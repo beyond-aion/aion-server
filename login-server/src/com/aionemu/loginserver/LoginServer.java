@@ -109,7 +109,7 @@ public class LoginServer {
 			KeyGen.init();
 		} catch (Exception e) {
 			log.error("Failed initializing Key Generator", e);
-			System.exit(ExitCode.CODE_ERROR);
+			System.exit(ExitCode.ERROR);
 		}
 
 		GameServerTable.load();

@@ -83,7 +83,7 @@ public class DeadLockDetector extends Thread {
 					log.warn(info);
 
 					if (doWhenDL == RESTART)
-						System.exit(ExitCode.CODE_RESTART);
+						System.exit(ExitCode.RESTART);
 				}
 				Thread.sleep(sleepTime);
 			} catch (Exception e) {

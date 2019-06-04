@@ -69,11 +69,8 @@ public class Shutdown extends Thread {
 
 		// shut down logger factory to flush all pending log messages
 		((LoggerContext) LoggerFactory.getILoggerFactory()).stop();
-		
+
 		// Do system exit
-		if (restartOnly)
-			Runtime.getRuntime().halt(ExitCode.CODE_RESTART);
-		else
-			Runtime.getRuntime().halt(ExitCode.CODE_NORMAL);
+		Runtime.getRuntime().halt(restartOnly ? ExitCode.RESTART : ExitCode.NORMAL);
 	}
 }

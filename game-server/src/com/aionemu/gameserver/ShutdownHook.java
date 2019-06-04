@@ -1,7 +1,7 @@
 package com.aionemu.gameserver;
 
 import java.security.Permission;
-import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,8 +27,8 @@ import ch.qos.logback.classic.LoggerContext;
 public class ShutdownHook extends Thread {
 
 	private static final Logger log = LoggerFactory.getLogger(ShutdownHook.class);
-	private final AtomicBoolean isRunning = new AtomicBoolean();
-	private int exitCode = ExitCode.CODE_ERROR;
+	private final AtomicInteger remainingSeconds = new AtomicInteger(Integer.MIN_VALUE);
+	private volatile int exitCode = ExitCode.ERROR;
 
 	public static ShutdownHook getInstance() {
 		return SingletonHolder.INSTANCE;
@@ -37,7 +37,7 @@ public class ShutdownHook extends Thread {
 	private ShutdownHook() {
 		System.setSecurityManager(new ExitMonitorSecurityManager()); // detects the exitCode when exit is triggered externally
 		if (ShutdownConfig.RESTART_SCHEDULE != null) {
-			CronService.getInstance().schedule(() -> System.exit(ExitCode.CODE_RESTART), CurrentThreadRunnableRunner.class, ShutdownConfig.RESTART_SCHEDULE,
+			CronService.getInstance().schedule(() -> System.exit(ExitCode.RESTART), CurrentThreadRunnableRunner.class, ShutdownConfig.RESTART_SCHEDULE,
 				false); // CurrentThreadRunnableRunner, otherwise ThreadPoolManager.getInstance().shutdown() will try to wait for this cron task
 			log.info("Scheduled automatic server restart based on cron expression: {}", ShutdownConfig.RESTART_SCHEDULE);
 		}
@@ -46,30 +46,46 @@ public class ShutdownHook extends Thread {
 	@Override
 	public void run() {
 		// this method is run when System.exit is triggered, or via other external events like console CTRL+C
-		shutdown(ShutdownConfig.DELAY, exitCode);
+		shutdown(exitCode, ShutdownConfig.DELAY);
 	}
 
-	public void shutdown(int duration, int exitCode) {
-		// set shutdown status, return if already running
-		if (!isRunning.compareAndSet(false, true))
+	protected void shutdown(int exitCode, int delaySeconds) {
+		if (delaySeconds < 0)
+			return;
+		// update effective exit code
+		this.exitCode = exitCode;
+		// update shutdown delay if possible (unset or more than one second left). return if another thread already runs the shutdown procedure
+		if (remainingSeconds.getAndUpdate(seconds -> seconds == Integer.MIN_VALUE || seconds > 1 ? delaySeconds : seconds) != Integer.MIN_VALUE)
 			return;
 
-		String shutdownMsg = exitCode == ExitCode.CODE_RESTART ? "restarting" : "shutting down";
-		for (int remainingSeconds = duration, interval = 0; remainingSeconds > 0; remainingSeconds -= interval) {
+		for (int announceInterval = 1, expectedSeconds = remainingSeconds.get(); remainingSeconds.get() > 0;) {
 			try {
 				if (World.getInstance().getAllPlayers().isEmpty())
 					break; // fast exit
 
-				log.info("Runtime is " + shutdownMsg + " in " + remainingSeconds + " seconds.");
-				PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_SERVER_SHUTDOWN(remainingSeconds));
+				if (remainingSeconds.get() % announceInterval == 0) {
+					String shutdownMsg = this.exitCode == ExitCode.RESTART ? "restarting" : "shutting down";
+					log.info("Runtime is " + shutdownMsg + " in " + remainingSeconds + " seconds.");
+					PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_SERVER_SHUTDOWN(remainingSeconds.get()));
+					announceInterval = nextInterval(remainingSeconds.get(), 5, 30);
+				}
 
-				interval = nextInterval(remainingSeconds, 5, 30);
-				sleep(interval * 1000);
+				sleep(1000);
+
+				// if remainingSeconds got updated from another thread
+				if (!remainingSeconds.compareAndSet(expectedSeconds, --expectedSeconds)) {
+					expectedSeconds = remainingSeconds.get();
+					announceInterval = 1;
+				}
 			} catch (InterruptedException e) {
 				// ignore
 			} catch (Exception e) {
 				log.error("", e);
 			}
+		}
+		if (!isRunning()) {
+			log.info("Shutdown was aborted");
+			return;
 		}
 
 		GameServer.shutdownNioServer(); // shuts down network, disconnects cs/ls/all players and saves them
@@ -84,11 +100,10 @@ public class ShutdownHook extends Thread {
 		// ThreadPoolManager shutdown
 		ThreadPoolManager.getInstance().shutdown();
 
-		log.info("Runtime is " + shutdownMsg + " now...");
 		// shut down logger factory to flush all pending log messages
 		((LoggerContext) LoggerFactory.getILoggerFactory()).stop();
 
-		Runtime.getRuntime().halt(exitCode);
+		Runtime.getRuntime().halt(this.exitCode);
 	}
 
 	/**
@@ -108,8 +123,12 @@ public class ShutdownHook extends Thread {
 		return Math.min(maxInterval, Math.max(minInterval, interval));
 	}
 
+	protected boolean abortShutdown() {
+		return isRunning() && remainingSeconds.updateAndGet(seconds -> seconds > 0 ? Integer.MIN_VALUE : seconds) == Integer.MIN_VALUE;
+	}
+
 	protected boolean isRunning() {
-		return isRunning.get();
+		return remainingSeconds.get() != Integer.MIN_VALUE;
 	}
 
 	private class ExitMonitorSecurityManager extends SecurityManager {

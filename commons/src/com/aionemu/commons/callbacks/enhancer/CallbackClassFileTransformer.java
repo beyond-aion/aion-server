@@ -53,7 +53,7 @@ public abstract class CallbackClassFileTransformer implements ClassFileTransform
 			// if it is a class from core (not a script) - terminate server
 			// noinspection ConstantConditions
 			if (loader.getClass().getName().equals("sun.misc.Launcher$AppClassLoader")) {
-				Runtime.getRuntime().halt(ExitCode.CODE_ERROR);
+				Runtime.getRuntime().halt(ExitCode.ERROR);
 			}
 
 			throw e1;

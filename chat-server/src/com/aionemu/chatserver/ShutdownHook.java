@@ -47,8 +47,8 @@ public class ShutdownHook extends Thread {
 
 		// Do system exit
 		if (restartOnly)
-			Runtime.getRuntime().halt(ExitCode.CODE_RESTART);
+			Runtime.getRuntime().halt(ExitCode.RESTART);
 		else
-			Runtime.getRuntime().halt(ExitCode.CODE_NORMAL);
+			Runtime.getRuntime().halt(ExitCode.NORMAL);
 	}
 }

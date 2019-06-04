@@ -390,8 +390,8 @@ public class GameServer {
 				try {
 					engine.load();
 				} catch (Throwable t) {
-					log.error("Aborting server start due to " + engine.getClass().getSimpleName() + " intialization error", t);
-					System.exit(ExitCode.CODE_ERROR);
+					log.error("Aborting server start due to " + engine.getClass().getSimpleName() + " initialization error", t);
+					System.exit(ExitCode.ERROR);
 				} finally {
 					progressLatch.countDown();
 				}
@@ -413,6 +413,14 @@ public class GameServer {
 
 	public static boolean isShuttingDown() {
 		return ShutdownHook.getInstance().isRunning();
+	}
+
+	public static void initShutdown(int exitCode, int delaySeconds) {
+		ThreadPoolManager.getInstance().executeLongRunning(() -> ShutdownHook.getInstance().shutdown(exitCode, delaySeconds));
+	}
+
+	public static boolean abortShutdown() {
+		return ShutdownHook.getInstance().abortShutdown();
 	}
 
 	public static void updateRatio(Race race, int i) {
