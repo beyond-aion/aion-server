@@ -38,8 +38,9 @@ import com.aionemu.commons.utils.PropertiesUtils;
 public class ScriptCompilerCache {
 
 	private static final Logger log = LoggerFactory.getLogger(ScriptCompilerCache.class);
+	private static final char FILE_SEPARATOR = System.getProperty("file.separator").charAt(0);
 	private static final Path WORKING_DIR = Paths.get("").toAbsolutePath();
-	private static final Path CACHE_DIR = Paths.get("./cache/classes");
+	public static final Path CACHE_DIR = Paths.get("./cache/classes");
 	private static final File CACHE_CLASS_MAP = new File(CACHE_DIR + "/classes.properties");
 	private static final AtomicInteger ACCESSORS = new AtomicInteger();
 
@@ -100,6 +101,11 @@ public class ScriptCompilerCache {
 			saveClassFileMap();
 	}
 
+	public static boolean contains(String className) {
+		String fileName = className.replace('.', FILE_SEPARATOR) + ".class";
+		return CLASS_FILES_BY_SOURCE_FILE.values().stream().anyMatch(files -> files.stream().anyMatch(file -> file.getPath().endsWith(fileName)));
+	}
+
 	private static List<File> findValidCachedClassFiles(File sourceFile) {
 		List<File> classFiles = getClassFiles(sourceFile);
 		for (File classFile : classFiles) {
@@ -114,7 +120,7 @@ public class ScriptCompilerCache {
 	private static String createClassName(File classFile) {
 		String className = CACHE_DIR.relativize(classFile.toPath()).toString();
 		className = className.substring(0, className.length() - 6);
-		return className.replace('\\', '.');
+		return className.replace(FILE_SEPARATOR, '.');
 	}
 
 	private static List<File> getClassFiles(File sourceFile) {
