@@ -96,11 +96,10 @@ public class SystemMailService {
 		if (attachedKinahCount > 0)
 			finalAttachedKinahCount = attachedKinahCount;
 
-		Timestamp time = new Timestamp(System.currentTimeMillis());
 		Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem, finalAttachedKinahCount,
-			title, message, sender, time, true, letterType);
+			title, message, sender, new Timestamp(System.currentTimeMillis()), true, letterType);
 
-		if (!DAOManager.getDAO(MailDAO.class).storeLetter(time, newLetter))
+		if (!DAOManager.getDAO(MailDAO.class).storeLetter(newLetter))
 			return false;
 
 		if (attachedItem != null)

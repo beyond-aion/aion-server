@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.Collection;
+import java.util.Comparator;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -23,14 +24,13 @@ public class SM_MAIL_SERVICE extends AionServerPacket {
 
 	private Player player;
 	private int serviceId;
-	private Collection<Letter> letters;
+	private List<Letter> letters;
 	private int mailMessage;
 	private Letter letter;
 	private long time;
 	private int letterId;
 	private int[] letterIds;
 	private byte attachmentType;
-	private boolean isExpress;
 
 	public SM_MAIL_SERVICE() {
 		this.serviceId = 0;
@@ -50,8 +50,11 @@ public class SM_MAIL_SERVICE extends AionServerPacket {
 	public SM_MAIL_SERVICE(Player player, Collection<Letter> letters, boolean isExpress) {
 		this.player = player;
 		this.serviceId = 2;
-		this.letters = letters;
-		this.isExpress = isExpress;
+		Stream<Letter> letterStream = letters.stream();
+		if (isExpress)
+			letterStream = letterStream.filter(letter -> letter.isExpress() && letter.isUnread());
+		letterStream = letterStream.sorted(Comparator.comparing(Letter::getTimeStamp).reversed()); // sort descending by date (newest to the top)
+		this.letters = letterStream.collect(Collectors.toList());
 	}
 
 	/**
@@ -97,11 +100,7 @@ public class SM_MAIL_SERVICE extends AionServerPacket {
 				writeMailMessage(mailMessage);
 				break;
 			case 2:
-				Stream<Letter> letterStream = letters.stream();
-				if (isExpress)
-					letterStream = letterStream.filter(letter -> letter.isExpress() && letter.isUnread()); // remove all read or normal letters
-				letterStream = letterStream.sorted((thisLetter, nextLetter) -> nextLetter.getTimeStamp().compareTo(thisLetter.getTimeStamp()));
-				writeLettersList(letterStream.collect(Collectors.toList())); // reverse sorted list to display newest letter at the top
+				writeLettersList(letters);
 				break;
 			case 3:
 				writeLetterRead(letter, time, totalCount, unreadCount, unreadExpressCount, unreadBlackCloudCount);

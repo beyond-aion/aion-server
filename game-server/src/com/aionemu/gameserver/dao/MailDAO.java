@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.dao;
 
-import java.sql.Timestamp;
-
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -17,7 +15,7 @@ public abstract class MailDAO implements IDFactoryAwareDAO {
 		return MailDAO.class.getName();
 	}
 
-	public abstract boolean storeLetter(Timestamp time, Letter letter);
+	public abstract boolean storeLetter(Letter letter);
 
 	public abstract Mailbox loadPlayerMailbox(Player player);
 

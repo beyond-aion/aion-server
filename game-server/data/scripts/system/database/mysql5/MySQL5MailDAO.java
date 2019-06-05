@@ -170,19 +170,19 @@ public class MySQL5MailDAO extends MailDAO {
 			return;
 		Collection<Letter> letters = mailbox.getLetters();
 		for (Letter letter : letters) {
-			storeLetter(letter.getTimeStamp(), letter);
+			storeLetter(letter);
 		}
 	}
 
 	@Override
-	public boolean storeLetter(Timestamp time, Letter letter) {
+	public boolean storeLetter(Letter letter) {
 		boolean result = false;
 		switch (letter.getPersistentState()) {
 			case NEW:
-				result = saveLetter(time, letter);
+				result = saveLetter(letter);
 				break;
 			case UPDATE_REQUIRED:
-				result = updateLetter(time, letter);
+				result = updateLetter(letter);
 				break;
 		}
 		letter.setPersistentState(PersistentState.UPDATED);
@@ -190,7 +190,7 @@ public class MySQL5MailDAO extends MailDAO {
 		return result;
 	}
 
-	private boolean saveLetter(final Timestamp time, final Letter letter) {
+	private boolean saveLetter(Letter letter) {
 		int attachedItemId = 0;
 		if (letter.getAttachedItem() != null)
 			attachedItemId = letter.getAttachedItem().getObjectId();
@@ -212,13 +212,13 @@ public class MySQL5MailDAO extends MailDAO {
 					stmt.setInt(7, fAttachedItemId);
 					stmt.setLong(8, letter.getAttachedKinah());
 					stmt.setInt(9, letter.getLetterType().getId());
-					stmt.setTimestamp(10, time);
+					stmt.setTimestamp(10, letter.getTimeStamp());
 					stmt.execute();
 				}
 			});
 	}
 
-	private boolean updateLetter(final Timestamp time, final Letter letter) {
+	private boolean updateLetter(Letter letter) {
 		int attachedItemId = 0;
 		if (letter.getAttachedItem() != null)
 			attachedItemId = letter.getAttachedItem().getObjectId();
@@ -234,7 +234,7 @@ public class MySQL5MailDAO extends MailDAO {
 					stmt.setInt(2, fAttachedItemId);
 					stmt.setLong(3, letter.getAttachedKinah());
 					stmt.setInt(4, letter.getLetterType().getId());
-					stmt.setTimestamp(5, time);
+					stmt.setTimestamp(5, letter.getTimeStamp());
 					stmt.setInt(6, letter.getObjectId());
 					stmt.execute();
 				}

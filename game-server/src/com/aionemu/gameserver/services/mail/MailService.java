@@ -142,9 +142,8 @@ public class MailService {
 		}
 
 		senderInventory.decreaseKinah(finalMailKinah);
-		Timestamp time = new Timestamp(System.currentTimeMillis());
 		Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem, attachedKinah, title, message,
-			sender.getName(), time, true, letterType);
+			sender.getName(), new Timestamp(System.currentTimeMillis()), true, letterType);
 
 		// first save attached item for FK consistency
 		if (attachedItem != null) {
@@ -154,7 +153,7 @@ public class MailService {
 			DAOManager.getDAO(ItemStoneListDAO.class).save(Collections.singletonList(attachedItem));
 		}
 		// save letter
-		if (!DAOManager.getDAO(MailDAO.class).storeLetter(time, newLetter))
+		if (!DAOManager.getDAO(MailDAO.class).storeLetter(newLetter))
 			return;
 
 		if (attachedItem != null && LoggingConfig.LOG_MAIL)
@@ -239,7 +238,7 @@ public class MailService {
 				// fix for kinah dupe
 				long attachedKinahCount = letter.getAttachedKinah();
 				letter.removeAttachedKinah();
-				if (!DAOManager.getDAO(MailDAO.class).storeLetter(letter.getTimeStamp(), letter)) {
+				if (!DAOManager.getDAO(MailDAO.class).storeLetter(letter)) {
 					AuditLogger.log(player, "tried to use kinah mail exploit. Location: " + player.getPosition() + ", kinah count: " + attachedKinahCount);
 					return;
 				}

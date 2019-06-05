@@ -2,11 +2,8 @@ package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
-import java.util.SortedSet;
-import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.model.gameobjects.Letter;
@@ -34,9 +31,6 @@ public class Mailbox {
 		this.owner = player;
 	}
 
-	/**
-	 * @param letter
-	 */
 	public void putLetterToMailbox(Letter letter) {
 		if (haveFreeSlots())
 			mails.put(letter.getObjectId(), letter);
@@ -44,30 +38,8 @@ public class Mailbox {
 			reserveMail.put(letter.getObjectId(), letter);
 	}
 
-	/**
-	 * Get all letters in mailbox (sorted according to time received)
-	 * 
-	 * @return
-	 */
 	public Collection<Letter> getLetters() {
-		SortedSet<Letter> letters = new TreeSet<>(new Comparator<Letter>() {
-
-			@Override
-			public int compare(Letter o1, Letter o2) {
-				if (o1.getTimeStamp().getTime() > o2.getTimeStamp().getTime())
-					return 1;
-				if (o1.getTimeStamp().getTime() < o2.getTimeStamp().getTime())
-					return -1;
-
-				return o1.getObjectId() > o2.getObjectId() ? 1 : -1;
-			}
-
-		});
-
-		for (Letter letter : mails.values()) {
-			letters.add(letter);
-		}
-		return letters;
+		return new ArrayList<>(mails.values());
 	}
 
 	/**
@@ -82,9 +54,9 @@ public class Mailbox {
 		if (substring.startsWith("%") || substring.startsWith("$$")) {
 			long lastOnlineMillis = owner.getCommonData().getLastOnline() == null ? 0 : owner.getCommonData().getLastOnline().getTime();
 			for (Letter letter : mails.values()) {
-				if (!letter.isUnread() || letter.getSenderName() == null || !letter.getSenderName().startsWith(substring))
+				if (!letter.isUnread() || lastOnlineMillis > letter.getTimeStamp().getTime())
 					continue;
-				if (lastOnlineMillis > letter.getTimeStamp().getTime())
+				if (letter.getSenderName() == null || !letter.getSenderName().startsWith(substring))
 					continue;
 				letters.add(letter);
 			}
