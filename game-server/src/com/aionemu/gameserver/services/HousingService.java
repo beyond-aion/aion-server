@@ -5,7 +5,11 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,6 +18,7 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.dao.HousesDAO;
+import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
@@ -57,6 +62,14 @@ public class HousingService {
 		log.info("Loading housing data...");
 		customHouses = new ConcurrentHashMap<>(DAOManager.getDAO(HousesDAO.class).loadHouses(DataManager.HOUSE_DATA.getLands(), false));
 		studios = new ConcurrentHashMap<>(DAOManager.getDAO(HousesDAO.class).loadHouses(DataManager.HOUSE_DATA.getLands(), true));
+		Set<Integer> playerIds = IntStream.of(DAOManager.getDAO(PlayerDAO.class).getUsedIDs()).boxed().collect(Collectors.toSet());
+		Stream.concat(customHouses.values().stream(), studios.values().stream()).forEach(house -> {
+			// houses table has no player_id foreign key because houses need to stay in DB even on player deletion (to keep bidding possible for example)
+			if (house.getOwnerId() > 0 && !playerIds.contains(house.getOwnerId())) {
+				log.warn("Player with ID " + house.getOwnerId() + " got deleted from DB, revoking house ownership for house " + house.getAddress().getId());
+				house.revokeOwner();
+			}
+		});
 		log.info("Housing Service loaded.");
 	}
 

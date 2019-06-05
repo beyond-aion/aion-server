@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.house;
 
 import java.sql.Timestamp;
 import java.util.Calendar;
-import java.util.Collection;
 import java.util.Date;
 import java.util.EnumMap;
 import java.util.List;
@@ -39,7 +38,6 @@ import com.aionemu.gameserver.model.templates.housing.Sale;
 import com.aionemu.gameserver.model.templates.spawns.HouseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnType;
-import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.player.PlayerService;
@@ -50,8 +48,6 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
-import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.ZoneService;
 
 /**
  * @author Rolandas
@@ -130,49 +126,31 @@ public class House extends VisibleObject implements Persistable {
 			SpawnEngine.bringIntoWorld(this);
 		}
 
+		spawnNpcs();
+	}
+
+	private void spawnNpcs() {
+		String masterName = ownerId == 0 ? null : PlayerService.getPlayerName(ownerId);
 		List<HouseSpawn> templates = DataManager.HOUSE_NPCS_DATA.getSpawnsByAddress(getAddress().getId());
 		if (templates == null) {
-			Collection<ZoneInstance> zones = ZoneService.getInstance().getZoneInstancesByWorldId(getAddress().getMapId()).values();
-			String msg = null;
-			for (ZoneInstance zone : zones) {
-				if (zone.getZoneTemplate().getZoneType() != ZoneClassName.SUB || zone.getZoneTemplate().getPriority() > 20)
-					continue;
-				if (zone.isInsideCordinate(getAddress().getX(), getAddress().getY(), getAddress().getZ())) {
-					msg = "zone=" + zone.getZoneTemplate().getXmlName();
-					break;
-				}
-			}
-			if (msg == null)
-				msg = "address=" + this.getAddress().getId() + "; map=" + this.getAddress().getMapId();
-			msg += "; x=" + getAddress().getX() + ", y=" + getAddress().getY() + ", z=" + getAddress().getZ();
-			log.warn("Missing npcs for house: " + msg);
+			log.warn("Missing npc spawns for house " + getAddress().getId());
 			return;
 		}
-
-		int creatorId = getAddress().getId();
-		String masterName = "";
-		if (ownerId != 0) {
-			masterName = PlayerService.getPlayerName(ownerId);
-			if (masterName == null) {
-				revokeOwner();
-				log.warn("Owner (Player ID: " + ownerId + ") of house " + getAddress() + " doesn't exist anymore, revoked ownership.");
-			}
-		}
-
 		for (HouseSpawn spawn : templates) {
 			Npc npc;
 			if (spawn.getType() == SpawnType.MANAGER) {
 				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getLand().getManagerNpcId(), spawn.getX(), spawn.getY(),
-					spawn.getZ(), spawn.getH());
+						spawn.getZ(), spawn.getH());
 				npc = VisibleObjectSpawner.spawnHouseNpc(t, getInstanceId(), this, masterName);
 			} else if (spawn.getType() == SpawnType.TELEPORT) {
 				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getLand().getTeleportNpcId(), spawn.getX(), spawn.getY(),
-					spawn.getZ(), spawn.getH());
+						spawn.getZ(), spawn.getH());
 				npc = VisibleObjectSpawner.spawnHouseNpc(t, getInstanceId(), this, masterName);
 			} else if (spawn.getType() == SpawnType.SIGN) {
 				// Signs do not have master name displayed, but have creatorId
+				int creatorId = getAddress().getId();
 				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getCurrentSignNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
-					spawn.getH(), creatorId);
+						spawn.getH(), creatorId);
 				npc = (Npc) SpawnEngine.spawnObject(t, getInstanceId());
 			} else {
 				log.warn("Unhandled spawn type " + spawn.getType());
@@ -365,6 +343,7 @@ public class House extends VisibleObject implements Persistable {
 		if (ownerId == 0)
 			return false;
 		getRegistry().despawnObjects();
+		despawnNpcs();
 		setOwnerId(0);
 		if (playerScripts == null)
 			playerScripts = DAOManager.getDAO(HouseScriptsDAO.class).getPlayerScripts(getObjectId());
@@ -384,6 +363,8 @@ public class House extends VisibleObject implements Persistable {
 		if (getStatus() != HouseStatus.SELL_WAIT)
 			setStatus(HouseStatus.NOSALE);
 		save();
+		if (getPosition() != null && isSpawned())
+			spawnNpcs();
 		return true;
 	}
 
