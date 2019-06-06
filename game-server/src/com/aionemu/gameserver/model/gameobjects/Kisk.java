@@ -4,14 +4,16 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.controllers.NpcController;
+import com.aionemu.gameserver.controllers.effect.EffectController;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.stats.KiskStatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KISK_UPDATE;
@@ -19,50 +21,37 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 
 /**
  * @author Sarynth, nrg
  */
 public class Kisk extends SummonedObject<Player> {
 
-	private final int creatorId;
+	private static final long KISK_LIFETIME_IN_SEC = TimeUnit.HOURS.toSeconds(2);
 	private final int legionId;
 	private final Race ownerRace;
 
-	private KiskStatsTemplate kiskStatsTemplate;
+	private final KiskStatsTemplate kiskStatsTemplate;
 
 	private int remainingResurrections;
 	private long kiskSpawnTime;
 
-	public final int KISK_LIFETIME_IN_SEC = 2 * 60 * 60; // 2 hours
-
 	private final Set<Integer> kiskMemberIds;
 
-	/**
-	 * @param objId
-	 * @param controller
-	 * @param spawnTemplate
-	 * @param objectTemplate
-	 */
-	public Kisk(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate npcTemplate, Player owner) {
-		super(objId, controller, spawnTemplate, npcTemplate, npcTemplate.getLevel());
+	public Kisk(int objId, NpcController controller, SpawnTemplate spawnTemplate, Player owner) {
+		super(objId, controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()).getLevel(), null);
 
-		this.kiskStatsTemplate = npcTemplate.getKiskStatsTemplate();
-
-		if (this.kiskStatsTemplate == null)
-			this.kiskStatsTemplate = new KiskStatsTemplate();
-
+		this.kiskStatsTemplate = getObjectTemplate().getKiskStatsTemplate() == null ? new KiskStatsTemplate() : getObjectTemplate().getKiskStatsTemplate();
 		this.kiskMemberIds = ConcurrentHashMap.newKeySet();
 		this.remainingResurrections = this.kiskStatsTemplate.getMaxResurrects();
 		this.kiskSpawnTime = System.currentTimeMillis() / 1000;
-		this.creatorId = owner.getObjectId();
 		this.legionId = owner.getLegion() == null ? 0 : owner.getLegion().getLegionId();
 		this.ownerRace = owner.getRace();
-	}
-
-	@Override
-	public int getCreatorId() {
-		return creatorId;
+		setCreatorId(owner.getObjectId());
+		setMasterName(owner.getName());
+		setKnownlist(new PlayerAwareKnownList(this));
+		setEffectController(new EffectController(this));
 	}
 
 	@Override
@@ -144,10 +133,8 @@ public class Kisk extends SummonedObject<Player> {
 	 * @return True if the player may bind to this kisk
 	 */
 	public boolean canBind(Player player) {
-		if (getCurrentMemberCount() >= getMaxMembers())
-			return false;
+		return getCurrentMemberCount() < getMaxMembers() && isUseAllowed(player);
 
-		return isUseAllowed(player);
 	}
 
 	private boolean isUseAllowed(Player player) {

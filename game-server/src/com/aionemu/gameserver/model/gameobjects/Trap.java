@@ -1,24 +1,23 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.controllers.NpcController;
+import com.aionemu.gameserver.controllers.effect.EffectController;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.stats.container.TrapGameStats;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.world.knownlist.NpcKnownList;
 
 /**
  * @author ATracer
  */
 public class Trap extends SummonedObject<Creature> {
 
-	/**
-	 * @param objId
-	 * @param controller
-	 * @param spawnTemplate
-	 * @param objectTemplate
-	 */
-	public Trap(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
-		super(objId, controller, spawnTemplate, objectTemplate, objectTemplate.getLevel());
+	public Trap(int objId, NpcController controller, SpawnTemplate spawnTemplate, Creature creator) {
+		super(objId, controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()).getLevel(), creator);
+		setMasterName("");
+		setKnownlist(new NpcKnownList(this));
+		setEffectController(new EffectController(this));
 	}
 
 	@Override
@@ -29,7 +28,7 @@ public class Trap extends SummonedObject<Creature> {
 
 	@Override
 	public byte getLevel() {
-		return (getCreator() == null ? 1 : getCreator().getLevel());
+		return getCreator() == null ? 1 : getCreator().getLevel();
 	}
 
 	/**
@@ -38,10 +37,5 @@ public class Trap extends SummonedObject<Creature> {
 	@Override
 	public NpcObjectType getNpcObjectType() {
 		return NpcObjectType.TRAP;
-	}
-
-	@Override
-	public String getMasterName() {
-		return "";
 	}
 }

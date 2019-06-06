@@ -1,34 +1,33 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.controllers.NpcController;
+import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.model.stats.container.HomingGameStats;
 import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.world.knownlist.NpcKnownList;
 
 /**
  * @author ATracer
  */
 public class Homing extends SummonedObject<Creature> {
 
+	private final int skillId;
+	private final ItemAttackType attackType;
+
 	/**
 	 * Number of performed attacks
 	 */
 	private int attackCount;
 
-	private int skillId;
-
-	/**
-	 * @param objId
-	 * @param controller
-	 * @param spawnTemplate
-	 * @param objectTemplate
-	 * @param level
-	 */
-	public Homing(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, byte level, int skillId) {
-		super(objId, controller, spawnTemplate, objectTemplate, level);
+	public Homing(int objId, NpcController controller, SpawnTemplate spawnTemplate, byte level, Creature creator, int skillId) {
+		super(objId, controller, spawnTemplate, level, creator);
 		this.skillId = skillId;
+		this.attackType = findAttackType();
+		setMasterName("");
+		setKnownlist(new NpcKnownList(this));
+		setEffectController(new EffectController(this));
 	}
 
 	@Override
@@ -61,12 +60,15 @@ public class Homing extends SummonedObject<Creature> {
 	}
 
 	@Override
-	public String getMasterName() {
-		return "";
+	public ItemAttackType getAttackType() {
+		return attackType;
 	}
 
-	@Override
-	public ItemAttackType getAttackType() {
+	public int getSkillId() {
+		return skillId;
+	}
+
+	private ItemAttackType findAttackType() {
 		if (getName().contains("fire"))
 			return ItemAttackType.MAGICAL_FIRE;
 		else if (getName().contains("stone") || getName().equals("gryphu"))
@@ -76,9 +78,5 @@ public class Homing extends SummonedObject<Creature> {
 		else if ((getName().contains("wind")) || (getName().contains("cyclone")) || (getName().contains("elemental")))
 			return ItemAttackType.MAGICAL_WIND;
 		return ItemAttackType.PHYSICAL;
-	}
-
-	public int getSkillId() {
-		return skillId;
 	}
 }

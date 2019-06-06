@@ -1,13 +1,13 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.controllers.NpcController;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.stats.container.SummonedObjectGameStats;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 
 /**
@@ -15,23 +15,17 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
  */
 public class SummonedObject<T extends VisibleObject> extends Npc {
 
-	private byte level;
+	private final byte level;
 
 	/**
 	 * Creator of this SummonedObject
 	 */
-	private T creator;
+	private final T creator;
 
-	/**
-	 * @param objId
-	 * @param controller
-	 * @param spawnTemplate
-	 * @param objectTemplate
-	 * @param level
-	 */
-	public SummonedObject(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, byte level) {
-		super(objId, controller, spawnTemplate, objectTemplate);
+	public SummonedObject(int objId, NpcController controller, SpawnTemplate spawnTemplate, byte level, T creator) {
+		super(objId, controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()));
 		this.level = level;
+		this.creator = creator;
 	}
 
 	@Override
@@ -50,20 +44,14 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 		return creator;
 	}
 
-	public void setCreator(T creator) {
-		if (creator instanceof Player)
-			((Player) creator).setSummonedObj(this);
-		this.creator = creator;
-	}
-
 	@Override
 	public String getMasterName() {
-		return creator != null ? creator.getName() : super.getMasterName();
+		return super.getMasterName() == null && creator != null ? creator.getName() : super.getMasterName();
 	}
 
 	@Override
 	public int getCreatorId() {
-		return creator != null ? creator.getObjectId() : 0;
+		return super.getCreatorId() == 0 && creator != null ? creator.getObjectId() : super.getCreatorId();
 	}
 
 	@Override

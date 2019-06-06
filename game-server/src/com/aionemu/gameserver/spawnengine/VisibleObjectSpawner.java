@@ -35,7 +35,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.rift.RiftLocation;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
-import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -94,11 +93,7 @@ public class VisibleObjectSpawner {
 	}
 
 	public static SummonedHouseNpc spawnHouseNpc(SpawnTemplate spawn, int instanceIndex, House creator, String masterName) {
-		int npcId = spawn.getNpcId();
-		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
-		SummonedHouseNpc npc = new SummonedHouseNpc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template, creator, masterName);
-		npc.setKnownlist(new PlayerAwareKnownList(npc));
-		npc.setEffectController(new EffectController(npc));
+		SummonedHouseNpc npc = new SummonedHouseNpc(IDFactory.getInstance().nextId(), new NpcController(), spawn, creator, masterName);
 		SpawnEngine.bringIntoWorld(npc, spawn, instanceIndex);
 		return npc;
 	}
@@ -193,64 +188,27 @@ public class VisibleObjectSpawner {
 		return npc;
 	}
 
-	/**
-	 * @param spawn
-	 * @param instanceIndex
-	 * @return
-	 */
-	protected static VisibleObject spawnGatherable(SpawnTemplate spawn, int instanceIndex) {
-		VisibleObjectTemplate template = DataManager.GATHERABLE_DATA.getGatherableTemplate(spawn.getNpcId());
-		Gatherable gatherable = new Gatherable(spawn, template, IDFactory.getInstance().nextId(), new GatherableController());
-		gatherable.setKnownlist(new PlayerAwareKnownList(gatherable));
+	public static Gatherable spawnGatherable(SpawnTemplate spawn, int instanceIndex) {
+		Gatherable gatherable = new Gatherable(spawn, IDFactory.getInstance().nextId(), new GatherableController());
 		SpawnEngine.bringIntoWorld(gatherable, spawn, instanceIndex);
 		return gatherable;
 	}
 
-	/**
-	 * @param spawn
-	 * @param instanceIndex
-	 * @param creator
-	 * @return
-	 */
 	public static Trap spawnTrap(SpawnTemplate spawn, int instanceIndex, Creature creator) {
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
-		Trap trap = new Trap(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
-		trap.setKnownlist(new NpcKnownList(trap));
-		trap.setEffectController(new EffectController(trap));
-		trap.setCreator(creator);
+		Trap trap = new Trap(IDFactory.getInstance().nextId(), new NpcController(), spawn, creator);
 		SpawnEngine.bringIntoWorld(trap, spawn, instanceIndex);
 		PacketSendUtility.broadcastPacket(trap, new SM_PLAYER_STATE(trap));
 		return trap;
 	}
 
-	/**
-	 * @param spawn
-	 * @param instanceIndex
-	 * @param creator
-	 * @return
-	 */
 	public static GroupGate spawnGroupGate(SpawnTemplate spawn, int instanceIndex, Creature creator) {
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
-		GroupGate groupgate = new GroupGate(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
-		groupgate.setKnownlist(new PlayerAwareKnownList(groupgate));
-		groupgate.setEffectController(new EffectController(groupgate));
-		groupgate.setCreator(creator);
+		GroupGate groupgate = new GroupGate(IDFactory.getInstance().nextId(), new NpcController(), spawn, creator);
 		SpawnEngine.bringIntoWorld(groupgate, spawn, instanceIndex);
 		return groupgate;
 	}
 
-	/**
-	 * @param spawn
-	 * @param instanceIndex
-	 * @param creator
-	 * @return
-	 */
 	public static Kisk spawnKisk(SpawnTemplate spawn, int instanceIndex, Player creator) {
-		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
-		Kisk kisk = new Kisk(IDFactory.getInstance().nextId(), new NpcController(), spawn, template, creator);
-		kisk.setMasterName(creator.getName());
-		kisk.setKnownlist(new PlayerAwareKnownList(kisk));
-		kisk.setEffectController(new EffectController(kisk));
+		Kisk kisk = new Kisk(IDFactory.getInstance().nextId(), new NpcController(), spawn, creator);
 		SpawnEngine.bringIntoWorld(kisk, spawn, instanceIndex);
 		return kisk;
 	}
@@ -290,21 +248,8 @@ public class VisibleObjectSpawner {
 		return functionalNpc;
 	}
 
-	/**
-	 * @param spawn
-	 * @param instanceIndex
-	 * @param creator
-	 * @param skillId
-	 * @param level
-	 * @return
-	 */
 	public static Servant spawnServant(SpawnTemplate spawn, int instanceIndex, Creature creator, int level, NpcObjectType objectType) {
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
-		byte servantLevel = creator.getLevel();
-		Servant servant = new Servant(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate, servantLevel);
-		servant.setKnownlist(new NpcKnownList(servant));
-		servant.setEffectController(new EffectController(servant));
-		servant.setCreator(creator);
+		Servant servant = new Servant(IDFactory.getInstance().nextId(), new NpcController(), spawn, creator.getLevel(), creator);
 		servant.setNpcObjectType(objectType);
 		servant.setUpStats();
 		SpawnEngine.bringIntoWorld(servant, spawn, instanceIndex);
@@ -321,40 +266,16 @@ public class VisibleObjectSpawner {
 		return servant;
 	}
 
-	/**
-	 * @param spawn
-	 * @param instanceIndex
-	 * @param creator
-	 * @param skillId
-	 * @param level
-	 * @return
-	 */
 	public static Servant spawnEnemyServant(SpawnTemplate spawn, int instanceIndex, Creature creator, byte servantLvl) {
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
-		Servant servant = new Servant(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate, servantLvl);
-		servant.setKnownlist(new NpcKnownList(servant));
-		servant.setEffectController(new EffectController(servant));
-		servant.setCreator(creator);
+		Servant servant = new Servant(IDFactory.getInstance().nextId(), new NpcController(), spawn, servantLvl, creator);
 		servant.setNpcObjectType(NpcObjectType.SERVANT);
 		SpawnEngine.bringIntoWorld(servant, spawn, instanceIndex);
 		return servant;
 	}
 
-	/**
-	 * @param spawn
-	 * @param instanceIndex
-	 * @param creator
-	 * @param attackCount
-	 * @return
-	 */
 	public static Homing spawnHoming(SpawnTemplate spawn, int instanceIndex, Creature creator, int attackCount, int skillId) {
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(spawn.getNpcId());
-		int creatureLevel = creator.getLevel();
-		Homing homing = new Homing(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate, (byte) creatureLevel, skillId);
+		Homing homing = new Homing(IDFactory.getInstance().nextId(), new NpcController(), spawn, creator.getLevel(), creator, skillId);
 		homing.setState(CreatureState.WEAPON_EQUIPPED);
-		homing.setKnownlist(new NpcKnownList(homing));
-		homing.setEffectController(new EffectController(homing));
-		homing.setCreator(creator);
 		homing.setAttackCount(attackCount);
 		SpawnEngine.bringIntoWorld(homing, spawn, instanceIndex);
 		return homing;

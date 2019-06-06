@@ -1,22 +1,19 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.controllers.NpcController;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
+import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 
 /**
  * @author LokiReborn
  */
 public class GroupGate extends SummonedObject<Creature> {
 
-	/**
-	 * @param objId
-	 * @param controller
-	 * @param spawnTemplate
-	 * @param objectTemplate
-	 */
-	public GroupGate(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
-		super(objId, controller, spawnTemplate, objectTemplate, (byte) 1);
+	public GroupGate(int objId, NpcController controller, SpawnTemplate spawnTemplate, Creature creator) {
+		super(objId, controller, spawnTemplate, (byte) 1, creator);
+		setKnownlist(new PlayerAwareKnownList(this));
+		setEffectController(new EffectController(this));
 	}
 
 	/**

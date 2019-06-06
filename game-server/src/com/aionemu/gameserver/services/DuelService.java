@@ -9,6 +9,8 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.DuelResult;
+import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -19,6 +21,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.model.DispelSlotType;
+import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -204,10 +207,18 @@ public class DuelService {
 
 	private void cancelSlaveAttacks(Player... players) {
 		for (Player player : players) {
-			if (player.getSummon() != null && player.getSummon().getMode() == SummonMode.ATTACK) // cancel summon attacking
-				SummonsService.doMode(SummonMode.GUARD, player.getSummon());
-			if (player.getSummonedObj() != null) // cancel summoned object attacking
-				player.getSummonedObj().getController().cancelCurrentSkill(null);
+			player.getKnownList().forEachObject(visibleObject -> { // cancel summoned object attacking
+				if (visibleObject instanceof SummonedObject) {
+					SummonedObject<?> summonedObject = (SummonedObject<?>) visibleObject;
+					Skill castingSkill = summonedObject.getCastingSkill();
+					if (castingSkill != null && player.equals(castingSkill.getFirstTarget()) && !summonedObject.isEnemy(player))
+						summonedObject.getController().cancelCurrentSkill(null);
+				} else if (visibleObject instanceof Summon) { // cancel summon attacking
+					Summon summon = (Summon) visibleObject;
+					if (summon.getMode() == SummonMode.ATTACK && player.equals(summon.getTarget()) && !summon.isEnemy(player))
+						SummonsService.doMode(SummonMode.GUARD, summon);
+				}
+			});
 		}
 	}
 

@@ -36,7 +36,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.Summon;
-import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank.AbyssRankUpdateType;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.EmotionList;
@@ -138,7 +137,6 @@ public class Player extends Creature {
 	private int flightTeleportId;
 	private int flightDistance;
 	private Summon summon;
-	private SummonedObject<?> summonedObj;
 	private Pet pet;
 	private Kisk kisk;
 	private boolean isResByPlayer = false;
@@ -1052,21 +1050,6 @@ public class Player extends Creature {
 	 */
 	public void setSummon(Summon summon) {
 		this.summon = summon;
-	}
-
-	/**
-	 * @return the summoned object
-	 */
-	public SummonedObject<?> getSummonedObj() {
-		return summonedObj;
-	}
-
-	/**
-	 * @param summonedObj
-	 *          the summoned object to set
-	 */
-	public void setSummonedObj(SummonedObject<?> summonedObj) {
-		this.summonedObj = summonedObj;
 	}
 
 	/**

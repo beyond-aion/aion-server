@@ -235,7 +235,7 @@ public class Npc extends Creature {
 	 * @return Name of the Master
 	 */
 	public String getMasterName() {
-		return masterName == null ? "" : masterName;
+		return masterName;
 	}
 
 	public void setMasterName(String masterName) {
