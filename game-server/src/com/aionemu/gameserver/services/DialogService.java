@@ -14,13 +14,11 @@ import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
@@ -155,6 +153,7 @@ public class DialogService {
 				case DECOMPOUND_WEAPON: // armsbreaking (2.5)
 				case HOUSING_BUILD: // housing build
 				case HOUSING_DESTRUCT: // housing destruct
+				case HOUSING_PERSONAL_AUCTION: // housing auction
 				case CHARGE_ITEM_SINGLE: // condition an individual item
 				case CHARGE_ITEM_SINGLE2: // augmenting an individual item
 				case TOWN_CHALLENGE: // town improvement
@@ -321,23 +320,13 @@ public class DialogService {
 				case GIVEUP_CRAFT_MASTER: // relinquish Master Status
 					RelinquishCraftStatus.relinquishMasterStatus(player, CraftSkillUpdateService.getInstance().getProfessionByNpc(npc));
 					break;
-				case HOUSING_PERSONAL_AUCTION: // housing auction
-					if (!player.hasHouseOwnerState(HouseOwnerState.BIDDING_ALLOWED)) {
-						if (player.getRace() == Race.ELYOS)
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_OWN_NOT_COMPLETE_QUEST(18802));
-						else
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_OWN_NOT_COMPLETE_QUEST(28802));
-						return;
-					}
-					sendDialogWindow(dialogActionId, player, npc);
-					break;
 				case FUNC_PET_H_ADOPT:
 					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.H_ADOPT));
 					break;
 				case FUNC_PET_H_ABANDON:
 					PacketSendUtility.sendPacket(player, new SM_PET(PetAction.H_ABANDON));
 					break;
-				case CHARGE_ITEM_MULTI2: // augmenting all equiped items
+				case CHARGE_ITEM_MULTI2: // augmenting all equipped items
 					ItemChargeService.startChargingEquippedItems(player, targetObjectId, 2);
 					break;
 				case HOUSING_RECREATE_PERSONAL_INS: // recreate personal house instance (studio)
