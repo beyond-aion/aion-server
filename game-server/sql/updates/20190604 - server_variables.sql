@@ -1,1 +1,0 @@
-DELETE FROM `server_variables` WHERE `key` IN ("auctionTime", "houseMaintainTime");

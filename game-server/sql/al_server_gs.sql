@@ -217,7 +217,7 @@ CREATE TABLE `house_bids` (
   `player_id` int(10) NOT NULL,
   `house_id` int(10) NOT NULL,
   `bid` bigint(20) NOT NULL,
-  `bid_time` timestamp NULL DEFAULT CURRENT_TIMESTAMP,
+  `bid_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`player_id`,`house_id`,`bid`),
   KEY `house_id_ibfk_1` (`house_id`),
   CONSTRAINT `house_id_ibfk_1` FOREIGN KEY (`house_id`) REFERENCES `houses` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
@@ -255,12 +255,12 @@ CREATE TABLE `houses` (
   `player_id` int(10) NOT NULL DEFAULT '0',
   `building_id` int(10) NOT NULL,
   `address` int(10) NOT NULL,
-  `acquire_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
+  `acquire_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `settings` int(11) NOT NULL DEFAULT '0',
   `status` enum('ACTIVE','SELL_WAIT','INACTIVE','NOSALE') NOT NULL DEFAULT 'ACTIVE',
   `next_pay` timestamp NULL DEFAULT NULL,
   `sell_started` timestamp NULL DEFAULT NULL,
-  `sign_notice` binary(130) DEFAULT NULL,
+  `sign_notice` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `address` (`address`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;

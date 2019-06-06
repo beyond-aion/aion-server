@@ -1,1 +1,0 @@
-DROP TABLE IF EXISTS `starter_packs`;

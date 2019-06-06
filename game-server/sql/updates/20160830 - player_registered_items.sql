@@ -1,1 +1,0 @@
-UPDATE `player_registered_items` SET `color` = NULL WHERE `color` = "0";
