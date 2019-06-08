@@ -38,7 +38,6 @@ import com.aionemu.gameserver.model.templates.housing.Sale;
 import com.aionemu.gameserver.model.templates.spawns.HouseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnType;
-import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
@@ -327,16 +326,11 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public int getCurrentSignNpcId() {
-		int npcId = getLand().getWaitingSignNpcId(); // bidding closed
-		if (status == HouseStatus.NOSALE)
-			npcId = getLand().getNosaleSignNpcId(); // invisible npc
-		else if (status == HouseStatus.SELL_WAIT) {
-			if (HousingBidService.getInstance().isBiddingAllowed())
-				npcId = getLand().getSaleSignNpcId(); // bidding open
-		} else if (ownerId != 0 && status == HouseStatus.ACTIVE) {
-			npcId = getLand().getHomeSignNpcId(); // resident information
-		}
-		return npcId;
+		if (getSellStarted() != null)
+			return getLand().getSaleSignNpcId();
+		if (ownerId == 0)
+			return getLand().getNosaleSignNpcId(); // invisible npc
+		return status == HouseStatus.INACTIVE ? getLand().getWaitingSignNpcId() : getLand().getHomeSignNpcId();
 	}
 
 	public synchronized boolean revokeOwner() {

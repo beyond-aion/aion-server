@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <house_lands>
-	<land id="325001" teleport_npc="810003" manager_npc="810017" sign_home="810007" sign_waiting="810006" sign_sale="810006" sign_nosale="810004">
+	<land id="325001" teleport_npc="810003" manager_npc="810017" sign_home="810007" sign_waiting="810006" sign_sale="810005" sign_nosale="810004">
 		<addresses>
 			<address id="10001" map="700010000" town="1001" x="696.159973" y="1999.969971" z="174.42577"/>
 			<address id="10002" map="700010000" town="1001" x="609.904907" y="2057.186279" z="174.90712"/>
@@ -15,7 +15,7 @@
 		<fee>20000000</fee>
 		<caps room="false" floor="false" emblemId="2" addon="true"/>
 	</land>
-	<land id="326001" teleport_npc="810003" manager_npc="810018" sign_home="810007" sign_waiting="810006" sign_sale="810006" sign_nosale="810004">
+	<land id="326001" teleport_npc="810003" manager_npc="810018" sign_home="810007" sign_waiting="810006" sign_sale="810005" sign_nosale="810004">
 		<addresses>
 			<address id="6001" map="210040000" town="0" x="2668.545166" y="645.303955" z="355.70212"/>
 			<address id="10004" map="700010000" town="1001" x="616.639160" y="2209.729980" z="163.37718"/>
@@ -150,7 +150,7 @@
 		<fee>4000000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="326002" teleport_npc="810003" manager_npc="810018" sign_home="810007" sign_waiting="810006" sign_sale="810006" sign_nosale="810004">
+	<land id="326002" teleport_npc="810003" manager_npc="810018" sign_home="810007" sign_waiting="810006" sign_sale="810005" sign_nosale="810004">
 		<addresses>
 			<address id="6101" map="210050000" town="0" x="1132.396240" y="813.401550" z="527.33487"/>
 		</addresses>
@@ -162,7 +162,7 @@
 		<fee>4000000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="327001" teleport_npc="810003" manager_npc="810019" sign_home="810007" sign_waiting="810006" sign_sale="810006" sign_nosale="810004">
+	<land id="327001" teleport_npc="810003" manager_npc="810019" sign_home="810007" sign_waiting="810006" sign_sale="810005" sign_nosale="810004">
 		<addresses>
 			<address id="10034" map="700010000" town="1002" x="252.724319" y="2238.557861" z="132.91587"/>
 			<address id="10035" map="700010000" town="1002" x="135.701981" y="2103.620605" z="128.50723"/>
@@ -312,7 +312,7 @@
 		<fee>2000000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="327002" teleport_npc="810003" manager_npc="810019" sign_home="810007" sign_waiting="810006" sign_sale="810006" sign_nosale="810004">
+	<land id="327002" teleport_npc="810003" manager_npc="810019" sign_home="810007" sign_waiting="810006" sign_sale="810005" sign_nosale="810004">
 		<addresses>
 			<address id="6002" map="210040000" town="0" x="2710.913330" y="615.251404" z="355.92179"/>
 			<address id="6003" map="210040000" town="0" x="2741.268555" y="575.825500" z="356.02247"/>
@@ -328,7 +328,7 @@
 		<fee>2000000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="327003" teleport_npc="810003" manager_npc="810019" sign_home="810007" sign_waiting="810006" sign_sale="810006" sign_nosale="810004">
+	<land id="327003" teleport_npc="810003" manager_npc="810019" sign_home="810007" sign_waiting="810006" sign_sale="810005" sign_nosale="810004">
 		<addresses>
 			<address id="6102" map="210050000" town="0" x="1179.377075" y="843.139038" z="522.79837"/>
 			<address id="6103" map="210050000" town="0" x="1133.011841" y="758.898926" z="522.73917"/>
@@ -343,7 +343,7 @@
 		<fee>2000000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="328001" teleport_npc="810003" manager_npc="810020" sign_home="810007" sign_waiting="810006" sign_sale="810006" sign_nosale="810004">
+	<land id="328001" teleport_npc="810003" manager_npc="810020" sign_home="810007" sign_waiting="810006" sign_sale="810005" sign_nosale="810004">
 		<addresses>
 			<address id="10056" map="700010000" town="1003" x="282.340027" y="2485.392334" z="271.10242"/>
 			<address id="10057" map="700010000" town="1003" x="222.500244" y="2478.861572" z="272.37461"/>
@@ -588,7 +588,7 @@
 		<fee>400000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="328002" teleport_npc="810003" manager_npc="810020" sign_home="810007" sign_waiting="810006" sign_sale="810006" sign_nosale="810004">
+	<land id="328002" teleport_npc="810003" manager_npc="810020" sign_home="810007" sign_waiting="810006" sign_sale="810005" sign_nosale="810004">
 		<addresses>
 			<address id="6005" map="210040000" town="0" x="1804.022461" y="1648.438599" z="129.4495"/>
 			<address id="6006" map="210040000" town="0" x="1746.503296" y="1593.924927" z="129.47357"/>
@@ -602,7 +602,7 @@
 		<fee>400000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="328003" teleport_npc="810003" manager_npc="810020" sign_home="810007" sign_waiting="810006" sign_sale="810006" sign_nosale="810004">
+	<land id="328003" teleport_npc="810003" manager_npc="810020" sign_home="810007" sign_waiting="810006" sign_sale="810005" sign_nosale="810004">
 		<addresses>
 			<address id="6106" map="210050000" town="0" x="2269.691162" y="151.000107" z="465.844"/>
 		</addresses>
@@ -614,7 +614,7 @@
 		<fee>400000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="329001" teleport_npc="810003" manager_npc="810021" sign_home="810007" sign_waiting="810006" sign_sale="810006" sign_nosale="810004">
+	<land id="329001" teleport_npc="810003" manager_npc="810021" sign_home="810007" sign_waiting="810006" sign_sale="810005" sign_nosale="810004">
 		<addresses>
 			<address id="2001" map="720010000" town="0" x="366.242615" y="295.776093" z="222.3536" exit_map="700010000" exit_x="2573.0" exit_y="1961.0" exit_z="185.0"/>
 		</addresses>
@@ -625,7 +625,7 @@
 		<fee>0</fee>
 		<caps room="true" floor="true" emblemId="0" addon="false"/>
 	</land>
-	<land id="335001" teleport_npc="810031" manager_npc="810022" sign_home="810030" sign_waiting="810029" sign_sale="810029" sign_nosale="810027">
+	<land id="335001" teleport_npc="810031" manager_npc="810022" sign_home="810030" sign_waiting="810029" sign_sale="810028" sign_nosale="810027">
 		<addresses>
 			<address id="20001" map="710010000" town="2001" x="675.548096" y="746.829895" z="148.28037"/>
 			<address id="20002" map="710010000" town="2001" x="732.745483" y="685.023804" z="147.88057"/>
@@ -640,7 +640,7 @@
 		<fee>20000000</fee>
 		<caps room="false" floor="false" emblemId="2" addon="true"/>
 	</land>
-	<land id="336001" teleport_npc="810031" manager_npc="810023" sign_home="810030" sign_waiting="810029" sign_sale="810029" sign_nosale="810027">
+	<land id="336001" teleport_npc="810031" manager_npc="810023" sign_home="810030" sign_waiting="810029" sign_sale="810028" sign_nosale="810027">
 		<addresses>
 			<address id="7001" map="220040000" town="0" x="221.412399" y="613.281616" z="257.20053"/>
 			<address id="20004" map="710010000" town="2001" x="901.398315" y="845.020752" z="138.23041"/>
@@ -775,7 +775,7 @@
 		<fee>4000000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="336002" teleport_npc="810031" manager_npc="810023" sign_home="810030" sign_waiting="810029" sign_sale="810029" sign_nosale="810027">
+	<land id="336002" teleport_npc="810031" manager_npc="810023" sign_home="810030" sign_waiting="810029" sign_sale="810028" sign_nosale="810027">
 		<addresses>
 			<address id="7101" map="220070000" town="0" x="2285.023682" y="2863.579834" z="513.9515"/>
 		</addresses>
@@ -787,7 +787,7 @@
 		<fee>4000000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="337001" teleport_npc="810031" manager_npc="810024" sign_home="810030" sign_waiting="810029" sign_sale="810029" sign_nosale="810027">
+	<land id="337001" teleport_npc="810031" manager_npc="810024" sign_home="810030" sign_waiting="810029" sign_sale="810028" sign_nosale="810027">
 		<addresses>
 			<address id="20034" map="710010000" town="2002" x="982.231628" y="441.943420" z="83.01753"/>
 			<address id="20035" map="710010000" town="2002" x="955.592773" y="156.014969" z="80.74565"/>
@@ -937,7 +937,7 @@
 		<fee>2000000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="337002" teleport_npc="810031" manager_npc="810024" sign_home="810030" sign_waiting="810029" sign_sale="810029" sign_nosale="810027">
+	<land id="337002" teleport_npc="810031" manager_npc="810024" sign_home="810030" sign_waiting="810029" sign_sale="810028" sign_nosale="810027">
 		<addresses>
 			<address id="7002" map="220040000" town="0" x="228.426514" y="665.478882" z="257.3396"/>
 			<address id="7003" map="220040000" town="0" x="271.431244" y="687.184143" z="255.12888"/>
@@ -953,7 +953,7 @@
 		<fee>2000000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="337003" teleport_npc="810031" manager_npc="810024" sign_home="810030" sign_waiting="810029" sign_sale="810029" sign_nosale="810027">
+	<land id="337003" teleport_npc="810031" manager_npc="810024" sign_home="810030" sign_waiting="810029" sign_sale="810028" sign_nosale="810027">
 		<addresses>
 			<address id="7102" map="220070000" town="0" x="2314.071045" y="2807.611328" z="516.05277"/>
 			<address id="7103" map="220070000" town="0" x="2337.878662" y="2878.449951" z="519.04017"/>
@@ -968,7 +968,7 @@
 		<fee>2000000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="338001" teleport_npc="810031" manager_npc="810025" sign_home="810030" sign_waiting="810029" sign_sale="810029" sign_nosale="810027">
+	<land id="338001" teleport_npc="810031" manager_npc="810025" sign_home="810030" sign_waiting="810029" sign_sale="810028" sign_nosale="810027">
 		<addresses>
 			<address id="20056" map="710010000" town="2003" x="351.612732" y="518.246643" z="203.50073"/>
 			<address id="20057" map="710010000" town="2003" x="442.695099" y="253.457077" z="205.4307"/>
@@ -1213,7 +1213,7 @@
 		<fee>400000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="338002" teleport_npc="810031" manager_npc="810025" sign_home="810030" sign_waiting="810029" sign_sale="810029" sign_nosale="810027">
+	<land id="338002" teleport_npc="810031" manager_npc="810025" sign_home="810030" sign_waiting="810029" sign_sale="810028" sign_nosale="810027">
 		<addresses>
 			<address id="7006" map="220040000" town="0" x="1695.341553" y="218.127777" z="367.31587"/>
 			<address id="7008" map="220040000" town="0" x="2113.662109" y="2106.111572" z="598.32187"/>
@@ -1227,7 +1227,7 @@
 		<fee>400000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="338003" teleport_npc="810031" manager_npc="810025" sign_home="810030" sign_waiting="810029" sign_sale="810029" sign_nosale="810027">
+	<land id="338003" teleport_npc="810031" manager_npc="810025" sign_home="810030" sign_waiting="810029" sign_sale="810028" sign_nosale="810027">
 		<addresses>
 			<address id="7106" map="220070000" town="0" x="659.700745" y="2840.201660" z="412.06037"/>
 		</addresses>
@@ -1239,7 +1239,7 @@
 		<fee>400000</fee>
 		<caps room="true" floor="true" emblemId="2" addon="true"/>
 	</land>
-	<land id="339001" teleport_npc="810031" manager_npc="810026" sign_home="810030" sign_waiting="810029" sign_sale="810029" sign_nosale="810027">
+	<land id="339001" teleport_npc="810031" manager_npc="810026" sign_home="810030" sign_waiting="810029" sign_sale="810028" sign_nosale="810027">
 		<addresses>
 			<address id="3001" map="730010000" town="0" x="122.268707" y="358.312622" z="267.89127" exit_map="710010000" exit_x="1197.0" exit_y="2773.0" exit_z="236.0"/>
 		</addresses>
