@@ -13,8 +13,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author KID
- * @modified Neon
+ * @author KID, Neon
  */
 public abstract class ChatCommand {
 
@@ -48,7 +47,11 @@ public abstract class ChatCommand {
 		}
 
 		try {
-			execute(player, params);
+			try {
+				execute(player, params);
+			} catch (IllegalArgumentException e) {
+				sendInfo(player, toErrorMessage(e));
+			}
 		} catch (Throwable t) {
 			log.error("Exception executing chat command \"" + getAliasWithPrefix() + " " + String.join(" ", params) + "\" - Player: " + player.getName()
 				+ ", Target: " + player.getTarget(), t);
@@ -147,12 +150,34 @@ public abstract class ChatCommand {
 	abstract boolean process(Player player, String... params);
 
 	/**
-	 * The code to be executed after successful command access validation.
-	 * 
-	 * @param player
-	 * @param params
+	 * The code to be executed after successful command access validation. Any IllegalArgumentException and its subclasses will be catched, printing the
+	 * error message to the player (using {@link #toErrorMessage(IllegalArgumentException)}).
 	 */
 	protected abstract void execute(Player player, String... params);
+
+	/**
+	 * This method can be overridden in case the default message extraction is not sufficient.
+	 * 
+	 * @return Message that should be sent to the player who caused the exception with invalid input. If null, the default syntax info will be sent, as
+	 *         specified by {@link #sendInfo(Player, String...)}
+	 */
+	protected String toErrorMessage(IllegalArgumentException e) {
+		String msg = e.getMessage();
+		if (msg != null && msg.startsWith("No enum constant ")) { // "No enum constant com.aionemu.gameserver.model.siege.SiegeRace.invalidName"
+			String[] enumParts = msg.substring(17).split("\\."); // -> ["com", "aionemu", "gameserver", "model", "siege", "SiegeRace", "invalidName"]
+			String enumName = enumParts[enumParts.length - 2]; // -> "SiegeRace"
+			// split camelCase word (https://stackoverflow.com/a/7599674)
+			String[] enumNameParts = enumName.split("(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])"); // -> ["Siege", "Race"]
+			enumName = String.join(" ", enumNameParts).toLowerCase(); // -> "siege race"
+			msg = "Invalid " + enumName + ".";
+		} else if (e instanceof NumberFormatException) { // Integer.parseInt and Long.parseLong don't provide nice error messages
+			if (msg != null && msg.startsWith("For input string: "))
+				msg = "Invalid number: " + msg.substring(18);
+			else
+				msg = "Invalid number.";
+		}
+		return msg;
+	}
 
 	/**
 	 * Sends an info message to the player.<br>
