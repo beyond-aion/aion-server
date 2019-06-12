@@ -69,13 +69,9 @@ public class HouseRegistry implements Persistable {
 		if (objects.containsKey(houseObject.getObjectId()))
 			return false;
 
-		if (houseObject.getPersistentState() != PersistentState.NEW) {
-			log.error("Inserting not new HouseObject: " + houseObject.getObjectId());
-			return false;
-		}
-
 		objects.put(houseObject.getObjectId(), houseObject);
-		setPersistentState(PersistentState.UPDATE_REQUIRED);
+		if (houseObject.getPersistentState() != PersistentState.UPDATED) // state is UPDATED when reloading registry and spawned objects get reused
+			setPersistentState(PersistentState.UPDATE_REQUIRED);
 		return true;
 	}
 
