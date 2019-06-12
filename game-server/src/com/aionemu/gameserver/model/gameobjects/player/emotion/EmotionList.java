@@ -9,6 +9,7 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dao.PlayerEmotionListDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.item.actions.EmotionLearnAction;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION_LIST;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -21,9 +22,6 @@ public class EmotionList {
 	private Map<Integer, Emotion> emotions;
 	private Player owner;
 
-	/**
-	 * @param owner
-	 */
 	public EmotionList(Player owner) {
 		this.owner = owner;
 	}
@@ -49,13 +47,11 @@ public class EmotionList {
 	}
 
 	public boolean contains(int emotionId) {
-		if (emotions == null)
-			return false;
-		return emotions.containsKey(emotionId);
+		return emotions != null && emotions.containsKey(emotionId);
 	}
 
 	public boolean canUse(int emotionId) {
-		return emotionId < 64 || (emotions != null && emotions.containsKey(emotionId)) || owner.hasPermission(MembershipConfig.EMOTIONS_ALL);
+		return !EmotionLearnAction.isLearnable(emotionId) || contains(emotionId) || owner.hasPermission(MembershipConfig.EMOTIONS_ALL);
 	}
 
 	public Collection<Emotion> getEmotions() {
