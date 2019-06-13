@@ -103,7 +103,7 @@ public class SpawnsData {
 			for (BaseSpawn baseSpawn : map.getBaseSpawns()) {
 				int baseId = baseSpawn.getId();
 				if (!baseSpawnMaps.containsKey(baseId)) {
-					baseSpawnMaps.put(baseId, new ArrayList<SpawnGroup>());
+					baseSpawnMaps.put(baseId, new ArrayList<>());
 				}
 				for (BaseSpawn.SimpleRaceTemplate simpleRace : baseSpawn.getBaseRaceTemplates()) {
 					for (Spawn spawn : simpleRace.getSpawns()) {
@@ -116,7 +116,7 @@ public class SpawnsData {
 			for (RiftSpawn rift : map.getRiftSpawns()) {
 				int id = rift.getId();
 				if (!riftSpawnMaps.containsKey(id)) {
-					riftSpawnMaps.put(id, new ArrayList<SpawnGroup>());
+					riftSpawnMaps.put(id, new ArrayList<>());
 				}
 				for (Spawn spawn : rift.getSpawns()) {
 					SpawnGroup spawnGroup = new SpawnGroup(map.getMapId(), spawn, id);
@@ -127,7 +127,7 @@ public class SpawnsData {
 			for (SiegeSpawn SiegeSpawn : map.getSiegeSpawns()) {
 				int siegeId = SiegeSpawn.getSiegeId();
 				if (!siegeSpawnMaps.containsKey(siegeId)) {
-					siegeSpawnMaps.put(siegeId, new ArrayList<SpawnGroup>());
+					siegeSpawnMaps.put(siegeId, new ArrayList<>());
 				}
 				for (SiegeSpawn.SiegeRaceTemplate race : SiegeSpawn.getSiegeRaceTemplates()) {
 					for (SiegeSpawn.SiegeRaceTemplate.SiegeModTemplate mod : race.getSiegeModTemplates()) {
@@ -145,7 +145,7 @@ public class SpawnsData {
 			for (VortexSpawn VortexSpawn : map.getVortexSpawns()) {
 				int id = VortexSpawn.getId();
 				if (!vortexSpawnMaps.containsKey(id)) {
-					vortexSpawnMaps.put(id, new ArrayList<SpawnGroup>());
+					vortexSpawnMaps.put(id, new ArrayList<>());
 				}
 				for (VortexSpawn.VortexStateTemplate type : VortexSpawn.getSiegeModTemplates()) {
 					if (type == null || type.getSpawns() == null) {
@@ -173,7 +173,7 @@ public class SpawnsData {
 			for (AhserionsFlightSpawn ahserionSpawn : map.getAhserionSpawns()) {
 				int teamId = ahserionSpawn.getFaction().getId();
 				if (!ahserionSpawnMaps.containsKey(teamId)) {
-					ahserionSpawnMaps.put(teamId, new ArrayList<SpawnGroup>());
+					ahserionSpawnMaps.put(teamId, new ArrayList<>());
 				}
 
 				for (AhserionsFlightSpawn.AhserionStageSpawnTemplate stageTemplate : ahserionSpawn.getStageSpawnTemplate()) {
@@ -239,6 +239,8 @@ public class SpawnsData {
 
 	public synchronized boolean saveSpawn(VisibleObject visibleObject, boolean delete) {
 		SpawnTemplate spawn = visibleObject.getSpawn();
+		if (spawn == null) // some objects like house objects have no spawn template
+			return false;
 		if (!spawn.getClass().equals(SpawnTemplate.class)) // do not save special/temporary spawns (siege, base, rift spawn, ...) as world spawns
 			return false;
 		if (spawn.getRespawnTime() <= 0) // do not save single time spawns (monster raid, handler spawn, ...) as world spawns
@@ -324,7 +326,7 @@ public class SpawnsData {
 			oldGroup.addSpawnSpot(spot);
 		oldGroup.setCustom(true);
 
-		SpawnMap map = null;
+		SpawnMap map;
 		if (data.templates == null) {
 			data.templates = new ArrayList<>();
 			map = new SpawnMap(spawn.getWorldId());

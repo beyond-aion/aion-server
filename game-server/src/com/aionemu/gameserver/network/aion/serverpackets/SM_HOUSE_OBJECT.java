@@ -28,13 +28,10 @@ public class SM_HOUSE_OBJECT extends AionServerPacket {
 			return;
 
 		House house = houseObject.getOwnerHouse();
-		if (house == null)
-			return;
-
 		int templateId = houseObject.getObjectTemplate().getTemplateId();
 
-		writeD(house.getAddress().getId()); // if painted 0 ?
-		writeD(house.getOwnerId()); // player which owns house
+		writeD(house == null ? 0 : house.getAddress().getId()); // if painted 0 ?
+		writeD(house == null ? 0 : house.getOwnerId()); // player which owns house
 		writeD(houseObject.getObjectId()); // <outlet[X]> data in house scripts
 		writeD(houseObject.getObjectId()); // <outDB[X]> data in house scripts (probably DB id), where [X] is number
 
