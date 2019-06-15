@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -147,9 +148,10 @@ public class KnownList {
 				log.error("", e);
 			}
 			if (object instanceof Player) {
-				Player player = (Player) object;
-				if (player.getPet() != null) // pet spawn packet must be sent after SM_PLAYER_INFO, otherwise the pet will not be displayed
-					addToVisibleObjects(player.getPet());
+				Pet pet = ((Player) object).getPet(); // pet spawn packet must be sent after SM_PLAYER_INFO, otherwise the pet will not be displayed
+				// only add if the pet can know this knownlists owner (currently players), otherwise we get memory leaks if the pet gets dismissed (despawns)
+				if (pet != null && pet.getKnownList().isAwareOf(owner))
+					addToVisibleObjects(pet);
 			}
 		}
 	}
@@ -187,7 +189,7 @@ public class KnownList {
 				Player player = (Player) object;
 				if (player.getEffectController().isAbnormalSet(AbnormalState.HIDE))
 					animation = ObjectDeleteAnimation.DELAYED; // fix to show players hide skill animation
-				if (player.getPet() != null) // pets have no visual/see state
+				if (player.getPet() != null) // pets have no visual/see state, so we sync visibility with their master
 					delFromVisibleObjects(player.getPet(), ObjectDeleteAnimation.FADE_OUT);
 			}
 			try {
@@ -262,10 +264,7 @@ public class KnownList {
 	}
 
 	/**
-	 * Whether knownlist owner aware of found object (should be kept in knownlist)
-	 * 
-	 * @param newObject
-	 * @return
+	 * @return True if the knownlist owner is aware of newObject (should be kept in knownlist)
 	 */
 	protected boolean isAwareOf(VisibleObject newObject) {
 		return true;
