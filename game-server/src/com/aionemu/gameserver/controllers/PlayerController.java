@@ -413,7 +413,7 @@ public class PlayerController extends CreatureController<Player> {
 			return;
 		if (getOwner().getIsFlyingBeforeDeath())
 			getOwner().unsetState(CreatureState.FLOATING_CORPSE);
-		else
+		else if (getOwner().isInState(CreatureState.DEAD))
 			getOwner().unsetState(CreatureState.DEAD);
 		getOwner().setState(CreatureState.ACTIVE);
 	}

@@ -22,7 +22,6 @@ import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
@@ -212,8 +211,6 @@ public class TeleportService {
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_STATS_INFO(player));
 		PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
-		if (player.isInFlyState(FlyState.FLYING)) // notify client if we are still flying (client always ends flying after teleport)
-			player.getFlyController().startFly(true, true);
 		World.getInstance().spawn(player);
 		World.getInstance().spawn(player.getPet());
 		player.getController().startProtectionActiveTask();

@@ -3,7 +3,6 @@ package com.aionemu.gameserver.world.knownlist;
 import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.ReentrantLock;
 import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
@@ -51,11 +50,6 @@ public class KnownList {
 	 */
 	protected final Map<Integer, VisibleObject> visualObjects = new ConcurrentHashMap<>();
 
-	private final ReentrantLock lock = new ReentrantLock();
-
-	/**
-	 * @param owner
-	 */
 	public KnownList(VisibleObject owner) {
 		this.owner = owner;
 	}
@@ -63,15 +57,12 @@ public class KnownList {
 	/**
 	 * Do KnownList update.
 	 */
-	public void doUpdate() {
-		lock.lock();
+	public synchronized void doUpdate() {
 		try {
 			forgetObjects();
 			findVisibleObjects();
 		} catch (Exception e) {
 			log.error("Exception during KnownList update of {}", owner, e);
-		} finally {
-			lock.unlock();
 		}
 	}
 
