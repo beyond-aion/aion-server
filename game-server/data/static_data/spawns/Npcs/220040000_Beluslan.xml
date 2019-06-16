@@ -34,6 +34,10 @@
 		<spawn npc_id="204722" respawn_time="295">
 			<spot x="293.341" y="416.42" z="232"/>
 		</spawn>
+		<!-- Albrich -->
+		<spawn npc_id="832820" respawn_time="295">
+			<spot x="1609.3" y="2710.1" z="705.0375" h="67"/>
+		</spawn>
 		<!-- Alfgeir -->
 		<spawn npc_id="204804" respawn_time="295">
 			<spot x="592.17" y="788.35" z="232.999" h="75"/>

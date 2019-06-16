@@ -16,7 +16,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class _2633DestroyingBalaurWeapons extends AbstractQuestHandler {
 
-	private final static int[] npc_ids = { 204700, 204807, 700296 };
+	private final static int[] npc_ids = { 832820, 204807, 700296 };
 
 	public _2633DestroyingBalaurWeapons() {
 		super(2633);
@@ -24,7 +24,7 @@ public class _2633DestroyingBalaurWeapons extends AbstractQuestHandler {
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(204700).addOnQuestStart(questId);
+		qe.registerQuestNpc(832820).addOnQuestStart(questId);
 		for (int npc_id : npc_ids)
 			qe.registerQuestNpc(npc_id).addOnTalkEvent(questId);
 		qe.registerQuestNpc(213933).addOnKillEvent(questId);
@@ -37,7 +37,7 @@ public class _2633DestroyingBalaurWeapons extends AbstractQuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (targetId == 204700) {
+		if (targetId == 832820) {
 			if (qs == null || qs.isStartable()) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
@@ -50,7 +50,7 @@ public class _2633DestroyingBalaurWeapons extends AbstractQuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 204700) {
+			if (targetId == 832820) {
 				if (env.getDialogActionId() == USE_OBJECT)
 					return sendQuestDialog(env, 10002);
 				else if (env.getDialogActionId() == SELECT_QUEST_REWARD)
