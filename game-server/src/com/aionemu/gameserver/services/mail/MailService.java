@@ -52,8 +52,8 @@ public class MailService {
 		long attachedKinah, LetterType letterType) {
 		if (sender.isTrading() || recipientName.length() > 16)
 			return;
-		if (letterType == LetterType.BLACKCLOUD || attachedKinah < 0 || attachedItemCount < 0) {
-			AuditLogger.log(sender, "tried to send letter of type " + letterType + " with " + attachedKinah + " Kinah and " + attachedItemCount + " items");
+		if (letterType == LetterType.BLACKCLOUD || attachedKinah < 0) {
+			AuditLogger.log(sender, "tried to send letter of type " + letterType + " with " + attachedKinah + " Kinah");
 			return;
 		}
 
