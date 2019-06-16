@@ -22,10 +22,10 @@ import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- * KnownList.
+ * The Knownlist contains every object the owner currently knows (visible and invisble). Which objects are found is controlled by distance and
+ * awareness modifiers. Knowing is always a two way relation, so if A knows B, then B also knows A. 
  * 
- * @author -Nemesiss-
- * @modified kosyachok, Neon
+ * @author -Nemesiss-, kosyachok, Neon
  */
 public class KnownList {
 
@@ -205,7 +205,7 @@ public class KnownList {
 	 */
 	private void forgetObjects() {
 		for (VisibleObject object : knownObjects.values()) {
-			if (!PositionUtil.isInRange(owner, object, object.getVisibleDistance()) && !object.getKnownList().checkReversedObjectInRange(owner)) {
+			if (!PositionUtil.isInRange(owner, object, getVisibleDistance(object))) {
 				del(object, ObjectDeleteAnimation.NONE);
 				object.getKnownList().del(owner, ObjectDeleteAnimation.NONE);
 			}
@@ -250,15 +250,11 @@ public class KnownList {
 					continue;
 				}
 
-				if (!PositionUtil.isInRange(owner, newObject, newObject.getVisibleDistance()) && !newObject.getKnownList().checkReversedObjectInRange(owner))
+				if (!PositionUtil.isInRange(owner, newObject, getVisibleDistance(newObject)))
 					continue;
 
-				/**
-				 * New object is not known.
-				 */
-				if (add(newObject)) {
+				if (add(newObject))
 					newObject.getKnownList().add(owner);
-				}
 			}
 		}
 	}
@@ -271,13 +267,10 @@ public class KnownList {
 	}
 
 	/**
-	 * Check can be overriden if new object has different known range and that value should be used
-	 * 
-	 * @param newObject
-	 * @return
+	 * @return Detection radius in meters in which newObject can be added to this knownlist.
 	 */
-	protected boolean checkReversedObjectInRange(VisibleObject newObject) {
-		return false;
+	protected float getVisibleDistance(VisibleObject newObject) {
+		return newObject.getVisibleDistance();
 	}
 
 	public void forEachNpc(Consumer<Npc> function) {
@@ -364,12 +357,11 @@ public class KnownList {
 		return knownPlayers != null ? knownPlayers : Collections.emptyMap();
 	}
 
-	final void checkKnownPlayersInitialized() {
+	private void checkKnownPlayersInitialized() {
 		if (knownPlayers == null) {
 			synchronized (this) {
-				if (knownPlayers == null) {
+				if (knownPlayers == null)
 					knownPlayers = new ConcurrentHashMap<>();
-				}
 			}
 		}
 	}

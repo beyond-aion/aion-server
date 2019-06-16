@@ -75,20 +75,45 @@
 		<p1 x="1881.6443" y="941.383" z="1574.1211"/>
 		<p2 x="1880.4535" y="930.6619" z="1564.1044"/>
 	</fly_ring>
-	<fly_ring name="SULFUR_ARCHIPELAGO_400010000_1" map="400010000" radius="6.0">
+	<fly_ring name="EASTERN_SHARD_OF_LATESRAN_400010000_1" map="400010000" radius="6.0">
 		<center x="1891.8741" y="3065.2195" z="1707.4513"/>
 		<p1 x="1892.0983" y="3064.8528" z="1716.1888"/>
 		<p2 x="1885.7323" y="3073.6284" z="1705.9841"/>
 	</fly_ring>
-	<fly_ring name="SULFUR_ARCHIPELAGO_400010000_2" map="400010000" radius="6.0">
+	<fly_ring name="EASTERN_SHARD_OF_LATESRAN_400010000_2" map="400010000" radius="6.0">
 		<center x="1917.1748" y="3082.0107" z="1705.9841"/>
 		<p1 x="1917.5629" y="3082.1155" z="1716.7146"/>
 		<p2 x="1923.2441" y="3072.4702" z="1705.3875"/>
 	</fly_ring>
+	<fly_ring name="SULFUR_ARCHIPELAGO_400010000_1" map="400010000" radius="6.0">
+		<center x="1421.6976" y="1348.4683" z="1702.2076"/>
+		<p1 x="1422.1875" y="1348.2551" z="1709.3684"/>
+		<p2 x="1418.3401" y="1340.3258" z="1703.877"/>
+	</fly_ring>
+	<fly_ring name="SULFUR_ARCHIPELAGO_400010000_2" map="400010000" radius="6.0">
+		<center x="1528.4044" y="1146.1538" z="1710.0175"/>
+		<p1 x="1528.7764" y="1145.7351" z="1717.1481"/>
+		<p2 x="1519.4172" y="1146.577" z="1711.7535"/>
+	</fly_ring>
 	<fly_ring name="SULFUR_ARCHIPELAGO_400010000_3" map="400010000" radius="6.0">
+		<center x="1378.6506" y="1039.2925" z="1702.1128"/>
+		<p1 x="1379.1752" y="1039.5077" z="1709.1907"/>
+		<p2 x="1376.119" y="1030.8198" z="1703.8541"/>
+	</fly_ring>
+	<fly_ring name="SULFUR_ARCHIPELAGO_400010000_4" map="400010000" radius="6.0">
+		<center x="1259.853" y="1232.8855" z="1709.7908"/>
+		<p1 x="1260.2239" y="1232.3516" z="1717.1589"/>
+		<p2 x="1251.7471" y="1234.427" z="1711.7827"/>
+	</fly_ring>
+	<fly_ring name="SULFUR_ARCHIPELAGO_400010000_5" map="400010000" radius="6.0">
 		<center x="1016.59076" y="2222.1873" z="1548.8679"/>
 		<p1 x="1017.9088" y="2223.8333" z="1557.7026"/>
 		<p2 x="1026.2504" y="2223.0486" z="1549.5204"/>
+	</fly_ring>
+	<fly_ring name="SULFUR_ARCHIPELAGO_400010000_6" map="400010000" radius="6.0">
+		<center x="1018.02405" y="2191.0186" z="1555.8004"/>
+		<p1 x="1018.5214" y="2192.3293" z="1564.0262"/>
+		<p2 x="1027.5802" y="2191.8608" z="1555.6587"/>
 	</fly_ring>
 	<fly_ring name="RESHANTA_400010000_1" map="400010000" radius="6.0">
 		<center x="2975.625" y="1073.8953" z="1540.4493"/>
@@ -121,26 +146,21 @@
 		<p2 x="2467.932" y="803.8407" z="1527.5416"/>
 	</fly_ring>
 	<fly_ring name="RESHANTA_400010000_7" map="400010000" radius="6.0">
-		<center x="1018.02405" y="2191.0186" z="1555.8004"/>
-		<p1 x="1018.5214" y="2192.3293" z="1564.0262"/>
-		<p2 x="1027.5802" y="2191.8608" z="1555.6587"/>
-	</fly_ring>
-	<fly_ring name="RESHANTA_400010000_8" map="400010000" radius="6.0">
 		<center x="3212.8882" y="1651.275" z="1441.2888"/>
 		<p1 x="3213.7402" y="1649.3308" z="1449.3647"/>
 		<p2 x="3222.6255" y="1650.7196" z="1441.4669"/>
 	</fly_ring>
-	<fly_ring name="RESHANTA_400010000_9" map="400010000" radius="6.0">
+	<fly_ring name="RESHANTA_400010000_8" map="400010000" radius="6.0">
 		<center x="2090.6487" y="962.59875" z="2938.4045"/>
 		<p1 x="2091.333" y="962.3107" z="2947.343"/>
 		<p2 x="2100.1309" y="963.93115" z="2939.1047"/>
 	</fly_ring>
-	<fly_ring name="RESHANTA_400010000_10" map="400010000" radius="6.0">
+	<fly_ring name="RESHANTA_400010000_9" map="400010000" radius="6.0">
 		<center x="2422.8904" y="3077.7458" z="1630.4448"/>
 		<p1 x="2427.6858" y="3077.4102" z="1637.4285"/>
 		<p2 x="2423.8577" y="3087.339" z="1632.4551"/>
 	</fly_ring>
-	<fly_ring name="RESHANTA_400010000_11" map="400010000" radius="6.0">
+	<fly_ring name="RESHANTA_400010000_10" map="400010000" radius="6.0">
 		<center x="1229.4347" y="2640.92" z="2949.56"/>
 		<p1 x="1229.6195" y="2641.9807" z="2958.5125"/>
 		<p2 x="1236.0035" y="2650.4355" z="2950.664"/>
@@ -255,62 +275,62 @@
 		<p1 x="2154.6458" y="1931.5641" z="2582.674"/>
 		<p2 x="2146.0388" y="1940.7697" z="2582.8086"/>
 	</fly_ring>
-	<fly_ring name="ELTNEN_FORTRESS_210020000_1" map="210020000" radius="9.0">
+	<fly_ring name="ELTNEN_FORTRESS_210020000_1" map="210020000" radius="6.0">
 		<center x="415.2098" y="2728.116" z="261.0448"/>
 		<p1 x="412.882" y="2730.572" z="263.066"/>
 		<p2 x="418.960" y="2726.169" z="262.760"/>
 	</fly_ring>
-	<fly_ring name="ELTNEN_FORTRESS_210020000_2" map="210020000" radius="9.0">
+	<fly_ring name="ELTNEN_FORTRESS_210020000_2" map="210020000" radius="6.0">
 		<center x="446.2765" y="2836.997" z="171.71"/>
 		<p1 x="447.7526" y="2840.4854" z="173.71022"/>
 		<p2 x="442.93362" y="2834.8486" z="173.25687"/>
 	</fly_ring>
-	<fly_ring name="ELTNEN_FORTRESS_210020000_3" map="210020000" radius="9.0">
+	<fly_ring name="ELTNEN_FORTRESS_210020000_3" map="210020000" radius="6.0">
 		<center x="299.33" y="2896.13" z="217.93"/>
 		<p1 x="297.92648" y="2900.0737" z="216.82283"/>
 		<p2 x="298.4678" y="2891.9697" z="217.0665"/>
 	</fly_ring>
-	<fly_ring name="ELTNEN_FORTRESS_210020000_4" map="210020000" radius="9.0">
-		<center x="149.75" y="2719.7" z="170.880"/>
-		<p1 x="152.3258" y="2718.0232" z="171.7985"/>
-		<p2 x="146.40668" y="2719.237" z="171.75475"/>
+	<fly_ring name="ELTNEN_FORTRESS_210020000_4" map="210020000" radius="6.0">
+		<center x="149.6892" y="2719.8547" z="171.5615"/>
+		<p1 x="151.14876" y="2721.39" z="178.8408"/>
+		<p2 x="140.9919" y="2722.6096" z="171.84511"/>
 	</fly_ring>
-	<fly_ring name="ELTNEN_FORTRESS_210020000_5" map="210020000" radius="9.0">
+	<fly_ring name="ELTNEN_FORTRESS_210020000_5" map="210020000" radius="6.0">
 		<center x="165.99" y="2654.83" z="234.23"/>
 		<p1 x="167.22414" y="2652.1208" z="236.76764"/>
 		<p2 x="167.01315" y="2658.0984" z="236.8048"/>
 	</fly_ring>
-	<fly_ring name="ELTNEN_FORTRESS_210020000_6" map="210020000" radius="9.0">
+	<fly_ring name="ELTNEN_FORTRESS_210020000_6" map="210020000" radius="6.0">
 		<center x="294.38" y="2705.03" z="247.94"/>
 		<p1 x="293.12952" y="2708.928" z="249.09882"/>
 		<p2 x="293.67902" y="2702.011" z="250.75513"/>
 	</fly_ring>
-	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_1" map="220020000" radius="8.0">
+	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_1" map="220020000" radius="6.0">
 		<center x="310.83936" y="2296.9807" z="470.03555"/>
 		<p1 x="307.056" y="2297.259" z="471.760"/>
 		<p2 x="314.745" y="2296.060" z="470.892"/>
 	</fly_ring>
-	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_2" map="220020000" radius="8.0">
+	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_2" map="220020000" radius="6.0">
 		<center x="376.047" y="2316.868" z="513.793"/>
 		<p1 x="379.463" y="2314.030" z="514.870"/>
 		<p2 x="375.143" y="2317.964" z="516.092"/>
 	</fly_ring>
-	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_3" map="220020000" radius="8.0">
+	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_3" map="220020000" radius="6.0">
 		<center x="405.115" y="2387.784" z="476.624"/>
 		<p1 x="401.557" y="2388.149" z="474.949"/>
 		<p2 x="409.059" y="2386.839" z="476.134"/>
 	</fly_ring>
-	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_4" map="220020000" radius="8.0">
+	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_4" map="220020000" radius="6.0">
 		<center x="312.286" y="2382.607" z="551.205"/>
 		<p1 x="313.866" y="2379.713" z="551.029"/>
 		<p2 x="313.240" y="2385.925" z="553.084"/>
 	</fly_ring>
-	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_5" map="220020000" radius="8.0">
+	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_5" map="220020000" radius="6.0">
 		<center x="234.67497" y="2383.1833" z="575.795"/>
 		<p1 x="234.131" y="2386.539" z="577.662"/>
 		<p2 x="234.730" y="2381.664" z="574.339"/>
 	</fly_ring>
-	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_6" map="220020000" radius="8.0">
+	<fly_ring name="MORHEIM_ICE_FORTRESS_220020000_6" map="220020000" radius="6.0">
 		<center x="262.27716" y="2344.9773" z="488.92358"/>
 		<p1 x="265.211" y="2344.942" z="490.662"/>
 		<p2 x="259.603" y="2342.865" z="490.047"/>

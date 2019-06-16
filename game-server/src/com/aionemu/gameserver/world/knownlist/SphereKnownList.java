@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.world.knownlist;
 
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author ATracer
@@ -16,7 +15,7 @@ public class SphereKnownList extends PlayerAwareKnownList {
 	}
 
 	@Override
-	protected boolean checkReversedObjectInRange(VisibleObject newObject) {
-		return PositionUtil.isInRange(owner, newObject, radius);
+	protected float getVisibleDistance(VisibleObject newObject) {
+		return radius;
 	}
 }
