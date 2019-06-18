@@ -380,6 +380,18 @@
 			<gd_item id="101900480"/><!-- Indratu's Aethercannon -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212874"/><!-- Grand Chieftain Kasika -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900201"/><!-- Kasika's Greatsword -->
+			<gd_item id="101300199"/><!-- Kasika's Spear -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Unique)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
@@ -396,6 +408,17 @@
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="212874"/><!-- Grand Chieftain Kasika -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000280"/><!-- Kasika's Claw -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" chance="30">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
 			<gd_npc npc_id="212283"/><!-- Watcher Zapiel -->
 		</gd_npcs>
 		<gd_items>
@@ -405,10 +428,9 @@
 			<gd_item id="101500451"/><!-- Zapiel's Staff -->
 			<gd_item id="101700464"/><!-- Zapiel's Longbow -->
 			<gd_item id="101900481"/><!-- Zapiel's Aethercannon -->
-			<gd_item id="115000730"/><!-- Zapiel's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" chance="16.5">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="30">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
@@ -503,6 +525,28 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="115000723"/><!-- Kunpapa's Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Unique)" chance="16.5">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212874"/><!-- Grand Chieftain Kasika -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000444"/><!-- Kasika's Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Shield (Unique)" chance="16.5">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212283"/><!-- Watcher Zapiel -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000730"/><!-- Zapiel's Shield -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Unique)" chance="16.5">
@@ -864,6 +908,20 @@
 			<gd_item id="110300762"/><!-- Indratu Elite's Jerkin -->
 			<gd_item id="110500738"/><!-- Indratu Elite's Hauberk -->
 			<gd_item id="110600726"/><!-- Indratu Elite's Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212874"/><!-- Grand Chieftain Kasika -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100479"/><!-- Grand Chieftain's Tunic -->
+			<gd_item id="110300440"/><!-- Grand Chieftain's Jerkin -->
+			<gd_item id="110500468"/><!-- Grand Chieftain's Hauberk -->
+			<gd_item id="110600465"/><!-- Grand Chieftain's Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" chance="40">
