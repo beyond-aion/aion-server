@@ -1,27 +1,44 @@
 package com.aionemu.gameserver.controllers;
 
+import java.sql.Timestamp;
 import java.util.List;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.dao.HousesDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
+import com.aionemu.gameserver.model.templates.spawns.HouseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_RENDER;
+import com.aionemu.gameserver.model.templates.spawns.SpawnType;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_ACQUIRE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OWNER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Rolandas
+ * @author Rolandas, Neon
  */
 public class HouseController extends VisibleObjectController<House> {
+
+	private static final Logger log = LoggerFactory.getLogger(HouseController.class);
 
 	@Override
 	public void see(VisibleObject object) {
@@ -30,39 +47,76 @@ public class HouseController extends VisibleObjectController<House> {
 	}
 
 	public void spawnObjects() {
-		if (getOwner().getRegistry() != null) {
-			for (HouseObject<?> obj : getOwner().getRegistry().getSpawnedObjects()) {
+		if (getOwner().getPosition() != null && getOwner().isSpawned() && !getOwner().isInactive()) {
+			for (HouseObject<?> obj : getOwner().getRegistry().getSpawnedObjects())
 				obj.spawn();
-			}
 		}
 	}
 
-	/**
-	 * Used for owner player only
-	 */
+	@Override
+	public void onAfterSpawn() {
+		// loads scripts and registry from DB if not already initialized
+		getOwner().getPlayerScripts();
+		getOwner().getRegistry();
+		updateSpawns();
+	}
+
+	private void updateSpawns() {
+		HouseAddress address = getOwner().getAddress();
+		List<HouseSpawn> templates = DataManager.HOUSE_NPCS_DATA.getSpawnsByAddress(address.getId());
+		if (templates == null) {
+			log.warn("Missing npc spawns for house " + address.getId());
+			return;
+		}
+		for (HouseSpawn spawn : templates) {
+			Npc npc;
+			if (spawn.getType() == SpawnType.MANAGER) {
+				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(address.getMapId(), address.getLand().getManagerNpcId(), spawn.getX(), spawn.getY(),
+					spawn.getZ(), spawn.getH());
+				npc = VisibleObjectSpawner.spawnHouseNpc(t, getOwner().getInstanceId(), getOwner());
+			} else if (spawn.getType() == SpawnType.TELEPORT) {
+				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(address.getMapId(), address.getLand().getTeleportNpcId(), spawn.getX(), spawn.getY(),
+					spawn.getZ(), spawn.getH());
+				npc = VisibleObjectSpawner.spawnHouseNpc(t, getOwner().getInstanceId(), getOwner());
+			} else if (spawn.getType() == SpawnType.SIGN) {
+				// Signs do not have master name displayed, but have creatorId
+				int creatorId = address.getId();
+				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(address.getMapId(), getCurrentSignNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
+					spawn.getH(), creatorId);
+				npc = (Npc) SpawnEngine.spawnObject(t, getOwner().getInstanceId());
+			} else {
+				log.warn("Unhandled spawn type " + spawn.getType());
+				continue;
+			}
+			getOwner().updateSpawn(spawn.getType(), npc);
+		}
+	}
+
+	@Override
+	public void onDespawn() {
+		super.onDespawn();
+		boolean isReusableStudio = HousingService.getInstance().findStudio(getOwner().getObjectId()) == getOwner();
+		if (isReusableStudio) { // save studio and release despawned npcs and the destroyed mapregion / worldmapinstance, since studio stays in RAM
+			getOwner().save();
+			getOwner().clearSpawns();
+			getOwner().setPosition(null);
+		}
+	}
+
 	public void updateAppearance() {
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_HOUSE_UPDATE(getOwner()));
 	}
 
-	public void broadcastAppearance() {
-		PacketSendUtility.broadcastPacket(getOwner(), new SM_HOUSE_RENDER(getOwner()));
-	}
-
 	public void kickVisitors(Player kicker, boolean kickFriends, boolean ownerChanged) {
-		List<ZoneInfo> zoneInfo = DataManager.ZONE_DATA.getZones().get(getOwner().getWorldId());
-		for (ZoneInfo info : zoneInfo) {
-			if (info.getZoneTemplate().getName().name().equals(getOwner().getName())) {
-				getOwner().getKnownList().forEachPlayer(player -> {
-					if (player.getObjectId() == getOwner().getOwnerId())
-						return;
-					if (!kickFriends && kicker != null && kicker.getFriendList().getFriend(player.getObjectId()) != null)
-						return;
-					if (player.isInsideZone(info.getZoneTemplate().getName()))
-						moveOutside(player, ownerChanged);
-				});
-				break;
-			}
-		}
+		ZoneName houseZone = ZoneName.get(getOwner().getName());
+		getOwner().getKnownList().forEachPlayer(player -> {
+			if (player.getObjectId() == getOwner().getOwnerId())
+				return;
+			if (!kickFriends && kicker != null && kicker.getFriendList().getFriend(player.getObjectId()) != null)
+				return;
+			if (player.isInsideZone(houseZone))
+				moveOutside(player, ownerChanged);
+		});
 		if (kicker != null) {
 			if (!kickFriends) {
 				PacketSendUtility.sendPacket(kicker, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_OUT_WITHOUT_FRIENDS());
@@ -102,5 +156,83 @@ public class HouseController extends VisibleObjectController<House> {
 			h += h < 60 ? 60 : -60; // opposite direction (player should look inside house)
 		}
 		TeleportService.teleportTo(player, getOwner().getWorldId(), getOwner().getInstanceId(), x, y, z, h, TeleportAnimation.FADE_OUT_BEAM);
+	}
+
+	public void changeOwner(int newOwnerId) {
+		int oldOwnerId = getOwner().getOwnerId();
+		if (oldOwnerId == newOwnerId)
+			return;
+
+		synchronized (getOwner()) {
+			boolean newOwnerHasAnotherHouse = newOwnerId != 0 && HousingService.getInstance().getCustomHouses().stream().anyMatch(house -> house.getOwnerId() == newOwnerId);
+			getOwner().resetRegistry();
+			getOwner().getPlayerScripts().removeAll();
+			getOwner().setOwnerId(newOwnerId);
+			if (newOwnerId == 0 && HousingService.getInstance().removeStudio(getOwner())) {
+				DAOManager.getDAO(HousesDAO.class).deleteHouse(oldOwnerId);
+				notifyAboutOwnerChange(oldOwnerId, false);
+				return;
+			}
+			getOwner().setInactive(newOwnerHasAnotherHouse);
+			getOwner().setDoorState(null);
+			getOwner().setShowOwnerName(true);
+			getOwner().setSignNotice(null);
+			getOwner().setAcquiredTime(newOwnerId == 0 ? null : new Timestamp(System.currentTimeMillis()));
+			getOwner().setNextPay(null);
+
+			Building defaultBuilding = getOwner().getLand().getDefaultBuilding();
+			if (defaultBuilding != getOwner().getBuilding())
+				HousingService.getInstance().switchHouseBuilding(getOwner(), defaultBuilding.getId());
+			else // in else clause because building switch also saves the house
+				getOwner().save();
+		}
+		House newHouseOfOldOwner = HousingService.getInstance().findInactiveHouse(oldOwnerId); // other house of seller that should get activated
+		if (newHouseOfOldOwner != null && newHouseOfOldOwner.getPosition() != null && newHouseOfOldOwner.isSpawned()) {
+			newHouseOfOldOwner.setInactive(false);
+			newHouseOfOldOwner.reloadHouseRegistry();
+			newHouseOfOldOwner.getController().updateSign();
+			newHouseOfOldOwner.getController().updateAppearance();
+		}
+		notifyAboutOwnerChange(oldOwnerId, false);
+		notifyAboutOwnerChange(newOwnerId, true);
+		if (getOwner().getPosition() != null && getOwner().isSpawned()) {
+			getOwner().updateSpawn(SpawnType.MANAGER, null); // remove old butler, otherwise new npcs spawn with old owner name
+			updateSpawns();
+			updateAppearance();
+			kickVisitors(null, true, true);
+		}
+	}
+
+	public void updateSign() {
+		if (getOwner().getCurrentSign() == null)
+			return;
+		int newNpcId = getCurrentSignNpcId();
+		if (newNpcId != getOwner().getCurrentSign().getNpcId()) {
+			SpawnTemplate t = getOwner().getCurrentSign().getSpawn();
+			t = SpawnEngine.newSingleTimeSpawn(t.getWorldId(), newNpcId, t.getX(), t.getY(), t.getZ(), t.getHeading(), t.getCreatorId());
+			getOwner().updateSpawn(SpawnType.SIGN, (Npc) SpawnEngine.spawnObject(t, getOwner().getInstanceId()));
+		}
+	}
+
+	private void notifyAboutOwnerChange(int ownerId, boolean isNewOwner) {
+		if (ownerId == 0)
+			return;
+		Player player = World.getInstance().findPlayer(ownerId);
+		if (player != null) {
+			player.resetHouses();
+			if (!isNewOwner)
+				PacketSendUtility.sendPacket(player, new SM_HOUSE_ACQUIRE(player.getObjectId(), getOwner().getAddress().getId(), false));
+			PacketSendUtility.sendPacket(player, new SM_HOUSE_OWNER_INFO(player));
+			if (isNewOwner)
+				PacketSendUtility.sendPacket(player, new SM_HOUSE_ACQUIRE(player.getObjectId(), getOwner().getAddress().getId(), true));
+		}
+	}
+
+	private int getCurrentSignNpcId() {
+		if (getOwner().getBids() != null)
+			return getOwner().getLand().getSaleSignNpcId();
+		if (getOwner().getOwnerId() == 0)
+			return getOwner().getLand().getNosaleSignNpcId(); // invisible npc
+		return getOwner().isInactive() ? getOwner().getLand().getWaitingSignNpcId() : getOwner().getLand().getHomeSignNpcId();
 	}
 }

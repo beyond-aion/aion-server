@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.HousingNpc;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
@@ -11,10 +11,10 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
  */
 public class NpcObject extends HouseObject<HousingNpc> {
 
-	Npc npc = null;
+	private Npc npc = null;
 
-	public NpcObject(House owner, int objId, int templateId) {
-		super(owner, objId, templateId);
+	public NpcObject(HouseRegistry registry, int objId, int templateId) {
+		super(registry, objId, templateId);
 	}
 
 	@Override

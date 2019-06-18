@@ -2,7 +2,6 @@ package com.aionemu.gameserver.utils.chathandlers;
 
 import java.awt.Color;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -79,13 +78,14 @@ public abstract class ChatCommand {
 	/**
 	 * Sets the command parameter info.<br>
 	 * This parameter info is needed to generate the syntax info in {@link #sendInfo(Player, String...)}.<br>
-	 * You can pass multiple comma separated <b>syntaxInfo</b> strings. Each string will result in a line of text output.
+	 * You can pass multiple comma separated lines of text. When following the parameter convention, parameters will be highlighted in white.
 	 * 
-	 * @param syntaxInfo
-	 *          strings should look like this:<br>
-	 *          &nbsp;&nbsp;" - Short description for no parameter.",<br>
-	 *          &nbsp;&nbsp;"&lt;param1a|param1b&gt; - Short parameter description.",<br>
-	 *          &nbsp;&nbsp;"&lt;param1&gt; &lt;param2&gt; [optional param3] - Short parameter description."
+	 * @param lines
+	 *          strings may look like this:<br>
+	 *          " - Short description for no parameter.",<br>
+	 *          "&lt;param1&gt; &lt;param2&gt; [optionalParam3] - Short parameter description (two mandatory parameters, third one is optional).",<br>
+	 *          "param1 &lt;param2&gt; - Short parameter description (first one is a non-variable word).",<br>
+	 *          "Some other help text."<br>
 	 */
 	protected final void setSyntaxInfo(String... lines) {
 		this.syntaxInfo = parseSyntaxInfo(lines);
@@ -103,18 +103,14 @@ public abstract class ChatCommand {
 		if (lines.length > 0) {
 			boolean containsSquareBrackets = false;
 			for (String info : lines) {
-				if (StringUtils.startsWithAny(info, " ", "<", "[")) {
-					if (!containsSquareBrackets && info.split(" - ", 2)[0].contains("["))
+				String[] split = info.split(" - ", 2);
+				if (split.length == 2) {
+					if (!containsSquareBrackets && split[0].contains("["))
 						containsSquareBrackets = true;
 					sb.append("\n\t").append(ChatUtil.color(getAliasWithPrefix(), Color.WHITE)).append(' ');
-					String[] split = info.split(" - ", 2);
-					if (split.length == 2) {
-						sb.append(split[0].replaceAll("([^<>\\[\\]| ]+)", ChatUtil.color("$1", Color.WHITE)).trim());
-						sb.append(" - ");
-						sb.append(split[1]);
-					} else {
-						sb.append(info);
-					}
+					sb.append(split[0].replaceAll("([^<>\\[\\]| ]+)", ChatUtil.color("$1", Color.WHITE)).trim());
+					sb.append(" - ");
+					sb.append(split[1]);
 				} else {
 					sb.append("\n").append(info);
 				}

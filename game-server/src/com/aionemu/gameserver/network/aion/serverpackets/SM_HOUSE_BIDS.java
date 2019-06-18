@@ -4,81 +4,54 @@ import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.HouseBidEntry;
-import com.aionemu.gameserver.model.house.HouseStatus;
+import com.aionemu.gameserver.model.house.HouseBids;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.HousingBidService;
+import com.aionemu.gameserver.services.HousingService;
+import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
 
 /**
- * @author Rolandas
+ * @author Rolandas, Neon
  */
 public class SM_HOUSE_BIDS extends AionServerPacket {
 
-	private boolean isFirst;
-	private boolean isLast;
-	private HouseBidEntry playerBid;
-	private List<HouseBidEntry> houseBids;
+	private final boolean isFirst;
+	private final boolean isLast;
+	private final List<HouseBids> houseBids;
 
-	public SM_HOUSE_BIDS(boolean isFirstPacket, boolean isLastPacket, HouseBidEntry playerBid, List<HouseBidEntry> houseBids) {
+	public SM_HOUSE_BIDS(boolean isFirstPacket, boolean isLastPacket, List<HouseBids> houseBids) {
 		isFirst = isFirstPacket;
 		isLast = isLastPacket;
-		this.playerBid = playerBid;
 		this.houseBids = houseBids;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		Player player = con.getActivePlayer();
-		int secondsTillAuction = HousingBidService.getInstance().getSecondsTillAuction();
-
+		HouseBids.Bid lastBid = isLast ? HousingBidService.getInstance().findLastBid(player) : null;
+		HouseBids bidsForRegisteredHouse = isLast ? HousingBidService.getInstance().findBidsForRegisteredHouse(player) : null;
 		writeC(isFirst ? 1 : 0);
 		writeC(isLast ? 1 : 0);
 
-		if (playerBid == null) {
-			writeD(0);
-			writeQ(0);
-		} else {
-			writeD(playerBid.getEntryIndex());
-			writeQ(playerBid.getBidPrice());
-		}
+		writeD(lastBid == null ? 0 : lastBid.getListIndex());
+		writeQ(lastBid == null ? 0 : lastBid.getKinah());
 
-		List<House> playerHouses = player.getHouses();
-		House sellHouse = null;
-		for (House house : playerHouses) {
-			if (house.getStatus() == HouseStatus.SELL_WAIT) {
-				sellHouse = house;
-				break;
-			}
-		}
-
-		HouseBidEntry sellData = null;
-		if (sellHouse != null) {
-			sellData = HousingBidService.getInstance().getHouseBid(sellHouse.getObjectId());
-			writeD(sellData.getEntryIndex());
-			writeQ(sellData.getBidPrice());
-		} else {
-			writeD(0);
-			writeQ(0);
-		}
+		writeD(bidsForRegisteredHouse == null ? 0 : bidsForRegisteredHouse.getListIndex());
+		writeQ(bidsForRegisteredHouse == null ? 0 : bidsForRegisteredHouse.getInitialOffer().getKinah()); // starting price
 
 		writeH(houseBids.size());
-		for (int n = 0; n < houseBids.size(); n++) {
-			HouseBidEntry entry = houseBids.get(n);
-			writeD(entry.getEntryIndex());
-			writeD(entry.getLandId());
-			writeD(entry.getAddress());
-			writeD(entry.getBuildingId());
-			if (sellData != null && entry.getEntryIndex() == sellData.getEntryIndex())
-				writeD(0);
-			else if (HousingBidService.canBidHouse(player, entry.getAddress()))
-				writeD(entry.getHouseType().getId());
-			else
-				writeD(0);
-			writeQ(entry.getBidPrice());
-			writeQ(entry.getUnk2());
-			writeD(entry.getBidCount());
-			writeD(secondsTillAuction);
+		for (HouseBids bids : houseBids) {
+			House house = HousingService.getInstance().findHouse(bids.getHouseObjectId());
+			writeD(bids.getListIndex());
+			writeD(house.getLand().getId());
+			writeD(house.getAddress().getId());
+			writeD(house.getBuilding().getId());
+			writeD(house.getHouseType().getId()); // client seems to ignore this
+			writeQ(bids.getHighestBid().getKinah());
+			writeQ(100000); // what's this? the same static value is sent in CM_REGISTER_HOUSE
+			writeD(bids.getBidCount());
+			writeD(AuctionEndTask.getInstance().getRemainingAuctionSeconds(bids.getHouseObjectId()));
 		}
 	}
 

@@ -93,12 +93,8 @@ public class PlayerService {
 		DAOManager.getDAO(PlayerPunishmentsDAO.class).storePlayerPunishment(player, PunishmentType.PRISON);
 		DAOManager.getDAO(PlayerPunishmentsDAO.class).storePlayerPunishment(player, PunishmentType.GATHER);
 		DAOManager.getDAO(InventoryDAO.class).store(player);
-		for (House house : player.getHouses()) {
-			DAOManager.getDAO(HousesDAO.class).storeHouse(house);
-			if (house.getRegistry() != null && house.getRegistry().getPersistentState() == PersistentState.UPDATE_REQUIRED) {
-				DAOManager.getDAO(PlayerRegisteredItemsDAO.class).store(house.getRegistry(), player.getCommonData().getPlayerObjId());
-			}
-		}
+		for (House house : player.getHouses())
+			house.save();
 		DAOManager.getDAO(ItemStoneListDAO.class).save(player);
 		DAOManager.getDAO(MailDAO.class).storeMailbox(player);
 		DAOManager.getDAO(PortalCooldownsDAO.class).storePortalCooldowns(player);

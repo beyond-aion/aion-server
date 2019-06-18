@@ -5,7 +5,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.templates.housing.HouseType;
+import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.HousingCategory;
 import com.aionemu.gameserver.model.templates.housing.LimitType;
 import com.aionemu.gameserver.model.templates.housing.PlaceArea;
@@ -16,6 +16,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_EDIT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 
@@ -34,13 +35,13 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	private Integer color = null;
 	private int colorExpireEnd;
 
-	private House ownerHouse;
+	private final HouseRegistry registry;
 	// don't set it directly, ever!!! Use setPersistentState() method instead
 	private PersistentState persistentState = PersistentState.NEW;
 
-	public HouseObject(House owner, int objId, int templateId) {
+	public HouseObject(HouseRegistry registry, int objId, int templateId) {
 		super(objId, new PlaceableObjectController<T>(), null, DataManager.HOUSING_OBJECT_DATA.getTemplateById(templateId), null);
-		this.ownerHouse = owner;
+		this.registry = registry;
 		getController().setOwner(this);
 		setKnownlist(new PlayerAwareKnownList(this));
 	}
@@ -59,18 +60,18 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 					this.persistentState = PersistentState.NOACTION;
 				else if (this.persistentState != PersistentState.DELETED) {
 					this.persistentState = PersistentState.DELETED;
-					ownerHouse.getRegistry().setPersistentState(PersistentState.UPDATE_REQUIRED);
+					registry.setPersistentState(PersistentState.UPDATE_REQUIRED);
 				}
 				break;
 			case UPDATE_REQUIRED:
 				if (this.persistentState == PersistentState.NEW) {
-					ownerHouse.getRegistry().setPersistentState(PersistentState.UPDATE_REQUIRED);
+					registry.setPersistentState(PersistentState.UPDATE_REQUIRED);
 					break;
 				}
 			default:
 				if (this.persistentState != persistentState) {
 					this.persistentState = persistentState;
-					ownerHouse.getRegistry().setPersistentState(PersistentState.UPDATE_REQUIRED);
+					registry.setPersistentState(PersistentState.UPDATE_REQUIRED);
 				}
 		}
 	}
@@ -92,7 +93,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 		else {
 			PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(4, 1, getObjectId()));
 			PacketSendUtility.sendPacket(player, msg);
-			ownerHouse.getRegistry().removeObject(getObjectId());
+			registry.removeObject(getObjectId());
 		}
 	}
 
@@ -101,11 +102,11 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 		getController().delete();
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(4, 1, getObjectId()));
 		PacketSendUtility.sendPacket(player, message);
-		ownerHouse.getRegistry().removeObject(getObjectId());
-		Player owner = World.getInstance().findPlayer(ownerHouse.getOwnerId());
+		registry.removeObject(getObjectId());
+		Player owner = World.getInstance().findPlayer(registry.getOwner().getOwnerId());
 		// if owner is not online, we should save his items
 		if (owner == null || !owner.isOnline())
-			ownerHouse.getRegistry().save();
+			registry.save();
 	}
 
 	@Override
@@ -176,7 +177,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	}
 
 	public void setRotation(int rotation) {
-		setHeading((byte) Math.ceil(rotation / 3f));
+		setHeading(PositionUtil.convertAngleToHeading(rotation));
 	}
 
 	public PlaceLocation getPlaceLocation() {
@@ -189,10 +190,9 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 
 	public int getPlacementLimit(boolean trial) {
 		LimitType limitType = getObjectTemplate().getPlacementLimit();
-		HouseType size = HouseType.fromValue(ownerHouse.getBuilding().getSize());
 		if (trial)
-			return limitType.getTrialObjectPlaceLimit(size);
-		return limitType.getObjectPlaceLimit(size);
+			return limitType.getTrialObjectPlaceLimit(registry.getOwner().getBuilding().getSize());
+		return limitType.getObjectPlaceLimit(registry.getOwner().getBuilding().getSize());
 	}
 
 	public ItemQuality getQuality() {
@@ -207,12 +207,16 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 		return getObjectTemplate().getCategory();
 	}
 
+	public HouseRegistry getRegistry() {
+		return registry;
+	}
+
 	public House getOwnerHouse() {
-		return ownerHouse;
+		return registry.getOwner();
 	}
 
 	public int getPlayerId() {
-		return ownerHouse.getOwnerId();
+		return registry.getOwner().getOwnerId();
 	}
 
 	public int getOwnerUsedCount() {
@@ -227,10 +231,10 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	public void incrementVisitorUsedCount() {
 		this.visitorUsedCount++;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
-		Player owner = World.getInstance().findPlayer(ownerHouse.getOwnerId());
+		Player owner = World.getInstance().findPlayer(registry.getOwner().getOwnerId());
 		// if owner is not online, we should save his items
 		if (owner == null || !owner.isOnline())
-			ownerHouse.getRegistry().save();
+			registry.save();
 	}
 
 	public void setOwnerUsedCount(int ownerUsedCount) {
@@ -267,22 +271,22 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	public void spawn() {
 		if (!isSpawnedByPlayer())
 			return;
-		World w = World.getInstance();
 		if (position == null || !isSpawned()) {
-			position = w.createPosition(ownerHouse.getWorldId(), x, y, z, heading, ownerHouse.getInstanceId());
+			position = World.getInstance().createPosition(registry.getOwner().getWorldId(), x, y, z, heading, registry.getOwner().getInstanceId());
 			SpawnEngine.bringIntoWorld(this);
+		} else {
+			updateKnownlist();
 		}
-		updateKnownlist();
 	}
 
 	/**
 	 * Removes house from spawn but it remains in registry
 	 */
 	public void removeFromHouse() {
-		this.setX(0);
-		this.setY(0);
-		this.setZ(0);
-		this.setHeading((byte) 0);
+		getController().delete();
+		x = y = z = heading = 0;
+		position = null;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	public void onUse(Player player) {

@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.HousingPicture;
 
 /**
@@ -9,8 +9,8 @@ import com.aionemu.gameserver.model.templates.housing.HousingPicture;
  */
 public class PictureObject extends HouseObject<HousingPicture> {
 
-	public PictureObject(House owner, int objId, int templateId) {
-		super(owner, objId, templateId);
+	public PictureObject(HouseRegistry registry, int objId, int templateId) {
+		super(registry, objId, templateId);
 	}
 
 	@Override

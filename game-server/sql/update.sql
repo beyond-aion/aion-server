@@ -29,8 +29,14 @@ ALTER TABLE `houses`
 ALTER TABLE `houses` DROP COLUMN `fee_paid`;
 
 -- remove obsolete server vars
-DELETE FROM `server_variables` WHERE `key` IN ("auctionTime", "houseMaintainTime");
+DELETE FROM `server_variables` WHERE `key` IN ("auctionTime", "houseMaintainTime", "auctionProlonged");
 
 -- fix field properties
 ALTER TABLE `house_bids` MODIFY COLUMN `bid_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `bid`;
-ALTER TABLE `houses` MODIFY COLUMN `acquire_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP AFTER `address`;
+ALTER TABLE `houses` MODIFY COLUMN `acquire_time` timestamp NULL DEFAULT NULL AFTER `address`;
+UPDATE `houses` SET `acquire_time` = NULL WHERE `player_id` = 0;
+
+-- remove obsolete house columns
+ALTER TABLE `houses`
+    DROP COLUMN `status`,
+    DROP COLUMN `sell_started`;

@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.HousingJukeBox;
 
 /**
@@ -8,8 +8,8 @@ import com.aionemu.gameserver.model.templates.housing.HousingJukeBox;
  */
 public class JukeBoxObject extends HouseObject<HousingJukeBox> {
 
-	public JukeBoxObject(House owner, int objId, int templateId) {
-		super(owner, objId, templateId);
+	public JukeBoxObject(HouseRegistry registry, int objId, int templateId) {
+		super(registry, objId, templateId);
 	}
 
 }

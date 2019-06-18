@@ -46,7 +46,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.ingameshop.InGameShop;
 import com.aionemu.gameserver.model.items.ItemCooldown;
 import com.aionemu.gameserver.model.items.storage.IStorage;
@@ -194,7 +193,6 @@ public class Player extends Creature {
 	private boolean isInSprintMode;
 	private List<ActionObserver> rideObservers;
 
-	private byte houseOwnerStates = HouseOwnerState.BUY_STUDIO_ALLOWED.getId();
 	private int battleReturnMap;
 	private float[] battleReturnCoords;
 	private int robotId;
@@ -1676,34 +1674,10 @@ public class Player extends Creature {
 
 	public House getActiveHouse() {
 		for (House house : getHouses())
-			if (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT)
+			if (!house.isInactive())
 				return house;
 
 		return null;
-	}
-
-	public byte getHouseOwnerStates() {
-		return houseOwnerStates;
-	}
-
-	public boolean hasHouseOwnerState(HouseOwnerState state) {
-		return (houseOwnerStates & state.getId()) == state.getId();
-	}
-
-	public void setHouseOwnerState(byte state) {
-		houseOwnerStates |= state;
-		House house = getActiveHouse();
-		if (house != null) {
-			house.fixBuildingStates();
-		}
-	}
-
-	public void unsetBuildingOwnerState(byte state) {
-		houseOwnerStates &= ~state;
-		House house = getActiveHouse();
-		if (house != null) {
-			house.fixBuildingStates();
-		}
 	}
 
 	public float[] getBattleReturnCoords() {

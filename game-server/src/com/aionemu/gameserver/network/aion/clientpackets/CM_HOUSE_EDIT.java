@@ -131,10 +131,7 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 			if (obj == null)
 				return;
 			sendPacket(new SM_HOUSE_EDIT(action, 0, itemObjectId));
-			obj.getController().delete();
 			obj.removeFromHouse();
-			obj.clearKnownlist();
-			house.getRegistry().setPersistentState(PersistentState.UPDATE_REQUIRED);
 			sendPacket(new SM_HOUSE_EDIT(3, 1, itemObjectId)); // place it back
 		} else if (action == 14) { // enter renovation mode
 			sendPacket(new SM_HOUSE_EDIT(14));

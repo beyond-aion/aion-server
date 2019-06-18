@@ -23,7 +23,6 @@ import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AutoGroupService;
-import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
@@ -32,7 +31,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMap;
-import com.aionemu.gameserver.world.WorldMap2DInstance;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapInstanceFactory;
 import com.aionemu.gameserver.world.WorldMapType;
@@ -123,11 +121,6 @@ public class InstanceService {
 			}
 		}
 		instance.getInstanceHandler().onInstanceDestroy();
-		if (instance instanceof WorldMap2DInstance) {
-			WorldMap2DInstance w2d = (WorldMap2DInstance) instance;
-			if (w2d.isPersonal())
-				HousingService.getInstance().onInstanceDestroy(w2d.getOwnerId());
-		}
 		WalkerFormator.onInstanceDestroy(worldId, instanceId);
 	}
 

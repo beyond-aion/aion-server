@@ -36,7 +36,7 @@ public class SM_FRIEND_LIST extends AionServerPacket {
 
 			House house = HousingService.getInstance().findActiveHouse(friend.getObjectId());
 			writeD(house == null ? 0 : house.getAddress().getId());
-			writeC(house == null ? 0 : house.getDoorState().getPacketValue());
+			writeC(house == null ? 0 : house.getDoorState().getId());
 
 			writeS(friend.getFriendMemo());
 		}

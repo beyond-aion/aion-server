@@ -12,7 +12,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.XmlTransient;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.mysql.jdbc.StringUtils;
 
 /**
  * @author Rolandas
@@ -21,30 +20,26 @@ import com.mysql.jdbc.StringUtils;
 @XmlRootElement(name = "building")
 public class Building {
 
+	@XmlAttribute(required = true)
+	private int id;
+
 	@XmlElement(name = "parts")
 	private Parts parts;
 
 	@XmlAttribute(name = "default")
-	protected boolean isDefault;
+	private boolean isDefault;
 
 	@XmlAttribute(name = "parts_match")
-	protected String partsMatch;
+	private String partsMatch;
 
 	@XmlAttribute
-	protected String size;
+	private HouseType size;
 
 	@XmlAttribute
-	protected BuildingType type;
-
-	@XmlAttribute(required = true)
-	protected int id;
-
-	public boolean isDefault() {
-		return isDefault;
-	}
+	private BuildingType type;
 
 	@XmlTransient
-	Map<PartType, Integer> partsByType = new HashMap<>();
+	private Map<PartType, Integer> partsByType = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (parts == null)
@@ -67,31 +62,33 @@ public class Building {
 			partsByType.put(PartType.ROOF, parts.getRoof());
 	}
 
-	// All methods for DataManager call are just to ensure integrity
-	// if called from housing land templates, because it only has id and isDefault
-	// for the buildings. Buildings template has full info though, except isDefault
-	// value for the land.
+	public int getId() {
+		return id;
+	}
+
+	public boolean isDefault() {
+		return isDefault;
+	}
+
+	// All DataManager calls are just to ensure integrity if called from housing land templates. Because buildings in land templates have only id and
+	// isDefault set. Buildings template has full info though, except isDefault value for the land.
 
 	public String getPartsMatchTag() {
-		if (StringUtils.isNullOrEmpty(partsMatch))
-			return DataManager.HOUSE_BUILDING_DATA.getBuilding(id).getPartsMatchTag();
+		if (partsMatch == null)
+			return DataManager.HOUSE_BUILDING_DATA.getBuilding(id).partsMatch;
 		return partsMatch;
 	}
 
-	public String getSize() {
-		if (StringUtils.isNullOrEmpty(size))
-			return DataManager.HOUSE_BUILDING_DATA.getBuilding(id).getSize();
+	public HouseType getSize() {
+		if (size == null)
+			return DataManager.HOUSE_BUILDING_DATA.getBuilding(id).size;
 		return size;
 	}
 
 	public BuildingType getType() {
 		if (type == null)
-			return DataManager.HOUSE_BUILDING_DATA.getBuilding(id).getType();
+			return DataManager.HOUSE_BUILDING_DATA.getBuilding(id).type;
 		return type;
-	}
-
-	public int getId() {
-		return id;
 	}
 
 	public Integer getDefaultPartId(PartType partType) {

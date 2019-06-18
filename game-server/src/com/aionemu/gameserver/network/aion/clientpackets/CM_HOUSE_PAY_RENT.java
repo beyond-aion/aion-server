@@ -12,7 +12,7 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_PAY_RENT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.taskmanager.tasks.MaintenanceTask;
+import com.aionemu.gameserver.taskmanager.tasks.housing.MaintenanceTask;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**

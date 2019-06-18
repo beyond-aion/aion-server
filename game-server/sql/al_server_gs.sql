@@ -255,11 +255,9 @@ CREATE TABLE `houses` (
   `player_id` int(10) NOT NULL DEFAULT '0',
   `building_id` int(10) NOT NULL,
   `address` int(10) NOT NULL,
-  `acquire_time` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  `acquire_time` timestamp NULL DEFAULT NULL,
   `settings` int(11) NOT NULL DEFAULT '0',
-  `status` enum('ACTIVE','SELL_WAIT','INACTIVE','NOSALE') NOT NULL DEFAULT 'ACTIVE',
   `next_pay` timestamp NULL DEFAULT NULL,
-  `sell_started` timestamp NULL DEFAULT NULL,
   `sign_notice` varchar(100) DEFAULT NULL,
   PRIMARY KEY (`id`),
   KEY `address` (`address`)

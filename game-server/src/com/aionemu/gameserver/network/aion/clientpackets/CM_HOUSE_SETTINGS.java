@@ -2,9 +2,11 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.HousePermissions;
+import com.aionemu.gameserver.model.house.HouseDoorState;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_ACQUIRE;
@@ -16,8 +18,8 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
  */
 public class CM_HOUSE_SETTINGS extends AionClientPacket {
 
-	private int doorState;
-	private int displayOwner;
+	private byte doorState;
+	private boolean showOwnerName;
 	private String signNotice;
 
 	public CM_HOUSE_SETTINGS(int opcode, Set<State> validStates) {
@@ -26,8 +28,8 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		doorState = readUC();
-		displayOwner = readUC();
+		doorState = readC();
+		showOwnerName = readC() == 1;
 		signNotice = readS();
 	}
 
@@ -41,23 +43,25 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 			AuditLogger.log(player, "sent string with more than 64 chars for house notice: " + signNotice);
 			signNotice = signNotice.substring(0, 64);
 		}
+		HouseDoorState doorState = HouseDoorState.get(this.doorState);
 		House house = player.getActiveHouse();
-		HousePermissions doorPermission = HousePermissions.getPacketDoorState(doorState);
-		house.setDoorState(doorPermission);
-		house.setNoticeState(HousePermissions.getNoticeState(displayOwner));
+		house.setDoorState(doorState);
+		house.setShowOwnerName(showOwnerName);
 		house.setSignNotice(signNotice);
 
 		sendPacket(new SM_HOUSE_ACQUIRE(player.getObjectId(), house.getAddress().getId(), true));
 		house.getController().updateAppearance();
 
-		if (doorPermission == HousePermissions.DOOR_OPENED_ALL)
+		if (doorState == HouseDoorState.OPEN)
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_OPEN_DOOR());
-		else if (doorPermission == HousePermissions.DOOR_OPENED_FRIENDS) {
+		else if (doorState == HouseDoorState.CLOSED_EXCEPT_FRIENDS) {
 			house.getController().kickVisitors(player, false, false);
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_CLOSE_DOOR_WITHOUT_FRIENDS());
-		} else if (doorPermission == HousePermissions.DOOR_CLOSED) {
+		} else if (doorState == HouseDoorState.CLOSED) {
 			house.getController().kickVisitors(player, true, false);
 			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_ORDER_CLOSE_DOOR_ALL());
+		} else {
+			LoggerFactory.getLogger(HouseDoorState.class).warn("Unhandled house door state " + doorState + " (" + this.doorState + ")");
 		}
 	}
 

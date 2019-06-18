@@ -421,10 +421,10 @@ public class World {
 	 *           if object is already despawned
 	 */
 	public void despawn(VisibleObject object, ObjectDeleteAnimation animation) {
+		WorldPosition position = object.getPosition();
 		try {
 			object.getController().onDespawn();
 		} finally {
-			WorldPosition position = object.getPosition();
 			MapRegion oldMapRegion = position.getMapRegion();
 			position.setIsSpawned(false);
 			if (oldMapRegion != null) { // can be null if an instance gets deleted?

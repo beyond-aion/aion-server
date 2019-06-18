@@ -54,7 +54,7 @@ public final class MailFormatter {
 		else
 			return;
 
-		MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate(templateName, "", ownedHouse.getPlayerRace());
+		MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate(templateName, "", Race.PC_ALL);
 
 		MailPart formatter = new MailPart() {
 
@@ -72,7 +72,7 @@ public final class MailFormatter {
 		String title = template.getFormattedTitle(null);
 		String message = template.getFormattedMessage(formatter);
 
-		SystemMailService.sendMail(templateName, ownedHouse.getButler().getMasterName(), title, message, 0, 0, kinah, LetterType.NORMAL);
+		SystemMailService.sendMail(templateName, ownedHouse.getOwnerName(), title, message, 0, 0, kinah, LetterType.NORMAL);
 	}
 
 	public static void sendHouseAuctionMail(House ownedHouse, PlayerCommonData playerData, AuctionResult result, long time, long returnKinah) {

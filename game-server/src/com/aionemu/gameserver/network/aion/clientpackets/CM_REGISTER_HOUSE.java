@@ -5,22 +5,19 @@ import java.util.Set;
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OWNER_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_RECEIVE_BIDS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HousingBidService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Rolandas
  */
 public class CM_REGISTER_HOUSE extends AionClientPacket {
 
-	long bidKinah;
-	long unk1;
+	private long bidKinah;
 
 	public CM_REGISTER_HOUSE(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -29,47 +26,45 @@ public class CM_REGISTER_HOUSE extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		bidKinah = readQ();
-		unk1 = readQ(); // 100000
+		readQ(); // always 100000
 	}
 
 	@Override
 	protected void runImpl() {
-		if (!HousingConfig.ENABLE_HOUSE_AUCTIONS)
-			return;
-
 		Player player = getConnection().getActivePlayer();
+		if (!HousingBidService.getInstance().isRegisteringAllowed()) {
+			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_AUCTION_TIMEOUT());
+			return;
+		}
+
 		House house = player.getActiveHouse();
 		if (house == null || house.getHouseType() == HouseType.STUDIO)
 			return; // should not happen
 
-		if (house.getStatus() == HouseStatus.SELL_WAIT) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_FAIL_ALREADY_REGISTED());
-			return;
-		}
-
-		if (!HousingBidService.getInstance().isRegisteringAllowed()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_AUCTION_TIMEOUT());
+		if (house.getBids() != null) {
+			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_FAIL_ALREADY_REGISTED());
 			return;
 		}
 
 		if (!house.isFeePaid() && HousingConfig.ENABLE_HOUSE_PAY) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_AUCTION_OVERDUE());
+			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_AUCTION_OVERDUE());
 			return;
 		}
 
-		long fee = (long) (bidKinah * 0.3f);
+		long fee = (long) (bidKinah * HousingConfig.AUCTION_REGISTRATION_FEE_PERCENT);
 
-		if (player.getInventory().getKinah() < fee) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NOT_ENOUGH_MONEY());
+		if (!player.getInventory().tryDecreaseKinah(fee)) {
+			// client has it's own validation, so we only get here if AUCTION_REGISTRATION_FEE_PERCENT is higher than the default in the client (30%)
+			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_KINA(fee));
 			return;
 		}
-		player.getInventory().decreaseKinah(fee);
-		HousingBidService.getInstance().addHouseToAuction(house, bidKinah);
-
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_MY_HOUSE(house.getAddress().getId()));
-		house.getController().updateAppearance();
-
-		PacketSendUtility.sendPacket(player, new SM_HOUSE_OWNER_INFO(player));
+		if (HousingBidService.getInstance().auction(house, bidKinah)) {
+			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_AUCTION_MY_HOUSE(house.getAddress().getId()));
+			sendPacket(new SM_RECEIVE_BIDS(0));
+		} else {
+			sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_AUCTION_TIMEOUT());
+			player.getInventory().increaseKinah(fee);
+		}
 	}
 
 }

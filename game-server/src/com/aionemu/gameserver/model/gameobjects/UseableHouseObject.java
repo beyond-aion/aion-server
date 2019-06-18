@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.PlaceableHouseObject;
 import com.aionemu.gameserver.world.World;
 
@@ -14,8 +14,8 @@ public abstract class UseableHouseObject<T extends PlaceableHouseObject> extends
 
 	private AtomicInteger usingPlayer = new AtomicInteger();
 
-	public UseableHouseObject(House owner, int objId, int templateId) {
-		super(owner, objId, templateId);
+	public UseableHouseObject(HouseRegistry registry, int objId, int templateId) {
+		super(registry, objId, templateId);
 	}
 
 	@Override

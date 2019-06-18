@@ -424,7 +424,7 @@ public final class PlayerEnterWorldService {
 		sendMacroList(client, player);
 		client.sendPacket(new SM_RECIPE_LIST(player.getRecipeList().getRecipeList()));
 		BrokerService.getInstance().onPlayerLogin(player);
-		HousingService.getInstance().onPlayerLogin(player);
+		HousingService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
 		// ----------------------------- Retail sequence -----------------------------
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
 			AutoGroupService.getInstance().onPlayerLogin(player);

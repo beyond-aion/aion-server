@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.HousingEmblem;
 
 /**
@@ -8,13 +8,12 @@ import com.aionemu.gameserver.model.templates.housing.HousingEmblem;
  */
 public class EmblemObject extends HouseObject<HousingEmblem> {
 
-	public EmblemObject(House owner, int objId, int templateId) {
-		super(owner, objId, templateId);
+	public EmblemObject(HouseRegistry registry, int objId, int templateId) {
+		super(registry, objId, templateId);
 	}
 
 	@Override
 	public boolean canExpireNow() {
-		// TODO Auto-generated method stub
 		return false;
 	}
 

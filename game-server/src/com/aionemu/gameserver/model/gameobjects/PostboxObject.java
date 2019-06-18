@@ -2,7 +2,7 @@ package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.HousingPostbox;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_OBJECT_USE_UPDATE;
@@ -10,13 +10,12 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Rolandas
- * @modified Neon
+ * @author Rolandas, Neon
  */
 public class PostboxObject extends UseableHouseObject<HousingPostbox> {
 
-	public PostboxObject(House owner, int objId, int templateId) {
-		super(owner, objId, templateId);
+	public PostboxObject(HouseRegistry registry, int objId, int templateId) {
+		super(registry, objId, templateId);
 	}
 
 	@Override

@@ -70,6 +70,7 @@ import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.services.FlyRingService;
 import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.services.HousingBidService;
+import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.LegionDominionService;
 import com.aionemu.gameserver.services.LimitedItemTradeService;
 import com.aionemu.gameserver.services.MonsterRaidService;
@@ -92,7 +93,9 @@ import com.aionemu.gameserver.services.player.PlayerLimitService;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
-import com.aionemu.gameserver.taskmanager.tasks.MaintenanceTask;
+import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionAutoFillTask;
+import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
+import com.aionemu.gameserver.taskmanager.tasks.housing.MaintenanceTask;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.cron.ThreadPoolManagerRunnableRunner;
@@ -248,6 +251,14 @@ public class GameServer {
 		RiftService.getInstance().initRiftLocations();
 		LegionDominionService.getInstance().initLocations();
 
+		ConsoleUtil.printSection("Housing");
+		HousingService.getInstance(); // init housing service before spawns since it gets called on every instance spawn
+		HousingBidService.getInstance();
+		AuctionEndTask.getInstance();
+		AuctionAutoFillTask.getInstance();
+		MaintenanceTask.getInstance();
+		ChallengeTaskService.getInstance();
+
 		ConsoleUtil.printSection("Spawns");
 		SpawnEngine.spawnAll();
 		TemporarySpawnEngine.spawnAll();
@@ -311,10 +322,6 @@ public class GameServer {
 		ConsoleUtil.printSection("Player Transfers");
 		PlayerTransferService.getInstance();
 
-		ConsoleUtil.printSection("Housing");
-		HousingBidService.getInstance().start();
-		MaintenanceTask.getInstance();
-		ChallengeTaskService.getInstance();
 		GameTimeService.getInstance().startClock();
 
 		PvpMapService.getInstance().init();

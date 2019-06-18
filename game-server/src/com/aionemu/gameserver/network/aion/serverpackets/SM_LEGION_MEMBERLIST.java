@@ -48,7 +48,7 @@ public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 
 			House house = HousingService.getInstance().findActiveHouse(legionMember.getObjectId());
 			writeD(house == null ? 0 : house.getAddress().getId());
-			writeD(house == null ? 0 : house.getDoorState().getPacketValue());
+			writeD(house == null ? 0 : house.getDoorState().getId());
 			writeD(NetworkConfig.GAMESERVER_ID); // TODO: add to account model? displays server number for each away player in region field
 		}
 	}

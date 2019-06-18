@@ -20,12 +20,24 @@ public abstract class AbstractHouseInfoPacket extends AionServerPacket {
 		this.house = house;
 	}
 
-	protected void writeCommonInfo(boolean withLegionMemberInfo) {
-		LegionMember member = withLegionMemberInfo && house.getOwnerId() > 0 ? LegionService.getInstance().getLegionMember(house.getOwnerId()) : null;
+	protected void writeCommonInfo() {
+		LegionMember member = house.isInactive() || house.getOwnerId() == 0 ? null : LegionService.getInstance().getLegionMember(house.getOwnerId());
+
+		writeD(0);
+		writeD(house.getAddress().getId());
+		writeD(house.getOwnerId());
+		writeD(house.getBuilding().getType().getId());
+		writeC(1); // unk
+
+		writeD(house.getBuilding().getId());
+		writeC(house.getHouseOwnerStates());
+		writeC(house.getDoorState().getId());
+
+		writeS(house.getOwnerName(), 52);
+
 		writeD(member == null ? 0 : member.getLegion().getLegionId());
 
-		// show/hide owner name; even for inactive house NC still puts that value
-		writeC(house.getNoticeState().getPacketValue());
+		writeC(house.isShowOwnerName() ? 1 : 0);
 		writeS(house.getSignNotice());
 
 		writePartData(house, PartType.ROOF, 0, true);
@@ -66,7 +78,7 @@ public abstract class AbstractHouseInfoPacket extends AionServerPacket {
 		if (skipPersonal && house.getBuilding().getType() == BuildingType.PERSONAL_INS)
 			writeD(0);
 		else {
-			HouseDecoration deco = house.getRenderPart(partType, room);
+			HouseDecoration deco = house.getRegistry().getRenderPart(partType, room);
 			writeD(deco != null ? deco.getTemplate().getId() : 0);
 		}
 	}

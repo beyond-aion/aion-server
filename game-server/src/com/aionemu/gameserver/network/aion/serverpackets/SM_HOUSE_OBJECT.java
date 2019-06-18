@@ -27,7 +27,7 @@ public class SM_HOUSE_OBJECT extends AionServerPacket {
 		if (player == null)
 			return;
 
-		House house = houseObject.getOwnerHouse();
+		House house = houseObject.getRegistry() == null ? null : houseObject.getRegistry().getOwner(); // may be null if it's a DummyHouseObject
 		int templateId = houseObject.getObjectTemplate().getTemplateId();
 
 		writeD(house == null ? 0 : house.getAddress().getId()); // if painted 0 ?

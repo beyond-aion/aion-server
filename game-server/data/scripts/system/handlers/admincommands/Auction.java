@@ -1,278 +1,163 @@
 package admincommands;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
+import java.util.function.Predicate;
+import java.util.stream.Collectors;
 
-import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.HouseBidEntry;
-import com.aionemu.gameserver.model.house.HouseStatus;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.HousingService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.utils.collections.Predicates;
+import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Rolandas
- * @modified Luzien
+ * @author Rolandas, Luzien, Neon
  */
 public class Auction extends AdminCommand {
 
 	public Auction() {
-		super("auction");
+		super("auction", "Adds or removes houses to/from auction.");
+
+		// @formatter:off
+		setSyntaxInfo(
+			"<address> [starting price] - Auctions the given house.",
+			"<zone> <house type> <count> [starting price] - Auctions free houses of given type that are in the specified zone.",
+			"asmo|ely <house type> <count> [starting price] - Auctions free asmodian or elysean houses of given type.",
+			"end <address|zone> - Ends the auction for given house(s), transferring ownership to the highest bidder.",
+			"cancel <address|zone> - Cancels the auction for given house(s).",
+			"Zone: Zone name from zones xml files",
+			"House type: house, mansion, estate, palace",
+			"If no starting price is given, default will be taken from templates."
+		);
+		// @formatter:on
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length < 1) {
-			info(admin, null);
+		if (params.length == 0) {
+			sendInfo(admin);
 			return;
 		}
 
-		if ("remove".equals(params[0])) {
+		boolean isCancel = "cancel".equalsIgnoreCase(params[0]);
+		if ("end".equalsIgnoreCase(params[0]) || isCancel) {
 			if (params.length < 2) {
-				info(admin, null);
+				sendInfo(admin);
 				return;
 			}
-			String param = params[1].toUpperCase();
-			List<House> housesToRemove = new ArrayList<>();
 
-			if ("HOUSE".equals(param.split("_")[0])) {
-				House house = HousingService.getInstance().getHouseByName(params[1].toUpperCase());
-				if (house == null || house.getStatus() != HouseStatus.SELL_WAIT) {
-					PacketSendUtility.sendMessage(admin, "No such house!");
+			boolean isHouseAddress = params[1].matches("\\d+");
+			List<House> houses;
+			if (isHouseAddress) {
+				House house = HousingService.getInstance().getHouseByAddress(Integer.parseInt(params[1]));
+				if (house == null) {
+					sendInfo(admin, "Invalid house address.");
+					return;
 				}
-				housesToRemove.add(house);
+				houses = Collections.singletonList(house);
 			} else {
-				ZoneName zoneName = ZoneName.get(params[1]);
-				if (zoneName.name().equals(ZoneName.NONE)) {
-					PacketSendUtility.sendMessage(admin, "No such zone!");
+				houses = findHousesInZone(admin, params[1], Predicates.alwaysTrue());
+				if (houses == null)
 					return;
-				}
-				for (House house : HousingService.getInstance().getCustomHouses()) {
-					if (house.getStatus() != HouseStatus.SELL_WAIT) {
-						continue;
-					}
-					float x = house.getX();
-					float y = house.getY();
-					float z = house.getZ();
-					if (house.getPosition().getMapRegion().isInsideZone(zoneName, x, y, z)) {
-						housesToRemove.add(house);
-					}
-				}
 			}
 
-			if (housesToRemove.size() == 0) {
-				PacketSendUtility.sendMessage(admin, "Nothing to remove!");
+			int removedHouses = 0;
+			for (House house : houses) {
+				if (!isCancel && HousingBidService.getInstance().endAuction(house.getObjectId())
+					|| isCancel && HousingBidService.getInstance().cancelAuction(house)) {
+					sendInfo(admin,
+						(isCancel ? "Canceled" : "Ended") + " auction for " + house.getHouseType().name().toLowerCase() + " " + house.getAddress().getId());
+					removedHouses++;
+				}
+			}
+			if (removedHouses == 0)
+				sendInfo(admin, isHouseAddress ? "The house is not for sale." : "No houses for sale in this zone.");
+		} else if (params[0].matches("\\d+")) {
+			int address = Integer.parseInt(params[0]);
+			House house = HousingService.getInstance().getHouseByAddress(address);
+			if (house == null) {
+				sendInfo(admin, "Invalid address.");
 				return;
 			}
-
-			boolean noSale = false;
-			if (params.length == 3) {
-				if (!"nosale".equals(params[2])) {
-					info(admin, null);
-					return;
-				}
-				noSale = true;
+			if (house.getBids() != null) {
+				sendInfo(admin, "Address " + address + " is already in auction.");
+				return;
 			}
-
-			for (House house : housesToRemove) {
-				if (HousingBidService.getInstance().removeHouseFromAuction(house, noSale)) {
-					PacketSendUtility.sendMessage(admin, "Succesfully removed house " + house.getName());
-				} else {
-					PacketSendUtility.sendMessage(admin, "Failed to remove house " + house.getName());
-				}
+			long price = params.length < 2 ? house.getDefaultAuctionPrice() : Long.parseLong(params[1]);
+			if (price <= 0) {
+				sendInfo(admin, "Starting price must be positive.");
+				return;
 			}
+			HousingBidService.getInstance().auction(house, price);
+			sendInfo(admin, "Address " + address + " was auctioned successfully.");
 		} else if ("add".equals(params[0])) {
-
-			if (params.length < 3 || params.length > 4) {
-				info(admin, null);
-				return;
-			}
-
-			ZoneName zoneName = ZoneName.get(params[1]);
-			if (zoneName.name().equals(ZoneName.NONE)) {
-				PacketSendUtility.sendMessage(admin, "No such zone!");
-				return;
-			}
-
-			HouseType houseType = null;
-			try {
-				houseType = HouseType.fromValue(params[2].toUpperCase());
-			} catch (Exception e) {
-			}
-
-			if (houseType == null) {
-				PacketSendUtility.sendMessage(admin, "No such house type!");
-				return;
-			}
-
-			long bidPrice = 0;
-			if (params.length == 4) {
-				try {
-					bidPrice = Long.parseLong(params[3]);
-					if (bidPrice <= 0) {
-						throw new IllegalArgumentException();
-					}
-				} catch (Exception e) {
-					PacketSendUtility.sendMessage(admin, "Only positive numbers for the bid price!");
-					return;
-				}
-			}
-
-			boolean found = false;
-			int counter = 0;
-
-			for (House house : HousingService.getInstance().getCustomHouses()) {
-				if (house.getOwnerId() != 0 || house.getHouseType() != houseType) {
-					continue;
-				}
-				if (house.getStatus() == HouseStatus.INACTIVE) {
-					continue;
-				}
-				if (house.getStatus() == HouseStatus.SELL_WAIT) {
-					// check to see if the bid entry exists
-					HouseBidEntry entry = HousingBidService.getInstance().getHouseBid(house.getObjectId());
-					if (entry == null) {
-						// reset status
-						house.setStatus(HouseStatus.ACTIVE);
-					} else {
-						continue;
-					}
-				}
-				float x = house.getX();
-				float y = house.getY();
-				float z = house.getZ();
-				if (house.getPosition().getMapRegion().isInsideZone(zoneName, x, y, z)) {
-					found = true;
-					long price = bidPrice > 0 ? bidPrice : house.getDefaultAuctionPrice();
-					if (HousingBidService.getInstance().addHouseToAuction(house, price)) {
-						house.save();
-						counter++;
-					}
-				}
-			}
-
-			if (found) {
-				PacketSendUtility.sendMessage(admin, "Added " + counter + " houses of type " + houseType);
-			} else {
-				PacketSendUtility.sendMessage(admin, "No houses, all are occupied or already in auction!");
-			}
-		} else if ("addrandom".equals(params[0])) {
 			if (params.length < 4 || params.length > 5) {
-				info(admin, null);
+				sendInfo(admin);
 				return;
 			}
 
-			String param = params[1].toUpperCase();
-			Race race;
-			if ("ALL".equals(param) || "PC_ALL".equals(param))
-				race = Race.PC_ALL;
-			else if ("ELYOS".equals(param))
-				race = Race.ELYOS;
-			else if ("ASMODIANS".equals(param))
-				race = Race.ASMODIANS;
-			else {
-				PacketSendUtility.sendMessage(admin, "Race not found! Use ALL | ELYOS | ASMODIANS!");
+			HouseType houseType = HouseType.valueOf(params[2].toUpperCase());
+			int maxCount = Integer.parseInt(params[3]);
+			if (maxCount <= 0) {
+				sendInfo(admin, "Count must be positive.");
 				return;
 			}
 
-			HouseType houseType = null;
-			try {
-				houseType = HouseType.fromValue(params[2].toUpperCase());
-			} catch (Exception e) {
+			Predicate<House> filter = house -> house.getHouseType() == houseType && house.getBids() == null && house.getOwnerId() == 0;
+			List<House> houses;
+			if ("asmodians".startsWith(params[1].toLowerCase())) {
+				filter = filter.and(house -> house.getWorldType() != WorldType.ELYSEA);
+				houses = HousingService.getInstance().getCustomHouses().stream().filter(filter).collect(Collectors.toList());
+			} else if ("elyos".startsWith(params[1].toLowerCase())) {
+				filter = filter.and(house -> house.getWorldType() != WorldType.ASMODAE);
+				houses = HousingService.getInstance().getCustomHouses().stream().filter(filter).collect(Collectors.toList());
+			} else {
+				houses = findHousesInZone(admin, params[1], filter);
 			}
-
-			if (houseType == null) {
-				PacketSendUtility.sendMessage(admin, "No such house type!");
+			if (houses == null)
+				return;
+			if (houses.isEmpty()) {
+				sendInfo(admin, "No auctionable " + houseType.name().toLowerCase() + "s found.");
 				return;
 			}
-
-			int count = 0;
-			try {
-				count = Integer.parseInt(params[3]);
-				if (count <= 0) {
-					throw new IllegalArgumentException();
-				}
-			} catch (Exception e) {
-				PacketSendUtility.sendMessage(admin, "Invalid count. Only positive numbers!");
+			long price = params.length < 5 ? houses.get(0).getDefaultAuctionPrice() : Long.parseLong(params[4]);
+			if (price <= 0) {
+				sendInfo(admin, "Starting price must be positive.");
 				return;
-			}
-			long bidPrice = 0;
-			if (params.length == 5) {
-				try {
-					bidPrice = Long.parseLong(params[4]);
-					if (bidPrice <= 0) {
-						throw new IllegalArgumentException();
-					}
-				} catch (Exception e) {
-					PacketSendUtility.sendMessage(admin, "Only positive numbers for the bid price!");
-					return;
-				}
 			}
 
 			int counter = 0;
-			List<House> houses = HousingService.getInstance().getCustomHouses();
-			while (!houses.isEmpty() && counter < count) {
-				House house = Rnd.get(houses);
-				houses.remove(house);
-				if (house.getOwnerId() != 0 || house.getHouseType() != houseType) {
-					continue;
-				}
-				if (race != Race.PC_ALL) {
-					int mapId = house.getAddress().getMapId();
-					if (race.equals(Race.ELYOS)) {
-						if (mapId != 210050000 && mapId != 700010000 && mapId != 210040000) {
-							continue;
-						}
-					} else if (race.equals(Race.ASMODIANS)) {
-						if (mapId != 710010000 && mapId != 220040000 && mapId != 220070000) {
-							continue;
-						}
-					}
-				}
-				if (house.getStatus() == HouseStatus.INACTIVE) {
-					continue;
-				}
-				if (house.getStatus() == HouseStatus.SELL_WAIT) {
-					// check to see if the bid entry exists
-					HouseBidEntry entry = HousingBidService.getInstance().getHouseBid(house.getObjectId());
-					if (entry == null) {
-						// reset status
-						house.setStatus(HouseStatus.ACTIVE);
-					} else {
-						continue;
-					}
-				}
-
-				long price = bidPrice > 0 ? bidPrice : house.getDefaultAuctionPrice();
-				if (HousingBidService.getInstance().addHouseToAuction(house, price)) {
-					house.save();
-					counter++;
-				}
+			Collections.shuffle(houses);
+			for (House house : houses) {
+				if (HousingBidService.getInstance().auction(house, price) && ++counter > maxCount)
+					break;
 			}
 
-			if (counter > 0) {
-				PacketSendUtility.sendMessage(admin, "Added " + counter + " houses of type " + houseType);
-			} else {
-				PacketSendUtility.sendMessage(admin, "No houses, all are occupied or already in auction!");
-			}
-
+			sendInfo(admin, "Auctioned " + counter + " " + houseType.name().toLowerCase() + "s for a starting price of " + price + " Kinah.");
 		} else {
-			info(admin, null);
+			sendInfo(admin);
 		}
-
 	}
 
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax:\n" + " //auction add <zone_name> <house_type> [initial_bid]\n"
-			+ " //auction remove <HOUSE_id|zone_name> [nosale]\n" + " //auction addrandom <race> <house_type> <count> [initial_bid]\n"
-			+ "   zone_name = from zones xml files\n" + "   house_type = house, mansion, estate, palace\n"
-			+ "   initial_bid = initial bid price (if omitted, default is used)");
+	private List<House> findHousesInZone(Player admin, String zoneName, Predicate<House> filter) {
+		ZoneName zone = ZoneName.get(zoneName);
+		if (zone.name().equals(ZoneName.NONE)) {
+			sendInfo(admin, "Invalid zone name");
+			return null;
+		}
+		List<House> housesToRemove = new ArrayList<>();
+		for (House house : HousingService.getInstance().getCustomHouses()) {
+			if (!filter.test(house))
+				continue;
+			if (house.getPosition().getMapRegion().isInsideZone(zone, house.getX(), house.getY(), house.getZ()))
+				housesToRemove.add(house);
+		}
+		return housesToRemove;
 	}
 }

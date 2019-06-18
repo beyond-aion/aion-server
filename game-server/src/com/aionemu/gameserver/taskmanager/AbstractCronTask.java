@@ -1,19 +1,25 @@
 package com.aionemu.gameserver.taskmanager;
 
 import java.util.Date;
+import java.util.concurrent.Semaphore;
 
 import org.quartz.CronExpression;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.dao.ServerVariablesDAO;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Rolandas, Neon
  */
 public abstract class AbstractCronTask implements Runnable {
 
-	private static final Long SERVER_STOP_MILLIS = DAOManager.getDAO(ServerVariablesDAO.class).loadLong("serverLastRun");
+	protected static final Long SERVER_STOP_MILLIS = DAOManager.getDAO(ServerVariablesDAO.class).loadLong("serverLastRun");
+	private static final Semaphore semaphore = new Semaphore(1);
+	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private final CronExpression cronExpression;
 	private Date lastPlannedRunBeforeServerStart;
 	private Date lastRun;
@@ -21,11 +27,35 @@ public abstract class AbstractCronTask implements Runnable {
 
 	public AbstractCronTask(CronExpression cronExpression) {
 		this.cronExpression = cronExpression;
+		if (this.cronExpression == null) {
+			log.info(getClass().getSimpleName() + " is deactivated");
+			return;
+		}
 		this.nextRun = getNextRunAfter(new Date());
 		this.lastPlannedRunBeforeServerStart = findLastPlannedRun();
-		if (SERVER_STOP_MILLIS != null && lastPlannedRunBeforeServerStart != null && SERVER_STOP_MILLIS < lastPlannedRunBeforeServerStart.getTime())
-			run(); // server was down when task should have run, so we run it now
-		CronService.getInstance().schedule(this, cronExpression, true);
+		runAndScheduleAsyncWithLock();
+	}
+
+	/**
+	 * Runs this task in another thread, so that constructor can finish and external references to this task don't throw null pointer exceptions.
+	 * This additionally makes sure that other tasks don't run before a previous one is finished, so multiple tasks are initialized semi-synchronous.
+	 */
+	private void runAndScheduleAsyncWithLock() {
+		semaphore.acquireUninterruptibly();
+		ThreadPoolManager.getInstance().executeLongRunning(() -> {
+			if (shouldRunOnStart())
+				run();
+			CronService.getInstance().schedule(this, cronExpression, true);
+			log.info("Scheduled " + getClass().getSimpleName() + " with cron expression: " + cronExpression);
+			semaphore.release();
+		});
+	}
+
+	/**
+	 * @return Default implementation returns true if the server was down when task should have run
+	 */
+	protected boolean shouldRunOnStart() {
+		return SERVER_STOP_MILLIS != null && lastPlannedRunBeforeServerStart != null && SERVER_STOP_MILLIS < lastPlannedRunBeforeServerStart.getTime();
 	}
 
 	/**

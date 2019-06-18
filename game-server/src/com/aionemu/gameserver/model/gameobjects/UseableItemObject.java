@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.HousingUseableItem;
 import com.aionemu.gameserver.model.templates.housing.LimitType;
 import com.aionemu.gameserver.model.templates.housing.UseItemAction;
@@ -30,8 +30,8 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 	private volatile boolean mustGiveLastReward = false;
 	private final UseDataWriter entryWriter;
 
-	public UseableItemObject(House owner, int objId, int templateId) {
-		super(owner, objId, templateId);
+	public UseableItemObject(HouseRegistry registry, int objId, int templateId) {
+		super(registry, objId, templateId);
 		UseItemAction action = getObjectTemplate().getAction();
 		if (action != null && action.getFinalRewardId() != null && isExpired())
 			mustGiveLastReward = true;

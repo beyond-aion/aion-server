@@ -264,10 +264,24 @@ public class HouseRegistry implements Persistable {
 		customParts.remove(decor.getObjectId());
 	}
 
-	public void save() {
-		if (persistentState == PersistentState.UPDATE_REQUIRED) {
-			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).store(this, getOwner().getOwnerId());
+	/**
+	 * Despawns all objects and updates DB.
+	 */
+	public void reset() {
+		List<HouseObject<?>> spawnedObjects = getSpawnedObjects();
+		if (spawnedObjects.isEmpty()) {
+			if (getOwner().getOwnerId() != 0)
+				DAOManager.getDAO(PlayerRegisteredItemsDAO.class).resetRegistry(getOwner().getOwnerId());
+		} else {
+			for (HouseObject<?> obj : spawnedObjects)
+				obj.removeFromHouse();
+			save();
 		}
+	}
+
+	public void save() {
+		if (persistentState == PersistentState.UPDATE_REQUIRED)
+			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).store(this, getOwner().getOwnerId());
 	}
 
 	@Override
@@ -282,27 +296,5 @@ public class HouseRegistry implements Persistable {
 
 	public int size() {
 		return objects.size() + customParts.size();
-	}
-
-	public void despawnObjects() {
-		if (getSpawnedObjects().isEmpty())
-			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).resetRegistry(owner.getOwnerId());
-		else
-			despawnObjects(true);
-	}
-
-	/**
-	 * Use before switching house
-	 */
-	public void despawnObjects(boolean remove) {
-		for (HouseObject<?> obj : getSpawnedObjects()) {
-			obj.getController().delete();
-			if (remove)
-				obj.removeFromHouse();
-		}
-		if (remove) {
-			setPersistentState(PersistentState.UPDATE_REQUIRED);
-			save();
-		}
 	}
 }

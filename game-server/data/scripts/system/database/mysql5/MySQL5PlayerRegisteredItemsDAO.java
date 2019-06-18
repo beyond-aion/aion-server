@@ -127,7 +127,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		} else {
 			obj = registry.getObjectByObjId(itemUniqueId);
 			if (obj == null)
-				obj = HouseObjectFactory.createNew(registry.getOwner(), itemUniqueId, rset.getInt("item_id"));
+				obj = HouseObjectFactory.createNew(registry, itemUniqueId, rset.getInt("item_id"));
 		}
 		obj.setOwnerUsedCount(rset.getInt("owner_use_count"));
 		obj.setVisitorUsedCount(rset.getInt("visitor_use_count"));
@@ -166,9 +166,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		boolean objectDeleteResult = false;
 		boolean partsDeleteResult = false;
 
-		Connection con = null;
-		try {
-			con = DatabaseFactory.getConnection();
+		try (Connection con = DatabaseFactory.getConnection()) {
 			con.setAutoCommit(false);
 			objectDeleteResult = deleteObjects(con, objectsToDelete);
 			partsDeleteResult = deleteParts(con, partsToDelete);
@@ -179,8 +177,6 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 			registry.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
 			log.error("Can't save registered items for player: " + playerId, e);
-		} finally {
-			DatabaseFactory.close(con);
 		}
 
 		for (HouseObject<?> obj : objects) {
@@ -212,10 +208,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 			return true;
 		}
 
-		PreparedStatement stmt = null;
-		try {
-			stmt = con.prepareStatement(isNew ? INSERT_QUERY : UPDATE_QUERY);
-
+		try (PreparedStatement stmt = con.prepareStatement(isNew ? INSERT_QUERY : UPDATE_QUERY)) {
 			for (HouseObject<?> obj : objects) {
 				if (obj.getExpireTime() > 0)
 					stmt.setInt(1, obj.getExpireTime());
@@ -250,8 +243,6 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		} catch (Exception e) {
 			log.error("Failed to execute house object update batch", e);
 			return false;
-		} finally {
-			DatabaseFactory.close(stmt);
 		}
 		return true;
 	}
@@ -262,9 +253,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 			return true;
 		}
 
-		PreparedStatement stmt = null;
-		try {
-			stmt = con.prepareStatement(isNew ? INSERT_QUERY : UPDATE_QUERY);
+		try (PreparedStatement stmt = con.prepareStatement(isNew ? INSERT_QUERY : UPDATE_QUERY)) {
 			for (HouseDecoration part : parts) {
 				stmt.setNull(1, Types.INTEGER);
 				stmt.setNull(2, Types.INTEGER);
@@ -288,8 +277,6 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		} catch (Exception e) {
 			log.error("Failed to execute house parts update batch", e);
 			return false;
-		} finally {
-			DatabaseFactory.close(stmt);
 		}
 		return true;
 	}
@@ -299,9 +286,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 			return true;
 		}
 
-		PreparedStatement stmt = null;
-		try {
-			stmt = con.prepareStatement(DELETE_QUERY);
+		try (PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
 			for (HouseObject<?> obj : objects) {
 				stmt.setInt(1, obj.getObjectId());
 				stmt.addBatch();
@@ -312,8 +297,6 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		} catch (Exception e) {
 			log.error("Failed to execute delete batch", e);
 			return false;
-		} finally {
-			DatabaseFactory.close(stmt);
 		}
 		return true;
 	}
@@ -323,9 +306,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 			return true;
 		}
 
-		PreparedStatement stmt = null;
-		try {
-			stmt = con.prepareStatement(DELETE_QUERY);
+		try (PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
 			for (HouseDecoration part : parts) {
 				stmt.setInt(1, part.getObjectId());
 				stmt.addBatch();
@@ -336,8 +317,6 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		} catch (Exception e) {
 			log.error("Failed to execute delete batch", e);
 			return false;
-		} finally {
-			DatabaseFactory.close(stmt);
 		}
 		return true;
 	}
@@ -345,11 +324,9 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 	@Override
 	public boolean deletePlayerItems(int playerId) {
 		log.info("Deleting player items");
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(CLEAN_PLAYER_QUERY)) {
-				stmt.setInt(1, playerId);
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(CLEAN_PLAYER_QUERY)) {
+			stmt.setInt(1, playerId);
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error in deleting all player registered items. PlayerObjId: " + playerId, e);
 			return false;
@@ -359,14 +336,11 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 
 	@Override
 	public void resetRegistry(int playerId) {
-		log.info("resetting player items: " + playerId);
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(RESET_QUERY)) {
-				stmt.setInt(1, playerId);
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(RESET_QUERY)) {
+			stmt.setInt(1, playerId);
+			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error in resetting  player registered items. PlayerObjId: " + playerId, e);
+			log.error("Error in resetting player registered items. PlayerObjId: " + playerId, e);
 		}
 	}
 

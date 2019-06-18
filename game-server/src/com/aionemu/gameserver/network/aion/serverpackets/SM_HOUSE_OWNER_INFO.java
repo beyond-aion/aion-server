@@ -7,70 +7,46 @@ import java.time.ZonedDateTime;
 import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.HouseStatus;
-import com.aionemu.gameserver.model.town.Town;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.services.HousingBidService;
-import com.aionemu.gameserver.services.TownService;
+import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
- * @author Rolandas
+ * @author Rolandas, Neon
  */
 public class SM_HOUSE_OWNER_INFO extends AionServerPacket {
 
-	private Player player;
+	private int playerHouseOwnerState;
 	private House activeHouse;
 	private House inactiveHouse;
 
 	public SM_HOUSE_OWNER_INFO(Player player) {
-		this.player = player;
 		for (House house : player.getHouses()) {
-			if (house.getStatus() == HouseStatus.INACTIVE)
+			if (house.isInactive())
 				inactiveHouse = house;
-			else if (house.getStatus() != HouseStatus.NOSALE)
+			else
 				activeHouse = house;
 		}
-		// Should not happen, just a validation
-		if (activeHouse == null)
-			inactiveHouse = null;
-		if (inactiveHouse != null && activeHouse.getSellStarted() == null) {
-			inactiveHouse = null;
+		if (activeHouse == null) {
+			playerHouseOwnerState = HouseOwnerState.SINGLE_HOUSE.getId();
+			if (HousingService.getInstance().canOwnHouse(player, false))
+				playerHouseOwnerState |= HouseOwnerState.BIDDING_ALLOWED.getId();
+		} else {
+			playerHouseOwnerState = HouseOwnerState.HAS_OWNER.getId() | HouseOwnerState.BIDDING_ALLOWED.getId();
 		}
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		if (activeHouse == null) {
-			writeD(0);
-			writeD(player.hasHouseOwnerState(HouseOwnerState.BUY_STUDIO_ALLOWED) ? 355000 : 0); // studio building id
-		} else {
-			writeD(activeHouse.getAddress().getId());
-			writeD(activeHouse.getBuilding().getId());
-		}
-		writeC(player.getHouseOwnerStates());
-		int townLevel = 1;
-		if (activeHouse != null && activeHouse.getAddress().getTownId() != 0) {
-			Town town = TownService.getInstance().getTownById(activeHouse.getAddress().getTownId());
-			townLevel = town.getLevel();
-		}
-		writeC(townLevel);
+		writeD(activeHouse == null ? 0 : activeHouse.getAddress().getId());
+		writeD(activeHouse == null ? 0 : activeHouse.getBuilding().getId());
+		writeC(playerHouseOwnerState); // (SINGLE_HOUSE | BIDDING_ALLOWED) enables studio buy button at Parrine and disables house icon in profile
+		writeC(activeHouse == null ? 0 : activeHouse.getTownLevel());
 		writeD(calculateWeeksUntilNextPay()); // controls date and color in player profile house icon tooltip, as well as overdue pay amount when paying
-
-		if (inactiveHouse == null) {
-			writeD(0);
-			writeD(0);
-			writeD(0);
-		} else {
-			long timePassed = (HousingBidService.getInstance().getAuctionStartTime() - activeHouse.getSellStarted().getTime()) / 1000;
-			int timeLeft = (int) (2 * 7 * 24 * 3600 - timePassed);
-			if (timeLeft < 0)
-				timeLeft = 0;
-			writeD(inactiveHouse.getAddress().getId());
-			writeD(inactiveHouse.getBuilding().getId());
-			writeD(timeLeft);
-		}
+		writeD(inactiveHouse == null ? 0 : inactiveHouse.getAddress().getId());
+		writeD(inactiveHouse == null ? 0 : inactiveHouse.getBuilding().getId());
+		writeD(inactiveHouse == null ? 0 : inactiveHouse.secondsUntilGraceEnd()); // seconds until new house (inactiveHouse) will be activated / old one (activeHouse) gets removed
 	}
 
 	private int calculateWeeksUntilNextPay() {

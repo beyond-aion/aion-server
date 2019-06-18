@@ -4,8 +4,8 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
-import java.util.HashSet;
-import java.util.Set;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.dao.HouseBidsDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.model.house.PlayerHouseBid;
+import com.aionemu.gameserver.model.house.HouseBids;
 
 /**
  * @author Rolandas
@@ -22,10 +22,10 @@ public class MySQL5HouseBidsDAO extends HouseBidsDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5HouseBidsDAO.class);
 
-	public static final String LOAD_QUERY = "SELECT * FROM `house_bids`";
-	public static final String INSERT_QUERY = "INSERT INTO `house_bids` (`player_id`,`house_id`, `bid`, `bid_time`) VALUES (?, ?, ?, ?)";
+	public static final String LOAD_QUERY = "SELECT * FROM `house_bids` ORDER BY `bid`, `bid_time`";
+	public static final String INSERT_QUERY = "INSERT INTO `house_bids` (`player_id`, `house_id`, `bid`, `bid_time`) VALUES (?, ?, ?, ?)";
 	public static final String DELETE_QUERY = "DELETE FROM `house_bids` WHERE `house_id` = ?";
-	public static final String UPDATE_QUERY = "UPDATE `house_bids` SET bid = ?, bid_time = ? WHERE player_id = ? AND house_id = ?";
+	public static final String DISABLE_QUERY = "UPDATE `house_bids` SET `player_id` = 0 WHERE `player_id` = ?";
 
 	@Override
 	public boolean supports(String databaseName, int majorVersion, int minorVersion) {
@@ -33,37 +33,35 @@ public class MySQL5HouseBidsDAO extends HouseBidsDAO {
 	}
 
 	@Override
-	public Set<PlayerHouseBid> loadBids() {
-		Set<PlayerHouseBid> results = new HashSet<>();
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(LOAD_QUERY)) {
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						int playerId = rset.getInt("player_id");
-						int houseId = rset.getInt("house_id");
-						long bidOffer = rset.getLong("bid");
-						Timestamp time = rset.getTimestamp("bid_time");
-						PlayerHouseBid bid = new PlayerHouseBid(playerId, houseId, bidOffer, time);
-						results.add(bid);
-					}
+	public Map<Integer, HouseBids> loadBids() {
+		Map<Integer, HouseBids> allBids = new ConcurrentHashMap<>();
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(LOAD_QUERY)) {
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int playerId = rset.getInt("player_id");
+					int houseId = rset.getInt("house_id");
+					long bidOffer = rset.getLong("bid");
+					Timestamp time = rset.getTimestamp("bid_time");
+					if (playerId == 0)
+						allBids.putIfAbsent(houseId, new HouseBids(houseId, bidOffer, time.getTime()));
+					else
+						allBids.get(houseId).bid(playerId, bidOffer, time.getTime());
 				}
 			}
 		} catch (Exception e) {
 			log.error("Cannot read house bids", e);
 		}
-		return results;
+		return allBids;
 	}
 
 	@Override
-	public boolean addBid(int playerId, int houseId, long bidOffer, Timestamp time) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
-				stmt.setInt(1, playerId);
-				stmt.setInt(2, houseId);
-				stmt.setLong(3, bidOffer);
-				stmt.setTimestamp(4, time);
-				stmt.execute();
-			}
+	public boolean addBid(HouseBids.Bid bid) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
+			stmt.setInt(1, bid.getPlayerObjectId());
+			stmt.setInt(2, bid.getHouseObjectId());
+			stmt.setLong(3, bid.getKinah());
+			stmt.setTimestamp(4, new Timestamp(bid.getTime()));
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Cannot insert house bid", e);
 			return false;
@@ -72,29 +70,25 @@ public class MySQL5HouseBidsDAO extends HouseBidsDAO {
 	}
 
 	@Override
-	public void changeBid(int playerId, int houseId, long newBidOffer, Timestamp time) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
-				stmt.setLong(1, newBidOffer);
-				stmt.setTimestamp(2, time);
-				stmt.setInt(3, playerId);
-				stmt.setInt(4, houseId);
-				stmt.execute();
-			}
+	public boolean disableBids(int playerObjectId) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DISABLE_QUERY)) {
+			stmt.setInt(1, playerObjectId);
+			return stmt.executeUpdate() > 0;
 		} catch (Exception e) {
-			log.error("Cannot update house bid", e);
+			log.error("Cannot disable house bids for player " + playerObjectId, e);
 		}
+		return false;
 	}
 
 	@Override
-	public void deleteHouseBids(int houseId) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
-				stmt.setInt(1, houseId);
-				stmt.execute();
-			}
+	public boolean deleteHouseBids(int houseId) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
+			stmt.setInt(1, houseId);
+			stmt.execute();
+			return true;
 		} catch (Exception e) {
 			log.error("Cannot delete house bids", e);
+			return false;
 		}
 	}
 

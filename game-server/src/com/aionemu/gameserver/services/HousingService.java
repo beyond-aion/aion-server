@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.services;
 
-import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -16,21 +16,17 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.HousingConfig;
-import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.dao.HousesDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
+import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.house.HouseStatus;
-import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_ACQUIRE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OWNER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -38,9 +34,10 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- * @author Rolandas
+ * @author Rolandas, Neon
  */
 public class HousingService {
 
@@ -59,18 +56,40 @@ public class HousingService {
 	}
 
 	private HousingService() {
-		log.info("Loading housing data...");
 		customHouses = new ConcurrentHashMap<>(DAOManager.getDAO(HousesDAO.class).loadHouses(DataManager.HOUSE_DATA.getLands(), false));
 		studios = new ConcurrentHashMap<>(DAOManager.getDAO(HousesDAO.class).loadHouses(DataManager.HOUSE_DATA.getLands(), true));
+		updateInactiveStateForAllHouses();
+		revokeOwnershipOfDeletedPlayers();
+		log.info("Loaded " + customHouses.size() + " houses and " + studios.size() + " studios");
+	}
+
+	private void revokeOwnershipOfDeletedPlayers() {
 		Set<Integer> playerIds = IntStream.of(DAOManager.getDAO(PlayerDAO.class).getUsedIDs()).boxed().collect(Collectors.toSet());
 		Stream.concat(customHouses.values().stream(), studios.values().stream()).forEach(house -> {
 			// houses table has no player_id foreign key because houses need to stay in DB even on player deletion (to keep bidding possible for example)
 			if (house.getOwnerId() > 0 && !playerIds.contains(house.getOwnerId())) {
 				log.warn("Player with ID " + house.getOwnerId() + " got deleted from DB, revoking house ownership for house " + house.getAddress().getId());
-				house.revokeOwner();
+				house.getController().changeOwner(0);
 			}
 		});
-		log.info("Housing Service loaded.");
+	}
+
+	private void updateInactiveStateForAllHouses() {
+		customHouses.values().stream().mapToInt(House::getOwnerId).distinct().forEach(this::updateInactiveStateForPlayerHouses);
+	}
+
+	/**
+	 * Only for server start. Doesn't send packets or reloads house registries because it should only be run once on init.
+	 */
+	private void updateInactiveStateForPlayerHouses(int playerObjId) {
+		Stream<House> houses = customHouses.values().stream().filter(house -> house.getOwnerId() == playerObjId);
+		if (playerObjId == 0) { // not occupied houses
+			houses.forEach(house -> house.setInactive(false));
+		} else {
+			List<House> housesSortedByAcquireDate = houses.sorted(Comparator.comparing(House::getAcquiredTime)).collect(Collectors.toList());
+			for (int i = 0; i < housesSortedByAcquireDate.size(); i++)
+				housesSortedByAcquireDate.get(i).setInactive(i != 0); // first house (oldest) should be active, rest inactive
+		}
 	}
 
 	public void spawnHouses(int worldId, int instanceId, int registeredId) {
@@ -90,7 +109,10 @@ public class HousingService {
 				customHouse.setPersistentState(PersistentState.NEW);
 				customHouses.put(address.getId(), customHouse);
 			}
-			customHouse.spawn(instanceId);
+			WorldPosition position = World.getInstance().createPosition(address.getMapId(), address.getX(), address.getY(), address.getZ(), (byte) 0,
+				instanceId);
+			customHouse.setPosition(position);
+			SpawnEngine.bringIntoWorld(customHouse);
 			spawnedCounter++;
 		}
 		if (spawnedCounter > 0) {
@@ -105,11 +127,8 @@ public class HousingService {
 		if (studio.getPosition() == null || studio.getInstanceId() != instanceId) {
 			HouseAddress addr = studio.getAddress();
 			studio.setPosition(World.getInstance().createPosition(addr.getMapId(), addr.getX(), addr.getY(), addr.getZ(), (byte) 0, instanceId));
-		}
-		if (!studio.isSpawned())
 			SpawnEngine.bringIntoWorld(studio);
-		// spawn only npcs
-		studio.spawn(instanceId);
+		}
 	}
 
 	public List<House> findPlayerHouses(int playerObjId) {
@@ -131,7 +150,18 @@ public class HousingService {
 		if (studios.containsKey(playerObjId))
 			return studios.get(playerObjId);
 		for (House house : customHouses.values()) {
-			if (house.getOwnerId() == playerObjId && (house.getStatus() == HouseStatus.ACTIVE || house.getStatus() == HouseStatus.SELL_WAIT))
+			if (house.getOwnerId() == playerObjId && !house.isInactive())
+				return house;
+		}
+		return null;
+	}
+
+	/**
+	 * @return The players current inactive house.
+	 */
+	public House findInactiveHouse(int playerObjId) {
+		for (House house : customHouses.values()) {
+			if (house.getOwnerId() == playerObjId && house.isInactive())
 				return house;
 		}
 		return null;
@@ -159,29 +189,12 @@ public class HousingService {
 		return customHouses.get(address);
 	}
 
-	public House activateBoughtHouse(int playerId) {
-		for (House house : customHouses.values()) {
-			if (house.getOwnerId() == playerId && house.getStatus() == HouseStatus.INACTIVE) {
-				house.revokeOwner();
-				house.setOwnerId(playerId);
-				house.setStatus(HouseStatus.ACTIVE);
-				house.setNextPay(null);
-				house.setSellStarted(null);
-				house.save();
-				return house;
-			}
-		}
-		return null;
-	}
-
 	public House getPlayerStudio(int playerId) {
 		return studios.get(playerId);
 	}
 
-	public void removeStudio(int playerId) {
-		if (playerId != 0) {
-			studios.remove(playerId);
-		}
+	public boolean removeStudio(House studio) {
+		return studios.values().remove(studio);
 	}
 
 	public void registerPlayerStudio(Player player) {
@@ -204,40 +217,36 @@ public class HousingService {
 		}
 
 		House studio = new House(address, 0);
-		studio.setOwnerId(player.getObjectId());
-
 		studios.put(player.getObjectId(), studio);
-		studio.setStatus(HouseStatus.ACTIVE);
-		studio.setAcquiredTime(new Timestamp(System.currentTimeMillis()));
-		studio.setNextPay(null);
 		studio.setPersistentState(PersistentState.NEW);
-		player.setHouseOwnerState(HouseOwnerState.HOUSE_OWNER.getId());
-		PacketSendUtility.sendPacket(player, new SM_HOUSE_ACQUIRE(player.getObjectId(), studio.getAddress().getId(), true));
+		studio.getController().changeOwner(player.getObjectId());
+
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_INS_OWN_SUCCESS());
-		PacketSendUtility.sendPacket(player, new SM_HOUSE_OWNER_INFO(player));
+	}
+
+	public boolean canOwnHouse(Player player, boolean notify) {
+		int questId = player.getRace() == Race.ELYOS ? 18802 : 28802;
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs == null || qs.getStatus() != QuestStatus.COMPLETE) {
+			if (notify)
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_CANT_OWN_NOT_COMPLETE_QUEST(questId));
+			return false;
+		}
+		return true;
 	}
 
 	public void switchHouseBuilding(House currentHouse, int newBuildingId) {
-		Building otherBuilding = DataManager.HOUSE_BUILDING_DATA.getBuilding(newBuildingId);
-		currentHouse.setBuilding(otherBuilding);
-		// currentHouse.getRegistry().despawnObjects(false);
-		currentHouse.getRegistry().save();
+		currentHouse.setBuilding(DataManager.HOUSE_BUILDING_DATA.getBuilding(newBuildingId));
+		currentHouse.save();
 		currentHouse.reloadHouseRegistry(); // load new defaults
-		DAOManager.getDAO(HousesDAO.class).storeHouse(currentHouse);
-		HouseController controller = (currentHouse.getController());
-		controller.broadcastAppearance();
-		controller.spawnObjects();
+		currentHouse.getController().spawnObjects();
 	}
 
 	public List<House> getCustomHouses() {
 		return new ArrayList<>(customHouses.values());
 	}
 
-	public House findHouseOrStudio(int objId) {
-		for (House studio : studios.values()) {
-			if (studio.getObjectId() == objId)
-				return studio;
-		}
+	public House findHouse(int objId) {
 		for (House house : customHouses.values()) {
 			if (house.getObjectId() == objId)
 				return house;
@@ -245,44 +254,39 @@ public class HousingService {
 		return null;
 	}
 
-	public void onInstanceDestroy(int ownerId) {
-		House studio = studios.get(ownerId);
-		if (studio != null) {
-			studio.despawnNpcs();
-			studio.save();
-			studio.setPosition(null); // release mapregion with destroyed worldmapinstance
+	public House findStudio(int objId) {
+		for (House studio : studios.values()) {
+			if (studio.getObjectId() == objId)
+				return studio;
 		}
+		return null;
+	}
+
+	public House findHouseOrStudio(int objId) {
+		House studio = findStudio(objId);
+		return studio == null ? findHouse(objId) : studio;
 	}
 
 	public void onPlayerDeleted(int playerObjId) {
-		House studio = getPlayerStudio(playerObjId);
-		if (studio != null)
-			studio.revokeOwner();
-		customHouses.values().forEach(house -> {
-			if (house.getOwnerId() == playerObjId)
-				house.revokeOwner();
+		findPlayerHouses(playerObjId).forEach(house -> {
+			HousingBidService.getInstance().disableBids(playerObjId);
+			house.getController().changeOwner(0);
 		});
 	}
 
 	public void onPlayerLogin(Player player) {
-		byte buildingState = HouseOwnerState.BUY_STUDIO_ALLOWED.getId();
 		House activeHouse = player.getActiveHouse();
-		if (activeHouse == null) {
-			QuestState qs;
-			qs = player.getQuestStateList().getQuestState(player.getRace() == Race.ELYOS ? 18802 : 28802);
-			if (qs != null && qs.getStatus().equals(QuestStatus.COMPLETE)) {
-				buildingState |= HouseOwnerState.BIDDING_ALLOWED.getId();
-			}
-		} else {
-			if (activeHouse.getStatus() == HouseStatus.SELL_WAIT)
-				buildingState = HouseOwnerState.SELLING_HOUSE.getId();
-			else
-				buildingState = HouseOwnerState.HOUSE_OWNER.getId();
+		if (activeHouse != null) {
 			if (HousingConfig.ENABLE_HOUSE_PAY && activeHouse.getNextPay() != null && activeHouse.getNextPay().getTime() <= System.currentTimeMillis())
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OVERDUE());
+		} else {
+			for (Letter letter : player.getMailbox().getNewSystemLetters("$$HS_OVERDUE_")) {
+				if (letter.getSenderName().endsWith("FINAL") || letter.getSenderName().endsWith("3RD")) {
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_SEQUESTRATE());
+					break;
+				}
+			}
 		}
-		player.setHouseOwnerState(buildingState);
-
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_OWNER_INFO(player));
 	}
 }

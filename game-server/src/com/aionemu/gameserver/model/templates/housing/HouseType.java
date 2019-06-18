@@ -10,18 +10,14 @@ public enum HouseType {
 	STUDIO(3, 0, "d"),
 	PALACE(4, 4, "s");
 
-	private HouseType(int index, int id, String abbrev) {
-		this.abbrev = abbrev;
+	private final int limitTypeIndex;
+	private final int id;
+	private final String abbrev; // building parts end with this letter (like CP_S for palace)
+
+	HouseType(int index, int id, String abbrev) {
 		this.limitTypeIndex = index;
 		this.id = id;
-	}
-
-	private String abbrev;
-	private int limitTypeIndex;
-	private int id;
-
-	public String getAbbreviation() {
-		return abbrev;
+		this.abbrev = abbrev;
 	}
 
 	public int getLimitTypeIndex() {
@@ -32,11 +28,7 @@ public enum HouseType {
 		return id;
 	}
 
-	public String value() {
-		return name();
-	}
-
-	public static HouseType fromValue(String value) {
-		return valueOf(value);
+	public String getAbbreviation() {
+		return abbrev;
 	}
 }

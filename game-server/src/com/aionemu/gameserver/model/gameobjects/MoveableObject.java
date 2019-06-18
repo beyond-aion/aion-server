@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.HousingMoveableItem;
 
 /**
@@ -9,8 +9,8 @@ import com.aionemu.gameserver.model.templates.housing.HousingMoveableItem;
  */
 public class MoveableObject extends HouseObject<HousingMoveableItem> {
 
-	public MoveableObject(House owner, int objId, int templateId) {
-		super(owner, objId, templateId);
+	public MoveableObject(HouseRegistry registry, int objId, int templateId) {
+		super(registry, objId, templateId);
 	}
 
 	@Override

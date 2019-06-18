@@ -4,12 +4,10 @@ import java.sql.Timestamp;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.EnumMap;
-import java.util.List;
 import java.util.Map;
+import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.time.DateUtils;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -18,10 +16,6 @@ import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.dao.HouseScriptsDAO;
 import com.aionemu.gameserver.dao.HousesDAO;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
-import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.TribeClass;
-import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -29,23 +23,18 @@ import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.model.templates.housing.Building;
-import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.housing.HousingLand;
-import com.aionemu.gameserver.model.templates.housing.PartType;
 import com.aionemu.gameserver.model.templates.housing.Sale;
-import com.aionemu.gameserver.model.templates.spawns.HouseSpawn;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnType;
-import com.aionemu.gameserver.services.HousingService;
+import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.services.player.PlayerService;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
+import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 
 /**
@@ -53,18 +42,17 @@ import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
  */
 public class House extends VisibleObject implements Persistable {
 
-	private static final Logger log = LoggerFactory.getLogger(House.class);
 	private final HouseAddress address;
 	private Building building;
 	private int ownerId;
 	private Timestamp acquiredTime;
-	private int permissions;
-	private HouseStatus status;
+	private HouseDoorState doorState;
+	private boolean showOwnerName = true;
+	private boolean inactive;
 	private Timestamp nextPay;
-	private Timestamp sellStarted;
-	private Map<SpawnType, Npc> spawns = new EnumMap<>(SpawnType.class);
+	private HouseBids bids;
+	private final Map<SpawnType, Npc> spawns = new EnumMap<>(SpawnType.class);
 	private HouseRegistry houseRegistry;
-	private byte houseOwnerStates = HouseOwnerState.SINGLE_HOUSE.getId();
 	private PlayerScripts playerScripts;
 	private PersistentState persistentState;
 	private String signNotice;
@@ -80,16 +68,11 @@ public class House extends VisibleObject implements Persistable {
 		this.building = building;
 		setKnownlist(new PlayerAwareKnownList(this));
 		setPersistentState(PersistentState.UPDATED);
-		getRegistry();
 	}
 
 	@Override
 	public HouseController getController() {
 		return (HouseController) super.getController();
-	}
-
-	public HousingLand getLand() {
-		return address.getLand();
 	}
 
 	@Override
@@ -101,65 +84,22 @@ public class House extends VisibleObject implements Persistable {
 		return address;
 	}
 
+	public HousingLand getLand() {
+		return address.getLand();
+	}
+
+	@Override
+	public WorldType getWorldType() {
+		return World.getInstance().getWorldMap(getAddress().getMapId()).getWorldType();
+	}
+
 	public Building getBuilding() {
 		return building;
 	}
 
 	public void setBuilding(Building building) {
 		this.building = building;
-	}
-
-	public synchronized void spawn(int instanceId) {
-		playerScripts = DAOManager.getDAO(HouseScriptsDAO.class).getPlayerScripts(getObjectId());
-
-		if (ownerId > 0 && (status == HouseStatus.ACTIVE || status == HouseStatus.SELL_WAIT))
-			reloadHouseRegistry();
-
-		fixBuildingStates();
-
-		// Studios are brought into world already, skip them
-		if (getPosition() == null || !getPosition().isSpawned()) {
-			WorldPosition position = World.getInstance().createPosition(address.getMapId(), address.getX(), address.getY(), address.getZ(), (byte) 0,
-				instanceId);
-			this.setPosition(position);
-			SpawnEngine.bringIntoWorld(this);
-		}
-
-		spawnNpcs();
-	}
-
-	private void spawnNpcs() {
-		String masterName = ownerId == 0 ? null : PlayerService.getPlayerName(ownerId);
-		List<HouseSpawn> templates = DataManager.HOUSE_NPCS_DATA.getSpawnsByAddress(getAddress().getId());
-		if (templates == null) {
-			log.warn("Missing npc spawns for house " + getAddress().getId());
-			return;
-		}
-		for (HouseSpawn spawn : templates) {
-			Npc npc;
-			if (spawn.getType() == SpawnType.MANAGER) {
-				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getLand().getManagerNpcId(), spawn.getX(), spawn.getY(),
-						spawn.getZ(), spawn.getH());
-				npc = VisibleObjectSpawner.spawnHouseNpc(t, getInstanceId(), this, masterName);
-			} else if (spawn.getType() == SpawnType.TELEPORT) {
-				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getLand().getTeleportNpcId(), spawn.getX(), spawn.getY(),
-						spawn.getZ(), spawn.getH());
-				npc = VisibleObjectSpawner.spawnHouseNpc(t, getInstanceId(), this, masterName);
-			} else if (spawn.getType() == SpawnType.SIGN) {
-				// Signs do not have master name displayed, but have creatorId
-				int creatorId = getAddress().getId();
-				SpawnTemplate t = SpawnEngine.newSingleTimeSpawn(getAddress().getMapId(), getCurrentSignNpcId(), spawn.getX(), spawn.getY(), spawn.getZ(),
-						spawn.getH(), creatorId);
-				npc = (Npc) SpawnEngine.spawnObject(t, getInstanceId());
-			} else {
-				log.warn("Unhandled spawn type " + spawn.getType());
-				continue;
-			}
-			if (npc == null)
-				log.warn("Invalid " + spawn.getType() + " npc ID for house " + getAddress());
-			else if (spawns.putIfAbsent(spawn.getType(), npc) != null)
-				log.warn("Duplicate " + spawn.getType() + " spawn for house " + getAddress());
-		}
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	@Override
@@ -172,23 +112,15 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public void setOwnerId(int ownerId) {
-		if (this.ownerId != ownerId) {
-			int oldOwnerId = this.ownerId;
-			this.ownerId = ownerId;
-			signNotice = null;
-			houseRegistry = null;
-			resetCachedHousesOfPlayer(oldOwnerId);
-			resetCachedHousesOfPlayer(ownerId);
-		}
-		fixBuildingStates();
+		this.ownerId = ownerId;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
-	private void resetCachedHousesOfPlayer(int ownerId) {
-		if (ownerId > 0) {
-			Player player = World.getInstance().findPlayer(ownerId);
-			if (player != null)
-				player.resetHouses();
-		}
+	public String getOwnerName() {
+		if (ownerId == 0)
+			return null;
+		Npc butler = getButler();
+		return butler == null ? PlayerService.getPlayerName(ownerId) : butler.getMasterName();
 	}
 
 	public Timestamp getAcquiredTime() {
@@ -197,70 +129,51 @@ public class House extends VisibleObject implements Persistable {
 
 	public void setAcquiredTime(Timestamp acquiredTime) {
 		this.acquiredTime = acquiredTime;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
-	public int getPermissions() {
-		if (ownerId == 0) {
-			setDoorState(status == HouseStatus.SELL_WAIT ? HousePermissions.DOOR_OPENED_ALL : HousePermissions.DOOR_CLOSED);
-			setNoticeState(HousePermissions.NOT_SET);
-		} else {
-			if (permissions == 0) {
-				setNoticeState(HousePermissions.SHOW_OWNER);
-				if (getBuilding().getType() == BuildingType.PERSONAL_FIELD) {
-					setDoorState(HousePermissions.DOOR_CLOSED);
-				}
-			}
-		}
+	public int getPermissionsForDB() {
+		int permissions = showOwnerName ? 1 : 0;
+		if (doorState != null)
+			permissions |= doorState.getId() << 8;
 		return permissions;
 	}
 
-	public void setPermissions(int permissions) {
-		this.permissions = permissions;
+	public void setPermissionsFromDB(int permissions) {
+		showOwnerName = (permissions & 0xFF) == 1;
+		doorState = HouseDoorState.get((byte) (permissions >> 8));
 	}
 
-	public HousePermissions getDoorState() {
-		return HousePermissions.getDoorState(getPermissions());
+	public HouseDoorState getDoorState() {
+		return doorState == null ? HouseDoorState.CLOSED : doorState;
 	}
 
-	public void setDoorState(HousePermissions doorState) {
-		permissions = HousePermissions.setDoorState(permissions, doorState);
+	public void setDoorState(HouseDoorState doorState) {
+		this.doorState = doorState;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
-	public HousePermissions getNoticeState() {
-		return HousePermissions.getNoticeState(getPermissions());
+	/**
+	 * @return True if the owner name should be displayed in the house sign tooltip
+	 */
+	public boolean isShowOwnerName() {
+		return showOwnerName;
 	}
 
-	public void setNoticeState(HousePermissions noticeState) {
-		permissions = HousePermissions.setNoticeState(permissions, noticeState);
+	public void setShowOwnerName(boolean showOwnerName) {
+		this.showOwnerName = showOwnerName;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
-	public synchronized HouseStatus getStatus() {
-		return status;
+	/**
+	 * @return True if the owner of this house has another (newly acquired) house
+	 */
+	public boolean isInactive() {
+		return inactive;
 	}
 
-	public synchronized void setStatus(HouseStatus status) {
-		if (this.status != status) {
-			// fix invalid status from DB, or automatically remove sign from not auctioned houses
-			if (this.ownerId == 0 && status == HouseStatus.ACTIVE) {
-				status = HouseStatus.NOSALE;
-			}
-			this.status = status;
-			fixBuildingStates();
-
-			if ((status != HouseStatus.INACTIVE || getSellStarted() != null) && spawns.get(SpawnType.SIGN) != null) {
-				Npc sign = spawns.get(SpawnType.SIGN);
-				int oldNpcId = sign.getNpcId();
-				int newNpcId = getCurrentSignNpcId();
-
-				if (newNpcId != oldNpcId) {
-					SpawnTemplate t = sign.getSpawn();
-					sign.getController().delete();
-					t = SpawnEngine.newSingleTimeSpawn(t.getWorldId(), newNpcId, t.getX(), t.getY(), t.getZ(), t.getHeading());
-					sign = (Npc) SpawnEngine.spawnObject(t, getInstanceId());
-					spawns.put(SpawnType.SIGN, sign);
-				}
-			}
-		}
+	public void setInactive(boolean inactive) {
+		this.inactive = inactive;
 	}
 
 	public boolean isFeePaid() {
@@ -277,89 +190,51 @@ public class House extends VisibleObject implements Persistable {
 			result = new Timestamp(DateUtils.round(nextPay, Calendar.DAY_OF_MONTH).getTime());
 		}
 		this.nextPay = result;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
-	public Timestamp getSellStarted() {
-		return sellStarted;
+	public HouseBids getBids() {
+		return bids;
 	}
 
-	public void setSellStarted(Timestamp sellStarted) {
-		this.sellStarted = sellStarted;
+	public void setBids(HouseBids bids) {
+		this.bids = bids;
+	}
+
+	public Npc getButler() {
+		return getSpawn(SpawnType.MANAGER);
+	}
+
+	public Npc getRelationshipCrystal() {
+		return getSpawn(SpawnType.TELEPORT);
+	}
+
+	public Npc getCurrentSign() {
+		return getSpawn(SpawnType.SIGN);
+	}
+
+	private Npc getSpawn(SpawnType type) {
+		synchronized (spawns) {
+			return spawns.get(type);
+		}
+	}
+
+	public void updateSpawn(SpawnType type, Npc npc) {
+		Npc oldSpawn;
+		synchronized (spawns) {
+			oldSpawn = spawns.put(type, npc);
+		}
+		if (oldSpawn != null)
+			oldSpawn.getController().delete();
 	}
 
 	/**
-	 * @return True if this house is currently still owned by a player who just bought a new house. The new house is inactive until the grace period
-	 *         ends (when this house is sold).
+	 * Do not use directly !!! It's for instance destroy of studios only. Studios get reused, Npcs are despawned by instance destroy
 	 */
-	public boolean isInGracePeriod() {
-		return ownerId > 0 && status != HouseStatus.INACTIVE && HousingService.getInstance().findPlayerHouses(ownerId).size() > 1;
-	}
-
-	public synchronized Npc getButler() {
-		return spawns.get(SpawnType.MANAGER);
-	}
-
-	public Race getPlayerRace() {
-		if (getButler() == null)
-			return Race.NONE;
-		if (getButler().getTribe() == TribeClass.GENERAL)
-			return Race.ELYOS;
-		return Race.ASMODIANS;
-	}
-
-	public synchronized Npc getRelationshipCrystal() {
-		return spawns.get(SpawnType.TELEPORT);
-	}
-
-	public synchronized Npc getCurrentSign() {
-		return spawns.get(SpawnType.SIGN);
-	}
-
-	/**
-	 * Do not use directly !!! It's for instance destroy of studios only (studios and their instance get reused, but house npcs are respawned)
-	 */
-	public synchronized void despawnNpcs() {
-		for (Npc npc : spawns.values()) {
-			npc.getController().delete();
+	public void clearSpawns() {
+		synchronized (spawns) {
+			spawns.clear();
 		}
-		spawns.clear();
-	}
-
-	public int getCurrentSignNpcId() {
-		if (getSellStarted() != null)
-			return getLand().getSaleSignNpcId();
-		if (ownerId == 0)
-			return getLand().getNosaleSignNpcId(); // invisible npc
-		return status == HouseStatus.INACTIVE ? getLand().getWaitingSignNpcId() : getLand().getHomeSignNpcId();
-	}
-
-	public synchronized boolean revokeOwner() {
-		if (ownerId == 0)
-			return false;
-		getRegistry().despawnObjects();
-		despawnNpcs();
-		setOwnerId(0);
-		if (playerScripts == null)
-			playerScripts = DAOManager.getDAO(HouseScriptsDAO.class).getPlayerScripts(getObjectId());
-		playerScripts.removeAll();
-		if (getBuilding().getType() == BuildingType.PERSONAL_INS) {
-			HousingService.getInstance().removeStudio(ownerId);
-			DAOManager.getDAO(HousesDAO.class).deleteHouse(ownerId);
-			return true;
-		}
-		acquiredTime = null;
-		sellStarted = null;
-		nextPay = null;
-
-		Building defaultBuilding = getLand().getDefaultBuilding();
-		if (defaultBuilding != building)
-			HousingService.getInstance().switchHouseBuilding(this, defaultBuilding.getId());
-		if (getStatus() != HouseStatus.SELL_WAIT)
-			setStatus(HouseStatus.NOSALE);
-		save();
-		if (getPosition() != null && isSpawned())
-			spawnNpcs();
-		return true;
 	}
 
 	public HouseRegistry getRegistry() {
@@ -368,33 +243,35 @@ public class House extends VisibleObject implements Persistable {
 		return houseRegistry;
 	}
 
+	public synchronized void resetRegistry() {
+		getRegistry().reset();
+		houseRegistry = null;
+	}
+
 	public synchronized void reloadHouseRegistry() {
 		houseRegistry = new HouseRegistry(this);
-		if (ownerId != 0)
+		if (ownerId != 0 && !isInactive())
 			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).loadRegistry(houseRegistry);
 	}
 
-	public HouseDecoration getRenderPart(PartType partType, int room) {
-		return getRegistry().getRenderPart(partType, room);
-	}
-
-	public HouseDecoration getDefaultPart(PartType partType, int room) {
-		return getRegistry().getDefaultPartByType(partType, room);
-	}
-
 	public PlayerScripts getPlayerScripts() {
+		if (playerScripts == null)
+			reloadPlayerScripts();
 		return playerScripts;
 	}
 
+	public synchronized void reloadPlayerScripts() {
+		playerScripts = DAOManager.getDAO(HouseScriptsDAO.class).getPlayerScripts(getObjectId());
+	}
+
 	public HouseType getHouseType() {
-		return HouseType.fromValue(getBuilding().getSize());
+		return getBuilding().getSize();
 	}
 
 	public synchronized void save() {
 		DAOManager.getDAO(HousesDAO.class).storeHouse(this);
-		// save registry if needed
 		if (houseRegistry != null)
-			this.houseRegistry.save();
+			houseRegistry.save();
 	}
 
 	@Override
@@ -408,20 +285,14 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public byte getHouseOwnerStates() {
-		return houseOwnerStates;
-	}
-
-	public void fixBuildingStates() {
-		houseOwnerStates = HouseOwnerState.SINGLE_HOUSE.getId();
-		if (ownerId != 0) {
-			houseOwnerStates |= HouseOwnerState.HAS_OWNER.getId();
-			if (status == HouseStatus.ACTIVE) {
-				houseOwnerStates |= HouseOwnerState.BIDDING_ALLOWED.getId();
-				houseOwnerStates &= ~HouseOwnerState.SINGLE_HOUSE.getId();
-			}
-		} else if (status == HouseStatus.SELL_WAIT) {
-			houseOwnerStates = HouseOwnerState.SELLING_HOUSE.getId();
-		}
+		// logic and enum names surely aren't right, but it's what allegedly got sent on retail some time in the past (?):
+		// 1|2 or 2 without owner, 1|2 or 1|4 with owner - we can make it right once we know what these values control
+		if (isInactive()) // only houses with owner can be inactive
+			return HouseOwnerState.BIDDING_ALLOWED.getId();
+		else if (ownerId == 0 && getBids() == null)
+			return HouseOwnerState.SINGLE_HOUSE.getId();
+		else
+			return (byte) (HouseOwnerState.HAS_OWNER.getId() | HouseOwnerState.BIDDING_ALLOWED.getId());
 	}
 
 	public String getSignNotice() {
@@ -430,14 +301,15 @@ public class House extends VisibleObject implements Persistable {
 
 	public void setSignNotice(String notice) {
 		signNotice = notice;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	public boolean canEnter(Player player) {
-		if (getOwnerId() != player.getObjectId() && !player.hasAccess(AdminConfig.HOUSE_ENTER_ALL)) {
+		if ((getOwnerId() != player.getObjectId() || isInactive()) && !player.hasAccess(AdminConfig.HOUSE_ENTER_ALL)) {
 			switch (getDoorState()) {
-				case DOOR_CLOSED:
+				case CLOSED:
 					return false;
-				case DOOR_OPENED_FRIENDS:
+				case CLOSED_EXCEPT_FRIENDS:
 					if (player.getFriendList().getFriend(getOwnerId()) == null && (player.getLegion() == null || !player.getLegion().isMember(getOwnerId())))
 						return false;
 			}
@@ -473,5 +345,35 @@ public class House extends VisibleObject implements Persistable {
 	 */
 	public byte getTeleportHeading() {
 		return PositionUtil.getHeadingTowards(getX(), getY(), getRelationshipCrystal().getSpawn().getX(), getRelationshipCrystal().getSpawn().getY());
+	}
+
+	public int getTownLevel() {
+		if (getAddress().getTownId() == 0)
+			return 0;
+		return TownService.getInstance().getTownById(getAddress().getTownId()).getLevel();
+	}
+
+	/**
+	 * @return Seconds until this inactive house will be activated and the old one gets removed from the owner. Returns -1 if this house is already
+	 *         active.
+	 */
+	public int secondsUntilGraceEnd() {
+		if (isInactive()) {
+			Date graceEndTime = findGraceEndTime();
+			return Math.max(0, (int) ((graceEndTime.getTime() - System.currentTimeMillis()) / 1000));
+		}
+		return -1;
+	}
+
+	/**
+	 * Grace end happens on auction end, so we find the nearest auction end date taking place around two weeks after the house was bought.
+	 */
+	private Date findGraceEndTime() {
+		long maxGraceEndTimeMillis = getAcquiredTime().getTime() + TimeUnit.DAYS.toMillis(14);
+		Date auctionEndTime = AuctionEndTask.getInstance().getNextRunAfter(getAcquiredTime());
+		Date graceEndTime = auctionEndTime;
+		while ((auctionEndTime = AuctionEndTask.getInstance().getNextRunAfter(auctionEndTime)).getTime() <= maxGraceEndTimeMillis)
+			graceEndTime = auctionEndTime;
+		return graceEndTime;
 	}
 }

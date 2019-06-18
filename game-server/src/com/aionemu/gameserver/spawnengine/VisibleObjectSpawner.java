@@ -92,8 +92,8 @@ public class VisibleObjectSpawner {
 		return npc;
 	}
 
-	public static SummonedHouseNpc spawnHouseNpc(SpawnTemplate spawn, int instanceIndex, House creator, String masterName) {
-		SummonedHouseNpc npc = new SummonedHouseNpc(IDFactory.getInstance().nextId(), new NpcController(), spawn, creator, masterName);
+	public static SummonedHouseNpc spawnHouseNpc(SpawnTemplate spawn, int instanceIndex, House creator) {
+		SummonedHouseNpc npc = new SummonedHouseNpc(IDFactory.getInstance().nextId(), new NpcController(), spawn, creator);
 		SpawnEngine.bringIntoWorld(npc, spawn, instanceIndex);
 		return npc;
 	}
