@@ -288,7 +288,7 @@ public class BIHTree implements CollisionData {
                                BoundingVolume worldBound,
                                CollisionResults results){
 
-    	CollisionResults boundResults = new CollisionResults(results.getIntentions(), results.isOnlyFirst(), results.getInstanceId());
+    	CollisionResults boundResults = new CollisionResults(results.getIntentions(), results.getInstanceId(), results.isOnlyFirst(), results.getIgnoredGeometry());
         worldBound.collideWith(r, boundResults);
         if (boundResults.size() > 0){
             float tMin = boundResults.getClosestCollision().getDistance();

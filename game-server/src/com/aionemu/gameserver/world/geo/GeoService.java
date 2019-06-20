@@ -8,9 +8,10 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
+import com.aionemu.gameserver.geoEngine.scene.Geometry;
+import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 
 /**
  * @author ATracer
@@ -34,12 +35,6 @@ public class GeoService {
 		}
 		log.info("Configured Geo type: " + getConfiguredGeoType());
 		geoData.loadGeoMaps();
-	}
-
-	public void setDoorState(int worldId, int instanceId, String name, boolean isOpened) {
-		if (GeoDataConfig.GEO_ENABLE) {
-			geoData.getMap(worldId).setDoorState(instanceId, name, isOpened);
-		}
 	}
 
 	/**
@@ -71,16 +66,8 @@ public class GeoService {
 		return geoData.getMap(worldId).getZ(x, y, zMax, zMin, instanceId);
 	}
 
-	/**
-	 * Only as temporarily solution to enable only siege door meshes
-	 * TODO: remove me
-	 */
-	public String getSiegeDoorName(int worldId, String meshFile, float x, float y, float z) {
-		return geoData.getMap(worldId).getDoorName(worldId, meshFile, x, y, z);
-	}
-
-	public String getDoorName(int worldId, String meshFile, float x, float y, float z) {
-		return GeoDataConfig.GEO_DOORS_ENABLE ? geoData.getMap(worldId).getDoorName(worldId, meshFile, x, y, z) : null;
+	public DoorGeometry getDoor(int worldId, String meshFile, float x, float y, float z) {
+		return geoData.getMap(worldId).getDoor(worldId, meshFile, x, y, z);
 	}
 
 	public CollisionResults getCollisions(VisibleObject object, float x, float y, float z, byte intentions) {
@@ -89,27 +76,18 @@ public class GeoService {
 	}
 
 	/**
-	 * @param object
-	 * @param target
-	 * @return
+	 * @return True if object has unobstructed view on its target.
 	 */
 	public boolean canSee(VisibleObject object, VisibleObject target) {
 		if (!GeoDataConfig.CANSEE_ENABLE)
 			return true;
 
-		// TODO: remove this check after fixing geo doors attacking
-		if (target instanceof SiegeNpc && ((SiegeNpc) target).getAi().getName().equals("fortressgate"))
-			return true;
-
 		float objectSeeCheckZ = object.getZ() + getSeeCheckOffset(object);
 		float targetSeeCheckZ = target.getZ() + getSeeCheckOffset(target);
+		Geometry targetGeometry = target instanceof GeoDoor ? ((GeoDoor) target).getGeometry() : null;
 
-		return canSee(object.getWorldId(), object.getX(), object.getY(), objectSeeCheckZ, target.getX(), target.getY(), targetSeeCheckZ,
-			object.getInstanceId());
-	}
-
-	public boolean canSee(int worldId, float x, float y, float z, float x1, float y1, float z1, int instanceId) {
-		return geoData.getMap(worldId).canSee(x, y, z, x1, y1, z1, instanceId);
+		return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(), objectSeeCheckZ, target.getX(),
+			target.getY(), targetSeeCheckZ, targetGeometry, object.getInstanceId());
 	}
 
 	private float getSeeCheckOffset(VisibleObject object) {
@@ -135,7 +113,7 @@ public class GeoService {
 		return GeoType.NO_GEO;
 	}
 
-	public static final GeoService getInstance() {
+	public static GeoService getInstance() {
 		return SingletonHolder.instance;
 	}
 

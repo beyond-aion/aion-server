@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorTemplate;
 import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorWorld;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 
 /**
@@ -43,9 +42,6 @@ public class StaticDoorSpawnManager {
 			StaticDoor staticDoor = new StaticDoor(objectId, new StaticObjectController(), spawn, data, instanceIndex);
 			staticDoor.setKnownlist(new PlayerAwareKnownList(staticDoor));
 			bringIntoWorld(staticDoor, spawn, instanceIndex);
-			if (staticDoor.getDoorName() != null) {
-				GeoService.getInstance().setDoorState(worldId, instanceIndex, staticDoor.getDoorName(), staticDoor.isOpen());
-			}
 			counter++;
 		}
 		if (counter > 0)

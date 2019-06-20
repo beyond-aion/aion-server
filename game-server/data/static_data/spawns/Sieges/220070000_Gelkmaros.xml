@@ -297,7 +297,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257793">
-						<spot x="1198.499" y="930.7560" z="306.6950" h="30" static_id="963"/>
+						<spot x="1198.5043" y="930.61505" z="306.7838" h="30" static_id="963"/>
 					</spawn>
 					<!-- Stallari -->
 					<spawn npc_id="257605">
@@ -456,7 +456,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257794">
-						<spot x="1198.499" y="930.7560" z="306.6950" h="30" static_id="963"/>
+						<spot x="1198.5043" y="930.61505" z="306.7838" h="30" static_id="963"/>
 					</spawn>
 					<!-- Stallari -->
 					<spawn npc_id="257610">
@@ -743,7 +743,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257792">
-						<spot x="1198.5" y="930.196" z="306.774" h="30" static_id="963"/>
+						<spot x="1198.5043" y="930.61505" z="306.7838" h="30" static_id="963"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257839">
@@ -1329,7 +1329,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="258093">
-						<spot x="1880.367" y="1169.168" z="323.5450" h="30" static_id="846"/>
+						<spot x="1880.257" y="1169.1709" z="323.63373" h="30" static_id="846"/>
 					</spawn>
 					<!-- Stallari -->
 					<spawn npc_id="257905">
@@ -1507,7 +1507,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="258094">
-						<spot x="1880.367" y="1169.168" z="323.5450" h="30" static_id="846"/>
+						<spot x="1880.257" y="1169.1709" z="323.63373" h="30" static_id="846"/>
 					</spawn>
 					<!-- Ulsaruk -->
 					<spawn npc_id="257910">
@@ -1783,7 +1783,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="258092">
-						<spot x="1880.367" y="1169.168" z="323.5450" h="30" static_id="846"/>
+						<spot x="1880.257" y="1169.1709" z="323.63373" h="30" static_id="846"/>
 					</spawn>
 					<!-- Dux -->
 					<spawn npc_id="257900">

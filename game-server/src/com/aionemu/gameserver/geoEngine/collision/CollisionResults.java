@@ -35,18 +35,26 @@ package com.aionemu.gameserver.geoEngine.collision;
 import java.util.ArrayList;
 import java.util.Iterator;
 
+import com.aionemu.gameserver.geoEngine.scene.Geometry;
+
 public class CollisionResults implements Iterable<CollisionResult> {
 
 	private final ArrayList<CollisionResult> results = new ArrayList<>();
 	private boolean sorted = true;
-	private final boolean onlyFirst;
 	private final byte intentions;
 	private final int instanceId;
+	private final boolean onlyFirst;
+	private final Geometry ignoredGeometry;
 
-	public CollisionResults(byte intentions, boolean searchFirst, int instanceId) {
+	public CollisionResults(byte intentions, int instanceId) {
+		this(intentions, instanceId, false, null);
+	}
+
+	public CollisionResults(byte intentions, int instanceId, boolean searchFirst, Geometry ignoredGeometry) {
 		this.intentions = intentions;
-		this.onlyFirst = searchFirst;
 		this.instanceId = instanceId;
+		this.onlyFirst = searchFirst;
+		this.ignoredGeometry = ignoredGeometry;
 	}
 
 	public void clear() {
@@ -134,10 +142,17 @@ public class CollisionResults implements Iterable<CollisionResult> {
 	}
 
 	/**
-	 * @return Returns the onlyFirst.
+	 * @return True if the results should only contain one collision max.
 	 */
 	public boolean isOnlyFirst() {
 		return onlyFirst;
+	}
+
+	/**
+	 * @return The geometry that will be ignored during collision checks.
+	 */
+	public Geometry getIgnoredGeometry() {
+		return ignoredGeometry;
 	}
 
 	/**

@@ -86,7 +86,7 @@ public class AIEngine implements GameEngine {
 			Class<? extends AbstractAI<? extends Creature>> aiClass = aiHandlers.get(name);
 			if (aiClass == null)
 				throw new IllegalArgumentException("No AI found for name " + name);
-			Constructor<? extends AbstractAI<? extends Creature>> constructor = findConstructor(aiClass, owner.getClass());
+			Constructor<? extends AbstractAI<? extends Creature>> constructor = findConstructor(aiClass, owner.getClass(), false);
 			if (constructor == null)
 				throw new IllegalArgumentException(aiClass + " cannot be instantiated with " + owner.getClass().getSimpleName() + " as the owner");
 			try {
@@ -101,12 +101,16 @@ public class AIEngine implements GameEngine {
 	}
 
 	@SuppressWarnings("unchecked")
-	private <T> Constructor<T> findConstructor(Class<T> aiClass, Class<? extends Creature> ownerType) {
+	private <T> Constructor<T> findConstructor(Class<T> aiClass, Class<? extends Creature> searchParamType, boolean isSuperType) {
 		for (Constructor<?> constructor : aiClass.getDeclaredConstructors()) {
 			if (constructor.getParameterCount() == 1) {
 				Class<?> constructorParamType = constructor.getParameterTypes()[0];
-				if (constructorParamType.isAssignableFrom(ownerType))
+				if (isSuperType) {
+					if (searchParamType.isAssignableFrom(constructorParamType))
+						return (Constructor<T>) constructor;
+				} else if (constructorParamType.isAssignableFrom(searchParamType)) {
 					return (Constructor<T>) constructor;
+				}
 			}
 		}
 		return null;
@@ -117,7 +121,7 @@ public class AIEngine implements GameEngine {
 			Class<? extends Creature> ownerType = findDefaultOwnerType(aiClass);
 			if (ownerType == null)
 				throw new GameServerError("Faulty AI handler: " + aiClass + " is missing generic owner type info");
-			if (findConstructor(aiClass, ownerType) == null)
+			if (findConstructor(aiClass, ownerType, true) == null)
 				throw new GameServerError(
 					"Faulty AI handler: " + aiClass + " is missing constructor taking owner of type " + ownerType + " as the only argument");
 		});

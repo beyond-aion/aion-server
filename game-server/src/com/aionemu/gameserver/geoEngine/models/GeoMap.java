@@ -4,17 +4,19 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Map.Entry;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
+import com.aionemu.gameserver.geoEngine.bounding.BoundingSphere;
+import com.aionemu.gameserver.geoEngine.bounding.BoundingVolume;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Ray;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
+import com.aionemu.gameserver.geoEngine.scene.Geometry;
 import com.aionemu.gameserver.geoEngine.scene.Node;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
@@ -31,7 +33,7 @@ public class GeoMap extends Node {
 	private short[] terrainData;
 	private int terrainDataRows, terrainDataCols;
 	private List<BoundingBox> tmpBox = new ArrayList<>();
-	private Map<String, DoorGeometry> doors = new HashMap<>();
+	private Map<String, List<DoorGeometry>> doors = new HashMap<>();
 
 	public GeoMap(String name, int worldSize) {
 		setCollisionFlags((short) (CollisionIntention.ALL.getId() << 8));
@@ -45,44 +47,64 @@ public class GeoMap extends Node {
 		}
 	}
 
-	public String getDoorName(int worldId, String meshFile, float x, float y, float z) {
-		String mesh = meshFile.toUpperCase();
+	public DoorGeometry getDoor(int worldId, String meshFile, float x, float y, float z) {
 		Vector3f templatePoint = new Vector3f(x, y, z);
-		float distance = Float.MAX_VALUE;
-		DoorGeometry foundDoor = null;
-		for (Entry<String, DoorGeometry> door : doors.entrySet()) {
-			if (!(door.getKey().startsWith(Integer.toString(worldId)) && door.getKey().endsWith(mesh)))
-				continue;
-			DoorGeometry checkDoor = doors.get(door.getKey());
-			float doorDistance = checkDoor.getWorldBound().distanceTo(templatePoint);
-			if (distance > doorDistance) {
-				distance = doorDistance;
-				foundDoor = checkDoor;
+		List<DoorGeometry> doors = this.doors.get(meshFile.toLowerCase());
+		DoorGeometry nearestMatch = null;
+		if (doors != null) {
+			for (DoorGeometry door : doors) {
+				if (door.getWorldBound().intersects(templatePoint))
+					return door;
 			}
-			if (checkDoor.getWorldBound().intersects(templatePoint)) {
-				foundDoor = checkDoor;
-				break;
-			}
+			nearestMatch = findNearestMatch(doors, templatePoint);
 		}
-		if (foundDoor == null) {
-			log.warn("Could not find static door: " + worldId + " " + meshFile + " " + templatePoint);
-			return null;
-		}
-		return foundDoor.getName();
+		String spawnPoint = toTemplateCoords(templatePoint);
+		if (nearestMatch == null)
+			log.warn("Could not find static door: " + worldId + " " + meshFile + " " + spawnPoint);
+		else
+			log.warn("Static door: " + worldId + " " + meshFile + " " + spawnPoint + " should spawn at " + toSpawnPoint(nearestMatch.getWorldBound()));
+		return nearestMatch;
 	}
 
-	public void setDoorState(int instanceId, String name, boolean isOpened) {
-		DoorGeometry door = doors.get(name);
-		if (door != null)
-			door.setDoorState(instanceId, isOpened);
+	private DoorGeometry findNearestMatch(List<DoorGeometry> doors, Vector3f pos) {
+		DoorGeometry nearestMatch = null;
+		float nearestDist = 15;
+		for (DoorGeometry door : doors) {
+			float dist = door.getWorldBound().distanceTo(pos);
+			if (dist < nearestDist) {
+				nearestMatch = door;
+				nearestDist = dist;
+			}
+		}
+		return nearestMatch;
+	}
+
+	private String toTemplateCoords(Vector3f coords) {
+		return "x=\"" + coords.getX() + "\" y=\"" + coords.getY() + "\" z=\"" + coords.getZ() + "\"";
+	}
+
+	private String toSpawnPoint(BoundingVolume boundingVolume) {
+		Vector3f spawnPosition = new Vector3f(boundingVolume.getCenter());
+		float zOffset = 0; // boundingVolume.center is always the middle point of the mesh, we need to subtract a z offset to find the ground spawn pos
+		if (boundingVolume instanceof BoundingBox)
+			zOffset = ((BoundingBox) boundingVolume).getZExtent();
+		else if (boundingVolume instanceof BoundingSphere)
+			zOffset = ((BoundingSphere) boundingVolume).getRadius();
+		zOffset -= 0.01f;
+		if (zOffset > 0)
+			spawnPosition.setZ(spawnPosition.getZ() - zOffset);
+		return toTemplateCoords(spawnPosition);
 	}
 
 	@Override
 	public int attachChild(Spatial child) {
 		int i = 0;
 
-		if (child instanceof DoorGeometry)
-			doors.put(child.getName(), (DoorGeometry) child);
+		if (child instanceof DoorGeometry) {
+			int index = child.getName().lastIndexOf('\\');
+			String meshFileName = child.getName().substring(index + 1).toLowerCase();
+			doors.computeIfAbsent(meshFileName, (k) -> new ArrayList<>()).add((DoorGeometry) child);
+		}
 
 		for (Spatial spatial : getChildren()) {
 			if (tmpBox.get(i).intersects(child.getWorldBound())) {
@@ -106,7 +128,7 @@ public class GeoMap extends Node {
 	 * @return The surface Z coordinate nearest to the given zMax value at the given position or {@link Float#NaN} if not found / less than zMin.
 	 */
 	public float getZ(float x, float y, float zMax, float zMin, int instanceId) {
-		CollisionResults results = new CollisionResults(CollisionIntention.PHYSICAL.getId(), false, instanceId);
+		CollisionResults results = new CollisionResults(CollisionIntention.PHYSICAL.getId(), instanceId);
 		Vector3f origin = new Vector3f(x, y, zMax);
 		Vector3f target = new Vector3f(x, y, zMin);
 		target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
@@ -170,7 +192,7 @@ public class GeoMap extends Node {
 	}
 
 	private CollisionResults getCollisions(Vector3f origin, float targetX, float targetY, float targetZ, int instanceId, byte intentions) {
-		CollisionResults results = new CollisionResults(intentions, false, instanceId);
+		CollisionResults results = new CollisionResults(intentions, instanceId);
 		Vector3f target = new Vector3f(targetX, targetY, targetZ);
 		float limit = origin.distance(target);
 		target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
@@ -305,7 +327,7 @@ public class GeoMap extends Node {
 		return singleMatch;
 	}
 
-	public boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId) {
+	public boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, Geometry targetGeometry, int instanceId) {
 		Vector3f origin = new Vector3f(x, y, z);
 		Vector3f target = new Vector3f(targetX, targetY, targetZ);
 		float distance = origin.distance(target);
@@ -325,7 +347,7 @@ public class GeoMap extends Node {
 			if (terrainCollision(curX, curY, ray, p1, p2, p3, p4))
 				return false;
 		}
-		CollisionResults results = new CollisionResults(CollisionIntention.DEFAULT_COLLISIONS.getId(), true, instanceId);
+		CollisionResults results = new CollisionResults(CollisionIntention.DEFAULT_COLLISIONS.getId(), instanceId, true, targetGeometry);
 		int collisions = collideWith(ray, results);
 		return results.size() == 0 && collisions == 0;
 	}

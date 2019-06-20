@@ -8,6 +8,7 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
@@ -19,28 +20,36 @@ import com.aionemu.gameserver.world.geo.GeoService;
 public class Collide extends AdminCommand {
 
 	public Collide() {
-		super("collide");
+		super("collide", "Geo debugging tool.");
+
+		// @formatter:off
+		setSyntaxInfo(
+			" - Lists collisions between your target and the ground.",
+			"me - Lists collisions between you and your target."
+		);
+		// @formatter:on
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		VisibleObject target = admin.getTarget();
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "Must select a target!");
+		boolean isMe = false;
+		if (params.length > 0 && !(isMe = "me".equalsIgnoreCase(params[0]))) {
+			sendInfo(admin);
 			return;
 		}
-		if (params.length > 1 || params.length == 1 && !"me".equalsIgnoreCase(params[0])) {
-			info(admin, null);
+		VisibleObject target = admin.getTarget();
+		if (target == null) {
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
 		}
 
-		final byte intentions = (CollisionIntention.DOOR.getId());
+		final byte intentions = CollisionIntention.DOOR.getId();
 		float x = target.getX();
 		float y = target.getY();
 		float z = target.getZ();
 		float targetX, targetY, targetZ;
 
-		if (params.length == 0) {
+		if (!isMe) {
 			targetX = x;
 			targetY = y;
 			targetZ = z - 10;
@@ -48,84 +57,41 @@ public class Collide extends AdminCommand {
 			targetX = admin.getX();
 			targetY = admin.getY();
 			targetZ = admin.getZ() + admin.getObjectTemplate().getBoundRadius().getUpper() / 2;
+			sendInfo(admin, "From target towards you:");
 		}
 
-		if (params.length == 1)
-			PacketSendUtility.sendMessage(admin, "From target direction:");
-		PacketSendUtility.sendMessage(admin, "Target: X=" + x + "; Y=" + y + "; Z=" + z);
+		sendInfo(admin, "Target: X=" + x + "; Y=" + y + "; Z=" + z);
 
 		CollisionResults results = GeoService.getInstance().getCollisions(target, targetX, targetY, targetZ, intentions);
 		CollisionResult closest = results.getClosestCollision();
 
 		if (results.size() == 0) {
-			PacketSendUtility.sendMessage(admin, "Hm... Nothing collidable?");
-			if (params.length == 0)
-				return;
-			else
-				closest = null;
+			sendInfo(admin, "No collisions found.");
+			closest = null;
 		} else {
-			Iterator<CollisionResult> iter = results.iterator();
-			int count = 0;
-			int closestId = 0;
-			String description = "";
-			while (iter.hasNext()) {
-				count++;
-				CollisionResult result = iter.next();
-				if (result.equals(closest))
-					closestId = count;
-				if (result.getGeometry() == null)
-					description += count + ". " + result.getContactPoint().toString() + "\n";
-				else {
-					if (result.getGeometry().getName() == null) {
-						description += count + ". " + result.getContactPoint().toString() + "; parent=" + result.getGeometry().getParent().getName() + "\n";
-					} else
-						description += count + ". " + result.getContactPoint().toString() + "; name=" + result.getGeometry().getName() + "\n";
-				}
-			}
-			description += "-----------------------\nClosest: " + closestId + ". Distance: " + closest.getDistance();
-			PacketSendUtility.sendMessage(admin, description);
+			listCollisions(admin, results, closest);
 		}
 
 		CollisionResult closestOpposite = null;
 
-		if (params.length == 1) {
-			PacketSendUtility.sendMessage(admin, "From opposite direction:");
-			PacketSendUtility.sendMessage(admin, "Admin: X=" + admin.getX() + "; Y=" + admin.getY() + "; Z=" + admin.getZ());
+		if (isMe) {
+			sendInfo(admin, "From you towards your target:");
+			sendInfo(admin, "Admin: X=" + admin.getX() + "; Y=" + admin.getY() + "; Z=" + admin.getZ());
 
 			results = GeoService.getInstance().getCollisions(admin, target.getX(), target.getY(),
 				target.getZ() + target.getObjectTemplate().getBoundRadius().getUpper() / 2, intentions);
 			closestOpposite = results.getClosestCollision();
 
 			if (results.size() == 0) {
-				PacketSendUtility.sendMessage(admin, "Hm... Nothing collidable?");
+				sendInfo(admin, "No collisions found.");
 				closestOpposite = null;
 			} else {
-				Iterator<CollisionResult> iter2 = results.iterator();
-				int count = 0;
-				int closestId = 0;
-				String description = "";
-
-				while (iter2.hasNext()) {
-					count++;
-					CollisionResult result = iter2.next();
-					if (result.equals(closestOpposite))
-						closestId = count;
-					if (result.getGeometry() == null)
-						description += count + ". " + result.getContactPoint().toString() + "\n";
-					else {
-						if (result.getGeometry().getName() == null) {
-							description += count + ". " + result.getContactPoint().toString() + "; parent=" + result.getGeometry().getParent().getName() + "\n";
-						} else
-							description += count + ". " + result.getContactPoint().toString() + "; name=" + result.getGeometry().getName() + "\n";
-					}
-				}
-				description += "-----------------------\nClosest: " + closestId + ". Distance: " + closestOpposite.getDistance();
-				PacketSendUtility.sendMessage(admin, description);
+				listCollisions(admin, results, closestOpposite);
 			}
 		}
 
-		if (params.length == 0 && closest != null && closest.getContactPoint().z + 0.5f < target.getZ()) {
-			PacketSendUtility.sendMessage(admin, "Below actual Z!");
+		if (!isMe && closest != null && closest.getContactPoint().z + 0.5f < target.getZ()) {
+			sendInfo(admin, "Closest collision is below target's Z coordinate!");
 		} else {
 			if (closest != null) {
 				SpawnTemplate spawn = SpawnEngine.newSpawn(admin.getWorldId(), 200000, closest.getContactPoint().x, closest.getContactPoint().y,
@@ -140,9 +106,25 @@ public class Collide extends AdminCommand {
 		}
 	}
 
-	@Override
-	public void info(Player player, String message) {
-		String syntax = "Syntax: //collide [me]";
-		PacketSendUtility.sendMessage(player, syntax);
+	private void listCollisions(Player admin, CollisionResults results, CollisionResult closestOpposite) {
+		int count = 1;
+		int closestId = 0;
+		String description = "";
+
+		for (Iterator<CollisionResult> iter = results.iterator(); iter.hasNext(); count++) {
+			CollisionResult result = iter.next();
+			if (result.equals(closestOpposite))
+				closestId = count;
+			if (result.getGeometry() == null)
+				description += count + ". " + result.getContactPoint().toString() + "\n";
+			else {
+				if (result.getGeometry().getName() == null) {
+					description += count + ". " + result.getContactPoint().toString() + "; parent=" + result.getGeometry().getParent().getName() + "\n";
+				} else
+					description += count + ". " + result.getContactPoint().toString() + "; name=" + result.getGeometry().getName() + "\n";
+			}
+		}
+		description += "-----------------------\nClosest: " + closestId + ". Distance: " + closestOpposite.getDistance();
+		sendInfo(admin, description);
 	}
 }

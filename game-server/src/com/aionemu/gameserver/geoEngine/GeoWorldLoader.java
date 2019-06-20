@@ -36,8 +36,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
 /**
- * @author Mr. Poke
- * @modified Neon
+ * @author Mr. Poke, Neon
  */
 public class GeoWorldLoader {
 
@@ -150,15 +149,8 @@ public class GeoWorldLoader {
 				if (node != null) {
 					try {
 						if ((node.getIntentions() & CollisionIntention.DOOR.getId()) != 0) {
-							if (!GeoDataConfig.GEO_DOORS_ENABLE && !name.contains("castledoor") && !name.contains("fortress_door"))
-								continue;
-							for (Spatial door : node.getChildren()) {
-								DoorGeometry doorClone = (DoorGeometry) door.clone();
-								if (createDoors(doorClone, worldId, matrix3f, loc, scale))
-									map.attachChild(doorClone);
-								else
-									missingDoors.add(doorClone.getName() + " (map=" + worldId + "; pos=" + loc + ")");
-							}
+							for (Spatial door : node.getChildren())
+								attachChild(map, door, matrix3f, loc, scale);
 						} else {
 							if ((node.getIntentions() & CollisionIntention.MOVEABLE.getId()) != 0) // TODO: handle moveable collisions (ships, shugo boxes)
 								continue;
@@ -203,17 +195,6 @@ public class GeoWorldLoader {
 			ZoneName zoneName = ZoneName.createOrGet(geometry.getName() + "_" + worldId);
 			ZoneService.getInstance().createMaterialZoneTemplate(geometry, worldId, zoneName);
 		}
-	}
-
-	private static boolean createDoors(Spatial node, int worldId, Matrix3f matrix, Vector3f location, float scale) {
-		node.setTransform(matrix, location, scale);
-		node.updateModelBound();
-		int regionId = getVectorHash(node.getWorldBound().getCenter());
-		int index = node.getName().lastIndexOf('\\');
-		// Create a unique name for doors
-		String doorName = worldId + "_DOOR_" + regionId + "_" + node.getName().substring(index + 1).toUpperCase();
-		node.setName(doorName);
-		return true;
 	}
 
 	/**

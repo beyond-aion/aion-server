@@ -397,8 +397,8 @@
 					</spawn>
 					<!-- Outer Fortress Gate -->
 					<spawn npc_id="275034">
-						<spot x="2139.131" y="2038.364" z="2310.875" h="30" static_id="146"/>
-						<spot x="2137.867" y="1823.281" z="2310.875" h="90" static_id="147"/>
+						<spot x="2137.88" y="2040.274" z="2311.015" h="30" static_id="146"/>
+						<spot x="2137.8796" y="1821.2285" z="2310.894" h="90" static_id="147"/>
 					</spawn>
 					<!-- Reshanta's Eye Guard Tower -->
 					<spawn npc_id="881976">
@@ -722,8 +722,8 @@
 					</spawn>
 					<!-- Outer Fortress Gate -->
 					<spawn npc_id="275035">
-						<spot x="2139.131" y="2038.364" z="2310.875" h="30" static_id="146"/>
-						<spot x="2137.867" y="1823.281" z="2310.875" h="90" static_id="147"/>
+						<spot x="2137.88" y="2040.274" z="2311.015" h="30" static_id="146"/>
+						<spot x="2137.8796" y="1821.2285" z="2310.894" h="90" static_id="147"/>
 					</spawn>
 					<!-- Quartermaster -->
 					<spawn npc_id="260213">
@@ -1125,8 +1125,8 @@
 					</spawn>
 					<!-- Outer Fortress Gate -->
 					<spawn npc_id="275033" respawn_time="295">
-						<spot x="2137.867" y="1823.281" z="2310.875" h="90" static_id="147"/>
-						<spot x="2139.131" y="2038.364" z="2310.875" h="30" static_id="146"/>
+						<spot x="2137.8796" y="1821.2285" z="2310.894" h="90" static_id="147"/>
+						<spot x="2137.88" y="2040.274" z="2311.015" h="30" static_id="146"/>
 					</spawn>
 					<!-- Field Generator -->
 					<spawn npc_id="260207">
@@ -2424,8 +2424,8 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="275104">
+						<spot x="2844.7305" y="2609.1204" z="1502.4609" static_id="25"/>
 						<spot x="2735.750" y="2609.375" z="1502.648" h="60" static_id="53"/>
-						<spot x="2843.018" y="2609.264" z="1502.649" static_id="25"/>
 					</spawn>
 					<!-- Lirhel -->
 					<spawn npc_id="263267">
@@ -2714,7 +2714,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="275105">
-						<spot x="2834.02" y="2609.26" z="1502.65" static_id="25"/>
+						<spot x="2844.7305" y="2609.1204" z="1502.4609" static_id="25"/>
 						<spot x="2735.75" y="2609.38" z="1502.64" h="60" static_id="53"/>
 					</spawn>
 					<!-- Gate Stone -->
@@ -3116,7 +3116,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="275103">
-						<spot x="2843.018" y="2609.264" z="1502.649" static_id="25"/>
+						<spot x="2844.7305" y="2609.1204" z="1502.4609" static_id="25"/>
 						<spot x="2735.750" y="2609.375" z="1502.648" h="60" static_id="53"/>
 					</spawn>
 					<!-- Veteran Lead Scout -->
@@ -8041,9 +8041,9 @@
 					<!-- Fortress Gate -->
 					<spawn npc_id="276210">
 						<spot x="2058.4890" y="1220.4016" z="2962.1147" h="90" static_id="118"/>
-						<spot x="1978.4093" y="1261.3148" z="2961.0691" h="90" static_id="2366"/>
+						<spot x="1975.9895" y="1262.8867" z="2961.3127" h="90" static_id="2366"/>
 						<spot x="2055.8506" y="1328.0554" z="2962.0798" h="30" static_id="119"/>
-						<spot x="2152.8701" y="1281.5854" z="2960.5166" h="90" static_id="2365"/>
+						<spot x="2151.5737" y="1280.5222" z="2961.1067" h="90" static_id="2365"/>
 					</spawn>
 					<!-- asmodian Fortress Gate -->
 					<spawn npc_id="279452">
@@ -8404,9 +8404,9 @@
 					<!-- Fortress Gate -->
 					<spawn npc_id="276211">
 						<spot x="2058.4890" y="1220.4016" z="2962.1147" h="90" static_id="118"/>
-						<spot x="1978.4093" y="1261.3148" z="2961.0691" h="90" static_id="2366"/>
+						<spot x="1975.9895" y="1262.8867" z="2961.3127" h="90" static_id="2366"/>
 						<spot x="2055.8506" y="1328.0554" z="2962.0798" h="30" static_id="119"/>
-						<spot x="2152.8701" y="1281.5854" z="2960.5166" h="90" static_id="2365"/>
+						<spot x="2151.5737" y="1280.5222" z="2961.1067" h="90" static_id="2365"/>
 					</spawn>
 					<!-- balaur Fortress Gate -->
 					<spawn npc_id="279746">
@@ -8840,9 +8840,9 @@
 					<!-- Fortress Gate -->
 					<spawn npc_id="276209">
 						<spot x="2058.4890" y="1220.4016" z="2962.1147" h="90" static_id="118"/>
-						<spot x="1978.4093" y="1261.3148" z="2961.0691" h="90" static_id="2366"/>
+						<spot x="1975.9895" y="1262.8867" z="2961.3127" h="90" static_id="2366"/>
 						<spot x="2055.8506" y="1328.0554" z="2962.0798" h="30" static_id="119"/>
-						<spot x="2152.8701" y="1281.5854" z="2960.5166" h="90" static_id="2365"/>
+						<spot x="2151.5737" y="1280.5222" z="2961.1067" h="90" static_id="2365"/>
 					</spawn>
 					<!-- Elyos Fortress Gate -->
 					<spawn npc_id="279158">
@@ -12070,7 +12070,7 @@
 					<!-- Fortress Gate -->
 					<spawn npc_id="276503">
 						<spot x="669.119" y="3005.671" z="2891.029" h="40" static_id="116"/>
-						<spot x="702.346" y="2979.831" z="2727.036" h="45" static_id="111"/>
+						<spot x="703.1003" y="2979.3777" z="2727.1462" h="45" static_id="111"/>
 					</spawn>
 					<!-- Seasoned Magus -->
 					<spawn npc_id="270848">
@@ -12336,7 +12336,7 @@
 					<!-- Fortress Gate -->
 					<spawn npc_id="276504">
 						<spot x="669.119" y="3005.671" z="2891.029" h="40" static_id="116"/>
-						<spot x="702.346" y="2979.831" z="2727.036" h="45" static_id="111"/>
+						<spot x="703.1003" y="2979.3777" z="2727.1462" h="45" static_id="111"/>
 					</spawn>
 					<!-- Bey -->
 					<spawn npc_id="271023">
@@ -12595,7 +12595,7 @@
 					<!-- Fortress Gate -->
 					<spawn npc_id="276505">
 						<spot x="669.119" y="3005.671" z="2891.029" h="40" static_id="116"/>
-						<spot x="702.346" y="2979.831" z="2727.036" h="45" static_id="111"/>
+						<spot x="703.1003" y="2979.3777" z="2727.1462" h="45" static_id="111"/>
 					</spawn>
 					<!-- Veteran Magus -->
 					<spawn npc_id="270860">

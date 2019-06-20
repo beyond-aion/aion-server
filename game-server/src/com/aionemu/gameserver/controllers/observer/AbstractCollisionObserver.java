@@ -55,7 +55,7 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 						dir.subtractLocal(pos).normalizeLocal();
 						Ray r = new Ray(pos, dir);
 						r.setLimit(limit);
-						CollisionResults results = new CollisionResults(intentions, true, creature.getInstanceId());
+						CollisionResults results = new CollisionResults(intentions, creature.getInstanceId(), true, null);
 						geometry.collideWith(r, results);
 						onMoved(results);
 						oldPos = pos;

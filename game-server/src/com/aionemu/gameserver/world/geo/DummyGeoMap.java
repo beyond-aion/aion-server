@@ -3,7 +3,9 @@ package com.aionemu.gameserver.world.geo;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
+import com.aionemu.gameserver.geoEngine.scene.Geometry;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
+import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 
 /**
  * @author ATracer
@@ -20,7 +22,7 @@ public class DummyGeoMap extends GeoMap {
 	}
 
 	@Override
-	public final boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId) {
+	public final boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, Geometry targetGeometry, int instanceId) {
 		return true;
 	}
 
@@ -33,13 +35,8 @@ public class DummyGeoMap extends GeoMap {
 	}
 
 	@Override
-	public String getDoorName(int worldId, String meshFile, float x, float y, float z) {
+	public DoorGeometry getDoor(int worldId, String meshFile, float x, float y, float z) {
 		return null;
-	}
-
-	@Override
-	public void setDoorState(int instanceId, String name, boolean state) {
-
 	}
 
 	@Override

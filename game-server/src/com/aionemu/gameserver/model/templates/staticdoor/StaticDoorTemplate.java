@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 
 /**
@@ -101,12 +100,6 @@ public class StaticDoorTemplate extends VisibleObjectTemplate {
 
 	public String getMeshFile() {
 		return meshFile;
-	}
-
-	public BoundingBox getBoundingBox() {
-		if (box == null)
-			return null;
-		return box.getBoundingBox();
 	}
 
 	public DoorType getDoorType() {

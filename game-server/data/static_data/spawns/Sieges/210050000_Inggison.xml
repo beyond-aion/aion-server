@@ -252,7 +252,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257193">
-						<spot x="1763.874" y="2114.595" z="321.5681" h="95" static_id="380"/>
+						<spot x="1763.7252" y="2114.2976" z="321.69666" h="95" static_id="380"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257240">
@@ -429,7 +429,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257194">
-						<spot x="1763.874" y="2114.595" z="321.5681" h="95" static_id="380"/>
+						<spot x="1763.7252" y="2114.2976" z="321.69666" h="95" static_id="380"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257241">
@@ -678,7 +678,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257192">
-						<spot x="1763.874" y="2114.595" z="321.5681" h="95" static_id="380"/>
+						<spot x="1763.7252" y="2114.2976" z="321.69666" h="95" static_id="380"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257239">
@@ -1277,7 +1277,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257493">
-						<spot x="833.7343" y="1863.445" z="333.9930" h="80" static_id="374"/>
+						<spot x="833.95294" y="1862.9146" z="334.08118" h="80" static_id="374"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257540">
@@ -1288,9 +1288,9 @@
 						<spot x="892.4789" y="1992.595" z="341.5119" h="80" />
 					</spawn>
 					<!-- Katia -->
-                    <spawn npc_id="799007" respawn_time="295">
-                        <spot x="714.551" y="1518.8" z="361.591" h="90"/>
-                    </spawn>
+					<spawn npc_id="799007" respawn_time="295">
+						<spot x="714.551" y="1518.8" z="361.591" h="90"/>
+					</spawn>
 				</siege_mod>
 			</siege_race>
 			<siege_race race="BALAUR">
@@ -1480,7 +1480,7 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257494">
-						<spot x="833.7343" y="1863.445" z="333.9930" h="80" static_id="374"/>
+						<spot x="833.95294" y="1862.9146" z="334.08118" h="80" static_id="374"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257541">
@@ -1731,7 +1731,7 @@
 					</spawn>		
 					<!-- Fortress Gate -->
 					<spawn npc_id="257492">
-						<spot x="833.7343" y="1863.445" z="333.9930" h="80" static_id="374"/>
+						<spot x="833.95294" y="1862.9146" z="334.08118" h="80" static_id="374"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257539">

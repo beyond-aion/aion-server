@@ -116,6 +116,8 @@ public class Geometry extends Spatial {
 
 	@Override
 	public int collideWith(Collidable other, CollisionResults results) {
+		if (results.getIgnoredGeometry() == this)
+			return 0;
 		if (other instanceof Ray) {
 			if (!worldBound.intersects(((Ray) other)))
 				return 0;
