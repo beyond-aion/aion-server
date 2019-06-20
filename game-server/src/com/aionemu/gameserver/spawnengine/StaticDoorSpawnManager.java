@@ -35,12 +35,6 @@ public class StaticDoorSpawnManager {
 		for (StaticDoorTemplate data : staticDoorWorld.getStaticDoors()) {
 			if (data.getDoorType() != DoorType.DOOR) {
 				// TODO: assign house doors to houses, so geo doors could be triggered by changing house settings;
-				if (data.getDoorType() == DoorType.ABYSS) {
-					// Set all abyss doors as opened
-					String doorName = GeoService.getInstance().getDoorName(worldId, data.getMeshFile(), data.getX(), data.getY(), data.getZ());
-					if (doorName != null)
-						GeoService.getInstance().setDoorState(worldId, instanceIndex, doorName, true);
-				}
 				continue;
 			}
 			SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, 300001, data.getX(), data.getY(), data.getZ(), (byte) 0);

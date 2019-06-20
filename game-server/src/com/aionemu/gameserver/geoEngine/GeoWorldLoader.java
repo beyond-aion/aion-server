@@ -21,12 +21,10 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Matrix3f;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
-import com.aionemu.gameserver.geoEngine.scene.Box;
 import com.aionemu.gameserver.geoEngine.scene.Geometry;
 import com.aionemu.gameserver.geoEngine.scene.Mesh;
 import com.aionemu.gameserver.geoEngine.scene.Node;
@@ -34,8 +32,6 @@ import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.geoEngine.scene.VertexBuffer;
 import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
-import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorTemplate;
-import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorWorld;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
@@ -92,7 +88,7 @@ public class GeoWorldLoader {
 					m.createCollisionData();
 
 					if ((m.getIntentions() & CollisionIntention.DOOR.getId()) != 0 && (m.getIntentions() & CollisionIntention.PHYSICAL.getId()) != 0) {
-						geom = new DoorGeometry(name);
+						geom = new DoorGeometry(name, m);
 					} else {
 						MaterialTemplate mtl = DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId());
 						geom = new Geometry(name, m);
@@ -154,7 +150,6 @@ public class GeoWorldLoader {
 				if (node != null) {
 					try {
 						if ((node.getIntentions() & CollisionIntention.DOOR.getId()) != 0) {
-							// ignore mesh for now (should be handled in collideWith() so it can be toggled during runtime)
 							if (!GeoDataConfig.GEO_DOORS_ENABLE && !name.contains("castledoor") && !name.contains("fortress_door"))
 								continue;
 							for (Spatial door : node.getChildren()) {
@@ -210,52 +205,8 @@ public class GeoWorldLoader {
 		}
 	}
 
-	/*
-	 * This method creates boxes for doors. Any geo meshes are ignored, however, the bounds are rechecked
-	 * for boxes during the creation. Boxes are more efficient way to handle collisions. So, it replaces
-	 * geo mesh with the artfitial Box geometry, taken from the static_doors.xml. Basically, you can create
-	 * missing doors here but that is not implemented. matrix is never used, as well as scale.
-	 * Those two arguments are needed if location MUST be repositioned according to geo mesh.
-	 * Geo may have both meshes from mission xml and from other files, so you never know. But now we handle
-	 * just mission xml. Other meshes are ignored.
-	 */
 	private static boolean createDoors(Spatial node, int worldId, Matrix3f matrix, Vector3f location, float scale) {
-		DoorGeometry geom = (DoorGeometry) node;
-
-		StaticDoorWorld worldDoors = DataManager.STATICDOOR_DATA.getStaticDoorWorlds(worldId);
-		if (worldDoors == null)
-			return false;
-
-		for (StaticDoorTemplate template : worldDoors.getStaticDoors()) {
-			BoundingBox boundingBox = template.getBoundingBox();
-			if (boundingBox == null)
-				continue; // absent in static doors templates, don't add it (why? but templates must be updated as well)
-
-			// Check if location is inside the template box. Usually, it's a center of box
-			if (!boundingBox.contains(location)) {
-				Vector3f templatePos;
-				// Not inside? Crappy templates, check the position then and do the best
-				if (template.getX() != null) {
-					// enough to check one coordinate for presence
-					templatePos = new Vector3f(template.getX(), template.getY(), template.getZ());
-					if (location.distance(templatePos) > 1f)
-						continue;
-				} else
-					continue;
-			}
-
-			// Replace geo mesh
-			Box boxMesh = new Box(boundingBox.getMin(new Vector3f()), boundingBox.getMax(new Vector3f()));
-			geom.setMesh(boxMesh);
-			// Assign flags if they are missing in geo (geo bugs)
-			geom.setCollisionFlags((short) (CollisionIntention.DEFAULT_COLLISIONS.getId() << 8));
-			break;
-		}
-
-		if (geom.getMesh() == null)
-			return false;
-
-		// Here if geo has a real mesh, it expands as big as it should be, so replacement falls back to geo mesh
+		node.setTransform(matrix, location, scale);
 		node.updateModelBound();
 		int regionId = getVectorHash(node.getWorldBound().getCenter());
 		int index = node.getName().lastIndexOf('\\');

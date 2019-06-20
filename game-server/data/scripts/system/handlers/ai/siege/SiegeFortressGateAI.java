@@ -70,14 +70,12 @@ public class SiegeFortressGateAI extends NpcAI {
 					case 252116:
 					case 252117:
 						return "ldf5_fortress_door_01.cgf";
-					/*
-					 * case 881578:
-					 * return "barricade_light_large_01a.cgf";
-					 * case 881579:
-					 * return "barricade_vritra_large_01a.cgf";
-					 * case 881580:
-					 * return "barricade_dark_large_01a.cgf";
-					 */
+					case 881578:
+						return "barricade_light_large_01a.cgf";
+					case 881579:
+						return "barricade_vritra_large_01a.cgf";
+					case 881580:
+						return "barricade_dark_large_01a.cgf";
 				}
 				break;
 			default:
@@ -91,10 +89,7 @@ public class SiegeFortressGateAI extends NpcAI {
 		super.handleSpawned();
 		doorName = GeoService.getInstance().getSiegeDoorName(getOwner().getWorldId(), getMeshFileName(), getOwner().getX(), getOwner().getY(),
 			getOwner().getZ());
-		if (getNpcId() == 256694) // exception for Nochsana Fortress Gate - Remove it if geo will ever works as intended
-			updateDoorState(true, true);
-		else
-			updateDoorState(false, true);
+		updateDoorState(false, true);
 	}
 
 	@Override

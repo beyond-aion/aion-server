@@ -68,9 +68,6 @@ public class GeoMap extends Node {
 			log.warn("Could not find static door: " + worldId + " " + meshFile + " " + templatePoint);
 			return null;
 		}
-		foundDoor.setFoundTemplate(true);
-		// log.info("Static door " + worldId + " " + meshFile + " " + templatePoint + " matched " + foundDoor.getName() +
-		// "; distance: " + distance);
 		return foundDoor.getName();
 	}
 

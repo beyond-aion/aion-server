@@ -56,16 +56,6 @@ public class Geometry extends Spatial {
 	}
 
 	/**
-	 * Create a geometry node without any mesh data.
-	 * 
-	 * @param name
-	 *          The name of this geometry
-	 */
-	public Geometry(String name) {
-		super(name);
-	}
-
-	/**
 	 * Create a geometry node with mesh data.
 	 * 
 	 * @param name
@@ -74,7 +64,7 @@ public class Geometry extends Spatial {
 	 *          The mesh data for this geometry
 	 */
 	public Geometry(String name, Mesh mesh) {
-		this(name);
+		super(name);
 		if (mesh == null)
 			throw new NullPointerException();
 
