@@ -92,7 +92,6 @@ public class Geometry extends Spatial {
 	}
 
 	public void setMesh(Mesh mesh) {
-
 		this.mesh = mesh;
 	}
 
@@ -157,5 +156,12 @@ public class Geometry extends Spatial {
 	@Override
 	public void setCollisionFlags(short flags) {
 		mesh.setCollisionFlags(flags);
+	}
+
+	@Override
+	public Geometry clone() throws CloneNotSupportedException {
+		Geometry geometry = (Geometry) super.clone();
+		geometry.cachedWorldMat = cachedWorldMat.clone();
+		return geometry;
 	}
 }
