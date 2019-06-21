@@ -505,18 +505,17 @@ public class BoundingSphere extends BoundingVolume {
 	 */
 	@Override
 	public BoundingVolume clone(BoundingVolume store) {
-		if (store != null && store.getType() == Type.Sphere) {
-			BoundingSphere rVal = (BoundingSphere) store;
-			if (null == rVal.center) {
-				rVal.center = new Vector3f();
-			}
-			rVal.center.set(center);
-			rVal.radius = radius;
-			rVal.checkPlane = checkPlane;
-			return rVal;
-		}
-
-		return new BoundingSphere(radius, (center != null ? center.clone() : null));
+		BoundingSphere rVal;
+		if (store != null && store.getType() == Type.Sphere)
+			rVal = (BoundingSphere) store;
+		else
+			rVal = new BoundingSphere();
+		if (rVal.center == null)
+			rVal.center = new Vector3f();
+		rVal.center.set(center);
+		rVal.radius = radius;
+		rVal.isTreeCollidable = isTreeCollidable;
+		return rVal;
 	}
 
 	/**
@@ -557,10 +556,6 @@ public class BoundingSphere extends BoundingVolume {
 		return false;
 	}
 
-	// public boolean intersectsOrientedBoundingBox(OrientedBoundingBox obb) {
-	// return obb.intersectsSphere(this);
-	// }
-
 	@Override
 	public boolean intersects(Ray ray) {
 		assert Vector3f.isValidVector(center);
@@ -594,6 +589,8 @@ public class BoundingSphere extends BoundingVolume {
 			root = FastMath.sqrt(discr);
 
 			float distance = root - a1;
+			if (distance > ray.getLimit())
+				return 0;
 			Vector3f point = new Vector3f(ray.direction).multLocal(distance).addLocal(ray.origin);
 
 			CollisionResult result = new CollisionResult(point, distance);
@@ -610,17 +607,26 @@ public class BoundingSphere extends BoundingVolume {
 		if (discr < 0.0) {
 			return 0;
 		} else if (discr >= FastMath.ZERO_TOLERANCE) {
+			int collisions = 0;
 			root = FastMath.sqrt(discr);
 			float dist = -a1 - root;
-			Vector3f point = new Vector3f(ray.direction).multLocal(dist).addLocal(ray.origin);
-			results.addCollision(new CollisionResult(point, dist));
+			if (Math.abs(dist) <= ray.getLimit()) {
+				Vector3f point = new Vector3f(ray.direction).multLocal(dist).addLocal(ray.origin);
+				results.addCollision(new CollisionResult(point, dist));
+				collisions++;
+			}
 
 			dist = -a1 + root;
-			point = new Vector3f(ray.direction).multLocal(dist).addLocal(ray.origin);
-			results.addCollision(new CollisionResult(point, dist));
-			return 2;
+			if (dist <= ray.getLimit()) {
+				Vector3f point = new Vector3f(ray.direction).multLocal(dist).addLocal(ray.origin);
+				results.addCollision(new CollisionResult(point, dist));
+				collisions++;
+			}
+			return collisions;
 		} else {
 			float dist = -a1;
+			if (dist > ray.getLimit())
+				return 0;
 			Vector3f point = new Vector3f(ray.direction).multLocal(dist).addLocal(ray.origin);
 			results.addCollision(new CollisionResult(point, dist));
 			return 1;

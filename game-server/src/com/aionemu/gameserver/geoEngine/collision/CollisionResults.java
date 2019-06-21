@@ -45,6 +45,7 @@ public class CollisionResults implements Iterable<CollisionResult> {
 	private final int instanceId;
 	private final boolean onlyFirst;
 	private final Geometry ignoredGeometry;
+	private boolean canSeeCheck;
 
 	public CollisionResults(byte intentions, int instanceId) {
 		this(intentions, instanceId, false, null);
@@ -166,4 +167,11 @@ public class CollisionResults implements Iterable<CollisionResult> {
 		return instanceId;
 	}
 
+	public boolean isCanSeeCheck() {
+		return canSeeCheck;
+	}
+
+	public void setCanSeeCheck(boolean canSeeCheck) {
+		this.canSeeCheck = canSeeCheck;
+	}
 }

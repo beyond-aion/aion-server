@@ -42,6 +42,7 @@ import com.aionemu.gameserver.geoEngine.bounding.BoundingVolume;
 import com.aionemu.gameserver.geoEngine.collision.Collidable;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.collision.UnsupportedCollisionException;
+import com.aionemu.gameserver.geoEngine.collision.WorldBoundCollisionResults;
 import com.aionemu.gameserver.geoEngine.math.FastMath;
 import com.aionemu.gameserver.geoEngine.math.Matrix4f;
 import com.aionemu.gameserver.geoEngine.math.Ray;
@@ -288,28 +289,35 @@ public class BIHTree implements CollisionData {
                                BoundingVolume worldBound,
                                CollisionResults results){
 
-    	CollisionResults boundResults = new CollisionResults(results.getIntentions(), results.getInstanceId(), results.isOnlyFirst(), results.getIgnoredGeometry());
-        worldBound.collideWith(r, boundResults);
-        if (boundResults.size() > 0){
-            float tMin = boundResults.getClosestCollision().getDistance();
-            float tMax = boundResults.getFarthestCollision().getDistance();
-            
-            if (tMax <= 0)
-                tMax = Float.POSITIVE_INFINITY;
-            else if (tMin == tMax)
-                tMin = 0;
+        WorldBoundCollisionResults wbCollisions = new WorldBoundCollisionResults(results, worldBound);
+        worldBound.collideWith(r, wbCollisions);
+        int collisions = wbCollisions.addValidCollisionsTo(results);
+        if (collisions > 0 && results.isOnlyFirst()) {
+          return collisions;
+        }
+        // if worldBound contains ray origin and there are no collisions it means ray starts and ends inside worldBound
+        if (wbCollisions.size() > 0 || wbCollisions.getCenterPlaneContactPoint() != null || worldBound.contains(r.getOrigin())) {
+            float tMin = 0;
+            float tMax = r.getLimit();
+            if (wbCollisions.size() > 0) {
+                tMin = wbCollisions.getClosestCollision().getDistance();
+                tMax = wbCollisions.getFarthestCollision().getDistance();
+                if (tMax <= 0)
+                    tMax = Float.POSITIVE_INFINITY;
+                else if (tMin == tMax)
+                    tMin = 0;
 
-            if (tMin <= 0)
-                tMin = 0;
+                if (tMin <= 0)
+                    tMin = 0;
 
-            if (r.getLimit() < Float.POSITIVE_INFINITY){
-                tMax = Math.min(tMax, r.getLimit());
+                if (r.getLimit() < Float.POSITIVE_INFINITY)
+                    tMax = Math.min(tMax, r.getLimit());
             }
 
-//            return root.intersectBrute(r, worldMatrix, this, tMin, tMax, results);
-            return root.intersectWhere(r, worldMatrix, this, tMin, tMax, results);
+//          collisions += root.intersectBrute(r, worldMatrix, this, tMin, tMax, results);
+            collisions += root.intersectWhere(r, worldMatrix, this, tMin, tMax, results);
         }
-        return 0;
+        return collisions;
     }
 
     private int collideWithBoundingVolume(BoundingVolume bv,

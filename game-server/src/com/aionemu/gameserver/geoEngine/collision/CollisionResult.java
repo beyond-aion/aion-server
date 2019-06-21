@@ -42,7 +42,6 @@ public class CollisionResult implements Comparable<CollisionResult> {
 
 	private Geometry geometry;
 	private Vector3f contactPoint;
-	private Vector3f contactNormal;
 	private float distance;
 
 	public CollisionResult(Vector3f contactPoint, float distance) {
@@ -71,16 +70,8 @@ public class CollisionResult implements Comparable<CollisionResult> {
 			return 0;
 	}
 
-	public void setContactNormal(Vector3f norm) {
-		this.contactNormal = norm;
-	}
-
 	public void setGeometry(Geometry geom) {
 		this.geometry = geom;
-	}
-
-	public Vector3f getContactNormal() {
-		return contactNormal;
 	}
 
 	public Vector3f getContactPoint() {

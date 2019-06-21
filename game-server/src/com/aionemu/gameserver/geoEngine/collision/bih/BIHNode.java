@@ -322,9 +322,7 @@ public final class BIHNode {
 					// fix invisible walls
 					if (worldSpaceDist > r.limit)
 						continue;
-					CollisionResult cr = new CollisionResult(contactPoint, worldSpaceDist);
-					cr.setContactNormal(computeTriangleNormal(v1, v2, v3, null));
-					results.addCollision(cr);
+					results.addCollision(new CollisionResult(contactPoint, worldSpaceDist));
 					cols++;
 					if (results.isOnlyFirst())
 						break stackloop;
@@ -335,15 +333,5 @@ public final class BIHNode {
 		r.setOrigin(o);
 		r.setDirection(d);
 		return cols;
-	}
-
-	public static Vector3f computeTriangleNormal(Vector3f v1, Vector3f v2, Vector3f v3, Vector3f store){
-		if (store == null)
-			store = new Vector3f(v2);
-		else
-			store.set(v2);
-
-		store.subtractLocal(v1).crossLocal(v3.x-v1.x, v3.y-v1.y, v3.z-v1.z);
-		return store.normalizeLocal();
 	}
 }

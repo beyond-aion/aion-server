@@ -51,33 +51,17 @@ public abstract class BoundingVolume implements Collidable {
 		Sphere,
 		AABB,
 		OBB,
-		Capsule;
+		Capsule
 	}
 
-	protected int checkPlane = 0;
 	Vector3f center = new Vector3f();
+	protected boolean isTreeCollidable;
 
 	public BoundingVolume() {
 	}
 
 	public BoundingVolume(Vector3f center) {
 		this.center.set(center);
-	}
-
-	/**
-	 * Grabs the checkplane we should check first.
-	 */
-	public int getCheckPlane() {
-		return checkPlane;
-	}
-
-	/**
-	 * Sets the index of the plane that should be first checked during rendering.
-	 * 
-	 * @param value
-	 */
-	public final void setCheckPlane(int value) {
-		checkPlane = value;
 	}
 
 	/**
@@ -145,6 +129,14 @@ public abstract class BoundingVolume implements Collidable {
 
 	public final void setCenter(Vector3f newCenter) {
 		center = newCenter;
+	}
+
+	public void setTreeCollidable(boolean isTreeCollidable) {
+		this.isTreeCollidable = isTreeCollidable;
+	}
+
+	public boolean isTreeCollidable() {
+		return isTreeCollidable;
 	}
 
 	/**
@@ -216,14 +208,6 @@ public abstract class BoundingVolume implements Collidable {
 	public abstract boolean intersectsBoundingBox(BoundingBox bb);
 
 	/**
-	 * determines if this bounding volume and a given bounding box are intersecting.
-	 * 
-	 * @param bb
-	 *          the bounding box to test against.
-	 * @return true if this volume intersects the given bounding box.
-	 */
-	// public abstract boolean intersectsOrientedBoundingBox(OrientedBoundingBox bb);
-	/**
 	 * determines if a given point is contained within this bounding volume.
 	 * 
 	 * @param point
@@ -242,16 +226,4 @@ public abstract class BoundingVolume implements Collidable {
 	public abstract boolean intersects(Vector3f point);
 
 	public abstract float getVolume();
-
-	@Override
-	public BoundingVolume clone() {
-		try {
-			BoundingVolume clone = (BoundingVolume) super.clone();
-			clone.center = center.clone();
-			return clone;
-		}
-		catch (CloneNotSupportedException ex) {
-			throw new AssertionError();
-		}
-	}
 }

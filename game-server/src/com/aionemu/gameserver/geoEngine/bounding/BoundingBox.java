@@ -38,6 +38,7 @@ import com.aionemu.gameserver.geoEngine.collision.Collidable;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.collision.UnsupportedCollisionException;
+import com.aionemu.gameserver.geoEngine.collision.WorldBoundCollisionResults;
 import com.aionemu.gameserver.geoEngine.math.FastMath;
 import com.aionemu.gameserver.geoEngine.math.Matrix3f;
 import com.aionemu.gameserver.geoEngine.math.Matrix4f;
@@ -310,17 +311,17 @@ public class BoundingBox extends BoundingVolume {
 	 */
 	@Override
 	public BoundingBox clone(BoundingVolume store) {
-		if (store != null && store.getType() == Type.AABB) {
-			BoundingBox rVal = (BoundingBox) store;
-			rVal.center.set(center);
-			rVal.xExtent = xExtent;
-			rVal.yExtent = yExtent;
-			rVal.zExtent = zExtent;
-			rVal.checkPlane = checkPlane;
-			return rVal;
-		}
-
-		return new BoundingBox(center.clone(), xExtent, yExtent, zExtent);
+		BoundingBox rVal;
+		if (store != null && store.getType() == Type.AABB)
+			rVal = (BoundingBox) store;
+		else
+			rVal = new BoundingBox();
+		rVal.center.set(center);
+		rVal.xExtent = xExtent;
+		rVal.yExtent = yExtent;
+		rVal.zExtent = zExtent;
+		rVal.isTreeCollidable = isTreeCollidable;
+		return rVal;
 	}
 
 	/**
@@ -449,7 +450,8 @@ public class BoundingBox extends BoundingVolume {
 		Vector3f diff = new Vector3f().set(ray.origin).subtractLocal(center);
 		Vector3f direction = new Vector3f().set(ray.direction);
 
-		float[] t = { 0f, Float.POSITIVE_INFINITY };
+		float[] t = { 0f, ray.getLimit() };
+		int collisions = 0;
 
 		float saveT0 = t[0], saveT1 = t[1];
 		boolean notEntirelyClipped = clip(+direction.x, -diff.x - xExtent, t) && clip(-direction.x, +diff.x - xExtent, t)
@@ -457,24 +459,30 @@ public class BoundingBox extends BoundingVolume {
 			&& clip(-direction.z, +diff.z - zExtent, t);
 
 		if (notEntirelyClipped && (t[0] != saveT0 || t[1] != saveT1)) {
+			Vector3f contactPoint1 = new Vector3f(ray.direction).multLocal(t[0]).addLocal(ray.origin);
+			results.addCollision(new CollisionResult(contactPoint1, t[0]));
+			collisions++;
 			if (t[1] > t[0]) {
-				float[] distances = t;
-				Vector3f[] points = new Vector3f[] { new Vector3f(ray.direction).multLocal(distances[0]).addLocal(ray.origin),
-					new Vector3f(ray.direction).multLocal(distances[1]).addLocal(ray.origin) };
-
-				CollisionResult result = new CollisionResult(points[0], distances[0]);
-				results.addCollision(result);
-				result = new CollisionResult(points[1], distances[1]);
-				results.addCollision(result);
-				return 2;
+				Vector3f contactPoint2 = new Vector3f(ray.direction).multLocal(t[1]).addLocal(ray.origin);
+				results.addCollision(new CollisionResult(contactPoint2, t[1]));
+				collisions++;
 			}
-
-			Vector3f point = new Vector3f(ray.direction).multLocal(t[0]).addLocal(ray.origin);
-			CollisionResult result = new CollisionResult(point, t[0]);
-			results.addCollision(result);
-			return 1;
 		}
-		return 0;
+		if (results instanceof WorldBoundCollisionResults) {
+			WorldBoundCollisionResults wbCollisionResults = (WorldBoundCollisionResults) results;
+			if (wbCollisionResults.shouldAddBoxCenterPlaneCollision()) {
+				saveT0 = t[0];
+				saveT1 = t[1];
+				boolean rayIntersectsCenterPlane = clip(+direction.y, -diff.y, t) && clip(-direction.y, +diff.y, t) && (t[0] != saveT0 || t[1] != saveT1);
+				if (rayIntersectsCenterPlane) {
+					// This collision is of a "flat" box, meaning a rectangle with the width (xExtend * 2) and height (zExtent * 2) of this box.
+					// Just imagine the original box lost one dimension, everything else stays the same.
+					Vector3f centerPlaneContactPoint = new Vector3f(ray.direction).multLocal(t[0]).addLocal(ray.origin);
+					wbCollisionResults.setBoxCenterPlaneCollision(new CollisionResult(centerPlaneContactPoint, t[0]));
+				}
+			}
+		}
+		return collisions;
 	}
 
 	@Override

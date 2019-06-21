@@ -183,10 +183,19 @@ public class VisibleObjectSpawner {
 			case 252116:
 			case 252117:
 				return "ldf5_fortress_door_01.cgf";
+			case 272255:
+			case 272256:
+			case 272257:
 			case 881578:
 				return "barricade_light_large_01a.cgf";
+			case 272258:
+			case 272259:
+			case 272260:
 			case 881579:
 				return "barricade_dark_large_01a.cgf";
+			case 272261:
+			case 272262:
+			case 272263:
 			case 881580:
 				return "barricade_vritra_large_01a.cgf";
 			default:

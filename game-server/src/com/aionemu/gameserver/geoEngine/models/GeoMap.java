@@ -348,8 +348,8 @@ public class GeoMap extends Node {
 				return false;
 		}
 		CollisionResults results = new CollisionResults(CollisionIntention.DEFAULT_COLLISIONS.getId(), instanceId, true, targetGeometry);
-		int collisions = collideWith(ray, results);
-		return results.size() == 0 && collisions == 0;
+		results.setCanSeeCheck(true);
+		return collideWith(ray, results) == 0;
 	}
 
 	@Override
