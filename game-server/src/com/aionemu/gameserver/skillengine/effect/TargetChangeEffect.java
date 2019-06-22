@@ -20,7 +20,6 @@ public class TargetChangeEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		// TODO Auto-generated method stub
 		switch (position) {
 			case 3: // remove all targets
 				// is not retail
@@ -28,7 +27,7 @@ public class TargetChangeEffect extends EffectTemplate {
 				if (effected instanceof Player) {
 					Player player = (Player) effected;
 					player.setTarget(null);
-					PacketSendUtility.sendPacket(player, new SM_TARGET_SELECTED(player));
+					PacketSendUtility.sendPacket(player, new SM_TARGET_SELECTED(null));
 					PacketSendUtility.broadcastPacket(player, new SM_TARGET_UPDATE(player));
 				}
 				break;

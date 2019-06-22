@@ -31,10 +31,8 @@ public class RandomMoveLocEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		final Player effector = (Player) effect.getEffector();
-
 		Skill skill = effect.getSkill();
-		World.getInstance().updatePosition(effector, skill.getX(), skill.getY(), skill.getZ(), skill.getH());
+		World.getInstance().updatePosition(effect.getEffector(), skill.getX(), skill.getY(), skill.getZ(), skill.getH());
 	}
 
 	@Override

@@ -690,7 +690,7 @@ public class AttackUtil {
 			if (player.getTarget() == object) {
 				if (!validateSee || !player.canSee(object)) {
 					player.setTarget(null);
-					PacketSendUtility.sendPacket(player, new SM_TARGET_SELECTED(player));
+					PacketSendUtility.sendPacket(player, new SM_TARGET_SELECTED(null));
 				}
 			}
 		});

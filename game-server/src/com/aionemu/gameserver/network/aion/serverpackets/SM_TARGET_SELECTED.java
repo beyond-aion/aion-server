@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -11,33 +11,22 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_TARGET_SELECTED extends AionServerPacket {
 
-	private int level;
-	private int maxHp;
-	private int currentHp;
-	private int maxMp;
-	private int currentMp;
 	private int targetObjId;
+	private int level;
+	private int maxHp, currentHp;
+	private int maxMp, currentMp;
 
-	public SM_TARGET_SELECTED(Player player) {
-		if (player != null) {
-			if (player.getTarget() instanceof Creature) {
-				Creature target = (Creature) player.getTarget();
-				this.level = target.getLevel();
-				this.maxHp = target.getLifeStats().getMaxHp();
-				this.currentHp = target.getLifeStats().getCurrentHp();
-				this.maxMp = target.getLifeStats().getMaxMp();
-				this.currentMp = target.getLifeStats().getCurrentMp();
-			} else {
-				// TODO: check various gather on retail
-				this.level = 0;
-				this.maxHp = 0;
-				this.currentHp = 0;
-				this.maxMp = 0;
-				this.currentMp = 0;
+	public SM_TARGET_SELECTED(VisibleObject target) {
+		if (target != null) {
+			this.targetObjId = target.getObjectId();
+			if (target instanceof Creature) {
+				Creature creature = (Creature) target;
+				this.level = creature.getLevel();
+				this.maxHp = creature.getLifeStats().getMaxHp();
+				this.currentHp = creature.getLifeStats().getCurrentHp();
+				this.maxMp = creature.getLifeStats().getMaxMp();
+				this.currentMp = creature.getLifeStats().getCurrentMp();
 			}
-
-			if (player.getTarget() != null)
-				targetObjId = player.getTarget().getObjectId();
 		}
 	}
 

@@ -2,6 +2,7 @@ package com.aionemu.gameserver.skillengine.model;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -36,6 +37,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
@@ -788,6 +790,10 @@ public class Skill {
 			switch (targetType) {
 				case 0: // PlayerObjectId as Target
 				case 3: // Target not in sight?
+					if (shouldSetPlayerEffectorAsTemporaryTarget(effects)) {
+						effector.setTarget(effector);
+						PacketSendUtility.sendPacket((Player) effector, new SM_TARGET_SELECTED(effector));
+					}
 					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, dashStatus), et);
 					break;
 				case 1: // XYZ as Target
@@ -806,6 +812,29 @@ public class Skill {
 			if (effector instanceof Player)
 				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_USE_ITEM(getItemTemplate().getL10n()));
 		}
+	}
+
+	/**
+	 * If the player has some target selected and receives SM_CASTSPELL_RESULT for a movement skill, it triggers a special logic inside the client:
+	 * If the player would move through a door with this skill (based on coords sent in SM_CASTSPELL_RESULT), the client decides instead to move to his
+	 * target's position.
+	 * We use this mechanic to make the client think he is targeting himself during movement skills. The result is, that the player cannot move through
+	 * the closed door with this skill because the client will instead use his own position as the target location as explained above.
+	 * 
+	 * @return True if the skill is a position changing skill casted by a player, such as Blind Leap, and the player is not targeting himself.
+	 */
+	private boolean shouldSetPlayerEffectorAsTemporaryTarget(List<Effect> effects) {
+		if (!(effector instanceof Player))
+			return false;
+		if (effector.equals(effector.getTarget()))
+			return false;
+		if (effects.stream().noneMatch(effect -> effect.getDashStatus() != DashStatus.NONE)) // DashStatus != NONE means it's a movement skill
+			return false;
+		List<VisibleObject> staticObjects = effector.getKnownList().getKnownObjects().values().stream()
+			.filter(object -> object.getSpawn() != null && object.getSpawn().getStaticId() != 0).collect(Collectors.toList());
+		if (staticObjects.stream().noneMatch(object -> PositionUtil.isInRange(effector, object, 15))) // no nearby obstacles
+			return false;
+		return true;
 	}
 
 	/**
