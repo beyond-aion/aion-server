@@ -80,8 +80,8 @@ public class SummonController extends CreatureController<Summon> {
 		int attackSpeed = getOwner().getGameStats().getAttackSpeed().getCurrent();
 		long now = System.currentTimeMillis();
 		long msSinceLastAttack = now - lastAttackMillis;
-		if (msSinceLastAttack < attackSpeed) {
-			AuditLogger.log(getMaster(), " possibly used hack to speed up summon auto-attack (" + msSinceLastAttack + "ms instead of" + attackSpeed + ")");
+		if (msSinceLastAttack < attackSpeed && attackSpeed - msSinceLastAttack > 50) { // 50ms tolerance
+			AuditLogger.log(getMaster(), "possibly used hack to speed up summon auto-attack (" + msSinceLastAttack + "ms instead of " + attackSpeed + ")");
 			return;
 		}
 		lastAttackMillis = now;
