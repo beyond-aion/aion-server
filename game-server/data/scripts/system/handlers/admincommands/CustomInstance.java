@@ -1,14 +1,11 @@
 package admincommands;
 
-import java.time.LocalTime;
-
 import com.aionemu.gameserver.custom.instance.CustomInstanceRankEnum;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
-import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author Estrayl
@@ -37,8 +34,7 @@ public class CustomInstance extends AdminCommand {
 		switch (params[0].toLowerCase()) {
 			case "removecd":
 				if (player.getTarget() instanceof Player) {
-					if (CustomInstanceService.getInstance().updateLastEntry(player.getObjectId(),
-						ServerTime.now().with(LocalTime.of(8, 0)).toEpochSecond() * 1000 - 86400000))
+					if (CustomInstanceService.getInstance().updateLastEntry(player.getObjectId(), 0))
 						PacketSendUtility.sendMessage(player, "Successfully removed custom instance cooldown for " + player.getTarget().getName());
 				} else {
 					PacketSendUtility.sendMessage(player, "Please select a player first.");

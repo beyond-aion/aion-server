@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.custom.instance;
 
 import java.time.LocalTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -8,7 +9,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import com.mysql.fabric.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -43,8 +43,11 @@ public class CustomInstanceService {
 	}
 
 	public boolean canEnter(int playerId) {
-		long reUseTime = ServerTime.now().with(LocalTime.of(9, 0)).toEpochSecond() * 1000;
-		return getPlayerRankObject(playerId).getLastEntry() < (ServerTime.now().getHour() > 9 ? reUseTime : reUseTime - 86400000);
+		ZonedDateTime now = ServerTime.now();
+		ZonedDateTime reUseTime = now.with(LocalTime.of(9, 0));
+		if (now.isBefore(reUseTime))
+			reUseTime = reUseTime.minusDays(1);
+		return getPlayerRankObject(playerId).getLastEntry() < reUseTime.toEpochSecond() * 1000;
 	}
 
 	public void onEnter(Player player) {
