@@ -52,7 +52,7 @@ public class CustomInstanceService {
 		}
 		playerModelEntriesCache.put(player.getObjectId(), loadPlayerModelEntries(player.getObjectId()));
 		WorldMapInstance wmi = InstanceService.getNextAvailableInstance(CUSTOM_INSTANCE_WORLD_ID, 0, (byte) 1, new RoahCustomInstanceHandler());
-		InstanceService.registerPlayerWithInstance(wmi, player);
+		wmi.register(player.getObjectId());
 		TeleportService.teleportTo(player, wmi.getMapId(), wmi.getInstanceId(), 504.0f, 396.0f, 94.0f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 	}
 
@@ -82,15 +82,10 @@ public class CustomInstanceService {
 
 		WorldMapInstance wmi = player.getPosition().getWorldMapInstance();
 		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler) || !((RoahCustomInstanceHandler) wmi.getInstanceHandler()).isBossPhase()
-			|| player.getPosition().getWorldMapInstance().getSoloPlayerObj() != player.getObjectId())
+			|| !player.getPosition().getWorldMapInstance().isRegistered(player.getObjectId()))
 			return;
 
-		List<PlayerModelEntry> entries = playerModelEntriesCache.get(player.getObjectId());
-		if (entries == null) {
-			entries = new ArrayList<>();
-			playerModelEntriesCache.put(player.getObjectId(), entries);
-		}
-
+		List<PlayerModelEntry> entries = getPlayerModelEntries(player.getObjectId());
 		entries.add(new PlayerModelEntry(player, skill.getSkillId(), target instanceof Creature ? (Creature) target : null));
 	}
 
@@ -107,12 +102,7 @@ public class CustomInstanceService {
 	}
 
 	public List<PlayerModelEntry> getPlayerModelEntries(int playerId) {
-		List<PlayerModelEntry> entries = playerModelEntriesCache.get(playerId);
-		if (entries == null) {
-			entries = new ArrayList<>();
-			playerModelEntriesCache.put(playerId, entries);
-		}
-		return entries;
+		return playerModelEntriesCache.computeIfAbsent(playerId, k -> new ArrayList<>());
 	}
 
 	private static class SingletonHolder {

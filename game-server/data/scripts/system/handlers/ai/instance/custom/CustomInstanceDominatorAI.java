@@ -26,7 +26,7 @@ import ai.AggressiveNpcAI;
 @AIName("custom_instance_dominator")
 public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 
-	private int rank;
+	private int playerObjId, rank;
 	private Future<?> debuffTask, playerPositionCheckTask;
 
 	public CustomInstanceDominatorAI(Npc owner) {
@@ -41,7 +41,8 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler))
 			return;
 
-		rank = CustomInstanceService.getInstance().getPlayerRankObject(wmi.getSoloPlayerObj()).getRank();
+		playerObjId = wmi.getRegisteredObjects().iterator().next();
+		rank = CustomInstanceService.getInstance().getPlayerRankObject(playerObjId).getRank();
 
 		debuffTask = ThreadPoolManager.getInstance().schedule(this::debuffTarget, 1000);
 		playerPositionCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(this::checkPlayerPosition, 15000, 15000);
@@ -49,7 +50,7 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 
 	private void checkPlayerPosition() {
 		if (!isDead() && getOwner().getGameStats().getLastAttackedTimeDelta() > 10) {
-			Player p = World.getInstance().findPlayer(getPosition().getWorldMapInstance().getSoloPlayerObj());
+			Player p = getPosition().getWorldMapInstance().getPlayer(playerObjId);
 			if (p != null && PositionUtil.isInRange(p, getOwner(), 60)) {
 				double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(p.getHeading()));
 				float x = (float) (p.getX() + Math.cos(Math.PI * 1 + radian) * 2);

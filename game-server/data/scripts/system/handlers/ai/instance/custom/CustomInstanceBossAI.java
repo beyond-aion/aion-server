@@ -83,7 +83,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler))
 			return;
 
-		int playerId = wmi.getSoloPlayerObj();
+		int playerId = wmi.getRegisteredObjects().iterator().next();
 		rank = CustomInstanceService.getInstance().getPlayerRankObject(playerId).getRank();
 
 		Player p = World.getInstance().findPlayer(playerId);
@@ -125,7 +125,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 			return;
 
 		if (PositionUtil.getDistance(getPosition().getX(), getPosition().getY(), getPosition().getZ(), creature.getX(), creature.getY(),
-			creature.getZ()) <= 45 && creature.getObjectId() == wmi.getSoloPlayerObj()) {
+			creature.getZ()) <= 45 && getPosition().getWorldMapInstance().isRegistered(creature.getObjectId())) {
 			getAggroList().addHate(creature, 100); // early aggro
 
 			if (skillTask == null && !onlyAttack)
@@ -188,16 +188,19 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 				}
 
 				int cdID = -1; // item skills that have no cdID
-				if (skillI.getSkillTemplate() != null)
-					cdID = skillI.getSkillTemplate().getCooldownId();
-
 				boolean isDPskill = false;
-				if (skillI.getSkillTemplate().getStartconditions() != null)
-					for (Condition c : skillI.getSkillTemplate().getStartconditions().getConditions())
-						if (c instanceof DpCondition) {
-							isDPskill = true;
-							break;
+				if (skillI.getSkillTemplate() != null) {
+					cdID = skillI.getSkillTemplate().getCooldownId();
+					if (skillI.getSkillTemplate().getStartconditions() != null) {
+						for (Condition c : skillI.getSkillTemplate().getStartconditions().getConditions()) {
+							if (c instanceof DpCondition) {
+								isDPskill = true;
+								break;
+							}
 						}
+					}
+				}
+
 
 				// rule out:
 				if (isDPskill || !skillI.canUseSkill(CastState.CAST_START)

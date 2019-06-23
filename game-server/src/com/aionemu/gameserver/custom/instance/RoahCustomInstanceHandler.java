@@ -12,11 +12,9 @@ import java.util.concurrent.atomic.AtomicLong;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModel;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelController;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -36,6 +34,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -68,6 +67,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	private AtomicLong startTime = new AtomicLong();
 	private AtomicBoolean isInitialized = new AtomicBoolean();
 
+	private int playerObjId;
 	private PlayerModel model;
 	private List<Integer> skillSet;
 
@@ -187,7 +187,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			case CENTER_ARTIFACT_ID:
 				cancelAllTasks();
 				// use pcd for rare cases in which the artifact got destroyed by dots/servants and the player got DC'ed before
-				PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(instance.getSoloPlayerObj());
+				PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(playerObjId);
 				float usedTime = (System.currentTimeMillis() - startTime.get()) / 1000f;
 				log.info("[CI_ROAH] Player [id=" + pcd.getPlayerObjId() + ", name=" + pcd.getName() + ", class=" + pcd.getPlayerClass() + ", rank="
 					+ CustomInstanceRankEnum.getRankDescription(rank) + "(" + rank + ")] succeeded in destroying the artifact in " + usedTime + "s (DPS:"
@@ -234,7 +234,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			case BOSS_MOB_E_F_ID:
 			case BOSS_MOB_AT_ID:
 				setResult(true);
-				calcBossDrop(npc.getObjectId(), instance.getSoloPlayerObj());
+				calcBossDrop(npc.getObjectId(), playerObjId);
 				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
 				break;
 		}
@@ -243,7 +243,8 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(Player player) {
 		if (isInitialized.compareAndSet(false, true)) {
-			rank = CustomInstanceService.getInstance().getPlayerRankObject(instance.getSoloPlayerObj()).getRank();
+			playerObjId = instance.getRegisteredObjects().iterator().next();
+			rank = CustomInstanceService.getInstance().getPlayerRankObject(playerObjId).getRank();
 			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
 				"Welcome to the 'Eternal Challenge', " + CustomInstanceRankEnum.getRankDescription(rank) + " challenger!", ChatType.BRIGHT_YELLOW_CENTER));
 			Npc artifact = getNpc(CENTER_ARTIFACT_ID);
@@ -252,8 +253,8 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				spawnUnlockableNpcs(player);
 			}
 			// train player model from previous boss runs
-			skillSet = PlayerModelController.getSkillSetForPlayer(instance.getSoloPlayerObj());
-			model = PlayerModelController.trainModelForPlayer(instance.getSoloPlayerObj(), skillSet);
+			skillSet = PlayerModelController.getSkillSetForPlayer(playerObjId);
+			model = PlayerModelController.trainModelForPlayer(playerObjId, skillSet);
 		}
 	}
 
@@ -328,10 +329,10 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				"Your rank has been decreased to " + CustomInstanceRankEnum.getRankDescription(rank) + ".", ChatType.BRIGHT_YELLOW_CENTER));
 
 			if (rank > 0) // prevent suicide abuse || loss rewards
-				ItemService.addItem(instance.getPlayer(instance.getSoloPlayerObj()), REWARD_COIN_ID, getRewardCoinAmount(rank), true);
+				ItemService.addItem(instance.getPlayer(playerObjId), REWARD_COIN_ID, getRewardCoinAmount(rank), true);
 		}
-		CustomInstanceService.getInstance().changePlayerRank(instance.getSoloPlayerObj(), rank);
-		CustomInstanceService.getInstance().saveNewPlayerModelEntries(instance.getSoloPlayerObj());
+		CustomInstanceService.getInstance().changePlayerRank(playerObjId, rank);
+		CustomInstanceService.getInstance().saveNewPlayerModelEntries(playerObjId);
 	}
 
 	private void cancelAllTasks() {

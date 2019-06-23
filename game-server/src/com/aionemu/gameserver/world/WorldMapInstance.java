@@ -293,6 +293,10 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		registeredObjects.add(objectId);
 	}
 
+	public Set<Integer> getRegisteredObjects() {
+		return registeredObjects;
+	}
+
 	/**
 	 * @return Count of all registered objects with this instance. Since objects can be players or teams, it does not resemble registered player count.
 	 */
