@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.custom.instance;
 
+import static com.aionemu.gameserver.custom.instance.CustomInstanceService.REWARD_COIN_ID;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_START_IDABRE;
 
 import java.util.ArrayList;
@@ -60,7 +61,6 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private static final int TIME_LIMIT = 900; // 15 minutes
 
-	private static final int REWARD_COIN_ID = 186000344;
 	private static final int MIN_REWARD = 2;
 	private static final float REWARD_SCALE = 2f;
 

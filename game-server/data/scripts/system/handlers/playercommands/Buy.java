@@ -1,5 +1,7 @@
 package playercommands;
 
+import static com.aionemu.gameserver.custom.instance.CustomInstanceService.REWARD_COIN_ID;
+
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -25,7 +27,6 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 public class Buy extends PlayerCommand {
 
 	private static final Map<Integer, Map<String, Integer>> rewards = new LinkedHashMap<>();
-	private static final int REWARD_COIN_ID = 186000409;
 
 	public Buy() {
 		super("buy", "Display or redeem loyalty rewards.");

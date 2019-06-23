@@ -34,6 +34,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class CustomInstanceService {
 
 	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
+	public static final int REWARD_COIN_ID = 186000409;
 	private static final int CUSTOM_INSTANCE_WORLD_ID = 300070000; // roah chamber
 
 	// Neural network related
