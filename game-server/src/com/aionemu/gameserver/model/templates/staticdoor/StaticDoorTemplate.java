@@ -5,7 +5,6 @@ import java.util.EnumSet;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
@@ -34,8 +33,6 @@ public class StaticDoorTemplate extends VisibleObjectTemplate {
 	protected String statesHex;
 	@XmlAttribute(name = "mesh")
 	private String meshFile;
-	@XmlElement(name = "box")
-	private StaticDoorBounds box;
 
 	@XmlTransient
 	EnumSet<StaticDoorState> states = EnumSet.noneOf(StaticDoorState.class);

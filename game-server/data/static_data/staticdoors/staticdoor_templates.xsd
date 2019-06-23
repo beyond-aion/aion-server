@@ -17,9 +17,6 @@
 		<xs:attribute name="world" type="xs:int" use="required" />
 	</xs:complexType>
 	<xs:complexType name="StaticDoor">
-		<xs:sequence>
-			<xs:element name="box" type="StaticDoorBounds" minOccurs="0" maxOccurs="1" />
-		</xs:sequence>
 		<xs:attribute name="type" type="DoorType" default="DOOR" />
 		<xs:attribute name="x" type="xs:float" />
 		<xs:attribute name="y" type="xs:float" />
@@ -36,12 +33,4 @@
 			<xs:enumeration value="HOUSE" />
 		</xs:restriction>
 	</xs:simpleType>
-	<xs:complexType name="StaticDoorBounds">
-		<xs:attribute name="x1" type="xs:float" use="required" />
-		<xs:attribute name="y1" type="xs:float" use="required" />
-		<xs:attribute name="z1" type="xs:float" use="required" />
-		<xs:attribute name="x2" type="xs:float" use="required" />
-		<xs:attribute name="y2" type="xs:float" use="required" />
-		<xs:attribute name="z2" type="xs:float" use="required" />
-	</xs:complexType>
 </xs:schema>
