@@ -42,7 +42,7 @@ public final class MailFormatter {
 		SystemMailService.sendMail("$$CASH_ITEM_MAIL", recipientName, title, body, itemObjectId, itemCount, 0, LetterType.BLACKCLOUD);
 	}
 
-	public static void sendHouseMaintenanceMail(House ownedHouse, long impoundTimeMillis, long kinah) {
+	public static void sendHouseMaintenanceMail(House ownedHouse, String ownerName, long impoundTimeMillis, long kinah) {
 		String templateName;
 		long daysUntilImpoundment = Duration.ofMillis(impoundTimeMillis - System.currentTimeMillis()).toDays();
 		if (daysUntilImpoundment <= 0)
@@ -72,7 +72,7 @@ public final class MailFormatter {
 		String title = template.getFormattedTitle(null);
 		String message = template.getFormattedMessage(formatter);
 
-		SystemMailService.sendMail(templateName, ownedHouse.getOwnerName(), title, message, 0, 0, kinah, LetterType.NORMAL);
+		SystemMailService.sendMail(templateName, ownerName, title, message, 0, 0, kinah, LetterType.NORMAL);
 	}
 
 	public static void sendHouseAuctionMail(House ownedHouse, PlayerCommonData playerData, AuctionResult result, long time, long returnKinah) {

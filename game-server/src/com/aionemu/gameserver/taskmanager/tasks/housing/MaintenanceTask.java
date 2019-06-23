@@ -55,6 +55,7 @@ public class MaintenanceTask extends AbstractCronTask {
 				continue;
 			}
 
+			String ownerName = house.getOwnerName();
 			long compensationKinah = 0;
 			Date impoundDate = calculateImpoundDate(house.getNextPay());
 			if (impoundDate.getTime() <= System.currentTimeMillis()) {
@@ -63,7 +64,7 @@ public class MaintenanceTask extends AbstractCronTask {
 				compensationKinah = (long) (house.getDefaultAuctionPrice() * 0.9f);
 			}
 
-			MailFormatter.sendHouseMaintenanceMail(house, impoundDate.getTime(), compensationKinah);
+			MailFormatter.sendHouseMaintenanceMail(house, ownerName, impoundDate.getTime(), compensationKinah);
 		}
 	}
 
