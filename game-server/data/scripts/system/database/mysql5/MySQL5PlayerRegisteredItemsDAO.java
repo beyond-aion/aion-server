@@ -77,7 +77,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 					String area = rset.getString("area");
 					if ("DECOR".equals(area)) {
 						HouseDecoration dec = createDecoration(rset);
-						if (!dec.getTemplate().getTags().contains(registry.getOwner().getBuilding().getPartsMatchTag()))
+						if (!dec.getTemplate().isForBuilding(registry.getOwner().getBuilding()))
 							continue;
 						dec.setPersistentState(PersistentState.UPDATED);
 						if (dec.isUsed()) {

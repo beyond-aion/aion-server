@@ -5,9 +5,6 @@ import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
@@ -20,7 +17,6 @@ import com.aionemu.gameserver.model.templates.housing.PartType;
  */
 public class HouseRegistry implements Persistable {
 
-	private static final Logger log = LoggerFactory.getLogger(HouseRegistry.class);
 	private final House owner;
 	private final Map<Integer, HouseObject<?>> objects = new LinkedHashMap<>();
 	private final Map<Integer, HouseDecoration> customParts = new LinkedHashMap<>();
@@ -218,15 +214,15 @@ public class HouseRegistry implements Persistable {
 			for (HouseDecoration decor : customParts.values()) {
 				if (decor.getTemplate().getType() != decorationUse.getTemplate().getType())
 					continue;
-				if (decor.getPersistentState() != PersistentState.DELETED) {
-					if (decor.isUsed()) {
-						decor.setUsed(false);
-						decor.setRoom(-1);
-						if (decor.getPersistentState() == PersistentState.NEW)
-							discardPart(decor);
-						else
-							decor.setPersistentState(PersistentState.DELETED);
-					}
+				if (decor.getPersistentState() == PersistentState.DELETED)
+					continue;
+				if (decor.isUsed() && decor.getRoom() == room) {
+					decor.setUsed(false);
+					decor.setRoom(-1);
+					if (decor.getPersistentState() == PersistentState.NEW)
+						discardPart(decor);
+					else
+						decor.setPersistentState(PersistentState.DELETED);
 				}
 			}
 			return;
@@ -234,21 +230,19 @@ public class HouseRegistry implements Persistable {
 		for (HouseDecoration decor : customParts.values()) {
 			if (decor.getTemplate().getType() != decorationUse.getTemplate().getType())
 				continue;
-			if (decor.getPersistentState() != PersistentState.DELETED) {
-				if (decorationUse.equals(decor)) {
-					decor.setUsed(true);
-					decor.setRoom(room);
-					defaultDecor.setUsed(false);
-				} else {
-					if (decor.isUsed() && !decorationUse.equals(decor) && decor.getRoom() == room) {
-						decor.setUsed(false);
-						decor.setRoom(-1);
-						if (decor.getPersistentState() == PersistentState.NEW)
-							discardPart(decor);
-						else
-							decor.setPersistentState(PersistentState.DELETED);
-					}
-				}
+			if (decor.getPersistentState() == PersistentState.DELETED)
+				continue;
+			if (decorationUse.equals(decor)) {
+				decor.setUsed(true);
+				decor.setRoom(room);
+				defaultDecor.setUsed(false);
+			} else if (decor.isUsed() && decor.getRoom() == room) {
+				decor.setUsed(false);
+				decor.setRoom(-1);
+				if (decor.getPersistentState() == PersistentState.NEW)
+					discardPart(decor);
+				else
+					decor.setPersistentState(PersistentState.DELETED);
 			}
 		}
 	}
