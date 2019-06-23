@@ -137,13 +137,10 @@ public class HouseRegistry implements Persistable {
 	public boolean putCustomPart(HouseDecoration houseDeco) {
 		if (customParts.containsKey(houseDeco.getObjectId()))
 			return false;
-		if (houseDeco.getPersistentState() != PersistentState.NEW) {
-			log.error("Inserting not new HouseDecoration: " + houseDeco.getObjectId());
-			return false;
-		}
 
 		customParts.put(houseDeco.getObjectId(), houseDeco);
-		setPersistentState(PersistentState.UPDATE_REQUIRED);
+		if (houseDeco.getPersistentState() != PersistentState.UPDATED)
+			setPersistentState(PersistentState.UPDATE_REQUIRED);
 		return true;
 	}
 

@@ -79,17 +79,17 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 						HouseDecoration dec = createDecoration(rset);
 						if (!dec.getTemplate().getTags().contains(registry.getOwner().getBuilding().getPartsMatchTag()))
 							continue;
-						registry.putCustomPart(dec);
+						dec.setPersistentState(PersistentState.UPDATED);
 						if (dec.isUsed()) {
 							if (registry.getOwner().getHouseType() != HouseType.PALACE && dec.getRoom() > 0)
 								dec.setRoom(0);
 							usedParts.computeIfAbsent(dec.getTemplate().getType(), k -> new ArrayList<>()).add(dec);
 						}
-						dec.setPersistentState(PersistentState.UPDATED);
+						registry.putCustomPart(dec);
 					} else {
 						HouseObject<?> obj = constructObject(registry, rset);
-						registry.putObject(obj);
 						obj.setPersistentState(PersistentState.UPDATED);
+						registry.putObject(obj);
 					}
 				}
 				for (PartType partType : PartType.values()) {

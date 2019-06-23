@@ -152,6 +152,7 @@ public class MySQL5HousesDAO extends HousesDAO {
 					house.setPermissionsFromDB(rset.getInt("settings"));
 					house.setNextPay(rset.getTimestamp("next_pay"));
 					house.setSignNotice(rset.getString("sign_notice"));
+					house.setPersistentState(PersistentState.UPDATED);
 
 					int id = studios ? house.getOwnerId() : address.getId();
 					houses.put(id, house);
