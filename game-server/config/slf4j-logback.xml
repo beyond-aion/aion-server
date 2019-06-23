@@ -81,6 +81,12 @@
 			<Pattern>${date} %message%n</Pattern>
 		</encoder>
 	</appender>
+	<appender name="app_custom_instance" class="ch.qos.logback.core.FileAppender">
+		<file>${logFolder}/custom_instance.log</file>
+		<encoder>
+			<Pattern>${date} %message%n</Pattern>
+		</encoder>
+	</appender>
 	<appender name="app_exchange" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/exchange.log</file>
 		<encoder>
@@ -184,6 +190,9 @@
 	</logger>
 	<logger name="CRAFT_LOG" additivity="false">
 		<appender-ref ref="app_craft" />
+	</logger>
+	<logger name="CUSTOM_INSTANCE_LOG">
+		<appender-ref ref="app_custom_instance" />
 	</logger>
 	<logger name="EXCHANGE_LOG">
 		<appender-ref ref="app_exchange" />

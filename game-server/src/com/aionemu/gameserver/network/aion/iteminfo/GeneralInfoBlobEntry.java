@@ -28,9 +28,9 @@ public class GeneralInfoBlobEntry extends ItemBlobEntry {
 		writeD(buf, item.secondsUntilExpiration()); // Disappear time
 		writeD(buf, 0);
 		writeD(buf, item.getTemporaryExchangeTimeRemaining());
-		writeH(buf, 0);// TODO sealed
-		writeD(buf, 0);
-		writeH(buf, 18);// unk 4.7.5
+		writeH(buf, 0); // TODO: Item Sealing - 1=sealed, 2=unsealing state, 3=special sealed(gm), 4=special unsealing(gm)
+		writeD(buf, 0); // Remaining unsealing time
+		writeH(buf, 18); // unk 4.7.5
 	}
 
 	@Override

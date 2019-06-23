@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../spawns.xsd">
+	<!-- Sanctum -->
+	<spawn_map map_id="110010000">
+		<!-- Reian Sorcerer -->
+		<spawn npc_id="800303" respawn_time="295">
+			<spot x="1362.0972" y="1475.6031" z="569.0385" h="23" />
+			<spot x="1369.8118" y="1484.1749" z="569.0385" h="82" />
+		</spawn>
+		<!-- Reian Sorcerer -->
+		<spawn npc_id="800304" respawn_time="295">
+			<spot x="1362.2782" y="1483.8331" z="569.0385" h="104" />
+		</spawn>
+		<!-- Reian Sorcerer -->
+		<spawn npc_id="800464" respawn_time="295">
+			<spot x="1370.8099" y="1476.4521" z="569.0385" h="49" />
+		</spawn>
+		<!-- Elyos Teleporter -->
+		<spawn npc_id="730578" respawn_time="295">
+			<spot x="1366.2594" y="1479.7798" z="569.1393" />
+		</spawn>
+	</spawn_map>
+	<!-- Pandaemonium -->
+	<spawn_map map_id="120010000">
+		<!-- Reian Sorcerer -->
+		<spawn npc_id="800303" respawn_time="295">
+			<spot x="1612.9677" y="1373.4250" z="193.1276" h="14" />
+			<spot x="1620.9770" y="1380.4285" z="193.1276" h="74" />
+		</spawn>
+		<!-- Reian Sorcerer -->
+		<spawn npc_id="800304" respawn_time="295">
+			<spot x="1612.7560" y="1380.6262" z="193.1278" h="106" />
+		</spawn>
+		<!-- Reian Sorcerer -->
+		<spawn npc_id="800464" respawn_time="295">
+			<spot x="1620.8959" y="1373.5557" z="193.1278" h="46" />
+		</spawn>
+		<!-- Asmodian Teleporter -->
+		<spawn npc_id="730579" respawn_time="295">
+			<spot x="1616.7156" y="1377.0825" z="193.2472" />
+		</spawn>
+	</spawn_map>
+</spawns>

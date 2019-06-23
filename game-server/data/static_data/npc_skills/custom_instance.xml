@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_skills.xsd">
+	<!-- Roah Custom Instance Bulky Mob: Vord -->
+	<npc_skills npc_ids="282757">
+		<npc_skill id="16535" lv="8" prob="25" cd="30000" />
+		<npc_skill id="2932" lv="1" prob="25" cd="180000" />
+		<npc_skill id="4606" lv="1" prob="25" cd="30000" />
+	</npc_skills>
+</npc_skill_templates>

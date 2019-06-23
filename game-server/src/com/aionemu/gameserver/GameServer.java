@@ -44,6 +44,7 @@ import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
+import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -325,6 +326,7 @@ public class GameServer {
 		GameTimeService.getInstance().startClock();
 
 		PvpMapService.getInstance().init();
+		CustomInstanceService.getInstance();
 
 		System.gc();
 

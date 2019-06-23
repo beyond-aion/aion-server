@@ -8,6 +8,7 @@
 	<portal_loc world_id="110010000" loc_id="1100103" x="1739.5557" y="2063.362" z="517.9073" h="68"/> <!-- Aerolink Exit -->
 	<portal_loc world_id="110010000" loc_id="1100104" x="1867" y="2068" z="517"/> <!-- Exit Steel Rake -->
 	<portal_loc world_id="110010000" loc_id="1100105" x="1448.5103" y="1503.075" z="573.0719"/> <!-- Eternal Bastion / Shugo Tomb / Nightmare Circus exit -->
+	<portal_loc world_id="110010000" loc_id="1100106" x="1366.35" y="1487.45" z="569.039" h="90"/><!-- Custom Instance Exit -->
 	<!-- Cloister of Kaisinel -->
 	<portal_loc world_id="110020000" loc_id="1100200" x="2155.6" y="1566.9" z="1204.897" h="71"/> <!-- Cloister of Kaisinel Entrance -->
 	<!-- Kaisinel Academy -->
@@ -24,6 +25,7 @@
 	<portal_loc world_id="120010000" loc_id="1200105" x="956.5115" y="1095.764" z="195.88034" h="64"/> <!-- Aerolink Exit -->
 	<portal_loc world_id="120010000" loc_id="1200106" x="950" y="1150" z="195" h="60"/> <!-- Exit Steel Rake -->
 	<portal_loc world_id="120010000" loc_id="1200108" x="1611.5024" y="1406.6398" z="193.12831"/> <!-- Eternal Bastion / Shugo Tomb / Nightmare Circus exit -->
+	<portal_loc world_id="120010000" loc_id="1200109" x="1616.83" y="1382.95" z="193.128" h="90"/><!-- Custom Instance Exit -->
 	<!-- Convent of Marchutan -->
 	<portal_loc world_id="120020000" loc_id="1200200" x="1557.2" y="1429.4" z="265.68" h="33"/> <!-- Convent of Marchutan Entrance -->
 	<!-- Marchutan Priory -->

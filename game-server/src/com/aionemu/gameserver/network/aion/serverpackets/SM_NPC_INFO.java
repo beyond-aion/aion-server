@@ -84,7 +84,7 @@ public class SM_NPC_INFO extends AionServerPacket {
 		writeD(npc.getGameStats().getMaxHp().getCurrent());
 		writeC(npc.getLevel());
 
-		NpcEquippedGear gear = npcTemplate.getEquipment();
+		NpcEquippedGear gear = npc.getOverrideEquipment(); // dynamically overriden Equipment (only for NPCs, not summons)
 		if (gear == null) {
 			writeD(0x00);
 			writeF(npcTemplate.getBoundRadius().getFront());
