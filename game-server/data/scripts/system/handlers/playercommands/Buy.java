@@ -7,7 +7,6 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -76,7 +75,7 @@ public class Buy extends PlayerCommand {
 	}
 
 	private void showRewards(Player player) {
-		PacketSendUtility.sendMessage(player, "Cost:", ChatType.YELLOW);
+		sendInfo(player, "Cost:");
 		for (Entry<Integer, Map<String, Integer>> idMap : rewards.entrySet()) {
 			String itemString = "";
 			int cost = idMap.getValue().get("cost");
@@ -94,24 +93,24 @@ public class Buy extends PlayerCommand {
 				itemString = itemString + cost + "   " + amount + "x ";
 
 			itemString += "[item: " + idMap.getKey() + "]"; // ID
-			PacketSendUtility.sendMessage(player, itemString, ChatType.YELLOW);
+			sendInfo(player, itemString);
 		}
-		PacketSendUtility.sendMessage(player, "To buy:", ChatType.YELLOW);
-		PacketSendUtility.sendMessage(player, "1. Right-click an item from the list to your Memo Pad.", ChatType.YELLOW);
-		PacketSendUtility.sendMessage(player, "2. Type \"." + getAlias() + "\" in your chat field (with space).", ChatType.YELLOW);
-		PacketSendUtility.sendMessage(player, "3. (Ctrl + Right-click) the item from your Memo Pad.", ChatType.YELLOW);
+		sendInfo(player, "To buy:");
+		sendInfo(player, "1. Right-click an item from the list to your Memo Pad.");
+		sendInfo(player, "2. Type \"." + getAlias() + "\" in your chat field (with space).");
+		sendInfo(player, "3. (Ctrl + Right-click) the item from your Memo Pad.");
 	}
 
 	private void buyItem(Player player, String itemLink) {
 		// redeem item
 		int itemId = ChatUtil.getItemId(itemLink);
 		if (DataManager.ITEM_DATA.getItemTemplate(itemId) == null) {
-			PacketSendUtility.sendMessage(player, itemLink + " is not a valid item.", ChatType.YELLOW);
+			sendInfo(player, itemLink + " is not a valid item.");
 			return;
 		}
 
 		if (!rewards.containsKey(itemId)) {
-			PacketSendUtility.sendMessage(player, ChatUtil.item(itemId) + " is not contained in the rewards.", ChatType.YELLOW);
+			sendInfo(player, ChatUtil.item(itemId) + " is not contained in the rewards.");
 			return;
 		}
 		int cost = rewards.get(itemId).get("cost");
@@ -120,7 +119,7 @@ public class Buy extends PlayerCommand {
 			rewardCoins += i.getItemCount();
 
 		if (cost > rewardCoins) {
-			PacketSendUtility.sendMessage(player, "You need " + cost + " to buy " + "[item: " + itemId + "].", ChatType.YELLOW);
+			sendInfo(player, "You need " + cost + " to buy " + "[item: " + itemId + "].");
 			return;
 		}
 
@@ -129,7 +128,7 @@ public class Buy extends PlayerCommand {
 			@Override
 			public void acceptRequest(Creature requester, Player responder) {
 				if (player.getInventory().decreaseByItemId(REWARD_COIN_ID, cost)) {
-					PacketSendUtility.sendMessage(player, "You have spent " + cost + ".", ChatType.YELLOW);
+					sendInfo(player, "You have spent " + cost + ".");
 					ItemService.addItem(player, itemId, rewards.get(itemId).get("amount"), true,
 						new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
 				}
