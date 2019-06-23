@@ -31,8 +31,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import ai.AggressiveNpcAI;
 
 /**
- * @author xTz
- * @modified Yeats, Estrayl
+ * @author xTz, Yeats, Estrayl
  */
 @AIName("brigade_general_vasharti")
 public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
@@ -73,7 +72,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 
 	private void scheduleFlameShieldBuffEvent(int delay) {
 		flameShieldBuffSchedule = ThreadPoolManager.getInstance().schedule(() -> {
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(Rnd.get(0, 1) == 0 ? 20530 : 20531, 60, 100)));
+			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20530 + Rnd.get(0, 1), 60, 100)));
 		}, delay);
 	}
 
@@ -96,7 +95,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 				Point3D p = getRndPos();
 				spawn(i % 2 == 0 ? 283008 : 283009, p.getX(), p.getY(), p.getZ(), (byte) 0);
 			}
-		}, 750, 7000);
+		}, 750, 7100);
 	}
 
 	@Override
@@ -135,6 +134,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 				}, 800);
 				break;
 			case 20533:
+				setStateIfNot(AIState.FIGHT);
 				SkillEngine.getInstance().getSkill(getOwner(), 20534, 1, getOwner()).useSkill(); // Sea of Fire
 				break;
 		}
@@ -145,7 +145,17 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	public void onEffectEnd(Effect effect) {
 		if (effect != null && effect.getSkillId() == 20534 && isInFlameShowerEvent.compareAndSet(true, false)) {
 			cancelTasks(seaOfFireSpawnTask);
+			getKnownList().forEachNpc(n -> {
+				switch (getNpcId()) {
+					case 283010:
+					case 283011:
+					case 283012:
+						n.getController().delete();
+						break;
+				}
+			});
 			scheduleFlameShieldBuffEvent(10000);
+			getOwner().getAggroList().addHate((Creature) getTarget(), 1000);
 		}
 	}
 
