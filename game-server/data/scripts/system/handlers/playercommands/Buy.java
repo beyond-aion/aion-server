@@ -32,8 +32,8 @@ public class Buy extends PlayerCommand {
 
 		// @formatter:off
 		setSyntaxInfo(
-			"<list> - Shows all buyable rewards.",
-			"<ITEM LINK> - Buys the respective item."
+			"list - Shows all buyable rewards.",
+			"<item link|ID> - Buys the respective item."
 		);
 		// @formatter:on
 		initRewards();
@@ -104,9 +104,13 @@ public class Buy extends PlayerCommand {
 	private void buyItem(Player player, String itemLink) {
 		// redeem item
 		int itemId = ChatUtil.getItemId(itemLink);
+		if (DataManager.ITEM_DATA.getItemTemplate(itemId) == null) {
+			PacketSendUtility.sendMessage(player, itemLink + " is not a valid item.", ChatType.YELLOW);
+			return;
+		}
 
 		if (!rewards.containsKey(itemId)) {
-			PacketSendUtility.sendMessage(player, itemLink + " is not contained in the rewards.", ChatType.YELLOW);
+			PacketSendUtility.sendMessage(player, ChatUtil.item(itemId) + " is not contained in the rewards.", ChatType.YELLOW);
 			return;
 		}
 		int cost = rewards.get(itemId).get("cost");
