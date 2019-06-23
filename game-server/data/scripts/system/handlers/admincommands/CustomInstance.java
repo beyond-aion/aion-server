@@ -42,7 +42,7 @@ public class CustomInstance extends AdminCommand {
 				break;
 			case "getrank":
 				if (player.getTarget() instanceof Player) {
-					int rank = CustomInstanceService.getInstance().getPlayerRankObject(player.getTarget().getObjectId()).getRank();
+					int rank = CustomInstanceService.getInstance().loadOrCreateRank(player.getTarget().getObjectId()).getRank();
 					PacketSendUtility.sendMessage(player,
 						player.getTarget().getName() + "'s current rank is " + CustomInstanceRankEnum.getRankDescription(rank) + "(" + rank + ").");
 				} else {

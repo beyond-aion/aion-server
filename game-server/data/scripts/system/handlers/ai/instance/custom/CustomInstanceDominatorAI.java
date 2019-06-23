@@ -42,7 +42,7 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 			return;
 
 		playerObjId = wmi.getRegisteredObjects().iterator().next();
-		rank = CustomInstanceService.getInstance().getPlayerRankObject(playerObjId).getRank();
+		rank = CustomInstanceService.getInstance().loadOrCreateRank(playerObjId).getRank();
 
 		debuffTask = ThreadPoolManager.getInstance().schedule(this::debuffTarget, 1000);
 		playerPositionCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(this::checkPlayerPosition, 15000, 15000);

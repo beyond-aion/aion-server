@@ -84,7 +84,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 			return;
 
 		int playerId = wmi.getRegisteredObjects().iterator().next();
-		rank = CustomInstanceService.getInstance().getPlayerRankObject(playerId).getRank();
+		rank = CustomInstanceService.getInstance().loadOrCreateRank(playerId).getRank();
 
 		Player p = World.getInstance().findPlayer(playerId);
 		if (p == null) {

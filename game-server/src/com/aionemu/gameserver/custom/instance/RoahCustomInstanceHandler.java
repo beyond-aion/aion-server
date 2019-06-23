@@ -244,7 +244,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	public void onEnterInstance(Player player) {
 		if (isInitialized.compareAndSet(false, true)) {
 			playerObjId = instance.getRegisteredObjects().iterator().next();
-			rank = CustomInstanceService.getInstance().getPlayerRankObject(playerObjId).getRank();
+			rank = CustomInstanceService.getInstance().loadOrCreateRank(playerObjId).getRank();
 			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
 				"Welcome to the 'Eternal Challenge', " + CustomInstanceRankEnum.getRankDescription(rank) + " challenger!", ChatType.BRIGHT_YELLOW_CENTER));
 			Npc artifact = getNpc(CENTER_ARTIFACT_ID);

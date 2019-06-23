@@ -43,11 +43,14 @@ public class CustomInstanceService {
 	}
 
 	public boolean canEnter(int playerId) {
+		CustomInstanceRank playerRankObject = DAOManager.getDAO(CustomInstanceDAO.class).loadPlayerRankObject(playerId);
+		if (playerRankObject == null)
+			return true;
 		ZonedDateTime now = ServerTime.now();
 		ZonedDateTime reUseTime = now.with(LocalTime.of(9, 0));
 		if (now.isBefore(reUseTime))
 			reUseTime = reUseTime.minusDays(1);
-		return getPlayerRankObject(playerId).getLastEntry() < reUseTime.toEpochSecond() * 1000;
+		return playerRankObject.getLastEntry() < reUseTime.toEpochSecond() * 1000;
 	}
 
 	public void onEnter(Player player) {
@@ -61,7 +64,7 @@ public class CustomInstanceService {
 		TeleportService.teleportTo(player, wmi.getMapId(), wmi.getInstanceId(), 504.0f, 396.0f, 94.0f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 	}
 
-	public CustomInstanceRank getPlayerRankObject(int playerId) {
+	public CustomInstanceRank loadOrCreateRank(int playerId) {
 		CustomInstanceRank customInstanceRank = DAOManager.getDAO(CustomInstanceDAO.class).loadPlayerRankObject(playerId);
 		if (customInstanceRank == null)
 			customInstanceRank = new CustomInstanceRank(playerId, 0, System.currentTimeMillis());
@@ -69,13 +72,13 @@ public class CustomInstanceService {
 	}
 
 	public boolean updateLastEntry(int playerId, long newEntryTime) {
-		CustomInstanceRank rankObj = getPlayerRankObject(playerId);
+		CustomInstanceRank rankObj = loadOrCreateRank(playerId);
 		rankObj.setLastEntry(newEntryTime);
 		return DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj);
 	}
 
 	public void changePlayerRank(int playerId, int newRank) {
-		CustomInstanceRank rankObj = getPlayerRankObject(playerId);
+		CustomInstanceRank rankObj = loadOrCreateRank(playerId);
 		int oldRank = rankObj.getRank();
 		rankObj.setRank(newRank);
 		if (DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj))
