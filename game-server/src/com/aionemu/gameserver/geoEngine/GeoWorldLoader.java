@@ -57,7 +57,7 @@ public class GeoWorldLoader {
 				short namelenght = geo.getShort();
 				byte[] nameByte = new byte[namelenght];
 				geo.get(nameByte);
-				String name = new String(nameByte).replace("/", "\\").toLowerCase().intern();
+				String name = new String(nameByte).replace('\\', '/').toLowerCase().intern();
 				Node node = new Node(DEBUG ? name : null);
 				byte intentions = 0;
 				byte singleChildMaterialId = -1;
@@ -110,7 +110,8 @@ public class GeoWorldLoader {
 
 	}
 
-	public static boolean loadWorld(int worldId, Map<String, Node> models, GeoMap map, Set<String> missingMeshes, List<String> missingDoors) {
+	public static boolean loadWorld(int worldId, Map<String, Node> models, GeoMap map, Set<String> missingMeshes) {
+		Set<String> ignoredMeshes = GeoDataConfig.IGNORED_MESHES.get(worldId);
 		File geoFile = new File(GEO_DIR + worldId + ".geo");
 		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r"); FileChannel roChannel = file.getChannel()) {
 			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, (int) roChannel.size()).load();
@@ -137,12 +138,16 @@ public class GeoWorldLoader {
 				int nameLength = geo.getShort();
 				byte[] nameByte = new byte[nameLength];
 				geo.get(nameByte);
-				String name = new String(nameByte).replace("/", "\\").toLowerCase();
+				String name = new String(nameByte).replace('\\', '/').toLowerCase();
 				Vector3f loc = new Vector3f(geo.getFloat(), geo.getFloat(), geo.getFloat());
 				float[] matrix = new float[9];
 				for (int i = 0; i < 9; i++)
 					matrix[i] = geo.getFloat();
 				float scale = geo.getFloat();
+
+				if (ignoredMeshes != null && ignoredMeshes.contains(name))
+					continue;
+
 				Matrix3f matrix3f = new Matrix3f();
 				matrix3f.set(matrix);
 				Node node = models.get(name);
@@ -186,7 +191,7 @@ public class GeoWorldLoader {
 	private static void createZone(Spatial geometry, int worldId, int childNumber) {
 		if (GeoDataConfig.GEO_MATERIALS_ENABLE && (geometry.getIntentions() & CollisionIntention.MATERIAL.getId()) != 0) {
 			int regionId = getVectorHash(geometry.getWorldBound().getCenter());
-			int index = geometry.getName().lastIndexOf('\\');
+			int index = geometry.getName().lastIndexOf('/');
 			int dotIndex = geometry.getName().lastIndexOf('.');
 			String name = geometry.getName().substring(index + 1, dotIndex).toUpperCase();
 			if (childNumber > 0)

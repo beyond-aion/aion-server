@@ -101,7 +101,7 @@ public class GeoMap extends Node {
 		int i = 0;
 
 		if (child instanceof DoorGeometry) {
-			int index = child.getName().lastIndexOf('\\');
+			int index = child.getName().lastIndexOf('/');
 			String meshFileName = child.getName().substring(index + 1).toLowerCase();
 			doors.computeIfAbsent(meshFileName, (k) -> new ArrayList<>()).add((DoorGeometry) child);
 		}

@@ -34,7 +34,6 @@ public class RealGeoData implements GeoData {
 		Map<String, Node> models = loadMeshes();
 		loadWorldMaps(models);
 		models.clear();
-		models = null;
 		log.info("Geodata: " + geoMaps.size() + " geo maps loaded!");
 	}
 
@@ -42,13 +41,12 @@ public class RealGeoData implements GeoData {
 		log.info("Loading geo maps..");
 		ConsoleUtil.initAndPrintProgressBar(DataManager.WORLD_MAPS_DATA.size());
 		Set<String> missingMeshes = new HashSet<>();
-		List<String> missingDoors = new ArrayList<>();
 		List<Integer> missingGeos = new ArrayList<>();
 
 		for (WorldMapTemplate map : DataManager.WORLD_MAPS_DATA) {
 			GeoMap geoMap = new GeoMap(Integer.toString(map.getMapId()), map.getWorldSize());
 
-			if (GeoWorldLoader.loadWorld(map.getMapId(), models, geoMap, missingMeshes, missingDoors)) {
+			if (GeoWorldLoader.loadWorld(map.getMapId(), models, geoMap, missingMeshes)) {
 				geoMaps.put(map.getMapId(), geoMap);
 			} else {
 				if (map.getWorldSize() != 0) // don't warn about maps with size 0 (test maps which cannot be entered)
@@ -60,15 +58,13 @@ public class RealGeoData implements GeoData {
 
 		if (missingMeshes.size() > 0)
 			log.warn(missingMeshes.size() + " meshes are missing:\n" + missingMeshes.stream().sorted().collect(Collectors.joining("\n")));
-		if (missingDoors.size() > 0)
-			log.warn(missingDoors.size() + " door templates are missing:\n" + missingDoors.stream().sorted().collect(Collectors.joining("\n")));
 		if (missingGeos.size() > 0)
 			log.warn(missingGeos.size() + " maps are missing and reverted to dummy implementation:\n" + missingGeos);
 	}
 
 	protected Map<String, Node> loadMeshes() {
 		log.info("Loading meshes..");
-		Map<String, Node> models = null;
+		Map<String, Node> models;
 		try {
 			models = GeoWorldLoader.loadMeshes("data/geo/models/geo.mesh");
 		} catch (IOException e) {

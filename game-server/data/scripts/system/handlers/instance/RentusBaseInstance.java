@@ -185,8 +185,9 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 	}
 
 	private void deleteNpc(int npcId) {
-		if (getNpc(npcId) != null && !getNpc(npcId).isDead())
-			getNpc(npcId).getController().delete();
+		Npc npc = getNpc(npcId);
+		if (npc != null && !npc.isDead())
+			npc.getController().delete();
 	}
 
 	private boolean isDeadNpc(int npcId) {
@@ -216,7 +217,9 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 				spawn(217310, 354.53f, 596.26f, 148.298f, (byte) 100);
 			else
 				spawn(217309, 354.53f, 596.26f, 148.298f, (byte) 100);
-			getNpc(856015).getController().die(npc);
+			Npc drakanBarricade = getNpc(856015);
+			if (drakanBarricade != null)
+				drakanBarricade.getController().die(npc);
 			despawnNpc(npc);
 		}
 	}
