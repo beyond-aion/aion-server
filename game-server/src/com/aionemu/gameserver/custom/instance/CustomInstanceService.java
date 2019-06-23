@@ -8,6 +8,7 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+import com.mysql.fabric.Server;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -42,7 +43,8 @@ public class CustomInstanceService {
 	}
 
 	public boolean canEnter(int playerId) {
-		return getPlayerRankObject(playerId).getLastEntry() < ServerTime.now().with(LocalTime.of(9, 0)).toEpochSecond() * 1000;
+		long reUseTime = ServerTime.now().with(LocalTime.of(9, 0)).toEpochSecond() * 1000;
+		return getPlayerRankObject(playerId).getLastEntry() < (ServerTime.now().getHour() > 9 ? reUseTime : reUseTime - 86400000);
 	}
 
 	public void onEnter(Player player) {

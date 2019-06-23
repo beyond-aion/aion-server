@@ -38,7 +38,7 @@ public class CustomInstance extends AdminCommand {
 			case "removecd":
 				if (player.getTarget() instanceof Player) {
 					if (CustomInstanceService.getInstance().updateLastEntry(player.getObjectId(),
-						ServerTime.now().with(LocalTime.of(8, 0)).toEpochSecond() * 1000))
+						ServerTime.now().with(LocalTime.of(8, 0)).toEpochSecond() * 1000 - 86400000))
 						PacketSendUtility.sendMessage(player, "Successfully removed custom instance cooldown for " + player.getTarget().getName());
 				} else {
 					PacketSendUtility.sendMessage(player, "Please select a player first.");
@@ -69,7 +69,7 @@ public class CustomInstance extends AdminCommand {
 	}
 
 	private void setNewRank(Player player, String newRank) {
-		int rank = 0;
+		int rank;
 		try {
 			rank = Integer.parseInt(newRank);
 		} catch (NumberFormatException e) {
