@@ -62,7 +62,10 @@ public class CustomInstanceService {
 	}
 
 	public CustomInstanceRank getPlayerRankObject(int playerId) {
-		return DAOManager.getDAO(CustomInstanceDAO.class).loadPlayerRankObject(playerId);
+		CustomInstanceRank customInstanceRank = DAOManager.getDAO(CustomInstanceDAO.class).loadPlayerRankObject(playerId);
+		if (customInstanceRank == null)
+			customInstanceRank = new CustomInstanceRank(playerId, 0, System.currentTimeMillis());
+		return customInstanceRank;
 	}
 
 	public boolean updateLastEntry(int playerId, long newEntryTime) {

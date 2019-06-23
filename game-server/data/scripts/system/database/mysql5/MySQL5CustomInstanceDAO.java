@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.time.LocalTime;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -14,7 +13,6 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.custom.instance.CustomInstanceRank;
 import com.aionemu.gameserver.dao.CustomInstanceDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
-import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author Jo, Estrayl
@@ -30,13 +28,12 @@ public class MySQL5CustomInstanceDAO extends CustomInstanceDAO {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, playerId);
 			ResultSet rset = stmt.executeQuery();
-			while (rset.next())
+			if (rset.next())
 				return new CustomInstanceRank(playerId, rset.getInt("rank"), rset.getTimestamp("last_entry").getTime());
-			return new CustomInstanceRank(playerId, 0, ServerTime.now().with(LocalTime.of(1, 0)).toEpochSecond() * 1000);
 		} catch (SQLException e) {
 			log.error("[CUSTOM_INSTANCE] Error loading rank object on player id " + playerId, e);
-			return null;
 		}
+		return null;
 	}
 
 	@Override
