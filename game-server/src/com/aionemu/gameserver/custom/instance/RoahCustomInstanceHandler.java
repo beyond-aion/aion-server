@@ -83,6 +83,11 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		spawn(730588, 505.2431f, 377.0414f, 93.8944f, (byte) 30, 33); // Exit
 	}
 
+	@Override
+	public void onInstanceDestroy() {
+		cancelAllTasks();
+	}
+
 	private void spawnRings() {
 		// transparent entry gate
 		FlyRing f1 = new FlyRing(new FlyRingTemplate("ROAH_WING_1", mapId, new Point3D(501.77, 409.53, 94.12), new Point3D(503.93, 409.65, 98.9),
@@ -271,8 +276,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
 		if (DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId) != null)
 			DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId).clear();
-		int index = 0;
-		dropItems.add(DropRegistrationService.getInstance().regDropItem(index++, playerId, npcObjId, REWARD_COIN_ID, getRewardCoinAmount(rank)));
+		dropItems.add(DropRegistrationService.getInstance().regDropItem(0, playerId, npcObjId, REWARD_COIN_ID, getRewardCoinAmount(rank)));
 	}
 
 	private int getRewardCoinAmount(int rank) {
@@ -405,6 +409,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			despawnNpcs(BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID);
 		} else {
 			PacketSendUtility.sendMessage(player, "You shall not pass!", ChatType.BRIGHT_YELLOW_CENTER);
+			cancelAllTasks();
 			despawnNpcs(CENTER_ARTIFACT_ID, TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
 		}
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 0));
