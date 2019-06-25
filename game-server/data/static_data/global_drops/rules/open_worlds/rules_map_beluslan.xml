@@ -171,7 +171,7 @@
 			<gd_item id="102000466"/><!-- Brhekman's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" chance="25">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="30">
 		<gd_maps>
 			<gd_map map_id="220040000"/><!-- Beluslan -->
 		</gd_maps>
@@ -444,6 +444,20 @@
 			<gd_item id="113300674"/><!-- Aarien's Breeches -->
 			<gd_item id="113500647"/><!-- Aarien's Chausses -->
 			<gd_item id="113600622"/><!-- Aarien's Greaves -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="33">
+		<gd_maps>
+			<gd_map map_id="220040000"/><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213747"/><!-- Queen Alukina -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100731"/><!-- Deep Sea Tunic -->
+			<gd_item id="110300693"/><!-- Deep Sea Jerkin -->
+			<gd_item id="110500670"/><!-- Deep Sea Hauberk -->
+			<gd_item id="110600656"/><!-- Deep Sea Breastplate -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Legend)" chance="33">
