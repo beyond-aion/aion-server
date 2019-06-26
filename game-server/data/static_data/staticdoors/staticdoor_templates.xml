@@ -151,12 +151,12 @@
 		<staticdoor keyid="185000086" doorid="295" x="1071.23621" y="651.2884" z="120.901917" mesh="door_temple2.cga" state="0xA"/>
 	</world>
 	<world world="300170000">
-		<staticdoor doorid="406" x="1333.97" y="467.6064" z="242.47" mesh="idcatacombs_door_open.cga" state="0x4"/>
-		<staticdoor doorid="466" x="1082.86646" y="82.61337" z="237.6659" mesh="slim_door_01.cga" state="0x4"/>
+		<staticdoor doorid="406" x="1333.97" y="462.87634" z="242.58633" mesh="idcatacombs_door_open.cga" state="0x4"/>
+		<staticdoor doorid="466" x="1082.8665" y="86.99911" z="233.79099" mesh="slim_door_01.cga" state="0x4"/>
 		<staticdoor keyid="1" doorid="467" x="980.175842" y="167.3317" z="245.154709" mesh="mangja_door_01.cga" state="0x4"/>
-		<staticdoor keyid="1" doorid="470" x="1304.60767" y="288.1092" z="246.622528" mesh="idcatacombs_door_close.cga" state="0x8"/>
-		<staticdoor keyid="1" doorid="471" x="1356.732" y="133.362579" z="247.752869" mesh="idcatacombs_door_close.cga" state="0x8"/>
-		<staticdoor keyid="1" doorid="473" x="1215.195" y="679.2901" z="252.303543" mesh="idcatacombs_door_close.cga" state="0x8"/>
+		<staticdoor keyid="1" doorid="470" x="1304.6678" y="288.17645" z="246.66255" mesh="idcatacombs_door_close.cga" state="0x8"/>
+		<staticdoor keyid="1" doorid="471" x="1356.7993" y="133.30238" z="247.7929" mesh="idcatacombs_door_close.cga" state="0x8"/>
+		<staticdoor keyid="1" doorid="473" x="1215.2622" y="679.2299" z="252.34357" mesh="idcatacombs_door_close.cga" state="0x8"/>
 		<staticdoor keyid="185000096" doorid="531" x="1584.85388" y="1435.14221" z="304.990265" mesh="idcatacombs_door_12.cga" state="0xA"/>
 		<staticdoor keyid="185000093" doorid="532" x="1455.74023" y="1532.30444" z="304.990265" mesh="idcatacombs_door_12.cga" state="0xA"/>
 		<staticdoor keyid="185000092" doorid="533" x="1400.67969" y="1325.54028" z="307.562042" mesh="idcatacombs_door_11.cga" state="0xA"/>
