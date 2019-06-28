@@ -50,7 +50,7 @@ public class SM_INVENTORY_ADD_ITEM extends AionServerPacket {
 
 		ItemInfoBlob.getFullBlob(player, item).writeMe(getBuf());
 
-		writeH(-1);
+		writeH((int) (item.getEquipmentSlot() & 0xFFFF));
 		writeC(item.getItemTemplate().isCloth() ? 1 : 0);
 	}
 }

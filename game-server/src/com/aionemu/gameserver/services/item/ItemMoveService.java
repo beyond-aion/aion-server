@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.IStorage;
-import com.aionemu.gameserver.model.items.storage.ItemStorage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.services.LegionService;
@@ -75,7 +74,7 @@ public class ItemMoveService {
 		if (!targetStorage.isFull() && item.getItemCount() > 0) {
 			sourceStorage.remove(item);
 			sendItemDeletePacket(player, StorageType.getStorageTypeById(sourceStorageType), item, ItemDeleteType.MOVE);
-			item.setEquipmentSlot(ItemStorage.FIRST_AVAILABLE_SLOT);
+			item.setEquipmentSlot(slot);
 			targetStorage.add(item);
 		}
 	}
