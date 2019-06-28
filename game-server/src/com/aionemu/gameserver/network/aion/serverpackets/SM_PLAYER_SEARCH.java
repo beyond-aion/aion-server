@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import static com.aionemu.gameserver.network.aion.serverpackets.AbstractPlayerInfoPacket.CHARNAME_MAX_LENGTH;
+
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
@@ -41,7 +43,7 @@ public class SM_PLAYER_SEARCH extends AionServerPacket {
 			writeC(player.getGender().getGenderId());
 			writeC(player.getLevel());
 			writeC(player.getPlayerSettings().isInDeniedStatus(DeniedStatus.GROUP) ? 1 : player.isInTeam() ? 3 : player.isLookingForGroup() ? 2 : 0);
-			writeS(ChatUtil.toFactionPrefixedName(activePlayer, player), 56);
+			writeS(ChatUtil.toFactionPrefixedName(activePlayer, player), CHARNAME_MAX_LENGTH + 2);
 		}
 	}
 }

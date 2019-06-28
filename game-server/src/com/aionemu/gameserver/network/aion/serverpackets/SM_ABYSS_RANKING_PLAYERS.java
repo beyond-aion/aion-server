@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import static com.aionemu.gameserver.network.aion.serverpackets.AbstractPlayerInfoPacket.CHARNAME_MAX_LENGTH;
+
 import java.util.Collections;
 import java.util.List;
 
@@ -57,8 +59,8 @@ public class SM_ABYSS_RANKING_PLAYERS extends AionServerPacket {
 			writeQ(rs.getPlayerAP());// Abyss Points
 			writeD(rs.getPlayerGP());// Glory Points
 			writeH(rs.getPlayerLevel());
-			writeS(rs.getPlayerName(), 52);// Two strings actually: player name + server name suffix (eg., SL for FastTrack)
-			writeS(rs.getLegionName(), 86);// Legion Name
+			writeS(rs.getPlayerName(), CHARNAME_MAX_LENGTH);// Two strings actually: player name + server name suffix (eg., SL for FastTrack)
+			writeS(rs.getLegionName(), 42);// Legion Name
 		}
 	}
 }

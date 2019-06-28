@@ -3,12 +3,10 @@ package com.aionemu.gameserver.model.team.legion;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Collection;
-import java.util.Comparator;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map.Entry;
-import java.util.SortedSet;
 import java.util.TreeMap;
-import java.util.TreeSet;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -39,7 +37,7 @@ public class Legion extends AionObject {
 	private TreeMap<Timestamp, String> announcementList = new TreeMap<>();
 	private LegionEmblem legionEmblem = new LegionEmblem();
 	private LegionWarehouse legionWarehouse;
-	private SortedSet<LegionHistory> legionHistory;
+	private final List<LegionHistory> legionHistory = new ArrayList<>();
 	private AtomicBoolean hasBonus = new AtomicBoolean(false);
 	private int occupiedLegionDominion = 0;
 	private int currentLegionDominion = 0;
@@ -49,7 +47,6 @@ public class Legion extends AionObject {
 		super(legionId);
 		this.legionName = legionName;
 		this.legionWarehouse = new LegionWarehouse(this);
-		this.legionHistory = new TreeSet<>(Comparator.comparing(LegionHistory::getTime).reversed());
 	}
 
 	public int getLegionId() {
@@ -470,24 +467,24 @@ public class Legion extends AionObject {
 		return getLegionLevel() - 1;
 	}
 
-	/**
-	 * @return the legionHistory
-	 */
-	public Collection<LegionHistory> getLegionHistory() {
-		return legionHistory;
-	}
-
-	public Collection<LegionHistory> getLegionHistoryByTabId(int tabType) {
-		if (legionHistory.isEmpty())
-			return legionHistory;
-		return legionHistory.stream().filter(h -> h.getTabId() == tabType).collect(Collectors.toList());
+	public List<LegionHistory> getLegionHistoryByTabId(int tabType) {
+		synchronized (legionHistory) {
+			if (legionHistory.isEmpty())
+				return Collections.emptyList();
+			return legionHistory.stream().filter(h -> h.getTabId() == tabType).collect(Collectors.toList());
+		}
 	}
 
 	/**
-	 * @param history
+	 * Adds history entries sorted descending by their timestamps.
 	 */
 	public void addHistory(LegionHistory history) {
-		this.legionHistory.add(history);
+		synchronized (legionHistory) {
+			int index = 0;
+			while (index < legionHistory.size() && history.getTime().before(legionHistory.get(index).getTime()))
+				index++;
+			legionHistory.add(index, history);
+		}
 	}
 
 	public void addBonus() {

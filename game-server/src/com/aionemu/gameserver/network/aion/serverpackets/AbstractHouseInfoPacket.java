@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import static com.aionemu.gameserver.network.aion.serverpackets.AbstractPlayerInfoPacket.CHARNAME_MAX_LENGTH;
+
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.team.legion.LegionEmblem;
@@ -14,6 +16,7 @@ import com.aionemu.gameserver.services.LegionService;
  */
 public abstract class AbstractHouseInfoPacket extends AionServerPacket {
 
+	public static final int SIGN_NOTICE_MAX_LENGTH = 64;
 	protected final House house;
 
 	protected AbstractHouseInfoPacket(House house) {
@@ -33,12 +36,12 @@ public abstract class AbstractHouseInfoPacket extends AionServerPacket {
 		writeC(house.getHouseOwnerStates());
 		writeC(house.getDoorState().getId());
 
-		writeS(house.getOwnerName(), 52);
+		writeS(house.getOwnerName(), CHARNAME_MAX_LENGTH);
 
 		writeD(member == null ? 0 : member.getLegion().getLegionId());
 
 		writeC(house.isShowOwnerName() ? 1 : 0);
-		writeS(house.getSignNotice());
+		writeS(house.getSignNotice(), SIGN_NOTICE_MAX_LENGTH); // client can display much longer strings but then decor won't show
 
 		writePartData(house, PartType.ROOF, 0, true);
 		writePartData(house, PartType.OUTWALL, 0, true);

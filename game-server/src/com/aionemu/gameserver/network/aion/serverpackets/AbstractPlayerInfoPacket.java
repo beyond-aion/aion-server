@@ -21,6 +21,11 @@ import com.aionemu.gameserver.services.BrokerService;
  */
 public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 
+	/**
+	 * The maximum number of characters the client can display. The client expects a fixed size text buffer in various packets. 
+	 */
+	public static final int CHARNAME_MAX_LENGTH = 25;
+
 	protected void writePlayerInfo(PlayerAccountData accPlData) {
 		PlayerCommonData pcd = accPlData.getPlayerCommonData();
 		int playerId = pcd.getPlayerObjId();
@@ -37,7 +42,7 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		}
 
 		writeD(playerId);
-		writeS(pcd.getName(), 52);
+		writeS(pcd.getName(), CHARNAME_MAX_LENGTH);
 		writeD(pcd.getGender().getGenderId());
 		writeD(pcd.getRace().getRaceId());
 		writeD(pcd.getPlayerClass().getClassId());
@@ -110,7 +115,7 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		writeH(0); // unk 2.5
 		writeD(pcd.getTitleId());
 		writeD(accPlData.isLegionMember() ? accPlData.getLegion().getLegionId() : 0);
-		writeS(accPlData.isLegionMember() ? accPlData.getLegion().getName() : "", 82);
+		writeS(accPlData.isLegionMember() ? accPlData.getLegion().getName() : null, 40);
 		writeH(accPlData.isLegionMember() ? 1 : 0);
 		writeD(pcd.getLastOnlineEpochSeconds());
 		for (int i = 0; i < 16; i++) { // 16 items is always expected by the client...

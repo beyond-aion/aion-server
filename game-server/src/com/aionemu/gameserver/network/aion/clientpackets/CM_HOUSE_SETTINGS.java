@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import static com.aionemu.gameserver.network.aion.serverpackets.AbstractHouseInfoPacket.SIGN_NOTICE_MAX_LENGTH;
+
 import java.util.Set;
 
 import org.slf4j.LoggerFactory;
@@ -39,9 +41,9 @@ public class CM_HOUSE_SETTINGS extends AionClientPacket {
 		if (player == null)
 			return;
 
-		if (signNotice.length() > 64) { // client limits sign notices to 64 chars but technically it supports more
+		if (signNotice.length() > SIGN_NOTICE_MAX_LENGTH) { // client limits sign notices to 64 chars but technically it supports more
 			AuditLogger.log(player, "sent string with more than 64 chars for house notice: " + signNotice);
-			signNotice = signNotice.substring(0, 64);
+			signNotice = signNotice.substring(0, SIGN_NOTICE_MAX_LENGTH);
 		}
 		HouseDoorState doorState = HouseDoorState.get(this.doorState);
 		House house = player.getActiveHouse();

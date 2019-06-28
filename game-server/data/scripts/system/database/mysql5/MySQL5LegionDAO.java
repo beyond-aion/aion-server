@@ -5,7 +5,6 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
-import java.util.Collection;
 import java.util.TreeMap;
 
 import org.slf4j.Logger;
@@ -445,25 +444,16 @@ public class MySQL5LegionDAO extends LegionDAO {
 	}
 
 	@Override
-	public void loadLegionHistory(final Legion legion) {
-
-		final Collection<LegionHistory> history = legion.getLegionHistory();
-
-		DB.select(SELECT_HISTORY_QUERY, new ParamReadStH() {
-
-			@Override
-			public void setParams(PreparedStatement stmt) throws SQLException {
-				stmt.setInt(1, legion.getLegionId());
-			}
-
-			@Override
-			public void handleRead(ResultSet resultSet) throws SQLException {
-				while (resultSet.next()) {
-					history.add(new LegionHistory(LegionHistoryType.valueOf(resultSet.getString("history_type")), resultSet.getString("name"),
+	public void loadLegionHistory(Legion legion) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_HISTORY_QUERY)) {
+			stmt.setInt(1, legion.getLegionId());
+			ResultSet resultSet = stmt.executeQuery();
+			while (resultSet.next())
+				legion.addHistory(new LegionHistory(LegionHistoryType.valueOf(resultSet.getString("history_type")), resultSet.getString("name"),
 						resultSet.getTimestamp("date"), resultSet.getInt("tab_id"), resultSet.getString("description")));
-				}
-			}
-		});
+		} catch (Exception e) {
+			log.error("Error loading legion history of " + legion, e);
+		}
 	}
 
 	@Override

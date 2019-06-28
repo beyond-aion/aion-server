@@ -8,10 +8,10 @@ import java.sql.Timestamp;
 public class LegionHistory {
 
 	private LegionHistoryType legionHistoryType;
-	private String name = "";
+	private String name;
 	private Timestamp time;
 	private int tabId;
-	private String description = "";
+	private String description;
 
 	public LegionHistory(LegionHistoryType legionHistoryType, String name, Timestamp time, int tabId, String description) {
 		this.legionHistoryType = legionHistoryType;

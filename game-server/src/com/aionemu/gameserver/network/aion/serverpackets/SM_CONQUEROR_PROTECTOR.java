@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import static com.aionemu.gameserver.network.aion.serverpackets.AbstractPlayerInfoPacket.CHARNAME_MAX_LENGTH;
+
 import java.util.Collection;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -67,7 +69,7 @@ public class SM_CONQUEROR_PROTECTOR extends AionServerPacket {
 					writeH(player.getLevel());
 					writeF(player.getX());
 					writeF(player.getY());
-					writeS(player.getName(true), 52);
+					writeS(player.getName(true), CHARNAME_MAX_LENGTH);
 					writeB(new byte[66]); // unk
 					writeD(1941); // unk
 					writeD(1942); // unk

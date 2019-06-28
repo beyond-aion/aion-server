@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -49,10 +49,7 @@ public class CM_LEGION_TABS extends AionClientPacket {
 						break;
 				case 0: // legion history
 				case 2: // legion WH history
-					Collection<LegionHistory> history = activePlayer.getLegion().getLegionHistoryByTabId(tab);
-					// If history size is lesser than page*8 return
-					if (history.size() < page * 8)
-						return;
+					List<LegionHistory> history = activePlayer.getLegion().getLegionHistoryByTabId(tab);
 					if (!history.isEmpty())
 						PacketSendUtility.sendPacket(activePlayer, new SM_LEGION_TABS(history, page, tab));
 					break;

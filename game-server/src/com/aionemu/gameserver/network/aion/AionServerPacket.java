@@ -70,19 +70,18 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	}
 
 	/**
-	 * Write String to buffer
-	 * 
-	 * @param text
-	 * @param size
+	 * Write string to buffer with a fixed length. Characters exceeding fixedLength will be truncated. Missing ones will be zero-padded.
+	 * The number of written bytes to the buffer is fixedLength * 2 + 2. The additional two bytes are the terminating (zero) char which the client
+	 * always requires. One could actually populate that last char normally and it would be displayed on client side, but then following data may get
+	 * corrupted.
 	 */
-	protected final void writeS(String text, int size) {
-		if (text == null) {
-			buf.put(new byte[size]);
+	protected final void writeS(String text, int fixedLength) {
+		if (text == null || text.isEmpty()) {
+			buf.put(new byte[(fixedLength + 1) * 2]);
 		} else {
-			final int len = text.length();
-			for (int i = 0; i < len; i++)
-				buf.putChar(text.charAt(i));
-			buf.put(new byte[size - (len * 2)]);
+			for (int i = 0; i < fixedLength; i++)
+				buf.putChar(i < text.length() ? text.charAt(i) : '\000');
+			buf.putChar('\000');
 		}
 	}
 

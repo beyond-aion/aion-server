@@ -16,7 +16,7 @@ public class SM_SECURITY_TOKEN_REQUEST_STATUS extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeS(token, 64);
+		writeS(token, 32);
 	}
 
 }

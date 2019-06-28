@@ -46,7 +46,7 @@ public class SM_ABYSS_RANKING_LEGIONS extends AionServerPacket {
 			writeC(rs.getLegionLevel());// Legion Level
 			writeD(rs.getLegionMembers());// Legion Members
 			writeQ(rs.getLegionCP());// Contribution Points
-			writeS(rs.getLegionName(), 82);// Legion Name
+			writeS(rs.getLegionName(), 40);// Legion Name
 		}
 	}
 }
