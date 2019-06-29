@@ -88,7 +88,7 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 			DecorateAction decorateAction = template.getActions().getDecorateAction();
 			if (decorateAction != null) {
 				HouseDecoration decor = new HouseDecoration(IDFactory.getInstance().nextId(), decorateAction.getTemplateId());
-				house.getRegistry().putCustomPart(decor);
+				house.getRegistry().putDecor(decor);
 				sendPacket(new SM_HOUSE_EDIT(action, 2, decor.getObjectId()));
 			} else {
 				HouseObject<?> obj = HouseObjectFactory.createNew(house, template);

@@ -1,16 +1,11 @@
 package com.aionemu.gameserver.model.templates.housing;
 
-import java.util.HashSet;
-import java.util.List;
 import java.util.Set;
 
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 
@@ -18,61 +13,46 @@ import com.aionemu.gameserver.model.templates.item.ItemQuality;
  * @author Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "")
 @XmlRootElement(name = "house_part")
 public class HousePart {
 
-	@XmlAttribute(name = "building_tags", required = true)
-	private List<String> buildingTags;
-
 	@XmlAttribute(required = true)
-	protected PartType type;
-
-	@XmlAttribute(required = true)
-	protected ItemQuality quality;
+	private int id;
 
 	@XmlAttribute
-	protected String name;
+	private String name;
 
 	@XmlAttribute(required = true)
-	protected int id;
+	private ItemQuality quality;
 
-	@XmlTransient
-	protected Set<String> tagsSet = new HashSet<>(1);
+	@XmlAttribute(required = true)
+	private PartType type;
 
-	void afterUnmarshal(Unmarshaller u, Object parent) {
-		if (buildingTags == null)
-			return;
+	@XmlAttribute(name = "building_tags", required = true)
+	private Set<String> buildingTags;
 
-		for (String tag : buildingTags)
-			tagsSet.add(tag);
-
-		buildingTags.clear();
-		buildingTags = null;
-	}
-
-	public PartType getType() {
-		return type;
-	}
-
-	public ItemQuality getQuality() {
-		return quality;
+	public int getId() {
+		return id;
 	}
 
 	public String getName() {
 		return name;
 	}
 
-	public int getId() {
-		return id;
+	public ItemQuality getQuality() {
+		return quality;
+	}
+
+	public PartType getType() {
+		return type;
 	}
 
 	public Set<String> getTags() {
-		return tagsSet;
+		return buildingTags;
 	}
 
 	public boolean isForBuilding(Building building) {
-		return tagsSet.contains(building.getPartsMatchTag());
+		return buildingTags.contains(building.getPartsMatchTag());
 	}
 
 }

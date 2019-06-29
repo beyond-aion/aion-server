@@ -15,16 +15,23 @@ public enum PartType {
 	DOOR(4, 4),
 	GARDEN(5, 5),
 	FENCE(6, 6),
+	// 7 is unused
 	INWALL_ANY(8, 13),
 	INFLOOR_ANY(14, 19),
+	// 20 - 26 is unknown, sometimes sent in CM_HOUSE_DECORATE (lineNo)
 	ADDON(27, 27);
+	// 28 - 29 is unknown, sometimes sent in CM_HOUSE_DECORATE (lineNo)
 
 	private int lineNrStart;
 	private int lineNrEnd;
 
-	private PartType(int packetLineStart, int packetLineEnd) {
+	PartType(int packetLineStart, int packetLineEnd) {
 		this.lineNrStart = packetLineStart;
 		this.lineNrEnd = packetLineEnd;
+	}
+
+	public int getRooms() {
+		return lineNrEnd - lineNrStart + 1;
 	}
 
 	public int getStartLineNr() {

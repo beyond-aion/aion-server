@@ -50,8 +50,8 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 			int templateId;
 			int typeId = 0;
 			if (obj == null) {
-				HouseDecoration deco = house.getRegistry().getCustomPartByObjId(itemObjectId);
-				templateId = deco.getTemplate().getId();
+				HouseDecoration deco = house.getRegistry().getDecorByObjId(itemObjectId);
+				templateId = deco.getTemplateId();
 			} else {
 				templateId = obj.getObjectTemplate().getTemplateId();
 				typeId = obj.getObjectTemplate().getTypeId();

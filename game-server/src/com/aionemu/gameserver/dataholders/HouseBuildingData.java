@@ -21,19 +21,19 @@ import com.aionemu.gameserver.model.templates.housing.Building;
 public class HouseBuildingData {
 
 	@XmlElement(name = "building")
-	protected List<Building> buildings;
+	private List<Building> buildings;
 
 	@XmlTransient
-	Map<Integer, Building> buildingById = new HashMap<>();
+	private Map<Integer, Building> buildingById = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (buildings == null)
 			return;
 
-		for (Building building : buildings)
-			buildingById.put(building.getId(), building);
-
-		buildings.clear();
+		for (Building building : buildings) {
+			if (buildingById.put(building.getId(), building) != null)
+				throw new IllegalArgumentException("Duplicate building ID " + building.getId());
+		}
 		buildings = null;
 	}
 

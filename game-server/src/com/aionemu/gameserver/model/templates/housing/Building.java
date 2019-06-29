@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.model.templates.housing;
 
-import java.util.HashMap;
+import java.util.ArrayList;
+import java.util.EnumMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
@@ -39,11 +41,12 @@ public class Building {
 	private BuildingType type;
 
 	@XmlTransient
-	private Map<PartType, Integer> partsByType = new HashMap<>();
+	private Map<PartType, Integer> partsByType;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (parts == null)
 			return;
+		partsByType = new EnumMap<>(PartType.class);
 		if (parts.getDoor() != 0)
 			partsByType.put(PartType.DOOR, parts.getDoor());
 		if (parts.getFence() != null)
@@ -91,8 +94,17 @@ public class Building {
 		return type;
 	}
 
-	public Integer getDefaultPartId(PartType partType) {
-		return DataManager.HOUSE_BUILDING_DATA.getBuilding(id).partsByType.get(partType);
+	public Integer getDefaultDecorId(PartType partType) {
+		return getPartsByType().get(partType);
 	}
 
+	public List<Integer> getDefaultPartIds() {
+		return new ArrayList<>(getPartsByType().values());
+	}
+
+	private Map<PartType, Integer> getPartsByType() {
+		if (partsByType == null)
+			return DataManager.HOUSE_BUILDING_DATA.getBuilding(id).partsByType;
+		return partsByType;
+	}
 }

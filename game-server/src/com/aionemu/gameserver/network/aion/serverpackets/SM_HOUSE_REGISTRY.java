@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.List;
+
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.UseableItemObject;
@@ -51,14 +53,16 @@ public class SM_HOUSE_REGISTRY extends AionServerPacket {
 				}
 			}
 		} else if (action == 2) { // Display default and registered decoration items
-			writeH(houseRegistry.getDefaultParts().size() + houseRegistry.getCustomParts().size());
-			for (HouseDecoration deco : houseRegistry.getDefaultParts()) {
+			List<Integer> defaultDecorIds = houseRegistry.getOwner().getBuilding().getDefaultPartIds();
+			List<HouseDecoration> unusedDecors = houseRegistry.getUnusedDecors();
+			writeH(defaultDecorIds.size() + unusedDecors.size());
+			for (Integer defaultPartId : defaultDecorIds) {
 				writeD(0);
-				writeD(deco.getTemplate().getId());
+				writeD(defaultPartId);
 			}
-			for (HouseDecoration houseDecor : houseRegistry.getCustomParts()) {
+			for (HouseDecoration houseDecor : unusedDecors) {
 				writeD(houseDecor.getObjectId());
-				writeD(houseDecor.getTemplate().getId());
+				writeD(houseDecor.getTemplateId());
 			}
 		}
 	}

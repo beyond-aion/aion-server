@@ -5,9 +5,7 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Types;
-import java.util.ArrayList;
 import java.util.Collection;
-import java.util.HashMap;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -15,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
@@ -25,7 +22,6 @@ import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
-import com.aionemu.gameserver.model.templates.housing.PartType;
 import com.aionemu.gameserver.services.item.HouseObjectFactory;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
@@ -72,42 +68,16 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, registry.getOwner().getOwnerId());
 			try (ResultSet rset = stmt.executeQuery()) {
-				HashMap<PartType, List<HouseDecoration>> usedParts = new HashMap<>();
 				while (rset.next()) {
 					String area = rset.getString("area");
 					if ("DECOR".equals(area)) {
-						HouseDecoration dec = createDecoration(rset);
-						if (!dec.getTemplate().isForBuilding(registry.getOwner().getBuilding()))
-							continue;
-						dec.setPersistentState(PersistentState.UPDATED);
-						if (dec.isUsed()) {
-							if (registry.getOwner().getHouseType() != HouseType.PALACE && dec.getRoom() > 0)
-								dec.setRoom(0);
-							usedParts.computeIfAbsent(dec.getTemplate().getType(), k -> new ArrayList<>()).add(dec);
-						}
-						registry.putCustomPart(dec);
+						registry.putDecor(createDecoration(registry, rset));
 					} else {
-						HouseObject<?> obj = constructObject(registry, rset);
-						obj.setPersistentState(PersistentState.UPDATED);
-						registry.putObject(obj);
+						registry.putObject(constructObject(registry, rset));
 					}
 				}
-				for (PartType partType : PartType.values()) {
-					if (usedParts.containsKey(partType)) {
-						for (HouseDecoration usedDeco : usedParts.get(partType))
-							registry.setPartInUse(usedDeco, usedDeco.getRoom());
-						continue;
-					}
-					int roomCount = 1;
-					if (registry.getOwner().getHouseType() == HouseType.PALACE && (partType == PartType.INFLOOR_ANY || partType == PartType.INWALL_ANY))
-						roomCount = 6;
-					for (int i = 0; i < roomCount; i++) {
-						HouseDecoration def = registry.getDefaultPartByType(partType, i);
-						if (def != null)
-							registry.setPartInUse(def, i);
-					}
-				}
-				registry.setPersistentState(PersistentState.UPDATED);
+				boolean hasInvalidDecors = registry.getDecors().stream().anyMatch(decor -> decor.getPersistentState() == PersistentState.DELETED);
+				registry.setPersistentState(hasInvalidDecors ? PersistentState.UPDATE_REQUIRED : PersistentState.UPDATED);
 			}
 		} catch (Exception e) {
 			log.error("Could not load house registry data for player " + registry.getOwner().getOwnerId(), e);
@@ -139,41 +109,47 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		obj.setColorExpireEnd(rset.getInt("color_expires"));
 		if (obj.getObjectTemplate().getUseDays() > 0)
 			obj.setExpireTime(rset.getInt("expire_time"));
+		obj.setPersistentState(PersistentState.UPDATED);
 		return obj;
 	}
 
-	private HouseDecoration createDecoration(ResultSet rset) throws SQLException {
+	private HouseDecoration createDecoration(HouseRegistry registry, ResultSet rset) throws SQLException {
 		int itemUniqueId = rset.getInt("item_unique_id");
-		int itemId = rset.getInt("item_Id");
-		// Obsolete, rename it
+		int itemId = rset.getInt("item_id");
 		byte room = rset.getByte("room");
 		HouseDecoration decor = new HouseDecoration(itemUniqueId, itemId, room);
-		decor.setUsed(rset.getInt("owner_use_count") > 0);
+
+		if (!decor.getTemplate().isForBuilding(registry.getOwner().getBuilding())
+			|| decor.getRoom() > 0 && registry.getOwner().getHouseType() != HouseType.PALACE)
+			decor.setPersistentState(PersistentState.DELETED);
+		else
+			decor.setPersistentState(PersistentState.UPDATED);
+
 		return decor;
 	}
 
 	@Override
 	public boolean store(HouseRegistry registry, int playerId) {
 		List<HouseObject<?>> objects = registry.getObjects();
-		List<HouseDecoration> decors = registry.getAllParts();
+		List<HouseDecoration> decors = registry.getDecors();
 		List<HouseObject<?>> objectsToAdd = objects.stream().filter(Persistable.NEW).collect(Collectors.toList());
 		List<HouseObject<?>> objectsToUpdate = objects.stream().filter(Persistable.CHANGED).collect(Collectors.toList());
 		List<HouseObject<?>> objectsToDelete = objects.stream().filter(Persistable.DELETED).collect(Collectors.toList());
-		List<HouseDecoration> partsToAdd = decors.stream().filter(Persistable.NEW).collect(Collectors.toList());
-		List<HouseDecoration> partsToUpdate = decors.stream().filter(Persistable.CHANGED).collect(Collectors.toList());
-		List<HouseDecoration> partsToDelete = decors.stream().filter(Persistable.DELETED).collect(Collectors.toList());
+		List<HouseDecoration> decorsToAdd = decors.stream().filter(Persistable.NEW).collect(Collectors.toList());
+		List<HouseDecoration> decorsToUpdate = decors.stream().filter(Persistable.CHANGED).collect(Collectors.toList());
+		List<HouseDecoration> decorsToDelete = decors.stream().filter(Persistable.DELETED).collect(Collectors.toList());
 
 		boolean objectDeleteResult = false;
-		boolean partsDeleteResult = false;
+		boolean decorsDeleteResult = false;
 
 		try (Connection con = DatabaseFactory.getConnection()) {
 			con.setAutoCommit(false);
 			objectDeleteResult = deleteObjects(con, objectsToDelete);
-			partsDeleteResult = deleteParts(con, partsToDelete);
+			decorsDeleteResult = deleteDecors(con, decorsToDelete);
 			storeObjects(con, objectsToUpdate, playerId, false);
-			storeParts(con, partsToUpdate, playerId, false);
+			storeDecors(con, decorsToUpdate, playerId, false);
 			storeObjects(con, objectsToAdd, playerId, true);
-			storeParts(con, partsToAdd, playerId, true);
+			storeDecors(con, decorsToAdd, playerId, true);
 			registry.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
 			log.error("Can't save registered items for player: " + playerId, e);
@@ -188,7 +164,7 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 
 		for (HouseDecoration decor : decors) {
 			if (decor.getPersistentState() == PersistentState.DELETED)
-				registry.discardPart(decor);
+				registry.discardDecor(decor);
 			else
 				decor.setPersistentState(PersistentState.UPDATED);
 		}
@@ -196,30 +172,20 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		if (objectDeleteResult)
 			IDFactory.getInstance().releaseObjectIds(objectsToDelete);
 
-		if (partsDeleteResult)
-			IDFactory.getInstance().releaseObjectIds(partsToDelete);
+		if (decorsDeleteResult)
+			IDFactory.getInstance().releaseObjectIds(decorsToDelete);
 
 		return true;
 	}
 
 	private boolean storeObjects(Connection con, Collection<HouseObject<?>> objects, int playerId, boolean isNew) {
-
-		if (GenericValidator.isBlankOrNull(objects)) {
+		if (objects.isEmpty())
 			return true;
-		}
 
 		try (PreparedStatement stmt = con.prepareStatement(isNew ? INSERT_QUERY : UPDATE_QUERY)) {
 			for (HouseObject<?> obj : objects) {
-				if (obj.getExpireTime() > 0)
-					stmt.setInt(1, obj.getExpireTime());
-				else
-					stmt.setNull(1, Types.INTEGER);
-
-				if (obj.getColor() == null)
-					stmt.setNull(2, Types.INTEGER);
-				else
-					stmt.setInt(2, obj.getColor());
-
+				stmt.setObject(1, obj.getExpireTime() > 0 ? obj.getExpireTime() : null, Types.INTEGER);
+				stmt.setObject(2, obj.getColor(), Types.INTEGER);
 				stmt.setInt(3, obj.getColorExpireEnd());
 				stmt.setInt(4, obj.getOwnerUsedCount());
 				stmt.setInt(5, obj.getVisitorUsedCount());
@@ -247,44 +213,41 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		return true;
 	}
 
-	private boolean storeParts(Connection con, Collection<HouseDecoration> parts, int playerId, boolean isNew) {
-
-		if (GenericValidator.isBlankOrNull(parts)) {
+	private boolean storeDecors(Connection con, Collection<HouseDecoration> decors, int playerId, boolean isNew) {
+		if (decors.isEmpty())
 			return true;
-		}
 
 		try (PreparedStatement stmt = con.prepareStatement(isNew ? INSERT_QUERY : UPDATE_QUERY)) {
-			for (HouseDecoration part : parts) {
+			for (HouseDecoration decor : decors) {
 				stmt.setNull(1, Types.INTEGER);
 				stmt.setNull(2, Types.INTEGER);
 				stmt.setInt(3, 0);
-				stmt.setInt(4, part.isUsed() ? 1 : 0);
+				stmt.setInt(4, 0);
 				stmt.setInt(5, 0);
 				stmt.setFloat(6, 0);
 				stmt.setFloat(7, 0);
 				stmt.setFloat(8, 0);
 				stmt.setInt(9, 0);
 				stmt.setString(10, "DECOR");
-				stmt.setByte(11, part.getRoom());
+				stmt.setByte(11, decor.getRoom());
 				stmt.setInt(12, playerId);
-				stmt.setInt(13, part.getObjectId());
-				stmt.setInt(14, part.getTemplate().getId());
+				stmt.setInt(13, decor.getObjectId());
+				stmt.setInt(14, decor.getTemplateId());
 				stmt.addBatch();
 			}
 
 			stmt.executeBatch();
 			con.commit();
 		} catch (Exception e) {
-			log.error("Failed to execute house parts update batch", e);
+			log.error("Failed to execute house decor update batch", e);
 			return false;
 		}
 		return true;
 	}
 
 	private boolean deleteObjects(Connection con, Collection<HouseObject<?>> objects) {
-		if (GenericValidator.isBlankOrNull(objects)) {
+		if (objects.isEmpty())
 			return true;
-		}
 
 		try (PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
 			for (HouseObject<?> obj : objects) {
@@ -301,14 +264,13 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 		return true;
 	}
 
-	private boolean deleteParts(Connection con, Collection<HouseDecoration> parts) {
-		if (GenericValidator.isBlankOrNull(parts)) {
+	private boolean deleteDecors(Connection con, Collection<HouseDecoration> decors) {
+		if (decors.isEmpty())
 			return true;
-		}
 
 		try (PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
-			for (HouseDecoration part : parts) {
-				stmt.setInt(1, part.getObjectId());
+			for (HouseDecoration decor : decors) {
+				stmt.setInt(1, decor.getObjectId());
 				stmt.addBatch();
 			}
 

@@ -19,13 +19,11 @@ public class HouseRegistry implements Persistable {
 
 	private final House owner;
 	private final Map<Integer, HouseObject<?>> objects = new LinkedHashMap<>();
-	private final Map<Integer, HouseDecoration> customParts = new LinkedHashMap<>();
-	private final HouseDecoration[] defaultParts = new HouseDecoration[28];
+	private final Map<Integer, HouseDecoration> decors = new LinkedHashMap<>();
 	private PersistentState persistentState = PersistentState.UPDATED;
 
 	public HouseRegistry(House owner) {
 		this.owner = owner;
-		putDefaultParts();
 	}
 
 	public House getOwner() {
@@ -85,164 +83,66 @@ public class HouseRegistry implements Persistable {
 		return oldObject;
 	}
 
-	/**
-	 * In packets used custom parts are not included (kinda semi-deleted)
-	 */
-	public List<HouseDecoration> getCustomParts() {
+	public List<HouseDecoration> getDecors() {
+		return new ArrayList<>(decors.values());
+	}
+
+	public List<HouseDecoration> getUnusedDecors() {
 		List<HouseDecoration> temp = new ArrayList<>();
-		for (HouseDecoration decor : customParts.values()) {
-			if (decor.getPersistentState() != PersistentState.DELETED && !decor.isUsed())
+		for (HouseDecoration decor : decors.values()) {
+			if (decor.getPersistentState() != PersistentState.DELETED && decor.getRoom() == -1)
 				temp.add(decor);
 		}
 		return temp;
 	}
 
-	public HouseDecoration getCustomPartByType(PartType partType, int room) {
-		for (HouseDecoration deco : customParts.values()) {
-			if (deco.getPersistentState() != PersistentState.DELETED && deco.getTemplate().getType() == partType) {
-				if (room == deco.getRoom())
-					return deco;
-			}
-		}
-		return null;
+	public HouseDecoration getDecorByObjId(int itemObjId) {
+		return decors.get(itemObjId);
 	}
 
-	public HouseDecoration getCustomPartByObjId(int itemObjId) {
-		return customParts.get(itemObjId);
-	}
-
-	public HouseDecoration getCustomPartByPartId(int partId, int room) {
-		for (HouseDecoration deco : customParts.values()) {
-			if (deco.getPersistentState() != PersistentState.DELETED && deco.getTemplate().getId() == partId && deco.getRoom() == room) {
-				return deco;
-			}
-		}
-		return null;
-	}
-
-	public int getCustomPartCountByPartId(int partId) {
-		int counter = 0;
-		for (HouseDecoration deco : customParts.values()) {
-			if (deco.getPersistentState() != PersistentState.DELETED && deco.getTemplate().getId() == partId) {
-				counter++;
-			}
-		}
-		return counter;
-	}
-
-	public boolean putCustomPart(HouseDecoration houseDeco) {
-		if (customParts.containsKey(houseDeco.getObjectId()))
+	public boolean putDecor(HouseDecoration decor) {
+		if (decors.containsKey(decor.getObjectId()))
 			return false;
 
-		customParts.put(houseDeco.getObjectId(), houseDeco);
-		if (houseDeco.getPersistentState() != PersistentState.UPDATED)
+		decors.put(decor.getObjectId(), decor);
+		if (decor.getPersistentState() != PersistentState.UPDATED)
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 		return true;
 	}
 
-	public HouseDecoration removeCustomPart(int itemObjId) {
-		HouseDecoration obj = null;
-
-		if (customParts.containsKey(itemObjId)) {
-			obj = customParts.get(itemObjId);
-			obj.setPersistentState(PersistentState.DELETED);
-			setPersistentState(PersistentState.UPDATE_REQUIRED);
+	public Integer getUsedDecorId(PartType partType, int room) {
+		for (HouseDecoration decor : decors.values()) {
+			if (decor.getPersistentState() != PersistentState.DELETED && decor.getTemplate().getType() == partType && decor.getRoom() == room)
+				return decor.getTemplateId();
 		}
-		return obj;
+		return getOwner().getBuilding().getDefaultDecorId(partType);
 	}
 
-	public List<HouseDecoration> getDefaultParts() {
-		List<HouseDecoration> temp = new ArrayList<>();
-		for (HouseDecoration deco : defaultParts) {
-			if (deco != null)
-				temp.add(deco);
-		}
-		return temp;
-	}
-
-	/**
-	 * @return Default decoration for the part type
-	 */
-	public HouseDecoration getDefaultPartByType(PartType partType, int room) {
-		return defaultParts[partType.getStartLineNr() + room];
-	}
-
-	private void putDefaultParts() {
-		for (PartType partType : PartType.values()) {
-			Integer partId = owner.getBuilding().getDefaultPartId(partType);
-			if (partId == null)
-				continue;
-			for (int line = partType.getStartLineNr(); line <= partType.getEndLineNr(); line++) {
-				int room = partType.getEndLineNr() - line;
-				HouseDecoration decor = new HouseDecoration(0, partId, room);
-				putDefaultPart(decor, room);
-			}
-		}
-	}
-
-	private void putDefaultPart(HouseDecoration houseDeco, int room) {
-		defaultParts[houseDeco.getTemplate().getType().getStartLineNr() + room] = houseDeco;
-		houseDeco.setPersistentState(PersistentState.NOACTION);
-	}
-
-	/**
-	 * @return All decoration parts including deleted
-	 */
-	public List<HouseDecoration> getAllParts() {
-		List<HouseDecoration> temp = new ArrayList<>();
-		for (HouseDecoration deco : defaultParts) {
-			if (deco != null)
-				temp.add(deco);
-		}
-		temp.addAll(customParts.values());
-		return temp;
-	}
-
-	public HouseDecoration getRenderPart(PartType partType, int room) {
-		for (HouseDecoration decor : customParts.values()) {
-			if (decor.getTemplate().getType() == partType && decor.isUsed() && decor.getRoom() == room) {
-				return decor;
-			}
-		}
-		return getDefaultPartByType(partType, room);
-	}
-
-	public void setPartInUse(HouseDecoration decorationUse, int room) {
-		HouseDecoration defaultDecor = defaultParts[decorationUse.getTemplate().getType().getStartLineNr() + room];
-		if (defaultDecor.getTemplate().getId() == decorationUse.getTemplate().getId()) {
-			defaultDecor.setUsed(true);
-			for (HouseDecoration decor : customParts.values()) {
-				if (decor.getTemplate().getType() != decorationUse.getTemplate().getType())
-					continue;
-				if (decor.getPersistentState() == PersistentState.DELETED)
-					continue;
-				if (decor.isUsed() && decor.getRoom() == room) {
-					decor.setUsed(false);
-					decor.setRoom(-1);
-					if (decor.getPersistentState() == PersistentState.NEW)
-						discardPart(decor);
-					else
-						decor.setPersistentState(PersistentState.DELETED);
-				}
-			}
+	public void setUsed(HouseDecoration decor, int room) {
+		if (decor.getPersistentState() == PersistentState.DELETED || decor.getRoom() == room)
 			return;
+		discardDecor(decor.getTemplate().getType(), room);
+		Integer defaultPartId = getOwner().getBuilding().getDefaultDecorId(decor.getTemplate().getType());
+		if (defaultPartId == decor.getTemplateId()) {
+			decor.setPersistentState(PersistentState.DELETED);
+		} else {
+			decor.setRoom(room);
+			if (decor.getPersistentState() != PersistentState.NEW) {
+				decor.setPersistentState(PersistentState.UPDATE_REQUIRED);
+				setPersistentState(PersistentState.UPDATE_REQUIRED);
+			}
 		}
-		for (HouseDecoration decor : customParts.values()) {
-			if (decor.getTemplate().getType() != decorationUse.getTemplate().getType())
-				continue;
-			if (decor.getPersistentState() == PersistentState.DELETED)
-				continue;
-			if (decorationUse.equals(decor)) {
-				decor.setUsed(true);
-				decor.setRoom(room);
-				defaultDecor.setUsed(false);
-			} else if (decor.isUsed() && decor.getRoom() == room) {
-				decor.setUsed(false);
-				decor.setRoom(-1);
-				if (decor.getPersistentState() == PersistentState.NEW)
-					discardPart(decor);
-				else
+	}
+
+	public void discardDecor(PartType partType, int roomNo) {
+		for (HouseDecoration decor : getDecors()) {
+			if (decor.getTemplate().getType() == partType && decor.getRoom() == roomNo) {
+				if (decor.getPersistentState() == PersistentState.NEW) {
+					discardDecor(decor);
+				} else {
 					decor.setPersistentState(PersistentState.DELETED);
+					setPersistentState(PersistentState.UPDATE_REQUIRED);
+				}
 			}
 		}
 	}
@@ -251,8 +151,8 @@ public class HouseRegistry implements Persistable {
 		objects.remove(objectId);
 	}
 
-	public void discardPart(HouseDecoration decor) {
-		customParts.remove(decor.getObjectId());
+	public void discardDecor(HouseDecoration decor) {
+		decors.remove(decor.getObjectId());
 	}
 
 	/**
@@ -286,6 +186,6 @@ public class HouseRegistry implements Persistable {
 	}
 
 	public int size() {
-		return objects.size() + customParts.size();
+		return objects.size() + decors.size();
 	}
 }

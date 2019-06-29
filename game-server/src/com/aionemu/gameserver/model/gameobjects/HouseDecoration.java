@@ -8,9 +8,8 @@ import com.aionemu.gameserver.model.templates.housing.HousePart;
  */
 public class HouseDecoration extends AionObject implements Persistable {
 
-	private int templateId;
+	private final int templateId;
 	private byte room;
-	private boolean isUsed;
 	private PersistentState persistentState;
 
 	public HouseDecoration(int objectId, int templateId) {
@@ -22,6 +21,10 @@ public class HouseDecoration extends AionObject implements Persistable {
 		this.templateId = templateId;
 		this.room = (byte) room;
 		this.persistentState = PersistentState.NEW;
+	}
+
+	public int getTemplateId() {
+		return templateId;
 	}
 
 	public HousePart getTemplate() {
@@ -48,22 +51,6 @@ public class HouseDecoration extends AionObject implements Persistable {
 	}
 
 	public void setRoom(int value) {
-		if (value != room) {
-			room = (byte) value;
-			if (persistentState != PersistentState.NEW && persistentState != PersistentState.NOACTION)
-				persistentState = PersistentState.UPDATE_REQUIRED;
-		}
-	}
-
-	public boolean isUsed() {
-		return isUsed;
-	}
-
-	public void setUsed(boolean isUsed) {
-		if (this.isUsed != isUsed && persistentState != PersistentState.DELETED) {
-			this.isUsed = isUsed;
-			if (persistentState != PersistentState.NEW && persistentState != PersistentState.NOACTION)
-				persistentState = PersistentState.UPDATE_REQUIRED;
-		}
+		room = (byte) value;
 	}
 }

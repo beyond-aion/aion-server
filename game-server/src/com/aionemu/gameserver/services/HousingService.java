@@ -20,7 +20,6 @@ import com.aionemu.gameserver.dao.HousesDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -162,24 +161,6 @@ public class HousingService {
 	public House findInactiveHouse(int playerObjId) {
 		for (House house : customHouses.values()) {
 			if (house.getOwnerId() == playerObjId && house.isInactive())
-				return house;
-		}
-		return null;
-	}
-
-	public void resetAppearance(House house) {
-		List<HouseDecoration> customParts = house.getRegistry().getCustomParts();
-		for (HouseDecoration deco : customParts) {
-			deco.setPersistentState(PersistentState.DELETED);
-		}
-		for (HouseDecoration deco : customParts) {
-			house.getRegistry().removeCustomPart(deco.getObjectId());
-		}
-	}
-
-	public House getHouseByName(String houseName) {
-		for (House house : customHouses.values()) {
-			if (house.getName().equals(houseName))
 				return house;
 		}
 		return null;
