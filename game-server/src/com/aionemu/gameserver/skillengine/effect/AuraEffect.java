@@ -5,6 +5,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MANTRA_EFFECT;
@@ -31,9 +33,9 @@ public class AuraEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		final Player effector = (Player) effect.getEffector();
-		if (effector.getEffectController().findBySkillId(effect.getSkillId()) != null) {
-			AuditLogger.log(effector, "might be abusing CM_CASTSPELL mantra effect, skill id: " + effect.getSkillId());
+		Creature effector = effect.getEffector();
+		if (effector instanceof Player && effector.getEffectController().findBySkillId(effect.getSkillId()) != null) {
+			AuditLogger.log((Player) effector, "might be abusing CM_CASTSPELL mantra effect, skill id: " + effect.getSkillId());
 			return;
 		}
 		effect.addToEffectedController();
@@ -41,26 +43,31 @@ public class AuraEffect extends EffectTemplate {
 
 	@Override
 	public void onPeriodicAction(Effect effect) {
-		Player effector = (Player) effect.getEffector();
-		if (!effector.isOnline()) { // task check
-			return;
-		}
-		if (effector.isInTeam()) {
-			int rangeBoost = effector.getGameStats().getStat(StatEnum.BOOST_MANTRA_RANGE, 100).getCurrent();
-			float rangeZ = distanceZ * rangeBoost / 100f;
-			float range = distance * rangeBoost / 100f;
-			for (Player player : effector.getCurrentGroup().getOnlineMembers()) {
-				if (effector.equals(player) || Math.abs(effector.getZ() - player.getZ()) <= rangeZ && PositionUtil.isInRange(effector, player, range)) {
-					applyAuraTo(player);
-				}
-			}
-		} else {
+		Creature effector = effect.getEffector();
+		if (effector instanceof Npc) {
 			applyAuraTo(effector);
+		} else {
+			Player p = (Player) effector;
+			if (!p.isOnline()) { // task check
+				return;
+			}
+			if (p.isInTeam()) {
+				int rangeBoost = effector.getGameStats().getStat(StatEnum.BOOST_MANTRA_RANGE, 100).getCurrent();
+				float rangeZ = distanceZ * rangeBoost / 100f;
+				float range = distance * rangeBoost / 100f;
+				for (Player player : p.getCurrentGroup().getOnlineMembers()) {
+					if (p.equals(player) || Math.abs(p.getZ() - player.getZ()) <= rangeZ && PositionUtil.isInRange(p, player, range)) {
+						applyAuraTo(player);
+					}
+				}
+			} else {
+				applyAuraTo(effector);
+			}
 		}
 		PacketSendUtility.broadcastPacket(effector, new SM_MANTRA_EFFECT(effector, skillId));
 	}
 
-	private void applyAuraTo(Player effected) {
+	private void applyAuraTo(Creature effected) {
 		SkillEngine.getInstance().applyEffect(skillId, effected, effected);
 	}
 
