@@ -8,11 +8,13 @@ import org.apache.commons.lang3.math.NumberUtils;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
+import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -48,8 +50,7 @@ public class MoveTo extends AdminCommand {
 			}
 			if (pos != null && pos.getZ() != 0) {
 				pos.setH(admin.getHeading());
-				moveTo(admin, pos, "Teleported to " + WorldMapType.getWorld(pos.getMapId()) + "\nX:" + pos.getX() + " Y:" + pos.getY() + " Z:"
-					+ pos.getZ());
+				moveTo(admin, pos, "Teleported to " + WorldMapType.getWorld(pos.getMapId()) + "\nX:" + pos.getX() + " Y:" + pos.getY() + " Z:" + pos.getZ());
 				return;
 			} else if (pos != null || params.length > 1 || params[0].startsWith("[pos:"))
 				errorMsg = "Invalid map position or missing/deactivated geo.";
@@ -79,7 +80,7 @@ public class MoveTo extends AdminCommand {
 
 	private WorldPosition parseWorldPosition(Player admin, String[] params) {
 		int coordIndex = 0;
-		int mapId = 0;
+		int mapId;
 		boolean isMapNameOrId = params[0].matches("^([a-zA-Z_]+|[1-9][0-9]{8,})$");
 		if (isMapNameOrId) {
 			mapId = NumberUtils.toInt(params[0]);
@@ -112,6 +113,11 @@ public class MoveTo extends AdminCommand {
 
 	private void moveTo(Player admin, WorldPosition pos, String message) {
 		sendInfo(admin, message); // msg before teleport, otherwise client could ignore it
+		if (pos.isInstanceMap() && pos.getWorldMapInstance().getParent().getMainWorldMapInstance() == pos.getWorldMapInstance()) {
+			// currently instance type maps have a main world map instance (default) which have no spawns, so we create a new instance instead
+			WorldMapInstance instance = InstanceService.getOrRegisterInstance(pos.getMapId(), admin);
+			pos = World.getInstance().createPosition(pos.getMapId(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), instance.getInstanceId());
+		}
 		TeleportService.teleportTo(admin, pos);
 	}
 
