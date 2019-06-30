@@ -145,7 +145,7 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public HouseDoorState getDoorState() {
-		return doorState == null ? HouseDoorState.CLOSED : doorState;
+		return doorState == null ? ownerId == 0 || inactive ? HouseDoorState.CLOSED : HouseDoorState.OPEN : doorState;
 	}
 
 	public void setDoorState(HouseDoorState doorState) {
