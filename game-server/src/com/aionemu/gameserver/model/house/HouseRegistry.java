@@ -7,6 +7,7 @@ import java.util.Map;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
+import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
@@ -60,27 +61,15 @@ public class HouseRegistry implements Persistable {
 	}
 
 	public boolean putObject(HouseObject<?> houseObject) {
-		if (objects.containsKey(houseObject.getObjectId()))
+		if (objects.putIfAbsent(houseObject.getObjectId(), houseObject) != null)
 			return false;
-
-		objects.put(houseObject.getObjectId(), houseObject);
 		if (houseObject.getPersistentState() != PersistentState.UPDATED) // state is UPDATED when reloading registry and spawned objects get reused
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 		return true;
 	}
 
-	public HouseObject<?> removeObject(int itemObjId) {
-		if (!objects.containsKey(itemObjId))
-			return null;
-
-		HouseObject<?> oldObject = objects.get(itemObjId);
-		if (oldObject.getPersistentState() == PersistentState.NEW)
-			discardObject(itemObjId);
-		else
-			oldObject.setPersistentState(PersistentState.DELETED);
-		setPersistentState(PersistentState.UPDATE_REQUIRED);
-
-		return oldObject;
+	public void discardObject(HouseObject<?> object, boolean direct) {
+		discard(objects, object, direct);
 	}
 
 	public List<HouseDecoration> getDecors() {
@@ -101,10 +90,8 @@ public class HouseRegistry implements Persistable {
 	}
 
 	public boolean putDecor(HouseDecoration decor) {
-		if (decors.containsKey(decor.getObjectId()))
+		if (decors.putIfAbsent(decor.getObjectId(), decor) != null)
 			return false;
-
-		decors.put(decor.getObjectId(), decor);
 		if (decor.getPersistentState() != PersistentState.UPDATED)
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 		return true;
@@ -136,23 +123,22 @@ public class HouseRegistry implements Persistable {
 
 	public void discardDecor(PartType partType, int roomNo) {
 		for (HouseDecoration decor : getDecors()) {
-			if (decor.getTemplate().getType() == partType && decor.getRoom() == roomNo) {
-				if (decor.getPersistentState() == PersistentState.NEW) {
-					discardDecor(decor);
-				} else {
-					decor.setPersistentState(PersistentState.DELETED);
-					setPersistentState(PersistentState.UPDATE_REQUIRED);
-				}
-			}
+			if (decor.getTemplate().getType() == partType && decor.getRoom() == roomNo)
+				discardDecor(decor, false);
 		}
 	}
 
-	public void discardObject(int objectId) {
-		objects.remove(objectId);
+	public void discardDecor(HouseDecoration decor, boolean direct) {
+		discard(decors, decor, direct);
 	}
 
-	public void discardDecor(HouseDecoration decor) {
-		decors.remove(decor.getObjectId());
+	private <T extends AionObject & Persistable> void discard(Map<Integer, T> map, T obj, boolean direct) {
+		if (obj.getPersistentState() == PersistentState.NEW || direct) {
+			map.remove(obj.getObjectId(), obj);
+		} else {
+			obj.setPersistentState(PersistentState.DELETED);
+			setPersistentState(PersistentState.UPDATE_REQUIRED);
+		}
 	}
 
 	/**
@@ -166,8 +152,12 @@ public class HouseRegistry implements Persistable {
 		} else {
 			for (HouseObject<?> obj : spawnedObjects)
 				obj.removeFromHouse();
-			save();
 		}
+		for (HouseDecoration decor : decors.values()) {
+			if (decor.getRoom() != -1)
+				discardDecor(decor, false);
+		}
+		save();
 	}
 
 	public void save() {

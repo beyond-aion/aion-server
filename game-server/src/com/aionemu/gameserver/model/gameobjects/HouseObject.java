@@ -93,7 +93,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 		else {
 			PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(4, 1, getObjectId()));
 			PacketSendUtility.sendPacket(player, msg);
-			registry.removeObject(getObjectId());
+			registry.discardObject(this, false);
 		}
 	}
 
@@ -102,7 +102,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 		getController().delete();
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(4, 1, getObjectId()));
 		PacketSendUtility.sendPacket(player, message);
-		registry.removeObject(getObjectId());
+		registry.discardObject(this, false);
 		Player owner = World.getInstance().findPlayer(registry.getOwner().getOwnerId());
 		// if owner is not online, we should save his items
 		if (owner == null || !owner.isOnline())
