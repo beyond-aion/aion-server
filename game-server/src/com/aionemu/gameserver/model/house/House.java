@@ -281,7 +281,19 @@ public class House extends VisibleObject implements Persistable {
 
 	@Override
 	public void setPersistentState(PersistentState persistentState) {
-		this.persistentState = persistentState;
+		switch (persistentState) {
+			case DELETED:
+				if (this.persistentState == PersistentState.NEW)
+					this.persistentState = PersistentState.NOACTION;
+				else
+					this.persistentState = PersistentState.DELETED;
+				break;
+			case UPDATE_REQUIRED:
+				if (this.persistentState == PersistentState.NEW)
+					break;
+			default:
+				this.persistentState = persistentState;
+		}
 	}
 
 	public byte getHouseOwnerStates() {
