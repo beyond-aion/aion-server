@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.staticdoor.DoorType;
 import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorTemplate;
-import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorWorld;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
@@ -27,11 +26,8 @@ public class StaticDoorSpawnManager {
 	 * @param instanceIndex
 	 */
 	public static void spawnTemplate(int worldId, int instanceIndex) {
-		StaticDoorWorld staticDoorWorld = DataManager.STATICDOOR_DATA.getStaticDoorWorlds(worldId);
-		if (staticDoorWorld == null)
-			return;
 		int counter = 0;
-		for (StaticDoorTemplate data : staticDoorWorld.getStaticDoors()) {
+		for (StaticDoorTemplate data : DataManager.STATICDOOR_DATA.getStaticDoors(worldId)) {
 			if (data.getDoorType() != DoorType.DOOR) {
 				// TODO: assign house doors to houses, so geo doors could be triggered by changing house settings;
 				continue;

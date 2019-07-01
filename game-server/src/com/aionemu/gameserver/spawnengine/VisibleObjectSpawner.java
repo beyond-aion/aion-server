@@ -30,7 +30,6 @@ import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.siege.SiegeFortressGate;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.house.House;
@@ -151,11 +150,6 @@ public class VisibleObjectSpawner {
 		return npc;
 	}
 
-	/**
-	 * @param spawn
-	 * @param instanceIndex
-	 * @return
-	 */
 	protected static VisibleObject spawnSiegeNpc(SiegeSpawnTemplate spawn, int instanceIndex) {
 		if (!SiegeConfig.SIEGE_ENABLED)
 			return null;
@@ -165,42 +159,11 @@ public class VisibleObjectSpawner {
 			log.error("No template for NPC " + String.valueOf(spawn.getNpcId()));
 			return null;
 		}
-		Npc npc;
-		if (npcTemplate.getAiName().equals("fortressgate")) {
-			npc = new SiegeFortressGate(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate, getDoorMeshFileName(npcTemplate));
-		} else {
-			npc = new SiegeNpc(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
-		}
+		Npc npc = new SiegeNpc(IDFactory.getInstance().nextId(), new NpcController(), spawn, npcTemplate);
 		npc.setKnownlist(new NpcKnownList(npc));
 		npc.setEffectController(new EffectController(npc));
 		SpawnEngine.bringIntoWorld(npc, spawn, instanceIndex);
 		return npc;
-	}
-
-	private static String getDoorMeshFileName(NpcTemplate doorNpcTemplate) {
-		switch (doorNpcTemplate.getTemplateId()) {
-			case 252115:
-			case 252116:
-			case 252117:
-				return "ldf5_fortress_door_01.cgf";
-			case 272255:
-			case 272256:
-			case 272257:
-			case 881578:
-				return "barricade_light_large_01a.cgf";
-			case 272258:
-			case 272259:
-			case 272260:
-			case 881579:
-				return "barricade_dark_large_01a.cgf";
-			case 272261:
-			case 272262:
-			case 272263:
-			case 881580:
-				return "barricade_vritra_large_01a.cgf";
-			default:
-				return "ab_castledoor_100.cgf";
-		}
 	}
 
 	protected static VisibleObject spawnInvasionNpc(VortexSpawnTemplate spawn, int instanceIndex) {
