@@ -79,7 +79,6 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		spawnRings();
-		spawn(CENTER_ARTIFACT_ID, 504.1977f, 481.5051f, 87.2790f, (byte) 30);
 		spawn(730588, 505.2431f, 377.0414f, 93.8944f, (byte) 30, 33); // Exit
 	}
 
@@ -98,6 +97,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	@Override
 	public boolean onPassFlyingRing(Player player, String flyingRing) {
 		if (flyingRing.equals("ROAH_WING_1") && startTime.compareAndSet(0, System.currentTimeMillis())) {
+			spawn(CENTER_ARTIFACT_ID, 504.1977f, 481.5051f, 87.2790f, (byte) 30);
 			PacketSendUtility.broadcastToMap(instance, STR_MSG_INSTANCE_START_IDABRE());
 			PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, TIME_LIMIT));
 			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
