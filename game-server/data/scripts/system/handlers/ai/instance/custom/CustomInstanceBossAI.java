@@ -154,9 +154,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 						getOwner().getCastingSkill().cancelCast();
 
 					// little break after timeout (for walking)
-					castTimeout = ThreadPoolManager.getInstance().schedule(() -> {
-						castTimeout = null;
-					}, 1000);
+					castTimeout = ThreadPoolManager.getInstance().schedule(() -> castTimeout = null, 1000);
 				}, castDuration); // after cast / instant skill: 300ms * attack speed
 			}
 		}
@@ -201,7 +199,6 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 						}
 					}
 				}
-
 
 				// rule out:
 				if (isDPskill || !skillI.canUseSkill(CastState.CAST_START)
@@ -248,7 +245,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 				equipmentList.add(i.getItemSkinTemplate());
 
 		NpcEquipmentList v = new NpcEquipmentList();
-		v.items = equipmentList.toArray(new ItemTemplate[equipmentList.size()]);
+		v.items = equipmentList.toArray(new ItemTemplate[0]);
 		getOwner().overrideEquipmentList(v);
 	}
 
@@ -295,18 +292,13 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		if (player.getEquipment().getOffHandWeapon() != null)
 			pAtk += pgs.getOffHandPAttack().getCurrent() / 2;
 		functions.add(new StatSetFunction(StatEnum.PHYSICAL_ATTACK, pAtk));
-		
-		switch (player.getPlayerClass()) { // npcs dont use Magical Attack
-			case BARD:
-			case CLERIC:
-			case SORCERER:
-			case SPIRIT_MASTER:
-			case GUNNER:
-			case RIDER:
-				functions.add(new StatSetFunction(StatEnum.PHYSICAL_CRITICAL, pgs.getMCritical().getCurrent()));
-				break;
-			default:
-				functions.add(new StatSetFunction(StatEnum.PHYSICAL_CRITICAL, pgs.getMainHandPCritical().getCurrent()));
+
+		if (player.getPlayerClass().isPhysicalClass()) {
+			functions.add(new StatSetFunction(StatEnum.PHYSICAL_CRITICAL, pgs.getMainHandPCritical().getCurrent()));
+		} else {
+			functions.add(new StatSetFunction(StatEnum.MAGICAL_CRITICAL, pgs.getMCritical().getCurrent()));
+			functions.add(new StatSetFunction(StatEnum.MAGICAL_ATTACK, pgs.getMainHandMAttack().getCurrent()));
+			functions.add(new StatSetFunction(StatEnum.BOOST_MAGICAL_SKILL, pgs.getMBoost().getCurrent()));
 		}
 
 		getOwner().getGameStats().addEffect(null, functions);
