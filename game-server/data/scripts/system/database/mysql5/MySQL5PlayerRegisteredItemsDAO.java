@@ -157,14 +157,14 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 
 		for (HouseObject<?> obj : objects) {
 			if (obj.getPersistentState() == PersistentState.DELETED)
-				registry.discardObject(obj.getObjectId());
+				registry.discardObject(obj, true);
 			else
 				obj.setPersistentState(PersistentState.UPDATED);
 		}
 
 		for (HouseDecoration decor : decors) {
 			if (decor.getPersistentState() == PersistentState.DELETED)
-				registry.discardDecor(decor);
+				registry.discardDecor(decor, true);
 			else
 				decor.setPersistentState(PersistentState.UPDATED);
 		}

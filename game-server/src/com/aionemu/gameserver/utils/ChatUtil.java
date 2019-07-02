@@ -169,7 +169,7 @@ public class ChatUtil {
 	}
 
 	/**
-	 * @param posStr
+	 * @param posLink
 	 *          can be an Aion link like "{@code [pos:Teleporter;0 400010000 2128.8 1924.3 0.0 2]}"
 	 * @return The {@link WorldPosition} or null if input was invalid.
 	 */

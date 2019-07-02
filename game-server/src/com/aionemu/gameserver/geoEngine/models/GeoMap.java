@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -27,6 +29,7 @@ import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 public class GeoMap extends Node {
 
 	private static final Logger log = LoggerFactory.getLogger(GeoMap.class);
+	private static final Set<Integer> loggedWarnings = ConcurrentHashMap.newKeySet();
 	public static final float MAX_Z = 4000;
 	public static final float MIN_Z = 0;
 
@@ -59,10 +62,13 @@ public class GeoMap extends Node {
 			nearestMatch = findNearestMatch(doors, templatePoint);
 		}
 		String spawnPoint = toTemplateCoords(templatePoint);
-		if (nearestMatch == null)
-			log.warn("Could not find static door: " + worldId + " " + meshFile + " " + spawnPoint);
-		else
-			log.warn("Static door: " + worldId + " " + meshFile + " " + spawnPoint + " should spawn at " + toSpawnPoint(nearestMatch.getWorldBound()));
+		String doorInfo =  worldId + " " + meshFile + " " + spawnPoint;
+		if (loggedWarnings.add(doorInfo.hashCode())) {
+			if (nearestMatch == null)
+				log.warn("Could not find static door: " + doorInfo);
+			else
+				log.warn("Static door: " + doorInfo + " should spawn at " + toSpawnPoint(nearestMatch.getWorldBound()));
+		}
 		return nearestMatch;
 	}
 

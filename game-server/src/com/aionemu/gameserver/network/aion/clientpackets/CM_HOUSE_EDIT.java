@@ -96,7 +96,7 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 				sendPacket(new SM_HOUSE_EDIT(action, 1, obj.getObjectId()));
 			}
 		} else if (action == 4) { // Delete item
-			house.getRegistry().removeObject(itemObjectId);
+			house.getRegistry().discardObject(house.getRegistry().getObjectByObjId(itemObjectId), false);
 			sendPacket(new SM_HOUSE_EDIT(action, 1, itemObjectId));
 			sendPacket(new SM_HOUSE_EDIT(4, 1, itemObjectId));
 		} else if (action == 5) { // spawn object

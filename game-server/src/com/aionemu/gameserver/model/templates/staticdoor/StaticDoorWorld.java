@@ -1,11 +1,16 @@
 package com.aionemu.gameserver.model.templates.staticdoor;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 /**
@@ -16,21 +21,30 @@ import javax.xml.bind.annotation.XmlType;
 public class StaticDoorWorld {
 
 	@XmlAttribute(name = "world")
-	protected int world;
+	private int worldId;
 	@XmlElement(name = "staticdoor")
-	protected List<StaticDoorTemplate> staticDoorTemplate;
+	private List<StaticDoorTemplate> templates;
+	@XmlTransient
+	private Map<Integer, StaticDoorTemplate> templatesByStaticId;
 
-	/**
-	 * @return the world
-	 */
-	public int getWorld() {
-		return world;
+	void afterUnmarshal(Unmarshaller u, Object parent) {
+		templatesByStaticId = new HashMap<>();
+		for (StaticDoorTemplate template : templates) {
+			if (templatesByStaticId.putIfAbsent(template.getDoorId(), template) != null)
+				throw new IllegalArgumentException("Duplicate door template for world " + worldId + ", id: " + template.getDoorId());
+		}
+		templates = null;
 	}
 
-	/**
-	 * @return the List<StaticDoorTemplate>
-	 */
-	public List<StaticDoorTemplate> getStaticDoors() {
-		return staticDoorTemplate;
+	public int getWorldId() {
+		return worldId;
+	}
+
+	public Collection<StaticDoorTemplate> getStaticDoors() {
+		return templatesByStaticId.values();
+	}
+
+	public StaticDoorTemplate getStaticDoor(int staticId) {
+		return templatesByStaticId.get(staticId);
 	}
 }

@@ -998,9 +998,9 @@
 		<staticdoor keyid="185000219" doorid="480" x="850.1436" y="324.191528" z="1723.44751" mesh="idseal_2st_door_01a.cga" state="0xA"/>
 	</world>
 	<world world="301400000">
-		<staticdoor doorid="428" x="531.4157" y="587.6455" z="395.351685" mesh="idsweep_door02.cga" state="0x8"/>
-		<staticdoor doorid="430" x="549.194" y="315.47" z="399.006317" mesh="idsweep_door01.cga" state="0xA"/>
-		<staticdoor doorid="431" x="549.8981" y="429.919128" z="395.211426" mesh="idsweep_door02.cga" state="0x8"/>
+		<staticdoor doorid="428" keyid="1" x="531.41571" y="587.64551" z="395.36168" mesh="idsweep_door02.cga" state="0xA"/>
+		<staticdoor doorid="430" keyid="0" x="549.19397" y="315.47" z="399.01632" mesh="idsweep_door01.cga" state="0xA"/>
+		<staticdoor doorid="431" keyid="1" x="549.89807" y="429.91913" z="395.22143" mesh="idsweep_door02.cga" state="0xA"/>
 	</world>
 	<world world="310050000">
 		<staticdoor keyid="185000002" doorid="167" x="308.903473" y="230.243332" z="144.248337" mesh="door_lp.cga" state="0x2"/>
@@ -2177,10 +2177,5 @@
 	</world>
 	<world world="900200000">
 		<staticdoor doorid="1" x="95.06283" y="74.55054" z="20.82549" mesh="idldf5re_solo_door_01.cga" state="0x2"/>
-	</world>
-	<world world="301400000">
-		<staticdoor keyid="0" doorid="430" x="549.1" y="314.6" z="399.279" state="0xA"/>
-		<staticdoor keyid="1" doorid="431" x="549.9" y="320" z="395.375" state="0xA"/>
-		<staticdoor keyid="1" doorid="428" x="531.3" y="587.7" z="394.375" state="0xA"/>
 	</world>
 </staticdoor_templates>

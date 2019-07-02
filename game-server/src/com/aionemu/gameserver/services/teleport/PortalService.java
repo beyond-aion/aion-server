@@ -52,14 +52,12 @@ public class PortalService {
 			return;
 		}
 
-		boolean instanceGroupReq = true;
+		boolean instanceGroupReq = !(player.hasAccess(AdminConfig.INSTANCE_ENTER_ALL) || player.hasPermission(MembershipConfig.INSTANCES_GROUP_REQ));
 		int mapId = loc.getWorldId();
 		int playerSize = portalPath.getPlayerCount();
 		boolean isInstance = portalPath.isInstance();
 
 		if (!player.hasAccess(AdminConfig.INSTANCE_ENTER_ALL)) {
-			instanceGroupReq = !player.hasPermission(MembershipConfig.INSTANCES_GROUP_REQ);
-
 			if (!checkMentor(player, mapId))
 				return;
 			if (!checkRace(player, npc, portalPath))

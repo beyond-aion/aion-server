@@ -8,7 +8,6 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.siege.SiegeFortressGate;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -22,15 +21,10 @@ import com.aionemu.gameserver.utils.PositionUtil;
  * @author Source
  */
 @AIName("fortressgate")
-public class SiegeFortressGateAI extends NpcAI {
+public class FortressGateAI extends NpcAI {
 
-	public SiegeFortressGateAI(SiegeFortressGate owner) {
+	public FortressGateAI(Npc owner) {
 		super(owner);
-	}
-
-	@Override
-	public SiegeFortressGate getOwner() {
-		return (SiegeFortressGate) super.getOwner();
 	}
 
 	@Override
@@ -71,11 +65,13 @@ public class SiegeFortressGateAI extends NpcAI {
 
 	@Override
 	protected void handleDied() {
-		Siege<?> siege = SiegeService.getInstance().getSiege(getOwner().getSiegeId());
-		if (siege != null) {
-			SiegeNpc boss = siege.getBoss();
-			if (boss != null)
-				boss.getEffectController().removeEffect(19111);
+		if (getOwner() instanceof SiegeNpc) {
+			Siege<?> siege = SiegeService.getInstance().getSiege(((SiegeNpc) getOwner()).getSiegeId());
+			if (siege != null) {
+				SiegeNpc boss = siege.getBoss();
+				if (boss != null)
+					boss.getEffectController().removeEffect(19111);
+			}
 		}
 		super.handleDied();
 		getOwner().setDoorState(getOwner().getInstanceId(), true);
