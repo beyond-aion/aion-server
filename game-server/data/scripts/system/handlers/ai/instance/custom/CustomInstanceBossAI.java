@@ -27,6 +27,7 @@ import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.EquipType;
+import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.condition.Condition;
@@ -243,7 +244,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		if (player.getEquipment().getOffHandWeapon() != null)
 			equipmentList.add(player.getEquipment().getOffHandWeapon().getItemSkinTemplate());
 		for (Item i : player.getEquipment().getEquippedItems())
-			if (i.getEquipmentType() == EquipType.ARMOR)
+			if (i.getEquipmentType() == EquipType.ARMOR && i.getItemTemplate().getItemSubType() != ItemSubType.SHIELD)
 				equipmentList.add(i.getItemSkinTemplate());
 
 		NpcEquipmentList v = new NpcEquipmentList();
