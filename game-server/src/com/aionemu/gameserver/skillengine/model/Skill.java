@@ -32,13 +32,7 @@ import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CASTSPELL;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CASTSPELL_RESULT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
@@ -324,7 +318,7 @@ public class Skill {
 		int boostValue;
 		boolean noBaseDurationCap = false;
 		boolean isPhysicalCharge = false;
-		if (skillMethod == SkillMethod.CHARGE && (effector instanceof Player) && (((Player) effector).getPlayerClass() == PlayerClass.PHYSICAL_CLASS
+		if (skillMethod == SkillMethod.CHARGE && (effector instanceof Player) && (((Player) effector).getPlayerClass().isPhysicalClass()
 			|| ((Player) effector).getPlayerClass() == PlayerClass.RIDER || ((Player) effector).getPlayerClass() == PlayerClass.GUNNER))
 			isPhysicalCharge = true;
 

@@ -28,13 +28,7 @@ public enum PlayerClass implements L10n {
 	GUNNER(14, 904316, ENGINEER),
 	ARTIST(15, 904317, true),
 	BARD(16, 904318, ARTIST),
-	ALL(17),
-
-	PHYSICAL_CLASS(WARRIOR.getClassId() | GLADIATOR.getClassId() | TEMPLAR.getClassId() |
-								SCOUT.getClassId() | ASSASSIN.getClassId() | RANGER.getClassId() | CHANTER.getClassId()),
-	MAGICAL_CLASS(MAGE.getClassId() | SORCERER.getClassId() | SPIRIT_MASTER.getClassId() |  PRIEST.getClassId() |
-								CLERIC.getClassId() | ENGINEER.getClassId() | RIDER.getClassId() | GUNNER.getClassId() |
-								ARTIST.getClassId() | BARD.getClassId());
+	ALL(17);
 
 	/** This id is used on client side */
 	private final byte classId;
@@ -107,5 +101,20 @@ public enum PlayerClass implements L10n {
 
 	public int getMask() {
 		return idMask;
+	}
+
+	public boolean isPhysicalClass() {
+		switch (this) {
+			case WARRIOR:
+			case GLADIATOR:
+			case TEMPLAR:
+			case SCOUT:
+			case ASSASSIN:
+			case RANGER:
+			case CHANTER:
+				return true;
+			default:
+				return false;
+		}
 	}
 }

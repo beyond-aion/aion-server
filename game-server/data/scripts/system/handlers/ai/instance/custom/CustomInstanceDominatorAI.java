@@ -6,7 +6,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.custom.instance.CustomInstanceRankEnum;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.custom.instance.RoahCustomInstanceHandler;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
@@ -89,14 +88,14 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 
 			if (rank >= CustomInstanceRankEnum.MITHRIL.getValue())
 				if (getOwner().getTarget() != null && getOwner().getTarget() instanceof Player
-					&& ((Player) (getOwner().getTarget())).getPlayerClass() == PlayerClass.PHYSICAL_CLASS)
+					&& ((Player) (getOwner().getTarget())).getPlayerClass().isPhysicalClass())
 					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3571, 65, 100))); // Body Root
 				else
 					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3572, 65, 100))); // Sigil of Silence
 
 			if (rank >= CustomInstanceRankEnum.CERANIUM.getValue())
 				if (getOwner().getTarget() != null && getOwner().getTarget() instanceof Player
-					&& ((Player) (getOwner().getTarget())).getPlayerClass() == PlayerClass.PHYSICAL_CLASS)
+					&& ((Player) (getOwner().getTarget())).getPlayerClass().isPhysicalClass())
 					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(4135, 65, 100))); // Blinding Light
 				else
 					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(1336, 65, 100))); // Curse of Weakness

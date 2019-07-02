@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.skill;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -28,8 +27,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
 /**
  * Skill entry which inherits properties from template (regular npc skills)
  * 
- * @author ATracer, nrg
- * @reworked Yeats
+ * @author ATracer, nrg, Yeats
  */
 public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
@@ -178,28 +176,16 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				return false;
 			case TARGET_IS_GATE:
 				if (curTarget instanceof Creature) {
-					NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(((Creature) curTarget).getObjectId());
-					if (template != null && template.getAbyssNpcType() == AbyssNpcType.DOOR) {
-						return true;
-					}
+					NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(curTarget.getObjectId());
+					return template != null && template.getAbyssNpcType() == AbyssNpcType.DOOR;
 				}
 				return false;
 			case TARGET_IS_PLAYER:
-				if (curTarget instanceof Player) {
-					return true;
-				}
-				return false;
+				return curTarget instanceof Player;
 			case TARGET_IS_MAGICAL_CLASS:
+				return curTarget instanceof Player && !((Player) curTarget).getPlayerClass().isPhysicalClass();
 			case TARGET_IS_PHYSICAL_CLASS:
-				boolean magical = condType == NpcSkillCondition.TARGET_IS_PHYSICAL_CLASS ? false : true;
-				if (curTarget instanceof Player) {
-					if (magical && ((Player) curTarget).getPlayerClass() == PlayerClass.MAGICAL_CLASS) {
-						return true;
-					} else if (!magical && ((Player) curTarget).getPlayerClass() == PlayerClass.PHYSICAL_CLASS) {
-						return true;
-					}
-				}
-				return false;
+				return curTarget instanceof Player && ((Player) curTarget).getPlayerClass().isPhysicalClass();
 			case TARGET_HAS_CARVED_SIGNET:
 				return hasCarvedSignet(curTarget, template.getSkillTemplate(), 0);
 			case TARGET_HAS_CARVED_SIGNET_LEVEL_II:
@@ -277,10 +263,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public boolean hasCondition() {
-		if (getConditionTemplate() != null && getConditionTemplate().getCondType() != NpcSkillCondition.NONE) {
-			return true;
-		}
-		return false;
+		return getConditionTemplate() != null && getConditionTemplate().getCondType() != NpcSkillCondition.NONE;
 	}
 
 	@Override
@@ -310,9 +293,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public boolean canUseNextChain(Npc owner) {
-		if (owner != null && (System.currentTimeMillis() - owner.getGameStats().getLastSkillTime()) > template.getMaxChainTime())
-			return false;
-		return true;
+		return owner != null && (System.currentTimeMillis() - owner.getGameStats().getLastSkillTime()) < template.getMaxChainTime();
 	}
 
 	@Override
