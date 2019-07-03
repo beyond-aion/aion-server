@@ -32,19 +32,18 @@ public class UnstableKaluvaSpawnAI extends NpcAI {
 
 	@Override
 	protected void handleCreatureSee(Creature creature) {
-		checkDistance(this, creature);
+		onMoved(creature);
 	}
 
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
-		checkDistance(this, creature);
+		onMoved(creature);
 	}
 
-	private void checkDistance(NpcAI ai, Creature creature) {
-		Npc kaluva = getPosition().getWorldMapInstance().getNpc(219553);
-		if (creature instanceof Npc) {
-			if (PositionUtil.isInRange(getOwner(), kaluva, 7) && task == null) {
-				kaluva.getEffectController().removeEffect(19152);
+	private void onMoved(Creature creature) {
+		if (task == null && creature instanceof Npc && ((Npc) creature).getNpcId() == 219553) {
+			if (PositionUtil.isInRange(getOwner(), creature, 7)) {
+				creature.getEffectController().removeEffect(19152);
 				scheduleHatch();
 			}
 		}
