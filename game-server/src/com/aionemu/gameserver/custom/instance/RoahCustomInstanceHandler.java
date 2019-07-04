@@ -239,7 +239,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			case BOSS_MOB_E_F_ID:
 			case BOSS_MOB_AT_ID:
 				setResult(true);
-				calcBossDrop(npc.getObjectId(), playerObjId);
+				calcBossDrop(npc.getObjectId());
 				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
 				break;
 		}
@@ -272,11 +272,15 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		}
 	}
 
-	private void calcBossDrop(int npcObjId, int playerId) {
+	private void calcBossDrop(int npcObjId) {
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
-		if (DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId) != null)
-			DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId).clear();
-		dropItems.add(DropRegistrationService.getInstance().regDropItem(0, playerId, npcObjId, REWARD_COIN_ID, getRewardCoinAmount(rank)));
+		if (dropItems != null) {
+			dropItems.clear();
+			dropItems.add(DropRegistrationService.getInstance().regDropItem(0, playerObjId, npcObjId, REWARD_COIN_ID, getRewardCoinAmount(rank)));
+		} else {
+			log.error("[CI_Roah] Could not register final rewards for player [id=" + playerObjId + "] [coins=" + getRewardCoinAmount(rank) + "].",
+				new Exception());
+		}
 	}
 
 	private int getRewardCoinAmount(int rank) {
