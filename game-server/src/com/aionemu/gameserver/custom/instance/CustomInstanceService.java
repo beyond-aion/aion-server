@@ -2,10 +2,7 @@ package com.aionemu.gameserver.custom.instance;
 
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -32,6 +29,10 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @author Jo, Estrayl
  */
 public class CustomInstanceService {
+
+	private final static List<Integer> restrictedSkills = Arrays.asList(0, 243, 244, 277, 282, 302, 912, 1178, 1327, 1346, 1347, 1757, 2106, 2167, 2400,
+		2425, 2565, 2778, 3331, 3643, 3663, 3683, 3705, 3729, 3788, 3789, 3833, 3835, 3837, 3839, 3904, 3991, 4407, 8291, 10164, 11011, 13010, 13234,
+		13231);
 
 	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
 	public static final int REWARD_COIN_ID = 186000409;
@@ -89,7 +90,7 @@ public class CustomInstanceService {
 
 	public void recordPlayerModelEntry(Player player, Skill skill, VisibleObject target) {
 		// FILTER: Only record roah custom instance skills for the moment
-		if (player.getWorldId() != CUSTOM_INSTANCE_WORLD_ID)
+		if (player.getWorldId() != CUSTOM_INSTANCE_WORLD_ID || restrictedSkills.contains(skill.getSkillId()))
 			return;
 
 		WorldMapInstance wmi = player.getPosition().getWorldMapInstance();

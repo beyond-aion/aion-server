@@ -2,7 +2,6 @@ package com.aionemu.gameserver.custom.instance.neuralnetwork;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -18,9 +17,6 @@ import com.google.common.primitives.Doubles;
  * @author Jo
  */
 public class PlayerModelEntry implements Persistable {
-
-	private final static List<Integer> restrictedSkills = Arrays.asList(0, 243, 244, 277, 282, 302, 912, 1178, 1346, 1347, 1757, 2106, 2167, 2400, 2425,
-		2565, 3331, 3663, 3705, 3729, 3683, 3788, 3789, 3835, 3837, 3643, 3839, 3833, 3991, 4407, 2778, 2425, 8291, 10164, 11011, 13010, 13234, 13231);
 
 	private PersistentState persistentState;
 
@@ -45,9 +41,6 @@ public class PlayerModelEntry implements Persistable {
 
 	// live constructor
 	public PlayerModelEntry(Creature playerOrBoss, int skillID, Creature target) {
-		if (restrictedSkills.contains(skillID))
-			return;
-
 		timestamp = new Timestamp(System.currentTimeMillis());
 
 		this.skillID = skillID;
