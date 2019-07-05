@@ -66,6 +66,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private AtomicLong startTime = new AtomicLong();
 	private AtomicBoolean isInitialized = new AtomicBoolean();
+	private AtomicBoolean isCompleted = new AtomicBoolean();
 
 	private int playerObjId;
 	private PlayerModel model;
@@ -321,26 +322,28 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private void setResult(boolean success) {
 		cancelAllTasks();
-		if (success) {
-			// upgrade rank
-			rank++;
-			PacketSendUtility.broadcastToMap(instance,
-				new SM_MESSAGE(0, null, "Your rank has been increased to " + CustomInstanceRankEnum.getRankDescription(rank)
-					+ ". Stay steadfast for tougher challenges and higher rewards!", ChatType.BRIGHT_YELLOW_CENTER));
-		} else {
-			// degrade rank
-			if (rank >= 24)
-				rank = 21; // to Ancient
-			else
-				rank = Math.max(0, (rank - 3) - (rank % 3)); // to 1st rank of last category
-			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
-				"Your rank has been decreased to " + CustomInstanceRankEnum.getRankDescription(rank) + ".", ChatType.BRIGHT_YELLOW_CENTER));
+		if (isCompleted.compareAndSet(false, true)) {
+			if (success) {
+				// upgrade rank
+				rank++;
+				PacketSendUtility.broadcastToMap(instance,
+					new SM_MESSAGE(0, null, "Your rank has been increased to " + CustomInstanceRankEnum.getRankDescription(rank)
+						+ ". Stay steadfast for tougher challenges and higher rewards!", ChatType.BRIGHT_YELLOW_CENTER));
+			} else {
+				// degrade rank
+				if (rank >= 24)
+					rank = 21; // to Ancient
+				else
+					rank = Math.max(0, (rank - 3) - (rank % 3)); // to 1st rank of last category
+				PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
+					"Your rank has been decreased to " + CustomInstanceRankEnum.getRankDescription(rank) + ".", ChatType.BRIGHT_YELLOW_CENTER));
 
-			if (rank > 0) // prevent suicide abuse || loss rewards
-				ItemService.addItem(instance.getPlayer(playerObjId), REWARD_COIN_ID, getRewardCoinAmount(rank), true);
+				if (rank > 0) // prevent suicide abuse || loss rewards
+					ItemService.addItem(instance.getPlayer(playerObjId), REWARD_COIN_ID, getRewardCoinAmount(rank), true);
+			}
+			CustomInstanceService.getInstance().changePlayerRank(playerObjId, rank);
+			CustomInstanceService.getInstance().saveNewPlayerModelEntries(playerObjId);
 		}
-		CustomInstanceService.getInstance().changePlayerRank(playerObjId, rank);
-		CustomInstanceService.getInstance().saveNewPlayerModelEntries(playerObjId);
 	}
 
 	private void cancelAllTasks() {
@@ -407,14 +410,15 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-		setResult(false);
-		if (isBossPhase) {
-			PacketSendUtility.sendMessage(player, "At last! I have become .. your greatest nightmare!", ChatType.BRIGHT_YELLOW_CENTER);
-			despawnNpcs(BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID);
-		} else {
-			PacketSendUtility.sendMessage(player, "You shall not pass!", ChatType.BRIGHT_YELLOW_CENTER);
-			cancelAllTasks();
-			despawnNpcs(CENTER_ARTIFACT_ID, TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
+		if (!isCompleted.get()) {
+			setResult(false);
+			if (isBossPhase) {
+				PacketSendUtility.sendMessage(player, "At last! I have become .. your greatest nightmare!", ChatType.BRIGHT_YELLOW_CENTER);
+				despawnNpcs(BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID);
+			} else {
+				PacketSendUtility.sendMessage(player, "You shall not pass!", ChatType.BRIGHT_YELLOW_CENTER);
+				despawnNpcs(CENTER_ARTIFACT_ID, TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
+			}
 		}
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 0));
 		return true;
