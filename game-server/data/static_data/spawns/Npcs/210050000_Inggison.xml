@@ -1618,10 +1618,6 @@
 			<spot x="513.406" y="1650.75" z="293.523" h="79"/>
 			<spot x="564.35" y="1509.05" z="281.39062" h="72" walker_id="C0F175F07D635F8FE9F9C26D69065FB2178DA973"/>
 		</spawn>
-		<!-- BLDF4_DramataMessageControl_n -->
-		<spawn npc_id="282135" respawn_time="295">
-			<spot x="142.088" y="2139.93" z="440" h="89"/>
-		</spawn>
 		<!-- Bloodied Crestlich -->
 		<spawn npc_id="216653" respawn_time="295">
 			<spot x="2104.2" y="500.121" z="432.25" h="103"/>
@@ -7933,15 +7929,6 @@
 			<spot x="2654.87" y="1758.39" z="235.0" h="95"/>
 			<spot x="2655.48" y="1894.11" z="217.49814" h="100"/>
 			<spot x="2738.71" y="2055.47" z="191.08063" h="45" walker_id="F5A125BF7BE52654D6CA172061FCB5D77A9B78C5"/>
-		</spawn>
-		<!-- Votaic Column -->
-		<spawn npc_id="281829" respawn_time="295">
-			<spot x="101.301" y="2136.59" z="441.456" h="11"/>
-			<spot x="117.882" y="2097.47" z="440.581" h="94"/>
-			<spot x="126.635" y="2175.41" z="441.63" h="109"/>
-			<spot x="158.632" y="2160.6" z="441.077" h="2"/>
-			<spot x="160.648" y="2099.39" z="439.625" h="108"/>
-			<spot x="187.129" y="2137.05" z="441.19" h="51"/>
 		</spawn>
 		<!-- Vrius -->
 		<spawn npc_id="798983" respawn_time="295">
