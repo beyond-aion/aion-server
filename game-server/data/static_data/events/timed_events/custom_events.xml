@@ -628,22 +628,22 @@
 					<spot x="392.58" y="231.57" z="93.12" h="30" />
 				</spawn>
 			</spawn_map>
-            <!-- Inggison -->
-            <spawn_map map_id="210050000">
-                <!-- Sematariux -->
-                <spawn npc_id="216520">
-                    <spot x="141.77" y="2142.31" z="440.0" h="90" />
-                </spawn>
-				<!-- Votaic Column -->
-				<spawn npc_id="281829">
-					<spot x="101.301" y="2136.59" z="441.456" />
-					<spot x="117.882" y="2097.47" z="440.581" />
-					<spot x="126.635" y="2175.41" z="441.630" />
-					<spot x="158.632" y="2160.60" z="441.077" />
-					<spot x="160.648" y="2099.39" z="439.625" />
-					<spot x="187.129" y="2137.05" z="441.190" />
-				</spawn>
-            </spawn_map>
+				<!-- Inggison -->
+				<spawn_map map_id="210050000">
+						<!-- Sematariux -->
+						<spawn npc_id="216520">
+								<spot x="141.77" y="2142.31" z="440.0" h="90" />
+						</spawn>
+						<!-- Votaic Column -->
+						<spawn npc_id="281829">
+							<spot x="101.301" y="2136.59" z="441.456" />
+							<spot x="117.882" y="2097.47" z="440.581" />
+							<spot x="126.635" y="2175.41" z="441.630" />
+							<spot x="158.632" y="2160.60" z="441.077" />
+							<spot x="160.648" y="2099.39" z="439.625" />
+							<spot x="187.129" y="2137.05" z="441.190" />
+						</spawn>
+				</spawn_map>
 			<!-- Gelkmaros -->
 			<spawn_map map_id="220070000">
 				<!-- Padmarashka -->
