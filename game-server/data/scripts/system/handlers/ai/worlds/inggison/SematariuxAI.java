@@ -190,7 +190,7 @@ public class SematariuxAI extends AggressiveNpcAI {
 				spawnAndObserveNpc(281933, npc.getPosition());
 				break;
 			case 281933:
-				if (deadThunderShields.incrementAndGet() >= 4)
+				if (deadThunderShields.incrementAndGet() >= 24)
 					getOwner().getEffectController().removeEffect(19186); // Protective Slumber
 				break;
 		}

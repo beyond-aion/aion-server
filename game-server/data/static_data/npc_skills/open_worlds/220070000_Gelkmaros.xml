@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_skills.xsd">
+    <npc_skills npc_ids="216580">
+        <npc_skill id="18722" lv="1" prob="100" min_time="30000" cd="120000" prio="1" /><!-- Primal Fear -->
+        <npc_skill id="20100" lv="1" prob="100" min_time="180000" cd="64000" prio="2" /><!-- Padmarashka' Roar -->
+        <npc_skill id="20093" lv="6" prob="70" cd="26000" /><!-- Destructive Claw -->
+        <npc_skill id="20401" lv="6" prob="70" cd="26000" /><!-- Venomous Claw -->
+        <npc_skill id="20098" lv="8" prob="60" max_hp="80" cd="15000" /><!-- Brandish Tail -->
+        <npc_skill id="20094" lv="7" prob="60" max_hp="70" cd="15000" /><!-- Destructive Bite -->
+        <npc_skill id="18724" lv="9" prob="80" max_hp="60" cd="26000" /><!-- Poisonous Breath -->
+        <npc_skill id="19183" lv="1" prob="80" max_hp="50" cd="30000" /><!-- Chilling Shriek -->
+        <npc_skill id="20096" lv="24" prob="70" max_hp="40" next_chain_id="1" next_skill_time="2000" target="ME" /><!-- Barrier of Deadly Poison -->
+        <npc_skill id="19185" lv="1" prob="100" chain_id="1" /><!-- Toxic Miasma -->
+        <npc_skill id="20097" lv="39" prob="100" max_hp="30" cd="30000" /><!-- Whirlpool of Death -->
+    </npc_skills>
+    <!-- Naduka Blade Captain -->
+    <npc_skills npc_ids="281938">
+        <npc_skill id="19162" lv="1" prob="100" />
+        <npc_skill id="19163" lv="1" prob="100" />
+    </npc_skills>
+    <!-- Naduka Tribunus -->
+    <npc_skills npc_ids="281939">
+        <npc_skill id="19164" lv="48" prob="100" />
+        <npc_skill id="19165" lv="48" prob="100" />
+    </npc_skills>
+    <!-- Naduka Cryptomancer -->
+    <npc_skills npc_ids="281940">
+        <npc_skill id="19166" lv="48" prob="100" />
+        <npc_skill id="19167" lv="48" prob="100" />
+    </npc_skills>
+    <!-- Naduka Blade Greatpriest -->
+    <npc_skills npc_ids="281941">
+        <npc_skill id="19168" lv="48" prob="65" />
+        <npc_skill id="19169" lv="48" prob="65" />
+        <npc_skill id="17363" lv="48" prob="100" max_hp="30" cd="100000" />
+    </npc_skills>
+</npc_skill_templates>

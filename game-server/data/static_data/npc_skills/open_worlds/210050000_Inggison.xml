@@ -2,7 +2,7 @@
 <npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_skills.xsd">
     <!-- Sematariux -->
     <npc_skills npc_ids="216520">
-        <npc_skill id="18722" lv="1" prob="100" cd="120000" prio="1" /><!-- Primal Fear -->
+        <npc_skill id="18722" lv="1" prob="100" cd="120000" min_time="30000" prio="1" /><!-- Primal Fear -->
         <npc_skill id="18728" lv="1" prob="70" /><!-- Destructive Bite -->
         <npc_skill id="18729" lv="1" prob="70" next_chain_id="1" next_skill_time="4000" /><!-- Destructive Claw -->
         <npc_skill id="18725" lv="1" prob="100" chain_id="1" /><!-- Brandish Tail -->

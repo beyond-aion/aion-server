@@ -386,7 +386,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Beyond Aion Summer Event 2018" start="2018-07-27T00:00:00" end="2018-08-19T23:59:59">
+	<event name="Summer Event" start="2019-07-13T00:00:00" end="2019-08-19T23:59:59">
 		<event_drops>
 			<gd_rule rule_name="Ice Block" chance="14">
 				<gd_maps>
@@ -611,5 +611,61 @@
 				</spawn>
 			</spawn_map>
 		</spawns>
+	</event>
+	<event name="Dramata Trouble" start="2019-07-13T00:00:00" end="2019-12-31T00:00:00">
+		<spawns>
+			<!-- Kaisinel Academy -->
+			<spawn_map map_id="110070000">
+				<!-- Dangerous Rift Gap -->
+				<spawn npc_id="701133" respawn_time="295">
+					<spot x="485.69" y="407.96" z="126.79" />
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120080000">
+				<!-- Dangerous Rift Gap -->
+				<spawn npc_id="701133" respawn_time="295">
+					<spot x="392.58" y="231.57" z="93.12" h="30" />
+				</spawn>
+			</spawn_map>
+            <!-- Inggison -->
+            <spawn_map map_id="210050000">
+                <!-- Sematariux -->
+                <spawn npc_id="216520">
+                    <spot x="141.77" y="2142.31" z="440.0" h="90" />
+                </spawn>
+				<!-- Votaic Column -->
+				<spawn npc_id="281829">
+					<spot x="101.301" y="2136.59" z="441.456" />
+					<spot x="117.882" y="2097.47" z="440.581" />
+					<spot x="126.635" y="2175.41" z="441.630" />
+					<spot x="158.632" y="2160.60" z="441.077" />
+					<spot x="160.648" y="2099.39" z="439.625" />
+					<spot x="187.129" y="2137.05" z="441.190" />
+				</spawn>
+            </spawn_map>
+			<!-- Gelkmaros -->
+			<spawn_map map_id="220070000">
+				<!-- Padmarashka -->
+				<spawn npc_id="216580">
+					<spot x="2940.20" y="851.29" z="35.29" h="30" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+		<event_drops>
+			<gd_rule rule_name="TODO" chance="100">
+				<gd_maps>
+					<gd_map map_id="210050000" /><!-- Inggison -->
+					<gd_map map_id="220070000" /><!-- Gelkmaros -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="216520" /><!-- Sematariux -->
+					<gd_npc npc_id="216580" /><!-- Padmarashka -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188052627" /><!-- [Event] Bag of Ice -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
 	</event>
 </timed_events>

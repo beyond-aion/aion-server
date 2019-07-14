@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="220070000">
 		<!-- Abandoned Drana Growing Device -->
@@ -459,10 +458,6 @@
 		<!-- Bitterwing -->
 		<spawn npc_id="217022" respawn_time="295">
 			<spot x="2152.72" y="1396.5" z="237.91"/>
-		</spawn>
-		<!-- BLDF4_DramataMessageControl_n -->
-		<spawn npc_id="282135" respawn_time="295">
-			<spot x="2933.84" y="851.415" z="37.7871"/>
 		</spawn>
 		<!-- Bluebelly Sparkle -->
 		<spawn npc_id="215964" respawn_time="295">
@@ -3589,10 +3584,6 @@
 		<spawn npc_id="216435" respawn_time="295">
 			<spot x="1304.5" y="1272.03" z="286.7481" h="89" walker_id="6E7066D53123B8865CFD1033AEF626EA27E7EB62"/>
 		</spawn>
-		<!-- Naduka Blade Captain -->
-		<spawn npc_id="281938" respawn_time="10800">
-			<spot x="2906.05" y="865.146" z="35.289" h="107"/>
-		</spawn>
 		<!-- Naduka Bonebreaker -->
 		<spawn npc_id="216095" respawn_time="295">
 			<spot x="2034.89" y="2399.59" z="454.844"/>
@@ -3664,10 +3655,6 @@
 			<spot x="369.891" y="1740.92" z="354.125" h="15"/>
 			<spot x="376.053" y="1792.67" z="361.166" h="112"/>
 			<spot x="421.873" y="1917.89" z="368.096" h="73"/>
-		</spawn>
-		<!-- Naduka Cryptomancer -->
-		<spawn npc_id="281940" respawn_time="10800">
-			<spot x="2952.03" y="878.61" z="35.2656" h="81"/>
 		</spawn>
 		<!-- Naduka Crusader -->
 		<spawn npc_id="216101" respawn_time="295">
@@ -3840,10 +3827,6 @@
 			<spot x="2270.25" y="1896.17" z="382.436"/>
 			<spot x="2345.57" y="1774.25" z="378.285"/>
 			<spot x="2354.4" y="1783.08" z="380.192"/>
-		</spawn>
-		<!-- Naduka Greatpriest -->
-		<spawn npc_id="281941" respawn_time="10800">
-			<spot x="2963.97" y="859.071" z="35.289" h="69"/>
 		</spawn>
 		<!-- Naduka Grunt -->
 		<spawn npc_id="236433" respawn_time="105">
@@ -4259,10 +4242,6 @@
 			<spot x="2812.1" y="1144.44" z="211.756"/>
 			<spot x="2824.02" y="1041.23" z="209.03"/>
 			<spot x="2849.22" y="991.337" z="210.465"/>
-		</spawn>
-		<!-- Naduka Tribunus -->
-		<spawn npc_id="281939" respawn_time="10800">
-			<spot x="2920.7" y="878.935" z="35.2889" h="94"/>
 		</spawn>
 		<!-- Naduka Vaegir -->
 		<spawn npc_id="216828" respawn_time="295">
@@ -6089,10 +6068,6 @@
 			<spot x="309.9901" y="1860.5973" z="360.1654"/>
 			<spot x="318.5172" y="1925.8157" z="368.6063"/>
 			<spot x="336.2850" y="1841.8414" z="364.0967"/>
-		</spawn>
-		<!-- Suspicious Zombie -->
-		<spawn npc_id="281822" respawn_time="295">
-			<spot x="2933.77" y="868.841" z="35.2889"/>
 		</spawn>
 		<!-- Svasuth -->
 		<spawn npc_id="799408" respawn_time="295">
