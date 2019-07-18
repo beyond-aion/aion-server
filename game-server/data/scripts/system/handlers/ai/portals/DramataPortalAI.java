@@ -37,7 +37,7 @@ public class DramataPortalAI extends ActionItemNpcAI {
 				PacketSendUtility.broadcastToWorld(new SM_MESSAGE(getOwner(),
 					"A dangerous rift is materializing inside [pos:Kaisinel's Academy;0 110070000 485.69 407.96 0.0 0]. Use it and destroy the source of this anomaly!",
 					ChatType.BRIGHT_YELLOW_CENTER), p -> p.getLevel() >= 65 && p.getRace() == Race.ELYOS);
-				targetLocation = new WorldPosition(220070000);
+				targetLocation = new WorldPosition(220070000, 2928.98f, 919.95f, 35.289f, (byte) 94);
 				break;
 			case 120080000:
 				PacketSendUtility.broadcastToWorld(new SM_MESSAGE(getOwner(),
