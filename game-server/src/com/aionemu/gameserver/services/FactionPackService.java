@@ -23,10 +23,10 @@ import com.aionemu.gameserver.utils.time.ServerTime;
 public class FactionPackService {
 
 	private static final FactionPackService INSTANCE = new FactionPackService();
-	private final LocalDateTime elyosMinCreationTime = LocalDateTime.of(2015, Month.DECEMBER, 7, 5, 0, 0);
-	private final LocalDateTime elyosMaxCreationTime = LocalDateTime.of(2016, Month.JANUARY, 3, 4, 0, 0);
-	private final LocalDateTime asmodianMinCreationTime = LocalDateTime.of(2016, Month.JANUARY, 17, 2, 0, 0);
-	private final LocalDateTime asmodianMaxCreationTime = LocalDateTime.of(2016, Month.JULY, 1, 0, 0, 0);
+	private final LocalDateTime elyosMinCreationTime = LocalDateTime.of(2019, Month.JULY, 17, 0, 0, 0);
+	private final LocalDateTime elyosMaxCreationTime = null;
+	private final LocalDateTime asmodianMinCreationTime = null;
+	private final LocalDateTime asmodianMaxCreationTime = null;
 	private final FactionPackDAO dao = DAOManager.getDAO(FactionPackDAO.class);
 	private final List<RewardItem> rewards = new ArrayList<>();
 
@@ -35,17 +35,16 @@ public class FactionPackService {
 	}
 
 	private FactionPackService() {
-		rewards.add(new RewardItem(186000236, 230)); // Blood Mark
-		rewards.add(new RewardItem(162000124, 250)); // Superior Restoration Serum
+		rewards.add(new RewardItem(186000236, 500)); // Blood Mark
+		rewards.add(new RewardItem(162002030, 250)); // [Event] Premium Restoration Serum
 		rewards.add(new RewardItem(162000023, 100)); // Greater Healing Potion
-		rewards.add(new RewardItem(186000137, 1500)); // Courage Insignia
-		rewards.add(new RewardItem(186000130, 3500)); // Crucible Insignia
-		rewards.add(new RewardItem(160010121, 10)); // Inquin Bonbon
-		rewards.add(new RewardItem(160010122, 10)); // Inquin Bonbon
+		rewards.add(new RewardItem(166000195, 50)); // Epsilon Enchantment Stone
+		rewards.add(new RewardItem(169630007, 1)); // [Expand Card] Expand Cube Ticket (lvl 4)
+		rewards.add(new RewardItem(188053526, 5)); // [Event] Aion's Steel Form Candy Box
 	}
 
 	public void addPlayerCustomReward(Player player) {
-		if (rewards == null || rewards.isEmpty())
+		if (rewards.isEmpty())
 			return;
 		if (player.getLevel() != 65)
 			return;
@@ -58,10 +57,10 @@ public class FactionPackService {
 	}
 
 	private void sendRewards(Player player, LocalDateTime minCreationTime, LocalDateTime maxCreationTime) {
-		LocalDateTime creationTime = ServerTime.atDate(player.getCreationDate()).toLocalDateTime();
-		if (creationTime.isBefore(minCreationTime))
+		LocalDateTime creationTime = ServerTime.ofEpochMilli(player.getAccount().getCreationDate()).toLocalDateTime();
+		if (minCreationTime == null || creationTime.isBefore(minCreationTime))
 			return;
-		if (creationTime.isAfter(maxCreationTime))
+		if (maxCreationTime != null && creationTime.isAfter(maxCreationTime))
 			return;
 		int accountId = player.getAccount().getId();
 		if (dao.loadReceivingPlayer(accountId) > 0)
