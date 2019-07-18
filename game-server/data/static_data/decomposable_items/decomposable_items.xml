@@ -7299,42 +7299,50 @@
 	<decomposable item_id="188051089" /><!-- Major Pudgy Porgus Bundle -->
 	<decomposable item_id="188051090" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="125040046" /><!-- Beach Hat -->
-			<item id="125040044" /><!-- Cute Swim Hat -->
-			<item id="125040039" /><!-- Cool Mirror Shades -->
-			<item id="125045076" /><!-- Cool Swim Cap -->
+			<item id="125045165" /><!-- NPC Summer Flower -->
+			<item id="125040042" /><!-- Summer Sunglasses -->
+			<item id="125045068" /><!-- NPC Flower-shaped Hairpin -->
+			<item id="125045242" /><!-- Aquablue Sunhat -->
+			<item id="125045275" /><!-- Daeva's Coy Companion -->
 			<item id="188053793" min_count="5" /><!-- Rare Manastone of Aetheric Field Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051091" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
 			<item id="169600087" /><!-- [Emotion Card] 'Bad Girl' Dance -->
-			<item id="110900770" /><!-- Leopard Bikini -->
-			<item id="110900105" /><!-- Hot Swimsuit -->
-			<item id="110900846" /><!-- Urban Summer Blue -->
-			<item id="110900847" /><!-- Urban Summer Lime -->
-			<item id="110900824" /><!-- Inked-Up Swimsuit-->
+			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
+			<item id="169600003" /><!-- [Emotion Card] 'Flirt' -->
+			<item id="169600186" /><!-- [Emotion Card] Sing "Good Day" -->
+			<item id="169600187" /><!-- [Emotion Card] Sing "You and I" -->
+			<item id="110900485" /><!-- Proud Single's Costume -->
+			<item id="110900105" /><!-- Striped Ballet Dress -->
+			<item id="110900107" /><!-- NPC Cool Swimsuit -->
+			<item id="110900420" /><!-- Cool Summer Look -->
 			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 			<item id="188053609" min_count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051092" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="125040046" /><!-- Beach Hat -->
-			<item id="125040044" /><!-- Cute Swim Hat -->
-			<item id="125040039" /><!-- Cool Mirror Shades -->
-			<item id="125045076" /><!-- Cool Swim Cap -->
+			<item id="125045165" /><!-- NPC Summer Flower -->
+			<item id="125040042" /><!-- Summer Sunglasses -->
+			<item id="125045068" /><!-- NPC Flower-shaped Hairpin -->
+			<item id="125045242" /><!-- Aquablue Sunhat -->
+			<item id="125045275" /><!-- Daeva's Coy Companion -->
 			<item id="188053793" min_count="5" /><!-- Rare Manastone of Aetheric Field Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051093" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
 			<item id="169600087" /><!-- [Emotion Card] 'Bad Girl' Dance -->
-			<item id="110900770" /><!-- Leopard Bikini -->
-			<item id="110900105" /><!-- Hot Swimsuit -->
-			<item id="110900846" /><!-- Urban Summer Blue -->
-			<item id="110900847" /><!-- Urban Summer Lime -->
-			<item id="110900824" /><!-- Inked-Up Swimsuit-->
+			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
+			<item id="169600003" /><!-- [Emotion Card] 'Flirt' -->
+			<item id="169600186" /><!-- [Emotion Card] Sing "Good Day" -->
+			<item id="169600187" /><!-- [Emotion Card] Sing "You and I" -->
+			<item id="110900485" /><!-- Proud Single's Costume -->
+			<item id="110900105" /><!-- Striped Ballet Dress -->
+			<item id="110900107" /><!-- NPC Cool Swimsuit -->
+			<item id="110900420" /><!-- Cool Summer Look -->
 			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 			<item id="188053609" min_count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</items>
@@ -22755,92 +22763,106 @@
 	<decomposable item_id="188052623" /><!-- [Event] Romantic Dye Box -->
 	<decomposable item_id="188052624" /><!-- [Event] Dramata's Bone Wing Box -->
 	<decomposable item_id="188052625"><!-- [Event] Ice-hot Box -->
-		<items chance="7">
-			<item id="162000124" min_count="15" /><!-- Superior Recovery Serum -->
+		<items chance="8">
+			<item id="162000124" min_count="10" /><!-- Superior Recovery Serum -->
 		</items>
-		<items chance="7">
-			<item id="162000107" min_count="5" /><!-- Saam King's Herb -->
+		<items chance="5.2">
+			<item id="162000107" min_count="3" /><!-- Saam King's Herb -->
 		</items>
-		<items chance="7">
-			<item id="164000255" min_count="5" /><!-- Fine Crit Strike Scroll -->
+		<items chance="5.2">
+			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
 		</items>
-		<items chance="7">
-			<item id="164000256" min_count="5" /><!-- Fine Crit Spell Scroll -->
+		<items chance="5.2">
+			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
 		</items>
-		<items chance="7">
+		<items chance="6">
+			<item id="160005060" min_count="2" /><!-- [Event] Zeraka Aether Jelly -->
+		</items>
+		<items chance="6">
+			<item id="160001308" min_count="3" race="ELYOS" /><!-- Beshu Cocktail -->
+			<item id="160002306" min_count="3" race="ASMODIANS" /><!-- Drupa Cocktail -->
+		</items>
+		<items chance="8">
+			<item id="161001001" /><!-- Revival Stone -->
+		</items>
+		<items chance="4">
 			<item id="164002116" min_count="3" /><!-- [Event] Rx: Accelerox -->
 		</items>
-		<items chance="7">
+		<items chance="4">
 			<item id="164002117" min_count="3" /><!-- [Event] Rx: Blitzopan -->
 		</items>
-		<items chance="7">
+		<items chance="4">
 			<item id="164002118" min_count="3" /><!-- [Event] Rx: Castafodin -->
 		</items>
-		<items chance="7">
+		<items chance="4">
 			<item id="164002272" min_count="3" /><!-- [Event] Enduring Greater Raging Wind Scroll -->
 		</items>
-		<items chance="7">
-			<item id="166000194" min_count="5" /><!-- Delta Enchantment Stone -->
+		<items chance="5">
+			<item id="166000194" min_count="3" /><!-- Delta Enchantment Stone -->
 		</items>
-		<items chance="7">
-			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
+		<items chance="5">
+			<item id="166000195" min_count="2" /><!-- Epsilon Enchantment Stone -->
 		</items>
-		<items chance="7">
+		<items chance="5.6">
 			<item id="186000399" min_count="10" /><!-- Honorable Conqueror's Mark -->
 		</items>
-		<items chance="2">
+		<items chance="4">
+			<item id="160010101" min_count="3" race="ELYOS" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="160010102" min_count="3" race="ASMODIANS" /><!-- Summer-Loving Inquin Form Candy -->
+		</items>
+		<items chance="0.4">
 			<item id="188053636" /><!-- Blood Mark Box -->
 		</items>
-		<items chance="2.5">
-			<item id="166030005" min_count="1" max_count="3" /><!-- Tempering Solution -->
+		<items chance="2.4">
+			<item id="166030005" min_count="2" /><!-- Tempering Solution -->
 		</items>
-		<items chance="2.5">
+		<items chance="3.2">
 			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
 		</items>
-		<items chance="2.5">
-			<item id="166500002" min_count="1" max_count="3" /><!-- Amplification Stone -->
-		</items>
-		<items chance="2.25">
-			<item id="166200013" /><!-- Enduring Mythic Weapon Tuning Scroll -->
-		</items>
-		<items chance="2.25">
-			<item id="166200014" /><!-- Enduring Mythic Armor Tuning Scroll -->
+		<items chance="3.2">
+			<item id="166500002" min_count="2" /><!-- Amplification Stone -->
 		</items>
 		<items chance="1">
-			<item id="188053614" /><!-- Illusion Godstone Bundle -->
+			<item id="188053207" /><!-- [Event] Ancient Spirit's Eternal Armor Chest -->
 		</items>
-		<items chance="1">
+		<items chance="2">
 			<item id="188053295" /><!-- Empyrean Plume Chest -->
 		</items>
-		<items chance="1">
+		<items chance="0.6">
 			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
 		</items>
-		<items chance="1">
-			<item id="188052388" /><!-- Modor's Equipment Box -->
+		<items chance="3">
+			<item id="166200014" /><!-- Enduring Mythic Armor Tuning Scroll -->
 		</items>
-		<items chance="1">
-			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
+		<items chance="3">
+			<item id="166200013" /><!-- Enduring Mythic Weapon Tuning Scroll -->
 		</items>
-		<items chance="1">
-			<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+		<items chance="0.4">
+			<item id="188053100" /><!-- Pure Dynatoum's Equipment Crux Box -->
 		</items>
-		<items chance="1">
-			<item id="188053903" /><!-- Honourable Conquest Equipment Chest -->
+		<items chance="0.4">
+			<item id="188053099" /><!-- Pure Modor's Equipment Crux Box -->
 		</items>
-		<items chance="1">
+		<items chance="0.08">
+			<item id="165020016" /><!-- Accessory Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+		</items>
+		<items chance="0.4">
 			<item id="188053033" /><!-- Kunax's Equipment Box -->
 		</items>
-		<items chance="0.25">
-			<item id="190100131" /><!-- Lustrous Skymane -->
+		<items chance="0.24">
+			<item id="168310018" /><!-- Major Blessed Augment: Level 2 -->
 		</items>
-		<items chance="0.25">
-			<item id="187000129" /><!-- Brazen Bulwark Burster -->
+		<items chance="0.2">
+			<item id="190100143" /><!-- Seakissed Aetherboard -->
 		</items>
-		<items chance="0.25">
+		<items chance="0.2">
+			<item id="187060161" /><!-- Blitzbolt Wings -->
+		</items>
+		<items chance="0.068">
 			<item id="188053004" /><!-- [Event] Dragon Lord's Weapon Chest -->
 		</items>
-		<items chance="0.25">
-			<item id="188052559" /><!-- Greater Felicitous Socketing Box (Eternal) -->
+		<items chance="0.012">
+			<item id="165020020" /><!-- Noble Weapon Wrapping Scroll (Mythic/Lv. 65 and lower) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052626" /><!-- [Event] Cocktail Shaker -->

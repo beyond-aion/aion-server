@@ -386,7 +386,79 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Summer Event" start="2019-07-13T00:00:00" end="2019-08-19T23:59:59">
+	<event name="Summer Event" start="2019-07-19T00:00:00" end="2019-08-04T23:59:59">
+		<spawns>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Victoria -->
+				<spawn npc_id="831808" respawn_time="295">
+					<spot x="1208.1000" y="1392.6000" z="208.3000" h="10" />
+				</spawn>
+				<!-- Oltrit -->
+				<spawn npc_id="831811" respawn_time="295">
+					<spot x="1202.6000" y="1394.9000" z="208.3000" h="6" />
+				</spawn>
+				<!-- Rezar
+				<spawn npc_id="831806" respawn_time="295">
+					<spot x="1209.3000" y="1399.8000" z="208.3000" h="5" />
+				</spawn> -->
+				<!-- Lamoralf -->
+				<spawn npc_id="831807" respawn_time="295">
+					<spot x="1200.5000" y="1413.9000" z="208.3000" h="118" />
+				</spawn>
+				<!-- Summer Beach Bar -->
+				<spawn npc_id="701937" respawn_time="295">
+					<spot x="1198.1000" y="1398.5000" z="208" h="3" />
+				</spawn>
+				<!-- Slim -->
+				<spawn npc_id="831827" respawn_time="295">
+					<spot x="1185.1000" y="1414.4000" z="208.1000" h="111" />
+				</spawn>
+				<!-- Supia -->
+				<spawn npc_id="831809" respawn_time="295">
+					<spot x="1192.8000" y="1387.5000" z="208.3000" h="15" />
+				</spawn>
+				<!-- Jeanne -->
+				<spawn npc_id="831810" respawn_time="295">
+					<spot x="1197.3000" y="1386" z="208.3000" h="24" />
+				</spawn>
+			</spawn_map>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Illaidah -->
+				<spawn npc_id="831799" respawn_time="295">
+					<spot x="1519.1000" y="1508.8000" z="565.9000" h="56" />
+				</spawn>
+				<!-- Walker -->
+				<spawn npc_id="831798" respawn_time="295">
+					<spot x="1533.9000" y="1498.4000" z="566.2000" h="43" />
+				</spawn>
+				<!-- Slim -->
+				<spawn npc_id="831815" respawn_time="295">
+					<spot x="1529.8000" y="1488.7000" z="565.9000" h="27" />
+				</spawn>
+				<!-- Adolpha -->
+				<spawn npc_id="831802" respawn_time="295">
+					<spot x="1531.9000" y="1523.9000" z="566.2000" h="61" />
+				</spawn>
+				<!-- Summer Beach Bar -->
+				<spawn npc_id="701937" respawn_time="295">
+					<spot x="1533.1000" y="1511.6000" z="565.9000" h="58" />
+				</spawn>
+				<!-- Callubriz
+				<spawn npc_id="831797" respawn_time="295">
+					<spot x="1521.9000" y="1515.2000" z="566.2000" h="65" />
+				</spawn> -->
+				<!-- Elena -->
+				<spawn npc_id="831801" respawn_time="295">
+					<spot x="1541.7000" y="1522.2000" z="566.2000" h="62" />
+				</spawn>
+				<!-- Ibiza -->
+				<spawn npc_id="831800" respawn_time="295">
+					<spot x="1542.2000" y="1517.6000" z="566.2000" h="62" />
+				</spawn>
+			</spawn_map>
+		</spawns>
 		<event_drops>
 			<gd_rule rule_name="Ice Block" chance="14">
 				<gd_maps>
