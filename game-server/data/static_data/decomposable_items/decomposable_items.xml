@@ -11102,38 +11102,22 @@
 	</decomposable>
 	<decomposable item_id="188051460"><!-- Box Blessed by Veille -->
 		<items>
-			<item id="186000242" min_count="2" /><!-- Ceramium Medals -->
+			<item id="186000242" min_count="10" /><!-- Ceramium Medals -->
 			<item id="164002167" min_count="15" /><!-- Drana Coffee -->
-			<item id="166030005" min_count="5" /><!-- Tempering Solution -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
-		</items>
-		<items>
-			<item id="186000242" min_count="2" /><!-- Ceramium Medals -->
-			<item id="164002167" min_count="15" /><!-- Drana Coffee -->
-			<item id="166500002" min_count="5" /><!-- Amplification Stone -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+			<item id="166030005" min_count="10" /><!-- Tempering Solution -->
+			<item id="169620067" min_count="5" /><!-- AP Boost Charm II - 50% -->
+			<item id="188052625" min_count="25" /><!-- [Event] Ice-hot Box -->
+			<item id="186000111" min_count="50" /><!-- Scorching Heat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051461"><!-- Box Blessed by Mastarius -->
 		<items>
-			<item id="186000242" min_count="2" /><!-- Ceramium Medals -->
+			<item id="186000242" min_count="10" /><!-- Ceramium Medals -->
 			<item id="164002167" min_count="15" /><!-- Drana Coffee -->
-			<item id="166030005" min_count="5" /><!-- Tempering Solution -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
-		</items>
-		<items>
-			<item id="186000242" min_count="2" /><!-- Ceramium Medals -->
-			<item id="164002167" min_count="15" /><!-- Drana Coffee -->
-			<item id="166500002" min_count="5" /><!-- Amplification Stone -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" /><!-- Lv70 Composite -->
+			<item id="166030005" min_count="10" /><!-- Tempering Solution -->
+			<item id="169620067" min_count="5" /><!-- AP Boost Charm II - 50% -->
+			<item id="188052625" min_count="25" /><!-- [Event] Ice-hot Box -->
+			<item id="186000111" min_count="50" /><!-- Scorching Heat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051462"><!-- Piloti's Balic Materials -->
@@ -24555,7 +24539,12 @@
 	<decomposable item_id="188052725" /><!-- [Event] Pirate King's Treasure Bundle -->
 	<decomposable item_id="188052726" /><!-- [Event] Ailu Form Candy Box -->
 	<decomposable item_id="188052727" /><!-- [Event] Padmarashka's Weapon Chest -->
-	<decomposable item_id="188052728" /><!-- [Event] Dramata Wing Chest -->
+	<decomposable item_id="188052728" selectable="true"><!-- [Event] Dramata Wing Chest -->
+		<items>
+			<item id="187050020" /><!-- [Event] Dramata's Bone Wings -->
+			<item id="187050021" /><!-- [Event] Dramata Wings -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052729" /><!-- Eternal Bastion Warfront Reward Chest -->
 	<decomposable item_id="188052730" /><!-- Prestige Case -->
 	<decomposable item_id="188052731"><!-- Ancient Crown Case -->
@@ -25834,8 +25823,44 @@
 	<decomposable item_id="188052943" /><!-- Hocus Pocus Clover Box -->
 	<decomposable item_id="188052944" /><!-- Hocus Pocus Diamond Box -->
 	<decomposable item_id="188052945" /><!-- Hocus Pocus Spade Box -->
-	<decomposable item_id="188052946" /><!-- Padmarashka's Raging Weapon Box -->
-	<decomposable item_id="188052947" /><!-- Sematariux's Weapon Box -->
+	<decomposable item_id="188052946" selectable="true"><!-- Padmarashka's Raging Weapon Box -->
+		<items>
+			<item id="100001281" /><!-- Padmarashka's Raging Sword -->
+			<item id="100001317" /><!-- Padmarashka's Raging Scale Sword -->
+			<item id="100001318" /><!-- Padmarashka's Raging Reversed Sword -->
+			<item id="100100976" /><!-- Padmarashka's Raging Warhammer -->
+			<item id="100201134" /><!-- Padmarashka's Raging Dagger -->
+			<item id="100201160" /><!-- Padmarashka's Raging Dirk -->
+			<item id="100500992" /><!-- Padmarashka's Raging Jewel -->
+			<item id="100601046" /><!-- Padmarashka's Raging Tome -->
+			<item id="100900979" /><!-- Padmarashka's Raging Greatsword -->
+			<item id="101300937" /><!-- Padmarashka's Raging Spear -->
+			<item id="101501004" /><!-- Padmarashka's Raging Staff -->
+			<item id="101701018" /><!-- Padmarashka's Raging Longbow -->
+			<item id="101800860" /><!-- Padmarashka's Pistol -->
+			<item id="101800861" /><!-- Padmarashka's Pistol -->
+			<item id="101900790" /><!-- Padmarashka's Aethercannon -->
+			<item id="102000824" /><!-- Padmarashka's Harp -->
+			<item id="102100751" /><!-- Padmarashka's Cipher-Blade -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052947" selectable="true"><!-- Sematariux's Weapon Box -->
+		<items>
+			<item id="100000915" /><!-- Sematariux's Sword -->
+			<item id="100100685" /><!-- Sematariux's Warhammer -->
+			<item id="100200815" /><!-- Sematariux's Dagger -->
+			<item id="100500706" /><!-- Sematariux's Jewel -->
+			<item id="100600763" /><!-- Sematariux's Tome -->
+			<item id="100900692" /><!-- Sematariux's Greatsword -->
+			<item id="101300662" /><!-- Sematariux's Spear -->
+			<item id="101500706" /><!-- Sematariux's Staff -->
+			<item id="101700730" /><!-- Sematariux's Longbow -->
+			<item id="101800634" /><!-- Sematariux's Pistol -->
+			<item id="101900633" /><!-- Sematariux's Aethercannon -->
+			<item id="102000668" /><!-- Sematariux's Harp -->
+			<item id="102100565" /><!-- Sematariux's Cipher-Blade -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052948" /><!-- [Event] [Event] Lustrous Godstone Box -->
 	<decomposable item_id="188052949" /><!-- [Event] Discordant Weapon Box -->
 	<decomposable item_id="188052950" /><!-- Power Lockbox Cache -->
@@ -29391,16 +29416,82 @@
 	<decomposable item_id="188053361" /><!-- Archon Reward Box -->
 	<decomposable item_id="188053362" /><!-- Archon Lesser Reward Box -->
 	<decomposable item_id="188053363" /><!-- Guardian Abyss Weapon Box -->
-	<decomposable item_id="188053364" /><!-- Guardian Abyss Armor Box -->
+	<decomposable item_id="188053364"><!-- Guardian Abyss Armor Box -->
+		<items>
+			<item id="188053367" player_classes="TEMPLAR GLADIATOR" /><!-- Guardian Tactician Plate Set -->
+			<item id="188053369" player_classes="CLERIC CHANTER RIDER" /><!-- Guardian Tactician Chain Set -->
+			<item id="188053371" player_classes="ASSASSIN RANGER GUNNER" /><!-- Guardian Tactician Leather Set -->
+			<item id="188053373" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Guardian Tactician Cloth Set -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053365" /><!-- Archon Abyss Weapon Box -->
-	<decomposable item_id="188053366" /><!-- Archon Abyss Armor Box -->
-	<decomposable item_id="188053367" /><!-- Guardian Tactician Plate Set -->
+	<decomposable item_id="188053366"><!-- Archon Abyss Armor Box -->
+		<items>
+			<item id="188053383" player_classes="TEMPLAR GLADIATOR" /><!-- Archon Tactician Plate Set -->
+			<item id="188053385" player_classes="CLERIC CHANTER RIDER" /><!-- Archon Tactician Chain Set -->
+			<item id="188053387" player_classes="ASSASSIN RANGER GUNNER" /><!-- Archon Tactician Leather Set -->
+			<item id="188053389" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Archon Tactician Cloth Set -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053367" selectable="true"><!-- Guardian Tactician Plate Set -->
+		<items>
+			<item id="110601511" /><!-- Resplendent Breastplate -->
+			<item id="111601474" /><!-- Resplendent Gauntlets -->
+			<item id="112601455" /><!-- Resplendent Shoulderplates -->
+			<item id="113601457" /><!-- Resplendent Greaves -->
+			<item id="114601464" /><!-- Resplendent Sabatons -->
+			<item id="110601513" /><!-- Seraph Breastplate -->
+			<item id="111601476" /><!-- Seraph Gauntlets -->
+			<item id="112601457" /><!-- Seraph Shoulderplates -->
+			<item id="113601459" /><!-- Seraph Greaves -->
+			<item id="114601466" /><!-- Seraph Sabatons -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053368" /><!-- Guardian Envoy Plate Set -->
-	<decomposable item_id="188053369" /><!-- Guardian Tactician Chain Set -->
+	<decomposable item_id="188053369" selectable="true"><!-- Guardian Tactician Chain Set -->
+		<items>
+			<item id="110551037" /><!-- Resplendent Hauberk -->
+			<item id="111501595" /><!-- Resplendent Handguards -->
+			<item id="112501537" /><!-- Resplendent Spaulders -->
+			<item id="113501613" /><!-- Resplendent Chausses -->
+			<item id="114501622" /><!-- Resplendent Brogans -->
+			<item id="110551039" /><!-- Seraph Hauberk -->
+			<item id="111501597" /><!-- Seraph Handguards -->
+			<item id="112501539" /><!-- Seraph Spaulders -->
+			<item id="113501615" /><!-- Seraph Chausses -->
+			<item id="114501624" /><!-- Seraph Brogans -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053370" /><!-- Guardian Envoy Chain Set -->
-	<decomposable item_id="188053371" /><!-- Guardian Tactician Leather Set -->
+	<decomposable item_id="188053371" selectable="true"><!-- Guardian Tactician Leather Set -->
+		<items>
+			<item id="110301707" /><!-- Resplendent Jerkin -->
+			<item id="111301645" /><!-- Resplendent Vambrace -->
+			<item id="112301584" /><!-- Resplendent Shoulderplates -->
+			<item id="113301676" /><!-- Resplendent Breeches -->
+			<item id="114301713" /><!-- Resplendent Boots -->
+			<item id="110301709" /><!-- Seraph Jerkin -->
+			<item id="111301647" /><!-- Seraph Vambrace -->
+			<item id="112301586" /><!-- Seraph Shoulderplates -->
+			<item id="113301678" /><!-- Seraph Breeches -->
+			<item id="114301715" /><!-- Seraph Boots -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053372" /><!-- Guardian Envoy Leather Set -->
-	<decomposable item_id="188053373" /><!-- Guardian Tactician Cloth Set -->
+	<decomposable item_id="188053373" selectable="true"><!-- Guardian Tactician Cloth Set -->
+		<items>
+			<item id="110101704" /><!-- Resplendent Tunic -->
+			<item id="111101534" /><!-- Resplendent Gloves -->
+			<item id="112101486" /><!-- Resplendent Pauldrons -->
+			<item id="113101548" /><!-- Resplendent Leggings -->
+			<item id="114101582" /><!-- Resplendent Shoes -->
+			<item id="110101706" /><!-- Seraph Tunic -->
+			<item id="111101536" /><!-- Seraph Gloves -->
+			<item id="112101488" /><!-- Seraph Pauldrons -->
+			<item id="113101550" /><!-- Seraph Leggings -->
+			<item id="114101584" /><!-- Seraph Shoes -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053374" /><!-- Guardian Envoy Cloth Set -->
 	<decomposable item_id="188053375" /><!-- Guardian Commander Plate Set -->
 	<decomposable item_id="188053376" /><!-- Guardian Executor Plate Set -->
@@ -29410,13 +29501,65 @@
 	<decomposable item_id="188053380" /><!-- Guardian Executor Leather Set -->
 	<decomposable item_id="188053381" /><!-- Guardian Commander Cloth Set -->
 	<decomposable item_id="188053382" /><!-- Guardian Executor Cloth Set -->
-	<decomposable item_id="188053383" /><!-- Archon Tactician Plate Set -->
+	<decomposable item_id="188053383" selectable="true"><!-- Archon Tactician Plate Set -->
+		<items>
+			<item id="110601512" /><!-- Eclipse Breastplate -->
+			<item id="111601475" /><!-- Eclipse Gauntlets -->
+			<item id="112601456" /><!-- Eclipse Shoulderplates -->
+			<item id="113601458" /><!-- Eclipse Greaves -->
+			<item id="114601465" /><!-- Eclipse Sabatons -->
+			<item id="110601514" /><!-- Shadowshift Breastplate -->
+			<item id="111601477" /><!-- Shadowshift Gauntlets -->
+			<item id="112601458" /><!-- Shadowshift Shoulderplates -->
+			<item id="113601460" /><!-- Shadowshift Greaves -->
+			<item id="114601467" /><!-- Shadowshift Sabatons -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053384" /><!-- Archon Envoy Plate Set -->
-	<decomposable item_id="188053385" /><!-- Archon Tactician Chain Set -->
+	<decomposable item_id="188053385" selectable="true"><!-- Archon Tactician Chain Set -->
+		<items>
+			<item id="110551038" /><!-- Eclipse Hauberk -->
+			<item id="111501596" /><!-- Eclipse Handguards -->
+			<item id="112501538" /><!-- Eclipse Spaulders -->
+			<item id="113501614" /><!-- Eclipse Chausses -->
+			<item id="114501623" /><!-- Eclipse Brogans -->
+			<item id="110551040" /><!-- Shadowshift Hauberk -->
+			<item id="111501598" /><!-- Shadowshift Handguards -->
+			<item id="112501540" /><!-- Shadowshift Spaulders -->
+			<item id="113501616" /><!-- Shadowshift Chausses -->
+			<item id="114501625" /><!-- Shadowshift Brogans -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053386" /><!-- Archon Envoy Chain Set -->
-	<decomposable item_id="188053387" /><!-- Archon Tactician Leather Set -->
+	<decomposable item_id="188053387" selectable="true"><!-- Archon Tactician Leather Set -->
+		<items>
+			<item id="110301708" /><!-- Eclipse Jerkin -->
+			<item id="111301646" /><!-- Eclipse Vambrace -->
+			<item id="112301585" /><!-- Eclipse Shoulderplates -->
+			<item id="113301677" /><!-- Eclipse Breeches -->
+			<item id="114301714" /><!-- Eclipse Boots -->
+			<item id="110301710" /><!-- Shadowshift Jerkin -->
+			<item id="111301648" /><!-- Shadowshift Vambrace -->
+			<item id="112301587" /><!-- Shadowshift Shoulderplates -->
+			<item id="113301679" /><!-- Shadowshift Breeches -->
+			<item id="114301716" /><!-- Shadowshift Boots -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053388" /><!-- Archon Envoy Leather Set -->
-	<decomposable item_id="188053389" /><!-- Archon Tactician Cloth Set -->
+	<decomposable item_id="188053389" selectable="true"><!-- Archon Tactician Cloth Set -->
+		<items>
+			<item id="110101705" /><!-- Eclipse Tunic -->
+			<item id="111101535" /><!-- Eclipse Gloves -->
+			<item id="112101487" /><!-- Eclipse Pauldrons -->
+			<item id="113101549" /><!-- Eclipse Leggings -->
+			<item id="114101583" /><!-- Eclipse Shoes -->
+			<item id="110101707" /><!-- Shadowshift Tunic -->
+			<item id="111101537" /><!-- Shadowshift Gloves -->
+			<item id="112101489" /><!-- Shadowshift Pauldrons -->
+			<item id="113101551" /><!-- Shadowshift Leggings -->
+			<item id="114101585" /><!-- Shadowshift Shoes -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053390" /><!-- Archon Envoy Cloth Set -->
 	<decomposable item_id="188053391" /><!-- Archon Commander Plate Set -->
 	<decomposable item_id="188053392" /><!-- Archon Executor Plate Set -->
