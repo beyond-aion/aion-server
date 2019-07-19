@@ -98,7 +98,10 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	@Override
 	public boolean onPassFlyingRing(Player player, String flyingRing) {
 		if (flyingRing.equals("ROAH_WING_1") && startTime.compareAndSet(0, System.currentTimeMillis())) {
-			spawn(CENTER_ARTIFACT_ID, 504.1977f, 481.5051f, 87.2790f, (byte) 30);
+			Npc artifact = (Npc) spawn(CENTER_ARTIFACT_ID, 504.1977f, 481.5051f, 87.2790f, (byte) 30);
+			if (artifact != null)
+				adaptNPC(artifact, rank);
+
 			PacketSendUtility.broadcastToMap(instance, STR_MSG_INSTANCE_START_IDABRE());
 			PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, TIME_LIMIT));
 			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
@@ -253,11 +256,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			rank = CustomInstanceService.getInstance().loadOrCreateRank(playerObjId).getRank();
 			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
 				"Welcome to the 'Eternal Challenge', " + CustomInstanceRankEnum.getRankDescription(rank) + " challenger!", ChatType.BRIGHT_YELLOW_CENTER));
-			Npc artifact = getNpc(CENTER_ARTIFACT_ID);
-			if (artifact != null) {
-				adaptNPC(artifact, rank);
-				spawnUnlockableNpcs(player);
-			}
+			spawnUnlockableNpcs(player);
 			// train player model from previous boss runs
 			skillSet = PlayerModelController.getSkillSetForPlayer(playerObjId);
 			model = PlayerModelController.trainModelForPlayer(playerObjId, skillSet);
