@@ -29,8 +29,8 @@ public class SM_CREATE_CHARACTER extends AbstractPlayerInfoPacket {
 	public static final int RESPONSE_NAME_RESERVED = 11;
 	/** You cannot create characters of other races in the same server */
 	public static final int RESPONSE_OTHER_RACE = 12;
-	/** You cannot create characters if dont have permission */
-	public static final int RESPONSE_PERMISSION_TO_CREATE = 20;
+	/** You cannot create the selected class in the current server */
+	public static final int RESPONSE_FORBIDDEN_CLASS = 20;
 	/** open create characters window */
 	public static final int RESPONSE_OPEN_CREATION_WINDOW = 22;
 
