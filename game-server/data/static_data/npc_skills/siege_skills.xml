@@ -132,7 +132,7 @@
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
 		</npc_skill>
 		<npc_skill id="17367" lv="40" prob="70" cd="15000" /><!-- Wide Area Stun -->
-		<npc_skill id="17382" lv="1" prob="30" min_time="30000" cd="15000"><!-- Treatment -->
+		<npc_skill id="17382" lv="1" prob="30" min_time="30000" cd="15000" target="NONE"><!-- Treatment -->
 			<cond cond_type="HELP_FRIEND" hp_below="40" range="25" />
 		</npc_skill>
 	</npc_skills>
@@ -155,7 +155,7 @@
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
 		</npc_skill>
 		<npc_skill id="17367" lv="50" prob="70" cd="15000" /><!-- Wide Area Stun -->
-		<npc_skill id="17382" lv="1" prob="30" min_time="30000" cd="15000"><!-- Treatment -->
+		<npc_skill id="17382" lv="1" prob="30" min_time="30000" cd="15000" target="NONE"><!-- Treatment -->
 			<cond cond_type="HELP_FRIEND" hp_below="40" range="25" />
 		</npc_skill>
 	</npc_skills>
@@ -178,7 +178,7 @@
 			<cond cond_type="HELP_FRIEND" hp_below="60" range="25" />
 		</npc_skill>
 		<npc_skill id="17367" lv="65" prob="70" cd="15000" /><!-- Wide Area Stun -->
-		<npc_skill id="17382" lv="1" prob="30" min_time="20000" cd="30000"><!-- Treatment -->
+		<npc_skill id="17382" lv="1" prob="30" min_time="20000" cd="30000" target="NONE"><!-- Treatment -->
 			<cond cond_type="HELP_FRIEND" hp_below="40" range="25" />
 		</npc_skill>
 	</npc_skills>
