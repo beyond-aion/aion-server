@@ -45,7 +45,7 @@ public class _4077PorgusRoundup extends AbstractQuestHandler {
 			}
 			qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 			updateQuestStatus(env);
-			NpcActions.delete(npc, true);
+			NpcActions.delete(npc, !npc.isDead());
 			return true;
 		} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 
@@ -54,7 +54,7 @@ public class _4077PorgusRoundup extends AbstractQuestHandler {
 			}
 			qs.setStatus(QuestStatus.REWARD);
 			updateQuestStatus(env);
-			NpcActions.delete(npc, true);
+			NpcActions.delete(npc, !npc.isDead());
 			return true;
 		}
 
