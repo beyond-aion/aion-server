@@ -198,11 +198,11 @@
 					</spawn>
 					<!-- Outer Gate (LDF5_Fortress_7011_Mist_Off_Terrace_Door_Da) -->
 					<spawn npc_id="252495">
-						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
-						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
-						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
-						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
-						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+						<spot x="746.44540" y="307.91357" z="155.8752" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="156.48" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="155.8407" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="155.7856" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="155.8632" h="30" static_id="500"/>
 					</spawn>
 					<!-- Outer Gate Teleport Device (LDF5_Fortress_Door1_Tele_F_D -->
 					<spawn npc_id="250189">
@@ -492,11 +492,11 @@
 					</spawn>
 					<!-- Outer Gate (LDF5_Fortress_7011_Mist_Off_Terrace_Door_Da) -->
 					<spawn npc_id="252495">
-						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
-						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
-						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
-						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
-						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+						<spot x="746.44540" y="307.91357" z="155.8752" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="156.48" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="155.8407" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="155.7856" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="155.8632" h="30" static_id="500"/>
 					</spawn>
 					<!-- Outer Gate Teleport Device (LDF5_Fortress_Door1_Tele_F_D -->
 					<spawn npc_id="250189">
@@ -794,11 +794,11 @@
 					</spawn>
 					<!-- Outer Gate (LDF5_Fortress_7011_Mist_Off_Terrace_Door_Li) -->
 					<spawn npc_id="252494" respawn_time="295">
-						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
-						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
-						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
-						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
-						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+						<spot x="746.44540" y="307.91357" z="155.8752" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="156.48" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="155.8407" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="155.7856" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="155.8632" h="30" static_id="500"/>
 					</spawn>
 					<!-- Outer Gate Teleport Device (LDF5_Fortress_Door1_Tele_F_L -->
 					<spawn npc_id="250188" respawn_time="295">
@@ -1086,11 +1086,11 @@
 					</spawn>
 					<!-- Outer Gate (LDF5_Fortress_7011_Mist_Off_Terrace_Door_Li) -->
 					<spawn npc_id="252494">
-						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
-						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
-						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
-						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
-						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+						<spot x="746.44540" y="307.91357" z="155.8752" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="156.48" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="155.8407" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="155.7856" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="155.8632" h="30" static_id="500"/>
 					</spawn>
 					<!-- Outer Gate Teleport Device (LDF5_Fortress_Door1_Tele_F_L -->
 					<spawn npc_id="250188">
@@ -1280,11 +1280,11 @@
 					</spawn>
 					<!-- Outer Gate (LDF5_Fortress_7011_Mist_Off_Terrace_Door_Dr) -->
 					<spawn npc_id="252496">
-						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
-						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
-						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
-						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
-						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+						<spot x="746.44540" y="307.91357" z="155.8752" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="156.48" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="155.8407" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="155.7856" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="155.8632" h="30" static_id="500"/>
 					</spawn>
 				</siege_mod>
 				<siege_mod mod="SIEGE">
@@ -1603,11 +1603,11 @@
 					</spawn>
 					<!-- Outer Gate (LDF5_Fortress_7011_Terrace_Door_Dr) -->
 					<spawn npc_id="252291">
-						<spot x="746.44540" y="307.91357" z="158.5857" h="30" static_id="494"/>
-						<spot x="787.07710" y="330.39362" z="158.5857" h="30" static_id="149"/>
-						<spot x="828.06190" y="308.23300" z="157.8945" h="30" static_id="492"/>
-						<spot x="746.51086" y="256.32490" z="158.5857" h="30" static_id="657"/>
-						<spot x="828.06400" y="256.24880" z="157.8945" h="30" static_id="500"/>
+						<spot x="746.44540" y="307.91357" z="155.8752" h="30" static_id="494"/>
+						<spot x="787.07710" y="330.39362" z="156.48" h="30" static_id="149"/>
+						<spot x="828.06190" y="308.23300" z="155.8407" h="30" static_id="492"/>
+						<spot x="746.51086" y="256.32490" z="155.7856" h="30" static_id="657"/>
+						<spot x="828.06400" y="256.24880" z="155.8632" h="30" static_id="500"/>
 					</spawn>
 					<!-- Balaur Gate (LDF5_Fortress_7011_Door_D_Dr) -->
 					<spawn npc_id="881580">
