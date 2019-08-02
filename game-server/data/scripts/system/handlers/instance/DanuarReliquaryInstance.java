@@ -1,5 +1,6 @@
 package instance;
 
+import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -22,7 +23,7 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 
 	private AtomicBoolean isCursedModorSpawned = new AtomicBoolean();
 	private AtomicInteger cloneKills = new AtomicInteger();
-	private boolean isCleared;
+	private ScheduledFuture<?> wipeTask;
 
 	protected int getExitId() {
 		return 730843;
@@ -52,7 +53,6 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 					spawnClone();
 				break;
 			case 231305: // Enraged Queen Modor
-				isCleared = true;
 				onInstanceEnd(true);
 				break;
 			case 701795: // Treasure Box
@@ -108,6 +108,7 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 	}
 
 	private void onInstanceEnd(boolean successful) {
+		cancelWipeTask();
 		instance.forEachNpc(npc -> npc.getController().delete());
 		spawn(getExitId(), 255.66669f, 263.78525f, 241.7986f, (byte) 86); // Spawn exit portal
 		if (successful)
@@ -115,9 +116,7 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 	}
 
 	private void scheduleWipe(int iterations) {
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (isCleared)
-				return;
+		wipeTask = ThreadPoolManager.getInstance().schedule(() -> {
 			switch (iterations) {
 				case 1:
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_INDER_RUNE_10MIN());
@@ -130,6 +129,11 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 			}
 			scheduleWipe(iterations + 1);
 		}, 5 * 60000);
+	}
+
+	private void cancelWipeTask() {
+		if (wipeTask != null && !wipeTask.isCancelled())
+			wipeTask.cancel(false);
 	}
 
 	private void despawnNpcs(int npcId) {
@@ -151,5 +155,10 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 		super.onPlayerLogOut(player);
 		if (player.isDead())
 			TeleportService.moveToBindLocation(player);
+	}
+
+	@Override
+	public void onInstanceDestroy() {
+		cancelWipeTask();
 	}
 }
