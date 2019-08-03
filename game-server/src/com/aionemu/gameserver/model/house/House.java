@@ -16,6 +16,9 @@ import com.aionemu.gameserver.controllers.HouseController;
 import com.aionemu.gameserver.dao.HouseScriptsDAO;
 import com.aionemu.gameserver.dao.HousesDAO;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -387,5 +390,10 @@ public class House extends VisibleObject implements Persistable {
 		while ((auctionEndTime = AuctionEndTask.getInstance().getNextRunAfter(auctionEndTime)).getTime() <= maxGraceEndTimeMillis)
 			graceEndTime = auctionEndTime;
 		return graceEndTime;
+	}
+
+	public boolean matchesLandRace(Race race) {
+		boolean isEly = DataManager.NPC_DATA.getNpcTemplate(getLand().getManagerNpcId()).getTribe() == TribeClass.GENERAL;
+		return race == Race.ELYOS && isEly || race == Race.ASMODIANS && !isEly;
 	}
 }

@@ -15,8 +15,6 @@ import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.taskmanager.AbstractCronTask;
-import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldType;
 
 /**
  * Handles registering unoccupied houses automatically for auction.
@@ -70,17 +68,8 @@ public class AuctionAutoFillTask extends AbstractCronTask {
 
 	private List<House> findAuctionableHouses(Race race, Set<House> auctionedHouses) {
 		List<House> houses = HousingService.getInstance().getCustomHouses();
-		houses.removeIf(house -> house.getOwnerId() != 0 || auctionedHouses.contains(house) || !matchesLandRace(house, race));
+		houses.removeIf(house -> house.getOwnerId() != 0 || auctionedHouses.contains(house) || !house.matchesLandRace(race));
 		return houses;
-	}
-
-	private boolean matchesLandRace(House house, Race race) {
-		WorldType worldType = World.getInstance().getWorldMap(house.getAddress().getMapId()).getWorldType();
-		if (worldType == WorldType.ASMODAE)
-			return race == Race.ASMODIANS;
-		if (worldType == WorldType.ELYSEA)
-			return race == Race.ELYOS;
-		return true;
 	}
 
 	private House findAndRemoveHouse(List<House> houses, HouseType houseType) {

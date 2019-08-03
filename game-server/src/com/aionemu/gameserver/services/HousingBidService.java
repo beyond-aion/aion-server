@@ -32,7 +32,6 @@ import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.time.ServerTime;
-import com.aionemu.gameserver.world.WorldType;
 
 /**
  * @author Rolandas, Neon
@@ -110,10 +109,8 @@ public class HousingBidService {
 	public List<HouseBids> getBidInfo(Race race) {
 		List<HouseBids> houseBids = new ArrayList<>();
 		for (HouseBids bidInfo : bids.values()) {
-			WorldType worldType = HousingService.getInstance().findHouse(bidInfo.getHouseObjectId()).getWorldType();
-			if (race == Race.ELYOS && worldType == WorldType.ASMODAE || race == Race.ASMODIANS && worldType == WorldType.ELYSEA)
-				continue;
-			houseBids.add(bidInfo);
+			if (HousingService.getInstance().findHouse(bidInfo.getHouseObjectId()).matchesLandRace(race))
+				houseBids.add(bidInfo);
 		}
 		return houseBids;
 	}
@@ -359,6 +356,10 @@ public class HousingBidService {
 
 		DAOManager.getDAO(HouseBidsDAO.class).deleteHouseBids(house.getObjectId());
 		house.setBids(null);
+		if (house.getOwnerId() == 0) {
+			house.setDoorState(null);
+			house.save();
+		}
 		house.getController().updateSign();
 		house.getController().updateAppearance();
 
