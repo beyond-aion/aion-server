@@ -23,8 +23,16 @@ public class ExtractAction extends AbstractItemAction {
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem) {
-		if (targetItem == null) { // no item selected.
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR());
+		if (targetItem == null) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_NO_TARGET_ITEM());
+			return false;
+		}
+		if (!targetItem.getItemTemplate().isArmor() && !targetItem.getItemTemplate().isWeapon()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_IT_CAN_NOT_BE_DECOMPOSED(targetItem.getL10n()));
+			return false;
+		}
+		if (targetItem.isEquipped()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_EQUIP_ITEM_CAN_NOT_BE_DECOMPOSED());
 			return false;
 		}
 
