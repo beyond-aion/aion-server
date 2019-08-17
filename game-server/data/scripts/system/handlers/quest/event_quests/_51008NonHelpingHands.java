@@ -69,7 +69,7 @@ public class _51008NonHelpingHands extends AbstractQuestHandler {
 				final SpawnSearchResult searchResult = DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(npc.getWorldId(), 831037);
 				if (PositionUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(),
 					npc.getZ()) <= 15) {
-					NpcActions.delete(npc, true);
+					NpcActions.delete(npc, !npc.isDead());
 					if (var == 0)
 						changeQuestStep(env, 0, 1);
 					else

@@ -47,7 +47,7 @@ public class _1157GaphyrksLove extends AbstractQuestHandler {
 		if (PositionUtil.getDistance(892, 2024, 166, npc.getX(), npc.getY(), npc.getZ()) > 13) {
 			return false;
 		}
-		NpcActions.delete(npc, true);
+		NpcActions.delete(npc, !npc.isDead());
 		playQuestMovie(env, 17);
 		return true;
 	}
