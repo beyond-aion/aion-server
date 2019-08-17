@@ -107,7 +107,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 		final int worldId = getSiegeLocation().getWorldId();
 		for (SiegeNpc sn : World.getInstance().getLocalSiegeNpcs(getSiegeLocationId())) {
-			if (sn.getAbyssNpcType() == AbyssNpcType.ARTIFACT || sn.getRating() == NpcRating.LEGENDARY || Rnd.chance() < 35)
+			if (sn.getAbyssNpcType() == AbyssNpcType.ARTIFACT || sn.getRating() == NpcRating.LEGENDARY
+				|| sn.getSpawn().getSiegeModType() == SiegeModType.ASSAULT || Rnd.chance() < 35)
 				continue;
 			final int amount = Rnd.get(1, 2);
 			for (int i = 0; i < amount; i++) {
