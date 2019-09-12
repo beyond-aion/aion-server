@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -44,8 +45,8 @@ public class LeftWingChamberInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnRings() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("LEFT_WING_1", mapId, new Point3D(576.2102, 585.4146, 353.90677), new Point3D(576.2102, 585.4146,
-			359.90677), new Point3D(575.18384, 596.36664, 353.90677), 10), instanceId);
+		FlyRing f1 = new FlyRing(new FlyRingTemplate("LEFT_WING_1", mapId, new Point3D(576.2102, 585.4146, 353.90677),
+			new Point3D(576.2102, 585.4146, 359.90677), new Point3D(575.18384, 596.36664, 353.90677), 10), instanceId);
 		f1.spawn();
 	}
 
@@ -107,5 +108,11 @@ public class LeftWingChamberInstance extends GeneralInstanceHandler {
 	public void onInstanceDestroy() {
 		isInstanceDestroyed = true;
 		startTime.set(0);
+	}
+
+	@Override
+	public void handleUseItemFinish(Player player, Npc npc) {
+		if (npc.getNpcId() == 700455)
+			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 }

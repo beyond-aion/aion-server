@@ -3,13 +3,9 @@ package admincommands;
 import static com.aionemu.gameserver.world.WorldMapType.*;
 import static java.util.stream.Collectors.*;
 
-import java.awt.Color;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.LinkedHashMap;
-import java.util.LinkedHashSet;
+import java.awt.*;
+import java.util.*;
 import java.util.List;
-import java.util.Map;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -286,6 +282,8 @@ public class GoTo extends AdminCommand {
 		addLocation(SEIZED_DANUAR_SANCTUARY, 388.66f, 1185.07f, 55.31f, "Seized Danuar Sanctuary", "SDS", "Verlorene Zukunft", "VZ");
 		addLocation(NIGHTMARE_CIRCUS, 467.64f, 568.34f, 201.67f, "Nightmare Circus", "NC", "Rukibuki Zirkus");
 		addLocation(KAMAR_BATTLEFIELD, 1329, 1501, 593, "Kamar Battlefield", "KB", "Schlachtfeld von Kamar");
+		// 4.3 Instance
+		addLocation(HEXWAY, 672.8f, 606.2f, 321.2f, "The Hexway", "Korridor des Verrats");
 		// 4.5 instances
 		addLocation(ENGULFED_OPHIDAN_BRIDGE, 753, 532, 577, "Engulfed Ophidian Bridge", "EOB", "Jormungand Marschroute");
 		addLocation(IRON_WALL_WARFRONT, 550, 477, 213, "Iron Wall Warfront", "IWW", "Schlachtfeld der Stahlmauerbastion");

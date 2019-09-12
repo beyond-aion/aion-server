@@ -665,6 +665,34 @@
 			</percentage>
 		</summons>
 	</ai>
+	<!-- Captain Jarka -->
+	<ai npcId="219609">
+		<summons>
+			<percentage percent="75">
+				<summonGroup npcId="219601" x="484.8571" y="591.9738" z="355.0857" h="92" count="1"/>
+				<summonGroup npcId="219601" x="484.7743" y="579.5548" z="355.0857" h="29" count="1"/>
+			</percentage>
+			<percentage percent="50">
+				<summonGroup npcId="219606" x="490.9703" y="585.4627" z="355.0857" h="59" count="1"/>
+				<summonGroup npcId="219606" x="478.7111" y="585.4633" z="355.0857" h="119" count="1"/>
+			</percentage>
+			<percentage percent="25">
+				<summonGroup npcId="219601" x="484.8571" y="591.9738" z="355.0857" h="92" count="1"/>
+				<summonGroup npcId="219601" x="484.7743" y="579.5548" z="355.0857" h="29" count="1"/>
+				<summonGroup npcId="219606" x="490.9703" y="585.4627" z="355.0857" h="59" count="1"/>
+				<summonGroup npcId="219606" x="478.7111" y="585.4633" z="355.0857" h="119" count="1"/>
+			</percentage>
+		</summons>
+	</ai>
+	<!-- Adjutant Galamat -->
+	<ai npcId="219610">
+		<summons>
+			<percentage percent="60" isIndividual="true"/>
+			<percentage percent="50" isIndividual="true"/>
+			<percentage percent="20" isIndividual="true"/>
+			<percentage percent="10" isIndividual="true"/>
+		</summons>
+	</ai>
 	<!-- Brigade General Sheba -->
 	<ai npcId="230858">
 		<summons>
@@ -804,6 +832,23 @@
 				<summonGroup npcId="281442" count="1" distance="10"/><!-- Holy Servant II -->
 				<summonGroup npcId="281443" count="1" distance="10"/><!-- Divine Crusader I -->
 				<summonGroup npcId="281444" count="1" distance="10"/><!-- Consecration -->
+			</percentage>
+		</summons>
+	</ai>
+	<!-- Captain Lakhara -->
+	<ai npcId="286933">
+		<summons>
+			<percentage percent="80" isIndividual="true">
+				<summonGroup npcId="219635" x="280.8051" y="486.8093" z="364.9362" h="5" count="1"/>
+				<summonGroup npcId="219636" x="270.8324" y="523.5122" z="364.9362" h="77" count="1"/>
+			</percentage>
+			<percentage percent="50" isIndividual="true">
+				<summonGroup npcId="219635" x="280.8051" y="486.8093" z="364.9362" h="5" count="1"/>
+				<summonGroup npcId="219636" x="270.8324" y="523.5122" z="364.9362" h="77" count="1"/>
+			</percentage>
+			<percentage percent="20" isIndividual="true">
+				<summonGroup npcId="219635" x="280.8051" y="486.8093" z="364.9362" h="5" count="1"/>
+				<summonGroup npcId="219636" x="270.8324" y="523.5122" z="364.9362" h="77" count="1"/>
 			</percentage>
 		</summons>
 	</ai>

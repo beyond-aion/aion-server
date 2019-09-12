@@ -1,71 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="300700000">
-		<!-- Ancient Treasure Box -->
-		<spawn npc_id="701662">
-			<spot x="195.89" y="619.05" z="366.12" h="115"/>
-			<spot x="195.99" y="552.5" z="366.12" h="5"/>
-			<spot x="207.52" y="684.07" z="366.12" h="105"/>
-			<spot x="207.87" y="486.88" z="366.12" h="15"/>
-			<spot x="229.45" y="425.69" z="366.12" h="25"/>
-			<spot x="230.34" y="423.96" z="366.12" h="25"/>
-		</spawn>
-		<!-- Ancient Treasure Box -->
-		<spawn npc_id="701663">
-			<spot x="193.59" y="619.05" z="366.32" h="115"/>
-			<spot x="193.95" y="552.01" z="366.32" h="5"/>
-			<spot x="205.53" y="684.4" z="366.32" h="105"/>
-			<spot x="205.74" y="486.37" z="366.32" h="15"/>
-			<spot x="227.48" y="423.8" z="366.32" h="25"/>
-		</spawn>
-		<!-- Golden Treasure Box -->
-		<spawn npc_id="701664">
-			<spot x="230.31" y="746.76" z="366.12" h="95"/>
-		</spawn>
-		<!-- IDAB1_SensoryArea_Timer_C -->
-		<spawn npc_id="206089">
-			<spot x="572.72" y="585.93" z="354" h="60"/>
-		</spawn>
 		<!-- Shining Magic Ward -->
 		<spawn npc_id="700455">
 			<spot x="672.8343" y="606.2250" z="321.1900" static_id="1"/>
 		</spawn>
 		<!-- Balaur Barricade -->
 		<spawn npc_id="219617">
-			<spot x="440.5806" y="573.9197" z="353.2359" h="1" static_id="228"/>
-			<spot x="444.0111" y="620.6435" z="353.3254" h="115" static_id="220"/>
-			<spot x="396.8209" y="633.3293" z="359.0991" h="115" static_id="224"/>
-			<spot x="315.9442" y="608.5529" z="362.0754" h="118" static_id="227"/>
-			<spot x="345.2448" y="647.1949" z="361.9265" h="115" static_id="225"/>
-			<spot x="301.7172" y="658.5482" z="361.7805" h="115" static_id="226"/>
+			<spot x="443.15118" y="550.1849" z="353.45728" h="62"/>
+			<spot x="451.418" y="643.4683" z="353.4497" h="51"/>
+			<spot x="443.0254" y="621.0671" z="353.47656" h="55"/>
+			<spot x="439.1232" y="573.7132" z="353.44513" h="61"/>
+			<spot x="443.3673" y="550.14417" z="353.42905" h="65"/>
+			<spot x="451.48822" y="527.7153" z="353.43195" h="68"/>
+			<spot x="438.98563" y="597.4107" z="353.46017" h="58"/>
 		</spawn>
-		<!-- Laksyaka Infantry -->
-		<spawn npc_id="219616">
-			<spot x="306.4067" y="657.2637" z="361.7942" h="111"/>
-		</spawn>
-		<!-- Laksyaka Infantry -->
-		<spawn npc_id="219614">
-            <spot x="366.94" y="567.94" z="360.8561" h="5"/>
-		</spawn>
-		<!-- Laksyaka Infantry -->
-		<spawn npc_id="219613">
-			<spot x="351.43" y="521.57" z="364" h="60"/>
-		</spawn>
-		<!-- Laksyaka Infantry -->
-		<spawn npc_id="219612">
-			<spot x="316.58" y="464.75" z="364" h="25"/>
-		</spawn>
-		<!-- Laksyaka Bladesworn -->
-		<spawn npc_id="219611">
-			<spot x="326.47" y="607.45" z="364" h="105"/>
-		</spawn>
-		<!-- Adjutant Galamat -->
+		<!-- B5: Adjutant Galamat -->
 		<spawn npc_id="219610">
-			<spot x="269.12" y="728.2" z="365.94" h="95"/>
+			<spot x="254.8600" y="671.4646" z="364.6414"/>
+		</spawn>
+		<!-- B3: Laksyaka Infantry -->
+		<spawn npc_id="219612">
+			<spot x="245.1121" y="556.6968" z="364.6414"/>
+		</spawn>
+		<!-- B2: Captain Lakhara -->
+		<spawn npc_id="286933">
+			<spot x="255.0075" y="499.7773" z="364.6414"/>
+		</spawn>
+		<!-- B1: Laksyaka Bladesworn -->
+		<spawn npc_id="219611">
+			<spot x="274.9571" y="445.4864" z="364.6414"/>
+		</spawn>
+		<!-- B4: Laksyaka Infantry -->
+		<spawn npc_id="219613">
+			<spot x="245.1972" y="614.3702" z="364.6414"/>
+		</spawn>
+		<!-- B6: Laksyaka Infantry -->
+		<spawn npc_id="219614">
+			<spot x="274.882" y="725.70087" z="364.6414" h="95"/>
 		</spawn>
 		<!-- Captain Jarka -->
 		<spawn npc_id="219609">
-			<spot x="450.16" y="585.51" z="354"/>
+			<spot x="485.59" y="585.42" z="357"/>
 		</spawn>
 		<!-- Laksyaka Elite Medic -->
 		<spawn npc_id="219608">
@@ -103,6 +79,8 @@
 			<spot x="574.9" y="578.43" z="351.15314" h="90"/>
 			<spot x="262.15" y="512.47" z="364.93622" h="15"/>
 			<spot x="300.42" y="511.78" z="361.77536" h="15"/>
+			<spot x="415.97882" y="625.3361" z="357.01883" h="115"/>
+			<spot x="395.00946" y="639.0109" z="359.35254" h="114"/>
 		</spawn>
 		<!-- Laksyaka Infantry -->
 		<spawn npc_id="219605">
@@ -126,7 +104,7 @@
 		</spawn>
 		<!-- Laksyaka Officer -->
 		<spawn npc_id="219604">
-			<spot x="274.92" y="729.06" z="365.94" h="95"/>
+			<spot x="287.31287" y="733.355" z="364.93622" h="95"/>
 		</spawn>
 		<!-- Laksyaka Sniper -->
 		<spawn npc_id="219603">
@@ -143,26 +121,24 @@
 		<spawn npc_id="219601">
 			<spot x="463.02" y="526.01" z="354" h="30"/>
 			<spot x="464.41" y="645.86" z="354" h="90"/>
-			<spot x="485.59" y="585.42" z="357"/>
 			<spot x="544.81" y="578.36" z="351.15314" h="60" walker_id="8D2B21618EFDC9915CAE8F37AEE4EBF89E2BD745"/>
-			<spot x="616.34" y="585.54" z="343.8363" h="100" walker_id="172798255EE36B40B7E8662BA4E94DFF2E5048EF"/>
+			<spot x="616.34" y="585.54" z="334.00977" h="100" walker_id="172798255EE36B40B7E8662BA4E94DFF2E5048EF"/>
+			<spot x="318.46" y="703.29" z="364" h="95"/>
 		</spawn>
 		<!-- Laksyaka Legatus -->
 		<spawn npc_id="219600">
-			<spot x="272.14" y="723.27" z="365.94" h="95"/>
+			<spot x="276.9040" y="711.0339" z="364.9362" h="95"/>
 			<spot x="320.33" y="707.18" z="364" h="95"/>
 			<spot x="461.06" y="614.07" z="352.69846" h="15" walker_id="42B792BD21C82AD2A585713333E1541979A5A042"/>
 			<spot x="461.25" y="556.22" z="352.69846" h="105" walker_id="B4FCF7C6362DD600A20E8E05CFBCF9BD798C236B"/>
 		</spawn>
 		<!-- Laksyaka Legatus -->
 		<spawn npc_id="219634">
-			<spot x="386.1" y="496.57" z="364" h="25"/>
+			<spot x="386.1" y="496.57" z="359.6768" h="25"/>
 			<spot x="447.5" y="645.48" z="356" h="90"/>
-			<spot x="701.91" y="582.79" z="328.42" h="10"/>
-		</spawn>
-		<!-- Laksyaka Magus -->
-		<spawn npc_id="219635">
-			<spot x="318.46" y="703.29" z="364" h="95"/>
+			<spot x="701.91" y="582.79" z="325.12787" h="10"/>
+			<spot x="432.77728" y="629.2643" z="355.1881" h="108"/>
+			<spot x="310.43048" y="659.00616" z="361.84824" h="9"/>
 		</spawn>
 		<!-- Laksyaka Sniper -->
 		<spawn npc_id="219637">
@@ -179,7 +155,8 @@
 			<spot x="372.07" y="678" z="363.88" h="105"/>
 			<spot x="384.78" y="499.1" z="364" h="25"/>
 			<spot x="529.4" y="592.03" z="354"/>
-			<spot x="696.96" y="580.75" z="329" h="10"/>
+			<spot x="696.96" y="580.75" z="328.25244" h="10"/>
+			<spot x="316.73245" y="651.1855" z="361.97565" h="112"/>
 		</spawn>
 	</spawn_map>
 </spawns>

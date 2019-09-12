@@ -226,10 +226,6 @@
 	<portal_use npc_id="700530">
 		<portal_path loc_id="3000800" race="ASMODIANS" player_count="6" instance="true" siege_id="1131" min_level="30" />
 	</portal_use>
-	<!-- Left Wing Chamber Exit -->
-	<portal_use npc_id="700455">
-		<portal_path loc_id="4000109" />
-	</portal_use>
 	<!-- Right Wing Chamber Elyos Entrance -->
 	<portal_use npc_id="700456">
 		<portal_path loc_id="3000900" race="ELYOS" player_count="6" instance="true" siege_id="1132" min_level="30" />
