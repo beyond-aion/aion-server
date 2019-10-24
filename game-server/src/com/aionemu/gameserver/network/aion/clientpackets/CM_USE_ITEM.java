@@ -70,11 +70,6 @@ public class CM_USE_ITEM extends AionClientPacket {
 		if (targetItem == null && player.getActiveHouse() != null)
 			targetHouseObject = player.getActiveHouse().getRegistry().getObjectByObjId(targetItemId);
 
-		if (item.getItemTemplate().getTemplateId() == 165000001 && (targetItem == null || targetItem.getItemTemplate().canExtract())) {
-			PacketSendUtility.sendPacket(player, STR_ITEM_COLOR_ERROR());
-			return;
-		}
-
 		// check use item multicast delay exploit cast (spam)
 		if (player.isCasting())
 			player.getController().cancelCurrentSkill(null);

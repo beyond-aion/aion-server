@@ -388,7 +388,7 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		return (getMask() & ItemMask.CAN_COMPOSITE_WEAPON) == ItemMask.CAN_COMPOSITE_WEAPON;
 	}
 
-	public boolean canExtract() {
+	public boolean canSplit() {
 		return (getMask() & ItemMask.CAN_SPLIT) == ItemMask.CAN_SPLIT;
 	}
 

@@ -56,10 +56,10 @@ public class GameTime implements Cloneable {
 	 * @param time
 	 *          Minutes since midnight 01.01.0000
 	 */
-	public GameTime(int time) {
-		if (time < 0)
+	public GameTime(Integer time) {
+		if (time != null && time < 0)
 			throw new IllegalArgumentException("Time must be >= 0");
-		gameTime = time;
+		gameTime = time == null ? 0 : time;
 		dayTime = calculateDayTime();
 	}
 

@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
@@ -13,7 +14,6 @@ import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.collections.Predicates;
-import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -112,10 +112,10 @@ public class Auction extends AdminCommand {
 			Predicate<House> filter = house -> house.getHouseType() == houseType && house.getBids() == null && house.getOwnerId() == 0;
 			List<House> houses;
 			if ("asmodians".startsWith(params[1].toLowerCase())) {
-				filter = filter.and(house -> house.getWorldType() != WorldType.ELYSEA);
+				filter = filter.and(house -> house.matchesLandRace(Race.ASMODIANS));
 				houses = HousingService.getInstance().getCustomHouses().stream().filter(filter).collect(Collectors.toList());
 			} else if ("elyos".startsWith(params[1].toLowerCase())) {
-				filter = filter.and(house -> house.getWorldType() != WorldType.ASMODAE);
+				filter = filter.and(house -> house.matchesLandRace(Race.ELYOS));
 				houses = HousingService.getInstance().getCustomHouses().stream().filter(filter).collect(Collectors.toList());
 			} else {
 				houses = findHousesInZone(admin, params[1], filter);
