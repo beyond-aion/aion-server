@@ -4116,15 +4116,15 @@
 			<drop item_id="125040244" chance="2" /><!-- [Event] Alchemist's Hat -->
 		</drop_group>
 		<drop_group><!-- Animas -->
-			<drop item_id="152012559" chance="100" /><!-- Grassy Anima -->
-			<drop item_id="152012561" chance="100" /><!-- Frozen Anima -->
-			<drop item_id="152012564" chance="100" /><!-- Mysterious Anima -->
-			<drop item_id="152012566" chance="100" /><!-- Devastated Anima -->
-			<drop item_id="152012567" chance="100" /><!-- Mossy Anima -->
-			<drop item_id="152012570" chance="100" /><!-- Hopeless Anima -->
-			<drop item_id="152012574" chance="100" /><!-- Avaricious Anima -->
-			<drop item_id="152012575" chance="100" /><!-- Desperate Anima -->
-			<drop item_id="152012576" chance="100" /><!-- Deluded Anima -->
+			<drop item_id="152012559" chance="100" min_amount="5" max_amount="5" /><!-- Grassy Anima -->
+			<drop item_id="152012561" chance="100" min_amount="5" max_amount="5" /><!-- Frozen Anima -->
+			<drop item_id="152012564" chance="100" min_amount="5" max_amount="5" /><!-- Mysterious Anima -->
+			<drop item_id="152012566" chance="100" min_amount="5" max_amount="5" /><!-- Devastated Anima -->
+			<drop item_id="152012567" chance="100" min_amount="5" max_amount="5" /><!-- Mossy Anima -->
+			<drop item_id="152012570" chance="100" min_amount="5" max_amount="5" /><!-- Hopeless Anima -->
+			<drop item_id="152012574" chance="100" min_amount="5" max_amount="5" /><!-- Avaricious Anima -->
+			<drop item_id="152012575" chance="100" min_amount="5" max_amount="5" /><!-- Desperate Anima -->
+			<drop item_id="152012576" chance="100" min_amount="5" max_amount="5" /><!-- Deluded Anima -->
 		</drop_group>
 	</npc_drop>
 	<!-- Alchemy Event: Common Treasure Box -->
@@ -4172,16 +4172,16 @@
 			<drop item_id="186000130" chance="100" min_amount="250" max_amount="250" /><!-- Crucible Insignia -->
 		</drop_group>
 		<drop_group><!-- Animas -->
-			<drop item_id="152012560" chance="100" /><!-- Tainted Anima -->
-			<drop item_id="152012562" chance="100" /><!-- Windy Anima -->
-			<drop item_id="152012563" chance="100" /><!-- Sylvan Anima -->
-			<drop item_id="152012565" chance="100" /><!-- Snowy Anima -->
-			<drop item_id="152012568" chance="100" /><!-- Waterlogged Anima -->
-			<drop item_id="152012569" chance="100" /><!-- Vengeful Anima -->
-			<drop item_id="152012571" chance="100" /><!-- Zealous Anima -->
-			<drop item_id="152012572" chance="100" /><!-- Ambitious Anima -->
-			<drop item_id="152012573" chance="100" /><!-- Remorseful Anima -->
-			<drop item_id="152012577" chance="100" /><!-- Wrathful Anima -->
+			<drop item_id="152012560" chance="100" min_amount="3" max_amount="3" /><!-- Tainted Anima -->
+			<drop item_id="152012562" chance="100" min_amount="3" max_amount="3" /><!-- Windy Anima -->
+			<drop item_id="152012563" chance="100" min_amount="3" max_amount="3" /><!-- Sylvan Anima -->
+			<drop item_id="152012565" chance="100" min_amount="3" max_amount="3" /><!-- Snowy Anima -->
+			<drop item_id="152012568" chance="100" min_amount="3" max_amount="3" /><!-- Waterlogged Anima -->
+			<drop item_id="152012569" chance="100" min_amount="3" max_amount="3" /><!-- Vengeful Anima -->
+			<drop item_id="152012571" chance="100" min_amount="3" max_amount="3" /><!-- Zealous Anima -->
+			<drop item_id="152012572" chance="100" min_amount="3" max_amount="3" /><!-- Ambitious Anima -->
+			<drop item_id="152012573" chance="100" min_amount="3" max_amount="3" /><!-- Remorseful Anima -->
+			<drop item_id="152012577" chance="100" min_amount="3" max_amount="3" /><!-- Wrathful Anima -->
 		</drop_group>
 	</npc_drop>
 	<!-- Shugo Emperor's Vault: Emperor's Treasure Box -->
