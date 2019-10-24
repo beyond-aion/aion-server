@@ -1097,4 +1097,159 @@
 		</gd_items>
 	</gd_rule>
 	<!-- END Cooking Recipes -->
+	<gd_rule rule_name="Dragon Lord Recipes(Asmodians)" chance="0.075" restriction_race="ASMODIANS">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark Poeta -->
+		</gd_maps>
+		<gd_items>
+			<gd_item id="152206597" /><!-- Design: Dragon Lord Blade -->
+			<gd_item id="152206628" /><!-- Design: Dragon Lord's Cowl -->
+			<gd_item id="152206606" /><!-- Design: Dragon Lord's Shield -->
+			<gd_item id="152206620" /><!-- Design: Dragon Lord's Vambrace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Drazma Recipes(Asmodians)" chance="0.075" restriction_race="ASMODIANS">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark Poeta -->
+		</gd_maps>
+		<gd_items>
+			<gd_item id="152206639" /><!-- Design: Drazma Bow -->
+			<gd_item id="152206596" /><!-- Design: Drazma Greatsword -->
+			<gd_item id="152206604" /><!-- Design: Drazma Hauberk -->
+			<gd_item id="152206627" /><!-- Design: Drazma Leggings -->
+			<gd_item id="152206626" /><!-- Design: Drazma Shoes -->
+			<gd_item id="152230502" /><!-- Design: Drazma's Aethercannon -->
+			<gd_item id="152230504" /><!-- Design: Drazma's Harp -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Necsium Recipes(Asmodians)" chance="0.075" restriction_race="ASMODIANS">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark Poeta -->
+		</gd_maps>
+		<gd_items>
+			<gd_item id="152206601" /><!-- Design: Necsium Chain Headdress -->
+			<gd_item id="152231507" /><!-- Design: Necsium Cipher-Blade -->
+			<gd_item id="152206594" /><!-- Design: Necsium Dagger -->
+			<gd_item id="152206602" /><!-- Design: Necsium Gauntlets -->
+			<gd_item id="152206603" /><!-- Design: Necsium Helm -->
+			<gd_item id="152206644" /><!-- Design: Necsium Orb -->
+			<gd_item id="152230501" /><!-- Design: Necsium Pistol -->
+			<gd_item id="152206595" /><!-- Design: Necsium Polearm -->
+			<gd_item id="152206636" /><!-- Design: Necsium Ring -->
+			<gd_item id="152206640" /><!-- Design: Necsium Staff -->
+			<gd_item id="152206600" /><!-- Design: Nexium Chausses -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Surkana Recipes(Asmodians)" chance="0.075" restriction_race="ASMODIANS">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark Poeta -->
+		</gd_maps>
+		<gd_items>
+			<gd_item id="152206637" /><!-- Design: Surkana Earrings -->
+			<gd_item id="152206619" /><!-- Design: Surkana Jerkin -->
+			<gd_item id="152206618" /><!-- Design: Surkana Shoulderguards -->
+			<gd_item id="152206605" /><!-- Design: Surkana Shoulderplates -->
+			<gd_item id="152206643" /><!-- Design: Surkana Spellbook -->
+			<gd_item id="152206647" /><!-- Design: Surkana Warhammer -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Dragon Lord Recipes(Elyos)" chance="0.075" restriction_race="ELYOS">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark Poeta -->
+		</gd_maps>
+		<gd_items>
+			<gd_item id="152201595" /><!-- Design: Dragon Lord Blade -->
+			<gd_item id="152201626" /><!-- Design: Dragon Lord's Cowl -->
+			<gd_item id="152201604" /><!-- Design: Dragon Lord's Shield -->
+			<gd_item id="152201618" /><!-- Design: Dragon Lord's Vambrace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Drazma Recipes(Elyos)" chance="0.075" restriction_race="ELYOS">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark Poeta -->
+		</gd_maps>
+		<gd_items>
+			<gd_item id="152201637" /><!-- Design: Drazma Bow -->
+			<gd_item id="152201594" /><!-- Design: Drazma Greatsword -->
+			<gd_item id="152201602" /><!-- Design: Drazma Hauberk -->
+			<gd_item id="152201625" /><!-- Design: Drazma Leggings -->
+			<gd_item id="152201624" /><!-- Design: Drazma Shoes -->
+			<gd_item id="152220513" /><!-- Design: Drazma's Aethercannon -->
+			<gd_item id="152220515" /><!-- Design: Drazma's Harp -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Neccium Recipes(Elyos)" chance="0.075" restriction_race="ELYOS">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark Poeta -->
+		</gd_maps>
+		<gd_items>
+			<gd_item id="152201599" /><!-- Design: Necsium Chain Headdress -->
+			<gd_item id="152221519" /><!-- Design: Necsium Cipher-Blade -->
+			<gd_item id="152201592" /><!-- Design: Necsium Dagger -->
+			<gd_item id="152201600" /><!-- Design: Necsium Gauntlets -->
+			<gd_item id="152201601" /><!-- Design: Necsium Helm -->
+			<gd_item id="152201642" /><!-- Design: Necsium Orb -->
+			<gd_item id="152220512" /><!-- Design: Necsium Pistol -->
+			<gd_item id="152201593" /><!-- Design: Necsium Polearm -->
+			<gd_item id="152201634" /><!-- Design: Necsium Ring -->
+			<gd_item id="152201638" /><!-- Design: Necsium Staff -->
+			<gd_item id="152201598" /><!-- Design: Nexium Chausses -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Surkana Recipes(Elyos)" chance="0.075" restriction_race="ELYOS">
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark Poeta -->
+		</gd_maps>
+		<gd_items>
+			<gd_item id="152201635" /><!-- Design: Surkana Earrings -->
+			<gd_item id="152201617" /><!-- Design: Surkana Jerkin -->
+			<gd_item id="152201616" /><!-- Design: Surkana Shoulderguards -->
+			<gd_item id="152201603" /><!-- Design: Surkana Shoulderplates -->
+			<gd_item id="152201641" /><!-- Design: Surkana Spellbook -->
+			<gd_item id="152201645" /><!-- Design: Surkana Warhammer -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Noble Surkana" chance="35">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214880" /><!-- Spaller Echtra -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012803" /><!-- Noble Surkana -->
+		</gd_items>
+	</gd_rule>
 </global_rules>
