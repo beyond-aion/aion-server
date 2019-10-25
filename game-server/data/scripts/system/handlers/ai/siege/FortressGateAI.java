@@ -8,11 +8,8 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.services.siege.Siege;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -65,14 +62,6 @@ public class FortressGateAI extends NpcAI {
 
 	@Override
 	protected void handleDied() {
-		if (getOwner() instanceof SiegeNpc) {
-			Siege<?> siege = SiegeService.getInstance().getSiege(((SiegeNpc) getOwner()).getSiegeId());
-			if (siege != null) {
-				SiegeNpc boss = siege.getBoss();
-				if (boss != null)
-					boss.getEffectController().removeEffect(19111);
-			}
-		}
 		super.handleDied();
 		getOwner().setDoorState(getOwner().getInstanceId(), true);
 	}

@@ -11,9 +11,7 @@ import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.siege.Siege;
-import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer, Source
@@ -23,18 +21,6 @@ public class SiegeProtectorNpcAI extends SiegeNpcAI {
 
 	public SiegeProtectorNpcAI(Npc owner) {
 		super(owner);
-	}
-
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (getOwner().getAbyssNpcType() != AbyssNpcType.BOSS)
-				return;
-			Siege<?> siege = SiegeService.getInstance().getSiege(((SiegeNpc) getOwner()).getSiegeId());
-			if (siege != null)
-				SkillEngine.getInstance().applyEffectDirectly(19111, getOwner(), getOwner());
-		}, 3000);
 	}
 
 	@Override
