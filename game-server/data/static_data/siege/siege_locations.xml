@@ -100,7 +100,7 @@
 		<legion_reward item_id="122001663" item_count="1"/>
 		<merc_zone id="1" costs="36" cooldown="900" msg_id="1402451" announce_id="1402448"/>
 		<merc_zone id="2" costs="36" cooldown="900" msg_id="1402452" announce_id="1402449"/>
-		<assault_data dredgion_id="20" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="20" base_budget="4" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="882272 882273 882274 882275 882276" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="251390 251393 251395 251398" distance_offset="4"/>
@@ -150,7 +150,7 @@
 		<legion_reward item_id="186000031" item_count="60"/>
 		<legion_reward item_id="188051893" item_count="1"/>
 		<legion_reward item_id="122001519" item_count="1"/>
-		<assault_data dredgion_id="15" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="15" base_budget="3" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="276793" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="276647 276648 276649 276650 276651" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="276717 276718 276719 276720 276721" distance_offset="4"/>
@@ -172,7 +172,7 @@
 		<legion_reward item_id="186000031" item_count="60"/>
 		<legion_reward item_id="188051893" item_count="1"/>
 		<legion_reward item_id="122001520" item_count="1"/>
-		<assault_data dredgion_id="14" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="14" base_budget="3" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="276793" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="276647 276648 276649 276650 276651" heading_offset="5" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="276717 276718 276719 276720 276721" heading_offset="45" distance_offset="4"/>
@@ -203,7 +203,7 @@
 		<legion_reward item_id="186000031" item_count="60"/>
 		<legion_reward item_id="188051893" item_count="1"/>
 		<legion_reward item_id="122001521" item_count="1"/>
-		<assault_data dredgion_id="12" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="12" base_budget="3" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="276793" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="276647 276648 276649 276650 276651" heading_offset="5" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="276717 276718 276719 276720 276721" heading_offset="45" distance_offset="4"/>
@@ -240,7 +240,7 @@
 		<legion_reward item_id="186000031" item_count="70"/>
 		<legion_reward item_id="188051893" item_count="1"/>
 		<legion_reward item_id="122001522" item_count="1"/>
-		<assault_data dredgion_id="18" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="18" base_budget="3" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="276953" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="276869 276870 276871 276872 276873" heading_offset="5" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="276989 276990 276991 276992 276993" heading_offset="45" distance_offset="4"/>
@@ -275,7 +275,7 @@
 		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402176" announce_id="1402173"/>
 		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402177" announce_id="1402174"/>
 		<merc_zone id="3" costs="12" cooldown="900" msg_id="1402178" announce_id="1402175"/>
-		<assault_data dredgion_id="13" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="13" base_budget="3" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
@@ -308,7 +308,7 @@
 		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402182" announce_id="1402179"/>
 		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402183" announce_id="1402180"/>
 		<merc_zone id="3" costs="8" cooldown="900" msg_id="1402184" announce_id="1402181"/>
-		<assault_data dredgion_id="17" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="17" base_budget="3" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
@@ -337,7 +337,7 @@
 		<legion_reward item_id="122001631" item_count="1"/>
 		<merc_zone id="1" costs="4" cooldown="900" msg_id="1402188" announce_id="1402185"/>
 		<merc_zone id="2" costs="4" cooldown="900" msg_id="1402189" announce_id="1402186"/>
-		<assault_data dredgion_id="16" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="16" base_budget="3" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
@@ -366,7 +366,7 @@
 		<legion_reward item_id="186000031" item_count="70"/>
 		<legion_reward item_id="188051893" item_count="1"/>
 		<legion_reward item_id="122001522" item_count="1"/>
-		<assault_data dredgion_id="19" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="19" base_budget="3" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="276953" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="276869 276870 276871 276872 276873" heading_offset="5" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="276989 276990 276991 276992 276993" heading_offset="45" distance_offset="4"/>
@@ -408,7 +408,7 @@
 		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402305" announce_id="1402296"/>
 		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402302" announce_id="1402293"/>
 		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402304" announce_id="1402294"/>
-		<assault_data dredgion_id="5" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="5" base_budget="3" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
@@ -442,7 +442,7 @@
 		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402323" announce_id="1402314"/>
 		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402320" announce_id="1402311"/>
 		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402322" announce_id="1402312"/>
-		<assault_data dredgion_id="6" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="6" base_budget="3" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
@@ -482,7 +482,7 @@
 		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402341" announce_id="1402332"/>
 		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402338" announce_id="1402329"/>
 		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402339" announce_id="1402330"/>
-		<assault_data dredgion_id="11" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="11" base_budget="3" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
@@ -516,7 +516,7 @@
 		<merc_zone id="2" costs="6" cooldown="900" msg_id="1402359" announce_id="1402350"/>
 		<merc_zone id="3" costs="3" cooldown="900" msg_id="1402356" announce_id="1402347"/>
 		<merc_zone id="4" costs="3" cooldown="900" msg_id="1402358" announce_id="1402348"/>
-		<assault_data dredgion_id="10" base_budget="5" base_delay="240">
+		<assault_data dredgion_id="10" base_budget="3" base_delay="240">
 			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="251383 251384 251385 251386 251387" heading_offset="5" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="251389 251392 251394 251397" heading_offset="45" distance_offset="4"/>
@@ -562,7 +562,7 @@
 		<merc_zone id="5" costs="39" cooldown="900" msg_id="1402496" announce_id="1402489"/>
 		<merc_zone id="6" costs="39" cooldown="900" msg_id="1402497" announce_id="1402490"/>
 		<merc_zone id="7" costs="20" cooldown="900" msg_id="1402498" announce_id="1402491"/>
-		<assault_data dredgion_id="21" base_budget="5" base_delay="180">
+		<assault_data dredgion_id="21" base_budget="4" base_delay="180">
 			<assaulter type="TELEPORT" npc_ids="251406" distance_offset="2"/>
 			<assaulter type="COMMANDER" npc_ids="252133 252134 252135 252136 252137" distance_offset="4"/>
 			<assaulter type="FIGHTER" npc_ids="252118 252119 252121 252122" distance_offset="4"/>
