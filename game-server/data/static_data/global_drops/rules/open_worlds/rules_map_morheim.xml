@@ -777,7 +777,7 @@
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217509" /><!-- Chieftain Nuaka -->
+			<gd_npc npc_id="212872" /><!-- Chieftain Nuaka -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="101500209" /><!-- Nuaka's Staff -->
@@ -788,11 +788,12 @@
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217509" /><!-- Chieftain Nuaka -->
+			<gd_npc npc_id="212872" /><!-- Chieftain Nuaka -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="101800293" /><!-- Nuaka's Pistol -->
 			<gd_item id="100200303" /><!-- Nuaka's Fang -->
+			<gd_item id="102100276" /><!-- Nuaka's Aether Key -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" chance="30">
@@ -800,7 +801,7 @@
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="217509" /><!-- Chieftain Nuaka -->
+			<gd_npc npc_id="212872" /><!-- Chieftain Nuaka -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="114100426" /><!-- Grand Chieftain's Shoes -->
