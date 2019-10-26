@@ -19,7 +19,7 @@ import com.aionemu.gameserver.utils.time.ServerTime;
 public class Sys extends AdminCommand {
 
 	public Sys() {
-		super("sys", "Shows and controls the system environment");
+		super("sys", "Shows and controls the system environment.");
 
 		// @formatter:off
 		setSyntaxInfo(

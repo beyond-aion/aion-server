@@ -49,10 +49,10 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 	private final int[] bossIds = new int[] { 219611, 286933, 219612, 219613, 219610, 219614 };
 	private final int bonusChestTimeLimit = 1320;
 
-	private int killedBossCount = 0;
-	private int attackedBossCount = 0;
+	private final AtomicInteger killedBossCount = new AtomicInteger();
+	private final AtomicInteger attackedBossCount = new AtomicInteger();
 
-	private AtomicBoolean handlingSecondBoss = new AtomicBoolean(false);
+	private AtomicBoolean handlingSecondBoss = new AtomicBoolean();
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
@@ -80,7 +80,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 				if (countdownTimer.compareAndSet(boss, 0, System.currentTimeMillis())) {
 					int timeLimit = bossTimeLimits[boss - 1];
 					currentCountdownIndex.set(boss);
-					attackedBossCount++;
+					attackedBossCount.incrementAndGet();
 					sendTimerToPlayers(timeLimit);
 					scheduleBossDespawn(boss, boss - 1, timeLimit * 1000);
 				}
@@ -154,9 +154,9 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 						cancelBossDespawn(bridgeNumber);
 						spawnBossLoot(bridgeNumber + 1);
 						openDoor(treasureDoors[bridgeNumber]);
-						killedBossCount++;
-						if (attackedBossCount == 6) {
-							if (killedBossCount == 6) {
+						int killedCount = killedBossCount.incrementAndGet();
+						if (attackedBossCount.get() == 6) {
+							if (killedCount == 6) {
 								if (bonusChestSpawnAllowed.get()) {
 									if (bonusChestTask != null && !bonusChestTask.isDone() && !bonusChestTask.isCancelled()) {
 										bonusChestTask.cancel(false);

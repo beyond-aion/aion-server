@@ -1097,7 +1097,8 @@
 		</gd_items>
 	</gd_rule>
 	<!-- END Cooking Recipes -->
-	<gd_rule rule_name="Dragon Lord Recipes(Asmodians)" chance="0.075" restriction_race="ASMODIANS">
+	<!-- Dark Poeta design drops -->
+	<gd_rule rule_name="Dragon Lord Recipes (Asmodians)" chance="0.075" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -1112,7 +1113,7 @@
 			<gd_item id="152206620" /><!-- Design: Dragon Lord's Vambrace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Drazma Recipes(Asmodians)" chance="0.075" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Drazma Recipes (Asmodians)" chance="0.075" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -1130,7 +1131,7 @@
 			<gd_item id="152230504" /><!-- Design: Drazma's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Necsium Recipes(Asmodians)" chance="0.075" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Necsium Recipes (Asmodians)" chance="0.075" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -1152,7 +1153,7 @@
 			<gd_item id="152206600" /><!-- Design: Nexium Chausses -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Surkana Recipes(Asmodians)" chance="0.075" restriction_race="ASMODIANS">
+	<gd_rule rule_name="Surkana Recipes (Asmodians)" chance="0.075" restriction_race="ASMODIANS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -1169,7 +1170,7 @@
 			<gd_item id="152206647" /><!-- Design: Surkana Warhammer -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Dragon Lord Recipes(Elyos)" chance="0.075" restriction_race="ELYOS">
+	<gd_rule rule_name="Dragon Lord Recipes (Elyos)" chance="0.075" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -1184,7 +1185,7 @@
 			<gd_item id="152201618" /><!-- Design: Dragon Lord's Vambrace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Drazma Recipes(Elyos)" chance="0.075" restriction_race="ELYOS">
+	<gd_rule rule_name="Drazma Recipes (Elyos)" chance="0.075" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -1202,7 +1203,7 @@
 			<gd_item id="152220515" /><!-- Design: Drazma's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Neccium Recipes(Elyos)" chance="0.075" restriction_race="ELYOS">
+	<gd_rule rule_name="Necsium Recipes (Elyos)" chance="0.075" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -1224,7 +1225,7 @@
 			<gd_item id="152201598" /><!-- Design: Nexium Chausses -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Surkana Recipes(Elyos)" chance="0.075" restriction_race="ELYOS">
+	<gd_rule rule_name="Surkana Recipes (Elyos)" chance="0.075" restriction_race="ELYOS">
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
@@ -1239,17 +1240,6 @@
 			<gd_item id="152201603" /><!-- Design: Surkana Shoulderplates -->
 			<gd_item id="152201641" /><!-- Design: Surkana Spellbook -->
 			<gd_item id="152201645" /><!-- Design: Surkana Warhammer -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Noble Surkana" chance="35">
-		<gd_maps>
-			<gd_map map_id="300040000" /><!-- Dark Poeta -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214880" /><!-- Spaller Echtra -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="152012803" /><!-- Noble Surkana -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

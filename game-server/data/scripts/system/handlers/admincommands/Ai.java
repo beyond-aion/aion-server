@@ -29,7 +29,7 @@ import com.aionemu.gameserver.world.World;
 public class Ai extends AdminCommand {
 
 	public Ai() {
-		super("ai", "Modifies and shows AI details");
+		super("ai", "Modifies and shows AI details.");
 
 		// @formatter:off
 		setSyntaxInfo(

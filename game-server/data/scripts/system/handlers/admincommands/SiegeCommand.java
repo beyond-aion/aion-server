@@ -22,7 +22,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class SiegeCommand extends AdminCommand {
 
 	public SiegeCommand() {
-		super("siege", "Controls sieges and artifacts");
+		super("siege", "Controls sieges and artifacts.");
 
 		// @formatter:off
 		setSyntaxInfo(

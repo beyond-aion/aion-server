@@ -372,6 +372,17 @@
 			<gd_item id="170195082" /><!-- [Souvenir] Shugo with a Pearl Earring -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Noble Surkana" chance="35">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214880" /><!-- Spaller Echtra -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012803" /><!-- Noble Surkana -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Junk" chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
