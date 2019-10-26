@@ -306,4 +306,48 @@
 			<gd_item id="122001169" /><!-- Kurnus' Turquoise Ring -->
 		</gd_items>
 	</gd_rule>
+	<!-- Skuma Silvereye -->
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216507" /><!-- Skuma Silvereye -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012047" /><!-- Crystal containing Skuma's soul -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216507" /><!-- Skuma Silvereye -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000913" /><!-- Skuma's Sword -->
+			<gd_item id="101500704" /><!-- Skuma's Staff -->
+			<gd_item id="101300660" /><!-- Skuma's Spear -->
+			<gd_item id="100600761" /><!-- Skuma's Tome -->
+			<gd_item id="102000666" /><!-- Skuma's Harp -->
+			<gd_item id="102100563" /><!-- Skuma's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216507" /><!-- Skuma Silvereye -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100975" /><!-- Skuma's Gloves -->
+			<gd_item id="111600958" /><!-- Skuma's Gauntlets -->
+			<gd_item id="112100931" /><!-- Skuma's Pauldrons -->
+			<gd_item id="112300929" /><!-- Skuma's Shoulderguards -->
+			<gd_item id="112500916" /><!-- Skuma's Spaulders -->
+			<gd_item id="112600931" /><!-- Skuma's Shoulderplates -->
+		</gd_items>
+	</gd_rule>
 </global_rules>
