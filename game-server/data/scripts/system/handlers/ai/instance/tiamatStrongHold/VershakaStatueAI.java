@@ -28,7 +28,7 @@ public class VershakaStatueAI extends NpcAI {
 	@Override
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		if (dialogActionId == SETPRO1) {
-			SkillEngine.getInstance().applyEffectDirectly(2784, player, player);
+			SkillEngine.getInstance().applyEffectDirectly(300, player, player);
 		}
 		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 		return true;
