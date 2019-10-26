@@ -267,4 +267,43 @@
 			<gd_item id="122001181" /><!-- Veille's Turquoise Ring -->
 		</gd_items>
 	</gd_rule>
+	<!-- Single Monster Drops -->
+	<!-- Kurnus -->
+	<gd_rule rule_name="Named Hairpin (Legend)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216501" /><!-- Chief Kurnus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002293" /><!-- Kurnus' Hairpin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216501" /><!-- Chief Kurnus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100929" /><!-- Kurnus' Pauldrons -->
+			<gd_item id="112300927" /><!-- Kurnus' Shoulderguards -->
+			<gd_item id="112500914" /><!-- Kurnus' Spaulders -->
+			<gd_item id="112600929" /><!-- Kurnus' Shoulderplates -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216501" /><!-- Chief Kurnus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001168" /><!-- Kurnus' Corundum Ring -->
+			<gd_item id="122001169" /><!-- Kurnus' Turquoise Ring -->
+		</gd_items>
+	</gd_rule>
 </global_rules>
