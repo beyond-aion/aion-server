@@ -19,7 +19,7 @@ import ai.AggressiveNpcAI;
 public class TelepathyControllerAI extends AggressiveNpcAI {
 
 	private Future<?> spawnTask;
-	private AtomicBoolean isAggred = new AtomicBoolean();
+	private final AtomicBoolean isAggred = new AtomicBoolean();
 
 	public TelepathyControllerAI(Npc owner) {
 		super(owner);
@@ -37,12 +37,16 @@ public class TelepathyControllerAI extends AggressiveNpcAI {
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (isAggred.compareAndSet(false, true)) {
-			spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-				if (!isDead()) {
-					Npc spawn = spawnHelper();
-					spawn.getKnownList().forEachPlayer(p -> spawn.getAggroList().addHate(p, 10));
+			synchronized (isAggred) {
+				if (isAggred.get()) {
+					spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+						if (!isDead()) {
+							Npc spawn = spawnHelper();
+							spawn.getKnownList().forEachPlayer(p -> spawn.getAggroList().addHate(p, 10));
+						}
+					}, 60000, 60000);
 				}
-			}, 60000, 60000);
+			}
 		}
 	}
 
@@ -54,8 +58,10 @@ public class TelepathyControllerAI extends AggressiveNpcAI {
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
-		cancelTask();
-		isAggred.set(false);
+		synchronized (isAggred) {
+			cancelTask();
+			isAggred.set(false);
+		}
 	}
 
 	@Override
