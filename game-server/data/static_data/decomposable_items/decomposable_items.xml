@@ -16518,22 +16518,22 @@
 	</decomposable>
 	<decomposable item_id="188052074" /><!-- [Event] Raksha Weapon Box -->
 	<decomposable item_id="188052075" selectable="true"><!-- [Event] Tahabata Weapon Box -->
-        <items>
-            <item id="100001408" /><!-- Tahabata's Sword -->
-            <item id="100101085" /><!-- Tahabata's Warhammer -->
-            <item id="100201247" /><!-- Tahabata's Dagger -->
-            <item id="100501093" /><!-- Tahabata's Jewel -->
-            <item id="100601149" /><!-- Tahabata's Tome -->
-            <item id="100901101" /><!-- Tahabata's Greatsword -->
-            <item id="101301038" /><!-- Tahabata's Spear -->
-            <item id="101501119" /><!-- Tahabata's Staff -->
-            <item id="101701130" /><!-- Tahabata's Longbow -->
-            <item id="101800575" /><!-- Tahabata's Pistol -->
-            <item id="101900571" /><!-- Tahabata's Aethercannon -->
-            <item id="102000601" /><!-- Tahabata's Harp -->
-            <item id="102100522" /><!-- Tahabata's Cipher-Blade -->
-        </items>
-    </decomposable>
+		<items>
+			<item id="100001408"/><!-- Tahabata's Sword -->
+			<item id="100101085"/><!-- Tahabata's Warhammer -->
+			<item id="100201247"/><!-- Tahabata's Dagger -->
+			<item id="100501093"/><!-- Tahabata's Jewel -->
+			<item id="100601149"/><!-- Tahabata's Tome -->
+			<item id="100901101"/><!-- Tahabata's Greatsword -->
+			<item id="101301038"/><!-- Tahabata's Spear -->
+			<item id="101501119"/><!-- Tahabata's Staff -->
+			<item id="101701130"/><!-- Tahabata's Longbow -->
+			<item id="101800575"/><!-- Tahabata's Pistol -->
+			<item id="101900571"/><!-- Tahabata's Aethercannon -->
+			<item id="102000601"/><!-- Tahabata's Harp -->
+			<item id="102100522"/><!-- Tahabata's Cipher-Blade -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052076"><!-- [Event] Bundle of Kahrun Symbols -->
 		<items chance="90.0">
 			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
@@ -28725,15 +28725,15 @@
 	<decomposable item_id="188053214" /><!-- [Event] Violet Bundle -->
 	<decomposable item_id="188053215" /><!-- xxxNAxxx -->
 	<decomposable item_id="188053216" selectable="true"><!-- [Event] Fine Violet Box -->
-        <items>
-            <item id="169405391" /><!-- Upgraded Distorted Sword of the Fierce Battle Prototype -->
-            <item id="169405392" /><!-- Upgraded Distorted Mace of the Fierce Battle Prototype -->
-            <item id="169405393" /><!-- Upgraded Distorted Dagger of the Fierce Battle Prototype -->
-            <item id="169405394" /><!-- Upgraded Distorted Greatsword of the Fierce Battle Prototype -->
-            <item id="169405395" /><!-- Upgraded Distorted Polearm of the Fierce Battle Prototype -->
-            <item id="169405396" /><!-- Upgraded Distorted Staff of the Fierce Battle Prototype -->
-        </items>
-    </decomposable>
+		<items>
+			<item id="169405391"/><!-- Upgraded Distorted Sword of the Fierce Battle Prototype -->
+			<item id="169405392"/><!-- Upgraded Distorted Mace of the Fierce Battle Prototype -->
+			<item id="169405393"/><!-- Upgraded Distorted Dagger of the Fierce Battle Prototype -->
+			<item id="169405394"/><!-- Upgraded Distorted Greatsword of the Fierce Battle Prototype -->
+			<item id="169405395"/><!-- Upgraded Distorted Polearm of the Fierce Battle Prototype -->
+			<item id="169405396"/><!-- Upgraded Distorted Staff of the Fierce Battle Prototype -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053217" /><!-- [Event] Greater Violet Box -->
 	<decomposable item_id="188053218" /><!-- [Event] Lesser Violet Box -->
 	<decomposable item_id="188053219" selectable="true"><!-- [Event] Sauro Commander's Accessory Box -->
@@ -34938,7 +34938,7 @@
 			<item id="190100164" /><!-- Magnificent Clucklich -->
 			<item id="190100146" /><!-- Immortal Knight's War Steed -->
 			<item id="190100150" /><!-- Shugo Gyrocopter -->
-            <item id="190100072" /><!-- Rosenimbus -->
+			<item id="190100072" /><!-- Rosenimbus -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188054261" /><!-- Alluring Wing Feather Box -->
