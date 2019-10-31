@@ -19,8 +19,7 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author SoulKeeper
- * @author_fix nerolory
+ * @author SoulKeeper, nerolory
  */
 public class CM_EMOTION extends AionClientPacket {
 
@@ -31,26 +30,19 @@ public class CM_EMOTION extends AionClientPacket {
 	/**
 	 * Emotion number
 	 */
-	EmotionType emotionType;
+	private EmotionType emotionType;
 	/**
 	 * Emotion number
 	 */
-	int emotion;
+	private int emotion;
 	/**
 	 * Coordinates of player
 	 */
-	float x;
-	float y;
-	float z;
-	byte heading;
+	private float x, y, z;
+	private byte heading;
 
-	int targetObjectId;
+	private int targetObjectId;
 
-	/**
-	 * Constructs new client packet instance.
-	 * 
-	 * @param opcode
-	 */
 	public CM_EMOTION(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}
@@ -83,9 +75,11 @@ public class CM_EMOTION extends AionClientPacket {
 			case ATTACKMODE_IN_STANDING: // get equip weapon
 			case NEUTRALMODE_IN_MOVE: // remove equip weapon
 			case NEUTRALMODE_IN_STANDING: // remove equip weapon
-			case START_SPRINT:
 			case END_SPRINT:
 			case WINDSTREAM_STRAFE:
+				break;
+			case START_SPRINT:
+				readD(); // unk 1
 				break;
 			case EMOTE:
 				emotion = readUH();
