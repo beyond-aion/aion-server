@@ -6,8 +6,5 @@ package com.aionemu.gameserver.model.templates.bounty;
 public enum BountyType {
 	
 	PER_X_KILLS,
-	TOTAL_KILLS,
-	DAILY_KILLS,
-	WEEKLY_KILLS,
-	SEASONAL_KILLS;
+	SEASONAL_KILLS
 }
