@@ -24,6 +24,7 @@ public class CM_ITEM_REMODEL extends AionClientPacket {
 		readD(); // npcId
 		keepItemId = readD();
 		extractItemId = readD();
+		readD(); // unk 0
 	}
 
 	@Override

@@ -12,12 +12,11 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
- * @author Artur
- * @reworked Majka
+ * @author Artur, Majka, Sykra
  */
 public class _14025CookingUpDisasters extends AbstractQuestHandler {
 
-	private final static int[] mobs = { 211776, 217090, 232133 };
+	private final static int[] mobs = { 211017, 217090, 232133 };
 
 	public _14025CookingUpDisasters() {
 		super(14025);
@@ -56,7 +55,7 @@ public class _14025CookingUpDisasters extends AbstractQuestHandler {
 		int targetId = env.getTargetId();
 
 		switch (targetId) {
-			case 211776:
+			case 211017:
 			case 232133:
 				int killVar1 = qs.getQuestVarById(1);
 				if (var == 5 && killVar1 < 4) {
