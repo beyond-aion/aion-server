@@ -906,9 +906,10 @@
 			<gd_item id="152012004" /><!-- Monitor Back Skin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Monitor Meat" chance="20" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Monitor Meat" chance="20" dynamic_chance="true" min_diff="-2" restriction_race="ASMODIANS">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="VARANUS" />
@@ -969,9 +970,10 @@
 			<gd_item id="152012007" /><!-- Basilisk Backbone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Basilisk Meat" chance="2" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Basilisk Meat" chance="2" dynamic_chance="true" min_diff="-2" restriction_race="ELYOS">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="BASILISK" />
@@ -1140,9 +1142,10 @@
 			<gd_item id="152012019" /><!-- Huge Frillneck Claw -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Raw Frillneck Meat" chance="10" dynamic_chance="true" min_diff="-15" max_diff="-10">
+	<gd_rule rule_name="Raw Frillneck Meat" chance="10" dynamic_chance="true" min_diff="-15" restriction_race="ELYOS">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="FRILLFAIMAM" />
@@ -1275,9 +1278,10 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Pluma -->
-	<gd_rule rule_name="Raw Pluma Meat" chance="20" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Raw Pluma Meat" chance="20" dynamic_chance="true" min_diff="-2" restriction_race="ELYOS">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="LUPYLLINI" />
@@ -1288,9 +1292,10 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Kurin -->
-	<gd_rule rule_name="Raw Kurin Meat" chance="27" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Raw Kurin Meat" chance="27" dynamic_chance="true" min_diff="-2" restriction_race="ELYOS">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="CURES" />
@@ -1301,9 +1306,10 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Crestlich -->
-	<gd_rule rule_name="Crestlich Breast Meat" chance="27" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Crestlich Breast Meat" chance="27" dynamic_chance="true" min_diff="-2" restriction_race="ELYOS">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="CRESTLICH" />
@@ -1313,9 +1319,10 @@
 			<gd_item id="152015003" /><!-- Crestlich Breast Meat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Crestlich Meat" chance="27" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Crestlich Meat" chance="27" dynamic_chance="true" min_diff="-2" restriction_race="ASMODIANS">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="CRESTLICH" />
@@ -1325,10 +1332,12 @@
 			<gd_item id="152015505" /><!-- Raw Crestlich Meat -->
 		</gd_items>
 	</gd_rule>
+
 	<!-- Rynoce -->
-	<gd_rule rule_name="Raw Rynoce Meat" chance="24" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Raw Rynoce Meat" chance="24" dynamic_chance="true" min_diff="-2" restriction_race="ELYOS">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="RHINOCE" />
@@ -1339,11 +1348,13 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Klaw -->
-	<gd_rule rule_name="Raw Klaw Meat" chance="24" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Raw Klaw Meat" chance="24" dynamic_chance="true" min_diff="-2" restriction_race="ELYOS">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
+			<gd_npc_group group="NEUTFLY" />
 			<gd_npc_group group="NEUTH1" />
 			<gd_npc_group group="NEUTH2" />
 		</gd_npc_groups>
@@ -1407,21 +1418,24 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Moonflower -->
-	<gd_rule rule_name="Moonflower Fruit" chance="24" dynamic_chance="true" min_diff="-14" max_diff="-5">
+	<gd_rule rule_name="Moonflower Fruit" chance="24" dynamic_chance="true" min_diff="-14" restriction_race="ELYOS">
 		<gd_worlds>
 			<gd_world wd_type="ELYSEA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="FELLIAL" />
+			<gd_npc_group group="RAFFLESIA" />
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 50 -->
 			<gd_item id="152015010" /><!-- Moonflower Fruit -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Crestlich Meat (Elyos)" chance="24" dynamic_chance="true" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Crestlich Meat (Elyos)" chance="24" dynamic_chance="true" min_diff="-4" restriction_race="ELYOS">
 		<gd_maps>
 			<gd_map map_id="210050000" /><!-- Inggison -->
+			<gd_map map_id="600100000" /><!-- Levinshor -->
 		</gd_maps>
 		<gd_npc_groups>
 			<gd_npc_group group="CRESTLICH" />
@@ -1431,9 +1445,10 @@
 			<gd_item id="152015013" /><!-- Crestlich Meat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Crestlich Meat (Asmodians)" chance="24" dynamic_chance="true" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Crestlich Meat (Asmodians)" chance="24" dynamic_chance="true" min_diff="-4" restriction_race="ASMODIANS">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+			<gd_map map_id="600100000" /><!-- Levinshor -->
 		</gd_maps>
 		<gd_npc_groups>
 			<gd_npc_group group="CRESTLICH" />
@@ -1443,33 +1458,38 @@
 			<gd_item id="152015513" /><!-- Marbled Crestlich Meat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Moonflower Leaf (Elyos)" chance="24" dynamic_chance="true" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Moonflower Leaf (Elyos)" chance="24" dynamic_chance="true" min_diff="-4" restriction_race="ELYOS">
 		<gd_maps>
 			<gd_map map_id="210050000" /><!-- Inggison -->
+			<gd_map map_id="600100000" /><!-- Levinshor -->
 		</gd_maps>
 		<gd_npc_groups>
 			<gd_npc_group group="FELLIAL" />
+			<gd_npc_group group="RAFFLESIA" />
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 55 -->
 			<gd_item id="152015014" /><!-- Moonflower Leaf -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Moonflower Leaf (Asmodians)" chance="24" dynamic_chance="true" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Moonflower Leaf (Asmodians)" chance="24" dynamic_chance="true" min_diff="-4" restriction_race="ASMODIANS">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+			<gd_map map_id="600100000" /><!-- Levinshor -->
 		</gd_maps>
 		<gd_npc_groups>
 			<gd_npc_group group="FELLIAL" />
+			<gd_npc_group group="RAFFLESIA" />
 		</gd_npc_groups>
 		<gd_items>
 			<!-- Level 55 -->
 			<gd_item id="152015514" /><!-- Moonflower Leaf -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Cellatu Meat (Elyos)" chance="24" dynamic_chance="true" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Cellatu Meat (Elyos)" chance="24" dynamic_chance="true" min_diff="-4" restriction_race="ELYOS">
 		<gd_maps>
 			<gd_map map_id="210050000" /><!-- Inggison -->
+			<gd_map map_id="600100000" /><!-- Levinshor -->
 		</gd_maps>
 		<gd_npc_groups>
 			<gd_npc_group group="CELLATU" />
@@ -1479,9 +1499,10 @@
 			<gd_item id="152015015" /><!-- Lean Cellatu Meat -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Cellatu Meat (Asmodians)" chance="24" dynamic_chance="true" min_diff="-4" max_diff="5">
+	<gd_rule rule_name="Cellatu Meat (Asmodians)" chance="24" dynamic_chance="true" min_diff="-4" restriction_race="ASMODIANS">
 		<gd_maps>
 			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+			<gd_map map_id="600100000" /><!-- Levinshor -->
 		</gd_maps>
 		<gd_npc_groups>
 			<gd_npc_group group="CELLATU" />
@@ -1569,9 +1590,10 @@
 			<gd_item id="152012518" /><!-- Noble Granker Horn -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Granker Meat" chance="20" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Granker Meat" chance="20" dynamic_chance="true" min_diff="-2" restriction_race="ASMODIANS">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="BIGHORNDEER" />
@@ -1677,9 +1699,10 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Fungy -->
-	<gd_rule rule_name="Fungen Cap" chance="40" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Fungen Cap" chance="40" dynamic_chance="true" min_diff="-2" restriction_race="ASMODIANS">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="FUNGY" />
@@ -1690,9 +1713,10 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Ksellid -->
-	<gd_rule rule_name="Ksellid Meat" chance="40" dynamic_chance="true" min_diff="-2" max_diff="2">
+	<gd_rule rule_name="Ksellid Meat" chance="40" dynamic_chance="true" min_diff="-2" restriction_race="ASMODIANS">
 		<gd_worlds>
 			<gd_world wd_type="ASMODAE" />
+			<gd_world wd_type="BALAUREA_HIGH" />
 		</gd_worlds>
 		<gd_npc_groups>
 			<gd_npc_group group="SHELLIZARD" />
@@ -1746,6 +1770,109 @@
 		</gd_worlds>
 		<gd_items>
 			<gd_item id="152012578" /><!-- Ceramium Fragment -->
+		</gd_items>
+	</gd_rule>
+	<!-- Abex -->
+	<gd_rule rule_name="Prime Abex Cut" chance="10" dynamic_chance="true" min_diff="0" max_diff="4">
+		<gd_worlds>
+			<gd_world wd_type="BALAUREA_HIGH" />
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="BAKU" />
+			<gd_npc_group group="CHAPIREPRIEST" />
+			<gd_npc_group group="CLODWORM" />
+			<gd_npc_group group="DRAKE" />
+			<gd_npc_group group="DRAKY" />
+			<gd_npc_group group="FETHLOT" />
+			<gd_npc_group group="FLOWERWORM" />
+			<gd_npc_group group="KALNIF" />
+			<gd_npc_group group="KUILLUS" />
+			<gd_npc_group group="UNICORN" />
+			<gd_npc_group group="WORM" />
+			<gd_npc_group group="ZAIF" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 61 -->
+			<gd_item id="152015016" /> <!-- Prime Abex Cut -->
+		</gd_items>
+	</gd_rule>
+	<!-- Raw Meat -->
+	<gd_rule rule_name="Tipolid Raw Meat" chance="20" dynamic_chance="true" min_diff="-2" restriction_race="ASMODIANS">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="HIPPOLIZARD" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152015507" /> <!-- Tipolid Raw Meat -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Raw Snuffler Meat" chance="20" dynamic_chance="true" min_diff="-2" restriction_race="ASMODIANS">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="MERDION" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152015508" /> <!-- Raw Snuffler Meat -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Raw Tayga Meat" chance="20" dynamic_chance="true" min_diff="-2" restriction_race="ASMODIANS">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="KALNIF" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152015509" /> <!-- Raw Tayga Meat -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Raw Lobnite Meat" chance="20" dynamic_chance="true" min_diff="-2" restriction_race="ASMODIANS">
+		<gd_worlds>
+			<gd_world wd_type="ASMODAE" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="LOBNITE" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152015510" /> <!-- Raw Lobnite Meat -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Raw Griffon Meat" chance="20" dynamic_chance="true" min_diff="-2" restriction_race="ELYOS">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="UNICORN" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 40 -->
+			<gd_item id="152015005" /> <!-- Raw Griffon Meat -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Raw Starturtle Meat" chance="20" dynamic_chance="true" min_diff="-2" restriction_race="ELYOS">
+		<gd_worlds>
+			<gd_world wd_type="ELYSEA" />
+			<gd_world wd_type="BALAUREA_HIGH" />
+		</gd_worlds>
+		<gd_npc_groups>
+			<gd_npc_group group="STARTURTLE" />
+		</gd_npc_groups>
+		<gd_items>
+			<!-- Level 50 -->
+			<gd_item id="152015008" /> <!-- Raw Starturtle Meat -->
 		</gd_items>
 	</gd_rule>
 </global_rules>
