@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Destroyer Kunax -->
+	<npc_skills npc_ids="234190">
+		<npc_skill id="21744" prob="0" is_post_spawn="true" /><!-- Ide Scale -->
+		<npc_skill id="21551" prob="100" cd="20000" /><!-- Aggressive Shot -->
+		<npc_skill id="21551" prob="100" cd="20000" /><!-- Slaughtering Cleave -->
+		<npc_skill id="21552" prob="100" /><!-- Onslaught -->
+		<npc_skill id="21553" prob="100" cd="20000" /><!-- Cleaving Massacre -->
+		<npc_skill id="21554" prob="100" cd="20000" /><!-- Butcher's Sweep -->
+		<npc_skill id="21555" prob="100" cd="60000" prio="2" min_time="60000" /><!-- Aerial Confinement -->
+		<npc_skill id="21558" prob="100" cd="60000" prio="1" min_time="30000" /><!-- Aether Prison -->
+	</npc_skills>
+</npc_skill_templates>
