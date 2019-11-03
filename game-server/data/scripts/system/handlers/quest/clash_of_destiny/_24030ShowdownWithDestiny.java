@@ -15,6 +15,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
@@ -119,7 +120,10 @@ public class _24030ShowdownWithDestiny extends AbstractQuestHandler {
 						case QUEST_SELECT:
 							return sendQuestDialog(env, 2716);
 						case SETPRO6:
-							// TODO: Find out, if any effect or so is getting applied to player
+							SkillEngine.getInstance().applyEffectDirectly(18567, player, player);
+							SkillEngine.getInstance().applyEffectDirectly(18568, player, player);
+							SkillEngine.getInstance().applyEffectDirectly(18569, player, player);
+							SkillEngine.getInstance().applyEffectDirectly(18570, player, player);
 							player.setState(CreatureState.FLYING);
 							player.unsetState(CreatureState.ACTIVE);
 							player.setFlightTeleportId(1001);
