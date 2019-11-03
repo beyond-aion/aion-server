@@ -40,10 +40,9 @@ public class _1107TheLostAxe extends AbstractQuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (targetId == 0) {
 			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
-				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-				return true;
-			} else
+				return QuestService.startQuest(env);
+			} else if (env.getDialogActionId() == QUEST_REFUSE_1)
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 		} else if (targetId == 203075) {
 			if (qs != null) {
