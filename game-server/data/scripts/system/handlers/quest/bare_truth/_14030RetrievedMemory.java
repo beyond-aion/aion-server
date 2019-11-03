@@ -14,6 +14,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
@@ -82,6 +83,7 @@ public class _14030RetrievedMemory extends AbstractQuestHandler {
 						case SETPRO4:
 							if (!giveQuestItem(env, 182215387, 1))
 								return false;
+							TeleportService.teleportTo(player, WorldMapType.RESHANTA.getId(), 2241f, 2191.5f, 2190.1f, (byte) 0, TeleportAnimation.FADE_OUT_BEAM);
 							return defaultCloseDialog(env, 3, 4); // 4
 					}
 					break;
@@ -102,6 +104,10 @@ public class _14030RetrievedMemory extends AbstractQuestHandler {
 							break;
 						case SETPRO5:
 							if (var == 4) {
+								SkillEngine.getInstance().applyEffectDirectly(18563, player, player);
+								SkillEngine.getInstance().applyEffectDirectly(18564, player, player);
+								SkillEngine.getInstance().applyEffectDirectly(18565, player, player);
+								SkillEngine.getInstance().applyEffectDirectly(18566, player, player);
 								player.setState(CreatureState.FLYING);
 								player.unsetState(CreatureState.ACTIVE);
 								player.setFlightTeleportId(1001);
