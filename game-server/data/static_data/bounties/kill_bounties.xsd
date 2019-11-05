@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jxb="http://java.sun.com/xml/ns/jaxb" jxb:version="2.1">
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:element name="kill_bounties">
 		<xs:complexType>
 			<xs:sequence>
@@ -21,10 +21,7 @@
 	<xs:simpleType name="BountyType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="PER_X_KILLS"/>
-			<xs:enumeration value="TOTAL_KILLS"/>
-			<xs:enumeration value="DAILY_KILLS"/>
-			<xs:enumeration value="WEEKLY_KILLS"/>
-			<xs:enumeration value="SEASON_KILLS"/>
+			<xs:enumeration value="SEASONAL_KILLS"/>
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>

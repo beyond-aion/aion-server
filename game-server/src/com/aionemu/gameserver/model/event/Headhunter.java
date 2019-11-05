@@ -34,10 +34,11 @@ public class Headhunter implements Comparable<Headhunter>, Persistable {
 		this.accumulatedKills = accumulatedKills;
 	}
 
-	public void incrementKills() {
+	public int incrementAndGetKills() {
 		accumulatedKills++;
 		lastUpdate = System.currentTimeMillis();
 		state = PersistentState.UPDATE_REQUIRED;
+		return accumulatedKills;
 	}
 
 	@Override
@@ -49,7 +50,7 @@ public class Headhunter implements Comparable<Headhunter>, Persistable {
 	public void setPersistentState(PersistentState state) {
 		this.state = state;
 	}
-	
+
 	public long getLastUpdate() {
 		return lastUpdate;
 	}

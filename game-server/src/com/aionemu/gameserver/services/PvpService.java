@@ -1,10 +1,6 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,8 +47,7 @@ import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
- * @author Sarynth
- * @reworked Estrayl
+ * @author Sarynth, Estrayl
  */
 public class PvpService {
 
@@ -69,16 +64,16 @@ public class PvpService {
 		return SingletonHolder.INSTANCE;
 	}
 
-	public void sendBountyReward(Player player, BountyType type, int neededKills) {
+	private void sendBountyReward(Player player, BountyType type, int killScore) {
 		for (KillBountyTemplate template : killBounties) {
-			if (template.getBountyType() != type || template.getKillCount() != neededKills)
+			if (template.getBountyType() != type || template.getKillCount() != killScore)
 				continue;
 			List<BountyTemplate> bounties = new ArrayList<>();
-			if (type == BountyType.PER_X_KILLS) {
+			if (type == BountyType.PER_X_KILLS)
 				bounties.add(Rnd.get(template.getBounties()));
-			} else {
+			else
 				bounties.addAll(template.getBounties());
-			}
+
 			for (BountyTemplate bounty : bounties)
 				ItemService.addItem(player, bounty.getItemId(), bounty.getCount(), true,
 					new ItemUpdatePredicate(ItemAddType.ITEM_COLLECT, ItemUpdateType.INC_CASH_ITEM));
@@ -119,9 +114,11 @@ public class PvpService {
 				if (CustomConfig.ENABLE_KILL_REWARD) {
 					int kills = killer.getAbyssRank().getAllKill();
 					for (KillBountyTemplate template : killBounties) {
-						int killStep = template.getKillCount();
-						if (kills % killStep == 0)
-							sendBountyReward(killer, BountyType.PER_X_KILLS, killStep);
+						if (template.getBountyType() == BountyType.PER_X_KILLS) {
+							int killStep = template.getKillCount();
+							if (kills % killStep == 0)
+								sendBountyReward(killer, BountyType.PER_X_KILLS, killStep);
+						}
 					}
 				}
 			}
@@ -130,7 +127,7 @@ public class PvpService {
 				ConquerorAndProtectorService.getInstance().onKill(winner, victim);
 				EventService.getInstance().onPvpKill(winner, victim);
 				if (EventsConfig.ENABLE_HEADHUNTING && EventsConfig.HEADHUNTING_MAPS.contains(victim.getWorldId()))
-					getHeadhunterById(winner.getObjectId()).incrementKills();
+					sendBountyReward(winner, BountyType.SEASONAL_KILLS, getHeadhunterById(winner.getObjectId()).incrementAndGetKills());
 			}
 		}
 
