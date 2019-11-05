@@ -1193,16 +1193,9 @@ public class LegionService {
 		// Send the new legion member the required legion packets
 		PacketSendUtility.sendPacket(player, new SM_LEGION_INFO(legion));
 		List<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, player.getObjectId());
-		ListSplitter<LegionMemberEx> splits = new ListSplitter<>(totalMembers, 80, true);
-		// Send the member list to the new legion member
-		while (splits.hasMore()) {
-			boolean isSplit = false;
-			boolean isFirst = splits.isFirst();
-			List<LegionMemberEx> curentMembers = splits.getNext();
-			if (isFirst && curentMembers.size() < totalMembers.size()) {
-				isSplit = true;
-			}
-			PacketSendUtility.sendPacket(player, new SM_LEGION_MEMBERLIST(curentMembers, isSplit, isFirst));
+		ListSplitter<LegionMemberEx> splitter = new ListSplitter<>(totalMembers, 80, true);
+		while (splitter.hasMore()) {
+			PacketSendUtility.sendPacket(player, new SM_LEGION_MEMBERLIST(splitter.getNext(), splitter.hasMore(), splitter.isFirst()));
 		}
 
 		// Send legion member info to the members
@@ -1408,9 +1401,6 @@ public class LegionService {
 			return false;
 	}
 
-	/**
-	 * @param player
-	 */
 	public void onLogin(Player activePlayer) {
 		Legion legion = activePlayer.getLegion();
 
@@ -1426,17 +1416,9 @@ public class LegionService {
 		// Send legion info packets
 		PacketSendUtility.sendPacket(activePlayer, new SM_LEGION_INFO(legion));
 		List<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, null);
-		// Send member list to player
-		ListSplitter<LegionMemberEx> splits = new ListSplitter<>(totalMembers, 80, true);
-		// Send the member list to the new legion member
-		while (splits.hasMore()) {
-			boolean isSplit = false;
-			boolean isFirst = splits.isFirst();
-			List<LegionMemberEx> curentMembers = splits.getNext();
-			if (isFirst && curentMembers.size() < totalMembers.size()) {
-				isSplit = true;
-			}
-			PacketSendUtility.sendPacket(activePlayer, new SM_LEGION_MEMBERLIST(curentMembers, isSplit, isFirst));
+		ListSplitter<LegionMemberEx> splitter = new ListSplitter<>(totalMembers, 80, true);
+		while (splitter.hasMore()) {
+			PacketSendUtility.sendPacket(activePlayer, new SM_LEGION_MEMBERLIST(splitter.getNext(), splitter.hasMore(), splitter.isFirst()));
 		}
 
 		// Send current announcement to player
@@ -1453,9 +1435,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * @param player
-	 */
 	public void onLogout(Player player) {
 		Legion legion = player.getLegion();
 		LegionWarehouse lwh = player.getLegion().getLegionWarehouse();
@@ -1469,11 +1448,6 @@ public class LegionService {
 		storeLegionAnnouncements(legion);
 		legion.decreaseOnlineMembersCount();
 		legion.removeBonus();
-	}
-
-	public void clearCaches() {
-		allCachedLegions.clear();
-		allCachedLegionMembers.clear();
 	}
 
 	/**
@@ -1928,50 +1902,18 @@ public class LegionService {
 	 * for name changes
 	 */
 	public void updateLegionMemberList(Player activePlayer) {
-		// TODO FIX NULL POINTER BECAUSE OF GETLEGIONMEMBEREX
 		if (activePlayer != null && activePlayer.getLegion() != null) {
 			Legion legion = activePlayer.getLegion();
 			List<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, null);
-			ListSplitter<LegionMemberEx> splits = new ListSplitter<>(totalMembers, 80, true);
-			// Send the member list to all online members
-			while (splits.hasMore()) {
-				boolean isSplit = false;
-				boolean isFirst = splits.isFirst();
-				List<LegionMemberEx> curentMembers = splits.getNext();
-				if (isFirst && curentMembers.size() < totalMembers.size()) {
-					isSplit = true;
-				}
-				PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_MEMBERLIST(curentMembers, isSplit, isFirst));
+			ListSplitter<LegionMemberEx> splitter = new ListSplitter<>(totalMembers, 80, true);
+			while (splitter.hasMore()) {
+				PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_MEMBERLIST(splitter.getNext(), splitter.hasMore(), splitter.isFirst()));
 			}
 		}
 	}
 
-	/**
-	 * for name changes
-	 * 
-	 * @param activePlayer
-	 */
-	public void removeFromCache(Player activePlayer) {
-		if (activePlayer == null) {
-			return;
-		}
-		if (allCachedLegionMembers.contains(activePlayer.getObjectId())) {
-			allCachedLegionMembers.remove(activePlayer);
-		}
-	}
-
-	/**
-	 * for name changes
-	 * 
-	 * @param activePlayer
-	 */
-	public void addToCache(Player activePlayer) {
-		if (activePlayer == null) {
-			return;
-		}
-		if (!allCachedLegionMembers.contains(activePlayer.getObjectId())) {
-			allCachedLegionMembers.add(activePlayer);
-		}
+	public void updateCachedPlayerName(String oldName, Player player) {
+		allCachedLegionMembers.updateCachedPlayerName(oldName, player);
 	}
 
 	public void joinLegionDominion(Player player, Legion legion, int locId) {
