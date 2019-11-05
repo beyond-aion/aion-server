@@ -69,7 +69,7 @@ public class PvpService {
 			if (template.getBountyType() != type || template.getKillCount() != killScore)
 				continue;
 			List<BountyTemplate> bounties = new ArrayList<>();
-			if (type == BountyType.PER_X_KILLS)
+			if (template.isRandomReward())
 				bounties.add(Rnd.get(template.getBounties()));
 			else
 				bounties.addAll(template.getBounties());

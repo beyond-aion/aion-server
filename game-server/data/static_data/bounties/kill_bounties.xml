@@ -1,28 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <kill_bounties xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="kill_bounties.xsd">
-	<kill_bounty type="PER_X_KILLS" kill_count="1000">
+	<kill_bounty type="PER_X_KILLS" kill_count="1000" is_random_reward="true">
 		<bounty item_id="168310018" count="1" /><!-- Major Blessed Augment -->
 	</kill_bounty>
-	<kill_bounty type="PER_X_KILLS" kill_count="400">
+	<kill_bounty type="PER_X_KILLS" kill_count="400" is_random_reward="true">
 		<bounty item_id="169610140" count="1" /><!-- [Title Card] Aion's Chosen (30 days) -->
 	</kill_bounty>
-	<kill_bounty type="PER_X_KILLS" kill_count="200">
+	<kill_bounty type="PER_X_KILLS" kill_count="200" is_random_reward="true">
 		<bounty item_id="169610054" count="1" /><!-- [Title Card] Brawny – 15-day pass -->
 	</kill_bounty>
-	<kill_bounty type="PER_X_KILLS" kill_count="100">
+	<kill_bounty type="PER_X_KILLS" kill_count="100" is_random_reward="true">
 		<bounty item_id="188053609" count="3" /><!-- Lv60 Composit Manastone Bundle -->
 		<bounty item_id="188053113" count="2" /><!-- Epic Ancient Manastone Bundle -->
 		<bounty item_id="166030005" count="5" /><!-- Tempering Solution -->
 		<bounty item_id="166500002" count="2" /><!-- Amplification Stone -->
 		<bounty item_id="188950017" count="2" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 	</kill_bounty>
-	<kill_bounty type="PER_X_KILLS" kill_count="50">
+	<kill_bounty type="PER_X_KILLS" kill_count="50" is_random_reward="true">
 		<bounty item_id="186000242" count="3" /><!-- Ceramium Medal -->
 		<bounty item_id="186000236" count="15" /><!-- Blood Mark -->
 		<bounty item_id="166020000" count="3" /><!-- Omega Enchantment Stone -->
 		<bounty item_id="188052481" count="5" /><!-- Balaur Serum Bundle -->
 	</kill_bounty>
-	<kill_bounty type="PER_X_KILLS" kill_count="20">
+	<kill_bounty type="PER_X_KILLS" kill_count="20" is_random_reward="true">
 		<bounty item_id="186000247" count="1" /><!-- Major Danuar Relic -->
 		<bounty item_id="186000147" count="1" /><!-- Mithril Medal -->
 		<bounty item_id="162000137" count="5" /><!-- Divine Life Serum -->

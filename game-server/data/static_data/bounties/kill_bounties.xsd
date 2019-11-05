@@ -13,6 +13,7 @@
 		</xs:sequence>
 		<xs:attribute name="type" type="BountyType" use="required"/>
 		<xs:attribute name="kill_count" type="xs:int"/>
+		<xs:attribute name="is_random_reward" type="xs:boolean"/>
 	</xs:complexType>
 	<xs:complexType name="Bounty">
 		<xs:attribute name="item_id" type="xs:int"/>

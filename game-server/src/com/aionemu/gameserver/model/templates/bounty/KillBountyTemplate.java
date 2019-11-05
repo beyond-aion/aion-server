@@ -2,11 +2,7 @@ package com.aionemu.gameserver.model.templates.bounty;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author Estrayl
@@ -19,18 +15,24 @@ public class KillBountyTemplate {
 	private BountyType type;
 	@XmlAttribute(name = "kill_count")
 	private int killCount;
-	
+	@XmlAttribute(name = "is_random_reward")
+	private boolean isRandomReward;
+
 	@XmlElement(name = "bounty")
 	private List<BountyTemplate> bounties;
-	
+
 	public BountyType getBountyType() {
 		return type;
 	}
-	
+
 	public int getKillCount() {
 		return killCount;
 	}
-	
+
+	public boolean isRandomReward() {
+		return isRandomReward;
+	}
+
 	public List<BountyTemplate> getBounties() {
 		return bounties;
 	}
