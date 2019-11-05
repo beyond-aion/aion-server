@@ -437,9 +437,10 @@ public class World {
 		}
 	}
 
-	/**
-	 * @return
-	 */
+	public void updateCachedPlayerName(String oldName, Player player) {
+		allPlayers.updateCachedPlayerName(oldName, player);
+	}
+
 	public Collection<Player> getAllPlayers() {
 		return allPlayers.getAllPlayers();
 	}
