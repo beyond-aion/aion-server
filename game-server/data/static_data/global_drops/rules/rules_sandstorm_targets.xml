@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../global_rules.xsd">
+    <gd_rule rule_name="Kahruns Symbol" chance="100" member_limit="4">
+        <gd_npcs>
+            <gd_npc npc_id="218543" /><!-- Assault Team Leader Kunati -->
+            <gd_npc npc_id="218459" /><!-- Brigade General Satra -->
+            <gd_npc npc_id="218518" /><!-- Colossal Geodenos -->
+            <gd_npc npc_id="218078" /><!-- Nemeco the Dancer -->
+            <gd_npc npc_id="218493" /><!-- Merciless Lamaz -->
+            <gd_npc npc_id="218555" /><!-- Aide Iranati -->
+            <gd_npc npc_id="218557" /><!-- Master-at-Arms Ranigan -->
+        </gd_npcs>
+        <gd_items>
+            <gd_item id="186000143" min_count="30" max_count="40" /><!-- Kahrun's Symbol -->
+        </gd_items>
+    </gd_rule>
+    <gd_rule rule_name="Kahruns Symbol" chance="100" member_limit="6">
+        <gd_npcs>
+            <gd_npc npc_id="218495" /><!-- Chieftain Pukikor -->
+            <gd_npc npc_id="218519" /><!-- Yndigo Blackice -->
+            <gd_npc npc_id="218082" /><!-- Daturum Wreckhelm -->
+            <gd_npc npc_id="218080" /><!-- Nubale the Glacier -->
+        </gd_npcs>
+        <gd_items>
+            <gd_item id="186000143" min_count="60" max_count="90" /><!-- Kahrun's Symbol -->
+        </gd_items>
+    </gd_rule>
+    <gd_rule rule_name="Kahruns Symbol" chance="100" member_limit="8">
+        <gd_npcs>
+            <gd_npc npc_id="217964" /><!-- Deputy Chieftain Aruru -->
+            <gd_npc npc_id="218745" /><!-- Ruthless Ossek -->
+            <gd_npc npc_id="218540" /><!-- Flaming Breath Byak -->
+            <gd_npc npc_id="218247" /><!-- Cavalry Chief Tagata -->
+            <gd_npc npc_id="218005" /><!-- Chieftain Haridoo -->
+            <gd_npc npc_id="218326" /><!-- Continuum Guardian Arachi -->
+            <gd_npc npc_id="218004" /><!-- Chaburat the Noble -->
+            <gd_npc npc_id="218085" /><!-- Debarim the Omnipotent -->
+        </gd_npcs>
+        <gd_items>
+            <gd_item id="186000143" min_count="60" max_count="90" /><!-- Kahrun's Symbol -->
+        </gd_items>
+    </gd_rule>
+</global_rules>
