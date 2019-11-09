@@ -14,26 +14,20 @@ import com.aionemu.gameserver.services.HousingService;
  */
 public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 
-	private boolean isFirst, isSplit;
-	private List<LegionMemberEx> legionMembers;
+	private final boolean isFirst, hasMore;
+	private final List<LegionMemberEx> legionMembers;
 
-	/**
-	 * This constructor will handle legion member info when a List of members is given
-	 * 
-	 * @param List
-	 *          <LegionMemberEx> legionMembers
-	 */
-	public SM_LEGION_MEMBERLIST(List<LegionMemberEx> legionMembers, boolean isSplit, boolean isFirst) {
+	public SM_LEGION_MEMBERLIST(List<LegionMemberEx> legionMembers, boolean hasMore, boolean isFirst) {
 		this.legionMembers = legionMembers;
 		this.isFirst = isFirst;
-		this.isSplit = isSplit;
+		this.hasMore = hasMore;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		int size = legionMembers.size();
 		writeC(isFirst ? 1 : 0);
-		writeH(isSplit ? size : -size);
+		writeH(hasMore ? size : -size);
 		for (LegionMemberEx legionMember : legionMembers) {
 			writeD(legionMember.getObjectId());
 			writeS(legionMember.getName());

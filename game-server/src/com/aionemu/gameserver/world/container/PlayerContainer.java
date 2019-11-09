@@ -77,4 +77,11 @@ public class PlayerContainer implements Iterable<Player> {
 	public Collection<Player> getAllPlayers() {
 		return playersById.values().stream().filter(p -> p != null).collect(Collectors.toList()); // ensure there are no null values (due to concurrent object removal)
 	}
+
+	public void updateCachedPlayerName(String oldName, Player player) {
+		playersByName.compute(oldName, (n, p)-> {
+			playersByName.put(player.getName(), player);
+			return player.equals(p) ? null : p;
+		});
+	}
 }

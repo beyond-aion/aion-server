@@ -21,16 +21,13 @@ public class CaptainJarkaAI extends SummonerAI {
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		Npc owner = getOwner();
 		// spawn smoke on death
 		WorldPosition currentPos = getPosition();
-		Npc smoke = (Npc) spawn(282465, currentPos.getX(), currentPos.getY(), currentPos.getZ(), (byte) 0);
-		NpcActions.delete(smoke);
+		NpcActions.delete(spawn(282465, currentPos.getX(), currentPos.getY(), currentPos.getZ(), (byte) 0));
 
 		// delete all npcs in range
-		for (Npc npc : currentPos.getWorldMapInstance().getNpcs())
-			if (PositionUtil.isInRange(owner, npc, 15) && !npc.equals(owner))
-				NpcActions.delete(npc);
+		currentPos.getWorldMapInstance().getNpcs().stream().filter(npc -> !npc.equals(getOwner()))
+			.filter(npc -> PositionUtil.isInRange(getOwner(), npc, 15)).forEach(NpcActions::delete);
 	}
 
 }

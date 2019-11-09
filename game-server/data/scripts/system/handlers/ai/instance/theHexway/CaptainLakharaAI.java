@@ -1,18 +1,15 @@
 package ai.instance.theHexway;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ScheduledFuture;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.ai.Percentage;
 import com.aionemu.gameserver.model.templates.ai.SummonGroup;
-import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.SummonerAI;
@@ -31,27 +28,11 @@ public class CaptainLakharaAI extends SummonerAI {
 
 	@Override
 	protected void handleIndividualSpawnedSummons(Percentage percent) {
-		SkillEngine.getInstance().getSkill(getOwner(), 17497, 65, getRandomTarget()).useNoAnimationSkill();
-		ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().getSkill(getOwner(), 17039, 65, getRandomTarget()).useNoAnimationSkill(),
-			1000);
-		for (SummonGroup summon : percent.getSummons()) {
-			cancelDespawnTask();
-			summonNpcWithSmoke(summon);
-		}
-		despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
-			for (SummonGroup summon : percent.getSummons()) {
-				despawnNpc(summon.getNpcId());
-			}
-		}, 25 * 1000);
-	}
-
-	private Player getRandomTarget() {
-		List<Player> players = new ArrayList<>();
-		for (Player player : getKnownList().getKnownPlayers().values())
-			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 50))
-				players.add(player);
-
-		return players.isEmpty() ? null : Rnd.get(players);
+		getOwner().getQueuedSkills().clear();
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(17497, 65, 100)));
+		cancelDespawnTask();
+		percent.getSummons().forEach(this::summonNpcWithSmoke);
+		despawnTask = ThreadPoolManager.getInstance().schedule(() -> percent.getSummons().forEach(group -> despawnNpc(group.getNpcId())), 25000);
 	}
 
 	@Override
@@ -73,21 +54,17 @@ public class CaptainLakharaAI extends SummonerAI {
 	}
 
 	private void cancelDespawnTask() {
-		if (despawnTask != null && !despawnTask.isCancelled())
+		if (despawnTask != null && !despawnTask.isDone())
 			despawnTask.cancel(true);
 	}
 
 	private void despawnNpc(int npcId) {
-		List<Npc> npcs = getPosition().getWorldMapInstance().getNpcs(npcId);
-		for (Npc npc : npcs)
-			if (!npc.isDead())
-				NpcActions.delete(npc);
+		getPosition().getWorldMapInstance().getNpcs(npcId).stream().filter(Objects::nonNull).filter(npc -> !npc.isDead()).forEach(NpcActions::delete);
 	}
 
 	private void summonNpcWithSmoke(SummonGroup summon) {
 		spawnHelpers(summon);
-		Npc smoke = (Npc) spawn(282465, summon.getX(), summon.getY(), summon.getZ(), summon.getH());
-		NpcActions.delete(smoke);
+		NpcActions.delete(spawn(282465, summon.getX(), summon.getY(), summon.getZ(), summon.getH()));
 	}
 
 }

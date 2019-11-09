@@ -1,9 +1,10 @@
 package ai.instance.theHexway;
 
-import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
@@ -12,9 +13,11 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.ai.Percentage;
-import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -26,8 +29,8 @@ import ai.SummonerAI;
 @AIName("adjutant_galamat")
 public class AdjutantGalamatAI extends SummonerAI {
 
-	private AtomicBoolean shieldPhase = new AtomicBoolean(false);
-	private AtomicInteger damageInShieldPhase = new AtomicInteger(0);
+	private final AtomicBoolean shieldPhase = new AtomicBoolean(false);
+	private final AtomicInteger damageInShieldPhase = new AtomicInteger(0);
 	private ScheduledFuture<?> damageDistributionTask;
 	private ScheduledFuture<?> addsSpawnTask;
 
@@ -41,64 +44,70 @@ public class AdjutantGalamatAI extends SummonerAI {
 			case 60:
 			case 20:
 				shieldPhase.set(true);
-				SkillEngine.getInstance().getSkill(getOwner(), 21799, 65, getOwner()).useNoAnimationSkill();
-				addsSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> rndSpawnInRange(219616, 12), 150, 4000);
-				final int chanceNotToDie = percent.getPercent() == 60 ? 80 : 20;
+				getOwner().getQueuedSkills().clear();
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21799, 65, 100, 0, 25000)));
+				addsSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+					if (!getEffectController().isUnderShield()) {
+						resetVariablesAndCancelTasks();
+						return;
+					}
+					rndSpawnInRange(219616, 12);
+				}, 0, 4000);
 
 				damageDistributionTask = ThreadPoolManager.getInstance().schedule(() -> {
 					if (addsSpawnTask != null && !addsSpawnTask.isDone())
 						addsSpawnTask.cancel(true);
-
-					Collection<Player> players = getKnownList().getKnownPlayers().values();
-					int playersInRange = players.size();
-					if (playersInRange > 0) {
-						int dmgPerMember = (damageInShieldPhase.get()) / playersInRange;
-						damageInShieldPhase.set(0);
+					if (!getEffectController().isUnderShield())
+						return;
+					List<Player> playersInRange = getKnownList().getKnownPlayers().values().stream().filter(p -> PositionUtil.isInRange(p, getOwner(), 20))
+						.collect(Collectors.toList());
+					if (playersInRange.size() > 0) {
+						int maxDmgPerPlayer = damageInShieldPhase.getAndSet(0) / playersInRange.size();
 						shieldPhase.set(false);
-						if (dmgPerMember > 0) {
-							for (Player player : players) {
-								if (player.getLifeStats().getMaxHp() <= dmgPerMember) {
-									int dmg = dmgPerMember;
-									if (Rnd.chance() < chanceNotToDie)
-										dmg = (int) (player.getLifeStats().getMaxHp() * 0.95);
-
-									player.getController().onAttack(getOwner(), dmg, AttackStatus.NORMALHIT);
-									WorldPosition p = player.getPosition();
-									Npc smoke = (Npc) spawn(282465, p.getX(), p.getY(), p.getZ(), p.getHeading());
-									NpcActions.delete(smoke);
+						if (maxDmgPerPlayer > 0) {
+							int chanceNotToDie = percent.getPercent() == 60 ? 40 : 20;
+							for (Player player : playersInRange) {
+								if (!player.isDead()) {
+									int dmgPerPlayer = maxDmgPerPlayer;
+									if (maxDmgPerPlayer >= player.getLifeStats().getMaxHp() && Rnd.get(100) <= chanceNotToDie)
+										dmgPerPlayer = (int) (player.getLifeStats().getMaxHp() * 0.90);
+									player.getController().onAttack(getOwner(), dmgPerPlayer, AttackStatus.NORMALHIT);
+									if (player.getLifeStats().getCurrentHp() <= dmgPerPlayer) {
+										WorldPosition playerPos = player.getPosition();
+										NpcActions.delete(spawn(282465, playerPos.getX(), playerPos.getY(), playerPos.getZ(), playerPos.getHeading()));
+									}
 								}
 							}
 						}
 					}
-				}, 25 * 1000);
+				}, 25000);
 				break;
 			case 50:
 			case 10:
-				resetsVariablesAndCancelTasks();
+				resetVariablesAndCancelTasks();
 				break;
 		}
-
 	}
 
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
-		resetsVariablesAndCancelTasks();
+		resetVariablesAndCancelTasks();
 	}
 
 	@Override
 	protected void handleDespawned() {
 		super.handleDespawned();
-		resetsVariablesAndCancelTasks();
+		resetVariablesAndCancelTasks();
 	}
 
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		resetsVariablesAndCancelTasks();
+		resetVariablesAndCancelTasks();
 	}
 
-	private void resetsVariablesAndCancelTasks() {
+	private void resetVariablesAndCancelTasks() {
 		damageInShieldPhase.set(0);
 		shieldPhase.set(false);
 		if (damageDistributionTask != null && !damageDistributionTask.isDone()) {
