@@ -16998,17 +16998,38 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052162"><!-- Ancient Items Bundle -->
-		<items>
-			<item id="166100010" min_count="10" max_count="30" /><!-- Supplements (Mythic) -->
-		</items>
+        <items chance="4">
+            <item id="186000064" /><!-- Greater Ancient Icon -->
+        </items>
+        <items chance="6">
+            <item id="186000061" /><!-- Ancient Seal -->
+        </items>
+        <items chance="8">
+            <item id="186000060" /><!-- Greater Ancient Seal -->
+        </items>
+        <items chance="10">
+            <item id="186000057" /><!-- Ancient Goblet -->
+        </items>
+        <items chance="15">
+            <item id="186000056" /><!-- Greater Ancient Goblet -->
+        </items>
+        <items chance="25">
+            <item id="186000053" /><!-- Ancient Crown -->
+        </items>
+        <items chance="20">
+            <item id="186000052" /><!-- Greater Ancient Crown -->
+        </items>
+        <items chance="12">
+            <item id="186000051" /><!-- Major Ancient Crown -->
+        </items>
 	</decomposable>
-	<decomposable item_id="188052163"><!-- Golden Treasure Box -->
-		<items>
-			<item id="186000096" min_count="2" /><!-- Platinum Medal -->
-		</items>
-		<items>
-			<item id="186000147" /><!-- Mithril Medal -->
-		</items>
+	<decomposable item_id="188052163"><!-- Ancient Treasure Box -->
+        <items chance="65">
+            <item id="188052162" /><!-- Bundle of ancient items -->
+        </items>
+        <items chance="35">
+            <random_item type="MANASTONE_LEGEND_GRADE_60" />
+        </items>
 	</decomposable>
 	<decomposable item_id="188052164"><!-- Furniture Paint Bundle -->
 		<items>
