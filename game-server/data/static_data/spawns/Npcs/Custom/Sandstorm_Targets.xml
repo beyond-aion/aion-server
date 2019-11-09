@@ -1,133 +1,133 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../spawns.xsd">
-    <!-- Merchants -->
-    <spawn_map map_id="210070000"><!-- Cygnea -->
-        <!-- Iskadar -->
-        <spawn npc_id="205592" respawn_time="295">
-            <spot x="538.4362" y="1978.1029" z="466.75" h="106" />
-        </spawn>
-        <!-- Versin -->
-        <spawn npc_id="205593" respawn_time="295">
-            <spot x="540.436" y="1980.9792" z="466.75" h="115" />
-        </spawn>
-        <!-- Dena -->
-        <spawn npc_id="205594" respawn_time="295">
-            <spot x="541.408" y="1984.7031" z="466.75" h="108" />
-        </spawn>
-        <!-- Equous -->
-        <spawn npc_id="205595" respawn_time="295">
-            <spot x="542.6753" y="1987.7146" z="466.7922" />
-        </spawn>
-    </spawn_map>
-    <spawn_map map_id="220080000"><!-- Enshar -->
-        <!-- Heilon -->
-        <spawn npc_id="205880" respawn_time="295">
-            <spot x="2711.7356" y="1369.0605" z="341.03702" h="93" />
-        </spawn>
-        <!-- Leipaz -->
-        <spawn npc_id="205881" respawn_time="295">
-            <spot x="2714.5486" y="1369.3282" z="341.03702" h="91" />
-        </spawn>
-        <!-- Lussiel -->
-        <spawn npc_id="205882" respawn_time="295">
-            <spot x="2717.413" y="1369.6761" z="341.03702" h="92" />
-        </spawn>
-        <!-- Aena -->
-        <spawn npc_id="205883" respawn_time="295">
-            <spot x="2720.0886" y="1370.0393" z="341.03702" h="92" />
-        </spawn>
-    </spawn_map>
-    <!-- Sandstorm Npcs -->
-    <spawn_map map_id="600100000"><!-- Levinshor -->
-        <!-- Continuum Guardian Arachi -->
-        <spawn npc_id="218326" respawn_time="32400">
-            <spot x="188.7514" y="1465.9116" z="225.9944" h="104" />
-        </spawn>
-        <!-- Chaburat the Noble -->
-        <spawn npc_id="218004" respawn_time="32400">
-            <spot x="1651.4686" y="169.7396" z="255.3977" h="26" />
-        </spawn>
-    </spawn_map>
-    <spawn_map map_id="600090000"><!-- Kaldor -->
-        <!-- Flaming Breath Byak -->
-        <spawn npc_id="218540" respawn_time="32400">
-            <spot x="475.8551" y="316.3324" z="145.5117" h="68" />
-        </spawn>
-        <!-- Ruthless Ossek -->
-        <spawn npc_id="218745" respawn_time="32400">
-            <spot x="1271.1799" y="686.0034" z="167.8775" h="28" />
-        </spawn>
-        <!-- Deputy Chieftain Aruru -->
-        <spawn npc_id="217964" respawn_time="32400">
-            <spot x="232.4105" y="776.3938" z="134.3247" h="112" />
-        </spawn>
-    </spawn_map>
-    <spawn_map map_id="600010000"><!-- Silentera_Canyon -->
-        <!-- Debarim the Omnipotent -->
-        <spawn npc_id="218085" respawn_time="32400">
-            <spot x="784.5342" y="769.3612" z="292.7161" h="59" />
-        </spawn>
-    </spawn_map>
-    <spawn_map map_id="220100000"><!-- Idian_Depths_D -->
-        <!-- Daturum Wreckhelm -->
-        <spawn npc_id="218082" respawn_time="14400">
-            <spot x="1039.6853" y="1269.4457" z="558.9579" h="7" />
-        </spawn>
-        <!-- Nubale the Glacier -->
-        <spawn npc_id="218080" respawn_time="14400">
-            <spot x="1026.4972" y="313.9766" z="553.2606" h="49" />
-        </spawn>
-        <!-- Colossal Geodenos -->
-        <spawn npc_id="218518" respawn_time="7200">
-            <spot x="431.9469" y="434.6481" z="574.2938" h="52" />
-        </spawn>
-        <!-- Nemeco the Dancer -->
-        <spawn npc_id="218078" respawn_time="7200">
-            <spot x="195.5701" y="1170.4862" z="534.9322" h="116" />
-        </spawn>
-        <!-- Master-at-Arms Ranigan -->
-        <spawn npc_id="218557" respawn_time="7200">
-            <spot x="815.3823" y="1298.8033" z="508.4266" h="102" />
-        </spawn>
-    </spawn_map>
-    <spawn_map map_id="210070000"><!-- Cygnea -->
-        <!-- Brigade General Satra -->
-        <spawn npc_id="218459" respawn_time="7200">
-            <spot x="524.0351" y="2331.3352" z="287.2434" h="16" />
-        </spawn>
-        <!-- Yndigo Blackice -->
-        <spawn npc_id="218519" respawn_time="14400"><!-- titel -->
-            <spot x="2547.1392" y="1767.8143" z="370.4462" h="22" />
-        </spawn>
-    </spawn_map>
-    <spawn_map map_id="220080000"><!-- Enshar -->
-        <!-- Assault Team Leader Kunati -->
-        <spawn npc_id="218543" respawn_time="7200">
-            <spot x="2795.2827" y="806.5164" z="227.2735" h="63" />
-        </spawn>
-        <!-- Chieftain Pukikor -->
-        <spawn npc_id="218495" respawn_time="14400">
-            <spot x="159.8261" y="1509.2024" z="280.3751" />
-        </spawn>
-    </spawn_map>
-    <spawn_map map_id="220070000"><!-- Gelkmaros -->
-        <!-- Merciless Lamaz -->
-        <spawn npc_id="218493" respawn_time="7200">
-            <spot x="488.3572" y="1279.8641" z="276.7521" h="30" />
-        </spawn>
-        <!-- Cavalry Chief Tagata -->
-        <spawn npc_id="218247" respawn_time="32400">
-            <spot x="2475.3761" y="916.1035" z="253.6551" h="25" />
-        </spawn>
-    </spawn_map>
-    <spawn_map map_id="210050000"><!-- Inggison -->
-        <!-- Aide Iranati -->
-        <spawn npc_id="218555" respawn_time="7200">
-            <spot x="2357.8125" y="1255.0906" z="249.2514" h="82" />
-        </spawn>
-        <!-- Chieftain Haridoo -->
-        <spawn npc_id="218005" respawn_time="32400">
-            <spot x="2172.7391" y="2010.0936" z="312.7561" h="50" />
-        </spawn>
-    </spawn_map>
+	<!-- Merchants -->
+	<spawn_map map_id="210070000"><!-- Cygnea -->
+		<!-- Iskadar -->
+		<spawn npc_id="205592" respawn_time="295">
+			<spot x="538.4362" y="1978.1029" z="466.75" h="106" />
+		</spawn>
+		<!-- Versin -->
+		<spawn npc_id="205593" respawn_time="295">
+			<spot x="540.436" y="1980.9792" z="466.75" h="115" />
+		</spawn>
+		<!-- Dena -->
+		<spawn npc_id="205594" respawn_time="295">
+			<spot x="541.408" y="1984.7031" z="466.75" h="108" />
+		</spawn>
+		<!-- Equous -->
+		<spawn npc_id="205595" respawn_time="295">
+			<spot x="542.6753" y="1987.7146" z="466.7922" />
+		</spawn>
+	</spawn_map>
+	<spawn_map map_id="220080000"><!-- Enshar -->
+		<!-- Heilon -->
+		<spawn npc_id="205880" respawn_time="295">
+			<spot x="2711.7356" y="1369.0605" z="341.03702" h="93" />
+		</spawn>
+		<!-- Leipaz -->
+		<spawn npc_id="205881" respawn_time="295">
+			<spot x="2714.5486" y="1369.3282" z="341.03702" h="91" />
+		</spawn>
+		<!-- Lussiel -->
+		<spawn npc_id="205882" respawn_time="295">
+			<spot x="2717.413" y="1369.6761" z="341.03702" h="92" />
+		</spawn>
+		<!-- Aena -->
+		<spawn npc_id="205883" respawn_time="295">
+			<spot x="2720.0886" y="1370.0393" z="341.03702" h="92" />
+		</spawn>
+	</spawn_map>
+	<!-- Sandstorm Npcs -->
+	<spawn_map map_id="600100000"><!-- Levinshor -->
+		<!-- Continuum Guardian Arachi -->
+		<spawn npc_id="218326" respawn_time="32400">
+			<spot x="188.7514" y="1465.9116" z="225.9944" h="104" />
+		</spawn>
+		<!-- Chaburat the Noble -->
+		<spawn npc_id="218004" respawn_time="32400">
+			<spot x="1651.4686" y="169.7396" z="255.3977" h="26" />
+		</spawn>
+	</spawn_map>
+	<spawn_map map_id="600090000"><!-- Kaldor -->
+		<!-- Flaming Breath Byak -->
+		<spawn npc_id="218540" respawn_time="32400">
+			<spot x="475.8551" y="316.3324" z="145.5117" h="68" />
+		</spawn>
+		<!-- Ruthless Ossek -->
+		<spawn npc_id="218745" respawn_time="32400">
+			<spot x="1271.1799" y="686.0034" z="167.8775" h="28" />
+		</spawn>
+		<!-- Deputy Chieftain Aruru -->
+		<spawn npc_id="217964" respawn_time="32400">
+			<spot x="232.4105" y="776.3938" z="134.3247" h="112" />
+		</spawn>
+	</spawn_map>
+	<spawn_map map_id="600010000"><!-- Silentera_Canyon -->
+		<!-- Debarim the Omnipotent -->
+		<spawn npc_id="218085" respawn_time="32400">
+			<spot x="784.5342" y="769.3612" z="292.7161" h="59" />
+		</spawn>
+	</spawn_map>
+	<spawn_map map_id="220100000"><!-- Idian_Depths_D -->
+		<!-- Daturum Wreckhelm -->
+		<spawn npc_id="218082" respawn_time="14400">
+			<spot x="1039.6853" y="1269.4457" z="558.9579" h="7" />
+		</spawn>
+		<!-- Nubale the Glacier -->
+		<spawn npc_id="218080" respawn_time="14400">
+			<spot x="1026.4972" y="313.9766" z="553.2606" h="49" />
+		</spawn>
+		<!-- Colossal Geodenos -->
+		<spawn npc_id="218518" respawn_time="7200">
+			<spot x="431.9469" y="434.6481" z="574.2938" h="52" />
+		</spawn>
+		<!-- Nemeco the Dancer -->
+		<spawn npc_id="218078" respawn_time="7200">
+			<spot x="195.5701" y="1170.4862" z="534.9322" h="116" />
+		</spawn>
+		<!-- Master-at-Arms Ranigan -->
+		<spawn npc_id="218557" respawn_time="7200">
+			<spot x="815.3823" y="1298.8033" z="508.4266" h="102" />
+		</spawn>
+	</spawn_map>
+	<spawn_map map_id="210070000"><!-- Cygnea -->
+		<!-- Brigade General Satra -->
+		<spawn npc_id="218459" respawn_time="7200">
+			<spot x="524.0351" y="2331.3352" z="287.2434" h="16" />
+		</spawn>
+		<!-- Yndigo Blackice -->
+		<spawn npc_id="218519" respawn_time="14400"><!-- titel -->
+			<spot x="2547.1392" y="1767.8143" z="370.4462" h="22" />
+		</spawn>
+	</spawn_map>
+	<spawn_map map_id="220080000"><!-- Enshar -->
+		<!-- Assault Team Leader Kunati -->
+		<spawn npc_id="218543" respawn_time="7200">
+			<spot x="2795.2827" y="806.5164" z="227.2735" h="63" />
+		</spawn>
+		<!-- Chieftain Pukikor -->
+		<spawn npc_id="218495" respawn_time="14400">
+			<spot x="159.8261" y="1509.2024" z="280.3751" />
+		</spawn>
+	</spawn_map>
+	<spawn_map map_id="220070000"><!-- Gelkmaros -->
+		<!-- Merciless Lamaz -->
+		<spawn npc_id="218493" respawn_time="7200">
+			<spot x="488.3572" y="1279.8641" z="276.7521" h="30" />
+		</spawn>
+		<!-- Cavalry Chief Tagata -->
+		<spawn npc_id="218247" respawn_time="32400">
+			<spot x="2475.3761" y="916.1035" z="253.6551" h="25" />
+		</spawn>
+	</spawn_map>
+	<spawn_map map_id="210050000"><!-- Inggison -->
+		<!-- Aide Iranati -->
+		<spawn npc_id="218555" respawn_time="7200">
+			<spot x="2357.8125" y="1255.0906" z="249.2514" h="82" />
+		</spawn>
+		<!-- Chieftain Haridoo -->
+		<spawn npc_id="218005" respawn_time="32400">
+			<spot x="2172.7391" y="2010.0936" z="312.7561" h="50" />
+		</spawn>
+	</spawn_map>
 </spawns>
