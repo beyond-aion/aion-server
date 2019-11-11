@@ -40,6 +40,8 @@ public class _1107TheLostAxe extends AbstractQuestHandler {
 					case QUEST_ACCEPT_1:
 						QuestService.startQuest(env);
 						return closeDialogWindow(env);
+					case QUEST_REFUSE_1:
+						return closeDialogWindow(env);
 				}
 			}
 		} else if (targetId == 203075) {
