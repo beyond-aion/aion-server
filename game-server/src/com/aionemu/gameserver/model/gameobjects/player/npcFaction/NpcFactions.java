@@ -30,8 +30,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
- * @author MrPoke
- * @modified synchro2
+ * @author MrPoke, synchro2, Sykra
  */
 public class NpcFactions {
 
@@ -41,9 +40,6 @@ public class NpcFactions {
 	private NpcFaction[] activeNpcFaction = new NpcFaction[2];
 	private int[] timeLimit = new int[] { 0, 0 };
 
-	/**
-	 * @param owner
-	 */
 	public NpcFactions(Player owner) {
 		this.owner = owner;
 	}
@@ -73,32 +69,21 @@ public class NpcFactions {
 	}
 
 	public NpcFaction getActiveNpcFaction(boolean mentor) {
-		if (mentor) {
-			return activeNpcFaction[1];
-		} else
-			return activeNpcFaction[0];
+		return activeNpcFaction[mentor ? 1 : 0];
 	}
 
 	public NpcFaction setActive(int npcFactionId) {
-		NpcFaction npcFaction = factions.get(npcFactionId);
-		if (npcFaction == null) {
-			npcFaction = new NpcFaction(npcFactionId, 0, false, ENpcFactionQuestState.NOTING, 0);
-			factions.put(npcFactionId, npcFaction);
-		}
+		NpcFaction npcFaction = factions.computeIfAbsent(npcFactionId, factionId -> new NpcFaction(factionId, 0, false, ENpcFactionQuestState.NOTING, 0));
 		npcFaction.setActive(true);
-		if (npcFaction.isMentor())
-			this.activeNpcFaction[1] = npcFaction;
-		else
-			this.activeNpcFaction[0] = npcFaction;
+		activeNpcFaction[npcFaction.isMentor() ? 1 : 0] = npcFaction;
 		return npcFaction;
 	}
 
 	public void leaveNpcFaction(Npc npc) {
 		int targetObjectId = npc.getObjectId();
 		NpcFactionTemplate npcFactionTemplate = DataManager.NPC_FACTIONS_DATA.getNpcFactionByNpcId(npc.getNpcId());
-		if (npcFactionTemplate == null) {
+		if (npcFactionTemplate == null)
 			return;
-		}
 		NpcFaction npcFaction = getFactionById(npcFactionTemplate.getId());
 		if (npcFaction == null || !npcFaction.isActive()) {
 			PacketSendUtility.sendPacket(owner, new SM_DIALOG_WINDOW(targetObjectId, 1438));
@@ -106,7 +91,6 @@ public class NpcFactions {
 		}
 		PacketSendUtility.sendPacket(owner, new SM_DIALOG_WINDOW(targetObjectId, 1353));
 		leaveNpcFaction(npcFaction);
-
 	}
 
 	private void leaveNpcFaction(NpcFaction npcFaction) {
@@ -167,7 +151,6 @@ public class NpcFactions {
 			PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_FACTION_JOIN(npcFactionTemplate.getL10n()));
 			PacketSendUtility.sendPacket(owner, new SM_DIALOG_WINDOW(targetObjectId, 1012));
 			setActive(npcFactionId);
-
 			sendDailyQuest();
 		}
 	}
@@ -201,7 +184,7 @@ public class NpcFactions {
 	}
 
 	public void abortQuest(QuestTemplate questTemplate) {
-		NpcFaction npcFaction = this.factions.get(questTemplate.getNpcFactionId());
+		NpcFaction npcFaction = factions.get(questTemplate.getNpcFactionId());
 		if (npcFaction == null || !npcFaction.isActive())
 			return;
 		npcFaction.setState(ENpcFactionQuestState.NOTING);
@@ -214,7 +197,7 @@ public class NpcFactions {
 			return;
 		npcFaction.setTime(getNextTime());
 		npcFaction.setState(ENpcFactionQuestState.COMPLETE);
-		this.timeLimit[npcFaction.isMentor() ? 1 : 0] = npcFaction.getTime();
+		timeLimit[npcFaction.isMentor() ? 1 : 0] = npcFaction.getTime();
 		if (questTemplate.getMentorType() == QuestMentorType.MENTOR) {
 			owner.getCommonData().setMentorFlagTime((int) (System.currentTimeMillis() / 1000) + 60 * 60 * 24); // TODO 1 day
 			PacketSendUtility.broadcastPacket(owner, new SM_TITLE_INFO(owner, true), false);
@@ -227,7 +210,7 @@ public class NpcFactions {
 			NpcFaction faction = activeNpcFaction[i];
 			if (faction == null || !faction.isActive())
 				continue;
-			if (this.timeLimit[i] > System.currentTimeMillis() / 1000)
+			if (timeLimit[i] > System.currentTimeMillis() / 1000)
 				continue;
 			int questId = 0;
 			switch (faction.getState()) {
@@ -250,6 +233,7 @@ public class NpcFactions {
 				questId = Rnd.get(quests).getId();
 				faction.setQuestId(questId);
 				faction.setTime(getNextTime());
+				faction.setState(ENpcFactionQuestState.NOTING);
 			}
 			PacketSendUtility.sendPacket(owner, new SM_QUEST_ACTION(questId));
 		}
@@ -264,9 +248,8 @@ public class NpcFactions {
 			if (npcFactionTemplate.getMaxLevel() < owner.getLevel()) {
 				faction.setActive(false);
 				activeNpcFaction[i] = null;
-				if (faction.getState() == ENpcFactionQuestState.START) {
+				if (faction.getState() == ENpcFactionQuestState.START)
 					QuestService.abandonQuest(owner, faction.getQuestId());
-				}
 				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_FACTION_LEAVE_BY_LEVEL_LIMIT(npcFactionTemplate.getL10n()));
 				faction.setState(ENpcFactionQuestState.NOTING);
 			}
@@ -276,11 +259,10 @@ public class NpcFactions {
 	private int getNextTime() {
 		ZonedDateTime now = ServerTime.now();
 		long repeatDateEpochSeconds;
-		if (now.getHour() >= 9) {
+		if (now.getHour() >= 9)
 			repeatDateEpochSeconds = now.with(LocalTime.MIDNIGHT).withHour(9).plusDays(1).toEpochSecond(); // tomorrow morning at 9:00 AM
-		} else {
+		else
 			repeatDateEpochSeconds = now.with(LocalTime.MIDNIGHT).withHour(9).toEpochSecond(); // today morning at 9:00 AM
-		}
 		return (int) repeatDateEpochSeconds;
 	}
 
