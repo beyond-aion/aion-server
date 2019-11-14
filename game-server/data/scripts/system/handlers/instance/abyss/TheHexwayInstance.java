@@ -52,7 +52,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 
 	private final Future<?>[] scheduledBossDespawnTasks = new ScheduledFuture[6];
 	private final AtomicLongArray stageStartMillis = new AtomicLongArray(6);
-	private final Map<Player, Integer> playerStageMapping = new ConcurrentHashMap<>();
+	private final Map<Integer, Integer> playerStageMapping = new ConcurrentHashMap<>();
 
 	private final AtomicBoolean bonusChestSpawnAllowed = new AtomicBoolean(true);
 	private final AtomicLong bonusChestStartMillis = new AtomicLong();
@@ -108,9 +108,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 					int elapsedTimeMillis = (int) (System.currentTimeMillis() - stageStartTimeMillis);
 					if (elapsedTimeMillis <= bossTimeLimitSeconds * 1000 && scheduledBossDespawnTasks[bossIndex] != null) {
 						// add player to stage mapping
-						synchronized (playerStageMapping) {
-							playerStageMapping.put(player, bossIndex);
-						}
+						playerStageMapping.put(player.getObjectId(), bossIndex);
 						// send quest timer to player
 						int remainingTimeSeconds = bossTimeLimitSeconds - elapsedTimeMillis / 1000;
 						PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, remainingTimeSeconds));
@@ -124,9 +122,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 	@Override
 	public void onLeaveInstance(Player player) {
 		if (player != null && player.isOnline()) {
-			synchronized (playerStageMapping) {
-				playerStageMapping.remove(player);
-			}
+			playerStageMapping.remove(player.getObjectId());
 			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 0));
 		}
 	}
@@ -160,7 +156,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 			// manager jarka
 			case 219609:
 				// open barricades
-				despawnNpcs(instance.getNpcs(219617), false);
+				instance.getNpcs(219617).forEach(NpcActions::delete);
 				break;
 			case 219611:
 			case 286933:
@@ -176,10 +172,12 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 						spawnBossChest(bossIndex);
 						openDoor(treasureDoorIds[bossIndex]);
 						// remove quest timers for affected players
-						synchronized (playerStageMapping) {
-							for (Player player : playerStageMapping.keySet())
-								if (playerStageMapping.get(player) == bossIndex)
+						for (Integer playerObjId : playerStageMapping.keySet()) {
+							if (playerStageMapping.get(playerObjId) == bossIndex) {
+								Player player = instance.getPlayer(playerObjId);
+								if (player != null)
 									PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 0));
+							}
 						}
 						// spawn bonus loot chest if all 6 boss npc are killed in the given time limits
 						if (attackedBossCount.get() == 6 && killedBossCount.incrementAndGet() == 6) {
@@ -212,7 +210,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 										bossNpc.getController().onAttack(bossNpc, (int) dmgToApply, AttackStatus.NORMALHIT);
 								}, 1000);
 							}
-							despawnNpc(secondNpc, true);
+							NpcActions.delete(secondNpc);
 						}
 					}
 					handlingSecondBoss.set(false);
@@ -248,20 +246,10 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 			int bossNpcId = bossNpcIds[bossIndex];
 			PacketSendUtility.broadcastToMap(instance,
 				SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(DataManager.NPC_DATA.getNpcTemplate(bossNpcId).getL10n()));
-			despawnNpcs(instance.getNpcs(bossNpcId), true);
+			instance.getNpcs(bossNpcIds).forEach(NpcActions::delete);
 			bonusChestSpawnAllowed.set(false);
 		}, despawnDelayMillis);
 		scheduledBossDespawnTasks[bossIndex] = despawnTask;
-	}
-
-	private void despawnNpcs(List<Npc> npcs, boolean ignoreDeadMobs) {
-		for (Npc npc : npcs)
-			despawnNpc(npc, ignoreDeadMobs);
-	}
-
-	private void despawnNpc(Npc npc, boolean ignoreDead) {
-		if (npc != null && (!ignoreDead || npc.isDead()))
-			NpcActions.delete(npc);
 	}
 
 	private void spawnBonusChest() {

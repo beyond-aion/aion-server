@@ -63,23 +63,23 @@
 		<npc_skill id="18165" lv="54" prob="14" />
 	</npc_skills>
 	<npc_skills npc_ids="286933 219610"><!-- Captain Lakhara (B3), Adjutant Galamat (B5) -->
-		<npc_skill id="16608" lv="65" prob="75" cd="15" />
-		<npc_skill id="17497" lv="65" prob="75" cd="20" /> <!-- 17477 -->
-		<npc_skill id="17485" lv="65" prob="50" cd="35" />
-		<npc_skill id="17039" lv="65" prob="30" cd="5" next_skill_time="3000" target="RANDOM_EXCEPT_MOST_HATED" />
-		<npc_skill id="17480" lv="65" prob="60" cd="30" target="RANDOM" />
+		<npc_skill id="16608" lv="65" prob="75" cd="15000" />
+		<npc_skill id="17497" lv="65" prob="75" cd="20000" />
+		<npc_skill id="17485" lv="65" prob="50" cd="35000" />
+		<npc_skill id="17039" lv="65" prob="30" cd="5000" next_skill_time="3000" target="RANDOM_EXCEPT_MOST_HATED" />
+		<npc_skill id="17480" lv="65" prob="60" cd="30000" target="RANDOM" />
 	</npc_skills>
 	<npc_skills npc_ids="219611 219614"><!-- Laksyaka Bladesworn (B1), Laksyaka Infantry (B6) -->
-		<npc_skill id="17480" lv="65" prob="75" cd="6" target="RANDOM_EXCEPT_MOST_HATED" />
-		<npc_skill id="17497" lv="65" prob="75" cd="15" />
-		<npc_skill id="18164" lv="65" prob="75" cd="10" target="MOST_HATED" />
-		<npc_skill id="18174" lv="65" prob="100" cd="20" max_time="50" min_time="30" />
+		<npc_skill id="17480" lv="65" prob="75" cd="6000" target="RANDOM_EXCEPT_MOST_HATED" />
+		<npc_skill id="17497" lv="65" prob="75" cd="15000" />
+		<npc_skill id="18164" lv="65" prob="75" cd="10000" target="MOST_HATED" />
+		<npc_skill id="18174" lv="65" prob="100" cd="20000" max_time="50000" min_time="30000" />
 	</npc_skills>
 	<npc_skills npc_ids="219612 219613"><!-- Laksyaka Infantry (B3), Laksyaka Infantry(B4) -->
-		<npc_skill id="17480" lv="65" prob="75" cd="6" target="RANDOM_EXCEPT_MOST_HATED" />
-		<npc_skill id="17497" lv="65" prob="75" cd="15" />
-		<npc_skill id="18164" lv="65" prob="75" cd="10" target="MOST_HATED" />
-		<npc_skill id="18174" lv="65" prob="100" cd="20" max_time="50" min_time="30" />
+		<npc_skill id="17480" lv="65" prob="75" cd="6000" target="RANDOM_EXCEPT_MOST_HATED" />
+		<npc_skill id="17497" lv="65" prob="75" cd="15000" />
+		<npc_skill id="18164" lv="65" prob="75" cd="10000" target="MOST_HATED" />
+		<npc_skill id="18174" lv="65" prob="100" cd="20000" max_time="50000" min_time="30000" />
 	</npc_skills>
 	<npc_skills npc_ids="219634"><!-- Laksyaka Legatus -->
 		<npc_skill id="18166" lv="50" prob="30" />

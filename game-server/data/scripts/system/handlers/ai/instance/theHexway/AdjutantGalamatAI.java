@@ -69,7 +69,7 @@ public class AdjutantGalamatAI extends SummonerAI {
 							for (Player player : playersInRange) {
 								if (!player.isDead()) {
 									int dmgPerPlayer = maxDmgPerPlayer;
-									if (maxDmgPerPlayer >= player.getLifeStats().getMaxHp() && Rnd.get(100) <= chanceNotToDie)
+									if (maxDmgPerPlayer >= player.getLifeStats().getMaxHp() && Rnd.chance() < chanceNotToDie)
 										dmgPerPlayer = (int) (player.getLifeStats().getMaxHp() * 0.90);
 									player.getController().onAttack(getOwner(), dmgPerPlayer, AttackStatus.NORMALHIT);
 									if (player.getLifeStats().getCurrentHp() <= dmgPerPlayer) {
