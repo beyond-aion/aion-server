@@ -1913,7 +1913,8 @@ public class LegionService {
 	}
 
 	public void updateCachedPlayerName(String oldName, Player player) {
-		allCachedLegionMembers.updateCachedPlayerName(oldName, player);
+		if (player.getLegion() != null)
+			allCachedLegionMembers.updateCachedPlayerName(oldName, player);
 	}
 
 	public void joinLegionDominion(Player player, Legion legion, int locId) {

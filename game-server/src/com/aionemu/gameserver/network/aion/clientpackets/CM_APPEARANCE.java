@@ -93,19 +93,13 @@ public class CM_APPEARANCE extends AionClientPacket {
 
 			player.getCommonData().setName(newName);
 			DAOManager.getDAO(PlayerDAO.class).storePlayer(player);
-			LegionService.getInstance().updateCachedPlayerName(oldName, player);
 			World.getInstance().updateCachedPlayerName(oldName, player);
+			LegionService.getInstance().updateCachedPlayerName(oldName, player);
 			PacketSendUtility.broadcastPacket(player, new SM_RENAME(player.getObjectId(), oldName, newName), true);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_SUCCESS(newName));
-			if (player.getLegion() != null) {
-				LegionService.getInstance().updateLegionMemberList(player);
-			}
-			if (player.isInAlliance()) {
-				PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.UPDATE);
-			}
-			if (player.isInGroup()) {
-				PlayerGroupService.updateGroup(player, GroupEvent.UPDATE);
-			}
+			LegionService.getInstance().updateLegionMemberList(player);
+			PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.UPDATE);
+			PlayerGroupService.updateGroup(player, GroupEvent.UPDATE);
 		}
 	}
 
