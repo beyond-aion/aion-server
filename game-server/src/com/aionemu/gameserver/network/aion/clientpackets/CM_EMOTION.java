@@ -76,7 +76,9 @@ public class CM_EMOTION extends AionClientPacket {
 			case NEUTRALMODE_IN_MOVE: // remove equip weapon
 			case NEUTRALMODE_IN_STANDING: // remove equip weapon
 			case END_SPRINT:
+				break;
 			case WINDSTREAM_STRAFE:
+				readC(); // unk 2
 				break;
 			case START_SPRINT:
 				readD(); // unk 1
