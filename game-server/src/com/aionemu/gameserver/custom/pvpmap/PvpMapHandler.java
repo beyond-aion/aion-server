@@ -308,29 +308,11 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		if (PvpMapService.getInstance().isRandomBoss(npc)) {
+			randomBossAlive = false;
+			return;
+		}
 		switch (npc.getNpcId()) {
-			case 233740:
-			case 235759:
-			case 235763:
-			case 235767:
-			case 235771:
-			case 235619:
-			case 235620:
-			case 235621:
-			case 855822:
-			case 855843:
-			case 230857:
-			case 230858:
-			case 855776:
-			case 277224:
-			case 219933:
-			case 219934:
-			case 235975:
-			case 855263:
-			case 231196:
-			case 231304:
-				randomBossAlive = false;
-				break;
 			case 219218: // keymaster chookuri
 				keymasterPositions
 					.add(new WorldPosition(mapId, npc.getSpawn().getX(), npc.getSpawn().getY(), npc.getSpawn().getZ(), npc.getSpawn().getHeading()));
