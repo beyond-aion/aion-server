@@ -27704,6 +27704,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The Agent has appeared.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_LDF4_Advance_GodElite() {
+		return new SM_SYSTEM_MESSAGE(1402543);
+	}
+
+	/**
 	 * The Agent battle will start in 10 minutes.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_LDF4_ADVANCE_GODELITE_TIME_01() {

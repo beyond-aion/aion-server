@@ -31,10 +31,11 @@ import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Estrayl
+ * @author Estrayl, Sykra
  */
 public class AgentSiege extends Siege<AgentLocation> {
 
@@ -67,21 +68,18 @@ public class AgentSiege extends Siege<AgentLocation> {
 	}
 
 	private void delayStart() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				startProgress++;
-				if (startProgress == 5) {
-					PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_02());
-				} else if (startProgress >= 10) {
-					onQuestDistribute();
-					onSpawn(); // Should initialize Agents and their flags
-					GlobalCallbackHelper.addCallback(apListener);
-					return; // Interrupts the task
-				}
-				delayStart();
+		ThreadPoolManager.getInstance().schedule(() -> {
+			startProgress++;
+			if (startProgress == 5) {
+				PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_02());
+			} else if (startProgress >= 10) {
+				onBroadcastAgentSpawn();
+				onQuestDistribute();
+				onSpawn(); // Should initialize Agents and their flags
+				GlobalCallbackHelper.addCallback(apListener);
+				return; // Interrupts the task
 			}
+			delayStart();
 		}, 60000);
 	}
 
@@ -110,14 +108,16 @@ public class AgentSiege extends Siege<AgentLocation> {
 		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 	}
 
+	private void onBroadcastAgentSpawn() {
+		WorldMapInstance levinshorWorldInstance = World.getInstance().getWorldMap(600100000).getMainWorldMapInstance();
+		if (levinshorWorldInstance != null)
+			PacketSendUtility.broadcastToMap(levinshorWorldInstance, SM_SYSTEM_MESSAGE.STR_MSG_LDF4_Advance_GodElite());
+	}
+
 	private void onQuestDistribute() {
 		for (Player player : World.getInstance().getWorldMap(600100000).getMainWorldMapInstance().getPlayersInside()) {
 			if (player.isInsideZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000")) || player.isInsideZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000"))) {
-				int questId;
-				if (player.getRace() == Race.ELYOS)
-					questId = 13744;
-				else
-					questId = 23744;
+				int questId = player.getRace() == Race.ELYOS ? 13744 : 23744;
 				QuestState qs = player.getQuestStateList().getQuestState(questId);
 				if (qs == null || qs.isStartable())
 					QuestService.startQuest(new QuestEnv(null, player, questId));
