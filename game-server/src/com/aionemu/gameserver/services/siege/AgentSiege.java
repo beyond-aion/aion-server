@@ -73,9 +73,9 @@ public class AgentSiege extends Siege<AgentLocation> {
 			if (startProgress == 5) {
 				PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_02());
 			} else if (startProgress >= 10) {
-				onBroadcastAgentSpawn();
-				onQuestDistribute();
-				onSpawn(); // Should initialize Agents and their flags
+				broadcastAgentSpawn();
+				distributeQuest();
+				spawnSiegeNpcs(); // Should initialize Agents and their flags
 				GlobalCallbackHelper.addCallback(apListener);
 				return; // Interrupts the task
 			}
@@ -89,7 +89,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 		getSiegeLocation().setVulnerable(false);
 		GlobalCallbackHelper.removeCallback(apListener);
 		removeListeners();
-		onDespawn();
+		despawnSiegeNpcs();
 		if (winner == null)
 			return;
 		Race winnerRace = winner == SiegeRace.ELYOS ? Race.ELYOS : Race.ASMODIANS;
@@ -99,7 +99,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 		sendRewardsToParticipants(getSiegeCounter().getRaceCounter(looser), SiegeResult.FAIL);
 	}
 
-	private void onWalkingEvent(Npc npc, String walkerId) {
+	private void initNpcWalking(Npc npc, String walkerId) {
 		if (npc == null)
 			return;
 		npc.getSpawn().setWalkerId(walkerId);
@@ -108,13 +108,13 @@ public class AgentSiege extends Siege<AgentLocation> {
 		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 	}
 
-	private void onBroadcastAgentSpawn() {
+	private void broadcastAgentSpawn() {
 		WorldMapInstance levinshorWorldInstance = World.getInstance().getWorldMap(600100000).getMainWorldMapInstance();
 		if (levinshorWorldInstance != null)
 			PacketSendUtility.broadcastToMap(levinshorWorldInstance, SM_SYSTEM_MESSAGE.STR_MSG_LDF4_Advance_GodElite());
 	}
 
-	private void onQuestDistribute() {
+	private void distributeQuest() {
 		for (Player player : World.getInstance().getWorldMap(600100000).getMainWorldMapInstance().getPlayersInside()) {
 			if (player.isInsideZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000")) || player.isInsideZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000"))) {
 				int questId = player.getRace() == Race.ELYOS ? 13744 : 23744;
@@ -125,7 +125,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 		}
 	}
 
-	public void onSpawn() {
+	public void spawnSiegeNpcs() {
 		List<SpawnGroup> siegeSpawns = DataManager.SPAWNS_DATA.getSiegeSpawnsByLocId(getSiegeLocationId());
 		if (siegeSpawns == null)
 			return;
@@ -142,7 +142,7 @@ public class AgentSiege extends Siege<AgentLocation> {
 		registerListeners();
 	}
 
-	public void onDespawn() {
+	public void despawnSiegeNpcs() {
 		Collection<SiegeNpc> npcs = World.getInstance().getLocalSiegeNpcs(getSiegeLocationId());
 		for (SiegeNpc npc : npcs) {
 			if (npc != null)
@@ -156,13 +156,13 @@ public class AgentSiege extends Siege<AgentLocation> {
 				if (veille != null)
 					throw new SiegeException("Tried to init veille twice!");
 				veille = target;
-				onWalkingEvent(veille, "600100000_npcpathgod_l");
+				initNpcWalking(veille, "600100000_npcpathgod_l");
 				break;
 			case GHENCHMAN_DARK:
 				if (masta != null)
 					throw new SiegeException("Tried to init masta twice!");
 				masta = target;
-				onWalkingEvent(masta, "600100000_npcpathgod_d");
+				initNpcWalking(masta, "600100000_npcpathgod_d");
 				break;
 			default:
 				throw new SiegeException("Tried to init a npc with not supported TemplateType " + target.getNpcTemplateType() + " for agent fight!");
