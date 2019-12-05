@@ -46,8 +46,8 @@ public class AdventService {
 		rewards.get(4).add(new CustomSurveyItem(186000238, 750));
 		// [Jakunerk] Fortified Recovery Serum
 		rewards.get(5).add(new CustomSurveyItem(162002030, 125));
-		// +5 Snowflake
-		rewards.get(6).add(new CustomSurveyItem(188052990, 5));
+		// All-Powerful Enchantment Stone
+		rewards.get(6).add(new CustomSurveyItem(166020000, 10));
 		// [Jakunerk] Holy Upgrade Serum
 		rewards.get(7).add(new CustomSurveyItem(166030007, 5));
 		// [Jakunerk] 12 Solorius Polar Bear Form Candies (Elyos)
@@ -62,8 +62,8 @@ public class AdventService {
 		rewards.get(11).add(new CustomSurveyItem(188053610, 5));
 		// [Jakunerk] Drana Coffee
 		rewards.get(12).add(new CustomSurveyItem(164002167, 25));
-		// All-Powerful Enchantment Stone
-		rewards.get(13).add(new CustomSurveyItem(166020000, 10));
+    // +5 Snowflake
+		rewards.get(13).add(new CustomSurveyItem(188052990, 5));
 		// Powerful Ancient Rune Tribe Relic
 		rewards.get(14).add(new CustomSurveyItem(186000247, 7));
 		// AP Scroll II
