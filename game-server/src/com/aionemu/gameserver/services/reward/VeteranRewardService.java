@@ -21,7 +21,7 @@ public final class VeteranRewardService {
 	private static final List<List<RewardItem>> rewards = new ArrayList<>();
 
 	static {
-		for (int i = 0; i < 48; i++)
+		for (int i = 0; i < 60; i++)
 			rewards.add(new ArrayList<>());
 		// month 1
 		rewards.get(0).add(new RewardItem(169630007, 1)); // [Expand Card] Expand Cube Ticket (lvl 4)
@@ -326,6 +326,84 @@ public final class VeteranRewardService {
 		rewards.get(47).add(new RewardItem(162000107, 50)); // Saam King's Herbs
 		rewards.get(47).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
 		rewards.get(47).add(new RewardItem(186000399, 100)); // Honorable Conqueror's Mark
+
+		// month 49
+		rewards.get(48).add(new RewardItem(169600098, 1)); // [Emotion Card] Hug Me
+		rewards.get(48).add(new RewardItem(161001001, 5)); // Revival Stone
+		rewards.get(48).add(new RewardItem(166030007, 5)); // [Event] Tempering Solution
+		rewards.get(48).add(new RewardItem(186000247, 5)); // Major Danuar Relic
+		rewards.get(48).add(new RewardItem(169620072, 3)); // AP Boost Charm II - 30%
+
+		// month 50
+		rewards.get(49).add(new RewardItem(165020015, 1)); // Armor Wrapping Scroll (Eternal/Lv. 65 and lower)
+		rewards.get(49).add(new RewardItem(188053526, 5)); // [Event] Aion's Steel Form Candy Box
+		rewards.get(49).add(new RewardItem(162000137, 25)); // Sublime Life Serum
+		rewards.get(49).add(new RewardItem(162000139, 25)); // Sublime Mana Serum
+
+		// month 51
+		rewards.get(50).add(new RewardItem(110900603, 1)); // Lawful Uniform
+		rewards.get(50).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
+		rewards.get(50).add(new RewardItem(164002116, 25)); // [Event] Rx: Accelerox
+		rewards.get(50).add(new RewardItem(164002117, 25)); // [Event] Rx: Blitzopan
+		rewards.get(50).add(new RewardItem(164002118, 25)); // [Event] Rx: Castafodin
+
+		// month 52
+		rewards.get(51).add(new RewardItem(125045283, 1)); // Lawful Headgear
+		rewards.get(51).add(new RewardItem(186000242, 15)); // Ceramium Medal
+		rewards.get(51).add(new RewardItem(188052719, 5)); // [Event] Dye Bundle
+		rewards.get(51).add(new RewardItem(164002284, 15)); // [Event] Ornate Firecrackers
+		rewards.get(51).add(new RewardItem(186000409, 150)); // Daeva's Respite Coin
+
+		// month 53
+		rewards.get(52).add(new RewardItem(165020016, 1)); // Accessory Wrapping Scroll (Eternal/Lv. 65 and lower)
+		rewards.get(52).add(new RewardItem(161001001, 5)); // Revival Stone
+		rewards.get(52).add(new RewardItem(186000051, 5)); // Major Ancient Crown
+		rewards.get(52).add(new RewardItem(188052719, 5)); // [Event] Dye Bundle
+
+		// month 54
+		rewards.get(53).add(new RewardItem(169670000, 1)); // Name Change Ticket
+		rewards.get(53).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		rewards.get(53).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
+		rewards.get(53).add(new RewardItem(164002272, 25)); // [Event] Enduring Greater Raging Wind Scroll
+		rewards.get(53).add(new RewardItem(162000141, 25)); // Sublime Wind Serum
+
+		// month 55
+		rewards.get(54).add(new RewardItem(168310018, 1)); // Major Blessed Augment: Level 2
+		rewards.get(54).add(new RewardItem(162000137, 25)); // Sublime Life Serum
+		rewards.get(54).add(new RewardItem(162000139, 25)); // Sublime Mana Serum
+		rewards.get(54).add(new RewardItem(188053610, 3)); // [Event] Level 70 Composite Manastone Bundle
+		rewards.get(54).add(new RewardItem(164002284, 15)); // [Event] Ornate Firecrackers
+
+		// month 56
+		rewards.get(55).add(new RewardItem(165020014, 1)); // Weapon Wrapping Scroll (Eternal/Lv. 65 and lower)
+		rewards.get(55).add(new RewardItem(186000242, 15)); // Ceramium Medal
+		rewards.get(55).add(new RewardItem(169620072, 3)); // AP Boost Charm II - 30%
+		rewards.get(55).add(new RewardItem(188053618, 1)); // Honorable Elim's Idian Bundle
+
+		// month 57
+		rewards.get(56).add(new RewardItem(166200009, 3)); // Mythic Weapon Tuning Scroll
+		rewards.get(56).add(new RewardItem(161001001, 5)); // Revival Stone
+		rewards.get(56).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
+		rewards.get(56).add(new RewardItem(166000195, 10)); // Epsilon Enchantment Stone
+
+		// month 58
+		rewards.get(57).add(new RewardItem(190010001, 1)); // Potbelly Inquin Egg
+		rewards.get(57).add(new RewardItem(188052761, 5)); // [Event] Bonus Entry Scroll Bundle
+		rewards.get(57).add(new RewardItem(188053526, 5)); // [Event] Aion's Steel Form Candy Box
+		rewards.get(57).add(new RewardItem(186000247, 5)); // Major Danuar Relic
+		rewards.get(57).add(new RewardItem(166150026, 2)); // [Stamp] Greater Felicitous Socketing (Heroic)
+
+		// month 59
+		rewards.get(58).add(new RewardItem(166200010, 3)); // Mythic Armor Tuning Scroll
+		rewards.get(58).add(new RewardItem(166000195, 15)); // Epsilon Enchantment Stone
+		rewards.get(58).add(new RewardItem(188052719, 5)); // [Event] Dye Bundle
+		rewards.get(58).add(new RewardItem(166030007, 5)); // [Event] Tempering Solution
+
+		// month 60
+		rewards.get(59).add(new RewardItem(188053996, 1)); // Emperor Trillirunerk's Feather Box
+		rewards.get(59).add(new RewardItem(162000107, 50)); // Saam King's Herb
+		rewards.get(59).add(new RewardItem(186000399, 125)); // Honorable Conqueror's Mark
+		rewards.get(59).add(new RewardItem(166150027, 2)); // [Stamp] Greater Felicitous Socketing (Mythic)
 	}
 
 	/**

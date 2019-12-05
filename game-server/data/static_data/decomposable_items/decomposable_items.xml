@@ -34643,7 +34643,12 @@
 			<item id="187060170" /><!-- Trillirunerk's Blue Flame Feather -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053996" /><!-- Emperor Trillirunerk's Feather Box -->
+	<decomposable item_id="188053996" selectable="true"><!-- Emperor Trillirunerk's Feather Box -->
+		<items>
+			<item id="187060166" /><!-- Trillirunerk's Ice Flame Feather -->
+			<item id="187060170" /><!-- Trillirunerk's Blue Flame Feather -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053997" /><!-- Ancient Crown Bundle -->
 	<decomposable item_id="188053998" /><!-- Ornate Enchantment Stone Bundle -->
 	<decomposable item_id="188054007" /><!-- Lockbox Key Pouch -->
