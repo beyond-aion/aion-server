@@ -17,10 +17,10 @@
 	<!-- Cygnea -->
 	<rift id="210070000">
 		<open schedule="0 0 * ? * *"/>
-		<open schedule="0 0 20 ? * MON,WED" spawn="true"/>
-		<open schedule="0 0 17 ? * SAT" spawn="true"/>
+		<open schedule="0 0 20 ? * WED,FRI" spawn="true"/>
+		<open schedule="0 0 17 ? * SUN" spawn="true"/>
 	</rift>
-	
+
 	<!-- Morheim -->
 	<rift id="220020000">
 		<open schedule="0 0 * ? * *"/>
@@ -39,6 +39,6 @@
 	<rift id="220080000">
 		<open schedule="0 0 * ? * *"/>
 		<open schedule="0 0 20 ? * TUE,THU" spawn="true"/>
-		<open schedule="0 0 17 ? * SUN" spawn="true"/>
+		<open schedule="0 0 17 ? * SAT" spawn="true"/>
 	</rift>
 </rift_schedule>
