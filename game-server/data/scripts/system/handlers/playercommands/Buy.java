@@ -2,6 +2,7 @@ package playercommands;
 
 import static com.aionemu.gameserver.custom.instance.CustomInstanceService.REWARD_COIN_ID;
 
+import java.awt.Color;
 import java.util.LinkedHashMap;
 import java.util.Map;
 import java.util.Map.Entry;
@@ -19,6 +20,7 @@ import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
+import org.apache.commons.lang3.StringUtils;
 
 /**
  * @author Estrayl
@@ -28,11 +30,11 @@ public class Buy extends PlayerCommand {
 	private static final Map<Integer, Map<String, Integer>> rewards = new LinkedHashMap<>();
 
 	public Buy() {
-		super("buy", "Display or redeem loyalty rewards.");
+		super("buy", "Exchange your " + ChatUtil.item(REWARD_COIN_ID) + " for various rewards.");
 
 		// @formatter:off
 		setSyntaxInfo(
-			"list - Shows all buyable rewards.",
+			" - Shows all buyable rewards.",
 			"<item link|ID> - Buys the respective item."
 		);
 		// @formatter:on
@@ -66,38 +68,35 @@ public class Buy extends PlayerCommand {
 
 	@Override
 	protected void execute(Player player, String... params) {
-		if (params.length != 1)
-			sendInfo(player);
-		else if ("list".equalsIgnoreCase(params[0]))
+		if (params.length == 0)
 			showRewards(player);
-		else
+		else if (params.length == 1)
 			buyItem(player, params[0]);
+		else
+			sendInfo(player);
 	}
 
 	private void showRewards(Player player) {
 		sendInfo(player, "Cost:");
 		for (Entry<Integer, Map<String, Integer>> idMap : rewards.entrySet()) {
-			String itemString = "";
-			int cost = idMap.getValue().get("cost");
+			String itemString;
+			String cost = String.valueOf(idMap.getValue().get("cost"));
 			int amount = idMap.getValue().get("amount");
-			if (cost < 1000) // indentation
-				itemString = "  " + itemString;
-			if (cost < 100)
-				itemString = "  " + itemString;
-			if (cost < 10)
-				itemString = "  " + itemString;
+			int digitsToPad = 4 - cost.length();
+			if (digitsToPad > 0)
+				cost = StringUtils.repeat(' ', digitsToPad * 2) + cost;
 
 			if (amount == 1)
-				itemString = itemString + cost + "   ";
+				itemString = cost + "   ";
 			else
-				itemString = itemString + cost + "   " + amount + "x ";
+				itemString = cost + "   " + amount + "x ";
 
-			itemString += "[item: " + idMap.getKey() + "]"; // ID
+			itemString += ChatUtil.item(idMap.getKey());
 			sendInfo(player, itemString);
 		}
 		sendInfo(player, "To buy:");
 		sendInfo(player, "1. Right-click an item from the list to your Memo Pad.");
-		sendInfo(player, "2. Type \"." + getAlias() + "\" in your chat field (with space).");
+		sendInfo(player, "2. Type " + ChatUtil.color(getAliasWithPrefix(), Color.WHITE) + " in your chat field (with space).");
 		sendInfo(player, "3. (Ctrl + Right-click) the item from your Memo Pad.");
 	}
 
@@ -105,7 +104,7 @@ public class Buy extends PlayerCommand {
 		// redeem item
 		int itemId = ChatUtil.getItemId(itemLink);
 		if (DataManager.ITEM_DATA.getItemTemplate(itemId) == null) {
-			sendInfo(player, itemLink + " is not a valid item.");
+			sendInfo(player, "\"" + itemLink + "\" is not a valid item (must be an item link or ID).");
 			return;
 		}
 
@@ -119,7 +118,7 @@ public class Buy extends PlayerCommand {
 			rewardCoins += i.getItemCount();
 
 		if (cost > rewardCoins) {
-			sendInfo(player, "You need " + cost + " to buy " + "[item: " + itemId + "].");
+			sendInfo(player, "You need " + cost + " to buy " + ChatUtil.item(itemId) + ".");
 			return;
 		}
 
@@ -128,7 +127,7 @@ public class Buy extends PlayerCommand {
 			@Override
 			public void acceptRequest(Creature requester, Player responder) {
 				if (player.getInventory().decreaseByItemId(REWARD_COIN_ID, cost)) {
-					sendInfo(player, "You have spent " + cost + ".");
+					sendInfo(player, "You have spent " + cost + ".");
 					ItemService.addItem(player, itemId, rewards.get(itemId).get("amount"), true,
 						new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_CASH_ITEM));
 				}

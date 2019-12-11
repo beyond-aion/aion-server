@@ -28745,16 +28745,7 @@
 	<decomposable item_id="188053213" /><!-- [Event] Remodeled Danuar Weapon Chest -->
 	<decomposable item_id="188053214" /><!-- [Event] Violet Bundle -->
 	<decomposable item_id="188053215" /><!-- xxxNAxxx -->
-	<decomposable item_id="188053216" selectable="true"><!-- [Event] Fine Violet Box -->
-		<items>
-			<item id="169405391"/><!-- Upgraded Distorted Sword of the Fierce Battle Prototype -->
-			<item id="169405392"/><!-- Upgraded Distorted Mace of the Fierce Battle Prototype -->
-			<item id="169405393"/><!-- Upgraded Distorted Dagger of the Fierce Battle Prototype -->
-			<item id="169405394"/><!-- Upgraded Distorted Greatsword of the Fierce Battle Prototype -->
-			<item id="169405395"/><!-- Upgraded Distorted Polearm of the Fierce Battle Prototype -->
-			<item id="169405396"/><!-- Upgraded Distorted Staff of the Fierce Battle Prototype -->
-		</items>
-	</decomposable>
+	<decomposable item_id="188053216" /><!-- [Event] Fine Violet Box -->
 	<decomposable item_id="188053217" /><!-- [Event] Greater Violet Box -->
 	<decomposable item_id="188053218" /><!-- [Event] Lesser Violet Box -->
 	<decomposable item_id="188053219" selectable="true"><!-- [Event] Sauro Commander's Accessory Box -->
