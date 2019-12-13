@@ -1913,7 +1913,7 @@ public class LegionService {
 	}
 
 	public void updateCachedPlayerName(String oldName, Player player) {
-		if (player.getLegion() != null)
+		if (player.getLegion() != null && allCachedLegionMembers.containsEx(player.getObjectId()))
 			allCachedLegionMembers.updateCachedPlayerName(oldName, player);
 	}
 
