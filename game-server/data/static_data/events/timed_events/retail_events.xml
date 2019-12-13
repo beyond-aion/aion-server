@@ -1229,7 +1229,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Celebrate Solorius" start="2018-12-01T00:00:00" end="2018-12-31T23:59:59" theme="CHRISTMAS">
+	<event name="Celebrate Solorius" start="2019-12-01T00:00:00" end="2019-12-31T23:59:59" theme="CHRISTMAS">
 		<event_drops>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="100">
 				<gd_npcs>
@@ -3793,7 +3793,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Frozen Magic Event" start="2018-12-15T00:00:00" end="2018-12-31T23:59:59">
+	<event name="Frozen Magic Event" start="2019-12-13T00:00:00" end="2019-12-31T23:59:59">
 		<quests>
 			<maintainable>80575 80576 80577 80578 80579 80580</maintainable>
 		</quests>

@@ -26376,6 +26376,12 @@
 		<items>
 			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
 		</items>
+		<items>
+			<item id="166150018" /><!-- Greater Felicitous Socketing (Eternal) -->
+		</items>
+		<items>
+			<item id="188053903" /><!-- Honorable Equipment of Conquest Box -->
+		</items>
 	</decomposable>
 	<decomposable item_id="188052999"><!-- [Event] Brilliant Ice Prism -->
 		<items chance="30.0">
@@ -26385,13 +26391,13 @@
 			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
 		</items>
 		<items chance="10.0">
-			<item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
+			<item id="188054238" /><!-- Iron Wall Armor Box -->
 		</items>
 		<items chance="5.0">
-			<item id="190100157" /><!-- Steampunk Sharptooth -->
+			<item id="190020088" /><!-- Pink Merek Egg -->
 		</items>
 		<items chance="20.0">
-			<item id="168310019" /><!-- Major Blessed Augment: Level 2 -->
+			<item id="188053219" /><!-- [Event] Sauro Commander's Accessory Box -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053000"><!-- [Event] Assured Greater Felicitous Socketing Box -->
