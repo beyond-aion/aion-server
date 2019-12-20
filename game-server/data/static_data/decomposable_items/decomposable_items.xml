@@ -28759,9 +28759,11 @@
 			<item id="120001469" /><!-- Sauro Commander's Corundum Earrings -->
 			<item id="121001343" /><!-- Sauro Commander's Corundum Necklace -->
 			<item id="122001612" /><!-- Sauro Commander's Corundum Ring -->
+			<item id="123001392" /><!-- Sauro Commander's Leather Belt -->
 			<item id="120001470" /><!-- Sauro Commander's Turquoise Earrings -->
 			<item id="121001344" /><!-- Sauro Commander's Turquoise Necklace -->
 			<item id="122001613" /><!-- Sauro Commander's Turquoise Ring -->
+			<item id="123001393" /><!-- Sauro Commander's Sash -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053220" /><!-- [Event] Ancient Coin Bundle -->
