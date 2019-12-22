@@ -1,5 +1,7 @@
 package instance.abyss;
 
+import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -56,7 +58,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 
 	private final AtomicBoolean bonusChestSpawnAllowed = new AtomicBoolean(true);
 	private final AtomicLong bonusChestStartMillis = new AtomicLong();
-	private final Future<?>[] timerProgressMsgTasks = new ScheduledFuture[notifyTimesSeconds.length];
+	private final List<Future<?>> timerProgressMsgTasks = new ArrayList<>();
 	private final AtomicInteger killedBossCount = new AtomicInteger();
 	private final AtomicInteger attackedBossCount = new AtomicInteger();
 	private Future<?> disableBonusChestSpawnTask;
@@ -87,11 +89,11 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 					int scheduleDelaySeconds = bonusChestTimeLimitSeconds - notifyTimesSeconds[i];
 					if (scheduleDelaySeconds > 0) {
 						final int notifyTimeSecond = notifyTimesSeconds[i];
-						ThreadPoolManager.getInstance().schedule(() -> {
+						timerProgressMsgTasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 							// send time info to all players if bonus chest spawn is allowed
 							if (bonusChestSpawnAllowed.get())
 								PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_REMAIN_TIME(String.valueOf(notifyTimeSecond)));
-						}, scheduleDelaySeconds * 1000);
+						}, scheduleDelaySeconds * 1000));
 					}
 				}
 			}
@@ -136,10 +138,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 
 		if (disableBonusChestSpawnTask != null && !disableBonusChestSpawnTask.isDone())
 			disableBonusChestSpawnTask.cancel(true);
-
-		for (Future<?> timerProgressMsgTask : timerProgressMsgTasks)
-			if (timerProgressMsgTask != null && !timerProgressMsgTask.isDone())
-				timerProgressMsgTask.cancel(true);
+		cancelTimeInformTasks();
 	}
 
 	@Override
@@ -172,8 +171,9 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 						spawnBossChest(bossIndex);
 						openDoor(treasureDoorIds[bossIndex]);
 						// remove quest timers for affected players
-						for (Integer playerObjId : playerStageMapping.keySet()) {
+						for (int playerObjId : playerStageMapping.keySet()) {
 							if (playerStageMapping.get(playerObjId) == bossIndex) {
+								playerStageMapping.remove(playerObjId);
 								Player player = instance.getPlayer(playerObjId);
 								if (player != null)
 									PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 0));
@@ -186,6 +186,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 									disableBonusChestSpawnTask.cancel(true);
 								spawnBonusChest();
 							}
+							cancelTimeInformTasks();
 						}
 						break;
 					}
@@ -206,7 +207,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 							if (percentageToDrop > 0) {
 								double dmgToApply = bossNpc.getLifeStats().getMaxHp() * (percentageToDrop * 0.8 / 100);
 								ThreadPoolManager.getInstance().schedule(() -> {
-									if (!bossNpc.isDead())
+									if (bossNpc != null && !bossNpc.isDead())
 										bossNpc.getController().onAttack(bossNpc, (int) dmgToApply, AttackStatus.NORMALHIT);
 								}, 1000);
 							}
@@ -246,10 +247,24 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 			int bossNpcId = bossNpcIds[bossIndex];
 			PacketSendUtility.broadcastToMap(instance,
 				SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(DataManager.NPC_DATA.getNpcTemplate(bossNpcId).getL10n()));
-			instance.getNpcs(bossNpcIds).forEach(NpcActions::delete);
+			instance.getNpcs(bossNpcId).forEach(NpcActions::delete);
 			bonusChestSpawnAllowed.set(false);
+			cancelTimeInformTasks();
 		}, despawnDelayMillis);
 		scheduledBossDespawnTasks[bossIndex] = despawnTask;
+	}
+
+	private void cancelTimeInformTasks() {
+		if (timerProgressMsgTasks.isEmpty())
+			return;
+		Iterator<Future<?>> taskIterator = timerProgressMsgTasks.iterator();
+		while (taskIterator.hasNext()) {
+			Future<?> timerProgressMsgTask = taskIterator.next();
+			if (timerProgressMsgTask != null && !timerProgressMsgTask.isDone()) {
+				timerProgressMsgTask.cancel(true);
+				taskIterator.remove();
+			}
+		}
 	}
 
 	private void spawnBonusChest() {
