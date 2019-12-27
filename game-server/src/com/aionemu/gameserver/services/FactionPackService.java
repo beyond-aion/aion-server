@@ -24,7 +24,7 @@ public class FactionPackService {
 
 	private static final FactionPackService INSTANCE = new FactionPackService();
 	private final LocalDateTime elyosMinCreationTime = LocalDateTime.of(2019, Month.JULY, 17, 0, 0, 0);
-	private final LocalDateTime elyosMaxCreationTime = null;
+	private final LocalDateTime elyosMaxCreationTime = LocalDateTime.of(2019, Month.DECEMBER, 28, 0, 0, 0);
 	private final LocalDateTime asmodianMinCreationTime = null;
 	private final LocalDateTime asmodianMaxCreationTime = null;
 	private final FactionPackDAO dao = DAOManager.getDAO(FactionPackDAO.class);
@@ -71,7 +71,8 @@ public class FactionPackService {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(e.getId());
 			if (template != null && template.getRace() == player.getOppositeRace())
 				continue;
-			SystemMailService.sendMail("Beyond Aion", player.getName(), "Faction Pack", "Greetings Daeva!\n\n"
+			SystemMailService.sendMail(
+				"Beyond Aion", player.getName(), "Faction Pack", "Greetings Daeva!\n\n"
 					+ "In gratitude for your decision to join the Elyos faction we prepared an additional item pack.\n\n" + "Enjoy your stay on Beyond Aion!",
 				e.getId(), e.getCount(), 0, LetterType.EXPRESS);
 		}
