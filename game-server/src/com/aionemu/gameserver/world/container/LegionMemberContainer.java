@@ -117,9 +117,11 @@ public class LegionMemberContainer {
 	}
 
 	public void updateCachedPlayerName(String oldName, Player player) {
-		legionMemberExByName.compute(oldName, (n, legionMember)-> {
+		legionMemberExByName.compute(oldName, (n, legionMember) -> {
 			if (legionMember == null)
 				legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMemberEx(player.getObjectId());
+			else
+				legionMember.setName(player.getName());
 			legionMemberExByName.put(player.getName(), legionMember);
 			return null;
 		});
