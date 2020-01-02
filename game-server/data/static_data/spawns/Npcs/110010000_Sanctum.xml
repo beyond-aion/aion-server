@@ -669,10 +669,10 @@
 		<spawn npc_id="798026" respawn_time="295">
 			<temporary_spawn/>
 			<spot x="1818.54" y="2192.09" z="528.766" h="91">
-				<temporary_spawn spawn_time="22.*.*" despawn_time="8.*.*"/>
+				<temporary_spawn spawn_time="21.*.*" despawn_time="9.*.*"/>
 			</spot>
 			<spot x="1968" y="1768" z="576.759" h="60">
-				<temporary_spawn spawn_time="10.*.*" despawn_time="20.*.*"/>
+				<temporary_spawn spawn_time="9.*.*" despawn_time="21.*.*"/>
 			</spot>
 		</spawn>
 		<!-- Kuruminerk -->
