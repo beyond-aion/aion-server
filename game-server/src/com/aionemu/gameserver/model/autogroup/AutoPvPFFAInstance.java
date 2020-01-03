@@ -39,7 +39,7 @@ public class AutoPvPFFAInstance extends AutoInstance {
 				players.remove(player.getObjectId());
 				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 5));
 				if (players.isEmpty()) {
-					AutoGroupService.getInstance().unRegisterInstance(instance.getInstanceId());
+					AutoGroupService.getInstance().unregisterAndDestroyInstance(instance.getInstanceId());
 				}
 				return;
 			}

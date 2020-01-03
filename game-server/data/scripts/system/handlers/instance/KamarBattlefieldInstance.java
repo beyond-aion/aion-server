@@ -26,7 +26,6 @@ import com.aionemu.gameserver.network.aion.instanceinfo.KamarBattlefieldScoreInf
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -269,7 +268,6 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 						PlayerReviveService.duelRevive(player);
 					onExitInstance(player);
 				}
-				AutoGroupService.getInstance().unRegisterInstance(instanceId);
 			}
 		}, 10000);
 	}

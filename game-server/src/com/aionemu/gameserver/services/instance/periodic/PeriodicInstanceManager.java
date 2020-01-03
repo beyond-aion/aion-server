@@ -9,57 +9,39 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author ViAl
+ * @author ViAl, Sykra
  */
 public class PeriodicInstanceManager {
 
-	/**
-	 * InstanceMaskID - Service
-	 */
-	private Map<Byte, PeriodicInstance> services;
+	private static final PeriodicInstanceManager INSTANCE = new PeriodicInstanceManager();
+	private final Map<Integer, PeriodicInstance> instancesByMaskId = new HashMap<>();
+
+	public static PeriodicInstanceManager getInstance() {
+		return INSTANCE;
+	}
 
 	private PeriodicInstanceManager() {
-		this.services = new HashMap<>();
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
-			DredgionService.getInstance().initIfEnabled();
-			registerInstance(DredgionService.getInstance());
-
-			KamarBattlefieldService.getInstance().initIfEnabled();
-			registerInstance(KamarBattlefieldService.getInstance());
-
-			EngulfedOphidianBridgeService.getInstance().initIfEnabled();
-			registerInstance(EngulfedOphidianBridgeService.getInstance());
-
-			IronWallFrontService.getInstance().initIfEnabled();
-			registerInstance(IronWallFrontService.getInstance());
-
-			IdgelDomeService.getInstance().initIfEnabled();
-			registerInstance(IdgelDomeService.getInstance());
+			registerServiceAndScheduleRegistration(DredgionService.getInstance());
+			registerServiceAndScheduleRegistration(KamarBattlefieldService.getInstance());
+			registerServiceAndScheduleRegistration(EngulfedOphidianBridgeService.getInstance());
+			registerServiceAndScheduleRegistration(IronWallFrontService.getInstance());
+			registerServiceAndScheduleRegistration(IdgelDomeService.getInstance());
 		}
 	}
 
-	public void registerInstance(PeriodicInstance instance) {
-		for (byte maskId : instance.getMaskIds()) {
-			this.services.put(maskId, instance);
-		}
+	private void registerServiceAndScheduleRegistration(PeriodicInstance instance) {
+		for (int maskId : instance.getMaskIds())
+			instancesByMaskId.put(maskId, instance);
+		instance.scheduleRegistrationIfEnabled();
 	}
 
-	public void handleRequest(Player player, byte maskId) {
-		if (this.services.containsKey(maskId)) {
-			PeriodicInstance instance = this.services.get(maskId);
+	public void handleRequest(Player player, int maskId) {
+		if (instancesByMaskId.containsKey(maskId)) {
+			PeriodicInstance instance = instancesByMaskId.get(maskId);
 			instance.showWindow(player);
 		} else {
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId));
 		}
 	}
-
-	public static PeriodicInstanceManager getInstance() {
-		return SingletonHolder.INSTANCE;
-	}
-
-	private static class SingletonHolder {
-
-		private static final PeriodicInstanceManager INSTANCE = new PeriodicInstanceManager();
-	}
-
 }

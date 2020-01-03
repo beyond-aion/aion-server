@@ -1,8 +1,9 @@
 package com.aionemu.gameserver.services.instance.periodic;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.quartz.CronExpression;
 import org.slf4j.Logger;
@@ -17,83 +18,92 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author ViAl
+ * @author ViAl, Sykra
  */
 public abstract class PeriodicInstance {
 
 	protected static final Logger log = LoggerFactory.getLogger(PeriodicInstance.class);
+
 	// required properties
 	private final CronExpression[] startExpressions;
 	private final boolean isEnabled;
-	protected final byte[] maskIds;
+	protected final int[] maskIds;
 	protected final byte minLevel;
 	protected final byte maxLevel;
 	protected final long registrationPeriod;
+
 	// inner variables
-	protected boolean registerAvailable;
-	private final List<Integer> playersWithCooldown;
+	protected AtomicBoolean registrationRunning = new AtomicBoolean(false);
+	private final List<Integer> playersWithCooldown = new CopyOnWriteArrayList<>();
 	private Future<?> unregisterTask;
 
-	public PeriodicInstance(boolean isEnabled, CronExpression[] startExpressions, long regPeriod, byte[] maskIds, byte minLevel, byte maxLevel) {
+	public PeriodicInstance(boolean isEnabled, CronExpression[] startExpressions, long regPeriod, int[] maskIds, byte minLevel, byte maxLevel) {
 		this.isEnabled = isEnabled;
 		this.startExpressions = startExpressions;
 		this.registrationPeriod = regPeriod;
 		this.maskIds = maskIds;
 		this.minLevel = minLevel;
 		this.maxLevel = maxLevel;
-		this.registerAvailable = false;
-		this.playersWithCooldown = new ArrayList<>();
 	}
 
-	public void initIfEnabled() {
+	public final void scheduleRegistrationIfEnabled() {
 		if (isEnabled) {
 			for (CronExpression startExpression : startExpressions) {
-				CronService.getInstance().schedule(() -> startRegistration(), startExpression);
-				log.info("Scheduled " + getClass().getSimpleName() + ": based on cron expression: " + startExpression + " Duration: "
-					+ registrationPeriod + " in minutes");
+				CronService.getInstance().schedule(this::startRegistration, startExpression);
+				log.info("Scheduled " + getClass().getSimpleName() + ": based on cron expression: " + startExpression + " Duration: " + registrationPeriod
+					+ " in minutes");
 			}
 		}
 	}
 
-	public void startRegistration() {
-		registerAvailable = true;
-		startUnregisterTask();
+	public final void startRegistration() {
+		if (!registrationRunning.compareAndSet(false, true)) {
+			log.info("Tried to register " + getClass().getSimpleName() + " while an registration period is active.");
+			return;
+		}
+		// start unregister task
+		unregisterTask = ThreadPoolManager.getInstance().schedule(this::stopRegistration, registrationPeriod * 60 * 1000);
+
 		World.getInstance().forEachPlayer(player -> {
-			if (player.getLevel() > minLevel && player.getLevel() <= maxLevel) {
-				for (byte maskId : this.maskIds) {
-					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon));
-					onSendEntry(player, maskId);
-				}
-			}
+			if (checkPlayerLevel(player.getLevel()))
+				for (int maskId : maskIds)
+					sendEntry(player, maskId);
 		});
 	}
 
-	protected void onSendEntry(Player player, byte maskId) {
+	protected void sendEntry(Player player, int maskId) {
+		PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon));
 	}
 
-	public void stopRegistration() {
-		registerAvailable = false;
+	public final void stopRegistration() {
+		if (!registrationRunning.compareAndSet(true, false)) {
+			log.error("Tried to unregister " + getClass().getSimpleName() + " while there is no active period");
+			return;
+		}
 		playersWithCooldown.clear();
-		for (byte maskId : this.maskIds)
-			AutoGroupService.getInstance().unRegisterInstance(maskId);
+		for (int maskId : maskIds)
+			AutoGroupService.getInstance().unregisterInstance(maskId);
 		World.getInstance().forEachPlayer(player -> {
-			if (player.getLevel() > minLevel && player.getLevel() <= maxLevel) {
-				for (byte maskId : this.maskIds)
+			if (checkPlayerLevel(player.getLevel()))
+				for (int maskId : maskIds)
 					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, true));
-			}
 		});
-		if (unregisterTask != null) {
+		if (unregisterTask != null && !unregisterTask.isCancelled()) {
 			unregisterTask.cancel(false);
 			unregisterTask = null;
 		}
 	}
 
 	public boolean isEnterAvailable(Player player) {
-		return registerAvailable && player.getLevel() > minLevel && player.getLevel() <= maxLevel;
+		return isRegisterAvailable() && checkPlayerLevel(player.getLevel());
 	}
 
-	public boolean isRegisterAvailable() {
-		return registerAvailable;
+	private boolean checkPlayerLevel(byte playerLevel) {
+		return playerLevel > minLevel && playerLevel <= maxLevel;
+	}
+
+	public final boolean isRegisterAvailable() {
+		return registrationRunning.get();
 	}
 
 	public void addCooldown(Player player) {
@@ -105,13 +115,12 @@ public abstract class PeriodicInstance {
 	}
 
 	public void showWindow(Player player) {
-		if (!playersWithCooldown.contains(player.getObjectId())) {
-			for (byte maskId : maskIds)
+		if (!hasCooldown(player))
+			for (int maskId : maskIds)
 				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId));
-		}
 	}
 
-	public byte[] getMaskIds() {
+	public int[] getMaskIds() {
 		return maskIds;
 	}
 
@@ -121,10 +130,6 @@ public abstract class PeriodicInstance {
 
 	public byte getMaxLevel() {
 		return maxLevel;
-	}
-
-	protected void startUnregisterTask() {
-		unregisterTask = ThreadPoolManager.getInstance().schedule(() -> stopRegistration(), registrationPeriod * 60 * 1000);
 	}
 
 }

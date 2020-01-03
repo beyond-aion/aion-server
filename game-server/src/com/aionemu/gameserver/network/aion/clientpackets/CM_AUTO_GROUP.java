@@ -56,7 +56,7 @@ public class CM_AUTO_GROUP extends AionClientPacket {
 				AutoGroupService.getInstance().cancelEnter(player, instanceMaskId);
 				break;
 			case 104:
-				PeriodicInstanceManager.getInstance().handleRequest(player, (byte) instanceMaskId);
+				PeriodicInstanceManager.getInstance().handleRequest(player, instanceMaskId);
 				break;
 			case 105:
 				// DredgionRegService.getInstance().failedEnterDredgion(player);

@@ -1,30 +1,30 @@
 package com.aionemu.gameserver.services.instance.periodic;
 
-import com.aionemu.gameserver.configs.main.AutoGroupConfig;
+import static com.aionemu.gameserver.configs.main.AutoGroupConfig.*;
+
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author xTz
+ * @author xTz, Sykra
  */
 public class KamarBattlefieldService extends PeriodicInstance {
 
+	private static final KamarBattlefieldService INSTANCE = new KamarBattlefieldService();
+
+	public static KamarBattlefieldService getInstance() {
+		return INSTANCE;
+	}
+
 	private KamarBattlefieldService() {
-		super(AutoGroupConfig.KAMAR_ENABLE, AutoGroupConfig.KAMAR_TIMES, AutoGroupConfig.KAMAR_TIMER, new byte[] { 107 }, (byte) 60, (byte) 66);
+		super(KAMAR_ENABLE, KAMAR_TIMES, KAMAR_TIMER, new int[] { 107 }, (byte) 60, (byte) 66);
 	}
 
 	@Override
-	protected void onSendEntry(Player player, byte maskId) {
+	protected void sendEntry(Player player, int maskId) {
+		super.sendEntry(player, maskId);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDKamar());
 	}
 
-	private static class SingletonHolder {
-
-		protected static final KamarBattlefieldService instance = new KamarBattlefieldService();
-	}
-
-	public static KamarBattlefieldService getInstance() {
-		return SingletonHolder.instance;
-	}
 }

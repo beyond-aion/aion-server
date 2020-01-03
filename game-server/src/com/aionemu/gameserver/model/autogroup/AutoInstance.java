@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.autogroup;
 
+import java.util.Comparator;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -24,23 +25,18 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 	public AutoGroupType agt;
 	public Map<Integer, AGPlayer> players = new HashMap<>();
 
-	protected boolean decrease(Player player, int itemId, long count) {
-		long i = 0;
+	protected boolean decrease(Player player, int itemId, long requiredCount) {
+		long itemCount = 0;
 		List<Item> items = player.getInventory().getItemsByItemId(itemId);
-		for (Item findedItem : items) {
-			i += findedItem.getItemCount();
-		}
-		if (i < count) {
+		for (Item item : items)
+			itemCount += item.getItemCount();
+		if (itemCount < requiredCount)
 			return false;
-		}
-		items.sort((i1, i2) -> Integer.compare(i1.getExpireTime(), i2.getExpireTime()));
+		items.sort(Comparator.comparingInt(Item::getExpireTime));
 		for (Item item : items) {
-			long l = player.getInventory().decreaseItemCount(item, count);
-			if (l == 0) {
+			requiredCount = player.getInventory().decreaseItemCount(item, requiredCount);
+			if (requiredCount == 0)
 				break;
-			} else {
-				count = l;
-			}
 		}
 		return true;
 	}
@@ -64,8 +60,9 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 
 	@Override
 	public void onEnterInstance(Player player) {
-		players.get(player.getObjectId()).setInInstance(true);
-		players.get(player.getObjectId()).setOnline(true);
+		AGPlayer autoGroupPlayer = players.get(player.getObjectId());
+		autoGroupPlayer.setInInstance(true);
+		autoGroupPlayer.setOnline(true);
 	}
 
 	@Override
@@ -79,10 +76,7 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 
 	@Override
 	public void unregister(Player player) {
-		int obj = player.getObjectId();
-		if (players.containsKey(obj)) {
-			players.remove(obj);
-		}
+		players.remove(player.getObjectId());
 	}
 
 	@Override
@@ -93,19 +87,14 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 	protected boolean satisfyTime(SearchInstance searchInstance) {
 		if (instance != null) {
 			InstanceReward<?> instanceReward = instance.getInstanceHandler().getInstanceReward();
-			if ((instanceReward != null && instanceReward.getInstanceProgressionType().isEndProgress())) {
+			if ((instanceReward != null && instanceReward.getInstanceProgressionType().isEndProgress()))
 				return false;
-			}
 		}
-
-		if (!searchInstance.getEntryRequestType().isQuickGroupEntry()) {
+		if (!searchInstance.getEntryRequestType().isQuickGroupEntry())
 			return startInstanceTime == 0;
-		}
-
 		int time = agt.getTime();
-		if (time == 0 || startInstanceTime == 0) {
+		if (time == 0 || startInstanceTime == 0)
 			return true;
-		}
 		return System.currentTimeMillis() - startInstanceTime < time;
 	}
 

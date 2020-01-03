@@ -25,7 +25,6 @@ import com.aionemu.gameserver.network.aion.instanceinfo.IronWallFrontScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -79,8 +78,8 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			addPlayerToReward(player);
 		}
 		sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 3, player.getObjectId()), ironWallFrontReward, getTime()));
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 6, player.getObjectId()),
-			ironWallFrontReward, getTime()));
+		PacketSendUtility.sendPacket(player,
+			new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 6, player.getObjectId()), ironWallFrontReward, getTime()));
 		// sendPacket();
 	}
 
@@ -145,7 +144,6 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 						PlayerReviveService.duelRevive(player);
 					onExitInstance(player);
 				}
-				AutoGroupService.getInstance().unRegisterInstance(instanceId);
 			}
 		}, 10000);
 	}
@@ -169,8 +167,8 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 		if (npcL10n != null)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 		ironWallFrontReward.addPointsByRace(race, points);
-		sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 10, race.equals(Race.ELYOS) ? 0 : 1), ironWallFrontReward,
-			getTime()));
+		sendPacket(
+			new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 10, race.equals(Race.ELYOS) ? 0 : 1), ironWallFrontReward, getTime()));
 		int diff = Math.abs(ironWallFrontReward.getAsmodiansPoint().intValue() - ironWallFrontReward.getElyosPoints().intValue());
 		if (diff >= 30000) {
 			stopInstance();

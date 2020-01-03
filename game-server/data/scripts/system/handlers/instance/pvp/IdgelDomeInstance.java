@@ -26,7 +26,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
@@ -123,9 +122,8 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 			for (Player player : instance.getPlayersInside()) {
 				if (player.isDead())
 					PlayerReviveService.duelRevive(player);
-				tasks.add(ThreadPoolManager.getInstance().schedule(() -> onExitInstance(player), 30000));
+				onExitInstance(player);
 			}
-			AutoGroupService.getInstance().unRegisterInstance(instanceId);
 		}, 10000));
 	}
 

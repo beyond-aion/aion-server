@@ -27,14 +27,12 @@ import com.aionemu.gameserver.model.instance.instancereward.DredgionReward;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.playerreward.DredgionPlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
-import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.instanceinfo.DredgionScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
@@ -148,7 +146,6 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 						PlayerReviveService.duelRevive(player);
 					onExitInstance(player);
 				}
-				AutoGroupService.getInstance().unRegisterInstance(instanceId);
 			}
 		}, 10000);
 	}
@@ -375,7 +372,6 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 
 	@Override
 	public void onLeaveInstance(Player player) {
-		if (player.isInGroup())
-			PlayerGroupService.removePlayer(player);
+
 	}
 }
