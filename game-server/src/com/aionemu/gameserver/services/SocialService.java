@@ -98,6 +98,8 @@ public class SocialService {
 	 * @return True on success
 	 */
 	public static boolean makeFriends(Player friend1, Player friend2) {
+		if (friend1.getFriendList().getFriend(friend2.getObjectId()) != null)
+			return false;
 		if (DAOManager.getDAO(FriendListDAO.class).addFriends(friend1, friend2)) {
 			friend1.getFriendList().addFriend(new Friend(friend2.getCommonData(), ""));
 			friend2.getFriendList().addFriend(new Friend(friend1.getCommonData(), ""));
