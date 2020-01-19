@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.skillengine.properties;
 
+import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -27,6 +28,18 @@ public class FirstTargetRangeProperty {
 		Creature effector = skill.getEffector();
 		Creature firstTarget = skill.getFirstTarget();
 
+		if (properties.getFirstTarget() == FirstTargetAttribute.POINT) {
+			 if (!GeoService.getInstance().canSee(effector.getWorldId(), effector.getInstanceId(), effector.getX(), effector.getY(), effector.getZ(),
+					skill.getX(), skill.getY(), skill.getZ(), 1f, IgnoreProperties.of(effector.getRace()))){
+				 if (effector instanceof Player) {
+					 PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_OBSTACLE());
+				 }
+				 return false;
+			 }
+			 return true;
+
+		}
+
 		if (firstTarget == null)
 			return false;
 
@@ -52,14 +65,11 @@ public class FirstTargetRangeProperty {
 		}
 
 		// TODO check for all targets too
-		// Cannon exception
-		if (effector.getTransformModel().getModelId() != 284867) {
-			if (!GeoService.getInstance().canSee(effector, firstTarget)) {
-				if (effector instanceof Player) {
-					PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_OBSTACLE());
-				}
-				return false;
+		if (!GeoService.getInstance().canSee(effector, firstTarget)) {
+			if (effector instanceof Player) {
+				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_OBSTACLE());
 			}
+			return false;
 		}
 		return true;
 	}

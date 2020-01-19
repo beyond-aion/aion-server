@@ -1,11 +1,10 @@
 package com.aionemu.gameserver.world.geo;
 
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
+import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
-import com.aionemu.gameserver.geoEngine.scene.Geometry;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
-import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 
 /**
  * @author ATracer
@@ -22,21 +21,16 @@ public class DummyGeoMap extends GeoMap {
 	}
 
 	@Override
-	public final boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, Geometry targetGeometry, int instanceId) {
+	public final boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId, IgnoreProperties ignoreProperties) {
 		return true;
 	}
 
 	@Override
 	public Vector3f getClosestCollision(float x, float y, float z, float targetX, float targetY, float targetZ, boolean atNearGroundZ, int instanceId,
-		byte intentions) {
+		byte intentions, IgnoreProperties ignoreProperties) {
 		if ((intentions & CollisionIntention.WALK.getId()) == 0) // if it's no walking npc, add 0.5m to not fall through the map on hills
 			targetZ += 0.5f;
 		return new Vector3f(targetX, targetY, targetZ);
-	}
-
-	@Override
-	public DoorGeometry getDoor(int worldId, String meshFile, float x, float y, float z) {
-		return null;
 	}
 
 	@Override

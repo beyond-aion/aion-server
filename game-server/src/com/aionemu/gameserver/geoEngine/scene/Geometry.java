@@ -116,8 +116,6 @@ public class Geometry extends Spatial {
 
 	@Override
 	public int collideWith(Collidable other, CollisionResults results) {
-		if (results.getIgnoredGeometry() == this)
-			return 0;
 		if (other instanceof Ray) {
 			if (!worldBound.intersects(((Ray) other)))
 				return 0;
@@ -133,7 +131,7 @@ public class Geometry extends Spatial {
 	}
 
 	@Override
-	public void setTransform(Matrix3f rotation, Vector3f loc, float scale) {
+	public void setTransform(Matrix3f rotation, Vector3f loc, Vector3f scale) {
 		cachedWorldMat.loadIdentity();
 		cachedWorldMat.setRotationMatrix(rotation);
 		cachedWorldMat.scale(scale);
@@ -141,13 +139,23 @@ public class Geometry extends Spatial {
 	}
 
 	@Override
-	public short getCollisionFlags() {
-		return mesh.getCollisionFlags();
+	public byte getCollisionIntentions() {
+		return mesh.getCollisionIntentions();
 	}
 
 	@Override
-	public void setCollisionFlags(short flags) {
-		mesh.setCollisionFlags(flags);
+	public void setCollisionIntentions(byte collisionIntentions) {
+		mesh.setCollisionIntentions(collisionIntentions);
+	}
+
+	@Override
+	public int getMaterialId() {
+		return mesh.getMaterialId();
+	}
+
+	@Override
+	public void setMaterialId(byte materialId) {
+		mesh.setMaterialId(materialId);
 	}
 
 	@Override

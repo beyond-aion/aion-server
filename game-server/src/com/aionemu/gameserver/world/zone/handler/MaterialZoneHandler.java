@@ -6,9 +6,11 @@ import java.util.List;
 import java.util.Map;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.controllers.observer.AbstractCollisionObserver;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.CollisionMaterialActor;
+import com.aionemu.gameserver.controllers.observer.ZoneCollisionMaterialActor;
 import com.aionemu.gameserver.controllers.observer.IActor;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -16,6 +18,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.materials.MaterialSkill;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -49,7 +52,19 @@ public class MaterialZoneHandler implements ZoneHandler {
 		}
 		if (matchingSkills.isEmpty())
 			return;
-		CollisionMaterialActor actor = new CollisionMaterialActor(creature, geometry, matchingSkills);
+		Vector3f initialPos = new Vector3f(creature.getX(), creature.getY(), creature.getZ());
+		if(creature instanceof Player) {
+			WorldPosition lastPosition = ((Player) creature).getMoveController().getLastPositionFromClient();
+			if (lastPosition != null) {
+				initialPos.set(lastPosition.getX(), lastPosition.getY(), lastPosition.getZ());
+			}
+		}
+		ZoneCollisionMaterialActor actor;
+		if (geometry.getMaterialId() >= 14 && geometry.getMaterialId() <= 16) { // base shield 14 & 15, abyss core 16
+			actor = new ZoneCollisionMaterialActor(creature, geometry, matchingSkills, AbstractCollisionObserver.CheckType.PASS, initialPos);
+		} else {
+			actor = new ZoneCollisionMaterialActor(creature, geometry, matchingSkills, initialPos);
+		}
 		creature.getObserveController().addObserver(actor);
 		observed.put(creature.getObjectId(), actor);
 		if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {

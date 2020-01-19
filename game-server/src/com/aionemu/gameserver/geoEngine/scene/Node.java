@@ -62,7 +62,8 @@ public class Node extends Spatial implements Cloneable {
 	 */
 	protected ArrayList<Spatial> children = new ArrayList<>(1);
 
-	protected short collisionFlags;
+	protected byte collisionIntentions;
+	protected byte materialId;
 
 	/**
 	 * Do not use this constructor. Serialization purposes only.
@@ -78,7 +79,7 @@ public class Node extends Spatial implements Cloneable {
 	 */
 	public Node(String name) {
 		super(name);
-		collisionFlags = CollisionIntention.ALL.getId();
+		collisionIntentions = CollisionIntention.ALL.getId();
 	}
 
 	/**
@@ -291,8 +292,7 @@ public class Node extends Spatial implements Cloneable {
 			Spatial child = children.get(x);
 			if (name.equals(child.getName())) {
 				return child;
-			}
-			else if (child instanceof Node) {
+			} else if (child instanceof Node) {
 				Spatial out = ((Node) child).getChild(name);
 				if (out != null) {
 					return out;
@@ -340,12 +340,14 @@ public class Node extends Spatial implements Cloneable {
 
 	@Override
 	public int collideWith(Collidable other, CollisionResults results) {
-		if ((getIntentions() & results.getIntentions()) == 0)
+		if ((getCollisionIntentions() & results.getIntentions()) == 0) {
 			return 0;
-		
+		}
+
 		if (other instanceof Ray) {
-			if (worldBound == null || !worldBound.intersects(((Ray) other)))
+			if (worldBound == null || !worldBound.intersects(((Ray) other))) {
 				return 0;
+			}
 		}
 
 		int total = 0;
@@ -355,10 +357,9 @@ public class Node extends Spatial implements Cloneable {
 
 				// not used materialIds do not have collision intention for materials set
 				// not all material meshes have physical collisions set
-				// TODO: implement event mesh collisions
-				if ((child.getIntentions() & results.getIntentions()) == 0
-					|| (child.getIntentions() & CollisionIntention.EVENT.getId()) != 0)
+				if ((child.getCollisionIntentions() & results.getIntentions()) == 0) {
 					continue;
+				}
 				if ((results.getIntentions() & CollisionIntention.MATERIAL.getId()) != 0 && child.getMaterialId() <= 0) {
 					continue;
 				}
@@ -447,8 +448,7 @@ public class Node extends Spatial implements Cloneable {
 				if (resultBound != null) {
 					// merge current world bound with child world bound
 					resultBound.mergeLocal(child.getWorldBound());
-				}
-				else {
+				} else {
 					// set world bound to first non-null child world bound
 					if (child.getWorldBound() != null) {
 						resultBound = child.getWorldBound().clone(this.worldBound);
@@ -460,7 +460,7 @@ public class Node extends Spatial implements Cloneable {
 	}
 
 	@Override
-	public void setTransform(Matrix3f rotation, Vector3f loc, float scale) {
+	public void setTransform(Matrix3f rotation, Vector3f loc, Vector3f scale) {
 		if (children != null) {
 			for (int i = 0; i < children.size(); i++) {
 				children.get(i).setTransform(rotation, loc, scale);
@@ -471,13 +471,13 @@ public class Node extends Spatial implements Cloneable {
 	@Override
 	public Node clone() throws CloneNotSupportedException {
 		Node node = new Node(name);
-		node.collisionFlags = collisionFlags;
+		node.collisionIntentions = collisionIntentions;
+		node.materialId = materialId;
 		for (Spatial spatial : children)
 			if (spatial instanceof Geometry) {
 				Geometry geom = new Geometry(spatial.getName(), ((Geometry) spatial).getMesh());
 				node.attachChild(geom);
-			}
-			else if (spatial instanceof Node)
+			} else if (spatial instanceof Node)
 				node.attachChild(((Node) (spatial)).clone());
 			else
 				throw new CloneNotSupportedException();
@@ -485,12 +485,35 @@ public class Node extends Spatial implements Cloneable {
 	}
 
 	@Override
-	public short getCollisionFlags() {
-		return collisionFlags;
+	public byte getCollisionIntentions() {
+		return this.collisionIntentions;
 	}
 
 	@Override
-	public void setCollisionFlags(short flags) {
-		collisionFlags = flags;
+	public void setCollisionIntentions(byte collisionIntentions) {
+		this.collisionIntentions = collisionIntentions;
+	}
+
+	@Override
+	public int getMaterialId() {
+		return (this.materialId & 0xFF);
+	}
+
+	@Override
+	public void setMaterialId(byte materialId) {
+		this.materialId = materialId;
+	}
+
+	public List<Node> getGeometries(String name) {
+		List<Node> matchingGeometries = new ArrayList<>();
+		if (name.equals(this.name)) {
+			matchingGeometries.add(this);
+		}
+		for (Spatial child : children) {
+			if (child instanceof Node) {
+				matchingGeometries.addAll(((Node) child).getGeometries(name));
+			}
+		}
+		return matchingGeometries;
 	}
 }

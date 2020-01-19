@@ -25,11 +25,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.HouseOwnerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
-import com.aionemu.gameserver.model.templates.housing.Building;
-import com.aionemu.gameserver.model.templates.housing.HouseAddress;
-import com.aionemu.gameserver.model.templates.housing.HouseType;
-import com.aionemu.gameserver.model.templates.housing.HousingLand;
-import com.aionemu.gameserver.model.templates.housing.Sale;
+import com.aionemu.gameserver.model.templates.housing.*;
 import com.aionemu.gameserver.model.templates.spawns.SpawnType;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.services.player.PlayerService;
@@ -38,6 +34,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldType;
+import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 
 /**
@@ -71,6 +68,7 @@ public class House extends VisibleObject implements Persistable {
 		this.building = building;
 		setKnownlist(new PlayerAwareKnownList(this));
 		setPersistentState(PersistentState.UPDATED);
+		GeoService.getInstance().setHouseDoorState(address.getMapId(), instanceId, address.getId(), getDoorState());
 	}
 
 	@Override
@@ -154,6 +152,7 @@ public class House extends VisibleObject implements Persistable {
 	public void setDoorState(HouseDoorState doorState) {
 		this.doorState = doorState;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
+		GeoService.getInstance().setHouseDoorState(address.getMapId(), getInstanceId(), address.getId(), getDoorState());
 	}
 
 	/**

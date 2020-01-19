@@ -32,11 +32,7 @@
 
 package com.aionemu.gameserver.geoEngine.scene;
 
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+import java.nio.*;
 import java.util.ArrayList;
 
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
@@ -98,7 +94,8 @@ public class Mesh {
 
 	private Mode mode = Mode.Triangles;
 
-	private short collisionFlags = -1;
+	private byte materialId = 0;
+	private byte collisionIntentions = 0;
 
 	public Mesh() {
 	}
@@ -500,20 +497,20 @@ public class Mesh {
 		return buffers;
 	}
 
-	public short getCollisionFlags() {
-		return collisionFlags;
+	public void setCollisionIntentions(byte collisionIntentions) {
+		this.collisionIntentions = collisionIntentions;
 	}
 
-	public void setCollisionFlags(short collisionFlags) {
-		this.collisionFlags = collisionFlags;
+	public void setMaterialId(byte materialId) {
+		this.materialId = materialId;
 	}
-	
-	public byte getMaterialId() {
-		return (byte) (collisionFlags & 0xFF);
+
+	public byte getCollisionIntentions() {
+		return this.collisionIntentions;
 	}
-	
-	public byte getIntentions() {
-		return (byte) (collisionFlags >> 8);
+
+	public int getMaterialId() {
+		return (this.materialId & 0xFF);
 	}
 
 }

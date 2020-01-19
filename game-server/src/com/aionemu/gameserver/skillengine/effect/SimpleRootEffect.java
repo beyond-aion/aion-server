@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -46,7 +47,7 @@ public class SimpleRootEffect extends EffectTemplate {
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(heading));
 		float x1 = (float) (Math.cos(radian) * 0.7f);
 		float y1 = (float) (Math.sin(radian) * 0.7f);
-		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ());
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ(), IgnoreProperties.of(effect.getEffector().getRace()));
 		World.getInstance().updatePosition(effected, closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), heading, false);
 		PacketSendUtility.broadcastPacketAndReceive(effected,
 			new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(), closestCollision.getX(), closestCollision.getY(), closestCollision.getZ()));

@@ -29,6 +29,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -390,6 +391,9 @@ public class World {
 	public void spawn(VisibleObject object) throws AlreadySpawnedException {
 		if (object == null)
 			return;
+		if (object.getSpawn() != null && object.getSpawn().getStaticId() > 0) {
+			GeoService.getInstance().spawnPlaceableObject(object.getWorldId(), object.getInstanceId(), object.getSpawn().getStaticId());
+		}
 		WorldPosition position = object.getPosition();
 		if (position.isSpawned())
 			throw new AlreadySpawnedException(object);
@@ -422,6 +426,9 @@ public class World {
 	 */
 	public void despawn(VisibleObject object, ObjectDeleteAnimation animation) {
 		WorldPosition position = object.getPosition();
+		if (object.getSpawn() != null && object.getSpawn().getStaticId() > 0) {
+			GeoService.getInstance().despawnPlaceableObject(object.getWorldId(), object.getInstanceId(), object.getSpawn().getStaticId());
+		}
 		try {
 			object.getController().onDespawn();
 		} finally {

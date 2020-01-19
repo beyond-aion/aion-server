@@ -1,33 +1,19 @@
 package com.aionemu.gameserver.spawnengine;
 
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.controllers.GatherableController;
-import com.aionemu.gameserver.controllers.NpcController;
-import com.aionemu.gameserver.controllers.PetController;
-import com.aionemu.gameserver.controllers.SiegeWeaponController;
-import com.aionemu.gameserver.controllers.SummonController;
+import com.aionemu.gameserver.controllers.*;
 import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Gatherable;
-import com.aionemu.gameserver.model.gameobjects.GroupGate;
-import com.aionemu.gameserver.model.gameobjects.Homing;
-import com.aionemu.gameserver.model.gameobjects.Kisk;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.NpcObjectType;
-import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.Servant;
-import com.aionemu.gameserver.model.gameobjects.Summon;
-import com.aionemu.gameserver.model.gameobjects.SummonedHouseNpc;
-import com.aionemu.gameserver.model.gameobjects.Trap;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -217,7 +203,7 @@ public class VisibleObjectSpawner {
 		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(owner.getHeading()));
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 7),
-			owner.getY() + (float) (Math.sin(radian) * 7), owner.getZ());
+			owner.getY() + (float) (Math.sin(radian) * 7), owner.getZ(), null);
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 		final Npc postman = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
 		postman.setCreatorId(owner.getObjectId());
@@ -233,7 +219,7 @@ public class VisibleObjectSpawner {
 		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(owner.getHeading()));
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 1),
-			owner.getY() + (float) (Math.sin(radian) * 1), owner.getZ());
+			owner.getY() + (float) (Math.sin(radian) * 1), owner.getZ(), null);
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 		final Npc functionalNpc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
 		functionalNpc.setKnownlist(new PlayerAwareKnownList(functionalNpc));
@@ -285,6 +271,12 @@ public class VisibleObjectSpawner {
 		int worldId = creator.getWorldId();
 		int instanceId = creator.getInstanceId();
 
+		if (GeoDataConfig.GEO_ENABLE) {
+			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(creator, x, y, z, IgnoreProperties.of(creator.getRace()));
+			x = closestCollision.x;
+			y = closestCollision.y;
+			z = closestCollision.z;
+		}
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, npcId, x, y, z, heading);
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 

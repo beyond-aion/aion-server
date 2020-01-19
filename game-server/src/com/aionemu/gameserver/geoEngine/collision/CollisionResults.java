@@ -35,8 +35,6 @@ package com.aionemu.gameserver.geoEngine.collision;
 import java.util.ArrayList;
 import java.util.Iterator;
 
-import com.aionemu.gameserver.geoEngine.scene.Geometry;
-
 public class CollisionResults implements Iterable<CollisionResult> {
 
 	private final ArrayList<CollisionResult> results = new ArrayList<>();
@@ -44,18 +42,22 @@ public class CollisionResults implements Iterable<CollisionResult> {
 	private final byte intentions;
 	private final int instanceId;
 	private final boolean onlyFirst;
-	private final Geometry ignoredGeometry;
+	private final IgnoreProperties ignoreProperties;
 	private boolean canSeeCheck;
+
+	public CollisionResults(byte intentions, int instanceId, IgnoreProperties ignoreProperties) { this(intentions, instanceId, false, ignoreProperties); }
 
 	public CollisionResults(byte intentions, int instanceId) {
 		this(intentions, instanceId, false, null);
 	}
 
-	public CollisionResults(byte intentions, int instanceId, boolean searchFirst, Geometry ignoredGeometry) {
+	public CollisionResults(byte intentions, int instanceId, boolean searchFirst) { this(intentions, instanceId, searchFirst, null); }
+
+	public CollisionResults(byte intentions, int instanceId, boolean searchFirst, IgnoreProperties ignoreProperties) {
 		this.intentions = intentions;
 		this.instanceId = instanceId;
 		this.onlyFirst = searchFirst;
-		this.ignoredGeometry = ignoredGeometry;
+		this.ignoreProperties = ignoreProperties;
 	}
 
 	public void clear() {
@@ -150,13 +152,6 @@ public class CollisionResults implements Iterable<CollisionResult> {
 	}
 
 	/**
-	 * @return The geometry that will be ignored during collision checks.
-	 */
-	public Geometry getIgnoredGeometry() {
-		return ignoredGeometry;
-	}
-
-	/**
 	 * @return the intention
 	 */
 	public byte getIntentions() {
@@ -165,6 +160,10 @@ public class CollisionResults implements Iterable<CollisionResult> {
 
 	public int getInstanceId() {
 		return instanceId;
+	}
+
+	public IgnoreProperties getIgnoreProperties() {
+		return this.ignoreProperties;
 	}
 
 	public boolean isCanSeeCheck() {

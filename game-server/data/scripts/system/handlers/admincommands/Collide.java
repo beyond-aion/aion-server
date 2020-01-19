@@ -43,7 +43,7 @@ public class Collide extends AdminCommand {
 			return;
 		}
 
-		final byte intentions = CollisionIntention.DOOR.getId();
+		final byte intentions = CollisionIntention.PHYSICAL.getId();
 		float x = target.getX();
 		float y = target.getY();
 		float z = target.getZ();
@@ -56,13 +56,13 @@ public class Collide extends AdminCommand {
 		} else {
 			targetX = admin.getX();
 			targetY = admin.getY();
-			targetZ = admin.getZ() + admin.getObjectTemplate().getBoundRadius().getUpper() / 2;
+			targetZ = admin.getZ() + admin.getObjectTemplate().getBoundRadius().getUpper() / 6;
 			sendInfo(admin, "From target towards you:");
 		}
 
 		sendInfo(admin, "Target: X=" + x + "; Y=" + y + "; Z=" + z);
 
-		CollisionResults results = GeoService.getInstance().getCollisions(target, targetX, targetY, targetZ, intentions);
+		CollisionResults results = GeoService.getInstance().getCollisions(target, targetX, targetY, targetZ, intentions, null);
 		CollisionResult closest = results.getClosestCollision();
 
 		if (results.size() == 0) {
@@ -79,7 +79,7 @@ public class Collide extends AdminCommand {
 			sendInfo(admin, "Admin: X=" + admin.getX() + "; Y=" + admin.getY() + "; Z=" + admin.getZ());
 
 			results = GeoService.getInstance().getCollisions(admin, target.getX(), target.getY(),
-				target.getZ() + target.getObjectTemplate().getBoundRadius().getUpper() / 2, intentions);
+				target.getZ() + target.getObjectTemplate().getBoundRadius().getUpper() / 2, intentions, null);
 			closestOpposite = results.getClosestCollision();
 
 			if (results.size() == 0) {

@@ -22,6 +22,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_TOWNS_LIST;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ViAl
@@ -52,6 +53,7 @@ public class Town implements Persistable, L10n {
 		this.persistentState = PersistentState.UPDATED;
 		this.spawnedNpcs = new ArrayList<>();
 		spawnNewObjects();
+		GeoService.getInstance().updateTown(this.race, this.id, this.level);
 	}
 
 	/**
@@ -111,6 +113,7 @@ public class Town implements Persistable, L10n {
 		broadcastUpdate();
 		despawnOldObjects();
 		spawnNewObjects();
+		GeoService.getInstance().updateTown(this.race, this.id, this.level);
 	}
 
 	private void broadcastUpdate() {

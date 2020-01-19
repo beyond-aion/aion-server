@@ -5,6 +5,7 @@ import java.util.Map;
 
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.IActor;
+import com.aionemu.gameserver.geoEngine.scene.DespawnableNode;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -27,6 +28,10 @@ public class SiegeShield implements ZoneHandler {
 
 	public SiegeShield(Spatial geometry) {
 		this.geometry = geometry;
+		if (geometry != null && geometry.getParent() != null && geometry.getParent() instanceof DespawnableNode) {
+			((DespawnableNode) geometry.getParent()).setId(siegeLocationId);
+			((DespawnableNode) geometry.getParent()).setType(DespawnableNode.DespawnableType.SHIELD);
+		}
 	}
 
 	public Spatial getGeometry() {
@@ -62,6 +67,9 @@ public class SiegeShield implements ZoneHandler {
 
 	public void setEnabled(boolean enable) {
 		isEnabled = enable;
+		if (geometry != null && geometry.getParent() != null && geometry.getParent() instanceof DespawnableNode) {
+			((DespawnableNode) geometry.getParent()).setActive(1, enable);
+		}
 	}
 
 	public boolean isEnabled() {
@@ -74,6 +82,9 @@ public class SiegeShield implements ZoneHandler {
 
 	public void setSiegeLocationId(int siegeLocationId) {
 		this.siegeLocationId = siegeLocationId;
+		if (geometry != null && geometry.getParent() != null && geometry.getParent() instanceof DespawnableNode) {
+			((DespawnableNode) geometry.getParent()).setId(siegeLocationId);
+		}
 	}
 
 	@Override

@@ -3,13 +3,8 @@ package com.aionemu.gameserver.geoEngine;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.io.StreamCorruptedException;
 import java.lang.reflect.Method;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.FloatBuffer;
-import java.nio.MappedByteBuffer;
-import java.nio.ShortBuffer;
+import java.nio.*;
 import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.List;
@@ -25,18 +20,14 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Matrix3f;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
-import com.aionemu.gameserver.geoEngine.scene.Geometry;
-import com.aionemu.gameserver.geoEngine.scene.Mesh;
-import com.aionemu.gameserver.geoEngine.scene.Node;
-import com.aionemu.gameserver.geoEngine.scene.Spatial;
-import com.aionemu.gameserver.geoEngine.scene.VertexBuffer;
-import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
+import com.aionemu.gameserver.geoEngine.scene.*;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
 /**
  * @author Mr. Poke, Neon
+ * @update Yeats 13.01.20
  */
 public class GeoWorldLoader {
 
@@ -60,7 +51,7 @@ public class GeoWorldLoader {
 				String name = new String(nameByte).replace('\\', '/').toLowerCase().intern();
 				Node node = new Node(DEBUG ? name : null);
 				byte intentions = 0;
-				byte singleChildMaterialId = -1;
+				int singleChildMaterialId = 0;
 				int modelCount = geo.getShort() & 0xFFFF;
 				for (int c = 0; c < modelCount; c++) {
 					Mesh m = new Mesh();
@@ -78,30 +69,26 @@ public class GeoWorldLoader {
 					for (int x = 0; x < triangles; x++) {
 						indexes.put(geo.getShort());
 					}
-
 					Geometry geom;
-					m.setCollisionFlags(geo.getShort());
-					intentions |= m.getIntentions();
+					m.setMaterialId(geo.get());
+					m.setCollisionIntentions(geo.get());
+					intentions |= m.getCollisionIntentions();
 					m.setBuffer(VertexBuffer.Type.Position, 3, vertices);
 					m.setBuffer(VertexBuffer.Type.Index, 3, indexes);
 					m.createCollisionData();
 
-					if ((m.getIntentions() & CollisionIntention.DOOR.getId()) != 0 && (m.getIntentions() & CollisionIntention.PHYSICAL.getId()) != 0) {
-						geom = new DoorGeometry(name, m);
-					} else {
-						MaterialTemplate mtl = DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId());
-						geom = new Geometry(name, m);
-						if (mtl != null || m.getMaterialId() == 11) {
-							node.setName(name);
-						}
-						if (modelCount == 1)
-							singleChildMaterialId = geom.getMaterialId();
+					MaterialTemplate mtl = DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId());
+					geom = new Geometry(name, m);
+					if (mtl != null || m.getMaterialId() == 11) {
+						node.setName(name);
 					}
+					if (modelCount == 1)
+						singleChildMaterialId = geom.getMaterialId();
+
 					node.attachChild(geom);
 				}
-				node.setCollisionFlags((short) (intentions << 8 | singleChildMaterialId & 0xFF));
-				if (node.getChildren().isEmpty())
-					throw new StreamCorruptedException("Cannot read mesh file \"" + fileName + "\": missing geometry data for " + name);
+				node.setCollisionIntentions(intentions);
+				node.setMaterialId((byte) singleChildMaterialId);
 				geoms.put(name, node);
 			}
 			destroyDirectByteBuffer(geo);
@@ -111,7 +98,6 @@ public class GeoWorldLoader {
 	}
 
 	public static boolean loadWorld(int worldId, Map<String, Node> models, GeoMap map, Set<String> missingMeshes) {
-		Set<String> ignoredMeshes = GeoDataConfig.IGNORED_MESHES.get(worldId);
 		File geoFile = new File(GEO_DIR + worldId + ".geo");
 		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r"); FileChannel roChannel = file.getChannel()) {
 			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, (int) roChannel.size()).load();
@@ -121,17 +107,28 @@ public class GeoWorldLoader {
 			else {
 				int size = geo.getInt();
 				short[] terrainData = new short[size];
+				byte[] terrainMaterials = new byte[size];
 				short z = 0;
+				byte mat;
 				boolean isAllSameZ = true;
+				boolean containsMat = false;
 				for (int i = 0; i < size; i++) {
 					if (z != (z = geo.getShort()) && i > 0)
 						isAllSameZ = false;
 					terrainData[i] = z;
+					mat = geo.get();
+					terrainMaterials[i] = mat;
+					if ((mat & 0xFF) > 0) {
+						containsMat = true;
+					}
 				}
 				if (isAllSameZ)
 					map.setTerrainData(new short[] { z }); // save memory by setting only one z coordinate
 				else
 					map.setTerrainData(terrainData);
+				if (containsMat) {
+					map.setTerrainMaterials(terrainMaterials);
+				}
 			}
 
 			while (geo.hasRemaining()) {
@@ -143,27 +140,30 @@ public class GeoWorldLoader {
 				float[] matrix = new float[9];
 				for (int i = 0; i < 9; i++)
 					matrix[i] = geo.getFloat();
-				float scale = geo.getFloat();
-
-				if (ignoredMeshes != null && ignoredMeshes.contains(name))
-					continue;
-
+				Vector3f scale = new Vector3f(1f, 1f, 1f);
+				scale.setX(geo.getFloat());
+				scale.setY(geo.getFloat());
+				scale.setZ(geo.getFloat());
+				byte type = geo.get();
+				short id = geo.getShort();
+				byte level = geo.get();
 				Matrix3f matrix3f = new Matrix3f();
 				matrix3f.set(matrix);
 				Node node = models.get(name);
 				if (node != null) {
 					try {
-						if ((node.getIntentions() & CollisionIntention.DOOR.getId()) != 0) {
-							for (Spatial door : node.getChildren())
-								attachChild(map, door, matrix3f, loc, scale);
-						} else {
-							if ((node.getIntentions() & CollisionIntention.MOVEABLE.getId()) != 0) // TODO: handle moveable collisions (ships, shugo boxes)
-								continue;
-							Node nodeClone = (Node) attachChild(map, node, matrix3f, loc, scale);
-							List<Spatial> children = nodeClone.getChildren();
-							for (int c = 0; c < children.size(); c++) {
-								createZone(children.get(c), worldId, children.size() == 1 ? 0 : c + 1);
-							}
+						if (type > 0) {
+							DespawnableNode despawnableNode = new DespawnableNode();
+							despawnableNode.copyFrom(node);
+							despawnableNode.type = DespawnableNode.DespawnableType.getTypeWithId(type);
+							despawnableNode.id = id;
+							despawnableNode.level = level;
+							node = despawnableNode;
+						}
+						Node nodeClone = (Node) attachChild(map, node, matrix3f, loc, scale);
+						List<Spatial> children = nodeClone.getChildren();
+						for (int c = 0; c < children.size(); c++) {
+							createZone(children.get(c), worldId, children.size() == 1 ? 0 : c + 1);
 						}
 					} catch (Exception e) {
 						log.error("", e);
@@ -180,7 +180,7 @@ public class GeoWorldLoader {
 		return true;
 	}
 
-	private static Spatial attachChild(GeoMap map, Spatial node, Matrix3f matrix, Vector3f location, float scale) throws CloneNotSupportedException {
+	private static Spatial attachChild(GeoMap map, Spatial node, Matrix3f matrix, Vector3f location, Vector3f scale) throws CloneNotSupportedException {
 		Spatial nodeClone = node.clone();
 		nodeClone.setTransform(matrix, location, scale);
 		nodeClone.updateModelBound();
@@ -189,7 +189,7 @@ public class GeoWorldLoader {
 	}
 
 	private static void createZone(Spatial geometry, int worldId, int childNumber) {
-		if (GeoDataConfig.GEO_MATERIALS_ENABLE && (geometry.getIntentions() & CollisionIntention.MATERIAL.getId()) != 0) {
+		if (GeoDataConfig.GEO_MATERIALS_ENABLE && (geometry.getCollisionIntentions() & CollisionIntention.MATERIAL.getId()) != 0) {
 			int regionId = getVectorHash(geometry.getWorldBound().getCenter());
 			int index = geometry.getName().lastIndexOf('/');
 			int dotIndex = geometry.getName().lastIndexOf('.');

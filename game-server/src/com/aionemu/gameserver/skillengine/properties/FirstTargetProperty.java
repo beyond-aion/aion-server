@@ -134,7 +134,6 @@ public class FirstTargetProperty {
 				break;
 			case POINT:
 				skill.setFirstTarget(skill.getEffector());
-				skill.setFirstTargetRangeCheck(false);
 				return true;
 		}
 

@@ -198,17 +198,13 @@ public abstract class Spatial implements Collidable, Cloneable {
 	 */
 	public abstract int getTriangleCount();
 
-	public byte getMaterialId() {
-		return (byte) (getCollisionFlags() & 0xFF);
-	}
+	public abstract void setCollisionIntentions(byte collisionIntentions);
 
-	public byte getIntentions() {
-		return (byte) (getCollisionFlags() >> 8);
-	}
+	public abstract void setMaterialId(byte materialId);
 
-	public abstract short getCollisionFlags();
+	public abstract byte getCollisionIntentions();
 
-	public abstract void setCollisionFlags(short flags);
+	public abstract int getMaterialId();
 
 	/**
 	 * Note that we are <i>matching</i> the pattern, therefore the pattern must match the entire pattern (i.e. it behaves
@@ -249,10 +245,10 @@ public abstract class Spatial implements Collidable, Cloneable {
 	 */
 	@Override
 	public String toString() {
-		return name + " (" + this.getClass().getSimpleName() + ") use " + CollisionIntention.toString(getIntentions());
+		return name + " (" + this.getClass().getSimpleName() + ") use " + CollisionIntention.toString(getCollisionIntentions());
 	}
 
-	public abstract void setTransform(Matrix3f rotation, Vector3f loc, float scale);
+	public abstract void setTransform(Matrix3f rotation, Vector3f loc, Vector3f scale);
 
 	@Override
 	public Spatial clone() throws CloneNotSupportedException {

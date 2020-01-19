@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,12 +14,17 @@ import com.aionemu.gameserver.geoEngine.bounding.BoundingVolume;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
+import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.geoEngine.math.Ray;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.geoEngine.scene.Geometry;
+import com.aionemu.gameserver.geoEngine.scene.DespawnableNode;
+import com.aionemu.gameserver.geoEngine.scene.DespawnableNode.DespawnableType;
 import com.aionemu.gameserver.geoEngine.scene.Node;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
-import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.house.HouseDoorState;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.spawnengine.SpawnEngine;
 
 /**
  * @author Mr. Poke
@@ -29,60 +32,31 @@ import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 public class GeoMap extends Node {
 
 	private static final Logger log = LoggerFactory.getLogger(GeoMap.class);
-	private static final Set<Integer> loggedWarnings = ConcurrentHashMap.newKeySet();
 	public static final float MAX_Z = 4000;
 	public static final float MIN_Z = 0;
 
 	private short[] terrainData;
+	public byte[] terrainMaterials;
 	private int terrainDataRows, terrainDataCols;
 	private List<BoundingBox> tmpBox = new ArrayList<>();
-	private Map<String, List<DoorGeometry>> doors = new HashMap<>();
+
+	private Map<Integer, DespawnableNode> despawnables = new HashMap<>();
+	private Map<Integer, List<DespawnableNode>> despawnableTownObjects = new HashMap<>();
+	private Map<Integer, DespawnableNode> despawnableHouseDoors = new HashMap<>();
+	private Map<Integer, DespawnableNode[]> despawnableDoors = new HashMap<>();
+	private String mapId = "";
 
 	public GeoMap(String name, int worldSize) {
-		setCollisionFlags((short) (CollisionIntention.ALL.getId() << 8));
+		mapId = name;
+		setCollisionIntentions(CollisionIntention.ALL.getId());
 		for (int x = 0; x < worldSize; x += 256) {
 			for (int y = 0; y < worldSize; y += 256) {
 				Node geoNode = new Node("");
-				geoNode.setCollisionFlags((short) (CollisionIntention.ALL.getId() << 8));
+				geoNode.setCollisionIntentions(CollisionIntention.ALL.getId());
 				tmpBox.add(new BoundingBox(new Vector3f(x, y, MIN_Z), new Vector3f(x + 256, y + 256, MAX_Z)));
 				super.attachChild(geoNode);
 			}
 		}
-	}
-
-	public DoorGeometry getDoor(int worldId, String meshFile, float x, float y, float z) {
-		Vector3f templatePoint = new Vector3f(x, y, z);
-		List<DoorGeometry> doors = this.doors.get(meshFile.toLowerCase());
-		DoorGeometry nearestMatch = null;
-		if (doors != null) {
-			for (DoorGeometry door : doors) {
-				if (door.getWorldBound().intersects(templatePoint))
-					return door;
-			}
-			nearestMatch = findNearestMatch(doors, templatePoint);
-		}
-		String spawnPoint = toTemplateCoords(templatePoint);
-		String doorInfo =  worldId + " " + meshFile + " " + spawnPoint;
-		if (loggedWarnings.add(doorInfo.hashCode())) {
-			if (nearestMatch == null)
-				log.warn("Could not find static door: " + doorInfo);
-			else
-				log.warn("Static door: " + doorInfo + " should spawn at " + toSpawnPoint(nearestMatch.getWorldBound()));
-		}
-		return nearestMatch;
-	}
-
-	private DoorGeometry findNearestMatch(List<DoorGeometry> doors, Vector3f pos) {
-		DoorGeometry nearestMatch = null;
-		float nearestDist = 15;
-		for (DoorGeometry door : doors) {
-			float dist = door.getWorldBound().distanceTo(pos);
-			if (dist < nearestDist) {
-				nearestMatch = door;
-				nearestDist = dist;
-			}
-		}
-		return nearestMatch;
 	}
 
 	private String toTemplateCoords(Vector3f coords) {
@@ -106,10 +80,33 @@ public class GeoMap extends Node {
 	public int attachChild(Spatial child) {
 		int i = 0;
 
-		if (child instanceof DoorGeometry) {
-			int index = child.getName().lastIndexOf('/');
-			String meshFileName = child.getName().substring(index + 1).toLowerCase();
-			doors.computeIfAbsent(meshFileName, (k) -> new ArrayList<>()).add((DoorGeometry) child);
+		if (child instanceof DespawnableNode) {
+			DespawnableNode desp = ((DespawnableNode) child);
+			switch (((DespawnableNode) child).type) {
+				case EVENT: // event object
+					break;
+				case PLACEABLE: // placeable
+					despawnables.put(desp.id, desp);
+					break;
+				case HOUSE: // house
+					break;
+				case HOUSE_DOOR: // house door
+					despawnableHouseDoors.put(desp.id, desp);
+					break;
+				case TOWN_OBJECT: // town object
+					if (!despawnableTownObjects.containsKey(desp.id)) {
+						despawnableTownObjects.put(desp.id, new ArrayList<>());
+					}
+					despawnableTownObjects.get(desp.id).add(desp);
+					break;
+				case DOOR_STATE1: // normal door state 1 (closed)
+				case DOOR_STATE2: // normal door state 2 (opened)
+					if (!despawnableDoors.containsKey(desp.id)) {
+						despawnableDoors.put(desp.id, new DespawnableNode[2]);
+					}
+					despawnableDoors.get(desp.id)[desp.type.id - DespawnableType.DOOR_STATE1.id] = desp;
+					break;
+			}
 		}
 
 		for (Spatial spatial : getChildren()) {
@@ -128,6 +125,10 @@ public class GeoMap extends Node {
 	public void setTerrainData(short[] terrainData) {
 		this.terrainData = terrainData;
 		terrainDataRows = terrainDataCols = (int) Math.sqrt(terrainData.length);
+	}
+
+	public void setTerrainMaterials(byte[] terrainMaterials) {
+		this.terrainMaterials = terrainMaterials;
 	}
 
 	/**
@@ -161,11 +162,11 @@ public class GeoMap extends Node {
 	}
 
 	public Vector3f getClosestCollision(float x, float y, float z, float targetX, float targetY, float targetZ, boolean atNearGroundZ, int instanceId,
-		byte intentions) {
+		byte intentions, IgnoreProperties ignoreProperties) {
 		int zOffset = 1; // check for collisions 1m above input z
 		float collisionOffset = 0.5f; // collision points will be 0.5m in front of the real contact
 		Vector3f origin = new Vector3f(x, y, z + zOffset);
-		CollisionResult closestCollision = getCollisions(origin, targetX, targetY, targetZ + zOffset, instanceId, intentions).getClosestCollision();
+		CollisionResult closestCollision = getCollisions(origin, targetX, targetY, targetZ + zOffset, instanceId, intentions, ignoreProperties).getClosestCollision();
 		if (closestCollision == null) {
 			Vector3f end = new Vector3f(targetX, targetY, targetZ);
 			if (atNearGroundZ) {
@@ -182,23 +183,23 @@ public class GeoMap extends Node {
 			Vector3f direction = contactPoint.subtract(origin).normalize();
 			contactPoint.subtractLocal(direction.multLocal(collisionOffset)); // set contact point back for proper ground calculation
 			float geoZ = getZ(contactPoint.x, contactPoint.y, contactPoint.z, contactPoint.z - 3, instanceId);
-			if (!Float.isNaN(geoZ))
+			if (!Float.isNaN(geoZ)) {
 				contactPoint.z = geoZ;
-			else
+			} else {
 				contactPoint.z -= zOffset;
+			}
 		} else {
 			contactPoint.z -= zOffset;
 		}
-
 		return contactPoint;
 	}
 
-	public CollisionResults getCollisions(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId, byte intentions) {
-		return getCollisions(new Vector3f(x, y, z), targetX, targetY, targetZ, instanceId, intentions);
+	public CollisionResults getCollisions(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId, byte intentions, IgnoreProperties ignoreProperties) {
+		return getCollisions(new Vector3f(x, y, z), targetX, targetY, targetZ, instanceId, intentions, ignoreProperties);
 	}
 
-	private CollisionResults getCollisions(Vector3f origin, float targetX, float targetY, float targetZ, int instanceId, byte intentions) {
-		CollisionResults results = new CollisionResults(intentions, instanceId);
+	private CollisionResults getCollisions(Vector3f origin, float targetX, float targetY, float targetZ, int instanceId, byte intentions, IgnoreProperties ignoreProperties) {
+		CollisionResults results = new CollisionResults(intentions, instanceId, ignoreProperties);
 		Vector3f target = new Vector3f(targetX, targetY, targetZ);
 		float limit = origin.distance(target);
 		target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
@@ -224,8 +225,9 @@ public class GeoMap extends Node {
 			float distanceFactor = curDistance / ray.getLimit();
 			float curX = x + distanceX * distanceFactor;
 			float curY = y + distanceY * distanceFactor;
-			if (terrainCollision(curX, curY, ray, p1, p2, p3, p4, result))
+			if (terrainCollision(curX, curY, ray, p1, p2, p3, p4, result)) {
 				return result;
+			}
 		}
 		return null;
 	}
@@ -242,7 +244,7 @@ public class GeoMap extends Node {
 		int z1y = (int) (y / 2f);
 		float z1, z2, z3, z4;
 		if (terrainData.length == 1) {
-			z1 = z2 = z3 = z4 = terrainData[0] / 32f;
+			z1 = z2 = z3 = z4 = terrainData[0] == Short.MIN_VALUE ? Float.NaN : (terrainData[0] / 32f);
 		} else {
 			if (isOutsideValidBounds(z1x, z1y))
 				return false;
@@ -250,10 +252,10 @@ public class GeoMap extends Node {
 			int z3Index = z1y + ((z1x + 1) * terrainDataRows);
 			if (z3Index + 1 >= terrainData.length)
 				return false;
-			z1 = terrainData[z1Index] / 32f;
-			z2 = terrainData[z1Index + 1] / 32f;
-			z3 = terrainData[z3Index] / 32f;
-			z4 = terrainData[z3Index + 1] / 32f;
+			z1 = terrainData[z1Index] == Short.MIN_VALUE ? Float.NaN : (terrainData[z1Index] / 32f);
+			z2 = terrainData[z1Index + 1] == Short.MIN_VALUE ? Float.NaN : (terrainData[z1Index + 1] / 32f);
+			z3 = terrainData[z3Index] == Short.MIN_VALUE ? Float.NaN : (terrainData[z3Index] / 32f);
+			z4 = terrainData[z3Index + 1] == Short.MIN_VALUE ? Float.NaN : (terrainData[z3Index + 1] / 32f);
 		}
 		int xMin = z1x * 2; // x coord for z1 & z2 (top of the rectangle)
 		float xMax = xMin + 2; // x coord for z3 & z4 (bottom of the rectangle)
@@ -265,16 +267,20 @@ public class GeoMap extends Node {
 			// the old and new rectangle
 			if (overlappingPoint != null) {
 				if (p1 == overlappingPoint) { // old p1 overlaps with new p4
-					if (ray.intersectWhere(p1, p2, new Vector3f(xMin, yMax, z2), result) || ray.intersectWhere(p1, p3, new Vector3f(xMax, yMin, z3), result))
+					if (!Float.isNaN(z2) && ray.intersectWhere(p1, p2, new Vector3f(xMin, yMax, z2), result) ||
+							!Float.isNaN(z3) && ray.intersectWhere(p1, p3, new Vector3f(xMax, yMin, z3), result))
 						return true;
 				} else if (p2 == overlappingPoint) { // old p2 overlaps with new p3
-					if (ray.intersectWhere(p2, p1, new Vector3f(xMin, yMin, z1), result) || ray.intersectWhere(p2, p4, new Vector3f(xMax, yMax, z4), result))
+					if (!Float.isNaN(z1) && ray.intersectWhere(p2, p1, new Vector3f(xMin, yMin, z1), result) ||
+							!Float.isNaN(z4) && ray.intersectWhere(p2, p4, new Vector3f(xMax, yMax, z4), result))
 						return true;
 				} else if (p3 == overlappingPoint) { // old p3 overlaps with new p2
-					if (ray.intersectWhere(p3, p1, new Vector3f(xMin, yMin, z1), result) || ray.intersectWhere(p3, p4, new Vector3f(xMax, yMax, z4), result))
+					if (!Float.isNaN(z1) && ray.intersectWhere(p3, p1, new Vector3f(xMin, yMin, z1), result) ||
+							!Float.isNaN(z4) && ray.intersectWhere(p3, p4, new Vector3f(xMax, yMax, z4), result))
 						return true;
 				} else if (p4 == overlappingPoint) { // old p4 overlaps with new p1
-					if (ray.intersectWhere(p4, p2, new Vector3f(xMin, yMax, z2), result) || ray.intersectWhere(p4, p3, new Vector3f(xMax, yMin, z3), result))
+					if (!Float.isNaN(z2) && ray.intersectWhere(p4, p2, new Vector3f(xMin, yMax, z2), result) ||
+							!Float.isNaN(z3) && ray.intersectWhere(p4, p3, new Vector3f(xMax, yMin, z3), result))
 						return true;
 				}
 			}
@@ -283,7 +289,12 @@ public class GeoMap extends Node {
 		p2.set(xMin, yMax, z2);
 		p3.set(xMax, yMin, z3);
 		p4.set(xMax, yMax, z4);
-		return ray.intersectWhere(p1, p2, p3, result) || ray.intersectWhere(p4, p2, p3, result); // test if ray intersects the triangle parts of our rectangle
+		if (!Float.isNaN(z2) && !Float.isNaN(z3)) {
+			return (!Float.isNaN(z1) && ray.intersectWhere(p1, p2, p3, result) ||
+					!Float.isNaN(z4) && ray.intersectWhere(p4, p2, p3, result));
+		} else {
+			return false;
+		}
 	}
 
 	private boolean isOutsideValidBounds(int x, int y) {
@@ -333,7 +344,7 @@ public class GeoMap extends Node {
 		return singleMatch;
 	}
 
-	public boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, Geometry targetGeometry, int instanceId) {
+	public boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId, IgnoreProperties ignoreProperties) {
 		Vector3f origin = new Vector3f(x, y, z);
 		Vector3f target = new Vector3f(targetX, targetY, targetZ);
 		float distance = origin.distance(target);
@@ -353,8 +364,7 @@ public class GeoMap extends Node {
 			if (terrainCollision(curX, curY, ray, p1, p2, p3, p4))
 				return false;
 		}
-		CollisionResults results = new CollisionResults(CollisionIntention.DEFAULT_COLLISIONS.getId(), instanceId, true, targetGeometry);
-		results.setCanSeeCheck(true);
+		CollisionResults results = new CollisionResults(CollisionIntention.DEFAULT_COLLISIONS.getId(), instanceId, true, ignoreProperties);
 		return collideWith(ray, results) == 0;
 	}
 
@@ -364,5 +374,135 @@ public class GeoMap extends Node {
 			getChildren().removeIf(s -> s instanceof Node && ((Node) s).getChildren().isEmpty());
 		}
 		super.updateModelBound();
+	}
+
+	public void spawnPlaceableObject(int instanceId, int staticId) {
+		DespawnableNode node = despawnables.get(staticId);
+		if (node != null) {
+			node.setActive(instanceId, true);
+		}
+	}
+
+	public void despawnPlaceableObject(int instanceId, int staticId) {
+		DespawnableNode node = despawnables.get(staticId);
+		if (node != null) {
+			node.setActive(instanceId, false);
+		}
+	}
+
+	public void updateTownToLevel(int townId, int level) {
+		if (despawnableTownObjects.containsKey(townId) && !despawnableTownObjects.get(townId).isEmpty()) {
+			for (DespawnableNode despawnableNode : despawnableTownObjects.get(townId)) {
+				despawnableNode.setActive(1, despawnableNode.level == (byte) level);
+			}
+		}
+	}
+
+	public void setHouseDoorState(int instanceId, int houseAddress, HouseDoorState state) {
+		if (despawnableHouseDoors.containsKey(houseAddress)) {
+			switch (state) {
+				case OPEN:
+					despawnableHouseDoors.get(houseAddress).setActive(instanceId, false);
+					break;
+				case CLOSED:
+				case CLOSED_EXCEPT_FRIENDS:
+					despawnableHouseDoors.get(houseAddress).setActive(instanceId, true);
+					break;
+			}
+		}
+	}
+
+	public void setDoorState(int instanceId, int doorId, boolean open) {
+		if (despawnableDoors.containsKey(doorId)) {
+			DespawnableNode[] doors = despawnableDoors.get(doorId);
+			if (doors[0] != null) {
+				doors[0].setActive(instanceId, !open);
+			} else {
+				log.warn("door state 1 not available for door: " + doorId + " in " + mapId + " instance: " + instanceId);
+			}
+			if (doors[1] != null) {
+				doors[1].setActive(instanceId, open);
+			} else {
+				log.warn("door state 2 not available for door: " + doorId + " in " + mapId + " instance: " + instanceId);
+			}
+		} else {
+			log.warn("No geometry found for door: " + doorId + " in world: " + mapId);
+		}
+	}
+
+	public boolean hasTerrainMaterials() {
+		return terrainMaterials != null;
+	}
+
+	/**
+	 * @return The terrain materialId at position x, y if no obstacle is in between, otherwise 0
+	 */
+	public int getTerrainMaterialAt(float x, float y, float z, int instanceId) {
+		int mat1x = (int) (x / 2f);
+		int mat1y = (int) (y / 2f);
+		if (isOutsideValidBounds(mat1x, mat1y))
+			return 0;
+		int width = (int) Math.sqrt(terrainMaterials.length);
+		int mat1Index = mat1y + (mat1x * width);
+		int mat3Index = mat1y + ((mat1x + 1) * width);
+		int matId = 0;
+		// check whether triangle points p1, p2, p3 have materials assigned
+		if (terrainMaterials[mat1Index] != 0 && terrainMaterials[mat1Index] == terrainMaterials[mat1Index + 1]  && terrainMaterials[mat1Index]  == terrainMaterials[mat3Index]) {
+			if (isLeft((mat1x * 2) + 2, mat1y * 2, mat1x * 2, (mat1y * 2) + 2, x, y)) { // check if x, y is in triangle
+				matId = terrainMaterials[mat1Index] & 0xFF;
+			}
+		}
+		if (matId == 0 && (mat3Index + 1) < terrainMaterials.length && terrainMaterials[mat3Index + 1] != 0 && terrainMaterials[mat3Index + 1] == terrainMaterials[mat3Index] && terrainMaterials[mat3Index + 1] == terrainMaterials[mat1Index + 1]) { // check whether triangle points p2, p3, p4 have materials assigned
+			if (!isLeft((mat1x * 2) + 2, mat1y * 2, mat1x * 2, (mat1y * 2) + 2, x, y)) { // check if x, y is in triangle
+				matId = terrainMaterials[mat3Index + 1] & 0xFF;
+			}
+		}
+
+		if (matId > 0) {
+			CollisionResults results = new CollisionResults(CollisionIntention.PHYSICAL.getId(), instanceId);
+			float zMax = z + 1;
+			float zMin = z - 1;
+			Vector3f origin = new Vector3f(x, y, zMax);
+			Vector3f target = new Vector3f(x, y, zMin);
+			target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
+			Ray r = new Ray(origin, target);
+			r.setLimit(zMax - zMin);
+			Vector3f terrain = null;
+			if (terrainData.length == 1) {
+				if (terrainData[0] != 0)
+					terrain = new Vector3f(x, y, terrainData[0] / 32f);
+			} else {
+				Vector3f result = new Vector3f();
+				if (terrainCollision(x, y, r, new Vector3f(), new Vector3f(), new Vector3f(), new Vector3f(), result))
+					terrain = result;
+			}
+			if (terrain != null && terrain.z >= zMin && terrain.z <= zMax) {
+				CollisionResult result = new CollisionResult(terrain, zMax - terrain.z);
+				results.addCollision(result);
+				collideWith(r, results);
+				if (results.getClosestCollision().equals(result)) {
+					return matId;
+				}
+			}
+			matId = 0;
+		}
+		return matId;
+	}
+
+	public List<Node> getGeometries(String name) {
+		List<Node> matchingGeometries = new ArrayList<>();
+		for (Spatial child : children) {
+			if (child instanceof Node) {
+				matchingGeometries.addAll(((Node)child).getGeometries(name));
+			}
+		}
+		return matchingGeometries;
+	}
+
+	/**
+	 * @return True if (targetX, targetY) is left of the line made by (startX, startY) -> (endX, endY)
+	 */
+	private boolean isLeft(float startX, float startY, float endX, float endY, float targetX, float targetY){
+		return ((endX - startX)*(targetY - startY) - (endY - startY)*(targetX - startX)) > 0;
 	}
 }

@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
 
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.world.WorldPosition;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -71,7 +73,15 @@ public class ShieldService {
 	}
 
 	public ActionObserver createShieldObserver(SiegeShield geoShield, Creature observed) {
-		return GeoDataConfig.GEO_SHIELDS_ENABLE ? new CollisionDieActor(observed, geoShield.getGeometry()) : null;
+		if (GeoDataConfig.GEO_SHIELDS_ENABLE) {
+			if (observed instanceof Player) {
+				WorldPosition lastClientPos = ((Player) observed).getMoveController().getLastPositionFromClient();
+				if (lastClientPos != null) {
+					return new CollisionDieActor(observed, geoShield.getGeometry(), new Vector3f(lastClientPos.getX(), lastClientPos.getY(), lastClientPos.getZ()));
+				}
+			}
+		}
+		return null;
 	}
 
 	/**

@@ -35,39 +35,25 @@ package com.aionemu.gameserver.geoEngine.collision;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.Geometry;
 
+import java.util.Objects;
+
 /**
  * @author Kirill
  */
 public class CollisionResult implements Comparable<CollisionResult> {
 
+	private final Vector3f contactPoint;
+	private final float distance;
 	private Geometry geometry;
-	private Vector3f contactPoint;
-	private float distance;
 
 	public CollisionResult(Vector3f contactPoint, float distance) {
 		this.contactPoint = contactPoint;
 		this.distance = distance;
 	}
 
-	public CollisionResult() {
-	}
-
-	public void setContactPoint(Vector3f point) {
-		this.contactPoint = point;
-	}
-
-	public void setDistance(float dist) {
-		this.distance = dist;
-	}
-
 	@Override
 	public int compareTo(CollisionResult other) {
-		if (distance < other.distance)
-			return -1;
-		else if (distance > other.distance)
-			return 1;
-		else
-			return 0;
+		return Float.compare(distance, other.distance);
 	}
 
 	public void setGeometry(Geometry geom) {
@@ -86,4 +72,18 @@ public class CollisionResult implements Comparable<CollisionResult> {
 		return distance;
 	}
 
+	@Override
+	public boolean equals(Object obj) {
+		if (!(obj instanceof CollisionResult)) {
+			return false;
+		}
+		if (this == obj) {
+			return true;
+		}
+
+		if (distance != ((CollisionResult) obj).distance || !contactPoint.equals(((CollisionResult) obj).contactPoint)) {
+			return false;
+		}
+		return Objects.equals(geometry.getName(), ((CollisionResult) obj).getGeometry().getName());
+	}
 }

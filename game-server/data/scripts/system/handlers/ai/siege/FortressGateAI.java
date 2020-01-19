@@ -53,22 +53,4 @@ public class FortressGateAI extends NpcAI {
 				return super.ask(question);
 		}
 	}
-
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		getOwner().setDoorState(getOwner().getInstanceId(), false);
-	}
-
-	@Override
-	protected void handleDied() {
-		super.handleDied();
-		getOwner().setDoorState(getOwner().getInstanceId(), true);
-	}
-
-	@Override
-	protected void handleDespawned() {
-		super.handleDespawned();
-		getOwner().setDoorState(getOwner().getInstanceId(), true);
-	}
 }

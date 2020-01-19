@@ -2,7 +2,6 @@ package com.aionemu.gameserver.skillengine.model;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -22,9 +21,6 @@ import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
-import com.aionemu.gameserver.geoEngine.math.Ray;
-import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -34,15 +30,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.model.templates.BoundRadius;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CASTSPELL;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CASTSPELL_RESULT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
@@ -62,7 +51,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
@@ -802,19 +790,7 @@ public class Skill {
 			switch (targetType) {
 				case 0: // PlayerObjectId as Target
 				case 3: // Target not in sight?
-					boolean shouldSetPlayerEffectorAsTemporaryTarget = shouldSetPlayerEffectorAsTemporaryTarget(effects);
-					VisibleObject oldTarget = effector.getTarget();
-					if (shouldSetPlayerEffectorAsTemporaryTarget) {
-						effector.setTarget(effector);
-						PacketSendUtility.sendPacket((Player) effector, new SM_TARGET_SELECTED(effector));
-					}
 					PacketSendUtility.broadcastPacketAndReceive(effector, new SM_CASTSPELL_RESULT(this, effects, serverTime, chainSuccess, dashStatus), et);
-					if (shouldSetPlayerEffectorAsTemporaryTarget) {
-						ThreadPoolManager.getInstance().schedule(() -> {
-							effector.setTarget(oldTarget);
-							PacketSendUtility.sendPacket((Player) effector, new SM_TARGET_SELECTED(oldTarget));
-						}, 150);
-					}
 					break;
 				case 1: // XYZ as Target
 					PacketSendUtility.broadcastPacketAndReceive(effector,
@@ -832,46 +808,6 @@ public class Skill {
 			if (effector instanceof Player)
 				PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_USE_ITEM(getItemTemplate().getL10n()));
 		}
-	}
-
-	/**
-	 * If the player has some target selected and receives SM_CASTSPELL_RESULT for a movement skill, it triggers a special logic inside the client:
-	 * If the player would move through a door with this skill (based on coords sent in SM_CASTSPELL_RESULT), the client decides instead to move to his
-	 * target's position.
-	 * We use this mechanic to make the client think he is targeting himself during movement skills. The result is, that the player cannot move through
-	 * the closed door with this skill because the client will instead use his own position as the target location as explained above.
-	 * 
-	 * @return True if the skill is a position changing skill casted by a player, such as Blind Leap, and the player is not targeting himself.
-	 */
-	private boolean shouldSetPlayerEffectorAsTemporaryTarget(List<Effect> effects) {
-		if (x == 0) // no target position to move to
-			return false;
-		if (!(effector instanceof Player))
-			return false;
-		if (effector.equals(effector.getTarget()))
-			return false;
-		if (effects.stream().noneMatch(effect -> effect.getDashStatus() != DashStatus.NONE)) // DashStatus != NONE means it's a movement skill
-			return false;
-		List<VisibleObject> staticObjects = effector.getKnownList().getKnownObjects().values().stream()
-			.filter(object -> object.getSpawn() != null && object.getSpawn().getStaticId() != 0).collect(Collectors.toList());
-		if (staticObjects.stream().noneMatch(this::isBetweenEffectorAndTargetPosition)) // no nearby obstacles
-			return false;
-		return true;
-	}
-
-	private boolean isBetweenEffectorAndTargetPosition(VisibleObject object) {
-		// get last known position before applyEffect updated pos to this skills target position
-		WorldPosition lastPositionFromClient = ((Player) effector).getMoveController().getLastPositionFromClient();
-		Vector3f origin = new Vector3f(lastPositionFromClient.getX(), lastPositionFromClient.getY(), lastPositionFromClient.getZ() + 1);
-		Vector3f dir = new Vector3f(x, y, z + 1);
-		if (!PositionUtil.isInRange(object, origin.getX(), origin.getY(), origin.getZ(), origin.distance(dir)))
-			return false;
-		BoundRadius boundRadius = object.getObjectTemplate().getBoundRadius();
-		float xyExtent = Math.max(boundRadius.getFront(), boundRadius.getSide()) + 0.5f; // these values are very imprecise so we assume worst
-		float zExtent = boundRadius.getUpper() / 2;
-		BoundingBox box = new BoundingBox(new Vector3f(object.getX(), object.getY(), object.getZ() + zExtent), xyExtent, xyExtent, zExtent + 0.5f);
-		dir.subtractLocal(origin).normalizeLocal();
-		return box.intersects(new Ray(origin, dir));
 	}
 
 	/**

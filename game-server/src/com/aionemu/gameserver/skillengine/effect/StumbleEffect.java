@@ -4,6 +4,7 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -31,7 +32,7 @@ public class StumbleEffect extends EffectTemplate {
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
 		float x1 = (float) (Math.cos(radian) * 1.3f);
 		float y1 = (float) (Math.sin(radian) * 1.3f);
-		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ());
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ(), IgnoreProperties.of(effector.getRace()));
 		effect.setTargetLoc(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 		effect.addToEffectedController();
 	}

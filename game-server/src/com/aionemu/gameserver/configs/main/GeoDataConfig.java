@@ -1,9 +1,5 @@
 package com.aionemu.gameserver.configs.main;
 
-import java.util.Map;
-import java.util.Set;
-
-import com.aionemu.commons.configuration.Properties;
 import com.aionemu.commons.configuration.Property;
 
 public class GeoDataConfig {
@@ -56,6 +52,4 @@ public class GeoDataConfig {
 	@Property(key = "gameserver.geodata.doors.enable", defaultValue = "true")
 	public static boolean GEO_DOORS_ENABLE;
 
-	@Properties(keyPattern = "^gameserver\\.geodata\\.ignored_meshes\\.(\\d+)$")
-	public static Map<Integer, Set<String>> IGNORED_MESHES;
 }

@@ -3,13 +3,10 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedQueue;
 
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.movement.NpcMoveController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.loadingutils.adapters.NpcEquipmentList;
-import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
@@ -21,14 +18,8 @@ import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.model.stats.container.NpcGameStats;
 import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
-import com.aionemu.gameserver.model.templates.npc.GroupDropType;
-import com.aionemu.gameserver.model.templates.npc.NpcRank;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
+import com.aionemu.gameserver.model.templates.npc.*;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
 import com.aionemu.gameserver.services.TribeRelationService;
@@ -37,15 +28,13 @@ import com.aionemu.gameserver.spawnengine.WalkerGroupShift;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldPosition;
-import com.aionemu.gameserver.world.geo.GeoDoor;
-import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * This class is a base class for all in-game NPCs, what includes: monsters and npcs that player can talk to (aka Citizens)
  * 
  * @author Luno
  */
-public class Npc extends Creature implements GeoDoor {
+public class Npc extends Creature {
 
 	private WalkerGroup walkerGroup;
 	private NpcSkillList skillList;
@@ -57,7 +46,6 @@ public class Npc extends Creature implements GeoDoor {
 	private CreatureType type = null;
 	private ItemAttackType attacktype = ItemAttackType.PHYSICAL;
 	private NpcEquippedGear overridenEquipment;
-	private final DoorGeometry doorGeometry;
 
 	public Npc(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
 		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
@@ -67,22 +55,6 @@ public class Npc extends Creature implements GeoDoor {
 		skillList = new NpcSkillList(this);
 		queuedSkills = new ConcurrentLinkedQueue<>();
 		setupStatContainers();
-		String meshFileName = getDoorMeshFileName();
-		if (meshFileName != null)
-			doorGeometry = GeoService.getInstance().getDoor(getSpawn().getWorldId(), meshFileName, getSpawn().getX(), getSpawn().getY(), getSpawn().getZ());
-		else {
-			doorGeometry = null;
-			if (getAi().getName().equals("fortressgate"))
-				LoggerFactory.getLogger(getClass()).warn("Could not find static door mesh file name for " + this);
-		}
-	}
-
-	private String getDoorMeshFileName() {
-		int staticId = getSpawn().getStaticId();
-		if (staticId == 0)
-			return null;
-		StaticDoorTemplate staticDoor = DataManager.STATICDOOR_DATA.getStaticDoor(getSpawn().getWorldId(), staticId);
-		return staticDoor == null ? null : staticDoor.getMeshFile();
 	}
 
 	@Override
@@ -399,10 +371,5 @@ public class Npc extends Creature implements GeoDoor {
 		if (overridenEquipment != null)
 			return overridenEquipment;
 		return getObjectTemplate().getEquipment();
-	}
-
-	@Override
-	public DoorGeometry getGeometry() {
-		return doorGeometry;
 	}
 }

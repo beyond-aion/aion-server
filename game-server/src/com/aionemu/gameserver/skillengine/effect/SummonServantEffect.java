@@ -7,6 +7,9 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.NpcObjectType;
@@ -18,6 +21,7 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ATracer
@@ -42,6 +46,12 @@ public class SummonServantEffect extends SummonEffect {
 		if (effect.getEffected() == null && effect.getSkillTemplate().getProperties().getFirstTarget() != FirstTargetAttribute.POINT)
 			throw new IllegalArgumentException("Servant " + npcId + "cannot be spawned by " + effector + " (target: null)");
 
+		if (GeoDataConfig.GEO_ENABLE) {
+			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, x, y, z, IgnoreProperties.of(effector.getRace()));
+			x = closestCollision.x;
+			y = closestCollision.y;
+			z = closestCollision.z;
+		}
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(effector.getWorldId(), npcId, x, y, z, effector.getHeading());
 		final Servant servant = VisibleObjectSpawner.spawnServant(spawn, effector.getInstanceId(), effector, effect.getSkillLevel(), npcObjectType);
 

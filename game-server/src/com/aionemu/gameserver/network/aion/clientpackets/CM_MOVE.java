@@ -91,6 +91,7 @@ public class CM_MOVE extends AionClientPacket {
 				m.setNewDirection(x2, y2, z2, heading);
 				if ((type & MovementMask.ABSOLUTE) == MovementMask.ABSOLUTE) {
 					if (player.isInCustomState(CustomPlayerState.TELEPORTATION_MODE)) {
+						player.getMoveController().setIsJumping(false);
 						World.getInstance().updatePosition(player, x2, y2, z2, heading);
 						m.onMoveFromClient();
 						PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player), true);
@@ -118,13 +119,22 @@ public class CM_MOVE extends AionClientPacket {
 			}
 		}
 
-		if (!AntiHackService.canMove(player, x, y, z, type))
+		if (!AntiHackService.canMove(player, x, y, z, type)) {
+			player.getMoveController().setIsJumping(false);
 			return;
+		}
 
 		if (!player.isSpawned()) // should be checked as late as possible, to prevent false warnings from World.updatePosition
 			return;
 		if (player.isProtectionActive() && (player.getX() != x || player.getY() != y || player.getZ() > z + 0.5f))
 			player.getController().stopProtectionActiveTask();
+		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL
+				&& (type & MovementMask.ABSOLUTE) != MovementMask.ABSOLUTE && (type & MovementMask.GLIDE) != MovementMask.GLIDE
+				&& (type & MovementMask.VEHICLE) != MovementMask.VEHICLE && z2 > z) {
+			player.getMoveController().setIsJumping(true);
+		} else {
+			player.getMoveController().setIsJumping(false);
+		}
 		World.getInstance().updatePosition(player, x, y, z, heading);
 		m.onMoveFromClient();
 		notifyControllers(player, oldMask);

@@ -11,7 +11,7 @@ public class WorldBoundCollisionResults extends CollisionResults {
 	private CollisionResult boxCenterPlaneCollision;
 
 	public WorldBoundCollisionResults(CollisionResults parent, BoundingVolume worldBound) {
-		super(parent.getIntentions(), parent.getInstanceId(), parent.isOnlyFirst(), parent.getIgnoredGeometry());
+		super(parent.getIntentions(), parent.getInstanceId(), parent.isOnlyFirst());
 		setCanSeeCheck(parent.isCanSeeCheck());
 		isIncludeWorldBoundCollision = worldBound.isTreeCollidable();
 	}

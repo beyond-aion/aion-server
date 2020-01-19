@@ -2,6 +2,7 @@ package com.aionemu.gameserver.controllers.movement;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.aionemu.gameserver.controllers.observer.TerrainZoneCollisionMaterialActor;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
@@ -12,6 +13,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public abstract class CreatureMoveController<T extends VisibleObject> {
 
+	private TerrainZoneCollisionMaterialActor actor;
 	public static final float MOVE_CHECK_OFFSET = 0.1f;
 	protected T owner;
 	protected byte heading;
@@ -23,9 +25,12 @@ public abstract class CreatureMoveController<T extends VisibleObject> {
 	protected float targetDestX;
 	protected float targetDestY;
 	protected float targetDestZ;
+	private boolean isJumping = false;
 
 	public CreatureMoveController(T owner) {
 		this.owner = owner;
+		actor = new TerrainZoneCollisionMaterialActor((Creature) owner);
+		((Creature) owner).getObserveController().addObserver(actor);
 	}
 
 	public void moveToDestination() {
@@ -85,7 +90,11 @@ public abstract class CreatureMoveController<T extends VisibleObject> {
 	}
 
 	public boolean isJumping() {
-		return false;
+		return isJumping;
+	}
+
+	public void setIsJumping(boolean isJumping) {
+		this.isJumping = isJumping;
 	}
 
 	public boolean isInMove() {
@@ -95,5 +104,4 @@ public abstract class CreatureMoveController<T extends VisibleObject> {
 	public void setInMove(boolean value) {
 		isInMove = value;
 	}
-
 }

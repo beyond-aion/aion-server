@@ -4,6 +4,7 @@ import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -22,8 +23,15 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class CollisionDieActor extends AbstractCollisionObserver implements IActor {
 
-	public CollisionDieActor(Creature creature, Spatial geometry) {
-		super(creature, geometry, CollisionIntention.MATERIAL.getId(), CheckType.PASS);
+	private boolean checkFort;
+
+	public CollisionDieActor(Creature creature, Spatial geometry, Vector3f initialPosition) {
+		this(creature, geometry, true, initialPosition);
+	}
+
+	public CollisionDieActor(Creature creature, Spatial geometry, boolean checkFort, Vector3f initialPosition) {
+		super(creature, geometry, CollisionIntention.MATERIAL.getId(), CheckType.PASS, initialPosition);
+		this.checkFort = checkFort;
 	}
 
 	@Override
@@ -36,9 +44,13 @@ public class CollisionDieActor extends AbstractCollisionObserver implements IAct
 					PacketSendUtility.sendMessage(player, "Entered " + result.getGeometry().getName());
 				}
 			}
-			FortressLocation fortress = SiegeService.getInstance().findFortress(creature.getWorldId(), creature.getX(), creature.getY(), creature.getZ());
-			if (fortress != null && fortress.isUnderShield() && fortress.getRace() != SiegeRace.getByRace(creature.getRace()))
+			if (checkFort) {
+				FortressLocation fortress = SiegeService.getInstance().findFortress(creature.getWorldId(), creature.getX(), creature.getY(), creature.getZ());
+				if (fortress != null && fortress.isUnderShield() && fortress.getRace() != SiegeRace.getByRace(creature.getRace()))
+					act();
+			} else {
 				act();
+			}
 		}
 	}
 
@@ -48,16 +60,6 @@ public class CollisionDieActor extends AbstractCollisionObserver implements IAct
 			return;
 		creature.getController().die();
 		creature.getController().onStopMove();
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (creature instanceof Player) {
-				Kisk kisk = ((Player) creature).getKisk();
-				if (kisk != null && kisk.isActive())
-					PlayerReviveService.kiskRevive((Player) creature);
-				else
-					PlayerReviveService.bindRevive((Player) creature);
-				PacketSendUtility.sendPacket((Player) creature, new SM_EMOTION(creature, EmotionType.RESURRECT)); // send to remove res option window
-			}
-		}, 2850);
 	}
 
 	@Override

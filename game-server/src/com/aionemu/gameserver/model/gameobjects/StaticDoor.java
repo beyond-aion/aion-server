@@ -3,34 +3,25 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.util.EnumSet;
 
 import com.aionemu.gameserver.controllers.StaticObjectController;
-import com.aionemu.gameserver.geoEngine.scene.mesh.DoorGeometry;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorState;
 import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.geo.GeoDoor;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author MrPoke, Rolandas
  */
-public class StaticDoor extends StaticObject implements GeoDoor {
+public class StaticDoor extends StaticObject {
 
 	private EnumSet<StaticDoorState> states;
-	private DoorGeometry door;
 	private boolean isLocked = true;
 
 	public StaticDoor(int objectId, StaticObjectController controller, SpawnTemplate spawnTemplate, StaticDoorTemplate objectTemplate, int instanceId) {
 		super(objectId, controller, spawnTemplate, objectTemplate);
 		states = EnumSet.copyOf(getObjectTemplate().getInitialStates());
-		if (objectTemplate.getMeshFile() != null) {
-			door = GeoService.getInstance().getDoor(spawnTemplate.getWorldId(), objectTemplate.getMeshFile(), objectTemplate.getX(), objectTemplate.getY(),
-				objectTemplate.getZ());
-		}
-		setDoorState(instanceId, isOpen());
-
 		if (objectTemplate.getKeyId() < 2) {
 			isLocked = false;
 		}
@@ -67,14 +58,15 @@ public class StaticDoor extends StaticObject implements GeoDoor {
 			states.remove(StaticDoorState.CLICKABLE);
 			states.add(StaticDoorState.OPENED); // 1001
 			packetState = 0x9;
+			GeoService.getInstance().setDoorState(getWorldId(), getInstanceId(), getSpawn().getStaticId(), true);
 		} else {
 			emotion = EmotionType.CLOSE_DOOR;
 			if (getObjectTemplate().getInitialStates().contains(StaticDoorState.CLICKABLE))
 				states.add(StaticDoorState.CLICKABLE);
 			states.remove(StaticDoorState.OPENED); // 1010
 			packetState = 0xA;
+			GeoService.getInstance().setDoorState(getWorldId(), getInstanceId(), this.getSpawn().getStaticId(), false);
 		}
-		setDoorState(getInstanceId(), open);
 		// int stateFlags = StaticDoorState.getFlags(states);
 		PacketSendUtility.broadcastPacket(this, new SM_EMOTION(this.getSpawn().getStaticId(), emotion, packetState));
 	}
@@ -89,10 +81,6 @@ public class StaticDoor extends StaticObject implements GeoDoor {
 	@Override
 	public StaticDoorTemplate getObjectTemplate() {
 		return (StaticDoorTemplate) super.getObjectTemplate();
-	}
-
-	public DoorGeometry getGeometry() {
-		return door;
 	}
 
 }
