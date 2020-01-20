@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="../spawns/spawns.xsd" />
+
+	<xs:element name="world_raid_locations" type="WorldRaidLocations" />
+
+	<xs:complexType name="WorldRaidLocations">
+		<xs:sequence>
+			<xs:element name="world_raid_location" type="WorldRaidLocation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WorldRaidLocation">
+		<xs:sequence>
+			<xs:element name="world_raid_npcs" type="WorldRaidNpcs" />
+			<xs:element name="location_markers" type="LocationMarkers" />
+		</xs:sequence>
+		<xs:attribute name="location_id" type="xs:int" use="required" />
+		<xs:attribute name="map_id" type="xs:int" use="required" />
+		<xs:attribute name="x" type="xs:float" use="required" />
+		<xs:attribute name="y" type="xs:float" use="required" />
+		<xs:attribute name="z" type="xs:float" use="required" />
+		<xs:attribute name="h" type="HeadingType" />
+	</xs:complexType>
+	<xs:complexType name="LocationMarkers">
+		<xs:sequence>
+			<xs:element name="spot" type="MarkerSpot" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="MarkerSpot">
+		<xs:attribute name="x" type="xs:float" use="required" />
+		<xs:attribute name="y" type="xs:float" use="required" />
+		<xs:attribute name="z" type="xs:float" use="required" />
+		<xs:attribute name="h" type="HeadingType" use="required" />
+	</xs:complexType>
+	<xs:complexType name="WorldRaidNpcs">
+		<xs:sequence>
+			<xs:element name="world_raid_npc" type="WorldRaidNpc" minOccurs="1" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="WorldRaidNpc">
+		<xs:attribute name="npc_id" type="xs:int" use="required" />
+		<xs:attribute name="death_msg_id" type="xs:int" />
+	</xs:complexType>
+</xs:schema>

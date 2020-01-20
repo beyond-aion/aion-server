@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<world_raid_schedules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="world_raid_schedule.xsd">
+	<!-- Verteron -->
+	<world_raid_schedule id="veteron_all" locations="1 2 3" min_count="2">
+		<start_time>0 30 17 3,18 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Altgard -->
+	<world_raid_schedule id="altgard_all" locations="4 5 6" min_count="2">
+		<start_time>0 30 17 3,18 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Eltnen -->
+	<world_raid_schedule id="eltnen_all" locations="7 8 9" min_count="2">
+		<start_time>0 30 17 6,21 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Morheim -->
+	<world_raid_schedule id="morheim_all" locations="10 11 12" min_count="2">
+		<start_time>0 30 17 6,21 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Theobomos -->
+	<world_raid_schedule id="theobomos_all" locations="13 14 15" min_count="2">
+		<start_time>0 30 19 9,24 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Brusthonin -->
+	<world_raid_schedule id="brusthonin_all" locations="16 17 18" min_count="2">
+		<start_time>0 30 19 9,24 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Heiron -->
+	<world_raid_schedule id="heiron_all" locations="19 20 21" min_count="2">
+		<start_time>0 30 19 12,27 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Beluslan -->
+	<world_raid_schedule id="beluslan_all" locations="22 23 24" min_count="2">
+		<start_time>0 30 19 12,27 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Inggison -->
+	<world_raid_schedule id="inggison_all" locations="25 26 27" min_count="2">
+		<start_time>0 30 17 15 * ?</start_time>
+		<start_time>0 30 19 30 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Gelkmaros -->
+	<world_raid_schedule id="gelkmaros_all" locations="28 29 30" min_count="2">
+		<start_time>0 30 17 15 * ?</start_time>
+		<start_time>0 30 19 30 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Reshanta -->
+	<world_raid_schedule id="reshanta_all" locations="31 32 33 34 35" min_count="3">
+		<start_time>0 30 17 2,17 * ?</start_time>
+		<start_time>0 30 19 10,25 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Enshar -->
+	<world_raid_schedule id="enshar_all" locations="36 37 38" min_count="2">
+		<start_time>0 30 17 4,19 * ?</start_time>
+		<start_time>0 30 19 11,26 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Cygnea -->
+	<world_raid_schedule id="cygnea_all" locations="39 40 41" min_count="2">
+		<start_time>0 30 17 5,20 * ?</start_time>
+		<start_time>0 30 19 13,28 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Levinshor -->
+	<world_raid_schedule id="levinshor_all" locations="45 46 47 48" min_count="3">
+		<start_time>0 30 17 7,22 * ?</start_time>
+		<start_time>0 30 19 14,29 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Kaldor -->
+	<world_raid_schedule id="kaldor_all" locations="49 50 51" min_count="2">
+		<start_time>0 30 17 1,16 * ?</start_time>
+		<start_time>0 30 19 8,23 * ?</start_time>
+	</world_raid_schedule>
+</world_raid_schedules>

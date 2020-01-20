@@ -64,11 +64,8 @@
 	</gd_rule>
 	<gd_rule rule_name="LV_4_WORLDRAID_BOX_T2" chance="100" member_limit="12">
 		<gd_npcs>
-			<gd_npc npc_id="234582" /><!-- Elite Benoid III -->
-			<gd_npc npc_id="234583" /><!-- Elite Eiter III -->
 			<gd_npc npc_id="234584" /><!-- Elite Magnorion II -->
 			<gd_npc npc_id="234585" /><!-- Elite Benoid II -->
-			<gd_npc npc_id="234586" /><!-- Elite Eiter III -->
 			<gd_npc npc_id="234587" /><!-- Elite Magnorion II -->
 		</gd_npcs>
 		<gd_items>

@@ -243,7 +243,7 @@ public class SpawnsData {
 			return false;
 		if (!spawn.getClass().equals(SpawnTemplate.class)) // do not save special/temporary spawns (siege, base, rift spawn, ...) as world spawns
 			return false;
-		if (spawn.getRespawnTime() <= 0) // do not save single time spawns (monster raid, handler spawn, ...) as world spawns
+		if (spawn.getRespawnTime() <= 0) // do not save single time spawns (world raid, handler spawn, ...) as world spawns
 			return false;
 		if (spawn.isTemporarySpawn()) // spawn start and end times of temporary world spawns (shugos, agrints, ...) would get lost
 			return false;

@@ -23,10 +23,13 @@ public class EventsConfig {
 	public static int ARCADE_RESUME_TOKEN;
 
 	/**
-	 * Monster Raid
+	 * World Raid
 	 */
-	@Property(key = "gameserver.monster.raid.enable", defaultValue = "false")
-	public static boolean ENABLE_MONSTER_RAID;
+	@Property(key = "gameserver.worldraid.enable", defaultValue = "false")
+	public static boolean ENABLE_WORLDRAID;
+
+	@Property(key = "gameserver.worldraid.usespawnmsg", defaultValue = "false")
+	public static boolean WORLDRAID_ENABLE_SPAWNMSG;
 
 	/**
 	 * Headhunting

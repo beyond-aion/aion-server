@@ -285,8 +285,8 @@ public class StaticData {
 	@XmlElement(name = "login_events")
 	public AtreianPassportData atreianPassportData;
 
-	@XmlElement(name = "raid_locations")
-	public MonsterRaidData raidData;
+	@XmlElement(name = "world_raid_locations")
+	public WorldRaidData worldRaidData;
 
 	@XmlElement(name = "kill_bounties")
 	public KillBountyData killBountyData;
@@ -386,7 +386,7 @@ public class StaticData {
 		log.info("Loaded " + itemPurificationData.size() + " item purifications entries");
 		log.info("Loaded " + upgradeArcadeData.size() + " upgrade arcade entries");
 		log.info("Loaded " + atreianPassportData.size() + " atreian passports");
-		log.info("Loaded " + raidData.size() + " raid entries");
+		log.info("Loaded " + worldRaidData.size() + " world raid locations");
 		log.info("Loaded " + killBountyData.size() + " kill bounty templates");
 		log.info("Loaded " + legionDominionData.size() + " legion dominion locations");
 	}

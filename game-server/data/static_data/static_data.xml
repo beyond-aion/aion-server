@@ -97,7 +97,6 @@
 	<import file="legion_dominion_template.xml" />
 	<import file="mail_templates.xml" />
 	<import file="mesh_materials/material_templates.xml" />
-	<import file="monster_raid/raid_locations.xml" />
 	<import file="npc_factions/npc_factions.xml" />
 	<import file="npc_shouts/npc_shouts.xml" />
 	<import file="npc_skills" singleRootTag="true" />
@@ -143,5 +142,6 @@
 	<import file="weather_table.xml" />
 	<import file="windstreams/windstreams.xml" />
 	<import file="world_maps.xml" />
+	<import file="world_raid/world_raids.xml" />
 	<import file="zones" singleRootTag="true" />
 </static_data>

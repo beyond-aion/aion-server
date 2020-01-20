@@ -74,7 +74,7 @@ import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.LegionDominionService;
 import com.aionemu.gameserver.services.LimitedItemTradeService;
-import com.aionemu.gameserver.services.MonsterRaidService;
+import com.aionemu.gameserver.services.WorldRaidService;
 import com.aionemu.gameserver.services.PeriodicSaveService;
 import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.services.RoadService;
@@ -246,7 +246,7 @@ public class GameServer {
 		ConsoleUtil.printSection("Location Data");
 		BaseService.getInstance();
 		SiegeService.getInstance();
-		MonsterRaidService.getInstance().initMonsterRaidLocations();
+		WorldRaidService.getInstance().initWorldRaidLocations();
 		// DAOManager.getDAO(SiegeMercenariesDAO.class).loadActiveMercenaries();
 		VortexService.getInstance().initVortexLocations();
 		RiftService.getInstance().initRiftLocations();
@@ -287,8 +287,8 @@ public class GameServer {
 		ConsoleUtil.printSection("World Bases");
 		BaseService.getInstance().initBases();
 
-		ConsoleUtil.printSection("Monster Raid");
-		MonsterRaidService.getInstance().initMonsterRaids();
+		ConsoleUtil.printSection("World Raid");
+		WorldRaidService.getInstance().initWorldRaids();
 
 		ConsoleUtil.printSection("Conqueror And Protector system");
 		ConquerorAndProtectorService.getInstance().init();

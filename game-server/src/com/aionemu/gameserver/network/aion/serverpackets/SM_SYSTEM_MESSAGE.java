@@ -27431,6 +27431,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Invasion of the Beritra Army
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_INVADE_VRITRA() {
+		return new SM_SYSTEM_MESSAGE(1402459);
+	}
+
+	/**
+	 * Great Invasion of the Beritra Army
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_WORLDRAID_INVADE_VRITRA_SPECIAL() {
+		return new SM_SYSTEM_MESSAGE(1402460);
+	}
+
+	/**
 	 * All monsters except Belsagos have disappeared from the Linkgate Foundry.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_Time_07() {

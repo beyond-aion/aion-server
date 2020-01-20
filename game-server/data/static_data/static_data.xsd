@@ -45,7 +45,6 @@
 	<xs:include schemaLocation="legion_dominion_template.xsd" />
 	<xs:include schemaLocation="mail_templates.xsd" />
 	<xs:include schemaLocation="mesh_materials/material_templates.xsd" />
-	<xs:include schemaLocation="monster_raid/raid_locations.xsd" />
 	<xs:include schemaLocation="npc_factions/npc_factions.xsd" />
 	<xs:include schemaLocation="npc_shouts/npc_shouts.xsd" />
 	<xs:include schemaLocation="npc_skills/npc_skills.xsd" />
@@ -91,6 +90,7 @@
 	<xs:include schemaLocation="weather_table.xsd" />
 	<xs:include schemaLocation="windstreams/windstreams.xsd" />
 	<xs:include schemaLocation="world_maps.xsd" />
+	<xs:include schemaLocation="world_raid/world_raids.xsd" />
 	<xs:include schemaLocation="zones/zones.xsd" />
 	<xs:element name="static_data">
 		<xs:complexType>
@@ -164,7 +164,6 @@
 					<xs:element ref="portal_templates2" minOccurs="0" />
 					<xs:element ref="quest_scripts" minOccurs="0" />
 					<xs:element ref="quests" minOccurs="0" />
-					<xs:element ref="raid_locations" minOccurs="0" />
 					<xs:element ref="random_bonuses" minOccurs="0" />
 					<xs:element ref="recipe_templates" minOccurs="0" />
 					<xs:element ref="rides" minOccurs="0" />
@@ -187,6 +186,7 @@
 					<xs:element ref="weather" minOccurs="0" />
 					<xs:element ref="windstreams" minOccurs="0" />
 					<xs:element ref="world_maps" minOccurs="0" />
+					<xs:element ref="world_raid_locations" minOccurs="0" />
 					<xs:element ref="zones" minOccurs="0" />
 				</xs:choice>
 			</xs:sequence>

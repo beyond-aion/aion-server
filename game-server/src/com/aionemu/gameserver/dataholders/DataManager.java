@@ -64,7 +64,6 @@ public final class DataManager {
 	public static Mails SYSTEM_MAIL_TEMPLATES;
 	public static MapWeatherData MAP_WEATHER_DATA;
 	public static MaterialData MATERIAL_DATA;
-	public static MonsterRaidData RAID_DATA;
 	public static MotionData MOTION_DATA;
 	public static MultiReturnItemData MULTIRETURN_DATA;
 	public static NpcFactionsData NPC_FACTIONS_DATA;
@@ -107,6 +106,7 @@ public final class DataManager {
 	public static WarehouseExpandData WAREHOUSEEXPANDER_DATA;
 	public static WindstreamData WINDSTREAM_DATA;
 	public static WorldMapsData WORLD_MAPS_DATA;
+	public static WorldRaidData WORLD_RAID_DATA;
 	public static XMLQuests XML_QUESTS;
 	public static ZoneData ZONE_DATA;
 	public static LegionDominionData LEGION_DOMINION_DATA;
@@ -210,7 +210,7 @@ public final class DataManager {
 		ITEM_PURIFICATION_DATA = data.itemPurificationData;
 		UPGRADE_ARCADE_DATA = data.upgradeArcadeData;
 		ATREIAN_PASSPORT_DATA = data.atreianPassportData;
-		RAID_DATA = data.raidData;
+		WORLD_RAID_DATA = data.worldRaidData;
 		KILL_BOUNTY_DATA = data.killBountyData;
 		LEGION_DOMINION_DATA = data.legionDominionData;
 
