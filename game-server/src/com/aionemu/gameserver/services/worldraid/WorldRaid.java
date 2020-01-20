@@ -98,7 +98,7 @@ public class WorldRaid {
 						break;
 				}
 			}
-		}, 0, 2000);
+		}, 0, 60000);
 	}
 
 	private void onWorldRaidFinish() {
@@ -123,7 +123,7 @@ public class WorldRaid {
 		despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
 			if (!boss.isDead())
 				WorldRaidService.getInstance().stopRaid(getLocationId());
-		}, 120 * 1000);
+		}, 3600 * 1000);
 	}
 
 	private void cancelDespawn() {
