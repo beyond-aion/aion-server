@@ -60,7 +60,7 @@ public class WorldRaidSchedules {
 			return maxCount;
 		}
 
-		public boolean getIsSpecialRaid() {
+		public boolean isSpecialRaid() {
 			return isSpecialRaid;
 		}
 

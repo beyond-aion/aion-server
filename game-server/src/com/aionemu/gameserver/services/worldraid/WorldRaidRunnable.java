@@ -41,7 +41,7 @@ public class WorldRaidRunnable implements Runnable {
 
 		// determine location count
 		int spawnLocationCount;
-		if (worldRaidSchedule.getIsSpecialRaid() || worldRaidSchedule.getMinCount() == 0)
+		if (worldRaidSchedule.isSpecialRaid() || worldRaidSchedule.getMinCount() == 0)
 			spawnLocationCount = worldRaidSchedule.getLocations().size();
 		else if (worldRaidSchedule.getMinCount() > 0 && worldRaidSchedule.getMaxCount() == 0)
 			spawnLocationCount = worldRaidSchedule.getMinCount();
@@ -58,7 +58,7 @@ public class WorldRaidRunnable implements Runnable {
 
 		// start actual world raids using the remaining locations
 		for (int locationId : validRaidLocations)
-			WorldRaidService.getInstance().startRaid(locationId, worldRaidSchedule.getIsSpecialRaid());
+			WorldRaidService.getInstance().startRaid(locationId, worldRaidSchedule.isSpecialRaid());
 		log.debug("Successfully started scheduled world raid with id: " + worldRaidSchedule.getId() + " at the following raid locations "
 			+ validRaidLocations.stream().map(String::valueOf).collect(Collectors.joining(",")));
 	}
