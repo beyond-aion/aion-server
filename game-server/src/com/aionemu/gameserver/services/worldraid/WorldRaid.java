@@ -106,13 +106,9 @@ public class WorldRaid {
 		despawnNpcs(flag, vortex);
 		despawnNpcs(locationMarkers);
 		if (isBossKilled()) {
-			int deathMsgId = randomBossTemplate.getDeathMsgId();
 			// STR_MSG_WORLDRAID_MESSAGE_DIE_01-06
-			if (deathMsgId >= 1402387 && deathMsgId <= 1402392)
-				broadcastMessage(new SM_SYSTEM_MESSAGE(deathMsgId), true);
-			else if (deathMsgId != 0)
-				log.warn("Tried to use despawn message " + deathMsgId + " for world raid npc " + randomBossTemplate.getNpcId() + " at location "
-					+ raidLocation.getLocationId());
+			if (randomBossTemplate.getDeathMsgId() != null)
+				broadcastMessage(new SM_SYSTEM_MESSAGE(randomBossTemplate.getDeathMsgId()), true);
 			cancelDespawn();
 		} else {
 			despawnNpcs(boss);
@@ -145,15 +141,11 @@ public class WorldRaid {
 
 	private void spawnAndInitRandomBoss() {
 		randomBossTemplate = Rnd.get(raidLocation.getNpcPool());
-		if (randomBossTemplate == null) {
-			log.error("Cannot initialize world raid boss. No valid npc found.");
-			return;
-		}
 		SpawnTemplate bossTemplate = SpawnEngine.newSingleTimeSpawn(raidLocation.getMapId(), randomBossTemplate.getNpcId(), raidLocation.getX(),
 			raidLocation.getY(), raidLocation.getZ(), raidLocation.getH(), 0, "world_raid_aggressive");
 		Npc bossNpc = (Npc) SpawnEngine.spawnObject(bossTemplate, 1);
 		if (bossNpc == null) {
-			log.error("Cannot initialize world raid boss. No boss was spawned.");
+			log.warn("Cannot initialize world raid boss with ID " + randomBossTemplate.getNpcId() + ". No boss was spawned.");
 			return;
 		}
 		boss = bossNpc;
@@ -173,36 +165,20 @@ public class WorldRaid {
 	private void spawnAndInitMapFlag() {
 		SpawnTemplate flagTemplate = SpawnEngine.newSingleTimeSpawn(raidLocation.getMapId(), 832819, raidLocation.getX(), raidLocation.getY(),
 			raidLocation.getZ(), (byte) 0);
-		Npc flagNpc = (Npc) SpawnEngine.spawnObject(flagTemplate, 1);
-		if (flagNpc == null) {
-			log.error("Cannot initialize flag for world raid location " + raidLocation.getLocationId() + ". No flag was spawned.");
-			return;
-		}
-		flag = flagNpc;
+		flag = (Npc) SpawnEngine.spawnObject(flagTemplate, 1);
 	}
 
 	private void spawnAndInitVortex() {
 		SpawnTemplate vortexTemplate = SpawnEngine.newSingleTimeSpawn(raidLocation.getMapId(), 702550, raidLocation.getX(), raidLocation.getY(),
 			raidLocation.getZ() + 40f, (byte) 0);
-		Npc vortexNpc = (Npc) SpawnEngine.spawnObject(vortexTemplate, 1);
-		if (vortexNpc == null) {
-			log.error("Cannot initialize vortex for world raid location " + raidLocation.getLocationId() + " No vortex was spawned.");
-			return;
-		}
-		vortex = vortexNpc;
+		vortex = (Npc) SpawnEngine.spawnObject(vortexTemplate, 1);
 	}
 
 	private void spawnAndInitMarkerSpots() {
 		for (MarkerSpot locationMarker : raidLocation.getLocationMarkers()) {
 			SpawnTemplate markerTemplate = SpawnEngine.newSingleTimeSpawn(raidLocation.getMapId(), 702548, locationMarker.getX(), locationMarker.getY(),
 				locationMarker.getZ(), locationMarker.getH());
-			Npc markerNpc = (Npc) SpawnEngine.spawnObject(markerTemplate, 1);
-			if (markerNpc == null) {
-				log.error("Cannot initialize marker " + locationMarker.toString() + " for world raid location " + raidLocation.getLocationId()
-					+ " No marker was spawned.");
-				return;
-			}
-			locationMarkers.add(markerNpc);
+			locationMarkers.add((Npc) SpawnEngine.spawnObject(markerTemplate, 1));
 		}
 	}
 

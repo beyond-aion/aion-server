@@ -39,6 +39,13 @@
 	</xs:complexType>
 	<xs:complexType name="WorldRaidNpc">
 		<xs:attribute name="npc_id" type="xs:int" use="required" />
-		<xs:attribute name="death_msg_id" type="xs:int" />
+		<xs:attribute name="death_msg_id" type="death_msg_id" />
 	</xs:complexType>
+
+	<xs:simpleType name="death_msg_id" id="death_msg_id">
+		<xs:restriction base="xs:int">
+			<xs:minInclusive value="1402387"/>
+			<xs:maxInclusive value="1402392"/>
+		</xs:restriction>
+	</xs:simpleType>
 </xs:schema>

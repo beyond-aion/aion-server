@@ -21,7 +21,7 @@ public class WorldRaidNpc {
 		return npcId;
 	}
 
-	public int getDeathMsgId() {
+	public Integer getDeathMsgId() {
 		return deathMsgId;
 	}
 

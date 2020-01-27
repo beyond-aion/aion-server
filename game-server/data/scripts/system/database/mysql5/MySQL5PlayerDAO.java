@@ -501,7 +501,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				while (rset.next()) {
 					int accountId = rset.getInt("account_id");
 					// number of inactive chars on account
-					inactiveCharsByAccId.merge(accountId, 1, (a, b) -> a + b);
+					inactiveCharsByAccId.merge(accountId, 1, Integer::sum);
 				}
 			}
 		});
