@@ -25,8 +25,7 @@ public class WorldRaidRunnable implements Runnable {
 
 	@Override
 	public void run() {
-		log.debug("Attempting to start world raid with id: " + worldRaidSchedule.getId() + " using the following location pool: "
-			+ worldRaidSchedule.getLocations().stream().map(String::valueOf).collect(Collectors.joining(",")));
+		log.debug("Attempting to start world raid with ID: " + worldRaidSchedule.getId() + " and location pool: "	+ worldRaidSchedule.getLocations());
 
 		List<Integer> validRaidLocations = worldRaidSchedule.getLocations().stream()
 			.filter(locationId -> WorldRaidService.getInstance().isValidWorldRaidLocation(locationId)
@@ -34,33 +33,27 @@ public class WorldRaidRunnable implements Runnable {
 			.collect(Collectors.toList());
 
 		if (validRaidLocations.size() != worldRaidSchedule.getLocations().size()) {
-			log.warn("Invalid world raid location count for raid with id: " + worldRaidSchedule.getId()
-				+ " Some locations may be invalid due to a misconfiguration or due to currently running raids!");
+			log.warn("Invalid world raid location count for raid with ID: " + worldRaidSchedule.getId()
+				+ ". Some locations may be invalid due to a misconfiguration or due to currently running raids!");
 			return;
 		}
 
 		// determine location count
-		int spawnLocationCount;
-		if (worldRaidSchedule.isSpecialRaid() || worldRaidSchedule.getMinCount() == 0)
-			spawnLocationCount = worldRaidSchedule.getLocations().size();
-		else if (worldRaidSchedule.getMinCount() > 0 && worldRaidSchedule.getMaxCount() == 0)
+		int spawnLocationCount = worldRaidSchedule.getLocations().size();
+		if (worldRaidSchedule.getMinCount() > 0 && spawnLocationCount > worldRaidSchedule.getMinCount())
 			spawnLocationCount = worldRaidSchedule.getMinCount();
-		else
-			spawnLocationCount = Rnd.get(worldRaidSchedule.getMinCount(), worldRaidSchedule.getMaxCount());
+		if (worldRaidSchedule.getMaxCount() > 0 && worldRaidSchedule.getMaxCount() > spawnLocationCount)
+			spawnLocationCount = Rnd.get(spawnLocationCount, worldRaidSchedule.getMaxCount());
 
 		// remove unused locations due to location count restriction
-		if (spawnLocationCount != validRaidLocations.size()) {
-			int locationCountToRemove = validRaidLocations.size() - spawnLocationCount;
-			for (int i = 0; i < locationCountToRemove; i++)
-				if (!validRaidLocations.isEmpty())
-					validRaidLocations.remove(Rnd.get(0, validRaidLocations.size() - 1));
-		}
+		while (validRaidLocations.size() > spawnLocationCount)
+			validRaidLocations.remove(Rnd.get(validRaidLocations.size()));
 
 		// start actual world raids using the remaining locations
 		for (int locationId : validRaidLocations)
 			WorldRaidService.getInstance().startRaid(locationId, worldRaidSchedule.isSpecialRaid());
-		log.debug("Successfully started scheduled world raid with id: " + worldRaidSchedule.getId() + " at the following raid locations "
-			+ validRaidLocations.stream().map(String::valueOf).collect(Collectors.joining(",")));
+		if (!validRaidLocations.isEmpty())
+			log.debug("Started scheduled world raid with ID " + worldRaidSchedule.getId() + " at the following raid locations: " + validRaidLocations);
 	}
 
 }

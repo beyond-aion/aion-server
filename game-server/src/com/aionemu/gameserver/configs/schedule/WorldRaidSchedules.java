@@ -36,7 +36,7 @@ public class WorldRaidSchedules {
 		private int minCount = 0;
 
 		@XmlAttribute(name = "max_count")
-		private int maxCount;
+		private int maxCount = 0;
 
 		@XmlAttribute(name = "is_special_raid")
 		private boolean isSpecialRaid;
