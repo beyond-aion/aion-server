@@ -18260,83 +18260,90 @@
 	<decomposable item_id="188052316" /><!-- Heavy Green Sack -->
 	<decomposable item_id="188052317" /><!-- [Event] Broken Heart Box -->
 	<decomposable item_id="188052318"><!-- [Event] Mended Heart -->
-		<items chance="1.1">
-			<item id="110900740" /><!-- [Event] Heartseeker Outfit -->
+		<items chance="1">
+			<item id="169610093" /><!-- [Title Card] Top Gun -->
 		</items>
-		<items chance="1.1">
-			<item id="110900213" /><!-- Beatific Outfit -->
+		<items chance="1">
+			<item id="188053099" /><!-- Pure Modor's Equipment Crux Box -->
 		</items>
-		<items chance="1.1">
-			<item id="125040226" /><!-- [Event] Wild Heart Headband -->
+		<items chance="1">
+			<item id="187050031" /><!-- Ornate Butterfly Wing Feather -->
 		</items>
-		<items chance="1.1">
-			<item id="190100162" /><!-- Shugo Gyrocopter (30 Days) -->
+		<items chance="1">
+			<item id="187060176" /><!-- Strengthened Glider -->
 		</items>
-		<items chance="1.1">
-			<item id="169620110" /><!-- [Event] Celestial Crafting Boost -->
+		<items chance="1">
+			<item id="190100139" /><!-- Sleek Hovercycle -->
 		</items>
-		<items chance="1.1">
-			<item id="169620079" /><!-- Gathering Boost Charm II - 100% -->
+		<items chance="1">
+			<item id="168310018" /><!-- Major Blessed Augment: Level 2 -->
 		</items>
-		<items chance="2.2">
+		<items chance="2">
 			<item id="169620072" /><!-- AP Boost Charm II - 30% -->
 		</items>
-		<items chance="2.2">
-			<item id="188950007" /><!-- Special Courier Pass (Eternal/Lv. 56 - 60) -->
-		</items>
-		<items chance="2.2">
-			<item id="188950015" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
-		</items>
-		<items chance="2.2">
+		<items chance="2">
 			<item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
 		</items>
-		<items chance="3.3">
+		<items chance="2">
+			<item id="166200009" /><!-- Mythic Weapon Tuning Scroll -->
+		</items>
+		<items chance="2">
+			<item id="165020014" /><!-- Weapon Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+		</items>
+		<items chance="2">
+			<item id="188053614" /><!-- Illusion Godstone Bundle -->
+		</items>
+		<items chance="2">
+			<item id="188053295" /><!-- Empyrean Plume Chest-->
+		</items>
+		<items chance="3">
 			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
 		</items>
-		<items chance="3.3">
-			<item id="186000051" /><!-- Major Ancient Crown -->
+		<items chance="3">
+			<item id="188053610" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 		</items>
-		<items chance="3.3">
-			<item id="186000236" min_count="15" max_count="25" /><!-- Blood Mark -->
+		<items chance="3">
+			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
 		</items>
-		<items chance="3.3">
-			<item id="186000242" /><!-- Ceramium Medals -->
+		<items chance="3">
+			<item id="186000051" min_count="3" /><!-- Major Ancient Crown -->
 		</items>
-		<items chance="3.3">
-			<item id="188053113" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+		<items chance="3">
+			<item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
 		</items>
-		<items chance="5.49">
-			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
+		<items chance="3">
+			<item id="166030005" min_count="3" /><!-- Tempering Solution -->
 		</items>
-		<items chance="5.49">
-			<item id="188052822" min_count="2" /><!-- Noble Ancient Manastone Chest -->
+		<items chance="5">
+			<item id="160010111" min_count="5" race="ELYOS" /><!-- [Event] Jumpy Monk Form Candy -->
+			<item id="160010112" min_count="5" race="ASMODIANS" /><!-- [Event] Jumpy Monk Form Candy -->
 		</items>
-		<items chance="5.49">
+		<items chance="5">
+			<item id="186000238" min_count="25" /><!-- Conqueror's Mark -->
+		</items>
+		<items chance="6">
 			<item id="160010337" /><!-- [Event] Heartfelt Chocolate -->
 		</items>
-		<items chance="5.49">
+		<items chance="6">
 			<item id="160010338" /><!-- [Event] Loving Chocolate -->
 		</items>
-		<items chance="6.59">
+		<items chance="7">
+			<item id="164002269" min_count="3" /><!-- Love Firecracker No.1 -->
+		</items>
+		<items chance="7">
+			<item id="164002143" min_count="3" /><!-- Love Firecracker No.2 -->
+		</items>
+		<items chance="7">
 			<item id="160010208" min_count="3" /><!-- [Event] Sweet Chocolate -->
 		</items>
-		<items chance="6.59">
-			<item id="188050714" /><!-- Chocolate Candy Box -->
+		<items chance="7">
+			<item id="162002001" min_count="5" /><!-- Love Potion -->
 		</items>
-		<items chance="6.59">
-			<item id="162002001" min_count="3" /><!-- Love Potion -->
+		<items chance="7">
+			<item id="164000118" min_count="5" /><!-- Major Crit Strike Scroll -->
 		</items>
-		<items chance="6.59">
-			<item id="164002269" min_count="2" /><!-- Love Firecracker No.1 -->
-		</items>
-		<items chance="6.59">
-			<item id="164002143" min_count="2" /><!-- Love Firecracker No.2 -->
-		</items>
-		<items chance="6.59">
-			<item id="164002073" min_count="2" /><!-- Love Firecracker No.3 -->
-		</items>
-		<items chance="6.59">
-			<item id="188053793" min_count="3" /><!-- Rare Manastone of Aetheric Field Bundle -->
+		<items chance="7">
+			<item id="164000122" min_count="5" /><!-- Major Crit Spell Scroll -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052319"><!-- [Event] Dragon Lord's Wing Box -->
