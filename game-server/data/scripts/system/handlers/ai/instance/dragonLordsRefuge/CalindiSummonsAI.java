@@ -10,10 +10,9 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Cheatkiller
- * @modified Luzien, Estrayl March 8th, 2018
+ * @author Cheatkiller, Luzien, Estrayl
  */
-@AIName("calindisummon")
+@AIName("calindi_summon")
 public class CalindiSummonsAI extends NpcAI {
 
 	private Future<?> task;
@@ -25,10 +24,37 @@ public class CalindiSummonsAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		int skill = getOwner().getNpcId() == 283132 ? 20914 : 20916;
-		int delay = getNpcId() == 283132 ? 500 : 2000;
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, skill), delay, delay);
+		int delay = getDelay();
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, getSkillId()), 500, delay);
 		ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(this), 15000);
+	}
+
+	private int getSkillId() {
+		switch (getNpcId()) {
+			case 283130:
+				return 20916;
+			case 283132:
+				return 20914;
+			case 856298:
+				return 21891;
+			case 856299:
+				return 21892;
+			default:
+				return 0;
+		}
+	}
+
+	private int getDelay() {
+		switch (getNpcId()) {
+			case 283130:
+			case 856299:
+				return 2000;
+			case 283132:
+			case 856298:
+				return 500;
+			default:
+				return 0;
+		}
 	}
 
 	@Override

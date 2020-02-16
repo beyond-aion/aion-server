@@ -1588,6 +1588,106 @@
 		<drop_group><!-- Named Box -->
 			<drop item_id="188052084" chance="100" each_member="true" /><!-- Dragon Lord Tiamat Treasure Chest -->
 		</drop_group>
+		<drop_group><!-- Courier Pass -->
+			<drop item_id="188950018" chance="4" /><!-- Special Courier Pass (Mythic/Lv.56-60) -->
+		</drop_group>
+	</npc_drop>
+	<!-- Anguished Dragon Lord's Refuge -->
+	<npc_drop npc_id="702729">
+		<drop_group><!-- Consumable Chest-->
+			<drop item_id="188053707" chance="100" each_member="true" /><!-- Glimmering Treasure Chest of Dragon Lord Tiamat -->
+		</drop_group>
+		<drop_group><!-- Amplification Stone (Multi) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group><!-- Named Armor -->
+			<drop item_id="112101644" chance="100" /><!-- Glimmering Dragon Lord's Pauldrons -->
+			<drop item_id="112101645" chance="100" /><!-- Glowing Dragon Lord's Pauldrons -->
+			<drop item_id="112301750" chance="100" /><!-- Glimmering Dragon Lord's Shoulderguards -->
+			<drop item_id="112301751" chance="100" /><!-- Glowing Dragon Lord's Shoulderguards -->
+			<drop item_id="112501701" chance="100" /><!-- Glimmering Dragon Lord's Spaulders -->
+			<drop item_id="112501702" chance="100" /><!-- Glowing Dragon Lord's Spaulders -->
+			<drop item_id="112501703" chance="100" /><!-- Tempered Dragon Lord's Spaulders -->
+			<drop item_id="112601612" chance="100" /><!-- Glimmering Dragon Lord's Shoulderplates -->
+			<drop item_id="112601613" chance="100" /><!-- Glowing Dragon Lord's Shoulderplates -->
+			<drop item_id="113101706" chance="100" /><!-- Glimmering Dragon Lord's Leggings -->
+			<drop item_id="113101707" chance="100" /><!-- Glowing Dragon Lord's Leggings -->
+			<drop item_id="113301842" chance="100" /><!-- Glimmering Dragon Lord's Legguards -->
+			<drop item_id="113301843" chance="100" /><!-- Glowing Dragon Lord's Legguards -->
+			<drop item_id="113501780" chance="100" /><!-- Glimmering Dragon Lord's Chausses -->
+			<drop item_id="113501781" chance="100" /><!-- Glowing Dragon Lord's Chausses -->
+			<drop item_id="113501782" chance="100" /><!-- Tempered Dragon Lord's Chausses -->
+			<drop item_id="113601613" chance="100" /><!-- Glimmering Dragon Lord's Greaves -->
+			<drop item_id="113601614" chance="100" /><!-- Glowing Dragon Lord's Greaves -->
+			<drop item_id="114101740" chance="100" /><!-- Glimmering Dragon Lord's Shoes -->
+			<drop item_id="114101741" chance="100" /><!-- Glowing Dragon Lord's Shoes -->
+			<drop item_id="114301879" chance="100" /><!-- Glimmering Dragon Lord's Boots -->
+			<drop item_id="114301880" chance="100" /><!-- Glowing Dragon Lord's Boots -->
+			<drop item_id="114501790" chance="100" /><!-- Glimmering Dragon Lord's Brogans -->
+			<drop item_id="114501791" chance="100" /><!-- Glowing Dragon Lord's Brogans -->
+			<drop item_id="114501792" chance="100" /><!-- Tempered Dragon Lord's Brogans -->
+			<drop item_id="114601620" chance="100" /><!-- Glimmering Dragon Lord's Sabatons -->
+			<drop item_id="114601621" chance="100" /><!-- Glowing Dragon Lord's Sabatons -->
+		</drop_group>
+		<drop_group><!-- Named Armor -->
+			<drop item_id="110101880" chance="50" /><!-- Glimmering Dragon Lord's Jacket -->
+			<drop item_id="110101881" chance="50" /><!-- Glowing Dragon Lord's Jacket -->
+			<drop item_id="110301873" chance="50" /><!-- Glimmering Dragon Lord's Jerkin -->
+			<drop item_id="110301874" chance="50" /><!-- Glowing Dragon Lord's Jerkin -->
+			<drop item_id="110551203" chance="50" /><!-- Glimmering Dragon Lord's Hauberk -->
+			<drop item_id="110551204" chance="50" /><!-- Glowing Dragon Lord's Hauberk -->
+			<drop item_id="110551205" chance="50" /><!-- Tempered Dragon Lord's Hauberk -->
+			<drop item_id="110601667" chance="50" /><!-- Glimmering Dragon Lord's Breastplate -->
+			<drop item_id="110601668" chance="50" /><!-- Glowing Dragon Lord's Breastplate -->
+			<drop item_id="111101695" chance="50" /><!-- Glimmering Dragon Lord's Gloves -->
+			<drop item_id="111101696" chance="50" /><!-- Glowing Dragon Lord's Gloves -->
+			<drop item_id="111301811" chance="50" /><!-- Glimmering Dragon Lord's Vambraces -->
+			<drop item_id="111301812" chance="50" /><!-- Glowing Dragon Lord's Vambraces -->
+			<drop item_id="111501762" chance="50" /><!-- Glimmering Dragon Lord's Handguards -->
+			<drop item_id="111501763" chance="50" /><!-- Glowing Dragon Lord's Handguards -->
+			<drop item_id="111501764" chance="50" /><!-- Tempered Dragon Lord's Handguards -->
+			<drop item_id="111601630" chance="50" /><!-- Glimmering Dragon Lord's Gauntlets -->
+			<drop item_id="111601631" chance="50" /><!-- Glowing Dragon Lord's Gauntlets -->
+		</drop_group>
+		<drop_group><!-- Named Weapon -->
+			<drop item_id="100001797" chance="15" /><!-- Glimmering Dragon Lord's Wrath -->
+			<drop item_id="100101389" chance="15" /><!-- Glimmering Dragon Lord's Delight -->
+			<drop item_id="100201562" chance="15" /><!-- Glimmering Dragon Lord's Murderous Intent -->
+			<drop item_id="100501355" chance="15" /><!-- Glimmering Dragon Lord's Arrogance -->
+			<drop item_id="100601472" chance="15" /><!-- Glimmering Dragon Lord's Distrust -->
+			<drop item_id="100901424" chance="15" /><!-- Glimmering Dragon Lord's Hatred -->
+			<drop item_id="101301313" chance="15" /><!-- Glimmering Dragon Lord's Greed -->
+			<drop item_id="101501404" chance="15" /><!-- Glimmering Dragon Lord's Pride -->
+			<drop item_id="101701408" chance="15" /><!-- Glimmering Dragon Lord's Jealousy -->
+			<drop item_id="101801266" chance="15" /><!-- Glimmering Dragon Lord's Fighting Spirit -->
+			<drop item_id="101901173" chance="15" /><!-- Glimmering Dragon Lord's Courage -->
+			<drop item_id="102001292" chance="15" /><!-- Glimmering Dragon Lord's Shudder -->
+			<drop item_id="102101109" chance="15" /><!-- Glimmering Dragon Lord's Craving -->
+			<drop item_id="115001833" chance="15" /><!-- Glimmering Dragon Lord's Sigh -->
+			<drop item_id="115001834" chance="15" /><!-- Glimmering Dragon Lord's Agony -->
+		</drop_group>
+		<drop_group><!-- Named Helmet -->
+			<drop item_id="125004294" chance="20" /><!-- Glimmering Dragon Lord's Helm -->
+			<drop item_id="125004295" chance="20" /><!-- Glimmering Dragon Lord's Chain Helm -->
+			<drop item_id="125004296" chance="20" /><!-- Glowing Dragon Lord's Magic Chain Helm -->
+			<drop item_id="125004297" chance="20" /><!-- Glimmering Dragon Lord's Hat -->
+			<drop item_id="125004298" chance="20" /><!-- Glowing Dragon Lord's Magic Hat -->
+			<drop item_id="125004299" chance="20" /><!-- Glimmering Dragon Lord's Bandana -->
+		</drop_group>
+		<drop_group><!-- Named Wings -->
+			<drop item_id="187000156" chance="10" /><!-- Tiamat's Glimmering Wings -->
+		</drop_group>
+		<drop_group><!-- Named Prototype -->
+			<drop item_id="169405391" chance="25" /><!-- Upgraded Distorted Sword of the Fierce Battle Prototype -->
+			<drop item_id="169405392" chance="25" /><!-- Upgraded Distorted Mace of the Fierce Battle Prototype -->
+			<drop item_id="169405393" chance="25" /><!-- Upgraded Distorted Dagger of the Fierce Battle Prototype -->
+			<drop item_id="169405394" chance="25" /><!-- Upgraded Distorted Greatsword of the Fierce Battle Prototype -->
+			<drop item_id="169405395" chance="25" /><!-- Upgraded Distorted Polearm of the Fierce Battle Prototype -->
+			<drop item_id="169405396" chance="25" /><!-- Upgraded Distorted Staff of the Fierce Battle Prototype -->
+		</drop_group>
+		<drop_group><!-- Courier Pass -->
+			<drop item_id="188950019" chance="4" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
+		</drop_group>
 	</npc_drop>
 	<!-- Elementis Forest -->
 	<npc_drop npc_id="700999">

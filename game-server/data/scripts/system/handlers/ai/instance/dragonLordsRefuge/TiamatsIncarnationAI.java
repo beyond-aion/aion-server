@@ -16,7 +16,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Estrayl March 9th, 2018
+ * @author Estrayl
  */
 @AIName("tiamats_incarnation")
 public class TiamatsIncarnationAI extends AggressiveNpcAI {
@@ -54,17 +54,24 @@ public class TiamatsIncarnationAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDespawned() {
-		getSummonNpcIds().stream().forEach(id -> getPosition().getWorldMapInstance().getNpcs(id).stream().forEach(npc -> npc.getController().delete()));
+		getSummonNpcIds().forEach(id -> getPosition().getWorldMapInstance().getNpcs(id).forEach(npc -> npc.getController().delete()));
+		super.handleDespawned();
 	}
 
 	private List<Integer> getSummonNpcIds() {
 		switch (getNpcId()) {
 			case 219366: // Graviwing
 				return Arrays.asList(282727, 282729); // Gravity Whirlpool, Thunderbolt Whirlpool
+			case 236279: // Graviwing HM
+				return Arrays.asList(856074, 856076);
 			case 219368: // Petriscale
 				return Arrays.asList(282731); // Petrification Crystal
+			case 236281: // Petriscale HM
+				return Arrays.asList(856072);
 			case 219365: // Fissure Fang
 				return Arrays.asList(282735, 282737); // Cavity of Earth, Collapsing Earth
+			case 236278: // Fissure Fang HM
+				return Arrays.asList(856068, 856070);
 			default:
 				return Collections.emptyList();
 		}

@@ -9,7 +9,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import ai.GeneralNpcAI;
 
 /**
- * @author Estrayl March 10th, 2018
+ * @author Estrayl
  */
 @AIName("IDTiamat_2_NPC_Tiamat")
 public class IDTiamat_2_NPC_TiamatAI extends GeneralNpcAI {
@@ -27,7 +27,7 @@ public class IDTiamat_2_NPC_TiamatAI extends GeneralNpcAI {
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate) {
 		if (skillTemplate.getSkillId() == 20919) {
-			spawn(219361, 466.7468f, 514.5500f, 417.4044f, (byte) 0); // Dragon Tiamat
+			spawn(getNpcId() + 1, 466.7468f, 514.5500f, 417.4044f, (byte) 0); // Dragon Tiamat
 			AIActions.deleteOwner(this);
 		}
 	}

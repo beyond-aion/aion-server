@@ -373,30 +373,6 @@
 	<portal_use npc_id="730625">
 		<portal_path loc_id="3005209" min_level="60" />
 	</portal_use>
-	<portal_use npc_id="730673">
-		<portal_path loc_id="3005201" min_level="60" />
-	</portal_use>
-	<portal_use npc_id="730674">
-		<portal_path loc_id="3005202" min_level="60" />
-	</portal_use>
-	<portal_use npc_id="730675">
-		<portal_path loc_id="3005203" min_level="60" />
-	</portal_use>
-	<portal_use npc_id="730676">
-		<portal_path loc_id="3005204" min_level="60" />
-	</portal_use>
-	<portal_use npc_id="730633">
-		<portal_path loc_id="3005205" min_level="60" />
-	</portal_use>
-	<portal_use npc_id="730634">
-		<portal_path loc_id="3005206" min_level="60" />
-	</portal_use>
-	<portal_use npc_id="730635">
-		<portal_path loc_id="3005207" min_level="60" />
-	</portal_use>
-	<portal_use npc_id="730636">
-		<portal_path loc_id="3005208" min_level="60" />
-	</portal_use>
 	<!-- THE HEXWAY -->
 	<!-- The Hexway Entrance -->
 	<portal_use npc_id="730731">
@@ -892,7 +868,7 @@
 	</portal_use>
 	<!-- Flowing Dimensional Exit [The Protector's Blessing] -->
 	<portal_use npc_id="730498">
-		<portal_path loc_id="6000214" instance="false" min_level="56" />
+		<portal_path loc_id="6000214" min_level="56" />
 	</portal_use>
 	<!-- Extradimensional Void Exit -->
 	<portal_use npc_id="730632">
@@ -1332,9 +1308,11 @@
 	<!-- Dragon Lord's Refuge Entrance -->
 	<portal_dialog npc_id="832997">
 		<portal_path dialog="10000" loc_id="3005200" player_count="12" instance="true" race="ELYOS" min_level="60" />
+		<portal_path dialog="10000" loc_id="3006300" player_count="12" instance="true" race="ASMODIANS" min_level="65" />
 	</portal_dialog>
 	<portal_dialog npc_id="832998" teleport_dialog_id="1352">
 		<portal_path dialog="10000" loc_id="3005200" player_count="12" instance="true" race="ASMODIANS" min_level="60" />
+		<portal_path dialog="10000" loc_id="3006300" player_count="12" instance="true" race="ELYOS" min_level="65" />
 	</portal_dialog>
 	<!-- Tiamat Stronghold Entrance -->
 	<portal_dialog npc_id="832995">

@@ -10,8 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Luzien
- * @modified Estrayl March 10th, 2018
+ * @author Luzien, Estrayl
  */
 @AIName("gravity_tornado")
 public class GravityTornadoAI extends NpcAI {
@@ -25,7 +24,7 @@ public class GravityTornadoAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, 20966), 2500, 6000);
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, getNpcId() == 283142 ? 20966 : 21901), 2500, 6000);
 	}
 
 	@Override
