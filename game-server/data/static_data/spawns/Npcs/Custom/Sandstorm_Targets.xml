@@ -8,7 +8,11 @@
 		</spawn>
 		<!-- Versin -->
 		<spawn npc_id="205593" respawn_time="295">
-			<spot x="540.436" y="1980.9792" z="466.75" h="115" />
+			<spot x="539.7662" y="1980.1721" z="466.75" h="110" />
+		</spawn>
+		<!-- Leontidan -->
+		<spawn npc_id="205560">
+			<spot x="541.012" y="1982.509" z="466.75" h="116" />
 		</spawn>
 		<!-- Dena -->
 		<spawn npc_id="205594" respawn_time="295">
@@ -28,13 +32,17 @@
 		<spawn npc_id="205881" respawn_time="295">
 			<spot x="2714.5486" y="1369.3282" z="341.03702" h="91" />
 		</spawn>
+		<!-- Phias -->
+		<spawn npc_id="205872" respawn_time="295">
+			<spot x="2717.413" y="1369.6761" z="341.03702" h="92" />
+		</spawn>
 		<!-- Lussiel -->
 		<spawn npc_id="205882" respawn_time="295">
-			<spot x="2717.413" y="1369.6761" z="341.03702" h="92" />
+			<spot x="2720.0886" y="1370.0393" z="341.03702" h="92" />
 		</spawn>
 		<!-- Aena -->
 		<spawn npc_id="205883" respawn_time="295">
-			<spot x="2720.0886" y="1370.0393" z="341.03702" h="92" />
+			<spot x="2723.1016" y="1370.4132" z="341.0370" h="92" />
 		</spawn>
 	</spawn_map>
 	<!-- Sandstorm Npcs -->
