@@ -10,13 +10,13 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Cheatkiller
- * @modified Estrayl March 8th, 2018
+ * @author Cheatkiller, Estrayl
  */
 @AIName("calindi_surkana")
 public class CalindiSurkanaAI extends NpcAI {
 
 	private Future<?> reflectTask;
+	private int calindiId;
 
 	public CalindiSurkanaAI(Npc owner) {
 		super(owner);
@@ -25,20 +25,27 @@ public class CalindiSurkanaAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		if (getNpcId() == 730695)
-			startReflectBuffTask(20590);
-		else if (getNpcId() == 730696)
-			startReflectBuffTask(20591);
+		calindiId = getPosition().getMapId() == 300520000 ? 219359 : 236274;
+		switch (getNpcId()) {
+			case 730695:
+			case 731629:
+				startReflectBuffTask(20590);
+				break;
+			case 730696:
+			case 731630:
+				startReflectBuffTask(20591);
+				break;
+		}
 	}
 
 	private void startReflectBuffTask(int buffId) {
 		reflectTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			Npc calindi = getPosition().getWorldMapInstance().getNpc(219359);
+			Npc calindi = getPosition().getWorldMapInstance().getNpc(calindiId);
 			if (isDead() || calindi == null || calindi.isDead()) {
 				reflectTask.cancel(false);
 				return;
 			}
-			SkillEngine.getInstance().applyEffectDirectly(buffId, getOwner(), calindi);
+			SkillEngine.getInstance().applyEffectDirectly(buffId, getOwner(), getPosition().getWorldMapInstance().getNpc(calindiId));
 		}, 2500, 5000);
 	}
 

@@ -778,4 +778,17 @@
 			<gd_item id="152012607"/><!-- Valiance Mote -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Idium Shard" chance="3">
+		<gd_maps>
+			<gd_map map_id="600100000"/><!-- Levinshor -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="LOBNERU_LAGOON_600100000"/><!-- Chapir Settlement -->
+			<gd_zone zone="MOON_THICKET_600100000"/><!-- Popoku settlement -->
+			<gd_zone zone="FLAMEBERTH_DOWNS_600100000"/><!-- Tiamat Basin -->
+		</gd_zones>
+		<gd_items>
+			<gd_item id="152012622"/><!-- Idium Shard -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

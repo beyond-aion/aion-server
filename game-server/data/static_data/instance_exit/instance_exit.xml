@@ -151,6 +151,9 @@
 	<!-- Ophidan Bridge -->
 	<instance_exit instance_id="300590000" exit_world="210070000" race="ELYOS" x="2783.5369" y="3003.8613" z="274.875" h="24"/>
 	<instance_exit instance_id="300590000" exit_world="220080000" race="ASMODIANS" x="490.745" y="93.0318" z="199.121" h="99"/>
+	<!-- Anguished Dragon Lord's Refuge -->
+	<instance_exit instance_id="300630000" exit_world="210070000" race="ELYOS" x="106.4101" y="1466.2885" z="491.8714" h="78"/>
+	<instance_exit instance_id="300630000" exit_world="220080000" race="ASMODIANS" x="2857.5056" y="1674.4569" z="306.40497" h="13"/>
 	<!-- Infinity Shard -->
 	<instance_exit instance_id="300800000" exit_world="600100000" race="PC_ALL" x="1072.4126" y="982.45844" z="337.7758"/>
 	<!-- Sauro Supply Base -->

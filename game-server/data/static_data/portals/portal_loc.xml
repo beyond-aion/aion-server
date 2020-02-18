@@ -396,14 +396,6 @@
 	<portal_loc world_id="300510000" loc_id="3005105" x="1062.7202" y="1069.358" z="786.4852"/>
 	<!-- Dragon Lord's Refuge -->
 	<portal_loc world_id="300520000" loc_id="3005200" x="501.95316" y="519.2258" z="240.26651" h="47"/>
-	<portal_loc world_id="300520000" loc_id="3005201" x="217.144" y="195.616" z="246.0712"/>
-	<portal_loc world_id="300520000" loc_id="3005202" x="785.866" y="197.713" z="246.0712"/>
-	<portal_loc world_id="300520000" loc_id="3005203" x="217.947" y="832.552" z="246.0712"/>
-	<portal_loc world_id="300520000" loc_id="3005204" x="779.178" y="833.055" z="246.0712"/>
-	<portal_loc world_id="300520000" loc_id="3005205" x="461.493" y="459.308" z="417.405"/>
-	<portal_loc world_id="300520000" loc_id="3005206" x="546" y="458.934" z="417.405"/>
-	<portal_loc world_id="300520000" loc_id="3005207" x="462.188" y="568.913" z="417.405"/>
-	<portal_loc world_id="300520000" loc_id="3005208" x="545.773" y="569.225" z="417.405"/>
 	<portal_loc world_id="300520000" loc_id="3005209" x="543.346" y="514.509" z="417.405"/>
 	<!-- The Hexway -->
 	<portal_loc world_id="300700000" loc_id="3007000" x="672.79526" y="606.17664" z="321.20"/>
@@ -504,6 +496,8 @@
 	<portal_loc world_id="301500000" loc_id="3015000" x="231.14" y="264.399" z="98"/>
 	<!-- Occupied Rentus Base -->
 	<portal_loc world_id="300620000" loc_id="3006200" x="557.1892" y="594.9243" z="154.074" h="72"/>
+	<!-- Anguished Dragon Lord's Refuge -->
+	<portal_loc world_id="300630000" loc_id="3006300" x="501.95316" y="519.2258" z="240.26651" h="47"/>
 	<!-- Raksang Ruins -->
 	<portal_loc world_id="300610000" loc_id="3006100" x="829.9911" y="941.58673" z="1207.4312" h="73"/>
 	<portal_loc world_id="300610000" loc_id="3006101" x="758.9605" y="658.897" z="841.1138" h="54"/>

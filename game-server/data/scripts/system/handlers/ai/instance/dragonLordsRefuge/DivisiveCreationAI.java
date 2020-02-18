@@ -23,8 +23,7 @@ import ai.AggressiveNpcAI;
  * 2k to 3k damage, which is about 50% of the current. The base damage of this skill is 4500 so it is reduced
  * by something on retail. Maybe remove this hard-coded adjustment if something changes in damage calculations.
  * 
- * @author Cheatkiller
- * @modified Estrayl March 8th, 2018
+ * @author Cheatkiller, Estrayl
  */
 @AIName("divisive_creation")
 public class DivisiveCreationAI extends AggressiveNpcAI {
@@ -37,23 +36,28 @@ public class DivisiveCreationAI extends AggressiveNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		final WorldMapInstance instance = getPosition().getWorldMapInstance();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.targetCreature(DivisiveCreationAI.this, Rnd.get(instance.getPlayersInside()));
-				setStateIfNot(AIState.WALKING);
-				getOwner().setState(CreatureState.ACTIVE, true);
-				getMoveController().moveToTargetObject();
-				PacketSendUtility.broadcastToMap(getOwner(), new SM_EMOTION(getOwner(), EmotionType.WALK));
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			AIActions.targetCreature(DivisiveCreationAI.this, Rnd.get(instance.getPlayersInside()));
+			setStateIfNot(AIState.WALKING);
+			getOwner().setState(CreatureState.ACTIVE, true);
+			getMoveController().moveToTargetObject();
+			PacketSendUtility.broadcastToMap(getOwner(), new SM_EMOTION(getOwner(), EmotionType.WALK));
 		}, 5000);
 	}
 
 	@Override
 	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
-		if (effect != null && effect.getSkillId() == 20986)
-			damage *= 0.5f;
+		if (effect != null) {
+				switch (effect.getSkillId()) {
+						case 20986:
+								damage *= 0.6f;
+								break;
+						case 21897:
+						case 21898:
+								damage *= 0.5f;
+								break;
+				}
+		}
 		return damage;
 	}
 

@@ -150,7 +150,6 @@ public class AhserionRaid {
 		PanesterraFaction asmodians = PanesterraFaction.DISILLON;
 		panesterraTeams.put(elyos, new PanesterraTeam(elyos));
 		panesterraTeams.put(asmodians, new PanesterraTeam(asmodians));
-		panesterraTeams.put(PanesterraFaction.BALAUR, new PanesterraTeam(PanesterraFaction.BALAUR));
 		SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(110070000, 802223, 485.692f, 401.079f, 127.789f, (byte) 0), 1);
 		SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(120080000, 802225, 400.772f, 231.517f, 93.113f, (byte) 30), 1);
 	}

@@ -20,9 +20,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Cheatkiller
- * @reworked Yeats
- * @modified Estrayl March 8th, 2018
+ * @author Cheatkiller, Yeats, Estrayl
  */
 @AIName("IDTiamat_2_calindi_flamelord")
 public class CalindiFlamelordAI extends AggressiveNpcAI {
@@ -71,7 +69,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 		}
 	}
 
-	private void startHallucinatoryVictoryEvent() {
+	protected void startHallucinatoryVictoryEvent() {
 		if (getPosition().getWorldMapInstance().getNpc(730695) == null && getPosition().getWorldMapInstance().getNpc(730696) == null)
 			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20911, 1, 100)));
 	}
@@ -82,7 +80,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 			case 20911:
 				spawn(730695, 482.21f, 458.06f, 427.42f, (byte) 98);
 				spawn(730696, 482.21f, 571.16f, 427.42f, (byte) 22);
-				rndSpawn();
+				rndSpawn(283132);
 				break;
 			case 20913:
 				Player target = getRandomTarget();
@@ -91,28 +89,28 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 		}
 	}
 
-	private void blazeEngraving() {
+	protected void blazeEngraving() {
 		if (Rnd.chance() < 2 && getPosition().getWorldMapInstance().getNpc(283130) == null)
 			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20913, 60, 100)));
 	}
 
-	private void rndSpawn() {
+	protected void rndSpawn(int npcId) {
 		for (int i = 0; i < 10; i++) {
-			SpawnTemplate template = rndSpawnInRange();
+			SpawnTemplate template = rndSpawnInRange(npcId);
 			SpawnEngine.spawnObject(template, getPosition().getInstanceId());
 		}
 	}
 
-	private SpawnTemplate rndSpawnInRange() {
+	private SpawnTemplate rndSpawnInRange(int npcId) {
 		float direction = Rnd.get(0, 199) / 100f;
 		int range = Rnd.get(5, 20);
 		float x1 = (float) (Math.cos(Math.PI * direction) * range);
 		float y1 = (float) (Math.sin(Math.PI * direction) * range);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), 283132, getPosition().getX() + x1, getPosition().getY() + y1,
+		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1,
 			getPosition().getZ(), getPosition().getHeading());
 	}
 
-	private Player getRandomTarget() {
+	protected Player getRandomTarget() {
 		List<Player> players = getKnownList().getKnownPlayers().values().stream()
 			.filter(player -> !player.isDead() && PositionUtil.isInRange(player, getOwner(), 50)).collect(Collectors.toList());
 		return Rnd.get(players);
@@ -120,6 +118,6 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 
 	private void addPercents() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[] { 75, 50, 25, 12 });
+		Collections.addAll(percents, 75, 50, 25, 12);
 	}
 }

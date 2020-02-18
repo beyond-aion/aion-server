@@ -5,22 +5,28 @@
 		<npc_skill id="20963" lv="60" prob="70" cd="25000" />
 		<npc_skill id="20964" lv="60" prob="70" cd="25000" />
 	</npc_skills>
+	<!-- Calindi Flamelord HM -->
+	<npc_skills npc_ids="236274">
+		<npc_skill id="21889" lv="65" prob="70" cd="8000" /><!-- Fire Dragon Claw -->
+		<npc_skill id="21890" lv="65" prob="70" cd="8000" /><!-- Frontal Devastation -->
+		<npc_skill id="20915" lv="1" prob="100" cd="30000" max_hp="80" /><!-- Ignition -->
+	</npc_skills>
 	<!-- Fissurefang -->
-	<npc_skills npc_ids="219365">
+	<npc_skills npc_ids="219365 236278">
 		<npc_skill id="20105" lv="60" prob="40" cd="15000" />
 		<npc_skill id="20145" lv="60" prob="70" />
 		<npc_skill id="20146" lv="60" prob="40" />
 		<npc_skill id="20169" lv="60" prob="40" />
 	</npc_skills>
 	<!-- Graviwing -->
-	<npc_skills npc_ids="219366">
+	<npc_skills npc_ids="219366 236279">
 		<npc_skill id="20105" lv="60" prob="40" cd="15000" />
 		<npc_skill id="20145" lv="60" prob="70" />
 		<npc_skill id="20146" lv="60" prob="40" />
 		<npc_skill id="20157" lv="60" prob="40" />
 	</npc_skills>
 	<!-- Wrathclaw -->
-	<npc_skills npc_ids="219367">
+	<npc_skills npc_ids="219367 236280">
 		<npc_skill id="20105" lv="60" prob="40" cd="15000" />
 		<npc_skill id="20145" lv="60" prob="40" />
 		<npc_skill id="20146" lv="60" prob="40" />
@@ -28,7 +34,7 @@
 		<npc_skill id="20166" lv="60" prob="40" />
 	</npc_skills>
 	<!-- Petriscale -->
-	<npc_skills npc_ids="219368">
+	<npc_skills npc_ids="219368 236281">
 		<npc_skill id="20105" lv="60" prob="40" cd="15000" />
 		<npc_skill id="20145" lv="60" prob="70" />
 		<npc_skill id="20146" lv="60" prob="40" />
@@ -36,12 +42,18 @@
 	</npc_skills>
 	<!-- Divisive Creation -->
 	<npc_skills npc_ids="283139">
+		<npc_skill id="20985" lv="60" prob="100" cd="9000" />
 		<npc_skill id="20986" lv="60" prob="100" />
+	</npc_skills>
+	<!-- Divisive Creation HM -->
+	<npc_skills npc_ids="856042">
+		<npc_skill id="21897" lv="1" prob="100" cd="9000" />
+		<npc_skill id="21898" lv="1" prob="100" />
 	</npc_skills>
 	<!-- Sinking Sand -->
 	<npc_skills npc_ids="283136">
-		<npc_skill id="20965" lv="60" prob="100">
-			<cond delay="1000" despawn_time="3000" />
+		<npc_skill id="21896" lv="60" prob="100">
+			<cond delay="1500" despawn_time="2500" />
 		</npc_skill>
 	</npc_skills>
 	<!-- Rockslam -->
@@ -50,10 +62,22 @@
 			<cond delay="1000" despawn_time="3000" />
 		</npc_skill>
 	</npc_skills>
+	<!-- Rockslam HM -->
+	<npc_skills npc_ids="856043">
+		<npc_skill id="21899" lv="60" prob="100">
+			<cond delay="1000" despawn_time="3000" />
+		</npc_skill>
+	</npc_skills>
 	<!-- Infinite Pain -->
 	<npc_skills npc_ids="283144">
 		<npc_skill id="20969" lv="60" prob="100">
-			<cond delay="1000" despawn_time="3000" />
+			<cond delay="500" despawn_time="3000" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Infinite Pain -->
+	<npc_skills npc_ids="856049">
+		<npc_skill id="21902" lv="1" prob="100">
+			<cond delay="500" despawn_time="3000" />
 		</npc_skill>
 	</npc_skills>
 </npc_skill_templates>

@@ -19,8 +19,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Cheatkiller
- * @modified Estrayl March 8th, 2018
+ * @author Cheatkiller, Estrayl
  */
 @AIName("gravity_crusher")
 public class GravityCrusherAI extends AggressiveNpcAI {
@@ -34,19 +33,19 @@ public class GravityCrusherAI extends AggressiveNpcAI {
 		super.handleSpawned();
 		final WorldMapInstance instance = getPosition().getWorldMapInstance();
 		ThreadPoolManager.getInstance().schedule(() -> {
-				AIActions.targetCreature(this, Rnd.get(instance.getPlayersInside()));
-				setStateIfNot(AIState.WALKING);
-				getOwner().setState(CreatureState.ACTIVE, true);
-				getMoveController().moveToTargetObject();
-				PacketSendUtility.broadcastToMap(getOwner(), new SM_EMOTION(getOwner(), EmotionType.WALK));
-				transform();
+			AIActions.targetCreature(this, Rnd.get(instance.getPlayersInside()));
+			setStateIfNot(AIState.WALKING);
+			getOwner().setState(CreatureState.ACTIVE, true);
+			getMoveController().moveToTargetObject();
+			PacketSendUtility.broadcastToMap(getOwner(), new SM_EMOTION(getOwner(), EmotionType.WALK));
+			transform();
 		}, 2000);
 	}
 
 	private void transform() {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead())
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20967, 1, 100)));
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(getNpcId() == 283141 ? 20967 : 21900, 1, 100)));
 		}, 30000);
 	}
 
@@ -54,6 +53,7 @@ public class GravityCrusherAI extends AggressiveNpcAI {
 	public void onEndUseSkill(SkillTemplate skillTemplate) {
 		switch (skillTemplate.getSkillId()) {
 			case 20967:
+			case 21900:
 				spawn(getOwner().getLevel() == 65 ? getNpcId() + 1 : getNpcId() - 1, getOwner().getX(), getOwner().getY(), getOwner().getZ(),
 					getOwner().getHeading());
 				AIActions.deleteOwner(this);

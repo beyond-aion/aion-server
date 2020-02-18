@@ -1,99 +1,65 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="300630000">
-		<!-- Burrowing Attack -->
-		<spawn npc_id="283061" respawn_time="295">
-			<spot x="450.22656" y="477.95065" z="420"/>
-			<spot x="451.54834" y="554.17102" z="420"/>
-			<spot x="463.62933" y="567.33997" z="420"/>
-			<spot x="463.91541" y="461.74323" z="420"/>
-			<spot x="465.6442" y="491.21851" z="420"/>
-			<spot x="465.6442" y="536.91156" z="420"/>
-			<spot x="484.39243" y="450.16803" z="420"/>
-			<spot x="485.7645" y="578.32843" z="420"/>
-			<spot x="487.95078" y="493.47849" z="420"/>
-			<spot x="487.95078" y="535.38641" z="420"/>
-			<spot x="504.23001" y="469.83026" z="420"/>
-			<spot x="504.23001" y="515.06" z="420"/>
-			<spot x="504.23001" y="559.30878" z="420"/>
-			<spot x="519.67987" y="493.47849" z="420"/>
-			<spot x="519.67987" y="535.38641" z="420"/>
-			<spot x="522.39771" y="450.51508" z="420"/>
-			<spot x="523.28448" y="578.05463" z="420"/>
-			<spot x="542.65143" y="491.21851" z="420"/>
-			<spot x="542.65143" y="536.91156" z="420"/>
-			<spot x="543.93872" y="461.81064" z="420"/>
-			<spot x="544.65118" y="567.60382" z="420"/>
-			<spot x="560.01801" y="514.40216" z="420"/>
+		<!-- Tiamat Aetheric Field -->
+		<spawn npc_id="730694">
+			<spot x="436.7526" y="513.8103" z="420.6662" static_id="14"/>
 		</spawn>
-		<!-- Calindi Flamelord -->
-		<spawn npc_id="219359" respawn_time="295">
-			<spot x="485.82706" y="514.54999" z="422"/>
+		<!-- Tiamat -->
+		<spawn npc_id="219360">
+			<spot x="466.747" y="514.550" z="417.4044" />
 		</spawn>
-		<!-- Collapsed Debris -->
-		<spawn npc_id="730704" respawn_time="295">
-			<spot x="437.54105" y="513.48688" z="415.82394" static_id="17"/>
+		<!-- Wavering Surkana -->
+		<spawn npc_id="730699">
+			<spot x="504.1100" y="514.9100" z="418" static_id="9"/>
+		</spawn>
+		<!-- Fallen Surkana -->
+		<spawn npc_id="730700">
+			<spot x="504.1100" y="514.9100" z="418.8708" static_id="47"/>
+		</spawn>
+		<!-- Siel's relics -->
+		<spawn npc_id="701502">
+			<spot x="456.121735" y="514.561768" z="437.353424" static_id="96"/>
+		</spawn>
+		<!-- Fissure's Realm Exit -->
+		<spawn npc_id="730633">
+			<spot x="217.144" y="195.616" z="246.071" h="75"/>
+		</spawn>
+		<!-- Gravity's Realm Exit -->
+		<spawn npc_id="730634">
+			<spot x="785.866" y="197.713" z="246.071" h="103"/>
+		</spawn>
+		<!-- Wrath's Realm Exit -->
+		<spawn npc_id="730635">
+			<spot x="217.947" y="832.552" z="246.071" h="47"/>
+		</spawn>
+		<!-- Petrification's Realm Exit -->
+		<spawn npc_id="730636">
+			<spot x="779.178" y="833.055" z="246.071" h="16"/>
+		</spawn>
+		<!-- Kahrun -->
+		<spawn npc_id="800429">
+			<spot x="496.42648" y="516.493" z="240.26653"/>
+		</spawn>
+		<!-- Kahrun -->
+		<spawn npc_id="800341">
+			<spot x="483.463" y="514.519" z="417.404" h="60" />
 		</spawn>
 		<!-- Fissurefang -->
-		<spawn npc_id="219365" respawn_time="295">
-			<spot x="200.31058" y="179.13354" z="250" h="15"/>
+		<spawn npc_id="236278">
+			<spot x="193.11104" y="173.50334" z="246.07117" h="15"/>
 		</spawn>
 		<!-- Graviwing -->
-		<spawn npc_id="219366" respawn_time="295">
-			<spot x="801.04761" y="179.27742" z="250" h="45"/>
-		</spawn>
-		<!-- IDTiamat_Mission_L_Invisible_4 -->
-		<spawn npc_id="283150" respawn_time="295">
-			<spot x="506.20877" y="516.62" z="242.8519"/>
-		</spawn>
-		<!-- Kahrun -->
-		<spawn npc_id="800340" respawn_time="295">
-			<spot x="499.24399" y="516.62" z="242"/>
-		</spawn>
-		<!-- Kahrun -->
-		<spawn npc_id="800341" respawn_time="295">
-			<spot x="482.99002" y="514.58246" z="420" h="60"/>
-		</spawn>
-		<!-- Kahrun -->
-		<spawn npc_id="800430" respawn_time="295">
-			<spot x="502.25089" y="510.40036" z="420" h="50"/>
-		</spawn>
-		<!-- Marchutan -->
-		<spawn npc_id="219491" respawn_time="295">
-			<spot x="504.20999" y="514.84003" z="422" h="60"/>
-		</spawn>
-		<!-- Marchutan -->
-		<spawn npc_id="219492" respawn_time="295">
-			<spot x="516.28503" y="514.84003" z="422" h="60"/>
-		</spawn>
-		<!-- Petriscale -->
-		<spawn npc_id="219368" respawn_time="295">
-			<spot x="797.65161" y="848.70807" z="250" h="75"/>
-		</spawn>
-		<!-- Siel's Relics -->
-		<spawn npc_id="701502" respawn_time="295">
-			<spot x="456.12" y="514.52002" z="437.35321" static_id="96"/>
-		</spawn>
-		<!-- Tiamat -->
-		<spawn npc_id="219360" respawn_time="295">
-			<spot x="451.97" y="514.54999" z="427"/>
-			<spot x="466.74683" y="514.54999" z="420"/>
-		</spawn>
-		<!-- Tiamat -->
-		<spawn npc_id="219361" respawn_time="295">
-			<spot x="459.23718" y="514.54999" z="422"/>
-		</spawn>
-		<!-- Tiamat -->
-		<spawn npc_id="219362" respawn_time="295">
-			<spot x="451.97" y="514.54999" z="424"/>
-		</spawn>
-		<!-- Tiamat's Huge Treasure Crate -->
-		<spawn npc_id="702729" respawn_time="295">
-			<spot x="479.89001" y="514.6275" z="422"/>
+		<spawn npc_id="236279">
+			<spot x="805.052" y="170.7381" z="246.07117" h="40"/>
 		</spawn>
 		<!-- Wrathclaw -->
-		<spawn npc_id="219367" respawn_time="295">
-			<spot x="200.85735" y="848.3028" z="250" h="105"/>
+		<spawn npc_id="236280">
+			<spot x="196.53738" y="854.4979" z="246.07117" h="105"/>
+		</spawn>
+		<!-- Petriscale -->
+		<spawn npc_id="236281">
+			<spot x="801.7295" y="851.3593" z="246.07117" h="75"/>
 		</spawn>
 	</spawn_map>
 </spawns>

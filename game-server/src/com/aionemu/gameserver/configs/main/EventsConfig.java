@@ -25,10 +25,10 @@ public class EventsConfig {
 	/**
 	 * World Raid
 	 */
-	@Property(key = "gameserver.worldraid.enable", defaultValue = "false")
+	@Property(key = "gameserver.worldraid.enable", defaultValue = "true")
 	public static boolean ENABLE_WORLDRAID;
 
-	@Property(key = "gameserver.worldraid.usespawnmsg", defaultValue = "false")
+	@Property(key = "gameserver.worldraid.use_spawn_msg", defaultValue = "true")
 	public static boolean WORLDRAID_ENABLE_SPAWNMSG;
 
 	/**

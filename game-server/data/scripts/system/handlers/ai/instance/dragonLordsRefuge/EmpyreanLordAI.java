@@ -18,14 +18,13 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.GeneralNpcAI;
 
 /**
- * @author Bobobear
- * @reworked Estrayl March 10th, 2018
+ * @author Bobobear, Estrayl
  */
 @AIName("empyrean_lord")
 public class EmpyreanLordAI extends GeneralNpcAI {
 
 	private List<Integer> percents = new ArrayList<>();
-	private Npc tiamat;
+	private int tiamatId;
 
 	public EmpyreanLordAI(Npc owner) {
 		super(owner);
@@ -40,16 +39,26 @@ public class EmpyreanLordAI extends GeneralNpcAI {
 					npc.getController().die();
 			});
 		}, 9000);
-		tiamat = getPosition().getWorldMapInstance().getNpc(219361);
+
+		tiamatId = getPosition().getMapId() == 300520000 ? 219361 : 236276;
 		switch (getNpcId()) {
 			case 219488:
+			case 856020:
+				ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(this, 20932), 8500);
+				break;
 			case 219491:
-				ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(this, getNpcId() == 219488 ? 20932 : 20936), 8500);
+			case 856023:
+				ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(this, 20936), 8500);
 				break;
 			case 219489:
+			case 856021:
+				AIActions.targetCreature(this, getPosition().getWorldMapInstance().getNpc(tiamatId));
+				ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(this, 20929), 8500);
+				break;
 			case 219492:
-				AIActions.targetCreature(this, tiamat);
-				ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(this, getNpcId() == 219489 ? 20929 : 20933), 2500);
+			case 856024:
+				AIActions.targetCreature(this, getPosition().getWorldMapInstance().getNpc(tiamatId));
+				ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(this, 20933), 2500);
 				break;
 		}
 		addPercent();
@@ -60,6 +69,7 @@ public class EmpyreanLordAI extends GeneralNpcAI {
 		switch (skillTemplate.getSkillId()) {
 			case 20932:
 			case 20936:
+				Npc tiamat = getPosition().getWorldMapInstance().getNpc(tiamatId);
 				AIActions.targetCreature(this, tiamat);
 				getAggroList().addHate(tiamat, Integer.MAX_VALUE / 4);
 				setStateIfNot(AIState.FIGHT);
@@ -79,7 +89,9 @@ public class EmpyreanLordAI extends GeneralNpcAI {
 			return;
 		switch (getNpcId()) {
 			case 219488:
+			case 856020:
 			case 219491:
+			case 856023:
 				if (hpPercentage <= percents.get(0)) {
 					switch (percents.remove(0)) {
 						case 50:
@@ -96,7 +108,7 @@ public class EmpyreanLordAI extends GeneralNpcAI {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[] { 50, 15 });
+		Collections.addAll(percents, 50, 15);
 	}
 
 }

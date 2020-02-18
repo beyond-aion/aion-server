@@ -68,6 +68,28 @@
 			<spot x="784.5342" y="769.3612" z="292.7161" h="59" />
 		</spawn>
 	</spawn_map>
+	<spawn_map map_id="210090000"><!-- Idian_Depths_L -->
+		<!-- Daturum Wreckhelm -->
+		<spawn npc_id="218082" respawn_time="14400">
+			<spot x="1039.6853" y="1269.4457" z="558.9579" h="7" />
+		</spawn>
+		<!-- Nubale the Glacier -->
+		<spawn npc_id="218080" respawn_time="14400">
+			<spot x="1026.4972" y="313.9766" z="553.2606" h="49" />
+		</spawn>
+		<!-- Colossal Geodenos -->
+		<spawn npc_id="218518" respawn_time="7200">
+			<spot x="431.9469" y="434.6481" z="574.2938" h="52" />
+		</spawn>
+		<!-- Nemeco the Dancer -->
+		<spawn npc_id="218078" respawn_time="7200">
+			<spot x="195.5701" y="1170.4862" z="534.9322" h="116" />
+		</spawn>
+		<!-- Master-at-Arms Ranigan -->
+		<spawn npc_id="218557" respawn_time="7200">
+			<spot x="815.3823" y="1298.8033" z="508.4266" h="102" />
+		</spawn>
+	</spawn_map>
 	<spawn_map map_id="220100000"><!-- Idian_Depths_D -->
 		<!-- Daturum Wreckhelm -->
 		<spawn npc_id="218082" respawn_time="14400">

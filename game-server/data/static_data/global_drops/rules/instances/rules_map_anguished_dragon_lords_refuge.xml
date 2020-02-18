@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<gd_rule rule_name="Named Box" chance="100" member_limit="12">
+		<gd_maps>
+			<gd_map map_id="300630000" /><!-- Anguished_Dragon_Lords_Refuge -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236274" /><!-- Calindi Flamelord -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188052579" /><!-- Dragon's Blood Mark Box -->
+		</gd_items>
+	</gd_rule>
+</global_rules>

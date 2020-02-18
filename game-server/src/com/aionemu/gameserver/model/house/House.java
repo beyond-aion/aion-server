@@ -283,6 +283,7 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	@Override
+	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {
 			case DELETED:

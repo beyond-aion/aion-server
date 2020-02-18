@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Estrayl March 10th, 2018
+ * @author Estrayl
  */
 @AIName("tiamats_incarnation_spawn")
 public class TiamatsIncarnationSpawnsAI extends NpcAI {
@@ -35,14 +35,19 @@ public class TiamatsIncarnationSpawnsAI extends NpcAI {
 	private int getSkillId() {
 		switch (getNpcId()) {
 			case 282727: // Gravity Whirlpool
+			case 856074:
 				return 20155;
 			case 282729: // Thunderbolt Whirlpool
+			case 856076:
 				return 20156;
 			case 282731: // Petrification Crystal
+			case 856072:
 				return 20159;
 			case 282735: // Cavity of Earth
+			case 856068:
 				return 20172;
 			case 282737: // Collapsing Earth
+			case 856070:
 				return 20173;
 			default:
 				return 0;
