@@ -117,7 +117,7 @@ public class OphidanBridgeInstance extends GeneralInstanceHandler {
 			case 701644:
 				if (used.compareAndSet(false, true)) {
 					npc.getController().delete();
-					spawn(731544, 436.36f, 496.45f, 604.8871f, (byte) 2);
+					spawn(731544, 436.36f, 496.45f, 604.8871f, (byte) 2, 7);
 				}
 				break;
 			case 731544:

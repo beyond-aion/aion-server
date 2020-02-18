@@ -27,7 +27,7 @@
 		</spawn>
 		<!-- Access Route Corridor -->
 		<spawn npc_id="731545">
-			<spot x="372.53" y="492.05" z="605.5736" h="60"/>
+			<spot x="372.53" y="492.05" z="605.5736" h="60" static_id="34"/>
 		</spawn>
 		<!-- North Defense Drakenclaw -->
 		<spawn npc_id="235728">
