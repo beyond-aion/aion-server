@@ -310,6 +310,11 @@ public class PlayerController extends CreatureController<Player> {
 					master.getLifeStats().setCurrentHpPercent(33);
 				if (master.getLifeStats().getMpPercentage() < 33)
 					master.getLifeStats().setCurrentMpPercent(33);
+
+				player.resetFearCount();
+				player.resetSleepCount();
+				((Player) master).resetFearCount();
+				((Player) master).resetSleepCount();
 				return;
 			}
 		}
@@ -333,6 +338,9 @@ public class PlayerController extends CreatureController<Player> {
 		player.unsetState(CreatureState.GLIDING);
 		player.unsetFlyState(FlyState.FLYING);
 		player.unsetFlyState(FlyState.GLIDING);
+
+		player.resetFearCount();
+		player.resetSleepCount();
 
 		// Effects removed with super.onDie()
 		super.onDie(lastAttacker);

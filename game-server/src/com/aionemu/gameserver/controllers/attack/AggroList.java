@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.annotations.AnnotatedMethod;
+import com.aionemu.gameserver.utils.stats.StatFunctions;
 
 /**
  * @author ATracer, KKnD
@@ -57,7 +58,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 		if (addHate) {
 			// for now we add hate equal to each damage received, additionally effectHate will be broadcast to all hating creatures
 			boolean isNewInAggroList = ai.getHate() == 0;
-			ai.addHate(damage);
+			ai.addHate(damage > 0 ? StatFunctions.calculateHate(attacker, damage) : damage);
 			owner.getController().onAddHate(attacker, isNewInAggroList);
 		}
 

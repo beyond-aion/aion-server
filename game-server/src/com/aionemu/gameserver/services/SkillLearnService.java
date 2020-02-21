@@ -102,9 +102,9 @@ public class SkillLearnService {
 	public static boolean removeSkill(Player player, int skillId) {
 		PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
 		if (skill != null) {
-			PacketSendUtility.sendPacket(player, new SM_SKILL_REMOVE(skill));
-			player.getSkillList().removeSkill(skillId);
 			player.getEffectController().removeEffect(skillId);
+			player.getSkillList().removeSkill(skillId);
+			PacketSendUtility.sendPacket(player, new SM_SKILL_REMOVE(skill));
 			return true;
 		}
 		return false;

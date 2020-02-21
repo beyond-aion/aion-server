@@ -400,6 +400,10 @@ public class Skill {
 				case "AROMATHERAPY": // Mana Treatment
 				case "PR_FOCUSCASTING": // Prayer of focus
 				case "RI_SUMMONARMOR": // Embark skill
+					//TODO: Find pattern, why do these skills have hittime 0 when used after kinetic slam?
+				case "RI_FORWARDATTACK": // Chilling Wave
+				case "RI_WARNINGALARM": // Mounting Frustration
+				case "RI_BINDINGSLAM": // Convulsion Beam
 					return true;
 			}
 		}

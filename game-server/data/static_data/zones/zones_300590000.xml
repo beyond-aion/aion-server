@@ -58,14 +58,6 @@
             <point x="235.39577" y="641.6328"/>
         </points>
     </zone>
-    <zone mapid="300590000" name="PVP_44_300590000" area_type="POLYGON" zone_type="PVP" flags="64">
-        <points bottom="476.8878" top="776.8878">
-            <point x="142.45432" y="702.1127"/>
-            <point x="135.53311" y="291.07"/>
-            <point x="890.88086" y="268.7177"/>
-            <point x="899.813" y="679.3153"/>
-        </points>
-    </zone>
     <zone mapid="300590000" name="SOUTHERN_APPROACH_POST_1_300590000" area_type="POLYGON" zone_type="SUB" priority="15" flags="0">
         <points bottom="555.33856" top="655.33856">
             <point x="575.3541" y="549.30206"/>

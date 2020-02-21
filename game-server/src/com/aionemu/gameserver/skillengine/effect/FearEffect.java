@@ -88,6 +88,9 @@ public class FearEffect extends EffectTemplate {
 			effected.getObserveController().addObserver(observer);
 			effect.setActionObserver(observer, position);
 		}
+		if (effected instanceof Player) {
+			((Player) effected).incrementFearCount();
+		}
 	}
 
 	@Override

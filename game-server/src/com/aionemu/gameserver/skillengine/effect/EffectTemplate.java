@@ -4,13 +4,9 @@ import java.util.Collections;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
@@ -26,12 +22,7 @@ import com.aionemu.gameserver.skillengine.change.Change;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifiers;
-import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.HitType;
-import com.aionemu.gameserver.skillengine.model.HopType;
-import com.aionemu.gameserver.skillengine.model.ShieldType;
-import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.skillengine.model.SpellStatus;
+import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 
 /**
@@ -340,8 +331,9 @@ public abstract class EffectTemplate {
 				return false;
 			}
 			if (!noResist && !isCannotMiss()) {
-				if (isDodgedOrResisted(effect))
+				if (isDodgedOrResisted(effect)) {
 					return false;
+				}
 			}
 			return true;
 		}
@@ -355,8 +347,9 @@ public abstract class EffectTemplate {
 				int[] positions = getPreEffects();
 				if (positions != null) {
 					for (int pos : positions) {
-						if (!effect.isInSuccessEffects(pos))
+						if (!effect.isInSuccessEffects(pos)) {
 							return false;
+						}
 					}
 				}
 				if (!noResist && !isCannotMiss()) {
@@ -366,8 +359,6 @@ public abstract class EffectTemplate {
 						}
 						return false;
 					}
-					if (isDodgedOrResisted(effect))
-						return false;
 				}
 				return true;
 			}
@@ -546,6 +537,18 @@ public abstract class EffectTemplate {
 
 		if (effected == null || effected.getGameStats() == null || effector == null || effector.getGameStats() == null)
 			return false;
+
+		if (effected instanceof Player) {
+			if (statEnum == StatEnum.FEAR_RESISTANCE && ((Player) effected).getFearCount() >= 2 && ((Player) effected).validateLastFearTime()) {
+				if (Rnd.get(1, 1000) <= (400 + ((((Player) effected).getFearCount() - 2) * 200))) {
+					return false;
+				}
+			} else if (statEnum == StatEnum.SLEEP_RESISTANCE && ((Player) effected).getSleepCount() >= 2 && ((Player) effected).validateLastSleepTime()) {
+				if (Rnd.get(1, 1000) <= (400 + ((((Player) effected).getSleepCount() - 2) * 200))) {
+					return false;
+				}
+			}
+		}
 
 		if (effect.getSkillTemplate().getGroup() != null && effect.getSkillTemplate().getGroup().equals("WA_AVENGINGCRASH"))
 			return true;

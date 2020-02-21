@@ -826,6 +826,9 @@
 	<xs:complexType name="HostileUpEffect">
 		<xs:complexContent>
 			<xs:extension base="Effect">
+				<xs:attribute name="temp_duration" type="xs:int" use="optional"/>
+				<xs:attribute name="temp_value" type="xs:int" use="optional"/>
+				<xs:attribute name="temp_delta" type="xs:int" use="optional"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>

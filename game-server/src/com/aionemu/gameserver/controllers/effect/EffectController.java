@@ -18,10 +18,7 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABNORMAL_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
-import com.aionemu.gameserver.skillengine.effect.EffectType;
-import com.aionemu.gameserver.skillengine.effect.TransformEffect;
+import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.model.ActivationAttribute;
 import com.aionemu.gameserver.skillengine.model.DispelCategoryType;
 import com.aionemu.gameserver.skillengine.model.DispelSlotType;
@@ -176,7 +173,7 @@ public class EffectController {
 						for (EffectTemplate et2 : nextEffect.getEffectTemplates()) {
 							if (et2.getEffectId() == 0)
 								continue;
-							if (et.getEffectId() == et2.getEffectId()) {
+							if ((et.getEffectId() == et2.getEffectId()) || (et instanceof SilenceEffect && et2 instanceof SilenceEffect)) {
 								if (et.getBasicLvl() > et2.getBasicLvl()) {
 									if (!nextEffect.isPassive() && nextEffect.getTargetSlot() != SkillTargetSlot.DEBUFF)
 										nextEffect.setEffectResult(EffectResult.CONFLICT);
