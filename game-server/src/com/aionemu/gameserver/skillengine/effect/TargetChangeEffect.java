@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_UPDATE;
@@ -20,17 +21,19 @@ public class TargetChangeEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		switch (position) {
-			case 3: // remove all targets
-				// is not retail
-				Creature effected = effect.getEffected();
-				if (effected instanceof Player) {
-					Player player = (Player) effected;
-					player.setTarget(null);
-					PacketSendUtility.sendPacket(player, new SM_TARGET_SELECTED(null));
-					PacketSendUtility.broadcastPacket(player, new SM_TARGET_UPDATE(player));
-				}
-				break;
+		Creature effected = effect.getEffected();
+		if (effected instanceof Player) {
+			Player player = (Player) effected;
+			VisibleObject target = null;
+			switch (delta) {
+				// case 0: Shimmerbomb sets target to null
+				case 1:
+					target = effect.getEffector();
+					break;
+			}
+			player.setTarget(target);
+			PacketSendUtility.sendPacket(player, new SM_TARGET_SELECTED(target));
+			PacketSendUtility.broadcastPacket(player, new SM_TARGET_UPDATE(player));
 		}
 	}
 }
