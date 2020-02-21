@@ -688,9 +688,7 @@
 	<ai npcId="219610">
 		<summons>
 			<percentage percent="60" isIndividual="true"/>
-			<percentage percent="50" isIndividual="true"/>
 			<percentage percent="20" isIndividual="true"/>
-			<percentage percent="10" isIndividual="true"/>
 		</summons>
 	</ai>
 	<!-- Brigade General Sheba -->

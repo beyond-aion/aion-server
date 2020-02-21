@@ -3653,10 +3653,10 @@
 	<!-- The Hexway -->
 	<npc_drop npc_id="701663"><!-- Ancient Treasure Box -->
 		<drop_group level_based_chance_reduction="true">
-			<drop item_id="186000409" chance="100" /><!-- Daeva's Respite Coin -->
+			<drop item_id="186000409" chance="100" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
-			<drop item_id="188052163" chance="100" /><!-- Ancient Treasure Box -->
+			<drop item_id="188052163" chance="100" each_member="true" /><!-- Ancient Treasure Box -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
 			<drop item_id="160002418" chance="25" /><!-- Fried Kusien -->
@@ -3671,20 +3671,20 @@
 	</npc_drop>
 	<npc_drop npc_id="701664"><!-- Golden Treasure Box -->
 		<drop_group level_based_chance_reduction="true">
-			<drop item_id="186000409" min_amount="2" chance="100" /><!-- Daeva's Respite Coin -->
+			<drop item_id="186000409" min_amount="2" max_amount="2" chance="100" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
-			<drop item_id="188052162" min_amount="2" chance="100" /><!-- Bundle of ancient items -->
+			<drop item_id="188052162" min_amount="2" max_amount="2" chance="100" each_member="true" /><!-- Bundle of ancient items -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
-			<drop item_id="186000242" min_amount="2" max_amount="3" chance="100" /><!-- Ceramium Medal -->
+			<drop item_id="186000242" min_amount="2" max_amount="3" chance="100" each_member="true" /><!-- Ceramium Medal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
 			<drop item_id="186000243" min_amount="8" max_amount="15" chance="10" /><!-- Shattered Ceranium -->
-			<drop item_id="186000147" max_amount="3" chance="15" /><!-- Mithril Medal -->
+			<drop item_id="186000147" min_amount="1" max_amount="3" chance="15" /><!-- Mithril Medal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
-			<drop item_id="188053610" chance="10" /><!-- Manastone Bundle (Level 70) -->
+			<drop item_id="188053610" chance="10" each_member="true" /><!-- Manastone Bundle (Level 70) -->
 		</drop_group>
 	</npc_drop>
 	<!-- Theobomos Lab -->
@@ -4210,7 +4210,7 @@
 			<drop item_id="152013044" chance="100" min_amount="3" max_amount="3" /><!-- Deadly Pride -->
 			<drop item_id="152013045" chance="100" min_amount="3" max_amount="3" /><!-- Malicious Pride -->
 		</drop_group>
-		<drop_group><!-- RARE --> 
+		<drop_group><!-- RARE -->
 			<drop item_id="188051874" chance="20" /><!-- Harvest Revel Furniture Set Box -->
 			<drop item_id="110900374" chance="2" /><!-- [Event] Alchemist's Dress -->
 			<drop item_id="125040244" chance="2" /><!-- [Event] Alchemist's Hat -->
@@ -4243,7 +4243,7 @@
 			<drop item_id="152013040" chance="100" min_amount="3" max_amount="3" /><!-- Mortal Envy -->
 			<drop item_id="152013043" chance="100" min_amount="3" max_amount="3" /><!-- Mortal Pride -->
 		</drop_group>
-		<drop_group race="ELYOS"><!-- CONSUMABLES --> 
+		<drop_group race="ELYOS"><!-- CONSUMABLES -->
 			<drop item_id="186000102" chance="100" min_amount="5" max_amount="15" /><!-- Fortuneers Token -->
 			<drop item_id="186000100" chance="100" min_amount="5" max_amount="15" /><!-- Progress Token -->
 			<drop item_id="186000399" chance="100" min_amount="10" max_amount="10" /><!-- Honorable Conqueror's Mark -->

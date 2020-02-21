@@ -55,6 +55,8 @@ public class PortalAI extends ActionItemNpcAI {
 			if (loc != null) {
 				TeleportService.teleport(teleportTemplate, loc.getLocId(), player, getOwner(), TeleportAnimation.FADE_OUT_BEAM);
 			}
+		} else {
+			super.handleUseItemFinish(player);
 		}
 	}
 
