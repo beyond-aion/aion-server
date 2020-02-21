@@ -59,8 +59,8 @@ public class FearEffect extends EffectTemplate {
 		final Creature effector = effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector();
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill(effector);
-		effect.setAbnormal(AbnormalState.FEAR);
-		effected.getEffectController().setAbnormal(AbnormalState.FEAR);
+		effect.setAbnormal(AbnormalState.FEAR.getId());
+		effected.getEffectController().setAbnormal(AbnormalState.FEAR.getId());
 
 		// PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
 		effected.getMoveController().abortMove();
@@ -88,11 +88,14 @@ public class FearEffect extends EffectTemplate {
 			effected.getObserveController().addObserver(observer);
 			effect.setActionObserver(observer, position);
 		}
+		if (effected instanceof Player) {
+			((Player) effected).incrementFearCount();
+		}
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.FEAR);
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.FEAR.getId());
 
 		effect.getEffected().getMoveController().abortMove();
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_TARGET_IMMOBILIZE(effect.getEffected()));

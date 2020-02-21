@@ -6,6 +6,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.atomic.AtomicLong;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -29,14 +31,8 @@ import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.actions.PlayerActions;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Kisk;
-import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.Summon;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank.AbyssRankUpdateType;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.EmotionList;
 import com.aionemu.gameserver.model.gameobjects.player.motion.MotionList;
@@ -198,6 +194,10 @@ public class Player extends Creature {
 	private int robotId;
 	private boolean isInFfaTeamMode;
 	private int customStates;
+
+	private AtomicInteger fearCount = new AtomicInteger(0);
+	private AtomicInteger sleepCount = new AtomicInteger(0);
+	private AtomicLong lastFearTime = new AtomicLong(0), lastSleepTime = new AtomicLong(0);
 
 	public Player(PlayerAccountData playerAccountData, Account account) {
 		super(playerAccountData.getPlayerCommonData().getPlayerObjId(), new PlayerController(), null, playerAccountData.getPlayerCommonData(),
@@ -1764,5 +1764,53 @@ public class Player extends Creature {
 
 	public boolean isInCustomState(CustomPlayerState state) {
 		return (customStates & state.getMask()) == state.getMask();
+	}
+
+	public void incrementFearCount() {
+		fearCount.incrementAndGet();
+		lastFearTime.set(System.currentTimeMillis());
+	}
+
+	public void incrementSleepCount() {
+		sleepCount.incrementAndGet();
+		lastSleepTime.set(System.currentTimeMillis());
+	}
+
+	public int getSleepCount() {
+		return sleepCount.get();
+	}
+
+	public int getFearCount() {
+		return fearCount.get();
+	}
+
+	public void resetFearCount() {
+		fearCount.set(0);
+		lastFearTime.set(0);
+	}
+
+	public void resetSleepCount() {
+		sleepCount.set(0);
+		lastSleepTime.set(0);
+	}
+
+	public boolean validateLastFearTime() {
+		if ((System.currentTimeMillis() - lastFearTime.get()) <= 60 * 1000) {
+			return true;
+		} else {
+			resetFearCount();
+			lastFearTime.set(0);
+			return false;
+		}
+	}
+
+	public boolean validateLastSleepTime() {
+		if ((System.currentTimeMillis() - lastSleepTime.get()) <= 60 * 1000) {
+			return true;
+		} else {
+			resetSleepCount();
+			lastSleepTime.set(0);
+			return false;
+		}
 	}
 }

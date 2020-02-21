@@ -31,8 +31,10 @@ public class SleepEffect extends EffectTemplate {
 	public void startEffect(final Effect effect) {
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill(effect.getEffector());
-		if (effected instanceof Player)
+		if (effected instanceof Player) {
 			((Player) effected).getFlyController().onStopGliding();
+			((Player) effected).incrementSleepCount();
+		}
 		effect.setAbnormal(AbnormalState.SLEEP);
 		effected.getEffectController().setAbnormal(AbnormalState.SLEEP);
 		effect.setCancelOnDmg(true);
