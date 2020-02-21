@@ -24,12 +24,4 @@
             <point x="79.6766" y="203.35919"/>
         </points>
     </zone>
-    <zone mapid="300800000" name="PVP_58_300800000" area_type="POLYGON" zone_type="PVP" flags="64">
-        <points bottom="79.34249" top="229.34248">
-            <point x="71.389404" y="49.25737"/>
-            <point x="188.91302" y="53.116364"/>
-            <point x="186.4573" y="220.8068"/>
-            <point x="68.58286" y="216.597"/>
-        </points>
-    </zone>
 </zones>
