@@ -6,6 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.SkillSubType;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
@@ -31,7 +32,7 @@ public class CM_REMOVE_ALTERED_STATE extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		Effect effect = player.getEffectController().findBySkillId(skillId);
 		if (effect != null) {
-			if (!player.equals(effect.getEffector())) {
+			if (!player.equals(effect.getEffector()) && effect.getSkillSubType() == SkillSubType.DEBUFF) {
 				AuditLogger.log(player, "tried to remove a (de)buff he didn't cast himself: " + skillId + " " + effect.getSkillName() + " (effector: "
 					+ effect.getEffector() + ")");
 			} else {
