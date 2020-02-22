@@ -195,9 +195,8 @@ public class Player extends Creature {
 	private boolean isInFfaTeamMode;
 	private int customStates;
 
-	private AtomicInteger fearCount = new AtomicInteger(0);
-	private AtomicInteger sleepCount = new AtomicInteger(0);
-	private AtomicLong lastFearTime = new AtomicLong(0), lastSleepTime = new AtomicLong(0);
+	private AtomicInteger fearCount = new AtomicInteger(), sleepCount = new AtomicInteger(), paralyzeCount = new AtomicInteger();
+	private AtomicLong lastFearTime = new AtomicLong(), lastSleepTime = new AtomicLong(), lastParalyzeTime = new AtomicLong();
 
 	public Player(PlayerAccountData playerAccountData, Account account) {
 		super(playerAccountData.getPlayerCommonData().getPlayerObjId(), new PlayerController(), null, playerAccountData.getPlayerCommonData(),
@@ -1776,12 +1775,21 @@ public class Player extends Creature {
 		lastSleepTime.set(System.currentTimeMillis());
 	}
 
-	public int getSleepCount() {
-		return sleepCount.get();
+	public void incrementParalyzeCount() {
+		paralyzeCount.incrementAndGet();
+		lastParalyzeTime.set(System.currentTimeMillis());
 	}
 
 	public int getFearCount() {
 		return fearCount.get();
+	}
+
+	public int getSleepCount() {
+		return sleepCount.get();
+	}
+
+	public int getParalyzeCount() {
+		return paralyzeCount.get();
 	}
 
 	public void resetFearCount() {
@@ -1794,12 +1802,16 @@ public class Player extends Creature {
 		lastSleepTime.set(0);
 	}
 
+	public int resetParalyzeCount() {
+		paralyzeCount.set(0);
+		lastParalyzeTime.set(0);
+	}
+
 	public boolean validateLastFearTime() {
 		if ((System.currentTimeMillis() - lastFearTime.get()) <= 60 * 1000) {
 			return true;
 		} else {
 			resetFearCount();
-			lastFearTime.set(0);
 			return false;
 		}
 	}
@@ -1809,7 +1821,15 @@ public class Player extends Creature {
 			return true;
 		} else {
 			resetSleepCount();
-			lastSleepTime.set(0);
+			return false;
+		}
+	}
+
+	public boolean validateLastParalyzeTime() {
+		if ((System.currentTimeMillis() - lastParalyzeTime.get()) <= 60 * 1000) {
+			return true;
+		} else {
+			resetParalyzeCount();
 			return false;
 		}
 	}
