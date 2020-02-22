@@ -389,7 +389,8 @@ public class GoTo extends AdminCommand {
 
 		// New instances 4.8
 		addLocation(OCCUPIED_RENTUS_BASE, 557, 593, 154, "Occupied Rentus Base", "Occupied Rentus", "Verlorene Rentus Basis");
-		addLocation(ANGUISHED_DRAGON_LORDS_REFUGE, 506, 516, 242, "Anguished Dragon Lords Refuge, Tiamats Hideout HM, TU HM");
+		addLocation(ANGUISHED_DRAGON_LORDS_REFUGE, 506, 516, 242, "Anguished Dragon Lords Refuge", "Tiamats Hideout HM", "TU HM");
+		addLocation(DRAKENSPIRE_DEPHTS, 322, 183, 1688, "Drakenspire Depths", "Makarna");
 
 		// New maps 4.8
 		addLocation(CYGNEA, 2905, 803, 570, "Cygnea", "Signia");
