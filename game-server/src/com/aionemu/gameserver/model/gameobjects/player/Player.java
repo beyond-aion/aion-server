@@ -1802,7 +1802,7 @@ public class Player extends Creature {
 		lastSleepTime.set(0);
 	}
 
-	public int resetParalyzeCount() {
+	public void resetParalyzeCount() {
 		paralyzeCount.set(0);
 		lastParalyzeTime.set(0);
 	}
