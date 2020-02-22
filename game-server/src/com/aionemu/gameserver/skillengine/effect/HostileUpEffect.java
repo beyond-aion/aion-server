@@ -5,11 +5,16 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.controllers.observer.ActionObserver;
+import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
+
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.atomic.AtomicReference;
 
 /**
  * @author ATracer
@@ -36,15 +41,29 @@ public class HostileUpEffect extends EffectTemplate {
 			// hate broadcasts in Effect.startEffect (if added to EffectController) and applyEffect (if there are no successEffects), so some never do
 			if (effect.getSuccessEffects().size() == 1) // only this effect template is present, therefore we know regular hate will never broadcast
 				totalHate += effect.getEffectHate();
-			((Npc) effected).getAggroList().addHate(effect.getEffector(), totalHate);
+			effected.getAggroList().addHate(effect.getEffector(), totalHate + tempHate);
 			if (tempHate > 0) {
-				effected.getAggroList().addHate(effect.getEffector(), tempHate);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
+				AtomicReference<ActionObserver> observerRef = new AtomicReference<>();
+				ScheduledFuture<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
 					@Override
 					public void run() {
-						effected.getAggroList().addHate(effect.getEffector(), -1 * tempHate);
+						if (effected.getAggroList().isHating(effect.getEffector())) {
+							effected.getAggroList().addHate(effect.getEffector(), -1 * tempHate);
+						}
+						if (observerRef.get() != null) {
+							effected.getObserveController().removeObserver(observerRef.get());
+						}
 					}
 				}, tempDuration);
+
+				observerRef.set(new ActionObserver(ObserverType.DEATH) {
+					@Override
+					public void died(Creature creature) {
+						task.cancel(false);
+						effect.getEffector().getObserveController().removeObserver(this);
+					}
+				});
+				effect.getEffected().getObserveController().addObserver(observerRef.get());
 			}
 		}
 	}
