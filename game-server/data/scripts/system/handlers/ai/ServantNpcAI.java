@@ -31,6 +31,11 @@ public class ServantNpcAI extends GeneralNpcAI {
 	}
 
 	@Override
+	public boolean canThink() {
+		return false;
+	}
+
+	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
 		if (getCreator() != null) {
