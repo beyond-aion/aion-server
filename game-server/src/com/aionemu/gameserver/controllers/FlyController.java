@@ -29,6 +29,8 @@ public class FlyController {
 			if (!player.isInFlyState(FlyState.FLYING)) {
 				player.getLifeStats().triggerFpRestore();
 				PacketSendUtility.broadcastToSightedPlayers(player, new SM_EMOTION(player, EmotionType.STOP_GLIDE), true);
+			} else {
+				player.getLifeStats().triggerFpReduce();
 			}
 			player.getGameStats().updateStatsAndSpeedVisually();
 		}
@@ -102,11 +104,10 @@ public class FlyController {
 				return false;
 			}
 			player.setFlyReuseTime(System.currentTimeMillis() + FLY_REUSE_TIME);
-			player.getLifeStats().triggerFpReduce();
 		}
 		player.setFlyState(FlyState.GLIDING);
 		player.setState(CreatureState.GLIDING);
-
+		player.getLifeStats().triggerFpReduce();
 		player.getGameStats().updateStatsAndSpeedVisually();
 		return true;
 	}
