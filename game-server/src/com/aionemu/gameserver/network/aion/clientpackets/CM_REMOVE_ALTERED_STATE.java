@@ -32,8 +32,8 @@ public class CM_REMOVE_ALTERED_STATE extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		Effect effect = player.getEffectController().findBySkillId(skillId);
 		if (effect != null) {
-			if (!player.equals(effect.getEffector()) && effect.getSkillSubType() == SkillSubType.DEBUFF) {
-				AuditLogger.log(player, "tried to remove a (de)buff he didn't cast himself: " + skillId + " " + effect.getSkillName() + " (effector: "
+			if (effect.getSkillSubType() == SkillSubType.DEBUFF) {
+				AuditLogger.log(player, "tried to remove a debuff: " + skillId + " " + effect.getSkillName() + " (effector: "
 					+ effect.getEffector() + ")");
 			} else {
 				effect.endEffect();
