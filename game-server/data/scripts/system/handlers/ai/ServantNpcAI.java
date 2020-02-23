@@ -11,6 +11,9 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.NpcObjectType;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -91,7 +94,13 @@ public class ServantNpcAI extends GeneralNpcAI {
 					AIActions.deleteOwner(ServantNpcAI.this);
 					cancelTask();
 				} else {
-					SkillEngine.getInstance().getSkill(getOwner(), skill.getSkillId(), skill.getSkillLevel(), getOwner().getTarget()).useSkill();
+					SkillTemplate template = skill.getTemplate().getSkillTemplate();
+					if ((template.getType() != SkillType.MAGICAL || !getOwner().getEffectController().isAbnormalSet(AbnormalState.SILENCE))
+							&& (template.getType() != SkillType.PHYSICAL || !getOwner().getEffectController().isAbnormalSet(AbnormalState.BIND))
+							&& (!getOwner().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
+							&& (!getOwner().getTransformModel().isActive() || getOwner().getTransformModel().getBanUseSkills() != 1)) {
+						SkillEngine.getInstance().getSkill(getOwner(), skill.getSkillId(), skill.getSkillLevel(), getOwner().getTarget()).useSkill();
+					}
 				}
 			}
 		}, startDelay, duration);
