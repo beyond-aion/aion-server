@@ -249,17 +249,28 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void onLeaveFlyArea() {
 		Player player = getOwner();
-		if (player.isInFlyingState() && !player.hasAccess(AdminConfig.FREE_FLIGHT)) {
-			if (player.isInGlidingState()) {
-				player.unsetFlyState(FlyState.FLYING);
-				player.unsetState(CreatureState.FLYING);
-				player.getGameStats().updateStatsAndSpeedVisually();
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_FLY), true);
-			} else {
-				player.getFlyController().endFly(true);
-				if (player.isSpawned()) // not spawned means leaving by teleporter
-					AuditLogger.log(player, "left fly zone in fly state at " + player.getPosition());
+		if (!player.hasAccess(AdminConfig.FREE_FLIGHT)) {
+			if (player.isInFlyingState()) {
+				if (player.isInGlidingState()) {
+					player.unsetFlyState(FlyState.FLYING);
+					player.unsetState(CreatureState.FLYING);
+					player.getLifeStats().triggerFpReduce();
+					player.getGameStats().updateStatsAndSpeedVisually();
+					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.STOP_FLY), true);
+				} else {
+					player.getFlyController().endFly(true);
+					if (player.isSpawned()) // not spawned means leaving by teleporter
+						AuditLogger.log(player, "left fly zone in fly state at " + player.getPosition());
+				}
+			} else if (player.isInGlidingState()) {
+				player.getLifeStats().triggerFpReduce();
 			}
+		}
+	}
+
+	public void onEnterFlyArea() {
+		if (!getOwner().hasAccess(AdminConfig.FREE_FLIGHT) && getOwner().isInGlidingState()) {
+			getOwner().getLifeStats().triggerFpReduce();
 		}
 	}
 
@@ -310,11 +321,6 @@ public class PlayerController extends CreatureController<Player> {
 					master.getLifeStats().setCurrentHpPercent(33);
 				if (master.getLifeStats().getMpPercentage() < 33)
 					master.getLifeStats().setCurrentMpPercent(33);
-
-				player.resetFearCount();
-				player.resetSleepCount();
-				((Player) master).resetFearCount();
-				((Player) master).resetSleepCount();
 				return;
 			}
 		}
@@ -341,6 +347,7 @@ public class PlayerController extends CreatureController<Player> {
 
 		player.resetFearCount();
 		player.resetSleepCount();
+		player.resetParalyzeCount();
 
 		// Effects removed with super.onDie()
 		super.onDie(lastAttacker);

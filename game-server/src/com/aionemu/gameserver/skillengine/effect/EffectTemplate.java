@@ -540,11 +540,15 @@ public abstract class EffectTemplate {
 
 		if (effected instanceof Player) {
 			if (statEnum == StatEnum.FEAR_RESISTANCE && ((Player) effected).getFearCount() >= 2 && ((Player) effected).validateLastFearTime()) {
-				if (Rnd.get(1, 1000) <= (400 + ((((Player) effected).getFearCount() - 2) * 200))) {
+				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getFearCount())) {
 					return false;
 				}
 			} else if (statEnum == StatEnum.SLEEP_RESISTANCE && ((Player) effected).getSleepCount() >= 2 && ((Player) effected).validateLastSleepTime()) {
-				if (Rnd.get(1, 1000) <= (400 + ((((Player) effected).getSleepCount() - 2) * 200))) {
+				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getSleepCount())) {
+					return false;
+				}
+			} else if (statEnum == StatEnum.PARALYZE_RESISTANCE && ((Player) effected).getParalyzeCount() >= 2 && ((Player) effected).validateLastParalyzeTime()) {
+				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getParalyzeCount())) {
 					return false;
 				}
 			}
@@ -617,6 +621,19 @@ public abstract class EffectTemplate {
 			LoggerFactory.getLogger(EffectTemplate.class).warn("Missing statenum penetration for " + statEnum.toString());
 		}
 		return toReturn;
+	}
+
+	private int getCumulativeResistChanceFor(int resistCount) {
+		switch (resistCount) {
+			case 2:
+				return 200;
+			case 3:
+				return 400;
+			case 4:
+				return 1000;
+			default:
+				return 0;
+		}
 	}
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {

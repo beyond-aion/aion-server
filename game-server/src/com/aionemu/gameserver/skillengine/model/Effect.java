@@ -26,10 +26,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_ACTIVATION;
 import com.aionemu.gameserver.services.event.Event;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.skillengine.effect.AbstractAbsoluteStatEffect;
-import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
-import com.aionemu.gameserver.skillengine.effect.EffectType;
+import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.periodicaction.PeriodicAction;
 import com.aionemu.gameserver.skillengine.periodicaction.PeriodicActions;
@@ -919,8 +916,23 @@ public class Effect implements StatOwner {
 		long duration = calculateTemplateDuration();
 
 		// adjust with pvp duration (not sure why some self target skills have pvp duration o.O idk how to handle that)
-		if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected) && getEffected() instanceof Player)
-			duration = duration * skillTemplate.getPvpDuration() / 100;
+		if (getEffected() instanceof Player) {
+			if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected))
+				duration = duration * skillTemplate.getPvpDuration() / 100;
+			for (EffectTemplate et : successEffects.values()) {
+				if (et instanceof ParalyzeEffect && ((Player) getEffected()).validateLastParalyzeTime()) {
+					duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getParalyzeCount()) / 100f);
+					break;
+				} else if (et instanceof FearEffect  && ((Player) getEffected()).validateLastFearTime()) {
+					duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getFearCount()) / 100f);
+					break;
+				} else if (et instanceof SleepEffect  && ((Player) getEffected()).validateLastSleepTime()) {
+					System.out.println(getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getSleepCount()) / 100f);
+					duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getSleepCount()) / 100f);
+					break;
+				}
+			}
+		}
 
 		return (int) Math.min(Integer.MAX_VALUE, duration);
 	}
@@ -936,6 +948,21 @@ public class Effect implements StatOwner {
 				longestTemplateDuration = effectDuration;
 		}
 		return longestTemplateDuration;
+	}
+
+	private int getCumulativeResistDurationMultiplierFor(int resistCount) {
+		switch (resistCount) {
+			case 1:
+				return 100;
+			case 2:
+				return 90;
+			case 3:
+				return 85;
+			case 4:
+				return 80;
+			default:
+				return 0;
+		}
 	}
 
 	public boolean isDeityAvatar() {

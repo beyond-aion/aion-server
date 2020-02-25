@@ -15,8 +15,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class LifeStatsRestoreService {
 
 	private static final int DEFAULT_DELAY = 6000;
-	private static final int DEFAULT_FPREDUCE_DELAY = 2000;
-	private static final int DEFAULT_FPRESTORE_DELAY = 2000;
 
 	private static LifeStatsRestoreService instance = new LifeStatsRestoreService();
 
@@ -44,8 +42,8 @@ public class LifeStatsRestoreService {
 	 * @param lifeStats
 	 * @return
 	 */
-	public Future<?> scheduleFpReduceTask(final PlayerLifeStats lifeStats, Integer costFp) {
-		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpReduceTask(lifeStats, costFp), 2000, DEFAULT_FPREDUCE_DELAY);
+	public Future<?> scheduleFpReduceTask(final PlayerLifeStats lifeStats, int costFp, long delay, long period) {
+		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpReduceTask(lifeStats, costFp), delay, period);
 	}
 
 	/**
@@ -53,7 +51,7 @@ public class LifeStatsRestoreService {
 	 * @return
 	 */
 	public Future<?> scheduleFpRestoreTask(PlayerLifeStats lifeStats) {
-		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpRestoreTask(lifeStats), 2000, DEFAULT_FPRESTORE_DELAY);
+		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpRestoreTask(lifeStats), 3000, DEFAULT_DELAY);
 	}
 
 	public static LifeStatsRestoreService getInstance() {
@@ -102,9 +100,9 @@ public class LifeStatsRestoreService {
 	private static class FpReduceTask implements Runnable {
 
 		private PlayerLifeStats lifeStats;
-		private Integer costFp;
+		private int costFp;
 
-		private FpReduceTask(PlayerLifeStats lifeStats, final Integer costFp) {
+		private FpReduceTask(PlayerLifeStats lifeStats, int costFp) {
 			this.lifeStats = lifeStats;
 			this.costFp = costFp;
 		}
@@ -116,21 +114,14 @@ public class LifeStatsRestoreService {
 				lifeStats = null;
 				return;
 			}
-
-			if (lifeStats.getCurrentFp() == 0) {
+			lifeStats.reduceFp(null, costFp, 0, null);
+			lifeStats.specialrestoreFp();
+			if (lifeStats.getCurrentFp() <= 0) {
 				if (lifeStats.getOwner().isFlying()) {
 					lifeStats.getOwner().getFlyController().endFly(true);
 				} else {
 					lifeStats.triggerFpRestore();
 				}
-			} else {
-				int reduceFp = lifeStats.getOwner().getFlyState() == 2 && lifeStats.getOwner().isInsideZoneType(ZoneType.FLY) ? 1 : 2;
-				if (costFp != null) {
-					reduceFp = costFp.intValue();
-				}
-
-				lifeStats.reduceFp(null, reduceFp, 0, null);
-				lifeStats.specialrestoreFp();
 			}
 		}
 	}

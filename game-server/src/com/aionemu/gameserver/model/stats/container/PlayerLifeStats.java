@@ -5,6 +5,7 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FLY_TIME;
@@ -146,8 +147,8 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 				value = getMaxFp() - this.currentFp;
 			}
 			if (currentFp != newFp) {
-				onIncreaseFp(type, value, skillId, log);
 				this.currentFp = newFp;
+				onIncreaseFp(type, value, skillId, log);
 			}
 		} finally {
 			fpLock.unlock();
@@ -220,8 +221,8 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	 * this method should be used only on FlyTimeRestoreService
 	 */
 	public void restoreFp() {
-		// how much fly time restoring per 2 second.
-		increaseFp(TYPE.NATURAL_FP, 1, 0, LOG.REGULAR);
+		// how much fly time restoring per 6 second.
+		increaseFp(TYPE.NATURAL_FP, 3, 0, LOG.REGULAR);
 	}
 
 	public void specialrestoreFp() {
@@ -231,7 +232,6 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 
 	public void triggerFpRestore() {
 		cancelFpReduce();
-
 		restoreLock.lock();
 		try {
 			if (flyRestoreTask == null && !isDead && !isFlyTimeFullyRestored()) {
@@ -264,10 +264,17 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 
 	private void triggerFpReduce(Integer costFp) {
 		cancelFpRestore();
+		cancelFpReduce();
 		restoreLock.lock();
 		try {
 			if (flyReduceTask == null && !isDead && !owner.hasAccess(AdminConfig.UNLIMITED_FLIGHT_TIME)) {
-				flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, costFp);
+				if (costFp != null) {
+					flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, costFp, 500, 1000);
+				} else if (owner.isInsideZoneType(ZoneType.FLY)) {
+					flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, 1, 1000, owner.isInGlidingState() ? 2000 : 1000);
+				} else {
+					flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, 2,  1000, 1000);
+				}
 			}
 		} finally {
 			restoreLock.unlock();
