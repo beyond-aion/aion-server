@@ -8,6 +8,8 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.model.TribeClass;
+import com.aionemu.gameserver.model.animations.AttackHandAnimation;
+import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -39,7 +41,7 @@ public class AggroEventHandler {
 		} else if (TribeRelationService.isFriend(owner, myTarget) || myTarget.isFlag())
 			return;
 		PacketSendUtility.broadcastPacket(owner,
-			new SM_ATTACK(owner, myTarget, 0, 633, 0, Collections.singletonList(new AttackResult(0, AttackStatus.NORMALHIT))));
+			new SM_ATTACK(owner, myTarget, 0, 633, AttackTypeAnimation.MELEE, AttackHandAnimation.MAIN_HAND, Collections.singletonList(new AttackResult(0, AttackStatus.NORMALHIT))));
 
 		ThreadPoolManager.getInstance().schedule(new AggroNotifier(owner, myTarget, true), 500);
 		owner.getPosition().getWorldMapInstance().getInstanceHandler().onAggro(owner);
@@ -53,7 +55,7 @@ public class AggroEventHandler {
 			if (myTarget instanceof Creature) {
 				Creature targetCreature = (Creature) myTarget;
 				PacketSendUtility.broadcastPacket(owner,
-					new SM_ATTACK(owner, targetCreature, 0, 633, 0, Collections.singletonList(new AttackResult(0, AttackStatus.NORMALHIT))));
+					new SM_ATTACK(owner, targetCreature, 0, 633, AttackTypeAnimation.MELEE, AttackHandAnimation.MAIN_HAND, Collections.singletonList(new AttackResult(0, AttackStatus.NORMALHIT))));
 				ThreadPoolManager.getInstance().schedule(new AggroNotifier(owner, targetCreature, false), 500);
 				return true;
 			}

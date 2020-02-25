@@ -18,12 +18,10 @@ import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.animations.AttackHandAnimation;
+import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Homing;
-import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.GodStone;
@@ -42,12 +40,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.EffectType;
-import com.aionemu.gameserver.skillengine.model.ChargeSkill;
-import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
-import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.skillengine.model.SkillType;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -330,19 +324,25 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			return;
 		}
 
+
 		// Calculate and apply damage
-		int attackType = 0;
+		AttackHandAnimation attackHandAnimation = AttackHandAnimation.MAIN_HAND;
+		AttackTypeAnimation attackTypeAnimation = AttackTypeAnimation.MELEE;
 		List<AttackResult> attackResult;
 		if (getOwner() instanceof Homing) {
 			attackResult = AttackUtil.calculateHomingAttackResult(getOwner(), target, getOwner().getAttackType().getMagicalElement());
-			attackType = 1;
+			attackHandAnimation = AttackHandAnimation.OFF_HAND;
 		} else {
 			if (getOwner().getAttackType() == ItemAttackType.PHYSICAL)
 				attackResult = AttackUtil.calculatePhysicalAttackResult(getOwner(), target);
 			else {
 				attackResult = AttackUtil.calculateMagicalAttackResult(getOwner(), target, getOwner().getAttackType().getMagicalElement());
-				attackType = 1;
+				attackHandAnimation = AttackHandAnimation.OFF_HAND;
 			}
+		}
+		if (getOwner() instanceof Npc) {
+			attackHandAnimation = getOwner().getAi().modifyAttackHandAnimation(attackHandAnimation);
+			attackTypeAnimation = getOwner().getAi().getAttackTypeAnimation(target);
 		}
 
 		int damage = 0;
@@ -355,7 +355,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		AttackStatus firstAttackStatus = AttackStatus.getBaseStatus(attackResult.get(0).getAttackStatus());
 
 		PacketSendUtility.broadcastPacketAndReceive(getOwner(),
-			new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time, attackType, attackResult),
+			new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time, attackTypeAnimation, attackHandAnimation, attackResult),
 			AIEventType.CREATURE_NEEDS_HELP);
 
 		getOwner().getGameStats().increaseAttackCounter();

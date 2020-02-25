@@ -3,6 +3,8 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import java.util.List;
 
 import com.aionemu.gameserver.controllers.attack.AttackResult;
+import com.aionemu.gameserver.model.animations.AttackHandAnimation;
+import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
@@ -15,27 +17,31 @@ public class SM_ATTACK extends AionServerPacket {
 
 	private int attackno;
 	private int time;
-	private int type;
+	private AttackHandAnimation attackHandAnimation;
+	private AttackTypeAnimation attackTypeAnimation;
 	private List<AttackResult> attackList;
 	private Creature attacker;
 	private Creature target;
 
-	public SM_ATTACK(Creature attacker, Creature target, int attackno, int time, int type, List<AttackResult> attackList) {
+
+	public SM_ATTACK(Creature attacker, Creature target, int attackno, int time, AttackTypeAnimation attackTypeAnimation, AttackHandAnimation attackHandAnimation, List<AttackResult> attackList) {
 		this.attacker = attacker;
 		this.target = target;
 		this.attackno = attackno;// empty
 		this.time = time;// empty
-		this.type = type;// empty
+		this.attackHandAnimation = attackHandAnimation;
+		this.attackTypeAnimation = attackTypeAnimation;
 		this.attackList = attackList;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(attacker.getObjectId());
-		writeC(attackno); // unknown
-		writeH(time); // unknown
-		writeC(0);
-		writeC(type); // 0, 1, 2
+		writeC(attackno);
+		writeH(time);
+		writeC(attackTypeAnimation.getId());
+		writeC(attackHandAnimation.getId());
+
 		writeD(target.getObjectId());
 
 		int attackerMaxHp = attacker.getLifeStats().getMaxHp();

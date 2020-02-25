@@ -17,6 +17,8 @@ import com.aionemu.gameserver.ai.event.AIListenable;
 import com.aionemu.gameserver.ai.handler.FreezeEventHandler;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.events.AbstractEventSource;
+import com.aionemu.gameserver.model.animations.AttackHandAnimation;
+import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -495,5 +497,15 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 	@Override
 	public int modifyAggroRange(int value) {
 		return value;
+	}
+
+	@Override
+	public AttackHandAnimation modifyAttackHandAnimation(AttackHandAnimation attackHandAnimation) {
+		return attackHandAnimation;
+	}
+
+	@Override
+	public AttackTypeAnimation getAttackTypeAnimation(Creature target) {
+		return AttackTypeAnimation.MELEE;
 	}
 }
