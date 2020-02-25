@@ -373,6 +373,11 @@ public class GoTo extends AdminCommand {
 		addLocation(DRAGON_LORDS_REFUGE, 495, 528, 417, "Throne of Blood", "Tiamat", "Blutthron");
 
 		/*
+		 * 4.0 Instances
+		 */
+		addLocation(INFINITY_SHARD, 109, 131, 125, "Infinity Shard", "Katalamize");
+
+		/*
 		 * 4.7 Instances
 		 */
 		addLocation(IDGEL_DOME, 254, 179, 83, "Idgel Dome", "Ruhnatorium");
