@@ -108,7 +108,7 @@ public class HyperionAI extends AggressiveNpcAI {
 				switch (percent) {
 					case 100:
 						System.out.println("checking percentage and adding powerful energy blast");
-						usePowerfulEnergyBlast();
+						queuePowerfulEnergyBlast();
 						break;
 					case 75:
 						spawnSummons(++stage);
@@ -251,7 +251,7 @@ public class HyperionAI extends AggressiveNpcAI {
 		return new Point3D(p.getX() + x1, p.getY() + y1, p.getZ());
 	}
 
-	private void usePowerfulEnergyBlast() {
+	private void queuePowerfulEnergyBlast() {
 		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100)));
 		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100)));
 		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100)));

@@ -23,7 +23,7 @@
 	<!-- Agent Kabalash -->
 	<npc_skills npc_ids="231075 231087">
 		<npc_skill id="20700" lv="56" is_post_spawn="true"/>
-		<npc_skill id="20701" lv="56" prob="90" cd="30000"/>
+		<npc_skill id="20701" lv="56" is_post_spawn="true"/>
 		<npc_skill id="20712" lv="56" prob="70" cd="15000"/>
 		<npc_skill id="17722" lv="56" prob="70" cd="10000"/>
 		<npc_skill id="17335" lv="56" prob="70" cd="10000"/>
@@ -93,9 +93,9 @@
 	<!-- Hyperion Defense Elite Assassin -->
 	<npc_skills npc_ids="231079 231083">
 		<npc_skill id="20700" lv="56" is_post_spawn="true"/>
-		<npc_skill id="17321" lv="56" prob="80" cd="8000"/>
+		<npc_skill id="17321" lv="56" prob="80" cd="8000" chain_id="1"/>
 		<npc_skill id="17332" lv="56" cd="8000" />
-		<npc_skill id="21289" lv="56" prob="80" cd="10000" chain_id="1"/>
+		<npc_skill id="21289" lv="56" prob="80" cd="10000"/>
 		<npc_skill id="16452" lv="56" prob="100" cd="30000" next_chain_id="1" next_skill_time="0"/>
 	</npc_skills>
 	<!-- hyperion defense elite fighter -->
