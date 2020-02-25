@@ -60,9 +60,6 @@ public class HyperionAI extends AggressiveNpcAI {
 	@Override
 	public AttackTypeAnimation getAttackTypeAnimation(Creature target) {
 		dist = PositionUtil.getDistance(getOwner(), target) - getObjectTemplate().getBoundRadius().getFront() - target.getObjectTemplate().getBoundRadius().getFront();
-		if (target instanceof Player) {
-			PacketSendUtility.sendMessage((Player) target, "distance: " + dist);
-		}
 		if (dist > 4) {
 			return AttackTypeAnimation.RANGED;
 		}
@@ -107,7 +104,6 @@ public class HyperionAI extends AggressiveNpcAI {
 				percents.remove(percent);
 				switch (percent) {
 					case 100:
-						System.out.println("checking percentage and adding powerful energy blast");
 						queuePowerfulEnergyBlast();
 						break;
 					case 75:
