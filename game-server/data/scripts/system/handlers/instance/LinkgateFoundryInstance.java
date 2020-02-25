@@ -102,7 +102,8 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_07());
 						instance.forEachNpc(npc -> {
 							if (npc.getNpcId() != 233898 && npc.getNpcId() != 234990 && npc.getNpcId() != 234991 // belsagos does not despawn
-								&& npc.getNpcId() != 702339 && npc.getNpcId() != 804629) { // teleport device does not despawn
+								&& npc.getNpcId() != 702339 && npc.getNpcId() != 804629 // teleport device does not despawn
+								&& npc.getNpcId() != 702590 && npc.getNpcId() != 702591 && npc.getNpcId() != 234992) { // secret lab portal & chest do not despawn
 								npc.getController().delete();
 							}
 						});
