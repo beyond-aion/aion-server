@@ -118,7 +118,7 @@
 			<spot x="128.82425" y="138.09889" z="113.79441"/>
 		</spawn>
 		<spawn npc_id="730741">
-			<spot x="129.34" y="137.98" z="112.17" static_id ="27"/>
+			<spot x="129.34" y="137.98" z="112.17" static_id="27"/>
 		</spawn>
 	</spawn_map>
 </spawns>

@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -92,11 +93,12 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 			}
 		}
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_BROKENPROTECTIONALL());
-		instance.getNpc(730741).getController().delete(); // ???
+		instance.getNpc(730741).getController().delete(); // remove barrier in center
 		instance.getNpc(231073).getEffectController().removeEffect(21254);
-		spawnResonators();
+		SkillEngine.getInstance().getSkill(instance.getNpc(231073), 21255, 56, null).useSkill();
+		//spawnResonators();
 		spawnTurrets();
-		startFailTimer();
+		//startFailTimer();
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_CHARGING());
 	}
 

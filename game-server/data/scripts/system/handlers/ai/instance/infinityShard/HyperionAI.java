@@ -11,15 +11,21 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.animations.AttackHandAnimation;
+import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
+import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -39,6 +45,7 @@ public class HyperionAI extends AggressiveNpcAI {
 	private WorldPosition southernSpawnPos = new WorldPosition(getPosition().getMapId(), 148.127f, 150.346f, 123.729f, (byte) 0);
 	private Future<?> spawnTask;
 	private byte stage = 0;
+	private double dist;
 
 	public HyperionAI(Npc owner) {
 		super(owner);
@@ -51,9 +58,47 @@ public class HyperionAI extends AggressiveNpcAI {
 	}
 
 	@Override
+	public AttackTypeAnimation getAttackTypeAnimation(Creature target) {
+		dist = PositionUtil.getDistance(getOwner(), target) - getObjectTemplate().getBoundRadius().getFront() - target.getObjectTemplate().getBoundRadius().getFront();
+		if (target instanceof Player) {
+			PacketSendUtility.sendMessage((Player) target, "distance: " + dist);
+		}
+		if (dist > 4) {
+			return AttackTypeAnimation.RANGED;
+		}
+		return AttackTypeAnimation.MELEE;
+	}
+
+	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());
+	}
+
+
+	@Override
+	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+		if (effect == null) {
+			if (dist > 10) {
+				return (int) (damage * 4.5);
+			} else if (dist > 4) {
+				return (int) (damage * 1.5);
+			}
+		}
+		return damage;
+	}
+
+	@Override
+	public ItemAttackType modifyAttackType(ItemAttackType type) {
+		if (dist > 4) {
+			return ItemAttackType.MAGICAL_EARTH;
+		}
+		return ItemAttackType.PHYSICAL;
+	}
+
+	@Override
+	public AttackHandAnimation modifyAttackHandAnimation(AttackHandAnimation attackHandAnimation) {
+		return Rnd.get(AttackHandAnimation.values());
 	}
 
 	private synchronized void checkPercentage(int hpPercentage) {
@@ -62,26 +107,36 @@ public class HyperionAI extends AggressiveNpcAI {
 				percents.remove(percent);
 				switch (percent) {
 					case 100:
-					case 90:
+						System.out.println("checking percentage and adding powerful energy blast");
 						usePowerfulEnergyBlast();
 						break;
-					case 78:
-						stage++;
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21245, 1, 100)));
+					case 75:
+						spawnSummons(++stage);
+					case 80:
+					case 67:
+						spawnAncientTyrhund(2);
+						break;
+					case 55:
+						spawnAncientTyrhund(3);
+						break;
+					case 45:
+					case 30:
+					case 17:
+						spawnAncientTyrhund(4);
 						break;
 					case 65:
-					case 40:
-						spawnSummons(++stage);
-						break;
 					case 50:
 					case 25:
 					case 20:
 						stage++;
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21245, 1, 100)));
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21253, 1, 100)));
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21253, 56, 100, 0, 0)));
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21244, 56, 100, 0, 5000)));
+						break;
+					case 40:
+						spawnSummons(++stage);
 						break;
 					case 10:
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21246, 1, 100)));
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21246, 56, 100)));
 						break;
 				}
 				break;
@@ -92,17 +147,13 @@ public class HyperionAI extends AggressiveNpcAI {
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate) {
 		switch (skillTemplate.getSkillId()) {
-			case 21245:
+			case 21253:
 				switch (stage) {
 					case 1:
-						spawnSummons(1);
-						break;
 					case 2:
 						spawnSummons(1);
 						break;
 					case 3:
-						spawnSummons(2);
-						break;
 					case 4:
 						spawnSummons(2);
 						break;
@@ -113,7 +164,6 @@ public class HyperionAI extends AggressiveNpcAI {
 						spawnSummons(4);
 						break;
 				}
-				spawnAncientTyrhund();
 				break;
 			case 21246:
 				scheduleLastPhase();
@@ -125,16 +175,15 @@ public class HyperionAI extends AggressiveNpcAI {
 		spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			if (!isDead()) {
 				spawnSummons(5);
-				spawnAncientTyrhund();
+				spawnAncientTyrhund(4);
 			}
 		}, 35000, 60000);
 	}
 
-	private void spawnAncientTyrhund() {
-		spawnWithWalker(231103, getRndPos(getPosition(), 8), null);
-		spawnWithWalker(231103, getRndPos(getPosition(), 8), null);
-		spawnWithWalker(231103, getRndPos(getPosition(), 8), null);
-		spawnWithWalker(231103, getRndPos(getPosition(), 8), null);
+	private void spawnAncientTyrhund(int count) {
+		for (int i = 0; i < count; i++) {
+			spawnWithWalker(231103, getRndPos(getPosition(), 12), null);
+		}
 	}
 
 	/**
@@ -203,9 +252,9 @@ public class HyperionAI extends AggressiveNpcAI {
 	}
 
 	private void usePowerfulEnergyBlast() {
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 1, 100)));
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 1, 100)));
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 1, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100)));
 	}
 
 	private void cancelSpawnTask() {
@@ -237,6 +286,6 @@ public class HyperionAI extends AggressiveNpcAI {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, 100, 90, 78, 65, 50, 45, 25, 15, 10);
+		Collections.addAll(percents, 100, 80, 75, 67, 65, 55, 50, 45, 40, 30, 25, 20, 17, 10);
 	}
 }
