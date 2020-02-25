@@ -39,6 +39,8 @@ public enum ChatType {
 	 */
 	GOLDEN_YELLOW(25, true), // System message (Dark Yellow), most commonly used, no "center" equivalent.
 
+	GM_CHAT(27, false),
+
 	WHITE(31, true), // System message (White), visible in "All" chat thumbnail only !
 	YELLOW(32, true), // System message (Yellow), visible in "All" chat thumbnail only !
 	BRIGHT_YELLOW(33, true), // System message (Light Yellow), visible in "All" chat thumbnail only !
