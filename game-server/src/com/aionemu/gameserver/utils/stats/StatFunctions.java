@@ -11,14 +11,7 @@ import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
 import com.aionemu.gameserver.model.SkillElement;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Homing;
-import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.Servant;
-import com.aionemu.gameserver.model.gameobjects.Summon;
-import com.aionemu.gameserver.model.gameobjects.SummonedObject;
-import com.aionemu.gameserver.model.gameobjects.Trap;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
@@ -68,7 +61,6 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param npc
 	 * @return Experience value identical to the ones seen on aion databases (but seen retail exp rewards are always higher)
 	 */
 	private static int calculateBaseExp(Npc npc) {
@@ -100,8 +92,6 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param player
-	 * @param target
 	 * @return DP reward from target
 	 */
 	public static int calculateDPReward(Player player, Creature target) {
@@ -118,8 +108,6 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param player
-	 * @param target
 	 * @return AP reward
 	 */
 	public static int calculatePvEApGained(Player player, Creature target) {
@@ -136,8 +124,6 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param defeated
-	 * @param winner
 	 * @return Points Lost in PvP Death
 	 */
 	public static int calculatePvPApLost(Player defeated, Player winner) {
@@ -157,12 +143,9 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param defeated
-	 * @param maxRank
-	 * @param maxLevel
 	 * @return Points Gained in PvP Kill
 	 */
-	public static int calculatePvpApGained(Player defeated, int maxRank, int maxLevel) {
+	public static int calculatePvpApGained(Player defeated, int winnerAbyssRank, int maxLevel) {
 		int pointsGained = defeated.getAbyssRank().getRank().getPointsGained();
 
 		// Level penalty calculation
@@ -190,7 +173,6 @@ public class StatFunctions {
 		}
 
 		// Abyss rank penalty calculation
-		int winnerAbyssRank = maxRank;
 		int defeatedAbyssRank = defeated.getAbyssRank().getRank().getId();
 		int abyssRankDifference = winnerAbyssRank - defeatedAbyssRank;
 
@@ -204,12 +186,9 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param defeated
-	 * @param maxRank
-	 * @param maxLevel
 	 * @return XP Points Gained in PvP Kill TODO: Find the correct formula.
 	 */
-	public static int calculatePvpXpGained(Player defeated, int maxRank, int maxLevel) {
+	public static int calculatePvpXpGained(Player defeated, int winnerAbyssRank, int maxLevel) {
 		int pointsGained = 5000;
 
 		// Level penalty calculation
@@ -237,7 +216,6 @@ public class StatFunctions {
 		}
 
 		// Abyss rank penalty calculation
-		int winnerAbyssRank = maxRank;
 		int defeatedAbyssRank = defeated.getAbyssRank().getRank().getId();
 		int abyssRankDifference = winnerAbyssRank - defeatedAbyssRank;
 
@@ -251,7 +229,7 @@ public class StatFunctions {
 	}
 
 	public static int calculatePvpDpGained(Player defeated, int maxRank, int maxLevel) {
-		int pointsGained = 0;
+		int pointsGained;
 
 		// base values
 		int baseDp = 1064;
@@ -273,11 +251,11 @@ public class StatFunctions {
 		// adjust by level
 		if (difference >= 10)
 			pointsGained = 0;
-		else if (difference < 10 && difference >= 0)
+		else if (difference >= 0)
 			pointsGained -= pointsGained * difference * 0.1;
 		else if (difference <= -10)
 			pointsGained *= 1.1;
-		else if (difference > -10 && difference < 0)
+		else
 			pointsGained += pointsGained * Math.abs(difference) * 0.01;
 
 		return pointsGained;
@@ -285,10 +263,6 @@ public class StatFunctions {
 
 	/**
 	 * Hate based on BOOST_HATE stat Now used only from skills, probably need to use for regular attack
-	 * 
-	 * @param creature
-	 * @param value
-	 * @return
 	 */
 	public static int calculateHate(Creature creature, int value) {
 		Stat2 stat = new AdditionStat(StatEnum.BOOST_HATE, value, creature, 0.1f);
@@ -296,10 +270,6 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param attacker
-	 * @param target
-	 * @param isMainHand
-	 * @param element
 	 * @return Damage made to target (-hp value)
 	 */
 	public static int calculateAttackDamage(Creature attacker, Creature target, boolean isMainHand, SkillElement element) {
@@ -325,10 +295,6 @@ public class StatFunctions {
 	}
 
 	/**
-	 * @param attacker
-	 * @param target
-	 * @param isMainHand
-	 * @param isSkill
 	 * @return Damage made to target (-hp value)
 	 */
 	public static int calculatePhysicalAttackDamage(Creature attacker, Creature target, boolean isMainHand, boolean isSkill) {
@@ -339,66 +305,7 @@ public class StatFunctions {
 			pAttack = ((Player) attacker).getGameStats().getOffHandPAttack();
 		float resultDamage = pAttack.getCurrent();
 		if (attacker instanceof Player) {
-			Equipment equipment = ((Player) attacker).getEquipment();
-			Item weapon;
-			if (isMainHand)
-				weapon = equipment.getMainHandWeapon();
-			else
-				weapon = equipment.getOffHandWeapon();
-
-			if (weapon != null) {
-				WeaponStats weaponStat = weapon.getItemTemplate().getWeaponStats();
-				if (weaponStat == null)
-					return 0;
-				int totalMin = weaponStat.getMinDamage();
-				int totalMax = weaponStat.getMaxDamage();
-				if (totalMax - totalMin < 1) {
-					log.warn("Weapon stat MIN_MAX_DAMAGE resulted average zero in main-hand calculation");
-					log.warn("Weapon ID: " + String.valueOf(equipment.getMainHandWeapon().getItemTemplate().getTemplateId()));
-					log.warn("MIN_DAMAGE = " + String.valueOf(totalMin));
-					log.warn("MAX_DAMAGE = " + String.valueOf(totalMax));
-				}
-				float power = attacker.getGameStats().getPower().getCurrent() * 0.01f;
-				int diff = Math.round((totalMax - totalMin) * power / 2);
-				// adjust with value from WeaponDualEffect
-				// it makes lower cap of damage lower, so damage is more random on offhand
-				int negativeDiff = diff;
-				if (!isMainHand)
-					negativeDiff = (int) Math.round((200 - ((Player) attacker).getDualEffectValue()) * 0.01 * diff);
-
-				resultDamage += Rnd.get(-negativeDiff, diff);
-				// add powerShard damage
-				if (attacker.isInState(CreatureState.POWERSHARD)) {
-					Item firstShard;
-					Item secondShard = null;
-					if (isMainHand || isSkill) {
-						firstShard = equipment.getMainHandPowerShard();
-						if (weapon.getItemTemplate().isTwoHandWeapon()
-							|| isSkill && equipment.getOffHandWeapon() != null && equipment.getEquippedShield() == null)
-							secondShard = equipment.getOffHandPowerShard();
-					} else
-						firstShard = equipment.getOffHandPowerShard();
-
-					if (firstShard != null) {
-						equipment.usePowerShard(firstShard, 1);
-						resultDamage += firstShard.getItemTemplate().getWeaponBoost();
-					}
-
-					if (secondShard != null) {
-						equipment.usePowerShard(secondShard, 1);
-						resultDamage += secondShard.getItemTemplate().getWeaponBoost();
-					}
-				}
-			} else {// if hand attack
-				int totalMin = 16;
-				int totalMax = 20;
-
-				float power = attacker.getGameStats().getPower().getCurrent() * 0.01f;
-				int diff = Math.round((totalMax - totalMin) * power / 2);
-				int bonusDmg = isMainHand ? pAttack.getBonus() : Math.round(pAttack.getBonus() * 0.98f);
-				resultDamage = bonusDmg + pAttack.getBase();
-				resultDamage += Rnd.get(-diff, diff);
-			}
+			resultDamage = calculateAttackDamageForPlayers((Player) attacker, pAttack, isMainHand, isSkill, false);
 		} else {
 			int rnd = (int) (resultDamage * 0.20f);
 			resultDamage += Rnd.get(-rnd, rnd);
@@ -424,58 +331,7 @@ public class StatFunctions {
 			mAttack = ((Player) attacker).getGameStats().getOffHandMAttack();
 		float resultDamage = mAttack.getCurrent();
 		if (attacker instanceof Player) {
-			Equipment equipment = ((Player) attacker).getEquipment();
-			Item weapon;
-			if (isMainHand)
-				weapon = equipment.getMainHandWeapon();
-			else
-				weapon = equipment.getOffHandWeapon();
-
-			if (weapon != null) {
-				WeaponStats weaponStat = weapon.getItemTemplate().getWeaponStats();
-				if (weaponStat == null)
-					return 0;
-				int totalMin = weaponStat.getMinDamage();
-				int totalMax = weaponStat.getMaxDamage();
-				if (totalMax - totalMin < 1) {
-					log.warn("Weapon stat MIN_MAX_DAMAGE resulted average zero in main-hand calculation");
-					log.warn("Weapon ID: " + String.valueOf(equipment.getMainHandWeapon().getItemTemplate().getTemplateId()));
-					log.warn("MIN_DAMAGE = " + String.valueOf(totalMin));
-					log.warn("MAX_DAMAGE = " + String.valueOf(totalMax));
-				}
-				float knowledge = attacker.getGameStats().getKnowledge().getCurrent() * 0.01f;
-				int diff = Math.round((totalMax - totalMin) * knowledge / 2);
-
-				int negativeDiff = diff;
-				if (!isMainHand)
-					negativeDiff = (int) Math.round((200 - ((Player) attacker).getDualEffectValue()) * 0.01 * diff);
-
-				int bonusDmg = isMainHand ? mAttack.getBonus() : Math.round(mAttack.getBonus() * 0.82f);
-				resultDamage = bonusDmg + mAttack.getBase();
-				resultDamage += Rnd.get(-negativeDiff, diff);
-
-				if (attacker.isInState(CreatureState.POWERSHARD)) {
-					Item firstShard;
-					Item secondShard = null;
-					if (isMainHand) {
-						firstShard = equipment.getMainHandPowerShard();
-						if (weapon.getItemTemplate().isTwoHandWeapon())
-							secondShard = equipment.getOffHandPowerShard();
-					} else {
-						firstShard = equipment.getOffHandPowerShard();
-					}
-
-					if (firstShard != null) {
-						equipment.usePowerShard(firstShard, 1);
-						resultDamage += firstShard.getItemTemplate().getWeaponBoost();
-					}
-
-					if (secondShard != null) {
-						equipment.usePowerShard(secondShard, 1);
-						resultDamage += secondShard.getItemTemplate().getWeaponBoost();
-					}
-				}
-			}
+			resultDamage = calculateAttackDamageForPlayers((Player) attacker, mAttack, isMainHand, false, true);
 		}
 
 		// elemental resistance
@@ -493,6 +349,75 @@ public class StatFunctions {
 		resultDamage *= 1.15f;
 
 		return Math.round(resultDamage);
+	}
+
+	private static float calculateAttackDamageForPlayers(Player attacker, Stat2 attack, boolean isMainHand, boolean isSkill, boolean isMagical) {
+		Equipment equipment = attacker.getEquipment();
+		Item weapon;
+		if (isMainHand)
+			weapon = equipment.getMainHandWeapon();
+		else
+			weapon = equipment.getOffHandWeapon();
+
+		float resultDamage = attack.getCurrent();
+		if (weapon != null) {
+			WeaponStats weaponStat = weapon.getItemTemplate().getWeaponStats();
+			if (weaponStat == null)
+				return 0;
+			int totalMin = weaponStat.getMinDamage();
+			int totalMax = weaponStat.getMaxDamage();
+			if (totalMax - totalMin < 1) {
+				log.warn("Weapon stat MIN_MAX_DAMAGE resulted average zero in main-hand calculation");
+				log.warn("Weapon ID: " + equipment.getMainHandWeapon().getItemTemplate().getTemplateId());
+				log.warn("MIN_DAMAGE = " + totalMin);
+				log.warn("MAX_DAMAGE = " + totalMax);
+			}
+			float baseAttribute = isMagical ? attacker.getGameStats().getKnowledge().getCurrent() * 0.01f
+				: attacker.getGameStats().getPower().getCurrent() * 0.01f;
+			int diff = Math.round((totalMax - totalMin) * baseAttribute / 2);
+			// adjust with value from WeaponDualEffect
+			// it makes lower cap of damage lower, so damage is more random on offhand
+			int negativeDiff = diff;
+			if (!isMainHand)
+				negativeDiff = (int) Math.round((200 - attacker.getDualEffectValue()) * 0.01 * diff);
+
+			if (isMagical) {
+				int bonusDmg = isMainHand ? attack.getBonus() : Math.round(attack.getBonus() * 0.82f);
+				resultDamage = bonusDmg + attack.getBase();
+			}
+			resultDamage += Rnd.get(-negativeDiff, diff);
+			// add powerShard damage
+			if (attacker.isInState(CreatureState.POWERSHARD)) {
+				Item firstShard;
+				Item secondShard = null;
+				if (isMainHand || isSkill) {
+					firstShard = equipment.getMainHandPowerShard();
+					if (weapon.getItemTemplate().isTwoHandWeapon() || isSkill && equipment.getOffHandWeapon() != null && equipment.getEquippedShield() == null)
+						secondShard = equipment.getOffHandPowerShard();
+				} else
+					firstShard = equipment.getOffHandPowerShard();
+
+				if (firstShard != null) {
+					equipment.usePowerShard(firstShard, 1);
+					resultDamage += firstShard.getItemTemplate().getWeaponBoost();
+				}
+
+				if (secondShard != null) {
+					equipment.usePowerShard(secondShard, 1);
+					resultDamage += secondShard.getItemTemplate().getWeaponBoost();
+				}
+			}
+		} else {// if hand attack
+			int totalMin = 16;
+			int totalMax = 20;
+
+			float power = attacker.getGameStats().getPower().getCurrent() * 0.01f;
+			int diff = Math.round((totalMax - totalMin) * power / 2);
+			int bonusDmg = isMainHand ? attack.getBonus() : Math.round(attack.getBonus() * 0.98f);
+			resultDamage = bonusDmg + attack.getBase();
+			resultDamage += Rnd.get(-diff, diff);
+		}
+		return resultDamage;
 	}
 
 	public static int calculateMagicalSkillDamage(Creature speller, Creature target, int baseDamage, int bonus, SkillElement element,
@@ -534,10 +459,6 @@ public class StatFunctions {
 
 	/**
 	 * Calculates MAGICAL CRITICAL chance
-	 * 
-	 * @param attacker
-	 * @param attacker
-	 * @return boolean
 	 */
 	public static boolean calculateMagicalCriticalRate(Creature attacker, Creature attacked, int criticalProb) {
 		if (attacker instanceof Servant || attacker instanceof Homing)
@@ -561,67 +482,45 @@ public class StatFunctions {
 		return Rnd.chance() < criticalRate;
 	}
 
-	/**
-	 * @param npcRating
-	 * @return
-	 */
 	public static int calculateRatingMultipler(NpcRating npcRating) {
 		// FIXME: to correct formula, have any reference?
-		int multipler;
 		switch (npcRating) {
 			case JUNK:
 			case NORMAL:
-				multipler = 2;
-				break;
+				return 2;
 			case ELITE:
-				multipler = 3;
-				break;
+				return 3;
 			case HERO:
-				multipler = 4;
-				break;
+				return 4;
 			case LEGENDARY:
-				multipler = 5;
-				break;
+				return 5;
 			default:
-				multipler = 1;
+				return 1;
 		}
-
-		return multipler;
 	}
 
-	/**
-	 * @param npcRating
-	 * @return Ap Rating
-	 */
 	public static int getApNpcRating(NpcRating npcRating) {
-		int multipler;
 		switch (npcRating) {
 			case JUNK:
-				multipler = 1;
-				break;
+				return 1;
 			case NORMAL:
-				multipler = 2;
-				break;
+				return 2;
 			case ELITE:
-				multipler = 4;
-				break;
+				return 4;
 			case HERO:
-				multipler = 35;// need check
-				break;
+				return 35;// need check
 			case LEGENDARY:
-				multipler = 2500;// need check
-				break;
+				return 2500;// need check
 			default:
-				multipler = 1;
+				return 1;
 		}
-
-		return multipler;
 	}
 
 	/**
 	 * @return adjusted damage according to PVE or PVP modifiers
 	 */
-	public static int adjustDamageByPvpOrPveModifiers(Creature attacker, Creature target, int baseDamage, int pvpDamage, boolean useTemplateDmg, SkillElement element) {
+	public static int adjustDamageByPvpOrPveModifiers(Creature attacker, Creature target, int baseDamage, int pvpDamage, boolean useTemplateDmg,
+		SkillElement element) {
 		float attackBonus = 1;
 		float defenseBonus = 1;
 		float damage = baseDamage;
@@ -668,9 +567,7 @@ public class StatFunctions {
 
 	/**
 	 * Calculates DODGE chance
-	 * 
-	 * @param attacker
-	 * @param attacked
+	 *
 	 * @return boolean
 	 */
 	public static boolean calculatePhysicalDodgeRate(Creature attacker, Creature attacked, int accMod) {
@@ -699,9 +596,7 @@ public class StatFunctions {
 
 	/**
 	 * Calculates PARRY chance
-	 * 
-	 * @param attacker
-	 * @param attacked
+	 *
 	 * @return int
 	 */
 	public static boolean calculatePhysicalParryRate(Creature attacker, Creature attacked) {
@@ -718,9 +613,7 @@ public class StatFunctions {
 
 	/**
 	 * Calculates BLOCK chance
-	 * 
-	 * @param attacker
-	 * @param attacked
+	 *
 	 * @return int
 	 */
 	public static boolean calculatePhysicalBlockRate(Creature attacker, Creature attacked) {
@@ -759,8 +652,7 @@ public class StatFunctions {
 	 * %7D%2C%7B604%2C+51.84%7D%2C+%7B649%2C+52.69%7D%7D http://www.aionsource.com/topic/40542-character-stats-xp-dp-origin-gerbatorteam-july-2009/
 	 * http://www.wolframalpha.com/input/?i=-0.000126341+x%5E2%2B0.184411+x-13.7738
 	 * https://docs.google.com/spreadsheet/ccc?key=0AqxBGNJV9RrzdGNjbEhQNHN3S3M5bUVfUVQxRkVIT3c&hl=en_US#gid=0
-	 * 
-	 * @param attacker
+	 *
 	 * @return double
 	 */
 	public static boolean calculatePhysicalCriticalRate(Creature attacker, Creature attacked, boolean isMainHand, int criticalProb, boolean isSkill) {
@@ -800,9 +692,7 @@ public class StatFunctions {
 
 	/**
 	 * Calculates RESIST chance
-	 * 
-	 * @param attacker
-	 * @param attacked
+	 *
 	 * @return int
 	 */
 	public static int calculateMagicalResistRate(Creature attacker, Creature attacked, int accMod, SkillElement element) {
