@@ -474,10 +474,10 @@ public class StatFunctions {
 
 		if (critical <= 440)
 			criticalRate = critical * 0.1f;
-		else if (critical <= 600)
+		else if (critical <= 560)
 			criticalRate = (440 * 0.1f) + ((critical - 440) * 0.05f);
 		else
-			criticalRate = (440 * 0.1f) + (160 * 0.05f) + ((critical - 600) * 0.02f);
+			criticalRate = (440 * 0.1f) + (120 * 0.05f) + ((critical - 560) * 0.01f);
 
 		return Rnd.chance() < criticalRate;
 	}
@@ -646,12 +646,9 @@ public class StatFunctions {
 
 	/**
 	 * Calculates CRITICAL chance
-	 * http://www.wolframalpha.com/input/?i=quadratic+fit+%7B%7B300%2C+30.97%7D%2C+%7B320%2C+31.68%7D%2C+%7B340%2C+33.30%7D%2C
-	 * +%7B360%2C+36.09%7D%2C+%7B380
-	 * %2C+37.81%7D%2C+%7B400%2C+40.72%7D%2C+%7B420%2C+42.12%7D%2C+%7B440%2C+44.03%7D%2C+%7B480%2C+44.66%7D%2C+%7B500%2C+45.96
-	 * %7D%2C%7B604%2C+51.84%7D%2C+%7B649%2C+52.69%7D%7D http://www.aionsource.com/topic/40542-character-stats-xp-dp-origin-gerbatorteam-july-2009/
 	 * http://www.wolframalpha.com/input/?i=-0.000126341+x%5E2%2B0.184411+x-13.7738
 	 * https://docs.google.com/spreadsheet/ccc?key=0AqxBGNJV9RrzdGNjbEhQNHN3S3M5bUVfUVQxRkVIT3c&hl=en_US#gid=0
+	 * https://docs.google.com/spreadsheets/d/1QEET5QAnxqxgT2T82g80C_9yH2D5iFos2TadR_UqPQs/edit#gid=1008537650
 	 *
 	 * @return double
 	 */
@@ -682,10 +679,10 @@ public class StatFunctions {
 
 		if (critical <= 440)
 			criticalChance = critical * 0.1f;
-		else if (critical <= 600)
+		else if (critical <= 560)
 			criticalChance = (440 * 0.1f) + ((critical - 440) * 0.05f);
 		else
-			criticalChance = (440 * 0.1f) + (160 * 0.05f) + ((critical - 600) * 0.02f);
+			criticalChance = (440 * 0.1f) + (120 * 0.05f) + ((critical - 560) * 0.01f);
 
 		return Rnd.chance() < criticalChance;
 	}
