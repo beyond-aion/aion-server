@@ -58,5 +58,6 @@ public class ReturningEventHandler {
 			if (!skills.isEmpty())
 				skills.forEach(s -> SkillEngine.getInstance().getSkill(npc, s.getSkillId(), s.getSkillLevel(), npc).useWithoutPropSkill());
 		}
+		npcAI.getOwner().getPosition().getWorldMapInstance().getInstanceHandler().onBackHome(npcAI.getOwner());
 	}
 }

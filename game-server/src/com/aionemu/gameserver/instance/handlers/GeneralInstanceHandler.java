@@ -208,6 +208,11 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
+	public void onBackHome(Npc npc) {
+
+	}
+
+	@Override
 	public boolean canEnter(Player player) {
 		return true;
 	}
