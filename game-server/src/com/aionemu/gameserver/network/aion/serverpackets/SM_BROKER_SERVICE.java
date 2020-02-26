@@ -9,6 +9,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.iteminfo.EnchantInfoBlobEntry;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
+import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
  * @author IlBuono, kosyachok
@@ -257,7 +258,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		EnchantInfoBlobEntry.writeInfo(getBuf(), item);
 		// ItemInfoBlob.newBlobEntry(ItemBlobType.PREMIUM_OPTION, null, item).writeThisBlob(getBuf());
 
-		writeS(brokerItem.getSeller());
+		writeS(PlayerService.getPlayerName(brokerItem.getSellerId()));
 		writeS(brokerItem.getItemCreator()); // creator
 		writeH(0);
 		writeC(0);

@@ -41,7 +41,6 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 					int itemId = rset.getInt("item_id");
 					long itemCount = rset.getLong("item_count");
 					String itemCreator = rset.getString("item_creator");
-					String seller = rset.getString("seller");
 					int sellerId = rset.getInt("seller_id");
 					long price = rset.getLong("price");
 					BrokerRace itemBrokerRace = BrokerRace.valueOf(rset.getString("broker_race"));
@@ -63,7 +62,7 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 							}
 						}
 
-					brokerItems.add(new BrokerItem(item, itemId, itemPointer, itemCount, itemCreator, price, seller, sellerId, itemBrokerRace, isSold,
+					brokerItems.add(new BrokerItem(item, itemId, itemPointer, itemCount, itemCreator, price, sellerId, itemBrokerRace, isSold,
 						isSettled, expireTime, settleTime, splittingAvailable));
 				}
 			}
@@ -149,7 +148,7 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 
 	private boolean insertBrokerItem(final BrokerItem item) {
 		boolean result = DB.insertUpdate(
-			"INSERT INTO `broker` (`item_pointer`, `item_id`, `item_count`, `item_creator`, `seller`, `price`, `broker_race`, `expire_time`, `seller_id`, `is_sold`, `is_settled`, `splitting_available`) VALUES (?,?,?,?,?,?,?,?,?,?,?,?)",
+			"INSERT INTO `broker` (`item_pointer`, `item_id`, `item_count`, `item_creator`, `price`, `broker_race`, `expire_time`, `seller_id`, `is_sold`, `is_settled`, `splitting_available`) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
 			new IUStH() {
 
 				@Override
@@ -158,14 +157,13 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 					stmt.setInt(2, item.getItemId());
 					stmt.setLong(3, item.getItemCount());
 					stmt.setString(4, item.getItemCreator());
-					stmt.setString(5, item.getSeller());
-					stmt.setLong(6, item.getPrice());
-					stmt.setString(7, String.valueOf(item.getItemBrokerRace()));
-					stmt.setTimestamp(8, item.getExpireTime());
-					stmt.setInt(9, item.getSellerId());
-					stmt.setBoolean(10, item.isSold());
-					stmt.setBoolean(11, item.isSettled());
-					stmt.setBoolean(12, item.isSplittingAvailable());
+					stmt.setLong(5, item.getPrice());
+					stmt.setString(6, String.valueOf(item.getItemBrokerRace()));
+					stmt.setTimestamp(7, item.getExpireTime());
+					stmt.setInt(8, item.getSellerId());
+					stmt.setBoolean(9, item.isSold());
+					stmt.setBoolean(10, item.isSettled());
+					stmt.setBoolean(11, item.isSplittingAvailable());
 					stmt.execute();
 				}
 			});
@@ -186,25 +184,6 @@ public class MySQL5BrokerDAO extends BrokerDAO {
 		});
 
 		return result;
-	}
-
-	@Override
-	public boolean preBuyCheck(int itemForCheck) {
-		PreparedStatement st = DB.prepareStatement("SELECT * FROM broker WHERE `item_pointer` = ? and `is_sold` = 0");
-		log.info("Checking broker item: " + itemForCheck);
-		try {
-			st.setInt(1, itemForCheck);
-
-			ResultSet rs = st.executeQuery();
-
-			if (rs.next())
-				return true;
-		} catch (SQLException e) {
-			log.error("Can't to prebuy broker check: ", e);
-		} finally {
-			DB.close(st);
-		}
-		return false;
 	}
 
 	private boolean updateBrokerItem(final BrokerItem item) {
