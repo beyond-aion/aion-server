@@ -214,6 +214,15 @@ public class HouseController extends VisibleObjectController<House> {
 		}
 	}
 
+	public void updateButler() {
+		if (getOwner().getButler() == null)
+			return;
+		SpawnTemplate t = getOwner().getButler().getSpawn();
+		t = SpawnEngine.newSingleTimeSpawn(t.getWorldId(), t.getNpcId(), t.getX(), t.getY(), t.getZ(), t.getHeading());
+		getOwner().updateSpawn(SpawnType.MANAGER, null); // clear the manager first, since he is used to determine house owner if spawned
+		getOwner().updateSpawn(SpawnType.MANAGER, VisibleObjectSpawner.spawnHouseNpc(t, getOwner().getInstanceId(), getOwner()));
+	}
+
 	private void notifyAboutOwnerChange(int ownerId, boolean isNewOwner) {
 		if (ownerId == 0)
 			return;
