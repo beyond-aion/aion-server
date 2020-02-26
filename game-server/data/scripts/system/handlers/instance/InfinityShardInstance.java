@@ -3,6 +3,7 @@ package instance;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.event.AIEventType;
@@ -27,6 +28,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class InfinityShardInstance extends GeneralInstanceHandler {
 
 	private List<Future<?>> tasks = new ArrayList<>();
+	private AtomicBoolean isRunning = new AtomicBoolean(true);
 
 	@Override
 	public void onDie(Npc npc) {
@@ -60,9 +62,19 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 				break;
 			case 231073: // Hyperion
 				cancelTasks();
-				despawnInstance();
+				despawnAllAndSpawnExit(true);
 				// rewardGP();
 				break;
+		}
+	}
+
+	@Override
+	public void onBackHome(Npc npc) {
+		if (npc.getNpcId() == 231073) { // hyperion
+			if (isRunning.getAndSet(false)) {
+				cancelTasks();
+				despawnAllAndSpawnExit(false);
+			}
 		}
 	}
 
@@ -133,13 +145,15 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	}
 
 	private void failInstance(boolean wipePlayers) {
-		cancelTasks();
-		instance.getNpc(231073).getController().delete();
-		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_USER_KILL());
-		if (wipePlayers)
-			for (Npc npc : instance.getNpcs(231104))
-				npc.getController().useSkill(21199);
-		ThreadPoolManager.getInstance().schedule(() -> despawnInstance(), 1500); // delay despawn for invisible NPCs to use the skill
+		if (isRunning.getAndSet(false)) {
+			cancelTasks();
+			instance.getNpc(231073).getController().delete();
+			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_USER_KILL());
+			if (wipePlayers)
+				for (Npc npc : instance.getNpcs(231104))
+					npc.getController().useSkill(21199);
+			ThreadPoolManager.getInstance().schedule(() -> despawnAllAndSpawnExit(false), 1500); // delay despawn for invisible NPCs to use the skill
+		}
 	}
 
 	private void spawnResonators() {
@@ -156,11 +170,16 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 		ThreadPoolManager.getInstance().schedule(() -> spawn(231102, 150.33377f, 132.67754f, 126.57981f, (byte) 50), Rnd.get(30000, 45000));
 	}
 
-	private void despawnInstance() {
+	private void despawnAllAndSpawnExit(boolean hyperionKilled) {
 		instance.forEachNpc(npc -> {
-			if (npc.getNpcId() != 231073)
+			if (hyperionKilled) {
+				if (npc.getNpcId() != 231073)
+					npc.getController().delete();
+			} else {
 				npc.getController().delete();
+			}
 		});
+		spawn(730842, 146.65f, 135.33f, 112.18f, (byte) 59); // exit portal
 	}
 
 	/*

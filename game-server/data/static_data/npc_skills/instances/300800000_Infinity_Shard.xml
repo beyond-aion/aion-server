@@ -3,14 +3,18 @@
 	<!-- Hyperion -->
 	<npc_skills npc_ids="231073">
 		<npc_skill id="21254" is_post_spawn="true" />
-		<npc_skill id="21241" lv="56" prob="65" target="RANDOM" cd="20000"/>
+		<npc_skill id="21241" lv="56" prob="65" target="RANDOM_EXCEPT_MOST_HATED" cd="120000"/>
+		<npc_skill id="21241" lv="56" prob="65" cd="30000"/>
 		<npc_skill id="21242" lv="56" prob="70" cd="8000" />
 		<npc_skill id="21243" lv="56" prob="70" cd="8000" />
 		<npc_skill id="21244" lv="56" prob="60" max_hp="80" cd="35000" />
-		<npc_skill id="21245" lv="56" prob="60" min_hp="15" max_hp="75" cd="20000" />
-		<npc_skill id="21247" lv="56" prob="60" min_hp="50" max_hp="80" cd="25000" target="RANDOM" />
-		<npc_skill id="21248" lv="56" prob="60" min_hp="15" max_hp="45" cd="25000" target="RANDOM" />
-		<npc_skill id="21249" lv="56" prob="60" max_hp="10" cd="25000" target="RANDOM"/>
+		<npc_skill id="21245" lv="56" prob="60" min_hp="15" max_hp="75" cd="25000"/>
+		<npc_skill id="21247" lv="56" prob="60" min_hp="50" max_hp="80" cd="30000"/>
+		<npc_skill id="21247" lv="56" prob="50" min_hp="50" max_hp="80" cd="140000" target="RANDOM_EXCEPT_MOST_HATED" />
+		<npc_skill id="21248" lv="56" prob="50" min_hp="15" max_hp="45" cd="140000" target="RANDOM_EXCEPT_MOST_HATED" />
+		<npc_skill id="21248" lv="56" prob="60" min_hp="15" max_hp="45" cd="30000" />
+		<npc_skill id="21249" lv="56" prob="50" max_hp="10" cd="140000" target="RANDOM_EXCEPT_MOST_HATED"/>
+		<npc_skill id="21249" lv="56" prob="60" max_hp="10" cd="30000"/>
 		<npc_skill id="21250" lv="56" prob="70" min_hp="30" max_hp="75" chain_id="0" next_chain_id="1" next_skill_time="0" cd="55000" prio="1"/>
 		<npc_skill id="21251" lv="56" prob="100" chain_id="1" />
 		<npc_skill id="21250" lv="56" prob="70" max_hp="25" chain_id="0" next_chain_id="4" next_skill_time="0" cd="55000" prio="2"/>

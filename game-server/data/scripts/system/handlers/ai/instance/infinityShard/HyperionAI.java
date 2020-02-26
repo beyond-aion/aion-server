@@ -262,8 +262,6 @@ public class HyperionAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		cancelSpawnTask();
 		super.handleBackHome();
-		stage = 0;
-		addPercent();
 	}
 
 	@Override
