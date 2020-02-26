@@ -17,7 +17,8 @@ import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicReference;
 
 /**
- * @author ATracer
+ * @author ATracer,
+ * Updated by Yeats 26.02.20
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HostileUpEffect")
@@ -51,7 +52,7 @@ public class HostileUpEffect extends EffectTemplate {
 							effected.getAggroList().addHate(effect.getEffector(), -1 * tempHate);
 						}
 						if (observerRef.get() != null) {
-							effected.getObserveController().removeObserver(observerRef.get());
+							effect.getEffector().getObserveController().removeObserver(observerRef.get());
 						}
 					}
 				}, tempDuration);
@@ -63,7 +64,7 @@ public class HostileUpEffect extends EffectTemplate {
 						effect.getEffector().getObserveController().removeObserver(this);
 					}
 				});
-				effect.getEffected().getObserveController().addObserver(observerRef.get());
+				effect.getEffector().getObserveController().addObserver(observerRef.get());
 			}
 		}
 	}
