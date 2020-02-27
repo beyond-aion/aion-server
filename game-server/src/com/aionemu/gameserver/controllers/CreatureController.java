@@ -281,28 +281,27 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		int procProbability = isMainHandWeapon ? godStoneInfo.getProbability() : godStoneInfo.getProbabilityLeft();
 		procProbability -= getOwner().getGameStats().getStat(StatEnum.PROC_REDUCE_RATE, 0).getCurrent();
+
 		if (Rnd.get(1, 1000) <= procProbability) {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId());
 			Skill skill = SkillEngine.getInstance().getSkill(attacker, godStoneInfo.getSkillId(), godStoneInfo.getSkillLevel(), getOwner(), template);
 			skill.setFirstTargetRangeCheck(false);
 			if (!skill.canUseSkill(CastState.CAST_START))
 				return;
+			PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getL10n()));
 			Effect effect = new Effect(skill, getOwner());
 			effect.initialize();
-			if (effect.getSuccessEffects().size() > 0) {
-				PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getL10n()));
-				effect.applyEffect();
-				// Illusion Godstones
-				if (godStoneInfo.getBreakProb() > 0) {
-					godStone.increaseActivatedCount();
-					if (godStone.getActivatedCount() > godStoneInfo.getNonBreakCount() && Rnd.get(1, 1000) <= godStoneInfo.getBreakProb()) {
-						// TODO: Delay 10 Minutes, send messages etc
-						// PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getL10n(),
-						// itemTemplate.getL10nId()));
-						weapon.setGodStone(null);
-						PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getL10n(), template.getL10n()));
-						ItemPacketService.updateItemAfterInfoChange(attacker, weapon);
-					}
+			effect.applyEffect();
+			// Illusion Godstones
+			if (godStoneInfo.getBreakProb() > 0) {
+				godStone.increaseActivatedCount();
+				if (godStone.getActivatedCount() > godStoneInfo.getNonBreakCount() && Rnd.get(1, 1000) <= godStoneInfo.getBreakProb()) {
+					// TODO: Delay 10 Minutes, send messages etc
+					// PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getL10n(),
+					// itemTemplate.getL10nId()));
+					weapon.setGodStone(null);
+					PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getL10n(), template.getL10n()));
+					ItemPacketService.updateItemAfterInfoChange(attacker, weapon);
 				}
 			}
 		}
