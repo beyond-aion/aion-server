@@ -58,7 +58,7 @@ public abstract class PeriodicInstance {
 
 	public final void startRegistration() {
 		if (!registrationRunning.compareAndSet(false, true)) {
-			log.info("Tried to register " + getClass().getSimpleName() + " while an registration period is active.");
+			log.warn("Tried to register " + getClass().getSimpleName() + " while an registration period is active.");
 			return;
 		}
 		// start unregister task
@@ -77,7 +77,7 @@ public abstract class PeriodicInstance {
 
 	public final void stopRegistration() {
 		if (!registrationRunning.compareAndSet(true, false)) {
-			log.error("Tried to unregister " + getClass().getSimpleName() + " while there is no active period");
+			log.warn("Tried to unregister " + getClass().getSimpleName() + " while there is no active period");
 			return;
 		}
 		playersWithCooldown.clear();
