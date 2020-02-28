@@ -11,8 +11,6 @@ public abstract class BrokerDAO implements DAO {
 
 	public abstract boolean store(BrokerItem brokerItem);
 
-	public abstract boolean preBuyCheck(int itemForCheck);
-
 	@Override
 	public final String getClassName() {
 		return BrokerDAO.class.getName();

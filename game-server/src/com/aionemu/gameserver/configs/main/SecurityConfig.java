@@ -73,9 +73,6 @@ public class SecurityConfig {
 	@Property(key = "gameserver.security.flood.msg", defaultValue = "6")
 	public static int FLOOD_MSG;
 
-	@Property(key = "gameserver.security.broker.prebuy", defaultValue = "true")
-	public static boolean BROKER_PREBUY_CHECK;
-
 	@Property(key = "gameserver.security.validation.flypath", defaultValue = "false")
 	public static boolean ENABLE_FLYPATH_VALIDATOR;
 

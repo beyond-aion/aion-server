@@ -50,7 +50,7 @@
 	<!-- Enshar -->
 	<world_raid_schedule id="enshar_all" locations="36 37 38" min_count="2">
 		<start_time>0 30 17 4,19 * ?</start_time>
-		<start_time>0 30 19 11,26 * ?</start_time>
+		<start_time>0 30 19 26 * ?</start_time>
 	</world_raid_schedule>
 	<!-- Cygnea -->
 	<world_raid_schedule id="cygnea_all" locations="39 40 41" min_count="2">
@@ -66,5 +66,9 @@
 	<world_raid_schedule id="kaldor_all" locations="49 50 51" min_count="2">
 		<start_time>0 30 17 1,16 * ?</start_time>
 		<start_time>0 30 19 8,23 * ?</start_time>
+	</world_raid_schedule>
+	<!-- Beritra Great Invasion -->
+	<world_raid_schedule id="beritra_great_invasion" locations="1 2 3 4 5 6 7 8 9 10 11 12 13 14 15 16 17 18 19 20 21 22 23 24 25 26 27 28 29 30 31 32 33 34 35 36 37 38 39 40 41 45 46 47 48 49 50 51" is_special_raid="true">
+		<start_time>0 30 19 11 * ?</start_time>
 	</world_raid_schedule>
 </world_raid_schedules>

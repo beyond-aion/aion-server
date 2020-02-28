@@ -1,6 +1,6 @@
 /*
- * DB changes since 230ce869 (13.12.2019)
+ * DB changes since e7107d7f (02.02.2019)
  */
 
--- drop advent calendar table
-DROP TABLE advent;
+-- drop unused 'seller'-name column in broker
+alter table broker drop column seller;

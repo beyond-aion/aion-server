@@ -12,8 +12,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.concurrent.atomic.AtomicLongArray;
 
-import com.aionemu.gameserver.controllers.attack.AttackStatus;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.ChatType;
@@ -44,13 +42,17 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class TheHexwayInstance extends GeneralInstanceHandler {
 
 	private static final String MSG_TIMER_STARTED = "You have 22 minutes to kill all boss mobs located at the end of each bridge to unlock a bonus chest!";
-	private static final String MSG_TIME_OVER = "Your time to unlock a bonus chest has expired!";
+	private static final String MSG_TIMER_NOTIFY = "You have %s left to unlock the bonus chest.";
+	private static final String MSG_TIMER_EXPIRED = "Your time to unlock a bonus chest has expired!";
+	private static final String MSG_BOSS_FAILED_NO_BOX = "You failed to kill a boss mob. No bonus chest will be unlocked.";
+	private static final String MSG_BOSS_FAILED = "You failed to kill a boss mob.";
+	private static final String MSG_SUCCESSFUL = "You have successfully completed the instance. A bonus chest was spawned.";
 
 	private final int[] bossTimeLimitsSeconds = new int[] { 120, 210, 150, 150, 210, 120 };
 	private final int[] treasureDoorIds = new int[] { 60, 61, 63, 64, 65, 66 };
 	private final int[] bossNpcIds = new int[] { 219611, 286933, 219612, 219613, 219610, 219614 };
 	private final int bonusChestTimeLimitSeconds = 1320;
-	private final int[] notifyTimesSeconds = new int[] { 900, 600, 300, 120, 60, 30, 10, 3, 2, 1 };
+	private final int[] notifyTimesSeconds = new int[] { 900, 600, 300, 120, 65, 60, 30, 10, 3, 2, 1 };
 
 	private final Future<?>[] scheduledBossDespawnTasks = new ScheduledFuture[6];
 	private final AtomicLongArray stageStartMillis = new AtomicLongArray(6);
@@ -78,23 +80,18 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 				// schedule bonus chest spawn condition change
 				disableBonusChestSpawnTask = ThreadPoolManager.getInstance().schedule(() -> {
 					if (bonusChestSpawnAllowed.compareAndSet(true, false))
-						PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, MSG_TIME_OVER, ChatType.BRIGHT_YELLOW_CENTER));
+						broadcastYellowMessage(MSG_TIMER_EXPIRED);
 				}, bonusChestTimeLimitSeconds * 1000);
 
 				// send info message to all players
-				PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, MSG_TIMER_STARTED, ChatType.BRIGHT_YELLOW_CENTER));
+				broadcastYellowMessage(MSG_TIMER_STARTED);
 
-				// send timer updates to all players
-				for (int i = 0; i < notifyTimesSeconds.length; i++) {
-					int scheduleDelaySeconds = bonusChestTimeLimitSeconds - notifyTimesSeconds[i];
-					if (scheduleDelaySeconds > 0) {
-						final int notifyTimeSecond = notifyTimesSeconds[i];
-						timerProgressMsgTasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-							// send time info to all players if bonus chest spawn is allowed
-							if (bonusChestSpawnAllowed.get())
-								PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_REMAIN_TIME(String.valueOf(notifyTimeSecond)));
-						}, scheduleDelaySeconds * 1000));
-					}
+				// schedule timer updates
+				for (final int notifyTimeSecond : notifyTimesSeconds) {
+					int scheduleDelaySeconds = bonusChestTimeLimitSeconds - notifyTimeSecond;
+					if (scheduleDelaySeconds > 0)
+						timerProgressMsgTasks
+							.add(ThreadPoolManager.getInstance().schedule(() -> sendTimeStringToPlayers(notifyTimeSecond), scheduleDelaySeconds * 1000));
 				}
 			}
 		} else if (flyingRing.startsWith("HEXWAY_BOSS_")) {
@@ -180,7 +177,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 							}
 						}
 						// spawn bonus loot chest if all 6 boss npc are killed in the given time limits
-						if (attackedBossCount.get() == 6 && killedBossCount.incrementAndGet() == 6) {
+						if (killedBossCount.incrementAndGet() == 6 && attackedBossCount.get() == 6) {
 							if (bonusChestSpawnAllowed.compareAndSet(true, false)) {
 								if (disableBonusChestSpawnTask != null && !disableBonusChestSpawnTask.isDone())
 									disableBonusChestSpawnTask.cancel(true);
@@ -188,6 +185,9 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 							}
 							cancelTimeInformTasks();
 						}
+						int remainingTimeSeconds = (int) ((bonusChestStartMillis.get() + bonusChestTimeLimitSeconds * 1000 - System.currentTimeMillis()) / 1000);
+						if (remainingTimeSeconds > 0)
+							sendTimeStringToPlayers(remainingTimeSeconds);
 						break;
 					}
 				}
@@ -205,10 +205,11 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 						if (bossNpc != null) {
 							int percentageToDrop = 25 - currentHpPercentage;
 							if (percentageToDrop > 0) {
-								double dmgToApply = bossNpc.getLifeStats().getMaxHp() * (percentageToDrop * 0.8 / 100);
+								int dmgToApply = (int) (bossNpc.getLifeStats().getMaxHp() * (percentageToDrop * 0.8 / 100));
 								ThreadPoolManager.getInstance().schedule(() -> {
-									if (bossNpc != null && !bossNpc.isDead())
-										bossNpc.getController().onAttack(bossNpc, (int) dmgToApply, AttackStatus.NORMALHIT);
+									if (bossNpc == null || bossNpc.isDead() || bossNpc.getLifeStats().isAboutToDie())
+										return;
+									bossNpc.getController().onAttack(bossNpc, dmgToApply, null);
 								}, 1000);
 							}
 							NpcActions.delete(secondNpc);
@@ -244,12 +245,10 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 
 	private void scheduleBossDespawn(int bossIndex, int despawnDelayMillis) {
 		ScheduledFuture<?> despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
-			int bossNpcId = bossNpcIds[bossIndex];
-			PacketSendUtility.broadcastToMap(instance,
-				SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(DataManager.NPC_DATA.getNpcTemplate(bossNpcId).getL10n()));
-			instance.getNpcs(bossNpcId).forEach(NpcActions::delete);
-			bonusChestSpawnAllowed.set(false);
+			boolean chestSpawnWasAllowed = bonusChestSpawnAllowed.getAndSet(false);
+			instance.getNpcs(bossNpcIds[bossIndex]).forEach(NpcActions::delete);
 			cancelTimeInformTasks();
+			broadcastYellowMessage(chestSpawnWasAllowed ? MSG_BOSS_FAILED_NO_BOX : MSG_BOSS_FAILED);
 		}, despawnDelayMillis);
 		scheduledBossDespawnTasks[bossIndex] = despawnTask;
 	}
@@ -268,7 +267,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnBonusChest() {
-		PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_BoxSpawn());
+		broadcastYellowMessage(MSG_SUCCESSFUL);
 		spawn(701664, 485.59f, 585.42f, 357f, (byte) 0);
 	}
 
@@ -331,6 +330,28 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 		StaticDoor door = instance.getDoors().get(doorId);
 		if (door != null)
 			door.setOpen(true);
+	}
+
+	private void broadcastYellowMessage(String message) {
+		PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, message, ChatType.BRIGHT_YELLOW_CENTER));
+	}
+
+	private void sendTimeStringToPlayers(int leftTimeSeconds) {
+		if (bonusChestSpawnAllowed.get())
+			broadcastYellowMessage(String.format(MSG_TIMER_NOTIFY, secondsToReadableString(leftTimeSeconds)));
+	}
+
+	private String secondsToReadableString(int remainingTimeSeconds) {
+		int remainingMinutes = remainingTimeSeconds / 60;
+		int remainingSeconds = remainingTimeSeconds - remainingMinutes * 60;
+		String msg;
+		if (remainingMinutes == 0)
+			msg = String.format("%ds", remainingSeconds);
+		else if (remainingSeconds == 0)
+			msg = String.format("%dm", remainingMinutes);
+		else
+			msg = String.format("%1$dm %2$ds", remainingMinutes, remainingSeconds);
+		return msg;
 	}
 
 }

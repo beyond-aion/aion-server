@@ -18,7 +18,6 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 	private long itemCount;
 	private String itemCreator;
 	private long price;
-	private String seller;
 	private int sellerId;
 	private BrokerRace itemBrokerRace;
 	private boolean isSold, isCanceled;
@@ -31,23 +30,21 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 	PersistentState state;
 
 	/**
-	 * Used where registering item
+	 * Used to manually register an item
 	 * 
 	 * @param item
 	 * @param price
-	 * @param seller
 	 * @param sellerId
-	 * @param sold
+	 * @param splittingAvailable
 	 * @param itemBrokerRace
 	 */
-	public BrokerItem(Item item, long price, String seller, int sellerId, boolean splittingAvailable, BrokerRace itemBrokerRace) {
+	public BrokerItem(Item item, long price, int sellerId, boolean splittingAvailable, BrokerRace itemBrokerRace) {
 		this.item = item;
 		this.itemId = item.getItemTemplate().getTemplateId();
 		this.itemUniqueId = item.getObjectId();
 		this.itemCount = item.getItemCount();
 		this.itemCreator = item.getItemCreator();
 		this.price = price;
-		this.seller = seller;
 		this.sellerId = sellerId;
 		this.itemBrokerRace = itemBrokerRace;
 		this.isSold = false;
@@ -64,19 +61,17 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 	 * @param item
 	 * @param itemId
 	 * @param price
-	 * @param seller
 	 * @param sellerId
 	 * @param itemBrokerRace
 	 */
-	public BrokerItem(Item item, int itemId, int itemUniqueId, long itemCount, String itemCreator, long price, String seller, int sellerId,
-		BrokerRace itemBrokerRace, boolean isSold, boolean isSettled, Timestamp expireTime, Timestamp settleTime, boolean splittingAvailable) {
+	public BrokerItem(Item item, int itemId, int itemUniqueId, long itemCount, String itemCreator, long price, int sellerId, BrokerRace itemBrokerRace,
+		boolean isSold, boolean isSettled, Timestamp expireTime, Timestamp settleTime, boolean splittingAvailable) {
 		this.item = item;
 		this.itemId = itemId;
 		this.itemUniqueId = itemUniqueId;
 		this.itemCount = itemCount;
 		this.itemCreator = itemCreator;
 		this.price = price;
-		this.seller = seller;
 		this.sellerId = sellerId;
 		this.itemBrokerRace = itemBrokerRace;
 
@@ -97,8 +92,7 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 	}
 
 	/**
-	 * @param return
-	 *          itemCreator
+	 * @return itemCreator
 	 */
 	public String getItemCreator() {
 		return itemCreator == null ? "" : itemCreator;
@@ -147,13 +141,6 @@ public class BrokerItem implements Comparable<BrokerItem>, Persistable {
 	 */
 	public long getPrice() {
 		return price;
-	}
-
-	/**
-	 * @return
-	 */
-	public String getSeller() {
-		return seller;
 	}
 
 	public int getSellerId() {

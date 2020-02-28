@@ -12,7 +12,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
-import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dao.BrokerDAO;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.model.Race;
@@ -31,6 +30,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -337,28 +337,25 @@ public class BrokerService {
 		boolean isEmptyCache = getFilteredItems(player).length == 0;
 		Race playerRace = player.getRace();
 
-		BrokerItem buyingItem = getRaceBrokerItems(playerRace).get(itemUniqueId);
-
-		if (!RestrictionsManager.canTrade(player)) {
+		if (!RestrictionsManager.canTrade(player))
 			return;
-		}
 
-		if (buyingItem == null)
-			return; // TODO: Message "this item has already been bought, refresh page please."
+		synchronized (this) {
+			BrokerItem buyingItem = getRaceBrokerItems(playerRace).get(itemUniqueId);
+			if (buyingItem == null)
+				return; // TODO: Message "this item has already been bought, refresh page please."
 
-		if (SecurityConfig.BROKER_PREBUY_CHECK) { // wtf?
-			if (!(DAOManager.getDAO(BrokerDAO.class).preBuyCheck(itemUniqueId))) {
-				PacketSendUtility.sendMessage(player, "Sorry, but this item already sold");
+			if (buyingItem.getSellerId() == player.getObjectId()) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_VENDOR_CAN_NOT_BUY_MY_REGISTER_ITEM());
 				return;
 			}
-		}
 
-		if (buyingItem.getSellerId() == player.getObjectId()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_VENDOR_CAN_NOT_BUY_MY_REGISTER_ITEM());
-			return;
-		}
-		synchronized (this) {
 			if (buyingItem.isSold() || buyingItem.isCanceled()) {
+				LoggerFactory.getLogger(BrokerService.class).warn(
+					"Player {} tried to buy the following item[id={}, objId={}, sellerId={}, sellerName={}, sold={}, canceled={}, settled={}, expireTime={}] which is already sold or canceled",
+					player.getName(), buyingItem.getItemId(), buyingItem.getItemUniqueId(), buyingItem.getSellerId(),
+					PlayerService.getPlayerName(buyingItem.getSellerId()), buyingItem.isSold(), buyingItem.isCanceled(), buyingItem.isSettled(),
+					buyingItem.getExpireTime());
 				PacketSendUtility.sendMessage(player, "Sorry, but this item already sold");
 				return;
 			}
@@ -380,8 +377,8 @@ public class BrokerService {
 				BrokerOpSaveTask bost = new BrokerOpSaveTask(buyingItem, buyingItem.getItem(), player.getInventory().getKinahItem(), player.getObjectId());
 				saveManager.add(bost);
 				// creating new broker item which will be settled
-				BrokerItem soldItem = new BrokerItem(ItemFactory.newItem(buyingItem.getItemId(), itemCount), buyingItem.getPrice(), buyingItem.getSeller(),
-					buyingItem.getSellerId(), buyingItem.isSplittingAvailable(), buyingItem.getItemBrokerRace());
+				BrokerItem soldItem = new BrokerItem(ItemFactory.newItem(buyingItem.getItemId(), itemCount), buyingItem.getPrice(), buyingItem.getSellerId(),
+					buyingItem.isSplittingAvailable(), buyingItem.getItemBrokerRace());
 				buyingItem = soldItem;
 				item = buyingItem.getItem();
 				BrokerOpSaveTask bost2 = new BrokerOpSaveTask(buyingItem, buyingItem.getItem(), player.getInventory().getKinahItem(), player.getObjectId());
@@ -405,15 +402,15 @@ public class BrokerService {
 			Item boughtItem = player.getInventory().add(item, ItemPacketService.ItemAddType.BROKER_BUY);
 
 			if (LoggingConfig.LOG_BROKER_EXCHANGE)
-				log.info("Player: " + player.getName() + " bought item " + boughtItem.getItemId() + " [" + boughtItem.getItemName() + "] (count: "
-					+ itemCount + ") from player: " + buyingItem.getSeller() + " (total price: " + price + ")");
+				log.info("Player: " + player.getName() + " bought item " + boughtItem.getItemId() + " [" + boughtItem.getItemName() + "] (count: " + itemCount
+					+ ") from player: " + PlayerService.getPlayerName(buyingItem.getSellerId()) + " (total price: " + price + ")");
 
 			// create save task
 			BrokerOpSaveTask bost = new BrokerOpSaveTask(buyingItem, boughtItem, player.getInventory().getKinahItem(), player.getObjectId());
 			saveManager.add(bost);
 		}
-		showRequestedItems(player, getPlayerCache(player).getBrokerMaskCache(), getPlayerCache(player).getBrokerSortTypeCache(), getPlayerCache(player)
-			.getBrokerStartPageCache(), getPlayerCache(player).getSearchItemList());
+		showRequestedItems(player, getPlayerCache(player).getBrokerMaskCache(), getPlayerCache(player).getBrokerSortTypeCache(),
+			getPlayerCache(player).getBrokerStartPageCache(), getPlayerCache(player).getSearchItemList());
 
 	}
 
@@ -534,7 +531,7 @@ public class BrokerService {
 
 		itemToRegister.setItemLocation(126);
 
-		BrokerItem newBrokerItem = new BrokerItem(itemToRegister, price, player.getName(), player.getObjectId(), splittingAvailable, brRace);
+		BrokerItem newBrokerItem = new BrokerItem(itemToRegister, price, player.getObjectId(), splittingAvailable, brRace);
 
 		switch (brRace) {
 			case ASMODIAN:
@@ -607,8 +604,8 @@ public class BrokerService {
 			return;
 		}
 		if (brokerItem != null) {
-			if (!brokerItem.getSeller().equals(player.getName())) {
-				log.info("[AUDIT] Player: {} tried to get item from broker that he doesn't own (may be due to name change)", player.getName());
+			if (brokerItem.getSellerId() != player.getObjectId()) {
+				log.info("[AUDIT] Player: {} tried to get item from broker that he doesn't own", player.getName());
 				return;
 			}
 			if (player.getInventory().isFull(brokerItem.getItem().getItemTemplate().getExtraInventoryId())) {
@@ -726,7 +723,6 @@ public class BrokerService {
 								result = elyosSettledItems.remove(item.getItemUniqueId()) != null;
 								break;
 						}
-
 						if (result) {
 							item.setPersistentState(PersistentState.DELETED);
 							saveManager.add(new BrokerOpSaveTask(item));
@@ -749,21 +745,16 @@ public class BrokerService {
 	}
 
 	private void checkExpiredItems() {
-		Map<Integer, BrokerItem> asmoBrokerItems = getRaceBrokerItems(Race.ASMODIANS);
-		Map<Integer, BrokerItem> elyosBrokerItems = getRaceBrokerItems(Race.ELYOS);
 		long now = System.currentTimeMillis();
-
-		for (BrokerItem item : asmoBrokerItems.values()) {
-			if (item != null && item.getExpireTime().getTime() <= now) {
-				putToSettled(Race.ASMODIANS, item, false);
-				asmodianBrokerItems.remove(item.getItemUniqueId());
-			}
-		}
-
-		for (BrokerItem item : elyosBrokerItems.values()) {
-			if (item != null && item.getExpireTime().getTime() <= now) {
-				putToSettled(Race.ELYOS, item, false);
-				this.elyosBrokerItems.remove(item.getItemUniqueId());
+		for (Race race : Arrays.asList(Race.ASMODIANS, Race.ELYOS)) {
+			Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(race);
+			for (BrokerItem item : brokerItems.values()) {
+				if (item != null && item.getExpireTime().getTime() <= now) {
+					synchronized (this) {
+						putToSettled(race, item, false);
+						brokerItems.remove(item.getItemUniqueId());
+					}
+				}
 			}
 		}
 	}
