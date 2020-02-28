@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.stats.container;
 
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -21,6 +22,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class PlayerLifeStats extends CreatureLifeStats<Player> {
 
 	private final ReentrantLock fpLock = new ReentrantLock();
+	private AtomicInteger flightReducePeriod = new AtomicInteger(2);
+	private AtomicInteger flightReduceValue = new AtomicInteger(1);
 	private int currentFp;
 	private Future<?> flyRestoreTask;
 	private Future<?> flyReduceTask;
@@ -264,16 +267,25 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 
 	private void triggerFpReduce(Integer costFp) {
 		cancelFpRestore();
-		cancelFpReduce();
 		restoreLock.lock();
 		try {
-			if (flyReduceTask == null && !isDead && !owner.hasAccess(AdminConfig.UNLIMITED_FLIGHT_TIME)) {
+			if (!owner.hasAccess(AdminConfig.UNLIMITED_FLIGHT_TIME) && !isDead) {
 				if (costFp != null) {
-					flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, costFp, 500, 1000);
+					flightReduceValue.set(costFp);
+					flightReducePeriod.set(1);
 				} else if (owner.isInsideZoneType(ZoneType.FLY)) {
-					flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, 1, 1000, owner.isInGlidingState() ? 2000 : 1000);
+					flightReduceValue.set(1);
+					flightReducePeriod.set(owner.isInGlidingState() ? 2 : 1);
 				} else {
-					flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, 2,  1000, 1000);
+					flightReduceValue.set(2);
+					flightReducePeriod.set(1);
+				}
+				if (flyReduceTask == null) {
+					if (costFp != null) {
+						flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, 500);
+					} else {
+						flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this, 1000);
+					}
 				}
 			}
 		} finally {
@@ -307,5 +319,13 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	public void triggerRestoreOnRevive() {
 		this.triggerRestoreTask();
 		triggerFpRestore();
+	}
+
+	public int getFlightReducePeriod() {
+		return flightReducePeriod.get();
+	}
+
+	public int getFlightReduceValue() {
+		return flightReduceValue.get();
 	}
 }

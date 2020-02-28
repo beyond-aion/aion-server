@@ -6,7 +6,6 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
-import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -42,8 +41,8 @@ public class LifeStatsRestoreService {
 	 * @param lifeStats
 	 * @return
 	 */
-	public Future<?> scheduleFpReduceTask(final PlayerLifeStats lifeStats, int costFp, long delay, long period) {
-		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpReduceTask(lifeStats, costFp), delay, period);
+	public Future<?> scheduleFpReduceTask(final PlayerLifeStats lifeStats, long delay) {
+		return ThreadPoolManager.getInstance().scheduleAtFixedRate(new FpReduceTask(lifeStats), delay, 1000);
 	}
 
 	/**
@@ -100,11 +99,10 @@ public class LifeStatsRestoreService {
 	private static class FpReduceTask implements Runnable {
 
 		private PlayerLifeStats lifeStats;
-		private int costFp;
+		private int secondsElapsed = 0;
 
-		private FpReduceTask(PlayerLifeStats lifeStats, int costFp) {
+		private FpReduceTask(PlayerLifeStats lifeStats) {
 			this.lifeStats = lifeStats;
-			this.costFp = costFp;
 		}
 
 		@Override
@@ -113,16 +111,18 @@ public class LifeStatsRestoreService {
 				lifeStats.cancelFpReduce();
 				lifeStats = null;
 				return;
-			}
-			lifeStats.reduceFp(null, costFp, 0, null);
-			lifeStats.specialrestoreFp();
-			if (lifeStats.getCurrentFp() <= 0) {
-				if (lifeStats.getOwner().isFlying()) {
-					lifeStats.getOwner().getFlyController().endFly(true);
-				} else {
-					lifeStats.triggerFpRestore();
+			} else if (secondsElapsed % lifeStats.getFlightReducePeriod() == 0) {
+				lifeStats.reduceFp(null, lifeStats.getFlightReduceValue(), 0, null);
+				lifeStats.specialrestoreFp();
+				if (lifeStats.getCurrentFp() <= 0) {
+					if (lifeStats.getOwner().isFlying()) {
+						lifeStats.getOwner().getFlyController().endFly(true);
+					} else {
+						lifeStats.triggerFpRestore();
+					}
 				}
 			}
+			secondsElapsed++;
 		}
 	}
 
