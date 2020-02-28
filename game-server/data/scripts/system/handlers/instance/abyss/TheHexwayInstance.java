@@ -52,7 +52,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 	private final int[] treasureDoorIds = new int[] { 60, 61, 63, 64, 65, 66 };
 	private final int[] bossNpcIds = new int[] { 219611, 286933, 219612, 219613, 219610, 219614 };
 	private final int bonusChestTimeLimitSeconds = 1320;
-	private final int[] notifyTimesSeconds = new int[] { 900, 600, 300, 120, 65, 60, 30, 10, 3, 2, 1 };
+	private final int[] notifyTimesSeconds = new int[] { 900, 600, 300, 120, 60, 30, 10, 3, 2, 1 };
 
 	private final Future<?>[] scheduledBossDespawnTasks = new ScheduledFuture[6];
 	private final AtomicLongArray stageStartMillis = new AtomicLongArray(6);
