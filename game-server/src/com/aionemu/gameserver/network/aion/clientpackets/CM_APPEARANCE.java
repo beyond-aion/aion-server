@@ -101,7 +101,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 			PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.UPDATE);
 			PlayerGroupService.updateGroup(player, GroupEvent.UPDATE);
 			if (!player.getHouses().isEmpty())
-				player.getHouses().forEach(house -> house.getController().updateButler());
+				player.getHouses().forEach(house -> house.getController().updateHouseSpawns());
 		}
 	}
 

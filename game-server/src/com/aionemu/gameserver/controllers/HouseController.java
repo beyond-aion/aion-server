@@ -196,9 +196,7 @@ public class HouseController extends VisibleObjectController<House> {
 		notifyAboutOwnerChange(oldOwnerId, false);
 		notifyAboutOwnerChange(newOwnerId, true);
 		if (getOwner().getPosition() != null && getOwner().isSpawned()) {
-			getOwner().updateSpawn(SpawnType.MANAGER, null); // remove old butler, otherwise new npcs spawn with old owner name
-			updateSpawns();
-			updateAppearance();
+			updateHouseSpawns();
 			kickVisitors(null, true, true);
 		}
 	}
@@ -214,13 +212,10 @@ public class HouseController extends VisibleObjectController<House> {
 		}
 	}
 
-	public void updateButler() {
-		if (getOwner().getButler() == null)
-			return;
-		SpawnTemplate t = getOwner().getButler().getSpawn();
-		t = SpawnEngine.newSingleTimeSpawn(t.getWorldId(), t.getNpcId(), t.getX(), t.getY(), t.getZ(), t.getHeading());
-		getOwner().updateSpawn(SpawnType.MANAGER, null); // clear the manager first, since he is used to determine house owner if spawned
-		getOwner().updateSpawn(SpawnType.MANAGER, VisibleObjectSpawner.spawnHouseNpc(t, getOwner().getInstanceId(), getOwner()));
+	public void updateHouseSpawns() {
+		getOwner().updateSpawn(SpawnType.MANAGER, null); // remove old butler, otherwise new npcs spawn with old owner name
+		updateSpawns();
+		updateAppearance();
 	}
 
 	private void notifyAboutOwnerChange(int ownerId, boolean isNewOwner) {
