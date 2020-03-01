@@ -65836,4 +65836,10 @@
 		<npc_skill id="17319" lv="65" prob="60" cd="30000" />
 		<npc_skill id="17393" lv="65" prob="60" cd="30000" />
 	</npc_skills>
+	<npc_skills npc_ids="279644 279546 279448">
+		<npc_skill id="20373" lv="65" prob="100"/>
+	</npc_skills>
+	<npc_skills npc_ids="279252 279154 279350">
+		<npc_skill id="20374" lv="65" prob="100"/>
+	</npc_skills>
 </npc_skill_templates>
