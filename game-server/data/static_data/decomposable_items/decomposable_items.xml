@@ -27623,7 +27623,7 @@
 			<item id="123001426" player_classes="SORCERER SPIRIT_MASTER GUNNER CLERIC BARD RIDER" /><!-- Greater Betrayer's Sash -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053120" selectable="true"><!-- Danuar Reliquary Loot [Weapon] -->
+	<decomposable item_id="188053120"><!-- Danuar Reliquary Loot [Weapon] -->
 		<items>
 			<item id="100001552" player_classes="ASSASSIN RANGER GLADIATOR" /><!-- Lunatic Modor's Sword -->
 			<item id="100101187" player_classes="CLERIC" /><!-- Lunatic Modor's Mace -->
@@ -27642,7 +27642,7 @@
 			<item id="102100820" player_classes="RIDER" /><!-- Lunatic Modor's Cipher-Blade -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053121" selectable="true"><!-- Danuar Reliquary Loot [Armor] -->
+	<decomposable item_id="188053121"><!-- Danuar Reliquary Loot [Armor] -->
 		<items>
 			<item id="110101618" player_classes="SORCERER" /><!-- Lunatic Modor's Tunic -->
 			<item id="111101459" player_classes="SORCERER" /><!-- Lunatic Modor's Gloves -->
@@ -27714,7 +27714,7 @@
 			<item id="115001595" player_classes="CLERIC" /><!-- Lunatic Modor's Scale Shield -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053122" selectable="true"><!-- Illuminary Obelisk Loot [Weapon] -->
+	<decomposable item_id="188053122"><!-- Illuminary Obelisk Loot [Weapon] -->
 		<items>
 			<item id="100001627" player_classes="ASSASSIN RANGER GLADIATOR TEMPLAR" /><!-- Brazen Aegis Sword -->
 			<item id="100101252" player_classes="CLERIC CHANTER" /><!-- Brazen Aegis Mace -->
@@ -27731,7 +27731,7 @@
 			<item id="102100923" player_classes="RIDER" /><!-- Brazen Aegis Cipher-Blade -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053123" selectable="true"><!-- Illuminary Obelisk Loot [Armor] -->
+	<decomposable item_id="188053123"><!-- Illuminary Obelisk Loot [Armor] -->
 		<items>
 			<item id="110101710" player_classes="SORCERER" /><!-- Brazen Aegis Tunic -->
 			<item id="111101540" player_classes="SORCERER" /><!-- Brazen Aegis Gloves -->
