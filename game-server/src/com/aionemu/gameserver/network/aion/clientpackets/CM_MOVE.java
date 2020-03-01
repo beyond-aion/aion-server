@@ -76,12 +76,16 @@ public class CM_MOVE extends AionClientPacket {
 			return;
 
 		PlayerMoveController m = player.getMoveController();
+		boolean jumping = false;
 		byte oldMask = m.movementMask;
 		m.movementMask = type;
 
 		if (type == MovementMask.IMMEDIATE) { // stopping or turning
 			m.setNewDirection(x, y, z, heading);
 		} else {
+			jumping = !player.isFlying() && (type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL
+					&& (type & MovementMask.ABSOLUTE) != MovementMask.ABSOLUTE && (type & MovementMask.GLIDE) != MovementMask.GLIDE
+					&& (type & MovementMask.VEHICLE) != MovementMask.VEHICLE && z2 > z;
 			if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
 				m.glideFlag = glideFlag;
 				player.getFlyController().switchToGliding();
@@ -128,13 +132,7 @@ public class CM_MOVE extends AionClientPacket {
 			return;
 		if (player.isProtectionActive() && (player.getX() != x || player.getY() != y || player.getZ() > z + 0.5f))
 			player.getController().stopProtectionActiveTask();
-		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL
-				&& (type & MovementMask.ABSOLUTE) != MovementMask.ABSOLUTE && (type & MovementMask.GLIDE) != MovementMask.GLIDE
-				&& (type & MovementMask.VEHICLE) != MovementMask.VEHICLE && z2 > z) {
-			player.getMoveController().setIsJumping(true);
-		} else {
-			player.getMoveController().setIsJumping(false);
-		}
+		player.getMoveController().setIsJumping(jumping);
 		World.getInstance().updatePosition(player, x, y, z, heading);
 		m.onMoveFromClient();
 		notifyControllers(player, oldMask);
