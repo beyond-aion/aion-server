@@ -75,22 +75,20 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 		float y = owner.getY();
 		float z = owner.getZ();
 
-		float currentSpeed = StatFunctions.getMovementModifier(owner, StatEnum.SPEED, owner.getGameStats().getMovementSpeedFloat());
-		float futureDistPassed = currentSpeed * (System.currentTimeMillis() - lastMoveUpdate) / 1000f;
 		float dist = (float) PositionUtil.getDistance(x, y, z, targetDestX, targetDestY, targetDestZ);
-
-		if (dist == 0) {
+		if (dist < 0.01f)
 			return;
-		}
 
-		if (futureDistPassed > dist) {
-			futureDistPassed = dist;
-		}
+		float currentSpeed = StatFunctions.getMovementModifier(owner, StatEnum.SPEED, owner.getGameStats().getMovementSpeedFloat());
+		long msElapsed = System.currentTimeMillis() - lastMoveUpdate;
+		float futureXYDistPassed = Math.min(currentSpeed * msElapsed / 1000f, dist);
+		float futureZDistPassed = isJumping() ? Math.min(2 * msElapsed / 1000f, dist) : futureXYDistPassed;
 
-		float distFraction = futureDistPassed / dist;
-		float newX = (targetDestX - x) * distFraction + x;
-		float newY = (targetDestY - y) * distFraction + y;
-		float newZ = (targetDestZ - z) * distFraction + z;
+		float distXYFraction = futureXYDistPassed / dist;
+		float distZFraction = isJumping() ? futureZDistPassed / dist : distXYFraction;
+		float newX = (targetDestX - x) * distXYFraction + x;
+		float newY = (targetDestY - y) * distXYFraction + y;
+		float newZ = (targetDestZ - z) * distZFraction + z;
 
 		/*
 		 * if ((movementMask & MovementMask.MOUSE) == 0) { targetDestX = newX + vectorX; targetDestY = newY + vectorY; targetDestZ = newZ + vectorZ; }
