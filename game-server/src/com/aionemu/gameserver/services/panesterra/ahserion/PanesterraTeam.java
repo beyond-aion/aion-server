@@ -47,7 +47,11 @@ public class PanesterraTeam {
 	}
 
 	public void moveTeamMembersToFortressPosition() {
-		forEachMember(player -> TeleportService.teleportTo(player, fortressPosition));
+		forEachMember(player -> {
+			if (player.getWorldId() == 400030000) {
+				TeleportService.teleportTo(player, fortressPosition);
+			}
+		});
 	}
 
 	public void forEachMember(Consumer<Player> consumer) {
