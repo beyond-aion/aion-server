@@ -33,7 +33,8 @@ public class SleepEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill(effect.getEffector());
 		if (effected instanceof Player) {
 			((Player) effected).getFlyController().onStopGliding();
-			((Player) effected).incrementSleepCount();
+			if (effect.getEffector().getMaster() instanceof Player)
+				((Player) effected).incrementSleepCount();
 		}
 		effect.setAbnormal(AbnormalState.SLEEP);
 		effected.getEffectController().setAbnormal(AbnormalState.SLEEP);

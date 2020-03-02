@@ -538,7 +538,8 @@ public abstract class EffectTemplate {
 		if (effected == null || effected.getGameStats() == null || effector == null || effector.getGameStats() == null)
 			return false;
 
-		if (effected instanceof Player) {
+		// calculate cumulative resist chance for fear, sleep and paralyze if effector & effected are players
+		if (effector.getMaster() instanceof Player && effected instanceof Player) {
 			if (statEnum == StatEnum.FEAR_RESISTANCE && ((Player) effected).getFearCount() >= 2 && ((Player) effected).validateLastFearTime()) {
 				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getFearCount())) {
 					return false;

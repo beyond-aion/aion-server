@@ -919,17 +919,19 @@ public class Effect implements StatOwner {
 		if (getEffected() instanceof Player) {
 			if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected))
 				duration = duration * skillTemplate.getPvpDuration() / 100;
-			for (EffectTemplate et : successEffects.values()) {
-				if (et instanceof ParalyzeEffect && ((Player) getEffected()).validateLastParalyzeTime()) {
-					duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getParalyzeCount()) / 100f);
-					break;
-				} else if (et instanceof FearEffect  && ((Player) getEffected()).validateLastFearTime()) {
-					duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getFearCount()) / 100f);
-					break;
-				} else if (et instanceof SleepEffect  && ((Player) getEffected()).validateLastSleepTime()) {
-					System.out.println(getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getSleepCount()) / 100f);
-					duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getSleepCount()) / 100f);
-					break;
+			if (getEffector().getMaster() instanceof Player) {
+				for (EffectTemplate et : successEffects.values()) {
+					if (et instanceof ParalyzeEffect && ((Player) getEffected()).validateLastParalyzeTime()) {
+						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getParalyzeCount()) / 100f);
+						break;
+					} else if (et instanceof FearEffect && ((Player) getEffected()).validateLastFearTime()) {
+						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getFearCount()) / 100f);
+						break;
+					} else if (et instanceof SleepEffect && ((Player) getEffected()).validateLastSleepTime()) {
+						System.out.println(getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getSleepCount()) / 100f);
+						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getSleepCount()) / 100f);
+						break;
+					}
 				}
 			}
 		}
