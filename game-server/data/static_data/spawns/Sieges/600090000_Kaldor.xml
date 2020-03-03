@@ -1658,7 +1658,7 @@
 					</spawn>
 					<!-- Real Teleport Device! -->
 					<spawn npc_id="802444" respawn_time="295">
-						<spot x="865.881653" y="805.2901" z="165.499023" h="60"/>
+						<spot x="865.881653" y="805.2901" z="165.499023" h="60" static_id="252"/>
 					</spawn>
 					<!-- Teleport Device (LDF5_Fortress_7012_DynTeleporter_Da) -->
 					<spawn npc_id="804529" respawn_time="295">
