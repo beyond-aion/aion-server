@@ -77,7 +77,7 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 		Summon summon = player.getSummon();
 		if (summon == null)
 			return;
-		if (summon.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE) || summon.getEffectController().isUnderFear())
+		if (summon.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE) || summon.getEffectController().isUnderFear() || summon.getEffectController().isConfused())
 			return;
 		SummonMoveController m = summon.getMoveController();
 		m.movementMask = type;

@@ -42,9 +42,7 @@ public class TargetEventHandler {
 				}
 				break;
 			case FOLLOWING:
-				npcAI.getOwner().getMoveController().abortMove();
-				npcAI.getOwner().getMoveController().storeStep();
-				break;
+			case CONFUSE:
 			case FEAR:
 				npcAI.getOwner().getMoveController().abortMove();
 				npcAI.getOwner().getMoveController().storeStep();
@@ -73,6 +71,7 @@ public class TargetEventHandler {
 			case FOLLOWING:
 				FollowManager.targetTooFar(npcAI);
 				break;
+			case CONFUSE:
 			case FEAR:
 				break;
 			default:

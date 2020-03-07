@@ -817,6 +817,13 @@ public class EffectController {
 	}
 
 	/**
+	 * @return true if creature is under Confuse effect
+	 */
+	public boolean isConfused() {
+		return isAbnormalSet(AbnormalState.CONFUSE);
+	}
+
+	/**
 	 * @return copy of abnormals list
 	 */
 	public List<Effect> getAbnormalEffects() {

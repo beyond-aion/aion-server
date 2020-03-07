@@ -177,6 +177,7 @@ public abstract class NpcAI extends AITemplate<Npc> {
 	protected boolean isDestinationReached() {
 		AIState state = getState();
 		switch (state) {
+			case CONFUSE:
 			case FEAR:
 				return PositionUtil.isInRange(getOwner(), getOwner().getMoveController().getTargetX2(), getOwner().getMoveController().getTargetY2(),
 					getOwner().getMoveController().getTargetZ2(), 1);

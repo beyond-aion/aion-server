@@ -70,7 +70,7 @@ public class CM_MOVE extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		if (player.isDead())
 			return;
-		if (player.getEffectController().isUnderFear())
+		if (player.getEffectController().isUnderFear() || player.getEffectController().isConfused())
 			return;
 		if (player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE)) // client sends crap when watching cutscenes in transform state
 			return;

@@ -110,7 +110,7 @@ public class CM_EMOTION extends AionClientPacket {
 		if (emotionType != EmotionType.SELECT_TARGET && emotionType != EmotionType.ATTACKMODE_IN_MOVE
 			&& emotionType != EmotionType.ATTACKMODE_IN_STANDING && emotionType != EmotionType.NEUTRALMODE_IN_MOVE
 			&& emotionType != EmotionType.NEUTRALMODE_IN_STANDING) {
-			if (player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE) || player.getEffectController().isUnderFear()) {
+			if (player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE) || player.getEffectController().isUnderFear() || player.getEffectController().isConfused()) {
 				return;
 			}
 		}

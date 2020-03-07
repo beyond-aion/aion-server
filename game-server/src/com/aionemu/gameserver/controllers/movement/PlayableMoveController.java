@@ -49,7 +49,7 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 	}
 
 	private boolean isControlled() {
-		return owner.getEffectController().isUnderFear();
+		return owner.getEffectController().isUnderFear() || owner.getEffectController().isConfused();
 	}
 
 	private void sendForcedMovePacket() {

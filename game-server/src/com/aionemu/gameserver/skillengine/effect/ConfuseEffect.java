@@ -4,11 +4,28 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.ai.manager.EmoteManager;
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_IMMOBILIZE;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.geo.GeoData;
+import com.aionemu.gameserver.world.geo.GeoService;
+
+import java.util.concurrent.ScheduledFuture;
 
 /**
- * @author ATracer, kecimis
+ * @author Yeats
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ConfuseEffect")
@@ -16,6 +33,12 @@ public class ConfuseEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
+		Creature effected = effect.getEffected();
+		effected.getEffectController().removeHideEffects();
+
+		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
+			((Player) effected).getFlyController().onStopGliding();
+		}
 		effect.addToEffectedController();
 	}
 
@@ -26,14 +49,63 @@ public class ConfuseEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(Effect effect) {
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.CONFUSE);
+		final Creature effector = effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector();
+		final Creature effected = effect.getEffected();
+		effected.getController().cancelCurrentSkill(effect.getEffector());
+		effected.getEffectController().setAbnormal(AbnormalState.CONFUSE);
 		effect.setAbnormal(AbnormalState.CONFUSE);
-		//TODO implement move events (similar to fear)
+
+		effected.getMoveController().abortMove();
+		if (effected instanceof Npc) {
+			EmoteManager.emoteStartAttacking((Npc) effected, effector);
+			effected.getAi().setStateIfNot(AIState.CONFUSE);
+		}
+		if (GeoDataConfig.FEAR_ENABLE) {
+			ScheduledFuture<?> confuseTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new ConfuseTask(effected), 0, 1000);
+			effect.setPeriodicTask(confuseTask, position);
+		}
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
 		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.CONFUSE);
+		effect.getEffected().getMoveController().abortMove();
+		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_TARGET_IMMOBILIZE(effect.getEffected()));
+
+		if (effect.getEffected() instanceof Npc) {
+			effect.getEffected().getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
+		}
+	}
+
+	class ConfuseTask implements Runnable {
+		private Creature effected;
+
+		ConfuseTask(Creature effected) {
+			this.effected = effected;
+		}
+
+		@Override
+		public void run() {
+			if (effected.getEffectController().isConfused()) {
+				float x = effected.getX();
+				float y = effected.getY();
+				float direction = Rnd.get(0, 199) / 100f;
+				float distance = effected.getGameStats().getMovementSpeedFloat();
+				float x1 = (float) (Math.cos(Math.PI * direction) * distance);
+				float y1 = (float) (Math.sin(Math.PI * direction) * distance);
+				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, x + x1, y +y1, effected.getZ());
+				if (effected.isFlying())
+					closestCollision.setZ(effected.getZ());
+				if (effected instanceof Npc) {
+					((Npc) effected).getMoveController().resetMove();
+					((Npc) effected).getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
+				} else {
+					byte moveAwayHeading = PositionUtil.convertAngleToHeading(direction);
+					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), moveAwayHeading);
+					effected.getMoveController().startMovingToDestination();
+				}
+			}
+		}
 	}
 
 }
