@@ -68,8 +68,8 @@ public class HyperionAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleAttack(Creature creature) {
-		super.handleAttack(creature);
 		checkPercentage(getLifeStats().getHpPercentage());
+		super.handleAttack(creature);
 	}
 
 
@@ -250,12 +250,17 @@ public class HyperionAI extends AggressiveNpcAI {
 	private void queuePowerfulEnergyBlast() {
 		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100)));
 		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100)));
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100)));
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100, 0, 8000)));
 	}
 
 	private void cancelSpawnTask() {
 		if (spawnTask != null && !spawnTask.isCancelled())
 			spawnTask.cancel(true);
+	}
+
+	@Override
+	public int modifyInitialSkillDelay(int delay) {
+		return 0;
 	}
 
 	@Override
