@@ -314,18 +314,6 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onPlayerLogOut(Player player) {
-		player.getInventory().decreaseByItemId(164000342, 20);
-		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
-	}
-
-	@Override
-	public void onLeaveInstance(Player player) {
-		player.getInventory().decreaseByItemId(164000342, 20);
-		super.onLeaveInstance(player);
-	}
-
-	@Override
 	public void onInstanceDestroy() {
 		isInstanceDestroyed = true;
 		if (spawnTask != null)
