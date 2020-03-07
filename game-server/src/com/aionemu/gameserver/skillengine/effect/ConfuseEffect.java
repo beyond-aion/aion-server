@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.skillengine.effect;
 
+import java.util.concurrent.ScheduledFuture;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -10,19 +12,19 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
+import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_IMMOBILIZE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.geo.GeoData;
 import com.aionemu.gameserver.world.geo.GeoService;
-
-import java.util.concurrent.ScheduledFuture;
 
 /**
  * @author Yeats
@@ -59,6 +61,9 @@ public class ConfuseEffect extends EffectTemplate {
 		if (effected instanceof Npc) {
 			EmoteManager.emoteStartAttacking((Npc) effected, effector);
 			effected.getAi().setStateIfNot(AIState.CONFUSE);
+		} else if (effected instanceof Player && effected.isInState(CreatureState.WALK_MODE)) {
+			effected.unsetState(CreatureState.WALK_MODE);
+			PacketSendUtility.broadcastPacket((Player) effected, new SM_EMOTION(effected, EmotionType.RUN), true);
 		}
 		if (GeoDataConfig.FEAR_ENABLE) {
 			ScheduledFuture<?> confuseTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new ConfuseTask(effected), 0, 1000);
