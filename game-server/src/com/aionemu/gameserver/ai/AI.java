@@ -86,4 +86,6 @@ public interface AI {
 	AttackHandAnimation modifyAttackHandAnimation(AttackHandAnimation attackHandAnimation);
 
 	AttackTypeAnimation getAttackTypeAnimation(Creature target);
+
+	int modifyInitialSkillDelay(int delay);
 }

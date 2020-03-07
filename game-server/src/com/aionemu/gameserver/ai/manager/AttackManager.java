@@ -24,7 +24,6 @@ public class AttackManager {
 			AILogger.info(npcAI, "AttackManager: startAttacking");
 		}
 		npcAI.getOwner().getGameStats().setFightStartingTime();
-		npcAI.getOwner().getQueuedSkills().clear();
 		VisibleObject target = npcAI.getOwner().getTarget();
 		if (target instanceof Creature) // may be null at this point (-> triggering then TARGET_GIVEUP)
 			EmoteManager.emoteStartAttacking(npcAI.getOwner(), (Creature) target);

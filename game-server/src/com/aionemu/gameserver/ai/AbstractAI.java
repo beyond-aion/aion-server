@@ -508,4 +508,9 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 	public AttackTypeAnimation getAttackTypeAnimation(Creature target) {
 		return AttackTypeAnimation.MELEE;
 	}
+
+	@Override
+	public int modifyInitialSkillDelay(int delay) {
+		return delay;
+	}
 }

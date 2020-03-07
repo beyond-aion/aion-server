@@ -237,4 +237,11 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 		lastSkillTime = 0;
 		nextSkillDelay = 0;
 	}
+
+	/**
+	 * @return time until the npc can use a skill for the first time in this fight
+	 */
+	public int getInitialSkillDelay() {
+		return owner.getAi().modifyInitialSkillDelay(Rnd.get(getAttackSpeed().getCurrent(), 3 * getAttackSpeed().getCurrent()));
+	}
 }

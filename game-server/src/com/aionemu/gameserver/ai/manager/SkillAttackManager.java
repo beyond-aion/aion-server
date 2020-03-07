@@ -169,7 +169,7 @@ public class SkillAttackManager {
 			return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
 		}
 
-		if (((System.currentTimeMillis() - owner.getGameStats().getFightStartingTime()) > owner.getGameStats().getAttackSpeed().getCurrent())
+		if (((System.currentTimeMillis() - owner.getGameStats().getFightStartingTime()) > owner.getGameStats().getInitialSkillDelay())
 			&& owner.getGameStats().canUseNextSkill()) {
 			if (queuedSkill != null && isReady(owner, queuedSkill)) {
 				return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
