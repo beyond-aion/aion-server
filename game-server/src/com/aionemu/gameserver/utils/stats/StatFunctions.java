@@ -464,9 +464,9 @@ public class StatFunctions {
 		if (attacker instanceof Servant || attacker instanceof Homing)
 			return false;
 
-		int critical = attacker.getGameStats().getMCritical().getCurrent();
-		critical = attacked.getGameStats().getPositiveReverseStat(StatEnum.MAGICAL_CRITICAL_RESIST, critical);
-
+		int critical = attacker.getGameStats().getMCritical().getCurrent() - attacked.getGameStats().getMCR().getCurrent();
+		if (critical <= 0)
+			critical = 1;
 		// add critical Prob
 		critical *= criticalProb / 100f;
 
@@ -670,7 +670,10 @@ public class StatFunctions {
 				return Rnd.get(1000) < acStatus.getValue();
 		}
 
-		critical = attacked.getGameStats().getPositiveReverseStat(StatEnum.PHYSICAL_CRITICAL_RESIST, critical);
+		critical -= attacked.getGameStats().getPCR().getCurrent();
+		if (critical < 0) {
+			critical = 1;
+		}
 
 		// add critical Prob
 		critical *= criticalProb / 100f;
