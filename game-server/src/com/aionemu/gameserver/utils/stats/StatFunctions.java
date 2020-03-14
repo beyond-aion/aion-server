@@ -671,7 +671,7 @@ public class StatFunctions {
 		}
 
 		critical -= attacked.getGameStats().getPCR().getCurrent();
-		if (critical < 0) {
+		if (critical <= 0) {
 			critical = 1;
 		}
 
