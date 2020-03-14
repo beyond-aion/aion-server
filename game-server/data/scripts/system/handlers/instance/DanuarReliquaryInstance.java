@@ -14,7 +14,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Yeats
+ * @author Ritsu, Estrayl, Yeats
  */
 @InstanceID(301110000)
 public class DanuarReliquaryInstance extends GeneralInstanceHandler {
