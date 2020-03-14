@@ -43,7 +43,7 @@ public class DynatoumMaintenanceDeviceAI extends NpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 21535:
 				scheduleSkillTask();

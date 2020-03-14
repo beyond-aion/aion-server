@@ -3,13 +3,14 @@ package ai.instance.danuarReliquary;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Ritsu
- * @modified Estrayl October 29th, 2017.
+ * @author Ritsu, Estrayl, Yeats
  */
 @AIName("malicious_ice_storm")
 public class MaliciousIceStormAI extends NpcAI {
@@ -25,7 +26,12 @@ public class MaliciousIceStormAI extends NpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+		return (int) (damage * 0.5f);
+	}
+
+	@Override
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 21180)
 			getOwner().getController().delete();
 	}

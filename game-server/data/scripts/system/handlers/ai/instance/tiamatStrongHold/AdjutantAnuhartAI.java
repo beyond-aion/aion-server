@@ -36,7 +36,7 @@ public class AdjutantAnuhartAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onStartUseSkill(SkillTemplate skillTemplate) {
+	public void onStartUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 20747) { // Blade Storm
 			SkillEngine.getInstance().applyEffect(20749, getOwner(), getOwner());
 			getEffectController().setAbnormal(AbnormalState.SANCTUARY);
@@ -45,7 +45,7 @@ public class AdjutantAnuhartAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 20747) // Blade Storm
 			getEffectController().unsetAbnormal(AbnormalState.SANCTUARY);
 	}

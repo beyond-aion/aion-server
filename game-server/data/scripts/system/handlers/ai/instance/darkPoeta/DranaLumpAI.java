@@ -44,7 +44,7 @@ public class DranaLumpAI extends ActionItemNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 18536)
 			getOwner().getController().delete();
 	}

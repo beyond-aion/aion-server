@@ -141,10 +141,10 @@
 	<instance_exit instance_id="300560000" exit_world="120010000" race="ASMODIANS" x="1611.5364" y="1403.6775" z="193.12807"/>
 	<!-- Hexway -->
 	<instance_exit instance_id="300700000" exit_world="600010000" race="PC_ALL" x="524.7724" y="767.15015" z="299.61633" h="60"/>
-	<!-- Danuar Reliquary
+	<!-- Danuar Reliquary -->
 	<instance_exit instance_id="301110000" exit_world="600090000" race="PC_ALL" x="775.7178" y="1029.159" z="112.1926"/>
-	-->
-	
+	<!-- Infernal Danuar Reliquary -->
+	<instance_exit instance_id="301360000" exit_world="600090000" race="PC_ALL" x="775.7178" y="1029.159" z="112.1926"/>
 	<!-- Sealed Danuar Mysticarium -->
 	<instance_exit instance_id="300480000" exit_world="210070000" race="ELYOS" x="2905" y="803" z="569.53" h="22"/>
 	<instance_exit instance_id="300480000" exit_world="220080000" race="ASMODIANS" x="454" y="2262" z="220.1" h="22"/>

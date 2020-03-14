@@ -50,7 +50,7 @@ public class MoriataAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		lastSkillUse = System.currentTimeMillis();
 	}
 

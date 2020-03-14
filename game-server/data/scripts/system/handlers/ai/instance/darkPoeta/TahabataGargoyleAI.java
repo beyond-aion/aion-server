@@ -17,7 +17,7 @@ public class TahabataGargoyleAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 18219)
 			getOwner().getController().delete();
 	}

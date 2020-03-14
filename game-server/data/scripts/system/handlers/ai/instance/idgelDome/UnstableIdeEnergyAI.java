@@ -40,7 +40,7 @@ public class UnstableIdeEnergyAI extends NpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 21559:
 				scheduleSkill(Rnd.get(10000, 30000));

@@ -138,7 +138,7 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (getOwner().getNpcId() == 231304) {
 			switch (skillTemplate.getSkillId()) {
 				case 21165:

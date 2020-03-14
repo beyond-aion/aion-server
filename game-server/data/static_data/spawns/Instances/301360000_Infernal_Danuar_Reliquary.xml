@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
-	<spawn_map map_id="301110000">
+	<spawn_map map_id="301360000">
 		<!-- Danuar Reliquary Novun -->
 		<spawn npc_id="284377">
 			<spot x="255.37" y="263.11" z="241.81252" h="90"/>

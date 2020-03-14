@@ -65,7 +65,7 @@ public class EmpyreanLordAI extends GeneralNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 20932:
 			case 20936:

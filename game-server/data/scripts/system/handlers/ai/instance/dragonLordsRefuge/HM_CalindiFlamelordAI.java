@@ -25,7 +25,7 @@ public class HM_CalindiFlamelordAI extends CalindiFlamelordAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 21887:
 				spawn(731629, 482.21f, 458.06f, 427.42f, (byte) 98);

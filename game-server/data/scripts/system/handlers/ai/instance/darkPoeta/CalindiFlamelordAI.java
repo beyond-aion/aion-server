@@ -53,7 +53,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 18233:
 				if (getLifeStats().getHpPercentage() >= 30 && getLifeStats().getHpPercentage() <= 60) {

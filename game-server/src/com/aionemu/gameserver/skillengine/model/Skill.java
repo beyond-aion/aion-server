@@ -277,7 +277,7 @@ public class Skill {
 				npc.getGameStats().setNextSkillDelay(-1);
 			}
 		}
-		effector.getAi().onStartUseSkill(skillTemplate);
+		effector.getAi().onStartUseSkill(skillTemplate, skillLevel);
 		if (castDuration > 0) {
 			schedule(castDuration);
 		} else {
@@ -742,7 +742,7 @@ public class Skill {
 			AbyssService.announceAbyssSkillUsage((Player) effector, getSkillTemplate().getL10n());
 		}
 
-		effector.getAi().onEndUseSkill(skillTemplate);
+		effector.getAi().onEndUseSkill(skillTemplate, skillLevel);
 		if (effector instanceof Npc) {
 			Npc npc = (Npc) effector;
 			NpcSkillEntry lastSkill = npc.getGameStats().getLastSkill();

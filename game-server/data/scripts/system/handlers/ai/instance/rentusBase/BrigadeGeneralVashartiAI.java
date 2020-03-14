@@ -99,7 +99,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onStartUseSkill(SkillTemplate skillTemplate) {
+	public void onStartUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 20534:
 				handleSeaOfFireEvent();
@@ -108,7 +108,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 19907: // repeat until reset
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19907, 1, 100, 0, 0))); // Chastise

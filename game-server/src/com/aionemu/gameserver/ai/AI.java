@@ -77,9 +77,9 @@ public interface AI {
 
 	int modifyAggroRange(int value);
 
-	void onStartUseSkill(SkillTemplate skillTemplate);
+	void onStartUseSkill(SkillTemplate skillTemplate, int skillLevel);
 
-	void onEndUseSkill(SkillTemplate skillTemplate);
+	void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel);
 
 	void onEffectEnd(Effect effect);
 

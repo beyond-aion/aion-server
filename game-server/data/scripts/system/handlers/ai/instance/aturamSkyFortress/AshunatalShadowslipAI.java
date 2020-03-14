@@ -57,8 +57,8 @@ public class AshunatalShadowslipAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
-		super.onEndUseSkill(skillTemplate);
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
+		super.onEndUseSkill(skillTemplate, skillLevel);
 		if (skillTemplate.getSkillId() == 19417) {
 			canThink = false;
 			ThreadPoolManager.getInstance().schedule(() -> {

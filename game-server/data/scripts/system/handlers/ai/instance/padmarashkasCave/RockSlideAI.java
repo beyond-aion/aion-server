@@ -42,7 +42,7 @@ public class RockSlideAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		ThreadPoolManager.getInstance().schedule(this::useRockSlide, 2700);
 	}
 }

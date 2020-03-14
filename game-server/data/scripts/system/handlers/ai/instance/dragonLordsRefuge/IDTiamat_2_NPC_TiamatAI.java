@@ -25,7 +25,7 @@ public class IDTiamat_2_NPC_TiamatAI extends GeneralNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 20919) {
 			spawn(getNpcId() + 1, 466.7468f, 514.5500f, 417.4044f, (byte) 0); // Dragon Tiamat
 			AIActions.deleteOwner(this);

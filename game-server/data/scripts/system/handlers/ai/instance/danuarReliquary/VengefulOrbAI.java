@@ -1,44 +1,49 @@
 package ai.instance.danuarReliquary;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
+
+import java.util.concurrent.Future;
 
 /**
- * @author Ritsu
- * @modified Estrayl October 28th, 2017.
+ * @author Ritsu, Estrayl, Yeats
  */
 @AIName("vengeful_orb")
 public class VengefulOrbAI extends NpcAI {
+
+	private Future<?> skillTask;
 
 	public VengefulOrbAI(Npc owner) {
 		super(owner);
 	}
 
-	/**
-	 * Currently capped the damage value. Seems to be some defensive calculations are not even retail.
-	 * Damage on retail: 12000 - 13000
-	 * Damage here: 17000+
-	 */
-	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
-		return damage > 12500 ? Rnd.get(12000, 13000) : damage;
-	}
-
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		AIActions.useSkill(VengefulOrbAI.this, 21178);
+		skillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
+			@Override
+			public void run() {
+				if (!getOwner().isDead())
+					AIActions.useSkill(VengefulOrbAI.this, 21178);
+			}
+		}, 100);
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 21178)
 			getOwner().getController().delete();
+	}
+
+	@Override
+	protected void handleDespawned() {
+		if (skillTask != null) {
+			skillTask.cancel(false);
+		}
+		super.handleDespawned();
 	}
 }

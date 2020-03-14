@@ -75,7 +75,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 20911:
 				spawn(730695, 482.21f, 458.06f, 427.42f, (byte) 98);

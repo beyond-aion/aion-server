@@ -219,8 +219,8 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
-		super.onEndUseSkill(skillTemplate);
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
+		super.onEndUseSkill(skillTemplate, skillLevel);
 		previousSkill = skillTemplate.getSkillId();
 
 		if (castTimeout != null) {

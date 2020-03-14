@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Cursed Queen Modor -->
+	<npc_skills npc_ids="231304">
+		<npc_skill id="21174" lv="1" prob="70" cd="17000" next_skill_time="8000"/><!-- Freezing Sphere of Revenge -->
+		<npc_skill id="21175" lv="1" prob="70" cd="17000" next_skill_time="8000"/><!-- Freezing Sphere of Malice -->
+	</npc_skills>
+	<!-- Enraged Queen Modor -->
+	<npc_skills npc_ids="231305">
+		<npc_skill id="21181" lv="1" prob="0" is_post_spawn="true"/> <!-- Malevolence -->
+		<npc_skill id="21742" lv="1" prob="70" cd="17000" next_skill_time="8000"/><!-- Subzero Malice -->
+		<npc_skill id="21743" lv="1" prob="70" cd="17000" next_skill_time="8000"/><!-- Rushing Subzero Malice -->
+	</npc_skills>
+	<!-- Modor's Clone -->
+	<npc_skills npc_ids="284383">
+		<npc_skill id="21181" lv="1" prob="0" is_post_spawn="true"/> <!-- Malevolence -->
+		<npc_skill id="21372" lv="1" prob="100" cd="20000" next_skill_time="15000" max_chain_time="23000" next_chain_id="1"/> <!-- Freezing Sphere of Malice -->
+		<npc_skill id="21373" lv="1" prob="100" cd="20000" next_skill_time="20000" max_chain_time="23000" chain_id="1" next_chain_id="2"/> <!-- Freezing Sphere of Revenge -->
+		<npc_skill id="21177" lv="1" prob="100" cd="20000" next_skill_time="15000" chain_id="2" /> <!-- Vengeful Orb -->
+	</npc_skills>
+	<!-- danuar reliquary novun -->
+	<npc_skills npc_ids="284377 284659 856493">
+		<npc_skill id="17029" lv="1" prob="60" cd="25000" is_post_spawn="true"/>
+		<npc_skill id="16516" lv="1" prob="70" cd="22000"/>
+		<npc_skill id="17949" lv="1" prob="70" cd="22000"/>
+	</npc_skills>
+	<!-- idean lapilima -->
+	<npc_skills npc_ids="284378 284660 856494">
+		<npc_skill id="16540" lv="1" prob="70" cd="22000"/>
+		<npc_skill id="16984" lv="1" prob="70" cd="22000"/>
+	</npc_skills>
+	<!-- idean obscura -->
+	<npc_skills npc_ids="284379 284661 856495">
+		<npc_skill id="16540" lv="1" prob="65" cd="23000"/>
+		<npc_skill id="16762" lv="1" prob="65" cd="23000"/>
+		<npc_skill id="16984" lv="1" prob="65" cd="23000"/>
+	</npc_skills>
+	<!-- modor's bodyguard -->
+	<npc_skills npc_ids="284380 284662 856496">
+		<npc_skill id="21265" lv="1" prob="60" cd="25000" is_post_spawn="true"/>
+		<npc_skill id="16516" lv="1" prob="70" cd="22000"/>
+		<npc_skill id="16984" lv="1" prob="70" cd="22000"/>
+	</npc_skills>
+	<!-- vengeful reaper -->
+	<npc_skills npc_ids="284381 284663 856497">
+		<npc_skill id="16516" lv="1" prob="70" cd="22000"/>
+		<npc_skill id="16984" lv="1" prob="70" cd="22000"/>
+	</npc_skills>
+	<!-- hoarfrost acheron drake -->
+	<npc_skills npc_ids="284382 284664 856498">
+		<!--<npc_skill id="16570" lv="1" prob="40" cd="45000"/> -->
+		<npc_skill id="17531" lv="1" prob="65" cd="23000"/>
+		<npc_skill id="16577" lv="1" prob="65" cd="23000"/>
+		<!--<npc_skill id="17114" lv="1" prob="60" cd="25000"/>-->
+		<npc_skill id="21267" lv="1" prob="65" cd="23000"/>
+	</npc_skills>
+</npc_skill_templates>

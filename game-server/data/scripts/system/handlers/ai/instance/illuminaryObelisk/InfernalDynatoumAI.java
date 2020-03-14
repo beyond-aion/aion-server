@@ -50,7 +50,7 @@ public class InfernalDynatoumAI extends DynatoumAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 21534:
 				getOwner().getController().delete();

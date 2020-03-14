@@ -38,8 +38,8 @@ public class ExplosionShadowsAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
-		super.onEndUseSkill(skillTemplate);
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
+		super.onEndUseSkill(skillTemplate, skillLevel);
 		if (skillTemplate.getSkillId() == 19425) // Self Destruct
 			ThreadPoolManager.getInstance().schedule(() -> check(), 1500);
 	}

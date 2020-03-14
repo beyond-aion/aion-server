@@ -91,7 +91,7 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onStartUseSkill(SkillTemplate skillTemplate) {
+	public void onStartUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 20922: // Ultimate Atrocity
 				spawn(283237, 445.0f, 550.70f, 417.41f, (byte) 0);
@@ -117,7 +117,7 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 20922: // Ultimate Atrocity
 			case 20924:

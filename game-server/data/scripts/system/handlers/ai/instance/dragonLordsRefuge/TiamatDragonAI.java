@@ -32,7 +32,7 @@ public class TiamatDragonAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 20920:
 				AIActions.useSkill(this, 20975); // Fissure Buff

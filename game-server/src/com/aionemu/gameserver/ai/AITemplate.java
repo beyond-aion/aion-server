@@ -159,11 +159,11 @@ public abstract class AITemplate<T extends Creature> extends AbstractAI<T> {
 	}
 
 	@Override
-	public void onStartUseSkill(SkillTemplate skillTemplate) {
+	public void onStartUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 	}
 
 	@Override

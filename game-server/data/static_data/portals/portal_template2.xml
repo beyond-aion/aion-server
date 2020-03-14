@@ -1409,14 +1409,12 @@
 	<!-- Danuar Reliquary Entrance -->
 	<portal_dialog npc_id="730841">
 		<portal_path dialog="10000" loc_id="3011100" player_count="6" instance="true" min_level="65" />
-		<!-- <portal_path dialog="10001" loc_id="3013600" player_count="6" instance="true" min_level="65">
-			</portal_path> -->
+		<portal_path dialog="10001" loc_id="3013600" player_count="6" instance="true" min_level="65"/>
 	</portal_dialog>
 	<!-- Danuar Reliquary : Kaldor Entrance -->
 	<portal_dialog npc_id="804621">
 		<portal_path dialog="10000" loc_id="3011100" player_count="6" instance="true" min_level="65" />
-		<!-- <portal_path dialog="10001" loc_id="3013600" player_count="6" instance="true" min_level="65">
-			</portal_path> -->
+		<portal_path dialog="10001" loc_id="3013600" player_count="6" instance="true" min_level="65"/>
 	</portal_dialog>
 	<!-- DANUAR RELIQUARY END -->
 	<!-- Sealed Danuar Mysticarium Entrance Elyos -->

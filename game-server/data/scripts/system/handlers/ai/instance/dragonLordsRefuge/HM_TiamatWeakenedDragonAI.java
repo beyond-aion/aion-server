@@ -49,7 +49,7 @@ public class HM_TiamatWeakenedDragonAI extends TiamatWeakenedDragonAI {
 	}
 
 	@Override
-	public void onStartUseSkill(SkillTemplate skillTemplate) {
+	public void onStartUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 20922: // Ultimate Atrocity
 				spawnAtrocity(25);

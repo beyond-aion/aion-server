@@ -8,20 +8,18 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Ritsu
- * @reworked Estrayl October 29th, 2017.
+ * @author Yeats
  */
 @InstanceID(301110000)
 public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 
-	private AtomicBoolean isCursedModorSpawned = new AtomicBoolean();
+	private AtomicBoolean isCursedModorActive = new AtomicBoolean();
 	private AtomicInteger cloneKills = new AtomicInteger();
 	private ScheduledFuture<?> wipeTask;
 
@@ -33,29 +31,61 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 		return 701795;
 	}
 
+	protected int getEnragedModorId() {
+		return 231305;
+	}
+
+	protected int getCursedModorId() {
+		return 231304;
+	}
+
+	protected int getRealCloneId() {
+		return 284383; // 855244
+	}
+
+	protected int getFakeCloneId() {
+		return 284384; // 855244
+	}
+
 	@Override
 	public void onDie(Npc npc) {
 		final int npcId = npc.getNpcId();
 		switch (npcId) {
-			case 284379: // Idean Obscura
+			case 284377: // Idean Obscura
 			case 284378: // Idean Lapilima
-			case 284377: // Danuar Reliquary Novun
+			case 284379: // Danuar Reliquary Novun
 				despawnNpc(npc);
-				if (isNullOrDead(284377) && isNullOrDead(284378) && isNullOrDead(284379) && isCursedModorSpawned.compareAndSet(false, true))
-					spawn(231304, 255.98627f, 259.0136f, 241.73842f, (byte) 90); // Cursed Queen Modor
+				if (isNullOrDead(284377) && isNullOrDead(284378) && isNullOrDead(284379) && isCursedModorActive.compareAndSet(false, true)) {
+					spawn(getCursedModorId(), 256.62f, 257.79f, 241.79f, (byte) 90);
+					Npc cursedModor = getNpc(getCursedModorId());
+					if (cursedModor != null) {
+						//SkillEngine.getInstance().getSkill(cursedModor, 21168, 1, cursedModor).useWithoutPropSkill();
+						//sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_INDER_RUNE_START());
+						scheduleWipe();
+					}
+				}
 				break;
 			case 284383: // Modor's Clone
-				despawnNpcs(284384); // Modor's Clone - Fake
+			case 855244: // Modor's Clone
+				despawnNpcs(getFakeCloneId());
 				despawnNpc(npc);
-				if (cloneKills.incrementAndGet() >= 3)
-					spawn(231305, 255.98627f, 259.0136f, 241.73842f, (byte) 90);
-				else
-					spawnClone();
+				ThreadPoolManager.getInstance().schedule(new Runnable() {
+					@Override
+					public void run() {
+						if (cloneKills.incrementAndGet() >= 3) {
+							spawn(getEnragedModorId(), 256.62f, 257.79f, 241.79f, (byte) 90);
+						} else {
+							spawnClones();
+						}
+					}
+				}, 2000);
 				break;
 			case 231305: // Enraged Queen Modor
+			case 234691: // Crazed Modor
 				onInstanceEnd(true);
 				break;
 			case 701795: // Treasure Box
+			case 802183:
 				break;
 			default:
 				despawnNpc(npc);
@@ -63,82 +93,36 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	@Override
-	public void onSpawn(VisibleObject object) {
-		if (object instanceof Npc) {
-			switch (((Npc) object).getNpcId()) {
-				case 231304:
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_INDER_RUNE_START());
-					scheduleWipe(0);
-					break;
-			}
-		}
-	}
-
-	private void spawnClone() {
+	private void spawnClones() {
 		int spawnCase = Rnd.get(1, 5);
 		switch (spawnCase) {
 			case 1:
-				spawn(284383, 255.5489f, 293.42154f, 253.78925f, (byte) 90);
+				spawn(getRealCloneId(), 255.5489f, 293.42154f, 253.78925f, (byte) 90);
 				break;
 			case 2:
-				spawn(284383, 232.5363f, 263.90112f, 248.65384f, (byte) 114);
+				spawn(getRealCloneId(), 232.5363f, 263.90112f, 248.65384f, (byte) 114);
 				break;
 			case 3:
-				spawn(284383, 240.11194f, 235.08876f, 251.14906f, (byte) 17);
+				spawn(getRealCloneId(), 240.11194f, 235.08876f, 251.14906f, (byte) 17);
 				break;
 			case 4:
-				spawn(284383, 271.23627f, 230.30913f, 250.92981f, (byte) 42);
+				spawn(getRealCloneId(), 271.23627f, 230.30913f, 250.92981f, (byte) 42);
 				break;
 			case 5:
-				spawn(284383, 284.6919f, 262.7201f, 248.75252f, (byte) 63);
+				spawn(getRealCloneId(), 284.6919f, 262.7201f, 248.75252f, (byte) 63);
 				break;
 		}
 
 		if (spawnCase != 1)
-			spawn(284384, 255.5489f, 293.42154f, 253.78925f, (byte) 90);
+			spawn(getFakeCloneId(), 255.5489f, 293.42154f, 253.78925f, (byte) 90);
 		if (spawnCase != 2)
-			spawn(284384, 232.5363f, 263.90112f, 248.65384f, (byte) 114);
+			spawn(getFakeCloneId(), 232.5363f, 263.90112f, 248.65384f, (byte) 114);
 		if (spawnCase != 3)
-			spawn(284384, 240.11194f, 235.08876f, 251.14906f, (byte) 17);
+			spawn(getFakeCloneId(), 240.11194f, 235.08876f, 251.14906f, (byte) 17);
 		if (spawnCase != 4)
-			spawn(284384, 271.23627f, 230.30913f, 250.92981f, (byte) 42);
+			spawn(getFakeCloneId(), 271.23627f, 230.30913f, 250.92981f, (byte) 42);
 		if (spawnCase != 5)
-			spawn(284384, 284.6919f, 262.7201f, 248.75252f, (byte) 63);
-	}
-
-	private void onInstanceEnd(boolean successful) {
-		cancelWipeTask();
-		instance.forEachNpc(npc -> npc.getController().delete());
-		spawn(getExitId(), 255.66669f, 263.78525f, 241.7986f, (byte) 86); // Spawn exit portal
-		if (successful)
-			spawn(getTreasureBoxId(), 256.65f, 258.09f, 241.78f, (byte) 100); // Treasure Box
-	}
-
-	private void scheduleWipe(int iterations) {
-		wipeTask = ThreadPoolManager.getInstance().schedule(() -> {
-			switch (iterations) {
-				case 1:
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_INDER_RUNE_10MIN());
-					break;
-				case 2:
-					spawn(284387, 256.60f, 257.99f, 241.78f, (byte) 0);
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_INDER_RUNE_END());
-					onInstanceEnd(false);
-					return;
-			}
-			scheduleWipe(iterations + 1);
-		}, 5 * 60000);
-	}
-
-	private void cancelWipeTask() {
-		if (wipeTask != null && !wipeTask.isCancelled())
-			wipeTask.cancel(false);
-	}
-
-	private void despawnNpcs(int npcId) {
-		for (Npc npc : instance.getNpcs(npcId))
-			despawnNpc(npc);
+			spawn(getFakeCloneId(), 284.6919f, 262.7201f, 248.75252f, (byte) 63);
 	}
 
 	private void despawnNpc(Npc npc) {
@@ -148,6 +132,42 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 
 	private boolean isNullOrDead(int npcId) {
 		return getNpc(npcId) == null || getNpc(npcId).isDead();
+	}
+
+	private void despawnNpcs(int npcId) {
+		for (Npc npc : instance.getNpcs(npcId))
+			despawnNpc(npc);
+	}
+
+	protected void onInstanceEnd(boolean successful) {
+		cancelWipeTask();
+		Npc modor = getNpc(getEnragedModorId());
+		if (modor == null) {
+			modor = getNpc(getCursedModorId());
+		}
+		if (modor != null) {
+			if (successful) {
+				PacketSendUtility.broadcastMessage(modor, 343629);
+			} else {
+				PacketSendUtility.broadcastMessage(modor, 1500739);
+			}
+		}
+		instance.forEachNpc(npc -> npc.getController().delete());
+		spawn(getExitId(), 255.66669f, 263.78525f, 241.7986f, (byte) 86); // Spawn exit portal
+		if (successful)
+			spawn(getTreasureBoxId(), 256.65f, 258.09f, 241.78f, (byte) 100); // Treasure Box
+	}
+
+	private void scheduleWipe() {
+		wipeTask = ThreadPoolManager.getInstance().schedule(() -> {
+			spawn(284386, 256.60f, 257.99f, 241.78f, (byte) 0);
+			onInstanceEnd(false);
+		}, 15 * 60000);
+	}
+
+	void cancelWipeTask() {
+		if (wipeTask != null && !wipeTask.isCancelled())
+			wipeTask.cancel(false);
 	}
 
 	@Override
@@ -160,5 +180,16 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceDestroy() {
 		cancelWipeTask();
+	}
+
+	@Override
+	public void onBackHome(Npc npc) {
+		if (npc.getNpcId() == getEnragedModorId() || npc.getNpcId() == getCursedModorId()) {
+			instance.forEachNpc(other -> {
+				if (other.getNpcId() != npc.getNpcId()) {
+					other.getController().delete();
+				}
+			});
+		}
 	}
 }

@@ -24,7 +24,7 @@ public class FinishThemAI extends NpcAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 21199)
 			getOwner().getController().delete();
 	}

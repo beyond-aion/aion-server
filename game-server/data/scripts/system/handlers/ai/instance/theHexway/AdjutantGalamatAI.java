@@ -52,7 +52,7 @@ public class AdjutantGalamatAI extends SummonerAI {
 	}
 
 	@Override
-	public void onEndUseSkill(SkillTemplate skillTemplate) {
+	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 21799) {
 			shieldPhase.set(true);
 			addSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> rndSpawnInRange(219616, 12), 0, 4000);
@@ -82,7 +82,7 @@ public class AdjutantGalamatAI extends SummonerAI {
 				}
 			}, 25000);
 		}
-		super.onEndUseSkill(skillTemplate);
+		super.onEndUseSkill(skillTemplate, skillLevel);
 	}
 
 	@Override
