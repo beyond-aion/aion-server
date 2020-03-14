@@ -6,6 +6,7 @@ import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -26,7 +27,9 @@ public class ReturningEventHandler {
 		if (npcAI.isLogging()) {
 			AILogger.info(npcAI, "onNotAtHome");
 		}
-		if (npcAI.setStateIfNot(AIState.RETURNING)) {
+		if (!npcAI.isMoveSupported()) {
+			npcAI.onGeneralEvent(AIEventType.BACK_HOME);
+		} else if (npcAI.setStateIfNot(AIState.RETURNING)) {
 			npcAI.setSubStateIfNot(AISubState.NONE);
 			if (npcAI.isLogging()) {
 				AILogger.info(npcAI, "returning and restoring");
