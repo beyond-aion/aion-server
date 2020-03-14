@@ -63,9 +63,11 @@ public class SiegeWeaponController extends SummonController {
 			return;
 		}
 		Race masterRace = master.getRace();
-		if (masterRace.equals(Race.ASMODIANS) && !target.getRace().equals(Race.PC_LIGHT_CASTLE_DOOR) && !target.getRace().equals(Race.DRAGON_CASTLE_DOOR)) {
+		if (masterRace == Race.ASMODIANS && target.getRace() != Race.PC_LIGHT_CASTLE_DOOR && target.getRace() != Race.DRAGON_CASTLE_DOOR
+		&& target.getRace() != Race.GCHIEF_LIGHT && target.getRace() != Race.GCHIEF_DRAGON) {
 			return;
-		} else if (masterRace.equals(Race.ELYOS) && !target.getRace().equals(Race.PC_DARK_CASTLE_DOOR) && !target.getRace().equals(Race.DRAGON_CASTLE_DOOR)) {
+		} else if (masterRace == Race.ELYOS && target.getRace() != Race.PC_DARK_CASTLE_DOOR && target.getRace() != Race.DRAGON_CASTLE_DOOR
+				&& target.getRace() != Race.GCHIEF_DARK && target.getRace() != Race.GCHIEF_DRAGON) {
 			return;
 		}
 		super.attackMode(targetObjId);

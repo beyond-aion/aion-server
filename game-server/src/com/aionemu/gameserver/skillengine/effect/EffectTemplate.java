@@ -6,7 +6,9 @@ import java.util.List;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
+import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
@@ -595,6 +597,11 @@ public abstract class EffectTemplate {
 				if (npc.getObjectTemplate().getStatsTemplate().getRunSpeed() == 0) {
 					if (statEnum == StatEnum.PULLED_RESISTANCE || statEnum == StatEnum.STAGGER_RESISTANCE || statEnum == StatEnum.STUMBLE_RESISTANCE)
 						return true;
+				}
+			} else if (effected instanceof Summon) {
+				Summon summon = (Summon) effected;
+				if (summon.getObjectTemplate().getRating() == NpcRating.HERO || summon.getObjectTemplate().getRating() == NpcRating.LEGENDARY) {
+					return true;
 				}
 			}
 		}
