@@ -26984,7 +26984,26 @@
 			<item id="166050130" /><!-- Blazing Warlord's Idian: Physical/Magical Defense -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053091" /><!-- Modor's Curiosity Box -->
+	<decomposable item_id="188053091"><!-- Modor's Curiosity Box -->
+		<items chance="50.0">
+			<item id="188053628"/> <!-- Pallasite Bundle -->
+			<item id="188052388"/> <!-- Modor's Equipment Box -->
+		</items>
+		<items chance="30.0">
+			<item id="125004076" player_classes="TEMPLAR"/> <!-- Pure Lunatic Modor's Templar Helm -->
+			<item id="125004077" player_classes="GLADIATOR"/> <!-- Pure Lunatic Modor's Gladiator Helm" -->
+			<item id="125004078" player_classes="CHANTER"/> <!-- Pure Lunatic Modor's Chanter Chain Helm -->
+			<item id="125004079" player_classes="CLERIC"/> <!-- Pure Lunatic Modor's Cleric Chain Helm -->
+			<item id="125004080" player_classes="RIDER"/> <!-- Pure Lunatic Modor's Aethertech Chain Helm -->
+			<item id="125004081" player_classes="ASSASSIN RANGER"/> <!-- Pure Lunatic Modor's Hat -->
+			<item id="125004082" player_classes="GUNNER"/> <!-- Pure Lunatic Modor's Gunslinger Headpiece -->
+			<item id="125004083" player_classes="SORCERER SPIRIT_MASTER"/> <!-- Pure Lunatic Modor's Hat -->
+			<item id="125004084" player_classes="BARD"/> <!-- Pure Lunatic Modor's Songweaver Headband -->
+		</items>
+		<items chance="20.0">
+			<item id="188053099"/> <!-- Pure Modor's Equipment Crux Box -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053092"><!-- Danuar Reliquary Expedition's Artifacts -->
 		<items>
 			<item id="186000237" min_count="35" /><!-- Ancient Coin -->

@@ -1294,7 +1294,7 @@
 	<!-- Danuar Reliquary -->
 	<npc_drop npc_id="701795">
 		<drop_group><!-- Conqueror's Mark -->
-			<drop item_id="186000238" min_amount="3" max_amount="5" chance="100" each_member="true" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="5" max_amount="8" chance="100" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group><!-- Amplification Stone (Multi) -->
 			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
@@ -1306,7 +1306,25 @@
 			<drop item_id="188052499" chance="100" each_member="true" /><!-- Danuar Reliquary Expedition's Excavation Box -->
 		</drop_group>
 		<drop_group><!-- Loyalty Coins -->
-			<drop item_id="186000409" chance="100" min_amount="30" max_amount="30" each_member="true" /><!-- Daeva's Respite Coin -->
+			<drop item_id="186000409" chance="100" min_amount="32" max_amount="32" each_member="true" /><!-- Daeva's Respite Coin -->
+		</drop_group>
+	</npc_drop>
+	<!-- Infernal Danuar Reliquary -->
+	<npc_drop npc_id="234691">
+		<drop_group><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="10" max_amount="15" chance="100" each_member="true" /><!-- Conqueror's Mark -->
+		</drop_group>
+		<drop_group><!-- Amplification Stone (Multi) -->
+			<drop item_id="166500002" chance="12" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group><!-- Modor's Curiosity Box -->
+			<drop item_id="188053091" chance="100" each_member="true" /><!-- Modor's Curiosity Box -->
+		</drop_group>
+		<drop_group><!-- Danuar Reliquary Expedition's Artifacts -->
+			<drop item_id="188053092" chance="100" each_member="true" /><!-- Danuar Reliquary Expedition's Artifacts -->
+		</drop_group>
+		<drop_group><!-- Loyalty Coins -->
+			<drop item_id="186000409" chance="100" min_amount="40" max_amount="40" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 	</npc_drop>
 	<!-- Danuar Sanctuary -->
