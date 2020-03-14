@@ -51,7 +51,7 @@ public class FollowSummonTaskAI implements Runnable {
 	}
 
 	private boolean isInTargetRange() {
-		return PositionUtil.isInRange(target, summon, 2);
+		return PositionUtil.isInRange(target, summon, 2, false);
 	}
 
 	private boolean isInMasterRange() {

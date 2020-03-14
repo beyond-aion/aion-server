@@ -3,10 +3,13 @@ package com.aionemu.gameserver.controllers;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.follow.FollowStartService;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author xTz
@@ -51,11 +54,21 @@ public class SiegeWeaponController extends SummonController {
 
 	@Override
 	public void attackMode(int targetObjId) {
-		super.attackMode(targetObjId);
 		Creature target = (Creature) getOwner().getKnownList().getObject(targetObjId);
-		if (target == null) {
+		if (target == null || !GeoService.getInstance().canSee(getOwner(), target)) {
 			return;
 		}
+		Player master = getOwner().getMaster();
+		if (master == null) {
+			return;
+		}
+		Race masterRace = master.getRace();
+		if (masterRace.equals(Race.ASMODIANS) && !target.getRace().equals(Race.PC_LIGHT_CASTLE_DOOR) && !target.getRace().equals(Race.DRAGON_CASTLE_DOOR)) {
+			return;
+		} else if (masterRace.equals(Race.ELYOS) && !target.getRace().equals(Race.PC_DARK_CASTLE_DOOR) && !target.getRace().equals(Race.DRAGON_CASTLE_DOOR)) {
+			return;
+		}
+		super.attackMode(targetObjId);
 		getOwner().setTarget(target);
 		getOwner().getAi().onCreatureEvent(AIEventType.FOLLOW_ME, target);
 		getOwner().getMoveController().moveToTargetObject();

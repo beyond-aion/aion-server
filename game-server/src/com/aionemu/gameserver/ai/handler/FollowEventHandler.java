@@ -51,7 +51,7 @@ public class FollowEventHandler {
 		if (object == null) {
 			return false;
 		}
-		return PositionUtil.isInRange(ai.getOwner(), object, 2);
+		return PositionUtil.isInRange(ai.getOwner(), object, 2, false);
 	}
 
 	/**
