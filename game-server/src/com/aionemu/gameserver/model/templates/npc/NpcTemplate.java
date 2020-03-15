@@ -67,7 +67,7 @@ public class NpcTemplate extends CreatureTemplate {
 	private int aggrorange;
 
 	@XmlAttribute(name = "sangle")
-	private int aggroAngle;
+	private int aggroAngle = 180;
 
 	@XmlAttribute(name = "arange")
 	private int attackRange;

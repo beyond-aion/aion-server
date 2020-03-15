@@ -32,7 +32,7 @@
 		<xs:attribute name="rating" type="NpcRating"/>
 		<xs:attribute name="rank" type="NpcRank"/>
 		<xs:attribute name="srange" type="xs:int" default="0"/>
-		<xs:attribute name="sangle" type="xs:int" default="180"/>
+		<xs:attribute name="sangle" type="xs:int"/>
 		<xs:attribute name="tribe" type="TribeClass"/>
 		<xs:attribute name="type" type="NpcTemplateType"/>
 		<xs:attribute name="abyss_type" type="AbyssType"/>
