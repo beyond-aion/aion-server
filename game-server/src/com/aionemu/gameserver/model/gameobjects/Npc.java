@@ -187,6 +187,10 @@ public class Npc extends Creature implements GeoDoor {
 		return getAi().modifyAggroRange(getObjectTemplate().getAggroRange());
 	}
 
+	public int getAggroAngle() {
+		return getAi().modifyAggroAngle(getObjectTemplate().getAggroAngle());
+	}
+
 	/**
 	 * @return True if the npc is within 1m of it's spawn location
 	 */

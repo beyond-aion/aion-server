@@ -500,6 +500,11 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 	}
 
 	@Override
+	public int modifyAggroAngle(int value) {
+		return value;
+	}
+
+	@Override
 	public AttackHandAnimation modifyAttackHandAnimation(AttackHandAnimation attackHandAnimation) {
 		return attackHandAnimation;
 	}

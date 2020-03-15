@@ -84,7 +84,7 @@ public class CreatureEventHandler {
 		if (!owner.getPosition().isMapRegionActive())
 			return;
 
-		if (PositionUtil.isInRange(owner, creature, owner.getAggroRange())) {
+		if (PositionUtil.isInRange(owner, creature, owner.getAggroRange()) && PositionUtil.isInFrontOf(creature, owner, owner.getAggroAngle())) {
 			ai.handleCreatureDetected(creature); // TODO: Move to AIEventType, prevent calling multiple times
 			boolean isPlayer = creature instanceof Player;
 			if (isPlayer && ((Player) creature).isInCustomState(CustomPlayerState.ENEMY_OF_ALL_NPCS)
