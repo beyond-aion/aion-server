@@ -115,7 +115,7 @@ public class Effect implements StatOwner {
 	/**
 	 * power of effect ( used for dispels)
 	 */
-	private int power = 10;
+	private int power;
 	/**
 	 * accModBoost used for SignetBurstEffect
 	 */
@@ -338,7 +338,7 @@ public class Effect implements StatOwner {
 		boolean instantSkill = false;
 		if (this.getSkill() != null && this.getSkill().isInstantSkill())
 			instantSkill = true;
-		if (er.getType() == ResourceType.HP && er.getValue() != 0 && !overTimeEffect && !instantSkill) {
+		if (er.getType() == ResourceType.HP && er.getValue() != 0 && !overTimeEffect && !instantSkill && !getEffected().isInvulnerable()) {
 			Creature effected = getEffected();
 			int value = (er.isDamage() ? -er.getValue() : er.getValue());
 			value += effected.getLifeStats().getCurrentHp();

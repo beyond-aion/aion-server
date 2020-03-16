@@ -125,8 +125,11 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker) {
 		Objects.requireNonNull(attacker, "attacker");
 
-		if (getOwner().isInvulnerable())
+		if (getOwner().isInvulnerable()) {
+			if (isAboutToDie())
+				unsetIsAboutToDie();
 			return currentHp;
+		}
 
 		int hpReduced = 0;
 		boolean died = false;
