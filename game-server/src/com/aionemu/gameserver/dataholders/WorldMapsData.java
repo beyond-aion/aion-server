@@ -2,6 +2,7 @@ package com.aionemu.gameserver.dataholders;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.function.Consumer;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -37,6 +38,10 @@ public class WorldMapsData implements Iterable<WorldMapTemplate> {
 	@Override
 	public Iterator<WorldMapTemplate> iterator() {
 		return worldMaps.iterator();
+	}
+
+	public void forEachParalllel(Consumer<WorldMapTemplate> consumer) {
+		worldMaps.parallelStream().forEach(consumer);
 	}
 
 	/**

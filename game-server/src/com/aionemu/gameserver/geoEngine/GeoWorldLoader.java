@@ -4,16 +4,17 @@ import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
 import java.lang.reflect.Method;
-import java.nio.*;
+import java.nio.ByteBuffer;
+import java.nio.FloatBuffer;
+import java.nio.MappedByteBuffer;
+import java.nio.ShortBuffer;
 import java.nio.channels.FileChannel;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
@@ -22,28 +23,24 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.geoEngine.scene.*;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
+import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
+import com.aionemu.gameserver.world.geo.DummyGeoData;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
 /**
- * @author Mr. Poke, Neon
- * @update Yeats 13.01.20
+ * @author Mr. Poke, Neon, Yeats
  */
 public class GeoWorldLoader {
 
-	private static final Logger log = LoggerFactory.getLogger(GeoWorldLoader.class);
-
-	private static String GEO_DIR = "data/geo/";
-
-	private static boolean DEBUG = false;
+	private static final String GEO_DIR = "data/geo/";
+	private static final boolean DEBUG = false;
 
 	public static Map<String, Node> loadMeshes(String fileName) throws IOException {
 		Map<String, Node> geoms = new HashMap<>();
 		File geoFile = new File(fileName);
 		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r"); FileChannel roChannel = file.getChannel()) {
-			int size = (int) roChannel.size();
-			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, size).load();
-			geo.order(ByteOrder.LITTLE_ENDIAN);
+			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size()).load();
 			while (geo.hasRemaining()) {
 				short namelenght = geo.getShort();
 				byte[] nameByte = new byte[namelenght];
@@ -97,35 +94,30 @@ public class GeoWorldLoader {
 
 	}
 
-	public static boolean loadWorld(int worldId, Map<String, Node> models, GeoMap map, Set<String> missingMeshes) {
-		File geoFile = new File(GEO_DIR + worldId + ".geo");
+	public static GeoMap loadWorld(WorldMapTemplate template, Map<String, Node> models, Set<String> missingMeshes) {
+		File geoFile = new File(GEO_DIR + template.getMapId() + ".geo");
+		if (!geoFile.exists())
+			return DummyGeoData.DUMMY_MAP;
+		GeoMap map = new GeoMap(Integer.toString(template.getMapId()), template.getWorldSize());
 		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r"); FileChannel roChannel = file.getChannel()) {
-			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, (int) roChannel.size()).load();
-			geo.order(ByteOrder.LITTLE_ENDIAN);
+			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size()).load();
 			if (geo.get() == 0)
 				map.setTerrainData(new short[] { geo.getShort() });
 			else {
 				int size = geo.getInt();
 				short[] terrainData = new short[size];
 				byte[] terrainMaterials = new byte[size];
-				short z = 0;
-				byte mat;
-				boolean isAllSameZ = true;
 				boolean containsMat = false;
 				for (int i = 0; i < size; i++) {
-					if (z != (z = geo.getShort()) && i > 0)
-						isAllSameZ = false;
+					short z = geo.getShort();
 					terrainData[i] = z;
-					mat = geo.get();
+					byte mat = geo.get();
 					terrainMaterials[i] = mat;
 					if ((mat & 0xFF) > 0) {
 						containsMat = true;
 					}
 				}
-				if (isAllSameZ)
-					map.setTerrainData(new short[] { z }); // save memory by setting only one z coordinate
-				else
-					map.setTerrainData(terrainData);
+				map.setTerrainData(terrainData);
 				if (containsMat) {
 					map.setTerrainMaterials(terrainMaterials);
 				}
@@ -162,7 +154,7 @@ public class GeoWorldLoader {
 					Node nodeClone = (Node) attachChild(map, node, matrix3f, loc, scale);
 					List<Spatial> children = nodeClone.getChildren();
 					for (int c = 0; c < children.size(); c++) {
-						createZone(children.get(c), worldId, children.size() == 1 ? 0 : c + 1);
+						createZone(children.get(c), template.getMapId(), children.size() == 1 ? 0 : c + 1);
 					}
 				} else {
 					missingMeshes.add(name);
@@ -170,10 +162,10 @@ public class GeoWorldLoader {
 			}
 			destroyDirectByteBuffer(geo);
 			map.updateModelBound();
-		} catch (IOException e) {
-			return false;
+		} catch (Exception e) {
+			throw new GameServerError("Could not load " + geoFile, e);
 		}
-		return true;
+		return map;
 	}
 
 	private static Spatial attachChild(GeoMap map, Spatial node, Matrix3f matrix, Vector3f location, Vector3f scale) throws CloneNotSupportedException {
