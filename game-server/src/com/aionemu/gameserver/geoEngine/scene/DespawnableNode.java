@@ -1,24 +1,32 @@
 package com.aionemu.gameserver.geoEngine.scene;
 
+import java.util.BitSet;
+
 import com.aionemu.gameserver.geoEngine.collision.Collidable;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
-import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.event.EventService;
-
-import java.util.BitSet;
 
 public class DespawnableNode extends Node {
 
 	public DespawnableType type = DespawnableType.NONE;
 	public int id = 0; //
 	public byte level = 0;
-	private BitSet instances = new BitSet();
+	private final BitSet instances = new BitSet();
 
 	public void setActive(int instanceId, boolean active) {
-		instances.set(instanceId, active);
+		synchronized (instances) {
+			instances.set(instanceId, active);
+		}
+	}
+
+	public boolean isActive(int instanceId) {
+		synchronized (instances) {
+			return instances.get(instanceId);
+		}
 	}
 
 	public void copyFrom(Node node) throws CloneNotSupportedException {
@@ -46,14 +54,16 @@ public class DespawnableNode extends Node {
 				return 0;
 			}
 		} else {
-			if (!instances.get(results.getInstanceId())) {
+			if (!isActive(results.getInstanceId())) {
 				return 0;
 			} else if ((results.getIgnoreProperties() != null)) {
-				if (results.getIgnoreProperties().getRace() != null && type == DespawnableType.SHIELD) {
+				if (type == DespawnableType.SHIELD
+					&& (results.getIgnoreProperties().getRace() != null || results.getIgnoreProperties() == IgnoreProperties.ANY_RACE)) {
 					SiegeLocation loc = SiegeService.getInstance().getSiegeLocation(id);
 					if (loc != null) {
-						if ((results.getIgnoreProperties().getRace() == Race.ANY) || (results.getIgnoreProperties().getRace().getRaceId() == loc.getRace().getRaceId()) ||
-								(results.getIgnoreProperties().getRace() == Race.DRAKAN && loc.getRace() == SiegeRace.BALAUR)) {
+						if (results.getIgnoreProperties() == IgnoreProperties.ANY_RACE
+							|| loc.getRace() != SiegeRace.BALAUR && results.getIgnoreProperties().getRace().getRaceId() == loc.getRace().getRaceId()
+							|| loc.getRace() == SiegeRace.BALAUR && results.getIgnoreProperties() == IgnoreProperties.BALAUR) {
 							return 0;
 						}
 					}
@@ -72,11 +82,11 @@ public class DespawnableNode extends Node {
 		node.type = type;
 		node.id = id;
 		node.level = level;
-		node.instances = (BitSet) instances.clone();
+		node.instances.or(instances);
 		node.name = name;
 		node.collisionIntentions = collisionIntentions;
 		node.materialId = materialId;
-		for (Spatial spatial : this.getChildren()) {
+		for (Spatial spatial : getChildren()) {
 			if (spatial instanceof Geometry) {
 				Geometry geom = new Geometry(spatial.getName(), ((Geometry) spatial).getMesh());
 				node.attachChild(geom);
@@ -98,6 +108,7 @@ public class DespawnableNode extends Node {
 	}
 
 	public enum DespawnableType {
+
 		NONE(0),
 		EVENT(1),
 		PLACEABLE(2),
@@ -107,37 +118,23 @@ public class DespawnableNode extends Node {
 		DOOR_STATE1(6),
 		DOOR_STATE2(7),
 		SHIELD(8);
-		//2 placeable, 3 house, 4 house-door, 5 town object, 6 door state1, 7 door state2, 8 shield
 
-		public byte id;
+		private final byte id;
 
-		private DespawnableType(int id) { this.id = (byte) id; }
+		DespawnableType(int id) {
+			this.id = (byte) id;
+		}
 
 		public byte getId() {
 			return this.id;
 		}
 
-		public static DespawnableType getTypeWithId(byte id) {
-			switch (id) {
-				case 1:
-					return DespawnableType.EVENT;
-				case 2:
-					return DespawnableType.PLACEABLE;
-				case 3:
-					return DespawnableType.HOUSE;
-				case 4:
-					return DespawnableType.HOUSE_DOOR;
-				case 5:
-					return DespawnableType.TOWN_OBJECT;
-				case 6:
-					return DespawnableType.DOOR_STATE1;
-				case 7:
-					return DespawnableType.DOOR_STATE2;
-				case 8:
-					return DespawnableType.SHIELD;
-				default:
-					return DespawnableType.NONE;
+		public static DespawnableType getById(byte id) {
+			for (DespawnableType type : values()) {
+				if (id == type.id)
+					return type;
 			}
+			throw new IllegalArgumentException("Invalid ID " + id);
 		}
 	}
 }

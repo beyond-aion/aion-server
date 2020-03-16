@@ -29,15 +29,13 @@ public class FirstTargetRangeProperty {
 		Creature firstTarget = skill.getFirstTarget();
 
 		if (properties.getFirstTarget() == FirstTargetAttribute.POINT) {
-			 if (!GeoService.getInstance().canSee(effector.getWorldId(), effector.getInstanceId(), effector.getX(), effector.getY(), effector.getZ(),
-					skill.getX(), skill.getY(), skill.getZ(), 1f, IgnoreProperties.of(effector.getRace()))){
+			 if (!GeoService.getInstance().canSee(effector, skill.getX(), skill.getY(), skill.getZ(), IgnoreProperties.of(effector.getRace()))) {
 				 if (effector instanceof Player) {
 					 PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_OBSTACLE());
 				 }
 				 return false;
 			 }
 			 return true;
-
 		}
 
 		if (firstTarget == null)

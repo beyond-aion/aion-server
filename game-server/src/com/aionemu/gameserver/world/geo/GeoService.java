@@ -15,7 +15,9 @@ import com.aionemu.gameserver.geoEngine.scene.Node;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.HouseDoorState;
+import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author ATracer
@@ -69,9 +71,10 @@ public class GeoService {
 	public float getZ(int worldId, float x, float y, float zMax, float zMin, int instanceId) {
 		return geoData.getMap(worldId).getZ(x, y, zMax, zMin, instanceId);
 	}
+
 	public CollisionResults getCollisions(VisibleObject object, float x, float y, float z, byte intentions, IgnoreProperties ignoreProperties) {
-		return geoData.getMap(object.getWorldId()).getCollisions(object.getX(), object.getY(), object.getZ(), x, y, z, object.getInstanceId(),
-			intentions, ignoreProperties);
+		return geoData.getMap(object.getWorldId()).getCollisions(object.getX(), object.getY(), object.getZ(), x, y, z, object.getInstanceId(), intentions,
+			ignoreProperties);
 	}
 
 	/**
@@ -92,12 +95,14 @@ public class GeoService {
 			race = ((Creature) object).getRace();
 		}
 		IgnoreProperties ignoreProperties = IgnoreProperties.of(race, staticId);
-		return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(), objectSeeCheckZ, target.getX(),
-			target.getY(), targetSeeCheckZ, object.getInstanceId(), ignoreProperties);
+		return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(), objectSeeCheckZ, target.getX(), target.getY(), targetSeeCheckZ,
+			object.getInstanceId(), ignoreProperties);
 	}
 
-	public boolean canSee(int worldId, int instanceId, float x, float y, float z, float targetX, float targetY, float targetZ, float zOffset, IgnoreProperties ignoreProperties) {
-		return geoData.getMap(worldId).canSee(x, y, z + zOffset, targetX, targetY, targetZ + zOffset, instanceId, ignoreProperties);
+	public boolean canSee(VisibleObject object, float targetX, float targetY, float targetZ, IgnoreProperties ignoreProperties) {
+		float zOffset = getSeeCheckOffset(object);
+		return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(), object.getZ() + zOffset, targetX, targetY, targetZ + zOffset,
+			object.getInstanceId(), ignoreProperties);
 	}
 
 	private float getSeeCheckOffset(VisibleObject object) {
@@ -107,18 +112,45 @@ public class GeoService {
 		return 1.25f;
 	}
 
-	public Vector3f getClosestCollision(Vector3f startPosition, int worldId, int instanceId, float x, float y, float z,  IgnoreProperties ignoreProperties) {
-		return geoData.getMap(worldId).getClosestCollision(startPosition.getX(), startPosition.getY(), startPosition.getZ(), x, y, z, true,
-				instanceId, CollisionIntention.DEFAULT_COLLISIONS.getId(), ignoreProperties);
-	}
-
-	public Vector3f getClosestCollision(Creature object, float x, float y, float z, IgnoreProperties ignoreProperties) {
-		return getClosestCollision(object, x, y, z, true, CollisionIntention.DEFAULT_COLLISIONS.getId(), ignoreProperties);
+	public Vector3f getClosestCollision(Creature object, float x, float y, float z) {
+		return getClosestCollision(object, x, y, z, true, CollisionIntention.DEFAULT_COLLISIONS.getId(), IgnoreProperties.ANY_RACE);
 	}
 
 	public Vector3f getClosestCollision(Creature object, float x, float y, float z, boolean atNearGroundZ, byte intentions, IgnoreProperties ignoreProperties) {
 		return geoData.getMap(object.getWorldId()).getClosestCollision(object.getX(), object.getY(), object.getZ(), x, y, z, atNearGroundZ,
 			object.getInstanceId(), intentions, ignoreProperties);
+	}
+
+	/**
+	 * Terrain agnostic check. It will move along the terrain and only return collisions which are actual obstacles, like trees, walls or steep hills.
+	 * Inclines <= 45° will not be considered as collisions.
+	 * On steep slopes and cliffs it'll return the position nearest to where you can still walk.
+	 */
+	public Vector3f findMovementCollision(Creature creature, float directionAngle, float maxDistance) {
+		double rad = Math.toRadians(directionAngle);
+		float x1 = (float) (Math.cos(rad) * maxDistance);
+		float y1 = (float) (Math.sin(rad) * maxDistance);
+		Vector3f startPos;
+		GeoMap map = geoData.getMap(creature.getWorldId());
+		if (creature instanceof Player) {
+			startPos = calculateCurrentGeoPosition((Player) creature);
+			if (creature.isFlying())
+				return map.getClosestCollision(startPos.getX(), startPos.getY(), startPos.getZ(), startPos.getX() + x1, startPos.getY() + y1,
+					startPos.getZ(), false, creature.getInstanceId(), CollisionIntention.DEFAULT_COLLISIONS.getId(), IgnoreProperties.ANY_RACE);
+		} else
+			startPos = new Vector3f(creature.getX(), creature.getY(), creature.getZ());
+		return map.findMovementCollision(startPos, startPos.getX() + x1, startPos.getY() + y1, creature.getInstanceId());
+	}
+
+	private Vector3f calculateCurrentGeoPosition(Player player) {
+		WorldPosition approximatePos = player.getPosition();
+		WorldPosition lastPos = player.getMoveController().getLastPositionFromClient();
+		if (lastPos == null)
+			return new Vector3f(approximatePos.getX(), approximatePos.getY(), approximatePos.getZ());
+		// client sends CM_MOVE in intervals when moving straight, so we search for possible collisions between lastPos and the server side position 
+		return geoData.getMap(approximatePos.getMapId()).getClosestCollision(lastPos.getX(), lastPos.getY(), lastPos.getZ(), approximatePos.getX(),
+			approximatePos.getY(), approximatePos.getZ(), true, approximatePos.getInstanceId(), CollisionIntention.DEFAULT_COLLISIONS.getId(),
+			IgnoreProperties.ANY_RACE);
 	}
 
 	public void spawnPlaceableObject(int worldId, int instanceId, int staticId) {

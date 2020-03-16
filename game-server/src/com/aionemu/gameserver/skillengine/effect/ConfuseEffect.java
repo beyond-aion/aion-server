@@ -92,21 +92,15 @@ public class ConfuseEffect extends EffectTemplate {
 		@Override
 		public void run() {
 			if (effected.getEffectController().isConfused()) {
-				float x = effected.getX();
-				float y = effected.getY();
-				float direction = Rnd.get(0, 199) / 100f;
-				float distance = effected.getGameStats().getMovementSpeedFloat();
-				float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-				float y1 = (float) (Math.sin(Math.PI * direction) * distance);
-				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, x + x1, y +y1, effected.getZ());
-				if (effected.isFlying())
-					closestCollision.setZ(effected.getZ());
+				float angle = Rnd.get(0, 359);
+				float maxDistance = effected.getGameStats().getMovementSpeedFloat();
+				Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effected, angle, maxDistance);
 				if (effected instanceof Npc) {
 					((Npc) effected).getMoveController().resetMove();
 					((Npc) effected).getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 				} else {
-					byte moveAwayHeading = PositionUtil.convertAngleToHeading(direction);
-					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), moveAwayHeading);
+					byte heading = PositionUtil.convertAngleToHeading(angle);
+					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), heading);
 					effected.getMoveController().startMovingToDestination();
 				}
 			}

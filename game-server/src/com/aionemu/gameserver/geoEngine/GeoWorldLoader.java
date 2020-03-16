@@ -151,22 +151,18 @@ public class GeoWorldLoader {
 				matrix3f.set(matrix);
 				Node node = models.get(name);
 				if (node != null) {
-					try {
-						if (type > 0) {
-							DespawnableNode despawnableNode = new DespawnableNode();
-							despawnableNode.copyFrom(node);
-							despawnableNode.type = DespawnableNode.DespawnableType.getTypeWithId(type);
-							despawnableNode.id = id;
-							despawnableNode.level = level;
-							node = despawnableNode;
-						}
-						Node nodeClone = (Node) attachChild(map, node, matrix3f, loc, scale);
-						List<Spatial> children = nodeClone.getChildren();
-						for (int c = 0; c < children.size(); c++) {
-							createZone(children.get(c), worldId, children.size() == 1 ? 0 : c + 1);
-						}
-					} catch (Exception e) {
-						log.error("", e);
+					if (type > 0) {
+						DespawnableNode despawnableNode = new DespawnableNode();
+						despawnableNode.copyFrom(node);
+						despawnableNode.type = DespawnableNode.DespawnableType.getById(type);
+						despawnableNode.id = id;
+						despawnableNode.level = level;
+						node = despawnableNode;
+					}
+					Node nodeClone = (Node) attachChild(map, node, matrix3f, loc, scale);
+					List<Spatial> children = nodeClone.getChildren();
+					for (int c = 0; c < children.size(); c++) {
+						createZone(children.get(c), worldId, children.size() == 1 ? 0 : c + 1);
 					}
 				} else {
 					missingMeshes.add(name);

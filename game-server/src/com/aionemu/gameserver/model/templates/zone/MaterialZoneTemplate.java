@@ -6,14 +6,10 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 
 /**
- * @author Rolandas
+ * @author Rolandas, Neon
  */
 public class MaterialZoneTemplate extends ZoneTemplate {
 
-	/**
-	 * @param geometry
-	 * @param worldId
-	 */
 	public MaterialZoneTemplate(Spatial geometry, int mapId) {
 		mapid = mapId;
 		flags = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getFlags();
@@ -21,20 +17,23 @@ public class MaterialZoneTemplate extends ZoneTemplate {
 		BoundingBox box = (BoundingBox) geometry.getWorldBound();
 		Vector3f center = box.getCenter();
 		// don't use polygons for small areas, they are bugged in Java API
-		if (geometry.getMaterialId() == 11 || geometry.getName().indexOf("CYLINDER") != -1
-				|| geometry.getName().indexOf("CONE") != -1 || geometry.getName().indexOf("H_COLUME") != -1) {
+		if (geometry.getName().contains("CYLINDER") || geometry.getName().contains("CONE") || geometry.getName().contains("H_COLUME")) {
 			areaType = AreaType.CYLINDER;
-			cylinder = new Cylinder(center.x, center.y, Math.max(box.getXExtent(), box.getYExtent()) + 1, center.z + box.getZExtent() + 1, center.z
-				- box.getZExtent() - 1);
-		}
-		else if (geometry.getName().indexOf("SEMISPHERE") != -1) {
+			float r = (float) Math.sqrt(box.getXExtent() * box.getXExtent() + box.getYExtent() * box.getYExtent());
+			cylinder = new Cylinder(center.x, center.y, r + 1, center.z + box.getZExtent() + 1, center.z - box.getZExtent() - 1);
+		} else if (geometry.getName().contains("SEMISPHERE")) {
 			areaType = AreaType.SEMISPHERE;
-			semisphere = new Semisphere(center.x, center.y, center.z, Math.max(Math.max(box.getXExtent(), box.getYExtent()), box.getZExtent()) + 1);
-		}
-		else {
+			semisphere = new Semisphere(center.x, center.y, center.z, calculateDistanceFromCenterToCorner(box) + 1);
+		} else {
 			areaType = AreaType.SPHERE;
-			sphere = new Sphere(center.x, center.y, center.z, Math.max(Math.max(box.getXExtent(), box.getYExtent()), box.getZExtent()) + 1);
+			sphere = new Sphere(center.x, center.y, center.z, calculateDistanceFromCenterToCorner(box) + 1);
 		}
 	}
 
+	private float calculateDistanceFromCenterToCorner(BoundingBox box) {
+		// all corners are the same distance from the center of the box
+		float distanceFromCenterToEdgeSquared = box.getXExtent() * box.getXExtent() + box.getYExtent() * box.getYExtent();
+		float distanceFromCenterToConerSquared = distanceFromCenterToEdgeSquared + box.getZExtent() * box.getZExtent();
+		return (float) Math.sqrt(distanceFromCenterToConerSquared);
+	}
 }

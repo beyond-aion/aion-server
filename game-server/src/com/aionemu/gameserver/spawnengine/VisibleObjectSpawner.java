@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.spawnengine;
 
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
-import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,6 +9,8 @@ import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.controllers.*;
 import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
+import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.*;
@@ -203,7 +203,7 @@ public class VisibleObjectSpawner {
 		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(owner.getHeading()));
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 7),
-			owner.getY() + (float) (Math.sin(radian) * 7), owner.getZ(), null);
+			owner.getY() + (float) (Math.sin(radian) * 7), owner.getZ());
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 		final Npc postman = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
 		postman.setCreatorId(owner.getObjectId());
@@ -219,7 +219,7 @@ public class VisibleObjectSpawner {
 		NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(owner.getHeading()));
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, owner.getX() + (float) (Math.cos(radian) * 1),
-			owner.getY() + (float) (Math.sin(radian) * 1), owner.getZ(), null);
+			owner.getY() + (float) (Math.sin(radian) * 1), owner.getZ());
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);
 		final Npc functionalNpc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
 		functionalNpc.setKnownlist(new PlayerAwareKnownList(functionalNpc));
@@ -266,18 +266,12 @@ public class VisibleObjectSpawner {
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(creator.getHeading()));
 		float x = creator.getX() + (float) (Math.cos(radian) * 2);
 		float y = creator.getY() + (float) (Math.sin(radian) * 2);
-		float z = creator.getZ();
+		Vector3f pos = GeoService.getInstance().getClosestCollision(creator, x, y, creator.getZ(), true, CollisionIntention.DEFAULT_COLLISIONS.getId(), IgnoreProperties.of(creator.getRace()));
 		byte heading = creator.getHeading();
 		int worldId = creator.getWorldId();
 		int instanceId = creator.getInstanceId();
 
-		if (GeoDataConfig.GEO_ENABLE) {
-			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(creator, x, y, z, IgnoreProperties.of(creator.getRace()));
-			x = closestCollision.x;
-			y = closestCollision.y;
-			z = closestCollision.z;
-		}
-		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, npcId, x, y, z, heading);
+		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, npcId, pos.getX(), pos.getY(), pos.getZ(), heading);
 		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
 
 		boolean isSiegeWeapon = "siege_weapon".equals(npcTemplate.getAiName());

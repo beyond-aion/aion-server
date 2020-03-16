@@ -9,22 +9,18 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
-import com.aionemu.gameserver.geoEngine.bounding.BoundingSphere;
-import com.aionemu.gameserver.geoEngine.bounding.BoundingVolume;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.geoEngine.math.Ray;
+import com.aionemu.gameserver.geoEngine.math.Vector2f;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.DespawnableNode;
 import com.aionemu.gameserver.geoEngine.scene.DespawnableNode.DespawnableType;
 import com.aionemu.gameserver.geoEngine.scene.Node;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.house.HouseDoorState;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 
 /**
  * @author Mr. Poke
@@ -34,9 +30,11 @@ public class GeoMap extends Node {
 	private static final Logger log = LoggerFactory.getLogger(GeoMap.class);
 	public static final float MAX_Z = 4000;
 	public static final float MIN_Z = 0;
+	private static final float COLLISION_CHECK_Z_OFFSET = 1;
+	private static final float COLLISION_BOUND_OFFSET = 0.5f;
 
 	private short[] terrainData;
-	public byte[] terrainMaterials;
+	private byte[] terrainMaterials;
 	private int terrainDataRows, terrainDataCols;
 	private List<BoundingBox> tmpBox = new ArrayList<>();
 
@@ -59,30 +57,13 @@ public class GeoMap extends Node {
 		}
 	}
 
-	private String toTemplateCoords(Vector3f coords) {
-		return "x=\"" + coords.getX() + "\" y=\"" + coords.getY() + "\" z=\"" + coords.getZ() + "\"";
-	}
-
-	private String toSpawnPoint(BoundingVolume boundingVolume) {
-		Vector3f spawnPosition = new Vector3f(boundingVolume.getCenter());
-		float zOffset = 0; // boundingVolume.center is always the middle point of the mesh, we need to subtract a z offset to find the ground spawn pos
-		if (boundingVolume instanceof BoundingBox)
-			zOffset = ((BoundingBox) boundingVolume).getZExtent();
-		else if (boundingVolume instanceof BoundingSphere)
-			zOffset = ((BoundingSphere) boundingVolume).getRadius();
-		zOffset -= 0.01f;
-		if (zOffset > 0)
-			spawnPosition.setZ(spawnPosition.getZ() - zOffset);
-		return toTemplateCoords(spawnPosition);
-	}
-
 	@Override
 	public int attachChild(Spatial child) {
 		int i = 0;
 
 		if (child instanceof DespawnableNode) {
 			DespawnableNode desp = ((DespawnableNode) child);
-			switch (((DespawnableNode) child).type) {
+			switch (desp.type) {
 				case EVENT: // event object
 					break;
 				case PLACEABLE: // placeable
@@ -94,17 +75,12 @@ public class GeoMap extends Node {
 					despawnableHouseDoors.put(desp.id, desp);
 					break;
 				case TOWN_OBJECT: // town object
-					if (!despawnableTownObjects.containsKey(desp.id)) {
-						despawnableTownObjects.put(desp.id, new ArrayList<>());
-					}
-					despawnableTownObjects.get(desp.id).add(desp);
+					despawnableTownObjects.computeIfAbsent(desp.id, k -> new ArrayList<>()).add(desp);
 					break;
 				case DOOR_STATE1: // normal door state 1 (closed)
 				case DOOR_STATE2: // normal door state 2 (opened)
-					if (!despawnableDoors.containsKey(desp.id)) {
-						despawnableDoors.put(desp.id, new DespawnableNode[2]);
-					}
-					despawnableDoors.get(desp.id)[desp.type.id - DespawnableType.DOOR_STATE1.id] = desp;
+					DespawnableNode[] doorStates = despawnableDoors.computeIfAbsent(desp.id, k -> new DespawnableNode[2]);
+					doorStates[desp.type == DespawnableType.DOOR_STATE1 ? 0 : 1] = desp;
 					break;
 			}
 		}
@@ -163,10 +139,8 @@ public class GeoMap extends Node {
 
 	public Vector3f getClosestCollision(float x, float y, float z, float targetX, float targetY, float targetZ, boolean atNearGroundZ, int instanceId,
 		byte intentions, IgnoreProperties ignoreProperties) {
-		int zOffset = 1; // check for collisions 1m above input z
-		float collisionOffset = 0.5f; // collision points will be 0.5m in front of the real contact
-		Vector3f origin = new Vector3f(x, y, z + zOffset);
-		CollisionResult closestCollision = getCollisions(origin, targetX, targetY, targetZ + zOffset, instanceId, intentions, ignoreProperties).getClosestCollision();
+		Vector3f origin = new Vector3f(x, y, z + COLLISION_CHECK_Z_OFFSET);
+		CollisionResult closestCollision = getCollisions(origin, targetX, targetY, targetZ + COLLISION_CHECK_Z_OFFSET, instanceId, intentions, ignoreProperties).getClosestCollision();
 		if (closestCollision == null) {
 			Vector3f end = new Vector3f(targetX, targetY, targetZ);
 			if (atNearGroundZ) {
@@ -175,30 +149,64 @@ public class GeoMap extends Node {
 					end.z = geoZ;
 			}
 			return end;
-		} else if (closestCollision.getDistance() <= collisionOffset + 0.05f) { // avoid climbing steep hills or passing through walls
+		} else if (closestCollision.getDistance() <= COLLISION_BOUND_OFFSET + 0.05f) { // avoid climbing steep hills or passing through walls
 			return new Vector3f(x, y, z);
 		}
 		Vector3f contactPoint = closestCollision.getContactPoint();
-		if (atNearGroundZ) {
-			Vector3f direction = contactPoint.subtract(origin).normalize();
-			contactPoint.subtractLocal(direction.multLocal(collisionOffset)); // set contact point back for proper ground calculation
-			float geoZ = getZ(contactPoint.x, contactPoint.y, contactPoint.z, contactPoint.z - 3, instanceId);
-			if (!Float.isNaN(geoZ)) {
-				contactPoint.z = geoZ;
+		applyCollisionCheckOffsets(contactPoint, origin, instanceId);
+		return contactPoint;
+	}
+
+	private void applyCollisionCheckOffsets(Vector3f pos, Vector3f direction, int instanceId) {
+		applyCollisionCheckOffsets(pos, direction, instanceId, false);
+	}
+
+	private void applyCollisionCheckOffsets(Vector3f pos, Vector3f direction, int instanceId, boolean allowNaN) {
+		if (direction != null) {
+			Vector3f dir = pos.subtract(direction).normalizeLocal();
+			pos.subtractLocal(dir.multLocal(COLLISION_BOUND_OFFSET)); // set contact point back for proper ground calculation
+			float geoZ = getZ(pos.x, pos.y, pos.z, pos.z - COLLISION_CHECK_Z_OFFSET * 3, instanceId);
+			if (allowNaN || !Float.isNaN(geoZ)) {
+				pos.z = geoZ;
 			} else {
-				contactPoint.z -= zOffset;
+				pos.z -= COLLISION_CHECK_Z_OFFSET;
 			}
 		} else {
-			contactPoint.z -= zOffset;
+			pos.z -= COLLISION_CHECK_Z_OFFSET;
 		}
-		return contactPoint;
+	}
+
+	public Vector3f findMovementCollision(Vector3f origin, float targetX, float targetY, int instanceId) {
+		// check if we have an obstacle 1m in target direction
+		origin.setZ(origin.getZ() + COLLISION_CHECK_Z_OFFSET);
+		Vector2f targetXY = new Vector2f(targetX, targetY);
+		Vector2f xyOffset = targetXY.subtract(origin.getX(), origin.getY()).normalizeLocal().multLocal(COLLISION_CHECK_Z_OFFSET);
+		float nextX = origin.getX() + xyOffset.getX(), nextY = origin.getY() + xyOffset.getY();
+		if (xyOffset.getX() >= 0 && nextX > targetX || xyOffset.getX() < 0 && nextX < targetX)
+			nextX = targetX;
+		if (xyOffset.getY() >= 0 && nextY > targetY || xyOffset.getY() < 0 && nextY < targetY)
+			nextY = targetY;
+		if (origin.getX() != nextX || origin.getY() != nextY) {
+			CollisionResult closestCollision = getCollisions(origin, nextX, nextY, origin.getZ(), instanceId, CollisionIntention.DEFAULT_COLLISIONS.getId(), IgnoreProperties.ANY_RACE).getClosestCollision();
+			if (closestCollision != null) { // obstacle found within 1m in target direction, return 0.5m offset position or origin of there's no ground
+				Vector3f targetPoint = closestCollision.getContactPoint();
+				applyCollisionCheckOffsets(targetPoint, origin, instanceId, true);
+				if (!Float.isNaN(targetPoint.getZ()))
+					return targetPoint;
+			} else { // no obstacle 1m in target direction, now check if there ground to stand on
+				float geoZ = getZ(nextX, nextY, origin.getZ(), origin.getZ() - COLLISION_CHECK_Z_OFFSET * 3, instanceId);
+				if (!Float.isNaN(geoZ)) // there is ground, so we set our origin to the 1m offset position and start over
+					return findMovementCollision(origin.set(nextX, nextY, geoZ), targetX, targetY, instanceId);
+			}
+		}
+		return origin.setZ(origin.getZ() - COLLISION_CHECK_Z_OFFSET);
 	}
 
 	public CollisionResults getCollisions(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId, byte intentions, IgnoreProperties ignoreProperties) {
 		return getCollisions(new Vector3f(x, y, z), targetX, targetY, targetZ, instanceId, intentions, ignoreProperties);
 	}
 
-	private CollisionResults getCollisions(Vector3f origin, float targetX, float targetY, float targetZ, int instanceId, byte intentions, IgnoreProperties ignoreProperties) {
+	public CollisionResults getCollisions(Vector3f origin, float targetX, float targetY, float targetZ, int instanceId, byte intentions, IgnoreProperties ignoreProperties) {
 		CollisionResults results = new CollisionResults(intentions, instanceId, ignoreProperties);
 		Vector3f target = new Vector3f(targetX, targetY, targetZ);
 		float limit = origin.distance(target);
@@ -493,7 +501,7 @@ public class GeoMap extends Node {
 		List<Node> matchingGeometries = new ArrayList<>();
 		for (Spatial child : children) {
 			if (child instanceof Node) {
-				matchingGeometries.addAll(((Node)child).getGeometries(name));
+				matchingGeometries.addAll(((Node) child).getGeometries(name));
 			}
 		}
 		return matchingGeometries;

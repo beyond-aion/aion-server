@@ -78,9 +78,8 @@ public enum Race implements L10n {
 	// 4.7.5
 	DOOR_KILLER(45),
 	// 4.8.0
-	LF5_Q_ITEM(46),
+	LF5_Q_ITEM(46);
 
-	ANY(Integer.MAX_VALUE);
 	private int raceId;
 	private int l10nId;
 

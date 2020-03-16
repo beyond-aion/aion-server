@@ -152,7 +152,8 @@ public class House extends VisibleObject implements Persistable {
 	public void setDoorState(HouseDoorState doorState) {
 		this.doorState = doorState;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
-		GeoService.getInstance().setHouseDoorState(address.getMapId(), getInstanceId(), address.getId(), getDoorState());
+		if (getPosition() != null && isSpawned())
+			GeoService.getInstance().setHouseDoorState(address.getMapId(), getInstanceId(), address.getId(), getDoorState());
 	}
 
 	/**

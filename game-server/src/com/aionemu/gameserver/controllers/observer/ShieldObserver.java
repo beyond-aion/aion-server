@@ -6,6 +6,7 @@ import com.aionemu.gameserver.model.shield.Shield;
 import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author Wakizashi, Source
@@ -20,7 +21,12 @@ public class ShieldObserver extends ActionObserver {
 		super(ObserverType.MOVE);
 		this.creature = creature;
 		this.shield = shield;
-		this.oldPosition = new Point3D(creature.getX(), creature.getY(), creature.getZ());
+		WorldPosition lastPos;
+		if (creature instanceof Player && (lastPos = ((Player) creature).getMoveController().getLastPositionFromClient()) != null) {
+			this.oldPosition = new Point3D(lastPos.getX(), lastPos.getY(), lastPos.getZ());
+		} else {
+			this.oldPosition = new Point3D(creature.getX(), creature.getY(), creature.getZ());
+		}
 	}
 
 	@Override

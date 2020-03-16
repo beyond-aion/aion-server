@@ -32,8 +32,6 @@
 
 package com.aionemu.gameserver.geoEngine.math;
 
-import java.util.logging.Logger;
-
 /*
  * -- Added *Local methods to cut down on object creation - JS
  */
@@ -48,8 +46,6 @@ import java.util.logging.Logger;
  * @author Joshua Slack
  */
 public final class Vector3f implements Cloneable {
-
-	private static final Logger logger = Logger.getLogger(Vector3f.class.getName());
 
 	public Object create() {
 		return new Vector3f();
@@ -84,7 +80,6 @@ public final class Vector3f implements Cloneable {
 	 * values of (0,0,0).
 	 */
 	public Vector3f() {
-		x = y = z = 0f;
 	}
 
 	/**
@@ -159,10 +154,6 @@ public final class Vector3f implements Cloneable {
 	 * @return the resultant vector.
 	 */
 	public Vector3f add(Vector3f vec) {
-		if (null == vec) {
-			logger.warning("Provided vector is null, null returned.");
-			return null;
-		}
 		return new Vector3f(x + vec.x, y + vec.y, z + vec.z);
 	}
 
@@ -193,10 +184,6 @@ public final class Vector3f implements Cloneable {
 	 * @return this
 	 */
 	public Vector3f addLocal(Vector3f vec) {
-		if (null == vec) {
-			logger.warning("Provided vector is null, null returned.");
-			return null;
-		}
 		x += vec.x;
 		y += vec.y;
 		z += vec.z;
@@ -282,10 +269,6 @@ public final class Vector3f implements Cloneable {
 	 * @return the resultant dot product of this vector and a given vector.
 	 */
 	public float dot(Vector3f vec) {
-		if (null == vec) {
-			logger.warning("Provided vector is null, 0 returned.");
-			return 0;
-		}
 		return x * vec.x + y * vec.y + z * vec.z;
 	}
 
@@ -482,10 +465,6 @@ public final class Vector3f implements Cloneable {
 	 * @return this
 	 */
 	public Vector3f multLocal(Vector3f vec) {
-		if (null == vec) {
-			logger.warning("Provided vector is null, null returned.");
-			return null;
-		}
 		x *= vec.x;
 		y *= vec.y;
 		z *= vec.z;
@@ -519,10 +498,6 @@ public final class Vector3f implements Cloneable {
 	 * @return this
 	 */
 	public Vector3f mult(Vector3f vec) {
-		if (null == vec) {
-			logger.warning("Provided vector is null, null returned.");
-			return null;
-		}
 		return mult(vec, null);
 	}
 
@@ -538,10 +513,6 @@ public final class Vector3f implements Cloneable {
 	 * @return this
 	 */
 	public Vector3f mult(Vector3f vec, Vector3f store) {
-		if (null == vec) {
-			logger.warning("Provided vector is null, null returned.");
-			return null;
-		}
 		if (store == null)
 			store = new Vector3f();
 		return store.set(x * vec.x, y * vec.y, z * vec.z);
@@ -650,10 +621,6 @@ public final class Vector3f implements Cloneable {
 	 * @return this
 	 */
 	public Vector3f subtractLocal(Vector3f vec) {
-		if (null == vec) {
-			logger.warning("Provided vector is null, null returned.");
-			return null;
-		}
 		x -= vec.x;
 		y -= vec.y;
 		z -= vec.z;

@@ -5,6 +5,8 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
+import com.aionemu.gameserver.controllers.observer.TerrainZoneCollisionMaterialActor;
+import com.aionemu.gameserver.world.geo.GeoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -58,7 +60,8 @@ import com.aionemu.gameserver.world.zone.ZoneUpdateService;
 public abstract class CreatureController<T extends Creature> extends VisibleObjectController<T> {
 
 	private static final Logger log = LoggerFactory.getLogger(CreatureController.class);
-	private ConcurrentHashMap<Integer, Future<?>> tasks = new ConcurrentHashMap<>();
+	private volatile TerrainZoneCollisionMaterialActor actor;
+	private final ConcurrentHashMap<Integer, Future<?>> tasks = new ConcurrentHashMap<>();
 
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
@@ -547,10 +550,19 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	public void onAfterSpawn() {
 		super.onAfterSpawn();
 		getOwner().revalidateZones();
+		if (actor == null && getOwner().getMoveController() != null && GeoService.getInstance().worldHasTerrainMaterials(getOwner().getWorldId())) {
+			actor = new TerrainZoneCollisionMaterialActor(getOwner());
+			getOwner().getObserveController().addObserver(actor);
+		}
 	}
 
 	@Override
 	public void onDespawn() {
+		if (actor != null) {
+			actor.abort();
+			getOwner().getObserveController().removeObserver(actor);
+			actor = null;
+		}
 		cancelTask(TaskId.DECAY);
 		getOwner().getMoveController().abortMove();
 		getOwner().getAggroList().clear();

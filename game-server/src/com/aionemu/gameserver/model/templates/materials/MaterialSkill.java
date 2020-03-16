@@ -21,7 +21,7 @@ public class MaterialSkill {
 	private List<MaterialActCondition> conditions;
 
 	@XmlAttribute(required = true)
-	private float frequency;
+	private int frequency;
 
 	@XmlAttribute
 	private MaterialTarget target;
@@ -36,7 +36,7 @@ public class MaterialSkill {
 		return conditions == null ? Collections.emptyList() : conditions;
 	}
 
-	public float getFrequency() {
+	public int getFrequency() {
 		return frequency;
 	}
 

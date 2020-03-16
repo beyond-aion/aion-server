@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.TaskId;
@@ -36,8 +36,8 @@ public class SummonServantEffect extends SummonEffect {
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effect.getEffector().getHeading()));
 		float x = effector.getX() + (float) (Math.cos(radian) * 2);
 		float y = effector.getY() + (float) (Math.sin(radian) * 2);
-		float z = effector.getZ();
-		Servant servant = spawnServant(effect, time, NpcObjectType.SERVANT, x, y, z);
+		Vector3f pos = GeoService.getInstance().getClosestCollision(effector, x, y, effector.getZ(), true, CollisionIntention.DEFAULT_COLLISIONS.getId(), IgnoreProperties.of(effector.getRace()));
+		Servant servant = spawnServant(effect, time, NpcObjectType.SERVANT, pos.getX(), pos.getY(), pos.getZ());
 		servant.getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
 	}
 
@@ -46,12 +46,6 @@ public class SummonServantEffect extends SummonEffect {
 		if (effect.getEffected() == null && effect.getSkillTemplate().getProperties().getFirstTarget() != FirstTargetAttribute.POINT)
 			throw new IllegalArgumentException("Servant " + npcId + "cannot be spawned by " + effector + " (target: null)");
 
-		if (GeoDataConfig.GEO_ENABLE) {
-			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effector, x, y, z, IgnoreProperties.of(effector.getRace()));
-			x = closestCollision.x;
-			y = closestCollision.y;
-			z = closestCollision.z;
-		}
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(effector.getWorldId(), npcId, x, y, z, effector.getHeading());
 		final Servant servant = VisibleObjectSpawner.spawnServant(spawn, effector.getInstanceId(), effector, effect.getSkillLevel(), npcObjectType);
 

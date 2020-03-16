@@ -9,13 +9,11 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
-import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -66,12 +64,11 @@ public class FearEffect extends EffectTemplate {
 		effect.setAbnormal(AbnormalState.FEAR);
 		effected.getEffectController().setAbnormal(AbnormalState.FEAR);
 
-		// PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
 		effected.getMoveController().abortMove();
 
 		if (effected instanceof Npc) {
 			EmoteManager.emoteStartAttacking((Npc) effected, effector); // set weapon_equipped for faster walk speed
-			((NpcAI) effected.getAi()).setStateIfNot(AIState.FEAR);
+			effected.getAi().setStateIfNot(AIState.FEAR);
 		} else if (effected instanceof Player && effected.isInState(CreatureState.WALK_MODE)) {
 			effected.unsetState(CreatureState.WALK_MODE);
 			PacketSendUtility.broadcastPacket((Player) effected, new SM_EMOTION(effected, EmotionType.RUN), true);
@@ -129,17 +126,10 @@ public class FearEffect extends EffectTemplate {
 
 		@Override
 		public void run() {
-			if (effected.getEffectController().isUnderFear() && PositionUtil.isInRange(effected, effector, 40, false)) {
-				float x = effected.getX();
-				float y = effected.getY();
+			if (effected.getEffectController().isUnderFear() && PositionUtil.isInRange(effected, effector, 40)) {
 				float angle = PositionUtil.calculateAngleFrom(effector, effected);
-				double radian = Math.toRadians(angle);
 				float maxDistance = effected.getGameStats().getMovementSpeedFloat();
-				float x1 = (float) (Math.cos(radian) * maxDistance);
-				float y1 = (float) (Math.sin(radian) * maxDistance);
-				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, x + x1, y + y1, effected.getZ(), IgnoreProperties.of(effector.getRace()));
-				if (effected.isFlying())
-					closestCollision.setZ(effected.getZ());
+				Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effected, angle, maxDistance);
 				if (effected instanceof Npc) {
 					((Npc) effected).getMoveController().resetMove();
 					((Npc) effected).getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
