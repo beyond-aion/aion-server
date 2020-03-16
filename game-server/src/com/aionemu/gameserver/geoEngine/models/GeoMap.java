@@ -30,7 +30,7 @@ public class GeoMap extends Node {
 	private static final Logger log = LoggerFactory.getLogger(GeoMap.class);
 	public static final float MAX_Z = 4000;
 	public static final float MIN_Z = 0;
-	private static final float COLLISION_CHECK_Z_OFFSET = 1;
+	public static final float COLLISION_CHECK_Z_OFFSET = 1;
 	private static final float COLLISION_BOUND_OFFSET = 0.5f;
 
 	private short[] terrainData;

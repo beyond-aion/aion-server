@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Ray;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
+import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -65,8 +66,9 @@ public abstract class AbstractCollisionObserver extends ActionObserver {
 							pos = new Vector3f(x, y, zMax);
 							dir = new Vector3f(pos.getX(), pos.getY(), zMin);
 						} else { // check if we passed the geometry (either entering or leaving)
-							pos = new Vector3f(creature.getX(), creature.getY(), creature.getZ());
+							pos = new Vector3f(creature.getX(), creature.getY(), creature.getZ() + GeoMap.COLLISION_CHECK_Z_OFFSET);
 							dir = oldPos.clone();
+							dir.setZ(dir.getZ() + GeoMap.COLLISION_CHECK_Z_OFFSET);
 						}
 						Float limit = pos.distance(dir);
 						dir.subtractLocal(pos).normalizeLocal();
