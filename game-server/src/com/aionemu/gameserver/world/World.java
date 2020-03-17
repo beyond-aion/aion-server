@@ -127,7 +127,7 @@ public class World {
 				BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
 				int baseId = bst.getId();
 				if (!baseNpc.containsKey(baseId)) {
-					baseNpc.putIfAbsent(baseId, new CopyOnWriteArrayList<Npc>());
+					baseNpc.putIfAbsent(baseId, new CopyOnWriteArrayList<>());
 				}
 				baseNpc.get(baseId).add((Npc) object);
 			}
@@ -146,16 +146,23 @@ public class World {
 	 * @return True if removed, false if the object wasn't in world
 	 */
 	public boolean removeObject(VisibleObject object) {
-		if (allObjects.containsKey(object.getObjectId())) {
-			try {
-				if (object.isSpawned())
-					despawn(object);
-				object.getController().onDelete();
-			} catch (Exception e) {
-				log.error(object + " did not leave world cleanly", e);
+		boolean removed = false;
+		synchronized (object) {
+			VisibleObject worldObject = allObjects.get(object.getObjectId());
+			if (worldObject == object) {
+				try {
+					if (object.isSpawned())
+						despawn(object);
+					object.getController().onDelete();
+				} catch (Exception e) {
+					log.error(object + " did not leave world cleanly", e);
+				}
+				removed = allObjects.remove(object.getObjectId(), object);
+			} else if (worldObject != null) {
+				log.warn("Attempt to remove " + object + " from world but ID already belongs to " + worldObject, new Exception());
 			}
-			allObjects.remove(object.getObjectId());
-
+		}
+		if (removed) {
 			if (object instanceof Npc) {
 				if (object instanceof SiegeNpc) {
 					SiegeNpc siegeNpc = (SiegeNpc) object;
@@ -166,8 +173,7 @@ public class World {
 				}
 
 				if (object.getSpawn() instanceof BaseSpawnTemplate) {
-					BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
-					int baseId = bst.getId();
+					int baseId = ((BaseSpawnTemplate) object.getSpawn()).getId();
 					baseNpc.get(baseId).remove(object);
 				}
 
@@ -175,15 +181,13 @@ public class World {
 			} else if (object instanceof Player) {
 				allPlayers.remove((Player) object);
 			}
-
-			return true;
 		}
-		return false;
+		return removed;
 	}
 
 	public Collection<SiegeNpc> getLocalSiegeNpcs(int locationId) {
 		Collection<SiegeNpc> result = localSiegeNpcs.get(locationId);
-		return result != null ? result : Collections.<SiegeNpc> emptySet();
+		return result != null ? result : Collections.emptySet();
 	}
 
 	public List<Npc> getBaseSpawns(int baseId) {

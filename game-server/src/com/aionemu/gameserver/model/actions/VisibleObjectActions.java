@@ -24,10 +24,7 @@ public class VisibleObjectActions {
 	 * @param scheduleRespawn
 	 */
 	public static void delete(VisibleObject obj, boolean scheduleRespawn) {
-		if (obj != null) {
-			obj.getController().delete();
-			if (scheduleRespawn)
-				RespawnService.scheduleRespawn(obj);
-		}
+		if (obj != null && obj.getController().delete() && scheduleRespawn)
+			RespawnService.scheduleRespawn(obj);
 	}
 }
