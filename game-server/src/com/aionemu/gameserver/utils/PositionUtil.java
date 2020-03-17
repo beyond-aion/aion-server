@@ -51,6 +51,9 @@ public class PositionUtil {
 	 * @return True if the object is in front of the target inside maxAngleDiff (e.g. ±90 degrees, meaning effective 180 degree coverage).
 	 */
 	public static boolean isInFrontOf(VisibleObject object, VisibleObject target, float maxAngleDiff) {
+		if (maxAngleDiff >= 180) {
+			return true;
+		}
 		float angle1 = calculateAngleFrom(target, object);
 		float angle2 = convertHeadingToAngle(target.getHeading());
 		return checkAngleDiff(angle1, angle2, maxAngleDiff);
