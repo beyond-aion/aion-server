@@ -128,7 +128,7 @@ public class FearEffect extends EffectTemplate {
 
 		@Override
 		public void run() {
-			if (effected.getEffectController().isUnderFear() && PositionUtil.isInRange(effected, effector, 40)) {
+			if (effected.getEffectController().isUnderFear() && PositionUtil.isInRange(effected, effector, 40, false)) {
 				float x = effected.getX();
 				float y = effected.getY();
 				float angle = PositionUtil.calculateAngleFrom(effector, effected);

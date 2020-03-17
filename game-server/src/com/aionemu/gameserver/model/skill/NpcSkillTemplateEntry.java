@@ -112,7 +112,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 						if (target.isDead() || target.getLifeStats().isAboutToDie())
 							continue;
 						if (creature.canSee(target) && target.getEffectController().hasAbnormalEffect(condTemp.getSkillId())
-							&& PositionUtil.isInRange(creature, target, condTemp.getRange()) && GeoService.getInstance().canSee(creature, target)) {
+							&& PositionUtil.isInRange(creature, target, condTemp.getRange(), false) && GeoService.getInstance().canSee(creature, target)) {
 							creature.setTarget(target);
 							return true;
 						}
@@ -127,7 +127,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 							continue;
 						if ((TribeRelationService.isSupport(creature, target) || TribeRelationService.isFriend(creature, target))
 							&& target.getLifeStats().getHpPercentage() <= condTemp.getHpBelow() && creature.canSee(target)
-							&& PositionUtil.isInRange(creature, target, condTemp.getRange()) && GeoService.getInstance().canSee(creature, target)) {
+							&& PositionUtil.isInRange(creature, target, condTemp.getRange(), false) && GeoService.getInstance().canSee(creature, target)) {
 							creature.setTarget(target);
 							return true;
 						}

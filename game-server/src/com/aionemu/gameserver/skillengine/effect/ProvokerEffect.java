@@ -62,7 +62,7 @@ public class ProvokerEffect extends ShieldEffect {
 					@Override
 					public void attacked(Creature creature, int id) {
 						if (radius > 0) {
-							if (!PositionUtil.isInRange(effector, creature, radius))
+							if (!PositionUtil.isInRange(effector, creature, radius, false))
 								return;
 						}
 						if (Rnd.chance() < prob2) {
@@ -80,7 +80,7 @@ public class ProvokerEffect extends ShieldEffect {
 					@Override
 					public void attacked(Creature creature, int id) {
 						if (radius > 0) {
-							if (!PositionUtil.isInRange(effector, creature, radius))
+							if (!PositionUtil.isInRange(effector, creature, radius, false))
 								return;
 						}
 						if (Rnd.chance() < prob2) {
@@ -98,7 +98,7 @@ public class ProvokerEffect extends ShieldEffect {
 					@Override
 					public void attacked(Creature creature, int id) {
 						if (radius > 0) {
-							if (!PositionUtil.isInRange(effector, creature, radius))
+							if (!PositionUtil.isInRange(effector, creature, radius, false))
 								return;
 						}
 						if (Rnd.chance() < prob2) {

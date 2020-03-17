@@ -198,8 +198,8 @@ public class PositionUtil {
 	public static double getDistance(VisibleObject object, VisibleObject object2, boolean centerToCenter) {
 		double distance = getDistance(object.getX(), object.getY(), object.getZ(), object2.getX(), object2.getY(), object2.getZ());
 		if (!centerToCenter) {
-			distance -= object.getObjectTemplate().getBoundRadius().getCollision();
-			distance -= object2.getObjectTemplate().getBoundRadius().getCollision();
+			distance -= object.getObjectTemplate().getBoundRadius().getFront();
+			distance -= object2.getObjectTemplate().getBoundRadius().getFront();
 		}
 		return distance;
 	}
@@ -231,8 +231,8 @@ public class PositionUtil {
 		if (object.getWorldId() != object2.getWorldId() || object.getInstanceId() != object2.getInstanceId())
 			return false;
 		if (!centerToCenter) {
-			range += object.getObjectTemplate().getBoundRadius().getCollision();
-			range += object2.getObjectTemplate().getBoundRadius().getCollision();
+			range += object.getObjectTemplate().getBoundRadius().getFront();
+			range += object2.getObjectTemplate().getBoundRadius().getFront();
 		}
 		return isInRange(object.getX(), object.getY(), object.getZ(), object2.getX(), object2.getY(), object2.getZ(), range);
 	}
@@ -304,6 +304,9 @@ public class PositionUtil {
 		double radian = Math.toRadians(convertHeadingToAngle(obj1.getHeading()));
 		if (direction == AreaDirections.BACK)
 			radian += Math.PI;
+
+		length += obj1.getObjectTemplate().getBoundRadius().getFront() + obj2.getObjectTemplate().getBoundRadius().getFront();
+		radius += obj2.getObjectTemplate().getBoundRadius().getFront();
 
 		float dx = (float) (Math.cos(radian) * length);
 		float dy = (float) (Math.sin(radian) * length);

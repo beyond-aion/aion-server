@@ -126,10 +126,10 @@ public class AttackShieldObserver extends AttackCalcObserver {
 				}
 			} else if (shieldType == ShieldType.REFLECTOR || shieldType == ShieldType.SKILL_REFLECTOR) { // shield type 1, reflected damage
 				if (minRadius != 0) {
-					if (PositionUtil.isInRange(attacker, effect.getEffected(), minRadius))
+					if (PositionUtil.isInRange(attacker, effect.getEffected(), minRadius, false))
 						continue;
 				}
-				if (PositionUtil.isInRange(attacker, effect.getEffected(), maxRadius)) {
+				if (PositionUtil.isInRange(attacker, effect.getEffected(), maxRadius, false)) {
 					int reflectedHit = attackResult.getDamage();
 					if (hit > 0 || totalHit > 0) {
 						int reflectedDamage = attackResult.getDamage() * totalHit / 100;
@@ -162,7 +162,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					break;
 				}
 
-				if (PositionUtil.isInRange(effect.getEffector(), effect.getEffected(), maxRadius)) {
+				if (PositionUtil.isInRange(effect.getEffector(), effect.getEffected(), maxRadius, false)) {
 					int damageProtected = 0;
 					int effectorDamage = 0;
 

@@ -521,7 +521,7 @@ public class Skill {
 						if (p == null || !p.isOnline() || effector.equals(p) || p.isDead()) {
 							continue;
 						}
-						if (PositionUtil.isInRange(effector, p, penaltyTemplate.getProperties().getEffectiveRange())) {
+						if (PositionUtil.isInRange(effector, p, penaltyTemplate.getProperties().getEffectiveRange(), false)) {
 							SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, p);
 							count++;
 						}

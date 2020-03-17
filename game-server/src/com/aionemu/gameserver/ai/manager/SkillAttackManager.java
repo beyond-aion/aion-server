@@ -116,7 +116,7 @@ public class SkillAttackManager {
 											if (temp.getTarget() == NpcSkillTargetAttribute.RANDOM_EXCEPT_MOST_HATED && owner.getAggroList().getMostHated().equals(target3))
 												continue;
 											if (owner.isEnemy(target3) && owner.canSee(target3)
-												&& PositionUtil.isInRange(owner, target3, template.getProperties().getFirstTargetRange())
+												&& PositionUtil.isInRange(owner, target3, template.getProperties().getFirstTargetRange(), false)
 												&& GeoService.getInstance().canSee(owner, target3)) {
 												knownCreatures.add(target3);
 											}

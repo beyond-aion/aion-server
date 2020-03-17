@@ -56,7 +56,7 @@ public class AuraEffect extends EffectTemplate {
 				float rangeZ = distanceZ * rangeBoost / 100f;
 				float range = distance * rangeBoost / 100f;
 				for (Player player : p.getCurrentGroup().getOnlineMembers()) {
-					if (p.equals(player) || Math.abs(p.getZ() - player.getZ()) <= rangeZ && PositionUtil.isInRange(p, player, range)) {
+					if (p.equals(player) || Math.abs(p.getZ() - player.getZ()) <= rangeZ && PositionUtil.isInRange(p, player, range, false)) {
 						applyAuraTo(player);
 					}
 				}

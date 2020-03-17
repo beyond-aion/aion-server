@@ -93,14 +93,12 @@ public class TargetRangeProperty {
 									continue;
 							}
 						}
-						if (!PositionUtil.isInRange(skillEffector, nextCreature, properties.getEffectiveDist()))
+						if (!PositionUtil.isInRange(skillEffector, nextCreature, properties.getEffectiveDist(), false))
 							continue;
 						skill.getEffectedList().add(creature);
 					} else if (properties.getEffectiveDist() > 0) {
 						// Lightning bolt
-						if (PositionUtil.isInsideAttackCylinder(skillEffector, nextCreature,
-							(properties.getEffectiveDist() + skillEffector.getObjectTemplate().getBoundRadius().getFront()),
-							((effectiveRange / 2f) + skillEffector.getObjectTemplate().getBoundRadius().getSide()), properties.getDirection())) {
+						if (PositionUtil.isInsideAttackCylinder(skillEffector, nextCreature, properties.getEffectiveDist(), (effectiveRange / 2f), properties.getDirection())) {
 							if (!skill.shouldAffectTarget(nextCreature))
 								continue;
 							skill.getEffectedList().add(creature);
