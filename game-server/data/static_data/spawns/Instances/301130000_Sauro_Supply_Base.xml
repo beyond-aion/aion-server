@@ -7,7 +7,7 @@
 		</spawn>
 		<!-- Brigade General Sheba -->
 		<spawn npc_id="230858">
-			<spot x="899.76935" y="889.67096" z="411.5366" h="60"/>
+			<spot x="899.76935" y="889.67096" z="411.5366" h="0"/>
 		</spawn>
 		<!-- Chief Gunner Kurmata -->
 		<spawn npc_id="230851">
@@ -120,8 +120,14 @@
 			<spot x="425.8472" y="292.9257" z="159.94757" h="90"/>
 			<spot x="638.6805" y="259.4768" z="190.875"/>
 		</spawn>
-		<!-- Sheban Bladesman 
+		<!-- Sheban Bladesman -->
 		<spawn npc_id="233286">
+			<spot x="890.3" y="880" z="411.46" h="15" random_walk="4"/>
+			<spot x="910" y="879" z="411.46" h="50" random_walk="4"/>
+			<spot x="909.7" y="899.4" z="411.46" h="75" random_walk="4"/>
+			<spot x="890.2" y="899.6" z="411.46" h="105" random_walk="4"/>
+		</spawn>
+		<!--<spawn npc_id="233286">
 		<spot x="254.9" y="429.12" z="159.32857" h="1" walker_id="F2F5D3F7AA068E5072942CA9053C8203640002E4"/>
 		<spot x="254.9" y="429.12" z="159.32857" h="1" walker_id="F2F5D3F7AA068E5072942CA9053C8203640002E4"/>
 		<spot x="254.9" y="429.12" z="159.32857" h="1" walker_id="F2F5D3F7AA068E5072942CA9053C8203640002E4"/>

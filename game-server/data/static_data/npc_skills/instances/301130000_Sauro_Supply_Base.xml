@@ -169,28 +169,35 @@
 	</npc_skills>
 	<!-- Guard Captain Ahuradim -->
 	<npc_skills npc_ids="230857">
-		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
-		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="60000" />
-		<npc_skill id="21190" lv="1" prob="8" />
-		<!-- <npc_skill id="21191" lv="1" prob="5"/> used by generators -->
-		<npc_skill id="21192" lv="1" prob="20" cd="30000" />
-		<npc_skill id="21193" lv="1" prob="23" cd="30000" />
-		<npc_skill id="21194" lv="1" prob="20" cd="30000" />
-		<!-- <npc_skill id="21195" lv="1" prob="10"/> -->
-		<npc_skill id="21426" lv="1" prob="25" next_chain_id="1" next_skill_time="0" cd="30000" />
-		<npc_skill id="21427" lv="1" prob="100" chain_id="1" next_skill_time="10000" />
-		<npc_skill id="21428" lv="1" prob="5" cd="20000" />
-		<npc_skill id="21429" lv="1" prob="5" cd="30000" />
-	</npc_skills>
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /> 
+		<npc_skill id="21426" lv="1" prob="75" cd="10000" next_skill_time="5000" /> 
+		<npc_skill id="21427" lv="1" prob="75" cd="8000" next_skill_time="5000" target="ME"/>
+		<npc_skill id="21193" lv="1" prob="70" cd="15000" next_skill_time="5000" target="ME"/>
+		<npc_skill id="21192" lv="1" prob="75" cd="15000" next_skill_time="5000" target="ME"/>
+		<npc_skill id="20775" lv="1" prob="70" cd="25000" next_skill_time="5000" target="ME"/>
+		<npc_skill id="21430" lv="1" prob="70" cd="15000" next_skill_time="5000" target="RANDOM"/> 
+		<npc_skill id="21428" lv="1" prob="70" cd="8000" next_skill_time="5000" target="ME"/> 
+		<npc_skill id="21429" lv="1" prob="60" cd="40000" next_skill_time="5000" max_hp="50"/>
+	</npc_skills> 
 	<!-- Brigade General Sheba -->
 	<npc_skills npc_ids="230858">
 		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
-		<npc_skill id="21183" lv="1" prob="40" max_hp="75" cd="30000" target="RANDOM" />
-		<npc_skill id="21187" lv="1" prob="40" cd="30000" />
-		<npc_skill id="21188" lv="1" prob="40" max_hp="90" cd="30000" />
-		<npc_skill id="21410" lv="1" prob="20" />
-		<npc_skill id="21425" lv="1" prob="20" cd="10000" />
-		<npc_skill id="21450" lv="1" prob="5" max_hp="50" cd="15000" />
+		<npc_skill id="21410" lv="1" prob="80" cd="7000" next_skill_time="5000"/>
+		<npc_skill id="21425" lv="1" prob="80" cd="7000" target="ME" next_skill_time="5000"/>
+		<npc_skill id="21450" lv="1" prob="45" cd="20000" max_hp="75" next_skill_time="4000"/>
+		<npc_skill id="21188" lv="1" prob="80" cd="25000" max_hp="90" target="ME" next_chain_id="1" next_skill_time="0"/>
+		<npc_skill id="21187" lv="1" prob="100" cd="10000" chain_id="1" next_skill_time="5000" target="ME"/>
+		<npc_skill id="21183" lv="1" prob="80" cd="25000" max_hp="80" target="RANDOM" next_chain_id="2" next_skill_time="0"/> 
+		<npc_skill id="21187" lv="1" prob="100" cd="10000" chain_id="2" next_skill_time="5000" target="ME"/>
+		<npc_skill id="21189" lv="1" prob="75" cd="25000" max_hp="70" target="ME"/> 
+		<npc_skill id="21184" lv="1" prob="80" cd="35000" max_hp="50" target="ME" next_chain_id="3" next_skill_time="9000" prio="1"/> 
+		<npc_skill id="21186" lv="1" prob="100" cd="0" chain_id="3" next_skill_time="5000"/> 
+		<npc_skill id="21410" lv="1" prob="70" cd="15000" max_hp="25" next_skill_time="3000"/>
+		<npc_skill id="21425" lv="1" prob="70" cd="15000" max_hp="25" target="ME" next_skill_time="3000"/>
+		<npc_skill id="21188" lv="1" prob="80" cd="50000" max_hp="25" target="ME" next_chain_id="4" next_skill_time="0"/>
+		<npc_skill id="21187" lv="1" prob="100" cd="10000" chain_id="4" next_skill_time="3000" target="ME"/>
+		<npc_skill id="21183" lv="1" prob="80" cd="50000" max_hp="80" target="RANDOM" next_chain_id="5" next_skill_time="0"/> 
+		<npc_skill id="21187" lv="1" prob="100" cd="10000" chain_id="5" next_skill_time="3000" target="ME"/>
 	</npc_skills>
 	<!-- Gatekeeper Stranir -->
 	<npc_skills npc_ids="233255">
@@ -243,5 +250,28 @@
 		<npc_skill id="21185" lv="26" prob="100">
 			<cond delay="7000" despawn_time="5000" />
 		</npc_skill>
+	</npc_skills>
+	<!-- Corrupted Danuar -->
+	<npc_skills npc_ids="284435">
+		<npc_skill id="16822" lv="1" prob="40" is_post_spawn="true" cd="15000"/>
+		<npc_skill id="16556" lv="1" prob="80" cd="25000"/>
+		<npc_skill id="16516" lv="1" prob="80" cd="15000"/>
+		<npc_skill id="20774" lv="1" prob="70" cd="20000"/>
+	</npc_skills>
+	<!-- sheban bladesman -->
+	<npc_skills npc_ids="233286">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" prio="3"/>
+		<npc_skill id="16822" lv="1" prob="0" is_post_spawn="true" prio="2"/>
+		<npc_skill id="18159" lv="1" prob="100" cd="35000" prio="1" next_skill_time="5000"/>
+		<npc_skill id="17332" lv="56" prob="70" cd="15000" next_chain_id="1" next_skill_time="0"/>
+		<npc_skill id="17446" lv="1" prob="100" chain_id="1" next_skill_time="5000"/> 
+		<npc_skill id="21411" lv="56" prob="80" cd="8000" next_skill_time="5000"/>
+		<npc_skill id="21412" lv="56" prob="100" cd="15000">
+			<cond cond_type="TARGET_HAS_CARVED_SIGNET" />
+		</npc_skill>
+	</npc_skills>
+	<!-- protective shield generator -->
+	<npc_skills npc_ids="284437 284445 284446">
+		<npc_skill id="21195" lv="1" prob="0" is_post_spawn="true"/>
 	</npc_skills>
 </npc_skill_templates>

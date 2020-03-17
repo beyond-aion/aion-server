@@ -3,6 +3,7 @@ package instance;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -13,6 +14,9 @@ import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -24,6 +28,7 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 
 	private Map<Integer, StaticDoor> doors;
 	private static List<WorldPosition> chestPoints = new ArrayList<>();
+	private Future<?> scheduledGeneratorTask;
 	static {
 		chestPoints.add(new WorldPosition(301130000, 253.97533f, 363.97156f, 159.64023f, (byte) 0));
 		chestPoints.add(new WorldPosition(301130000, 262.36151f, 393.78619f, 156.83209f, (byte) 30));
@@ -137,10 +142,72 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 				break;
 			case 230857:
 				spawn(801967, 721.84f, 889.93f, 411.45f, (byte) 60);// Sauro Exit
+				cancelTask();
 				break;
 			case 230858:
 				spawn(801967, 880.82f, 889.93f, 411.45f, (byte) 120);// Sauro Exit
 				break;
+			case 284437: // protective shield generator
+			case 284445:
+			case 284446:
+				if (instance.getNpc(230857) != null && !instance.getNpc(230857).isDead()) {
+					spawn(npc.getNpcId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
+					Npc ahuradim =  instance.getNpc(230857);
+					if (ahuradim != null && !ahuradim.isDead()) {
+						if (npc.getNpcId() == 284437) {
+							startGeneratorTask(Rnd.chance() < 50 ? 284445 : 284446, ahuradim);
+						} else if (npc.getNpcId() == 284445) {
+							startGeneratorTask(Rnd.chance() < 50 ? 284446 : 284437, ahuradim);
+						} else {
+							startGeneratorTask(Rnd.chance() < 50 ? 284437 : 284445, ahuradim);
+						}
+					}
+				}
+				npc.getController().delete();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					Npc gen1 = instance.getNpc(284437);
+					Npc gen2 = instance.getNpc(284445);
+					Npc gen3 = instance.getNpc(284446);
+					if (gen1 != null) {
+						SkillEngine.getInstance().getSkill(gen1, 20773, 1, gen1).useWithoutPropSkill();
+					}
+					if (gen2 != null) {
+						SkillEngine.getInstance().getSkill(gen2, 20773, 1, gen2).useWithoutPropSkill();
+					}
+					if (gen3 != null) {
+						SkillEngine.getInstance().getSkill(gen3, 20773, 1, gen3).useWithoutPropSkill();
+					}
+				}, 500);
+				break;
+		}
+	}
+
+	private void startGeneratorTask(int npcId, Npc ahuradim) {
+		scheduledGeneratorTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!ahuradim.isDead()) {
+				Npc generator = instance.getNpc(npcId);
+				generator.setTarget(ahuradim);
+				PacketSendUtility.broadcastMessage(generator, 1501014);
+				scheduledGeneratorTask = ThreadPoolManager.getInstance().schedule(() -> {
+					if (!generator.isDead()) {
+						PacketSendUtility.broadcastMessage(generator, 1501015);
+						SkillEngine.getInstance().getSkill(generator, 21200, 1, generator).useWithoutPropSkill();
+					}
+				}, 15 * 1000);
+			}
+		}, 40 * 1000);
+	}
+
+	private void cancelTask() {
+		if (scheduledGeneratorTask != null) {
+			scheduledGeneratorTask.cancel(false);
+		}
+	}
+
+	@Override
+	public void onBackHome(Npc npc) {
+		if (npc.getNpcId() == 230857) {
+			cancelTask();
 		}
 	}
 
