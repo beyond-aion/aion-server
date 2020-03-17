@@ -72,7 +72,6 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 				percents.remove(percent);
 				switch (percent) {
 					case 100:
-						//queueSkill(21165, 1, 0); // rend space
 						queueSkill(21181, 1); // Malevolence
 						queueSkill(21171, 1); // Grendal's Explosive Wrath
 						break;
@@ -159,10 +158,10 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 			case 21174: // frozen domain of rancour
 				multiplier = 1f;
 				if (skillLevel == 1 && (curStage == 1 || curStage == 5)) {
-					int rnd = Rnd.get(1, 100);
-					if (rnd <= 15) {
+					float rnd = Rnd.chance();
+					if (rnd < 15) {
 						queueSkill(21175, 2, Rnd.get(5000, 9000)); // lv 2 prevent skill loop
-					} else if (rnd <= 45) {
+					} else if (rnd < 45) {
 						queueSkill(21173, 1, Rnd.get(5000, 9000)); // summon frost storm
 					}
 				}
@@ -182,10 +181,10 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 					case 1:
 					case 3: // when she's not on a platform/last stage use aoe skills
 						if (skillLevel == 1) {
-							int rnd = Rnd.get(1, 100);
-							if (rnd <= 15) {
+							float rnd = Rnd.chance();
+							if (rnd < 15) {
 								queueSkill(21174, 2, Rnd.get(5000, 9000)); // lv 2 to prevent skill loop
-							} else if (rnd <= 45) {
+							} else if (rnd < 45) {
 								queueSkill(21229, 1, Rnd.get(5000, 9000)); //  Dragon Lords Lightning Shock
 							}
 						}
@@ -273,8 +272,8 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 					default:
 						break;
 				}
-				PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_HEADING_UPDATE(getOwner()));
-				PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
+				PacketSendUtility.broadcastPacket(getOwner(), new SM_HEADING_UPDATE(getOwner()));
+				PacketSendUtility.broadcastPacket(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
 			}
 		}, 500);
 	}
@@ -305,16 +304,14 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 		addPercent();
 		addPlatformLocations();
 		World.getInstance().updatePosition(getOwner(), 256.62f, 257.79f, 241.79f, (byte) 90);
-		PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_HEADING_UPDATE(getOwner()));
-		PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_HEADING_UPDATE(getOwner()));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
 	}
 
 	private boolean shouldUsePlatformSkills(int skillLevel) {
-		Iterator<NpcSkillEntry> iter = getOwner().getQueuedSkills().iterator();
-		while (iter.hasNext()) {
-			NpcSkillEntry next = iter.next();
+		for (NpcSkillEntry skill : getOwner().getQueuedSkills()) {
 			// if another teleport skill(=21165) is queued with level != 10 -> next stage is ready so stop switching platforms
-			if (next.getSkillLevel() != 10 && next.getSkillId() == 21165 && next.getSkillLevel() != skillLevel) {
+			if (skill.getSkillLevel() != 10 && skill.getSkillId() == 21165 && skill.getSkillLevel() != skillLevel) {
 				return false;
 			}
 		}

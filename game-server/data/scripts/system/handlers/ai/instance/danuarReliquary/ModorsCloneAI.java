@@ -20,7 +20,6 @@ import ai.AggressiveNpcAI;
 @AIName("modors_clone")
 public class ModorsCloneAI extends AggressiveNpcAI {
 
-	private AtomicBoolean canCancel = new AtomicBoolean();
 	private float modifier = 1.2f;
 
 	public ModorsCloneAI(Npc owner) {
@@ -108,15 +107,5 @@ public class ModorsCloneAI extends AggressiveNpcAI {
 	protected void handleDespawned() {
 		cancelVengefulOrb();
 		super.handleDespawned();
-	}
-
-	@Override
-	protected void handleTargetChanged(Creature creature) {
-		super.handleTargetChanged(creature);
-	}
-
-	@Override
-	protected void handleBackHome() {
-		super.handleBackHome();
 	}
 }

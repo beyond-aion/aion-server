@@ -237,8 +237,8 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 								PositionUtil.getHeadingTowards(nextPosition.getX(), nextPosition.getY(), 256.62f, 257.79f));
 						break;
 				}
-				PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_HEADING_UPDATE(getOwner()));
-				PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
+				PacketSendUtility.broadcastPacket(getOwner(), new SM_HEADING_UPDATE(getOwner()));
+				PacketSendUtility.broadcastPacket(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
 			}
 		}, 500);
 	}
@@ -327,11 +327,9 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 	}
 
 	private boolean shouldUsePlatformSkills(int skillLevel) {
-		Iterator<NpcSkillEntry> iter = getOwner().getQueuedSkills().iterator();
-		while (iter.hasNext()) {
-			NpcSkillEntry next = iter.next();
+		for (NpcSkillEntry skill : getOwner().getQueuedSkills()) {
 			// if another teleport skill(=21165) is queued with level != 10 -> next stage is ready so stop switching platforms
-			if (next.getSkillLevel() != 10 && next.getSkillId() == 21165 && next.getSkillLevel() != skillLevel) {
+			if (skill.getSkillLevel() != 10 && skill.getSkillId() == 21165 && skill.getSkillLevel() != skillLevel) {
 				return false;
 			}
 		}
@@ -353,7 +351,7 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 		addPercent();
 		addPlatformLocations();
 		World.getInstance().updatePosition(getOwner(), 256.62f, 257.79f, 241.79f, (byte) 90);
-		PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_HEADING_UPDATE(getOwner()));
-		PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_HEADING_UPDATE(getOwner()));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
 	}
 }
