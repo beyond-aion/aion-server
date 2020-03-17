@@ -1306,7 +1306,7 @@
 			<drop item_id="188052499" chance="100" each_member="true" /><!-- Danuar Reliquary Expedition's Excavation Box -->
 		</drop_group>
 		<drop_group><!-- Loyalty Coins -->
-			<drop item_id="186000409" chance="100" min_amount="32" max_amount="32" each_member="true" /><!-- Daeva's Respite Coin -->
+			<drop item_id="186000409" chance="100" min_amount="30" max_amount="30" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 	</npc_drop>
 	<!-- Infernal Danuar Reliquary -->
@@ -1324,7 +1324,7 @@
 			<drop item_id="188053092" chance="100" each_member="true" /><!-- Danuar Reliquary Expedition's Artifacts -->
 		</drop_group>
 		<drop_group><!-- Loyalty Coins -->
-			<drop item_id="186000409" chance="100" min_amount="40" max_amount="40" each_member="true" /><!-- Daeva's Respite Coin -->
+			<drop item_id="186000409" chance="100" min_amount="36" max_amount="36" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 	</npc_drop>
 	<!-- Danuar Sanctuary -->

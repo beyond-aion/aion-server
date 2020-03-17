@@ -116,7 +116,7 @@
 			<gd_npc npc_id="231073" /><!-- Hyperion -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000409" min_count="35" /><!-- Daeva's Respite Coin -->
+			<gd_item id="186000409" min_count="32" /><!-- Daeva's Respite Coin -->
 		</gd_items>
 	</gd_rule>
 	<!-- TODO: Padmarashka's Cave min_count="34" -->
