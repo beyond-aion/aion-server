@@ -14,12 +14,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
-import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
-import com.aionemu.gameserver.skillengine.model.HealType;
-import com.aionemu.gameserver.skillengine.model.HitType;
-import com.aionemu.gameserver.skillengine.model.ShieldType;
-import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
@@ -181,7 +177,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					attackResult.setProtectedDamage(effectorDamage);
 					attackResult.setProtectorId(effect.getEffectorId());
 					effect.getEffector().getController().onAttack(attacker, effect.getSkillId(), TYPE.PROTECTDMG, effectorDamage, false, LOG.REGULAR,
-						attackResult.getAttackStatus(), true);
+						attackResult.getAttackStatus(), attackerEffect != null ? attackerEffect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED : true);
 					// dont launch subeffect if damage is fully absorbed
 					if (!isPunchShield(attackerEffect))
 						attackResult.setLaunchSubEffect(false);

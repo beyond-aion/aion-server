@@ -188,7 +188,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId) {
 		onAttack(effect.getEffector(), effect.getSkillId(), type, damage, notifyAttack, logId, effect.getAttackStatus(),
-			!effect.isGodstoneActivated() && !effect.isPeriodic());
+			!effect.isGodstoneActivated() && !effect.isPeriodic() && effect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED);
 		if (type == TYPE.DELAYDAMAGE)
 			effect.broadcastHate();
 	}
