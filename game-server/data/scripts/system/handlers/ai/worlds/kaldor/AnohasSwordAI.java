@@ -20,9 +20,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.questEngine.model.QuestState;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -83,23 +80,10 @@ public class AnohasSwordAI extends NpcAI {
 					flag.getController().delete();
 				}
 			});
-			World.getInstance().forEachPlayer(receiver -> {
-				PacketSendUtility.sendPacket(receiver, SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_SPAWN());
-				swordController.delete(); // despawn sword
-				if (receiver.getRace() == raceSummoned)
-					startQuest(receiver, raceSummoned == Race.ELYOS ? 13817 : 23817);
-				else
-					startQuest(receiver, raceSummoned == Race.ELYOS ? 13818 : 23818);
-			});
+			PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_SPAWN());
+			swordController.delete(); // despawn sword
 		}, 30 * 60000);
 		return true;
-	}
-
-	private void startQuest(Player player, int questId) {
-		final QuestState qs = player.getQuestStateList().getQuestState(questId);
-		QuestEnv env = new QuestEnv(null, player, questId);
-		if (qs == null || qs.isStartable())
-			QuestService.startQuest(env);
 	}
 
 	@Override
