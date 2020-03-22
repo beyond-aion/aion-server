@@ -27644,181 +27644,304 @@
 	</decomposable>
 	<decomposable item_id="188053120"><!-- Danuar Reliquary Loot [Weapon] -->
 		<items>
-			<item id="100001552" player_classes="ASSASSIN RANGER GLADIATOR" /><!-- Lunatic Modor's Sword -->
-			<item id="100101187" player_classes="CLERIC" /><!-- Lunatic Modor's Mace -->
-			<item id="100101188" player_classes="GLADIATOR TEMPLAR CHANTER" /><!-- Lunatic Modor's Warhammer -->
-			<item id="100201355" player_classes="ASSASSIN RANGER" /><!-- Lunatic Modor's Dagger -->
-			<item id="100501187" player_classes="SORCERER SPIRIT_MASTER" /><!-- Lunatic Modor's Orb -->
-			<item id="100601276" player_classes="SORCERER SPIRIT_MASTER" /><!-- Lunatic Modor's Spellbook -->
-			<item id="100901207" player_classes="TEMPLAR GLADIATOR" /><!-- Lunatic Modor's Greatsword -->
-			<item id="101301135" player_classes="GLADIATOR" /><!-- Lunatic Modor's Polearm -->
-			<item id="101501217" player_classes="CHANTER" /><!-- Lunatic Modor's Staff -->
-			<item id="101501232" player_classes="CLERIC" /><!-- Lunatic Modor's Cane -->
-			<item id="101701237" player_classes="RANGER ASSASSIN GLADIATOR" /><!-- Lunatic Modor's Bow -->
-			<item id="101801018" player_classes="GUNNER RIDER" /><!-- Lunatic Modor's Pistol -->
-			<item id="101900981" player_classes="GUNNER" /><!-- Lunatic Modor's Aethercannon -->
-			<item id="102001044" player_classes="BARD" /><!-- Lunatic Modor's Harp -->
+			<item id="100001552" player_classes="GLADIATOR" /><!-- Lunatic Modor's Sword -->
+			<item id="100001552" player_classes="RANGER" /><!-- Lunatic Modor's Sword -->
 			<item id="102100820" player_classes="RIDER" /><!-- Lunatic Modor's Cipher-Blade -->
+			<item id="100101188" player_classes="TEMPLAR" /><!-- Lunatic Modor's Warhammer -->
+			<item id="100101187" player_classes="CLERIC" /><!-- Lunatic Modor's Mace -->
+			<item id="100101188" player_classes="CHANTER" /><!-- Lunatic Modor's Warhammer -->
+			<item id="100001552" player_classes="ASSASSIN" /><!-- Lunatic Modor's Sword -->
+			<item id="102001044" player_classes="BARD" /><!-- Lunatic Modor's Harp -->
+			<item id="101801018" player_classes="GUNNER" /><!-- Lunatic Modor's Pistol -->
+			<item id="100501187" player_classes="SORCERER" /><!-- Lunatic Modor's Orb -->
+			<item id="100601276" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Spellbook -->
+		</items>
+		<items>
+			<item id="100101188" player_classes="GLADIATOR" /><!-- Lunatic Modor's Warhammer -->
+			<item id="100201355" player_classes="RANGER" /><!-- Lunatic Modor's Dagger -->
+			<item id="101801018" player_classes="RIDER" /><!-- Lunatic Modor's Pistol -->
+			<item id="100901207" player_classes="TEMPLAR" /><!-- Lunatic Modor's Greatsword -->
+			<item id="101501232" player_classes="CLERIC" /><!-- Lunatic Modor's Cane -->
+			<item id="101501217" player_classes="CHANTER" /><!-- Lunatic Modor's Staff -->
+			<item id="100201355" player_classes="ASSASSIN" /><!-- Lunatic Modor's Dagger -->
+			<item id="102001044" player_classes="BARD" /><!-- Lunatic Modor's Harp -->
+			<item id="101900981" player_classes="GUNNER" /><!-- Lunatic Modor's Aethercannon -->
+			<item id="100601276" player_classes="SORCERER" /><!-- Lunatic Modor's Spellbook -->
+			<item id="100501187" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Orb -->
+		</items>
+		<items>
+			<item id="100201355" player_classes="GLADIATOR" /><!-- Lunatic Modor's Dagger -->
+			<item id="101701237" player_classes="RANGER" /><!-- Lunatic Modor's Bow -->
+			<item id="102100820" player_classes="RIDER" /><!-- Lunatic Modor's Cipher-Blade -->
+			<item id="115001594" player_classes="TEMPLAR" /><!-- Lunatic Modor's Shield -->
+			<item id="115001595" player_classes="CLERIC" /><!-- Lunatic Modor's Scale Shield -->
+			<item id="115001594" player_classes="CHANTER" /><!-- Lunatic Modor's Shield -->
+			<item id="101701237" player_classes="ASSASSIN" /><!-- Lunatic Modor's Bow -->
+			<item id="102001044" player_classes="BARD" /><!-- Lunatic Modor's Harp -->
+			<item id="101801018" player_classes="GUNNER" /><!-- Lunatic Modor's Pistol -->
+			<item id="100501187" player_classes="SORCERER" /><!-- Lunatic Modor's Orb -->
+			<item id="100601276" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Spellbook -->
+		</items>
+		<items>
+			<item id="100901207" player_classes="GLADIATOR" /><!-- Lunatic Modor's Greatsword -->
+			<item id="100001552" player_classes="RANGER" /><!-- Lunatic Modor's Sword -->
+			<item id="101801018" player_classes="RIDER" /><!-- Lunatic Modor's Pistol -->
+			<item id="100101188" player_classes="TEMPLAR" /><!-- Lunatic Modor's Warhammer -->
+			<item id="100101187" player_classes="CLERIC" /><!-- Lunatic Modor's Mace -->
+			<item id="100101188" player_classes="CHANTER" /><!-- Lunatic Modor's Warhammer -->
+			<item id="100001552" player_classes="ASSASSIN" /><!-- Lunatic Modor's Sword -->
+			<item id="102001044" player_classes="BARD" /><!-- Lunatic Modor's Harp -->
+			<item id="101900981" player_classes="GUNNER" /><!-- Lunatic Modor's Aethercannon -->
+			<item id="100601276" player_classes="SORCERER" /><!-- Lunatic Modor's Spellbook -->
+			<item id="100501187" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Orb -->
+		</items>
+		<items>
+			<item id="101301135" player_classes="GLADIATOR"  /><!-- Lunatic Modor's Polearm -->
+			<item id="100201355" player_classes="RANGER"  /><!-- Lunatic Modor's Dagger -->
+			<item id="102100820" player_classes="RIDER"  /><!-- Lunatic Modor's Cipher-Blade -->
+			<item id="100901207" player_classes="TEMPLAR"  /><!-- Lunatic Modor's Greatsword -->
+			<item id="101501232" player_classes="CLERIC"  /><!-- Lunatic Modor's Cane -->
+			<item id="101501217" player_classes="CHANTER"  /><!-- Lunatic Modor's Staff -->
+			<item id="100201355" player_classes="ASSASSIN"  /><!-- Lunatic Modor's Dagger -->
+			<item id="102001044" player_classes="BARD"  /><!-- Lunatic Modor's Harp -->
+			<item id="101801018" player_classes="GUNNER"  /><!-- Lunatic Modor's Pistol -->
+			<item id="100501187" player_classes="SORCERER"  /><!-- Lunatic Modor's Orb -->
+			<item id="100601276" player_classes="SPIRIT_MASTER"  /><!-- Lunatic Modor's Spellbook -->
+		</items>
+		<items>
+			<item id="101701237" player_classes="GLADIATOR" /><!-- Lunatic Modor's Bow -->
+			<item id="101701237" player_classes="RANGER" /><!-- Lunatic Modor's Bow -->
+			<item id="101801018" player_classes="RIDER" /><!-- Lunatic Modor's Pistol -->
+			<item id="115001594" player_classes="TEMPLAR" /><!-- Lunatic Modor's Shield -->
+			<item id="115001595" player_classes="CLERIC" /><!-- Lunatic Modor's Scale Shield -->
+			<item id="115001594" player_classes="CHANTER" /><!-- Lunatic Modor's Shield -->
+			<item id="101701237" player_classes="ASSASSIN" /><!-- Lunatic Modor's Bow -->
+			<item id="102001044" player_classes="BARD" /><!-- Lunatic Modor's Harp -->
+			<item id="101900981" player_classes="GUNNER" /><!-- Lunatic Modor's Aethercannon -->
+			<item id="100601276" player_classes="SORCERER" /><!-- Lunatic Modor's Spellbook -->
+			<item id="100501187" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Orb -->
+		</items>
+		<items>
+			<item id="115001594" player_classes="GLADIATOR" /><!-- Lunatic Modor's Shield -->
+			<item id="100001552" player_classes="RANGER" /><!-- Lunatic Modor's Sword -->
+			<item id="102100820" player_classes="RIDER" /><!-- Lunatic Modor's Cipher-Blade -->
+			<item id="100901207" player_classes="TEMPLAR" /><!-- Lunatic Modor's Greatsword -->
+			<item id="101501232" player_classes="CLERIC" /><!-- Lunatic Modor's Cane -->
+			<item id="101501217" player_classes="CHANTER" /><!-- Lunatic Modor's Staff -->
+			<item id="100001552" player_classes="ASSASSIN" /><!-- Lunatic Modor's Sword -->
+			<item id="102001044" player_classes="BARD" /><!-- Lunatic Modor's Harp -->
+			<item id="101801018" player_classes="GUNNER" /><!-- Lunatic Modor's Pistol -->
+			<item id="100501187" player_classes="SORCERER" /><!-- Lunatic Modor's Orb -->
+			<item id="100601276" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Spellbook -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053121"><!-- Danuar Reliquary Loot [Armor] -->
 		<items>
-			<item id="110101618" player_classes="SORCERER" /><!-- Lunatic Modor's Tunic -->
-			<item id="111101459" player_classes="SORCERER" /><!-- Lunatic Modor's Gloves -->
-			<item id="112101413" player_classes="SORCERER" /><!-- Lunatic Modor's Pauldrons -->
-			<item id="113101469" player_classes="SORCERER" /><!-- Lunatic Modor's Leggings -->
-			<item id="114101506" player_classes="SORCERER" /><!-- Lunatic Modor's Shoes -->
-			<item id="125003514" player_classes="SORCERER" /><!-- Lunatic Modor's Headband -->
-			<item id="110101618" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Tunic -->
-			<item id="111101459" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Gloves -->
-			<item id="112101413" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Pauldrons -->
-			<item id="113101469" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Leggings -->
-			<item id="114101506" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Shoes -->
-			<item id="125003514" player_classes="SPIRIT_MASTER" /><!-- Lunatic Modor's Headband -->
+			<item id="110101618" player_classes="SORCERER SPIRIT_MASTER" /><!-- Lunatic Modor's Tunic -->
 			<item id="110101619" player_classes="BARD" /><!-- Lunatic Modor's Songweaver Tunic -->
-			<item id="111101460" player_classes="BARD" /><!-- Lunatic Modor's Songweaver Gloves -->
-			<item id="112101414" player_classes="BARD" /><!-- Lunatic Modor's Songweaver Pauldrons -->
-			<item id="113101470" player_classes="BARD" /><!-- Lunatic Modor's Songweaver Leggings -->
-			<item id="114101507" player_classes="BARD" /><!-- Lunatic Modor's Songweaver Shoes -->
-			<item id="125003515" player_classes="BARD" /><!-- Lunatic Modor's Songweaver Headband -->
-			<item id="110301508" player_classes="ASSASSIN" /><!-- Lunatic Modor's Jerkin -->
-			<item id="111301448" player_classes="ASSASSIN" /><!-- Lunatic Modor's Vambrace -->
-			<item id="112301392" player_classes="ASSASSIN" /><!-- Lunatic Modor's Shoulderguards -->
-			<item id="113301472" player_classes="ASSASSIN" /><!-- Lunatic Modor's Breeches -->
-			<item id="114301509" player_classes="ASSASSIN" /><!-- Lunatic Modor's Boots -->
-			<item id="125003510" player_classes="ASSASSIN" /><!-- Lunatic Modor's Hat -->
-			<item id="110301508" player_classes="RANGER" /><!-- Lunatic Modor's Jerkin -->
-			<item id="111301448" player_classes="RANGER" /><!-- Lunatic Modor's Vambrace -->
-			<item id="112301392" player_classes="RANGER" /><!-- Lunatic Modor's Shoulderguards -->
-			<item id="113301472" player_classes="RANGER" /><!-- Lunatic Modor's Breeches -->
-			<item id="114301509" player_classes="RANGER" /><!-- Lunatic Modor's Boots -->
-			<item id="125003510" player_classes="RANGER" /><!-- Lunatic Modor's Hat -->
-			<item id="110301509" player_classes="GUNNER" /><!-- Lunatic Modor's Gunslinger Magic Jerkin -->
-			<item id="111301449" player_classes="GUNNER" /><!-- Lunatic Modor's Gunslinger Magic Vambrace -->
-			<item id="112301393" player_classes="GUNNER" /><!-- Lunatic Modor's Gunslinger Magic Shoulderguards -->
-			<item id="113301473" player_classes="GUNNER" /><!-- Lunatic Modor's Gunslinger Magic Breeches -->
-			<item id="114301510" player_classes="GUNNER" /><!-- Lunatic Modor's Gunslinger Magic Boots -->
-			<item id="125003511" player_classes="GUNNER" /><!-- Lunatic Modor's Gunslinger Hat -->
+			<item id="110301508" player_classes="ASSASSIN RANGER" /><!-- Lunatic Modor's Jerkin -->
 			<item id="110501464" player_classes="CHANTER" /><!-- Lunatic Modor's Chanter Hauberk -->
-			<item id="111501421" player_classes="CHANTER" /><!-- Lunatic Modor's Chanter Handguards -->
-			<item id="112501363" player_classes="CHANTER" /><!-- Lunatic Modor's Chanter Spaulders -->
-			<item id="113501437" player_classes="CHANTER" /><!-- Lunatic Modor's Chanter Chausses -->
-			<item id="114501446" player_classes="CHANTER" /><!-- Lunatic Modor's Chanter Brogans -->
-			<item id="125003506" player_classes="CHANTER" /><!-- Lunatic Modor's Chanter Chain Hood -->
 			<item id="110501465" player_classes="CLERIC" /><!-- Lunatic Modor's Cleric Hauberk -->
-			<item id="111501422" player_classes="CLERIC" /><!-- Lunatic Modor's Cleric Handguards -->
-			<item id="112501364" player_classes="CLERIC" /><!-- Lunatic Modor's Cleric Spaulders -->
-			<item id="113501438" player_classes="CLERIC" /><!-- Lunatic Modor's Cleric Chausses -->
-			<item id="114501447" player_classes="CLERIC" /><!-- Lunatic Modor's Cleric Brogans -->
-			<item id="125003507" player_classes="CLERIC" /><!-- Lunatic Modor's Cleric Chain Hood -->
 			<item id="110550940" player_classes="RIDER" /><!-- Lunatic Modor's Aethertech Magic Hauberk -->
-			<item id="111501498" player_classes="RIDER" /><!-- Lunatic Modor's Aethertech Magic Handguards -->
-			<item id="112501440" player_classes="RIDER" /><!-- Lunatic Modor's Aethertech Magic Spaulders -->
-			<item id="113501516" player_classes="RIDER" /><!-- Lunatic Modor's Aethertech Magic Chausses -->
-			<item id="114501525" player_classes="RIDER" /><!-- Lunatic Modor's Aethertech Magic Brogans -->
-			<item id="125003791" player_classes="RIDER" /><!-- Lunatic Modor's Aethertech Magic Helm -->
 			<item id="110601443" player_classes="TEMPLAR" /><!-- Lunatic Modor's Templar Breastplate -->
-			<item id="111601405" player_classes="TEMPLAR" /><!-- Lunatic Modor's Templar Gauntlets -->
-			<item id="112601387" player_classes="TEMPLAR" /><!-- Lunatic Modor's Templar Shoulderplates -->
-			<item id="113601389" player_classes="TEMPLAR" /><!-- Lunatic Modor's Templar Greaves -->
-			<item id="114601393" player_classes="TEMPLAR" /><!-- Lunatic Modor's Templar Sabatons -->
-			<item id="125003503" player_classes="TEMPLAR" /><!-- Lunatic Modor's Templar Helm -->
 			<item id="110601476" player_classes="GLADIATOR" /><!-- Lunatic Modor's Gladiator Breastplate -->
+		</items>
+		<items>
+			<item id="111101459" player_classes="SORCERER SPIRIT_MASTER" /><!-- Lunatic Modor's Gloves -->
+			<item id="111101460" player_classes="BARD" /><!-- Lunatic Modor's Songweaver Gloves -->
+			<item id="111301448" player_classes="ASSASSIN RANGER" /><!-- Lunatic Modor's Vambrace -->
+			<item id="111301449" player_classes="GUNNER" /><!-- Lunatic Modor's Gunslinger Magic Vambrace -->
+			<item id="111501421" player_classes="CHANTER" /><!-- Lunatic Modor's Chanter Handguards -->
+			<item id="111501422" player_classes="CLERIC" /><!-- Lunatic Modor's Cleric Handguards -->
+			<item id="111501498" player_classes="RIDER" /><!-- Lunatic Modor's Aethertech Magic Handguards -->
+			<item id="111601405" player_classes="TEMPLAR" /><!-- Lunatic Modor's Templar Gauntlets -->
 			<item id="111601439" player_classes="GLADIATOR" /><!-- Lunatic Modor's Gladiator Gauntlets -->
+		</items>
+		<items>
+			<item id="112101413" player_classes="SORCERER SPIRIT_MASTER" /><!-- Lunatic Modor's Pauldrons -->
+			<item id="112101414" player_classes="BARD" /><!-- Lunatic Modor's Songweaver Pauldrons -->
+			<item id="112301392" player_classes="ASSASSIN RANGER" /><!-- Lunatic Modor's Shoulderguards -->
+			<item id="112301393" player_classes="GUNNER" /><!-- Lunatic Modor's Gunslinger Magic Shoulderguards -->
+			<item id="112501363" player_classes="CHANTER" /><!-- Lunatic Modor's Chanter Spaulders -->
+			<item id="112501364" player_classes="CLERIC" /><!-- Lunatic Modor's Cleric Spaulders -->
+			<item id="112501440" player_classes="RIDER" /><!-- Lunatic Modor's Aethertech Magic Spaulders -->
+			<item id="112601387" player_classes="TEMPLAR" /><!-- Lunatic Modor's Templar Shoulderplates -->
 			<item id="112601420" player_classes="GLADIATOR" /><!-- Lunatic Modor's Gladiator Shoulderplates -->
+		</items>
+		<items>
+			<item id="113101469" player_classes="SORCERER SPIRIT_MASTER" /><!-- Lunatic Modor's Leggings -->
+			<item id="113101470" player_classes="BARD" /><!-- Lunatic Modor's Songweaver Leggings -->
+			<item id="113301472" player_classes="ASSASSIN RANGER" /><!-- Lunatic Modor's Breeches -->
+			<item id="113301473" player_classes="GUNNER" /><!-- Lunatic Modor's Gunslinger Magic Breeches -->
+			<item id="113501437" player_classes="CHANTER" /><!-- Lunatic Modor's Chanter Chausses -->
+			<item id="113501438" player_classes="CLERIC" /><!-- Lunatic Modor's Cleric Chausses -->
+			<item id="113501516" player_classes="RIDER" /><!-- Lunatic Modor's Aethertech Magic Chausses -->
+			<item id="113601389" player_classes="TEMPLAR" /><!-- Lunatic Modor's Templar Greaves -->
 			<item id="113601422" player_classes="GLADIATOR" /><!-- Lunatic Modor's Gladiator Greaves -->
+		</items>
+		<items>
+			<item id="114101506" player_classes="SORCERER SPIRIT_MASTER" /><!-- Lunatic Modor's Shoes -->
+			<item id="114101507" player_classes="BARD" /><!-- Lunatic Modor's Songweaver Shoes -->
+			<item id="114301509" player_classes="ASSASSIN RANGER" /><!-- Lunatic Modor's Boots -->
+			<item id="114301510" player_classes="GUNNER" /><!-- Lunatic Modor's Gunslinger Magic Boots -->
+			<item id="114501446" player_classes="CHANTER" /><!-- Lunatic Modor's Chanter Brogans -->
+			<item id="114501447" player_classes="CLERIC" /><!-- Lunatic Modor's Cleric Brogans -->
+			<item id="114501525" player_classes="RIDER" /><!-- Lunatic Modor's Aethertech Magic Brogans -->
+			<item id="114601393" player_classes="TEMPLAR" /><!-- Lunatic Modor's Templar Sabatons -->
 			<item id="114601427" player_classes="GLADIATOR" /><!-- Lunatic Modor's Gladiator Sabatons -->
+		</items>
+		<items>
+			<item id="125003514" player_classes="SORCERER SPIRIT_MASTER" /><!-- Lunatic Modor's Headband -->
+			<item id="125003515" player_classes="BARD" /><!-- Lunatic Modor's Songweaver Headband -->
+			<item id="125003510" player_classes="ASSASSIN RANGER" /><!-- Lunatic Modor's Hat -->
+			<item id="125003511" player_classes="GUNNER" /><!-- Lunatic Modor's Gunslinger Hat -->
+			<item id="125003506" player_classes="CHANTER" /><!-- Lunatic Modor's Chanter Chain Hood -->
+			<item id="125003507" player_classes="CLERIC" /><!-- Lunatic Modor's Cleric Chain Hood -->
+			<item id="125003791" player_classes="RIDER" /><!-- Lunatic Modor's Aethertech Magic Helm -->
+			<item id="125003503" player_classes="TEMPLAR" /><!-- Lunatic Modor's Templar Helm -->
 			<item id="125003650" player_classes="GLADIATOR" /><!-- Lunatic Modor's Gladiator Helm -->
-			<item id="115001594" player_classes="TEMPLAR GLADIATOR CHANTER" /><!-- Lunatic Modor's Shield -->
-			<item id="115001595" player_classes="CLERIC" /><!-- Lunatic Modor's Scale Shield -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053122"><!-- Illuminary Obelisk Loot [Weapon] -->
 		<items>
-			<item id="100001627" player_classes="ASSASSIN RANGER GLADIATOR TEMPLAR" /><!-- Brazen Aegis Sword -->
-			<item id="100101252" player_classes="CLERIC CHANTER" /><!-- Brazen Aegis Mace -->
-			<item id="100201427" player_classes="ASSASSIN RANGER GLADIATOR" /><!-- Brazen Aegis Dagger -->
-			<item id="100501244" player_classes="SORCERER SPIRIT_MASTER" /><!-- Brazen Aegis Orb -->
-			<item id="100601344" player_classes="SORCERER SPIRIT_MASTER" /><!-- Brazen Aegis Spellbook -->
-			<item id="100901265" player_classes="TEMPLAR GLADIATOR" /><!-- Brazen Aegis Greatsword -->
-			<item id="101301187" player_classes="GLADIATOR" /><!-- Brazen Aegis Polearm -->
-			<item id="101501275" player_classes="CHANTER" /><!-- Brazen Aegis Staff -->
-			<item id="101701290" player_classes="RANGER ASSASSIN GLADIATOR" /><!-- Brazen Aegis Bow -->
-			<item id="101801141" player_classes="GUNNER RIDER" /><!-- Brazen Aegis Pistol -->
-			<item id="101901051" player_classes="GUNNER" /><!-- Brazen Aegis Aethercannon -->
-			<item id="102001167" player_classes="BARD" /><!-- Brazen Aegis Harp -->
-			<item id="102100923" player_classes="RIDER" /><!-- Brazen Aegis Cipher-Blade -->
+			<item player_classes="GLADIATOR" id="100001627" /><!-- Brazen Aegis Sword -->
+			<item player_classes="RANGER" id="100001627" /><!-- Brazen Aegis Sword -->
+			<item player_classes="RIDER" id="101801141" /><!-- Brazen Aegis Pistol -->
+			<item player_classes="TEMPLAR" id="100001627" /><!-- Brazen Aegis Sword -->
+			<item player_classes="CLERIC" id="100101252" /><!-- Brazen Aegis Mace -->
+			<item player_classes="CHANTER" id="100101252" /><!-- Brazen Aegis Mace -->
+			<item player_classes="ASSASSIN" id="100001627" /><!-- Brazen Aegis Sword -->
+			<item player_classes="BARD" id="102001167" /><!-- Brazen Aegis Harp -->
+			<item player_classes="GUNNER" id="101801141" /><!-- Brazen Aegis Pistol -->
+			<item player_classes="SORCERER" id="100501244" /><!-- Brazen Aegis Orb -->
+			<item player_classes="SPIRIT_MASTER" id="100601344" /><!-- Brazen Aegis Spellbook -->
+		</items>
+		<items>
+			<item player_classes="GLADIATOR" id="100201427" /><!-- Brazen Aegis Dagger -->
+			<item player_classes="RANGER" id="100201427" /><!-- Brazen Aegis Dagger -->
+			<item player_classes="RIDER" id="102100923" /><!-- Brazen Aegis Cipher-Blade -->
+			<item player_classes="TEMPLAR" id="100901265" /><!-- Brazen Aegis Greatsword -->
+			<item player_classes="CLERIC" id="115001671" /><!-- Brazen Aegis Shield -->
+			<item player_classes="CHANTER" id="101501275" /><!-- Brazen Aegis Staff -->
+			<item player_classes="ASSASSIN" id="100201427" /><!-- Brazen Aegis Dagger -->
+			<item player_classes="BARD" id="102001167" /><!-- Brazen Aegis Harp -->
+			<item player_classes="GUNNER" id="101901051" /><!-- Brazen Aegis Aethercannon -->
+			<item player_classes="SORCERER" id="100601344" /><!-- Brazen Aegis Spellbook -->
+			<item player_classes="SPIRIT_MASTER" id="100501244" /><!-- Brazen Aegis Orb -->
+		</items>
+		<items>
+			<item player_classes="GLADIATOR" id="100901265" /><!-- Brazen Aegis Greatsword -->
+			<item player_classes="RANGER" id="101701290" /><!-- Brazen Aegis Bow -->
+			<item player_classes="RIDER" id="101801141" /><!-- Brazen Aegis Pistol -->
+			<item player_classes="TEMPLAR" id="115001671" /><!-- Brazen Aegis Shield -->
+			<item player_classes="CLERIC" id="100101252" /><!-- Brazen Aegis Mace -->
+			<item player_classes="CHANTER" id="115001671" /><!-- Brazen Aegis Shield -->
+			<item player_classes="ASSASSIN" id="101701290" /><!-- Brazen Aegis Bow -->
+			<item player_classes="BARD" id="102001167" /><!-- Brazen Aegis Harp -->
+			<item player_classes="GUNNER" id="101801141" /><!-- Brazen Aegis Pistol -->
+			<item player_classes="SORCERER" id="100501244" /><!-- Brazen Aegis Orb -->
+			<item player_classes="SPIRIT_MASTER" id="100601344" /><!-- Brazen Aegis Spellbook -->
+		</items>
+		<items>
+			<item player_classes="GLADIATOR" id="101301187" /><!-- Brazen Aegis Polearm -->
+			<item player_classes="RANGER" id="100001627" /><!-- Brazen Aegis Sword -->
+			<item player_classes="RIDER" id="102100923" /><!-- Brazen Aegis Cipher-Blade -->
+			<item player_classes="TEMPLAR" id="100001627" /><!-- Brazen Aegis Sword -->
+			<item player_classes="CLERIC" id="115001671" /><!-- Brazen Aegis Shield -->
+			<item player_classes="CHANTER" id="100101252" /><!-- Brazen Aegis Mace -->
+			<item player_classes="ASSASSIN" id="100001627" /><!-- Brazen Aegis Sword -->
+			<item player_classes="BARD" id="102001167" /><!-- Brazen Aegis Harp -->
+			<item player_classes="GUNNER" id="101901051" /><!-- Brazen Aegis Aethercannon -->
+			<item player_classes="SORCERER" id="100601344" /><!-- Brazen Aegis Spellbook -->
+			<item player_classes="SPIRIT_MASTER" id="100501244" /><!-- Brazen Aegis Orb -->
+		</items>
+		<items>
+			<item player_classes="GLADIATOR" id="101701290" /><!-- Brazen Aegis Bow -->
+			<item player_classes="RANGER" id="100201427" /><!-- Brazen Aegis Dagger -->
+			<item player_classes="RIDER" id="101801141" /><!-- Brazen Aegis Pistol -->
+			<item player_classes="TEMPLAR" id="100901265" /><!-- Brazen Aegis Greatsword -->
+			<item player_classes="CLERIC" id="100101252" /><!-- Brazen Aegis Mace -->
+			<item player_classes="CHANTER" id="101501275" /><!-- Brazen Aegis Staff -->
+			<item player_classes="ASSASSIN" id="100201427" /><!-- Brazen Aegis Dagger -->
+			<item player_classes="BARD" id="102001167" /><!-- Brazen Aegis Harp -->
+			<item player_classes="GUNNER" id="101801141" /><!-- Brazen Aegis Pistol -->
+			<item player_classes="SORCERER" id="100501244" /><!-- Brazen Aegis Orb -->
+			<item player_classes="SPIRIT_MASTER" id="100601344" /><!-- Brazen Aegis Spellbook -->
+		</items>
+		<items>
+			<item player_classes="GLADIATOR" id="115001671" /><!-- Brazen Aegis Shield -->
+			<item player_classes="RANGER" id="101701290" /><!-- Brazen Aegis Bow -->
+			<item player_classes="RIDER" id="102100923" /><!-- Brazen Aegis Cipher-Blade -->
+			<item player_classes="TEMPLAR" id="115001671" /><!-- Brazen Aegis Shield -->
+			<item player_classes="CLERIC" id="115001671" /><!-- Brazen Aegis Shield -->
+			<item player_classes="CHANTER" id="115001671" /><!-- Brazen Aegis Shield -->
+			<item player_classes="ASSASSIN" id="101701290" /><!-- Brazen Aegis Bow -->
+			<item player_classes="BARD" id="102001167" /><!-- Brazen Aegis Harp -->
+			<item player_classes="GUNNER" id="101901051" /><!-- Brazen Aegis Aethercannon -->
+			<item player_classes="SORCERER" id="100601344" /><!-- Brazen Aegis Spellbook -->
+			<item player_classes="SPIRIT_MASTER" id="100501244" /><!-- Brazen Aegis Orb -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053123"><!-- Illuminary Obelisk Loot [Armor] -->
 		<items>
-			<item id="110101710" player_classes="SORCERER" /><!-- Brazen Aegis Tunic -->
-			<item id="111101540" player_classes="SORCERER" /><!-- Brazen Aegis Gloves -->
-			<item id="112101492" player_classes="SORCERER" /><!-- Brazen Aegis Pauldrons -->
-			<item id="113101554" player_classes="SORCERER" /><!-- Brazen Aegis Leggings -->
-			<item id="114101588" player_classes="SORCERER" /><!-- Brazen Aegis Shoes -->
-			<item id="125003884" player_classes="SORCERER" /><!-- Brazen Aegis Bandana -->
-			<item id="110101710" player_classes="SPIRIT_MASTER" /><!-- Brazen Aegis Tunic -->
-			<item id="111101540" player_classes="SPIRIT_MASTER" /><!-- Brazen Aegis Gloves -->
-			<item id="112101492" player_classes="SPIRIT_MASTER" /><!-- Brazen Aegis Pauldrons -->
-			<item id="113101554" player_classes="SPIRIT_MASTER" /><!-- Brazen Aegis Leggings -->
-			<item id="114101588" player_classes="SPIRIT_MASTER" /><!-- Brazen Aegis Shoes -->
-			<item id="125003884" player_classes="SPIRIT_MASTER" /><!-- Brazen Aegis Bandana -->
+			<item id="110101710" player_classes="SORCERER SPIRIT_MASTER" /><!-- Brazen Aegis Tunic -->
 			<item id="110101712" player_classes="BARD" /><!-- Brazen Bulwark Tunic -->
-			<item id="111101542" player_classes="BARD" /><!-- Brazen Bulwark Gloves -->
-			<item id="112101494" player_classes="BARD" /><!-- Brazen Bulwark Pauldrons -->
-			<item id="113101556" player_classes="BARD" /><!-- Brazen Bulwark Leggings -->
-			<item id="114101590" player_classes="BARD" /><!-- Brazen Bulwark Shoes -->
-			<item id="125003886" player_classes="BARD" /><!-- Brazen Bulwark Bandana -->
-			<item id="110301713" player_classes="ASSASSIN" /><!-- Brazen Aegis Jerkin -->
-			<item id="111301651" player_classes="ASSASSIN" /><!-- Brazen Aegis Vambrace -->
-			<item id="112301590" player_classes="ASSASSIN" /><!-- Brazen Aegis Shoulderguards -->
-			<item id="113301682" player_classes="ASSASSIN" /><!-- Brazen Aegis Breeches -->
-			<item id="114301719" player_classes="ASSASSIN" /><!-- Brazen Aegis Boots -->
-			<item id="125003876" player_classes="ASSASSIN" /><!-- Brazen Aegis Hat -->
-			<item id="110301713" player_classes="RANGER" /><!-- Brazen Aegis Jerkin -->
-			<item id="111301651" player_classes="RANGER" /><!-- Brazen Aegis Vambrace -->
-			<item id="112301590" player_classes="RANGER" /><!-- Brazen Aegis Shoulderguards -->
-			<item id="113301682" player_classes="RANGER" /><!-- Brazen Aegis Breeches -->
-			<item id="114301719" player_classes="RANGER" /><!-- Brazen Aegis Boots -->
-			<item id="125003876" player_classes="RANGER" /><!-- Brazen Aegis Hat -->
+			<item id="110301713" player_classes="ASSASSIN RANGER" /><!-- Brazen Aegis Jerkin -->
 			<item id="110301715" player_classes="GUNNER" /><!-- Brazen Bulwark Jerkin -->
-			<item id="111301653" player_classes="GUNNER" /><!-- Brazen Bulwark Vambrace -->
-			<item id="112301592" player_classes="GUNNER" /><!-- Brazen Bulwark Shoulderguards -->
-			<item id="113301684" player_classes="GUNNER" /><!-- Brazen Bulwark Breeches -->
-			<item id="114301721" player_classes="GUNNER" /><!-- Brazen Bulwark Boots -->
-			<item id="125003878" player_classes="GUNNER" /><!-- Brazen Bulwark Hat -->
-			<item id="110551054" player_classes="CHANTER" /><!-- Brazen Aegis Hauberk -->
-			<item id="111501611" player_classes="CHANTER" /><!-- Brazen Aegis Handguards -->
-			<item id="112501552" player_classes="CHANTER" /><!-- Brazen Aegis Spaulders -->
-			<item id="113501631" player_classes="CHANTER" /><!-- Brazen Aegis Chausses -->
-			<item id="114501640" player_classes="CHANTER" /><!-- Brazen Aegis Brogans -->
-			<item id="125003880" player_classes="CHANTER" /><!-- Brazen Aegis Chainmail -->
-			<item id="110551054" player_classes="CLERIC" /><!-- Brazen Aegis Hauberk -->
-			<item id="111501611" player_classes="CLERIC" /><!-- Brazen Aegis Handguards -->
-			<item id="112501552" player_classes="CLERIC" /><!-- Brazen Aegis Spaulders -->
-			<item id="113501631" player_classes="CLERIC" /><!-- Brazen Aegis Chausses -->
-			<item id="114501640" player_classes="CLERIC" /><!-- Brazen Aegis Brogans -->
-			<item id="125003880" player_classes="CLERIC" /><!-- Brazen Aegis Chainmail -->
+			<item id="110551054" player_classes="CHANTER CLERIC" /><!-- Brazen Aegis Hauberk -->
 			<item id="110551056" player_classes="RIDER" /><!-- Brazen Bulwark Hauberk -->
-			<item id="111501613" player_classes="RIDER" /><!-- Brazen Bulwark Handguards -->
-			<item id="112501554" player_classes="RIDER" /><!-- Brazen Bulwark Spaulders -->
-			<item id="113501633" player_classes="RIDER" /><!-- Brazen Bulwark Chausses -->
-			<item id="114501642" player_classes="RIDER" /><!-- Brazen Bulwark Brogans -->
-			<item id="125003882" player_classes="RIDER" /><!-- Brazen Bulwark Chainmail -->
 			<item id="110601517" player_classes="TEMPLAR" /><!-- Brazen Aegis Breastplate -->
-			<item id="111601480" player_classes="TEMPLAR" /><!-- Brazen Aegis Gauntlets -->
-			<item id="112601461" player_classes="TEMPLAR" /><!-- Brazen Aegis Shoulderplates -->
-			<item id="113601463" player_classes="TEMPLAR" /><!-- Brazen Aegis Greaves -->
-			<item id="114601470" player_classes="TEMPLAR" /><!-- Brazen Aegis Sabatons -->
-			<item id="125003872" player_classes="TEMPLAR" /><!-- Brazen Aegis Helm -->
 			<item id="110601519" player_classes="GLADIATOR" /><!-- Brazen Bulwark Breastplate -->
+		</items>
+		<items>
+			<item id="111101540" player_classes="SORCERER SPIRIT_MASTER" /><!-- Brazen Aegis Gloves -->
+			<item id="111101542" player_classes="BARD" /><!-- Brazen Bulwark Gloves -->
+			<item id="111301651" player_classes="ASSASSIN RANGER" /><!-- Brazen Aegis Vambrace -->
+			<item id="111301653" player_classes="GUNNER" /><!-- Brazen Bulwark Vambrace -->
+			<item id="111501611" player_classes="CHANTER CLERIC" /><!-- Brazen Aegis Handguards -->
+			<item id="111501613" player_classes="RIDER" /><!-- Brazen Bulwark Handguards -->
+			<item id="111601480" player_classes="TEMPLAR" /><!-- Brazen Aegis Gauntlets -->
 			<item id="111601482" player_classes="GLADIATOR" /><!-- Brazen Bulwark Gauntlets -->
+		</items>
+		<items>
+			<item id="112101492" player_classes="SORCERER SPIRIT_MASTER" /><!-- Brazen Aegis Pauldrons -->
+			<item id="112101494" player_classes="BARD" /><!-- Brazen Bulwark Pauldrons -->
+			<item id="112301590" player_classes="ASSASSIN RANGER" /><!-- Brazen Aegis Shoulderguards -->
+			<item id="112301592" player_classes="GUNNER" /><!-- Brazen Bulwark Shoulderguards -->
+			<item id="112501552" player_classes="CHANTER CLERIC" /><!-- Brazen Aegis Spaulders -->
+			<item id="112501554" player_classes="RIDER" /><!-- Brazen Bulwark Spaulders -->
+			<item id="112601461" player_classes="TEMPLAR" /><!-- Brazen Aegis Shoulderplates -->
 			<item id="112601463" player_classes="GLADIATOR" /><!-- Brazen Bulwark Shoulderplates -->
+		</items>
+		<items>
+			<item id="113101554" player_classes="SORCERER SPIRIT_MASTER" /><!-- Brazen Aegis Leggings -->
+			<item id="113101556" player_classes="BARD" /><!-- Brazen Bulwark Leggings -->
+			<item id="113301682" player_classes="ASSASSIN RANGER" /><!-- Brazen Aegis Breeches -->
+			<item id="113301684" player_classes="GUNNER" /><!-- Brazen Bulwark Breeches -->
+			<item id="113501631" player_classes="CHANTER CLERIC" /><!-- Brazen Aegis Chausses -->
+			<item id="113501633" player_classes="RIDER" /><!-- Brazen Bulwark Chausses -->
+			<item id="113601463" player_classes="TEMPLAR" /><!-- Brazen Aegis Greaves -->
 			<item id="113601465" player_classes="GLADIATOR" /><!-- Brazen Bulwark Greaves -->
+		</items>
+		<items>
+			<item id="114101588" player_classes="SORCERER SPIRIT_MASTER" /><!-- Brazen Aegis Shoes -->
+			<item id="114101590" player_classes="BARD" /><!-- Brazen Bulwark Shoes -->
+			<item id="114301719" player_classes="ASSASSIN RANGER" /><!-- Brazen Aegis Boots -->
+			<item id="114301721" player_classes="GUNNER" /><!-- Brazen Bulwark Boots -->
+			<item id="114501640" player_classes="CHANTER CLERIC" /><!-- Brazen Aegis Brogans -->
+			<item id="114501642" player_classes="RIDER" /><!-- Brazen Bulwark Brogans -->
+			<item id="114601470" player_classes="TEMPLAR" /><!-- Brazen Aegis Sabatons -->
 			<item id="114601472" player_classes="GLADIATOR" /><!-- Brazen Bulwark Sabatons -->
+		</items>
+		<items>
+			<item id="125003884" player_classes="SORCERER SPIRIT_MASTER" /><!-- Brazen Aegis Bandana -->
+			<item id="125003886" player_classes="BARD" /><!-- Brazen Bulwark Bandana -->
+			<item id="125003876" player_classes="ASSASSIN RANGER" /><!-- Brazen Aegis Hat -->
+			<item id="125003878" player_classes="GUNNER" /><!-- Brazen Bulwark Hat -->
+			<item id="125003880" player_classes="CHANTER CLERIC" /><!-- Brazen Aegis Chainmail -->
+			<item id="125003882" player_classes="RIDER" /><!-- Brazen Bulwark Chainmail -->
+			<item id="125003872" player_classes="TEMPLAR" /><!-- Brazen Aegis Helm -->
 			<item id="125003874" player_classes="GLADIATOR" /><!-- Brazen Bulwark Helm -->
-			<item id="115001671" player_classes="TEMPLAR GLADIATOR CLERIC CHANTER" /><!-- Brazen Aegis Shield -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053124"><!-- Infinity Shard Equipment Loot -->
