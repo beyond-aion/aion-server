@@ -62,14 +62,8 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 				}
 				// only alliance leader can open this instance
 				if (player.getPlayerAlliance().isSomeCaptain(player)) {
-					if (player.getInventory().decreaseByItemId(185000230, 1)) {
-						PortalService.port(portalPath, player, getOwner());
-						return true;
-					} else {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-						return true;
-					}
+					PortalService.port(portalPath, player, getOwner());
+					return true;
 				} else {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_NOT_LEADER());
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
