@@ -16,6 +16,7 @@ import com.aionemu.gameserver.controllers.attack.KillCounter;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.dao.HeadhuntingDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.event.Headhunter;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
@@ -67,6 +68,8 @@ public class PvpService {
 	private void sendBountyReward(Player player, BountyType type, int killScore) {
 		for (KillBountyTemplate template : killBounties) {
 			if (template.getBountyType() != type || template.getKillCount() != killScore)
+				continue;
+			if (template.getRaceCondition() != Race.PC_ALL && template.getRaceCondition() != player.getRace())
 				continue;
 			List<BountyTemplate> bounties = new ArrayList<>();
 			if (template.isRandomReward())
@@ -121,13 +124,15 @@ public class PvpService {
 						}
 					}
 				}
+				if (EventsConfig.ENABLE_HEADHUNTING && EventsConfig.HEADHUNTING_MAPS.contains(victim.getWorldId())) {
+						int kills = getHeadhunterById(killer.getObjectId()).incrementAndGetKills();
+						sendBountyReward(killer, BountyType.SEASONAL_KILLS, kills);
+				}
 			}
 			updateKillQuests(killers, victim);
 			if (killers.contains(winner)) { // rewards for winner only (group members are ignored)
 				ConquerorAndProtectorService.getInstance().onKill(winner, victim);
 				EventService.getInstance().onPvpKill(winner, victim);
-				if (EventsConfig.ENABLE_HEADHUNTING && EventsConfig.HEADHUNTING_MAPS.contains(victim.getWorldId()))
-					sendBountyReward(winner, BountyType.SEASONAL_KILLS, getHeadhunterById(winner.getObjectId()).incrementAndGetKills());
 			}
 		}
 
