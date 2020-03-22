@@ -116,7 +116,7 @@ public class ShieldService {
 				shield.setSiegeLocationId(location.getLocationId());
 			}
 		}
-		if (shields.size() == 0) {
+		if (shields.isEmpty()) {
 			log.warn("Could not find a shield for locId: " + location.getLocationId());
 		} else {
 			location.setShields(shields);
