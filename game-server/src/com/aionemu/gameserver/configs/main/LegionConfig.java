@@ -266,4 +266,11 @@ public class LegionConfig {
 
 	@Property(key = "gameserver.legion.task.requirement.enable", defaultValue = "true")
 	public static boolean ENABLE_GUILD_TASK_REQ;
+
+	/**
+	 * Enable/Disable legion dominion key requirement
+	 */
+	@Property(key = "gameserver.legion.require_key_for_stonespear_reach", defaultValue = "true")
+	public static boolean REQUIRE_KEY_FOR_STONESPEAR_REACH;
+
 }

@@ -6,6 +6,7 @@ import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.configs.main.LegionConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -62,8 +63,14 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 				}
 				// only alliance leader can open this instance
 				if (player.getPlayerAlliance().isSomeCaptain(player)) {
-					PortalService.port(portalPath, player, getOwner());
-					return true;
+					if (!LegionConfig.REQUIRE_KEY_FOR_STONESPEAR_REACH || player.getInventory().decreaseByItemId(185000230, 1)) {
+						PortalService.port(portalPath, player, getOwner());
+						return true;
+					} else {
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
+						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
+						return true;
+					}
 				} else {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_NOT_LEADER());
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0, questId));
