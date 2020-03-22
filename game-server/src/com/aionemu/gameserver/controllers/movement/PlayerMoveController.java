@@ -45,6 +45,10 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 		return lastPositionFromClient;
 	}
 
+	public void resetLastPositionFromClient() {
+		lastPositionFromClient = null;
+	}
+
 	/**
 	 * This method should only be called from player move packets, not any calculated intermediate position updates by the server
 	 */

@@ -1724,6 +1724,7 @@ public class Player extends Creature {
 
 	@Override
 	public void setPosition(WorldPosition position) {
+		getMoveController().resetLastPositionFromClient(); // if we don't reset it, material collision handlers (such as shields) affect you on teleport
 		getCommonData().setPosition(position);
 	}
 
