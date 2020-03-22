@@ -3,6 +3,8 @@ package com.aionemu.gameserver.services;
 import java.util.ArrayList;
 import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,9 +36,9 @@ public class ShieldService {
 	}
 
 	private final LinkedHashMap<Integer, Shield> sphereShields = new LinkedHashMap<>();
-	private final LinkedHashMap<Integer, List<SiegeShield>> registeredShields = new LinkedHashMap<>();
+	private final Map<Integer, List<SiegeShield>> registeredShields = new ConcurrentHashMap<>();
 
-	public static final ShieldService getInstance() {
+	public static ShieldService getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -60,7 +62,7 @@ public class ShieldService {
 		// TODO: check this list of not bound meshes (would remain inactive)
 		for (List<SiegeShield> otherShields : registeredShields.values()) {
 			for (SiegeShield shield : otherShields)
-				log.debug("Not bound shield " + shield.getGeometry().getName());
+				log.warn("Not bound shield " + shield.getGeometry().getName());
 		}
 	}
 
@@ -81,12 +83,7 @@ public class ShieldService {
 	 *          - shield to be registered
 	 */
 	public void registerShield(int worldId, SiegeShield shield) {
-		List<SiegeShield> mapShields = registeredShields.get(worldId);
-		if (mapShields == null) {
-			mapShields = new ArrayList<>();
-			registeredShields.put(worldId, mapShields);
-		}
-		mapShields.add(shield);
+		registeredShields.computeIfAbsent(worldId, k -> new ArrayList<>()).add(shield);
 	}
 
 	/**
