@@ -62,7 +62,7 @@ public class LegionDominionPortalAI extends PortalDialogAI {
 					return true;
 				}
 				// only alliance leader can open this instance
-				if (player.getPlayerAlliance().isSomeCaptain(player)) {
+				if (player.getPlayerAlliance().isSomeCaptain(player) && player.getLegion() != null && player.getLegion().getCurrentLegionDominion() > 0) {
 					if (!LegionConfig.REQUIRE_KEY_FOR_STONESPEAR_REACH || player.getInventory().decreaseByItemId(185000230, 1)) {
 						PortalService.port(portalPath, player, getOwner());
 						return true;
