@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.shield.Shield;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeShield;
+import com.aionemu.gameserver.model.siege.SiegeType;
 import com.aionemu.gameserver.model.templates.shield.ShieldTemplate;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
@@ -59,7 +60,6 @@ public class ShieldService {
 			shield.spawn();
 			log.debug("Added " + shield.getName() + " at m=" + shield.getWorldId() + ",x=" + shield.getX() + ",y=" + shield.getY() + ",z=" + shield.getZ());
 		}
-		// TODO: check this list of not bound meshes (would remain inactive)
 		for (List<SiegeShield> otherShields : registeredShields.values()) {
 			for (SiegeShield shield : otherShields)
 				log.warn("Not bound shield " + shield.getGeometry().getName());
@@ -114,7 +114,8 @@ public class ShieldService {
 			}
 		}
 		if (shields.isEmpty()) {
-			log.warn("Could not find a shield for locId: " + location.getLocationId());
+			if (location.getType() != SiegeType.OUTPOST && location.getLocationId() != 1241) // outposts and miren don't have any shields
+				log.warn("Could not find a shield for locId: " + location.getLocationId());
 		} else {
 			location.setShields(shields);
 		}

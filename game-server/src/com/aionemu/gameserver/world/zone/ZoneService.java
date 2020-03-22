@@ -8,7 +8,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import com.aionemu.gameserver.model.siege.SiegeType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -155,7 +154,7 @@ public final class ZoneService implements GameEngine {
 					SiegeLocation siege = DataManager.SIEGE_LOCATION_DATA.getSiegeLocations().get(area.getZoneTemplate().getSiegeId().get(0));
 					if (siege != null) {
 						siege.addZone((SiegeZoneInstance) instance);
-						if (GeoDataConfig.GEO_SHIELDS_ENABLE && siege.getType() != SiegeType.OUTPOST)
+						if (GeoDataConfig.GEO_SHIELDS_ENABLE)
 							ShieldService.getInstance().attachShield(siege);
 					}
 					break;
