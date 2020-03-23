@@ -288,6 +288,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 			case 3:
 				spawn(701663, 185.4841f, 630.1168f, 365.0105f, (byte) 108);
 				spawn(701662, 201.0349f, 612.7051f, 364.6045f, (byte) 25);
+				break;
 			case 4:
 				spawn(701663, 192.4604f, 673.4794f, 365.0105f, (byte) 13);
 				spawn(701662, 213.7684f, 696.3926f, 365.0105f, (byte) 25);
