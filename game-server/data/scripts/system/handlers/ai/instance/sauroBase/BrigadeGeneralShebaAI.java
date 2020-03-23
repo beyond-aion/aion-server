@@ -20,7 +20,7 @@ public class BrigadeGeneralShebaAI extends AggressiveNpcAI {
 		super(owner);
 	}
 
-	private float multiplier;
+	private float multiplier = 1f;
 	private boolean spawnCenter = true;
 
 	@Override
