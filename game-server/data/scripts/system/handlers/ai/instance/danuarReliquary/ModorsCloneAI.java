@@ -20,7 +20,7 @@ import ai.AggressiveNpcAI;
 @AIName("modors_clone")
 public class ModorsCloneAI extends AggressiveNpcAI {
 
-	private float modifier = 1.2f;
+	private float modifier = 1.35f;
 
 	public ModorsCloneAI(Npc owner) {
 		super(owner);
@@ -81,7 +81,7 @@ public class ModorsCloneAI extends AggressiveNpcAI {
 
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
-		modifier = 1.2f;
+		modifier = 1.35f;
 	}
 
 	private void cancelVengefulOrb() {
