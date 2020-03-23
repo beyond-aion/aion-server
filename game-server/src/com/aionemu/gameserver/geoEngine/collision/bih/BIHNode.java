@@ -322,6 +322,13 @@ public final class BIHNode {
 					// fix invisible walls
 					if (worldSpaceDist > r.limit)
 						continue;
+					if (results.shouldInvalidateSlopingSurface()) {
+						// taken from https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/geometry-of-a-triangle
+						Vector3f planeNormal = v2.subtractLocal(v1).crossLocal(v3.subtractLocal(v1)).normalizeLocal();
+						double elevationAngleRad = planeNormal.angleBetween(Vector3f.UNIT_Z);
+						if (elevationAngleRad > results.getSlopingSurfaceAngleRad())
+							contactPoint.setZ(Float.NaN);
+					}
 					results.addCollision(new CollisionResult(contactPoint, worldSpaceDist));
 					cols++;
 					if (results.isOnlyFirst())

@@ -37,6 +37,7 @@ import java.util.Iterator;
 
 public class CollisionResults implements Iterable<CollisionResult> {
 
+	private static final double SLOPING_SURFACE_ANGLE_RAD = Math.toRadians(45); // players can't walk or stand on surfaces with >= 45° elevation angle
 	private final ArrayList<CollisionResult> results = new ArrayList<>();
 	private boolean sorted = true;
 	private final byte intentions;
@@ -44,14 +45,19 @@ public class CollisionResults implements Iterable<CollisionResult> {
 	private final boolean onlyFirst;
 	private final IgnoreProperties ignoreProperties;
 	private boolean canSeeCheck;
+	private boolean invalidateSlopingSurface;
 
-	public CollisionResults(byte intentions, int instanceId, IgnoreProperties ignoreProperties) { this(intentions, instanceId, false, ignoreProperties); }
+	public CollisionResults(byte intentions, int instanceId, IgnoreProperties ignoreProperties) {
+		this(intentions, instanceId, false, ignoreProperties);
+	}
 
 	public CollisionResults(byte intentions, int instanceId) {
 		this(intentions, instanceId, false, null);
 	}
 
-	public CollisionResults(byte intentions, int instanceId, boolean searchFirst) { this(intentions, instanceId, searchFirst, null); }
+	public CollisionResults(byte intentions, int instanceId, boolean searchFirst) {
+		this(intentions, instanceId, searchFirst, null);
+	}
 
 	public CollisionResults(byte intentions, int instanceId, boolean searchFirst, IgnoreProperties ignoreProperties) {
 		this.intentions = intentions;
@@ -172,5 +178,17 @@ public class CollisionResults implements Iterable<CollisionResult> {
 
 	public void setCanSeeCheck(boolean canSeeCheck) {
 		this.canSeeCheck = canSeeCheck;
+	}
+
+	public boolean shouldInvalidateSlopingSurface() {
+		return invalidateSlopingSurface;
+	}
+
+	public double getSlopingSurfaceAngleRad() {
+		return SLOPING_SURFACE_ANGLE_RAD;
+	}
+
+	public void setInvalidateSlopingSurface(boolean invalidateSlopingSurface) {
+		this.invalidateSlopingSurface = invalidateSlopingSurface;
 	}
 }

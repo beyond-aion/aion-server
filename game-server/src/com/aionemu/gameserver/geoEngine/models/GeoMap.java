@@ -32,6 +32,7 @@ public class GeoMap extends Node {
 	public static final float MIN_Z = 0;
 	public static final float COLLISION_CHECK_Z_OFFSET = 1;
 	private static final float COLLISION_BOUND_OFFSET = 0.5f;
+	private static final float TERRAIN_POINTS_DISTANCE = 2f;
 
 	private short[] terrainData;
 	private byte[] terrainMaterials;
@@ -42,7 +43,7 @@ public class GeoMap extends Node {
 	private Map<Integer, List<DespawnableNode>> despawnableTownObjects = new HashMap<>();
 	private Map<Integer, DespawnableNode> despawnableHouseDoors = new HashMap<>();
 	private Map<Integer, DespawnableNode[]> despawnableDoors = new HashMap<>();
-	private String mapId = "";
+	private String mapId;
 
 	public GeoMap(String name, int worldSize) {
 		mapId = name;
@@ -111,7 +112,16 @@ public class GeoMap extends Node {
 	 * @return The surface Z coordinate nearest to the given zMax value at the given position or {@link Float#NaN} if not found / less than zMin.
 	 */
 	public float getZ(float x, float y, float zMax, float zMin, int instanceId) {
+		return getZ(x, y, zMax, zMin, instanceId, false);
+	}
+
+	/**
+	 * @return The surface Z coordinate nearest to the given zMax value at the given position or {@link Float#NaN} if not found / less than zMin.
+	 * Also returns {@link Float#NaN} if ignoreSlopingSurface is true and the surface angle is >45° (too steep to safely stand on).
+	 */
+	public float getZ(float x, float y, float zMax, float zMin, int instanceId, boolean ignoreSlopingSurface) {
 		CollisionResults results = new CollisionResults(CollisionIntention.PHYSICAL.getId(), instanceId);
+		results.setInvalidateSlopingSurface(ignoreSlopingSurface);
 		Vector3f origin = new Vector3f(x, y, zMax);
 		Vector3f target = new Vector3f(x, y, zMin);
 		target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
@@ -123,9 +133,12 @@ public class GeoMap extends Node {
 			if (terrainData[0] != 0)
 				terrain = new Vector3f(x, y, terrainData[0] / 32f);
 		} else {
-			Vector3f result = new Vector3f();
-			if (terrainCollision(x, y, r, new Vector3f(), new Vector3f(), new Vector3f(), new Vector3f(), result))
+			Vector3f p1 = new Vector3f(), p2 = new Vector3f(), p3 = new Vector3f(), p4 = new Vector3f(), result = new Vector3f();
+			if (terrainCollision(x, y, r, p1, p2, p3, p4, result)) {
 				terrain = result;
+				if (ignoreSlopingSurface && getMaximumHeightDiff(p1, p2, p3, p4) > TERRAIN_POINTS_DISTANCE) // height diff >2m means >45° elevation
+					terrain.setZ(Float.NaN);
+			}
 		}
 		if (terrain != null && terrain.z >= zMin && terrain.z <= zMax) {
 			CollisionResult result = new CollisionResult(terrain, zMax - terrain.z);
@@ -135,6 +148,17 @@ public class GeoMap extends Node {
 			return Float.NaN;
 		}
 		return results.getClosestCollision().getContactPoint().z;
+	}
+
+	private float getMaximumHeightDiff(Vector3f vector1, Vector3f... vectors) {
+		float maxZ = vector1.getZ(), minZ = vector1.getZ();
+		for (Vector3f vector3f : vectors) {
+			if (Float.isNaN(maxZ) || vector3f.getZ() > maxZ)
+				maxZ = vector3f.getZ();
+			if (Float.isNaN(minZ) || vector3f.getZ() < minZ)
+				minZ = vector3f.getZ();
+		}
+		return maxZ - minZ;
 	}
 
 	public Vector3f getClosestCollision(float x, float y, float z, float targetX, float targetY, float targetZ, boolean atNearGroundZ, int instanceId,
@@ -193,8 +217,8 @@ public class GeoMap extends Node {
 				applyCollisionCheckOffsets(targetPoint, origin, instanceId, true);
 				if (!Float.isNaN(targetPoint.getZ()))
 					return targetPoint;
-			} else { // no obstacle 1m in target direction, now check if there ground to stand on
-				float geoZ = getZ(nextX, nextY, origin.getZ(), origin.getZ() - COLLISION_CHECK_Z_OFFSET * 3, instanceId);
+			} else { // no obstacle 1m in target direction, now check if there's ground to stand on
+				float geoZ = getZ(nextX, nextY, origin.getZ(), origin.getZ() - COLLISION_CHECK_Z_OFFSET * 2.5f, instanceId, true);
 				if (!Float.isNaN(geoZ)) // there is ground, so we set our origin to the 1m offset position and start over
 					return findMovementCollision(origin.set(nextX, nextY, geoZ), targetX, targetY, instanceId);
 			}
@@ -248,8 +272,8 @@ public class GeoMap extends Node {
 		// z1┌───┐z2 │ top view where z1 and z2 face north. each corner represents a terrainData z coordinate around given x/y.
 		//   │ ∕ │   │ the resolution of terrainData is 2x2m. this rectangle effectively consists of two adjacent triangles in 3d space,
 		// z3└───┘z4 │ the point where our ray collides with one of those triangles is the exact terrain coordinate (meaning the map ground)
-		int z1x = (int) (x / 2f);
-		int z1y = (int) (y / 2f);
+		int z1x = (int) (x / TERRAIN_POINTS_DISTANCE);
+		int z1y = (int) (y / TERRAIN_POINTS_DISTANCE);
 		float z1, z2, z3, z4;
 		if (terrainData.length == 1) {
 			z1 = z2 = z3 = z4 = terrainData[0] == Short.MIN_VALUE ? Float.NaN : (terrainData[0] / 32f);
@@ -446,8 +470,8 @@ public class GeoMap extends Node {
 	 * @return The terrain materialId at position x, y if no obstacle is in between, otherwise 0
 	 */
 	public int getTerrainMaterialAt(float x, float y, float z, int instanceId) {
-		int mat1x = (int) (x / 2f);
-		int mat1y = (int) (y / 2f);
+		int mat1x = (int) (x / TERRAIN_POINTS_DISTANCE);
+		int mat1y = (int) (y / TERRAIN_POINTS_DISTANCE);
 		if (isOutsideValidBounds(mat1x, mat1y))
 			return 0;
 		int width = (int) Math.sqrt(terrainMaterials.length);
