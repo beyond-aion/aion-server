@@ -2,6 +2,9 @@ package com.aionemu.gameserver.world.geo;
 
 import java.util.List;
 
+import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.utils.PositionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -86,6 +89,20 @@ public class GeoService {
 
 		float objectSeeCheckZ = object.getZ() + getSeeCheckOffset(object);
 		float targetSeeCheckZ = target.getZ() + getSeeCheckOffset(target);
+		float x = object.getX();
+		float y = object.getY();
+		float targetX = target.getX();
+		float targetY = target.getY();
+		if (object instanceof Npc && ((Npc) object).getAi().ask(AIQuestion.SHOULD_CAN_SEE_ADD_BOUNDS_ON_ATTACK)) {
+			double rad = Math.toRadians(PositionUtil.calculateAngleFrom(object, target));
+			x += (float) (Math.cos(rad) * object.getObjectTemplate().getBoundRadius().getFront());
+			y += (float) (Math.sin(rad) * object.getObjectTemplate().getBoundRadius().getFront());
+		}
+		if (target instanceof Npc && ((Npc) target).getAi().ask(AIQuestion.SHOULD_CAN_SEE_ADD_BOUNDS_ON_ATTACKED)) {
+			double rad = Math.toRadians(PositionUtil.calculateAngleFrom(target, object));
+			targetX += (float) (Math.cos(rad) * target.getObjectTemplate().getBoundRadius().getFront());
+			targetY += (float) (Math.sin(rad) * target.getObjectTemplate().getBoundRadius().getFront());
+		}
 		Race race = null;
 		int staticId = -1;
 		if (target.getSpawn() != null) {
@@ -95,7 +112,7 @@ public class GeoService {
 			race = ((Creature) object).getRace();
 		}
 		IgnoreProperties ignoreProperties = IgnoreProperties.of(race, staticId);
-		return geoData.getMap(object.getWorldId()).canSee(object.getX(), object.getY(), objectSeeCheckZ, target.getX(), target.getY(), targetSeeCheckZ,
+		return geoData.getMap(object.getWorldId()).canSee(x, y, objectSeeCheckZ, targetX, targetY, targetSeeCheckZ,
 			object.getInstanceId(), ignoreProperties);
 	}
 

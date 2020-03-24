@@ -80,17 +80,17 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 			case 20911:
 				spawn(730695, 482.21f, 458.06f, 427.42f, (byte) 98);
 				spawn(730696, 482.21f, 571.16f, 427.42f, (byte) 22);
-				rndSpawn(283132);
+				rndSpawn(283133);
 				break;
 			case 20913:
 				Player target = getRandomTarget();
 				if (target != null)
-					spawn(283130, target.getX(), target.getY(), target.getZ(), (byte) 0);
+					spawn(283131, target.getX(), target.getY(), target.getZ(), (byte) 0);
 		}
 	}
 
 	protected void blazeEngraving() {
-		if (Rnd.chance() < 2 && getPosition().getWorldMapInstance().getNpc(283130) == null)
+		if (Rnd.chance() < 2 && getPosition().getWorldMapInstance().getNpc(283131) == null)
 			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20913, 60, 100)));
 	}
 

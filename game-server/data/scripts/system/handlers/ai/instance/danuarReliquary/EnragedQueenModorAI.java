@@ -93,7 +93,7 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 					case 70:
 						queueSkill(21165, 2); // rend space
 						queueSkill(21176, 1); // electric vengeance
-						queueSkill(21229, 1, 6000); // electric wrath
+						queueSkill(21229, 1, 4000); // electric wrath
 						queueSkill(21742, 1, 4000); // subzero malice
 						queueSkill(21743, 1, 4000); // rushing subzero malice
 						break;
@@ -101,8 +101,8 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 						queueSkill(21165, 4); // rend space
 						queueSkill(21268, 1); // demented scream
 						queueSkill(21269, 1, 4000); // spiteful roar
-						queueSkill(21742, 1, 5000); // subzero malice
-						queueSkill(21743, 1, 5000); // rushing subzero malice
+						queueSkill(21742, 1, 4000); // subzero malice
+						queueSkill(21743, 1, 4000); // rushing subzero malice
 						queueSkill(21165, 5, 4000); // rend space
 						queueSkill(21170, 1, 2500); // Grendal's Rage
 						break;
@@ -194,8 +194,8 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 						break;
 					case 2:
 						if (getLifeStats().getHpPercentage() >= 55) {
-							queueSkill(21165, 3, 6000); // rend space
-							queueSkill(21170, 1, 4000); // Grendal's Rage
+							queueSkill(21165, 3, 4000); // rend space
+							queueSkill(21170, 1, 3000); // Grendal's Rage
 						}
 						break;
 				}
@@ -281,12 +281,12 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 			case 1:
 			case 2:
 			case 3:
-				return Rnd.get(4, 8) * 1000;
+				return Rnd.get(2, 6) * 1000;
 			case 4:
 			case 5:
 			case 6:
 			case 7:
-				return Rnd.get(2, 6) * 1000;
+				return Rnd.get(2, 4) * 1000;
 			default:
 				return Rnd.get(0, 4) * 1000;
 		}

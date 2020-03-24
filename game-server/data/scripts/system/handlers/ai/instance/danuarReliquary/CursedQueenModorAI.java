@@ -81,8 +81,8 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 						queueSkill(21229, 1);  // Dragon Lords Lightning Shock
 						break;
 					case 77:
-						queueSkill(21165, 2, Rnd.get(4000, 8000));
-						queueSkill(21179, 1, Rnd.get(3000, 5000)); // ice storm when going up 1st time
+						queueSkill(21165, 2, 4000);
+						queueSkill(21179, 1, 4000); // ice storm when going up 1st time
 						break;
 					case 61:
 						queueSkill(21165, 3);
@@ -160,9 +160,9 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 				if (skillLevel == 1 && (curStage == 1 || curStage == 5)) {
 					float rnd = Rnd.chance();
 					if (rnd < 15) {
-						queueSkill(21175, 2, Rnd.get(5000, 9000)); // lv 2 prevent skill loop
+						queueSkill(21175, 2, 5000); // lv 2 prevent skill loop
 					} else if (rnd < 45) {
-						queueSkill(21173, 1, Rnd.get(5000, 9000)); // summon frost storm
+						queueSkill(21173, 1, 5000); // summon frost storm
 					}
 				}
 				break;
@@ -171,7 +171,7 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 				switch (curStage) {
 					case 2: // going up 1st time, switch platforms
 						if (shouldUsePlatformSkills(skillLevel)) {
-							queueSkill(21165, 10, Rnd.get(3000, 6000));
+							queueSkill(21165, 10, 5000);
 						}
 						break;
 					case 4: // = hp <= 50%
@@ -183,9 +183,9 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 						if (skillLevel == 1) {
 							float rnd = Rnd.chance();
 							if (rnd < 15) {
-								queueSkill(21174, 2, Rnd.get(5000, 9000)); // lv 2 to prevent skill loop
+								queueSkill(21174, 2, 5000); // lv 2 to prevent skill loop
 							} else if (rnd < 45) {
-								queueSkill(21229, 1, Rnd.get(5000, 9000)); //  Dragon Lords Lightning Shock
+								queueSkill(21229, 1, 5000); //  Dragon Lords Lightning Shock
 							}
 						}
 						break;
@@ -195,8 +195,8 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 				Vector3f pos = getRandomPosFromCenter(Rnd.get(9));
 				spawn(284528, pos.getX(), pos.getY(), pos.getZ(), (byte) 10);
 				if (curStage == 2 && shouldUsePlatformSkills(skillLevel)) {
-					queueSkill(21174, 1, Rnd.get(3000, 6000)); // frozen domain of rancour
-					queueSkill(21175, 1, Rnd.get(3000, 6000)); // frozen domain of revenge
+					queueSkill(21174, 1, 5000); // frozen domain of rancour
+					queueSkill(21175, 1, 5000); // frozen domain of revenge
 				}
 				break;
 			default:
