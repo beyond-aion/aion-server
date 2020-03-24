@@ -25761,7 +25761,16 @@
 	<decomposable item_id="188052911" /><!-- Test Item -->
 	<decomposable item_id="188052912" /><!-- Test Item -->
 	<decomposable item_id="188052913" /><!-- Test Item -->
-	<decomposable item_id="188052914" /><!-- [Event] Dandy Form Candy Box -->
+	<decomposable item_id="188052914" selectable="true"><!-- [Event] Dandy Form Candy Box -->
+		<items>
+			<item id="160010298" race="ELYOS" /><!-- [Event] Clever Dandi Form Candy -->
+			<item id="160010300" race="ASMODIANS" /><!-- [Event] Clever Dandi Form Candy -->
+			<item id="160010301" race="ELYOS" /><!-- [Event] Swift Dandi Form Candy -->
+			<item id="160010302" race="ASMODIANS" /><!-- [Event] Swift Dandi Form Candy -->
+			<item id="160010297" race="ELYOS" /><!-- [Event] Stalwart Dandi Form Candy -->
+			<item id="160010299" race="ASMODIANS" /><!-- [Event] Stalwart Dandi Form Candy -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052915" /><!-- [Event] Stormwing Weapon Chest -->
 	<decomposable item_id="188052916" /><!-- [Event] Triniel's Shadow Wraith Weapon Chest -->
 	<decomposable item_id="188052917" /><!-- [Event] Triniel's Shadow Wraith Attire Chest -->
@@ -28653,65 +28662,77 @@
 	</decomposable>
 	<decomposable item_id="188053184" /><!-- [Event] Golden Rice Cake Soup Ingredients Bundle -->
 	<decomposable item_id="188053185"><!-- [Event] Wishing Soup -->
-		<items chance="20.0">
-			<item id="188052632" /><!-- [Event] Superior Manastone Bundle -->
+		<items chance="13.75">
+			<item id="162000124" min_count="10" /><!-- Superior Recovery Serum -->
 		</items>
-		<items chance="15.0">
-			<item id="188052590" /><!-- Cuperine Ceramium Piece Case -->
+		<items chance="9.5">
+			<item id="186000237" min_count="10" /><!-- Ancient Coin -->
 		</items>
-		<items chance="10.0">
-			<item id="188052323" /><!-- [Event] Lesser Composite Manastone Bundle -->
+		<items chance="13.75">
+			<item id="186000238" min_count="15" /><!-- Conqueror's Mark -->
 		</items>
-		<items chance="8.0">
-			<item id="188052135" /><!-- [Event] Victory Banquet Food Box -->
+		<items chance="12.5">
+			<item id="188053453" min_count="3" /><!-- [Event] Scroll Bundle -->
 		</items>
-		<items chance="5.0">
-			<item id="161001001" min_count="5" /><!-- Revival Stone -->
+		<items chance="5.25">
+			<item id="162000141" min_count="5" /><!-- Sublime Wind Serum -->
 		</items>
-		<items chance="5.0">
-			<item id="186000051" /><!-- Major Ancient Crown -->
+		<items chance="13.75">
+			<item id="162000107" min_count="3" /><!-- Saam King's Herbs -->
 		</items>
-		<items chance="5.0">
-			<item id="188052324" /><!-- [Event] Greater Composite Manastone Bundle -->
-		</items>
-		<items chance="5.0">
-			<item id="186000242" /><!-- Ceramium Medal -->
-		</items>
-		<items chance="5.0">
-			<item id="188052654" /><!-- Noble Ancient Manastone Bundle -->
-		</items>
-		<items chance="5.0">
-			<item id="166030005" /><!-- Tempering Solution -->
-		</items>
-		<items chance="5.0">
-			<item id="110900739" /><!-- [Event] Graceful Hanbok -->
-		</items>
-		<items chance="4.0">
-			<item id="166200010" /><!-- Mythic Armor Tuning Scroll -->
-		</items>
-		<items chance="3.0">
-			<item id="166200009" /><!-- Mythic Weapon Tuning Scroll -->
+		<items chance="1.25">
+			<item id="169620067" /><!-- AP Boost Charm II - 50% -->
 		</items>
 		<items chance="2.5">
-			<item id="190100130" /><!-- Lustrous Skymane (30 days) -->
+			<item id="188053624" min_count="5" /><!-- Return Scroll Bundle -->
 		</items>
-		<items chance="1.0">
-			<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+		<items chance="0.8">
+			<item id="164002238" /><!-- Instant Return Scroll -->
 		</items>
-		<items chance="0.5">
-			<item id="188052639" /><!-- [Event] Heroic Godstone Bundle -->
+		<items chance="2.5">
+			<item id="186000051" min_count="3" /><!-- Major Ancient Crown -->
 		</items>
-		<items chance="0.4">
-			<item id="188052703" /><!-- [Event] Fabled Godstone Bundle -->
+		<items chance="2.5">
+			<item id="188052914" min_count="3" /><!-- [Event] Dandy Form Candy Box -->
 		</items>
-		<items chance="0.3">
-			<item id="188053219" /><!-- [Event] Sauro Commander's Accessory Box -->
+		<items chance="3.25">
+			<item id="166030005" min_count="2" /><!-- Tempering Solution -->
 		</items>
-		<items chance="0.2">
-			<item id="188053207" /><!-- [Event] Ancient Spirit's Eternal Armor Chest -->
+		<items chance="0.75">
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
+		</items>
+		<items chance="0.125">
+			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
+		</items>
+		<items chance="6.5">
+			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
+		</items>
+		<items chance="6.5">
+			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items chance="2.5">
+			<item id="188053610" min_count="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 		</items>
 		<items chance="0.1">
-			<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
+			<item id="188052075" /><!-- [Event] Tahabata Weapon Box -->
+		</items>
+		<items chance="1">
+			<item id="166200010" /><!-- Mythic Armor Tuning Scroll -->
+		</items>
+		<items chance="1">
+			<item id="166200009" /><!-- Mythic Weapon Tuning Scroll -->
+		</items>
+		<items chance="0.1">
+			<item id="190100139" /><!-- Sleek Hovercycle -->
+		</items>
+		<items chance="0.05">
+			<item id="187060177" /><!-- Aether Glider -->
+		</items>
+		<items chance="0.025">
+			<item id="165020015" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+		</items>
+		<items chance="0.05">
+			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053186" /><!-- [Event] Exalted Accessory Bundle -->
@@ -30542,7 +30563,28 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053452" /><!-- Autumn Guy's Lucky Box -->
-	<decomposable item_id="188053453" /><!-- [Event] Scroll Bundle -->
+	<decomposable item_id="188053453"><!-- [Event] Scroll Bundle -->
+		<items>
+			<item id="160001308" min_count="3" race="ELYOS" /><!-- Beshu Cocktail -->
+			<item id="160002306" min_count="3" race="ASMODIANS" /><!-- Drupa Cocktail -->
+		</items>
+		<items>
+			<item id="164000118" min_count="3" player_classes="GLADIATOR TEMPLAR ASSASSIN RANGER CHANTER" /><!-- Major Crit Strike Scroll -->
+			<item id="164000122" min_count="3" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Major Crit Spell Scroll -->
+		</items>
+		<items>
+			<item id="164000126" min_count="3" /><!-- Major Strike Resist Scroll -->
+		</items>
+		<items>
+			<item id="164000130" min_count="3" /><!-- Major Spell Resist Scroll -->
+		</items>
+		<items>
+			<item id="164000260" min_count="3" /><!-- Premium Magic Suppression Scroll -->
+		</items>
+		<items>
+			<item id="164000259" min_count="3" /><!-- Premium Anti-Shock Scroll -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053454" /><!-- [Event] Quality Recovery Bundle -->
 	<decomposable item_id="188053455" /><!-- [Event] High Grade Recovery Bundle -->
 	<decomposable item_id="188053457" /><!-- [Event] Panda Transformation Candy Box -->

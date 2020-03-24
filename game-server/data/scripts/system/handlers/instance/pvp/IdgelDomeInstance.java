@@ -2,6 +2,7 @@ package instance.pvp;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -33,6 +34,7 @@ import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -81,6 +83,8 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		Race winningrace = idi.getWinningRace();
 		int winnerBonusAp = Rnd.get(10000, 14000);
 		int loserBonusAp = Rnd.get(3000, 6000);
+		boolean isEventActive = ServerTime.now().isAfter(ServerTime.of(LocalDateTime.of(2020, 3, 27, 0, 0)))
+			&& ServerTime.now().isBefore(ServerTime.of(LocalDateTime.of(2020, 4, 5, 23, 59))); // TODO: Remove me
 		instance.forEachPlayer(p -> {
 			IdgelDomePlayerInfo reward = idi.getPlayerReward(p.getObjectId());
 			if (reward.getRace() == winningrace) {
@@ -96,12 +100,16 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 					reward.setReward3(mythicKunaxEqItemId, mythicKunaxEqItemId == 0 ? 0 : 1);
 					reward.setReward4(188053032, 1);
 				}
+				if (isEventActive)
+					reward.setBonusReward(186000388, 35);
 			} else {
 				reward.setBaseAp(IdgelDomeInfo.DEFEAT_AP);
 				reward.setBonusAp(loserBonusAp);
 				reward.setBaseGp(10);
 				reward.setReward1(186000242, 1, 0);
 				reward.setReward2(188053031, 1, 0);
+				if (isEventActive)
+					reward.setBonusReward(186000388, 15);
 			}
 			sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.SHOW_REWARD, p.getObjectId(), 0), idi, getTime()));
 			AbyssPointsService.addAp(p, reward.getBaseAp() + reward.getBonusAp());
