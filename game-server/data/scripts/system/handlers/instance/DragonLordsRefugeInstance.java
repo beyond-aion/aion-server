@@ -163,8 +163,8 @@ public class DragonLordsRefugeInstance extends GeneralInstanceHandler {
 			case 219361: // Tiamat Dragon - killed by Empyrean Lord
 				getNpc(730699).getController().die(); // Animates roof destruction
 				getNpc(730700).getController().die();
-				spawn(283134, 457f, 514f, 417.540f, (byte) 0);
-				spawn(219362, 457f, 514f, 417.540f, (byte) 0);
+				spawn(283134, 451.97f, 514.55f, 418f, (byte) 0);
+				spawn(219362, 451.97f, 514.55f, 418f, (byte) 0);
 				spawn(730704, 437.541f, 513.487f, 415.824f, (byte) 0, 17); // Collapsed Debris impaling Tiamat
 				break;
 			case 219362:
