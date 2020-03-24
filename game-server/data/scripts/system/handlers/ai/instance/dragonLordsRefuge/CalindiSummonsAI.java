@@ -7,6 +7,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -16,7 +17,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class CalindiSummonsAI extends NpcAI {
 
 	private Future<?> task;
-
+	private VisibleObject textureObject = null;
 	public CalindiSummonsAI(Npc owner) {
 		super(owner);
 	}
@@ -25,15 +26,24 @@ public class CalindiSummonsAI extends NpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		int delay = getDelay();
+		if (getFakeTextureNpcId() != 0) {
+			textureObject = spawn(getOwner().getWorldId(), getFakeTextureNpcId(), getPosition().getX(), getPosition().getY(),
+					getPosition().getZ(), (byte) 0, 0, getObjectId(), getOwner().getInstanceId());
+		}
 		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, getSkillId()), 500, delay);
-		ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(this), 15000);
+		ThreadPoolManager.getInstance().schedule(() -> {
+			AIActions.deleteOwner(this);
+			if (textureObject != null) {
+				textureObject.getController().delete();
+			}
+		}, 15000);
 	}
 
 	private int getSkillId() {
 		switch (getNpcId()) {
-			case 283130:
+			case 283131:
 				return 20916;
-			case 283132:
+			case 283133:
 				return 20914;
 			case 856298:
 				return 21891;
@@ -44,12 +54,25 @@ public class CalindiSummonsAI extends NpcAI {
 		}
 	}
 
+	private int getFakeTextureNpcId() {
+		switch (getNpcId()) {
+			case 283131:
+			case 856299:
+				return 283130;
+			case 283133:
+			case 856298:
+				return 283132;
+			default:
+				return 0;
+		}
+	}
+
 	private int getDelay() {
 		switch (getNpcId()) {
-			case 283130:
+			case 283131:
 			case 856299:
 				return 2000;
-			case 283132:
+			case 283133:
 			case 856298:
 				return 500;
 			default:
