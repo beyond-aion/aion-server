@@ -28,14 +28,12 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
-import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
-import com.aionemu.gameserver.services.MotionLoggingService;
 import com.aionemu.gameserver.services.abyss.AbyssService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -89,6 +87,7 @@ public class Skill {
 	private int castDuration;
 	private int hitTime;// from CM_CASTSPELL
 	private int serverTime;// time when effect is applied
+	private int animationTime;
 	private long castStartTime;
 	private boolean instantSkill = false;
 	private String chainCategory = null;
@@ -240,11 +239,6 @@ public class Skill {
 		// start casting
 		effector.setCasting(this);
 
-		// log skill time if effector instance of player
-		// TODO config
-		if (effector instanceof Player)
-			MotionLoggingService.getInstance().logTime((Player) effector, getSkillTemplate(), getHitTime(), firstTarget);
-
 		// send packets to start casting
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE) {
 			castStartTime = System.currentTimeMillis();
@@ -372,69 +366,38 @@ public class Skill {
 	}
 
 	private boolean checkAnimationTime() {
-		if (!(effector instanceof Player) || skillMethod != SkillMethod.CAST)// TODO item skills?
+		if (!(effector instanceof Player)) {
+			return true;
+		}
+		if (!(effector instanceof Player) || skillMethod != SkillMethod.CAST && skillMethod != SkillMethod.CHARGE)// TODO item skills?
 			return true;
 		Player player = (Player) effector;
-
-		// if player is without weapon, dont check animation time
-		if (player.getEquipment().getMainHandWeaponType() == null)
-			return true;
-
-		// exceptions for certain skills -herb and mana treatment -traps
-		if (getSkillTemplate().getGroup() != null) {
-			switch (getSkillTemplate().getGroup()) {
-				case "MENDING_L": // Bandage Heal
-				case "MENDING": // Herb Treatment
-				case "AROMATHERAPY": // Mana Treatment
-				case "PR_FOCUSCASTING": // Prayer of focus
-				case "RI_SUMMONARMOR": // Embark skill
-					//TODO: Find pattern, why do these skills have hittime 0 when used after kinetic slam?
-				case "RI_FORWARDATTACK": // Chilling Wave
-				case "RI_WARNINGALARM": // Mounting Frustration
-				case "RI_BINDINGSLAM": // Convulsion Beam
-					return true;
-			}
-		}
 
 		if (player.getTransformModel().isActive() && player.getTransformModel().getType() == TransformType.FORM1)
 			return true;
 
-		if (getSkillTemplate().getSubType() == SkillSubType.SUMMONTRAP)
-			return true;
-
 		Motion motion = getSkillTemplate().getMotion();
-		if (motion == null)
+		if (motion == null || motion.getName() == null) // skills like Remove Shock (283) or Feint (912)
 			return true; // some skills, like Blind Side (3467) or scroll/food buffs have no motion
-
-		if (motion.isInstantSkill()) {
-			if (hitTime != 0) {
-				log.warn("Instant skill with hitTime > 0 (modified client_skills?) skill id: " + getSkillId() + ", " + player);
-				return false;
-			}
-			if (motion.getName() == null) // skills like Remove Shock (283) or Feint (912)
-				return true; // in this case, no update for NextSkillUse time is needed, so return instantly
-		} else {
-			if (motion.getName() == null)
-				return true; // can't check animations without motion name (warning is sent on server startup, see DataManager.SKILL_DATA.validateMotions())
-			if (hitTime == 0) {
-				AuditLogger.log(player, "modified non-instant skill to hit instantly (skill id: " + getSkillId() + ")");
-				return false;
-			}
-		}
 
 		MotionTime motionTime = DataManager.MOTION_DATA.getMotionTime(motion.getName());
 		if (motionTime == null) // no warning here (already sent on server startup to avoid permanent spam, see DataManager.SKILL_DATA.validateMotions())
 			return true;
 
 		WeaponTypeWrapper weapons = new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(), player.getEquipment().getOffHandWeaponType());
-		float serverTime = motionTime.getTimeForWeapon(player.getRace(), player.getGender(), weapons);
 		int clientTime = hitTime;
-
-		if (serverTime == 0) {
-			if (!motionTime.isAllZero()) // only warn if motionTime isn't "empty" (warning for allZero motionTimes is sent on server startup)
-				log.warn("missing weapon time for motionName: " + motion.getName() + " weapons: " + weapons.toString() + " Race: " + player.getRace()
-					+ " Gender: " + player.getGender() + " skillId: " + getSkillId());
-			return true;
+		float serverHitTime = 0;
+		if (motionTime != null) {
+			int id = 1;
+			if (isMulticast() && player.getChainSkills().getCurrentChainCount(chainCategory) > 0) {
+				id = player.getChainSkills().getCurrentChainCount(chainCategory) + 1;
+			}
+			Times time = motionTime.getTimesFor(player.getRace(), player.getGender(), weapons, player.isInRobotMode(), id);
+			if (time != null) {
+				float atkSpeed2 = ((float) player.getGameStats().getAttackSpeed().getCurrent() / (float) player.getGameStats().getAttackSpeed().getBase());
+				animationTime = (int)(time.getMaxTime() * motion.getSpeed() * atkSpeed2 * 10);
+				serverHitTime = ((player.isInRobotMode() ? time.getAnimationLength() : time.getMinTime()) * motion.getSpeed() * atkSpeed2 * 10);
+			}
 		}
 
 		// adjust client time with ammotime
@@ -442,48 +405,21 @@ public class Skill {
 		if (getSkillTemplate().getAmmoSpeed() != 0) {
 			double distance = PositionUtil.getDistance(effector, firstTarget);
 			ammoTime = Math.round(distance / getSkillTemplate().getAmmoSpeed() * 1000);// checked with client
-			clientTime -= ammoTime;
 		}
 
-		// adjust servertime with motion play speed
-		if (motion.getSpeed() != 100) {
-			serverTime /= 100f;
-			serverTime *= motion.getSpeed();
-		}
+		float finalTime = motion.getDelay() + (serverHitTime + ammoTime) * 0.95f; // allow 5% diff -> when jumping
 
-		Stat2 attackSpeed = player.getGameStats().getAttackSpeed();
-
-		// adjust serverTime with attackSpeed
-		if (attackSpeed.getBase() != attackSpeed.getCurrent())
-			serverTime *= ((float) attackSpeed.getCurrent() / (float) attackSpeed.getBase());
-
-		// tolerance
-		if (castDuration == 0)
-			serverTime *= 0.85f;
-		else
-			serverTime *= 0.5f;
-
-		int finalTime = Math.round(serverTime);
-		if (motion.isInstantSkill() && hitTime == 0) {
+		if (motion.isInstantSkill() && clientTime == 0) {
 			this.serverTime = (int) ammoTime;
+		} else if (clientTime < finalTime) {
+			AuditLogger.log(player, "Modified skill time for client skill: " + getSkillId() + " (clientTime < finalTime: " + clientTime + "/" + finalTime + "). Player is in move: " + player.getMoveController().isInMove());
+			this.serverTime = Math.round(finalTime);
 		} else {
-			if (clientTime < finalTime) {
-				// check for no animation Hacks
-				AuditLogger.log(player,
-					"modified skill time for client skill: " + getSkillId() + " (clientTime < finalTime: " + clientTime + "/" + finalTime + ")");
-				if (SecurityConfig.NO_ANIMATION) {
-					// check if values are too low and disable skill usage / kick player
-					if (clientTime < 0 || (clientTime / serverTime) < SecurityConfig.NO_ANIMATION_VALUE) {
-						if (SecurityConfig.NO_ANIMATION_KICK) {
-							player.getClientConnection().close(new SM_QUIT_RESPONSE());
-						}
-						return false;
-					}
-				}
-			}
-			this.serverTime = hitTime;
+			this.serverTime = clientTime;
 		}
-		player.setNextSkillUse(System.currentTimeMillis() + castDuration + finalTime);
+		PacketSendUtility.sendMessage(player, " anim time: " + animationTime + " motionName: " + (motion != null ? motion.getName() : " null"));
+		if (skillMethod != SkillMethod.CHARGE)
+			player.setNextSkillUse(System.currentTimeMillis() + castDuration + animationTime);
 		return true;
 	}
 
@@ -747,8 +683,12 @@ public class Skill {
 			if (effector instanceof Player)
 				effector.getObserveController().notifyEndSkillCastObservers(this);
 		}
-		if (effector instanceof Player)
+		if (effector instanceof Player) {
+			if (this instanceof ChargeSkill) {
+				((Player) effector).setNextSkillUse(System.currentTimeMillis() + animationTime);
+			}
 			CustomInstanceService.getInstance().recordPlayerModelEntry((Player) effector, this, effector.getTarget());
+		}
 	}
 
 	private void addResistedEffectHateAndNotifyFriends(List<Effect> effects) {
@@ -1066,6 +1006,13 @@ public class Skill {
 	 */
 	public void setHitTime(int time) {
 		this.hitTime = time;
+	}
+
+	/**
+	 * @param animationTime the animation time to set
+	 */
+	public void setAnimationTime(int animationTime) {
+		this.animationTime = animationTime;
 	}
 
 	/**

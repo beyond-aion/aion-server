@@ -9,15 +9,20 @@
 		</xs:sequence>
 	</xs:complexType>
 	<xs:complexType name="MotionTime">
-		<xs:all>
-			<xs:element name="am" type="Times" />
-			<xs:element name="af" type="Times" />
-			<xs:element name="em" type="Times" />
-			<xs:element name="ef" type="Times" />
-		</xs:all>
+		<xs:sequence>
+			<xs:element name="asmodian_female" type="Times" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="asmodian_male" type="Times" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="elyos_female" type="Times" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="elyos_male" type="Times" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="robot" type="Times" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
 		<xs:attribute name="name" type="xs:string" use="required" />
 	</xs:complexType>
 	<xs:complexType name="Times">
-		<xs:attribute name="times" type="xs:string" use="required" />
+		<xs:attribute name="weapon" type="xs:string" use="required" />
+		<xs:attribute name="id" type="xs:int"/>
+		<xs:attribute name="min" type="xs:float"/>
+		<xs:attribute name="max" type="xs:float"/>
+		<xs:attribute name="animation_length" type="xs:float" />
 	</xs:complexType>
 </xs:schema>

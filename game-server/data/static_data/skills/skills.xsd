@@ -271,6 +271,7 @@
 		<xs:attribute name="name" type="xs:string" />
 		<xs:attribute name="speed" type="xs:int" use="optional" default="100" />
 		<xs:attribute name="instant_skill" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="delay" type="xs:int" use="optional" default="0"/>
 	</xs:complexType>
 	<xs:complexType name="ActionModifiers">
 		<xs:sequence minOccurs="0" maxOccurs="unbounded">
