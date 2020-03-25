@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Bounty")
 public class BountyTemplate {
 
-	@XmlAttribute(name = "item_id")
+	@XmlAttribute(name = "item_id", required = true)
 	private int itemId;
 	@XmlAttribute(name = "count")
 	private int count;

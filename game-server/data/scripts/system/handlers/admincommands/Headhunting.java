@@ -1,10 +1,6 @@
 package admincommands;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -56,10 +52,11 @@ public class Headhunting extends AdminCommand {
 
 		// @formatter:off
 		setSyntaxInfo(
-			"<analyze> - Analyzes the season.", "<clear> - Clears the analayzed results",
+			"<analyze> - Analyzes the season.",
 			"<show> <rewards|results> - Shows the registered rewards or analyzed results",
-			"<reward> - Executes the reward algorithm and clears all references (cached headhunters and database entries).",
-			"<setKills> <playerId> <kills> - Set headhunting kills of specified player to given value."
+			"<clear> - Clears the analayzed results",
+			"<setKills> <playerId> <kills> - Set headhunting kills of specified player to given value.", 
+			"<finalize> <true|false> - Finalizes the season (clears all references) and rewards all participants if requested"
 		);
 		// @formatter:on
 
@@ -109,9 +106,6 @@ public class Headhunting extends AdminCommand {
 				else if (params[1].equalsIgnoreCase("results"))
 					showResults(admin);
 				break;
-			case "reward":
-				rewardPlayers(admin);
-				break;
 			case "setKills":
 				if (params.length < 3) {
 					sendInfo(admin);
@@ -122,6 +116,14 @@ public class Headhunting extends AdminCommand {
 				} catch (NumberFormatException e) {
 					sendInfo(admin, "playerId and kills should be numbers.");
 				}
+				break;
+			case "finalize":
+				if (params.length < 2) {
+					sendInfo(admin);
+					return;
+				}
+				boolean shouldReward = Boolean.parseBoolean(params[1]);
+				finalizeSeason(admin, shouldReward);
 				break;
 			default:
 				sendInfo(admin);
@@ -177,9 +179,9 @@ public class Headhunting extends AdminCommand {
 		StringBuilder builder = new StringBuilder();
 		for (Race race : results.keySet()) {
 			Map<PlayerClass, List<Headhunter>> raceMap = results.get(race);
-			builder.append("<hr><center>" + race + "</center>");
+			builder.append("<hr><center>").append(race).append("</center>");
 			for (PlayerClass pc : raceMap.keySet()) {
-				builder.append("<br><br>" + pc.toString() + "<br>");
+				builder.append("<br><br>").append(pc.toString()).append("<br>");
 				List<Headhunter> hunterz = raceMap.get(pc);
 				for (int pos = 0; pos < hunterz.size(); pos++) {
 					Headhunter hunter = hunterz.get(pos);
@@ -187,7 +189,7 @@ public class Headhunting extends AdminCommand {
 						break;
 
 					String name = PlayerService.getPlayerName(hunter.getHunterId());
-					builder.append("<br>" + (pos + 1) + ". " + name + " Kills: " + hunter.getKills());
+					builder.append("<br>").append(pos + 1).append(". ").append(name).append(" Kills: ").append(hunter.getKills());
 				}
 			}
 		}
@@ -202,87 +204,91 @@ public class Headhunting extends AdminCommand {
 		StringBuilder builder = new StringBuilder();
 		builder.append("<hr><center>Rewards</center><br><hr>");
 		for (Integer rank : rewards.keySet()) {
-			builder.append("<br><br><br>Rank: " + rank + "<br>");
+			builder.append("<br><br><br>Rank: ").append(rank).append("<br>");
 			List<RewardItem> items = rewards.get(rank);
 			for (RewardItem item : items)
-				builder.append("<br>" + item.getCount() + "x " + DataManager.ITEM_DATA.getItemTemplate(item.getId()).getName());
+				builder.append("<br>").append(item.getCount()).append("x ").append(DataManager.ITEM_DATA.getItemTemplate(item.getId()).getName());
 		}
 		if (!consolationRewards.isEmpty()) {
-			builder.append("<br><br>Consolation prize for >= " + EventsConfig.HEADHUNTING_CONSOLATION_PRIZE_KILLS + " kills<br>");
+			builder.append("<br><br>Consolation prize for >= ").append(EventsConfig.HEADHUNTING_CONSOLATION_PRIZE_KILLS).append(" kills<br>");
 			for (RewardItem item : consolationRewards)
-				builder.append("<br>" + item.getCount() + "x " + DataManager.ITEM_DATA.getItemTemplate(item.getId()).getName());
+				builder.append("<br>").append(item.getCount()).append("x ").append(DataManager.ITEM_DATA.getItemTemplate(item.getId()).getName());
 		}
 		HTMLService.showHTML(admin, HTMLCache.getInstance().getHTML("headhunting.xhtml").replace("HUNTERZ", builder));
 	}
 
-	/**
-	 * Rewards the analyzed players, clears all references and archives the final results.
-	 */
 	private void rewardPlayers(Player admin) {
-		if (EventsConfig.ENABLE_HEADHUNTING) {
-			sendInfo(admin, "Season is still active! You have to disable headhunting to reward participants.");
-			return;
-		} else if (results == null) {
-			sendInfo(admin, "No results available! The headhunting season needs to be analyzed before rewarding.");
-			return;
-		} else if (results.isEmpty()) {
-			results = null;
-			sendInfo(admin, "No participation in this season. Empty reward map was cleared.");
-			return;
-		}
-		int rewardedPlayers = 0;
-		int sentMails = 0;
-		for (Race race : results.keySet()) {
-			Map<PlayerClass, List<Headhunter>> raceMap = results.get(race);
-			for (PlayerClass pc : raceMap.keySet()) {
-				List<Headhunter> hunterz = raceMap.get(pc);
-				for (int pos = 0; pos < hunterz.size(); pos++) {
-					final Headhunter hunter = hunterz.get(pos);
-					List<RewardItem> items = null;
-					if (pos < 3)
-						items = rewards.get(pos + 1);
-					else if (hunter.getKills() >= EventsConfig.HEADHUNTING_CONSOLATION_PRIZE_KILLS)
-						items = consolationRewards;
+			int rewardedPlayers = 0;
+			int sentMails = 0;
+			for (Race race : results.keySet()) {
+					Map<PlayerClass, List<Headhunter>> raceMap = results.get(race);
+					for (PlayerClass pc : raceMap.keySet()) {
+							List<Headhunter> hunterz = raceMap.get(pc);
+							for (int pos = 0; pos < hunterz.size(); pos++) {
+									final Headhunter hunter = hunterz.get(pos);
+									List<RewardItem> items = null;
+									if (pos < 3)
+											items = rewards.get(pos + 1);
+									else if (hunter.getKills() >= EventsConfig.HEADHUNTING_CONSOLATION_PRIZE_KILLS)
+											items = consolationRewards;
 
-					if (items == null || items.isEmpty())
-						continue;
+									if (items == null || items.isEmpty())
+											continue;
 
-					String name = PlayerService.getPlayerName(hunter.getHunterId());
-					String rank;
-					switch (pos) {
-						case 0:
-							rank = "1st";
-							break;
-						case 1:
-							rank = "2nd";
-							break;
-						case 2:
-							rank = "3rd";
-							break;
-						default:
-							rank = "consolation";
+									String name = PlayerService.getPlayerName(hunter.getHunterId());
+									String rank;
+									switch (pos) {
+											case 0:
+													rank = "1st";
+													break;
+											case 1:
+													rank = "2nd";
+													break;
+											case 2:
+													rank = "3rd";
+													break;
+											default:
+													rank = "consolation";
+									}
+									for (RewardItem item : items) {
+											if (SystemMailService.sendMail("Headhunting Corp", name, "Rewards",
+															"We congratulate you for reaching the " + rank + " rank in this season with a total of " + hunter.getKills() + " kills.", item.getId(),
+															item.getCount(), 0, LetterType.BLACKCLOUD)) {
+													sentMails++;
+											} else {
+													log.error("Failed to send reward mail to player " + name + " for rank " + rank + ". (ItemId: " + item.getId() + " Count: "
+																	+ item.getCount() + ").");
+											}
+									}
+									log.info(
+													"[Race: " + race + "] [PlayerClass: " + pc + "] [Rank: " + rank + "] [RewardedPlayer: " + name + "] [Kills: " + hunter.getKills() + "]");
+									rewardedPlayers++;
+							}
 					}
-					for (RewardItem item : items) {
-						if (SystemMailService.sendMail("Headhunting Corp", name, "Rewards",
-							"We congratulate you for reaching the " + rank + " rank in this season with a total of " + hunter.getKills() + " kills.", item.getId(),
-							item.getCount(), 0, LetterType.BLACKCLOUD)) {
-							sentMails++;
-						} else {
-							log.error("Failed to send reward mail to player " + name + " for rank " + rank + ". (ItemId: " + item.getId() + " Count: "
-								+ item.getCount() + ").");
-						}
-					}
-					log.info(
-						"[Race: " + race + "] [PlayerClass: " + pc + "] [Rank: " + rank + "] [RewardedPlayer: " + name + "] [Kills: " + hunter.getKills() + "]");
-					rewardedPlayers++;
-				}
 			}
-		}
-		sendInfo(admin, "Successfully rewarded " + rewardedPlayers + " Players and sent " + sentMails + " Mails.");
-		PvpService.getInstance().finalizeHeadhuntingSeason();
-		DAOManager.getDAO(HeadhuntingDAO.class).clearTables();
-		results.clear();
-		results = null;
-		sendInfo(admin, "Successfully cleared all references for this season and finished archiving.");
+			sendInfo(admin, "Successfully rewarded " + rewardedPlayers + " Players and sent " + sentMails + " Mails.");
+	}
+
+	private void finalizeSeason(Player admin, boolean shouldReward) {
+			if (EventsConfig.ENABLE_HEADHUNTING) {
+					sendInfo(admin, "Season is still active! You have to disable headhunting to reward participants.");
+					return;
+			} else if (shouldReward && results == null) {
+					sendInfo(admin, "No results available! The headhunting season needs to be analyzed before rewarding.");
+					return;
+			} else if (shouldReward && results.isEmpty()) {
+					results = null;
+					sendInfo(admin, "No participation in this season. Empty reward map was cleared.");
+					return;
+			}
+
+			if (shouldReward)
+					rewardPlayers(admin);
+
+			PvpService.getInstance().finalizeHeadhuntingSeason();
+			DAOManager.getDAO(HeadhuntingDAO.class).clearTables();
+			results.clear();
+			results = null;
+			sendInfo(admin, "Successfully cleared all references for this season and finished archiving.");
 	}
 }

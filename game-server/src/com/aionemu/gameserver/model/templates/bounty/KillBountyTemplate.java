@@ -4,6 +4,8 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
+import com.aionemu.gameserver.model.Race;
+
 /**
  * @author Estrayl
  */
@@ -17,6 +19,8 @@ public class KillBountyTemplate {
 	private int killCount;
 	@XmlAttribute(name = "is_random_reward")
 	private boolean isRandomReward;
+	@XmlAttribute(name = "race")
+	private Race race = Race.PC_ALL;
 
 	@XmlElement(name = "bounty")
 	private List<BountyTemplate> bounties;
@@ -31,6 +35,10 @@ public class KillBountyTemplate {
 
 	public boolean isRandomReward() {
 		return isRandomReward;
+	}
+
+	public Race getRaceCondition() {
+		return race;
 	}
 
 	public List<BountyTemplate> getBounties() {

@@ -29,4 +29,80 @@
 		<bounty item_id="162000139" count="5" /><!-- Divine Mana Serum -->
 		<bounty item_id="162000141" count="5" /><!-- Divine Flight Serum -->
 	</kill_bounty>
+
+	<kill_bounty type="SEASONAL_KILLS" kill_count="25">
+		<bounty item_id="186000051" count="10" /><!-- Major Ancient Crown -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="50">
+		<bounty item_id="188053610" count="5" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="75">
+		<bounty item_id="186000242" count="5" /><!-- Ceramium Medal -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="100">
+		<bounty item_id="166030005" count="5" /><!-- Tempering Solution -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="125">
+		<bounty item_id="186000051" count="10" /><!-- Major Ancient Crown -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="150">
+		<bounty item_id="188053610" count="5" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="175">
+		<bounty item_id="186000242" count="1" /><!-- Ceramium Medal -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="200">
+		<bounty item_id="188051709" count="1" /><!-- [Event] Silver Box -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="225">
+		<bounty item_id="186000051" count="10" /><!-- Major Ancient Crown -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="250">
+		<bounty item_id="166500002" count="5" /><!-- Amplification Stone -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="275">
+		<bounty item_id="188053610" count="5" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="300">
+		<bounty item_id="186000242" count="15" /><!-- Ceramium Medal -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="325">
+		<bounty item_id="186000051" count="10" /><!-- Major Ancient Crown -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="350">
+		<bounty item_id="166030005" count="5" /><!-- Tempering Solution -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="375">
+		<bounty item_id="188053610" count="5" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="400">
+		<bounty item_id="188051710" count="1" /><!-- [Event] Gold Box -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="450">
+		<bounty item_id="186000242" count="5" /><!-- Ceramium Medal -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="500">
+		<bounty item_id="166500002" count="10" /><!-- Amplification Stone -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="550">
+		<bounty item_id="188053610" count="5" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="600">
+		<bounty item_id="188053646" count="1" /><!-- Nether Dragon King's Sealed Box -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="650">
+		<bounty item_id="166030005" count="10" /><!-- Tempering Solution -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="700">
+		<bounty item_id="186000051" count="10" /><!-- Major Ancient Crown -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="750">
+		<bounty item_id="188053610" count="5" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="800" race="ASMODIANS">
+		<bounty item_id="188053366" count="1" /><!-- Archon Abyss Armor Box -->
+	</kill_bounty>
+	<kill_bounty type="SEASONAL_KILLS" kill_count="800" race="ELYOS">
+		<bounty item_id="188053364" count="1" /><!-- Guardian Abyss Armor Box -->
+	</kill_bounty>
 </kill_bounties>
