@@ -366,9 +366,6 @@ public class Skill {
 	}
 
 	private boolean checkAnimationTime() {
-		if (!(effector instanceof Player)) {
-			return true;
-		}
 		if (!(effector instanceof Player) || skillMethod != SkillMethod.CAST && skillMethod != SkillMethod.CHARGE)// TODO item skills?
 			return true;
 		Player player = (Player) effector;
@@ -400,7 +397,6 @@ public class Skill {
 			}
 		}
 
-		// adjust client time with ammotime
 		long ammoTime = 0;
 		if (getSkillTemplate().getAmmoSpeed() != 0) {
 			double distance = PositionUtil.getDistance(effector, firstTarget);
@@ -417,7 +413,7 @@ public class Skill {
 		} else {
 			this.serverTime = clientTime;
 		}
-		PacketSendUtility.sendMessage(player, " anim time: " + animationTime + " motionName: " + (motion != null ? motion.getName() : " null"));
+		
 		if (skillMethod != SkillMethod.CHARGE)
 			player.setNextSkillUse(System.currentTimeMillis() + castDuration + animationTime);
 		return true;
