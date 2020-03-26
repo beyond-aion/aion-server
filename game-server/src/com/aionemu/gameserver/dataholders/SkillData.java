@@ -143,8 +143,6 @@ public class SkillData {
 					MotionTime mt = DataManager.MOTION_DATA.getMotionTime(m.getName());
 					if (mt == null)
 						missing.append('"').append(m.getName()).append("\" (skill id ").append(t.getSkillId()).append("), ");
-					else if (mt.isAllZero())
-						empty.append('"').append(m.getName()).append("\" (skill id ").append(t.getSkillId()).append("), ");
 				}
 			}
 		}

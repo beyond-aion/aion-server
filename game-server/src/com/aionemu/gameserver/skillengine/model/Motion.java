@@ -22,6 +22,9 @@ public class Motion {
 	@XmlAttribute(name = "instant_skill")
 	private boolean instantSkill = false;
 
+	@XmlAttribute(name = "delay")
+	private int delay = 0;
+
 	protected void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (name != null)
 			name = name.intern(); // intern to save RAM
@@ -40,5 +43,9 @@ public class Motion {
 
 	public boolean isInstantSkill() {
 		return instantSkill;
+	}
+
+	public int getDelay() {
+		return delay;
 	}
 }

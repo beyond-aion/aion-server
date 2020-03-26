@@ -7,8 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.skillengine.condition.SkillChargeCondition;
-import com.aionemu.gameserver.skillengine.model.ChargeSkillEntry;
-import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.*;
 
 /**
  * @author Cheatkiller
@@ -39,8 +38,22 @@ public class CM_USE_CHARGE_SKILL extends AionClientPacket {
 				break;
 			time -= chargeTime;
 		}
+		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(chargeSkill.getSkills().get(index).getId());
+		Motion motion = skillTemplate.getMotion();
+		MotionTime motionTime = DataManager.MOTION_DATA.getMotionTime(motion.getName());
+		int animationTime = 0;
+		if (motionTime != null) {
+			WeaponTypeWrapper weapons = new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(), player.getEquipment().getOffHandWeaponType());
+			if (motionTime != null) {
+				Times times = motionTime.getTimesFor(player.getRace(), player.getGender(), weapons, player.isInRobotMode(), index + 1);
+				if (times != null) {
+					float atkSpeed2 = ((float) player.getGameStats().getAttackSpeed().getCurrent() / (float) player.getGameStats().getAttackSpeed().getBase());
+					animationTime = (int) (times.getMaxTime() * motion.getSpeed() * atkSpeed2 * 10);
+				}
+			}
+		}
 		player.getController().useChargeSkill(chargeSkill.getSkills().get(index).getId(), chargeCastingSkill.getSkillLevel(),
-			chargeCastingSkill.getHitTime(), chargeCastingSkill.getFirstTarget());
+			chargeCastingSkill.getHitTime(), animationTime, chargeCastingSkill.getFirstTarget());
 		chargeCastingSkill.cancelCast();
 	}
 

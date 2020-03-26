@@ -110,8 +110,10 @@ public class FearEffect extends EffectTemplate {
 				effect.getEffected().getObserveController().removeObserver(observer);
 		}
 
-		if (effect.getEffected() instanceof Npc)
-			((Npc) effect.getEffected()).getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
+		if (effect.getEffected() instanceof Npc) {
+			effect.getEffected().getAi().setStateIfNot(AIState.IDLE);
+			effect.getEffected().getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
+		}
 	}
 
 	class FearTask implements Runnable {

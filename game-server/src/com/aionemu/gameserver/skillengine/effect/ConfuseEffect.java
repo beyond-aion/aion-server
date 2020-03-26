@@ -78,6 +78,7 @@ public class ConfuseEffect extends EffectTemplate {
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_TARGET_IMMOBILIZE(effect.getEffected()));
 
 		if (effect.getEffected() instanceof Npc) {
+			effect.getEffected().getAi().setStateIfNot(AIState.IDLE);
 			effect.getEffected().getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
 		}
 	}
