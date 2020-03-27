@@ -92,7 +92,7 @@ public class PvpService {
 		doReward(victim, 1);
 	}
 
-	private synchronized Headhunter getHeadhunterById(final int objId) {
+	public synchronized Headhunter getHeadhunterById(final int objId) {
 		Headhunter headhunter = headhunters.putIfAbsent(objId, new Headhunter(objId, 0, System.currentTimeMillis(), PersistentState.UPDATE_REQUIRED));
 		return headhunter != null ? headhunter : headhunters.get(objId);
 	}
