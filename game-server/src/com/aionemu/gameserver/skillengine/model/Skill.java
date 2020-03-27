@@ -384,17 +384,15 @@ public class Skill {
 		WeaponTypeWrapper weapons = new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(), player.getEquipment().getOffHandWeaponType());
 		int clientTime = hitTime;
 		float serverHitTime = 0;
-		if (motionTime != null) {
-			int id = 1;
-			if (isMulticast() && player.getChainSkills().getCurrentChainCount(chainCategory) > 0) {
-				id = player.getChainSkills().getCurrentChainCount(chainCategory) + 1;
-			}
-			Times time = motionTime.getTimesFor(player.getRace(), player.getGender(), weapons, player.isInRobotMode(), id);
-			if (time != null) {
-				float atkSpeed2 = ((float) player.getGameStats().getAttackSpeed().getCurrent() / (float) player.getGameStats().getAttackSpeed().getBase());
-				animationTime = (int)(time.getMaxTime() * motion.getSpeed() * atkSpeed2 * 10);
-				serverHitTime = ((player.isInRobotMode() ? time.getAnimationLength() : time.getMinTime()) * motion.getSpeed() * atkSpeed2 * 10);
-			}
+		int motionId = 1;
+		if (isMulticast() && player.getChainSkills().getCurrentChainCount(chainCategory) > 0) {
+			motionId = player.getChainSkills().getCurrentChainCount(chainCategory) + 1;
+		}
+		Times time = motionTime.getTimesFor(player.getRace(), player.getGender(), weapons, player.isInRobotMode(), motionId);
+		if (time != null) {
+			float atkSpeed2 = ((float) player.getGameStats().getAttackSpeed().getCurrent() / (float) player.getGameStats().getAttackSpeed().getBase());
+			animationTime = (int)(time.getMaxTime() * motion.getSpeed() * atkSpeed2 * 10);
+			serverHitTime = ((player.isInRobotMode() ? time.getAnimationLength() : time.getMinTime()) * motion.getSpeed() * atkSpeed2 * 10);
 		}
 
 		long ammoTime = 0;

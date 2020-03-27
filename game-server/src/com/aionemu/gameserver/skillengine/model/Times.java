@@ -34,9 +34,6 @@ public class Times {
 	@XmlAttribute(name = "animation_length")
 	private float animationLength;
 
-	@XmlTransient
-	private HashMap<WeaponTypeWrapper, Integer> timeForWeaponType = new HashMap<>();
-
 	public int getId() {
 		return id;
 	}
