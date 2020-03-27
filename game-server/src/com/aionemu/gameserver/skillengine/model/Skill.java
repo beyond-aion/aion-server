@@ -993,18 +993,11 @@ public class Skill {
 	public int getHitTime() {
 		return hitTime;
 	}
-
-	/**
-	 * @param time
-	 *          The time to set.
-	 */
+	
 	public void setHitTime(int time) {
 		this.hitTime = time;
 	}
 
-	/**
-	 * @param animationTime the animation time to set
-	 */
 	public void setAnimationTime(int animationTime) {
 		this.animationTime = animationTime;
 	}
