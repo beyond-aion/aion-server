@@ -14,7 +14,7 @@ import com.aionemu.commons.utils.Rnd;
 public class PlayerModel {
 
 	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
-	private static final int MAX_TRAINING_TIME = 180000;
+	private static final long MAX_TRAINING_TIME_IN_MS = 180000;
 	public boolean isReady;
 	public double learnRate;
 	public double momentum;
@@ -59,14 +59,16 @@ public class PlayerModel {
 				processInput(dataSet.getValues());
 				valideToOutput(dataSet.getTargets());
 			}
-			if (System.currentTimeMillis() >= startTime + MAX_TRAINING_TIME) {
+			if (System.currentTimeMillis() >= startTime + MAX_TRAINING_TIME_IN_MS) {
 				numEpochs = i;
 				break;
 			}
 		}
 		isReady = true;
-		log.info(
-			"Training took " + (System.currentTimeMillis() - startTime) + "ms with " + dataSets.size() + " data sets after " + numEpochs + " epochs.");
+		long processingTime = System.currentTimeMillis() - startTime;
+		if (processingTime >= MAX_TRAINING_TIME_IN_MS)
+			log.warn(String.format("[CI_ROAH] Deep learning exceeded [MAX_TRAINING_TIME_IN_MS=%d] with %d data sets. Only %d cycles were processed.",
+				MAX_TRAINING_TIME_IN_MS, dataSets.size(), numEpochs));
 	}
 
 	private void processInput(double... inputs) {
@@ -74,8 +76,8 @@ public class PlayerModel {
 		for (PlayerModelLink n : input)
 			n.value = inputs[i++];
 		for (List<PlayerModelLink> layer : inner)
-			layer.forEach(a -> a.calculateValue());
-		output.forEach(a -> a.calculateValue());
+			layer.forEach(PlayerModelLink::calculateValue);
+		output.forEach(PlayerModelLink::calculateValue);
 	}
 
 	private void valideToOutput(double... targets) {

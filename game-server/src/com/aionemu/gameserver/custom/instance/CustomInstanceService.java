@@ -13,6 +13,7 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
 import com.aionemu.gameserver.dao.CustomInstanceDAO;
 import com.aionemu.gameserver.dao.CustomInstancePlayerModelEntryDAO;
+import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
@@ -83,9 +84,11 @@ public class CustomInstanceService {
 		CustomInstanceRank rankObj = loadOrCreateRank(playerId);
 		int oldRank = rankObj.getRank();
 		rankObj.setRank(newRank);
-		if (DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj))
-			log.info("[CI_ROAH] Changing instance rank for [playerId=" + playerId + "] from " + CustomInstanceRankEnum.getRankDescription(oldRank) + "("
-				+ oldRank + ") to " + CustomInstanceRankEnum.getRankDescription(newRank) + "(" + newRank + ").");
+		if (DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj)) {
+			String name = DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(playerId);
+			log.info(String.format("[CI_ROAH] Rank changed for Player [id=%d, name=%s, oldRank=%s(%d), newRank=%s(%d)]", playerId, name,
+				CustomInstanceRankEnum.getRankDescription(oldRank), oldRank, CustomInstanceRankEnum.getRankDescription(newRank), newRank));
+		}
 	}
 
 	public void recordPlayerModelEntry(Player player, Skill skill, VisibleObject target) {

@@ -3683,75 +3683,49 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Boiling Point" start="2015-08-14T00:00:00" end="2015-08-28T00:00:00">
+	<event name="Boiling Point" start="2020-03-27T00:00:00" end="2020-04-05T23:59:59">
 		<quests>
 			<maintainable>51035 51036 51037 50035 50036 50037</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Boiling Point Event Drop 1" chance="10" member_limit="12" level_based_chance_reduction="true">
+			<gd_rule rule_name="Boiling Point Rolled Dumpling" chance="100" member_limit="6" level_based_chance_reduction="true">
 				<gd_items>
-					<gd_item id="186000387" /><!-- [Event] Rice Cake -->
+					<gd_item id="186000387" /><!-- [Event] Rolled Dumpling -->
 				</gd_items>
+				<gd_zones>
+					<gd_zone zone="TWILIGHT_DRANA_FARM_220070000" />
+					<gd_zone zone="VISCUM_SWAMP_220070000" />
+					<gd_zone zone="HANARKAND_210050000" />
+					<gd_zone zone="HANARKAND_GATE_210050000" />
+					<gd_zone zone="HANARKAND_OBSERVATION_POST_210050000" />
+					<gd_zone zone="HANARKAND_ORACLE_CHAMBER_210050000" />
+					<gd_zone zone="HANARKAND_PLAINS_210050000" />
+					<gd_zone zone="HANARKAND_PRISON_ENTRANCE_210050000" />
+					<gd_zone zone="HANARKAND_PROTECTION_ALTAR_210050000" />
+				</gd_zones>
+			</gd_rule>
+			<gd_rule rule_name="Boiling Point Bone Broth" chance="100" member_limit="6" level_based_chance_reduction="true">
+				<gd_items>
+					<gd_item id="186000388" min_count="10" /><!-- [Event] Bone Broth -->
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="301270000" /><!-- Linkgate Foundry -->
+				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="217206" /><!-- Warden Surama -->
-					<gd_npc npc_id="215795" /><!-- Debilkarim The Maker -->
-					<gd_npc npc_id="214669" /><!-- Unstable Triroan -->
-					<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
-					<gd_npc npc_id="231050" /><!-- Vera -->
-					<gd_npc npc_id="230740" /><!-- Accountant Kanerunerk -->
-					<gd_npc npc_id="701795" /><!-- Treasure Box (Danuar Reliquary) -->
-					<gd_npc npc_id="233383" /><!-- Chief Medic Tagnu -->
-					<gd_npc npc_id="231073" /><!-- Hyperion -->
-					<gd_npc npc_id="219299" /><!-- Muzzled Punisher -->
-					<gd_npc npc_id="219300" /><!-- Punisher Unleashed -->
-					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
-					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
-					<gd_npc npc_id="215783" /><!-- Nexus -->
-					<gd_npc npc_id="216183" /><!-- Stormwing -->
-					<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
-					<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest (Tiamat Stronghold) -->
-					<gd_npc npc_id="230737" /><!-- Maintenance Chief Notakiki -->
-					<gd_npc npc_id="230743" /><!-- Captain Rumakiki -->
-					<gd_npc npc_id="217647" /><!-- Raksha Boilheart -->
-					<gd_npc npc_id="217475" /><!-- Raksha -->
-					<gd_npc npc_id="700938" /><!-- Abyssal Treasure Box (Abyssal Splinter) -->
-					<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate (Dragon Lord's Refuge) -->
-					<gd_npc npc_id="233740" /><!-- Test instrument Dainatum -->
-					<gd_npc npc_id="230092" /><!-- Enraged Barukan -->
-					<gd_npc npc_id="230093" /><!-- Furious Barukan -->
+					<gd_npc npc_id="233898" /><!-- Belsagos -->
+					<gd_npc npc_id="234990" /><!-- Belsagos -->
+					<gd_npc npc_id="234991" /><!-- Belsagos -->
 				</gd_npcs>
 			</gd_rule>
-			<gd_rule rule_name="Boiling Point Event Drop 2" chance="50" member_limit="12" level_based_chance_reduction="true">
+			<gd_rule rule_name="Boiling Point Bone Broth" chance="100" member_limit="6" level_based_chance_reduction="true">
 				<gd_items>
-					<gd_item id="186000388" /><!-- [Event] Beef Bone Broth -->
+					<gd_item id="186000388" min_count="25" /><!-- [Event] Bone Broth -->
 				</gd_items>
+				<gd_maps>
+					<gd_map map_id="300700000" /><!-- The Hexway -->
+				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="217206" /><!-- Warden Surama -->
-					<gd_npc npc_id="215795" /><!-- Debilkarim The Maker -->
-					<gd_npc npc_id="214669" /><!-- Unstable Triroan -->
-					<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
-					<gd_npc npc_id="231050" /><!-- Vera -->
-					<gd_npc npc_id="230740" /><!-- Accountant Kanerunerk -->
-					<gd_npc npc_id="701795" /><!-- Treasure Box (Danuar Reliquary) -->
-					<gd_npc npc_id="233383" /><!-- Chief Medic Tagnu -->
-					<gd_npc npc_id="231073" /><!-- Hyperion -->
-					<gd_npc npc_id="219299" /><!-- Muzzled Punisher -->
-					<gd_npc npc_id="219300" /><!-- Punisher Unleashed -->
-					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
-					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
-					<gd_npc npc_id="215783" /><!-- Nexus -->
-					<gd_npc npc_id="216183" /><!-- Stormwing -->
-					<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
-					<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest (Tiamat Stronghold) -->
-					<gd_npc npc_id="230737" /><!-- Maintenance Chief Notakiki -->
-					<gd_npc npc_id="230743" /><!-- Captain Rumakiki -->
-					<gd_npc npc_id="217647" /><!-- Raksha Boilheart -->
-					<gd_npc npc_id="217475" /><!-- Raksha -->
-					<gd_npc npc_id="700938" /><!-- Abyssal Treasure Box (Abyssal Splinter) -->
-					<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate (Dragon Lord's Refuge) -->
-					<gd_npc npc_id="233740" /><!-- Test instrument Dainatum -->
-					<gd_npc npc_id="230092" /><!-- Enraged Barukan -->
-					<gd_npc npc_id="230093" /><!-- Furious Barukan -->
+					<gd_npc npc_id="219610" /><!-- Adjutant Galamat -->
 				</gd_npcs>
 			</gd_rule>
 		</event_drops>

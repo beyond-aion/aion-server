@@ -198,9 +198,9 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				// use pcd for rare cases in which the artifact got destroyed by dots/servants and the player got DC'ed before
 				PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(playerObjId);
 				float usedTime = (System.currentTimeMillis() - startTime.get()) / 1000f;
-				log.info("[CI_ROAH] Player [id=" + pcd.getPlayerObjId() + ", name=" + pcd.getName() + ", class=" + pcd.getPlayerClass() + ", rank="
-					+ CustomInstanceRankEnum.getRankDescription(rank) + "(" + rank + ")] succeeded in destroying the artifact in " + usedTime + "s (DPS:"
-					+ npc.getLifeStats().getMaxHp() / usedTime + ").");
+				log.info(String.format("[CI_ROAH] Player [id=%d, name=%s, class=%s, rank=%s(%d)] succeeded in destroying the artifact in %.3fs (DPS:%.4f).",
+					pcd.getPlayerObjId(), pcd.getName(), pcd.getPlayerClass(), CustomInstanceRankEnum.getRankDescription(rank), rank, usedTime,
+					npc.getLifeStats().getMaxHp() / usedTime));
 				despawnNpcs(TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
 
 				PacketSendUtility.broadcastToMap(instance,

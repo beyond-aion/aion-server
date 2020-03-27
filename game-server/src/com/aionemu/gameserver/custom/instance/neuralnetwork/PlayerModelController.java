@@ -11,6 +11,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class PlayerModelController {
 
+	private static final int TRAINING_EPOCHS = 1000;
+
 	public static PlayerModel trainModelForPlayer(int playerId, List<Integer> skillSet) {
 		// get input data:
 		List<PlayerModelEntry> playerModelEntries = CustomInstanceService.getInstance().getPlayerModelEntries(playerId);
@@ -32,7 +34,7 @@ public class PlayerModelController {
 		PlayerModel model = new PlayerModel(dataSets.get(0).getValues().length, 10, dataSets.get(0).getTargets().length, 1, null, null);
 
 		// train
-		ThreadPoolManager.getInstance().executeLongRunning(() -> model.train(dataSets, 1000));
+		ThreadPoolManager.getInstance().executeLongRunning(() -> model.train(dataSets, TRAINING_EPOCHS));
 		return model;
 	}
 
