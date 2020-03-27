@@ -42,6 +42,9 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 			tickDelay = 2000;
 		} else if (group != null && group.equals("WI_SUMMONTORNADO")) {
 			tickDelay = 1000;
+		} else if (group.equals("WI_DELAYEDSTRIKE")) {
+			tickDelay = 5000;
+			spawnDuration = 9;
 		}
 		Servant servant = spawnServant(effect, spawnDuration, NpcObjectType.SKILLAREA, x, y, z);
 		if (effect.getEffected() != null) // point skill without any initial target (we cannot trigger handleAttack with a null target)
@@ -49,7 +52,7 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 
 		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
-			private int skillPos = 1;
+			private int skillPos = 0;
 
 			@Override
 			public void run() {
