@@ -954,6 +954,7 @@ public class Effect implements StatOwner {
 
 	private int getCumulativeResistDurationMultiplierFor(int resistCount) {
 		switch (resistCount) {
+			case 0:
 			case 1:
 				return 100;
 			case 2:
@@ -963,7 +964,7 @@ public class Effect implements StatOwner {
 			case 4:
 				return 80;
 			default:
-				return 0;
+				return 1;
 		}
 	}
 
