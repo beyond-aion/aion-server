@@ -666,7 +666,8 @@ public final class QuestService {
 			}
 		} else {
 			CollectItem selectedOption = collectItems.getCollectItem().get(rewardIndex);
-			if (!player.getInventory().decreaseByItemId(selectedOption.getItemId(), selectedOption.getCount())) {
+			if (player.getInventory().getItemCountByItemId(selectedOption.getItemId()) < selectedOption.getCount()
+				|| !player.getInventory().decreaseByItemId(selectedOption.getItemId(), selectedOption.getCount())) {
 				String requiredItemL10n = DataManager.ITEM_DATA.getItemTemplate(selectedOption.getItemId()).getL10n();
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_COMPLETE_ERROR_QUEST_ITEM_RETRY(requiredItemL10n));
 				return -1;
