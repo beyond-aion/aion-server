@@ -192,10 +192,13 @@ public class PvpService {
 	}
 
 	private void logKill(Player winner, Player victim, List<Player> assistedGroup) {
-		assistedGroup.remove(winner);
-		if (LoggingConfig.LOG_KILL)
-			log.info("[KILL] Player [" + winner.getName() + "] killed [" + victim.getName() + "] assisted by "
-				+ assistedGroup.stream().map(p -> "[" + p.getName() + "]").collect(Collectors.joining(",")));
+		if (LoggingConfig.LOG_KILL) {
+			if (assistedGroup.size() > 1 || assistedGroup.size() == 1 && !assistedGroup.contains(winner))
+				log.info("[KILL] " + winner + " killed " + victim + " assisted by "
+					+ assistedGroup.stream().filter(p -> !p.equals(winner)).map(String::valueOf).collect(Collectors.joining(",")));
+			else
+				log.info("[KILL] " + winner + " killed " + victim);
+		}
 
 		if (LoggingConfig.LOG_PL) {
 			String ip1 = winner.getClientConnection().getIP();
