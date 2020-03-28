@@ -8,24 +8,20 @@ import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Bobobear, Rolandas
- * @modified Pad
+ * @author Bobobear, Rolandas, Pad
  */
 public class RelicRewards extends AbstractTemplateQuestHandler {
 
 	private final Set<Integer> startNpcIds = new HashSet<>();
 	private boolean isDataDriven;
 
-	/**
-	 * @param questId
-	 * @param startNpcId
-	 */
 	public RelicRewards(int questId, List<Integer> startNpcIds) {
 		super(questId);
 		if (startNpcIds != null)
@@ -52,9 +48,9 @@ public class RelicRewards extends AbstractTemplateQuestHandler {
 			if (startNpcIds.contains(targetId)) {
 				switch (dialogActionId) {
 					case EXCHANGE_COIN:
-						if (player.getCommonData().getLevel() >= 30) {
-							int rewardId = QuestService.getCollectItemsReward(env, false, false);
-							if (rewardId != -1)
+						QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
+						if (player.getCommonData().getLevel() >= template.getMinlevelPermitted()) {
+							if (QuestService.checkAndGetCollectItemQuestRewardCategory(env) != -1)
 								return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 							else
 								return sendQuestDialog(env, 3398);
@@ -69,16 +65,16 @@ public class RelicRewards extends AbstractTemplateQuestHandler {
 					case USE_OBJECT:
 						return sendQuestDialog(env, isDataDriven ? 4762 : 1011);
 					case SELECT1:
-						rewardId = QuestService.checkCollectItemsReward(env, false, true, 0);
+						rewardId = QuestService.checkAndGetCollectItemQuestRewardCategory(env, 0);
 						break;
 					case SELECT2:
-						rewardId = QuestService.checkCollectItemsReward(env, false, true, 1);
+						rewardId = QuestService.checkAndGetCollectItemQuestRewardCategory(env, 1);
 						break;
 					case SELECT3:
-						rewardId = QuestService.checkCollectItemsReward(env, false, true, 2);
+						rewardId = QuestService.checkAndGetCollectItemQuestRewardCategory(env, 2);
 						break;
 					case SELECT4:
-						rewardId = QuestService.checkCollectItemsReward(env, false, true, 3);
+						rewardId = QuestService.checkAndGetCollectItemQuestRewardCategory(env, 3);
 						break;
 				}
 				if (rewardId != -1) {

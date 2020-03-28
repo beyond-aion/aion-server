@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -91,7 +92,7 @@ public class PvpService {
 		doReward(victim, 1);
 	}
 
-	private synchronized Headhunter getHeadhunterById(final int objId) {
+	public synchronized Headhunter getHeadhunterById(final int objId) {
 		Headhunter headhunter = headhunters.putIfAbsent(objId, new Headhunter(objId, 0, System.currentTimeMillis(), PersistentState.UPDATE_REQUIRED));
 		return headhunter != null ? headhunter : headhunters.get(objId);
 	}
@@ -125,8 +126,8 @@ public class PvpService {
 					}
 				}
 				if (EventsConfig.ENABLE_HEADHUNTING && EventsConfig.HEADHUNTING_MAPS.contains(victim.getWorldId())) {
-						int kills = getHeadhunterById(killer.getObjectId()).incrementAndGetKills();
-						sendBountyReward(killer, BountyType.SEASONAL_KILLS, kills);
+					int kills = getHeadhunterById(killer.getObjectId()).incrementAndGetKills();
+					sendBountyReward(killer, BountyType.SEASONAL_KILLS, kills);
 				}
 			}
 			updateKillQuests(killers, victim);
@@ -136,7 +137,7 @@ public class PvpService {
 			}
 		}
 
-		logKill(winner, victim);
+		logKill(winner, victim, killers);
 
 		// track how much of the total damage actually generated AP (ignoring Duels, Arena, NPCs), so the victim loses his AP based on that fraction
 		int apRelevantDamage = 0;
@@ -190,9 +191,11 @@ public class PvpService {
 		return killers;
 	}
 
-	private void logKill(Player winner, Player victim) {
+	private void logKill(Player winner, Player victim, List<Player> assistedGroup) {
+		assistedGroup.remove(winner);
 		if (LoggingConfig.LOG_KILL)
-			log.info("[KILL] Player [" + winner.getName() + "] killed [" + victim.getName() + "]");
+			log.info("[KILL] Player [" + winner.getName() + "] killed [" + victim.getName() + "] assisted by "
+				+ assistedGroup.stream().map(p -> "[" + p.getName() + "]").collect(Collectors.joining(",")));
 
 		if (LoggingConfig.LOG_PL) {
 			String ip1 = winner.getClientConnection().getIP();

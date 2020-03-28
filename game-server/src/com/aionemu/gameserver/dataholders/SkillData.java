@@ -132,7 +132,6 @@ public class SkillData {
 	public void validateMotions() {
 		StringBuilder names = new StringBuilder();
 		StringBuilder missing = new StringBuilder();
-		StringBuilder empty = new StringBuilder();
 		Set<String> motionNames = new HashSet<>();
 		for (SkillTemplate t : getSkillTemplates()) {
 			Motion m = t.getMotion();
@@ -150,7 +149,5 @@ public class SkillData {
 			LoggerFactory.getLogger(SkillData.class).warn("Missing motion names for these skills: {}", names.substring(0, names.length() - 2));
 		if (missing.length() > 0)
 			LoggerFactory.getLogger(SkillData.class).warn("Missing motion times for these motion names: {}", missing.substring(0, missing.length() - 2));
-		if (empty.length() > 0)
-			LoggerFactory.getLogger(SkillData.class).warn("Emtpy motion times for these motion names (all times are zero): {}", empty.substring(0, empty.length() - 2));
 	}
 }

@@ -84,7 +84,7 @@ public class CreatureEventHandler {
 		if (!owner.getPosition().isMapRegionActive())
 			return;
 
-		if (PositionUtil.isInRange(owner, creature, owner.getAggroRange()) && PositionUtil.isInFrontOf(creature, owner, owner.getAggroAngle())) {
+		if (isInSeeRange(creature, owner)) {
 			ai.handleCreatureDetected(creature); // TODO: Move to AIEventType, prevent calling multiple times
 			boolean isPlayer = creature instanceof Player;
 			if (isPlayer && ((Player) creature).isInCustomState(CustomPlayerState.ENEMY_OF_ALL_NPCS)
@@ -100,6 +100,14 @@ public class CreatureEventHandler {
 				ShoutEventHandler.onSee(ai, creature);
 			}
 		}
+	}
+
+	private static boolean isInSeeRange(Creature creature, Npc npc) {
+		if (npc.getAggroAngle() == 0 || npc.getAggroRange() == 0)
+			return false;
+		if (!PositionUtil.isInRange(npc, creature, npc.getAggroRange()))
+			return false;
+		return PositionUtil.isInFrontOf(creature, npc, npc.getAggroAngle() / 2f) || PositionUtil.isInRange(npc, creature, npc.getShortAggroRange());
 	}
 
 	private static boolean validateAggro(Npc owner, Creature creature) {

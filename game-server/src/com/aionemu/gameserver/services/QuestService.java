@@ -6,14 +6,7 @@ import java.sql.Timestamp;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
@@ -44,20 +37,7 @@ import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.model.templates.quest.CollectItem;
-import com.aionemu.gameserver.model.templates.quest.CollectItems;
-import com.aionemu.gameserver.model.templates.quest.HandlerSideDrop;
-import com.aionemu.gameserver.model.templates.quest.InventoryItem;
-import com.aionemu.gameserver.model.templates.quest.InventoryItems;
-import com.aionemu.gameserver.model.templates.quest.QuestCategory;
-import com.aionemu.gameserver.model.templates.quest.QuestDrop;
-import com.aionemu.gameserver.model.templates.quest.QuestItems;
-import com.aionemu.gameserver.model.templates.quest.QuestMentorType;
-import com.aionemu.gameserver.model.templates.quest.QuestRepeatCycle;
-import com.aionemu.gameserver.model.templates.quest.QuestTarget;
-import com.aionemu.gameserver.model.templates.quest.QuestWorkItems;
-import com.aionemu.gameserver.model.templates.quest.Rewards;
-import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
+import com.aionemu.gameserver.model.templates.quest.*;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOT_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
@@ -655,93 +635,46 @@ public final class QuestService {
 	}
 
 	/**
-	 * Returns the first index of reward which matched collected items. Returns -1 if not applied. If quest wasn't started, starts it (useful for relics
-	 * quests)
+	 * Only used by relic reward quests. Checks if the player has any necessary items with sufficient count and starts the quest.
 	 */
-	public static int getCollectItemsReward(QuestEnv env, boolean showWarning, boolean removeItem) {
-		return checkCollectItemsReward(env, showWarning, removeItem, null);
+	public static int checkAndGetCollectItemQuestRewardCategory(QuestEnv env) {
+		return checkAndGetCollectItemQuestRewardCategory(env, null);
 	}
 
-	/**
-	 * Returns an index of reward if collected items match the specified rewardIndex. Returns -1 if not matched. If quest wasn't started, starts it
-	 * (useful for relics quests)
-	 */
-	public static int checkCollectItemsReward(QuestEnv env, boolean showWarning, boolean removeItem, Integer rewardIndex) {
+	public static int checkAndGetCollectItemQuestRewardCategory(QuestEnv env, Integer rewardIndex) {
 		Player player = env.getPlayer();
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(env.getQuestId());
-		String requiredItemL10n = null;
-		int result = -1;
 
 		CollectItems collectItems = template.getCollectItems();
 		if (collectItems == null || template.getRewards().isEmpty() || rewardIndex != null && rewardIndex >= template.getRewards().size())
-			return result;
-
-		List<Integer> toCheck = null; // collect item indexes
-		int start = rewardIndex != null ? rewardIndex : 0;
-		int end = rewardIndex != null ? rewardIndex + 1 : template.getRewards().size();
-
-		for (result = start; result < end; result++) {
-			boolean checkValid = true;
-			Rewards reward = template.getRewards().get(result);
-			toCheck = reward.getCollectItemChecks();
-
-			if (toCheck == null) { // all items are required
-				toCheck = new ArrayList<>();
-				for (int index = 0; index < collectItems.getCollectItem().size(); index++)
-					toCheck.add(index);
-			} else if (toCheck.contains(-1)) { // no check/remove is required
-				removeItem = false;
-				break;
-			}
-
-			Integer index = 0;
-			for (int i = 0; i < toCheck.size(); i++) {
-				CollectItem ci = collectItems.getCollectItem().get(index);
-				int itemId = ci.getItemId();
-				long count = itemId == ItemId.KINAH.value() ? player.getInventory().getKinah() : player.getInventory().getItemCountByItemId(itemId);
-				checkValid &= ci.getCount() <= count;
-				if (!checkValid)
-					break;
-			}
-			if (!checkValid) {
-				// save last required item
-				CollectItem ci = collectItems.getCollectItem().get(index);
-				requiredItemL10n = DataManager.ITEM_DATA.getItemTemplate(ci.getItemId()).getL10n();
-			} else {
-				// all checks were success
-				requiredItemL10n = null;
-				break;
-			}
-		}
-
-		if (requiredItemL10n != null) {
-			if (showWarning)
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_COMPLETE_ERROR_QUEST_ITEM_RETRY(requiredItemL10n));
-			return -1;
-		}
-
-		QuestState qs = player.getQuestStateList().getQuestState(env.getQuestId());
-		if (qs == null || qs.isStartable()) {
-			boolean stateValid = true;
-			if (collectItems.getStartCheck())
-				stateValid = startQuest(env);
-			if (!stateValid)
-				return -1;
-		} else if (qs.getStatus() != QuestStatus.START && collectItems.getStartCheck())
 			return -1;
 
-		if (removeItem && toCheck != null) {
-			for (int i = 0; i < toCheck.size(); i++) {
-				int index = toCheck.get(i);
-				CollectItem collectItem = collectItems.getCollectItem().get(index);
-				if (collectItem.getItemId() == ItemId.KINAH.value())
-					player.getInventory().decreaseKinah(collectItem.getCount());
-				else {
-					player.getInventory().decreaseByItemId(collectItem.getItemId(), collectItem.getCount());
+		if (rewardIndex == null) { // Verify if player has atleast one item with sufficient count and starts quest
+			for (CollectItem cItem : collectItems.getCollectItem()) {
+				if (player.getInventory().getItemCountByItemId(cItem.getItemId()) >= cItem.getCount()) {
+					QuestState qs = player.getQuestStateList().getQuestState(env.getQuestId());
+					if (qs == null || qs.isStartable()) {
+						boolean stateValid = true;
+						if (collectItems.getStartCheck())
+							stateValid = startQuest(env);
+						if (stateValid)
+							return 0;
+					} else if (qs.getStatus() != QuestStatus.START && collectItems.getStartCheck()) {
+						return -1;
+					}
 				}
 			}
+		} else {
+			CollectItem selectedOption = collectItems.getCollectItem().get(rewardIndex);
+			if (!player.getInventory().decreaseByItemId(selectedOption.getItemId(), selectedOption.getCount())) {
+				String requiredItemL10n = DataManager.ITEM_DATA.getItemTemplate(selectedOption.getItemId()).getL10n();
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_QUEST_COMPLETE_ERROR_QUEST_ITEM_RETRY(requiredItemL10n));
+				return -1;
+			} else {
+				return rewardIndex;
+			}
 		}
-		return result;
+		return -1;
 	}
 
 	public static VisibleObject spawnQuestNpc(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading, int staticId) {
@@ -1018,11 +951,7 @@ public final class QuestService {
 	}
 
 	public static void addQuestDrop(int npcId, QuestDrop drop) {
-		List<QuestDrop> drops = questDrop.get(npcId);
-		if (drops == null) {
-			drops = new ArrayList<>();
-			questDrop.put(npcId, drops);
-		}
+		List<QuestDrop> drops = questDrop.computeIfAbsent(npcId, k -> new ArrayList<>());
 		drops.add(drop);
 	}
 

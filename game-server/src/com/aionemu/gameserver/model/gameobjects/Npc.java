@@ -159,6 +159,11 @@ public class Npc extends Creature {
 		return getAi().modifyAggroRange(getObjectTemplate().getAggroRange());
 	}
 
+	public int getShortAggroRange() {
+		int aggroRange = getAggroRange();
+		return aggroRange < 8 ? aggroRange / 2 : 4;
+	}
+
 	public int getAggroAngle() {
 		return getAi().modifyAggroAngle(getObjectTemplate().getAggroAngle());
 	}

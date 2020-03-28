@@ -112,7 +112,7 @@ public class MotionTime {
 			return;
 		}
 		for (Times t : times) {
-			WeaponTypeWrapper wrapper = null;
+			WeaponTypeWrapper wrapper;
 			switch (t.getWeapon()) {
 				case "1hand":
 					wrapper = new WeaponTypeWrapper(ItemGroup.SWORD, null);
@@ -165,6 +165,8 @@ public class MotionTime {
 				case "harp":
 					wrapper = new WeaponTypeWrapper(ItemGroup.HARP, null);
 					break;
+				default:
+					throw new IllegalArgumentException(t.getWeapon() + " is not implemented");
 			}
 			map.computeIfAbsent(wrapper, k -> new HashMap<>()).put(t.getId(), t);
 		}

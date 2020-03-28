@@ -1,12 +1,7 @@
 package com.aionemu.gameserver.questEngine;
 
 import java.io.File;
-import java.util.EnumMap;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
 import org.quartz.JobDetail;
@@ -29,12 +24,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.factions.NpcFactionTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.model.templates.quest.HandlerSideDrop;
-import com.aionemu.gameserver.model.templates.quest.InventoryItem;
-import com.aionemu.gameserver.model.templates.quest.QuestCategory;
-import com.aionemu.gameserver.model.templates.quest.QuestDrop;
-import com.aionemu.gameserver.model.templates.quest.QuestItems;
-import com.aionemu.gameserver.model.templates.quest.QuestNpc;
+import com.aionemu.gameserver.model.templates.quest.*;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_COMPLETED_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -189,7 +179,7 @@ public class QuestEngine implements GameEngine {
 
 	public boolean onDialog(QuestEnv env) {
 		try {
-			AbstractQuestHandler questHandler = null;
+			AbstractQuestHandler questHandler;
 			if (env.getQuestId() != 0) {
 				questHandler = getQuestHandlerByQuestId(env.getQuestId());
 				if (questHandler != null)
@@ -702,7 +692,7 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public boolean onAtDistance(QuestEnv env) {
-		QuestNpc questNpc = null;
+		QuestNpc questNpc;
 		Npc npc = (Npc) env.getVisibleObject();
 		if (!questNpcs.containsKey(npc.getNpcId())) {
 			return false;
@@ -796,7 +786,7 @@ public class QuestEngine implements GameEngine {
 	public void registerOnLevelChanged(int questId) {
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 		Race racePermitted = template.getRacePermitted();
-		TIntArrayList quests = null;
+		TIntArrayList quests;
 		if (racePermitted == null) {
 			quests = getOrCreateOnLevelUpForRace(Race.ASMODIANS);
 			if (!quests.contains(questId))
@@ -1031,19 +1021,19 @@ public class QuestEngine implements GameEngine {
 	}
 
 	private void analyzeQuestHandlers() {
-		log.info("Analyzing quest handlers...");
+		boolean ignoreEventQuests = true;
+		log.info("Analyzing quest handlers (ignoreEventQuests=" + ignoreEventQuests + ")...");
 		Set<Integer> unobtainableQuests = new HashSet<>();
 		Set<Integer> factionIds = new HashSet<>();
 		for (NpcFactionTemplate nft : DataManager.NPC_FACTIONS_DATA.getNpcFactionsData()) {
-			if (nft.getNpcIds() == null || nft.getNpcIds().stream().anyMatch(npcId -> existsSpawnData(npcId)))
+			if (nft.getNpcIds() == null || nft.getNpcIds().stream().anyMatch(this::existsSpawnData))
 				factionIds.add(nft.getId());
 		}
 		StringBuilder obsoleteHandlers = new StringBuilder();
 		for (AbstractQuestHandler qh : questHandlers.valueCollection()) {
 			QuestTemplate qt = DataManager.QUEST_DATA.getQuestById(qh.getQuestId());
 			if (qt.getMinlevelPermitted() == 99) {
-				if (!(qh instanceof AbstractTemplateQuestHandler)) // since xml handlers aren't expensive, we ignore them. only log manually scripted handlers
-					obsoleteHandlers.append("\n\tQuest ").append(qh.getQuestId()).append(" (minLvl=99, handler=").append(qh.getClass().getName()).append(")");
+				// don't log as obsolete, because players can still have the active quest from before an update
 				unobtainableQuests.add(qh.getQuestId());
 			} else if (qt.getNpcFactionId() > 0 && !factionIds.contains(qt.getNpcFactionId())) { // outdated or unimplemented npc faction
 				if (!(qh instanceof AbstractTemplateQuestHandler)) // since xml handlers aren't expensive, we ignore them. only log manually scripted handlers
@@ -1056,6 +1046,8 @@ public class QuestEngine implements GameEngine {
 		for (int npcId : questNpcs.keys()) {
 			if (!existsSpawnData(npcId)) { // if the npc doesn't appear in any spawn template (world, instance, base, siege, temporary, event, ...)
 				Set<Integer> questIds = getQuestNpc(npcId).findAllRegisteredQuestIds();
+				if (ignoreEventQuests && questIds.stream().allMatch(id -> id >= 80000))
+					continue;
 				if (questIds.stream().allMatch(id -> unobtainableQuests.contains(id) || existsSpawnDataForAnyAlternativeNpc(id, npcId)))
 					continue; // don't log unobtainable quests or if alternative npcs appear in spawn data (many quests support outdated + current npcs)
 				missingSpawns.append("\n\tNpc ").append(npcId).append(" (quests: ").append(StringUtils.join(questIds, ", ")).append(")");
@@ -1093,7 +1085,7 @@ public class QuestEngine implements GameEngine {
 		Set<Integer> alternativeNpcs = quest.getAlternativeNpcs(npcId);
 		if (alternativeNpcs == null)
 			return false;
-		return alternativeNpcs.stream().anyMatch(npc -> existsSpawnData(npc));
+		return alternativeNpcs.stream().anyMatch(this::existsSpawnData);
 	}
 
 	private void addMessageSendingTask() {
