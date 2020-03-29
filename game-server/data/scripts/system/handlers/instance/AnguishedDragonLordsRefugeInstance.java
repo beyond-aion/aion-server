@@ -151,8 +151,8 @@ public class AnguishedDragonLordsRefugeInstance extends DragonLordsRefugeInstanc
 			case 236276: // Tiamat Dragon - killed by Empyrean Lord
 				getNpc(730699).getController().die(); // Animates roof destruction
 				getNpc(730700).getController().die();
-				spawn(283134, 451f, 514.55f, 417.40436f, (byte) 0);
-				spawn(236277, 451f, 514.55f, 417.40436f, (byte) 0);
+				spawn(283134, 451.97f, 514.55f, 417.40436f, (byte) 0);
+				spawn(236277, 451.97f, 514.55f, 417.40436f, (byte) 0);
 				spawn(730704, 437.541f, 513.487f, 415.824f, (byte) 0, 17); // Collapsed Debris impaling Tiamat
 				break;
 			case 236277:
