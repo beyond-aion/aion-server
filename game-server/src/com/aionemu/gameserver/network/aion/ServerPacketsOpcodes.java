@@ -84,7 +84,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_GM_SHOW_LEGION_MEMBERLIST.class, 0x42);
 		addPacketOpcode(SM_WEATHER.class, 0x43);
 		addPacketOpcode(SM_PLAYER_STATE.class, 0x44);
-		// 0x45 SM_SUMMON_TELEPORT_REQUEST some teleport/summon dialog. response when accepting/declining the dialog is 0x166. first D in SM and CM packets is identical (dialog ID?)
+		// 0x45 SM_SUMMON_TELEPORT_REQUEST some teleport/summon dialog. response when accepting/declining the dialog is 0x166. first D in SM and CM packets is identical (dialog ID?) //fsc 0x45 cshh unk name skill_id time_seconds
 		addPacketOpcode(SM_LEVEL_UPDATE.class, 0x46);
 		addPacketOpcode(SM_QUEST_LIST.class, 0x47);
 		addPacketOpcode(SM_KEY.class, 0x48);
@@ -298,7 +298,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_MARK_FRIENDLIST.class, 0x117);
 		addPacketOpcode(SM_CHALLENGE_LIST.class, 0x118);
 		// 281
-		// 0x11A
+		// 0x11A shows buff icon + symbols next to players name //fsc 0x11a dd playerObjId iconId (2 = Reward for new user, 3 = reward for returning user, 10 benefits for special user)
 		// addPacketOpcode(SM_DISPUTE_LAND.class, 0x11B);
 		addPacketOpcode(SM_FIRST_SHOW_DECOMPOSABLE.class, 0x11C);
 		addPacketOpcode(SM_MEGAPHONE.class, 0x11D); // Megaphone
