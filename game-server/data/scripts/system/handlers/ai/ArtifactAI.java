@@ -219,8 +219,10 @@ public class ArtifactAI extends NpcAI {
 		private SM_SYSTEM_MESSAGE message;
 
 		/**
+		 *
 		 * @param artifact
-		 * @param targetRace
+		 * @param activator
+		 * @param skill used by this artifact
 		 */
 		private ArtifactUseSkill(ArtifactLocation artifact, Player activator, SkillTemplate skill) {
 			this.artifact = artifact;
@@ -237,18 +239,19 @@ public class ArtifactAI extends NpcAI {
 
 			final boolean start = (runCount == 1);
 			final boolean end = (runCount == artifact.getTemplate().getRepeatCount());
-
 			runCount++;
-			player.getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
+			if (start) {
+				artifact.setStatus(ArtifactStatus.ACTIVATED);
+			}
+			getOwner().getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
 
 				@Override
 				public void accept(Player player) {
-					if (start)
+					if (start) {
 						PacketSendUtility.sendPacket(player, message);
-					artifact.setStatus(ArtifactStatus.ACTIVATED);
-					PacketSendUtility.sendPacket(player, pkt);
+						PacketSendUtility.sendPacket(player, pkt);
+					}
 					if (end) {
-						artifact.setStatus(ArtifactStatus.IDLE);
 						PacketSendUtility.sendPacket(player, pkt);
 					}
 				}
