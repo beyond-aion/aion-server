@@ -14,6 +14,7 @@ import com.aionemu.gameserver.skillengine.model.SkillMoveType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author Sarynth modified by Wakizashi, Sippolo
@@ -33,9 +34,11 @@ public class PulledEffect extends EffectTemplate {
 		if (ec.isAbnormalSet(AbnormalState.PULLED) || ec.isAbnormalSet(AbnormalState.STUMBLE) || ec.isAbnormalSet(AbnormalState.OPENAERIAL))
 			return;
 
+		if (!GeoService.getInstance().canSee(effect.getEffected(),effect.getEffector())) {
+			return;
+		}
 		if (!super.calculate(effect, StatEnum.PULLED_RESISTANCE, null))
 			return;
-
 		effect.setSkillMoveType(SkillMoveType.PULL);
 		final Creature effector = effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector();
 		// Target must be pulled just one meter away from effector, not IN place of effector
