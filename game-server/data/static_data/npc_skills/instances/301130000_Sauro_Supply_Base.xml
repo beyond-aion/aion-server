@@ -189,7 +189,7 @@
 		<npc_skill id="21187" lv="1" prob="100" cd="10000" chain_id="1" next_skill_time="5000" target="ME"/>
 		<npc_skill id="21183" lv="1" prob="80" cd="25000" max_hp="80" target="RANDOM" next_chain_id="2" next_skill_time="0"/> 
 		<npc_skill id="21187" lv="1" prob="100" cd="10000" chain_id="2" next_skill_time="5000" target="ME"/>
-		<npc_skill id="21189" lv="1" prob="75" cd="25000" max_hp="75" target="ME" prio="1"/> 
+		<npc_skill id="21189" lv="1" prob="80" cd="50000" max_hp="75" target="ME" prio="1"/> 
 		<npc_skill id="21184" lv="1" prob="80" cd="35000" max_hp="50" target="ME" next_chain_id="3" next_skill_time="9000" prio="1"/> 
 		<npc_skill id="21186" lv="1" prob="100" cd="0" chain_id="3" next_skill_time="5000"/> 
 		<npc_skill id="21410" lv="1" prob="70" cd="15000" max_hp="25" next_skill_time="3000"/>
