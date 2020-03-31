@@ -43,6 +43,7 @@ public class ScriptCompilerCache {
 	public static final Path CACHE_DIR = Paths.get("./cache/classes");
 	private static final File CACHE_CLASS_MAP = new File(CACHE_DIR + "/classes.properties");
 	private static final AtomicInteger ACCESSORS = new AtomicInteger();
+	private static final AtomicBoolean SHOULD_PERSIST = new AtomicBoolean();
 
 	@Properties
 	private static ConcurrentHashMap<File, Set<File>> CLASS_FILES_BY_SOURCE_FILE;
@@ -83,7 +84,6 @@ public class ScriptCompilerCache {
 	}
 
 	public static void cacheClasses(Collection<BinaryClass> binaryClasses) {
-		boolean needsUpdate = false;
 		for (BinaryClass binaryClass : binaryClasses) {
 			if (binaryClass.getSourceFile() == null) // class was loaded from cache, source file is already in cache map
 				continue;
@@ -92,12 +92,12 @@ public class ScriptCompilerCache {
 				Files.createDirectories(path.getParent());
 				Path classFile = Files.write(path, binaryClass.getBytes());
 				addClassFile(binaryClass.getSourceFile(), classFile);
-				needsUpdate = true;
+				SHOULD_PERSIST.set(true);
 			} catch (IOException e) {
 				log.error("Couldn't cache " + binaryClass.getName(), e);
 			}
-		}
-		if (ACCESSORS.decrementAndGet() == 0 && needsUpdate) // minor tweak to only save once after concurrent access finished and only if needed
+		});
+		if (ACCESSORS.decrementAndGet() == 0 && SHOULD_PERSIST.get()) // only save once after concurrent access finished and only if cache changed
 			saveClassFileMap();
 	}
 
@@ -150,6 +150,7 @@ public class ScriptCompilerCache {
 			log.error("Couldn't save class file map", e);
 			return false;
 		}
+		SHOULD_PERSIST.set(false);
 		return true;
 	}
 }
