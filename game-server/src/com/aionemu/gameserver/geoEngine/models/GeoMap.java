@@ -83,6 +83,8 @@ public class GeoMap extends Node {
 					DespawnableNode[] doorStates = despawnableDoors.computeIfAbsent(desp.id, k -> new DespawnableNode[2]);
 					doorStates[desp.type == DespawnableType.DOOR_STATE1 ? 0 : 1] = desp;
 					break;
+				default:
+					throw new IllegalArgumentException(desp.type + " is not implemented");
 			}
 		}
 

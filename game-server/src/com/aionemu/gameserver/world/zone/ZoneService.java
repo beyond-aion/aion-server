@@ -233,8 +233,8 @@ public final class ZoneService implements GameEngine {
 		zoneData.saveData();
 	}
 
-	public void createMaterialZoneTemplate(Spatial geometry, int worldId, ZoneName zoneName) {
-		if (zoneName.name().equals(ZoneName.NONE))
+	public synchronized void createMaterialZoneTemplate(Spatial geometry, int worldId, ZoneName zoneName) {
+		if (zoneName == ZoneName.NONE)
 			return;
 
 		ZoneHandler handler = collidableHandlers.get(zoneName);

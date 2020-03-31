@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.world.zone;
 
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -13,11 +13,11 @@ public final class ZoneName {
 
 	private final static Logger log = LoggerFactory.getLogger(ZoneName.class);
 
-	private static final Map<String, ZoneName> zoneNames = new HashMap<>();
-	public static final String NONE = "NONE";
+	private static final Map<String, ZoneName> zoneNames = new ConcurrentHashMap<>();
+	public static final ZoneName NONE = new ZoneName("NONE");
 
 	static {
-		zoneNames.put(NONE, new ZoneName(NONE));
+		zoneNames.put(NONE.name(), NONE);
 	}
 
 	private String _name;
@@ -34,28 +34,22 @@ public final class ZoneName {
 		return _name.hashCode();
 	}
 
-	public static final ZoneName createOrGet(String name) {
-		name = name.toUpperCase();
-		if (zoneNames.containsKey(name))
-			return zoneNames.get(name);
-		ZoneName newZone = new ZoneName(name);
-		zoneNames.put(name, newZone);
-		return newZone;
+	public static ZoneName createOrGet(String name) {
+		return zoneNames.computeIfAbsent(name.toUpperCase(), ZoneName::new);
 	}
 
-	public static final int getId(String name) {
-		name = name.toUpperCase();
-		if (zoneNames.containsKey(name))
-			return zoneNames.get(name).id();
-		return zoneNames.get(NONE).id();
+	public static int getId(String name) {
+		return zoneNames.getOrDefault(name.toUpperCase(), NONE).id();
 	}
 
-	public static final ZoneName get(String name) {
+	public static ZoneName get(String name) {
 		name = name.toUpperCase();
-		if (zoneNames.containsKey(name))
-			return zoneNames.get(name);
-		log.warn("Missing zone : " + name);
-		return zoneNames.get(NONE);
+		ZoneName zoneName = zoneNames.get(name);
+		if (zoneName == null) {
+			zoneName = NONE;
+			log.warn("Missing zone : " + name);
+		}
+		return zoneName;
 	}
 
 	@Override
