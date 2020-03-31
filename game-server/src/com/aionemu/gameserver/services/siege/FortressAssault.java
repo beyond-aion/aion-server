@@ -55,7 +55,8 @@ public class FortressAssault extends Assault<FortressSiege> {
 	}
 
 	private void scheduleSpawns() {
-		spawnTask = ThreadPoolManager.getInstance().schedule(this::spawnWave, Rnd.get(minSpawnDelay, assaultData.getBaseDelay()), TimeUnit.SECONDS);
+		int delay = minSpawnDelay >= assaultData.getBaseDelay() ? minSpawnDelay : Rnd.get(minSpawnDelay, assaultData.getBaseDelay());
+		spawnTask = ThreadPoolManager.getInstance().schedule(this::spawnWave, delay, TimeUnit.SECONDS);
 	}
 
 	private void spawnWave() {
