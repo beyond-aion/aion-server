@@ -116,12 +116,7 @@ public class SummonerAI extends AggressiveNpcAI {
 
 	protected void spawnHelpers(SummonGroup summonGroup) {
 		if (!isDead() && checkBeforeSpawn()) {
-			int count;
-			if (summonGroup.getCount() != 0)
-				count = summonGroup.getCount();
-			else
-				count = Rnd.get(summonGroup.getMinCount(), summonGroup.getMaxCount());
-
+			int count = Rnd.get(summonGroup.getMinCount(), summonGroup.getMaxCount());
 			for (int i = 0; i < count; i++) {
 				VisibleObject npc;
 				if (summonGroup.getDistance() != 0)

@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.ItemData;
 import com.aionemu.gameserver.dataholders.StaticData;
@@ -36,7 +35,9 @@ public class GlobalDropItem implements Chance {
 			throw new IllegalArgumentException("Global drop item ID " + itemId + " is invalid");
 		if (minCount <= 0)
 			throw new IllegalArgumentException("Global drop item [" + itemId + "] min_count (" + minCount + ") must be greater than 0");
-		if (maxCount != 0 && maxCount <= minCount)
+		if (maxCount == 0)
+			maxCount = minCount;
+		else if (maxCount < minCount)
 			throw new IllegalArgumentException(
 				"Global drop item [" + itemId + "] max_count (" + maxCount + ") must be greater than or equal to min_count (" + minCount + ")");
 	}
@@ -51,10 +52,6 @@ public class GlobalDropItem implements Chance {
 
 	public int getMaxCount() {
 		return maxCount;
-	}
-
-	public final int getResultCount() {
-		return maxCount == 0 ? minCount : Rnd.get(minCount, maxCount);
 	}
 
 	@Override

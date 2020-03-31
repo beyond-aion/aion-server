@@ -26,20 +26,19 @@
 			<xs:element name="summonGroup" type="SummonGroup" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
 			<xs:attribute name="percent" type="xs:int" use="required"/>
-			<xs:attribute name="skillId" type="xs:int" use="optional"/>
-			<xs:attribute name="isIndividual" type="xs:boolean" use="optional"/>
+			<xs:attribute name="skillId" type="xs:int"/>
+			<xs:attribute name="isIndividual" type="xs:boolean"/>
 	</xs:complexType>
 	<xs:complexType name="SummonGroup">
 			<xs:attribute name="npcId" type="xs:int" use="required"/>
-			<xs:attribute name="x" type="xs:float" use="optional"/>
-			<xs:attribute name="y" type="xs:float" use="optional"/>
-			<xs:attribute name="z" type="xs:float" use="optional"/>
-			<xs:attribute name="h" type="xs:byte" use="optional" default="0"/>
-			<xs:attribute name="count" type="xs:int" use="optional"/>
-			<xs:attribute name="minCount" type="xs:int" use="optional"/>
-			<xs:attribute name="maxCount" type="xs:int" use="optional"/>
-			<xs:attribute name="distance" type="xs:float" use="optional"/>
-			<xs:attribute name="schedule" type="xs:int" use="optional"/>
+			<xs:attribute name="x" type="xs:float"/>
+			<xs:attribute name="y" type="xs:float"/>
+			<xs:attribute name="z" type="xs:float"/>
+			<xs:attribute name="h" type="xs:byte" default="0"/>
+			<xs:attribute name="minCount" type="xs:int" default="1"/>
+			<xs:attribute name="maxCount" type="xs:int"/>
+			<xs:attribute name="distance" type="xs:float"/>
+			<xs:attribute name="schedule" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="Bombs">
 		<xs:sequence>
@@ -48,6 +47,6 @@
 	</xs:complexType>
 	<xs:complexType name="BombTemplate">
 		<xs:attribute name="skillId" type="xs:int" use="required"/>
-		<xs:attribute name="cd" type="xs:int" use="optional"/>
+		<xs:attribute name="cd" type="xs:int"/>
 	</xs:complexType>
 </xs:schema>

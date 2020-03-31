@@ -20,13 +20,13 @@
 		<xs:attribute name="race" type="xs:string" />
 		<xs:attribute name="name" type="xs:string" />
 		<xs:attribute name="level_based_chance_reduction" type="xs:boolean" default="false" />
-		<xs:attribute name="max_items" type="xs:int" use="optional" default="1" />
+		<xs:attribute name="max_items" type="xs:int" default="1" />
 	</xs:complexType>
 	<xs:complexType name="Drop">
-		<xs:attribute name="item_id" type="xs:int" />
-		<xs:attribute name="min_amount" type="xs:int" use="optional" default="1" />
-		<xs:attribute name="max_amount" type="xs:int" use="optional" default="1" />
-		<xs:attribute name="chance" type="xs:float" />
-		<xs:attribute name="each_member" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="item_id" type="xs:int" use="required" />
+		<xs:attribute name="min_amount" type="xs:int" default="1" />
+		<xs:attribute name="max_amount" type="xs:int" default="0" />
+		<xs:attribute name="chance" type="xs:float" default="100" />
+		<xs:attribute name="each_member" type="xs:boolean" default="false" />
 	</xs:complexType>
 </xs:schema>

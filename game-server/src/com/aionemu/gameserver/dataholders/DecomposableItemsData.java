@@ -47,12 +47,8 @@ public class DecomposableItemsData {
 	}
 
 	public List<ResultedItem> getSelectableItems(int itemId) {
-		if (selectableDecomposables.contains(itemId)) {
-			List<ResultedItem> result = new ArrayList<>();
-			result.addAll(selectableDecomposables.get(itemId));
-			return result;
-		} else
-			return null;
+		List<ResultedItem> items = selectableDecomposables.get(itemId);
+		return items == null ? null : new ArrayList<>(items);
 	}
 
 	public List<ExtractedItemsCollection> getInfoByItemId(int itemId) {
