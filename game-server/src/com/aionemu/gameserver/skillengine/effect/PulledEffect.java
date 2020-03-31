@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.effect.EffectController;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -46,7 +47,8 @@ public class PulledEffect extends EffectTemplate {
 		float z = effector.getZ();
 		final float x1 = (float) Math.cos(radian);
 		final float y1 = (float) Math.sin(radian);
-		effect.setTargetLoc(effector.getX() + x1, effector.getY() + y1, z);
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effect.getEffected(),effector.getX() + x1, effector.getY() + y1, z);
+		effect.setTargetLoc(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 	}
 
 	@Override
