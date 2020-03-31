@@ -1,22 +1,13 @@
 package com.aionemu.commons.scripting;
 
-import java.io.File;
-import java.io.FileOutputStream;
-import java.io.IOException;
+import java.io.*;
 import java.net.URI;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
 
@@ -84,9 +75,9 @@ public class ScriptCompilerCache {
 	}
 
 	public static void cacheClasses(Collection<BinaryClass> binaryClasses) {
-		for (BinaryClass binaryClass : binaryClasses) {
+		binaryClasses.parallelStream().forEach(binaryClass -> {
 			if (binaryClass.getSourceFile() == null) // class was loaded from cache, source file is already in cache map
-				continue;
+				return;
 			try {
 				Path path = Paths.get(CACHE_DIR.toString(), binaryClass.toUri().toString().replace('.', '/') + ".class");
 				Files.createDirectories(path.getParent());
@@ -134,7 +125,7 @@ public class ScriptCompilerCache {
 		File sourceFile = WORKING_DIR.relativize(Paths.get(sourceFileUri)).toFile();
 		CLASS_FILES_BY_SOURCE_FILE.compute(sourceFile, (key, files) -> {
 			if (files == null)
-				files = new HashSet<>();
+				files = ConcurrentHashMap.newKeySet();
 			files.add(CACHE_DIR.relativize(classFile).toFile());
 			return files;
 		});
@@ -144,8 +135,8 @@ public class ScriptCompilerCache {
 		java.util.Properties properties = new java.util.Properties();
 		CLASS_FILES_BY_SOURCE_FILE.forEach(
 			(sourceFile, classFiles) -> properties.put(sourceFile.toString(), classFiles.stream().map(File::getPath).collect(Collectors.joining(","))));
-		try (FileOutputStream fos = new FileOutputStream(CACHE_CLASS_MAP)) {
-			properties.store(fos, "THIS FILE IS AUTO GENERATED, DO NOT EDIT!");
+		try (OutputStream os = new BufferedOutputStream(new FileOutputStream(CACHE_CLASS_MAP))) {
+			properties.store(os, "THIS FILE IS AUTO GENERATED, DO NOT EDIT!");
 		} catch (IOException e) {
 			log.error("Couldn't save class file map", e);
 			return false;

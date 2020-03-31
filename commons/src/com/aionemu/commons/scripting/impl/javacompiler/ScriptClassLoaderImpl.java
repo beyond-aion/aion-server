@@ -3,7 +3,6 @@ package com.aionemu.commons.scripting.impl.javacompiler;
 import java.io.File;
 import java.io.IOException;
 import java.io.InputStream;
-import java.io.OutputStream;
 import java.net.URL;
 import java.util.Collections;
 import java.util.Enumeration;
@@ -136,9 +135,7 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 			if (ClassUtils.isPackageMember(cn, packageName)) {
 				BinaryClass bc = new BinaryClass(cn, null);
 				try {
-					byte[] data = getRawClassByName(cn);
-					OutputStream os = bc.openOutputStream();
-					os.write(data);
+					loadRawClassByName(cn, bc);
 				} catch (IOException e) {
 					log.error("Error while loading class from package " + packageName, e);
 					throw e;
@@ -156,55 +153,36 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 	 * 
 	 * @param name
 	 *          the name of the class
-	 * @return the resulting class data
+	 * @param bc
+	 *          the target BinaryClass to write the data to
 	 * @throws IOException
 	 *           if failed to load class
 	 * @throws IllegalArgumentException
 	 *           if failed to open input stream for class
 	 */
-	protected byte[] getRawClassByName(String name) throws IOException {
+	private void loadRawClassByName(String name, BinaryClass bc) throws IOException {
 		String resourceName = name.replace('.', '/').concat(".class");
 		URL resource = getResource(resourceName);
-		InputStream is = null;
-		byte[] clazz = null;
-
-		try {
-			is = resource.openStream();
-			clazz = IOUtils.toByteArray(is);
+		if (resource == null)
+			throw new IllegalArgumentException("Can't open input stream for resource: " + name);
+		try (InputStream is = resource.openStream()) {
+			IOUtils.copy(is, bc.openOutputStream());
 		} catch (IOException e) {
 			log.error("Error while loading class data: " + name, e);
 			throw e;
-		} catch (NullPointerException e) {
-			log.error("Can't open input stream for resource: " + name);
-			throw new IllegalArgumentException("Failed to open input stream for resource: " + name);
-		} finally {
-			if (is != null) {
-				try {
-					is.close();
-				} catch (IOException e) {
-					log.error("Error while closing stream", e);
-				}
-			}
 		}
-		return clazz;
 	}
 
 	@Override
 	public byte[] getByteCode(String className) {
-		BinaryClass bc = getClassFileManager().getCompiledClasses().get(className);
-		byte[] b = new byte[bc.getBytes().length];
-		System.arraycopy(bc.getBytes(), 0, b, 0, b.length);
-		return b;
+		BinaryClass bc = classFileManager.getCompiledClasses().get(className);
+		return bc.getBytes();
 	}
 
 	@Override
 	public Class<?> getDefinedClass(String name) {
 		BinaryClass bc = classFileManager.getCompiledClasses().get(name);
-		if (bc == null) {
-			return null;
-		}
-
-		return bc.getDefinedClass();
+		return bc == null ? null : bc.getDefinedClass();
 	}
 
 	@Override
