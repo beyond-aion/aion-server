@@ -1,11 +1,21 @@
 package com.aionemu.gameserver.dataholders.loadingutils;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.InputStreamReader;
+import java.nio.charset.StandardCharsets;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
+
+import javax.xml.stream.XMLInputFactory;
+import javax.xml.stream.XMLStreamReader;
+import javax.xml.transform.stax.StAXSource;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.xml.JAXBUtil;
+import com.aionemu.commons.utils.xml.XmlUtil;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.StaticData;
 
@@ -26,7 +36,7 @@ public class XmlDataLoader {
 	private static final String CACHE_XML_FILE = CACHE_DIRECTORY + "/static_data.xml";
 	private static final String MAIN_XML_FILE = "./data/static_data/static_data.xml";
 
-	public static final XmlDataLoader getInstance() {
+	public static XmlDataLoader getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -48,10 +58,29 @@ public class XmlDataLoader {
 
 		try {
 			log.info("Processing cache file...");
-			return JAXBUtil.deserialize(cachedXml, StaticData.class, XML_SCHEMA_FILE);
+			// passing the xsd for auto schema validation in JAXBUtil.deserialize slows down the server start, so we validate manually in another thread and don't let the server start on error
+			Future<?> validationTask = validateAsync(cachedXml);
+			StaticData staticData = JAXBUtil.deserialize(cachedXml, StaticData.class);
+			staticData.setValidationTask(validationTask);
+			return staticData;
 		} catch (Throwable e) {
 			throw new GameServerError("Error while loading static data", e);
 		}
+	}
+
+	private Future<?> validateAsync(File cachedXml) {
+		// not via ThreadPoolManager because it wraps tasks so that exceptions are swallowed and task.get() doesn't fail with an ExecutionException
+		return Executors.newSingleThreadExecutor().submit(() -> {
+			log.info("Validating " + cachedXml + " in background...");
+			try (InputStreamReader isr = new InputStreamReader(new FileInputStream(cachedXml), StandardCharsets.UTF_8)) {
+				long time = System.currentTimeMillis();
+				XMLStreamReader xmlStreamReader = XMLInputFactory.newInstance().createXMLStreamReader(isr);
+				XmlUtil.getSchema(XML_SCHEMA_FILE).newValidator().validate(new StAXSource(xmlStreamReader));
+				log.info("Validated " + cachedXml + " in " + (System.currentTimeMillis() - time) + "ms");
+			} catch (Throwable t) {
+				throw new GameServerError("Error validating " + cachedXml, t);
+			}
+		});
 	}
 
 	/**
@@ -61,7 +90,7 @@ public class XmlDataLoader {
 	 * @param cachedXml
 	 * @param cleanMainXml
 	 * @throws Error
-	 *           is thrown if some problem occured.
+	 *           is thrown if some problem occurred.
 	 */
 	private void mergeXmlFiles(File cachedXml, File cleanMainXml) throws Error {
 		XmlMerger merger = new XmlMerger(cleanMainXml, cachedXml);

@@ -39,10 +39,6 @@ public class SiegeLocationTemplate implements L10n {
 
 	@XmlAttribute(name = "name_id")
 	protected int nameId = 0;
-	@XmlAttribute(name = "repeat_count")
-	protected int repeatCount = 1;
-	@XmlAttribute(name = "repeat_interval")
-	protected int repeatInterval = 1;
 	@XmlAttribute(name = "siege_duration")
 	protected int siegeDuration;
 	@XmlAttribute(name = "influence")
@@ -95,11 +91,11 @@ public class SiegeLocationTemplate implements L10n {
 	}
 
 	public int getRepeatCount() {
-		return repeatCount;
+		return artifactActivation.getRepeatCount();
 	}
 
 	public int getRepeatInterval() {
-		return repeatInterval;
+		return artifactActivation.getRepeatInterval();
 	}
 
 	public List<Integer> getFortressDependency() {

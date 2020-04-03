@@ -56,18 +56,6 @@ import com.aionemu.gameserver.geoEngine.utils.IntMap.Entry;
 
 public class Mesh {
 
-	// TODO: Document this enum
-	public enum Mode {
-		Points,
-		Lines,
-		LineLoop,
-		LineStrip,
-		Triangles,
-		TriangleStrip,
-		TriangleFan,
-		Hybrid
-	}
-
 	// private static final int BUFFERS_SIZE = VertexBuffer.Type.BoneIndex.ordinal() + 1;
 
 	/**
@@ -81,64 +69,14 @@ public class Mesh {
 	// VertexBuffer>(VertexBuffer.Type.class);
 	// private VertexBuffer[] buffers = new VertexBuffer[BUFFERS_SIZE];
 	private IntMap<VertexBuffer> buffers = new IntMap<>();
-	private float pointSize = 1;
-	private float lineWidth = 1;
-
-	private transient int vertexArrayID = -1;
 
 	private int vertCount = -1;
 	private int elementCount = -1;
-	private int maxNumWeights = -1; // only if using skeletal animation
-
-	private int[] modeStart;
-
-	private Mode mode = Mode.Triangles;
 
 	private byte materialId = 0;
 	private byte collisionIntentions = 0;
 
 	public Mesh() {
-	}
-
-	public int[] getModeStart() {
-		return modeStart;
-	}
-
-	public void setModeStart(int[] modeStart) {
-		this.modeStart = modeStart;
-	}
-
-	public Mode getMode() {
-		return mode;
-	}
-
-	public void setMode(Mode mode) {
-		this.mode = mode;
-		updateCounts();
-	}
-
-	public int getMaxNumWeights() {
-		return maxNumWeights;
-	}
-
-	public void setMaxNumWeights(int maxNumWeights) {
-		this.maxNumWeights = maxNumWeights;
-	}
-
-	public float getPointSize() {
-		return pointSize;
-	}
-
-	public void setPointSize(float pointSize) {
-		this.pointSize = pointSize;
-	}
-
-	public float getLineWidth() {
-		return lineWidth;
-	}
-
-	public void setLineWidth(float lineWidth) {
-		this.lineWidth = lineWidth;
 	}
 
 	/**
@@ -228,26 +166,6 @@ public class Mesh {
 		}
 	}
 
-	private int computeNumElements(int bufSize) {
-		switch (mode) {
-			case Triangles:
-				return bufSize / 3;
-			case TriangleFan:
-			case TriangleStrip:
-				return bufSize - 2;
-			case Points:
-				return bufSize;
-			case Lines:
-				return bufSize / 2;
-			case LineLoop:
-				return bufSize;
-			case LineStrip:
-				return bufSize - 1;
-			default:
-				throw new UnsupportedOperationException();
-		}
-	}
-
 	public void updateCounts() {
 		if (getBuffer(Type.InterleavedData) != null)
 			throw new IllegalStateException("Should update counts before interleave");
@@ -258,15 +176,10 @@ public class Mesh {
 			vertCount = pb.getData().capacity() / pb.getNumComponents();
 		}
 		if (ib != null) {
-			elementCount = computeNumElements(ib.getData().capacity());
+			elementCount = ib.getData().capacity() / 3;
+		} else {
+			elementCount = vertCount / 3;
 		}
-		else {
-			elementCount = computeNumElements(vertCount);
-		}
-	}
-
-	public int getTriangleCount(int lod) {
-		return elementCount;
 	}
 
 	public int getTriangleCount() {
@@ -307,17 +220,6 @@ public class Mesh {
 				BufferUtils.populateFromBuffer(v3, fpb, vert3);
 			}
 		}
-	}
-
-	public int getId() {
-		return vertexArrayID;
-	}
-
-	public void setId(int id) {
-		if (vertexArrayID != -1)
-			throw new IllegalStateException("ID has already been set.");
-
-		vertexArrayID = id;
 	}
 
 	public void createCollisionData() {

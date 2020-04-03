@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.effect.EffectController;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -14,6 +15,7 @@ import com.aionemu.gameserver.skillengine.model.SkillMoveType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author Sarynth modified by Wakizashi, Sippolo
@@ -33,9 +35,11 @@ public class PulledEffect extends EffectTemplate {
 		if (ec.isAbnormalSet(AbnormalState.PULLED) || ec.isAbnormalSet(AbnormalState.STUMBLE) || ec.isAbnormalSet(AbnormalState.OPENAERIAL))
 			return;
 
+		if (!GeoService.getInstance().canSee(effect.getEffected(),effect.getEffector())) {
+			return;
+		}
 		if (!super.calculate(effect, StatEnum.PULLED_RESISTANCE, null))
 			return;
-
 		effect.setSkillMoveType(SkillMoveType.PULL);
 		final Creature effector = effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector();
 		// Target must be pulled just one meter away from effector, not IN place of effector
@@ -43,7 +47,8 @@ public class PulledEffect extends EffectTemplate {
 		float z = effector.getZ();
 		final float x1 = (float) Math.cos(radian);
 		final float y1 = (float) Math.sin(radian);
-		effect.setTargetLoc(effector.getX() + x1, effector.getY() + y1, z);
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effect.getEffected(),effector.getX() + x1, effector.getY() + y1, z);
+		effect.setTargetLoc(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 	}
 
 	@Override

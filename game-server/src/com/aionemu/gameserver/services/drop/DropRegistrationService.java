@@ -1,12 +1,6 @@
 package com.aionemu.gameserver.services.drop;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.commons.utils.Rnd;
@@ -27,16 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.items.ItemId;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropItem;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropMap;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpc;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropNpcGroup;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropRace;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropRating;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropTribe;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropWorld;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalDropZone;
-import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
+import com.aionemu.gameserver.model.templates.globaldrops.*;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
@@ -462,7 +447,7 @@ public class DropRegistrationService {
 	}
 
 	private long getItemCount(GlobalDropItem item, Npc npc) {
-		long count = item.getResultCount();
+		long count = Rnd.get(item.getMinCount(), item.getMaxCount());
 		if (item.getId() == ItemId.KINAH.value())
 			count *= npc.getLevel() * Math.pow(getRankModifier(npc) * getRatingModifier(npc), 6);
 		return count;

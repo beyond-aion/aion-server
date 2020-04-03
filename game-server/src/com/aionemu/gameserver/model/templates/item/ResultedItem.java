@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlList;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.ItemData;
 import com.aionemu.gameserver.dataholders.StaticData;
@@ -42,7 +41,9 @@ public class ResultedItem {
 			throw new IllegalArgumentException("Decomposable reward item ID is invalid: " + itemId);
 		if (minCount <= 0)
 			throw new IllegalArgumentException("Decomposable reward item [" + itemId + "] min_count (" + minCount + ") must be greater than 0");
-		if (maxCount != 0 && maxCount <= minCount)
+		if (maxCount == 0)
+			maxCount = minCount;
+		else if (maxCount < minCount)
 			throw new IllegalArgumentException(
 					"Decomposable reward item [" + itemId + "] max_count (" + maxCount + ") must be unset or greater than min_count (" + minCount + ")");
 	}
@@ -65,10 +66,6 @@ public class ResultedItem {
 
 	public List<PlayerClass> getPlayerClasses() {
 		return playerClasses;
-	}
-
-	public final int getResultCount() {
-		return maxCount == 0 ? minCount : Rnd.get(minCount, maxCount);
 	}
 
 	/**

@@ -1,10 +1,10 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Collections;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Set;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -52,12 +52,7 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 				if (selectableItems == null) {
 					return;
 				}
-				Iterator<ResultedItem> iter = selectableItems.iterator();
-				while (iter.hasNext()) {
-					ResultedItem i = iter.next();
-					if (!i.isObtainableFor(player))
-						iter.remove();
-				}
+				selectableItems.removeIf(i -> !i.isObtainableFor(player));
 				if (index + 1 > selectableItems.size()) {
 					return;
 				}
@@ -70,7 +65,8 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 				player.getInventory().decreaseByObjectId(objectId, 1);
 				PacketSendUtility.sendPacket(player, new SM_SECONDARY_SHOW_DECOMPOSABLE(objectId, Collections.emptyList())); // TODO
 				ResultedItem selectedItem = selectableItems.get(index);
-				ItemService.addItem(player, selectedItem.getItemId(), selectedItem.getResultCount(), true, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
+				int count = Rnd.get(selectedItem.getMinCount(), selectedItem.getMaxCount());
+				ItemService.addItem(player, selectedItem.getItemId(), count, true, new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 			}
 		}
 	}
