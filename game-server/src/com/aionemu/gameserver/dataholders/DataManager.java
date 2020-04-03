@@ -1,11 +1,16 @@
 package com.aionemu.gameserver.dataholders;
 
+import com.aionemu.commons.utils.ExitCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.loadingutils.XmlDataLoader;
 import com.aionemu.gameserver.model.templates.item.actions.DecomposeAction;
 import com.aionemu.gameserver.model.templates.mail.Mails;
+
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Future;
 
 /**
  * This class is holding whole static data, that is loaded from /data/static_data directory.<br>
@@ -110,6 +115,7 @@ public final class DataManager {
 	public static XMLQuests XML_QUESTS;
 	public static ZoneData ZONE_DATA;
 	public static LegionDominionData LEGION_DOMINION_DATA;
+	private static Future<?> xmlValidationTask;
 
 	/**
 	 * Constructor creating <tt>DataManager</tt> instance.<br>
@@ -213,6 +219,7 @@ public final class DataManager {
 		WORLD_RAID_DATA = data.worldRaidData;
 		KILL_BOUNTY_DATA = data.killBountyData;
 		LEGION_DOMINION_DATA = data.legionDominionData;
+		xmlValidationTask = data.getValidationTask();
 
 		// subsequent data processing (must be called after initializing DataManager fields)
 		ITEM_DATA.cleanup();
@@ -222,6 +229,20 @@ public final class DataManager {
 
 		long time = System.currentTimeMillis() - start;
 		log.info("##### [Static Data loaded in " + String.format("%.1f", time / 1000f) + " seconds] #####");
+	}
+
+	public static void waitForValidationToFinishAndShutdownOnFail() {
+		if (xmlValidationTask == null)
+			return;
+		try {
+			xmlValidationTask.get();
+		} catch (InterruptedException | CancellationException ignored) {
+		} catch (ExecutionException e) {
+			log.error("Static data xml validation failed", e.getCause());
+			System.exit(ExitCode.ERROR);
+		} finally {
+			xmlValidationTask = null;
+		}
 	}
 
 	private static class SingletonHolder {

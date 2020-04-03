@@ -1,10 +1,9 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.concurrent.Future;
+
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -294,6 +293,9 @@ public class StaticData {
 	@XmlElement(name = "legion_dominion_template")
 	public LegionDominionData legionDominionData;
 
+	@XmlTransient
+	private Future<?> validationTask;
+
 	void beforeUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		unmarshaller.setListener(new StaticDataListener(this));
 	}
@@ -389,5 +391,13 @@ public class StaticData {
 		log.info("Loaded " + worldRaidData.size() + " world raid locations");
 		log.info("Loaded " + killBountyData.size() + " kill bounty templates");
 		log.info("Loaded " + legionDominionData.size() + " legion dominion locations");
+	}
+
+	public void setValidationTask(Future<?> validationTask) {
+		this.validationTask = validationTask;
+	}
+
+	public Future<?> getValidationTask() {
+		return validationTask;
 	}
 }
