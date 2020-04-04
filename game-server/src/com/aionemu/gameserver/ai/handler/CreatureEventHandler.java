@@ -105,9 +105,9 @@ public class CreatureEventHandler {
 	private static boolean isInSeeRange(Creature creature, Npc npc) {
 		if (npc.getAggroAngle() == 0 || npc.getAggroRange() == 0)
 			return false;
-		if (!PositionUtil.isInRange(npc, creature, npc.getAggroRange()))
+		if (!PositionUtil.isInRange(npc, creature, npc.getAggroRange(), false))
 			return false;
-		return PositionUtil.isInFrontOf(creature, npc, npc.getAggroAngle() / 2f) || PositionUtil.isInRange(npc, creature, npc.getShortAggroRange());
+		return PositionUtil.isInFrontOf(creature, npc, npc.getAggroAngle() / 2f) || PositionUtil.isInRange(npc, creature, npc.getShortAggroRange(), false);
 	}
 
 	private static boolean validateAggro(Npc owner, Creature creature) {

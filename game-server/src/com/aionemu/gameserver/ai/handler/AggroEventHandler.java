@@ -28,6 +28,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
  */
 public class AggroEventHandler {
 
+	private static final int PUSHED_RANGE_VALUE = 2;
 	/**
 	 * @param npcAI
 	 * @param myTarget
@@ -49,7 +50,7 @@ public class AggroEventHandler {
 
 	public static boolean onCreatureNeedsSupport(NpcAI npcAI, Creature creatureAskingForSupport) {
 		Npc owner = npcAI.getOwner();
-		if (TribeRelationService.isSupport(creatureAskingForSupport, owner) && PositionUtil.isInRange(owner, creatureAskingForSupport, 30)
+		if (TribeRelationService.canHelpCreature(creatureAskingForSupport, owner) && PositionUtil.isInRange(owner, creatureAskingForSupport, owner.getAggroRange() + PUSHED_RANGE_VALUE, false)
 			&& GeoService.getInstance().canSee(owner, creatureAskingForSupport)) {
 			VisibleObject attacker = creatureAskingForSupport.getTarget();
 			if (attacker instanceof Creature) {
@@ -72,7 +73,7 @@ public class AggroEventHandler {
 		VisibleObject target = attacker.getTarget();
 		if (target instanceof Player) {
 			Player playerTarget = (Player) target;
-			if (!owner.isEnemy(playerTarget) && owner.isEnemy(attacker) && PositionUtil.isInRange(owner, playerTarget, owner.getAggroRange())
+			if (!owner.isEnemy(playerTarget) && owner.isEnemy(attacker) && PositionUtil.isInRange(owner, playerTarget, owner.getAggroRange() + PUSHED_RANGE_VALUE, false)
 				&& GeoService.getInstance().canSee(owner, attacker)) {
 				owner.getAggroList().addHate(attacker, 1);
 				return true;

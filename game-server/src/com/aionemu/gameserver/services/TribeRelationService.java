@@ -396,4 +396,11 @@ public class TribeRelationService {
 		SiegeRace occupier = SiegeService.getInstance().getFortress(panesterraFortressId).getRace();
 		return SiegeRace.getByRace(player.getRace()) == occupier && npc.getRace() != Race.DRAKAN;
 	}
+
+	public static boolean canHelpCreature(Creature creature1, Creature creature2) {
+		return  creature1.getTribe() == creature2.getTribe() ||
+				DataManager.TRIBE_RELATIONS_DATA.isSupportRelation(creature1.getTribe(),creature2.getTribe()) ||
+				DataManager.TRIBE_RELATIONS_DATA.isFriendlyRelation(creature1.getTribe(), creature2.getTribe());
+
+	}
 }
