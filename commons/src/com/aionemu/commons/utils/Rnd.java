@@ -1,5 +1,7 @@
 package com.aionemu.commons.utils;
 
+import org.slf4j.LoggerFactory;
+
 import java.util.List;
 
 /**
@@ -46,6 +48,12 @@ public final class Rnd {
 	 * @return A number between min and max
 	 */
 	public static int get(int min, int max) {
+		if (min == max) {
+			return min;
+		} else if (max < min) {
+			LoggerFactory.getLogger(Rnd.class).warn("", new IllegalArgumentException("max < min"));
+			max = min;
+		}
 		return min + (int) Math.floor(rnd.nextFloat() * (max - min + 1));
 	}
 

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.ai;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -13,25 +14,32 @@ import javax.xml.bind.annotation.XmlType;
 public class SummonGroup {
 
 	@XmlAttribute(name = "npcId")
-	protected int npcId;
+	private int npcId;
 	@XmlAttribute(name = "x")
-	protected float x;
+	private float x;
 	@XmlAttribute(name = "y")
-	protected float y;
+	private float y;
 	@XmlAttribute(name = "z")
-	protected float z;
+	private float z;
 	@XmlAttribute(name = "h")
-	protected byte h;
-	@XmlAttribute(name = "count")
-	protected int count;
+	private byte h;
 	@XmlAttribute(name = "minCount")
-	protected int minCount;
+	private int minCount = 1;
 	@XmlAttribute(name = "maxCount")
-	protected int maxCount;
+	private int maxCount;
 	@XmlAttribute(name = "distance")
-	protected float distance;
+	private float distance;
 	@XmlAttribute(name = "schedule")
-	protected int schedule;
+	private int schedule;
+
+	void afterUnmarshal(Unmarshaller u, Object parent) {
+		if (minCount <= 0)
+			throw new IllegalArgumentException("minCount (" + minCount + ") for npc group " + npcId + " must be greater than zero");
+		if (maxCount == 0)
+			maxCount = minCount;
+		else if (maxCount < minCount)
+			throw new IllegalArgumentException("maxCount (" + maxCount + ") for npc group " + npcId + " must be greater than minCount (" + minCount + ")");
+	}
 
 	public int getNpcId() {
 		return npcId;
@@ -51,10 +59,6 @@ public class SummonGroup {
 
 	public byte getH() {
 		return h;
-	}
-
-	public int getCount() {
-		return count;
 	}
 
 	public int getMinCount() {

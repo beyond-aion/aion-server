@@ -147,7 +147,7 @@ public class Auction extends AdminCommand {
 
 	private List<House> findHousesInZone(Player admin, String zoneName, Predicate<House> filter) {
 		ZoneName zone = ZoneName.get(zoneName);
-		if (zone.name().equals(ZoneName.NONE)) {
+		if (zone == ZoneName.NONE) {
 			sendInfo(admin, "Invalid zone name");
 			return null;
 		}

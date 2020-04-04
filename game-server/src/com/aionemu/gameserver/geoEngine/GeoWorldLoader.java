@@ -9,10 +9,8 @@ import java.nio.FloatBuffer;
 import java.nio.MappedByteBuffer;
 import java.nio.ShortBuffer;
 import java.nio.channels.FileChannel;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
+import java.util.concurrent.CountDownLatch;
 
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
@@ -22,8 +20,8 @@ import com.aionemu.gameserver.geoEngine.math.Matrix3f;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.geoEngine.scene.*;
-import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.DummyGeoData;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
@@ -37,6 +35,7 @@ public class GeoWorldLoader {
 	private static final boolean DEBUG = false;
 
 	public static Map<String, Node> loadMeshes(String fileName) throws IOException {
+		List<CountDownLatch> latches = new ArrayList<>();
 		Map<String, Node> geoms = new HashMap<>();
 		File geoFile = new File(fileName);
 		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r"); FileChannel roChannel = file.getChannel()) {
@@ -50,6 +49,8 @@ public class GeoWorldLoader {
 				byte intentions = 0;
 				int singleChildMaterialId = 0;
 				int modelCount = geo.getShort() & 0xFFFF;
+				CountDownLatch latch = new CountDownLatch(modelCount);
+				latches.add(latch);
 				for (int c = 0; c < modelCount; c++) {
 					Mesh m = new Mesh();
 
@@ -66,23 +67,23 @@ public class GeoWorldLoader {
 					for (int x = 0; x < triangles; x++) {
 						indexes.put(geo.getShort());
 					}
-					Geometry geom;
 					m.setMaterialId(geo.get());
 					m.setCollisionIntentions(geo.get());
 					intentions |= m.getCollisionIntentions();
 					m.setBuffer(VertexBuffer.Type.Position, 3, vertices);
 					m.setBuffer(VertexBuffer.Type.Index, 3, indexes);
-					m.createCollisionData();
-
-					MaterialTemplate mtl = DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId());
-					geom = new Geometry(name, m);
-					if (mtl != null || m.getMaterialId() == 11) {
+					if (node.getName() == null && (m.getMaterialId() == 11 || DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId()) != null))
 						node.setName(name);
-					}
 					if (modelCount == 1)
-						singleChildMaterialId = geom.getMaterialId();
-
-					node.attachChild(geom);
+						singleChildMaterialId = m.getMaterialId();
+					ThreadPoolManager.getInstance().execute(() -> {
+						m.createCollisionData();
+						Geometry geom = new Geometry(name, m);
+						synchronized (node) {
+							node.attachChild(geom);
+						}
+						latch.countDown();
+					});
 				}
 				node.setCollisionIntentions(intentions);
 				node.setMaterialId((byte) singleChildMaterialId);
@@ -90,8 +91,13 @@ public class GeoWorldLoader {
 			}
 			destroyDirectByteBuffer(geo);
 		}
+		latches.forEach(l -> {
+			try {
+				l.await();
+			} catch (InterruptedException ignored) {
+			}
+		});
 		return geoms;
-
 	}
 
 	public static GeoMap loadWorld(WorldMapTemplate template, Map<String, Node> models, Set<String> missingMeshes) {
@@ -129,18 +135,14 @@ public class GeoWorldLoader {
 				geo.get(nameByte);
 				String name = new String(nameByte).replace('\\', '/').toLowerCase();
 				Vector3f loc = new Vector3f(geo.getFloat(), geo.getFloat(), geo.getFloat());
-				float[] matrix = new float[9];
-				for (int i = 0; i < 9; i++)
-					matrix[i] = geo.getFloat();
-				Vector3f scale = new Vector3f(1f, 1f, 1f);
-				scale.setX(geo.getFloat());
-				scale.setY(geo.getFloat());
-				scale.setZ(geo.getFloat());
+				Matrix3f matrix3f = new Matrix3f();
+				for (int i = 0; i < 3; i++)
+					for (int j = 0; j < 3; j++)
+						matrix3f.set(i, j, geo.getFloat());
+				Vector3f scale = new Vector3f(geo.getFloat(), geo.getFloat(), geo.getFloat());
 				byte type = geo.get();
 				short id = geo.getShort();
 				byte level = geo.get();
-				Matrix3f matrix3f = new Matrix3f();
-				matrix3f.set(matrix);
 				Node node = models.get(name);
 				if (node != null) {
 					if (type > 0) {

@@ -327,6 +327,7 @@ public class GameServer {
 
 		PvpMapService.getInstance().init();
 		CustomInstanceService.getInstance();
+		DataManager.waitForValidationToFinishAndShutdownOnFail();
 
 		System.gc();
 

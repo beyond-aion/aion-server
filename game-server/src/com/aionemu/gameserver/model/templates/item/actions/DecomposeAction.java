@@ -1,10 +1,6 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,12 +17,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.item.ExtractedItemsCollection;
-import com.aionemu.gameserver.model.templates.item.ItemQuality;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.model.templates.item.RandomItem;
-import com.aionemu.gameserver.model.templates.item.RandomType;
-import com.aionemu.gameserver.model.templates.item.ResultedItem;
+import com.aionemu.gameserver.model.templates.item.*;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FIRST_SHOW_DECOMPOSABLE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -171,7 +162,8 @@ public class DecomposeAction extends AbstractItemAction {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_SUCCEED(parentItem.getL10n()));
 					for (ResultedItem resultItem : selectedCollection.getItems()) {
 						if (resultItem.isObtainableFor(player)) {
-							ItemService.addItem(player, resultItem.getItemId(), resultItem.getResultCount(), true,
+							int count = Rnd.get(resultItem.getMinCount(), resultItem.getMaxCount());
+							ItemService.addItem(player, resultItem.getItemId(), count, true,
 								new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
 						}
 					}
@@ -348,9 +340,11 @@ public class DecomposeAction extends AbstractItemAction {
 									} while (!isValidItemId(randomId));
 									break;
 							}
-							if (randomId != 0)
-								ItemService.addItem(player, randomId, randomItem.getResultCount(), true,
+							if (randomId != 0) {
+								int count = Rnd.get(randomItem.getMinCount(), randomItem.getMaxCount());
+								ItemService.addItem(player, randomId, count, true,
 									new ItemUpdatePredicate(ItemAddType.DECOMPOSABLE, ItemUpdateType.INC_ITEM_COLLECT));
+							}
 						}
 					}
 				}

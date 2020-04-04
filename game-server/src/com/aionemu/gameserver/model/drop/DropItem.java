@@ -33,11 +33,10 @@ public class DropItem {
 	}
 
 	/**
-	 * Regenerates item count upon each call // TODO input parameters - based on attacker stats // TODO more precise calculations (non-linear)
+	 * Regenerates item count upon each call
 	 */
 	public void calculateCount() {
-		long rndCount = Rnd.get(dropTemplate.getMinAmount(), dropTemplate.getMaxAmount());
-		count = rndCount == 0 ? 1 : rndCount;
+		count = Rnd.get(dropTemplate.getMinAmount(), dropTemplate.getMaxAmount());
 	}
 
 	/**

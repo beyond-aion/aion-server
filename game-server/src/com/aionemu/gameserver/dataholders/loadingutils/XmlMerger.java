@@ -28,6 +28,7 @@ import org.xml.sax.SAXException;
 import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
+import com.aionemu.commons.utils.PropertiesUtils;
 import com.aionemu.commons.utils.xml.XmlUtil;
 
 /**
@@ -173,10 +174,7 @@ public class XmlMerger {
 			return true;
 		}
 
-		Properties metadata = restoreFileModifications(metaDataFile);
-
-		if (metadata == null) // new file or smth else.
-			return true;
+		Properties metadata = PropertiesUtils.load(metaDataFile, null);
 
 		SAXParserFactory parserFactory = SAXParserFactory.newInstance();
 
@@ -262,8 +260,8 @@ public class XmlMerger {
 		if (file.isFile()) {
 			importFile(file, false, false, writer, metadata);
 		} else {
-			boolean singleRootTag = Boolean.valueOf(getAttributeValue(reader, qNameSingleRootTag, "false"));
-			boolean recImport = Boolean.valueOf(getAttributeValue(reader, qNameRecursiveImport, "true"));
+			boolean singleRootTag = Boolean.parseBoolean(getAttributeValue(reader, qNameSingleRootTag, "false"));
+			boolean recImport = Boolean.parseBoolean(getAttributeValue(reader, qNameRecursiveImport, "true"));
 			log.debug("Processing dir " + file);
 			for (File file2 : XmlUtil.listFiles(file, recImport)) {
 				boolean skipRootStartElement = singleRootTag && startElement != null;
@@ -429,7 +427,7 @@ public class XmlMerger {
 
 			if (file.isDirectory()) { // otherwise check all files inside
 				String rec = attributes.getValue(qNameRecursiveImport.getLocalPart());
-				for (File childFile : XmlUtil.listFiles(file, rec == null ? true : Boolean.valueOf(rec))) {
+				for (File childFile : XmlUtil.listFiles(file, rec == null || Boolean.parseBoolean(rec))) {
 					if (checkFile(childFile)) {
 						isModified = true;
 						return;
@@ -459,20 +457,6 @@ public class XmlMerger {
 
 		public boolean isModified() {
 			return isModified;
-		}
-	}
-
-	private Properties restoreFileModifications(File file) {
-		if (!file.exists() || !file.isFile())
-			return null;
-
-		try (FileReader reader = new FileReader(file)) {
-			Properties props = new Properties();
-			props.load(reader);
-			return props;
-		} catch (IOException e) { // properties
-			log.debug("File modfications restoring error. ", e);
-			return null;
 		}
 	}
 

@@ -55,11 +55,11 @@
 	<npc_drop npc_id="212928"><!-- Treasure Box -->
 		<drop_group><!-- Kinah -->
 			<!-- Level 1 -->
-			<drop item_id="182400001" min_amount="10" max_amount="25" chance="100" /><!-- Kinah -->
+			<drop item_id="182400001" min_amount="10" max_amount="25" /><!-- Kinah -->
 		</drop_group>
 		<drop_group><!-- Other -->
 			<!-- Level 20 -->
-			<drop item_id="169000005" min_amount="100" max_amount="100" chance="60" /><!-- Power Shard -->
+			<drop item_id="169000005" min_amount="100" chance="60" /><!-- Power Shard -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="212945"><!-- Treasure Box -->
@@ -76,16 +76,16 @@
 		</drop_group>
 		<drop_group><!-- Kinah -->
 			<!-- Level 1 -->
-			<drop item_id="182400001" min_amount="25" max_amount="35" chance="100" /><!-- Kinah -->
+			<drop item_id="182400001" min_amount="25" max_amount="35" /><!-- Kinah -->
 		</drop_group>
 		<drop_group><!-- Potion -->
 			<!-- Level 30 -->
-			<drop item_id="162000004" min_amount="20" max_amount="20" chance="50" /><!-- Life Potion -->
-			<drop item_id="162000009" min_amount="20" max_amount="20" chance="50" /><!-- Mana Potion -->
+			<drop item_id="162000004" min_amount="20" chance="50" /><!-- Life Potion -->
+			<drop item_id="162000009" min_amount="20" chance="50" /><!-- Mana Potion -->
 		</drop_group>
 		<drop_group><!-- Power Shard -->
 			<!-- Level 30 -->
-			<drop item_id="169000007" min_amount="200" max_amount="200" chance="60" /><!-- Greater Power Shard -->
+			<drop item_id="169000007" min_amount="200" chance="60" /><!-- Greater Power Shard -->
 		</drop_group>
 	</npc_drop>
 	<!-- Eltnen -->
@@ -122,7 +122,7 @@
 	<!-- Pernon/Oriel -->
 	<npc_drop npc_id="218874">
 		<drop_group><!-- Named Life Leaf -->
-			<drop item_id="152012058" chance="100" /><!-- Life Leaf -->
+			<drop item_id="152012058" /><!-- Life Leaf -->
 		</drop_group>
 		<drop_group><!-- Named Aether Gem -->
 			<drop item_id="182006852" chance="80" /><!-- Rough Aether Gem -->
@@ -133,7 +133,7 @@
 	</npc_drop>
 	<npc_drop npc_id="218876">
 		<drop_group><!-- Named Life Leaf -->
-			<drop item_id="152012058" chance="100" /><!-- Life Leaf -->
+			<drop item_id="152012058" /><!-- Life Leaf -->
 		</drop_group>
 		<drop_group><!-- Named Aether Gem -->
 			<drop item_id="182006853" chance="80" /><!-- Hard Aether Gem -->
@@ -144,7 +144,7 @@
 	</npc_drop>
 	<npc_drop npc_id="218878">
 		<drop_group><!-- Named Life Leaf -->
-			<drop item_id="152012058" chance="100" /><!-- Life Leaf -->
+			<drop item_id="152012058" /><!-- Life Leaf -->
 		</drop_group>
 		<drop_group><!-- Named Aether Gem -->
 			<drop item_id="182006852" chance="80" /><!-- Rough Aether Gem -->
@@ -155,7 +155,7 @@
 	</npc_drop>
 	<npc_drop npc_id="218880">
 		<drop_group><!-- Named Life Leaf -->
-			<drop item_id="152012058" chance="100" /><!-- Life Leaf -->
+			<drop item_id="152012058" /><!-- Life Leaf -->
 		</drop_group>
 		<drop_group><!-- Named Aether Gem -->
 			<drop item_id="182006851" chance="80" /><!-- Broken Aether Gem -->
@@ -166,7 +166,7 @@
 	</npc_drop>
 	<npc_drop npc_id="218882">
 		<drop_group><!-- Named Life Leaf -->
-			<drop item_id="152012558" chance="100" /><!-- Life Leaf -->
+			<drop item_id="152012558" /><!-- Life Leaf -->
 		</drop_group>
 		<drop_group><!-- Named Aether Gem -->
 			<drop item_id="182006852" chance="80" /><!-- Rough Aether Gem -->
@@ -177,7 +177,7 @@
 	</npc_drop>
 	<npc_drop npc_id="218884">
 		<drop_group><!-- Named Life Leaf -->
-			<drop item_id="152012558" chance="100" /><!-- Life Leaf -->
+			<drop item_id="152012558" /><!-- Life Leaf -->
 		</drop_group>
 		<drop_group><!-- Named Aether Gem -->
 			<drop item_id="182006853" chance="80" /><!-- Hard Aether Gem -->
@@ -188,7 +188,7 @@
 	</npc_drop>
 	<npc_drop npc_id="218886">
 		<drop_group><!-- Named Life Leaf -->
-			<drop item_id="152012558" chance="100" /><!-- Life Leaf -->
+			<drop item_id="152012558" /><!-- Life Leaf -->
 		</drop_group>
 		<drop_group><!-- Named Aether Gem -->
 			<drop item_id="182006852" chance="80" /><!-- Rough Aether Gem -->
@@ -199,7 +199,7 @@
 	</npc_drop>
 	<npc_drop npc_id="218888">
 		<drop_group><!-- Named Life Leaf -->
-			<drop item_id="152012558" chance="100" /><!-- Life Leaf -->
+			<drop item_id="152012558" /><!-- Life Leaf -->
 		</drop_group>
 		<drop_group><!-- Named Aether Gem -->
 			<drop item_id="182006851" chance="80" /><!-- Broken Aether Gem -->
@@ -210,29 +210,29 @@
 	</npc_drop>
 	<npc_drop npc_id="701519">
 		<drop_group><!-- Named Paint -->
-			<drop item_id="169120001" min_amount="1" max_amount="2" chance="90" /><!-- Paint: Red -->
-			<drop item_id="169120002" min_amount="1" max_amount="2" chance="10" /><!-- Paint: Pink -->
+			<drop item_id="169120001" max_amount="2" chance="90" /><!-- Paint: Red -->
+			<drop item_id="169120002" max_amount="2" chance="10" /><!-- Paint: Pink -->
 		</drop_group>
 		<drop_group><!-- Named Essence -->
-			<drop item_id="182006982" chance="100" /><!-- Flower's Essence -->
+			<drop item_id="182006982" /><!-- Flower's Essence -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701520">
 		<drop_group><!-- Named Paint -->
-			<drop item_id="169120003" min_amount="1" max_amount="2" chance="90" /><!-- Paint: Blue -->
-			<drop item_id="169120004" min_amount="1" max_amount="2" chance="10" /><!-- Paint: Purple -->
+			<drop item_id="169120003" max_amount="2" chance="90" /><!-- Paint: Blue -->
+			<drop item_id="169120004" max_amount="2" chance="10" /><!-- Paint: Purple -->
 		</drop_group>
 		<drop_group><!-- Named Essence -->
-			<drop item_id="182006982" chance="100" /><!-- Flower's Essence -->
+			<drop item_id="182006982" /><!-- Flower's Essence -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701521">
 		<drop_group><!-- Named Paint -->
-			<drop item_id="169120005" min_amount="1" max_amount="2" chance="90" /><!-- Paint: Orange -->
-			<drop item_id="169120006" min_amount="1" max_amount="2" chance="10" /><!-- Paint: Mustard -->
+			<drop item_id="169120005" max_amount="2" chance="90" /><!-- Paint: Orange -->
+			<drop item_id="169120006" max_amount="2" chance="10" /><!-- Paint: Mustard -->
 		</drop_group>
 		<drop_group><!-- Named Essence -->
-			<drop item_id="182006982" chance="100" /><!-- Flower's Essence -->
+			<drop item_id="182006982" /><!-- Flower's Essence -->
 		</drop_group>
 	</npc_drop>
 	<!-- Theobomos -->
@@ -260,7 +260,7 @@
 	<!-- Inggison -->
 	<npc_drop npc_id="217099"><!-- Treasure Box -->
 		<drop_group><!-- Quest item -->
-			<drop item_id="186000109" chance="100" /><!-- Old Weathered Seal -->
+			<drop item_id="186000109" /><!-- Old Weathered Seal -->
 		</drop_group>
 		<drop_group><!-- Serum -->
 			<drop item_id="162000050" chance="65" min_amount="10" max_amount="15" /><!-- Major Recovery Serum -->
@@ -275,7 +275,7 @@
 	<!-- Gelkmaros -->
 	<npc_drop npc_id="217075"><!-- Gathering Kit -->
 		<drop_group><!-- Quest item -->
-			<drop item_id="186000109" chance="100" /><!-- Old Weathered Seal -->
+			<drop item_id="186000109" /><!-- Old Weathered Seal -->
 		</drop_group>
 		<drop_group><!-- Serum -->
 			<drop item_id="162000050" chance="65" min_amount="10" max_amount="15" /><!-- Major Recovery Serum -->
@@ -292,15 +292,15 @@
 	<!-- 701574 >> Unstable Abyssal Splinter -->
 	<npc_drop npc_id="700860">
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000096" chance="100" /><!-- Platinum Medal -->
+			<drop item_id="186000096" /><!-- Platinum Medal -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="5" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -319,16 +319,16 @@
 	<!-- 700861 >> Unstable Abyssal Splinter -->
 	<npc_drop npc_id="700934">
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000030" chance="100" /><!-- Gold Medal -->
-			<drop item_id="186000096" chance="100" /><!-- Platinum Medal -->
+			<drop item_id="186000030" /><!-- Gold Medal -->
+			<drop item_id="186000096" /><!-- Platinum Medal -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="5" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -346,10 +346,10 @@
 	</npc_drop>
 	<npc_drop npc_id="700935">
 		<drop_group><!-- Named Key -->
-			<drop item_id="185000104" chance="100" /><!-- Abyssal Fragment -->
+			<drop item_id="185000104" /><!-- Abyssal Fragment -->
 		</drop_group>
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000096" chance="100" /><!-- Platinum Medal -->
+			<drop item_id="186000096" /><!-- Platinum Medal -->
 		</drop_group>
 		<drop_group><!-- Named Armor (Unique) -->
 			<drop item_id="111101098" chance="10" /><!-- Forgotten Abyssal Gloves -->
@@ -358,12 +358,12 @@
 			<drop item_id="111601072" chance="10" /><!-- Forgotten Abyssal Gauntlets -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="5" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -375,15 +375,15 @@
 	</npc_drop>
 	<npc_drop npc_id="700936">
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000096" chance="100" /><!-- Platinum Medal -->
+			<drop item_id="186000096" /><!-- Platinum Medal -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="5" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -408,7 +408,7 @@
 			<drop item_id="170490004" chance="10" /><!-- [Souvenir] Yamennes Bust -->
 		</drop_group>
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000096" chance="100" /><!-- Platinum Medal -->
+			<drop item_id="186000096" /><!-- Platinum Medal -->
 		</drop_group>
 		<drop_group><!-- Named Weapon (Unique) -->
 			<drop item_id="100200940" chance="30" /><!-- Forgotten Abyssal Dagger -->
@@ -441,12 +441,12 @@
 			<drop item_id="115001094" chance="10" /><!-- Forgotten Abyssal Shield -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="5" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -461,7 +461,7 @@
 			<drop item_id="170490004" chance="10" /><!-- [Souvenir] Yamennes Bust -->
 		</drop_group>
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000096" chance="100" /><!-- Platinum Medal -->
+			<drop item_id="186000096" /><!-- Platinum Medal -->
 		</drop_group>
 		<drop_group><!-- Named Weapon (Epic) -->
 			<drop item_id="100200941" chance="15" /><!-- Yamennes' Dagger -->
@@ -512,12 +512,12 @@
 			<drop item_id="115001094" chance="15" /><!-- Forgotten Abyssal Shield -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="5" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -652,25 +652,25 @@
 			<drop item_id="112600816" chance="20" /><!-- Ancient Reshanta Shoulderplates -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="6" chance="60" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="5" chance="40" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="4" chance="20" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="3" chance="10" /><!-- Major Ancient Icon -->
+			<drop item_id="186000066" max_amount="6" chance="60" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="5" chance="40" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="4" chance="20" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000063" max_amount="3" chance="10" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="4" chance="50" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="3" chance="30" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000062" max_amount="4" chance="50" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="3" chance="30" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="2" chance="20" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="10" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="3" chance="40" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="2" chance="20" /><!-- Ancient Goblet -->
+			<drop item_id="186000058" max_amount="3" chance="40" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="2" chance="20" /><!-- Ancient Goblet -->
 			<drop item_id="186000056" chance="10" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="5" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="2" chance="20" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000054" max_amount="2" chance="20" /><!-- Lesser Ancient Crown -->
 			<drop item_id="186000053" chance="10" /><!-- Ancient Crown -->
 			<drop item_id="186000052" chance="5" /><!-- Greater Ancient Crown -->
 			<drop item_id="186000051" chance="2" /><!-- Major Ancient Crown -->
@@ -732,25 +732,25 @@
 			<drop item_id="112600816" chance="20" /><!-- Ancient Reshanta Shoulderplates -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="6" chance="60" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="5" chance="40" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="4" chance="20" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="3" chance="10" /><!-- Major Ancient Icon -->
+			<drop item_id="186000066" max_amount="6" chance="60" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="5" chance="40" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="4" chance="20" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000063" max_amount="3" chance="10" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="4" chance="50" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="3" chance="30" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000062" max_amount="4" chance="50" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="3" chance="30" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="2" chance="20" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="10" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="3" chance="40" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="2" chance="20" /><!-- Ancient Goblet -->
+			<drop item_id="186000058" max_amount="3" chance="40" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="2" chance="20" /><!-- Ancient Goblet -->
 			<drop item_id="186000056" chance="10" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="5" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="2" chance="20" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000054" max_amount="2" chance="20" /><!-- Lesser Ancient Crown -->
 			<drop item_id="186000053" chance="10" /><!-- Ancient Crown -->
 			<drop item_id="186000052" chance="5" /><!-- Greater Ancient Crown -->
 			<drop item_id="186000051" chance="2" /><!-- Major Ancient Crown -->
@@ -812,26 +812,26 @@
 			<drop item_id="112600816" chance="20" /><!-- Ancient Reshanta Shoulderplates -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="6" chance="60" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="5" chance="50" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="4" chance="30" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="3" chance="20" /><!-- Major Ancient Icon -->
+			<drop item_id="186000066" max_amount="6" chance="60" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="5" chance="50" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="4" chance="30" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000063" max_amount="3" chance="20" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="5" chance="50" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="4" chance="35" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="3" chance="25" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000059" min_amount="1" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
+			<drop item_id="186000062" max_amount="5" chance="50" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="4" chance="35" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="3" chance="25" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000059" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="4" chance="40" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="3" chance="30" /><!-- Ancient Goblet -->
-			<drop item_id="186000056" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000058" max_amount="4" chance="40" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="3" chance="30" /><!-- Ancient Goblet -->
+			<drop item_id="186000056" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="10" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="3" chance="30" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000053" min_amount="1" max_amount="2" chance="20" /><!-- Ancient Crown -->
+			<drop item_id="186000054" max_amount="3" chance="30" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000053" max_amount="2" chance="20" /><!-- Ancient Crown -->
 			<drop item_id="186000052" chance="10" /><!-- Greater Ancient Crown -->
 			<drop item_id="186000051" chance="5" /><!-- Major Ancient Crown -->
 		</drop_group>
@@ -886,14 +886,14 @@
 			<drop item_id="112600770" chance="10" /><!-- Guardian Centurion's Shoulderplates -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="5" chance="40" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="4" chance="30" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000066" max_amount="5" chance="40" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="4" chance="30" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="2" chance="20" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="10" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="3" chance="40" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="30" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="3" chance="40" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="30" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="20" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="10" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -961,25 +961,25 @@
 			<drop item_id="112600816" chance="20" /><!-- Ancient Reshanta Shoulderplates -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="5" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="4" chance="40" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="3" chance="30" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="2" chance="20" /><!-- Major Ancient Icon -->
+			<drop item_id="186000066" max_amount="5" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="4" chance="40" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="3" chance="30" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000063" max_amount="2" chance="20" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="4" chance="30" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="3" chance="20" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000059" min_amount="1" max_amount="2" chance="10" /><!-- Major Ancient Seal -->
+			<drop item_id="186000062" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="4" chance="30" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="3" chance="20" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000059" max_amount="2" chance="10" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="3" chance="50" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="2" chance="30" /><!-- Ancient Goblet -->
-			<drop item_id="186000056" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000058" max_amount="3" chance="50" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="2" chance="30" /><!-- Ancient Goblet -->
+			<drop item_id="186000056" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="10" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="2" chance="20" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000054" max_amount="2" chance="20" /><!-- Lesser Ancient Crown -->
 			<drop item_id="186000053" chance="15" /><!-- Ancient Crown -->
 			<drop item_id="186000052" chance="10" /><!-- Greater Ancient Crown -->
 			<drop item_id="186000051" chance="5" /><!-- Major Ancient Crown -->
@@ -1041,25 +1041,25 @@
 			<drop item_id="112600816" chance="20" /><!-- Ancient Reshanta Shoulderplates -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="5" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="4" chance="40" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="3" chance="30" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="2" chance="20" /><!-- Major Ancient Icon -->
+			<drop item_id="186000066" max_amount="5" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="4" chance="40" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="3" chance="30" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000063" max_amount="2" chance="20" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="4" chance="30" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="3" chance="20" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000059" min_amount="1" max_amount="2" chance="10" /><!-- Major Ancient Seal -->
+			<drop item_id="186000062" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="4" chance="30" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="3" chance="20" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000059" max_amount="2" chance="10" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="3" chance="50" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="2" chance="30" /><!-- Ancient Goblet -->
-			<drop item_id="186000056" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000058" max_amount="3" chance="50" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="2" chance="30" /><!-- Ancient Goblet -->
+			<drop item_id="186000056" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="10" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="2" chance="20" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000054" max_amount="2" chance="20" /><!-- Lesser Ancient Crown -->
 			<drop item_id="186000053" chance="15" /><!-- Ancient Crown -->
 			<drop item_id="186000052" chance="10" /><!-- Greater Ancient Crown -->
 			<drop item_id="186000051" chance="5" /><!-- Major Ancient Crown -->
@@ -1121,27 +1121,27 @@
 			<drop item_id="112600816" chance="20" /><!-- Ancient Reshanta Shoulderplates -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="6" chance="60" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="5" chance="50" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="4" chance="40" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="4" chance="30" /><!-- Major Ancient Icon -->
+			<drop item_id="186000066" max_amount="6" chance="60" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="5" chance="50" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="4" chance="40" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000063" max_amount="4" chance="30" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="6" chance="55" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="5" chance="40" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="4" chance="30" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000059" min_amount="1" max_amount="3" chance="25" /><!-- Major Ancient Seal -->
+			<drop item_id="186000062" max_amount="6" chance="55" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="5" chance="40" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="4" chance="30" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000059" max_amount="3" chance="25" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="5" chance="50" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="4" chance="40" /><!-- Ancient Goblet -->
-			<drop item_id="186000056" min_amount="1" max_amount="3" chance="30" /><!-- Greater Ancient Goblet -->
-			<drop item_id="186000055" min_amount="1" max_amount="2" chance="20" /><!-- Major Ancient Goblet -->
+			<drop item_id="186000058" max_amount="5" chance="50" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="4" chance="40" /><!-- Ancient Goblet -->
+			<drop item_id="186000056" max_amount="3" chance="30" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000055" max_amount="2" chance="20" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="3" chance="30" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000053" min_amount="1" max_amount="2" chance="25" /><!-- Ancient Crown -->
-			<drop item_id="186000052" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Crown -->
+			<drop item_id="186000054" max_amount="3" chance="30" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000053" max_amount="2" chance="25" /><!-- Ancient Crown -->
+			<drop item_id="186000052" max_amount="2" chance="20" /><!-- Greater Ancient Crown -->
 			<drop item_id="186000051" chance="15" /><!-- Major Ancient Crown -->
 		</drop_group>
 	</npc_drop>
@@ -1195,14 +1195,14 @@
 			<drop item_id="112600770" chance="10" /><!-- Guardian Centurion's Shoulderplates -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="30" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="30" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="10" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="7.5" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="15" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="10" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="15" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="10" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="7.5" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="5" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -1258,14 +1258,14 @@
 			<drop item_id="112600772" chance="10" /><!-- Archon Centurion's Shoulderplates -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="30" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="30" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="10" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="7.5" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="15" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="10" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="15" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="10" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="7.5" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="5" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -1279,58 +1279,58 @@
 	<!-- Danuar Mysticarium -->
 	<npc_drop npc_id="230076">
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" chance="100" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000066" /><!-- Lesser Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Manastone Bundle -->
 			<drop item_id="188052556" chance="50" /><!-- Composite Manastone Bundle -->
 		</drop_group>
 		<drop_group><!-- Named Potion -->
-			<drop item_id="162000119" min_amount="1" max_amount="5" chance="100" /><!-- Superior Life Potion -->
-			<drop item_id="162000120" min_amount="1" max_amount="5" chance="100" /><!-- Superior Mana Potion -->
-			<drop item_id="162000122" min_amount="1" max_amount="5" chance="100" /><!-- Superior Life Serum -->
-			<drop item_id="162000123" min_amount="1" max_amount="5" chance="100" /><!-- Superior Mana Serum -->
+			<drop item_id="162000119" max_amount="5" /><!-- Superior Life Potion -->
+			<drop item_id="162000120" max_amount="5" /><!-- Superior Mana Potion -->
+			<drop item_id="162000122" max_amount="5" /><!-- Superior Life Serum -->
+			<drop item_id="162000123" max_amount="5" /><!-- Superior Mana Serum -->
 		</drop_group>
 	</npc_drop>
 	<!-- Danuar Reliquary -->
 	<npc_drop npc_id="701795">
 		<drop_group><!-- Conqueror's Mark -->
-			<drop item_id="186000238" min_amount="5" max_amount="8" chance="100" each_member="true" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="5" max_amount="8" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group><!-- Amplification Stone (Multi) -->
 			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
 		</drop_group>
 		<drop_group><!-- Named Equipment Box (Epic) -->
-			<drop item_id="188052388" chance="100" each_member="true" /><!-- Modor's Equipment Box -->
+			<drop item_id="188052388" each_member="true" /><!-- Modor's Equipment Box -->
 		</drop_group>
 		<drop_group><!-- Named Supply Box (Unique) -->
-			<drop item_id="188052499" chance="100" each_member="true" /><!-- Danuar Reliquary Expedition's Excavation Box -->
+			<drop item_id="188052499" each_member="true" /><!-- Danuar Reliquary Expedition's Excavation Box -->
 		</drop_group>
 		<drop_group><!-- Loyalty Coins -->
-			<drop item_id="186000409" chance="100" min_amount="30" max_amount="30" each_member="true" /><!-- Daeva's Respite Coin -->
+			<drop item_id="186000409" min_amount="30" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 	</npc_drop>
 	<!-- Infernal Danuar Reliquary -->
 	<npc_drop npc_id="234691">
 		<drop_group><!-- Conqueror's Mark -->
-			<drop item_id="186000238" min_amount="10" max_amount="15" chance="100" each_member="true" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="10" max_amount="15" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group><!-- Amplification Stone (Multi) -->
 			<drop item_id="166500002" chance="12" each_member="true" /><!-- Amplification Stone -->
 		</drop_group>
 		<drop_group><!-- Modor's Curiosity Box -->
-			<drop item_id="188053091" chance="100" each_member="true" /><!-- Modor's Curiosity Box -->
+			<drop item_id="188053091" each_member="true" /><!-- Modor's Curiosity Box -->
 		</drop_group>
 		<drop_group><!-- Danuar Reliquary Expedition's Artifacts -->
-			<drop item_id="188053092" chance="100" each_member="true" /><!-- Danuar Reliquary Expedition's Artifacts -->
+			<drop item_id="188053092" each_member="true" /><!-- Danuar Reliquary Expedition's Artifacts -->
 		</drop_group>
 		<drop_group><!-- Loyalty Coins -->
-			<drop item_id="186000409" chance="100" min_amount="36" max_amount="36" each_member="true" /><!-- Daeva's Respite Coin -->
+			<drop item_id="186000409" min_amount="36" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 	</npc_drop>
 	<!-- Danuar Sanctuary -->
 	<npc_drop npc_id="233391">
 		<drop_group><!-- Named Key -->
-			<drop item_id="188052656" chance="100" each_member="true" /><!-- Sanctuary Keybox -->
+			<drop item_id="188052656" each_member="true" /><!-- Sanctuary Keybox -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="233084">
@@ -1471,32 +1471,32 @@
 	</npc_drop>
 	<npc_drop npc_id="233190">
 		<drop_group><!-- Named Ancient Manastone (Legend/Unique) -->
-			<drop item_id="167020024" chance="100" /><!-- Ancient Manastone: HP +105 -->
-			<drop item_id="167020026" chance="100" /><!-- Ancient Manastone: Accuracy +31 -->
-			<drop item_id="167020027" chance="100" /><!-- Ancient Manastone: Evasion +21 -->
-			<drop item_id="167020028" chance="100" /><!-- Ancient Manastone: Parry +31 -->
-			<drop item_id="167020029" chance="100" /><!-- Ancient Manastone: Block +31 -->
-			<drop item_id="167020030" chance="100" /><!-- Ancient Manastone: Crit Strike +20 -->
-			<drop item_id="167020031" chance="100" /><!-- Ancient Manastone: Strike Resist +21 -->
-			<drop item_id="167020032" chance="100" /><!-- Ancient Manastone: Crit Spell +7 -->
-			<drop item_id="167020033" chance="100" /><!-- Ancient Manastone: Magical Critical Resistance +8 -->
-			<drop item_id="167020034" chance="100" /><!-- Ancient Manastone: Physical Defense +70 -->
-			<drop item_id="167020035" chance="100" /><!-- Ancient Manastone: Resist Magic +19 -->
-			<drop item_id="167020036" chance="100" /><!-- Ancient Manastone: Attack +6 -->
-			<drop item_id="167020037" chance="100" /><!-- Ancient Manastone: Magical Accuracy +18 -->
-			<drop item_id="167020038" chance="100" /><!-- Ancient Manastone: Magic Boost +30 -->
-			<drop item_id="167020039" chance="100" /><!-- Ancient Manastone: Magic Suppression +40 -->
-			<drop item_id="167020040" chance="100" /><!-- Ancient Manastone: Healing Boost +5 -->
-			<drop item_id="167020056" chance="100" /><!-- Ancient Manastone: Accuracy +33 -->
-			<drop item_id="167020057" chance="100" /><!-- Ancient Manastone: Evasion +23 -->
-			<drop item_id="167020058" chance="100" /><!-- Ancient Manastone: Parry +33 -->
-			<drop item_id="167020059" chance="100" /><!-- Ancient Manastone: Block +33 -->
-			<drop item_id="167020060" chance="100" /><!-- Ancient Manastone: Physical Critical Resistance +22 -->
-			<drop item_id="167020061" chance="100" /><!-- Ancient Manastone: Magical Critical Resistance +9 -->
-			<drop item_id="167020062" chance="100" /><!-- Ancient Manastone: Physical Defense +80 -->
-			<drop item_id="167020063" chance="100" /><!-- Ancient Manastone: Attack +7 -->
-			<drop item_id="167020064" chance="100" /><!-- Ancient Manastone: Magical Accuracy +20 -->
-			<drop item_id="167020065" chance="100" /><!-- Ancient Manastone: Magic Boost +32 -->
+			<drop item_id="167020024" /><!-- Ancient Manastone: HP +105 -->
+			<drop item_id="167020026" /><!-- Ancient Manastone: Accuracy +31 -->
+			<drop item_id="167020027" /><!-- Ancient Manastone: Evasion +21 -->
+			<drop item_id="167020028" /><!-- Ancient Manastone: Parry +31 -->
+			<drop item_id="167020029" /><!-- Ancient Manastone: Block +31 -->
+			<drop item_id="167020030" /><!-- Ancient Manastone: Crit Strike +20 -->
+			<drop item_id="167020031" /><!-- Ancient Manastone: Strike Resist +21 -->
+			<drop item_id="167020032" /><!-- Ancient Manastone: Crit Spell +7 -->
+			<drop item_id="167020033" /><!-- Ancient Manastone: Magical Critical Resistance +8 -->
+			<drop item_id="167020034" /><!-- Ancient Manastone: Physical Defense +70 -->
+			<drop item_id="167020035" /><!-- Ancient Manastone: Resist Magic +19 -->
+			<drop item_id="167020036" /><!-- Ancient Manastone: Attack +6 -->
+			<drop item_id="167020037" /><!-- Ancient Manastone: Magical Accuracy +18 -->
+			<drop item_id="167020038" /><!-- Ancient Manastone: Magic Boost +30 -->
+			<drop item_id="167020039" /><!-- Ancient Manastone: Magic Suppression +40 -->
+			<drop item_id="167020040" /><!-- Ancient Manastone: Healing Boost +5 -->
+			<drop item_id="167020056" /><!-- Ancient Manastone: Accuracy +33 -->
+			<drop item_id="167020057" /><!-- Ancient Manastone: Evasion +23 -->
+			<drop item_id="167020058" /><!-- Ancient Manastone: Parry +33 -->
+			<drop item_id="167020059" /><!-- Ancient Manastone: Block +33 -->
+			<drop item_id="167020060" /><!-- Ancient Manastone: Physical Critical Resistance +22 -->
+			<drop item_id="167020061" /><!-- Ancient Manastone: Magical Critical Resistance +9 -->
+			<drop item_id="167020062" /><!-- Ancient Manastone: Physical Defense +80 -->
+			<drop item_id="167020063" /><!-- Ancient Manastone: Attack +7 -->
+			<drop item_id="167020064" /><!-- Ancient Manastone: Magical Accuracy +20 -->
+			<drop item_id="167020065" /><!-- Ancient Manastone: Magic Boost +32 -->
 		</drop_group>
 		<drop_group><!-- Named Bundle -->
 			<drop item_id="188053709" chance="75" /><!-- Stolen Shelter Ancient Coin Bundle -->
@@ -1511,7 +1511,7 @@
 			<drop item_id="182400001" chance="75" min_amount="2312" max_amount="6120" /><!-- Kinah -->
 		</drop_group>
 		<drop_group><!-- Power Shard -->
-			<drop item_id="169000010" chance="70" min_amount="50" max_amount="50" /><!-- Superior Power Shard -->
+			<drop item_id="169000010" chance="70" min_amount="50" /><!-- Superior Power Shard -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="233191">
@@ -1546,7 +1546,7 @@
 			<drop item_id="182400001" chance="75" min_amount="1712" max_amount="4020" /><!-- Kinah -->
 		</drop_group>
 		<drop_group><!-- Power Shard -->
-			<drop item_id="169000010" chance="65" min_amount="25" max_amount="25" /><!-- Superior Power Shard -->
+			<drop item_id="169000010" chance="65" min_amount="25" /><!-- Superior Power Shard -->
 		</drop_group>
 	</npc_drop>
 	<!-- Custom PvP-Map Chest -->
@@ -1582,29 +1582,29 @@
 			<drop item_id="186000243" chance="30" min_amount="2" max_amount="7" /><!-- Fragmented Ceramium -->
 		</drop_group>
 		<drop_group><!-- Supplies -->
-			<drop item_id="162000124" chance="40" min_amount="25" max_amount="25" /><!-- Superior Recovery Serum -->
+			<drop item_id="162000124" chance="40" min_amount="25" /><!-- Superior Recovery Serum -->
 			<drop item_id="164000076" chance="35" min_amount="10" max_amount="25" /><!-- Greater Running Scroll -->
 			<drop item_id="164000073" chance="35" min_amount="10" max_amount="25" /><!-- Greater Courage Scroll -->
 			<drop item_id="164000134" chance="35" min_amount="10" max_amount="25" /><!-- Greater Awakening Scroll -->
 			<drop item_id="164000079" chance="35" min_amount="10" max_amount="25" /><!-- Greater Raging Wind Scroll -->
 		</drop_group>
 		<drop_group><!-- Kinah -->
-			<drop item_id="182400001" chance="100" min_amount="20242" max_amount="94120" /><!-- Kinah -->
+			<drop item_id="182400001" min_amount="20242" max_amount="94120" /><!-- Kinah -->
 		</drop_group>
 		<drop_group><!-- Conquerors Mark -->
-			<drop item_id="186000238" min_amount="10" max_amount="30" chance="100" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="10" max_amount="30" /><!-- Conqueror's Mark -->
 		</drop_group>
 	</npc_drop>
 	<!-- Dragon Lords Refuge -->
 	<npc_drop npc_id="701542">
 		<drop_group><!-- Conqueror's Mark -->
-			<drop item_id="186000238" min_amount="3" max_amount="5" chance="100" each_member="true" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="3" max_amount="5" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group><!-- Amplification Stone (Multi) -->
 			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
 		</drop_group>
 		<drop_group><!-- Named Box -->
-			<drop item_id="188052084" chance="100" each_member="true" /><!-- Dragon Lord Tiamat Treasure Chest -->
+			<drop item_id="188052084" each_member="true" /><!-- Dragon Lord Tiamat Treasure Chest -->
 		</drop_group>
 		<drop_group><!-- Courier Pass -->
 			<drop item_id="188950018" chance="4" /><!-- Special Courier Pass (Mythic/Lv.56-60) -->
@@ -1613,42 +1613,42 @@
 	<!-- Anguished Dragon Lord's Refuge -->
 	<npc_drop npc_id="702729">
 		<drop_group><!-- Consumable Chest-->
-			<drop item_id="188053707" chance="100" each_member="true" /><!-- Glimmering Treasure Chest of Dragon Lord Tiamat -->
+			<drop item_id="188053707" each_member="true" /><!-- Glimmering Treasure Chest of Dragon Lord Tiamat -->
 		</drop_group>
 		<drop_group><!-- Amplification Stone (Multi) -->
 			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="186000409" min_amount="62" chance="100" each_member="true" /><!-- Daeva's Respite Coin -->
+			<drop item_id="186000409" min_amount="62" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 		<drop_group><!-- Named Armor -->
-			<drop item_id="112101644" chance="100" /><!-- Glimmering Dragon Lord's Pauldrons -->
-			<drop item_id="112101645" chance="100" /><!-- Glowing Dragon Lord's Pauldrons -->
-			<drop item_id="112301750" chance="100" /><!-- Glimmering Dragon Lord's Shoulderguards -->
-			<drop item_id="112301751" chance="100" /><!-- Glowing Dragon Lord's Shoulderguards -->
-			<drop item_id="112501701" chance="100" /><!-- Glimmering Dragon Lord's Spaulders -->
-			<drop item_id="112501702" chance="100" /><!-- Glowing Dragon Lord's Spaulders -->
-			<drop item_id="112501703" chance="100" /><!-- Tempered Dragon Lord's Spaulders -->
-			<drop item_id="112601612" chance="100" /><!-- Glimmering Dragon Lord's Shoulderplates -->
-			<drop item_id="112601613" chance="100" /><!-- Glowing Dragon Lord's Shoulderplates -->
-			<drop item_id="113101706" chance="100" /><!-- Glimmering Dragon Lord's Leggings -->
-			<drop item_id="113101707" chance="100" /><!-- Glowing Dragon Lord's Leggings -->
-			<drop item_id="113301842" chance="100" /><!-- Glimmering Dragon Lord's Legguards -->
-			<drop item_id="113301843" chance="100" /><!-- Glowing Dragon Lord's Legguards -->
-			<drop item_id="113501780" chance="100" /><!-- Glimmering Dragon Lord's Chausses -->
-			<drop item_id="113501781" chance="100" /><!-- Glowing Dragon Lord's Chausses -->
-			<drop item_id="113501782" chance="100" /><!-- Tempered Dragon Lord's Chausses -->
-			<drop item_id="113601613" chance="100" /><!-- Glimmering Dragon Lord's Greaves -->
-			<drop item_id="113601614" chance="100" /><!-- Glowing Dragon Lord's Greaves -->
-			<drop item_id="114101740" chance="100" /><!-- Glimmering Dragon Lord's Shoes -->
-			<drop item_id="114101741" chance="100" /><!-- Glowing Dragon Lord's Shoes -->
-			<drop item_id="114301879" chance="100" /><!-- Glimmering Dragon Lord's Boots -->
-			<drop item_id="114301880" chance="100" /><!-- Glowing Dragon Lord's Boots -->
-			<drop item_id="114501790" chance="100" /><!-- Glimmering Dragon Lord's Brogans -->
-			<drop item_id="114501791" chance="100" /><!-- Glowing Dragon Lord's Brogans -->
-			<drop item_id="114501792" chance="100" /><!-- Tempered Dragon Lord's Brogans -->
-			<drop item_id="114601620" chance="100" /><!-- Glimmering Dragon Lord's Sabatons -->
-			<drop item_id="114601621" chance="100" /><!-- Glowing Dragon Lord's Sabatons -->
+			<drop item_id="112101644" /><!-- Glimmering Dragon Lord's Pauldrons -->
+			<drop item_id="112101645" /><!-- Glowing Dragon Lord's Pauldrons -->
+			<drop item_id="112301750" /><!-- Glimmering Dragon Lord's Shoulderguards -->
+			<drop item_id="112301751" /><!-- Glowing Dragon Lord's Shoulderguards -->
+			<drop item_id="112501701" /><!-- Glimmering Dragon Lord's Spaulders -->
+			<drop item_id="112501702" /><!-- Glowing Dragon Lord's Spaulders -->
+			<drop item_id="112501703" /><!-- Tempered Dragon Lord's Spaulders -->
+			<drop item_id="112601612" /><!-- Glimmering Dragon Lord's Shoulderplates -->
+			<drop item_id="112601613" /><!-- Glowing Dragon Lord's Shoulderplates -->
+			<drop item_id="113101706" /><!-- Glimmering Dragon Lord's Leggings -->
+			<drop item_id="113101707" /><!-- Glowing Dragon Lord's Leggings -->
+			<drop item_id="113301842" /><!-- Glimmering Dragon Lord's Legguards -->
+			<drop item_id="113301843" /><!-- Glowing Dragon Lord's Legguards -->
+			<drop item_id="113501780" /><!-- Glimmering Dragon Lord's Chausses -->
+			<drop item_id="113501781" /><!-- Glowing Dragon Lord's Chausses -->
+			<drop item_id="113501782" /><!-- Tempered Dragon Lord's Chausses -->
+			<drop item_id="113601613" /><!-- Glimmering Dragon Lord's Greaves -->
+			<drop item_id="113601614" /><!-- Glowing Dragon Lord's Greaves -->
+			<drop item_id="114101740" /><!-- Glimmering Dragon Lord's Shoes -->
+			<drop item_id="114101741" /><!-- Glowing Dragon Lord's Shoes -->
+			<drop item_id="114301879" /><!-- Glimmering Dragon Lord's Boots -->
+			<drop item_id="114301880" /><!-- Glowing Dragon Lord's Boots -->
+			<drop item_id="114501790" /><!-- Glimmering Dragon Lord's Brogans -->
+			<drop item_id="114501791" /><!-- Glowing Dragon Lord's Brogans -->
+			<drop item_id="114501792" /><!-- Tempered Dragon Lord's Brogans -->
+			<drop item_id="114601620" /><!-- Glimmering Dragon Lord's Sabatons -->
+			<drop item_id="114601621" /><!-- Glowing Dragon Lord's Sabatons -->
 		</drop_group>
 		<drop_group><!-- Named Armor -->
 			<drop item_id="110101880" chance="50" /><!-- Glimmering Dragon Lord's Jacket -->
@@ -1780,12 +1780,12 @@
 	<!-- Esoterrace -->
 	<npc_drop npc_id="701022">
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="25" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="25" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="25" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="60" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="60" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="30" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="10" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -1797,12 +1797,12 @@
 	</npc_drop>
 	<npc_drop npc_id="701023">
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="25" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="25" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="25" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="60" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="60" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="30" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="10" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -1812,9 +1812,9 @@
 			<drop item_id="186000056" chance="5" /><!-- Greater Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="2" chance="80" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000053" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Crown -->
-			<drop item_id="186000052" min_amount="1" max_amount="2" chance="5" /><!-- Greater Ancient Crown -->
+			<drop item_id="186000054" max_amount="2" chance="80" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000053" max_amount="2" chance="15" /><!-- Ancient Crown -->
+			<drop item_id="186000052" max_amount="2" chance="5" /><!-- Greater Ancient Crown -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701025">
@@ -1825,55 +1825,55 @@
 			<drop item_id="186000096" chance="10" /><!-- Platinum Medal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="2" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="2" max_amount="2" chance="30" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="2" max_amount="2" chance="15" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000066" min_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" min_amount="2" chance="30" /><!-- Ancient Icon -->
+			<drop item_id="186000064" min_amount="2" chance="15" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="30" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="20" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="2" chance="10" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="30" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="20" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="2" chance="10" /><!-- Greater Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="2" chance="10" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="2" chance="8" /><!-- Ancient Goblet -->
-			<drop item_id="186000056" min_amount="1" max_amount="2" chance="5" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000058" max_amount="2" chance="10" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="2" chance="8" /><!-- Ancient Goblet -->
+			<drop item_id="186000056" max_amount="2" chance="5" /><!-- Greater Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="2" chance="5" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000053" min_amount="1" max_amount="2" chance="4" /><!-- Ancient Crown -->
-			<drop item_id="186000052" min_amount="1" max_amount="2" chance="2" /><!-- Greater Ancient Crown -->
+			<drop item_id="186000054" max_amount="2" chance="5" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000053" max_amount="2" chance="4" /><!-- Ancient Crown -->
+			<drop item_id="186000052" max_amount="2" chance="2" /><!-- Greater Ancient Crown -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701027">
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000096" min_amount="1" max_amount="2" chance="80" /><!-- Platinum Medal -->
+			<drop item_id="186000096" max_amount="2" chance="80" /><!-- Platinum Medal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="2" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="2" max_amount="2" chance="25" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="2" max_amount="2" chance="25" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000066" min_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" min_amount="2" chance="25" /><!-- Ancient Icon -->
+			<drop item_id="186000064" min_amount="2" chance="25" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="3" chance="50" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="3" chance="35" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="3" chance="15" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000062" max_amount="3" chance="50" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="3" chance="35" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="3" chance="15" /><!-- Greater Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="2" max_amount="2" chance="40" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="2" max_amount="2" chance="40" /><!-- Ancient Goblet -->
-			<drop item_id="186000056" min_amount="2" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000058" min_amount="2" chance="40" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" min_amount="2" chance="40" /><!-- Ancient Goblet -->
+			<drop item_id="186000056" min_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="2" max_amount="2" chance="80" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000053" min_amount="2" max_amount="2" chance="15" /><!-- Ancient Crown -->
-			<drop item_id="186000052" min_amount="2" max_amount="2" chance="5" /><!-- Greater Ancient Crown -->
+			<drop item_id="186000054" min_amount="2" chance="80" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000053" min_amount="2" chance="15" /><!-- Ancient Crown -->
+			<drop item_id="186000052" min_amount="2" chance="5" /><!-- Greater Ancient Crown -->
 		</drop_group>
 	</npc_drop>
 	<!-- Eternal Bastion S-Grade -->
 	<npc_drop npc_id="701917">
 		<drop_group><!-- Conqueror's Mark -->
-			<drop item_id="186000238" min_amount="3" max_amount="5" chance="100" each_member="true" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="3" max_amount="5" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group><!-- Named Epic Weapon -->
 			<drop item_id="100001584" chance="80" /><!-- Bastion Aggressor Sword -->
@@ -1891,19 +1891,19 @@
 			<drop item_id="102100846" chance="80" /><!-- Bastion Defender Cipher-Blade -->
 		</drop_group>
 		<drop_group><!-- Named Mythic Weapon -->
-			<drop item_id="100001585" chance="100" /><!-- Bastion Aggressor Firm Sword -->
-			<drop item_id="100101223" chance="100" /><!-- Bastion Aggressor Firm Mace -->
-			<drop item_id="100201393" chance="100" /><!-- Bastion Aggressor Firm Dagger -->
-			<drop item_id="100501213" chance="100" /><!-- Bastion Aggressor Firm Orb -->
-			<drop item_id="100601305" chance="100" /><!-- Bastion Aggressor Firm Spellbook -->
-			<drop item_id="100901235" chance="100" /><!-- Bastion Aggressor Firm Greatsword -->
-			<drop item_id="101301161" chance="100" /><!-- Bastion Aggressor Firm Polearm -->
-			<drop item_id="101501249" chance="100" /><!-- Bastion Aggressor Firm Staff -->
-			<drop item_id="101701264" chance="100" /><!-- Bastion Aggressor Firm Bow -->
-			<drop item_id="101801070" chance="100" /><!-- Bastion Aggressor Firm Pistol -->
-			<drop item_id="101901021" chance="100" /><!-- Bastion Aggressor Firm Aethercannon -->
-			<drop item_id="102001095" chance="100" /><!-- Bastion Aggressor Firm Harp -->
-			<drop item_id="102100847" chance="100" /><!-- Bastion Aggressor Firm Cipher-Blade -->
+			<drop item_id="100001585" /><!-- Bastion Aggressor Firm Sword -->
+			<drop item_id="100101223" /><!-- Bastion Aggressor Firm Mace -->
+			<drop item_id="100201393" /><!-- Bastion Aggressor Firm Dagger -->
+			<drop item_id="100501213" /><!-- Bastion Aggressor Firm Orb -->
+			<drop item_id="100601305" /><!-- Bastion Aggressor Firm Spellbook -->
+			<drop item_id="100901235" /><!-- Bastion Aggressor Firm Greatsword -->
+			<drop item_id="101301161" /><!-- Bastion Aggressor Firm Polearm -->
+			<drop item_id="101501249" /><!-- Bastion Aggressor Firm Staff -->
+			<drop item_id="101701264" /><!-- Bastion Aggressor Firm Bow -->
+			<drop item_id="101801070" /><!-- Bastion Aggressor Firm Pistol -->
+			<drop item_id="101901021" /><!-- Bastion Aggressor Firm Aethercannon -->
+			<drop item_id="102001095" /><!-- Bastion Aggressor Firm Harp -->
+			<drop item_id="102100847" /><!-- Bastion Aggressor Firm Cipher-Blade -->
 		</drop_group>
 		<drop_group><!-- Named Mythic Cloth Armor -->
 			<drop item_id="110101686" chance="25" /><!-- Bastion Defender Firm Tunic -->
@@ -2023,16 +2023,16 @@
 			<drop item_id="125003759" chance="25" /><!-- Bastion Protector Headband -->
 		</drop_group>
 		<drop_group><!-- Named Augment Bundle -->
-			<drop item_id="188052614" chance="100" /><!-- Defender's Augment Bundle -->
+			<drop item_id="188052614" /><!-- Defender's Augment Bundle -->
 		</drop_group>
 		<drop_group><!-- Named Quest Bundle -->
-			<drop item_id="188052619" chance="100" /><!-- Pashid's Claw Bundle -->
+			<drop item_id="188052619" /><!-- Pashid's Claw Bundle -->
 		</drop_group>
 		<drop_group><!-- Named Relic Bundle -->
-			<drop item_id="188052607" min_amount="1" max_amount="4" chance="100" /><!-- Major Relic Box -->
+			<drop item_id="188052607" max_amount="4" /><!-- Major Relic Box -->
 		</drop_group>
 		<drop_group><!-- Named Composite Bundle -->
-			<drop item_id="188052599" min_amount="4" max_amount="4" chance="100" /><!-- Defender's Supply Box -->
+			<drop item_id="188052599" min_amount="4" /><!-- Defender's Supply Box -->
 		</drop_group>
 		<drop_group><!-- Named Amplification Stone -->
 			<drop item_id="166500002" chance="10" /><!-- Amplification Stone -->
@@ -2044,10 +2044,10 @@
 	<!-- Haramel -->
 	<npc_drop npc_id="700829">
 		<drop_group><!-- Named Material -->
-			<drop item_id="152000901" min_amount="5" max_amount="5" chance="100" /><!-- Aether Powder -->
+			<drop item_id="152000901" min_amount="5" /><!-- Aether Powder -->
 		</drop_group>
 		<drop_group><!-- Named Supply -->
-			<drop item_id="169300003" min_amount="3" max_amount="3" chance="100" /><!-- Lesser Odella Powder -->
+			<drop item_id="169300003" min_amount="3" /><!-- Lesser Odella Powder -->
 		</drop_group>
 		<drop_group><!-- Named Armor (Rare) -->
 			<drop item_id="111601071" chance="66" /><!-- Haramel's Gauntlets -->
@@ -2059,10 +2059,10 @@
 	</npc_drop>
 	<npc_drop npc_id="700830">
 		<drop_group><!-- Named Material -->
-			<drop item_id="152000901" min_amount="5" max_amount="5" chance="100" /><!-- Aether Powder -->
+			<drop item_id="152000901" min_amount="5" /><!-- Aether Powder -->
 		</drop_group>
 		<drop_group><!-- Named Supply -->
-			<drop item_id="169300003" min_amount="3" max_amount="3" chance="100" /><!-- Lesser Odella Powder -->
+			<drop item_id="169300003" min_amount="3" /><!-- Lesser Odella Powder -->
 		</drop_group>
 		<drop_group><!-- Named Armor (Rare) -->
 			<drop item_id="114301148" chance="66" /><!-- Haramel's Boots -->
@@ -2074,10 +2074,10 @@
 	</npc_drop>
 	<npc_drop npc_id="700831">
 		<drop_group><!-- Named Material -->
-			<drop item_id="152000901" min_amount="5" max_amount="5" chance="100" /><!-- Aether Powder -->
+			<drop item_id="152000901" min_amount="5" /><!-- Aether Powder -->
 		</drop_group>
 		<drop_group><!-- Named Supply -->
-			<drop item_id="169300003" min_amount="3" max_amount="3" chance="100" /><!-- Lesser Odella Powder -->
+			<drop item_id="169300003" min_amount="3" /><!-- Lesser Odella Powder -->
 		</drop_group>
 		<drop_group><!-- Named Armor (Rare) -->
 			<drop item_id="114101138" chance="66" /><!-- Haramel's Boots -->
@@ -2089,10 +2089,10 @@
 	</npc_drop>
 	<npc_drop npc_id="700832">
 		<drop_group><!-- Named Material -->
-			<drop item_id="152000901" min_amount="5" max_amount="5" chance="100" /><!-- Aether Powder -->
+			<drop item_id="152000901" min_amount="5" /><!-- Aether Powder -->
 		</drop_group>
 		<drop_group><!-- Named Supply -->
-			<drop item_id="169300003" min_amount="3" max_amount="3" chance="100" /><!-- Lesser Odella Powder -->
+			<drop item_id="169300003" min_amount="3" /><!-- Lesser Odella Powder -->
 		</drop_group>
 		<drop_group><!-- Named Armor (Rare) -->
 			<drop item_id="114501097" chance="66" /><!-- Haramel's Brogans -->
@@ -2113,36 +2113,36 @@
 	<!-- Idgel Research Center -->
 	<npc_drop npc_id="701570">
 		<drop_group><!-- Named Key -->
-			<drop item_id="185000168" chance="100" /><!-- Research Center Key -->
+			<drop item_id="185000168" /><!-- Research Center Key -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701935">
 		<drop_group><!-- Named Supply -->
-			<drop item_id="188052724" chance="100" /><!-- Beritran Hoard -->
+			<drop item_id="188052724" /><!-- Beritran Hoard -->
 		</drop_group>
 	</npc_drop>
 	<!-- Illuminary Obelisk -->
 	<npc_drop npc_id="730884">
 		<drop_group><!-- Named Instance Item -->
-			<drop item_id="164000289" chance="100" /><!-- Crystalline Idium Piece -->
+			<drop item_id="164000289" /><!-- Crystalline Idium Piece -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="730885">
 		<drop_group><!-- Named Cannonball -->
-			<drop item_id="164000290" chance="100" /><!-- Danuar Cannonball -->
+			<drop item_id="164000290" /><!-- Danuar Cannonball -->
 		</drop_group>
 	</npc_drop>
 	<!-- Random Chest for all Lv65 Inner Abyss Instances + hidden spawn in Cygnea & Levinshor -->
 	<npc_drop npc_id="832865">
 		<drop_group><!-- Named Box -->
-			<drop item_id="188053450" chance="100" /><!-- Abyss Fortress Box -->
+			<drop item_id="188053450" /><!-- Abyss Fortress Box -->
 		</drop_group>
 	</npc_drop>
 	<!-- Krotan Barracks -->
 	<npc_drop npc_id="702288">
 		<drop_group><!-- Named Boxes -->
-			<drop item_id="188052920" chance="100" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052921" chance="100" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052920" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052921" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group><!-- Named Food -->
 			<drop item_id="160002418" chance="25" /><!-- Fried Kucien -->
@@ -2157,10 +2157,10 @@
 	</npc_drop>
 	<npc_drop npc_id="702289">
 		<drop_group><!-- Named Box -->
-			<drop item_id="188053451" chance="100" each_member="true" /><!-- Ornate Abyss Fortress Box -->
+			<drop item_id="188053451" each_member="true" /><!-- Ornate Abyss Fortress Box -->
 		</drop_group>
 		<drop_group><!-- Named Supply -->
-			<drop item_id="188052919" chance="100" each_member="true" /><!-- Fortress Supplies -->
+			<drop item_id="188052919" each_member="true" /><!-- Fortress Supplies -->
 		</drop_group>
 		<drop_group><!-- Named Serum Box -->
 			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
@@ -2172,8 +2172,8 @@
 	<!-- Krotan Barracks (Legion) -->
 	<npc_drop npc_id="702290">
 		<drop_group><!-- Named Boxes -->
-			<drop item_id="188052743" chance="100" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052744" chance="100" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052743" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052744" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group><!-- Named Food -->
 			<drop item_id="160002418" chance="30" /><!-- Fried Kucien -->
@@ -2188,10 +2188,10 @@
 	</npc_drop>
 	<npc_drop npc_id="702291">
 		<drop_group><!-- Named Box -->
-			<drop item_id="188053451" chance="100" each_member="true" /><!-- Ornate Abyss Fortress Box -->
+			<drop item_id="188053451" each_member="true" /><!-- Ornate Abyss Fortress Box -->
 		</drop_group>
 		<drop_group><!-- Named Supply -->
-			<drop item_id="188052742" chance="100" each_member="true" /><!-- Fortress Supplies -->
+			<drop item_id="188052742" each_member="true" /><!-- Fortress Supplies -->
 		</drop_group>
 		<drop_group><!-- Named Serum Box -->
 			<drop item_id="188053083" chance="15" /><!-- Tempering Solution Chest -->
@@ -2289,26 +2289,26 @@
 			<drop item_id="112600772" chance="10" /><!-- Archon Centurion's Shoulderplates -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="6" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="5" chance="45" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="4" chance="30" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="3" chance="20" /><!-- Major Ancient Icon -->
+			<drop item_id="186000066" max_amount="6" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="5" chance="45" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="4" chance="30" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000063" max_amount="3" chance="20" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="4" chance="40" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="3" chance="25" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000059" min_amount="1" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
+			<drop item_id="186000062" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="4" chance="40" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="3" chance="25" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000059" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="4" chance="35" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="3" chance="30" /><!-- Ancient Goblet -->
-			<drop item_id="186000056" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000058" max_amount="4" chance="35" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="3" chance="30" /><!-- Ancient Goblet -->
+			<drop item_id="186000056" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="10" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="3" chance="25" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000053" min_amount="1" max_amount="2" chance="20" /><!-- Ancient Crown -->
+			<drop item_id="186000054" max_amount="3" chance="25" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000053" max_amount="2" chance="20" /><!-- Ancient Crown -->
 			<drop item_id="186000052" chance="10" /><!-- Greater Ancient Crown -->
 			<drop item_id="186000051" chance="5" /><!-- Major Ancient Crown -->
 		</drop_group>
@@ -2316,8 +2316,8 @@
 	<!-- Kysis Barracks -->
 	<npc_drop npc_id="702292">
 		<drop_group><!-- Named Boxes -->
-			<drop item_id="188052920" chance="100" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052921" chance="100" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052920" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052921" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group><!-- Named Food -->
 			<drop item_id="160002418" chance="25" /><!-- Fried Kucien -->
@@ -2332,10 +2332,10 @@
 	</npc_drop>
 	<npc_drop npc_id="702293">
 		<drop_group><!-- Named Box -->
-			<drop item_id="188053451" chance="100" each_member="true" /><!-- Ornate Abyss Fortress Box -->
+			<drop item_id="188053451" each_member="true" /><!-- Ornate Abyss Fortress Box -->
 		</drop_group>
 		<drop_group><!-- Named Supply -->
-			<drop item_id="188052919" chance="100" each_member="true" /><!-- Fortress Supplies -->
+			<drop item_id="188052919" each_member="true" /><!-- Fortress Supplies -->
 		</drop_group>
 		<drop_group><!-- Named Serum Box -->
 			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
@@ -2347,8 +2347,8 @@
 	<!-- Kysis Barracks (Legion) -->
 	<npc_drop npc_id="702294">
 		<drop_group><!-- Named Boxes -->
-			<drop item_id="188052743" chance="100" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052744" chance="100" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052743" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052744" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group><!-- Named Food -->
 			<drop item_id="160002418" chance="30" /><!-- Fried Kucien -->
@@ -2363,10 +2363,10 @@
 	</npc_drop>
 	<npc_drop npc_id="702295">
 		<drop_group><!-- Named Box -->
-			<drop item_id="188053451" chance="100" each_member="true" /><!-- Ornate Abyss Fortress Box -->
+			<drop item_id="188053451" each_member="true" /><!-- Ornate Abyss Fortress Box -->
 		</drop_group>
 		<drop_group><!-- Named Supply -->
-			<drop item_id="188052742" chance="100" each_member="true" /><!-- Fortress Supplies -->
+			<drop item_id="188052742" each_member="true" /><!-- Fortress Supplies -->
 		</drop_group>
 		<drop_group><!-- Named Serum Box -->
 			<drop item_id="188053083" chance="15" /><!-- Tempering Solution Chest -->
@@ -2468,26 +2468,26 @@
 			<drop item_id="114600846" chance="10" /><!-- Elite Archon Tribunus' Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="6" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="5" chance="45" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="4" chance="30" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="3" chance="20" /><!-- Major Ancient Icon -->
+			<drop item_id="186000066" max_amount="6" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="5" chance="45" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="4" chance="30" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000063" max_amount="3" chance="20" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="4" chance="40" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="3" chance="25" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000059" min_amount="1" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
+			<drop item_id="186000062" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="4" chance="40" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="3" chance="25" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000059" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="4" chance="35" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="3" chance="30" /><!-- Ancient Goblet -->
-			<drop item_id="186000056" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000058" max_amount="4" chance="35" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="3" chance="30" /><!-- Ancient Goblet -->
+			<drop item_id="186000056" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="10" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="3" chance="25" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000053" min_amount="1" max_amount="2" chance="20" /><!-- Ancient Crown -->
+			<drop item_id="186000054" max_amount="3" chance="25" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000053" max_amount="2" chance="20" /><!-- Ancient Crown -->
 			<drop item_id="186000052" chance="10" /><!-- Greater Ancient Crown -->
 			<drop item_id="186000051" chance="5" /><!-- Major Ancient Crown -->
 		</drop_group>
@@ -2538,14 +2538,14 @@
 			<drop item_id="114600824" chance="20" /><!-- Reshanta Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="3" chance="60" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="3" chance="40" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000066" max_amount="3" chance="60" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="3" chance="40" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="2" chance="20" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="7.5" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
 			<drop item_id="186000062" chance="40" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="30" /><!-- Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="30" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="20" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="10" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -2601,19 +2601,19 @@
 			<drop item_id="114600780" chance="10" /><!-- Guardian Squad Leader's Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="60" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="40" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="60" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="40" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="20" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="3" chance="7.5" /><!-- Major Ancient Icon -->
+			<drop item_id="186000063" max_amount="3" chance="7.5" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="4" chance="30" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="3" chance="20" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="3" chance="10" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000059" min_amount="1" max_amount="2" chance="5" /><!-- Major Ancient Seal -->
+			<drop item_id="186000062" max_amount="4" chance="30" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="3" chance="20" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="3" chance="10" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000059" max_amount="2" chance="5" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="2" chance="30" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000058" max_amount="2" chance="30" /><!-- Lesser Ancient Goblet -->
 			<drop item_id="186000057" chance="20" /><!-- Ancient Goblet -->
 			<drop item_id="186000056" chance="10" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="5" /><!-- Major Ancient Goblet -->
@@ -2664,14 +2664,14 @@
 			<drop item_id="114600782" chance="10" /><!-- Archon Squad Leader's Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="60" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="40" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="60" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="40" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="20" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="7.5" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="5" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="3" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="5" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="3" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="2" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="1" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -2685,7 +2685,7 @@
 	<!-- Linkgate Foundry -->
 	<npc_drop npc_id="234992">
 		<drop_group><!-- Named Instance Item -->
-			<drop item_id="188053238" chance="100" /><!-- Scroll Bundle (Linkgate Foundry) -->
+			<drop item_id="188053238" /><!-- Scroll Bundle (Linkgate Foundry) -->
 		</drop_group>
 	</npc_drop>
 	<!-- Lower Udas Temple -->
@@ -2707,8 +2707,8 @@
 	<!-- Miren Barracks -->
 	<npc_drop npc_id="702296">
 		<drop_group><!-- Named Boxes -->
-			<drop item_id="188052920" chance="100" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052921" chance="100" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052920" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052921" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group><!-- Named Food -->
 			<drop item_id="160002418" chance="25" /><!-- Fried Kucien -->
@@ -2723,10 +2723,10 @@
 	</npc_drop>
 	<npc_drop npc_id="702297">
 		<drop_group><!-- Named Box -->
-			<drop item_id="188053451" chance="100" each_member="true" /><!-- Ornate Abyss Fortress Box -->
+			<drop item_id="188053451" each_member="true" /><!-- Ornate Abyss Fortress Box -->
 		</drop_group>
 		<drop_group><!-- Named Supply -->
-			<drop item_id="188052919" chance="100" each_member="true" /><!-- Fortress Supplies -->
+			<drop item_id="188052919" each_member="true" /><!-- Fortress Supplies -->
 		</drop_group>
 		<drop_group><!-- Named Serum Box -->
 			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
@@ -2738,8 +2738,8 @@
 	<!-- Miren Barracks (Legion) -->
 	<npc_drop npc_id="702298">
 		<drop_group><!-- Named Boxes -->
-			<drop item_id="188052743" chance="100" each_member="true" /><!-- Manastone Box -->
-			<drop item_id="188052744" chance="100" each_member="true" /><!-- Ancient Relic Box -->
+			<drop item_id="188052743" each_member="true" /><!-- Manastone Box -->
+			<drop item_id="188052744" each_member="true" /><!-- Ancient Relic Box -->
 		</drop_group>
 		<drop_group><!-- Named Food -->
 			<drop item_id="160002418" chance="30" /><!-- Fried Kucien -->
@@ -2754,10 +2754,10 @@
 	</npc_drop>
 	<npc_drop npc_id="702299">
 		<drop_group><!-- Named Box -->
-			<drop item_id="188053451" chance="100" each_member="true" /><!-- Ornate Abyss Fortress Box -->
+			<drop item_id="188053451" each_member="true" /><!-- Ornate Abyss Fortress Box -->
 		</drop_group>
 		<drop_group><!-- Named Supply -->
-			<drop item_id="188052742" chance="100" each_member="true" /><!-- Fortress Supplies -->
+			<drop item_id="188052742" each_member="true" /><!-- Fortress Supplies -->
 		</drop_group>
 		<drop_group><!-- Named Serum Box -->
 			<drop item_id="188053083" chance="15" /><!-- Tempering Solution Chest -->
@@ -2769,26 +2769,26 @@
 	<!-- Miren Chamber -->
 	<npc_drop npc_id="700543">
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="6" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="5" chance="45" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="4" chance="30" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="3" chance="20" /><!-- Major Ancient Icon -->
+			<drop item_id="186000066" max_amount="6" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="5" chance="45" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="4" chance="30" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000063" max_amount="3" chance="20" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="4" chance="40" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="3" chance="25" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000059" min_amount="1" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
+			<drop item_id="186000062" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="4" chance="40" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="3" chance="25" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000059" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="4" chance="35" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="3" chance="30" /><!-- Ancient Goblet -->
-			<drop item_id="186000056" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000058" max_amount="4" chance="35" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="3" chance="30" /><!-- Ancient Goblet -->
+			<drop item_id="186000056" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="10" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="3" chance="25" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000053" min_amount="1" max_amount="2" chance="20" /><!-- Ancient Crown -->
+			<drop item_id="186000054" max_amount="3" chance="25" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000053" max_amount="2" chance="20" /><!-- Ancient Crown -->
 			<drop item_id="186000052" chance="10" /><!-- Greater Ancient Crown -->
 			<drop item_id="186000051" chance="5" /><!-- Major Ancient Crown -->
 		</drop_group>
@@ -2859,26 +2859,26 @@
 			<drop item_id="114600846" chance="10" /><!-- Elite Archon Tribunus' Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="6" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="5" chance="45" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="4" chance="30" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="3" chance="20" /><!-- Major Ancient Icon -->
+			<drop item_id="186000066" max_amount="6" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="5" chance="45" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="4" chance="30" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000063" max_amount="3" chance="20" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="4" chance="40" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="3" chance="25" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000059" min_amount="1" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
+			<drop item_id="186000062" max_amount="5" chance="45" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="4" chance="40" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="3" chance="25" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000059" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="4" chance="35" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="3" chance="30" /><!-- Ancient Goblet -->
-			<drop item_id="186000056" min_amount="1" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000058" max_amount="4" chance="35" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="3" chance="30" /><!-- Ancient Goblet -->
+			<drop item_id="186000056" max_amount="2" chance="20" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="10" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="3" chance="25" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000053" min_amount="1" max_amount="2" chance="20" /><!-- Ancient Crown -->
+			<drop item_id="186000054" max_amount="3" chance="25" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000053" max_amount="2" chance="20" /><!-- Ancient Crown -->
 			<drop item_id="186000052" chance="10" /><!-- Greater Ancient Crown -->
 			<drop item_id="186000051" chance="5" /><!-- Major Ancient Crown -->
 		</drop_group>
@@ -2894,7 +2894,7 @@
 			<drop item_id="188053706" chance="25" each_member="true" /><!-- Rentus Base Supplies -->
 		</drop_group>
 		<drop_group><!-- Named Stigma Bundle -->
-			<drop item_id="188053783" min_amount="1" max_amount="1" chance="25" /><!-- Stigma Sack -->
+			<drop item_id="188053783" chance="25" /><!-- Stigma Sack -->
 		</drop_group>
 		<drop_group><!-- Named Accessoire (Epic) -->
 			<drop item_id="125004267" chance="35" /><!-- Vasharti Legionnaire's Plate Helmet -->
@@ -2907,7 +2907,7 @@
 	</npc_drop>
 	<npc_drop npc_id="236705">
 		<drop_group><!-- Named Bundle -->
-			<drop item_id="188053713" chance="100" each_member="true" /><!-- Blood Mark Bundle -->
+			<drop item_id="188053713" each_member="true" /><!-- Blood Mark Bundle -->
 		</drop_group>
 		<drop_group><!-- Named Armor (Epic) -->
 			<drop item_id="113101703" chance="35" /><!-- Vasharti Legionnaire's Leggings -->
@@ -2929,17 +2929,17 @@
 	<!-- Raksang -->
 	<npc_drop npc_id="701369">
 		<drop_group><!-- Named Key -->
-			<drop item_id="188100028" chance="100" /><!-- Corridor Key Piece -->
+			<drop item_id="188100028" /><!-- Corridor Key Piece -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701370">
 		<drop_group><!-- Named Key -->
-			<drop item_id="188100029" chance="100" /><!-- Fear Key Piece -->
+			<drop item_id="188100029" /><!-- Fear Key Piece -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701371">
 		<drop_group><!-- Named Key -->
-			<drop item_id="188100030" chance="100" /><!-- Fire Key Piece -->
+			<drop item_id="188100030" /><!-- Fire Key Piece -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701372">
@@ -2956,76 +2956,76 @@
 	<!-- Rentus Base -->
 	<npc_drop npc_id="218572">
 		<drop_group><!-- Named Armor (Unique) -->
-			<drop item_id="114101284" chance="100" /><!-- Rebel Sorcerer's Shoes -->
-			<drop item_id="114101285" chance="100" /><!-- Rebel Spiritmaster's Shoes -->
-			<drop item_id="114101434" chance="100" /><!-- Rebel Songweaver's Shoes -->
-			<drop item_id="114301290" chance="100" /><!-- Rebel Assassin's Boots -->
-			<drop item_id="114301291" chance="100" /><!-- Rebel Ranger's Boots -->
-			<drop item_id="114301440" chance="100" /><!-- Rebel Gunslinger's Boots -->
-			<drop item_id="114501248" chance="100" /><!-- Rebel Cleric's Brogans -->
-			<drop item_id="114501249" chance="100" /><!-- Rebel Chanter's Brogans -->
-			<drop item_id="114501646" chance="100" /><!-- Rebel Aethertech's Magic Brogans -->
-			<drop item_id="114601190" chance="100" /><!-- Rebel Gladiator's Sabatons -->
-			<drop item_id="114601191" chance="100" /><!-- Rebel Templar's Sabatons -->
-			<drop item_id="111101238" chance="100" /><!-- Rebel Sorcerer's Gloves -->
-			<drop item_id="111101239" chance="100" /><!-- Rebel Spiritmaster's Gloves -->
-			<drop item_id="111101387" chance="100" /><!-- Rebel Songweaver's Gloves -->
-			<drop item_id="111301233" chance="100" /><!-- Rebel Assassin's Vambrace -->
-			<drop item_id="111301234" chance="100" /><!-- Rebel Ranger's Vambrace -->
-			<drop item_id="111301379" chance="100" /><!-- Rebel Gunslinger's Vambrace -->
-			<drop item_id="111501227" chance="100" /><!-- Rebel Cleric's Handguards -->
-			<drop item_id="111501228" chance="100" /><!-- Rebel Chanter's Handguards -->
-			<drop item_id="111501617" chance="100" /><!-- Rebel Aethertech's Magic Handguards -->
-			<drop item_id="111601206" chance="100" /><!-- Rebel Gladiator's Gauntlets -->
-			<drop item_id="111601207" chance="100" /><!-- Rebel Templar's Gauntlets -->
-			<drop item_id="112101196" chance="100" /><!-- Rebel Sorcerer's Pauldrons -->
-			<drop item_id="112101197" chance="100" /><!-- Rebel Spiritmaster's Pauldrons -->
-			<drop item_id="112101341" chance="100" /><!-- Rebel Songweaver's Pauldrons -->
-			<drop item_id="112301179" chance="100" /><!-- Rebel Assassin's Shoulderguards -->
-			<drop item_id="112301180" chance="100" /><!-- Rebel Ranger's Shoulderguards -->
+			<drop item_id="114101284" /><!-- Rebel Sorcerer's Shoes -->
+			<drop item_id="114101285" /><!-- Rebel Spiritmaster's Shoes -->
+			<drop item_id="114101434" /><!-- Rebel Songweaver's Shoes -->
+			<drop item_id="114301290" /><!-- Rebel Assassin's Boots -->
+			<drop item_id="114301291" /><!-- Rebel Ranger's Boots -->
+			<drop item_id="114301440" /><!-- Rebel Gunslinger's Boots -->
+			<drop item_id="114501248" /><!-- Rebel Cleric's Brogans -->
+			<drop item_id="114501249" /><!-- Rebel Chanter's Brogans -->
+			<drop item_id="114501646" /><!-- Rebel Aethertech's Magic Brogans -->
+			<drop item_id="114601190" /><!-- Rebel Gladiator's Sabatons -->
+			<drop item_id="114601191" /><!-- Rebel Templar's Sabatons -->
+			<drop item_id="111101238" /><!-- Rebel Sorcerer's Gloves -->
+			<drop item_id="111101239" /><!-- Rebel Spiritmaster's Gloves -->
+			<drop item_id="111101387" /><!-- Rebel Songweaver's Gloves -->
+			<drop item_id="111301233" /><!-- Rebel Assassin's Vambrace -->
+			<drop item_id="111301234" /><!-- Rebel Ranger's Vambrace -->
+			<drop item_id="111301379" /><!-- Rebel Gunslinger's Vambrace -->
+			<drop item_id="111501227" /><!-- Rebel Cleric's Handguards -->
+			<drop item_id="111501228" /><!-- Rebel Chanter's Handguards -->
+			<drop item_id="111501617" /><!-- Rebel Aethertech's Magic Handguards -->
+			<drop item_id="111601206" /><!-- Rebel Gladiator's Gauntlets -->
+			<drop item_id="111601207" /><!-- Rebel Templar's Gauntlets -->
+			<drop item_id="112101196" /><!-- Rebel Sorcerer's Pauldrons -->
+			<drop item_id="112101197" /><!-- Rebel Spiritmaster's Pauldrons -->
+			<drop item_id="112101341" /><!-- Rebel Songweaver's Pauldrons -->
+			<drop item_id="112301179" /><!-- Rebel Assassin's Shoulderguards -->
+			<drop item_id="112301180" /><!-- Rebel Ranger's Shoulderguards -->
 		</drop_group>
 		<drop_group><!-- Named Armor (Unique) -->
-			<drop item_id="113101257" chance="100" /><!-- Rebel Sorcerer's Leggings -->
-			<drop item_id="113101258" chance="100" /><!-- Rebel Spiritmaster's Leggings -->
-			<drop item_id="113101403" chance="100" /><!-- Rebel Songweaver's Leggings -->
-			<drop item_id="113301259" chance="100" /><!-- Rebel Assassin's Breeches -->
-			<drop item_id="113301260" chance="100" /><!-- Rebel Ranger's Breeches -->
-			<drop item_id="113301402" chance="100" /><!-- Rebel Gunslinger's Breeches -->
-			<drop item_id="113501244" chance="100" /><!-- Rebel Cleric's Chausses -->
-			<drop item_id="113501245" chance="100" /><!-- Rebel Chanter's Chausses -->
-			<drop item_id="113501637" chance="100" /><!-- Rebel Aethertech's Magic Chausses -->
-			<drop item_id="113601197" chance="100" /><!-- Rebel Gladiator's Greaves -->
-			<drop item_id="113601198" chance="100" /><!-- Rebel Templar's Greaves -->
-			<drop item_id="110101363" chance="100" /><!-- Rebel Sorcerer's Tunic -->
-			<drop item_id="110101364" chance="100" /><!-- Rebel Spiritmaster's Tunic -->
-			<drop item_id="110101541" chance="100" /><!-- Rebel Songweaver's Tunic -->
-			<drop item_id="110301290" chance="100" /><!-- Rebel Assassin's Jerkin -->
-			<drop item_id="110301291" chance="100" /><!-- Rebel Ranger's Jerkin -->
-			<drop item_id="110301437" chance="100" /><!-- Rebel Gunslinger's Jerkin -->
-			<drop item_id="110501268" chance="100" /><!-- Rebel Cleric's Hauberk -->
-			<drop item_id="110501269" chance="100" /><!-- Rebel Chanter's Hauberk -->
-			<drop item_id="110551060" chance="100" /><!-- Rebel Aethertech's Magic Hauberk -->
-			<drop item_id="110601237" chance="100" /><!-- Rebel Gladiator's Breastplate -->
-			<drop item_id="110601238" chance="100" /><!-- Rebel Templar's Breastplate -->
-			<drop item_id="112301323" chance="100" /><!-- Rebel Gunslinger's Shoulderguards -->
-			<drop item_id="112501172" chance="100" /><!-- Rebel Cleric's Spaulders -->
-			<drop item_id="112501173" chance="100" /><!-- Rebel Chanter's Spaulders -->
-			<drop item_id="112501558" chance="100" /><!-- Rebel Aethertech's Magic Spaulder -->
-			<drop item_id="112601184" chance="100" /><!-- Rebel Gladiator's Shoulderplates -->
-			<drop item_id="112601185" chance="100" /><!-- Rebel Templar's Shoulderplates -->
+			<drop item_id="113101257" /><!-- Rebel Sorcerer's Leggings -->
+			<drop item_id="113101258" /><!-- Rebel Spiritmaster's Leggings -->
+			<drop item_id="113101403" /><!-- Rebel Songweaver's Leggings -->
+			<drop item_id="113301259" /><!-- Rebel Assassin's Breeches -->
+			<drop item_id="113301260" /><!-- Rebel Ranger's Breeches -->
+			<drop item_id="113301402" /><!-- Rebel Gunslinger's Breeches -->
+			<drop item_id="113501244" /><!-- Rebel Cleric's Chausses -->
+			<drop item_id="113501245" /><!-- Rebel Chanter's Chausses -->
+			<drop item_id="113501637" /><!-- Rebel Aethertech's Magic Chausses -->
+			<drop item_id="113601197" /><!-- Rebel Gladiator's Greaves -->
+			<drop item_id="113601198" /><!-- Rebel Templar's Greaves -->
+			<drop item_id="110101363" /><!-- Rebel Sorcerer's Tunic -->
+			<drop item_id="110101364" /><!-- Rebel Spiritmaster's Tunic -->
+			<drop item_id="110101541" /><!-- Rebel Songweaver's Tunic -->
+			<drop item_id="110301290" /><!-- Rebel Assassin's Jerkin -->
+			<drop item_id="110301291" /><!-- Rebel Ranger's Jerkin -->
+			<drop item_id="110301437" /><!-- Rebel Gunslinger's Jerkin -->
+			<drop item_id="110501268" /><!-- Rebel Cleric's Hauberk -->
+			<drop item_id="110501269" /><!-- Rebel Chanter's Hauberk -->
+			<drop item_id="110551060" /><!-- Rebel Aethertech's Magic Hauberk -->
+			<drop item_id="110601237" /><!-- Rebel Gladiator's Breastplate -->
+			<drop item_id="110601238" /><!-- Rebel Templar's Breastplate -->
+			<drop item_id="112301323" /><!-- Rebel Gunslinger's Shoulderguards -->
+			<drop item_id="112501172" /><!-- Rebel Cleric's Spaulders -->
+			<drop item_id="112501173" /><!-- Rebel Chanter's Spaulders -->
+			<drop item_id="112501558" /><!-- Rebel Aethertech's Magic Spaulder -->
+			<drop item_id="112601184" /><!-- Rebel Gladiator's Shoulderplates -->
+			<drop item_id="112601185" /><!-- Rebel Templar's Shoulderplates -->
 		</drop_group>
 		<drop_group><!-- Named Head (Unique) -->
-			<drop item_id="125002896" chance="100" /><!-- Rebel Sorcerer's Headband -->
-			<drop item_id="125002897" chance="100" /><!-- Rebel Spiritmaster's Headband -->
-			<drop item_id="125003321" chance="100" /><!-- Rebel Songweaver's Headband -->
-			<drop item_id="125002898" chance="100" /><!-- Rebel Assassin's Hat -->
-			<drop item_id="125002899" chance="100" /><!-- Rebel Ranger's Hat -->
-			<drop item_id="125003320" chance="100" /><!-- Rebel Gunslinger's Hat -->
-			<drop item_id="125002900" chance="100" /><!-- Rebel Cleric's Chain Hood -->
-			<drop item_id="125002901" chance="100" /><!-- Rebel Chanter's Chain Hood -->
-			<drop item_id="125003902" chance="100" /><!-- Rebel Aethertech's Magic Helm -->
-			<drop item_id="125002902" chance="100" /><!-- Rebel Gladiator's Helm -->
-			<drop item_id="125002903" chance="100" /><!-- Rebel Templar's Helm -->
+			<drop item_id="125002896" /><!-- Rebel Sorcerer's Headband -->
+			<drop item_id="125002897" /><!-- Rebel Spiritmaster's Headband -->
+			<drop item_id="125003321" /><!-- Rebel Songweaver's Headband -->
+			<drop item_id="125002898" /><!-- Rebel Assassin's Hat -->
+			<drop item_id="125002899" /><!-- Rebel Ranger's Hat -->
+			<drop item_id="125003320" /><!-- Rebel Gunslinger's Hat -->
+			<drop item_id="125002900" /><!-- Rebel Cleric's Chain Hood -->
+			<drop item_id="125002901" /><!-- Rebel Chanter's Chain Hood -->
+			<drop item_id="125003902" /><!-- Rebel Aethertech's Magic Helm -->
+			<drop item_id="125002902" /><!-- Rebel Gladiator's Helm -->
+			<drop item_id="125002903" /><!-- Rebel Templar's Helm -->
 		</drop_group>
 		<drop_group><!-- Named Guestbloom (Unique) -->
 			<drop item_id="170195109" chance="20" /><!-- Resistance Army's Guestbloom -->
@@ -3115,14 +3115,14 @@
 			<drop item_id="114600824" chance="20" /><!-- Reshanta Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="60" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="40" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="60" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="40" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="20" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="7.5" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="5" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="3" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="5" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="3" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="2" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="1" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -3178,14 +3178,14 @@
 			<drop item_id="114600780" chance="10" /><!-- Guardian Squad Leader's Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="60" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="40" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="60" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="40" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="20" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="7.5" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="5" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="3" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="5" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="3" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="2" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="1" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -3241,14 +3241,14 @@
 			<drop item_id="114600782" chance="10" /><!-- Archon Squad Leader's Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="60" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="40" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="60" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="40" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="20" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="7.5" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="5" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="3" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="5" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="3" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="2" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="1" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -3264,7 +3264,7 @@
 	<!-- Steel Rake -->
 	<npc_drop npc_id="700553">
 		<drop_group><!-- Named Treasure Key -->
-			<drop item_id="185000076" chance="100" /><!-- Steel Rake Treasure Chest Key -->
+			<drop item_id="185000076" /><!-- Steel Rake Treasure Chest Key -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="700554">
@@ -3319,28 +3319,28 @@
 			<drop item_id="114600824" chance="25" /><!-- Reshanta Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="40" /><!-- Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="2" chance="30" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000063" min_amount="1" max_amount="2" chance="20" /><!-- Major Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="40" /><!-- Ancient Icon -->
+			<drop item_id="186000064" max_amount="2" chance="30" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000063" max_amount="2" chance="20" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="40" /><!-- Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="2" chance="30" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000059" min_amount="1" max_amount="2" chance="20" /><!-- Major Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="50" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="40" /><!-- Ancient Seal -->
+			<drop item_id="186000060" max_amount="2" chance="30" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000059" max_amount="2" chance="20" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="2" chance="30" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000058" max_amount="2" chance="30" /><!-- Lesser Ancient Goblet -->
 			<drop item_id="186000057" chance="20" /><!-- Ancient Goblet -->
 			<drop item_id="186000056" chance="10" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="5" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Crown -->
-			<drop item_id="186000054" min_amount="2" max_amount="2" chance="10" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000053" min_amount="2" max_amount="2" chance="5" /><!-- Ancient Crown -->
-			<drop item_id="186000052" min_amount="2" max_amount="2" chance="2" /><!-- Greater Ancient Crown -->
-			<drop item_id="186000051" min_amount="2" max_amount="2" chance="1" /><!-- Major Ancient Crown -->
+			<drop item_id="186000054" min_amount="2" chance="10" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000053" min_amount="2" chance="5" /><!-- Ancient Crown -->
+			<drop item_id="186000052" min_amount="2" chance="2" /><!-- Greater Ancient Crown -->
+			<drop item_id="186000051" min_amount="2" chance="1" /><!-- Major Ancient Crown -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="700462">
@@ -3388,14 +3388,14 @@
 			<drop item_id="114600824" chance="25" /><!-- Reshanta Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="40" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="40" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="10" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="15" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="5" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -3451,14 +3451,14 @@
 			<drop item_id="114600824" chance="25" /><!-- Reshanta Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="40" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="40" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="10" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="15" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="5" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -3514,14 +3514,14 @@
 			<drop item_id="114600824" chance="25" /><!-- Reshanta Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="40" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="40" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="10" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="15" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="5" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -3577,19 +3577,19 @@
 			<drop item_id="114600780" chance="10" /><!-- Guardian Squad Leader's Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="4" chance="40" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="3" chance="30" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="4" chance="40" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="3" chance="30" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="20" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="10" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="3" chance="40" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="30" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="3" chance="40" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="30" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="20" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="10" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="2" chance="30" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000058" max_amount="2" chance="30" /><!-- Lesser Ancient Goblet -->
 			<drop item_id="186000057" chance="20" /><!-- Ancient Goblet -->
 			<drop item_id="186000056" chance="10" /><!-- Greater Ancient Goblet -->
 			<drop item_id="186000055" chance="5" /><!-- Major Ancient Goblet -->
@@ -3640,14 +3640,14 @@
 			<drop item_id="114600780" chance="10" /><!-- Guardian Squad Leader's Sabatons -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="40" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="40" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 			<drop item_id="186000063" chance="10" /><!-- Major Ancient Icon -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="15" /><!-- Greater Ancient Seal -->
 			<drop item_id="186000059" chance="5" /><!-- Major Ancient Seal -->
 		</drop_group>
@@ -3661,8 +3661,8 @@
 	<!-- Talocs Hollow -->
 	<npc_drop npc_id="700742">
 		<drop_group><!-- Egg Shell -->
-			<drop item_id="182005918" min_amount="1" max_amount="5" chance="43" /><!-- Glossy Green Egg Shell -->
-			<drop item_id="182005919" min_amount="1" max_amount="5" chance="23" /><!-- Glossy Yellow Egg Shell -->
+			<drop item_id="182005918" max_amount="5" chance="43" /><!-- Glossy Green Egg Shell -->
+			<drop item_id="182005919" max_amount="5" chance="23" /><!-- Glossy Yellow Egg Shell -->
 		</drop_group>
 		<drop_group><!-- Enchantment Stone -->
 			<drop item_id="166000192" chance="10" /><!-- Beta Enchantment Stone -->
@@ -3671,10 +3671,10 @@
 	<!-- The Hexway -->
 	<npc_drop npc_id="701663"><!-- Ancient Treasure Box -->
 		<drop_group level_based_chance_reduction="true">
-			<drop item_id="186000409" chance="100" each_member="true" /><!-- Daeva's Respite Coin -->
+			<drop item_id="186000409" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
-			<drop item_id="188052163" chance="100" each_member="true" /><!-- Ancient Treasure Box -->
+			<drop item_id="188052163" each_member="true" /><!-- Ancient Treasure Box -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
 			<drop item_id="160002418" chance="25" /><!-- Fried Kusien -->
@@ -3689,17 +3689,17 @@
 	</npc_drop>
 	<npc_drop npc_id="701664"><!-- Golden Treasure Box -->
 		<drop_group level_based_chance_reduction="true">
-			<drop item_id="186000409" min_amount="2" max_amount="2" chance="100" each_member="true" /><!-- Daeva's Respite Coin -->
+			<drop item_id="186000409" min_amount="2" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
-			<drop item_id="188052162" min_amount="2" max_amount="2" chance="100" each_member="true" /><!-- Bundle of ancient items -->
+			<drop item_id="188052162" min_amount="2" each_member="true" /><!-- Bundle of ancient items -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
-			<drop item_id="186000242" min_amount="2" max_amount="3" chance="100" each_member="true" /><!-- Ceramium Medal -->
+			<drop item_id="186000242" min_amount="2" max_amount="3" each_member="true" /><!-- Ceramium Medal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
 			<drop item_id="186000243" min_amount="8" max_amount="15" chance="10" /><!-- Shattered Ceranium -->
-			<drop item_id="186000147" min_amount="1" max_amount="3" chance="15" /><!-- Mithril Medal -->
+			<drop item_id="186000147" max_amount="3" chance="15" /><!-- Mithril Medal -->
 		</drop_group>
 		<drop_group level_based_chance_reduction="true">
 			<drop item_id="188053610" chance="10" each_member="true" /><!-- Manastone Bundle (Level 70) -->
@@ -3718,94 +3718,94 @@
 	<!-- Rare Chest -->
 	<npc_drop npc_id="701388">
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000147" min_amount="1" max_amount="2" chance="10" /><!-- Mithril Medal -->
+			<drop item_id="186000147" max_amount="2" chance="10" /><!-- Mithril Medal -->
 		</drop_group>
 		<drop_group><!-- Named AP Safe -->
-			<drop item_id="186000059" chance="100" /><!-- Major Ancient Seal -->
+			<drop item_id="186000059" /><!-- Major Ancient Seal -->
 		</drop_group>
 		<drop_group><!-- Named AP Standard -->
 			<drop item_id="186000051" chance="30" /><!-- Major Ancient Crown -->
 			<drop item_id="186000052" chance="30" /><!-- Greater Ancient Crown -->
-			<drop item_id="186000053" min_amount="1" max_amount="2" chance="30" /><!-- Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="4" chance="30" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000053" max_amount="2" chance="30" /><!-- Ancient Crown -->
+			<drop item_id="186000054" max_amount="4" chance="30" /><!-- Lesser Ancient Crown -->
 			<drop item_id="186000055" chance="30" /><!-- Major Ancient Goblet -->
-			<drop item_id="186000056" min_amount="1" max_amount="2" chance="30" /><!-- Greater Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="3" chance="30" /><!-- Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="4" chance="30" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000056" max_amount="2" chance="30" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000057" max_amount="3" chance="30" /><!-- Ancient Goblet -->
+			<drop item_id="186000058" max_amount="4" chance="30" /><!-- Lesser Ancient Goblet -->
 		</drop_group>
 		<drop_group><!-- Named AP Additional -->
-			<drop item_id="186000060" min_amount="1" max_amount="2" chance="15" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="5" chance="15" /><!-- Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="5" chance="15" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000063" min_amount="1" max_amount="2" chance="15" /><!-- Major Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="3" chance="15" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="5" chance="15" /><!-- Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="5" chance="15" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000060" max_amount="2" chance="15" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000061" max_amount="5" chance="15" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="5" chance="15" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000063" max_amount="2" chance="15" /><!-- Major Ancient Icon -->
+			<drop item_id="186000064" max_amount="3" chance="15" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000065" max_amount="5" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="5" chance="15" /><!-- Lesser Ancient Icon -->
 		</drop_group>
 	</npc_drop>
 	<!-- Unique Chest -->
 	<npc_drop npc_id="701389">
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000147" min_amount="1" max_amount="3" chance="50" /><!-- Mithril Medal -->
+			<drop item_id="186000147" max_amount="3" chance="50" /><!-- Mithril Medal -->
 		</drop_group>
 		<drop_group><!-- Named AP Safe -->
-			<drop item_id="186000055" min_amount="3" max_amount="3" chance="100" /><!-- Major Ancient Goblet -->
+			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
 		</drop_group>
 		<drop_group><!-- Named AP Standard -->
 			<drop item_id="186000051" chance="30" /><!-- Major Ancient Crown -->
 			<drop item_id="186000052" chance="30" /><!-- Greater Ancient Crown -->
-			<drop item_id="186000053" min_amount="1" max_amount="2" chance="40" /><!-- Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="4" chance="30" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000056" min_amount="1" max_amount="3" chance="30" /><!-- Greater Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="3" chance="30" /><!-- Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="2" chance="30" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000053" max_amount="2" chance="40" /><!-- Ancient Crown -->
+			<drop item_id="186000054" max_amount="4" chance="30" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000056" max_amount="3" chance="30" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000057" max_amount="3" chance="30" /><!-- Ancient Goblet -->
+			<drop item_id="186000058" max_amount="2" chance="30" /><!-- Lesser Ancient Goblet -->
 		</drop_group>
 		<drop_group><!-- Named AP Additional -->
-			<drop item_id="186000059" min_amount="1" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="3" chance="15" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="3" chance="15" /><!-- Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="4" chance="15" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000063" min_amount="1" max_amount="3" chance="15" /><!-- Major Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="4" chance="15" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="5" chance="15" /><!-- Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="5" chance="15" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000059" max_amount="2" chance="15" /><!-- Major Ancient Seal -->
+			<drop item_id="186000060" max_amount="3" chance="15" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000061" max_amount="3" chance="15" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="4" chance="15" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000063" max_amount="3" chance="15" /><!-- Major Ancient Icon -->
+			<drop item_id="186000064" max_amount="4" chance="15" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000065" max_amount="5" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="5" chance="15" /><!-- Lesser Ancient Icon -->
 		</drop_group>
 	</npc_drop>
 	<!-- Legend Chest -->
 	<npc_drop npc_id="701390">
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000147" min_amount="2" max_amount="4" chance="100" /><!-- Mithril Medal -->
+			<drop item_id="186000147" min_amount="2" max_amount="4" /><!-- Mithril Medal -->
 		</drop_group>
 		<drop_group><!-- Named Enchantment Stone -->
-			<drop item_id="166000195" chance="100" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="166000195" /><!-- Epsilon Enchantment Stone -->
 		</drop_group>
 		<drop_group><!-- Named AP Safe -->
-			<drop item_id="186000051" min_amount="3" max_amount="3" chance="100" /><!-- Major Ancient Crown -->
+			<drop item_id="186000051" min_amount="3" /><!-- Major Ancient Crown -->
 		</drop_group>
 		<drop_group><!-- Named AP Standard -->
-			<drop item_id="186000052" min_amount="1" max_amount="3" chance="40" /><!-- Greater Ancient Crown -->
-			<drop item_id="186000053" min_amount="1" max_amount="4" chance="40" /><!-- Ancient Crown -->
-			<drop item_id="186000054" min_amount="1" max_amount="5" chance="40" /><!-- Lesser Ancient Crown -->
-			<drop item_id="186000055" min_amount="1" max_amount="5" chance="40" /><!-- Major Ancient Goblet -->
-			<drop item_id="186000056" min_amount="1" max_amount="4" chance="40" /><!-- Greater Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="3" chance="40" /><!-- Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="2" chance="40" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000052" max_amount="3" chance="40" /><!-- Greater Ancient Crown -->
+			<drop item_id="186000053" max_amount="4" chance="40" /><!-- Ancient Crown -->
+			<drop item_id="186000054" max_amount="5" chance="40" /><!-- Lesser Ancient Crown -->
+			<drop item_id="186000055" max_amount="5" chance="40" /><!-- Major Ancient Goblet -->
+			<drop item_id="186000056" max_amount="4" chance="40" /><!-- Greater Ancient Goblet -->
+			<drop item_id="186000057" max_amount="3" chance="40" /><!-- Ancient Goblet -->
+			<drop item_id="186000058" max_amount="2" chance="40" /><!-- Lesser Ancient Goblet -->
 		</drop_group>
 		<drop_group><!-- Named AP Additional -->
-			<drop item_id="186000059" min_amount="1" max_amount="5" chance="15" /><!-- Major Ancient Seal -->
-			<drop item_id="186000060" min_amount="1" max_amount="5" chance="15" /><!-- Greater Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="5" chance="15" /><!-- Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="5" chance="15" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000063" min_amount="1" max_amount="5" chance="15" /><!-- Major Ancient Icon -->
-			<drop item_id="186000064" min_amount="1" max_amount="5" chance="15" /><!-- Greater Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="5" chance="15" /><!-- Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="5" chance="15" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000059" max_amount="5" chance="15" /><!-- Major Ancient Seal -->
+			<drop item_id="186000060" max_amount="5" chance="15" /><!-- Greater Ancient Seal -->
+			<drop item_id="186000061" max_amount="5" chance="15" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="5" chance="15" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000063" max_amount="5" chance="15" /><!-- Major Ancient Icon -->
+			<drop item_id="186000064" max_amount="5" chance="15" /><!-- Greater Ancient Icon -->
+			<drop item_id="186000065" max_amount="5" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="5" chance="15" /><!-- Lesser Ancient Icon -->
 		</drop_group>
 	</npc_drop>
 	<!-- Raksang Ruins -->
 	<npc_drop npc_id="702694">
 		<drop_group><!-- Named Bombs -->
-			<drop item_id="164000342" min_amount="20" max_amount="20" chance="100" /><!-- Improved Life Drain Bomb -->
+			<drop item_id="164000342" min_amount="20" /><!-- Improved Life Drain Bomb -->
 		</drop_group>
 	</npc_drop>
 	<!-- Tiamat Stronghold -->
@@ -3814,27 +3814,27 @@
 			<drop item_id="186000096" chance="50" /><!-- Platinum Medal -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="25" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="25" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="25" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="60" /><!-- Lesser Ancient Seal -->
-			<drop item_id="186000061" min_amount="1" max_amount="2" chance="30" /><!-- Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="60" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000061" max_amount="2" chance="30" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="10" /><!-- Greater Ancient Seal -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Goblet -->
-			<drop item_id="186000058" min_amount="1" max_amount="2" chance="80" /><!-- Lesser Ancient Goblet -->
-			<drop item_id="186000057" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Goblet -->
+			<drop item_id="186000058" max_amount="2" chance="80" /><!-- Lesser Ancient Goblet -->
+			<drop item_id="186000057" max_amount="2" chance="15" /><!-- Ancient Goblet -->
 			<drop item_id="186000056" chance="5" /><!-- Greater Ancient Goblet -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701527">
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000096" min_amount="1" max_amount="2" chance="100" /><!-- Platinum Medal -->
+			<drop item_id="186000096" max_amount="2" /><!-- Platinum Medal -->
 		</drop_group>
 		<drop_group><!-- Named Coin -->
-			<drop item_id="186000201" chance="100" each_member="true" /><!-- Protectorate Coin -->
+			<drop item_id="186000201" each_member="true" /><!-- Protectorate Coin -->
 		</drop_group>
 		<drop_group><!-- Named Souvenir -->
 			<drop item_id="170170090" chance="15" /><!-- [Souvenir] Tiamat Statue -->
@@ -3882,12 +3882,12 @@
 	<!-- Unstable Abyssal Splinter -->
 	<npc_drop npc_id="701574">
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="10" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="10" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="10" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="10" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="10" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="5" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="2" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -3905,15 +3905,15 @@
 	</npc_drop>
 	<npc_drop npc_id="701575">
 		<drop_group><!-- Named Legion Coin -->
-			<drop item_id="186000199" min_amount="1" max_amount="10" chance="40" /><!-- Legion Coin -->
+			<drop item_id="186000199" max_amount="10" chance="40" /><!-- Legion Coin -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="5" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -3941,22 +3941,22 @@
 	<npc_drop npc_id="700861">
 		<drop_group><!-- Named Quest Item -->
 			<!-- ASMODIANS -->
-			<drop item_id="182209822" chance="100" each_member="true" /><!-- quest_30364a -->
+			<drop item_id="182209822" each_member="true" /><!-- quest_30364a -->
 			<!-- ELYOS -->
-			<drop item_id="182209802" chance="100" each_member="true" /><!-- quest_30264a -->
+			<drop item_id="182209802" each_member="true" /><!-- quest_30264a -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701576">
 		<drop_group><!-- Named Legion Coin -->
-			<drop item_id="186000199" min_amount="1" max_amount="10" chance="40" /><!-- Legion Coin -->
+			<drop item_id="186000199" max_amount="10" chance="40" /><!-- Legion Coin -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="5" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -3977,18 +3977,18 @@
 	</npc_drop>
 	<npc_drop npc_id="701577">
 		<drop_group><!-- Named Key -->
-			<drop item_id="185000104" chance="100" /><!-- Abyssal Fragment -->
+			<drop item_id="185000104" /><!-- Abyssal Fragment -->
 		</drop_group>
 		<drop_group><!-- Named Legion Coin -->
-			<drop item_id="186000199" min_amount="1" max_amount="10" chance="40" /><!-- Legion Coin -->
+			<drop item_id="186000199" max_amount="10" chance="40" /><!-- Legion Coin -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="5" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -4015,15 +4015,15 @@
 	</npc_drop>
 	<npc_drop npc_id="701578">
 		<drop_group><!-- Named Legion Coin -->
-			<drop item_id="186000199" min_amount="1" max_amount="10" chance="100" /><!-- Legion Coin -->
+			<drop item_id="186000199" max_amount="10" /><!-- Legion Coin -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Icon -->
-			<drop item_id="186000066" min_amount="1" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
-			<drop item_id="186000065" min_amount="1" max_amount="2" chance="15" /><!-- Ancient Icon -->
+			<drop item_id="186000066" max_amount="2" chance="50" /><!-- Lesser Ancient Icon -->
+			<drop item_id="186000065" max_amount="2" chance="15" /><!-- Ancient Icon -->
 			<drop item_id="186000064" chance="15" /><!-- Greater Ancient Icon -->
 		</drop_group>
 		<drop_group><!-- Named Ancient Seal -->
-			<drop item_id="186000062" min_amount="1" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
+			<drop item_id="186000062" max_amount="2" chance="25" /><!-- Lesser Ancient Seal -->
 			<drop item_id="186000061" chance="15" /><!-- Ancient Seal -->
 			<drop item_id="186000060" chance="5" /><!-- Greater Ancient Seal -->
 		</drop_group>
@@ -4057,7 +4057,7 @@
 			<drop item_id="170490004" chance="10" /><!-- [Souvenir] Yamennes Bust -->
 		</drop_group>
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000147" min_amount="1" max_amount="4" chance="100" /><!-- Mithril Medal -->
+			<drop item_id="186000147" max_amount="4" /><!-- Mithril Medal -->
 		</drop_group>
 		<drop_group><!-- Named Weapon (Unique) -->
 			<drop item_id="101501124" chance="10" /><!-- Unstable Abyssal Cane -->
@@ -4095,7 +4095,7 @@
 			<drop item_id="170490004" chance="15" /><!-- [Souvenir] Yamennes Bust -->
 		</drop_group>
 		<drop_group><!-- Named Medal -->
-			<drop item_id="186000147" min_amount="1" max_amount="8" chance="100" /><!-- Mithril Medal -->
+			<drop item_id="186000147" max_amount="8" /><!-- Mithril Medal -->
 		</drop_group>
 		<drop_group><!-- Named Weapon (Epic) -->
 			<drop item_id="100201266" chance="3" /><!-- Yamennes Painflare's Stiletto -->
@@ -4149,22 +4149,22 @@
 	<!-- Void Cube -->
 	<npc_drop npc_id="701585">
 		<drop_group><!-- Named Instance Item -->
-			<drop item_id="164000252" chance="100" /><!-- Blue Aetheric Field Bomb -->
+			<drop item_id="164000252" /><!-- Blue Aetheric Field Bomb -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701586">
 		<drop_group><!-- Named Instance Item -->
-			<drop item_id="164000252" chance="100" /><!-- Blue Aetheric Field Bomb -->
+			<drop item_id="164000252" /><!-- Blue Aetheric Field Bomb -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701661">
 		<drop_group><!-- Named Instance Item -->
-			<drop item_id="164000251" chance="100" /><!-- Red Aetheric Field Bomb -->
+			<drop item_id="164000251" /><!-- Red Aetheric Field Bomb -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701936">
 		<drop_group><!-- Named Bundle -->
-			<drop item_id="188052724" chance="100" /><!-- Beritran Hoard -->
+			<drop item_id="188052724" /><!-- Beritran Hoard -->
 		</drop_group>
 	</npc_drop>
 	<!-- START: Sealed Danuar Mysticarium -->
@@ -4190,43 +4190,43 @@
 	<!-- Stolen Solorius Box -->
 	<npc_drop npc_id="701457">
 		<drop_group><!-- Celebrate Solorius Event Drops -->
-			<drop item_id="169230001" chance="100" /><!-- [Event] Dye: True Red -->
-			<drop item_id="169230002" chance="100" /><!-- [Event] Dye: True White -->
-			<drop item_id="169230003" chance="100" /><!-- [Event] Dye: Green Tea -->
-			<drop item_id="169230008" chance="100" /><!-- [Event] Dye: True Black -->
+			<drop item_id="169230001" /><!-- [Event] Dye: True Red -->
+			<drop item_id="169230002" /><!-- [Event] Dye: True White -->
+			<drop item_id="169230003" /><!-- [Event] Dye: Green Tea -->
+			<drop item_id="169230008" /><!-- [Event] Dye: True Black -->
 		</drop_group>
 	</npc_drop>
 	<!-- Alchemy Event: Premium Treasure Box -->
 	<npc_drop npc_id="831785">
 		<drop_group max_items="2"><!-- COMMON -->
-			<drop item_id="152000914" chance="100" min_amount="10" max_amount="10" /><!-- Brilliant Magical Aether -->
-			<drop item_id="169405252" chance="100" min_amount="3" max_amount="3" /><!-- Fury Powder -->
-			<drop item_id="169405254" chance="100" min_amount="3" max_amount="3" /><!-- Earth Trace -->
-			<drop item_id="152012580" chance="100" min_amount="3" max_amount="3" /><!-- Fire Mote -->
-			<drop item_id="152012581" chance="100" min_amount="3" max_amount="3" /><!-- Fire Breath -->
-			<drop item_id="152012582" chance="100" min_amount="3" max_amount="3" /><!-- Fire Fragment -->
-			<drop item_id="152012583" chance="100" min_amount="3" max_amount="3" /><!-- Fire Source -->
-			<drop item_id="152012584" chance="100" min_amount="3" max_amount="3" /><!-- Water Source -->
-			<drop item_id="152012585" chance="100" min_amount="3" max_amount="3" /><!-- Wind Mote -->
-			<drop item_id="152012586" chance="100" min_amount="3" max_amount="3" /><!-- Wind Breath -->
-			<drop item_id="152012587" chance="100" min_amount="3" max_amount="3" /><!-- Wind Eternity -->
-			<drop item_id="152012588" chance="100" min_amount="3" max_amount="3" /><!-- Wind Fragment -->
-			<drop item_id="152012589" chance="100" min_amount="3" max_amount="3" /><!-- Wind Source -->
-			<drop item_id="152012590" chance="100" min_amount="3" max_amount="3" /><!-- Wind Origin -->
-			<drop item_id="152012591" chance="100" min_amount="3" max_amount="3" /><!-- Water Fragment -->
-			<drop item_id="152012593" chance="100" min_amount="3" max_amount="3" /><!-- Valor's Heart -->
+			<drop item_id="152000914" min_amount="10" /><!-- Brilliant Magical Aether -->
+			<drop item_id="169405252" min_amount="3" /><!-- Fury Powder -->
+			<drop item_id="169405254" min_amount="3" /><!-- Earth Trace -->
+			<drop item_id="152012580" min_amount="3" /><!-- Fire Mote -->
+			<drop item_id="152012581" min_amount="3" /><!-- Fire Breath -->
+			<drop item_id="152012582" min_amount="3" /><!-- Fire Fragment -->
+			<drop item_id="152012583" min_amount="3" /><!-- Fire Source -->
+			<drop item_id="152012584" min_amount="3" /><!-- Water Source -->
+			<drop item_id="152012585" min_amount="3" /><!-- Wind Mote -->
+			<drop item_id="152012586" min_amount="3" /><!-- Wind Breath -->
+			<drop item_id="152012587" min_amount="3" /><!-- Wind Eternity -->
+			<drop item_id="152012588" min_amount="3" /><!-- Wind Fragment -->
+			<drop item_id="152012589" min_amount="3" /><!-- Wind Source -->
+			<drop item_id="152012590" min_amount="3" /><!-- Wind Origin -->
+			<drop item_id="152012591" min_amount="3" /><!-- Water Fragment -->
+			<drop item_id="152012593" min_amount="3" /><!-- Valor's Heart -->
 		</drop_group>
 		<drop_group max_items="2"><!-- BALIC -->
-			<drop item_id="152013026" chance="100" min_amount="3" max_amount="3" /><!-- Fatal Execration of Pleasure -->
-			<drop item_id="152013027" chance="100" min_amount="3" max_amount="3" /><!-- Inescapable Execration of Pleasure -->
-			<drop item_id="152013035" chance="100" min_amount="3" max_amount="3" /><!-- Fatal Urge of Pleasure -->
-			<drop item_id="152013036" chance="100" min_amount="3" max_amount="3" /><!-- Inescapable Urge of Pleasure -->
-			<drop item_id="152013038" chance="100" min_amount="3" max_amount="3" /><!-- Deadly Wrath -->
-			<drop item_id="152013039" chance="100" min_amount="3" max_amount="3" /><!-- Malicious Wrath -->
-			<drop item_id="152013041" chance="100" min_amount="3" max_amount="3" /><!-- Deadly Envy -->
-			<drop item_id="152013042" chance="100" min_amount="3" max_amount="3" /><!-- Malicious Envy -->
-			<drop item_id="152013044" chance="100" min_amount="3" max_amount="3" /><!-- Deadly Pride -->
-			<drop item_id="152013045" chance="100" min_amount="3" max_amount="3" /><!-- Malicious Pride -->
+			<drop item_id="152013026" min_amount="3" /><!-- Fatal Execration of Pleasure -->
+			<drop item_id="152013027" min_amount="3" /><!-- Inescapable Execration of Pleasure -->
+			<drop item_id="152013035" min_amount="3" /><!-- Fatal Urge of Pleasure -->
+			<drop item_id="152013036" min_amount="3" /><!-- Inescapable Urge of Pleasure -->
+			<drop item_id="152013038" min_amount="3" /><!-- Deadly Wrath -->
+			<drop item_id="152013039" min_amount="3" /><!-- Malicious Wrath -->
+			<drop item_id="152013041" min_amount="3" /><!-- Deadly Envy -->
+			<drop item_id="152013042" min_amount="3" /><!-- Malicious Envy -->
+			<drop item_id="152013044" min_amount="3" /><!-- Deadly Pride -->
+			<drop item_id="152013045" min_amount="3" /><!-- Malicious Pride -->
 		</drop_group>
 		<drop_group><!-- RARE -->
 			<drop item_id="188051874" chance="20" /><!-- Harvest Revel Furniture Set Box -->
@@ -4234,90 +4234,90 @@
 			<drop item_id="125040244" chance="2" /><!-- [Event] Alchemist's Hat -->
 		</drop_group>
 		<drop_group><!-- Animas -->
-			<drop item_id="152012559" chance="100" min_amount="5" max_amount="5" /><!-- Grassy Anima -->
-			<drop item_id="152012561" chance="100" min_amount="5" max_amount="5" /><!-- Frozen Anima -->
-			<drop item_id="152012564" chance="100" min_amount="5" max_amount="5" /><!-- Mysterious Anima -->
-			<drop item_id="152012566" chance="100" min_amount="5" max_amount="5" /><!-- Devastated Anima -->
-			<drop item_id="152012567" chance="100" min_amount="5" max_amount="5" /><!-- Mossy Anima -->
-			<drop item_id="152012570" chance="100" min_amount="5" max_amount="5" /><!-- Hopeless Anima -->
-			<drop item_id="152012574" chance="100" min_amount="5" max_amount="5" /><!-- Avaricious Anima -->
-			<drop item_id="152012575" chance="100" min_amount="5" max_amount="5" /><!-- Desperate Anima -->
-			<drop item_id="152012576" chance="100" min_amount="5" max_amount="5" /><!-- Deluded Anima -->
+			<drop item_id="152012559" min_amount="5" /><!-- Grassy Anima -->
+			<drop item_id="152012561" min_amount="5" /><!-- Frozen Anima -->
+			<drop item_id="152012564" min_amount="5" /><!-- Mysterious Anima -->
+			<drop item_id="152012566" min_amount="5" /><!-- Devastated Anima -->
+			<drop item_id="152012567" min_amount="5" /><!-- Mossy Anima -->
+			<drop item_id="152012570" min_amount="5" /><!-- Hopeless Anima -->
+			<drop item_id="152012574" min_amount="5" /><!-- Avaricious Anima -->
+			<drop item_id="152012575" min_amount="5" /><!-- Desperate Anima -->
+			<drop item_id="152012576" min_amount="5" /><!-- Deluded Anima -->
 		</drop_group>
 	</npc_drop>
 	<!-- Alchemy Event: Common Treasure Box -->
 	<npc_drop npc_id="831786">
 		<drop_group><!-- COMMON -->
-			<drop item_id="152010316" chance="100" min_amount="30" max_amount="40" /><!-- Greater Elemental Stone -->
-			<drop item_id="152010319" chance="100" min_amount="30" max_amount="40" /><!-- Fine Elemental Stone -->
-			<drop item_id="152000326" chance="100" min_amount="5" max_amount="5" /><!-- Dazzling Corundum Ore -->
-			<drop item_id="152000327" chance="100" min_amount="5" max_amount="5" /><!-- Dazzling Turquiose Ore -->
-			<drop item_id="152000328" chance="100" min_amount="5" max_amount="5" /><!-- Dazzling Elatrite Ore -->
+			<drop item_id="152010316" min_amount="30" max_amount="40" /><!-- Greater Elemental Stone -->
+			<drop item_id="152010319" min_amount="30" max_amount="40" /><!-- Fine Elemental Stone -->
+			<drop item_id="152000326" min_amount="5" /><!-- Dazzling Corundum Ore -->
+			<drop item_id="152000327" min_amount="5" /><!-- Dazzling Turquiose Ore -->
+			<drop item_id="152000328" min_amount="5" /><!-- Dazzling Elatrite Ore -->
 		</drop_group>
 		<drop_group><!-- BALIC -->
-			<drop item_id="152013025" chance="100" min_amount="3" max_amount="3" /><!-- Execration of Pleasure -->
-			<drop item_id="152013034" chance="100" min_amount="3" max_amount="3" /><!-- Urge of Pleasure -->
-			<drop item_id="152013037" chance="100" min_amount="3" max_amount="3" /><!-- Mortal Wrath -->
-			<drop item_id="152013040" chance="100" min_amount="3" max_amount="3" /><!-- Mortal Envy -->
-			<drop item_id="152013043" chance="100" min_amount="3" max_amount="3" /><!-- Mortal Pride -->
+			<drop item_id="152013025" min_amount="3" /><!-- Execration of Pleasure -->
+			<drop item_id="152013034" min_amount="3" /><!-- Urge of Pleasure -->
+			<drop item_id="152013037" min_amount="3" /><!-- Mortal Wrath -->
+			<drop item_id="152013040" min_amount="3" /><!-- Mortal Envy -->
+			<drop item_id="152013043" min_amount="3" /><!-- Mortal Pride -->
 		</drop_group>
 		<drop_group race="ELYOS"><!-- CONSUMABLES -->
-			<drop item_id="186000102" chance="100" min_amount="5" max_amount="15" /><!-- Fortuneers Token -->
-			<drop item_id="186000100" chance="100" min_amount="5" max_amount="15" /><!-- Progress Token -->
-			<drop item_id="186000399" chance="100" min_amount="10" max_amount="10" /><!-- Honorable Conqueror's Mark -->
-			<drop item_id="186000399" chance="100" min_amount="10" max_amount="10" /><!-- Honorable Conqueror's Mark -->
-			<drop item_id="166000194" chance="100" min_amount="5" max_amount="5" /><!-- Delta Enchantment Stone -->
-			<drop item_id="166000194" chance="100" min_amount="5" max_amount="5" /><!-- Delta Enchantment Stone -->
-			<drop item_id="166000195" chance="100" min_amount="5" max_amount="5" /><!-- Epsilon Enchantment Stone -->
-			<drop item_id="166000195" chance="100" min_amount="5" max_amount="5" /><!-- Epsilon Enchantment Stone -->
-			<drop item_id="186000237" chance="100" min_amount="80" max_amount="80" /><!-- Ancient Coin -->
-			<drop item_id="186000237" chance="100" min_amount="80" max_amount="80" /><!-- Ancient Coin -->
-			<drop item_id="188052719" chance="100" min_amount="1" max_amount="1" /><!-- Event Dye Bundle -->
-			<drop item_id="186000130" chance="100" min_amount="250" max_amount="250" /><!-- Crucible Insignia -->
+			<drop item_id="186000102" min_amount="5" max_amount="15" /><!-- Fortuneers Token -->
+			<drop item_id="186000100" min_amount="5" max_amount="15" /><!-- Progress Token -->
+			<drop item_id="186000399" min_amount="10" /><!-- Honorable Conqueror's Mark -->
+			<drop item_id="186000399" min_amount="10" /><!-- Honorable Conqueror's Mark -->
+			<drop item_id="166000194" min_amount="5" /><!-- Delta Enchantment Stone -->
+			<drop item_id="166000194" min_amount="5" /><!-- Delta Enchantment Stone -->
+			<drop item_id="166000195" min_amount="5" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="166000195" min_amount="5" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="186000237" min_amount="80" /><!-- Ancient Coin -->
+			<drop item_id="186000237" min_amount="80" /><!-- Ancient Coin -->
+			<drop item_id="188052719" /><!-- Event Dye Bundle -->
+			<drop item_id="186000130" min_amount="250" /><!-- Crucible Insignia -->
 		</drop_group>
 		<drop_group race="ASMODIANS"><!-- CONSUMABLES -->
-			<drop item_id="186000105" chance="100" min_amount="5" max_amount="15" /><!-- Daemon Token -->
-			<drop item_id="186000103" chance="100" min_amount="5" max_amount="15" /><!-- Ward Token -->
-			<drop item_id="186000399" chance="100" min_amount="10" max_amount="10" /><!-- Honorable Conqueror's Mark -->
-			<drop item_id="186000399" chance="100" min_amount="10" max_amount="10" /><!-- Honorable Conqueror's Mark -->
-			<drop item_id="166000194" chance="100" min_amount="5" max_amount="5" /><!-- Delta Enchantment Stone -->
-			<drop item_id="166000194" chance="100" min_amount="5" max_amount="5" /><!-- Delta Enchantment Stone -->
-			<drop item_id="166000195" chance="100" min_amount="5" max_amount="5" /><!-- Epsilon Enchantment Stone -->
-			<drop item_id="166000195" chance="100" min_amount="5" max_amount="5" /><!-- Epsilon Enchantment Stone -->
-			<drop item_id="186000237" chance="100" min_amount="80" max_amount="80" /><!-- Ancient Coin -->
-			<drop item_id="186000237" chance="100" min_amount="80" max_amount="80" /><!-- Ancient Coin -->
-			<drop item_id="188052719" chance="100" min_amount="1" max_amount="1" /><!-- Event Dye Bundle -->
-			<drop item_id="186000130" chance="100" min_amount="250" max_amount="250" /><!-- Crucible Insignia -->
+			<drop item_id="186000105" min_amount="5" max_amount="15" /><!-- Daemon Token -->
+			<drop item_id="186000103" min_amount="5" max_amount="15" /><!-- Ward Token -->
+			<drop item_id="186000399" min_amount="10" /><!-- Honorable Conqueror's Mark -->
+			<drop item_id="186000399" min_amount="10" /><!-- Honorable Conqueror's Mark -->
+			<drop item_id="166000194" min_amount="5" /><!-- Delta Enchantment Stone -->
+			<drop item_id="166000194" min_amount="5" /><!-- Delta Enchantment Stone -->
+			<drop item_id="166000195" min_amount="5" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="166000195" min_amount="5" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="186000237" min_amount="80" /><!-- Ancient Coin -->
+			<drop item_id="186000237" min_amount="80" /><!-- Ancient Coin -->
+			<drop item_id="188052719" /><!-- Event Dye Bundle -->
+			<drop item_id="186000130" min_amount="250" /><!-- Crucible Insignia -->
 		</drop_group>
 		<drop_group><!-- Animas -->
-			<drop item_id="152012560" chance="100" min_amount="3" max_amount="3" /><!-- Tainted Anima -->
-			<drop item_id="152012562" chance="100" min_amount="3" max_amount="3" /><!-- Windy Anima -->
-			<drop item_id="152012563" chance="100" min_amount="3" max_amount="3" /><!-- Sylvan Anima -->
-			<drop item_id="152012565" chance="100" min_amount="3" max_amount="3" /><!-- Snowy Anima -->
-			<drop item_id="152012568" chance="100" min_amount="3" max_amount="3" /><!-- Waterlogged Anima -->
-			<drop item_id="152012569" chance="100" min_amount="3" max_amount="3" /><!-- Vengeful Anima -->
-			<drop item_id="152012571" chance="100" min_amount="3" max_amount="3" /><!-- Zealous Anima -->
-			<drop item_id="152012572" chance="100" min_amount="3" max_amount="3" /><!-- Ambitious Anima -->
-			<drop item_id="152012573" chance="100" min_amount="3" max_amount="3" /><!-- Remorseful Anima -->
-			<drop item_id="152012577" chance="100" min_amount="3" max_amount="3" /><!-- Wrathful Anima -->
+			<drop item_id="152012560" min_amount="3" /><!-- Tainted Anima -->
+			<drop item_id="152012562" min_amount="3" /><!-- Windy Anima -->
+			<drop item_id="152012563" min_amount="3" /><!-- Sylvan Anima -->
+			<drop item_id="152012565" min_amount="3" /><!-- Snowy Anima -->
+			<drop item_id="152012568" min_amount="3" /><!-- Waterlogged Anima -->
+			<drop item_id="152012569" min_amount="3" /><!-- Vengeful Anima -->
+			<drop item_id="152012571" min_amount="3" /><!-- Zealous Anima -->
+			<drop item_id="152012572" min_amount="3" /><!-- Ambitious Anima -->
+			<drop item_id="152012573" min_amount="3" /><!-- Remorseful Anima -->
+			<drop item_id="152012577" min_amount="3" /><!-- Wrathful Anima -->
 		</drop_group>
 	</npc_drop>
 	<!-- Shugo Emperor's Vault: Emperor's Treasure Box -->
 	<npc_drop npc_id="832929">
 		<drop_group>
-			<drop item_id="186000237" chance="100" min_amount="5" max_amount="10" /><!-- Ancient Coin -->
+			<drop item_id="186000237" min_amount="5" max_amount="10" /><!-- Ancient Coin -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="162002030" chance="100" min_amount="5" max_amount="10" /><!-- [Event] Premium Restoration Serum -->
+			<drop item_id="162002030" min_amount="5" max_amount="10" /><!-- [Event] Premium Restoration Serum -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="186000238" chance="100" min_amount="10" max_amount="15" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="10" max_amount="15" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="164002235" chance="30" min_amount="5" max_amount="5" /><!-- Greater Running Scroll (10 Minutes) -->
+			<drop item_id="164002235" chance="30" min_amount="5" /><!-- Greater Running Scroll (10 Minutes) -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="186000051" chance="10" min_amount="2" max_amount="2" /><!-- Major Ancient Crown -->
+			<drop item_id="186000051" chance="10" min_amount="2" /><!-- Major Ancient Crown -->
 		</drop_group>
 		<drop_group>
 			<drop item_id="169620110" chance="10" /><!-- [Event] Celestial Crafting Boost -->
@@ -4331,34 +4331,34 @@
 			<drop item_id="188053636" chance="10" /><!-- Blood Mark Box -->
 		</drop_group>
 		<drop_group race="ELYOS">
-			<drop item_id="160010158" chance="10" min_amount="3" max_amount="3" /><!-- [Event] Shugo Disguise Candy -->
+			<drop item_id="160010158" chance="10" min_amount="3" /><!-- [Event] Shugo Disguise Candy -->
 		</drop_group>
 		<drop_group race="ASMODIANS">
-			<drop item_id="160010159" chance="10" min_amount="3" max_amount="3" /><!-- [Event] Shugo Disguise Candy -->
+			<drop item_id="160010159" chance="10" min_amount="3" /><!-- [Event] Shugo Disguise Candy -->
 		</drop_group>
 	</npc_drop>
 	<!-- Shugo Emperor's Vault: Emperor's Quality Treasure Box -->
 	<npc_drop npc_id="832930">
 		<drop_group>
-			<drop item_id="186000237" chance="100" min_amount="10" max_amount="15" /><!-- Ancient Coin -->
+			<drop item_id="186000237" min_amount="10" max_amount="15" /><!-- Ancient Coin -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="162002030" chance="100" min_amount="10" max_amount="20" /><!-- [Event] Premium Restoration Serum -->
+			<drop item_id="162002030" min_amount="10" max_amount="20" /><!-- [Event] Premium Restoration Serum -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="186000238" chance="100" min_amount="15" max_amount="25" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="15" max_amount="25" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="164002235" chance="30" min_amount="10" max_amount="10" /><!-- Greater Running Scroll (10 Minutes) -->
+			<drop item_id="164002235" chance="30" min_amount="10" /><!-- Greater Running Scroll (10 Minutes) -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="186000051" chance="10" min_amount="5" max_amount="5" /><!-- Major Ancient Crown -->
+			<drop item_id="186000051" chance="10" min_amount="5" /><!-- Major Ancient Crown -->
 		</drop_group>
 		<drop_group>
 			<drop item_id="188052297" chance="5" /><!-- Noble Composite Manastone Bundle -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="166020000" chance="5" min_amount="5" max_amount="5" /><!-- Omega Enchantment Stone -->
+			<drop item_id="166020000" chance="5" min_amount="5" /><!-- Omega Enchantment Stone -->
 		</drop_group>
 		<drop_group>
 			<drop item_id="190100144" chance="5" /><!-- Seakissed Aetherboard (30 days) -->
@@ -4367,34 +4367,34 @@
 			<drop item_id="190100153" chance="5" /><!-- Shugo Jet (30 days) -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="166030005" chance="10" min_amount="3" max_amount="3" /><!-- Tempering Solution -->
+			<drop item_id="166030005" chance="10" min_amount="3" /><!-- Tempering Solution -->
 		</drop_group>
 	</npc_drop>
 	<!-- Shugo Emperor's Vault: Emperor's Premium Treasure Box -->
 	<npc_drop npc_id="832931">
 		<drop_group>
-			<drop item_id="186000237" chance="100" min_amount="15" max_amount="20" /><!-- Ancient Coin -->
+			<drop item_id="186000237" min_amount="15" max_amount="20" /><!-- Ancient Coin -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="162002030" chance="100" min_amount="25" max_amount="25" /><!-- [Event] Premium Restoration Serum -->
+			<drop item_id="162002030" min_amount="25" /><!-- [Event] Premium Restoration Serum -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="186000399" chance="100" min_amount="10" max_amount="10" /><!-- Honorable Conqueror's Mark -->
+			<drop item_id="186000399" min_amount="10" /><!-- Honorable Conqueror's Mark -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="164002235" chance="30" min_amount="15" max_amount="15" /><!-- Greater Running Scroll (10 Minutes) -->
+			<drop item_id="164002235" chance="30" min_amount="15" /><!-- Greater Running Scroll (10 Minutes) -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="186000051" chance="10" min_amount="7" max_amount="7" /><!-- Major Ancient Crown -->
+			<drop item_id="186000051" chance="10" min_amount="7" /><!-- Major Ancient Crown -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="188052297" chance="5" min_amount="3" max_amount="3" /><!-- Noble Composite Manastone Bundle -->
+			<drop item_id="188052297" chance="5" min_amount="3" /><!-- Noble Composite Manastone Bundle -->
 		</drop_group>
 		<drop_group>
 			<drop item_id="188053618" chance="10" /><!-- Honorable Elim's Idian Bundle -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="166500002" chance="5" min_amount="3" max_amount="3" /><!-- Amplification Stone -->
+			<drop item_id="166500002" chance="5" min_amount="3" /><!-- Amplification Stone -->
 		</drop_group>
 		<drop_group>
 			<drop item_id="110900876" chance="2" /><!-- Nyerkcarrier -->
@@ -4404,7 +4404,7 @@
 			<drop item_id="188053995" chance="2" /><!-- Emperor Trillirunerk's Feather Box -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="188950017" chance="2" min_amount="2" max_amount="2" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
+			<drop item_id="188950017" chance="2" min_amount="2" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</drop_group>
 		<drop_group>
 			<drop item_id="188950019" chance="2" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
@@ -4413,44 +4413,44 @@
 	<!-- Shugo Emperor's Vault: Indinerk Jonakak's Supply Box -->
 	<npc_drop npc_id="235644">
 		<drop_group>
-			<drop item_id="162002031" chance="100" each_member="true" /><!-- Shugo Warrior's Minor Salve -->
+			<drop item_id="162002031" each_member="true" /><!-- Shugo Warrior's Minor Salve -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="162002032" chance="100" each_member="true" /><!-- Shugo Warrior's Greater Salve -->
+			<drop item_id="162002032" each_member="true" /><!-- Shugo Warrior's Greater Salve -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="162002033" chance="100" /><!-- Shugo Warrior's Minor Adrenaline -->
+			<drop item_id="162002033" /><!-- Shugo Warrior's Minor Adrenaline -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="162002034" chance="100" /><!-- Shugo Warrior's Greater Adrenaline -->
+			<drop item_id="162002034" /><!-- Shugo Warrior's Greater Adrenaline -->
 		</drop_group>
 	</npc_drop>
 	<!-- Birthday Event -->
 	<npc_drop npc_id="701983">
 		<drop_group race="ELYOS">
-			<drop item_id="162000137" chance="100" min_amount="5" max_amount="5" /><!-- Sublime Life Serum -->
-			<drop item_id="162000139" chance="100" min_amount="5" max_amount="5" /><!-- Sublime Mana Serum -->
-			<drop item_id="162000141" chance="100" min_amount="5" max_amount="5" /><!-- Sublime Wind Serum -->
-			<drop item_id="186000236" chance="100" min_amount="10" max_amount="15" /><!-- Blood Mark -->
-			<drop item_id="186000051" chance="100" min_amount="2" max_amount="2" /><!-- Major Ancient Crown -->
-			<drop item_id="160010354" chance="100" /><!-- Greater Seed of Transformation -->
+			<drop item_id="162000137" min_amount="5" /><!-- Sublime Life Serum -->
+			<drop item_id="162000139" min_amount="5" /><!-- Sublime Mana Serum -->
+			<drop item_id="162000141" min_amount="5" /><!-- Sublime Wind Serum -->
+			<drop item_id="186000236" min_amount="10" max_amount="15" /><!-- Blood Mark -->
+			<drop item_id="186000051" min_amount="2" /><!-- Major Ancient Crown -->
+			<drop item_id="160010354" /><!-- Greater Seed of Transformation -->
 		</drop_group>
 		<drop_group race="ASMODIANS">
-			<drop item_id="162000137" chance="100" min_amount="5" max_amount="5" /><!-- Sublime Life Serum -->
-			<drop item_id="162000139" chance="100" min_amount="5" max_amount="5" /><!-- Sublime Mana Serum -->
-			<drop item_id="162000141" chance="100" min_amount="5" max_amount="5" /><!-- Sublime Wind Serum -->
-			<drop item_id="186000236" chance="100" min_amount="10" max_amount="15" /><!-- Blood Mark -->
-			<drop item_id="186000051" chance="100" min_amount="2" max_amount="2" /><!-- Major Ancient Crown -->
-			<drop item_id="160010355" chance="100" /><!-- Greater Seed of Transformation -->
+			<drop item_id="162000137" min_amount="5" /><!-- Sublime Life Serum -->
+			<drop item_id="162000139" min_amount="5" /><!-- Sublime Mana Serum -->
+			<drop item_id="162000141" min_amount="5" /><!-- Sublime Wind Serum -->
+			<drop item_id="186000236" min_amount="10" max_amount="15" /><!-- Blood Mark -->
+			<drop item_id="186000051" min_amount="2" /><!-- Major Ancient Crown -->
+			<drop item_id="160010355" /><!-- Greater Seed of Transformation -->
 		</drop_group>
 		<drop_group>
 			<drop item_id="188053618" chance="20" /><!-- Honorable Elim's Idian Bundle -->
-			<drop item_id="166500002" chance="20" min_amount="3" max_amount="3" /><!-- Amplification Stone -->
-			<drop item_id="166020000" chance="20" min_amount="3" max_amount="3" /><!-- Omega Enchantment Stone -->
-			<drop item_id="166030007" chance="20" min_amount="3" max_amount="3" /><!-- [Event] Tempering Solution -->
-			<drop item_id="186000242" chance="20" min_amount="2" max_amount="2" /><!-- Ceramium Medal -->
-			<drop item_id="188053610" chance="20" min_amount="3" max_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
-			<drop item_id="186000247" chance="20" min_amount="5" max_amount="5" /><!-- Major Danuar Relic -->
+			<drop item_id="166500002" chance="20" min_amount="3" /><!-- Amplification Stone -->
+			<drop item_id="166020000" chance="20" min_amount="3" /><!-- Omega Enchantment Stone -->
+			<drop item_id="166030007" chance="20" min_amount="3" /><!-- [Event] Tempering Solution -->
+			<drop item_id="186000242" chance="20" min_amount="2" /><!-- Ceramium Medal -->
+			<drop item_id="188053610" chance="20" min_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<drop item_id="186000247" chance="20" min_amount="5" /><!-- Major Danuar Relic -->
 			<drop item_id="188053207" chance="20" /><!-- [Event] Ancient Spirit's Eternal Armor Chest -->
 			<drop item_id="188052073" chance="20" /><!-- [Event] Ancient Spirit's Wing Box -->
 		</drop_group>

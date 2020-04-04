@@ -4,8 +4,6 @@ import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.commons.utils.Rnd;
-
 /**
  * @author vlog
  * @modified Neon
@@ -23,7 +21,9 @@ public class RandomItem {
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (minCount <= 0)
 			throw new IllegalArgumentException("Decomposable random reward item of type " + type + " min_count (" + minCount + ") must be greater than 0");
-		if (maxCount != 0 && maxCount <= minCount)
+		if (maxCount == 0)
+			maxCount = minCount;
+		else if (maxCount < minCount)
 			throw new IllegalArgumentException(
 				"Decomposable random reward item of type " + type + " max_count (" + maxCount + ") must be unset or greater than min_count (" + minCount + ")");
 	}
@@ -38,9 +38,5 @@ public class RandomItem {
 
 	public int getMaxCount() {
 		return maxCount;
-	}
-
-	public final int getResultCount() {
-		return maxCount == 0 ? minCount : Rnd.get(minCount, maxCount);
 	}
 }
