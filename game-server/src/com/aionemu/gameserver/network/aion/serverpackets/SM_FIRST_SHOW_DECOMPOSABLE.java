@@ -30,8 +30,8 @@ public class SM_FIRST_SHOW_DECOMPOSABLE extends AionServerPacket {
 			writeD(item.getItemId());
 			writeD(item.getMinCount());
 			writeC(0);
-			writeC(0);
-			writeC(0);
+			writeC(0); // rnd stat bonus
+			writeC(0); // rnd enchant bonus
 			writeC(1);
 			index++;
 		}
