@@ -23,7 +23,7 @@
 		<item item_id="186000399" normal_count="0" frenzy_count="10" />
 	</rewards>
 	<rewards min_level="4">
-		<item item_id="110900050" normal_count="1" frenzy_count="1" />
+		<item item_id="110900858" normal_count="1" frenzy_count="1" />
 		<item item_id="188053845" normal_count="1" frenzy_count="1" />
 		<item item_id="188052719" normal_count="2" frenzy_count="2" />
 		<item item_id="169405253" normal_count="1" frenzy_count="1" />
@@ -34,9 +34,9 @@
 		<item item_id="166150018" normal_count="0" frenzy_count="3" />
 	</rewards>
 	<rewards min_level="6">
-		<item item_id="110900225" normal_count="1" frenzy_count="1" />
+		<item item_id="110900414" normal_count="1" frenzy_count="1" />
 		<item item_id="188053614" normal_count="1" frenzy_count="1" />
-		<item item_id="190020032" normal_count="1" frenzy_count="1" />
+		<item item_id="190020086" normal_count="1" frenzy_count="1" />
 		<item item_id="166100011" normal_count="100" frenzy_count="100" />
 		<item item_id="188053609" normal_count="3" frenzy_count="3" />
 		<item item_id="166500002" normal_count="0" frenzy_count="5" />
