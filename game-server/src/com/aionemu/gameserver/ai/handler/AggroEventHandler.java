@@ -47,13 +47,13 @@ public class AggroEventHandler {
 		owner.getPosition().getWorldMapInstance().getInstanceHandler().onAggro(owner);
 	}
 
-	public static boolean onCreatureNeedsSupport(NpcAI npcAI, Creature notMyTarget) {
+	public static boolean onCreatureNeedsSupport(NpcAI npcAI, Creature creatureAskingForSupport) {
 		Npc owner = npcAI.getOwner();
-		if (TribeRelationService.isSupport(notMyTarget, owner) && PositionUtil.isInRange(owner, notMyTarget, owner.getAggroRange())
-			&& GeoService.getInstance().canSee(owner, notMyTarget)) {
-			VisibleObject myTarget = notMyTarget.getTarget();
-			if (myTarget instanceof Creature) {
-				Creature targetCreature = (Creature) myTarget;
+		if (TribeRelationService.isSupport(creatureAskingForSupport, owner) && PositionUtil.isInRange(owner, creatureAskingForSupport, 30)
+			&& GeoService.getInstance().canSee(owner, creatureAskingForSupport)) {
+			VisibleObject attacker = creatureAskingForSupport.getTarget();
+			if (attacker instanceof Creature) {
+				Creature targetCreature = (Creature) attacker;
 				PacketSendUtility.broadcastPacket(owner,
 					new SM_ATTACK(owner, targetCreature, 0, 633, AttackTypeAnimation.MELEE, AttackHandAnimation.MAIN_HAND, Collections.singletonList(new AttackResult(0, AttackStatus.NORMALHIT))));
 				ThreadPoolManager.getInstance().schedule(new AggroNotifier(owner, targetCreature, false), 500);
