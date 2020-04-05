@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.services.panesterra.ahserion;
 
-import java.util.HashMap;
+import java.util.Collections;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
@@ -27,13 +28,11 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- * @author Yeats
- * @modified Neon
- * @reworked Estrayl October 29th, 2017.
+ * @author Yeats, Neon, Estrayl
  */
 public class AhserionRaid {
 
-	private final Map<PanesterraFaction, PanesterraTeam> panesterraTeams = new HashMap<>();
+	private final Map<PanesterraFaction, PanesterraTeam> panesterraTeams = Collections.synchronizedMap(new EnumMap<>(PanesterraFaction.class));
 	private PanesterraTeam winner;
 	private AtomicBoolean isStarted = new AtomicBoolean();
 	private Future<?> progressTask;
@@ -232,10 +231,7 @@ public class AhserionRaid {
 				break;
 		}
 
-		PanesterraTeam eliminatedTeam;
-		synchronized (panesterraTeams) {
-			eliminatedTeam = panesterraTeams.remove(eliminatedFaction);
-		}
+		PanesterraTeam eliminatedTeam = panesterraTeams.remove(eliminatedFaction);
 		if (eliminatedTeam != null) {
 			eliminatedTeam.setIsEliminated(true);
 			eliminatedTeam.moveTeamMembersToFortressPosition();

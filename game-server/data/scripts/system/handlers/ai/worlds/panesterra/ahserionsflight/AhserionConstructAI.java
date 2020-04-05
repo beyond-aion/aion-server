@@ -227,31 +227,29 @@ public class AhserionConstructAI extends NpcAI {
 			} else
 				faction = PanesterraFaction.BALAUR;
 
-			Integer dmg = panesterraDamage.get(faction);
-			if (dmg != null)
-				panesterraDamage.put(faction, dmg + ai.getDamage());
-			else
-				panesterraDamage.put(faction, ai.getDamage());
+			panesterraDamage.merge(faction, ai.getDamage(), Integer::sum);
 		}
-		findWinnerTeam(panesterraDamage);
+		PanesterraFaction winnerTeam = findWinnerTeam(panesterraDamage);
+		spawnTankFleetForWinner(getOwner().getSpawn().getStaticId(), winnerTeam);
 		RespawnService.scheduleDecayTask(getOwner(), 3000);
 		super.handleDied();
 	}
 
-	private void findWinnerTeam(Map<PanesterraFaction, Integer> panesterraDamage) {
+	private PanesterraFaction findWinnerTeam(Map<PanesterraFaction, Integer> panesterraDamage) {
 		// just in case: we'll spawn balaur construct again
 		PanesterraFaction winner = PanesterraFaction.BALAUR;
 		int maxDmg = panesterraDamage.getOrDefault(PanesterraFaction.BALAUR, 0);
 		for (PanesterraFaction faction : PanesterraFaction.values()) {
 			Integer dmg = panesterraDamage.get(faction);
-			if (dmg != null && !AhserionRaid.getInstance().getFactionTeam(faction).isEliminated()) {
+			PanesterraTeam team = AhserionRaid.getInstance().getFactionTeam(faction);
+			if (dmg != null && team != null && !team.isEliminated()) {
 				if (dmg > maxDmg) {
 					maxDmg = dmg;
 					winner = faction;
 				}
 			}
 		}
-		spawnTankFleetForWinner(getOwner().getSpawn().getStaticId(), winner);
+		return winner;
 	}
 
 	private void spawnTankFleetForWinner(int staticId, PanesterraFaction faction) {
