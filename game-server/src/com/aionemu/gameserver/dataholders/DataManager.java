@@ -1,16 +1,16 @@
 package com.aionemu.gameserver.dataholders;
 
-import com.aionemu.commons.utils.ExitCode;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-import com.aionemu.gameserver.dataholders.loadingutils.XmlDataLoader;
-import com.aionemu.gameserver.model.templates.item.actions.DecomposeAction;
-import com.aionemu.gameserver.model.templates.mail.Mails;
-
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.gameserver.GameServerError;
+import com.aionemu.gameserver.dataholders.loadingutils.XmlDataLoader;
+import com.aionemu.gameserver.model.templates.item.actions.DecomposeAction;
+import com.aionemu.gameserver.model.templates.mail.Mails;
 
 /**
  * This class is holding whole static data, that is loaded from /data/static_data directory.<br>
@@ -238,8 +238,7 @@ public final class DataManager {
 			xmlValidationTask.get();
 		} catch (InterruptedException | CancellationException ignored) {
 		} catch (ExecutionException e) {
-			log.error("Static data xml validation failed", e.getCause());
-			System.exit(ExitCode.ERROR);
+			throw e.getCause() instanceof Error ? (Error) e.getCause() : new GameServerError(e.getCause());
 		} finally {
 			xmlValidationTask = null;
 		}

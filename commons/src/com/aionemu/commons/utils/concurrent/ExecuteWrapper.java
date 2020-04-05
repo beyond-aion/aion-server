@@ -23,10 +23,10 @@ public class ExecuteWrapper implements Executor {
 
 	@Override
 	public void execute(Runnable runnable) {
-		execute(runnable, expectedMaxExecutionTimeMillis);
+		execute(runnable, expectedMaxExecutionTimeMillis, true);
 	}
 
-	public static void execute(Runnable runnable, long expectedMaxExecutionTimeMillis) {
+	public static void execute(Runnable runnable, long expectedMaxExecutionTimeMillis, boolean catchAndLogThrowables) {
 		try {
 			long begin = System.nanoTime();
 			runnable.run();
@@ -43,7 +43,10 @@ public class ExecuteWrapper implements Executor {
 				}
 			}
 		} catch (Throwable t) {
-			log.error("Exception in a Runnable execution:", t);
+			if (catchAndLogThrowables)
+				log.error("Exception in a Runnable execution:", t);
+			else
+				throw t;
 		}
 	}
 }

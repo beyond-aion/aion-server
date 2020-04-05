@@ -32,7 +32,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	/**
 	 * Possible states of GsConnection
 	 */
-	public static enum State {
+	public enum State {
 		/**
 		 * Means that GameServer just connect, but is not authenticated yet
 		 */
@@ -87,7 +87,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 		GsClientPacket pck = GsPacketHandlerFactory.handle(data, this);
 
 		if (pck != null && pck.read())
-			ThreadPoolManager.getInstance().executeLsPacket(pck);
+			ThreadPoolManager.getInstance().execute(pck);
 
 		return true;
 	}

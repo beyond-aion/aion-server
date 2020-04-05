@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.InputStreamReader;
 import java.nio.charset.StandardCharsets;
-import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
 
 import javax.xml.stream.XMLInputFactory;
@@ -18,6 +17,7 @@ import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.commons.utils.xml.XmlUtil;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.StaticData;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * This class is responsible for loading xml files. It uses JAXB to do the job.<br>
@@ -69,8 +69,7 @@ public class XmlDataLoader {
 	}
 
 	private Future<?> validateAsync(File cachedXml) {
-		// not via ThreadPoolManager because it wraps tasks so that exceptions are swallowed and task.get() doesn't fail with an ExecutionException
-		return Executors.newSingleThreadExecutor().submit(() -> {
+		return ThreadPoolManager.getInstance().submit(() -> {
 			log.info("Validating " + cachedXml + " in background...");
 			try (InputStreamReader isr = new InputStreamReader(new FileInputStream(cachedXml), StandardCharsets.UTF_8)) {
 				long time = System.currentTimeMillis();

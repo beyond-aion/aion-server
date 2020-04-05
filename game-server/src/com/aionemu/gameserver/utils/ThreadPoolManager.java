@@ -2,15 +2,7 @@ package com.aionemu.gameserver.utils;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.ArrayBlockingQueue;
-import java.util.concurrent.Executor;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ForkJoinPool;
-import java.util.concurrent.Future;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.ScheduledThreadPoolExecutor;
-import java.util.concurrent.ThreadPoolExecutor;
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -34,7 +26,10 @@ public final class ThreadPoolManager implements Executor {
 	private final ForkJoinPool workStealingPool;
 
 	private ThreadPoolManager() {
-		final int instantPoolSize = ThreadConfig.BASE_THREAD_POOL_SIZE * Runtime.getRuntime().availableProcessors();
+		int instantPoolSize = ThreadConfig.BASE_THREAD_POOL_SIZE == 0 ? Runtime.getRuntime().availableProcessors() : ThreadConfig.BASE_THREAD_POOL_SIZE;
+		int scheduledPoolSize = ThreadConfig.SCHEDULED_THREAD_POOL_SIZE == 0 ? Runtime.getRuntime().availableProcessors() * 4 : ThreadConfig.SCHEDULED_THREAD_POOL_SIZE;
+		// common ForkJoin (for .parallelStream() calls) uses the calling thread too, so we need to subtract 1 to use exactly the number of threads desired
+		System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", String.valueOf(instantPoolSize - 1));
 
 		new DeadLockDetector(60, DeadLockDetector.RESTART).start();
 		instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100000),
@@ -42,7 +37,7 @@ public final class ThreadPoolManager implements Executor {
 		instantPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
 		instantPool.prestartAllCoreThreads();
 
-		scheduledPool = new ScheduledThreadPoolExecutor(ThreadConfig.SCHEDULED_THREAD_POOL_SIZE * Runtime.getRuntime().availableProcessors());
+		scheduledPool = new ScheduledThreadPoolExecutor(scheduledPoolSize);
 		scheduledPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
 		scheduledPool.prestartAllCoreThreads();
 
@@ -51,7 +46,7 @@ public final class ThreadPoolManager implements Executor {
 		longRunningPool.prestartAllCoreThreads();
 
 		WorkStealThreadFactory forkJoinThreadFactory = new WorkStealThreadFactory("ForkJoinPool");
-		workStealingPool = new ForkJoinPool(Runtime.getRuntime().availableProcessors(), forkJoinThreadFactory, null, true);
+		workStealingPool = new ForkJoinPool(instantPoolSize, forkJoinThreadFactory, null, true);
 
 		Thread maintainThread = new Thread(this::purge, "ThreadPool Purge Task");
 
@@ -62,15 +57,8 @@ public final class ThreadPoolManager implements Executor {
 			+ longRunningPool.getPoolSize() + " long running, and " + workStealingPool.getPoolSize() + " forking thread(s).");
 	}
 
-	private static final class ThreadPoolRunnableWrapper extends RunnableWrapper {
-
-		private ThreadPoolRunnableWrapper(Runnable runnable) {
-			super(runnable, ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING);
-		}
-	}
-
 	public final ScheduledFuture<?> schedule(Runnable r, long delay, TimeUnit unit) {
-		r = new ThreadPoolRunnableWrapper(r);
+		r = new RunnableWrapper(r, ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING, true);
 		return scheduledPool.schedule(r, delay, unit);
 	}
 
@@ -79,7 +67,7 @@ public final class ThreadPoolManager implements Executor {
 	}
 
 	public final ScheduledFuture<?> scheduleAtFixedRate(Runnable r, long delay, long period) {
-		r = new ThreadPoolRunnableWrapper(r);
+		r = new RunnableWrapper(r, ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING, true);
 		return scheduledPool.scheduleAtFixedRate(r, delay, period, TimeUnit.MILLISECONDS);
 	}
 
@@ -89,7 +77,7 @@ public final class ThreadPoolManager implements Executor {
 
 	@Override
 	public final void execute(Runnable r) {
-		instantPool.execute(new ThreadPoolRunnableWrapper(r));
+		instantPool.execute(new RunnableWrapper(r, ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING, true));
 	}
 
 	public final void executeLongRunning(Runnable r) {
@@ -97,11 +85,11 @@ public final class ThreadPoolManager implements Executor {
 	}
 
 	public final Future<?> submit(Runnable r) {
-		return instantPool.submit(new ThreadPoolRunnableWrapper(r));
+		return instantPool.submit(new RunnableWrapper(r, ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING, false));
 	}
 
 	public final Future<?> submitLongRunning(Runnable r) {
-		return longRunningPool.submit(new RunnableWrapper(r));
+		return longRunningPool.submit(new RunnableWrapper(r, Long.MAX_VALUE, false));
 	}
 
 	public void purge() {
