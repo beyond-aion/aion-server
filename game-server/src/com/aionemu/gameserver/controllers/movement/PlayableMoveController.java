@@ -31,6 +31,7 @@ public abstract class PlayableMoveController<T extends Creature> extends Creatur
 	public byte glideFlag;
 	public int unk1;
 	public int unk2;
+	public int geyserLocationId; // locationId from windstreams.xml
 
 	public PlayableMoveController(T owner) {
 		super(owner);

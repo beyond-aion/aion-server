@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import com.aionemu.gameserver.controllers.movement.GlideFlag;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
@@ -25,6 +26,7 @@ public class CM_MOVE extends AionClientPacket {
 	private float x, y, z, x2, y2, z2, vehicleX, vehicleY, vehicleZ, vectorX, vectorY, vectorZ;
 	private byte glideFlag;
 	private int unk1, unk2;
+	private int geyserLocationId;
 
 	public CM_MOVE(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -55,6 +57,8 @@ public class CM_MOVE extends AionClientPacket {
 		}
 		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
 			glideFlag = readC();
+			if (glideFlag == GlideFlag.GEYSER)
+				geyserLocationId = readUC(); // locationId from windstreams.xml
 		}
 		if ((type & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
 			unk1 = readD();
@@ -88,6 +92,7 @@ public class CM_MOVE extends AionClientPacket {
 					&& (type & MovementMask.VEHICLE) != MovementMask.VEHICLE && z2 > z;
 			if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
 				m.glideFlag = glideFlag;
+				m.geyserLocationId = geyserLocationId;
 				player.getFlyController().switchToGliding();
 			}
 

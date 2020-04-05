@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
+import com.aionemu.gameserver.controllers.movement.GlideFlag;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayableMoveController;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -53,7 +54,10 @@ public class SM_MOVE extends AionServerPacket {
 			}
 		}
 		if ((movementMask & MovementMask.GLIDE) == MovementMask.GLIDE) {
-			writeC(pmc == null ? 0 : pmc.glideFlag);
+			byte glideFlag = pmc == null ? 0 : pmc.glideFlag;
+			writeC(glideFlag);
+			if (glideFlag == GlideFlag.GEYSER)
+				writeC(pmc.geyserLocationId);
 		}
 		if (pmc != null && (movementMask & MovementMask.VEHICLE) == MovementMask.VEHICLE) {
 			writeD(pmc.unk1);
