@@ -11,6 +11,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ATracer
@@ -43,8 +44,15 @@ public class OpenAerialEffect extends EffectTemplate {
 		if (effected instanceof Player)
 			((Player) effected).getFlyController().onStopGliding();
 		effected.getMoveController().abortMove();
+		float z = effect.getEffected().getZ();
+		if (!effect.getEffected().isFlying()) {
+			float geoZ = GeoService.getInstance().getZ(effect.getEffected().getWorldId(),effect.getEffected().getX(), effect.getEffected().getY(), effect.getEffected().getZ() + 2, effect.getEffected().getZ() - 1, effect.getEffected().getInstanceId());
+			if (!Float.isNaN(geoZ)) {
+				z = geoZ;
+			}
+		}
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(),
-			effect.getEffected().getX(), effect.getEffected().getY(), effect.getEffected().getZ()));
+			effect.getEffected().getX(), effect.getEffected().getY(), z));
 		effected.getEffectController().setAbnormal(AbnormalState.OPENAERIAL);
 		effect.setAbnormal(AbnormalState.OPENAERIAL);
 	}
