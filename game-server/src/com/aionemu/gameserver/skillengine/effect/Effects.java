@@ -5,12 +5,7 @@ import java.util.List;
 import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author ATracer
@@ -119,15 +114,21 @@ public class Effects {
 		@XmlElement(name = "targetchange", type = TargetChangeEffect.class), @XmlElement(name = "dummy", type = DummyEffect.class),
 		@XmlElement(name = "alwayshit", type = AlwaysHitEffect.class), @XmlElement(name = "alwaysnoresist", type = AlwaysNoResistEffect.class),
 		@XmlElement(name = "utility", type = UtilityEffect.class) })
-	protected List<EffectTemplate> effects;
+	private List<EffectTemplate> effects;
 
 	@XmlTransient
-	protected Set<EffectType> effectTypes;
+	private Set<EffectType> effectTypes;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		effectTypes = EnumSet.noneOf(EffectType.class);
-		for (EffectTemplate et : effects)
-			effectTypes.add(et.getEffectType());
+		for (EffectTemplate et : effects) {
+			String effectName = et.getClass().getSimpleName().replaceAll("Effect", "").toUpperCase();
+			try {
+				effectTypes.add(EffectType.valueOf(effectName));
+			} catch (Exception e) {
+				throw new IllegalArgumentException("Missing EffectType " + effectName + " for: " + et.getClass());
+			}
+		}
 	}
 
 	public List<EffectTemplate> getEffects() {

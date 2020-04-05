@@ -3,12 +3,8 @@ package com.aionemu.gameserver.skillengine.effect;
 import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
-import com.aionemu.gameserver.model.gameobjects.Summon;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
@@ -19,7 +15,10 @@ import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.skillengine.change.Change;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
@@ -87,9 +86,6 @@ public abstract class EffectTemplate {
 	protected int value;
 	@XmlAttribute
 	protected int delta;
-
-	@XmlTransient
-	protected EffectType effectType;
 
 	/**
 	 * @return the value
@@ -233,13 +229,6 @@ public abstract class EffectTemplate {
 		}
 
 		return null;
-	}
-
-	/**
-	 * @return the effectType
-	 */
-	public EffectType getEffectType() {
-		return effectType;
 	}
 
 	/**
@@ -641,15 +630,6 @@ public abstract class EffectTemplate {
 				return 1000;
 			default:
 				return 0;
-		}
-	}
-
-	void afterUnmarshal(Unmarshaller u, Object parent) {
-		String effectName = getClass().getSimpleName().replaceAll("Effect", "").toUpperCase();
-		try {
-			effectType = EffectType.valueOf(effectName);
-		} catch (Exception e) {
-			throw new IllegalArgumentException("missing effectype: " + effectName);
 		}
 	}
 }

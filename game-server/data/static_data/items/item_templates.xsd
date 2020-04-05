@@ -125,8 +125,8 @@
 		<xs:attribute name="weapon_boost" type="xs:int"/>
 		<xs:attribute name="attack_type" type="ItemAttackType"/>
 		<xs:attribute name="desc" type="xs:int"/>
-		<xs:attribute name="restrict_max" type="xs:string"/>
-		<xs:attribute name="restrict" type="xs:string"/>
+		<xs:attribute name="restrict_max" type="ByteList"/>
+		<xs:attribute name="restrict" type="ByteList"/>
 		<xs:attribute name="rnd_bonus" type="xs:int"/>
 		<xs:attribute name="rnd_count" type="xs:int"/>
 		<xs:attribute name="bonus_apply" type="xs:string"/>
@@ -738,5 +738,8 @@
 			<xs:enumeration value="RANK5_SET1_PHYSICAL_PANTS" />
 			<xs:enumeration value="RANK5_SET1_PHYSICAL_SHOES" />
 		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="ByteList">
+		<xs:list itemType="xs:byte" />
 	</xs:simpleType>
 </xs:schema>

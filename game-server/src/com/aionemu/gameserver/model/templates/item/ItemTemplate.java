@@ -3,16 +3,12 @@ package com.aionemu.gameserver.model.templates.item;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
+import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.dataholders.loadingutils.adapters.SpaceSeparatedBytesAdapter;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.items.ItemId;
@@ -35,12 +31,10 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 @XmlType(namespace = "", name = "ItemTemplate")
 public class ItemTemplate extends VisibleObjectTemplate {
 
-	@XmlAttribute(name = "id", required = true)
-	@XmlID
-	private String id;
-	@XmlElement(name = "modifiers", required = false)
+	private int itemId;
+	@XmlElement(name = "modifiers")
 	private ModifiersTemplate modifiers;
-	@XmlElement(name = "actions", required = false)
+	@XmlElement(name = "actions")
 	private ItemActions actions;
 	@XmlAttribute(name = "mask")
 	private int mask;
@@ -76,7 +70,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private String bonusApply;// enum
 	@XmlAttribute(name = "race")
 	private Race race = Race.PC_ALL;
-	private int itemId;
 	@XmlAttribute(name = "return_world")
 	private int returnWorldId;
 	@XmlAttribute(name = "return_alias")
@@ -87,14 +80,12 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private Stigma stigma;
 	@XmlAttribute(name = "name")
 	private String name;
+	@XmlJavaTypeAdapter(SpaceSeparatedBytesAdapter.class)
 	@XmlAttribute(name = "restrict")
-	private String restrict;
+	private byte[] levelRestrictions;
+	@XmlJavaTypeAdapter(SpaceSeparatedBytesAdapter.class)
 	@XmlAttribute(name = "restrict_max")
-	private String restrictMax;
-	@XmlTransient
-	private int[] restricts;
-	@XmlTransient
-	private byte[] restrictsMax;
+	private byte[] maxLevelRestrictions;
 	@XmlAttribute(name = "m_slots")
 	private int manastoneSlots;
 	@XmlAttribute(name = "s_slots")
@@ -146,25 +137,13 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	private static final WeaponStats emptyWeaponStats = new WeaponStats();
 
-	/**
-	 * @param u
-	 * @param parent
-	 */
+	@XmlID
+	@XmlAttribute(name = "id", required = true)
+	private void setXmlUid(String uid) {
+		itemId = Integer.parseInt(uid);
+	}
+
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		setItemId(Integer.parseInt(id));
-		String[] parts = restrict.split(",");
-		restricts = new int[17];
-		for (int i = 0; i < parts.length; i++) {
-			restricts[i] = Integer.parseInt(parts[i]);
-		}
-		restrict = null; // we don't use it, null to save RAM
-		if (restrictMax != null) {
-			String[] partsMax = restrictMax.split(",");
-			restrictsMax = new byte[17];
-			for (int i = 0; i < partsMax.length; i++) {
-				restrictsMax[i] = Byte.parseByte(partsMax[i]);
-			}
-		}
 		if (weaponStats == null)
 			weaponStats = emptyWeaponStats;
 
@@ -185,25 +164,16 @@ public class ItemTemplate extends VisibleObjectTemplate {
 		return itemGroup.getValidEquipmentSlots();
 	}
 
-	/**
-	 * @param playerClass
-	 * @return
-	 */
 	public boolean isClassSpecific(PlayerClass playerClass) {
-		boolean related = restricts[playerClass.ordinal()] > 0;
+		boolean related = levelRestrictions[playerClass.ordinal()] > 0;
 		if (!related && !playerClass.isStartingClass()) {
-			related = restricts[playerClass.getStartingClass().ordinal()] > 0;
+			related = levelRestrictions[playerClass.getStartingClass().ordinal()] > 0;
 		}
 		return related;
 	}
 
-	/**
-	 * @param playerClass
-	 * @param level
-	 * @return
-	 */
 	public int getRequiredLevel(PlayerClass playerClass) {
-		int requiredLevel = restricts[playerClass.ordinal()];
+		int requiredLevel = levelRestrictions[playerClass.ordinal()];
 		if (requiredLevel == 0)
 			return -1;
 		else
@@ -211,8 +181,8 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	}
 
 	public byte getMaxLevelRestrict(PlayerClass playerClass) {
-		if (restrictMax != null) {
-			return restrictsMax[playerClass.getClassId()];
+		if (maxLevelRestrictions != null) {
+			return maxLevelRestrictions[playerClass.ordinal()];
 		}
 		return 0;
 	}
@@ -314,10 +284,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public boolean isStigma() {
 		return stigma != null;
-	}
-
-	public void setItemId(int itemId) {
-		this.itemId = itemId;
 	}
 
 	/**
