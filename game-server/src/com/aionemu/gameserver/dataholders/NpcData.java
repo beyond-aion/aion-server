@@ -3,14 +3,11 @@ package com.aionemu.gameserver.dataholders;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -42,8 +39,13 @@ public class NpcData {
 	private TIntObjectHashMap<NpcTemplate> npcData = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
+		StaticDataListener.registerForAsyncExecutionOrRun(u, this::init);
+	}
+
+	private void init() {
 		for (NpcTemplate npc : npcs) {
 			npcData.put(npc.getTemplateId(), npc);
+			npc.internAiName();
 			if (npc.getTribe() != null && !npc.getTribe().isUsed())
 				npc.getTribe().setUsed(true);
 			if (npc.getFuncDialogIds() != null) {
@@ -83,7 +85,6 @@ public class NpcData {
 				template.setAbnormalResistance(NpcStatCalculation.calculateStat(StatEnum.ABNORMAL_RESISTANCE_ALL, rating, rank, level));
 			}
 		}
-		npcs.clear();
 		npcs = null;
 	}
 

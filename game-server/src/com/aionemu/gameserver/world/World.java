@@ -23,7 +23,6 @@ import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
-import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.container.PlayerContainer;
@@ -79,8 +78,12 @@ public class World {
 	 * Constructor.
 	 */
 	private World() {
-		for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA)
-			worldMaps.put(template.getMapId(), new WorldMap(template));
+		DataManager.WORLD_MAPS_DATA.forEachParalllel(template -> {
+			WorldMap worldMap = new WorldMap(template);
+			synchronized (worldMaps) {
+				worldMaps.put(template.getMapId(), worldMap);
+			}
+		});
 
 		log.info("World: " + worldMaps.size() + " world maps created.");
 	}

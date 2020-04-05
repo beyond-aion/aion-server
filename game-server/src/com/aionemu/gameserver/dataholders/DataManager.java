@@ -220,6 +220,7 @@ public final class DataManager {
 		KILL_BOUNTY_DATA = data.killBountyData;
 		LEGION_DOMINION_DATA = data.legionDominionData;
 		xmlValidationTask = data.getValidationTask();
+		data.waitForAfterUnmarshalTasksToFinish();
 
 		// subsequent data processing (must be called after initializing DataManager fields)
 		ITEM_DATA.cleanup();

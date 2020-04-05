@@ -135,12 +135,10 @@ public class SpawnEngine {
 			log.info("Spawns are disabled");
 			return;
 		}
-		for (WorldMapTemplate worldMapTemplate : DataManager.WORLD_MAPS_DATA) {
-			if (worldMapTemplate.isInstance()) {
-				continue;
-			}
-			spawnBasedOnTemplate(worldMapTemplate);
-		}
+		DataManager.WORLD_MAPS_DATA.forEachParalllel(worldMapTemplate -> {
+			if (!worldMapTemplate.isInstance())
+				spawnBasedOnTemplate(worldMapTemplate);
+		});
 		DataManager.SPAWNS_DATA.clearTemplates();
 		printWorldSpawnStats();
 	}

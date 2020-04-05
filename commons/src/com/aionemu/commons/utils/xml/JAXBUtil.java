@@ -1,16 +1,15 @@
 package com.aionemu.commons.utils.xml;
 
-import java.io.ByteArrayOutputStream;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.InputStreamReader;
-import java.io.PrintStream;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
 import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.ExecutionException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -25,6 +24,12 @@ import org.w3c.dom.Node;
  * @author ?, Neon
  */
 public class JAXBUtil {
+
+	private static final Map<Class<?>, Future<JAXBContext>> CONTEXTS = new ConcurrentHashMap<>();
+
+	public static void preLoadContext(Class<?> clazz) {
+		CONTEXTS.put(clazz, Executors.newSingleThreadExecutor().submit(() -> JAXBContext.newInstance(clazz)));
+	}
 
 	public static String serialize(Object obj) {
 		try {
@@ -160,12 +165,15 @@ public class JAXBUtil {
 	}
 
 	public static Unmarshaller newUnmarshaller(Class<?> clazz, Schema schema) {
+		Future<JAXBContext> contextTask = CONTEXTS.remove(clazz);
 		try {
-			JAXBContext jc = JAXBContext.newInstance(clazz);
+			JAXBContext jc = contextTask == null ? JAXBContext.newInstance(clazz) : contextTask.get();
 			Unmarshaller u = jc.createUnmarshaller();
 			u.setEventHandler(new XmlValidationHandler());
 			u.setSchema(schema);
 			return u;
+		} catch (InterruptedException | ExecutionException e) {
+			throw new RuntimeException(e instanceof ExecutionException ? e.getCause() : e);
 		} catch (JAXBException e) {
 			ByteArrayOutputStream os = new ByteArrayOutputStream();
 			try (PrintStream ps = new PrintStream(os)) {

@@ -3,12 +3,7 @@ package com.aionemu.gameserver.model.templates.npc;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlID;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
@@ -127,6 +122,9 @@ public class NpcTemplate extends CreatureTemplate {
 	protected void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (level > 1 && !"noaction".equals(ai) && getAbyssNpcType().equals(AbyssNpcType.TELEPORTER)) // TODO: reparse npc_template
 			ai = "siege_teleporter";
+	}
+
+	public void internAiName() {
 		if (ai != null)
 			ai = ai.intern(); // intern to save RAM, since most npcs use same ai names
 	}

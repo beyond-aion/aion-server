@@ -1,5 +1,9 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.CancellationException;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
 
 import javax.xml.bind.Unmarshaller;
@@ -8,6 +12,7 @@ import javax.xml.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.loadingutils.StaticDataListener;
 import com.aionemu.gameserver.model.templates.mail.Mails;
 
@@ -294,6 +299,8 @@ public class StaticData {
 	public LegionDominionData legionDominionData;
 
 	@XmlTransient
+	private List<Future<?>> afterUnmarshalTasks;
+	@XmlTransient
 	private Future<?> validationTask;
 
 	void beforeUnmarshal(Unmarshaller unmarshaller, Object parent) {
@@ -397,7 +404,27 @@ public class StaticData {
 		this.validationTask = validationTask;
 	}
 
-	public Future<?> getValidationTask() {
+	Future<?> getValidationTask() {
 		return validationTask;
+	}
+
+	public void addAfterUnmarshalTask(Future<?> task) {
+		if (afterUnmarshalTasks == null)
+			afterUnmarshalTasks = new ArrayList<>();
+		afterUnmarshalTasks.add(task);
+	}
+
+	void waitForAfterUnmarshalTasksToFinish() {
+		if (afterUnmarshalTasks == null)
+			return;
+		afterUnmarshalTasks.forEach(task -> {
+			try {
+				task.get();
+			} catch (InterruptedException | CancellationException ignored) {
+			} catch (ExecutionException e) {
+				throw e.getCause() instanceof Error ? (Error) e.getCause() : new GameServerError(e.getCause());
+			}
+		});
+		afterUnmarshalTasks = null;
 	}
 }
