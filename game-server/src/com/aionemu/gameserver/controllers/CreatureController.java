@@ -219,10 +219,12 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			getOwner().getObserveController().notifyAttackedObservers(attacker, skillId);
 		}
 
-		boolean addHate = notifyAttack || type != TYPE.REGULAR; // !notifyAttack && TYPE.REGULAR = reflect dmg, which should not increase hate
-		getOwner().getAggroList().addDamage(attacker, damage, addHate);
-		getOwner().getLifeStats().reduceHp(type, damage, skillId, logId, attacker);
+		boolean addFullDamageAsHate = notifyAttack || logId == LOG.PROCATKINSTANT; // !notifyAttack && TYPE.REGULAR = reflect dmg, which should not increase hate
+		getOwner().getAggroList().addDamage(attacker, damage, addFullDamageAsHate);
 
+		// notify all NPC's around that creature is attacking me
+		getOwner().getKnownList().forEachNpc(npc -> npc.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));
+		getOwner().getLifeStats().reduceHp(type, damage, skillId, logId, attacker);
 		getOwner().incrementAttackedCount();
 
 		if (!getOwner().isDead() && attacker instanceof Player) {
@@ -232,9 +234,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			if (allowGodstoneActivation && status != AttackStatus.DODGE && status != AttackStatus.RESIST)
 				calculateGodStoneEffects(player);
 		}
-
-		// notify all NPC's around that creature is attacking me
-		getOwner().getKnownList().forEachNpc(npc -> npc.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));
 	}
 
 	private void applyEffectOnCritical(Player attacker, int skillId) {
