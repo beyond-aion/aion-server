@@ -9,16 +9,7 @@ import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.commons.utils.xml.XmlUtil;
 import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.configs.Config;
-import com.aionemu.gameserver.dataholders.CustomDrop;
-import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.DecomposableItemsData;
-import com.aionemu.gameserver.dataholders.EventData;
-import com.aionemu.gameserver.dataholders.ItemData;
-import com.aionemu.gameserver.dataholders.NpcData;
-import com.aionemu.gameserver.dataholders.NpcSkillData;
-import com.aionemu.gameserver.dataholders.QuestsData;
-import com.aionemu.gameserver.dataholders.SkillData;
-import com.aionemu.gameserver.dataholders.XMLQuests;
+import com.aionemu.gameserver.dataholders.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
@@ -45,6 +36,7 @@ public class Reload extends AdminCommand {
 			"<quests> - Reloads quest templates and handlers.",
 			"<skills|npcskills> - Reloads the specified skill templates.",
 			"<events> - Reloads event templates and (re)starts events.",
+			"<arcade> - Reloads the Upgrade Arcade reward item list.",
 			"<decomposables> - Reloads content of item bundles",
 			"<npcs|items|customdrops|gameshop> - Reloads the specified data." 
 		);
@@ -110,6 +102,11 @@ public class Reload extends AdminCommand {
 			DataManager.EVENT_DATA.setEvents(templates);
 			EventService.getInstance().start();
 			sendInfo(admin, DataManager.EVENT_DATA.size() + " events loaded.");
+		} else if (params[0].equalsIgnoreCase("arcade")) {
+			File xml = new File("./data/static_data/events/arcadelist.xml");
+			DataManager.UPGRADE_ARCADE_DATA = JAXBUtil.deserialize(xml, UpgradeArcadeData.class, "./data/static_data/static_data.xsd");
+			long rewards = DataManager.UPGRADE_ARCADE_DATA.getRewards().stream().mapToLong(l -> l.getArcadeRewardItems().size()).sum();
+			sendInfo(admin, rewards + " upgrade arcade rewards loaded.");
 		} else if (params[0].equalsIgnoreCase("decomposables")) {
 			File xml = new File("./data/static_data/decomposable_items/decomposable_items.xml");
 			DataManager.DECOMPOSABLE_ITEMS_DATA = JAXBUtil.deserialize(xml, DecomposableItemsData.class, "./data/static_data/decomposable_items/decomposable_items.xsd");
