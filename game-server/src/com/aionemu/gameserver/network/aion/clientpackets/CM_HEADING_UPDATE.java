@@ -14,7 +14,7 @@ public class CM_HEADING_UPDATE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		// heading = readC(); // we already set the heading 
+		readC(); // heading, which is already set before this packet is received
 	}
 
 	@Override
