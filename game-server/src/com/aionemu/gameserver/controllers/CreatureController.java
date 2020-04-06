@@ -219,7 +219,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			getOwner().getObserveController().notifyAttackedObservers(attacker, skillId);
 		}
 
-		boolean addFullDamageAsHate = notifyAttack || logId == LOG.PROCATKINSTANT; // !notifyAttack && TYPE.REGULAR = reflect dmg, which should not increase hate
+		boolean addFullDamageAsHate = notifyAttack || logId == LOG.PROCATKINSTANT; // periodic effects don't add full damage as hate
 		getOwner().getAggroList().addDamage(attacker, damage, addFullDamageAsHate);
 
 		// notify all NPC's around that creature is attacking me
