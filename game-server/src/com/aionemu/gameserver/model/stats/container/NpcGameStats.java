@@ -9,14 +9,14 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
- * @author xavier
- * @modified Estrayl
+ * @author xavier, Estrayl
  */
 public class NpcGameStats extends CreatureGameStats<Npc> {
 
@@ -109,7 +109,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getHpRegenRate() {
-		return getStat(StatEnum.REGEN_HP, getStatsTemplate().getMaxHp() / 4);
+		int divider = 2;
+		if (owner.getAbyssNpcType() != AbyssNpcType.NONE)
+			divider = 4; // Abyss type related NPCs restore their health by 25%
+		return getStat(StatEnum.REGEN_HP, getStatsTemplate().getMaxHp() / divider);
 	}
 
 	@Override

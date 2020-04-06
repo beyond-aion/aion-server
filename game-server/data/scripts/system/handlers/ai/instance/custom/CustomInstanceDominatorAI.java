@@ -3,19 +3,21 @@ package ai.instance.custom;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.AttackIntention;
 import com.aionemu.gameserver.custom.instance.CustomInstanceRankEnum;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.custom.instance.RoahCustomInstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 import ai.AggressiveNpcAI;
 
@@ -25,8 +27,8 @@ import ai.AggressiveNpcAI;
 @AIName("custom_instance_dominator")
 public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 
-	private int playerObjId, rank;
-	private Future<?> debuffTask, playerPositionCheckTask;
+	private int rank;
+	private Future<?> debuffTask;
 
 	public CustomInstanceDominatorAI(Npc owner) {
 		super(owner);
@@ -40,24 +42,22 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler))
 			return;
 
-		playerObjId = wmi.getRegisteredObjects().iterator().next();
+		int playerObjId = wmi.getRegisteredObjects().iterator().next();
 		rank = CustomInstanceService.getInstance().loadOrCreateRank(playerObjId).getRank();
 
 		debuffTask = ThreadPoolManager.getInstance().schedule(this::debuffTarget, 1000);
-		playerPositionCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(this::checkPlayerPosition, 15000, 15000);
 	}
 
-	private void checkPlayerPosition() {
-		if (!isDead() && getOwner().getGameStats().getLastAttackedTimeDelta() > 10) {
-			Player p = getPosition().getWorldMapInstance().getPlayer(playerObjId);
-			if (p != null && PositionUtil.isInRange(p, getOwner(), 60)) {
-				double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(p.getHeading()));
-				float x = (float) (p.getX() + Math.cos(Math.PI * 1 + radian) * 2);
-				float y = (float) (p.getY() + Math.sin(Math.PI * 1 + radian) * 2);
-				World.getInstance().updatePosition(getOwner(), x, y, p.getZ(), (byte) 30);
+	@Override
+	public AttackIntention chooseAttackIntention() {
+		VisibleObject target = getTarget();
+		if (!isDead() && target != null) {
+			if (!GeoService.getInstance().canSee(getOwner(), target)) {
+				World.getInstance().updatePosition(getOwner(), target.getX(), target.getY(), target.getZ(), (byte) 30);
 				PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
 			}
 		}
+		return super.chooseAttackIntention();
 	}
 
 	private void debuffTarget() {
@@ -111,8 +111,6 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 	private void cancelTasks() {
 		if (debuffTask != null && !debuffTask.isCancelled())
 			debuffTask.cancel(true);
-		if (playerPositionCheckTask != null && !playerPositionCheckTask.isCancelled())
-			playerPositionCheckTask.cancel(true);
 	}
 
 	@Override
@@ -127,4 +125,12 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 		super.handleDespawned();
 	}
 
+	@Override
+	protected void handleBackHome() {
+		super.handleBackHome();
+		WorldMapInstance wmi = getPosition().getWorldMapInstance();
+		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler))
+			return;
+		wmi.getPlayersInside().forEach(p -> getOwner().getAggroList().addHate(p, 1000));
+	}
 }
