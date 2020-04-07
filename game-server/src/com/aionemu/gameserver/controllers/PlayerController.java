@@ -222,7 +222,9 @@ public class PlayerController extends CreatureController<Player> {
 
 	public void onEnterFlyArea() {
 		if (!getOwner().hasAccess(AdminConfig.FREE_FLIGHT)) {
-			getOwner().getLifeStats().triggerFpReduce();
+			if (getOwner().isFlying()) {
+				getOwner().getLifeStats().triggerFpReduce();
+			}
 		}
 	}
 
