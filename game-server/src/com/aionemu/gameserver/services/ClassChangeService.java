@@ -63,7 +63,7 @@ public class ClassChangeService {
 				return false;
 			}
 			byte id = oldClass.getClassId(); // starting class ID +1/+2 equals valid subclass ID
-			if (oldClass == newClass || id >= PlayerClass.ALL.getClassId() || newClass.getClassId() <= id || newClass.getClassId() > id + 2) {
+			if (oldClass == newClass || newClass == PlayerClass.ALL || newClass.getClassId() <= id || newClass.getClassId() > id + 2) {
 				PacketSendUtility.sendMessage(player, "Invalid class chosen");
 				return false;
 			}
