@@ -28,7 +28,7 @@ public class AssemblyItemAction extends AbstractItemAction {
 	private int item;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		AssemblyItem assemblyItem = getAssemblyItem();
 		if (assemblyItem == null) {
 			return false;
@@ -42,7 +42,7 @@ public class AssemblyItemAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(final Player player, final Item parentItem, Item targetItem) {
+	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(),
 			1000, 0, 0), true);
 		final ItemUseObserver observer = new ItemUseObserver() {

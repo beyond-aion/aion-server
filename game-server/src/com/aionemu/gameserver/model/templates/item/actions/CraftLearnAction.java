@@ -22,7 +22,7 @@ public class CraftLearnAction extends AbstractItemAction {
 	protected int recipeid;
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		player.getController().cancelUseItem();
 		if (player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1)) {
 			if (RecipeService.addRecipe(player, recipeid, false)) {
@@ -33,7 +33,7 @@ public class CraftLearnAction extends AbstractItemAction {
 	}
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		return RecipeService.validateNewRecipe(player, recipeid) != null;
 	}
 

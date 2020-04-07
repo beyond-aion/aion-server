@@ -1,10 +1,6 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -32,12 +28,13 @@ public class MultiReturnAction extends AbstractItemAction {
 	private static final short USAGE_DELAY = 5000;
 
 	@Override
-	public boolean canAct(Player player, Item item, Item targetItem) {
+	public boolean canAct(Player player, Item item, Item targetItem, Object... params) {
 		return true;
 	}
 
 	@Override
-	public void act(final Player player, final Item item, final Item targetItem) {
+	public void act(final Player player, final Item item, final Item targetItem, Object... params) {
+		int indexReturn = (int) params[0];
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), item.getObjectId(), item.getItemId(), USAGE_DELAY, 0, 0), true);
 
 		final ItemUseObserver observer = new ItemUseObserver() {
@@ -56,7 +53,7 @@ public class MultiReturnAction extends AbstractItemAction {
 
 			@Override
 			public void run() {
-				ReturnLocList loc = DataManager.MULTIRETURN_DATA.getReturnLocListById(id).get(item.getIndexReturn());
+				ReturnLocList loc = DataManager.MULTIRETURN_DATA.getReturnLocListById(id).get(indexReturn);
 				if (loc != null && loc.getAlias() != null && loc.getWorldid() > 0) {
 					if (!player.getInventory().decreaseByObjectId(item.getObjectId(), 1)) {
 						observer.abort();

@@ -22,12 +22,12 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class CompositionAction extends AbstractItemAction {
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		return false;
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 
 	}
 

@@ -29,7 +29,7 @@ public class SkillLearnAction extends AbstractItemAction {
 	protected PlayerClass playerClass;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		// 1. check player level
 		if (player.getCommonData().getLevel() < level)
 			return false;
@@ -50,7 +50,7 @@ public class SkillLearnAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		// item animation and message
 		ItemTemplate itemTemplate = parentItem.getItemTemplate();
 		// PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.USE_ITEM(itemTemplate.getDescription()));

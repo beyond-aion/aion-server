@@ -26,7 +26,7 @@ public class ExpandInventoryAction extends AbstractItemAction {
 	private StorageType storage;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		switch (storage) {
 			case CUBE:
 				return CubeExpandService.canExpandByTicket(player, level);
@@ -37,7 +37,7 @@ public class ExpandInventoryAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
 		ItemTemplate itemTemplate = parentItem.getItemTemplate();

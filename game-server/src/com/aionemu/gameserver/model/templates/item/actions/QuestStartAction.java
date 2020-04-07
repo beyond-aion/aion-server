@@ -28,7 +28,7 @@ public class QuestStartAction extends AbstractItemAction {
 	protected int questid;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		QuestState qs = player.getQuestStateList().getQuestState(questid);
 		if (qs == null || qs.isStartable())
 			return true;
@@ -42,7 +42,7 @@ public class QuestStartAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		QuestEngine.getInstance().onDialog(new QuestEnv(null, player, questid, DialogAction.ASK_QUEST_ACCEPT));
 	}
 }

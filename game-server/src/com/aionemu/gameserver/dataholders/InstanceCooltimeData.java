@@ -3,11 +3,7 @@ package com.aionemu.gameserver.dataholders;
 import java.time.DayOfWeek;
 import java.time.LocalTime;
 import java.time.ZonedDateTime;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.Unmarshaller;
@@ -62,9 +58,7 @@ public class InstanceCooltimeData {
 	}
 
 	public int getWorldId(int syncId) {
-		if (!syncIdToMapId.containsKey(syncId))
-			return 0;
-		return syncIdToMapId.get(syncId);
+		return syncIdToMapId.getOrDefault(syncId, 0);
 	}
 
 	public long calculateInstanceEntranceCooltime(Player player, int worldId) {

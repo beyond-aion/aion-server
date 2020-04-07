@@ -20,15 +20,17 @@ public abstract class AbstractItemAction {
 	 * @param player
 	 * @param parentItem
 	 * @param targetItem
-	 * @return
+	 * @param params Optional parameters (implementation specific), same as in the following {@link #act(Player, Item, Item, Object...)} call.
+	 * @return True if act() can be called
 	 */
-	public abstract boolean canAct(Player player, Item parentItem, Item targetItem);
+	public abstract boolean canAct(Player player, Item parentItem, Item targetItem, Object... params);
 
 	/**
 	 * @param player
 	 * @param parentItem
 	 * @param targetItem
+	 * @param params Optional parameters (implementation specific), same as in previous {@link #canAct(Player, Item, Item, Object...)} call.
 	 */
-	public abstract void act(Player player, Item parentItem, Item targetItem);
+	public abstract void act(Player player, Item parentItem, Item targetItem, Object... params);
 
 }

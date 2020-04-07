@@ -34,7 +34,7 @@ public class TuningAction extends AbstractItemAction {
 	private boolean shouldNotReduceTuneCount;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (targetItem.isEquipped())
 			return false;
 		if (!targetItem.isIdentified()) {
@@ -59,7 +59,7 @@ public class TuningAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		int parentItemId = parentItem.getItemId();
 		int tuningScrollObjectId = parentItem.getObjectId();
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 9, 0),

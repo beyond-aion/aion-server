@@ -12,15 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.PlayerLifeStats;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
-import com.aionemu.gameserver.skillengine.effect.HealEffect;
-import com.aionemu.gameserver.skillengine.effect.HealInstantEffect;
-import com.aionemu.gameserver.skillengine.effect.MPHealEffect;
-import com.aionemu.gameserver.skillengine.effect.MPHealInstantEffect;
-import com.aionemu.gameserver.skillengine.effect.ProcHealInstantEffect;
-import com.aionemu.gameserver.skillengine.effect.ProcMPHealInstantEffect;
-import com.aionemu.gameserver.skillengine.effect.SummonEffect;
-import com.aionemu.gameserver.skillengine.effect.TransformEffect;
+import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -56,7 +48,7 @@ public class SkillUseAction extends AbstractItemAction {
 	}
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		Skill skill = SkillEngine.getInstance().getSkill(player, skillid, level, player.getTarget(), parentItem.getItemTemplate());
 		if (skill == null)
 			return false;
@@ -93,7 +85,7 @@ public class SkillUseAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		Skill skill = SkillEngine.getInstance().getSkill(player, skillid, level, player.getTarget(), parentItem.getItemTemplate());
 		if (skill != null) {
 			player.getController().cancelUseItem();

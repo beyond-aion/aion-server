@@ -15,13 +15,13 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class ReadAction extends AbstractItemAction {
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		// TODO: get quest
 		return true;
 	}
 
 	@Override
-	public void act(final Player player, Item parentItem, Item targetItem) {
+	public void act(final Player player, Item parentItem, Item targetItem, Object... params) {
 		final int itemObjId = parentItem.getObjectId();
 		final int id = parentItem.getItemTemplate().getTemplateId();
 

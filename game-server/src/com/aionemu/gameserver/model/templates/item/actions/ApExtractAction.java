@@ -21,7 +21,7 @@ public class ApExtractAction extends AbstractItemAction {
 	protected float rate;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (targetItem == null || !targetItem.canApExtract())
 			return false;
 		if (parentItem.getItemTemplate().getLevel() < targetItem.getItemTemplate().getLevel())
@@ -96,7 +96,7 @@ public class ApExtractAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		Acquisition acquisition = targetItem.getItemTemplate().getAcquisition();
 		if (acquisition == null || acquisition.getRequiredAp() == 0)
 			return;

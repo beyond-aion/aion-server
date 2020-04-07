@@ -33,7 +33,7 @@ public class AnimationAddAction extends AbstractItemAction {
 	protected Integer minutes;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (parentItem == null) { // no item selected.
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR());
 			return false;
@@ -43,7 +43,7 @@ public class AnimationAddAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(final Player player, final Item parentItem, Item targetItem) {
+	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
 		player.getController().cancelUseItem();
 		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
 			.getTemplateId(), 1000, 0, 0));

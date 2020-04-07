@@ -3,6 +3,7 @@ package com.aionemu.gameserver.restrictions;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -14,6 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
+import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -415,9 +417,43 @@ public class PlayerRestrictions extends AbstractRestrictions {
 			return false;
 		}
 
+		// Prevents potion spamming, and relogging to use kisks/aether jelly/long CD items.
+		if (player.hasCooldown(item)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANT_USE_UNTIL_DELAY_TIME());
+			return false;
+		}
+
+		ItemActions itemActions = item.getItemTemplate().getActions();
+		if (itemActions == null || itemActions.getItemActions().isEmpty()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE());
+			return false;
+		}
+
 		ItemUseLimits limits = item.getItemTemplate().getUseLimits();
 		if (limits.getGenderPermitted() != null && limits.getGenderPermitted() != player.getGender()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_GENDER());
+			return false;
+		}
+
+		if (item.getItemTemplate().getRace() != Race.PC_ALL && item.getItemTemplate().getRace() != player.getRace()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_RACE());
+			return false;
+		}
+
+		if (!item.getItemTemplate().isClassSpecific(player.getCommonData().getPlayerClass())) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_INVALID_CLASS());
+			return false;
+		}
+
+		int requiredLevel = item.getItemTemplate().getRequiredLevel(player.getPlayerClass());
+		if (requiredLevel > player.getLevel()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_TOO_LOW_LEVEL_MUST_BE_THIS_LEVEL(item.getL10n(), requiredLevel));
+			return false;
+		}
+
+		byte levelRestrict = item.getItemTemplate().getMaxLevelRestrict(player.getPlayerClass());
+		if (levelRestrict != 0 && player.getLevel() > levelRestrict) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_USE_ITEM_TOO_HIGH_LEVEL(levelRestrict, item.getL10n()));
 			return false;
 		}
 
@@ -428,6 +464,19 @@ public class PlayerRestrictions extends AbstractRestrictions {
 				return false;
 			}
 		}
+
+		if (item.getItemTemplate().getActivationRace() != null) {
+			// TODO: check retail messages
+			if (!(player.getTarget() instanceof Creature)) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANT_FIND_VALID_TARGET());
+				return false;
+			}
+			if (((Creature) player.getTarget()).getRace() != item.getItemTemplate().getActivationRace()) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST_TO_CURRENT_TARGET());
+				return false;
+			}
+		}
+
 		return true;
 	}
 

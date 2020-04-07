@@ -1,13 +1,9 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author ATracer
@@ -33,28 +29,14 @@ public class ItemActions {
 		@XmlElement(name = "tuning", type = TuningAction.class), @XmlElement(name = "megaphone", type = MegaphoneAction.class),
 		@XmlElement(name = "pack", type = PackAction.class), @XmlElement(name = "tampering", type = TamperingAction.class),
 		@XmlElement(name = "multireturn", type = MultiReturnAction.class) })
-	protected List<AbstractItemAction> itemActions;
+	private List<AbstractItemAction> itemActions;
 
 	/**
 	 * Gets the value of the itemActions property. Objects of the following type(s) are allowed in the list {@link SkillLearnAction }
 	 * {@link SkillUseAction }
 	 */
 	public List<AbstractItemAction> getItemActions() {
-		if (itemActions == null) {
-			itemActions = new ArrayList<>();
-		}
-		return this.itemActions;
-	}
-
-	public List<ToyPetSpawnAction> getToyPetSpawnActions() {
-		List<ToyPetSpawnAction> result = new ArrayList<>();
-		if (itemActions == null)
-			return result;
-
-		for (AbstractItemAction action : itemActions)
-			if (action instanceof ToyPetSpawnAction)
-				result.add((ToyPetSpawnAction) action);
-		return result;
+		return itemActions == null ? Collections.emptyList() : itemActions;
 	}
 
 	public EnchantItemAction getEnchantAction() {
