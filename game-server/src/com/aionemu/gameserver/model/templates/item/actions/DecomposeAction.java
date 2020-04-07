@@ -97,7 +97,7 @@ public class DecomposeAction extends AbstractItemAction {
 	}
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (player.isDead() || !player.isSpawned())
 			return false;
 		List<ExtractedItemsCollection> itemsCollections = null;
@@ -116,7 +116,7 @@ public class DecomposeAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(final Player player, final Item parentItem, final Item targetItem) {
+	public void act(final Player player, final Item parentItem, final Item targetItem, Object... params) {
 		player.getController().cancelUseItem();
 		Collection<ResultedItem> selectable = DataManager.DECOMPOSABLE_ITEMS_DATA.getSelectableItems(parentItem.getItemId());
 		if (selectable != null) {

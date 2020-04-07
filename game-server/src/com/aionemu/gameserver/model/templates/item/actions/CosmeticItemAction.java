@@ -28,7 +28,7 @@ public class CosmeticItemAction extends AbstractItemAction {
 	protected String cosmeticName;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		CosmeticItemTemplate template = DataManager.COSMETIC_ITEMS_DATA.getCosmeticItemsTemplate(cosmeticName);
 		if (template == null) {
 			return false;
@@ -49,7 +49,7 @@ public class CosmeticItemAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(final Player player, Item parentItem, Item targetItem) {
+	public void act(final Player player, Item parentItem, Item targetItem, Object... params) {
 		CosmeticItemTemplate template = DataManager.COSMETIC_ITEMS_DATA.getCosmeticItemsTemplate(cosmeticName);
 		PlayerAppearance playerAppearance = player.getPlayerAppearance();
 		String type = template.getType();

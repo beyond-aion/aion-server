@@ -29,7 +29,8 @@ public abstract class AbstractCharacterEditPacket extends AionClientPacket {
 		characterName = Util.convertName(readS(25)); // client leaks random data here when entering char creation screen for the first time
 		gender = readD() == 0 ? Gender.MALE : Gender.FEMALE;
 		race = readD() == 0 ? Race.ELYOS : Race.ASMODIANS;
-		playerClass = PlayerClass.getPlayerClassById((byte) readD());
+		byte classId = (byte) (readD() & PlayerClass.ALL.getClassId()); // sanitize input to avoid exceptions whn entering char creation (class won't be used then anyway)
+		playerClass = PlayerClass.getPlayerClassById(classId);
 	}
 
 	protected void readAppearance() {

@@ -23,7 +23,6 @@ import com.aionemu.gameserver.model.items.NpcEquippedGear;
 import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
 import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -691,10 +690,6 @@ public abstract class Creature extends VisibleObject {
 
 	public int getSkillCooldown(SkillTemplate template) {
 		return template.getCooldown();
-	}
-
-	public int getItemCooldown(ItemTemplate template) {
-		return template.getUseLimits().getDelayTime();
 	}
 
 	public boolean isNewSpawn() {

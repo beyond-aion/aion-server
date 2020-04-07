@@ -43,7 +43,7 @@ public class RideAction extends AbstractItemAction {
 	protected int npcId;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (!player.isInPlayerMode(PlayerMode.RIDE)) { // RideAction is for mounting and dismounting, canAct should never forbid dismounting
 			if (parentItem == null)
 				return false;
@@ -69,7 +69,7 @@ public class RideAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(final Player player, final Item parentItem, Item targetItem) {
+	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
 		player.getController().cancelUseItem();
 		if (player.isInPlayerMode(PlayerMode.RIDE)) {
 			player.unsetPlayerMode(PlayerMode.RIDE);

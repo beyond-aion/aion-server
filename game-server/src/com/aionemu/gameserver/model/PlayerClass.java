@@ -1,7 +1,13 @@
 package com.aionemu.gameserver.model;
 
+import java.lang.reflect.Field;
+import java.util.Arrays;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.xml.bind.annotation.XmlEnum;
 
+import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.model.templates.L10n;
 
 /**
@@ -28,7 +34,7 @@ public enum PlayerClass implements L10n {
 	GUNNER(14, 904316, ENGINEER),
 	ARTIST(15, 904317, true),
 	BARD(16, 904318, ARTIST),
-	ALL(17);
+	ALL(null, 0, false);
 
 	/** This id is used on client side */
 	private final byte classId;
@@ -41,19 +47,34 @@ public enum PlayerClass implements L10n {
 	/** Tells whether player can create new character with this class */
 	private PlayerClass startingClass;
 
-	PlayerClass(int classId) {
-		this(classId, 0, false);
-	}
-
 	PlayerClass(int classId, int nameId, PlayerClass startingClass) {
 		this(classId, nameId, false);
 		this.startingClass = startingClass;
 	}
 
-	PlayerClass(int classId, int nameId, boolean isStartingClass) {
-		this.classId = (byte) classId;
+	PlayerClass(Integer classId, int nameId, boolean isStartingClass) {
 		this.nameId = nameId;
-		this.idMask = (int) Math.pow(2, classId);
+		if (classId == null) {
+			byte id = 0;
+			int mask = 0;
+			List<Field> fields = Arrays.stream(PlayerClass.class.getDeclaredFields()).filter(Field::isEnumConstant).collect(Collectors.toList());
+			for (Field field : fields) {
+				try {
+					PlayerClass playerClass = (PlayerClass) field.get(null);
+					if (playerClass != null) { // PlayerClass.ALL (this) is null and must be ignored
+						id |= playerClass.getClassId();
+						mask |= playerClass.getMask();
+					}
+				} catch (IllegalAccessException e) { // should never happen
+					throw new GameServerError(e);
+				}
+			}
+			this.classId = id;
+			this.idMask = mask;
+		} else {
+			this.classId = classId.byteValue();
+			this.idMask = (int) Math.pow(2, classId);
+		}
 		if (isStartingClass)
 			this.startingClass = this;
 	}

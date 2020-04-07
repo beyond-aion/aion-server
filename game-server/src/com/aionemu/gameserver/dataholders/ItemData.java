@@ -1,16 +1,9 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.items.ItemMask;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
@@ -106,9 +99,10 @@ public class ItemData {
 		return items.get(itemId);
 	}
 
-	/**
-	 * @return items.size()
-	 */
+	public Collection<ItemTemplate> getItemTemplates() {
+		return items.valueCollection();
+	}
+
 	public int size() {
 		return items.size();
 	}

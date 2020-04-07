@@ -19,13 +19,13 @@ public class SummonHouseObjectAction extends AbstractItemAction {
 	private int objectId;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		// TODO Auto-generated method stub
 		return false;
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		// TODO Auto-generated method stub
 
 	}

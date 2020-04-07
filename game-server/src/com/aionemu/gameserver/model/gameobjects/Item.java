@@ -1,11 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
-import java.util.TreeSet;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -18,13 +13,7 @@ import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.enchants.EnchantEffect;
 import com.aionemu.gameserver.model.enchants.TemperingEffect;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.items.ChargeInfo;
-import com.aionemu.gameserver.model.items.GodStone;
-import com.aionemu.gameserver.model.items.IdianStone;
-import com.aionemu.gameserver.model.items.ItemMask;
-import com.aionemu.gameserver.model.items.ManaStone;
-import com.aionemu.gameserver.model.items.PendingTuneResult;
-import com.aionemu.gameserver.model.items.RandomBonusEffect;
+import com.aionemu.gameserver.model.items.*;
 import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.ItemStorage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
@@ -75,7 +64,6 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	private RandomBonusEffect bonusStatsEffect;
 	private RandomBonusEffect fusionedItemBonusStatsEffect;
 	private int packCount;
-	private int indexReturn;
 	private int tempering;
 	private EnchantEffect enchantEffect;
 	private TemperingEffect temperingEffect;
@@ -937,14 +925,6 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		this.packCount = packCount;
 	}
 
-	public int getIndexReturn() {
-		return indexReturn;
-	}
-
-	public void setIndexReturn(int indexReturn) {
-		this.indexReturn = indexReturn;
-	}
-
 	public int getMaxEnchantLevel() {
 		return this.getItemTemplate().getMaxEnchantLevel() + this.getEnchantBonus();
 	}
@@ -1008,7 +988,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 			+ getGodStoneId() + ", isSoulBound=" + isSoulBound + ", itemLocation=" + itemLocation + ", enchantLevel=" + enchantLevel + ", enchantBonus="
 			+ enchantBonus + ", expireTime=" + expireTime + ", temporaryExchangeTime=" + temporaryExchangeTime + ", repurchasePrice=" + repurchasePrice
 			+ ", activationCount=" + activationCount + ", bonusNumber=" + getBonusStatsId() + ", tuneCount=" + tuneCount + ", packCount=" + packCount
-			+ ", indexReturn=" + indexReturn + ", tempering=" + tempering + ", isAmplified=" + isAmplified + ", buffSkill=" + buffSkill
-			+ ", rndPlumeBonusValue=" + rndPlumeBonusValue + ", getChargePoints()=" + getChargePoints() + "]";
+			+ ", tempering=" + tempering + ", isAmplified=" + isAmplified + ", buffSkill=" + buffSkill + ", rndPlumeBonusValue=" + rndPlumeBonusValue
+			+ ", getChargePoints()=" + getChargePoints() + "]";
 	}
 }

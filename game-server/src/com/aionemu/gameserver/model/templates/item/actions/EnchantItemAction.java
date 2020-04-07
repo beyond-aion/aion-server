@@ -42,7 +42,7 @@ public class EnchantItemAction extends AbstractItemAction {
 	private float chance;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (isSupplementAction())
 			return false;
 		if (targetItem == null) { // no item selected.
@@ -76,7 +76,7 @@ public class EnchantItemAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(final Player player, final Item parentItem, final Item targetItem) {
+	public void act(final Player player, final Item parentItem, final Item targetItem, Object... params) {
 		act(player, parentItem, targetItem, null, 1);
 	}
 

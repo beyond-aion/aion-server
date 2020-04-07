@@ -22,7 +22,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class ExtractAction extends AbstractItemAction {
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (targetItem == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_NO_TARGET_ITEM());
 			return false;
@@ -40,7 +40,7 @@ public class ExtractAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(final Player player, final Item parentItem, final Item targetItem) {
+	public void act(final Player player, final Item parentItem, final Item targetItem, Object... params) {
 		PacketSendUtility.sendPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate()
 			.getTemplateId(), 5000, 0, 0));
 		player.getController().cancelTask(TaskId.ITEM_USE);

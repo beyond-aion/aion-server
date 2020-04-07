@@ -32,7 +32,7 @@ public class PolishAction extends AbstractItemAction {
 	private int polishSetId;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (parentItem.getItemTemplate().getLevel() > targetItem.getItemTemplate().getLevel()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_POLISH_WRONG_LEVEL());
 			return false;
@@ -45,7 +45,7 @@ public class PolishAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 5000, 0, 0), true);
 		ItemUseObserver observer = new ItemUseObserver() {

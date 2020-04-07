@@ -17,12 +17,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class FireworksUseAction extends AbstractItemAction {
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		return true;
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (parentItem.getActivationCount() > 1)
 			parentItem.setActivationCount(parentItem.getActivationCount() - 1);
 		else

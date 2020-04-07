@@ -61,7 +61,6 @@ import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamPath;
@@ -1591,11 +1590,6 @@ public class Player extends Creature {
 	@Override
 	public int getSkillCooldown(SkillTemplate template) {
 		return isInCustomState(CustomPlayerState.NO_SKILL_COOLDOWN_MODE) ? 0 : template.getCooldown();
-	}
-
-	@Override
-	public int getItemCooldown(ItemTemplate template) {
-		return template.getUseLimits().getDelayTime();
 	}
 
 	public void setLastMessageTime() {

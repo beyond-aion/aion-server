@@ -19,12 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
 import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.SkillUseAction;
-import com.aionemu.gameserver.model.templates.pet.FoodType;
-import com.aionemu.gameserver.model.templates.pet.PetDopingEntry;
-import com.aionemu.gameserver.model.templates.pet.PetFeedResult;
-import com.aionemu.gameserver.model.templates.pet.PetFlavour;
-import com.aionemu.gameserver.model.templates.pet.PetFunction;
-import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
+import com.aionemu.gameserver.model.templates.pet.*;
 import com.aionemu.gameserver.model.trade.TradeList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -180,8 +175,8 @@ public class PetService {
 						true);
 					SkillEngine.getInstance().applyEffectDirectly(((SkillUseAction) itemAction).getSkillId(), ((SkillUseAction) itemAction).getLevel(), player,
 						player, null, ForceType.DEFAULT);
-					player.addItemCoolDown(useItem.getItemTemplate().getUseLimits().getDelayId(), now + player.getItemCooldown(useItem.getItemTemplate()),
-						player.getItemCooldown(useItem.getItemTemplate()) / 1000);
+					int useDelay = useItem.getItemTemplate().getUseLimits().getDelayTime();
+					player.addItemCoolDown(useItem.getItemTemplate().getUseLimits().getDelayId(), now + useDelay, useDelay / 1000);
 					player.getInventory().decreaseByItemId(itemId, 1);
 				} else
 					log.warn("Pet attempt to use not skill use item");

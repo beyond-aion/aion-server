@@ -25,7 +25,7 @@ public class TitleAddAction extends AbstractItemAction {
 	protected Integer minutes;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (titleid == 0 || parentItem == null) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR());
 			return false;
@@ -38,7 +38,7 @@ public class TitleAddAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 		ItemTemplate itemTemplate = parentItem.getItemTemplate();
 		PacketSendUtility.broadcastPacket(player,
 			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), itemTemplate.getTemplateId()), true);

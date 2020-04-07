@@ -22,13 +22,13 @@ public class ChargeAction extends AbstractItemAction {
 	protected int capacity;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		Collection<Item> conditioningItems = ItemChargeService.filterItemsToCondition(player, null, parentItem.getImprovement().getChargeWay());
 		return conditioningItems.size() > 0;
 	}
 
 	@Override
-	public void act(final Player player, Item parentItem, Item targetItem) {
+	public void act(final Player player, Item parentItem, Item targetItem, Object... params) {
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return;
 		Collection<Item> conditioningItems = ItemChargeService.filterItemsToCondition(player, null, parentItem.getImprovement().getChargeWay());

@@ -17,12 +17,12 @@ public class RemodelAction extends AbstractItemAction {
 	private int expireMinutes;
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		return false;
 	}
 
 	@Override
-	public void act(Player player, Item parentItem, Item targetItem) {
+	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
 	}
 
 	public int getExpireMinutes() {

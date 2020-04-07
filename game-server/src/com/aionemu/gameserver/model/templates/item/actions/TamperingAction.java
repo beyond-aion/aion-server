@@ -35,7 +35,7 @@ public class TamperingAction extends AbstractItemAction {
 	private static final Logger log = LoggerFactory.getLogger("TAMPERING_LOG");
 
 	@Override
-	public boolean canAct(Player player, Item parentItem, Item targetItem) {
+	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		int maxTemp = targetItem.getItemTemplate().getMaxTampering();
 		if (!(maxTemp > 0) || targetItem.getTempering() >= maxTemp) {
 			return false;
@@ -44,7 +44,7 @@ public class TamperingAction extends AbstractItemAction {
 	}
 
 	@Override
-	public void act(final Player player, final Item parentItem, final Item targetItem) {
+	public void act(final Player player, final Item parentItem, final Item targetItem, Object... params) {
 		final int parentItemId = parentItem.getItemId();
 		final int parntObjectId = parentItem.getObjectId();
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 0, 0),
