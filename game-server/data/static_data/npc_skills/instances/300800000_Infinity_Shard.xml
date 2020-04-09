@@ -31,7 +31,7 @@
 		<npc_skill id="20712" lv="56" prob="70" cd="15000"/>
 		<npc_skill id="17722" lv="56" prob="70" cd="10000"/>
 		<npc_skill id="17335" lv="56" prob="70" cd="10000"/>
-		<npc_skill id="20179" lv="56" prob="70" cd="15000"/>
+		<npc_skill id="20179" lv="10" prob="70" cd="15000"/> <!-- change to lv="56" when new NpcStats and damage calculations are implemented -->
 		<npc_skill id="21288" lv="56" prob="70" cd="10000"/>
 		<npc_skill id="20711" lv="56" prob="70" cd="10000"/>
 	</npc_skills>
