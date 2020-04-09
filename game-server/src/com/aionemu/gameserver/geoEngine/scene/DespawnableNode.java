@@ -54,7 +54,7 @@ public class DespawnableNode extends Node {
 				return 0;
 			}
 		} else {
-			if (!isActive(results.getInstanceId())) {
+			if (type != DespawnableType.HOUSE && !isActive(results.getInstanceId())) {
 				return 0;
 			} else if ((results.getIgnoreProperties() != null)) {
 				if (type == DespawnableType.SHIELD
