@@ -77,6 +77,8 @@ public class SiegeCannonAI extends NpcAI {
 			case 251772:
 			case 251773:
 			case 251774:
+			case 882253: // Divine
+			case 882255:
 				return 0x540D41; // 21517 65
 			case 252164: // Wealhtheow Elyos
 			case 252165:
@@ -116,6 +118,8 @@ public class SiegeCannonAI extends NpcAI {
 			case 251782:
 			case 251783:
 			case 251784:
+			case 882254: // Divine Asmo Sky Cannon
+			case 882256:
 				return 0x540E41; // 21518 65
 			case 252171: // Wealhtheow Asmo
 			case 252172:
