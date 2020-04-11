@@ -95,6 +95,8 @@ public class TargetRangeProperty {
 						}
 						if (!PositionUtil.isInRange(skillEffector, nextCreature, properties.getEffectiveDist(), false))
 							continue;
+						if (!skill.shouldAffectTarget(nextCreature))
+							continue;
 						skill.getEffectedList().add(creature);
 					} else if (properties.getEffectiveDist() > 0) {
 						// Lightning bolt
@@ -135,11 +137,14 @@ public class TargetRangeProperty {
 							if (!checkCommonRequirements(member, skill))
 								continue;
 							if (PositionUtil.isInRange(effector, member, effectiveRange, false)) {
-								effectedList.add(member);
+								if (skill.shouldAffectTarget(member))
+									effectedList.add(member);
 								if (value == TargetRangeAttribute.PARTY_WITHPET) {
 									Summon aMemberSummon = member.getSummon();
-									if (aMemberSummon != null)
-										effectedList.add(aMemberSummon);
+									if (aMemberSummon != null) {
+										if (skill.shouldAffectTarget(aMemberSummon))
+											effectedList.add(aMemberSummon);
+									}
 								}
 							}
 						}
@@ -157,7 +162,9 @@ public class TargetRangeProperty {
 					if (nextCreature instanceof Trap && !((Trap) nextCreature).getMaster().isEnemy(skillEffector))
 						continue;
 
-					if (PositionUtil.isInRange(nextCreature, skill.getX(), skill.getY(), skill.getZ(), distanceToTarget + 1))
+					if (!PositionUtil.isInRange(nextCreature, skill.getX(), skill.getY(), skill.getZ(), distanceToTarget + 1))
+						continue;
+					if (skill.shouldAffectTarget(nextCreature))
 						effectedList.add(creature);
 				}
 				break;
