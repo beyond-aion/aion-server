@@ -140,18 +140,14 @@ public class TransformModel {
 	 * @return the type
 	 */
 	public TransformType getType() {
-		if (isActive())
-			return transformType;
-		return originalType;
+		return transformType;
 	}
 
 	/**
 	 * @return the panelId
 	 */
 	public int getPanelId() {
-		if (isActive())
-			return panelId;
-		return 0;
+		return panelId;
 	}
 
 	public boolean isActive() {
@@ -162,7 +158,7 @@ public class TransformModel {
 	 * @return the transformTribe
 	 */
 	public TribeClass getTribe() {
-		if (isActive() && transformTribe != null)
+		if (transformTribe != null)
 			return transformTribe;
 		return overrideTribe;
 	}
@@ -184,69 +180,48 @@ public class TransformModel {
 	 * @return the banUseSkills
 	 */
 	public int getBanUseSkills() {
-		if (isActive())
-			return banUseSkills;
-		else
-			return 0;
+		return banUseSkills;
 	}
 
 	/**
 	 * @return the banMovement
 	 */
 	public int getBanMovement() {
-		if (isActive())
-			return banMovement;
-		else
-			return 0;
+		return banMovement;
 	}
 
 	/**
 	 * @return the res1
 	 */
 	public int getRes1() {
-		if (isActive())
-			return res1;
-		else
-			return 0;
+		return res1;
 	}
 
 	/**
 	 * @return the res2
 	 */
 	public int getRes2() {
-		if (isActive())
-			return res2;
-		else
-			return 0;
+		return res2;
 	}
 
 	/**
 	 * @return the res3
 	 */
 	public int getRes3() {
-		if (isActive())
-			return res3;
-		else
-			return 0;
+		return res3;
 	}
 
 	/**
 	 * @return the res5
 	 */
 	public int getRes5() {
-		if (isActive())
-			return res5;
-		else
-			return 0;
+		return res5;
 	}
 
 	/**
 	 * @return the res6
 	 */
 	public int getRes6() {
-		if (isActive())
-			return res6;
-		else
-			return 0;
+		return res6;
 	}
 }
