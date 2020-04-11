@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
-import com.aionemu.gameserver.services.siege.Siege;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
@@ -65,14 +64,14 @@ public class SiegeWeaponController extends SummonController {
 			return;
 		}
 		Race masterRace = master.getRace();
-		if (target.getRace() != Race.DRAKAN && target instanceof SiegeNpc && !((SiegeNpc) target).isBoss()) {
-			if (masterRace == Race.ASMODIANS && target.getRace() != Race.PC_LIGHT_CASTLE_DOOR && target.getRace() != Race.DRAGON_CASTLE_DOOR
-					&& target.getRace() != Race.GCHIEF_LIGHT && target.getRace() != Race.GCHIEF_DRAGON) {
-				return;
-			} else if (masterRace == Race.ELYOS && target.getRace() != Race.PC_DARK_CASTLE_DOOR && target.getRace() != Race.DRAGON_CASTLE_DOOR
-					&& target.getRace() != Race.GCHIEF_DARK && target.getRace() != Race.GCHIEF_DRAGON) {
-				return;
-			}
+		if (target.getRace() == Race.DRAKAN && target instanceof SiegeNpc && !((SiegeNpc) target).isBoss()) {
+			return;
+		} else if (masterRace == Race.ASMODIANS && target.getRace() != Race.PC_LIGHT_CASTLE_DOOR && target.getRace() != Race.DRAGON_CASTLE_DOOR
+				&& target.getRace() != Race.GCHIEF_LIGHT && target.getRace() != Race.GCHIEF_DRAGON) {
+			return;
+		} else if (masterRace == Race.ELYOS && target.getRace() != Race.PC_DARK_CASTLE_DOOR && target.getRace() != Race.DRAGON_CASTLE_DOOR
+				&& target.getRace() != Race.GCHIEF_DARK && target.getRace() != Race.GCHIEF_DRAGON) {
+			return;
 		}
 		super.attackMode(targetObjId);
 		getOwner().setTarget(target);

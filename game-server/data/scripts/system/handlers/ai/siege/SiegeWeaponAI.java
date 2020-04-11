@@ -86,14 +86,14 @@ public class SiegeWeaponAI extends AITemplate<Summon> {
 			return;
 		}
 		Race masterRace = master.getRace();
-		if (race != Race.DRAKAN && creature instanceof SiegeNpc && !((SiegeNpc) creature).isBoss()) {
-			if (masterRace == Race.ASMODIANS && race != Race.PC_LIGHT_CASTLE_DOOR && race != Race.DRAGON_CASTLE_DOOR
-					&& race != Race.GCHIEF_LIGHT && race != Race.GCHIEF_DRAGON) {
-				return;
-			} else if (masterRace == Race.ELYOS && race != Race.PC_DARK_CASTLE_DOOR && race != Race.DRAGON_CASTLE_DOOR
-					&& race != Race.GCHIEF_DARK && race != Race.GCHIEF_DRAGON) {
-				return;
-			}
+		if (race == Race.DRAKAN && creature instanceof SiegeNpc && !((SiegeNpc) creature).isBoss()) {
+			return;
+		} else if (masterRace == Race.ASMODIANS && race != Race.PC_LIGHT_CASTLE_DOOR && race != Race.DRAGON_CASTLE_DOOR
+				&& race != Race.GCHIEF_LIGHT && race != Race.GCHIEF_DRAGON) {
+			return;
+		} else if (masterRace == Race.ELYOS && race != Race.PC_DARK_CASTLE_DOOR && race != Race.DRAGON_CASTLE_DOOR
+				&& race != Race.GCHIEF_DARK && race != Race.GCHIEF_DRAGON) {
+			return;
 		}
 		if (getOwner().getMode() != SummonMode.ATTACK) {
 			return;
