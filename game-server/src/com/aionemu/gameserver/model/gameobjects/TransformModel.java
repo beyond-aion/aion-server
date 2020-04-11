@@ -19,7 +19,6 @@ public class TransformModel {
 	private TransformType originalType;
 	private TransformType transformType;
 	private int panelId;
-	private boolean isActive = false;
 	private TribeClass transformTribe;
 	private TribeClass overrideTribe;
 
@@ -69,7 +68,6 @@ public class TransformModel {
 			this.res3 = 0;
 			this.res5 = 0;
 			this.res6 = 0;
-			this.isActive = false;
 		} else { // set new
 			this.modelId = modelId;
 			this.transformType = type;
@@ -81,13 +79,12 @@ public class TransformModel {
 			this.res3 = res3;
 			this.res5 = res5;
 			this.res6 = res6;
-			this.isActive = true;
 		}
 
 		this.updateVisually();
 	}
 
-	private void updateVisually() {
+	public void updateVisually() {
 		PacketSendUtility.broadcastPacketAndReceive(owner, new SM_TRANSFORM(owner));
 	}
 
@@ -109,12 +106,19 @@ public class TransformModel {
 	 * @return the modelId
 	 */
 	public int getModelId() {
-		if (isActive && modelId > 0)
+		if (eventModelId == owner.getObjectTemplate().getTemplateId() && transformType == TransformType.PC && isUnrestricted()) { // Player removed visual appearance via Nomorph command
+			return eventModelId;
+		}
+		if (isActive())
 			return modelId;
 		if (eventModelId > 0)
 			return eventModelId;
 		else
 			return owner.getObjectTemplate().getTemplateId();
+	}
+
+	public boolean isUnrestricted() {
+		return banUseSkills == 0 && banMovement == 0 && res1 == 0 && res2 == 0 && res3 == 0 && res5 == 0 && res6 == 0;
 	}
 
 	/**
@@ -128,11 +132,15 @@ public class TransformModel {
 		this.eventModelId = eventModelId;
 	}
 
+	public int getEventModelId() {
+		return this.eventModelId;
+	}
+
 	/**
 	 * @return the type
 	 */
 	public TransformType getType() {
-		if (isActive)
+		if (isActive())
 			return transformType;
 		return originalType;
 	}
@@ -141,20 +149,20 @@ public class TransformModel {
 	 * @return the panelId
 	 */
 	public int getPanelId() {
-		if (isActive)
+		if (isActive())
 			return panelId;
 		return 0;
 	}
 
 	public boolean isActive() {
-		return isActive;
+		return modelId > 0 && modelId != owner.getObjectTemplate().getTemplateId();
 	}
 
 	/**
 	 * @return the transformTribe
 	 */
 	public TribeClass getTribe() {
-		if (isActive && transformTribe != null)
+		if (isActive() && transformTribe != null)
 			return transformTribe;
 		return overrideTribe;
 	}
@@ -176,7 +184,7 @@ public class TransformModel {
 	 * @return the banUseSkills
 	 */
 	public int getBanUseSkills() {
-		if (isActive)
+		if (isActive())
 			return banUseSkills;
 		else
 			return 0;
@@ -186,7 +194,7 @@ public class TransformModel {
 	 * @return the banMovement
 	 */
 	public int getBanMovement() {
-		if (isActive)
+		if (isActive())
 			return banMovement;
 		else
 			return 0;
@@ -196,7 +204,7 @@ public class TransformModel {
 	 * @return the res1
 	 */
 	public int getRes1() {
-		if (isActive)
+		if (isActive())
 			return res1;
 		else
 			return 0;
@@ -206,7 +214,7 @@ public class TransformModel {
 	 * @return the res2
 	 */
 	public int getRes2() {
-		if (isActive)
+		if (isActive())
 			return res2;
 		else
 			return 0;
@@ -216,7 +224,7 @@ public class TransformModel {
 	 * @return the res3
 	 */
 	public int getRes3() {
-		if (isActive)
+		if (isActive())
 			return res3;
 		else
 			return 0;
@@ -226,7 +234,7 @@ public class TransformModel {
 	 * @return the res5
 	 */
 	public int getRes5() {
-		if (isActive)
+		if (isActive())
 			return res5;
 		else
 			return 0;
@@ -236,7 +244,7 @@ public class TransformModel {
 	 * @return the res6
 	 */
 	public int getRes6() {
-		if (isActive)
+		if (isActive())
 			return res6;
 		else
 			return 0;
