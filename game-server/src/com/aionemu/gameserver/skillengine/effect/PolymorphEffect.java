@@ -24,13 +24,13 @@ public class PolymorphEffect extends TransformEffect {
 			Creature effected = effect.getEffected();
 			NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(model);
 			if (template != null)
-				effected.getTransformModel().setTribe(template.getTribe(), false);
+				effected.getTransformModel().setTribe(template.getTribe());
 		}
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
 		super.endEffect(effect);
-		effect.getEffected().getTransformModel().setTribe(null, false);
+		effect.getEffected().getTransformModel().setTribe(null);
 	}
 }

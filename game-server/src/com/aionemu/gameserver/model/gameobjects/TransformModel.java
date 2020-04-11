@@ -20,7 +20,6 @@ public class TransformModel {
 	private TransformType transformType;
 	private int panelId;
 	private TribeClass transformTribe;
-	private TribeClass overrideTribe;
 
 	// restrictions
 	protected int banUseSkills;
@@ -158,21 +157,15 @@ public class TransformModel {
 	 * @return the transformTribe
 	 */
 	public TribeClass getTribe() {
-		if (transformTribe != null)
-			return transformTribe;
-		return overrideTribe;
+		return transformTribe;
 	}
 
 	/**
 	 * @param transformTribe
 	 *          the transformTribe to set
 	 */
-	public void setTribe(TribeClass transformTribe, boolean override) {
-		if (override)
-			this.overrideTribe = transformTribe;
-		else
-			this.transformTribe = transformTribe;
-
+	public void setTribe(TribeClass transformTribe) {
+		this.transformTribe = transformTribe;
 		this.updateTribeVisually();
 	}
 
