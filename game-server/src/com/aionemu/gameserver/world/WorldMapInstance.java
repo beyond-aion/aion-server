@@ -1,11 +1,6 @@
 package com.aionemu.gameserver.world;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
@@ -249,13 +244,8 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return npcs;
 	}
 
-	public Map<Integer, StaticDoor> getDoors() {
-		Map<Integer, StaticDoor> doors = new HashMap<>();
-		for (VisibleObject v : this) {
-			if (v instanceof StaticDoor)
-				doors.put(v.getSpawn().getStaticId(), (StaticDoor) v);
-		}
-		return doors;
+	public VisibleObject getObjectByStaticId(int staticId) {
+		return worldMapObjects.values().stream().filter(o -> o != null && o.getSpawn() != null && o.getSpawn().getStaticId() == staticId).findAny().orElse(null);
 	}
 
 	/**
@@ -390,7 +380,16 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return playerSize;
 	}
 
-	@Override
+	public void setDoorState(int staticId, boolean open) {
+		for (VisibleObject v : worldMapObjects.values()) {
+			if (v instanceof StaticDoor && v.getSpawn().getStaticId() == staticId) {
+				((StaticDoor) v).setOpen(open);
+				return;
+			}
+		}
+		log.warn("Door (ID: " + staticId + ") doesn't exist", new RuntimeException());
+	}
+
 	public Iterator<VisibleObject> iterator() {
 		return worldMapObjects.values().iterator();
 	}
@@ -401,6 +400,13 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 
 	public void forEachPlayer(Consumer<Player> function) {
 		forEach(worldMapPlayers, function);
+	}
+
+	public void forEachDoor(Consumer<StaticDoor> function) {
+		forEach(worldMapObjects, o -> {
+			if (o instanceof StaticDoor)
+				function.accept((StaticDoor) o);
+		});
 	}
 
 	private <T extends VisibleObject> void forEach(Map<Integer, T> concurrentMap, Consumer<T> function) {

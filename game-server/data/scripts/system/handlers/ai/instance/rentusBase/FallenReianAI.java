@@ -17,30 +17,19 @@ public class FallenReianAI extends NpcAI {
 
 	private AtomicBoolean isCollapsed = new AtomicBoolean(false);
 
-	private int doorId;
-
 	public FallenReianAI(Npc owner) {
 		super(owner);
 	}
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		doorId = getNpcId() == 799661 ? 16 : 54;
-	}
-
-	@Override
 	protected void handleCreatureMoved(Creature creature) {
-		if (creature instanceof Player) {
-			final Player player = (Player) creature;
-			if (PositionUtil.getDistance(getOwner(), player) <= doorId) {
-				if (PositionUtil.getDistance(getOwner(), getPosition().getWorldMapInstance().getDoors().get(doorId)) <= 30) {
-					if (isCollapsed.compareAndSet(false, true)) {
-						getPosition().getWorldMapInstance().getDoors().get(doorId).setOpen(true);
-					}
-				}
-			}
-		}
+		if (isCollapsed.get())
+			return;
+		if (!(creature instanceof Player))
+			return;
+		Player player = (Player) creature;
+		if (PositionUtil.isInRange(getOwner(), player, 20) && isCollapsed.compareAndSet(false, true))
+			getPosition().getWorldMapInstance().setDoorState(getNpcId() == 799661 ? 16 : 54, true);
 	}
 
 }

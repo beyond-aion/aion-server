@@ -118,8 +118,8 @@ public class BaranathDredgionInstance2 extends DredgionInstance2 {
 
 	@Override
 	protected void openFirstDoors() {
-		openDoor(17);
-		openDoor(18);
+		instance.setDoorState(17, true);
+		instance.setDoorState(18, true);
 	}
 
 }

@@ -35,14 +35,14 @@ public class QueenMosquaAI extends SummonerAI {
 		super.handleCreatureAggro(creature);
 		if (isHome) {
 			isHome = false;
-			getPosition().getWorldMapInstance().getDoors().get(7).setOpen(false);
+			getPosition().getWorldMapInstance().setDoorState(7, false);
 		}
 	}
 
 	@Override
 	protected void handleBackHome() {
 		isHome = true;
-		getPosition().getWorldMapInstance().getDoors().get(7).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(7, true);
 		super.handleBackHome();
 	}
 
@@ -50,7 +50,7 @@ public class QueenMosquaAI extends SummonerAI {
 	protected void handleDied() {
 		super.handleDied();
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
-		getPosition().getWorldMapInstance().getDoors().get(7).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(7, true);
 
 		Npc npc = instance.getNpc(700738);
 		if (npc != null) {

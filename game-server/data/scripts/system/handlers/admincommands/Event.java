@@ -4,7 +4,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
@@ -170,8 +169,7 @@ public class Event extends AdminCommand {
 			npc.getController().delete();
 			count.getAndIncrement();
 		});
-		for (StaticDoor door : map.getDoors().values())
-			door.setOpen(true);
+		map.forEachDoor(door -> door.setOpen(true));
 
 		sendInfo(admin, "Deleted " + count + " NPCs.");
 	}

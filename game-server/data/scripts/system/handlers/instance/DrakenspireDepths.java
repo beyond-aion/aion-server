@@ -4,7 +4,6 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -18,7 +17,6 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -31,7 +29,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Estrayl
@@ -77,7 +74,6 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 	private AtomicInteger killedCommanderCount = new AtomicInteger();
 	private AtomicInteger fallenWaveDefender = new AtomicInteger();
 	private AtomicInteger dispelledBuffs = new AtomicInteger();
-	private Map<Integer, StaticDoor> doors;
 	private List<Future<?>> waveAssaultTasks = new ArrayList<>();
 	private Future<?> twinFailTask;
 	private Future<?> orissanSwitchTask;
@@ -88,12 +84,6 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 	private byte orissanImmortalityCount = 0;
 	private byte waveCount = 0;
 	private byte beritraProgressCount = 0;
-
-	@Override
-	public void onInstanceCreate(WorldMapInstance wmi) {
-		super.onInstanceCreate(wmi);
-		doors = wmi.getDoors();
-	}
 
 	private void onTwinFightStart() {
 		twinFailTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
@@ -192,8 +182,8 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 		waveCount++;
 		switch (waveCount) {
 			case 1:
-				doors.get(267).setOpen(true);
-				doors.get(271).setOpen(true);
+				instance.setDoorState(267, true);
+				instance.setDoorState(271, true);
 				spawn(731581, 578.55f, 819.27f, 1609.42f, (byte) 0).getSpawn().setStaticId(84);
 				spawn(731581, 690.49f, 822.41f, 1609.57f, (byte) 0).getSpawn().setStaticId(405);
 				spawn(731581, 635.39f, 784.05f, 1596.72f, (byte) 0).getSpawn().setStaticId(548);
@@ -203,8 +193,8 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_05());
 				break;
 			case 3:
-				doors.get(7).setOpen(true);
-				doors.get(310).setOpen(true);
+				instance.setDoorState(7, true);
+				instance.setDoorState(310, true);
 				spawn(731581, 707.34f, 876.80f, 1603.69f, (byte) 0).getSpawn().setStaticId(398);
 				spawn(731581, 570.70f, 877.51f, 1599.80f, (byte) 0).getSpawn().setStaticId(401);
 				if (isHardmode)
@@ -217,8 +207,8 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_07());
 				break;
 			case 5:
-				doors.get(210).setOpen(true);
-				doors.get(312).setOpen(true);
+				instance.setDoorState(210, true);
+				instance.setDoorState(312, true);
 				spawn(731581, 694.01f, 935.97f, 1618.09f, (byte) 0).getSpawn().setStaticId(399);
 				spawn(731581, 572.94f, 940.04f, 1620.04f, (byte) 0).getSpawn().setStaticId(407);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_08());
@@ -465,13 +455,13 @@ public class DrakenspireDepths extends GeneralInstanceHandler {
 				npc.getController().delete();
 				break;
 			case 236224:
-				doors.get(375).setOpen(true);
+				instance.setDoorState(375, true);
 				break;
 			case 236661:
-				doors.get(376).setOpen(true);
+				instance.setDoorState(376, true);
 				break;
 			case 236662:
-				doors.get(378).setOpen(true);
+				instance.setDoorState(378, true);
 				break;
 			case 731580:
 				switch (npc.getSpawn().getStaticId()) {

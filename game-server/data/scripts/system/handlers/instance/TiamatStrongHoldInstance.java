@@ -1,6 +1,5 @@
 package instance;
 
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -11,7 +10,6 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
@@ -29,7 +27,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 @InstanceID(300510000)
 public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 
-	private Map<Integer, StaticDoor> doors;
 	private boolean isInstanceDestroyed;
 	private AtomicInteger drakans = new AtomicInteger();
 	private AtomicBoolean startSuramaEvent = new AtomicBoolean();
@@ -57,13 +54,13 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 				sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_REWARD_SPAWN());
 				spawn(283177, 1175.65f, 1069.08f, 498.52f, (byte) 0); // ex 283913
 				spawn(701501, 1075.4409f, 1078.5071f, 787.685f, (byte) 16);
-				doors.get(48).setOpen(true);
+				instance.setDoorState(48, true);
 				spawnKahrun();
 				break;
 			case 219357:// ex 219405
 				sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_REWARD_SPAWN());
 				spawn(701501, 1077.1716f, 1058.1995f, 787.685f, (byte) 61);
-				doors.get(37).setOpen(true);
+				instance.setDoorState(37, true);
 				isDeadBosses();
 				break;
 			case 219358:// ex 219406
@@ -77,7 +74,7 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 			case 219353:// ex 219401
 				sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_REWARD_SPAWN());
 				spawn(701501, 1071.5909f, 1040.6797f, 787.685f, (byte) 23);
-				doors.get(711).setOpen(true);
+				instance.setDoorState(711, true);
 				isDeadBosses();
 				break;
 			case 219354:// ex 219402
@@ -90,11 +87,11 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 			case 219355:// ex 219403
 				sendMsg(SM_SYSTEM_MESSAGE.STR_IDTIAMAT_TIAMAT_REWARD_SPAWN());
 				spawn(701501, 1063.5973f, 1092.7402f, 787.685f, (byte) 107);
-				doors.get(51).setOpen(true);
-				doors.get(54).setOpen(true);
-				doors.get(78).setOpen(true);
-				doors.get(11).setOpen(true);
-				doors.get(79).setOpen(true);
+				instance.setDoorState(51, true);
+				instance.setDoorState(54, true);
+				instance.setDoorState(78, true);
+				instance.setDoorState(11, true);
+				instance.setDoorState(79, true);
 				isDeadBosses();
 				break;
 			case 219356:// ex 219404
@@ -279,7 +276,7 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
 			case 701494:
-				doors.get(22).setOpen(true);
+				instance.setDoorState(22, true);
 				break;
 		}
 	}
@@ -287,17 +284,15 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		doors = instance.getDoors();
-		doors.get(610).setOpen(true);
-		// doors.get(20).setOpen(true);
-		doors.get(706).setOpen(true);
+		instance.setDoorState(610, true);
+		// instance.setDoorState(20, true);
+		instance.setDoorState(706, true);
 		spawnColonels();
 	}
 
 	@Override
 	public void onInstanceDestroy() {
 		isInstanceDestroyed = true;
-		doors.clear();
 	}
 
 	@Override

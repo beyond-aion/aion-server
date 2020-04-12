@@ -47,7 +47,7 @@ public class BrigadeGeneralTerathAI extends AggressiveNpcAI {
 		if (isHome.compareAndSet(true, false)) {
 			if (aethericField == null) {
 				aethericField = (Npc) spawn(730692, 1030.08f, 1030.08f, 1030.08f, (byte) 0);
-				getPosition().getWorldMapInstance().getDoors().get(706).setOpen(false);
+				getPosition().getWorldMapInstance().setDoorState(706, false);
 			}
 			if (!isGravityEvent) {
 				startSkillTask();
@@ -170,7 +170,7 @@ public class BrigadeGeneralTerathAI extends AggressiveNpcAI {
 		percents.clear();
 		cancelskillTask();
 		aethericField.getController().delete();
-		getPosition().getWorldMapInstance().getDoors().get(706).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(706, true);
 		despawn();
 	}
 
@@ -192,7 +192,7 @@ public class BrigadeGeneralTerathAI extends AggressiveNpcAI {
 		isHome.set(true);
 		aethericField.getController().delete();
 		despawn();
-		getPosition().getWorldMapInstance().getDoors().get(706).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(706, true);
 	}
 
 	@Override

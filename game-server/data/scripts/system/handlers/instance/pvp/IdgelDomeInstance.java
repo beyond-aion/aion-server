@@ -64,7 +64,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PROGRESS), idi, getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), idi, getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), idi, getTime()));
-		instance.getDoors().values().forEach(d -> d.setOpen(true));
+		instance.forEachDoor(door -> door.setOpen(true));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> spawn(234190, 264.4382f, 258.58527f, 88.452042f, (byte) 31), 600000));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> onStop(false), 1200000));
 		spawnAndSetRespawn(802548, 199.187f, 191.761f, 80.7466f, (byte) 15, 180);

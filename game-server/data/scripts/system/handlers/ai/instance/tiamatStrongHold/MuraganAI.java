@@ -89,7 +89,7 @@ public class MuraganAI extends GeneralNpcAI {
 	private void openSuramaDoor() {
 		if (getOwner().getNpcId() == 800436) {
 			PacketSendUtility.broadcastMessage(getOwner(), 390835);
-			getPosition().getWorldMapInstance().getDoors().get(56).setOpen(true);
+			getPosition().getWorldMapInstance().setDoorState(56, true);
 			AIActions.deleteOwner(this);
 		}
 	}

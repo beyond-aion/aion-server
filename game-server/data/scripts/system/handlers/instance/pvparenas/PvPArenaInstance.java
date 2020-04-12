@@ -7,7 +7,6 @@ import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
@@ -141,7 +140,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	}
 
 	private void sendPacket(AionServerPacket packet) {
-		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, packet));
+		PacketSendUtility.broadcastToMap(instance, packet);
 	}
 
 	private void spawnRndRelics(int time) {
@@ -257,7 +256,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 			public void run() {
 				// start round 1
 				if (!isInstanceDestroyed && !instanceReward.isRewarded() && canStart()) {
-					openDoors();
+					instance.forEachDoor(door -> door.setOpen(true));
 					sendPacket(new SM_SYSTEM_MESSAGE(1401058));
 					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 					sendPacket();
@@ -323,14 +322,6 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	@Override
 	public void onExitInstance(Player player) {
 		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
-	}
-
-	private void openDoors() {
-		for (StaticDoor door : instance.getDoors().values()) {
-			if (door != null) {
-				door.setOpen(true);
-			}
-		}
 	}
 
 	protected PvPArenaPlayerReward getPlayerReward(int objectId) {

@@ -4,7 +4,6 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -12,7 +11,6 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
@@ -37,7 +35,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class TalocsHollowInstance extends GeneralInstanceHandler {
 
 	private List<Integer> movies = new ArrayList<>();
-	private Map<Integer, StaticDoor> doors;
 
 	@Override
 	public void onEnterInstance(Player player) {
@@ -85,8 +82,8 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	public void onDie(Npc npc) {
 		switch (npc.getNpcId()) {
 			case 215467:
-				openDoor(48);
-				openDoor(49);
+				instance.setDoorState(48, true);
+				instance.setDoorState(49, true);
 				break;
 			case 215457:
 				Npc newNpc = getNpc(700633);
@@ -130,12 +127,6 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	@Override
-	public void onInstanceDestroy() {
-		movies.clear();
-		doors.clear();
-	}
-
 	private void sendMovie(Player player, int movie) {
 		if (!movies.contains(movie)) {
 			movies.add(movie);
@@ -149,18 +140,11 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 		player.getEffectController().removeEffect(10252);
 	}
 
-	private void openDoor(int doorId) {
-		StaticDoor door = doors.get(doorId);
-		if (door != null)
-			door.setOpen(true);
-	}
-
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		doors = instance.getDoors();
-		doors.get(48).setOpen(true);
-		doors.get(7).setOpen(true);
+		instance.setDoorState(48, true);
+		instance.setDoorState(7, true);
 		spawnRings();
 	}
 

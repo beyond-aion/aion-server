@@ -2,8 +2,6 @@ package ai.instance.beshmundirTemple;
 
 import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
 
-import java.util.function.Consumer;
-
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -45,7 +43,7 @@ public class PlegetonAI extends NpcAI {
 								if (npc != null && !npc.isDead()) {
 									npc.getController().delete();
 									PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 0));
-									getPosition().getWorldMapInstance().getDoors().get(467).setOpen(true);
+									getPosition().getWorldMapInstance().setDoorState(467, true);
 								}
 							}
 						}, 420000);
@@ -71,14 +69,7 @@ public class PlegetonAI extends NpcAI {
 	}
 
 	private void sendTimer() {
-		getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 420));
-			}
-
-		});
+		PacketSendUtility.broadcastToMap(getOwner(), new SM_QUEST_ACTION(0, 420));
 	}
 
 	@Override

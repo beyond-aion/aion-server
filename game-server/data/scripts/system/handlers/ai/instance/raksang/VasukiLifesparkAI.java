@@ -94,7 +94,7 @@ public class VasukiLifesparkAI extends AggressiveNpcAI {
 							public void run() {
 								if (!isDead()) {
 									if (getNpcId() == 217763) {
-										getPosition().getWorldMapInstance().getDoors().get(219).setOpen(true);
+										getPosition().getWorldMapInstance().setDoorState(219, true);
 									}
 									SkillEngine.getInstance().getSkill(getOwner(), 19967, level, getOwner()).useNoAnimationSkill();
 									ThreadPoolManager.getInstance().schedule(new Runnable() {

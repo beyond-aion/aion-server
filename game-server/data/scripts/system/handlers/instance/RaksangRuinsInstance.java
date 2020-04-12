@@ -1,6 +1,5 @@
 package instance;
 
-import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -11,7 +10,6 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -28,7 +26,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class RaksangRuinsInstance extends GeneralInstanceHandler {
 
 	private volatile boolean isInstanceDestroyed;
-	private Map<Integer, StaticDoor> doors;
 	private AtomicBoolean isEventStarted = new AtomicBoolean();
 	private AtomicInteger waveKillz = new AtomicInteger();
 	private Future<?> spawnTask;
@@ -43,7 +40,6 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate(WorldMapInstance wmi) {
 		super.onInstanceCreate(wmi);
-		doors = wmi.getDoors();
 		way = (byte) Rnd.get(3);
 	}
 
@@ -71,11 +67,11 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 				switch (waveKillz.incrementAndGet()) {
 					case 15:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END());
-						doors.get(457).setOpen(true);
+						instance.setDoorState(457, true);
 						break;
 					case 30:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END());
-						doors.get(64).setOpen(true);
+						instance.setDoorState(64, true);
 						break;
 				}
 				break;
@@ -88,7 +84,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 						spawnTask.cancel(false);
 						spawnTask = null;
 						spawns = 0;
-						doors.get(107).setOpen(true);
+						instance.setDoorState(107, true);
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_END());
 						break;
 					case 56:
@@ -97,21 +93,21 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 				}
 				break;
 			case 236084:
-				doors.get(307).setOpen(true);
+				instance.setDoorState(307, true);
 				break;
 			case 217469:
-				doors.get(107).setOpen(true);
+				instance.setDoorState(107, true);
 				break;
 			case 236303:
-				doors.get(294).setOpen(true);
+				instance.setDoorState(294, true);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_END());
 				break;
 			case 236304:
-				doors.get(118).setOpen(true);
+				instance.setDoorState(118, true);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_C_END());
 				break;
 			case 236305:
-				doors.get(324).setOpen(true);
+				instance.setDoorState(324, true);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_END());
 				break;
 			case 236306:

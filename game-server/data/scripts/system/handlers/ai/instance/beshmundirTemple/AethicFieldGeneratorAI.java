@@ -45,7 +45,7 @@ public class AethicFieldGeneratorAI extends GeneralNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		if (isAggred.compareAndSet(false, true)) {
-			getPosition().getWorldMapInstance().getDoors().get(471).setOpen(false);
+			getPosition().getWorldMapInstance().setDoorState(471, false);
 			aggroTask();
 		}
 		super.handleAttack(creature);
@@ -122,7 +122,7 @@ public class AethicFieldGeneratorAI extends GeneralNpcAI {
 		cancelAggroTask();
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
 		if (instance != null) {
-			instance.getDoors().get(471).setOpen(true);
+			instance.setDoorState(471, true);
 			deleteNpcs(instance.getNpcs(216532));
 		}
 		isAggred.set(false);
@@ -134,7 +134,7 @@ public class AethicFieldGeneratorAI extends GeneralNpcAI {
 	protected void handleDied() {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
 		if (instance != null) {
-			instance.getDoors().get(471).setOpen(true);
+			instance.setDoorState(471, true);
 			deleteNpcs(instance.getNpcs(216532));
 		}
 		cancelAggroTask();

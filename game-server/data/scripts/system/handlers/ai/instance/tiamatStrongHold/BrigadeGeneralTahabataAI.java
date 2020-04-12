@@ -46,9 +46,8 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (isHome.compareAndSet(true, false) && getPosition().getWorldMapInstance().getDoors().get(610) != null) {
-			getPosition().getWorldMapInstance().getDoors().get(610).setOpen(false);
-		}
+		if (isHome.compareAndSet(true, false))
+			getPosition().getWorldMapInstance().setDoorState(610, false);
 		checkPercentage(getLifeStats().getHpPercentage());
 	}
 
@@ -253,7 +252,7 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		addPercent();
 		isHome.set(true);
-		getPosition().getWorldMapInstance().getDoors().get(610).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(610, true);
 		super.handleBackHome();
 		getEffectController().removeEffect(20942);
 		deleteAdds();
@@ -273,7 +272,7 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDied() {
 		percents.clear();
-		getPosition().getWorldMapInstance().getDoors().get(610).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(610, true);
 		super.handleDied();
 		deleteAdds();
 		cancelPiercingStrike();

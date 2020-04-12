@@ -105,8 +105,7 @@ public class AhserionRaid {
 						break;
 					case 20:
 						checkForIllegalMovement();
-						for (StaticDoor door : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().getDoors().values())
-							door.setOpen(true);
+						World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().forEachDoor(door -> door.setOpen(true));
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_08());
 						break;
 					case 40:
@@ -264,7 +263,7 @@ public class AhserionRaid {
 	}
 
 	private void sendMsg(SM_SYSTEM_MESSAGE msg) {
-		World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().forEachPlayer(player -> PacketSendUtility.sendPacket(player, msg));
+		PacketSendUtility.broadcastToMap(World.getInstance().getWorldMap(400030000).getMainWorldMapInstance(), msg);
 	}
 
 	private void deleteNpcs(PanesterraFaction eliminatedFaction, int flagToDelete) {

@@ -49,8 +49,8 @@ public class AlarmAI extends AggressiveNpcAI {
 					WalkManager.startWalking(this);
 					getOwner().setState(CreatureState.ACTIVE, true);
 					PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
-					getPosition().getWorldMapInstance().getDoors().get(128).setOpen(true);
-					getPosition().getWorldMapInstance().getDoors().get(138).setOpen(true);
+					getPosition().getWorldMapInstance().setDoorState(128, true);
+					getPosition().getWorldMapInstance().setDoorState(138, true);
 					ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 						@Override

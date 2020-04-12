@@ -2,16 +2,13 @@ package instance;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_BigOrb_Spawn;
 
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
@@ -32,8 +29,6 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 
 	private AtomicInteger macunbello = new AtomicInteger();
 	private AtomicInteger kills = new AtomicInteger();
-	Npc npcMacunbello = null;
-	private Map<Integer, StaticDoor> doors;
 	private Race instanceRace;
 
 	@Override
@@ -67,31 +62,31 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 			case 216590: // Temadaro (Normal)
 				int killedCount = macunbello.getAndSet(0);
 				if (killedCount < 12) {
-					npcMacunbello = (Npc) spawn(216735, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // strongest macunbello
+					Npc npcMacunbello = (Npc) spawn(216735, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // strongest macunbello
 					SkillEngine.getInstance().applyEffectDirectly(19046, npcMacunbello, npcMacunbello);
 				} else if (killedCount < 14) {
-					npcMacunbello = (Npc) spawn(216734, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // 2nd strongest macunbello
+					Npc npcMacunbello = (Npc) spawn(216734, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // 2nd strongest macunbello
 					SkillEngine.getInstance().applyEffectDirectly(19047, npcMacunbello, npcMacunbello);
 				} else if (killedCount < 21) {
-					npcMacunbello = (Npc) spawn(216737, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // 2nd weakest macunbello
+					Npc npcMacunbello = (Npc) spawn(216737, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // 2nd weakest macunbello
 					SkillEngine.getInstance().applyEffectDirectly(19048, npcMacunbello, npcMacunbello);
 				} else {
 					spawn(216245, 981.015015f, 134.373001f, 241.755005f, (byte) 30); // weakest macunbello
 				}
 				sendPacket(new SM_QUEST_ACTION(0, 0));
-				openDoor(467);
+				instance.setDoorState(467, true);
 				break;
 			case 799342:
 				sendPacket(new SM_PLAY_MOVIE(0, 447));
 				break;
 			case 216157:
 			case 216238:
-				openDoor(470);
+				instance.setDoorState(470, true);
 				spawn(216159, 1357.0598f, 388.6637f, 249.26372f, (byte) 90);
 				break;
 			case 216165:
 			case 216246:
-				openDoor(473);
+				instance.setDoorState(473, true);
 				break;
 			case 216739:
 			case 216740:
@@ -105,7 +100,7 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 				break;
 			case 216158:
 			case 216239:
-				openDoor(471);
+				instance.setDoorState(471, true);
 				break;
 			case 700608:
 				if (instanceRace == Race.ASMODIANS) {
@@ -150,15 +145,8 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	private void sendPacket(final AionServerPacket packet) {
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendPacket(player, packet);
-			}
-
-		});
+	private void sendPacket(AionServerPacket packet) {
+		PacketSendUtility.broadcastToMap(instance, packet);
 	}
 
 	@Override
@@ -173,19 +161,7 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		doors = instance.getDoors();
-		doors.get(535).setOpen(true);
-	}
-
-	private void openDoor(int doorId) {
-		StaticDoor door = doors.get(doorId);
-		if (door != null)
-			door.setOpen(true);
-	}
-
-	@Override
-	public void onInstanceDestroy() {
-		doors.clear();
+		instance.setDoorState(535, true);
 	}
 
 	@Override

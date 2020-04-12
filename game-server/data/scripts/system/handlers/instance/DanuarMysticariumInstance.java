@@ -2,7 +2,6 @@ package instance;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -10,14 +9,12 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * After activating the start device one of three game events will be chosen.
@@ -42,45 +39,35 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300480000)
 public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 
-	private Map<Integer, StaticDoor> doors;
 	private List<Future<?>> tasks;
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		doors = instance.getDoors();
-	}
-
-	@Override
 	public void onOpenDoor(int door) {
-		if (doors.containsKey(door)) {
-			doors.remove(door);
-			switch (door) {
-				case 101:
-					spawn(219963, 212.068f, 510.02f, 153.23f, (byte) 115);
-					break;
-				case 7:
-					spawn(219963, 241.602f, 541.79f, 152.591f, (byte) 95);
-					break;
-				case 11:
-					spawn(219963, 317.654f, 545.801f, 148.8f, (byte) 80);
-					break;
-				case 6:
-					spawn(219964, 225.53f, 529.7f, 153.04f, (byte) 100);
-					break;
-				case 10:
-					spawn(219964, 295.04f, 547.48f, 148.73f, (byte) 90);
-					break;
-				case 8:
-					spawn(219965, 262.17f, 545.68f, 150.51f, (byte) 85);
-					break;
-				case 12:
-					spawn(219965, 336.94f, 532.89f, 148.472f, (byte) 75);
-					break;
-				case 13:
-					spawn(219969, 348.14f, 512.56f, 148.19f, (byte) 65);
-					break;
-			}
+		switch (door) {
+			case 101:
+				spawn(219963, 212.068f, 510.02f, 153.23f, (byte) 115);
+				break;
+			case 7:
+				spawn(219963, 241.602f, 541.79f, 152.591f, (byte) 95);
+				break;
+			case 11:
+				spawn(219963, 317.654f, 545.801f, 148.8f, (byte) 80);
+				break;
+			case 6:
+				spawn(219964, 225.53f, 529.7f, 153.04f, (byte) 100);
+				break;
+			case 10:
+				spawn(219964, 295.04f, 547.48f, 148.73f, (byte) 90);
+				break;
+			case 8:
+				spawn(219965, 262.17f, 545.68f, 150.51f, (byte) 85);
+				break;
+			case 12:
+				spawn(219965, 336.94f, 532.89f, 148.472f, (byte) 75);
+				break;
+			case 13:
+				spawn(219969, 348.14f, 512.56f, 148.19f, (byte) 65);
+				break;
 		}
 	}
 
@@ -89,7 +76,7 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 		switch (npc.getNpcId()) {
 			case 731583:
 				startTasks();
-				doors.get(3).setOpen(true);
+				instance.setDoorState(3, true);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_1());
 				TeleportService.teleportTo(player, mapId, instanceId, 140.45f, 182.2f, 242f, (byte) 10, TeleportAnimation.FADE_OUT_BEAM);
 				npc.getController().delete();
@@ -128,7 +115,6 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceDestroy() {
 		cancelTasks();
-		doors.clear();
 	}
 
 	@Override

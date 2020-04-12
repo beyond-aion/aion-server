@@ -3,7 +3,6 @@ package instance;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
@@ -13,7 +12,6 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.EngulfedOphidianBridgeReward;
@@ -39,8 +37,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(301210000)
 public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 
-	protected EngulfedOphidianBridgeReward engulfedOBReward;
-	private Map<Integer, StaticDoor> doors;
+	private EngulfedOphidianBridgeReward engulfedOBReward;
 	private long instanceTime;
 	private Future<?> instanceTask;
 	private Future<?> timeCheckTask;
@@ -79,14 +76,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 			}
 
 		}, 120000);
-		instanceTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				stopInstance();
-			}
-
-		}, 1320000);
+		instanceTask = ThreadPoolManager.getInstance().schedule(this::stopInstance, 1320000);
 	}
 
 	private void startTimeCheck() {
@@ -388,14 +378,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		if (player == null) {
 			return;
 		}
-		int points = 0;
-
 		captureBases(player, npc);
-
-		if (points > 0) {
-			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getL10n(), player);
-			npc.getController().delete();
-		}
 	}
 
 	private void captureBasesBalaurs(Npc npc) {
@@ -466,27 +449,13 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	public void openFirstDoors() {
-		openDoor(177);
-		openDoor(176);
+	private void openFirstDoors() {
+		instance.setDoorState(177, true);
+		instance.setDoorState(176, true);
 	}
 
-	protected void openDoor(int doorId) {
-		StaticDoor door = doors.get(doorId);
-		if (door != null) {
-			door.setOpen(true);
-		}
-	}
-
-	public void sendPacket(final AionServerPacket packet) {
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendPacket(player, packet);
-			}
-
-		});
+	private void sendPacket(AionServerPacket packet) {
+		PacketSendUtility.broadcastToMap(instance, packet);
 	}
 
 	@Override
@@ -494,7 +463,6 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		engulfedOBReward = new EngulfedOphidianBridgeReward(mapId, instanceId);
 		engulfedOBReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
-		doors = instance.getDoors();
 		racePosition = engulfedOBReward.getRacePosition();
 		spawn((racePosition == 0 ? 802025 : 802026), 753.31775f, 570.89905f, 577.3619f, (byte) 36);
 		spawn((racePosition == 0 ? 701949 : 701948), 753.31775f, 570.89905f, 577.3619f, (byte) 87);

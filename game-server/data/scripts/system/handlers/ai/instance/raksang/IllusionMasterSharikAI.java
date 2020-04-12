@@ -165,8 +165,8 @@ public class IllusionMasterSharikAI extends AggressiveNpcAI {
 	protected void handleDied() {
 		despawnMirrors();
 		cancelPhaseTask();
-		getPosition().getWorldMapInstance().getDoors().get(294).setOpen(true);
-		getPosition().getWorldMapInstance().getDoors().get(295).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(294, true);
+		getPosition().getWorldMapInstance().setDoorState(295, true);
 		super.handleDied();
 	}
 
