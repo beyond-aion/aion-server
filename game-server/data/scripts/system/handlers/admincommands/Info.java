@@ -95,7 +95,7 @@ public class Info extends AdminCommand {
 				sendInfo(admin,
 					"[AI info]\n\tAI: " + npc.getAi().getName() + "\n\tState: " + npc.getAi().getState() + ", SubState: " + npc.getAi().getSubState());
 				sendInfo(admin,
-					"[Sense range]\n\tRadius: " + npc.getAggroRange() + "\n\tSide: " + npc.getObjectTemplate().getBoundRadius().getSide() + ", Front: "
+					"[Sense range]\n\tRadius: " + npc.getAggroRange() + "\n\tShort-Radius: " + npc.getShortAggroRange() + "\n\tAngle: " + npc.getAggroAngle() + "\n\tSide: " + npc.getObjectTemplate().getBoundRadius().getSide() + ", Front: "
 						+ npc.getObjectTemplate().getBoundRadius().getFront() + ", Upper: " + npc.getObjectTemplate().getBoundRadius().getUpper()
 						+ "\n\tDirectional bound: " + PositionUtil.getDirectionalBound(npc, admin, true) + "\n\tDistance: "
 						+ (npc.getAggroRange() + PositionUtil.getDirectionalBound(npc, admin, true)));
