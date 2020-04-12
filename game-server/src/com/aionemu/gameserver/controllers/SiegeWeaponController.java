@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.summons.UnsummonType;
+import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -59,25 +60,35 @@ public class SiegeWeaponController extends SummonController {
 		if (target == null || !GeoService.getInstance().canSee(getOwner(), target)) {
 			return;
 		}
+		if (isValidTarget(target)) {
+			super.attackMode(targetObjId);
+			getOwner().setTarget(target);
+			getOwner().getAi().onCreatureEvent(AIEventType.FOLLOW_ME, target);
+			getOwner().getMoveController().moveToTargetObject();
+			getMaster().getController().addTask(TaskId.SUMMON_FOLLOW, FollowStartService.newFollowingToTargetCheckTask(getOwner(), target));
+		}
+	}
+
+	public boolean isValidTarget(Creature target) {
 		Player master = getOwner().getMaster();
 		if (master == null) {
-			return;
+			return false;
 		}
 		Race masterRace = master.getRace();
-		if (target.getRace() == Race.DRAKAN && target instanceof SiegeNpc && !((SiegeNpc) target).isBoss()) {
-			return;
-		} else if (masterRace == Race.ASMODIANS && target.getRace() != Race.PC_LIGHT_CASTLE_DOOR && target.getRace() != Race.DRAGON_CASTLE_DOOR
-				&& target.getRace() != Race.GCHIEF_LIGHT && target.getRace() != Race.GCHIEF_DRAGON) {
-			return;
-		} else if (masterRace == Race.ELYOS && target.getRace() != Race.PC_DARK_CASTLE_DOOR && target.getRace() != Race.DRAGON_CASTLE_DOOR
-				&& target.getRace() != Race.GCHIEF_DARK && target.getRace() != Race.GCHIEF_DRAGON) {
-			return;
+		if (!isBalaurBoss(target)) {
+			if (masterRace == Race.ASMODIANS && target.getRace() != Race.PC_LIGHT_CASTLE_DOOR && target.getRace() != Race.DRAGON_CASTLE_DOOR
+					&& target.getRace() != Race.GCHIEF_LIGHT && target.getRace() != Race.GCHIEF_DRAGON) {
+				return false;
+			} else if (masterRace == Race.ELYOS && target.getRace() != Race.PC_DARK_CASTLE_DOOR && target.getRace() != Race.DRAGON_CASTLE_DOOR
+					&& target.getRace() != Race.GCHIEF_DARK && target.getRace() != Race.GCHIEF_DRAGON) {
+				return false;
+			}
 		}
-		super.attackMode(targetObjId);
-		getOwner().setTarget(target);
-		getOwner().getAi().onCreatureEvent(AIEventType.FOLLOW_ME, target);
-		getOwner().getMoveController().moveToTargetObject();
-		getMaster().getController().addTask(TaskId.SUMMON_FOLLOW, FollowStartService.newFollowingToTargetCheckTask(getOwner(), target));
+		return true;
+	}
+
+	private boolean isBalaurBoss(Creature creature) {
+		return creature.getRace() == Race.DRAKAN && creature instanceof SiegeNpc && ((SiegeNpc) creature).getObjectTemplate().getRating() == NpcRating.LEGENDARY;
 	}
 
 	@Override

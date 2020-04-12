@@ -8,11 +8,8 @@ import com.aionemu.gameserver.ai.handler.FollowEventHandler;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.SiegeWeaponController;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
@@ -80,28 +77,11 @@ public class SiegeWeaponAI extends AITemplate<Summon> {
 		if (creature == null) {
 			return;
 		}
-		Race race = creature.getRace();
-		Player master = getOwner().getMaster();
-		if (master == null) {
-			return;
-		}
-		Race masterRace = master.getRace();
-		if (race == Race.DRAKAN && creature instanceof SiegeNpc && !((SiegeNpc) creature).isBoss()) {
-			return;
-		} else if (masterRace == Race.ASMODIANS && race != Race.PC_LIGHT_CASTLE_DOOR && race != Race.DRAGON_CASTLE_DOOR
-				&& race != Race.GCHIEF_LIGHT && race != Race.GCHIEF_DRAGON) {
-			return;
-		} else if (masterRace == Race.ELYOS && race != Race.PC_DARK_CASTLE_DOOR && race != Race.DRAGON_CASTLE_DOOR
-				&& race != Race.GCHIEF_DARK && race != Race.GCHIEF_DRAGON) {
-			return;
-		}
-		if (getOwner().getMode() != SummonMode.ATTACK) {
-			return;
-		}
-
-		if (System.currentTimeMillis() - lastAttackTime > duration + 2000) {
-			lastAttackTime = System.currentTimeMillis();
-			getOwner().getController().useSkill(skill, skillLvl);
+		if (getOwner().getController() instanceof SiegeWeaponController && ((SiegeWeaponController) getOwner().getController()).isValidTarget(creature)) {
+			if (System.currentTimeMillis() - lastAttackTime > duration + 2000) {
+				lastAttackTime = System.currentTimeMillis();
+				getOwner().getController().useSkill(skill, skillLvl);
+			}
 		}
 	}
 
