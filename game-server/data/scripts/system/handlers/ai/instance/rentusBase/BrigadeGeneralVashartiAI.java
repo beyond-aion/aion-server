@@ -49,7 +49,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (isHome.compareAndSet(true, false)) {
-			getPosition().getWorldMapInstance().getDoors().get(70).setOpen(false);
+			getPosition().getWorldMapInstance().setDoorState(70, false);
 			enrageSchedule = ThreadPoolManager.getInstance().schedule(this::handleEnrageEvent, 10, TimeUnit.MINUTES);
 			scheduleFlameShieldBuffEvent(5000);
 		}
@@ -225,7 +225,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		addPercent();
 		isHome.set(true);
-		getPosition().getWorldMapInstance().getDoors().get(70).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(70, true);
 		cancelTasks(enrageSchedule, flameShieldBuffSchedule, seaOfFireSpawnTask);
 		clearSpawns();
 		super.handleBackHome();
@@ -233,7 +233,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDied() {
-		getPosition().getWorldMapInstance().getDoors().get(70).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(70, true);
 		cancelTasks(enrageSchedule, flameShieldBuffSchedule, seaOfFireSpawnTask);
 		PacketSendUtility.broadcastMessage(getOwner(), 1500410);
 		clearSpawns();

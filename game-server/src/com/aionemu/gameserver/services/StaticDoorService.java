@@ -5,8 +5,8 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -26,45 +26,47 @@ public class StaticDoorService {
 		protected static final StaticDoorService instance = new StaticDoorService();
 	}
 
-	public void openStaticDoor(final Player player, int doorId) {
-		StaticDoor door = player.getPosition().getWorldMapInstance().getDoors().get(doorId);
-		if (door == null) {
-			log.warn("Door (ID: " + doorId + ") is missing near " + player.getPosition());
+	public void openStaticDoor(Player player, int doorId) {
+		StaticDoor door = getDoor(player, doorId);
+		if (door == null)
 			return;
-		}
 		int keyId = door.getObjectTemplate().getKeyId();
 
 		if (player.hasAccess(AdminConfig.INSTANCE_DOOR_INFO))
 			PacketSendUtility.sendMessage(player, "Door ID: " + doorId + ", key ID: " + keyId);
 
-		if (checkStaticDoorKey(player, door, keyId)) {
-			player.getPosition().getWorldMapInstance().getInstanceHandler().onOpenDoor(doorId);
-			door.setOpen(true);
+		boolean opened = false;
+		synchronized (door) {
+			if (!door.isOpen() && checkStaticDoorKey(player, door, keyId)) {
+				door.setOpen(true);
+				opened = true;
+			}
 		}
+		if (opened)
+			player.getPosition().getWorldMapInstance().getInstanceHandler().onOpenDoor(doorId);
 	}
 
 	public void changeStaticDoorState(final Player player, int doorId, boolean open, int state) {
-		StaticDoor door = player.getPosition().getWorldMapInstance().getDoors().get(doorId);
-		if (door == null) {
-			PacketSendUtility.sendMessage(player, "Door is not spawned!");
+		StaticDoor door = getDoor(player, doorId);
+		if (door == null)
 			return;
-		}
 		door.changeState(open, state);
-		String currentStates = "";
-		for (StaticDoorState st : StaticDoorState.values()) {
-			if (st == StaticDoorState.NONE)
-				continue;
-			if (door.getStates().contains(st))
-				currentStates += st.toString() + ", ";
-		}
-		if ("".equals(currentStates))
-			currentStates = "NONE";
-		else
-			currentStates = currentStates.substring(0, currentStates.length() - 2);
-		PacketSendUtility.sendMessage(player, "Door states now are: " + currentStates);
+		PacketSendUtility.sendMessage(player, "Door states now are: " + door.getStates());
 	}
 
-	public boolean checkStaticDoorKey(Player player, StaticDoor door, int keyId) {
+	private StaticDoor getDoor(Player player, int doorId) {
+		VisibleObject object = player.getPosition().getWorldMapInstance().getObjectByStaticId(doorId);
+		if (!(object instanceof StaticDoor)) {
+			if (object == null)
+				log.warn("Door (ID: " + doorId + ") is missing near " + player.getPosition());
+			else
+				log.warn("Door (ID: " + doorId + ") is not a static door but " + object);
+			return null;
+		}
+		return (StaticDoor) object;
+	}
+
+	private boolean checkStaticDoorKey(Player player, StaticDoor door, int keyId) {
 		if (player.hasAccess(AdminConfig.INSTANCE_OPEN_DOORS))
 			return true;
 

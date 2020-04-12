@@ -210,7 +210,7 @@ public class CaptainXastaAI extends AggressiveNpcAI {
 						@Override
 						public void run() {
 							SkillEngine.getInstance().getSkill(ariana, 19358, 60, ariana).useNoAnimationSkill();
-							instance.getDoors().get(145).setOpen(true);
+							instance.setDoorState(145, true);
 							deleteNpcs(instance.getNpcs(701156));
 							ThreadPoolManager.getInstance().schedule(new Runnable() {
 

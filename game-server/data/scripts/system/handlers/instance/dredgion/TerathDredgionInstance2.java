@@ -149,8 +149,8 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 
 	@Override
 	protected void openFirstDoors() {
-		openDoor(173);
-		openDoor(4);
+		instance.setDoorState(4, true);
+		instance.setDoorState(173, true);
 	}
 
 }

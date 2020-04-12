@@ -157,7 +157,7 @@ public class TheFlamelordAI extends AggressiveNpcAI {
 	protected void handleDied() {
 		percents.clear();
 		cancelPhaseTask();
-		getPosition().getWorldMapInstance().getDoors().get(118).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(118, true);
 		PacketSendUtility.broadcastMessage(getOwner(), 1401121);
 		super.handleDied();
 	}

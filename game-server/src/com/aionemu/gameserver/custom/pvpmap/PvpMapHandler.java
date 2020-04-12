@@ -25,16 +25,11 @@ import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_TELEPORT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.instance.InstanceService;
@@ -83,9 +78,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
 		StaticDoorSpawnManager.spawnTemplate(mapId, instanceId);
-		for (StaticDoor door : instance.getDoors().values()) {
-			door.setOpen(true);
-		}
+		instance.forEachDoor(door -> door.setOpen(true));
 		addRespawnLocations();
 		startSupplyTask();
 		spawnKeymasters();

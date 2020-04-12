@@ -20,15 +20,10 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.utils3d.Point3D;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -166,7 +161,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 					if (npc.getNpcId() == bossNpcId) {
 						cancelBossDespawn(bossIndex);
 						spawnBossChest(bossIndex);
-						openDoor(treasureDoorIds[bossIndex]);
+						instance.setDoorState(treasureDoorIds[bossIndex], true);
 						// remove quest timers for affected players
 						for (int playerObjId : playerStageMapping.keySet()) {
 							if (playerStageMapping.get(playerObjId) == bossIndex) {
@@ -207,7 +202,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 							if (percentageToDrop > 0) {
 								int dmgToApply = (int) (bossNpc.getLifeStats().getMaxHp() * (percentageToDrop * 0.8 / 100));
 								ThreadPoolManager.getInstance().schedule(() -> {
-									if (bossNpc == null || bossNpc.isDead() || bossNpc.getLifeStats().isAboutToDie())
+									if (bossNpc.isDead() || bossNpc.getLifeStats().isAboutToDie())
 										return;
 									bossNpc.getController().onAttack(bossNpc, dmgToApply, null);
 								}, 1000);
@@ -325,12 +320,6 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 	private void spawnBossTimerTrigger(int number, Point3D p1, Point3D center, Point3D p2) {
 		FlyRing timerBarrier = new FlyRing(new FlyRingTemplate("HEXWAY_BOSS_" + number, mapId, center, p1, p2, 10), instanceId);
 		timerBarrier.spawn();
-	}
-
-	private void openDoor(int doorId) {
-		StaticDoor door = instance.getDoors().get(doorId);
-		if (door != null)
-			door.setOpen(true);
 	}
 
 	private void broadcastYellowMessage(String message) {

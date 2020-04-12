@@ -2,9 +2,6 @@ package instance;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
@@ -14,7 +11,6 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
@@ -33,7 +29,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author Tibald
@@ -41,28 +36,10 @@ import com.aionemu.gameserver.world.WorldPosition;
 @InstanceID(301220000)
 public class IronWallFrontInstance extends GeneralInstanceHandler {
 
-	protected IronWallFrontReward ironWallFrontReward;
-	private Map<Integer, StaticDoor> doors;
+	private IronWallFrontReward ironWallFrontReward;
 	private long instanceTime;
 	private Future<?> instanceTask;
 	private boolean isInstanceDestroyed = false;
-	private static List<WorldPosition> generalsPos = new ArrayList<>();
-	private static List<WorldPosition> garnonPos = new ArrayList<>();
-
-	static {
-		generalsPos.add(new WorldPosition(301120000, 1437.7f, 1368.7f, 600.8967f, (byte) 40));
-		generalsPos.add(new WorldPosition(301120000, 1172.2f, 1445, 586.55f, (byte) 35));
-		generalsPos.add(new WorldPosition(301120000, 1428.67f, 1617.67f, 599.9493f, (byte) 70));
-		garnonPos.add(new WorldPosition(301120000, 1138.4039f, 1619.2574f, 598.43506f, (byte) 53));
-		garnonPos.add(new WorldPosition(301120000, 1184.5309f, 1408.2471f, 586.6199f, (byte) 6));
-		garnonPos.add(new WorldPosition(301120000, 1241.9187f, 1557.2854f, 585.2431f, (byte) 46));
-		garnonPos.add(new WorldPosition(301120000, 1270.4377f, 1455.0625f, 595.2903f, (byte) 13));
-		garnonPos.add(new WorldPosition(301120000, 1325.634f, 1326.134f, 596.4888f, (byte) 106));
-		garnonPos.add(new WorldPosition(301120000, 1346.7902f, 1717.1029f, 598.43396f, (byte) 30));
-		garnonPos.add(new WorldPosition(301120000, 1410.7446f, 1579.752f, 595.7288f, (byte) 93));
-		garnonPos.add(new WorldPosition(301120000, 1455.881f, 1392.8229f, 598.5873f, (byte) 10));
-		garnonPos.add(new WorldPosition(301120000, 1540.113f, 1395.6737f, 596.625f, (byte) 105));
-	}
 
 	private void addPlayerToReward(Player player) {
 		ironWallFrontReward.addPlayerReward(new IronWallFrontPlayerReward(player.getObjectId(), player.getRace()));
@@ -95,14 +72,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			}
 
 		}, 120000);
-		instanceTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				stopInstance();
-			}
-
-		}, 1320000);
+		instanceTask = ThreadPoolManager.getInstance().schedule(this::stopInstance, 1320000);
 	}
 
 	public void stopInstance() {
@@ -246,26 +216,12 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	}
 
 	public void openFirstDoors() {
-		openDoor(177);
-		openDoor(176);
+		instance.setDoorState(177, true);
+		instance.setDoorState(176, true);
 	}
 
-	protected void openDoor(int doorId) {
-		StaticDoor door = doors.get(doorId);
-		if (door != null) {
-			door.setOpen(true);
-		}
-	}
-
-	public void sendPacket(final AionServerPacket packet) {
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendPacket(player, packet);
-			}
-
-		});
+	private void sendPacket(AionServerPacket packet) {
+		PacketSendUtility.broadcastToMap(instance, packet);
 	}
 
 	@Override
@@ -273,7 +229,6 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		ironWallFrontReward = new IronWallFrontReward(mapId, instanceId);
 		ironWallFrontReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
-		doors = instance.getDoors();
 		startInstanceTask();
 	}
 

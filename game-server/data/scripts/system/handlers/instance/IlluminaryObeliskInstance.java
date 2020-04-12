@@ -44,7 +44,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 	private void scheduleInstanceStart() {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_DOOR_OPEN());
-			instance.getDoors().get(129).setOpen(true);
+			instance.setDoorState(129, true);
 			scheduleWipe(3000);
 		}, 60000);
 	}

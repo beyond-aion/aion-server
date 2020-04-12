@@ -88,11 +88,9 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	}
 
 	private void sendPacket(Npc npc, int points) {
-		instance.forEachPlayer(p -> {
-			if (npc != null)
-				PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npc.getObjectTemplate().getL10n(), points));
-			PacketSendUtility.sendPacket(p, new SM_INSTANCE_SCORE(new DarkPoetaScoreInfo(instanceReward), instanceReward, getTime()));
-		});
+		if (npc != null)
+			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npc.getObjectTemplate().getL10n(), points));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(new DarkPoetaScoreInfo(instanceReward), instanceReward, getTime()));
 	}
 
 	private int checkRank(int totalPoints) {
@@ -254,7 +252,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 		startTime = System.currentTimeMillis();
 		sendPacket(null, 0);
 		if (!manually)
-			instance.getDoors().values().stream().forEach(d -> d.setOpen(true));
+			instance.forEachDoor(d -> d.setOpen(true));
 	}
 
 	@Override

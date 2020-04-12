@@ -4,7 +4,6 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
@@ -19,7 +18,6 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
@@ -48,7 +46,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class DredgionInstance2 extends GeneralInstanceHandler {
 
 	protected int surkanKills;
-	private Map<Integer, StaticDoor> doors;
 	protected DredgionReward dredgionReward;
 	private float loosingGroupMultiplier = 1;
 	private boolean isInstanceDestroyed = false;
@@ -110,7 +107,6 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		dredgionReward = new DredgionReward(mapId, instanceId);
 		dredgionReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
-		doors = instance.getDoors();
 	}
 
 	protected void stopInstance(Race race) {
@@ -247,7 +243,7 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 		// pvpKills for pvp and balaurKills for pve
 		if (pvpKill && points > 0) {
 			addPvPKillToPlayer(player);
-		} else if (target instanceof Npc && ((Npc) target).getRace().equals(Race.DRAKAN)) {
+		} else if (target instanceof Npc && target.getRace().equals(Race.DRAKAN)) {
 			addBalaurKillToPlayer(player);
 		}
 		sendPacket();
@@ -271,24 +267,13 @@ public class DredgionInstance2 extends GeneralInstanceHandler {
 		stopInstanceTask();
 		isInstanceDestroyed = true;
 		dredgionReward.clear();
-		doors.clear();
 	}
 
 	protected void openFirstDoors() {
 	}
 
-	protected void openDoor(int doorId) {
-		StaticDoor door = doors.get(doorId);
-		if (door != null) {
-			door.setOpen(true);
-		}
-	}
-
 	private void sendPacket() {
-		instance.forEachPlayer((Player player) -> {
-			PacketSendUtility.sendPacket(player,
-				new SM_INSTANCE_SCORE(new DredgionScoreInfo(dredgionReward, instance.getPlayersInside()), dredgionReward, getTime()));
-		});
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(new DredgionScoreInfo(dredgionReward, instance.getPlayersInside()), dredgionReward, getTime()));
 	}
 
 	private int getTime() {

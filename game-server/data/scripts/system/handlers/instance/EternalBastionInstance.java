@@ -2,7 +2,6 @@ package instance;
 
 import java.util.Arrays;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.function.Consumer;
@@ -16,7 +15,6 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
@@ -44,7 +42,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class EternalBastionInstance extends GeneralInstanceHandler {
 
 	private static final int START_DELAY = 180 * 1000;
-	private Map<Integer, StaticDoor> doors;
 	private Future<?> instanceTimer;
 	private Future<?> assaultsPodsTask;
 	private int assaultsPodsPosition;
@@ -203,16 +200,13 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	}
 
 	protected void sendPacket(String npcL10n, int points) {
-		instance.forEachPlayer((Player player) -> {
-			if (points != 0) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-			}
-			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new NormalScoreInfo(instanceReward), instanceReward, getTime()));
-		});
+		if (npcL10n != null)
+			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(new NormalScoreInfo(instanceReward), instanceReward, getTime()));
 	}
 
 	private int checkRank(int totalPoints) {
-		int rank = 0;
+		int rank;
 		if (totalPoints >= 92000) {
 			instanceReward.setFinalAp(35000);
 			instanceReward.setRewardItem1(186000242);
@@ -416,7 +410,6 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		instanceReward.setBasicAp(20000);
 		instanceReward.setPoints(20000);
-		doors = instance.getDoors();
 
 		if (instanceTimer == null) {
 			startTime = System.currentTimeMillis();
@@ -429,7 +422,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 					rndSpawn((Npc) spawn(231170, 800.51465f, 469.41602f, 228.58566f, (byte) 90), 233313, 2);
 					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 					sendPacket(null, 0);
-					openDoors();
+					instance.forEachDoor(door -> door.setOpen(true));
 					startAssaultsPodsTask();
 					startAssaultsMobsTask();
 					startBombersTask();
@@ -661,14 +654,6 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 			npc.getPosition().getZ(), npc.getPosition().getHeading());
 	}
 
-	private void openDoors() {
-		for (StaticDoor door : doors.values()) {
-			if (door != null) {
-				door.setOpen(true);
-			}
-		}
-	}
-
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
 		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
@@ -715,7 +700,6 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 		cancelAssaultsMobsTask();
 		cancelAssaultsPodsTask();
 		isInstanceDestroyed = true;
-		doors.clear();
 	}
 
 	@Override

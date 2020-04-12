@@ -12,7 +12,6 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
@@ -36,7 +35,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(301400000)
 public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 
-	private Map<Integer, StaticDoor> doors;
 	private Map<Integer, Integer> transformationCache = new HashMap<>(); // saves the applied transformation to avoid effect loss during sendlogs
 	private List<Integer> spawns = new ArrayList<>();
 	private AtomicBoolean started = new AtomicBoolean();
@@ -52,7 +50,6 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 
 		instanceReward = new NormalReward(mapId, instanceId);
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
-		doors = instance.getDoors();
 		spawnMorphShugos();
 		if (timer == null) {
 			startTime = System.currentTimeMillis();
@@ -61,7 +58,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 					startTime = System.currentTimeMillis();
 					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 					sendPacket(null, 0);
-					doors.get(430).setOpen(true);
+					instance.setDoorState(430, true);
 					startInstance();
 					startFailTask();
 				}
@@ -245,7 +242,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 				break;
 			case 235660: // Ruthless Jabaraki
 				addPoints(npc, 1740);
-				doors.get(431).setOpen(true);
+				instance.setDoorState(431, true);
 				spawnRoom2();
 				break;
 			case 235631: // Brainwashed Peon
@@ -259,7 +256,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 				addPoints(npc, 660);
 				amount++;
 				if (amount >= 2) {
-					doors.get(428).setOpen(true);
+					instance.setDoorState(428, true);
 					spawnRoom3();
 				}
 				break;
@@ -413,7 +410,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	}
 
 	private synchronized void checkRank(int totalPoints) {
-		int rank = 8;
+		int rank;
 		if (totalPoints >= 471200) {
 			int additionalKeys = Rnd.chance() < 10 ? Rnd.get(2, 4) : 0;
 			instanceReward.setRewardItem1(185000222);
@@ -548,11 +545,9 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	}
 
 	private void sendPacket(String npcL10n, int points) {
-		instance.getPlayersInside().stream().filter(p -> p != null && p.isOnline()).forEach(p -> {
-			if (npcL10n != null)
-				PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-			PacketSendUtility.sendPacket(p, new SM_INSTANCE_SCORE(new TheShugoEmperorsVaultScoreInfo(instanceReward), instanceReward, getTime()));
-		});
+		if (npcL10n != null)
+			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(new TheShugoEmperorsVaultScoreInfo(instanceReward), instanceReward, getTime()));
 	}
 
 	private int getTime() {

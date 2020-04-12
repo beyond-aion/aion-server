@@ -274,7 +274,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startStage1_1() { // minute 0 - 1
-		spawnGuardianStone((instanceRace == Race.ELYOS ? true : false), 1);
+		spawnGuardianStone(instanceRace == Race.ELYOS, 1);
 		int npcId = 855765 + Rnd.get(0, 8);
 		spawnAtPointsTask(50, npcId, -1);
 		spawnAtPointsTask(8000, 856305, 0);
@@ -336,7 +336,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	private void startStage2_1() { // minute 5 - 6
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-			spawnGuardianStone((instanceRace == Race.ELYOS ? true : false), 2);
+			spawnGuardianStone(instanceRace == Race.ELYOS, 2);
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
 			// 2k + 800 = 2,8k
@@ -411,7 +411,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	private void startStage3_1() { // minute 10 - 11
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-			spawnGuardianStone((instanceRace == Race.ELYOS ? true : false), 3);
+			spawnGuardianStone(instanceRace == Race.ELYOS, 3);
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
 			int npcId3 = 855811 + Rnd.get(0, 8);
@@ -500,7 +500,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	private void startStage4_1() { // minute 16 - 17
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-			spawnGuardianStone((instanceRace == Race.ELYOS ? true : false), 4);
+			spawnGuardianStone(instanceRace == Race.ELYOS, 4);
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
 			int npcId3 = 855811 + Rnd.get(0, 8);
@@ -661,11 +661,9 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void sendPacket(String npcL10n, int points) {
-		instance.getPlayersInside().stream().filter(p -> p != null && p.isOnline()).forEach(p -> {
-			if (npcL10n != null)
-				PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-			PacketSendUtility.sendPacket(p, new SM_INSTANCE_SCORE(new LegionDominionScoreInfo(reward), reward, getTime()));
-		});
+		if (npcL10n != null)
+			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(new LegionDominionScoreInfo(reward), reward, getTime()));
 	}
 
 	private int getTime() {
@@ -697,9 +695,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			WorldPosition point = points.get(index);
 			if (point != null) {
 				SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, npcId, point.getX(), point.getY(), point.getZ(), point.getHeading());
-				if (template != null) {
-					SpawnEngine.spawnObject(template, instanceId);
-				}
+				SpawnEngine.spawnObject(template, instanceId);
 			}
 		} else {
 			for (WorldPosition point : points) {
@@ -707,9 +703,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 					break;
 				}
 				SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, npcId, point.getX(), point.getY(), point.getZ(), point.getHeading());
-				if (template != null) {
-					SpawnEngine.spawnObject(template, instanceId);
-				}
+				SpawnEngine.spawnObject(template, instanceId);
 			}
 		}
 	}

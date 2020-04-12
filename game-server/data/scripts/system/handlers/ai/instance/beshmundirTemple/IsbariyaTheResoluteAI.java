@@ -43,7 +43,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 		super.handleAttack(creature);
 		if (isStart.compareAndSet(false, true)) {
 			PacketSendUtility.broadcastMessage(getOwner(), 342051, 1000);
-			getPosition().getWorldMapInstance().getDoors().get(535).setOpen(false);
+			getPosition().getWorldMapInstance().setDoorState(535, false);
 			startBasicSkillTask();
 		}
 		checkPercentage(getLifeStats().getHpPercentage());
@@ -65,7 +65,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 		cancelTasks(spawnTask, basicSkillTask);
 		super.handleDied();
 		PacketSendUtility.broadcastMessage(getOwner(), 342055);
-		getPosition().getWorldMapInstance().getDoors().get(535).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(535, true);
 	}
 
 	@Override
@@ -80,7 +80,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 		cancelTasks(spawnTask, basicSkillTask);
 		super.handleBackHome();
 		isStart.set(false);
-		getPosition().getWorldMapInstance().getDoors().get(535).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(535, true);
 		stage = 0;
 	}
 

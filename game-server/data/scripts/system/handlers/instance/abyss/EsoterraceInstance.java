@@ -2,14 +2,11 @@ package instance.abyss;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
-import java.util.Map;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -26,13 +23,10 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 @InstanceID(300250000)
 public class EsoterraceInstance extends GeneralInstanceHandler {
 
-	private Map<Integer, StaticDoor> doors;
-
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		doors = instance.getDoors();
-		doors.get(367).setOpen(true);
+		instance.setDoorState(367, true);
 		if (Rnd.chance() < 21) {
 			spawn(799580, 1034.11f, 985.01f, 327.35095f, (byte) 105);
 			spawn(217649, 1033.67f, 978.08f, 327.35095f, (byte) 35);
@@ -43,7 +37,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 	public void onDie(Npc npc) {
 		switch (npc.getObjectTemplate().getTemplateId()) {
 			case 282295:
-				openDoor(39);
+				instance.setDoorState(39, true);
 				break;
 			case 282291: // Surkana Feeder enables "hardmode"
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_08());
@@ -52,23 +46,23 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 				break;
 			case 217289:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_07());
-				openDoor(122);
+				instance.setDoorState(122, true);
 				break;
 			case 217281:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_04());
-				openDoor(70);
+				instance.setDoorState(70, true);
 				break;
 			case 217195:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_05());
-				openDoor(45);
-				openDoor(52);
-				openDoor(67);
+				instance.setDoorState(45, true);
+				instance.setDoorState(52, true);
+				instance.setDoorState(67, true);
 				spawn(701027, 751.513489f, 1136.021851f, 365.031158f, (byte) 60, 41);
 				spawn(701027, 829.620789f, 1134.330078f, 365.031281f, (byte) 60, 77);
 				break;
 			case 217185:
 				spawn(701023, 1264.862061f, 644.995178f, 296.831818f, (byte) 60, 112);
-				doors.get(367).setOpen(false);
+				instance.setDoorState(367, false);
 				break;
 			case 217204:
 				spawn(205437, 1309.390259f, 1163.644287f, 51.493992f, (byte) 13);
@@ -94,7 +88,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 				Npc npc3 = getNpc(217282);
 				if (isDead(npc1) && isDead(npc2) && isDead(npc3)) {
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_03());
-					openDoor(111);
+					instance.setDoorState(111, true);
 				}
 				break;
 		}
@@ -124,17 +118,6 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("DRANA_PRODUCTION_LAB_300250000")) {
 			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400919));
 		}
-	}
-
-	private void openDoor(int doorId) {
-		StaticDoor door = doors.get(doorId);
-		if (door != null)
-			door.setOpen(true);
-	}
-
-	@Override
-	public void onInstanceDestroy() {
-		doors.clear();
 	}
 
 }

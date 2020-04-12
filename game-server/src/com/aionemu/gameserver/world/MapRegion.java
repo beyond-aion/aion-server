@@ -1,12 +1,7 @@
 package com.aionemu.gameserver.world;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeSet;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -21,7 +16,6 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.configs.administration.DeveloperConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -106,17 +100,6 @@ public class MapRegion {
 	 */
 	public Map<Integer, VisibleObject> getObjects() {
 		return objects;
-	}
-
-	public Map<Integer, StaticDoor> getDoors() {
-		Map<Integer, StaticDoor> doors = new HashMap<>();
-		for (VisibleObject obj : objects.values()) {
-			if (obj instanceof StaticDoor) {
-				StaticDoor door = (StaticDoor) obj;
-				doors.put(door.getSpawn().getStaticId(), door);
-			}
-		}
-		return doors;
 	}
 
 	/**

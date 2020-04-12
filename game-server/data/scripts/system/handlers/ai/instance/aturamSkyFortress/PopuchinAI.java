@@ -81,7 +81,7 @@ public class PopuchinAI extends AggressiveNpcAI {
 		super.handleAttack(creature);
 		if (isHome) {
 			isHome = false;
-			getPosition().getWorldMapInstance().getDoors().get(68).setOpen(false);
+			getPosition().getWorldMapInstance().setDoorState(68, false);
 			startBombTask();
 		}
 	}
@@ -97,7 +97,7 @@ public class PopuchinAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		isHome = true;
 		super.handleBackHome();
-		getPosition().getWorldMapInstance().getDoors().get(68).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(68, true);
 		if (bombTask != null && !bombTask.isDone()) {
 			bombTask.cancel(true);
 		}
@@ -132,7 +132,7 @@ public class PopuchinAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		getPosition().getWorldMapInstance().getDoors().get(68).setOpen(true);
+		getPosition().getWorldMapInstance().setDoorState(68, true);
 	}
 
 }

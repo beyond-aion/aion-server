@@ -4,7 +4,6 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
 
@@ -14,7 +13,6 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
@@ -42,8 +40,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 @InstanceID(301120000)
 public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 
-	protected KamarReward kamarReward;
-	private Map<Integer, StaticDoor> doors;
+	private KamarReward kamarReward;
 	private long instanceTime;
 	private Future<?> instanceTask;
 	private Future<?> timeCheckTask;
@@ -181,20 +178,16 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDKamar_DrakanH_Spawn());
 						break;
 					case 18:
-						List<WorldPosition> temp = new ArrayList<>();
-						temp.addAll(generalsPos);
+						List<WorldPosition> temp = new ArrayList<>(generalsPos);
 						int index = Rnd.get(temp.size());
-						WorldPosition pos = temp.get(index);
+						WorldPosition pos = temp.remove(index);
 						spawn(232854, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
-						temp.remove(index);
 						index = Rnd.get(temp.size());
-						pos = temp.get(index);
+						pos = temp.remove(index);
 						spawn(232853, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
-						temp.remove(index);
 						index = Rnd.get(temp.size());
-						pos = temp.get(index);
+						pos = temp.remove(index);
 						spawn(232852, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
-						temp.remove(index);
 						spawn(232846, 1442.18f, 1370.7f, 600.6902f, (byte) 40);
 						spawn(232846, 1434.45f, 1365.7f, 600.70776f, (byte) 40);
 						spawn(232846, 1178.58f, 1445.6f, 586.5563f, (byte) 35);
@@ -392,29 +385,15 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	public void openFirstDoors() {
-		openDoor(4);
-		openDoor(8);
-		openDoor(10);
-		openDoor(11);
+	private void openFirstDoors() {
+		instance.setDoorState(4, true);
+		instance.setDoorState(8, true);
+		instance.setDoorState(10, true);
+		instance.setDoorState(11, true);
 	}
 
-	protected void openDoor(int doorId) {
-		StaticDoor door = doors.get(doorId);
-		if (door != null) {
-			door.setOpen(true);
-		}
-	}
-
-	public void sendPacket(final AionServerPacket packet) {
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendPacket(player, packet);
-			}
-
-		});
+	private void sendPacket(AionServerPacket packet) {
+		PacketSendUtility.broadcastToMap(instance, packet);
 	}
 
 	@Override
@@ -422,7 +401,6 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		kamarReward = new KamarReward(mapId, instanceId);
 		kamarReward.setInstanceProgressionType(InstanceProgressionType.REINFORCE_MEMBER);
-		doors = instance.getDoors();
 		startInstanceTask();
 	}
 

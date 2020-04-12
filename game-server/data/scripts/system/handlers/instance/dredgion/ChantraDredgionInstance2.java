@@ -160,7 +160,7 @@ public class ChantraDredgionInstance2 extends DredgionInstance2 {
 
 	@Override
 	protected void openFirstDoors() {
-		openDoor(4);
-		openDoor(173);
+		instance.setDoorState(4, true);
+		instance.setDoorState(173, true);
 	}
 }

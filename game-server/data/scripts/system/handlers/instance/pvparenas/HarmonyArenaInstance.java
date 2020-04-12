@@ -9,7 +9,6 @@ import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
@@ -186,11 +185,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 			public void run() {
 				// start round 1
 				if (!isInstanceDestroyed && !instanceReward.isRewarded() && canStart()) {
-					for (StaticDoor door : instance.getDoors().values()) {
-						if (door != null) {
-							door.setOpen(true);
-						}
-					}
+					instance.forEachDoor(door -> door.setOpen(true));
 					sendMsg(new SM_SYSTEM_MESSAGE(1401058));
 					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 					instanceReward.sendPacket(10, null);

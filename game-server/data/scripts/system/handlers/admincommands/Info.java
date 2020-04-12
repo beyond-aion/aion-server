@@ -98,8 +98,7 @@ public class Info extends AdminCommand {
 					"[Sense range]\n\tRadius: " + npc.getAggroRange() + "\n\tSide: " + npc.getObjectTemplate().getBoundRadius().getSide() + ", Front: "
 						+ npc.getObjectTemplate().getBoundRadius().getFront() + ", Upper: " + npc.getObjectTemplate().getBoundRadius().getUpper()
 						+ "\n\tDirectional bound: " + PositionUtil.getDirectionalBound(npc, admin, true) + "\n\tDistance: "
-						+ (npc.getAggroRange() + PositionUtil.getDirectionalBound(npc, admin, true)) + "\n\tCollision: "
-						+ (npc.getAggroRange() - npc.getObjectTemplate().getBoundRadius().getCollision()));
+						+ (npc.getAggroRange() + PositionUtil.getDirectionalBound(npc, admin, true)));
 				sendInfo(admin, "[Spawn info]\n\tStaticId: " + npc.getSpawn().getStaticId() + ", DistToSpawn: " + npc.getDistanceToSpawnLocation() + "m");
 				if (npc.isPathWalker()) {
 					sendInfo(admin, "\tRouteId: " + npc.getSpawn().getWalkerId());
@@ -120,6 +119,8 @@ public class Info extends AdminCommand {
 			sendInfo(admin, "[Life stats]\n\tHP: " + creature.getLifeStats().getCurrentHp() + " / " + creature.getLifeStats().getMaxHp() + "\n\tMP: "
 				+ creature.getLifeStats().getCurrentMp() + " / " + creature.getLifeStats().getMaxMp());
 			sendInfo(admin, createAggroInfo(creature));
+		} else if (target.getSpawn() != null && target.getSpawn().getStaticId() != 0) {
+			sendInfo(admin, "\tStaticId: " + target.getSpawn().getStaticId());
 		}
 	}
 

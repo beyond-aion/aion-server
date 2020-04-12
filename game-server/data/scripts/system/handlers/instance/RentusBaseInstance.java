@@ -1,6 +1,5 @@
 package instance;
 
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.NpcAI;
@@ -11,7 +10,6 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
@@ -20,7 +18,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * According to the version 4.8 the instance was simplified and shortened. The starting point of this
@@ -35,7 +32,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300280000)
 public class RentusBaseInstance extends GeneralInstanceHandler {
 
-	private Map<Integer, StaticDoor> doors;
 	private AtomicBoolean isRaceKnown = new AtomicBoolean();
 	private AtomicBoolean isXastaEventStarted = new AtomicBoolean();
 
@@ -44,28 +40,28 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 		switch (npc.getNpcId()) {
 			case 217315: // Umatha the Crazed
 				if (isDeadNpc(217316)) {
-					doors.get(145).setOpen(true);
+					instance.setDoorState(145, true);
 					despawnNpc(instance.getNpc(701156));
 				}
 				break;
 			case 217316: // Ambusher Kiriana
 				if (isDeadNpc(217315)) {
-					doors.get(145).setOpen(true);
+					instance.setDoorState(145, true);
 					despawnNpc(instance.getNpc(701156));
 				}
 				break;
 			case 217311: // Kuhara
 				spawn(219215, 141.54f, 255.06f, 213f, (byte) 25);
-				doors.get(43).setOpen(false);
-				doors.get(150).setOpen(true);
+				instance.setDoorState(43, false);
+				instance.setDoorState(150, true);
 				despawnNpc(npc);
 				break;
 			case 217317: // Archmagus Upadi
-				doors.get(70).setOpen(true);
+				instance.setDoorState(70, true);
 				break;
 			case 217313: // Brigade General Vasharti
 				deleteNpc(799669);
-				doors.get(70).setOpen(true);
+				instance.setDoorState(70, true);
 				spawn(730520, 193.6f, 436.5f, 262f, (byte) 86); // rentus base exit
 				spawn(833047, 195.48f, 413.87f, 260.97f, (byte) 27); // rentus supplies storage box
 				Npc ariana = (Npc) spawn(799670, 183.736f, 391.392f, 260.571f, (byte) 26);
@@ -101,23 +97,17 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 	public void onAggro(Npc npc) {
 		switch (npc.getNpcId()) {
 			case 217311: // Kuhara
-				doors.get(43).setOpen(true);
+				instance.setDoorState(43, true);
 				PacketSendUtility.broadcastMessage(npc, 1500393);
 				break;
 			case 217313: // Vasharti
-				doors.get(70).setOpen(false);
+				instance.setDoorState(70, false);
 				break;
 		}
 	}
 
 	private void spawnEndEvent(int npcId, String walkern, int time) {
 		sp(npcId, 193.39548f, 435.56158f, 260.57135f, (byte) 86, time, walkern);
-	}
-
-	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		doors = instance.getDoors();
 	}
 
 	@Override

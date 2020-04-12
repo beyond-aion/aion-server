@@ -2,7 +2,6 @@ package instance;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
@@ -10,7 +9,6 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -26,7 +24,6 @@ import com.aionemu.gameserver.world.WorldPosition;
 @InstanceID(301130000)
 public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 
-	private Map<Integer, StaticDoor> doors;
 	private static List<WorldPosition> chestPoints = new ArrayList<>();
 	private Future<?> scheduledGeneratorTask;
 	static {
@@ -56,14 +53,8 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onInstanceDestroy() {
-		doors.clear();
-	}
-
-	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		doors = instance.getDoors();
 		// spawn Sauro Base Grave Robber (pool=1)
 		switch (Rnd.get(1, 5)) {
 			case 1:
@@ -83,16 +74,14 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 				break;
 		}
 
-		List<WorldPosition> temp = new ArrayList<>();
-		temp.addAll(chestPoints);
+		List<WorldPosition> temp = new ArrayList<>(chestPoints);
 		for (int i = 0; i < 8; i++) {
 			int index = Rnd.get(temp.size());
-			WorldPosition pos = temp.get(index);
+			WorldPosition pos = temp.remove(index);
 			spawn(230847, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
-			temp.remove(index);
 		}
-		for (int i = 0; i < temp.size(); i++) {
-			spawn(230848, temp.get(i).getX(), temp.get(i).getY(), temp.get(i).getZ(), temp.get(i).getHeading());
+		for (WorldPosition worldPosition : temp) {
+			spawn(230848, worldPosition.getX(), worldPosition.getY(), worldPosition.getZ(), worldPosition.getHeading());
 		}
 	}
 
@@ -101,31 +90,31 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 		switch (npc.getNpcId()) {
 			case 230837:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_03());
-				doors.get(372).setOpen(true);
+				instance.setDoorState(372, true);
 				break;
 			case 230849:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_01());
-				doors.get(383).setOpen(true);
+				instance.setDoorState(383, true);
 				break;
 			case 230850:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_04());
-				doors.get(375).setOpen(true);
+				instance.setDoorState(375, true);
 				break;
 			case 230851:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_02());
-				doors.get(59).setOpen(true);
+				instance.setDoorState(59, true);
 				break;
 			case 230852: // Ranodim
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_06());
-				doors.get(388).setOpen(true);
+				instance.setDoorState(388, true);
 				break;
 			case 233255:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_05());
-				doors.get(378).setOpen(true);
+				instance.setDoorState(378, true);
 				break;
 			case 230838:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_07());
-				doors.get(376).setOpen(true);
+				instance.setDoorState(376, true);
 				break;
 			case 230853:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_08());

@@ -2,7 +2,6 @@ package instance;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_IDStation_Doping_01_AD;
 
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -13,7 +12,6 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
@@ -35,7 +33,6 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 @InstanceID(300240000)
 public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 
-	private Map<Integer, StaticDoor> doors;
 	private boolean isInstanceDestroyed;
 	private AtomicBoolean msgIsSent = new AtomicBoolean();
 	private AtomicInteger officerKilled = new AtomicInteger();
@@ -57,7 +54,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				break;
 			case 700983:
 				spawn(282278, 449.5576f, 420.7812f, 652.9143f, (byte) 89);
-				doors.get(68).setOpen(true);
+				instance.setDoorState(68, true);
 				break;
 			case 702650:
 				spawn(282277, 572.8088f, 459.4094f, 647.93896f, (byte) 15);
@@ -79,11 +76,11 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 			case 217370:
 				int killed1 = officerKilled.incrementAndGet();
 				if (killed1 == 4) {
-					doors.get(174).setOpen(true);
+					instance.setDoorState(174, true);
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_3FDoor_311());
 					startOfficerWalkerEvent();
 				} else if (killed1 == 8) {
-					doors.get(175).setOpen(true);
+					instance.setDoorState(175, true);
 					startMarbataWalkerEvent();
 				}
 				despawnNpc(npc);
@@ -93,12 +90,12 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				if (killed2 == 1) {
 					startOfficerWalkerEvent();
 				} else if (killed2 == 2) {
-					doors.get(178).setOpen(true);
+					instance.setDoorState(178, true);
 				}
 				despawnNpc(npc);
 				break;
 			case 217382:
-				doors.get(230).setOpen(true);
+				instance.setDoorState(230, true);
 				Player player = npc.getAggroList().getMostPlayerDamage();
 				if (player != null) {
 					AbyssPointsService.addAp(player, 540);
@@ -173,8 +170,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		doors = instance.getDoors();
-		doors.get(177).setOpen(true);
+		instance.setDoorState(177, true);
 		Npc npc = instance.getNpc(217371);
 		if (npc != null) {
 			SkillEngine.getInstance().getSkill(npc, 19406, 1, npc).useNoAnimationSkill();
@@ -192,7 +188,6 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceDestroy() {
 		isInstanceDestroyed = true;
-		doors.clear();
 	}
 
 	@Override
@@ -215,7 +210,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_Doping_01());
 				break;
 			case 730410:
-				doors.get(90).setOpen(true);
+				instance.setDoorState(90, true);
 				break;
 			case 731533:
 				SkillEngine.getInstance().getSkill(player, 21807, 1, player).useNoAnimationSkill();

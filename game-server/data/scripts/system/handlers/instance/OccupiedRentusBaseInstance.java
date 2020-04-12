@@ -1,6 +1,5 @@
 package instance;
 
-import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.NpcAI;
@@ -11,7 +10,6 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
@@ -20,7 +18,6 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Tibald
@@ -29,7 +26,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300620000)
 public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 
-	private Map<Integer, StaticDoor> doors;
 	private AtomicBoolean isRaceKnown = new AtomicBoolean();
 	private AtomicBoolean isXastaEventStarted = new AtomicBoolean();
 
@@ -38,28 +34,28 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 		switch (npc.getNpcId()) {
 			case 236299:
 				if (isDeadNpc(236301)) {
-					doors.get(145).setOpen(true);
+					instance.setDoorState(145, true);
 					despawnNpc(instance.getNpc(701156));
 				}
 				break;
 			case 236301:
 				if (isDeadNpc(236299)) {
-					doors.get(145).setOpen(true);
+					instance.setDoorState(145, true);
 					despawnNpc(instance.getNpc(701156));
 				}
 				break;
 			case 236298: // Kuhara
 				spawn(236705, 141.54f, 255.06f, 213f, (byte) 25);
-				doors.get(43).setOpen(false);
-				doors.get(150).setOpen(true);
+				instance.setDoorState(43, false);
+				instance.setDoorState(150, true);
 				npc.getController().delete();
 				break;
 			case 236302: // Archmagus Upadi
-				doors.get(70).setOpen(true);
+				instance.setDoorState(70, true);
 				break;
 			case 236300: // Brigade General Vasharti
 				deleteNpc(799669);
-				doors.get(70).setOpen(true);
+				instance.setDoorState(70, true);
 				spawn(730401, 193.6f, 436.5f, 262f, (byte) 86); // occupied rentus base exit
 				spawn(833048, 195.48f, 413.87f, 260.97f, (byte) 27); // Rentus Quality Supply Storage Box
 				Npc ariana = (Npc) spawn(799670, 183.736f, 391.392f, 260.571f, (byte) 26);
@@ -95,23 +91,17 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 	public void onAggro(Npc npc) {
 		switch (npc.getNpcId()) {
 		case 236298: // Kuhara
-			doors.get(43).setOpen(true);
+			instance.setDoorState(43, true);
 			PacketSendUtility.broadcastMessage(npc, 1500393);
 			break;
 		case 236300: // Vasharti
-			doors.get(70).setOpen(false);
+			instance.setDoorState(70, false);
 			break;
 		}
 	}
 
 	private void spawnEndEvent(int npcId, String walkern, int time) {
 		sp(npcId, 193.39548f, 435.56158f, 260.57135f, (byte) 86, time, walkern);
-	}
-
-	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		doors = instance.getDoors();
 	}
 
 	@Override

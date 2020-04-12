@@ -27,14 +27,14 @@ public class ExplosionShadowsAI extends AggressiveNpcAI {
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
-		getPosition().getWorldMapInstance().getDoors().get(2).setOpen(false); // this actually opens it on client side (wtf)
+		getPosition().getWorldMapInstance().setDoorState(2, false); // this actually opens it on client side (wtf)
 	}
 
 	@Override
 	protected void handleDespawned() {
 		super.handleDespawned();
-		getPosition().getWorldMapInstance().getDoors().get(17).setOpen(false); // this actually opens it on client side (wtf)
-		getPosition().getWorldMapInstance().getDoors().get(2).setOpen(false); // this actually opens it on client side (wtf)
+		getPosition().getWorldMapInstance().setDoorState(17, false); // this actually opens it on client side (wtf)
+		getPosition().getWorldMapInstance().setDoorState(2, false); // this actually opens it on client side (wtf)
 	}
 
 	@Override
