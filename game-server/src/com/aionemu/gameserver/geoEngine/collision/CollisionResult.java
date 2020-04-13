@@ -32,10 +32,10 @@
 
 package com.aionemu.gameserver.geoEngine.collision;
 
+import java.util.Objects;
+
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.Geometry;
-
-import java.util.Objects;
 
 /**
  * @author Kirill
@@ -85,5 +85,10 @@ public class CollisionResult implements Comparable<CollisionResult> {
 			return false;
 		}
 		return Objects.equals(geometry.getName(), ((CollisionResult) obj).getGeometry().getName());
+	}
+
+	@Override
+	public int hashCode() {
+		return Objects.hash(contactPoint, distance, geometry);
 	}
 }
