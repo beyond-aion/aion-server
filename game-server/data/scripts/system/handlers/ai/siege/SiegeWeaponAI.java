@@ -77,6 +77,9 @@ public class SiegeWeaponAI extends AITemplate<Summon> {
 		if (creature == null) {
 			return;
 		}
+		if (getOwner().getMode() != SummonMode.ATTACK) {
+			return;
+		}
 		if (getOwner().getController() instanceof SiegeWeaponController && ((SiegeWeaponController) getOwner().getController()).isValidTarget(creature)) {
 			if (System.currentTimeMillis() - lastAttackTime > duration + 2000) {
 				lastAttackTime = System.currentTimeMillis();
