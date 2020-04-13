@@ -29,7 +29,6 @@ import com.aionemu.loginserver.network.gameserver.serverpackets.SM_ACCOUNT_AUTH_
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_GS_CHARACTER_RESPONSE;
 import com.aionemu.loginserver.utils.AccountUtils;
 import com.aionemu.loginserver.utils.ExternalAuthUtil;
-import com.mysql.jdbc.StringUtils;
 
 /**
  * This class is responsible for controlling all account actions
@@ -184,15 +183,10 @@ public class AccountController {
 			}
 		}
 
-		// if no or empty account name
-		if (StringUtils.isNullOrEmpty(accountName)) {
-			return AionAuthResponse.STR_L2AUTH_S_ACCOUNT_LOAD_FAIL;
-		}
-
 		Account account = loadAccount(accountName);
 
 		// Try to create new account
-		if (account == null && Config.ACCOUNT_AUTO_CREATION) {
+		if (account == null && Config.ACCOUNT_AUTO_CREATION && accountName != null && !accountName.isEmpty()) {
 			account = createAccount(accountName, password);
 		}
 
