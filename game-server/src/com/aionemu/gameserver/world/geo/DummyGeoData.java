@@ -7,7 +7,7 @@ import com.aionemu.gameserver.geoEngine.models.GeoMap;
  */
 public class DummyGeoData implements GeoData {
 
-	public static final DummyGeoMap DUMMY_MAP = new DummyGeoMap("", 0);
+	public static final DummyGeoMap DUMMY_MAP = new DummyGeoMap(0, 0);
 
 	@Override
 	public void loadGeoMaps() {

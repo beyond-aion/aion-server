@@ -104,7 +104,7 @@ public class GeoWorldLoader {
 		File geoFile = new File(GEO_DIR + template.getMapId() + ".geo");
 		if (!geoFile.exists())
 			return DummyGeoData.DUMMY_MAP;
-		GeoMap map = new GeoMap(Integer.toString(template.getMapId()), template.getWorldSize());
+		GeoMap map = new GeoMap(template.getMapId(), template.getWorldSize());
 		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r"); FileChannel roChannel = file.getChannel()) {
 			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size()).load();
 			if (geo.get() == 0)

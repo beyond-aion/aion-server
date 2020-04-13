@@ -43,10 +43,10 @@ public class GeoMap extends Node {
 	private Map<Integer, List<DespawnableNode>> despawnableTownObjects = new HashMap<>();
 	private Map<Integer, DespawnableNode> despawnableHouseDoors = new HashMap<>();
 	private Map<Integer, DespawnableNode[]> despawnableDoors = new HashMap<>();
-	private String mapId;
+	private int mapId;
 
-	public GeoMap(String name, int worldSize) {
-		mapId = name;
+	public GeoMap(int mapId, int worldSize) {
+		this.mapId = mapId;
 		setCollisionIntentions(CollisionIntention.ALL.getId());
 		for (int x = 0; x < worldSize; x += 256) {
 			for (int y = 0; y < worldSize; y += 256) {
@@ -460,6 +460,9 @@ public class GeoMap extends Node {
 				log.warn("door state 2 not available for door: " + doorId + " in " + mapId + " instance: " + instanceId);
 			}
 		} else {
+			// TODO mesh is excluded on purpose in geobuilder due to incorrect collision data: objects/npc/level_object/idyun_bridge/idyun_bridge_01a.cga
+			if (doorId == 145 && mapId == 300620000)
+				return;
 			log.warn("No geometry found for door: " + doorId + " in world: " + mapId);
 		}
 	}
