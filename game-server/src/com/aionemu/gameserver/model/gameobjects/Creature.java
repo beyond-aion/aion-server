@@ -62,8 +62,8 @@ public abstract class Creature extends VisibleObject {
 	private TribeClass tribe = TribeClass.GENERAL;
 
 	public Creature(int objId, CreatureController<? extends Creature> controller, SpawnTemplate spawnTemplate, CreatureTemplate objectTemplate,
-		WorldPosition position) {
-		super(objId, controller, spawnTemplate, objectTemplate, position);
+		WorldPosition position, boolean autoReleaseObjectId) {
+		super(objId, controller, spawnTemplate, objectTemplate, position, autoReleaseObjectId);
 		String aiName = objectTemplate.getAiName();
 		if (spawnTemplate != null && spawnTemplate.getAiName() != null)
 			aiName = SpawnTemplate.NO_AI.equals(spawnTemplate.getAiName()) ? null : spawnTemplate.getAiName();

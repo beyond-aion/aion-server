@@ -22,8 +22,8 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 	 */
 	private final T creator;
 
-	public SummonedObject(int objId, NpcController controller, SpawnTemplate spawnTemplate, byte level, T creator) {
-		super(objId, controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()));
+	public SummonedObject(NpcController controller, SpawnTemplate spawnTemplate, byte level, T creator) {
+		super(controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()));
 		this.level = level;
 		this.creator = creator;
 	}

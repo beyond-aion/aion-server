@@ -6,11 +6,7 @@ import com.aionemu.gameserver.model.Expirable;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.house.HouseRegistry;
-import com.aionemu.gameserver.model.templates.housing.HousingCategory;
-import com.aionemu.gameserver.model.templates.housing.LimitType;
-import com.aionemu.gameserver.model.templates.housing.PlaceArea;
-import com.aionemu.gameserver.model.templates.housing.PlaceLocation;
-import com.aionemu.gameserver.model.templates.housing.PlaceableHouseObject;
+import com.aionemu.gameserver.model.templates.housing.*;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_EDIT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -40,7 +36,11 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	private PersistentState persistentState = PersistentState.NEW;
 
 	public HouseObject(HouseRegistry registry, int objId, int templateId) {
-		super(objId, new PlaceableObjectController<T>(), null, DataManager.HOUSING_OBJECT_DATA.getTemplateById(templateId), null);
+		this(registry, objId, templateId, false);
+	}
+
+	public HouseObject(HouseRegistry registry, int objId, int templateId, boolean autoReleaseObjectId) {
+		super(objId, new PlaceableObjectController<T>(), null, DataManager.HOUSING_OBJECT_DATA.getTemplateById(templateId), null, autoReleaseObjectId);
 		this.registry = registry;
 		getController().setOwner(this);
 		setKnownlist(new PlayerAwareKnownList(this));

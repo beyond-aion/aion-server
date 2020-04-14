@@ -14,8 +14,8 @@ import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
  */
 public class SummonedHouseNpc extends SummonedObject<House> {
 
-	public SummonedHouseNpc(int objId, NpcController controller, SpawnTemplate spawnTemplate, House house) {
-		super(objId, controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()).getLevel(), house);
+	public SummonedHouseNpc(NpcController controller, SpawnTemplate spawnTemplate, House house) {
+		super(controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()).getLevel(), house);
 		String masterName = house.getOwnerName();
 		setMasterName(masterName == null ? "" : masterName);
 		setKnownlist(new PlayerAwareKnownList(this));

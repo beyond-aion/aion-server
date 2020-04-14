@@ -63,7 +63,7 @@ public class DatabaseFactory {
 		}
 
 		try {
-			DatabaseConfig.DATABASE_DRIVER.newInstance();
+			DatabaseConfig.DATABASE_DRIVER.getDeclaredConstructor().newInstance();
 		} catch (Exception e) {
 			throw new Error("Error initializing DB driver", e);
 		}

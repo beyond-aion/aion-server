@@ -29,8 +29,8 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	protected final Lock teamLock = new ReentrantLock();
 	private TM leader;
 
-	public GeneralTeam(int objId) {
-		super(objId);
+	public GeneralTeam(int objId, boolean autoReleaseObjectId) {
+		super(objId, autoReleaseObjectId);
 	}
 
 	public final void onEvent(TeamEvent event) {

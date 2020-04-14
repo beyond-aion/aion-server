@@ -24,7 +24,7 @@ public class EnumTransformer extends PropertyTransformer<Enum<?>> {
 	public static final EnumTransformer SHARED_INSTANCE = new EnumTransformer();
 
 	@Override
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	protected Enum<?> parseObject(String value, TransformationTypeInfo typeInfo) {
 		return value.isEmpty() ? null : Enum.valueOf((Class<? extends Enum>) typeInfo.getType(), value);
 	}

@@ -36,8 +36,8 @@ public class Summon extends Creature {
 	private SkillElement alwaysResistElement = SkillElement.NONE;
 	private int summonedBySkillId, liveTime;
 
-	public Summon(int objId, SummonController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, Player master, int time) {
-		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
+	public Summon(int objId, SummonController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, Player master, int time, boolean autoReleaseObjectId) {
+		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()), autoReleaseObjectId);
 		controller.setOwner(this);
 		moveController = controller instanceof SiegeWeaponController ? new SiegeWeaponMoveController(this) : new SummonMoveController(this);
 		this.liveTime = time;
@@ -246,10 +246,5 @@ public class Summon extends Creature {
 
 	public SkillElement getAlwaysResistElement() {
 		return alwaysResistElement;
-	}
-
-	@Override
-	protected boolean autoReleaseObjectId() {
-		return getLifeStats() instanceof SummonLifeStats; // NpcLifeStats if object id was inherited from npc with TallocsSummonAI
 	}
 }

@@ -127,7 +127,7 @@ public class PvpMapService {
 		} else {
 			PvpMapHandler mapHandler = null;
 			try {
-				mapHandler = PvpMapHandler.class.newInstance();
+				mapHandler = PvpMapHandler.class.getDeclaredConstructor().newInstance();
 			} catch (Exception e) {
 				log.warn("[PvpMapService] Could not create a new instance of PvpMapHandler:", e);
 			}

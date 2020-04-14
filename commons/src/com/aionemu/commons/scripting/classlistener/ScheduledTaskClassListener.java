@@ -66,10 +66,10 @@ public class ScheduledTaskClassListener implements ClassListener {
 		try {
 			if (metadata.instancePerCronExpression()) {
 				for (String s : metadata.value()) {
-					getCronService().schedule(clazz.newInstance(), s, metadata.longRunningTask());
+					getCronService().schedule(clazz.getDeclaredConstructor().newInstance(), s, metadata.longRunningTask());
 				}
 			} else {
-				Runnable r = clazz.newInstance();
+				Runnable r = clazz.getDeclaredConstructor().newInstance();
 				for (String s : metadata.value()) {
 					getCronService().schedule(r, s, metadata.longRunningTask());
 				}

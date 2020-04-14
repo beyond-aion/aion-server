@@ -62,7 +62,7 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public House(int objectId, Building building, HouseAddress address, int instanceId) {
-		super(objectId, new HouseController(), null, null, null);
+		super(objectId, new HouseController(), null, null, null, false);
 		getController().setOwner(this);
 		this.address = address;
 		this.building = building;

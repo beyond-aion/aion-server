@@ -1,14 +1,9 @@
 package mysql5;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.StringEscapeUtils;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DB;
@@ -41,7 +36,7 @@ public class MySQL5Announcements extends AnnouncementsDAO {
 
 	private Announcement getAnnouncement(ResultSet resultSet) throws SQLException {
 		int id = resultSet.getInt("id");
-		String message = StringEscapeUtils.unescapeJava(resultSet.getString("announce"));
+		String message = resultSet.getString("announce").replace("\\n", "\n").replace("\\t", "\t");
 		String faction = resultSet.getString("faction");
 		String chatType = resultSet.getString("type");
 		int delay = resultSet.getInt("delay");

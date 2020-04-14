@@ -3,10 +3,13 @@ package com.aionemu.chatserver;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
-import java.io.FilenameFilter;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
 import java.text.SimpleDateFormat;
-import java.util.Date;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
@@ -48,37 +51,58 @@ public class ChatServer {
 	private ChatServer() {
 	}
 
-	private static void initalizeLoggger() {
-		new File("./log/backup/").mkdirs();
-		File[] files = new File("log").listFiles(new FilenameFilter() {
+	private static void initializeLogger() {
+		try {
+			Path logFolder = Paths.get("./log");
+			Path oldLogsFolder = Paths.get(logFolder + "/archived");
+			List<File> files = new ArrayList<>();
+			File serverStartTimeFile = new File("./log/[server_start_marker]");
+			long serverStartTime;
+			long[] serverEndTime = { 0 }; // for mutability within a stream (file walker), we need to use an array here
 
-			@Override
-			public boolean accept(File dir, String name) {
-				return name.endsWith(".log");
-			}
-		});
+			Files.createDirectories(serverStartTimeFile.toPath().getParent());
+			serverStartTimeFile.createNewFile(); // creates the file only if it does not exists
+			serverStartTime = serverStartTimeFile.lastModified();
+			serverStartTimeFile.setLastModified(ManagementFactory.getRuntimeMXBean().getStartTime()); // update with new server start time
 
-		if (files != null && files.length > 0) {
-			byte[] buf = new byte[1024];
-			String outFilename = "./log/backup/" + new SimpleDateFormat("yyyy-MM-dd HHmmss").format(new Date()) + ".zip";
-			try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(outFilename))) {
-				out.setMethod(ZipOutputStream.DEFLATED);
-				out.setLevel(Deflater.BEST_COMPRESSION);
+			Files.createDirectories(logFolder);
+			Files.walkFileTree(logFolder, new SimpleFileVisitor<>() {
 
-				for (File logFile : files) {
-					try (FileInputStream in = new FileInputStream(logFile)) {
-						out.putNextEntry(new ZipEntry(logFile.getName()));
-						int len;
-						while ((len = in.read(buf)) > 0) {
-							out.write(buf, 0, len);
-						}
-						out.closeEntry();
+				@Override
+				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+					if (!attrs.isDirectory() && file.toString().toLowerCase().endsWith(".log")) {
+						files.add(file.toFile());
+						if (serverEndTime[0] < attrs.lastModifiedTime().toMillis())
+							serverEndTime[0] = attrs.lastModifiedTime().toMillis();
 					}
-					logFile.delete();
+					return FileVisitResult.CONTINUE;
 				}
-			} catch (IOException e) {
+			});
+
+			if (!files.isEmpty()) {
+				Files.createDirectories(oldLogsFolder);
+				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH.mm");
+				String outFilename = (serverStartTime < serverEndTime[0] ? sdf.format(serverStartTime) : "Unknown") + " to " + sdf.format(serverEndTime[0]) + ".zip";
+				try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(oldLogsFolder + "/" + outFilename))) {
+					out.setMethod(ZipOutputStream.DEFLATED);
+					out.setLevel(Deflater.BEST_COMPRESSION);
+					for (File logFile : files) {
+						try (FileInputStream in = new FileInputStream(logFile)) {
+							out.putNextEntry(new ZipEntry(logFolder.relativize(logFile.toPath()).toString()));
+							in.transferTo(out);
+							out.closeEntry();
+						}
+					}
+				}
+				for (File logFile : files) { // remove files after successful archiving
+					logFile.delete();
+					logFile.getParentFile().delete(); // attempt to delete the parent directory (only succeeds if empty)
+				}
 			}
+		} catch (IOException | SecurityException e) {
+			throw new RuntimeException("Error gathering and archiving old logs, shutting down...", e);
 		}
+
 		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
 		try {
 			JoranConfigurator configurator = new JoranConfigurator();
@@ -96,7 +120,7 @@ public class ChatServer {
 	public static void main(final String[] args) {
 		long start = System.currentTimeMillis();
 
-		initalizeLoggger();
+		initializeLogger();
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
 		(new ServerCommandProcessor()).start(); // Launch the server command processor thread

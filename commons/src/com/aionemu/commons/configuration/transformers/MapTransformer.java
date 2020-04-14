@@ -12,7 +12,7 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
 public class MapTransformer {
 
 	public static Map<?, ?> transform(Map<String, String> values, Class<?> type, Type... genericTypeArgs) throws Exception {
-		return transform(values, new TransformationTypeInfo<>(type, genericTypeArgs));
+		return transform(values, new TransformationTypeInfo(type, genericTypeArgs));
 	}
 
 	@SuppressWarnings("unchecked")
@@ -27,19 +27,20 @@ public class MapTransformer {
 			else
 				throw new UnsupportedOperationException("No default implementation for " + mapType + ", non abstract/interface class must be declared.");
 		} else {
-			output = (Map<K, V>) mapType.newInstance();
+			output = (Map<K, V>) mapType.getDeclaredConstructor().newInstance();
 		}
 		transformAndFill(values, output, typeInfo.getGenericType(0), typeInfo.getGenericType(1));
 		return output;
 	}
 
-	private static <K, V> void transformAndFill(Map<String, String> values, Map<K, V> output, TransformationTypeInfo<K> keyType, TransformationTypeInfo<V> valueType) {
-		PropertyTransformer<K> keyTransformer = PropertyTransformerFactory.getTransformer(keyType.getType());
-		PropertyTransformer<V> valueTransformer = PropertyTransformerFactory.getTransformer(valueType.getType());
+	@SuppressWarnings({ "unchecked", "rawtypes" })
+	private static <K, V> void transformAndFill(Map<String, String> values, Map<K, V> output, TransformationTypeInfo keyType, TransformationTypeInfo valueType) {
+		PropertyTransformer keyTransformer = PropertyTransformerFactory.getTransformer(keyType.getType());
+		PropertyTransformer valueTransformer = PropertyTransformerFactory.getTransformer(valueType.getType());
 		values.forEach((k, v) -> {
-			K key = keyTransformer.transform(k, keyType);
+			K key = (K) keyTransformer.transform(k, keyType);
 			try {
-				V value = valueTransformer.transform(v, valueType);
+				V value = (V) valueTransformer.transform(v, valueType);
 				output.put(key, value);
 			} catch (Exception e) {
 				throw new TransformationException("Could not transform property: " + k, e);

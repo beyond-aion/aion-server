@@ -24,7 +24,7 @@ public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 	private League league;
 
 	public PlayerAlliance(PlayerAllianceMember leader, TeamType type) {
-		super(IDFactory.getInstance().nextId());
+		super(IDFactory.getInstance().nextId(), true);
 		this.type = type;
 		setLeader(leader);
 		for (int groupId = 1000; groupId <= 1003; groupId++) {
@@ -134,10 +134,5 @@ public class PlayerAlliance extends TemporaryPlayerTeam<PlayerAllianceMember> {
 
 	public TeamType getTeamType() {
 		return type;
-	}
-
-	@Override
-	protected boolean autoReleaseObjectId() {
-		return true;
 	}
 }

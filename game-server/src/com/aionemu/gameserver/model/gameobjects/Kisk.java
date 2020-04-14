@@ -39,8 +39,8 @@ public class Kisk extends SummonedObject<Player> {
 
 	private final Set<Integer> kiskMemberIds;
 
-	public Kisk(int objId, NpcController controller, SpawnTemplate spawnTemplate, Player owner) {
-		super(objId, controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()).getLevel(), null);
+	public Kisk(NpcController controller, SpawnTemplate spawnTemplate, Player owner) {
+		super(controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()).getLevel(), null);
 
 		this.kiskStatsTemplate = getObjectTemplate().getKiskStatsTemplate() == null ? new KiskStatsTemplate() : getObjectTemplate().getKiskStatsTemplate();
 		this.kiskMemberIds = ConcurrentHashMap.newKeySet();

@@ -22,7 +22,7 @@ public class FlyRing extends VisibleObject {
 
 	public FlyRing(FlyRingTemplate template, int instanceId) {
 		super(IDFactory.getInstance().nextId(), new FlyRingController(), null, null, World.getInstance().createPosition(template.getMap(),
-			template.getCenter().getX(), template.getCenter().getY(), template.getCenter().getZ(), (byte) 0, instanceId));
+			template.getCenter().getX(), template.getCenter().getY(), template.getCenter().getZ(), (byte) 0, instanceId), true);
 
 		((FlyRingController) getController()).setOwner(this);
 		this.template = template;

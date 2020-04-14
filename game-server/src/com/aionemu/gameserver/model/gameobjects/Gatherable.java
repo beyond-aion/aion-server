@@ -4,6 +4,7 @@ import com.aionemu.gameserver.controllers.GatherableController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.templates.gather.GatherableTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 
@@ -12,8 +13,8 @@ import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
  */
 public class Gatherable extends VisibleObject {
 
-	public Gatherable(SpawnTemplate spawnTemplate, int objId, GatherableController controller) {
-		super(objId, controller, spawnTemplate, DataManager.GATHERABLE_DATA.getGatherableTemplate(spawnTemplate.getNpcId()), new WorldPosition(spawnTemplate.getWorldId()));
+	public Gatherable(SpawnTemplate spawnTemplate, GatherableController controller) {
+		super(IDFactory.getInstance().nextId(), controller, spawnTemplate, DataManager.GATHERABLE_DATA.getGatherableTemplate(spawnTemplate.getNpcId()), new WorldPosition(spawnTemplate.getWorldId()), true);
 		controller.setOwner(this);
 		setKnownlist(new PlayerAwareKnownList(this));
 	}
@@ -26,10 +27,5 @@ public class Gatherable extends VisibleObject {
 	@Override
 	public GatherableController getController() {
 		return (GatherableController) super.getController();
-	}
-
-	@Override
-	protected boolean autoReleaseObjectId() {
-		return true;
 	}
 }

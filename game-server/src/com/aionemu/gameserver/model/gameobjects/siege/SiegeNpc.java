@@ -15,15 +15,8 @@ public class SiegeNpc extends Npc {
 	private final int siegeId;
 	private final SiegeRace siegeRace;
 
-	/**
-	 * @param objId
-	 * @param controller
-	 * @param spawnTemplate
-	 * @param objectTemplate
-	 *          SiegeNpc constructor
-	 */
-	public SiegeNpc(int objId, NpcController controller, SiegeSpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
-		super(objId, controller, spawnTemplate, objectTemplate);
+	public SiegeNpc(NpcController controller, SiegeSpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
+		super(controller, spawnTemplate, objectTemplate);
 		this.siegeId = spawnTemplate.getSiegeId();
 		this.siegeRace = spawnTemplate.getSiegeRace();
 	}

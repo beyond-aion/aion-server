@@ -124,7 +124,7 @@ public class ConfigurableProcessor {
 	 *          Properties with keys & default values
 	 */
 	private static void processField(Field f, Object obj, Properties props) {
-		boolean oldAccessible = f.isAccessible();
+		boolean oldAccessible = f.canAccess(obj);
 		try {
 			if (!oldAccessible)
 				f.setAccessible(true);

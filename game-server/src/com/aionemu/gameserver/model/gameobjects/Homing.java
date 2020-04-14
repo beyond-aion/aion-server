@@ -21,8 +21,8 @@ public class Homing extends SummonedObject<Creature> {
 	 */
 	private int attackCount;
 
-	public Homing(int objId, NpcController controller, SpawnTemplate spawnTemplate, byte level, Creature creator, int skillId) {
-		super(objId, controller, spawnTemplate, level, creator);
+	public Homing(NpcController controller, SpawnTemplate spawnTemplate, byte level, Creature creator, int skillId) {
+		super(controller, spawnTemplate, level, creator);
 		this.skillId = skillId;
 		this.attackType = findAttackType();
 		setMasterName("");

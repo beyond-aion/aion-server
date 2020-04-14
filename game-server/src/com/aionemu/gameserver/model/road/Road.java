@@ -25,7 +25,7 @@ public class Road extends VisibleObject {
 
 	public Road(RoadTemplate template, Integer instanceId) {
 		super(IDFactory.getInstance().nextId(), new RoadController(), null, null, World.getInstance().createPosition(template.getMap(),
-			template.getCenter().getX(), template.getCenter().getY(), template.getCenter().getZ(), (byte) 0, instanceId));
+			template.getCenter().getX(), template.getCenter().getY(), template.getCenter().getZ(), (byte) 0, instanceId), true);
 
 		((RoadController) getController()).setOwner(this);
 		this.template = template;

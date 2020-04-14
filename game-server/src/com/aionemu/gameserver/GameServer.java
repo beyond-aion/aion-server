@@ -109,29 +109,29 @@ public class GameServer {
 	/**
 	 * Archives old logs in log folder (recursively) and configures the logging service.
 	 */
-	private static void initalizeLoggger() {
+	private static void initializeLogger() {
 		try {
 			Path logFolder = Paths.get("./log");
 			Path oldLogsFolder = Paths.get(logFolder + "/archived");
 			List<File> files = new ArrayList<>();
-			File gsStartTimeFile = new File("./log/[server_start_marker]");
-			long gsStartTime;
-			long[] gsEndTime = { 0 }; // for mutability within a stream (file walker), we need to use an array here
+			File serverStartTimeFile = new File("./log/[server_start_marker]");
+			long serverStartTime;
+			long[] serverEndTime = { 0 }; // for mutability within a stream (file walker), we need to use an array here
 
-			Files.createDirectories(gsStartTimeFile.toPath().getParent());
-			gsStartTimeFile.createNewFile(); // creates the file only if it does not exists
-			gsStartTime = gsStartTimeFile.lastModified();
-			gsStartTimeFile.setLastModified(ManagementFactory.getRuntimeMXBean().getStartTime()); // update with new server start time
+			Files.createDirectories(serverStartTimeFile.toPath().getParent());
+			serverStartTimeFile.createNewFile(); // creates the file only if it does not exists
+			serverStartTime = serverStartTimeFile.lastModified();
+			serverStartTimeFile.setLastModified(ManagementFactory.getRuntimeMXBean().getStartTime()); // update with new server start time
 
 			Files.createDirectories(logFolder);
-			Files.walkFileTree(logFolder, new SimpleFileVisitor<Path>() {
+			Files.walkFileTree(logFolder, new SimpleFileVisitor<>() {
 
 				@Override
-				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) throws IOException {
+				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
 					if (!attrs.isDirectory() && file.toString().toLowerCase().endsWith(".log")) {
 						files.add(file.toFile());
-						if (gsEndTime[0] < attrs.lastModifiedTime().toMillis())
-							gsEndTime[0] = attrs.lastModifiedTime().toMillis();
+						if (serverEndTime[0] < attrs.lastModifiedTime().toMillis())
+							serverEndTime[0] = attrs.lastModifiedTime().toMillis();
 					}
 					return FileVisitResult.CONTINUE;
 				}
@@ -140,17 +140,14 @@ public class GameServer {
 			if (!files.isEmpty()) {
 				Files.createDirectories(oldLogsFolder);
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH.mm");
-				String outFilename = (gsStartTime < gsEndTime[0] ? sdf.format(gsStartTime) : "Unknown") + " to " + sdf.format(gsEndTime[0]) + ".zip";
+				String outFilename = (serverStartTime < serverEndTime[0] ? sdf.format(serverStartTime) : "Unknown") + " to " + sdf.format(serverEndTime[0]) + ".zip";
 				try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(oldLogsFolder + "/" + outFilename))) {
-					byte[] buf = new byte[1024];
 					out.setMethod(ZipOutputStream.DEFLATED);
 					out.setLevel(Deflater.BEST_COMPRESSION);
 					for (File logFile : files) {
 						try (FileInputStream in = new FileInputStream(logFile)) {
 							out.putNextEntry(new ZipEntry(logFolder.relativize(logFile.toPath()).toString()));
-							int len;
-							while ((len = in.read(buf)) > 0)
-								out.write(buf, 0, len);
+							in.transferTo(out);
 							out.closeEntry();
 						}
 					}
@@ -185,7 +182,7 @@ public class GameServer {
 		long start = System.currentTimeMillis();
 
 		JAXBUtil.preLoadContext(StaticData.class); // do this early so DataManager doesn't need to wait as long
-		initalizeLoggger();
+		initializeLogger();
 		initUtilityServicesAndConfig();
 
 		boolean enableExecutionTimeWarnings = CommonsConfig.EXECUTION_TIME_WARNING_ENABLE;

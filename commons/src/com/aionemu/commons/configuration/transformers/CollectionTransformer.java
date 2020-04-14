@@ -1,11 +1,7 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Modifier;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 
 import com.aionemu.commons.configuration.PropertyTransformerFactory;
 import com.aionemu.commons.configuration.TransformationTypeInfo;
@@ -42,7 +38,7 @@ public class CollectionTransformer extends CommaSeparatedValueTransformer<Collec
 			else
 				throw new UnsupportedOperationException("No default implementation for " + typeInfo.getType() + ", non abstract/interface class must be declared.");
 		} else {
-			collection = (Collection<Object>) typeInfo.getType().newInstance();
+			collection = (Collection<Object>) typeInfo.getType().getDeclaredConstructor().newInstance();
 		}
 
 		if (!values.isEmpty()) {

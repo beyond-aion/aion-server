@@ -1,12 +1,10 @@
 package com.aionemu.commons.utils.xml;
 
-import static org.apache.commons.io.filefilter.FileFilterUtils.*;
-
-import java.io.File;
-import java.io.Reader;
-import java.io.StringReader;
-import java.io.StringWriter;
+import java.io.*;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Collection;
+import java.util.stream.Collectors;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -21,9 +19,6 @@ import javax.xml.validation.Schema;
 import javax.xml.validation.SchemaFactory;
 import javax.xml.validation.Validator;
 
-import org.apache.commons.io.FileUtils;
-import org.apache.commons.io.filefilter.HiddenFileFilter;
-import org.apache.commons.io.filefilter.IOFileFilter;
 import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
@@ -118,7 +113,10 @@ public abstract class XmlUtil {
 	 * @return List of .xml files inside the root directory.
 	 */
 	public static Collection<File> listFiles(File root, boolean recursive) {
-		IOFileFilter dirFilter = recursive ? makeSVNAware(HiddenFileFilter.VISIBLE) : null;
-		return FileUtils.listFiles(root, and(suffixFileFilter(".xml"), HiddenFileFilter.VISIBLE), dirFilter);
+		try {
+			return Files.find(root.toPath(), recursive ? Integer.MAX_VALUE : 1, (path, attrs) -> attrs.isRegularFile() && path.toString().toLowerCase().endsWith(".xml")).map(Path::toFile).collect(Collectors.toList());
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
 	}
 }

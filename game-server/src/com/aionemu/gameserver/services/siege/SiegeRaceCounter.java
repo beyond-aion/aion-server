@@ -1,12 +1,6 @@
 package com.aionemu.gameserver.services.siege;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicLong;
 
@@ -113,13 +107,7 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 		}
 
 		List<Map.Entry<K, AtomicLong>> tempList = new ArrayList<>(unorderedMap.entrySet());
-		tempList.sort(new Comparator<Map.Entry<K, AtomicLong>>() {
-
-			@Override
-			public int compare(Map.Entry<K, AtomicLong> o1, Map.Entry<K, AtomicLong> o2) {
-				return new Long(o2.getValue().get()).compareTo(o1.getValue().get());
-			}
-		});
+		tempList.sort((o1, o2) -> Long.compare(o2.getValue().get(), o1.getValue().get()));
 
 		Map<K, Long> result = new LinkedHashMap<>();
 		for (Map.Entry<K, AtomicLong> entry : tempList) {
@@ -132,7 +120,7 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 
 	@Override
 	public int compareTo(SiegeRaceCounter o) {
-		return new Long(o.getTotalDamage()).compareTo(getTotalDamage());
+		return Long.compare(o.getTotalDamage(), getTotalDamage());
 	}
 
 	public SiegeRace getSiegeRace() {

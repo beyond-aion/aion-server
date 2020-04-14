@@ -55,8 +55,8 @@ public abstract class VisibleObject extends AionObject {
 	 * @param objectTemplate
 	 */
 	public VisibleObject(int objId, VisibleObjectController<? extends VisibleObject> controller, SpawnTemplate spawnTemplate,
-		VisibleObjectTemplate objectTemplate, WorldPosition position) {
-		super(objId);
+		VisibleObjectTemplate objectTemplate, WorldPosition position, boolean autoReleaseObjectId) {
+		super(objId, autoReleaseObjectId);
 		this.controller = controller;
 		this.position = position;
 		this.spawnTemplate = spawnTemplate;

@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
-import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.NpcKnownList;
 
@@ -88,7 +87,7 @@ public class RiftManager {
 
 	private Npc spawnInstance(int instance, SpawnTemplate template, RVController controller) {
 		NpcTemplate masterObjectTemplate = DataManager.NPC_DATA.getNpcTemplate(template.getNpcId());
-		Npc npc = new Npc(IDFactory.getInstance().nextId(), controller, template, masterObjectTemplate);
+		Npc npc = new Npc(controller, template, masterObjectTemplate);
 
 		npc.setKnownlist(new NpcKnownList(npc));
 		npc.setEffectController(new EffectController(npc));

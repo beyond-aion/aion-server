@@ -48,7 +48,7 @@ public class OnClassLoadUnloadListener implements ClassListener {
 			if (!Modifier.isStatic(m.getModifiers()))
 				continue;
 
-			boolean accessible = m.isAccessible();
+			boolean accessible = m.canAccess(null);
 			m.setAccessible(true);
 
 			if (m.getAnnotation(annotationClass) != null) {

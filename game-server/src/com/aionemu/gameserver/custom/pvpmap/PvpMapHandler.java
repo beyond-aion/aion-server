@@ -43,7 +43,6 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -166,7 +165,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43, 0,
 					"modified_iron_wall_aggressive");
-				final Npc npc = new Npc(IDFactory.getInstance().nextId(), new NpcController(), spawn, template);
+				Npc npc = new Npc(new NpcController(), spawn, template);
 				npc.setKnownlist(new NpcKnownList(npc));
 				npc.setEffectController(new EffectController(npc));
 				SpawnEngine.bringIntoWorld(npc, mapId, instanceId, spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getHeading());

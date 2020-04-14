@@ -14,8 +14,8 @@ public class Servant extends SummonedObject<Creature> {
 
 	private NpcObjectType objectType;
 
-	public Servant(int objId, NpcController controller, SpawnTemplate spawnTemplate, byte level, Creature creator) {
-		super(objId, controller, spawnTemplate, level, creator);
+	public Servant(NpcController controller, SpawnTemplate spawnTemplate, byte level, Creature creator) {
+		super(controller, spawnTemplate, level, creator);
 		setMasterName("");
 		setKnownlist(new NpcKnownList(this));
 		setEffectController(new EffectController(this));

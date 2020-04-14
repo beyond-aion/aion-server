@@ -46,7 +46,7 @@ public class TallocsSummonAI extends NpcAI {
 			SpawnTemplate st = getSpawnTemplate();
 			SpawnTemplate spawnTemplate = SpawnEngine.newSingleTimeSpawn(st.getWorldId(), getNpcId(), st.getX(), st.getY(), st.getZ(), st.getHeading(),
 				0, SpawnTemplate.NO_AI);
-			Summon summon = new Summon(getObjectId(), new SummonController(), spawnTemplate, getObjectTemplate(), player, 0);
+			Summon summon = new Summon(getObjectId(), new SummonController(), spawnTemplate, getObjectTemplate(), player, 0, false);
 			player.setSummon(summon);
 			summon.setTarget(player.getTarget());
 			summon.setKnownlist(getKnownList());

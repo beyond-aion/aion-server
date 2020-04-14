@@ -26,7 +26,7 @@ public abstract class PropertyTransformer<T> {
 	 *           if something went wrong
 	 */
 	public final T transform(String value, Class<?> type, Type... genericTypeArgs) throws TransformationException {
-		return transform(value, new TransformationTypeInfo<>(type, genericTypeArgs));
+		return transform(value, new TransformationTypeInfo(type, genericTypeArgs));
 	}
 
 	protected final T transform(String value, TransformationTypeInfo typeInfo) throws TransformationException {

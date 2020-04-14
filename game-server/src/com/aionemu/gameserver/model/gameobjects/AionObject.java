@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
+import java.lang.ref.Cleaner;
+
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
@@ -13,13 +15,25 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
  */
 public abstract class AionObject {
 
+	private final static Cleaner CLEANER = Cleaner.create();
+
 	/**
 	 * Unique id, for all game objects such as: items, players, monsters.
 	 */
 	private final int objectId;
 
 	public AionObject(int objId) {
+		this(objId, false);
+	}
+
+	public AionObject(int objId, boolean autoReleaseObjectId) {
 		this.objectId = objId;
+		if (objectId != 0 && autoReleaseObjectId) {
+			CLEANER.register(this, () -> {
+				if (!RespawnService.setAutoReleaseId(objId)) // try to register auto-release after respawn/respawn cancel
+					IDFactory.getInstance().releaseId(objId); // otherwise release ID now
+			});
+		}
 	}
 
 	/**
@@ -45,7 +59,7 @@ public abstract class AionObject {
 			return false;
 
 		if (objectId == 0) // object is a dummy (no unique ID from IDFactory)
-			return System.identityHashCode(this) ==  System.identityHashCode(obj);
+			return System.identityHashCode(this) == System.identityHashCode(obj);
 
 		return hashCode() == obj.hashCode(); // cheap direct objectId comparison (see above)
 	}
@@ -61,19 +75,6 @@ public abstract class AionObject {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [name=" + getName() + ", objectId=" + objectId + "]";
-	}
-
-	@Override
-	protected void finalize() throws Throwable {
-		if (objectId != 0 && autoReleaseObjectId()) {
-			if (!RespawnService.setAutoReleaseId(objectId)) // try to register auto-release after respawn/respawn cancel
-				IDFactory.getInstance().releaseId(objectId); // otherwise release ID now
-		}
-		super.finalize();
-	}
-
-	protected boolean autoReleaseObjectId() {
-		return false;
 	}
 
 }

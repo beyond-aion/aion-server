@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.utils.chathandlers;
 
+import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Modifier;
 
 import com.aionemu.commons.scripting.classlistener.ClassListener;
@@ -23,8 +24,8 @@ public class ChatCommandsLoader implements ClassListener {
 			if (!isValidClass(c))
 				continue;
 			try {
-				processor.registerCommand((ChatCommand) c.newInstance());
-			} catch (InstantiationException | IllegalAccessException e) {
+				processor.registerCommand((ChatCommand) c.getDeclaredConstructor().newInstance());
+			} catch (InstantiationException | IllegalAccessException | NoSuchMethodException | InvocationTargetException e) {
 				throw new RuntimeException(e);
 			}
 		}

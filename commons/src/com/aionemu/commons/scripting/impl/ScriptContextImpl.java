@@ -2,14 +2,10 @@ package com.aionemu.commons.scripting.impl;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.ref.Cleaner;
 import java.nio.file.Files;
 import java.nio.file.Paths;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.regex.PatternSyntaxException;
 
 import org.slf4j.Logger;
@@ -34,11 +30,7 @@ public class ScriptContextImpl implements ScriptContext {
 	 * logger for this class
 	 */
 	private static final Logger log = LoggerFactory.getLogger(ScriptContextImpl.class);
-
-	/**
-	 * Script context that is parent for this script context
-	 */
-	private final ScriptContext parentScriptContext;
+	private final static Cleaner CLEANER = Cleaner.create();
 
 	/**
 	 * Libraries (list of jar files) that have to be loaded class loader
@@ -50,20 +42,64 @@ public class ScriptContextImpl implements ScriptContext {
 	 */
 	private final String dirPattern;
 
-	/**
-	 * Result of compilation of script context
-	 */
-	private CompilationResult compilationResult;
+	private final CleanableState state;
 
-	/**
-	 * List of child script contexts
-	 */
-	private Set<ScriptContext> childScriptContexts;
+	private static class CleanableState implements Runnable {
 
-	/**
-	 * Classlistener for this script context
-	 */
-	private ClassListener classListener;
+		/**
+		 * Script context that is parent for this script context
+		 */
+		private final ScriptContext parentScriptContext;
+
+		/**
+		 * Result of compilation of script context
+		 */
+		private CompilationResult compilationResult;
+
+		/**
+		 * List of child script contexts
+		 */
+		private Set<ScriptContext> childScriptContexts;
+
+		/**
+		 * Classlistener for this script context
+		 */
+		private ClassListener classListener;
+
+		private CleanableState(ScriptContext parentScriptContext) {
+			this.parentScriptContext = parentScriptContext;
+		}
+
+		@Override
+		public void run() {
+			if (compilationResult != null) {
+				log.error("Finalization of initialized ScriptContext. Forcing context shutdown.");
+				shutdown();
+			}
+		}
+
+		private synchronized void shutdown() {
+			if (compilationResult == null) {
+				log.error("Shutdown of not initialized script context", new Exception());
+				return;
+			}
+			if (childScriptContexts != null) {
+				for (ScriptContext child : childScriptContexts) {
+					child.shutdown();
+				}
+			}
+
+			getClassListener().preUnload(compilationResult.getCompiledClasses());
+			compilationResult = null;
+		}
+
+		private ClassListener getClassListener() {
+			if (classListener == null && parentScriptContext != null) {
+				return parentScriptContext.getClassListener();
+			}
+			return classListener;
+		}
+	}
 
 	/**
 	 * Creates new scriptcontext with given root file
@@ -93,37 +129,38 @@ public class ScriptContextImpl implements ScriptContext {
 	 */
 	public ScriptContextImpl(String dirPattern, ScriptContext parent) {
 		this.dirPattern = dirPattern;
-		this.parentScriptContext = parent;
 		if (getDirectories().isEmpty())
 			throw new IllegalArgumentException("No valid directories found for pattern: " + dirPattern);
+		this.state = new CleanableState(parent);
+		CLEANER.register(this, this.state);
 	}
 
 	@Override
 	public synchronized void init() {
 
-		if (compilationResult != null) {
+		if (state.compilationResult != null) {
 			log.error("Init request on initialized ScriptContext");
 			return;
 		}
 
 		ScriptCompiler scriptCompiler = new ScriptCompilerImpl();
 
-		if (parentScriptContext != null) {
-			scriptCompiler.setParentClassLoader(parentScriptContext.getCompilationResult().getClassLoader());
+		if (state.parentScriptContext != null) {
+			scriptCompiler.setParentClassLoader(state.parentScriptContext.getCompilationResult().getClassLoader());
 		}
 
 		scriptCompiler.setLibraries(libraries);
 		List<File> sourceFiles = findFiles();
 		if (CommonsConfig.SCRIPT_COMPILER_CACHING)
 			scriptCompiler.setClasses(ScriptCompilerCache.findValidCachedClassFiles(sourceFiles));
-		compilationResult = scriptCompiler.compile(sourceFiles);
+		state.compilationResult = scriptCompiler.compile(sourceFiles);
 		if (CommonsConfig.SCRIPT_COMPILER_CACHING)
-			ScriptCompilerCache.cacheClasses(compilationResult.getBinaryClasses());
+			ScriptCompilerCache.cacheClasses(state.compilationResult.getBinaryClasses());
 
-		getClassListener().postLoad(compilationResult.getCompiledClasses());
+		getClassListener().postLoad(state.compilationResult.getCompiledClasses());
 
-		if (childScriptContexts != null) {
-			for (ScriptContext context : childScriptContexts) {
+		if (state.childScriptContexts != null) {
+			for (ScriptContext context : state.childScriptContexts) {
 				context.init();
 			}
 		}
@@ -167,20 +204,7 @@ public class ScriptContextImpl implements ScriptContext {
 
 	@Override
 	public synchronized void shutdown() {
-
-		if (compilationResult == null) {
-			log.error("Shutdown of not initialized script context", new Exception());
-			return;
-		}
-
-		if (childScriptContexts != null) {
-			for (ScriptContext child : childScriptContexts) {
-				child.shutdown();
-			}
-		}
-
-		getClassListener().preUnload(compilationResult.getCompiledClasses());
-		compilationResult = null;
+		state.shutdown();
 	}
 
 	@Override
@@ -196,12 +220,12 @@ public class ScriptContextImpl implements ScriptContext {
 
 	@Override
 	public CompilationResult getCompilationResult() {
-		return compilationResult;
+		return state.compilationResult;
 	}
 
 	@Override
 	public synchronized boolean isInitialized() {
-		return compilationResult != null;
+		return state.compilationResult != null;
 	}
 
 	@Override
@@ -216,23 +240,23 @@ public class ScriptContextImpl implements ScriptContext {
 
 	@Override
 	public ScriptContext getParentScriptContext() {
-		return parentScriptContext;
+		return state.parentScriptContext;
 	}
 
 	@Override
 	public Collection<ScriptContext> getChildScriptContexts() {
-		return childScriptContexts;
+		return state.childScriptContexts;
 	}
 
 	@Override
 	public void addChildScriptContext(ScriptContext context) {
 
 		synchronized (this) {
-			if (childScriptContexts == null) {
-				childScriptContexts = new HashSet<>();
+			if (state.childScriptContexts == null) {
+				state.childScriptContexts = new HashSet<>();
 			}
 
-			if (childScriptContexts.contains(context)) {
+			if (state.childScriptContexts.contains(context)) {
 				log.error("Double child definition, dirPattern: " + dirPattern + ", child: " + context.getDirPattern());
 				return;
 			}
@@ -242,20 +266,17 @@ public class ScriptContextImpl implements ScriptContext {
 			}
 		}
 
-		childScriptContexts.add(context);
+		state.childScriptContexts.add(context);
 	}
 
 	@Override
 	public void setClassListener(ClassListener cl) {
-		classListener = cl;
+		state.classListener = cl;
 	}
 
 	@Override
 	public ClassListener getClassListener() {
-		if (classListener == null && getParentScriptContext() != null) {
-			return getParentScriptContext().getClassListener();
-		}
-		return classListener;
+		return state.getClassListener();
 	}
 
 	@Override
@@ -266,23 +287,14 @@ public class ScriptContextImpl implements ScriptContext {
 
 		ScriptContextImpl another = (ScriptContextImpl) obj;
 
-		if (parentScriptContext == null) {
+		if (state.parentScriptContext == null) {
 			return another.getDirPattern().equals(dirPattern);
 		}
-		return another.getDirPattern().equals(dirPattern) && parentScriptContext.equals(another.parentScriptContext);
+		return another.getDirPattern().equals(dirPattern) && state.parentScriptContext.equals(another.state.parentScriptContext);
 	}
 
 	@Override
 	public int hashCode() {
-		return Objects.hash(parentScriptContext, dirPattern);
-	}
-
-	@Override
-	public void finalize() throws Throwable {
-		if (compilationResult != null) {
-			log.error("Finalization of initialized ScriptContext. Forcing context shutdown.");
-			shutdown();
-		}
-		super.finalize();
+		return Objects.hash(state.parentScriptContext, dirPattern);
 	}
 }

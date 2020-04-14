@@ -27,7 +27,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	private LootGroupRules lootGroupRules = new LootGroupRules();
 
 	public League(LeagueMember leader) {
-		super(IDFactory.getInstance().nextId());
+		super(IDFactory.getInstance().nextId(), true);
 		setLeader(leader);
 	}
 
@@ -88,8 +88,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 	 * @return sorted alliances by position
 	 */
 	public Collection<LeagueMember> getSortedMembers() {
-		List<LeagueMember> memberList = new ArrayList<>();
-		memberList.addAll(members.values());
+		List<LeagueMember> memberList = new ArrayList<>(members.values());
 		memberList.sort(Comparator.comparing(LeagueMember::getLeaguePosition));
 		return memberList;
 	}
@@ -169,10 +168,5 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 			}
 		}
 		return captains;
-	}
-
-	@Override
-	protected boolean autoReleaseObjectId() {
-		return true;
 	}
 }

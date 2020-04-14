@@ -115,8 +115,8 @@ public class DAOManager {
 	 * @throws InstantiationException
 	 *           if something went wrong during instantiation of DAO
 	 */
-	public static void registerDAO(Class<? extends DAO> daoClass) throws DAOAlreadyRegisteredException, IllegalAccessException, InstantiationException {
-		DAO dao = daoClass.newInstance();
+	public static void registerDAO(Class<? extends DAO> daoClass) throws DAOAlreadyRegisteredException, ReflectiveOperationException {
+		DAO dao = daoClass.getDeclaredConstructor().newInstance();
 
 		if (!dao.supports(getDatabaseName(), getDatabaseMajorVersion(), getDatabaseMinorVersion())) {
 			return;

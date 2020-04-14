@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 
@@ -29,15 +28,13 @@ public class StaticObjectSpawnManager {
 			spawn.resetTemplates(instanceIndex);
 			for (int i = 0; i < spawn.getPool(); i++) {
 				SpawnTemplate template = spawn.getRndTemplate(instanceIndex);
-				int objectId = IDFactory.getInstance().nextId();
-				StaticObject staticObject = new StaticObject(objectId, new StaticObjectController(), template, objectTemplate);
+				StaticObject staticObject = new StaticObject(new StaticObjectController(), template, objectTemplate);
 				staticObject.setKnownlist(new PlayerAwareKnownList(staticObject));
 				bringIntoWorld(staticObject, template, instanceIndex);
 			}
 		} else {
 			for (SpawnTemplate template : spawn.getSpawnTemplates()) {
-				int objectId = IDFactory.getInstance().nextId();
-				StaticObject staticObject = new StaticObject(objectId, new StaticObjectController(), template, objectTemplate);
+				StaticObject staticObject = new StaticObject(new StaticObjectController(), template, objectTemplate);
 				staticObject.setKnownlist(new PlayerAwareKnownList(staticObject));
 				bringIntoWorld(staticObject, template, instanceIndex);
 			}

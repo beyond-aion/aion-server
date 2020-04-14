@@ -24,8 +24,8 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	private LootGroupRules lootGroupRules = new LootGroupRules();
 	private Map<Integer, Integer> brands = new ConcurrentHashMap<>();
 
-	public TemporaryPlayerTeam(int objId) {
-		super(objId);
+	public TemporaryPlayerTeam(int objId, boolean autoReleaseObjectId) {
+		super(objId, autoReleaseObjectId);
 	}
 
 	/**

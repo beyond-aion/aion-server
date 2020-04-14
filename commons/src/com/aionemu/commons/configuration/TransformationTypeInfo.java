@@ -9,17 +9,17 @@ import java.lang.reflect.WildcardType;
  * 
  * @author Neon
  */
-public class TransformationTypeInfo<T> {
+public class TransformationTypeInfo {
 
-	private final Class<T> type;
+	private final Class<?> type;
 	private final Type[] genericTypeArgs;
 
-	public TransformationTypeInfo(Class<T> type, Type[] genericTypeArgs) {
+	public TransformationTypeInfo(Class<?> type, Type[] genericTypeArgs) {
 		this.type = type;
 		this.genericTypeArgs = genericTypeArgs;
 	}
 
-	public Class<T> getType() {
+	public Class<?> getType() {
 		return type;
 	}
 
@@ -27,7 +27,7 @@ public class TransformationTypeInfo<T> {
 		return genericTypeArgs.length;
 	}
 
-	public TransformationTypeInfo<?> getGenericType(int index) {
+	public TransformationTypeInfo getGenericType(int index) {
 		Type innerType;
 		if (index >= genericTypeArgs.length) // <..., ..., ...>
 			throw new IndexOutOfBoundsException(type.getSimpleName() + " has not enough generic arguments. Tried to access index " + index + ".");
@@ -42,6 +42,6 @@ public class TransformationTypeInfo<T> {
 		}
 		if (!(innerType instanceof Class))
 			throw new UnsupportedOperationException("<" + innerType.getTypeName() + "> of " + type.getSimpleName() + " must be a valid class.");
-		return new TransformationTypeInfo<>((Class<?>) innerType, innerGenericType);
+		return new TransformationTypeInfo((Class<?>) innerType, innerGenericType);
 	}
 }

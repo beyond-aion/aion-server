@@ -3,7 +3,6 @@ package com.aionemu.gameserver.geoEngine;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.lang.reflect.Method;
 import java.nio.ByteBuffer;
 import java.nio.FloatBuffer;
 import java.nio.MappedByteBuffer;
@@ -89,7 +88,6 @@ public class GeoWorldLoader {
 				node.setMaterialId((byte) singleChildMaterialId);
 				geoms.put(name, node);
 			}
-			destroyDirectByteBuffer(geo);
 		}
 		latches.forEach(l -> {
 			try {
@@ -162,7 +160,6 @@ public class GeoWorldLoader {
 					missingMeshes.add(name);
 				}
 			}
-			destroyDirectByteBuffer(geo);
 			map.updateModelBound();
 		} catch (Exception e) {
 			throw new GameServerError("Could not load " + geoFile, e);
@@ -203,19 +200,5 @@ public class GeoWorldLoader {
 		long yIntBits = Float.floatToIntBits(location.y);
 		long zIntBits = Float.floatToIntBits(location.z);
 		return (int) ((xIntBits * 73856093 ^ yIntBits * 19349669 ^ zIntBits * 83492791) % 700001);
-	}
-
-	private static void destroyDirectByteBuffer(ByteBuffer toBeDestroyed) {
-		if (!toBeDestroyed.isDirect())
-			return;
-
-		try {
-			Method cleaner = toBeDestroyed.getClass().getMethod("cleaner");
-			cleaner.setAccessible(true);
-			Method clean = Class.forName("sun.misc.Cleaner").getMethod("clean");
-			clean.setAccessible(true);
-			clean.invoke(cleaner.invoke(toBeDestroyed));
-		} catch (Exception ex) {
-		}
 	}
 }

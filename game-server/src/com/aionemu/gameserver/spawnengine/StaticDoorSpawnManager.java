@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.staticdoor.DoorType;
 import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorTemplate;
-import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
@@ -35,8 +34,7 @@ public class StaticDoorSpawnManager {
 			}
 			SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, 300001, data.getX(), data.getY(), data.getZ(), (byte) 0);
 			spawn.setStaticId(data.getDoorId());
-			int objectId = IDFactory.getInstance().nextId();
-			StaticDoor staticDoor = new StaticDoor(objectId, new StaticObjectController(), spawn, data, instanceIndex);
+			StaticDoor staticDoor = new StaticDoor(new StaticObjectController(), spawn, data, instanceIndex);
 			staticDoor.setKnownlist(new PlayerAwareKnownList(staticDoor));
 			bringIntoWorld(staticDoor, spawn, instanceIndex);
 			counter++;

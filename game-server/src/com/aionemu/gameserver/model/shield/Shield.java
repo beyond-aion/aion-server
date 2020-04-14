@@ -13,13 +13,12 @@ import com.aionemu.gameserver.world.knownlist.SphereKnownList;
  */
 public class Shield extends VisibleObject {
 
-	private ShieldTemplate template = null;
-	private String name = null;
-	private int id = 0;
+	private ShieldTemplate template;
+	private String name;
+	private int id;
 
 	public Shield(ShieldTemplate template) {
-		super(IDFactory.getInstance().nextId(), new ShieldController(), null, null, null);
-
+		super(IDFactory.getInstance().nextId(), new ShieldController(), null, null, null, true);
 		((ShieldController) getController()).setOwner(this);
 		this.template = template;
 		this.name = (template.getName() == null) ? "SHIELD" : template.getName();

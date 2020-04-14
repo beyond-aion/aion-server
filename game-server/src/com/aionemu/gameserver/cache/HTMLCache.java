@@ -1,21 +1,12 @@
 package com.aionemu.gameserver.cache;
 
-import java.io.BufferedInputStream;
-import java.io.BufferedOutputStream;
-import java.io.File;
-import java.io.FileFilter;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
+import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -75,10 +66,7 @@ public final class HTMLCache {
 		if (cacheFile.exists()) {
 			log.info("Cache[HTML]: Using cache file... OK.");
 
-			ObjectInputStream ois = null;
-			try {
-				ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(getCacheFile())));
-
+			try (ObjectInputStream ois = new ObjectInputStream(new BufferedInputStream(new FileInputStream(getCacheFile())))) {
 				cache = (Map<String, String>) ois.readObject();
 
 				for (String html : cache.values()) {
@@ -90,8 +78,6 @@ public final class HTMLCache {
 
 				reload(true);
 				return;
-			} finally {
-				IOUtils.closeQuietly(ois);
 			}
 		} else {
 			parseDir(HTML_ROOT);
@@ -126,15 +112,10 @@ public final class HTMLCache {
 		if (!cacheFile.exists()) {
 			log.info("Cache[HTML]: Creating cache file... OK.");
 
-			ObjectOutputStream oos = null;
-			try {
-				oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(getCacheFile())));
-
+			try (ObjectOutputStream oos = new ObjectOutputStream(new BufferedOutputStream(new FileOutputStream(getCacheFile())))) {
 				oos.writeObject(cache);
 			} catch (IOException e) {
 				log.warn("", e);
-			} finally {
-				IOUtils.closeQuietly(oos);
 			}
 		}
 	}
@@ -224,9 +205,7 @@ public final class HTMLCache {
 
 	public String loadFile(File file) {
 		if (isLoadable(file)) {
-			BufferedInputStream bis = null;
-			try {
-				bis = new BufferedInputStream(new FileInputStream(file));
+			try (BufferedInputStream bis = new BufferedInputStream(new FileInputStream(file))) {
 				byte[] raw = new byte[bis.available()];
 				bis.read(raw);
 
@@ -246,8 +225,6 @@ public final class HTMLCache {
 				return content;
 			} catch (Exception e) {
 				log.warn("Problem with htm file:", e);
-			} finally {
-				IOUtils.closeQuietly(bis);
 			}
 		}
 

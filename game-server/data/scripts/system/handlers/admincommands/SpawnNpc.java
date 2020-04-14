@@ -87,7 +87,7 @@ public class SpawnNpc extends AdminCommand {
 	private static class DummyHouseObject extends HouseObject<PlaceableHouseObject> {
 
 		public DummyHouseObject(int templateId) {
-			super(null, IDFactory.getInstance().nextId(), templateId);
+			super(null, IDFactory.getInstance().nextId(), templateId, true);
 		}
 
 		@Override
@@ -108,11 +108,6 @@ public class SpawnNpc extends AdminCommand {
 		@Override
 		public byte getHeading() {
 			return getPosition().getHeading();
-		}
-
-		@Override
-		protected boolean autoReleaseObjectId() {
-			return true;
 		}
 	}
 }

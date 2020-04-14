@@ -11,11 +11,9 @@ public class PlayerGroup extends TemporaryPlayerTeam<PlayerGroupMember> {
 
 	private final PlayerGroupStats playerGroupStats;
 	private TeamType type;
-	private final boolean isNewId;
 
 	public PlayerGroup(PlayerGroupMember leader, TeamType type, int id) {
-		super(id == 0 ? IDFactory.getInstance().nextId() : id);
-		this.isNewId = id == 0;
+		super(id == 0 ? IDFactory.getInstance().nextId() : id, id == 0);
 		this.playerGroupStats = new PlayerGroupStats(this);
 		this.type = type;
 		setLeader(leader);
@@ -51,10 +49,5 @@ public class PlayerGroup extends TemporaryPlayerTeam<PlayerGroupMember> {
 
 	public TeamType getTeamType() {
 		return type;
-	}
-
-	@Override
-	protected boolean autoReleaseObjectId() {
-		return isNewId;
 	}
 }

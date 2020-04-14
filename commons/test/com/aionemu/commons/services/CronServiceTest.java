@@ -1,12 +1,10 @@
 package com.aionemu.commons.services;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.*;
 
 import java.lang.reflect.Constructor;
 import java.util.List;
 import java.util.TimeZone;
-import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.junit.AfterClass;
@@ -86,31 +84,6 @@ public class CronServiceTest {
 		cronService.schedule(test, "0/2 * * * * ?");
 		sleep(5);
 		assertEquals(val.intValue(), 1);
-	}
-
-	@Test
-	public void testCancelledRunableGC() {
-		final AtomicBoolean collected = new AtomicBoolean();
-		Runnable r = new Runnable() {
-
-			@Override
-			public void run() {
-				cronService.cancel(this);
-			}
-
-			@Override
-			public void finalize() throws Throwable {
-				collected.set(true);
-				super.finalize();
-			}
-		};
-
-		cronService.schedule(r, "/1 * * * * ?");
-		r = null;
-		sleep(1);
-		System.gc();
-		sleep(1);
-		assertTrue(collected.get());
 	}
 
 	@Test

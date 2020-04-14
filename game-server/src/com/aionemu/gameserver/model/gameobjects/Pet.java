@@ -17,7 +17,7 @@ public class Pet extends VisibleObject {
 	private final PetCommonData commonData;
 
 	public Pet(PetTemplate petTemplate, PetController controller, PetCommonData commonData, Player master) {
-		super(commonData.getObjectId(), controller, null, petTemplate, new WorldPosition(master.getWorldId()));
+		super(commonData.getObjectId(), controller, null, petTemplate, new WorldPosition(master.getWorldId()), false);
 		controller.setOwner(this);
 		this.master = master;
 		this.commonData = commonData;

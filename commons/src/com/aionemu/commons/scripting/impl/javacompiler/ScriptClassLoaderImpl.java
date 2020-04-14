@@ -11,7 +11,6 @@ import java.util.Set;
 
 import javax.tools.JavaFileObject;
 
-import org.apache.commons.io.IOUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -166,7 +165,7 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 		if (resource == null)
 			throw new IllegalArgumentException("Can't open input stream for resource: " + name);
 		try (InputStream is = resource.openStream()) {
-			IOUtils.copy(is, bc.openOutputStream());
+			is.transferTo(bc.openOutputStream());
 		} catch (IOException e) {
 			log.error("Error while loading class data: " + name, e);
 			throw e;

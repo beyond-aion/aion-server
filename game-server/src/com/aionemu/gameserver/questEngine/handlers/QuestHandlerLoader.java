@@ -33,7 +33,7 @@ public class QuestHandlerLoader implements ClassListener {
 			if (AbstractQuestHandler.class.isAssignableFrom(c)) {
 				try {
 					Class<? extends AbstractQuestHandler> tmp = (Class<? extends AbstractQuestHandler>) c;
-					QuestEngine.getInstance().addQuestHandler(tmp.newInstance());
+					QuestEngine.getInstance().addQuestHandler(tmp.getDeclaredConstructor().newInstance());
 				} catch (Exception e) {
 					throw new RuntimeException("Failed to load quest handler class: " + c.getName(), e);
 				}

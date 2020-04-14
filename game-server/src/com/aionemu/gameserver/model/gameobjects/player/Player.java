@@ -199,7 +199,7 @@ public class Player extends Creature {
 
 	public Player(PlayerAccountData playerAccountData, Account account) {
 		super(playerAccountData.getPlayerCommonData().getPlayerObjId(), new PlayerController(), null, playerAccountData.getPlayerCommonData(),
-			playerAccountData.getPlayerCommonData().getPosition());
+			playerAccountData.getPlayerCommonData().getPosition(), false);
 		this.playerAccountData = playerAccountData;
 		this.playerAccount = account;
 

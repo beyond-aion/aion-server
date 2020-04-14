@@ -1,25 +1,21 @@
 package com.aionemu.gameserver.dataholders.loadingutils;
 
-import java.io.BufferedWriter;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.FileReader;
-import java.io.FileWriter;
-import java.io.IOException;
+import java.io.*;
+import java.nio.ByteBuffer;
+import java.nio.channels.SeekableByteChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
+import java.nio.file.StandardOpenOption;
 import java.util.Properties;
+import java.util.zip.CRC32;
 
 import javax.xml.namespace.QName;
 import javax.xml.parsers.ParserConfigurationException;
 import javax.xml.parsers.SAXParser;
 import javax.xml.parsers.SAXParserFactory;
-import javax.xml.stream.XMLInputFactory;
-import javax.xml.stream.XMLOutputFactory;
-import javax.xml.stream.XMLStreamException;
-import javax.xml.stream.XMLStreamReader;
-import javax.xml.stream.XMLStreamWriter;
+import javax.xml.stream.*;
 import javax.xml.stream.events.XMLEvent;
 
-import org.apache.commons.io.FileUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.xml.sax.Attributes;
@@ -479,6 +475,19 @@ public class XmlMerger {
 	 *           if an IO error occurs reading the file
 	 */
 	private static String makeHash(File file) throws IOException {
-		return String.valueOf(FileUtils.checksumCRC32(file));
+		return String.valueOf(calculateCRC32(file.toPath()));
+	}
+
+	private static long calculateCRC32(Path filePath) throws IOException {
+		CRC32 crc = new CRC32();
+		ByteBuffer buffer = ByteBuffer.allocate(1024);
+		int len;
+		try (SeekableByteChannel input = Files.newByteChannel(filePath, StandardOpenOption.READ)) {
+			while ((len = input.read(buffer)) > 0) {
+				buffer.flip();
+				crc.update(buffer.array(), 0, len);
+			}
+		}
+		return crc.getValue();
 	}
 }

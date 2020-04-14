@@ -1,11 +1,7 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author xTz
@@ -57,7 +53,7 @@ public class SpawnSpotTemplate {
 	public SpawnSpotTemplate() {
 	}
 
-	private static final Integer ZERO = new Integer(0);
+	private static final Integer ZERO = 0;
 
 	void beforeMarshal(Marshaller marshaller) {
 		if (ZERO.equals(staticId))

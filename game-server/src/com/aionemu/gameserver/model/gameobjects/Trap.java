@@ -13,8 +13,8 @@ import com.aionemu.gameserver.world.knownlist.NpcKnownList;
  */
 public class Trap extends SummonedObject<Creature> {
 
-	public Trap(int objId, NpcController controller, SpawnTemplate spawnTemplate, Creature creator) {
-		super(objId, controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()).getLevel(), creator);
+	public Trap(NpcController controller, SpawnTemplate spawnTemplate, Creature creator) {
+		super(controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()).getLevel(), creator);
 		setMasterName("");
 		setKnownlist(new NpcKnownList(this));
 		setEffectController(new EffectController(this));

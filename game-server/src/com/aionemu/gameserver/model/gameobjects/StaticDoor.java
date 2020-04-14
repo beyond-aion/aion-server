@@ -19,8 +19,8 @@ public class StaticDoor extends StaticObject {
 	private EnumSet<StaticDoorState> states;
 	private boolean isLocked = true;
 
-	public StaticDoor(int objectId, StaticObjectController controller, SpawnTemplate spawnTemplate, StaticDoorTemplate objectTemplate, int instanceId) {
-		super(objectId, controller, spawnTemplate, objectTemplate);
+	public StaticDoor(StaticObjectController controller, SpawnTemplate spawnTemplate, StaticDoorTemplate objectTemplate, int instanceId) {
+		super(controller, spawnTemplate, objectTemplate);
 		states = EnumSet.copyOf(getObjectTemplate().getInitialStates());
 		if (objectTemplate.getKeyId() < 2) {
 			isLocked = false;

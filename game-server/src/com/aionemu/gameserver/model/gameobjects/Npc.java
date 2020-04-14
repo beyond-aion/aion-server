@@ -27,6 +27,7 @@ import com.aionemu.gameserver.spawnengine.WalkerGroup;
 import com.aionemu.gameserver.spawnengine.WalkerGroupShift;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -47,8 +48,8 @@ public class Npc extends Creature {
 	private ItemAttackType attacktype = ItemAttackType.PHYSICAL;
 	private NpcEquippedGear overridenEquipment;
 
-	public Npc(int objId, NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
-		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()));
+	public Npc(NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
+		super(IDFactory.getInstance().nextId(), controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()), true);
 		Objects.requireNonNull(objectTemplate, "Npcs should be based on template");
 		controller.setOwner(this);
 		moveController = new NpcMoveController(this);
@@ -360,11 +361,6 @@ public class Npc extends Creature {
 	@Override
 	public float getVisibleDistance() {
 		return isFlag() || isRaidMonster() ? Float.MAX_VALUE : super.getVisibleDistance();
-	}
-
-	@Override
-	protected boolean autoReleaseObjectId() {
-		return true;
 	}
 
 	public void overrideEquipmentList(NpcEquipmentList v) {

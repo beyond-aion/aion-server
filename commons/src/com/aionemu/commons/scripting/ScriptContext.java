@@ -130,13 +130,4 @@ public interface ScriptContext {
 	 */
 	@Override
 	int hashCode();
-
-	/**
-	 * This method overrides finalization to ensure that active script context will not be collected by GC. If such situation happens -
-	 * {@link #shutdown()} is called to ensure that resources were released.
-	 * 
-	 * @throws Throwable
-	 *           if something goes wrong during finalization
-	 */
-	void finalize() throws Throwable;
 }
