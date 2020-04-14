@@ -18,7 +18,6 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.google.common.base.Preconditions;
 
 /**
  * @author ATracer
@@ -57,7 +56,8 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 
 	public void addMember(TM member) {
 		Objects.requireNonNull(member, "Team member should be not null");
-		Preconditions.checkState(members.put(member.getObjectId(), member) == null, "Team member is already added");
+		if (members.put(member.getObjectId(), member) != null)
+			throw new IllegalStateException("Team member is already added");
 	}
 
 	public final TM removeMember(TM member) {
@@ -67,7 +67,8 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 
 	public final TM removeMember(int objectId) {
 		TM removedMember = members.remove(objectId);
-		Preconditions.checkState(removedMember != null, "Team member is already removed");
+		if (removedMember == null)
+			throw new IllegalStateException("Team member is already removed");
 		onRemoveMember(removedMember);
 		return removedMember;
 	}
@@ -178,7 +179,8 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	}
 
 	protected final void setLeader(TM member) {
-		Preconditions.checkState(leader == null, "Leader should be not initialized");
+		if (leader != null)
+			throw new IllegalStateException("Leader should be not initialized");
 		Objects.requireNonNull(member, "Leader should not be null");
 		this.leader = member;
 	}

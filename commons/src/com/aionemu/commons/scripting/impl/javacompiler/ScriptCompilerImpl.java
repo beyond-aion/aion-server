@@ -2,6 +2,8 @@ package com.aionemu.commons.scripting.impl.javacompiler;
 
 import java.io.File;
 import java.io.IOException;
+import java.lang.management.ManagementFactory;
+import java.lang.management.RuntimeMXBean;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -27,6 +29,18 @@ import com.aionemu.commons.scripting.ScriptCompiler;
 public class ScriptCompilerImpl implements ScriptCompiler {
 
 	private static final Logger log = LoggerFactory.getLogger(ScriptCompilerImpl.class);
+	private static final List<String> COMPILER_OPTIONS = new ArrayList<>();
+
+	static {
+		RuntimeMXBean runtimeMxBean = ManagementFactory.getRuntimeMXBean();
+		COMPILER_OPTIONS.addAll(Arrays.asList("-encoding", "UTF-8", "-g"));
+		if (runtimeMxBean.getInputArguments().contains("--enable-preview")) {
+			// activate preview features in compiler too, if the project was started with --enable-preview
+			COMPILER_OPTIONS.add("--enable-preview");
+			COMPILER_OPTIONS.add("--release");
+			COMPILER_OPTIONS.add(runtimeMxBean.getSpecVersion());
+		}
+	}
 
 	/**
 	 * Instance of JavaCompiler that will be used to compile classes
@@ -163,7 +177,6 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	 *           if compilation failed with errors
 	 */
 	protected CompilationResult doCompilation(Iterable<JavaFileObject> compilationUnits) {
-		List<String> options = Arrays.asList("-encoding", "UTF-8", "-g");
 		DiagnosticListener<JavaFileObject> listener = new ErrorListener();
 		ClassFileManager manager = new ClassFileManager(javaCompiler, listener);
 		manager.setParentClassLoader(parentClassLoader);
@@ -179,7 +192,7 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 			classFiles.forEach(manager::addClass);
 
 		if (compilationUnits.iterator().hasNext()) {
-			JavaCompiler.CompilationTask task = javaCompiler.getTask(null, manager, listener, options, null, compilationUnits);
+			JavaCompiler.CompilationTask task = javaCompiler.getTask(null, manager, listener, COMPILER_OPTIONS, null, compilationUnits);
 
 			if (!task.call())
 				throw new RuntimeException("Error while compiling classes");

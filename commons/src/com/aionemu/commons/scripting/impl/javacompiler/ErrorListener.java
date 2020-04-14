@@ -26,11 +26,16 @@ public class ErrorListener implements DiagnosticListener<JavaFileObject> {
 	 */
 	@Override
 	public void report(Diagnostic<? extends JavaFileObject> diagnostic) {
+		String msg = diagnostic.getMessage(Locale.ENGLISH);
+		if (diagnostic.getKind() == Diagnostic.Kind.NOTE) {
+			if ("Some input files use preview language features.".equals(msg) || "Recompile with -Xlint:preview for details.".equals(msg))
+				return; // we're intentionally using preview features if we use --enable-preview, so don't spam our logs about it
+		}
 		StringBuilder sb = new StringBuilder();
 		sb.append("Java Compiler ");
 		sb.append(diagnostic.getKind());
 		sb.append(": ");
-		sb.append(diagnostic.getMessage(Locale.ENGLISH));
+		sb.append(msg);
 		if (diagnostic.getSource() != null) {
 			sb.append("\n");
 			sb.append("Source: ");

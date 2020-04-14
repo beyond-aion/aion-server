@@ -11,21 +11,11 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
-import com.aionemu.gameserver.model.team.league.events.LeagueChangeLeaderEvent;
-import com.aionemu.gameserver.model.team.league.events.LeagueCreateEvent;
-import com.aionemu.gameserver.model.team.league.events.LeagueDisbandEvent;
-import com.aionemu.gameserver.model.team.league.events.LeagueInviteEvent;
-import com.aionemu.gameserver.model.team.league.events.LeagueJoinEvent;
-import com.aionemu.gameserver.model.team.league.events.LeagueKinahDistributionEvent;
-import com.aionemu.gameserver.model.team.league.events.LeagueLeftEvent;
+import com.aionemu.gameserver.model.team.league.events.*;
 import com.aionemu.gameserver.model.team.league.events.LeagueLeftEvent.LeaveReson;
-import com.aionemu.gameserver.model.team.league.events.LeagueLootRulesChangeEvent;
-import com.aionemu.gameserver.model.team.league.events.LeagueMoveEvent;
-import com.aionemu.gameserver.model.team.league.events.LeagueShowBrandEvent;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.google.common.base.Preconditions;
 
 /**
  * @author ATracer
@@ -38,7 +28,7 @@ public class LeagueService {
 		GlobalCallbackHelper.addCallback(new AllianceDisbandListener());
 	}
 
-	public static final void inviteToLeague(final Player inviter, Player invited) {
+	public static void inviteToLeague(final Player inviter, Player invited) {
 		if (canInvite(inviter, invited)) {
 			PlayerAlliance playerAlliance = invited.getPlayerAlliance();
 
@@ -58,7 +48,7 @@ public class LeagueService {
 		}
 	}
 
-	public static final boolean canInvite(Player inviter, Player invited) {
+	public static boolean canInvite(Player inviter, Player invited) {
 		if (inviter.isDead()) {
 			// You cannot use the Alliance League invitation function while you are dead.
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_UNION_CANT_INVITE_WHEN_DEAD());
@@ -92,7 +82,7 @@ public class LeagueService {
 		return true;
 	}
 
-	public static final League createLeague(Player leader) {
+	public static League createLeague(Player leader) {
 		PlayerAlliance alliance = leader.getPlayerAlliance();
 		Objects.requireNonNull(alliance, "Alliance can not be null");
 		LeagueMember mainAlliance = new LeagueMember(alliance, 0);
@@ -107,7 +97,7 @@ public class LeagueService {
 	/**
 	 * Add alliance to league
 	 */
-	public static final void addAlliance(League league, PlayerAlliance alliance) {
+	public static void addAlliance(League league, PlayerAlliance alliance) {
 		Objects.requireNonNull(league, "League should not be null");
 		league.onEvent(new LeagueJoinEvent(league, alliance));
 	}
@@ -115,7 +105,7 @@ public class LeagueService {
 	/**
 	 * Remove alliance from league (normal leave)
 	 */
-	public static final void removeAlliance(PlayerAlliance alliance) {
+	public static void removeAlliance(PlayerAlliance alliance) {
 		if (alliance != null) {
 			League league = alliance.getLeague();
 			Objects.requireNonNull(league, "League should not be null");
@@ -126,11 +116,13 @@ public class LeagueService {
 	/**
 	 * Remove alliance from league (expel)
 	 */
-	public static final void expelAlliance(LeagueMember leagueAlliance, Player leagueLeader) {
+	public static void expelAlliance(LeagueMember leagueAlliance, Player leagueLeader) {
 		PlayerAlliance leagueLeaderAlliance = leagueLeader.getPlayerAlliance();
-		Preconditions.checkArgument(leagueLeaderAlliance.isLeader(leagueLeader), "Given player is not the league alliance leader");
+		if (!leagueLeaderAlliance.isLeader(leagueLeader))
+			throw new IllegalArgumentException("Given player is not the league alliance leader");
 		League league = leagueLeaderAlliance.getLeague();
-		Preconditions.checkArgument(league.isLeader(leagueLeaderAlliance), "Leaders alliance is not the league leader");
+		if (!league.isLeader(leagueLeaderAlliance))
+			throw new IllegalArgumentException("Leader's alliance is not the league leader");
 		league.onEvent(new LeagueLeftEvent(league, leagueAlliance.getObject(), LeaveReson.EXPEL));
 	}
 
@@ -167,7 +159,7 @@ public class LeagueService {
 		}
 	}
 
-	public static final void changeGroupRules(League league, LootGroupRules lootRules) {
+	public static void changeGroupRules(League league, LootGroupRules lootRules) {
 		league.onEvent(new LeagueLootRulesChangeEvent(league, lootRules));
 	}
 

@@ -13,7 +13,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.packet.BaseClientPacket;
-import com.google.common.base.Preconditions;
 
 /**
  * Packet Processor responsible for executing packets in correct order with respecting rules: - 1 packet / client at one time. - execute packets in
@@ -118,10 +117,10 @@ public class PacketProcessor<T extends AConnection<?>> {
 	 *          - Executor that will be used to execute task (should be used only as decorator).
 	 */
 	public PacketProcessor(int minThreads, int maxThreads, int threadSpawnThreshold, int threadKillThreshold, Executor executor) {
-		Preconditions.checkArgument(minThreads > 0, "Min Threads must be positive");
-		Preconditions.checkArgument(maxThreads >= minThreads, "Max Threads must be >= Min Threads");
-		Preconditions.checkArgument(threadSpawnThreshold > 0, "Thread Spawn Threshold must be positive");
-		Preconditions.checkArgument(threadKillThreshold > 0, "Thread Kill Threshold must be positive");
+		checkArgument(minThreads > 0, "Min Threads must be positive");
+		checkArgument(maxThreads >= minThreads, "Max Threads must be >= Min Threads");
+		checkArgument(threadSpawnThreshold > 0, "Thread Spawn Threshold must be positive");
+		checkArgument(threadKillThreshold > 0, "Thread Kill Threshold must be positive");
 
 		this.minThreads = minThreads;
 		this.maxThreads = maxThreads;
@@ -134,6 +133,11 @@ public class PacketProcessor<T extends AConnection<?>> {
 
 		for (int i = 0; i < minThreads; i++)
 			newThread();
+	}
+
+	private void checkArgument(boolean condition, String errorMessage) {
+		if (!condition)
+			throw new IllegalArgumentException(errorMessage);
 	}
 
 	/**

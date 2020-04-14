@@ -11,7 +11,6 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillSubType;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.google.common.primitives.Doubles;
 
 /**
  * @author Jo
@@ -163,14 +162,11 @@ public class PlayerModelEntry implements Persistable {
 		for (int skillID : skillSet)
 			input.add((double) (skillID == previousSkillID ? 1 : 0));
 
-		return Doubles.toArray(input);
+		return input.stream().mapToDouble(Double::doubleValue).toArray();
 	}
 
 	public double[] toActionOutputArray(List<Integer> skillSet) {
-		List<Double> output = new ArrayList<>();
-		for (int skillID : skillSet)
-			output.add((double) (skillID == this.skillID ? 1 : 0));
-		return Doubles.toArray(output);
+		return skillSet.stream().mapToDouble(skillId -> skillId == this.skillID ? 1 : 0).toArray();
 	}
 
 	public Timestamp getTimestamp() {

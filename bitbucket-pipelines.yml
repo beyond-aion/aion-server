@@ -1,7 +1,7 @@
-image: maven:3.3.9
+image: maven:3.6.3
 
 clone:
-  depth: 3 # shallow git clone, since we don't need all the history
+  depth: 1 # shallow git clone, since we don't need all the history
 
 pipelines:
   custom: # triggered manually
