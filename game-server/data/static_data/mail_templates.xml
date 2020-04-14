@@ -230,4 +230,30 @@ Formatting rules:
             <tail id="904462"/>
         </template>
     </mail>
+	<mail name="$$GD_REWARD_MAIL">
+		<template name="" race="ELYOS">
+			<sender id="905975" />
+			<title id="905976" />
+			<header id="0" />
+			<body id="905977">
+				<param id="month" />
+				<param id="day" />
+				<param id="territorial" />
+				<param id="legionName" />
+			</body>
+			<tail id="905978" />
+		</template>
+		<template name="" race="ASMODIANS">
+			<sender id="905979" />
+			<title id="905980" />
+			<header id="0" />
+			<body id="905981">
+				<param id="month" />
+				<param id="day" />
+				<param id="territorial" />
+				<param id="legionName" />
+			</body>
+			<tail id="905982" />
+		</template>
+	</mail>
 </mails>

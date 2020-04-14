@@ -1,10 +1,13 @@
 package com.aionemu.gameserver.services.mail;
 
+import java.sql.Timestamp;
 import java.time.Duration;
+import java.time.LocalDateTime;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
@@ -131,4 +134,32 @@ public final class MailFormatter {
 		SystemMailService.sendMail("$$ABYSS_REWARD_MAIL", playerData.getName(), title, message, attachedItemObjId, attachedItemCount, attachedKinahCount,
 			LetterType.NORMAL);
 	}
+
+	public static void sendGuildDominionRewardMail(Player player, int territorialId, Timestamp participantDate, int itemId, int itemCount) {
+		MailTemplate template = DataManager.SYSTEM_MAIL_TEMPLATES.getMailTemplate("$$GD_REWARD_MAIL", "", player.getRace());
+		LocalDateTime participationDate = participantDate.toLocalDateTime();
+		MailPart formatter = new MailPart() {
+
+			@Override
+			public String getParamValue(String name) {
+				String val = "";
+				if ("month".equals(name)) {
+					val = Integer.toString(participationDate.getMonthValue());
+				} else if ("day".equals(name)) {
+					val = Integer.toString(participationDate.getDayOfMonth());
+				} else if ("territorial".equals(name)) {
+					val = Integer.toString(territorialId);
+				} else if ("legionName".equals(name)) {
+					val = player.getLegion() == null ? "" : player.getLegion().getName();
+				}
+				return val;
+			}
+		};
+
+		String title = template.getFormattedTitle(formatter);
+		String body = template.getFormattedMessage(formatter);
+
+		SystemMailService.sendMail("$$GD_REWARD_MAIL", player.getName(), title, body, itemId, itemCount, 0, LetterType.NORMAL);
+	}
+
 }
