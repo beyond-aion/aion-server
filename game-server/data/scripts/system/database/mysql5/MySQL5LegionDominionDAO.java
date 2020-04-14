@@ -1,6 +1,5 @@
 package mysql5;
 
-import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -13,7 +12,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DB;
-import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
 import com.aionemu.gameserver.dao.LegionDominionDAO;
@@ -29,34 +27,41 @@ public class MySQL5LegionDominionDAO extends LegionDominionDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5LegionDominionDAO.class);
 
-	public static final String UPDATE_LOC = "UPDATE legion_dominion_locations SET legion_id=?, occupied_date=? WHERE id=?";
-	public static final String LOAD1 = "SELECT * FROM `legion_dominion_locations`";
-	public static final String LOAD2 = "SELECT * FROM `legion_dominion_participants` WHERE `legion_dominion_id`=? " ;
-	public static final String INSERT_NEW = "INSERT INTO legion_dominion_participants(`legion_dominion_id`, `legion_id`) VALUES (?, ?)";
-	public static final String UPDATE_PARTICIPANT = "UPDATE legion_dominion_participants SET points=?, survived_time=?, participated_date=? WHERE legion_id=?";
+	private static final String UPDATE_LOC = "UPDATE legion_dominion_locations SET legion_id=?, occupied_date=? WHERE id=?";
+	private static final String LOAD1 = "SELECT * FROM `legion_dominion_locations`";
+	private static final String LOAD2 = "SELECT * FROM `legion_dominion_participants` WHERE `legion_dominion_id`=? " ;
+	private static final String INSERT_NEW_LOCATION = "INSERT INTO legion_dominion_locations(`id`,`legion_id`) VALUES(?,?)";
+	private static final String INSERT_NEW = "INSERT INTO legion_dominion_participants(`legion_dominion_id`, `legion_id`) VALUES (?, ?)";
+	private static final String UPDATE_PARTICIPANT = "UPDATE legion_dominion_participants SET points=?, survived_time=?, participated_date=? WHERE legion_id=?";
 	private static final String DELETE_INFO = "DELETE FROM legion_dominion_participants WHERE legion_id=?";
 
 	@Override
-	public boolean loadLegionDominionLocations(Map<Integer, LegionDominionLocation> locations) {
-		boolean success = true;
-		List<Integer> loaded = new ArrayList<>();
-		Connection con = null;
-		PreparedStatement stmt = null;
-		try {
-				con = DatabaseFactory.getConnection();
-				stmt = con.prepareStatement(LOAD1);
-				ResultSet resultSet = stmt.executeQuery();
-				while (resultSet.next()) {
-					LegionDominionLocation loc = locations.get(resultSet.getInt("id"));
-					loc.setLegionId(resultSet.getInt("legion_id"));
-					loc.setOccupiedDate(resultSet.getTimestamp("occupied_date"));
-					loaded.add(loc.getLocationId());
-				}
+	public boolean loadOrCreateLegionDominionLocations(Map<Integer, LegionDominionLocation> locations) {
+		try (PreparedStatement ps = DB.prepareStatement(LOAD1); ResultSet rs = DB.executeQuerry(ps)){
+			List<Integer> nonExistingLocations = new ArrayList<>(locations.keySet());
+			if (rs == null) {
+				log.error("Error loading Legion Dominion location from Database: empty resultset");
+				return false;
+			}
+			while (rs.next()) {
+				LegionDominionLocation loc = locations.get(rs.getInt("id"));
+				loc.setLegionId(rs.getInt("legion_id"));
+				loc.setOccupiedDate(rs.getTimestamp("occupied_date"));
+				nonExistingLocations.remove((Integer) loc.getLocationId());
+			}
+
+			for (int locationId : nonExistingLocations) {
+				DB.insertUpdate(INSERT_NEW_LOCATION, stmt -> {
+					stmt.setInt(1, locationId);
+					stmt.setInt(2, 0);
+					stmt.execute();
+				});
+			}
+			return true;
 		} catch (SQLException e) {
-			log.warn("Error loading Legion Dominion location from Database: " + e.getMessage(), e);
-			success = false;
+			log.error("Error loading Legion Dominion location from Database", e);
+			return false;
 		}
-		return success;
 	}
 
 	@Override

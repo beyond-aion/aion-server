@@ -2,8 +2,8 @@
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
     <spawn_map map_id="210070000">
         <!-- Rift -->
-        <spawn npc_id="700137" handler="RIFT">
 		<!-- Entry -->
+        <spawn npc_id="700137" handler="RIFT">
             <spot x="2669.0242" y="438.01553" z="576.44300" anchor="CYGNEA_AM"/> <!-- id 2170 -->
             <spot x="1695.2113" y="118.30494" z="541.34860" anchor="CYGNEA_BM"/> <!-- id 2171 -->
             <spot x="780.76843" y="1797.6338" z="457.70422" anchor="CYGNEA_CM"/> <!-- id 2172 -->
@@ -16,9 +16,14 @@
             <spot x="2911.7507" y="2899.1367" z="270.23444" anchor="CYGNEA_HM"/> <!-- id 2177 -->
             <spot x="1990.0380" y="1688.9974" z="195.12500" anchor="CYGNEA_IM"/> <!-- id 2178 -->
 		</spawn>
-		<spawn npc_id="700138" handler="RIFT">
+		<spawn npc_id="702721" handler="RIFT">
+			<spot x="1390.3015" y="658.4547" z="582.958" h="92" anchor="CYGNEA_VIL1M"/> <!--2189 -->
+			<spot x="1214.9753" y="1564.4226" z="468.49017" h="50" anchor="CYGNEA_VIL2M"/> <!--2190 -->
+			<spot x="2392.9177" y="1553.1038" z="438.97025" h="88" anchor="CYGNEA_VIL3M"/> <!--2191 -->
+		</spawn>
 		<!-- Exit -->
-            <spot x="2674.3784" y="592.28790" z="555.33340" anchor="CYGNEA_AS"/> <!-- id 2280 -->
+		<spawn npc_id="700138" handler="RIFT">
+		    <spot x="2674.3784" y="592.28790" z="555.33340" anchor="CYGNEA_AS"/> <!-- id 2280 -->
             <spot x="1814.7332" y="306.04382" z="556.33890" anchor="CYGNEA_BS"/> <!-- id 2281 -->
             <spot x="347.00986" y="1513.1348" z="458.63156" anchor="CYGNEA_CS"/> <!-- id 2282 -->
             <spot x="1969.6664" y="1219.6482" z="439.87613" anchor="CYGNEA_DS"/> <!-- id 2283 -->
@@ -30,6 +35,11 @@
             <spot x="2736.0444" y="2074.6597" z="242.66900" anchor="CYGNEA_HS"/> <!-- id 2287 -->
             <spot x="1359.5742" y="2211.3206" z="186.94678" anchor="CYGNEA_IS"/> <!-- id 2288 -->
         </spawn>
+		<spawn npc_id="702722" handler="RIFT">
+			<spot x="1094.4875" y="412.1734" z="596.687" h="79" anchor="CYGNEA_VIL1S"/> <!--2289 -->
+			<spot x="1115.4843" y="1408.345" z="492.3389" h="19" anchor="CYGNEA_VIL2S"/> <!--2290 -->
+			<spot x="2616.026" y="1555.6674" z="449.8001" h="28" anchor="CYGNEA_VIL3S"/> <!--2291 -->
+		</spawn>
 		<!-- CYGNEA_AM -->
 		<rift_spawn id="2170">
 			<!-- someone to spawn -->

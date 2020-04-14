@@ -1,27 +1,33 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
-	<xs:include schemaLocation="global_types.xsd"/>
-  <xs:element name="legion_dominion_template">
-    <xs:complexType>
+
+	<xs:include schemaLocation="global_types.xsd" />
+
+	<xs:element name="legion_dominion_template">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="legion_dominion_location" maxOccurs="unbounded" type="LegionDominionLocation" />
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:complexType name="LegionDominionLocation">
 		<xs:sequence>
-			<xs:element name="legion_dominion_location" maxOccurs="unbounded" type="Legion_dominion_location"/>
+			<xs:element name="reward" type="LegionDominionReward" maxOccurs="unbounded" />
+			<xs:element name="invasion_rift" type="LegionDominionInvasionRift" minOccurs="0" maxOccurs="1" />
 		</xs:sequence>
+		<xs:attribute name="id" use="required" type="xs:integer" />
+		<xs:attribute name="race" use="required" type="Race" />
+		<xs:attribute name="worldId" use="required" type="xs:integer" />
+		<xs:attribute name="zone" use="required" type="xs:string" />
+		<xs:attribute name="nameId" use="required" type="xs:integer" />
 	</xs:complexType>
-  </xs:element>
-    <xs:complexType name="Legion_dominion_location">
-		<xs:sequence>
-			<xs:element name="reward" type="LegionDominionReward" maxOccurs="unbounded"/> 
-		</xs:sequence>
-		<xs:attribute name="id" use="required" type="xs:integer"/>
-		<xs:attribute name="race" use="required" type="Race"/>
-		<xs:attribute name="worldId" use="required" type="xs:integer"/>
-		<xs:attribute name="zone" use="required" type="xs:string"/>
-		<xs:attribute name="nameId" use="required" type="xs:integer"/>
+	<xs:complexType name="LegionDominionReward">
+		<xs:attribute name="rank" type="xs:int" />
+		<xs:attribute name="itemId" type="xs:int" />
+		<xs:attribute name="count" type="xs:int" />
 	</xs:complexType>
-  <xs:complexType name="LegionDominionReward">
-		<xs:attribute name="rank" type="xs:int"/>
-		<xs:attribute name="id" type="xs:int"/>
-		<xs:attribute name="count" type="xs:int"/>
-		<xs:attribute name="time" type="xs:int"/>
+	<xs:complexType name="LegionDominionInvasionRift">
+		<xs:attribute name="key_item_id" type="xs:int" use="required" />
+		<xs:attribute name="rift_id" type="xs:int" use="required" />
 	</xs:complexType>
 </xs:schema>

@@ -14,5 +14,6 @@
 		<xs:attribute name="id" type="xs:int" use="required"/>
 		<xs:attribute name="world" type="xs:int"/>
 		<xs:attribute name="has_spawns" type="xs:boolean" default="false"/>
+		<xs:attribute name="auto_closeable" type="xs:boolean" default="true" />
 	</xs:complexType>
 </xs:schema>

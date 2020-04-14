@@ -207,13 +207,13 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		int rank = 8;
 		if (points > 67000) { // S-Rank
 			if (bossKilled) {
-				reward.setRewardItem1Count(2);
+				reward.setRewardItem1Count(4);
 				reward.setFinalAP((points / 10));
 			} else {
-				reward.setRewardItem1Count(1);
+				reward.setRewardItem1Count(3);
 			}
 			reward.setFinalGP(120);
-			reward.setRewardItem1(186000242); // C-Med
+			reward.setRewardItem1(186000242); // Ceranium-Medal
 			reward.setRewardItem2(188053801); // Stonespear Siege Champion Reward Chest
 			reward.setRewardItem2Count(1);
 			reward.setRewardItem3(188053804); // Stonespear Siege Champion Relic Chest
@@ -221,8 +221,8 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			rank = 1;
 		} else if (points > 41000) { // A-Rank
 			reward.setFinalGP(100);
-			reward.setRewardItem1(186000243); // C-Fragment
-			reward.setRewardItem1Count(10);
+			reward.setRewardItem1(186000242); // Ceranium-Medal
+			reward.setRewardItem1Count(2);
 			reward.setRewardItem2(188053800); // Stonespear Siege Runner-Up Reward Chest
 			reward.setRewardItem2Count(1);
 			reward.setRewardItem3(188053803); // Stonespear Siege Runner-Up Relic Chest
@@ -230,13 +230,27 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			rank = 2;
 		} else if (points > 25000) { // B-Rank
 			reward.setFinalGP(80);
-			reward.setRewardItem1(186000243); // C-Fragment
+			reward.setRewardItem1(186000147); // Mithril-Medal
 			reward.setRewardItem1Count(5);
 			reward.setRewardItem2(188053799); // Stonespear Siege Reward Chest
 			reward.setRewardItem2Count(1);
 			reward.setRewardItem3(188053802); // Stonespear Siege Relic Chest
 			reward.setRewardItem3Count(1);
 			rank = 3;
+		} else if (points > 8800) { // D-Rank
+			reward.setRewardItem1(186000243); // Ceranium-Fragment
+			reward.setRewardItem1Count(12);
+			reward.setRewardItem2(186000096); // Platinum Medal
+			reward.setRewardItem2Count(3);
+			rank = 5;
+		} else if (points > 0) { // F-Rank
+			if (points > 1000) {
+				reward.setRewardItem1(186000243); // Ceranium-Fragment
+				reward.setRewardItem1Count(6);
+				reward.setRewardItem2(186000096); // Platinum Medal
+				reward.setRewardItem2Count(1);
+			}
+			rank = 6;
 		}
 
 		if (!reward.isRewarded()) {

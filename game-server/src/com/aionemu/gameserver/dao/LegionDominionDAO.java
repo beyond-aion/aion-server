@@ -17,7 +17,7 @@ public abstract class LegionDominionDAO implements DAO {
 		return LegionDominionDAO.class.getName();
 	}
 
-	public abstract boolean loadLegionDominionLocations(Map<Integer, LegionDominionLocation> legionDominionLocations);
+	public abstract boolean loadOrCreateLegionDominionLocations(Map<Integer, LegionDominionLocation> legionDominionLocations);
 
 	public abstract void updateLegionDominionLocation(LegionDominionLocation loc);
 

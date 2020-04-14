@@ -6,38 +6,29 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author Yeats
- *
+ * @author Yeats, Sykra
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "LegionDominionReward")
 public class LegionDominionReward {
 
-	@XmlAttribute(name = "id")
-	protected int id;
+	@XmlAttribute(name = "rank")
+	protected int rank;
+	@XmlAttribute(name = "itemId")
+	protected int itemId;
 	@XmlAttribute(name = "count")
 	protected int count;
-	@XmlAttribute(name = "time")
-	protected int time;
-	
-	/**
-	 * @return the id
-	 */
-	public int getId() {
-		return id;
+
+	public int getRank() {
+		return rank;
 	}
-	
-	/**
-	 * @return the count
-	 */
+
+	public int getItemId() {
+		return itemId;
+	}
+
 	public int getCount() {
 		return count;
 	}
-	
-	/**
-	 * @return the time
-	 */
-	public int getTime() {
-		return time;
-	}
+
 }

@@ -32,6 +32,10 @@ public class RiftLocation {
 		return template.hasSpawns();
 	}
 
+	public boolean isAutoCloseable() {
+		return template.isAutoCloseable();
+	}
+
 	public boolean isOpened() {
 		return opened;
 	}

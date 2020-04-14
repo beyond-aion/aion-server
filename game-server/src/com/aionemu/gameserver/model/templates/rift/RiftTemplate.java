@@ -13,11 +13,13 @@ import javax.xml.bind.annotation.XmlType;
 public class RiftTemplate {
 
 	@XmlAttribute(name = "id")
-	protected int id;
+	private int id;
 	@XmlAttribute(name = "world")
-	protected int world;
+	private int world;
 	@XmlAttribute(name = "has_spawns")
-	protected boolean hasSpawns;
+	private boolean hasSpawns;
+	@XmlAttribute(name = "auto_closeable")
+	private boolean autoCloseable = true;
 
 	public int getId() {
 		return id;
@@ -31,4 +33,7 @@ public class RiftTemplate {
 		return hasSpawns;
 	}
 
+	public boolean isAutoCloseable() {
+		return autoCloseable;
+	}
 }

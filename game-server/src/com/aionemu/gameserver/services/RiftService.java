@@ -54,14 +54,13 @@ public class RiftService {
 
 	public boolean isValidId(int id) {
 		if (isRift(id)) {
-			return RiftService.getInstance().getRiftLocations().keySet().contains(id);
+			return RiftService.getInstance().getRiftLocations().containsKey(id);
 		} else {
 			for (RiftLocation loc : RiftService.getInstance().getRiftLocations().values()) {
 				if (loc.getWorldId() == id)
 					return true;
 			}
 		}
-
 		return false;
 	}
 
@@ -134,11 +133,11 @@ public class RiftService {
 		for (RiftLocation loc : locations.values()) {
 			if (loc.getWorldId() == id) {
 				if (guards) {
-					if (loc.hasSpawns())
+					if (loc.hasSpawns() && loc.isAutoCloseable())
 						possibleLocs.add(loc);
 					continue;
 				}
-				if (!loc.hasSpawns())
+				if (!loc.hasSpawns() && loc.isAutoCloseable())
 					possibleLocs.add(loc);
 			}
 		}
@@ -191,7 +190,7 @@ public class RiftService {
 			SpawnTemplate npcSpawnTemplate = entry.getValue();
 			VisibleObject npc = World.getInstance().findVisibleObject(npcObjectId);
 			// npcObjectId may have been released and reassigned to a completely unrelated mob, if the original (now despawned) rift npc was a non
-			// respawning mob. spawned list doesn't clean up removed spawns but only updates respawning npcObjectIds, therefore the npcSpawnTemplate check 
+			// respawning mob. spawned list doesn't clean up removed spawns but only updates respawning npcObjectIds, therefore the npcSpawnTemplate check
 			if (npc != null && npc.getSpawn() == npcSpawnTemplate)
 				npc.getController().deleteIfAliveOrCancelRespawn();
 			else
@@ -202,14 +201,19 @@ public class RiftService {
 		location.getSpawned().clear();
 	}
 
-	public void closeRifts() {
+	public boolean isRiftOpened(int riftId) {
+		return activeRifts.containsKey(riftId);
+	}
+
+	public void closeRifts(boolean forceClose) {
 		closing.lock();
-
 		try {
-			for (RiftLocation rift : activeRifts.values())
+			for (RiftLocation rift : activeRifts.values()) {
+				if (!forceClose && rift.isAutoCloseable())
+					continue;
 				closeRift(rift);
-
-			activeRifts.clear();
+				activeRifts.remove(rift.getId());
+			}
 		} finally {
 			closing.unlock();
 		}

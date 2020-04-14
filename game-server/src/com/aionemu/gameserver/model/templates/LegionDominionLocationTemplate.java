@@ -11,11 +11,10 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.Race;
 
 /**
- * @author Yeats
- *
+ * @author Yeats, Sykra
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "Legion_dominion_location")
+@XmlType(name = "LegionDominionLocation")
 public class LegionDominionLocationTemplate implements L10n {
 
 	@XmlAttribute(name = "id")
@@ -30,45 +29,36 @@ public class LegionDominionLocationTemplate implements L10n {
 	protected int nameId;
 	@XmlElement(name = "reward")
 	protected List<LegionDominionReward> reward;
-	
-	/**
-	 * @return the id
-	 */
+	@XmlElement(name = "invasion_rift")
+	protected LegionDominionInvasionRift invasionRift;
+
 	public int getId() {
 		return id;
 	}
-	
-	/**
-	 * @return the worldId
-	 */
+
 	public int getWorldId() {
 		return worldId;
 	}
-	
-	/**
-	 * @return the race
-	 */
+
 	public Race getRace() {
 		return race;
 	}
-	
-	/**
-	 * @return the zone
-	 */
+
 	public String getZone() {
 		return zone;
 	}
 
-	
-	/**
-	 * @return the reward
-	 */
 	public List<LegionDominionReward> getRewards() {
 		return reward;
+	}
+
+	public LegionDominionInvasionRift getInvasionRift() {
+		return invasionRift;
 	}
 
 	@Override
 	public int getL10nId() {
 		return nameId;
 	}
+
 }

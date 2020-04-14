@@ -39,8 +39,8 @@ public class SM_CONQUEROR_PROTECTOR extends AionServerPacket {
 		this.player = player;
 	}
 
-	public SM_CONQUEROR_PROTECTOR(Collection<Player> intruders) {
-		this.type = 5;
+	public SM_CONQUEROR_PROTECTOR(Collection<Player> intruders, boolean displayCd) {
+		this.type = displayCd ? 5 : 4;
 		this.intruders = intruders;
 	}
 
@@ -58,7 +58,8 @@ public class SM_CONQUEROR_PROTECTOR extends AionServerPacket {
 				writeD(buffLvl);
 				writeD(cooldown); // intruder scan cooldown
 				break;
-			case 5: // intruder scan
+			case 4: // intruder scan (without cd)
+			case 5: // intruder scan (with cd)
 				writeH(intruders.size());
 				for (Player player : intruders) {
 					CPInfo info = ConquerorAndProtectorService.getInstance().getCPInfoForCurrentMap(player);

@@ -23,13 +23,14 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author ATracer, Source
+ * @author ATracer, Source, Sykra
  */
 public class RVController extends NpcController {
 
 	private boolean isMaster = false;
 	private boolean isVortex = false;
 	private boolean isVolatile = false;
+	private boolean isInvasion = false;
 	private final Map<Integer, Player> passedPlayers = new HashMap<>();
 	private SpawnTemplate slaveSpawnTemplate;
 	private Npc slave;
@@ -52,6 +53,7 @@ public class RVController extends NpcController {
 		this.maxLevel = riftTemplate.getMaxLevel();
 		this.deSpawnedTime = ((int) (System.currentTimeMillis() / 1000))
 			+ (isVortex ? VortexService.getInstance().getDuration() * 3600 : RiftService.getInstance().getDuration() * 3600);
+		this.isInvasion = riftTemplate.isInvasionRift();
 
 		if (slave != null)// master rift should be created
 		{
@@ -70,6 +72,7 @@ public class RVController extends NpcController {
 		this.maxLevel = riftTemplate.getMaxLevel();
 		this.deSpawnedTime = ((int) (System.currentTimeMillis() / 1000))
 			+ (isVortex ? VortexService.getInstance().getDuration() * 3600 : RiftService.getInstance().getDuration() * 3600);
+		this.isInvasion = riftTemplate.isInvasionRift();
 
 		if (slave != null)// master rift should be created
 		{
@@ -83,8 +86,11 @@ public class RVController extends NpcController {
 
 	@Override
 	public void onDialogRequest(Player player) {
-		if (isMaster || isAccepting)
+		if (isMaster || isAccepting) {
+			if (isInvasion && player.getOppositeRace() != riftTemplate.getDestination())
+				return;
 			onRequest(player);
+		}
 	}
 
 	private void onRequest(Player player) {
@@ -227,6 +233,14 @@ public class RVController extends NpcController {
 		return deSpawnedTime - (int) (System.currentTimeMillis() / 1000);
 	}
 
+	public boolean isVolatile() {
+		return isVolatile;
+	}
+
+	public boolean isInvasion() {
+		return isInvasion;
+	}
+
 	public Map<Integer, Player> getPassedPlayers() {
 		return passedPlayers;
 	}
@@ -242,10 +256,6 @@ public class RVController extends NpcController {
 			return new int[] { first, controller.slaveSpawnTemplate.getWorldId() };
 		}
 		return new int[] { first };
-	}
-
-	public boolean isVolatile() {
-		return isVolatile;
 	}
 
 }

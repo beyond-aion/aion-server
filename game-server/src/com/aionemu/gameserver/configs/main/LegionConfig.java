@@ -273,4 +273,10 @@ public class LegionConfig {
 	@Property(key = "gameserver.legion.require_key_for_stonespear_reach", defaultValue = "true")
 	public static boolean REQUIRE_KEY_FOR_STONESPEAR_REACH;
 
+	/**
+	 * Min points to be reached in stonespear reach instance to account for a territory election
+	 */
+	@Property(key = "gameserver.legion.stonespear_reach_min_points", defaultValue = "0")
+	public static int STONESPEAR_REACH_MIN_POINTS_FOR_TERRITORY;
+
 }

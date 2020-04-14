@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.templates.cp.CPType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CONQUEROR_PROTECTOR;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionDominionService;
+import com.aionemu.gameserver.taskmanager.tasks.LegionDominionIntruderUpdateTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -115,6 +116,7 @@ public class ConquerorAndProtectorService {
 						cpInfo.getBuff().applyEffect(player, cpInfo.getType(), 3);
 						PacketSendUtility.sendPacket(player, new SM_CONQUEROR_PROTECTOR(7, cpInfo.getLDRank(), getOrRemoveCooldown(player.getObjectId())));
 					}
+					LegionDominionIntruderUpdateTask.getInstance().addPlayer(loc.getLocationId(), player);
 				}
 			}
 		}
@@ -128,11 +130,12 @@ public class ConquerorAndProtectorService {
 			CPInfo cpInfo = protectors.get(player.getObjectId());
 			if (cpInfo != null && cpInfo.getLDRank() > 0) {
 				LegionDominionLocation loc = LegionDominionService.getInstance().getLegionDominionLoc(player.getLegion().getOccupiedLegionDominion());
-				if (loc == null || loc.getZoneNameAsString().equalsIgnoreCase(zone.getAreaTemplate().getZoneName().name())) {
+				if (loc != null && loc.getZoneNameAsString().equalsIgnoreCase(zone.getAreaTemplate().getZoneName().name())) {
 					cpInfo.setLDRank(0);
 					updateBuffAndNotifyNearbyPlayers(player, cpInfo);
 					if (cpInfo.getRank() == 0)
 						protectors.remove(player.getObjectId());
+					LegionDominionIntruderUpdateTask.getInstance().removePlayer(loc.getLocationId(), player);
 				}
 			}
 		}
@@ -155,6 +158,13 @@ public class ConquerorAndProtectorService {
 				addVictims(killer, killerInfo, 1);
 			}
 		}
+	}
+
+	public void sendDetectCooldown(Player player) {
+		CPInfo cpInfo = getCPInfoForCurrentMap(player);
+		if (cpInfo == null)
+			return;
+		PacketSendUtility.sendPacket(player, new SM_CONQUEROR_PROTECTOR(7, cpInfo.getLDRank(), getOrRemoveCooldown(player.getObjectId())));
 	}
 
 	private void addVictims(Player player, CPInfo info, int count) {
@@ -189,7 +199,7 @@ public class ConquerorAndProtectorService {
 		if (getOrRemoveCooldown(player.getObjectId()) > 0)
 			return;
 		intruderScanCooldowns.put(player.getObjectId(), System.currentTimeMillis() + 180 * 1000);
-		PacketSendUtility.sendPacket(player, new SM_CONQUEROR_PROTECTOR(findIntruders(player)));
+		PacketSendUtility.sendPacket(player, new SM_CONQUEROR_PROTECTOR(findIntruders(player), true));
 	}
 
 	private int getOrRemoveCooldown(int objectId) {

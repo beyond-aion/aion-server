@@ -2,8 +2,6 @@ package com.aionemu.gameserver.services;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import java.time.DayOfWeek;
-import java.time.ZonedDateTime;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -59,7 +57,6 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -410,10 +407,8 @@ public class DialogService {
 			case ABYSSRANK:
 				return player.getAbyssRank().getRank().getId() < talkInfo.getSubDialogValue();
 			case TARGET_LEGION_DOMINION:
-				ZonedDateTime now = ServerTime.now();
-				if (now.getDayOfWeek() == DayOfWeek.WEDNESDAY && now.getHour() >= 8 && now.getHour() <= 10) {
+				if (LegionDominionService.getInstance().isInCalculationTime())
 					return true;
-				}
 				if (player.getLegion() != null) {
 					if (player.getLegion().getCurrentLegionDominion() == talkInfo.getSubDialogValue()) {
 						return false;

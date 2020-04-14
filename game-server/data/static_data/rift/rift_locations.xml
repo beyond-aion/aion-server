@@ -31,6 +31,9 @@
 	<rift_location id="2176" world="210070000" has_spawns="true"/>
 	<rift_location id="2177" world="210070000" has_spawns="true"/>
 	<rift_location id="2178" world="210070000" has_spawns="true"/>
+	<rift_location id="2189" world="210070000" auto_closeable="false"/>
+	<rift_location id="2190" world="210070000" auto_closeable="false"/>
+	<rift_location id="2191" world="210070000" auto_closeable="false"/>
 	<!-- Morheim -->
 	<rift_location id="2220" world="220020000"/>
 	<rift_location id="2221" world="220020000"/>
@@ -62,4 +65,7 @@
 	<rift_location id="2286" world="220080000" has_spawns="true"/>
 	<rift_location id="2287" world="220080000" has_spawns="true"/>
 	<rift_location id="2288" world="220080000" has_spawns="true"/>
+	<rift_location id="2289" world="220080000" auto_closeable="false"/>
+	<rift_location id="2290" world="220080000" auto_closeable="false"/>
+	<rift_location id="2291" world="220080000" auto_closeable="false"/>
 </rift_locations>

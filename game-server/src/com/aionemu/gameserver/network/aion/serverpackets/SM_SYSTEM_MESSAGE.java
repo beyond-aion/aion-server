@@ -28502,6 +28502,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The Invasion Rift to Elysea has opened.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_LIGHT_SIDE_LEGION_DIRECT_PORTAL_OPEN() {
+		return new SM_SYSTEM_MESSAGE (1402877);
+	}
+
+	/**
+	 * An Invasion Rift to Asmodae has opened.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_DARK_SIDE_LEGION_DIRECT_PORTAL_OPEN() {
+		return new SM_SYSTEM_MESSAGE(1402878);
+	}
+
+	/**
 	 * You cannot use %0 at your level.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_CANNOT_USE_DIRECT_PORTAL_LEVEL_LIMIT_COMMON(String npcL10n) {

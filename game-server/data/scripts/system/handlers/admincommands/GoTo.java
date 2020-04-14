@@ -398,6 +398,7 @@ public class GoTo extends AdminCommand {
 		addLocation(DRAKENSPIRE_DEPHTS, 322, 183, 1688, "Drakenspire Depths", "Makarna");
 		addLocation(RAKSANG_RUINS, 830, 942, 1207, (byte) 73, "Raksang Ruins", "Mantor");
 		addLocation(INFERNAL_DANUAR_RELIQUARY, 256.60f, 257.99f, 241.78f, "Infernal Danuar Reliquary", "IDR", "Ruhnadium Heroisch");
+		addLocation(STONESPEAR_REACH, 231.14f, 264.399f, (byte) 98, "Stonespear Reach", "Plaza of Challenge", "Platz der Herausforderung");
 
 		// New maps 4.8
 		addLocation(CYGNEA, 2905, 803, 570, "Cygnea", "Signia");

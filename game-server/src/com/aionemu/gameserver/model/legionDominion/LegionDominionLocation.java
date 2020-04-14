@@ -1,22 +1,28 @@
 package com.aionemu.gameserver.model.legionDominion;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 import java.util.Map;
 import java.util.TreeMap;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.configs.main.LegionConfig;
 import com.aionemu.gameserver.dao.LegionDominionDAO;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.team.legion.Legion;
+import com.aionemu.gameserver.model.templates.LegionDominionInvasionRift;
 import com.aionemu.gameserver.model.templates.LegionDominionLocationTemplate;
+import com.aionemu.gameserver.model.templates.LegionDominionReward;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_RANK;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Yeats
+ * @author Yeats, Sykra
  */
 public class LegionDominionLocation {
 
@@ -25,7 +31,6 @@ public class LegionDominionLocation {
 	private int legionId;
 	private Timestamp occupiedDate;
 	private Map<Integer, LegionDominionParticipantInfo> participantInfo = new TreeMap<>();
-	private List<Integer> legionsSortedByrank = new ArrayList<>();
 
 	public LegionDominionLocation(LegionDominionLocationTemplate template) {
 		this.template = template;
@@ -56,6 +61,10 @@ public class LegionDominionLocation {
 		return legionId;
 	}
 
+	public LegionDominionInvasionRift getInvasionRift() {
+		return template.getInvasionRift();
+	}
+
 	public void setLegionId(int legionId) {
 		this.legionId = legionId;
 	}
@@ -76,15 +85,19 @@ public class LegionDominionLocation {
 		participantInfo = info;
 	}
 
-	public List<Integer> getRank() {
-		return legionsSortedByrank;
+	public List<LegionDominionParticipantInfo> getLegionRanking(boolean removeNonEligibleLegions) {
+		if (participantInfo.isEmpty())
+			return Collections.emptyList();
+		Stream<LegionDominionParticipantInfo> participantStream = participantInfo.values().stream();
+		if (removeNonEligibleLegions)
+			participantStream = participantStream.filter(info -> info.getPoints() > LegionConfig.STONESPEAR_REACH_MIN_POINTS_FOR_TERRITORY);
+		return participantStream
+			.sorted(Comparator.comparingInt(LegionDominionParticipantInfo::getPoints).reversed().thenComparingLong(LegionDominionParticipantInfo::getDate))
+			.collect(Collectors.toList());
 	}
 
-	public int getRank(int legionId) {
-		if (legionsSortedByrank.contains(legionId)) {
-			return legionsSortedByrank.indexOf(legionId) + 1;
-		}
-		return 0;
+	public Map<Integer, List<LegionDominionReward>> getRewards() {
+		return template.getRewards().stream().collect(Collectors.groupingBy(LegionDominionReward::getRank));
 	}
 
 	public boolean join(int legionId) {
@@ -107,38 +120,19 @@ public class LegionDominionLocation {
 	}
 
 	public List<LegionDominionParticipantInfo> getSortedTop25Participants(LegionDominionParticipantInfo curLegion) {
-		List<LegionDominionParticipantInfo> info = new ArrayList<>();
-		info.addAll(participantInfo.values());
-		if (!info.isEmpty()) {
-			info.sort(null);
-			info = info.subList(0, (25 > info.size()) ? (info.size()) : 25); // = 25 entries
-			if (info.contains(curLegion)) {
-				return info;
-			} else {
-				info.remove(info.size() - 1); // remove last index
-				info.add(info.size(), (curLegion)); // add cur Legion to last index
-			}
+		List<LegionDominionParticipantInfo> info = getLegionRanking(false);
+		if (info.isEmpty())
+			return Collections.emptyList();
+		info = info.subList(0,  Math.min(25, info.size()));
+		if (!info.contains(curLegion)) {
+			info.remove(info.size() -1);
+			info.add(info.size() , curLegion);
 		}
 		return info;
 	}
 
-	public LegionDominionParticipantInfo getWinner() {
-		List<LegionDominionParticipantInfo> info = new ArrayList<>();
-		info.addAll(participantInfo.values());
-		if (!info.isEmpty()) {
-			info.sort(null);
-			if (info.get(0) != null && info.get(0).getPoints() > 0) {
-				return info.get(0);
-			}
-		}
-		return null;
-	}
-
 	public LegionDominionParticipantInfo getParticipantInfo(int legionId) {
-		if (!participantInfo.isEmpty() && participantInfo.containsKey(legionId)) {
-			return participantInfo.get(legionId);
-		}
-		return null;
+		return participantInfo.get(legionId);
 	}
 
 	public void updateRanking() {
@@ -151,6 +145,5 @@ public class LegionDominionLocation {
 
 	public synchronized void reset() {
 		participantInfo = new TreeMap<>();
-		legionsSortedByrank = new ArrayList<>();
 	}
 }

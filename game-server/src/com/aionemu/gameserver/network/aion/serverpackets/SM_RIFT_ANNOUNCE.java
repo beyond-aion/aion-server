@@ -78,7 +78,7 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 				writeF(rift.getOwner().getX());
 				writeF(rift.getOwner().getY());
 				writeF(rift.getOwner().getZ());
-				writeC(rift.isVortex() ? 1 : (rift.isVolatile() ? 4 : 0)); // 1 vortex, 2, concert hall, 3 pangaea, 4 chaos rift, 5 infiltration rift
+				writeRiftType();
 				writeC(rift.isMaster() ? 1 : 0); // display | hide
 				break;
 			case 3:
@@ -87,7 +87,7 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 				writeD(rift.getOwner().getObjectId());
 				writeD(rift.getUsedEntries());
 				writeD(rift.getRemainTime());
-				writeC(rift.isVortex() ? 1 : (rift.isVolatile() ? 4 : 0)); // 1 vortex, 2, concert hall, 3 pangaea, 4 chaos rift, 5 infiltration
+				writeRiftType();
 				writeC(0); // unk
 				break;
 			case 4: // rift despawn
@@ -97,4 +97,18 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 				break;
 		}
 	}
+
+	private void writeRiftType() {
+		// 1 vortex, 2, concert hall, 3 pangaea, 4 chaos rift, 5 infiltration rift
+		if (rift.isVortex()) {
+			writeC(1);
+		} else if (rift.isVolatile()) {
+			writeC(4);
+		} else if (rift.isInvasion()) {
+			writeC(5);
+		} else {
+			writeC(0);
+		}
+	}
+
 }

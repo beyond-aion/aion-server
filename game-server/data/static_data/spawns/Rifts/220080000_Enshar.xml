@@ -2,8 +2,8 @@
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
     <spawn_map map_id="220080000">
         <!-- Rift -->
-        <spawn npc_id="700137" handler="RIFT">
 		<!-- Entry -->
+        <spawn npc_id="700137" handler="RIFT">
             <spot x="152.02060" y="2572.3533" z="134.02466" anchor="ENSHAR_AM"/> <!-- id 2280 -->
             <spot x="1305.3157" y="2422.7840" z="279.51456" anchor="ENSHAR_BM"/> <!-- id 2281 -->
             <spot x="2307.4660" y="1204.8960" z="325.00000" anchor="ENSHAR_CM"/> <!-- id 2282 -->
@@ -16,9 +16,13 @@
             <spot x="104.40256" y="156.43721" z="165.69632" anchor="ENSHAR_HM"/> <!-- id 2287 -->
             <spot x="1742.1217" y="1212.8824" z="211.69537" anchor="ENSHAR_IM"/> <!-- id 2288 -->
 		</spawn>
-		<spawn npc_id="700138" handler="RIFT">
+		<spawn npc_id="702721" handler="RIFT">
+			<spot x="1818.7255" y="2550.4365" z="300.012" h="71" anchor="ENSHAR_VIL1M"/> <!--2289 -->
+			<spot x="1474.6984" y="1796.5096" z="330.69998" h="103" anchor="ENSHAR_VIL2M"/> <!--2290 -->
+			<spot x="803.0243" y="1260.2048" z="252.79918" h="63" anchor="ENSHAR_VIL3M"/> <!--2291 -->
+		</spawn>
 		<!-- Exit -->
-            <spot x="587.75305" y="2667.7040" z="182.33176" anchor="ENSHAR_AS"/> <!-- id 2170 -->
+		<spawn npc_id="700138" handler="RIFT">
             <spot x="1427.6782" y="2369.2650" z="270.75000" anchor="ENSHAR_BS"/> <!-- id 2171 -->
             <spot x="2356.9678" y="1377.9133" z="335.74457" anchor="ENSHAR_CS"/> <!-- id 2172 -->
             <spot x="882.30670" y="1786.6001" z="299.61420" anchor="ENSHAR_DS"/> <!-- id 2173 -->
@@ -30,6 +34,11 @@
             <spot x="381.94467" y="366.77304" z="191.89494" anchor="ENSHAR_HS"/> <!-- id 2177 -->
             <spot x="1657.1338" y="995.59230" z="192.25000" anchor="ENSHAR_IS"/> <!-- id 2178 -->
         </spawn>
+		<spawn npc_id="702722" handler="RIFT">
+			<spot x="2138.715" y="2386.2053" z="321.6469" h="25" anchor="ENSHAR_VIL1S"/> <!--2189 -->
+			<spot x="1388.0222" y="1927.4559" z="342.62463" h="23" anchor="ENSHAR_VIL2S"/> <!--2190 -->
+			<spot x="569.84485" y="1176.2722" z="262.81213" h="114" anchor="ENSHAR_VIL3S"/> <!--2191 -->
+		</spawn>
 		<!-- ENSHAR_AM -->
 		<rift_spawn id="2280">
 			<!-- someone to spawn -->

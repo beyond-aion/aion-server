@@ -35,6 +35,9 @@ public enum RiftEnum {
 	CYGNEA_GM(2176, "CYGNEA_GM", "ENSHAR_GS", 144, 60, 65, Race.ASMODIANS, false, true),
 	CYGNEA_HM(2177, "CYGNEA_HM", "ENSHAR_HS", 144, 60, 65, Race.ASMODIANS, false, true),
 	CYGNEA_IM(2178, "CYGNEA_IM", "ENSHAR_IS", 144, 60, 65, Race.ASMODIANS, false, true),
+	CYGNEA_VIL1M(2189, "CYGNEA_VIL1M", "ENSHAR_VIL1S", 72, 55, 65, Race.ASMODIANS, false, false, true),
+	CYGNEA_VIL2M(2190, "CYGNEA_VIL2M", "ENSHAR_VIL2S", 72, 55, 65, Race.ASMODIANS, false, false, true),
+	CYGNEA_VIL3M(2191, "CYGNEA_VIL3M", "ENSHAR_VIL3S", 72, 55, 65, Race.ASMODIANS, false, false, true),
 	MARCHUTAN_AM(1280, "MARCHUTAN_AM", "MARCHUTAN_AS", 24, 45, 65, Race.ELYOS, true),
 	MORHEIM_AM(2220, "MORHEIM_AM", "ELTNEN_AS", 12, 20, 65, Race.ELYOS),
 	MORHEIM_BM(2221, "MORHEIM_BM", "ELTNEN_BS", 20, 20, 65, Race.ELYOS),
@@ -62,7 +65,10 @@ public enum RiftEnum {
 	ENSHAR_FM(2285, "ENSHAR_FM", "CYGNEA_FS", 48, 55, 65, Race.ELYOS),
 	ENSHAR_GM(2286, "ENSHAR_GM", "CYGNEA_GS", 144, 60, 65, Race.ELYOS, false, true),
 	ENSHAR_HM(2287, "ENSHAR_HM", "CYGNEA_HS", 144, 60, 65, Race.ELYOS, false, true),
-	ENSHAR_IM(2288, "ENSHAR_IM", "CYGNEA_IS", 144, 60, 65, Race.ELYOS, false, true);
+	ENSHAR_IM(2288, "ENSHAR_IM", "CYGNEA_IS", 144, 60, 65, Race.ELYOS, false, true),
+	ENSHAR_VIL1M(2289, "ENSHAR_VIL1M", "CYGNEA_VIL1S", 72, 55, 65, Race.ELYOS, false, false, true),
+	ENSHAR_VIL2M(2290, "ENSHAR_VIL2M", "CYGNEA_VIL2S", 72, 55, 65, Race.ELYOS, false, false, true),
+	ENSHAR_VIL3M(2291, "ENSHAR_VIL3M", "CYGNEA_VIL3S", 72, 55, 65, Race.ELYOS, false, false, true);
 
 	private int id;
 	private String master;
@@ -73,17 +79,22 @@ public enum RiftEnum {
 	private Race destination;
 	private boolean vortex;
 	private boolean canBeVolatile;
+	private boolean isInvasionRift;
 
-	private RiftEnum(int id, String master, String slave, int entries, int minLevel, int maxLevel, Race destination) {
-		this(id, master, slave, entries, minLevel, maxLevel, destination, false, false);
+	RiftEnum(int id, String master, String slave, int entries, int minLevel, int maxLevel, Race destination) {
+		this(id, master, slave, entries, minLevel, maxLevel, destination, false, false, false);
 	}
 
-	private RiftEnum(int id, String master, String slave, int entries, int minLevel, int maxLevel, Race destination, boolean vortex) {
-		this(id, master, slave, entries, minLevel, maxLevel, destination, vortex, false);
+	RiftEnum(int id, String master, String slave, int entries, int minLevel, int maxLevel, Race destination, boolean vortex) {
+		this(id, master, slave, entries, minLevel, maxLevel, destination, vortex, false, false);
 	}
 
-	private RiftEnum(int id, String master, String slave, int entries, int minLevel, int maxLevel, Race destination, boolean vortex,
-		boolean canBeVolatile) {
+	RiftEnum(int id, String master, String slave, int entries, int minLevel, int maxLevel, Race destination, boolean vortex, boolean canBeVolatile) {
+		this(id, master, slave, entries, minLevel, maxLevel, destination, vortex, canBeVolatile, false);
+	}
+
+	RiftEnum(int id, String master, String slave, int entries, int minLevel, int maxLevel, Race destination, boolean vortex,
+			 boolean canBeVolatile, boolean isInvasionRift) {
 		this.id = id;
 		this.master = master;
 		this.slave = slave;
@@ -93,6 +104,7 @@ public enum RiftEnum {
 		this.destination = destination;
 		this.vortex = vortex;
 		this.canBeVolatile = canBeVolatile;
+		this.isInvasionRift = isInvasionRift;
 	}
 
 	public static RiftEnum getRift(int id) throws IllegalArgumentException {
@@ -101,7 +113,6 @@ public enum RiftEnum {
 				return rift;
 			}
 		}
-
 		throw new IllegalArgumentException("Unsupported rift id: " + id);
 	}
 
@@ -111,7 +122,6 @@ public enum RiftEnum {
 				return rift;
 			}
 		}
-
 		throw new IllegalArgumentException("Unsupported vortex race: " + race);
 	}
 
@@ -170,6 +180,10 @@ public enum RiftEnum {
 
 	public boolean canBeVolatile() {
 		return canBeVolatile;
+	}
+
+	public boolean isInvasionRift() {
+		return isInvasionRift;
 	}
 
 }
