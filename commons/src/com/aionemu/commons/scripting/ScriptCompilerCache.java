@@ -115,6 +115,7 @@ public class ScriptCompilerCache {
 	}
 
 	private static List<File> getClassFiles(File sourceFile) {
+		sourceFile = WORKING_DIR.relativize(Paths.get(sourceFile.toURI())).toFile();
 		Set<File> classFiles = CLASS_FILES_BY_SOURCE_FILE.get(sourceFile);
 		if (classFiles == null)
 			return Collections.emptyList();
