@@ -28376,6 +28376,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Xasta flies past overhead.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDYUN_RASTA_SPAWN_01() {
+		return new SM_SYSTEM_MESSAGE(1402775);
+	}
+
+	/**
+	 * Use the anti-aircraft gun to attack Xasta flying overhead.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDYUN_RASTA_SPAWN_02() {
+		return new SM_SYSTEM_MESSAGE(1402776);
+	}
+
+	/**
 	 * Prepare for combat! Enemies approaching!
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_TAMES_SOLO_A_START() {

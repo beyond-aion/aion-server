@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -113,7 +114,6 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 	@Override
 	public void onLeaveInstance(Player player) {
 		player.getEffectController().removeEffect(player.getRace() == Race.ELYOS ? 21805 : 21806);
-		player.getInventory().decreaseByItemId(185000229, 1);
 	}
 
 	@Override
@@ -196,6 +196,8 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 			if (detector.getNpcId() == 856056 && isXastaEventStarted.compareAndSet(false, true)) {
 				sp(236271, 521.33f, 499.49f, 179.946f, (byte) 27, 2000, "300620000_Xasta_Path");
 				despawnNpc(detector);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDYUN_RASTA_SPAWN_01());
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDYUN_RASTA_SPAWN_02(), 2000);
 			}
 		}
 	}
