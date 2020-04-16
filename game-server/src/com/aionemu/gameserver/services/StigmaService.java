@@ -460,10 +460,13 @@ public class StigmaService {
 	}
 
 	public static void removeStigmaSkills(Player player, Stigma stigma, int stigmaLevel, boolean notifyPlayer) {
+		List<String> notifiedSkillL10ns = new ArrayList<>();
 		for (String skillGroup : stigma.getGainSkillGroups()) {
 			for (SkillTemplate st : DataManager.SKILL_DATA.getSkillTemplatesByGroup(skillGroup)) {
-				if (notifyPlayer && st.getL10n() != null)
+				if (notifyPlayer && st.getL10n() != null && !notifiedSkillL10ns.contains(st.getL10n())) {
+					notifiedSkillL10ns.add(st.getL10n());
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_STIGMA_YOU_CANNOT_USE_THIS_SKILL_AFTER_UNEQUIP_STIGMA_STONE(st.getL10n()));
+				}
 				for (SkillLearnTemplate skill : DataManager.SKILL_TREE_DATA.getTemplatesForSkill(st.getSkillId(), player.getPlayerClass(), player.getRace()))
 					SkillLearnService.removeSkill(player, skill.getSkillId());
 			}
