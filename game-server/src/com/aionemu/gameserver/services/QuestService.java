@@ -10,6 +10,8 @@ import java.util.*;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.world.geo.GeoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -687,6 +689,18 @@ public final class QuestService {
 	public static VisibleObject spawnQuestNpc(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading) {
 		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(worldId, templateId, x, y, z, heading);
 		return SpawnEngine.spawnObject(template, instanceId);
+	}
+
+	public static void addNewSpawnInFront(int worldId, int instanceId, int templateId, Creature creature, float distance) {
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(creature.getHeading()));
+		float x = creature.getX() + (float) (Math.cos(radian) * distance);
+		float y = creature.getY() + (float) (Math.sin(radian) * distance);
+		float z = creature.getZ();
+		float geoZ = GeoService.getInstance().getZ(worldId, x, y, creature.getZ() + 2, creature.getZ() - 1, instanceId);
+		if (!Float.isNaN(geoZ)) {
+			z = geoZ;
+		}
+		addNewSpawn(worldId,instanceId,templateId,x, y, z,creature.getHeading());
 	}
 
 	public static void addNewSpawn(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading) {

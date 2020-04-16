@@ -71,7 +71,7 @@ public class _2004ACharmedCube extends AbstractQuestHandler {
 				case 700047: // Tombstone
 					if (var == 1 && env.getVisibleObject().getObjectTemplate().getTemplateId() == 700047 && dialogActionId == USE_OBJECT) {
 						Npc npc = (Npc) env.getVisibleObject();
-						QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 211755, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
+						QuestService.addNewSpawnInFront(player.getWorldId(), player.getInstanceId(), 211755, npc, 2);
 						return true;
 					}
 					return false;
