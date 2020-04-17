@@ -1,6 +1,6 @@
 package admincommands;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.Comparator;
 import java.util.LinkedHashMap;
 import java.util.List;
@@ -11,10 +11,13 @@ import org.apache.commons.lang3.math.NumberUtils;
 import org.apache.commons.lang3.text.WordUtils;
 
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_SCRIPTS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.player.PlayerService;
@@ -38,7 +41,8 @@ public class HouseCommand extends AdminCommand {
 			"list <map> - Shows all house addresses for the given map.",
 			"tp <address> - Teleports you to the house with the given address.",
 			"own <address> - Gives ownership of given house to your target.",
-			"revoke <address> - Revokes ownership of given house."
+			"revoke <address> - Revokes ownership of given house.",
+			"reloadscripts <address> - Reloads all scripts for the given house."
 		);
 		// @formatter:on
 	}
@@ -71,6 +75,8 @@ public class HouseCommand extends AdminCommand {
 		} else if ("tp".equalsIgnoreCase(params[0])) {
 			TeleportService.teleportTo(admin, house.getPosition().getWorldMapInstance(), house.getX(), house.getY(), house.getZ(),
 				house.getTeleportHeading(), TeleportAnimation.NONE);
+		} else if ("reloadscripts".equals(params[0])) {
+			reloadPlayerScripts(admin, house);
 		} else {
 			sendInfo(admin);
 		}
@@ -158,4 +164,22 @@ public class HouseCommand extends AdminCommand {
 		house.getController().changeOwner(0);
 		sendInfo(admin, "Ownership of house " + house.getAddress().getId() + " was revoked from " + PlayerService.getPlayerName(ownerId));
 	}
+
+	private void reloadPlayerScripts(Player admin, House house) {
+		Npc butler = house.getButler();
+		if (butler == null) {
+			sendInfo(admin, "No butler was found for house with address " + house.getAddress().getId());
+			return;
+		}
+		PlayerScripts emptyScriptContainer = new PlayerScripts(house.getObjectId());
+		int[] oldScriptIds =  house.getPlayerScripts().getIds().stream().mapToInt(i -> i).toArray();
+		house.reloadPlayerScripts();
+
+		butler.getKnownList().forEachPlayer(player -> {
+			PacketSendUtility.sendPacket(player, new SM_HOUSE_SCRIPTS(house.getAddress().getId(), emptyScriptContainer, oldScriptIds));
+			PacketSendUtility.sendPacket(player, new SM_HOUSE_SCRIPTS(house.getAddress().getId(), house.getPlayerScripts()));
+		});
+		sendInfo(admin, "Script reload successful");
+	}
+
 }
