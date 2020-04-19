@@ -1,51 +1,51 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
 <legion_dominion_template xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="legion_dominion_template.xsd">
-	<legion_dominion_location id="1" worldId="220080000" zone="LegionDominionArea_01" race="ASMODIANS" nameId="404623">
-		<reward rank="1" itemId="188053896" count="1" />
-		<reward rank="1" itemId="185000233" count="1" />
-		<reward rank="1" itemId="169610352" count="1" />
-		<reward rank="2" itemId="188053896" count="1" />
-		<reward rank="3" itemId="188053897" count="1" />
+	<legion_dominion_location id="1" world_id="220080000" zone="LegionDominionArea_01" race="ASMODIANS" name_id="404623">
+		<reward rank="1" item_id="188053896" count="1" />
+		<reward rank="1" item_id="185000233" count="1" />
+		<reward rank="1" item_id="169610352" count="1" />
+		<reward rank="2" item_id="188053896" count="1" />
+		<reward rank="3" item_id="188053897" count="1" />
 		<invasion_rift key_item_id="185000233" rift_id="2289" />
 	</legion_dominion_location>
-	<legion_dominion_location id="2" worldId="220080000" zone="LegionDominionArea_02" race="ASMODIANS" nameId="404624">
-		<reward rank="1" itemId="188053896" count="1" />
-		<reward rank="1" itemId="185000234" count="1" />
-		<reward rank="1" itemId="169610353" count="1" />
-		<reward rank="2" itemId="188053896" count="1" />
-		<reward rank="3" itemId="188053897" count="1" />
+	<legion_dominion_location id="2" world_id="220080000" zone="LegionDominionArea_02" race="ASMODIANS" name_id="404624">
+		<reward rank="1" item_id="188053896" count="1" />
+		<reward rank="1" item_id="185000234" count="1" />
+		<reward rank="1" item_id="169610353" count="1" />
+		<reward rank="2" item_id="188053896" count="1" />
+		<reward rank="3" item_id="188053897" count="1" />
 		<invasion_rift key_item_id="185000234" rift_id="2290" />
 	</legion_dominion_location>
-	<legion_dominion_location id="3" worldId="220080000" zone="LegionDominionArea_03" race="ASMODIANS" nameId="404625">
-		<reward rank="1" itemId="188053896" count="1" />
-		<reward rank="1" itemId="185000235" count="1" />
-		<reward rank="1" itemId="169610354" count="1" />
-		<reward rank="2" itemId="188053896" count="1" />
-		<reward rank="3" itemId="188053897" count="1" />
+	<legion_dominion_location id="3" world_id="220080000" zone="LegionDominionArea_03" race="ASMODIANS" name_id="404625">
+		<reward rank="1" item_id="188053896" count="1" />
+		<reward rank="1" item_id="185000235" count="1" />
+		<reward rank="1" item_id="169610354" count="1" />
+		<reward rank="2" item_id="188053896" count="1" />
+		<reward rank="3" item_id="188053897" count="1" />
 		<invasion_rift key_item_id="185000235" rift_id="2291" />
 	</legion_dominion_location>
-	<legion_dominion_location id="4" worldId="210070000" zone="LegionDominionArea_04" race="ELYOS" nameId="404633">
-		<reward rank="1" itemId="188053896" count="1" />
-		<reward rank="1" itemId="185000227" count="1" />
-		<reward rank="1" itemId="169610349" count="1" />
-		<reward rank="2" itemId="188053896" count="1" />
-		<reward rank="3" itemId="188053897" count="1" />
+	<legion_dominion_location id="4" world_id="210070000" zone="LegionDominionArea_04" race="ELYOS" name_id="404633">
+		<reward rank="1" item_id="188053896" count="1" />
+		<reward rank="1" item_id="185000227" count="1" />
+		<reward rank="1" item_id="169610349" count="1" />
+		<reward rank="2" item_id="188053896" count="1" />
+		<reward rank="3" item_id="188053897" count="1" />
 		<invasion_rift key_item_id="185000227" rift_id="2189" />
 	</legion_dominion_location>
-	<legion_dominion_location id="5" worldId="210070000" zone="LegionDominionArea_05" race="ELYOS" nameId="404634">
-		<reward rank="1" itemId="188053896" count="1" />
-		<reward rank="1" itemId="185000231" count="1" />
-		<reward rank="1" itemId="169610350" count="1" />
-		<reward rank="2" itemId="188053896" count="1" />
-		<reward rank="3" itemId="188053897" count="1" />
+	<legion_dominion_location id="5" world_id="210070000" zone="LegionDominionArea_05" race="ELYOS" name_id="404634">
+		<reward rank="1" item_id="188053896" count="1" />
+		<reward rank="1" item_id="185000231" count="1" />
+		<reward rank="1" item_id="169610350" count="1" />
+		<reward rank="2" item_id="188053896" count="1" />
+		<reward rank="3" item_id="188053897" count="1" />
 		<invasion_rift key_item_id="185000231" rift_id="2190" />
 	</legion_dominion_location>
-	<legion_dominion_location id="6" worldId="210070000" zone="LegionDominionArea_06" race="ELYOS" nameId="404635">
-		<reward rank="1" itemId="188053896" count="1" />
-		<reward rank="1" itemId="185000232" count="1" />
-		<reward rank="1" itemId="169610351" count="1" />
-		<reward rank="2" itemId="188053896" count="1" />
-		<reward rank="3" itemId="188053897" count="1" />
+	<legion_dominion_location id="6" world_id="210070000" zone="LegionDominionArea_06" race="ELYOS" name_id="404635">
+		<reward rank="1" item_id="188053896" count="1" />
+		<reward rank="1" item_id="185000232" count="1" />
+		<reward rank="1" item_id="169610351" count="1" />
+		<reward rank="2" item_id="188053896" count="1" />
+		<reward rank="3" item_id="188053897" count="1" />
 		<invasion_rift key_item_id="185000232" rift_id="2191" />
 	</legion_dominion_location>
 </legion_dominion_template>

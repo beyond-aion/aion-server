@@ -17,13 +17,13 @@
 		</xs:sequence>
 		<xs:attribute name="id" use="required" type="xs:integer" />
 		<xs:attribute name="race" use="required" type="Race" />
-		<xs:attribute name="worldId" use="required" type="xs:integer" />
+		<xs:attribute name="world_id" use="required" type="xs:integer" />
 		<xs:attribute name="zone" use="required" type="xs:string" />
-		<xs:attribute name="nameId" use="required" type="xs:integer" />
+		<xs:attribute name="name_id" use="required" type="xs:integer" />
 	</xs:complexType>
 	<xs:complexType name="LegionDominionReward">
 		<xs:attribute name="rank" type="xs:int" />
-		<xs:attribute name="itemId" type="xs:int" />
+		<xs:attribute name="item_id" type="xs:int" />
 		<xs:attribute name="count" type="xs:int" />
 	</xs:complexType>
 	<xs:complexType name="LegionDominionInvasionRift">

@@ -19,13 +19,13 @@ public class LegionDominionLocationTemplate implements L10n {
 
 	@XmlAttribute(name = "id")
 	protected int id;
-	@XmlAttribute(name = "worldId")
+	@XmlAttribute(name = "world_id")
 	protected int worldId;
 	@XmlAttribute(name = "race")
 	protected Race race;
 	@XmlAttribute(name = "zone")
 	protected String zone;
-	@XmlAttribute(name = "nameId")
+	@XmlAttribute(name = "name_id")
 	protected int nameId;
 	@XmlElement(name = "reward")
 	protected List<LegionDominionReward> reward;

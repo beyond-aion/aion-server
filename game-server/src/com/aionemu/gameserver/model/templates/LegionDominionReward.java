@@ -14,7 +14,7 @@ public class LegionDominionReward {
 
 	@XmlAttribute(name = "rank")
 	protected int rank;
-	@XmlAttribute(name = "itemId")
+	@XmlAttribute(name = "item_id")
 	protected int itemId;
 	@XmlAttribute(name = "count")
 	protected int count;
