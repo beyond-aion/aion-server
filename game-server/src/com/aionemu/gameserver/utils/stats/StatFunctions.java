@@ -449,7 +449,9 @@ public class StatFunctions {
 			damage -= Math.round(damage * Math.min(tgs.getMDef().getCurrent() * 0.0001f, 99f));
 		}
 
-		if (speller instanceof Npc && !(speller instanceof SummonedObject<?>)) {
+		if (damage < 1) {
+			damage = 1;
+		} else if (speller instanceof Npc && !(speller instanceof SummonedObject<?>)) {
 			int rnd = (int) (damage * 0.08f);
 			damage += Rnd.get(-rnd, rnd);
 		}
