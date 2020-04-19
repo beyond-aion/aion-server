@@ -21,7 +21,7 @@ public class CM_PET_EMOTE extends AionClientPacket {
 	private PetEmote emote;
 	private float x1, y1, z1, x2, y2, z2;
 	private byte h;
-	private int emotionId;
+	private int emoteId, emotionId;
 	private int unk2;
 
 	public CM_PET_EMOTE(int opcode, Set<State> validStates) {
@@ -30,7 +30,8 @@ public class CM_PET_EMOTE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		emote = PetEmote.getEmoteById(readUC());
+		emoteId = readUC();
+		emote = PetEmote.getEmoteById(emoteId);
 		switch (emote) {
 			case MOVE_STOP:
 			case MOVE_POSITION_UPDATE:
@@ -59,8 +60,10 @@ public class CM_PET_EMOTE extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		Pet pet = player.getPet();
 
-		if (pet == null)
+		if (pet == null || !pet.isSpawned() || emote == PetEmote.UNKNOWN) {
+			LoggerFactory.getLogger(getClass()).warn(player + " / " + pet + " sent pet emote " + emoteId + " (emotionId: " + emotionId + ", unk2: " + unk2 + ")");
 			return;
+		}
 
 		// sometimes client is crazy enough to send -2.4457384E7 as z coordinate
 		// TODO (check retail) either its client bug or packet problem somewhere
@@ -83,7 +86,6 @@ public class CM_PET_EMOTE extends AionClientPacket {
 				PacketSendUtility.broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote));
 				break;
 			case BUFF:
-			case UNKNOWN:
 				break;
 			default:
 				PacketSendUtility.broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote, emotionId, unk2));
