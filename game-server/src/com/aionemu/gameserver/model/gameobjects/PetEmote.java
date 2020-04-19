@@ -8,6 +8,7 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 public enum PetEmote {
 
 	MOVE_STOP(0),
+	MOVE_POSITION_UPDATE(8), // TODO not totally sure, couldn't reproduce. sends current coords 
 	MOVETO(12),
 	NO_INTERACTION(128), // not sure when this is sent, sometimes after miol status action
 	FLY_START(129),

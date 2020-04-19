@@ -2,6 +2,8 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.PetEmote;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -31,6 +33,7 @@ public class CM_PET_EMOTE extends AionClientPacket {
 		emote = PetEmote.getEmoteById(readUC());
 		switch (emote) {
 			case MOVE_STOP:
+			case MOVE_POSITION_UPDATE:
 				x1 = readF();
 				y1 = readF();
 				z1 = readF();
@@ -67,6 +70,10 @@ public class CM_PET_EMOTE extends AionClientPacket {
 
 		switch (emote) {
 			case MOVE_STOP:
+			case MOVE_POSITION_UPDATE:
+				if (emote == PetEmote.MOVE_POSITION_UPDATE) { // TODO remove once we're sure "MOVE_POSITION_UPDATE" is correct and h is actually h
+					LoggerFactory.getLogger(getClass()).warn(pet + " of " + player + " sent " + emote + " at x:" + x1 + ", y:" + y1 + ", z:" + z1 + ", h:" + h);
+				}
 				World.getInstance().updatePosition(pet, x1, y1, z1, h);
 				PacketSendUtility.broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote));
 				break;
