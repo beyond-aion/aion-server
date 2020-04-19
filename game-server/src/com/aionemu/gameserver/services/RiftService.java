@@ -208,12 +208,14 @@ public class RiftService {
 	public void closeRifts(boolean forceClose) {
 		closing.lock();
 		try {
+			List<Integer> riftsToRemove = new ArrayList<>();
 			for (RiftLocation rift : activeRifts.values()) {
-				if (!forceClose && rift.isAutoCloseable())
-					continue;
-				closeRift(rift);
-				activeRifts.remove(rift.getId());
+				if (forceClose || rift.isAutoCloseable()) {
+					closeRift(rift);
+					riftsToRemove.add(rift.getId());
+				}
 			}
+			riftsToRemove.forEach(riftId -> activeRifts.remove(riftId));
 		} finally {
 			closing.unlock();
 		}

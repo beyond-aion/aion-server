@@ -29,6 +29,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
@@ -190,6 +191,9 @@ public class LegionDominionService {
 			} else {
 				PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_DARK_SIDE_LEGION_DIRECT_PORTAL_OPEN());
 			}
+			// Schedule rift close
+			ThreadPoolManager.getInstance().schedule(() -> RiftService.getInstance().closeRifts(invasionRift.getRiftId()),
+				RiftService.getInstance().getDuration() * 3540 * 1000);
 		}
 		return openedSuccessfully;
 	}
