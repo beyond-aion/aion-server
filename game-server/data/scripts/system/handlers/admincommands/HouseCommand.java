@@ -75,7 +75,7 @@ public class HouseCommand extends AdminCommand {
 		} else if ("tp".equalsIgnoreCase(params[0])) {
 			TeleportService.teleportTo(admin, house.getPosition().getWorldMapInstance(), house.getX(), house.getY(), house.getZ(),
 				house.getTeleportHeading(), TeleportAnimation.NONE);
-		} else if ("reloadscripts".equals(params[0])) {
+		} else if ("reloadscripts".equalsIgnoreCase(params[0])) {
 			reloadPlayerScripts(admin, house);
 		} else {
 			sendInfo(admin);

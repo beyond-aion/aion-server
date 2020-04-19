@@ -21,9 +21,4 @@ public class FlagNpcAI extends NpcAI {
 		return 0;
 	}
 
-	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
-		return 0;
-	}
-
 }
