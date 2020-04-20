@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.PetEmote;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET_EMOTE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
@@ -60,7 +61,9 @@ public class CM_PET_EMOTE extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		Pet pet = player.getPet();
 
-		if (pet == null || !pet.isSpawned() || emote == PetEmote.UNKNOWN) {
+		if (pet == null || !pet.isSpawned()) // client sometimes just doesn't care...
+			return;
+		if (emote == PetEmote.UNKNOWN) {
 			LoggerFactory.getLogger(getClass()).warn(player + " / " + pet + " sent pet emote " + emoteId + " (emotionId: " + emotionId + ", unk2: " + unk2 + ")");
 			return;
 		}
@@ -68,8 +71,10 @@ public class CM_PET_EMOTE extends AionClientPacket {
 		// sometimes client is crazy enough to send -2.4457384E7 as z coordinate
 		// TODO (check retail) either its client bug or packet problem somewhere
 		// reproducible by flying randomly and falling from long height with fly resume
-		if (x1 < 0 || y1 < 0 || z1 < 0)
+		if (x1 < 0 || y1 < 0 || z1 < 0) {
+			LoggerFactory.getLogger(getClass()).warn(pet + " of " + player + " sent " + emote + " at x:" + x1 + ", y:" + y1 + ", z:" + z1 + ", h:" + h);
 			return;
+		}
 
 		switch (emote) {
 			case MOVE_STOP:
@@ -78,17 +83,19 @@ public class CM_PET_EMOTE extends AionClientPacket {
 					LoggerFactory.getLogger(getClass()).warn(pet + " of " + player + " sent " + emote + " at x:" + x1 + ", y:" + y1 + ", z:" + z1 + ", h:" + h);
 				}
 				World.getInstance().updatePosition(pet, x1, y1, z1, h);
-				PacketSendUtility.broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote));
+				broadcastToSightedPlayersExceptMaster(pet, new SM_PET_EMOTE(pet, emote));
 				break;
 			case MOVETO:
 				World.getInstance().updatePosition(pet, x1, y1, z1, h);
 				pet.getMoveController().setNewDirection(x2, y2, z2, h);
-				PacketSendUtility.broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote));
-				break;
-			case BUFF:
+				broadcastToSightedPlayersExceptMaster(pet, new SM_PET_EMOTE(pet, emote));
 				break;
 			default:
-				PacketSendUtility.broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote, emotionId, unk2));
+				broadcastToSightedPlayersExceptMaster(pet, new SM_PET_EMOTE(pet, emote, emotionId, unk2));
 		}
+	}
+
+	private void broadcastToSightedPlayersExceptMaster(Pet pet, AionServerPacket packet) {
+		PacketSendUtility.broadcastPacket(pet, packet, false, other -> !other.equals(pet.getMaster()) && other.getKnownList().sees(pet));
 	}
 }
