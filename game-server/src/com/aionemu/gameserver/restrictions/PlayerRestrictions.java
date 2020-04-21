@@ -16,6 +16,7 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
+import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -425,8 +426,10 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 		ItemActions itemActions = item.getItemTemplate().getActions();
 		if (itemActions == null || itemActions.getItemActions().isEmpty()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE());
-			return false;
+			if (item.getItemTemplate().getItemGroup() != ItemGroup.QUEST) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE());
+				return false;
+			}
 		}
 
 		ItemUseLimits limits = item.getItemTemplate().getUseLimits();

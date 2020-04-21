@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -13,10 +14,12 @@ import com.aionemu.gameserver.model.templates.item.actions.InstanceTimeClear;
 import com.aionemu.gameserver.model.templates.item.actions.MultiReturnAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author Avol, Neon
@@ -76,11 +79,17 @@ public class CM_USE_ITEM extends AionClientPacket {
 			return;
 
 		HandlerResult result = QuestEngine.getInstance().onItemUseEvent(new QuestEnv(null, player, 0), item);
-		if (result == HandlerResult.FAILED)
-			return; // don't remove item
+
+		List<AbstractItemAction> itemActions = item.getItemTemplate().getActions() == null ? Collections.emptyList()
+			: item.getItemTemplate().getActions().getItemActions();
+
+		if (itemActions.isEmpty() && result != HandlerResult.SUCCESS) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE());
+			return;
+		}
 
 		List<AbstractItemAction> actions = new ArrayList<>();
-		for (AbstractItemAction itemAction : item.getItemTemplate().getActions().getItemActions()) {
+		for (AbstractItemAction itemAction : itemActions) {
 			// check if the item can be used before placing it on the cooldown list.
 			if (itemAction instanceof DyeAction) {
 				if (itemAction.canAct(player, item, targetItem, targetHouseObject))
