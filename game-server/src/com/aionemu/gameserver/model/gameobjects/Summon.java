@@ -21,6 +21,7 @@ import com.aionemu.gameserver.model.stats.container.SummonLifeStats;
 import com.aionemu.gameserver.model.summons.SkillOrder;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -181,6 +182,10 @@ public class Summon extends Creature {
 	@Override
 	public Race getRace() {
 		return getMaster().getRace();
+	}
+
+	public boolean isPet() {
+		return getObjectTemplate().getNpcTemplateType() == NpcTemplateType.SUMMON_PET;
 	}
 
 	/**

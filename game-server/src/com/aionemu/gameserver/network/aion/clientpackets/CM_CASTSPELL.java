@@ -1,17 +1,14 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST;
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_SKILL_NOT_READY;
-
 import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ChatUtil;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author alexa026
@@ -82,12 +79,16 @@ public class CM_CASTSPELL extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 
 		if (player.isDead()) {
-			PacketSendUtility.sendPacket(player, STR_SKILL_CANT_CAST(ChatUtil.l10n(1400059)));
+			sendPacket(SM_SYSTEM_MESSAGE.STR_SKILL_CANT_CAST(ChatUtil.l10n(1400059)));
 			return;
 		}
 
 		if (spellid == 0) {
 			player.getController().cancelCurrentSkill(null);
+			return;
+		}
+		if (DataManager.PET_SKILL_DATA.isPetOrderSkill(spellid) && (player.getSummon() == null || !player.getSummon().isPet())) {
+			sendPacket(SM_SYSTEM_MESSAGE.STR_SKILL_NOT_NEED_PET());
 			return;
 		}
 
@@ -102,7 +103,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 
 		long currentTime = System.currentTimeMillis();
 		if (player.getNextSkillUse() > currentTime) {
-			PacketSendUtility.sendPacket(player, STR_SKILL_NOT_READY());
+			sendPacket(SM_SYSTEM_MESSAGE.STR_SKILL_NOT_READY());
 			return;
 		}
 

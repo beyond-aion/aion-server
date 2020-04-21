@@ -45,10 +45,15 @@ public class PetSkillData {
 			}
 			skillList.add(petSkill.getSkillId());
 		}
+		petSkills = null;
 	}
 
 	public int size() {
 		return petSkillData.size();
+	}
+
+	public boolean isPetOrderSkill(int orderSkill) {
+		return petSkillData.containsKey(orderSkill);
 	}
 
 	public int getPetOrderSkill(int orderSkill, int petNpcId) {

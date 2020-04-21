@@ -28565,6 +28565,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You cannot use the skill because the companion has not been summoned.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_SKILL_NOT_NEED_PET() {
+		return new SM_SYSTEM_MESSAGE(1402918);
+	}
+
+	/**
 	 * You are too far from the target to use that skill.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_SKILL_NOT_ENOUGH_DISTANCE() {

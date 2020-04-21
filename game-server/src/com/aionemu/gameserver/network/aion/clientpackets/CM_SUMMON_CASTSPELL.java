@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.summons.SkillOrder;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
@@ -46,8 +47,10 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 
 		final Summon summon = player.getSummon();
-		if (summon == null) // commonly due to lags when the pet dies
+		if (summon == null || !summon.isPet()) {
+			sendPacket(SM_SYSTEM_MESSAGE.STR_SKILL_NOT_NEED_PET());
 			return;
+		}
 
 		if (summon.getObjectId() != summonObjId) {
 			AuditLogger.log(player, "tried to cast a summon spell from a different summon instance");
