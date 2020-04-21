@@ -20,8 +20,7 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 
 	private byte type;
 	private byte heading;
-	private float x = 0f, y = 0f, z = 0f, x2 = 0f, y2 = 0f, z2 = 0f, vehicleX = 0f, vehicleY = 0f, vehicleZ = 0f, vectorX = 0f, vectorY = 0f,
-		vectorZ = 0f;
+	private float x, y, z, x2, y2, z2, vehicleX, vehicleY, vehicleZ;
 	private byte glideFlag;
 	private int unk1, unk2;
 
@@ -31,11 +30,6 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		Player player = getConnection().getActivePlayer();
-
-		if (player == null || !player.isSpawned())
-			return;
-
 		readD();// object id
 
 		x = readF();
@@ -46,18 +40,9 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 		type = readC();
 
 		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
-			if ((type & MovementMask.ABSOLUTE) == 0) {
-				/*
-				 * [xTz] in packet is missed this for type 0xC0 vectorX = readF(); vectorY = readF(); vectorZ = readF();
-				 */
-				x2 = vectorX + x;
-				y2 = vectorY + y;
-				z2 = vectorZ + z;
-			} else {
-				x2 = readF();
-				y2 = readF();
-				z2 = readF();
-			}
+			x2 = readF();
+			y2 = readF();
+			z2 = readF();
 		}
 		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
 			glideFlag = readC();
@@ -75,7 +60,7 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		Summon summon = player.getSummon();
-		if (summon == null)
+		if (summon == null || !summon.isSpawned())
 			return;
 		if (summon.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE) || summon.getEffectController().isUnderFear() || summon.getEffectController().isConfused())
 			return;
@@ -89,11 +74,6 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 		if (type == MovementMask.IMMEDIATE) {
 			summon.getController().onStopMove();
 		} else if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
-			if ((type & MovementMask.ABSOLUTE) == 0) {
-				m.vectorX = vectorX;
-				m.vectorY = vectorY;
-				m.vectorZ = vectorZ;
-			}
 			summon.getMoveController().setNewDirection(x2, y2, z2, heading);
 			summon.getController().onStartMove();
 		} else
