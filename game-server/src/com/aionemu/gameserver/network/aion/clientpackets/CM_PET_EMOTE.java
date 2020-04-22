@@ -83,19 +83,19 @@ public class CM_PET_EMOTE extends AionClientPacket {
 					LoggerFactory.getLogger(getClass()).warn(pet + " of " + player + " sent " + emote + " at x:" + x1 + ", y:" + y1 + ", z:" + z1 + ", h:" + h);
 				}
 				World.getInstance().updatePosition(pet, x1, y1, z1, h);
-				broadcastToSightedPlayersExceptMaster(pet, new SM_PET_EMOTE(pet, emote));
+				broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote), false);
 				break;
 			case MOVETO:
 				World.getInstance().updatePosition(pet, x1, y1, z1, h);
 				pet.getMoveController().setNewDirection(x2, y2, z2, h);
-				broadcastToSightedPlayersExceptMaster(pet, new SM_PET_EMOTE(pet, emote));
+				broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote), false);
 				break;
 			default:
-				broadcastToSightedPlayersExceptMaster(pet, new SM_PET_EMOTE(pet, emote, emotionId, unk2));
+				broadcastToSightedPlayers(pet, new SM_PET_EMOTE(pet, emote, emotionId, unk2), emote == PetEmote.EMOTION);
 		}
 	}
 
-	private void broadcastToSightedPlayersExceptMaster(Pet pet, AionServerPacket packet) {
-		PacketSendUtility.broadcastPacket(pet, packet, false, other -> !other.equals(pet.getMaster()) && other.getKnownList().sees(pet));
+	private void broadcastToSightedPlayers(Pet pet, AionServerPacket packet, boolean withMaster) {
+		PacketSendUtility.broadcastPacket(pet, packet, false, other -> (withMaster || !other.equals(pet.getMaster())) && other.getKnownList().sees(pet));
 	}
 }
