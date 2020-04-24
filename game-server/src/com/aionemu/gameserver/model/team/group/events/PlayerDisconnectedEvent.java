@@ -32,7 +32,7 @@ public class PlayerDisconnectedEvent implements TeamEvent {
 
 	@Override
 	public void handleEvent() {
-		if (group.shouldDisband()) {
+		if (group.getOnlineMembers().isEmpty()) {
 			PlayerGroupService.disband(group);
 		} else {
 			if (player.equals(group.getLeader().getObject())) {

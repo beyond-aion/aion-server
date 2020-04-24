@@ -43,6 +43,9 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent {
 				PacketSendUtility.sendPacket(player, new SM_GROUP_MEMBER_INFO(group, member, GroupEvent.ENTER));
 			}
 		});
+		// change leader to player logging in first if all players are disconnected
+		if (group.getLeader() != null && !group.hasMember(group.getLeader().getObjectId()))
+			group.onEvent(new ChangeGroupLeaderEvent(group, player));
 	}
 
 }

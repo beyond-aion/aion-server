@@ -86,9 +86,4 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 			sendPacket(Predicates.Players.WITH_LOOT_PET, SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03());
 	}
 
-	@Override
-	public boolean shouldDisband() {
-		return super.shouldDisband() || getOnlineMembers().isEmpty();
-	}
-
 }

@@ -141,7 +141,7 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 		return size() == 0;
 	}
 
-	public boolean shouldDisband() {
+	public final boolean shouldDisband() {
 		return size() == 1; // teams always contain at least two members
 	}
 
