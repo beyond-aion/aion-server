@@ -769,6 +769,10 @@ public class QuestEngine implements GameEngine {
 		itemRelatedQuests.add(questId);
 	}
 
+	public boolean isRegisteredQuestItem(int itemId) {
+		return questItemRelated.containsKey(itemId);
+	}
+
 	public void registerQuestHouseItem(int questId) {
 		if (!questHouseItems.contains(questId))
 			questHouseItems.add(questId);

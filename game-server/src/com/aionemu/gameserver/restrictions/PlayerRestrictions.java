@@ -20,6 +20,7 @@ import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.ban.ChatBanService;
@@ -426,7 +427,7 @@ public class PlayerRestrictions extends AbstractRestrictions {
 
 		ItemActions itemActions = item.getItemTemplate().getActions();
 		if (itemActions == null || itemActions.getItemActions().isEmpty()) {
-			if (item.getItemTemplate().getItemGroup() != ItemGroup.QUEST) {
+			if (!QuestEngine.getInstance().isRegisteredQuestItem(item.getItemId())) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_IS_NOT_USABLE());
 				return false;
 			}
