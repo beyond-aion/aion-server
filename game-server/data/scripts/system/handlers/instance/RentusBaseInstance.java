@@ -131,7 +131,7 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 			case 702681:
 			case 702682:
 				TeleportService.teleportTo(player, npc.getWorldId(), npc.getInstanceId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
-				SkillEngine.getInstance().getSkill(npc, 21806, 60, player).useNoAnimationSkill();
+				SkillEngine.getInstance().applyEffectDirectly(21806, npc, player);
 				despawnNpc(npc);
 				break;
 			case 702683:
@@ -141,7 +141,7 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 			case 702687:
 			case 702688:
 				TeleportService.teleportTo(player, npc.getWorldId(), npc.getInstanceId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
-				SkillEngine.getInstance().getSkill(npc, 21805, 60, player).useNoAnimationSkill();
+				SkillEngine.getInstance().applyEffectDirectly(21805, npc, player);
 				despawnNpc(npc);
 				break;
 			case 701097:
@@ -222,8 +222,8 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 			if (player.getRace() == Race.ELYOS) {
 				for (int npcId = 702677; npcId <= 702682; npcId++) {
 					Npc npc = getNpc(npcId);
-					spawn(npcId + 6, npc.getX(), npc.getY(), 151.785f, npc.getHeading()).getSpawn().setStaticId(npc.getSpawn().getStaticId());
-					npc.getController().delete();
+					despawnNpc(npc);
+					spawn(npcId + 6, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), npc.getSpawn().getStaticId());
 				}
 			}
 		}
