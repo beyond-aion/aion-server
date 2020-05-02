@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
 import com.aionemu.gameserver.model.gameobjects.UseableItemObject;
@@ -51,6 +53,10 @@ public class SM_HOUSE_EDIT extends AionServerPacket {
 			int typeId = 0;
 			if (obj == null) {
 				HouseDecoration deco = house.getRegistry().getDecorByObjId(itemObjectId);
+				if (deco == null) {
+					LoggerFactory.getLogger(getClass()).warn("House item with object ID " + itemObjectId + " wasn't found in registry of " + house);
+					return;
+				}
 				templateId = deco.getTemplateId();
 			} else {
 				templateId = obj.getObjectTemplate().getTemplateId();
