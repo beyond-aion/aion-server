@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CREATE_CHARACTER;
 import com.aionemu.gameserver.services.AccountService;
@@ -38,25 +37,24 @@ public class CM_CREATE_CHARACTER extends AbstractCharacterEditPacket {
 	protected void readImpl() {
 		readD(); // account id
 		readS(); // account name
-		readBasicInfo();
+		readBasicInfo(true);
 		readAppearance();
 		type = readUC();
 	}
 
 	@Override
 	protected void runImpl() {
-		AionConnection client = getConnection();
-		Account account = client.getAccount();
+		Account account = getConnection().getAccount();
 
 		if (type == 1) { // flag to enter char creation screen
-			client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_OPEN_CREATION_WINDOW));
+			sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_OPEN_CREATION_WINDOW));
 			return;
 		}
 
 		AccountService.removeDeletedCharacters(account);
 		int responseCode = validateBasicInfo(account);
 		if (responseCode != SM_CREATE_CHARACTER.RESPONSE_OK) {
-			client.sendPacket(new SM_CREATE_CHARACTER(null, responseCode));
+			sendPacket(new SM_CREATE_CHARACTER(null, responseCode));
 			return;
 		}
 
@@ -70,7 +68,7 @@ public class CM_CREATE_CHARACTER extends AbstractCharacterEditPacket {
 		Player player = PlayerService.newPlayer(accPlData, account);
 
 		if (!PlayerService.storeNewPlayer(player, account.getName(), account.getId())) {
-			client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_DB_ERROR));
+			sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_DB_ERROR));
 			IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());
 		} else {
 			List<Item> equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(player.getObjectId());
@@ -79,7 +77,7 @@ public class CM_CREATE_CHARACTER extends AbstractCharacterEditPacket {
 			PlayerService.storeCreationTime(player.getObjectId(), accPlData.getCreationDate());
 
 			account.addPlayerAccountData(accPlData);
-			client.sendPacket(new SM_CREATE_CHARACTER(accPlData, SM_CREATE_CHARACTER.RESPONSE_OK));
+			sendPacket(new SM_CREATE_CHARACTER(accPlData, SM_CREATE_CHARACTER.RESPONSE_OK));
 		}
 	}
 
@@ -88,6 +86,8 @@ public class CM_CREATE_CHARACTER extends AbstractCharacterEditPacket {
 			: GSConfig.CHARACTER_LIMIT_COUNT;
 		if (account.size() > maxCharCount)
 			return SM_CREATE_CHARACTER.RESPONSE_SERVER_LIMIT_EXCEEDED;
+		if (playerClass == null) // should never happen (only with type == 1 to enter char creation screen, where we won't reach this validation)
+			return SM_CREATE_CHARACTER.FAILED_TO_CREATE_THE_CHARACTER;
 		if (!PlayerService.isFreeName(characterName))
 			return GSConfig.CHARACTER_CREATION_MODE == 2 ? SM_CREATE_CHARACTER.RESPONSE_NAME_RESERVED : SM_CREATE_CHARACTER.RESPONSE_NAME_ALREADY_USED;
 		if (PlayerService.isOldName(characterName))

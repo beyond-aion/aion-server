@@ -93,15 +93,19 @@ public enum PlayerClass implements L10n {
 	 * 
 	 * @param classId
 	 *          - id of player class
-	 * @return PlayerClass objects that matches the given classId. If there isn't any objects that matches given id, then
-	 *         <b>IllegalArgumentException</b> is being thrown.
+	 * @return PlayerClass that matches the given classId. If there isn't one, {@link IllegalArgumentException} is being thrown.
 	 */
 	public static PlayerClass getPlayerClassById(byte classId) {
+		return getPlayerClassById(classId, false);
+	}
+
+	public static PlayerClass getPlayerClassById(byte classId, boolean ignoreInvalidClassId) {
 		for (PlayerClass pc : values()) {
 			if (pc.getClassId() == classId)
 				return pc;
 		}
-
+		if (ignoreInvalidClassId)
+			return null;
 		throw new IllegalArgumentException("There is no player class with id " + classId);
 	}
 

@@ -25,12 +25,11 @@ public abstract class AbstractCharacterEditPacket extends AionClientPacket {
 		super(opcode, validStates);
 	}
 
-	protected void readBasicInfo() {
+	protected void readBasicInfo(boolean ignoreInvalidPlayerClass) {
 		characterName = Util.convertName(readS(25)); // client leaks random data here when entering char creation screen for the first time
 		gender = readD() == 0 ? Gender.MALE : Gender.FEMALE;
 		race = readD() == 0 ? Race.ELYOS : Race.ASMODIANS;
-		byte classId = (byte) (readD() & PlayerClass.ALL.getClassId()); // sanitize input to avoid exceptions whn entering char creation (class won't be used then anyway)
-		playerClass = PlayerClass.getPlayerClassById(classId);
+		playerClass = PlayerClass.getPlayerClassById((byte) readD(), ignoreInvalidPlayerClass);
 	}
 
 	protected void readAppearance() {

@@ -31,7 +31,7 @@ public class CM_CHARACTER_EDIT extends AbstractCharacterEditPacket {
 	@Override
 	protected void readImpl() {
 		objectId = readD();
-		readBasicInfo();
+		readBasicInfo(false);
 		readAppearance();
 	}
 
