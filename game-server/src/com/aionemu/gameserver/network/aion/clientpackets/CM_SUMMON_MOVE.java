@@ -2,6 +2,8 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.SummonMoveController;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -40,9 +42,16 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 		type = readC();
 
 		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
-			x2 = readF();
-			y2 = readF();
-			z2 = readF();
+			if ((type & MovementMask.ABSOLUTE) == 0) {
+				String msg = "Vector movement without vector data for " + getConnection().getActivePlayer().getSummon() + ": " + x + ", " + y + ", " + z;
+				if (getRemainingBytes() > 0)
+					msg += " (type: " + type + ", remaining bytes: " + getRemainingBytes() + ")";
+				LoggerFactory.getLogger(getClass()).warn(msg);
+			} else {
+				x2 = readF();
+				y2 = readF();
+				z2 = readF();
+			}
 		}
 		if ((type & MovementMask.GLIDE) == MovementMask.GLIDE) {
 			glideFlag = readC();
@@ -74,6 +83,8 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 		if (type == MovementMask.IMMEDIATE) {
 			summon.getController().onStopMove();
 		} else if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
+			if ((type & MovementMask.ABSOLUTE) == 0) // FIXME handle correctly once we figured out what to do in this case (missing data for x2, y2, z2)
+				return;
 			summon.getMoveController().setNewDirection(x2, y2, z2, heading);
 			summon.getController().onStartMove();
 		} else
