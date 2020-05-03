@@ -74,4 +74,10 @@ public class PazuzuAI extends AggressiveNpcAI {
 		}
 	}
 
+	@Override
+	protected void handleDespawned() {
+		cancelTask();
+		super.handleDespawned();
+	}
+
 }

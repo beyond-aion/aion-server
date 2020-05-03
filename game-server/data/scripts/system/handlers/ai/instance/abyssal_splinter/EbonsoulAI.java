@@ -73,4 +73,11 @@ public class EbonsoulAI extends AggressiveNpcAI {
 		isHome.set(true);
 		getEffectController().removeEffect(19266);
 	}
+
+	@Override
+	protected void handleDespawned() {
+		cancelTask();
+		super.handleDespawned();
+	}
+
 }
