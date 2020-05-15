@@ -792,6 +792,23 @@ public class BrokerService {
 		playerBrokerCache.remove(player.getObjectId());
 	}
 
+	public void onPlayerDeleted(int playerId) {
+		for (Race playerRace : Arrays.asList(Race.ELYOS, Race.ASMODIANS)) {
+			Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(playerRace);
+			if (brokerItems != null) {
+				synchronized (brokerItems) {
+					brokerItems.values().removeIf(brokerItem -> brokerItem.getSellerId() == playerId);
+				}
+			}
+			if (brokerItems != null) {
+				brokerItems = getRaceBrokerSettledItems(playerRace);
+				synchronized (brokerItems) {
+					brokerItems.values().removeIf(brokerItem -> brokerItem.getSellerId() == playerId);
+				}
+			}
+		}
+	}
+
 	/**
 	 * @param player
 	 * @return
