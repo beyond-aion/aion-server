@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dao;
 
+import java.util.List;
 import java.util.Map;
 
 import com.aionemu.commons.database.dao.DAO;
@@ -19,7 +20,7 @@ public abstract class HouseBidsDAO implements DAO {
 
 	public abstract boolean addBid(HouseBids.Bid bid);
 
-	public abstract boolean disableBids(int playerObjectId);
+	public abstract boolean deleteOrDisableBids(int playerObjectId, List<HouseBids.Bid> bidsToDelete);
 
 	public abstract boolean deleteHouseBids(int houseId);
 

@@ -2,11 +2,7 @@ package com.aionemu.gameserver.services;
 
 import java.time.DayOfWeek;
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.function.BinaryOperator;
 
 import org.slf4j.Logger;
@@ -332,8 +328,11 @@ public class HousingBidService {
 	}
 
 	public void disableBids(int playerObjId) {
-		if (DAOManager.getDAO(HouseBidsDAO.class).disableBids(playerObjId))
-			bids.values().forEach(b -> b.disableBids(playerObjId));
+		bids.values().forEach(b -> {
+			synchronized (b) {
+				DAOManager.getDAO(HouseBidsDAO.class).deleteOrDisableBids(playerObjId, b.deleteOrDisableBids(playerObjId));
+			}
+		});
 	}
 
 	public HouseBids.Bid findLastBid(Player player) {

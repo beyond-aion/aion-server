@@ -83,14 +83,22 @@ public class HouseBids {
 	}
 
 	/**
-	 * Disables all bids of given player by setting bidder ID to 0. We cannot and should not remove bids of any player, because otherwise another bidder
-	 * may become the highest bidder for two houses. Therefore we set them to 0 and handle it gracefully on auction end.
+	 * Deletes all bids of given player which are not the highest bid. Disables the bid by setting bidder ID to 0 if it's the highest bid, because
+	 * otherwise another bidder may become the highest bidder for two houses. Auction winner with bidder ID 0 will be handled gracefully on auction end.
 	 */
-	public synchronized void disableBids(int playerObjectId) {
-		for (Bid bid : bids) {
-			if (bid.getPlayerObjectId() == playerObjectId)
-				bid.playerObjectId = 0;
+	public synchronized List<Bid> deleteOrDisableBids(int playerObjectId) {
+		List<Bid> bidsToDelete = new ArrayList<>();
+		for (int i = 1, indexOfHighestBid = bids.size() - 1; i <= indexOfHighestBid; i++) {
+			Bid bid = bids.get(i);
+			if (bid.getPlayerObjectId() == playerObjectId) {
+				if (i == 1 || i < indexOfHighestBid)
+					bidsToDelete.add(bid);
+				else 
+					bid.playerObjectId = 0;
+			}
 		}
+		bids.removeAll(bidsToDelete);
+		return bidsToDelete;
 	}
 
 	public class Bid {

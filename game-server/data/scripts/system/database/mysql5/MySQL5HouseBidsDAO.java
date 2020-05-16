@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.Timestamp;
+import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -25,6 +26,7 @@ public class MySQL5HouseBidsDAO extends HouseBidsDAO {
 	public static final String LOAD_QUERY = "SELECT * FROM `house_bids` ORDER BY `bid`, `bid_time`";
 	public static final String INSERT_QUERY = "INSERT INTO `house_bids` (`player_id`, `house_id`, `bid`, `bid_time`) VALUES (?, ?, ?, ?)";
 	public static final String DELETE_QUERY = "DELETE FROM `house_bids` WHERE `house_id` = ?";
+	public static final String DELETE_SINGLE_BID_QUERY = "DELETE FROM `house_bids` WHERE `player_id` = ? AND `house_id` = ? AND `bid` = ?";
 	public static final String DISABLE_QUERY = "UPDATE `house_bids` SET `player_id` = 0 WHERE `player_id` = ?";
 
 	@Override
@@ -70,14 +72,27 @@ public class MySQL5HouseBidsDAO extends HouseBidsDAO {
 	}
 
 	@Override
-	public boolean disableBids(int playerObjectId) {
-		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DISABLE_QUERY)) {
-			stmt.setInt(1, playerObjectId);
-			return stmt.executeUpdate() > 0;
+	public boolean deleteOrDisableBids(int playerObjectId, List<HouseBids.Bid> bidsToDelete) {
+		try (Connection con = DatabaseFactory.getConnection()) {
+			if (!bidsToDelete.isEmpty()) {
+				try (PreparedStatement delStmt = con.prepareStatement(DELETE_SINGLE_BID_QUERY)) {
+					for (HouseBids.Bid bid : bidsToDelete) {
+						delStmt.setInt(1, bid.getPlayerObjectId());
+						delStmt.setInt(2, bid.getHouseObjectId());
+						delStmt.setLong(3, bid.getKinah());
+						delStmt.execute();
+					}
+				}
+			}
+			try (PreparedStatement stmt = con.prepareStatement(DISABLE_QUERY)) {
+				stmt.setInt(1, playerObjectId);
+				stmt.executeUpdate();
+			}
 		} catch (Exception e) {
-			log.error("Cannot disable house bids for player " + playerObjectId, e);
+			log.error("Cannot delete or disable house bids for player " + playerObjectId, e);
+			return false;
 		}
-		return false;
+		return true;
 	}
 
 	@Override
