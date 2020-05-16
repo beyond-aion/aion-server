@@ -38,8 +38,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author kosyachok
- * @author ATracer
+ * @author kosyachok, ATracer
  */
 public class BrokerService {
 
@@ -48,12 +47,12 @@ public class BrokerService {
 	private Map<Integer, BrokerItem> asmodianBrokerItems = new ConcurrentHashMap<>();
 	private Map<Integer, BrokerItem> asmodianSettledItems = new ConcurrentHashMap<>();
 	private static final Logger log = LoggerFactory.getLogger("EXCHANGE_LOG");
-	private final int DELAY_BROKER_SAVE = 6000;
-	private final int DELAY_BROKER_CHECK = 60000;
+	private static final int DELAY_BROKER_SAVE = 6000;
+	private static final int DELAY_BROKER_CHECK = 60000;
 	private BrokerPeriodicTaskManager saveManager;
 	private Map<Integer, BrokerPlayerCache> playerBrokerCache = new ConcurrentHashMap<>();
 
-	public static final BrokerService getInstance() {
+	public static BrokerService getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -101,12 +100,6 @@ public class BrokerService {
 		log.info("Broker loaded with " + loadedBrokerItemsCount + " broker items, " + loadedSettledItemsCount + " settled items.");
 	}
 
-	/**
-	 * @param player
-	 * @param clientMask
-	 * @param sortType
-	 * @param startPage
-	 */
 	public void showRequestedItems(Player player, int clientMask, byte sortType, int startPage, List<Integer> itemList) {
 		BrokerItem[] searchItems = null;
 		int playerBrokerMaskCache = getPlayerMask(player);
@@ -228,11 +221,6 @@ public class BrokerService {
 		return higher;
 	}
 
-	/**
-	 * @param player
-	 * @param clientMask
-	 * @return
-	 */
 	private BrokerItem[] getItemsByMask(Player player, int clientMask, boolean cached) {
 		List<BrokerItem> searchItems = new ArrayList<>();
 
@@ -272,21 +260,10 @@ public class BrokerService {
 		return items;
 	}
 
-	/**
-	 * Perform sorting according to sort type
-	 *
-	 * @param brokerItems
-	 * @param sortType
-	 */
 	private void sortBrokerItems(BrokerItem[] brokerItems, byte sortType) {
 		Arrays.sort(brokerItems, BrokerItem.getComparatoryByType(sortType));
 	}
 
-	/**
-	 * @param brokerItems
-	 * @param startPage
-	 * @return
-	 */
 	private BrokerItem[] getRequestedPage(BrokerItem[] brokerItems, int startPage) {
 		List<BrokerItem> page = new ArrayList<>();
 		int startingElement = startPage * 9;
@@ -298,10 +275,6 @@ public class BrokerService {
 		return page.toArray(new BrokerItem[page.size()]);
 	}
 
-	/**
-	 * @param race
-	 * @return
-	 */
 	private Map<Integer, BrokerItem> getRaceBrokerItems(Race race) {
 		switch (race) {
 			case ELYOS:
@@ -313,10 +286,6 @@ public class BrokerService {
 		}
 	}
 
-	/**
-	 * @param race
-	 * @return
-	 */
 	private Map<Integer, BrokerItem> getRaceBrokerSettledItems(Race race) {
 		switch (race) {
 			case ELYOS:
@@ -328,10 +297,6 @@ public class BrokerService {
 		}
 	}
 
-	/**
-	 * @param player
-	 * @param itemUniqueId
-	 */
 	public void buyBrokerItem(Player player, int itemUniqueId, long itemCount) {
 
 		boolean isEmptyCache = getFilteredItems(player).length == 0;
@@ -414,11 +379,6 @@ public class BrokerService {
 
 	}
 
-	/**
-	 * @param race
-	 * @param brokerItem
-	 * @param isSold
-	 */
 	private void putToSettled(Race race, BrokerItem brokerItem, boolean isSold) {
 		if (isSold)
 			brokerItem.removeItem();
@@ -457,11 +417,6 @@ public class BrokerService {
 		return c;
 	}
 
-	/**
-	 * @param player
-	 * @param itemUniqueId
-	 * @param price
-	 */
 	public void registerItem(Player player, int itemUniqueId, long count, long price, boolean splittingAvailable) {
 		Item itemToRegister = player.getInventory().getItemByObjId(itemUniqueId);
 		Race playerRace = player.getRace();
@@ -549,10 +504,6 @@ public class BrokerService {
 		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(newBrokerItem, 0, registeredItemsCount));
 	}
 
-	/**
-	 * @param player
-	 * @param itemUniqueId
-	 */
 	public void showSellWindow(Player player, int itemUniqueId) {
 		Item itemToRegister = player.getInventory().getItemByObjId(itemUniqueId);
 
@@ -565,9 +516,6 @@ public class BrokerService {
 			getHigherPrice(race, itemToRegister.getItemId())));
 	}
 
-	/**
-	 * @param player
-	 */
 	public void showRegisteredItems(Player player) {
 		Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(player.getRace());
 
@@ -592,10 +540,6 @@ public class BrokerService {
 		return false;
 	}
 
-	/**
-	 * @param player
-	 * @param brokerItemId
-	 */
 	public void cancelRegisteredItem(Player player, int brokerItemId) {
 		Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(player.getRace());
 		BrokerItem brokerItem = brokerItems.get(brokerItemId);
@@ -624,9 +568,6 @@ public class BrokerService {
 		showRegisteredItems(player);
 	}
 
-	/**
-	 * @param player
-	 */
 	public void showSettledItems(Player player) {
 		Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(player.getRace());
 
@@ -647,9 +588,6 @@ public class BrokerService {
 		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(settledItems.toArray(new BrokerItem[settledItems.size()]), totalKinah));
 	}
 
-	/**
-	 * @param PlayerCommonData
-	 */
 	public long getCollectedMoney(PlayerCommonData playerCommonData) {
 		Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(playerCommonData.getRace());
 		int playerId = playerCommonData.getPlayerObjId();
@@ -677,9 +615,6 @@ public class BrokerService {
 		return totalKinah;
 	}
 
-	/**
-	 * @param player
-	 */
 	public void settleAccount(Player player) {
 		Race playerRace = player.getRace();
 		Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(playerRace);
@@ -759,9 +694,6 @@ public class BrokerService {
 		}
 	}
 
-	/**
-	 * @param player
-	 */
 	public void onPlayerLogin(Player player) {
 		Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(player.getRace());
 
@@ -775,10 +707,6 @@ public class BrokerService {
 		}
 	}
 
-	/**
-	 * @param player
-	 * @return
-	 */
 	private BrokerPlayerCache getPlayerCache(Player player) {
 		BrokerPlayerCache cacheEntry = playerBrokerCache.get(player.getObjectId());
 		if (cacheEntry == null) {
@@ -800,8 +728,8 @@ public class BrokerService {
 					brokerItems.values().removeIf(brokerItem -> brokerItem.getSellerId() == playerId);
 				}
 			}
+			brokerItems = getRaceBrokerSettledItems(playerRace);
 			if (brokerItems != null) {
-				brokerItems = getRaceBrokerSettledItems(playerRace);
 				synchronized (brokerItems) {
 					brokerItems.values().removeIf(brokerItem -> brokerItem.getSellerId() == playerId);
 				}
@@ -809,18 +737,10 @@ public class BrokerService {
 		}
 	}
 
-	/**
-	 * @param player
-	 * @return
-	 */
 	private int getPlayerMask(Player player) {
 		return getPlayerCache(player).getBrokerMaskCache();
 	}
 
-	/**
-	 * @param player
-	 * @return
-	 */
 	private BrokerItem[] getFilteredItems(Player player) {
 		return getPlayerCache(player).getBrokerListCache();
 	}
@@ -832,9 +752,6 @@ public class BrokerService {
 
 		private static final String CALLED_METHOD_NAME = "brokerOperation()";
 
-		/**
-		 * @param period
-		 */
 		public BrokerPeriodicTaskManager(int period) {
 			super(period);
 		}
@@ -861,12 +778,6 @@ public class BrokerService {
 		private Item kinahItem;
 		private int playerId;
 
-		/**
-		 * @param brokerItem
-		 * @param item
-		 * @param kinahItem
-		 * @param playerId
-		 */
 		private BrokerOpSaveTask(BrokerItem brokerItem, Item item, Item kinahItem, int playerId) {
 			this.brokerItem = brokerItem;
 			this.item = item;
@@ -874,9 +785,6 @@ public class BrokerService {
 			this.playerId = playerId;
 		}
 
-		/**
-		 * @param brokerItem
-		 */
 		public BrokerOpSaveTask(BrokerItem brokerItem) {
 			this.brokerItem = brokerItem;
 		}
