@@ -66,8 +66,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 	private int rndBonusId = 0;
 	@XmlAttribute(name = "rnd_count")
 	private int maxTuneCount = -1;
-	@XmlAttribute(name = "bonus_apply")
-	private String bonusApply;// enum
 	@XmlAttribute(name = "race")
 	private Race race = Race.PC_ALL;
 	@XmlAttribute(name = "return_world")
@@ -248,10 +246,6 @@ public class ItemTemplate extends VisibleObjectTemplate {
 
 	public int getOptionSlotBonus() {
 		return optionSlotBonus;
-	}
-
-	public String getBonusApply() {
-		return bonusApply;
 	}
 
 	public boolean isNoEnchant() {

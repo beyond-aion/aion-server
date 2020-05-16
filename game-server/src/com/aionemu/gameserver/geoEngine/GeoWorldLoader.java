@@ -31,7 +31,6 @@ import com.aionemu.gameserver.world.zone.ZoneService;
 public class GeoWorldLoader {
 
 	private static final String GEO_DIR = "data/geo/";
-	private static final boolean DEBUG = false;
 
 	public static Map<String, Node> loadMeshes(String fileName) throws IOException {
 		List<CountDownLatch> latches = new ArrayList<>();
@@ -43,8 +42,8 @@ public class GeoWorldLoader {
 				short namelenght = geo.getShort();
 				byte[] nameByte = new byte[namelenght];
 				geo.get(nameByte);
-				String name = new String(nameByte).replace('\\', '/').toLowerCase().intern();
-				Node node = new Node(DEBUG ? name : null);
+				String name = new String(nameByte).replace('\\', '/').toLowerCase();
+				Node node = new Node(null);
 				byte intentions = 0;
 				int singleChildMaterialId = 0;
 				int modelCount = geo.getShort() & 0xFFFF;

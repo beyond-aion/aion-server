@@ -129,7 +129,6 @@
 		<xs:attribute name="restrict" type="ByteList"/>
 		<xs:attribute name="rnd_bonus" type="xs:int"/>
 		<xs:attribute name="rnd_count" type="xs:int"/>
-		<xs:attribute name="bonus_apply" type="xs:string"/>
 		<xs:attribute name="race" type="itemRace"/>
 		<xs:attribute name="price" type="xs:int"/>
 		<xs:attribute name="quality" type="itemQuality"/>
