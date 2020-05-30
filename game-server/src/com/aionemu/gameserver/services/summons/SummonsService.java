@@ -128,7 +128,7 @@ public class SummonsService {
 		private List<AggroList> findSummonOnlyHaters(Summon owner) {
 			Collection<VisibleObject> npcsKnownByMaster = owner.getMaster().getKnownList().getKnownObjects().values();
 			List<AggroList> aggroLists = new ArrayList<>();
-			npcsKnownByMaster.stream().forEach(object -> {
+			npcsKnownByMaster.forEach(object -> {
 				if (object instanceof Creature) {
 					AggroList aggroList = ((Creature) object).getAggroList();
 					if (aggroList.isHating(owner) && !aggroList.isHating(owner.getMaster()))

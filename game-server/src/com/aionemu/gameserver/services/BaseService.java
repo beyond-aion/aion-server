@@ -69,8 +69,8 @@ public class BaseService {
 	 * Executes start of all casual and stained bases.
 	 */
 	public final void initBases() {
-		casualBases.values().stream().forEach(loc -> start(loc.getId()));
-		stainedBases.values().stream().forEach(sLoc -> start(sLoc.getId()));
+		casualBases.values().forEach(loc -> start(loc.getId()));
+		stainedBases.values().forEach(sLoc -> start(sLoc.getId()));
 	}
 
 	/**

@@ -124,7 +124,7 @@ public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 	}
 
 	private void deleteNpcs() {
-		charges.stream().forEach(s -> s.getController().delete());
+		charges.forEach(s -> s.getController().delete());
 	}
 
 	@Override
