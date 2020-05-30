@@ -139,7 +139,7 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		writeD(DAOManager.getDAO(MailDAO.class).haveUnread(playerId) ? 1 : 0); // unread mail count
 		writeD(0); // express mail count
 		writeD(0); // blackcloud mail count
-		writeQ(BrokerService.getInstance().getCollectedMoney(pcd)); // collected money from broker
+		writeQ(BrokerService.getInstance().getEarnedKinahFromSoldItems(pcd)); // collected money from broker
 		writeD(0);
 		writeD(0);
 		writeD(0);

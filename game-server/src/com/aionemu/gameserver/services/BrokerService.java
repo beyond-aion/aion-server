@@ -2,9 +2,13 @@ package com.aionemu.gameserver.services;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 import java.util.Map;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
@@ -38,7 +42,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author kosyachok, ATracer
+ * @author kosyachok, ATracer, Sykra
  */
 public class BrokerService {
 
@@ -396,13 +400,10 @@ public class BrokerService {
 				elyosSettledItems.put(brokerItem.getItemUniqueId(), brokerItem);
 				break;
 		}
-
-		Player seller = World.getInstance().findPlayer(brokerItem.getSellerId());
-
 		saveManager.add(new BrokerOpSaveTask(brokerItem));
-
+		Player seller = World.getInstance().findPlayer(brokerItem.getSellerId());
 		if (seller != null) {
-			PacketSendUtility.sendPacket(seller, new SM_BROKER_SERVICE(true, getTotalSettledKinah(seller)));
+			PacketSendUtility.sendPacket(seller, new SM_BROKER_SERVICE(true, getEarnedKinahFromSoldItems(seller.getRace(), seller.getObjectId())));
 			// TODO: Retail system message
 		}
 	}
@@ -569,50 +570,29 @@ public class BrokerService {
 	}
 
 	public void showSettledItems(Player player) {
-		Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(player.getRace());
-
-		List<BrokerItem> settledItems = new ArrayList<>();
-
-		int playerId = player.getObjectId();
-		long totalKinah = 0;
-
-		for (BrokerItem item : brokerSettledItems.values()) {
-			if (item != null && playerId == item.getSellerId()) {
-				settledItems.add(item);
-
-				if (item.isSold())
-					totalKinah += item.getPrice() * item.getItemCount();
-			}
-		}
-
-		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(settledItems.toArray(new BrokerItem[settledItems.size()]), totalKinah));
+		List<BrokerItem> settledItems = getSettledItemsForPlayer(player.getRace(), player.getObjectId());
+		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(settledItems.toArray(new BrokerItem[settledItems.size()]), extractEarnedKinahForSoldItems(settledItems)));
 	}
 
-	public long getCollectedMoney(PlayerCommonData playerCommonData) {
-		Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(playerCommonData.getRace());
-		int playerId = playerCommonData.getPlayerObjId();
-
-		long totalKinah = 0;
-
-		for (BrokerItem item : brokerSettledItems.values()) {
-			if (item != null && playerId == item.getSellerId()) {
-				if (item.isSold())
-					totalKinah += item.getPrice();
-			}
-		}
-		return totalKinah;
+	private List<BrokerItem> getSettledItemsForPlayer(Race playerRace, int playerId) {
+		Map<Integer, BrokerItem> settledItemsForRace = getRaceBrokerSettledItems(playerRace);
+		if (settledItemsForRace == null)
+			return Collections.emptyList();
+		return settledItemsForRace.values().stream().filter(Objects::nonNull).filter(item -> item.getSellerId() == playerId).collect(Collectors.toList());
 	}
 
-	private long getTotalSettledKinah(Player player) {
-		long totalKinah = 0;
-		int playerId = player.getObjectId();
-		for (BrokerItem item : getRaceBrokerSettledItems(player.getRace()).values()) {
-			if (item != null && playerId == item.getSellerId()) {
-				if (item.isSold())
-					totalKinah += item.getPrice();
-			}
-		}
-		return totalKinah;
+	private long extractEarnedKinahForSoldItems(Collection<BrokerItem> items) {
+		if (items == null || items.isEmpty())
+			return 0;
+		return items.stream().filter(Objects::nonNull).filter(BrokerItem::isSold).map(item -> item.getPrice() * item.getItemCount()).mapToLong(Long::longValue).sum();
+	}
+
+	public long getEarnedKinahFromSoldItems(PlayerCommonData playerCommonData) {
+		return getEarnedKinahFromSoldItems(playerCommonData.getRace(), playerCommonData.getPlayerObjId());
+	}
+
+	private long getEarnedKinahFromSoldItems(Race playerRace, int playerId) {
+		return extractEarnedKinahForSoldItems(getSettledItemsForPlayer(playerRace, playerId));
 	}
 
 	public void settleAccount(Player player) {
@@ -695,16 +675,9 @@ public class BrokerService {
 	}
 
 	public void onPlayerLogin(Player player) {
-		Map<Integer, BrokerItem> brokerSettledItems = getRaceBrokerSettledItems(player.getRace());
-
-		int playerId = player.getObjectId();
-
-		for (BrokerItem item : brokerSettledItems.values()) {
-			if (item != null && playerId == item.getSellerId()) {
-				PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(true, getTotalSettledKinah(player)));
-				break;
-			}
-		}
+		List<BrokerItem> settledItemsForPlayer = getSettledItemsForPlayer(player.getRace(), player.getObjectId());
+		if (!settledItemsForPlayer.isEmpty())
+			PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(true, extractEarnedKinahForSoldItems(settledItemsForPlayer)));
 	}
 
 	private BrokerPlayerCache getPlayerCache(Player player) {
