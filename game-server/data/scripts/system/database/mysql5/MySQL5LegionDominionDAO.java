@@ -1,5 +1,6 @@
 package mysql5;
 
+import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -12,6 +13,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DB;
+import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
 import com.aionemu.gameserver.dao.LegionDominionDAO;
@@ -37,7 +39,7 @@ public class MySQL5LegionDominionDAO extends LegionDominionDAO {
 
 	@Override
 	public boolean loadOrCreateLegionDominionLocations(Map<Integer, LegionDominionLocation> locations) {
-		try (PreparedStatement ps = DB.prepareStatement(LOAD1); ResultSet rs = DB.executeQuerry(ps)){
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(LOAD1); ResultSet rs = ps.executeQuery()) {
 			List<Integer> nonExistingLocations = new ArrayList<>(locations.keySet());
 			if (rs == null) {
 				log.error("Error loading Legion Dominion location from Database: empty resultset");
@@ -51,11 +53,11 @@ public class MySQL5LegionDominionDAO extends LegionDominionDAO {
 			}
 
 			for (int locationId : nonExistingLocations) {
-				DB.insertUpdate(INSERT_NEW_LOCATION, stmt -> {
-					stmt.setInt(1, locationId);
-					stmt.setInt(2, 0);
-					stmt.execute();
-				});
+				try (PreparedStatement insertPs = con.prepareStatement(INSERT_NEW_LOCATION)) {
+					insertPs.setInt(1, locationId);
+					insertPs.setInt(2, 0);
+					insertPs.execute();
+				}
 			}
 			return true;
 		} catch (SQLException e) {

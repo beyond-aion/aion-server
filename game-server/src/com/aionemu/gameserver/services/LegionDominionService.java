@@ -39,7 +39,7 @@ public class LegionDominionService {
 
 	private static final LegionDominionService instance = new LegionDominionService();
 
-	private Map<Integer, LegionDominionLocation> legionDominionLocations = new TreeMap<>();
+	private final Map<Integer, LegionDominionLocation> legionDominionLocations = new TreeMap<>();
 
 	public static LegionDominionService getInstance() {
 		return instance;
@@ -63,11 +63,6 @@ public class LegionDominionService {
 		return legionDominionLocations.get(locId);
 	}
 
-	/**
-	 * @param legionId
-	 * @param locId
-	 * @return
-	 */
 	public boolean join(int legionId, int locId) {
 		return legionDominionLocations.get(locId).join(legionId);
 	}

@@ -1,75 +1,64 @@
 package com.aionemu.gameserver.taskmanager.tasks;
 
 import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.legionDominion.LegionDominionLocation;
+import com.aionemu.gameserver.model.templates.cp.CPType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CONQUEROR_PROTECTOR;
+import com.aionemu.gameserver.services.LegionDominionService;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.CPInfo;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMap;
-import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 public class LegionDominionIntruderUpdateTask extends AbstractPeriodicTaskManager {
-
-	private final Map<Integer, List<Player>> playerTerritoryMap = new ConcurrentHashMap<>();
 
 	private LegionDominionIntruderUpdateTask() {
 		super(4000);
 	}
 
-	public void addPlayer(int territoryId, Player player) {
-		synchronized (playerTerritoryMap) {
-			playerTerritoryMap.computeIfAbsent(territoryId, (id) -> new ArrayList<>()).add(player);
-		}
-	}
-
-	public void removePlayer(int territoryId, Player player) {
-		synchronized (playerTerritoryMap) {
-			if (playerTerritoryMap.get(territoryId) != null) {
-				List<Player> players = playerTerritoryMap.get(territoryId);
-				players.remove(player);
-				if (players.isEmpty())
-					playerTerritoryMap.remove(territoryId);
-			}
-		}
-	}
-
 	@Override
 	public void run() {
-		if (playerTerritoryMap.isEmpty())
+ 		if (!CustomConfig.CONQUEROR_AND_PROTECTOR_SYSTEM_ENABLED)
 			return;
-		for (int territoryId : playerTerritoryMap.keySet()) {
-			List<Player> players;
-			players = playerTerritoryMap.get(territoryId);
-			if (players == null || players.isEmpty())
+		Map<Integer, List<LegionDominionLocation>> locationsPerWorldMap = LegionDominionService.getInstance().getLegionDominions().stream()
+			.filter(loc -> loc.getLegionId() != 0).collect(Collectors.groupingBy(LegionDominionLocation::getWorldId));
+		if (locationsPerWorldMap.isEmpty())
+			return;
+
+		for (Map.Entry<Integer, List<LegionDominionLocation>> entry : locationsPerWorldMap.entrySet()) {
+			if (entry == null)
 				continue;
-			players = new ArrayList<>(players);
-			Map<Integer, List<Player>> instancePlayers = new HashMap<>();
-			for (Player player : players) {
-				WorldMap worldMap = World.getInstance().getWorldMap(player.getPosition().getMapId());
-				if (worldMap == null)
+			List<Player> players = World.getInstance().getWorldMap(entry.getKey()).getMainWorldMapInstance().getPlayersInside();
+			for (LegionDominionLocation location : entry.getValue()) {
+				if (location.getZoneNameAsString().isEmpty())
 					continue;
-				List<Player> intruders = instancePlayers.computeIfAbsent(player.getPosition().getInstanceId(), (worldMapInstanceId) -> {
-					try {
-						WorldMapInstance worldMapInstance = worldMap.getWorldMapInstanceById(worldMapInstanceId);
-						return worldMapInstance.getPlayersInside().stream().filter(p -> p.getRace() == player.getOppositeRace())
-							.filter(p -> ConquerorAndProtectorService.getInstance().getCPInfoForCurrentMap(p) != null).collect(Collectors.toList());
-					} catch (IllegalArgumentException e) {
-						log.error("Error getting intruders for territorial [mapId: {}, id: {}] due to an invalid instanceId: {}", worldMap.getMapId(),
-							territoryId, worldMapInstanceId);
-						return Collections.emptyList();
-					}
-				});
-				if (!intruders.isEmpty())
-					PacketSendUtility.sendPacket(player, new SM_CONQUEROR_PROTECTOR(intruders, false));
+				ZoneName zoneName = ZoneName.get(location.getZoneNameAsString());
+				if (zoneName == ZoneName.NONE)
+					continue;
+				ConquerorAndProtectorService cpService = ConquerorAndProtectorService.getInstance();
+				List<Player> protectors = new ArrayList<>();
+				List<Player> conquerors = new ArrayList<>();
+				for (Player player : players) {
+					if (!player.isInsideZone(zoneName))
+						continue;
+					CPInfo cpInfo = cpService.getCPInfoForCurrentMap(player);
+					if (cpInfo == null || (cpInfo.getType() == CPType.PROTECTOR && cpInfo.getLDRank() != 3))
+						continue;
+					if (cpInfo.getType() == CPType.CONQUEROR)
+						conquerors.add(player);
+					else if (cpInfo.getType() == CPType.PROTECTOR)
+						protectors.add(player);
+				}
+				if (!conquerors.isEmpty())
+					protectors.forEach(player -> PacketSendUtility.sendPacket(player, new SM_CONQUEROR_PROTECTOR(conquerors, false)));
 			}
 		}
 	}

@@ -116,7 +116,6 @@ public class ConquerorAndProtectorService {
 						cpInfo.getBuff().applyEffect(player, cpInfo.getType(), 3);
 						PacketSendUtility.sendPacket(player, new SM_CONQUEROR_PROTECTOR(7, cpInfo.getLDRank(), getOrRemoveCooldown(player.getObjectId())));
 					}
-					LegionDominionIntruderUpdateTask.getInstance().addPlayer(loc.getLocationId(), player);
 				}
 			}
 		}
@@ -135,7 +134,6 @@ public class ConquerorAndProtectorService {
 					updateBuffAndNotifyNearbyPlayers(player, cpInfo);
 					if (cpInfo.getRank() == 0)
 						protectors.remove(player.getObjectId());
-					LegionDominionIntruderUpdateTask.getInstance().removePlayer(loc.getLocationId(), player);
 				}
 			}
 		}
