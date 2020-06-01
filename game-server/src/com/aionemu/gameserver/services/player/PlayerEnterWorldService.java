@@ -81,6 +81,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_SPAWN;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PRICES;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_COOLDOWN;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
@@ -383,8 +384,8 @@ public final class PlayerEnterWorldService {
 		// SM_BD_UNK h 0
 		SiegeService.getInstance().onPlayerLogin(player);
 		client.sendPacket(new SM_PRICES());
-		// SM_A5_UNK ch 1 0
-		// SM_A5_UNK ch 0 0
+		if (!player.getCraftCooldowns().isEmpty())
+			client.sendPacket(new SM_RECIPE_COOLDOWN(player, 1));
 		BindPointTeleportService.onLogin(player);
 		client.sendPacket(new SM_FRIEND_LIST());
 		client.sendPacket(new SM_BLOCK_LIST());

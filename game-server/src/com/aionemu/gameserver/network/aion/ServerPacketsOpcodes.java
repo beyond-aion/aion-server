@@ -180,7 +180,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_SUMMON_USESKILL.class, 0xA2);
 		addPacketOpcode(SM_WINDSTREAM.class, 0xA3);
 		addPacketOpcode(SM_WINDSTREAM_ANNOUNCE.class, 0xA4);
-		// 165
+		addPacketOpcode(SM_RECIPE_COOLDOWN.class, 0xA5);
 		addPacketOpcode(SM_FIND_GROUP.class, 0xA6);
 		addPacketOpcode(SM_REPURCHASE.class, 0xA7);
 		addPacketOpcode(SM_WAREHOUSE_INFO.class, 0xA8);
