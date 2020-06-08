@@ -53,7 +53,7 @@
 		</spawn>
 		<!-- Chaburat the Noble -->
 		<spawn npc_id="218004" respawn_time="32400">
-			<spot x="1651.4686" y="169.7396" z="255.3977" h="26" />
+			<spot x="1559.1493" y="399.68192" z="267.7067" h="84" />
 		</spawn>
 	</spawn_map>
 	<spawn_map map_id="600090000"><!-- Kaldor -->

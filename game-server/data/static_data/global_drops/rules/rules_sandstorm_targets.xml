@@ -37,7 +37,7 @@
 			<gd_npc npc_id="218085" /><!-- Debarim the Omnipotent -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000143" min_count="60" max_count="90" /><!-- Kahrun's Symbol -->
+			<gd_item id="186000143" min_count="135" max_count="180" /><!-- Kahrun's Symbol -->
 		</gd_items>
 	</gd_rule>
 </global_rules>
