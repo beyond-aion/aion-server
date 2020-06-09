@@ -37,7 +37,9 @@ public class IDF5_U3_VortexAI extends NoActionAI {
 			npcIds.addAll(Arrays.asList(233857, 233880, 233881));
 		else // hard mode
 			npcIds.addAll(Arrays.asList(234687, 234688, 234689));
-		tasks.add(ThreadPoolManager.getInstance().scheduleAtFixedRate(this::handlePhaseAttacks, 120000, 120000));
+		synchronized (tasks) {
+			tasks.add(ThreadPoolManager.getInstance().scheduleAtFixedRate(this::handlePhaseAttacks, 120000, 120000));
+		}
 	}
 
 	private void handlePhaseAttacks() {
@@ -102,20 +104,30 @@ public class IDF5_U3_VortexAI extends NoActionAI {
 	}
 
 	private void spawn(int npcId, float x, float y, float z, byte h, int delay, String walkerId) {
-		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
+		addTask(() -> {
 			Npc npc = (Npc) spawn(npcId, x, y, z, h);
 			npc.getSpawn().setWalkerId(walkerId);
-			tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
+			addTask(() -> {
 				WalkManager.startWalking((NpcAI) npc.getAi());
 				npc.setState(CreatureState.ACTIVE, true);
 				PacketSendUtility.broadcastToMap(getOwner(), new SM_EMOTION(getOwner(), EmotionType.RUN));
-			}, 2500));
-		}, delay));
+			}, 2500);
+		}, delay);
+	}
+
+	private void addTask(Runnable task, int delayMs) {
+		synchronized (tasks) {
+			if (!tasks.isEmpty())
+				tasks.add(ThreadPoolManager.getInstance().schedule(task, delayMs));
+		}
 	}
 
 	@Override
 	protected void handleDespawned() {
-		tasks.stream().filter(t -> t != null && !t.isCancelled()).forEach(t -> t.cancel(true));
+		synchronized (tasks) {
+			tasks.stream().filter(t -> !t.isDone()).forEach(t -> t.cancel(true));
+			tasks.clear();
+		}
 		super.handleDespawned();
 	}
 }
