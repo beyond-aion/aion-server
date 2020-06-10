@@ -306,7 +306,7 @@ public class StatFunctions {
 		float resultDamage = pAttack.getCurrent();
 		if (attacker instanceof Player) {
 			resultDamage = calculateAttackDamageForPlayers((Player) attacker, pAttack, isMainHand, isSkill, false);
-		} else {
+		} else if (resultDamage > 1) {
 			int rnd = (int) (resultDamage * 0.20f);
 			resultDamage += Rnd.get(-rnd, rnd);
 		}
