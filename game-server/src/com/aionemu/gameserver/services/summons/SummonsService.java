@@ -8,6 +8,7 @@ import java.util.concurrent.Future;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,6 +23,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author xTz
@@ -70,8 +72,13 @@ public class SummonsService {
 		@Override
 		public void run() {
 			Player master = summon.getMaster();
+			VisibleObject summonObj = World.getInstance().findVisibleObject(summon.getObjectId());
+			// transformed npc via SM_TRANSFORM_IN_SUMMON
+			if (summonObj != null && summonObj instanceof Npc npc)
+				npc.getController().delete();
+			else
+				summon.getController().delete();
 
-			summon.getController().delete();
 			if (summon.equals(master.getSummon()))
 				master.setSummon(null);
 

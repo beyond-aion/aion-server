@@ -1,20 +1,10 @@
 package ai.instance.tallocsHollow;
 
-import java.util.function.Consumer;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.Summon;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.summons.SummonMode;
-import com.aionemu.gameserver.model.summons.UnsummonType;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.summons.SummonsService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.WorldMapInstance;
 
 import ai.SummonerAI;
 
@@ -24,7 +14,7 @@ import ai.SummonerAI;
 @AIName("queenmosqua")
 public class QueenMosquaAI extends SummonerAI {
 
-	private boolean isHome = true;
+	private final AtomicBoolean isHome = new AtomicBoolean(true);
 
 	public QueenMosquaAI(Npc owner) {
 		super(owner);
@@ -33,45 +23,21 @@ public class QueenMosquaAI extends SummonerAI {
 	@Override
 	protected void handleCreatureAggro(Creature creature) {
 		super.handleCreatureAggro(creature);
-		if (isHome) {
-			isHome = false;
+		if (isHome.compareAndSet(true,false))
 			getPosition().getWorldMapInstance().setDoorState(7, false);
-		}
 	}
 
 	@Override
 	protected void handleBackHome() {
-		isHome = true;
-		getPosition().getWorldMapInstance().setDoorState(7, true);
 		super.handleBackHome();
+		isHome.set(true);
+		getPosition().getWorldMapInstance().setDoorState(7, true);
 	}
 
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		WorldMapInstance instance = getPosition().getWorldMapInstance();
 		getPosition().getWorldMapInstance().setDoorState(7, true);
-
-		Npc npc = instance.getNpc(700738);
-		if (npc != null) {
-			SpawnTemplate template = npc.getSpawn();
-			spawn(700739, template.getX(), template.getY(), template.getZ(), template.getHeading(), 11);
-			npc.getKnownList().forEachPlayer(new Consumer<Player>() {
-
-				@Override
-				public void accept(Player player) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_IDELIM_EGG_BREAK());
-					Summon summon = player.getSummon();
-					if (summon != null) {
-						if (summon.getNpcId() == 799500 || summon.getNpcId() == 799501) {
-							SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.UNSPECIFIED);
-							PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 435));
-						}
-					}
-				}
-			});
-			npc.getController().delete();
-		}
 	}
 
 }

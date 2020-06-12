@@ -1,9 +1,8 @@
 package instance;
 
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
-
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -11,8 +10,11 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.Storage;
+import com.aionemu.gameserver.model.summons.SummonMode;
+import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.utils3d.Point3D;
@@ -24,17 +26,18 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
+import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author xTz
+ * @author xTz, Skyra
  */
 @InstanceID(300190000)
 public class TalocsHollowInstance extends GeneralInstanceHandler {
 
-	private List<Integer> movies = new ArrayList<>();
+	private final List<Integer> movies = new ArrayList<>();
 
 	@Override
 	public void onEnterInstance(Player player) {
@@ -81,32 +84,47 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	@Override
 	public void onDie(Npc npc) {
 		switch (npc.getNpcId()) {
-			case 215467:
+			case 215467: // kinquid
 				instance.setDoorState(48, true);
 				instance.setDoorState(49, true);
 				break;
-			case 215457:
-				Npc newNpc = getNpc(700633);
-				if (newNpc != null) {
-					newNpc.getController().delete();
+			case 215457: // ancient octanus
+				Npc thornyVines = getNpc(700633);
+				if (thornyVines != null)
+					thornyVines.getController().delete();
+				break;
+			case 215480: // queen mosqua
+				Npc insectEgg = getNpc(700738);
+				if (insectEgg != null) {
+					insectEgg.getController().delete();
+					SpawnTemplate eggTemplate = insectEgg.getSpawn();
+					spawn(700739, eggTemplate.getX(), eggTemplate.getY(), eggTemplate.getZ(), eggTemplate.getHeading(), 11);
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDELIM_EGG_BREAK());
+					instance.getPlayersInside().stream().filter(Objects::nonNull).forEach(player -> {
+						Summon summon = player.getSummon();
+						if (summon != null) {
+							if (summon.getNpcId() == 799500 || summon.getNpcId() == 799501) {
+								SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.UNSPECIFIED);
+								PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 435));
+							}
+						}
+					});
 				}
 				break;
-			case 700739:
+			case 700739: // cracked huge insect egg
+				SpawnTemplate crackedEggTemplate = npc.getSpawn();
+				spawn(281817, crackedEggTemplate.getX(), crackedEggTemplate.getY(), crackedEggTemplate.getZ(), crackedEggTemplate.getHeading(), 9);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDELIM_WIND_INFO());
-				SpawnTemplate template = npc.getSpawn();
-				spawn(281817, template.getX(), template.getY(), template.getZ(), template.getHeading(), 9);
-				npc.getController().delete();
 				break;
-			case 215488:
+			case 215488: // celestius
 				Player player = npc.getAggroList().getMostPlayerDamage();
-				if (player != null) {
+				if (player != null)
 					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 10021, 437, 0));
-				}
-				Npc newNpc2 = getNpc(700740);
-				if (newNpc2 != null) {
-					SpawnTemplate template2 = newNpc2.getSpawn();
-					spawn(700741, template2.getX(), template2.getY(), template2.getZ(), template2.getHeading(), 92);
-					newNpc2.getController().delete();
+				Npc contaminatedFragment = getNpc(700740);
+				if (contaminatedFragment != null) {
+					SpawnTemplate fragmentTemplate = contaminatedFragment.getSpawn();
+					spawn(700741, fragmentTemplate.getX(), fragmentTemplate.getY(), fragmentTemplate.getZ(), fragmentTemplate.getHeading(), 92);
+					contaminatedFragment.getController().delete();
 				}
 				spawn(799503, 548f, 811f, 1375f, (byte) 0);
 				break;
@@ -177,7 +195,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		TeleportService.teleportTo(player, mapId, instanceId, 202.26694f, 226.0532f, 1098.236f, (byte) 30);
 		return true;
 	}

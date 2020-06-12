@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TRANSFORM_IN_SUMMON;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -28,7 +29,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 @AIName("tallocssummon")
 public class TallocsSummonAI extends NpcAI {
 
-	private AtomicBoolean isTransformed = new AtomicBoolean(false);
+	private final AtomicBoolean isTransformed = new AtomicBoolean(false);
 
 	public TallocsSummonAI(Npc owner) {
 		super(owner);
@@ -38,14 +39,13 @@ public class TallocsSummonAI extends NpcAI {
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		if (dialogActionId == MAKE_MERCENARY && isTransformed.compareAndSet(false, true)) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
-			if (player.getSummon() != null) { // to do remove
-				PacketSendUtility.sendMessage(player, "Please dismiss your summon first.");
+			if (player.getSummon() != null) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_SUMMON_ALREADY_HAVE_A_FOLLOWER());
 				return true;
 			}
-
 			SpawnTemplate st = getSpawnTemplate();
-			SpawnTemplate spawnTemplate = SpawnEngine.newSingleTimeSpawn(st.getWorldId(), getNpcId(), st.getX(), st.getY(), st.getZ(), st.getHeading(),
-				0, SpawnTemplate.NO_AI);
+			SpawnTemplate spawnTemplate = SpawnEngine.newSingleTimeSpawn(st.getWorldId(), getNpcId(), st.getX(), st.getY(), st.getZ(), st.getHeading(), 0,
+				SpawnTemplate.NO_AI);
 			Summon summon = new Summon(getObjectId(), new SummonController(), spawnTemplate, getObjectTemplate(), player, 0, false);
 			player.setSummon(summon);
 			summon.setTarget(player.getTarget());
@@ -63,8 +63,7 @@ public class TallocsSummonAI extends NpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		if (!isTransformed.get()) {
+		if (!isTransformed.get())
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10));
-		}
 	}
 }
