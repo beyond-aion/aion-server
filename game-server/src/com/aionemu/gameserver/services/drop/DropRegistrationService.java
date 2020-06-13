@@ -99,7 +99,10 @@ public class DropRegistrationService {
 		}
 
 		if (npc.isInInstance()) {
-			npc.getPosition().getWorldMapInstance().getInstanceHandler().onDropRegistered(npc, winnerObj);
+			int instanceWinnerObjId = winnerObj;
+			if (winnerObj == 0 && player.getCurrentTeam() == null)
+				instanceWinnerObjId = player.getObjectId();
+			npc.getPosition().getWorldMapInstance().getInstanceHandler().onDropRegistered(npc, instanceWinnerObjId);
 		}
 		npc.getAi().onGeneralEvent(AIEventType.DROP_REGISTERED);
 
