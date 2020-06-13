@@ -87,7 +87,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		this.oldLegionId = getSiegeLocation().getLegionId();
 		if (getSiegeLocation().getRace() != SiegeRace.BALAUR) {
 			initMercenaryZones();
-			getSiegeLocation().forEachPlayer(p -> getSiegeLocation().checkForBalanceBuff(p, FortressLocation.SiegeBuff.ADD));
+			getSiegeLocation().forEachPlayer(p -> getSiegeLocation().checkForBalanceBuff(p, FortressLocation.SiegeBuffAction.ADD));
 			if (getBoss().getLevel() == 65) {
 				SiegeRace oppositeRace = getSiegeLocation().getRace() == SiegeRace.ELYOS ? SiegeRace.ASMODIANS : SiegeRace.ELYOS;
 				ThreadPoolManager.getInstance().schedule(() -> spawnFactionTroopAssault(oppositeRace), Rnd.get(600, 1800) * 1000); // Faction Balance NPCs
@@ -156,7 +156,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		// despawn protectors and make fortress invulnerable
 		SiegeService.getInstance().deSpawnNpcs(getSiegeLocationId());
 		// need to remove balance buff before vulnerability is set to false
-		getSiegeLocation().forEachPlayer(p -> getSiegeLocation().checkForBalanceBuff(p, FortressLocation.SiegeBuff.SIEGE_END_REMOVE));
+		getSiegeLocation().forEachPlayer(p -> getSiegeLocation().checkForBalanceBuff(p, FortressLocation.SiegeBuffAction.SIEGE_END_REMOVE));
 		getSiegeLocation().setVulnerable(false);
 		getSiegeLocation().setUnderShield(false);
 

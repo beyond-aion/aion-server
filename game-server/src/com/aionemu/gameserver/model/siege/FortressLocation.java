@@ -44,30 +44,30 @@ public class FortressLocation extends SiegeLocation {
 	public void onEnterZone(Creature creature, ZoneInstance zone) {
 		super.onEnterZone(creature, zone);
 		creature.setInsideZoneType(ZoneType.SIEGE);
-		checkForBalanceBuff(creature, SiegeBuff.ADD);
+		checkForBalanceBuff(creature, SiegeBuffAction.ADD);
 	}
 
 	@Override
 	public void onLeaveZone(Creature creature, ZoneInstance zone) {
 		super.onLeaveZone(creature, zone);
 		creature.unsetInsideZoneType(ZoneType.SIEGE);
-		checkForBalanceBuff(creature, SiegeBuff.LEAVE_ZONE_REMOVE);
+		checkForBalanceBuff(creature, SiegeBuffAction.LEAVE_ZONE_REMOVE);
 
 	}
 
-	public void checkForBalanceBuff(Creature creature, SiegeBuff siegeBuff) {
+	public void checkForBalanceBuff(Creature creature, SiegeBuffAction siegeBuffAction) {
 		if (creature instanceof Player && isVulnerable() && getFactionBalance() != 0) {
-			switch (siegeBuff) {
+			switch (siegeBuffAction) {
 				case LEAVE_ZONE_REMOVE:
 				case SIEGE_END_REMOVE:
 					for (int i = 8867; i <= 8884; i++) {
 						if (creature.getEffectController().hasAbnormalEffect(i)) {
 							creature.getEffectController().removeEffect(i);
 							if (creature.getRace() == Race.ELYOS) {
-								PacketSendUtility.sendPacket((Player) creature, siegeBuff == SiegeBuff.LEAVE_ZONE_REMOVE ?
+								PacketSendUtility.sendPacket((Player) creature, siegeBuffAction == SiegeBuffAction.LEAVE_ZONE_REMOVE ?
 										SM_SYSTEM_MESSAGE.STR_MSG_WEAK_RACE_BUFF_LIGHT_GET_OUT_AREA() : SM_SYSTEM_MESSAGE.STR_MSG_WEAK_RACE_BUFF_LIGHT_MIST_OFF());
 							} else {
-								PacketSendUtility.sendPacket((Player) creature, siegeBuff == SiegeBuff.LEAVE_ZONE_REMOVE ?
+								PacketSendUtility.sendPacket((Player) creature, siegeBuffAction == SiegeBuffAction.LEAVE_ZONE_REMOVE ?
 										SM_SYSTEM_MESSAGE.STR_MSG_WEAK_RACE_BUFF_DARK_GET_OUT_AREA() : SM_SYSTEM_MESSAGE.STR_MSG_WEAK_RACE_BUFF_DARK_MIST_OFF());
 							}
 							break;
@@ -110,7 +110,7 @@ public class FortressLocation extends SiegeLocation {
 		});
 	}
 
-	public enum SiegeBuff {
+	public enum SiegeBuffAction {
 		ADD,
 		LEAVE_ZONE_REMOVE,
 		SIEGE_END_REMOVE
