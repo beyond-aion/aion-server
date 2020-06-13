@@ -92,9 +92,10 @@ public class CM_LOGIN extends AionClientPacket {
 		readB(16); // 0
 		readB(7); // static bytes: 20 00 00 00 00 00 01
 		readB(16); // static bytes: 9D DA 47 A7 21 C0 A6 A5 4B B7 5E E3 CE C9 26 AA
-		readD(); // 0
-		readD(); // unk
-		readD(); // 0
+		int d1 = readD(); // 0
+		int d2 = readD(); // unk
+		int d3 = readD(); // 0
+		System.out.println("CM_LOGIN: d1=" + d1 + " d2=" + d2 + " d3=" + d3);
 	}
 
 	@Override

@@ -36,11 +36,13 @@ public class CM_AUTH_GG extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		sessionId = readD();
-		readD();
-		readD();
-		readD();
-		readD();
+		int d1 = readD();
+		int d2 = readD();
+		int d3 = readD();
+		int d4 = readD();
 		readB(0x0B);
+
+		System.out.println("CM_AUTH: d1=" + d1 + " d2=" + d2 + " d3=" + d3 + " d4=" + d4);
 	}
 
 	@Override
