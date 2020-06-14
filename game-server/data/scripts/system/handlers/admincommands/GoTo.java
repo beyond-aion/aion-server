@@ -272,6 +272,8 @@ public class GoTo extends AdminCommand {
 		addLocation(UDAS_TEMPLE_LOWER, 1146, 277, 116, "Udas Lower Temple", "Udas Tempelgruft");
 		addLocation(BESHMUNDIR_TEMPLE, 1477, 237, 243, "Beshmundir Temple", "BT");
 		addLocation(PADMARASHKA_CAVE, 385, 506, 66, "Padmarashka Cave");
+		// 3.0 Instances
+		addLocation(ATURAN_SKY_FORTRESS, 691.459f, 456.8719f, 655.7797f, "ASF", "Aturam Sky Fortress", "Atruam Himmelsfestung");
 		// 4.0 Instances
 		addLocation(SAURO_SUPPLY_BASE, 640.7884f, 174.29156f, 195.625f, "Sauro Supply Base");
 		addLocation(ETERNAL_BASTION, 745.86206f, 291.18323f, 233.7940f, "Eternal Bastion", "EB", "Stahlmauerbastion");
@@ -398,7 +400,7 @@ public class GoTo extends AdminCommand {
 		addLocation(DRAKENSPIRE_DEPHTS, 322, 183, 1688, "Drakenspire Depths", "Makarna");
 		addLocation(RAKSANG_RUINS, 830, 942, 1207, (byte) 73, "Raksang Ruins", "Mantor");
 		addLocation(INFERNAL_DANUAR_RELIQUARY, 256.60f, 257.99f, 241.78f, "Infernal Danuar Reliquary", "IDR", "Ruhnadium Heroisch");
-		addLocation(STONESPEAR_REACH, 231.14f, 264.399f, (byte) 98, "Stonespear Reach", "Plaza of Challenge", "Platz der Herausforderung");
+		addLocation(STONESPEAR_REACH, 231.14f, 264.399f, 98, "Stonespear Reach", "Plaza of Challenge", "Platz der Herausforderung");
 
 		// New maps 4.8
 		addLocation(CYGNEA, 2905, 803, 570, "Cygnea", "Signia");
