@@ -144,7 +144,7 @@
 		<npc_skill id="21292" lv="56" prob="33" cd="5000" />
 	</npc_skills>
 	<!-- Commander Ranodim -->
-	<npc_skills npc_ids="230852">
+	<npc_skills npc_ids="230852 233316 233317">
 		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
 		<npc_skill id="21135" lv="1" prob="100" max_hp="60" cd="30000" />
 		<npc_skill id="17294" lv="1" prob="30" />

@@ -74,6 +74,9 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 				break;
 		}
 
+		// spawn Commander Ranodim
+		spawn(Rnd.get(new int[] { 230852, 233316, 233317 }), 289.8795f, 343.75858f, 159.34445f, (byte) 90);
+
 		List<WorldPosition> temp = new ArrayList<>(chestPoints);
 		for (int i = 0; i < 8; i++) {
 			int index = Rnd.get(temp.size());
@@ -105,6 +108,8 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 				instance.setDoorState(59, true);
 				break;
 			case 230852: // Ranodim
+			case 233316:
+			case 233317:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_06());
 				instance.setDoorState(388, true);
 				break;

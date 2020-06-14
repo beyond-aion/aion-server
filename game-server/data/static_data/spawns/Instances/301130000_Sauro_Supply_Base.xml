@@ -17,10 +17,6 @@
 		<spawn npc_id="230853">
 			<spot x="146.14592" y="429.8655" z="150.77364"/>
 		</spawn>
-		<!-- Commander Ranodim -->
-		<spawn npc_id="230852">
-			<spot x="289.8795" y="343.75858" z="159.34445" h="90"/>
-		</spawn>
 		<!-- Contaminated Bloodwing -->
 		<spawn npc_id="233318">
 			<spot x="467.9899" y="292.37143" z="160.79488"/>

@@ -38,7 +38,9 @@
 			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
 			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
 			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="233317" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="186000237" min_count="5" max_count="10" /><!-- Ancient Coin -->
@@ -93,7 +95,9 @@
 			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
 			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
 			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="233317" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="100001578" /><!-- Sauro Guard's Sword -->
@@ -125,7 +129,9 @@
 			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
 			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
 			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="233317" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="110101673" /><!-- Sauro Guard's Tunic -->
@@ -163,7 +169,9 @@
 			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
 			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
 			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="233317" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="120001465" chance="10" /><!-- Sauro Guard's Corundum Earrings -->
@@ -195,7 +203,9 @@
 			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
 			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
 			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="233317" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="100001579" /><!-- Sauren Sword -->
@@ -230,7 +240,9 @@
 			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
 			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
 			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="233317" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="110101671" /><!-- Sauren Tunic -->
@@ -290,7 +302,9 @@
 			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
 			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
 			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="233317" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="120001467" chance="10" /><!-- Sauren Corundum Earrings -->
@@ -427,7 +441,9 @@
 			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
 			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
 			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="233317" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="120001469" chance="10" /><!-- Sauro Commander's Corundum Earrings -->
@@ -461,6 +477,7 @@
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
@@ -472,7 +489,8 @@
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="233317" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="185000177" /><!-- Blue Storeroom Key -->
@@ -483,7 +501,8 @@
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="233317" /><!-- Commander Ranodim -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="185000178" /><!-- Green Storeroom Key -->
