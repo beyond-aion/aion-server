@@ -131,7 +131,7 @@
 			<gd_item id="186000147" /><!-- Mithril Medal -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Boss Volatile Bundle" chance="100" member_limit="144">
+	<gd_rule rule_name="Named Boss Volatile Bundle" chance="100" member_limit="18">
 		<gd_npcs>
 			<gd_npc npc_id="219887" /><!-- Captain Brimas -->
 			<gd_npc npc_id="219906" /><!-- Captain Meriward  -->
