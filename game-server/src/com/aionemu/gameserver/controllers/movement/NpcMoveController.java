@@ -417,7 +417,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		return destination == Destination.TARGET_OBJECT;
 	}
 
-	public void storeStep() {
+	public synchronized void storeStep() {
 		if (owner.getAi().getState() == AIState.RETURNING)
 			return;
 		if (lastSteps == null)
@@ -430,7 +430,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			lastSteps.put(++stepSequenceNr, currentStep);
 	}
 
-	public Point3D recallPreviousStep() {
+	public synchronized Point3D recallPreviousStep() {
 		if (lastSteps == null)
 			lastSteps = new LastUsedCache<>(10);
 
@@ -454,7 +454,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		return result;
 	}
 
-	public void clearBackSteps() {
+	public synchronized void clearBackSteps() {
 		stepSequenceNr = 0;
 		lastSteps = null;
 		movementMask = MovementMask.IMMEDIATE;
