@@ -27055,8 +27055,8 @@
 			<item id="125004086" player_classes="GLADIATOR" /><!-- Pure Dynatoum Radiant Helm -->
 			<item id="125004089" player_classes="ASSASSIN RANGER" /><!-- Pure Dynatoum Radiant Hat -->
 			<item id="125004090" player_classes="GUNNER" /><!-- Pure Dynatoum Radiant Hat -->
-			<item id="125004088" player_classes="CHANTER" /><!-- Pure Dynatoum Radiant Chain Helm -->
-			<item id="125004087" player_classes="CLERIC RIDER" /><!-- Pure Dynatoum Radiant Chain Helm -->
+			<item id="125004088" player_classes="RIDER" /><!-- Pure Dynatoum Radiant Chain Helm -->
+			<item id="125004087" player_classes="CLERIC CHANTER" /><!-- Pure Dynatoum Radiant Chain Helm -->
 			<item id="125004091" player_classes="SORCERER SPIRIT_MASTER" /><!-- Pure Dynatoum Radiant Headband -->
 			<item id="125004092" player_classes="BARD" /><!-- Pure Dynatoum Radiant Headband -->
 		</items>
