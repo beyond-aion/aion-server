@@ -157,7 +157,7 @@
 	<map id="900020000" name="TestBasic" cName="Test_Basic" twin_count="10" beginner_twin_count="10" water_level="16" death_level="0" world_size="256" drop_type="NONE" flags="BIND RECALL GLIDE FLY RIDE DUEL_SAME_RACE"/>
 	<map id="900030000" name="Test_Server" cName="Test_Server" twin_count="5" beginner_twin_count="5" water_level="0" death_level="0" world_size="1024" drop_type="NONE" flags="BIND RECALL GLIDE FLY RIDE PVP DUEL_SAME_RACE"/>
 	<map id="900100000" name="Test_GiantMonster" cName="Test_GiantMonster" water_level="16" death_level="0" world_size="1024" drop_type="NONE" flags="BIND RECALL GLIDE FLY DUEL_SAME_RACE DUEL_OTHER_RACE"/>
-	<map id="900110000" name="Housing_barrack" cName="Housing_barrack" water_level="115" death_level="0" world_size="3072" drop_type="NONE" flags="BIND RECALL GLIDE PVP DUEL_SAME_RACE"/>
+	<map id="900110000" name="Housing_barrack" cName="Housing_barrack" water_level="115" death_level="0" world_size="3072" drop_type="NONE" flags="BIND RECALL GLIDE RIDE PVP DUEL_SAME_RACE"/>
 	<map id="900120000" name="Test_IDArena" cName="Test_IDArena" instance="true" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags=""/>
 	<map id="900130000" name="IDLDF5RE_test" cName="IDLDF5RE_test" instance="true" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags=""/>
 	<map id="900140000" name="Instanced_Dungeon_Test" cName="Test_Kgw" instance="true" water_level="0" death_level="0" world_size="0" drop_type="NONE" flags=""/>
