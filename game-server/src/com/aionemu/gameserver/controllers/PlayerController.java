@@ -47,7 +47,7 @@ import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.instance.InstanceService;
-import com.aionemu.gameserver.services.reward.PromotionKitService;
+import com.aionemu.gameserver.services.reward.StarterKitService;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
@@ -618,8 +618,8 @@ public class PlayerController extends CreatureController<Player> {
 		SkillLearnService.learnNewSkills(player, minNewLevel, newLevel);
 		BonusPackService.getInstance().addPlayerCustomReward(player);
 		FactionPackService.getInstance().addPlayerCustomReward(player);
-		if (CustomConfig.ENABLE_PROMOTION_KIT)
-			PromotionKitService.getInstance().onLevelUp(player, minNewLevel, newLevel);
+		if (CustomConfig.ENABLE_STARTER_KIT)
+			StarterKitService.getInstance().onLevelUp(player, minNewLevel, newLevel);
 	}
 
 	public void upgradePlayer() {
