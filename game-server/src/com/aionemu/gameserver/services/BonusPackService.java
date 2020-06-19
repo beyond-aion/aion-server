@@ -26,17 +26,17 @@ public class BonusPackService {
 	private BonusPackService() {
 						    // itemId, count
 
-		rewards.put(186000242, 15);   //Ceramium Medal
-		rewards.put(186000130, 6500); //Crucible Insignia
-		rewards.put(186000051, 5);    //Major Ancient Crown
-		rewards.put(166000195, 10);   //Epsilon Enchantment Stone
+		rewards.put(186000242, 15); // Ceramium Medal
+		rewards.put(186000130, 6500); // Crucible Insignia
+		rewards.put(186000051, 5); // Major Ancient Crown
+		rewards.put(166000195, 15); // Epsilon Enchantment Stone
 
-		rewards.put(169620072, 1);    //AP Scroll
-		rewards.put(169620082, 1);    //Gathering Scroll
-		rewards.put(169620094, 1);    //Crafting Scroll
+		rewards.put(186000236, 250); // Blood Mark
+		rewards.put(186000237, 4500); // Ancient Coin
+		rewards.put(186000409, 150); // Daeva's Respite Coin
 
-		rewards.put(188052562, 5);    //Scroll Bundle
-		rewards.put(190100030, 1);    //Pagati Mount 15days
+		rewards.put(188052562, 5); // Scroll Bundle
+		rewards.put(190100051, 1); // Flying Pagati
 	}
 
 	public void addPlayerCustomReward(Player player) {
