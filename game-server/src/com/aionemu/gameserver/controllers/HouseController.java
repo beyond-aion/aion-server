@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.templates.housing.Building;
 import com.aionemu.gameserver.model.templates.housing.HouseAddress;
+import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.templates.spawns.HouseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnType;
@@ -213,6 +214,9 @@ public class HouseController extends VisibleObjectController<House> {
 	}
 
 	public void updateHouseSpawns() {
+		// only update spawns in active studios
+		if (getOwner().getHouseType() == HouseType.STUDIO && (getOwner().getPosition() == null || !getOwner().isSpawned()))
+			return;
 		getOwner().updateSpawn(SpawnType.MANAGER, null); // remove old butler, otherwise new npcs spawn with old owner name
 		updateSpawns();
 		updateAppearance();
