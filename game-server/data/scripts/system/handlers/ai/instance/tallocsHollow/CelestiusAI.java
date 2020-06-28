@@ -46,10 +46,7 @@ public class CelestiusAI extends AggressiveNpcAI {
 
 	private void startHelpersCall() {
 		helpersTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			deleteHelpers();
-			if (isDead() && getLifeStats().getHpPercentage() < 90) {
-				cancelHelpersTask();
-			} else {
+			if (!isDead()) {
 				SkillEngine.getInstance().getSkill(getOwner(), 18981, 44, getOwner()).useNoAnimationSkill();
 				startRun((Npc) spawn(281514, 518, 813, 1378, (byte) 0), "3001900001");
 				startRun((Npc) spawn(281514, 551, 795, 1376, (byte) 0), "3001900002");
@@ -67,8 +64,6 @@ public class CelestiusAI extends AggressiveNpcAI {
 
 	private void deleteHelpers() {
 		for (Npc npc : getPosition().getWorldMapInstance().getNpcs(281514)) {
-			if (npc == null)
-				continue;
 			npc.getController().delete();
 		}
 	}

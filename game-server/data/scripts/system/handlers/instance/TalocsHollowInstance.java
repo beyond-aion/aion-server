@@ -3,6 +3,7 @@ package instance;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -38,6 +39,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class TalocsHollowInstance extends GeneralInstanceHandler {
 
 	private final List<Integer> movies = new ArrayList<>();
+	private final AtomicBoolean isQueenMosquaHome = new AtomicBoolean(true);
 
 	@Override
 	public void onEnterInstance(Player player) {
@@ -82,6 +84,20 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
+	public void onAggro(Npc npc) {
+		if (npc.getNpcId() == 215480 && isQueenMosquaHome.compareAndSet(true, false))
+			instance.setDoorState(7, false);
+	}
+
+	@Override
+	public void onBackHome(Npc npc) {
+		if (npc.getNpcId() == 215480) { // queen mosqua
+			isQueenMosquaHome.set(true);
+			instance.setDoorState(7, true);
+		}
+	}
+
+	@Override
 	public void onDie(Npc npc) {
 		switch (npc.getNpcId()) {
 			case 215467: // kinquid
@@ -94,6 +110,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 					thornyVines.getController().delete();
 				break;
 			case 215480: // queen mosqua
+				instance.setDoorState(7, true);
 				Npc insectEgg = getNpc(700738);
 				if (insectEgg != null) {
 					insectEgg.getController().delete();
