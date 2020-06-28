@@ -273,7 +273,7 @@ public class GoTo extends AdminCommand {
 		addLocation(BESHMUNDIR_TEMPLE, 1477, 237, 243, "Beshmundir Temple", "BT");
 		addLocation(PADMARASHKA_CAVE, 385, 506, 66, "Padmarashka Cave");
 		// 3.0 Instances
-		addLocation(ATURAN_SKY_FORTRESS, 691.459f, 456.8719f, 655.7797f, "ASF", "Aturam Sky Fortress", "Atruam Himmelsfestung");
+		addLocation(ATURAM_SKY_FORTRESS, 691.459f, 456.8719f, 655.7797f, "ASF", "Aturam Sky Fortress", "Aturam Himmelsfestung");
 		// 4.0 Instances
 		addLocation(SAURO_SUPPLY_BASE, 640.7884f, 174.29156f, 195.625f, "Sauro Supply Base");
 		addLocation(ETERNAL_BASTION, 745.86206f, 291.18323f, 233.7940f, "Eternal Bastion", "EB", "Stahlmauerbastion");
