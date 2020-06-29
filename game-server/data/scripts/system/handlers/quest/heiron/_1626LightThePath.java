@@ -44,9 +44,8 @@ public class _1626LightThePath extends AbstractQuestHandler {
 			if (targetId == 204592) {
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
-						return sendQuestDialog(env, 4762);
+						return sendQuestDialog(env, env.isDialogContinuationFromPreQuest() ? 1011 : 4762);
 					case ASK_QUEST_ACCEPT:
-						// TODO we need to send page 1011 (which uses the same actionId) first. due to a stateless dialog selection this is not possible
 						return sendQuestDialog(env, 4);
 					case QUEST_ACCEPT_1:
 					case QUEST_ACCEPT_SIMPLE:

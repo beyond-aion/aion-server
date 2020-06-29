@@ -10,13 +10,7 @@ import java.util.stream.Stream;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.CreatureType;
-import com.aionemu.gameserver.model.DialogAction;
-import com.aionemu.gameserver.model.DialogPage;
-import com.aionemu.gameserver.model.EmotionId;
-import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.*;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -24,22 +18,10 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.QuestStateList;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.model.templates.quest.CollectItem;
-import com.aionemu.gameserver.model.templates.quest.CollectItems;
-import com.aionemu.gameserver.model.templates.quest.FinishedQuestCond;
-import com.aionemu.gameserver.model.templates.quest.QuestDrop;
-import com.aionemu.gameserver.model.templates.quest.QuestItems;
-import com.aionemu.gameserver.model.templates.quest.QuestNpc;
-import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
+import com.aionemu.gameserver.model.templates.quest.*;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestActionType;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -465,6 +447,7 @@ public abstract class AbstractQuestHandler {
 									if (fcondition.getQuestId() == env.getQuestId() && isAcceptableQuest(template)) {
 										env.setQuestId(questId);
 										env.setDialogActionId(DialogAction.QUEST_SELECT);
+										env.setDialogContinuationFromPreQuest(true);
 										return QuestEngine.getInstance().onDialog(env); // show start dialog of follow-up quest
 									}
 								}

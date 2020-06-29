@@ -13,6 +13,7 @@ public class QuestEnv {
 	private Player player;
 	private int questId;
 	private int dialogActionId;
+	private boolean isDialogContinuationFromPreQuest;
 	private int extendedRewardIndex;
 
 	public QuestEnv(VisibleObject visibleObject, Player player, int questId) {
@@ -77,6 +78,14 @@ public class QuestEnv {
 
 	public void setDialogActionId(int dialogActionId) {
 		this.dialogActionId = dialogActionId;
+	}
+
+	public boolean isDialogContinuationFromPreQuest() {
+		return isDialogContinuationFromPreQuest;
+	}
+
+	public void setDialogContinuationFromPreQuest(boolean isDialogContinuationFromPreQuest) {
+		this.isDialogContinuationFromPreQuest = isDialogContinuationFromPreQuest;
 	}
 
 	/**
