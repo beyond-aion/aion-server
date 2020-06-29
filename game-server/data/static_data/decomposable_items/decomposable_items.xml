@@ -25465,32 +25465,18 @@
 	</decomposable>
 	<decomposable item_id="188052828" selectable="true"><!-- Dynatoum's Weapon Box -->
 		<items>
-			<item id="100601343" player_classes="SORCERER" /><!-- Aegis Spellbook -->
-			<item id="100501243" player_classes="SORCERER" /><!-- Aegis Orb -->
-			<item id="100601343" player_classes="SPIRIT_MASTER" /><!-- Aegis Spellbook -->
-			<item id="100501243" player_classes="SPIRIT_MASTER" /><!-- Aegis Orb -->
-			<item id="100101251" player_classes="CHANTER" /><!-- Aegis Mace -->
-			<item id="101501274" player_classes="CHANTER" /><!-- Aegis Staff -->
-			<item id="115001670" player_classes="CHANTER" /><!-- Aegis Shield -->
-			<item id="100101251" player_classes="CLERIC" /><!-- Aegis Mace -->
-			<item id="101501274" player_classes="CLERIC" /><!-- Aegis Staff -->
-			<item id="115001670" player_classes="CLERIC" /><!-- Aegis Shield -->
+			<item id="100601343" player_classes="SORCERER SPIRIT_MASTER" /><!-- Aegis Spellbook -->
+			<item id="100501243" player_classes="SORCERER SPIRIT_MASTER" /><!-- Aegis Orb -->
+			<item id="100101251" player_classes="CHANTER CLERIC" /><!-- Aegis Mace -->
+			<item id="101501274" player_classes="CHANTER CLERIC" /><!-- Aegis Staff -->
+			<item id="115001670" player_classes="CHANTER CLERIC TEMPLAR GLADIATOR" /><!-- Aegis Shield -->
 			<item id="102001166" player_classes="BARD" /><!-- Aegis Harp -->
-			<item id="100901264" player_classes="TEMPLAR" /><!-- Aegis Greatsword -->
-			<item id="100001626" player_classes="TEMPLAR" /><!-- Aegis Sword -->
-			<item id="115001670" player_classes="TEMPLAR" /><!-- Aegis Shield -->
-			<item id="101701289" player_classes="GLADIATOR" /><!-- Aegis Bow -->
-			<item id="100201426" player_classes="GLADIATOR" /><!-- Aegis Dagger -->
-			<item id="100901264" player_classes="GLADIATOR" /><!-- Aegis Greatsword -->
+			<item id="100901264" player_classes="TEMPLAR GLADIATOR" /><!-- Aegis Greatsword -->
+			<item id="100001626" player_classes="TEMPLAR GLADIATOR ASSASSIN" /><!-- Aegis Sword -->
+			<item id="101701289" player_classes="GLADIATOR ASSASSIN RANGER" /><!-- Aegis Bow -->
+			<item id="100201426" player_classes="GLADIATOR ASSASSIN RANGER" /><!-- Aegis Dagger -->
 			<item id="101301186" player_classes="GLADIATOR" /><!-- Aegis Polearm -->
-			<item id="100001626" player_classes="GLADIATOR" /><!-- Aegis Sword -->
-			<item id="115001670" player_classes="GLADIATOR" /><!-- Aegis Shield -->
-			<item id="101701289" player_classes="ASSASSIN" /><!-- Aegis Bow -->
-			<item id="100201426" player_classes="ASSASSIN" /><!-- Aegis Dagger -->
-			<item id="100001626" player_classes="ASSASSIN" /><!-- Aegis Sword -->
-			<item id="101701289" player_classes="RANGER" /><!-- Aegis Bow -->
-			<item id="100201426" player_classes="RANGER" /><!-- Aegis Dagger -->
-			<item id="101801140" player_classes="GUNNER" /><!-- Aegis Pistol -->
+			<item id="101801140" player_classes="GUNNER RIDER" /><!-- Aegis Pistol -->
 			<item id="101901050" player_classes="GUNNER" /><!-- Aegis Aethercannon -->
 			<item id="102100922" player_classes="RIDER" /><!-- Aegis Cipher-Blade -->
 		</items>
@@ -25573,33 +25559,19 @@
 	</decomposable>
 	<decomposable item_id="188052830" selectable="true"><!-- Dynatoum's Brazen Weapon Box -->
 		<items>
-			<item id="100501244" player_classes="SORCERER" /><!-- Brazen Aegis Orb -->
-			<item id="100601344" player_classes="SORCERER" /><!-- Brazen Aegis Spellbook -->
-			<item id="100501244" player_classes="SPIRIT_MASTER" /><!-- Brazen Aegis Orb -->
-			<item id="100601344" player_classes="SPIRIT_MASTER" /><!-- Brazen Aegis Spellbook -->
-			<item id="100101252" player_classes="CHANTER" /><!-- Brazen Aegis Mace -->
-			<item id="101501275" player_classes="CHANTER" /><!-- Brazen Aegis Staff -->
-			<item id="115001671" player_classes="CHANTER" /><!-- Brazen Aegis Shield -->
-			<item id="100101252" player_classes="CLERIC" /><!-- Brazen Aegis Mace -->
-			<item id="101501275" player_classes="CLERIC" /><!-- Brazen Aegis Staff -->
-			<item id="115001671" player_classes="CLERIC" /><!-- Brazen Aegis Shield -->
+			<item id="100501244" player_classes="SORCERER SPIRIT_MASTER" /><!-- Brazen Aegis Orb -->
+			<item id="100601344" player_classes="SORCERER SPIRIT_MASTER" /><!-- Brazen Aegis Spellbook -->
+			<item id="100101252" player_classes="CHANTER CLERIC" /><!-- Brazen Aegis Mace -->
+			<item id="101501275" player_classes="CHANTER CLERIC" /><!-- Brazen Aegis Staff -->
+			<item id="115001671" player_classes="CHANTER CLERIC TEMPLAR GLADIATOR" /><!-- Brazen Aegis Shield -->
 			<item id="102001167" player_classes="BARD" /><!-- Brazen Aegis Harp -->
-			<item id="100901265" player_classes="TEMPLAR" /><!-- Brazen Aegis Greatsword -->
-			<item id="100001627" player_classes="TEMPLAR" /><!-- Brazen Aegis Sword -->
-			<item id="115001671" player_classes="TEMPLAR" /><!-- Brazen Aegis Shield -->
-			<item id="101701290" player_classes="GLADIATOR" /><!-- Brazen Aegis Bow -->
-			<item id="100201427" player_classes="GLADIATOR" /><!-- Brazen Aegis Dagger -->
-			<item id="100901265" player_classes="GLADIATOR" /><!-- Brazen Aegis Greatsword -->
+			<item id="100901265" player_classes="TEMPLAR GLADIATOR" /><!-- Brazen Aegis Greatsword -->
+			<item id="100001627" player_classes="TEMPLAR GLADIATOR ASSASSIN" /><!-- Brazen Aegis Sword -->
+			<item id="101701290" player_classes="GLADIATOR ASSASSIN RANGER" /><!-- Brazen Aegis Bow -->
+			<item id="100201427" player_classes="GLADIATOR ASSASSIN RANGER" /><!-- Brazen Aegis Dagger -->
 			<item id="101301187" player_classes="GLADIATOR" /><!-- Brazen Aegis Polearm -->
-			<item id="100001627" player_classes="GLADIATOR" /><!-- Brazen Aegis Sword -->
-			<item id="115001671" player_classes="GLADIATOR" /><!-- Brazen Aegis Shield -->
-			<item id="101701290" player_classes="ASSASSIN" /><!-- Brazen Aegis Bow -->
-			<item id="100201427" player_classes="ASSASSIN" /><!-- Brazen Aegis Dagger -->
-			<item id="100001627" player_classes="ASSASSIN" /><!-- Brazen Aegis Sword -->
-			<item id="101701290" player_classes="RANGER" /><!-- Brazen Aegis Bow -->
-			<item id="100201427" player_classes="RANGER" /><!-- Brazen Aegis Dagger -->
 			<item id="101901051" player_classes="GUNNER" /><!-- Brazen Aegis Aethercannon -->
-			<item id="101801141" player_classes="GUNNER" /><!-- Brazen Aegis Pistol -->
+			<item id="101801141" player_classes="GUNNER RIDER" /><!-- Brazen Aegis Pistol -->
 			<item id="102100923" player_classes="RIDER" /><!-- Brazen Aegis Cipher-Blade -->
 		</items>
 	</decomposable>
