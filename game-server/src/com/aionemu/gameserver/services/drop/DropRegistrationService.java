@@ -98,12 +98,7 @@ public class DropRegistrationService {
 					droppedItems, groupMembers, winnerObj);
 		}
 
-		if (npc.isInInstance()) {
-			int instanceWinnerObjId = winnerObj;
-			if (winnerObj == 0 && player.getCurrentTeam() == null)
-				instanceWinnerObjId = player.getObjectId();
-			npc.getPosition().getWorldMapInstance().getInstanceHandler().onDropRegistered(npc, instanceWinnerObjId);
-		}
+		npc.getPosition().getWorldMapInstance().getInstanceHandler().onDropRegistered(npc, winnerObj);
 		npc.getAi().onGeneralEvent(AIEventType.DROP_REGISTERED);
 
 		for (Player p : allowedLooters) {

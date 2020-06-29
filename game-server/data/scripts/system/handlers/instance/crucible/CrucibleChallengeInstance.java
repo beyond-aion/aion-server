@@ -812,13 +812,10 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 					return;
 				}
 				rewardCount++;
-				Player player = instance.getPlayer(winnerObj);
-				if (player != null) {
-					if (player.isInsideZone(ZoneName.get("ILLUSION_STADIUM_1_300320000"))) {
-						sp(205667, 1258.8464f, 237.85518f, 405.39673f, (byte) 0, 0);
-					} else if (player.isInsideZone(ZoneName.get("ILLUSION_STADIUM_6_300320000"))) {
-						sp(205677, 1271.5472f, 791.36145f, 436.64017f, (byte) 0, 0);
-					}
+				if (npc.isInsideZone(ZoneName.get("ILLUSION_STADIUM_1_300320000"))) {
+					sp(205667, 1258.8464f, 237.85518f, 405.39673f, (byte) 0, 0);
+				} else if (npc.isInsideZone(ZoneName.get("ILLUSION_STADIUM_6_300320000"))) {
+					sp(205677, 1271.5472f, 791.36145f, 436.64017f, (byte) 0, 0);
 				}
 				dropItems.clear();
 				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, winnerObj, npcId, 186000130, count));
