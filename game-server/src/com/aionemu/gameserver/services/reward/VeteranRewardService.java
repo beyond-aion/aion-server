@@ -92,7 +92,7 @@ public final class VeteranRewardService {
 		rewards.get(10).add(new RewardItem(169620072, 3)); // AP Boost Charm II - 30%
 
 		// month 12
-		rewards.get(11).add(new RewardItem(190100049, 1)); // Flying Crestlich
+		rewards.get(11).add(new RewardItem(190100107, 1)); // Emerald Crestlich
 		rewards.get(11).add(new RewardItem(169600062, 1)); // [Emotion Card] Play Harp
 		rewards.get(11).add(new RewardItem(169610343, 1)); // [Title] Forgotten Hero
 		rewards.get(11).add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
