@@ -1,7 +1,6 @@
 package ai.instance.unstableSplinterpath;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -20,20 +19,20 @@ public class PieceOfMidnightAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleCreatureSee(Creature creature) {
-		checkDistance(this, creature);
+		checkDistance(creature);
 	}
 
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
-		checkDistance(this, creature);
+		checkDistance(creature);
 	}
 
-	private void checkDistance(NpcAI ai, Creature creature) {
-		Npc rukril = getPosition().getWorldMapInstance().getNpc(219551);
-		Npc ebonsoul = getPosition().getWorldMapInstance().getNpc(219552);
+	private void checkDistance(Creature creature) {
 		if (creature instanceof Npc) {
-			if (PositionUtil.isInRange(getOwner(), rukril, 5) && rukril.getEffectController().hasAbnormalEffect(19266)) {
+			Npc rukril = getPosition().getWorldMapInstance().getNpc(219551);
+			if (rukril != null && PositionUtil.isInRange(getOwner(), rukril, 5) && rukril.getEffectController().hasAbnormalEffect(19266)) {
 				rukril.getEffectController().removeEffect(19266);
+				Npc ebonsoul = getPosition().getWorldMapInstance().getNpc(219552);
 				if (ebonsoul != null && ebonsoul.getEffectController().hasAbnormalEffect(19159))
 					ebonsoul.getEffectController().removeEffect(19159);
 			}

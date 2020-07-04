@@ -28,9 +28,9 @@ public class PieceOfSplendorAI extends AggressiveNpcAI {
 	}
 
 	private void checkDistance(Creature creature) {
-		Npc ebonsoul = getPosition().getWorldMapInstance().getNpc(219552);
-		if (creature instanceof Npc && ebonsoul != null) {
-			if (PositionUtil.isInRange(getOwner(), ebonsoul, 5) && ebonsoul.getEffectController().hasAbnormalEffect(19159)) {
+		if (creature instanceof Npc) {
+			Npc ebonsoul = getPosition().getWorldMapInstance().getNpc(219552);
+			if (ebonsoul != null && PositionUtil.isInRange(getOwner(), ebonsoul, 5) && ebonsoul.getEffectController().hasAbnormalEffect(19159)) {
 				ebonsoul.getEffectController().removeEffect(19159);
 				Npc rukril = getPosition().getWorldMapInstance().getNpc(219551);
 				if (rukril != null && rukril.getEffectController().hasAbnormalEffect(19266))
