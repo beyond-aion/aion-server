@@ -1,6 +1,6 @@
 /*
- * DB changes since e7107d7f (02.02.2019)
+ * DB changes since ed3b91a (04.07.2020)
  */
 
--- drop unused 'seller'-name column in broker
-alter table broker drop column seller;
+-- remove old event items
+DELETE FROM inventory WHERE item_id = 186000111;
