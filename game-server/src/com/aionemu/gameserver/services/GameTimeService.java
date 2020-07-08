@@ -20,8 +20,8 @@ import com.aionemu.gameserver.utils.time.gametime.GameTime;
 public class GameTimeService {
 
 	private static final Logger log = LoggerFactory.getLogger(GameTimeService.class);
-	private GameTime gameTime = new GameTime(DAOManager.getDAO(ServerVariablesDAO.class).loadInt("time"));
-	private AtomicBoolean isStarted = new AtomicBoolean();
+	private final GameTime gameTime = new GameTime(DAOManager.getDAO(ServerVariablesDAO.class).loadInt("time"));
+	private final AtomicBoolean isStarted = new AtomicBoolean();
 
 	private GameTimeService() {
 		log.info("Initialized GameTime");
@@ -53,17 +53,13 @@ public class GameTimeService {
 		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> gameTime.addMinutes(1), 5000, 5000);
 
 		// task to save the game time and update all clients
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				log.info("Sending current game time to all players");
-				PacketSendUtility.broadcastToWorld(new SM_GAME_TIME());
-				if (saveGameTime())
-					log.info("Game time saved...");
-				else
-					log.warn("Error saving game time");
-			}
+		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			log.info("Sending current game time to all players");
+			PacketSendUtility.broadcastToWorld(new SM_GAME_TIME());
+			if (saveGameTime())
+				log.info("Game time saved...");
+			else
+				log.warn("Error saving game time");
 		}, updateInterval, updateInterval);
 
 		log.info("GameTime started. Update interval: " + updateInterval / 1000 + "s");

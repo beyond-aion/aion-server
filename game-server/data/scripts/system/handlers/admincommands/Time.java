@@ -6,20 +6,22 @@ import com.aionemu.gameserver.services.GameTimeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.time.gametime.GameTime;
-import com.aionemu.gameserver.world.World;
 
 /**
- * @author Pan
+ * @author Pann, Neon, Sykra
  */
 public class Time extends AdminCommand {
 
 	public Time() {
 		super("time", "Changes the game time.");
 
+		// @formatter:off
 		setSyntaxInfo(
 			"<dawn|day|dusk|night> - Sets the specified day time.",
-			"<0-23> - Sets the specified hour."
+			"<0-23> - Sets the specified hour.",
+			"<0-23> <0-59> - Sets the specified hour and minute."
 		);
+		// @formatter:on
 	}
 
 	@Override
@@ -28,8 +30,8 @@ public class Time extends AdminCommand {
 			sendInfo(admin);
 			return;
 		}
-
 		int hour;
+		int minute = 0;
 		if (params[0].equalsIgnoreCase("night")) {
 			hour = 22;
 		} else if (params[0].equalsIgnoreCase("dusk")) {
@@ -43,6 +45,11 @@ public class Time extends AdminCommand {
 				hour = Integer.parseInt(params[0]);
 				if (hour < 0 || hour > 23)
 					throw new IllegalArgumentException("A day has only 24 hours!\nMin value: 0 - Max value: 23");
+				if (params.length == 2) {
+					minute = Integer.parseInt(params[1]);
+					if (minute < 0 || minute > 59)
+						throw new IllegalArgumentException("An hour has only 60 minutes!\nMin value: 0 - Max value: 59");
+				}
 			} catch (IllegalArgumentException e) {
 				sendInfo(admin, e.getClass() == IllegalArgumentException.class ? e.getMessage() : null); // default info for NumberFormatException
 				return;
@@ -50,11 +57,16 @@ public class Time extends AdminCommand {
 		}
 
 		GameTime gameTime = GameTimeService.getInstance().getGameTime();
-		int hourOffset = hour - GameTimeService.getInstance().getGameTime().getHour(); // hour offset inside the same day
-		gameTime.addMinutes((60 * hourOffset) - gameTime.getMinute());
-
-		World.getInstance().forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_GAME_TIME()));
-
+		int hourOffset = hour - gameTime.getHour(); // hour offset inside the same day
+		int minutesToAdd = 60 * hourOffset;
+		if (minute == 0) {
+			minutesToAdd -= gameTime.getMinute();
+		} else {
+			int minuteOffset = minute - gameTime.getMinute();
+			minutesToAdd += minuteOffset;
+		}
+		gameTime.addMinutes(minutesToAdd);
+		PacketSendUtility.broadcastToWorld(new SM_GAME_TIME());
 		sendInfo(admin, "You changed the time to " + gameTime.getHour() + ":" + String.format("%02d", gameTime.getMinute()) + ".");
 	}
 }

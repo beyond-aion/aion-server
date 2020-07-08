@@ -5,9 +5,9 @@ import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
@@ -31,20 +32,18 @@ public class RespawnService {
 	public static final int IMMEDIATE_DECAY = 2 * 1000;
 	public static final int WITH_DROP_DECAY = 5 * 60 * 1000;
 	private static final Map<Integer, RespawnTask> pendingRespawns = new ConcurrentHashMap<>();
+	private static final Logger log = LoggerFactory.getLogger(RespawnService.class);
 
 	/**
-	 * Schedules decay (despawn) of the npc with the default delay time. If there is already a decay task, it will be replaced with this one. The task
-	 * can then be accessed via {@link NpcController#getTask(TaskId.DECAY)}
+	 * Schedules decay (despawn) of the npc with the default delay time. If there is already a decay task, it will be replaced with this one.
 	 */
 	public static Future<?> scheduleDecayTask(Npc npc) {
-		int decayInterval;
 		Set<DropItem> drop = DropRegistrationService.getInstance().getCurrentDropMap().get(npc.getObjectId());
-
+		int decayInterval;
 		if (drop == null || drop.isEmpty())
 			decayInterval = IMMEDIATE_DECAY;
 		else
 			decayInterval = WITH_DROP_DECAY;
-
 		return scheduleDecayTask(npc, decayInterval);
 	}
 
@@ -77,15 +76,11 @@ public class RespawnService {
 		RespawnTask oldRespawnTask = pendingRespawns.put(visibleObject.getObjectId(), respawnTask);
 		if (oldRespawnTask != null) { // objectId should not have been in pendingRespawns
 			if (spawnTemplate == oldRespawnTask.spawnTemplate) {
-				LoggerFactory.getLogger(RespawnService.class).warn("Duplicate respawn task initiated for " + visibleObject, new IllegalStateException());
+				log.warn("Duplicate respawn task initiated for {}", visibleObject, new IllegalStateException());
 			} else {
-				String oldOwnerInfo = "Old owner: Npc ID: " + oldRespawnTask.spawnTemplate.getNpcId() + ", map ID: "
-					+ oldRespawnTask.spawnTemplate.getWorldId();
-				String newOwnerInfo = "New owner: " + visibleObject;
-				LoggerFactory.getLogger(RespawnService.class)
-					.warn("ObjectId " + visibleObject.getObjectId()
-						+ " got released and reassigned while there was a still active respawn task for the old objectId owner.\n" + oldOwnerInfo + "\n"
-						+ newOwnerInfo);
+				log.warn(
+					"ObjectId {} got released and reassigned while there was a still active respawn task for the old objectId owner.\nOld owner: Npc ID: {}, map ID: {}\nNew owner: {}",
+					visibleObject.getObjectId(), oldRespawnTask.spawnTemplate.getNpcId(), oldRespawnTask.spawnTemplate.getWorldId(), visibleObject);
 			}
 		}
 		return respawnTask;
@@ -175,6 +170,7 @@ public class RespawnService {
 			VisibleObject respawn = SpawnEngine.spawnObject(spawnTemplate.hasPool() ? spawnTemplate.changeTemplate(instanceId) : spawnTemplate, instanceId);
 			if (respawn != null) {
 				RiftService.getInstance().updateSpawned(oldObjectId, respawn);
+				TemporarySpawnEngine.updateSpawned(oldObjectId, respawn);
 			}
 		}
 

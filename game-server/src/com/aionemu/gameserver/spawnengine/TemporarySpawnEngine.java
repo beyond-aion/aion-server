@@ -33,21 +33,22 @@ public class TemporarySpawnEngine {
 	}
 
 	private static void despawn() {
-		// no sync on spawnedObjects needed since despawn() and spawn() always occur in the same thread
 		List<VisibleObject> remainingObjects = new ArrayList<>(spawnedObjects.size());
-		spawnedObjects.forEach(object -> {
-			if (object.getSpawn().getTemporarySpawn().canDespawn()) {
-				if (object instanceof Npc) {
-					Npc npc = (Npc) object;
-					if (!npc.isDead() && object.getSpawn().hasPool())
-						object.getSpawn().setUse(npc.getInstanceId(), false);
+		synchronized (spawnedObjects) {
+			spawnedObjects.forEach(object -> {
+				if (object.getSpawn().getTemporarySpawn().canDespawn()) {
+					if (object instanceof Npc) {
+						Npc npc = (Npc) object;
+						if (!npc.isDead() && object.getSpawn().hasPool())
+							object.getSpawn().setUse(npc.getInstanceId(), false);
+					}
+					object.getController().deleteIfAliveOrCancelRespawn();
+				} else {
+					remainingObjects.add(object);
 				}
-				object.getController().deleteIfAliveOrCancelRespawn();
-			} else {
-				remainingObjects.add(object);
-			}
-		});
-		spawnedObjects = remainingObjects;
+			});
+			spawnedObjects = remainingObjects;
+		}
 	}
 
 	private static void spawn(boolean startCheck) {
@@ -107,4 +108,12 @@ public class TemporarySpawnEngine {
 			});
 		}
 	}
+
+	public static void updateSpawned(int oldObjId, VisibleObject respawn) {
+		synchronized (spawnedObjects) {
+			spawnedObjects.stream().filter(obj -> obj.getObjectId() == oldObjId).findFirst().ifPresent(spawnedObjects::remove);
+			spawnedObjects.add(respawn);
+		}
+	}
+
 }
