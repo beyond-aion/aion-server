@@ -23,6 +23,7 @@
 		</spawn>
 		<!-- Exit -->
 		<spawn npc_id="700138" handler="RIFT">
+			<spot x="587.75305" y="2667.7040" z="182.33176" anchor="ENSHAR_AS"/> <!-- id 2170 -->
             <spot x="1427.6782" y="2369.2650" z="270.75000" anchor="ENSHAR_BS"/> <!-- id 2171 -->
             <spot x="2356.9678" y="1377.9133" z="335.74457" anchor="ENSHAR_CS"/> <!-- id 2172 -->
             <spot x="882.30670" y="1786.6001" z="299.61420" anchor="ENSHAR_DS"/> <!-- id 2173 -->
