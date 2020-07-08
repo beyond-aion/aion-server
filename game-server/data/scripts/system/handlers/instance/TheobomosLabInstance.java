@@ -55,7 +55,7 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 		WorldPosition p = npc.getPosition();
 		int npcId = npc.getNpcId();
 		Npc orb = getNpc(280973);
-		if (PositionUtil.getDistance(orb, npc) <= 7) {
+		if (orb != null && PositionUtil.getDistance(orb, npc) <= 7) {
 			switch (npcId) {
 				case 280971:
 					isDead1 = true;
