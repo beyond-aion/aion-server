@@ -7,7 +7,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.team.legion.LegionRank;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
@@ -135,32 +134,27 @@ public class CM_LEGION extends AionClientPacket {
 				LegionService.getInstance().handleCharNameRequest(exOpcode, activePlayer, charName, newNickname, rank);
 			} else {
 				switch (exOpcode) {
-				/** Refresh legion info **/
-					case 0x08:
+					case 0x02: // leave legion
+						LegionService.getInstance().leaveLegion(activePlayer);
+						break;
+					case 0x08: // refresh legion info
 						sendPacket(new SM_LEGION_INFO(legion));
 						break;
-					/** Edit announcements **/
-					case 0x09:
-						LegionService.getInstance().handleLegionRequest(exOpcode, activePlayer, announcement);
+					case 0x09: // edit announcements
+						LegionService.getInstance().changeAnnouncement(activePlayer, announcement);
 						break;
-					/** Change self introduction **/
-					case 0x0A:
-						LegionService.getInstance().handleLegionRequest(exOpcode, activePlayer, newSelfIntro);
+					case 0x0A: // change self introduction
+						LegionService.getInstance().changeSelfIntro(activePlayer, newSelfIntro);
 						break;
-					/** Edit permissions **/
-					case 0x0D:
+					case 0x0D: // edit permissions
 						if (activePlayer.getLegionMember().isBrigadeGeneral())
 							LegionService.getInstance().changePermissions(legion, deputyPermission, centurionPermission, legionarPermission, volunteerPermission);
 						break;
-					/** Select Legion Dominion to participate **/
-					case 0x10:
-						  if (activePlayer.getLegionMember().isBrigadeGeneral() || activePlayer.getLegionMember().getRank() == LegionRank.DEPUTY) {
-						  LegionService.getInstance().joinLegionDominion(activePlayer, legion, legionDominionId);
-						  }
+					case 0x0E: // level up legion
+						LegionService.getInstance().requestChangeLevel(activePlayer);
 						break;
-					/** Misc. **/
-					default:
-						LegionService.getInstance().handleLegionRequest(exOpcode, activePlayer);
+					case 0x10: // select Legion Dominion to participate
+						LegionService.getInstance().joinLegionDominion(activePlayer, legionDominionId);
 						break;
 				}
 			}

@@ -21,7 +21,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.siege.FortressLocation;
-import com.aionemu.gameserver.model.team.legion.LegionWarehouse;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.npc.TalkInfo;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
@@ -31,17 +30,7 @@ import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_HEADING_UPDATE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLASTIC_SURGERY;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_REPURCHASE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SELL_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TRADELIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TRADE_IN_LIST;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.restrictions.RestrictionsManager;
@@ -71,15 +60,11 @@ public class DialogService {
 		if (target == null)
 			return;
 
-		if (target instanceof Npc) {
-			Npc npc = (Npc) target;
+		if (target instanceof Npc npc) {
 			npc.getAi().onCreatureEvent(AIEventType.DIALOG_FINISH, player);
 
-			if (npc.getObjectTemplate().supportsAction(DialogAction.OPEN_LEGION_WAREHOUSE) && player.isLegionMember()) {
-				LegionWarehouse lwh = player.getLegion().getLegionWarehouse();
-				if (lwh.getWhUser() == player.getObjectId())
-					lwh.setWhUser(0);
-			}
+			if (npc.getObjectTemplate().supportsAction(DialogAction.OPEN_LEGION_WAREHOUSE) && player.isLegionMember())
+				player.getLegion().getLegionWarehouse().unsetInUse(player.getObjectId());
 
 			ThreadPoolManager.getInstance().schedule(new Runnable() {
 
@@ -172,7 +157,7 @@ public class DialogService {
 					final double factor = (expLost < 1000000 ? 0.25 - (0.00000015 * expLost) : 0.1);
 					final int price = (int) (expLost * factor);
 
-					RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<Npc>(npc) {
+					RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<>(npc) {
 
 						@Override
 						public void acceptRequest(Npc requester, Player responder) {

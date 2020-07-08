@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.model.team.legion;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.LegionStorageProxy;
@@ -16,21 +18,11 @@ import com.aionemu.gameserver.world.World;
  */
 public class LegionWarehouse extends Storage {
 
-	private Legion legion;
-	private int currentWhUser;
+	private final AtomicInteger currentUser = new AtomicInteger();
 
 	public LegionWarehouse(Legion legion) {
 		super(StorageType.LEGION_WAREHOUSE);
-		this.legion = legion;
 		this.setLimit(legion.getWarehouseSlots());
-	}
-
-	public Legion getLegion() {
-		return this.legion;
-	}
-
-	public void setOwnerLegion(Legion legion) {
-		this.legion = legion;
 	}
 
 	/**
@@ -38,6 +30,7 @@ public class LegionWarehouse extends Storage {
 	 */
 	@Override
 	public void increaseKinah(long amount) {
+		int currentWhUser = getCurrentUser();
 		Player player = currentWhUser == 0 ? null : World.getInstance().findPlayer(currentWhUser);
 		new LegionStorageProxy(this, player).increaseKinah(amount);
 	}
@@ -147,12 +140,16 @@ public class LegionWarehouse extends Storage {
 		throw new UnsupportedOperationException("LWH doesnt have owner");
 	}
 
-	public void setWhUser(int currentWhUser) {
-		this.currentWhUser = currentWhUser;
+	public boolean unsetInUse(int playerObjId) {
+		return currentUser.compareAndSet(playerObjId, 0);
 	}
 
-	public int getWhUser() {
-		return currentWhUser;
+	public boolean setInUse(int playerObjId) {
+		return currentUser.compareAndSet(0, playerObjId);
+	}
+
+	public int getCurrentUser() {
+		return currentUser.get();
 	}
 
 }

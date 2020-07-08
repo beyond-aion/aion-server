@@ -189,10 +189,8 @@ public class LegionCommand extends AdminCommand {
 				return;
 			}
 
-			if (service.directAddPlayer(legion, target)) {
+			if (service.addToLegion(legion, target, player)) {
 				PacketSendUtility.sendMessage(player, "player " + target.getName() + " was added to " + legion.getName());
-			} else {
-				PacketSendUtility.sendMessage(player, "probably legion " + legion.getName() + " is full");
 			}
 		} else if (params[0].equalsIgnoreCase("bg")) {
 			if (!verifyLength(player, 3, params)) // legion bg NAME PLAYER
