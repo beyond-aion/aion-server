@@ -23570,7 +23570,7 @@
 	</decomposable>
 	<decomposable item_id="188052677"><!-- [Event] Rapturous Wing -->
 		<items>
-			<item id="186000319" min_count="2" /><!-- [Event] Golden Feather -->
+			<item id="186000319" min_count="1" max_count="3" /><!-- [Event] Golden Feather -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052678"><!-- [Event] Alchemist's Pouch -->
