@@ -390,6 +390,8 @@ public class DialogService {
 			case ITEM_ID:
 				return player.getInventory().getItemCountByItemId(talkInfo.getSubDialogValue()) == 0;
 			case ABYSSRANK:
+				if (player.isStaff())
+					return false;
 				return player.getAbyssRank().getRank().getId() < talkInfo.getSubDialogValue();
 			case TARGET_LEGION_DOMINION:
 				if (LegionDominionService.getInstance().isInCalculationTime())
