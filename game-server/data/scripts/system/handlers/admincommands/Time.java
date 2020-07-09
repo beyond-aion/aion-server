@@ -8,7 +8,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.time.gametime.GameTime;
 
 /**
- * @author Pann, Neon, Sykra
+ * @author Pan, Neon, Sykra
  */
 public class Time extends AdminCommand {
 

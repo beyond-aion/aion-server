@@ -37,11 +37,8 @@ public class TemporarySpawnEngine {
 		synchronized (spawnedObjects) {
 			spawnedObjects.forEach(object -> {
 				if (object.getSpawn().getTemporarySpawn().canDespawn()) {
-					if (object instanceof Npc) {
-						Npc npc = (Npc) object;
-						if (!npc.isDead() && object.getSpawn().hasPool())
-							object.getSpawn().setUse(npc.getInstanceId(), false);
-					}
+					if (object instanceof Npc npc && !npc.isDead() && object.getSpawn().hasPool())
+						object.getSpawn().setUse(npc.getInstanceId(), false);
 					object.getController().deleteIfAliveOrCancelRespawn();
 				} else {
 					remainingObjects.add(object);
@@ -84,8 +81,11 @@ public class TemporarySpawnEngine {
 
 	private static void spawn(SpawnTemplate template, int instanceId) {
 		VisibleObject object = SpawnEngine.spawnObject(template, instanceId);
-		if (object != null)
-			spawnedObjects.add(object);
+		if (object != null) {
+			synchronized (spawnedObjects) {
+				spawnedObjects.add(object);
+			}
+		}
 	}
 
 	public static void addSpawnGroup(SpawnGroup spawnGroup, int instanceId) {
