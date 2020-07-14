@@ -24771,6 +24771,7 @@
 			<item id="188600263"/><!-- [Event] Ophidan Bridge Bonus Entry Scroll -->
 			<item id="188600264"/><!-- [Event] The Eternal Bastion Bonus Entry Scroll -->
 			<item id="188600265"/><!-- [Event] Sauro Supply Base Bonus Entry Scroll -->
+			<item id="188600331"/><!-- Occupied Rentus Base Bonus Entry Scroll -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052762"><!-- Krotan Siege Reward Chest -->
