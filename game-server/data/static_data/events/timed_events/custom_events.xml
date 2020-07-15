@@ -535,6 +535,20 @@
 					<gd_item id="165020021" /><!-- Noble Armor Wrapping Scroll (Mythic/Lv. 65 and lower) -->
 				</gd_items>
 			</gd_rule>
+			<gd_rule rule_name="Named Special Courier Pass" chance="100">
+				<gd_maps>
+					<gd_map map_id="210050000"/><!-- Inggison -->
+					<gd_map map_id="220070000"/><!-- Gelkmaros -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="216520"/><!-- Sematariux -->
+					<gd_npc npc_id="216580"/><!-- Padmarashka -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188950017"/><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
+					<gd_item id="188950015"/><!-- Special Courier Pass (Eternal/Lv.61-65) -->
+				</gd_items>
+			</gd_rule>
 			<gd_rule rule_name="Named Abyss Armor Chest" chance="100" member_limit="48" restriction_race="ASMODIANS">
 				<gd_maps>
 					<gd_map map_id="210050000" /><!-- Inggison -->

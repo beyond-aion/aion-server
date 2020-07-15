@@ -11111,9 +11111,11 @@
 			<item id="186000242" min_count="10" /><!-- Ceramium Medals -->
 			<item id="164002167" min_count="15" /><!-- Drana Coffee -->
 			<item id="166030005" min_count="10" /><!-- Tempering Solution -->
-			<item id="169620067" min_count="5" /><!-- AP Boost Charm II - 50% -->
-			<item id="188052625" min_count="25" /><!-- [Event] Ice-hot Box -->
-			<item id="186000111" min_count="50" /><!-- Scorching Heat -->
+			<item id="169620067" min_count="3" /><!-- AP Boost Charm II - 50% -->
+			<item id="186000247" min_count="10" /><!-- Major Danuar Relic -->
+			<item id="162000137" min_count="15" /><!-- Sublime Life Serum -->
+			<item id="162000139" min_count="15" /><!-- Sublime Mana Serum -->
+			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051461"><!-- Box Blessed by Mastarius -->
@@ -11121,9 +11123,11 @@
 			<item id="186000242" min_count="10" /><!-- Ceramium Medals -->
 			<item id="164002167" min_count="15" /><!-- Drana Coffee -->
 			<item id="166030005" min_count="10" /><!-- Tempering Solution -->
-			<item id="169620067" min_count="5" /><!-- AP Boost Charm II - 50% -->
-			<item id="188052625" min_count="25" /><!-- [Event] Ice-hot Box -->
-			<item id="186000111" min_count="50" /><!-- Scorching Heat -->
+			<item id="169620067" min_count="3" /><!-- AP Boost Charm II - 50% -->
+			<item id="186000247" min_count="10" /><!-- Major Danuar Relic -->
+			<item id="162000137" min_count="15" /><!-- Sublime Life Serum -->
+			<item id="162000139" min_count="15" /><!-- Sublime Mana Serum -->
+			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051462"><!-- Piloti's Balic Materials -->
@@ -27443,9 +27447,9 @@
 			<item id="188053109" /><!-- Ahserion's Equipment Box -->
 			<item id="188053110" /><!-- Ahserion's Flight Battlefield Material Bundle -->
 			<item id="188053112" /><!-- Ahserion's Flight Composite Manastone Bundle -->
-			<item id="188053113" /><!-- Ahserion's Flight Godstone Bundle -->
-			<item id="188053115" /><!-- Ahserion's Flight Recharger Bundle -->
-			<item id="188053116" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<item id="188053113" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<item id="188053115" /><!-- Ahserion's Flight Godstone Bundle -->
+			<item id="188053116" /><!-- Ahserion's Flight Recharger Bundle -->
 			<item id="188053090" /><!-- Ahserion's Flight Champion's Bundle -->
 			<item id="186000242" min_count="4" /><!-- Ceramium Medal -->
 			<item id="169610148" /><!-- [Title] Ahserion Conqueror (3 days) -->
