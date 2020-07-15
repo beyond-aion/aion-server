@@ -34558,6 +34558,7 @@
 			<item id="100901421" player_classes="GLADIATOR TEMPLAR" /><!-- Conqueror's Honorable Greatsword -->
 			<item id="100601469" player_classes="SORCERER SPIRIT_MASTER" /><!-- Conqueror's Honorable Spellbook -->
 			<item id="102001289" player_classes="BARD" /><!-- Conqueror's Honorable Harp -->
+			<item id="101901170" player_classes="GUNNER" /><!-- Conqueror's Honorable Aethercannon -->
 			<item id="102101106" player_classes="RIDER" /><!-- Conqueror's Honorable Cipher-Blade -->
 		</items>
 		<items chance="3">
