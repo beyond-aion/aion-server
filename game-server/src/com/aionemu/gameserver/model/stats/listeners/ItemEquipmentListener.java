@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.stats.listeners;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,37 +36,31 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author xavier modified by Wakizashi
+ * @author xavier, Wakizashi
  */
 public class ItemEquipmentListener {
 
-	/**
-	 * @param item
-	 * @param cgs
-	 */
 	public static void onItemEquipment(Item item, Player owner) {
 		owner.getController().cancelUseItem();
 		ItemTemplate itemTemplate = item.getItemTemplate();
 
-		onItemEquipment(item, owner.getGameStats());
+		addWeaponStats(item, owner.getGameStats());
 
-		// Check if belongs to ItemSet
-		if (itemTemplate.isItemSet()) {
+		if (itemTemplate.isItemSet())
 			recalculateItemSet(itemTemplate.getItemSet(), owner);
-		}
 		if (item.hasManaStones())
 			addStonesStats(item, item.getItemStones(), owner.getGameStats());
-
 		if (item.hasFusionStones())
 			addStonesStats(item, item.getFusionStones(), owner.getGameStats());
+
 		IdianStone idianStone = item.getIdianStone();
-		if (idianStone != null) {
+		if (idianStone != null)
 			idianStone.onEquip(owner, item.getEquipmentSlot());
-		}
+
 		if (item.getBuffSkill() != 0) {
 			SkillTemplate buffSkill = DataManager.SKILL_DATA.getSkillTemplate(item.getBuffSkill());
 			SkillLearnService.learnTemporarySkill(owner, item.getBuffSkill(), 1);
-			HashMap<Integer, Long> coolDowns = new HashMap<>();
+			Map<Integer, Long> coolDowns = new HashMap<>();
 			long currTime = System.currentTimeMillis();
 			long oldCooldown = owner.getSkillCoolDown(buffSkill.getCooldownId());
 			long newCooldown;
@@ -84,9 +79,8 @@ public class ItemEquipmentListener {
 		}
 		int enchantLevel = item.getEnchantLevel();
 		int temperingLevel = item.getTempering();
-		if (enchantLevel > 0) {
+		if (enchantLevel > 0)
 			EnchantService.applyEnchantEffect(item, owner, enchantLevel);
-		}
 		if (temperingLevel > 0) {
 			if (item.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 				item.setTemperingEffect(new TemperingEffect(owner, item));
@@ -110,18 +104,13 @@ public class ItemEquipmentListener {
 				action.accept(bonusStats);
 	}
 
-	/**
-	 * @param item
-	 * @param owner
-	 */
 	public static void onItemUnequipment(Item item, Player owner) {
 		owner.getController().cancelUseItem();
 
 		ItemTemplate itemTemplate = item.getItemTemplate();
 		// Check if belongs to ItemSet
-		if (itemTemplate.isItemSet()) {
+		if (itemTemplate.isItemSet())
 			recalculateItemSet(itemTemplate.getItemSet(), owner);
-		}
 
 		owner.getGameStats().endEffect(item);
 
@@ -151,31 +140,23 @@ public class ItemEquipmentListener {
 			SkillLearnService.removeSkill(owner, item.getBuffSkill());
 	}
 
-	/**
-	 * @param itemTemplate
-	 * @param slot
-	 * @param cgs
-	 */
-	private static void onItemEquipment(Item item, CreatureGameStats<?> cgs) {
+	private static void addWeaponStats(Item item, CreatureGameStats<?> cgs) {
 		ItemTemplate itemTemplate = item.getItemTemplate();
-		long slot = item.getEquipmentSlot();
-		List<StatFunction> modifiers = itemTemplate.getModifiers();
-		if (modifiers == null) {
-			return;
-		}
+		List<StatFunction> mainWeaponModifiers = itemTemplate.getModifiers();
+		if (mainWeaponModifiers == null)
+			mainWeaponModifiers = Collections.emptyList();
 
-		List<StatFunction> allModifiers;
-
-		if ((slot & ItemSlot.MAIN_OR_SUB.getSlotIdMask()) != 0) {
-			allModifiers = wrapModifiers(item, modifiers);
+		List<StatFunction> modifiersToApply;
+		if ((item.getEquipmentSlot() & ItemSlot.MAIN_OR_SUB.getSlotIdMask()) != 0) {
+			modifiersToApply = extractApplicableWeaponModifiers(item, mainWeaponModifiers);
 			if (item.hasFusionedItem()) {
 				// add all bonus modifiers according to rules
 				ItemTemplate fusionedItemTemplate = item.getFusionedItemTemplate();
 				ItemGroup weaponType = fusionedItemTemplate.getItemGroup();
 				List<StatFunction> fusionedItemModifiers = fusionedItemTemplate.getModifiers();
-				if (fusionedItemModifiers != null) {
-					allModifiers.addAll(wrapModifiers(item, fusionedItemModifiers));
-				}
+				if (fusionedItemModifiers != null)
+					modifiersToApply.addAll(extractApplicableWeaponModifiers(item, fusionedItemModifiers));
+
 				// add 10% of Magic Boost and Attack
 				WeaponStats weaponStats = fusionedItemTemplate.getWeaponStats();
 				if (weaponStats != null) {
@@ -183,34 +164,23 @@ public class ItemEquipmentListener {
 					int attack = Math.round(0.1f * weaponStats.getMeanDamage());
 					if (weaponType == ItemGroup.ORB || weaponType == ItemGroup.STAFF || weaponType == ItemGroup.SPELLBOOK || weaponType == ItemGroup.GUN
 						|| weaponType == ItemGroup.CANNON || weaponType == ItemGroup.HARP || weaponType == ItemGroup.KEYBLADE) {
-						allModifiers.add(new StatAddFunction(StatEnum.BOOST_MAGICAL_SKILL, boostMagicalSkill, false));
+						modifiersToApply.add(new StatAddFunction(StatEnum.BOOST_MAGICAL_SKILL, boostMagicalSkill, false));
 					}
-					allModifiers.add(new StatAddFunction(
+					modifiersToApply.add(new StatAddFunction(
 						item.getItemTemplate().getAttackType().isMagical() ? StatEnum.MAGICAL_ATTACK : StatEnum.PHYSICAL_ATTACK, attack, false));
 				}
 			}
 		} else {
-			allModifiers = modifiers;
+			modifiersToApply = mainWeaponModifiers;
 		}
-		item.setCurrentModifiers(allModifiers);
-		cgs.addEffect(item, allModifiers);
+		item.setCurrentModifiers(modifiersToApply);
+		cgs.addEffect(item, modifiersToApply);
 	}
 
-	/**
-	 * Filter stats based on the following rules:<br>
-	 * 1) don't include fusioned stats which will be taken only from 1 weapon <br>
-	 * 2) wrap stats which are different for MAIN and OFF hands<br>
-	 * 3) add the rest<br>
-	 *
-	 * @param item
-	 * @param modifiers
-	 * @return
-	 */
-	private static List<StatFunction> wrapModifiers(Item item, List<StatFunction> modifiers) {
+	private static List<StatFunction> extractApplicableWeaponModifiers(Item item, List<StatFunction> modifiers) {
 		List<StatFunction> allModifiers = new ArrayList<>();
 		for (StatFunction modifier : modifiers) {
 			switch (modifier.getName()) {
-				// why they are removed look at DuplicateStatFunction
 				case ATTACK_SPEED:
 				case PVP_ATTACK_RATIO:
 				case BOOST_CASTING_TIME:
@@ -222,11 +192,6 @@ public class ItemEquipmentListener {
 		return allModifiers;
 	}
 
-	/**
-	 * @param itemSetTemplate
-	 * @param player
-	 * @param isWeapon
-	 */
 	private static void recalculateItemSet(ItemSetTemplate itemSetTemplate, Player player) {
 		if (itemSetTemplate == null)
 			return;
@@ -237,11 +202,9 @@ public class ItemEquipmentListener {
 		int itemSetPartsEquipped = player.getEquipment().itemSetPartsEquipped(itemSetTemplate.getId());
 
 		// 2.- Check Item Set Parts and add effects one by one if not done already
-		for (PartBonus itempartbonus : itemSetTemplate.getPartbonus()) {
-			if (itempartbonus.getCount() <= itemSetPartsEquipped) {
+		for (PartBonus itempartbonus : itemSetTemplate.getPartbonus())
+			if (itempartbonus.getCount() <= itemSetPartsEquipped)
 				player.getGameStats().addEffect(itemSetTemplate, itempartbonus.getModifiers());
-			}
-		}
 
 		// 3.- Finally check if all items are applied and set the full bonus if not already applied
 		FullBonus fullbonus = itemSetTemplate.getFullbonus();
@@ -252,54 +215,26 @@ public class ItemEquipmentListener {
 		}
 	}
 
-	/**
-	 * All modifiers of stones will be applied to character
-	 *
-	 * @param item
-	 * @param cgs
-	 */
 	private static void addStonesStats(Item item, Set<? extends ManaStone> itemStones, CreatureGameStats<?> cgs) {
-		if (itemStones == null || itemStones.size() == 0)
+		if (itemStones == null || itemStones.isEmpty())
 			return;
-
-		for (ManaStone stone : itemStones) {
+		for (ManaStone stone : itemStones)
 			addStoneStats(item, stone, cgs);
-		}
 	}
 
-	/**
-	 * Used when socketing of equipped item
-	 *
-	 * @param item
-	 * @param stone
-	 * @param cgs
-	 */
 	public static void addStoneStats(Item item, ManaStone stone, CreatureGameStats<?> cgs) {
-		if (stone == null)
+		if (stone == null || stone.getModifiers() == null)
 			return;
-		List<StatFunction> modifiers = stone.getModifiers();
-		if (modifiers == null) {
-			return;
-		}
-
-		cgs.addEffect(stone, modifiers);
+		cgs.addEffect(stone, stone.getModifiers());
 	}
 
-	/**
-	 * All modifiers of stones will be removed
-	 *
-	 * @param itemStones
-	 * @param cgs
-	 */
 	public static void removeStoneStats(Set<? extends ManaStone> itemStones, CreatureGameStats<?> cgs) {
-		if (itemStones == null || itemStones.size() == 0)
+		if (itemStones == null || itemStones.isEmpty())
 			return;
-
 		for (ManaStone stone : itemStones) {
 			List<StatFunction> modifiers = stone.getModifiers();
-			if (modifiers != null) {
+			if (modifiers != null)
 				cgs.endEffect(stone);
-			}
 		}
 	}
 
