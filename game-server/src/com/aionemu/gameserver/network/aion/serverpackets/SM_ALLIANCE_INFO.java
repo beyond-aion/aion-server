@@ -7,6 +7,7 @@ import java.util.List;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
+import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -23,7 +24,7 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 	private int subType;
 	private final int messageId;
 	private final String message;
-	private boolean isLeague;
+	private int leagueId;
 	private final List<AllianceInfo> leagueData = new ArrayList<>();
 	public static final int VICECAPTAIN_PROMOTE = 1300984;
 	public static final int VICECAPTAIN_DEMOTE = 1300985;
@@ -106,14 +107,15 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 		subType = alliance.getTeamType().getSubType();
 		this.messageId = messageId;
 		this.message = message;
-		isLeague = alliance.isInLeague();
-		if (isLeague) {
-			lootLeagueRules = alliance.getLeague().getLootGroupRules();
-			for (Player captain : alliance.getLeague().getCaptains()) {
+		League league = alliance.getLeague();
+		if (league != null) {
+			leagueId = league.getTeamId();
+			lootLeagueRules = league.getLootGroupRules();
+			for (Player captain : league.getCaptains()) {
 				AllianceInfo info = new AllianceInfo();
 				PlayerAlliance captainAlliance = captain.getPlayerAlliance();
 				if (captainAlliance != null) {
-					info.setAlliancePosition(alliance.getLeague().getMember(captainAlliance.getObjectId()).getLeaguePosition());
+					info.setAlliancePosition(league.getMember(captainAlliance.getObjectId()).getLeaguePosition());
 					info.setAllianceObjectId(captainAlliance.getObjectId());
 					info.setMemberCount(captainAlliance.size());
 					if (!captainAlliance.equals(skipped)) {
@@ -152,7 +154,7 @@ public class SM_ALLIANCE_INFO extends AionServerPacket {
 		writeC(0x00);
 		writeD(type);
 		writeD(subType); // 3.5
-		writeD(alliance.isInLeague() ? alliance.getLeague().getTeamId() : 0);
+		writeD(leagueId);
 		for (int a = 0; a < 4; a++) {
 			writeD(a); // group num
 			writeD(1000 + a); // group id
