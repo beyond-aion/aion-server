@@ -2,13 +2,7 @@ package com.aionemu.gameserver.model.gameobjects.player;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -34,12 +28,7 @@ import com.aionemu.gameserver.model.templates.item.enums.EquipType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.StigmaService;
@@ -59,7 +48,7 @@ public class Equipment implements Persistable {
 
 	private static final Logger log = LoggerFactory.getLogger(Equipment.class);
 
-	private final SortedMap<Long, Item> equipment = new TreeMap<>();
+	private final SortedMap<Long, Item> equipment = Collections.synchronizedSortedMap(new TreeMap<>());
 	private final Player owner;
 	private PersistentState persistentState = PersistentState.UPDATED;
 
@@ -169,12 +158,10 @@ public class Equipment implements Persistable {
 
 	private boolean checkInventorySlots(long itemSlotToEquip) {
 		if (owner.getInventory().isFull() && ItemSlot.isTwoHandedWeapon(itemSlotToEquip)) { // weapon slot(s)
-			synchronized (equipment) {
-				for (ItemSlot slot : ItemSlot.getSlotsFor(itemSlotToEquip)) {
-					Item equippedWeaponOrShield = equipment.get(slot.getSlotIdMask());
-					if (equippedWeaponOrShield == null || equippedWeaponOrShield.getItemTemplate().isTwoHandWeapon())
-						return true;
-				}
+			for (ItemSlot slot : ItemSlot.getSlotsFor(itemSlotToEquip)) {
+				Item equippedWeaponOrShield = equipment.get(slot.getSlotIdMask());
+				if (equippedWeaponOrShield == null || equippedWeaponOrShield.getItemTemplate().isTwoHandWeapon())
+					return true;
 			}
 			return false; // two weapons would need to be unequipped, but there is no free slot
 		}
@@ -370,21 +357,27 @@ public class Equipment implements Persistable {
 	}
 
 	public List<Item> getEquippedItems() {
-		return equipment.values().stream().distinct().collect(Collectors.toList());
+		synchronized (equipment) {
+			return equipment.values().stream().distinct().collect(Collectors.toList());
+		}
 	}
 
 	public Set<Integer> getEquippedItemIds() {
-		return equipment.values().stream().map(Item::getItemId).collect(Collectors.toSet());
+		synchronized (equipment) {
+			return equipment.values().stream().map(Item::getItemId).collect(Collectors.toSet());
+		}
 	}
 
 	public List<Item> getEquippedItemsWithoutStigma() {
 		List<Item> equippedItems = new ArrayList<>();
 		Set<Item> twoHanded = new HashSet<>();
-		for (Item item : equipment.values()) {
-			if (!ItemSlot.isStigma(item.getEquipmentSlot())) {
-				if (item.getItemTemplate().isTwoHandWeapon() && !twoHanded.add(item))
-					continue;
-				equippedItems.add(item);
+		synchronized (equipment) {
+			for (Item item : equipment.values()) {
+				if (!ItemSlot.isStigma(item.getEquipmentSlot())) {
+					if (item.getItemTemplate().isTwoHandWeapon() && !twoHanded.add(item))
+						continue;
+					equippedItems.add(item);
+				}
 			}
 		}
 		return equippedItems;
@@ -392,43 +385,45 @@ public class Equipment implements Persistable {
 
 	public List<Item> getEquippedForAppearance() {
 		List<Item> equippedItems = new ArrayList<>();
-		for (Item item : equipment.values()) {
-			if (ItemSlot.isVisible(item.getEquipmentSlot()) && !(item.getItemTemplate().isTwoHandWeapon() && equippedItems.contains(item)))
-				equippedItems.add(item);
+		synchronized (equipment) {
+			for (Item item : equipment.values()) {
+				if (ItemSlot.isVisible(item.getEquipmentSlot()) && !(item.getItemTemplate().isTwoHandWeapon() && equippedItems.contains(item)))
+					equippedItems.add(item);
+			}
 		}
 		return equippedItems;
 	}
 
 	public List<Item> getEquippedItemsAllStigma() {
 		List<Item> equippedItems = new ArrayList<>();
-		for (Item item : equipment.values()) {
-			if (ItemSlot.isStigma(item.getEquipmentSlot())) {
-				equippedItems.add(item);
+		synchronized (equipment) {
+			for (Item item : equipment.values()) {
+				if (ItemSlot.isStigma(item.getEquipmentSlot())) {
+					equippedItems.add(item);
+				}
 			}
 		}
 		return equippedItems;
 	}
 
-	/**
-	 * @return List<Item>
-	 */
 	public List<Item> getEquippedItemsRegularStigma() {
 		List<Item> equippedItems = new ArrayList<>();
-		for (Item item : equipment.values()) {
-			if (ItemSlot.isRegularStigma(item.getEquipmentSlot()))
-				equippedItems.add(item);
+		synchronized (equipment) {
+			for (Item item : equipment.values()) {
+				if (ItemSlot.isRegularStigma(item.getEquipmentSlot()))
+					equippedItems.add(item);
+			}
 		}
 		return equippedItems;
 	}
 
-	/**
-	 * @return List<Item>
-	 */
 	public List<Item> getEquippedItemsAdvancedStigma() {
 		List<Item> equippedItems = new ArrayList<>();
-		for (Item item : equipment.values()) {
-			if (ItemSlot.isAdvancedStigma(item.getEquipmentSlot())) {
-				equippedItems.add(item);
+		synchronized (equipment) {
+			for (Item item : equipment.values()) {
+				if (ItemSlot.isAdvancedStigma(item.getEquipmentSlot())) {
+					equippedItems.add(item);
+				}
 			}
 		}
 		return equippedItems;
@@ -441,18 +436,19 @@ public class Equipment implements Persistable {
 		int number = 0;
 		List<Integer> counted = new ArrayList<>(); // no double counting for accessory and weapons
 
-		for (Item item : equipment.values()) {
-			if ((item.getEquipmentSlot() & ItemSlot.MAIN_OFF_HAND.getSlotIdMask()) != 0
-				|| (item.getEquipmentSlot() & ItemSlot.SUB_OFF_HAND.getSlotIdMask()) != 0) {
-				continue;
-			}
-			ItemSetTemplate setTemplate = item.getItemTemplate().getItemSet();
-			if (setTemplate != null && setTemplate.getId() == itemSetTemplateId && !counted.contains(item.getItemId())) {
-				counted.add(item.getItemId());
-				++number;
+		synchronized (equipment) {
+			for (Item item : equipment.values()) {
+				if ((item.getEquipmentSlot() & ItemSlot.MAIN_OFF_HAND.getSlotIdMask()) != 0
+						|| (item.getEquipmentSlot() & ItemSlot.SUB_OFF_HAND.getSlotIdMask()) != 0) {
+					continue;
+				}
+				ItemSetTemplate setTemplate = item.getItemTemplate().getItemSet();
+				if (setTemplate != null && setTemplate.getId() == itemSetTemplateId && !counted.contains(item.getItemId())) {
+					counted.add(item.getItemId());
+					++number;
+				}
 			}
 		}
-		counted.clear();
 		return number;
 	}
 
@@ -490,15 +486,17 @@ public class Equipment implements Persistable {
 	 */
 	public void onLoadApplyEquipmentStats() {
 		Item twoHanded = null;
-		for (Item item : equipment.values()) {
-			if ((item.getEquipmentSlot() & ItemSlot.MAIN_OFF_HAND.getSlotIdMask()) == 0
-				&& (item.getEquipmentSlot() & ItemSlot.SUB_OFF_HAND.getSlotIdMask()) == 0) {
-				if (item.getItemTemplate().isTwoHandWeapon()) {
-					if (twoHanded != null)
-						continue;
-					twoHanded = item;
+		synchronized (equipment) {
+			for (Item item : equipment.values()) {
+				if ((item.getEquipmentSlot() & ItemSlot.MAIN_OFF_HAND.getSlotIdMask()) == 0
+						&& (item.getEquipmentSlot() & ItemSlot.SUB_OFF_HAND.getSlotIdMask()) == 0) {
+					if (item.getItemTemplate().isTwoHandWeapon()) {
+						if (twoHanded != null)
+							continue;
+						twoHanded = item;
+					}
+					ItemEquipmentListener.onItemEquipment(item, owner);
 				}
-				ItemEquipmentListener.onItemEquipment(item, owner);
 			}
 		}
 		owner.getLifeStats().synchronizeWithMaxStats();
@@ -521,24 +519,6 @@ public class Equipment implements Persistable {
 			return null;
 		ItemSubType shieldType = subHandItem.getItemTemplate().getItemSubType();
 		return (shieldType == ItemSubType.SHIELD) ? subHandItem : null;
-	}
-
-	/**
-	 * @return true if player is equipping the requested ArmorType
-	 */
-	public boolean isArmorTypeEquipped(ItemSubType type) {
-		for (Item item : equipment.values()) {
-			if (item == null || item.getItemTemplate().isWeapon())
-				continue;
-			// TODO: Check it! Not sure for dual hand
-			if (item.getItemTemplate().isArmor()) {
-				if (item.getItemTemplate().getItemSubType() == type && item.isEquipped()
-					&& item.getEquipmentSlot() != ItemSlot.SUB_OFF_HAND.getSlotIdMask()) {
-					return true;
-				}
-			}
-		}
-		return false;
 	}
 
 	/**
@@ -567,31 +547,15 @@ public class Equipment implements Persistable {
 	}
 
 	public boolean isPowerShardEquipped() {
-		Item leftPowershard = equipment.get(ItemSlot.POWER_SHARD_LEFT.getSlotIdMask());
-		if (leftPowershard != null)
-			return true;
-
-		Item rightPowershard = equipment.get(ItemSlot.POWER_SHARD_RIGHT.getSlotIdMask());
-		if (rightPowershard != null)
-			return true;
-
-		return false;
+		return getMainHandPowerShard() != null || getOffHandPowerShard() != null;
 	}
 
 	public Item getMainHandPowerShard() {
-		Item mainHandPowerShard = equipment.get(ItemSlot.POWER_SHARD_RIGHT.getSlotIdMask());
-		if (mainHandPowerShard != null)
-			return mainHandPowerShard;
-
-		return null;
+		return equipment.get(ItemSlot.POWER_SHARD_RIGHT.getSlotIdMask());
 	}
 
 	public Item getOffHandPowerShard() {
-		Item offHandPowerShard = equipment.get(ItemSlot.POWER_SHARD_LEFT.getSlotIdMask());
-		if (offHandPowerShard != null)
-			return offHandPowerShard;
-
-		return null;
+		return equipment.get(ItemSlot.POWER_SHARD_LEFT.getSlotIdMask());
 	}
 
 	/**
@@ -719,18 +683,13 @@ public class Equipment implements Persistable {
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
-	/**
-	 * @param weaponType
-	 */
 	public boolean isWeaponEquipped(ItemSubType subType) {
-		if (equipment.get(ItemSlot.MAIN_HAND.getSlotIdMask()) != null
-			&& equipment.get(ItemSlot.MAIN_HAND.getSlotIdMask()).getItemTemplate().getItemSubType() == subType) {
+		Item weapon = getMainHandWeapon();
+		if (weapon != null && weapon.getItemTemplate().getItemSubType() == subType)
 			return true;
-		}
-		if (equipment.get(ItemSlot.SUB_HAND.getSlotIdMask()) != null
-			&& equipment.get(ItemSlot.SUB_HAND.getSlotIdMask()).getItemTemplate().getItemSubType() == subType) {
+		weapon = getOffHandWeapon();
+		if (weapon != null && weapon.getItemTemplate().getItemSubType() == subType)
 			return true;
-		}
 		return false;
 	}
 
