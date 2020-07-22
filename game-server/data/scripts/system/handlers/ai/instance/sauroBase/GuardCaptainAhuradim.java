@@ -61,7 +61,7 @@ public class GuardCaptainAhuradim extends AggressiveNpcAI {
 					case 50:
 					case 25:
 						queueSkill(21194,1, 0, NpcSkillTargetAttribute.ME);
-						if (Rnd.chance() < 50) {
+						if (Rnd.nextBoolean()) {
 							queueSkill(21429, 1, 5000, NpcSkillTargetAttribute.MOST_HATED);
 						} else {
 							queueSkill(21190, 1, 5000, NpcSkillTargetAttribute.ME);

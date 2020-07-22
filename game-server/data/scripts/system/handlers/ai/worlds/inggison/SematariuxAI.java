@@ -116,7 +116,7 @@ public class SematariuxAI extends AggressiveNpcAI {
 				List<Integer> targetedPlayers = new ArrayList<>();
 				while (targetedPlayers.size() < knownPlayers.size() * 0.2f) {
 					for (Player p : knownPlayers) {
-						if (!targetedPlayers.contains(p.getObjectId()) && Rnd.chance() < 50) {
+						if (!targetedPlayers.contains(p.getObjectId()) && Rnd.nextBoolean()) {
 							spawn(281452, p.getX(), p.getY(), p.getZ(), (byte) 0);
 							targetedPlayers.add(p.getObjectId());
 						}

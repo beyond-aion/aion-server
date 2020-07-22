@@ -124,7 +124,7 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 				return;
 			case 233377: // Enforcer Udara
 				updateScore(mostPlayerDamage, npc, 1000, false);
-				if (Rnd.chance() < 50) {
+				if (Rnd.nextBoolean()) {
 					spawn(701455, 484.500f, 495.700f, 397.425f, (byte) 33);
 					sendMsgByRace(1401421, Race.PC_ALL, 0);
 				}

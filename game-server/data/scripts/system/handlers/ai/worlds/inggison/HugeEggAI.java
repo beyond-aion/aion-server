@@ -32,7 +32,7 @@ public class HugeEggAI extends GeneralNpcAI {
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		if (Rnd.chance() < 50) {
+		if (Rnd.nextBoolean()) {
 			spawn(217097, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
 			AIActions.deleteOwner(this);
 		}

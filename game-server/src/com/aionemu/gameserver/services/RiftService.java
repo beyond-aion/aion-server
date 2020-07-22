@@ -1,10 +1,6 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
@@ -126,7 +122,7 @@ public class RiftService {
 	 */
 	public void prepareRiftOpening(int id, boolean guards) {
 		if (id != 210070000 && id != 220080000) {
-			if (!guards && Rnd.chance() < 50)
+			if (!guards && Rnd.nextBoolean())
 				return;
 		}
 		List<RiftLocation> possibleLocs = new ArrayList<>();

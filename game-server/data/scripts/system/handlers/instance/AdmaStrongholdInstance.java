@@ -14,7 +14,7 @@ public class AdmaStrongholdInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		if (Rnd.chance() < 50) {
+		if (Rnd.nextBoolean()) {
 			switch (Rnd.get(1, 3)) {
 				case 1:
 					spawn(205224, 477.5849f, 398.20898f, 187.49918f, (byte) 50);

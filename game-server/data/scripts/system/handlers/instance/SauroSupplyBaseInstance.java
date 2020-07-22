@@ -149,11 +149,11 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 					Npc ahuradim =  instance.getNpc(230857);
 					if (ahuradim != null && !ahuradim.isDead()) {
 						if (npc.getNpcId() == 284437) {
-							startGeneratorTask(Rnd.chance() < 50 ? 284445 : 284446, ahuradim);
+							startGeneratorTask(Rnd.nextBoolean() ? 284445 : 284446, ahuradim);
 						} else if (npc.getNpcId() == 284445) {
-							startGeneratorTask(Rnd.chance() < 50 ? 284446 : 284437, ahuradim);
+							startGeneratorTask(Rnd.nextBoolean() ? 284446 : 284437, ahuradim);
 						} else {
-							startGeneratorTask(Rnd.chance() < 50 ? 284437 : 284445, ahuradim);
+							startGeneratorTask(Rnd.nextBoolean() ? 284437 : 284445, ahuradim);
 						}
 					}
 				}
@@ -178,17 +178,19 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 
 	private void startGeneratorTask(int npcId, Npc ahuradim) {
 		scheduledGeneratorTask = ThreadPoolManager.getInstance().schedule(() -> {
-			if (!ahuradim.isDead()) {
-				Npc generator = instance.getNpc(npcId);
-				generator.setTarget(ahuradim);
-				PacketSendUtility.broadcastMessage(generator, 1501014);
-				scheduledGeneratorTask = ThreadPoolManager.getInstance().schedule(() -> {
-					if (!generator.isDead()) {
-						PacketSendUtility.broadcastMessage(generator, 1501015);
-						SkillEngine.getInstance().getSkill(generator, 21200, 1, generator).useWithoutPropSkill();
-					}
-				}, 15 * 1000);
-			}
+			if (ahuradim.isDead())
+				return;
+			Npc generator = instance.getNpc(npcId);
+			if (generator == null || generator.isDead())
+				return;
+			generator.setTarget(ahuradim);
+			PacketSendUtility.broadcastMessage(generator, 1501014);
+			scheduledGeneratorTask = ThreadPoolManager.getInstance().schedule(() -> {
+				if (!generator.isDead()) {
+					PacketSendUtility.broadcastMessage(generator, 1501015);
+					SkillEngine.getInstance().getSkill(generator, 21200, 1, generator).useWithoutPropSkill();
+				}
+			}, 15 * 1000);
 		}, 40 * 1000);
 	}
 
