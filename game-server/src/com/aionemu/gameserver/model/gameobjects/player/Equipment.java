@@ -184,7 +184,7 @@ public class Equipment implements Persistable {
 
 		ItemSlot[] targetSlots = ItemSlot.getSlotsFor(itemSlotToEquip);
 
-		synchronized (equipment) {
+		synchronized (this) {
 			// do unequip of necessary items
 			unEquip(getUnequipSlots(itemSlotToEquip));
 			owner.getInventory().remove(item);
@@ -249,16 +249,8 @@ public class Equipment implements Persistable {
 		if (checkFullInventory && owner.getInventory().isFull())
 			return null;
 
-		synchronized (equipment) {
-			Item itemToUnequip = null;
-
-			for (Item item : equipment.values()) {
-				if (item.getObjectId() == itemObjId) {
-					itemToUnequip = item;
-					break;
-				}
-			}
-
+		synchronized (this) {
+			Item itemToUnequip = getEquippedItemByObjId(itemObjId);
 			if (itemToUnequip == null || !itemToUnequip.isEquipped())
 				return null;
 
@@ -335,10 +327,10 @@ public class Equipment implements Persistable {
 		return false;
 	}
 
-	public Item getEquippedItemByObjId(int value) {
+	public Item getEquippedItemByObjId(int itemObjId) {
 		synchronized (equipment) {
 			for (Item item : equipment.values()) {
-				if (item.getObjectId() == value)
+				if (item.getObjectId() == itemObjId)
 					return item;
 			}
 		}
