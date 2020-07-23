@@ -463,13 +463,6 @@
 	<chest npc_id="233192">
 		<key_item item_ids="0" count="1" />
 	</chest>
-	<!-- Rukibuki Circus Troupe -->
-	<chest npc_id="831745">
-		<key_item item_ids="185000184" count="1" />
-	</chest>
-	<chest npc_id="831575">
-		<key_item item_ids="185000184" count="3" />
-	</chest>
 	<!-- Kamar Battlefield -->
 	<chest npc_id="801777">
 		<key_item item_ids="0" count="1" />

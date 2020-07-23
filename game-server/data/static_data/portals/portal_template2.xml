@@ -572,16 +572,10 @@
 	</portal_use>
 
 	<!-- NIGHTMARE CIRCUS -->
-	<!-- Nightmare Circus Exit -->
-	<portal_use npc_id="831746">
-		<portal_path loc_id="1100105" race="ELYOS" />
-		<portal_path loc_id="1200107" race="ASMODIANS" />
-	</portal_use>
-
-	<!-- RUKIBUKI CIRCUS TROUPE -->
+	<!-- Exit -->
 	<portal_use npc_id="831576">
 		<portal_path loc_id="1100105" race="ELYOS" />
-		<portal_path loc_id="1200107" race="ASMODIANS" />
+		<portal_path loc_id="1200108" race="ASMODIANS" />
 	</portal_use>
 
 	<!-- Live Party Concert Hall -->
@@ -1919,16 +1913,16 @@
 	<portal_dialog npc_id="730356">
 		<portal_path dialog="10000" loc_id="3002200" player_count="12" instance="true" siege_id="1011" race="ASMODIANS" min_level="50" />
 	</portal_dialog>
-	<!-- Nightmare Circus (Rukibuki Circus Troupe) Event Teleports -->
+	<!-- Nightmare Circus Entrances -->
 	<!-- Saia (Pandaemonium) -->
 	<portal_dialog npc_id="831714">
 		<portal_path dialog="10000" loc_id="3011600" player_count="6" instance="true" min_level="30" />
 	</portal_dialog>
-	<!-- Dormira (Sanctum) -->
-	<portal_dialog npc_id="831712">
+	<!-- Arika (Sanctum) -->
+	<portal_dialog npc_id="831709">
 		<portal_path dialog="10000" loc_id="3011600" player_count="6" instance="true" min_level="30" />
 	</portal_dialog>
-	<!-- End Nightmare Circus (Rukibuki Circus Troupe) Event Teleports -->
+	<!-- End Nightmare Circus Entrances -->
 	<!-- Drakenspire Depths -->
 	<!-- TELEPORTS ELYOS
 		<portal_dialog npc_id="731546">

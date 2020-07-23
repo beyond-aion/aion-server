@@ -162,7 +162,7 @@
 	<!-- Seized Danuar Sanctuary -->
 	<instance_exit instance_id="301140000" exit_world="210070000" race="ASMODIANS" x="2099.2441" y="2280.8606" z="294.625" h="83"/>
 	<instance_exit instance_id="301140000" exit_world="220080000" race="ELYOS" x="1672.2477" y="561.77155" z="257.77853" h="55"/>
-	<!-- Rukibuki Circus Troupe -->
+	<!-- Nightmare Circus -->
 	<instance_exit instance_id="301160000" exit_world="110010000" race="ELYOS" x="1450.5635" y="1502.4572" z="573.0719"/>
 	<instance_exit instance_id="301160000" exit_world="120010000" race="ASMODIANS" x="1611.5364" y="1403.6775" z="193.12807"/>
 	<!-- Illuminary Obelisk -->

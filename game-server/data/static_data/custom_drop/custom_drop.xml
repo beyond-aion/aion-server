@@ -2883,8 +2883,6 @@
 			<drop item_id="186000051" chance="5" /><!-- Major Ancient Crown -->
 		</drop_group>
 	</npc_drop>
-	<!-- Nightmare Circus -->
-	<!-- Custom-Drops für 831745 & 831575 -->
 	<!-- Occupied Rentus Base -->
 	<npc_drop npc_id="833048">
 		<drop_group><!-- Named Equipment Box -->

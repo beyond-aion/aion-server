@@ -31,8 +31,11 @@
 			80328 [XML] [Event/Daily] Rolling on the Loot	
 			80329 [XML] [Event/Daily] Just Roll With It	
 			80330 [SCRIPT] [Event/Daily] Wanding More Power	
-			80331 [SCRIPT] [Event/Daily] I've Got the Power!	
-			80344 [XML] [Event] Alchemist's Gift	
+			80331 [SCRIPT] [Event/Daily] I've Got the Power!
+			80341 [SCRIPT] [Event] A Hallowed Eve
+			80342 [XML] [Event] Into the Nightmare
+			80343 [XML] [Event] Assault on the Nightmare Circus
+			80344 [XML] [Event] Alchemist's Gift
 			80351 [XML] [Event] The First Hit Is Free	
 			80352 [XML] [Event] Ice Hot!	
 			80353 [XML] [Event] Closing This Party Down	
@@ -352,6 +355,8 @@
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="80223" start_npc_ids="831028"/>
 	<monster_hunt id="80319" start_npc_ids="831426"/>
+	<monster_hunt id="80342" start_npc_ids="831714 831709"/>
+	<monster_hunt id="80343" start_npc_ids="831718" end_npc_ids="831714 831709"/>
 	<monster_hunt id="80387" start_npc_ids="831837"/>
 	<monster_hunt id="80388" start_npc_ids="831837"/>
 	<monster_hunt id="80389" start_npc_ids="831837"/>

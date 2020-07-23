@@ -691,10 +691,11 @@
 			<percentage percent="20" isIndividual="true"/>
 		</summons>
 	</ai>
+	<!-- Mistress Viloa (Nightmare Circus) -->
 	<ai npcId="233459">
 		<summons>
 			<percentage percent="100">
-				<summonGroup npcId="233456" minCount="3" distance="3"/>
+				<summonGroup npcId="233456" minCount="3" distance="3" schedule="5000"/><!-- Primal Nightmare -->
 			</percentage>
 		</summons>
 	</ai>

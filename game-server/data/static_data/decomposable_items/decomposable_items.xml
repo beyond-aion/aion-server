@@ -10505,25 +10505,31 @@
 	</decomposable>
 	<decomposable item_id="188051338"><!-- [Event] Case of Harvest Revel Ale -->
 		<items>
-			<item id="160010147" /><!-- [Event] Creamy Pumpkin Ale -->
+			<item id="160005026" min_count="5"/><!-- [Event] Pumpkin Jelly -->
 		</items>
 		<items>
-			<item id="160010148" /><!-- [Event] Dry Pumpkin Ale -->
+			<item id="160005027" min_count="5"/><!-- [Event] Ale Jelly -->
 		</items>
 		<items>
-			<item id="160010149" /><!-- [Event] Cool Creamy Pumpkin Ale -->
+			<item id="160010147" min_count="5"/><!-- [Event] Creamy Pumpkin Ale -->
 		</items>
 		<items>
-			<item id="160010150" /><!-- [Event] Cool Dry Pumpkin Ale -->
+			<item id="160010148" min_count="5"/><!-- [Event] Dry Pumpkin Ale -->
 		</items>
 		<items>
-			<item id="160010151" /><!-- [Event] Warm Pumpkin Ale -->
+			<item id="160010149" min_count="5"/><!-- [Event] Cool Creamy Pumpkin Ale -->
 		</items>
 		<items>
-			<item id="160010152" /><!-- [Event] Warm Creamy Pumpkin Ale -->
+			<item id="160010150" min_count="5"/><!-- [Event] Cool Dry Pumpkin Ale -->
 		</items>
 		<items>
-			<item id="160010153" /><!-- [Event] Warm Dry Pumpkin Ale -->
+			<item id="160010151" min_count="5"/><!-- [Event] Warm Pumpkin Ale -->
+		</items>
+		<items>
+			<item id="160010152" min_count="5"/><!-- [Event] Warm Creamy Pumpkin Ale -->
+		</items>
+		<items>
+			<item id="160010153" min_count="5"/><!-- [Event] Warm Dry Pumpkin Ale -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051339"><!-- [Event] Potcrab's Love -->
@@ -15172,66 +15178,42 @@
 	</decomposable>
 	<decomposable item_id="188051869" /><!-- [Event] Lovely Dye Pouch -->
 	<decomposable item_id="188051870" /><!-- [Event] Heavy Scroll Bundle -->
-	<decomposable item_id="188051871"><!-- [Harvest Revel] Display Furniture Shopping Bag -->
+	<decomposable item_id="188051871" selectable="true"><!-- [Harvest Revel] Display Furniture Shopping Bag -->
 		<items>
-			<item id="170000048" /><!-- Harvest Revel Festival Shelf -->
-		</items>
-		<items>
-			<item id="170120034" /><!-- Harvest Revel Bed -->
-		</items>
-		<items>
-			<item id="170130053" /><!-- Harvest Revel Couch -->
-		</items>
-		<items>
-			<item id="170150001" /><!-- Harvest Revel Pumpkin Lighting -->
-		</items>
-		<items>
-			<item id="170150002" /><!-- Harvest Revel Wall Lighting -->
-		</items>
-		<items>
-			<item id="170160011" /><!-- Harvest Revel Partition -->
-		</items>
-		<items>
-			<item id="170200025" /><!-- Harvest Revel Rug -->
-		</items>
-		<items>
-			<item id="170410030" /><!-- Harvest Revel Chair -->
-		</items>
-		<items>
-			<item id="170420037" /><!-- Harvest Revel Ornament Pile -->
+			<item id="170000048"/><!-- Harvest Revel Festival Shelf -->
+			<item id="170120034"/><!-- Harvest Revel Bed -->
+			<item id="170130053"/><!-- Harvest Revel Couch -->
+			<item id="170150001"/><!-- Harvest Revel Pumpkin Lighting -->
+			<item id="170150002"/><!-- Harvest Revel Wall Lighting -->
+			<item id="170160011"/><!-- Harvest Revel Partition -->
+			<item id="170200025"/><!-- Harvest Revel Rug -->
+			<item id="170410030"/><!-- Harvest Revel Chair -->
+			<item id="170420037"/><!-- Harvest Revel Ornament Pile -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188051872"><!-- [Harvest Revel] Functional Furniture Shopping Bag -->
+	<decomposable item_id="188051872" selectable="true"><!-- [Harvest Revel] Functional Furniture Shopping Bag -->
 		<items>
-			<item id="170420035" /><!-- Harvest Revel Banquet Table -->
-		</items>
-		<items>
-			<item id="170100024" /><!-- Harvest Revel Log Cabinet -->
-		</items>
-		<items>
-			<item id="170100023" /><!-- Pumpkin-decorated Cabinet -->
-		</items>
-		<items>
-			<item id="170190054" /><!-- Pumpkin-decorated Tree -->
+			<item id="170420035"/><!-- Harvest Revel Banquet Table -->
+			<item id="170100024"/><!-- Harvest Revel Log Cabinet -->
+			<item id="170100023"/><!-- Pumpkin-decorated Cabinet -->
+			<item id="170190054"/><!-- Pumpkin-decorated Tree -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188051873"><!-- [Harvest Revel] Decorative Furniture Shopping Bag -->
+	<decomposable item_id="188051873" selectable="true"><!-- [Harvest Revel] Decorative Furniture Shopping Bag -->
 		<items>
-			<item id="171110052" /><!-- Pumpkin Wallpaper -->
-		</items>
-		<items>
-			<item id="171130032" /><!-- Star-patterned Floor -->
+			<item id="171110052"/><!-- Pumpkin Wallpaper -->
+			<item id="171130032"/><!-- Star-patterned Floor -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051874"><!-- Harvest Revel Furniture Set Box -->
 		<items chance="50">
-			<item id="188051872" /><!-- [Harvest Revel] Functional Furniture Shopping Bag -->
-		</items>
-		<items chance="10">
-			<item id="188051873" /><!-- [Harvest Revel] Decorative Furniture Shopping Bag -->
+			<item id="188051871"/><!-- [Harvest Revel] Display Furniture Shopping Bag -->
 		</items>
 		<items chance="40">
-			<item id="188051871" /><!-- [Harvest Revel] Display Furniture Shopping Bag -->
+			<item id="188051872"/><!-- [Harvest Revel] Functional Furniture Shopping Bag -->
+		</items>
+		<items chance="10">
+			<item id="188051873"/><!-- [Harvest Revel] Decorative Furniture Shopping Bag -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051875"><!-- [Solorius] Display Furniture Pack -->
@@ -21423,7 +21405,26 @@
 			<item id="166150019" /><!-- Assured Greater Felicitous Socketing (Mythic) -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052561" /><!-- [Event] Consumables Bundle -->
+	<decomposable item_id="188052561"><!-- [Event] Consumables Bundle -->
+		<items>
+			<item id="162000066" min_count="3"/><!-- Recovery Crystal -->
+		</items>
+		<items>
+			<item id="164002167" min_count="5"/><!-- Drana Coffee -->
+		</items>
+		<items>
+			<item id="164002168" min_count="3"/><!-- [Event] Spicy Drana Steak -->
+		</items>
+		<items>
+			<item id="164002169" min_count="3"/><!-- [Event] Tasty Drana Steak -->
+		</items>
+		<items>
+			<item id="166100008" min_count="75"/><!-- Greater Supplements (Eternal) -->
+		</items>
+		<items>
+			<item id="169000010" min_count="500"/><!-- Power Shard: +40 -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052562"><!-- [Event] Scroll Bundle -->
 		<items>
 			<item id="164000069" min_count="20" /><!-- Greater Anti-Shock Scroll -->
@@ -21775,7 +21776,26 @@
 			<item id="166050038" /><!-- Esoteric Idian: Physical/Magical Defense -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052589" /><!-- [Event] Consumables Bundle -->
+	<decomposable item_id="188052589"><!-- [Event] Consumables Bundle -->
+		<items>
+			<item id="162000066" min_count="3"/><!-- Recovery Crystal -->
+		</items>
+		<items>
+			<item id="164002167" min_count="5"/><!-- Drana Coffee -->
+		</items>
+		<items>
+			<item id="164002168" min_count="3"/><!-- [Event] Spicy Drana Steak -->
+		</items>
+		<items>
+			<item id="164002169" min_count="3"/><!-- [Event] Tasty Drana Steak -->
+		</items>
+		<items>
+			<item id="166100008" min_count="75"/><!-- Greater Supplements (Eternal) -->
+		</items>
+		<items>
+			<item id="169000010" min_count="500"/><!-- Power Shard: +40 -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052590"><!-- Cuperine Ceramium Piece Case -->
 		<items chance="95.0">
 			<item id="186000243" min_count="2" /><!-- Fragmented Ceramium -->
@@ -23645,7 +23665,7 @@
 			<item id="102001136" /><!-- [Event] Lullaby Harp Skin -->
 		</items>
 		<items>
-			<item id="188600241" /><!-- Nightmare Circus Bonus Entry Scroll -->
+			<item id="188600206" /><!-- Nightmare Circus Bonus Entry Scroll -->
 		</items>
 		<items>
 			<item id="190070016" /><!-- Yume Summoning Lamp (30 days) -->
@@ -23728,61 +23748,14 @@
 			<item id="102001136" /><!-- [Event] Lullaby Harp Skin -->
 		</items>
 		<items>
-			<item id="188600241" /><!-- Nightmare Circus Bonus Entry Scroll -->
-		</items>
-		<items>
-			<item id="190070016" /><!-- Yume Summoning Lamp (30 days) -->
+			<item id="188600206" /><!-- Nightmare Circus Bonus Entry Scroll -->
 		</items>
 		<items>
 			<item id="187060086" /><!-- Yume's Faerie Feather -->
 		</items>
 		<items>
-			<item id="187060087" /><!-- Yume's Empowered Faerie Feather -->
-		</items>
-		<items>
-			<item id="169610143" /><!-- [Title] Dreamstrider Title (3 days) -->
-		</items>
-		<items>
-			<item id="169610144" /><!-- [Title] Dreamstrider Title (7 days) -->
-		</items>
-		<items>
-			<item id="162001014" /><!-- Tea of Repose - 20% Recovery -->
-		</items>
-		<items>
-			<item id="162001012" /><!-- Tea of Repose - 50% Recovery -->
-		</items>
-		<items>
-			<item id="164002111" /><!-- Greater Running Scroll (1 hour) -->
-		</items>
-		<items>
-			<item id="164002113" /><!-- Greater Awakening Scroll (1 hour) -->
-		</items>
-		<items>
-			<item id="164002112" /><!-- Greater Courage Scroll (1 hour) -->
-		</items>
-		<items>
-			<item id="164002115" /><!-- Major Crit Spell Scroll (1 hour) -->
-		</items>
-		<items>
-			<item id="164002114" /><!-- Major Crit Strike Scroll (1 hour) -->
-		</items>
-		<items>
-			<item id="190100072" /><!-- Rosenimbus -->
-		</items>
-		<items>
-			<item id="169600191" /><!-- [Emotion Card] &quot;I Put a Spell On You&quot; Dance -->
-		</items>
-		<items>
-			<item id="169600190" /><!-- [Emotion Card] &quot;Call My Name&quot; Dance -->
-		</items>
-		<items>
-			<item id="169600189" /><!-- [Emotion Card] &quot;Can't Get Enough of Him&quot; Dance -->
-		</items>
-		<items>
-			<item id="169600188" /><!-- [Emotion Card] &quot;Tearful&quot; Dance -->
-		</items>
-		<items>
-			<item id="169600192" /><!-- [Emotion Card] &quot;You and I&quot; Dance -->
+			<item id="164002220" race="ASMODIANS" /><!-- Circus Card: Harlequin -->
+			<item id="164002221" race="ELYOS" /><!-- Circus Card: Harlequin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052686"><!-- [Event] Nightmare Key Bundle -->

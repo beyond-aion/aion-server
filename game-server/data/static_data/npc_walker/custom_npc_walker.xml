@@ -2524,7 +2524,7 @@
 		<routestep x="802.17114" y="340.90512" z="230.98207"/>
 		<routestep x="752.49884" y="292.9267" z="233.75148" rest_time="160000"/>
 	</walker_template>
-	<!-- Rukibuki Circus Troupe -->
+	<!-- Nightmare Circus -->
 	<!-- Left Left 1 -->
 	<walker_template route_id="3011600001" loop_type="WALK_BACK">
 		<routestep x="524.41406" y="628.0354" z="207.97612"/>

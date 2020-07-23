@@ -410,9 +410,8 @@
 	<portal_loc world_id="301110000" loc_id="3011100" x="255.7398" y="243.60954" z="241.90897"/>
 	<!-- Infernal Danuar Reliquary -->
 	<portal_loc world_id="301360000" loc_id="3013600" x="255.7398" y="243.60954" z="241.90897"/>
-	<!-- 4.3 Nightmare Circus (Rukibuki Circus Troupe) -->
+	<!-- 4.3 Nightmare Circus -->
 	<portal_loc world_id="301160000" loc_id="3011600" x="467.64584" y="568.34076" z="201.6762" h="117"/>
-	<portal_loc world_id="120010000" loc_id="3011602" x="1611.5364" y="1403.6775" z="193.12807"/>
 	<!-- Sealed Danuar Mysticarium -->
 	<portal_loc world_id="300480000" loc_id="3004800" x="184.35031" y="121.30565" z="231.287" h="60"/>
 	<!-- 4.8 Ophidan Bridge -->
