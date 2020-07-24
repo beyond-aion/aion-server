@@ -1,6 +1,5 @@
 package instance;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -33,23 +32,18 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @InstanceID(301200000)
 public class NightmareCircus extends GeneralInstanceHandler {
 
-	private List<Integer> movies = new ArrayList<>();
 	private boolean isInstanceDestroyed;
 	private Future<?> spawnTask;
 	private Future<?> despawnBossTask;
 	private AtomicBoolean moviePlayed = new AtomicBoolean();
 
 	@Override
-	public void onEnterInstance(final Player player) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				SkillEngine.getInstance().applyEffectDirectly(player.getRace() == Race.ELYOS ? 21469 : 21471, player, player);
-				sendMsg(831551, 1501120);
-				sendMsg(831552, 1501119);
-				sendMsg(831553, 1501118);
-			}
+	public void onEnterInstance(Player player) {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			SkillEngine.getInstance().applyEffectDirectly(player.getRace() == Race.ELYOS ? 21469 : 21471, player, player);
+			sendMsg(831551, 1501120);
+			sendMsg(831552, 1501119);
+			sendMsg(831553, 1501118);
 		}, 1000);
 	}
 
@@ -477,7 +471,6 @@ public class NightmareCircus extends GeneralInstanceHandler {
 	public void onInstanceDestroy() {
 		cancelSpawnTask();
 		cancelDespawnBossTask();
-		movies.clear();
 		isInstanceDestroyed = true;
 	}
 }

@@ -39,12 +39,9 @@ public class YumeAI extends GeneralNpcAI {
 	}
 
 	@Override
-	public void onEffectEnd(Effect effect) {
-		// FIXME Doesn't trigger when healing Yume
-		super.onEffectEnd(effect);
-		if (effect.getSkillId() == 21463) {
+	public void onEffectApplied(Effect effect) {
+		if (effect.getSkillId() == 21463)
 			AIActions.useSkill(this, 21467);
-		}
 	}
 
 	@Override
