@@ -18,6 +18,7 @@ public class SM_CASTSPELL extends AionServerPacket {
 	private final int targetType;
 	private final int duration;
 	private final float castSpeed;
+	private final boolean isMagical;
 
 	private int targetObjectId;
 
@@ -25,7 +26,7 @@ public class SM_CASTSPELL extends AionServerPacket {
 	private float y;
 	private float z;
 
-	public SM_CASTSPELL(Creature effector, int spellId, int level, int targetType, int targetObjectId, int duration, float castSpeed) {
+	public SM_CASTSPELL(Creature effector, int spellId, int level, int targetType, int targetObjectId, int duration, float castSpeed, boolean isMagical) {
 		this.effector = effector;
 		this.spellId = spellId;
 		this.level = level;
@@ -33,10 +34,11 @@ public class SM_CASTSPELL extends AionServerPacket {
 		this.targetObjectId = targetObjectId;
 		this.duration = duration;
 		this.castSpeed = castSpeed;
+		this.isMagical = isMagical;
 	}
 
-	public SM_CASTSPELL(Creature effector, int spellId, int level, int targetType, float x, float y, float z, int duration, float castSpeed) {
-		this(effector, spellId, level, targetType, 0, duration, castSpeed);
+	public SM_CASTSPELL(Creature effector, int spellId, int level, int targetType, float x, float y, float z, int duration, float castSpeed, boolean isMagical) {
+		this(effector, spellId, level, targetType, 0, duration, castSpeed, isMagical);
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -78,6 +80,6 @@ public class SM_CASTSPELL extends AionServerPacket {
 		writeH(duration);
 		writeC(0x00);// unk
 		writeF(castSpeed); // cast speed
-		writeC(0x00);// phys or magical?
+		writeC(isMagical ? 1 : 0);// phys or magical?
 	}
 }

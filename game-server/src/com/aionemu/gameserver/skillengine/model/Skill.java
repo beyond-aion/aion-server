@@ -472,7 +472,7 @@ public class Skill {
 			switch (targetType) {
 				case 0: // PlayerObjectId as Target
 					PacketSendUtility.broadcastPacketAndReceive(effector,
-						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, castDuration, castSpeed));
+						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, castDuration, castSpeed, isMagical()));
 					if (effector instanceof Npc) {
 						ShoutEventHandler.onCast((NpcAI) effector.getAi(), firstTarget);
 					}
@@ -480,12 +480,12 @@ public class Skill {
 
 				case 3: // Target not in sight?
 					PacketSendUtility.broadcastPacketAndReceive(effector,
-						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, castDuration, castSpeed));
+						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, targetObjId, castDuration, castSpeed, isMagical()));
 					break;
 
 				case 1: // XYZ as Target
 					PacketSendUtility.broadcastPacketAndReceive(effector,
-						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, x, y, z, castDuration, castSpeed));
+						new SM_CASTSPELL(effector, skillTemplate.getSkillId(), skillLevel, targetType, x, y, z, castDuration, castSpeed, isMagical()));
 					break;
 			}
 		} else if (skillMethod == SkillMethod.ITEM && castDuration > 0) {
@@ -1136,5 +1136,9 @@ public class Skill {
 
 	public void setHate(int hate) {
 		this.hate = hate;
+	}
+
+	private boolean isMagical() {
+		return skillTemplate.getType() == SkillType.MAGICAL && skillTemplate.getSubType() != SkillSubType.NONE;
 	}
 }
