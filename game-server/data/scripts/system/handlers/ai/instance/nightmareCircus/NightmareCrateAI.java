@@ -38,13 +38,11 @@ public class NightmareCrateAI extends ActionItemNpcAI {
 			} else if (player.getInventory().decreaseByItemId(185000184, 1)) {
 				analyzeOpening(player);
 			}
-		} else if (npcId == 831575 && (player.getInventory().getItemCountByItemId(185000187) > 2
-			|| player.getInventory().getItemCountByItemId(185000184) > 2 || player.getInventory().getItemCountByItemId(185000163) > 0)) {
+		} else if (npcId == 831575
+			&& (player.getInventory().getItemCountByItemId(185000187) > 2 || player.getInventory().getItemCountByItemId(185000184) > 2)) {
 			if (player.getInventory().decreaseByItemId(185000187, 3)) {
 				analyzeOpening(player);
 			} else if (player.getInventory().decreaseByItemId(185000184, 3)) {
-				analyzeOpening(player);
-			} else if (player.getInventory().decreaseByItemId(185000163, 1)) {
 				analyzeOpening(player);
 			}
 		} else {

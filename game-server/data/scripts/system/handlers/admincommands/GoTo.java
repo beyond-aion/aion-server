@@ -282,7 +282,7 @@ public class GoTo extends AdminCommand {
 		addLocation(DANUAR_RELIQUARY, 256.60f, 257.99f, 241.78f, "Danuar Reliquary", "DR", "Ruhnadium");
 		addLocation(DANUAR_SANCTUARY, 388.66f, 1185.07f, 55.31f, "Danuar Sanctuary", "DS", "Zuflucht der Ruhn", "ZDR");
 		addLocation(SEIZED_DANUAR_SANCTUARY, 388.66f, 1185.07f, 55.31f, "Seized Danuar Sanctuary", "SDS", "Verlorene Zukunft", "VZ");
-		addLocation(NIGHTMARE_CIRCUS, 467.64f, 568.34f, 201.67f, "Nightmare Circus", "NC", "Rukibuki Zirkus");
+		addLocation(THE_NIGHTMARE_CIRCUS, 467.64f, 568.34f, 201.67f, "Nightmare Circus", "NC", "Rukibuki Zirkus");
 		addLocation(KAMAR_BATTLEFIELD, 1329, 1501, 593, "Kamar Battlefield", "KB", "Schlachtfeld von Kamar");
 		// 4.3 Instance
 		addLocation(HEXWAY, 672.8f, 606.2f, 321.2f, "The Hexway", "Korridor des Verrats");

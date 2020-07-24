@@ -32,6 +32,15 @@
 			80329 [XML] [Event/Daily] Just Roll With It	
 			80330 [SCRIPT] [Event/Daily] Wanding More Power	
 			80331 [SCRIPT] [Event/Daily] I've Got the Power!
+			80332 [TODO] [Event] From the Fairy…
+			80333 [TODO] [Event] Request from Pucas
+			80334 [TODO] [Event] Ringmaster Rukibuki's Conspiracy Continues
+			80335 [TODO] [Event] Secret of Transformation
+			80336 [TODO] [Event] Secret of Transformation
+			80337 [TODO] [Event] IU Rescue Operation
+			80338 [TODO] [Event] Ringmaster Rukibuki's Conspiracy Continues 2
+			80339 [TODO] [Event] Ringmaster Rukibuki's Conspiracy Continues 3
+			80340 [TODO] [Event] Ringmaster Rukibuki's Conspiracy Continues 4
 			80341 [SCRIPT] [Event] A Hallowed Eve
 			80342 [XML] [Event] Into the Nightmare
 			80343 [XML] [Event] Assault on the Nightmare Circus
@@ -355,8 +364,8 @@
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="80223" start_npc_ids="831028"/>
 	<monster_hunt id="80319" start_npc_ids="831426"/>
-	<monster_hunt id="80342" start_npc_ids="831714 831709"/>
-	<monster_hunt id="80343" start_npc_ids="831718" end_npc_ids="831714 831709"/>
+	<monster_hunt id="80342" start_npc_ids="831709 831710 831711 831712 831713 831714 831715 831716 831717"/>
+	<monster_hunt id="80343" start_npc_ids="831718" end_npc_ids="831709 831710 831711 831712 831713 831714 831715 831716 831717"/>
 	<monster_hunt id="80387" start_npc_ids="831837"/>
 	<monster_hunt id="80388" start_npc_ids="831837"/>
 	<monster_hunt id="80389" start_npc_ids="831837"/>

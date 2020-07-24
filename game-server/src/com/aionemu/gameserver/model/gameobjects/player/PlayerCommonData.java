@@ -173,7 +173,7 @@ public class PlayerCommonData extends CreatureTemplate {
 		long repose = 0;
 		long salvation = 0;
 		Player player = getPlayer();
-		if (player != null && player.getWorldId() == 301160000) // nightmare circus
+		if (player != null && player.getWorldId() == 301200000) // nightmare circus
 			return;
 
 		if (player != null)

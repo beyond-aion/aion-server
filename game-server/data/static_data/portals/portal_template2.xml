@@ -1916,11 +1916,11 @@
 	<!-- Nightmare Circus Entrances -->
 	<!-- Saia (Pandaemonium) -->
 	<portal_dialog npc_id="831714">
-		<portal_path dialog="10000" loc_id="3011600" player_count="6" instance="true" min_level="30" />
+		<portal_path dialog="10000" loc_id="3012000" player_count="6" instance="true" min_level="30" />
 	</portal_dialog>
 	<!-- Arika (Sanctum) -->
 	<portal_dialog npc_id="831709">
-		<portal_path dialog="10000" loc_id="3011600" player_count="6" instance="true" min_level="30" />
+		<portal_path dialog="10000" loc_id="3012000" player_count="6" instance="true" min_level="30" />
 	</portal_dialog>
 	<!-- End Nightmare Circus Entrances -->
 	<!-- Drakenspire Depths -->

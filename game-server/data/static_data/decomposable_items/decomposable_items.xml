@@ -21389,7 +21389,12 @@
 			<random_item type="MANASTONE_LEGEND_GRADE_50" />
 		</items>
 	</decomposable>
-	<decomposable item_id="188052557" /><!-- Harlequin Card Box -->
+	<decomposable item_id="188052557"><!-- Harlequin Card Box -->
+		<items>
+			<item id="164002221" race="ELYOS" /><!-- Circus Card: Harlequin -->
+			<item id="164002220" race="ASMODIANS" /><!-- Circus Card: Harlequin -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052558"><!-- Assured Greater Felicitous Socketing Box (Fabled) -->
 		<items>
 			<item id="166150017" /><!-- Assured Greater Felicitous Socketing (Fabled) -->
@@ -22820,8 +22825,8 @@
 	</decomposable>
 	<decomposable item_id="188052620"><!-- Cursed Circus Box -->
 		<items>
-			<item id="164002221" race="ELYOS" /><!-- Circus Card: Harlequin -->
-			<item id="164002220" race="ASMODIANS" /><!-- Circus Card: Harlequin -->
+			<item id="164002227" race="ELYOS" /><!-- Circus Card: Harlequin -->
+			<item id="164002226" race="ASMODIANS" /><!-- Circus Card: Harlequin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052621" /><!-- [Event] Romantic Gift Box -->
@@ -23665,7 +23670,7 @@
 			<item id="102001136" /><!-- [Event] Lullaby Harp Skin -->
 		</items>
 		<items>
-			<item id="188600206" /><!-- Nightmare Circus Bonus Entry Scroll -->
+			<item id="188600241" /><!-- Nightmare Circus Bonus Entry Scroll -->
 		</items>
 		<items>
 			<item id="190070016" /><!-- Yume Summoning Lamp (30 days) -->
@@ -23748,14 +23753,14 @@
 			<item id="102001136" /><!-- [Event] Lullaby Harp Skin -->
 		</items>
 		<items>
-			<item id="188600206" /><!-- Nightmare Circus Bonus Entry Scroll -->
+			<item id="188600241" /><!-- Nightmare Circus Bonus Entry Scroll -->
 		</items>
 		<items>
 			<item id="187060086" /><!-- Yume's Faerie Feather -->
 		</items>
 		<items>
-			<item id="164002220" race="ASMODIANS" /><!-- Circus Card: Harlequin -->
-			<item id="164002221" race="ELYOS" /><!-- Circus Card: Harlequin -->
+			<item id="164002227" race="ELYOS" /><!-- Circus Card: Harlequin -->
+			<item id="164002226" race="ASMODIANS" /><!-- Circus Card: Harlequin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052686"><!-- [Event] Nightmare Key Bundle -->

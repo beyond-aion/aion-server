@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
+	<spawn_map map_id="301200000">
+		<!-- Solid Iron chain -->
+		<spawn npc_id="831740">
+			<spot static_id="17" x="522.04095" y="565.48944" z="199.3413"/>
+		</spawn>
+		<!-- Enslaved Dream -->
+		<spawn npc_id="831747">
+			<spot x="522.38953" y="571.33569" z="198.906"/>
+		</spawn>
+		<!-- Closed Cage -->
+		<spawn npc_id="831627">
+			<spot static_id="142" x="522.39825" y="564.69006" z="199.03371"/>
+		</spawn>
+		<!-- Yume -->
+		<spawn npc_id="831741">
+			<spot x="524.80756" y="565.47778" z="199.55348" h="60"/>
+		</spawn>
+		<!-- Adana -->
+		<spawn npc_id="831718">
+			<spot x="472.84296" y="564.04993" z="202.58923" h="50"/>
+		</spawn>
+		<!-- Adiva -->
+		<spawn npc_id="831552">
+			<spot x="471.4483" y="572.52191" z="202.58923" h="76"/>
+		</spawn>
+		<!-- Ailee -->
+		<spawn npc_id="831551">
+			<spot x="473.07919" y="571.30505" z="202.58923" h="76"/>
+		</spawn>
+		<!-- Aine -->
+		<spawn npc_id="831553">
+			<spot x="471.67184" y="562.4325" z="202.58923" h="50"/>
+		</spawn>
+		<!-- IDASteria_IU_inviNPC01 -->
+		<spawn npc_id="831578">
+			<spot x="515.55835" y="565.32074" z="200.67662" h="90"/>
+		</spawn>
+	</spawn_map>
+</spawns>

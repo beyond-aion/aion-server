@@ -843,8 +843,8 @@
 		<can_enter_mentor>true</can_enter_mentor>
 	</instance_cooltime>
 	<instance_cooltime race="PC_ALL" worldId="301160000" id="109" sync_id="102">
-		<type>DAILY</type>
-		<ent_cool_time>900</ent_cool_time>
+		<type>RELATIVE</type>
+		<ent_cool_time>0</ent_cool_time>
 		<maxcount>1</maxcount>
 		<max_member_light>6</max_member_light>
 		<max_member_dark>6</max_member_dark>

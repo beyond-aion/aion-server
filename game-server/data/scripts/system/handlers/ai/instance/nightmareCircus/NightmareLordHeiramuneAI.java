@@ -52,7 +52,7 @@ public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
 				switch (percent) {
 					case 80 -> startSpawnTask();
 					case 50 -> {
-						PacketSendUtility.broadcastMessage(getOwner(), 1500991);
+						PacketSendUtility.broadcastMessage(getOwner(), 1501138);
 						spawn(233162, getOwner().getX() + 5, getOwner().getY() + 5, getOwner().getZ(), getOwner().getHeading());
 					}
 				}
@@ -97,7 +97,7 @@ public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
 	}
 
 	private void spawnHelpers() {
-		PacketSendUtility.broadcastMessage(getOwner(), 1500992);
+		PacketSendUtility.broadcastMessage(getOwner(), 1501139);
 		spawn(233457, 521.585f, 510.16528f, 199.59279f, (byte) 30);
 		spawn(233457, 523.3747f, 621.1362f, 208.05113f, (byte) 90);
 	}

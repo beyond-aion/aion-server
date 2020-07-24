@@ -15,10 +15,12 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import ai.GeneralNpcAI;
 
 /**
+ * FIXME NPC should only be visible to the owner (implement enum SummonOwner)
+ *
  * @author Ritsu
  */
 @AIName("nightmareharlequin")
-public class NightmareHarlequinAI extends GeneralNpcAI {	// FIXME NPC should only be visible to the owner (implement enum SummonOwner)
+public class NightmareHarlequinAI extends GeneralNpcAI {
 
 	public NightmareHarlequinAI(Npc owner) {
 		super(owner);
@@ -27,11 +29,8 @@ public class NightmareHarlequinAI extends GeneralNpcAI {	// FIXME NPC should onl
 	@Override
 	protected void handleDialogStart(Player player) {
 		switch (getNpcId()) {
-			case 831599, 831600 -> super.handleDialogStart(player);
-			default -> {
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
-				break;
-			}
+			case 831757, 831758 -> super.handleDialogStart(player);
+			default -> PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 		}
 	}
 
@@ -43,7 +42,7 @@ public class NightmareHarlequinAI extends GeneralNpcAI {	// FIXME NPC should onl
 			return true;
 		}
 		if (dialogActionId == SETPRO1) {
-			SkillEngine.getInstance().getSkill(getOwner(), player.getRace() == Race.ELYOS ? 21331 : 21334, 1, player).useWithoutPropSkill();
+			SkillEngine.getInstance().getSkill(getOwner(), player.getRace() == Race.ELYOS ? 21470 : 21472, 1, player).useWithoutPropSkill();
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 		} else if (dialogActionId == QUEST_SELECT && questId != 0) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, questId));

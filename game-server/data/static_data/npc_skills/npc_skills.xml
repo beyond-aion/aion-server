@@ -63585,9 +63585,6 @@
 	<npc_skills npc_ids="831754">
 		<npc_skill id="21466" lv="1" prob="100" max_hp="100" />
 	</npc_skills>
-	<npc_skills npc_ids="831757">
-		<npc_skill id="21472" lv="1" prob="25" min_hp="95" max_hp="100" />
-	</npc_skills>
 	<npc_skills npc_ids="855263">
 		<npc_skill id="21761" lv="1" prob="70" cd="25000" next_skill_time="6000" />
 		<npc_skill id="21762" lv="1" prob="70" cd="30000" next_skill_time="6500" />

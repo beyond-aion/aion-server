@@ -5553,7 +5553,7 @@
 		<event_drops>
 			<gd_rule rule_name="Event Bundle" chance="100" member_limit="6">
 				<gd_maps>
-					<gd_map map_id="301160000"/><!-- Nightmare_Circus -->
+					<gd_map map_id="301200000"/><!-- Nightmare_Circus -->
 				</gd_maps>
 				<gd_npcs>
 					<gd_npc npc_id="233453"/><!-- Harlequin Lord Reshka -->
@@ -5565,7 +5565,7 @@
 			</gd_rule>
 			<gd_rule rule_name="Event Pet" chance="5.5">
 				<gd_maps>
-					<gd_map map_id="301160000"/><!-- Nightmare_Circus -->
+					<gd_map map_id="301200000"/><!-- Nightmare_Circus -->
 				</gd_maps>
 				<gd_npcs>
 					<gd_npc npc_id="233453"/><!-- Harlequin Lord Reshka -->
@@ -5575,22 +5575,9 @@
 					<gd_item id="190070010"/><!-- Popstar Summoning Lamp -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Event Key" chance="50">
-				<gd_maps>
-					<gd_map map_id="301160000"/><!--Nightmare_Circus -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="233453"/><!-- Harlequin Lord Reshka -->
-					<gd_npc npc_id="233459"/><!-- Mistress Viloa -->
-					<gd_npc npc_id="233467"/><!-- Nightmare Lord Heiramune -->
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="185000163"/><!-- Nightmare Lord's Key -->
-				</gd_items>
-			</gd_rule>
 			<gd_rule rule_name="Event Key" chance="100">
 				<gd_maps>
-					<gd_map map_id="301160000"/><!-- Nightmare_Circus -->
+					<gd_map map_id="301200000"/><!-- Nightmare_Circus -->
 				</gd_maps>
 				<gd_npcs>
 					<gd_npc npc_id="233467"/><!-- Nightmare Lord Heiramune -->
@@ -5601,7 +5588,7 @@
 			</gd_rule>
 			<gd_rule rule_name="Event Supply Bundle" chance="100" member_limit="6">
 				<gd_maps>
-					<gd_map map_id="301160000"/><!-- Nightmare_Circus -->
+					<gd_map map_id="301200000"/><!-- Nightmare_Circus -->
 				</gd_maps>
 				<gd_npcs>
 					<gd_npc npc_id="233467"/><!-- Nightmare Lord Heiramune -->
@@ -5612,7 +5599,7 @@
 			</gd_rule>
 			<gd_rule rule_name="Nightmare Crate" chance="100" max_drop_rule="4">
 				<gd_maps>
-					<gd_map map_id="301160000"/><!-- Nightmare Circus -->
+					<gd_map map_id="301200000"/><!-- Nightmare Circus -->
 				</gd_maps>
 				<gd_npcs>
 					<gd_npc npc_id="831745"/>
@@ -5626,7 +5613,7 @@
 			</gd_rule>
 			<gd_rule rule_name="Nightmare Crate (Rare)" chance="35">
 				<gd_maps>
-					<gd_map map_id="301160000"/><!-- Nightmare Circus -->
+					<gd_map map_id="301200000"/><!-- Nightmare Circus -->
 				</gd_maps>
 				<gd_npcs>
 					<gd_npc npc_id="831745"/>
@@ -5640,7 +5627,7 @@
 			</gd_rule>
 			<gd_rule rule_name="Greater Nightmare Crate" chance="100" max_drop_rule="4">
 				<gd_maps>
-					<gd_map map_id="301160000"/><!-- Nightmare Circus -->
+					<gd_map map_id="301200000"/><!-- Nightmare Circus -->
 				</gd_maps>
 				<gd_npcs>
 					<gd_npc npc_id="831575"/>
@@ -5654,7 +5641,7 @@
 			</gd_rule>
 			<gd_rule rule_name="Greater Nightmare Crate (Rare)" chance="35">
 				<gd_maps>
-					<gd_map map_id="301160000"/><!-- Nightmare Circus -->
+					<gd_map map_id="301200000"/><!-- Nightmare Circus -->
 				</gd_maps>
 				<gd_npcs>
 					<gd_npc npc_id="831575"/>

@@ -42,8 +42,8 @@ public class YumeAI extends GeneralNpcAI {
 	public void onEffectEnd(Effect effect) {
 		// FIXME Doesn't trigger when healing Yume
 		super.onEffectEnd(effect);
-		if (effect.getSkillId() == 21327) {
-			AIActions.useSkill(this, 21364);
+		if (effect.getSkillId() == 21463) {
+			AIActions.useSkill(this, 21467);
 		}
 	}
 
@@ -57,9 +57,9 @@ public class YumeAI extends GeneralNpcAI {
 					public void run() {
 						if (p.getLifeStats().getHpPercentage() < 100) {
 							if (Rnd.nextBoolean()) {
-								PacketSendUtility.broadcastMessage(getOwner(), 1500978);
+								PacketSendUtility.broadcastMessage(getOwner(), 1501126);
 							}
-							AIActions.useSkill(YumeAI.this, 21363);
+							AIActions.useSkill(YumeAI.this, 21466);
 						}
 					}
 				}, 15000, 15000);

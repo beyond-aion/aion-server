@@ -93,7 +93,7 @@ public class HarlequinLordReshkaAI extends AggressiveNpcAI {
 			public void run() {
 				if (!isDead()) {
 					AIActions.useSkill(HarlequinLordReshkaAI.this, 21477);
-					PacketSendUtility.broadcastMessage(getOwner(), 1500999);
+					PacketSendUtility.broadcastMessage(getOwner(), 1501146);
 				}
 			}
 
@@ -104,8 +104,8 @@ public class HarlequinLordReshkaAI extends AggressiveNpcAI {
 			public void run() {
 				if (!isDead()) {
 					AIActions.useSkill(HarlequinLordReshkaAI.this, 21477);
-					PacketSendUtility.broadcastMessage(getOwner(), 1501000);
-					PacketSendUtility.broadcastMessage(getOwner(), Rnd.nextBoolean() ? 1500998 : 1500990, 2000);
+					PacketSendUtility.broadcastMessage(getOwner(), 1501147);
+					PacketSendUtility.broadcastMessage(getOwner(), Rnd.nextBoolean() ? 1501145 : 1501137, 2000);
 				}
 			}
 

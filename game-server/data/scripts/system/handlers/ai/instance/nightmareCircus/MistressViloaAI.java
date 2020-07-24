@@ -20,11 +20,11 @@ public class MistressViloaAI extends SummonerAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		PacketSendUtility.broadcastMessage(getOwner(), 1500988, 3000);
+		PacketSendUtility.broadcastMessage(getOwner(), 1501135, 3000);
 	}
 
 	@Override
 	protected void handleSpawnFinished(SummonGroup summonGroup) {
-		PacketSendUtility.broadcastMessage(getOwner(), 1500987, 1000);
+		PacketSendUtility.broadcastMessage(getOwner(), 1501134, 1000);
 	}
 }
