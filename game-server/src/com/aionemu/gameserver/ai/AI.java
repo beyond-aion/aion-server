@@ -83,6 +83,8 @@ public interface AI {
 
 	void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel);
 
+	void onEffectApplied(Effect effect);
+
 	void onEffectEnd(Effect effect);
 
 	AttackHandAnimation modifyAttackHandAnimation(AttackHandAnimation attackHandAnimation);

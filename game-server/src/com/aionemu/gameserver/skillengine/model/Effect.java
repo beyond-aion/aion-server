@@ -1,10 +1,6 @@
 package com.aionemu.gameserver.skillengine.model;
 
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeSet;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -626,6 +622,7 @@ public class Effect implements StatOwner {
 				break;
 			template.startSubEffect(this);
 		}
+		effected.getAi().onEffectApplied(this);
 	}
 
 	public void broadcastHate() {

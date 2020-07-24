@@ -167,6 +167,10 @@ public abstract class AITemplate<T extends Creature> extends AbstractAI<T> {
 	}
 
 	@Override
+	public void onEffectApplied(Effect effect) {
+	}
+
+	@Override
 	public void onEffectEnd(Effect effect) {
 	}
 }
