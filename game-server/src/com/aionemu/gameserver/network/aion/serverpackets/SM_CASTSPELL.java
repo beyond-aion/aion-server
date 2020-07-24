@@ -80,6 +80,6 @@ public class SM_CASTSPELL extends AionServerPacket {
 		writeH(duration);
 		writeC(0x00);// unk
 		writeF(castSpeed); // cast speed
-		writeC(isMagical ? 1 : 0);// phys or magical?
+		writeC(isMagical ? 1 : 0); //affects animation time
 	}
 }
