@@ -24,7 +24,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
  */
 public class WalkManager {
 
-	public static byte RANDOM_WALK_GEO_FLAGS = (byte) (CollisionIntention.DEFAULT_COLLISIONS.getId() | CollisionIntention.WALK.getId());
+	public static byte RANDOM_WALK_GEO_FLAGS = (byte) (CollisionIntention.CANT_SEE_COLLISIONS.getId() | CollisionIntention.WALK.getId() | CollisionIntention.PHYSICAL_SEE_THROUGH.getId());
 
 	/**
 	 * @param npcAI

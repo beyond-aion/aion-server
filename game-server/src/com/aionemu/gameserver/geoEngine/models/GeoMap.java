@@ -398,7 +398,7 @@ public class GeoMap extends Node {
 			if (terrainCollision(curX, curY, ray, p1, p2, p3, p4))
 				return false;
 		}
-		CollisionResults results = new CollisionResults(CollisionIntention.DEFAULT_COLLISIONS.getId(), instanceId, true, ignoreProperties);
+		CollisionResults results = new CollisionResults(CollisionIntention.CANT_SEE_COLLISIONS.getId(), instanceId, true, ignoreProperties);
 		return collideWith(ray, results) == 0;
 	}
 
