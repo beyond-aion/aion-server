@@ -40,8 +40,9 @@ public class YumeAI extends GeneralNpcAI {
 
 	@Override
 	public void onEffectApplied(Effect effect) {
-		if (effect.getSkillId() == 21463)
-			AIActions.useSkill(this, 21467);
+		switch (effect.getSkillId()) {
+			case 21463, 21465 -> AIActions.useSkill(this, 21467);
+		}
 	}
 
 	@Override
