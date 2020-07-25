@@ -925,7 +925,6 @@ public class Effect implements StatOwner {
 						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getFearCount()) / 100f);
 						break;
 					} else if (et instanceof SleepEffect && ((Player) getEffected()).validateLastSleepTime()) {
-						System.out.println(getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getSleepCount()) / 100f);
 						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getSleepCount()) / 100f);
 						break;
 					}
