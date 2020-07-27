@@ -3502,42 +3502,6 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Aion Community Appreciation Event" start="2015-11-20T00:00:00" end="2015-12-04T00:00:00">
-		<event_drops>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" chance="5" dynamic_chance="true" level_based_chance_reduction="true">
-				<gd_ratings>
-					<gd_rating rating="NORMAL" />
-					<gd_rating rating="ELITE" />
-					<gd_rating rating="HERO" />
-					<gd_rating rating="LEGENDARY" />
-				</gd_ratings>
-				<gd_items>
-					<gd_item id="188100091" /><!-- [Event] Signet Piece: A -->
-					<gd_item id="188100092" /><!-- [Event] Signet Piece: I -->
-					<gd_item id="188100093" /><!-- [Event] Signet Piece: O -->
-				</gd_items>
-				<gd_worlds>
-					<gd_world wd_type="ABYSS_INSTANCE" />
-					<gd_world wd_type="BALAUREA_INSTANCE" />
-				</gd_worlds>
-			</gd_rule>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" chance="0.5" dynamic_chance="true" level_based_chance_reduction="true">
-				<gd_ratings>
-					<gd_rating rating="NORMAL" />
-					<gd_rating rating="ELITE" />
-					<gd_rating rating="HERO" />
-					<gd_rating rating="LEGENDARY" />
-				</gd_ratings>
-				<gd_items>
-					<gd_item id="188100094" /><!-- [Event] Signet Piece: N -->
-				</gd_items>
-				<gd_worlds>
-					<gd_world wd_type="ABYSS_INSTANCE" />
-					<gd_world wd_type="BALAUREA_INSTANCE" />
-				</gd_worlds>
-			</gd_rule>
-		</event_drops>
-	</event>
 	<event name="The Lost Words!" start="2015-06-04T00:00:00" end="2015-06-18T00:00:00">
 		<quests>
 			<maintainable>80567 80568 80569 80570 80571 80572 80573 80574</maintainable>
