@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.model.templates.item;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -22,8 +25,8 @@ public class ItemUseLimits {
 	@XmlAttribute(name = "usedelayid")
 	private int useDelayId;
 
-	@XmlAttribute(name = "ownership_world")
-	private int ownershipWorldId;
+	@XmlAttribute(name = "ownership_worlds")
+	private List<Integer> ownershipWorldIds;
 
 	@XmlAttribute(name = "usearea")
 	private String usearea;
@@ -56,31 +59,24 @@ public class ItemUseLimits {
 		return useDelayId;
 	}
 
-	public void setDelayId(int delayId) {
-		useDelayId = delayId;
-	}
-
 	public int getDelayTime() {
 		return useDelay;
 	}
 
-	public void setDelayTime(int useDelay) {
-		this.useDelay = useDelay;
-	}
-
 	public ZoneName getUseArea() {
-		if (this.usearea == null)
+		if (usearea == null)
 			return null;
-
 		try {
-			return ZoneName.createOrGet(this.usearea);
+			return ZoneName.createOrGet(usearea);
 		} catch (Exception e) {
 			return null;
 		}
 	}
 
-	public int getOwnershipWorld() {
-		return ownershipWorldId;
+	public List<Integer> getOwnershipWorldIds() {
+		if (ownershipWorldIds == null)
+			return Collections.emptyList();
+		return ownershipWorldIds;
 	}
 
 	public Gender getGenderPermitted() {

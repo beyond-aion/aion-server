@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.instance;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -51,12 +52,6 @@ public class InstanceService {
 		}
 	}
 
-	/**
-	 * @param worldId
-	 * @param ownerId
-	 *          - playerObjectId or Legion id in future
-	 * @return
-	 */
 	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult, GeneralInstanceHandler handler) {
 		WorldMap map = World.getInstance().getWorldMap(worldId);
 
@@ -112,10 +107,9 @@ public class InstanceService {
 
 		TemporarySpawnEngine.onInstanceDestroy(worldId, instanceId); // first unregister all temporary spawns, then despawn mobs
 		for (VisibleObject obj : instance) {
-			if (obj instanceof Player) {
-				Player player = (Player) obj;
+			if (obj instanceof Player player) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_FORCE(0));
-				moveToExitPoint((Player) obj);
+				moveToExitPoint(player);
 			} else {
 				obj.getController().delete();
 			}
@@ -215,31 +209,19 @@ public class InstanceService {
 			if (beginnerInstance != null) {
 				// set to correct twin instanceId, not to #1
 				World.getInstance().setPosition(player, worldId, beginnerInstance.getInstanceId(), player.getX(), player.getY(), player.getZ(),
-						player.getHeading());
+					player.getHeading());
 			}
 		}
 	}
 
-	/**
-	 * @param player
-	 * @param portalTemplates
-	 */
 	public static void moveToExitPoint(Player player) {
 		TeleportService.moveToInstanceExit(player, player.getWorldId(), player.getRace());
 	}
 
-	/**
-	 * @param worldId
-	 * @param instanceId
-	 * @return
-	 */
 	public static boolean isInstanceExist(int worldId, int instanceId) {
 		return World.getInstance().getWorldMap(worldId).getWorldMapInstanceById(instanceId) != null;
 	}
 
-	/**
-	 * @param worldMapInstance
-	 */
 	private static void startInstanceChecker(WorldMapInstance worldMapInstance) {
 		int period = 60000; // 1 minute
 		worldMapInstance
@@ -288,12 +270,8 @@ public class InstanceService {
 	public static void onEnterInstance(Player player) {
 		player.getPosition().getWorldMapInstance().getInstanceHandler().onEnterInstance(player);
 		AutoGroupService.getInstance().onEnterInstance(player);
-		for (Item item : player.getInventory().getItems()) {
-			if (item.getItemTemplate().getOwnershipWorld() == 0)
-				continue;
-			if (item.getItemTemplate().getOwnershipWorld() != player.getWorldId())
-				player.getInventory().decreaseByObjectId(item.getObjectId(), item.getItemCount());
-		}
+		removeRestrictedItemsFromInventoryAndStorage(player,
+			item -> item.getItemTemplate().hasWorldRestrictions() && !item.getItemTemplate().isItemRestrictedToWorld(player.getWorldId()));
 	}
 
 	public static void onLeaveInstance(Player player) {
@@ -309,21 +287,24 @@ public class InstanceService {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_PARTY(InstanceService.INSTANCE_DESTROY_DELAY / 60000));
 			}
 		}
-		for (Item item : player.getInventory().getItems()) {
-			if (item.getItemTemplate().getOwnershipWorld() == player.getWorldId())
+		removeRestrictedItemsFromInventoryAndStorage(player, item -> item.getItemTemplate().isItemRestrictedToWorld(player.getWorldId()));
+
+		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
+			AutoGroupService.getInstance().onLeaveInstance(player);
+	}
+
+	private static void removeRestrictedItemsFromInventoryAndStorage(Player player, Predicate<Item> conditionForItemRemoval) {
+		if (conditionForItemRemoval == null)
+			return;
+		for (Item item : player.getInventory().getItems())
+			if (conditionForItemRemoval.test(item))
 				player.getInventory().decreaseByObjectId(item.getObjectId(), item.getItemCount());
-		}
 		for (Storage storage : player.getPetBag()) {
 			if (storage == null)
 				continue;
-			for (Item item : storage.getItems()) {
-				if (item.getItemTemplate().getOwnershipWorld() == player.getWorldId())
+			for (Item item : storage.getItems())
+				if (conditionForItemRemoval.test(item))
 					storage.decreaseByObjectId(item.getObjectId(), item.getItemCount());
-			}
-		}
-
-		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
-			AutoGroupService.getInstance().onLeaveInstance(player);
 		}
 	}
 

@@ -72,7 +72,7 @@
 	</xs:complexType>
 	<xs:complexType name="UseLimits">
 		<xs:attribute name="guild_level" type="xs:int" use="optional"/>
-		<xs:attribute name="ownership_world" type="xs:int" use="optional"/>
+		<xs:attribute name="ownership_worlds" type="IntListType" use="optional"/>
 		<xs:attribute name="usearea" type="xs:string" use="optional"/>
 		<xs:attribute name="rank_max" type="xs:int" use="optional"/>
 		<xs:attribute name="rank_min" type="xs:int" use="optional"/>
