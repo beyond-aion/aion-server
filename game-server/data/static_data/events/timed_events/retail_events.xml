@@ -3502,80 +3502,94 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="The Lost Words!" start="2015-06-04T00:00:00" end="2015-06-18T00:00:00">
+	<event name="Lost Memories" start="2020-08-03T00:00:00" end="2020-08-16T00:00:00">
 		<quests>
 			<maintainable>80567 80568 80569 80570 80571 80572 80573 80574</maintainable>
 		</quests>
-		<event_drops>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" chance="5" dynamic_chance="true" level_based_chance_reduction="true">
-				<gd_ratings>
-					<gd_rating rating="NORMAL" />
-					<gd_rating rating="ELITE" />
-					<gd_rating rating="HERO" />
-					<gd_rating rating="LEGENDARY" />
-				</gd_ratings>
-				<gd_items>
-					<gd_item id="188052977" /><!-- The Stolen Letter Card A -->
-					<gd_item id="188052978" /><!-- The Stolen Letter Card I -->
-					<gd_item id="188052979" /><!-- The Stolen Letter Card O -->
-					<gd_item id="188052980" /><!-- The Stolen Letter Card B -->
-					<gd_item id="188052981" /><!-- The Stolen Letter Card S -->
-					<gd_item id="188052982" /><!-- The Stolen Letter Card D -->
-					<gd_item id="188052983" /><!-- The Stolen Letter Card E -->
-				</gd_items>
-				<gd_worlds>
-					<gd_world wd_type="ABYSS_INSTANCE" />
-					<gd_world wd_type="ARENA_INSTANCE" />
-					<gd_world wd_type="BALAUREA_INSTANCE" />
-					<gd_world wd_type="DREDGION_INSTANCE" />
-					<gd_world wd_type="STEEL_RAKE_INSTANCE" />
-				</gd_worlds>
-			</gd_rule>
-			<gd_rule rule_name="Aion Community Appreciation Event Drop" chance="0.5" dynamic_chance="true" level_based_chance_reduction="true">
-				<gd_ratings>
-					<gd_rating rating="NORMAL" />
-					<gd_rating rating="ELITE" />
-					<gd_rating rating="HERO" />
-					<gd_rating rating="LEGENDARY" />
-				</gd_ratings>
-				<gd_items>
-					<gd_item id="182007144" /><!-- The Stolen Letter Card N -->
-					<gd_item id="182007145" /><!-- The Stolen Letter Card Y -->
-					<gd_item id="182007146" /><!-- The Stolen Letter Card V -->
-				</gd_items>
-				<gd_worlds>
-					<gd_world wd_type="ABYSS_INSTANCE" />
-					<gd_world wd_type="ARENA_INSTANCE" />
-					<gd_world wd_type="BALAUREA_INSTANCE" />
-					<gd_world wd_type="DREDGION_INSTANCE" />
-					<gd_world wd_type="STEEL_RAKE_INSTANCE" />
-				</gd_worlds>
-			</gd_rule>
-		</event_drops>
 		<spawns>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- Lenarinerk -->
-				<spawn npc_id="832017" respawn_time="295">
-					<spot x="1307.3000" y="1401.2000" z="208.1250" h="21" />
-				</spawn>
 				<!-- Lenarunerk -->
 				<spawn npc_id="832016" respawn_time="295">
-					<spot x="1312.3000" y="1398.0000" z="208.1250" h="108" />
+					<spot x="1312.3000" y="1398.0000" z="208.1250" h="21"/>
+				</spawn>
+				<!-- Lenarinerk -->
+				<spawn npc_id="832017" respawn_time="295">
+					<spot x="1307.3000" y="1401.2000" z="208.1250" h="21"/>
 				</spawn>
 			</spawn_map>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
 				<!-- Lenarunerk -->
 				<spawn npc_id="832016" respawn_time="295">
-					<spot x="1455.4000" y="1451.3000" z="572.8761" h="8" />
+					<spot x="1455.4000" y="1451.3000" z="572.8761" h="8"/>
 				</spawn>
 				<!-- Lenarinerk -->
 				<spawn npc_id="832017" respawn_time="295">
-					<spot x="1457.0000" y="1449.6000" z="572.8755" h="16" />
+					<spot x="1457.0000" y="1449.6000" z="572.8755" h="16"/>
 				</spawn>
 			</spawn_map>
 		</spawns>
+		<event_drops>
+			<gd_rule rule_name="Stolen Letter Cards (regular)" chance="25" member_limit="48" dynamic_chance="true"
+							 level_based_chance_reduction="true">
+				<gd_worlds>
+					<gd_world wd_type="BALAUREA"/>
+					<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+					<gd_world wd_type="BALAUREA_HIGH"/>
+				</gd_worlds>
+				<gd_ratings>
+					<gd_rating rating="NORMAL"/>
+					<gd_rating rating="ELITE"/>
+					<gd_rating rating="HERO"/>
+					<gd_rating rating="LEGENDARY"/>
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="188052977"/><!-- The Stolen Letter Card A -->
+					<gd_item id="188052979"/><!-- The Stolen Letter Card O -->
+					<gd_item id="188052980"/><!-- The Stolen Letter Card B -->
+					<gd_item id="188052983"/><!-- The Stolen Letter Card E -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Stolen Letter Cards (common)" chance="3" dynamic_chance="true"
+							 level_based_chance_reduction="true">
+				<gd_worlds>
+					<gd_world wd_type="BALAUREA"/>
+					<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+					<gd_world wd_type="BALAUREA_HIGH"/>
+				</gd_worlds>
+				<gd_ratings>
+					<gd_rating rating="NORMAL"/>
+					<gd_rating rating="ELITE"/>
+					<gd_rating rating="HERO"/>
+					<gd_rating rating="LEGENDARY"/>
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="188052978"/><!-- The Stolen Letter Card I -->
+					<gd_item id="188052981"/><!-- The Stolen Letter Card S -->
+					<gd_item id="188052982"/><!-- The Stolen Letter Card D -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Stolen Letter Cards (rare)" chance="0.5" dynamic_chance="true"
+							 level_based_chance_reduction="true">
+				<gd_worlds>
+					<gd_world wd_type="BALAUREA"/>
+					<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
+					<gd_world wd_type="BALAUREA_HIGH"/>
+				</gd_worlds>
+				<gd_ratings>
+					<gd_rating rating="NORMAL"/>
+					<gd_rating rating="ELITE"/>
+					<gd_rating rating="HERO"/>
+					<gd_rating rating="LEGENDARY"/>
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="182007144"/><!-- The Stolen Letter Card N -->
+					<gd_item id="182007145"/><!-- The Stolen Letter Card Y -->
+					<gd_item id="182007146"/><!-- The Stolen Letter Card V -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
 	</event>
 	<event name="New Beginning's Event" start="2016-01-30T00:00:00" end="2016-02-16T00:00:00">
 		<spawns>

@@ -571,21 +571,6 @@
 	<decomposable item_id="182007137" /><!-- The Stolen Letter Card D -->
 	<decomposable item_id="182007138" /><!-- The Stolen Letter Card E -->
 	<decomposable item_id="182007143" /><!-- Mysterious Letter Pouch -->
-	<decomposable item_id="182007144"><!-- The Stolen Letter Card N -->
-		<items>
-			<item id="182007147" /><!-- Letter Card Snippet -->
-		</items>
-	</decomposable>
-	<decomposable item_id="182007145"><!-- The Stolen Letter Card Y -->
-		<items>
-			<item id="182007147" /><!-- Letter Card Snippet -->
-		</items>
-	</decomposable>
-	<decomposable item_id="182007146"><!-- The Stolen Letter Card V -->
-		<items>
-			<item id="182007147" /><!-- Letter Card Snippet -->
-		</items>
-	</decomposable>
 	<decomposable item_id="188050000" /><!-- Disassembled Item 1 -->
 	<decomposable item_id="188050001" /><!-- Disassembled Item 2 -->
 	<decomposable item_id="188050002" /><!-- Disassembled Item 3 -->
@@ -12681,19 +12666,19 @@
 	<decomposable item_id="188051600" /><!-- [Event] Everlasting Enchantment Stone Box -->
 	<decomposable item_id="188051601"><!-- Construction Flux Bundle -->
 		<items chance="30.0">
-			<item id="152011092" min_count="1" max_count="5" /><!-- Minor Construction Flux -->
+			<item id="152011092" max_count="5"/><!-- Minor Construction Flux -->
 		</items>
 		<items chance="25.0">
-			<item id="152011093" min_count="1" max_count="4" /><!-- Lesser Construction Flux -->
+			<item id="152011093" max_count="4"/><!-- Lesser Construction Flux -->
 		</items>
 		<items chance="25.0">
-			<item id="152011094" min_count="1" max_count="3" /><!-- Construction Flux -->
+			<item id="152011094" max_count="3"/><!-- Construction Flux -->
 		</items>
 		<items chance="12.5">
-			<item id="152011095" min_count="1" max_count="2" /><!-- Greater Construction Flux -->
+			<item id="152011095" max_count="2"/><!-- Greater Construction Flux -->
 		</items>
 		<items chance="7.5">
-			<item id="152011096" /><!-- Major Construction Flux -->
+			<item id="152011096"/><!-- Major Construction Flux -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051602"><!-- Lesser Enchantment Stone Bundle -->
@@ -16295,8 +16280,28 @@
 			<item id="171110055" /><!-- Eastern Cemallia Flower Wallpaper -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052049" /><!-- Eastern Functional Furniture Pack -->
-	<decomposable item_id="188052050" /><!-- Eastern Furniture Set Pack -->
+	<decomposable item_id="188052049"><!-- Eastern Functional Furniture Pack -->
+		<items>
+			<item id="170420038"/><!-- Eastern Banquet -->
+		</items>
+		<items>
+			<item id="170100025"/><!-- Eastern Butterfly Cabinet -->
+		</items>
+		<items>
+			<item id="170100026"/><!-- Eastern Four Seasons Cabinet -->
+		</items>
+		<items>
+			<item id="170190076"/><!-- Eastern Thourak Guestbloom -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052050"><!-- Eastern Furniture Set Pack -->
+		<items>
+			<item id="188052048"/><!-- Eastern Display Furniture Pack -->
+		</items>
+		<items>
+			<item id="188052049"/><!-- Eastern Functional Furniture Pack -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052051" /><!-- Lesser Blessing Box of Growth I -->
 	<decomposable item_id="188052052" /><!-- Lesser Blessing Box of Growth II -->
 	<decomposable item_id="188052053" /><!-- Lesser Blessing Box of Growth III -->
@@ -17029,15 +17034,6 @@
 			<item id="169120045" /><!-- Paint: Espresso -->
 		</items>
 		<items>
-			<item id="169120003" /><!-- Paint: Blue -->
-		</items>
-		<items>
-			<item id="169120039" /><!-- Paint: Dark Green -->
-		</items>
-		<items>
-			<item id="169120045" /><!-- Paint: Espresso -->
-		</items>
-		<items>
 			<item id="169120040" /><!-- Paint: Green -->
 		</items>
 		<items>
@@ -17060,9 +17056,6 @@
 		</items>
 		<items>
 			<item id="169120002" /><!-- Paint: Pink -->
-		</items>
-		<items>
-			<item id="169120004" /><!-- Paint: Purple -->
 		</items>
 		<items>
 			<item id="169120004" /><!-- Paint: Purple -->
@@ -20622,17 +20615,98 @@
 			<item id="169300011" min_count="25" /><!-- Dimensional Fragment -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052515" /><!-- Animal Set Box -->
-	<decomposable item_id="188052516" /><!-- Cute Cat Set -->
-	<decomposable item_id="188052517" /><!-- Cute Rabbit Set -->
-	<decomposable item_id="188052518" /><!-- Cute Raccoon Set -->
-	<decomposable item_id="188052519" /><!-- Lazy Cat Set -->
-	<decomposable item_id="188052520" /><!-- Lovely Pink Cat Set -->
-	<decomposable item_id="188052521" /><!-- Classy Gray Cat Set -->
-	<decomposable item_id="188052522" /><!-- Lovely Pink Rabbit Set -->
-	<decomposable item_id="188052523" /><!-- Classy Gray Rabbit Set -->
-	<decomposable item_id="188052524" /><!-- Lovely Pink Raccoon Set -->
-	<decomposable item_id="188052525" /><!-- Classy Gray Raccoon Set -->
+	<decomposable item_id="188052515"><!-- Animal Set Box -->
+		<items>
+			<item id="188052516"/><!-- Cute Cat Set -->
+		</items>
+		<items>
+			<item id="188052517"/><!-- Cute Rabbit Set -->
+		</items>
+		<items>
+			<item id="188052518"/><!-- Cute Raccoon Set -->
+		</items>
+		<items>
+			<item id="188052519"/><!-- Lazy Cat Set -->
+		</items>
+		<items>
+			<item id="188052520"/><!-- Lovely Pink Cat Set -->
+		</items>
+		<items>
+			<item id="188052521"/><!-- Classy Gray Cat Set -->
+		</items>
+		<items>
+			<item id="188052522"/><!-- Lovely Pink Rabbit Set -->
+		</items>
+		<items>
+			<item id="188052523"/><!-- Classy Gray Rabbit Set -->
+		</items>
+		<items>
+			<item id="188052524"/><!-- Lovely Pink Raccoon Set -->
+		</items>
+		<items>
+			<item id="188052525"/><!-- Classy Gray Raccoon Set -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052516"><!-- Cute Cat Set -->
+		<items>
+			<item id="110900396"/><!-- Cat Suit -->
+			<item id="125045117"/><!-- Cute Cat Hat -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052517"><!-- Cute Rabbit Set -->
+		<items>
+			<item id="110900397"/><!-- Rabbit Suit -->
+			<item id="125045118"/><!-- Cute Rabbit Hat -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052518"><!-- Cute Raccoon Set -->
+		<items>
+			<item id="110900398"/><!-- Raccoon Suit -->
+			<item id="125045119"/><!-- Cute Raccoon Hat -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052519"><!-- Lazy Cat Set -->
+		<items>
+			<item id="110900396"/><!-- Cat Suit -->
+			<item id="125045135"/><!-- Lazy Cat Hat -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052520"><!-- Lovely Pink Cat Set -->
+		<items>
+			<item id="110900421"/><!-- Lovely Pink Cat Suit -->
+			<item id="125045136"/><!-- Lovely Pink Cat Hat -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052521"><!-- Classy Gray Cat Set -->
+		<items>
+			<item id="110900422"/><!-- Classy Gray Cat Suit -->
+			<item id="125045137"/><!-- Classy Gray Cat Hat -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052522"><!-- Lovely Pink Rabbit Set -->
+		<items>
+			<item id="110900423"/><!-- Lovely Pink Rabbit Suit -->
+			<item id="125045138"/><!-- Lovely Pink Rabbit Hat -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052523"><!-- Classy Gray Rabbit Set -->
+		<items>
+			<item id="110900424"/><!-- Classy Gray Rabbit Suit -->
+			<item id="125045139"/><!-- Classy Gray Rabbit Hat -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052524"><!-- Lovely Pink Raccoon Set -->
+		<items>
+			<item id="110900425"/><!-- Lovely Pink Raccoon Suit -->
+			<item id="125045140"/><!-- Lovely Pink Raccoon Hat -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052525"><!-- Classy Gray Raccoon Set -->
+		<items>
+			<item id="110900426"/><!-- Classy Gray Raccoon Suit -->
+			<item id="125045141"/><!-- Classy Gray Raccoon Hat -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052526"><!-- Mysterious Green Sack -->
 		<items chance="7.0">
 			<item id="167020024" /><!-- Ancient Manastone: HP +105 -->
@@ -24409,11 +24483,18 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052708" /><!-- [Event] Joyful Essence Bundle -->
-	<decomposable item_id="188052709"><!-- [Event] Fleeting Chromanimbus Container(15 days) -->
+	<decomposable item_id="188052709"><!-- [Event] Fleeting Chromanimbus Container (15 days) -->
 		<items>
-			<item id="190100081" /><!-- Goldenimbus (7 days) -->
-			<item id="190100082" /><!-- Goldenimbus (15 days) -->
-			<item id="190100083" /><!-- Goldenimbus (30 days) -->
+			<item id="190100076"/><!-- Rosenimbus (15 days) -->
+		</items>
+		<items>
+			<item id="190100082"/><!-- Goldenimbus (15 days) -->
+		</items>
+		<items>
+			<item id="190100088"/><!-- Ceruleanimbus (15 days) -->
+		</items>
+		<items>
+			<item id="190100094"/><!-- Crimsonimbus (15 days) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052710" /><!-- [Event] Everlasting Chromanimbus Container -->
@@ -25827,7 +25908,20 @@
 	</decomposable>
 	<decomposable item_id="188052937" /><!-- Farushunerk's Bonus Bundle -->
 	<decomposable item_id="188052938" /><!-- Iron Wall Warfront Medal Bundle -->
-	<decomposable item_id="188052939" /><!-- [Event] Fleeting Chromanimbus Container(15 days) -->
+	<decomposable item_id="188052939"><!-- [Event] Fleeting Chromanimbus Container (15 days) -->
+		<items>
+			<item id="190100076"/><!-- Rosenimbus (15 days) -->
+		</items>
+		<items>
+			<item id="190100082"/><!-- Goldenimbus (15 days) -->
+		</items>
+		<items>
+			<item id="190100088"/><!-- Ceruleanimbus (15 days) -->
+		</items>
+		<items>
+			<item id="190100094"/><!-- Crimsonimbus (15 days) -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052940" /><!-- [Event] Coin Bundle -->
 	<decomposable item_id="188052941" /><!-- Hocus Pocus Card Box -->
 	<decomposable item_id="188052942" /><!-- Hocus Pocus Heart Box -->
@@ -25929,48 +26023,69 @@
 	<decomposable item_id="188052976" /><!-- Archon Summoning Scroll Bundle -->
 	<decomposable item_id="188052977"><!-- The Stolen Letter Card A -->
 		<items>
-			<item id="182007147" /><!-- Letter Card Snippet -->
+			<item id="182007147"/><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052978"><!-- The Stolen Letter Card I -->
 		<items>
-			<item id="182007147" /><!-- Letter Card Snippet -->
+			<item id="182007147"/><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052979"><!-- The Stolen Letter Card O -->
 		<items>
-			<item id="182007147" /><!-- Letter Card Snippet -->
+			<item id="182007147"/><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052980"><!-- The Stolen Letter Card B -->
 		<items>
-			<item id="182007147" /><!-- Letter Card Snippet -->
+			<item id="182007147"/><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052981"><!-- The Stolen Letter Card S -->
 		<items>
-			<item id="182007147" /><!-- Letter Card Snippet -->
+			<item id="182007147"/><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052982"><!-- The Stolen Letter Card D -->
 		<items>
-			<item id="182007147" /><!-- Letter Card Snippet -->
+			<item id="182007147"/><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052983"><!-- The Stolen Letter Card E -->
 		<items>
-			<item id="182007147" /><!-- Letter Card Snippet -->
+			<item id="182007147"/><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052984"><!-- Mysterious Letter Pouch -->
 		<items>
-			<item id="182007144" /><!-- The Stolen Letter Card N -->
+			<item id="188052977"/><!-- The Stolen Letter Card A -->
 		</items>
 		<items>
-			<item id="182007145" /><!-- The Stolen Letter Card Y -->
+			<item id="188052978"/><!-- The Stolen Letter Card I -->
 		</items>
 		<items>
-			<item id="182007146" /><!-- The Stolen Letter Card V -->
+			<item id="188052979"/><!-- The Stolen Letter Card O -->
+		</items>
+		<items>
+			<item id="188052980"/><!-- The Stolen Letter Card B -->
+		</items>
+		<items>
+			<item id="188052981"/><!-- The Stolen Letter Card S -->
+		</items>
+		<items>
+			<item id="188052982"/><!-- The Stolen Letter Card D -->
+		</items>
+		<items>
+			<item id="188052983"/><!-- The Stolen Letter Card E -->
+		</items>
+		<items>
+			<item id="182007144"/><!-- The Stolen Letter Card N -->
+		</items>
+		<items>
+			<item id="182007145"/><!-- The Stolen Letter Card Y -->
+		</items>
+		<items>
+			<item id="182007146"/><!-- The Stolen Letter Card V -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052986"><!-- +1 Snowball -->
@@ -26354,10 +26469,10 @@
 	</decomposable>
 	<decomposable item_id="188053000"><!-- [Event] Assured Greater Felicitous Socketing Box -->
 		<items>
-			<item id="188052559" /><!-- Assured Greater Felicitous Socketing Box (Eternal) -->
+			<item id="166150018"/><!-- Assured Greater Felicitous Socketing (Eternal) -->
 		</items>
 		<items>
-			<item id="188052560" /><!-- Assured Greater Felicitous Socketing Box (Mythic) -->
+			<item id="166150019"/><!-- Assured Greater Felicitous Socketing (Mythic) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053001"><!-- [Event] Fabled Godstone Bundle -->
@@ -26671,9 +26786,65 @@
 			<item id="188052719" /><!-- [Event] Dye Bundle -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053009" /><!-- Letter Collector's Greater Bundle -->
-	<decomposable item_id="188053010" /><!-- Letter Collector's Bundle -->
-	<decomposable item_id="188053011" /><!-- Letter Collector's Lesser Bundle -->
+	<decomposable item_id="188053009"><!-- Letter Collector's Greater Bundle -->
+		<items chance="70">
+			<item id="188053783"/><!-- Stigma Sack -->
+			<random_item type="MANASTONE_RARE_GRADE_70"/>
+		</items>
+		<items chance="20">
+			<item id="188053000"/><!-- [Event] Assured Greater Felicitous Socketing Box -->
+			<random_item type="ANCIENTITEMS"/>
+		</items>
+		<items chance="5">
+			<item id="188053666"/><!-- [Event] Ceramium Medal Box -->
+			<random_item type="MANASTONE_LEGEND_GRADE_60"/>
+		</items>
+		<items chance="2.5">
+			<item id="188053666"/><!-- [Event] Ceramium Medal Box -->
+			<item id="188053618"/><!-- Honorable Elim's Idian Bundle -->
+		</items>
+		<items chance="2.5">
+			<item id="188054035"/><!-- [Club] Full Furniture Bundle -->
+			<item id="188052939"/><!-- [Event] Fleeting Chromanimbus Container (15 days) -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053010"><!-- Letter Collector's Bundle -->
+		<items chance="70">
+			<item id="188053617"/><!-- Noble Tidal Idian Bundle -->
+			<item id="186000146" min_count="15"/><!-- Guestpetal -->
+		</items>
+		<items chance="25">
+			<item id="188053667"/><!-- [Event] Mithril Medal Box -->
+			<item id="188051736"/><!-- Dye Petal Bundle -->
+		</items>
+		<items chance="2.5">
+			<item id="188052050"/><!-- Eastern Furniture Set Pack -->
+			<item id="170195021" race="ASMODIANS"/><!-- [Employment Contract] General Goods Merchant -->
+			<item id="170190022" race="ELYOS"/><!-- [Employment Contract] General Goods Merchant -->
+		</items>
+		<items chance="2.5">
+			<item id="188052050"/><!-- Eastern Furniture Set Pack -->
+			<item id="170195022" race="ASMODIANS"/><!-- [Employment Contract] Warehouse Manager -->
+			<item id="170190023" race="ELYOS"/><!-- [Employment Contract] Warehouse Manager -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053011"><!-- Letter Collector's Lesser Bundle -->
+		<items chance="45">
+			<item id="188052164"/><!-- Furniture Paint Bundle -->
+			<item id="186000146" min_count="10"/><!-- Guestpetal -->
+		</items>
+		<items chance="45">
+			<item id="188052719"/><!-- [Event] Dye Bundle -->
+			<item id="186000146" min_count="10"/><!-- Guestpetal -->
+		</items>
+		<items chance="5">
+			<item id="188051564"/><!-- Housing Accessory Bundle -->
+			<item id="188051601"/><!-- Construction Flux Bundle -->
+		</items>
+		<items chance="5">
+			<item id="188052515"/><!-- Animal Set Box -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053012"><!-- Blood Mark Enchantment Chest -->
 		<items chance="90.0">
 			<item id="166100011" min_count="70" /><!-- Greater Supplements (Mythic) -->
@@ -30906,7 +31077,32 @@
 			<item id="166050022" /><!-- Tidal Idian: Resistance -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053617" /><!-- Noble Tidal Idian Bundle -->
+	<decomposable item_id="188053617"><!-- Noble Tidal Idian Bundle -->
+		<items>
+			<item id="166050023"/><!-- Noble Tidal Idian: Physical Attack -->
+		</items>
+		<items>
+			<item id="166050024"/><!-- Noble Tidal Idian: Magical Attack -->
+		</items>
+		<items>
+			<item id="166050025"/><!-- Noble Tidal Idian: Physical Defense -->
+		</items>
+		<items>
+			<item id="166050026"/><!-- Noble Tidal Idian: Magical Defense -->
+		</items>
+		<items>
+			<item id="166050027"/><!-- Noble Tidal Idian: Assistance -->
+		</items>
+		<items>
+			<item id="166050028"/><!-- Noble Tidal Idian: Resistance -->
+		</items>
+		<items>
+			<item id="166050029"/><!-- Noble Tidal Idian: Physical/Magical Attack -->
+		</items>
+		<items>
+			<item id="166050030"/><!-- Noble Tidal Idian: Physical/Magical Defense -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053618"><!-- Honorable Elim's Idian Bundle -->
 		<items>
 			<item id="166050137" /><!-- Honorable Elim's Idian: Physical Attack -->
@@ -31237,12 +31433,12 @@
 	</decomposable>
 	<decomposable item_id="188053666"><!-- [Event] Ceramium Medal Box -->
 		<items>
-			<item id="186000242" min_count="1" max_count="3" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="3"/><!-- Ceramium Medal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053667"><!-- [Event] Mithril Medal Box -->
 		<items>
-			<item id="186000147" min_count="1" max_count="3" /><!-- Mithril Medal -->
+			<item id="186000147" min_count="4"/><!-- Mithril Medal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053668" /><!-- [Event] Sonatine's Friendship Box -->
@@ -34932,7 +35128,62 @@
 	<decomposable item_id="188054032" /><!-- [Club] Employment Contract Bundle -->
 	<decomposable item_id="188054033" /><!-- [Club] Sealed General Goods Merchant Contract -->
 	<decomposable item_id="188054034" /><!-- [Club] Sealed Warehouse Manager Contract -->
-	<decomposable item_id="188054035" /><!-- [Club] Full Furniture Bundle -->
+	<decomposable item_id="188054035"><!-- [Club] Full Furniture Bundle -->
+		<items>
+			<item id="170005024"/><!-- Fancy Club Window -->
+		</items>
+		<items>
+			<item id="170005025"/><!-- Club Restroom Door -->
+		</items>
+		<items>
+			<item id="170100041"/><!-- Club Speaker Cabinet -->
+		</items>
+		<items>
+			<item id="170135045"/><!-- Club Couch -->
+		</items>
+		<items>
+			<item id="170155003"/><!-- Disco Ball Light Standg -->
+		</items>
+		<items>
+			<item id="170155004"/><!-- Green Bottle Lighting -->
+		</items>
+		<items>
+			<item id="170155006"/><!-- Blue Bottle Lighting -->
+		</items>
+		<items>
+			<item id="170160026"/><!-- Club Partition -->
+		</items>
+		<items>
+			<item id="170195137"/><!-- Illuminated Houseplant -->
+		</items>
+		<items>
+			<item id="170195138"/><!-- Graceful Club Tree -->
+		</items>
+		<items>
+			<item id="170205025"/><!-- Vinyl Dancefloor -->
+		</items>
+		<items>
+			<item id="170205026"/><!-- Illuminated Dancefloor -->
+		</items>
+		<items>
+			<item id="170415028"/><!-- Fancy Stool -->
+		</items>
+		<items>
+			<item id="170425040"/><!-- Club Cocktail Table -->
+		</items>
+		<items>
+			<item id="170425041"/><!-- Stylish Club Table -->
+		</items>
+		<items>
+			<item id="170425042"/><!-- Mini Bar -->
+		</items>
+		<items>
+			<item id="171130041"/><!-- Club Ambience Wallpaper -->
+		</items>
+		<items>
+			<item id="171130043"/><!-- Starry Club Floor -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188054036" /><!-- [Event] Frozen Ice Festival Box -->
 	<decomposable item_id="188054037" /><!-- [Event] Engraved Ice Festival Box -->
 	<decomposable item_id="188054038" /><!-- Wave Song Armor Box -->
