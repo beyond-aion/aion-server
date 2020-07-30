@@ -32,7 +32,7 @@
 			28828 [SCRIPT] [Housing] The Many Facets of Friendship
 			28829 [XML] [Housing] The Big Empty
 			28830 [SCRIPT] [Housing] Interior Decorator
-			28831 [SCRIPT] [Housing] Just a Step to the Left...
+			28831 [XML] [Housing] Just a Step to the Left...
 			28832 [SCRIPT] [Housing] Taking the Tour
 			28833 [XML] [Daily] Sprout, Sprout, Let It All Out
 			28834 [XML] [Daily] 'Til the Soil...
@@ -95,6 +95,7 @@
 	<report_to id="28810" start_npc_ids="830118" end_npc_ids="830154"/>
 	<report_to id="28827" start_npc_ids="830153" end_npc_ids="810022 810023 810024 810025 810026"/>
 	<report_to id="28829" start_npc_ids="810022 810023 810024 810025 810026" end_npc_ids="830585"/>
+	<report_to id="28831" start_npc_ids="830651" end_npc_ids="810022 810023 810024 810025 810026"/>
 	<report_to id="28843" start_npc_ids="830532" end_npc_ids="830211"/>
 	<report_to id="28845" start_npc_ids="798459" end_npc_ids="830532"/>
 	<report_to id="28846" start_npc_ids="830466" end_npc_ids="798457"/>
