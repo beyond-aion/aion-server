@@ -110,6 +110,8 @@ public class TemporarySpawnEngine {
 	}
 
 	public static void updateSpawned(int oldObjId, VisibleObject respawn) {
+		if (respawn == null || respawn.getSpawn().getTemporarySpawn() == null)
+			return;
 		synchronized (spawnedObjects) {
 			spawnedObjects.stream().filter(obj -> obj.getObjectId() == oldObjId).findFirst().ifPresent(spawnedObjects::remove);
 			spawnedObjects.add(respawn);
