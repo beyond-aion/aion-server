@@ -47,7 +47,7 @@ public class SpawnSpotTemplate {
 	@XmlElement(name = "temporary_spawn")
 	private TemporarySpawn temporaySpawn;
 
-	@XmlElement(name = "ai")
+	@XmlAttribute(name = "ai")
 	private String ai;
 
 	public SpawnSpotTemplate() {
