@@ -15275,7 +15275,20 @@
 			<item id="170390117" /><!-- Solorius Garden Snowman -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188051879" /><!-- Solorius Furniture Set Box -->
+	<decomposable item_id="188051879"><!-- Solorius Furniture Set Box -->
+		<items>
+			<item id="188051875" /><!-- [Solorius] Display Furniture Pack -->
+		</items>
+		<items>
+			<item id="188051876" /><!-- [Solorius] Functional Furniture Pack -->
+		</items>
+		<items>
+			<item id="188051877" /><!-- [Solorius] Decorative Furniture Pack -->
+		</items>
+		<items>
+			<item id="188051878" /><!-- [Solorius] Garden Furniture Pack -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051880" /><!-- Lesser Pink Point Radama Bundle -->
 	<decomposable item_id="188051881" /><!-- Pink Point Radama Bundle -->
 	<decomposable item_id="188051882" /><!-- Greater Pink Point Radama Bundle -->
@@ -34936,11 +34949,103 @@
 	<decomposable item_id="188053956" /><!-- [Event] Talented Ice Sculptor's Box -->
 	<decomposable item_id="188053957" /><!-- [Event] Enheartened Ice Sculptor's Box -->
 	<decomposable item_id="188053958" /><!-- [Event] Soulful Ice Sculptor's Box -->
-	<decomposable item_id="188053959" /><!-- [Camping] Display Furniture Bag -->
-	<decomposable item_id="188053960" /><!-- [Camping] Functional Furniture Bag -->
-	<decomposable item_id="188053961" /><!-- [Camping] Decorative Wallpaper -->
-	<decomposable item_id="188053962" /><!-- [Camping] Decorative Flooring -->
-	<decomposable item_id="188053963" /><!-- Camping Bundle -->
+	<decomposable item_id="188053959"><!-- [Camping] Display Furniture Bag -->
+		<items>
+			<item id="170115027" /><!-- Camping Essentials -->
+		</items>
+		<items>
+			<item id="170115028" /><!-- Camping Luxuries -->
+		</items>
+		<items>
+			<item id="170115029" /><!-- Roaring Campfire -->
+		</items>
+		<items>
+			<item id="170125025" /><!-- Camping Essentials -->
+		</items>
+		<items>
+			<item id="170155001" /><!-- Camping Lantern -->
+		</items>
+		<items>
+			<item id="170155002" /><!-- Hanging Camping Lantern -->
+		</items>
+		<items>
+			<item id="170205024" /><!-- Camping Mat -->
+		</items>
+		<items>
+			<item id="170415025" /><!-- Comfortable Camping Chair -->
+		</items>
+		<items>
+			<item id="170415026" /><!-- Comfortable Camp Hammock -->
+		</items>
+		<items>
+			<item id="170425038" /><!-- Picnic Table -->
+		</items>
+		<items>
+			<item id="170425039" /><!-- Camping Tent -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053960"><!-- [Camping] Functional Furniture Bag -->
+		<items>
+			<item id="170100039" /><!-- Comfortable Camping Cabinet -->
+		</items>
+		<items>
+			<item id="170100040" /><!-- Pleasant Camping Cabinet -->
+		</items>
+		<items>
+			<item id="170195127" /><!-- Cozy Campfire -->
+		</items>
+		<items>
+			<item id="170195128" /><!-- Cozy Shugo Camper -->
+		</items>
+		<items>
+			<item id="170425036" /><!-- Delicious Camp Smorgasbord -->
+		</items>
+		<items>
+			<item id="170425037" /><!-- Camping Cook-off Grill -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053961"><!-- [Camping] Decorative Wallpaper -->
+		<items>
+			<item id="171130033" /><!-- Bright Spring Camp Wallpaper -->
+		</items>
+		<items>
+			<item id="171130034" /><!-- Fresh Summer Camp Wallpaper -->
+		</items>
+		<items>
+			<item id="171130035" /><!-- Breezy Fall Camp Wallpaper -->
+		</items>
+		<items>
+			<item id="171130036" /><!-- Cozy Winter Camp Wallpaper -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053962"><!-- [Camping] Decorative Flooring -->
+		<items>
+			<item id="171130037" /><!-- Bright Spring Camp Floor -->
+		</items>
+		<items>
+			<item id="171130038" /><!-- Fresh Summer Camp Floor -->
+		</items>
+		<items>
+			<item id="171130039" /><!-- Cool Fall Camp Floor -->
+		</items>
+		<items>
+			<item id="171130040" /><!-- Cozy Winter Camp Floor -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053963"><!-- Camping Bundle -->
+		<items>
+			<item id="188053959" /><!-- [Camping] Display Furniture Bag -->
+		</items>
+		<items>
+			<item id="188053960" /><!-- [Camping] Functional Furniture Bag -->
+		</items>
+		<items>
+			<item id="188053961" /><!-- [Camping] Decorative Wallpaper -->
+		</items>
+		<items>
+			<item id="188053962" /><!-- [Camping] Decorative Flooring -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053964" /><!-- Major Grand Invasion Reward Box -->
 	<decomposable item_id="188053965" /><!-- Greater Grand Invasion Reward Box -->
 	<decomposable item_id="188053966" /><!-- Grand Invasion Reward Box -->
@@ -35123,65 +35228,73 @@
 			<item id="187060103" /><!-- Prestige Wings -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188054030" /><!-- [Club] Decorative Furniture Bundle -->
-	<decomposable item_id="188054031" /><!-- [Club] Functional Furniture Bundle -->
+	<decomposable item_id="188054030"><!-- [Club] Decorative Furniture Bundle -->
+		<items>
+			<item id="170005024" /><!-- Fancy Club Window -->
+		</items>
+		<items>
+			<item id="170005025" /><!-- Club Restroom Door -->
+		</items>
+		<items>
+			<item id="170135045" /><!-- Club Couch -->
+		</items>
+		<items>
+			<item id="170155003" /><!-- Disco Ball Light Stand -->
+		</items>
+		<items>
+			<item id="170155004" /><!-- Green Bottle Lighting -->
+		</items>
+		<items>
+			<item id="170155006" /><!-- Blue Bottle Lighting -->
+		</items>
+		<items>
+			<item id="170160026" /><!-- Club Partition -->
+		</items>
+		<items>
+			<item id="170205025" /><!-- Vinyl Dancefloor -->
+		</items>
+		<items>
+			<item id="170205026" /><!-- Illuminated Dancefloor -->
+		</items>
+		<items>
+			<item id="170415028" /><!-- Fancy Stool -->
+		</items>
+		<items>
+			<item id="170425041" /><!-- Stylish Club Table -->
+		</items>
+		<items>
+			<item id="170425042" /><!-- Mini Bar -->
+		</items>
+		<items>
+			<item id="171130041" /><!-- Club Ambience Wallpaper -->
+		</items>
+		<items>
+			<item id="171130043" /><!-- Starry Club Floor -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054031"><!-- [Club] Functional Furniture Bundle -->
+		<items>
+			<item id="170100041" /><!-- Club Speaker Cabinet -->
+		</items>
+		<items>
+			<item id="170195137" /><!-- Illuminated Houseplant -->
+		</items>
+		<items>
+			<item id="170195138" /><!-- Graceful Club Tree -->
+		</items>
+		<items>
+			<item id="170425040" /><!-- Club Cocktail Table -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188054032" /><!-- [Club] Employment Contract Bundle -->
 	<decomposable item_id="188054033" /><!-- [Club] Sealed General Goods Merchant Contract -->
 	<decomposable item_id="188054034" /><!-- [Club] Sealed Warehouse Manager Contract -->
 	<decomposable item_id="188054035"><!-- [Club] Full Furniture Bundle -->
 		<items>
-			<item id="170005024"/><!-- Fancy Club Window -->
+			<item id="188054030" /><!-- [Club] Decorative Furniture Bundle -->
 		</items>
 		<items>
-			<item id="170005025"/><!-- Club Restroom Door -->
-		</items>
-		<items>
-			<item id="170100041"/><!-- Club Speaker Cabinet -->
-		</items>
-		<items>
-			<item id="170135045"/><!-- Club Couch -->
-		</items>
-		<items>
-			<item id="170155003"/><!-- Disco Ball Light Standg -->
-		</items>
-		<items>
-			<item id="170155004"/><!-- Green Bottle Lighting -->
-		</items>
-		<items>
-			<item id="170155006"/><!-- Blue Bottle Lighting -->
-		</items>
-		<items>
-			<item id="170160026"/><!-- Club Partition -->
-		</items>
-		<items>
-			<item id="170195137"/><!-- Illuminated Houseplant -->
-		</items>
-		<items>
-			<item id="170195138"/><!-- Graceful Club Tree -->
-		</items>
-		<items>
-			<item id="170205025"/><!-- Vinyl Dancefloor -->
-		</items>
-		<items>
-			<item id="170205026"/><!-- Illuminated Dancefloor -->
-		</items>
-		<items>
-			<item id="170415028"/><!-- Fancy Stool -->
-		</items>
-		<items>
-			<item id="170425040"/><!-- Club Cocktail Table -->
-		</items>
-		<items>
-			<item id="170425041"/><!-- Stylish Club Table -->
-		</items>
-		<items>
-			<item id="170425042"/><!-- Mini Bar -->
-		</items>
-		<items>
-			<item id="171130041"/><!-- Club Ambience Wallpaper -->
-		</items>
-		<items>
-			<item id="171130043"/><!-- Starry Club Floor -->
+			<item id="188054031" /><!-- [Club] Functional Furniture Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188054036" /><!-- [Event] Frozen Ice Festival Box -->
