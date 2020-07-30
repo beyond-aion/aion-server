@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../spawns.xsd">
+	<!-- Sanctum -->
+	<spawn_map map_id="110010000">
+		<!-- Training Dummy -->
+		<spawn npc_id="700571" respawn_time="295">
+			<spot x="1441.4403" y="1261.2754" z="564.1405" h="21" />
+			<spot x="1426.101" y="1268.183" z="564.1405" h="21" />
+		</spawn>
+	</spawn_map>
+	<!-- Pandaemonium -->
+	<spawn_map map_id="120010000">
+		<!-- Training Dummy -->
+		<spawn npc_id="700581" respawn_time="295">
+			<spot x="943.6641" y="1603.7838" z="221.81981" h="104" />
+			<spot x="930.929" y="1591.0526" z="221.88731" h="104" />
+		</spawn>
+	</spawn_map>
+</spawns>
