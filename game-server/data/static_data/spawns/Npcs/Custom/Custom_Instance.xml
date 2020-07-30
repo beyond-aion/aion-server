@@ -9,7 +9,7 @@
 		</spawn>
 		<!-- Reian Sorcerer -->
 		<spawn npc_id="800304" respawn_time="295">
-			<spot x="1362.2782" y="1483.8331" z="569.0385" h="104" />
+			<spot x="1362.2782" y="1483.8331" z="569.0385" h="104" ai="custom_instance_reian_teleport_shouter" />
 		</spawn>
 		<!-- Reian Sorcerer -->
 		<spawn npc_id="800464" respawn_time="295">
@@ -17,7 +17,11 @@
 		</spawn>
 		<!-- Elyos Teleporter -->
 		<spawn npc_id="730578" respawn_time="295">
-			<spot x="1366.2594" y="1479.7798" z="569.1393" />
+			<spot x="1366.2594" y="1479.7798" z="569.1393" ai="custom_instance_teleporter" />
+		</spawn>
+		<!-- Info Board -->
+		<spawn npc_id="700906" respawn_time="295">
+			<spot x="1371.2657" y="1486.0785" z="569.0384" h="51" ai="custom_instance_info_board" />
 		</spawn>
 	</spawn_map>
 	<!-- Pandaemonium -->
@@ -29,7 +33,7 @@
 		</spawn>
 		<!-- Reian Sorcerer -->
 		<spawn npc_id="800304" respawn_time="295">
-			<spot x="1612.7560" y="1380.6262" z="193.1278" h="106" />
+			<spot x="1612.7560" y="1380.6262" z="193.1278" h="106" ai="custom_instance_reian_teleport_shouter" />
 		</spawn>
 		<!-- Reian Sorcerer -->
 		<spawn npc_id="800464" respawn_time="295">
@@ -37,7 +41,11 @@
 		</spawn>
 		<!-- Asmodian Teleporter -->
 		<spawn npc_id="730579" respawn_time="295">
-			<spot x="1616.7156" y="1377.0825" z="193.2472" />
+			<spot x="1616.7156" y="1377.0825" z="193.2472" ai="custom_instance_teleporter" />
+		</spawn>
+		<!-- Info Board -->
+		<spawn npc_id="700907" respawn_time="295">
+			<spot x="1613.9137" y="1383.2136" z="193.1278" h="70" ai="custom_instance_info_board" />
 		</spawn>
 	</spawn_map>
 </spawns>

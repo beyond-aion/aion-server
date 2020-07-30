@@ -163,6 +163,8 @@ CREATE TABLE `custom_instance` (
   `rank` int(11) NOT NULL,
   `last_entry` timestamp NOT NULL,
   PRIMARY KEY (`player_id`),
+  KEY `rank` (`rank`),
+  KEY `last_entry` (`last_entry`),
   CONSTRAINT `custom_instance_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

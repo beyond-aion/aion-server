@@ -137,7 +137,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				}
 			}, 80000, 60000);
 
-			if (rank >= CustomInstanceRankEnum.BRONZE.getValue()) {
+			if (rank >= CustomInstanceRankEnum.BRONZE.getMinRank()) {
 				// spawn trash mobs: 1 wave/min after 1min
 				trashMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
@@ -159,7 +159,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				}, 60000, 60000 - rank * 1000); // 60s ... 30s
 			}
 
-			if (rank >= CustomInstanceRankEnum.SILVER.getValue()) {
+			if (rank >= CustomInstanceRankEnum.SILVER.getMinRank()) {
 				// spawn dominator mob: 1/min after 1:40min
 				dominatorMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
@@ -357,43 +357,43 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	}
 
 	private void spawnUnlockableNpcs(Player player) {
-		if (rank >= CustomInstanceRankEnum.BRONZE.getValue()) // + General Goods Merchant
+		if (rank >= CustomInstanceRankEnum.BRONZE.getMinRank()) // + General Goods Merchant
 			if (player.getRace() == Race.ASMODIANS)
 				spawn(205848, 510.84058f, 407.1751f, 93.91156f, (byte) 87);
 			else
 				spawn(205826, 510.84058f, 407.1751f, 93.91156f, (byte) 87);
 
-		if (rank >= CustomInstanceRankEnum.SILVER.getValue()) // + Warehouse Manager
+		if (rank >= CustomInstanceRankEnum.SILVER.getMinRank()) // + Warehouse Manager
 			spawn(205711, 496.6516f, 407.25f, 93.85523f, (byte) 99);
 
-		if (rank >= CustomInstanceRankEnum.GOLD.getValue()) // + Legion Warehouse
+		if (rank >= CustomInstanceRankEnum.GOLD.getMinRank()) // + Legion Warehouse
 			if (player.getRace() == Race.ASMODIANS)
 				spawn(805253, 494.753f, 405.53464f, 93.87636f, (byte) 104);
 			else
 				spawn(805245, 494.753f, 405.53464f, 93.87636f, (byte) 104);
 
-		if (rank >= CustomInstanceRankEnum.PLATINUM.getValue()) // + Mail
+		if (rank >= CustomInstanceRankEnum.PLATINUM.getMinRank()) // + Mail
 			if (player.getRace() == Race.ASMODIANS)
 				spawn(700079, 499.6871f, 406.73828f, 93.84634f, (byte) 91);
 			else
 				spawn(700000, 499.6871f, 406.73828f, 93.84634f, (byte) 91);
 
-		if (rank >= CustomInstanceRankEnum.MITHRIL.getValue()) // + Soul Healer
+		if (rank >= CustomInstanceRankEnum.MITHRIL.getMinRank()) // + Soul Healer
 			spawn(205727, 513.6179f, 405.60223f, 93.91156f, (byte) 82);
 
-		if (rank >= CustomInstanceRankEnum.CERANIUM.getValue()) // + Trade Broker
+		if (rank >= CustomInstanceRankEnum.CERANIUM.getMinRank()) // + Trade Broker
 			if (player.getRace() == Race.ASMODIANS)
 				spawn(205853, 516.24396f, 402.30844f, 93.91156f, (byte) 68);
 			else
 				spawn(798912, 516.24396f, 402.30844f, 93.91156f, (byte) 68);
 
-		if (rank >= CustomInstanceRankEnum.ANCIENT.getValue()) // + Stigma Master
+		if (rank >= CustomInstanceRankEnum.ANCIENT.getMinRank()) // + Stigma Master
 			if (player.getRace() == Race.ASMODIANS)
 				spawn(800765, 493.39554f, 403.7841f, 93.88781f, (byte) 106);
 			else
 				spawn(800760, 493.39554f, 403.7841f, 93.88781f, (byte) 106);
 
-		if (rank >= CustomInstanceRankEnum.ANCIENT_PLUS.getValue()) // + AP Shugo
+		if (rank >= CustomInstanceRankEnum.ANCIENT_PLUS.getMinRank()) // + AP Shugo
 			spawn(804833, 508.1798f, 407.87378f, 93.8523f, (byte) 89);
 	}
 

@@ -52,8 +52,8 @@ public class SM_NPC_INFO extends AionServerPacket {
 		writeF(npc.getY());
 		writeF(npc.getZ());
 		writeD(npc.getObjectId());
-		writeD(npcTemplate.getTemplateId()); // npc id
-		writeD(npcTemplate.getTemplateId());
+		writeD(npcTemplate.getTemplateId()); // npc id reference for hp gauge + talk properties
+		writeD(npcTemplate.getTemplateId()); // npc id reference for visual appearance
 		writeC(creatureType.getId());
 
 		/*

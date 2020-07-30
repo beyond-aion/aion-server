@@ -142,4 +142,27 @@ public enum PlayerClass implements L10n {
 				return false;
 		}
 	}
+
+	public String getIconImage() {
+		return switch (this) {
+			case WARRIOR -> "textures/ui/EMBLEM/icon_emblem_warrior.dds";
+			case GLADIATOR -> "textures/ui/EMBLEM/icon_emblem_fighter.dds";
+			case TEMPLAR -> "textures/ui/EMBLEM/icon_emblem_knight.dds";
+			case SCOUT -> "textures/ui/EMBLEM/icon_emblem_scout.dds";
+			case ASSASSIN -> "textures/ui/EMBLEM/icon_emblem_assassin.dds";
+			case RANGER -> "textures/ui/EMBLEM/icon_emblem_ranger.dds";
+			case MAGE -> "textures/ui/EMBLEM/icon_emblem_mage.dds";
+			case SORCERER -> "textures/ui/EMBLEM/icon_emblem_wizard.dds";
+			case SPIRIT_MASTER -> "textures/ui/EMBLEM/icon_emblem_elementalist.dds";
+			case PRIEST -> "textures/ui/EMBLEM/icon_emblem_cleric.dds"; // cleric and priest images are switched in client
+			case CLERIC -> "textures/ui/EMBLEM/icon_emblem_priest.dds"; // cleric and priest images are switched in client
+			case CHANTER -> "textures/ui/EMBLEM/icon_emblem_chanter.dds";
+			case ENGINEER -> "textures/ui/EMBLEM/Icon_emblem_Engineer.dds";
+			case RIDER -> "textures/ui/EMBLEM/Icon_emblem_Rider.dds";
+			case GUNNER -> "textures/ui/EMBLEM/Icon_emblem_Gunner.dds";
+			case ARTIST -> "textures/ui/EMBLEM/Icon_emblem_Artist.dds";
+			case BARD -> "textures/ui/EMBLEM/Icon_emblem_Bard.dds";
+			case ALL -> null;
+		};
+	}
 }

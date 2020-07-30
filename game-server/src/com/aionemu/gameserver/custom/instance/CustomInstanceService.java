@@ -10,19 +10,23 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
 import com.aionemu.gameserver.dao.CustomInstanceDAO;
 import com.aionemu.gameserver.dao.CustomInstancePlayerModelEntryDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.services.HTMLService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -38,6 +42,7 @@ public class CustomInstanceService {
 	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
 	public static final int REWARD_COIN_ID = 186000409;
 	private static final int CUSTOM_INSTANCE_WORLD_ID = 300070000; // roah chamber
+	private static final int LEADERBOARD_WINDOW_OBJECT_ID = IDFactory.getInstance().nextId();
 
 	// Neural network related
 	private Map<Integer, List<PlayerModelEntry>> playerModelEntriesCache = new ConcurrentHashMap<>();
@@ -119,6 +124,39 @@ public class CustomInstanceService {
 
 	public List<PlayerModelEntry> getPlayerModelEntries(int playerId) {
 		return playerModelEntriesCache.computeIfAbsent(playerId, k -> new ArrayList<>());
+	}
+
+	public void openLeaderboard(Player player, Race race) {
+		List<CustomInstanceRankedPlayer> rankedPlayers = DAOManager.getDAO(CustomInstanceDAO.class).loadTop10(race);
+		String content = """
+			<br><br><br>
+			<font color='3E2601' size='4'>Eternal Challenge Leaderboard</font><br>
+			<br>
+			<img src='textures/ui/basic_sep1.dds' width='300' height='2'><br>
+			<br><br>
+			<table>
+				<tr>
+					<th align='right'><font color='3E2601'>#</font></th>
+					<th>&nbsp;&nbsp;</th>
+					<th colspan='2' align='center'><font color='3E2601'>Name</font></th>
+					<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+					<th align='center'><font color='3E2601'>Rank</font></th>
+				</tr>
+			""";
+		int rank = 1;
+		for (CustomInstanceRankedPlayer p : rankedPlayers) {
+			content += "<tr>";
+			content += "  <td align='right'><font color='3E2601'>" + rank++ + "</font></td>";
+			content += "  <td></td>";
+			content += "  <td background='textures/black_smoke2.DDS'><img src='" + p.getPlayerClass().getIconImage() + "' width='24'></td>";
+			content += "  <td><font color='3E2601'>" + p.getName() + "</font></td>";
+			content += "  <td></td>";
+			content += "  <td><font color='3E2601'>" + CustomInstanceRankEnum.getRankDescription(p.getRank()) + "</font></td>";
+			content += "</tr>";
+		}
+		content += "</table>";
+		String page = HTMLCache.getInstance().getHTML("simplePageTemplate.xhtml");
+		HTMLService.sendData(player, LEADERBOARD_WINDOW_OBJECT_ID, page.replace("%content%", content));
 	}
 
 	private static class SingletonHolder {

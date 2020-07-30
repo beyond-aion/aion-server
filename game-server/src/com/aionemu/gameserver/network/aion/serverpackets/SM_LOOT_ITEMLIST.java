@@ -4,8 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
 
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.drop.Drop;
 import com.aionemu.gameserver.model.drop.DropItem;
@@ -26,11 +24,6 @@ public class SM_LOOT_ITEMLIST extends AionServerPacket {
 	public SM_LOOT_ITEMLIST(int targetObjectId, Set<DropItem> setItems, Player player) {
 		this.targetObjectId = targetObjectId;
 		this.dropItems = new ArrayList<>();
-		if (setItems == null) {
-			LoggerFactory.getLogger(SM_LOOT_ITEMLIST.class).warn("null Set<DropItem>, skip");
-			return;
-		}
-
 		for (DropItem item : setItems) {
 			if (item.canViewDropItem(player.getObjectId()))
 				dropItems.add(item);
