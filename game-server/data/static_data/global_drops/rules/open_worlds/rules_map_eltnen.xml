@@ -1445,4 +1445,72 @@
 			<gd_item id="182200558" /><!-- doc_quest_1197a -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="5">
+		<gd_maps>
+			<gd_map map_id="210020000" /><!-- Eltnen -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="MANDURI_FOREST_210020000" />
+		</gd_zones>
+		<gd_npcs>
+			<gd_npc npc_id="210763" /><!-- Manduri Gatherer -->
+			<gd_npc npc_id="210764" /><!-- Manduri Hunter -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182201304" /><!-- Worn Book -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="5">
+		<gd_maps>
+			<gd_map map_id="210020000" /><!-- Eltnen -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="EASTERN_ERACUS_DESERT_210020000" />
+		</gd_zones>
+		<gd_npcs>
+			<gd_npc npc_id="210918" /><!-- Devourer Sheluk -->
+			<gd_npc npc_id="210880" /><!-- Red-tipped Sheluk -->
+			<gd_npc npc_id="210901" /><!-- Red-tipped Sheluk -->
+			<gd_npc npc_id="211754" /><!-- Rotting Gnarl -->
+			<gd_npc npc_id="210821" /><!-- Thorntail Scolopen -->
+			<gd_npc npc_id="210845" /><!-- Thorntail Scolopen -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000015" /><!-- Tarnished Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="5">
+		<gd_maps>
+			<gd_map map_id="210020000" /><!-- Eltnen -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="KYOLA_TEMPLE_210020000" />
+		</gd_zones>
+		<gd_npcs>
+			<gd_npc npc_id="211849" /><!-- Chaotic Temptress -->
+			<gd_npc npc_id="210957" /><!-- Inflamed Temptress -->
+			<gd_npc npc_id="211844" /><!-- Raging Obscura -->
+			<gd_npc npc_id="211814" /><!-- Shadow Obscura -->
+			<gd_npc npc_id="211815" /><!-- Shadow Obscura -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182201400" /><!-- Fire Temple Key -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="5">
+		<gd_maps>
+			<gd_map map_id="210020000" /><!-- Eltnen -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="KURIULLU_MOUNTAIN_210020000" />
+			<gd_zone zone="LEPHARIST_BASTION_210020000" />
+			<gd_zone zone="KURIULLU_PASS_210020000" />
+		</gd_zones>
+		<gd_npc_groups>
+			<gd_npc_group group="PRETOR" />
+		</gd_npc_groups>
+		<gd_items>
+			<gd_item id="182201342" /><!-- Paper Slip -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

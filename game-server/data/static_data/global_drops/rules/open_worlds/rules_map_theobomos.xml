@@ -368,4 +368,18 @@
 			<gd_item id="121000794" /><!-- Octaku's Necklace -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="50">
+		<gd_maps>
+			<gd_map map_id="210060000" /><!-- Theobomos -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="MARLA_CAVE_210060000" />
+		</gd_zones>
+		<gd_npcs>
+			<gd_npc npc_id="214578" /><!-- Mabolo of Death -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182208041" /><!-- Stone of Mabolo -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

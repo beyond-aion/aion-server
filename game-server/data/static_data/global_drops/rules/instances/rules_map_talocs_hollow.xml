@@ -266,4 +266,12 @@
 			<gd_item id="164000138" /><!-- Gellmar's Wardstone -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="2">
+		<gd_maps>
+			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
+		</gd_maps>
+		<gd_items>
+			<gd_item id="182209524" /><!-- Hard Seed -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

@@ -1533,4 +1533,79 @@
 			<gd_item id="152012030"/><!-- Stone Misery Fragment -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="3">
+		<gd_maps>
+			<gd_map map_id="210040000" /><!-- Heiron -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="HEIRONOPOLIS_210040000" />
+			<gd_zone zone="VAIZELS_PEAK_210040000" />
+		</gd_zones>
+		<gd_npc_groups>
+			<gd_npc_group group="ETTIN" />
+		</gd_npc_groups>
+		<gd_items>
+			<gd_item id="182201710" /><!-- Leather Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="50">
+		<gd_maps>
+			<gd_map map_id="210040000" /><!-- Heiron -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="ORTON_FARM_210040000" />
+		</gd_zones>
+		<gd_npcs>
+			<gd_npc npc_id="212126" /><!-- Miserly Iscraw -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182201728" /><!-- Parchment Map -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="3">
+		<gd_maps>
+			<gd_map map_id="210040000" /><!-- Heiron -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="LEPHARIST_RESEARCH_CENTER_210040000" />
+		</gd_zones>
+		<gd_npc_groups>
+			<gd_npc_group group="LEPHAR" />
+		</gd_npc_groups>		
+		<gd_items>
+			<gd_item id="182201744" /><!-- Mapping the Revolutionaries -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="3">
+		<gd_maps>
+			<gd_map map_id="210040000" /><!-- Heiron -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="STENON_BAY_210040000" />
+		</gd_zones>
+		<gd_npc_groups>
+			<gd_npc_group group="UNDEADLIGHT_WI" />
+			<gd_npc_group group="UNDEADLIGHT_FI" />
+		</gd_npc_groups>
+		<gd_items>
+			<gd_item id="182201765" /><!-- Old Letter -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="3">
+		<gd_maps>
+			<gd_map map_id="210040000" /><!-- Heiron -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="NOLANTIS_RUINS_210040000" />
+			<gd_zone zone="STENON_BAY_210040000" />
+		</gd_zones>
+		<gd_npc_groups>
+			<gd_npc_group group="SKELETON" />
+			<gd_npc_group group="UNDEADLIGHT_FI" />
+			<gd_npc_group group="GRAVEKNIGHT" />
+		</gd_npc_groups>
+		<gd_items>
+			<gd_item id="182201789" /><!-- Broken Flute -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

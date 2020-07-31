@@ -455,4 +455,21 @@
 			<gd_item id="111600387" /><!-- Mepisto's Gauntlets -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Quest-Start Item" chance="3">
+		<gd_maps>
+			<gd_map map_id="210030000" /><!-- Verteron -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="TURSIN_GARRISON_210030000" />
+			<gd_zone zone="TURSIN_OUTPOST_210030000" />
+		</gd_zones>
+		<gd_npc_groups>
+			<gd_npc_group group="KRALLWARRIOR" />
+			<gd_npc_group group="KRALLSCOUT" />
+			<gd_npc_group group="KRALLSHAMAN" />
+		</gd_npc_groups>
+		<gd_items>
+			<gd_item id="182200549" /><!-- Ancient Stone Fragment -->
+		</gd_items>
+	</gd_rule>
 </global_rules>
