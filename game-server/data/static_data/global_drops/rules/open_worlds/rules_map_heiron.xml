@@ -1608,4 +1608,38 @@
 			<gd_item id="182201789" /><!-- Broken Flute -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Golden Lepharist Insignia (Elite)" chance="75">
+		<gd_maps>
+			<gd_map map_id="210040000" /><!-- Heiron -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="LEPHARIST_BASTION_210020000" />
+		</gd_zones>
+		<gd_npc_groups>
+			<gd_npc_group group="LEPHAR" />
+		</gd_npc_groups>
+		<gd_ratings>
+			<gd_rating rating="ELITE" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="186000046" /><!-- Golden Lepharist Insignia -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Golden Lepharist Insignia" chance="15">
+		<gd_maps>
+			<gd_map map_id="210040000" /><!-- Heiron -->
+		</gd_maps>
+		<gd_zones>
+			<gd_zone zone="LEPHARIST_BASTION_210020000" />
+		</gd_zones>
+		<gd_npc_groups>
+			<gd_npc_group group="LEPHAR" />
+		</gd_npc_groups>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="186000046" /><!-- Golden Lepharist Insignia -->
+		</gd_items>
+	</gd_rule>
 </global_rules>
