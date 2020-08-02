@@ -29678,8 +29678,40 @@
 	<decomposable item_id="188053334" /><!-- Generous Blessing Box -->
 	<decomposable item_id="188053335" /><!-- Sensible Daeva's Box -->
 	<decomposable item_id="188053336" /><!-- Rising Daeva's Box -->
-	<decomposable item_id="188053337" /><!-- Exquisite Daeva's Box -->
-	<decomposable item_id="188053338" /><!-- Exquisite Daeva's Outfit Box -->
+	<decomposable item_id="188053337"><!-- Exquisite Daeva's Box -->
+		<items>
+			<item id="169600207" /><!-- [Emotion Card] Juggling -->
+		</items>
+		<items>
+			<item id="188053338" /><!-- Exquisite Daeva's Outfit Box -->
+		</items>
+		<items>
+			<item id="188508004" /><!-- [Motion Card] Private Store Sign -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053338"><!-- Exquisite Daeva's Outfit Box -->
+		<items>
+			<item id="110900767" /><!-- Classic Coat -->
+		</items>
+		<items>
+			<item id="110900768" /><!-- Leopard Tights -->
+		</items>
+		<items>
+			<item id="110900769" /><!-- Leopard Mustang -->
+		</items>
+		<items>
+			<item id="110900770" /><!-- Leopard Bikini -->
+		</items>
+		<items>
+			<item id="110900771" /><!-- Retro Club Outfit -->
+		</items>
+		<items>
+			<item id="110900772" /><!-- Duster -->
+		</items>
+		<items>
+			<item id="110900773" /><!-- Mesmerizing Club Outfit -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053339"><!-- Ancestor's Reward Bundle -->
 		<items chance="80">
 			<item id="186000236" min_count="10" max_count="20" /><!-- Blood Mark -->

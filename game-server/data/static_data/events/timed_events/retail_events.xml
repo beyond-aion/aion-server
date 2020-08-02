@@ -5634,7 +5634,7 @@
 					<gd_npc npc_id="235619"/><!-- Warmage Suyaroka -->
 					<gd_npc npc_id="235620"/><!-- Chief Medic Tagnu -->
 					<gd_npc npc_id="235621"/><!-- Virulent Ukahim -->
-					<gd_npc npc_id="236277"/><!-- Tiamat Lv65 -->
+					<gd_npc npc_id="702729"/><!-- Tiamat's Huge Treasure Crate (Anguished Dragon Lords Refuge) -->
 				</gd_npcs>
 			</gd_rule>
 		</event_drops>
