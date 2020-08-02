@@ -416,8 +416,30 @@ public class AttackUtil {
 		if (template instanceof NoReduceSpellATKInstantEffect)
 			return true;
 		if (template instanceof ProcAtkInstantEffect && effect.getSkillTemplate().isProvoked()) { // proc effects of skills like 8583
-			if (!effect.getStack().startsWith("ITEM_SKILL_PROC") && !effect.getStack().startsWith("BA_N_")) // exclude godstones and bard skills
-				return true;
+			// TODO: find pattern or extract <apply_magical_skill_boost_bonus> and <apply_magical_critical> from server files. What about missing ones?
+			switch (effect.getStack().toLowerCase()) {
+				case "nwi_delayspell_dd_proca_tal":
+				case "ngu_vritra_delayspell_dd_proca_tal":
+				case "sgfi_procts_air":
+				case "ab1_artifact_hellfire":
+				case "ldf4b_c3_artifact_tiamat_delayatk":
+				case "ldf4b_t4_artifact_crystal_dd":
+				case "ldf4b_t3_artifact_fury_dd":
+				case "ldf4b_t2_artifact_gravity_openaerial":
+				case "ldf4b_t2_artifact_gravity_dd":
+				case "ldf4b_t1_artifact_crack_stumble_mpatk":
+				case "ldf4b_t1_artifact_crack_dd":
+				case "idtiamat_tahabata_adddmgtobleed":
+				case "kn_turnaggressiveeffect":
+				case "tiamatdown_tiamatagent_bomb":
+				case "idtiamat_thor_procatk":
+				case "idyun_vasharti_refdmg_red":
+				case "idyun_vasharti_refdmg_blue":
+				case "ldf4b_d3_buff_poison_proc":
+				case "ldf4b_tatar_procatk":
+				case "idforest_wave_trico_proclight":
+					return true;
+			}
 		}
 		return false;
 	}
