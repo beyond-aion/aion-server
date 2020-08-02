@@ -175,6 +175,18 @@
 			80582 [XML] [Event] Second Path to Glory
 			80583 [XML] [Event] Third Flight to Glory
 			80584 [XML] [Event] Third Path to Glory
+			80623 [XML] [Event/Daily] Pierodan's Belongings
+			80624 [XML] [Event/Daily] Pierodan's Belongings
+			80625 [XML] [Event/Daily] For the Victory of Tuperunerk
+			80626 [XML] [Event/Daily] The Last Card
+			80627 [XML] [Event] Cold Royal Flush
+			80628 [XML] [Event] Cold Royal Flush
+			80629 [XML] [Event] Dishonest 7th Heart
+			80630 [XML] [Event] Dishonest 7th Heart
+			80631 [XML] [Event/Daily] Four of a Kind
+			80632 [XML] [Event/Daily] Four of a Kind
+			80633 [XML] [Event/Daily] Lost Card
+			80634 [XML] [Event/Daily] Lost Card
 			80645 [XML] [Event] Efforts for Honor 1
 			80646 [XML] [Event] Efforts for Honor 2
 			80647 [XML] [Event] Efforts for Honor 3
@@ -270,6 +282,8 @@
 	<!-- CUSTOM: report_to id="80578" start_npc_ids="832041" end_npc_ids="832041"/-->
 	<!-- CUSTOM: report_to id="80580" start_npc_ids="832040" end_npc_ids="832040"/-->
 	<report_to id="80689" start_npc_ids="832921" end_npc_ids="832922"/>
+	<report_to id="80623" start_npc_ids="832870"/>
+	<report_to id="80624" start_npc_ids="832871"/>
 	<report_to id="80708" start_npc_ids="833503"/>
 	
 	<!-- COLLECTING QUESTS -->
@@ -318,6 +332,16 @@
 	<item_collecting id="80582" start_npc_ids="832015"/>
 	<item_collecting id="80583" start_npc_ids="832014"/>
 	<item_collecting id="80584" start_npc_ids="832015"/>
+	<item_collecting id="80625" start_npc_ids="832876"/>
+	<item_collecting id="80626" start_npc_ids="832877"/>
+	<item_collecting id="80627" start_npc_ids="832868"/>
+	<item_collecting id="80628" start_npc_ids="832869"/>
+	<item_collecting id="80629" start_npc_ids="832868"/>
+	<item_collecting id="80630" start_npc_ids="832869"/>
+	<item_collecting id="80631" start_npc_ids="832878"/>
+	<item_collecting id="80632" start_npc_ids="832879"/>
+	<item_collecting id="80633" start_npc_ids="832880"/>
+	<item_collecting id="80634" start_npc_ids="832881"/>
 	<item_collecting id="80645" start_npc_ids="832913"/>
 	<item_collecting id="80646" start_npc_ids="832913"/>
 	<item_collecting id="80647" start_npc_ids="832913"/>
