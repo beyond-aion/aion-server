@@ -582,4 +582,8 @@
 	<chest npc_id="701983">
 		<key_item item_ids="0" count="1" />
 	</chest>
+	<!-- Joker's Wild Event -->
+	<chest npc_id="832260">
+		<key_item item_ids="185000199" count="1" />
+	</chest>
 </chest_templates>

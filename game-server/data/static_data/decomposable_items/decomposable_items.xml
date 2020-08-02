@@ -14417,7 +14417,29 @@
 	<decomposable item_id="188051788" /><!-- [Event] Chaos Gift Bundle -->
 	<decomposable item_id="188051789" /><!-- [Event] Surprise Crafted Weapon Box -->
 	<decomposable item_id="188051790" /><!-- [Event] New Recruit Weapon Box -->
-	<decomposable item_id="188051791" /><!-- [Event] World's Traditional Costume Box -->
+	<decomposable item_id="188051791"><!-- [Event] World's Traditional Costume Box -->
+		<items>
+			<item id="110900361" /><!-- [Event] Striped Costume -->
+		</items>
+		<items>
+			<item id="110900362" /><!-- [Event] Kimono -->
+		</items>
+		<items>
+			<item id="110900363" /><!-- [Event] Imperial Costume -->
+		</items>
+		<items>
+			<item id="110900364" /><!-- [Event] Chipao/Changpao -->
+		</items>
+		<items>
+			<item id="110900365" /><!-- [Event] Dandy/Bustle -->
+		</items>
+		<items>
+			<item id="110900366" /><!-- [Event] Caftan/Sarafan -->
+		</items>
+		<items>
+			<item id="110900367" /><!-- [Event] Himation/Chiton -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051792"><!-- Greater Bundle of Kahrun's Symbols -->
 		<items>
 			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
@@ -29656,8 +29678,40 @@
 	<decomposable item_id="188053334" /><!-- Generous Blessing Box -->
 	<decomposable item_id="188053335" /><!-- Sensible Daeva's Box -->
 	<decomposable item_id="188053336" /><!-- Rising Daeva's Box -->
-	<decomposable item_id="188053337" /><!-- Exquisite Daeva's Box -->
-	<decomposable item_id="188053338" /><!-- Exquisite Daeva's Outfit Box -->
+	<decomposable item_id="188053337"><!-- Exquisite Daeva's Box -->
+		<items>
+			<item id="169600207" /><!-- [Emotion Card] Juggling -->
+		</items>
+		<items>
+			<item id="188053338" /><!-- Exquisite Daeva's Outfit Box -->
+		</items>
+		<items>
+			<item id="188508004" /><!-- [Motion Card] Private Store Sign -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053338"><!-- Exquisite Daeva's Outfit Box -->
+		<items>
+			<item id="110900767" /><!-- Classic Coat -->
+		</items>
+		<items>
+			<item id="110900768" /><!-- Leopard Tights -->
+		</items>
+		<items>
+			<item id="110900769" /><!-- Leopard Mustang -->
+		</items>
+		<items>
+			<item id="110900770" /><!-- Leopard Bikini -->
+		</items>
+		<items>
+			<item id="110900771" /><!-- Retro Club Outfit -->
+		</items>
+		<items>
+			<item id="110900772" /><!-- Duster -->
+		</items>
+		<items>
+			<item id="110900773" /><!-- Mesmerizing Club Outfit -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053339"><!-- Ancestor's Reward Bundle -->
 		<items chance="80">
 			<item id="186000236" min_count="10" max_count="20" /><!-- Blood Mark -->
@@ -30795,11 +30849,109 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053527" /><!-- [Event] Flying Pagati Box (7 days) -->
-	<decomposable item_id="188053528" /><!-- [Event] Heart Mini Trump -->
-	<decomposable item_id="188053529" /><!-- [Event] Club Mini Trump -->
-	<decomposable item_id="188053530" /><!-- [Event] Heart 7 (1&amp;6) -->
-	<decomposable item_id="188053531" /><!-- [Event] Heart 7 (2&amp;5) -->
-	<decomposable item_id="188053532" /><!-- [Event] Heart 7 (3&amp;4) -->
+	<decomposable item_id="188053528"><!-- [Event] Heart Mini Trump -->
+		<items>
+			<item id="188100238" /><!-- [Event] 2 of Hearts -->
+		</items>
+		<items>
+			<item id="188100239" /><!-- [Event] 3 of Hearts -->
+		</items>
+		<items>
+			<item id="188100240" /><!-- [Event] 4 of Hearts -->
+		</items>
+		<items>
+			<item id="188100241" /><!-- [Event] 5 of Hearts -->
+		</items>
+		<items>
+			<item id="188100242" /><!-- [Event] 6 of Hearts -->
+		</items>
+		<items>
+			<item id="160010400" /><!-- [Event] 7 of Hearts -->
+		</items>
+		<items>
+			<item id="160010385" /><!-- [Event] 8 of Hearts -->
+		</items>
+		<items>
+			<item id="160010386" /><!-- [Event] 9 of Hearts -->
+		</items>
+		<items>
+			<item id="160010387" /><!-- [Event] 10 of Hearts -->
+		</items>
+		<items>
+			<item id="160010388" /><!-- [Event] Jack of Hearts -->
+		</items>
+		<items>
+			<item id="160010389" /><!-- [Event] Queen of Hearts -->
+		</items>
+		<items>
+			<item id="160010390" /><!-- [Event] König of Hearts -->
+		</items>
+		<items>
+			<item id="188100237" /><!-- [Event] Ace of Hearts -->
+		</items>
+		<items>
+			<item id="160010401" /><!-- [Event] Red Joker -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053529"><!-- [Event] Club Mini Trump -->
+		<items>
+			<item id="160010391" /><!-- [Event] 2 of Clubs -->
+		</items>
+		<items>
+			<item id="160010392" /><!-- [Event] 3 of Clubs -->
+		</items>
+		<items>
+			<item id="160010393" /><!-- [Event] 4 of Clubs -->
+		</items>
+		<items>
+			<item id="160010394" /><!-- [Event] 5 of Clubs -->
+		</items>
+		<items>
+			<item id="160010395" /><!-- [Event] 6 of Clubs -->
+		</items>
+		<items>
+			<item id="160010396" /><!-- [Event] 7 of Clubs -->
+		</items>
+		<items>
+			<item id="160010397" /><!-- [Event] 8 of Clubs -->
+		</items>
+		<items>
+			<item id="160010398" /><!-- [Event] 9 of Clubs -->
+		</items>
+		<items>
+			<item id="188100244" /><!-- [Event] 10 of Clubs -->
+		</items>
+		<items>
+			<item id="188100245" /><!-- [Event] Jack of Clubs -->
+		</items>
+		<items>
+			<item id="188100246" /><!-- [Event] Queen of Clubs -->
+		</items>
+		<items>
+			<item id="188100247" /><!-- [Event] King of Clubs -->
+		</items>
+		<items>
+			<item id="188100243" /><!-- [Event] Ace of Clubs -->
+		</items>
+		<items>
+			<item id="160010402" /><!-- [Event] Black Joker -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053530"><!-- [Event] Heart 7 (1&amp;6) -->
+		<items>
+			<item id="160010400" /><!-- [Event] 7 of Hearts -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053531"><!-- [Event] Heart 7 (2&amp;5) -->
+		<items>
+			<item id="160010400" /><!-- [Event] 7 of Hearts -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053532"><!-- [Event] Heart 7 (3&amp;4) -->
+		<items>
+			<item id="160010400" /><!-- [Event] 7 of Hearts -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053533" /><!-- [Event] Mastarius' Armor Memory Box -->
 	<decomposable item_id="188053534" /><!-- [Event] Veille's Armor Memory Box -->
 	<decomposable item_id="188053535" /><!-- Castellan Consumables Bundle -->

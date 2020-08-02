@@ -3855,7 +3855,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Joker's Wild Event" start="2015-01-07T00:00:00" end="2015-01-21T00:00:00">
+	<event name="Joker's Wild Event" start="2020-08-01T00:00:00" end="2020-08-01T23:59:59">
 		<quests>
 			<maintainable>80623 80624 80625 80626 80627 80628 80629 80630 80631 80632 80633 80634</maintainable>
 		</quests>
@@ -3863,113 +3863,247 @@
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
 				<!-- Joker's Secret Box -->
-				<spawn npc_id="832260" respawn_time="295">
-					<spot x="1503.8" y="1438.3" z="572.8711" h="40" />
-					<spot x="1503.8" y="1438.3" z="572.8711" h="40" />
-					<spot x="1506.3" y="1439.9" z="572.8712" h="40" />
-					<spot x="1510.7" y="1438.8" z="572.8712" h="40" />
-					<spot x="1507.9" y="1437.3" z="572.8711" h="40" />
-					<spot x="1505.1" y="1435.8" z="572.871" h="40" />
-					<spot x="1508.9" y="1441.5" z="572.8713" h="40" />
-					<spot x="1508.9" y="1441.5" z="572.8713" h="40" />
-					<spot x="1510.7" y="1438.8" z="572.8712" h="40" />
-					<spot x="1506.3" y="1439.9" z="572.8712" h="40" />
-					<spot x="1507.9" y="1437.3" z="572.8711" h="40" />
-					<spot x="1508.9" y="1441.5" z="572.8713" h="40" />
+				<spawn npc_id="832260" respawn_time="10">
+					<spot x="1503.3" y="1438.5" z="572.8712" h="40" />
+					<spot x="1505.0" y="1435.5" z="572.8712" h="40" />
+					<spot x="1506.3" y="1440.2" z="572.8712" h="40" />
+					<spot x="1508.0" y="1437.2" z="572.8712" h="40" />
+					<spot x="1509.3" y="1441.8" z="572.8712" h="40" />
+					<spot x="1511.0" y="1438.8" z="572.8712" h="40" />
 				</spawn>
 				<!-- World_FOBJ_TrumpTable -->
 				<spawn npc_id="832867" respawn_time="295">
-					<spot x="1508" y="1452.8" z="572.8718" h="51" />
+					<spot x="1508.0" y="1452.8" z="572.8718" h="51" />
 				</spawn>
-				<!-- Allace -->
+				<!-- Allas -->
 				<spawn npc_id="832868" respawn_time="295">
-					<spot x="1504.4" y="1443.6" z="572.8713" h="3" />
+					<spot x="1503.6" y="1443.3" z="572.8718" h="45" />
 				</spawn>
-				<!-- Pierrogaroden -->
+				<!-- Pierodan -->
 				<spawn npc_id="832870" respawn_time="295">
-					<spot x="1506" y="1444.8" z="572.8714" h="44" />
+					<spot x="1506.0" y="1444.8" z="572.8718" h="45" />
 				</spawn>
 				<!-- Croke -->
 				<spawn npc_id="832872" respawn_time="295">
-					<spot x="1503.3" y="1442.5" z="572.8715" h="17" />
+					<spot x="1500.6" y="1442.1" z="572.8718" h="17" />
 				</spawn>
 				<!-- Luis -->
 				<spawn npc_id="832874" respawn_time="295">
-					<spot x="1507" y="1450.6" z="572.8716" h="21" />
+					<spot x="1507.0" y="1450.6" z="572.8718" h="21" />
 				</spawn>
 				<!-- Tuperunerk -->
 				<spawn npc_id="832876" respawn_time="295">
-					<spot x="1509.2" y="1451.7" z="572.8717" h="49" />
+					<spot x="1509.2" y="1451.2" z="572.8718" h="49" />
 				</spawn>
-				<!-- Houserinrinerk -->
+				<!-- Housrinerk -->
 				<spawn npc_id="832877" respawn_time="295">
-					<spot x="1509.8" y="1453.1" z="572.8718" h="54" />
+					<spot x="1509.9" y="1452.65" z="572.8718" h="54" />
 				</spawn>
-				<!-- Scrooge -->
+				<!-- Scroog -->
 				<spawn npc_id="832878" respawn_time="295">
-					<spot x="1506.5" y="1452.9" z="572.8718" h="1" />
+					<spot x="1506.5" y="1453.0" z="572.8718" />
 				</spawn>
-				<!-- Triply -->
+				<!-- Tripli -->
 				<spawn npc_id="832880" respawn_time="295">
-					<spot x="1507.4" y="1454.2" z="572.8718" h="104" />
+					<spot x="1507.2" y="1454.2" z="572.8718" h="104" />
+				</spawn>
+				<!-- Dronk -->
+				<spawn npc_id="832882" respawn_time="295">
+					<spot x="1509.4" y="1455.2" z="572.8718" h="106" />
 				</spawn>
 			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
 				<!-- Joker's Secret Box -->
-				<spawn npc_id="832260" respawn_time="295">
-					<spot x="1270.9" y="1351.4" z="204.4608" />
-					<spot x="1270.9" y="1346.8" z="204.4608" />
-					<spot x="1279.7" y="1346.8" z="204.4608" />
-					<spot x="1275.2" y="1351.4" z="204.4608" />
-					<spot x="1275.2" y="1346.8" z="204.4608" />
-					<spot x="1279.7" y="1351.4" z="204.4608" />
-					<spot x="1275.2" y="1351.4" z="204.4608" />
-					<spot x="1275.2" y="1346.8" z="204.4608" />
-					<spot x="1275.2" y="1346.8" z="204.4608" />
-					<spot x="1270.9" y="1346.8" z="204.4608" />
-					<spot x="1270.9" y="1346.8" z="204.4608" />
-					<spot x="1270.9" y="1346.8" z="204.4608" />
-					<spot x="1270.9" y="1346.8" z="204.4608" />
+				<spawn npc_id="832260" respawn_time="10">
+					<spot x="1271.7" y="1339.4" z="204.4608" h="90" />
+					<spot x="1275.7" y="1339.4" z="204.4608" h="90" />
+					<spot x="1279.7" y="1339.4" z="204.4608" h="90" />
+					<spot x="1271.7" y="1334.4" z="204.4608" h="90" />
+					<spot x="1275.7" y="1334.4" z="204.4608" h="90" />
+					<spot x="1279.7" y="1334.4" z="204.4608" h="90" />
 				</spawn>
 				<!-- World_FOBJ_TrumpTable -->
 				<spawn npc_id="832867" respawn_time="295">
-					<spot x="1276" y="1331" z="204.42" h="30" />
+					<spot x="1276.0" y="1319.0" z="204.42" h="30" />
 				</spawn>
-				<!-- Allace -->
+				<!-- Allas -->
 				<spawn npc_id="832869" respawn_time="295">
-					<spot x="1275.4" y="1340" z="204.42" h="90" />
+					<spot x="1275.7" y="1328.0" z="204.42" h="90" />
 				</spawn>
-				<!-- Pierrogaroden -->
+				<!-- Pierodan -->
 				<spawn npc_id="832871" respawn_time="295">
-					<spot x="1277.9" y="1340" z="204.42" h="113" />
+					<spot x="1277.9" y="1327.5" z="204.42" h="113" />
 				</spawn>
 				<!-- Croke -->
 				<spawn npc_id="832873" respawn_time="295">
-					<spot x="1274.3" y="1340.1" z="204.42" h="108" />
+					<spot x="1272.5" y="1328.0" z="204.42" h="108" />
 				</spawn>
 				<!-- Luis -->
 				<spawn npc_id="832875" respawn_time="295">
-					<spot x="1274" y="1331" z="204.42" h="2" />
+					<spot x="1274.0" y="1319.0" z="204.42" />
 				</spawn>
 				<!-- Tuperunerk -->
 				<spawn npc_id="832876" respawn_time="295">
-					<spot x="1277.1" y="1332.4" z="204.42" h="84" />
+					<spot x="1277.0" y="1320.4" z="204.42" h="84" />
 				</spawn>
-				<!-- Houserinrinerk -->
+				<!-- Housrinerk -->
 				<spawn npc_id="832877" respawn_time="295">
-					<spot x="1275.5" y="1332.4" z="204.42" h="90" />
+					<spot x="1275.0" y="1320.4" z="204.42" h="90" />
 				</spawn>
-				<!-- Scrooge -->
+				<!-- Scroog -->
 				<spawn npc_id="832879" respawn_time="295">
-					<spot x="1275" y="1329.6" z="204.42" h="19" />
+					<spot x="1275.0" y="1317.4" z="204.42" h="19" />
 				</spawn>
-				<!-- Triply -->
+				<!-- Tripli -->
 				<spawn npc_id="832881" respawn_time="295">
-					<spot x="1277.2" y="1329.8" z="204.42" h="35" />
+					<spot x="1277.0" y="1317.4" z="204.42" h="35" />
+				</spawn>
+				<!-- Dronk -->
+				<spawn npc_id="832883" respawn_time="295">
+					<spot x="1278.8" y="1319.0" z="204.42" h="21" />
 				</spawn>
 			</spawn_map>
 		</spawns>
+		<event_drops>
+			<gd_rule rule_name="Trump Rift Drop" chance="50" member_limit="6">
+				<gd_items>
+					<gd_item id="188053528" /><!-- [Event] Heart Mini Trump -->
+					<gd_item id="188053529" /><!-- [Event] Club Mini Trump -->
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="210050000" /><!-- Inggison -->
+					<gd_map map_id="220070000" /><!-- Gelkmaros -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="209520" /><!-- Inggison Sentinel -->
+					<gd_npc npc_id="209523" /><!-- Gelkmaros Protector -->
+					<gd_npc npc_id="209534" /><!-- Inggison Elite Templar -->
+					<gd_npc npc_id="209535" /><!-- Inggison Elite Gladiator -->
+					<gd_npc npc_id="209536" /><!-- Inggison Elite Ranger -->
+					<gd_npc npc_id="209537" /><!-- Inggison Elite Sorcerer -->
+					<gd_npc npc_id="209538" /><!-- Inggison Elite Cleric -->
+					<gd_npc npc_id="209549" /><!-- Gelkmaros Elite Templar -->
+					<gd_npc npc_id="209550" /><!-- Gelkmaros Elite Gladiator -->
+					<gd_npc npc_id="209551" /><!-- Gelkmaros Elite Ranger -->
+					<gd_npc npc_id="209552" /><!-- Gelkmaros Elite Sorcerer -->
+					<gd_npc npc_id="209553" /><!-- Gelkmaros Elite Cleric -->
+				</gd_npcs>
+			</gd_rule>
+			<gd_rule rule_name="Trump Single Drop" chance="8">
+				<gd_items>
+					<gd_item id="188053528" /><!-- [Event] Heart Mini Trump -->
+					<gd_item id="188053529" /><!-- [Event] Club Mini Trump -->
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="600010000" /><!-- Silentera Canyon -->
+				</gd_maps>
+			</gd_rule>
+			<gd_rule rule_name="Trump Boss Drop" chance="100" member_limit="12">
+				<gd_items>
+					<gd_item id="188053528" /><!-- [Event] Heart Mini Trump -->
+					<gd_item id="188053529" /><!-- [Event] Club Mini Trump -->
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
+					<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
+					<gd_map map_id="300630000" /><!-- Anguished_Dragon_Lords_Refuge -->
+					<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
+					<gd_map map_id="301110000" /><!-- Danuar_Reliquary -->
+					<gd_map map_id="301360000" /><!-- Infernal_Danuar_Reliquary -->
+					<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
+					<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
+					<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
+					<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest -->
+					<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate (Dragon Lords Refuge) -->
+					<gd_npc npc_id="702729" /><!-- Tiamat's Huge Treasure Crate (Anguished Dragon Lords Refuge) -->
+					<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+					<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
+					<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
+					<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
+					<gd_npc npc_id="701795" /><!-- Treasure Box (Danuar Reliquary) -->
+					<gd_npc npc_id="234691" /><!-- Crazed Modor -->
+					<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
+					<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
+					<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
+					<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
+					<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
+					<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
+					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
+					<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
+				</gd_npcs>
+			</gd_rule>
+			<gd_rule rule_name="Joker's Secret Box (regular)" chance="100" max_drop_rule="3">
+				<gd_maps>
+					<gd_map map_id="110010000" /><!-- Sanctum -->
+					<gd_map map_id="120010000" /><!-- Pandaemonium -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="832260" />
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="162000137" min_count="2" /><!-- Sublime Life Serum -->
+					<gd_item id="162000139" min_count="2" /><!-- Sublime Mana Serum -->
+					<gd_item id="162000141" min_count="2" /><!-- Sublime Wind Serum -->
+					<gd_item id="162000107" min_count="5" /><!-- Saam King's Herbs -->
+					<gd_item id="162000023" min_count="5" /><!-- Greater Healing Potion -->
+					<gd_item id="186000237" min_count="25" /><!-- Ancient Coin -->
+					<gd_item id="186000238" min_count="25" /><!-- Conqueror's Mark -->
+					<gd_item id="186000243" min_count="5" /><!-- Fragmented Ceramium -->
+					<gd_item id="188052632" min_count="2" /><!-- [Event] Superior Manastone Bundle -->
+					<gd_item id="186000199" min_count="10" /><!-- Legion Coin -->
+					<gd_item id="166020000" max_count="2" /><!-- Omega Enchantment Stone -->
+					<gd_item id="166030005" max_count="2" /><!-- Tempering Solution -->
+					<gd_item id="166500002" max_count="2" /><!-- Amplification Stone -->
+					<gd_item id="188054198" /><!-- Greater Scroll Bundle -->
+					<gd_item id="186000247" /><!-- Major Danuar Relic -->
+					<gd_item id="188053783" /><!-- Stigma Sack -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Joker's Secret Box (common)" chance="15">
+				<gd_maps>
+					<gd_map map_id="110010000" /><!-- Sanctum -->
+					<gd_map map_id="120010000" /><!-- Pandaemonium -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="832260" />
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188051621" /><!-- [Event] Small Jester Costume Box -->
+					<gd_item id="188051791" /><!-- [Event] World's Traditional Costume Box -->
+					<gd_item id="188052636" /><!-- [Event] Lesser Composite Manastone Bundle -->
+					<gd_item id="188052637" /><!-- [Event] Greater Composite Manastone Bundle -->
+					<gd_item id="188052717" /><!-- [Event] Noble Idian Bundle -->
+					<gd_item id="188053636" /><!-- Blood Mark Box -->
+					<gd_item id="169620082" /><!-- Gathering Boost Charm II - 100% -->
+					<gd_item id="169620094" /><!-- Crafting Boost Charm III - 100% -->
+					<gd_item id="160010401" /><!-- [Event] Red Joker -->
+					<gd_item id="160010402" /><!-- [Event] Black Joker -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Joker's Secret Box (rare)" chance="5">
+				<gd_maps>
+					<gd_map map_id="110010000" /><!-- Sanctum -->
+					<gd_map map_id="120010000" /><!-- Pandaemonium -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="832260" />
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
+					<gd_item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
+					<gd_item id="188053005" /><!-- [Event] Hyperion's Wing Chest -->
+					<gd_item id="166200021" /><!-- Mythic Weapon Tuning Scroll -->
+					<gd_item id="166200022" /><!-- Mythic Armor Tuning Scroll -->
+					<gd_item id="169600099" /><!-- [Emotion Card] Juggling -->
+					<gd_item id="169650000" /><!-- Plastic Surgery Ticket -->
+					<gd_item id="169660000" /><!-- Gender Switch Ticket -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
 	</event>
 	<event name="Legendary Symphony" start="2020-04-10T00:00:00" end="2020-04-22T23:59:59">
 		<quests>
@@ -5500,7 +5634,7 @@
 					<gd_npc npc_id="235619"/><!-- Warmage Suyaroka -->
 					<gd_npc npc_id="235620"/><!-- Chief Medic Tagnu -->
 					<gd_npc npc_id="235621"/><!-- Virulent Ukahim -->
-					<gd_npc npc_id="236277"/><!-- Tiamat Lv65 -->
+					<gd_npc npc_id="702729"/><!-- Tiamat's Huge Treasure Crate (Anguished Dragon Lords Refuge) -->
 				</gd_npcs>
 			</gd_rule>
 		</event_drops>
