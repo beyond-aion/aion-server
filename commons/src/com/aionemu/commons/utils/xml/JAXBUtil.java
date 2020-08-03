@@ -32,9 +32,15 @@ public class JAXBUtil {
 	}
 
 	public static String serialize(Object obj) {
+		return serialize(obj, null);
+	}
+
+	public static String serialize(Object obj, String schemaFile) {
 		try {
 			JAXBContext jc = JAXBContext.newInstance(obj.getClass());
 			Marshaller m = jc.createMarshaller();
+			if (schemaFile != null)
+				m.setSchema(XmlUtil.getSchema(schemaFile));
 			m.setProperty(Marshaller.JAXB_ENCODING, "UTF-8");
 			m.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
 			StringWriter sw = new StringWriter();

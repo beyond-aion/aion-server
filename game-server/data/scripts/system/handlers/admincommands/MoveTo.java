@@ -66,7 +66,7 @@ public class MoveTo extends AdminCommand {
 		}
 
 		if (params.length >= 1) {
-			int npcId = getNpcId(params);
+			int npcId = getNpcId(admin, params);
 			if (npcId > 0) {
 				sendInfo(admin, "Teleported to " + ChatUtil.path(npcId, true) + ".");
 				TeleportService.teleportToNpc(admin, npcId);
@@ -121,16 +121,16 @@ public class MoveTo extends AdminCommand {
 		TeleportService.teleportTo(admin, pos);
 	}
 
-	private int getNpcId(String... params) {
+	private int getNpcId(Player admin, String... params) {
 		if (NumberUtils.isDigits(params[0])) {
 			int npcId = NumberUtils.toInt(params[0]);
-			if (npcId > 0 && DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(0, npcId) != null)
+			if (npcId > 0 && DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(admin.getWorldId(), npcId) != null)
 				return npcId;
 		} else {
 			String npcName = String.join(" ", params).toLowerCase();
 			for (NpcTemplate template : DataManager.NPC_DATA.getNpcData().valueCollection()) {
 				if (template.getName().toLowerCase().equals(npcName)) {
-					if (DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(0, template.getTemplateId()) != null)
+					if (DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(admin.getWorldId(), template.getTemplateId()) != null)
 						return template.getTemplateId();
 				}
 			}

@@ -94,7 +94,7 @@
 			<spot x="456.353" y="511.38" z="206.736" h="61" static_id="135"/>
 		</spawn>
 		<!-- Guard Kirrin -->
-		<spawn npc_id="213943" respawn_time="295" custom="true">
+		<spawn npc_id="213943" respawn_time="295">
 			<spot x="563.6" y="506.71" z="199.73503" h="59" walker_id="B25537018991A4C79334DF5A3602273575A3DA15"/>
 			<spot x="567.71" y="568.12" z="199.73503" h="94" walker_id="034C0381295C4DEEA238FC76C6BD1FD5EC17B396"/>
 			<spot x="587.61" y="521.11" z="199.73503" h="32" walker_id="CE5DE586C947F549EFBC51D13EF682A501BC434C"/>

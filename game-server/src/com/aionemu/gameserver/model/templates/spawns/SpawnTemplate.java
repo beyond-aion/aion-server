@@ -21,7 +21,6 @@ public class SpawnTemplate {
 	private int fly;
 	private String anchor;
 	private SpawnGroup spawnGroup;
-	private EventTemplate eventTemplate;
 	private String aiName;
 	private int state;
 	private int creatorId;
@@ -94,6 +93,10 @@ public class SpawnTemplate {
 
 	public byte getHeading() {
 		return h;
+	}
+
+	public void setHeading(byte h) {
+		this.h = h;
 	}
 
 	public int getStaticId() {
@@ -173,15 +176,11 @@ public class SpawnTemplate {
 	}
 
 	public boolean isEventSpawn() {
-		return eventTemplate != null;
+		return getEventTemplate() != null;
 	}
 
 	public EventTemplate getEventTemplate() {
-		return eventTemplate;
-	}
-
-	public void setEventTemplate(EventTemplate eventTemplate) {
-		this.eventTemplate = eventTemplate;
+		return spawnGroup.getEventTemplate();
 	}
 
 	public String getAiName() {

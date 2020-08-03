@@ -11,6 +11,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
+import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
@@ -33,13 +34,15 @@ public class SpawnGroup extends AbstractLockManager {
 	private TemporarySpawn temporarySpawn;
 	private int respawnTime;
 	private SpawnHandlerType handlerType;
-	private List<SpawnTemplate> spots = new ArrayList<>();
+	private List<SpawnTemplate> spots;
 	private HashMap<Integer, HashMap<SpawnTemplate, Boolean>> poolUsedTemplates;
+	private EventTemplate eventTemplate;
 
 	public SpawnGroup(int worldId, int npcId, int respawnTime) {
 		this.worldId = worldId;
 		this.npcId = npcId;
 		this.respawnTime = respawnTime;
+		this.spots = new ArrayList<>(1);
 	}
 
 	public SpawnGroup(int worldId, Spawn spawn) {
@@ -47,8 +50,6 @@ public class SpawnGroup extends AbstractLockManager {
 		initializing(spawn);
 		for (SpawnSpotTemplate template : spawn.getSpawnSpotTemplates()) {
 			SpawnTemplate spawnTemplate = new SpawnTemplate(this, template);
-			if (spawn.isEventSpawn())
-				spawnTemplate.setEventTemplate(spawn.getEventTemplate());
 			spots.add(spawnTemplate);
 		}
 	}
@@ -117,6 +118,9 @@ public class SpawnGroup extends AbstractLockManager {
 		difficultId = spawn.getDifficultId();
 		if (hasPool())
 			poolUsedTemplates = new HashMap<>();
+		spots = new ArrayList<>(spawn.getSpawnSpotTemplates().size());
+		if (spawn.isEventSpawn())
+			eventTemplate = spawn.getEventTemplate();
 	}
 
 	public List<SpawnTemplate> getSpawnTemplates() {
@@ -150,6 +154,10 @@ public class SpawnGroup extends AbstractLockManager {
 
 	public boolean hasPool() {
 		return pool > 0;
+	}
+
+	public byte getDifficultId() {
+		return difficultId;
 	}
 
 	public int getRespawnTime() {
@@ -234,8 +242,7 @@ public class SpawnGroup extends AbstractLockManager {
 		}
 	}
 
-	public byte getDifficultId() {
-		return difficultId;
+	public EventTemplate getEventTemplate() {
+		return eventTemplate;
 	}
-
 }

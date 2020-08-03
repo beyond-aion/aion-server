@@ -1,45 +1,28 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileOutputStream;
-import java.util.AbstractMap.SimpleEntry;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Set;
+import java.io.IOException;
+import java.nio.file.*;
+import java.nio.file.attribute.BasicFileAttributes;
+import java.util.*;
+import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
-import javax.xml.bind.JAXBContext;
-import javax.xml.bind.Marshaller;
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
-import javax.xml.validation.Schema;
+import javax.xml.bind.annotation.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.utils.xml.XmlUtil;
+import com.aionemu.commons.taskmanager.AbstractLockManager;
+import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
-import com.aionemu.gameserver.model.templates.spawns.Spawn;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
-import com.aionemu.gameserver.model.templates.spawns.SpawnMap;
-import com.aionemu.gameserver.model.templates.spawns.SpawnSearchResult;
-import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.model.templates.spawns.*;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawn;
 import com.aionemu.gameserver.model.templates.spawns.mercenaries.MercenaryRace;
 import com.aionemu.gameserver.model.templates.spawns.mercenaries.MercenarySpawn;
@@ -51,28 +34,25 @@ import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawn;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.WorldType;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
- * @author xTz
- * @modified Rolandas, Neon
+ * @author xTz, Rolandas, Neon
  */
 @XmlRootElement(name = "spawns")
 @XmlType(namespace = "", name = "SpawnsData")
 @XmlAccessorType(XmlAccessType.NONE)
-public class SpawnsData {
+public class SpawnsData extends AbstractLockManager {
 
 	private static final Logger log = LoggerFactory.getLogger(SpawnsData.class);
 
 	@XmlElement(name = "spawn_map", type = SpawnMap.class)
 	private List<SpawnMap> templates;
 
-	private TIntObjectHashMap<Map<Integer, SimpleEntry<SpawnGroup, Spawn>>> allSpawnMaps = new TIntObjectHashMap<>();
+	private TIntObjectHashMap<TIntObjectHashMap<List<SpawnGroup>>> allSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup>> baseSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup>> riftSpawnMaps = new TIntObjectHashMap<>();
 	private TIntObjectHashMap<List<SpawnGroup>> siegeSpawnMaps = new TIntObjectHashMap<>();
@@ -83,21 +63,31 @@ public class SpawnsData {
 
 	public void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (SpawnMap map : templates) {
-			Map<Integer, SimpleEntry<SpawnGroup, Spawn>> mapSpawns = allSpawnMaps.get(map.getMapId());
-			if (mapSpawns == null) {
-				mapSpawns = new LinkedHashMap<>();
-				allSpawnMaps.put(map.getMapId(), mapSpawns);
-			}
+			TIntObjectHashMap<List<SpawnGroup>> mapSpawns = allSpawnMaps.get(map.getMapId());
+			writeLock();
+			try {
+				if (mapSpawns == null) {
+					mapSpawns = new TIntObjectHashMap<>();
+						allSpawnMaps.put(map.getMapId(), mapSpawns);
+				}
 
-			List<Integer> customs = new ArrayList<>();
-			for (Spawn spawn : map.getSpawns()) {
-				if (spawn.isCustom()) {
-					if (mapSpawns.containsKey(spawn.getNpcId()))
+				List<Integer> customs = new ArrayList<>();
+				for (Spawn spawn : map.getSpawns()) {
+					if (customs.contains(spawn.getNpcId()))
+						continue;
+					if (spawn.isCustom()) {
 						mapSpawns.remove(spawn.getNpcId());
-					customs.add(spawn.getNpcId());
-				} else if (customs.contains(spawn.getNpcId()))
-					continue;
-				mapSpawns.put(spawn.getNpcId(), new SimpleEntry<>(new SpawnGroup(map.getMapId(), spawn), spawn));
+						customs.add(spawn.getNpcId());
+					}
+					List<SpawnGroup> spawnGroups = mapSpawns.get(spawn.getNpcId());
+					if (spawnGroups == null) {
+						spawnGroups = new ArrayList<>(1);
+						mapSpawns.put(spawn.getNpcId(), spawnGroups);
+					}
+					spawnGroups.add(new SpawnGroup(map.getMapId(), spawn));
+				}
+			} finally {
+				writeUnlock();
 			}
 
 			for (BaseSpawn baseSpawn : map.getBaseSpawns()) {
@@ -187,7 +177,7 @@ public class SpawnsData {
 				}
 			}
 		}
-		allNpcIds = allSpawnMaps.valueCollection().stream().flatMap(spawn -> spawn.keySet().stream()).collect(Collectors.toSet());
+		allNpcIds = allSpawnMaps.valueCollection().stream().flatMap(spawn -> IntStream.of(spawn.keys()).boxed()).collect(Collectors.toSet());
 		allNpcIds.addAll(baseSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
 		allNpcIds
 			.addAll(siegeSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
@@ -199,22 +189,30 @@ public class SpawnsData {
 	}
 
 	public void clearTemplates() {
-		if (templates != null) {
-			templates.clear();
-			templates = null;
-		}
+		templates = null;
 	}
 
 	public List<SpawnGroup> getSpawnsByWorldId(int worldId) {
-		if (!allSpawnMaps.containsKey(worldId))
-			return Collections.emptyList();
-		return allSpawnMaps.get(worldId).values().stream().map(e -> e.getKey()).collect(Collectors.toList());
+		readLock();
+		try {
+			TIntObjectHashMap<List<SpawnGroup>> spawnGroupsByNpcId = allSpawnMaps.get(worldId);
+			if (spawnGroupsByNpcId == null)
+				return Collections.emptyList();
+			return spawnGroupsByNpcId.valueCollection().stream().flatMap(Collection::stream).collect(Collectors.toList());
+		} finally {
+			readUnlock();
+		}
 	}
 
-	public Spawn getSpawnsForNpc(int worldId, int npcId) {
-		if (!allSpawnMaps.containsKey(worldId) || !allSpawnMaps.get(worldId).containsKey(npcId))
-			return null;
-		return allSpawnMaps.get(worldId).get(npcId).getValue();
+	public List<SpawnGroup> getSpawnsForNpc(int worldId, int npcId) {
+		readLock();
+		try {
+			TIntObjectHashMap<List<SpawnGroup>> spawnGroupsByNpcId = allSpawnMaps.get(worldId);
+			List<SpawnGroup> spawnGroups = spawnGroupsByNpcId == null ? null : spawnGroupsByNpcId.get(npcId);
+			return spawnGroups == null ? Collections.emptyList() : spawnGroups;
+		} finally {
+			readUnlock();
+		}
 	}
 
 	public List<SpawnGroup> getBaseSpawnsByLocId(int id) {
@@ -247,128 +245,115 @@ public class SpawnsData {
 			return false;
 		if (spawn.isTemporarySpawn()) // spawn start and end times of temporary world spawns (shugos, agrints, ...) would get lost
 			return false;
-		Spawn oldGroup = DataManager.SPAWNS_DATA.getSpawnsForNpc(visibleObject.getWorldId(), spawn.getNpcId());
 
-		File xml = new File("./data/static_data/spawns/" + getRelativePath(visibleObject));
-		SpawnsData data = null;
-		Schema schema = XmlUtil.getSchema("./data/static_data/spawns/spawns.xsd");
-		JAXBContext jc;
-		boolean addGroup = false;
-
-		try {
-			jc = JAXBContext.newInstance(SpawnsData.class);
-		} catch (Exception e) {
-			log.error("Could not create JAXB context for XML unmarshalling!", e);
-			return false;
+		String folder = "./data/static_data/spawns/" + getRelativePath(visibleObject);
+		String fileName = visibleObject.getWorldId() + "_" + visibleObject.getPosition().getWorldMapInstance().getParent().getName().replace(' ', '_')
+			+ ".xml";
+		File xml = new File(folder + "/New/" + fileName);
+		String schema = "./data/static_data/spawns/spawns.xsd";
+		SpawnsData data = xml.isFile() ? JAXBUtil.deserialize(xml, SpawnsData.class, schema) : new SpawnsData();
+		SpawnMap spawnMap = data.templates == null ? null
+			: data.templates.stream().filter(m -> m.getMapId() == visibleObject.getWorldId()).findFirst().orElse(null);
+		if (spawnMap == null) {
+			spawnMap = new SpawnMap(visibleObject.getWorldId());
+			if (data.templates == null)
+				data.templates = Collections.singletonList(spawnMap);
+			else
+				data.templates.add(spawnMap);
 		}
-
-		if (xml.exists()) {
-			try (FileInputStream fin = new FileInputStream(xml)) {
-				Unmarshaller unmarshaller = jc.createUnmarshaller();
-				unmarshaller.setSchema(schema);
-				data = (SpawnsData) unmarshaller.unmarshal(fin);
-			} catch (Exception e) {
-				log.error("Could not load old XML file!", e);
-				return false;
-			}
+		Spawn oldGroup = findSpawnTemplate(spawnMap, spawn); // find in new file
+		if (oldGroup == null) {
+			oldGroup = loadSpawnsFromTemplateFiles(folder, schema, spawn); // load from old files
+			if (oldGroup != null)
+				spawnMap.getSpawns().add(oldGroup);
 		}
-
-		if (oldGroup == null || oldGroup.isCustom()) {
-			if (data == null)
-				data = new SpawnsData();
-
-			oldGroup = data.getSpawnsForNpc(visibleObject.getWorldId(), spawn.getNpcId());
-			if (oldGroup == null) {
-				oldGroup = new Spawn(spawn.getNpcId(), spawn.getRespawnTime(), spawn.getHandlerType());
-				addGroup = true;
-			}
-		} else {
-			if (data == null)
-				data = DataManager.SPAWNS_DATA;
-			// only remove from memory, will be added back later
-			allSpawnMaps.get(visibleObject.getWorldId()).remove(spawn.getNpcId());
-			addGroup = true;
+		if (oldGroup == null) {
+			oldGroup = new Spawn(spawn.getNpcId(), spawn.getRespawnTime(), spawn.getHandlerType());
+			spawnMap.getSpawns().add(oldGroup);
 		}
+		oldGroup.setCustom(true);
 
 		SpawnSpotTemplate spot = new SpawnSpotTemplate(visibleObject.getX(), visibleObject.getY(), visibleObject.getZ(), visibleObject.getHeading(),
 			visibleObject.getSpawn().getRandomWalkRange(), visibleObject.getSpawn().getWalkerId(), visibleObject.getSpawn().getWalkerIndex());
-		boolean changeX = visibleObject.getX() != spawn.getX();
-		boolean changeY = visibleObject.getY() != spawn.getY();
-		boolean changeZ = visibleObject.getZ() != spawn.getZ();
-		boolean changeH = visibleObject.getHeading() != spawn.getHeading();
-		if (changeH && visibleObject instanceof Npc) {
-			if (visibleObject.getHeading() > 120) // xsd validation fails on negative numbers or if greater than 120 (=360 degrees)
-				visibleObject.getPosition().setH((byte) (visibleObject.getHeading() - 120));
-			else if (visibleObject.getHeading() < 0)
-				visibleObject.getPosition().setH((byte) (visibleObject.getHeading() + 120));
-		}
-
-		SpawnSpotTemplate oldSpot = null;
-		for (SpawnSpotTemplate s : oldGroup.getSpawnSpotTemplates()) {
-			if (s.getX() == spot.getX() && s.getY() == spot.getY() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading()) {
-				if (delete || !Objects.equals(s.getWalkerId(), spot.getWalkerId())) {
-					oldSpot = s;
-					break;
-				} else
-					return false; // nothing to change
-			} else if (changeX && s.getY() == spot.getY() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading()
-				|| changeY && s.getX() == spot.getX() && s.getZ() == spot.getZ() && s.getHeading() == spot.getHeading()
-				|| changeZ && s.getX() == spot.getX() && s.getY() == spot.getY() && s.getHeading() == spot.getHeading()
-				|| changeH && s.getX() == spot.getX() && s.getY() == spot.getY() && s.getZ() == spot.getZ()) {
-				oldSpot = s;
+		int oldSpotIndex = -1;
+		for (int i = 0; i < oldGroup.getSpawnSpotTemplates().size(); i++) {
+			SpawnSpotTemplate s = oldGroup.getSpawnSpotTemplates().get(i);
+			if (positionMatches(spawn, s)) {
+				oldSpotIndex = i;
 				break;
 			}
 		}
+		if (oldSpotIndex >= 0) {
+			if (delete)
+				oldGroup.getSpawnSpotTemplates().remove(oldSpotIndex);
+			else
+				oldGroup.getSpawnSpotTemplates().set(oldSpotIndex, spot);
+		} else if (!delete)
+			oldGroup.getSpawnSpotTemplates().add(spot);
 
-		if (oldSpot != null)
-			oldGroup.getSpawnSpotTemplates().remove(oldSpot);
-		if (!delete)
-			oldGroup.addSpawnSpot(spot);
-		oldGroup.setCustom(true);
-
-		SpawnMap map;
-		if (data.templates == null) {
-			data.templates = new ArrayList<>();
-			map = new SpawnMap(spawn.getWorldId());
-			data.templates.add(map);
-		} else {
-			map = data.templates.get(0);
-		}
-
-		if (addGroup)
-			map.getSpawns().add(oldGroup);
 
 		xml.getParentFile().mkdir();
-		try (ByteArrayOutputStream os = new ByteArrayOutputStream()) {
-			Marshaller marshaller = jc.createMarshaller();
-			marshaller.setSchema(schema);
-			marshaller.setProperty(Marshaller.JAXB_FORMATTED_OUTPUT, true);
-			marshaller.marshal(data, os);
-			try (FileOutputStream fos = new FileOutputStream(xml)) { // only overwrite xml if marshalling was successful (= no exception)
-				fos.write(os.toByteArray());
-			}
+		try {
+			Files.writeString(xml.toPath(), JAXBUtil.serialize(data, schema));
 		} catch (Exception e) {
 			log.error("Could not save XML file!", e);
 			return false;
 		}
-		DataManager.SPAWNS_DATA.templates = data.templates;
-		DataManager.SPAWNS_DATA.afterUnmarshal(null, null);
-		DataManager.SPAWNS_DATA.clearTemplates();
+		// update spawn coords at the end, because we need previous coords above to find the old spawn template
+		spawn.setX(spot.getX());
+		spawn.setY(spot.getY());
+		spawn.setZ(spot.getZ());
+		spawn.setHeading(spot.getHeading());
+		templates = data.templates;
+		afterUnmarshal(null, null);
+		clearTemplates();
 		return true;
 	}
 
+	private Spawn loadSpawnsFromTemplateFiles(String folder, String schema, SpawnTemplate spawn) {
+		AtomicReference<Spawn> match = new AtomicReference<>();
+		try {
+			Files.walkFileTree(Paths.get(folder), new SimpleFileVisitor<>() {
+
+				@Override
+				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
+					if (attrs.isRegularFile() && file.toString().toLowerCase().endsWith(".xml")) {
+						for (SpawnMap spawnMap : JAXBUtil.deserialize(file.toFile(), SpawnsData.class, schema).templates) {
+							Spawn s = findSpawnTemplate(spawnMap, spawn);
+							if (s != null) {
+								match.set(s);
+								return FileVisitResult.TERMINATE;
+							}
+						}
+					}
+					return FileVisitResult.CONTINUE;
+				}
+			});
+		} catch (IOException e) {
+			log.error("", e);
+		}
+		return match.get();
+	}
+
+	private Spawn findSpawnTemplate(SpawnMap spawnMap, SpawnTemplate spawn) {
+		return spawnMap.getSpawns().stream().filter(s -> s.getSpawnSpotTemplates().stream().anyMatch(spot -> positionMatches(spawn, spot))).findFirst()
+			.orElse(null);
+	}
+
+	private boolean positionMatches(SpawnTemplate spawn, SpawnSpotTemplate spawnSpotTemplate) {
+		return spawnSpotTemplate.getX() == spawn.getX() && spawnSpotTemplate.getY() == spawn.getY() && spawnSpotTemplate.getZ() == spawn.getZ()
+			&& spawnSpotTemplate.getHeading() == spawn.getHeading();
+	}
+
 	private static String getRelativePath(VisibleObject visibleObject) {
-		String path;
-		WorldMap map = World.getInstance().getWorldMap(visibleObject.getWorldId());
 		if (visibleObject.getSpawn().getHandlerType() == SpawnHandlerType.RIFT)
-			path = "Rifts";
+			return "Rifts";
 		else if (visibleObject instanceof Gatherable)
-			path = "Gather";
-		else if (map.isInstanceType())
-			path = "Instances";
+			return "Gather";
+		else if (visibleObject.getPosition().getWorldMapInstance().getParent().isInstanceType())
+			return "Instances";
 		else
-			path = "Npcs";
-		return path + "/New/" + visibleObject.getWorldId() + "_" + map.getName().replace(' ', '_') + ".xml";
+			return "Npcs";
 	}
 
 	public int size() {
@@ -386,7 +371,7 @@ public class SpawnsData {
 	 * @return
 	 */
 	public SpawnSearchResult getNearestSpawnByNpcId(Player player, int npcId, int worldId) {
-		Spawn spawns = getSpawnsForNpc(worldId, npcId);
+		List<SpawnGroup> spawns = getSpawnsForNpc(worldId, npcId);
 		if (spawns == null) { // -> there are no spawns for this npcId on the current map
 			// search all maps of players race
 			for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA) {
@@ -423,39 +408,46 @@ public class SpawnsData {
 			}
 		}
 
-		return getNearestSpawn((player != null ? player.getPosition() : null), spawns.getSpawnSpotTemplates(), worldId);
+		return getNearestSpawn((player != null ? player.getPosition() : null), spawns, worldId);
 	}
 
-	private SpawnSearchResult getNearestSpawn(WorldPosition position, List<SpawnSpotTemplate> spawnSpots, int worldId) {
-		if (spawnSpots.isEmpty() || position == null) {
+	private SpawnSearchResult getNearestSpawn(WorldPosition position, List<SpawnGroup> spawnGroups, int worldId) {
+		if (position == null || spawnGroups.isEmpty()) {
 			return null;
 		}
 		if (worldId != position.getMapId()) {
-			return new SpawnSearchResult(worldId, spawnSpots.get(0));
+			SpawnGroup spawnGroup = spawnGroups.get(0);
+			return spawnGroup.getSpawnTemplates().isEmpty() ? null : toSpawnSearchResult(worldId, spawnGroup.getSpawnTemplates().get(0));
 		}
 
-		SpawnSpotTemplate temp = null;
+		SpawnTemplate temp = null;
 		float distance = 0;
-		for (SpawnSpotTemplate template : spawnSpots) {
-			if (temp == null) {
-				temp = template;
-				distance = (float) PositionUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(),
-					template.getZ());
-				if (distance <= 1f)
-					break;
-			} else {
-				float dist = (float) PositionUtil.getDistance(position.getX(), position.getY(), position.getZ(), template.getX(), template.getY(),
-					template.getZ());
-				if (dist < distance) {
-					distance = dist;
-					temp = template;
+		outerLoop:
+		for (SpawnGroup spawnGroup : spawnGroups) {
+			for (SpawnTemplate spot : spawnGroup.getSpawnTemplates()) {
+				if (temp == null) {
+					temp = spot;
+					distance = (float) PositionUtil.getDistance(position.getX(), position.getY(), position.getZ(), spot.getX(), spot.getY(), spot.getZ());
 					if (distance <= 1f)
-						break;
+						break outerLoop;
+				} else {
+					float dist = (float) PositionUtil.getDistance(position.getX(), position.getY(), position.getZ(), spot.getX(), spot.getY(), spot.getZ());
+					if (dist < distance) {
+						distance = dist;
+						temp = spot;
+						if (distance <= 1f)
+							break outerLoop;
+					}
 				}
 			}
-
 		}
-		return temp == null ? null : new SpawnSearchResult(worldId, temp);
+
+		return temp == null ? null : toSpawnSearchResult(worldId, temp);
+	}
+
+	private SpawnSearchResult toSpawnSearchResult(int worldId, SpawnTemplate spot) {
+		return new SpawnSearchResult(worldId, new SpawnSpotTemplate(spot.getX(), spot.getY(), spot.getZ(), spot.getHeading(), spot.getRandomWalkRange(),
+			spot.getWalkerId(), spot.getWalkerIndex()));
 	}
 
 	/**
@@ -465,23 +457,23 @@ public class SpawnsData {
 	 * @return template for the spot
 	 */
 	public SpawnSearchResult getFirstSpawnByNpcId(int worldId, int npcId) {
-		Spawn spawns = getSpawnsForNpc(worldId, npcId);
+		List<SpawnGroup> spawnGroups = getSpawnsForNpc(worldId, npcId);
 
-		if (spawns == null) {
+		if (spawnGroups.isEmpty()) {
 			for (WorldMapTemplate template : DataManager.WORLD_MAPS_DATA) {
 				if (template.getMapId() == worldId)
 					continue;
-				spawns = getSpawnsForNpc(template.getMapId(), npcId);
-				if (spawns != null) {
+				spawnGroups = getSpawnsForNpc(template.getMapId(), npcId);
+				if (!spawnGroups.isEmpty()) {
 					worldId = template.getMapId();
 					break;
 				}
 			}
-			if (spawns == null)
+			if (spawnGroups.isEmpty())
 				return null;
 		}
-		List<SpawnSpotTemplate> spawnSpots = spawns.getSpawnSpotTemplates();
-		return spawnSpots.isEmpty() ? null : new SpawnSearchResult(worldId, spawnSpots.get(0));
+		List<SpawnTemplate> spawnSpots = spawnGroups.get(0).getSpawnTemplates();
+		return spawnSpots.isEmpty() ? null : toSpawnSearchResult(worldId, spawnSpots.get(0));
 	}
 
 	/**
@@ -497,9 +489,16 @@ public class SpawnsData {
 	}
 
 	public void removeEventSpawnObjects(EventTemplate eventTemplate) {
-		allSpawnMaps.valueCollection().forEach(map -> {
-			map.values().removeIf(entry -> eventTemplate.equals(entry.getValue().getEventTemplate()));
-		});
+		writeLock();
+		try {
+			allSpawnMaps.valueCollection().forEach(spawnGroupsByNpcId -> {
+				Collection<List<SpawnGroup>> allSpawnGroups = spawnGroupsByNpcId.valueCollection();
+				allSpawnGroups.forEach(spawnGroups -> spawnGroups.removeIf(spawnGroup -> eventTemplate.equals(spawnGroup.getEventTemplate())));
+				allSpawnGroups.removeIf(List::isEmpty);
+			});
+		} finally {
+			writeUnlock();
+		}
 	}
 
 	public List<SpawnMap> getTemplates() {

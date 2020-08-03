@@ -4,12 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.Marshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
@@ -98,12 +93,8 @@ public class Spawn {
 		return spawnTemplates;
 	}
 
-	public void addSpawnSpot(SpawnSpotTemplate template) {
-		getSpawnSpotTemplates().add(template);
-	}
-
 	public boolean isCustom() {
-		return isCustom == null ? false : isCustom;
+		return isCustom != null && isCustom;
 	}
 
 	public void setCustom(boolean isCustom) {

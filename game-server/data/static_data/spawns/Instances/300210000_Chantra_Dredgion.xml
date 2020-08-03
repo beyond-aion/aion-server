@@ -244,7 +244,7 @@
 			<spot x="556.89" y="489.416" z="393.648" h="1"/>
 		</spawn>
 		<!-- First Mate Rukana -->
-		<spawn npc_id="216877" respawn_time="295" custom="true">
+		<spawn npc_id="216877" respawn_time="295">
 			<spot x="627.15643" y="409.6418" z="410.62933" h="69"/>
 		</spawn>
 		<!-- Gatekeeper Sarta -->
