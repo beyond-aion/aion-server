@@ -622,7 +622,8 @@ public class Effect implements StatOwner {
 				break;
 			template.startSubEffect(this);
 		}
-		effected.getAi().onEffectApplied(this);
+		if (effected != null)
+			effected.getAi().onEffectApplied(this);
 	}
 
 	public void broadcastHate() {
