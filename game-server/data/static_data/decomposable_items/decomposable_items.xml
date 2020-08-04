@@ -26058,69 +26058,57 @@
 	<decomposable item_id="188052976" /><!-- Archon Summoning Scroll Bundle -->
 	<decomposable item_id="188052977"><!-- The Stolen Letter Card A -->
 		<items>
-			<item id="182007147"/><!-- Letter Card Snippet -->
+			<item id="182007147" /><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052978"><!-- The Stolen Letter Card I -->
 		<items>
-			<item id="182007147"/><!-- Letter Card Snippet -->
+			<item id="182007147" /><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052979"><!-- The Stolen Letter Card O -->
 		<items>
-			<item id="182007147"/><!-- Letter Card Snippet -->
+			<item id="182007147" /><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052980"><!-- The Stolen Letter Card B -->
 		<items>
-			<item id="182007147"/><!-- Letter Card Snippet -->
+			<item id="182007147" /><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052981"><!-- The Stolen Letter Card S -->
 		<items>
-			<item id="182007147"/><!-- Letter Card Snippet -->
+			<item id="182007147" /><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052982"><!-- The Stolen Letter Card D -->
 		<items>
-			<item id="182007147"/><!-- Letter Card Snippet -->
+			<item id="182007147" /><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052983"><!-- The Stolen Letter Card E -->
 		<items>
-			<item id="182007147"/><!-- Letter Card Snippet -->
+			<item id="182007147" /><!-- Letter Card Snippet -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052984"><!-- Mysterious Letter Pouch -->
-		<items>
-			<item id="188052977"/><!-- The Stolen Letter Card A -->
+		<items chance="10">
+			<item id="182007144" /><!-- The Stolen Letter Card N -->
 		</items>
-		<items>
-			<item id="188052978"/><!-- The Stolen Letter Card I -->
+		<items chance="13">
+			<item id="182007145" /><!-- The Stolen Letter Card Y -->
 		</items>
-		<items>
-			<item id="188052979"/><!-- The Stolen Letter Card O -->
+		<items chance="17">
+			<item id="182007146" /><!-- The Stolen Letter Card V -->
 		</items>
-		<items>
-			<item id="188052980"/><!-- The Stolen Letter Card B -->
+		<items chance="20">
+			<item id="188052978" /><!-- The Stolen Letter Card I -->
 		</items>
-		<items>
-			<item id="188052981"/><!-- The Stolen Letter Card S -->
+		<items chance="20">
+			<item id="188052981" /><!-- The Stolen Letter Card S -->
 		</items>
-		<items>
-			<item id="188052982"/><!-- The Stolen Letter Card D -->
-		</items>
-		<items>
-			<item id="188052983"/><!-- The Stolen Letter Card E -->
-		</items>
-		<items>
-			<item id="182007144"/><!-- The Stolen Letter Card N -->
-		</items>
-		<items>
-			<item id="182007145"/><!-- The Stolen Letter Card Y -->
-		</items>
-		<items>
-			<item id="182007146"/><!-- The Stolen Letter Card V -->
+		<items chance="20">
+			<item id="188052982" /><!-- The Stolen Letter Card D -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052986"><!-- +1 Snowball -->

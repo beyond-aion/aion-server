@@ -3414,7 +3414,7 @@
 					<gd_item id="188052982" /><!-- The Stolen Letter Card D -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Stolen Letter Cards (rare)" chance="0.5" dynamic_chance="true" level_based_chance_reduction="true">
+			<gd_rule rule_name="Stolen Letter Cards (rare)" chance="1.5" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_worlds>
 					<gd_world wd_type="BALAUREA" />
 					<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
