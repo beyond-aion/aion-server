@@ -16579,7 +16579,12 @@
 			<item id="166000194" min_count="2" /><!-- Delta Enchantment Stone -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052081" /><!-- Premium Enchantment Stone Bundle -->
+	<decomposable item_id="188052081"><!-- Premium Enchantment Stone Bundle -->
+		<items>
+			<item id="166020000" min_count="3" max_count="5" /><!-- Omega Enchantment Stone -->
+			<item id="188051216" min_count="3" /><!-- Greater Supplements Bag (Eternal) -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052082" /><!-- Kahrun's Symbol Box -->
 	<decomposable item_id="188052083" /><!-- Small GM Gift Box -->
 	<decomposable item_id="188052084"><!-- Dragon Lord Tiamat Treasure Chest -->
@@ -19781,13 +19786,53 @@
 	</decomposable>
 	<decomposable item_id="188052417"><!-- Traveling Performer's Die -->
 		<items>
+			<item id="160010259" race="ELYOS" /><!-- Number 1 -->
+			<item id="160010261" race="ASMODIANS" /><!-- Number 1 -->
+		</items>
+		<items>
+			<item id="160010260" race="ELYOS" /><!-- Number 2 -->
+			<item id="160010262" race="ASMODIANS" /><!-- Number 2 -->
+		</items>
+		<items>
+			<item id="164002214" race="ELYOS" /><!-- Number 3 -->
+			<item id="164002215" race="ASMODIANS" /><!-- Number 3 -->
+		</items>
+		<items>
+			<item id="164002216" race="ELYOS" /><!-- Number 4 -->
+			<item id="164002217" race="ASMODIANS" /><!-- Number 4 -->
+		</items>
+		<items>
 			<item id="188100101" /><!-- Number 5 -->
 		</items>
 		<items>
 			<item id="188100102" /><!-- Number 6 -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052418" /><!-- Shiny Gift Box -->
+	<decomposable item_id="188052418"><!-- Shiny Gift Box -->
+		<items>
+			<item id="188051621" /><!-- [Event] Small Jester Costume Box -->
+		</items>
+		<items>
+			<item id="125040075" /><!-- Firehead -->
+		</items>
+		<items>
+			<item id="188052421" /><!-- Lv. 4113 Composite Manastone Bundle -->
+		</items>
+		<items>
+			<item id="188052081" /><!-- Premium Enchantment Stone Bundle -->
+		</items>
+		<items>
+			<item id="162002030" min_count="25" /><!-- [Event] Premium Restoration Potion -->
+		</items>
+		<items>
+			<item id="160010013" min_count="5" race="ELYOS" /><!-- [Event] Adoring Tiger Candy -->
+			<item id="160010014" min_count="5" race="ASMODIANS" /><!-- [Event] Adoring Tiger Candy -->
+		</items>
+		<items>
+			<item id="160010234" min_count="5" race="ELYOS" /><!-- [Event] Valiant Tiger Form Candy -->
+			<item id="160010235" min_count="5" race="ASMODIANS" /><!-- [Event] Valiant Tiger Form Candy -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052419"><!-- Thrifty Transformation Bundle -->
 		<items>
 			<item id="160010255" min_count="5" race="ELYOS" /><!-- Guardian General Wand -->
@@ -19804,10 +19849,10 @@
 	</decomposable>
 	<decomposable item_id="188052421"><!-- Lv. 4113 Composite Manastone Bundle -->
 		<items>
-			<item id="166000194" min_count="1" max_count="3" /><!-- Delta Enchantment Stone -->
+			<item id="166000194" min_count="3" max_count="5" /><!-- Delta Enchantment Stone -->
 		</items>
 		<items>
-			<item id="166000195" min_count="1" max_count="3" /><!-- Epsilon Enchantment Stone -->
+			<item id="166000195" min_count="3" max_count="5" /><!-- Epsilon Enchantment Stone -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052422" /><!-- Level 30 Battle Supplies -->

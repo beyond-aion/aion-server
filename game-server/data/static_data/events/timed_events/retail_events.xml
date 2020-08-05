@@ -2354,117 +2354,63 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Transform and battle as a Guardian General" start="2015-04-01T00:00:00" end="2015-04-10T23:59:59">
+	<event name="April Fool's Day" start="2015-04-01T00:00:00" end="2015-04-10T23:59:59">
 		<quests>
-			<maintainable>80330 80331</maintainable>
+			<maintainable>80328 80329 80330 80331</maintainable>
 		</quests>
 		<spawns>
-			<!-- Sanctum -->
-			<spawn_map map_id="110010000">
-				<!-- Palandry -->
-				<spawn npc_id="831527" respawn_time="295">
-					<spot x="1455" y="1487" z="573" h="43" />
-				</spawn>
-				<!-- Ketru -->
-				<spawn npc_id="831528" respawn_time="295">
-					<spot x="1457" y="1491" z="573" h="57" />
-				</spawn>
-				<!-- Ashken -->
-				<spawn npc_id="831529" respawn_time="295">
-					<spot x="1454" y="1486" z="573" h="31" />
-				</spawn>
-				<!-- Kokomi -->
-				<spawn npc_id="831530" respawn_time="295">
-					<spot x="1454" y="1490" z="573" h="113" />
-				</spawn>
-				<!-- Kotori -->
-				<spawn npc_id="831537" respawn_time="295">
-					<spot x="1451" y="1487" z="573" h="10" />
-				</spawn>
-				<!-- Brax Hauler -->
-				<spawn npc_id="831535" respawn_time="295">
-					<spot x="1458" y="1487" z="573" h="51" />
-				</spawn>
-			</spawn_map>
 			<!-- Oriel -->
 			<spawn_map map_id="700010000">
-				<!-- Brax Hauler -->
-				<spawn npc_id="831536" respawn_time="295">
-					<spot x="1271" y="1829" z="97" h="39" />
-				</spawn>
-				<!-- Kokomi -->
-				<spawn npc_id="831530" respawn_time="295">
-					<spot x="1272" y="1835" z="97" h="101" />
-				</spawn>
-				<!-- Kotori -->
-				<spawn npc_id="831537" respawn_time="295">
-					<spot x="1269" y="1832" z="97" h="11" />
-				</spawn>
-				<!-- Ashken -->
-				<spawn npc_id="831529" respawn_time="295">
-					<spot x="1273" y="1831" z="97" h="40" />
+				<!-- Palandry -->
+				<spawn npc_id="831527" respawn_time="295">
+					<spot x="1274" y="1832" z="97" h="51" />
 				</spawn>
 				<!-- Ketru -->
 				<spawn npc_id="831528" respawn_time="295">
 					<spot x="1276" y="1835" z="97" h="56" />
 				</spawn>
-				<!-- Palandry -->
-				<spawn npc_id="831527" respawn_time="295">
-					<spot x="1274" y="1832" z="97" h="51" />
+				<!-- Ashken -->
+				<spawn npc_id="831529" respawn_time="295">
+					<spot x="1273" y="1831" z="97" h="40" />
 				</spawn>
-			</spawn_map>
-			<!-- Pandaemonium -->
-			<spawn_map map_id="120010000">
-				<!-- Soleil -->
-				<spawn npc_id="831531" respawn_time="295">
-					<spot x="1317" y="1393" z="208" h="8" />
-				</spawn>
-				<!-- Rotul -->
-				<spawn npc_id="831532" respawn_time="295">
-					<spot x="1320" y="1392" z="208" h="31" />
-				</spawn>
-				<!-- Nomini -->
-				<spawn npc_id="831534" respawn_time="295">
-					<spot x="1323" y="1397" z="208" h="77" />
-				</spawn>
-				<!-- Motori -->
-				<spawn npc_id="831538" respawn_time="295">
-					<spot x="1318" y="1397" z="208" h="99" />
-				</spawn>
-				<!-- Traavis -->
-				<spawn npc_id="831533" respawn_time="295">
-					<spot x="1316" y="1395" z="208" h="117" />
+				<!-- Kokomi -->
+				<spawn npc_id="831530" respawn_time="295">
+					<spot x="1272" y="1835" z="97" h="101" />
 				</spawn>
 				<!-- Brax Hauler -->
-				<spawn npc_id="831535" respawn_time="295">
-					<spot x="1321" y="1390" z="208" h="26" />
+				<spawn npc_id="831536" respawn_time="295">
+					<spot x="1271" y="1829" z="97" h="39" />
+				</spawn>
+				<!-- Kotori -->
+				<spawn npc_id="831537" respawn_time="295">
+					<spot x="1269" y="1832" z="97" h="11" />
 				</spawn>
 			</spawn_map>
 			<!-- Pernon -->
 			<spawn_map map_id="710010000">
-				<!-- Traavis -->
-				<spawn npc_id="831533" respawn_time="295">
-					<spot x="1067" y="1550" z="97" h="98" />
+				<!-- Soleil -->
+				<spawn npc_id="831531" respawn_time="295">
+					<spot x="1064" y="1549" z="97" h="94" />
 				</spawn>
 				<!-- Rotul -->
 				<spawn npc_id="831532" respawn_time="295">
 					<spot x="1059" y="1546" z="97" h="103" />
 				</spawn>
-				<!-- Motori -->
-				<spawn npc_id="831538" respawn_time="295">
-					<spot x="1065" y="1545" z="97" h="57" />
+				<!-- Traavis -->
+				<spawn npc_id="831533" respawn_time="295">
+					<spot x="1067" y="1550" z="97" h="98" />
 				</spawn>
-				<!-- Soleil -->
-				<spawn npc_id="831531" respawn_time="295">
-					<spot x="1064" y="1549" z="97" h="94" />
+				<!-- Nomini -->
+				<spawn npc_id="831534" respawn_time="295">
+					<spot x="1063" y="1543" z="97" h="32" />
 				</spawn>
 				<!-- Brax Hauler -->
 				<spawn npc_id="831536" respawn_time="295">
 					<spot x="1060" y="1549" z="97" h="100" />
 				</spawn>
-				<!-- Nomini -->
-				<spawn npc_id="831534" respawn_time="295">
-					<spot x="1063" y="1543" z="97" h="32" />
+				<!-- Motori -->
+				<spawn npc_id="831538" respawn_time="295">
+					<spot x="1065" y="1545" z="97" h="57" />
 				</spawn>
 			</spawn_map>
 		</spawns>
