@@ -13472,7 +13472,41 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188051675" /><!-- Mysterious Box -->
-	<decomposable item_id="188051676" /><!-- [Event] Noble Box of Life -->
+	<decomposable item_id="188051676"><!-- [Event] Noble Box of Life -->
+		<items>
+			<item id="162001030" min_count="10" /><!-- [Event] Premium Recovery Potion -->
+		</items>
+		<items>
+			<item id="164002167" min_count="5" /><!-- Drana Coffee -->
+		</items>
+		<items>
+			<item id="166100020" min_count="150" /><!-- [Stamp] Greater Supplements (Eternal) -->
+		</items>
+		<items>
+			<item id="166100023" min_count="150" /><!-- [Stamp] Greater Supplements (Eternal) -->
+		</items>
+		<items>
+			<item id="185000216" /><!-- Ancestor's Relic -->
+		</items>
+		<items>
+			<item id="186000399" min_count="10" /><!-- Honorable Conqueror's Mark -->
+		</items>
+		<items>
+			<item id="188052090" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- [Event] Magic Food Bundle -->
+			<item id="188052091" race="ELYOS" player_classes="GLADIATOR TEMPLAR ASSASSIN RANGER CHANTER" /><!-- [Event] Melee Food Bundle -->
+			<item id="188052092" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- [Event] Magic Food Bundle -->
+			<item id="188052093" race="ASMODIANS" player_classes="GLADIATOR TEMPLAR ASSASSIN RANGER CHANTER" /><!-- [Event] Melee Food Bundle -->
+		</items>
+		<items>
+			<item id="188053452" /><!-- Autumn Guy's Lucky Box -->
+		</items>
+		<items>
+			<item id="188053623" /><!-- Fire Dragon King's Weapon Bundle -->
+		</items>
+		<items>
+			<item id="188053628" /><!-- Pallasite Bundle -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051677" /><!-- [Event] Eternal Treasure Chest -->
 	<decomposable item_id="188051678" /><!-- [Event] Small Eternal Treasure Chest -->
 	<decomposable item_id="188051679" /><!-- [Event] Major Balaur Bundle -->
@@ -16827,10 +16861,74 @@
 	<decomposable item_id="188052087" /><!-- Abyssal Balaur Bundle -->
 	<decomposable item_id="188052088" /><!-- [Event] Recovery Bundle -->
 	<decomposable item_id="188052089" /><!-- [Event] Scroll Bundle -->
-	<decomposable item_id="188052090" /><!-- [Event] Magic Food Bundle -->
-	<decomposable item_id="188052091" /><!-- [Event] Melee Food Bundle -->
-	<decomposable item_id="188052092" /><!-- [Event] Magic Food Bundle -->
-	<decomposable item_id="188052093" /><!-- [Event] Melee Food Bundle -->
+	<decomposable item_id="188052090"><!-- [Event] Magic Food Bundle -->
+		<items>
+			<item id="160001274" min_count="3" /><!-- Perer Aether Jelly -->
+		</items>
+		<items>
+			<item id="160001345" min_count="3" /><!-- Tasty Feena Herb Sushi Roll -->
+		</items>
+		<items>
+			<item id="160001353" min_count="3" /><!-- Tasty Kuvano Juice -->
+		</items>
+		<items>
+			<item id="160001394" min_count="3" /><!-- Tasty Sky Dragon Emperor's Salad -->
+		</items>
+		<items>
+			<item id="160001398" min_count="3" /><!-- Tasty Sky Dragon Emperor's Savory Food -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052091"><!-- [Event] Melee Food Bundle -->
+		<items>
+			<item id="160001274" min_count="3" /><!-- Perer Aether Jelly -->
+		</items>
+		<items>
+			<item id="160001344" min_count="3" /><!-- Tasty Crestlich Herb Sausage -->
+		</items>
+		<items>
+			<item id="160001347" min_count="3" /><!-- Tasty Innesi Herb Dumpling -->
+		</items>
+		<items>
+			<item id="160001353" min_count="3" /><!-- Tasty Kuvano Juice -->
+		</items>
+		<items>
+			<item id="160001395" min_count="3" /><!-- Tasty Sky Dragon Emperor's Curry -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052092"><!-- [Event] Magic Food Bundle -->
+		<items>
+			<item id="160001353" min_count="3" /><!-- Tasty Kuvano Juice -->
+		</items>
+		<items>
+			<item id="160002274" min_count="3" /><!-- Cippo Aether Jelly -->
+		</items>
+		<items>
+			<item id="160002343" min_count="3" /><!-- Tasty Nokara Herb Sushi -->
+		</items>
+		<items>
+			<item id="160002392" min_count="3" /><!-- Tasty Horned Dragon Emperor's Salad -->
+		</items>
+		<items>
+			<item id="160002396" min_count="3" /><!-- Tasty Horned Dragon Emperor's Savory Food -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052093"><!-- [Event] Melee Food Bundle -->
+		<items>
+			<item id="160001344" min_count="3" /><!-- Tasty Crestlich Herb Sausage -->
+		</items>
+		<items>
+			<item id="160001353" min_count="3" /><!-- Tasty Kuvano Juice -->
+		</items>
+		<items>
+			<item id="160002274" min_count="3" /><!-- Cippo Aether Jelly -->
+		</items>
+		<items>
+			<item id="160002345" min_count="3" /><!-- Tasty Poma Wine Herb Dumpling -->
+		</items>
+		<items>
+			<item id="160002393" min_count="3" /><!-- Tasty Horned Dragon Emperor's Curry -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052094" /><!-- [Event] Consumables Bundle -->
 	<decomposable item_id="188052095" /><!-- [Event] Consumables Bundle -->
 	<decomposable item_id="188052096" /><!-- World Drop Limit Test Bundle -->
@@ -17630,12 +17728,101 @@
 			<item id="186000232" min_count="1" max_count="10" /><!-- Ceramium Coin -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052281" /><!-- Autumn Harvest Fruit Gift Set -->
-	<decomposable item_id="188052282" /><!-- [Event] Autumn Harvest Welcome Package -->
-	<decomposable item_id="188052283" /><!-- [Event] Rabbit Form Candy Bundle -->
-	<decomposable item_id="188052284" /><!-- [Event] Fruit Hat Box -->
-	<decomposable item_id="188052285" /><!-- [Event] Coin Bundle -->
-	<decomposable item_id="188052286" /><!-- [Event] Coin Bundle -->
+	<decomposable item_id="188052281"><!-- Autumn Harvest Fruit Gift Set -->
+		<items>
+			<item id="125040245" /><!-- Rubus Hat -->
+		</items>
+		<items>
+			<item id="125040246" /><!-- Merone Hat -->
+		</items>
+		<items>
+			<item id="125040247" /><!-- Brommel Hat -->
+		</items>
+		<items>
+			<item id="125040248" /><!-- Rubashi Hat -->
+		</items>
+		<items>
+			<item id="125040249" /><!-- Kiwi Hairpin -->
+		</items>
+		<items>
+			<item id="125040250" /><!-- Lemon Hairpin -->
+		</items>
+		<items>
+			<item id="125040251" /><!-- Vinna Hairpin -->
+		</items>
+		<items>
+			<item id="125040252" /><!-- Egg Hairpin -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052282"><!-- [Event] Autumn Harvest Welcome Package -->
+		<items>
+			<item id="187060013" /><!-- Brilliance Wings -->
+		</items>
+		<items>
+			<item id="188052076" /><!-- [Event] Bundle of Kahrun Symbols -->
+		</items>
+		<items>
+			<item id="188052281" /><!-- Autumn Harvest Fruit Gift Set -->
+		</items>
+		<items>
+			<item id="188052283" /><!-- [Event] Rabbit Form Candy Bundle -->
+		</items>
+		<items>
+			<item id="188052285" race="ELYOS" /><!-- [Event] Coin Bundle -->
+			<item id="188052286" race="ASMODIANS" /><!-- [Event] Coin Bundle -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052283"><!-- [Event] Rabbit Form Candy Bundle -->
+		<items>
+			<item id="160010220" min_count="5" race="ELYOS" /><!-- Bounding Shugo Form Candy -->
+			<item id="160010221" min_count="5" race="ASMODIANS" /><!-- Bounding Shugo Form Candy -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052284"><!-- [Event] Fruit Hat Box -->
+		<items>
+			<item id="125040246" /><!-- Merone Hat -->
+		</items>
+		<items>
+			<item id="125040248" /><!-- Rubashi Hat -->
+		</items>
+		<items>
+			<item id="125040250" /><!-- Lemon Hairpin -->
+		</items>
+		<items>
+			<item id="125040251" /><!-- Vinna Hairpin -->
+		</items>
+		<items>
+			<item id="125040252" /><!-- Egg Hairpin -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052285"><!-- [Event] Coin Bundle -->
+		<items>
+			<item id="186000003" min_count="30" /><!-- Silver Coin -->
+		</items>
+		<items>
+			<item id="186000004" min_count="40" /><!-- Gold Coin -->
+		</items>
+		<items>
+			<item id="186000005" min_count="50" /><!-- Platinum Coin -->
+		</items>
+		<items>
+			<item id="186000018" min_count="60" /><!-- Mithril Coin -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052286"><!-- [Event] Coin Bundle -->
+		<items>
+			<item id="186000008" min_count="30" /><!-- Silver Coin -->
+		</items>
+		<items>
+			<item id="186000009" min_count="40" /><!-- Gold Coin -->
+		</items>
+		<items>
+			<item id="186000010" min_count="50" /><!-- Platinum Coin -->
+		</items>
+		<items>
+			<item id="186000019" min_count="60" /><!-- Mithril Coin -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052287"><!-- Silverine Ltd. Supplies -->
 		<items>
 			<item id="162000122" min_count="5" /><!-- Superior Life Serum -->
@@ -30769,7 +30956,53 @@
 			<item id="186000242" /><!-- Ceramium Medal -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053452" /><!-- Autumn Guy's Lucky Box -->
+	<decomposable item_id="188053452"><!-- Autumn Guy's Lucky Box -->
+		<items>
+			<item id="164002228" /><!-- Administrator's Boon – 1-Time Pass -->
+		</items>
+		<items>
+			<item id="165005034" /><!-- Vindachinerk's Abyss Accessory Extraction Tools -->
+		</items>
+		<items>
+			<item id="165005074" /><!-- Vindachinerk's Noble Abyss Accessory Extraction Tools -->
+		</items>
+		<items>
+			<item id="166050107" /><!-- Infused Idian: Physical Attack -->
+		</items>
+		<items>
+			<item id="166050108" /><!-- Infused Idian: Magical Attack -->
+		</items>
+		<items>
+			<item id="166050109" /><!-- Infused Idian: Block -->
+		</items>
+		<items>
+			<item id="166050110" /><!-- Infused Idian: Strike Resist -->
+		</items>
+		<items>
+			<item id="166050111" /><!-- Infused Idian: Spell Resist -->
+		</items>
+		<items>
+			<item id="166200009" /><!-- Mythic Weapon Tuning Scroll -->
+		</items>
+		<items>
+			<item id="166200010" /><!-- Mythic Armor Tuning Scroll -->
+		</items>
+		<items>
+			<item id="188052559" /><!-- Assured Greater Felicitous Socketing Box (Eternal) -->
+		</items>
+		<items>
+			<item id="188052560" /><!-- Assured Greater Felicitous Socketing Box (Mythic) -->
+		</items>
+		<items>
+			<item id="188052638" /><!-- [Event] Fabled Godstone Bundle -->
+		</items>
+		<items>
+			<item id="188052639" /><!-- [Event] Heroic Godstone Bundle -->
+		</items>
+		<items>
+			<item id="188052654" /><!-- Noble Ancient Manastone Bundle -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053453"><!-- [Event] Scroll Bundle -->
 		<items>
 			<item id="160001308" min_count="3" race="ELYOS" /><!-- Beshu Cocktail -->
