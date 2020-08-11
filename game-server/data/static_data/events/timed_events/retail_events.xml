@@ -2378,7 +2378,7 @@
 					<spot x="1272" y="1835" z="97" h="101" />
 				</spawn>
 				<!-- Brax Hauler -->
-				<spawn npc_id="831536" respawn_time="295">
+				<spawn npc_id="831535" respawn_time="295">
 					<spot x="1271" y="1829" z="97" h="39" />
 				</spawn>
 				<!-- Kotori -->
