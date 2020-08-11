@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <timed_events xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="timed_events.xsd">
-	<event name="Atreian City Festival" start="2015-02-06T00:00:00" end="2015-02-13T00:00:00">
+	<event name="Atreian City Festival" start="2015-02-06T00:00:00" end="2015-02-13T23:59:59">
 		<quests>
 			<maintainable>80162 80163 80164 80165 80166 80167 80168 80169</maintainable>
 		</quests>
@@ -17,63 +17,65 @@
 					<gd_item id="186000149" /><!-- [Event] Smooth Petal -->
 					<gd_item id="186000150" /><!-- [Event] Comet Powder -->
 					<gd_item id="186000151" /><!-- [Event] Dried Sweet Dado -->
-					<gd_item id="186000152" /><!-- [Event] Silver Lump -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
-				<!-- phiorina -->
+				<!-- Phiorina -->
 				<spawn npc_id="800270" respawn_time="295">
 					<spot x="1407" y="1403" z="573" h="30" />
 				</spawn>
-				<!-- enper -->
+				<!-- Enper -->
 				<spawn npc_id="800271" respawn_time="295">
 					<spot x="1399" y="1421" z="573" h="90" />
 				</spawn>
-				<!-- muriel -->
+				<!-- Muriel -->
 				<spawn npc_id="800272" respawn_time="295">
 					<spot x="1391" y="1400" z="573" h="90" />
 				</spawn>
-				<!-- draphios -->
+				<!-- Draphios -->
 				<spawn npc_id="800273" respawn_time="295">
 					<spot x="1387" y="1411" z="573" h="6" />
 				</spawn>
-				<!-- glaion -->
+				<!-- Glaion -->
 				<spawn npc_id="800278" respawn_time="295">
 					<spot x="1394" y="1422" z="573" h="90" />
 				</spawn>
 			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- theon -->
+				<!-- Theon -->
 				<spawn npc_id="800274" respawn_time="295">
 					<spot x="1389" y="1391" z="208" h="30" />
 				</spawn>
-				<!-- meskam -->
+				<!-- Meskam -->
 				<spawn npc_id="800275" respawn_time="295">
 					<spot x="1368" y="1393" z="208" h="30" />
 				</spawn>
-				<!-- lekna -->
+				<!-- Lekna -->
 				<spawn npc_id="800276" respawn_time="295">
 					<spot x="1374" y="1408" z="208" h="90" />
 				</spawn>
-				<!-- teira -->
+				<!-- Teira -->
 				<spawn npc_id="800277" respawn_time="295">
 					<spot x="1390" y="1408" z="208" h="90" />
 				</spawn>
-				<!-- adole -->
+				<!-- Adole -->
 				<spawn npc_id="800279" respawn_time="295">
 					<spot x="1367" y="1408" z="208" h="90" />
 				</spawn>
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Valentine's Day Inventory" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00">
+	<event name="Valentine's Day Inventory" start="2015-02-13T00:00:00" end="2015-02-28T23:59:59">
 		<inventory_drop item_id="186000167" startlevel="1" interval="6" />
 	</event>
-	<event name="Valentine's Day" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00" theme="VALENTINE">
+	<event name="Valentine's Day" start="2015-02-13T00:00:00" end="2015-02-28T23:59:59" theme="VALENTINE">
+		<quests>
+			<maintainable>80170 80171</maintainable>
+		</quests>
 		<event_drops>
 			<gd_rule rule_name="Valentine's Day Event Drop" chance="10" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
@@ -87,9 +89,6 @@
 				</gd_items>
 			</gd_rule>
 		</event_drops>
-		<quests>
-			<maintainable>80170 80171</maintainable>
-		</quests>
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
@@ -97,27 +96,27 @@
 				<spawn npc_id="800246" respawn_time="295">
 					<spot x="1402" y="1520" z="572.99426" h="66" />
 				</spawn>
-				<!-- luke -->
+				<!-- Luke -->
 				<spawn npc_id="800247" respawn_time="295">
 					<spot x="1402.6797" y="1503.384" z="572.99426" h="49" />
 				</spawn>
-				<!-- phiorina -->
+				<!-- Phiorina -->
 				<spawn npc_id="800270" respawn_time="295">
 					<spot x="1407" y="1403" z="573" h="30" />
 				</spawn>
-				<!-- enper -->
+				<!-- Enper -->
 				<spawn npc_id="800271" respawn_time="295">
 					<spot x="1399" y="1421" z="573" h="90" />
 				</spawn>
-				<!-- muriel -->
+				<!-- Muriel -->
 				<spawn npc_id="800272" respawn_time="295">
 					<spot x="1391" y="1400" z="573" h="90" />
 				</spawn>
-				<!-- draphios -->
+				<!-- Draphios -->
 				<spawn npc_id="800273" respawn_time="295">
 					<spot x="1387" y="1411" z="573" h="6" />
 				</spawn>
-				<!-- glaion -->
+				<!-- Glaion -->
 				<spawn npc_id="800278" respawn_time="295">
 					<spot x="1394" y="1422" z="573" h="90" />
 				</spawn>
@@ -128,57 +127,57 @@
 				<spawn npc_id="800248" respawn_time="295">
 					<spot x="1277.2385" y="1351" z="204.4608" h="90" />
 				</spawn>
-				<!-- miata -->
+				<!-- Miata -->
 				<spawn npc_id="800249" respawn_time="295">
 					<spot x="1272.5769" y="1351.3453" z="204.4608" h="92" />
 				</spawn>
-				<!-- theon -->
+				<!-- Theon -->
 				<spawn npc_id="800274" respawn_time="295">
 					<spot x="1389" y="1391" z="208" h="30" />
 				</spawn>
-				<!-- meskam -->
+				<!-- Meskam -->
 				<spawn npc_id="800275" respawn_time="295">
 					<spot x="1368" y="1393" z="208" h="30" />
 				</spawn>
-				<!-- lekna -->
+				<!-- Lekna -->
 				<spawn npc_id="800276" respawn_time="295">
 					<spot x="1374" y="1408" z="208" h="90" />
 				</spawn>
-				<!-- teira -->
+				<!-- Teira -->
 				<spawn npc_id="800277" respawn_time="295">
 					<spot x="1390" y="1408" z="208" h="90" />
 				</spawn>
-				<!-- adole -->
+				<!-- Adole -->
 				<spawn npc_id="800279" respawn_time="295">
 					<spot x="1367" y="1408" z="208" h="90" />
 				</spawn>
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Love is in the Air" start="2015-02-13T00:00:00" end="2015-02-28T00:00:00">
+	<event name="Love is in the Air" start="2015-02-13T00:00:00" end="2015-02-28T23:59:59">
 		<quests>
-			<maintainable>80298 80299 80300 80301 80302 80303 80304 80305 80305 80306 80307 80308 80309</maintainable>
+			<maintainable>80298 80299 80300 80301 80302 80303 80304 80305 80306 80307 80308 80309</maintainable>
 		</quests>
 		<spawns>
 			<!-- Oriel -->
 			<spawn_map map_id="700010000">
-				<!-- chocolate tower -->
+				<!-- Chocolate tower -->
 				<spawn npc_id="831402" respawn_time="295">
 					<spot x="1300" y="1828" z="100" h="100" />
 				</spawn>
-				<!-- chocorunerk -->
+				<!-- Chocorunerk -->
 				<spawn npc_id="831392" respawn_time="295">
 					<spot x="1274" y="1833" z="98" h="46" />
 				</spawn>
-				<!-- sollorinerk -->
+				<!-- Sollorinerk -->
 				<spawn npc_id="831395" respawn_time="295">
 					<spot x="1254" y="1863" z="98" h="90" />
 				</spawn>
-				<!-- khannarinerk -->
+				<!-- Khannarinerk -->
 				<spawn npc_id="831394" respawn_time="295">
 					<spot x="1305" y="1821" z="100" h="100" />
 				</spawn>
-				<!-- smug lovebirds -->
+				<!-- Lovesick Shulack -->
 				<spawn npc_id="219640" respawn_time="295">
 					<spot x="1482.8152" y="1885.7509" z="99.4443" />
 					<spot x="1480.5588" y="1887.3224" z="100.1929" h="20" />
@@ -270,7 +269,7 @@
 					<spot x="1372.7120" y="1648.2538" z="96.7214" h="112" />
 					<spot x="1385.0940" y="1658.2664" z="95.5049" h="6" />
 				</spawn>
-				<!-- happy singleton -->
+				<!-- Happy Singleton -->
 				<spawn npc_id="219639" respawn_time="295">
 					<spot x="2503.7749" y="1776.3477" z="180.0277" h="73" />
 					<spot x="2502.2881" y="1784.2084" z="179.0479" h="39" />
@@ -323,23 +322,23 @@
 			</spawn_map>
 			<!-- Pernon -->
 			<spawn_map map_id="710010000">
-				<!-- chocolate tower -->
+				<!-- Chocolate tower -->
 				<spawn npc_id="831403" respawn_time="295">
 					<spot x="1047" y="1567" z="101" h="30" />
 				</spawn>
-				<!-- chocorunerk -->
+				<!-- Chocorunerk -->
 				<spawn npc_id="831393" respawn_time="295">
 					<spot x="1064" y="1548" z="98" h="90" />
 				</spawn>
-				<!-- khannarinerk -->
+				<!-- Candinerk -->
 				<spawn npc_id="831396" respawn_time="295">
 					<spot x="1046" y="1575" z="100" h="30" />
 				</spawn>
-				<!-- sollorinerk -->
+				<!-- Lirinerk -->
 				<spawn npc_id="831397" respawn_time="295">
 					<spot x="1058" y="1511" z="99" h="15" />
 				</spawn>
-				<!-- smug lovebirds -->
+				<!-- Lovesick Shulack -->
 				<spawn npc_id="219640" respawn_time="295">
 					<spot x="924.4612" y="1416.7347" z="108.3548" />
 					<spot x="957.0273" y="1500.5865" z="101.0137" />
@@ -428,7 +427,7 @@
 					<spot x="1195.4865" y="1419.4092" z="100.4774" h="70" />
 					<spot x="1166.8564" y="1423.5612" z="100.2343" h="40" />
 				</spawn>
-				<!-- happy singleton -->
+				<!-- Happy Singleton -->
 				<spawn npc_id="219639" respawn_time="295">
 					<spot x="1521.2880" y="2678.6931" z="228.8137" />
 					<spot x="1511.5392" y="2648.1316" z="223.3997" h="90" />
@@ -498,7 +497,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Love is in the Aether" start="2015-02-12T00:00:00" end="2015-02-26T00:00:00">
+	<event name="Love is in the Aether" start="2015-02-12T00:00:00" end="2015-02-26T23:59:59">
 		<quests>
 			<maintainable>80545 80546 80547 80549 80550 80551</maintainable>
 		</quests>
@@ -513,7 +512,7 @@
 				<spawn npc_id="832008">
 					<spot x="1531.5000" y="1508.8000" z="565.8892" h="10" />
 				</spawn>
-				<!-- -->
+				<!-- wday_flower05 (Dandelion) -->
 				<spawn npc_id="702319">
 					<spot x="1529.1000" y="1512.6000" z="565.8908" h="92" />
 				</spawn>
@@ -528,14 +527,14 @@
 				<spawn npc_id="832008">
 					<spot x="1273.1000" y="1410.2000" z="208.1250" h="24" />
 				</spawn>
-				<!-- -->
+				<!-- wday_flower05 (Dandelion) -->
 				<spawn npc_id="702319">
 					<spot x="1279.8000" y="1409.1000" z="208.1250" h="38" />
 				</spawn>
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="The Fortune Fayre" start="2015-03-09T00:00:00" end="2015-03-23T00:00:00">
+	<event name="The Fortune Fayre" start="2015-03-09T00:00:00" end="2015-03-23T23:59:59">
 		<quests>
 			<startable>80028 80029 80031 80032</startable>
 			<maintainable>80030 80033 80034 80035 80036 80037 80038 80039</maintainable>
@@ -565,61 +564,43 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Spring Event Inventory" start="2015-03-06T00:00:00" end="2015-03-21T00:00:00">
+	<event name="Spring Event Inventory" start="2015-03-06T00:00:00" end="2015-03-21T23:59:59">
 		<inventory_drop item_id="186000168" startlevel="8" interval="15" />
 	</event>
-	<event name="Spring Event" start="2015-03-06T00:00:00" end="2015-03-21T00:00:00">
+	<event name="Spring Event" start="2015-03-06T00:00:00" end="2015-03-21T23:59:59">
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
-				<!-- gleisa -->
+				<!-- Gleisa -->
 				<spawn npc_id="800250" respawn_time="295">
 					<spot x="1528.2053" y="1513.424" z="565.89343" h="57" />
 				</spawn>
-				<!-- lacros -->
+				<!-- Lacros -->
 				<spawn npc_id="800251" respawn_time="295">
 					<spot x="1527.9835" y="1509.6407" z="565.894" h="60" />
 				</spawn>
 			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- meleaf -->
+				<!-- Meleaf -->
 				<spawn npc_id="800252" respawn_time="295">
 					<spot x="1246" y="1405" z="208" h="30" />
 				</spawn>
-				<!-- leavold -->
+				<!-- Leavold -->
 				<spawn npc_id="800253" respawn_time="295">
 					<spot x="1243" y="1403" z="208" h="30" />
 				</spawn>
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Doppelgangers" start="2015-01-01T00:00:00" end="2015-01-30T00:00:00">
-		<spawns>
-			<!-- Verteron -->
-			<spawn_map map_id="210030000">
-				<!-- Laylin -->
-				<spawn npc_id="799702" respawn_time="295">
-					<spot x="1645.45" y="1498.74" z="119.717" h="49" />
-				</spawn>
-			</spawn_map>
-			<!-- Altgard -->
-			<spawn_map map_id="220030000">
-				<!-- Ronya -->
-				<spawn npc_id="799703" respawn_time="295">
-					<spot x="1749.65" y="1808.09" z="254.487" h="108" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
-	<event name="Ascension Energy Inventory" start="2015-09-21T00:00:00" end="2015-10-26T00:00:00">
+	<event name="Ascension Energy Inventory" start="2015-09-21T00:00:00" end="2015-10-26T23:59:59">
 		<inventory_drop item_id="186000127" startlevel="8" interval="15" />
 	</event>
-	<event name="Ascension Energy" start="2016-11-15T00:00:00" end="2016-11-30T23:59:00">
+	<event name="Ascension Energy" start="2016-11-15T00:00:00" end="2016-11-30T23:59:59">
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
-				<!-- <Daeva's Day Cake> -->
+				<!-- Daeva's Day 3-tier Cake -->
 				<spawn npc_id="831921" respawn_time="295">
 					<spot x="1532.4474" y="1511.6154" z="565.8823" h="60" />
 				</spawn>
@@ -662,7 +643,7 @@
 			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- <Daeva's Day Cake> -->
+				<!-- Daeva's Day 3-tier Cake -->
 				<spawn npc_id="831922" respawn_time="295">
 					<spot x="1275.8658" y="1333.3451" z="204.42003" h="90" />
 				</spawn>
@@ -716,7 +697,10 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Crab Fest" start="2016-12-01T00:00:00" end="2017-01-01T00:00:00" theme="CHRISTMAS">
+	<event name="Crab Fest" start="2016-12-01T00:00:00" end="2016-12-31T23:59:59" theme="CHRISTMAS">
+		<quests>
+			<maintainable>80112 80113 80114 80115 80116 80117 80118 80119 80120 80121 80122 80123 80124 80125 80126 80127 80128 80129</maintainable>
+		</quests>
 		<event_drops>
 			<gd_rule rule_name="Crab Fest Event Drop" chance="100">
 				<gd_npcs>
@@ -757,9 +741,6 @@
 				</gd_items>
 			</gd_rule>
 		</event_drops>
-		<quests>
-			<maintainable>80112 80113 80114 80115 80116 80117 80118 80119 80128 80120 80121 80122 80123 80124 80125 80126 80127 80129</maintainable>
-		</quests>
 		<spawns>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
@@ -1087,7 +1068,7 @@
 			</spawn_map>
 			<!-- Theobomos -->
 			<spawn_map map_id="210060000">
-				<!-- Chittering potcrab -->
+				<!-- Chittering Potcrab -->
 				<spawn npc_id="217719" respawn_time="180">
 					<spot x="1533.3657" y="1426.789" z="22.2993" h="102" />
 					<spot x="1538.873" y="1416.3708" z="22.6795" h="99" />
@@ -1230,6 +1211,9 @@
 		</spawns>
 	</event>
 	<event name="Celebrate Solorius" start="2019-12-01T00:00:00" end="2019-12-31T23:59:59" theme="CHRISTMAS">
+		<quests>
+			<maintainable>50007 50008 50009 51007 51008 51009</maintainable>
+		</quests>
 		<event_drops>
 			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="100">
 				<gd_npcs>
@@ -1280,28 +1264,25 @@
 				</gd_items>
 			</gd_rule>
 		</event_drops>
-		<quests>
-			<maintainable>50007 50008 50009 51007 51008 51009</maintainable>
-		</quests>
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
-				<!-- lenatinerk -->
+				<!-- Lenatinerk -->
 				<spawn npc_id="831032" respawn_time="295">
 					<spot x="1527.1254" y="1515.9658" z="565.8988" h="60" />
 				</spawn>
-				<!-- thauminerk -->
+				<!-- Thauminerk -->
 				<spawn npc_id="831419" respawn_time="295">
 					<spot x="1526.5577" y="1505.5736" z="565.9025" h="60" />
 				</spawn>
 			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- lenatinerk -->
+				<!-- Lenatinerk -->
 				<spawn npc_id="831033" respawn_time="295">
 					<spot x="1208.9816" y="1394.5138" z="208.1250" />
 				</spawn>
-				<!-- thauminerk -->
+				<!-- Thauminerk -->
 				<spawn npc_id="831420" respawn_time="295">
 					<spot x="1208.1348" y="1401.1824" z="208.1250" />
 				</spawn>
@@ -1440,7 +1421,31 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="New Year Event" start="2015-12-22T00:00:00" end="2016-01-12T00:00:00" theme="CHRISTMAS">
+	<event name="Gank the Grankers Inventory" start="2015-12-16T00:00:00" end="2015-12-31T23:59:59">
+		<inventory_drop item_id="186000385" startlevel="8" interval="10" />
+	</event>
+	<event name="Gank the Grankers" start="2015-12-16T00:00:00" end="2015-12-31T23:59:59">
+		<spawns>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Pandarinrinerk -->
+				<spawn npc_id="832731" respawn_time="295">
+					<spot x="1512.5" y="1511.5" z="565.934" h="102" />
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Pandarinrinerk -->
+				<spawn npc_id="832732" respawn_time="295">
+					<spot x="1214.1" y="1398.8" z="208.125" h="6" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="New Year Event" start="2015-12-22T00:00:00" end="2016-01-12T23:59:59" theme="CHRISTMAS">
+		<quests>
+			<maintainable>80022 80023 80024 80025 80026 80027</maintainable>
+		</quests>
 		<event_drops>
 			<gd_rule rule_name="New Year Event Drop" chance="5" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
@@ -1454,9 +1459,6 @@
 				</gd_items>
 			</gd_rule>
 		</event_drops>
-		<quests>
-			<maintainable>80022 80023 80024 80025 80026 80027</maintainable>
-		</quests>
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
@@ -1475,6 +1477,9 @@
 		</spawns>
 	</event>
 	<event name="Trick or treat! The witch and the king" start="2017-10-29T18:00:00" end="2017-11-02T20:00:00" theme="HALLOWEEN">
+		<quests>
+			<maintainable>80010 80011 80012 80013 80014 80015 80086 80087 80088 80089 80090 80091 80092 80093 80094 80095 80096 80097 80098 80099 80100 80101 80102 80103 80104 80105 80106 80107 80108 80109 80110 80111</maintainable>
+		</quests>
 		<event_drops>
 			<gd_rule rule_name="Event Potion" chance="50" min_diff="-29" level_based_chance_reduction="true">
 				<gd_items>
@@ -1507,13 +1512,10 @@
 				</gd_items>
 			</gd_rule>
 		</event_drops>
-		<quests>
-			<maintainable>80010 80011 80012 80013 80014 80015 80086 80087 80088 80089 80090 80091 80092 80093 80094 80095 80096 80097 80098 80099 80100 80101 80102 80103 80104 80105 80106 80107 80108 80109 80110 80111</maintainable>
-		</quests>
 		<spawns>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- Witcha -->
+				<!-- Witchta -->
 				<spawn npc_id="205485" respawn_time="295">
 					<spot x="1273.000" y="1349.000" z="204.000" h="90" />
 				</spawn>
@@ -1678,6 +1680,7 @@
 					<spot x="1519.763" y="1528.506" z="101.127" h="99" />
 				</spawn>
 			</spawn_map>
+			<!-- Theobomos -->
 			<spawn_map map_id="210060000">
 				<!-- Apprentice Mage Soul -->
 				<spawn npc_id="217695" respawn_time="175">
@@ -1713,6 +1716,7 @@
 					<spot x="1794.774" y="1369.216" z="17.452" h="1" />
 				</spawn>
 			</spawn_map>
+			<!-- Eltnen -->
 			<spawn_map map_id="210020000">
 				<!-- Professional Witch Hunter -->
 				<spawn npc_id="217703" respawn_time="175">
@@ -1779,16 +1783,17 @@
 				<spawn npc_id="217704" respawn_time="175">
 					<spot x="2635.086" y="345.748" z="426.688" />
 					<spot x="2595.454" y="613.132" z="342.432" h="13" />
-					<spot x="2544.990" y="589.832" z="339.114" h="70"/>
-					<spot x="2666.744" y="529.250" z="369.198" h="37"/>
+					<spot x="2544.990" y="589.832" z="339.114" h="70" />
+					<spot x="2666.744" y="529.250" z="369.198" h="37" />
 					<spot x="2505.297" y="673.894" z="340.500" />
-					<spot x="2606.274" y="616.968" z="343.900" h="100"/>
-					<spot x="2396.598" y="543.472" z="312.682" h="51"/>
-					<spot x="2458.546" y="623.566" z="332.875" h="17"/>
-					<spot x="2357.916" y="645.198" z="340.875" h="111"/>
+					<spot x="2606.274" y="616.968" z="343.900" h="100" />
+					<spot x="2396.598" y="543.472" z="312.682" h="51" />
+					<spot x="2458.546" y="623.566" z="332.875" h="17" />
+					<spot x="2357.916" y="645.198" z="340.875" h="111" />
 					<spot x="2514.238" y="659.534" z="340.500" />
 				</spawn>
 			</spawn_map>
+			<!-- Morheim -->
 			<spawn_map map_id="220020000">
 				<!-- Professional Exorcist Soul -->
 				<spawn npc_id="217709" respawn_time="175">
@@ -1905,6 +1910,7 @@
 					<spot x="1818.328" y="1899.986" z="249.375" />
 				</spawn>
 			</spawn_map>
+			<!-- Beluslan -->
 			<spawn_map map_id="220040000">
 				<!-- Senior Healer Soul -->
 				<spawn npc_id="217712" respawn_time="175">
@@ -1939,6 +1945,7 @@
 					<spot x="320.704" y="595.431" z="226.614" h="16" />
 				</spawn>
 			</spawn_map>
+			<!-- Brusthonin -->
 			<spawn_map map_id="220050000">
 				<!-- Apprentice Healer Soul -->
 				<spawn npc_id="217708" respawn_time="175">
@@ -1976,7 +1983,10 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Daru Days" start="2015-11-23T00:00:00" end="2015-11-30T00:00:00">
+	<event name="Daru Days" start="2015-11-23T00:00:00" end="2015-11-30T23:59:59">
+		<quests>
+			<maintainable>80076 80077 80078 80079 80080 80081 80082 80083 80084 80085</maintainable>
+		</quests>
 		<event_drops>
 			<gd_rule rule_name="Daru Days Event Drop" chance="1" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_ratings>
@@ -2002,9 +2012,6 @@
 				</gd_items>
 			</gd_rule>
 		</event_drops>
-		<quests>
-			<maintainable>80076 80078 80079 80080 80081 80077 80082 80083 80084 80085</maintainable>
-		</quests>
 		<spawns>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
@@ -2138,10 +2145,44 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Growth" start="2014-01-01T00:00:00" end="2014-12-31T00:00:00">
+	<event name="Growth" start="2014-01-01T00:00:00" end="2014-12-31T23:59:59">
 		<quests>
 			<maintainable>80212 80213 80214 80215 80216 80217 80218 80219 80220 80221 80222 80223 80224 80225 80226 80227 80228 80229 80387 80388 80389 80390 80398 80399 80400 80401 80487 80488 80489 80490 80491 80492 80493 80494 80495 80496 80497 80498 80499 80500 80501 80502 80503 80504 80505 80506 80507 80508 80509 80510 80511 80512 80513 80514 80515 80516 80517 80518 80519 80520 80521 80522 80523 80524 80525 80526 80527 80528 80529 80530 80531 80532 80533 80534 80535 80536 80537 80538</maintainable>
 		</quests>
+		<event_drops>
+			<gd_rule rule_name="Growth Event Drop Elyos" chance="10" restriction_race="ELYOS" level_based_chance_reduction="true">
+				<gd_items>
+					<gd_item id="182215196" /><!-- Fiery Heart -->
+				</gd_items>
+				<gd_npcs>
+					<gd_npc npc_id="212839" /><!-- Blue Crystal Molgat -->
+					<gd_npc npc_id="212840" /><!-- Lava Gatneri -->
+					<gd_npc npc_id="212841" /><!-- Flame Branch Flavi -->
+					<gd_npc npc_id="212842" /><!-- Black Smoke Asparn -->
+					<gd_npc npc_id="212843" /><!-- Tough Sipus -->
+					<gd_npc npc_id="212844" /><!-- Silver Blade Rotan -->
+					<gd_npc npc_id="212845" /><!-- Broken Wing Kutisen -->
+					<gd_npc npc_id="212846" /><!-- Kromede The Corrupt -->
+					<gd_npc npc_id="214621" /><!-- Vile Judge Kromede -->
+				</gd_npcs>
+			</gd_rule>
+			<gd_rule rule_name="Growth Event Drop Asmodians" chance="10" restriction_race="ASMODIANS" level_based_chance_reduction="true">
+				<gd_items>
+					<gd_item id="182215197" /><!-- Fiery Heart -->
+				</gd_items>
+				<gd_npcs>
+					<gd_npc npc_id="212839" /><!-- Blue Crystal Molgat -->
+					<gd_npc npc_id="212840" /><!-- Lava Gatneri -->
+					<gd_npc npc_id="212841" /><!-- Flame Branch Flavi -->
+					<gd_npc npc_id="212842" /><!-- Black Smoke Asparn -->
+					<gd_npc npc_id="212843" /><!-- Tough Sipus -->
+					<gd_npc npc_id="212844" /><!-- Silver Blade Rotan -->
+					<gd_npc npc_id="212845" /><!-- Broken Wing Kutisen -->
+					<gd_npc npc_id="212846" /><!-- Kromede The Corrupt -->
+					<gd_npc npc_id="214621" /><!-- Vile Judge Kromede -->
+				</gd_npcs>
+			</gd_rule>
+		</event_drops>
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
@@ -2312,287 +2353,64 @@
 				</spawn>
 			</spawn_map>
 		</spawns>
-		<event_drops>
-			<gd_rule rule_name="Growth Event Drop Elyos" chance="10" restriction_race="ELYOS" level_based_chance_reduction="true">
-				<gd_items>
-					<gd_item id="182215196" /><!-- Fiery Heart -->
-				</gd_items>
-				<gd_npcs>
-					<gd_npc npc_id="212839" /><!-- Blue Crystal Molgat -->
-					<gd_npc npc_id="212840" /><!-- Lava Gatneri -->
-					<gd_npc npc_id="212841" /><!-- Flame Branch Flavi -->
-					<gd_npc npc_id="212842" /><!-- Black Smoke Asparn -->
-					<gd_npc npc_id="212843" /><!-- Tough Sipus -->
-					<gd_npc npc_id="212844" /><!-- Silver Blade Rotan -->
-					<gd_npc npc_id="212845" /><!-- Broken Wing Kutisen -->
-					<gd_npc npc_id="212846" /><!-- Kromede The Corrupt -->
-					<gd_npc npc_id="214621" /><!-- Vile Judge Kromede -->
-				</gd_npcs>
-			</gd_rule>
-			<gd_rule rule_name="Growth Event Drop Asmodians" chance="10" restriction_race="ASMODIANS" level_based_chance_reduction="true">
-				<gd_items>
-					<gd_item id="182215197" /><!-- Fiery Heart -->
-				</gd_items>
-				<gd_npcs>
-					<gd_npc npc_id="212839" /><!-- Blue Crystal Molgat -->
-					<gd_npc npc_id="212840" /><!-- Lava Gatneri -->
-					<gd_npc npc_id="212841" /><!-- Flame Branch Flavi -->
-					<gd_npc npc_id="212842" /><!-- Black Smoke Asparn -->
-					<gd_npc npc_id="212843" /><!-- Tough Sipus -->
-					<gd_npc npc_id="212844" /><!-- Silver Blade Rotan -->
-					<gd_npc npc_id="212845" /><!-- Broken Wing Kutisen -->
-					<gd_npc npc_id="212846" /><!-- Kromede The Corrupt -->
-					<gd_npc npc_id="214621" /><!-- Vile Judge Kromede -->
-				</gd_npcs>
-			</gd_rule>
-		</event_drops>
 	</event>
-	<event name="Transform and battle as a Guardian General" start="2015-04-01T00:00:00" end="2015-04-10T00:00:00">
+	<event name="April Fool's Day" start="2015-04-01T00:00:00" end="2015-04-10T23:59:59">
 		<quests>
-			<maintainable>80330 80331</maintainable>
+			<maintainable>80328 80329 80330 80331</maintainable>
 		</quests>
 		<spawns>
-			<!-- Sanctum -->
-			<spawn_map map_id="110010000">
-				<!-- Palandry -->
-				<spawn npc_id="831527" respawn_time="295">
-					<spot x="1455" y="1487" z="573" h="43" />
-				</spawn>
-				<!-- Ketru -->
-				<spawn npc_id="831528" respawn_time="295">
-					<spot x="1457" y="1491" z="573" h="57" />
-				</spawn>
-				<!-- Ashken -->
-				<spawn npc_id="831529" respawn_time="295">
-					<spot x="1454" y="1486" z="573" h="31" />
-				</spawn>
-				<!-- Kokomi -->
-				<spawn npc_id="831530" respawn_time="295">
-					<spot x="1454" y="1490" z="573" h="113" />
-				</spawn>
-				<!-- Kotori -->
-				<spawn npc_id="831537" respawn_time="295">
-					<spot x="1451" y="1487" z="573" h="10" />
-				</spawn>
-				<!-- Brax Hauler -->
-				<spawn npc_id="831535" respawn_time="295">
-					<spot x="1458" y="1487" z="573" h="51" />
-				</spawn>
-			</spawn_map>
 			<!-- Oriel -->
 			<spawn_map map_id="700010000">
-				<!-- Brax Hauler -->
-				<spawn npc_id="831536" respawn_time="295">
-					<spot x="1271" y="1829" z="97" h="39" />
-				</spawn>
-				<!-- Kokomi -->
-				<spawn npc_id="831530" respawn_time="295">
-					<spot x="1272" y="1835" z="97" h="101" />
-				</spawn>
-				<!-- Kotori -->
-				<spawn npc_id="831537" respawn_time="295">
-					<spot x="1269" y="1832" z="97" h="11" />
-				</spawn>
-				<!-- Ashken -->
-				<spawn npc_id="831529" respawn_time="295">
-					<spot x="1273" y="1831" z="97" h="40" />
+				<!-- Palandry -->
+				<spawn npc_id="831527" respawn_time="295">
+					<spot x="1274" y="1832" z="97" h="51" />
 				</spawn>
 				<!-- Ketru -->
 				<spawn npc_id="831528" respawn_time="295">
 					<spot x="1276" y="1835" z="97" h="56" />
 				</spawn>
-				<!-- Palandry -->
-				<spawn npc_id="831527" respawn_time="295">
-					<spot x="1274" y="1832" z="97" h="51" />
+				<!-- Ashken -->
+				<spawn npc_id="831529" respawn_time="295">
+					<spot x="1273" y="1831" z="97" h="40" />
 				</spawn>
-			</spawn_map>
-			<!-- Pandaemonium -->
-			<spawn_map map_id="120010000">
-				<!-- Soleil -->
-				<spawn npc_id="831531" respawn_time="295">
-					<spot x="1317" y="1393" z="208" h="8" />
-				</spawn>
-				<!-- Rotul -->
-				<spawn npc_id="831532" respawn_time="295">
-					<spot x="1320" y="1392" z="208" h="31" />
-				</spawn>
-				<!-- Nomini -->
-				<spawn npc_id="831534" respawn_time="295">
-					<spot x="1323" y="1397" z="208" h="77" />
-				</spawn>
-				<!-- Motori -->
-				<spawn npc_id="831538" respawn_time="295">
-					<spot x="1318" y="1397" z="208" h="99" />
-				</spawn>
-				<!-- Traavis -->
-				<spawn npc_id="831533" respawn_time="295">
-					<spot x="1316" y="1395" z="208" h="117" />
+				<!-- Kokomi -->
+				<spawn npc_id="831530" respawn_time="295">
+					<spot x="1272" y="1835" z="97" h="101" />
 				</spawn>
 				<!-- Brax Hauler -->
 				<spawn npc_id="831535" respawn_time="295">
-					<spot x="1321" y="1390" z="208" h="26" />
+					<spot x="1271" y="1829" z="97" h="39" />
+				</spawn>
+				<!-- Kotori -->
+				<spawn npc_id="831537" respawn_time="295">
+					<spot x="1269" y="1832" z="97" h="11" />
 				</spawn>
 			</spawn_map>
 			<!-- Pernon -->
 			<spawn_map map_id="710010000">
-				<!-- Traavis -->
-				<spawn npc_id="831533" respawn_time="295">
-					<spot x="1067" y="1550" z="97" h="98" />
+				<!-- Soleil -->
+				<spawn npc_id="831531" respawn_time="295">
+					<spot x="1064" y="1549" z="97" h="94" />
 				</spawn>
 				<!-- Rotul -->
 				<spawn npc_id="831532" respawn_time="295">
 					<spot x="1059" y="1546" z="97" h="103" />
 				</spawn>
-				<!-- Motori -->
-				<spawn npc_id="831538" respawn_time="295">
-					<spot x="1065" y="1545" z="97" h="57" />
-				</spawn>
-				<!-- Soleil -->
-				<spawn npc_id="831531" respawn_time="295">
-					<spot x="1064" y="1549" z="97" h="94" />
-				</spawn>
-				<!-- Brax Hauler -->
-				<spawn npc_id="831536" respawn_time="295">
-					<spot x="1060" y="1549" z="97" h="100" />
+				<!-- Traavis -->
+				<spawn npc_id="831533" respawn_time="295">
+					<spot x="1067" y="1550" z="97" h="98" />
 				</spawn>
 				<!-- Nomini -->
 				<spawn npc_id="831534" respawn_time="295">
 					<spot x="1063" y="1543" z="97" h="32" />
 				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
-	<event name="Guardian General Showdown" start="2015-05-07T00:00:00" end="2015-05-22T00:00:00">
-		<spawns>
-			<!-- Silentera Canyon -->
-			<spawn_map map_id="600010000">
-				<!-- Furious Dux -->
-				<spawn npc_id="220948">
-					<spot x="658.7087" y="795.21857" z="293.14087" h="7" />
+				<!-- Brax Hauler -->
+				<spawn npc_id="831536" respawn_time="295">
+					<spot x="1060" y="1549" z="97" h="100" />
 				</spawn>
-				<!-- Furious Stalari -->
-				<spawn npc_id="220949">
-					<spot x="657.95105" y="737.5624" z="293.19818" />
-				</spawn>
-				<!-- elyos guardian general protector -->
-				<spawn npc_id="831417" respawn_time="295">
-					<spot x="635.0" y="776.0" z="293.00385" h="2" />
-					<spot x="651.60815" y="802.75323" z="293.6553" h="43" />
-					<spot x="647.5964" y="799.0588" z="293.6553" h="58" />
-					<spot x="657.64703" y="805.4715" z="293.53683" h="27" />
-					<spot x="650.41376" y="783.22876" z="292.79694" h="77" />
-					<spot x="657.8896" y="785.7252" z="292.94116" h="96" />
-					<spot x="635.48486" y="777.75946" z="292.99524" h="64" />
-					<spot x="637.6857" y="776.83496" z="293.00385" h="60" />
-					<spot x="637.06274" y="774.723" z="293.0038" h="100" />
-					<spot x="654.70984" y="782.11487" z="292.79138" h="92" />
-					<spot x="665.0868" y="791.3751" z="289.51376" h="114" />
-					<spot x="667.0471" y="803.78955" z="289.51376" h="113" />
-					<spot x="669.38525" y="794.227" z="289.51376" h="109" />
-				</spawn>
-				<!-- asmodian guardian general protector -->
-				<spawn npc_id="831418" respawn_time="295">
-					<spot x="637.0" y="758.0" z="293.00537" h="46" />
-					<spot x="639.042" y="759.69055" z="293.00385" h="116" />
-					<spot x="635.53314" y="759.89777" z="293.00385" h="50" />
-					<spot x="637.1878" y="761.3926" z="293.00385" h="35" />
-					<spot x="650.49677" y="751.914" z="292.79153" h="46" />
-					<spot x="658.28406" y="750.43695" z="292.94116" h="36" />
-					<spot x="654.21655" y="753.39026" z="292.7842" h="34" />
-					<spot x="656.94403" y="727.93616" z="293.50845" h="96" />
-					<spot x="646.3884" y="729.8014" z="293.0692" h="75" />
-					<spot x="645.7898" y="735.65607" z="293.6553" h="64" />
-					<spot x="666.6759" y="741.97485" z="289.51376" h="8" />
-					<spot x="669.3937" y="739.873" z="289.51376" h="7" />
-					<spot x="668.32574" y="732.40625" z="289.55386" h="3" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
-	<event name="GGS Event 1" start="2015-05-15T20:00:00" end="2015-05-15T22:00:00">
-		<spawns>
-			<!-- Gelkmaros -->
-			<spawn_map map_id="220070000">
-				<!-- Furious Dux -->
-				<spawn npc_id="220948">
-					<spot x="1283" y="1229" z="293" h="67" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
-	<event name="GGS Event 2" start="2015-05-16T20:00:00" end="2015-05-16T22:00:00">
-		<spawns>
-			<!-- Inggison -->
-			<spawn_map map_id="210050000">
-				<!-- Furious Stalari -->
-				<spawn npc_id="220949">
-					<spot x="1322" y="1915" z="308" h="60" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
-	<event name="GGS Event 3" start="2015-05-17T20:00:00" end="2015-05-17T22:00:00">
-		<spawns>
-			<!-- Gelkmaros -->
-			<spawn_map map_id="220070000">
-				<!-- Furious Dux -->
-				<spawn npc_id="220948">
-					<spot x="1283" y="1229" z="293" h="67" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
-	<event name="GGS Event 4" start="2015-05-18T20:00:00" end="2015-05-18T22:00:00">
-		<spawns>
-			<!-- Inggison -->
-			<spawn_map map_id="210050000">
-				<!-- Furious Stalari -->
-				<spawn npc_id="220949">
-					<spot x="1322" y="1915" z="308" h="60" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
-	<event name="GGS Event 5" start="2015-05-19T20:00:00" end="2015-05-19T22:00:00">
-		<spawns>
-			<!-- Gelkmaros -->
-			<spawn_map map_id="220070000">
-				<!-- Furious Dux -->
-				<spawn npc_id="220948">
-					<spot x="1283" y="1229" z="293" h="67" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
-	<event name="GGS Event 6" start="2015-05-20T20:00:00" end="2015-05-20T22:00:00">
-		<spawns>
-			<!-- Inggison -->
-			<spawn_map map_id="210050000">
-				<!-- Furious Stalari -->
-				<spawn npc_id="220949">
-					<spot x="1322" y="1915" z="308" h="60" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
-	<event name="GGS Event 7" start="2015-05-21T20:00:00" end="2015-05-21T22:00:00">
-		<spawns>
-			<!-- Gelkmaros -->
-			<spawn_map map_id="220070000">
-				<!-- Furious Dux -->
-				<spawn npc_id="220948">
-					<spot x="1283" y="1229" z="293" h="67" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
-	<event name="GGS Event 8" start="2015-05-22T20:00:00" end="2015-05-22T22:00:00">
-		<spawns>
-			<!-- Inggison -->
-			<spawn_map map_id="210050000">
-				<!-- Furious Stalari -->
-				<spawn npc_id="220949">
-					<spot x="1322" y="1915" z="308" h="60" />
+				<!-- Motori -->
+				<spawn npc_id="831538" respawn_time="295">
+					<spot x="1065" y="1545" z="97" h="57" />
 				</spawn>
 			</spawn_map>
 		</spawns>
@@ -3091,8 +2909,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<!-- TODO: Check on retail NPC spawn position. real activation date is 2015-04-01 to 2015-05-22 but make it 2015 for test purpose -->
-	<event name="Shugo Imperial Tomb" start="2015-04-01T00:00:00" end="2015-05-22T00:00:00">
+	<event name="Shugo Imperial Tomb" start="2015-04-01T00:00:00" end="2015-05-22T23:59:59">
 		<quests>
 			<maintainable>80274 80275 80279 80282</maintainable>
 		</quests>
@@ -3144,6 +2961,9 @@
 		</spawns>
 	</event>
 	<event name="Shugo Emperor's Vault" start="2018-09-21T00:00:00" end="2018-10-07T23:59:59">
+		<!-- <quests>
+			<maintainable>80689 80690 80691 80692 80693 80694 80695 80696</maintainable>
+		</quests> -->
 		<event_drops>
 			<gd_rule rule_name="Emperor's Vault Entry Scroll" chance="100" member_limit="12">
 				<gd_maps>
@@ -3161,9 +2981,6 @@
 				</gd_items>
 			</gd_rule>
 		</event_drops>
-		<!-- <quests>
-			<maintainable>80689 80690 80691 80692 80693 80694 80695 80696</maintainable>
-		</quests> -->
 		<spawns>
 			<spawn_map map_id="110010000">
 				<!-- Indinerk Jonakak's Secret Passage -->
@@ -3195,7 +3012,10 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Summer Block Party" start="2015-08-01T00:00:00" end="2015-09-04T00:00:00">
+	<event name="Summer Block Party" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
+		<quests>
+			<maintainable>80351 80352 80353 80354 80355 80356 80357 80358 80359 80360 80361 80362 80363 80364 80365 80366 80367 80368</maintainable>
+		</quests>
 		<event_drops>
 			<gd_rule rule_name="Summer Block Party Drop" chance="2" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_worlds>
@@ -3216,9 +3036,6 @@
 				</gd_items>
 			</gd_rule>
 		</event_drops>
-		<quests>
-			<maintainable>80351 80352 80353 80354 80355 80356 80357 80358 80359 80360 80361 80362 80363 80364 80365 80366 80367 80368</maintainable>
-		</quests>
 		<spawns>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
@@ -3266,7 +3083,7 @@
 				</spawn>
 				<!-- Sachsinerk -->
 				<spawn npc_id="831825" respawn_time="295">
-					<spot x="1180.6000" y="1408" z="208.1000" h="0" />
+					<spot x="1180.6000" y="1408" z="208.1000" />
 				</spawn>
 				<!-- Wachovinerk -->
 				<spawn npc_id="831822" respawn_time="295">
@@ -3329,7 +3146,9 @@
 		</spawns>
 	</event>
 	<event name="Alchemy Event" start="2020-04-20T00:00:00" end="2020-04-26T23:59:59">
-		<!-- [Event] Alchemist's Pouch -->
+		<quests>
+			<maintainable>80344</maintainable>
+		</quests>
 		<event_drops>
 			<gd_rule rule_name="Alchemy Boss Event Drop" chance="100" member_limit="6" level_based_chance_reduction="true">
 				<gd_maps>
@@ -3377,9 +3196,6 @@
 				</gd_items>
 			</gd_rule>
 		</event_drops>
-		<quests>
-			<maintainable>80344</maintainable>
-		</quests>
 		<spawns>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
@@ -3435,7 +3251,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Visit the Brax Cafe!" start="2015-10-09T00:00:00" end="2015-10-23T00:00:00" theme="BRAXCAFE">
+	<event name="Visit the Brax Cafe!" start="2015-10-09T00:00:00" end="2015-10-23T23:59:59" theme="BRAXCAFE">
 		<quests>
 			<maintainable>80268 80269 80270 80271</maintainable>
 		</quests>
@@ -3506,89 +3322,89 @@
 		<quests>
 			<maintainable>80567 80568 80569 80570 80571 80572 80573 80574</maintainable>
 		</quests>
+		<event_drops>
+			<gd_rule rule_name="Stolen Letter Cards (regular)" chance="25" member_limit="48" dynamic_chance="true" level_based_chance_reduction="true">
+				<gd_worlds>
+					<gd_world wd_type="BALAUREA" />
+					<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
+					<gd_world wd_type="BALAUREA_HIGH" />
+				</gd_worlds>
+				<gd_ratings>
+					<gd_rating rating="NORMAL" />
+					<gd_rating rating="ELITE" />
+					<gd_rating rating="HERO" />
+					<gd_rating rating="LEGENDARY" />
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="188052977" /><!-- The Stolen Letter Card A -->
+					<gd_item id="188052979" /><!-- The Stolen Letter Card O -->
+					<gd_item id="188052980" /><!-- The Stolen Letter Card B -->
+					<gd_item id="188052983" /><!-- The Stolen Letter Card E -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Stolen Letter Cards (common)" chance="3" dynamic_chance="true" level_based_chance_reduction="true">
+				<gd_worlds>
+					<gd_world wd_type="BALAUREA" />
+					<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
+					<gd_world wd_type="BALAUREA_HIGH" />
+				</gd_worlds>
+				<gd_ratings>
+					<gd_rating rating="NORMAL" />
+					<gd_rating rating="ELITE" />
+					<gd_rating rating="HERO" />
+					<gd_rating rating="LEGENDARY" />
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="188052978" /><!-- The Stolen Letter Card I -->
+					<gd_item id="188052981" /><!-- The Stolen Letter Card S -->
+					<gd_item id="188052982" /><!-- The Stolen Letter Card D -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Stolen Letter Cards (rare)" chance="1.5" dynamic_chance="true" level_based_chance_reduction="true">
+				<gd_worlds>
+					<gd_world wd_type="BALAUREA" />
+					<gd_world wd_type="BALAUREA_HIGH_INSTANCE" />
+					<gd_world wd_type="BALAUREA_HIGH" />
+				</gd_worlds>
+				<gd_ratings>
+					<gd_rating rating="NORMAL" />
+					<gd_rating rating="ELITE" />
+					<gd_rating rating="HERO" />
+					<gd_rating rating="LEGENDARY" />
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="182007144" /><!-- The Stolen Letter Card N -->
+					<gd_item id="182007145" /><!-- The Stolen Letter Card Y -->
+					<gd_item id="182007146" /><!-- The Stolen Letter Card V -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
 		<spawns>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
 				<!-- Lenarunerk -->
 				<spawn npc_id="832016" respawn_time="295">
-					<spot x="1312.3000" y="1398.0000" z="208.1250" h="21"/>
+					<spot x="1312.3000" y="1398.0000" z="208.1250" h="21" />
 				</spawn>
 				<!-- Lenarinerk -->
 				<spawn npc_id="832017" respawn_time="295">
-					<spot x="1307.3000" y="1401.2000" z="208.1250" h="21"/>
+					<spot x="1307.3000" y="1401.2000" z="208.1250" h="21" />
 				</spawn>
 			</spawn_map>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
 				<!-- Lenarunerk -->
 				<spawn npc_id="832016" respawn_time="295">
-					<spot x="1455.4000" y="1451.3000" z="572.8761" h="8"/>
+					<spot x="1455.4000" y="1451.3000" z="572.8761" h="8" />
 				</spawn>
 				<!-- Lenarinerk -->
 				<spawn npc_id="832017" respawn_time="295">
-					<spot x="1457.0000" y="1449.6000" z="572.8755" h="16"/>
+					<spot x="1457.0000" y="1449.6000" z="572.8755" h="16" />
 				</spawn>
 			</spawn_map>
 		</spawns>
-		<event_drops>
-			<gd_rule rule_name="Stolen Letter Cards (regular)" chance="25" member_limit="48" dynamic_chance="true" level_based_chance_reduction="true">
-				<gd_worlds>
-					<gd_world wd_type="BALAUREA"/>
-					<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
-					<gd_world wd_type="BALAUREA_HIGH"/>
-				</gd_worlds>
-				<gd_ratings>
-					<gd_rating rating="NORMAL"/>
-					<gd_rating rating="ELITE"/>
-					<gd_rating rating="HERO"/>
-					<gd_rating rating="LEGENDARY"/>
-				</gd_ratings>
-				<gd_items>
-					<gd_item id="188052977"/><!-- The Stolen Letter Card A -->
-					<gd_item id="188052979"/><!-- The Stolen Letter Card O -->
-					<gd_item id="188052980"/><!-- The Stolen Letter Card B -->
-					<gd_item id="188052983"/><!-- The Stolen Letter Card E -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Stolen Letter Cards (common)" chance="3" dynamic_chance="true" level_based_chance_reduction="true">
-				<gd_worlds>
-					<gd_world wd_type="BALAUREA"/>
-					<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
-					<gd_world wd_type="BALAUREA_HIGH"/>
-				</gd_worlds>
-				<gd_ratings>
-					<gd_rating rating="NORMAL"/>
-					<gd_rating rating="ELITE"/>
-					<gd_rating rating="HERO"/>
-					<gd_rating rating="LEGENDARY"/>
-				</gd_ratings>
-				<gd_items>
-					<gd_item id="188052978"/><!-- The Stolen Letter Card I -->
-					<gd_item id="188052981"/><!-- The Stolen Letter Card S -->
-					<gd_item id="188052982"/><!-- The Stolen Letter Card D -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Stolen Letter Cards (rare)" chance="0.5" dynamic_chance="true" level_based_chance_reduction="true">
-				<gd_worlds>
-					<gd_world wd_type="BALAUREA"/>
-					<gd_world wd_type="BALAUREA_HIGH_INSTANCE"/>
-					<gd_world wd_type="BALAUREA_HIGH"/>
-				</gd_worlds>
-				<gd_ratings>
-					<gd_rating rating="NORMAL"/>
-					<gd_rating rating="ELITE"/>
-					<gd_rating rating="HERO"/>
-					<gd_rating rating="LEGENDARY"/>
-				</gd_ratings>
-				<gd_items>
-					<gd_item id="182007144"/><!-- The Stolen Letter Card N -->
-					<gd_item id="182007145"/><!-- The Stolen Letter Card Y -->
-					<gd_item id="182007146"/><!-- The Stolen Letter Card V -->
-				</gd_items>
-			</gd_rule>
-		</event_drops>
 	</event>
-	<event name="New Beginning's Event" start="2016-01-30T00:00:00" end="2016-02-16T00:00:00">
+	<event name="New Beginning's Event" start="2016-01-30T00:00:00" end="2016-02-16T23:59:59">
 		<spawns>
 			<!-- Verteron -->
 			<spawn_map map_id="210030000">
@@ -3660,7 +3476,7 @@
 	</event>
 	<event name="Boiling Point" start="2020-03-27T00:00:00" end="2020-04-05T23:59:59">
 		<quests>
-			<maintainable>51035 51036 51037 50035 50036 50037</maintainable>
+			<maintainable>50035 50036 50037 51035 51036 51037</maintainable>
 		</quests>
 		<event_drops>
 			<gd_rule rule_name="Boiling Point Rolled Dumpling" chance="100" member_limit="6" level_based_chance_reduction="true">
@@ -3725,71 +3541,10 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Gank the Grankers Inventory" start="2015-12-16T00:00:00" end="2016-12-30T00:00:00">
-		<inventory_drop item_id="186000385" startlevel="8" interval="10" />
-	</event>
-	<event name="Gank the Grankers" start="2015-12-16T00:00:00" end="2016-12-24T00:00:00">
-		<spawns>
-			<!-- Sanctum -->
-			<spawn_map map_id="110010000">
-				<!-- Pandarinrinerk -->
-				<spawn npc_id="832731" respawn_time="295">
-					<spot x="1512.5" y="1511.5" z="565.934" h="102" />
-				</spawn>
-			</spawn_map>
-			<!-- Pandaemonium -->
-			<spawn_map map_id="120010000">
-				<!-- Pandarinrinerk -->
-				<spawn npc_id="832732" respawn_time="295">
-					<spot x="1214.1" y="1398.8" z="208.125" h="6" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-	</event>
 	<event name="Frozen Magic Event" start="2019-12-13T00:00:00" end="2019-12-31T23:59:59">
 		<quests>
 			<maintainable>80575 80576 80577 80578 80579 80580</maintainable>
 		</quests>
-		<spawns>
-			<!-- Sanctum -->
-			<spawn_map map_id="110010000">
-				<!-- Freezy -->
-				<spawn npc_id="832040" respawn_time="295">
-					<spot x="1526" y="1516" z="565.9007" h="72" />
-				</spawn>
-				<!-- Frosterinerk -->
-				<spawn npc_id="832041" respawn_time="295">
-					<spot x="1520.5" y="1507.4" z="565.913" h="18" />
-				</spawn>
-				<!-- Frostirunerk -->
-				<spawn npc_id="832042" respawn_time="295">
-					<spot x="1518.4" y="1512.2" z="565.9181" h="57" />
-				</spawn>
-				<!-- World_FOBJ_Winter_Snow -->
-				<spawn npc_id="832039" respawn_time="295">
-					<spot x="1534" y="1514" z="565.8892" h="68" />
-				</spawn>
-			</spawn_map>
-			<!-- Pandaemonium -->
-			<spawn_map map_id="120010000">
-				<!-- Freezy -->
-				<spawn npc_id="832040" respawn_time="295">
-					<spot x="1208.7" y="1399.8" z="208.125" h="14" />
-				</spawn>
-				<!-- Frosterinerk -->
-				<spawn npc_id="832041" respawn_time="295">
-					<spot x="1210" y="1404" z="208.125" h="117" />
-				</spawn>
-				<!-- Frostirunerk -->
-				<spawn npc_id="832042" respawn_time="295">
-					<spot x="1213" y="1400" z="208.125" h="3" />
-				</spawn>
-				<!-- World_FOBJ_Winter_Snow -->
-				<spawn npc_id="832039" respawn_time="295">
-					<spot x="1199" y="1394" z="208.125" h="18" />
-				</spawn>
-			</spawn_map>
-		</spawns>
 		<event_drops>
 			<gd_rule rule_name="Snowball (Single)" chance="10">
 				<gd_items>
@@ -3854,117 +3609,51 @@
 				</gd_npcs>
 			</gd_rule>
 		</event_drops>
+		<spawns>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Freezy -->
+				<spawn npc_id="832040" respawn_time="295">
+					<spot x="1526" y="1516" z="565.9007" h="72" />
+				</spawn>
+				<!-- Frosterinerk -->
+				<spawn npc_id="832041" respawn_time="295">
+					<spot x="1520.5" y="1507.4" z="565.913" h="18" />
+				</spawn>
+				<!-- Frostirunerk -->
+				<spawn npc_id="832042" respawn_time="295">
+					<spot x="1518.4" y="1512.2" z="565.9181" h="57" />
+				</spawn>
+				<!-- World_FOBJ_Winter_Snow -->
+				<spawn npc_id="832039" respawn_time="295">
+					<spot x="1534" y="1514" z="565.8892" h="68" />
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Freezy -->
+				<spawn npc_id="832040" respawn_time="295">
+					<spot x="1208.7" y="1399.8" z="208.125" h="14" />
+				</spawn>
+				<!-- Frosterinerk -->
+				<spawn npc_id="832041" respawn_time="295">
+					<spot x="1210" y="1404" z="208.125" h="117" />
+				</spawn>
+				<!-- Frostirunerk -->
+				<spawn npc_id="832042" respawn_time="295">
+					<spot x="1213" y="1400" z="208.125" h="3" />
+				</spawn>
+				<!-- World_FOBJ_Winter_Snow -->
+				<spawn npc_id="832039" respawn_time="295">
+					<spot x="1199" y="1394" z="208.125" h="18" />
+				</spawn>
+			</spawn_map>
+		</spawns>
 	</event>
 	<event name="Joker's Wild Event" start="2020-08-01T00:00:00" end="2020-08-01T23:59:59">
 		<quests>
 			<maintainable>80623 80624 80625 80626 80627 80628 80629 80630 80631 80632 80633 80634</maintainable>
 		</quests>
-		<spawns>
-			<!-- Sanctum -->
-			<spawn_map map_id="110010000">
-				<!-- Joker's Secret Box -->
-				<spawn npc_id="832260" respawn_time="10">
-					<spot x="1503.3" y="1438.5" z="572.8712" h="40" />
-					<spot x="1505.0" y="1435.5" z="572.8712" h="40" />
-					<spot x="1506.3" y="1440.2" z="572.8712" h="40" />
-					<spot x="1508.0" y="1437.2" z="572.8712" h="40" />
-					<spot x="1509.3" y="1441.8" z="572.8712" h="40" />
-					<spot x="1511.0" y="1438.8" z="572.8712" h="40" />
-				</spawn>
-				<!-- World_FOBJ_TrumpTable -->
-				<spawn npc_id="832867" respawn_time="295">
-					<spot x="1508.0" y="1452.8" z="572.8718" h="51" />
-				</spawn>
-				<!-- Allas -->
-				<spawn npc_id="832868" respawn_time="295">
-					<spot x="1503.6" y="1443.3" z="572.8718" h="45" />
-				</spawn>
-				<!-- Pierodan -->
-				<spawn npc_id="832870" respawn_time="295">
-					<spot x="1506.0" y="1444.8" z="572.8718" h="45" />
-				</spawn>
-				<!-- Croke -->
-				<spawn npc_id="832872" respawn_time="295">
-					<spot x="1500.6" y="1442.1" z="572.8718" h="17" />
-				</spawn>
-				<!-- Luis -->
-				<spawn npc_id="832874" respawn_time="295">
-					<spot x="1507.0" y="1450.6" z="572.8718" h="21" />
-				</spawn>
-				<!-- Tuperunerk -->
-				<spawn npc_id="832876" respawn_time="295">
-					<spot x="1509.2" y="1451.2" z="572.8718" h="49" />
-				</spawn>
-				<!-- Housrinerk -->
-				<spawn npc_id="832877" respawn_time="295">
-					<spot x="1509.9" y="1452.65" z="572.8718" h="54" />
-				</spawn>
-				<!-- Scroog -->
-				<spawn npc_id="832878" respawn_time="295">
-					<spot x="1506.5" y="1453.0" z="572.8718" />
-				</spawn>
-				<!-- Tripli -->
-				<spawn npc_id="832880" respawn_time="295">
-					<spot x="1507.2" y="1454.2" z="572.8718" h="104" />
-				</spawn>
-				<!-- Dronk -->
-				<spawn npc_id="832882" respawn_time="295">
-					<spot x="1509.4" y="1455.2" z="572.8718" h="106" />
-				</spawn>
-			</spawn_map>
-			<!-- Pandaemonium -->
-			<spawn_map map_id="120010000">
-				<!-- Joker's Secret Box -->
-				<spawn npc_id="832260" respawn_time="10">
-					<spot x="1271.7" y="1339.4" z="204.4608" h="90" />
-					<spot x="1275.7" y="1339.4" z="204.4608" h="90" />
-					<spot x="1279.7" y="1339.4" z="204.4608" h="90" />
-					<spot x="1271.7" y="1334.4" z="204.4608" h="90" />
-					<spot x="1275.7" y="1334.4" z="204.4608" h="90" />
-					<spot x="1279.7" y="1334.4" z="204.4608" h="90" />
-				</spawn>
-				<!-- World_FOBJ_TrumpTable -->
-				<spawn npc_id="832867" respawn_time="295">
-					<spot x="1276.0" y="1319.0" z="204.42" h="30" />
-				</spawn>
-				<!-- Allas -->
-				<spawn npc_id="832869" respawn_time="295">
-					<spot x="1275.7" y="1328.0" z="204.42" h="90" />
-				</spawn>
-				<!-- Pierodan -->
-				<spawn npc_id="832871" respawn_time="295">
-					<spot x="1277.9" y="1327.5" z="204.42" h="113" />
-				</spawn>
-				<!-- Croke -->
-				<spawn npc_id="832873" respawn_time="295">
-					<spot x="1272.5" y="1328.0" z="204.42" h="108" />
-				</spawn>
-				<!-- Luis -->
-				<spawn npc_id="832875" respawn_time="295">
-					<spot x="1274.0" y="1319.0" z="204.42" />
-				</spawn>
-				<!-- Tuperunerk -->
-				<spawn npc_id="832876" respawn_time="295">
-					<spot x="1277.0" y="1320.4" z="204.42" h="84" />
-				</spawn>
-				<!-- Housrinerk -->
-				<spawn npc_id="832877" respawn_time="295">
-					<spot x="1275.0" y="1320.4" z="204.42" h="90" />
-				</spawn>
-				<!-- Scroog -->
-				<spawn npc_id="832879" respawn_time="295">
-					<spot x="1275.0" y="1317.4" z="204.42" h="19" />
-				</spawn>
-				<!-- Tripli -->
-				<spawn npc_id="832881" respawn_time="295">
-					<spot x="1277.0" y="1317.4" z="204.42" h="35" />
-				</spawn>
-				<!-- Dronk -->
-				<spawn npc_id="832883" respawn_time="295">
-					<spot x="1278.8" y="1319.0" z="204.42" h="21" />
-				</spawn>
-			</spawn_map>
-		</spawns>
 		<event_drops>
 			<gd_rule rule_name="Trump Rift Drop" chance="50" member_limit="6">
 				<gd_items>
@@ -4104,6 +3793,112 @@
 				</gd_items>
 			</gd_rule>
 		</event_drops>
+		<spawns>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Joker's Secret Box -->
+				<spawn npc_id="832260" respawn_time="10">
+					<spot x="1503.3" y="1438.5" z="572.8712" h="40" />
+					<spot x="1505.0" y="1435.5" z="572.8712" h="40" />
+					<spot x="1506.3" y="1440.2" z="572.8712" h="40" />
+					<spot x="1508.0" y="1437.2" z="572.8712" h="40" />
+					<spot x="1509.3" y="1441.8" z="572.8712" h="40" />
+					<spot x="1511.0" y="1438.8" z="572.8712" h="40" />
+				</spawn>
+				<!-- World_FOBJ_TrumpTable -->
+				<spawn npc_id="832867" respawn_time="295">
+					<spot x="1508.0" y="1452.8" z="572.8718" h="51" />
+				</spawn>
+				<!-- Allas -->
+				<spawn npc_id="832868" respawn_time="295">
+					<spot x="1503.6" y="1443.3" z="572.8718" h="45" />
+				</spawn>
+				<!-- Pierodan -->
+				<spawn npc_id="832870" respawn_time="295">
+					<spot x="1506.0" y="1444.8" z="572.8718" h="45" />
+				</spawn>
+				<!-- Croke -->
+				<spawn npc_id="832872" respawn_time="295">
+					<spot x="1500.6" y="1442.1" z="572.8718" h="17" />
+				</spawn>
+				<!-- Luis -->
+				<spawn npc_id="832874" respawn_time="295">
+					<spot x="1507.0" y="1450.6" z="572.8718" h="21" />
+				</spawn>
+				<!-- Tuperunerk -->
+				<spawn npc_id="832876" respawn_time="295">
+					<spot x="1509.2" y="1451.2" z="572.8718" h="49" />
+				</spawn>
+				<!-- Housrinerk -->
+				<spawn npc_id="832877" respawn_time="295">
+					<spot x="1509.9" y="1452.65" z="572.8718" h="54" />
+				</spawn>
+				<!-- Scroog -->
+				<spawn npc_id="832878" respawn_time="295">
+					<spot x="1506.5" y="1453.0" z="572.8718" />
+				</spawn>
+				<!-- Tripli -->
+				<spawn npc_id="832880" respawn_time="295">
+					<spot x="1507.2" y="1454.2" z="572.8718" h="104" />
+				</spawn>
+				<!-- Dronk -->
+				<spawn npc_id="832882" respawn_time="295">
+					<spot x="1509.4" y="1455.2" z="572.8718" h="106" />
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Joker's Secret Box -->
+				<spawn npc_id="832260" respawn_time="10">
+					<spot x="1271.7" y="1339.4" z="204.4608" h="90" />
+					<spot x="1275.7" y="1339.4" z="204.4608" h="90" />
+					<spot x="1279.7" y="1339.4" z="204.4608" h="90" />
+					<spot x="1271.7" y="1334.4" z="204.4608" h="90" />
+					<spot x="1275.7" y="1334.4" z="204.4608" h="90" />
+					<spot x="1279.7" y="1334.4" z="204.4608" h="90" />
+				</spawn>
+				<!-- World_FOBJ_TrumpTable -->
+				<spawn npc_id="832867" respawn_time="295">
+					<spot x="1276.0" y="1319.0" z="204.42" h="30" />
+				</spawn>
+				<!-- Allas -->
+				<spawn npc_id="832869" respawn_time="295">
+					<spot x="1275.7" y="1328.0" z="204.42" h="90" />
+				</spawn>
+				<!-- Pierodan -->
+				<spawn npc_id="832871" respawn_time="295">
+					<spot x="1277.9" y="1327.5" z="204.42" h="113" />
+				</spawn>
+				<!-- Croke -->
+				<spawn npc_id="832873" respawn_time="295">
+					<spot x="1272.5" y="1328.0" z="204.42" h="108" />
+				</spawn>
+				<!-- Luis -->
+				<spawn npc_id="832875" respawn_time="295">
+					<spot x="1274.0" y="1319.0" z="204.42" />
+				</spawn>
+				<!-- Tuperunerk -->
+				<spawn npc_id="832876" respawn_time="295">
+					<spot x="1277.0" y="1320.4" z="204.42" h="84" />
+				</spawn>
+				<!-- Housrinerk -->
+				<spawn npc_id="832877" respawn_time="295">
+					<spot x="1275.0" y="1320.4" z="204.42" h="90" />
+				</spawn>
+				<!-- Scroog -->
+				<spawn npc_id="832879" respawn_time="295">
+					<spot x="1275.0" y="1317.4" z="204.42" h="19" />
+				</spawn>
+				<!-- Tripli -->
+				<spawn npc_id="832881" respawn_time="295">
+					<spot x="1277.0" y="1317.4" z="204.42" h="35" />
+				</spawn>
+				<!-- Dronk -->
+				<spawn npc_id="832883" respawn_time="295">
+					<spot x="1278.8" y="1319.0" z="204.42" h="21" />
+				</spawn>
+			</spawn_map>
+		</spawns>
 	</event>
 	<event name="Legendary Symphony" start="2020-04-10T00:00:00" end="2020-04-22T23:59:59">
 		<quests>
@@ -4114,7 +3909,7 @@
 			<spawn_map map_id="110010000">
 				<!-- Sonatine -->
 				<spawn npc_id="832967" respawn_time="295">
-					<spot x="1468.924" y="1468.615" z="572.876" h="95"/>
+					<spot x="1468.924" y="1468.615" z="572.876" h="95" />
 				</spawn>
 				<!-- Andante -->
 				<!-- CUSTOM REWARDS PER CMD
@@ -4124,14 +3919,14 @@
 				-->
 				<!-- Allegro -->
 				<spawn npc_id="832969" respawn_time="295">
-					<spot x="1467.247" y="1468.093" z="572.876" h="95"/>
+					<spot x="1467.247" y="1468.093" z="572.876" h="95" />
 				</spawn>
 			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
 				<!-- Sonatine -->
 				<spawn npc_id="832970" respawn_time="295">
-					<spot x="1295.02" y="1436.568" z="209.091" h="85"/>
+					<spot x="1295.02" y="1436.568" z="209.091" h="85" />
 				</spawn>
 				<!-- Andante -->
 				<!-- CUSTOM REWARDS PER CMD
@@ -4141,7 +3936,7 @@
 				-->
 				<!-- Allegro -->
 				<spawn npc_id="832972" respawn_time="295">
-					<spot x="1292.396" y="1437.56" z="209.091" h="81"/>
+					<spot x="1292.396" y="1437.56" z="209.091" h="81" />
 				</spawn>
 			</spawn_map>
 		</spawns>
@@ -4151,96 +3946,96 @@
 			<!-- Green Garrisons -->
 			<gd_rule rule_name="Symphony of Legend - The First Movement" chance="40">
 				<gd_maps>
-					<gd_map map_id="600100000"/><!-- Levinshor -->
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235370"/><!-- Tomul Brawler -->
-					<gd_npc npc_id="235371"/><!-- Tomul Cutthroat -->
-					<gd_npc npc_id="235372"/><!-- Tomul Shaman -->
-					<gd_npc npc_id="235373"/><!-- Tomul Aquamancer -->
-					<gd_npc npc_id="235374"/><!-- Denku Feralclaw -->
-					<gd_npc npc_id="235375"/><!-- Denku Fang -->
-					<gd_npc npc_id="235376"/><!-- Denku Restorer -->
-					<gd_npc npc_id="235377"/><!-- Denku Feralmage -->
+					<gd_npc npc_id="235370" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235371" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235372" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235373" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235374" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235375" /><!-- Denku Fang -->
+					<gd_npc npc_id="235376" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235377" /><!-- Denku Feralmage -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188100252"/><!-- Symphony of Legend - The First Movement -->
+					<gd_item id="188100252" /><!-- Symphony of Legend - The First Movement -->
 				</gd_items>
 			</gd_rule>
 			<!-- Blue Garrions -->
 			<gd_rule rule_name="Symphony of Legend - The Second Movement" chance="40">
 				<gd_maps>
-					<gd_map map_id="600100000"/><!-- Levinshor -->
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235346"/><!-- Tomul Brawler -->
-					<gd_npc npc_id="235347"/><!-- Tomul Cutthroat -->
-					<gd_npc npc_id="235348"/><!-- Tomul Shaman -->
-					<gd_npc npc_id="235349"/><!-- Tomul Aquamancer -->
-					<gd_npc npc_id="235350"/><!-- Denku Feralclaw -->
-					<gd_npc npc_id="235351"/><!-- Denku Fang -->
-					<gd_npc npc_id="235352"/><!-- Denku Restorer -->
-					<gd_npc npc_id="235353"/><!-- Denku Feralmage -->
+					<gd_npc npc_id="235346" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235347" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235348" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235349" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235350" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235351" /><!-- Denku Fang -->
+					<gd_npc npc_id="235352" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235353" /><!-- Denku Feralmage -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188100253"/><!-- Symphony of Legend - The Second Movement -->
+					<gd_item id="188100253" /><!-- Symphony of Legend - The Second Movement -->
 				</gd_items>
 			</gd_rule>
 			<!-- Yellow Garrions -->
 			<gd_rule rule_name="Symphony of Legend - The Third Movement" chance="40">
 				<gd_maps>
-					<gd_map map_id="600100000"/><!-- Levinshor -->
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235354"/><!-- Tomul Brawler -->
-					<gd_npc npc_id="235355"/><!-- Tomul Cutthroat -->
-					<gd_npc npc_id="235356"/><!-- Tomul Shaman -->
-					<gd_npc npc_id="235357"/><!-- Tomul Aquamancer -->
-					<gd_npc npc_id="235358"/><!-- Denku Feralclaw -->
-					<gd_npc npc_id="235359"/><!-- Denku Fang -->
-					<gd_npc npc_id="235360"/><!-- Denku Restorer -->
-					<gd_npc npc_id="235361"/><!-- Denku Feralmage -->
+					<gd_npc npc_id="235354" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235355" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235356" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235357" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235358" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235359" /><!-- Denku Fang -->
+					<gd_npc npc_id="235360" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235361" /><!-- Denku Feralmage -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188100254"/><!-- Symphony of Legend - The Third Movement -->
+					<gd_item id="188100254" /><!-- Symphony of Legend - The Third Movement -->
 				</gd_items>
 			</gd_rule>
 			<!-- Red Garrions -->
 			<gd_rule rule_name="Symphony of Legend - The Fourth Movement" chance="40">
 				<gd_maps>
-					<gd_map map_id="600100000"/><!-- Levinshor -->
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235362"/><!-- Tomul Brawler -->
-					<gd_npc npc_id="235363"/><!-- Tomul Cutthroat -->
-					<gd_npc npc_id="235364"/><!-- Tomul Shaman -->
-					<gd_npc npc_id="235365"/><!-- Tomul Aquamancer -->
-					<gd_npc npc_id="235366"/><!-- Denku Feralclaw -->
-					<gd_npc npc_id="235367"/><!-- Denku Fang -->
-					<gd_npc npc_id="235368"/><!-- Denku Restorer -->
-					<gd_npc npc_id="235369"/><!-- Denku Feralmage -->
+					<gd_npc npc_id="235362" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235363" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235364" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235365" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235366" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235367" /><!-- Denku Fang -->
+					<gd_npc npc_id="235368" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235369" /><!-- Denku Feralmage -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188100255"/><!-- Symphony of Legend - The Fourth Movement -->
+					<gd_item id="188100255" /><!-- Symphony of Legend - The Fourth Movement -->
 				</gd_items>
 			</gd_rule>
 			<!-- Central Garrions -->
 			<gd_rule rule_name="Symphony of Legend - Epilogue" chance="40">
 				<gd_maps>
-					<gd_map map_id="600100000"/><!-- Levinshor -->
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="235378"/><!-- Tomul Brawler -->
-					<gd_npc npc_id="235379"/><!-- Tomul Cutthroat -->
-					<gd_npc npc_id="235380"/><!-- Tomul Shaman -->
-					<gd_npc npc_id="235381"/><!-- Tomul Aquamancer -->
-					<gd_npc npc_id="235382"/><!-- Denku Feralclaw -->
-					<gd_npc npc_id="235383"/><!-- Denku Fang -->
-					<gd_npc npc_id="235384"/><!-- Denku Restorer -->
-					<gd_npc npc_id="235385"/><!-- Denku Feralmage -->
+					<gd_npc npc_id="235378" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235379" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235380" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235381" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235382" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235383" /><!-- Denku Fang -->
+					<gd_npc npc_id="235384" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235385" /><!-- Denku Feralmage -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188100256"/><!-- Symphony of Legend - Epilogue -->
+					<gd_item id="188100256" /><!-- Symphony of Legend - Epilogue -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -4249,7 +4044,7 @@
 		<event_drops>
 			<gd_rule rule_name="Mysterious Card" chance="10">
 				<gd_maps>
-					<gd_map map_id="600100000"/><!-- Levinshor -->
+					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
@@ -4257,7 +4052,7 @@
 					<gd_rating rating="HERO" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="186000381"/><!-- Mysterious Card -->
+					<gd_item id="186000381" /><!-- Mysterious Card -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -4280,6 +4075,55 @@
 	</event>
 	<event name="Blessing Of The Magic Fountain" start="2019-04-19T00:00:00" end="2019-05-05T23:59:59">
 		<inventory_drop item_id="186000406" startlevel="1" interval="60" />
+		<event_drops>
+			<gd_rule rule_name="Aether Bloom Bouquet" chance="100" member_limit="6">
+				<gd_maps>
+					<gd_map map_id="300280000" /><!-- Rentus_Base -->
+					<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
+					<gd_map map_id="300590000" /><!-- Ophidan Bridge -->
+					<gd_map map_id="301380000" /><!-- Danuar Sanctuary -->
+					<gd_map map_id="301140000" /><!-- Seized Danuar Sanctuary -->
+					<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
+					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
+					<gd_map map_id="301230000" /><!-- Illuminary Obelisk -->
+					<gd_map map_id="301370000" /><!-- Infernal Illuminary Obelisk -->
+					<gd_map map_id="301110000" /><!-- Danuar Reliquary -->
+				</gd_maps>
+				<gd_npcs>
+					<!-- Rentus Base -->
+					<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
+					<!-- Tiamat's Stronghold -->
+					<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest -->
+					<!-- Ophidan Bridge -->
+					<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+					<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
+					<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
+					<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
+					<!-- Danuar Sanctuary -->
+					<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
+					<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
+					<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
+					<!-- Seized Danuar Sanctuary -->
+					<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
+					<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
+					<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
+					<!-- Occupied Rentus Base -->
+					<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
+					<!-- Sauro Supply Base -->
+					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+					<!-- Illuminary Obelisk -->
+					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
+					<!-- Infernal Illuminary Obelisk -->
+					<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
+					<!-- Danuar Reliquary -->
+					<gd_npc npc_id="701795" /><!-- Treasue Box (Danuar Reliquary) -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053915" /><!-- [Event] Aether Bloom Bouquet -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
@@ -5165,66 +5009,66 @@
 			<spawn_map map_id="600100000">
 				<!-- Yellow Aether Blossom 60 spawns -->
 				<spawn npc_id="702786" respawn_time="900" pool="10">
-					<spot x="76.66101" y="115.750656" z="347.38513" /> 
-					<spot x="120.299255" y="120.32318" z="347.4139" /> 
-					<spot x="143.0629" y="145.99945" z="356.39844" /> 
-					<spot x="131.89015" y="173.01598" z="367.80206" /> 
-					<spot x="183.67853" y="170.87936" z="373.49973" /> 
-					<spot x="245.56975" y="147.94858" z="358.94165" /> 
-					<spot x="280.6892" y="119.567795" z="365.43997" /> 
-					<spot x="319.67386" y="104.35142" z="364.0591" /> 
-					<spot x="339.36334" y="83.24553" z="370.2682" /> 
-					<spot x="362.75143" y="58.566605" z="370.1322" /> 
-					<spot x="391.1521" y="69.418846" z="361.34186" /> 
-					<spot x="386.7206" y="117.485" z="354.33817" /> 
-					<spot x="351.6092" y="139.58484" z="353.32632" /> 
-					<spot x="330.7214" y="175.72633" z="352.70493" /> 
-					<spot x="295.09494" y="190.85771" z="352.56842" /> 
-					<spot x="283.80972" y="221.02307" z="343.8972" /> 
-					<spot x="310.4598" y="253.74077" z="333.08124" /> 
-					<spot x="341.61374" y="233.91089" z="331.08356" /> 
-					<spot x="374.0842" y="233.85864" z="330.7765" /> 
-					<spot x="404.5816" y="219.58464" z="334.52557" /> 
-					<spot x="438.27948" y="206.50055" z="333.47144" /> 
-					<spot x="466.3229" y="175.3709" z="327.18347" /> 
-					<spot x="480.35983" y="145.67111" z="332.77057" /> 
-					<spot x="511.5405" y="139.19328" z="331.85785" /> 
-					<spot x="488.49054" y="169.76413" z="330.07605" /> 
-					<spot x="484.8678" y="214.13878" z="323.14453" /> 
-					<spot x="508.43634" y="229.6167" z="323.27576" /> 
-					<spot x="476.89755" y="277.08908" z="312.3214" /> 
-					<spot x="486.2925" y="317.03296" z="309.61496" /> 
-					<spot x="540.1415" y="268.49826" z="294.97348" /> 
-					<spot x="588.8588" y="262.0867" z="291.45175" /> 
-					<spot x="615.9274" y="286.99866" z="294.32117" /> 
-					<spot x="640.68286" y="327.2207" z="301.0461" /> 
-					<spot x="648.88666" y="376.0458" z="309.91702" /> 
-					<spot x="679.7993" y="331.2938" z="295.69193" /> 
-					<spot x="701.09344" y="275.80972" z="291.18124" /> 
-					<spot x="439.45483" y="366.86838" z="327.69574" /> 
-					<spot x="401.58032" y="331.19614" z="322.1044" /> 
-					<spot x="377.11996" y="374.6155" z="320.01498" /> 
-					<spot x="307.8377" y="349.26697" z="322.5095" /> 
-					<spot x="268.0854" y="397.67725" z="329.74448" /> 
-					<spot x="228.29526" y="353.77" z="327.2501" /> 
-					<spot x="187.4831" y="362.62802" z="332.13647" /> 
-					<spot x="177.48236" y="403.74072" z="324.99268" /> 
-					<spot x="221.65749" y="436.12646" z="316.65417" /> 
-					<spot x="190.40439" y="470.8736" z="307.4463" /> 
-					<spot x="212.04192" y="503.69928" z="298.70456" /> 
-					<spot x="246.51498" y="496.7882" z="298.16086" /> 
-					<spot x="236.44194" y="541.6072" z="289.06055" /> 
-					<spot x="266.55054" y="558.3498" z="284.5013" /> 
-					<spot x="147.75171" y="440.3349" z="324.46283" /> 
-					<spot x="157.05717" y="486.41312" z="324.13214" /> 
-					<spot x="128.2444" y="522.2562" z="329.40762" /> 
-					<spot x="152.25908" y="570.262" z="328.76657" /> 
-					<spot x="97.67929" y="575.5603" z="333.72232" /> 
-					<spot x="109.91872" y="625.77313" z="324.6087" /> 
-					<spot x="75.66747" y="660.72" z="313.83737" /> 
-					<spot x="101.90204" y="694.2081" z="305.44873" /> 
-					<spot x="98.5632" y="732.557" z="297.72827" /> 
-					<spot x="128.88278" y="766.864" z="289.11386" /> 
+					<spot x="76.66101" y="115.750656" z="347.38513" />
+					<spot x="120.299255" y="120.32318" z="347.4139" />
+					<spot x="143.0629" y="145.99945" z="356.39844" />
+					<spot x="131.89015" y="173.01598" z="367.80206" />
+					<spot x="183.67853" y="170.87936" z="373.49973" />
+					<spot x="245.56975" y="147.94858" z="358.94165" />
+					<spot x="280.6892" y="119.567795" z="365.43997" />
+					<spot x="319.67386" y="104.35142" z="364.0591" />
+					<spot x="339.36334" y="83.24553" z="370.2682" />
+					<spot x="362.75143" y="58.566605" z="370.1322" />
+					<spot x="391.1521" y="69.418846" z="361.34186" />
+					<spot x="386.7206" y="117.485" z="354.33817" />
+					<spot x="351.6092" y="139.58484" z="353.32632" />
+					<spot x="330.7214" y="175.72633" z="352.70493" />
+					<spot x="295.09494" y="190.85771" z="352.56842" />
+					<spot x="283.80972" y="221.02307" z="343.8972" />
+					<spot x="310.4598" y="253.74077" z="333.08124" />
+					<spot x="341.61374" y="233.91089" z="331.08356" />
+					<spot x="374.0842" y="233.85864" z="330.7765" />
+					<spot x="404.5816" y="219.58464" z="334.52557" />
+					<spot x="438.27948" y="206.50055" z="333.47144" />
+					<spot x="466.3229" y="175.3709" z="327.18347" />
+					<spot x="480.35983" y="145.67111" z="332.77057" />
+					<spot x="511.5405" y="139.19328" z="331.85785" />
+					<spot x="488.49054" y="169.76413" z="330.07605" />
+					<spot x="484.8678" y="214.13878" z="323.14453" />
+					<spot x="508.43634" y="229.6167" z="323.27576" />
+					<spot x="476.89755" y="277.08908" z="312.3214" />
+					<spot x="486.2925" y="317.03296" z="309.61496" />
+					<spot x="540.1415" y="268.49826" z="294.97348" />
+					<spot x="588.8588" y="262.0867" z="291.45175" />
+					<spot x="615.9274" y="286.99866" z="294.32117" />
+					<spot x="640.68286" y="327.2207" z="301.0461" />
+					<spot x="648.88666" y="376.0458" z="309.91702" />
+					<spot x="679.7993" y="331.2938" z="295.69193" />
+					<spot x="701.09344" y="275.80972" z="291.18124" />
+					<spot x="439.45483" y="366.86838" z="327.69574" />
+					<spot x="401.58032" y="331.19614" z="322.1044" />
+					<spot x="377.11996" y="374.6155" z="320.01498" />
+					<spot x="307.8377" y="349.26697" z="322.5095" />
+					<spot x="268.0854" y="397.67725" z="329.74448" />
+					<spot x="228.29526" y="353.77" z="327.2501" />
+					<spot x="187.4831" y="362.62802" z="332.13647" />
+					<spot x="177.48236" y="403.74072" z="324.99268" />
+					<spot x="221.65749" y="436.12646" z="316.65417" />
+					<spot x="190.40439" y="470.8736" z="307.4463" />
+					<spot x="212.04192" y="503.69928" z="298.70456" />
+					<spot x="246.51498" y="496.7882" z="298.16086" />
+					<spot x="236.44194" y="541.6072" z="289.06055" />
+					<spot x="266.55054" y="558.3498" z="284.5013" />
+					<spot x="147.75171" y="440.3349" z="324.46283" />
+					<spot x="157.05717" y="486.41312" z="324.13214" />
+					<spot x="128.2444" y="522.2562" z="329.40762" />
+					<spot x="152.25908" y="570.262" z="328.76657" />
+					<spot x="97.67929" y="575.5603" z="333.72232" />
+					<spot x="109.91872" y="625.77313" z="324.6087" />
+					<spot x="75.66747" y="660.72" z="313.83737" />
+					<spot x="101.90204" y="694.2081" z="305.44873" />
+					<spot x="98.5632" y="732.557" z="297.72827" />
+					<spot x="128.88278" y="766.864" z="289.11386" />
 				</spawn>
 				<!-- Ruby Aether Blossom 60 spawns -->
 				<spawn npc_id="702787" respawn_time="900" pool="10">
@@ -5542,99 +5386,51 @@
 				</spawn>
 			</spawn_map>
 		</spawns>
-		<event_drops>
-			<gd_rule rule_name="Aether Bloom Bouquet" chance="100" member_limit="6">
-				<gd_maps>
-					<gd_map map_id="300280000" /><!-- Rentus_Base -->
-					<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
-					<gd_map map_id="300590000" /><!-- Ophidan Bridge -->
-					<gd_map map_id="301380000" /><!-- Danuar Sanctuary -->
-					<gd_map map_id="301140000" /><!-- Seized Danuar Sanctuary -->
-					<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
-					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
-					<gd_map map_id="301230000" /><!-- Illuminary Obelisk -->
-					<gd_map map_id="301370000" /><!-- Infernal Illuminary Obelisk -->
-					<gd_map map_id="301110000" /><!-- Danuar Reliquary -->
-				</gd_maps>
-				<gd_npcs>
-					<!-- Rentus Base -->
-					<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
-					<!-- Tiamat's Stronghold -->
-					<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest -->
-					<!-- Ophidan Bridge -->
-					<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
-					<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
-					<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
-					<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
-					<!-- Danuar Sanctuary -->
-					<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
-		 			<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
-		 			<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
-					<!-- Seized Danuar Sanctuary -->
-					<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
-		 			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
-		 			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
-					<!-- Occupied Rentus Base -->
-					<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
-					<!-- Sauro Supply Base -->
-					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
-					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
-					<!-- Illuminary Obelisk -->
-					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
-					<!-- Infernal Illuminary Obelisk -->
-					<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
-					<!-- Danuar Reliquary -->
-					<gd_npc npc_id="701795" /><!-- Treasue Box (Danuar Reliquary) -->
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="188053915" /><!-- [Event] Aether Bloom Bouquet -->
-				</gd_items>
-			</gd_rule>
-		</event_drops>
 	</event>
-	<event name="Empyrean Lord's Feathers" start="2020-07-08T00:00:00" end="2020-07-08T23:59:59"><!-- TODO Insert playercommand because NPC tradelists are useless -->
-		<inventory_drop item_id="188052676" startlevel="10" interval="60" count="3"/>
+	<!-- TODO Insert playercommand because NPC tradelists are useless -->
+	<event name="Empyrean Lord's Feathers" start="2020-07-08T00:00:00" end="2020-07-08T23:59:59">
+		<inventory_drop item_id="188052676" startlevel="10" interval="60" count="3" />
 		<event_drops>
 			<gd_rule rule_name="Celestial Feather (Single_E)" chance="15" restriction_race="ELYOS">
 				<gd_items>
-					<gd_item id="188052676"/><!-- [Event] Celestial Feather -->
+					<gd_item id="188052676" /><!-- [Event] Celestial Feather -->
 				</gd_items>
 				<gd_maps>
-					<gd_map map_id="220080000"/><!-- Enshar -->
+					<gd_map map_id="220080000" /><!-- Enshar -->
 				</gd_maps>
 			</gd_rule>
 			<gd_rule rule_name="Celestial Feather (Single_A)" chance="15" restriction_race="ASMODIANS">
 				<gd_items>
-					<gd_item id="188052676"/><!-- [Event] Celestial Feather -->
+					<gd_item id="188052676" /><!-- [Event] Celestial Feather -->
 				</gd_items>
 				<gd_maps>
-					<gd_map map_id="210070000"/><!-- Cygnea -->
+					<gd_map map_id="210070000" /><!-- Cygnea -->
 				</gd_maps>
 			</gd_rule>
 			<gd_rule rule_name="Celestial Feather (Shared)" chance="100" member_limit="12">
 				<gd_items>
-					<gd_item id="188052676" min_count="3" max_count="5"/><!-- [Event] Celestial Feather -->
+					<gd_item id="188052676" min_count="3" max_count="5" /><!-- [Event] Celestial Feather -->
 				</gd_items>
 				<gd_maps>
-					<gd_map map_id="300620000"/><!-- Occupied_Rentus_Base -->
-					<gd_map map_id="301130000"/><!-- Sauro_Supply_Base -->
-					<gd_map map_id="300800000"/><!-- Infinity_Shard -->
-					<gd_map map_id="301270000"/><!-- Linkgate_Foundry -->
-					<gd_map map_id="301140000"/><!-- Seized_Danuar_Sanctuary -->
-					<gd_map map_id="300630000"/><!-- Anguished_Dragon_Lords_Refuge -->
+					<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
+					<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
+					<gd_map map_id="300800000" /><!-- Infinity_Shard -->
+					<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
+					<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
+					<gd_map map_id="300630000" /><!-- Anguished_Dragon_Lords_Refuge -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="236300"/><!-- Brigade General Vasharti -->
-					<gd_npc npc_id="230857"/><!-- Guard Captain Ahuradim -->
-					<gd_npc npc_id="230858"/><!-- Brigade General Sheba -->
-					<gd_npc npc_id="231073"/><!-- Hyperion -->
-					<gd_npc npc_id="233898"/><!-- Belsagos -->
-					<gd_npc npc_id="234990"/><!-- Belsagos -->
-					<gd_npc npc_id="234991"/><!-- Belsagos -->
-					<gd_npc npc_id="235619"/><!-- Warmage Suyaroka -->
-					<gd_npc npc_id="235620"/><!-- Chief Medic Tagnu -->
-					<gd_npc npc_id="235621"/><!-- Virulent Ukahim -->
-					<gd_npc npc_id="702729"/><!-- Tiamat's Huge Treasure Crate (Anguished Dragon Lords Refuge) -->
+					<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
+					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+					<gd_npc npc_id="231073" /><!-- Hyperion -->
+					<gd_npc npc_id="233898" /><!-- Belsagos -->
+					<gd_npc npc_id="234990" /><!-- Belsagos -->
+					<gd_npc npc_id="234991" /><!-- Belsagos -->
+					<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
+					<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
+					<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
+					<gd_npc npc_id="702729" /><!-- Tiamat's Huge Treasure Crate (Anguished Dragon Lords Refuge) -->
 				</gd_npcs>
 			</gd_rule>
 		</event_drops>
@@ -5643,125 +5439,125 @@
 		<quests>
 			<maintainable>80341 80342 80343</maintainable>
 		</quests>
+		<event_drops>
+			<gd_rule rule_name="Event Bundle" chance="100" member_limit="6">
+				<gd_maps>
+					<gd_map map_id="301200000" /><!-- Nightmare_Circus -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="233453" /><!-- Harlequin Lord Reshka -->
+					<gd_npc npc_id="233459" /><!-- Mistress Viloa -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188052686" /><!-- [Event] Nightmare Key Bundle -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Event Pet" chance="5.5">
+				<gd_maps>
+					<gd_map map_id="301200000" /><!-- Nightmare_Circus -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="233453" /><!-- Harlequin Lord Reshka -->
+					<gd_npc npc_id="233459" /><!-- Mistress Viloa -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="190070010" /><!-- Popstar Summoning Lamp -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Event Key" chance="100">
+				<gd_maps>
+					<gd_map map_id="301200000" /><!-- Nightmare_Circus -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="233467" /><!-- Nightmare Lord Heiramune -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="185000184" /><!-- [Event] Nightmare Key -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Event Supply Bundle" chance="100" member_limit="6">
+				<gd_maps>
+					<gd_map map_id="301200000" /><!-- Nightmare_Circus -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="233467" /><!-- Nightmare Lord Heiramune -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188052561" /><!-- [Event] Consumables Bundle -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Nightmare Crate" chance="100" max_drop_rule="4">
+				<gd_maps>
+					<gd_map map_id="301200000" /><!-- Nightmare Circus -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="831745" />
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188052589" /><!-- [Event] Consumables Bundle -->
+					<gd_item id="188051338" /><!-- [Event] Case of Harvest Revel Ale -->
+					<gd_item id="188052685" /><!-- [Event] Dreamer's Reward -->
+					<gd_item id="188054198" /><!-- Greater Scroll Bundle -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Nightmare Crate (Rare)" chance="35">
+				<gd_maps>
+					<gd_map map_id="301200000" /><!-- Nightmare Circus -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="831745" />
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053636" /><!-- Blood Mark Box -->
+					<gd_item id="169600218" /><!-- [Emotion Card] Harvest Reveling -->
+					<gd_item id="125040110" /><!-- Jack-o-lantern Hat -->
+					<gd_item id="188051874" /><!-- Harvest Revel Furniture Set Box -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Greater Nightmare Crate" chance="100" max_drop_rule="4">
+				<gd_maps>
+					<gd_map map_id="301200000" /><!-- Nightmare Circus -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="831575" />
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188052589" /><!-- [Event] Consumables Bundle -->
+					<gd_item id="188051338" /><!-- [Event] Case of Harvest Revel Ale -->
+					<gd_item id="188052685" /><!-- [Event] Dreamer's Reward -->
+					<gd_item id="188051516" /><!-- Smart Greater Scroll Bundle -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Greater Nightmare Crate (Rare)" chance="35">
+				<gd_maps>
+					<gd_map map_id="301200000" /><!-- Nightmare Circus -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="831575" />
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053666" /><!-- [Event] Ceramium Medal Box -->
+					<gd_item id="169600218" /><!-- [Emotion Card] Harvest Reveling -->
+					<gd_item id="110900866" /><!-- Reveler's Reverie -->
+					<gd_item id="188051874" /><!-- Harvest Revel Furniture Set Box -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
 		<spawns>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
 				<!-- Saia -->
 				<spawn npc_id="831714" respawn_time="295">
-					<spot x="1602" y="1406" z="193.12856" h="118"/>
+					<spot x="1602" y="1406" z="193.12856" h="118" />
 				</spawn>
 			</spawn_map>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
 				<!-- Arika -->
 				<spawn npc_id="831709" respawn_time="295">
-					<spot x="1458.5823" y="1502.069" z="573.0719" h="57"/>
+					<spot x="1458.5823" y="1502.069" z="573.0719" h="57" />
 				</spawn>
 			</spawn_map>
 		</spawns>
-		<event_drops>
-			<gd_rule rule_name="Event Bundle" chance="100" member_limit="6">
-				<gd_maps>
-					<gd_map map_id="301200000"/><!-- Nightmare_Circus -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="233453"/><!-- Harlequin Lord Reshka -->
-					<gd_npc npc_id="233459"/><!-- Mistress Viloa -->
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="188052686"/><!-- [Event] Nightmare Key Bundle -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Event Pet" chance="5.5">
-				<gd_maps>
-					<gd_map map_id="301200000"/><!-- Nightmare_Circus -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="233453"/><!-- Harlequin Lord Reshka -->
-					<gd_npc npc_id="233459"/><!-- Mistress Viloa -->
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="190070010"/><!-- Popstar Summoning Lamp -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Event Key" chance="100">
-				<gd_maps>
-					<gd_map map_id="301200000"/><!-- Nightmare_Circus -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="233467"/><!-- Nightmare Lord Heiramune -->
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="185000184"/><!-- [Event] Nightmare Key -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Event Supply Bundle" chance="100" member_limit="6">
-				<gd_maps>
-					<gd_map map_id="301200000"/><!-- Nightmare_Circus -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="233467"/><!-- Nightmare Lord Heiramune -->
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="188052561"/><!-- [Event] Consumables Bundle -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Nightmare Crate" chance="100" max_drop_rule="4">
-				<gd_maps>
-					<gd_map map_id="301200000"/><!-- Nightmare Circus -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="831745"/>
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="188052589"/><!-- [Event] Consumables Bundle -->
-					<gd_item id="188051338"/><!-- [Event] Case of Harvest Revel Ale -->
-					<gd_item id="188052685"/><!-- [Event] Dreamer's Reward -->
-					<gd_item id="188054198"/><!-- Greater Scroll Bundle -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Nightmare Crate (Rare)" chance="35">
-				<gd_maps>
-					<gd_map map_id="301200000"/><!-- Nightmare Circus -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="831745"/>
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="188053636"/><!-- Blood Mark Box -->
-					<gd_item id="169600218"/><!-- [Emotion Card] Harvest Reveling -->
-					<gd_item id="125040110"/><!-- Jack-o-lantern Hat -->
-					<gd_item id="188051874"/><!-- Harvest Revel Furniture Set Box -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Greater Nightmare Crate" chance="100" max_drop_rule="4">
-				<gd_maps>
-					<gd_map map_id="301200000"/><!-- Nightmare Circus -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="831575"/>
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="188052589"/><!-- [Event] Consumables Bundle -->
-					<gd_item id="188051338"/><!-- [Event] Case of Harvest Revel Ale -->
-					<gd_item id="188052685"/><!-- [Event] Dreamer's Reward -->
-					<gd_item id="188051516"/><!-- Smart Greater Scroll Bundle -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Greater Nightmare Crate (Rare)" chance="35">
-				<gd_maps>
-					<gd_map map_id="301200000"/><!-- Nightmare Circus -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="831575"/>
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="188053666"/><!-- [Event] Ceramium Medal Box -->
-					<gd_item id="169600218"/><!-- [Emotion Card] Harvest Reveling -->
-					<gd_item id="110900866"/><!-- Reveler's Reverie -->
-					<gd_item id="188051874"/><!-- Harvest Revel Furniture Set Box -->
-				</gd_items>
-			</gd_rule>
-		</event_drops>
 	</event>
 </timed_events>
