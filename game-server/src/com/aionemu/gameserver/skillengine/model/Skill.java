@@ -413,7 +413,8 @@ public class Skill {
 		}
 		
 		if (skillMethod != SkillMethod.CHARGE)
-			player.setNextSkillUse(System.currentTimeMillis() + castDuration + animationTime);
+			player.setNextSkillUse(System.currentTimeMillis() + castDuration + (long)(animationTime * 0.8f));
+
 		return true;
 	}
 
@@ -679,7 +680,7 @@ public class Skill {
 		}
 		if (effector instanceof Player) {
 			if (this instanceof ChargeSkill) {
-				((Player) effector).setNextSkillUse(System.currentTimeMillis() + animationTime);
+				((Player) effector).setNextSkillUse(System.currentTimeMillis() + (long)(animationTime * 0.8f));
 			}
 			CustomInstanceService.getInstance().recordPlayerModelEntry((Player) effector, this, effector.getTarget());
 		}
