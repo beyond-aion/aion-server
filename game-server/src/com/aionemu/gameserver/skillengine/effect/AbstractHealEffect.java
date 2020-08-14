@@ -42,7 +42,7 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 		int finalHeal = percent ? maxCurValue * valueWithDelta / 100 : valueWithDelta;
 
 		if (type == HealType.HP) {
-			if (!(this instanceof ProcHealInstantEffect)) {
+			if (!(this instanceof ProcHealInstantEffect || this instanceof HealInstantEffect)) {
 				int healBoost = effector.getGameStats().getStat(StatEnum.HEAL_BOOST, 0).getCurrent();
 				finalHeal += Math.round(finalHeal * healBoost / 1000f); // capped by 100%
 				// Apply caster's heal related effects (passive boosts, active buffs e.g. blessed shield)
