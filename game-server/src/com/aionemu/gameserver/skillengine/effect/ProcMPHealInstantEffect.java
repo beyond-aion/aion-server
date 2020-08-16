@@ -25,12 +25,12 @@ public class ProcMPHealInstantEffect extends AbstractHealEffect {
 	}
 
 	@Override
-	protected int getCurrentStatValue(Effect effect) {
+	public int getCurrentStatValue(Effect effect) {
 		return effect.getEffected().getLifeStats().getCurrentMp();
 	}
 
 	@Override
-	protected int getMaxStatValue(Effect effect) {
+	public int getMaxStatValue(Effect effect) {
 		return effect.getEffected().getGameStats().getMaxMp().getCurrent();
 	}
 }

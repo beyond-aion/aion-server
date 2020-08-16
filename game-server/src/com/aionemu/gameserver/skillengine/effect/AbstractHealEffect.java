@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -20,7 +19,7 @@ import com.aionemu.gameserver.skillengine.model.HealType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractHealEffect")
-public abstract class AbstractHealEffect extends EffectTemplate {
+public abstract class AbstractHealEffect extends EffectTemplate implements HealEffectTemplate {
 
 	@XmlAttribute
 	protected boolean percent;
@@ -28,36 +27,7 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 	public void calculate(Effect effect, HealType healType) {
 		if (!super.calculate(effect, null, null))
 			return;
-
-		int valueWithDelta = calculateBaseValue(effect);
-		int finalHeal = calculateHeal(effect, healType, valueWithDelta, getCurrentStatValue(effect), getMaxStatValue(effect));
-
-		effect.setReserveds(new EffectReserved(position, finalHeal, ResourceType.of(healType), false), false);
-	}
-
-	public int calculateHeal(Effect effect, HealType type, int valueWithDelta, int currentValue, int maxCurValue) {
-		Creature effector = effect.getEffector();
-		Creature effected = effect.getEffected();
-
-		int finalHeal = percent ? maxCurValue * valueWithDelta / 100 : valueWithDelta;
-
-		if (type == HealType.HP) {
-			if (!(this instanceof ProcHealInstantEffect || percent)) {
-				int healBoost = effector.getGameStats().getStat(StatEnum.HEAL_BOOST, 0).getCurrent(); // capped by 100%
-				// Apply caster's heal related effects (passive boosts, active buffs e.g. blessed shield)
-				int healSkillBoost = effector.getGameStats().getStat(StatEnum.HEAL_SKILL_BOOST, 1000).getCurrent() - 1000;
-				finalHeal += Math.round(finalHeal * (healBoost + healSkillBoost)/ 1000f);
-			}
-			// Apply target's heal related effects (e.g. brilliant protection)
-			finalHeal = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, finalHeal).getCurrent();
-		}
-
-		if (type == HealType.HP && effected.getEffectController().isAbnormalSet(AbnormalState.DISEASE))
-			finalHeal = 0;
-		else
-			finalHeal = maxCurValue - currentValue < finalHeal ? (maxCurValue - currentValue) : finalHeal;
-
-		return finalHeal;
+		effect.setReserveds(new EffectReserved(position, calculateHealValue(effect, healType), ResourceType.of(healType), false), false);
 	}
 
 	public void applyEffect(Effect effect, HealType healType) {
@@ -91,7 +61,26 @@ public abstract class AbstractHealEffect extends EffectTemplate {
 		}
 	}
 
-	protected abstract int getCurrentStatValue(Effect effect);
+	@Override
+	public boolean isPercent() {
+		return percent;
+	}
 
-	protected abstract int getMaxStatValue(Effect effect);
+	@Override
+	public boolean allowHpHealBoost(Effect effect) {
+		return !percent && !(this instanceof ProcHealInstantEffect);
+	}
+
+	@Override
+	public int calculateBaseHealValue(Effect effect) {
+		return calculateBaseValue(effect);
+	}
+
+	@Override
+	public int calculateHealValue(Effect effect, HealType type) {
+		if (type == HealType.HP && effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.DISEASE))
+			return 0;
+		int cap = getMaxStatValue(effect) - getCurrentStatValue(effect);
+		return Math.min(cap, HealEffectTemplate.super.calculateHealValue(effect, type));
+	}
 }

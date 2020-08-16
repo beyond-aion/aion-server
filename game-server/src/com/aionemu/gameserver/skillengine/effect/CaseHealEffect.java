@@ -20,7 +20,7 @@ public class CaseHealEffect extends AbstractHealEffect {
 	protected HealType type;
 
 	@Override
-	protected int getCurrentStatValue(Effect effect) {
+	public int getCurrentStatValue(Effect effect) {
 		switch (type) {
 			case HP:
 				return effect.getEffected().getLifeStats().getCurrentHp();
@@ -32,7 +32,7 @@ public class CaseHealEffect extends AbstractHealEffect {
 	}
 
 	@Override
-	protected int getMaxStatValue(Effect effect) {
+	public int getMaxStatValue(Effect effect) {
 		switch (type) {
 			case HP:
 				return effect.getEffected().getGameStats().getMaxHp().getCurrent();
@@ -69,22 +69,17 @@ public class CaseHealEffect extends AbstractHealEffect {
 		};
 		effect.getEffected().getObserveController().addObserver(observer);
 		effect.setActionObserver(observer, position);
-		
 	}
 
 	private boolean tryHeal(final Effect effect) {
 		final int currentValue = getCurrentStatValue(effect);
 		final int maxCurValue = getMaxStatValue(effect);
+		// only heal if the current value is at or below the given percentage
 		if (currentValue <= (maxCurValue * condValue / 100f)) {
-			// calculate heal to the effective moment
-			int healValueWithDelta = calculateBaseValue(effect);
-			int finalHeal = calculateHeal(effect, type, healValueWithDelta, currentValue, maxCurValue);
-
-			// apply heal
 			if (type == HealType.HP)
-				effect.getEffected().getLifeStats().increaseHp(TYPE.HP, finalHeal, effect, LOG.CASEHEAL);
+				effect.getEffected().getLifeStats().increaseHp(TYPE.HP, calculateHealValue(effect, type), effect, LOG.CASEHEAL);
 			else if (type == HealType.MP)
-				effect.getEffected().getLifeStats().increaseMp(TYPE.MP, finalHeal, effect.getSkillId(), LOG.CASEHEAL);
+				effect.getEffected().getLifeStats().increaseMp(TYPE.MP, calculateHealValue(effect, type), effect.getSkillId(), LOG.CASEHEAL);
 			effect.endEffect();
 			return true;
 		}

@@ -26,12 +26,12 @@ public class HealInstantEffect extends AbstractHealEffect {
 	}
 
 	@Override
-	protected int getCurrentStatValue(Effect effect) {
+	public int getCurrentStatValue(Effect effect) {
 		return effect.getEffected().getLifeStats().getCurrentHp();
 	}
 
 	@Override
-	protected int getMaxStatValue(Effect effect) {
+	public int getMaxStatValue(Effect effect) {
 		return effect.getEffected().getGameStats().getMaxHp().getCurrent();
 	}
 }

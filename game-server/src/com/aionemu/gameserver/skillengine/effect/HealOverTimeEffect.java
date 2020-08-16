@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -20,7 +19,7 @@ import com.aionemu.gameserver.skillengine.model.HealType;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HealOverTimeEffect")
-public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
+public abstract class HealOverTimeEffect extends AbstractOverTimeEffect implements HealEffectTemplate {
 
 	@Override
 	public void calculate(Effect effect) {
@@ -31,31 +30,7 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 	}
 
 	public void startEffect(Effect effect, HealType healType) {
-		// calculate value of heals
-		Creature effector = effect.getEffector();
-		Creature effected = effect.getEffected();
-		int valueWithDelta = calculateBaseValue(effect);
-		int maxCurValue = getMaxStatValue(effect);
-		int possibleHealValue = 0;
-		if (percent)
-			possibleHealValue = maxCurValue * valueWithDelta / 100;
-		else
-			possibleHealValue = valueWithDelta;
-
-		int finalHeal = possibleHealValue;
-
-		if (healType == HealType.HP) {
-			if (effect.getItemTemplate() == null) {
-				int healBoost = effector.getGameStats().getStat(StatEnum.HEAL_BOOST, 0).getCurrent(); // capped by 100%
-				// Apply caster's heal related effects (passive boosts, active buffs e.g. blessed shield)
-				int healSkillBoost = effector.getGameStats().getStat(StatEnum.HEAL_SKILL_BOOST, 1000).getCurrent() - 1000;
-				finalHeal += Math.round(finalHeal * (healBoost + healSkillBoost) / 1000f); 
-			}
-			// Apply target's heal related effects (e.g. brilliant protection)
-			finalHeal = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, finalHeal).getCurrent();
-		}
-		effect.setReserveds(new EffectReserved(position, finalHeal, ResourceType.of(healType), false, false), true);
-
+		effect.setReserveds(new EffectReserved(position, calculateHealValue(effect, healType), ResourceType.of(healType), false, false), true);
 		super.startEffect(effect, null);
 	}
 
@@ -88,7 +63,18 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 
 	}
 
-	protected abstract int getCurrentStatValue(Effect effect);
+	@Override
+	public boolean isPercent() {
+		return percent;
+	}
 
-	protected abstract int getMaxStatValue(Effect effect);
+	@Override
+	public boolean allowHpHealBoost(Effect effect) {
+		return !percent && effect.getItemTemplate() == null;
+	}
+
+	@Override
+	public int calculateBaseHealValue(Effect effect) {
+		return calculateBaseValue(effect);
+	}
 }

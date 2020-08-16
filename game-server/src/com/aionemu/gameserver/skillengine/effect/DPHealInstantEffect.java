@@ -26,12 +26,12 @@ public class DPHealInstantEffect extends AbstractHealEffect {
 	}
 
 	@Override
-	protected int getCurrentStatValue(Effect effect) {
+	public int getCurrentStatValue(Effect effect) {
 		return ((Player) effect.getEffected()).getCommonData().getDp();
 	}
 
 	@Override
-	protected int getMaxStatValue(Effect effect) {
+	public int getMaxStatValue(Effect effect) {
 		return ((Player) effect.getEffected()).getGameStats().getMaxDp().getCurrent();
 	}
 }
