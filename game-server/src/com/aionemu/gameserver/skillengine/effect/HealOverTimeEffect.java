@@ -46,10 +46,10 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect {
 
 		if (healType == HealType.HP) {
 			if (effect.getItemTemplate() == null) {
-				int healBoost = effector.getGameStats().getStat(StatEnum.HEAL_BOOST, 0).getCurrent();
-				finalHeal += Math.round(finalHeal * healBoost / 1000f); // capped by 100%
+				int healBoost = effector.getGameStats().getStat(StatEnum.HEAL_BOOST, 0).getCurrent(); // capped by 100%
 				// Apply caster's heal related effects (passive boosts, active buffs e.g. blessed shield)
-				finalHeal = effector.getGameStats().getStat(StatEnum.HEAL_SKILL_BOOST, finalHeal).getCurrent();
+				int healSkillBoost = effector.getGameStats().getStat(StatEnum.HEAL_SKILL_BOOST, 1000).getCurrent() - 1000;
+				finalHeal += Math.round(finalHeal * (healBoost + healSkillBoost) / 1000f); 
 			}
 			// Apply target's heal related effects (e.g. brilliant protection)
 			finalHeal = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, finalHeal).getCurrent();
