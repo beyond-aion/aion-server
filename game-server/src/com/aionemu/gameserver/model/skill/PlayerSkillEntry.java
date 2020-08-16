@@ -15,7 +15,7 @@ import com.aionemu.gameserver.skillengine.model.StigmaType;
 public class PlayerSkillEntry extends SkillEntry implements Persistable {
 
 	private int skillType; // 0 normal skill , 1 stigma skill , 3 linked stigma skill
-	private int currentXp; // for crafting skills
+	private volatile int currentXp; // for crafting skills
 	private PersistentState persistentState;
 
 	public PlayerSkillEntry(Player player, int skillId, int skillLvl, PersistentState persistentState) {
@@ -79,7 +79,6 @@ public class PlayerSkillEntry extends SkillEntry implements Persistable {
 	 * Stupid NC shit: For profession skills, these values are also needed in {@link SM_SKILL_REMOVE} to be able to remove the skill from
 	 * list.
 	 * 
-	 * @param skill
 	 * @return The flag that the client wants for the skill.
 	 */
 	public int getProfessionFlag() {
@@ -123,33 +122,19 @@ public class PlayerSkillEntry extends SkillEntry implements Persistable {
 		return isTappingSkill() ? Math.min(size, 4) : size; // limit tapping bar size to 4 (499) to prevent black bar above 500 points
 	}
 
-	/**
-	 * @return the currentXp
-	 */
 	public int getCurrentXp() {
 		return currentXp;
 	}
 
-	/**
-	 * @param currentXp
-	 *          the currentXp to set
-	 */
 	public void setCurrentXp(int currentXp) {
 		this.currentXp = currentXp;
 	}
 
-	/**
-	 * @return the pState
-	 */
 	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
 
-	/**
-	 * @param persistentState
-	 *          the pState to set
-	 */
 	@Override
 	public void setPersistentState(PersistentState persistentState) {
 		switch (persistentState) {

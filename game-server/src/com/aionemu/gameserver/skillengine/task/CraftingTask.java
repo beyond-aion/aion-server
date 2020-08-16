@@ -29,12 +29,6 @@ public class CraftingTask extends AbstractCraftTask {
 	private int showBarDelay;
 	private int executionSpeed;
 
-	/**
-	 * @param requester
-	 * @param responder
-	 * @param successValue
-	 * @param failureValue
-	 */
 	public CraftingTask(Player requester, StaticObject responder, RecipeTemplate recipeTemplate, int skillLvlDiff, int bonus) {
 		super(requester, responder, skillLvlDiff);
 		this.recipeTemplate = recipeTemplate;
@@ -177,7 +171,7 @@ public class CraftingTask extends AbstractCraftTask {
 			currentFailureValue = fullBarValue;
 
 		int speed = bonusModifier < 1 ? Math.round(900 * (2 - bonusModifier)) : (900 - (skillLvlDiff * 30));
-		executionSpeed = speed < 300 ? 300 : speed;
+		executionSpeed = Math.max(speed, 300);
 		showBarDelay = bonusModifier < 1 ? 1200 : Math.max(500, 1200 - (skillLvlDiff * 30));
 	}
 }

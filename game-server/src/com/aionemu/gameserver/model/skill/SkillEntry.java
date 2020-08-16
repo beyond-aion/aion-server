@@ -6,7 +6,7 @@ package com.aionemu.gameserver.model.skill;
 public abstract class SkillEntry {
 
 	protected final int skillId;
-	protected int skillLevel;
+	protected volatile int skillLevel;
 
 	SkillEntry(int skillId, int skillLevel) {
 		this.skillId = skillId;

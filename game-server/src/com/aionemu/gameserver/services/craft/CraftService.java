@@ -39,11 +39,6 @@ public class CraftService {
 
 	private static final Logger log = LoggerFactory.getLogger("CRAFT_LOG");
 
-	/**
-	 * @param player
-	 * @param recipetemplate
-	 * @param critCount
-	 */
 	public static void finishCrafting(final Player player, RecipeTemplate recipetemplate, int critCount, int bonus) {
 
 		if (recipetemplate.getMaxProductionCount() != null) {
@@ -97,12 +92,6 @@ public class CraftService {
 		}
 	}
 
-	/**
-	 * @param player
-	 * @param targetTemplateId
-	 * @param recipeId
-	 * @param targetObjId
-	 */
 	public static void startCrafting(Player player, int recipeId, int targetObjId, int craftType, Map<Integer, Long> sendMaterialsData) {
 
 		RecipeTemplate recipeTemplate = DataManager.RECIPE_DATA.getRecipeTemplateById(recipeId);

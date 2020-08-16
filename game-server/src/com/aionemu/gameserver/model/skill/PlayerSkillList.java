@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.model.skill;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -18,16 +18,14 @@ import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
  */
 public final class PlayerSkillList implements SkillList<Player> {
 
-	private final Map<Integer, PlayerSkillEntry> skills;
-	private final List<PlayerSkillEntry> deletedSkills;
+	private final Map<Integer, PlayerSkillEntry> skills = new ConcurrentHashMap<>();
+	private final List<PlayerSkillEntry> deletedSkills = new ArrayList<>();
 
 	public PlayerSkillList() {
-		this(new ArrayList<>());
+
 	}
 
 	public PlayerSkillList(List<PlayerSkillEntry> playerSkills) {
-		this.skills = new HashMap<>();
-		this.deletedSkills = new ArrayList<>();
 		for (PlayerSkillEntry entry : playerSkills)
 			skills.put(entry.getSkillId(), entry);
 	}
@@ -37,7 +35,9 @@ public final class PlayerSkillList implements SkillList<Player> {
 	}
 
 	public List<PlayerSkillEntry> getDeletedSkills() {
-		return new ArrayList<>(deletedSkills);
+		synchronized (deletedSkills) {
+			return new ArrayList<>(deletedSkills);
+		}
 	}
 
 	public PlayerSkillEntry getSkillEntry(int skillId) {
@@ -49,14 +49,6 @@ public final class PlayerSkillList implements SkillList<Player> {
 		return addSkill(player, skillId, skillLevel, false);
 	}
 
-	/**
-	 * Adds a temporary skill which will not be saved in database.
-	 * 
-	 * @param player
-	 * @param skillId
-	 * @param skillLevel
-	 * @return
-	 */
 	public boolean addTemporarySkill(Player player, int skillId, int skillLevel) {
 		return addSkill(player, skillId, skillLevel, true);
 	}
@@ -71,7 +63,8 @@ public final class PlayerSkillList implements SkillList<Player> {
 			isNew = false;
 		} else {
 			skills.put(skillId, new PlayerSkillEntry(player, skillId, skillLevel, isTemporary ? PersistentState.NOACTION : PersistentState.NEW));
-			List<SkillLearnTemplate> learnTemplates = DataManager.SKILL_TREE_DATA.getSkillsForSkill(skillId, player.getPlayerClass(), player.getRace(), player.getLevel());
+			List<SkillLearnTemplate> learnTemplates = DataManager.SKILL_TREE_DATA.getSkillsForSkill(skillId, player.getPlayerClass(), player.getRace(),
+				player.getLevel());
 			for (SkillLearnTemplate learnTemplate : learnTemplates) {
 				if (learnTemplate.getLearnSkill() != null && skills.get(learnTemplate.getLearnSkill()) != null) {
 					isNew = false;
@@ -87,7 +80,7 @@ public final class PlayerSkillList implements SkillList<Player> {
 	 * Only for usage with gathering and crafting skills.
 	 */
 	@SuppressWarnings("fallthrough")
-	public boolean addSkillXp(Player player, int skillId, int xpReward, int objSkillLvl) {
+	public synchronized boolean addSkillXp(Player player, int skillId, int xpReward, int objSkillLvl) {
 		PlayerSkillEntry skill = getSkillEntry(skillId);
 		int skillLvl = skill.getSkillLevel();
 		if (skillLvl - objSkillLvl > 40)
@@ -122,8 +115,9 @@ public final class PlayerSkillList implements SkillList<Player> {
 
 		int requiredExp = (int) (0.23 * (skillLvl + 17.2) * (skillLvl + 17.2));
 		if (skill.getCurrentXp() + xpReward >= requiredExp) {
+			skillLvl++;
 			skill.setCurrentXp(0);
-			skill.setSkillLvl(skillLvl + 1);
+			skill.setSkillLvl(skillLvl);
 			SkillLearnService.onLearnSkill(player, skillId, skillLvl, false);
 		} else
 			skill.setCurrentXp(skill.getCurrentXp() + xpReward);
@@ -143,11 +137,13 @@ public final class PlayerSkillList implements SkillList<Player> {
 	@Override
 	public synchronized boolean removeSkill(int skillId) {
 		PlayerSkillEntry entry = skills.remove(skillId);
-		if (entry != null) {
-			entry.setPersistentState(PersistentState.DELETED);
+		if (entry == null)
+			return false;
+		entry.setPersistentState(PersistentState.DELETED);
+		synchronized (deletedSkills) {
 			deletedSkills.add(entry);
 		}
-		return entry != null;
+		return true;
 	}
 
 	@Override
