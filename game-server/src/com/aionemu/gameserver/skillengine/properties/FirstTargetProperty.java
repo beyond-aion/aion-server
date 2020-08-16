@@ -17,16 +17,16 @@ import com.aionemu.gameserver.utils.PositionUtil;
 public class FirstTargetProperty {
 
 	public static boolean set(Skill skill, Properties properties) {
-
+		Creature effector = skill.getEffector();
 		FirstTargetAttribute value = properties.getFirstTarget();
 		skill.setFirstTargetAttribute(value);
 		switch (value) {
 			case ME:
 				skill.setFirstTargetRangeCheck(false);
-				skill.setFirstTarget(skill.getEffector());
+				skill.setFirstTarget(effector);
 				break;
 			case TARGETORME:
-				if (skill.getEffector().equals(skill.getFirstTarget()))
+				if (effector.equals(skill.getFirstTarget()))
 					break;
 				boolean changeTargetToMe = false;
 				if (skill.getFirstTarget() == null) {
@@ -34,19 +34,19 @@ public class FirstTargetProperty {
 				} else {
 					switch (properties.getTargetRelation()) {
 						case ENEMY:
-							if (!skill.getFirstTarget().isEnemy(skill.getEffector()))
+							if (!skill.getFirstTarget().isEnemy(effector))
 								changeTargetToMe = true;
 							break;
 						case FRIEND:
-							if (skill.getFirstTarget().isEnemy(skill.getEffector()))
+							if (skill.getFirstTarget().isEnemy(effector))
 								changeTargetToMe = true;
 							break;
 						case MYPARTY:
 							if (!isTargetTeamMember(skill, false)) {
-								if (skill.getFirstTarget().isEnemy(skill.getEffector())) {
+								if (skill.getFirstTarget().isEnemy(effector)) {
 									changeTargetToMe = true;
 								} else {
-									PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_PARTY_ONLY());
+									PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_PARTY_ONLY());
 									return false;
 								}
 							}
@@ -56,9 +56,9 @@ public class FirstTargetProperty {
 						changeTargetToMe = true;
 				}
 				if (changeTargetToMe) {
-					if (skill.getFirstTarget() != null && skill.getEffector() instanceof Player)
-						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_AUTO_CHANGE_TARGET_TO_MY());
-					skill.setFirstTarget(skill.getEffector());
+					if (skill.getFirstTarget() != null && effector instanceof Player playerEffector)
+						PacketSendUtility.sendPacket(playerEffector, SM_SYSTEM_MESSAGE.STR_SKILL_AUTO_CHANGE_TARGET_TO_MY());
+					skill.setFirstTarget(effector);
 				}
 				break;
 			case TARGET:
@@ -71,39 +71,44 @@ public class FirstTargetProperty {
 					break;
 
 				TargetRelationAttribute relation = skill.getSkillTemplate().getProperties().getTargetRelation();
-				if (skill.getFirstTarget() == null || skill.getFirstTarget().equals(skill.getEffector())) {
-					if (skill.getEffector() instanceof Player) {
+				if (skill.getFirstTarget() == null || skill.getFirstTarget().equals(effector)) {
+					if (effector instanceof Player playerEffector) {
 						if (skill.getSkillTemplate().getProperties().getTargetType() == TargetRangeAttribute.AREA)
 							return skill.getFirstTarget() != null;
 
 						TargetRangeAttribute type = skill.getSkillTemplate().getProperties().getTargetType();
-						if ((relation != TargetRelationAttribute.ALL && relation != TargetRelationAttribute.MYPARTY) || type == TargetRangeAttribute.PARTY) {
-							PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
+						if ((relation != TargetRelationAttribute.ALL && relation != TargetRelationAttribute.MYPARTY && relation != TargetRelationAttribute.FRIEND)
+							|| type == TargetRangeAttribute.PARTY) {
+							PacketSendUtility.sendPacket(playerEffector, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 							return false;
 						}
 					}
 				}
 
-				if (relation == TargetRelationAttribute.MYPARTY) {
-					if (!isTargetTeamMember(skill, false)) {
-						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_PARTY_ONLY());
+				if (relation == TargetRelationAttribute.FRIEND) {
+					if (!(skill.getFirstTarget() instanceof Creature firstTarget) || effector.isEnemy(firstTarget)) {
+						if (effector instanceof Player playerEffector)
+							PacketSendUtility.sendPacket(playerEffector, SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_NOTENEMY_ONLY());
 						return false;
 					}
-				}
-
-				if (relation != TargetRelationAttribute.ENEMY && !isTargetAllowed(skill, skill.getFirstTarget())) {
-					if (skill.getEffector() instanceof Player) {
-						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
+				} else if (relation == TargetRelationAttribute.MYPARTY) {
+					if (!isTargetTeamMember(skill, false)) {
+						if (effector instanceof Player playerEffector)
+							PacketSendUtility.sendPacket(playerEffector, SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_PARTY_ONLY());
+						return false;
+					}
+				} else if (relation != TargetRelationAttribute.ENEMY && !isTargetAllowed(skill, skill.getFirstTarget())) {
+					if (effector instanceof Player playerEffector) {
+						PacketSendUtility.sendPacket(playerEffector, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 					}
 					return false;
 				}
 				break;
 			case MYPET:
-				Creature effector = skill.getEffector();
-				if (effector instanceof Player) {
-					Summon summon = ((Player) effector).getSummon();
+				if (effector instanceof Player playerEffector) {
+					Summon summon = playerEffector.getSummon();
 					if (summon == null || !isTargetAllowed(skill, summon)) {
-						PacketSendUtility.sendPacket((Player) skill.getEffector(), SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_PET_ONLY());
+						PacketSendUtility.sendPacket(playerEffector, SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_PET_ONLY());
 						return false;
 					}
 					skill.setFirstTarget(summon);
@@ -112,11 +117,9 @@ public class FirstTargetProperty {
 				}
 				break;
 			case MYMASTER:
-				Creature peteffector = skill.getEffector();
-				if (peteffector instanceof Summon) {
-					Player player = ((Summon) peteffector).getMaster();
-					if (player != null)
-						skill.setFirstTarget(player);
+				if (effector instanceof Summon summon) {
+					if (summon.getMaster() != null)
+						skill.setFirstTarget(summon.getMaster());
 					else
 						return false;
 				} else {
@@ -124,7 +127,7 @@ public class FirstTargetProperty {
 				}
 				break;
 			case PASSIVE:
-				skill.setFirstTarget(skill.getEffector());
+				skill.setFirstTarget(effector);
 				break;
 			case TARGET_MYPARTY_NONVISIBLE: // Summon Group Member
 				if (!isTargetTeamMember(skill, true))
@@ -133,14 +136,14 @@ public class FirstTargetProperty {
 				skill.setFirstTargetRangeCheck(false);
 				break;
 			case POINT:
-				skill.setFirstTarget(skill.getEffector());
+				skill.setFirstTarget(effector);
 				return true;
 		}
 
 		if (skill.getFirstTarget() != null) {
 			// update heading for npcs (players may look in a different direction)
-			if (skill.getEffector() instanceof Npc && !skill.getEffector().equals(skill.getFirstTarget()))
-				skill.getEffector().getPosition().setH(PositionUtil.getHeadingTowards(skill.getEffector(), skill.getFirstTarget()));
+			if (effector instanceof Npc && !effector.equals(skill.getFirstTarget()))
+				effector.getPosition().setH(PositionUtil.getHeadingTowards(effector, skill.getFirstTarget()));
 			skill.getEffectedList().add(skill.getFirstTarget());
 		}
 		return true;
