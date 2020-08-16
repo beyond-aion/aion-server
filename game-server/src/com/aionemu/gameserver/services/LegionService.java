@@ -137,59 +137,28 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * Gets a legion ONLY if he is in the cache
-	 *
-	 * @return Legion or null if not cached
-	 */
 	private Legion getCachedLegion(int legionId) {
-		return this.allCachedLegions.get(legionId);
+		return allCachedLegions.get(legionId);
 	}
 
-	/**
-	 * Gets a legion ONLY if he is in the cache
-	 *
-	 * @return Legion or null if not cached
-	 */
 	private Legion getCachedLegion(String legionName) {
-		return this.allCachedLegions.get(legionName);
+		return allCachedLegions.get(legionName);
 	}
 
-	/**
-	 * Returns all cached legions
-	 */
 	public LegionContainer getCachedLegions() {
-		return this.allCachedLegions;
+		return allCachedLegions;
 	}
 
-	/**
-	 * This method will add a new legion to the cache
-	 *
-	 * @param playerObjId
-	 * @param legionMember
-	 */
 	private void addCachedLegion(Legion legion) {
-		this.allCachedLegions.add(legion);
+		allCachedLegions.add(legion);
 	}
 
-	/**
-	 * This method will add a new legion member to the cache
-	 *
-	 * @param playerObjId
-	 * @param legionMember
-	 */
 	private void addCachedLegionMember(LegionMember legionMember) {
-		this.allCachedLegionMembers.addMember(legionMember);
+		allCachedLegionMembers.addMember(legionMember);
 	}
 
-	/**
-	 * This method will add a new legion member to the cache
-	 *
-	 * @param playerObjId
-	 * @param legionMemberEx
-	 */
 	private void addCachedLegionMemberEx(LegionMemberEx legionMemberEx) {
-		this.allCachedLegionMembers.addMemberEx(legionMemberEx);
+		allCachedLegionMembers.addMemberEx(legionMemberEx);
 	}
 
 	/**
@@ -216,88 +185,31 @@ public class LegionService {
 		addHistory(legion, legionMember.getName(), LegionHistoryType.KICK);
 	}
 
-	/**
-	 * Returns the legion with given name
-	 *
-	 * @param legionName
-	 *          Legion Name
-	 * @return Legion or null if doesn't exists
-	 */
 	public Legion getLegion(String legionName) {
-		/**
-		 * First check if our legion already exists in our Cache
-		 */
-		if (allCachedLegions.contains(legionName)) {
-			Legion legion = getCachedLegion(legionName);
-			return legion;
+		Legion legion = getCachedLegion(legionName);
+		if (legion == null) {
+			legion = DAOManager.getDAO(LegionDAO.class).loadLegion(legionName);
+			if (legion == null)
+				return null;
+			loadLegionInfo(legion);
+			addCachedLegion(legion);
 		}
-
-		/**
-		 * Else load the legion information from the database
-		 */
-		Legion legion = DAOManager.getDAO(LegionDAO.class).loadLegion(legionName);
-
-		/**
-		 * This will handle the rest of the information that needs to be loaded
-		 */
-		loadLegionInfo(legion);
-
-		/**
-		 * Add our legion to the Cache
-		 */
-		addCachedLegion(legion);
-
-		/**
-		 * Return the legion
-		 */
-		return legion;
+		return checkDisband(legion) ? null : legion;
 	}
 
-	/**
-	 * Returns the legion with given legionId (if such legion exists)
-	 *
-	 * @param legionId
-	 * @return Legion
-	 */
 	public Legion getLegion(int legionId) {
-		/**
-		 * First check if our legion already exists in our Cache
-		 */
-		if (allCachedLegions.contains(legionId)) {
-			Legion legion = getCachedLegion(legionId);
-			return legion;
+		Legion legion = getCachedLegion(legionId);
+		if (legion == null) {
+			legion = DAOManager.getDAO(LegionDAO.class).loadLegion(legionId);
+			if (legion == null)
+				return null;
+			loadLegionInfo(legion);
+			addCachedLegion(legion);
 		}
-
-		/**
-		 * Else load the legion information from the database
-		 */
-		Legion legion = DAOManager.getDAO(LegionDAO.class).loadLegion(legionId);
-
-		/**
-		 * This will handle the rest of the information that needs to be loaded
-		 */
-		loadLegionInfo(legion);
-
-		/**
-		 * Add our legion to the Cache
-		 */
-		addCachedLegion(legion);
-
-		/**
-		 * Return the legion
-		 */
-		return legion;
+		return checkDisband(legion) ? null : legion;
 	}
 
-	/**
-	 * This method will load the legion information
-	 *
-	 * @param legion
-	 */
 	private void loadLegionInfo(Legion legion) {
-		if (legion == null)
-			return;
-
 		// Load and add the legion members to legion
 		legion.setLegionMembers(DAOManager.getDAO(LegionMemberDAO.class).loadLegionMembers(legion.getLegionId()));
 
@@ -340,27 +252,14 @@ public class LegionService {
 		return members;
 	}
 
-	/**
-	 * Returns the legion with given legionId (if such legion exists)
-	 *
-	 * @param playerObjId
-	 * @return LegionMember
-	 */
 	public LegionMember getLegionMember(int playerObjId) {
-		LegionMember legionMember = null;
-		if (this.allCachedLegionMembers.contains(playerObjId))
-			legionMember = this.allCachedLegionMembers.getMember(playerObjId);
-		else {
+		LegionMember legionMember = allCachedLegionMembers.getMember(playerObjId);
+		if (legionMember == null) {
 			legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(playerObjId);
 			if (legionMember != null)
 				addCachedLegionMember(legionMember);
 		}
-
-		if (legionMember != null)
-			if (checkDisband(legionMember.getLegion()))
-				return null;
-
-		return legionMember;
+		return legionMember == null || checkDisband(legionMember.getLegion()) ? null : legionMember;
 	}
 
 	/**
