@@ -27,8 +27,7 @@ public class CalindiSummonsAI extends NpcAI {
 		super.handleSpawned();
 		int delay = getDelay();
 		if (getFakeTextureNpcId() != 0) {
-			textureObject = spawn(getOwner().getWorldId(), getFakeTextureNpcId(), getPosition().getX(), getPosition().getY(),
-					getPosition().getZ(), (byte) 0, 0, getObjectId(), getOwner().getInstanceId());
+			textureObject = spawn(getFakeTextureNpcId(), getPosition().getX(), getPosition().getY(), getPosition().getZ(), (byte) 0);
 		}
 		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, getSkillId()), 500, delay);
 		ThreadPoolManager.getInstance().schedule(() -> {

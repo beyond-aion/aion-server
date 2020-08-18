@@ -379,9 +379,6 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 		}
 	}
 
-	/**
-	 * @param event
-	 */
 	protected void logEvent(AIEventType event) {
 		if (AIConfig.EVENT_DEBUG) {
 			if (eventLog == null) {
@@ -395,7 +392,7 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 		}
 	}
 
-	void handleCreatureEvent(AIEventType event, Creature creature) {
+	private void handleCreatureEvent(AIEventType event, Creature creature) {
 		switch (event) {
 			case ATTACK:
 				handleAttack(creature);
@@ -458,21 +455,17 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 	/**
 	 * Spawn object in the same world and instance as AI's owner
 	 */
-	protected VisibleObject spawn(int npcId, float x, float y, float z, byte heading) {
-		return spawn(owner.getWorldId(), npcId, x, y, z, heading, 0, owner.getObjectId(), getPosition().getInstanceId());
+	protected final VisibleObject spawn(int npcId, float x, float y, float z, byte heading) {
+		return spawn(npcId, x, y, z, heading, 0);
 	}
 
 	/**
 	 * Spawn object with staticId in the same world and instance as AI's owner
 	 */
-	protected VisibleObject spawn(int npcId, float x, float y, float z, byte heading, int staticId) {
-		return spawn(owner.getWorldId(), npcId, x, y, z, heading, staticId, owner.getObjectId(), getPosition().getInstanceId());
-	}
-
-	protected VisibleObject spawn(int worldId, int npcId, float x, float y, float z, byte heading, int staticId, int creatorId, int instanceId) {
-		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(worldId, npcId, x, y, z, heading, creatorId);
+	protected final VisibleObject spawn(int npcId, float x, float y, float z, byte heading, int staticId) {
+		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, x, y, z, heading, owner.getObjectId());
 		template.setStaticId(staticId);
-		return SpawnEngine.spawnObject(template, instanceId);
+		return SpawnEngine.spawnObject(template, owner.getInstanceId());
 	}
 
 	@Override
