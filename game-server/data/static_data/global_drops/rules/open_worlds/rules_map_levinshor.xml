@@ -147,7 +147,7 @@
 			<gd_npc npc_id="235385"/><!-- Denku Feralmage -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="186000238" min_count="7" max_count="11"/><!-- Conqueror's Mark -->
+			<gd_item id="186000238" min_count="20" max_count="30"/><!-- Conqueror's Mark -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Amplification Stone" chance="1.5">

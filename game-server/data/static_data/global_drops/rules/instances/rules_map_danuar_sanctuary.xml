@@ -1,5 +1,18 @@
 <?xml version="1.0" encoding="utf-8"?>
 <global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<gd_rule rule_name="Named Mark" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
+			<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000238" min_count="60" max_count="90" /><!-- Conqueror's Mark -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Weapon (Unique)" chance="1.33">
 		<gd_maps>
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->

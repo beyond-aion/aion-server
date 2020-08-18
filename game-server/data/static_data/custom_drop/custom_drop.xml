@@ -1294,7 +1294,7 @@
 	<!-- Danuar Reliquary -->
 	<npc_drop npc_id="701795">
 		<drop_group><!-- Conqueror's Mark -->
-			<drop item_id="186000238" min_amount="5" max_amount="8" each_member="true" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group><!-- Amplification Stone (Multi) -->
 			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
@@ -1312,7 +1312,7 @@
 	<!-- Infernal Danuar Reliquary -->
 	<npc_drop npc_id="234691">
 		<drop_group><!-- Conqueror's Mark -->
-			<drop item_id="186000238" min_amount="10" max_amount="15" each_member="true" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group><!-- Amplification Stone (Multi) -->
 			<drop item_id="166500002" chance="12" each_member="true" /><!-- Amplification Stone -->
@@ -1598,7 +1598,7 @@
 	<!-- Dragon Lords Refuge -->
 	<npc_drop npc_id="701542">
 		<drop_group><!-- Conqueror's Mark -->
-			<drop item_id="186000238" min_amount="3" max_amount="5" each_member="true" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group><!-- Amplification Stone (Multi) -->
 			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
@@ -1709,72 +1709,8 @@
 		<drop_group><!-- Courier Pass -->
 			<drop item_id="188950019" chance="4" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
 		</drop_group>
-	</npc_drop>
-	<!-- Elementis Forest -->
-	<npc_drop npc_id="700999">
-		<drop_group><!-- Named Armor (Epic) -->
-			<drop item_id="112101198" chance="5" /><!-- Primal Spirit Pauldrons -->
-			<drop item_id="112601186" chance="5" /><!-- Primal Spirit Shoulderplates -->
-		</drop_group>
-		<drop_group><!-- Named Weapon (Unique) -->
-			<drop item_id="100001261" chance="10" /><!-- Primal Spirit Assassin Sword -->
-			<drop item_id="100500981" chance="10" /><!-- Primal Spirit Jewel -->
-		</drop_group>
-		<drop_group><!-- Named Belt (Unique) -->
-			<drop item_id="123001213" chance="20" /><!-- Cursed Forest Leather Belt -->
-			<drop item_id="123001214" chance="20" /><!-- Cursed Forest Sash -->
-		</drop_group>
-		<drop_group><!-- Named Accessory (Unique) -->
-			<drop item_id="120001239" chance="15" /><!-- Cursed Forest Corundum Earrings -->
-			<drop item_id="120001240" chance="15" /><!-- Cursed Forest Turquoise Earrings -->
-		</drop_group>
-		<drop_group><!-- Named Armor (Legend) -->
-			<drop item_id="114101283" chance="40" /><!-- Fallen Spirit Shoes -->
-			<drop item_id="114301289" chance="40" /><!-- Fallen Spirit Boots -->
-			<drop item_id="114501247" chance="40" /><!-- Fallen Spirit Brogans -->
-			<drop item_id="114601189" chance="40" /><!-- Fallen Spirit Sabatons -->
-			<drop item_id="112101195" chance="40" /><!-- Fallen Spirit Pauldrons -->
-			<drop item_id="112301178" chance="40" /><!-- Fallen Spirit Shoulderguards -->
-			<drop item_id="112501171" chance="40" /><!-- Fallen Spirit Spaulders -->
-			<drop item_id="112601183" chance="40" /><!-- Fallen Spirit Shoulderplates -->
-			<drop item_id="111101237" chance="40" /><!-- Fallen Spirit Gloves -->
-			<drop item_id="111301232" chance="40" /><!-- Fallen Spirit Vambrace -->
-			<drop item_id="111501226" chance="40" /><!-- Fallen Spirit Handguards -->
-			<drop item_id="111601205" chance="40" /><!-- Fallen Spirit Gauntlets -->
-		</drop_group>
-	</npc_drop>
-	<npc_drop npc_id="701009">
-		<drop_group><!-- Named Armor (Epic) -->
-			<drop item_id="114301292" chance="5" /><!-- Primal Spirit Boots -->
-			<drop item_id="114301586" chance="5" /><!-- Ancient Spirit's Magic Boots -->
-			<drop item_id="114501250" chance="5" /><!-- Primal Spirit Brogans -->
-			<drop item_id="114501588" chance="5" /><!-- Ancient Spirit's Magic Brogans -->
-		</drop_group>
-		<drop_group><!-- Named Weapon (Unique) -->
-			<drop item_id="100001258" chance="10" /><!-- Primal Spirit Sword -->
-			<drop item_id="101500989" chance="10" /><!-- Primal Spirit Staff -->
-		</drop_group>
-		<drop_group><!-- Named Belt (Unique) -->
-			<drop item_id="123001213" chance="20" /><!-- Cursed Forest Leather Belt -->
-			<drop item_id="123001214" chance="20" /><!-- Cursed Forest Sash -->
-		</drop_group>
-		<drop_group><!-- Named Accessory (Unique) -->
-			<drop item_id="120001239" chance="15" /><!-- Cursed Forest Corundum Earrings -->
-			<drop item_id="120001240" chance="15" /><!-- Cursed Forest Turquoise Earrings -->
-		</drop_group>
-		<drop_group><!-- Named Armor (Legend) -->
-			<drop item_id="114101283" chance="30" /><!-- Fallen Spirit Shoes -->
-			<drop item_id="114301289" chance="30" /><!-- Fallen Spirit Boots -->
-			<drop item_id="114501247" chance="30" /><!-- Fallen Spirit Brogans -->
-			<drop item_id="114601189" chance="30" /><!-- Fallen Spirit Sabatons -->
-			<drop item_id="112101195" chance="30" /><!-- Fallen Spirit Pauldrons -->
-			<drop item_id="112301178" chance="30" /><!-- Fallen Spirit Shoulderguards -->
-			<drop item_id="112501171" chance="30" /><!-- Fallen Spirit Spaulders -->
-			<drop item_id="112601183" chance="30" /><!-- Fallen Spirit Shoulderplates -->
-			<drop item_id="111101237" chance="30" /><!-- Fallen Spirit Gloves -->
-			<drop item_id="111301232" chance="30" /><!-- Fallen Spirit Vambrace -->
-			<drop item_id="111501226" chance="30" /><!-- Fallen Spirit Handguards -->
-			<drop item_id="111601205" chance="30" /><!-- Fallen Spirit Gauntlets -->
+		<drop_group><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 	</npc_drop>
 	<!-- Esoterrace -->
@@ -1873,7 +1809,7 @@
 	<!-- Eternal Bastion S-Grade -->
 	<npc_drop npc_id="701917">
 		<drop_group><!-- Conqueror's Mark -->
-			<drop item_id="186000238" min_amount="3" max_amount="5" each_member="true" /><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group><!-- Named Epic Weapon -->
 			<drop item_id="100001584" chance="80" /><!-- Bastion Aggressor Sword -->
@@ -4089,6 +4025,9 @@
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701580">
+		<drop_group><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
+		</drop_group>
 		<drop_group><!-- Named Souvenir -->
 			<drop item_id="170490004" chance="15" /><!-- [Souvenir] Yamennes Bust -->
 		</drop_group>

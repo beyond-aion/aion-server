@@ -19,6 +19,19 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drop -->
+	<gd_rule rule_name="Named Mark" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="301250000" /><!-- Legion_Miren_Barracks -->
+			<gd_map map_id="301290000" /><!-- Miren_Barracks -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="233718" /><!-- Weakened Miren Prince -->
+			<gd_npc npc_id="233719" /><!-- Enraged Miren Prince -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000238" min_count="60" max_count="90" /><!-- Conqueror's Mark -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Treasure Key" chance="100">
 		<gd_maps>
 			<gd_map map_id="301250000" /><!-- Legion_Miren_Barracks -->
