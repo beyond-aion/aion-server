@@ -1,5 +1,9 @@
 package ai;
 
+import java.util.ArrayList;
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
@@ -9,12 +13,14 @@ import com.aionemu.gameserver.model.templates.ai.BombTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author xTz
+ * @author xTz, Sykra
  */
 @AIName("bomb")
 public class BombAI extends AggressiveNpcAI {
 
 	private BombTemplate template;
+
+	private final List<Future<?>> tasks = new ArrayList<>();
 
 	public BombAI(Npc owner) {
 		super(owner);
@@ -22,35 +28,45 @@ public class BombAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleSpawned() {
+		super.handleSpawned();
 		template = DataManager.AI_DATA.getAiTemplate(getNpcId()).getBombs().getBombTemplate();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				doUseSkill();
-			}
-		}, 2000);
+		addTask(ThreadPoolManager.getInstance().schedule(() -> useSkill(template.getSkillId()), template.getCd() + 2000));
 	}
 
-	private void doUseSkill() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
+	@Override
+	protected void handleDied() {
+		super.handleDied();
+		cancelTasks();
+	}
 
-			@Override
-			public void run() {
-				useSkill(template.getSkillId());
-			}
-		}, template.getCd());
+	@Override
+	protected void handleDespawned() {
+		super.handleDespawned();
+		cancelTasks();
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
+		return switch (question) {
+			case SHOULD_DECAY, SHOULD_REWARD, SHOULD_LOOT -> false;
+			default -> super.ask(question);
+		};
+	}
+
+	private void addTask(Future<?> task) {
+		if (task == null)
+			return;
+		synchronized (tasks) {
+			tasks.add(task);
+		}
+	}
+
+	private void cancelTasks() {
+		synchronized (tasks) {
+			for (Future<?> task : tasks)
+				if (task != null && !task.isDone())
+					task.cancel(true);
+			tasks.clear();
 		}
 	}
 
@@ -58,12 +74,7 @@ public class BombAI extends AggressiveNpcAI {
 		AIActions.targetSelf(this);
 		AIActions.useSkill(this, skill);
 		int duration = DataManager.SKILL_DATA.getSkillTemplate(skill).getDuration();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.deleteOwner(BombAI.this);
-			}
-		}, duration != 0 ? duration + 4000 : 0);
+		addTask(ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(BombAI.this), duration != 0 ? duration + 4000 : 0));
 	}
+
 }

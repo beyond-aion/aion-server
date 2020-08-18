@@ -3,13 +3,14 @@ package ai.instance.tallocsHollow;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
 
 /**
- * @author xTz
+ * @author xTz, Sykra
  */
 @AIName("mosquaegg")
 public class MosquaEggAI extends AggressiveNpcAI {
@@ -22,16 +23,11 @@ public class MosquaEggAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleSpawned() {
+		super.handleSpawned();
 		supraklawSpawnTask = ThreadPoolManager.getInstance().schedule(() -> {
 			spawn(217132, getPosition().getX(), getPosition().getY(), getPosition().getZ(), getPosition().getHeading());
 			getOwner().getController().delete();
 		}, 17000);
-	}
-
-	@Override
-	protected void handleBackHome() {
-		super.handleBackHome();
-		cancelSpawnTask();
 	}
 
 	@Override
@@ -44,6 +40,14 @@ public class MosquaEggAI extends AggressiveNpcAI {
 	protected void handleDied() {
 		super.handleDied();
 		cancelSpawnTask();
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_DECAY, SHOULD_REWARD, SHOULD_LOOT -> false;
+			default -> super.ask(question);
+		};
 	}
 
 	private void cancelSpawnTask() {
