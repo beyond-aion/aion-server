@@ -26,25 +26,17 @@ public class PashidSiegeVolatileAI extends AggressiveNpcAI {
 	}
 
 	private void attackWall() {
-		final Npc wall = getPosition().getWorldMapInstance().getNpc(831333);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			Npc wall = getPosition().getWorldMapInstance().getNpc(831333);
+			if (wall != null && wall.isSpawned())
 				getOwner().getAggroList().addHate(wall, 1000);
-			}
 		}, 3000);
 	}
 
 	private void detonation() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (getOwner() == null || isDead())
-					return;
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead() && getOwner().isSpawned())
 				AIActions.useSkill(PashidSiegeVolatileAI.this, getOwner().getNpcId() == 231150 ? 21259 : 21272);
-			}
 		}, Rnd.get(10000, 30000));
 	}
 }

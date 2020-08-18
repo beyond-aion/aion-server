@@ -66,28 +66,18 @@ public class GatesSummonedAI extends GeneralNpcAI {
 	}
 
 	private void cancelEventTask() {
-		if (eventTask != null && !eventTask.isDone()) {
+		if (eventTask != null && !eventTask.isDone())
 			eventTask.cancel(true);
-		}
 	}
 
 	private void startEventTask() {
-		eventTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				Npc boss = getPosition().getWorldMapInstance().getNpc(216960);
-				if (isDead() && getOwner() == null)
-					cancelEventTask();
-				else {
-					if (Rnd.get(0, 1) == 0)
-						SkillEngine.getInstance().getSkill(getOwner(), 19257, 55, boss).useNoAnimationSkill();
-					else
-						SkillEngine.getInstance().getSkill(getOwner(), 19281, 55, boss).useNoAnimationSkill();
-				}
+		eventTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			Npc boss = getPosition().getWorldMapInstance().getNpc(216960);
+			if (boss == null || boss.isDead()) {
+				cancelEventTask();
+				return;
 			}
-
+			SkillEngine.getInstance().getSkill(getOwner(), Rnd.nextBoolean() ? 19257 : 19281, 55, boss).useNoAnimationSkill();
 		}, 5000, 30000);
-
 	}
 }

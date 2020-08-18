@@ -28,7 +28,7 @@ public class ConquestOfferingBuffNpcAI extends ActionItemNpcAI {
 	public void handleSpawned() {
 		super.handleSpawned();
 		sendWakeUpMsg();
-		startDespawnTask();
+		despawnTask = ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 65000);
 	}
 
 	@Override
@@ -39,13 +39,6 @@ public class ConquestOfferingBuffNpcAI extends ActionItemNpcAI {
 			SkillEngine.getInstance().getSkill(getOwner(), skillId, 1, player).useSkill();
 			getOwner().getController().delete();
 		}
-	}
-
-	private void startDespawnTask() {
-		despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
-			if (getOwner() != null)
-				getOwner().getController().delete();
-		}, 65000);
 	}
 
 	@Override
@@ -61,9 +54,8 @@ public class ConquestOfferingBuffNpcAI extends ActionItemNpcAI {
 	}
 
 	private void cancelTask() {
-		if (despawnTask != null && !despawnTask.isCancelled()) {
+		if (despawnTask != null && !despawnTask.isDone())
 			despawnTask.cancel(true);
-		}
 	}
 
 	private void sendWakeUpMsg() {

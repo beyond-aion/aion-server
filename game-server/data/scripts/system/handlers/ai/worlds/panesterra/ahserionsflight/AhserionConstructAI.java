@@ -28,8 +28,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Yeats
- * @modified Estrayl October 30th, 2017.
+ * @author Yeats, Estrayl
  */
 @AIName("ahserion_construct")
 public class AhserionConstructAI extends NpcAI {
@@ -50,7 +49,7 @@ public class AhserionConstructAI extends NpcAI {
 
 	private void broadcastAttack() {
 		if (canShout.compareAndSet(true, false)) {
-			if (getOwner() != null && !getOwner().isDead() && getOwner().getWorldId() == 400030000) {
+			if (!getOwner().isDead() && getOwner().getWorldId() == 400030000) {
 				switch (getOwner().getSpawn().getStaticId()) {
 					case 180:
 						PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_TANK_C_ATTACKED());

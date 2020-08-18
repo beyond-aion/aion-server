@@ -1,10 +1,11 @@
 package ai;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillConditionTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -30,60 +31,31 @@ public class UseSkillAndDieAI extends NpcAI {
 	}
 
 	private void scheduleSkill() {
-		if (getOwner().getCreatorId() == 0) {
-			despawn(1);
-			return;
-		}
 		NpcSkillList skillList = getOwner().getSkillList();
 		if (skillList.getNpcSkills().isEmpty()) {
-			despawn(1);
+			LoggerFactory.getLogger(getClass()).warn(getOwner() + " has no skill list");
+			getOwner().getController().delete();
 			return;
 		}
 		NpcSkillConditionTemplate conditionTemplate = skillList.getNpcSkills().get(0).getConditionTemplate();
 		if (conditionTemplate != null) {
 			canDie = conditionTemplate.canDie();
 			ThreadPoolManager.getInstance().schedule(() -> {
-				if (getOwner() != null && !getOwner().isDead()) {
-					Creature spawner = findCreator(getOwner().getCreatorId());
-					if (spawner != null && !spawner.isDead()) {
-						SkillEngine.getInstance()
-							.getSkill(getOwner(), skillList.getNpcSkills().get(0).getSkillId(), skillList.getNpcSkills().get(0).getSkillLevel(), getOwner())
-							.useSkill();
-					}
+				if (getOwner().isDead() || !getOwner().isSpawned())
+					return;
+				if (getCreatorId() == 0 || getKnownList().getObject(getCreatorId()) instanceof Creature creator && !creator.isDead()) {
+					SkillEngine.getInstance()
+						.getSkill(getOwner(), skillList.getNpcSkills().get(0).getSkillId(), skillList.getNpcSkills().get(0).getSkillLevel(), getOwner())
+						.useSkill();
 				}
-				despawn(conditionTemplate.getDespawnTime());
+				ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), conditionTemplate.getDespawnTime());
 			}, conditionTemplate.getDelay());
 		}
 	}
 
-	private Creature findCreator(int objId) {
-		for (VisibleObject obj : getOwner().getKnownList().getKnownObjects().values()) {
-			if (obj instanceof Creature) {
-				if (obj.getObjectId() == objId) {
-					return (Creature) obj;
-				}
-			}
-		}
-		return null;
-	}
-
-	private void despawn(int despawn_time) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (getOwner() != null && !getOwner().isDead())
-					getOwner().getController().delete();
-			}
-		}, despawn_time);
-	}
-
 	@Override
 	public int modifyDamage(Creature attacker, int damage, Effect effect) {
-		if (!canDie)
-			return 0;
-		else
-			return damage;
+		return canDie ? damage : 0;
 	}
 
 	@Override

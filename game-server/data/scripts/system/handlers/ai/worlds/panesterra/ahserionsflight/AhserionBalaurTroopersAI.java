@@ -21,7 +21,7 @@ public class AhserionBalaurTroopersAI extends NpcAI {
 	public void handleSpawned() {
 		super.handleSpawned();
 		spawnAttackers();
-		scheduleDespawn();
+		ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 25000);
 	}
 
 	private void spawnAttackers() {
@@ -34,16 +34,5 @@ public class AhserionBalaurTroopersAI extends NpcAI {
 					AhserionRaid.getInstance().spawnStage(5, ((AhserionsFlightSpawnTemplate) getOwner().getSpawn()).getFaction());
 			}, 6500);
 		}
-	}
-
-	private void scheduleDespawn() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (getOwner() != null)
-					getOwner().getController().delete();
-			}
-		}, 25000);
 	}
 }

@@ -25,22 +25,7 @@ public class KebbitAI extends GeneralNpcAI {
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();
-		startDespawnTask();
-	}
-
-	private void startDespawnTask() {
-		if (despawnTask != null) {
-			return;
-		}
-		despawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (getOwner() != null && !getOwner().isDead()) {
-					getOwner().getController().delete();
-				}
-			}
-		}, 15500); // 15,5s
+		despawnTask = ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 15500); // 15,5s
 	}
 
 	@Override
@@ -51,9 +36,8 @@ public class KebbitAI extends GeneralNpcAI {
 	}
 
 	private void cancelTask() {
-		if (despawnTask != null && !despawnTask.isCancelled()) {
+		if (despawnTask != null && !despawnTask.isDone())
 			despawnTask.cancel(false);
-		}
 	}
 
 	@Override

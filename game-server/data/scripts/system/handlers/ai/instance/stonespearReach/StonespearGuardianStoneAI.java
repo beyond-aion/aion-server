@@ -30,10 +30,8 @@ public class StonespearGuardianStoneAI extends NpcAI {
 
 	private void startTask() {
 		task = ThreadPoolManager.getInstance().schedule(() -> {
-			if (getOwner() != null) {
-				PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_OBJ_End());
-				getOwner().getController().delete();
-			}
+			PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_OBJ_End());
+			getOwner().getController().delete();
 		}, 55000); // message says 2mins but its actually only ~1min.
 	}
 

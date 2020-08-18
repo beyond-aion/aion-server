@@ -96,28 +96,20 @@ public class PadmarashkaEggAI extends NpcAI {
 	}
 
 	private void smallEggSpawn() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (getOwner() != null && !isDead()) {
-					AIActions.deleteOwner(PadmarashkaEggAI.this);
-					attackPlayer((Npc) spawn(282616, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0));
-				}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead() && getOwner().isSpawned()) {
+				AIActions.deleteOwner(PadmarashkaEggAI.this);
+				attackPlayer((Npc) spawn(282616, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0));
 			}
+
 		}, 60000); // TODO: Need right value
 	}
 
 	private void hugeEggSpawn() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (getOwner() != null && !isDead()) {
-					AIActions.deleteOwner(PadmarashkaEggAI.this);
-					attackPlayer((Npc) spawn(282620, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0));
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead() && getOwner().isSpawned()) {
+				AIActions.deleteOwner(PadmarashkaEggAI.this);
+				attackPlayer((Npc) spawn(282620, getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0));
 			}
 		}, 120000); // TODO: Need right value
 	}
