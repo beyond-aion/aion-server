@@ -32030,67 +32030,67 @@
 	<decomposable item_id="188053688"><!-- Inggison Lesser Conqueror's Mark Box -->
 		<items chance="95.0">
 			<item id="186000238" min_count="25" max_count="40" /><!-- Conqueror's Mark -->
-			<item id="186000399" min_count="3" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="7" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 		<items chance="5.0">
 			<item id="186000238" min_count="25" max_count="40" /><!-- Conqueror's Mark -->
 			<item id="186000236" race="ASMODIANS" /><!-- Blood Mark -->
-			<item id="186000399" min_count="3" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="7" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053689"><!-- Inggison Conqueror's Mark Box -->
 		<items chance="95.0">
 			<item id="186000238" min_count="50" max_count="75" /><!-- Conqueror's Mark -->
-			<item id="186000399" min_count="6" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="15" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 		<items chance="5.0">
 			<item id="186000238" min_count="50" max_count="75" /><!-- Conqueror's Mark -->
 			<item id="186000236" min_count="2" race="ASMODIANS" /><!-- Blood Mark -->
-			<item id="186000399" min_count="6" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="15" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053690"><!-- Inggison Greater Conqueror's Mark Box -->
 		<items chance="95.0">
 			<item id="186000238" min_count="90" max_count="115" /><!-- Conqueror's Mark -->
-			<item id="186000399" min_count="9" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="22" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 		<items chance="5.0">
 			<item id="186000238" min_count="90" max_count="115" /><!-- Conqueror's Mark -->
 			<item id="186000236" min_count="3" race="ASMODIANS" /><!-- Blood Mark -->
-			<item id="186000399" min_count="9" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="22" race="ASMODIANS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053691"><!-- Gelkmaros Lesser Conqueror's Mark Box -->
 		<items chance="95.0">
 			<item id="186000238" min_count="25" max_count="40" /><!-- Conqueror's Mark -->
-			<item id="186000399" min_count="3" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="7" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 		<items chance="5.0">
 			<item id="186000238" min_count="25" max_count="40" /><!-- Conqueror's Mark -->
 			<item id="186000236" race="ELYOS" /><!-- Blood Mark -->
-			<item id="186000399" min_count="3" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="7" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053692"><!-- Gelkmaros Conqueror's Mark Box -->
 		<items chance="95.0">
 			<item id="186000238" min_count="50" max_count="75" /><!-- Conqueror's Mark -->
-			<item id="186000399" min_count="6" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="15" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 		<items chance="5.0">
 			<item id="186000238" min_count="50" max_count="75" /><!-- Conqueror's Mark -->
 			<item id="186000236" min_count="2" race="ELYOS" /><!-- Blood Mark -->
-			<item id="186000399" min_count="6" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="15" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053693"><!-- Gelkmaros Greater Conqueror's Mark Box -->
 		<items chance="95.0">
 			<item id="186000238" min_count="90" max_count="115" /><!-- Conqueror's Mark -->
-			<item id="186000399" min_count="9" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="22" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 		<items chance="5.0">
 			<item id="186000238" min_count="90" max_count="115" /><!-- Conqueror's Mark -->
 			<item id="186000236" min_count="3" race="ELYOS" /><!-- Blood Mark -->
-			<item id="186000399" min_count="9" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
+			<item id="186000399" min_count="22" race="ELYOS" /><!-- Honorable Conqueror's Mark -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053694"><!-- Ride Box of Conquest -->
