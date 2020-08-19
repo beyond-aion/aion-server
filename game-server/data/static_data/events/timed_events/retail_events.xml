@@ -2415,7 +2415,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Code Red: Atreia" start="2017-05-05T00:00:00" end="2017-05-14T23:59:59">
+	<event name="Code Red: Atreia" start="2020-08-24T00:00:00" end="2020-09-06T23:59:59">
 		<quests>
 			<maintainable>80324 80325 80326 80327</maintainable>
 		</quests>
@@ -2432,7 +2432,7 @@
 				</spawn>
 				<!-- Jorpine (MON-THU) -->
 				<spawn npc_id="831435" respawn_time="295">
-					<spot x="1438.3000" y="1496.2000" z="573" h="97" />
+					<spot x="1438.3000" y="1496.2000" z="573" h="29" />
 				</spawn>
 				<!-- Yennu (MON-THU) -->
 				<spawn npc_id="831436" respawn_time="295">
@@ -2440,7 +2440,7 @@
 				</spawn>
 				<!-- Dalloren (FRI-SAT) -->
 				<spawn npc_id="831437" respawn_time="295">
-					<spot x="1438.3000" y="1496.2000" z="573" h="97" />
+					<spot x="1438.3000" y="1496.2000" z="573" h="29" />
 				</spawn>
 				<!-- Dalliea (FRI-SAT) -->
 				<spawn npc_id="831518" respawn_time="295">
@@ -2452,7 +2452,7 @@
 				</spawn>
 				<!-- Medical Supplies -->
 				<spawn npc_id="831447" respawn_time="295">
-					<spot x="1434.8000" y="1495.4000" z="573" h="81" />
+					<spot x="1434.8000" y="1495.4000" z="573" h="26" />
 				</spawn>
 			</spawn_map>
 			<!-- Verteron -->
