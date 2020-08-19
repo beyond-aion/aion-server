@@ -53,6 +53,10 @@ public class DuelService {
 	 *          the player who respond to duel request
 	 */
 	public void onDuelRequest(Player requester, Player targetPlayer) {
+		if (targetPlayer == null || requester.equals(targetPlayer)) {
+			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_NO_USER_TO_REQUEST());
+			return;
+		}
 		if (requester.isInInstance() && !CustomConfig.INSTANCE_DUEL_ENABLE) {
 			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_MSG_DUEL_CANT_IN_THIS_ZONE());
 			return;
@@ -69,7 +73,7 @@ public class DuelService {
 			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_MSG_REJECTED_DUEL(targetPlayer.getName()));
 			return;
 		}
-		if (targetPlayer.isDead()) {
+		if (requester.isDead() || targetPlayer.isDead()) {
 			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_PARTNER_INVALID(targetPlayer.getName()));
 			return;
 		}
