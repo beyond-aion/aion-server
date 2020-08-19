@@ -61,7 +61,7 @@ public class SpringAI extends NpcAI {
 
 	private void checkForHeal() {
 		if (isDead() || !getPosition().isSpawned())
-			cancelTasks();
+			return;
 		for (VisibleObject object : getKnownList().getKnownObjects().values()) {
 			Creature creature = (Creature) object;
 			CreatureLifeStats<?> lifeStats = creature.getLifeStats();
