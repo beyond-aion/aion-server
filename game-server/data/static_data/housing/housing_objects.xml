@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<housing_objects>
+<housing_objects xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="housing_objects.xsd">
     <passive area="INTERIOR" location="FLOOR" use_days="1" id="3000001" name_id="360001" category="CARPET" quality="COMMON" talking_distance="5.0" can_dye="true"/>
     <passive area="INTERIOR" location="FLOOR" use_days="1" id="3000002" name_id="360002" category="CARPET" quality="COMMON" talking_distance="5.0" can_dye="true"/>
     <passive area="INTERIOR" location="WALL" use_days="1" id="3000003" name_id="360003" category="CURTAIN" quality="COMMON" talking_distance="5.0" can_dye="true"/>
@@ -1345,8 +1345,8 @@
     <use_item required_item="186000159" use_count="100" delay="5000" cd="180" owner="false" area="INTERIOR" location="STACK" limit="POT" id="3195135" name_id="846833" category="DECORATION" quality="UNIQUE" talking_distance="2.0">
         <action check_type="2" remove_count="1" reward_id="188053916" final_reward_id="188053998"/>
     </use_item>
-    <use_item use_count="6" delay="5000" cd="86400" owner="true" area="INTERIOR" location="STACK" limit="POT" id="3195136" name_id="846834" category="DECORATION" quality="UNIQUE" talking_distance="5.0">
-        <action check_type="0" remove_count="0" reward_id="188053997" final_reward_id="188053997"/>
+    <use_item required_item="186000166" use_count="6" delay="5000" cd="86400" owner="true" area="INTERIOR" location="STACK" limit="POT" id="3195136" name_id="846834" category="DECORATION" quality="UNIQUE" talking_distance="5.0">
+        <action check_type="0" remove_count="1" reward_id="188053997" final_reward_id="188053997"/>
     </use_item>
     <npc npc_id="810053" area="INTERIOR" location="FLOOR" use_days="30" id="3195137" name_id="846870" category="NPC" quality="COMMON" talking_distance="5.0"/>
     <npc npc_id="810054" area="INTERIOR" location="FLOOR" use_days="30" id="3195138" name_id="846871" category="NPC" quality="COMMON" talking_distance="5.0"/>

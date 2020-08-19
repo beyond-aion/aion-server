@@ -35504,7 +35504,20 @@
 			<item id="187060170" /><!-- Trillirunerk's Blue Flame Feather -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053997" /><!-- Ancient Crown Bundle -->
+	<decomposable item_id="188053997"><!-- Ancient Crown Bundle -->
+		<items chance="10">
+			<item id="186000051" /><!-- Major Ancient Crown -->
+		</items>
+		<items chance="20">
+			<item id="186000052" /><!-- Greater Ancient Crown -->
+		</items>
+		<items chance="30">
+			<item id="186000053" /><!-- Ancient Crown -->
+		</items>
+		<items chance="40">
+			<item id="186000054" /><!-- Lesser Ancient Crown -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053998" /><!-- Ornate Enchantment Stone Bundle -->
 	<decomposable item_id="188054007" /><!-- Lockbox Key Pouch -->
 	<decomposable item_id="188054008" /><!-- Lockbox Key Pouch -->
