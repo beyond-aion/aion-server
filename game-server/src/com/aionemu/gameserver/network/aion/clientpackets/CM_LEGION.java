@@ -147,8 +147,7 @@ public class CM_LEGION extends AionClientPacket {
 						LegionService.getInstance().changeSelfIntro(activePlayer, newSelfIntro);
 						break;
 					case 0x0D: // edit permissions
-						if (activePlayer.getLegionMember().isBrigadeGeneral())
-							LegionService.getInstance().changePermissions(legion, deputyPermission, centurionPermission, legionarPermission, volunteerPermission);
+						LegionService.getInstance().changePermissions(activePlayer, legion, deputyPermission, centurionPermission, legionarPermission, volunteerPermission);
 						break;
 					case 0x0E: // level up legion
 						LegionService.getInstance().requestChangeLevel(activePlayer);

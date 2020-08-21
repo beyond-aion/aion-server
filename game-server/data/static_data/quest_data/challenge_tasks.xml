@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<challenge_tasks>
-    <task id="300" type="LEGION" race="ELYOS" min_level="5" max_level="6" name_id="1199506" repeat="true">
+<challenge_tasks  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="challenge_tasks.xsd">
+    <task id="300" type="LEGION" race="ELYOS" min_level="5" max_level="6" name_id="1199506" repeat="true" legion_level_task="true">
         <quest id="17000" repeat_count="6" score="81"/>
         <quest id="17001" repeat_count="12" score="150"/>
         <quest id="17002" repeat_count="42" score="174"/>
@@ -10,7 +10,7 @@
         <contrib rank="4" number="150" reward_id="186000199" item_count="2"/>
         <reward type="NONE" msg_id="904485"/>
     </task>
-    <task id="301" type="LEGION" race="ELYOS" prev_task="300" min_level="6" max_level="7" name_id="1199508" repeat="true">
+    <task id="301" type="LEGION" race="ELYOS" prev_task="300" min_level="6" max_level="7" name_id="1199508" repeat="true" legion_level_task="true">
         <quest id="17003" repeat_count="12" score="111"/>
         <quest id="17004" repeat_count="24" score="159"/>
         <quest id="17005" repeat_count="60" score="720"/>
@@ -20,7 +20,7 @@
         <contrib rank="4" number="180" reward_id="186000199" item_count="5"/>
         <reward type="NONE" msg_id="904485"/>
     </task>
-    <task id="302" type="LEGION" race="ELYOS" prev_task="301" min_level="7" max_level="8" name_id="1199510" repeat="true">
+    <task id="302" type="LEGION" race="ELYOS" prev_task="301" min_level="7" max_level="8" name_id="1199510" repeat="true" legion_level_task="true">
         <quest id="17006" repeat_count="24" score="150"/>
         <quest id="17007" repeat_count="48" score="165"/>
         <quest id="17008" repeat_count="84" score="720"/>
@@ -72,7 +72,7 @@
 		<contrib rank="4" number="14" reward_id="186000199" item_count="1"/>
 		<reward type="NONE"/>
 	</task>
-    <task id="400" type="LEGION" race="ASMODIANS" min_level="5" max_level="6" name_id="1199518" repeat="true">
+    <task id="400" type="LEGION" race="ASMODIANS" min_level="5" max_level="6" name_id="1199518" repeat="true" legion_level_task="true">
         <quest id="27000" repeat_count="6" score="81"/>
         <quest id="27001" repeat_count="12" score="150"/>
         <quest id="27002" repeat_count="42" score="174"/>
@@ -82,7 +82,7 @@
         <contrib rank="4" number="150" reward_id="186000199" item_count="2"/>
         <reward type="NONE" msg_id="904485"/>
     </task>
-    <task id="401" type="LEGION" race="ASMODIANS" prev_task="400" min_level="6" max_level="7" name_id="1199520" repeat="true">
+    <task id="401" type="LEGION" race="ASMODIANS" prev_task="400" min_level="6" max_level="7" name_id="1199520" repeat="true" legion_level_task="true">
         <quest id="27003" repeat_count="12" score="111"/>
         <quest id="27004" repeat_count="24" score="159"/>
         <quest id="27005" repeat_count="60" score="720"/>
@@ -92,7 +92,7 @@
         <contrib rank="4" number="180" reward_id="186000199" item_count="5"/>
         <reward type="NONE" msg_id="904485"/>
     </task>
-    <task id="402" type="LEGION" race="ASMODIANS" prev_task="401" min_level="7" max_level="8" name_id="1199522" repeat="true">
+    <task id="402" type="LEGION" race="ASMODIANS" prev_task="401" min_level="7" max_level="8" name_id="1199522" repeat="true" legion_level_task="true">
         <quest id="27006" repeat_count="24" score="150"/>
         <quest id="27007" repeat_count="48" score="165"/>
         <quest id="27008" repeat_count="84" score="720"/>

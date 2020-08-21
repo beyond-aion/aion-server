@@ -49,6 +49,9 @@ public class ChallengeTaskTemplate implements L10n {
 	@XmlAttribute(required = true)
 	private int id;
 
+	@XmlAttribute(name = "legion_level_task")
+	private boolean legionLevelTask = false;
+
 	public List<ChallengeQuestTemplate> getQuests() {
 		return quest;
 	}
@@ -62,11 +65,11 @@ public class ChallengeTaskTemplate implements L10n {
 	}
 
 	public boolean isRepeatable() {
-		return repeat == true;
+		return repeat;
 	}
 
 	public boolean isTownResidence() {
-		return townResidence == true;
+		return townResidence;
 	}
 
 	@Override
@@ -96,5 +99,9 @@ public class ChallengeTaskTemplate implements L10n {
 
 	public int getId() {
 		return id;
+	}
+
+	public boolean isLegionLevelTask() {
+		return legionLevelTask;
 	}
 }

@@ -13,10 +13,18 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
+import com.aionemu.gameserver.custom.pvpmap.PvpMapHandler;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.drop.DropItem;
-import com.aionemu.gameserver.model.gameobjects.*;
+import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.DropNpc;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Pet;
+import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
+import com.aionemu.gameserver.model.gameobjects.Summon;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -234,7 +242,12 @@ public class NpcController extends CreatureController<Npc> {
 					rewardAp *= percentage;
 					rewardAp *= instanceApMultiplier;
 
-					QuestEngine.getInstance().onKill(new QuestEnv(getOwner(), player, 0));
+					boolean shouldNotifyQuestEngine = true; // do not include pvp map
+					if (getOwner().getPosition() != null && getOwner().getPosition().getWorldMapInstance() != null
+						&& getOwner().getPosition().getWorldMapInstance().getInstanceHandler() instanceof PvpMapHandler)
+						shouldNotifyQuestEngine = false;
+					if (shouldNotifyQuestEngine)
+						QuestEngine.getInstance().onKill(new QuestEnv(getOwner(), player, 0));
 					EventService.getInstance().onPveKill(player, getOwner());
 					player.getCommonData().addExp(rewardXp, Rates.XP_HUNTING, getOwner().getObjectTemplate().getL10n());
 					player.getCommonData().addDp(rewardDp);

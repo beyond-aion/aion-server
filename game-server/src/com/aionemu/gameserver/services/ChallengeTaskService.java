@@ -244,17 +244,23 @@ public class ChallengeTaskService {
 		}
 	}
 
-	public boolean canRaiseLegionLevel(int legionId, int legionLevel) {
-		Map<Integer, ChallengeTask> tasks;
-		if (legionTasks.containsKey(legionId)) {
-			tasks = legionTasks.get(legionId);
-		} else {
-			tasks = DAOManager.getDAO(ChallengeTasksDAO.class).load(legionId, ChallengeType.LEGION);
-		}
+	public boolean canRaiseLegionLevel(int legionId, int legionLevel, Player actingPlayer) {
+		Map<Integer, ChallengeTask> tasks = legionTasks.computeIfAbsent(legionId,
+			id -> DAOManager.getDAO(ChallengeTasksDAO.class).load(id, ChallengeType.LEGION));
+		List<ChallengeTask> requiredTasksForLevel = new ArrayList<>();
 		for (ChallengeTask task : tasks.values()) {
-			if (task.getTemplate().getMinLevel() == legionLevel && task.isCompleted())
-				return true;
+			ChallengeTaskTemplate taskTemplate = task.getTemplate();
+			if (taskTemplate.isLegionLevelTask() && taskTemplate.getMinLevel() == legionLevel)
+				requiredTasksForLevel.add(task);
 		}
-		return false;
+		if (requiredTasksForLevel.isEmpty()) {
+			log.warn("Player[id={}, name={}] tried to increase level of legion[id={}, currentLevel={}] but no challenge tasks were found",
+					actingPlayer.getObjectId(), actingPlayer.getName(), legionId, legionLevel);
+			return false;
+		}
+		for (ChallengeTask task : requiredTasksForLevel)
+			if (!task.isCompleted())
+				return false;
+		return true;
 	}
 }

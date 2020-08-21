@@ -24,8 +24,34 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.model.team.legion.*;
-import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.model.team.legion.Legion;
+import com.aionemu.gameserver.model.team.legion.LegionEmblem;
+import com.aionemu.gameserver.model.team.legion.LegionEmblemType;
+import com.aionemu.gameserver.model.team.legion.LegionHistory;
+import com.aionemu.gameserver.model.team.legion.LegionHistoryType;
+import com.aionemu.gameserver.model.team.legion.LegionMember;
+import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
+import com.aionemu.gameserver.model.team.legion.LegionPermissionsMask;
+import com.aionemu.gameserver.model.team.legion.LegionRank;
+import com.aionemu.gameserver.model.team.legion.LegionWarehouse;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ICON_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_ADD_MEMBER;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_EDIT;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_LEAVE_MEMBER;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_MEMBERLIST;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_SEND_EMBLEM;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_SEND_EMBLEM_DATA;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_TABS;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_EMBLEM;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_MEMBER;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_NICKNAME;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_SELF_INTRO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_TITLE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_INFO;
 import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.trade.PricesService;
@@ -603,12 +629,12 @@ public class LegionService {
 	}
 
 	/**
-	 * This method will handle the changement of permissions
-	 *
-	 * @param legion
+	 * This method will handle the update of permissions
 	 */
-	public void changePermissions(Legion legion, short deputyPermission, short centurionPermission, short legionarPermission,
+	public void changePermissions(Player actingPlayer, Legion legion, short deputyPermission, short centurionPermission, short legionarPermission,
 		short volunteerPermission) {
+		if (actingPlayer.getObjectId() != legion.getBrigadeGeneral())
+			return;
 		if (legion.setLegionPermissions(deputyPermission, centurionPermission, legionarPermission, volunteerPermission)) {
 			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_EDIT(0x02, legion));
 		}
@@ -616,8 +642,6 @@ public class LegionService {
 
 	/**
 	 * This method will handle the leveling up of a legion
-	 *
-	 * @param LegionCommand
 	 */
 	public void requestChangeLevel(Player activePlayer) {
 		if (legionRestrictions.canChangeLevel(activePlayer)) {
@@ -1413,28 +1437,34 @@ public class LegionService {
 		 * This method checks all restrictions for changing legion level
 		 *
 		 * @param activePlayer
-		 * @param kinahAmount
 		 * @return true if allowed to change legion level
 		 */
 		private boolean canChangeLevel(Player activePlayer) {
 			Legion legion = activePlayer.getLegion();
 			int levelContributionPrice = legion.getContributionPrice();
-
+			if (legion.getBrigadeGeneral() != activePlayer.getObjectId()) {
+				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_LEVEL_DONT_HAVE_RIGHT());
+				return false;
+			}
 			if (legion.getLegionLevel() == MAX_LEGION_LEVEL) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_LEVEL_CANT_LEVEL_UP());
 				return false;
-			} else if (LegionConfig.ENABLE_GUILD_TASK_REQ && legion.getLegionLevel() >= 5) {
-				if (!ChallengeTaskService.getInstance().canRaiseLegionLevel(legion.getLegionId(), legion.getLegionLevel())) {
+			}
+			if (LegionConfig.ENABLE_GUILD_TASK_REQ && legion.getLegionLevel() >= 5) {
+				if (!ChallengeTaskService.getInstance().canRaiseLegionLevel(legion.getLegionId(), legion.getLegionLevel(), activePlayer)) {
 					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_LEVEL_UP_CHALLENGE_TASK(legion.getLegionLevel()));
 					return false;
 				}
-			} else if (activePlayer.getInventory().getKinah() < legion.getKinahPrice()) {
+			}
+			if (activePlayer.getInventory().getKinah() < legion.getKinahPrice()) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_LEVEL_NOT_ENOUGH_MONEY());
 				return false;
-			} else if (!legion.hasRequiredMembers()) {
+			}
+			if (!legion.hasRequiredMembers()) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_LEVEL_NOT_ENOUGH_MEMBER());
 				return false;
-			} else if (legion.getContributionPoints() < levelContributionPrice) {
+			}
+			if (legion.getContributionPoints() < levelContributionPrice) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CHANGE_LEVEL_NOT_ENOUGH_POINT());
 				return false;
 			}
