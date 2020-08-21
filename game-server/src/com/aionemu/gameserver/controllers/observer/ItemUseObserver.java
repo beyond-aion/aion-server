@@ -11,9 +11,6 @@ import com.aionemu.gameserver.skillengine.model.Skill;
  */
 public abstract class ItemUseObserver extends ActionObserver {
 
-	/**
-	 * @param observerType
-	 */
 	public ItemUseObserver() {
 		super(ObserverType.ALL);
 	}
@@ -60,6 +57,21 @@ public abstract class ItemUseObserver extends ActionObserver {
 
 	@Override
 	public final void sit() {
+		abort();
+	}
+
+	@Override
+	public void endSkillCast(Skill skill) {
+		abort();
+	}
+
+	@Override
+	public void itemused(Item item) {
+		abort();
+	}
+
+	@Override
+	public void boostSkillCost(Skill skill) {
 		abort();
 	}
 

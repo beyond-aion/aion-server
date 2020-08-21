@@ -36,9 +36,6 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	@XmlAttribute
 	protected int time;
 
-	/**
-	 * @return the Npc Id
-	 */
 	public int getNpcId() {
 		return npcid;
 	}
@@ -72,8 +69,8 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 	public void act(final Player player, final Item parentItem, Item targetItem, Object... params) {
 		// ShowAction
 		player.getController().cancelUseItem();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(),
-			10000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 10000, 0, 0), true);
 		final ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
@@ -81,54 +78,42 @@ public class ToyPetSpawnAction extends AbstractItemAction {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_CANCELED());
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem
-					.getItemTemplate().getTemplateId(), 0, 2, 0), true);
+				PacketSendUtility.broadcastPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 2, 0), true);
 			}
 		};
 
 		player.getObserveController().attach(observer);
-		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
+			PacketSendUtility.broadcastPacket(player,
+				new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);
+			player.getObserveController().removeObserver(observer);
+			// RemoveKisk
+			if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
+				return;
+			float x = player.getX();
+			float y = player.getY();
+			float z = player.getZ();
+			byte heading = (byte) ((player.getHeading() + 60) % 120);
+			int worldId = player.getWorldId();
+			int instanceId = player.getInstanceId();
+			SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, npcid, x, y, z, heading);
 
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(),
-					0, 1, 1), true);
-				player.getObserveController().removeObserver(observer);
-				// RemoveKisk
-				if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
-					return;
-				float x = player.getX();
-				float y = player.getY();
-				float z = player.getZ();
-				byte heading = (byte) ((player.getHeading() + 60) % 120);
-				int worldId = player.getWorldId();
-				int instanceId = player.getInstanceId();
-				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, npcid, x, y, z, heading);
+			final Kisk kisk = VisibleObjectSpawner.spawnKisk(spawn, instanceId, player);
+			final int objOwnerId = player.getObjectId();
+			// Schedule Despawn Action
+			Future<?> task = ThreadPoolManager.getInstance().schedule(() -> kisk.getController().delete(), 7200000);
+			// Fixed 2 hours 2 * 60 * 60 * 1000
+			kisk.getController().addTask(TaskId.DESPAWN, task);
 
-				final Kisk kisk = VisibleObjectSpawner.spawnKisk(spawn, instanceId, player);
-				final int objOwnerId = player.getObjectId();
-				// Schedule Despawn Action
-				Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
+			// ShowFinalAction
+			player.getController().cancelTask(TaskId.ITEM_USE);
+			KiskService.getInstance().regKisk(kisk, objOwnerId);
 
-					@Override
-					public void run() {
-						kisk.getController().delete();
-					}
-				}, 7200000);
-				// Fixed 2 hours 2 * 60 * 60 * 1000
-				kisk.getController().addTask(TaskId.DESPAWN, task);
-
-				// ShowFinalAction
-				// TODO Bad idea...
-				// player.getController().cancelUseItem();
-				player.getController().cancelTask(TaskId.ITEM_USE);
-				KiskService.getInstance().regKisk(kisk, objOwnerId);
-
-				if (kisk.getMaxMembers() > 1)
-					kisk.getController().onDialogRequest(player);
-				else
-					KiskService.getInstance().onBind(kisk, player);
-			}
+			if (kisk.getMaxMembers() > 1)
+				kisk.getController().onDialogRequest(player);
+			else
+				KiskService.getInstance().onBind(kisk, player);
 		}, 10000));
 	}
 

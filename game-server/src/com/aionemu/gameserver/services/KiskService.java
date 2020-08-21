@@ -5,7 +5,6 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -41,16 +40,12 @@ public class KiskService {
 		// send players SET_BIND_POINT and send them die packet again, if they lie dead, but are still not revived
 		for (Player member : kisk.getCurrentMemberList()) {
 			member.setKisk(null);
-			PacketSendUtility.sendPacket(member, new SM_BIND_POINT_INFO(0, 0f, 0f, 0f, member));
+			TeleportService.sendSetBindPoint(member);
 			if (member.isDead())
 				member.getController().sendDie();
 		}
 	}
 
-	/**
-	 * @param kisk
-	 * @param player
-	 */
 	public void onBind(Kisk kisk, Player player) {
 		if (player.getKisk() != null)
 			player.getKisk().removePlayer(player);
@@ -67,9 +62,6 @@ public class KiskService {
 		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 2, player.getCommonData().getLevel()), true);
 	}
 
-	/**
-	 * @param player
-	 */
 	public void onLogin(Player player) {
 		Kisk kisk = this.boundButOfflinePlayer.get(player.getObjectId());
 		if (kisk != null) {

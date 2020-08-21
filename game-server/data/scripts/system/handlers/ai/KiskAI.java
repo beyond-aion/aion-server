@@ -33,22 +33,16 @@ public class KiskAI extends NpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		if (getLifeStats().isFullyRestoredHp())
-			for (Player member : getOwner().getCurrentMemberList())
-				PacketSendUtility.sendPacket(member, STR_BINDSTONE_IS_ATTACKED());
-	}
-
-	@Override
-	protected void handleDied() {
-		getOwner().broadcastPacket(STR_BINDSTONE_IS_DESTROYED());
-		super.handleDied();
+			getOwner().broadcastPacket(STR_BINDSTONE_IS_ATTACKED());
 	}
 
 	@Override
 	protected void handleDespawned() {
 		KiskService.getInstance().removeKisk(getOwner());
-		if (!isDead())
+		if (isDead())
+			getOwner().broadcastPacket(STR_BINDSTONE_IS_DESTROYED());
+		else
 			getOwner().broadcastPacket(STR_BINDSTONE_IS_REMOVED());
-
 		super.handleDespawned();
 	}
 

@@ -41,8 +41,8 @@ public class Kisk extends SummonedObject<Player> {
 
 	public Kisk(NpcController controller, SpawnTemplate spawnTemplate, Player owner) {
 		super(controller, spawnTemplate, DataManager.NPC_DATA.getNpcTemplate(spawnTemplate.getNpcId()).getLevel(), null);
-
-		this.kiskStatsTemplate = getObjectTemplate().getKiskStatsTemplate() == null ? new KiskStatsTemplate() : getObjectTemplate().getKiskStatsTemplate();
+		this.kiskStatsTemplate = getObjectTemplate().getKiskStatsTemplate() == null ? new KiskStatsTemplate()
+			: getObjectTemplate().getKiskStatsTemplate();
 		this.kiskMemberIds = ConcurrentHashMap.newKeySet();
 		this.remainingResurrections = this.kiskStatsTemplate.getMaxResurrects();
 		this.kiskSpawnTime = System.currentTimeMillis() / 1000;
@@ -69,8 +69,8 @@ public class Kisk extends SummonedObject<Player> {
 
 	@Override
 	public CreatureType getType(Creature creature) {
-		if (creature instanceof Player)
-			return isEnemyFrom((Player) creature) ? CreatureType.ATTACKABLE : CreatureType.SUPPORT;
+		if (creature instanceof Player player)
+			return isEnemyFrom(player) ? CreatureType.ATTACKABLE : CreatureType.SUPPORT;
 		return super.getType(creature);
 	}
 
@@ -126,7 +126,7 @@ public class Kisk extends SummonedObject<Player> {
 	public int getRemainingLifetime() {
 		long timeElapsed = (System.currentTimeMillis() / 1000) - kiskSpawnTime;
 		int timeRemaining = (int) (KISK_LIFETIME_IN_SEC - timeElapsed);
-		return (timeRemaining > 0 ? timeRemaining : 0);
+		return Math.max(timeRemaining, 0);
 	}
 
 	/**
@@ -134,7 +134,6 @@ public class Kisk extends SummonedObject<Player> {
 	 */
 	public boolean canBind(Player player) {
 		return getCurrentMemberCount() < getMaxMembers() && isUseAllowed(player);
-
 	}
 
 	private boolean isUseAllowed(Player player) {
@@ -166,9 +165,6 @@ public class Kisk extends SummonedObject<Player> {
 		return false;
 	}
 
-	/**
-	 * @param player
-	 */
 	public void addPlayer(Player player) {
 		if (kiskMemberIds.add(player.getObjectId())) {
 			broadcastKiskUpdate();
@@ -178,18 +174,12 @@ public class Kisk extends SummonedObject<Player> {
 		player.setKisk(this);
 	}
 
-	/**
-	 * @param player
-	 */
 	public void removePlayer(Player player) {
 		player.setKisk(null);
 		if (kiskMemberIds.remove(player.getObjectId()))
 			broadcastKiskUpdate();
 	}
 
-	/**
-	 * Sends SM_KISK_UPDATE to each member
-	 */
 	private void broadcastKiskUpdate() {
 		// on all members, but not the ones in knownlist, they will receive the update in the next step
 		for (Player member : getCurrentMemberList()) {
@@ -201,18 +191,12 @@ public class Kisk extends SummonedObject<Player> {
 		PacketSendUtility.broadcastPacket(this, new SM_KISK_UPDATE(this), player -> player.getRace() == ownerRace);
 	}
 
-	/**
-	 * @param message
-	 */
 	public void broadcastPacket(SM_SYSTEM_MESSAGE message) {
 		for (Player member : getCurrentMemberList()) {
 			PacketSendUtility.sendPacket(member, message);
 		}
 	}
 
-	/**
-	 * @param player
-	 */
 	public void resurrectionUsed() {
 		remainingResurrections--;
 		broadcastKiskUpdate();
@@ -220,9 +204,6 @@ public class Kisk extends SummonedObject<Player> {
 			getController().delete();
 	}
 
-	/**
-	 * @return ownerRace
-	 */
 	public Race getOwnerRace() {
 		return ownerRace;
 	}

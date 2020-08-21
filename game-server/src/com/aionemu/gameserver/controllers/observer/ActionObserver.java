@@ -17,31 +17,20 @@ public class ActionObserver {
 
 	private AtomicBoolean used;
 
-	private ObserverType observerType;
+	private final ObserverType observerType;
 
 	public ActionObserver(ObserverType observerType) {
 		this.observerType = observerType;
 	}
 
-	/**
-	 * Make this observer usable exactly one time
-	 */
 	public void makeOneTimeUse() {
 		used = new AtomicBoolean(false);
 	}
 
-	/**
-	 * Try to use this observer. Will return true only once.
-	 * 
-	 * @return
-	 */
 	public boolean tryUse() {
 		return used.compareAndSet(false, true);
 	}
 
-	/**
-	 * @return the observerType
-	 */
 	public ObserverType getObserverType() {
 		return observerType;
 	}
@@ -56,90 +45,45 @@ public class ActionObserver {
 	public void attacked(Creature creature, int skillId) {
 	}
 
-	/**
-	 * @param creature
-	 */
 	public void attack(Creature creature) {
 	}
 
-	/**
-	 * @param item
-	 * @param owner
-	 */
 	public void equip(Item item, Player owner) {
 	}
 
-	/**
-	 * @param item
-	 * @param owner
-	 */
 	public void unequip(Item item, Player owner) {
 	}
 
-	/**
-	 * @param skill
-	 */
 	public void startSkillCast(Skill skill) {
 	}
 
-	/**
-	 * @param skill
-	 */
 	public void endSkillCast(Skill skill) {
 	}
 
-	/**
-	 * @param skill
-	 */
 	public void boostSkillCost(Skill skill) {
 	}
 
-	/**
-	 * @param creature
-	 */
 	public void died(Creature creature) {
 	}
 
-	/**
-	 * @param creature
-	 * @param dotEffect
-	 */
 	public void dotattacked(Creature creature, Effect dotEffect) {
 	}
 
-	/**
-	 * @param item
-	 */
 	public void itemused(Item item) {
 	}
 
-	/**
-	 * @param npc
-	 */
 	public void npcdialogrequested(Npc npc) {
 	}
 
-	/**
-	 * @param state
-	 */
 	public void abnormalsetted(AbnormalState state) {
 	}
 
-	/**
-	 * @param
-	 */
 	public void summonrelease() {
 	}
 
-	/**
-	 * @param
-	 */
 	public void sit() {
 	}
 
-	/**
-	 * @param
-	 */
 	public void hpChanged(int value) {
 	}
 }
