@@ -224,12 +224,11 @@ public class NpcController extends CreatureController<Npc> {
 					+ info.getAttacker().getName() + " obj: " + info.getAttacker().getObjectId() + " owner: " + getOwner().getName() + " player was skiped");
 				continue;
 			}
-			if (attacker instanceof TemporaryPlayerTeam<?>) {
-				PlayerTeamDistributionService.doReward((TemporaryPlayerTeam<?>) attacker, percentage, getOwner(), winner);
-			} else if (attacker instanceof Player && ((Player) attacker).isInGroup()) {
-				PlayerTeamDistributionService.doReward(((Player) attacker).getPlayerGroup(), percentage, getOwner(), winner);
-			} else if (attacker instanceof Player) {
-				Player player = (Player) attacker;
+			if (attacker instanceof TemporaryPlayerTeam<?> tmpPlayerTeam) {
+				PlayerTeamDistributionService.doReward(tmpPlayerTeam, percentage, getOwner(), winner);
+			} else if (attacker instanceof Player player && player.isInGroup()) {
+				PlayerTeamDistributionService.doReward(player.getPlayerGroup(), percentage, getOwner(), winner);
+			} else if (attacker instanceof Player player) {
 				if (!player.isDead()) {
 					// Reward init
 					long rewardXp = StatFunctions.calculateExperienceReward(player.getLevel(), getOwner());

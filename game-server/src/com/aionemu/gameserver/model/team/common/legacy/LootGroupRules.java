@@ -52,10 +52,6 @@ public class LootGroupRules {
 		mythic_item_above = mythicItemAbove;
 	}
 
-	/**
-	 * @param quality
-	 * @return
-	 */
 	public boolean getQualityRule(ItemQuality quality) {
 		switch (quality) {
 			case COMMON: // White
@@ -74,123 +70,69 @@ public class LootGroupRules {
 		return false;
 	}
 
-	/**
-	 * @param quality
-	 * @return
-	 */
 	public boolean isMisc(ItemQuality quality) {
 		return quality.equals(ItemQuality.JUNK) && misc == 1;
 	}
 
-	/**
-	 * @return the lootRule
-	 */
 	public LootRuleType getLootRule() {
 		return lootRule;
 	}
 
-	/**
-	 * @return the autodistributionId
-	 */
 	public int getAutodistributionId() {
 		boolean isBid = mythic_item_above == 3;
 		boolean isRoll = mythic_item_above == 2;
 		return isBid ? 3 : isRoll ? 2 : 0;
 	}
 
-	/**
-	 * @return the common_item_above
-	 */
 	public int getCommonItemAbove() {
 		return common_item_above;
 	}
 
-	/**
-	 * @return the superior_item_above
-	 */
 	public int getSuperiorItemAbove() {
 		return superior_item_above;
 	}
 
-	/**
-	 * @return the heroic_item_above
-	 */
 	public int getHeroicItemAbove() {
 		return heroic_item_above;
 	}
 
-	/**
-	 * @return the fabled_item_above
-	 */
 	public int getFabledItemAbove() {
 		return fabled_item_above;
 	}
 
-	/**
-	 * @return the ethernal_item_above
-	 */
 	public int getEternalItemAbove() {
 		return eternal_item_above;
 	}
 
-	/**
-	 * @return the mythic_item_above
-	 */
 	public int getMythicItemAbove() {
 		return mythic_item_above;
 	}
 
-	/**
-	 * @return the nrMisc
-	 */
 	public int getNrMisc() {
 		return nrMisc;
 	}
 
-	/**
-	 * @param nrMisc
-	 *          .
-	 */
 	public void setNrMisc(int nrMisc) {
 		this.nrMisc = nrMisc;
 	}
 
 	public void setPlayersInRoll(final Collection<Player> players, int time, final int index, final int npcId) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				for (Player player : players) {
-					if (player.isInPlayerMode(PlayerMode.IN_ROLL)) {
-						InRoll inRoll = player.inRoll;
-						switch (inRoll.getRollType()) {
-							case 2:
-								if (inRoll.getIndex() == index && inRoll.getNpcId() == npcId)
-									DropDistributionService.getInstance().handleRoll(player, 0, inRoll.getItemId(), inRoll.getNpcId(), inRoll.getIndex());
-								break;
-							case 3:
-								if (inRoll.getIndex() == index && inRoll.getNpcId() == npcId)
-									DropDistributionService.getInstance().handleBid(player, 0, inRoll.getItemId(), inRoll.getNpcId(), inRoll.getIndex());
-								break;
-						}
-					}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			for (Player player : players) {
+				if (player.isInPlayerMode(PlayerMode.IN_ROLL)) {
+					InRoll inRoll = player.inRoll;
+					if (inRoll.getIndex() == index && inRoll.getNpcId() == npcId)
+						DropDistributionService.getInstance().handleRollOrBid(player, inRoll.getRollType(), 0, 0, inRoll.getItemId(), inRoll.getNpcId(),
+							inRoll.getIndex());
 				}
 			}
-
 		}, time);
 	}
 
-	/**
-	 * @return the nrRoundRobin
-	 */
 	public int getNrRoundRobin() {
 		return nrRoundRobin;
 	}
 
-	/**
-	 * @param nrRoundRobin
-	 *          .
-	 */
 	public void setNrRoundRobin(int nrRoundRobin) {
 		this.nrRoundRobin = nrRoundRobin;
 	}

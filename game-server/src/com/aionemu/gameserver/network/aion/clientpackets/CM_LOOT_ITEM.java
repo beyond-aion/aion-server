@@ -28,9 +28,8 @@ public class CM_LOOT_ITEM extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player == null) {
+		if (player == null)
 			return;
-		}
 		DropService.getInstance().requestDropItem(player, targetObjectId, index);
 	}
 }

@@ -22,8 +22,8 @@ public class CM_GROUP_LOOT extends AionClientPacket {
 	private int unk2;
 	@SuppressWarnings("unused")
 	private int unk3;
-	private int npcId;
-	private int distributionId;
+	private int npcObjId;
+	private int distributionMode;
 	private int roll;
 	private long bid;
 	@SuppressWarnings("unused")
@@ -44,8 +44,8 @@ public class CM_GROUP_LOOT extends AionClientPacket {
 		unk2 = readUC();
 		unk3 = readUC(); // 3.0
 		unk4 = readUC(); // 3.5
-		npcId = readD();
-		distributionId = readUC();// 2: Roll 3: Bid
+		npcObjId = readD();
+		distributionMode = readUC();// 2: Roll 3: Bid
 		roll = readD();// 0: Never Rolled 1: Rolled
 		bid = readQ();// 0: No Bid else bid amount
 	}
@@ -53,16 +53,8 @@ public class CM_GROUP_LOOT extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		if (player == null) {
+		if (player == null)
 			return;
-		}
-		switch (distributionId) {
-			case 2:
-				DropDistributionService.getInstance().handleRoll(player, roll, itemId, npcId, index);
-				break;
-			case 3:
-				DropDistributionService.getInstance().handleBid(player, bid, itemId, npcId, index);
-				break;
-		}
+		DropDistributionService.getInstance().handleRollOrBid(player, distributionMode, roll, bid, itemId, npcObjId, index);
 	}
 }

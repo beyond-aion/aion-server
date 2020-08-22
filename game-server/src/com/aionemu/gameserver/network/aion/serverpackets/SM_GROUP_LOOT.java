@@ -4,28 +4,24 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author Rhys2002
+ * @author Rhys2002, Sykra
  */
 public class SM_GROUP_LOOT extends AionServerPacket {
 
-	private int groupId;
-	private int index;
-	private int unk2;
-	private int itemId;
-	private int unk3;
-	private int lootCorpseId;
-	private int distributionId;
-	private int playerId;
-	private long luck;
+	private final int groupId;
+	private final int index;
+	private final int itemCount;
+	private final int itemId;
+	private final int unk3;
+	private final int lootCorpseId;
+	private final int distributionId;
+	private final int playerId;
+	private final long luck;
 
-	/**
-	 * @param Player
-	 *          Id must be 0 to start the Roll Options
-	 */
-	public SM_GROUP_LOOT(int groupId, int playerId, int itemId, int lootCorpseId, int distributionId, long luck, int index) {
+	public SM_GROUP_LOOT(int groupId, int playerId, int itemId, int itemCount, int lootCorpseId, int distributionId, long luck, int index) {
 		this.groupId = groupId;
 		this.index = index;
-		this.unk2 = 1;
+		this.itemCount = itemCount;
 		this.itemId = itemId;
 		this.unk3 = 0;
 		this.lootCorpseId = lootCorpseId;
@@ -38,14 +34,14 @@ public class SM_GROUP_LOOT extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		writeD(groupId);
 		writeD(index);
-		writeD(unk2);
+		writeD(itemCount);
 		writeD(itemId);
 		writeC(unk3);
 		writeC(0); // 3.0
 		writeC(0); // 3.5
 		writeD(lootCorpseId);
 		writeC(distributionId);
-		writeD(playerId);
+		writeD(playerId); // 0 starts the roll option
 		writeD((int) luck);
 	}
 }

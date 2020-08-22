@@ -16,109 +16,26 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author xTz
+ * @author xTz, Sykra
  */
 public class DropDistributionService {
 
-	private static Logger log = LoggerFactory.getLogger(DropDistributionService.class);
+	private static final Logger log = LoggerFactory.getLogger(DropDistributionService.class);
 
 	public static DropDistributionService getInstance() {
 		return SingletonHolder.instance;
 	}
 
-	/**
-	 * @param Called
-	 *          from CM_GROUP_LOOT to handle rolls
-	 */
-	public void handleRoll(Player player, int roll, int itemId, int npcId, int index) {
-		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcId);
-		if (player == null || dropNpc == null)
+	public void handleRollOrBid(Player player, int mode, int roll, long bid, int itemId, int npcObjId, int index) {
+		if (player == null)
 			return;
-		int maxRoll = 0;
-		int luck = 0;
-		if (player.isInGroup() || player.isInAlliance()) {
-			if (roll == 0) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_ME());
-			} else {
-				maxRoll = player.isInGroup() ? 100 : 1000;
-				luck = Rnd.get(1, maxRoll);
-				
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_ME(luck, maxRoll));
-			}
-			for (Player member : dropNpc.getInRangePlayers()) {
-				if (member == null) {
-					log.warn("member null Owner is in group? " + player.isInGroup() + " Owner is in Alliance? " + player.isInAlliance());
-					continue;
-				}
-
-				int teamId = member.getCurrentTeamId();
-				PacketSendUtility
-					.sendPacket(member, new SM_GROUP_LOOT(teamId, member.getObjectId(), itemId, npcId, dropNpc.getDistributionId(), luck, index));
-				if (!player.equals(member) && member.isOnline()) {
-					if (roll == 0) {
-						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_OTHER(player.getName()));
-					} else {
-						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_OTHER(player.getName(), luck, maxRoll));
-					}
-				}
-			}
-			distributeLoot(player, luck, itemId, npcId);
-		}
-	}
-
-	/**
-	 * @param Called
-	 *          from CM_GROUP_LOOT to handle bids
-	 */
-	public void handleBid(Player player, long bid, int itemId, int npcId, int index) {
-		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcId);
-		if (player == null || dropNpc == null) {
+		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcObjId);
+		if (dropNpc == null)
 			return;
-		}
-
-		if (player.isInGroup() || player.isInAlliance()) {
-			if ((bid > 0 && player.getInventory().getKinah() < bid) || bid < 0 || bid > 999999999) {
-				bid = 0; // Set BID to 0 if player has bid more KINAH then they have in inventory or send negative value
-			}
-
-			if (bid > 0) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_ME());
-			} else {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_ME());
-			}
-
-			for (Player member : dropNpc.getInRangePlayers()) {
-				if (member == null) {
-					log.warn("member null Owner is in group? " + player.isInGroup() + " Owner is in Alliance? " + player.isInAlliance());
-					continue;
-				}
-
-				int teamId = member.getCurrentTeamId();
-				PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(teamId, member.getObjectId(), itemId, npcId, dropNpc.getDistributionId(), bid, index));
-				if (!player.equals(member) && member.isOnline()) {
-					if (bid > 0) {
-						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_OTHER(player.getName()));
-					} else {
-						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_OTHER(player.getName()));
-					}
-				}
-			}
-			distributeLoot(player, bid, itemId, npcId);
-		}
-	}
-
-	/**
-	 * @param Checks
-	 *          all players have Rolled or Bid then Distributes items accordingly
-	 */
-	private void distributeLoot(Player player, long luckyPlayer, int itemId, int npcId) {
-		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcId);
-		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcId);
-		DropItem requestedItem = null;
-
+		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
 		if (dropItems == null)
 			return;
-
+		DropItem requestedItem = null;
 		synchronized (dropItems) {
 			for (DropItem dropItem : dropItems)
 				if (dropItem.getIndex() == dropNpc.getCurrentIndex()) {
@@ -126,9 +43,73 @@ public class DropDistributionService {
 					break;
 				}
 		}
-
 		if (requestedItem == null)
 			return;
+		if (mode == 2)
+			handleRoll(player, roll, itemId, requestedItem, dropNpc);
+		else if (mode == 3)
+			handleBid(player, bid, itemId, requestedItem, dropNpc);
+		else
+			log.warn("Player[id={}, name={}] requested invalid distributionMode {} for dropItem[itemId={}, index={}, npcObjId={}]", player.getObjectId(),
+				player.getName(), mode, itemId, index, npcObjId);
+	}
+
+	private void handleRoll(Player player, int roll, int itemId, DropItem requestedItem, DropNpc dropNpc) {
+		if (player.isInGroup() || player.isInAlliance()) {
+			int maxRoll = 0;
+			int luck = 0;
+			if (roll == 0) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_ME());
+			} else {
+				maxRoll = player.isInGroup() ? 100 : 1000;
+				luck = Rnd.get(1, maxRoll);
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_ME(luck, maxRoll));
+			}
+			final int fLuck = luck;
+			final int fMaxRoll = maxRoll;
+			for (Player member : dropNpc.getInRangePlayers()) {
+				if (member == null) {
+					log.warn("member null Owner is in group? " + player.isInGroup() + " Owner is in Alliance? " + player.isInAlliance());
+					continue;
+				}
+				int teamId = member.getCurrentTeamId();
+				PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(teamId, member.getObjectId(), itemId, (int) requestedItem.getCount(),
+						dropNpc.getObjectId(), dropNpc.getDistributionId(), fLuck, requestedItem.getIndex()));
+				if (!player.equals(member) && member.isOnline()) {
+					if (roll == 0) {
+						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_OTHER(player.getName()));
+					} else {
+						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_OTHER(player.getName(), fLuck, fMaxRoll));
+					}
+				}
+			}
+			distributeLoot(player, luck, itemId, requestedItem, dropNpc);
+		}
+	}
+
+	private void handleBid(Player player, long bid, int itemId, DropItem requestedItem, DropNpc dropNpc) {
+		if (player.isInGroup() || player.isInAlliance()) {
+			if ((bid > 0 && player.getInventory().getKinah() < bid) || bid < 0 || bid > 999999999)
+				bid = 0;
+			PacketSendUtility.sendPacket(player, bid > 0 ? SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_ME() : SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_ME());
+			final long fBid = bid;
+			for (Player member : dropNpc.getInRangePlayers()) {
+				int teamId = member.getCurrentTeamId();
+				PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(teamId, member.getObjectId(), itemId, (int) requestedItem.getCount(),
+					dropNpc.getObjectId(), dropNpc.getDistributionId(), fBid, requestedItem.getIndex()));
+				if (!player.equals(member) && member.isOnline()) {
+					if (fBid > 0) {
+						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_OTHER(player.getName()));
+					} else {
+						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_OTHER(player.getName()));
+					}
+				}
+			}
+			distributeLoot(player, bid, itemId, requestedItem, dropNpc);
+		}
+	}
+
+	private void distributeLoot(Player player, long luckyPlayer, int itemId, DropItem requestedItem, DropNpc dropNpc) {
 		player.unsetPlayerMode(PlayerMode.IN_ROLL);
 		// Removes player from ARRAY once they have rolled or bid
 		if (dropNpc.containsPlayerStatus(player))
@@ -151,30 +132,28 @@ public class DropDistributionService {
 					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_ALL_GIVEUP());
 				}
 				int teamId = member.getCurrentTeamId();
-				PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(teamId, requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer()
-					.getObjectId() : 1, itemId, npcId, dropNpc.getDistributionId(), 0xFFFFFFFF, requestedItem.getIndex()));
+				PacketSendUtility.sendPacket(member,
+					new SM_GROUP_LOOT(teamId, requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer().getObjectId() : 1, itemId,
+						(int) requestedItem.getCount(), dropNpc.getObjectId(), dropNpc.getDistributionId(), 0xFFFFFFFF, requestedItem.getIndex()));
 			}
 		}
 
 		LootGroupRules lgr = player.getLootGroupRules();
-		if (lgr != null) {
+		if (lgr != null)
 			lgr.removeItemToBeDistributed(requestedItem);
-		}
 
 		// Check if there is a Winning Player registered if not all members must have passed...
 		if (requestedItem.getWinningPlayer() == null) {
 			requestedItem.isFreeForAll(true);
-			if (lgr != null && !lgr.getItemsToBeDistributed().isEmpty()) {
+			if (lgr != null && !lgr.getItemsToBeDistributed().isEmpty())
 				DropService.getInstance().canDistribute(player, lgr.getItemsToBeDistributed().getFirst());
-			}
 			return;
 		}
 
 		requestedItem.isDistributeItem(true);
-		DropService.getInstance().requestDropItem(player, npcId, dropNpc.getCurrentIndex());
-		if (lgr != null && !lgr.getItemsToBeDistributed().isEmpty()) {
+		DropService.getInstance().requestDropItem(player, dropNpc.getObjectId(), dropNpc.getCurrentIndex());
+		if (lgr != null && !lgr.getItemsToBeDistributed().isEmpty())
 			DropService.getInstance().canDistribute(player, lgr.getItemsToBeDistributed().getFirst());
-		}
 	}
 
 	private static class SingletonHolder {
