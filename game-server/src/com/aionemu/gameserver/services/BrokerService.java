@@ -584,7 +584,7 @@ public class BrokerService {
 	private long extractEarnedKinahForSoldItems(Collection<BrokerItem> items) {
 		if (items == null || items.isEmpty())
 			return 0;
-		return items.stream().filter(Objects::nonNull).filter(BrokerItem::isSold).map(item -> item.getPrice() * item.getItemCount()).mapToLong(Long::longValue).sum();
+		return items.stream().filter(Objects::nonNull).filter(BrokerItem::isSold).mapToLong(item -> item.getPrice() * item.getItemCount()).sum();
 	}
 
 	public long getEarnedKinahFromSoldItems(PlayerCommonData playerCommonData) {
