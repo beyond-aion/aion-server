@@ -27,7 +27,7 @@ public class ArtifactAssault extends Assault<ArtifactSiege> {
 	@Override
 	public void onAssaultFinish(boolean captured) {
 		if (captured)
-			siegeLocation.forEachPlayer(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED()));
+			siegeLocation.forEachPlayer(p -> PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED(getBossNpcL10n())));
 	}
 
 	private void spawnAssaulter() {

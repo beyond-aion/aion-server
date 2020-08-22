@@ -51,7 +51,7 @@ public class FortressAssault extends Assault<FortressSiege> {
 	@Override
 	protected void onAssaultFinish(boolean isCaptured) {
 		if (isCaptured)
-			announce(SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED());
+			announce(SM_SYSTEM_MESSAGE.STR_ABYSS_DRAGON_BOSS_KILLED(getBossNpcL10n()));
 	}
 
 	private void scheduleSpawns() {

@@ -17,7 +17,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author Luzien, Estrayl
  */
-public abstract class Assault<siege extends Siege<?>> {
+public abstract class Assault<SiegeType extends Siege<?>> {
 
 	private final AtomicBoolean isStarted = new AtomicBoolean();
 	protected final SiegeLocation siegeLocation;
@@ -27,7 +27,7 @@ public abstract class Assault<siege extends Siege<?>> {
 
 	protected Future<?> dredgionTask, spawnTask;
 
-	public Assault(Siege<?> siege) {
+	public Assault(SiegeType siege) {
 		this.siegeLocation = siege.getSiegeLocation();
 		this.boss = siege.getBoss();
 		this.locationId = siege.getSiegeLocationId();
@@ -63,9 +63,15 @@ public abstract class Assault<siege extends Siege<?>> {
 		float x1 = (float) (target.getX() + Math.cos(radian) * a.getDistanceOffset());
 		float y1 = (float) (target.getY() + Math.sin(radian) * a.getDistanceOffset());
 
-		Npc spawned = (Npc) SpawnEngine.spawnObject(
-			SpawnEngine.newSiegeSpawn(getWorldId(), a.getNpcId(), locationId, SiegeRace.BALAUR, SiegeModType.ASSAULT, x1, y1, target.getZ() + 0.5f, (byte) 0), 1);
+		Npc spawned = (Npc) SpawnEngine.spawnObject(SpawnEngine.newSiegeSpawn(getWorldId(), a.getNpcId(), locationId, SiegeRace.BALAUR,
+			SiegeModType.ASSAULT, x1, y1, target.getZ() + 0.5f, (byte) 0), 1);
 		spawned.getAggroList().addHate(target, 100000);
+	}
+
+	protected String getBossNpcL10n() {
+		if (boss != null && boss.getObjectTemplate() != null)
+			return boss.getObjectTemplate().getL10n();
+		return "";
 	}
 
 }
