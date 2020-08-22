@@ -17100,7 +17100,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * The Balaur have killed the Guardian General.
+	 * The Balaur have defeated %0.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_ABYSS_DRAGON_BOSS_KILLED(String npcL10n) {
 		return new SM_SYSTEM_MESSAGE(1390199, npcL10n);
@@ -17113,7 +17113,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return new SM_SYSTEM_MESSAGE(1390200);
 	}
 
-	/**s
+	/**
 	 * The Balaur have destroyed the Gate Guardian Stone.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_ABYSS_DRAGON_REPAIR_BROKEN() {
