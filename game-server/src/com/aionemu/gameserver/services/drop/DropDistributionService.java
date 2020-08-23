@@ -64,8 +64,6 @@ public class DropDistributionService {
 				luck = Rnd.get(1, maxRoll);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_ME(luck, maxRoll));
 			}
-			final int fLuck = luck;
-			final int fMaxRoll = maxRoll;
 			for (Player member : dropNpc.getInRangePlayers()) {
 				if (member == null) {
 					log.warn("member null Owner is in group? " + player.isInGroup() + " Owner is in Alliance? " + player.isInAlliance());
@@ -73,12 +71,12 @@ public class DropDistributionService {
 				}
 				int teamId = member.getCurrentTeamId();
 				PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(teamId, member.getObjectId(), itemId, (int) requestedItem.getCount(),
-						dropNpc.getObjectId(), dropNpc.getDistributionId(), fLuck, requestedItem.getIndex()));
+					dropNpc.getObjectId(), dropNpc.getDistributionId(), luck, requestedItem.getIndex()));
 				if (!player.equals(member) && member.isOnline()) {
 					if (roll == 0) {
 						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_OTHER(player.getName()));
 					} else {
-						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_OTHER(player.getName(), fLuck, fMaxRoll));
+						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_OTHER(player.getName(), luck, maxRoll));
 					}
 				}
 			}
@@ -91,13 +89,12 @@ public class DropDistributionService {
 			if ((bid > 0 && player.getInventory().getKinah() < bid) || bid < 0 || bid > 999999999)
 				bid = 0;
 			PacketSendUtility.sendPacket(player, bid > 0 ? SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_ME() : SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_ME());
-			final long fBid = bid;
 			for (Player member : dropNpc.getInRangePlayers()) {
 				int teamId = member.getCurrentTeamId();
 				PacketSendUtility.sendPacket(member, new SM_GROUP_LOOT(teamId, member.getObjectId(), itemId, (int) requestedItem.getCount(),
-					dropNpc.getObjectId(), dropNpc.getDistributionId(), fBid, requestedItem.getIndex()));
+					dropNpc.getObjectId(), dropNpc.getDistributionId(), bid, requestedItem.getIndex()));
 				if (!player.equals(member) && member.isOnline()) {
-					if (fBid > 0) {
+					if (bid > 0) {
 						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_RESULT_OTHER(player.getName()));
 					} else {
 						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_PAY_GIVEUP_OTHER(player.getName()));
