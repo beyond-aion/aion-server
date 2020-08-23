@@ -370,7 +370,7 @@ public final class PlayerEnterWorldService {
 
 		KiskService.getInstance().onLogin(player);
 		TeleportService.sendObeliskBindPoint(player);
-		TeleportService.sendKiskBindPoint(player, false);
+		TeleportService.sendKiskBindPoint(player);
 
 		AhserionRaid.getInstance().onPlayerLogin(player);
 
