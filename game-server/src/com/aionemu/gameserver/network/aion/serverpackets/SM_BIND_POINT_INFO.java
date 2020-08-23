@@ -27,13 +27,21 @@ public class SM_BIND_POINT_INFO extends AionServerPacket {
 	}
 
 	public SM_BIND_POINT_INFO(Kisk kisk) {
-		WorldPosition pos = kisk.getPosition();
-		this.mapId = pos.getMapId();
-		this.x = pos.getX();
-		this.y = pos.getY();
-		this.z = pos.getZ();
+		boolean isActive = kisk.isActive();
+		if (isActive) {
+			WorldPosition pos = kisk.getPosition();
+			this.mapId = pos.getMapId();
+			this.x = pos.getX();
+			this.y = pos.getY();
+			this.z = pos.getZ();
+		} else {
+			this.mapId = 0;
+			this.x = 0;
+			this.y = 0;
+			this.z = 0;
+		}
 		this.bindPointType = 4;
-		this.kiskObjId = kisk.isActive() ? kisk.getObjectId() : 0;
+		this.kiskObjId = isActive ? kisk.getObjectId() : 0;
 	}
 
 	@Override
