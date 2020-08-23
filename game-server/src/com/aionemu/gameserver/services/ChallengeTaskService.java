@@ -20,6 +20,7 @@ import com.aionemu.gameserver.model.challenge.ChallengeQuest;
 import com.aionemu.gameserver.model.challenge.ChallengeTask;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeTaskTemplate;
 import com.aionemu.gameserver.model.templates.challenge.ChallengeType;
@@ -244,18 +245,17 @@ public class ChallengeTaskService {
 		}
 	}
 
-	public boolean canRaiseLegionLevel(int legionId, int legionLevel, Player actingPlayer) {
-		Map<Integer, ChallengeTask> tasks = legionTasks.computeIfAbsent(legionId,
+	public boolean canRaiseLegionLevel(Legion legion, Player actingPlayer) {
+		Map<Integer, ChallengeTask> tasks = legionTasks.computeIfAbsent(legion.getLegionId(),
 			id -> DAOManager.getDAO(ChallengeTasksDAO.class).load(id, ChallengeType.LEGION));
 		List<ChallengeTask> requiredTasksForLevel = new ArrayList<>();
 		for (ChallengeTask task : tasks.values()) {
 			ChallengeTaskTemplate taskTemplate = task.getTemplate();
-			if (taskTemplate.isLegionLevelTask() && taskTemplate.getMinLevel() == legionLevel)
+			if (taskTemplate.isLegionLevelTask() && taskTemplate.getMinLevel() == legion.getLegionLevel())
 				requiredTasksForLevel.add(task);
 		}
 		if (requiredTasksForLevel.isEmpty()) {
-			log.warn("Player[id={}, name={}] tried to increase level of legion[id={}, currentLevel={}] but no challenge tasks were found",
-					actingPlayer.getObjectId(), actingPlayer.getName(), legionId, legionLevel);
+			log.warn("{} tried to increase level of {} but no challenge tasks were found", actingPlayer, legion);
 			return false;
 		}
 		for (ChallengeTask task : requiredTasksForLevel)
