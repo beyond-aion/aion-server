@@ -58,8 +58,8 @@ public class LegionDominionInvasionRiftOpenAI extends GeneralNpcAI {
 					if (player.getInventory().decreaseByItemId(invasionRift.getKeyItemId(), 1)) {
 						if (!LegionDominionService.getInstance().openInvasionRift(loc.getLocationId())) {
 							LoggerFactory.getLogger(LegionDominionInvasionRiftOpenAI.class).error(
-								"Player [id={},name={}] tried to open rift in territory {} - rift opening failed, but item [id={}] got consumed!",
-								player.getObjectId(), player.getName(), loc.getLocationId(), invasionRift.getKeyItemId());
+								"{} tried to open rift in territory {} - rift opening failed, but item [id={}] got consumed!", player, loc.getLocationId(),
+								invasionRift.getKeyItemId());
 						}
 					}
 				}

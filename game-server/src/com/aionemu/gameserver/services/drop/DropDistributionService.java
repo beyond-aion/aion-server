@@ -50,8 +50,7 @@ public class DropDistributionService {
 		else if (mode == 3)
 			handleBid(player, bid, itemId, requestedItem, dropNpc);
 		else
-			log.warn("Player[id={}, name={}] requested invalid distributionMode {} for dropItem[itemId={}, index={}, npcObjId={}]", player.getObjectId(),
-				player.getName(), mode, itemId, index, npcObjId);
+			log.warn("{} requested invalid distributionMode {} for dropItem[itemId={}, index={}, npcObjId={}]", player, mode, itemId, index, npcObjId);
 	}
 
 	private void handleRoll(Player player, int roll, int itemId, DropItem requestedItem, DropNpc dropNpc) {
