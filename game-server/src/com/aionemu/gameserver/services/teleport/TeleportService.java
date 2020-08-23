@@ -356,7 +356,7 @@ public class TeleportService {
 	 *
 	 * @param player
 	 */
-	public static void sendSetBindPoint(Player player) {
+	public static void sendObeliskBindPoint(Player player) {
 		int worldId;
 		float x, y, z;
 		if (player.getBindPoint() != null) {
@@ -372,7 +372,13 @@ public class TeleportService {
 			y = locationData.getY();
 			z = locationData.getZ();
 		}
-		PacketSendUtility.sendPacket(player, new SM_BIND_POINT_INFO(worldId, x, y, z, player));
+		PacketSendUtility.sendPacket(player, new SM_BIND_POINT_INFO(worldId, x, y, z));
+	}
+
+	public static void sendKiskBindPoint(Player player, boolean forceSendInactiveKisk) {
+		// send kisk data if present and active
+		if (player.getKisk() != null && (player.getKisk().isActive() || forceSendInactiveKisk))
+			PacketSendUtility.sendPacket(player, new SM_BIND_POINT_INFO(player.getKisk()));
 	}
 
 	/**

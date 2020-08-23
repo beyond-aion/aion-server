@@ -369,7 +369,9 @@ public final class PlayerEnterWorldService {
 		client.sendPacket(new SM_CHANNEL_INFO(player.getPosition()));
 
 		KiskService.getInstance().onLogin(player);
-		TeleportService.sendSetBindPoint(player);
+		TeleportService.sendObeliskBindPoint(player);
+		TeleportService.sendKiskBindPoint(player, false);
+
 		AhserionRaid.getInstance().onPlayerLogin(player);
 
 		// ----------------------------- Retail sequence -----------------------------

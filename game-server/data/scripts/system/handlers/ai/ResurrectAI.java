@@ -95,7 +95,7 @@ public class ResurrectAI extends NpcAI {
 					responder.setBindPoint(bpp);
 					if (DAOManager.getDAO(PlayerBindPointDAO.class).store(responder)) {
 						responder.getInventory().decreaseKinah(bindPointTemplate.getPrice());
-						TeleportService.sendSetBindPoint(responder);
+						TeleportService.sendObeliskBindPoint(responder);
 						PacketSendUtility.broadcastPacket(responder, new SM_LEVEL_UPDATE(responder.getObjectId(), 2, responder.getCommonData().getLevel()), true);
 						PacketSendUtility.sendPacket(responder, STR_DEATH_REGISTER_RESURRECT_POINT());
 					} else

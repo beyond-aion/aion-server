@@ -37,11 +37,10 @@ public class KiskService {
 			}
 		}
 
-		// send players SET_BIND_POINT and send them die packet again, if they lie dead, but are still not revived
 		for (Player member : kisk.getCurrentMemberList()) {
+			TeleportService.sendKiskBindPoint(member, true); // clear kisk info in
 			member.setKisk(null);
-			TeleportService.sendSetBindPoint(member);
-			if (member.isDead())
+			if (member.isDead()) // player has died and is not revived
 				member.getController().sendDie();
 		}
 	}
@@ -51,13 +50,8 @@ public class KiskService {
 			player.getKisk().removePlayer(player);
 
 		kisk.addPlayer(player);
-
-		// Send Bind Point Data
-		TeleportService.sendSetBindPoint(player);
-
-		// Send System Message
+		TeleportService.sendKiskBindPoint(player, false);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BINDSTONE_REGISTER());
-
 		// Send Animated Bind Flash
 		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 2, player.getCommonData().getLevel()), true);
 	}
