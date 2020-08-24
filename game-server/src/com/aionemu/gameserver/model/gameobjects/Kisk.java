@@ -124,6 +124,8 @@ public class Kisk extends SummonedObject<Player> {
 	}
 
 	public int getRemainingLifetime() {
+		if (isDead())
+			return 0;
 		long timeElapsed = (System.currentTimeMillis() / 1000) - kiskSpawnTime;
 		int timeRemaining = (int) (KISK_LIFETIME_IN_SEC - timeElapsed);
 		return Math.max(timeRemaining, 0);
