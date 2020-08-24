@@ -377,7 +377,7 @@ public class TeleportService {
 
 	public static void sendKiskBindPoint(Player player) {
 		if (player.getKisk() != null)
-			PacketSendUtility.sendPacket(player, new SM_BIND_POINT_INFO(player.getKisk().isActive() ? player.getKisk() : null));
+			PacketSendUtility.sendPacket(player, new SM_BIND_POINT_INFO(player.getKisk()));
 	}
 
 	/**

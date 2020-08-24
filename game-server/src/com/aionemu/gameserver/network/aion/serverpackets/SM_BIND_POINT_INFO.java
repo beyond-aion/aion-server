@@ -27,7 +27,7 @@ public class SM_BIND_POINT_INFO extends AionServerPacket {
 	}
 
 	public SM_BIND_POINT_INFO(Kisk kisk) {
-		if (kisk == null) {
+		if (kisk == null || !kisk.isActive()) {
 			this.mapId = 0;
 			this.x = 0;
 			this.y = 0;
