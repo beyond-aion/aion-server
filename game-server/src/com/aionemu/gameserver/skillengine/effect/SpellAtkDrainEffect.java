@@ -28,17 +28,15 @@ public class SpellAtkDrainEffect extends AbstractOverTimeEffect {
 		int valueWithDelta = calculateBaseValue(effect);
 		int critAddDmg = critAddDmg2 + critAddDmg1 * effect.getSkillLevel();
 		int damage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, position, true, critProbMod2, critAddDmg);
-		effect.getEffected().getController().onAttack(effect, TYPE.REGULAR, damage, true, LOG.SPELLATKDRAIN);
+		effect.getEffected().getController().onAttack(effect, TYPE.DAMAGE, damage, true, LOG.SPELLATKDRAIN);
 		effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected());
 
-		ThreadPoolManager.getInstance().schedule(() -> {
-			// Drain (heal) portion of damage inflicted
-			if (hpPercent != 0) {
-				effect.getEffector().getLifeStats().increaseHp(TYPE.HP, damage * hpPercent / 100, effect, LOG.SPELLATKDRAIN);
-			}
-			if (mpPercent != 0) {
-				effect.getEffector().getLifeStats().increaseMp(TYPE.MP, damage * mpPercent / 100, effect.getSkillId(), LOG.SPELLATKDRAIN);
-			}
-		}, 1000);
+		// Drain (heal) portion of damage inflicted
+		if (hpPercent != 0) {
+			effect.getEffector().getLifeStats().increaseHp(TYPE.HP, damage * hpPercent / 100, effect, LOG.SPELLATKDRAIN);
+		}
+		if (mpPercent != 0) {
+			effect.getEffector().getLifeStats().increaseMp(TYPE.MP, damage * mpPercent / 100, effect.getSkillId(), LOG.SPELLATKDRAIN);
+		}
 	}
 }
