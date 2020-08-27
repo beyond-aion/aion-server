@@ -9,6 +9,7 @@ import com.aionemu.gameserver.controllers.attack.AttackUtil;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Sippolo, kecimis
@@ -30,12 +31,14 @@ public class SpellAtkDrainEffect extends AbstractOverTimeEffect {
 		effect.getEffected().getController().onAttack(effect, TYPE.REGULAR, damage, true, LOG.SPELLATKDRAIN);
 		effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected());
 
-		// Drain (heal) portion of damage inflicted
-		if (hpPercent != 0) {
-			effect.getEffector().getLifeStats().increaseHp(TYPE.HP, damage * hpPercent / 100, effect, LOG.SPELLATKDRAIN);
-		}
-		if (mpPercent != 0) {
-			effect.getEffector().getLifeStats().increaseMp(TYPE.MP, damage * mpPercent / 100, effect.getSkillId(), LOG.SPELLATKDRAIN);
-		}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			// Drain (heal) portion of damage inflicted
+			if (hpPercent != 0) {
+				effect.getEffector().getLifeStats().increaseHp(TYPE.HP, damage * hpPercent / 100, effect, LOG.SPELLATKDRAIN);
+			}
+			if (mpPercent != 0) {
+				effect.getEffector().getLifeStats().increaseMp(TYPE.MP, damage * mpPercent / 100, effect.getSkillId(), LOG.SPELLATKDRAIN);
+			}
+		}, 1000);
 	}
 }
