@@ -26,8 +26,6 @@ public interface HealEffectTemplate {
 				int healSkillBoost = effect.getEffector().getGameStats().getStat(StatEnum.HEAL_SKILL_BOOST, 1000).getCurrent() - 1000;
 				healValue += Math.round(healValue * (healBoost + healSkillBoost) / 1000f);
 			}
-			// Apply target's heal related effects (e.g. brilliant protection)
-			healValue = effect.getEffected().getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, healValue).getCurrent();
 		}
 		return healValue;
 	}

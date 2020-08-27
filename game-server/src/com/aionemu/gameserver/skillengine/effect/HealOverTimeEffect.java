@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -41,24 +42,20 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect implemen
 		int maxCurValue = getMaxStatValue(effect);
 		int possibleHealValue = effect.getReserveds(position).getValue();
 
+		//Apply target's heal related effects (e.g. brilliant protection)
+		if (healType == HealType.HP && !effect.getSkillTemplate().getStack().startsWith("ITEM_"))
+			possibleHealValue = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, possibleHealValue).getCurrent();
+
 		int healValue = maxCurValue - currentValue < possibleHealValue ? (maxCurValue - currentValue) : possibleHealValue;
 
 		if (healValue <= 0)
 			return;
 
 		switch (healType) {
-			case HP:
-				effected.getLifeStats().increaseHp(TYPE.HP, healValue, effect, LOG.HEAL);
-				break;
-			case MP:
-				effected.getLifeStats().increaseMp(TYPE.MP, healValue, effect.getSkillId(), LOG.MPHEAL);
-				break;
-			case FP:
-				((Player) effected).getLifeStats().increaseFp(TYPE.FP, healValue, effect.getSkillId(), LOG.FPHEAL);
-				break;
-			case DP:
-				((Player) effected).getCommonData().addDp(healValue);
-				break;
+			case HP -> effected.getLifeStats().increaseHp(TYPE.HP, healValue, effect, LOG.HEAL);
+			case MP -> effected.getLifeStats().increaseMp(TYPE.MP, healValue, effect.getSkillId(), LOG.MPHEAL);
+			case FP -> ((Player) effected).getLifeStats().increaseFp(TYPE.FP, healValue, effect.getSkillId(), LOG.FPHEAL);
+			case DP -> ((Player) effected).getCommonData().addDp(healValue);
 		}
 
 	}
