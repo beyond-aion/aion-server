@@ -552,7 +552,7 @@ public abstract class EffectTemplate {
 		int effectPower = 1000;
 
 		if (isAlteredState(statEnum))
-			effectPower -= effected.getGameStats().getStat(StatEnum.ABNORMAL_RESISTANCE_ALL, effected.getGameStats().getAbnormalResistance()).getCurrent();
+			effectPower -= effected.getGameStats().getAbnormalResistance().getCurrent();
 
 		// effect resistance
 		effectPower -= effected.getGameStats().getStat(statEnum, 0).getCurrent();
