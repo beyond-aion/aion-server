@@ -5,6 +5,7 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_REMOVE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -20,6 +21,13 @@ public class SkillLearnService {
 
 	public static void onLearnSkill(Player player, int skillId, int skillLevel, boolean isNew) {
 		PlayerSkillEntry skill = player.getSkillList().getSkillEntry(skillId);
+		if (skill.isProfessionSkill())
+			switch (skillLevel) {
+				case 1, 100, 200, 300, 400, 450, 500 -> {
+					if (skillLevel != 1 || skill.isCraftingSkill()) // exclude lvl 1 tapping skills
+						PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 4, 0), true);
+				}
+			}
 		if (player.getEffectController() != null) { // null on character creation
 			if (player.isSpawned())
 				sendPacket(player, skill, isNew);

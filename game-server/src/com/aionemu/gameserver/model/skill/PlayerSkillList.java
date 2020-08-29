@@ -9,8 +9,10 @@ import com.aionemu.gameserver.configs.main.CraftConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.SkillLearnService;
 import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author IceReaper, orfeo087, Avol, AEJTester
@@ -109,6 +111,7 @@ public final class PlayerSkillList implements SkillList<Player> {
 					case 449:
 					case 499:
 					case 549:
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CRAFT_INFO_MAXPOINT_UP());
 						return false; // disable exp gain to force mastering upgrade via npc
 				}
 		}
