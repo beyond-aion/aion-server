@@ -35,6 +35,6 @@ public class SpellAtkDrainInstantEffect extends DamageEffect {
 				effect.getEffector().getLifeStats().increaseMp(TYPE.ABSORBED_MP, effect.getReserveds(position).getValue() * mpPercent / 100,
 						effect.getSkillId(), LOG.SPELLATKDRAININSTANT);
 			}
-		}, 1000);
+		}, 1000); // on retail the effect is applied about 1sec later (maybe based on animationTime/hitTime?)
 	}
 }
