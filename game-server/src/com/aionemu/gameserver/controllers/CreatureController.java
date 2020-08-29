@@ -183,12 +183,12 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks when Creature was attacked
 	 */
 	public final void onAttack(Creature creature, int damage, AttackStatus attackStatus) {
-		onAttack(creature, 0, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, true);
+		onAttack(creature, 0, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, true, HopType.DAMAGE);
 	}
 
-	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId) {
+	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, HopType hopType) {
 		onAttack(effect.getEffector(), effect.getSkillId(), type, damage, notifyAttack, logId, effect.getAttackStatus(),
-			!effect.isGodstoneActivated() && !effect.isPeriodic() && effect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED);
+			!effect.isGodstoneActivated() && !effect.isPeriodic() && effect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED, hopType);
 		if (type == TYPE.DELAYDAMAGE)
 			effect.broadcastHate();
 	}
@@ -197,7 +197,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks when Creature was attacked
 	 */
 	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status,
-		boolean allowGodstoneActivation) {
+						 boolean allowGodstoneActivation, HopType hopType) {
 		if (damage != 0 && notifyAttack) {
 			Skill skill = getOwner().getCastingSkill();
 			if (skill != null) {
@@ -219,8 +219,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			getOwner().getObserveController().notifyAttackedObservers(attacker, skillId);
 		}
 
-		boolean addFullDamageAsHate = notifyAttack || logId == LOG.PROCATKINSTANT; // periodic effects don't add full damage as hate
-		getOwner().getAggroList().addDamage(attacker, damage, addFullDamageAsHate);
+		getOwner().getAggroList().addDamage(attacker, damage, notifyAttack, hopType);
 
 		// notify all NPC's around that creature is attacking me
 		getOwner().getKnownList().forEachNpc(npc -> npc.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));

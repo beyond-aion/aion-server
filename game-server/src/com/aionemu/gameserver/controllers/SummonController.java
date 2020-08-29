@@ -15,6 +15,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.model.HopType;
 import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.taskmanager.tasks.PlayerMoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -90,7 +91,7 @@ public class SummonController extends CreatureController<Summon> {
 
 	@Override
 	public void onAttack(Creature creature, int skillId, TYPE type, int damage, boolean notifyAttack, LOG log, AttackStatus attackStatus,
-		boolean allowGodstoneActivation) {
+						 boolean allowGodstoneActivation, HopType hopType) {
 		if (getOwner().isDead())
 			return;
 
@@ -98,7 +99,7 @@ public class SummonController extends CreatureController<Summon> {
 		if (getOwner().getMode() == SummonMode.RELEASE)
 			return;
 
-		super.onAttack(creature, skillId, type, damage, notifyAttack, log, attackStatus, allowGodstoneActivation);
+		super.onAttack(creature, skillId, type, damage, notifyAttack, log, attackStatus, allowGodstoneActivation, hopType);
 		PacketSendUtility.sendPacket(getOwner().getMaster(), new SM_SUMMON_UPDATE(getOwner()));
 	}
 

@@ -9,9 +9,12 @@ import com.aionemu.gameserver.model.gameobjects.AionObject;
  */
 public class AggroInfo {
 
+	private static final int HATE_REDUCE_VALUE = 364; // most retail npcs lose 364 hate. TODO: find formula
 	private AionObject attacker;
 	private int hate;
 	private int damage;
+	private long lastInteractionTime = 0;
+	private int hateReduceCount = 1;
 
 	/**
 	 * @param attacker
@@ -43,6 +46,8 @@ public class AggroInfo {
 		this.hate += damageValue;
 		if (this.hate < 1)
 			this.hate = 1;
+		lastInteractionTime = System.currentTimeMillis();
+		hateReduceCount = 1;
 	}
 
 	/**
@@ -71,5 +76,22 @@ public class AggroInfo {
 	 */
 	public void setDamage(int damage) {
 		this.damage = damage;
+	}
+
+	public long getLastInteractionTime() {
+		return lastInteractionTime;
+	}
+
+	public int getHateReduceCount() {
+		return hateReduceCount;
+	}
+
+	public void reduceHate() {
+		if (hate > 1) {
+			hate -= HATE_REDUCE_VALUE * hateReduceCount;
+			hateReduceCount++;
+			if (hate < 1)
+				hate = 1;
+		}
 	}
 }

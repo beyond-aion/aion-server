@@ -32,7 +32,7 @@ public class SpellAttackEffect extends AbstractOverTimeEffect {
 	@Override
 	public void onPeriodicAction(Effect effect) {
 		Creature effected = effect.getEffected();
-		effected.getController().onAttack(effect, TYPE.DAMAGE, effect.getReserveds(position).getValue(), false, LOG.SPELLATK);
+		effected.getController().onAttack(effect, TYPE.DAMAGE, effect.getReserveds(position).getValue(), false, LOG.SPELLATK, hopType);
 		effected.getObserveController().notifyDotAttackedObservers(effect.getEffector(), effect);
 	}
 }

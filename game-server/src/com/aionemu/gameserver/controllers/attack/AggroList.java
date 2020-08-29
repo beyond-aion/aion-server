@@ -4,6 +4,7 @@ import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.events.AbstractEventSource;
@@ -16,6 +17,8 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
+import com.aionemu.gameserver.skillengine.model.HopType;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.annotations.AnnotatedMethod;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 
@@ -26,6 +29,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 
 	protected final Creature owner;
 	private ConcurrentHashMap<Integer, AggroInfo> aggroList = new ConcurrentHashMap<>();
+	private Future<?> reductionTask;
 
 	public AggroList(Creature owner) {
 		this.owner = owner;
@@ -38,12 +42,15 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	 * @param damage
 	 */
 	@Listenable
-	public void addDamage(Creature attacker, int damage, boolean addFullDamageAsHate) {
+	public void addDamage(Creature attacker, int damage, boolean notifyAttack, HopType hopType) {
 		if (!isAware(attacker))
 			return;
 		// If the incoming damage is higher than the rest life it will decreased to the rest life
-		if (damage > owner.getLifeStats().getCurrentHp())
+		if (damage >= owner.getLifeStats().getCurrentHp()) {
 			damage = owner.getLifeStats().getCurrentHp();
+		} else {
+			startReductionTask();
+		}
 
 		AddDamageEvent evObj = null;
 		if (hasSubscribers()) {
@@ -58,8 +65,9 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 
 		// for now we add hate equal to each damage received, additionally effectHate will be broadcast to all hating creatures
 		boolean isNewInAggroList = ai.getHate() == 0;
-		if (addFullDamageAsHate) {
-			ai.addHate(damage > 0 ? StatFunctions.calculateHate(attacker, damage) : damage);
+		if (notifyAttack && hopType == HopType.DAMAGE) {
+			//damage caused by auto attacks and skills with HopType.DAMAGE is multiplied by 10 and added as hate on retail
+			ai.addHate(damage > 0 ? StatFunctions.calculateHate(attacker, damage * 10) : damage);
 		} else {
 			ai.addHate(1);
 		}
@@ -264,6 +272,10 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	 * Clear aggroList
 	 */
 	public void clear() {
+		if (reductionTask != null) {
+			reductionTask.cancel(true);
+			reductionTask = null;
+		}
 		aggroList.clear();
 	}
 
@@ -370,4 +382,15 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 		return event.getDamage() > 0;
 	}
 
+	private void startReductionTask() {
+		if (reductionTask == null) {
+			reductionTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+				for (AggroInfo info : aggroList.values()) {
+					if (info.getLastInteractionTime() != 0 && System.currentTimeMillis() - info.getLastInteractionTime() > 5000){
+						info.reduceHate();
+					}
+				}
+			}, 10000, 10000); // every 10 sec reduce hate of not attacking creatures
+		}
+	}
 }

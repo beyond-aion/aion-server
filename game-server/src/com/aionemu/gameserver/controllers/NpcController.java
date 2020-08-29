@@ -3,6 +3,7 @@ package com.aionemu.gameserver.controllers;
 import java.util.Collection;
 import java.util.Set;
 
+import com.aionemu.gameserver.skillengine.model.HopType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -306,7 +307,7 @@ public class NpcController extends CreatureController<Npc> {
 
 	@Override
 	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
-		boolean allowGodstoneActivation) {
+                         boolean allowGodstoneActivation, HopType hopType) {
 		if (getOwner().isDead())
 			return;
 		final Creature actingCreature;
@@ -317,7 +318,7 @@ public class NpcController extends CreatureController<Npc> {
 		else
 			actingCreature = attacker.getActingCreature();
 
-		super.onAttack(actingCreature, skillId, type, damage, notifyAttack, logId, attackStatus, allowGodstoneActivation);
+		super.onAttack(actingCreature, skillId, type, damage, notifyAttack, logId, attackStatus, allowGodstoneActivation, hopType);
 
 		Npc npc = getOwner();
 		ShoutEventHandler.onEnemyAttack((NpcAI) npc.getAi(), attacker);

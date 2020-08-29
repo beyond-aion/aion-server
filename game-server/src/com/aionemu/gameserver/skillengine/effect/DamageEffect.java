@@ -26,7 +26,7 @@ public abstract class DamageEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		effect.getEffected().getController().onAttack(effect, TYPE.REGULAR, effect.getReserveds(this.position).getValue(), true, LOG.REGULAR);
+		effect.getEffected().getController().onAttack(effect, TYPE.REGULAR, effect.getReserveds(this.position).getValue(), true, LOG.REGULAR, hopType);
 		if (effect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED)
 			effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected());
 	}
