@@ -22,7 +22,6 @@ public class SM_LEVEL_UPDATE extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		writeD(targetObjectId);
 		writeH(effect); // unk
-		writeH(level);
-		writeH(0x00); // unk
+		writeD(level);
 	}
 }

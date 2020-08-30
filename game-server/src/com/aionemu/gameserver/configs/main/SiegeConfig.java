@@ -44,4 +44,7 @@ public class SiegeConfig {
 
 	@Property(key = "gameserver.siege.legion.gp.cap_per_member", defaultValue = "200")
 	public static int LEGION_GP_CAP_PER_MEMBER;
+
+	@Property(key = "gameserver.siege.door.repair.heal.percent", defaultValue = "0.01")
+	public static double DOOR_REPAIR_HEAL_PERCENT;
 }

@@ -15,6 +15,7 @@
 	<xs:complexType name="siegelocation">
 		<xs:sequence>
 			<xs:element name="artifact_activation" type="ArtifactActivation" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element name="door_repair_data" type="DoorRepairData" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="siege_reward" type="SiegeReward" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="legion_reward" type="SiegeLegionReward" minOccurs="0" maxOccurs="unbounded"/>
 			<xs:element name="merc_zone" type="SiegeMercenaryZone" minOccurs="0" maxOccurs="unbounded"/>
@@ -61,6 +62,18 @@
 		<xs:attribute name="repeat_count" type="xs:int" use="optional" default="1"/>
 		<xs:attribute name="repeat_interval" type="xs:int" use="optional" default="1"/>
 		<xs:attribute name="cd" type="xs:int" use="optional" default="3600"/>
+	</xs:complexType>
+	<xs:complexType name="DoorRepairData">
+		<xs:sequence>
+			<xs:element name="door_repair_stone" type="DoorRepairStone" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="item_id" type="xs:int" use="optional" default="188030000"/>
+		<xs:attribute name="count" type="xs:int" use="optional" default="5"/>
+		<xs:attribute name="cd" type="xs:int" use="optional" default="30"/>
+	</xs:complexType>
+	<xs:complexType name="DoorRepairStone">
+		<xs:attribute name="static_id" type="xs:int" use="required"/>
+		<xs:attribute name="door_id" type="xs:int" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="SiegeReward">
 		<xs:attribute name="top" type="xs:int" use="required"/>

@@ -14,6 +14,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
+import com.aionemu.gameserver.model.templates.siegelocation.DoorRepairData;
+import com.aionemu.gameserver.model.templates.siegelocation.DoorRepairStone;
 import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -461,6 +463,14 @@ public class SiegeService {
 	public ArtifactLocation getFortressArtifact(int siegeLocId) {
 		ArtifactLocation loc = getArtifact(siegeLocId);
 		return loc == null || loc.getOwningFortress() == null ? null : loc;
+	}
+
+	public DoorRepairData getDoorRepairData(int siegeId) {
+		return getFortress(siegeId).getTemplate().getDoorRepairData();
+	}
+
+	public DoorRepairStone getRepairStone(int siegeId, int id) {
+		return getFortress(siegeId).getTemplate().getDoorRepairData().getRepairStone(id);
 	}
 
 	public Map<Integer, SiegeLocation> getSiegeLocations() {

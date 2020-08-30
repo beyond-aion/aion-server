@@ -25,7 +25,6 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 		TYPE11(11),
 		TYPE12(12),
 		TYPE14(14),
-		TYPE18(18),
 		TYPE25(25),
 
 		NATURAL_HP(3),
@@ -41,6 +40,7 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 		MAGICCOUNTERATK(15),
 		DISPELBUFFCOUNTERATK(16), // TODO implement
 		FALL_DAMAGE(17),
+		DOOR_REPAIR(18),
 		HEAL_MP(19),
 		DAMAGE_MP(20),
 		ABSORBED_MP(20),

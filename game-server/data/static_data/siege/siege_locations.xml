@@ -140,6 +140,10 @@
 	</siege_location>
 	<siege_location id="1131" type="FORTRESS" world="400010000" name_id="400911" occupy_count="2" siege_duration="3600" influence="3">
 		<artifact_activation item_id="188020000" count="1" skill="12147" repeat_count="1" repeat_interval="1" cd="3600"/>
+		<door_repair_data>
+			<door_repair_stone static_id="199" door_id="53"/>
+			<door_repair_stone static_id="200" door_id="25"/>
+		</door_repair_data>
 		<siege_reward top="12" item_id="186000096" item_count="3"/>
 		<siege_reward top="20" item_id="186000030" item_count="3"/>
 		<siege_reward top="30" item_id="186000030" item_count="2"/>
@@ -162,6 +166,10 @@
 	</siege_location>
 	<siege_location id="1132" type="FORTRESS" world="400010000" name_id="400912" occupy_count="2" siege_duration="3600" influence="3">
 		<artifact_activation item_id="188020000" count="1" skill="12148" repeat_count="1" repeat_interval="1" cd="3600"/>
+		<door_repair_data>
+			<door_repair_stone static_id="202" door_id="6"/>
+			<door_repair_stone static_id="225" door_id="23"/>
+		</door_repair_data>
 		<siege_reward top="12" item_id="186000096" item_count="3"/>
 		<siege_reward top="20" item_id="186000030" item_count="3"/>
 		<siege_reward top="30" item_id="186000030" item_count="2"/>
@@ -193,6 +201,10 @@
 	</siege_location>
 	<siege_location id="1141" type="FORTRESS" world="400010000" name_id="400913" occupy_count="2" siege_duration="3600" influence="3">
 		<artifact_activation item_id="188020000" count="1" skill="12149" repeat_count="1" repeat_interval="1" cd="3600"/>
+		<door_repair_data>
+			<door_repair_stone static_id="204" door_id="49"/>
+			<door_repair_stone static_id="205" door_id="50"/>
+		</door_repair_data>
 		<siege_reward top="12" item_id="186000096" item_count="3"/>
 		<siege_reward top="20" item_id="186000030" item_count="3"/>
 		<siege_reward top="30" item_id="186000030" item_count="2"/>
@@ -230,6 +242,10 @@
 	</siege_location>
 	<siege_location id="1211" type="FORTRESS" world="400010000" name_id="400914" occupy_count="2" siege_duration="3600" influence="4">
 		<artifact_activation item_id="188020000" count="1" skill="12150" repeat_count="1" repeat_interval="1" cd="5400"/>
+		<door_repair_data>
+			<door_repair_stone static_id="206" door_id="51"/>
+			<door_repair_stone static_id="207" door_id="54"/>
+		</door_repair_data>
 		<siege_reward top="18" item_id="186000096" item_count="3"/>
 		<siege_reward top="30" item_id="186000030" item_count="3"/>
 		<siege_reward top="45" item_id="186000030" item_count="2"/>
@@ -264,6 +280,10 @@
 	</siege_location>
 	<siege_location id="1221" type="FORTRESS" world="400010000" name_id="400915" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9" kinah_rewards="80000000 70000000 60000000 25000000">
 		<artifact_activation item_id="188020000" count="1" skill="12152" cd="5400"/>
+		<door_repair_data>
+			<door_repair_stone static_id="210" door_id="119"/>
+			<door_repair_stone static_id="211" door_id="118"/>
+		</door_repair_data>
 		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
 		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="50" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
@@ -297,6 +317,10 @@
 	</siege_location>
 	<siege_location id="1231" type="FORTRESS" world="400010000" name_id="400916" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9" kinah_rewards="80000000 70000000 60000000 25000000">
 		<artifact_activation item_id="188020000" count="1" skill="12153" cd="5400"/>
+		<door_repair_data>
+			<door_repair_stone static_id="212" door_id="24"/>
+			<door_repair_stone static_id="213" door_id="121"/>
+		</door_repair_data>
 		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
 		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="50" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
@@ -327,6 +351,10 @@
 	</siege_location>
 	<siege_location id="1241" type="FORTRESS" world="400010000" name_id="400917" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="9" kinah_rewards="80000000 70000000 60000000 25000000">
 		<artifact_activation item_id="188020000" count="1" skill="12154" cd="5400"/>
+		<door_repair_data>
+			<door_repair_stone static_id="214" door_id="110"/>
+			<door_repair_stone static_id="215" door_id="19"/>
+		</door_repair_data>
 		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
 		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="50" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
@@ -356,6 +384,10 @@
 	</siege_location>
 	<siege_location id="1251" type="FORTRESS" world="400010000" name_id="400918" occupy_count="2" siege_duration="3600" influence="4">
 		<artifact_activation item_id="188020000" count="1" skill="12151" repeat_count="1" repeat_interval="1" cd="5400"/>
+		<door_repair_data>
+			<door_repair_stone static_id="208" door_id="116"/>
+			<door_repair_stone static_id="209" door_id="111"/>
+		</door_repair_data>
 		<siege_reward top="18" item_id="186000096" item_count="3"/>
 		<siege_reward top="30" item_id="186000030" item_count="3"/>
 		<siege_reward top="45" item_id="186000030" item_count="2"/>
@@ -396,6 +428,9 @@
 	</siege_location>
 	<siege_location id="2011" type="FORTRESS" world="210050000" name_id="401288" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
 		<artifact_activation item_id="188020001" count="3" skill="12155" cd="7200"/>
+		<door_repair_data count="75">
+			<door_repair_stone static_id="478" door_id="380"/>
+		</door_repair_data>
 		<siege_reward top="11" item_id="188053163" item_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" item_id="188053164" item_count="1" gp_win="175" gp_defeat="90"/>
 		<siege_reward top="33" item_id="188053165" item_count="1" gp_win="150" gp_defeat="75"/>
@@ -430,6 +465,9 @@
 	</siege_location>
 	<siege_location id="2021" type="FORTRESS" world="210050000" name_id="401290" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
 		<artifact_activation item_id="188020001" count="2" skill="12156" cd="7200"/>
+		<door_repair_data count="75">
+			<door_repair_stone static_id="383" door_id="374"/>
+		</door_repair_data>
 		<siege_reward top="11" item_id="188053159" item_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" item_id="188053160" item_count="1" gp_win="175" gp_defeat="90"/>
 		<siege_reward top="33" item_id="188053161" item_count="1" gp_win="150" gp_defeat="75"/>
@@ -470,6 +508,9 @@
 	</siege_location>
 	<siege_location id="3011" type="FORTRESS" world="220070000" name_id="401292" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
 		<artifact_activation item_id="188020001" count="2" skill="12157" cd="7200"/>
+		<door_repair_data count="75">
+			<door_repair_stone static_id="969" door_id="963"/>
+		</door_repair_data>
 		<siege_reward top="11" item_id="188053171" item_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" item_id="188053172" item_count="1" gp_win="175" gp_defeat="90"/>
 		<siege_reward top="33" item_id="188053173" item_count="1" gp_win="150" gp_defeat="75"/>
@@ -504,6 +545,9 @@
 	</siege_location>
 	<siege_location id="3021" type="FORTRESS" world="220070000" name_id="401294" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
 		<artifact_activation item_id="188020001" count="3" skill="12158" cd="7200"/>
+		<door_repair_data count="75">
+			<door_repair_stone static_id="855" door_id="846"/>
+		</door_repair_data>
 		<siege_reward top="11" item_id="188053167" item_count="1" gp_win="200" gp_defeat="100"/>
 		<siege_reward top="22" item_id="188053168" item_count="1" gp_win="175" gp_defeat="90"/>
 		<siege_reward top="33" item_id="188053169" item_count="1" gp_win="150" gp_defeat="75"/>
@@ -594,6 +638,7 @@
 	</siege_location>
 	<!-- Panesterra -->
 	<siege_location id="10111" type="FORTRESS" world="400020000" name_id="404158" siege_duration="3600" influence="0">
+		<!-- <door_repair_data count="75"/> -->
 		<siege_reward top="10" item_id="186000096" item_count="1"/>
 		<siege_reward top="10" item_id="188052121" item_count="1"/>
 		<siege_reward top="20" item_id="186000096" item_count="1"/>
@@ -604,6 +649,7 @@
 		<legion_reward item_id="186000096" item_count="50"/>
 	</siege_location>
 	<siege_location id="10211" type="FORTRESS" world="400040000" name_id="404173" siege_duration="3600" influence="0">
+		<!--<door_repair_data count="75"/> -->
 		<siege_reward top="10" item_id="186000096" item_count="1"/>
 		<siege_reward top="10" item_id="188052121" item_count="1"/>
 		<siege_reward top="20" item_id="186000096" item_count="1"/>
@@ -614,6 +660,7 @@
 		<legion_reward item_id="186000096" item_count="50"/>
 	</siege_location>
 	<siege_location id="10311" type="FORTRESS" world="400050000" name_id="404174" siege_duration="3600" influence="0">
+		<!--<door_repair_data count="75"/> -->
 		<siege_reward top="10" item_id="186000096" item_count="1"/>
 		<siege_reward top="10" item_id="188052121" item_count="1"/>
 		<siege_reward top="20" item_id="186000096" item_count="1"/>
@@ -624,6 +671,7 @@
 		<legion_reward item_id="186000096" item_count="50"/>
 	</siege_location>
 	<siege_location id="10411" type="FORTRESS" world="400060000" name_id="404175" siege_duration="3600" influence="0">
+		<!--<door_repair_data count="75"/> -->
 		<siege_reward top="10" item_id="186000096" item_count="1"/>
 		<siege_reward top="10" item_id="188052121" item_count="1"/>
 		<siege_reward top="20" item_id="186000096" item_count="1"/>

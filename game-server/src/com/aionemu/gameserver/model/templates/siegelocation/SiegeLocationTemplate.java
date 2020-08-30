@@ -28,6 +28,8 @@ public class SiegeLocationTemplate implements L10n {
 	protected int world;
 	@XmlElement(name = "artifact_activation")
 	protected ArtifactActivation artifactActivation;
+	@XmlElement(name = "door_repair_data")
+	protected DoorRepairData doorRepairData;
 	@XmlElement(name = "siege_reward")
 	protected List<SiegeReward> siegeRewards;
 	@XmlElement(name = "legion_reward")
@@ -67,6 +69,10 @@ public class SiegeLocationTemplate implements L10n {
 
 	public ArtifactActivation getActivation() {
 		return artifactActivation;
+	}
+
+	public DoorRepairData getDoorRepairData() {
+		return doorRepairData;
 	}
 
 	public List<SiegeReward> getSiegeRewards() {
