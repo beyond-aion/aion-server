@@ -34,7 +34,7 @@ public class ServerPacketsOpcodes {
 		// 16
 		addPacketOpcode(SM_GATHERABLE_INFO.class, 0x11);
 		// 0x12
-		// 0x13
+		addPacketOpcode(SM_GM_SEARCH.class, 0x13);
 		addPacketOpcode(SM_TELEPORT_LOC.class, 0x14);
 		addPacketOpcode(SM_PLAYER_MOVE.class, 0x15);
 		addPacketOpcode(SM_DELETE.class, 0x16);
@@ -85,7 +85,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_WEATHER.class, 0x43);
 		addPacketOpcode(SM_PLAYER_STATE.class, 0x44);
 		// 0x45 SM_SUMMON_TELEPORT_REQUEST some teleport/summon dialog. response when accepting/declining the dialog is 0x166. first D in SM and CM packets is identical (dialog ID?) //fsc 0x45 cshh unk name skill_id time_seconds
-		addPacketOpcode(SM_LEVEL_UPDATE.class, 0x46);
+		addPacketOpcode(SM_ACTION_ANIMATION.class, 0x46);
 		addPacketOpcode(SM_QUEST_LIST.class, 0x47);
 		addPacketOpcode(SM_KEY.class, 0x48);
 		addPacketOpcode(SM_SUMMON_PANEL_REMOVE.class, 0x49);
