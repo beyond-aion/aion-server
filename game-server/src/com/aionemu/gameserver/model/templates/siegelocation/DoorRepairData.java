@@ -28,7 +28,7 @@ public class DoorRepairData {
         for (DoorRepairStone repairStone : doorRepairTemplates) {
             doorRepairStones.put(repairStone.staticId, repairStone);
         }
-        doorRepairTemplates.clear();
+        doorRepairTemplates = null;
     }
 
     public int getItemId() {

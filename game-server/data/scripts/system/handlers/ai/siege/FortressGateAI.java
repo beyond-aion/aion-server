@@ -7,9 +7,8 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
-import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.siegelocation.DoorRepairData;
 import com.aionemu.gameserver.model.templates.siegelocation.DoorRepairStone;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
@@ -19,9 +18,6 @@ import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.world.World;
-
-import java.util.Collection;
 
 /**
  * @author Source
@@ -65,20 +61,16 @@ public class FortressGateAI extends NpcAI {
 
 	@Override
 	protected void handleDied() {
-		if (getOwner() instanceof SiegeNpc) {
-			DoorRepairData repairData = SiegeService.getInstance().getFortress(((SiegeSpawnTemplate) getSpawnTemplate()).getSiegeId()).getTemplate().getDoorRepairData();
+		if (getSpawnTemplate() instanceof SiegeSpawnTemplate spawnTemplate) {
+			DoorRepairData repairData = SiegeService.getInstance().getFortress(spawnTemplate.getSiegeId()).getTemplate().getDoorRepairData();
 			if (repairData != null) {
 				for (DoorRepairStone stone : repairData.getRepairStones()) {
 					if (stone.getDoorId() == getSpawnTemplate().getStaticId()) {
-						Collection<SiegeNpc> npcs = World.getInstance().getLocalSiegeNpcs(((SiegeSpawnTemplate) getSpawnTemplate()).getSiegeId());
-						for (SiegeNpc npc : npcs) {
-							if (npc.getObjectTemplate().getAbyssNpcType().equals(AbyssNpcType.DOORREPAIR) && stone.getStaticId() == npc.getSpawn().getStaticId()) {
-								npc.getController().delete();
-								break;
-							}
-						}
+						VisibleObject obj = getPosition().getWorldMapInstance().getObjectByStaticId(stone.getStaticId());
+						if (obj != null)
+							obj.getController().delete();
+						break;
 					}
-					break;
 				}
 			}
 		}

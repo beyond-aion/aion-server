@@ -3,10 +3,11 @@ package com.aionemu.gameserver.services;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.aionemu.gameserver.model.animations.ActionAnimation;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KISK_UPDATE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ACTION_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -59,7 +60,7 @@ public class KiskService {
 		TeleportService.sendKiskBindPoint(player);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BINDSTONE_REGISTER());
 		// Send Animated Bind Flash
-		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 2, player.getCommonData().getLevel()), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ACTION_ANIMATION(player.getObjectId(), ActionAnimation.BIND_KISK), true);
 	}
 
 	public void onLogin(Player player) {

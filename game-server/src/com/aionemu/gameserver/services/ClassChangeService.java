@@ -4,9 +4,10 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.animations.ActionAnimation;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ACTION_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
@@ -71,7 +72,7 @@ public class ClassChangeService {
 
 		player.getCommonData().setPlayerClass(newClass);
 		player.getController().upgradePlayer();
-		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 4, player.getLevel()), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ACTION_ANIMATION(player.getObjectId(), ActionAnimation.CLASS_CHANGE, player.getLevel()), true);
 		PacketSendUtility.broadcastPacket(player, new SM_PLAYER_INFO(player));
 		SkillLearnService.learnNewSkills(player, 9, player.getLevel());
 

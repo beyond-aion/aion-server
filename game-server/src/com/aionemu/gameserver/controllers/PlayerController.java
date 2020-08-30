@@ -7,6 +7,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import com.aionemu.gameserver.model.animations.ActionAnimation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -608,7 +609,7 @@ public class PlayerController extends CreatureController<Player> {
 		player.getCommonData().updateMaxRepose();
 		player.getCommonData().resetSalvationPoints();
 		upgradePlayer();
-		PacketSendUtility.broadcastPacket(player, new SM_LEVEL_UPDATE(player.getObjectId(), 0, newLevel), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ACTION_ANIMATION(player.getObjectId(), ActionAnimation.LEVEL_UP, newLevel), true);
 
 		player.getNpcFactions().onLevelUp();
 		QuestEngine.getInstance().onLevelChanged(player);

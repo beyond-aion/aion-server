@@ -5,25 +5,24 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.animations.ActionAnimation;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.team.legion.LegionPermissionsMask;
-import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.siegelocation.DoorRepairData;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.siege.SiegeException;
-import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.Collection;
 import java.util.concurrent.atomic.AtomicLong;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
@@ -64,7 +63,7 @@ public class GateRepairAI extends NpcAI {
 				};
 				if (player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_ASK_DOOR_REPAIR_DO_YOU_ACCEPT_REPAIR, repairstone)) {
 					PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_ASK_DOOR_REPAIR_DO_YOU_ACCEPT_REPAIR,
-							getObjectId(), 5,  ChatUtil.l10n(DataManager.ITEM_DATA.getItemTemplate(repairData.getItemId()).getL10nId()), repairData.getCount()));
+							getObjectId(), 5,  DataManager.ITEM_DATA.getItemTemplate(repairData.getItemId()).getL10n(), repairData.getCount()));
 				}
 			}
 
@@ -78,32 +77,25 @@ public class GateRepairAI extends NpcAI {
 	}
 
 	public void onActivate(Player player, DoorRepairData repairData) {
-		if (getOwner() instanceof SiegeNpc owner) {
-			Collection<SiegeNpc> npcs = World.getInstance().getLocalSiegeNpcs(owner.getSiegeId());
-			SiegeNpc door = null;
-			for (SiegeNpc npc : npcs) {
-				if (npc.getObjectTemplate().getAbyssNpcType().equals(AbyssNpcType.DOOR)
-						&& npc.getSpawn().getStaticId() == repairData.getRepairStone(getSpawnTemplate().getStaticId()).getDoorId()) {
-					door = npc;
-					break;
+		if (getSpawnTemplate() instanceof SiegeSpawnTemplate spawnTemplate) {
+			VisibleObject obj = getPosition().getWorldMapInstance().getObjectByStaticId(repairData.getRepairStone(spawnTemplate.getStaticId()).getDoorId());
+
+			if (obj == null) {
+				throw new SiegeException("Could not find a door to repair for siege " + spawnTemplate.getSiegeId() + " for npc_id = " + getNpcId() + " with static_id = " + getSpawnTemplate().getStaticId());
+			}
+			if (obj instanceof Creature door) {
+				int healValue = (int) Math.round(door.getLifeStats().getMaxHp() * SiegeConfig.DOOR_REPAIR_HEAL_PERCENT);
+				if (door.getLifeStats().getCurrentHp() + healValue > door.getLifeStats().getMaxHp()) {
+					healValue = door.getLifeStats().getMaxHp() - door.getLifeStats().getCurrentHp();
 				}
-			}
 
-			if (door == null) {
-				throw new SiegeException("Could not find a door to repair for siege " + owner.getSiegeId() + " for npc_id = " + getNpcId() + " with static_id = " + getSpawnTemplate().getStaticId());
+				if (LoggingConfig.LOG_SIEGE)
+					log.info("Gate Repair Stone with staticId: " + getSpawnTemplate().getStaticId() + " siege: " + getSpawnTemplate().getSiegeId() + " activated by " + player + " (race: " + player.getRace() + ") to heal door with staticId: " + (door.getSpawn().getStaticId()) + " by " + healValue);
+				nextActivationTime.set(System.currentTimeMillis() + repairData.getCd());
+				PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_REPAIR_ABYSS_DOOR(player.getName(), "" + healValue));
+				PacketSendUtility.broadcastPacket(getOwner(), new SM_ACTION_ANIMATION(getObjectId(), ActionAnimation.REPAIR_GATE, door.getObjectId()));
+				door.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.DOOR_REPAIR, healValue);
 			}
-
-			int healValue = (int) Math.round(door.getLifeStats().getMaxHp() * SiegeConfig.DOOR_REPAIR_HEAL_PERCENT);
-			if (door.getLifeStats().getCurrentHp() + healValue > door.getLifeStats().getMaxHp()) {
-				healValue = door.getLifeStats().getMaxHp() - door.getLifeStats().getCurrentHp();
-			}
-
-			if (LoggingConfig.LOG_SIEGE)
-				log.info("Gate Repair Stone with staticId: " + getSpawnTemplate().getStaticId() + " siege: " + getSpawnTemplate().getSiegeId() + " activated by " + player.getName() + " (race: " + player.getRace() + ") to heal door with staticId: " + (door.getSpawn().getStaticId()) + " by " + healValue);
-			nextActivationTime.set(System.currentTimeMillis() + repairData.getCd());
-			PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_REPAIR_ABYSS_DOOR(player.getName(), "" + healValue));
-			PacketSendUtility.broadcastPacket(owner, new SM_LEVEL_UPDATE(owner.getObjectId(), 3, door.getObjectId()));
-			door.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.DOOR_REPAIR, healValue);
 		}
 	}
 
@@ -126,7 +118,7 @@ public class GateRepairAI extends NpcAI {
 		} else if (player.getInventory().getItemCountByItemId(repairData.getItemId()) >= repairData.getCount() && player.getInventory().decreaseByItemId(repairData.getItemId(), repairData.getCount())) {
 			return true;
 		} else {
-			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_DOOR_REPAIR_NOT_ENOUGH_FEE(ChatUtil.l10n(DataManager.ITEM_DATA.getItemTemplate(repairData.getItemId()).getL10nId()), "" + repairData.getCount()));
+			PacketSendUtility.sendPacket(player, STR_CANNOT_USE_DOOR_REPAIR_NOT_ENOUGH_FEE(DataManager.ITEM_DATA.getItemTemplate(repairData.getItemId()).getL10n(), "" + repairData.getCount()));
 		}
 		return false;
 	}

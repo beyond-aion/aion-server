@@ -2,6 +2,7 @@ package ai;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
 
+import com.aionemu.gameserver.model.animations.ActionAnimation;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -21,7 +22,7 @@ import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.BindPointTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEVEL_UPDATE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ACTION_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -96,7 +97,7 @@ public class ResurrectAI extends NpcAI {
 					if (DAOManager.getDAO(PlayerBindPointDAO.class).store(responder)) {
 						responder.getInventory().decreaseKinah(bindPointTemplate.getPrice());
 						TeleportService.sendObeliskBindPoint(responder);
-						PacketSendUtility.broadcastPacket(responder, new SM_LEVEL_UPDATE(responder.getObjectId(), 2, responder.getCommonData().getLevel()), true);
+						PacketSendUtility.broadcastPacket(responder, new SM_ACTION_ANIMATION(responder.getObjectId(), ActionAnimation.BIND_KISK), true);
 						PacketSendUtility.sendPacket(responder, STR_DEATH_REGISTER_RESURRECT_POINT());
 					} else
 						// if any errors happen, left that player with old bind point
