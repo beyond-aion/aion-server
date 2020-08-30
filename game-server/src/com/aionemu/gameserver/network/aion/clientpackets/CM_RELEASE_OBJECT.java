@@ -35,7 +35,7 @@ public class CM_RELEASE_OBJECT extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		VisibleObject object = player.getKnownList().getObject(targetObjectId);
-		if (object instanceof UseableHouseObject<?> && ((UseableHouseObject<?>) object).releaseOccupant(player)) { // release object
+		if (object instanceof UseableHouseObject<?> useableHouseObject && useableHouseObject.releaseOccupant(player)) { // release object
 			if (player.getController().hasScheduledTask(TaskId.HOUSE_OBJECT_USE) || object instanceof PostboxObject) { // post box always sends the message
 				if (object instanceof UseableItemObject) // reset visual use progress bar
 					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), object.getObjectId(), 0, 9));

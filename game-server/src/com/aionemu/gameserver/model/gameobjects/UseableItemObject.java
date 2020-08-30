@@ -134,75 +134,71 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 			return;
 		}
 
-		if (!setOccupant(player)) {
+		int delayMs = getObjectTemplate().getDelay();
+		if (!setOccupant(player, delayMs)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_OCCUPIED_BY_OTHER());
 			return;
 		}
 
-		final int delay = getObjectTemplate().getDelay();
 		final int usedCount = useCount == null ? 0 : currentUseCount + 1;
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_USE(getObjectTemplate().getL10n()));
-		PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delay, 8));
-		player.getController().addTask(TaskId.HOUSE_OBJECT_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+		PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delayMs, 8));
+		player.getController().addTask(TaskId.HOUSE_OBJECT_USE, ThreadPoolManager.getInstance().schedule(() -> {
+			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 9));
+			if (requiredItem != null && action.getRemoveCount() != null && action.getRemoveCount() > 0) {
+				if (!player.getInventory().decreaseByItemId(requiredItem, action.getRemoveCount()))
+					return;
+			}
 
-			@Override
-			public void run() {
-				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 0, 9));
-				if (requiredItem != null && action.getRemoveCount() != null && action.getRemoveCount() > 0) {
-					if (!player.getInventory().decreaseByItemId(requiredItem, action.getRemoveCount()))
-						return;
-				}
+			int rewardId = 0;
+			boolean delete = false;
 
-				int rewardId = 0;
-				boolean delete = false;
-
-				if (useCount != null) {
-					if (action.getFinalRewardId() != null && useCount + 1 == usedCount) {
-						// visitors do not get final rewards
-						rewardId = action.getFinalRewardId();
-						delete = true;
-					} else if (action.getRewardId() != null) {
-						rewardId = action.getRewardId();
-						if (useCount == usedCount) {
-							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_FLOWERPOT_GOAL(getObjectTemplate().getL10n()));
-							if (action.getFinalRewardId() == null) {
-								delete = true;
-							} else {
-								setMustGiveLastReward(true);
-								setExpireTime((int) (System.currentTimeMillis() / 1000));
-								setPersistentState(PersistentState.UPDATE_REQUIRED);
-							}
-						}
-					}
+			if (useCount != null) {
+				if (action.getFinalRewardId() != null && useCount + 1 == usedCount) {
+					// visitors do not get final rewards
+					rewardId = action.getFinalRewardId();
+					delete = true;
 				} else if (action.getRewardId() != null) {
 					rewardId = action.getRewardId();
+					if (useCount == usedCount) {
+						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_FLOWERPOT_GOAL(getObjectTemplate().getL10n()));
+						if (action.getFinalRewardId() == null) {
+							delete = true;
+						} else {
+							setMustGiveLastReward(true);
+							setExpireTime((int) (System.currentTimeMillis() / 1000));
+							setPersistentState(PersistentState.UPDATE_REQUIRED);
+						}
+					}
 				}
-				if (usedCount > 0) {
-					if (!delete)
-						if (isOwner)
-							incrementOwnerUsedCount();
-						else
-							incrementVisitorUsedCount();
-					PacketSendUtility.broadcastPacket(player, new SM_OBJECT_USE_UPDATE(player.getObjectId(), ownerId, usedCount, UseableItemObject.this), true);
-				}
-				if (rewardId > 0) {
-					ItemService.addItem(player, rewardId, 1);
-					String rewardL10n = DataManager.ITEM_DATA.getItemTemplate(rewardId).getL10n();
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_REWARD_ITEM(getObjectTemplate().getL10n(), rewardL10n));
-				}
-				if (delete)
-					selfDestroy(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(getObjectTemplate().getL10n()));
-				else {
-					long reuseTime;
-					Integer cd = getObjectTemplate().getCd();
-					if (cd == null || cd == 0) // use once per day (cooldown ends at midnight)
-						reuseTime = ServerTime.now().with(LocalTime.MAX).toEpochSecond() * 1000;
-					else
-						reuseTime = System.currentTimeMillis() + cd * 1000;
-					player.getHouseObjectCooldowns().put(getObjectId(), reuseTime);
-				}
+			} else if (action.getRewardId() != null) {
+				rewardId = action.getRewardId();
 			}
-		}, delay));
+			if (usedCount > 0) {
+				if (!delete)
+					if (isOwner)
+						incrementOwnerUsedCount();
+					else
+						incrementVisitorUsedCount();
+			}
+			if (rewardId > 0) {
+				ItemService.addItem(player, rewardId, 1);
+				String rewardL10n = DataManager.ITEM_DATA.getItemTemplate(rewardId).getL10n();
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_REWARD_ITEM(getObjectTemplate().getL10n(), rewardL10n));
+			}
+			PacketSendUtility.broadcastPacket(player, new SM_OBJECT_USE_UPDATE(player.getObjectId(), ownerId, usedCount, UseableItemObject.this), true);
+			if (delete)
+				selfDestroy(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(getObjectTemplate().getL10n()));
+			else {
+				long reuseTime;
+				Integer cd = getObjectTemplate().getCd();
+				if (cd == null || cd == 0) // use once per day (cooldown ends at midnight)
+					reuseTime = ServerTime.now().with(LocalTime.MAX).toEpochSecond() * 1000;
+				else
+					reuseTime = System.currentTimeMillis() + cd * 1000;
+				player.getHouseObjectCooldowns().put(getObjectId(), reuseTime);
+			}
+		}, delayMs));
 	}
 
 	public void setMustGiveLastReward(boolean mustGiveLastReward) {
