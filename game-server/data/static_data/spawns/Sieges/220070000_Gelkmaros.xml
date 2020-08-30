@@ -739,7 +739,7 @@
 					</spawn>
 					<!-- Gate Stone -->
 					<spawn npc_id="257795">
-						<spot x="1198.14" y="908.588" z="306.019"/>
+						<spot x="1198.14" y="908.588" z="306.019" static_id="969"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257792">
