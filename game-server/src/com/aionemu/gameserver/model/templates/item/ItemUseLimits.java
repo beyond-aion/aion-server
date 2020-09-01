@@ -38,7 +38,7 @@ public class ItemUseLimits {
 	private Boolean rideUsable;
 
 	@XmlAttribute(name = "rank_min")
-	private int minRank;
+	private int minRank = AbyssRankEnum.GRADE9_SOLDIER.getId();
 
 	@XmlAttribute(name = "rank_max")
 	private int maxRank = AbyssRankEnum.SUPREME_COMMANDER.getId();
