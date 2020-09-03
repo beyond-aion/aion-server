@@ -26,11 +26,11 @@
 		<xs:attribute name="world" type="xs:int" use="required"/>
 		<xs:attribute name="name_id" type="xs:int"/>
 		<xs:attribute name="fortress_dependency" type="IntListType"/>
-		<xs:attribute name="siege_duration" type="xs:int" use="optional" default="-1"/>
-		<xs:attribute name="influence" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="siege_duration" type="xs:int" use="optional"/>
+		<xs:attribute name="influence" type="xs:int" use="optional"/>
 		<xs:attribute name="legion_gp" type="xs:int"/>
-		<xs:attribute name="occupy_count" type="xs:int" use="optional" default="0"/>
-		<xs:attribute name="kinah_rewards" type="IntListType" use="optional" default="0"/>
+		<xs:attribute name="occupy_count" type="xs:int" use="optional"/>
+		<xs:attribute name="kinah_rewards" type="IntListType" use="optional"/>
 	</xs:complexType>
 
 	<xs:simpleType name="SiegeType">
@@ -56,20 +56,20 @@
 		</xs:restriction>
 	</xs:simpleType>
 	<xs:complexType name="ArtifactActivation">
-		<xs:attribute name="item_id" type="xs:int" use="optional" default="188020000"/>
-		<xs:attribute name="count" type="xs:int" use="optional" default="1"/>
-		<xs:attribute name="skill" type="xs:int" use="optional" default="0"/>
-		<xs:attribute name="repeat_count" type="xs:int" use="optional" default="1"/>
-		<xs:attribute name="repeat_interval" type="xs:int" use="optional" default="1"/>
-		<xs:attribute name="cd" type="xs:int" use="optional" default="3600"/>
+		<xs:attribute name="item_id" type="xs:int" use="optional"/>
+		<xs:attribute name="count" type="xs:int" use="optional"/>
+		<xs:attribute name="skill" type="xs:int" use="optional"/>
+		<xs:attribute name="repeat_count" type="xs:int" use="optional"/>
+		<xs:attribute name="repeat_interval" type="xs:int" use="optional"/>
+		<xs:attribute name="cd" type="xs:int" use="optional"/>
 	</xs:complexType>
 	<xs:complexType name="DoorRepairData">
 		<xs:sequence>
 			<xs:element name="door_repair_stone" type="DoorRepairStone" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="item_id" type="xs:int" use="optional" default="188030000"/>
-		<xs:attribute name="count" type="xs:int" use="optional" default="5"/>
-		<xs:attribute name="cd" type="xs:int" use="optional" default="30"/>
+		<xs:attribute name="item_id" type="xs:int" use="optional"/>
+		<xs:attribute name="count" type="xs:int" use="optional"/>
+		<xs:attribute name="cd" type="xs:int" use="optional"/>
 	</xs:complexType>
 	<xs:complexType name="DoorRepairStone">
 		<xs:attribute name="static_id" type="xs:int" use="required"/>
@@ -79,8 +79,8 @@
 		<xs:attribute name="top" type="xs:int" use="required"/>
 		<xs:attribute name="item_id" type="xs:int" use="required"/>
 		<xs:attribute name="item_count" type="xs:int" use="required"/>
-		<xs:attribute name="gp_win" type="xs:int" use="optional" default="0"/>
-		<xs:attribute name="gp_defeat" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="gp_win" type="xs:int" use="optional"/>
+		<xs:attribute name="gp_defeat" type="xs:int" use="optional"/>
 	</xs:complexType>
 	<xs:complexType name="SiegeLegionReward">
 		<xs:attribute name="item_id" type="xs:int" use="required"/>
