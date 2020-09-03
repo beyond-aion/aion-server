@@ -71,16 +71,16 @@
 		<xs:attribute name="burn_attack" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="UseLimits">
-		<xs:attribute name="guild_level" type="xs:int" use="optional"/>
-		<xs:attribute name="ownership_worlds" type="IntListType" use="optional"/>
-		<xs:attribute name="usearea" type="xs:string" use="optional"/>
-		<xs:attribute name="rank_max" type="xs:int" use="optional"/>
-		<xs:attribute name="rank_min" type="xs:int" use="optional"/>
-		<xs:attribute name="purchable_rank_min" type="xs:int" use="optional"/>
-		<xs:attribute name="recommend_rank" type="xs:int" use="optional"/>
-		<xs:attribute name="ride_usable" type="xs:boolean" use="optional" default="false"/>
-		<xs:attribute name="gender" type="xs:string" use="optional"/>
-		<xs:attribute name="pack_count" type="xs:int" use="optional"/>
+		<xs:attribute name="guild_level" type="xs:int"/>
+		<xs:attribute name="ownership_worlds" type="IntListType"/>
+		<xs:attribute name="usearea" type="xs:string"/>
+		<xs:attribute name="rank_max" type="xs:int"/>
+		<xs:attribute name="rank_min" type="xs:int" default="1"/>
+		<xs:attribute name="purchable_rank_min" type="xs:int"/>
+		<xs:attribute name="recommend_rank" type="xs:int"/>
+		<xs:attribute name="ride_usable" type="xs:boolean" default="false"/>
+		<xs:attribute name="gender" type="xs:string"/>
+		<xs:attribute name="pack_count" type="xs:int"/>
 		<xs:attribute name="usedelayid" type="xs:int"/>
 		<xs:attribute name="usedelay" type="xs:int"/>
 	</xs:complexType>
@@ -105,16 +105,16 @@
 			<xs:element name="inventory" type="ExtraInventory" minOccurs="0" maxOccurs="1"/>
 			<xs:element name="idian" type="Idian" minOccurs="0" maxOccurs="1"/>
 		</xs:sequence>
-		<xs:attribute name="pack_count" type="xs:int" use="optional"/>
-		<xs:attribute name="robot" type="xs:int" use="optional"/>
-		<xs:attribute name="expire_time" type="xs:int" use="optional"/>
-		<xs:attribute name="temp_exchange_time" type="xs:int" use="optional"/>
-		<xs:attribute name="s_slots" type="xs:int" use="optional"/>
-		<xs:attribute name="option_slot_bonus" type="xs:int" use="optional"/>
-		<xs:attribute name="attack_gap" type="xs:float" use="optional"/>
-		<xs:attribute name="slot" type="xs:int" use="optional"/>
-		<xs:attribute name="activate_count" type="xs:int" use="optional"/>
-		<xs:attribute name="activate_combat" type="xs:boolean" use="optional"/>
+		<xs:attribute name="pack_count" type="xs:int"/>
+		<xs:attribute name="robot" type="xs:int"/>
+		<xs:attribute name="expire_time" type="xs:int"/>
+		<xs:attribute name="temp_exchange_time" type="xs:int"/>
+		<xs:attribute name="s_slots" type="xs:int"/>
+		<xs:attribute name="option_slot_bonus" type="xs:int"/>
+		<xs:attribute name="attack_gap" type="xs:float"/>
+		<xs:attribute name="slot" type="xs:int"/>
+		<xs:attribute name="activate_count" type="xs:int"/>
+		<xs:attribute name="activate_combat" type="xs:boolean"/>
 		<xs:attribute name="activate_target" type="ItemActivationTarget"/>
 		<xs:attribute name="m_slots" type="xs:int"/>
 		<xs:attribute name="max_tampering" type="xs:int"/>
@@ -144,9 +144,9 @@
 		<xs:attribute name="tempering_name" type="xs:string"/>
 		<xs:attribute name="enchant_name" type="xs:string" />
 		<xs:attribute name="multi_return" type="xs:string"/>
-		<xs:attribute name="can_exceed_enchant" type="xs:boolean" use="optional"/>
-		<xs:attribute name="exceed_enchant_skill" type="ExceedEnchantSkillSet" use="optional"/>
-		<xs:attribute name="enchant_type" type="xs:int" use="optional"/>
+		<xs:attribute name="can_exceed_enchant" type="xs:boolean"/>
+		<xs:attribute name="exceed_enchant_skill" type="ExceedEnchantSkillSet"/>
+		<xs:attribute name="enchant_type" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="AbstractItemAction" abstract="true"/>
 	<xs:complexType name="ItemActions">
@@ -249,7 +249,7 @@
 			<xs:extension base="AbstractItemAction">
 				<xs:attribute name="skillid" type="xs:int"/>
 				<xs:attribute name="level" type="xs:int"/>
-				<xs:attribute name="mapid" type="xs:int" use="optional" />
+				<xs:attribute name="mapid" type="xs:int" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
@@ -352,7 +352,7 @@
 	<xs:complexType name="AdoptPetAction">
 		<xs:complexContent>
 			<xs:extension base="AbstractItemAction">
-				<xs:attribute name="minutes" type="xs:int" use="optional"/>
+				<xs:attribute name="minutes" type="xs:int"/>
 				<xs:attribute name="sidekick" type="xs:boolean" default="false"/>
 				<xs:attribute name="petId" type="xs:int"/>
 			</xs:extension>
@@ -377,7 +377,7 @@
 	<xs:complexType name="RemodelAction">
 		<xs:complexContent>
 			<xs:extension base="AbstractItemAction">
-				<xs:attribute name="minutes" type="xs:int" use="optional"/>
+				<xs:attribute name="minutes" type="xs:int"/>
 				<xs:attribute name="type" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>

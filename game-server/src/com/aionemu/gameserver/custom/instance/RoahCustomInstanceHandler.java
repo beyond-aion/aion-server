@@ -334,11 +334,14 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 					rank = 21; // to Ancient
 				else
 					rank = Math.max(0, (rank - 3) - (rank % 3)); // to 1st rank of last category
-				PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
-					"Your rank has been decreased to " + CustomInstanceRankEnum.getRankDescription(rank) + ".", ChatType.BRIGHT_YELLOW_CENTER));
+				Player player = instance.getPlayer(playerObjId);
+				if (player != null) {
+					PacketSendUtility.sendPacket(player, new SM_MESSAGE(0, null,
+						"Your rank has been decreased to " + CustomInstanceRankEnum.getRankDescription(rank) + ".", ChatType.BRIGHT_YELLOW_CENTER));
 
-				if (rank > 0) // prevent suicide abuse || loss rewards
-					ItemService.addItem(instance.getPlayer(playerObjId), REWARD_COIN_ID, getRewardCoinAmount(rank), true);
+					if (rank > 0) // prevent suicide abuse || loss rewards
+						ItemService.addItem(player, REWARD_COIN_ID, getRewardCoinAmount(rank), true);
+				}
 			}
 			CustomInstanceService.getInstance().changePlayerRank(playerObjId, rank);
 			CustomInstanceService.getInstance().saveNewPlayerModelEntries(playerObjId);
