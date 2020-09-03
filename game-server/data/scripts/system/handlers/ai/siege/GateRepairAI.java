@@ -80,9 +80,6 @@ public class GateRepairAI extends NpcAI {
 		if (getSpawnTemplate() instanceof SiegeSpawnTemplate spawnTemplate) {
 			VisibleObject obj = getPosition().getWorldMapInstance().getObjectByStaticId(repairData.getRepairStone(spawnTemplate.getStaticId()).getDoorId());
 
-			if (obj == null) {
-				throw new SiegeException("Could not find a door to repair for siege " + spawnTemplate.getSiegeId() + " for npc_id = " + getNpcId() + " with static_id = " + getSpawnTemplate().getStaticId());
-			}
 			if (obj instanceof Creature door) {
 				int healValue = (int) Math.round(door.getLifeStats().getMaxHp() * SiegeConfig.DOOR_REPAIR_HEAL_PERCENT);
 				if (door.getLifeStats().getCurrentHp() + healValue > door.getLifeStats().getMaxHp()) {
@@ -95,6 +92,8 @@ public class GateRepairAI extends NpcAI {
 				PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_REPAIR_ABYSS_DOOR(player.getName(), "" + healValue));
 				PacketSendUtility.broadcastPacket(getOwner(), new SM_ACTION_ANIMATION(getObjectId(), ActionAnimation.REPAIR_GATE, door.getObjectId()));
 				door.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.DOOR_REPAIR, healValue);
+			} else {
+				throw new SiegeException("Could not find a door to repair for siege " + spawnTemplate.getSiegeId() + " for npc_id = " + getNpcId() + " with static_id = " + getSpawnTemplate().getStaticId());
 			}
 		}
 	}
