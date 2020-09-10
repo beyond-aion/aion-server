@@ -84,6 +84,14 @@ public class StatCapUtil {
 				case MAXMP:
 					value = 0;
 					break;
+				case WATER_RESISTANCE:
+				case FIRE_RESISTANCE:
+				case EARTH_RESISTANCE:
+				case WIND_RESISTANCE:
+				case DARK_RESISTANCE:
+				case LIGHT_RESISTANCE:
+					value = -1150;
+					break;
 			}
 			return value;
 		}
@@ -102,6 +110,14 @@ public class StatCapUtil {
 					break;
 				case HEAL_BOOST:
 					value = 1000;
+					break;
+				case WATER_RESISTANCE:
+				case FIRE_RESISTANCE:
+				case EARTH_RESISTANCE:
+				case WIND_RESISTANCE:
+				case DARK_RESISTANCE:
+				case LIGHT_RESISTANCE:
+					value = 1150;
 					break;
 			}
 			return value;

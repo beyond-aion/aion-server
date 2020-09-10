@@ -334,10 +334,10 @@ public class StatFunctions {
 			resultDamage = calculateAttackDamageForPlayers((Player) attacker, mAttack, isMainHand, false, true);
 		}
 
-		// elemental resistance
+		// elemental resistance, 145 = 10% damage reduction (cap at +-1150)
 		float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element),
 			target.getGameStats().getMagicalDefenseFor(element));
-		resultDamage = Math.round(resultDamage * (1 - elementalDef / 1250f));
+		resultDamage = resultDamage * (1 - elementalDef / 1450f);
 
 		// damage is reduced by 100 per 1000 mdef
 		resultDamage -= target.getGameStats().getMDef().getCurrent() * 0.10f;
@@ -439,12 +439,10 @@ public class StatFunctions {
 		damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
 		// add bonus damage
 		damage += bonus;
-		/*
-		 * element resist: fire, wind, water, earth 10 elemental resist ~ 1% reduce of magical baseDamage
-		 */
+		// elemental resistance, 145 = 10% magical damage reduction (cap at +-1150)
 		if (element != SkillElement.NONE) {
 			float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element), tgs.getMagicalDefenseFor(element));
-			damage = Math.round(damage * (1 - (elementalDef / 1250f)));
+			damage = damage * (1 - (elementalDef / 1450f));
 			// damage is reduced by 100 per 1000 mdef
 			damage -= target.getGameStats().getMDef().getCurrent() * 0.10f;
 		}
