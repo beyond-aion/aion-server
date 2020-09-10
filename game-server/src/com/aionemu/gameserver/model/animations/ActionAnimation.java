@@ -3,7 +3,7 @@ package com.aionemu.gameserver.model.animations;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ACTION_ANIMATION;
 
 /**
- * These IDs are for use with {@link SM_ACTION_ANIMATION SM_SHOW_ANIMATION}.
+ * These IDs are for use with {@link SM_ACTION_ANIMATION}.
  *
  * @author Yeats
  */

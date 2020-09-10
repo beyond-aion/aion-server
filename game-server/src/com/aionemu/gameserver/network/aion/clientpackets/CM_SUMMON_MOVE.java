@@ -2,8 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.SummonMoveController;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -32,7 +30,7 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		readD();// object id
+		readD(); // object id
 
 		x = readF();
 		y = readF();
@@ -43,10 +41,8 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 
 		if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
 			if ((type & MovementMask.ABSOLUTE) == 0) {
-				String msg = "Vector movement without vector data for " + getConnection().getActivePlayer().getSummon() + ": " + x + ", " + y + ", " + z;
-				if (getRemainingBytes() > 0)
-					msg += " (type: " + type + ", remaining bytes: " + getRemainingBytes() + ")";
-				LoggerFactory.getLogger(getClass()).warn(msg);
+				// this type is sent when the summon is in move and it receives or resists movement restricting effects, like stun, stagger, etc.
+				// summon's x/y/z is expected to be immediately updated to the sent x/y/z values and no vector or x2/y2/z2 coords are sent
 			} else {
 				x2 = readF();
 				y2 = readF();
@@ -83,7 +79,7 @@ public class CM_SUMMON_MOVE extends AionClientPacket {
 		if (type == MovementMask.IMMEDIATE) {
 			summon.getController().onStopMove();
 		} else if ((type & MovementMask.POSITION) == MovementMask.POSITION && (type & MovementMask.MANUAL) == MovementMask.MANUAL) {
-			if ((type & MovementMask.ABSOLUTE) == 0) // FIXME handle correctly once we figured out what to do in this case (missing data for x2, y2, z2)
+			if ((type & MovementMask.ABSOLUTE) == 0) // skip position update since the server has already set the correct position for stun or resist
 				return;
 			summon.getMoveController().setNewDirection(x2, y2, z2, heading);
 			summon.getController().onStartMove();
