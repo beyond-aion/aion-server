@@ -311,7 +311,7 @@ public class StatFunctions {
 			resultDamage += Rnd.get(-rnd, rnd);
 		}
 
-		// subtract defense
+		// damage is reduced by 100 per 1000 pdef
 		float pDef = target.getGameStats().getPDef().getBonus()
 			+ getMovementModifier(target, StatEnum.PHYSICAL_DEFENSE, target.getGameStats().getPDef().getBase());
 		resultDamage -= (pDef * 0.10f);
@@ -339,8 +339,8 @@ public class StatFunctions {
 			target.getGameStats().getMagicalDefenseFor(element));
 		resultDamage = Math.round(resultDamage * (1 - elementalDef / 1250f));
 
-		// Magical Defense for test purpose
-		resultDamage -= Math.round(resultDamage * Math.min(target.getGameStats().getMDef().getCurrent() * 0.0001f, 99f));
+		// damage is reduced by 100 per 1000 mdef
+		resultDamage -= target.getGameStats().getMDef().getCurrent() * 0.10f;
 
 		if (resultDamage <= 0)
 			resultDamage = 1;
@@ -445,8 +445,8 @@ public class StatFunctions {
 		if (element != SkillElement.NONE) {
 			float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element), tgs.getMagicalDefenseFor(element));
 			damage = Math.round(damage * (1 - (elementalDef / 1250f)));
-			// magic defense for test purpose
-			damage -= Math.round(damage * Math.min(tgs.getMDef().getCurrent() * 0.0001f, 99f));
+			// damage is reduced by 100 per 1000 mdef
+			damage -= target.getGameStats().getMDef().getCurrent() * 0.10f;
 		}
 
 		if (damage < 1) {
