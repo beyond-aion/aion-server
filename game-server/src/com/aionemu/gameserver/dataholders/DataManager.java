@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.Collection;
 import java.util.concurrent.CancellationException;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.Future;
@@ -11,6 +12,7 @@ import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.loadingutils.XmlDataLoader;
 import com.aionemu.gameserver.model.templates.item.actions.DecomposeAction;
 import com.aionemu.gameserver.model.templates.mail.Mails;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 
 /**
  * This class is holding whole static data, that is loaded from /data/static_data directory.<br>
@@ -224,7 +226,9 @@ public final class DataManager {
 
 		// subsequent data processing (must be called after initializing DataManager fields)
 		ITEM_DATA.cleanup();
-		GLOBAL_DROP_DATA.processRules(NPC_DATA.getNpcData().valueCollection());
+		Collection<NpcTemplate> npcTemplates = NPC_DATA.getNpcData().valueCollection();
+		GLOBAL_DROP_DATA.processRules(npcTemplates);
+		TRADE_LIST_DATA.validateBuyLists(npcTemplates);
 		SKILL_DATA.validateMotions();
 		DecomposeAction.validateRandomItemIds();
 

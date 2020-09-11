@@ -93,7 +93,6 @@ public class DialogService {
 				case BUY: {
 					TradeListTemplate tradeListTemplate = DataManager.TRADE_LIST_DATA.getTradeListTemplate(npc.getNpcId());
 					if (tradeListTemplate == null) {
-						log.warn("Buy list is missing for npc " + npc.getNpcId());
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getL10n()));
 						break;
 					}
