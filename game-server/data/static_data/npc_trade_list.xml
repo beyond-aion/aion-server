@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<npc_trade_list>
+<npc_trade_list xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_trade_list.xsd">
 	<tradelist_template npc_id="203060" buy_price_rate="200">
 		<tradelist id="129" />
 		<tradelist id="130" />
@@ -1527,6 +1527,9 @@
 	<tradelist_template npc_id="205802" buy_price_rate="200" sell_price_rate="100">
 		<tradelist id="1379" />
 	</tradelist_template>
+	<tradelist_template npc_id="205803" buy_price_rate="200" sell_price_rate="1000">
+		<tradelist id="1380" />
+	</tradelist_template>
 	<tradelist_template npc_id="205809" npc_type="ABYSS">
 		<tradelist id="1467" />
 	</tradelist_template>
@@ -1811,6 +1814,12 @@
 		<tradelist id="107" />
 		<tradelist id="465" />
 	</tradelist_template>
+	<tradelist_template npc_id="263566" buy_price_rate="200" sell_price_rate="1300">
+		<tradelist id="76" />
+		<tradelist id="232" />
+		<tradelist id="239" />
+		<tradelist id="464" />
+	</tradelist_template>
 	<tradelist_template npc_id="263567">
 		<tradelist id="370" />
 		<tradelist id="118" />
@@ -1835,6 +1844,12 @@
 		<tradelist id="71" />
 		<tradelist id="466" />
 	</tradelist_template>
+	<tradelist_template npc_id="266552" buy_price_rate="200" sell_price_rate="1300">
+		<tradelist id="101" />
+		<tradelist id="118" />
+		<tradelist id="370" />
+		<tradelist id="467" />
+	</tradelist_template>
 	<tradelist_template npc_id="268049">
 		<tradelist id="232" />
 		<tradelist id="239" />
@@ -1852,6 +1867,36 @@
 		<tradelist id="239" />
 		<tradelist id="75" />
 		<tradelist id="466" />
+	</tradelist_template>
+	<tradelist_template npc_id="269250" buy_price_rate="200" sell_price_rate="1300">
+		<tradelist id="105" />
+		<tradelist id="118" />
+		<tradelist id="370" />
+		<tradelist id="467" />
+	</tradelist_template>
+	<tradelist_template npc_id="270149" buy_price_rate="200" sell_price_rate="1300">
+		<tradelist id="74" />
+		<tradelist id="232" />
+		<tradelist id="239" />
+		<tradelist id="466" />
+	</tradelist_template>
+	<tradelist_template npc_id="270150" buy_price_rate="200" sell_price_rate="1300">
+		<tradelist id="104" />
+		<tradelist id="118" />
+		<tradelist id="370" />
+		<tradelist id="467" />
+	</tradelist_template>
+	<tradelist_template npc_id="271051" buy_price_rate="200" sell_price_rate="1300">
+		<tradelist id="72" />
+		<tradelist id="232" />
+		<tradelist id="239" />
+		<tradelist id="466" />
+	</tradelist_template>
+	<tradelist_template npc_id="271052" buy_price_rate="200" sell_price_rate="1300">
+		<tradelist id="102" />
+		<tradelist id="118" />
+		<tradelist id="370" />
+		<tradelist id="467" />
 	</tradelist_template>
 	<tradelist_template npc_id="278007">
 		<tradelist id="371" />
