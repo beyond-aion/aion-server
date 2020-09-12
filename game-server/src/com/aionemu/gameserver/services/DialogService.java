@@ -285,10 +285,9 @@ public class DialogService {
 					break;
 				case TRADE_IN:
 					TradeListTemplate tradeListTemplate = DataManager.TRADE_LIST_DATA.getTradeInListTemplate(npc.getNpcId());
-					if (tradeListTemplate == null) {
-						log.warn("Trade-in list is missing for npc " + npc.getNpcId());
+					if (tradeListTemplate == null)
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_HE_DOES_NOT_SELL_ITEM(npc.getObjectTemplate().getL10n()));
-					} else
+					else
 						PacketSendUtility.sendPacket(player, new SM_TRADE_IN_LIST(npc, tradeListTemplate, 100));
 					break;
 				case SELL:

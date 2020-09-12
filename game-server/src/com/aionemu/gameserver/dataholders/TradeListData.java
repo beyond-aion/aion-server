@@ -96,5 +96,11 @@ public class TradeListData {
 				.collect(Collectors.toList());
 		if (!missingNpcIds.isEmpty())
 			LoggerFactory.getLogger(getClass()).warn("Missing trade lists for these npcs: " + missingNpcIds);
+		missingNpcIds = npcTemplates.stream()
+				.filter(npc -> npc.supportsAction(DialogAction.TRADE_IN) && getTradeInListTemplate(npc.getTemplateId()) == null)
+				.map(NpcTemplate::getTemplateId).sorted()
+				.collect(Collectors.toList());
+		if (!missingNpcIds.isEmpty())
+			LoggerFactory.getLogger(getClass()).warn("Missing trade-in lists for these npcs: " + missingNpcIds);
 	}
 }
