@@ -194,4 +194,11 @@ public class DropItem {
 	public int getOptionalSocket() {
 		return optionalSocket;
 	}
+
+	public boolean isOnlyPossibleLooter(Player player) {
+		if (playerObjIds.size() != 1)
+			return false;
+		return playerObjIds.contains(player.getObjectId());
+	}
+
 }

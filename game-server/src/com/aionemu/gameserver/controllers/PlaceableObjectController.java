@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.controllers;
 
 import com.aionemu.gameserver.model.gameobjects.HouseObject;
+import com.aionemu.gameserver.model.gameobjects.UseableHouseObject;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.housing.PlaceableHouseObject;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -23,5 +25,12 @@ public class PlaceableObjectController<T extends PlaceableHouseObject> extends V
 			return;
 		}
 		getOwner().onDialogRequest(player);
+	}
+
+	@Override
+	public void notKnow(VisibleObject object) {
+		super.notKnow(object);
+		if (getOwner() instanceof UseableHouseObject<?> useableHouseObject && object instanceof Player player)
+			useableHouseObject.releaseOccupant(player);
 	}
 }

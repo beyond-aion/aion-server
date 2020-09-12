@@ -134,12 +134,12 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 			return;
 		}
 
-		int delayMs = getObjectTemplate().getDelay();
-		if (!setOccupant(player, delayMs)) {
+		if (!setOccupant(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_OCCUPIED_BY_OTHER());
 			return;
 		}
 
+		final int delayMs = getObjectTemplate().getDelay();
 		final int usedCount = useCount == null ? 0 : currentUseCount + 1;
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_USE(getObjectTemplate().getL10n()));
 		PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), delayMs, 8));

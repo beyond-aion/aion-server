@@ -1,10 +1,6 @@
 package com.aionemu.gameserver.services.drop;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -18,11 +14,7 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.drop.DropItem;
-import com.aionemu.gameserver.model.gameobjects.DropNpc;
-import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.InRoll;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -31,11 +23,7 @@ import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_GROUP_LOOT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOT_ITEMLIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOT_STATUS;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
@@ -59,30 +47,22 @@ public class DropService {
 		return SingletonHolder.instance;
 	}
 
-	/**
-	 * @param npcUniqueId
-	 */
 	public void scheduleFreeForAll(final int npcUniqueId) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcUniqueId);
-				if (dropNpc != null) {
-					DropRegistrationService.getInstance().getDropRegistrationMap().get(npcUniqueId).startFreeForAll();
-					VisibleObject npc = World.getInstance().findVisibleObject(npcUniqueId);
-					if (npc != null && npc.isSpawned()) {
-						// fix for elyos/asmodians being able to loot elyos/asmodian npcs
-						// TODO there might be more npcs who are friendly towards players and should not be loot able by them
-						if (npc instanceof Npc && ((Npc) npc).getRace().isAsmoOrEly()) {
-							PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0), p -> ((Npc) npc).getRace() != p.getRace());
-						} else {
-							PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0));
-						}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcUniqueId);
+			if (dropNpc != null) {
+				DropRegistrationService.getInstance().getDropRegistrationMap().get(npcUniqueId).startFreeForAll();
+				VisibleObject visibleObject = World.getInstance().findVisibleObject(npcUniqueId);
+				if (visibleObject != null && visibleObject.isSpawned()) {
+					// fix for elyos/asmodians being able to loot elyos/asmodian npcs
+					// TODO there might be more npcs who are friendly towards players and should not be loot able by them
+					if (visibleObject instanceof Npc npc && npc.getRace().isAsmoOrEly()) {
+						PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0), p -> npc.getRace() != p.getRace());
+					} else {
+						PacketSendUtility.broadcastPacket(visibleObject, new SM_LOOT_STATUS(npcUniqueId, 0));
 					}
 				}
 			}
-
 		}, 240000);
 	}
 
@@ -129,8 +109,7 @@ public class DropService {
 
 		dropNpc.setLootingPlayer(player);
 		VisibleObject visObj = World.getInstance().findVisibleObject(npcObjectId);
-		if (visObj instanceof Npc) {
-			Npc npc = ((Npc) visObj);
+		if (visObj instanceof Npc npc) {
 			ScheduledFuture<?> decayTask = (ScheduledFuture<?>) npc.getController().cancelTask(TaskId.DECAY);
 			if (decayTask != null) {
 				long remaingDecayTime = decayTask.getDelay(TimeUnit.MILLISECONDS);
@@ -144,7 +123,7 @@ public class DropService {
 			dropItems = Collections.emptySet();
 		}
 
-		PacketSendUtility.sendPacket(player, new SM_LOOT_ITEMLIST(npcObjectId, dropItems, player));
+		PacketSendUtility.sendPacket(player, new SM_LOOT_ITEMLIST(dropNpc, dropItems, player));
 		PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npcObjectId, 2));
 		player.unsetState(CreatureState.ACTIVE);
 		player.setState(CreatureState.LOOTING);
@@ -452,14 +431,14 @@ public class DropService {
 		}
 
 		if (!autoLoot)
-			resendDropList(dropNpc.getLootingPlayer(), npcObjectId, dropItems);
+			resendDropList(dropNpc.getLootingPlayer(), npcObjectId, dropNpc, dropItems);
 	}
 
-	private void resendDropList(Player player, int npcObjectId, Set<DropItem> dropItems) {
+	private void resendDropList(Player player, int npcObjectId, DropNpc dropNpc, Set<DropItem> dropItems) {
 		Npc npc = (Npc) World.getInstance().findVisibleObject(npcObjectId);
 		if (dropItems.size() != 0) {
 			if (player != null) {
-				PacketSendUtility.sendPacket(player, new SM_LOOT_ITEMLIST(npcObjectId, dropItems, player));
+				PacketSendUtility.sendPacket(player, new SM_LOOT_ITEMLIST(dropNpc, dropItems, player));
 			}
 		} else {
 			if (player != null) {
@@ -474,10 +453,6 @@ public class DropService {
 		}
 	}
 
-	/**
-	 * @param Displays
-	 *          messages when item gained via ROLLED
-	 */
 	private void winningRollActions(Player player, int itemId, int npcObjectId) {
 		String itemL10n = DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LOOT_GET_ITEM_ME(itemL10n));
@@ -491,10 +466,6 @@ public class DropService {
 		}
 	}
 
-	/**
-	 * @param Displays
-	 *          messages/removes and shares kinah when item gained via BID
-	 */
 	private void winningBidActions(Player player, int npcObjectId, long highestValue) {
 		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npcObjectId);
 		if (highestValue > 0) {
