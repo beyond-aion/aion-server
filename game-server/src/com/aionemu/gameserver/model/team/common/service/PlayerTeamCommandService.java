@@ -19,9 +19,10 @@ import com.aionemu.gameserver.model.team.league.LeagueService;
  */
 public class PlayerTeamCommandService {
 
-	public static final void executeCommand(Player player, TeamCommand command, int memberObjId) {
+	public static void executeCommand(Player player, TeamCommand command, int memberObjId) {
 		TemporaryPlayerTeam<? extends TeamMember<Player>> team = player.getCurrentTeam();
-		Objects.requireNonNull(team, "Cannot execute team command: " + command + " from " + player + " without an active team");
+		if (team == null) // team might have been disbanded or player can have been kicked out of his team by the time the packet arrived 
+			return;
 		switch (command) {
 			case GROUP_BAN_MEMBER:
 				PlayerGroupService.banPlayer(findMember(team, player, memberObjId), player);
