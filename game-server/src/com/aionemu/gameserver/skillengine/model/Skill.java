@@ -553,8 +553,6 @@ public class Skill {
 		Motion motion = skillTemplate.getMotion();
 		if (motion != null && motion.isInstantSkill() || hitTime == 0)
 			instantSkill = true;
-		else if (skillTemplate.getSkillCategory() == SkillCategory.HEAL && !skillTemplate.getStack().equals("BA_SONGOFBLESS"))
-			instantSkill = true; // TODO remove this condition entirely? should heals really always hit instantly?
 
 		// Perform necessary actions (use mp,dp items etc)
 		Actions skillActions = skillTemplate.getActions();
