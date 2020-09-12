@@ -71,12 +71,19 @@ public class CaseHealEffect extends AbstractHealEffect {
 		// only heal if the current value is at or below the given percentage
 		if (currentValue <= (maxCurValue * condValue / 100f)) {
 			if (type == HealType.HP)
-				effect.getEffected().getLifeStats().increaseHp(TYPE.HP, calculateBaseHealValue(effect), effect, LOG.CASEHEAL);
+				effect.getEffected().getLifeStats().increaseHp(TYPE.HP, calculateHealValue(effect, type), effect, LOG.CASEHEAL);
 			else if (type == HealType.MP)
-				effect.getEffected().getLifeStats().increaseMp(TYPE.MP, calculateBaseHealValue(effect), effect.getSkillId(), LOG.CASEHEAL);
+				effect.getEffected().getLifeStats().increaseMp(TYPE.MP, calculateHealValue(effect, type), effect.getSkillId(), LOG.CASEHEAL);
 			effect.endEffect();
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public int calculateHealValue(Effect effect, HealType type) {
+		if (type == HealType.HP && effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.DISEASE))
+			return 0;
+		return isPercent() ? getMaxStatValue(effect) * calculateBaseHealValue(effect) / 100 : calculateBaseHealValue(effect);
 	}
 }
