@@ -19,7 +19,8 @@ public class Search extends ConsoleCommand {
 	public void execute(Player admin, String... params) {
 		if (params.length > 0) {
 			Player p = World.getInstance().findPlayer(params[0]);
-			PacketSendUtility.sendPacket(admin, new SM_GM_SEARCH(p));
+			if (p != null)
+				PacketSendUtility.sendPacket(admin, new SM_GM_SEARCH(p));
 		}
 	}
 }
