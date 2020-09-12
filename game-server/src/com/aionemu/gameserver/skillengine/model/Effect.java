@@ -121,6 +121,8 @@ public class Effect implements StatOwner {
 
 	private boolean endedByTime = false;
 
+	private Effect designatedDispelEffect = null;
+
 	public Effect(Skill skill, Creature effected) {
 		this(skill.getEffector(), effected, skill.getSkillTemplate(), skill.getSkillLevel(), null, null);
 		this.effectHate = skill.getHate();
@@ -1343,5 +1345,21 @@ public class Effect implements StatOwner {
 		public static ForceType getInstance(String name) {
 			return forceTypes.computeIfAbsent(name, key -> new ForceType(name));
 		}
+	}
+
+	public Effect getDesignatedDispelEffect() {
+		return designatedDispelEffect;
+	}
+
+	public boolean setDesignatedDispelEffect(Effect effect) {
+		if (designatedDispelEffect == null) {
+			designatedDispelEffect = effect;
+			return true;
+		}
+		return false;
+	}
+
+	public void resetDesignatedDispelEffect() {
+		designatedDispelEffect = null;
 	}
 }

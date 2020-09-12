@@ -23,13 +23,12 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 	protected int hitdelta;
 	@XmlAttribute(name = "dispel_level")
 	protected int dispelLevel;
-	private int i;
 	private int finalPower;
 
 	@Override
 	public void applyEffect(Effect effect) {
 		super.applyEffect(effect);
-		effect.getEffected().getEffectController().dispelBuffCounterAtkEffect(i, dispelLevel, finalPower);
+		effect.getEffected().getEffectController().dispelBuffCounterAtkEffect(effect);
 	}
 
 	@Override
@@ -38,17 +37,21 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 		int count = calculateBaseValue(effect);
 		finalPower = power + dpower * effect.getSkillLevel();
 
-		i = effected.getEffectController().calculateNumberOfEffects(dispelLevel);
-		i = (i < count ? i : count);
-
+		int dispelledEffectCount = count - effected.getEffectController().calculateEffectsToRemove(effect, count, dispelLevel, finalPower);
 		int newValue = 0;
-		if (i == 1)
+		if (dispelledEffectCount == 1)
 			newValue = hitvalue;
-		else if (i > 1)
-			newValue = hitvalue + ((hitvalue / 2) * (i - 1));
+		else if (dispelledEffectCount > 1)
+			newValue = hitvalue + ((hitvalue / 2) * (dispelledEffectCount - 1));
 
 		int valueWithDelta = newValue + hitdelta * effect.getSkillLevel();
 
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
+	}
+
+	@Override
+	public void endEffect(Effect effect) {
+		effect.getEffected().getEffectController().resetDesignatedDispelEffect(effect);
+		super.endEffect(effect);
 	}
 }

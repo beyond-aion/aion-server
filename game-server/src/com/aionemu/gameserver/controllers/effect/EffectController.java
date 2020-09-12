@@ -612,8 +612,56 @@ public class EffectController {
 		return number;
 	}
 
-	public void removeEffectByDispelCat(DispelCategoryType dispelCat, SkillTargetSlot targetSlot, int count, int dispelLevel, int power,
-		boolean itemTriggered) {
+	/**
+	 * Calculates effects that will be removed and reduces their power. Used only in DispelBuffCounterAtkEffect
+	 * @return number of effects that will be removed
+	 */
+	public int calculateEffectsToRemove(Effect effect, int count, int dispelLevel, int power) {
+		lock.readLock().lock();
+		try {
+			for (Effect ef : abnormalEffectMap.values()) {
+				if (count == 0)
+					break;
+
+				DispelCategoryType dispelCat = ef.getDispelCategory();
+				SkillTargetSlot targetSlot = ef.getSkillTemplate().getTargetSlot();
+
+				// skip effects that are about to be removed by another dispel effect
+				if (ef.getDesignatedDispelEffect() != null)
+					continue;
+
+				// effects with duration 86400000 cant be dispelled
+				// TODO recheck
+				if (ef.getDuration() >= 86400000 && !isRemovableEffect(ef))
+					continue;
+
+				if (ef.isSanctuaryEffect())
+					continue;
+
+				// check for targetslot, effects with target slot higher or equal to 2 cant be removed (ex. skillId: 11885)
+				if (targetSlot != SkillTargetSlot.BUFF && (targetSlot != SkillTargetSlot.DEBUFF && dispelCat != DispelCategoryType.ALL)
+						|| ef.getTargetSlotLevel() >= 2)
+					continue;
+
+				switch (dispelCat) {
+					case ALL:
+					case BUFF:// DispelBuffCounterAtkEffect
+						if (ef.getReqDispelLevel() <= dispelLevel) {
+							if (removePower(ef, power)) {
+								ef.setDesignatedDispelEffect(effect);
+							}
+							count--;
+						}
+						break;
+				}
+			}
+		} finally {
+			lock.readLock().unlock();
+		}
+		return count;
+	}
+
+	public void removeEffectByDispelCat(DispelCategoryType dispelCat, SkillTargetSlot targetSlot, int count, int dispelLevel, int power) {
 		List<Effect> effectsToEnd = new ArrayList<>();
 		boolean insufficientDispelPower = false;
 		boolean insufficientDispelLevel = false;
@@ -629,6 +677,10 @@ public class EffectController {
 				}
 
 				if (effect.isSanctuaryEffect())
+					continue;
+
+				// skip effects that are about to be removed by another dispel effect
+				if (effect.getDesignatedDispelEffect() != null)
 					continue;
 
 				// check for targetslot, effects with target slot level higher or equal to 2 cant be removed (ex. skillId: 11885)
@@ -695,61 +747,21 @@ public class EffectController {
 		}
 	}
 
-	private int removeEffectByTargetSlot(int count, SkillTargetSlot targetSlot, int dispelLevel, int power) {
+	public void dispelBuffCounterAtkEffect(Effect effect) {
 		List<Effect> effectsToEnd = new ArrayList<>();
-		boolean insufficientDispelPower = false;
-		boolean insufficientDispelLevel = false;
 		lock.readLock().lock();
 		try {
-			for (Effect effect : abnormalEffectMap.values()) {
-				SkillTargetSlot ts = effect.getSkillTemplate().getTargetSlot();
-				DispelCategoryType dispelCat = effect.getDispelCategory();
-				if (ts == targetSlot) {
-					if (count == 0)
-						break;
-					if (effect.getDuration() >= 86400000 && !isRemovableEffect(effect))
-						continue;
-					if (effect.isSanctuaryEffect())
-						continue;
-					if (effect.getTargetSlotLevel() >= 2)
-						continue;
-
-					boolean remove = false;
-					switch (dispelCat) {
-						case ALL:
-						case BUFF:
-							if (effect.getReqDispelLevel() <= dispelLevel)
-								remove = true;
-							break;
-					}
-					if (remove) {
-						if (removePower(effect, power))
-							effectsToEnd.add(effect);
-						else
-							insufficientDispelPower = true;
-						count--;
-					} else
-						insufficientDispelLevel = true;
+			for (Effect ef : abnormalEffectMap.values()) {
+				if (effect.equals(ef.getDesignatedDispelEffect())) {
+					effectsToEnd.add(ef);
 				}
 			}
 		} finally {
 			lock.readLock().unlock();
 		}
-		for (Effect effect : effectsToEnd) // end outside lock so broadcasting effects can't cause deadlocks
-			effect.endEffect();
-		if (owner instanceof Player) {
-			if (insufficientDispelPower)
-				PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELCOUNT());
-			if (insufficientDispelLevel)
-				PacketSendUtility.sendPacket((Player) owner, SM_SYSTEM_MESSAGE.STR_MSG_NOT_ENOUGH_DISPELLEVEL());
+		for (Effect ef : effectsToEnd) {
+			ef.endEffect();
 		}
-		return count;
-	}
-
-	public void dispelBuffCounterAtkEffect(int count, int dispelLevel, int power) {
-		count = removeEffectByTargetSlot(count, SkillTargetSlot.BUFF, dispelLevel, power);
-		if (count > 0)
-			removeEffectByTargetSlot(count, SkillTargetSlot.DEBUFF, dispelLevel, power);
 	}
 
 	// TODO this should be removed
@@ -923,5 +935,18 @@ public class EffectController {
 
 	public void setKeepBuffsOnDie(boolean keepBuffsOnDie) {
 		this.keepBuffsOnDie = keepBuffsOnDie;
+	}
+
+	public void resetDesignatedDispelEffect(Effect effect) {
+		lock.readLock().lock();
+		try {
+			for (Effect ef : abnormalEffectMap.values()) {
+				if (effect.equals(ef.getDesignatedDispelEffect())) {
+					ef.resetDesignatedDispelEffect();
+				}
+			}
+		} finally {
+			lock.readLock().unlock();
+		}
 	}
 }
