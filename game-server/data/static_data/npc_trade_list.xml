@@ -9333,6 +9333,46 @@
 	<trade_in_list_template npc_id="804176">
 		<tradelist id="113" />
 	</trade_in_list_template>
+	<trade_in_list_template npc_id="804496">
+		<tradelist id="140" />
+		<tradelist id="141" />
+		<tradelist id="144" />
+	</trade_in_list_template>
+	<trade_in_list_template npc_id="804497">
+		<tradelist id="142" />
+		<tradelist id="143" />
+		<tradelist id="145" />
+	</trade_in_list_template>
+	<trade_in_list_template npc_id="804498">
+		<tradelist id="140" />
+		<tradelist id="141" />
+		<tradelist id="144" />
+	</trade_in_list_template>
+	<trade_in_list_template npc_id="804499">
+		<tradelist id="142" />
+		<tradelist id="143" />
+		<tradelist id="145" />
+	</trade_in_list_template>
+	<trade_in_list_template npc_id="804506">
+		<tradelist id="146" />
+		<tradelist id="147" />
+		<tradelist id="150" />
+	</trade_in_list_template>
+	<trade_in_list_template npc_id="804507">
+		<tradelist id="148" />
+		<tradelist id="149" />
+		<tradelist id="151" />
+	</trade_in_list_template>
+	<trade_in_list_template npc_id="804508">
+		<tradelist id="146" />
+		<tradelist id="147" />
+		<tradelist id="150" />
+	</trade_in_list_template>
+	<trade_in_list_template npc_id="804509">
+		<tradelist id="148" />
+		<tradelist id="149" />
+		<tradelist id="151" />
+	</trade_in_list_template>
 	<trade_in_list_template npc_id="804656">
 		<tradelist id="220" />
 		<tradelist id="221" />
