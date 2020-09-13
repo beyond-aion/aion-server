@@ -37,15 +37,8 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 		int count = calculateBaseValue(effect);
 		finalPower = power + dpower * effect.getSkillLevel();
 
-		int dispelledEffectCount = count - effected.getEffectController().calculateEffectsToRemove(effect, count, dispelLevel, finalPower);
-		int newValue = 0;
-		if (dispelledEffectCount == 1)
-			newValue = hitvalue;
-		else if (dispelledEffectCount > 1)
-			newValue = hitvalue + ((hitvalue / 2) * (dispelledEffectCount - 1));
-
-		int valueWithDelta = newValue + hitdelta * effect.getSkillLevel();
-
+		int dispelledEffectCount = effected.getEffectController().calculateBuffsOrEffectorDebuffsToRemove(effect, count, dispelLevel, finalPower);
+		int valueWithDelta = dispelledEffectCount > 0 ? hitvalue + ((hitvalue / 2) * (dispelledEffectCount - 1)) + hitdelta * effect.getSkillLevel() : 0;
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
 	}
 

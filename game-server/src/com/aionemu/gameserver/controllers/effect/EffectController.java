@@ -616,7 +616,8 @@ public class EffectController {
 	 * Calculates effects that will be removed and reduces their power. Used only in DispelBuffCounterAtkEffect
 	 * @return number of effects that will be removed
 	 */
-	public int calculateEffectsToRemove(Effect effect, int count, int dispelLevel, int power) {
+	public int calculateBuffsOrEffectorDebuffsToRemove(Effect effect, int count, int dispelLevel, int power) {
+		int dispelledEffectCount = 0;
 		lock.readLock().lock();
 		try {
 			for (Effect ef : abnormalEffectMap.values()) {
@@ -643,12 +644,17 @@ public class EffectController {
 						|| ef.getTargetSlotLevel() >= 2)
 					continue;
 
+				// remove only debuffs of the effector
+				if (targetSlot == SkillTargetSlot.DEBUFF && !effect.getEffector().equals(ef.getEffector()))
+					continue;
+
 				switch (dispelCat) {
 					case ALL:
 					case BUFF:// DispelBuffCounterAtkEffect
 						if (ef.getReqDispelLevel() <= dispelLevel) {
 							if (removePower(ef, power)) {
 								ef.setDesignatedDispelEffect(effect);
+								dispelledEffectCount++;
 							}
 							count--;
 						}
@@ -658,7 +664,7 @@ public class EffectController {
 		} finally {
 			lock.readLock().unlock();
 		}
-		return count;
+		return dispelledEffectCount;
 	}
 
 	public void removeEffectByDispelCat(DispelCategoryType dispelCat, SkillTargetSlot targetSlot, int count, int dispelLevel, int power) {
@@ -727,8 +733,6 @@ public class EffectController {
 						effectsToEnd.add(effect);
 					} else if (owner instanceof Player) {
 						insufficientDispelPower = true;
-						count++;
-						power += 10;
 					}
 					count--;
 				} else
