@@ -81,9 +81,12 @@ public class CaseHealEffect extends AbstractHealEffect {
 	}
 
 	@Override
-	public int calculateHealValue(Effect effect, HealType type) {
-		if (type == HealType.HP && effect.getEffected().getEffectController().isAbnormalSet(AbnormalState.DISEASE))
-			return 0;
-		return isPercent() ? getMaxStatValue(effect) * calculateBaseHealValue(effect) / 100 : calculateBaseHealValue(effect);
+	public boolean allowHpHealBoost(Effect effect) {
+		return false;
+	}
+
+	@Override
+	public boolean allowHpHealSkillDeboost(Effect effect) {
+		return false;
 	}
 }

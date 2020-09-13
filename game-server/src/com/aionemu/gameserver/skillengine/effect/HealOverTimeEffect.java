@@ -42,8 +42,7 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect implemen
 		int maxCurValue = getMaxStatValue(effect);
 		int possibleHealValue = effect.getReserveds(position).getValue();
 
-		//Apply target's heal related effects (e.g. brilliant protection)
-		if (healType == HealType.HP && !effect.getSkillTemplate().getStack().startsWith("ITEM_"))
+		if (healType == HealType.HP && effect.getItemTemplate() == null)
 			possibleHealValue = effected.getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, possibleHealValue).getCurrent();
 
 		int healValue = maxCurValue - currentValue < possibleHealValue ? (maxCurValue - currentValue) : possibleHealValue;
@@ -68,6 +67,11 @@ public abstract class HealOverTimeEffect extends AbstractOverTimeEffect implemen
 	@Override
 	public boolean allowHpHealBoost(Effect effect) {
 		return !percent && effect.getItemTemplate() == null;
+	}
+
+	@Override
+	public boolean allowHpHealSkillDeboost(Effect effect) {
+		return false; // calculated in onPeriodicAction instead
 	}
 
 	@Override

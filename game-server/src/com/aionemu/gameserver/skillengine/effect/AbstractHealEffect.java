@@ -7,7 +7,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -69,7 +68,12 @@ public abstract class AbstractHealEffect extends EffectTemplate implements HealE
 
 	@Override
 	public boolean allowHpHealBoost(Effect effect) {
-		return !percent && !(this instanceof ProcHealInstantEffect);
+		return !percent;
+	}
+
+	@Override
+	public boolean allowHpHealSkillDeboost(Effect effect) {
+		return true;
 	}
 
 	@Override
@@ -83,9 +87,6 @@ public abstract class AbstractHealEffect extends EffectTemplate implements HealE
 			return 0;
 		int cap = getMaxStatValue(effect) - getCurrentStatValue(effect);
 		int healValue = HealEffectTemplate.super.calculateHealValue(effect, type);
-		//Apply target's heal related effects (e.g. brilliant protection)
-		if (type == HealType.HP && !(this instanceof ProcHealInstantEffect))
-			healValue = effect.getEffected().getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, healValue).getCurrent();
 		return Math.min(cap, healValue);
 	}
 }

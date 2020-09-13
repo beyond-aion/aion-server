@@ -33,4 +33,14 @@ public class ProcHealInstantEffect extends AbstractHealEffect {
 	public int getMaxStatValue(Effect effect) {
 		return effect.getEffected().getGameStats().getMaxHp().getCurrent();
 	}
+
+	@Override
+	public boolean allowHpHealBoost(Effect effect) {
+		return false;
+	}
+
+	@Override
+	public boolean allowHpHealSkillDeboost(Effect effect) {
+		return false;
+	}
 }
