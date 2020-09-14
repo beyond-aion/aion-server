@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.services.instance;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.function.Predicate;
 
 import org.slf4j.Logger;
@@ -30,11 +28,7 @@ import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
 import com.aionemu.gameserver.spawnengine.WalkerFormator;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMap;
-import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.WorldMapInstanceFactory;
-import com.aionemu.gameserver.world.WorldMapType;
+import com.aionemu.gameserver.world.*;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -43,14 +37,6 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class InstanceService {
 
 	private static final Logger log = LoggerFactory.getLogger(InstanceService.class);
-	private static final List<Integer> instanceCoolDownFilter = new ArrayList<>();
-	public static final int INSTANCE_DESTROY_DELAY = 10 * 60 * 1000; // 10 minutes
-
-	public static void load() {
-		for (String s : CustomConfig.INSTANCES_COOL_DOWN_FILTER.split(",")) {
-			instanceCoolDownFilter.add(Integer.parseInt(s));
-		}
-	}
 
 	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult, GeneralInstanceHandler handler) {
 		WorldMap map = World.getInstance().getWorldMap(worldId);
@@ -235,7 +221,7 @@ public class InstanceService {
 
 		private EmptyInstanceCheckerTask(WorldMapInstance worldMapInstance) {
 			this.worldMapInstance = worldMapInstance;
-			this.instanceDestroyTime = System.currentTimeMillis() + INSTANCE_DESTROY_DELAY;
+			updateInstanceDestroyTime();
 		}
 
 		private boolean canDestroyInstance() {
@@ -252,7 +238,7 @@ public class InstanceService {
 		}
 
 		private void updateInstanceDestroyTime() {
-			instanceDestroyTime = System.currentTimeMillis() + INSTANCE_DESTROY_DELAY;
+			instanceDestroyTime = System.currentTimeMillis() + getDestroyDelaySeconds(worldMapInstance) * 1000;
 		}
 
 		@Override
@@ -280,11 +266,11 @@ public class InstanceService {
 			registeredInstance.getInstanceHandler().onLeaveInstance(player);
 			if (!registeredInstance.isPersonal()) {
 				if (registeredInstance.getPlayerMaxSize() == 1) // solo instance
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE(InstanceService.INSTANCE_DESTROY_DELAY / 60000));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE(getDestroyDelaySeconds(registeredInstance) / 60));
 				else if (registeredInstance.getRegisteredTeam() != null && registeredInstance.getRegisteredTeam().getMembers().isEmpty())
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_PARTY(0));
 				else if (registeredInstance.getPlayersInside().size() <= 1)
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_PARTY(InstanceService.INSTANCE_DESTROY_DELAY / 60000));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_PARTY(getDestroyDelaySeconds(registeredInstance) / 60));
 			}
 		}
 		removeRestrictedItemsFromInventoryAndStorage(player, item -> item.getItemTemplate().isItemRestrictedToWorld(player.getWorldId()));
@@ -317,12 +303,10 @@ public class InstanceService {
 	}
 
 	public static int getInstanceRate(Player player, int mapId) {
-		int instanceCooldownRate = player.hasPermission(MembershipConfig.INSTANCES_COOLDOWN) && !instanceCoolDownFilter.contains(mapId)
-			? CustomConfig.INSTANCES_RATE : 1;
-		if (instanceCoolDownFilter.contains(mapId)) {
-			instanceCooldownRate = 1;
-		}
-		return instanceCooldownRate;
+		return player.hasPermission(MembershipConfig.INSTANCES_COOLDOWN) && !CustomConfig.INSTANCE_COOLDOWN_RATE_EXCLUDED_MAPS.contains(mapId) ? CustomConfig.INSTANCE_COOLDOWN_RATE : 1;
 	}
 
+	public static int getDestroyDelaySeconds(WorldMapInstance worldMapInstance) {
+		return worldMapInstance.getPlayerMaxSize() == 1 ? CustomConfig.SOLO_INSTANCE_DESTROY_DELAY_SECONDS : CustomConfig.INSTANCE_DESTROY_DELAY_SECONDS;
+	}
 }

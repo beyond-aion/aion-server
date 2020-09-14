@@ -115,17 +115,20 @@ public class CustomConfig {
 	@Property(key = "gameserver.npcexpands.limit", defaultValue = "5")
 	public static int NPC_CUBE_EXPANDS_SIZE_LIMIT;
 
-	/**
-	 * Enable instances cooldown filtring
-	 */
-	@Property(key = "gameserver.instances.cooldown.filter", defaultValue = "0")
-	public static String INSTANCES_COOL_DOWN_FILTER;
+	@Property(key = "gameserver.instance.cooldown_rate", defaultValue = "1")
+	public static int INSTANCE_COOLDOWN_RATE;
 
-	/**
-	 * Instances formula
-	 */
-	@Property(key = "gameserver.instances.cooldown.rate", defaultValue = "1")
-	public static int INSTANCES_RATE;
+	@Property(key = "gameserver.instance.cooldown_rate.excluded_maps", defaultValue = "")
+	public static Set<Integer> INSTANCE_COOLDOWN_RATE_EXCLUDED_MAPS;
+
+	@Property(key = "gameserver.instance.destroy_delay_seconds", defaultValue = "600")
+	public static int INSTANCE_DESTROY_DELAY_SECONDS;
+
+	@Property(key = "gameserver.instance.solo.destroy_delay_seconds", defaultValue = "600")
+	public static int SOLO_INSTANCE_DESTROY_DELAY_SECONDS;
+
+	@Property(key = "gameserver.instance.duel.enable", defaultValue = "true")
+	public static boolean INSTANCE_DUEL_ENABLE;
 
 	/**
 	 * Enable Kinah cap
@@ -238,9 +241,6 @@ public class CustomConfig {
 
 	@Property(key = "gameserver.abyssxform.afterlogout", defaultValue = "false")
 	public static boolean ABYSSXFORM_LOGOUT;
-
-	@Property(key = "gameserver.instance.duel.enable", defaultValue = "true")
-	public static boolean INSTANCE_DUEL_ENABLE;
 
 	@Property(key = "gameserver.ride.restriction.enable", defaultValue = "true")
 	public static boolean ENABLE_RIDE_RESTRICTION;

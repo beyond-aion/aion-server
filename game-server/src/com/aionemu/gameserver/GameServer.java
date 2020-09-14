@@ -56,7 +56,6 @@ import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.event.EventService;
-import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.instance.periodic.PeriodicInstanceManager;
 import com.aionemu.gameserver.services.player.PlayerLimitService;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
@@ -269,8 +268,6 @@ public class GameServer {
 		PeriodicSaveService.getInstance();
 		AtreianPassportService.getInstance();
 		CronJobService.getInstance();
-
-		InstanceService.load();
 
 		if (!GeoDataConfig.GEO_MATERIALS_ENABLE)
 			CuringZoneService.getInstance();
