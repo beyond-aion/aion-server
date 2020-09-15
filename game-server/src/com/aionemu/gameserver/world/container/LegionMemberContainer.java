@@ -71,13 +71,12 @@ public class LegionMemberContainer {
 
 	/**
 	 * Remove LegionMember from this Container.
-	 * 
-	 * @param legionMember
 	 */
-	public void remove(LegionMemberEx legionMember) {
-		legionMemberById.remove(legionMember.getObjectId());
-		legionMemberExById.remove(legionMember.getObjectId());
-		legionMemberExByName.remove(legionMember.getName());
+	public void remove(int legionMemberObjId) {
+		legionMemberById.remove(legionMemberObjId);
+		LegionMemberEx legionMemberEx = legionMemberExById.remove(legionMemberObjId);
+		if (legionMemberEx != null)
+			legionMemberExByName.remove(legionMemberEx.getName());
 	}
 
 	/**
