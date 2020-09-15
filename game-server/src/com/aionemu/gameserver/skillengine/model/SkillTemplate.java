@@ -108,6 +108,8 @@ public class SkillTemplate implements L10n {
 	private boolean noSaveOnLogout = false;
 	@XmlAttribute(name = "stigma")
 	private StigmaType stigmaType = StigmaType.NONE;
+	@XmlAttribute(name = "applymcrit")
+	private boolean applyMcrit = true;
 
 	/**
 	 * @return the Properties
@@ -505,4 +507,7 @@ public class SkillTemplate implements L10n {
 		return skillCategory;
 	}
 
+	public boolean isMcritApplied() {
+		return applyMcrit;
+	}
 }

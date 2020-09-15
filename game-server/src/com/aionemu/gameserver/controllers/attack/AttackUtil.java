@@ -80,7 +80,7 @@ public class AttackUtil {
 				break;
 			default: {
 				if (mainHandStatus == null)
-					mainHandStatus = calculateMagicalStatus(attacker, attacked, 100, false);
+					mainHandStatus = calculateMagicalStatus(attacker, attacked, 100, false, true);
 				if (attacker instanceof Player) {
 					mainHandWeapon = ((Player) attacker).getEquipment().getMainHandWeapon();
 					if (mainHandWeapon != null)
@@ -366,7 +366,7 @@ public class AttackUtil {
 				status = calculatePhysicalStatus(effector, effected, true, accMod, criticalProb, true, cannotMiss);
 				break;
 			default:
-				status = calculateMagicalStatus(effector, effected, criticalProb, true);
+				status = calculateMagicalStatus(effector, effected, criticalProb, true, effect.getSkillTemplate().isMcritApplied());
 				break;
 		}
 
@@ -552,7 +552,7 @@ public class AttackUtil {
 	 * @return
 	 */
 	public static int calculateMagicalOverTimeSkillResult(Effect effect, int skillDamage, SkillElement element, int position, boolean useMagicBoost,
-		int criticalProb, int critAddDmg) {
+		int criticalProb, int critAddDmg, boolean applyMcrit) {
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
 		int damage;
@@ -569,7 +569,7 @@ public class AttackUtil {
 			AttackStatus status = effect.getAttackStatus();
 			// calculate attack status only if it has not been forced already
 			if (status == AttackStatus.NORMALHIT && position == 1)
-				status = calculateMagicalStatus(effector, effected, criticalProb, true);
+				status = calculateMagicalStatus(effector, effected, criticalProb, true, applyMcrit);
 			switch (status) {
 				case CRITICAL:
 					damage = (int) calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg,
@@ -658,13 +658,13 @@ public class AttackUtil {
 	 * Every + 100 delta of (MR - MA) = + 10% to resist<br>
 	 * if the difference is 1000 = 100% resist
 	 */
-	public static AttackStatus calculateMagicalStatus(Creature attacker, Creature attacked, int criticalProb, boolean isSkill) {
+	public static AttackStatus calculateMagicalStatus(Creature attacker, Creature attacked, int criticalProb, boolean isSkill, boolean applyMcrit) {
 		if (!isSkill) {
 			if (Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(attacker, attacked, 0, SkillElement.NONE))
 				return AttackStatus.RESIST;
 		}
 
-		if (StatFunctions.calculateMagicalCriticalRate(attacker, attacked, criticalProb)) {
+		if (StatFunctions.calculateMagicalCriticalRate(attacker, attacked, criticalProb, applyMcrit)) {
 			return AttackStatus.CRITICAL;
 		}
 

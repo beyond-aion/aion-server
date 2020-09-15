@@ -460,8 +460,8 @@ public class StatFunctions {
 	/**
 	 * Calculates MAGICAL CRITICAL chance
 	 */
-	public static boolean calculateMagicalCriticalRate(Creature attacker, Creature attacked, int criticalProb) {
-		if (attacker instanceof Servant || attacker instanceof Homing)
+	public static boolean calculateMagicalCriticalRate(Creature attacker, Creature attacked, int criticalProb, boolean applyMcrit) {
+		if (attacker instanceof Servant || attacker instanceof Homing || !applyMcrit)
 			return false;
 
 		int critical = attacker.getGameStats().getMCritical().getCurrent() - attacked.getGameStats().getMCR().getCurrent();

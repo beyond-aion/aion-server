@@ -31,7 +31,7 @@ public class PoisonEffect extends AbstractOverTimeEffect {
 		int valueWithDelta = calculateBaseValue(effect);
 		int critAddDmg = this.critAddDmg2 + this.critAddDmg1 * effect.getSkillLevel();
 		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, this.position, false, this.critProbMod2,
-			critAddDmg);
+			critAddDmg, effect.getSkillTemplate().isMcritApplied());
 		effect.setReserveds(new EffectReserved(position, finalDamage, ResourceType.HP, true, false), true);
 		super.startEffect(effect, AbnormalState.POISON);
 	}
