@@ -36,28 +36,28 @@
 		<xs:attribute name="skillsubtype" type="skillSubType" use="required" />
 		<xs:attribute name="conflict_id" type="xs:int" />
 		<xs:attribute name="tslot" type="TargetSlot" />
-		<xs:attribute name="tslot_level" use="optional" type="xs:int" default="0" />
-		<xs:attribute name="dispel_category" type="DispelCategoryType" use="optional" default="NONE" />
-		<xs:attribute name="req_dispel_level" type="xs:int" use="optional" />
+		<xs:attribute name="tslot_level" type="xs:int" default="0" />
+		<xs:attribute name="dispel_category" type="DispelCategoryType" default="NONE" />
+		<xs:attribute name="req_dispel_level" type="xs:int" />
 		<xs:attribute name="activation" type="activationAttribute" use="required" />
 		<xs:attribute name="stigma" type="StigmaType" />
 		<xs:attribute name="ammospeed" type="xs:int" />
 		<xs:attribute name="duration" type="xs:int" use="required" />
 		<xs:attribute name="toggle_timer" type="xs:int" />
-		<xs:attribute name="cooldown" type="xs:int" use="optional" default="0" />
-		<xs:attribute name="cooldown_delta_lv" type="xs:int" use="optional" default="0" />
+		<xs:attribute name="cooldown" type="xs:int" default="0" />
+		<xs:attribute name="cooldown_delta_lv" type="xs:int" default="0" />
 		<xs:attribute name="skill_category" type="skillCategory" default="NONE" />
 		<xs:attribute name="pvp_damage" type="xs:int" />
 		<xs:attribute name="pvp_duration" type="xs:int" />
-		<xs:attribute name="chain_skill_prob" type="xs:int" use="optional" default="0" />
-		<xs:attribute name="cancel_rate" type="xs:int" use="optional" default="0" />
-		<xs:attribute name="stance" type="xs:boolean" use="optional" default="false" />
-		<xs:attribute name="avatar" type="xs:boolean" use="optional" default="false" />
-		<xs:attribute name="ground" type="xs:boolean" use="optional" default="false" />
+		<xs:attribute name="chain_skill_prob" type="xs:int" default="0" />
+		<xs:attribute name="cancel_rate" type="xs:int" default="0" />
+		<xs:attribute name="stance" type="xs:boolean" default="false" />
+		<xs:attribute name="avatar" type="xs:boolean" default="false" />
+		<xs:attribute name="ground" type="xs:boolean" default="false" />
 		<xs:attribute name="remove_flyend" type="xs:boolean" />
 		<xs:attribute name="noremoveatdie" type="xs:boolean" />
 		<xs:attribute name="no_save_on_logout" type="xs:boolean" />
-		<xs:attribute name="applymcrit" type="xs:boolean"/>
+		<xs:attribute name="applymcrit" type="xs:boolean" default="true"/>
 	</xs:complexType>
 	<xs:complexType name="Effects">
 		<xs:sequence minOccurs="1" maxOccurs="unbounded">
@@ -270,9 +270,9 @@
 	</xs:complexType>
 	<xs:complexType name="Motion">
 		<xs:attribute name="name" type="xs:string" />
-		<xs:attribute name="speed" type="xs:int" use="optional" default="100" />
-		<xs:attribute name="instant_skill" type="xs:boolean" use="optional" default="false" />
-		<xs:attribute name="delay" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="speed" type="xs:int" default="100" />
+		<xs:attribute name="instant_skill" type="xs:boolean" default="false" />
+		<xs:attribute name="delay" type="xs:int" default="0"/>
 	</xs:complexType>
 	<xs:complexType name="ActionModifiers">
 		<xs:sequence minOccurs="0" maxOccurs="unbounded">
@@ -302,8 +302,8 @@
 		<xs:attribute name="preeffect_prob" type="xs:int" />
 		<xs:attribute name="preeffect" type="xs:string" />
 		<xs:attribute name="element" type="SkillElement" />
-		<xs:attribute name="hittypeprob2" type="xs:int" use="optional" default="100" />
-		<xs:attribute name="hittype" type="HitType" use="optional" default="EVERYHIT" />
+		<xs:attribute name="hittypeprob2" type="xs:int" default="100" />
+		<xs:attribute name="hittype" type="HitType" default="EVERYHIT" />
 		<xs:attribute name="mrresist" type="xs:boolean" default="true" />
 		<xs:attribute name="accmod1" type="xs:int" />
 		<xs:attribute name="accmod2" type="xs:int" />
@@ -368,7 +368,7 @@
 		<xs:complexContent>
 			<xs:extension base="PeriodicAction">
 				<xs:attribute name="value" type="xs:int" use="required" />
-				<xs:attribute name="delta" type="xs:int" use="optional" />
+				<xs:attribute name="delta" type="xs:int" />
 				<xs:attribute name="ratio" type="xs:boolean" />
 			</xs:extension>
 		</xs:complexContent>
@@ -641,13 +641,13 @@
 				<xs:attribute name="model" type="xs:int" use="required" />
 				<xs:attribute name="type" type="TransformType" default="NONE" />
 				<xs:attribute name="panelid" type="xs:int" />
-				<xs:attribute name="banUseSkills" type="xs:int" use="optional" />
-				<xs:attribute name="banMovement" type="xs:int" use="optional" />
-				<xs:attribute name="res1" type="xs:int" use="optional" />
-				<xs:attribute name="res2" type="xs:int" use="optional" />
-				<xs:attribute name="res3" type="xs:int" use="optional" />
-				<xs:attribute name="res5" type="xs:int" use="optional" />
-				<xs:attribute name="res6" type="xs:int" use="optional" />
+				<xs:attribute name="banUseSkills" type="xs:int" />
+				<xs:attribute name="banMovement" type="xs:int" />
+				<xs:attribute name="res1" type="xs:int" />
+				<xs:attribute name="res2" type="xs:int" />
+				<xs:attribute name="res3" type="xs:int" />
+				<xs:attribute name="res5" type="xs:int" />
+				<xs:attribute name="res6" type="xs:int" />
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
