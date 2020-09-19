@@ -97,4 +97,28 @@
 			<gd_item id="102100494" /><!-- Mutant's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="70">
+		<gd_maps>
+			<gd_map map_id="320110000" /><!-- Alquimia_Research_Center -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214100" /><!-- Ra-121ex -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121001247" /><!-- Test Subject's Garnet Necklace -->
+			<gd_item id="121001248" /><!-- Test Subject's Lazuli Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" chance="50">
+		<gd_maps>
+			<gd_map map_id="320110000" /><!-- Alquimia_Research_Center -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214100" /><!-- Ra-121ex -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001495" /><!-- Test Subject's Garnet Ring -->
+			<gd_item id="122001496" /><!-- Test Subject's Lazuli Ring -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

@@ -557,6 +557,7 @@
 		<gd_items>
 			<gd_item id="100100147" /><!-- Krall Grand Chieftain's Warhammer -->
 			<gd_item id="101500159" /><!-- Krall Grand Chieftain's Staff -->
+			<gd_item id="102100259" /><!-- Krall Grand Chieftain's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" chance="30">
@@ -583,6 +584,8 @@
 		<gd_items>
 			<gd_item id="101700169" /><!-- Krall Grand Chieftain's Longbow -->
 			<gd_item id="100200250" /><!-- Krall Grand Chieftain's Dagger -->
+			<gd_item id="101800275" /><!-- Krall Grand Chieftain's Pistol -->
+			<gd_item id="101900277" /><!-- Krall Grand Chieftain's Aethercannon -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" chance="30">
@@ -1443,6 +1446,17 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="182200558" /><!-- doc_quest_1197a -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="80">
+		<gd_maps>
+			<gd_map map_id="210020000" /><!-- Eltnen -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211713" /><!-- Millennium Laupede -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012026" /><!-- Millennium Carapace -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Quest-Start Item" chance="5">

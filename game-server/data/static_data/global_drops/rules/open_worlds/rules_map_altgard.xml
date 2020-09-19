@@ -76,6 +76,8 @@
 			<gd_npc npc_id="210606" /><!-- The Peltclaimer -->
 			<gd_npc npc_id="210607" /><!-- Jahama the Ruthless -->
 			<gd_npc npc_id="210630" /><!-- Scowl -->
+			<gd_npc npc_id="210603" /><!-- Numurru Quickfist -->
+			<gd_npc npc_id="210605" /><!-- Fourpoints -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 20 -->
@@ -211,6 +213,7 @@
 			<!-- Level 17 -->
 			<gd_item id="100000265" /><!-- Numurru's Sword -->
 			<gd_item id="100500193" /><!-- Numurru's Jewel -->
+			<gd_item id="102100261" /><!-- Numurru's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" chance="50">

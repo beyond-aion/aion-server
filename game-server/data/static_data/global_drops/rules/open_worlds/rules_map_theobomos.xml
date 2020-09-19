@@ -119,6 +119,7 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="101500552" /><!-- Clorint's Staff -->
+			<gd_item id="102100512" /><!-- Gudomka's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" chance="50">

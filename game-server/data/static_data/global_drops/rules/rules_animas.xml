@@ -8,6 +8,7 @@
 		</gd_maps>
 		<gd_zones>
 			<gd_zone zone="EMBERPINE_PASS_600090000" />
+			<gd_zone zone="STILLNESS_HOLLOW_600090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -109,6 +110,7 @@
 		<gd_zones>
 			<gd_zone zone="SMOLDERING_CRAG_600090000" />
 			<gd_zone zone="MOLTEN_CLIFFS_600090000" />
+			<gd_zone zone="ASHEN_GLADE_600090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -126,6 +128,7 @@
 		<gd_zones>
 			<gd_zone zone="SMOLDERING_CRAG_600090000" />
 			<gd_zone zone="MOLTEN_CLIFFS_600090000" />
+			<gd_zone zone="ASHEN_GLADE_600090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
@@ -142,6 +145,7 @@
 		</gd_maps>
 		<gd_zones>
 			<gd_zone zone="EMBERPINE_PASS_600090000" />
+			<gd_zone zone="STILLNESS_HOLLOW_600090000" />
 		</gd_zones>
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />

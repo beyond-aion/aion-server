@@ -212,6 +212,18 @@
 			<gd_item id="110500464" /><!-- Flame Hauberk -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="320100000" /><!-- Fire_Temple -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212844" /><!-- Silver Blade Rotan -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001541" /><!-- Rotan's Circlet -->
+			<gd_item id="122001540" /><!-- Rotan's Ring -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->

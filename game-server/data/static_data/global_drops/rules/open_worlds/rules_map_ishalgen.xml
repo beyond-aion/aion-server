@@ -137,4 +137,15 @@
 			<gd_item id="123001267" /><!-- Hatata's Leather Belt -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Potion" chance="100">
+		<gd_maps>
+			<gd_map map_id="220010000" /><!-- Ishalgen -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210648" /><!-- Squzii Ironfist -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="162000031" min_count="5" /><!-- Squzii's Carrot Juice -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

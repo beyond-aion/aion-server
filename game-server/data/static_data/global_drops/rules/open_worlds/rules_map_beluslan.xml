@@ -78,6 +78,7 @@
 		<gd_items>
 			<gd_item id="100900387"/><!-- Eto's Greatsword -->
 			<gd_item id="101300378"/><!-- Eto's Spear -->
+			<gd_item id="102100494" /><!-- Mutant's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
@@ -359,6 +360,18 @@
 			<gd_item id="111300652"/><!-- Deep Sea Vambrace -->
 			<gd_item id="111500639"/><!-- Deep Sea Handguards -->
 			<gd_item id="111600629"/><!-- Deep Sea Gauntlets -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Rare)" chance="50">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213743" /><!-- Swimmersbane -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001496" /><!-- Deep Sea Hat -->
+			<gd_item id="125001498" /><!-- Deep Sea Helm -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" chance="50">
@@ -787,6 +800,213 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="152012538"/><!-- Dugolle's Bone -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="65">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213721" /><!-- Ruby Jannsen -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000753" /><!-- Jannsen's Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="70">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213729" /><!-- Masto The Ancient -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000770" /><!-- Masto the Ancient's Shield -->
+			<gd_item id="123000862" /><!-- Masto the Ancient's Leather Belt -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Acessory (Legend)" chance="70">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213729" /><!-- Masto The Ancient -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000704" /><!-- Masto's Diamond Earrings -->
+			<gd_item id="120000703" /><!-- Masto's Sapphire Earrings -->
+			<gd_item id="121000640" /><!-- Masto's Ruby Necklace -->
+			<gd_item id="121000641" /><!-- Masto's Sapphire Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="70">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213729" /><!-- Masto The Ancient -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000510" /><!-- Masto's Sword -->
+			<gd_item id="100900385" /><!-- Masto's Greatsword -->
+			<gd_item id="100200499" /><!-- Masto's Dagger -->
+			<gd_item id="100100393" /><!-- Masto's Warhammer -->
+			<gd_item id="100500388" /><!-- Masto's Jewel -->
+			<gd_item id="100600418" /><!-- Masto's Tome -->
+			<gd_item id="101300376" /><!-- Masto's Spear -->
+			<gd_item id="101500392" /><!-- Masto's Staff -->
+			<gd_item id="101700404" /><!-- Masto's Longbow -->
+			<gd_item id="102000462" /><!-- Masto's Harp -->
+			<gd_item id="101800448" /><!-- Masto's Pistol -->
+			<gd_item id="101900434" /><!-- Masto's Aethercannon -->
+			<gd_item id="102100431" /><!-- Masto's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213729" /><!-- Masto The Ancient -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012534" /><!-- Masto the Ancient's Crystal -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213729" /><!-- Masto The Ancient -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000785" /><!-- Masto's Tears -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213742" /><!-- Drowned Nahas -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114100677" /><!-- Deep Sea Shoes -->
+			<gd_item id="114300690" /><!-- Deep Sea Boots -->
+			<gd_item id="114500656" /><!-- Deep Sea Brogans -->
+			<gd_item id="114600614" /><!-- Deep Sea Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Legend)" chance="65">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213742" /><!-- Drowned Nahas -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001497" /><!-- Deep Sea Chain Helm -->
+			<gd_item id="125001495" /><!-- Deep Sea Headband -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213742" /><!-- Drowned Nahas -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012537" /><!-- Nahas' Dark Energy -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="55">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213727" /><!-- Motherless Ramu -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110300690" /><!-- Ramu's Jerkin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213713" /><!-- Divine Shard -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000667" /><!-- Araxia's Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="60">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213713" /><!-- Divine Shard -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000755" /><!-- Araxia's Belt -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213753" /><!-- Archmage Ysika -->
+			<gd_npc npc_id="213752" /><!-- Captain Amichel -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100648" /><!-- Watch's Gloves -->
+			<gd_item id="114100675" /><!-- Watch's Shoes -->
+			<gd_item id="111300650" /><!-- Watch's Vambrace -->
+			<gd_item id="114300688" /><!-- Watch's Boots -->
+			<gd_item id="111500637" /><!-- Watch's Handguards -->
+			<gd_item id="114500654" /><!-- Watch's Brogans -->
+			<gd_item id="111600627" /><!-- Watch's Gauntlets -->
+			<gd_item id="114600612" /><!-- Watch's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213757" /><!-- Instructor Mara -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100729" /><!-- Watch's Tunic -->
+			<gd_item id="110300691" /><!-- Watch's Jerkin -->
+			<gd_item id="110500668" /><!-- Watch's Hauberk -->
+			<gd_item id="110600654" /><!-- Watch's Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Rare)" chance="70">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213757" /><!-- Instructor Mara -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001489" /><!-- Watch's Golden Diadem -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
+		<gd_maps>
+			<gd_map map_id="220040000" /><!-- Beluslan -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213720" /><!-- Officer Poretti -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000637" /><!-- Poretti's Necklace -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

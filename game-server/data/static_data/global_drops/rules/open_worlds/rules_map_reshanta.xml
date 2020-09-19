@@ -96,4 +96,51 @@
 			<gd_item id="125001267" /><!-- Menotios' Crown -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="80">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="251017" /><!-- Flame Tear Brerkun -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000659" /><!-- Brerkun's Ring -->
+			<gd_item id="122000660" /><!-- Brerkun's Seal -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="252549" /><!-- Imperturbable Kamon -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000505" /><!-- Kamon's Iron Shield -->
+			<gd_item id="115000506" /><!-- Kamon's Stone Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory Rare" chance="75">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="252549" /><!-- Imperturbable Kamon -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000653" /><!-- Kamon's Belt -->
+			<gd_item id="123000652" /><!-- Kamon's Leather Belt -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="65">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="251017" /><!-- Flame Tear Brerkun -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000509" /><!-- Red Tear Shield -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

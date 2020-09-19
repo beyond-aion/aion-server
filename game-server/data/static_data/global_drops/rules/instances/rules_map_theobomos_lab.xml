@@ -103,7 +103,7 @@
 			<gd_item id="113600804" /><!-- Clandestine Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="65">
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 		</gd_maps>
@@ -193,10 +193,13 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="214664" /><!-- Wistful Syripne -->
+			<gd_npc npc_id="214666" /><!-- Water Spirit Undine -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="120000898" /><!-- Ancient Spirit's Diamond Earrings -->
+			<gd_item id="120000896" /><!-- Ancient Spirit's Ruby Earrings -->
 			<gd_item id="122001034" /><!-- Ancient Spirit's Sapphire Ring -->
+			<gd_item id="122001035" /><!-- Ancient Spirit's Diamond Ring -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" chance="50">
@@ -209,18 +212,6 @@
 		<gd_items>
 			<gd_item id="120000897" /><!-- Ancient Spirit's Sapphire Earrings -->
 			<gd_item id="122001033" /><!-- Ancient Spirit's Ruby Ring -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" chance="50">
-		<gd_maps>
-			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="214666" /><!-- Water Spirit Undine -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="120000896" /><!-- Ancient Spirit's Ruby Earrings -->
-			<gd_item id="122001035" /><!-- Ancient Spirit's Diamond Ring -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" chance="50">

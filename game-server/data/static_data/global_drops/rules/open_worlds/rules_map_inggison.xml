@@ -350,4 +350,840 @@
 			<gd_item id="112600931" /><!-- Skuma's Shoulderplates -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216524" /><!-- Geffen -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100100684" /><!-- Geffen's Warhammer -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216517" /><!-- Kyang Redmane -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100976" /><!-- Kyang's Gloves -->
+			<gd_item id="111300981" /><!-- Kyang's Vambrace -->
+			<gd_item id="114301037" /><!-- Kyang's Boots -->
+			<gd_item id="111500968" /><!-- Kyang's Handguards -->
+			<gd_item id="114500980" /><!-- Kyang's Brogans -->
+			<gd_item id="111600959" /><!-- Kyang's Gauntlets -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216517" /><!-- Kyang Redmane -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100933" /><!-- Kyang's Pauldrons -->
+			<gd_item id="112600933" /><!-- Kyang's Shoulderplates -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216521" /><!-- Baydeeafa -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100932" /><!-- Wormwood Pauldrons -->
+			<gd_item id="114101016" /><!-- Baydeeafa's Shoes -->
+			<gd_item id="112300930" /><!-- Wormwood Shoulderguards -->
+			<gd_item id="112500917" /><!-- Wormwood Spaulders -->
+			<gd_item id="112600932" /><!-- Wormwood Shoulderplates -->
+			<gd_item id="114600939" /><!-- Baydeeafa's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216521" /><!-- Baydeeafa -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112300931" /><!-- Baydeeafa's Shoulderguards -->
+			<gd_item id="112500918" /><!-- Baydeeafa's Spaulders -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236493" /><!-- Sukana The Learned -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100987" /><!-- Sukana's Leggings -->
+			<gd_item id="113301000" /><!-- Sukana's Breeches -->
+			<gd_item id="113500970" /><!-- Sukana's Chausses -->
+			<gd_item id="113600941" /><!-- Sukana's Greaves -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236493" /><!-- Sukana The Learned -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001178" /><!-- Sukana's Corundum Ring -->
+			<gd_item id="122001179" /><!-- Sukana's Turquoise Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236493" /><!-- Sukana The Learned -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101017" /><!-- Sukana's Shoes -->
+			<gd_item id="114301038" /><!-- Sukana's Boots -->
+			<gd_item id="114500981" /><!-- Sukana's Brogans -->
+			<gd_item id="114600940" /><!-- Sukana's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216507" /><!-- Skuma Silvereye -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000913" /><!-- Skuma's Sword -->
+			<gd_item id="100600761" /><!-- Skuma's Tome -->
+			<gd_item id="101300660" /><!-- Skuma's Spear -->
+			<gd_item id="101500704" /><!-- Skuma's Staff -->
+			<gd_item id="102000666" /><!-- Skuma's Harp -->
+			<gd_item id="102100563" /><!-- Skuma's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216507" /><!-- Skuma Silvereye -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100975" /><!-- Skuma's Gloves -->
+			<gd_item id="112100931" /><!-- Skuma's Pauldrons -->
+			<gd_item id="112300929" /><!-- Skuma's Shoulderguards -->
+			<gd_item id="112500916" /><!-- Skuma's Spaulders -->
+			<gd_item id="111600958" /><!-- Skuma's Gauntlets -->
+			<gd_item id="112600931" /><!-- Skuma's Shoulderplates -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216507" /><!-- Skuma Silvereye -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000949" /><!-- Skuma's Sword -->
+			<gd_item id="100000950" /><!-- Skuma's Noble Sword -->
+			<gd_item id="100100722" /><!-- Skuma's Noble Mace -->
+			<gd_item id="100100721" /><!-- Skuma's Mace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Housing Object (Unique)" chance="1">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216507" /><!-- Skuma Silvereye -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="170130012" /><!-- Skuma's Couch -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216514" /><!-- Queen Klawnickt -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001033" /><!-- Klawnickt's Corundum Earrings -->
+			<gd_item id="120001034" /><!-- Klawnickt's Turquoise Earrings -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216514" /><!-- Queen Klawnickt -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000945" /><!-- Klawnickt's Corundum Necklace -->
+			<gd_item id="121000946" /><!-- Klawnickt's Turquoise Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216514" /><!-- Queen Klawnickt -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000914" /><!-- Klawnickt's Sword -->
+			<gd_item id="100900691" /><!-- Klawnickt's Greatsword -->
+			<gd_item id="100200814" /><!-- Klawnickt Dagger -->
+			<gd_item id="100100683" /><!-- Klawnickt's Warhammer -->
+			<gd_item id="100500705" /><!-- Klawnickt's Jewel -->
+			<gd_item id="100600762" /><!-- Klawnickt's Tome -->
+			<gd_item id="101300661" /><!-- Klawnickt's Spear -->
+			<gd_item id="101500705" /><!-- Klawnickt's Staff -->
+			<gd_item id="101700729" /><!-- Klawnickt's Longbow -->
+			<gd_item id="102000667" /><!-- Klawnickt's Instrument -->
+			<gd_item id="101800633" /><!-- Klawnickt's Pistol -->
+			<gd_item id="102100564" /><!-- Klawnickt's Cipher-Blade -->
+			<gd_item id="101900632" /><!-- Aethercannon of Klawnickt -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216514" /><!-- Queen Klawnickt -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001004" /><!-- Klawnickt's Noble Shield -->
+			<gd_item id="115001003" /><!-- Klawnickt's Shield -->
+			<gd_item id="111301014" /><!-- Klawnickt's Noble Vambrace -->
+			<gd_item id="111301013" /><!-- Klawnickt's Vambrace -->
+			<gd_item id="110601011" /><!-- Klawnickt's Noble Breastplate -->
+			<gd_item id="110601010" /><!-- Klawnickt's Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216514" /><!-- Queen Klawnickt -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012046" /><!-- Klawnickt Fragment -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216512" /><!-- Priest Zitan -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002297" /><!-- Zitan's Helm -->
+			<gd_item id="125002296" /><!-- Zitan's Chain Hood -->
+			<gd_item id="125002295" /><!-- Zitan's Hat -->
+			<gd_item id="125002294" /><!-- Zitan's Headband -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216512" /><!-- Priest Zitan -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001035" /><!-- Zitan's Corundum Earrings -->
+			<gd_item id="120001036" /><!-- Zitan's Turquoise Earrings -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216512" /><!-- Priest Zitan -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101015" /><!-- Zitan's Shoes -->
+			<gd_item id="114301036" /><!-- Zitan's Boots -->
+			<gd_item id="114500979" /><!-- Zitan's Brogans -->
+			<gd_item id="114600938" /><!-- Zitan's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216518" /><!-- Latzio Stoneheart -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101081" /><!-- Latzio's Tunic -->
+			<gd_item id="110301030" /><!-- Latzio's Jerkin -->
+			<gd_item id="110500998" /><!-- Latzio's Hauberk -->
+			<gd_item id="110600978" /><!-- Latzio's Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216518" /><!-- Latzio Stoneheart -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001037" /><!-- Latzio's Corundum Earrings -->
+			<gd_item id="120001038" /><!-- Latzio's Turquoise Earrings -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216518" /><!-- Latzio Stoneheart -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100977" /><!-- Latzio's Gloves -->
+			<gd_item id="111300982" /><!-- Latzio's Vambrace -->
+			<gd_item id="111500969" /><!-- Latzio's Handguards -->
+			<gd_item id="111600960" /><!-- Latzio's Gauntlets -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216518" /><!-- Latzio Stoneheart -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101500744" /><!-- Latzio's Noble Staff -->
+			<gd_item id="101500743" /><!-- Latzio's Staff -->
+			<gd_item id="101700765" /><!-- Latzio's Noble Bow -->
+			<gd_item id="101700764" /><!-- Latzio's Bow -->
+			<gd_item id="102000085" /><!-- Latzio's Harp -->
+			<gd_item id="101900086" /><!-- Latzio's Aethercannon -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216518" /><!-- Latzio Stoneheart -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012048" /><!-- Latzio's Blood -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Legend)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216519" /><!-- Captain Voltayre -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002304" /><!-- Voltayre's Hairpin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="45">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216519" /><!-- Captain Voltayre -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100988" /><!-- Voltayre Leggings -->
+			<gd_item id="113301001" /><!-- Voltayre Breeches -->
+			<gd_item id="113500971" /><!-- Voltayre Chausses -->
+			<gd_item id="113600942" /><!-- Voltayre Greaves -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" chance="45">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216519" /><!-- Captain Voltayre -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000949" /><!-- Voltayre's Corundum Necklace -->
+			<gd_item id="121000950" /><!-- Voltayre's Turquoise Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236494" /><!-- Head Priest Nashuma -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000947" /><!-- Nashuma's Corundum Necklace -->
+			<gd_item id="121000948" /><!-- Nashuma's Turquoise Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236494" /><!-- Head Priest Nashuma -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101082" /><!-- Nashuma's Tunic -->
+			<gd_item id="110301031" /><!-- Nashuma's Jerkin -->
+			<gd_item id="110500999" /><!-- Nashuma's Hauberk -->
+			<gd_item id="110600979" /><!-- Nashuma's Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" chance="20">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236494" /><!-- Head Priest Nashuma -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000977" /><!-- Nashuma's Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236494" /><!-- Head Priest Nashuma -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012049" /><!-- Grudge Stone of Head Priest Nashuma -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216515" /><!-- Mervin -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000943" /><!-- Mervin's Necklace -->
+			<gd_item id="123001037" /><!-- Mervin's Belt -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216515" /><!-- Mervin -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101080" /><!-- Mervin's Tunic -->
+			<gd_item id="110301029" /><!-- Mervin's Jerkin -->
+			<gd_item id="110500997" /><!-- Mervin's Hauberk -->
+			<gd_item id="110600977" /><!-- Mervin's Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216510" /><!-- Skar -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001174" /><!-- Skar's Corundum Ring -->
+			<gd_item id="122001175" /><!-- Skar's Turquoise Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216510" /><!-- Skar -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100986" /><!-- Skar's Leggings -->
+			<gd_item id="113300999" /><!-- Skar's Breeches -->
+			<gd_item id="113500969" /><!-- Skar's Chausses -->
+			<gd_item id="113600940" /><!-- Skar's Greaves -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216510" /><!-- Skar -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002303" /><!-- Skar's Hairpin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216511" /><!-- The Punisher -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000944" /><!-- Punisher's Necklace -->
+			<gd_item id="123001036" /><!-- Punisher's Belt -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216511" /><!-- The Punisher -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002302" /><!-- Punisher's Helm -->
+			<gd_item id="125002301" /><!-- Punisher's Chain Hood -->
+			<gd_item id="125002300" /><!-- Punisher's Hat -->
+			<gd_item id="125002299" /><!-- Punisher's Headband -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216505" /><!-- Rockhorn -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000974" /><!-- Rockhorn's Malevite Shield -->
+			<gd_item id="115000973" /><!-- Rockhorn's Drenium Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216505" /><!-- Rockhorn -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001176" /><!-- Rockhorn's Corundum Ring -->
+			<gd_item id="122001177" /><!-- Rockhorn's Turquoise Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216505" /><!-- Rockhorn -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001040" /><!-- Rockhorn's Leather Belt -->
+			<gd_item id="123001041" /><!-- Rockhorn's Sash -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216503" /><!-- Glugbeard -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100984" /><!-- Glugbeard's Leggings -->
+			<gd_item id="114101012" /><!-- Glugbeard's Shoes -->
+			<gd_item id="113300997" /><!-- Glugbeard's Breeches -->
+			<gd_item id="114301033" /><!-- Glugbeard's Boots -->
+			<gd_item id="113500967" /><!-- Glugbeard's Chausses -->
+			<gd_item id="114500976" /><!-- Glugbeard's Brogans -->
+			<gd_item id="113600938" /><!-- Glugbeard's Greaves -->
+			<gd_item id="114600935" /><!-- Glugbeard's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="65">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216503" /><!-- Glugbeard -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000912" /><!-- Glugbeard's Sword -->
+			<gd_item id="100900689" /><!-- Glugbeard's Greatsword -->
+			<gd_item id="100200812" /><!-- Glugbeard's Dagger -->
+			<gd_item id="100100681" /><!-- Glugbeard's Warhammer -->
+			<gd_item id="100500703" /><!-- Glugbeard's Jewel -->
+			<gd_item id="100600760" /><!-- Glugbeard's Tome -->
+			<gd_item id="101300659" /><!-- Glugbeard's Spear -->
+			<gd_item id="101500703" /><!-- Glugbeard's Staff -->
+			<gd_item id="101700727" /><!-- Glugbeard's Longbow -->
+			<gd_item id="102000665" /><!-- Glugbeard's Harp -->
+			<gd_item id="101800631" /><!-- Glugbeard's Pistol -->
+			<gd_item id="101900630" /><!-- Glugbeard's Aethercannon -->
+			<gd_item id="102100562" /><!-- Glugbeard's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216506" /><!-- Violoton -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111500966" /><!-- Violoton's Handguards -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Rare)" chance="70">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216513" /><!-- Tiritaphon -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002298" /><!-- Tiritaphon's Hairpin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216513" /><!-- Tiritaphon -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001038" /><!-- Tiritaphon's Leather Belt -->
+			<gd_item id="123001039" /><!-- Tiritaphon's Sash -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216513" /><!-- Tiritaphon -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000976" /><!-- Tiritaphon's Malevite Shield -->
+			<gd_item id="115000975" /><!-- Tiritaphon's Drenium Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" chance="90">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216516" /><!-- Omega -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001041" /><!-- Omega's Corundum Earrings -->
+			<gd_item id="120001042" /><!-- Omega's Turquoise Earrings -->
+			<gd_item id="123001042" /><!-- Omega's Leather Belt -->
+			<gd_item id="123001043" /><!-- Omega's Sash -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Epic)" chance="75">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216516" /><!-- Omega -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000953" /><!-- Omega's Corundum Necklace -->
+			<gd_item id="121000954" /><!-- Omega's Turquoise Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Epic)" chance="75">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216516" /><!-- Omega -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002308" /><!-- Omega's Helm -->
+			<gd_item id="125002307" /><!-- Omega's Chain Hood -->
+			<gd_item id="125002306" /><!-- Omega's Hat -->
+			<gd_item id="125002305" /><!-- Omega's Headband -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216516" /><!-- Omega -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182206845" /><!-- Omega's Fragment -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216508" /><!-- The Shieldbearer -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900690" /><!-- Shieldbearer's Greatsword -->
+			<gd_item id="100200813" /><!-- Shieldbearer's Dagger -->
+			<gd_item id="100100682" /><!-- Shieldbearer's Warhammer -->
+			<gd_item id="100500704" /><!-- Shieldbearer's Jewel -->
+			<gd_item id="101700728" /><!-- Shieldbearer's Longbow -->
+			<gd_item id="101800632" /><!-- Shieldbearer's Pistol -->
+			<gd_item id="101900631" /><!-- Shieldbearer's Aethercannon -->
+			<gd_item id="102100563" /><!-- Skuma's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216508" /><!-- The Shieldbearer -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101014" /><!-- Shieldbearer's Shoes -->
+			<gd_item id="111300980" /><!-- Shieldbearer's Vambrace -->
+			<gd_item id="114301035" /><!-- Shieldbearer's Boots -->
+			<gd_item id="111500967" /><!-- Shieldbearer's Handguards -->
+			<gd_item id="114500978" /><!-- Shieldbearer's Brogans -->
+			<gd_item id="114600937" /><!-- Shieldbearer's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216502" /><!-- Titch Kippie -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100973" /><!-- Titch's Gloves -->
+			<gd_item id="111300978" /><!-- Titch's Vambrace -->
+			<gd_item id="111500964" /><!-- Titch's Handguards -->
+			<gd_item id="111600956" /><!-- Titch's Gauntlets -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216502" /><!-- Titch Kippie -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001029" /><!-- Titch's Corundum Earrings -->
+			<gd_item id="120001030" /><!-- Titch's Turquoise Earrings -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="65">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216502" /><!-- Titch Kippie -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000970" /><!-- Titch's Drenium Shield -->
+			<gd_item id="115000971" /><!-- Titch's Malevite Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216504" /><!-- Elder Narikiki -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101078" /><!-- Narikiki's Tunic -->
+			<gd_item id="110301027" /><!-- Narikiki's Jerkin -->
+			<gd_item id="110500995" /><!-- Narikiki's Hauberk -->
+			<gd_item id="110600975" /><!-- Narikiki's Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216504" /><!-- Elder Narikiki -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001034" /><!-- Narikiki's Leather Belt -->
+			<gd_item id="123001035" /><!-- Narikiki's Sash -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216504" /><!-- Elder Narikiki -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001170" /><!-- Narikiki's Corundum Ring -->
+			<gd_item id="122001171" /><!-- Narikiki's Turquoise Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216504" /><!-- Elder Narikiki -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000972" /><!-- Narikiki's Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Souvenir" chance="15">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216504" /><!-- Elder Narikiki -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="170170088" /><!-- [Souvenir] Narikiki Cat Weapon Decoration -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="210050000" /><!-- Inggison -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216504" /><!-- Elder Narikiki -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012050" /><!-- Core of Elder Narikiki -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

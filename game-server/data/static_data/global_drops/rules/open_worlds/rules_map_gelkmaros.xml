@@ -270,4 +270,848 @@
 			<gd_item id="125003836" /><!-- Mastarius' Magic Helm -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216558" /><!-- Captain Naiyak -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002313" /><!-- Naiyak's Helm -->
+			<gd_item id="125002312" /><!-- Naiyak's Chain Hood -->
+			<gd_item id="125002311" /><!-- Naiyak's Hat -->
+			<gd_item id="125002310" /><!-- Naiyak's Headband -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216558" /><!-- Captain Naiyak -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000984" /><!-- Naiyak's Malevite Shield -->
+			<gd_item id="115000983" /><!-- Naiyak's Drenium Shield -->
+			<gd_item id="111100982" /><!-- Naiyak's Gloves -->
+			<gd_item id="111300987" /><!-- Naiyak's Vambrace -->
+			<gd_item id="111500974" /><!-- Naiyak's Handguards -->
+			<gd_item id="111600965" /><!-- Naiyak's Gauntlets -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Legend)" chance="80">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216570" /><!-- Turatu Spawnfoot -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002320" /><!-- Turatu's Hat -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="50">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216570" /><!-- Turatu Spawnfoot -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101089" /><!-- Turatu's Tunic -->
+			<gd_item id="110501006" /><!-- Turatu's Hauberk -->
+			<gd_item id="110301038" /><!-- Turatu's Jerkin -->
+			<gd_item id="110600986" /><!-- Turatu's Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" chance="25">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216570" /><!-- Turatu Spawnfoot -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000985" /><!-- Turatu's Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216570" /><!-- Turatu Spawnfoot -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012548" /><!-- Turatu Fragment -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236448" /><!-- Hashak The Plough -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100983" /><!-- Hashak's Gloves -->
+			<gd_item id="114301044" /><!-- Hashak's Boots -->
+			<gd_item id="114500987" /><!-- Hashak's Brogans -->
+			<gd_item id="111600966" /><!-- Hashak's Gauntlets -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236448" /><!-- Hashak The Plough -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112300938" /><!-- Hashak's Shoulderguards -->
+			<gd_item id="112500925" /><!-- Hashak's Spaulders -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Unique)" chance="40">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216581" /><!-- Minga Bigeyes -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101500711" /><!-- Minga's Staff -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236446" /><!-- Pincers Prime -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101024" /><!-- Pincers' Shoes -->
+			<gd_item id="111300988" /><!-- Pincers' Vambrace -->
+			<gd_item id="111500975" /><!-- Pincers' Handguards -->
+			<gd_item id="114600946" /><!-- Pincers' Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="65">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236446" /><!-- Pincers Prime -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100940" /><!-- Pincers' Pauldrons -->
+			<gd_item id="112600940" /><!-- Pincers' Shoulderplates -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236449" /><!-- Elder Malekor -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001049" /><!-- Malekor's Corundum Earrings -->
+			<gd_item id="120001050" /><!-- Malekor's Turquoise Earrings -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236449" /><!-- Elder Malekor -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100939" /><!-- Malekor's Pauldrons -->
+			<gd_item id="112300937" /><!-- Malekor's Shoulderguards -->
+			<gd_item id="112500924" /><!-- Malekor's Spaulders -->
+			<gd_item id="112600939" /><!-- Malekor's Shoulderplates -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" chance="40">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236449" /><!-- Elder Malekor -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111600967" /><!-- Malekor's Gauntlets -->
+			<gd_item id="111100984" /><!-- Malekor's Gloves -->
+			<gd_item id="111500976" /><!-- Malekor's Handguards -->
+			<gd_item id="111300989" /><!-- Malekor's Vambrace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236449" /><!-- Elder Malekor -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182005137" /><!-- Malekor Crystal -->
+			<gd_item id="182005133" /><!-- Malekor Crystal Powder -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216578" /><!-- Gravekeeper Basaim -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000961" /><!-- Basaim's Corundum Necklace -->
+			<gd_item id="121000962" /><!-- Basaim's Turquoise Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216578" /><!-- Gravekeeper Basaim -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100995" /><!-- Basaim's Leggings -->
+			<gd_item id="113301008" /><!-- Basaim's Breeches -->
+			<gd_item id="113500978" /><!-- Basaim's Chausses -->
+			<gd_item id="113600949" /><!-- Basaim's Greaves -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216578" /><!-- Gravekeeper Basaim -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101025" /><!-- Basaim's Shoes -->
+			<gd_item id="114301045" /><!-- Basaim's Boots -->
+			<gd_item id="114500988" /><!-- Basaim's Brogans -->
+			<gd_item id="114600947" /><!-- Basaim's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216578" /><!-- Gravekeeper Basaim -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012550" /><!-- Gravekeeper Basaim's Blood -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216579" /><!-- Lord Dhuni -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101088" /><!-- Dhuni's Tunic -->
+			<gd_item id="110301037" /><!-- Dhuni's Jerkin -->
+			<gd_item id="110501005" /><!-- Dhuni's Hauberk -->
+			<gd_item id="110600985" /><!-- Dhuni's Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="55">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216579" /><!-- Lord Dhuni -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100996" /><!-- Dhuni's Leggings -->
+			<gd_item id="113301009" /><!-- Dhuni's Breeches -->
+			<gd_item id="113500979" /><!-- Dhuni's Chausses -->
+			<gd_item id="113600950" /><!-- Dhuni's Greaves -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" chance="55">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216579" /><!-- Lord Dhuni -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001051" /><!-- Dhuni's Corundum Earrings -->
+			<gd_item id="120001052" /><!-- Dhuni's Turquoise Earrings -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216579" /><!-- Lord Dhuni -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012551" /><!-- Grudge Stone of Lord Dhuni -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216546" /><!-- Flesh-eating Swarm -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101020" /><!-- Flesheating Swarm's Shoes -->
+			<gd_item id="114301041" /><!-- Flesheating Swarm's Boots -->
+			<gd_item id="114500984" /><!-- Flesheating Swarm's Brogans -->
+			<gd_item id="114600943" /><!-- Flesheating Swarm's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="60">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216546" /><!-- Flesh-eating Swarm -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001043" /><!-- Flesheating Swarm's Earrings -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="30">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216546" /><!-- Flesh-eating Swarm -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001047" /><!-- Flesheating Swarm's Cloth Waist -->
+			<gd_item id="123001046" /><!-- Flesheating Swarm's Leather Belt -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216557" /><!-- Orciphae -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001048" /><!-- Orciphae's Leather Belt -->
+			<gd_item id="123001049" /><!-- Orciphae's Sash -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="40">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216557" /><!-- Orciphae -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100938" /><!-- Orciphae's Pauldrons -->
+			<gd_item id="112300936" /><!-- Orciphae's Shoulderguards -->
+			<gd_item id="112500923" /><!-- Orciphae's Spaulders -->
+			<gd_item id="112600938" /><!-- Orciphae's Shoulderplates -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="40">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216557" /><!-- Orciphae -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001047" /><!-- Orciphae's Corundum Earrings -->
+			<gd_item id="120001048" /><!-- Orciphae's Turquoise Earrings -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="60">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216548" /><!-- Alpha Mansat -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100936" /><!-- Mansat's Pauldrons -->
+			<gd_item id="112300934" /><!-- Mansat's Shoulderguards -->
+			<gd_item id="112500921" /><!-- Mansat's Spaulders -->
+			<gd_item id="112600936" /><!-- Mansat's Shoulderplates -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="60">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216548" /><!-- Alpha Mansat -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001183" /><!-- Mansat's Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="40">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216548" /><!-- Alpha Mansat -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000978" /><!-- Mansat's Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216553" /><!-- Chieftain Ulagu -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101085" /><!-- Ulagu's Tunic -->
+			<gd_item id="110301034" /><!-- Ulagu's Jerkin -->
+			<gd_item id="110501002" /><!-- Ulagu's Hauberk -->
+			<gd_item id="110600982" /><!-- Ulagu's Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="50">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216553" /><!-- Chieftain Ulagu -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000980" /><!-- Ulagu's Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216553" /><!-- Chieftain Ulagu -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001045" /><!-- Ulagu's Corundum Earrings -->
+			<gd_item id="120001046" /><!-- Ulagu's Turquoise Earrings -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216553" /><!-- Chieftain Ulagu -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012549" /><!-- Crystal containing Chieftain Ulagu's soul -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Souvenir" chance="15">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216553" /><!-- Chieftain Ulagu -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="170170089" /><!-- [Souvenir] Chieftain Ulagu's Mask -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216551" /><!-- Deathwing -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100991" /><!-- Deathwing's Leggings -->
+			<gd_item id="113301004" /><!-- Deathwing's Breeches -->
+			<gd_item id="113500974" /><!-- Deathwing's Chausses -->
+			<gd_item id="113600945" /><!-- Deathwing's Greaves -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216551" /><!-- Deathwing -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000955" /><!-- Deathwing's Corundum Necklace -->
+			<gd_item id="121000956" /><!-- Deathwing's Turquoise Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216551" /><!-- Deathwing -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000917" /><!-- Deathwing's Sword -->
+			<gd_item id="100900694" /><!-- Deathwing's Greatsword -->
+			<gd_item id="100200817" /><!-- Deathwing's Dagger -->
+			<gd_item id="100100687" /><!-- Deathwing's Warhammer -->
+			<gd_item id="100500708" /><!-- Deathwing's Jewel -->
+			<gd_item id="100600765" /><!-- Deathwing's Tome -->
+			<gd_item id="101300664" /><!-- Deathwing's Spear -->
+			<gd_item id="101500708" /><!-- Deathwing's Staff -->
+			<gd_item id="101700732" /><!-- Deathwing's Longbow -->
+			<gd_item id="102000670" /><!-- Deathwing's Harp -->
+			<gd_item id="101800636" /><!-- Deathwing's Pistol -->
+			<gd_item id="101900635" /><!-- Deathwing's Aethercannon -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216568" /><!-- Saira Sharpeyes -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000982" /><!-- Saira's Malevite Shield -->
+			<gd_item id="115000981" /><!-- Saira's Drenium Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Legend)" chance="65">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216568" /><!-- Saira Sharpeyes -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002318" /><!-- Saira's Helm -->
+			<gd_item id="125002317" /><!-- Saira's Chain Hood -->
+			<gd_item id="125002316" /><!-- Saira's Hat -->
+			<gd_item id="125002315" /><!-- Saira's Headband -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="65">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216568" /><!-- Saira Sharpeyes -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000919" /><!-- Saira's Sword -->
+			<gd_item id="100900696" /><!-- Saira's Greatsword -->
+			<gd_item id="100200819" /><!-- Saira's Dagger -->
+			<gd_item id="100100689" /><!-- Saira's Warhammer -->
+			<gd_item id="100500710" /><!-- Saira's Jewel -->
+			<gd_item id="100600767" /><!-- Saira's Tome -->
+			<gd_item id="101300666" /><!-- Saira's Spear -->
+			<gd_item id="101500710" /><!-- Saira's Staff -->
+			<gd_item id="101700734" /><!-- Saira's Longbow -->
+			<gd_item id="102000672" /><!-- Saira's Harp -->
+			<gd_item id="101800638" /><!-- Saira's Pistol -->
+			<gd_item id="101900637" /><!-- Saira's Aethercannon -->
+			<gd_item id="102100568" /><!-- Saira's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216568" /><!-- Saira Sharpeyes -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="152012552" /><!-- Core of Saira Sharpeyes -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216569" /><!-- Highpriest Heka -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000918" /><!-- Heka's Sword -->
+			<gd_item id="100900695" /><!-- Heka's Greatsword -->
+			<gd_item id="100200818" /><!-- Heka's Dagger -->
+			<gd_item id="100100688" /><!-- Heka's Warhammer -->
+			<gd_item id="100500709" /><!-- Heka's Jewel -->
+			<gd_item id="100600766" /><!-- Heka's Tome -->
+			<gd_item id="101300665" /><!-- Heka's Spear -->
+			<gd_item id="101500709" /><!-- Heka's Staff -->
+			<gd_item id="101700733" /><!-- Heka's Longbow -->
+			<gd_item id="102000671" /><!-- Heka's Harp -->
+			<gd_item id="101800637" /><!-- Heka's Pistol -->
+			<gd_item id="101900636" /><!-- Heka's Aethercannon -->
+			<gd_item id="102100567" /><!-- Heka's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216569" /><!-- Highpriest Heka -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101087" /><!-- Heka's Tunic -->
+			<gd_item id="110301036" /><!-- Heka's Jerkin -->
+			<gd_item id="110501004" /><!-- Heka's Hauberk -->
+			<gd_item id="110600984" /><!-- Heka's Breastplate -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216569" /><!-- Highpriest Heka -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000959" /><!-- Heka's Corundum Necklace -->
+			<gd_item id="121000960" /><!-- Heka's Turquoise Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216569" /><!-- Highpriest Heka -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100994" /><!-- Heka's Leggings -->
+			<gd_item id="113301007" /><!-- Heka's Breeches -->
+			<gd_item id="113500977" /><!-- Heka's Chausses -->
+			<gd_item id="113600948" /><!-- Heka's Greaves -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="65">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216561" /><!-- Skully Crimsonshell -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000957" /><!-- Skully's Corundum Necklace -->
+			<gd_item id="121000958" /><!-- Skully's Turquoise Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216561" /><!-- Skully Crimsonshell -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="113100993" /><!-- Skully's Leggings -->
+			<gd_item id="113301006" /><!-- Skully's Breeches -->
+			<gd_item id="113500976" /><!-- Skully's Chausses -->
+			<gd_item id="113600947" /><!-- Skully's Greaves -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" chance="30">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216561" /><!-- Skully Crimsonshell -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001188" /><!-- Skully's Corundum Ring -->
+			<gd_item id="122001189" /><!-- Skully's Turquoise Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216556" /><!-- Little Lost May -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101022" /><!-- May's Shoes -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216564" /><!-- The Administrator -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001184" /><!-- Administrator's Corundum Ring -->
+			<gd_item id="122001185" /><!-- Administrator's Turquoise Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216564" /><!-- The Administrator -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001050" /><!-- Administrator's Leather Belt -->
+			<gd_item id="123001051" /><!-- Administrator's Sash -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216564" /><!-- The Administrator -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002319" /><!-- Administrator's Hat -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" chance="95">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216576" /><!-- Ragnarok -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000963" /><!-- Ragnarok's Corundum Necklace -->
+			<gd_item id="121000964" /><!-- Ragnarok's Turquoise Necklace -->
+			<gd_item id="123001052" /><!-- Ragnarok's Leather Belt -->
+			<gd_item id="123001053" /><!-- Ragnarok's Sash -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Epic)" chance="85">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216576" /><!-- Ragnarok -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001105" /><!-- Ragnarok's Corundum Earrings -->
+			<gd_item id="120001106" /><!-- Ragnarok's Turquoise Earrings -->
+			<gd_item id="122001190" /><!-- Ragnarok's Corundum Ring -->
+			<gd_item id="122001191" /><!-- Ragnarok's Turquoise Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216550" /><!-- Camu The Forestkeeper -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100980" /><!-- Camu's Gloves -->
+			<gd_item id="111300985" /><!-- Camu's Vambrace -->
+			<gd_item id="111500972" /><!-- Camu's Handguards -->
+			<gd_item id="111600963" /><!-- Camu's Gauntlets -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216550" /><!-- Camu The Forestkeeper -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001182" /><!-- Camu's Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="50">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216550" /><!-- Camu The Forestkeeper -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000979" /><!-- Camu's Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216547" /><!-- Alpha Kuruku -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001044" /><!-- Kuruku's Earrings -->
+			<gd_item id="123001044" /><!-- Kuruku's Leather Belt -->
+			<gd_item id="123001045" /><!-- Kuruku's Sash -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Legend)" chance="55">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216547" /><!-- Alpha Kuruku -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002309" /><!-- Kuruku's Hat -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216554" /><!-- Windchaser -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125002314" /><!-- Windchaser's Hairpin -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216554" /><!-- Windchaser -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114101023" /><!-- Windchaser's Shoes -->
+			<gd_item id="114301043" /><!-- Windchaser's Boots -->
+			<gd_item id="114500986" /><!-- Windchaser's Brogans -->
+			<gd_item id="114600945" /><!-- Windchaser's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220070000" /><!-- Gelkmaros -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="216554" /><!-- Windchaser -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122001186" /><!-- Windchaser's Corundum Ring -->
+			<gd_item id="122001187" /><!-- Windchaser's Turquoise Ring -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

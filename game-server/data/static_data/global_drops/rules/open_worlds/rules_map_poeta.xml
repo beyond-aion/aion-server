@@ -128,4 +128,32 @@
 			<gd_item id="162000001" /><!-- Carrot Juice of Paruru -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Common)" chance="80">
+		<gd_maps>
+			<gd_map map_id="210010000" /><!-- Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210162" /><!-- Supervisor Duaguru -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120001302" /><!-- Duaguru's Earrings -->
+			<gd_item id="120001303" /><!-- Duaguru's Aether Earrings -->
+			<gd_item id="122001456" /><!-- Duaguru's Aether Ring -->
+			<gd_item id="122001455" /><!-- Duaguru's Ring -->
+			<gd_item id="121001205" /><!-- Duaguru's Necklace -->
+			<gd_item id="121001206" /><!-- Duaguru's Aether Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
+		<gd_maps>
+			<gd_map map_id="210010000" /><!-- Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210162" /><!-- Supervisor Duaguru -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123001266" /><!-- Duaguru's Belt -->
+			<gd_item id="123001265" /><!-- Duaguru's Leather Belt -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

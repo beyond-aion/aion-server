@@ -210,7 +210,9 @@
 			<gd_npc npc_id="211265"/><!-- Medeus the Vile -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="102000507"/><!-- Medeus' Harp -->
+			<gd_item id="102000507" /><!-- Medeus' Harp -->
+			<gd_item id="100600478" /><!-- Medeus' Tome -->
+			<gd_item id="102100475" /><!-- Akairun's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Legend)" chance="30">
@@ -415,15 +417,19 @@
 			<gd_npc npc_id="212314"/><!-- Bollvig Blackheart -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="100200561"/><!-- Black Heart's Dagger -->
-			<gd_item id="102000513"/><!-- Black Heart's Harp -->
-			<gd_item id="101900483"/><!-- Black Heart's Aethercannon -->
-			<gd_item id="101800910"/><!-- Black Heart's Pistol -->
-			<gd_item id="100000589"/><!-- Black Heart's Sword -->
-			<gd_item id="100100454"/><!-- Black Heart's Warhammer -->
-			<gd_item id="100500451"/><!-- Black Heart's Jewel -->
-			<gd_item id="100600484"/><!-- Black Heart's Tome -->
-			<gd_item id="100900447"/><!-- Black Heart's Greatsword -->
+			<gd_item id="100200561" /><!-- Black Heart's Dagger -->
+			<gd_item id="102000513" /><!-- Black Heart's Harp -->
+			<gd_item id="101900483" /><!-- Black Heart's Aethercannon -->
+			<gd_item id="101800910" /><!-- Black Heart's Pistol -->
+			<gd_item id="100000589" /><!-- Black Heart's Sword -->
+			<gd_item id="100100454" /><!-- Black Heart's Warhammer -->
+			<gd_item id="100500451" /><!-- Black Heart's Jewel -->
+			<gd_item id="100600484" /><!-- Black Heart's Tome -->
+			<gd_item id="100900447" /><!-- Black Heart's Greatsword -->
+			<gd_item id="101300436" /><!-- Black Heart's Spear -->
+			<gd_item id="101500453" /><!-- Black Heart's Staff -->
+			<gd_item id="101700466" /><!-- Black Heart's Longbow -->
+			<gd_item id="102100765" /><!-- Anuhart Elite's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Shield (Rare)" chance="50">
@@ -594,6 +600,17 @@
 			<gd_item id="114300755"/><!-- Furol's Boots -->
 			<gd_item id="114500721"/><!-- Furol's Brogans -->
 			<gd_item id="114600681"/><!-- Furol's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50"><!-- TODO Sykra chance -->
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212127"/><!-- Furol the Gray -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000670" /><!-- Furol's Necklace -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" chance="50">
@@ -912,8 +929,14 @@
 			<gd_npc npc_id="212314"/><!-- Bollvig Blackheart -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110100809"/><!-- Bollvig's Tunic -->
-			<gd_item id="113100731"/><!-- Bollvig's Leggings -->
+			<gd_item id="110100809" /><!-- Bollvig's Tunic -->
+			<gd_item id="113100731" /><!-- Bollvig's Leggings -->
+			<gd_item id="110300765" /><!-- Bollvig's Jerkin -->
+			<gd_item id="113300748" /><!-- Bollvig's Breeches -->
+			<gd_item id="110500741" /><!-- Bollvig's Hauberk -->
+			<gd_item id="113500721" /><!-- Bollvig's Chausses -->
+			<gd_item id="110600729" /><!-- Bollvig's Breastplate -->
+			<gd_item id="113600695" /><!-- Bollvig's Greaves -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
@@ -1030,6 +1053,17 @@
 			<gd_item id="120000742"/><!-- Lambos' Sapphire Earrings -->
 			<gd_item id="122000792"/><!-- Lambos' Sapphire Ring -->
 			<gd_item id="122000793"/><!-- Lambos' Diamond Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Headgear (Rare)" chance="50">
+		<gd_maps>
+			<gd_map map_id="210040000"/><!-- Heiron -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212132"/><!-- Lambos -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="125001566" /><!-- Boatswain's Headband -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="100">
@@ -1363,7 +1397,10 @@
 			<gd_npc npc_id="212314"/><!-- Bollvig Blackheart -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="125001586"/><!-- Punishment Hat -->
+			<gd_item id="125001586" /><!-- Punishment Hat -->
+			<gd_item id="125001587" /><!-- Punishment Chain Helm -->
+			<gd_item id="125001585" /><!-- Punishment Headband -->
+			<gd_item id="125001588" /><!-- Punishment Helm -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Belt (Rare)" chance="50">

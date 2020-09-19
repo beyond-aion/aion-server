@@ -369,6 +369,7 @@
 		<gd_ratings>
 			<gd_rating rating="NORMAL" />
 			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
 		</gd_ratings>
 		<gd_items>
 			<!-- Level 15 -->

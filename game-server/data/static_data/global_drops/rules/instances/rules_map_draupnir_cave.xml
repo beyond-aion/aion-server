@@ -154,7 +154,7 @@
 			<gd_item id="122000763" /><!-- Dragashum's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" chance="40">
+	<gd_rule rule_name="Named Chest (Legend)" chance="45">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -162,8 +162,18 @@
 			<gd_npc npc_id="213775" /><!-- Greatscholar Jaadis -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112500601" /><!-- Bakarma Elite's Spaulders -->
-			<gd_item id="112600609" /><!-- Bakarma Elite's Shoulderplates -->
+			<gd_item id="188053266" /><!-- Jaadis' Pants Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Chest (Unique)" chance="40">
+		<gd_maps>
+			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="213775" /><!-- Greatscholar Jaadis -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053260" /><!-- Jaadis' Fabled Pants Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
@@ -188,7 +198,7 @@
 			<gd_item id="120000710" /><!-- Afrane's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" chance="45">
+	<gd_rule rule_name="Named Chest (Legend)" chance="45">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -196,11 +206,10 @@
 			<gd_npc npc_id="213776" /><!-- Instructor Afrane -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113500650" /><!-- Bakarma Elite's Chausses -->
-			<gd_item id="113600625" /><!-- Bakarma Elite's Greaves -->
+			<gd_item id="188053267" /><!-- Afrane's Shoe Box -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Chest (Unique)" chance="40">
 		<gd_maps>
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 		</gd_maps>
@@ -208,12 +217,7 @@
 			<gd_npc npc_id="213776" /><!-- Instructor Afrane -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="114100680" /><!-- Sunrise Shoes -->
-			<gd_item id="114300693" /><!-- Boots of Dark Dusk -->
-			<gd_item id="114301593" /><!-- Magic Boots of Dark Dusk -->
-			<gd_item id="114500659" /><!-- Deep Abyss Brogans -->
-			<gd_item id="114501596" /><!-- Deep Abyss Magic Brogans -->
-			<gd_item id="114600617" /><!-- Ice Black Sabatons -->
+			<gd_item id="188053267" /><!-- Afrane's Shoe Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
@@ -235,8 +239,7 @@
 			<gd_npc npc_id="213778" /><!-- Beautiful Lakshmi -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110100733" /><!-- Bakarma Elite's Tunic -->
-			<gd_item id="110300695" /><!-- Bakarma Elite's Jerkin -->
+			<gd_item id="188053268" /><!-- Lakshmi's Gloves Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" chance="40">
@@ -247,12 +250,7 @@
 			<gd_npc npc_id="213778" /><!-- Beautiful Lakshmi -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="111100653" /><!-- Sunrise Gloves -->
-			<gd_item id="111300655" /><!-- Vambrace of Dark Dusk -->
-			<gd_item id="111301527" /><!-- Magic Vambrace of Dark Dusk -->
-			<gd_item id="111500642" /><!-- Deep Abyss Handguards -->
-			<gd_item id="111501569" /><!-- Deep Abyss Magic Handguards -->
-			<gd_item id="111600632" /><!-- Ice Black Gauntlets -->
+			<gd_item id="188053262" /><!-- Lakshmi's Fabled Gloves Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
@@ -274,8 +272,7 @@
 			<gd_npc npc_id="213779" /><!-- Commander Nimbarka -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="110500672" /><!-- Bakarma Elite's Hauberk -->
-			<gd_item id="110600658" /><!-- Bakarma Elite's Breastplate -->
+			<gd_item id="188053269" /><!-- Nimbarka's Armor Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" chance="40">
@@ -286,12 +283,7 @@
 			<gd_npc npc_id="213779" /><!-- Commander Nimbarka -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100614" /><!-- Sunrise Pauldrons -->
-			<gd_item id="112300614" /><!-- Shoulderguards of Dark Dusk -->
-			<gd_item id="112301468" /><!-- Magic Shoulderguards of Dark Dusk -->
-			<gd_item id="112500602" /><!-- Deep Abyss Spaulders -->
-			<gd_item id="112501511" /><!-- Deep Abyss Magic Spaulders -->
-			<gd_item id="112600610" /><!-- Ice Black Shoulderplates -->
+			<gd_item id="188053263" /><!-- Nimbarka's Fabled Armor Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Legend)" chance="75">
@@ -386,8 +378,7 @@
 			<gd_npc npc_id="213802" /><!-- Kind Saraswati -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="113100661" /><!-- Bakarma Elite's Leggings -->
-			<gd_item id="113300677" /><!-- Bakarma Elite's Breeches -->
+			<gd_item id="188053264" /><!-- Saraswati's Fabled Shoulder Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" chance="40">
@@ -398,12 +389,7 @@
 			<gd_npc npc_id="213802" /><!-- Kind Saraswati -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="112100614" /><!-- Sunrise Pauldrons -->
-			<gd_item id="112300614" /><!-- Shoulderguards of Dark Dusk -->
-			<gd_item id="112301468" /><!-- Magic Shoulderguards of Dark Dusk -->
-			<gd_item id="112500602" /><!-- Deep Abyss Spaulders -->
-			<gd_item id="112501511" /><!-- Deep Abyss Magic Spaulders -->
-			<gd_item id="112600610" /><!-- Ice Black Shoulderplates -->
+			<gd_item id="188053264" /><!-- Saraswati's Fabled Shoulder Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" chance="50">

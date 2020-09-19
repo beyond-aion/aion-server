@@ -76,6 +76,7 @@
 		<gd_items>
 			<gd_item id="101500522" /><!-- Ursanafi's Staff -->
 			<gd_item id="100100524" /><!-- Ursanafi's Warhammer -->
+			<gd_item id="102100504" /><!-- Inshar's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="70">

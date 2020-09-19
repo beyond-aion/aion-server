@@ -53,6 +53,9 @@
 			<gd_npc npc_id="210312" /><!-- Kumbacha the Shaman -->
 			<gd_npc npc_id="210314" /><!-- Scout Takata -->
 			<gd_npc npc_id="210315" /><!-- Smackstopper Tambaku -->
+			<gd_npc npc_id="210310" /><!-- Blindeye -->
+			<gd_npc npc_id="210308" /><!-- Hakka The Bigmouth -->
+			<gd_npc npc_id="210309" /><!-- Scrapper Tunkara -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 20 -->
@@ -210,6 +213,7 @@
 			<!-- Level 18 -->
 			<gd_item id="100200236" /><!-- Hakka's Dagger -->
 			<gd_item id="101800262" /><!-- Hakka's Pistol -->
+			<gd_item id="102100246" /><!-- Tunkara's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" chance="50">

@@ -119,6 +119,70 @@
 			<gd_item id="125004021"/><!-- Darok's Mask -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Manastone Level 70 (Unique)" chance="10">
+		<gd_maps>
+			<gd_map map_id="600090000" /><!-- Kaldor -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234305"/><!-- Arrogant Darok -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="167020064" /><!-- Ancient Manastone: Magical Accuracy +20 -->
+			<gd_item id="167020065" /><!-- Ancient Manastone: Magic Boost +32 -->
+			<gd_item id="167020060" /><!-- Ancient Manastone: Physical Critical Resistance +22 -->
+			<gd_item id="167020061" /><!-- Ancient Manastone: Magical Critical Resistance +9 -->
+			<gd_item id="167020062" /><!-- Ancient Manastone: Physical Defense +80 -->
+			<gd_item id="167020063" /><!-- Ancient Manastone: Attack +7 -->
+			<gd_item id="167020056" /><!-- Ancient Manastone: Accuracy +33 -->
+			<gd_item id="167020057" /><!-- Ancient Manastone: Evasion +23 -->
+			<gd_item id="167020058" /><!-- Ancient Manastone: Parry +33 -->
+			<gd_item id="167020059" /><!-- Ancient Manastone: Block +33 -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Manastone Level 70 (Epic)" chance="5">
+		<gd_maps>
+			<gd_map map_id="600090000" /><!-- Kaldor -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234305"/><!-- Arrogant Darok -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="167020080" /><!-- Ancient Manastone: Magical Accuracy +22 -->
+			<gd_item id="167020081" /><!-- Ancient Manastone: Magic Boost +35 -->
+			<gd_item id="167020082" /><!-- Ancient Manastone: Magic Suppression +50 -->
+			<gd_item id="167020083" /><!-- Ancient Manastone: Healing Boost +6 -->
+			<gd_item id="167020076" /><!-- Ancient Manastone: Spell Resist +11 -->
+			<gd_item id="167020077" /><!-- Ancient Manastone: Physical Defense +100 -->
+			<gd_item id="167020078" /><!-- Ancient Manastone: Resist Magic +20 -->
+			<gd_item id="167020079" /><!-- Ancient Manastone: Attack +8 -->
+			<gd_item id="167020072" /><!-- Ancient Manastone: Accuracy +35 -->
+			<gd_item id="167020073" /><!-- Ancient Manastone: Evasion +24 -->
+			<gd_item id="167020074" /><!-- Ancient Manastone: Crit Strike +24 -->
+			<gd_item id="167020075" /><!-- Ancient Manastone: Crit Spell +9 -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Power Shards" chance="100">
+		<gd_maps>
+			<gd_map map_id="600090000" /><!-- Kaldor -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234305"/><!-- Arrogant Darok -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="169000010" min_count="250" /><!-- Superior Power Shard -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Coins" chance="100">
+		<gd_maps>
+			<gd_map map_id="600090000" /><!-- Kaldor -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234305"/><!-- Arrogant Darok -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000237" min_count="5" max_count="25" /><!-- Ancient Coin -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Material Burning Vitality" chance="3">
 		<gd_maps>
 			<gd_map map_id="600090000"/><!-- Kaldor -->

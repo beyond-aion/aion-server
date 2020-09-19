@@ -24,6 +24,13 @@
 			<gd_npc_group group="NEUTH2" />
 			<gd_npc_group group="OCTASIDE" />
 			<gd_npc_group group="SPAKLE" />
+			<gd_npc_group group="MERDION" />
+			<gd_npc_group group="SPAKY" />
+			<gd_npc_group group="SCORPION" />
+			<gd_npc_group group="NEUTL2" />
+			<gd_npc_group group="POTCRAB" />
+			<gd_npc_group group="DRAKAN_WORKER" />
+			<gd_npc_group group="FLYINGWORM" />
 		</gd_npc_groups>
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA_HIGH" />
@@ -62,6 +69,19 @@
 			<gd_npc_group group="RHINOCE" />
 			<gd_npc_group group="SALIVADO" />
 			<gd_npc_group group="VARANUS_ALLIGATOR" />
+			<gd_npc_group group="ZAIF" />
+			<gd_npc_group group="ETTIN" />
+			<gd_npc_group group="FLOWERWORM" />
+			<gd_npc_group group="WATERWORM" />
+			<gd_npc_group group="POPOKUWIZARD" />
+			<gd_npc_group group="POPOKUASSASSIN" />
+			<gd_npc_group group="POPOKUFIGHTER" />
+			<gd_npc_group group="POPOKUPRIEST" />
+			<gd_npc_group group="BAKU" />
+			<gd_npc_group group="HIIV" />
+			<gd_npc_group group="MANDURIT" />
+			<gd_npc_group group="BAT" />
+			<gd_npc_group group="CRESTLICH" />
 		</gd_npc_groups>
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA_HIGH" />
@@ -92,6 +112,7 @@
 			<gd_npc_group group="STATUE_M" />
 			<gd_npc_group group="STONEGOLEM" />
 			<gd_npc_group group="ZOMBIE" />
+			<gd_npc_group group="MIMIC" />
 		</gd_npc_groups>
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA_HIGH" />
@@ -158,6 +179,9 @@
 			<gd_npc_group group="ROTTENTREE" />
 			<gd_npc_group group="SLIME" />
 			<gd_npc_group group="XIPETO" />
+			<gd_npc_group group="RAFFLESIA" />
+			<gd_npc_group group="MIMIC_PLANTS" />
+			<gd_npc_group group="FUNGY" />
 		</gd_npc_groups>
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA_HIGH" />
@@ -255,6 +279,8 @@
 			<gd_npc_group group="UNDEADLIGHT_FI" />
 			<gd_npc_group group="UNDEADLIGHT_WI" />
 			<gd_npc_group group="VAMPIRE" />
+			<gd_npc_group group="MILLIPEDE" />
+			<gd_npc_group group="MILLIPEDE" />
 		</gd_npc_groups>
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA_HIGH" />
@@ -285,6 +311,8 @@
 			<gd_npc_group group="CRITON" />
 			<gd_npc_group group="FRILLFAIMAM" />
 			<gd_npc_group group="SPALLER" />
+			<gd_npc_group group="MILLIPEDE" />
+			<gd_npc_group group="STARTURTLE" />
 		</gd_npc_groups>
 		<gd_worlds>
 			<gd_world wd_type="BALAUREA_HIGH" />

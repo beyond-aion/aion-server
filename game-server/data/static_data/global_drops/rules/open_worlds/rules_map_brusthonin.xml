@@ -214,6 +214,7 @@
 		<gd_items>
 			<gd_item id="100200662" /><!-- Agueria's Dagger -->
 			<gd_item id="101800561" /><!-- Agueria's Pistol -->
+			<gd_item id="102100513" /><!-- Devahanson's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" chance="50">

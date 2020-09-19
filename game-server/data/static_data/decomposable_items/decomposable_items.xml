@@ -29348,11 +29348,56 @@
 	<decomposable item_id="188053257" /><!-- [Event] Ancient Spirit's Supremacy Hat Box -->
 	<decomposable item_id="188053258" /><!-- [Event] Ancient Spirit's Leather Hat Box -->
 	<decomposable item_id="188053259" /><!-- [Event] Ancient Spirit's Cloth Bandana Box -->
-	<decomposable item_id="188053260" /><!-- Jaadis' Fabled Pants Box -->
-	<decomposable item_id="188053261" /><!-- Afrane's Fabled Shoe Box -->
-	<decomposable item_id="188053262" /><!-- Lakshmi's Fabled Gloves Box -->
-	<decomposable item_id="188053263" /><!-- Nimbarka's Fabled Armor Box -->
-	<decomposable item_id="188053264" /><!-- Saraswati's Fabled Shoulder Box -->
+	<decomposable item_id="188053260" selectable="true"><!-- Jaadis' Fabled Pants Box -->
+		<items>
+			<item id="113300678" /><!-- Breeches of Dark Dusk -->
+			<item id="113501587" /><!-- Chausses of the Abyssal Depths -->
+			<item id="113500651" /><!-- Deep Abyss Chain Breeches -->
+			<item id="113600626" /><!-- Ice Black Plate Greaves -->
+			<item id="113301555" /><!-- Leather Leggings of Dark Twilight -->
+			<item id="113100662" /><!-- Sunrise Cloth Breeches -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053261" selectable="true"><!-- Afrane's Fabled Shoe Box -->
+		<items>
+			<item id="114100680" /><!-- Sunrise Shoes -->
+			<item id="114300693" /><!-- Boots of Dark Dusk -->
+			<item id="114301593" /><!-- Magic Boots of Dark Dusk -->
+			<item id="114500659" /><!-- Deep Abyss Brogans -->
+			<item id="114501596" /><!-- Deep Abyss Magic Brogans -->
+			<item id="114600617" /><!-- Ice Black Sabatons -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053262" selectable="true"><!-- Lakshmi's Fabled Gloves Box -->
+		<items>
+			<item id="111100653" /><!-- Sunrise Gloves -->
+			<item id="111300655" /><!-- Vambrace of Dark Dusk -->
+			<item id="111301527" /><!-- Magic Vambrace of Dark Dusk -->
+			<item id="111500642" /><!-- Deep Abyss Handguards -->
+			<item id="111501569" /><!-- Deep Abyss Magic Handguards -->
+			<item id="111600632" /><!-- Ice Black Gauntlets -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053263" selectable="true"><!-- Nimbarka's Fabled Armor Box -->
+		<items>
+			<item id="112100614" /><!-- Sunrise Pauldrons -->
+			<item id="112300614" /><!-- Shoulderguards of Dark Dusk -->
+			<item id="112301468" /><!-- Magic Shoulderguards of Dark Dusk -->
+			<item id="112500602" /><!-- Deep Abyss Spaulders -->
+			<item id="112501511" /><!-- Deep Abyss Magic Spaulders -->
+			<item id="112600610" /><!-- Ice Black Shoulderplates -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053264" selectable="true"><!-- Saraswati's Fabled Shoulder Box -->
+		<items>
+			<item id="112100614" /><!-- Sunrise Pauldrons -->
+			<item id="112300614" /><!-- Shoulderguards of Dark Dusk -->
+			<item id="112301468" /><!-- Magic Shoulderguards of Dark Dusk -->
+			<item id="112500602" /><!-- Deep Abyss Spaulders -->
+			<item id="112501511" /><!-- Deep Abyss Magic Spaulders -->
+			<item id="112600610" /><!-- Ice Black Shoulderplates -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053265" selectable="true"><!-- Bakarma's Fabled Weapon Box -->
 		<items>
 			<item id="100000818" /><!-- Commander Bakarma's Sword -->

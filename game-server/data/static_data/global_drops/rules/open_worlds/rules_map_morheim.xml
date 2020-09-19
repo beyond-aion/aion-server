@@ -215,6 +215,7 @@
 		<gd_items>
 			<gd_item id="100500199" /><!-- Natama's Jewel -->
 			<gd_item id="101500199" /><!-- Natama's Staff -->
+			<gd_item id="102100268" /><!-- Zubaba's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" chance="50">
@@ -284,6 +285,8 @@
 			<gd_item id="100600211" /><!-- Taran's Tome -->
 			<gd_item id="100000268" /><!-- Taran's Sword -->
 			<gd_item id="101500197" /><!-- Taran's Staff -->
+			<gd_item id="102000293" /><!-- Tjorvi's Harp -->
+			<gd_item id="101900283" /><!-- Tjorvi's Aethercannon -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" chance="50">
@@ -635,6 +638,7 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="100100193" /><!-- Zifbaum's Dipper -->
+			<gd_item id="102100273" /><!-- King's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="20">
@@ -930,6 +934,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="212817" /><!-- Klaw Spawnmaster -->
+			<gd_npc npc_id="212816" /><!-- Klaw Spawnguard -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 26 -->
@@ -962,10 +967,12 @@
 		<gd_npcs>
 			<gd_npc npc_id="212817" /><!-- Klaw Spawnmaster -->
 			<gd_npc npc_id="212818" /><!-- Klaw Spawnlord -->
+			<gd_npc npc_id="212816" /><!-- Klaw Spawnguard -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 26 -->
 			<gd_item id="120000513" /><!-- Worker Klaw's Earrings -->
+			<gd_item id="120000514" /><!-- Fighter Klaw's Earrings -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
@@ -973,11 +980,13 @@
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="212818" /><!-- Klaw Spawnlord -->
 			<gd_npc npc_id="212820" /><!-- Klaw Comitatus -->
 		</gd_npcs>
 		<gd_items>
 			<!-- Level 26 -->
 			<gd_item id="122000553" /><!-- Guard Captain's Ring -->
+			<gd_item id="122000554" /><!-- Bodyguard Captain's Ring -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Weapon (Rare)" chance="50">
@@ -993,6 +1002,7 @@
 			<gd_item id="100500197" /><!-- Klawtun's Jewel -->
 			<gd_item id="100100183" /><!-- Klawtun's Warhammer -->
 			<gd_item id="101300188" /><!-- Klawtun's Spear -->
+			<gd_item id="102100264" /><!-- Taran's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" chance="50">
@@ -1220,7 +1230,7 @@
 			<gd_item id="122000557" /><!-- Ilaina's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="50">
+	<gd_rule rule_name="Named Material" chance="100">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
 		</gd_maps>
@@ -1228,9 +1238,42 @@
 			<gd_npc npc_id="212828" /><!-- Sawteeth Lehul -->
 		</gd_npcs>
 		<gd_items>
-			<!-- Level 32 -->
-			<gd_item id="112300370" /><!-- Arkanis Shoulderguards -->
-			<gd_item id="112600413" /><!-- Arkanis Shoulderplates -->
+			<gd_item id="152012002" /><!-- Wriggot Scale -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="100">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212828" /><!-- Sawteeth Lehul -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182004507" /><!-- Wriggot Fluid -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" chance="100">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212828" /><!-- Sawteeth Lehul -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="101700495" /><!-- Wriggot's Longbow -->
+			<gd_item id="102000938" /><!-- Wriggot's Harp -->
+			<gd_item id="101900055" /><!-- Wriggot's Aethercannon -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="35">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212828" /><!-- Sawteeth Lehul -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500201" /><!-- Wriggot's Jewel -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
@@ -1241,7 +1284,6 @@
 			<gd_npc npc_id="212828" /><!-- Sawteeth Lehul -->
 		</gd_npcs>
 		<gd_items>
-			<!-- Level 32 -->
 			<gd_item id="122000558" /><!-- Lehul's Ring -->
 		</gd_items>
 	</gd_rule>
@@ -1404,6 +1446,17 @@
 			<gd_item id="122000563" /><!-- Kruk's Ring -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212870" /><!-- Big Fang Kruk -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000443" /><!-- Sparkie Carapace Shield -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
@@ -1424,6 +1477,43 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="125001117" /><!-- Hapanunu's Water Glasses -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212659" /><!-- Ginseng Digger Boss -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000271" /><!-- Ancient Gingseng´s Sword -->
+			<gd_item id="100600215" /><!-- Ancient Gingseng´s Tome -->
+			<gd_item id="101500200" /><!-- Gingseng Digger´s Staff -->
+			<gd_item id="102000297" /><!-- Age-old Ginseng Stringed Instrument -->
+			<gd_item id="115000437" /><!-- Ancient Ginseng´s Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212832" /><!-- Testivorus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500201" /><!-- Wriggot's Jewel -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212832" /><!-- Testivorus -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000578" /><!-- Wriggot's Belt -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

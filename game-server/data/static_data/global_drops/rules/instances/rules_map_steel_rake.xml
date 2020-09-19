@@ -110,6 +110,20 @@
 			<gd_item id="188051413" /><!-- Koakoa's Fabled Pants Chest -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
+		<gd_maps>
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215070" /><!-- Chief Gunner Koakoa -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112100828" /><!-- Shulack Pirate's Pauldrons -->
+			<gd_item id="112300822" /><!-- Shulack Pirate's Shoulderguards -->
+			<gd_item id="112500813" /><!-- Shulack Pirate's Spaulders -->
+			<gd_item id="112600824" /><!-- Shulack Pirate's Shoulderplates -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Armor (Rare)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
@@ -248,6 +262,20 @@
 			<gd_item id="123000938" /><!-- Genie's Belt -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
+		<gd_maps>
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215081" /><!-- Brass-Eye Grogget -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100976" /><!-- Shulack Pirate's Tunic -->
+			<gd_item id="110300921" /><!-- Shulack Pirate's Jerkin -->
+			<gd_item id="110500889" /><!-- Shulack Pirate's Hauberk -->
+			<gd_item id="110600873" /><!-- Shulack Pirate's Breastplate -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Headband (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
@@ -259,8 +287,11 @@
 			<gd_item id="125002030" /><!-- Grogget's Hat -->
 			<gd_item id="125002014" /><!-- Grogget's Headband -->
 			<gd_item id="125002017" /><!-- Grogget's Helm -->
+			<gd_item id="125002016" /><!-- Grogget's Chain Helm -->
+			<gd_item id="125002015" /><!-- Grogget's Hat -->
 		</gd_items>
 	</gd_rule>
+
 	<gd_rule rule_name="Named Headband (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
@@ -275,6 +306,32 @@
 			<gd_item id="125001982" /><!-- Menekiki's Helm -->
 		</gd_items>
 	</gd_rule>
+
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
+		<gd_maps>
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215072" /><!-- Firelord Kadomch -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="111100872" /><!-- Shulack Sailor's Gloves -->
+			<gd_item id="111500863" /><!-- Shulack Sailor's Handguards -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Legend)" chance="35">
+		<gd_maps>
+			<gd_map map_id="300100000" /><!-- Steel_Rake -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215072" /><!-- Firelord Kadomch -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="114100906" /><!-- Shulack Pirate's Shoes -->
+			<gd_item id="114500874" /><!-- Shulack Pirate's Brogans -->
+		</gd_items>
+	</gd_rule>
+
 	<gd_rule rule_name="Named Souvenir" chance="50">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
