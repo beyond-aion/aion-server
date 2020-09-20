@@ -552,7 +552,7 @@ public class AttackUtil {
 	 * @return
 	 */
 	public static int calculateMagicalOverTimeSkillResult(Effect effect, int skillDamage, SkillElement element, int position, boolean useMagicBoost,
-		int criticalProb, int critAddDmg, boolean applyMcrit) {
+		int criticalProb, int critAddDmg) {
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
 		int damage;
@@ -569,7 +569,7 @@ public class AttackUtil {
 			AttackStatus status = effect.getAttackStatus();
 			// calculate attack status only if it has not been forced already
 			if (status == AttackStatus.NORMALHIT && position == 1)
-				status = calculateMagicalStatus(effector, effected, criticalProb, true, applyMcrit);
+				status = calculateMagicalStatus(effector, effected, criticalProb, true, effect.getSkillTemplate().isMcritApplied());
 			switch (status) {
 				case CRITICAL:
 					damage = (int) calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg,

@@ -484,7 +484,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			place = 5;
 		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_2_300320000"), player)) { // stage 5
 			place = 6;
-		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_300320000"), player)) { // stage 6
+		} else if (isInZone(ZoneName.get("ILLUSION_STADIUM_7_300320000"), player)) { // stage 6
 			place = 7;
 		}
 		getPlayerReward(player.getObjectId()).setSpawnPosition(place);
