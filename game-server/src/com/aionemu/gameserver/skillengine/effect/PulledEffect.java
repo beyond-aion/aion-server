@@ -59,12 +59,12 @@ public class PulledEffect extends EffectTemplate {
 			if (effected instanceof Player)
 				((Player) effected).getFlyController().onStopGliding();
 		}
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PULLED);
+		effect.setAbnormal(AbnormalState.PULLED);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
 		PacketSendUtility.broadcastPacketAndReceive(effected,
 			new SM_FORCED_MOVE(effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector(), effected.getObjectId(), effect.getTargetX(),
 				effect.getTargetY(), effect.getTargetZ()));
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PULLED);
-		effect.setAbnormal(AbnormalState.PULLED);
 	}
 
 	@Override

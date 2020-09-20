@@ -44,11 +44,11 @@ public class StaggerEffect extends EffectTemplate {
 		if (effected instanceof Player)
 			((Player) effected).getFlyController().onStopGliding();
 		effected.getEffectController().removeParalyzeEffects();
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STAGGER);
+		effect.setAbnormal(AbnormalState.STAGGER);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(),
 			new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STAGGER);
-		effect.setAbnormal(AbnormalState.STAGGER);
 	}
 
 	@Override

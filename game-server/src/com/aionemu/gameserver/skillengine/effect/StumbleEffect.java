@@ -45,11 +45,11 @@ public class StumbleEffect extends EffectTemplate {
 		effected.getEffectController().removeParalyzeEffects();
 		effected.getEffectController().removeStunEffects();
 		// effected.getMoveController().abortMove();
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUMBLE);
+		effect.setAbnormal(AbnormalState.STUMBLE);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(),
 			new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUMBLE);
-		effect.setAbnormal(AbnormalState.STUMBLE);
 	}
 
 	@Override
@@ -63,7 +63,7 @@ public class StumbleEffect extends EffectTemplate {
 
 		if (!super.calculate(effect, StatEnum.STUMBLE_RESISTANCE, SpellStatus.STUMBLE))
 			return;
-		effect.setSkillMoveType(SkillMoveType.STUMBLE);
+		effect.setSkillMoveType(SkillMoveType.STUMBLE_OR_OPENAERIAL);
 	}
 
 	@Override
