@@ -10,7 +10,11 @@ public class QueuedNpcSkillTemplate extends NpcSkillTemplate {
 	}
 
 	public QueuedNpcSkillTemplate(int id, int lv, int prob, int cd, int nextSkillTime) {
-		this(id, lv, prob, cd, nextSkillTime, NpcSkillTargetAttribute.MOST_HATED, 0, 0, 0, 0, ConjunctionType.AND, null);
+		this(id, lv, prob, cd, nextSkillTime, NpcSkillTargetAttribute.MOST_HATED);
+	}
+
+	public QueuedNpcSkillTemplate(int id, int lv, int prob, int cd, int nextSkillTime, NpcSkillTargetAttribute npcSkillTargetAttribute) {
+		this(id, lv, prob, cd, nextSkillTime, npcSkillTargetAttribute, 0, 0, 0, 0, ConjunctionType.AND, null);
 	}
 
 	public QueuedNpcSkillTemplate(int id, int lv, int prob, int cd, int nextSkillTime, NpcSkillTargetAttribute target, int minHp, int maxHp,
