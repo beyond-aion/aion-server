@@ -103,7 +103,7 @@
 			<gd_item id="113600804" /><!-- Clandestine Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" chance="65">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 		</gd_maps>
