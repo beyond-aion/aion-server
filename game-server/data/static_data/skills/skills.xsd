@@ -1422,7 +1422,7 @@
 	<xs:complexType name="TargetTeleportEffect">
 		<xs:complexContent>
 			<xs:extension base="Effect">
-				<xs:attribute name="same_map" type="xs:boolean" use="required" />
+				<xs:attribute name="alias_location" type="xs:string"/>
 				<xs:attribute name="distance" type="xs:int" use="required" />
 			</xs:extension>
 		</xs:complexContent>

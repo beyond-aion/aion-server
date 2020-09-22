@@ -144,4 +144,5 @@
 	<import file="world_maps.xml" />
 	<import file="world_raid/world_raids.xml" />
 	<import file="zones" singleRootTag="true" />
+	<import file="skills/alias_locations.xml" />
 </static_data>

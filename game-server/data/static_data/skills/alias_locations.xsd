@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="alias_locations" type="AliasLocations" />
+	<xs:complexType name="AliasLocations">
+		<xs:sequence>
+			<xs:element name="alias_location" type="AliasLocation" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AliasLocation">
+		<xs:sequence>
+			<xs:element name="alias_pos" type="AliasPosition" minOccurs="0" maxOccurs="unbounded" />
+		</xs:sequence>
+		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="world_id" type="xs:int" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="AliasPosition">
+		<xs:attribute name="x" type="xs:float" use="required"/>
+		<xs:attribute name="y" type="xs:float" use="required"/>
+		<xs:attribute name="z" type="xs:float" use="required"/>
+	</xs:complexType>
+</xs:schema>

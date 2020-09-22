@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<alias_locations>
+	<!-- Lower Udas Temple-->
+	<alias_location name="IDTemple_Low_Furnace_01" world_id="300160000">
+		<alias_pos x="529.252380" y="1297.261719" z="198"/>
+		<alias_pos x="530.399963" y="1297.261719" z="198"/>
+	</alias_location>
+	<!-- Transidium_Annex -->
+	<alias_location name="Alias_5" world_id="400030000">
+		<alias_pos x="489.59015" y="463.3067" z="675.85"/>
+		<alias_pos x="530.35266" y="463.7789" z="675.75"/>
+		<alias_pos x="559.3717" y="493.02136" z="675.85"/>
+		<alias_pos x="558.8116" y="532.8049" z="675.85"/>
+		<alias_pos x="529.26996" y="562.76263" z="675.75"/>
+		<alias_pos x="488.10117" y="562.2498" z="675.8"/>
+		<alias_pos x="459.52594" y="533.0261" z="676.1"/>
+		<alias_pos x="461.0773" y="491.3015" z="676"/>
+	</alias_location>
+</alias_locations>

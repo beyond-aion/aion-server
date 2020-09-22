@@ -65065,8 +65065,7 @@
 		<npc_skill id="21568" lv="65" prob="70" cd="20000" target="RANDOM" />
 		<npc_skill id="21569" lv="65" prob="80" max_hp="50" cd="24000" target="ME" />
 		<npc_skill id="21570" lv="65" prob="100" cd="24000" target="RANDOM" />
-		<!-- TODO: Distortion Blast - need fix for TargetTeleport effect -->
-		<npc_skill id="21573" lv="65" max_hp="75" prob="70" cd="24000" target="RANDOM" />
+		<npc_skill id="21573" lv="65" max_hp="75" prob="70" cd="24000" target="RANDOM" next_skill_time="9500"/>
 		<npc_skill id="21574" lv="65" prob="100" max_hp="35" prio="1" cd="60000" target="ME" next_skill_time="10000">
 			<spawn_npc npc_id="297195" />
 		</npc_skill>

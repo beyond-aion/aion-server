@@ -92,6 +92,7 @@
 	<xs:include schemaLocation="world_maps.xsd" />
 	<xs:include schemaLocation="world_raid/world_raids.xsd" />
 	<xs:include schemaLocation="zones/zones.xsd" />
+	<xs:include schemaLocation="skills/alias_locations.xsd" />
 	<xs:element name="static_data">
 		<xs:complexType>
 			<xs:sequence>
@@ -188,6 +189,7 @@
 					<xs:element ref="world_maps" minOccurs="0" />
 					<xs:element ref="world_raid_locations" minOccurs="0" />
 					<xs:element ref="zones" minOccurs="0" />
+					<xs:element ref="alias_locations" minOccurs="0" />
 				</xs:choice>
 			</xs:sequence>
 		</xs:complexType>

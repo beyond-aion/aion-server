@@ -117,6 +117,7 @@ public final class DataManager {
 	public static XMLQuests XML_QUESTS;
 	public static ZoneData ZONE_DATA;
 	public static LegionDominionData LEGION_DOMINION_DATA;
+	public static SkillAliasLocationData SKILL_ALIAS_LOCATION_DATA;
 	private static Future<?> xmlValidationTask;
 
 	/**
@@ -221,6 +222,7 @@ public final class DataManager {
 		WORLD_RAID_DATA = data.worldRaidData;
 		KILL_BOUNTY_DATA = data.killBountyData;
 		LEGION_DOMINION_DATA = data.legionDominionData;
+		SKILL_ALIAS_LOCATION_DATA = data.skillAliasLocationData;
 		xmlValidationTask = data.getValidationTask();
 		data.waitForAfterUnmarshalTasksToFinish();
 
