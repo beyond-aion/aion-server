@@ -636,7 +636,7 @@
 			<gd_item id="188053339"/><!-- Ancestor's Reward Bundle -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor Material" chance="100">
+	<gd_rule rule_name="Named Armor Material" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
@@ -649,7 +649,7 @@
 			<gd_item id="152012636"/><!-- Forest Denku's Hand Crux -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor Material" chance="100">
+	<gd_rule rule_name="Named Armor Material" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
@@ -662,7 +662,7 @@
 			<gd_item id="152012638"/><!-- Forest Denku's Head Crux -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor Material" chance="100">
+	<gd_rule rule_name="Named Armor Material" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
@@ -675,7 +675,7 @@
 			<gd_item id="152012642"/><!-- Sandwash Tomul's Hand Crux -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor Material" chance="100">
+	<gd_rule rule_name="Named Armor Material" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>

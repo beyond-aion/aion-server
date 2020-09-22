@@ -3,7 +3,9 @@ package ai.worlds.levinshor;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.handler.TargetEventHandler;
 import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -32,5 +34,13 @@ public class AncientMonsterAI extends AggressiveNpcAI {
 		super.handleMoveArrived();
 		if (getOwner().getDistanceToSpawnLocation() > 15)
 			TargetEventHandler.onTargetGiveup(this);
+	}
+
+	@Override
+	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+		float multi = 1.5f;
+		if (effect != null && effect.getSkillTemplate().getSkillId() == 21780)
+			multi = 3;
+		return super.modifyOwnerDamage((int) (damage * multi), effected, effect);
 	}
 }

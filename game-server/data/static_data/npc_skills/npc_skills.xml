@@ -64709,38 +64709,39 @@
 	</npc_skills>
 	<!-- Vocolith Summons -->
 	<npc_skills npc_ids="235217">
-		<npc_skill id="21781" lv="65" prob="100" cd="35000" />
+		<npc_skill id="21781" lv="65" prob="100" cd="15000" target="RANDOM"/>
 		<npc_skill id="18770" lv="65" prob="100" cd="30000" target="ME" />
-		<npc_skill id="16519" lv="65" prob="100" cd="30000" />
-		<npc_skill id="21790" lv="65" prob="80" max_hp="80" cd="30000" />
-		<npc_skill id="21783" lv="65" prob="100" max_hp="70" cd="30000" />
+		<npc_skill id="16519" lv="65" prob="100" cd="30000" target="RANDOM"/>
+		<npc_skill id="21790" lv="65" prob="100" cd="30000" target="RANDOM"/>
+		<npc_skill id="21783" lv="65" prob="100" cd="30000" target="ME"/>
+		<npc_skill id="21782" lv="65" prob="100" max_hp="50" cd="15000" target="RANDOM" />
 	</npc_skills>
 	<npc_skills npc_ids="235218">
-		<npc_skill id="19549" lv="30" prob="80" cd="30000" />
-		<npc_skill id="19549" lv="70" prob="60" max_hp="55" cd="80000" />
-		<npc_skill id="19550" lv="35" prob="80" cd="30000" />
-		<npc_skill id="19552" lv="55" prob="80" max_hp="35" next_chain_id="1" cd="50000" next_skill_time="0" />
-		<npc_skill id="19553" lv="45" prob="100" max_hp="30" chain_id="1" cd="35000" prio="1">
+		<npc_skill id="19549" lv="40" prob="80" cd="15000" target="RANDOM"/>
+		<npc_skill id="19549" lv="60" prob="100" max_hp="55" cd="60000" target="RANDOM"/>
+		<npc_skill id="19550" lv="25" prob="80" cd="30000" target="RANDOM" />
+		<npc_skill id="19552" lv="55" prob="100" max_hp="50" next_chain_id="1" cd="40000" next_skill_time="0" />
+		<npc_skill id="19553" lv="25" prob="100" max_hp="50" chain_id="1" cd="35000" prio="1">
 			<cond cond_type="TARGET_IS_AETHERS_HOLD" />
 		</npc_skill>
-		<npc_skill id="21780" lv="65" prob="70" cd="20000" />
+		<npc_skill id="21780" lv="65" prob="80" cd="10000" target="RANDOM"/>
 	</npc_skills>
 	<npc_skills npc_ids="235219">
-		<npc_skill id="21785" lv="65" prob="100" cd="25000" />
-		<npc_skill id="18770" lv="65" prob="100" cd="25000" target="ME" />
-		<npc_skill id="21786" lv="65" prob="80" max_hp="70" cd="30000" />
-		<npc_skill id="21784" lv="65" prob="100" max_hp="55" cd="30000" />
+		<npc_skill id="21785" lv="65" prob="80" cd="20000" target="ME"/>
+		<npc_skill id="18770" lv="65" prob="80" cd="20000" target="ME" />
+		<npc_skill id="21786" lv="65" prob="100" max_hp="80" cd="30000" target="RANDOM"/>
+		<npc_skill id="21784" lv="65" prob="100" max_hp="65" cd="30000" />
 		<npc_skill id="16519" lv="65" prob="100" cd="30000" />
 	</npc_skills>
 	<npc_skills npc_ids="235220">
-		<npc_skill id="19555" lv="25" prob="70" cd="35000" />
-		<npc_skill id="19556" lv="35" prob="70" max_hp="55" cd="45000" />
-		<npc_skill id="19557" lv="75" prob="70" cd="45000" />
-		<npc_skill id="19558" lv="15" prob="70" cd="35000" />
-		<npc_skill id="19560" lv="15" prob="70" cd="35000" />
-		<npc_skill id="19561" lv="15" prob="70" cd="35000" />
-		<npc_skill id="19562" lv="15" prob="70" cd="35000" />
-		<npc_skill id="19563" lv="20" prob="80" max_hp="40" cd="35000" />
+		<npc_skill id="19555" lv="25" prob="100" cd="35000" target="RANDOM"/>
+		<npc_skill id="19556" lv="40" prob="100" max_hp="55" cd="45000" target="ME"/>
+		<npc_skill id="19557" lv="75" prob="100" cd="35000" target="RANDOM" />
+		<npc_skill id="19558" lv="15" prob="100" cd="35000" target="RANDOM"/>
+		<npc_skill id="19560" lv="35" prob="100" cd="35000" />
+		<npc_skill id="19561" lv="35" prob="100" cd="35000" target="RANDOM"/>
+		<npc_skill id="19562" lv="25" prob="100" cd="35000" target="RANDOM"/>
+		<npc_skill id="19563" lv="20" prob="100" max_hp="40" cd="35000" target="RANDOM"/>
 	</npc_skills>
 	<!-- Tiamaranta's Eye -->
 	<!-- Ranger -->
