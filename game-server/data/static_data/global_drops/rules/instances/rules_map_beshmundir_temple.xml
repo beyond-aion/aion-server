@@ -14,7 +14,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Armor (Unique)" chance="10">
+	<gd_rule rule_name="Named Armor (Unique)" chance="20">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -29,7 +29,7 @@
 			<gd_item id="112600920" /><!-- Beshmundir Gladiator Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Armor (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -58,7 +58,7 @@
 			<gd_item id="114600923" /><!-- Underground Temple Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Armor (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -73,7 +73,7 @@
 			<gd_item id="113501582" /><!-- Beshmundir Aethertech Magic Chausses -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" chance="35">
+	<gd_rule rule_name="Named Armor (Epic)" chance="70">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -100,7 +100,7 @@
 			<gd_item id="120001040" /><!-- Manadar's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Armor (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -126,7 +126,7 @@
 			<gd_item id="122001162" /><!-- Vehalla's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Armor (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -151,7 +151,7 @@
 			<gd_item id="120001039" /><!-- Plaguebearer's Earrings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Armor (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -179,7 +179,7 @@
 			<gd_item id="112500904" /><!-- Underground Temple Spaulders -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Armor (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -194,7 +194,7 @@
 			<gd_item id="114600925" /><!-- Beshmundir Templar Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" chance="20">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="40">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -222,7 +222,7 @@
 			<gd_item id="114500964" /><!-- Underground Temple Brogans -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Armor (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -264,7 +264,7 @@
 			<gd_item id="111600944" /><!-- Underground Temple Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Armor (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -313,7 +313,7 @@
 			<gd_item id="125003835" /><!-- Beshmundir Aethertech Hairpin -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Epic)" chance="35">
+	<gd_rule rule_name="Named Weapon (Epic)" chance="70">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -327,7 +327,7 @@
 			<gd_item id="102100758" /><!-- Flarestorm's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Epic)" chance="35">
+	<gd_rule rule_name="Named Shield (Epic)" chance="70">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -370,7 +370,7 @@
 			<gd_item id="113600928" /><!-- Underground Temple Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Armor (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -385,7 +385,7 @@
 			<gd_item id="111600945" /><!-- Beshmundir Gladiator Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" chance="35">
+	<gd_rule rule_name="Named Armor (Epic)" chance="70">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -472,7 +472,7 @@
 			<gd_item id="170195083" /><!-- [Souvenir] Coffin Accessory of Beshmundir -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Armor (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -494,7 +494,7 @@
 			<gd_item id="110600967" /><!-- Beshmundir Templar Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Unique)" chance="20">
+	<gd_rule rule_name="Named Shield (Unique)" chance="40">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -507,7 +507,7 @@
 			<gd_item id="115000965" /><!-- Beshmundir Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" chance="35">
+	<gd_rule rule_name="Named Armor (Epic)" chance="70">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -553,7 +553,7 @@
 			<gd_item id="121000941" /><!-- Vorpal Corundum Necklace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Unique)" chance="40">
+	<gd_rule rule_name="Named Accessory (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -597,7 +597,7 @@
 			<gd_item id="186000099" /><!-- Vorpal Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Epic)" chance="35">
+	<gd_rule rule_name="Named Weapon (Epic)" chance="70">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -620,7 +620,7 @@
 			<gd_item id="102000662" chance="8.33" /><!-- Stormwing's Harp -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Weapon (Unique)" chance="40">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -652,7 +652,7 @@
 			<gd_item id="102100755" /><!-- Vorpal Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" chance="35">
+	<gd_rule rule_name="Named Armor (Epic)" chance="70">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -682,7 +682,7 @@
 			<gd_item id="112600919" /><!-- Underground Temple Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="40">
+	<gd_rule rule_name="Named Armor (Unique)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -696,7 +696,7 @@
 			<gd_item id="114600924" /><!-- Beshmundir Gladiator Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" chance="35">
+	<gd_rule rule_name="Named Armor (Epic)" chance="70">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>
@@ -726,7 +726,7 @@
 			<gd_item id="111500952" /><!-- Underground Temple Handguards -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="30">
+	<gd_rule rule_name="Named Armor (Unique)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 		</gd_maps>

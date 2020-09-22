@@ -3785,32 +3785,32 @@
 			<drop item_id="188053083" chance="2.5" each_member="true" /><!-- Tempering Solution Chest -->
 		</drop_group>
 		<drop_group><!-- Named Weapon (Unique) -->
-			<drop item_id="100101075" chance="20" /><!-- Tahabata's Mace -->
-			<drop item_id="100501086" chance="20" /><!-- Tahabata's Orb -->
-			<drop item_id="101501111" chance="20" /><!-- Tahabata's Quarterstaff -->
+			<drop item_id="100101075" chance="60" /><!-- Tahabata's Mace -->
+			<drop item_id="100501086" chance="60" /><!-- Tahabata's Orb -->
+			<drop item_id="101501111" chance="60" /><!-- Tahabata's Quarterstaff -->
 		</drop_group>
 		<drop_group><!-- Named Weapon (Epic) -->
-			<drop item_id="101501070" chance="20" /><!-- Tiamat Guard's Cane -->
-			<drop item_id="100901081" chance="20" /><!-- Tiamat Guard's Greatsword -->
-			<drop item_id="101701111" chance="20" /><!-- Tiamat Guard's Longbow -->
-			<drop item_id="100201207" chance="20" /><!-- Tiamat Guard's Stiletto -->
-			<drop item_id="101301018" chance="20" /><!-- Tiamat Guard's Spear -->
-			<drop item_id="100001360" chance="20" /><!-- Tiamat Guard's Sword -->
-			<drop item_id="100601106" chance="20" /><!-- Tiamat Guard's Tome -->
-			<drop item_id="100101038" chance="20" /><!-- Tiamat Guard's Warhammer -->
-			<drop item_id="100501050" chance="20" /><!-- Tiamat Guard's Jewel -->
-			<drop item_id="101800859" chance="20" /><!-- Tiamat Guard's Pistol -->
-			<drop item_id="101900857" chance="20" /><!-- Tiamat Guard's Aethercannon -->
-			<drop item_id="102000891" chance="20" /><!-- Tiamat Guard's Harp -->
-			<drop item_id="102100750" chance="20" /><!-- Tiamat Guard's Cipher-Blade -->
+			<drop item_id="101501070" chance="45" /><!-- Tiamat Guard's Cane -->
+			<drop item_id="100901081" chance="45" /><!-- Tiamat Guard's Greatsword -->
+			<drop item_id="101701111" chance="45" /><!-- Tiamat Guard's Longbow -->
+			<drop item_id="100201207" chance="45" /><!-- Tiamat Guard's Stiletto -->
+			<drop item_id="101301018" chance="45" /><!-- Tiamat Guard's Spear -->
+			<drop item_id="100001360" chance="45" /><!-- Tiamat Guard's Sword -->
+			<drop item_id="100601106" chance="45" /><!-- Tiamat Guard's Tome -->
+			<drop item_id="100101038" chance="45" /><!-- Tiamat Guard's Warhammer -->
+			<drop item_id="100501050" chance="45" /><!-- Tiamat Guard's Jewel -->
+			<drop item_id="101800859" chance="45" /><!-- Tiamat Guard's Pistol -->
+			<drop item_id="101900857" chance="45" /><!-- Tiamat Guard's Aethercannon -->
+			<drop item_id="102000891" chance="45" /><!-- Tiamat Guard's Harp -->
+			<drop item_id="102100750" chance="45" /><!-- Tiamat Guard's Cipher-Blade -->
 		</drop_group>
 		<drop_group><!-- Named Armor (Unique) -->
-			<drop item_id="110101482" chance="30" /><!-- Tiamat Guard's Tunic -->
-			<drop item_id="110301390" chance="30" /><!-- Tiamat Guard's Jerkin -->
-			<drop item_id="110301581" chance="30" /><!-- Tiamat Guard Captain's Magic Jerkin -->
-			<drop item_id="110501365" chance="30" /><!-- Tiamat Guard's Hauberk -->
-			<drop item_id="110551002" chance="30" /><!-- Tiamat Guard's Magic Hauberk -->
-			<drop item_id="110601338" chance="30" /><!-- Tiamat Guard's Breastplate -->
+			<drop item_id="110101482" chance="62" /><!-- Tiamat Guard's Tunic -->
+			<drop item_id="110301390" chance="62" /><!-- Tiamat Guard's Jerkin -->
+			<drop item_id="110301581" chance="62" /><!-- Tiamat Guard Captain's Magic Jerkin -->
+			<drop item_id="110501365" chance="62" /><!-- Tiamat Guard's Hauberk -->
+			<drop item_id="110551002" chance="62" /><!-- Tiamat Guard's Magic Hauberk -->
+			<drop item_id="110601338" chance="62" /><!-- Tiamat Guard's Breastplate -->
 		</drop_group>
 	</npc_drop>
 	<!-- Unstable Abyssal Splinter -->
