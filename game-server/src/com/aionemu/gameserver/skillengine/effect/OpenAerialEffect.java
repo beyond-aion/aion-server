@@ -7,6 +7,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillMoveType;
@@ -59,8 +60,8 @@ public class OpenAerialEffect extends EffectTemplate {
 		effected.getEffectController().setAbnormal(AbnormalState.OPENAERIAL);
 		effect.setAbnormal(AbnormalState.OPENAERIAL);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
-		if (effected instanceof Player p)
-			PacketSendUtility.sendPacket(p, new SM_MOVE(p, p.getMoveController().getMovementMask()));
+		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(),
+				effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
 	}
 
 	@Override
