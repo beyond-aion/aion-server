@@ -110,7 +110,8 @@ public class SkillTemplate implements L10n {
 	private StigmaType stigmaType = StigmaType.NONE;
 	@XmlAttribute(name = "applymcrit")
 	private boolean applyMcrit = true;
-
+	@XmlAttribute(name = "hostile_type")
+	private HostileType hostileType = HostileType.NONE;
 	/**
 	 * @return the Properties
 	 */
@@ -509,5 +510,9 @@ public class SkillTemplate implements L10n {
 
 	public boolean isMcritApplied() {
 		return applyMcrit;
+	}
+
+	public HostileType getHostileType() {
+		return hostileType;
 	}
 }

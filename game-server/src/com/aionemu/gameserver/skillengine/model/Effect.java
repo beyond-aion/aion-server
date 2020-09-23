@@ -632,13 +632,15 @@ public class Effect implements StatOwner {
 		if (effectHate != 0 && tauntHate >= 0) { // don't add hate if taunt hate is < 0!
 			Creature effected = getEffected();
 			effected.getAggroList().addHate(effector, effectHate);
-			effected.getKnownList().forEachObject(visibleObject -> {
-				if (visibleObject instanceof Creature) {
-					AggroList al = ((Creature) visibleObject).getAggroList();
-					if (al.isHating(effector))
-						al.addHate(effector, effectHate);
-				}
-			});
+			if (skillTemplate.getHostileType() == HostileType.INDIRECT) {
+				effected.getKnownList().forEachObject(visibleObject -> {
+					if (visibleObject instanceof Creature) {
+						AggroList al = ((Creature) visibleObject).getAggroList();
+						if (al.isHating(effector))
+							al.addHate(effector, effectHate);
+					}
+				});
+			}
 			effectHate = 0; // set to 0 to avoid external second broadcast
 		}
 	}

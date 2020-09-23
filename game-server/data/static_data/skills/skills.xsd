@@ -58,6 +58,7 @@
 		<xs:attribute name="noremoveatdie" type="xs:boolean" />
 		<xs:attribute name="no_save_on_logout" type="xs:boolean" />
 		<xs:attribute name="applymcrit" type="xs:boolean" default="true"/>
+		<xs:attribute name="hostile_type" type="HostileType" default="NONE"/>
 	</xs:complexType>
 	<xs:complexType name="Effects">
 		<xs:sequence minOccurs="1" maxOccurs="unbounded">
@@ -2003,6 +2004,13 @@
 			<xs:enumeration value="WEAPONDUAL" />
 			<xs:enumeration value="WEAPONMASTERY" />
 			<xs:enumeration value="XPBOOST" />
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="HostileType">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="NONE" />
+			<xs:enumeration value="DIRECT" />
+			<xs:enumeration value="INDIRECT" />
 		</xs:restriction>
 	</xs:simpleType>
 </xs:schema>
