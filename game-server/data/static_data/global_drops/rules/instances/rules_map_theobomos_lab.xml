@@ -37,7 +37,7 @@
 			<gd_item id="115000832" /><!-- Iprita's Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="65">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 		</gd_maps>
@@ -49,7 +49,7 @@
 			<gd_item id="113100846" /><!-- Clandestine Leggings -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="65">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 		</gd_maps>
@@ -63,7 +63,7 @@
 			<gd_item id="114600798" /><!-- Clandestine Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="65">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 		</gd_maps>
@@ -77,7 +77,7 @@
 			<gd_item id="111600815" /><!-- Clandestine Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="65">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 		</gd_maps>
@@ -91,7 +91,7 @@
 			<gd_item id="112600789" /><!-- Clandestine Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="65">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 		</gd_maps>
@@ -103,7 +103,7 @@
 			<gd_item id="113600804" /><!-- Clandestine Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="65">
+	<gd_rule rule_name="Named Armor (Rare)" chance="70">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 		</gd_maps>
