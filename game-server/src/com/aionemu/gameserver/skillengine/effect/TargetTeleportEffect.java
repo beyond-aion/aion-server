@@ -41,12 +41,12 @@ public class TargetTeleportEffect extends EffectTemplate {
 				final float x1 = (float) Math.cos(radian);
 				final float y1 = (float) Math.sin(radian);
 				Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effect.getEffected(),effector.getX() + x1, effector.getY() + y1, z);
-				TeleportService.teleportTo(p, p.getWorldId(), p.getInstanceId(), closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), p.getHeading(), TeleportAnimation.NONE);
+				TeleportService.teleportTo(p, p.getWorldId(), p.getInstanceId(), closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), p.getHeading());
 			} else { // teleport to random specified position
 				SkillAliasLocation skillAliasLocation = DataManager.SKILL_ALIAS_LOCATION_DATA.getSkillAliasLocation(loc);
 				if (skillAliasLocation != null && p.getWorldId() == skillAliasLocation.getWorldId()) {
 					SkillAliasPosition position = Rnd.get(skillAliasLocation.getSkillAliasPositionList());
-					TeleportService.teleportTo(p, p.getWorldId(), p.getInstanceId(), position.getX(), position.getY(), position.getZ(), p.getHeading(), TeleportAnimation.NONE);
+					TeleportService.teleportTo(p, p.getWorldId(), p.getInstanceId(), position.getX(), position.getY(), position.getZ(), p.getHeading());
 				}
 			}
 		}

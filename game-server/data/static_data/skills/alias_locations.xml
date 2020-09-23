@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<alias_locations>
+<alias_locations xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="alias_locations.xsd">
 	<!-- Lower Udas Temple-->
 	<alias_location name="IDTemple_Low_Furnace_01" world_id="300160000">
 		<alias_pos x="529.252380" y="1297.261719" z="198"/>

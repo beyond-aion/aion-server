@@ -4,7 +4,7 @@ import com.aionemu.gameserver.skillengine.model.SkillAliasLocation;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -16,7 +16,7 @@ public class SkillAliasLocationData {
     private List<SkillAliasLocation> skillAliasLocationData;
 
     @XmlTransient
-    private Map<String, SkillAliasLocation> skillAliasLocations = new LinkedHashMap<>();
+    private Map<String, SkillAliasLocation> skillAliasLocations = new HashMap<>();
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (SkillAliasLocation loc : skillAliasLocationData) {
