@@ -446,7 +446,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	public final void setCurrentHp(int hp) {
 		hpLock.lock();
 		try {
-			currentHp = Math.max(0, hp);
+			currentHp = Math.max(0, Math.min(hp, getMaxHp()));
 			isDead = currentHp == 0;
 		} finally {
 			hpLock.unlock();
@@ -470,7 +470,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	public final void setCurrentMp(int value) {
 		mpLock.lock();
 		try {
-			currentMp = Math.max(0, value);
+			currentMp = Math.max(0, Math.min(value, getMaxMp()));
 		} finally {
 			mpLock.unlock();
 		}
