@@ -17,6 +17,9 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
+import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
+import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -84,7 +87,7 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 						break;
 					case 25:
 					case 5:
-						SkillEngine.getInstance().getSkill(getOwner(), 21778, 1, getOwner()).useWithoutPropSkill(); // 20% heal
+						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21778, 1, 100, 0, 3000, NpcSkillTargetAttribute.ME)));
 						break;
 				}
 				percents.remove(percent);
