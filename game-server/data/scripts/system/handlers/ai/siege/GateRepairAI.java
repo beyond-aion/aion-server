@@ -46,7 +46,9 @@ public class GateRepairAI extends NpcAI {
 
 	@Override
 	protected void handleDialogStart(final Player player) {
-		DoorRepairData repairData = SiegeService.getInstance().getFortress(getSpawnTemplate().getSiegeId()).getTemplate().getDoorRepairData();
+		DoorRepairData repairData = SiegeService.getInstance().getDoorRepairData(getSpawnTemplate().getSiegeId());
+		if (repairData == null)
+			return;
 
 		RequestResponseHandler<Npc> gaterepair = new RequestResponseHandler<Npc>(getOwner()) {
 			@Override

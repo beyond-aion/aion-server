@@ -466,11 +466,17 @@ public class SiegeService {
 	}
 
 	public DoorRepairData getDoorRepairData(int siegeId) {
-		return getFortress(siegeId).getTemplate().getDoorRepairData();
+		FortressLocation fortressLocation = getFortress(siegeId);
+		if (fortressLocation == null)
+			return null;
+		return fortressLocation.getTemplate().getDoorRepairData();
 	}
 
-	public DoorRepairStone getRepairStone(int siegeId, int id) {
-		return getFortress(siegeId).getTemplate().getDoorRepairData().getRepairStone(id);
+	public DoorRepairStone getRepairStone(int siegeId, int repairStoneStaticId) {
+		DoorRepairData doorRepairData = getDoorRepairData(siegeId);
+		if (doorRepairData == null)
+			return null;
+		return doorRepairData.getRepairStone(repairStoneStaticId);
 	}
 
 	public Map<Integer, SiegeLocation> getSiegeLocations() {

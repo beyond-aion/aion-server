@@ -43,8 +43,8 @@ public class DoorRepairData {
         return cd * 1000;
     }
 
-    public DoorRepairStone getRepairStone(int id) {
-        return doorRepairStones.get(id);
+    public DoorRepairStone getRepairStone(int stoneStaticId) {
+        return doorRepairStones.get(stoneStaticId);
     }
 
     public Collection<DoorRepairStone> getRepairStones() {

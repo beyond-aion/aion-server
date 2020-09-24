@@ -62,7 +62,7 @@ public class FortressGateAI extends NpcAI {
 	@Override
 	protected void handleDied() {
 		if (getSpawnTemplate() instanceof SiegeSpawnTemplate spawnTemplate) {
-			DoorRepairData repairData = SiegeService.getInstance().getFortress(spawnTemplate.getSiegeId()).getTemplate().getDoorRepairData();
+			DoorRepairData repairData = SiegeService.getInstance().getDoorRepairData(spawnTemplate.getSiegeId());
 			if (repairData != null) {
 				for (DoorRepairStone stone : repairData.getRepairStones()) {
 					if (stone.getDoorId() == getSpawnTemplate().getStaticId()) {
