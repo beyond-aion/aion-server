@@ -323,17 +323,12 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		cancelAllTasks();
 		if (isCompleted.compareAndSet(false, true)) {
 			if (success) {
-				// upgrade rank
 				rank++;
 				PacketSendUtility.broadcastToMap(instance,
 					new SM_MESSAGE(0, null, "Your rank has been increased to " + CustomInstanceRankEnum.getRankDescription(rank)
 						+ ". Stay steadfast for tougher challenges and higher rewards!", ChatType.BRIGHT_YELLOW_CENTER));
 			} else {
-				// degrade rank
-				if (rank >= 24)
-					rank = 21; // to Ancient
-				else
-					rank = Math.max(0, (rank - 3) - (rank % 3)); // to 1st rank of last category
+				rank--;
 				Player player = instance.getPlayer(playerObjId);
 				if (player != null) {
 					PacketSendUtility.sendPacket(player, new SM_MESSAGE(0, null,
