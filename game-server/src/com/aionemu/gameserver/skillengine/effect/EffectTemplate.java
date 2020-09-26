@@ -468,14 +468,13 @@ public abstract class EffectTemplate {
 
 	public int calculateHate(Effect effect) {
 		if (hopType != null) {
-			int hate;
+			int hate = 0;
 			switch (hopType) {
 				case DAMAGE:
 					hate = effect.getReserveds(0).getValue();
-					break;
 				case SKILLLV:
 					int skillLvl = effect.getSkillLevel();
-					hate = hopB + hopA * skillLvl; // Aggro-value of the effect
+					hate += hopB + hopA * skillLvl; // Aggro-value of the effect
 					break;
 				default:
 					throw new UnsupportedOperationException("Unhandled effect type " + hopType + " for hate calculation");
