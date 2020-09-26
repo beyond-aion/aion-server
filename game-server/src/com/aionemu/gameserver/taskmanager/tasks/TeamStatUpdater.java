@@ -8,20 +8,22 @@ import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
 
 /**
- * @author Sarynth Supports PlayerGroup and PlayerAlliance movement updating.
+ * Supports PlayerGroup and PlayerAlliance stat updating.
+ * 
+ * @author Sarynth
  */
-public final class TeamEffectUpdater extends AbstractIterativePeriodicTaskManager<Player> {
+public final class TeamStatUpdater extends AbstractIterativePeriodicTaskManager<Player> {
 
 	private static final class SingletonHolder {
 
-		private static final TeamEffectUpdater INSTANCE = new TeamEffectUpdater();
+		private static final TeamStatUpdater INSTANCE = new TeamStatUpdater();
 	}
 
-	public static TeamEffectUpdater getInstance() {
+	public static TeamStatUpdater getInstance() {
 		return SingletonHolder.INSTANCE;
 	}
 
-	public TeamEffectUpdater() {
+	public TeamStatUpdater() {
 		super(500);
 	}
 
@@ -30,23 +32,16 @@ public final class TeamEffectUpdater extends AbstractIterativePeriodicTaskManage
 		if (player.isOnline()) {
 			if (player.isInGroup()) {
 				PlayerGroupService.updateGroup(player, GroupEvent.MOVEMENT);
-				// PlayerGroupService.updateGroup(player, GroupEvent.UPDATE_EFFECTS);
-				PlayerGroupService.updateGroup(player, GroupEvent.MOVEMENT);
-			}
-			if (player.isInAlliance()) {
-				PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.MOVEMENT);
-				PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.MOVEMENT);
-				// PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.UNK);
+			} else if (player.isInAlliance()) {
 				PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.MOVEMENT);
 			}
 		}
-		// Remove task from list. It will be re-added if player effect changes again.
-		this.stopTask(player);
+		this.stopTask(player); // task will be re-added on demand
 	}
 
 	@Override
 	protected String getCalledMethodName() {
-		return "teamEffectUpdate()";
+		return "teamStatUpdate()";
 	}
 
 }

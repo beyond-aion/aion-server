@@ -8,7 +8,9 @@ import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
 
 /**
- * @author Sarynth Supports PlayerGroup and PlayerAlliance movement updating.
+ * Supports PlayerGroup and PlayerAlliance movement updating.
+ * 
+ * @author Sarynth
  */
 public final class TeamMoveUpdater extends AbstractIterativePeriodicTaskManager<Player> {
 
@@ -27,15 +29,14 @@ public final class TeamMoveUpdater extends AbstractIterativePeriodicTaskManager<
 
 	@Override
 	protected void callTask(Player player) {
-		if (player.isInGroup()) {
-			PlayerGroupService.updateGroup(player, GroupEvent.MOVEMENT);
+		if (player.isOnline()) {
+			if (player.isInGroup()) {
+				PlayerGroupService.updateGroup(player, GroupEvent.MOVEMENT);
+			} else if (player.isInAlliance()) {
+				PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.MOVEMENT);
+			}
 		}
-		if (player.isInAlliance()) {
-			PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.MOVEMENT);
-		}
-
-		// Remove task from list. It will be re-added if player moves again.
-		this.stopTask(player);
+		this.stopTask(player); // task will be re-added on demand
 	}
 
 	@Override

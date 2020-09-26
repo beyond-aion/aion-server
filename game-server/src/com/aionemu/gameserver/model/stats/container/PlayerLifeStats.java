@@ -13,7 +13,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_FLY_TIME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_HP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATUPDATE_MP;
 import com.aionemu.gameserver.services.LifeStatsRestoreService;
-import com.aionemu.gameserver.taskmanager.tasks.TeamEffectUpdater;
+import com.aionemu.gameserver.taskmanager.tasks.TeamStatUpdater;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -69,8 +69,8 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	private void sendGroupPacketUpdate() {
-		if (owner.isInTeam() && !TeamEffectUpdater.getInstance().hasTask(owner)) {
-			TeamEffectUpdater.getInstance().startTask(owner);
+		if (owner.isInTeam() && !TeamStatUpdater.getInstance().hasTask(owner)) {
+			TeamStatUpdater.getInstance().startTask(owner);
 		}
 	}
 
