@@ -44,7 +44,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 	}
 
 	private final int price = 50000; // = 50.000 Kinah
-	private final int maxCooldownTime = 3000; // = 5min -> skills with a cd >5min are ignored
+	private final int maxCooldownTime = 3060; // = 5min 6sec
 
 	@Override
 	protected void handleSpawned() {
