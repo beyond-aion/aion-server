@@ -24,7 +24,7 @@ public class FactionPackService {
 
 	private static final FactionPackService INSTANCE = new FactionPackService();
 	private final LocalDateTime elyosMinCreationTime = LocalDateTime.of(2020, Month.SEPTEMBER, 14, 0, 0, 0);
-	private final LocalDateTime elyosMaxCreationTime = LocalDateTime.of(2020, Month.DECEMBER, 31, 23, 59, 59);
+	private final LocalDateTime elyosMaxCreationTime = LocalDateTime.of(2020, Month.SEPTEMBER, 26, 23, 59, 59);
 	private final LocalDateTime asmodianMinCreationTime = null;
 	private final LocalDateTime asmodianMaxCreationTime = null;
 	private final FactionPackDAO dao = DAOManager.getDAO(FactionPackDAO.class);
