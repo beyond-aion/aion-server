@@ -24,7 +24,7 @@ public class MySQL5RewardServiceDAO extends RewardServiceDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MySQL5RewardServiceDAO.class);
 	private static final String UPDATE_QUERY = "UPDATE `player_web_rewards` SET `received`=? WHERE `entry_id`=?";
-	private static final String SELECT_QUERY = "SELECT * FROM `player_web_rewards` WHERE `player_id`=? AND `received` IS NULL";
+	private static final String SELECT_QUERY = "SELECT entry_id, item_id, item_count FROM `player_web_rewards` WHERE `player_id`=? AND `received` IS NULL";
 
 	@Override
 	public boolean supports(String arg0, int arg1, int arg2) {

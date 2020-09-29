@@ -869,8 +869,10 @@ CREATE TABLE `player_web_rewards` (
   `item_count` bigint(20) NOT NULL DEFAULT '1',
   `added` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `received` timestamp NULL DEFAULT NULL,
+  `order_id` varchar(10) NULL DEFAULT NULL,
   PRIMARY KEY (`entry_id`),
   KEY `item_owner` (`player_id`),
+  UNIQUE (`order_id`),
   CONSTRAINT `player_web_rewards_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
