@@ -37,8 +37,8 @@ public class IdianStone extends ItemStone {
 	}
 
 	public void onEquip(final Player player, long slot) {
-		if (polishCharge > 0) {
-			actionListener = new ActionObserver(ObserverType.ALL) {
+		if (polishCharge > 0 && (slot & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0) {
+			actionListener = new ActionObserver(ObserverType. ATTACK_DEFEND) {
 
 				@Override
 				public void attacked(Creature creature, int skillId) {
@@ -52,8 +52,7 @@ public class IdianStone extends ItemStone {
 
 			};
 			player.getObserveController().addObserver(actionListener);
-			if ((slot & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0)
-				rndBonusEffect.applyEffect(player);
+			rndBonusEffect.applyEffect(player);
 		}
 	}
 
