@@ -631,10 +631,10 @@
 	</siege_location>
 	<!-- Agent Fight -->
 	<siege_location id="8011" type="AGENT_FIGHT" world="600100000" siege_duration="4200">
-		<siege_reward top="11" item_id="186000242" item_count="4" gp_win="300" gp_defeat="100"/>
-		<siege_reward top="20" item_id="186000242" item_count="3" gp_win="200" gp_defeat="75"/>
-		<siege_reward top="30" item_id="186000242" item_count="2" gp_win="150" gp_defeat="50"/>
-		<siege_reward top="200" item_id="186000242" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="11" gp_win="300" gp_defeat="100"/>
+		<siege_reward top="20" gp_win="200" gp_defeat="75"/>
+		<siege_reward top="30" gp_win="150" gp_defeat="50"/>
+		<siege_reward top="200" gp_win="100" gp_defeat="50"/>
 	</siege_location>
 	<!-- Panesterra -->
 	<siege_location id="10111" type="FORTRESS" world="400020000" name_id="404158" siege_duration="3600" influence="0">

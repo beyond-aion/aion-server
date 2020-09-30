@@ -514,7 +514,7 @@
 			<gd_item id="114601573"/><!-- Delegate's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Mythic Armor Additional" chance="5">
+	<gd_rule rule_name="Named Mythic Armor Additional" chance="50">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
@@ -541,6 +541,40 @@
 			<gd_item id="113501714"/><!-- Delegate's Chausses -->
 			<gd_item id="114501724"/><!-- Delegate's Brogans -->
 			
+			<gd_item id="110601620"/><!-- Delegate's Breastplate -->
+			<gd_item id="111601583"/><!-- Delegate's Gauntlets -->
+			<gd_item id="112601565"/><!-- Delegate's Shoulderplates -->
+			<gd_item id="113601566"/><!-- Delegate's Greeves -->
+			<gd_item id="114601573"/><!-- Delegate's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Mythic Armor Additional" chance="30">
+		<gd_maps>
+			<gd_map map_id="600100000"/><!-- Levinshor -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235064"/><!-- Empowered Veille -->
+			<gd_npc npc_id="235065"/><!-- Empowered Mastarius -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110101834"/><!-- Delegate's Tunic -->
+			<gd_item id="111101648"/><!-- Delegate's Gloves -->
+			<gd_item id="112101598"/><!-- Delegate's Pauldrons -->
+			<gd_item id="113101660"/><!-- Delegate's Leggings -->
+			<gd_item id="114101694"/><!-- Delegate's Shoes -->
+
+			<gd_item id="110301807"/><!-- Delegate's Jerkin -->
+			<gd_item id="111301745"/><!-- Delegate's Vambrace -->
+			<gd_item id="112301684"/><!-- Delegate's Shoulderguards -->
+			<gd_item id="113301776"/><!-- Delegate's Breeches -->
+			<gd_item id="114301813"/><!-- Delegate's Boots -->
+
+			<gd_item id="110551137"/><!-- Delegate's Hauberk -->
+			<gd_item id="111501696"/><!-- Delegate's Handguards -->
+			<gd_item id="112501635"/><!-- Delegate's Spaulders -->
+			<gd_item id="113501714"/><!-- Delegate's Chausses -->
+			<gd_item id="114501724"/><!-- Delegate's Brogans -->
+
 			<gd_item id="110601620"/><!-- Delegate's Breastplate -->
 			<gd_item id="111601583"/><!-- Delegate's Gauntlets -->
 			<gd_item id="112601565"/><!-- Delegate's Shoulderplates -->

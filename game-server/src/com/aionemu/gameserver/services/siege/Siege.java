@@ -226,7 +226,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 					long kinahReward = Math.round(kinahRewardForRewardLevel / (float) topGrade.getTop());
 					if (kinahReward > 40000000)
 						kinahReward = 40000000;
-					if (isWinner)
+					if (isWinner && topGrade.getItemId() > 0 && topGrade.getItemCount() > 0)
 						MailFormatter.sendAbyssRewardMail(getSiegeLocation(), PlayerService.getOrLoadPlayerCommonData(playerId), level, raceResult, timeMillis,
 							topGrade.getItemId(), topGrade.getItemCount(), kinahReward);
 					if (gp > 0) {

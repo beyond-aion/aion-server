@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "SiegeReward")
 public class SiegeReward {
 
-	@XmlAttribute(name = "top")
+	@XmlAttribute(name = "top", required = true)
 	protected int top;
 	@XmlAttribute(name = "item_id")
 	protected int itemId;
