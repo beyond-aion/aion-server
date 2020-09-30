@@ -466,6 +466,7 @@ public abstract class EffectTemplate {
 		return effectSubConditions == null || effectSubConditions.validate(effect);
 	}
 
+	@SuppressWarnings("fallthrough")
 	public int calculateHate(Effect effect) {
 		if (hopType != null) {
 			int hate = 0;
