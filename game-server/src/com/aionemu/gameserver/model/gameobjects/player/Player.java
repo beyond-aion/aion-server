@@ -70,6 +70,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.DuelService;
+import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.skillengine.condition.ChainCondition;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -125,7 +126,6 @@ public class Player extends Creature {
 	private NpcFactions npcFactions;
 
 	private int flyState = 0;
-	private boolean isTrading;
 	private FlyController flyController;
 	private CraftingTask craftingTask;
 	private int flightTeleportId;
@@ -783,24 +783,10 @@ public class Player extends Creature {
 		return isInFlyState(FlyState.GLIDING);
 	}
 
-	/**
-	 * @return the isTrading
-	 */
 	public boolean isTrading() {
-		return isTrading;
+		return ExchangeService.getInstance().isPlayerInExchange(this);
 	}
 
-	/**
-	 * @param isTrading
-	 *          the isTrading to set
-	 */
-	public void setTrading(boolean isTrading) {
-		this.isTrading = isTrading;
-	}
-
-	/**
-	 * @return the isInPrison
-	 */
 	public boolean isInPrison() {
 		return getPrisonDurationSeconds() > 0;
 	}

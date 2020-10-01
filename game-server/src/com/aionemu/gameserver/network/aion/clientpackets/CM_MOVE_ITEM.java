@@ -12,10 +12,7 @@ import com.aionemu.gameserver.services.item.ItemMoveService;
  */
 public class CM_MOVE_ITEM extends AionClientPacket {
 
-	/**
-	 * Target object id that client wants to TALK WITH or 0 if wants to unselect
-	 */
-	private int targetObjectId;
+	private int itemObjId;
 	private byte source;
 	private byte destination;
 	private short slot;
@@ -26,7 +23,7 @@ public class CM_MOVE_ITEM extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		targetObjectId = readD();// empty
+		itemObjId = readD();
 		source = readC(); // FROM (0 - player inventory, 1 - regular warehouse, 2 - account warehouse, 3 - legion warehouse)
 		destination = readC(); // TO
 		slot = readH();
@@ -35,6 +32,6 @@ public class CM_MOVE_ITEM extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		ItemMoveService.moveItem(player, targetObjectId, source, destination, slot);
+		ItemMoveService.moveItem(player, itemObjId, source, destination, slot);
 	}
 }

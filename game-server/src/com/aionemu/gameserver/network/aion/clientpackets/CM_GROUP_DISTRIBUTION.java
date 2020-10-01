@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.team.league.LeagueService;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 
 /**
  * @author Lyahim, Simple, xTz
@@ -35,7 +35,7 @@ public class CM_GROUP_DISTRIBUTION extends AionClientPacket {
 
 		Player player = getConnection().getActivePlayer();
 
-		if (!RestrictionsManager.canTrade(player))
+		if (!PlayerRestrictions.canTrade(player))
 			return;
 
 		switch (partyType) {

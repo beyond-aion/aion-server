@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PrivateStore;
@@ -19,6 +20,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PRIVATE_STORE_NAME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
@@ -29,21 +31,57 @@ public class PrivateStoreService {
 
 	private static final Logger log = LoggerFactory.getLogger("EXCHANGE_LOG");
 
-	public static void createStoreWithItems(Player activePlayer, TradePSItem[] tradePSItems) {
-		if (CreatureState.ACTIVE.getId() != activePlayer.getState() || activePlayer.getStore() != null)
+	public static void createStoreWithItems(Player player, TradePSItem[] tradePSItems) {
+		if (!canOpenPrivateStore(player))
 			return;
 
-		PrivateStore store = new PrivateStore(activePlayer);
-		for (int i = 0; i < tradePSItems.length; i++) {
-			Item item = activePlayer.getInventory().getItemByObjId(tradePSItems[i].getItemObjId());
-			if (!validateItem(store, item, tradePSItems[i]))
+		PrivateStore store = new PrivateStore(player);
+		for (TradePSItem tradePSItem : tradePSItems) {
+			Item item = player.getInventory().getItemByObjId(tradePSItem.getItemObjId());
+			if (!validateItem(store, item, tradePSItem))
 				return;
-			store.addItemToSell(tradePSItems[i].getItemObjId(), tradePSItems[i]);
+			store.addItemToSell(tradePSItem.getItemObjId(), tradePSItem);
 		}
-		createStore(activePlayer, store);
+		player.setStore(store);
+		player.setState(CreatureState.PRIVATE_SHOP);
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.OPEN_PRIVATESHOP, 0, 0), true);
 	}
 
-	private static final boolean validateItem(PrivateStore store, Item item, TradePSItem psItem) {
+	private static boolean canOpenPrivateStore(Player player) {
+		if (player.isFlying()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_FLY_MODE());
+			return false;
+		}
+		if (player.getMoveController().isInMove()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_MOVING_OBJECT());
+			return false;
+		}
+		if (player.isInAttackMode()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_COMBAT_MODE());
+			return false;
+		}
+		if (player.isTrading()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_OPEN_STORE_DURING_CRAFTING()); // name "crafting" is NC fail, msg is correct
+			return false;
+		}
+		if (player.isInPlayerMode(PlayerMode.RIDE)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_RESTRICTION_RIDE());
+			return false;
+		}
+		if (player.getEffectController().isAbnormalSet(AbnormalState.HIDE)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_PERSONAL_SHOP_DISABLED_IN_HIDDEN_MODE());
+			return false;
+		}
+		if (player.isDead())
+			return false;
+		if (player.getState() != CreatureState.ACTIVE.getId())
+			return false;
+		if (player.getStore() != null)
+			return false;
+		return true;
+	}
+
+	private static boolean validateItem(PrivateStore store, Item item, TradePSItem psItem) {
 		if (item == null || psItem.getItemId() != item.getItemTemplate().getTemplateId()) {
 			return false;
 		}
@@ -72,27 +110,13 @@ public class PrivateStoreService {
 		return true;
 	}
 
-	/**
-	 * This method will create the player's store
-	 * 
-	 * @param activePlayer
-	 */
-	private static void createStore(Player activePlayer, PrivateStore store) {
-		activePlayer.setStore(store);
-		activePlayer.setState(CreatureState.PRIVATE_SHOP);
-		PacketSendUtility.broadcastPacket(activePlayer, new SM_EMOTION(activePlayer, EmotionType.OPEN_PRIVATESHOP, 0, 0), true);
-	}
-
-	/**
-	 * This method will destroy the player's store
-	 * 
-	 * @param activePlayer
-	 */
-	public static void closePrivateStore(Player activePlayer) {
-		activePlayer.setStore(null);
-		activePlayer.unsetState(CreatureState.PRIVATE_SHOP);
-		activePlayer.setState(CreatureState.ACTIVE);
-		PacketSendUtility.broadcastPacket(activePlayer, new SM_EMOTION(activePlayer, EmotionType.CLOSE_PRIVATESHOP, 0, 0), true);
+	public static void closePrivateStore(Player player) {
+		if (player.getStore() == null)
+			return;
+		player.setStore(null);
+		player.unsetState(CreatureState.PRIVATE_SHOP);
+		player.setState(CreatureState.ACTIVE);
+		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.CLOSE_PRIVATESHOP, 0, 0), true);
 	}
 
 	/**

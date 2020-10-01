@@ -1,12 +1,6 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.Objects;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
@@ -31,7 +25,7 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BROKER_SERVICE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.player.PlayerService;
@@ -306,7 +300,7 @@ public class BrokerService {
 		boolean isEmptyCache = getFilteredItems(player).length == 0;
 		Race playerRace = player.getRace();
 
-		if (!RestrictionsManager.canTrade(player))
+		if (!PlayerRestrictions.canTrade(player))
 			return;
 
 		synchronized (this) {
@@ -425,7 +419,7 @@ public class BrokerService {
 		if (itemToRegister == null || count > itemToRegister.getItemCount())
 			return;
 
-		if (!RestrictionsManager.canTrade(player)) {
+		if (!PlayerRestrictions.canTrade(player)) {
 			return;
 		}
 
@@ -545,7 +539,7 @@ public class BrokerService {
 		Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(player.getRace());
 		BrokerItem brokerItem = brokerItems.get(brokerItemId);
 
-		if (!RestrictionsManager.canTrade(player)) {
+		if (!PlayerRestrictions.canTrade(player)) {
 			return;
 		}
 		if (brokerItem != null) {

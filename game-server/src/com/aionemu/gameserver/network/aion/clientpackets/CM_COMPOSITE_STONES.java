@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.actions.CompositionAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 
 /**
  * Created with IntelliJ IDEA. User: pixfid Date: 7/14/13 Time: 5:30 PM
@@ -63,7 +63,7 @@ public class CM_COMPOSITE_STONES extends AionClientPacket {
 		if (second == null)
 			return;
 
-		if (!RestrictionsManager.canUseItem(player, tools))
+		if (!PlayerRestrictions.canUseItem(player, tools))
 			return;
 
 		CompositionAction action = new CompositionAction();

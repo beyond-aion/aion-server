@@ -19,20 +19,10 @@ import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.group.callback.AddPlayerToGroupCallback;
 import com.aionemu.gameserver.model.team.group.callback.PlayerGroupCreateCallback;
 import com.aionemu.gameserver.model.team.group.callback.PlayerGroupDisbandCallback;
-import com.aionemu.gameserver.model.team.group.events.ChangeGroupLeaderEvent;
-import com.aionemu.gameserver.model.team.group.events.ChangeGroupLootRulesEvent;
-import com.aionemu.gameserver.model.team.group.events.GroupDisbandEvent;
-import com.aionemu.gameserver.model.team.group.events.PlayerConnectedEvent;
-import com.aionemu.gameserver.model.team.group.events.PlayerDisconnectedEvent;
-import com.aionemu.gameserver.model.team.group.events.PlayerGroupEnteredEvent;
-import com.aionemu.gameserver.model.team.group.events.PlayerGroupInvite;
-import com.aionemu.gameserver.model.team.group.events.PlayerGroupLeavedEvent;
-import com.aionemu.gameserver.model.team.group.events.PlayerGroupStopMentoringEvent;
-import com.aionemu.gameserver.model.team.group.events.PlayerGroupUpdateEvent;
-import com.aionemu.gameserver.model.team.group.events.PlayerStartMentoringEvent;
+import com.aionemu.gameserver.model.team.group.events.*;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.TimeUtil;
@@ -47,8 +37,8 @@ public class PlayerGroupService {
 	private static final Map<Integer, PlayerGroup> groups = new ConcurrentHashMap<>();
 	private static final AtomicBoolean offlineCheckStarted = new AtomicBoolean();
 
-	public static final void inviteToGroup(final Player inviter, final Player invited) {
-		if (RestrictionsManager.canInviteToGroup(inviter, invited)) {
+	public static void inviteToGroup(final Player inviter, final Player invited) {
+		if (PlayerRestrictions.canInviteToGroup(inviter, invited)) {
 			PlayerGroupInvite invite = new PlayerGroupInvite(inviter);
 			if (invited.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, invite)) {
 				PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, 0, 0, inviter.getName()));

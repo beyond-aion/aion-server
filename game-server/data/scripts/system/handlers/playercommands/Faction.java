@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.player.PlayerChatService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
@@ -39,7 +39,7 @@ public class Faction extends PlayerCommand {
 			return;
 		}
 
-		if (!RestrictionsManager.canChat(player))
+		if (!PlayerRestrictions.canChat(player))
 			return;
 
 		if (CustomConfig.FACTION_USE_PRICE > 0) {

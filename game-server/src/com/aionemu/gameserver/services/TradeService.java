@@ -1,10 +1,6 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,7 +25,7 @@ import com.aionemu.gameserver.model.templates.tradelist.TradeNpcType;
 import com.aionemu.gameserver.model.trade.TradeItem;
 import com.aionemu.gameserver.model.trade.TradeList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
@@ -88,7 +84,7 @@ public class TradeService {
 	 * @return true or false
 	 */
 	public static boolean performBuyTransaction(Npc npc, Player player, TradeList tradeList, boolean useKinah) {
-		if (!RestrictionsManager.canTrade(player)) {
+		if (!PlayerRestrictions.canTrade(player)) {
 			return false;
 		}
 
@@ -200,7 +196,7 @@ public class TradeService {
 	}
 
 	public static boolean performSellToShop(Player player, TradeList tradeList, TradeListTemplate purchaseTemplate, int sellModifier) {
-		if (!RestrictionsManager.canTrade(player))
+		if (!PlayerRestrictions.canTrade(player))
 			return false;
 
 		Storage inventory = player.getInventory();
@@ -269,7 +265,7 @@ public class TradeService {
 			return false;
 		}
 
-		if (!RestrictionsManager.canTrade(player))
+		if (!PlayerRestrictions.canTrade(player))
 			return false;
 
 		Storage inventory = player.getInventory();
@@ -301,7 +297,7 @@ public class TradeService {
 	}
 
 	public static boolean performBuyFromTradeInTrade(Player player, int npcObjectId, int itemId, int count, List<Integer> tradeInItemObjectIds) {
-		if (!RestrictionsManager.canTrade(player)) {
+		if (!PlayerRestrictions.canTrade(player)) {
 			return false;
 		}
 		if (player.getInventory().isFull()) {

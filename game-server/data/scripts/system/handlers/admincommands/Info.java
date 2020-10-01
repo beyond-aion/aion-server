@@ -15,7 +15,7 @@ import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.spawnengine.ClusteredNpc;
@@ -113,7 +113,7 @@ public class Info extends AdminCommand {
 			}
 			sendInfo(admin, createZoneInfo(creature));
 			sendInfo(admin, "[Tribe]\n\tRace: " + creature.getRace() + ", Tribe: " + creature.getTribe() + ", TribeBase: " + creature.getBaseTribe());
-			sendInfo(admin, "[Your relation]\n\tisEnemy: " + admin.isEnemy(creature) + ", canAttack: " + RestrictionsManager.canAttack(admin, target));
+			sendInfo(admin, "[Your relation]\n\tisEnemy: " + admin.isEnemy(creature) + ", canAttack: " + PlayerRestrictions.canAttack(admin, target));
 			sendInfo(admin, "[Targets relation]\n\tisEnemy: " + creature.isEnemy(admin)
 				+ (creature instanceof Npc ? ", Hostility: " + ((Npc) creature).getType(admin) : ""));
 			sendInfo(admin, "[Life stats]\n\tHP: " + creature.getLifeStats().getCurrentHp() + " / " + creature.getLifeStats().getMaxHp() + "\n\tMP: "

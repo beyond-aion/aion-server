@@ -131,6 +131,10 @@ public class ShutdownHook extends Thread {
 		return remainingSeconds.get() != Integer.MIN_VALUE;
 	}
 
+	protected int getRemainingSeconds() {
+		return remainingSeconds.get();
+	}
+
 	private class ExitMonitorSecurityManager extends SecurityManager {
 
 		@Override

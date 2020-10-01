@@ -1,12 +1,14 @@
 package com.aionemu.gameserver.controllers;
 
+import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
+import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
@@ -64,7 +66,7 @@ public class FlyController {
 	 *         already flying).
 	 */
 	public boolean startFly(boolean broadcastPacket, boolean ignoreFlightCooldown) {
-		if (!RestrictionsManager.canFly(player))
+		if (!canFly(player))
 			return false;
 		if (!ignoreFlightCooldown) {
 			if (player.getFlyReuseTime() > System.currentTimeMillis()) {
@@ -86,6 +88,26 @@ public class FlyController {
 		return true;
 	}
 
+	private static boolean canFly(Player player) {
+		if (!player.getCommonData().isDaeva()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
+			return false;
+		}
+		if (!player.hasAccess(AdminConfig.FREE_FLIGHT) && !player.isInsideZoneType(ZoneType.FLY)) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLYING_FORBIDDEN_HERE());
+			return false;
+		}
+		if (player.isUnderNoFly()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANT_FLY_NOW_DUE_TO_NOFLY());
+			return false;
+		}
+		if (player.getTransformModel().getRes6() == 1) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FLY_CANNOT_FLY_POLYMORPH_STATUS());
+			return false;
+		}
+		return player.getStore() == null;
+	}
+
 	/**
 	 * Switching to glide mode (called by CM_MOVE with VALIDATE_GLIDE movement type) 1) from standing state 2) from flying state If from stand to glide
 	 * - start fp reduce + emotions/stats if from fly to glide - only emotions/stats
@@ -94,10 +116,8 @@ public class FlyController {
 		if (player.isInGlidingState() || !player.canPerformMove())
 			return false;
 
-		// check restrictions
-		if (!RestrictionsManager.canGlide(player)) {
+		if (!canGlide(player))
 			return false;
-		}
 		if (player.getFlyState() == 0) {
 			// fly reuse time only if gliding from walking
 			if (player.getFlyReuseTime() > System.currentTimeMillis()) {
@@ -109,6 +129,18 @@ public class FlyController {
 		player.setState(CreatureState.GLIDING);
 		player.getLifeStats().triggerFpReduce();
 		player.getGameStats().updateStatsAndSpeedVisually();
+		return true;
+	}
+
+	private static boolean canGlide(Player player) {
+		if (!player.getCommonData().isDaeva()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_ONLY_DEVA_CAN());
+			return false;
+		}
+		if (player.getTransformModel().getRes6() == 1) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GLIDE_CANNOT_GLIDE_POLYMORPH_STATUS());
+			return false;
+		}
 		return true;
 	}
 }

@@ -1,17 +1,13 @@
 package com.aionemu.gameserver.services;
 
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.trade.RepurchaseList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -49,7 +45,7 @@ public class RepurchaseService {
 	}
 
 	public void repurchaseFromShop(Player player, RepurchaseList repurchaseList) {
-		if (!RestrictionsManager.canTrade(player)) {
+		if (!PlayerRestrictions.canTrade(player)) {
 			return;
 		}
 		Set<Item> items = repurchaseItems.get(player.getObjectId());

@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -20,7 +20,7 @@ public class PlayerGroupInvite extends RequestResponseHandler<Player> {
 
 	@Override
 	public void acceptRequest(Player inviter, Player invited) {
-		if (RestrictionsManager.canInviteToGroup(inviter, invited)) {
+		if (PlayerRestrictions.canInviteToGroup(inviter, invited)) {
 			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_INVITED_HIM(invited.getName()));
 			PlayerGroup group = inviter.getPlayerGroup();
 			if (group != null) {

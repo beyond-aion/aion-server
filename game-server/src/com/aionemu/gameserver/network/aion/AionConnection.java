@@ -3,11 +3,7 @@ package com.aionemu.gameserver.network.aion;
 import java.io.IOException;
 import java.nio.ByteBuffer;
 import java.nio.channels.SocketChannel;
-import java.util.ArrayDeque;
-import java.util.Deque;
-import java.util.Map;
-import java.util.Objects;
-import java.util.Queue;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
@@ -240,7 +236,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected final void onDisconnect() {
 		connectionAliveChecker.stop();
-		if (GameServer.isShuttingDown()) { // client crashing during countdown
+		if (GameServer.isShuttingDownSoon()) { // client crashing during last seconds of countdown
 			safeLogout(); // instant synchronized leaveWorld to ensure completion before onServerClose
 			return;
 		}

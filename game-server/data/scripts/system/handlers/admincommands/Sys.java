@@ -76,7 +76,7 @@ public class Sys extends AdminCommand {
 
 	private void runOrAbortShutdown(Player player, int exitCode, String delay) {
 		if ("abort".equalsIgnoreCase(delay)) {
-			if (!GameServer.isShuttingDown())
+			if (!GameServer.isShutdownScheduled())
 				sendInfo(player, "There is no shutdown in progress.");
 			else
 				sendInfo(player, GameServer.abortShutdown() ? "Successfully aborted server shutdown." : "Couldn't abort server shutdown.");

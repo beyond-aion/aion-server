@@ -17,16 +17,8 @@ import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.trade.Exchange;
 import com.aionemu.gameserver.model.trade.ExchangeItem;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CUBE_UPDATE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EXCHANGE_ADD_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EXCHANGE_ADD_KINAH;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EXCHANGE_CONFIRMATION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EXCHANGE_REQUEST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_ADD_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
@@ -67,9 +59,6 @@ public class ExchangeService {
 		if (!validateParticipants(player1, player2))
 			return;
 
-		player1.setTrading(true);
-		player2.setTrading(true);
-
 		exchanges.put(player1.getObjectId(), new Exchange(player1, player2));
 		exchanges.put(player2.getObjectId(), new Exchange(player2, player1));
 
@@ -82,7 +71,7 @@ public class ExchangeService {
 	 * @param player2
 	 */
 	private boolean validateParticipants(Player player1, Player player2) {
-		return RestrictionsManager.canTrade(player1) && RestrictionsManager.canTrade(player2);
+		return PlayerRestrictions.canTrade(player1) && PlayerRestrictions.canTrade(player2);
 	}
 
 	private Player getCurrentParter(Player player) {
@@ -107,9 +96,6 @@ public class ExchangeService {
 		return partner != null ? getCurrentExchange(partner) : null;
 	}
 
-	/**
-	 * @param player
-	 */
 	public boolean isPlayerInExchange(Player player) {
 		return getCurrentExchange(player) != null;
 	}
@@ -342,8 +328,6 @@ public class ExchangeService {
 						IDFactory.getInstance().releaseId(item.getItem().getObjectId()); // release ID if it was a newly allocated one
 				}
 			}
-
-			player.setTrading(false);
 		}
 	}
 

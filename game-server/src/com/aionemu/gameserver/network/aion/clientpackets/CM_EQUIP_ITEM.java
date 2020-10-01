@@ -9,7 +9,7 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -38,7 +38,7 @@ public class CM_EQUIP_ITEM extends AionClientPacket {
 
 		activePlayer.getController().cancelUseItem();
 
-		if (!RestrictionsManager.canChangeEquip(activePlayer))
+		if (!PlayerRestrictions.canChangeEquip(activePlayer))
 			return;
 
 		Equipment equipment = activePlayer.getEquipment();

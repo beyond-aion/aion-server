@@ -6,7 +6,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.trade.TradePSItem;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.PrivateStoreService;
 
 /**
@@ -14,10 +13,6 @@ import com.aionemu.gameserver.services.PrivateStoreService;
  */
 public class CM_PRIVATE_STORE extends AionClientPacket {
 
-	/**
-	 * Private store information
-	 */
-	private Player player;
 	private TradePSItem[] tradePSItems;
 
 	public CM_PRIVATE_STORE(int opcode, Set<State> validStates) {
@@ -39,10 +34,7 @@ public class CM_PRIVATE_STORE extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		player = getConnection().getActivePlayer();
-		if (!RestrictionsManager.canPrivateStore(player))
-			return;
-
+		Player player = getConnection().getActivePlayer();
 		if (tradePSItems.length <= 0)
 			PrivateStoreService.closePrivateStore(player);
 		else

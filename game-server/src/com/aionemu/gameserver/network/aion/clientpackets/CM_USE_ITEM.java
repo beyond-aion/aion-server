@@ -18,7 +18,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -75,7 +75,7 @@ public class CM_USE_ITEM extends AionClientPacket {
 		if (player.isCasting())
 			player.getController().cancelCurrentSkill(null);
 
-		if (!RestrictionsManager.canUseItem(player, item))
+		if (!PlayerRestrictions.canUseItem(player, item))
 			return;
 
 		HandlerResult result = QuestEngine.getInstance().onItemUseEvent(new QuestEnv(null, player, 0), item);

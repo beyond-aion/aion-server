@@ -43,7 +43,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.drop.DropService;
@@ -393,7 +393,7 @@ public class PlayerController extends CreatureController<Player> {
 
 		PlayerGameStats gameStats = getOwner().getGameStats();
 
-		if (!RestrictionsManager.canAttack(getOwner(), target))
+		if (!PlayerRestrictions.canAttack(getOwner(), target))
 			return;
 
 		// client handles most distance checks beforehand, but for some cases we need to check it also
@@ -462,7 +462,7 @@ public class PlayerController extends CreatureController<Player> {
 		Skill skill = SkillEngine.getInstance().getSkillFor(player, skillId, player.getTarget());
 
 		if (skill != null) {
-			if (!RestrictionsManager.canUseSkill(player, skill))
+			if (!PlayerRestrictions.canUseSkill(player, skill))
 				return;
 
 			skill.setTargetType(targetType, x, y, z);
@@ -490,7 +490,7 @@ public class PlayerController extends CreatureController<Player> {
 		}
 
 		if (skill != null) {
-			if (!RestrictionsManager.canUseSkill(player, skill))
+			if (!PlayerRestrictions.canUseSkill(player, skill))
 				return;
 
 			skill.setTargetType(targetType, x, y, z);

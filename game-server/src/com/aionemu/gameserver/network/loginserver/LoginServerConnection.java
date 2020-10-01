@@ -102,7 +102,7 @@ public class LoginServerConnection extends AConnection<LsServerPacket> {
 
 	@Override
 	protected final void onDisconnect() {
-		if (GameServer.isShuttingDown())
+		if (GameServer.isShutdownScheduled())
 			return;
 		log.warn("Lost connection with LoginServer");
 		LoginServer.getInstance().reconnect();

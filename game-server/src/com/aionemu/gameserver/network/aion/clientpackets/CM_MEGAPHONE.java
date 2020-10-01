@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.templates.item.actions.MegaphoneAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -40,7 +40,7 @@ public class CM_MEGAPHONE extends AionClientPacket {
 		if (item == null)
 			return;
 
-		if (!RestrictionsManager.canUseItem(player, item))
+		if (!PlayerRestrictions.canUseItem(player, item))
 			return;
 
 		MegaphoneAction megaphoneAction = item.getItemTemplate().getActions().getItemActions().stream()

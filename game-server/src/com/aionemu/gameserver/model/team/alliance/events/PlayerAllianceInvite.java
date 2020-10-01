@@ -11,7 +11,7 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.collections.Predicates;
 
@@ -26,7 +26,7 @@ public class PlayerAllianceInvite extends RequestResponseHandler<Player> {
 
 	@Override
 	public void acceptRequest(Player inviter, Player invited) {
-		if (RestrictionsManager.canInviteToAlliance(inviter, invited)) {
+		if (PlayerRestrictions.canInviteToAlliance(inviter, invited)) {
 
 			PlayerAlliance alliance = inviter.getPlayerAlliance();
 			List<Player> playersToAdd = new ArrayList<>();

@@ -21,7 +21,6 @@ public class CM_CRAFT extends AionClientPacket {
 	private int targetTemplateId;
 	private int recipeId;
 	private int targetObjId;
-	private int materialsCount;
 	private int craftType;
 	private Map<Integer, Long> materialsData = new HashMap<>();
 
@@ -35,7 +34,7 @@ public class CM_CRAFT extends AionClientPacket {
 		targetTemplateId = readD();
 		recipeId = readD();
 		targetObjId = readD();
-		materialsCount = readUH();
+		int materialsCount = readUH();
 		craftType = readUC();
 		for (int i = 0; i < materialsCount; i++)
 			materialsData.put(readD(), readQ());
@@ -47,8 +46,7 @@ public class CM_CRAFT extends AionClientPacket {
 
 		if (player == null || !player.isSpawned())
 			return;
-		// disallow crafting in shutdown progress..
-		if (GameServer.isShuttingDown())
+		if (GameServer.isShuttingDownSoon()) // stop crafting to avoid unnecessary material loss 
 			return;
 
 		// 129 = Morph Substances

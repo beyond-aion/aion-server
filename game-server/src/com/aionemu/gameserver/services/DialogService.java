@@ -33,7 +33,6 @@ import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.instance.periodic.DredgionService;
@@ -114,10 +113,6 @@ public class DialogService {
 					break;
 				}
 				case DEPOSIT_CHAR_WAREHOUSE: // warehouse (2.5)
-					if (!RestrictionsManager.canUseWarehouse(player))
-						return;
-					sendDialogWindow(dialogActionId, player, npc);
-					break;
 				case OPEN_VENDOR: // Consign trade?? npc karinerk, koorunerk (2.5)
 				case OPEN_STIGMA_WINDOW: // stigma
 				case CREATE_LEGION: // create legion

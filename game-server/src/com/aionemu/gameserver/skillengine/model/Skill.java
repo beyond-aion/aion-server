@@ -33,7 +33,6 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
 import com.aionemu.gameserver.services.abyss.AbyssService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -41,10 +40,12 @@ import com.aionemu.gameserver.skillengine.action.Action;
 import com.aionemu.gameserver.skillengine.action.Actions;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.condition.SkillChargeCondition;
+import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.properties.FirstTargetAttribute;
 import com.aionemu.gameserver.skillengine.properties.Properties;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.skillengine.properties.TargetRangeAttribute;
+import com.aionemu.gameserver.skillengine.properties.TargetRelationAttribute;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -182,18 +183,58 @@ public class Skill {
 	}
 
 	private boolean validateEffectedList() {
-		if (effector instanceof Player) {
-			Player player = (Player) effector;
-			effectedList.removeIf(effected -> !RestrictionsManager.canAffectBySkill(player, effected, this));
+		if (effector instanceof Player player) {
+			if (canUseSkill(player))
+				effectedList.removeIf(effected -> !isValidTarget(player, effected));
+			else
+				effectedList.clear();
 		}
 
 		if (targetType == 0 && effectedList.isEmpty()) { // target selected but no target will be hit
 			if (targetRangeAttribute != TargetRangeAttribute.AREA) { // don't restrict AoE activation
-				if (effector instanceof Player)
-					PacketSendUtility.sendPacket((Player) effector, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
+				if (effector instanceof Player player)
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
 			}
 		}
+
+		return true;
+	}
+
+	private boolean canUseSkill(Player player) {
+		if (player.isUsingFlyTeleport())
+			return false;
+		if (!getSkillTemplate().hasEvadeEffect() && player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
+			return false;
+		if (player.getStore() != null)
+			return false;
+		return true;
+	}
+
+	private boolean isValidTarget(Player player, Creature target) {
+		if (target instanceof Player targetPlayer) {
+			if (targetPlayer.isUsingFlyTeleport())
+				return false;
+			if (target.getRace() != player.getRace()) {
+				if (!target.isEnemyFrom(player))
+					return false;
+			} else if (targetPlayer.isDueling(player) && getSkillTemplate().getProperties().getTargetRelation() != TargetRelationAttribute.ENEMY) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
+				return false;
+			}
+		}
+
+		if (target.getLifeStats().isAboutToDie() && !isNonTargetAOE())
+			return false;
+
+		if (target.isDead() && !getSkillTemplate().hasResurrectEffect() && !isNonTargetAOE()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
+			return false;
+		}
+
+		// cant resurrect non players and non dead
+		if (getSkillTemplate().hasResurrectEffect() && (!(target instanceof Player) || !target.isDead()))
+			return false;
 
 		return true;
 	}

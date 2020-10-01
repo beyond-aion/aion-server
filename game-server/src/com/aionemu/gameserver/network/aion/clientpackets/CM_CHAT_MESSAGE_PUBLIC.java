@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.services.player.PlayerChatService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -48,7 +48,7 @@ public class CM_CHAT_MESSAGE_PUBLIC extends AionClientPacket {
 		if (ChatProcessor.getInstance().handleChatCommand(player, message))
 			return;
 
-		if (!RestrictionsManager.canChat(player))
+		if (!PlayerRestrictions.canChat(player))
 			return;
 
 		PlayerChatService.logMessage(player, type, message);

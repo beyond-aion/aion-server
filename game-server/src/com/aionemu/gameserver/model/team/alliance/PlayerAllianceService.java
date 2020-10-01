@@ -15,19 +15,8 @@ import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.alliance.callback.AddPlayerToAllianceCallback;
 import com.aionemu.gameserver.model.team.alliance.callback.PlayerAllianceCreateCallback;
 import com.aionemu.gameserver.model.team.alliance.callback.PlayerAllianceDisbandCallback;
-import com.aionemu.gameserver.model.team.alliance.events.AllianceDisbandEvent;
-import com.aionemu.gameserver.model.team.alliance.events.AssignViceCaptainEvent;
+import com.aionemu.gameserver.model.team.alliance.events.*;
 import com.aionemu.gameserver.model.team.alliance.events.AssignViceCaptainEvent.AssignType;
-import com.aionemu.gameserver.model.team.alliance.events.ChangeAllianceLeaderEvent;
-import com.aionemu.gameserver.model.team.alliance.events.ChangeAllianceLootRulesEvent;
-import com.aionemu.gameserver.model.team.alliance.events.ChangeMemberGroupEvent;
-import com.aionemu.gameserver.model.team.alliance.events.CheckAllianceReadyEvent;
-import com.aionemu.gameserver.model.team.alliance.events.PlayerAllianceEnteredEvent;
-import com.aionemu.gameserver.model.team.alliance.events.PlayerAllianceInvite;
-import com.aionemu.gameserver.model.team.alliance.events.PlayerAllianceLeavedEvent;
-import com.aionemu.gameserver.model.team.alliance.events.PlayerAllianceUpdateEvent;
-import com.aionemu.gameserver.model.team.alliance.events.PlayerConnectedEvent;
-import com.aionemu.gameserver.model.team.alliance.events.PlayerDisconnectedEvent;
 import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent.LeaveReson;
 import com.aionemu.gameserver.model.team.common.events.TeamCommand;
 import com.aionemu.gameserver.model.team.common.events.TeamKinahDistributionEvent;
@@ -36,7 +25,7 @@ import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.restrictions.RestrictionsManager;
+import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -52,7 +41,7 @@ public class PlayerAllianceService {
 	private static final AtomicBoolean offlineCheckStarted = new AtomicBoolean();
 
 	public static final void inviteToAlliance(final Player inviter, Player invited) {
-		if (RestrictionsManager.canInviteToAlliance(inviter, invited)) {
+		if (PlayerRestrictions.canInviteToAlliance(inviter, invited)) {
 			PlayerGroup playerGroup = invited.getPlayerGroup();
 
 			if (playerGroup != null) {
