@@ -11370,13 +11370,13 @@
 	<decomposable item_id="188051515" /><!-- Smart Scroll Bundle -->
 	<decomposable item_id="188051516" selectable="true"><!-- Smart Greater Scroll Bundle -->
 		<items>
-			<item id="164000076" min_count="100" /><!--	Greater Running Scroll -->
-			<item id="164000073" min_count="100" /><!--	Greater Courage Scroll -->
-			<item id="164000079" min_count="100" /><!--	Greater Raging Wind Scroll -->
-			<item id="164000134" min_count="100" /><!--	Greater Awakening Scroll -->
-			<item id="164000257" min_count="50" /><!--	Fine Strike Resist Scroll -->
-			<item id="164000258" min_count="50" /><!--	Fine Spell Resist Scroll -->
-			<item id="164000255" min_count="100" /><!--	Fine Crit Strike Scroll -->
+			<item id="164000076" min_count="100" /><!-- Greater Running Scroll -->
+			<item id="164000073" min_count="100" /><!-- Greater Courage Scroll -->
+			<item id="164000079" min_count="100" /><!-- Greater Raging Wind Scroll -->
+			<item id="164000134" min_count="100" /><!-- Greater Awakening Scroll -->
+			<item id="164000257" min_count="50" /><!-- Fine Strike Resist Scroll -->
+			<item id="164000258" min_count="50" /><!-- Fine Spell Resist Scroll -->
+			<item id="164000255" min_count="100" /><!-- Fine Crit Strike Scroll -->
 			<item id="164000256" min_count="100" /><!-- Fine Crit Spell Scroll -->
 		</items>
 	</decomposable>
@@ -29380,12 +29380,12 @@
 	</decomposable>
 	<decomposable item_id="188053263" selectable="true"><!-- Nimbarka's Fabled Armor Box -->
 		<items>
-			<item id="110551011" /><!--	Chain Cuirass of the Abyssal Depths	-->
-			<item id="110500673" /><!--	Deep Abyss Hauberk	-->
-			<item id="110600659" /><!--	Ice Black Breastplate	-->
-			<item id="110300696" /><!--	Jerkin of Dark Dusk	-->
-			<item id="110301589" /><!--	Leather Jacket of Dark Twilight	-->
-			<item id="110100734" /><!--	Sunrise Tunic	-->
+			<item id="110551011" /><!-- Chain Cuirass of the Abyssal Depths -->
+			<item id="110500673" /><!-- Deep Abyss Hauberk -->
+			<item id="110600659" /><!-- Ice Black Breastplate -->
+			<item id="110300696" /><!-- Jerkin of Dark Dusk -->
+			<item id="110301589" /><!-- Leather Jacket of Dark Twilight -->
+			<item id="110100734" /><!-- Sunrise Tunic -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053264" selectable="true"><!-- Saraswati's Fabled Shoulder Box -->

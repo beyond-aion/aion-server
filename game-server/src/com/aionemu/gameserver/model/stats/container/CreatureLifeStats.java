@@ -107,21 +107,6 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		this.killingBlow = 0;
 	}
 
-	/**
-	 * This method is called whenever caller wants to absorb creatures' HP
-	 *
-	 * @param type
-	 *          attack type (see {@link SM_ATTACK_STATUS.TYPE}), if null, no {@link SM_ATTACK_STATUS} packet will be sent
-	 * @param value
-	 *          hp to subtract
-	 * @param skillId
-	 *          skillId (0 if none)
-	 * @param log
-	 *          log type (see {@link SM_ATTACK_STATUS.LOG}) for the attack status packet to be sent
-	 * @param attacker
-	 *          attacking creature or self
-	 * @return The HP that this creature has left. If 0, the creature died.
-	 */
 	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker) {
 		return reduceHp(type, value, skillId, log, attacker, true);
 	}

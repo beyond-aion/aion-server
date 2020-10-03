@@ -217,7 +217,7 @@
 			<gd_npc npc_id="213776" /><!-- Instructor Afrane -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053267" /><!-- Afrane's Shoe Box -->
+			<gd_item id="188053261" /><!-- Afrane's Fabled Shoe Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Rare)" chance="70">
