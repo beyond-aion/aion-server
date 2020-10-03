@@ -291,7 +291,6 @@
 			<gd_item id="125002015" /><!-- Grogget's Hat -->
 		</gd_items>
 	</gd_rule>
-
 	<gd_rule rule_name="Named Headband (Legend)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
@@ -306,7 +305,6 @@
 			<gd_item id="125001982" /><!-- Menekiki's Helm -->
 		</gd_items>
 	</gd_rule>
-
 	<gd_rule rule_name="Named Armor (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->
@@ -331,7 +329,6 @@
 			<gd_item id="114500874" /><!-- Shulack Pirate's Brogans -->
 		</gd_items>
 	</gd_rule>
-
 	<gd_rule rule_name="Named Souvenir" chance="50">
 		<gd_maps>
 			<gd_map map_id="300100000" /><!-- Steel_Rake -->

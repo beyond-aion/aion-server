@@ -38,6 +38,7 @@
 			<gd_npc npc_id="216157" /><!-- Captain Lakhara -->
 		</gd_npcs>
 		<gd_items>
+			<gd_item id="111301523" /><!-- Beshmundir Gunslinger Magic Vambrace -->
 			<gd_item id="113101404" /><!-- Beshmundir Songweaver Leggings -->
 			<gd_item id="111300967" /><!-- Beshmundir Assassin Vambrace -->
 			<gd_item id="114500965" /><!-- Beshmundir Cleric Brogans -->
@@ -165,6 +166,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216163" /><!-- The Plaguebearer -->
+			<gd_npc npc_id="216244" /><!-- The Plaguebearer -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="114500966" /><!-- Beshmundir Chanter Brogans -->
@@ -210,6 +212,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="216165" /><!-- The Great Virhana -->
+			<gd_npc npc_id="216246" /><!-- The Great Virhana -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="100001006" /><!-- Virhana's Sword -->

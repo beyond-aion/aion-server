@@ -1230,6 +1230,18 @@
 			<gd_item id="122000557" /><!-- Ilaina's Ring -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="50">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212828" /><!-- Sawteeth Lehul -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="112300370" /><!-- Arkanis Shoulderguards -->
+			<gd_item id="112600413" /><!-- Arkanis Shoulderplates -->
+		</gd_items>
+	</gd_rule>
 	<gd_rule rule_name="Named Material" chance="100">
 		<gd_maps>
 			<gd_map map_id="220020000" /><!-- Morheim -->
@@ -1514,6 +1526,44 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="123000578" /><!-- Wriggot's Belt -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="60">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="212860" /><!-- Ascended Pretor -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000561" /><!-- Ascended Body's Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211393" /><!-- Chieftain Suroot -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100200292" /><!-- Surt's Dagger -->
+			<gd_item id="100100186" /><!-- Surt's Warhammer -->
+			<gd_item id="100600214" /><!-- Surt's Tome -->
+			<gd_item id="102000296" /><!-- Surt's Harp -->
+			<gd_item id="101800283" /><!-- Surt's Pistol -->
+			<gd_item id="102100267" /><!-- Surt's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="45">
+		<gd_maps>
+			<gd_map map_id="220020000" /><!-- Morheim -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211393" /><!-- Chieftain Suroot -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000575" /><!-- Surt's Belt -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

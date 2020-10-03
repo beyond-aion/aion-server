@@ -86,6 +86,7 @@
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="219185" /><!-- Aldreen -->
+			<gd_npc npc_id="217373" /><!-- Popuchin -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="110900259" /><!-- Shulack Work Clothes -->

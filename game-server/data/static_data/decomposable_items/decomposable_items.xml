@@ -29380,12 +29380,12 @@
 	</decomposable>
 	<decomposable item_id="188053263" selectable="true"><!-- Nimbarka's Fabled Armor Box -->
 		<items>
-			<item id="112100614" /><!-- Sunrise Pauldrons -->
-			<item id="112300614" /><!-- Shoulderguards of Dark Dusk -->
-			<item id="112301468" /><!-- Magic Shoulderguards of Dark Dusk -->
-			<item id="112500602" /><!-- Deep Abyss Spaulders -->
-			<item id="112501511" /><!-- Deep Abyss Magic Spaulders -->
-			<item id="112600610" /><!-- Ice Black Shoulderplates -->
+			<item id="110551011" /><!--	Chain Cuirass of the Abyssal Depths	-->
+			<item id="110500673" /><!--	Deep Abyss Hauberk	-->
+			<item id="110600659" /><!--	Ice Black Breastplate	-->
+			<item id="110300696" /><!--	Jerkin of Dark Dusk	-->
+			<item id="110301589" /><!--	Leather Jacket of Dark Twilight	-->
+			<item id="110100734" /><!--	Sunrise Tunic	-->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053264" selectable="true"><!-- Saraswati's Fabled Shoulder Box -->
@@ -29605,7 +29605,7 @@
 	<decomposable item_id="188053287" selectable="true"><!-- Dhatra's Fabled Earrings Box -->
 		<items>
 			<item id="120000902" /><!-- Earrings of Ascending -->
-			<item id="122001060" /><!-- Sapphire Ring of Telepathy Controller -->
+			<item id="120000903" /><!-- Earrings of Ascending -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053288" selectable="true"><!-- Anuhart's Fabled Belt Box -->

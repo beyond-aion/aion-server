@@ -1527,4 +1527,32 @@
 			<gd_item id="182201342" /><!-- Paper Slip -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Chest" chance="15">
+		<gd_maps>
+			<gd_map map_id="210020000" /><!-- Eltnen -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211862" /><!-- Crack Pathrunner -->
+			<gd_npc npc_id="211863" /><!-- Crack Pathrunner -->
+			<gd_npc npc_id="211864" /><!-- Elder Pathrunner -->
+			<gd_npc npc_id="211865" /><!-- Elder Pathrunner -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053949" /><!-- Elite Legionnaire Weapon Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Chest" chance="15">
+		<gd_maps>
+			<gd_map map_id="210020000" /><!-- Eltnen -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="211862" /><!-- Crack Pathrunner -->
+			<gd_npc npc_id="211863" /><!-- Crack Pathrunner -->
+			<gd_npc npc_id="211864" /><!-- Elder Pathrunner -->
+			<gd_npc npc_id="211865" /><!-- Elder Pathrunner -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053952" /><!-- Elite Legionnaire Armor Box -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

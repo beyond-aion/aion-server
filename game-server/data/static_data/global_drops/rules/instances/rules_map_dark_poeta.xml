@@ -43,7 +43,7 @@
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="237002" /><!-- Main Power Generator -->
+			<gd_npc npc_id="214895" /><!-- Main Power Generator -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053289" /><!-- Fabled Dragon Flame Necklace Box -->
@@ -71,7 +71,7 @@
 			<gd_item id="122001039" /><!-- Noah's Tears -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" chance="60">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -80,6 +80,28 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053292" /><!-- Dhatra's Earrings Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Unique)" chance="60">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="215389" /><!-- Spaller Dhatra -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053287" /><!-- Dhatra's Fabled Earrings Box -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="80">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214851" /><!-- Marabata Of Poisoning -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053291" /><!-- Marabata's Ring Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Accessory (Unique)" chance="60">
@@ -383,12 +405,15 @@
 			<gd_item id="152012803" /><!-- Noble Surkana -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Junk" chance="15">
+	<gd_rule rule_name="Named Junk" chance="15">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="214894" /><!-- Telepathy Controller -->
+			<gd_npc npc_id="214895" /><!-- Main Power Generator -->
+			<gd_npc npc_id="214896" /><!-- Auxiliary Power Generator -->
+			<gd_npc npc_id="214897" /><!-- Emergency Generator -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="152012804" /><!-- Noble Drazma -->
@@ -418,6 +443,19 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="160001277" /><!-- Wasteland Drakie Candy -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Junk" chance="15">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="214849" /><!-- Marabata of Strength -->
+			<gd_npc npc_id="214850" /><!-- Marabata Of Aether -->
+			<gd_npc npc_id="214851" /><!-- Marabata Of Poisoning -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182005391" /><!-- Noble Marabata Fragment -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

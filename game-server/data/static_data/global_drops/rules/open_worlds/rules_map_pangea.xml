@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<!-- Common -->
+	<gd_rule rule_name="Material Breath" chance="3">
+		<gd_maps>
+			<gd_map map_id="400040000" /><!-- Aspida -->
+			<gd_map map_id="400050000" /><!-- Atanatos -->
+			<gd_map map_id="400060000" /><!-- Disillon -->
+			<gd_map map_id="400020000" /><!-- Belus -->
+		</gd_maps>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="152012606" /><!-- Vigor Breath -->
+			<gd_item id="152012605" /><!-- Sheltered Breath -->
+			<gd_item id="152012604" /><!-- Valiance Breath -->
+			<gd_item id="152012595" /><!-- Unity Breath -->
+			<gd_item id="152012594" /><!-- Harmony Breath -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Glossy Fragment" chance="3">
+		<gd_maps>
+			<gd_map map_id="400040000" /><!-- Aspida -->
+			<gd_map map_id="400050000" /><!-- Atanatos -->
+			<gd_map map_id="400060000" /><!-- Disillon -->
+			<gd_map map_id="400020000" /><!-- Belus -->
+		</gd_maps>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="186000373" /><!-- Glossy Belus Fragment -->
+			<gd_item id="186000374" /><!-- Glossy Aspida Fragment -->
+			<gd_item id="186000375" /><!-- Glossy Atanatos Fragment -->
+			<gd_item id="186000376" /><!-- Glossy Disillon Fragment -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Prismatic Fragment" chance="2">
+		<gd_maps>
+			<gd_map map_id="400040000" /><!-- Aspida -->
+			<gd_map map_id="400050000" /><!-- Atanatos -->
+			<gd_map map_id="400060000" /><!-- Disillon -->
+			<gd_map map_id="400020000" /><!-- Belus -->
+		</gd_maps>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+			<gd_rating rating="ELITE" />
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="186000377" /><!-- Prismatic Belus Fragment -->
+			<gd_item id="186000378" /><!-- Prismatic Aspida Fragment -->
+			<gd_item id="186000379" /><!-- Prismatic Atanatos Fragment -->
+			<gd_item id="186000380" /><!-- Prismatic Disillon Fragment -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Power Shards" chance="100">
+		<gd_maps>
+			<gd_map map_id="400040000" /><!-- Aspida -->
+			<gd_map map_id="400050000" /><!-- Atanatos -->
+			<gd_map map_id="400060000" /><!-- Disillon -->
+			<gd_map map_id="400020000" /><!-- Belus -->
+		</gd_maps>
+		<gd_ratings>
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="169000010" min_count="500" /><!-- Superior Power Shard -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Material" chance="80">
+		<gd_maps>
+			<gd_map map_id="400040000" /><!-- Aspida -->
+			<gd_map map_id="400050000" /><!-- Atanatos -->
+			<gd_map map_id="400060000" /><!-- Disillon -->
+			<gd_map map_id="400020000" /><!-- Belus -->
+		</gd_maps>
+		<gd_ratings>
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="169405267" min_count="5" /><!-- Flame Vitality -->
+			<gd_item id="169405268" min_count="5" /><!-- Lightning Vitality -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Godstone" chance="5">
+		<gd_maps>
+			<gd_map map_id="400040000" /><!-- Aspida -->
+			<gd_map map_id="400050000" /><!-- Atanatos -->
+			<gd_map map_id="400060000" /><!-- Disillon -->
+			<gd_map map_id="400020000" /><!-- Belus -->
+		</gd_maps>
+		<gd_ratings>
+			<gd_rating rating="HERO" />
+		</gd_ratings>
+		<gd_items>
+			<gd_item id="168000163" /><!-- Illusion Godstone: Nezekan's Advance -->
+			<gd_item id="168000162" /><!-- Illusion Godstone: Ereshkigal's Honor -->
+			<gd_item id="168000161" /><!-- Illusion Godstone: Meslamtaeda's Greed -->
+			<gd_item id="168000165" /><!-- Illusion Godstone: Fregion's Trick -->
+			<gd_item id="168000164" /><!-- Illusion Godstone: Beritra's Plot -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Composite Manastone Bundle" chance="1">
+		<gd_maps>
+			<gd_map map_id="400040000" /><!-- Aspida -->
+			<gd_map map_id="400050000" /><!-- Atanatos -->
+			<gd_map map_id="400060000" /><!-- Disillon -->
+			<gd_map map_id="400020000" /><!-- Belus -->
+		</gd_maps>
+		<gd_ratings>
+			<gd_rating rating="NORMAL" />
+		</gd_ratings>
+		<gd_npc_names>
+			<gd_npc_name value="temporal" function="START_WITH" />
+		</gd_npc_names>
+		<gd_items>
+			<gd_item id="188053609" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Epic)" chance="60">
+		<gd_maps>
+			<gd_map map_id="400040000" /><!-- Aspida -->
+			<gd_map map_id="400050000" /><!-- Atanatos -->
+			<gd_map map_id="400060000" /><!-- Disillon -->
+			<gd_map map_id="400020000" /><!-- Belus -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="881410" /><!-- sharp taipaum -->
+			<gd_npc npc_id="881434" /><!-- sharp taipaum -->
+			<gd_npc npc_id="881426" /><!-- sharp taipaum -->
+			<gd_npc npc_id="881418" /><!-- sharp taipaum -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001698" /><!-- Taipaum's Sword -->
+			<gd_item id="100901324" /><!-- Taipaum's Greatsword -->
+			<gd_item id="100201469" /><!-- Taipaum's Dagger -->
+			<gd_item id="100101297" /><!-- Taipaum's Mace -->
+			<gd_item id="100501283" /><!-- Taipaum's Orb -->
+			<gd_item id="100601393" /><!-- Taipaum's Spellbook -->
+			<gd_item id="101301229" /><!-- Taipaum's Polearm -->
+			<gd_item id="101501320" /><!-- Taipaum's Staff -->
+			<gd_item id="101701334" /><!-- Taipaum's Bow -->
+			<gd_item id="102001212" /><!-- Taipaum's Harp -->
+			<gd_item id="101801184" /><!-- Taipaum's Pistol -->
+			<gd_item id="101901095" /><!-- Taipaum's Aethercannon -->
+			<gd_item id="102101018" /><!-- Taipaum's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" chance="60">
+		<gd_maps>
+			<gd_map map_id="400040000" /><!-- Aspida -->
+			<gd_map map_id="400050000" /><!-- Atanatos -->
+			<gd_map map_id="400060000" /><!-- Disillon -->
+			<gd_map map_id="400020000" /><!-- Belus -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="881410" /><!-- sharp taipaum -->
+			<gd_npc npc_id="881434" /><!-- sharp taipaum -->
+			<gd_npc npc_id="881426" /><!-- sharp taipaum -->
+			<gd_npc npc_id="881418" /><!-- sharp taipaum -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001719" /><!-- Taipaum's Protective Shield -->
+			<gd_item id="115001718" /><!-- Taipaum's Battle Shield -->
+			<gd_item id="110101795" /><!-- Taipaum's Tunic -->
+			<gd_item id="111101615" /><!-- Taipaum's Gloves -->
+			<gd_item id="112101565" /><!-- Taipaum's Pauldrons -->
+			<gd_item id="113101627" /><!-- Taipaum's Leggings -->
+			<gd_item id="114101661" /><!-- Taipaum's Shoes -->
+			<gd_item id="110301780" /><!-- Taipaum's Jerkin -->
+			<gd_item id="111301718" /><!-- Taipaum's Vambrace -->
+			<gd_item id="112301657" /><!-- Taipaum's Shoulderguards -->
+			<gd_item id="113301749" /><!-- Taipaum's Breeches -->
+			<gd_item id="114301786" /><!-- Taipaum's Boots -->
+			<gd_item id="110551116" /><!-- Taipaum's Hauberk -->
+			<gd_item id="111501675" /><!-- Taipaum's Handguards -->
+			<gd_item id="112501614" /><!-- Taipaum's Spaulders -->
+			<gd_item id="113501693" /><!-- Taipaum's Chausses -->
+			<gd_item id="114501703" /><!-- Taipaum's Brogans -->
+			<gd_item id="110601583" /><!-- Taipaum's Breastplate -->
+			<gd_item id="111601546" /><!-- Taipaum's Gauntlets -->
+			<gd_item id="112601528" /><!-- Taipaum's Shoulderplates -->
+			<gd_item id="113601529" /><!-- Taipaum's Greaves -->
+			<gd_item id="114601536" /><!-- Taipaum's Sabatons -->
+			<gd_item id="125004056" /><!-- Taipaum's Helm -->
+			<gd_item id="125004057" /><!-- Taipaum's Chain Helm -->
+			<gd_item id="125004058" /><!-- Taipaum's Hat -->
+			<gd_item id="125004059" /><!-- Taipaum's Headband -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Epic)" chance="60">
+		<gd_maps>
+			<gd_map map_id="400040000" /><!-- Aspida -->
+			<gd_map map_id="400050000" /><!-- Atanatos -->
+			<gd_map map_id="400060000" /><!-- Disillon -->
+			<gd_map map_id="400020000" /><!-- Belus -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="881411" /><!-- fierce gustafi -->
+			<gd_npc npc_id="881435" /><!-- fierce gustafi -->
+			<gd_npc npc_id="881427" /><!-- fierce gustafi -->
+			<gd_npc npc_id="881419" /><!-- fierce gustafi -->
+			<gd_npc npc_id="881419" /><!-- fierce gustafi -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001699" /><!-- Gustafi's Sword -->
+			<gd_item id="100901325" /><!-- Gustafi's Greatsword -->
+			<gd_item id="100201470" /><!-- Gustafi's Dagger -->
+			<gd_item id="100101298" /><!-- Gustafi's Mace -->
+			<gd_item id="100501284" /><!-- Gustafi's Orb -->
+			<gd_item id="100601394" /><!-- Gustafi's Spellbook -->
+			<gd_item id="101301230" /><!-- Gustafi's Polearm -->
+			<gd_item id="101501321" /><!-- Gustafi's Staff -->
+			<gd_item id="101701335" /><!-- Gustafi's Bow -->
+			<gd_item id="102001213" /><!-- Gustafi's Harp -->
+			<gd_item id="101801185" /><!-- Gustafi's Pistol -->
+			<gd_item id="101901096" /><!-- Gustafi's Aethercannon -->
+			<gd_item id="102101019" /><!-- Gustafi's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Epic)" chance="60">
+		<gd_maps>
+			<gd_map map_id="400040000" /><!-- Aspida -->
+			<gd_map map_id="400050000" /><!-- Atanatos -->
+			<gd_map map_id="400060000" /><!-- Disillon -->
+			<gd_map map_id="400020000" /><!-- Belus -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="881411" /><!-- fierce gustafi -->
+			<gd_npc npc_id="881435" /><!-- fierce gustafi -->
+			<gd_npc npc_id="881427" /><!-- fierce gustafi -->
+			<gd_npc npc_id="881419" /><!-- fierce gustafi -->
+			<gd_npc npc_id="881419" /><!-- fierce gustafi -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115001721" /><!-- Gustafi's Protective Shield -->
+			<gd_item id="115001720" /><!-- Gustafi's Battle Shield -->
+			<gd_item id="110101796" /><!-- Gustafi's Tunic -->
+			<gd_item id="111101616" /><!-- Gustafi's Gloves -->
+			<gd_item id="112101566" /><!-- Gustafi's Pauldrons -->
+			<gd_item id="113101628" /><!-- Gustafi's Leggings -->
+			<gd_item id="114101662" /><!-- Gustafi's Shoes -->
+			<gd_item id="110301781" /><!-- Gustafi's Jerkin -->
+			<gd_item id="111301719" /><!-- Gustafi's Vambrace -->
+			<gd_item id="112301658" /><!-- Gustafi's Shoulderguards -->
+			<gd_item id="113301750" /><!-- Gustafi's Breeches -->
+			<gd_item id="114301787" /><!-- Gustafi's Boots -->
+			<gd_item id="110551117" /><!-- Gustafi's Hauberk -->
+			<gd_item id="111501676" /><!-- Gustafi's Handguards -->
+			<gd_item id="112501615" /><!-- Gustafi's Spaulders -->
+			<gd_item id="113501694" /><!-- Gustafi's Chausses -->
+			<gd_item id="114501704" /><!-- Gustafi's Brogans -->
+			<gd_item id="110601584" /><!-- Gustafi's Breastplate -->
+			<gd_item id="111601547" /><!-- Gustafi's Gauntlets -->
+			<gd_item id="112601529" /><!-- Gustafi's Shoulderplates -->
+			<gd_item id="113601530" /><!-- Gustafi's Greaves -->
+			<gd_item id="114601537" /><!-- Gustafi's Sabatons -->
+			<gd_item id="125004060" /><!-- Gustafi's Helm -->
+			<gd_item id="125004061" /><!-- Gustafi's Chain Helm -->
+			<gd_item id="125004062" /><!-- Gustafi's Hat -->
+			<gd_item id="125004063" /><!-- Gustafi's Headband -->
+		</gd_items>
+	</gd_rule>
+</global_rules>

@@ -378,7 +378,7 @@
 			<gd_npc npc_id="213802" /><!-- Kind Saraswati -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188053264" /><!-- Saraswati's Fabled Shoulder Box -->
+			<gd_item id="188053270" /><!-- Saraswati's Shoulder Gear Box -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Armor (Unique)" chance="40">

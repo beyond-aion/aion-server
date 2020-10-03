@@ -100,6 +100,7 @@
 			<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
 			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
 			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
+			<gd_npc npc_id="235655" /><!-- Bodyguard Yatakin -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="115001636" /><!-- Danann Divine Scale Shield -->
@@ -114,6 +115,7 @@
 			<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
 			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
 			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
+			<gd_npc npc_id="235655" /><!-- Bodyguard Yatakin -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="115001637" /><!-- Danann Noble Battle Shield -->
@@ -213,7 +215,7 @@
 			<gd_item id="112601437" /><!-- Danann Divine Shoulderplates -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Epic)" chance="10">
+	<gd_rule rule_name="Named Armor (Epic)" chance="7.5">
 		<gd_maps>
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 		</gd_maps>
@@ -221,6 +223,7 @@
 			<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
 			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
 			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
+			<gd_npc npc_id="235655" /><!-- Bodyguard Yatakin -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="114101565" /><!-- Danann Noble Shoes -->
@@ -243,6 +246,30 @@
 			<gd_item id="112301569" /><!-- Danann Noble Shoulderguards -->
 			<gd_item id="112501418" /><!-- Danann Noble Spaulders -->
 			<gd_item id="112601439" /><!-- Danann Noble Shoulderplates -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Epic)" chance="7.5">
+		<gd_maps>
+			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="235655" /><!-- Bodyguard Yatakin -->
+			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100001589" /><!-- Danann Noble Sword -->
+			<gd_item id="100901238" /><!-- Danann Noble Greatsword -->
+			<gd_item id="100201396" /><!-- Danann Noble Dagger -->
+			<gd_item id="100101226" /><!-- Danann Noble Mace -->
+			<gd_item id="100501216" /><!-- Danann Noble Jewel -->
+			<gd_item id="100601308" /><!-- Danann Noble Spellbook -->
+			<gd_item id="101301164" /><!-- Danann Noble Polearm -->
+			<gd_item id="101501252" /><!-- Danann Noble Staff -->
+			<gd_item id="101701267" /><!-- Danann Noble Longbow -->
+			<gd_item id="102001100" /><!-- Danann Viol -->
+			<gd_item id="101801075" /><!-- Danann Flintlock -->
+			<gd_item id="101901024" /><!-- Danann Arquebus -->
+			<gd_item id="102100849" /><!-- Danann Noble Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Ancient Manastone (Unique)" chance="52">

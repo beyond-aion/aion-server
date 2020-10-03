@@ -143,4 +143,216 @@
 			<gd_item id="115000509" /><!-- Red Tear Shield -->
 		</gd_items>
 	</gd_rule>
+
+	<gd_rule rule_name="Named Accessory (Rare)" chance="80">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="253613" /><!-- Team Leader Lahu -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="121000544" /><!-- Lahu's Garnet Necklace -->
+			<gd_item id="121000545" /><!-- Lahu's Lazuli Necklace -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="60">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="253613" /><!-- Team Leader Lahu -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900237" /><!-- Lahu's Greatsword -->
+			<gd_item id="101300234" /><!-- Lahu's Spear -->
+			<gd_item id="101700258" /><!-- Lahu's Longbow -->
+			<gd_item id="101900315" /><!-- Lahu's Aethercannon -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="253705" /><!-- The Everwatcher -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100500244" /><!-- Everwatcher's Lens -->
+			<gd_item id="100600260" /><!-- Everwatcher's Tome -->
+			<gd_item id="102000328" /><!-- Everwatcher's Harp -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="253705" /><!-- The Everwatcher -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="120000605" /><!-- Everwatcher's Lazuli Earrings -->
+			<gd_item id="120000604" /><!-- Everwatcher's Garnet Earrings -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="253705" /><!-- The Everwatcher -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="123000653" /><!-- Kamon's Belt -->
+			<gd_item id="123000652" /><!-- Kamon's Leather Belt -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="75">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="253705" /><!-- The Everwatcher -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000505" /><!-- Kamon's Iron Shield -->
+			<gd_item id="115000506" /><!-- Kamon's Stone Shield -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Rare)" chance="65">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="252503" /><!-- Neved The Forgotten -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000651" /><!-- Neved's Ring -->
+			<gd_item id="122000652" /><!-- Neved's Seal -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Rare)" chance="65">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="252503" /><!-- Neved The Forgotten -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100000319" /><!-- Old Warrior's Sword -->
+			<gd_item id="100900236" /><!-- Old Warrior's Greatsword -->
+			<gd_item id="100200340" /><!-- Old Warrior's Dagger -->
+			<gd_item id="100100232" /><!-- Old Warrior's Warhammer -->
+			<gd_item id="100500243" /><!-- Old Warrior's Jewel -->
+			<gd_item id="100600259" /><!-- Old Warrior's Tome -->
+			<gd_item id="101300233" /><!-- Old Warrior's Spear -->
+			<gd_item id="101500245" /><!-- Old Warrior's Staff -->
+			<gd_item id="101700257" /><!-- Old Warrior's Longbow -->
+			<gd_item id="102000327" /><!-- Old Warrior's Harp -->
+			<gd_item id="101800313" /><!-- Old Warrior's Pistol -->
+			<gd_item id="101900314" /><!-- Old Warrior's Aethercannon -->
+			<gd_item id="102100296" /><!-- Old Warrior's Cipher-Blade -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="65">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="253007" /><!-- Brigade General Akius -->
+			<gd_npc npc_id="253016" /><!-- Captain Semund -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110600510" /><!-- Assaulter's Breastplate -->
+			<gd_item id="111600481" /><!-- Assaulter's Gauntlets -->
+			<gd_item id="112600462" /><!-- Assaulter's Shoulderplates -->
+			<gd_item id="113600477" /><!-- Assaulter's Greaves -->
+			<gd_item id="114600467" /><!-- Assaulter's Sabatons -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="65">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="253032" /><!-- Deputy Lagel -->
+			<gd_npc npc_id="253024" /><!-- Lumion -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110300537" /><!-- Sniper's Jerkin -->
+			<gd_item id="111300507" /><!-- Sniper's Vambrace -->
+			<gd_item id="112300469" /><!-- Sniper's Shoulderguards -->
+			<gd_item id="113300520" /><!-- Sniper's Breeches -->
+			<gd_item id="114300534" /><!-- Sniper's Boots -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="65">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="253020" /><!-- General Luhut -->
+			<gd_npc npc_id="253011" /><!-- Highmage Nobris -->
+
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110100576" /><!-- Footsoldier's Tunic -->
+			<gd_item id="111100505" /><!-- Footsoldier's Gloves -->
+			<gd_item id="112100469" /><!-- Footsoldier's Pauldrons -->
+			<gd_item id="113100504" /><!-- Footsoldier's Leggings -->
+			<gd_item id="114100521" /><!-- Footsoldier's Shoes -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Rare)" chance="65">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="253028" /><!-- Deputy Lohan -->
+			<gd_npc npc_id="253036" /><!-- Highmage Pasau -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="110500515" /><!-- Healer's Hauberk -->
+			<gd_item id="111500494" /><!-- Healer's Handguards -->
+			<gd_item id="112500457" /><!-- Healer's Spaulders -->
+			<gd_item id="113500493" /><!-- Healer's Chausses -->
+			<gd_item id="114500500" /><!-- Healer's Brogans -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Weapon (Legend)" chance="65">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="255155" /><!-- Queen Klawtinel -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="100900238" /><!-- Klawtinel's Greatsword -->
+			<gd_item id="100500245" /><!-- Klawtinel's Jewel -->
+			<gd_item id="101500247" /><!-- Klawtinel's Staff -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Accessory (Legend)" chance="65">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="255155" /><!-- Queen Klawtinel -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="122000657" /><!-- Klawtinel's Ruby Ring -->
+			<gd_item id="122000658" /><!-- Klawtinel's Sapphire Ring -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Named Armor (Unique)" chance="35">
+		<gd_maps>
+			<gd_map map_id="400010000" /><!-- Reshanta -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="255155" /><!-- Queen Klawtinel -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="115000508" /><!-- Klawtinel's Shell -->
+		</gd_items>
+	</gd_rule>
 </global_rules>

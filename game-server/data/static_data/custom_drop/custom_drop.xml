@@ -119,6 +119,137 @@
 			<drop item_id="122000780" chance="25" /><!-- Azure Flame Ring -->
 		</drop_group>
 	</npc_drop>
+	<!-- PvP Arenas -->
+	<npc_drop npc_id="218783">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218784">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218785">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218786">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218787">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218788">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218789">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218790">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218791">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218793">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218809">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218810">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="218812">
+		<drop_group>
+			<drop item_id="164000166" /><!-- Fine Crucible Coliseum Invincibility Water -->
+			<drop item_id="164000167" /><!-- Fine Crucible Coliseum Courage Water -->
+			<drop item_id="164000164" /><!-- Fine Crucible Coliseum Explosion Water -->
+			<drop item_id="164000165" /><!-- Fine Crucible Coliseum Restraint Water -->
+			<drop item_id="164000168" /><!-- Fine Crucible Coliseum Ascension Water -->
+			<drop item_id="164000169" /><!-- Fine Crucible Coliseum Recovery Water -->
+		</drop_group>
+	</npc_drop>
 	<!-- Pernon/Oriel -->
 	<npc_drop npc_id="218874">
 		<drop_group><!-- Named Life Leaf -->
