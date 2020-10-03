@@ -5,8 +5,6 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
-import com.aionemu.gameserver.controllers.observer.TerrainZoneCollisionMaterialActor;
-import com.aionemu.gameserver.world.geo.GeoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -17,6 +15,7 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
+import com.aionemu.gameserver.controllers.observer.TerrainZoneCollisionMaterialActor;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.TaskId;
@@ -48,6 +47,7 @@ import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneUpdateService;
 
@@ -150,12 +150,13 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	/**
 	 * Perform tasks on Creature death.<br>
-	 * Should ONLY be called from {@link com.aionemu.gameserver.model.stats.container.CreatureLifeStats#reduceHp(TYPE, int, int, LOG, Creature)
+	 * Should ONLY be called from {@link com.aionemu.gameserver.model.stats.container.CreatureLifeStats#reduceHp(TYPE, int, int, LOG, Creature, boolean)
 	 * reduceHp()} to avoid duplicate death events.
 	 * 
 	 * @param lastAttacker
+	 * @param sendDiePacket
 	 */
-	public void onDie(Creature lastAttacker) {
+	public void onDie(Creature lastAttacker, boolean sendDiePacket) {
 		getOwner().getMoveController().abortMove();
 		getOwner().setCasting(null);
 		getOwner().getEffectController().removeAllEffects();
@@ -223,7 +224,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		// notify all NPC's around that creature is attacking me
 		getOwner().getKnownList().forEachNpc(npc -> npc.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));
-		getOwner().getLifeStats().reduceHp(type, damage, skillId, logId, attacker);
+		getOwner().getLifeStats().reduceHp(type, damage, skillId, logId, attacker, true);
 		getOwner().incrementAttackedCount();
 
 		if (!getOwner().isDead() && attacker instanceof Player) {
@@ -323,7 +324,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			&& (target == null || getOwner().isDead() || getOwner().getLifeStats().isAboutToDie() || !getOwner().canAttack() || !getOwner().isSpawned())) {
 			return;
 		}
-
 
 		// Calculate and apply damage
 		AttackHandAnimation attackHandAnimation = AttackHandAnimation.MAIN_HAND;
@@ -452,7 +452,11 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	public boolean die(TYPE type, LOG log, Creature lastAttacker) {
-		return getOwner().getLifeStats().reduceHp(type, Integer.MAX_VALUE, 0, log, lastAttacker) == 0;
+		return getOwner().getLifeStats().reduceHp(type, Integer.MAX_VALUE, 0, log, lastAttacker, true) == 0;
+	}
+
+	public boolean die(TYPE type, LOG log, Creature lastAttacker, boolean sendDiePacket) {
+		return getOwner().getLifeStats().reduceHp(type, Integer.MAX_VALUE, 0, log, lastAttacker, sendDiePacket) == 0;
 	}
 
 	/**

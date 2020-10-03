@@ -124,7 +124,7 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public void onDie(Creature lastAttacker) {
+	public void onDie(Creature lastAttacker, boolean sendDiePacket) {
 		Npc owner = getOwner();
 		if (owner.getSpawn().hasPool())
 			owner.getSpawn().setUse(owner.getInstanceId(), false);
@@ -144,7 +144,7 @@ public class NpcController extends CreatureController<Npc> {
 			log.error("onDie() exception for " + owner + ":", e);
 		}
 
-		super.onDie(lastAttacker);
+		super.onDie(lastAttacker, sendDiePacket);
 
 		if (shouldRespawn && SiegeService.getInstance().isRespawnAllowed(owner))
 			RespawnService.scheduleRespawn(getOwner());

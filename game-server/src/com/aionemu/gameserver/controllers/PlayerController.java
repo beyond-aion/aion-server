@@ -255,7 +255,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public void onDie(Creature lastAttacker) {
+	public void onDie(Creature lastAttacker, boolean sendDiePacket) {
 		Player player = getOwner();
 		player.getController().cancelCurrentSkill(null);
 		setRebirthReviveInfo();
@@ -305,7 +305,7 @@ public class PlayerController extends CreatureController<Player> {
 		player.resetParalyzeCount();
 
 		// Effects removed with super.onDie()
-		super.onDie(lastAttacker);
+		super.onDie(lastAttacker, sendDiePacket);
 
 		if (player.isInInstance() && player.getPosition().getWorldMapInstance().getInstanceHandler().onDie(player, lastAttacker))
 			return;
@@ -321,7 +321,7 @@ public class PlayerController extends CreatureController<Player> {
 				player.getCommonData().calculateExpLoss();
 		}
 
-		if (!player.getController().hasTask(TaskId.TELEPORT)) // don't show res options if the player is about to get teleported (see ResurrectBaseEffect)
+		if (sendDiePacket && !player.getController().hasTask(TaskId.TELEPORT)) // don't show res options if the player is about to get teleported (see ResurrectBaseEffect)
 			sendDieFromCreature(lastAttacker);
 
 		QuestEngine.getInstance().onDie(new QuestEnv(null, player, 0));

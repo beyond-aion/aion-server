@@ -109,20 +109,41 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 	/**
 	 * This method is called whenever caller wants to absorb creatures' HP
-	 * 
+	 *
 	 * @param type
-	 *          - attack type (see {@link SM_ATTACK_STATUS.TYPE}), if null, no {@link SM_ATTACK_STATUS} packet will be sent
+	 *          attack type (see {@link SM_ATTACK_STATUS.TYPE}), if null, no {@link SM_ATTACK_STATUS} packet will be sent
 	 * @param value
-	 *          - hp to subtract
+	 *          hp to subtract
 	 * @param skillId
-	 *          - skillId (0 if none)
+	 *          skillId (0 if none)
 	 * @param log
-	 *          - log type (see {@link SM_ATTACK_STATUS.LOG}) for the attack status packet to be sent
+	 *          log type (see {@link SM_ATTACK_STATUS.LOG}) for the attack status packet to be sent
 	 * @param attacker
-	 *          - attacking creature or self
+	 *          attacking creature or self
 	 * @return The HP that this creature has left. If 0, the creature died.
 	 */
 	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker) {
+		return reduceHp(type, value, skillId, log, attacker, true);
+	}
+
+	/**
+	 * This method is called whenever caller wants to absorb creatures' HP
+	 * 
+	 * @param type
+	 *          attack type (see {@link SM_ATTACK_STATUS.TYPE}), if null, no {@link SM_ATTACK_STATUS} packet will be sent
+	 * @param value
+	 *          hp to subtract
+	 * @param skillId
+	 *          skillId (0 if none)
+	 * @param log
+	 *          log type (see {@link SM_ATTACK_STATUS.LOG}) for the attack status packet to be sent
+	 * @param attacker
+	 *          attacking creature or self
+	 * @param sendDiePacket
+	 *          send SM_DIE to players
+	 * @return The HP that this creature has left. If 0, the creature died.
+	 */
+	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker, boolean sendDiePacket) {
 		Objects.requireNonNull(attacker, "attacker");
 
 		if (getOwner().isInvulnerable()) {
@@ -155,7 +176,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (hpReduced > 0 || skillId != 0)
 			onReduceHp(type, hpReduced, skillId, log);
 		if (died)
-			getOwner().getController().onDie(attacker);
+			getOwner().getController().onDie(attacker, sendDiePacket);
 		if (hpReduced > 0)
 			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
 		return currentHp;
@@ -242,7 +263,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		if (hpIncreased > 0 || skillId != 0)
 			onIncreaseHp(type, hpIncreased, skillId, log);
 		if (died)
-			getOwner().getController().onDie(effector == null ? getOwner() : effector);
+			getOwner().getController().onDie(effector == null ? getOwner() : effector, true);
 		if (hpIncreased > 0) {
 			if (killingBlow != 0 && currentHp > killingBlow)
 				unsetIsAboutToDie();
