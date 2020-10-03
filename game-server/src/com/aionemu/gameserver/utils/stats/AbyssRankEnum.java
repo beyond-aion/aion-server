@@ -92,14 +92,15 @@ public enum AbyssRankEnum {
 
 	public int getGpLossPerDay() {
 		int gpLossCap = RankingConfig.TOP_RANKING_GP_LOSS_CAP;
-		return gpLossCap > -1 && gpLossPerDay > gpLossCap ? gpLossCap : gpLossPerDay;
+		int dailyGpLoss = RankingConfig.TOP_RANKING_GP_LOSS.getOrDefault(this, gpLossPerDay);
+		return gpLossCap > -1 && dailyGpLoss > gpLossCap ? gpLossCap : dailyGpLoss;
 	}
 
 	/**
 	 * @return The quota is the maximum number of allowed player to have the rank
 	 */
 	public int getQuota() {
-		return quota;
+		return RankingConfig.TOP_RANKING_QUOTA.getOrDefault(this, quota);
 	}
 
 	public static String getRankL10n(Player player) {
