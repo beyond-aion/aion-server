@@ -6,7 +6,7 @@ import com.aionemu.gameserver.skillengine.model.SignetEnum;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
-import java.util.HashMap;
+import java.util.EnumMap;
 import java.util.List;
 import java.util.Map;
 
@@ -18,7 +18,7 @@ public class SignetDataTemplates {
     private List<SignetDataTemplate> signetDataTemplateList;
 
     @XmlTransient
-    private Map<SignetEnum, SignetDataTemplate> signets = new HashMap<>();
+    private Map<SignetEnum, SignetDataTemplate> signets = new EnumMap<>(SignetEnum.class);
 
     void afterUnmarshal(Unmarshaller u, Object parent) {
         for (SignetDataTemplate data : signetDataTemplateList) {
