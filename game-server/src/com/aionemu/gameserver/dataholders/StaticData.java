@@ -301,6 +301,9 @@ public class StaticData {
 	@XmlElement(name = "alias_locations")
 	public SkillAliasLocationData skillAliasLocationData;
 
+	@XmlElement(name = "signet_data_templates")
+	public SignetDataTemplates signetDataTemplates;
+
 	@XmlTransient
 	private List<Future<?>> afterUnmarshalTasks;
 	@XmlTransient
@@ -402,6 +405,7 @@ public class StaticData {
 		log.info("Loaded " + killBountyData.size() + " kill bounty templates");
 		log.info("Loaded " + legionDominionData.size() + " legion dominion locations");
 		log.info("Loaded " + skillAliasLocationData.size() + " skill alias locations");
+		log.info("Loaded " + signetDataTemplates.size() + " signet data templates");
 	}
 
 	public void setValidationTask(Future<?> validationTask) {

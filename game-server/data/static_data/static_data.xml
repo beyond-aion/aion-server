@@ -145,4 +145,5 @@
 	<import file="world_raid/world_raids.xml" />
 	<import file="zones" singleRootTag="true" />
 	<import file="skills/alias_locations.xml" />
+	<import file="skills/signet_data_templates.xml" />
 </static_data>

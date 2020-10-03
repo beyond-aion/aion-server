@@ -7,7 +7,10 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.SignetData;
+import com.aionemu.gameserver.skillengine.model.SignetEnum;
 
 /**
  * @author ATracer, kecimis
@@ -26,39 +29,16 @@ public class SignetBurstEffect extends DamageEffect {
 		Effect signetEffect = effect.getEffected().getEffectController().getAbnormalEffect(signet);
 		int valueWithDelta = calculateBaseValue(effect);
 
-		if (signetEffect == null) {
-			valueWithDelta *= 0.05f;
-			AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
-			effect.setLaunchSubEffect(false);
-		} else {
-			int level = signetEffect.getSkillLevel();
-			effect.setSignetBurstedCount(level);
-			int failChance = 0;
-			switch (level) {
-				case 1:
-					valueWithDelta *= 0.2f;
-					failChance = 90;
-					break;
-				case 2:
-					valueWithDelta *= 0.5f;
-					failChance = 70;
-					break;
-				case 3:
-					valueWithDelta *= 1.0f;
-					break;
-				case 4:
-					valueWithDelta *= 1.2f;
-					break;
-				case 5:
-					valueWithDelta *= 1.5f;
-					break;
-			}
-			AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
-			if (Rnd.chance() < failChance) {
-				effect.setLaunchSubEffect(false);
-			}
-			signetEffect.endEffect();
+		int effectProb = 0;
+		SignetData signetData = DataManager.SIGNET_DATA_TEMPLATES.getSignetData(SignetEnum.valueOf(signet), signetEffect == null ? 0 : signetEffect.getSkillLevel());
+		if (signetData != null) {
+			valueWithDelta *= signetData.getDamageMultiplier();
+			effectProb = signetData.getAddEffectProb();
 		}
+		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
+		effect.setLaunchSubEffect(Rnd.chance() < effectProb);
+		if (signetEffect != null)
+			signetEffect.endEffect();
 	}
 
 	@Override

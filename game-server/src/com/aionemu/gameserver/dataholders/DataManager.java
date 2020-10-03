@@ -118,6 +118,7 @@ public final class DataManager {
 	public static ZoneData ZONE_DATA;
 	public static LegionDominionData LEGION_DOMINION_DATA;
 	public static SkillAliasLocationData SKILL_ALIAS_LOCATION_DATA;
+	public static SignetDataTemplates SIGNET_DATA_TEMPLATES;
 	private static Future<?> xmlValidationTask;
 
 	/**
@@ -223,6 +224,7 @@ public final class DataManager {
 		KILL_BOUNTY_DATA = data.killBountyData;
 		LEGION_DOMINION_DATA = data.legionDominionData;
 		SKILL_ALIAS_LOCATION_DATA = data.skillAliasLocationData;
+		SIGNET_DATA_TEMPLATES = data.signetDataTemplates;
 		xmlValidationTask = data.getValidationTask();
 		data.waitForAfterUnmarshalTasksToFinish();
 

@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<signet_data_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="signet_data_templates.xsd">
+	<signet_data_template signet_skill="SIGNET1">
+		<signet_data lvl="0" add_effect_prob="0" dmg_multi="0.1"/>
+		<signet_data lvl="1" add_effect_prob="0" dmg_multi="0.2"/>
+		<signet_data lvl="2" add_effect_prob="20" dmg_multi="0.5"/>
+		<signet_data lvl="3" add_effect_prob="50" dmg_multi="1.0"/>
+		<signet_data lvl="4" add_effect_prob="70" dmg_multi="1.2"/>
+		<signet_data lvl="5" add_effect_prob="100" dmg_multi="1.5"/>
+	</signet_data_template>
+	<signet_data_template signet_skill="SIGNET2">
+		<signet_data lvl="0" dmg_multi="0.12"/>
+		<signet_data lvl="1" dmg_multi="0.3"/>
+		<signet_data lvl="2" dmg_multi="0.5"/>
+		<signet_data lvl="3" dmg_multi="0.7"/>
+		<signet_data lvl="4" dmg_multi="0.9"/>
+		<signet_data lvl="5" dmg_multi="1.1"/>
+	</signet_data_template>
+	<signet_data_template signet_skill="SIGNET3">
+		<signet_data lvl="0" dmg_multi="0.12"/>
+		<signet_data lvl="1" dmg_multi="0.5"/>
+		<signet_data lvl="2" dmg_multi="0.9"/>
+		<signet_data lvl="3" dmg_multi="1.1"/>
+		<signet_data lvl="4" dmg_multi="1.3"/>
+		<signet_data lvl="5" dmg_multi="1.5"/>
+	</signet_data_template>
+	<signet_data_template signet_skill="SIGNET4">
+		<signet_data lvl="0" dmg_multi="0.12"/>
+		<signet_data lvl="1" dmg_multi="0.5"/>
+		<signet_data lvl="2" dmg_multi="0.9"/>
+		<signet_data lvl="3" dmg_multi="1.1"/>
+		<signet_data lvl="4" dmg_multi="1.3"/>
+		<signet_data lvl="5" dmg_multi="1.5"/>
+	</signet_data_template>
+</signet_data_templates>

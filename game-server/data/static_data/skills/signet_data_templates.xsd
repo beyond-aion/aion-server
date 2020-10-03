@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:element name="signet_data_templates" type="SignetDataTemplates"/>
+	<xs:complexType name="SignetDataTemplates">
+		<xs:sequence>
+			<xs:element name="signet_data_template" type="SignetDataTemplate" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SignetDataTemplate">
+		<xs:sequence>
+			<xs:element name="signet_data" type="SignetData" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="signet_skill" type="SignetEnum" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="SignetData">
+		<xs:attribute name="lvl" type="xs:int" use="required"/>
+		<xs:attribute name="add_effect_prob" type="xs:int" />
+		<xs:attribute name="dmg_multi" type="xs:float" use="required"/>
+	</xs:complexType>
+	<xs:simpleType name="SignetEnum">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="SIGNET1"/>
+			<xs:enumeration value="SIGNET2"/>
+			<xs:enumeration value="SIGNET3"/>
+			<xs:enumeration value="SIGNET4"/>
+		</xs:restriction>
+	</xs:simpleType>
+</xs:schema>
