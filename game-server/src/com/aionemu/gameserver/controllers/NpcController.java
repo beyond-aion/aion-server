@@ -220,11 +220,6 @@ public class NpcController extends CreatureController<Npc> {
 				continue;
 
 			float percentage = info.getDamage() / totalDmg;
-			if (percentage > 1) {
-				log.warn("WARN BIG REWARD PERCENTAGE: " + percentage + " damage: " + info.getDamage() + " total damage: " + totalDmg + " name: "
-					+ info.getAttacker().getName() + " obj: " + info.getAttacker().getObjectId() + " owner: " + getOwner().getName() + " player was skiped");
-				continue;
-			}
 			if (attacker instanceof TemporaryPlayerTeam<?> tmpPlayerTeam) {
 				PlayerTeamDistributionService.doReward(tmpPlayerTeam, percentage, getOwner(), winner);
 			} else if (attacker instanceof Player player && player.isInGroup()) {

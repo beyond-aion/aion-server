@@ -43,9 +43,10 @@ public class CustomInstanceService {
 	public static final int REWARD_COIN_ID = 186000409;
 	private static final int CUSTOM_INSTANCE_WORLD_ID = 300070000; // roah chamber
 	private static final int LEADERBOARD_WINDOW_OBJECT_ID = IDFactory.getInstance().nextId();
+	private static final int RESET_HOUR = 9;
 
 	// Neural network related
-	private Map<Integer, List<PlayerModelEntry>> playerModelEntriesCache = new ConcurrentHashMap<>();
+	private final Map<Integer, List<PlayerModelEntry>> playerModelEntriesCache = new ConcurrentHashMap<>();
 
 	private CustomInstanceService() {
 	}
@@ -55,7 +56,7 @@ public class CustomInstanceService {
 		if (playerRankObject == null)
 			return true;
 		ZonedDateTime now = ServerTime.now();
-		ZonedDateTime reUseTime = now.with(LocalTime.of(9, 0));
+		ZonedDateTime reUseTime = now.with(LocalTime.of(RESET_HOUR, 0));
 		if (now.isBefore(reUseTime))
 			reUseTime = reUseTime.minusDays(1);
 		return playerRankObject.getLastEntry() < reUseTime.toEpochSecond() * 1000;
@@ -77,6 +78,23 @@ public class CustomInstanceService {
 		if (customInstanceRank == null)
 			customInstanceRank = new CustomInstanceRank(playerId, 0, System.currentTimeMillis());
 		return customInstanceRank;
+	}
+
+	public boolean resetEntryCooldown(int playerId) {
+		CustomInstanceRank rankObj = DAOManager.getDAO(CustomInstanceDAO.class).loadPlayerRankObject(playerId);
+		if (rankObj == null)
+			return false;
+		ZonedDateTime now = ServerTime.now();
+		ZonedDateTime reUseTime = now.with(LocalTime.of(RESET_HOUR, 0));
+		if (now.isBefore(reUseTime))
+			reUseTime = reUseTime.minusDays(1);
+		if (rankObj.getLastEntry() < reUseTime.toEpochSecond() * 1000) {
+			return false;
+		} else {
+			reUseTime = reUseTime.minusSeconds(1);
+			rankObj.setLastEntry(reUseTime.toEpochSecond() * 1000);
+			return DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj);
+		}
 	}
 
 	public boolean updateLastEntry(int playerId, long newEntryTime) {

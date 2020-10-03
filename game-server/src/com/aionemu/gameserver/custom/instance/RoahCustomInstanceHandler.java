@@ -114,46 +114,38 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			}, TIME_LIMIT * 1000);
 
 			// spawn bulky mob: 1/min after 1:20min
-			bulkyMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-				@Override
-				public void run() {
-					Npc bulky = null;
-					for (Npc n : instance.getNpcs(BULKY_MOB_ID)) {
-						if (!n.isDead() && !n.getLifeStats().isAboutToDie()) {
-							bulky = n;
-							break;
-						}
+			bulkyMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+				Npc bulky = null;
+				for (Npc n : instance.getNpcs(BULKY_MOB_ID)) {
+					if (!n.isDead() && !n.getLifeStats().isAboutToDie()) {
+						bulky = n;
+						break;
 					}
-					if (bulky != null) {
-						bulky.getLifeStats().setCurrentHp(bulky.getLifeStats().getMaxHp());
-						PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "Protector Vord recovered energy!", ChatType.BRIGHT_YELLOW_CENTER));
-					} else {
-						bulky = (Npc) spawn(BULKY_MOB_ID, 493.923f, 488.16794f, 87.18341f, (byte) 0);
-						adaptNPC(bulky, rank);
-						bulky.getAggroList().addHate(player, 1000);
-						PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "A tough protector has appeared!", ChatType.BRIGHT_YELLOW_CENTER));
-					}
+				}
+				if (bulky != null) {
+					bulky.getLifeStats().setCurrentHp(bulky.getLifeStats().getMaxHp());
+					PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "Protector Vord recovered energy!", ChatType.BRIGHT_YELLOW_CENTER));
+				} else {
+					bulky = (Npc) spawn(BULKY_MOB_ID, 493.923f, 488.16794f, 87.18341f, (byte) 0);
+					adaptNPC(bulky, rank);
+					bulky.getAggroList().addHate(player, 1000);
+					PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "A tough protector has appeared!", ChatType.BRIGHT_YELLOW_CENTER));
 				}
 			}, 80000, 60000);
 
 			if (rank >= CustomInstanceRankEnum.BRONZE.getMinRank()) {
 				// spawn trash mobs: 1 wave/min after 1min
-				trashMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+				trashMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+					int newTrash = 6;
+					for (Npc n : instance.getNpcs(TRASH_MOB_ID)) // always spawn until 6 total
+						if (!n.isDead())
+							newTrash--;
 
-					@Override
-					public void run() {
-						int newTrash = 6;
-						for (Npc n : instance.getNpcs(TRASH_MOB_ID)) // always spawn until 6 total
-							if (!n.isDead())
-								newTrash--;
-
-						if (newTrash > 0) {
-							for (int i = 0; i < newTrash; i++) {
-								Npc mob = (Npc) spawn(TRASH_MOB_ID, 500.1f + Rnd.get() * 8, 460f + Rnd.get() * 4, 86.7112f, (byte) 30);
-								adaptNPC(mob, rank);
-								mob.getAggroList().addHate(player, 1000);
-							}
+					if (newTrash > 0) {
+						for (int i = 0; i < newTrash; i++) {
+							Npc mob = (Npc) spawn(TRASH_MOB_ID, 500.1f + Rnd.get() * 8, 460f + Rnd.get() * 4, 86.7112f, (byte) 30);
+							adaptNPC(mob, rank);
+							mob.getAggroList().addHate(player, 1000);
 						}
 					}
 				}, 60000, 60000 - rank * 1000); // 60s ... 30s
@@ -161,31 +153,26 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 			if (rank >= CustomInstanceRankEnum.SILVER.getMinRank()) {
 				// spawn dominator mob: 1/min after 1:40min
-				dominatorMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-					@Override
-					public void run() {
-						Npc dominator = null;
-						for (Npc n : instance.getNpcs(DOMINATOR_MOB_ID)) {
-							if (!n.isDead() && !n.getLifeStats().isAboutToDie()) {
-								dominator = n;
-								break;
-							}
+				dominatorMobSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+					Npc dominator = null;
+					for (Npc n : instance.getNpcs(DOMINATOR_MOB_ID)) {
+						if (!n.isDead() && !n.getLifeStats().isAboutToDie()) {
+							dominator = n;
+							break;
 						}
-						if (dominator != null) {
-							dominator.getLifeStats().setCurrentHp(dominator.getLifeStats().getMaxHp());
-							PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "Protector Vala recovered energy!", ChatType.BRIGHT_YELLOW_CENTER));
+					}
+					if (dominator != null) {
+						dominator.getLifeStats().setCurrentHp(dominator.getLifeStats().getMaxHp());
+						PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "Protector Vala recovered energy!", ChatType.BRIGHT_YELLOW_CENTER));
 
-						} else {
-							dominator = (Npc) spawn(DOMINATOR_MOB_ID, 515.23114f, 487.94998f, 87.176056f, (byte) 60);
-							adaptNPC(dominator, rank);
-							dominator.getAggroList().addHate(player, 1000);
-							PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "A vile protector has appeared!", ChatType.BRIGHT_YELLOW_CENTER));
-						}
+					} else {
+						dominator = (Npc) spawn(DOMINATOR_MOB_ID, 515.23114f, 487.94998f, 87.176056f, (byte) 60);
+						adaptNPC(dominator, rank);
+						dominator.getAggroList().addHate(player, 1000);
+						PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null, "A vile protector has appeared!", ChatType.BRIGHT_YELLOW_CENTER));
 					}
 				}, 100000, 60000);
 			}
-
 		}
 		return false;
 	}
@@ -328,7 +315,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 					new SM_MESSAGE(0, null, "Your rank has been increased to " + CustomInstanceRankEnum.getRankDescription(rank)
 						+ ". Stay steadfast for tougher challenges and higher rewards!", ChatType.BRIGHT_YELLOW_CENTER));
 			} else {
-				rank--;
+				rank = Math.max(0, --rank);
 				Player player = instance.getPlayer(playerObjId);
 				if (player != null) {
 					PacketSendUtility.sendPacket(player, new SM_MESSAGE(0, null,

@@ -33,18 +33,21 @@ public class CustomInstance extends AdminCommand {
 
 		switch (params[0].toLowerCase()) {
 			case "removecd":
-				if (player.getTarget() instanceof Player) {
-					if (CustomInstanceService.getInstance().updateLastEntry(player.getObjectId(), 0))
-						PacketSendUtility.sendMessage(player, "Successfully removed custom instance cooldown for " + player.getTarget().getName());
+				if (player.getTarget() instanceof Player targetPlayer) {
+					if (CustomInstanceService.getInstance().resetEntryCooldown(targetPlayer.getObjectId())) {
+						PacketSendUtility.sendMessage(player, "Successfully removed custom instance cooldown for " + targetPlayer.getName() + ".");
+					} else {
+						PacketSendUtility.sendMessage(player, "Player " + targetPlayer.getName() + " does not need a reset.");
+					}
 				} else {
 					PacketSendUtility.sendMessage(player, "Please select a player first.");
 				}
 				break;
 			case "getrank":
-				if (player.getTarget() instanceof Player) {
-					int rank = CustomInstanceService.getInstance().loadOrCreateRank(player.getTarget().getObjectId()).getRank();
+				if (player.getTarget() instanceof Player targetPlayer) {
+					int rank = CustomInstanceService.getInstance().loadOrCreateRank(targetPlayer.getObjectId()).getRank();
 					PacketSendUtility.sendMessage(player,
-						player.getTarget().getName() + "'s current rank is " + CustomInstanceRankEnum.getRankDescription(rank) + "(" + rank + ").");
+						targetPlayer.getName() + "'s current rank is " + CustomInstanceRankEnum.getRankDescription(rank) + "(" + rank + ").");
 				} else {
 					PacketSendUtility.sendMessage(player, "Please select a player first.");
 				}
@@ -55,11 +58,6 @@ public class CustomInstance extends AdminCommand {
 					return;
 				}
 				setNewRank(player, params[1]);
-				break;
-			case "getentries":
-				if (player.getTarget() instanceof Player)
-					PacketSendUtility.sendMessage(player, CustomInstanceService.getInstance().getPlayerModelEntries(player.getTarget().getObjectId()).size()
-						+ " entries are currently cached for player " + player.getTarget().getName() + ".");
 				break;
 		}
 	}
@@ -73,8 +71,8 @@ public class CustomInstance extends AdminCommand {
 			return;
 		}
 		VisibleObject target = player.getTarget();
-		if (player.getTarget() instanceof Player) {
-			CustomInstanceService.getInstance().changePlayerRank(player.getTarget().getObjectId(), rank);
+		if (player.getTarget() instanceof Player targetPlayer) {
+			CustomInstanceService.getInstance().changePlayerRank(targetPlayer.getObjectId(), rank);
 			PacketSendUtility.sendMessage(player,
 				"Changed " + target.getName() + " to " + rank + " which is equivalent to " + CustomInstanceRankEnum.getRankDescription(rank));
 		} else {
