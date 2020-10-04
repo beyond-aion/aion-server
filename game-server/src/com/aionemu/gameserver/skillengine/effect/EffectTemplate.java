@@ -531,15 +531,15 @@ public abstract class EffectTemplate {
 
 		// calculate cumulative resist chance for fear, sleep and paralyze if effector & effected are players
 		if (effector.getMaster() instanceof Player && effected instanceof Player) {
-			if (statEnum == StatEnum.FEAR_RESISTANCE && ((Player) effected).getFearCount() >= 2 && ((Player) effected).validateLastFearTime()) {
+			if (statEnum == StatEnum.FEAR_RESISTANCE && ((Player) effected).getFearCount() >= 3 && ((Player) effected).validateLastFearTime()) {
 				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getFearCount())) {
 					return false;
 				}
-			} else if (statEnum == StatEnum.SLEEP_RESISTANCE && ((Player) effected).getSleepCount() >= 2 && ((Player) effected).validateLastSleepTime()) {
+			} else if (statEnum == StatEnum.SLEEP_RESISTANCE && ((Player) effected).getSleepCount() >= 3 && ((Player) effected).validateLastSleepTime()) {
 				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getSleepCount())) {
 					return false;
 				}
-			} else if (statEnum == StatEnum.PARALYZE_RESISTANCE && ((Player) effected).getParalyzeCount() >= 2 && ((Player) effected).validateLastParalyzeTime()) {
+			} else if (statEnum == StatEnum.PARALYZE_RESISTANCE && ((Player) effected).getParalyzeCount() >= 3 && ((Player) effected).validateLastParalyzeTime()) {
 				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getParalyzeCount())) {
 					return false;
 				}
@@ -622,11 +622,11 @@ public abstract class EffectTemplate {
 
 	private int getCumulativeResistChanceFor(int resistCount) {
 		switch (resistCount) {
-			case 2:
-				return 200;
 			case 3:
-				return 400;
+				return 200;
 			case 4:
+				return 400;
+			case 5:
 				return 1000;
 			default:
 				return 0;

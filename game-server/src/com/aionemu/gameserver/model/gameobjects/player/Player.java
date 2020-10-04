@@ -1789,7 +1789,7 @@ public class Player extends Creature {
 	}
 
 	public boolean validateLastFearTime() {
-		if ((System.currentTimeMillis() - lastFearTime.get()) <= 60 * 1000) {
+		if ((System.currentTimeMillis() - lastFearTime.get()) <= 10 * 1000) {
 			return true;
 		} else {
 			resetFearCount();
@@ -1798,7 +1798,7 @@ public class Player extends Creature {
 	}
 
 	public boolean validateLastSleepTime() {
-		if ((System.currentTimeMillis() - lastSleepTime.get()) <= 60 * 1000) {
+		if ((System.currentTimeMillis() - lastSleepTime.get()) <= 10 * 1000) {
 			return true;
 		} else {
 			resetSleepCount();
@@ -1807,7 +1807,7 @@ public class Player extends Creature {
 	}
 
 	public boolean validateLastParalyzeTime() {
-		if ((System.currentTimeMillis() - lastParalyzeTime.get()) <= 60 * 1000) {
+		if ((System.currentTimeMillis() - lastParalyzeTime.get()) <= 10 * 1000) {
 			return true;
 		} else {
 			resetParalyzeCount();
