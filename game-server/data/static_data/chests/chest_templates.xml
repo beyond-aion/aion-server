@@ -586,4 +586,14 @@
 	<chest npc_id="832260">
 		<key_item item_ids="185000199" count="1" />
 	</chest>
+	<!-- Drakenspire Depths -->
+	<chest npc_id="833012">
+		<key_item item_ids="0" count="1" />
+	</chest>
+	<chest npc_id="833013">
+		<key_item item_ids="0" count="1" />
+	</chest>
+	<chest npc_id="833015">
+		<key_item item_ids="0" count="1" />
+	</chest>
 </chest_templates>

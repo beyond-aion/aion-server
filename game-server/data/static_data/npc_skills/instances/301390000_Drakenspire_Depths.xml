@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Fountless Lava Protector -->
+	<npc_skills npc_ids="236225">
+		<npc_skill id="21641" lv="1" prob="0" is_post_spawn="true" /><!-- Binding Curse -->
+		<npc_skill id="21811" lv="65" prob="70" cd="8000" /><!-- Flame Smash -->
+		<npc_skill id="21812" lv="65" prob="70" cd="10000" /><!-- Magma Smash -->
+		<npc_skill id="21813" lv="65" prob="70" cd="20000" /><!-- Burning Lava Stone -->
+		<npc_skill id="21814" lv="65" prob="70" cd="20000" /><!-- Lava Shock -->
+		<npc_skill id="21815" lv="65" prob="70" min_time="28000" cd="45000" /><!-- Magma Eruption -->
+	</npc_skills>
+	<!-- Lava Protector -->
+	<npc_skills npc_ids="236227">
+		<npc_skill id="21641" lv="1" prob="0" is_post_spawn="true" /><!-- Binding Curse -->
+		<npc_skill id="21643" lv="1" prob="0" is_post_spawn="true" /><!-- Share Source -->
+		<npc_skill id="21811" lv="65" prob="70" cd="8000" /><!-- Flame Smash -->
+		<npc_skill id="21812" lv="65" prob="70" cd="10000" /><!-- Magma Smash -->
+		<npc_skill id="21813" lv="65" prob="70" cd="20000" /><!-- Burning Lava Stone -->
+		<npc_skill id="21814" lv="65" prob="70" cd="20000" /><!-- Lava Shock -->
+		<npc_skill id="21815" lv="65" prob="70" min_time="28000" cd="45000" /><!-- Magma Eruption -->
+	</npc_skills>
+	<!-- Fountless Heatvent Protector -->
+	<npc_skills npc_ids="236226">
+		<npc_skill id="21642" lv="1" prob="0" is_post_spawn="true" /><!-- Silence Curse -->
+		<npc_skill id="21816" lv="65" prob="70" cd="8000" /><!-- Flame Flurry -->
+		<npc_skill id="21817" lv="65" prob="70" cd="10000" /><!-- Blaze Blast -->
+		<npc_skill id="21818" lv="65" prob="70" cd="20000" /><!-- Sweltering Heat Bind -->
+		<npc_skill id="21819" lv="65" prob="70" cd="20000" /><!-- Inferno Blaze -->
+	</npc_skills>
+	<!-- Heatvent Protector -->
+	<npc_skills npc_ids="236228">
+		<npc_skill id="21642" lv="1" prob="0" is_post_spawn="true" /><!-- Silence Curse -->
+		<npc_skill id="21643" lv="1" prob="0" is_post_spawn="true" /><!-- Share Source -->
+		<npc_skill id="21816" lv="65" prob="70" cd="8000" /><!-- Flame Flurry -->
+		<npc_skill id="21817" lv="65" prob="70" cd="10000" /><!-- Blaze Blast -->
+		<npc_skill id="21818" lv="65" prob="70" cd="20000" /><!-- Sweltering Heat Bind -->
+		<npc_skill id="21819" lv="65" prob="70" cd="20000" /><!-- Inferno Blaze -->
+	</npc_skills>
+	<!-- Orissan -->
+	<npc_skills npc_ids="236229 236232">
+		<npc_skill id="21635" lv="1" prob="100" min_time="15000" target="ME" /><!-- Summon Crystal -->
+	</npc_skills>
+	<!-- Immortal Orissan -->
+	<npc_skills npc_ids="236230 236233">
+		<npc_skill id="21634" lv="1" prob="0" is_post_spawn="true" />
+		<npc_skill id="21885" lv="1" prob="100" min_time="90000" prio="1" target="ME" /><!-- Weaken Ascension Domination -->
+		<npc_skill id="21636" lv="67" prob="100" cd="18000" /><!-- Arctic Current -->
+		<npc_skill id="21631" lv="1" prob="100" cd="26000" /><!-- Aerial Thrust -->
+		<npc_skill id="21630" lv="1" prob="100" /><!-- Power Attack -->
+	</npc_skills>
+	<!-- Exhausted Orissan -->
+	<npc_skills npc_ids="236231	236234">
+		<npc_skill id="21636" lv="67" prob="100" cd="18000" /><!-- Arctic Current -->
+		<npc_skill id="21640" lv="1" prob="100" min_time="123000" cd="120000" prio="1" target="ME" /><!-- Ereshkigal's Protection -->
+		<npc_skill id="21631" lv="1" prob="100" cd="26000" /><!-- Aerial Thrust -->
+		<npc_skill id="21630" lv="1" prob="100" /><!-- Power Attack -->
+	</npc_skills>
+	<!-- Beritra Easy Mode -->
+	<npc_skills npc_ids="236244">
+		<npc_skill id="21599" lv="1" prob="100" next_chain_id="1" next_skill_time="2000" cd="12000" /><!-- Charged Fist -->
+		<npc_skill id="21600" lv="1" prob="100" chain_id="1" /><!-- Successive Strike -->
+
+		<npc_skill id="21607" lv="1" prob="100" next_chain_id="2" next_skill_time="0" cd="20000" min_time="30000" /><!-- Dark Sign -->
+		<npc_skill id="21606" lv="1" prob="100" chain_id="2" target="ME" /><!-- Soul Plunder -->
+
+		<npc_skill id="21603" lv="1" prob="100" next_chain_id="3" next_skill_time="2000" cd="30000" min_time="120000" /><!-- Rending Shadow -->
+		<npc_skill id="21604" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="2000" target="RANDOM_EXCEPT_MOST_HATED" /><!-- Rending Shadow -->
+		<npc_skill id="21604" lv="1" prob="100" chain_id="4" target="RANDOM_EXCEPT_MOST_HATED" /><!-- Rending Shadow -->
+
+		<npc_skill id="21609" lv="1" prob="100" cd="30000" min_time="60000" target="ME" /><!-- Soul Extinction Field ai handling  -->
+		<npc_skill id="21608" lv="1" prob="100" cd="30000" min_time="80000" /><!-- Soul Extinction -->
+
+		<npc_skill id="21601" lv="1" prob="100" cd="45000" min_time="30000" target="ME" /><!-- Pulse Wave -->
+		<!-- <npc_skill id="21605" lv="1" /> Chains of Command - TODO: fix effect -->
+	</npc_skills>
+	<!-- Grotesque Deathchar Illdrudge -->
+	<npc_skills npc_ids="236103">
+		<npc_skill id="18548" lv="67" prob="100" prio="1" cd="20000" /><!-- Bombing -->
+		<npc_skill id="18647" lv="67" prob="70" /><!-- Hurl Wedge -->
+		<npc_skill id="19164" lv="67" prob="70" /><!-- Targeted Strike -->
+		<npc_skill id="21092" lv="67" prob="70" /><!-- Ultimate Offense -->
+	</npc_skills>
+	<!-- Deathchar Patroller -->
+	<npc_skills npc_ids="236109 236221 236142">
+		<npc_skill id="21300" lv="67" prob="70" /><!-- Strike -->
+	</npc_skills>
+	<!-- Deathchar Slayer -->
+	<npc_skills npc_ids="236101 236125 236137">
+		<npc_skill id="19915" lv="1" prob="0" is_post_spawn="true" /><!-- Hide II -->
+		<npc_skill id="18159" lv="67" prob="100" prio="1" cd="20000" /><!-- Powerful Ambush -->
+		<npc_skill id="21301" lv="67" prob="70" /><!-- Power Attack -->
+		<npc_skill id="17933" lv="67" prob="70" /><!-- Quick Blindside Attack -->
+		<npc_skill id="21092" lv="67" prob="70" /><!-- Ultimate Offense -->
+		<npc_skill id="16411" lv="1" prob="70" cd="10000" /><!-- Careful Hide -->
+	</npc_skills>
+	<!-- Deathchar Necromancer -->
+	<npc_skills npc_ids="236124 236222">
+		<npc_skill id="17543" lv="67" prob="70" cd="12000" /><!-- Wide Area Flame Emission -->
+		<npc_skill id="16919" lv="67" prob="70" /><!-- Fireball -->
+		<npc_skill id="17096" lv="67" prob="70" cd="12000" /><!-- Mortal Fire -->
+	</npc_skills>
+	<!-- Frantic Phantomscorch Bonerival -->
+	<npc_skills npc_ids="236155">
+		<npc_skill id="17716" lv="67" prob="70" cd="12000" /><!-- Accurate Shot -->
+		<npc_skill id="18548" lv="67" prob="70" cd="18000" /><!-- Bombing -->
+		<npc_skill id="18559" lv="67" prob="70" cd="16000" /><!-- Aggravate Wound -->
+		<npc_skill id="19714" lv="67" prob="70" cd="18000" /><!-- Guilty Verdict -->
+	</npc_skills>
+	<!-- Frantic Phantomscorch Chimera -->
+	<npc_skills npc_ids="236223">
+		<npc_skill id="20779" lv="67" prob="100" /><!-- Explosion of Wrath -->
+		<npc_skill id="17543" lv="67" prob="40" cd="20000" /><!-- Wide Area Flame Emission -->
+	</npc_skills>
+	<!-- Frantic Phantomscorch Contender -->
+	<npc_skills npc_ids="236154">
+		<npc_skill id="17048" lv="67" prob="70" cd="12000" /><!-- Wide Successive Strike -->
+		<npc_skill id="17935" lv="67" prob="70" cd="12000" /><!-- Successive Crippling Wave -->
+		<npc_skill id="18548" lv="67" prob="70" cd="12000" /><!-- Wide Successive Strike -->
+		<npc_skill id="21300" lv="67" prob="70" cd="9000" /><!-- Strike -->
+	</npc_skills>
+	<!-- Ripper => fire, accurate shot -->
+	<!-- Exploding Flame -->
+	<npc_skills npc_ids="856459">
+		<npc_skill id="18579" lv="65" prob="100" target="ME">
+			<cond despawn_time="3000" can_die="false" delay="1000" />
+		</npc_skill>
+	</npc_skills>
+</npc_skill_templates>

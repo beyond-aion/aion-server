@@ -189,6 +189,9 @@
 	<!-- Danuar Sanctuary -->
 	<instance_exit instance_id="301380000" exit_world="210070000" race="ELYOS" x="2099.2441" y="2280.8606" z="294.625" h="83"/>
 	<instance_exit instance_id="301380000" exit_world="220080000" race="ASMODIANS" x="1672.2477" y="561.77155" z="257.77853" h="55"/>
+	<!-- Drakenspire Depths -->
+	<instance_exit instance_id="301390000" exit_world="210070000" race="ELYOS" x="77.14092" y="2757.5469" z="229.31216" h="51"/>
+	<instance_exit instance_id="301390000" exit_world="220080000" race="ASMODIANS" x="2991.0142" y="375.1645" z="309.1385" h="107"/>
 	<!-- Engulfed Ophidian Bridge
 	<instance_exit instance_id="301210000" exit_world="600070000" race="ELYOS" x="687.22705" y="653.72125" z="514.68646"/>
 	<instance_exit instance_id="301210000" exit_world="600070000" race="ASMODIANS" x="716.3487" y="871.67554" z="514.59405" h="60"/>

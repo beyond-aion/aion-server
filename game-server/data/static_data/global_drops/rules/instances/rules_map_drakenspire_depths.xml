@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<gd_rule rule_name="Named Key" chance="100">
+		<gd_maps>
+			<gd_map map_id="301390000" /><!-- Drakensire_Depths -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="236223" /><!-- Fetid Phantomscorch Chimera -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000219" /><!-- Crossroad's Choice Key -->
+		</gd_items>
+	</gd_rule>
+</global_rules>

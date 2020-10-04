@@ -3,254 +3,250 @@
 	<spawn_map map_id="301390000">
 		<!-- Deathchar Patroler -->
 		<spawn npc_id="236119">
-			<spot x="442.10" y="185.00" z="1682.22" h="60"/>
+			<spot x="442.10" y="185.00" z="1682.22" h="60" />
 		</spawn>
 		<!-- Deathchar Slayer -->
 		<spawn npc_id="236106">
-			<spot x="404.80" y="173.8" z="1684.22" h="30"/>
+			<spot x="404.80" y="173.8" z="1684.22" h="30" />
 		</spawn>
 		<!-- Deathchar Slayer -->
 		<spawn npc_id="236113">
-			<spot x="404.80" y="191.80" z="1684.22" h="90"/>
+			<spot x="404.80" y="191.80" z="1684.22" h="90" />
 		</spawn>
 		<!-- Deathchar Slayer -->
 		<spawn npc_id="236120">
-			<spot x="440.20" y="182.3" z="1682.22" h="60"/>
+			<spot x="440.20" y="182.3" z="1682.22" h="60" />
 		</spawn>
 		<!-- Elite Deathchar Necromancer -->
 		<spawn npc_id="236124">
-			<spot x="442.10" y="179.70" z="1682.22" h="60"/>
+			<spot x="442.10" y="179.70" z="1682.22" h="60" />
 		</spawn>
 		<!-- Elite Deathchar Patroler -->
 		<spawn npc_id="236109">
-			<spot x="403.42" y="177.10" z="1684.22" h="30"/>
+			<spot x="403.42" y="177.10" z="1684.22" h="30" />
 		</spawn>
 		<!-- Elite Deathchar Patroler -->
 		<spawn npc_id="236116">
-			<spot x="403.40" y="188.60" z="1684.22" h="90"/>
+			<spot x="403.40" y="188.60" z="1684.22" h="90" />
 		</spawn>
 		<!-- Elite Grave Cavity Thresher -->
 		<spawn npc_id="236187">
-            <spot x="783.8458" y="348.7829" z="1697.0194" h="83"/>
-        </spawn>
+			<spot x="783.8458" y="348.7829" z="1697.0194" h="83" />
+		</spawn>
 		<!-- Elite Grave Cavity Thresher -->
 		<spawn npc_id="236194">
-            <spot x="851.6595" y="333.6102" z="1723.6393" h="87"/>
-        </spawn>
+			<spot x="851.6595" y="333.6102" z="1723.6393" h="87" />
+		</spawn>
 		<!-- Elite Grave Cavity Thresher -->
 		<spawn npc_id="236201">
-            <spot x="873.2335" y="268.7520" z="1714.9712" h="73"/>
-        </spawn>
+			<spot x="873.2335" y="268.7520" z="1714.9712" h="73" />
+		</spawn>
 		<!-- Elite Phantomscorch Chimera -->
 		<spawn npc_id="236162">
-			<spot x="819.90" y="482.90" z="1709.46" h="90"/>
+			<spot x="819.90" y="482.90" z="1709.46" h="90" />
 		</spawn>
 		<!-- Elite Phantomscorch Contender -->
 		<spawn npc_id="236163">
-			<spot x="768.30" y="245.00" z="1699.81" h="65"/>
+			<spot x="768.30" y="245.00" z="1699.81" h="65" />
 		</spawn>
 		<!-- Elite Phantomscorch Contender -->
 		<spawn npc_id="236170">
-			<spot x="754.60" y="268.80" z="1699.55" h="77"/>
+			<spot x="754.60" y="268.80" z="1699.55" h="77" />
 		</spawn>
 		<!-- Elite Phantomscorch Contender -->
 		<spawn npc_id="236177">
-			<spot x="783.10" y="239.50" z="1701.31" h="63"/>
+			<spot x="783.10" y="239.50" z="1701.31" h="63" />
 		</spawn>
 		<!-- Elite Phantomscorch Dominator -->
 		<spawn npc_id="236168">
-			<spot x="834.60" y="462.40" z="1709.41" h="106"/>
+			<spot x="834.60" y="462.40" z="1709.41" h="106" />
 		</spawn>
 		<!-- Elite Phantomscorch Dominator -->
 		<spawn npc_id="236175">
-			<spot x="812.80" y="462.40" z="1709.62" h="99"/>
+			<spot x="812.80" y="462.40" z="1709.62" h="99" />
 		</spawn>
 		<!-- Eternal Altar of Torment Entrance-->
 		<spawn npc_id="804697">
-			<spot x="635.6907" y="959.4604" z="1615.0714" static_id="50"/>
+			<spot x="635.6907" y="959.4604" z="1615.0714" static_id="50" />
 		</spawn>
 		<!-- Exploding Flame -->
 		<spawn npc_id="207127">
-			<spot x="866.80" y="273.40" z="1715.02"/>
+			<spot x="866.80" y="273.40" z="1715.02" />
 		</spawn>
 		<!-- Exploding Flame -->
 		<spawn npc_id="207128">
-			<spot x="558.3259" y="152.4086" z="1683.0303" static_id="408"/>
+			<spot x="558.3259" y="152.4086" z="1683.0303" static_id="408" />
 		</spawn>
 		<!-- Exploding Flame -->
 		<spawn npc_id="207129">
-			<spot x="558.3259" y="212.0246" z="1683.0303" static_id="409"/>
+			<spot x="558.3259" y="212.0246" z="1683.0303" static_id="409" />
 		</spawn>
 		<!-- Fedit Deathchar Necromancer -->
 		<spawn npc_id="236222">
-			<spot x="488.17" y="151.90" z="1686.44" h="60"/>
+			<spot x="488.17" y="151.90" z="1686.44" h="60" />
 		</spawn>
 		<!-- Fedit Deathchar Patroler -->
 		<spawn npc_id="236221">
-			<spot x="488.53" y="210.88" z="1686.44" h="60"/>
+			<spot x="488.53" y="210.88" z="1686.44" h="60" />
 		</spawn>
 		<!-- Fedit Phantomscorch Chimera -->
 		<spawn npc_id="236223">
-			<spot x="762.60" y="250.80" z="1699.64" h="68"/>
+			<spot x="762.60" y="250.80" z="1699.64" h="68" />
 		</spawn>
 		<!-- Frantic Phantomscorch Bonerival -->
 		<spawn npc_id="236155">
-			<spot x="730.24" y="250.46" z="1694.64" walker_id="301390000_NPCPath2nd_Monster_Path04"/>
-			<spot x="839.37" y="299.41" z="1720.11" walker_id="301390000_NPCPath2nd_Monster_Path07"/>
-			<spot x="648.02" y="211.84" z="1679.72" walker_id="301390000_NPCPath2nd_Monster_Path01"/>
-			<spot x="745.23" y="226.79" z="1696.42" walker_id="301390000_NPCPath2nd_Monster_Path03"/>
-			<spot x="692.96" y="219.05" z="1683.31" walker_id="301390000_NPCPath2nd_Monster_Path02"/>
-			<spot x="635.45" y="829.37" z="1599.70" walker_id="301390000_NPCPath4th_Monster_Path01"/>
+			<spot x="730.24" y="250.46" z="1694.64" walker_id="301390000_NPCPath2nd_Monster_Path04" />
+			<spot x="839.37" y="299.41" z="1720.11" walker_id="301390000_NPCPath2nd_Monster_Path07" />
+			<spot x="648.02" y="211.84" z="1679.72" walker_id="301390000_NPCPath2nd_Monster_Path01" />
+			<spot x="745.23" y="226.79" z="1696.42" walker_id="301390000_NPCPath2nd_Monster_Path03" />
+			<spot x="692.96" y="219.05" z="1683.31" walker_id="301390000_NPCPath2nd_Monster_Path02" />
+			<spot x="635.45" y="829.37" z="1599.70" walker_id="301390000_NPCPath4th_Monster_Path01" />
 		</spawn>
 		<!-- Frantic Phantomscorch Chimera -->
 		<spawn npc_id="236156">
-			<spot x="843.60" y="248.70" z="1711.82" walker_id="301390000_NPCPath2nd_Monster_Path08"/>
-			<spot x="773.02" y="320.89" z="1698.46" walker_id="301390000_NPCPath2nd_Monster_Path05"/>
+			<spot x="843.60" y="248.70" z="1711.82" walker_id="301390000_NPCPath2nd_Monster_Path08" />
+			<spot x="773.02" y="320.89" z="1698.46" walker_id="301390000_NPCPath2nd_Monster_Path05" />
 		</spawn>
 		<!-- Frantic Phantomscorch Contender -->
 		<spawn npc_id="236154">
-			<spot x="739.50" y="241.40" z="1695.49" h="67"/>
-			<spot x="744.60" y="235.70" z="1696.36" h="67"/>
-			<spot x="732.70" y="234.10" z="1693.63" h="67"/>
-			<spot x="727.70" y="240.10" z="1692.86" h="67"/>
-			<spot x="790.20" y="420.50" z="1705.20" h="104"/>
-			<spot x="886.30" y="412.00" z="1705.23" h="104"/>
-			<spot x="840.90" y="428.70" z="1717.83" h="104"/>
+			<spot x="739.50" y="241.40" z="1695.49" h="67" />
+			<spot x="744.60" y="235.70" z="1696.36" h="67" />
+			<spot x="732.70" y="234.10" z="1693.63" h="67" />
+			<spot x="727.70" y="240.10" z="1692.86" h="67" />
+			<spot x="790.20" y="420.50" z="1705.20" h="104" />
+			<spot x="886.30" y="412.00" z="1705.23" h="104" />
+			<spot x="840.90" y="428.70" z="1717.83" h="104" />
 		</spawn>
 		<!-- Grave Cavity Ripper -->
-        <spawn npc_id="236185">
-            <spot x="787.7131" y="346.7578" z="1696.9890" h="83"/>
-            <spot x="779.9349" y="350.8198" z="1697.0891" h="83"/>
-            <spot x="773.1234" y="359.3553" z="1697.1418" h="104"/>
-            <spot x="798.9832" y="361.1798" z="1696.9639" h="77"/>
-        </spawn>
+		<spawn npc_id="236185">
+			<spot x="787.7131" y="346.7578" z="1696.9890" h="83" />
+			<spot x="779.9349" y="350.8198" z="1697.0891" h="83" />
+			<spot x="773.1234" y="359.3553" z="1697.1418" h="104" />
+			<spot x="798.9832" y="361.1798" z="1696.9639" h="77" />
+		</spawn>
 		<!-- Grave Cavity Ripper -->
-        <spawn npc_id="236192">
-            <spot x="855.9052" y="333.1070" z="1723.6320" h="87"/>
-            <spot x="846.9718" y="334.7176" z="1723.6630" h="89"/>
-            <spot x="836.7016" y="344.0336" z="1723.5789" h="102"/>
-            <spot x="867.8423" y="341.9248" z="1723.7585" h="75"/>
-        </spawn>
+		<spawn npc_id="236192">
+			<spot x="855.9052" y="333.1070" z="1723.6320" h="87" />
+			<spot x="846.9718" y="334.7176" z="1723.6630" h="89" />
+			<spot x="836.7016" y="344.0336" z="1723.5789" h="102" />
+			<spot x="867.8423" y="341.9248" z="1723.7585" h="75" />
+		</spawn>
 		<!-- Grave Cavity Ripper -->
-        <spawn npc_id="236199">
-            <spot x="875.8175" y="265.7439" z="1714.9683" h="72"/>
-            <spot x="869.9674" y="272.6162" z="1714.9944" h="74"/>
-            <spot x="889.6445" y="263.3861" z="1715.0859" h="56"/>
-            <spot x="869.4539" y="288.4061" z="1714.8397" h="86"/>
-        </spawn>
+		<spawn npc_id="236199">
+			<spot x="875.8175" y="265.7439" z="1714.9683" h="72" />
+			<spot x="869.9674" y="272.6162" z="1714.9944" h="74" />
+			<spot x="889.6445" y="263.3861" z="1715.0859" h="56" />
+			<spot x="869.4539" y="288.4061" z="1714.8397" h="86" />
+		</spawn>
 		<!-- Grave Cavity Thresher -->
-        <spawn npc_id="236183">
-            <spot x="798.1878" y="366.3135" z="1697.0474" h="75"/>
-            <spot x="775.1258" y="366.27444" z="1697.093" h="113"/>
-        </spawn>
+		<spawn npc_id="236183">
+			<spot x="798.1878" y="366.3135" z="1697.0474" h="75" />
+			<spot x="775.1258" y="366.27444" z="1697.093" h="113" />
+		</spawn>
 		<!-- Grave Cavity Thresher -->
-        <spawn npc_id="236190">
-            <spot x="865.4684" y="348.2869" z="1723.7563" h="75"/>
-            <spot x="840.2242" y="351.8190" z="1723.5162" h="106"/>
-        </spawn>
+		<spawn npc_id="236190">
+			<spot x="865.4684" y="348.2869" z="1723.7563" h="75" />
+			<spot x="840.2242" y="351.8190" z="1723.5162" h="106" />
+		</spawn>
 		<!-- Grave Cavity Thresher -->
-        <spawn npc_id="236197">
-            <spot x="873.8383" y="290.1610" z="1714.8422" h="91"/>
-            <spot x="892.9705" y="269.6353" z="1715.0974" h="63"/>
-        </spawn>
+		<spawn npc_id="236197">
+			<spot x="873.8383" y="290.1610" z="1714.8422" h="91" />
+			<spot x="892.9705" y="269.6353" z="1715.0974" h="63" />
+		</spawn>
 		<!-- Heatvent Protector -->
 		<spawn npc_id="236228">
-			<spot x="530.8584" y="151.8681" z="1683.4116" h="60"/>
+			<spot x="530.8584" y="151.8681" z="1683.4116" h="60" />
 		</spawn>
 		<!-- Lava Protector -->
 		<spawn npc_id="236227">
-			<spot x="531.0885" y="212.43806" z="1683.4116" h="60"/>
+			<spot x="531.0885" y="212.43806" z="1683.4116" h="60" />
 		</spawn>
 		<!-- Phantomscorch Bonerival -->
 		<spawn npc_id="236159">
-			<spot x="824.10" y="477.90" z="1709.62" h="90"/>
+			<spot x="824.10" y="477.90" z="1709.62" h="90" />
 		</spawn>
 		<!-- Phantomscorch Chimera -->
 		<spawn npc_id="236167">
-			<spot x="754.00" y="275.10" z="1699.78" h="97"/>
+			<spot x="754.00" y="275.10" z="1699.78" h="97" />
 		</spawn>
 		<!-- Phantomscorch Chimera -->
 		<spawn npc_id="236174">
-			<spot x="776.10" y="239.50" z="1700.75" h="64"/>
+			<spot x="776.10" y="239.50" z="1700.75" h="64" />
 		</spawn>
 		<!-- Phantomscorch Contender -->
 		<spawn npc_id="236165">
-			<spot x="830.90" y="457.50" z="1709.32" h="93"/>
+			<spot x="830.90" y="457.50" z="1709.32" h="93" />
 		</spawn>
 		<!-- Phantomscorch Contender -->
 		<spawn npc_id="236172">
-			<spot x="809.40" y="457.40" z="1709.52" h="83"/>
+			<spot x="809.40" y="457.40" z="1709.52" h="83" />
 		</spawn>
 		<!-- Phantomscorch Dominator -->
 		<spawn npc_id="236157">
-			<spot x="754.10" y="250.40" z="1698.69" h="65"/>
+			<spot x="754.10" y="250.40" z="1698.69" h="65" />
 		</spawn>
 		<!-- Rapacious Kadena -->
 		<spawn npc_id="236224">
-			<spot x="787.20" y="379.30" z="1697.03" h="92"/>
+			<spot x="787.20" y="379.30" z="1697.03" h="92" />
 		</spawn>
 		<!-- Rapacious Kadena -->
 		<spawn npc_id="236661">
-			<spot x="855.60" y="362.40" z="1723.66" h="92"/>
+			<spot x="855.60" y="362.40" z="1723.66" h="92" />
 		</spawn>
 		<!-- Rapacious Kadena -->
 		<spawn npc_id="236662">
-			<spot x="894.60" y="286.80" z="1714.99" h="74"/>
-		</spawn>
-		<!-- Reverted Orissan -->
-		<spawn npc_id="236232">
-			<spot x="811.90" y="567.90" z="1701.04" h="92"/>
+			<spot x="894.60" y="286.80" z="1714.99" h="74" />
 		</spawn>
 		<!-- Seal of Darkness | Stage doors -->
 		<spawn npc_id="731580">
-			<spot x="592.4119" y="181.3037" z="1683.2340" static_id="603"/>
-			<spot x="809.1951" y="598.8419" z="1701.2881" static_id="522"/>
-			<spot x="635.8439" y="905.0720" z="1600.7059" static_id="332"/>
+			<spot x="592.4119" y="181.3037" z="1683.2340" static_id="603" />
+			<spot x="809.1951" y="598.8419" z="1701.2881" static_id="522" />
+			<spot x="635.8439" y="905.0720" z="1600.7059" static_id="332" />
 		</spawn>
 		<!-- Wave Enter Sensor -->
 		<spawn npc_id="206405">
-			<spot x="639.50" y="866.50" z="1600.88"/>
+			<spot x="639.50" y="866.50" z="1600.88" />
 		</spawn>
 		<!-- Weakened Deathchar Necromancer -->
 		<spawn npc_id="236141">
-			<spot x="483.70" y="147.50" z="1686.44" h="60"/>
+			<spot x="483.70" y="147.50" z="1686.44" h="60" />
 		</spawn>
 		<!-- Weakened Deathchar Patroler -->
 		<spawn npc_id="236131">
-			<spot x="484.10" y="205.90" z="1686.27" h="60"/>
+			<spot x="484.10" y="205.90" z="1686.27" h="60" />
 		</spawn>
 		<!-- Weakened Deathchar Patroler Boss -->
 		<spawn npc_id="236142">
-			<spot x="480.1" y="151.70" z="1686.44" h="60"/>
+			<spot x="480.1" y="151.70" z="1686.44" h="60" />
 		</spawn>
 		<!-- Weakened Deathchar Slayer -->
 		<spawn npc_id="236132">
-			<spot x="480.50" y="210.40" z="1686.27" h="60"/>
+			<spot x="480.50" y="210.40" z="1686.27" h="60" />
 		</spawn>
 		<!-- Weakened Deathchar Slayer Boss -->
 		<spawn npc_id="236137">
-			<spot x="484.00" y="215.20" z="1686.27" h="60"/>
+			<spot x="484.00" y="215.20" z="1686.27" h="60" />
 		</spawn>
 		<!-- Weakened Grotesque Deathchar Illdrudge -->
 		<spawn npc_id="236129">
-			<spot x="446.73" y="153.20" z="1682.22" h="60" walker_id="301390000_succubus_left"/>
-			<spot x="446.73" y="209.39" z="1682.22" h="60" walker_id="301390000_succubus_right"/>
+			<spot x="446.73" y="153.20" z="1682.22" h="60" walker_id="301390000_succubus_left" />
+			<spot x="446.73" y="209.39" z="1682.22" h="60" walker_id="301390000_succubus_right" />
 		</spawn>
 		<!-- Weakened Grotesque Deathchar Patroler -->
 		<spawn npc_id="236126">
-			<spot x="413.20" y="249.30" z="1684.07" h="60"/>
-			<spot x="413.70" y="113.70" z="1684.07" h="60"/>
-			<spot x="404.30" y="228.30" z="1684.07" h="30"/>
-			<spot x="404.30" y="136.20" z="1684.07" h="30"/>
+			<spot x="413.20" y="249.30" z="1684.07" h="60" />
+			<spot x="413.70" y="113.70" z="1684.07" h="60" />
+			<spot x="404.30" y="228.30" z="1684.07" h="30" />
+			<spot x="404.30" y="136.20" z="1684.07" h="30" />
 		</spawn>
 		<!-- Weakened Grotesque Deathchar Slayer -->
 		<spawn npc_id="236128">
-			<spot x="454.30" y="246.70" z="1684.07" h="60"/>
-			<spot x="434.20" y="248.30" z="1684.07" h="60"/>
-			<spot x="434.00" y="115.20" z="1684.07" h="60"/>
-			<spot x="455.80" y="116.20" z="1684.07" h="60"/>
-			<spot x="479.40" y="125.50" z="1684.07" h="60"/>
-			<spot x="478.60" y="238.00" z="1684.07" h="60"/>
+			<spot x="454.30" y="246.70" z="1684.07" h="60" />
+			<spot x="434.20" y="248.30" z="1684.07" h="60" />
+			<spot x="434.00" y="115.20" z="1684.07" h="60" />
+			<spot x="455.80" y="116.20" z="1684.07" h="60" />
+			<spot x="479.40" y="125.50" z="1684.07" h="60" />
+			<spot x="478.60" y="238.00" z="1684.07" h="60" />
 		</spawn>
 	</spawn_map>
 </spawns>
