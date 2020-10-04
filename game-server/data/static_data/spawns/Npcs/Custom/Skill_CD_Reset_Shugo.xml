@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../spawns.xsd">
+	<!-- Sanctum Arena -->
+	<spawn_map map_id="110010000">
+		<spawn npc_id="833543" respawn_time="295">
+			<spot x="1422.7744" y="1250.0612" z="569.47" h="16" ai="customcdreset" />
+		</spawn>
+	</spawn_map>
+	<!-- Pandaemonium Arena -->
+	<spawn_map map_id="120010000">
+		<spawn npc_id="833543" respawn_time="295">
+			<spot x="930.0757" y="1604.4641" z="225.6" h="105" ai="customcdreset" />
+		</spawn>
+	</spawn_map>
+	<!-- Discipline Training Grounds -->
+	<spawn_map map_id="300430000">
+		<spawn npc_id="833543" respawn_time="295">
+			<!-- The Plaza of Struggle -->
+			<spot x="1831.303" y="1719.6138" z="305.14697" h="15" ai="customcdreset" />
+			<!-- Red Sand Arena -->
+			<spot x="1856.4928" y="1075.8822" z="338.22055" h="87" ai="customcdreset" />
+			<!-- Abyss Bridge -->
+			<spot x="294.2966" y="1245.7626" z="268.07672" h="54" ai="customcdreset" />
+			<!-- Collapsed Wind Tower -->
+			<spot x="685.91534" y="1776.664" z="188.9151" h="51" ai="customcdreset" />
+		</spawn>
+	</spawn_map>
+</spawns>

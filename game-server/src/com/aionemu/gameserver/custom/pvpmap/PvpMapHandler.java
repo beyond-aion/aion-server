@@ -106,7 +106,9 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			float z = GeoService.getInstance().getZ(player.getWorldId(), x, y, player.getZ(), instanceId);
 			if (Float.isNaN(z))
 				z = player.getZ() + 0.5f;
-			spawn(833543, x, y, z, PositionUtil.getHeadingTowards(x, y, player.getX(), player.getY()));
+			byte heading = PositionUtil.getHeadingTowards(x, y, player.getX(), player.getY());
+			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, 833543, x, y, z, heading, 0, "customcdreset");
+			SpawnEngine.spawnObject(template, instanceId);
 		}
 	}
 

@@ -1,10 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="120010000">
-		<!-- Robo-Shugo (Skill CD Remover) -->
-		<spawn npc_id="833543" respawn_time="295">
-			<spot x="930.0757" y="1604.4641" z="225.6" h="105"/>
-		</spawn>
 		<!-- Claw Captain Lailin -->
 		<spawn npc_id="831835" respawn_time="295">
 			<spot x="1202.6000" y="1441.8000" z="209.0907" h="90"/>
