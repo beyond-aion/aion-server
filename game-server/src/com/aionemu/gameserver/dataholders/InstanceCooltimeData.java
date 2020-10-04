@@ -14,6 +14,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceCoolTimeType;
 import com.aionemu.gameserver.model.templates.InstanceCooltime;
@@ -55,6 +56,11 @@ public class InstanceCooltimeData {
 
 	public int getInstanceMaxCountByWorldId(int worldId) {
 		return instanceCooltimes.get(worldId).getMaxCount();
+	}
+
+	public int getMaxMemberCount(int worldId, Race race) {
+		InstanceCooltime template = getInstanceCooltimeByWorldId(worldId);
+		return template == null ? 0 : race == Race.ELYOS ? template.getMaxMemberLight() : template.getMaxMemberDark();
 	}
 
 	public int getWorldId(int syncId) {

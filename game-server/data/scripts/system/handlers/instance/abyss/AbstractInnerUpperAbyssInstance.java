@@ -184,6 +184,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 	 *          - the amount of abyss points the destroyed statue should reward
 	 */
 	protected void rewardStatueKill(int ap) {
-		instance.getPlayersInside().forEach(p -> AbyssPointsService.addAp(p, ap / instance.playerCount()));
+		int rewardAp = ap / instance.getPlayerCount();
+		instance.getPlayersInside().forEach(p -> AbyssPointsService.addAp(p, rewardAp));
 	}
 }

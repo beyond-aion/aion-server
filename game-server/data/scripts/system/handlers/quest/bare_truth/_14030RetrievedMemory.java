@@ -89,8 +89,7 @@ public class _14030RetrievedMemory extends AbstractQuestHandler {
 					break;
 				case 700551: // Fissure of Destiny
 					if (dialogActionId == USE_OBJECT && var == 4) {
-						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.IDAB_PRO_L3.getId());
-						newInstance.register(player.getObjectId());
+						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.IDAB_PRO_L3.getId(), player);
 						TeleportService.teleportTo(player, newInstance, 52, 174, 229);
 						return true;
 					}

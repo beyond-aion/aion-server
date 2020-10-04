@@ -11,6 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -95,8 +96,7 @@ public class _24046TheShadowCalls extends AbstractQuestHandler {
 						return sendQuestDialog(env, 2034);
 					}
 					if (dialogActionId == SETPRO4) {
-						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320120000);
-						newInstance.register(player.getObjectId());
+						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.SHADOW_COURT_DUNGEON.getId(), player);
 						TeleportService.teleportTo(player, newInstance, 591.47894f, 420.20865f, 202.97754f);
 						playQuestMovie(env, 423);
 						changeQuestStep(env, 3, 5); // 5

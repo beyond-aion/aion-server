@@ -16,6 +16,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -116,8 +117,7 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 						case SETPRO9:
 							qs.setQuestVar(9);
 							updateQuestStatus(env);
-							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320040000);
-							newInstance.register(player.getObjectId());
+							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.NIDALBER.getId(), player);
 							TeleportService.teleportTo(player, newInstance, 274, 167, 204);
 							return closeDialogWindow(env);
 					}

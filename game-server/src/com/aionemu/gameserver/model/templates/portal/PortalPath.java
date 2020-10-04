@@ -2,11 +2,7 @@ package com.aionemu.gameserver.model.templates.portal;
 
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.Race;
 
@@ -21,18 +17,12 @@ public class PortalPath {
 	private int dialog;
 	@XmlAttribute(name = "loc_id")
 	private int locId;
-	@XmlAttribute(name = "player_count")
-	private int playerCount = 1;
-	@XmlAttribute(name = "instance")
-	private boolean instance;
 	@XmlAttribute(name = "siege_id")
 	private int siegeId;
 	@XmlAttribute(name = "race")
 	private Race race = Race.PC_ALL;
 	@XmlAttribute(name = "min_level")
 	private int minLevel;
-	@XmlAttribute(name = "max_level")
-	private int maxLevel;
 	@XmlAttribute(name = "min_rank")
 	private int minRank;
 	@XmlAttribute(name = "kinah")
@@ -56,14 +46,6 @@ public class PortalPath {
 		return locId;
 	}
 
-	public int getPlayerCount() {
-		return playerCount;
-	}
-
-	public boolean isInstance() {
-		return instance;
-	}
-
 	public int getSiegeId() {
 		return siegeId;
 	}
@@ -74,10 +56,6 @@ public class PortalPath {
 
 	public int getMinLevel() {
 		return minLevel;
-	}
-
-	public int getMaxLevel() {
-		return maxLevel;
 	}
 
 	public int getMinRank() {

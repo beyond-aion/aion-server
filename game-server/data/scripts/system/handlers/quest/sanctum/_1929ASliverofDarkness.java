@@ -18,6 +18,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Mr. Poke
@@ -97,8 +98,7 @@ public class _1929ASliverofDarkness extends AbstractQuestHandler {
 						case SETPRO3:
 							if (var == 2) {
 								changeQuestStep(env, 2, 93); // 93
-								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310070000);
-								newInstance.register(player.getObjectId());
+								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.IDLF1B_STIGMA.getId(), player);
 								TeleportService.teleportTo(player, newInstance, 338, 101, 1191);
 								return closeDialogWindow(env);
 							}

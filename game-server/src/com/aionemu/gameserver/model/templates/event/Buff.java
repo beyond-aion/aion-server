@@ -5,12 +5,7 @@ import java.util.Set;
 import java.util.function.Predicate;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlEnum;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import org.slf4j.LoggerFactory;
 
@@ -69,9 +64,9 @@ public class Buff {
 	@XmlEnum
 	public enum BuffMapType {
 		WORLD_MAP(instance -> !instance.getTemplate().isInstance()),
-		SOLO_INSTANCE(instance -> instance.getPlayerMaxSize() == 1),
-		GROUP_INSTANCE(instance -> instance.getPlayerMaxSize() > 1 && instance.getPlayerMaxSize() <= 6),
-		ALLIANCE_INSTANCE(instance -> instance.getPlayerMaxSize() > 6 && instance.getPlayerMaxSize() <= 24);
+		SOLO_INSTANCE(instance -> instance.getMaxPlayers() == 1),
+		GROUP_INSTANCE(instance -> instance.getMaxPlayers() > 1 && instance.getMaxPlayers() <= 6),
+		ALLIANCE_INSTANCE(instance -> instance.getMaxPlayers() > 6 && instance.getMaxPlayers() <= 24);
 
 		private final Predicate<WorldMapInstance> matches;
 

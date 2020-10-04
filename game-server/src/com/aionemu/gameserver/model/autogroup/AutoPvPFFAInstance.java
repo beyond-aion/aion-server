@@ -15,11 +15,11 @@ public class AutoPvPFFAInstance extends AutoInstance {
 	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
 		super.writeLock();
 		try {
-			if (!satisfyTime(searchInstance) || (players.size() >= agt.getPlayerSize())) {
+			if (!satisfyTime(searchInstance) || (players.size() >= getMaxPlayers())) {
 				return AGQuestion.FAILED;
 			}
 			players.put(player.getObjectId(), new AGPlayer(player));
-			return instance != null ? AGQuestion.ADDED : (players.size() == agt.getPlayerSize() ? AGQuestion.READY : AGQuestion.ADDED);
+			return instance != null ? AGQuestion.ADDED : (players.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED);
 		} finally {
 			super.writeUnlock();
 		}

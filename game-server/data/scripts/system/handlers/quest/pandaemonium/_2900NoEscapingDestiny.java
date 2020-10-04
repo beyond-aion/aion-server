@@ -16,6 +16,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Mr. Poke, edited Rolandas
@@ -122,8 +123,7 @@ public class _2900NoEscapingDestiny extends AbstractQuestHandler {
 						case SETPRO5:
 							if (var == 4) {
 								changeQuestStep(env, 4, 95); // 95
-								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320070000);
-								newInstance.register(player.getObjectId());
+								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.SPACE_OF_DESTINY.getId(), player);
 								TeleportService.teleportTo(player, newInstance, 270.8424f, 249.1182f, 125.8369f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
 								return closeDialogWindow(env);
 							}

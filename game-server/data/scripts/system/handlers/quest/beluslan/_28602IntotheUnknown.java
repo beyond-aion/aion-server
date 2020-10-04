@@ -12,6 +12,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Gigi
@@ -108,8 +109,7 @@ public class _28602IntotheUnknown extends AbstractQuestHandler {
 				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else if (env.getDialogActionId() == SETPRO1) {
-					WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300230000);
-					newInstance.register(player.getObjectId());
+					WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.KROMEDES_TRIAL.getId(), player);
 					TeleportService.teleportTo(player, newInstance, 244.98566f, 244.14162f, 189.52058f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 					changeQuestStep(env, 0, 1); // 1
 					return closeDialogWindow(env);

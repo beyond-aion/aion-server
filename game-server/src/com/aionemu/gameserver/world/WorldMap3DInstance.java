@@ -7,12 +7,8 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class WorldMap3DInstance extends WorldMapInstance {
 
-	/**
-	 * @param parent
-	 * @param instanceId
-	 */
-	public WorldMap3DInstance(WorldMap parent, int instanceId) {
-		super(parent, instanceId);
+	public WorldMap3DInstance(WorldMap parent, int instanceId, int maxPlayers) {
+		super(parent, instanceId, maxPlayers);
 	}
 
 	@Override

@@ -7,6 +7,7 @@ import java.util.Map;
 import java.util.stream.Collectors;
 
 import com.aionemu.commons.taskmanager.AbstractLockManager;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -108,5 +109,12 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 
 	protected List<Player> getPlayersByRace(Race race) {
 		return instance.getPlayersInside().stream().filter(p -> p.getRace() == race).collect(Collectors.toList());
+	}
+
+	public int getMaxPlayers() {
+		if (instance != null)
+			return instance.getMaxPlayers();
+		Race race = players.isEmpty() ? Race.ELYOS : players.values().iterator().next().getRace();
+		return DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getInstanceMapId(), race);
 	}
 }

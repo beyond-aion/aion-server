@@ -9,21 +9,16 @@ import com.aionemu.gameserver.instance.handlers.InstanceHandler;
  */
 public class WorldMapInstanceFactory {
 
-	/**
-	 * @param parent
-	 * @param instanceId
-	 * @return
-	 */
-	public static WorldMapInstance createWorldMapInstance(WorldMap parent, int instanceId) {
-		return createWorldMapInstance(parent, instanceId, 0, null);
+	public static WorldMapInstance createWorldMapInstance(WorldMap parent, int instanceId, int maxPlayers) {
+		return createWorldMapInstance(parent, instanceId, 0, null, maxPlayers);
 	}
 
-	public static WorldMapInstance createWorldMapInstance(WorldMap parent, int instanceId, int ownerId, GeneralInstanceHandler customHandler) {
-		WorldMapInstance worldMapInstance = null;
+	public static WorldMapInstance createWorldMapInstance(WorldMap parent, int instanceId, int ownerId, GeneralInstanceHandler customHandler, int maxPlayers) {
+		WorldMapInstance worldMapInstance;
 		if (parent.getMapId() == WorldMapType.RESHANTA.getId()) {
-			worldMapInstance = new WorldMap3DInstance(parent, instanceId);
+			worldMapInstance = new WorldMap3DInstance(parent, instanceId, maxPlayers);
 		} else {
-			worldMapInstance = new WorldMap2DInstance(parent, instanceId, ownerId);
+			worldMapInstance = new WorldMap2DInstance(parent, instanceId, ownerId, maxPlayers);
 		}
 
 		if (customHandler != null) {

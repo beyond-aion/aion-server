@@ -102,8 +102,7 @@ public class _14047ChainingMemories extends AbstractQuestHandler {
 						break;
 					case SETPRO3:
 						changeQuestStep(env, 2, 3);
-						WorldMapInstance instance = InstanceService.getNextAvailableInstance(WorldMapType.AZOTURAN_FORTRESS.getId());
-						instance.register(player.getObjectId());
+						WorldMapInstance instance = InstanceService.getNextAvailableInstance(WorldMapType.AZOTURAN_FORTRESS.getId(), player);
 						QuestService.spawnQuestNpc(instance.getMapId(), instance.getInstanceId(), icaronixNormalId, 478.8f, 431.1f, 1062.0067f, (byte) 58);
 						TeleportService.teleportTo(player, instance, 305.8f, 334.46f, 1019.69f, (byte) 27, TeleportAnimation.FADE_OUT_BEAM);
 						return true;

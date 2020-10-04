@@ -385,8 +385,6 @@
 	<portal_loc world_id="220010000" loc_id="2200101" x="527.03973" y="2449.6787" z="281.59262" h="57"/> <!-- Anturoon Crossing -->
 	<!-- Isphrael's Tract -->
 	<portal_loc world_id="300390000" loc_id="3003900" x="273.96478" y="217.55084" z="207.5269" h="60"/>
-	<!-- Protector's Realm -->
-	<portal_loc world_id="300330000" loc_id="3003300" x="216.56151" y="244.50179" z="124.94201"/>
 	<!-- Tiamat Stronghold -->
 	<portal_loc world_id="300510000" loc_id="3005100" x="1581.5779" y="1068.3219" z="492.00986"/>
 	<portal_loc world_id="300510000" loc_id="3005101" x="1062.7202" y="1069.358" z="786.4852"/>

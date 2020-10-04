@@ -109,8 +109,7 @@ public class _24030ShowdownWithDestiny extends AbstractQuestHandler {
 					break;
 				case 700551: // Fissure of Destiny
 					if (dialogActionId == USE_OBJECT && var == 5) {
-						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.IDAB_PRO_D3.getId());
-						newInstance.register(player.getObjectId());
+						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.IDAB_PRO_D3.getId(), player);
 						TeleportService.teleportTo(player, newInstance, 52, 174, 229);
 						return true;
 					}

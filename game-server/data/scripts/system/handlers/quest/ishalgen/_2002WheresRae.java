@@ -19,6 +19,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Mr. Poke
@@ -122,8 +123,7 @@ public class _2002WheresRae extends AbstractQuestHandler {
 								updateQuestStatus(env);
 								PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
 								// Create instance
-								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(320010000);
-								newInstance.register(player.getObjectId());
+								WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.ATAXIAR.getId(), player);
 								TeleportService.teleportTo(player, newInstance, 457.65f, 426.8f, 230.4f);
 								return true;
 							}

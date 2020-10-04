@@ -23,6 +23,7 @@ import com.aionemu.gameserver.model.templates.portal.ItemReq;
 import com.aionemu.gameserver.model.templates.portal.PortalLoc;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.model.templates.portal.QuestReq;
+import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -54,8 +55,8 @@ public class PortalService {
 
 		boolean instanceGroupReq = !(player.hasAccess(AdminConfig.INSTANCE_ENTER_ALL) || player.hasPermission(MembershipConfig.INSTANCES_GROUP_REQ));
 		int mapId = loc.getWorldId();
-		int playerSize = portalPath.getPlayerCount();
-		boolean isInstance = portalPath.isInstance();
+		InstanceCooltime instanceRestrictions = DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(mapId);
+		int maxPlayers = instanceRestrictions == null ? 0 : player.getRace() == Race.ELYOS ? instanceRestrictions.getMaxMemberLight() : instanceRestrictions.getMaxMemberDark();
 
 		if (!player.hasAccess(AdminConfig.INSTANCE_ENTER_ALL)) {
 			if (!checkMentor(player, mapId))
@@ -68,16 +69,15 @@ public class PortalService {
 				return;
 			if (!checkQuests(player, npc, portalPath))
 				return;
-			if (instanceGroupReq && !checkPlayerSize(player, npc, portalPath)) {
+			if (instanceGroupReq && !checkPlayerSize(player, npc, portalPath, maxPlayers)) {
 				return;
 			}
 		}
 
 		WorldMapInstance instance = null;
-		switch (playerSize) {
-			case 0:
-				log.warn("Tried to enter instance with player limit 0!");
-				return;
+		switch (maxPlayers) {
+			case 0: // 0 means target map has no player limit, so it shouldn't require a registration
+				break;
 			case 1: // solo
 				instance = InstanceService.getRegisteredInstance(mapId, player.getObjectId());
 				break;
@@ -109,7 +109,7 @@ public class PortalService {
 		}
 
 		if (!reenter) {
-			if (!checkEnterLevel(player, npc, portalPath)) {
+			if (!checkEnterLevel(player, npc, portalPath, instanceRestrictions)) {
 				return;
 			}
 			if (!checkAndRemoveRequiredItems(player, npc, portalPath)) {
@@ -122,14 +122,14 @@ public class PortalService {
 		}
 
 		PlayerGroup group = player.getPlayerGroup();
-		switch (playerSize) {
+		switch (maxPlayers) {
+			case 0:
 			case 1:
 				// if already registered - just teleport
-				if (instance != null && mapId != player.getWorldId()) {
+				if (instance != null && mapId != player.getWorldId())
 					transfer(player, loc, instance, reenter);
-					return;
-				}
-				port(player, loc, reenter, isInstance);
+				else
+					port(player, loc, reenter, maxPlayers);
 				break;
 			case 3:
 			case 6:
@@ -150,18 +150,21 @@ public class PortalService {
 						}
 
 						// No solo instance found
-						if (instance == null)
-							instance = registerTeam(group, mapId, playerSize, difficult);
+						if (instance == null) {
+							instance = InstanceService.getNextAvailableInstance(mapId, difficult, maxPlayers);
+							instance.registerTeam(group);
+						}
 					}
 					// No instance and default requirement on = Group on
 					else if (instance == null && instanceGroupReq) {
-						instance = registerTeam(group, mapId, playerSize, difficult);
+						instance = InstanceService.getNextAvailableInstance(mapId, difficult, maxPlayers);
+						instance.registerTeam(group);
 					}
 					// No instance, default requirement off, no group = Register new instance with player ID
 					else if (instance == null && !instanceGroupReq && group == null) {
-						instance = InstanceService.getNextAvailableInstance(mapId, difficult);
+						instance = InstanceService.getNextAvailableInstance(mapId, difficult, maxPlayers);
 					}
-					if (instance != null && instance.getPlayersInside().size() < playerSize) {
+					if (instance.getPlayersInside().size() < maxPlayers) {
 						transfer(player, loc, instance, reenter);
 					}
 				}
@@ -176,16 +179,14 @@ public class PortalService {
 					instance = InstanceService.getRegisteredInstance(mapId, teamId);
 
 					if (instance == null) {
+						instance = InstanceService.getNextAvailableInstance(mapId, difficult, maxPlayers);
 						if (team != null)
-							instance = registerTeam(team, mapId, playerSize, difficult);
-						else
-							instance = InstanceService.getNextAvailableInstance(mapId, difficult);
+							instance.registerTeam(team);
 					}
-					if (instance != null && instance.getPlayersInside().size() < playerSize) {
+					if (instance.getPlayersInside().size() < maxPlayers) {
 						transfer(player, loc, instance, reenter);
 					}
 				}
-				break;
 		}
 	}
 
@@ -200,11 +201,16 @@ public class PortalService {
 		return true;
 	}
 
-	private static boolean checkEnterLevel(Player player, Npc npc, PortalPath portalPath) {
+	private static boolean checkEnterLevel(Player player, Npc npc, PortalPath portalPath, InstanceCooltime instanceRestrictions) {
 		if (player.hasPermission(MembershipConfig.INSTANCES_LEVEL_REQ))
 			return true;
 		int enterMinLvl = portalPath.getMinLevel();
-		int enterMaxLvl = portalPath.getMaxLevel();
+		int enterMaxLvl = 0;
+		if (instanceRestrictions != null) {
+			if (enterMinLvl == 0)
+				enterMinLvl = player.getRace() == Race.ELYOS ? instanceRestrictions.getEnterMinLevelLight() : instanceRestrictions.getEnterMinLevelDark();
+			enterMaxLvl = player.getRace() == Race.ELYOS ? instanceRestrictions.getEnterMaxLevelLight() : instanceRestrictions.getEnterMaxLevelDark();
+		}
 		int lvl = player.getLevel();
 		if (lvl < enterMinLvl || enterMaxLvl > 0 && lvl > enterMaxLvl) {
 			if (portalPath.getErrLevel() != 0) {
@@ -251,9 +257,8 @@ public class PortalService {
 		return true;
 	}
 
-	private static boolean checkPlayerSize(Player player, Npc npc, PortalPath portalPath) {
-		int playerSize = portalPath.getPlayerCount();
-		if (playerSize == 6 || playerSize == 3) { // group
+	private static boolean checkPlayerSize(Player player, Npc npc, PortalPath portalPath, int maxPlayers) {
+		if (maxPlayers == 6 || maxPlayers == 3) { // group
 			if (!player.isInGroup()) {
 				if (portalPath.getErrGroup() != 0) {
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), portalPath.getErrGroup()));
@@ -262,12 +267,12 @@ public class PortalService {
 				}
 				return false;
 			}
-		} else if (playerSize > 6 && playerSize <= 24) { // alliance
+		} else if (maxPlayers > 6 && maxPlayers <= 24) { // alliance
 			if (!player.isInAlliance()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_FORCE_DON());
 				return false;
 			}
-		} else if (playerSize > 24) { // league
+		} else if (maxPlayers > 24) { // league
 			if (!player.isInLeague()) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTER_ONLY_UNION_DON());
 				return false;
@@ -337,22 +342,16 @@ public class PortalService {
 		return true;
 	}
 
-	private static void port(Player requester, PortalLoc loc, boolean reenter, boolean isInstance) {
-		WorldMapInstance instance;
-		if (isInstance) {
+	private static void port(Player requester, PortalLoc loc, boolean reenter, int maxPlayers) {
+		WorldMapTemplate worldTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(loc.getWorldId());
+		if (worldTemplate.isInstance()) {
 			boolean isPersonal = WorldMapType.getWorld(loc.getWorldId()).isPersonal();
-			instance = InstanceService.getNextAvailableInstance(loc.getWorldId(), isPersonal ? requester.getObjectId() : 0, (byte) 0);
+			WorldMapInstance instance = InstanceService.getNextAvailableInstance(loc.getWorldId(), isPersonal ? requester.getObjectId() : 0, (byte) 0, maxPlayers);
 			instance.register(requester.getObjectId());
 			transfer(requester, loc, instance, reenter);
 		} else {
 			TeleportService.teleportTo(requester, loc.getWorldId(), loc.getX(), loc.getY(), loc.getZ(), loc.getH(), TeleportAnimation.FADE_OUT_BEAM);
 		}
-	}
-
-	private static WorldMapInstance registerTeam(GeneralTeam<?, ?> team, int mapId, int playerSize, byte difficult) {
-		WorldMapInstance instance = InstanceService.getNextAvailableInstance(mapId, difficult);
-		instance.registerTeam(team, playerSize);
-		return instance;
 	}
 
 	private static void transfer(Player player, PortalLoc loc, WorldMapInstance instance, boolean reenter) {

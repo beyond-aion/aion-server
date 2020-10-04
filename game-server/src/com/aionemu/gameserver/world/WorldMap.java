@@ -27,7 +27,7 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 
 		for (int i = 1; i <= getInstanceCount(); i++) {
 			int nextId = getNextInstanceId();
-			addInstance(nextId, WorldMapInstanceFactory.createWorldMapInstance(this, nextId));
+			addInstance(nextId, WorldMapInstanceFactory.createWorldMapInstance(this, nextId, 0));
 		}
 	}
 

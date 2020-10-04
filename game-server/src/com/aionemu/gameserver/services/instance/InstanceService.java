@@ -37,7 +37,7 @@ public class InstanceService {
 
 	private static final Logger log = LoggerFactory.getLogger(InstanceService.class);
 
-	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult, GeneralInstanceHandler handler) {
+	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult, GeneralInstanceHandler handler, int maxPlayers) {
 		WorldMap map = World.getInstance().getWorldMap(worldId);
 
 		if (!map.isInstanceType())
@@ -45,7 +45,7 @@ public class InstanceService {
 
 		int nextInstanceId = map.getNextInstanceId();
 		log.info("Creating new instance:" + worldId + " id:" + nextInstanceId + " owner:" + ownerId + " difficult:" + difficult);
-		WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId, handler);
+		WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId, handler, maxPlayers);
 
 		map.addInstance(nextInstanceId, worldMapInstance);
 
@@ -61,16 +61,19 @@ public class InstanceService {
 		return worldMapInstance;
 	}
 
-	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult) {
-		return getNextAvailableInstance(worldId, ownerId, difficult, null);
+	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult, int maxPlayers) {
+		return getNextAvailableInstance(worldId, ownerId, difficult, null, maxPlayers);
 	}
 
-	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId) {
-		return getNextAvailableInstance(worldId, 0, (byte) 0);
+	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, Player player) {
+		int maxPlayers = DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(worldId, player.getRace());
+		WorldMapInstance instance = getNextAvailableInstance(worldId, 0, (byte) 0, maxPlayers);
+		instance.register(player.getObjectId());
+		return instance;
 	}
 
-	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, byte difficult) {
-		return getNextAvailableInstance(worldId, 0, difficult);
+	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, byte difficult, int maxPlayers) {
+		return getNextAvailableInstance(worldId, 0, difficult, maxPlayers);
 	}
 
 	/**
@@ -106,8 +109,7 @@ public class InstanceService {
 	public static WorldMapInstance getOrRegisterInstance(int worldId, Player player) {
 		WorldMapInstance instance = getRegisteredInstance(worldId, player.getObjectId());
 		if (instance == null)
-			instance = getNextAvailableInstance(worldId);
-		instance.register(player.getObjectId());
+			instance = getNextAvailableInstance(worldId, player);
 		return instance;
 	}
 
@@ -140,7 +142,7 @@ public class InstanceService {
 			if (instance.isPersonal() && instance.getOwnerId() == ownerId)
 				return instance;
 		}
-		return getNextAvailableInstance(worldId, ownerId, (byte) 0);
+		return getNextAvailableInstance(worldId, ownerId, (byte) 0, 0);
 	}
 
 	public static WorldMapInstance getBeginnerInstance(int worldId, int registeredId) {
@@ -177,8 +179,7 @@ public class InstanceService {
 			WorldMapInstance registeredInstance = isPersonal ? getOrCreatePersonalInstance(worldId, lookupId) : getRegisteredInstance(worldId, lookupId);
 
 			if (registeredInstance != null) {
-				int maxSize = registeredInstance.getPlayerMaxSize();
-				if (maxSize > 0 && registeredInstance.getPlayersInside().size() >= maxSize) {
+				if (registeredInstance.isFull()) {
 					moveToExitPoint(player);
 					return;
 				}
@@ -264,7 +265,7 @@ public class InstanceService {
 		if (registeredInstance != null) { // don't get instance via player.getPosition since he maybe isn't registered with it anymore (login after dc)
 			registeredInstance.getInstanceHandler().onLeaveInstance(player);
 			if (!registeredInstance.isPersonal()) {
-				if (registeredInstance.getPlayerMaxSize() == 1) // solo instance
+				if (registeredInstance.getMaxPlayers() == 1) // solo instance
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE(getDestroyDelaySeconds(registeredInstance) / 60));
 				else if (registeredInstance.getRegisteredTeam() != null && registeredInstance.getRegisteredTeam().getMembers().isEmpty())
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_PARTY(0));
@@ -306,6 +307,6 @@ public class InstanceService {
 	}
 
 	public static int getDestroyDelaySeconds(WorldMapInstance worldMapInstance) {
-		return worldMapInstance.getPlayerMaxSize() == 1 ? CustomConfig.SOLO_INSTANCE_DESTROY_DELAY_SECONDS : CustomConfig.INSTANCE_DESTROY_DELAY_SECONDS;
+		return worldMapInstance.getMaxPlayers() == 1 ? CustomConfig.SOLO_INSTANCE_DESTROY_DELAY_SECONDS : CustomConfig.INSTANCE_DESTROY_DELAY_SECONDS;
 	}
 }

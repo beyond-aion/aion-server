@@ -30,6 +30,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -97,8 +98,7 @@ public class _1006Ascension extends AbstractQuestHandler {
 							TeleportService.teleportTo(player, 210010000, 657f, 1071f, 99.375f, (byte) 72, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
 						case SETPRO3:
-							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310020000);
-							newInstance.register(player.getObjectId());
+							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.KARAMATIS_B.getId(), player);
 							TeleportService.teleportTo(player, newInstance, 52, 174, 229, (byte) 10, TeleportAnimation.NONE);
 							qs.setQuestVar(99); // 99
 							updateQuestStatus(env);

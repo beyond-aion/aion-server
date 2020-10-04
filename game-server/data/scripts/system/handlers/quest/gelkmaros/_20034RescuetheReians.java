@@ -16,6 +16,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Majka
@@ -169,8 +170,7 @@ public class _20034RescuetheReians extends AbstractQuestHandler {
 				case SETPRO3:
 					if (var == 2) {
 						removeQuestItem(env, 182215595, 1);
-						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300150000);
-						newInstance.register(player.getObjectId());
+						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.UDAS_TEMPLE.getId(), player);
 						TeleportService.teleportTo(player, newInstance, 561.8651f, 221.91483f, 134.53333f, (byte) 90,
 							TeleportAnimation.FADE_OUT_BEAM);
 						return true;

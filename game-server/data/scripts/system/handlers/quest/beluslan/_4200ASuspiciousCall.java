@@ -17,6 +17,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author kecimis
@@ -83,8 +84,7 @@ public class _4200ASuspiciousCall extends AbstractQuestHandler {
 						return sendQuestDialog(env, 1011);
 					case SETPRO1:
 						// Create instance
-						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(300100000);
-						newInstance.register(player.getObjectId());
+						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.STEEL_RAKE.getId(), player);
 						// teleport to cell in steel rake
 						TeleportService.teleportTo(player, newInstance, 403.55f, 508.11f, 885.77f);
 						qs.setQuestVarById(0, var + 1);

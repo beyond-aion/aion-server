@@ -8,42 +8,42 @@ import com.aionemu.gameserver.dataholders.DataManager;
  * @author xTz
  */
 public enum AutoGroupType {
-	BARANATH_DREDGION(1, 600000, 12) {
+	BARANATH_DREDGION(1, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoDredgionInstance();
 		}
 	},
-	CHANTRA_DREDGION(2, 600000, 12) {
+	CHANTRA_DREDGION(2, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoDredgionInstance();
 		}
 	},
-	TERATH_DREDGION(3, 600000, 12) {
+	TERATH_DREDGION(3, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoDredgionInstance();
 		}
 	},
-	ELYOS_FIRE_TEMPLE(4, 300000, 6) {
+	ELYOS_FIRE_TEMPLE(4, 300000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoGeneralInstance();
 		}
 	},
-	NOCHSANA_TRAINING_CAMP(5, 600000, 6) {
+	NOCHSANA_TRAINING_CAMP(5, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoGeneralInstance();
 		}
 	},
-	DARK_POETA(6, 1200000, 6) {
+	DARK_POETA(6, 1200000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
@@ -51,252 +51,252 @@ public enum AutoGroupType {
 		}
 	},
 	// STEEL_RAKE(7, 1200000, 6) { @Override AutoInstance newAutoInstance() { return new AutoGeneralInstance(); } },
-	UDAS_TEMPLE(8, 600000, 6) {
+	UDAS_TEMPLE(8, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoGeneralInstance();
 		}
 	},
-	LOWER_UDAS_TEMPLE(9, 600000, 6) {
+	LOWER_UDAS_TEMPLE(9, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoGeneralInstance();
 		}
 	},
-	EMPYREAN_CRUCIBLE(11, 600000, 6) {
+	EMPYREAN_CRUCIBLE(11, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoGeneralInstance();
 		}
 	},
-	ASMODIANS_FIRE_TEMPLE(14, 300000, 6) {
+	ASMODIANS_FIRE_TEMPLE(14, 300000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoGeneralInstance();
 		}
 	},
-	ARENA_OF_CHAOS_1(21, 110000, 8, 1) {
+	ARENA_OF_CHAOS_1(21, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	ARENA_OF_CHAOS_2(22, 110000, 8, 2) {
+	ARENA_OF_CHAOS_2(22, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	ARENA_OF_CHAOS_3(23, 110000, 8, 3) {
+	ARENA_OF_CHAOS_3(23, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	ARENA_OF_DISCIPLINE_1(24, 110000, 2, 1) {
+	ARENA_OF_DISCIPLINE_1(24, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	ARENA_OF_DISCIPLINE_2(25, 110000, 2, 2) {
+	ARENA_OF_DISCIPLINE_2(25, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	ARENA_OF_DISCIPLINE_3(26, 110000, 2, 3) {
+	ARENA_OF_DISCIPLINE_3(26, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	CHAOS_TRAINING_GROUNDS_1(27, 110000, 8, 1) {
+	CHAOS_TRAINING_GROUNDS_1(27, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	CHAOS_TRAINING_GROUNDS_2(28, 110000, 8, 2) {
+	CHAOS_TRAINING_GROUNDS_2(28, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	CHAOS_TRAINING_GROUNDS_3(29, 110000, 8, 3) {
+	CHAOS_TRAINING_GROUNDS_3(29, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	DISCIPLINE_TRAINING_GROUNDS_1(30, 110000, 2, 1) {
+	DISCIPLINE_TRAINING_GROUNDS_1(30, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	DISCIPLINE_TRAINING_GROUNDS_2(31, 110000, 2, 2) {
+	DISCIPLINE_TRAINING_GROUNDS_2(31, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	DISCIPLINE_TRAINING_GROUNDS_3(32, 110000, 2, 3) {
+	DISCIPLINE_TRAINING_GROUNDS_3(32, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	ARENA_OF_HARMONY_1(33, 110000, 6, 1) {
+	ARENA_OF_HARMONY_1(33, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoHarmonyInstance();
 		}
 	},
-	ARENA_OF_HARMONY_2(34, 110000, 6, 2) {
+	ARENA_OF_HARMONY_2(34, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoHarmonyInstance();
 		}
 	},
-	ARENA_OF_HARMONY_3(35, 110000, 6, 3) {
+	ARENA_OF_HARMONY_3(35, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoHarmonyInstance();
 		}
 	},
-	ARENA_OF_GLORY_1(38, 110000, 4, 1) {
+	ARENA_OF_GLORY_1(38, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	ARENA_OF_CHAOS_4(39, 110000, 8, 4) {
+	ARENA_OF_CHAOS_4(39, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	ARENA_OF_DISCIPLINE_4(40, 110000, 2, 4) {
+	ARENA_OF_DISCIPLINE_4(40, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	ARENA_OF_HARMONY_4(41, 110000, 6, 4) {
+	ARENA_OF_HARMONY_4(41, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoHarmonyInstance();
 		}
 	},
-	ARENA_OF_GLORY_2(42, 110000, 4, 2) {
+	ARENA_OF_GLORY_2(42, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	CHAOS_TRAINING_GROUNDS_4(43, 110000, 8, 4) {
+	CHAOS_TRAINING_GROUNDS_4(43, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	DISCIPLINE_TRAINING_GROUNDS_4(44, 110000, 2, 4) {
+	DISCIPLINE_TRAINING_GROUNDS_4(44, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvPFFAInstance();
 		}
 	},
-	HARAMONIOUS_TRAINING_CENTER_4(45, 110000, 6, 4) {
+	HARAMONIOUS_TRAINING_CENTER_4(45, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoHarmonyInstance();
 		}
 	},
-	HARAMONIOUS_TRAINING_CENTER_1(101, 110000, 6, 1) {
+	HARAMONIOUS_TRAINING_CENTER_1(101, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoHarmonyInstance();
 		}
 	},
-	HARAMONIOUS_TRAINING_CENTER_2(102, 110000, 6, 2) {
+	HARAMONIOUS_TRAINING_CENTER_2(102, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoHarmonyInstance();
 		}
 	},
-	HARAMONIOUS_TRAINING_CENTER_3(103, 110000, 6, 3) {
+	HARAMONIOUS_TRAINING_CENTER_3(103, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoHarmonyInstance();
 		}
 	},
-	KAMAR_BATTLEFIELD(107, 600000, 24) {
+	KAMAR_BATTLEFIELD(107, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoKamarInstance();
 		}
 	},
-	ENGULFED_OPHIDIAN_BRIDGE(108, 600000, 12) {
+	ENGULFED_OPHIDIAN_BRIDGE(108, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoEngufledOphidianBridgeInstance();
+			return new AutoEngulfedOphidianBridgeInstance();
 		}
 	},
-	IRON_WALL_WARFRONT(109, 600000, 48) {
+	IRON_WALL_WARFRONT(109, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoIronWallFrontInstance();
 		}
 	},
-	IDGEL_DOME(111, 600000, 12) {
+	IDGEL_DOME(111, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoIdgelDomeInstance();
 		}
 	},
-	STEEL_RAKE_ELYOS(308, 600000, 6) {
+	STEEL_RAKE_ELYOS(308, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoGeneralInstance();
 		}
 	},
-	STEEL_RAKE_ASMODIANS(401, 600000, 6) {
+	STEEL_RAKE_ASMODIANS(401, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
@@ -306,28 +306,22 @@ public enum AutoGroupType {
 
 	private int instanceMaskId;
 	private int time;
-	private byte playerSize;
 	private byte difficultId;
 	private AutoGroup template;
 
-	private AutoGroupType(int instanceMaskId, int time, int playerSize, int difficultId) {
-		this(instanceMaskId, time, playerSize);
+	AutoGroupType(int instanceMaskId, int time, int difficultId) {
+		this(instanceMaskId, time);
 		this.difficultId = (byte) difficultId;
 	}
 
-	private AutoGroupType(int instanceMaskId, int time, int playerSize) {
+	AutoGroupType(int instanceMaskId, int time) {
 		this.instanceMaskId = instanceMaskId;
 		this.time = time;
-		this.playerSize = (byte) playerSize;
 		template = DataManager.AUTO_GROUP.getTemplateByInstaceMaskId(this.instanceMaskId);
 	}
 
 	public int getInstanceMapId() {
 		return template.getInstanceId();
-	}
-
-	public byte getPlayerSize() {
-		return playerSize;
 	}
 
 	public int getInstanceMaskId() {

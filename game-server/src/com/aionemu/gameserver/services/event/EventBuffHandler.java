@@ -1,13 +1,7 @@
 package com.aionemu.gameserver.services.event;
 
 import java.time.ZonedDateTime;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
@@ -255,11 +249,8 @@ public class EventBuffHandler {
 			return true;
 		TemporaryPlayerTeam<?> team = player.getCurrentTeam();
 		if (team != null) {
-			int maxAllowedTeamSize;
-			InstanceCooltime template = DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(player.getWorldId());
-			if (template != null)
-				maxAllowedTeamSize = player.getRace() == Race.ELYOS ? template.getMaxMemberLight() : template.getMaxMemberDark();
-			else
+			int maxAllowedTeamSize = DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(player.getWorldId(), player.getRace());
+			if (maxAllowedTeamSize == 0)
 				maxAllowedTeamSize = team.getMaxMemberCount();
 
 			if (buff.getRestriction().getTeamSizeMaxPercent() >= team.size() * 100f / maxAllowedTeamSize)

@@ -34,7 +34,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
 		super.writeLock();
 		try {
-			if (!satisfyTime(searchInstance) || (players.size() >= agt.getPlayerSize())) {
+			if (!satisfyTime(searchInstance) || (players.size() >= getMaxPlayers())) {
 				return AGQuestion.FAILED;
 			}
 			AGQuestion result;
@@ -166,7 +166,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 					players.put(obj, agp);
 				}
 			}
-			return instance != null ? AGQuestion.ADDED : (players.size() == agt.getPlayerSize() ? AGQuestion.READY : AGQuestion.ADDED);
+			return instance != null ? AGQuestion.ADDED : (players.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED);
 		}
 		return AGQuestion.FAILED;
 	}
@@ -182,7 +182,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 			} else if (getAGPlayerByIndex(group, 0).getRace().equals(player.getRace())) {
 				group.add(agp);
 				players.put(obj, agp);
-				return instance != null ? AGQuestion.ADDED : (players.size() == agt.getPlayerSize() ? AGQuestion.READY : AGQuestion.ADDED);
+				return instance != null ? AGQuestion.ADDED : (players.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED);
 			}
 		}
 		return AGQuestion.FAILED;

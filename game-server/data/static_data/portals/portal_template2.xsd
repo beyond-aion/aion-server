@@ -40,12 +40,9 @@
 		</xs:sequence>
 		<xs:attribute name="dialog" type="xs:int" />
 		<xs:attribute name="loc_id" type="xs:int" />
-		<xs:attribute name="player_count" type="xs:int" default="1" />
-		<xs:attribute name="instance" type="xs:boolean" default="false" />
 		<xs:attribute name="siege_id" type="xs:int" />
 		<xs:attribute name="race" type="Race" default="PC_ALL" />
-		<xs:attribute name="min_level" type="xs:int" />
-		<xs:attribute name="max_level" type="xs:int" />
+		<xs:attribute name="min_level" type="xs:int" /><!-- no value means default level restrictions from instance_cooltimes will be used -->
 		<xs:attribute name="min_rank" type="xs:int" />
 		<xs:attribute name="kinah" type="xs:int" />
 		<xs:attribute name="title_id" type="xs:int" />

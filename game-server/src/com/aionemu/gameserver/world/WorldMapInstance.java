@@ -77,16 +77,12 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	private InstanceHandler instanceHandler;
 	private final Map<ZoneName, ZoneInstance> zones;
 	private WorldPosition startPos;
-	private int playerSize;
+	private final int maxPlayers;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param parent
-	 */
-	public WorldMapInstance(WorldMap parent, int instanceId) {
+	public WorldMapInstance(WorldMap parent, int instanceId, int maxPlayers) {
 		this.parent = parent;
 		this.instanceId = instanceId;
+		this.maxPlayers = maxPlayers;
 		this.zones = ZoneService.getInstance().getZoneInstancesByWorldId(parent.getMapId());
 		initMapRegions();
 	}
@@ -197,7 +193,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		}
 	}
 
-	public int playerCount() {
+	public int getPlayerCount() {
 		return worldMapPlayers.size();
 	}
 
@@ -271,12 +267,11 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return getInstanceId() > twinCount;
 	}
 
-	public void registerTeam(GeneralTeam<?, ?> team, int playerSize) {
+	public void registerTeam(GeneralTeam<?, ?> team) {
 		if (registeredTeam != null)
 			throw new IllegalStateException("A team for instance " + instanceId + " of map " + getMapId() + " is already registered");
 		registeredTeam = team;
 		register(team.getTeamId());
-		this.playerSize = playerSize;
 	}
 
 	public void register(int objectId) {
@@ -354,11 +349,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return regionZones.toArray(new ZoneInstance[regionZones.size()]);
 	}
 
-	/**
-	 * @param player
-	 * @param zoneName
-	 * @return
-	 */
 	public boolean isInsideZone(VisibleObject object, ZoneName zoneName) {
 		ZoneInstance zoneTemplate = zones.get(zoneName);
 		if (zoneTemplate == null)
@@ -366,18 +356,17 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return isInsideZone(object.getPosition(), zoneName);
 	}
 
-	/**
-	 * @param pos
-	 * @param zone
-	 * @return
-	 */
 	public boolean isInsideZone(WorldPosition pos, ZoneName zoneName) {
 		MapRegion mapRegion = this.getRegion(pos.getX(), pos.getY(), pos.getZ());
 		return mapRegion.isInsideZone(zoneName, pos.getX(), pos.getY(), pos.getZ());
 	}
 
-	public int getPlayerMaxSize() {
-		return playerSize;
+	public int getMaxPlayers() {
+		return maxPlayers;
+	}
+
+	public boolean isFull() {
+		return maxPlayers > 0 && getPlayerCount() >= maxPlayers;
 	}
 
 	public void setDoorState(int staticId, boolean open) {

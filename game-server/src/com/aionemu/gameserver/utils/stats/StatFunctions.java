@@ -51,8 +51,8 @@ public class StatFunctions {
 		WorldMapInstance instance = target.getPosition().getWorldMapInstance();
 		int baseXP = calculateBaseExp(target);
 		float mapMulti = instance.getInstanceHandler().getInstanceExpMultiplier(); // map modifier to approach retail exp values
-		if (instance.getParent().isInstanceType() && instance.getPlayerMaxSize() >= 2 && instance.getPlayerMaxSize() <= 6) {
-			mapMulti *= instance.getPlayerMaxSize(); // on retail you get mob EP * max instance member count (only for group instances)
+		if (instance.getParent().isInstanceType() && instance.getMaxPlayers() >= 2 && instance.getMaxPlayers() <= 6) {
+			mapMulti *= instance.getMaxPlayers(); // on retail you get mob EP * max instance member count (only for group instances)
 			mapMulti /= RatesConfig.XP_SOLO_RATES[0]; // custom: divide by regular xp rates, so they will not affect the rewarded XP
 		}
 		int xpPercentage = XPRewardEnum.xpRewardFrom(target.getLevel() - maxLevelInRange);

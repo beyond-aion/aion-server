@@ -18,6 +18,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author MrPoke
@@ -123,8 +124,7 @@ public class _1002RequestoftheElim extends AbstractQuestHandler {
 							}
 							return false;
 						case SETPRO5:
-							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310010000);
-							newInstance.register(player.getObjectId());
+							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.KARAMATIS.getId(), player);
 							TeleportService.teleportTo(player, newInstance, 52, 174, 229);
 							changeQuestStep(env, 13, 20); // 20
 							return closeDialogWindow(env);

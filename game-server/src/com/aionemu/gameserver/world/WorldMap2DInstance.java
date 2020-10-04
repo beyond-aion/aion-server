@@ -9,8 +9,8 @@ public class WorldMap2DInstance extends WorldMapInstance {
 
 	private final int ownerId;
 
-	public WorldMap2DInstance(WorldMap parent, int instanceId, int ownerId) {
-		super(parent, instanceId);
+	public WorldMap2DInstance(WorldMap parent, int instanceId, int ownerId, int maxPlayers) {
+		super(parent, instanceId, maxPlayers);
 		this.ownerId = ownerId;
 	}
 

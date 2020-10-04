@@ -1,25 +1,13 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
-import com.aionemu.gameserver.model.autogroup.AGPlayer;
-import com.aionemu.gameserver.model.autogroup.AGQuestion;
-import com.aionemu.gameserver.model.autogroup.AutoGroupType;
-import com.aionemu.gameserver.model.autogroup.AutoInstance;
-import com.aionemu.gameserver.model.autogroup.EntryRequestType;
-import com.aionemu.gameserver.model.autogroup.LookingForParty;
-import com.aionemu.gameserver.model.autogroup.SearchInstance;
+import com.aionemu.gameserver.model.autogroup.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
@@ -29,11 +17,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.instance.PvPArenaService;
-import com.aionemu.gameserver.services.instance.periodic.DredgionService;
-import com.aionemu.gameserver.services.instance.periodic.EngulfedOphidianBridgeService;
-import com.aionemu.gameserver.services.instance.periodic.IdgelDomeService;
-import com.aionemu.gameserver.services.instance.periodic.IronWallFrontService;
-import com.aionemu.gameserver.services.instance.periodic.KamarBattlefieldService;
+import com.aionemu.gameserver.services.instance.periodic.*;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -373,7 +357,7 @@ public class AutoGroupService {
 					}
 				}
 				if (canCreate) {
-					WorldMapInstance instance = createInstance(agt.getInstanceMapId(), agt.getDifficultId());
+					WorldMapInstance instance = createInstance(agt.getInstanceMapId(), agt.getDifficultId(), autoInstance.getMaxPlayers());
 					autoInstance.onInstanceCreate(instance);
 					autoInstances.put(instance.getInstanceId(), autoInstance);
 					for (Player player : players) {
@@ -514,10 +498,10 @@ public class AutoGroupService {
 		return player.getPortalCooldownList().isPortalUseDisabled(worldId) && useDelay > 0;
 	}
 
-	private WorldMapInstance createInstance(int worldId, byte difficultId) {
+	private WorldMapInstance createInstance(int worldId, byte difficultId, int maxPlayers) {
 		WorldMap map = World.getInstance().getWorldMap(worldId);
 		int nextInstanceId = map.getNextInstanceId();
-		WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId);
+		WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, maxPlayers);
 		map.addInstance(nextInstanceId, worldMapInstance);
 		SpawnEngine.spawnInstance(worldId, worldMapInstance.getInstanceId(), difficultId);
 		InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);

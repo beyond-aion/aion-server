@@ -76,7 +76,8 @@ public class PortalDialogAI extends PortalAI {
 				return true;
 			case SELECT1_1:
 				if (agt != null) {
-					if (agt.getPlayerSize() <= 6 && !player.isInGroup() || agt.getPlayerSize() > 6 && !player.isInAlliance()) {
+					int maxMemberCount = DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getInstanceMapId(), player.getRace());
+					if (maxMemberCount <= 6 && !player.isInGroup() || maxMemberCount > 6 && !player.isInAlliance()) {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1182));
 						return true;
 					}

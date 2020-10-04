@@ -12,6 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Hellboy, aion4Free
@@ -94,8 +95,7 @@ public class _1922DeliveronYourPromises extends AbstractQuestHandler {
 							}
 							return false;
 						case SETPRO3:
-							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(310080000);
-							newInstance.register(player.getObjectId());
+							WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.SANCTUM_UNDERGROUND_ARENA.getId(), player);
 							TeleportService.teleportTo(player, newInstance, 276, 293, 163, (byte) 90, TeleportAnimation.NONE);
 							if (var == 4 || var == 6)
 								changeQuestStep(env, var, 5, false); // 5
