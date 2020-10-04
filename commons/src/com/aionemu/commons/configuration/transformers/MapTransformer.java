@@ -2,6 +2,7 @@ package com.aionemu.commons.configuration.transformers;
 
 import java.lang.reflect.Modifier;
 import java.lang.reflect.Type;
+import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -22,9 +23,10 @@ public class MapTransformer {
 			throw new IllegalArgumentException(mapType + " is not a Map type");
 		Map<K, V> output;
 		if (mapType.isInterface() || Modifier.isAbstract(mapType.getModifiers())) {
-			if (mapType == Map.class)
-				output = new HashMap<>();
-			else
+			if (mapType == Map.class) {
+				Class<K> keyType = (Class<K>) typeInfo.getGenericType(0).getType();
+				output = keyType.isEnum() ? new EnumMap(keyType) : new HashMap<>();
+			}	else
 				throw new UnsupportedOperationException("No default implementation for " + mapType + ", non abstract/interface class must be declared.");
 		} else {
 			output = (Map<K, V>) mapType.getDeclaredConstructor().newInstance();
