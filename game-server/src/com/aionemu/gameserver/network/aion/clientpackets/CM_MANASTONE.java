@@ -85,13 +85,9 @@ public class CM_MANASTONE extends AionClientPacket {
 				}
 				break;
 			case 3: // remove manastone
-				VisibleObject npc = player.getTarget();
-				if (npc instanceof Npc && npc.getObjectId() == npcObjId && PositionUtil.isInTalkRange(player, (Npc) npc)) {
-					if (targetFusedSlot == 1)
-						ItemSocketService.removeManastone(player, targetItemUniqueId, slotNum);
-					else
-						ItemSocketService.removeFusionstone(player, targetItemUniqueId, slotNum);
-				}
+				VisibleObject visibleObject = player.getTarget();
+				if (visibleObject.getObjectId() == npcObjId && visibleObject instanceof Npc npc && PositionUtil.isInTalkRange(player, npc))
+					ItemSocketService.removeManastone(player, targetItemUniqueId, slotNum, targetFusedSlot != 1);
 				break;
 			case 4: // add godstone
 				Item weaponItem = player.getInventory().getItemByObjId(targetItemUniqueId);

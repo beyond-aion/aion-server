@@ -22,15 +22,7 @@ import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
-import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
-import com.aionemu.gameserver.model.gameobjects.player.MacroList;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerSettings;
-import com.aionemu.gameserver.model.gameobjects.player.QuestStateList;
-import com.aionemu.gameserver.model.gameobjects.player.RecipeList;
+import com.aionemu.gameserver.model.gameobjects.player.*;
 import com.aionemu.gameserver.model.gameobjects.player.emotion.EmotionList;
 import com.aionemu.gameserver.model.gameobjects.player.motion.Motion;
 import com.aionemu.gameserver.model.gameobjects.player.motion.MotionList;
@@ -229,21 +221,16 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 			Item item = new Item(newId, itemId, itemCnt, itemColor, colorExpires, itemCreator, itemExpireTime, itemActivationCnt, itemEquipped,
 				itemSoulBound, equipSlot, location, enchant, enchantBonus, skinId, fusionId, optSocket, optFusion, charge, tuneCount, bonusStatsId,
 				fusionedItemBonusStatsId, tempering, packCount, itemAmplified, buffSkill, 0);
-			if (manastones.size() > 0) {
-				for (int[] stone : manastones) {
-					ItemSocketService.addManaStone(item, stone[0], stone[1]);
-				}
+			if (manastones.size() > 0)
+				for (int[] stone : manastones)
+					ItemSocketService.addManaStone(item, stone[0], stone[1], false);
 
-			}
-			if (fusions.size() > 0) {
-				for (int[] stone : fusions) {
-					ItemSocketService.addFusionStone(item, stone[0], stone[1]);
-				}
+			if (fusions.size() > 0)
+				for (int[] stone : fusions)
+					ItemSocketService.addManaStone(item, stone[0], stone[1], true);
 
-			}
-			if (godstone != 0) {
+			if (godstone != 0)
 				item.addGodStone(godstone);
-			}
 
 			sb.append("\n(old objId=").append(objIdOld).append(") -> ").append(item);
 			item.setPersistentState(PersistentState.NEW);

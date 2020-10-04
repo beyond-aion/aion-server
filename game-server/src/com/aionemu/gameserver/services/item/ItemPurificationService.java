@@ -106,11 +106,11 @@ public class ItemPurificationService {
 		}
 		if (sourceItem.hasManaStones()) {
 			for (ManaStone manaStone : sourceItem.getItemStones())
-				ItemSocketService.addManaStone(newItem, manaStone.getItemId());
+				ItemSocketService.addManaStone(newItem, manaStone.getItemId(), false);
 		}
 		if (sourceItem.hasFusionStones()) {
 			for (ManaStone manaStone : sourceItem.getFusionStones())
-				ItemSocketService.addFusionStone(newItem, manaStone.getItemId());
+				ItemSocketService.addManaStone(newItem, manaStone.getItemId(), true);
 		}
 		if (sourceItem.getGodStone() != null)
 			newItem.addGodStone(sourceItem.getGodStone().getItemId(), sourceItem.getGodStone().getActivatedCount());

@@ -94,7 +94,6 @@ public class TuningAction extends AbstractItemAction {
 					newEnchantBonus = targetItem.getEnchantBonus();
 				} else {
 					targetItem.setTuneCount(targetItem.getTuneCount() + 1);
-					targetItem.setPersistentState(Persistable.PersistentState.UPDATE_REQUIRED);
 					player.getInventory().setPersistentState(Persistable.PersistentState.UPDATE_REQUIRED);
 					newOptionalSockets = Rnd.get(0, targetItem.getItemTemplate().getOptionSlotBonus());
 					newEnchantBonus = Rnd.get(0, targetItem.getItemTemplate().getMaxEnchantBonus());

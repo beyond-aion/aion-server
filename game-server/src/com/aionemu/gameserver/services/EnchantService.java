@@ -422,25 +422,17 @@ public class EnchantService {
 	}
 
 	public static boolean socketManastoneAct(Player player, Item parentItem, Item targetItem, Item supplementItem, int targetWeapon, boolean result) {
-
 		// Decrease required supplements
 		player.updateSupplements();
 		if (!player.getInventory().decreaseByObjectId(parentItem.getObjectId(), 1))
 			return false;
 		if (result) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_SUCCEED(targetItem.getL10n()));
-			if (targetWeapon == 1) {
-				ManaStone manaStone = ItemSocketService.addManaStone(targetItem, parentItem.getItemTemplate().getTemplateId());
-				if (targetItem.isEquipped()) {
-					ItemEquipmentListener.addStoneStats(targetItem, manaStone, player.getGameStats());
-					player.getGameStats().updateStatsAndSpeedVisually();
-				}
-			} else {
-				ManaStone manaStone = ItemSocketService.addFusionStone(targetItem, parentItem.getItemTemplate().getTemplateId());
-				if (targetItem.isEquipped()) {
-					ItemEquipmentListener.addStoneStats(targetItem, manaStone, player.getGameStats());
-					player.getGameStats().updateStatsAndSpeedVisually();
-				}
+
+			ManaStone manaStone = ItemSocketService.addManaStone(targetItem, parentItem.getItemTemplate().getTemplateId(), targetWeapon != 1);
+			if (targetItem.isEquipped()) {
+				ItemEquipmentListener.addStoneStats(targetItem, manaStone, player.getGameStats());
+				player.getGameStats().updateStatsAndSpeedVisually();
 			}
 		} else {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_FAILED(targetItem.getL10n()));

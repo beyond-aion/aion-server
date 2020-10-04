@@ -133,7 +133,7 @@ public class ItemService {
 		newItem.setItemCreator(sourceItem.getItemCreator());
 		if (sourceItem.hasManaStones()) {
 			for (ManaStone manaStone : sourceItem.getItemStones())
-				ItemSocketService.addManaStone(newItem, manaStone.getItemId());
+				ItemSocketService.addManaStone(newItem, manaStone.getItemId(), false);
 		}
 		if (sourceItem.getGodStone() != null)
 			newItem.addGodStone(sourceItem.getGodStone().getItemId(), sourceItem.getGodStone().getActivatedCount());

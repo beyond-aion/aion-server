@@ -51,7 +51,6 @@ public class ItemActionService {
 				item.setBonusStats(TuningAction.getRandomStatBonusIdFor(item), true);
 				item.setEnchantBonus(Rnd.get(0, item.getItemTemplate().getMaxEnchantBonus()));
 				item.setTuneCount(item.getTuneCount() + 1); // not tuned have count = -1
-				item.setPersistentState(PersistentState.UPDATE_REQUIRED);
 				player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 				PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_IDENTIFY_SUCCEED(item.getL10n()));
@@ -72,17 +71,5 @@ public class ItemActionService {
 		item.setPendingTuneResult(null);
 		item.setPersistentState(PersistentState.UPDATE_REQUIRED);
 		player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
-		if (item.hasManaStones())
-			removeManastonesExceedingMaxSlot(item);
-	}
-
-	private static void removeManastonesExceedingMaxSlot(Item item) {
-		int maxManastoneSlotIndex = item.getSockets(false) - 1;
-		Set<ManaStone> manastonesToRemove = item.getItemStones().stream().filter(m -> m.getSlot() > maxManastoneSlotIndex).collect(Collectors.toSet());
-		if (!manastonesToRemove.isEmpty()) {
-			item.getItemStones().removeAll(manastonesToRemove);
-			manastonesToRemove.forEach(m -> m.setPersistentState(PersistentState.DELETED));
-			DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(manastonesToRemove);
-		}
 	}
 }

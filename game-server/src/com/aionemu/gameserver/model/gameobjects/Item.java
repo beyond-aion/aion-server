@@ -478,7 +478,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	}
 
 	/**
-	 * @param goodStone
+	 * @param godStone
 	 *          the goodStone to set
 	 */
 	public void setGodStone(GodStone godStone) {
@@ -502,6 +502,8 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 */
 	public void setEnchantLevel(int enchantLevel) {
 		this.enchantLevel = enchantLevel;
+		if (enchantLevel > 0)
+			removeRemainingTuningCountIfPossible();
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
@@ -606,6 +608,8 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		setFusionedItemBonusStats(bonusStatsId, false);
 		setFusionedItemOptionalSockets(optionalSockets);
 		updateChargeInfo(0);
+		if (template != null)
+			removeRemainingTuningCountIfPossible();
 	}
 
 	private void removeAllFusionStones() {
@@ -871,6 +875,13 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 
 	public void setTuneCount(int tuneCount) {
 		this.tuneCount = tuneCount;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
+	}
+
+	public void removeRemainingTuningCountIfPossible() {
+		if (!itemTemplate.canTune() || tuneCount == itemTemplate.getMaxTuneCount())
+			return;
+		setTuneCount(itemTemplate.getMaxTuneCount());
 	}
 
 	/**
