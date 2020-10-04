@@ -126,7 +126,6 @@ public class ItemPurificationService {
 			}
 			newItem.setBonusStats(statBonusId, true);
 		}
-		newItem.setTuneCount(sourceItem.getTuneCount());
 		newItem.setItemColor(sourceItem.getItemColor());
 		player.getInventory().add(newItem);
 	}
