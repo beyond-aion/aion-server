@@ -32,7 +32,6 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.PvpService;
 import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -58,6 +57,8 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private static final int SHUGO_SPAWN_RATE = 30;
+	private static final int[] RANDOM_BOSS_NPC_IDS = {231196, 233740, 235759, 235765, 235763, 235767, 235771, 235619, 235620, 235621, 855822,
+			855843, 230857, 230858, 277224, 855776, 219933, 219934, 235975, 855263, 231304};
 	private final Map<Integer, WorldPosition> origins = new HashMap<>();
 	private final Map<Integer, Long> joinOrLeaveTime = new HashMap<>();
 	private final Map<Race, List<WorldPosition>> respawnLocations = new HashMap<>();
@@ -66,12 +67,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	private final AtomicBoolean canJoin = new AtomicBoolean();
 	private List<Future<?>> tasks = new ArrayList<>();
 	private Future<?> supplyTask, despawnTask;
-	private boolean randomBossAlive = false;
-
-	public PvpMapHandler() {
-		super();
-		InstanceService.getNextAvailableInstance(301220000, 0, (byte) 0, this);
-	}
+	private int currentRandomBossObjId;
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
@@ -84,7 +80,18 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		spawnTreasureChests();
 		spawnNpcs();
 		startRandomBossTask();
-		canJoin.set(true);
+		setActive(true);
+	}
+
+	public boolean isActive() {
+		return canJoin.get();
+	}
+
+	public boolean setActive(boolean active) {
+		boolean success = canJoin.compareAndSet(!active, active);
+		if (!active && success)
+			instance.forEachPlayer(this::removePlayer);
+		return success;
 	}
 
 	private void spawnShugo(Player player) {
@@ -161,7 +168,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			int bonus = World.getInstance().getAllPlayers().size() * 2;
 			bonus = bonus > 30 ? 30 : bonus;
 			if (Rnd.chance() < (CustomConfig.PVP_MAP_RANDOM_BOSS_BASE_RATE + bonus)) {
-				int npcId = PvpMapService.getInstance().getRandomBossId();
+				int npcId = Rnd.get(RANDOM_BOSS_NPC_IDS);
 				NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
 				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43, 0,
 					"modified_iron_wall_aggressive");
@@ -169,8 +176,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				npc.setKnownlist(new NpcKnownList(npc));
 				npc.setEffectController(new EffectController(npc));
 				SpawnEngine.bringIntoWorld(npc, mapId, instanceId, spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getHeading());
+				currentRandomBossObjId = npc.getObjectId();
 				scheduleRandomBossDespawn(npc);
-				randomBossAlive = true;
 				World.getInstance().forEachPlayer(PvpMapService.getInstance()::notifyBossSpawn);
 			}
 		}, CustomConfig.PVP_MAP_RANDOM_BOSS_SCHEDULE);
@@ -180,7 +187,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			if (npc != null && !npc.getLifeStats().isAboutToDie() && !npc.isDead()) {
 				npc.getController().delete();
-				randomBossAlive = false;
+				if (npc.getObjectId() == currentRandomBossObjId)
+					currentRandomBossObjId = 0;
 			}
 		}, 50, TimeUnit.MINUTES));
 	}
@@ -198,6 +206,14 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		if (canJoin(p)) {
 			startTeleportation(p, false);
 		}
+	}
+
+	public void leave(Player p) {
+		if (!checkState(p) || p.getController().hasScheduledTask(TaskId.SKILL_USE)) {
+			PacketSendUtility.sendMessage(p, "You cannot leave the PvP-Map in your current state.");
+			return;
+		}
+		startTeleportation(p, true);
 	}
 
 	private void startTeleportation(Player p, boolean isLeaving) {
@@ -237,21 +253,29 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private boolean canJoin(Player p) {
-		if (p.isStaff()) {
-			return true;
-		} else if (!canJoin.get() || p.getController().hasScheduledTask(TaskId.SKILL_USE)) {
-			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map now.");
-			return false;
-		} else if (!checkState(p)) {
-			PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map in your current state.");
-			return false;
-		} else if (joinOrLeaveTime.containsKey(p.getObjectId()) && ((System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) < 120000)) {
-			int timeInSeconds = (int) Math.ceil((120000 - (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId()))) / 1000f);
-			PacketSendUtility.sendMessage(p, "You can reenter the PvP-Map in " + timeInSeconds + " second" + (timeInSeconds > 1 ? "s." : "."));
-			return false;
-		} else {
-			return true;
+		if (!p.isStaff()) {
+			if (!canJoin.get()) {
+				PacketSendUtility.sendMessage(p, "The PvP-Map is currently disabled.");
+				return false;
+			} else if (p.getLevel() < 60) {
+				PacketSendUtility.sendMessage(p, "The PvP-Map is for players level 60 and above.");
+				return false;
+			} else if (p.isInInstance() || p.getWorldId() == 400030000) {
+				PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while in an instance.");
+				return false;
+			} else if (p.getController().isInCombat()) {
+				PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map while in combat.");
+				return false;
+			} else if (!checkState(p) || p.getController().hasScheduledTask(TaskId.SKILL_USE)) {
+				PacketSendUtility.sendMessage(p, "You cannot enter the PvP-Map in your current state.");
+				return false;
+			} else if (joinOrLeaveTime.containsKey(p.getObjectId()) && ((System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId())) < 120000)) {
+				int timeInSeconds = (int) Math.ceil((120000 - (System.currentTimeMillis() - joinOrLeaveTime.get(p.getObjectId()))) / 1000f);
+				PacketSendUtility.sendMessage(p, "You can reenter the PvP-Map in " + timeInSeconds + " second" + (timeInSeconds > 1 ? "s." : "."));
+				return false;
+			}
 		}
+		return true;
 	}
 
 	private boolean checkState(Player p) {
@@ -286,7 +310,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
+	public boolean onDie(Player player, Creature lastAttacker) {
 		if (canJoin.get()) {
 			if (lastAttacker instanceof Player && !lastAttacker.equals(player)) {
 				spawnShugo((Player) lastAttacker);
@@ -300,8 +324,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
-		if (PvpMapService.getInstance().isRandomBoss(npc)) {
-			randomBossAlive = false;
+		if (npc.getObjectId() == currentRandomBossObjId) {
+			currentRandomBossObjId = 0;
 			return;
 		}
 		switch (npc.getNpcId()) {
@@ -386,10 +410,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	@Override
 	public void onInstanceDestroy() {
-		PvpMapService.getInstance().closeMap(instanceId);
 		canJoin.set(false);
 		cancelTasks();
-		clearLists();
 	}
 
 	private void cancelTasks() {
@@ -436,22 +458,6 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		return instanceId;
 	}
 
-	public void removeAllPlayersAndStop() {
-		canJoin.set(false);
-		cancelTasks();
-		instance.forEachPlayer(this::removePlayer);
-		clearLists();
-	}
-
-	private void clearLists() {
-		joinOrLeaveTime.clear();
-		respawnLocations.clear();
-		supplyPositions.clear();
-		keymasterPositions.clear();
-		treasurePositions.clear();
-		origins.clear();
-	}
-
 	private synchronized void removePlayer(Player p) {
 		updateJoinOrLeaveTime(p);
 		if (p.isDead())
@@ -477,23 +483,17 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		return fortress != null && fortress.isVulnerable();
 	}
 
-	public boolean leave(Player p) {
-		if (checkState(p) && !p.getController().hasScheduledTask(TaskId.SKILL_USE)) {
-			startTeleportation(p, true);
-			return true;
-		}
-		return false;
+	public boolean isOnMap(Creature creature) {
+		return instance != null && instance.getObject(creature.getObjectId()) != null;
 	}
 
-	public boolean isOnMap(Creature creature) {
-		return instance.getObject(creature.getObjectId()) != null;
+	public boolean isRandomBoss(int objectId) {
+		return currentRandomBossObjId == objectId;
 	}
 
 	public boolean isRandomBossAlive() {
-		if (canJoin.get()) {
-			return randomBossAlive;
-		}
-		return false;
+		Npc boss = (Npc) instance.getObject(currentRandomBossObjId);
+		return boss != null && !boss.isDead();
 	}
 
 	private void spawnNpcs() {
