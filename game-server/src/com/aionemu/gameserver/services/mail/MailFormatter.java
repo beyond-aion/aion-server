@@ -162,4 +162,10 @@ public final class MailFormatter {
 		SystemMailService.sendMail("$$GD_REWARD_MAIL", player.getName(), title, body, itemId, itemCount, 0, LetterType.NORMAL);
 	}
 
+	public static void sendCustomAbyssDefeatRewardMail(PlayerCommonData playerCommonData, int itemId, int itemCount) {
+		SystemMailService.sendMail(playerCommonData.getRace() == Race.ELYOS ? "%NPC:203700" : "%NPC:204052", // Fasimedes, Vidar
+				playerCommonData.getName(), "$901513", // Reward Statement
+				"", itemId, itemCount, 0, LetterType.NORMAL);
+	}
+
 }

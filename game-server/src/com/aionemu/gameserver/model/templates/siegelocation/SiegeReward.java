@@ -18,6 +18,10 @@ public class SiegeReward {
 	protected int itemId;
 	@XmlAttribute(name = "item_count")
 	protected int itemCount;
+	@XmlAttribute(name = "item_id_defeat")
+	protected int itemIdDefeat;
+	@XmlAttribute(name = "item_count_defeat")
+	protected int itemCountDefeat;
 	@XmlAttribute(name = "gp_win")
 	protected int gpWin;
 	@XmlAttribute(name = "gp_defeat")
@@ -41,5 +45,21 @@ public class SiegeReward {
 
 	public int getGpForDefeat() {
 		return gpDefeat;
+	}
+
+	public int getItemIdDefeat() {
+		return itemIdDefeat;
+	}
+
+	public int getItemCountDefeat() {
+		return itemCountDefeat;
+	}
+
+	public boolean hasItemRewardsForWin() {
+		return itemId > 0 && itemCount > 0;
+	}
+
+	public boolean hasItemRewardsForDefeat() {
+		return itemIdDefeat > 0 && itemCountDefeat > 0;
 	}
 }

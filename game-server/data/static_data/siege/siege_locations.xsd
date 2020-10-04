@@ -79,6 +79,8 @@
 		<xs:attribute name="top" type="xs:int" use="required" />
 		<xs:attribute name="item_id" type="xs:int" />
 		<xs:attribute name="item_count" type="xs:int" />
+		<xs:attribute name="item_id_defeat" type="xs:int" />
+		<xs:attribute name="item_count_defeat" type="xs:int" />
 		<xs:attribute name="gp_win" type="xs:int" />
 		<xs:attribute name="gp_defeat" type="xs:int" />
 	</xs:complexType>

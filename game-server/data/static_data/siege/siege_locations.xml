@@ -90,10 +90,10 @@
 	<siege_location id="140" type="INDUN" world="210070000"/>
 	<siege_location id="1011" type="FORTRESS" world="400010000" name_id="400910" occupy_count="2" legion_gp="1000" siege_duration="3000" influence="10" kinah_rewards="100000000 90000000 80000000 50000000">
 		<artifact_activation item_id="188020000" count="1" skill="12078" cd="7200"/>
-		<siege_reward top="11" item_id="186000242" item_count="4" gp_win="300" gp_defeat="150"/>
-		<siege_reward top="22" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
-		<siege_reward top="50" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="200" item_id="186000242" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="186000242" item_count="4" item_id_defeat="186000243" item_count_defeat="10" gp_win="300" gp_defeat="150"/>
+		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
+		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="50" item_id="186000242" item_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward item_id="182400001" item_count="30000000" />
 		<legion_reward item_id="186000242" item_count="1"/>
 		<legion_reward item_id="188052117" item_count="1"/>
@@ -284,10 +284,10 @@
 			<door_repair_stone static_id="210" door_id="119"/>
 			<door_repair_stone static_id="211" door_id="118"/>
 		</door_repair_data>
-		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
-		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="50" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="200" item_id="186000147" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="186000242" item_count="3" item_id_defeat="186000243" item_count_defeat="10" gp_win="250" gp_defeat="125"/>
+		<siege_reward top="11" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="22" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="50" item_id="186000243" item_count="5" gp_win="100" gp_defeat="50"/>
 		<legion_reward item_id="182400001" item_count="15000000" />
 		<legion_reward item_id="188052762" item_count="1"/>
 		<legion_reward item_id="188052114" item_count="1"/>
@@ -321,10 +321,10 @@
 			<door_repair_stone static_id="212" door_id="24"/>
 			<door_repair_stone static_id="213" door_id="121"/>
 		</door_repair_data>
-		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
-		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="50" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="200" item_id="186000147" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="186000242" item_count="3" item_id_defeat="186000243" item_count_defeat="10" gp_win="250" gp_defeat="125"/>
+		<siege_reward top="11" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="22" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="50" item_id="186000243" item_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward item_id="182400001" item_count="15000000" />
 		<legion_reward item_id="188052763" item_count="1"/>
 		<legion_reward item_id="188052115" item_count="1"/>
@@ -355,10 +355,10 @@
 			<door_repair_stone static_id="214" door_id="110"/>
 			<door_repair_stone static_id="215" door_id="19"/>
 		</door_repair_data>
-		<siege_reward top="11" item_id="186000242" item_count="3" gp_win="250" gp_defeat="125"/>
-		<siege_reward top="22" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="50" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="200" item_id="186000147" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="186000242" item_count="3" item_id_defeat="186000243" item_count_defeat="10" gp_win="250" gp_defeat="125"/>
+		<siege_reward top="11" item_id="186000242" item_count="2" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="22" item_id="186000242" item_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="50" item_id="186000243" item_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward item_id="182400001" item_count="15000000" />
 		<legion_reward item_id="188052764" item_count="1"/>
 		<legion_reward item_id="188052116" item_count="1"/>
@@ -431,10 +431,10 @@
 		<door_repair_data item_id="188030000" count="75" cd="30">
 			<door_repair_stone static_id="478" door_id="380"/>
 		</door_repair_data>
-		<siege_reward top="11" item_id="188053163" item_count="1" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="22" item_id="188053164" item_count="1" gp_win="175" gp_defeat="90"/>
-		<siege_reward top="33" item_id="188053165" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="200" item_id="188053166" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188053163" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="11" item_id="188053164" item_count="1" gp_win="175" gp_defeat="90"/>
+		<siege_reward top="22" item_id="188053165" item_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="50" item_id="188053166" item_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward item_id="182400001" item_count="10000000" />
 		<legion_reward item_id="186000242" item_count="1"/>
 		<legion_reward item_id="188052119" item_count="1"/>
@@ -468,10 +468,10 @@
 		<door_repair_data item_id="188030000" count="75" cd="30">
 			<door_repair_stone static_id="383" door_id="374"/>
 		</door_repair_data>
-		<siege_reward top="11" item_id="188053159" item_count="1" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="22" item_id="188053160" item_count="1" gp_win="175" gp_defeat="90"/>
-		<siege_reward top="33" item_id="188053161" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="200" item_id="188053162" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188053159" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="11" item_id="188053160" item_count="1" gp_win="175" gp_defeat="90"/>
+		<siege_reward top="22" item_id="188053161" item_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="50" item_id="188053162" item_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward item_id="182400001" item_count="10000000" />
 		<legion_reward item_id="186000242" item_count="1"/>
 		<legion_reward item_id="188052118" item_count="1"/>
@@ -501,20 +501,20 @@
 		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
 	</siege_location>
 	<siege_location id="2111" type="OUTPOST" world="210050000" fortress_dependency="2011 2021" siege_duration="7200" kinah_rewards="400000000 300000000 200000000 100000000">
-		<siege_reward top="11" item_id="188050706" item_count="1" gp_win="300" gp_defeat="150"/>
-		<siege_reward top="22" item_id="188050707" item_count="1" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="33" item_id="188050708" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="200" item_id="188050709" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188050706" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="300" gp_defeat="150"/>
+		<siege_reward top="11" item_id="188050707" item_count="1" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="22" item_id="188050708" item_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="50" item_id="188050709" item_count="1" gp_win="100" gp_defeat="50"/>
 	</siege_location>
 	<siege_location id="3011" type="FORTRESS" world="220070000" name_id="401292" occupy_count="2" legion_gp="1000" siege_duration="2400" influence="8" kinah_rewards="50000000 40000000 30000000 10000000">
 		<artifact_activation item_id="188020001" count="2" skill="12157" cd="7200"/>
 		<door_repair_data item_id="188030000" count="75" cd="30">
 			<door_repair_stone static_id="969" door_id="963"/>
 		</door_repair_data>
-		<siege_reward top="11" item_id="188053171" item_count="1" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="22" item_id="188053172" item_count="1" gp_win="175" gp_defeat="90"/>
-		<siege_reward top="33" item_id="188053173" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="200" item_id="188053174" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188053171" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="11" item_id="188053172" item_count="1" gp_win="175" gp_defeat="90"/>
+		<siege_reward top="22" item_id="188053173" item_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="50" item_id="188053174" item_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward item_id="182400001" item_count="10000000" />
 		<legion_reward item_id="186000242" item_count="1"/>
 		<legion_reward item_id="188052121" item_count="1"/>
@@ -548,10 +548,10 @@
 		<door_repair_data item_id="188030000" count="75" cd="30">
 			<door_repair_stone static_id="855" door_id="846"/>
 		</door_repair_data>
-		<siege_reward top="11" item_id="188053167" item_count="1" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="22" item_id="188053168" item_count="1" gp_win="175" gp_defeat="90"/>
-		<siege_reward top="33" item_id="188053169" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="200" item_id="188053170" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188053167" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="11" item_id="188053168" item_count="1" gp_win="175" gp_defeat="90"/>
+		<siege_reward top="22" item_id="188053169" item_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="50" item_id="188053170" item_count="1" gp_win="100" gp_defeat="50"/>
 		<legion_reward item_id="182400001" item_count="10000000" />
 		<legion_reward item_id="186000242" item_count="1"/>
 		<legion_reward item_id="188052120" item_count="1"/>
@@ -581,17 +581,17 @@
 		<artifact_activation item_id="188020002" count="2" skill="12159" repeat_count="5" repeat_interval="3" cd="1800"/>
 	</siege_location>
 	<siege_location id="3111" type="OUTPOST" world="220070000" fortress_dependency="3011 3021" siege_duration="7200" kinah_rewards="400000000 300000000 200000000 100000000">
-		<siege_reward top="11" item_id="188050702" item_count="1" gp_win="300" gp_defeat="150"/>
-		<siege_reward top="22" item_id="188050703" item_count="1" gp_win="200" gp_defeat="100"/>
-		<siege_reward top="33" item_id="188050704" item_count="1" gp_win="150" gp_defeat="75"/>
-		<siege_reward top="200" item_id="188050705" item_count="1" gp_win="100" gp_defeat="50"/>
+		<siege_reward top="5" item_id="188050702" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="300" gp_defeat="150"/>
+		<siege_reward top="11" item_id="188050703" item_count="1" gp_win="200" gp_defeat="100"/>
+		<siege_reward top="22" item_id="188050704" item_count="1" gp_win="150" gp_defeat="75"/>
+		<siege_reward top="50" item_id="188050705" item_count="1" gp_win="100" gp_defeat="50"/>
 	</siege_location>
 	<!-- Wealhtheow's Keep -->
 	<siege_location id="7011" type="FORTRESS" world="600090000" name_id="404142" occupy_count="2" legion_gp="1000" siege_duration="3600" influence="14" kinah_rewards="100000000 90000000 80000000 50000000">
-	    <siege_reward top="11" item_id="169610150" item_count="1" gp_win="0" gp_defeat="200"/>
-		<siege_reward top="30" item_id="169610150" item_count="1" gp_win="0" gp_defeat="150"/>
-		<siege_reward top="60" item_id="169610150" item_count="1" gp_win="0" gp_defeat="100"/>
-		<siege_reward top="200" item_id="169610150" item_count="1" gp_win="0" gp_defeat="50"/>
+	    <siege_reward top="5" item_id="169610150" item_count="1" item_id_defeat="186000243" item_count_defeat="10" gp_win="0" gp_defeat="200"/>
+		<siege_reward top="11" item_id="169610150" item_count="1" gp_win="0" gp_defeat="150"/>
+		<siege_reward top="22" item_id="169610150" item_count="1" gp_win="0" gp_defeat="100"/>
+		<siege_reward top="50" item_id="169610150" item_count="1" gp_win="0" gp_defeat="50"/>
 		<legion_reward item_id="182400001" item_count="30000000"/>
 		<legion_reward item_id="186000242" item_count="4"/>
 		<legion_reward item_id="182215545" item_count="1"/>
