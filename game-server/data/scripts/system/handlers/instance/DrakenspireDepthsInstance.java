@@ -32,12 +32,12 @@ import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * Quick Difficulty Guide:
- * Difficulty 3: Hard Mode
+ * Difficulty 5: Hard Mode
  * - Players have to kill the twin bosses in under 5 minutes within a 15s gap
  * - Players have to kill Orissan in his second vulnerable phase
  * - Players have to defeat 5 waves to defend their siege weapon
  * - Players have to dispel 3 buffs of Beritra and he'll transform into a dragon
- * Difficulty 2: Normal Mode
+ * Difficulty 3: Normal Mode
  * - Players have failed to kill the twin bosses in under 5 minutes or failed to kill Orissan in his second vulnerable phase
  * - Players have to kill a weakened Orissan in his second vulnerable phase (if they already failed the twin bosses)
  * - Players have to defeat 3 waves to defend their siege weapon
@@ -156,7 +156,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 			case 236242:
 			case 236243:
 				if (eventCounter.incrementAndGet() >= difficulty.get()) // difficulty is equivalent to the necessary kills
-					onWaveEventComplete();
+					onWaveEventComplete(true);
 				break;
 			case 236244: // Beritra Easy Mode
 				spawn(833012, 152f, 518f, 1749.6f, (byte) 55);
@@ -171,7 +171,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 			case 236248:
 			case 236249:
 				if (waveSurvivors.decrementAndGet() == 0)
-					deleteNpcsByIds(209723, 209788, 702719, 702720);
+					onWaveEventComplete(false);
 				break;
 			// exploding flame 856459 skill use
 			case 731580:
@@ -410,25 +410,31 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 		}, 28000));
 	}
 
-	private void onWaveEventComplete() {
-		cancelTasks(currentEventTask);
-		deleteNpcsByIds(236204, 236205, 236206, 236216, 236217, 236218, 236219, 236220, 731581);
-		SkillEngine.getInstance().getSkill(getNpc(race.get() == Race.ELYOS ? 702719 : 702720), 20838, 1, getNpc(731580)).useSkill();
-		switch (waveSurvivors.get()) {
-			case 8 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_04());
-			case 7, 6 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_03());
-			case 5, 4, 3 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_02());
-			case 2, 1 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_01());
+	private void onWaveEventComplete(boolean isSuccessful) {
+		cancelTasks(currentEventTask, additionalEventTask);
+		deleteNpcsByIds(236204, 236205, 236206, 236216, 236217, 236218, 236219, 236220, 236239, 236240, 236241, 236242, 236243, 731581);
+		if (isSuccessful) {
+			SkillEngine.getInstance().getSkill(getNpc(race.get() == Race.ELYOS ? 702719 : 702720), 20838, 1, getNpc(731580)).useSkill();
+			switch (waveSurvivors.get()) {
+				case 8 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_04());
+				case 7, 6 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_03());
+				case 5, 4, 3 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_02());
+				case 2, 1 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_01());
+			}
+			spawn(236244, 152f, 518f, 1749.6f, (byte) 55); // Beritra Easy Mode
+			/*
+			 * TODO: use this after implementing the complete beritra stuff
+			 * switch (difficulty.get()) {
+			 * case 5 -> spawn(236246, 152f, 518f, 1749.6f, (byte) 55);
+			 * case 3 -> spawn(236245, 152f, 518f, 1749.6f, (byte) 55);
+			 * case 1 -> spawn(236244, 152f, 518f, 1749.6f, (byte) 55);
+			 * }
+			 */
+		} else {
+			deleteNpcsByIds(702719, 702720);
+			// TODO: find sys msg for fail
 		}
-		spawn(236244, 152f, 518f, 1749.6f, (byte) 55); // Beritra Easy Mode
-		/*
-		 * TODO: use this after implementing the complete beritra stuff
-		 * switch (difficulty.get()) {
-		 * case 5 -> spawn(236246, 152f, 518f, 1749.6f, (byte) 55);
-		 * case 3 -> spawn(236245, 152f, 518f, 1749.6f, (byte) 55);
-		 * case 1 -> spawn(236244, 152f, 518f, 1749.6f, (byte) 55);
-		 * }
-		 */
+
 	}
 
 	@Override

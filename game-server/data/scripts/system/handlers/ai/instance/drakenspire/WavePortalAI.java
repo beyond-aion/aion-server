@@ -59,7 +59,7 @@ public class WavePortalAI extends NoActionAI {
 					spawn(236206, 576.92f, 936.11f, 1620.33f, (byte) 104, "301390000_Wave_Top_Right_02");
 				}
 			}
-		}, 8000, staticId == 405 ? 28000 : 15000));
+		}, 8000, staticId == 405 ? 40000 : 22000));
 	}
 
 	private void spawn(int npcId, float x, float y, float z, int heading, String walkerId) {
