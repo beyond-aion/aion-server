@@ -35,18 +35,7 @@ import com.aionemu.gameserver.model.templates.teleport.TelelocationTemplate;
 import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
 import com.aionemu.gameserver.model.templates.teleport.TeleportType;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CHANNEL_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_MEMBER;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_SPAWN;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TELEPORT_LOC;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TELEPORT_MAP;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.PrivateStoreService;
 import com.aionemu.gameserver.services.SiegeService;
@@ -501,7 +490,7 @@ public class TeleportService {
 	 */
 	public static boolean sendTeleportRequest(Player player, int npcId) {
 		int questionMsgId = 905097; // You will be teleported to %0 Continue?
-		RequestResponseHandler<Creature> handler = new RequestResponseHandler<Creature>(null) {
+		RequestResponseHandler<Creature> handler = new RequestResponseHandler<>(null) {
 
 			@Override
 			public void acceptRequest(Creature requester, Player responder) {
@@ -540,7 +529,7 @@ public class TeleportService {
 				return;
 
 			if (animation != TeleportAnimation.NONE) { // this is a delayed teleport (triggered after animation end)
-				if (player.isDead()) {
+				if (player.isDead() || !InstanceService.isInstanceExist(worldId, instanceId)) { // instance might be destroyed after animation end if unlucky
 					PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 					World.getInstance().spawn(player);
 					return;
