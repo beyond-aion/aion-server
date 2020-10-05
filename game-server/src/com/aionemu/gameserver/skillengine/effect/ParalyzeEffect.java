@@ -30,8 +30,15 @@ public class ParalyzeEffect extends EffectTemplate {
 	public void startEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill(effect.getEffector());
-		if (effected instanceof Player)
-			((Player) effected).getFlyController().onStopGliding();
+		if (effected instanceof Player player) {
+			player.getFlyController().onStopGliding();
+			if (effect.getEffector().getMaster() instanceof Player) {
+				long duration = getDuration2() + ((long) getDuration1()) * effect.getSkillLevel();
+				if (getRandomTime() > 0 )
+					duration -= getRandomTime()/2;
+				player.incrementParalayzeCountAndUpdateNextValidTime(duration);
+			}
+		}
 		effect.setAbnormal(AbnormalState.PARALYZE);
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PARALYZE);
 
@@ -39,8 +46,6 @@ public class ParalyzeEffect extends EffectTemplate {
 
 	@Override
 	public void endEffect(Effect effect) {
-		if (effect.getEffected() instanceof Player effected && effect.getEffector().getMaster() instanceof Player)
-			effected.incrementParalyzeCount();
 		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.PARALYZE);
 	}
 }

@@ -957,12 +957,13 @@ public class Effect implements StatOwner {
 		switch (resistCount) {
 			case 0:
 			case 1:
-				return 100;
 			case 2:
-				return 90;
+				return 100;
 			case 3:
-				return 85;
+				return 90;
 			case 4:
+				return 85;
+			case 5:
 				return 80;
 			default:
 				return 1;

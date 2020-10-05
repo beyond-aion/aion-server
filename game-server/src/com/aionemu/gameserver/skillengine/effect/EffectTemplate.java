@@ -622,14 +622,16 @@ public abstract class EffectTemplate {
 
 	private int getCumulativeResistChanceFor(int resistCount) {
 		switch (resistCount) {
+			case 0:
+			case 1:
+			case 2:
+				return 0;
 			case 3:
 				return 200;
 			case 4:
 				return 400;
-			case 5:
-				return 1000;
 			default:
-				return 0;
+				return 1000;
 		}
 	}
 }

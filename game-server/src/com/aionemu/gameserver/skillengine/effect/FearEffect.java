@@ -92,12 +92,17 @@ public class FearEffect extends EffectTemplate {
 			effected.getObserveController().addObserver(observer);
 			effect.setActionObserver(observer, position);
 		}
+
+		if (effect.getEffected() instanceof Player player && effect.getEffector().getMaster() instanceof Player) {
+			long duration = getDuration2() + ((long) getDuration1()) * effect.getSkillLevel();
+			if (getRandomTime() > 0 )
+				duration -= getRandomTime()/2;
+			player.incrementFearCountAndUpdateNextValidTime(duration);
+		}
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		if (effect.getEffected() instanceof Player effected && effect.getEffector().getMaster() instanceof Player)
-			effected.incrementFearCount();
 		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.FEAR);
 
 		effect.getEffected().getMoveController().abortMove();
