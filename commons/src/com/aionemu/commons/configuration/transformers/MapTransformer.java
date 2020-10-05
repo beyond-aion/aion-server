@@ -26,8 +26,9 @@ public class MapTransformer {
 			if (mapType == Map.class) {
 				Class<K> keyType = (Class<K>) typeInfo.getGenericType(0).getType();
 				output = keyType.isEnum() ? new EnumMap(keyType) : new HashMap<>();
-			}	else
+			} else {
 				throw new UnsupportedOperationException("No default implementation for " + mapType + ", non abstract/interface class must be declared.");
+			}
 		} else {
 			output = (Map<K, V>) mapType.getDeclaredConstructor().newInstance();
 		}

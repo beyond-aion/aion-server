@@ -1,7 +1,5 @@
 package instance;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -30,7 +28,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -57,7 +54,6 @@ import com.aionemu.gameserver.world.WorldPosition;
 @InstanceID(301390000)
 public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 
-	private final List<Future<?>> spawnTasks = new ArrayList<>();
 	private final AtomicInteger difficulty = new AtomicInteger(5); // 5 = HM, 3 = NM, 1 = EM
 	private final AtomicBoolean isStageActive = new AtomicBoolean();
 	private final AtomicInteger waveSurvivors = new AtomicInteger(8); // increases the final boss time by 15s for each survivor
@@ -66,8 +62,8 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 	private Future<?> currentEventTask, additionalEventTask; // re-usable for all stages
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceDestroy() {
+		cancelTasks(currentEventTask, additionalEventTask);
 	}
 
 	@Override
@@ -124,7 +120,6 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 	@Override
 	public void onDie(Npc npc) {
 		int npcId = npc.getNpcId();
-		boolean shouldDespawnImmediately = true;
 		switch (npcId) {
 			case 236227: // Lava Protector
 			case 236228: // Heatvent Protector
@@ -133,7 +128,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 				} else {
 					spawn(npcId == 236227 ? 855708 : 855709, npc.getX(), npc.getY(), npc.getZ(), (byte) 0); // Sphere
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_RESSURECT_02());
-					additionalEventTask = ThreadPoolManager.getInstance().schedule(this::onTwinRespawn, 15000);
+					setAdditionalEventTask(ThreadPoolManager.getInstance().schedule(this::onTwinRespawn, 15000));
 				}
 				break;
 			case 236223: // Fetid Phantomscorch Chimera
@@ -206,7 +201,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 	}
 
 	private void onTwinsFightStart() {
-		currentEventTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+		setCurrentEventTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			private int twinProgressCount;
 
@@ -229,7 +224,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 				}
 			}
 
-		}, 30000, 30 * 1000);
+		}, 30000, 30 * 1000));
 	}
 
 	private void onTwinRespawn() {
@@ -310,11 +305,11 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 			}
 		}
 
-		currentEventTask = ThreadPoolManager.getInstance().schedule(() -> {
+		setCurrentEventTask(ThreadPoolManager.getInstance().schedule(() -> {
 			Npc orissan = getNpc(difficulty.get() == 5 ? 236234 : 236231);
 			if (orissan != null) // should not happen
 				SkillEngine.getInstance().getSkill(orissan, 21635, 1, orissan).useSkill(); // Summon Crystal
-		}, delay);
+		}, delay));
 	}
 
 	private void onOrissanComplete() {
@@ -360,7 +355,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 	}
 
 	private void scheduleWaveStarts() {
-		currentEventTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+		setCurrentEventTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
 			private int waveCount;
 
@@ -398,11 +393,11 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 					scheduleCommanderWave(waveCount);
 			}
 
-		}, 6000, 60000);
+		}, 6000, 60000));
 	}
 
 	private void scheduleCommanderWave(int waveCount) {
-		additionalEventTask = ThreadPoolManager.getInstance().schedule(() -> {
+		setAdditionalEventTask(ThreadPoolManager.getInstance().schedule(() -> {
 			sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Left", 0);
 			sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Right", 0);
 			if (waveCount >= 3)
@@ -412,7 +407,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 				sp(Rnd.get(236216, 236220), 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Right", 4000);
 			}
 			sp(236243 - difficulty.get() + waveCount, 634.80f, 790.95f, 1596.80f, (byte) 30, "301390000_Wave_Commander_Middle", 3000); // Boss
-		}, 28000);
+		}, 28000));
 	}
 
 	private void onWaveEventComplete() {
@@ -496,15 +491,19 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 		instance.getNpcs(ids).stream().filter(Objects::nonNull).forEach(n -> n.getController().delete());
 	}
 
-	private void cancelTasks(List<Future<?>> tasks) {
-		for (Future<?> task : tasks)
-			if (task != null && !task.isCancelled())
-				task.cancel(true);
+	private synchronized void setCurrentEventTask(Future<?> task) {
+		cancelTasks(currentEventTask);
+		currentEventTask = task;
 	}
 
-	private void cancelTasks(Future<?>... tasks) {
+	private synchronized void setAdditionalEventTask(Future<?> task) {
+		cancelTasks(additionalEventTask);
+		additionalEventTask = task;
+	}
+
+	private synchronized void cancelTasks(Future<?>... tasks) {
 		for (Future<?> task : tasks)
-			if (task != null && !task.isCancelled())
+			if (task != null && !task.isDone())
 				task.cancel(true);
 	}
 
