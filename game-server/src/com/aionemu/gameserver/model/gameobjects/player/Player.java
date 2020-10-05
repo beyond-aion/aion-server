@@ -1748,17 +1748,17 @@ public class Player extends Creature {
 
 	public void incrementFearCountAndUpdateExpirationTime(long duration) {
 		fearCount.incrementAndGet();
-		cumulativeFearResistExpirationTime.set(System.currentTimeMillis() + duration + 1000);
+		cumulativeFearResistExpirationTime.set(System.currentTimeMillis() + duration + 1000); // +1s to compensate for hittime and differences between retail
 	}
 
 	public void incrementSleepCountAndUpdateExpirationTime(long duration) {
 		sleepCount.incrementAndGet();
-		cumulativeSleepResistExpirationTime.set(System.currentTimeMillis() + duration + 1000);
+		cumulativeSleepResistExpirationTime.set(System.currentTimeMillis() + duration + 1000); // +1s to compensate for hittime and differences between retail
 	}
 
 	public void incrementParalyzeCountAndUpdateExpirationTime(long duration) {
 		paralyzeCount.incrementAndGet();
-		cumulativeParalyzeResistExpirationTime.set(System.currentTimeMillis() + duration + 1000);
+		cumulativeParalyzeResistExpirationTime.set(System.currentTimeMillis() + duration + 1000); // +1s to compensate for hittime and differences between retail
 	}
 
 	public int getFearCount() {
