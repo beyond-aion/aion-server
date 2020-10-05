@@ -923,13 +923,13 @@ public class Effect implements StatOwner {
 				duration = duration * skillTemplate.getPvpDuration() / 100;
 			if (getEffector().getMaster() instanceof Player) {
 				for (EffectTemplate et : successEffects.values()) {
-					if (et instanceof ParalyzeEffect && ((Player) getEffected()).validateLastParalyzeTime()) {
+					if (et instanceof ParalyzeEffect && ((Player) getEffected()).validateCumulativeParalyzeResistExpirationTime()) {
 						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getParalyzeCount()) / 100f);
 						break;
-					} else if (et instanceof FearEffect && ((Player) getEffected()).validateLastFearTime()) {
+					} else if (et instanceof FearEffect && ((Player) getEffected()).validateCumulativeFearResistExpirationTime()) {
 						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getFearCount()) / 100f);
 						break;
-					} else if (et instanceof SleepEffect && ((Player) getEffected()).validateLastSleepTime()) {
+					} else if (et instanceof SleepEffect && ((Player) getEffected()).validateCumulativeSleepResistExpirationTime()) {
 						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getSleepCount()) / 100f);
 						break;
 					}

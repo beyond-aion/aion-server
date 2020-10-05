@@ -195,7 +195,7 @@ public class Player extends Creature {
 	private int customStates;
 
 	private AtomicInteger fearCount = new AtomicInteger(), sleepCount = new AtomicInteger(), paralyzeCount = new AtomicInteger();
-	private AtomicLong nextFearTime = new AtomicLong(), nextSleepTime = new AtomicLong(), nextParalyzeTime = new AtomicLong();
+	private AtomicLong cumulativeFearResistExpirationTime = new AtomicLong(), cumulativeSleepResistExpirationTime = new AtomicLong(), cumulativeParalyzeResistExpirationTime = new AtomicLong();
 
 	public Player(PlayerAccountData playerAccountData, Account account) {
 		super(playerAccountData.getPlayerCommonData().getPlayerObjId(), new PlayerController(), null, playerAccountData.getPlayerCommonData(),
@@ -1746,19 +1746,19 @@ public class Player extends Creature {
 		return (customStates & state.getMask()) == state.getMask();
 	}
 
-	public void incrementFearCountAndUpdateNextValidTime(long duration) {
+	public void incrementFearCountAndUpdateExpirationTime(long duration) {
 		fearCount.incrementAndGet();
-		nextFearTime.set(System.currentTimeMillis() + duration + 1000);
+		cumulativeFearResistExpirationTime.set(System.currentTimeMillis() + duration + 1000);
 	}
 
-	public void incrementSleepCountAndUpdateNextValidTime(long duration) {
+	public void incrementSleepCountAndUpdateExpirationTime(long duration) {
 		sleepCount.incrementAndGet();
-		nextSleepTime.set(System.currentTimeMillis() + duration + 1000);
+		cumulativeSleepResistExpirationTime.set(System.currentTimeMillis() + duration + 1000);
 	}
 
-	public void incrementParalayzeCountAndUpdateNextValidTime(long duration) {
+	public void incrementParalyzeCountAndUpdateExpirationTime(long duration) {
 		paralyzeCount.incrementAndGet();
-		nextParalyzeTime.set(System.currentTimeMillis() + duration + 1000);
+		cumulativeParalyzeResistExpirationTime.set(System.currentTimeMillis() + duration + 1000);
 	}
 
 	public int getFearCount() {
@@ -1775,21 +1775,21 @@ public class Player extends Creature {
 
 	public void resetFearCount() {
 		fearCount.set(0);
-		nextFearTime.set(0);
+		cumulativeFearResistExpirationTime.set(0);
 	}
 
 	public void resetSleepCount() {
 		sleepCount.set(0);
-		nextSleepTime.set(0);
+		cumulativeSleepResistExpirationTime.set(0);
 	}
 
 	public void resetParalyzeCount() {
 		paralyzeCount.set(0);
-		nextParalyzeTime.set(0);
+		cumulativeParalyzeResistExpirationTime.set(0);
 	}
 
-	public boolean validateLastFearTime() {
-		if ((System.currentTimeMillis() - nextFearTime.get()) < 0) {
+	public boolean validateCumulativeFearResistExpirationTime() {
+		if (System.currentTimeMillis() > cumulativeFearResistExpirationTime.get()) {
 			return true;
 		} else {
 			resetFearCount();
@@ -1797,8 +1797,8 @@ public class Player extends Creature {
 		}
 	}
 
-	public boolean validateLastSleepTime() {
-		if ((System.currentTimeMillis() - nextSleepTime.get()) < 0) {
+	public boolean validateCumulativeSleepResistExpirationTime() {
+		if (System.currentTimeMillis() > cumulativeSleepResistExpirationTime.get()) {
 			return true;
 		} else {
 			resetSleepCount();
@@ -1806,8 +1806,8 @@ public class Player extends Creature {
 		}
 	}
 
-	public boolean validateLastParalyzeTime() {
-		if ((System.currentTimeMillis() - nextParalyzeTime.get()) < 0) {
+	public boolean validateCumulativeParalyzeResistExpirationTime() {
+		if (System.currentTimeMillis() > cumulativeParalyzeResistExpirationTime.get()) {
 			return true;
 		} else {
 			resetParalyzeCount();

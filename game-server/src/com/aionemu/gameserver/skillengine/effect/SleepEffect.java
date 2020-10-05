@@ -37,7 +37,7 @@ public class SleepEffect extends EffectTemplate {
 				long duration = getDuration2() + ((long) getDuration1()) * effect.getSkillLevel();
 				if (getRandomTime() > 0 )
 					duration -= getRandomTime()/2;
-				player.incrementSleepCountAndUpdateNextValidTime(duration);
+				player.incrementSleepCountAndUpdateExpirationTime(duration);
 			}
 		}
 		effect.setAbnormal(AbnormalState.SLEEP);

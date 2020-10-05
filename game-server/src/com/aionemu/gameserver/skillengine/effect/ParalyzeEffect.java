@@ -36,7 +36,7 @@ public class ParalyzeEffect extends EffectTemplate {
 				long duration = getDuration2() + ((long) getDuration1()) * effect.getSkillLevel();
 				if (getRandomTime() > 0 )
 					duration -= getRandomTime()/2;
-				player.incrementParalayzeCountAndUpdateNextValidTime(duration);
+				player.incrementParalyzeCountAndUpdateExpirationTime(duration);
 			}
 		}
 		effect.setAbnormal(AbnormalState.PARALYZE);
