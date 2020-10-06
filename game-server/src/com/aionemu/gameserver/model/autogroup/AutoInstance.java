@@ -115,6 +115,9 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 		if (instance != null)
 			return instance.getMaxPlayers();
 		Race race = players.isEmpty() ? Race.ELYOS : players.values().iterator().next().getRace();
-		return DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getInstanceMapId(), race);
+		int maxMemberCount = DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getInstanceMapId(), race);
+		if (agt.isIconInvite()) // fix for dreds and battlefields, since instance_cooltime limits are per faction, not total. arena counts are ok though
+			maxMemberCount += DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getInstanceMapId(), race == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS);
+		return maxMemberCount;
 	}
 }
