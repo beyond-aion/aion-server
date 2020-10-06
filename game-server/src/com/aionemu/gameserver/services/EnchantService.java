@@ -274,6 +274,8 @@ public class EnchantService {
 				else
 					player.getInventory().decreaseByObjectId(targetItem.getObjectId(), 1);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENCHANT_TYPE1_ENCHANT_FAIL(targetItem.getL10n()));
+			} else {
+				targetItem.removeRemainingTuningCountIfPossible();
 			}
 		}
 		if (targetItem.getPersistentState() != PersistentState.DELETED) {
@@ -435,6 +437,7 @@ public class EnchantService {
 				player.getGameStats().updateStatsAndSpeedVisually();
 			}
 		} else {
+			targetItem.removeRemainingTuningCountIfPossible();
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_FAILED(targetItem.getL10n()));
 		}
 

@@ -879,9 +879,8 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	}
 
 	public void removeRemainingTuningCountIfPossible() {
-		if (!itemTemplate.canTune() || tuneCount == itemTemplate.getMaxTuneCount())
-			return;
-		setTuneCount(itemTemplate.getMaxTuneCount());
+		if (isIdentified() && itemTemplate.getMaxTuneCount() > 0 && tuneCount != itemTemplate.getMaxTuneCount())
+			setTuneCount(itemTemplate.getMaxTuneCount());
 	}
 
 	/**
