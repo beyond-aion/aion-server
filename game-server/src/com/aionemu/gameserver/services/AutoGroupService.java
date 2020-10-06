@@ -319,7 +319,6 @@ public class AutoGroupService {
 			if (checkNewGroup) {
 				AutoGroupType agt = AutoGroupType.getAGTByMaskId(instanceMaskId);
 				AutoInstance autoInstance = agt.getAutoInstance();
-				autoInstance.initialize(instanceMaskId);
 				boolean canCreate = false;
 				Iterator<LookingForParty> iter = searchers.values().iterator();
 				LookingForParty lfp;

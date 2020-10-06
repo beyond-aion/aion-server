@@ -14,6 +14,10 @@ import com.aionemu.gameserver.services.instance.periodic.DredgionService;
  */
 public class AutoDredgionInstance extends AutoInstance {
 
+	public AutoDredgionInstance(AutoGroupType agt) {
+		super(agt);
+	}
+
 	@Override
 	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
 		super.writeLock();

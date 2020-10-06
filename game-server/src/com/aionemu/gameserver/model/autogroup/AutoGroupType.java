@@ -12,295 +12,295 @@ public enum AutoGroupType {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoDredgionInstance();
+			return new AutoDredgionInstance(this);
 		}
 	},
 	CHANTRA_DREDGION(2, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoDredgionInstance();
+			return new AutoDredgionInstance(this);
 		}
 	},
 	TERATH_DREDGION(3, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoDredgionInstance();
+			return new AutoDredgionInstance(this);
 		}
 	},
 	ELYOS_FIRE_TEMPLE(4, 300000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance();
+			return new AutoGeneralInstance(this);
 		}
 	},
 	NOCHSANA_TRAINING_CAMP(5, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance();
+			return new AutoGeneralInstance(this);
 		}
 	},
 	DARK_POETA(6, 1200000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance();
+			return new AutoGeneralInstance(this);
 		}
 	},
-	// STEEL_RAKE(7, 1200000, 6) { @Override AutoInstance newAutoInstance() { return new AutoGeneralInstance(); } },
+	// STEEL_RAKE(7, 1200000, 6) { @Override AutoInstance newAutoInstance() { return new AutoGeneralInstance(this); } },
 	UDAS_TEMPLE(8, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance();
+			return new AutoGeneralInstance(this);
 		}
 	},
 	LOWER_UDAS_TEMPLE(9, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance();
+			return new AutoGeneralInstance(this);
 		}
 	},
 	EMPYREAN_CRUCIBLE(11, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance();
+			return new AutoGeneralInstance(this);
 		}
 	},
 	ASMODIANS_FIRE_TEMPLE(14, 300000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance();
+			return new AutoGeneralInstance(this);
 		}
 	},
 	ARENA_OF_CHAOS_1(21, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	ARENA_OF_CHAOS_2(22, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	ARENA_OF_CHAOS_3(23, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	ARENA_OF_DISCIPLINE_1(24, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	ARENA_OF_DISCIPLINE_2(25, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	ARENA_OF_DISCIPLINE_3(26, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	CHAOS_TRAINING_GROUNDS_1(27, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	CHAOS_TRAINING_GROUNDS_2(28, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	CHAOS_TRAINING_GROUNDS_3(29, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	DISCIPLINE_TRAINING_GROUNDS_1(30, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	DISCIPLINE_TRAINING_GROUNDS_2(31, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	DISCIPLINE_TRAINING_GROUNDS_3(32, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	ARENA_OF_HARMONY_1(33, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoHarmonyInstance();
+			return new AutoHarmonyInstance(this);
 		}
 	},
 	ARENA_OF_HARMONY_2(34, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoHarmonyInstance();
+			return new AutoHarmonyInstance(this);
 		}
 	},
 	ARENA_OF_HARMONY_3(35, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoHarmonyInstance();
+			return new AutoHarmonyInstance(this);
 		}
 	},
 	ARENA_OF_GLORY_1(38, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	ARENA_OF_CHAOS_4(39, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	ARENA_OF_DISCIPLINE_4(40, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	ARENA_OF_HARMONY_4(41, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoHarmonyInstance();
+			return new AutoHarmonyInstance(this);
 		}
 	},
 	ARENA_OF_GLORY_2(42, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	CHAOS_TRAINING_GROUNDS_4(43, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	DISCIPLINE_TRAINING_GROUNDS_4(44, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoPvPFFAInstance();
+			return new AutoPvPFFAInstance(this);
 		}
 	},
 	HARAMONIOUS_TRAINING_CENTER_4(45, 110000, 4) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoHarmonyInstance();
+			return new AutoHarmonyInstance(this);
 		}
 	},
 	HARAMONIOUS_TRAINING_CENTER_1(101, 110000, 1) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoHarmonyInstance();
+			return new AutoHarmonyInstance(this);
 		}
 	},
 	HARAMONIOUS_TRAINING_CENTER_2(102, 110000, 2) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoHarmonyInstance();
+			return new AutoHarmonyInstance(this);
 		}
 	},
 	HARAMONIOUS_TRAINING_CENTER_3(103, 110000, 3) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoHarmonyInstance();
+			return new AutoHarmonyInstance(this);
 		}
 	},
 	KAMAR_BATTLEFIELD(107, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoKamarInstance();
+			return new AutoKamarInstance(this);
 		}
 	},
 	ENGULFED_OPHIDIAN_BRIDGE(108, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoEngulfedOphidianBridgeInstance();
+			return new AutoEngulfedOphidianBridgeInstance(this);
 		}
 	},
 	IRON_WALL_WARFRONT(109, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoIronWallFrontInstance();
+			return new AutoIronWallFrontInstance(this);
 		}
 	},
 	IDGEL_DOME(111, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoIdgelDomeInstance();
+			return new AutoIdgelDomeInstance(this);
 		}
 	},
 	STEEL_RAKE_ELYOS(308, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance();
+			return new AutoGeneralInstance(this);
 		}
 	},
 	STEEL_RAKE_ASMODIANS(401, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance();
+			return new AutoGeneralInstance(this);
 		}
 	};
 

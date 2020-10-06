@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.model.autogroup;
 
 import java.util.Comparator;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
 import com.aionemu.commons.taskmanager.AbstractLockManager;
@@ -20,11 +20,14 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public abstract class AutoInstance extends AbstractLockManager implements AutoInstanceHandler {
 
-	protected int instanceMaskId;
+	public final AutoGroupType agt;
 	public long startInstanceTime;
 	public WorldMapInstance instance;
-	public AutoGroupType agt;
-	public Map<Integer, AGPlayer> players = new HashMap<>();
+	public Map<Integer, AGPlayer> players = new ConcurrentHashMap<>();
+
+	public AutoInstance(AutoGroupType agt) {
+		this.agt = agt;
+	}
 
 	protected boolean decrease(Player player, int itemId, long requiredCount) {
 		long itemCount = 0;
@@ -40,12 +43,6 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 				break;
 		}
 		return true;
-	}
-
-	@Override
-	public void initialize(int instanceMaskId) {
-		this.instanceMaskId = instanceMaskId;
-		agt = AutoGroupType.getAGTByMaskId(instanceMaskId);
 	}
 
 	@Override

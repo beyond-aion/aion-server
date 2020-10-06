@@ -16,6 +16,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class AutoKamarInstance extends AutoInstance {
 
+	public AutoKamarInstance(AutoGroupType agt) {
+		super(agt);
+	}
+
 	@Override
 	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
 		super.writeLock();

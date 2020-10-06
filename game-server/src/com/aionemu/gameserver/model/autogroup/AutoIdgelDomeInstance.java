@@ -14,6 +14,10 @@ import com.aionemu.gameserver.services.instance.periodic.IdgelDomeService;
  */
 public class AutoIdgelDomeInstance extends AutoInstance {
 
+	public AutoIdgelDomeInstance(AutoGroupType agt) {
+		super(agt);
+	}
+
 	@Override
 	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
 		super.writeLock();

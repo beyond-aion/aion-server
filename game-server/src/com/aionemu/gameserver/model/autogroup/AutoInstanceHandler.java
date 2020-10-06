@@ -8,8 +8,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public interface AutoInstanceHandler {
 
-	void initialize(int instanceMaskId);
-
 	void onInstanceCreate(WorldMapInstance instance);
 
 	AGQuestion addPlayer(Player player, SearchInstance searchInstance);

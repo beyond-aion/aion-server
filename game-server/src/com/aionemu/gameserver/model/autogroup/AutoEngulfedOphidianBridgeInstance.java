@@ -14,6 +14,10 @@ import com.aionemu.gameserver.services.instance.periodic.EngulfedOphidianBridgeS
  */
 public class AutoEngulfedOphidianBridgeInstance extends AutoInstance {
 
+	public AutoEngulfedOphidianBridgeInstance(AutoGroupType agt) {
+		super(agt);
+	}
+
 	@Override
 	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
 		super.writeLock();

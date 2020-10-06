@@ -19,6 +19,10 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
  */
 public class AutoGeneralInstance extends AutoInstance {
 
+	public AutoGeneralInstance(AutoGroupType agt) {
+		super(agt);
+	}
+
 	@Override
 	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
 		super.writeLock();

@@ -11,6 +11,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class AutoPvPFFAInstance extends AutoInstance {
 
+	public AutoPvPFFAInstance(AutoGroupType agt) {
+		super(agt);
+	}
+
 	@Override
 	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
 		super.writeLock();
@@ -37,7 +41,7 @@ public class AutoPvPFFAInstance extends AutoInstance {
 			}
 			if (!decrease(player, itemId, size)) {
 				players.remove(player.getObjectId());
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 5));
+				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId(), 5));
 				if (players.isEmpty()) {
 					AutoGroupService.getInstance().unregisterAndDestroyInstance(instance.getInstanceId());
 				}

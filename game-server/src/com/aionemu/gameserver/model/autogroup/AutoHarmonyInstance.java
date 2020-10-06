@@ -22,6 +22,10 @@ public class AutoHarmonyInstance extends AutoInstance {
 	private List<AGPlayer> group1 = new ArrayList<>();
 	private List<AGPlayer> group2 = new ArrayList<>();
 
+	public AutoHarmonyInstance(AutoGroupType agt) {
+		super(agt);
+	}
+
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
@@ -61,7 +65,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 		if (agt.isHarmonyArena()) {
 			if (!decrease(player, 186000184, 1)) {
 				players.remove(player.getObjectId());
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 5));
+				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId(), 5));
 				if (players.isEmpty()) {
 					AutoGroupService.getInstance().unregisterAndDestroyInstance(instance.getInstanceId());
 				}

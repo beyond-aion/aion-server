@@ -14,6 +14,10 @@ import com.aionemu.gameserver.services.instance.periodic.IronWallFrontService;
  */
 public class AutoIronWallFrontInstance extends AutoInstance {
 
+	public AutoIronWallFrontInstance(AutoGroupType agt) {
+		super(agt);
+	}
+
 	@Override
 	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
 		super.writeLock();
