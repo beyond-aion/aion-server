@@ -12,19 +12,19 @@ import com.aionemu.gameserver.network.aion.iteminfo.EnchantInfoBlobEntry;
 public class SM_TUNE_RESULT extends AionServerPacket {
 
 	private final Item targetItem;
-	private final int tuningScrollObjectId;
+	private final int tuningScrollItemId;
 	private final PendingTuneResult result;
 
-	public SM_TUNE_RESULT(Item targetItem, int tuningScrollObjectId, PendingTuneResult result) {
+	public SM_TUNE_RESULT(Item targetItem, int tuningScrollItemId, PendingTuneResult result) {
 		this.targetItem = targetItem;
-		this.tuningScrollObjectId = tuningScrollObjectId;
+		this.tuningScrollItemId = tuningScrollItemId;
 		this.result = result;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(targetItem.getObjectId());
-		writeD(tuningScrollObjectId);
+		writeD(tuningScrollItemId);
 		writeC(result.getStatBonusId());
 		EnchantInfoBlobEntry.writeInfo(getBuf(), targetItem, result.getOptionalSockets(), result.getEnchantBonus());
 		writeB(new byte[36]);

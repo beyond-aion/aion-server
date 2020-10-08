@@ -60,10 +60,10 @@ public class TuningAction extends AbstractItemAction {
 
 	@Override
 	public void act(Player player, Item parentItem, Item targetItem, Object... params) {
-		int parentItemId = parentItem.getItemId();
+		int tuningScrollItemId = parentItem.getItemId();
 		int tuningScrollObjectId = parentItem.getObjectId();
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItemId, 5000, 9, 0),
-			true);
+		PacketSendUtility.broadcastPacket(player,
+			new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), tuningScrollItemId, 5000, 12, 0), true);
 		ItemUseObserver observer = new ItemUseObserver() {
 
 			@Override
@@ -71,40 +71,35 @@ public class TuningAction extends AbstractItemAction {
 				player.getController().cancelTask(TaskId.ITEM_USE);
 				player.removeItemCoolDown(parentItem.getItemTemplate().getUseLimits().getDelayId());
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_REIDENTIFY_CANCELED(targetItem.getL10n()));
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, parentItemId, 0, 11, 0),
-					true);
+				PacketSendUtility.broadcastPacket(player,
+					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, tuningScrollItemId, 0, 14, 0), true);
 				player.getObserveController().removeObserver(this);
 			}
 
 		};
 		player.getObserveController().attach(observer);
-		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(new Runnable() {
+		player.getController().addTask(TaskId.ITEM_USE, ThreadPoolManager.getInstance().schedule(() -> {
+			player.getObserveController().removeObserver(observer);
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, tuningScrollItemId, 0, 13, 0),
+				true);
+			if (!player.getInventory().decreaseByObjectId(tuningScrollObjectId, 1))
+				return;
 
-			@Override
-			public void run() {
-				player.getObserveController().removeObserver(observer);
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), tuningScrollObjectId, parentItemId, 0, 10, 0),
-					true);
-				if (!player.getInventory().decreaseByObjectId(tuningScrollObjectId, 1))
-					return;
-
-				int newOptionalSockets, newEnchantBonus, newStatBonusId;
-				if (shouldNotReduceTuneCount) { // only tune attributes (bonus stats)
-					newOptionalSockets = targetItem.getOptionalSockets();
-					newEnchantBonus = targetItem.getEnchantBonus();
-				} else {
-					targetItem.setTuneCount(targetItem.getTuneCount() + 1);
-					player.getInventory().setPersistentState(Persistable.PersistentState.UPDATE_REQUIRED);
-					newOptionalSockets = Rnd.get(0, targetItem.getItemTemplate().getOptionSlotBonus());
-					newEnchantBonus = Rnd.get(0, targetItem.getItemTemplate().getMaxEnchantBonus());
-				}
-				newStatBonusId = getRandomStatBonusIdFor(targetItem);
-				PendingTuneResult result = new PendingTuneResult(newOptionalSockets, newEnchantBonus, newStatBonusId);
-				targetItem.setPendingTuneResult(result);
-				PacketSendUtility.sendPacket(player, new SM_TUNE_RESULT(targetItem, tuningScrollObjectId, result));
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_REIDENTIFY_SUCCEED(targetItem.getL10n()));
+			int newOptionalSockets, newEnchantBonus, newStatBonusId;
+			if (shouldNotReduceTuneCount) { // only tune attributes (bonus stats)
+				newOptionalSockets = targetItem.getOptionalSockets();
+				newEnchantBonus = targetItem.getEnchantBonus();
+			} else {
+				targetItem.setTuneCount(targetItem.getTuneCount() + 1);
+				player.getInventory().setPersistentState(Persistable.PersistentState.UPDATE_REQUIRED);
+				newOptionalSockets = Rnd.get(0, targetItem.getItemTemplate().getOptionSlotBonus());
+				newEnchantBonus = Rnd.get(0, targetItem.getItemTemplate().getMaxEnchantBonus());
 			}
-
+			newStatBonusId = getRandomStatBonusIdFor(targetItem);
+			PendingTuneResult result = new PendingTuneResult(newOptionalSockets, newEnchantBonus, newStatBonusId);
+			targetItem.setPendingTuneResult(result);
+			PacketSendUtility.sendPacket(player, new SM_TUNE_RESULT(targetItem, tuningScrollItemId, result));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_REIDENTIFY_SUCCEED(targetItem.getL10n()));
 		}, 5000));
 	}
 
