@@ -285,7 +285,7 @@ public class GoTo extends AdminCommand {
 		addLocation(THE_NIGHTMARE_CIRCUS, 467.64f, 568.34f, 201.67f, "Nightmare Circus", "NC", "Rukibuki Zirkus");
 		addLocation(KAMAR_BATTLEFIELD, 1329, 1501, 593, "Kamar Battlefield", "KB", "Schlachtfeld von Kamar");
 		// 4.3 Instance
-		addLocation(HEXWAY, 672.8f, 606.2f, 321.2f, "The Hexway", "Korridor des Verrats");
+		addLocation(HEXWAY, 672.8f, 606.2f, 321.2f, "The Hexway", "Korridor des Verrats", "KDV");
 		// 4.5 instances
 		addLocation(ENGULFED_OPHIDAN_BRIDGE, 753, 532, 577, "Engulfed Ophidian Bridge", "EOB", "Jormungand Marschroute");
 		addLocation(IRON_WALL_WARFRONT, 550, 477, 213, "Iron Wall Warfront", "IWW", "Schlachtfeld der Stahlmauerbastion");
