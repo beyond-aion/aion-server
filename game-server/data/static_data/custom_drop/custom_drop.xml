@@ -1844,6 +1844,79 @@
 			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 	</npc_drop>
+	<!-- Drakenspire Depths -->
+	<npc_drop npc_id="833012">
+		<drop_group>
+			<drop item_id="110101882" chance="20" /><!-- Dragon Lord's Sorcerer Jacket -->
+			<drop item_id="110101883" chance="20" /><!-- Dragon Lord's Spiritmaster Jacket -->
+			<drop item_id="110101884" chance="20" /><!-- Dragon Lord's Songweaver Jacket -->
+			<drop item_id="110301875" chance="20" /><!-- Dragon Lord's Assassin Jerkin -->
+			<drop item_id="110301876" chance="20" /><!-- Dragon Lord's Ranger Jerkin -->
+			<drop item_id="110301877" chance="20" /><!-- Dragon Lord's Gunslinger Magic Jerkin -->
+			<drop item_id="110551206" chance="20" /><!-- Dragon Lord's Chanter Hauberk -->
+			<drop item_id="110551207" chance="20" /><!-- Dragon Lord's Cleric Hauberk -->
+			<drop item_id="110551208" chance="20" /><!-- Dragon Lord's Aethertech Magic Hauberk -->
+			<drop item_id="110601669" chance="20" /><!-- Dragon Lord's Templar Breastplate -->
+			<drop item_id="110601670" chance="20" /><!-- Dragon Lord's Gladiator Breastplate -->
+		</drop_group>
+		<drop_group max_items="3">
+			<drop item_id="111101697" /><!-- Dragon Lord's Sorcerer Gloves -->
+			<drop item_id="111101698" /><!-- Dragon Lord's Spiritmaster Gloves -->
+			<drop item_id="111101699" /><!-- Dragon Lord's Songweaver Gloves -->
+			<drop item_id="111301813" /><!-- Dragon Lord's Assassin Vambraces -->
+			<drop item_id="111301814" /><!-- Dragon Lord's Ranger Vambraces -->
+			<drop item_id="111301815" /><!-- Dragon Lord's Gunslinger Magic Vambraces -->
+			<drop item_id="111501765" /><!-- Dragon Lord's Chanter Handguards -->
+			<drop item_id="111501766" /><!-- Dragon Lord's Cleric Handguards -->
+			<drop item_id="111501767" /><!-- Dragon Lord's Aethertech Magic Handguards -->
+			<drop item_id="111601632" /><!-- Dragon Lord's Templar Gauntlets -->
+			<drop item_id="111601633" /><!-- Dragon Lord's Gladiator Gauntlets -->
+			<drop item_id="112101646" /><!-- Dragon Lord's Sorcerer Pauldrons -->
+			<drop item_id="112101647" /><!-- Dragon Lord's Spiritmaster Pauldrons -->
+			<drop item_id="112101648" /><!-- Dragon Lord's Songweaver Pauldrons -->
+			<drop item_id="112301752" /><!-- Dragon Lord's Assassin Shoulderguards -->
+			<drop item_id="112301753" /><!-- Dragon Lord's Ranger Shoulderguards -->
+			<drop item_id="112301754" /><!-- Dragon Lord's Gunslinger Magic Shoulderguards -->
+			<drop item_id="112501704" /><!-- Dragon Lord's Chanter Spaulders -->
+			<drop item_id="112501705" /><!-- Dragon Lord's Cleric Spaulders -->
+			<drop item_id="112501706" /><!-- Dragon Lord's Aethertech Magic Spaulders -->
+			<drop item_id="112601614" /><!-- Dragon Lord's Templar Shoulderplates -->
+			<drop item_id="112601615" /><!-- Dragon Lord's Gladiator Shoulderplates -->
+			<drop item_id="114101742" /><!-- Dragon Lord's Sorcerer Shoes -->
+			<drop item_id="114101743" /><!-- Dragon Lord's Spiritmaster Shoes -->
+			<drop item_id="114101744" /><!-- Dragon Lord's Songweaver Shoes -->
+			<drop item_id="114301881" /><!-- Dragon Lord's Assassin Boots -->
+			<drop item_id="114301882" /><!-- Dragon Lord's Ranger Boots -->
+			<drop item_id="114301883" /><!-- Dragon Lord's Gunslinger Magic Boots -->
+			<drop item_id="114501793" /><!-- Dragon Lord's Chanter Brogans -->
+			<drop item_id="114501794" /><!-- Dragon Lord's Cleric Brogans -->
+			<drop item_id="114501795" /><!-- Dragon Lord's Aethertech Magic Brogans -->
+			<drop item_id="114601622" /><!-- Dragon Lord's Templar Sabatons -->
+			<drop item_id="114601623" /><!-- Dragon Lord's Gladiator Sabatons -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="113101708" chance="40" /><!-- Dragon Lord's Sorcerer Leggings -->
+			<drop item_id="113101709" chance="40" /><!-- Dragon Lord's Spiritmaster Leggings -->
+			<drop item_id="113101710" chance="40" /><!-- Dragon Lord's Songweaver Leggings -->
+			<drop item_id="113301844" chance="40" /><!-- Dragon Lord's Assassin Legguards -->
+			<drop item_id="113301845" chance="40" /><!-- Dragon Lord's Ranger Legguards -->
+			<drop item_id="113301846" chance="40" /><!-- Dragon Lord's Gunslinger Magic Legguards -->
+			<drop item_id="113501783" chance="40" /><!-- Dragon Lord's Chanter Chausses -->
+			<drop item_id="113501784" chance="40" /><!-- Dragon Lord's Cleric Chausses -->
+			<drop item_id="113501785" chance="40" /><!-- Dragon Lord's Aethertech Magic Chausses -->
+			<drop item_id="113601615" chance="40" /><!-- Dragon Lord's Templar Greaves -->
+			<drop item_id="113601616" chance="40" /><!-- Dragon Lord's Gladiator Greaves -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="125004282" chance="40" /><!-- Dragon Lord's Helm -->
+			<drop item_id="125004283" chance="40" /><!-- Dragon Lord's Chain Helm -->
+			<drop item_id="125004284" chance="40" /><!-- Dragon Lord's Hat -->
+			<drop item_id="125004285" chance="40" /><!-- Dragon Lord's Bandana -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="166030005" chance="10" each_member="true" /><!-- Tempering Solution -->
+		</drop_group>
+	</npc_drop>
 	<!-- Esoterrace -->
 	<npc_drop npc_id="701022">
 		<drop_group level_based_chance_reduction="true"><!-- Named Ancient Icon -->
