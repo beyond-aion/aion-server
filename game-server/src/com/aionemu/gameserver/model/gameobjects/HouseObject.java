@@ -87,24 +87,23 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 
 	@Override
 	public void onExpire(Player player) {
-		SM_SYSTEM_MESSAGE msg = SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(getObjectTemplate().getL10n());
-		if (isSpawnedByPlayer())
-			selfDestroy(player, msg);
-		else {
-			PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(4, 1, getObjectId()));
-			PacketSendUtility.sendPacket(player, msg);
-			registry.discardObject(this, false);
-		}
+		despawnAndRemoveHouseObject(player, true);
 	}
 
-	protected void selfDestroy(final Player player, SM_SYSTEM_MESSAGE message) {
-		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(7, 0, getObjectId()));
-		getController().delete();
+	protected void despawnAndRemoveHouseObject(Player player, boolean isExpired) {
+		if (isSpawnedByPlayer()) {
+			PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(7, 0, getObjectId()));
+			getController().delete();
+		}
 		PacketSendUtility.sendPacket(player, new SM_HOUSE_EDIT(4, 1, getObjectId()));
-		PacketSendUtility.sendPacket(player, message);
+		if (isExpired)
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_EXPIRE_TIME(getObjectTemplate().getL10n()));
+		else
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(getObjectTemplate().getL10n()));
 		registry.discardObject(this, false);
-		Player owner = World.getInstance().findPlayer(registry.getOwner().getOwnerId());
+
 		// if owner is not online, we should save his items
+		Player owner = World.getInstance().findPlayer(registry.getOwner().getOwnerId());
 		if (owner == null || !owner.isOnline())
 			registry.save();
 	}

@@ -7,11 +7,9 @@ import java.util.Map;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
-import com.aionemu.gameserver.model.gameobjects.AionObject;
-import com.aionemu.gameserver.model.gameobjects.HouseDecoration;
-import com.aionemu.gameserver.model.gameobjects.HouseObject;
-import com.aionemu.gameserver.model.gameobjects.Persistable;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.templates.housing.PartType;
+import com.aionemu.gameserver.world.World;
 
 /**
  * @author Rolandas
@@ -139,6 +137,9 @@ public class HouseRegistry implements Persistable {
 			obj.setPersistentState(PersistentState.DELETED);
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 		}
+		// remove house object use cooldowns for this object
+		if (obj instanceof UseableHouseObject<?> useableHouseObject && useableHouseObject.hasUseCooldown())
+			World.getInstance().forEachPlayer(player -> player.getHouseObjectCooldowns().remove(obj.getObjectId()));
 	}
 
 	/**

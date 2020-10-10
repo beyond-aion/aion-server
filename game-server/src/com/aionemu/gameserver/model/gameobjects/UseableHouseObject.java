@@ -51,4 +51,9 @@ public abstract class UseableHouseObject<T extends PlaceableHouseObject> extends
 	protected final void releaseOccupant() {
 		usingPlayer.set(0);
 	}
+
+	public boolean hasUseCooldown() {
+		return false;
+	}
+
 }

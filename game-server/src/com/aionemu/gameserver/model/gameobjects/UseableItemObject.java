@@ -188,7 +188,7 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 			}
 			PacketSendUtility.broadcastPacket(player, new SM_OBJECT_USE_UPDATE(player.getObjectId(), ownerId, usedCount, UseableItemObject.this), true);
 			if (delete)
-				selfDestroy(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_OBJECT_DELETE_USE_COUNT_FINAL(getObjectTemplate().getL10n()));
+				despawnAndRemoveHouseObject(player, false);
 			else {
 				long reuseTime;
 				Integer cd = getObjectTemplate().getCd();
@@ -213,4 +213,10 @@ public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 	public void writeUsageData(ByteBuffer buffer) {
 		entryWriter.writeMe(buffer);
 	}
+
+	@Override
+	public boolean hasUseCooldown() {
+		return getObjectTemplate().getCd() != null && getObjectTemplate().getCd() > 0;
+	}
+
 }
