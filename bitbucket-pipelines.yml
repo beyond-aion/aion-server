@@ -11,9 +11,16 @@ pipelines:
             - maven
           script:
             - mvn -f commons/pom.xml install
-            - mvn -f chat-server/pom.xml compile
-            - mvn -f login-server/pom.xml compile
-            - mvn -f game-server/pom.xml compile
+      - parallel:
+          - step:
+              script:
+                - mvn -f chat-server/pom.xml compile
+          - step:
+              script:
+                - mvn -f login-server/pom.xml compile
+          - step:
+              script:
+                - mvn -f game-server/pom.xml compile
     build-chat-server:
       - step:
           caches:
