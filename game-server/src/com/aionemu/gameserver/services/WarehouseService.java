@@ -13,7 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.QuestStateList;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.model.templates.WarehouseExpandTemplate;
+import com.aionemu.gameserver.model.templates.StorageExpansionTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_INFO;
@@ -21,59 +21,54 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Simple
- * @reworked Luzien
+ * @author Simple, Luzien
  */
 public class WarehouseService {
 
 	private static final Logger log = LoggerFactory.getLogger(WarehouseService.class);
-	private static final int MIN_EXPAND = 0;
 	private static final int MAX_EXPAND = 11;
 
 	/**
 	 * Shows Question window and expands on positive response
-	 *
-	 * @param player
-	 * @param npc
 	 */
-	public static void expandWarehouse(final Player player, Npc npc) {
-		final WarehouseExpandTemplate expandTemplate = DataManager.WAREHOUSEEXPANDER_DATA.getWarehouseExpandListTemplate(npc.getNpcId());
-
-		if (expandTemplate == null) {
-			log.error("Warehouse Expand Template could not be found for Npc ID: " + npc.getObjectTemplate().getTemplateId());
+	public static void expandWarehouse(Player player, Npc npc) {
+		StorageExpansionTemplate template = DataManager.WAREHOUSEEXPANDER_DATA.getWarehouseExpansionTemplate(npc.getNpcId());
+		if (template == null) {
+			log.warn("Warehouse expansion template could not be found for " + npc);
 			return;
 		}
 
-		if (npcCanExpandLevel(expandTemplate, player.getWhNpcExpands() + 1) && canExpand(player)) {
-			/**
-			 * Check if our player can pay the warehouse expand price
-			 */
-			final int price = getPriceByLevel(expandTemplate, player.getWhNpcExpands() + 1);
-			RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<Npc>(npc) {
+		if (!canExpand(player))
+			return;
+		int newNpcExpansions = player.getWhNpcExpands() + 1;
+		int minExpansionLevel = template.getMinExpansionLevel();
+		if (newNpcExpansions < minExpansionLevel) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_DUE_TO_MINIMUM_EXTEND_LEVEL_BY_THIS_NPC(npc.getObjectTemplate().getL10n(), minExpansionLevel - 1));
+			return;
+		}
+		Integer price = template.getPrice(newNpcExpansions);
+		if (price == null || newNpcExpansions > template.getMaxExpansionLevel()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_MORE_DUE_TO_MAXIMUM_EXTEND_LEVEL_BY_THIS_NPC(npc.getObjectTemplate().getL10n(), template.getMaxExpansionLevel()));
+			return;
+		}
+		RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<>(npc) {
 
-				@Override
-				public void acceptRequest(Npc requester, Player responder) {
-					if (responder.getInventory().getKinah() < price) {
-						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_EXPAND_NOT_ENOUGH_MONEY());
-						return;
-					}
-					responder.getInventory().decreaseKinah(price);
+			@Override
+			public void acceptRequest(Npc requester, Player responder) {
+				if (responder.getInventory().tryDecreaseKinah(price))
 					expand(responder, true);
-				}
-
-			};
-
-			boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, responseHandler);
-			if (result) {
-				PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, 0, 0, String.valueOf(price)));
+				else
+					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_EXPAND_NOT_ENOUGH_MONEY()); // warehouse and cube use the same msg..
 			}
-		} else
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_MORE());
+
+		};
+
+		boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, responseHandler);
+		if (result) {
+			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, 0, 0, String.valueOf(price)));
+		}
 	}
 
-	/**
-	 * @param player
-	 */
 	public static void expand(Player player, boolean isNpcExpand) {
 		if (!canExpand(player))
 			return;
@@ -89,58 +84,25 @@ public class WarehouseService {
 		sendWarehouseInfo(player, false);
 	}
 
-	/**
-	 * Checks if new player cube is not max
-	 *
-	 * @param level
-	 * @return true or false
-	 */
-	private static boolean validateNewSize(int level) {
-		// check min and max level
-		if (level < MIN_EXPAND || level > MAX_EXPAND)
-			return false;
-		return true;
-	}
-
-	/**
-	 * @param player
-	 * @return
-	 */
-	public static boolean canExpand(Player player) {
-		return validateNewSize(player.getWarehouseSize() + 1);
-	}
-
 	public static boolean canExpandByTicket(Player player, int ticketLevel) {
 		if (!canExpand(player))
 			return false;
-		int ticketExpands = player.getWhBonusExpands() - getCompletedWhQuests(player);
-
-		return ticketExpands < ticketLevel;
-	}
-
-	/**
-	 * Checks if npc can expand level
-	 *
-	 * @param clist
-	 * @param level
-	 * @return true or false
-	 */
-	private static boolean npcCanExpandLevel(WarehouseExpandTemplate clist, int level) {
-		// check if level exists in template
-		if (!clist.contains(level))
+		if (player.getWhBonusExpands() - getCompletedWhQuests(player) >= ticketLevel) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_MORE());
 			return false;
+		}
 		return true;
 	}
 
-	/**
-	 * The guy who created cube template should blame himself :) One day I will rewrite them
-	 *
-	 * @param template
-	 * @param level
-	 * @return
-	 */
-	private static int getPriceByLevel(WarehouseExpandTemplate clist, int level) {
-		return clist.get(level).getPrice();
+	public static boolean canExpand(Player player) {
+		int newExpansions = player.getWarehouseExpansions() + 1;
+		if (newExpansions < 0)
+			return false;
+		if (newExpansions > MAX_EXPAND) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_MORE());
+			return false;
+		}
+		return true;
 	}
 
 	private static int getCompletedWhQuests(Player player) {
@@ -162,12 +124,10 @@ public class WarehouseService {
 	public static void sendWarehouseInfo(Player player, boolean sendAccountWh) {
 		List<Item> items = player.getStorage(StorageType.REGULAR_WAREHOUSE.getId()).getItems();
 
-		int whSize = player.getWarehouseSize();
+		int whSize = player.getWarehouseExpansions();
 		int itemsSize = items.size();
 
-		/**
-		 * Regular warehouse
-		 */
+		// regular warehouse
 		boolean firstPacket = true;
 		if (itemsSize != 0) {
 			int index = 0;
@@ -185,9 +145,7 @@ public class WarehouseService {
 		PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(null, StorageType.REGULAR_WAREHOUSE.getId(), whSize, false, player));
 
 		if (sendAccountWh) {
-			/**
-			 * Account warehouse
-			 */
+			// account warehouse
 			PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(player.getStorage(StorageType.ACCOUNT_WAREHOUSE.getId()).getItemsWithKinah(),
 				StorageType.ACCOUNT_WAREHOUSE.getId(), 0, true, player));
 		}

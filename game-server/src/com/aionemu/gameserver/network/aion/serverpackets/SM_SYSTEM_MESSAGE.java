@@ -10855,29 +10855,29 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * %0 can only upgrade cubes of level %1 or higher.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_EXTEND_INVENTORY_CANT_EXTEND_DUE_TO_MINIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0, String value1) {
-		return new SM_SYSTEM_MESSAGE(1300436, value0, value1);
+	public static SM_SYSTEM_MESSAGE STR_EXTEND_INVENTORY_CANT_EXTEND_DUE_TO_MINIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0, int level) {
+		return new SM_SYSTEM_MESSAGE(1300436, value0, level);
 	}
 
 	/**
 	 * %0 can only upgrade cubes to level %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_EXTEND_INVENTORY_CANT_EXTEND_MORE_DUE_TO_MAXIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0, String value1) {
-		return new SM_SYSTEM_MESSAGE(1300437, value0, value1);
+	public static SM_SYSTEM_MESSAGE STR_EXTEND_INVENTORY_CANT_EXTEND_MORE_DUE_TO_MAXIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0, int level) {
+		return new SM_SYSTEM_MESSAGE(1300437, value0, level);
 	}
 
 	/**
 	 * %0 can only upgrade private warehouses of level %1 or higher.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_DUE_TO_MINIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0, String value1) {
-		return new SM_SYSTEM_MESSAGE(1300438, value0, value1);
+	public static SM_SYSTEM_MESSAGE STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_DUE_TO_MINIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0, int level) {
+		return new SM_SYSTEM_MESSAGE(1300438, value0, level);
 	}
 
 	/**
 	 * %0 can only upgrade warehouses to level %1.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_MORE_DUE_TO_MAXIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0, String value1) {
-		return new SM_SYSTEM_MESSAGE(1300439, value0, value1);
+	public static SM_SYSTEM_MESSAGE STR_EXTEND_CHAR_WAREHOUSE_CANT_EXTEND_MORE_DUE_TO_MAXIMUM_EXTEND_LEVEL_BY_THIS_NPC(String value0, int level) {
+		return new SM_SYSTEM_MESSAGE(1300439, value0, level);
 	}
 
 	/**

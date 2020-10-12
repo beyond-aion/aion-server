@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.model.templates.CubeExpandTemplate;
+import com.aionemu.gameserver.model.templates.StorageExpansionTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUBE_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -17,61 +17,50 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author ATracer
- * @author Simple
- * @reworked Luzien
+ * @author ATracer, Simple, Luzien
  */
 public class CubeExpandService {
 
 	private static final Logger log = LoggerFactory.getLogger(CubeExpandService.class);
-	private static final int MIN_EXPAND = 0;
-	private static final int MAX_EXPAND = CustomConfig.BASIC_CUBE_SIZE_LIMIT;
 
 	/**
 	 * Shows Question window and expands on positive response
-	 *
-	 * @param player
-	 * @param npc
 	 */
-	public static void expandCube(final Player player, Npc npc) {
-		final CubeExpandTemplate expandTemplate = DataManager.CUBEEXPANDER_DATA.getCubeExpandListTemplate(npc.getNpcId());
-
-		if (expandTemplate == null) {
-			log.error("Cube Expand Template could not be found for Npc ID: " + npc.getObjectId());
+	public static void expandCube(Player player, Npc npc) {
+		StorageExpansionTemplate template = DataManager.CUBEEXPANDER_DATA.getCubeExpansionTemplate(npc.getNpcId());
+		if (template == null) {
+			log.warn("Cube expansion template could not be found for " + npc);
 			return;
 		}
 
-		if (npcCanExpandLevel(expandTemplate, player.getNpcExpands() + 1) && canExpand(player)) {
-			/**
-			 * Check if player is allowed to expand by buying
-			 */
-			if (player.getNpcExpands() >= CustomConfig.NPC_CUBE_EXPANDS_SIZE_LIMIT) {
-				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_INVENTORY_CANT_EXTEND_MORE());
-				return;
-			}
-			/**
-			 * Check if our player can pay the cubic expand price
-			 */
-			final int price = getPriceByLevel(expandTemplate, player.getNpcExpands() + 1);
+		if (!canExpand(player))
+			return;
+		int newNpcExpansions = player.getNpcExpands() + 1;
+		int minExpansionLevel = template.getMinExpansionLevel();
+		if (newNpcExpansions < minExpansionLevel) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_INVENTORY_CANT_EXTEND_DUE_TO_MINIMUM_EXTEND_LEVEL_BY_THIS_NPC(npc.getObjectTemplate().getL10n(), minExpansionLevel - 1));
+			return;
+		}
+		Integer price = template.getPrice(newNpcExpansions);
+		int maxExpansionLevel = Math.min(template.getMaxExpansionLevel(), CustomConfig.NPC_CUBE_EXPANDS_SIZE_LIMIT);
+		if (price == null || newNpcExpansions > maxExpansionLevel) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_INVENTORY_CANT_EXTEND_MORE_DUE_TO_MAXIMUM_EXTEND_LEVEL_BY_THIS_NPC(npc.getObjectTemplate().getL10n(), maxExpansionLevel));
+			return;
+		}
+		RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<>(npc) {
 
-			RequestResponseHandler<Npc> responseHandler = new RequestResponseHandler<Npc>(npc) {
-
-				@Override
-				public void acceptRequest(Npc requester, Player responder) {
-					if (price > responder.getInventory().getKinah()) {
-						PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_EXPAND_NOT_ENOUGH_MONEY());
-						return;
-					}
+			@Override
+			public void acceptRequest(Npc requester, Player responder) {
+				if (responder.getInventory().tryDecreaseKinah(price, ItemUpdateType.DEC_KINAH_CUBE))
 					npcExpand(responder);
-					responder.getInventory().decreaseKinah(price, ItemUpdateType.DEC_KINAH_CUBE);
-				}
-			};
-			boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, responseHandler);
-			if (result) {
-				PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, 0, 0, String.valueOf(price)));
+				else
+					PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_EXPAND_NOT_ENOUGH_MONEY()); // warehouse and cube use the same msg..
 			}
-		} else
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_INVENTORY_CANT_EXTEND_MORE());
+		};
+		boolean result = player.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, responseHandler);
+		if (result) {
+			PacketSendUtility.sendPacket(player, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_WAREHOUSE_EXPAND_WARNING, 0, 0, String.valueOf(price)));
+		}
 	}
 
 	/**
@@ -115,54 +104,21 @@ public class CubeExpandService {
 	public static boolean canExpandByTicket(Player player, int ticketLevel) {
 		if (!canExpand(player))
 			return false;
-		int ticketExpands = player.getItemExpands();
-
-		return ticketExpands < ticketLevel;
+		if (player.getItemExpands() >= ticketLevel) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_INVENTORY_CANT_EXTEND_MORE());
+			return false;
+		}
+		return true;
 	}
 
-	/**
-	 * @param player
-	 * @return
-	 */
 	public static boolean canExpand(Player player) {
-		return validateNewSize(player.getNpcExpands() + player.getQuestExpands() + player.getItemExpands() + 1);
-	}
-
-	/**
-	 * Checks if new player cube is not max
-	 *
-	 * @param level
-	 * @return true or false
-	 */
-	private static boolean validateNewSize(int level) {
-		// check min and max level
-		if (level < MIN_EXPAND || level > MAX_EXPAND)
+		int newExpansions = player.getNpcExpands() + player.getQuestExpands() + player.getItemExpands() + 1;
+		if (newExpansions < 0)
 			return false;
-		return true;
-	}
-
-	/**
-	 * Checks if npc can expand level
-	 *
-	 * @param clist
-	 * @param level
-	 * @return true or false
-	 */
-	private static boolean npcCanExpandLevel(CubeExpandTemplate clist, int level) {
-		// check if level exists in template
-		if (!clist.contains(level))
+		if (newExpansions > CustomConfig.CUBE_EXPANSION_LIMIT) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTEND_INVENTORY_CANT_EXTEND_MORE());
 			return false;
+		}
 		return true;
-	}
-
-	/**
-	 * The guy who created cube template should blame himself :) One day I will rewrite them
-	 *
-	 * @param clist
-	 * @param level
-	 * @return
-	 */
-	private static int getPriceByLevel(CubeExpandTemplate clist, int level) {
-		return clist.get(level).getPrice();
 	}
 }

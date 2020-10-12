@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.aionemu.gameserver.model.templates.WarehouseExpandTemplate;
+import com.aionemu.gameserver.model.templates.StorageExpansionTemplate;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -21,21 +21,23 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 @XmlAccessorType(XmlAccessType.FIELD)
 public class WarehouseExpandData {
 
-	@XmlElement(name = "warehouse_npc")
-	private List<WarehouseExpandTemplate> clist;
-	private TIntObjectHashMap<WarehouseExpandTemplate> npctlistData = new TIntObjectHashMap<>();
+	@XmlElement(name = "expansion_npc")
+	private List<StorageExpansionTemplate> expansionTemplates;
+	private TIntObjectHashMap<StorageExpansionTemplate> expansionTemplatesByNpcId = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		for (WarehouseExpandTemplate npc : clist) {
-			npctlistData.put(npc.getNpcId(), npc);
+		for (StorageExpansionTemplate expansionTemplate : expansionTemplates) {
+			for (int npcId : expansionTemplate.getNpcIds())
+				expansionTemplatesByNpcId.put(npcId, expansionTemplate);
 		}
+		expansionTemplates = null;
 	}
 
 	public int size() {
-		return npctlistData.size();
+		return expansionTemplatesByNpcId.size();
 	}
 
-	public WarehouseExpandTemplate getWarehouseExpandListTemplate(int id) {
-		return npctlistData.get(id);
+	public StorageExpansionTemplate getWarehouseExpansionTemplate(int id) {
+		return expansionTemplatesByNpcId.get(id);
 	}
 }

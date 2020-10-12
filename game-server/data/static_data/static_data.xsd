@@ -8,7 +8,6 @@
 	<xs:include schemaLocation="bounties/kill_bounties.xsd" />
 	<xs:include schemaLocation="chests/chest_templates.xsd" />
 	<xs:include schemaLocation="cosmetic_items/cosmetic_items.xsd" />
-	<xs:include schemaLocation="cube_expander/cube_expander.xsd" />
 	<xs:include schemaLocation="curing_objects/curing_objects.xsd" />
 	<xs:include schemaLocation="custom_drop/custom_drop.xsd" />
 	<xs:include schemaLocation="decomposable_items/decomposable_items.xsd" />
@@ -86,7 +85,7 @@
 	<xs:include schemaLocation="tribe/tribe_relations.xsd" />
 	<xs:include schemaLocation="vortex/dimensional_vortex.xsd" />
 	<xs:include schemaLocation="walker_versions.xsd" />
-	<xs:include schemaLocation="warehouse_expander/warehouse_expander.xsd" />
+	<xs:include schemaLocation="storage_expander/storage_expander.xsd" />
 	<xs:include schemaLocation="weather_table.xsd" />
 	<xs:include schemaLocation="windstreams/windstreams.xsd" />
 	<xs:include schemaLocation="world_maps.xsd" />

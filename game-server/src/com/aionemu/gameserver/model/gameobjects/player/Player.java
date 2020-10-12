@@ -717,7 +717,7 @@ public class Player extends Creature {
 		return playerAccount.getName();
 	}
 
-	public int getWarehouseSize() {
+	public int getWarehouseExpansions() {
 		return getCommonData().getWhNpcExpands() + getCommonData().getWhBonusExpands();
 	}
 
@@ -730,7 +730,7 @@ public class Player extends Creature {
 	}
 
 	public void setWarehouseLimit() {
-		getWarehouse().setLimit(StorageType.REGULAR_WAREHOUSE.getLimit() + (getWarehouseSize() * getWarehouse().getRowLength()));
+		getWarehouse().setLimit(StorageType.REGULAR_WAREHOUSE.getLimit() + (getWarehouseExpansions() * getWarehouse().getRowLength()));
 	}
 
 	/**

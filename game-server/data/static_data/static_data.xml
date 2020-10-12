@@ -69,7 +69,6 @@
 	<import file="bounties/kill_bounties.xml" />
 	<import file="chests/chest_templates.xml" />
 	<import file="cosmetic_items/cosmetic_items.xml" />
-	<import file="cube_expander/cube_expander.xml" />
 	<import file="curing_objects/curing_objects.xml" />
 	<import file="custom_drop/custom_drop.xml" />
 	<import file="decomposable_items/decomposable_items.xml" />
@@ -133,12 +132,13 @@
 	<import file="staticdoors/staticdoor_templates.xml" />
 	<import file="stats/absolute_stats.xml" />
 	<import file="stats/player" singleRootTag="true" />
+	<import file="storage_expander/cube_expander.xml" />
+	<import file="storage_expander/warehouse_expander.xml" />
 	<import file="teleport_location.xml" />
 	<import file="town_spawns" singleRootTag="true" />
 	<import file="tribe/tribe_relations.xml" />
 	<import file="vortex/dimensional_vortex.xml" />
 	<import file="walker_versions.xml" />
-	<import file="warehouse_expander/warehouse_expander.xml" />
 	<import file="weather_table.xml" />
 	<import file="windstreams/windstreams.xml" />
 	<import file="world_maps.xml" />

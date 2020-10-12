@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+	<xs:include schemaLocation="../global_types.xsd"/>
+	<xs:element name="cube_expander" type="storageExpander"/>
+	<xs:element name="warehouse_expander" type="storageExpander"/>
+	<xs:complexType name="storageExpander">
+		<xs:sequence>
+			<xs:element name="expansion_npc" type="expansionTemplate" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="expansionTemplate">
+		<xs:sequence>
+			<xs:element name="expand" type="expansionLevel" minOccurs="0" maxOccurs="unbounded"/>
+		</xs:sequence>
+		<xs:attribute name="ids" type="IntListType" use="required"/>
+	</xs:complexType>
+	<xs:complexType name="expansionLevel">
+		<xs:attribute name="level" type="xs:int"/>
+		<xs:attribute name="price" type="xs:int"/>
+	</xs:complexType>
+</xs:schema>

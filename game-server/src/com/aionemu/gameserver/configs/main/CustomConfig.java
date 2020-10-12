@@ -104,10 +104,10 @@ public class CustomConfig {
 	public static int BASIC_QUEST_SIZE_LIMIT;
 
 	/**
-	 * Basic Quest limit size
+	 * Total number of allowed cube expansions
 	 */
-	@Property(key = "gameserver.basic.cubesize.limit", defaultValue = "10")
-	public static int BASIC_CUBE_SIZE_LIMIT;
+	@Property(key = "gameserver.cube.expansion_limit", defaultValue = "11")
+	public static int CUBE_EXPANSION_LIMIT;
 
 	/**
 	 * Npc Cube Expands limit size

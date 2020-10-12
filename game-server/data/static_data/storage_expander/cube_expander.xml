@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<cube_expander xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="storage_expander.xsd">
+	<!-- Poeta / Ishalgen -->
+	<expansion_npc ids="798008 798037">
+		<expand level="1" price="1000" />
+	</expansion_npc>
+	<!-- Sanctum / Pandaemonium -->
+	<expansion_npc ids="798011 798012 798058 798059">
+		<expand level="1" price="1000" />
+		<expand level="2" price="12000" />
+		<expand level="3" price="80000" />
+		<expand level="4" price="180000" />
+	</expansion_npc>
+	<!-- Abyss, Tigraki Island -->
+	<expansion_npc ids="279022">
+		<expand level="5" price="360000" />
+	</expansion_npc>
+</cube_expander>
