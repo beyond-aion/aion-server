@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.network.loginserver.serverpackets;
 
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.loginserver.LoginServerConnection;
 import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 
@@ -8,32 +9,21 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
  */
 public class SM_LS_CONTROL extends LsServerPacket {
 
-	private final String accountName;
+	private final int type, param, accountId, adminId;
 
-	private final String adminName;
-
-	private final String playerName;
-
-	private final int param;
-
-	private final int type;
-
-	public SM_LS_CONTROL(String accountName, String playerName, String adminName, int param, int type) {
+	public SM_LS_CONTROL(int type, int param, Player player, Player admin) {
 		super(0x05);
-		this.accountName = accountName;
-		this.param = param;
-		this.playerName = playerName;
-		this.adminName = adminName;
 		this.type = type;
-
+		this.param = param;
+		this.accountId = player.getAccount().getId();
+		this.adminId = admin.getObjectId();
 	}
 
 	@Override
 	protected void writeImpl(LoginServerConnection con) {
 		writeC(type);
-		writeS(adminName);
-		writeS(accountName);
-		writeS(playerName);
 		writeC(param);
+		writeD(accountId);
+		writeD(adminId);
 	}
 }

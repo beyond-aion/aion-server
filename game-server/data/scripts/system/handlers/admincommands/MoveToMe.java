@@ -2,7 +2,9 @@ package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -27,9 +29,10 @@ public class MoveToMe extends AdminCommand {
 			sendInfo(admin);
 			return;
 		}
-		Player playerToMove = World.getInstance().findPlayer(Util.convertName(params[0]));
+		String playerName = Util.convertName(params[0]);
+		Player playerToMove = World.getInstance().findPlayer(playerName);
 		if (playerToMove == null) {
-			sendInfo(admin, "The specified player is not online.");
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 			return;
 		}
 		if (params.length >= 2) {

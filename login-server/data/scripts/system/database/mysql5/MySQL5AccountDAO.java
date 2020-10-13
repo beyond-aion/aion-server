@@ -171,10 +171,8 @@ public class MySQL5AccountDAO extends AccountDAO {
 
 	@Override
 	public boolean updateAccount(Account account) {
-		int result = 0;
 		PreparedStatement st = DB.prepareStatement("UPDATE account_data SET `" + MySQL5DAOUtils.MYSQL_TABLE_ACCOUNT_NAME
 			+ "` = ?, `password` = ?, access_level = ?, membership = ?, last_server = ?, last_ip = ?, last_mac = ?, ip_force = ? WHERE `id` = ?");
-
 		try {
 			st.setString(1, account.getName());
 			st.setString(2, account.getPasswordHash());
@@ -187,12 +185,12 @@ public class MySQL5AccountDAO extends AccountDAO {
 			st.setInt(9, account.getId());
 			st.executeUpdate();
 		} catch (SQLException e) {
-			log.error("Can't update account");
+			log.error("Can't update " + account, e);
+			return false;
 		} finally {
 			DB.close(st);
 		}
-
-		return result > 0;
+		return true;
 	}
 
 	@Override

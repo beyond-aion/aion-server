@@ -24,12 +24,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_L2AUTH_LOGIN_CHECK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECONNECT_KEY;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.loginserver.LoginServerConnection.State;
-import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_AUTH;
-import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_DISCONNECTED;
-import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_LIST;
-import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_RECONNECT_KEY;
-import com.aionemu.gameserver.network.loginserver.serverpackets.SM_BAN;
-import com.aionemu.gameserver.network.loginserver.serverpackets.SM_LS_CONTROL;
+import com.aionemu.gameserver.network.loginserver.serverpackets.*;
 import com.aionemu.gameserver.services.AccountService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -234,11 +229,11 @@ public class LoginServer {
 		sendPacket(new SM_ACCOUNT_LIST(new ArrayList<>(loggedInAccounts.values())));
 	}
 
-	public void sendLsControlPacket(String accountName, String playerName, String adminName, int param, int type) {
-		sendPacket(new SM_LS_CONTROL(accountName, playerName, adminName, param, type));
+	public void sendLsControlPacket(int type, int param, Player player, Player admin) {
+		sendPacket(new SM_LS_CONTROL(type, param, player, admin));
 	}
 
-	public void accountUpdate(int accountId, byte param, int type) {
+	public AionConnection accountUpdate(int accountId, int type, byte param) {
 		AionConnection client = loggedInAccounts.get(accountId);
 		if (client != null) {
 			Account account = client.getAccount();
@@ -246,7 +241,9 @@ public class LoginServer {
 				account.setAccessLevel(param);
 			else if (type == 2)
 				account.setMembership(param);
+			return client;
 		}
+		return null;
 	}
 
 	public void sendBanPacket(byte type, int accountId, String ip, int time, int adminObjId) {

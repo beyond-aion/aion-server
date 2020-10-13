@@ -8,35 +8,25 @@ import com.aionemu.loginserver.network.gameserver.GsServerPacket;
  */
 public class SM_LS_CONTROL_RESPONSE extends GsServerPacket {
 
-	private int type;
-
+	private final byte type, param;
+	private final int accountId, adminId;
 	private boolean result;
 
-	private String playerName;
-
-	private int param;
-
-	private String adminName;
-
-	private int accountId;
-
-	public SM_LS_CONTROL_RESPONSE(int type, boolean result, String playerName, int accountId, int param, String adminName) {
+	public SM_LS_CONTROL_RESPONSE(byte type, byte param, int accountId, int adminId, boolean result) {
 		this.type = type;
-		this.result = result;
-		this.playerName = playerName;
 		this.param = param;
-		this.adminName = adminName;
 		this.accountId = accountId;
+		this.adminId = adminId;
+		this.result = result;
 	}
 
 	@Override
 	protected void writeImpl(GsConnection con) {
 		writeC(4);
 		writeC(type);
-		writeC(result ? 1 : 0);
-		writeS(adminName);
-		writeS(playerName);
 		writeC(param);
 		writeD(accountId);
+		writeD(adminId);
+		writeC(result ? 1 : 0);
 	}
 }
