@@ -33,7 +33,7 @@ public class CM_BAN_RESPONSE extends LsClientPacket {
 
 	@Override
 	public void runImpl() {
-		Player admin = World.getInstance().findPlayer(adminObjId);
+		Player admin = World.getInstance().getPlayer(adminObjId);
 
 		if (admin == null) {
 			return;

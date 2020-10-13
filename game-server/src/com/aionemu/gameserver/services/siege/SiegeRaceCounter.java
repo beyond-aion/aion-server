@@ -135,7 +135,7 @@ public class SiegeRaceCounter implements Comparable<SiegeRaceCounter> {
 	public Integer getWinnerLegionId() {
 		Map<Player, AtomicLong> teamDamageMap = new HashMap<>();
 		for (Integer id : playerDamageCounter.keySet()) {
-			Player player = World.getInstance().findPlayer(id);
+			Player player = World.getInstance().getPlayer(id);
 
 			if (player != null) {
 				if (player.getCurrentTeam() != null) {

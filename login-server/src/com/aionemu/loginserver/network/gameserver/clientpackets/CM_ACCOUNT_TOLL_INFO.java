@@ -1,9 +1,7 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.dao.PremiumDAO;
-import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 
 /**
@@ -11,21 +9,17 @@ import com.aionemu.loginserver.network.gameserver.GsClientPacket;
  */
 public class CM_ACCOUNT_TOLL_INFO extends GsClientPacket {
 
+	private int accountId;
 	private long toll;
-
-	private String accountName;
 
 	@Override
 	protected void readImpl() {
+		accountId = readD();
 		toll = readQ();
-		accountName = readS();
 	}
 
 	@Override
 	protected void runImpl() {
-		Account account = DAOManager.getDAO(AccountDAO.class).getAccount(accountName);
-
-		if (account != null)
-			DAOManager.getDAO(PremiumDAO.class).updatePoints(account.getId(), toll, 0);
+		DAOManager.getDAO(PremiumDAO.class).updatePoints(accountId, toll, 0);
 	}
 }

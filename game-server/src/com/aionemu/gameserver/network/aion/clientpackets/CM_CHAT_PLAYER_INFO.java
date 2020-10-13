@@ -29,7 +29,7 @@ public class CM_CHAT_PLAYER_INFO extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		Player target = World.getInstance().findPlayer(ChatUtil.getRealCharName(playerName));
+		Player target = World.getInstance().getPlayer(ChatUtil.getRealCharName(playerName));
 		if (target == null) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 			return;

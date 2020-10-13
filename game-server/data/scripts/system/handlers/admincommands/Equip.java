@@ -47,7 +47,7 @@ public class Equip extends AdminCommand {
 				return;
 			}
 			Player player = null;
-			player = World.getInstance().findPlayer(Util.convertName(params[i]));
+			player = World.getInstance().getPlayer(Util.convertName(params[i]));
 			if (player == null) {
 				VisibleObject target = admin.getTarget();
 				if (target instanceof Player)

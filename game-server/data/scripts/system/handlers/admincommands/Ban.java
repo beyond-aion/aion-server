@@ -31,7 +31,7 @@ public class Ban extends AdminCommand {
 		String accountIp = "";
 
 		// First, try to find player in the World
-		Player player = World.getInstance().findPlayer(name);
+		Player player = World.getInstance().getPlayer(name);
 		if (player != null) {
 			accountId = player.getClientConnection().getAccount().getId();
 			accountIp = player.getClientConnection().getIP();

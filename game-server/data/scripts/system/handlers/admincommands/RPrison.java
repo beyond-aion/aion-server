@@ -26,7 +26,7 @@ public class RPrison extends AdminCommand {
 		}
 
 		try {
-			Player playerFromPrison = World.getInstance().findPlayer(Util.convertName(params[0]));
+			Player playerFromPrison = World.getInstance().getPlayer(Util.convertName(params[0]));
 
 			if (playerFromPrison != null) {
 				PunishmentService.setIsInPrison(playerFromPrison, false, 0, "");

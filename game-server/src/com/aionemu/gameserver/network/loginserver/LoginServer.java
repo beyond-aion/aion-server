@@ -179,7 +179,7 @@ public class LoginServer {
 		for (PlayerAccountData accountData : account) {
 			PlayerCommonData pcd = accountData.getPlayerCommonData();
 			if (pcd.isOnline()) {
-				Player player = World.getInstance().findPlayer(pcd.getPlayerObjId());
+				Player player = World.getInstance().getPlayer(pcd.getPlayerObjId());
 				if (player != null && player.getClientConnection() != null) {
 					player.getClientConnection().close(SM_SYSTEM_MESSAGE.STR_KICK_ANOTHER_USER_TRY_LOGIN()); // kick
 				}

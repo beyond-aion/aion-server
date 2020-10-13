@@ -204,14 +204,14 @@ public class World {
 	/**
 	 * @see PlayerContainer#get(String)
 	 */
-	public Player findPlayer(String name) {
+	public Player getPlayer(String name) {
 		return allPlayers.get(name);
 	}
 
 	/**
 	 * @see PlayerContainer#get(int)
 	 */
-	public Player findPlayer(int objectId) {
+	public Player getPlayer(int objectId) {
 		return allPlayers.get(objectId);
 	}
 
@@ -379,9 +379,9 @@ public class World {
 		WorldMap map = getWorldMap(mapId);
 		if (map == null)
 			throw new NullPointerException("Failed to create position (invalid mapId: " + mapId + ")");
-		if (map.getWorldMapInstanceById(instanceId) == null)
+		if (map.getWorldMapInstance(instanceId) == null)
 			throw new NullPointerException("Failed to create position (invalid instanceId " + instanceId + " for mapId " + mapId + ")");
-		MapRegion mr = map.getWorldMapInstanceById(instanceId).getRegion(x, y, z);
+		MapRegion mr = map.getWorldMapInstance(instanceId).getRegion(x, y, z);
 		if (mr == null)
 			throw new NullPointerException(
 				"Failed to create position (invalid coords: x=" + x + ", y=" + y + ", z=" + z + " for mapId " + mapId + " in instanceId " + instanceId + ")");

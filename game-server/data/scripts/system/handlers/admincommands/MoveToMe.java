@@ -30,7 +30,7 @@ public class MoveToMe extends AdminCommand {
 			return;
 		}
 		String playerName = Util.convertName(params[0]);
-		Player playerToMove = World.getInstance().findPlayer(playerName);
+		Player playerToMove = World.getInstance().getPlayer(playerName);
 		if (playerToMove == null) {
 			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 			return;

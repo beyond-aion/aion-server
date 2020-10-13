@@ -56,7 +56,7 @@ public class PanesterraTeam {
 
 	public void forEachMember(Consumer<Player> consumer) {
 		for (Integer playerId : teamMembers) {
-			Player player = World.getInstance().findPlayer(playerId);
+			Player player = World.getInstance().getPlayer(playerId);
 			if (player != null)
 				consumer.accept(player);
 		}

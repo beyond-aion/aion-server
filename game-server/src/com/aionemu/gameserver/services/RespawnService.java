@@ -164,7 +164,7 @@ public class RespawnService {
 		}
 
 		private void respawn() {
-			if (!InstanceService.isInstanceExist(spawnTemplate.getWorldId(), instanceId))
+			if (!InstanceService.instanceExists(spawnTemplate.getWorldId(), instanceId))
 				return;
 
 			VisibleObject respawn = SpawnEngine.spawnObject(spawnTemplate.hasPool() ? spawnTemplate.changeTemplate(instanceId) : spawnTemplate, instanceId);

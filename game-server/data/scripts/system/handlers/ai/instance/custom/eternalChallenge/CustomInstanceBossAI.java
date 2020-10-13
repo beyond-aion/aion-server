@@ -87,7 +87,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		int playerId = wmi.getRegisteredObjects().iterator().next();
 		rank = CustomInstanceService.getInstance().loadOrCreateRank(playerId).getRank();
 
-		Player p = World.getInstance().findPlayer(playerId);
+		Player p = World.getInstance().getPlayer(playerId);
 		if (p == null) {
 			log.error("[CI_ROAH] No player object found for player id: " + playerId
 				+ ". Either the player is offline or the central artifact was destroyed by something else.", new Exception());

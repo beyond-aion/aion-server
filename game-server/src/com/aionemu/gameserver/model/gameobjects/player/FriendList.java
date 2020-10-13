@@ -121,7 +121,7 @@ public class FriendList implements Iterable<Friend> {
 		this.status = status;
 
 		for (Friend friend : friends.values()) {
-			Player friendPlayer = World.getInstance().findPlayer(friend.getObjectId());
+			Player friendPlayer = World.getInstance().getPlayer(friend.getObjectId());
 			if (friendPlayer == null)
 				continue;
 

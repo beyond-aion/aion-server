@@ -50,7 +50,7 @@ public class Grant extends AdminCommand {
 		Player player;
 		if (params.length >= 3) {
 			String playerName = Util.convertName(params[2]);
-			player = World.getInstance().findPlayer(playerName);
+			player = World.getInstance().getPlayer(playerName);
 			if (player == null) {
 				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 				return;

@@ -38,7 +38,7 @@ public class DeliveryManAI extends FollowingNpcAI {
 	@Override
 	protected void handleDespawned() {
 		PacketSendUtility.broadcastMessage(getOwner(), 390267); // Whiririkk, let's go!
-		Player player = World.getInstance().findPlayer(getOwner().getCreatorId());
+		Player player = World.getInstance().getPlayer(getOwner().getCreatorId());
 		if (player != null && getOwner().equals(player.getPostman()))
 			player.setPostman(null);
 		super.handleDespawned();

@@ -39,7 +39,7 @@ public class CM_CS_PLAYER_AUTH_RESPONSE extends CsClientPacket {
 	@Override
 	protected void runImpl() {
 		if (ChatServer.getInstance().isUp()) {
-			Player player = World.getInstance().findPlayer(playerId);
+			Player player = World.getInstance().getPlayer(playerId);
 			if (player != null) {
 				PacketSendUtility.sendPacket(player, new SM_CHAT_INIT(token));
 				if (ChatBanService.isBanned(player))

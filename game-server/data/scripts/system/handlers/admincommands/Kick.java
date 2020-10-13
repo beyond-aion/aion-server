@@ -42,7 +42,7 @@ public class Kick extends AdminCommand {
 				}
 			});
 		} else {
-			Player player = World.getInstance().findPlayer(Util.convertName(params[0]));
+			Player player = World.getInstance().getPlayer(Util.convertName(params[0]));
 			if (player == null) {
 				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_BUDDYLIST_NO_OFFLINE_CHARACTER());
 				return;

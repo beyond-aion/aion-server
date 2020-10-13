@@ -11,9 +11,11 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -79,32 +81,14 @@ public class Event extends AdminCommand {
 			for (Player player : World.getInstance().getAllPlayers())
 				setEventState(admin, player, true);
 		} else if (params[0].equalsIgnoreCase("setStatus")) {
-			Player player = null;
-			if (params.length > 1) {
-				player = World.getInstance().findPlayer(params[1]);
-				if (player == null)
-					sendInfo(admin, "There was no player found with the name '" + params[1] + "'!");
-			} else if (admin.getTarget() instanceof Player) {
-				player = (Player) admin.getTarget();
-			}
-			if (player == null) {
-				sendInfo(admin, "No valid target!");
+			Player player = getPlayer(admin, params.length > 1 ? params[1] : null);
+			if (player == null)
 				return;
-			}
 			setEventState(admin, player, false);
 		} else if (params[0].equalsIgnoreCase("setGroupStatus")) {
-			Player player = null;
-			if (params.length > 1) {
-				player = World.getInstance().findPlayer(params[1]);
-				if (player == null)
-					sendInfo(admin, "There was no player found with the name '" + params[1] + "'!");
-			} else if (admin.getTarget() instanceof Player) {
-				player = (Player) admin.getTarget();
-			}
-			if (player == null) {
-				sendInfo(admin, "No valid target!");
+			Player player = getPlayer(admin, params.length > 1 ? params[1] : null);
+			if (player == null)
 				return;
-			}
 			TemporaryPlayerTeam<?> team = player.getCurrentTeam();
 			if (team == null) {
 				sendInfo(admin, "The target is not in a group or alliance!");
@@ -113,16 +97,11 @@ public class Event extends AdminCommand {
 			for (Player p : team.getOnlineMembers())
 				setEventState(admin, p, false);
 		} else if (params.length > 1 && params[0].equalsIgnoreCase("setEnemy")) {
-			Player player = null;
-			if (params.length > 2) {
-				player = World.getInstance().findPlayer(params[2]);
-				if (player == null)
-					sendInfo(admin, "There was no player found with the name '" + params[2] + "'!");
-			} else if (admin.getTarget() instanceof Player) {
-				player = (Player) admin.getTarget();
-			}
-			if (player == null || !player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
-				sendInfo(admin, "No valid target! (Event state available?)");
+			Player player = getPlayer(admin, params.length > 2 ? params[2] : null);
+			if (player == null)
+				return;
+			if (!player.isInCustomState(CustomPlayerState.EVENT_MODE)) {
+				sendInfo(admin, player.getName() + " is not in event state");
 				return;
 			}
 			boolean ffaTeamMode = false;
@@ -152,6 +131,22 @@ public class Event extends AdminCommand {
 		} else {
 			sendInfo(admin);
 		}
+	}
+
+	private Player getPlayer(Player admin, String name) {
+		Player player = null;
+		if (name != null) {
+			String playerName = Util.convertName(name);
+			player = World.getInstance().getPlayer(playerName);
+			if (player == null) {
+				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
+			}
+		} else if (admin.getTarget() instanceof Player target) {
+			player = target;
+		} else {
+			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
+		}
+		return player;
 	}
 
 	private void clearInstance(Player admin) {

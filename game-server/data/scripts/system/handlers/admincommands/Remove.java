@@ -29,7 +29,7 @@ public class Remove extends AdminCommand {
 		int itemId = 0;
 		long itemCount = 1;
 		byte itemCountIndex = 2;
-		Player target = World.getInstance().findPlayer(Util.convertName(params[0]));
+		Player target = World.getInstance().getPlayer(Util.convertName(params[0]));
 		if (target == null) {
 			info(admin, "Player isn't online.");
 			return;

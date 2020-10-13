@@ -417,7 +417,7 @@ public class TeleportService {
 
 	public static void moveToInstanceExit(Player player, int worldId, Race race) {
 		InstanceExit instanceExit = DataManager.INSTANCE_EXIT_DATA.getInstanceExit(worldId, race);
-		if (instanceExit != null && InstanceService.isInstanceExist(instanceExit.getExitWorld(), 1)) {
+		if (instanceExit != null && InstanceService.instanceExists(instanceExit.getExitWorld(), 1)) {
 			teleportTo(player, instanceExit.getExitWorld(), instanceExit.getX(), instanceExit.getY(), instanceExit.getZ(), instanceExit.getH());
 		} else {
 			if (instanceExit == null)
@@ -529,7 +529,7 @@ public class TeleportService {
 				return;
 
 			if (animation != TeleportAnimation.NONE) { // this is a delayed teleport (triggered after animation end)
-				if (player.isDead() || !InstanceService.isInstanceExist(worldId, instanceId)) { // instance might be destroyed after animation end if unlucky
+				if (player.isDead() || !InstanceService.instanceExists(worldId, instanceId)) { // instance might be destroyed after animation end if unlucky
 					PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 					World.getInstance().spawn(player);
 					return;

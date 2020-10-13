@@ -43,7 +43,7 @@ public class PunishmentService {
 		DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(playerId, PunishmentType.CHARBAN, calculateDuration(dayCount), reason);
 
 		// if player is online - kick him
-		Player player = World.getInstance().findPlayer(playerId);
+		Player player = World.getInstance().getPlayer(playerId);
 		if (player != null)
 			player.getClientConnection().close(new SM_QUIT_RESPONSE());
 	}

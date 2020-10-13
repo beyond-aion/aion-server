@@ -1,12 +1,8 @@
 package com.aionemu.gameserver.model.team.legion;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.stream.Collectors;
 
@@ -87,7 +83,7 @@ public class Legion extends AionObject {
 	public List<Player> getOnlineLegionMembers() {
 		List<Player> onlineLegionMembers = new ArrayList<>();
 		for (int legionMemberObjId : legionMembers) {
-			Player onlineLegionMember = World.getInstance().findPlayer(legionMemberObjId);
+			Player onlineLegionMember = World.getInstance().getPlayer(legionMemberObjId);
 			if (onlineLegionMember != null)
 				onlineLegionMembers.add(onlineLegionMember);
 		}

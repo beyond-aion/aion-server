@@ -18,11 +18,7 @@ import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.player.Equipment;
-import com.aionemu.gameserver.model.gameobjects.player.MacroList;
-import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
+import com.aionemu.gameserver.model.gameobjects.player.*;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.items.storage.PlayerStorage;
@@ -259,7 +255,7 @@ public class PlayerService {
 	}
 
 	public static PlayerCommonData getOrLoadPlayerCommonData(int playerObjId) {
-		Player player = World.getInstance().findPlayer(playerObjId);
+		Player player = World.getInstance().getPlayer(playerObjId);
 		if (player == null)
 			return DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerObjId);
 		return player.getCommonData();
@@ -380,7 +376,7 @@ public class PlayerService {
 	}
 
 	public static String getPlayerName(int objectId) {
-		Player player = World.getInstance().findPlayer(objectId);
+		Player player = World.getInstance().getPlayer(objectId);
 		if (player != null)
 			return player.getName();
 		return DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(objectId);

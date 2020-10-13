@@ -150,7 +150,7 @@ public class AbyssRankUpdateService {
 
 	protected void updateRankTo(AbyssRankEnum newRank, int playerId) {
 		// check if rank has changed for online players
-		Player onlinePlayer = World.getInstance().findPlayer(playerId);
+		Player onlinePlayer = World.getInstance().getPlayer(playerId);
 		if (onlinePlayer != null) {
 			AbyssRank abyssRank = onlinePlayer.getAbyssRank();
 			AbyssRankEnum currentRank = abyssRank.getRank();

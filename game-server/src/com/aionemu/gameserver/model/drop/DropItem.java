@@ -142,7 +142,7 @@ public class DropItem {
 			if (winningPlayer.isOnline()) {
 				return winningPlayer;
 			} else {
-				Player player = World.getInstance().findPlayer(winningPlayer.getObjectId());
+				Player player = World.getInstance().getPlayer(winningPlayer.getObjectId());
 				if (player != null) {
 					return player;
 				} else {

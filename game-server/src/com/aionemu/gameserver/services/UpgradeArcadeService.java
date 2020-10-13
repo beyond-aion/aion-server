@@ -123,7 +123,7 @@ public class UpgradeArcadeService {
 			PacketSendUtility.sendPacket(player, new SM_UPGRADE_ARCADE(frenzyDurationSeconds));
 			int playerId = player.getObjectId();
 			ThreadPoolManager.getInstance().schedule(() -> {
-				Player p = World.getInstance().findPlayer(playerId);
+				Player p = World.getInstance().getPlayer(playerId);
 				if (p != null)
 					sendRemainingFrenzyModeTime(p, progress);
 			}, frenzyDurationMillis);

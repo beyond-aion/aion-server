@@ -95,7 +95,7 @@ public class Kisk extends SummonedObject<Player> {
 		List<Player> currentMemberList = new ArrayList<>();
 
 		for (int memberId : kiskMemberIds) {
-			Player member = World.getInstance().findPlayer(memberId);
+			Player member = World.getInstance().getPlayer(memberId);
 			if (member != null)
 				currentMemberList.add(member);
 		}

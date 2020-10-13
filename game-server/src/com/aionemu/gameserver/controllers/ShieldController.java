@@ -52,7 +52,7 @@ public class ShieldController extends VisibleObjectController<Shield> {
 	public void disable() {
 		for (ConcurrentHashMap.Entry<Integer, ActionObserver> e : observed.entrySet()) {
 			ActionObserver observer = observed.remove(e.getKey());
-			Player player = World.getInstance().findPlayer(e.getKey());
+			Player player = World.getInstance().getPlayer(e.getKey());
 			if (player != null)
 				player.getObserveController().removeObserver(observer);
 		}

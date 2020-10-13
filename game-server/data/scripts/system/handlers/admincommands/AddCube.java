@@ -26,7 +26,7 @@ public class AddCube extends AdminCommand {
 
 		Player receiver = null;
 
-		receiver = World.getInstance().findPlayer(Util.convertName(params[0]));
+		receiver = World.getInstance().getPlayer(Util.convertName(params[0]));
 
 		if (receiver == null) {
 			PacketSendUtility.sendMessage(admin, "The player " + Util.convertName(params[0]) + " is not online.");

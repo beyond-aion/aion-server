@@ -6,11 +6,7 @@ import com.aionemu.gameserver.dao.FriendListDAO;
 import com.aionemu.gameserver.model.gameobjects.player.BlockedPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Friend;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_BLOCK_LIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_BLOCK_RESPONSE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_LIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_NOTIFY;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_RESPONSE;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
@@ -126,7 +122,7 @@ public class SocialService {
 	public static boolean deleteFriend(Player deleter, Friend friend) {
 		int friendObjId = friend.getObjectId();
 		if (DAOManager.getDAO(FriendListDAO.class).delFriends(deleter.getObjectId(), friendObjId)) {
-			Player friendPlayer = World.getInstance().findPlayer(friendObjId);
+			Player friendPlayer = World.getInstance().getPlayer(friendObjId);
 			if (friendPlayer != null) {
 				friendPlayer.getFriendList().delFriend(deleter.getObjectId());
 				PacketSendUtility.sendPacket(friendPlayer, new SM_FRIEND_LIST());

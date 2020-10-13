@@ -29,7 +29,7 @@ public class BanChar extends AdminCommand {
 		String playerName = Util.convertName(params[0]);
 
 		// First, try to find player in the World
-		Player player = World.getInstance().findPlayer(playerName);
+		Player player = World.getInstance().getPlayer(playerName);
 		if (player != null)
 			playerId = player.getObjectId();
 

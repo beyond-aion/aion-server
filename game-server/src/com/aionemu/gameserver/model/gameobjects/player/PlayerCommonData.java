@@ -432,7 +432,7 @@ public class PlayerCommonData extends CreatureTemplate {
 	 */
 	public Player getPlayer() {
 		if (online && getPosition() != null) {
-			return World.getInstance().findPlayer(playerObjId);
+			return World.getInstance().getPlayer(playerObjId);
 		}
 		return null;
 	}

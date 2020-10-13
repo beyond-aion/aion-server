@@ -56,7 +56,7 @@ public class CM_CHAT_MESSAGE_WHISPER extends AionClientPacket {
 	protected void runImpl() {
 		String realName = ChatUtil.getRealCharName(name);
 		Player sender = getConnection().getActivePlayer();
-		Player receiver = World.getInstance().findPlayer(realName);
+		Player receiver = World.getInstance().getPlayer(realName);
 
 		if (receiver == null) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(realName));

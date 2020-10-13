@@ -25,7 +25,7 @@ public class SecurityToken extends AdminCommand {
 		Player receiver = null;
 
 		if (params[0].equals("show")) {
-			receiver = World.getInstance().findPlayer(Util.convertName(params[1]));
+			receiver = World.getInstance().getPlayer(Util.convertName(params[1]));
 			if (receiver == null) {
 				PacketSendUtility.sendMessage(player, "Can't find this player, maybe he's not online");
 				return;
@@ -38,7 +38,7 @@ public class SecurityToken extends AdminCommand {
 			}
 
 		} else {
-			receiver = World.getInstance().findPlayer(Util.convertName(params[0]));
+			receiver = World.getInstance().getPlayer(Util.convertName(params[0]));
 
 			if (receiver == null) {
 				PacketSendUtility.sendMessage(player, "Can't find this player, maybe he's not online");

@@ -76,7 +76,7 @@ public class TemporaryTradeTimeTask extends AbstractPeriodicTaskManager {
 				int time = (item.getTemporaryExchangeTime() - (int) (System.currentTimeMillis() / 1000));
 				if (time <= 0) {
 					for (int playerId : entry.getValue()) {
-						Player player = World.getInstance().findPlayer(playerId);
+						Player player = World.getInstance().getPlayer(playerId);
 						if (player != null)
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCHANGE_TIME_OVER(item.getL10n()));
 					}

@@ -57,7 +57,7 @@ public class MoveTo extends AdminCommand {
 		}
 
 		if (params.length == 1 && !NumberUtils.isDigits(params[0])) {
-			Player player = World.getInstance().findPlayer(Util.convertName(params[0]));
+			Player player = World.getInstance().getPlayer(Util.convertName(params[0]));
 			if (player != null && !player.equals(admin)) {
 				moveTo(admin, player.getPosition(), "Teleported to " + ChatUtil.name(player) + ".");
 				return;

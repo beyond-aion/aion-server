@@ -204,8 +204,8 @@ public class InstanceService {
 		TeleportService.moveToInstanceExit(player, player.getWorldId(), player.getRace());
 	}
 
-	public static boolean isInstanceExist(int worldId, int instanceId) {
-		return World.getInstance().getWorldMap(worldId).getWorldMapInstanceById(instanceId) != null;
+	public static boolean instanceExists(int worldId, int instanceId) {
+		return World.getInstance().getWorldMap(worldId).getWorldMapInstance(instanceId) != null;
 	}
 
 	private static void startInstanceChecker(WorldMapInstance worldMapInstance) {

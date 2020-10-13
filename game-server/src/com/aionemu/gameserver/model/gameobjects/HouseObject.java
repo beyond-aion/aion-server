@@ -103,7 +103,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 		registry.discardObject(this, false);
 
 		// if owner is not online, we should save his items
-		Player owner = World.getInstance().findPlayer(registry.getOwner().getOwnerId());
+		Player owner = World.getInstance().getPlayer(registry.getOwner().getOwnerId());
 		if (owner == null || !owner.isOnline())
 			registry.save();
 	}
@@ -230,7 +230,7 @@ public abstract class HouseObject<T extends PlaceableHouseObject> extends Visibl
 	public void incrementVisitorUsedCount() {
 		this.visitorUsedCount++;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
-		Player owner = World.getInstance().findPlayer(registry.getOwner().getOwnerId());
+		Player owner = World.getInstance().getPlayer(registry.getOwner().getOwnerId());
 		// if owner is not online, we should save his items
 		if (owner == null || !owner.isOnline())
 			registry.save();

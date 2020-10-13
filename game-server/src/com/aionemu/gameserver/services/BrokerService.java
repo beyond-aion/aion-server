@@ -395,7 +395,7 @@ public class BrokerService {
 				break;
 		}
 		saveManager.add(new BrokerOpSaveTask(brokerItem));
-		Player seller = World.getInstance().findPlayer(brokerItem.getSellerId());
+		Player seller = World.getInstance().getPlayer(brokerItem.getSellerId());
 		if (seller != null) {
 			PacketSendUtility.sendPacket(seller, new SM_BROKER_SERVICE(true, getEarnedKinahFromSoldItems(seller.getRace(), seller.getObjectId())));
 			// TODO: Retail system message

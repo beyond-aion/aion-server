@@ -110,7 +110,7 @@ public class Rename extends AdminCommand {
 
 	public void sendPacket(Player admin, Player player, String rename, String recipient) {
 		for (Friend friend : player.getFriendList()) {
-			Player friendPlayer = World.getInstance().findPlayer(friend.getObjectId());
+			Player friendPlayer = World.getInstance().getPlayer(friend.getObjectId());
 			if (friendPlayer != null)
 				PacketSendUtility.sendPacket(friendPlayer, new SM_PLAYER_INFO(player));
 		}

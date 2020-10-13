@@ -2,10 +2,7 @@ package quest.reshanta;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import java.util.List;
-
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -17,7 +14,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author Artur
@@ -93,14 +89,15 @@ public class _14045RumorsOnWings extends AbstractQuestHandler {
 							return false;
 						case SETPRO3:
 							if (var == 2) {
-								QuestService.addNewSpawn(400010000, player.getInstanceId(), 214102, 2344.32f, 1789.96f, 2258.88f, (byte) 86, 5);
-								QuestService.addNewSpawn(400010000, player.getInstanceId(), 214102, 2344.51f, 1786.01f, 2258.88f, (byte) 52, 5);
-								Creature raithor = World.getInstance().getWorldMap(400010000).getWorldMapInstanceById(player.getInstanceId()).getNpc(278643);
-								List<Npc> npcs = World.getInstance().getWorldMap(400010000).getWorldMapInstanceById(player.getInstanceId()).getNpcs(214102);
-								for (Npc npc : npcs) {
-									npc.getAggroList().addHate(raithor, 1);
-									raithor.getAggroList().addHate(npc, 1);
-								}
+								Npc raithor = (Npc) env.getVisibleObject();
+								QuestService.addNewSpawn(raithor.getWorldId(), raithor.getInstanceId(), 214102, 2344.32f, 1789.96f, 2258.88f, (byte) 86, 5);
+								QuestService.addNewSpawn(raithor.getWorldId(), raithor.getInstanceId(), 214102, 2344.51f, 1786.01f, 2258.88f, (byte) 52, 5);
+								raithor.getKnownList().forEachNpc(npc -> {
+									if (npc.getNpcId() == 214102) {
+										npc.getAggroList().addHate(raithor, 1);
+										raithor.getAggroList().addHate(npc, 1);
+									}
+								});
 								qs.setQuestVarById(0, 3); // 3
 								return closeDialogWindow(env);
 							}

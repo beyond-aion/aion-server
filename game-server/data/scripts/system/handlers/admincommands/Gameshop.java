@@ -36,7 +36,7 @@ public class Gameshop extends AdminCommand {
 		int list;
 		byte category, subCategory, itemType, gift;
 		long count, price, toll;
-		Player player = null;
+		Player player;
 		String titleDescription;
 		if ("delete".startsWith(params[0])) {
 			try {
@@ -156,13 +156,13 @@ public class Gameshop extends AdminCommand {
 
 				String name = Util.convertName(params[1]);
 
-				player = World.getInstance().findPlayer(name);
+				player = World.getInstance().getPlayer(name);
 				if (player == null) {
 					PacketSendUtility.sendMessage(admin, "The specified player is not online.");
 					return;
 				}
 
-				if (LoginServer.getInstance().sendPacket(new SM_ACCOUNT_TOLL_INFO(toll, player.getAcountName()))) {
+				if (LoginServer.getInstance().sendPacket(new SM_ACCOUNT_TOLL_INFO(toll, player.getAccount().getId()))) {
 					player.getClientConnection().getAccount().setToll(toll);
 					PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
 					PacketSendUtility.sendMessage(admin, "Tolls setted to " + toll + ".");
@@ -189,7 +189,7 @@ public class Gameshop extends AdminCommand {
 				}
 
 				player = (Player) target;
-				if (LoginServer.getInstance().sendPacket(new SM_ACCOUNT_TOLL_INFO(toll, player.getAcountName()))) {
+				if (LoginServer.getInstance().sendPacket(new SM_ACCOUNT_TOLL_INFO(toll, player.getAccount().getId()))) {
 					player.getClientConnection().getAccount().setToll(toll);
 					PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
 					PacketSendUtility.sendMessage(admin, "Tolls setted to " + toll + ".");
@@ -212,7 +212,7 @@ public class Gameshop extends AdminCommand {
 
 				String name = Util.convertName(params[1]);
 
-				player = World.getInstance().findPlayer(name);
+				player = World.getInstance().getPlayer(name);
 				if (player == null) {
 					PacketSendUtility.sendMessage(admin, "The specified player is not online.");
 					return;

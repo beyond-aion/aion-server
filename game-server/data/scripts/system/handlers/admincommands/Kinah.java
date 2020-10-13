@@ -32,7 +32,7 @@ public class Kinah extends AdminCommand {
 				return;
 			}
 		} else {
-			receiver = World.getInstance().findPlayer(Util.convertName(params[0]));
+			receiver = World.getInstance().getPlayer(Util.convertName(params[0]));
 
 			if (receiver == null) {
 				PacketSendUtility.sendMessage(admin, "Could not find a player by that name.");

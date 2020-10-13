@@ -19,7 +19,7 @@ public class Status extends ConsoleCommand {
 	protected void execute(Player admin, String... params) {
 		Player target = null;
 		if (params.length > 0) {
-			target = World.getInstance().findPlayer(params[0]);
+			target = World.getInstance().getPlayer(params[0]);
 		}
 		if (target == null && admin.getTarget() instanceof Player) {
 			target = (Player) admin.getTarget();

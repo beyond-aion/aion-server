@@ -15,23 +15,9 @@ import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
-import com.aionemu.gameserver.configs.main.AutoGroupConfig;
-import com.aionemu.gameserver.configs.main.CraftConfig;
-import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.GSConfig;
-import com.aionemu.gameserver.configs.main.HTMLConfig;
-import com.aionemu.gameserver.configs.main.MembershipConfig;
-import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
-import com.aionemu.gameserver.configs.main.SecurityConfig;
+import com.aionemu.gameserver.configs.main.*;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
-import com.aionemu.gameserver.dao.AbyssRankDAO;
-import com.aionemu.gameserver.dao.InventoryDAO;
-import com.aionemu.gameserver.dao.ItemStoneListDAO;
-import com.aionemu.gameserver.dao.PlayerDAO;
-import com.aionemu.gameserver.dao.PlayerPasskeyDAO;
-import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
-import com.aionemu.gameserver.dao.PlayerQuestListDAO;
-import com.aionemu.gameserver.dao.PlayerSkillListDAO;
+import com.aionemu.gameserver.dao.*;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData;
 import com.aionemu.gameserver.model.ChatType;
@@ -60,57 +46,11 @@ import com.aionemu.gameserver.model.templates.housing.HouseAddress;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.network.aion.AionConnection;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_AFTER_TIME_CHECK_4_7_5;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_BLOCK_LIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CHANNEL_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CHARACTER_SELECT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION_LIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ENTER_WORLD_CHECK;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ENTER_WORLD_CHECK.Msg;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FRIEND_LIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_GAME_TIME;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_COOLDOWN;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_LOC_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MACRO_LIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_SPAWN;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PRICES;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_LIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_COOLDOWN;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_LIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_LIST;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TITLE_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_UI_SETTINGS;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_UNK_3_5_1;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_WAREHOUSE_INFO;
 import com.aionemu.gameserver.questEngine.QuestEngine;
-import com.aionemu.gameserver.services.AccountService;
-import com.aionemu.gameserver.services.AtreianPassportService;
-import com.aionemu.gameserver.services.AutoGroupService;
-import com.aionemu.gameserver.services.BonusPackService;
-import com.aionemu.gameserver.services.BrokerService;
-import com.aionemu.gameserver.services.ClassChangeService;
-import com.aionemu.gameserver.services.FactionPackService;
-import com.aionemu.gameserver.services.HTMLService;
-import com.aionemu.gameserver.services.HousingBidService;
-import com.aionemu.gameserver.services.HousingService;
-import com.aionemu.gameserver.services.KiskService;
-import com.aionemu.gameserver.services.LegionService;
-import com.aionemu.gameserver.services.PunishmentService;
+import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.PunishmentService.PunishmentType;
-import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.services.StigmaService;
-import com.aionemu.gameserver.services.SurveyService;
-import com.aionemu.gameserver.services.VortexService;
-import com.aionemu.gameserver.services.WarehouseService;
 import com.aionemu.gameserver.services.abyss.AbyssSkillService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.event.EventService;
@@ -603,7 +543,7 @@ class GeneralUpdateTask implements Runnable {
 
 	@Override
 	public void run() {
-		Player player = World.getInstance().findPlayer(playerId);
+		Player player = World.getInstance().getPlayer(playerId);
 		if (player != null) {
 			try {
 				DAOManager.getDAO(AbyssRankDAO.class).storeAbyssRank(player);
@@ -630,7 +570,7 @@ class ItemUpdateTask implements Runnable {
 
 	@Override
 	public void run() {
-		Player player = World.getInstance().findPlayer(playerId);
+		Player player = World.getInstance().getPlayer(playerId);
 		if (player != null) {
 			try {
 				DAOManager.getDAO(InventoryDAO.class).store(player);

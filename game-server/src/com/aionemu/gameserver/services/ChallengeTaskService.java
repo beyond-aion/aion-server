@@ -1,11 +1,7 @@
 package com.aionemu.gameserver.services;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeMap;
 import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
@@ -222,7 +218,7 @@ public class ChallengeTaskService {
 					LegionMember legionMember = LegionService.getInstance().getLegionMember(memberObjId);
 					winnersByPoints.computeIfAbsent(legionMember.getChallengeScore(), k -> new ArrayList<>()).add(memberObjId);
 					legionMember.setChallengeScore(0);
-					if (World.getInstance().findPlayer(memberObjId) == null) // save legionMember to DB since owning player is not online (no autosave schedule)
+					if (World.getInstance().getPlayer(memberObjId) == null) // save legionMember to DB since owning player is not online (no autosave schedule)
 						LegionService.getInstance().storeLegionMember(legionMember);
 				}
 				int rewardsAdded = 0, itemId, itemCount;

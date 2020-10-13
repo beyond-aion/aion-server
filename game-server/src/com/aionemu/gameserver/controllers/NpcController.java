@@ -3,7 +3,6 @@ package com.aionemu.gameserver.controllers;
 import java.util.Collection;
 import java.util.Set;
 
-import com.aionemu.gameserver.skillengine.model.HopType;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,14 +17,7 @@ import com.aionemu.gameserver.custom.pvpmap.PvpMapHandler;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.drop.DropItem;
-import com.aionemu.gameserver.model.gameobjects.AionObject;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.DropNpc;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.Pet;
-import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
-import com.aionemu.gameserver.model.gameobjects.Summon;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -44,6 +36,7 @@ import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.event.EventService;
+import com.aionemu.gameserver.skillengine.model.HopType;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -181,7 +174,7 @@ public class NpcController extends CreatureController<Npc> {
 			return null;
 		if (dropNpc.getAllowedLooters().size() != 1) // auto looting is not available in FFA loot mode
 			return null;
-		Player player = World.getInstance().findPlayer(dropNpc.getAllowedLooters().iterator().next());
+		Player player = World.getInstance().getPlayer(dropNpc.getAllowedLooters().iterator().next());
 		if (player == null) // looter got disconnected
 			return null;
 		Pet pet = player.getPet();

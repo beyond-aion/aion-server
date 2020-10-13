@@ -73,7 +73,7 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 			Player topOnlinePlayer = null;
 			for (Iterator<Integer> iter = topPlayerDamages.keySet().iterator(); iter.hasNext();) {
 				Integer topPlayerId = topPlayerDamages.keySet().iterator().next();
-				topOnlinePlayer = World.getInstance().findPlayer(topPlayerId);
+				topOnlinePlayer = World.getInstance().getPlayer(topPlayerId);
 				if (topOnlinePlayer != null)
 					break;
 			}

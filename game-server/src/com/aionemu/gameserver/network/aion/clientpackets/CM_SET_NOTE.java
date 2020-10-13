@@ -37,7 +37,7 @@ public class CM_SET_NOTE extends AionClientPacket {
 			activePlayer.getCommonData().setNote(note);
 
 			for (Friend friend : activePlayer.getFriendList()) {
-				Player friendPlayer = World.getInstance().findPlayer(friend.getObjectId());
+				Player friendPlayer = World.getInstance().getPlayer(friend.getObjectId());
 				if (friendPlayer != null)
 					PacketSendUtility.sendPacket(friendPlayer, new SM_FRIEND_LIST()); // Send him a new friend list packet
 			}

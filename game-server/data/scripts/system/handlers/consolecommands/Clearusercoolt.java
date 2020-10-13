@@ -28,7 +28,7 @@ public class Clearusercoolt extends ConsoleCommand {
 			return;
 		}
 
-		Player player = World.getInstance().findPlayer(Util.convertName(params[0]));
+		Player player = World.getInstance().getPlayer(Util.convertName(params[0]));
 
 		if (player == null) {
 			PacketSendUtility.sendMessage(admin, "Could not find an online player with that name.");

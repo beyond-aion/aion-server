@@ -37,7 +37,7 @@ public class CM_BLOCK_ADD extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		Player target = World.getInstance().findPlayer(Util.convertName(targetName));
+		Player target = World.getInstance().getPlayer(Util.convertName(targetName));
 
 		if (player.getName().equalsIgnoreCase(targetName))
 			sendPacket(new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.CANT_BLOCK_SELF, targetName));

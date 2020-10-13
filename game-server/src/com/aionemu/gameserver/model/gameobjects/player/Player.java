@@ -713,7 +713,7 @@ public class Player extends Creature {
 	/**
 	 * @return The account name of this player.
 	 */
-	public String getAcountName() {
+	public String getAccountName() {
 		return playerAccount.getName();
 	}
 

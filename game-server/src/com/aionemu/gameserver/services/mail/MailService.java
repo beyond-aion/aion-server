@@ -8,11 +8,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
-import com.aionemu.gameserver.dao.BlockListDAO;
-import com.aionemu.gameserver.dao.InventoryDAO;
-import com.aionemu.gameserver.dao.ItemStoneListDAO;
-import com.aionemu.gameserver.dao.MailDAO;
-import com.aionemu.gameserver.dao.PlayerDAO;
+import com.aionemu.gameserver.dao.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
@@ -171,7 +167,7 @@ public class MailService {
 			return MailMessage.MAIL_IS_ONE_RACE_ONLY;
 		if (recipientCommonData.getMailboxLetters() >= 100)
 			return MailMessage.RECIPIENT_MAILBOX_FULL;
-		Player p = World.getInstance().findPlayer(recipientCommonData.getPlayerObjId());
+		Player p = World.getInstance().getPlayer(recipientCommonData.getPlayerObjId());
 		BlockList blockList = p != null ? p.getBlockList() : DAOManager.getDAO(BlockListDAO.class).load(recipientCommonData.getPlayerObjId());
 		if (blockList.contains(sender.getObjectId()))
 			return MailMessage.YOU_ARE_IN_RECIPIENT_IGNORE_LIST;

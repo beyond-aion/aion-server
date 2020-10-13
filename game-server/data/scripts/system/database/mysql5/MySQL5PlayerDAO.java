@@ -1,15 +1,7 @@
 package mysql5;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.sql.*;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -59,7 +51,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				"UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
 			log.debug("[DAO: MySQL5PlayerDAO] storing player " + player.getObjectId() + " " + player.getName());
 			PlayerCommonData pcd = player.getCommonData();
-			stmt.setString(1, player.getName());
+			stmt.setString(1, pcd.getName());
 			stmt.setLong(2, pcd.getExp());
 			stmt.setLong(3, pcd.getExpRecoverable());
 			stmt.setFloat(4, player.getX());
@@ -67,14 +59,14 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 			stmt.setFloat(6, player.getZ());
 			stmt.setInt(7, player.getHeading());
 			stmt.setInt(8, player.getWorldId());
-			stmt.setString(9, player.getGender().toString());
-			stmt.setString(10, player.getRace().toString());
+			stmt.setString(9, pcd.getGender().toString());
+			stmt.setString(10, pcd.getRace().toString());
 			stmt.setString(11, pcd.getPlayerClass().toString());
-			stmt.setInt(12, player.getQuestExpands());
-			stmt.setInt(13, player.getNpcExpands());
-			stmt.setInt(14, player.getItemExpands());
-			stmt.setInt(15, player.getWhNpcExpands());
-			stmt.setInt(16, player.getWhBonusExpands());
+			stmt.setInt(12, pcd.getQuestExpands());
+			stmt.setInt(13, pcd.getNpcExpands());
+			stmt.setInt(14, pcd.getItemExpands());
+			stmt.setInt(15, pcd.getWhNpcExpands());
+			stmt.setInt(16, pcd.getWhBonusExpands());
 			stmt.setString(17, pcd.getNote());
 			stmt.setInt(18, pcd.getTitleId());
 			stmt.setInt(19, pcd.getBonusTitleId());
@@ -85,11 +77,11 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 			stmt.setInt(22, mails);
 			stmt.setLong(23, pcd.getCurrentReposeEnergy());
 			stmt.setInt(24, pcd.getMentorFlagTime());
-			stmt.setInt(25, player.getCommonData().getWorldOwnerId());
+			stmt.setInt(25, pcd.getWorldOwnerId());
 			stmt.setInt(26, player.getObjectId());
 			stmt.execute();
 		} catch (Exception e) {
-			log.error("Error saving player: " + player.getObjectId() + " " + player.getName(), e);
+			log.error("Error saving " + player, e);
 		}
 	}
 
@@ -122,7 +114,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 				stmt.execute();
 			}
 		} catch (Exception e) {
-			log.error("Error saving new player: " + player.getObjectId() + " " + player.getName(), e);
+			log.error("Error saving new " + player, e);
 			return false;
 		}
 		return true;
@@ -130,7 +122,7 @@ public class MySQL5PlayerDAO extends PlayerDAO {
 
 	@Override
 	public PlayerCommonData loadPlayerCommonDataByName(String name) {
-		Player player = World.getInstance().findPlayer(name);
+		Player player = World.getInstance().getPlayer(name);
 		if (player != null) {
 			return player.getCommonData();
 		}

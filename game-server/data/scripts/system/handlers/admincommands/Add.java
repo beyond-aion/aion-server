@@ -42,7 +42,7 @@ public class Add extends AdminCommand {
 		int itemId = ChatUtil.getItemId(params[index]);
 		if (itemId == 0) {
 			String playerName = Util.convertName(params[index]);
-			receiver = World.getInstance().findPlayer(playerName);
+			receiver = World.getInstance().getPlayer(playerName);
 			if (receiver == null) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 				return;

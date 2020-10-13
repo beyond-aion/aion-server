@@ -179,7 +179,7 @@ public class DuelService {
 	public void fixTeamVisibility(Player hiddenDuelist) {
 		Integer opponentId = DuelService.getInstance().getOpponentId(hiddenDuelist);
 		if (opponentId != null) {
-			Player opponent = World.getInstance().findPlayer(opponentId);
+			Player opponent = World.getInstance().getPlayer(opponentId);
 			if (opponent != null && opponent.getKnownList().knows(hiddenDuelist) && !opponent.getKnownList().sees(hiddenDuelist)
 				&& hiddenDuelist.isInSameTeam(opponent))
 				PacketSendUtility.sendPacket(opponent, new SM_DELETE(hiddenDuelist));
@@ -194,7 +194,7 @@ public class DuelService {
 		if (opponnentId == null) // not dueling
 			return;
 
-		Player winner = World.getInstance().findPlayer(opponnentId);
+		Player winner = World.getInstance().getPlayer(opponnentId);
 		if (winner != null) {
 			winner.getEffectController().removeByDispelSlotType(DispelSlotType.DEBUFF); // all debuffs are removed from winner, but buffs will remain
 			winner.getController().cancelCurrentSkill(null);

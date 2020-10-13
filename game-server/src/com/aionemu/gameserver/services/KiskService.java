@@ -6,8 +6,8 @@ import java.util.concurrent.ConcurrentHashMap;
 import com.aionemu.gameserver.model.animations.ActionAnimation;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_KISK_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ACTION_ANIMATION;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_KISK_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -40,7 +40,7 @@ public class KiskService {
 			}
 		}
 		// remove the "2h place cooldown" for the kisk creator
-		Player creator = World.getInstance().findPlayer(kisk.getCreatorId());
+		Player creator = World.getInstance().getPlayer(kisk.getCreatorId());
 		if (creator != null)
 			PacketSendUtility.sendPacket(creator, new SM_KISK_UPDATE(kisk));
 

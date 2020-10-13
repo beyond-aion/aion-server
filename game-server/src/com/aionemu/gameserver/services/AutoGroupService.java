@@ -533,7 +533,7 @@ public class AutoGroupService {
 		int instanceMaskId = si.getInstanceMaskId();
 		if (si.getEntryRequestType().isGroupEntry() && si.getMembers() != null) {
 			for (Integer obj : si.getMembers()) {
-				Player member = World.getInstance().findPlayer(obj);
+				Player member = World.getInstance().getPlayer(obj);
 				if (member != null) {
 					if (si.isDredgion() && DredgionService.getInstance().isRegisterAvailable()) {
 						PacketSendUtility.sendPacket(member, new SM_AUTO_GROUP(instanceMaskId, 6));

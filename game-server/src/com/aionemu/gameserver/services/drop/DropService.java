@@ -210,7 +210,7 @@ public class DropService {
 				if (lootGrouRules.getItemsToBeDistributed().isEmpty() || containDropItem) {
 					dropNpc.setCurrentIndex(requestedItem.getIndex());
 					for (Player member : dropNpc.getInRangePlayers()) {
-						Player finalPlayer = World.getInstance().findPlayer(member.getObjectId());
+						Player finalPlayer = World.getInstance().getPlayer(member.getObjectId());
 						if (finalPlayer != null && finalPlayer.isOnline()) {
 							dropNpc.addPlayerStatus(finalPlayer);
 							finalPlayer.setPlayerMode(PlayerMode.IN_ROLL, new InRoll(npcId, itemId, requestedItem.getIndex(), dropNpc.getDistributionId()));
@@ -262,7 +262,7 @@ public class DropService {
 		if (distId > 1 && lootGroupRules.getQualityRule(quality)) {
 			boolean anyOnline = false;
 			for (Player member : dropNpc.getInRangePlayers()) {
-				Player finalPlayer = World.getInstance().findPlayer(member.getObjectId());
+				Player finalPlayer = World.getInstance().getPlayer(member.getObjectId());
 				if (finalPlayer != null && finalPlayer.isOnline()) {
 					anyOnline = true;
 					break;

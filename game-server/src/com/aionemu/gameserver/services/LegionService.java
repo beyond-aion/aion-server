@@ -650,7 +650,7 @@ public class LegionService {
 		Legion legion = activePlayer.getLegion();
 		LegionMember legionMember;
 		Player targetPlayer;
-		if ((targetPlayer = World.getInstance().findPlayer(charName)) != null) {
+		if ((targetPlayer = World.getInstance().getPlayer(charName)) != null) {
 			legionMember = targetPlayer.getLegionMember();
 			if (targetPlayer.getLegion() != legion)
 				return;
@@ -755,7 +755,7 @@ public class LegionService {
 			if (objExcluded != null && objExcluded.equals(memberObjId)) {
 				continue;
 			}
-			Player memberPlayer = World.getInstance().findPlayer(memberObjId);
+			Player memberPlayer = World.getInstance().getPlayer(memberObjId);
 			if (memberPlayer != null) {
 				legionMemberEx = new LegionMemberEx(memberPlayer, memberPlayer.getLegionMember(), true);
 			} else {
@@ -1084,7 +1084,7 @@ public class LegionService {
 		legion.getLegionWarehouse().unsetInUse(legionMember.getObjectId());
 
 		// If player is online send packet and reset legion member
-		Player player = World.getInstance().findPlayer(charName);
+		Player player = World.getInstance().getPlayer(charName);
 		if (player != null) {
 			PacketSendUtility.broadcastPacket(player, new SM_LEGION_UPDATE_TITLE(player.getObjectId(), 0, "", 2), true);
 		}
@@ -1110,7 +1110,7 @@ public class LegionService {
 		Legion legion = activePlayer.getLegion();
 
 		charName = Util.convertName(charName);
-		Player targetPlayer = World.getInstance().findPlayer(charName);
+		Player targetPlayer = World.getInstance().getPlayer(charName);
 
 		switch (exOpcode) {
 			/**

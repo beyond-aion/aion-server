@@ -31,7 +31,7 @@ public class Friend {
 	public Status getStatus() {
 		if (!pcd.isOnline())
 			return FriendList.Status.OFFLINE;
-		Player player = World.getInstance().findPlayer(getObjectId());
+		Player player = World.getInstance().getPlayer(getObjectId());
 		if (player == null)
 			return FriendList.Status.OFFLINE;
 		return player.getFriendList().getStatus();

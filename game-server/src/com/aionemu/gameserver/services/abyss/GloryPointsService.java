@@ -21,7 +21,7 @@ public class GloryPointsService {
 	}
 
 	public static void increaseGp(int playerObjId, int additionalGp, boolean addRates) {
-		Player onlinePlayer = World.getInstance().findPlayer(playerObjId);
+		Player onlinePlayer = World.getInstance().getPlayer(playerObjId);
 		if (onlinePlayer != null) {
 			addGp(onlinePlayer, additionalGp, addRates);
 		} else {
@@ -33,7 +33,7 @@ public class GloryPointsService {
 	}
 
 	public static void decreaseGp(int playerObjId, int gpToRemove) {
-		Player onlinePlayer = World.getInstance().findPlayer(playerObjId);
+		Player onlinePlayer = World.getInstance().getPlayer(playerObjId);
 		if (onlinePlayer != null) {
 			addGp(onlinePlayer, -gpToRemove, false);
 		} else {

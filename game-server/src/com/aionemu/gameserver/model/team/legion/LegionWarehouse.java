@@ -31,7 +31,7 @@ public class LegionWarehouse extends Storage {
 	@Override
 	public void increaseKinah(long amount) {
 		int currentWhUser = getCurrentUser();
-		Player player = currentWhUser == 0 ? null : World.getInstance().findPlayer(currentWhUser);
+		Player player = currentWhUser == 0 ? null : World.getInstance().getPlayer(currentWhUser);
 		new LegionStorageProxy(this, player).increaseKinah(amount);
 	}
 

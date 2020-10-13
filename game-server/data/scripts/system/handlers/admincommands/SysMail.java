@@ -205,13 +205,13 @@ public class SysMail extends AdminCommand {
 				}
 				shouldExpress = true;
 			} else if (letterType == LetterType.EXPRESS) {
-				if (World.getInstance().findPlayer(recipient) == null) {
+				if (World.getInstance().getPlayer(recipient) == null) {
 					PacketSendUtility.sendMessage(admin, "This Recipient is offline.");
 					return false;
 				}
 				shouldExpress = true;
 			} else { // Black cloud
-				shouldExpress = World.getInstance().findPlayer(recipient) != null;
+				shouldExpress = World.getInstance().getPlayer(recipient) != null;
 			}
 		} else {
 			shouldExpress = letterType != LetterType.NORMAL;

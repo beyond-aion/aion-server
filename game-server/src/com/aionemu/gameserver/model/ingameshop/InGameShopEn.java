@@ -1,13 +1,7 @@
 package com.aionemu.gameserver.model.ingameshop;
 
 import java.sql.Timestamp;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 
@@ -167,8 +161,7 @@ public class InGameShopEn {
 		if (LoginServer.getInstance().sendPacket(new SM_PREMIUM_CONTROL(request, item.getItemPrice())))
 			activeRequests.put(request.requestId, request);
 		if (LoggingConfig.LOG_INGAMESHOP)
-			log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " is watching item:"
-				+ item.getItemId() + " cost " + item.getItemPrice() + " toll.");
+			log.info("[INGAMESHOP] > " + player + " (" + player.getAccount() + ") is watching item:" + item.getItemId() + " cost " + item.getItemPrice() + " toll.");
 	}
 
 	public void giftItemRequest(Player player, String receiver, String message, int itemObjId) {
@@ -229,7 +222,7 @@ public class InGameShopEn {
 
 	public boolean decreaseToll(Player player, long price) {
 		if (LoginServer.getInstance().sendPacket(
-			new SM_ACCOUNT_TOLL_INFO(player.getClientConnection().getAccount().getToll() - price, player.getAcountName()))) {
+			new SM_ACCOUNT_TOLL_INFO(player.getClientConnection().getAccount().getToll() - price, player.getAccount().getId()))) {
 			player.getClientConnection().getAccount().setToll(player.getClientConnection().getAccount().getToll() - price);
 			PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(player.getClientConnection().getAccount().getToll()));
 			return true;
@@ -242,7 +235,7 @@ public class InGameShopEn {
 	public void finishRequest(int requestId, int result, long toll) {
 		IGRequest request = this.activeRequests.get(requestId);
 		if (request.requestId == requestId) {
-			Player player = World.getInstance().findPlayer(request.playerId);
+			Player player = World.getInstance().getPlayer(request.playerId);
 			if (player != null) {
 				if (result == 1) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INGAMESHOP_ERROR());
@@ -256,8 +249,7 @@ public class InGameShopEn {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INGAMESHOP_NOT_ENOUGH_CASH("Toll"));
 					PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
 					if (LoggingConfig.LOG_INGAMESHOP)
-						log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " has not bought item: "
-							+ item.getItemId() + " count: " + item.getItemCount() + " Cause: NOT ENOUGH TOLLS");
+						log.info("[INGAMESHOP] > " + player + " (" + player.getAccount() + ") has not bought item: " + item.getItemId() + " count: " + item.getItemCount() + " Cause: NOT ENOUGH TOLLS");
 				} else if (result == 3) {
 					// uses for lottery
 					if (request.itemObjId == 0) {
@@ -278,19 +270,17 @@ public class InGameShopEn {
 							LetterType.BLACKCLOUD);
 						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INGAMESHOP_GIFT_SUCCESS());
 						if (LoggingConfig.LOG_INGAMESHOP)
-							log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " BUY ITEM: "
-								+ item.getItemId() + " COUNT: " + item.getItemCount() + " FOR PlayerName: " + request.receiver);
+							log.info("[INGAMESHOP] > " + player + " (" + player.getAccount() + ") BUY ITEM: " + item.getItemId() + " COUNT: " + item.getItemCount() + " FOR PlayerName: " + request.receiver);
 						if (LoggingConfig.LOG_INGAMESHOP_SQL)
 							DAOManager.getDAO(InGameShopLogDAO.class).log("GIFT", new Timestamp(System.currentTimeMillis()), player.getName(),
-								player.getAcountName(), request.receiver, item.getItemId(), item.getItemCount(), item.getItemPrice());
+								player.getAccountName(), request.receiver, item.getItemId(), item.getItemCount(), item.getItemPrice());
 					} else {
 						ItemService.addItem(player, item.getItemId(), item.getItemCount());
 						if (LoggingConfig.LOG_INGAMESHOP)
-							log.info("[INGAMESHOP] > Account name: " + player.getAcountName() + ", PlayerName: " + player.getName() + " BUY ITEM: "
-								+ item.getItemId() + " COUNT: " + item.getItemCount());
+							log.info("[INGAMESHOP] > " + player + " (" + player.getAccount() + ") BUY ITEM: " + item.getItemId() + " COUNT: " + item.getItemCount());
 						if (LoggingConfig.LOG_INGAMESHOP_SQL)
 							DAOManager.getDAO(InGameShopLogDAO.class).log("BUY", new Timestamp(System.currentTimeMillis()), player.getName(),
-								player.getAcountName(), player.getName(), item.getItemId(), item.getItemCount(), item.getItemPrice());
+								player.getAccountName(), player.getName(), item.getItemId(), item.getItemCount(), item.getItemPrice());
 						DAOManager.getDAO(InventoryDAO.class).store(player);
 					}
 					item.increaseSales();

@@ -37,7 +37,7 @@ public class CM_REPORT_PLAYER extends AionClientPacket {
 		switch (reportType) {
 			case 0: // /accuse, /AutoReportHunting
 				Player activePlayer = getConnection().getActivePlayer();
-				Player player = World.getInstance().findPlayer(ChatUtil.getRealCharName(playerName));
+				Player player = World.getInstance().getPlayer(ChatUtil.getRealCharName(playerName));
 				if (player != null && player.getRace() != activePlayer.getRace()) {
 					sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_DO_NOT_ACCUSE());
 				} else if (activePlayer.equals(player)) {

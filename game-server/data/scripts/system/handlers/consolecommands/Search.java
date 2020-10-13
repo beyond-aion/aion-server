@@ -18,7 +18,7 @@ public class Search extends ConsoleCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (params.length > 0) {
-			Player p = World.getInstance().findPlayer(params[0]);
+			Player p = World.getInstance().getPlayer(params[0]);
 			if (p != null)
 				PacketSendUtility.sendPacket(admin, new SM_GM_SEARCH(p));
 		}

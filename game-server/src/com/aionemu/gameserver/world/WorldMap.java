@@ -136,13 +136,7 @@ public class WorldMap implements Iterable<WorldMapInstance> {
 		return instances.get(1);
 	}
 
-	/**
-	 * This method return WorldMapInstance by specified instanceId
-	 * 
-	 * @param instanceId
-	 * @return WorldMapInstance
-	 */
-	public WorldMapInstance getWorldMapInstanceById(int instanceId) {
+	public WorldMapInstance getWorldMapInstance(int instanceId) {
 		// instanceId is a count, some code still uses 0 for the default instance
 		if (instanceId == 0)
 			instanceId = 1;

@@ -60,7 +60,7 @@ public class Quest extends AdminCommand {
 		Player target;
 		int questId = ChatUtil.getQuestId(params[index]);
 		if (questId == 0) {
-			target = World.getInstance().findPlayer(Util.convertName(params[index]));
+			target = World.getInstance().getPlayer(Util.convertName(params[index]));
 
 			if (target == null || !target.isOnline()) {
 				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_ASK_PCINFO_LOGOFF());

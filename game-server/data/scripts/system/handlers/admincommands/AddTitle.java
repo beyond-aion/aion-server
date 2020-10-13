@@ -6,6 +6,8 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.TitleTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -36,9 +38,10 @@ public class AddTitle extends AdminCommand {
 
 		Player target = null;
 		if (params.length == 2) {
-			target = World.getInstance().findPlayer(Util.convertName(params[1]));
+			String playerName = Util.convertName(params[1]);
+			target = World.getInstance().getPlayer(playerName);
 			if (target == null) {
-				sendInfo(player, "player " + params[1] + " was not found");
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 				return;
 			}
 		} else {

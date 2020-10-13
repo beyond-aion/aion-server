@@ -90,7 +90,7 @@ public class SurveyService {
 		}
 		log.info("[SurveyController] found new " + cnt + " items for " + players.size() + " players.");
 		for (int ownerId : players) {
-			Player player = World.getInstance().findPlayer(ownerId);
+			Player player = World.getInstance().getPlayer(ownerId);
 			if (player != null) {
 				showAvailable(player);
 			}

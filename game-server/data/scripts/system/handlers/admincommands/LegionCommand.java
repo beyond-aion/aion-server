@@ -157,7 +157,7 @@ public class LegionCommand extends AdminCommand {
 			if (!verifyLength(player, 2, params)) // legion kick PLAYER
 				return;
 
-			Player target = World.getInstance().findPlayer(Util.convertName(params[1]));
+			Player target = World.getInstance().getPlayer(Util.convertName(params[1]));
 			if (target == null) {
 				PacketSendUtility.sendMessage(player, "player " + params[1] + " not exists.");
 				return;
@@ -178,7 +178,7 @@ public class LegionCommand extends AdminCommand {
 			if (legion == null)
 				return;
 
-			Player target = World.getInstance().findPlayer(Util.convertName(params[2]));
+			Player target = World.getInstance().getPlayer(Util.convertName(params[2]));
 			if (target == null) {
 				PacketSendUtility.sendMessage(player, "player " + params[2] + " not exists.");
 				return;
@@ -200,7 +200,7 @@ public class LegionCommand extends AdminCommand {
 			if (legion == null)
 				return;
 
-			Player target = World.getInstance().findPlayer(Util.convertName(params[2]));
+			Player target = World.getInstance().getPlayer(Util.convertName(params[2]));
 			if (target == null) {
 				PacketSendUtility.sendMessage(player, "player " + params[2] + " not exists.");
 				return;
@@ -213,7 +213,7 @@ public class LegionCommand extends AdminCommand {
 
 			Collection<Integer> members = legion.getLegionMembers();
 			for (int memberId : members) {
-				Player pl = World.getInstance().findPlayer(memberId);
+				Player pl = World.getInstance().getPlayer(memberId);
 				if (pl != null) {
 					if (pl.getLegionMember().getRank() == LegionRank.BRIGADE_GENERAL) {
 						pl.getLegionMember().setRank(LegionRank.LEGIONARY);
@@ -245,7 +245,7 @@ public class LegionCommand extends AdminCommand {
 			if (!verifyLength(player, 3, params)) // legion setrank PLAYER RANK
 				return;
 
-			Player target = World.getInstance().findPlayer(Util.convertName(params[1]));
+			Player target = World.getInstance().getPlayer(Util.convertName(params[1]));
 			if (target == null) {
 				PacketSendUtility.sendMessage(player, "player " + params[1] + " not exists.");
 				return;

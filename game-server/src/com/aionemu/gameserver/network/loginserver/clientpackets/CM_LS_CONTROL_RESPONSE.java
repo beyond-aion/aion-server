@@ -31,7 +31,7 @@ public class CM_LS_CONTROL_RESPONSE extends LsClientPacket {
 
 	@Override
 	public void runImpl() {
-		Player admin = World.getInstance().findPlayer(adminId);
+		Player admin = World.getInstance().getPlayer(adminId);
 		if (!result) {
 			if (admin != null)
 				PacketSendUtility.sendMessage(admin, "The operation failed.");

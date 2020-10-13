@@ -77,7 +77,7 @@ public class SM_ITEM_USAGE_ANIMATION extends AionServerPacket {
 	@Override
 	protected void writeImpl(AionConnection con) {
 		if (time > 0) {
-			final Player player = World.getInstance().findPlayer(playerObjId);
+			final Player player = World.getInstance().getPlayer(playerObjId);
 			final Item item = player.getInventory().getItemByObjId(itemObjId);
 			player.setUsingItem(item);
 		}

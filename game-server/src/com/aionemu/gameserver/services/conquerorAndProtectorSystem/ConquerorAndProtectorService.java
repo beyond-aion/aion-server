@@ -17,7 +17,6 @@ import com.aionemu.gameserver.model.templates.cp.CPType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CONQUEROR_PROTECTOR;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionDominionService;
-import com.aionemu.gameserver.taskmanager.tasks.LegionDominionIntruderUpdateTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -174,7 +173,7 @@ public class ConquerorAndProtectorService {
 			if (info.getRank() == 0 && info.getLDRank() == 0)
 				(info.getType() == CPType.CONQUEROR ? conquerors : protectors).remove(info.getPlayerId());
 			if (player == null)
-				player = World.getInstance().findPlayer(info.getPlayerId());
+				player = World.getInstance().getPlayer(info.getPlayerId());
 			if (player != null)
 				updateBuffAndNotifyNearbyPlayers(player, info);
 		}
@@ -219,7 +218,7 @@ public class ConquerorAndProtectorService {
 		if (protector != null) {
 			for (CPInfo conqueror : conquerors.values()) {
 				if (canSee(protector, conqueror)) {
-					Player intruder = World.getInstance().findPlayer(conqueror.getPlayerId());
+					Player intruder = World.getInstance().getPlayer(conqueror.getPlayerId());
 					if (intruder != null && intruder.getRace() != player.getRace() && PositionUtil.isInRange(intruder, player, 500))
 						intruders.add(intruder);
 				}

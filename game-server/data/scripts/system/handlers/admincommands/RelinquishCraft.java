@@ -38,7 +38,7 @@ public class RelinquishCraft extends AdminCommand {
 		Player target;
 		if (params.length == 3) {
 			String playerName = Util.convertName(params[i++]);
-			target = World.getInstance().findPlayer(playerName);
+			target = World.getInstance().getPlayer(playerName);
 			if (target == null) {
 				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_NO_SUCH_USER(playerName));
 				return;

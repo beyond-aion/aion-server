@@ -225,7 +225,7 @@ public class HouseController extends VisibleObjectController<House> {
 	private void notifyAboutOwnerChange(int ownerId, boolean isNewOwner) {
 		if (ownerId == 0)
 			return;
-		Player player = World.getInstance().findPlayer(ownerId);
+		Player player = World.getInstance().getPlayer(ownerId);
 		if (player != null) {
 			player.resetHouses();
 			if (!isNewOwner)
