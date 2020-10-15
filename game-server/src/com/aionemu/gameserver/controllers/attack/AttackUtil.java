@@ -7,12 +7,7 @@ import java.util.List;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.Servant;
-import com.aionemu.gameserver.model.gameobjects.SummonedObject;
-import com.aionemu.gameserver.model.gameobjects.Trap;
+import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.items.NpcEquippedGear;
@@ -22,13 +17,7 @@ import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
 import com.aionemu.gameserver.skillengine.change.Func;
-import com.aionemu.gameserver.skillengine.effect.DamageEffect;
-import com.aionemu.gameserver.skillengine.effect.DelayedSpellAttackInstantEffect;
-import com.aionemu.gameserver.skillengine.effect.DispelBuffCounterAtkEffect;
-import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
-import com.aionemu.gameserver.skillengine.effect.NoReduceSpellATKInstantEffect;
-import com.aionemu.gameserver.skillengine.effect.ProcAtkInstantEffect;
-import com.aionemu.gameserver.skillengine.effect.SkillAttackInstantEffect;
+import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.EffectReserved;
@@ -70,7 +59,7 @@ public class AttackUtil {
 		switch (elem) {
 			case NONE:
 				if (mainHandStatus == null)
-					mainHandStatus = calculatePhysicalStatus(attacker, attacked, true);
+					mainHandStatus = calculatePhysicalStatus(attacker, attacked, true, 0, 100, false, false);
 				if (attacker instanceof Player) {
 					mainHandWeapon = ((Player) attacker).getEquipment().getMainHandWeapon();
 					if (mainHandWeapon != null)
@@ -256,31 +245,16 @@ public class AttackUtil {
 		}
 	}
 
-	/**
-	 * @param effect
-	 * @param skillDamage
-	 * @param template
-	 * @param ignoreShield
-	 */
 	public static void calculateSkillResult(Effect effect, int skillDamage, EffectTemplate template, boolean ignoreShield) {
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
 		// define values
 		ActionModifier modifier = template.getActionModifiers(effect);
 		SkillElement element = template.getElement();
-		Func func = (template instanceof DamageEffect ? ((DamageEffect) template).getMode() : Func.ADD);
-		int randomDamageType = (template instanceof SkillAttackInstantEffect ? ((SkillAttackInstantEffect) template).getRnddmg() : 0);
-		int skillLvl = effect.getSkillLevel();
-		int accMod = template.getAccMod2() + template.getAccMod1() * skillLvl;
-		int criticalProb = template.getCritProbMod2();
-		if (template instanceof DispelBuffCounterAtkEffect)
-			criticalProb = 0;// critprob 0, dispelbuffcounteratkeffect can not crit
-		int critAddDmg = template.getCritAddDmg2() + template.getCritAddDmg1() * skillLvl;
-		boolean cannotMiss = template instanceof SkillAttackInstantEffect && ((SkillAttackInstantEffect) template).isCannotmiss();
-		boolean shared = template instanceof DamageEffect && ((DamageEffect) template).isShared();
+		Func func = template instanceof DamageEffect damageEffect ? damageEffect.getMode() : Func.ADD;
+		int randomDamageType = template instanceof SkillAttackInstantEffect skillAttackInstantEffect ? skillAttackInstantEffect.getRnddmg() : 0;
+		int critAddDmg = template.getCritAddDmg2() + template.getCritAddDmg1() * effect.getSkillLevel();
 		boolean useTemplateDmg = isUseTemplateDmg(effect, template);
-		// for sm_castspell_result packet
-		int position = template.getPosition();
 		boolean send = true;
 		if (template instanceof DelayedSpellAttackInstantEffect || template instanceof ProcAtkInstantEffect)
 			send = false;
@@ -363,10 +337,10 @@ public class AttackUtil {
 		AttackStatus status;
 		switch (element) {
 			case NONE:
-				status = calculatePhysicalStatus(effector, effected, true, accMod, criticalProb, true, cannotMiss);
+				status = calculatePhysicalStatus(effector, effected, template, effect.getSkillLevel());
 				break;
 			default:
-				status = calculateMagicalStatus(effector, effected, criticalProb, true, effect.getSkillTemplate().isMcritApplied());
+				status = calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isMcritApplied());
 				break;
 		}
 
@@ -403,13 +377,13 @@ public class AttackUtil {
 			damage = effector.getAi().modifyOwnerDamage(damage, effected, effect);
 		}
 
-		if (shared && !effect.getSkill().getEffectedList().isEmpty())
+		if (effect.getSkill().getEffectedList().size() > 1 && template instanceof DamageEffect damageEffect && damageEffect.isShared())
 			damage /= effect.getSkill().getEffectedList().size();
 
 		if (damage < 0)
 			damage = 0;
 
-		calculateEffectResult(effect, effected, damage, status, ht, ignoreShield, position, send);
+		calculateEffectResult(effect, effected, damage, status, ht, ignoreShield, template.getPosition(), send);
 	}
 
 	private static boolean isUseTemplateDmg(Effect effect, EffectTemplate template) {
@@ -587,29 +561,22 @@ public class AttackUtil {
 		return damage;
 	}
 
-	/**
-	 * Manage attack status rate
-	 * 
-	 * @source http://www.aionsource.com/forum/mechanic-analysis/42597-character-stats-xp-dp-origin-gerbator-team-july-2009 -a.html
-	 * @return AttackStatus
-	 */
-	public static AttackStatus calculatePhysicalStatus(Creature attacker, Creature attacked, boolean isMainHand) {
-		return calculatePhysicalStatus(attacker, attacked, isMainHand, 0, 100, false, false);
+	private static AttackStatus calculatePhysicalStatus(Creature attacker, Creature attacked, EffectTemplate template, int skillLevel) {
+		int accMod = template.getAccMod2() + template.getAccMod1() * skillLevel;
+		boolean cannotMiss = template instanceof SkillAttackInstantEffect skillAttackInstantEffect && skillAttackInstantEffect.isCannotmiss();
+		return calculatePhysicalStatus(attacker, attacked, true, accMod, template.getCritProbMod2(), true, cannotMiss);
 	}
 
-	public static AttackStatus calculatePhysicalStatus(Creature attacker, Creature attacked, boolean isMainHand, int accMod, int criticalProb,
+	private static AttackStatus calculatePhysicalStatus(Creature attacker, Creature attacked, boolean isMainHand, int accMod, int criticalProb,
 		boolean isSkill, boolean cannotMiss) {
 		AttackStatus status = AttackStatus.NORMALHIT;
-		if (!isMainHand)
-			status = AttackStatus.OFFHAND_NORMALHIT;
 
 		if (!cannotMiss) {
-			if (attacked instanceof Player && ((Player) attacked).getEquipment().isShieldEquipped()
+			// npcs can't block or parry currently (humanoid mobs with shield / weapon should be able to)
+			if (attacked instanceof Player player && player.getEquipment().isShieldEquipped()
 				&& StatFunctions.calculatePhysicalBlockRate(attacker, attacked))// TODO accMod
 				status = AttackStatus.BLOCK;
-			// Parry can only be done with weapon, also weapon can have humanoid mobs,
-			// but for now there isnt implementation of monster category
-			else if (attacked instanceof Player && ((Player) attacked).getEquipment().getMainHandWeaponType() != null
+			else if (attacked instanceof Player player && player.getEquipment().getMainHandWeaponType() != null
 				&& StatFunctions.calculatePhysicalParryRate(attacker, attacked))// TODO accMod
 				status = AttackStatus.PARRY;
 			else if (!isSkill && StatFunctions.calculatePhysicalDodgeRate(attacker, attacked, accMod)) {
@@ -623,35 +590,15 @@ public class AttackUtil {
 		}
 
 		if (StatFunctions.calculatePhysicalCriticalRate(attacker, attacked, isMainHand, criticalProb, isSkill)) {
-			switch (status) {
-				case BLOCK:
-					if (isMainHand)
-						status = AttackStatus.CRITICAL_BLOCK;
-					else
-						status = AttackStatus.OFFHAND_CRITICAL_BLOCK;
-					break;
-				case PARRY:
-					if (isMainHand)
-						status = AttackStatus.CRITICAL_PARRY;
-					else
-						status = AttackStatus.OFFHAND_CRITICAL_PARRY;
-					break;
-				case DODGE:
-					if (isMainHand)
-						status = AttackStatus.CRITICAL_DODGE;
-					else
-						status = AttackStatus.OFFHAND_CRITICAL_DODGE;
-					break;
-				default:
-					if (isMainHand)
-						status = AttackStatus.CRITICAL;
-					else
-						status = AttackStatus.OFFHAND_CRITICAL;
-					break;
-			}
+			status = switch (status) {
+				case BLOCK -> AttackStatus.CRITICAL_BLOCK;
+				case PARRY -> AttackStatus.CRITICAL_PARRY;
+				case DODGE -> AttackStatus.CRITICAL_DODGE;
+				default -> AttackStatus.CRITICAL;
+			};
 		}
 
-		return status;
+		return isMainHand ? status : AttackStatus.getOffHandStats(status);
 	}
 
 	/**

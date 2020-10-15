@@ -14,16 +14,20 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 public class DispelBuffCounterAtkEffect extends DamageEffect {
 
 	@XmlAttribute
-	protected int dpower;
+	private int dpower;
 	@XmlAttribute
-	protected int power;
+	private int power;
 	@XmlAttribute
-	protected int hitvalue;
+	private int hitvalue;
 	@XmlAttribute
-	protected int hitdelta;
+	private int hitdelta;
 	@XmlAttribute(name = "dispel_level")
-	protected int dispelLevel;
-	private int finalPower;
+	private int dispelLevel;
+
+	@Override
+	public int getCritProbMod2() {
+		return 0; // critProbMod2 is 100 by default but this effect type cannot crit
+	}
 
 	@Override
 	public void applyEffect(Effect effect) {
@@ -35,7 +39,7 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 	public void calculateDamage(Effect effect) {
 		Creature effected = effect.getEffected();
 		int count = calculateBaseValue(effect);
-		finalPower = power + dpower * effect.getSkillLevel();
+		int finalPower = power + dpower * effect.getSkillLevel();
 
 		int dispelledEffectCount = effected.getEffectController().calculateBuffsOrEffectorDebuffsToRemove(effect, count, dispelLevel, finalPower);
 		int valueWithDelta = dispelledEffectCount > 0 ? hitvalue + ((hitvalue / 2) * (dispelledEffectCount - 1)) + hitdelta * effect.getSkillLevel() : 0;

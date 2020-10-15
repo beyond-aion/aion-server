@@ -67,7 +67,7 @@ public class ShutdownHook extends Thread {
 					String shutdownMsg = this.exitCode == ExitCode.RESTART ? "restarting" : "shutting down";
 					log.info("Runtime is " + shutdownMsg + " in " + remainingSeconds + " seconds.");
 					PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_SERVER_SHUTDOWN(remainingSeconds.get()));
-					announceInterval = nextInterval(remainingSeconds.get(), 5, 30);
+					announceInterval = nextInterval(remainingSeconds.get(), 5, 60);
 				}
 
 				sleep(1000);
