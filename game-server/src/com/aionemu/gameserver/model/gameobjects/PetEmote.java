@@ -10,7 +10,7 @@ public enum PetEmote {
 	MOVE_STOP(0),
 	MOVE_POSITION_UPDATE(8), // TODO not totally sure, couldn't reproduce. sends current coords 
 	MOVETO(12),
-	NO_INTERACTION(128), // sometimes after miol status action, otherwise when player is in attack mode
+	NO_INTERACTION(128), // sometimes after pet status action, otherwise when player is in attack mode
 	FLY_START(129),
 	FLY_STOP(130),
 	FLY(131),
@@ -19,8 +19,9 @@ public enum PetEmote {
 	ATTACK_MODE_FEARFUL(141), // when player is in attack mode (some pets are of fearful nature)
 	ALARM(142),
 	ALARM_STOP_SHOUTING(144), // when starting to move while the pet is doing its shouting animation (siren will continue)
-	INIT_INTERACTION(145), // init miol status action
-	PERFORM_INTERACTION(146), // perform miol status action
+	INIT_INTERACTION(145), // init pet status action
+	PERFORM_INTERACTION(146), // perform pet status action
+	GET_MOOD_GIFT(147), // when player requests the present for the pet's full mood gauge
 	BUFF(148),
 	LOOT_START(149),
 	LOOT_STOP(150),
