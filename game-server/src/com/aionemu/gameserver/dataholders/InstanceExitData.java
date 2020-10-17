@@ -1,15 +1,9 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.portal.InstanceExit;
@@ -26,27 +20,25 @@ public class InstanceExitData {
 	protected List<InstanceExit> instanceExit;
 
 	@XmlTransient
-	protected List<InstanceExit> instanceExits = new ArrayList<>();
+	private final Map<Integer, List<InstanceExit>> instanceExitByWorldId = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
-		for (InstanceExit exit : instanceExit) {
-			instanceExits.add(exit);
-		}
-		instanceExit.clear();
+		instanceExit.forEach(exit -> instanceExitByWorldId.computeIfAbsent(exit.getInstanceId(), i -> new ArrayList<>()).add(exit));
 		instanceExit = null;
 	}
 
 	public InstanceExit getInstanceExit(int worldId, Race race) {
-		for (InstanceExit exit : instanceExits) {
-			if (exit.getInstanceId() == worldId && (race.equals(exit.getRace()) || exit.getRace().equals(Race.PC_ALL))) {
-				return exit;
-			}
-		}
+		List<InstanceExit> instanceExits = instanceExitByWorldId.getOrDefault(worldId, Collections.emptyList());
+		if (instanceExits.isEmpty())
+			return null;
+		for (InstanceExit instanceExit : instanceExits)
+			if (instanceExit.getRace() == Race.PC_ALL || instanceExit.getRace() == race)
+				return instanceExit;
 		return null;
 	}
 
 	public int size() {
-		return instanceExits.size();
+		return instanceExitByWorldId.values().stream().mapToInt(List::size).sum();
 	}
 
 }
