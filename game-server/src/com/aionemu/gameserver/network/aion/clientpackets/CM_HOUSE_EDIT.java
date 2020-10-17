@@ -88,11 +88,11 @@ public class CM_HOUSE_EDIT extends AionClientPacket {
 			DecorateAction decorateAction = template.getActions().getDecorateAction();
 			if (decorateAction != null) {
 				HouseDecoration decor = new HouseDecoration(IDFactory.getInstance().nextId(), decorateAction.getTemplateId());
-				house.getRegistry().putDecor(decor);
+				house.getRegistry().putDecor(decor, true);
 				sendPacket(new SM_HOUSE_EDIT(action, 2, decor.getObjectId()));
 			} else {
 				HouseObject<?> obj = HouseObjectFactory.createNew(house, template);
-				house.getRegistry().putObject(obj);
+				house.getRegistry().putObject(obj, true);
 				sendPacket(new SM_HOUSE_EDIT(action, 1, obj.getObjectId()));
 			}
 		} else if (action == 4) { // Delete item

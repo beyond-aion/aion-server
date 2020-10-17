@@ -71,9 +71,9 @@ public class MySQL5PlayerRegisteredItemsDAO extends PlayerRegisteredItemsDAO {
 				while (rset.next()) {
 					String area = rset.getString("area");
 					if ("DECOR".equals(area)) {
-						registry.putDecor(createDecoration(registry, rset));
+						registry.putDecor(createDecoration(registry, rset), false);
 					} else {
-						registry.putObject(constructObject(registry, rset));
+						registry.putObject(constructObject(registry, rset), false);
 					}
 				}
 				boolean hasInvalidDecors = registry.getDecors().stream().anyMatch(decor -> decor.getPersistentState() == PersistentState.DELETED);

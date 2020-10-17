@@ -58,11 +58,13 @@ public class HouseRegistry implements Persistable {
 		return objects.get(itemObjId);
 	}
 
-	public boolean putObject(HouseObject<?> houseObject) {
+	public boolean putObject(HouseObject<?> houseObject, boolean saveRegistry) {
 		if (objects.putIfAbsent(houseObject.getObjectId(), houseObject) != null)
 			return false;
 		if (houseObject.getPersistentState() != PersistentState.UPDATED) // state is UPDATED when reloading registry and spawned objects get reused
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
+		if (saveRegistry)
+			save();
 		return true;
 	}
 
@@ -87,11 +89,13 @@ public class HouseRegistry implements Persistable {
 		return decors.get(itemObjId);
 	}
 
-	public boolean putDecor(HouseDecoration decor) {
+	public boolean putDecor(HouseDecoration decor, boolean saveRegistry) {
 		if (decors.putIfAbsent(decor.getObjectId(), decor) != null)
 			return false;
 		if (decor.getPersistentState() != PersistentState.UPDATED)
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
+		if (saveRegistry)
+			save();
 		return true;
 	}
 
