@@ -1,7 +1,6 @@
 package ai.instance.tallocsHollow;
 
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
@@ -23,7 +22,6 @@ import ai.AggressiveNpcAI;
 @AIName("celestius")
 public class CelestiusAI extends AggressiveNpcAI {
 
-	private final AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> helpersTask;
 
 	public CelestiusAI(Npc owner) {
@@ -33,18 +31,20 @@ public class CelestiusAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (isHome.compareAndSet(true, false))
+		if (helpersTask == null)
 			startHelpersCall();
 	}
 
-	private void cancelHelpersTask() {
+	private synchronized void cancelHelpersTask() {
 		if (helpersTask != null && !helpersTask.isDone()) {
 			helpersTask.cancel(true);
 			helpersTask = null;
 		}
 	}
 
-	private void startHelpersCall() {
+	private synchronized void startHelpersCall() {
+		if (helpersTask != null)
+			return;
 		helpersTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			if (!isDead()) {
 				SkillEngine.getInstance().getSkill(getOwner(), 18981, 44, getOwner()).useNoAnimationSkill();
@@ -72,7 +72,6 @@ public class CelestiusAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		cancelHelpersTask();
 		deleteHelpers();
-		isHome.set(true);
 		super.handleBackHome();
 	}
 
