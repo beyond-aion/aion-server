@@ -10,6 +10,7 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -18,6 +19,8 @@ import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
+import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
@@ -202,5 +205,11 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 			default:
 				return super.ask(question);
 		}
+	}
+
+	@Override
+	public void modifyOwnerStat(Stat2 stat) {
+		if (stat.getStat() == StatEnum.MAXHP)
+			stat.setBaseRate(SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
 	}
 }
