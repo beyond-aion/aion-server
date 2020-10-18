@@ -10,6 +10,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITE
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemActionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * @author Estrayl
@@ -34,7 +35,10 @@ public class CM_TUNE_RESULT extends AionClientPacket {
 		Player player = getConnection().getActivePlayer();
 		Item itemToTune = player.getInventory().getItemByObjId(itemObjectId);
 		if (itemToTune != null) {
-			if (hasAccepted) {
+			boolean auditInvalidEvent = !hasAccepted && itemToTune.getPendingTuneResult() != null && itemToTune.getPendingTuneResult().isAttributeOnly();
+			if (hasAccepted || auditInvalidEvent) {
+				if (auditInvalidEvent)
+					AuditLogger.log(player, "tried to cancel a attribute re-identification which is not possible by default");
 				ItemActionService.applyTuneResult(player, itemToTune);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_REIDENTIFY_APPLY_YES(itemToTune.getL10n()));
 			} else {

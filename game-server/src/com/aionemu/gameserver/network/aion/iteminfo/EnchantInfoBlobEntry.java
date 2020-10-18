@@ -106,8 +106,7 @@ public class EnchantInfoBlobEntry extends ItemBlobEntry {
 	private static Map<Integer, ManaStone> createManastoneMap(Item item) {
 		if (item.hasManaStones())
 			return item.getItemStones().stream().collect(Collectors.toMap(ItemStone::getSlot, s -> s));
-		else
-			return Collections.emptyMap();
+		return Collections.emptyMap();
 	}
 
 	@Override

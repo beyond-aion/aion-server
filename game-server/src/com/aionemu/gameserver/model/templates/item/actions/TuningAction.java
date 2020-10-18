@@ -96,7 +96,7 @@ public class TuningAction extends AbstractItemAction {
 				newEnchantBonus = Rnd.get(0, targetItem.getItemTemplate().getMaxEnchantBonus());
 			}
 			newStatBonusId = getRandomStatBonusIdFor(targetItem);
-			PendingTuneResult result = new PendingTuneResult(newOptionalSockets, newEnchantBonus, newStatBonusId);
+			PendingTuneResult result = new PendingTuneResult(newOptionalSockets, newEnchantBonus, newStatBonusId, shouldNotReduceTuneCount);
 			targetItem.setPendingTuneResult(result);
 			PacketSendUtility.sendPacket(player, new SM_TUNE_RESULT(targetItem, tuningScrollItemId, result));
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_REIDENTIFY_SUCCEED(targetItem.getL10n()));
