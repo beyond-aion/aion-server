@@ -28,16 +28,12 @@ public class NightmareLordHeiramuneCloneAI extends AggressiveNpcAI {
 	}
 
 	private void heal() {
-		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				Npc boss = getPosition().getWorldMapInstance().getNpc(233467);
-				if (boss != null && !boss.isDead()) {
-					SkillEngine.getInstance().getSkill(getOwner(), 21342, 1, boss).useSkill();
-				} else
-					AIActions.deleteOwner(NightmareLordHeiramuneCloneAI.this);
-			}
+		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			Npc boss = getPosition().getWorldMapInstance().getNpc(233467);
+			if (boss != null && !boss.isDead()) {
+				SkillEngine.getInstance().getSkill(getOwner(), 21342, 1, boss).useSkill();
+			} else
+				AIActions.deleteOwner(NightmareLordHeiramuneCloneAI.this);
 		}, 5000, 10000);
 		getOwner().getController().addTask(TaskId.SKILL_USE, task);
 	}

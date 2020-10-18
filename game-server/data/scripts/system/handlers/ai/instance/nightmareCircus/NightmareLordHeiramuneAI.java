@@ -62,15 +62,11 @@ public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
 	}
 
 	private void startSpawnTask() {
-		spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead())
-					cancelTask();
-				else {
-					spawnHelpers();
-				}
+		spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (isDead())
+				cancelTask();
+			else {
+				spawnHelpers();
 			}
 		}, 0, 20000);
 	}

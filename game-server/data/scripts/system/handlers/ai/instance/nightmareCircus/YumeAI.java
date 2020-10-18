@@ -49,16 +49,12 @@ public class YumeAI extends GeneralNpcAI {
 	protected void handleCreatureMoved(Creature creature) {
 		if (creature instanceof Player p) {
 			if (isStart.compareAndSet(false, true)) {
-				skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-					@Override
-					public void run() {
-						if (p.getLifeStats().getHpPercentage() < 100) {
-							if (Rnd.nextBoolean()) {
-								PacketSendUtility.broadcastMessage(getOwner(), 1501126);
-							}
-							AIActions.useSkill(YumeAI.this, 21466);
+				skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+					if (p.getLifeStats().getHpPercentage() < 100) {
+						if (Rnd.nextBoolean()) {
+							PacketSendUtility.broadcastMessage(getOwner(), 1501126);
 						}
+						AIActions.useSkill(YumeAI.this, 21466);
 					}
 				}, 15000, 15000);
 			}

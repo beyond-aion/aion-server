@@ -32,14 +32,7 @@ public class SolidIronChainAI extends AggressiveNpcAI {
 	protected void handleDespawned() {
 		super.handleDespawned();
 		if (moviePlayed.compareAndSet(false, true)) {
-			getPosition().getWorldMapInstance().forEachPlayer(new Consumer<Player>() {
-
-				@Override
-				public void accept(Player p) {
-					PacketSendUtility.sendPacket(p, new SM_PLAY_MOVIE(0, 983));
-				}
-
-			});
+			getPosition().getWorldMapInstance().forEachPlayer(p -> PacketSendUtility.sendPacket(p, new SM_PLAY_MOVIE(0, 983)));
 		}
 	}
 

@@ -87,13 +87,7 @@ public class EnragedNightmareAI extends AggressiveNpcAI {
 				EmoteManager.emoteStopAttacking(getOwner());
 				SkillEngine.getInstance().getSkill(getOwner(), 21342, 1, boss).useSkill();
 				if (getOwner().getController().useSkill(21342)) {
-					skillTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							AIActions.deleteOwner(EnragedNightmareAI.this);
-						}
-					}, 3000);
+					skillTask = ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(EnragedNightmareAI.this), 3000);
 				}
 			}
 		}

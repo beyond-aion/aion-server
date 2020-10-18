@@ -48,28 +48,23 @@ public class CircusBoxesAI extends NpcAI {
 	}
 
 	private void spawnJester() {
-		spawnJesterTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					int count = Rnd.get(3, 5);
-					for (int i = 0; i < count; i++) {
-						switch (getOwner().getNpcId()) {
-							case 831348:
-								rndSpawn(233462);
-								break;
-							case 831349:
-								rndSpawn(233463);
-								break;
-							default:
-								return;
-						}
-						getOwner().getController().delete();
+		spawnJesterTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead()) {
+				int count = Rnd.get(3, 5);
+				for (int i = 0; i < count; i++) {
+					switch (getOwner().getNpcId()) {
+						case 831348:
+							rndSpawn(233462);
+							break;
+						case 831349:
+							rndSpawn(233463);
+							break;
+						default:
+							return;
 					}
+					getOwner().getController().delete();
 				}
 			}
-
 		}, 33000);
 	}
 
