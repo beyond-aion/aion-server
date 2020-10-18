@@ -21,7 +21,7 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>14</release>
+					<release>15</release>
 					<compilerArgs>
 						<arg>--enable-preview</arg>
 						<arg>-Xlint:all,-preview,-classfile</arg>
