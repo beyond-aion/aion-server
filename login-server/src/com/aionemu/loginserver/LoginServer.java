@@ -32,7 +32,6 @@ import com.aionemu.loginserver.dao.BannedMacDAO;
 import com.aionemu.loginserver.network.NetConnector;
 import com.aionemu.loginserver.network.ncrypt.KeyGen;
 import com.aionemu.loginserver.service.PlayerTransferService;
-import com.aionemu.loginserver.utils.ThreadPoolManager;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
@@ -124,11 +123,6 @@ public class LoginServer {
 		DatabaseFactory.init();
 		DAOManager.init();
 
-		ThreadPoolManager.getInstance();
-
-		/**
-		 * Initialize Key Generator
-		 */
 		try {
 			KeyGen.init();
 		} catch (Exception e) {
@@ -148,7 +142,7 @@ public class LoginServer {
 		VersionInfoUtil.printAllInfo(LoginServer.class);
 		SystemInfoUtil.printAllInfo();
 
-		NetConnector.getInstance().connect(ThreadPoolManager.getInstance());
+		NetConnector.connect();
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
 		log.info("Login Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 	}

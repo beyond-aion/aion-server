@@ -5,7 +5,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.loginserver.network.NetConnector;
-import com.aionemu.loginserver.utils.ThreadPoolManager;
+import com.aionemu.loginserver.service.PlayerTransferService;
 
 import ch.qos.logback.classic.LoggerContext;
 
@@ -55,17 +55,12 @@ public class Shutdown extends Thread {
 	@Override
 	public void run() {
 		try {
-			NetConnector.getInstance().shutdown();
+			NetConnector.shutdown();
 		} catch (Throwable t) {
 			log.error("Can't shutdown NetConnector", t);
 		}
 
-		/* Shuting down threadpools */
-		try {
-			ThreadPoolManager.getInstance().shutdown();
-		} catch (Throwable t) {
-			log.error("Can't shutdown ThreadPoolManager", t);
-		}
+		PlayerTransferService.getInstance().shutdown();
 
 		// shut down logger factory to flush all pending log messages
 		((LoggerContext) LoggerFactory.getILoggerFactory()).stop();

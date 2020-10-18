@@ -1,13 +1,14 @@
 package com.aionemu.loginserver;
 
 import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_PING;
-import com.aionemu.loginserver.utils.ThreadPoolManager;
 
 /**
  * @author KID, Neon
@@ -37,10 +38,10 @@ public class PingPongTask implements Runnable {
 		unrespondedPingCount.set(0);
 	}
 
-	public void start() {
+	public void start(ScheduledExecutorService scheduledExecutorService) {
 		if (task != null)
 			throw new UnsupportedOperationException("PingPongTask was already started");
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(this, 5000, 5000);
+		task = scheduledExecutorService.scheduleAtFixedRate(this, 5, 5, TimeUnit.SECONDS);
 	}
 
 	public void stop() {

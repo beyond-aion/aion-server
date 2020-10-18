@@ -6,6 +6,10 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Queue;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.ThreadPoolExecutor;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -15,7 +19,6 @@ import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.PingPongTask;
 import com.aionemu.loginserver.network.factories.GsPacketHandlerFactory;
-import com.aionemu.loginserver.utils.ThreadPoolManager;
 
 /**
  * Object representing connection between LoginServer and GameServer.
@@ -28,6 +31,12 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	 * Logger for this class.
 	 */
 	private static final Logger log = LoggerFactory.getLogger(GsConnection.class);
+	private static final ExecutorService PACKET_EXECUTOR = Executors.newCachedThreadPool();
+	private static final ScheduledExecutorService PINGPONG_EXECUTOR = Executors.newSingleThreadScheduledExecutor();
+
+	static {
+		((ThreadPoolExecutor) PACKET_EXECUTOR).setCorePoolSize(1);
+	}
 
 	/**
 	 * Possible states of GsConnection
@@ -87,7 +96,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 		GsClientPacket pck = GsPacketHandlerFactory.handle(data, this);
 
 		if (pck != null && pck.read())
-			ThreadPoolManager.getInstance().execute(pck);
+			PACKET_EXECUTOR.execute(pck);
 
 		return true;
 	}
@@ -123,8 +132,9 @@ public class GsConnection extends AConnection<GsServerPacket> {
 
 	@Override
 	protected final void onServerClose() {
-		// TODO mb some packet should be send to gameserver before closing?
-		close(/* packet */);
+		close();
+		PINGPONG_EXECUTOR.shutdown();
+		PACKET_EXECUTOR.shutdown();
 	}
 
 	/**
@@ -141,7 +151,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	public void setState(State state) {
 		this.state = state;
 		if (state == State.AUTHED) {
-			pingPongTask.start();
+			pingPongTask.start(PINGPONG_EXECUTOR);
 		}
 	}
 

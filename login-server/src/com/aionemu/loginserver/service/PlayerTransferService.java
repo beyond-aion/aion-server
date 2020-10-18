@@ -3,7 +3,9 @@ package com.aionemu.loginserver.service;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.Executors;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,15 +22,14 @@ import com.aionemu.loginserver.service.ptransfer.PlayerTransferRequest;
 import com.aionemu.loginserver.service.ptransfer.PlayerTransferResultStatus;
 import com.aionemu.loginserver.service.ptransfer.PlayerTransferStatus;
 import com.aionemu.loginserver.service.ptransfer.PlayerTransferTask;
-import com.aionemu.loginserver.utils.ThreadPoolManager;
 
 /**
  * @author KID
  */
 public class PlayerTransferService {
 
-	private static PlayerTransferService instance = new PlayerTransferService();
-	private final Logger log = LoggerFactory.getLogger(PlayerTransferService.class);
+	private static final Logger log = LoggerFactory.getLogger(PlayerTransferService.class);
+	private static final PlayerTransferService instance = new PlayerTransferService();
 
 	public static PlayerTransferService getInstance() {
 		return instance;
@@ -36,12 +37,10 @@ public class PlayerTransferService {
 
 	private Map<Integer, PlayerTransferRequest> transfers = new HashMap<>();
 	private Map<Integer, PlayerTransferTask> tasks = new HashMap<>();
-	private Future<?> verifyTask;
-	private PlayerTransferDAO dao;
+	private final Future<?> verifyTask;
 
 	private PlayerTransferService() {
-		verifyTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> verifyNewTasks(), 10000, 7 * 60000);
-		dao = DAOManager.getDAO(PlayerTransferDAO.class);
+		verifyTask = Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(this::verifyNewTasks, 10, 7 * 60, TimeUnit.SECONDS);
 		log.info("PlayerTransferService will be initialized in 10 sec.");
 	}
 
@@ -49,7 +48,7 @@ public class PlayerTransferService {
 	 * first init. getting values from sql
 	 */
 	protected void verifyNewTasks() {
-		List<PlayerTransferTask> tasksNew = dao.getNew();
+		List<PlayerTransferTask> tasksNew = DAOManager.getDAO(PlayerTransferDAO.class).getNew();
 		log.info("PlayerTransfer perform task init. " + tasks.size() + " new tasks.");
 		for (PlayerTransferTask task : tasksNew) {
 			GameServerInfo server = GameServerTable.getGameServerInfo(task.sourceServerId);
@@ -76,7 +75,7 @@ public class PlayerTransferService {
 
 			task.status = PlayerTransferTask.STATUS_ACTIVE;
 			tasks.put(task.id, task);
-			dao.update(task);
+			DAOManager.getDAO(PlayerTransferDAO.class).update(task);
 			server.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.PERFORM_ACTION, task));
 			log.info("performing player transfer #" + task.id);
 		}
@@ -149,7 +148,7 @@ public class PlayerTransferService {
 		PlayerTransferTask task = tasks.remove(taskId);
 		task.status = PlayerTransferTask.STATUS_ERROR;
 		task.comment = reason;
-		dao.update(task);
+		DAOManager.getDAO(PlayerTransferDAO.class).update(task);
 	}
 
 	/**
@@ -160,7 +159,7 @@ public class PlayerTransferService {
 		PlayerTransferTask task = tasks.remove(taskId);
 		task.status = PlayerTransferTask.STATUS_ERROR;
 		task.comment = reason;
-		dao.update(task);
+		DAOManager.getDAO(PlayerTransferDAO.class).update(task);
 		GameServerInfo targetServer = GameServerTable.getGameServerInfo(request.targetServerId);
 		if (targetServer == null || targetServer.getConnection() == null) {
 			log.error("Player transfer requests offline server! #" + request.targetServerId);
@@ -183,7 +182,7 @@ public class PlayerTransferService {
 		PlayerTransferTask task = tasks.remove(taskId);
 		task.status = PlayerTransferTask.STATUS_DONE;
 		task.comment = "task done";
-		dao.update(task);
+		DAOManager.getDAO(PlayerTransferDAO.class).update(task);
 		GameServerInfo sourceServer = GameServerTable.getGameServerInfo(request.serverId);
 		if (sourceServer == null || sourceServer.getConnection() == null) {
 			log.error("Player transfer requests offline server! #" + request.serverId);

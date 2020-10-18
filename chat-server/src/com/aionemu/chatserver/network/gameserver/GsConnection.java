@@ -6,7 +6,7 @@ import java.nio.channels.SocketChannel;
 import java.util.ArrayDeque;
 import java.util.Deque;
 import java.util.Queue;
-import java.util.concurrent.Executor;
+import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 import java.util.concurrent.ThreadPoolExecutor;
 
@@ -24,12 +24,12 @@ import com.aionemu.commons.network.Dispatcher;
 public class GsConnection extends AConnection<GsServerPacket> {
 
 	private static final Logger log = LoggerFactory.getLogger(GsConnection.class);
-	private static final Executor packetExecutor = Executors.newCachedThreadPool();
+	private static final ExecutorService PACKET_EXECUTOR = Executors.newCachedThreadPool();
 	private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<>();
 	private State state;
 
 	static {
-		((ThreadPoolExecutor) packetExecutor).setCorePoolSize(1);
+		((ThreadPoolExecutor) PACKET_EXECUTOR).setCorePoolSize(1);
 	}
 
 	public enum State {
@@ -50,7 +50,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	public boolean processData(ByteBuffer data) {
 		GsClientPacket pck = GsPacketHandlerFactory.handle(data, this);
 		if (pck != null && pck.read())
-			packetExecutor.execute(pck);
+			PACKET_EXECUTOR.execute(pck);
 		return true;
 	}
 
@@ -73,6 +73,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	@Override
 	protected final void onServerClose() {
 		close();
+		PACKET_EXECUTOR.shutdown();
 	}
 
 	public State getState() {
