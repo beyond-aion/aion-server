@@ -30,8 +30,8 @@ public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleSpawned() {
-		addPercent();
 		super.handleSpawned();
+		addPercent();
 	}
 
 	private void addPercent() {
@@ -63,9 +63,7 @@ public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
 
 	private void startSpawnTask() {
 		spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (isDead())
-				cancelTask();
-			else {
+			if (!isDead()) {
 				spawnHelpers();
 			}
 		}, 0, 20000);
@@ -79,17 +77,29 @@ public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDied() {
-		cancelTask();
-		percents.clear();
 		super.handleDied();
+		cancelTask();
+		despawnNpcs(233457, 233162);
+	}
+
+	@Override
+	protected void handleDespawned() {
+		super.handleDespawned();
+		cancelTask();
 	}
 
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
 		cancelTask();
-		percents.clear();
+		addPercent();
 		isHome.set(true);
+	}
+
+	private void despawnNpcs(int... npcIds) {
+		for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs(npcIds)) {
+			npc.getController().delete();
+		}
 	}
 
 	private void spawnHelpers() {

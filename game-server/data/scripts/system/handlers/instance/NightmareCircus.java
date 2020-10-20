@@ -58,7 +58,7 @@ public class NightmareCircus extends GeneralInstanceHandler {
 		if (movieId == 983) {
 			if (moviePlayed.compareAndSet(false, true)) {
 				sendMsg(831747, 1501114);
-				ThreadPoolManager.getInstance().schedule(() -> despawnNpc(getNpc(831747)), 3000);
+				ThreadPoolManager.getInstance().schedule(() -> despawnNpcs(831747), 3000);
 				spawnPhase();
 				startDespawnBossTask();
 			}
@@ -282,64 +282,36 @@ public class NightmareCircus extends GeneralInstanceHandler {
 	}
 
 	private void startDespawnBossTask() {
-		despawnTasks[0] = ThreadPoolManager.getInstance().schedule(() -> getNpc(233459).getController().deleteIfAliveOrCancelRespawn(), 210000);
-		despawnTasks[1] = ThreadPoolManager.getInstance().schedule(() -> getNpc(233453).getController().deleteIfAliveOrCancelRespawn(), 310000);
+		despawnTasks[0] = ThreadPoolManager.getInstance().schedule(() -> {
+			Npc npc = getNpc(233459);
+			if (npc != null)
+				npc.getController().deleteIfAliveOrCancelRespawn();
+		}, 210000);
+		despawnTasks[1] = ThreadPoolManager.getInstance().schedule(() -> {
+			Npc npc = getNpc(233453);
+			if (npc != null)
+				npc.getController().deleteIfAliveOrCancelRespawn();
+		}, 310000);
 	}
 
-	protected void despawnNpc(Npc npc) {
-		if (npc != null) {
+	private void despawnNpcs(int... npcIds) {
+		for (Npc npc : instance.getNpcs(npcIds)) {
 			npc.getController().delete();
 		}
-	}
-
-	private void despawnNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
-			npc.getController().delete();
-		}
-	}
-
-	private List<Npc> getNpcs(int npcId) {
-		if (!isInstanceDestroyed) {
-			return instance.getNpcs(npcId);
-		}
-		return Collections.emptyList();
 	}
 
 	@Override
 	public void onDie(Npc npc) {
-
 		switch (npc.getNpcId()) {
-			case 831348:
-			case 831349:
-				sendMsg(npc.getNpcId(), 1501144);
-				despawnNpc(npc);
-				break;
 			case 233450:
 			case 233455:
 			case 233462:
 			case 233463:
-				despawnNpc(npc);
-				break;
-			case 233459:
-				despawnNpcs(getNpcs(233456));
-				break;
-			case 233453:
-				despawnNpcs(getNpcs(233462));
-				despawnNpcs(getNpcs(233463));
-				despawnNpcs(getNpcs(831348));
-				despawnNpcs(getNpcs(831349));
+				npc.getController().delete();
 				break;
 			case 233467:
 				instance.forEachPlayer(p -> PacketSendUtility.sendPacket(p, new SM_PLAY_MOVIE(0, 984)));
-				despawnNpcs(getNpcs(233457));
-				despawnNpc(getNpc(233162));
-				despawnNpc(getNpc(831740));
-				despawnNpc(getNpc(831627));
-				despawnNpc(getNpc(831741));
-				despawnNpc(getNpc(831718));
-				despawnNpc(getNpc(831551));
-				despawnNpc(getNpc(831552));
-				despawnNpc(getNpc(831553));
+				despawnNpcs(831740, 831627, 831741, 831718, 831551, 831552, 831553);
 				// Open Cage
 				spawn(831598, 522.3982f, 564.6901f, 199.0337f, (byte) 60, 14);
 				// Yume

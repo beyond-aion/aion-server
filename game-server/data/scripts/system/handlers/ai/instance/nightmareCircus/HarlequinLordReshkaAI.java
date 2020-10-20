@@ -17,7 +17,7 @@ import ai.AggressiveNpcAI;
 @AIName("harlequinlordreshka")
 public class HarlequinLordReshkaAI extends AggressiveNpcAI {
 
-	private Future<?> openBoxesTask;
+	private Future<?>[] openBoxesTasks = new Future<?>[2];
 	private Future<?> spawnBoxesTask;
 
 	public HarlequinLordReshkaAI(Npc owner) {
@@ -36,11 +36,20 @@ public class HarlequinLordReshkaAI extends AggressiveNpcAI {
 	protected void handleDied() {
 		super.handleDied();
 		cancelTasks();
+		despawnNpcs(831348, 831349);
+	}
+
+	@Override
+	protected void handleDespawned() {
+		super.handleDespawned();
+		cancelTasks();
 	}
 
 	private void cancelTasks() {
-		if (openBoxesTask != null && !openBoxesTask.isDone()) {
-			openBoxesTask.cancel(true);
+		for (Future<?> openBoxesTask : openBoxesTasks) {
+			if (openBoxesTask != null && !openBoxesTask.isDone()) {
+				openBoxesTask.cancel(true);
+			}
 		}
 		if (spawnBoxesTask != null && !spawnBoxesTask.isDone()) {
 			spawnBoxesTask.cancel(true);
@@ -82,18 +91,24 @@ public class HarlequinLordReshkaAI extends AggressiveNpcAI {
 	}
 
 	private void openBoxes() {
-		openBoxesTask = ThreadPoolManager.getInstance().schedule(() -> {
+		openBoxesTasks[0] = ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead()) {
 				AIActions.useSkill(HarlequinLordReshkaAI.this, 21477);
 				PacketSendUtility.broadcastMessage(getOwner(), 1501146);
 			}
 		}, 30000);
-		openBoxesTask = ThreadPoolManager.getInstance().schedule(() -> {
+		openBoxesTasks[1] = ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead()) {
 				AIActions.useSkill(HarlequinLordReshkaAI.this, 21477);
 				PacketSendUtility.broadcastMessage(getOwner(), 1501147);
 				PacketSendUtility.broadcastMessage(getOwner(), Rnd.nextBoolean() ? 1501145 : 1501137, 2000);
 			}
 		}, 60000);
+	}
+
+	private void despawnNpcs(int... npcIds) {
+		for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs(npcIds)) {
+			npc.getController().delete();
+		}
 	}
 }

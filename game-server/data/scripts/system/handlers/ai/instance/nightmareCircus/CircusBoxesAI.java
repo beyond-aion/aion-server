@@ -24,21 +24,22 @@ public class CircusBoxesAI extends NpcAI {
 
 	@Override
 	protected void handleSpawned() {
-		spawnJester();
 		super.handleSpawned();
+		spawnJester();
 	}
 
 	@Override
 	protected void handleDespawned() {
-		cancelspawnJesterTask();
 		super.handleDespawned();
+		cancelspawnJesterTask();
+		despawnNpcs(233462, 233463);
 	}
 
 	@Override
 	protected void handleDied() {
+		super.handleDied();
 		PacketSendUtility.broadcastMessage(getOwner(), 1501144);
 		cancelspawnJesterTask();
-		super.handleDied();
 	}
 
 	private void cancelspawnJesterTask() {
@@ -50,6 +51,7 @@ public class CircusBoxesAI extends NpcAI {
 	private void spawnJester() {
 		spawnJesterTask = ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead()) {
+				getOwner().getController().delete();
 				int count = Rnd.get(3, 5);
 				for (int i = 0; i < count; i++) {
 					switch (getOwner().getNpcId()) {
@@ -62,7 +64,6 @@ public class CircusBoxesAI extends NpcAI {
 						default:
 							return;
 					}
-					getOwner().getController().delete();
 				}
 			}
 		}, 33000);
@@ -75,5 +76,11 @@ public class CircusBoxesAI extends NpcAI {
 		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
 		WorldPosition p = getPosition();
 		spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), (byte) 0);
+	}
+
+	private void despawnNpcs(int... npcIds) {
+		for (Npc npc : getOwner().getPosition().getWorldMapInstance().getNpcs(npcIds)) {
+			npc.getController().delete();
+		}
 	}
 }
