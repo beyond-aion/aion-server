@@ -16,6 +16,7 @@ public class PlaceableObjectController<T extends PlaceableHouseObject> extends V
 
 	@Override
 	public void onDespawn() {
+		super.onDespawn();
 		getOwner().onDespawn();
 	}
 

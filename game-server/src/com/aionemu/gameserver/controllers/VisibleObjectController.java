@@ -5,6 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * This class is for controlling VisibleObjects [players, npc's etc]. Its controlling movement, visibility etc.
@@ -84,6 +85,8 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	 * Called before object is placed into world
 	 */
 	public void onBeforeSpawn() {
+		if (getOwner().getSpawn() != null && getOwner().getSpawn().getStaticId() > 0)
+			GeoService.getInstance().spawnPlaceableObject(getOwner().getWorldId(), getOwner().getInstanceId(), getOwner().getSpawn().getStaticId());
 	}
 
 	/**
@@ -96,6 +99,8 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	 * Called before object despawns
 	 */
 	public void onDespawn() {
+		if (getOwner().getSpawn() != null && getOwner().getSpawn().getStaticId() > 0)
+			GeoService.getInstance().despawnPlaceableObject(getOwner().getWorldId(), getOwner().getInstanceId(), getOwner().getSpawn().getStaticId());
 	}
 
 	/**

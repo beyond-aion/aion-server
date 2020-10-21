@@ -561,6 +561,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	@Override
 	public void onDespawn() {
+		super.onDespawn();
 		if (actor != null) {
 			actor.abort();
 			getOwner().getObserveController().removeObserver(actor);

@@ -28,7 +28,6 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
-import com.aionemu.gameserver.world.geo.GeoService;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -39,9 +38,6 @@ import gnu.trove.map.hash.TIntObjectHashMap;
  */
 public class World {
 
-	/**
-	 * Logger for this class.
-	 */
 	private static final Logger log = LoggerFactory.getLogger(World.class);
 
 	/**
@@ -74,9 +70,6 @@ public class World {
 	 */
 	private final TIntObjectHashMap<WorldMap> worldMaps = new TIntObjectHashMap<>();
 
-	/**
-	 * Constructor.
-	 */
 	private World() {
 		DataManager.WORLD_MAPS_DATA.forEachParalllel(template -> {
 			WorldMap worldMap = new WorldMap(template);
@@ -92,11 +85,6 @@ public class World {
 		return SingletonHolder.instance;
 	}
 
-	/**
-	 * Store object in the world.
-	 * 
-	 * @param object
-	 */
 	public void storeObject(VisibleObject object) {
 		if (object.getPosition() == null) {
 			log.error("Tried to add {} with null position in world", object);
@@ -106,9 +94,8 @@ public class World {
 		if (oldObject != null)
 			throw new DuplicateAionObjectException(object, oldObject);
 
-		if (object instanceof Npc) {
-			if (object instanceof SiegeNpc) {
-				SiegeNpc siegeNpc = (SiegeNpc) object;
+		if (object instanceof Npc npc) {
+			if (object instanceof SiegeNpc siegeNpc) {
 				Collection<SiegeNpc> npcs = localSiegeNpcs.get(siegeNpc.getSiegeId());
 				if (npcs == null) {
 					synchronized (localSiegeNpcs) {
@@ -126,28 +113,28 @@ public class World {
 				npcs.add(siegeNpc);
 			}
 
-			if (object.getSpawn() instanceof BaseSpawnTemplate) {
-				BaseSpawnTemplate bst = (BaseSpawnTemplate) object.getSpawn();
-				int baseId = bst.getId();
+			if (object.getSpawn() instanceof BaseSpawnTemplate baseSpawnTemplate) {
+				int baseId = baseSpawnTemplate.getId();
 				if (!baseNpc.containsKey(baseId)) {
 					baseNpc.putIfAbsent(baseId, new CopyOnWriteArrayList<>());
 				}
-				baseNpc.get(baseId).add((Npc) object);
+				baseNpc.get(baseId).add(npc);
 			}
 
-			allNpcs.put(object.getObjectId(), (Npc) object);
-		} else if (object instanceof Player) {
-			allPlayers.add((Player) object);
+			allNpcs.put(object.getObjectId(), npc);
+		} else if (object instanceof Player player) {
+			allPlayers.add(player);
 		}
 	}
 
 	/**
 	 * Despawns (if spawned) and completely removes the object from the world.<br>
-	 * If the object returns true for autoReleaseObjectId(), it's objectId will be released from IDFactory once it gets garbage collected (see
-	 * {@link AionObject#finalize()}).
+	 * If the object was instantiated with {@code autoReleaseObjectId = true}, it's objectId will be released from IDFactory once it gets garbage
+	 * collected (see {@link AionObject#AionObject(int, boolean)}).
 	 * 
 	 * @return True if removed, false if the object wasn't in world
 	 */
+	@SuppressWarnings("SynchronizationOnLocalVariableOrMethodParameter")
 	public boolean removeObject(VisibleObject object) {
 		boolean removed = false;
 		synchronized (object) {
@@ -167,22 +154,21 @@ public class World {
 		}
 		if (removed) {
 			if (object instanceof Npc) {
-				if (object instanceof SiegeNpc) {
-					SiegeNpc siegeNpc = (SiegeNpc) object;
+				if (object instanceof SiegeNpc siegeNpc) {
 					Collection<SiegeNpc> locSpawn = localSiegeNpcs.get(siegeNpc.getSiegeId());
 					if (!GenericValidator.isBlankOrNull(locSpawn)) {
 						locSpawn.remove(siegeNpc);
 					}
 				}
 
-				if (object.getSpawn() instanceof BaseSpawnTemplate) {
-					int baseId = ((BaseSpawnTemplate) object.getSpawn()).getId();
+				if (object.getSpawn() instanceof BaseSpawnTemplate baseSpawnTemplate) {
+					int baseId = baseSpawnTemplate.getId();
 					baseNpc.get(baseId).remove(object);
 				}
 
 				allNpcs.remove(object.getObjectId());
-			} else if (object instanceof Player) {
-				allPlayers.remove((Player) object);
+			} else if (object instanceof Player player) {
+				allPlayers.remove(player);
 			}
 		}
 		return removed;
@@ -226,46 +212,21 @@ public class World {
 		return allObjects.get(objectId);
 	}
 
-	/**
-	 * Check whether object is in world
-	 * 
-	 * @param objectId
-	 * @return
-	 */
 	public boolean isInWorld(int objectId) {
 		return allObjects.containsKey(objectId);
 	}
 
-	/**
-	 * Return World Map by id
-	 * 
-	 * @param id
-	 * @return World map, null if it doesn't exist.
-	 */
 	public WorldMap getWorldMap(int id) {
 		return worldMaps.get(id);
 	}
 
 	/**
 	 * Update position of VisibleObject [used when object is moving on one map instance]. Check if active map region changed and do all needed updates.
-	 * 
-	 * @param object
-	 * @param newX
-	 * @param newY
-	 * @param newZ
-	 * @param newHeading
 	 */
 	public void updatePosition(VisibleObject object, float newX, float newY, float newZ, byte newHeading) {
 		updatePosition(object, newX, newY, newZ, newHeading, true);
 	}
 
-	/**
-	 * @param object
-	 * @param newX
-	 * @param newY
-	 * @param newZ
-	 * @param newHeading
-	 */
 	public void updatePosition(VisibleObject object, float newX, float newY, float newZ, byte newHeading, boolean updateKnownList) {
 		if (!object.isSpawned()) { // despawned objects should never move
 			log.warn("Can't update position of despawned object: {}", object, new Throwable());
@@ -275,8 +236,7 @@ public class World {
 		WorldPosition position = object.getPosition();
 		MapRegion oldRegion = position.getMapRegion();
 		if (oldRegion == null) {
-			if (object instanceof Player) {
-				Player player = (Player) object;
+			if (object instanceof Player player) {
 				if (!player.isStaff()) {
 					AuditLogger.log(player, "is outside valid regions: " + position);
 					// he will be sent to bind point in PlayerLeaveWorldService
@@ -292,10 +252,9 @@ public class World {
 		if (newRegion == null) {
 			log.warn("New MapRegion for {} doesn't exist at coordinates: Map {}, X {}, Y {}, Z {}", object, object.getWorldId(), newX, newY, newZ,
 				new Throwable());
-			if (object instanceof Creature)
-				((Creature) object).getMoveController().abortMove();
-			if (object instanceof Player) {
-				Player player = (Player) object;
+			if (object instanceof Creature creature)
+				creature.getMoveController().abortMove();
+			if (object instanceof Player player) {
 				float x, y, z;
 				int worldId;
 				byte h = 0;
@@ -322,9 +281,9 @@ public class World {
 		position.setXYZH(newX, newY, newZ, newHeading);
 
 		if (newRegion != oldRegion) {
-			if (object instanceof Creature) {
-				oldRegion.revalidateZones((Creature) object);
-				newRegion.revalidateZones((Creature) object);
+			if (object instanceof Creature creature) {
+				oldRegion.revalidateZones(creature);
+				newRegion.revalidateZones(creature);
 			}
 			oldRegion.remove(object);
 			newRegion.add(object);
@@ -364,17 +323,6 @@ public class World {
 		return true;
 	}
 
-	/**
-	 * Creates and return {@link WorldPosition} object, representing position with given parameters.
-	 * 
-	 * @param mapId
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param heading
-	 * @param instanceId
-	 * @return WorldPosition
-	 */
 	public WorldPosition createPosition(int mapId, float x, float y, float z, byte heading, int instanceId) {
 		WorldMap map = getWorldMap(mapId);
 		if (map == null)
@@ -390,17 +338,10 @@ public class World {
 
 	/**
 	 * Spawns the object at the current position (use setPosition). Object will be visible by others and will see other objects.
-	 * 
-	 * @param object
-	 * @throws AlreadySpawnedException
-	 *           when object is already spawned.
 	 */
 	public void spawn(VisibleObject object) throws AlreadySpawnedException {
 		if (object == null)
 			return;
-		if (object.getSpawn() != null && object.getSpawn().getStaticId() > 0) {
-			GeoService.getInstance().spawnPlaceableObject(object.getWorldId(), object.getInstanceId(), object.getSpawn().getStaticId());
-		}
 		WorldPosition position = object.getPosition();
 		if (position.isSpawned())
 			throw new AlreadySpawnedException(object);
@@ -425,17 +366,10 @@ public class World {
 	}
 
 	/**
-	 * Despawns the object, object will become invisible and object position will become invalid. All other objects will be noticed that this object
-	 * is no longer visible.
-	 * 
-	 * @throws NullPointerException
-	 *           if object is already despawned
+	 * Despawns the object, object will become invisible. All other objects will be noticed that this object is no longer visible.
 	 */
 	public void despawn(VisibleObject object, ObjectDeleteAnimation animation) {
 		WorldPosition position = object.getPosition();
-		if (object.getSpawn() != null && object.getSpawn().getStaticId() > 0) {
-			GeoService.getInstance().despawnPlaceableObject(object.getWorldId(), object.getInstanceId(), object.getSpawn().getStaticId());
-		}
 		try {
 			object.getController().onDespawn();
 		} finally {
@@ -444,8 +378,8 @@ public class World {
 			if (oldMapRegion != null) { // can be null if an instance gets deleted?
 				oldMapRegion.getParent().removeObject(object);
 				oldMapRegion.remove(object);
-				if (object instanceof Creature)
-					oldMapRegion.revalidateZones((Creature) object);
+				if (object instanceof Creature creature)
+					oldMapRegion.revalidateZones(creature);
 			}
 			object.clearKnownlist(animation);
 		}
