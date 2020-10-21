@@ -54,8 +54,8 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 		creatures.put(creature.getObjectId(), creature);
 		if (creature instanceof Player)
 			creature.getController().onEnterZone(this);
-		for (int i = 0; i < handlers.size(); i++)
-			handlers.get(i).onEnterZone(creature, this);
+		for (ZoneHandler handler : handlers)
+			handler.onEnterZone(creature, this);
 		return true;
 	}
 
@@ -64,18 +64,17 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 			return false;
 		creatures.remove(creature.getObjectId());
 		creature.getController().onLeaveZone(this);
-		for (int i = 0; i < handlers.size(); i++)
-			handlers.get(i).onLeaveZone(creature, this);
+		for (ZoneHandler handler : handlers)
+			handler.onLeaveZone(creature, this);
 		return true;
 	}
 
 	public boolean onDie(Creature attacker, Creature target) {
 		if (!creatures.containsKey(target.getObjectId()))
 			return false;
-		for (int i = 0; i < handlers.size(); i++) {
-			ZoneHandler handler = handlers.get(i);
-			if (handler instanceof AdvancedZoneHandler) {
-				if (((AdvancedZoneHandler) handler).onDie(attacker, target, this))
+		for (ZoneHandler handler : handlers) {
+			if (handler instanceof AdvancedZoneHandler advancedZoneHandler) {
+				if (advancedZoneHandler.onDie(attacker, target, this))
 					return true;
 			}
 		}
@@ -106,7 +105,7 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 	public boolean canFly() {
 		if (template.getZoneTemplate().getFlags() == -1 || template.getZoneTemplate().getFlags() == 0
 			|| World.getInstance().getWorldMap(mapId).hasOverridenOption(ZoneAttributes.FLY))
-			return World.getInstance().getWorldMap(mapId).isPossibleFly();
+			return World.getInstance().getWorldMap(mapId).isFlightAllowed();
 		return (template.getZoneTemplate().getFlags() & ZoneAttributes.FLY.getId()) != 0;
 	}
 

@@ -78,6 +78,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	private final Map<ZoneName, ZoneInstance> zones;
 	private WorldPosition startPos;
 	private final int maxPlayers;
+	private long lastPlayerLeaveTime;
 
 	public WorldMapInstance(WorldMap parent, int instanceId, int maxPlayers) {
 		this.parent = parent;
@@ -169,23 +170,21 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 				}
 			}
 		}
-		if (object instanceof Player) {
-			if (this.getParent().isPossibleFly())
-				((Player) object).setInsideZoneType(ZoneType.FLY);
-			worldMapPlayers.put(object.getObjectId(), (Player) object);
+		if (object instanceof Player player) {
+			if (getParent().isFlightAllowed())
+				player.setInsideZoneType(ZoneType.FLY);
+			worldMapPlayers.put(object.getObjectId(), player);
 		}
 	}
 
-	/**
-	 * @param object
-	 */
 	public void removeObject(AionObject object) {
 		worldMapObjects.remove(object.getObjectId());
-		if (object instanceof Player) {
-			if (this.getParent().isPossibleFly()) {
-				((Player) object).unsetInsideZoneType(ZoneType.FLY);
+		if (object instanceof Player player) {
+			lastPlayerLeaveTime = System.currentTimeMillis();
+			if (getParent().isFlightAllowed()) {
+				player.unsetInsideZoneType(ZoneType.FLY);
 				// necessary for fly maps like the abyss (they don't have FlyZones, so no FlyZoneInstance.onLeave() is called)
-				((Player) object).getController().onLeaveFlyArea();
+				player.getController().onLeaveFlyArea();
 			}
 			worldMapPlayers.remove(object.getObjectId());
 		} else if (object instanceof Npc) {
@@ -351,9 +350,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 
 	public boolean isInsideZone(VisibleObject object, ZoneName zoneName) {
 		ZoneInstance zoneTemplate = zones.get(zoneName);
-		if (zoneTemplate == null)
-			return false;
-		return isInsideZone(object.getPosition(), zoneName);
+		return zoneTemplate != null && isInsideZone(object.getPosition(), zoneName);
 	}
 
 	public boolean isInsideZone(WorldPosition pos, ZoneName zoneName) {
@@ -369,10 +366,14 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return maxPlayers > 0 && getPlayerCount() >= maxPlayers;
 	}
 
+	public long getLastPlayerLeaveTime() {
+		return lastPlayerLeaveTime;
+	}
+
 	public void setDoorState(int staticId, boolean open) {
 		for (VisibleObject v : worldMapObjects.values()) {
-			if (v instanceof StaticDoor && v.getSpawn().getStaticId() == staticId) {
-				((StaticDoor) v).setOpen(open);
+			if (v instanceof StaticDoor staticDoor && v.getSpawn().getStaticId() == staticId) {
+				staticDoor.setOpen(open);
 				return;
 			}
 		}

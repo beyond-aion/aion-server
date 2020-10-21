@@ -217,19 +217,17 @@ public class InstanceService {
 	private static class EmptyInstanceCheckerTask implements Runnable {
 
 		private final WorldMapInstance worldMapInstance;
-		private long instanceDestroyTime;
+		private final long taskStartTime;
 
 		private EmptyInstanceCheckerTask(WorldMapInstance worldMapInstance) {
 			this.worldMapInstance = worldMapInstance;
-			updateInstanceDestroyTime();
+			this.taskStartTime = System.currentTimeMillis();
 		}
 
 		private boolean canDestroyInstance() {
-			if (!worldMapInstance.getPlayersInside().isEmpty()) {
-				updateInstanceDestroyTime();
+			if (!worldMapInstance.getPlayersInside().isEmpty())
 				return false;
-			}
-			return worldMapInstance.isPersonal() || isRegisteredTeamDisbanded() || System.currentTimeMillis() > instanceDestroyTime - 1000;
+			return worldMapInstance.isPersonal() || isRegisteredTeamDisbanded() || System.currentTimeMillis() > calculateDestroyTime() - 1000;
 		}
 
 		private boolean isRegisteredTeamDisbanded() {
@@ -237,8 +235,9 @@ public class InstanceService {
 			return registeredTeam != null && registeredTeam.isDisbanded();
 		}
 
-		private void updateInstanceDestroyTime() {
-			instanceDestroyTime = System.currentTimeMillis() + getDestroyDelaySeconds(worldMapInstance) * 1000;
+		private long calculateDestroyTime() {
+			long lastActivity = Math.max(taskStartTime, worldMapInstance.getLastPlayerLeaveTime());
+			return lastActivity + getDestroyDelaySeconds(worldMapInstance) * 1000;
 		}
 
 		@Override
@@ -246,7 +245,6 @@ public class InstanceService {
 			if (canDestroyInstance())
 				destroyInstance(worldMapInstance);
 		}
-
 	}
 
 	public static void onLogOut(Player player) {
