@@ -76,31 +76,26 @@ public class HideEffect extends BufEffect {
 			AttackUtil.removeTargetFrom(effected, true);
 		}, 500);
 
+		effected.getController().onHide();
 		// for player adding: Remove Hide when using any item action . when requesting dialog to any npc . when being attacked . when attacking
 		if (effected instanceof Player) {
-			((Player) effected).getController().onHide();
 
 			// Remove Hide when use skill / item skill
 			ActionObserver observer = new ActionObserver(ObserverType.STARTSKILLCAST) {
 
-				private int buffNumber = 1;
+				private int buffNumber = 0;
 
 				@Override
 				public void startSkillCast(Skill skill) {
 					// TODO find better way
 					if (skill.getSkillMethod() == SkillMethod.ITEM) {
-						if (skill.getItemTemplate().isPotion() || skill.getSkillTemplate().getDuration() > 0) {
+						if (skill.getItemTemplate().isPotion() || skill.getSkillTemplate().getDuration() > 0)
 							effect.endEffect();
-						} else
-							return;
-					} else if (skill.getSkillTemplate().getEffects().hasAnyEffectType(EffectType.SHAPECHANGE)) {
-						effect.endEffect();
-					}
-
-					if (skill.isSelfBuff() && buffNumber++ < buffCount)
 						return;
-
-					effect.endEffect();
+					}
+					boolean isShapeChange = skill.getSkillTemplate().getEffects().hasAnyEffectType(EffectType.SHAPECHANGE);
+					if (isShapeChange || !skill.isSelfBuff() || ++buffNumber >= buffCount)
+						effect.endEffect();
 				}
 
 			};
