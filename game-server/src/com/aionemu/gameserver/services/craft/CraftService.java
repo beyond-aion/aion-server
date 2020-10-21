@@ -160,7 +160,7 @@ public class CraftService {
 			return false;
 		}
 
-		if (player.isInPlayerMode(PlayerMode.RIDE)) {
+		if (player.isInPlayerMode(PlayerMode.RIDE) || player.isInAnyHide()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_COMBINE_WHILE_IN_CURRENT_STANCE());
 			return false;
 		}
