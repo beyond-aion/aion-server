@@ -5,8 +5,6 @@ import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.Servant;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -41,19 +39,11 @@ public class TargetRelationProperty {
 				}
 				break;
 			case MYPARTY:
-				boolean skipCheck = source instanceof Npc && !(source instanceof Servant); // NPCs need some more advanced checks for such skills
 				for (Iterator<Creature> iter = targetsList.iterator(); iter.hasNext();) {
 					Creature target = iter.next();
 
-					if (!skipCheck && target instanceof Player) {
-						Player targetPlayer = (Player) target;
+					if (source.getMaster() instanceof Player sourcePlayer && target instanceof Player targetPlayer) {
 						if (isBuffAllowed(source, targetPlayer)) {
-							Player sourcePlayer;
-							if (source instanceof Servant) {
-								sourcePlayer = (Player) source.getMaster();
-							} else {
-								sourcePlayer = (Player) source;
-							}
 							if (targetPlayer.equals(sourcePlayer))
 								continue;
 							int teamId = sourcePlayer.getCurrentTeamId();
