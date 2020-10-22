@@ -20,15 +20,10 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class TalkEventHandler {
 
-	/**
-	 * @param npcAI
-	 * @param creature
-	 */
 	public static void onTalk(NpcAI npcAI, Creature creature) {
 		onSimpleTalk(npcAI, creature);
 
-		if (creature instanceof Player) {
-			Player player = (Player) creature;
+		if (creature instanceof Player player) {
 			if (QuestEngine.getInstance().onDialog(new QuestEnv(npcAI.getOwner(), player, 0, DialogAction.USE_OBJECT)))
 				return;
 			// only player villagers can use villager npcs in oriel/pernon
@@ -38,16 +33,12 @@ public class TalkEventHandler {
 					int currentTownId = TownService.getInstance().getTownIdByPosition(player);
 					if (playerTownId != currentTownId) {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcAI.getOwner().getObjectId(), 44));
-						return;
 					} else {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcAI.getOwner().getObjectId(), 10));
-						return;
 					}
+					return;
 				default:
-					int dialogPageId = 10;
-					if (DialogService.isSubDialogRestricted(player, npcAI.getOwner())) {
-						dialogPageId = 1011;
-					}
+					int dialogPageId = DialogService.isInteractionAllowed(player, npcAI.getOwner()) ? 10 : 1011;
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npcAI.getOwner().getObjectId(), dialogPageId));
 					break;
 			}
@@ -55,10 +46,6 @@ public class TalkEventHandler {
 
 	}
 
-	/**
-	 * @param npcAI
-	 * @param creature
-	 */
 	public static void onSimpleTalk(NpcAI npcAI, Creature creature) {
 		if (npcAI.getOwner().getObjectTemplate().isDialogNpc()) {
 			npcAI.setSubStateIfNot(AISubState.TALK);
@@ -66,10 +53,6 @@ public class TalkEventHandler {
 		}
 	}
 
-	/**
-	 * @param npcAI
-	 * @param creature
-	 */
 	public static void onFinishTalk(NpcAI npcAI, Creature creature) {
 		Npc owner = npcAI.getOwner();
 		if (owner.isTargeting(creature.getObjectId())) {
@@ -82,19 +65,6 @@ public class TalkEventHandler {
 						npcAI.think();
 				}, 750);
 			}
-		}
-	}
-
-	/**
-	 * No SM_LOOKATOBJECT broadcast
-	 * 
-	 * @param npcAI
-	 * @param creature
-	 */
-	public static void onSimpleFinishTalk(NpcAI npcAI, Creature creature) {
-		Npc owner = npcAI.getOwner();
-		if (owner.isTargeting(creature.getObjectId()) && npcAI.setSubStateIfNot(AISubState.NONE)) {
-			owner.setTarget(null);
 		}
 	}
 

@@ -101,16 +101,14 @@ public class CM_BUY_ITEM extends AionClientPacket {
 		if (target == null)
 			return;
 
-		if (target instanceof Player && tradeActionId == 0) {
-			Player targetPlayer = (Player) target;
+		if (target instanceof Player targetPlayer && tradeActionId == 0) {
 			PrivateStoreService.sellStoreItem(targetPlayer, player, tradeList);
-		} else if (target instanceof Npc) {
-			Npc npc = (Npc) target;
-			TradeListTemplate tradeTemplate = null;
-			if (DialogService.isSubDialogRestricted(player, npc)) {
+		} else if (target instanceof Npc npc) {
+			if (!DialogService.isInteractionAllowed(player, npc)) {
 				AuditLogger.log(player, "might be abusing CM_BUY_ITEM: no right trading with " + npc);
 				return;
 			}
+			TradeListTemplate tradeTemplate;
 			switch (tradeActionId) {
 				case 1: // sell to shop
 					if (npc.canBuy() || npc.canPurchase()) {

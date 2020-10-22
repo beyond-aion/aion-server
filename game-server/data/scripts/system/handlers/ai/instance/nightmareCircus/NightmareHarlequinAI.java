@@ -9,14 +9,13 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 import ai.GeneralNpcAI;
 
 /**
- * FIXME NPC should only be visible to the owner (implement enum SummonOwner)
- *
  * @author Ritsu
  */
 @AIName("nightmareharlequin")
@@ -28,10 +27,9 @@ public class NightmareHarlequinAI extends GeneralNpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		switch (getNpcId()) {
-			case 831757, 831758 -> super.handleDialogStart(player);
-			default -> PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
-		}
+		// without an deny dialog we have to refrain from sending dialogs if the player is not allowed to talk to the npc. maybe it's invisible on retail?
+		if (DialogService.isInteractionAllowed(player, getOwner()))
+			super.handleDialogStart(player);
 	}
 
 	@Override

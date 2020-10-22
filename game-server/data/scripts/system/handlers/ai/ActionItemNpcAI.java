@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
+import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -34,10 +35,11 @@ public class ActionItemNpcAI extends NpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		handleUseItemStart(player);
+		if (DialogService.isInteractionAllowed(player, getOwner()))
+			handleUseItemStart(player);
 	}
 
-	protected void handleUseItemStart(final Player player) {
+	protected void handleUseItemStart(Player player) {
 		final int talkDelayInMs = getTalkDelayInMs();
 		if (talkDelayInMs > 0) {
 			final ItemUseObserver observer = new ItemUseObserver() {
@@ -61,19 +63,14 @@ public class ActionItemNpcAI extends NpcAI {
 			}
 			PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), talkDelayInMs, startBarAnimation));
 			PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_QUESTLOOT, 0, getObjectId()), true);
-			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
-					PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), talkDelayInMs, cancelBarAnimation));
-					player.getObserveController().removeObserver(observer);
-					synchronized (observers) {
-						observers.remove(observer);
-					}
-					handleUseItemFinish(player);
+			player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(() -> {
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);
+				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), talkDelayInMs, cancelBarAnimation));
+				player.getObserveController().removeObserver(observer);
+				synchronized (observers) {
+					observers.remove(observer);
 				}
-
+				handleUseItemFinish(player);
 			}, talkDelayInMs));
 		} else {
 			handleUseItemFinish(player);

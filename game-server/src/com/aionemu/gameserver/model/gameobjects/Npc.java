@@ -23,6 +23,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
 import com.aionemu.gameserver.services.TribeRelationService;
+import com.aionemu.gameserver.skillengine.effect.SummonOwner;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
 import com.aionemu.gameserver.spawnengine.WalkerGroupShift;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -47,6 +48,7 @@ public class Npc extends Creature {
 	private CreatureType type = null;
 	private ItemAttackType attacktype = ItemAttackType.PHYSICAL;
 	private NpcEquippedGear overridenEquipment;
+	private SummonOwner summonOwner = null;
 
 	public Npc(NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
 		super(IDFactory.getInstance().nextId(), controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()), true);
@@ -372,5 +374,13 @@ public class Npc extends Creature {
 		if (overridenEquipment != null)
 			return overridenEquipment;
 		return getObjectTemplate().getEquipment();
+	}
+
+	public void setSummonOwner(SummonOwner summonOwner) {
+		this.summonOwner = summonOwner;
+	}
+
+	public SummonOwner getSummonOwner() {
+		return summonOwner;
 	}
 }

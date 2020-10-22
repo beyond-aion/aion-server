@@ -222,7 +222,8 @@ public class VisibleObjectSpawner {
 		Npc functionalNpc = new Npc(new NpcController(), spawn, template);
 		functionalNpc.setKnownlist(new PlayerAwareKnownList(functionalNpc));
 		functionalNpc.setEffectController(new EffectController(functionalNpc));
-		functionalNpc.getAi().onCustomEvent(1, owner, summonOwner);
+		functionalNpc.setCreatorId(owner.getObjectId());
+		functionalNpc.setSummonOwner(summonOwner);
 		SpawnEngine.bringIntoWorld(functionalNpc, spawn, owner.getInstanceId());
 		return functionalNpc;
 	}

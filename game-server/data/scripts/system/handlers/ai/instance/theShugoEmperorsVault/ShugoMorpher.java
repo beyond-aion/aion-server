@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
+import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -38,7 +39,7 @@ public class ShugoMorpher extends GeneralNpcAI {
 	}
 
 	protected void handleDialogStart(Player player) {
-		if (started.compareAndSet(false, true)) {
+		if (DialogService.isInteractionAllowed(player, getOwner()) && started.compareAndSet(false, true)) {
 			final int delay = 1000;
 			final ItemUseObserver obs = new ItemUseObserver() {
 

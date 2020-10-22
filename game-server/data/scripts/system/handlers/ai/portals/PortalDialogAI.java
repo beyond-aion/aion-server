@@ -98,7 +98,7 @@ public class PortalDialogAI extends PortalAI {
 	}
 
 	protected void checkDialog(Player player) {
-		if (DialogService.isSubDialogRestricted(player, getOwner())) {
+		if (!DialogService.isInteractionAllowed(player, getOwner())) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 			return;
 		}
@@ -117,7 +117,6 @@ public class PortalDialogAI extends PortalAI {
 				} else if (qs == null || qs.isStartable()) {
 					if (QuestService.checkStartConditions(player, questId, false)) {
 						playerCanStartQuest = true;
-						continue;
 					}
 				}
 			}
