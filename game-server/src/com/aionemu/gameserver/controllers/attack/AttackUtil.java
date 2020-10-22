@@ -377,7 +377,7 @@ public class AttackUtil {
 			damage = effector.getAi().modifyOwnerDamage(damage, effected, effect);
 		}
 
-		if (effect.getSkill().getEffectedList().size() > 1 && template instanceof DamageEffect damageEffect && damageEffect.isShared())
+		if (effect.getSkill() != null && effect.getSkill().getEffectedList().size() > 1 && template instanceof DamageEffect damageEffect && damageEffect.isShared())
 			damage /= effect.getSkill().getEffectedList().size();
 
 		if (damage < 0)
