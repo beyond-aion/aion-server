@@ -34,7 +34,7 @@ public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
 		addPercent();
 	}
 
-	private void addPercent() {
+	private synchronized void addPercent() {
 		percents.clear();
 		Collections.addAll(percents, 80, 50);
 	}
