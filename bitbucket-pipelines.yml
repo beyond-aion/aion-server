@@ -1,4 +1,4 @@
-image: maven:3.6.3
+image: maven:3.6.3-openjdk-15
 
 clone:
   depth: 1 # shallow git clone, since we don't need all the history
