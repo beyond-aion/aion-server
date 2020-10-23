@@ -12,11 +12,9 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -67,17 +65,11 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 	}
 
 	private void startFireStormTask() {
-		fireStormTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead())
-					cancelFireStorm();
-				else {
-					startFireStormEvent();
-				}
-			}
-
+		fireStormTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (isDead())
+				cancelFireStorm();
+			else
+				startFireStormEvent();
 		}, 10000, 20000);
 	}
 
@@ -201,21 +193,8 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 	}
 
 	private void rndSpawn(int npcId, int count) {
-		for (int i = 0; i < count; i++) {
-			WorldMapInstance instance = getPosition().getWorldMapInstance();
-			if (instance != null) {
-				SpawnTemplate template = rndSpawnInRange(npcId, 10);
-				SpawnEngine.spawnObject(template, getPosition().getInstanceId());
-			}
-		}
-	}
-
-	private SpawnTemplate rndSpawnInRange(int npcId, int dist) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x1 = (float) (Math.cos(Math.PI * direction) * dist);
-		float y1 = (float) (Math.sin(Math.PI * direction) * dist);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(),
-			getPosition().getHeading());
+		for (int i = 0; i < count; i++)
+			rndSpawnInRange(npcId, 10);
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {
@@ -228,7 +207,7 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[] { 96, 75, 60, 55, 40, 25, 20, 10, 7 });
+		Collections.addAll(percents, 96, 75, 60, 55, 40, 25, 20, 10, 7);
 	}
 
 	@Override

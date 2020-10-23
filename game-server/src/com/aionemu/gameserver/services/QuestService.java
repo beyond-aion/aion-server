@@ -10,8 +10,6 @@ import java.util.*;
 import java.util.concurrent.Future;
 import java.util.stream.Collectors;
 
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.world.geo.GeoService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -27,7 +25,6 @@ import com.aionemu.gameserver.model.drop.Drop;
 import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.DropNpc;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.QuestStateList;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
@@ -40,7 +37,6 @@ import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.quest.*;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOT_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
@@ -58,7 +54,6 @@ import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.reward.BonusService;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -680,48 +675,6 @@ public final class QuestService {
 		return -1;
 	}
 
-	public static VisibleObject spawnQuestNpc(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading, int staticId) {
-		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(worldId, templateId, x, y, z, heading);
-		template.setStaticId(staticId);
-		return SpawnEngine.spawnObject(template, instanceId);
-	}
-
-	public static VisibleObject spawnQuestNpc(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading) {
-		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(worldId, templateId, x, y, z, heading);
-		return SpawnEngine.spawnObject(template, instanceId);
-	}
-
-	public static void addNewSpawnInFront(int worldId, int instanceId, int templateId, Creature creature, float distance) {
-		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(creature.getHeading()));
-		float x = creature.getX() + (float) (Math.cos(radian) * distance);
-		float y = creature.getY() + (float) (Math.sin(radian) * distance);
-		float z = creature.getZ();
-		float geoZ = GeoService.getInstance().getZ(worldId, x, y, creature.getZ() + 2, creature.getZ() - 1, instanceId);
-		if (!Float.isNaN(geoZ)) {
-			z = geoZ;
-		}
-		addNewSpawn(worldId,instanceId,templateId,x, y, z,creature.getHeading());
-	}
-
-	public static void addNewSpawn(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading) {
-		addNewSpawn(worldId, instanceId, templateId, x, y, z, heading, 5);
-	}
-
-	public static void addNewSpawn(int worldId, int instanceId, int templateId, float x, float y, float z, byte heading, int timeInMin) {
-		final Npc npc = (Npc) spawnQuestNpc(worldId, instanceId, templateId, x, y, z, heading);
-		if (timeInMin > 0 && !npc.isInInstance()) {
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					if (!npc.isDead())
-						npc.getController().delete();
-				}
-
-			}, 60000 * timeInMin);
-		}
-	}
-
 	public static int getQuestDrop(Set<DropItem> dropItems, int index, Npc npc, Collection<Player> players, Player player) {
 		Collection<QuestDrop> drops = getQuestDrop(npc.getNpcId());
 		if (drops.isEmpty()) {
@@ -840,23 +793,12 @@ public final class QuestService {
 			}
 
 			PlayerGroup group = player.getPlayerGroup();
-			boolean found = false;
-			for (Player member : group.getMembers()) {
-				if (member.isMentor() && PositionUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE) {
-					found = true;
-					break;
-				}
-			}
-			if (!found) {
+			if (group.getMembers().stream().noneMatch(member -> member.isMentor() && PositionUtil.isInRange(player, member, GroupConfig.GROUP_MAX_DISTANCE))) {
 				return false;
 			}
 		}
-		if (drop instanceof HandlerSideDrop) {
-			if (((HandlerSideDrop) drop).getNeededAmount() <= player.getInventory().getItemCountByItemId(drop.getItemId())) {
-				return false;
-			} else {
-				return true;
-			}
+		if (drop instanceof HandlerSideDrop handlerSideDrop) {
+			return handlerSideDrop.getNeededAmount() > player.getInventory().getItemCountByItemId(drop.getItemId());
 		}
 
 		CollectItems collectItems = DataManager.QUEST_DATA.getQuestById(questId).getCollectItems();

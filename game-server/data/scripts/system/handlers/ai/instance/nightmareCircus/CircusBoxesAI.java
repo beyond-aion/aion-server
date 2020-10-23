@@ -8,7 +8,6 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * @author Ritsu
@@ -56,10 +55,10 @@ public class CircusBoxesAI extends NpcAI {
 				for (int i = 0; i < count; i++) {
 					switch (getOwner().getNpcId()) {
 						case 831348:
-							rndSpawn(233462);
+							rndSpawnInRange(233462, 3, 8);
 							break;
 						case 831349:
-							rndSpawn(233463);
+							rndSpawnInRange(233463, 3, 8);
 							break;
 						default:
 							return;
@@ -67,15 +66,6 @@ public class CircusBoxesAI extends NpcAI {
 				}
 			}
 		}, 33000);
-	}
-
-	private void rndSpawn(int npcId) {
-		float direction = Rnd.get(0, 180) / 100f;
-		int distance = Rnd.get(3, 8);
-		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
-		WorldPosition p = getPosition();
-		spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), (byte) 0);
 	}
 
 	private void despawnNpcs(int... npcIds) {

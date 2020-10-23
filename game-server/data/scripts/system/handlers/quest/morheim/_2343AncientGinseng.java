@@ -3,7 +3,6 @@ package quest.morheim;
 import static com.aionemu.gameserver.model.DialogAction.QUEST_ACCEPT_1;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -44,9 +43,7 @@ public class _2343AncientGinseng extends AbstractQuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700243) {
-				Npc npc = player.getPosition().getWorldMapInstance().getNpc(212814);
-				if (npc == null)
-					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 212814, 1008.36f, 481.88f, 509.3f, (byte) 60);
+				spawnForFiveMinutes(212814, player.getWorldMapInstance(), 1008.36f, 481.88f, 509.3f, (byte) 60);
 				removeQuestItem(env, 182204134, 1);
 				qs.setStatus(QuestStatus.REWARD);
 				QuestService.finishQuest(env);

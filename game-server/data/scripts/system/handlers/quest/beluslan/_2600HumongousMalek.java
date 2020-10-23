@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -79,7 +78,7 @@ public class _2600HumongousMalek extends AbstractQuestHandler {
 					if (var == 1) {
 						if (player.getInventory().getItemCountByItemId(182204528) == 1) {
 							removeQuestItem(env, 182204528, 1);
-							QuestService.addNewSpawn(220040000, player.getInstanceId(), 215383, (float) 1140.78, (float) 432.85, (float) 341.0825, (byte) 0);
+							spawnForFiveMinutes(215383, player.getWorldMapInstance(), (float) 1140.78, (float) 432.85, (float) 341.0825, (byte) 0);
 							return true;
 						}
 					}

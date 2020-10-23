@@ -12,7 +12,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -129,8 +128,7 @@ public class _2620SummoningPhagrasul extends AbstractQuestHandler {
 										return;
 									PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), targetObjectId, 3000, 0));
 									PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_LOOT, 0, targetObjectId), true);
-									QuestService.addNewSpawn(220040000, player.getInstanceId(), 204824, (float) 2851.698, (float) 160.88698, (float) 301.78537,
-										(byte) 93);
+									spawnForFiveMinutes(204824, player.getWorldMapInstance(), (float) 2851.698, (float) 160.88698, (float) 301.78537, (byte) 93);
 								}
 							}, 3000);
 						}

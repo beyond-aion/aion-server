@@ -2,13 +2,11 @@ package quest.enshar;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -122,10 +120,7 @@ public class _20501WhattheRuinsSay extends AbstractQuestHandler {
 						return sendQuestDialog(env, 3057);
 					if (dialogActionId == SET_SUCCEED) {
 						// Beritra Special Assassin [ID: 219935] is spawned
-						Npc npc = (Npc) env.getVisibleObject();
-						if (npc != null)
-							QuestService.addNewSpawn(220080000, player.getInstanceId(), 219935, npc.getPosition().getX(), npc.getPosition().getY(),
-								npc.getPosition().getZ(), npc.getPosition().getHeading());
+						spawnForFiveMinutes(219935, env.getVisibleObject().getPosition());
 						qs.setQuestVar(var + 1);
 						qs.setStatus(QuestStatus.REWARD);
 						updateQuestStatus(env);

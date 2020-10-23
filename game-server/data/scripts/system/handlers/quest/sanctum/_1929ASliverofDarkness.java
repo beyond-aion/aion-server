@@ -13,7 +13,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -165,7 +164,7 @@ public class _1929ASliverofDarkness extends AbstractQuestHandler {
 							if (var == 96) {
 								Npc npc = (Npc) env.getVisibleObject();
 								npc.getController().delete();
-								QuestService.addNewSpawn(310070000, player.getInstanceId(), 212992, (float) 191.9, (float) 267.68, 1374, (byte) 0);
+								spawnForFiveMinutes(212992, player.getWorldMapInstance(), (float) 191.9, (float) 267.68, 1374, (byte) 0);
 								changeQuestStep(env, 96, 97); // 97
 								return closeDialogWindow(env);
 							}
@@ -198,7 +197,7 @@ public class _1929ASliverofDarkness extends AbstractQuestHandler {
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		final Player player = env.getPlayer();
 		if (movieId == 155) {
-			QuestService.addNewSpawn(310070000, player.getInstanceId(), 205111, (float) 197.6, (float) 265.9, (float) 1374.0, (byte) 0);
+			spawnForFiveMinutes(205111, player.getWorldMapInstance(), (float) 197.6, (float) 265.9, (float) 1374.0, (byte) 0);
 			changeQuestStep(env, 94, 98); // 98
 			return true;
 		}

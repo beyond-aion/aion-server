@@ -72,8 +72,7 @@ public class _30222AGuardsCurse extends AbstractQuestHandler {
 			switch (targetId) {
 				// case 216739: { // Warrior Monument
 				// Npc npc = (Npc) env.getVisibleObject();
-				// QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 216239, npc.getX(), npc.getY(),
-				// npc.getZ(), npc.getHeading());
+				// spawn(216239, player, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				// return true;
 				// }
 				case 216239: // Ahbana the Wicked

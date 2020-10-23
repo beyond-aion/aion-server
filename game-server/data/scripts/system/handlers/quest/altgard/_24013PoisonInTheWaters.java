@@ -9,9 +9,7 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -86,18 +84,12 @@ public class _24013PoisonInTheWaters extends AbstractQuestHandler {
 		if (player.isInsideZone(ZoneName.get("DF1A_ITEMUSEAREA_Q2016_220030000"))) {
 
 			// Spawns 2 Feral Black Claw Sharpeye [ID: 210457] far from the player
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					Player player = env.getPlayer();
-					WorldPosition playerPosition = player.getPosition();
-					float playerX = playerPosition.getX();
-					float playerY = playerPosition.getY();
-					float playerZ = playerPosition.getZ();
-					QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 210457, playerX + 13.0f, playerY - 3.0f, playerZ, (byte) 60); // Right
-					QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 210457, playerX + 13.0f, playerY + 3.0f, playerZ, (byte) 60); // Left
-				}
+			ThreadPoolManager.getInstance().schedule(() -> {
+				float playerX = env.getPlayer().getX();
+				float playerY = env.getPlayer().getY();
+				float playerZ = env.getPlayer().getZ();
+				spawn(210457, player, playerX + 13.0f, playerY - 3.0f, playerZ, (byte) 60); // Right
+				spawn(210457, player, playerX + 13.0f, playerY + 3.0f, playerZ, (byte) 60); // Left
 			}, 3000);
 
 			return HandlerResult.fromBoolean(useQuestItem(env, item, 2, 3, false)); // 3

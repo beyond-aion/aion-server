@@ -17,7 +17,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.questEngine.task.QuestTasks;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -63,8 +62,7 @@ public class _2394ADyingWish extends AbstractQuestHandler {
 				if (dialogActionId == QUEST_SELECT) {
 					return sendQuestDialog(env, 1011);
 				} else if (dialogActionId == SETPRO1) {
-					Npc orlan = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 790021, player.getX(), player.getY(),
-						player.getZ(), (byte) 8);
+					Npc orlan = (Npc) spawnInFrontOf(790021, player);
 					WalkManager.startWalking((NpcAI) orlan.getAi());
 					orlan.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 					PacketSendUtility.broadcastPacket(orlan, new SM_EMOTION(orlan, EmotionType.START_EMOTE2, 0, orlan.getObjectId()));

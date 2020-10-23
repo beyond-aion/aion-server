@@ -16,7 +16,6 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -92,8 +91,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 		seaOfFireSpawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			int smashCount = (npcId - 283007) * 5 + 1; // 15, 20, 25
 			for (int i = 2; i < smashCount; i++) {
-				Point3D p = getRndPos();
-				spawn(i % 2 == 0 ? 283008 : 283009, p.getX(), p.getY(), p.getZ(), (byte) 0);
+				rndSpawnInRange(i % 2 == 0 ? 283008 : 283009, 0, 29);
 			}
 		}, 750, 7100);
 	}
@@ -166,14 +164,6 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 			SkillEngine.getInstance().getSkill(getOwner(), 20533, 1, getOwner()).useSkill(); // off (skill name)
 		}
 		return super.isDestinationReached();
-	}
-
-	private Point3D getRndPos() {
-		double radian = Math.toRadians(Rnd.get(1, 360));
-		float distance = Rnd.get() * 29f;
-		float x1 = (float) (Math.cos(Math.PI * radian) * distance);
-		float y1 = (float) (Math.sin(Math.PI * radian) * distance);
-		return new Point3D(getOwner().getSpawn().getX() + x1, getOwner().getSpawn().getY() + y1, getOwner().getSpawn().getZ());
 	}
 
 	private void clearSpawns() {

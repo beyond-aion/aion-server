@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
@@ -79,11 +78,10 @@ public class _24016AStrangeNewThread extends AbstractQuestHandler {
 					if (var == 2) {
 						if (dialogActionId == USE_OBJECT) {
 							if (player.getPlayerClass() == PlayerClass.RIDER) { // Spawn for Rider
-								QuestService.addNewSpawn(320030000, player.getInstanceId(), 233876, (float) 260.12, (float) 234.93, (float) 216.00, (byte) 90); // Officer
-																																																																								// Tavasha
+								spawn(233876, player, 260.12f, 234.93f, 216.00f, (byte) 90); // Officer Tavasha
 								return useQuestObject(env, 2, 3, false, false); // 3
 							} else { // Spawn for other classes
-								QuestService.addNewSpawn(320030000, player.getInstanceId(), 210753, (float) 260.12, (float) 234.93, (float) 216.00, (byte) 90); // Kuninasha
+								spawn(210753, player, 260.12f, 234.93f, 216.00f, (byte) 90); // Kuninasha
 								return useQuestObject(env, 2, 13, false, false); // 13
 							}
 						}

@@ -57,15 +57,13 @@ public class _47110AGlobeTrottingLesson extends AbstractQuestHandler {
 			if (targetId == 700971) {
 				if (player.isInGroup()) {
 					PlayerGroup group = player.getPlayerGroup();
-					for (Player member : group.getMembers()) {
-						if (player.isMentor() && PositionUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE) {
-							Npc npc = (Npc) env.getVisibleObject();
-							NpcActions.delete(npc, true);
-							QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 217174, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
-							return true;
-						} else
-							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee());
+					if (group.getMembers().stream().anyMatch(member -> member.isMentor() && PositionUtil.isInRange(player, member, GroupConfig.GROUP_MAX_DISTANCE))) {
+						Npc npc = (Npc) env.getVisibleObject();
+						NpcActions.delete(npc, true);
+						spawnForFiveMinutes(217174, npc.getPosition());
+						return true;
 					}
+					PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentee());
 				}
 			}
 			if (targetId == 799921) {

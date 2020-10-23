@@ -2,13 +2,11 @@ package ai.worlds;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.WorldPosition;
 
 import ai.OneDmgAI;
 
@@ -64,34 +62,26 @@ public class AgrintAI extends OneDmgAI {
 					case 218852:
 					case 218853:
 						npcId = getNpcId() + 320;
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
+						rndSpawnInRange(npcId, 1, 2);
+						rndSpawnInRange(npcId, 1, 2);
+						rndSpawnInRange(npcId, 1, 2);
+						rndSpawnInRange(npcId, 1, 2);
+						rndSpawnInRange(npcId, 1, 2);
 						break;
 					case 218862:
 					case 218863:
 					case 218864:
 					case 218865:
 						npcId = getNpcId() + 308;
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
-						rndSpawnInRange(npcId, Rnd.get(1, 2));
+						rndSpawnInRange(npcId, 1, 2);
+						rndSpawnInRange(npcId, 1, 2);
+						rndSpawnInRange(npcId, 1, 2);
+						rndSpawnInRange(npcId, 1, 2);
+						rndSpawnInRange(npcId, 1, 2);
 						break;
 				}
 			}
 		}
-	}
-
-	private Npc rndSpawnInRange(int npcId, float distance) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
-		WorldPosition p = getPosition();
-		return (Npc) spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), (byte) 0);
 	}
 
 	@Override
@@ -101,12 +91,12 @@ public class AgrintAI extends OneDmgAI {
 	}
 
 	private void spawnChests(int npcId) {
-		rndSpawnInRange(npcId, Rnd.get(1, 6));
-		rndSpawnInRange(npcId, Rnd.get(1, 6));
-		rndSpawnInRange(npcId, Rnd.get(1, 6));
-		rndSpawnInRange(npcId, Rnd.get(1, 6));
-		rndSpawnInRange(npcId, Rnd.get(1, 6));
-		rndSpawnInRange(npcId, Rnd.get(1, 6));
+		rndSpawnInRange(npcId, 1, 6);
+		rndSpawnInRange(npcId, 1, 6);
+		rndSpawnInRange(npcId, 1, 6);
+		rndSpawnInRange(npcId, 1, 6);
+		rndSpawnInRange(npcId, 1, 6);
+		rndSpawnInRange(npcId, 1, 6);
 	}
 
 	@Override

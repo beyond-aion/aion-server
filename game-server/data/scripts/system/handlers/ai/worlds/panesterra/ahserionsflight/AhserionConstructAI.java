@@ -90,24 +90,12 @@ public class AhserionConstructAI extends NpcAI {
 			|| !AhserionRaid.getInstance().isStarted() || getOwner().getTribe() == TribeClass.GAB1_SUB_NONAGGRESSIVE_DRAKAN) {
 			return;
 		}
-		attackSchedule = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				switch (getOwner().getSpawn().getStaticId()) {
-					case 180:
-						AhserionRaid.getInstance().spawnStage(3, PanesterraFaction.BALAUR);
-						break;
-					case 181:
-						AhserionRaid.getInstance().spawnStage(4, PanesterraFaction.BALAUR);
-						break;
-					case 182:
-						AhserionRaid.getInstance().spawnStage(5, PanesterraFaction.BALAUR);
-						break;
-					case 183:
-						AhserionRaid.getInstance().spawnStage(6, PanesterraFaction.BALAUR);
-						break;
-				}
+		attackSchedule = ThreadPoolManager.getInstance().schedule(() -> {
+			switch (getOwner().getSpawn().getStaticId()) {
+				case 180 -> AhserionRaid.getInstance().spawnStage(3, PanesterraFaction.BALAUR);
+				case 181 -> AhserionRaid.getInstance().spawnStage(4, PanesterraFaction.BALAUR);
+				case 182 -> AhserionRaid.getInstance().spawnStage(5, PanesterraFaction.BALAUR);
+				case 183 -> AhserionRaid.getInstance().spawnStage(6, PanesterraFaction.BALAUR);
 			}
 		}, 300000); // 5min
 	}
@@ -252,21 +240,17 @@ public class AhserionConstructAI extends NpcAI {
 	}
 
 	private void spawnTankFleetForWinner(int staticId, PanesterraFaction faction) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			List<SpawnGroup> ahserionSpawns = DataManager.SPAWNS_DATA.getAhserionSpawnByTeamId(faction.getId());
+			if (ahserionSpawns == null)
+				return;
 
-			@Override
-			public void run() {
-				List<SpawnGroup> ahserionSpawns = DataManager.SPAWNS_DATA.getAhserionSpawnByTeamId(faction.getId());
-				if (ahserionSpawns == null)
-					return;
-
-				for (SpawnGroup grp : ahserionSpawns) {
-					for (SpawnTemplate template : grp.getSpawnTemplates()) {
-						AhserionsFlightSpawnTemplate ahserionTemplate = (AhserionsFlightSpawnTemplate) template;
-						if (ahserionTemplate.getStage() == staticId) {
-							SpawnEngine.spawnObject(ahserionTemplate, 1);
-							return;
-						}
+			for (SpawnGroup grp : ahserionSpawns) {
+				for (SpawnTemplate template : grp.getSpawnTemplates()) {
+					AhserionsFlightSpawnTemplate ahserionTemplate = (AhserionsFlightSpawnTemplate) template;
+					if (ahserionTemplate.getStage() == staticId) {
+						SpawnEngine.spawnObject(ahserionTemplate, 1);
+						return;
 					}
 				}
 			}
@@ -274,9 +258,7 @@ public class AhserionConstructAI extends NpcAI {
 	}
 
 	private void spawnNpc(int npcId) {
-		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(400030000, npcId, getOwner().getX(), getOwner().getY(), getOwner().getZ(),
-			getOwner().getHeading());
-		flag = (Npc) SpawnEngine.spawnObject(template, 1);
+		flag = (Npc) spawn(npcId, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
 	}
 
 	@Override

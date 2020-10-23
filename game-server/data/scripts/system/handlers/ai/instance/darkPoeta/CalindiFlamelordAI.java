@@ -2,7 +2,6 @@ package ai.instance.darkPoeta;
 
 import java.util.concurrent.Future;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -12,7 +11,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldPosition;
 
 import ai.AggressiveNpcAI;
 
@@ -35,15 +33,6 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 		scheduleWipe();
 	}
 
-	private void rndSpawnInRange() {
-		float direction = Rnd.get(0, 199) / 100f;
-		int distance = Rnd.get(0, 2);
-		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
-		WorldPosition p = getPosition();
-		spawn(281268, p.getX() + x1, p.getY() + y1, p.getZ(), p.getHeading());
-	}
-
 	private void scheduleWipe() {
 		PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_A_RANK_BATTLE_TIME());
 		wipeTask = ThreadPoolManager.getInstance().schedule(() -> {
@@ -62,8 +51,8 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 					spawn(281267, 1177.1423f, 1253.9136f, 140.58705f, (byte) 97);
 					spawn(281267, 1163.5889f, 1231.9149f, 145.40042f, (byte) 118);
 				} else {
-					rndSpawnInRange();
-					rndSpawnInRange();
+					rndSpawnInRange(281268, 1, 2);
+					rndSpawnInRange(281268, 1, 1);
 				}
 				break;
 			case 19679: // You are unworthy.

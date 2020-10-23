@@ -42,36 +42,9 @@ public class ManadarAI extends AggressiveNpcAI {
 	private void check() {
 		if (getPosition().isSpawned() && !isDead() && isStart) {
 			for (int i = 0; i < 5; i++) {
-				int distance = Rnd.get(4, 11);
-				int nrNpc = Rnd.get(1, 2);
-				switch (nrNpc) {
-					case 1:
-						nrNpc = 281545;
-						break;
-					case 2:
-						nrNpc = 281756;
-						break;
-				}
-				rndSpawnInRange(nrNpc, distance);
+				rndSpawnInRange(Rnd.nextBoolean() ? 281545 : 281756, 4, 11);
 			}
-			doSchedule();
+			ThreadPoolManager.getInstance().schedule(this::check, 6000);
 		}
-	}
-
-	private void rndSpawnInRange(int npcId, float distance) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
-		spawn(npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(), (byte) 0);
-	}
-
-	private void doSchedule() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				check();
-			}
-		}, 6000);
 	}
 }

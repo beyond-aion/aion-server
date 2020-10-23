@@ -7,7 +7,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -160,8 +159,8 @@ public class _20507ItsWorseThanWeThought extends AbstractQuestHandler {
 			float xPlayer = player.getPosition().getX();
 			float yPlayer = player.getPosition().getY();
 			float zPlayer = player.getPosition().getZ();
-			QuestService.addNewSpawn(220080000, player.getInstanceId(), 219954, xPlayer + 3, yPlayer + 1, zPlayer, (byte) 60, 5);
-			QuestService.addNewSpawn(220080000, player.getInstanceId(), 219955, xPlayer + 2, yPlayer + 3, zPlayer, (byte) 73, 5);
+			spawnForFiveMinutes(219954, player.getWorldMapInstance(), xPlayer + 3, yPlayer + 1, zPlayer, (byte) 60);
+			spawnForFiveMinutes(219955, player.getWorldMapInstance(), xPlayer + 2, yPlayer + 3, zPlayer, (byte) 73);
 		}
 		return true;
 	}

@@ -10,7 +10,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -101,9 +100,8 @@ public class _10501ResearchtheRuins extends AbstractQuestHandler {
 					if (dialogActionId == QUEST_SELECT)
 						return sendQuestDialog(env, 2375);
 					if (dialogActionId == SETPRO5) {
-						// Beritra Raider [ID: 236250] is spawned for 10 minutes
-						QuestService.addNewSpawn(210070000, player.getInstanceId(), 236250, (float) 2067.6863, (float) 386.52222, (float) 565.7099, (byte) 70,
-							10);
+						// Spawn Beritra Raider for 10 minutes
+						spawnTemporarily(236250, player.getWorldMapInstance(), 2067.6863f, 386.52222f, 565.7099f, (byte) 70, 10);
 						return defaultCloseDialog(env, var, var + 1);
 					}
 				}

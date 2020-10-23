@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
@@ -49,7 +48,7 @@ public class _21249TheInvincibleStarket extends AbstractQuestHandler {
 				} else if (dialogActionId == SETPRO1) {
 					Npc npc = (Npc) env.getVisibleObject();
 					NpcActions.delete(npc, true);
-					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799529, player.getX(), player.getY(), player.getZ(), (byte) 0);
+					spawnForFiveMinutes(799529, npc.getPosition());
 					return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 799529) {

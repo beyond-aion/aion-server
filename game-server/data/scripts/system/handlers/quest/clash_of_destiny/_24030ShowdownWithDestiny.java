@@ -12,7 +12,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -157,8 +156,7 @@ public class _24030ShowdownWithDestiny extends AbstractQuestHandler {
 					return defaultOnKillEvent(env, mobs, 0, 49, 1);
 				else if (var1 == 49) {
 					changeQuestStep(env, var, 7);
-					Npc mob = (Npc) QuestService.spawnQuestNpc(WorldMapType.IDAB_PRO_D3.getId(), player.getInstanceId(), 798346, player.getX(), player.getY(),
-						player.getZ(), (byte) 0);
+					Npc mob = (Npc) spawnInFrontOf(798346, player);
 					mob.getAggroList().addHate(player, 100);
 					return true;
 				}

@@ -2,13 +2,11 @@ package quest.theobomos;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
@@ -56,8 +54,7 @@ public class _3082DousingTheFlame extends AbstractQuestHandler {
 					return defaultCloseDialog(env, 1, 2);
 				}
 			} else if (targetId == 700416 && qs.getQuestVarById(0) == 2) {
-				Npc npc = (Npc) env.getVisibleObject();
-				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 700417, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
+				spawnForFiveMinutes(700417, env.getVisibleObject().getPosition());
 				removeQuestItem(env, 182208060, 1);
 				return useQuestObject(env, 2, 2, true, false);
 			}

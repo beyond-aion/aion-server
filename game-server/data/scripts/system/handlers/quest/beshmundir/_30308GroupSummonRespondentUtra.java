@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -78,9 +77,9 @@ public class _30308GroupSummonRespondentUtra extends AbstractQuestHandler {
 
 	@Override
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
-		final Player player = env.getPlayer();
-		final int id = item.getItemTemplate().getTemplateId();
-		final int itemObjId = item.getObjectId();
+		Player player = env.getPlayer();
+		int id = item.getItemTemplate().getTemplateId();
+		int itemObjId = item.getObjectId();
 
 		if (id != 182209710)
 			return HandlerResult.UNKNOWN;
@@ -91,15 +90,10 @@ public class _30308GroupSummonRespondentUtra extends AbstractQuestHandler {
 			return HandlerResult.UNKNOWN;
 
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
-				player.getInventory().decreaseByObjectId(itemObjId, 1);
-				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799506, player.getX(), player.getY(), player.getZ(),
-					player.getHeading());
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+			player.getInventory().decreaseByObjectId(itemObjId, 1);
+			spawnInFrontOf(799506, player);
 		}, 3000);
 		return HandlerResult.SUCCESS;
 	}

@@ -4,8 +4,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 
 /**
  * @author Yeats 16.03.2016.
@@ -53,11 +51,7 @@ public class ConquestOfferingAggressiveAI extends AggressiveNpcAI {
 				npcId = getOwner().getWorldId() == 210050000 ? 833018 : 833021;
 			}
 		}
-
-		if (npcId != 0) {
-			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(getOwner().getWorldId(), npcId, getOwner().getX() + 0.3f, getOwner().getY() + 0.3f,
-				getOwner().getZ() + 0.2f, getOwner().getHeading());
-			SpawnEngine.spawnObject(template, getOwner().getInstanceId());
-		}
+		if (npcId != 0)
+			spawn(npcId, getOwner().getX() + 0.3f, getOwner().getY() + 0.3f, getOwner().getZ() + 0.2f, getOwner().getHeading());
 	}
 }

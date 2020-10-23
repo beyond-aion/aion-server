@@ -9,12 +9,11 @@ import java.util.Set;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.templates.spawns.SpawnSearchResult;
+import com.aionemu.gameserver.model.templates.spawns.SpawnSpotTemplate;
 import com.aionemu.gameserver.questEngine.handlers.models.Monster;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author vlog
@@ -87,9 +86,8 @@ public class KillSpawned extends AbstractTemplateQuestHandler {
 					}
 					if (monsterId == 0)
 						return false;
-					SpawnSearchResult searchResult = DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(player.getWorldId(), targetId);
-					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), monsterId, searchResult.getSpot().getX(),
-						searchResult.getSpot().getY(), searchResult.getSpot().getZ(), searchResult.getSpot().getHeading());
+					SpawnSpotTemplate spot = DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(player.getWorldId(), targetId).getSpot();
+					spawnForFiveMinutes(monsterId, player.getWorldMapInstance(), spot.getX(), spot.getY(), spot.getZ(), spot.getHeading());
 					return true;
 				}
 			} else {

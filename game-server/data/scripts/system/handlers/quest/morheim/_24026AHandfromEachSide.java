@@ -110,8 +110,8 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 							return false;
 						case SETPRO3:
 							balaurKilled = 0;
-							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader
-							QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 259.10f, 261.79f, 227.77f, (byte) 94); // 280818 Draconute Scout
+							spawn(213575, player, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader
+							spawn(213575, player, 259.10f, 261.79f, 227.77f, (byte) 94); // 280818 Draconute Scout
 							QuestService.questTimerStart(env, 240);
 							return defaultCloseDialog(env, 2, 3); // 3
 						case SETPRO4:
@@ -140,8 +140,8 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 			if (targetId == 213575 || targetId == 280818) {
 				balaurKilled++;
 				if (balaurKilled == 2) {
-					QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader
-					QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 213575, 259.10f, 261.79f, 227.77f, (byte) 94); // 280818 Draconute Scout
+					spawn(213575, player, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader
+					spawn(213575, player, 259.10f, 261.79f, 227.77f, (byte) 94); // 280818 Draconute Scout
 				} else if (balaurKilled == 4) {
 					QuestService.questTimerEnd(env);
 					if (kargateIsAlive(env)) {
@@ -149,7 +149,7 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 						PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 158));
 					} else {
 						changeQuestStep(env, 3, 2);
-						QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 204432, 272.83f, 176.81f, 204.35f, (byte) 0);
+						spawn(204432, player, 272.83f, 176.81f, 204.35f, (byte) 0);
 					}
 				}
 				return true;
@@ -172,7 +172,7 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 158));
 			} else {
 				changeQuestStep(env, 3, 2);
-				QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 204432, 272.83f, 176.81f, 204.35f, (byte) 0);
+				spawn(204432, player, 272.83f, 176.81f, 204.35f, (byte) 0);
 			}
 			return true;
 		}
@@ -191,7 +191,7 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 			QuestService.questTimerEnd(env);
 			changeQuestStep(env, 3, 2);
 			if (!kargateIsAlive(env))
-				QuestService.spawnQuestNpc(320040000, player.getInstanceId(), 204432, 272.83f, 176.81f, 204.35f, (byte) 0);
+				spawn(204432, player, 272.83f, 176.81f, 204.35f, (byte) 0);
 			return true;
 		}
 		return false;
@@ -213,12 +213,12 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 	}
 
 	private boolean kargateIsAlive(QuestEnv env) {
-		Npc kargate = env.getPlayer().getPosition().getWorldMapInstance().getNpc(204432);
+		Npc kargate = env.getPlayer().getWorldMapInstance().getNpc(204432);
 		return (kargate != null && !kargate.isDead());
 	}
 
 	private void deleteBalaur(QuestEnv env) {
-		for (Npc npc : env.getPlayer().getPosition().getWorldMapInstance().getNpcs(213575, 280818)) {
+		for (Npc npc : env.getPlayer().getWorldMapInstance().getNpcs(213575, 280818)) {
 			npc.getController().delete();
 		}
 	}

@@ -12,7 +12,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -129,7 +128,7 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 							qs.setQuestVar(11);
 							updateQuestStatus(env);
 							playQuestMovie(env, 888);
-							QuestService.addNewSpawn(320040000, player.getInstanceId(), 730898, 257, 257, (float) 226.35, (byte) 95); // Broken Teleporter Device
+							spawn(730898, player, 257, 257, (float) 226.35, (byte) 95); // Broken Teleporter Device
 					}
 					break;
 				case 730898:// Broken Large Teleporter
@@ -193,15 +192,15 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 			int var = qs.getQuestVars().getQuestVars();
 			if (var == 9 && player.getWorldId() == 320040000) {
 				// Shattered Large Teleporter
-				QuestService.addNewSpawn(320040000, player.getInstanceId(), 730888, 257, 257, (float) 226.35, (byte) 95);
+				spawn(730888, player, 257, 257, (float) 226.35, (byte) 95);
 				// Captain Tarbana
-				QuestService.addNewSpawn(320040000, player.getInstanceId(), 233878, (float) 262.9, (float) 224.5, (float) 211.348, (byte) 95);
+				spawn(233878, player, (float) 262.9, (float) 224.5, (float) 211.348, (byte) 95);
 				// 5x Baranath Sentinel
-				QuestService.addNewSpawn(320040000, player.getInstanceId(), 233886, (float) 217.015, (float) 221.694, (float) 207.49455, (byte) 97);
-				QuestService.addNewSpawn(320040000, player.getInstanceId(), 233886, (float) 239.732, (float) 211.250, (float) 209.19, (byte) 97);
-				QuestService.addNewSpawn(320040000, player.getInstanceId(), 233886, (float) 257.065, (float) 204.49, (float) 209.094, (byte) 97);
-				QuestService.addNewSpawn(320040000, player.getInstanceId(), 233886, (float) 274.899, (float) 199.398, (float) 208.83487, (byte) 97);
-				QuestService.addNewSpawn(320040000, player.getInstanceId(), 233886, (float) 282.878, (float) 223.742, (float) 208.252, (byte) 97);
+				spawn(233886, player, (float) 217.015, (float) 221.694, (float) 207.49455, (byte) 97);
+				spawn(233886, player, (float) 239.732, (float) 211.250, (float) 209.19, (byte) 97);
+				spawn(233886, player, (float) 257.065, (float) 204.49, (float) 209.094, (byte) 97);
+				spawn(233886, player, (float) 274.899, (float) 199.398, (float) 208.83487, (byte) 97);
+				spawn(233886, player, (float) 282.878, (float) 223.742, (float) 208.252, (byte) 97);
 			}
 		}
 		return false;

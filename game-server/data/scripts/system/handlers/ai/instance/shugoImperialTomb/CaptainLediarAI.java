@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
@@ -53,13 +52,6 @@ public class CaptainLediarAI extends AggressiveNpcAI {
 				rndSpawnInRange(npcId, 2);
 			}
 		}
-	}
-
-	private void rndSpawnInRange(int npcId, float distance) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x = (float) (Math.cos(Math.PI * direction) * distance);
-		float y = (float) (Math.sin(Math.PI * direction) * distance);
-		spawn(npcId, getPosition().getX() + x, getPosition().getY() + y, getPosition().getZ(), (byte) 0);
 	}
 
 	@Override

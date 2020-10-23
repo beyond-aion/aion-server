@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -151,12 +150,10 @@ public class _14030RetrievedMemory extends AbstractQuestHandler {
 			int var = qs.getQuestVarById(0);
 			if (var >= 2 && var < 55) {
 				int[] npcIds = { 215396, 215397, 215398, 215399, 211043, 214578 };
-				if (var == 2) {
+				if (var == 2)
 					return defaultOnKillEvent(env, 214578, 2, 3); // 3
-				}
-				if (var == 54) {
-					QuestService.addNewSpawn(WorldMapType.IDAB_PRO_L3.getId(), player.getInstanceId(), 215400, 240f, 257f, 208.53946f, (byte) 68);
-				}
+				if (var == 54)
+					spawn(215400, player, 240f, 257f, 208.53946f, (byte) 68);
 				return defaultOnKillEvent(env, npcIds, 2, 55); // 2 - 55
 			} else if (var == 55) {
 				return defaultOnKillEvent(env, 215400, 55, 56); // 56

@@ -2,13 +2,11 @@ package quest.ishalgen;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Mr. Poke
@@ -70,8 +68,7 @@ public class _2004ACharmedCube extends AbstractQuestHandler {
 					break;
 				case 700047: // Tombstone
 					if (var == 1 && env.getVisibleObject().getObjectTemplate().getTemplateId() == 700047 && dialogActionId == USE_OBJECT) {
-						Npc npc = (Npc) env.getVisibleObject();
-						QuestService.addNewSpawnInFront(player.getWorldId(), player.getInstanceId(), 211755, npc, 2);
+						spawnForFiveMinutesInFront(211755, env.getVisibleObject(), env.getVisibleObject().getHeading(), 2);
 						return true;
 					}
 					return false;

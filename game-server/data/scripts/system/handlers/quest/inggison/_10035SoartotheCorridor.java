@@ -113,7 +113,7 @@ public class _10035SoartotheCorridor extends AbstractQuestHandler {
 						case USE_OBJECT:
 							if (var == 6) {
 								removeQuestItem(env, 182215629, 1);
-								// QuestService.addNewSpawn(210050000, player.getInstanceId(), 700641, 1377, 2297, 296, (byte) 90); ToDo: to check on retail what's
+								// spawnForFiveMinutes(700641, player, 1377, 2297, 296, (byte) 90); ToDo: to check on retail what's
 								// its function
 								qs.setQuestVar(7);
 								updateQuestStatus(env);

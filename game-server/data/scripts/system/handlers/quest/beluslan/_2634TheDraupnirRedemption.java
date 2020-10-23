@@ -12,7 +12,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.questEngine.task.QuestTasks;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -65,8 +64,7 @@ public class _2634TheDraupnirRedemption extends AbstractQuestHandler {
 						case SETPRO1: {
 							Npc npc = (Npc) env.getVisibleObject();
 							npc.getController().delete();
-							Npc survivor = (Npc) QuestService.spawnQuestNpc(npc.getWorldId(), npc.getInstanceId(), 204830, player.getX(), player.getY(),
-								player.getZ(), (byte) 0);
+							Npc survivor = (Npc) spawnInFrontOf(204830, player);
 							PacketSendUtility.sendPacket(player, new SM_NPC_INFO(survivor, player));
 							survivor.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 							player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, survivor, 204828));

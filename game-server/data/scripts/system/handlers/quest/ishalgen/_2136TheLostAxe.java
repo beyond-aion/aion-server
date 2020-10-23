@@ -103,7 +103,7 @@ public class _2136TheLostAxe extends AbstractQuestHandler {
 						playQuestMovie(env, 59);
 						qs.setQuestVarById(0, 1);
 						updateQuestStatus(env);
-						QuestService.addNewSpawn(220010000, player.getInstanceId(), 790009, 1088.5f, 2371.8f, 258.375f, (byte) 87);
+						spawnForFiveMinutes(790009, player.getWorldMapInstance(), 1088.5f, 2371.8f, 258.375f, (byte) 87);
 						return true;
 					}
 			}

@@ -7,7 +7,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Luzien
@@ -105,7 +104,7 @@ public class _28302DocumentSaved extends AbstractQuestHandler {
 			}
 		} else if (var0 == 5) {
 			if (targetId == popuchinId)
-				QuestService.spawnQuestNpc(300240000, player.getInstanceId(), 730375, 374.9f, 424.3f, 653.53f, (byte) 0);
+				spawn(730375, player, 374.9f, 424.3f, 653.53f, (byte) 0);
 		}
 
 		return false;

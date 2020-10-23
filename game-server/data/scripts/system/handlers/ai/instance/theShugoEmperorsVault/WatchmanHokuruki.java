@@ -8,8 +8,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 
 /**
  * @author Yeats
@@ -17,8 +15,7 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 @AIName("watchman_hokuruki")
 public class WatchmanHokuruki extends IDSweep_Bosses {
 
-	protected List<Integer> percents = new ArrayList<>();
-	private List<Npc> spawnedAdds = new ArrayList<>();
+	private List<Integer> percents = new ArrayList<>();
 	private List<Integer> addStages = new ArrayList<>();
 
 	public WatchmanHokuruki(Npc owner) {
@@ -33,8 +30,8 @@ public class WatchmanHokuruki extends IDSweep_Bosses {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[] { 100, 75, 50, 25, 15 });
-		Collections.addAll(addStages, new Integer[] { 2, 3, 4 });
+		Collections.addAll(percents, 100, 75, 50, 25, 15);
+		Collections.addAll(addStages, 2, 3, 4);
 	}
 
 	private synchronized void checkPercentage(int hpPercentage) {
@@ -90,15 +87,6 @@ public class WatchmanHokuruki extends IDSweep_Bosses {
 				spawn(235649, 488.86f, 627.54f, 395.27853f, (byte) 38);
 				break;
 		}
-		startHate();
-	}
-
-	private void startHate() {
-		for (Npc npc : spawnedAdds) {
-			if (npc != null && !npc.isDead()) {
-				npc.getAggroList().addHate(getOwner().getAggroList().getMostHated(), 1);
-			}
-		}
 	}
 
 	@Override
@@ -116,19 +104,8 @@ public class WatchmanHokuruki extends IDSweep_Bosses {
 
 	private void rndSpawn(int npcId, int count) {
 		for (int i = 0; i < count; i++) {
-			SpawnTemplate template = rndSpawnInRange(npcId);
-			Npc npc = (Npc) SpawnEngine.spawnObject(template, getPosition().getInstanceId());
-			spawnedAdds.add(npc);
+			Npc npc = (Npc) rndSpawnInRange(npcId, 3, 5);
+			npc.getAggroList().addHate(getOwner().getAggroList().getMostHated(), 1);
 		}
 	}
-
-	private SpawnTemplate rndSpawnInRange(int npcId) {
-		float direction = Rnd.get(0, 199) / 100f;
-		int range = Rnd.get(3, 5);
-		float x1 = (float) (Math.cos(Math.PI * direction) * range);
-		float y1 = (float) (Math.sin(Math.PI * direction) * range);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(),
-			getPosition().getHeading());
-	}
-
 }

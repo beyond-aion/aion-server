@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -237,7 +236,7 @@ public class _20034RescuetheReians extends AbstractQuestHandler {
 		int var = qs.getQuestVarById(0);
 		if (targetId == 216592) {
 			if (var == 4) {
-				QuestService.addNewSpawn(300150000, player.getInstanceId(), 799341, 561.8763f, 192.25128f, 135.88919f, (byte) 30);
+				spawnForFiveMinutes(799341, player.getWorldMapInstance(), 561.8763f, 192.25128f, 135.88919f, (byte) 30);
 				qs.setQuestVarById(0, var + 1);
 				updateQuestStatus(env);
 				return true;
@@ -256,7 +255,7 @@ public class _20034RescuetheReians extends AbstractQuestHandler {
 		if (qs == null || qs.getStatus() != QuestStatus.START || qs.getQuestVars().getQuestVars() != 4) {
 			return false;
 		}
-		QuestService.addNewSpawn(300150000, player.getInstanceId(), 216592, (float) 561.8763, (float) 192.25128, (float) 135.88919, (byte) 30);
+		spawnForFiveMinutes(216592, player.getWorldMapInstance(), (float) 561.8763, (float) 192.25128, (float) 135.88919, (byte) 30);
 		return true;
 	}
 

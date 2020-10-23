@@ -7,7 +7,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -218,12 +217,8 @@ public class _10507ABigPlottoFoil extends AbstractQuestHandler {
 		}
 
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
-			float xPlayer = player.getPosition().getX();
-			float yPlayer = player.getPosition().getY();
-			float zPlayer = player.getPosition().getZ();
-			QuestService.addNewSpawn(210070000, player.getInstanceId(), 236266, xPlayer + 2, yPlayer + 3, zPlayer, (byte) 73, 2);
-		}
+		if (qs != null && qs.getStatus() == QuestStatus.REWARD)
+			spawnTemporarily(236266, player.getWorldMapInstance(), player.getX() + 2, player.getY() + 3, player.getZ(), (byte) 73, 2);
 		return true;
 	}
 

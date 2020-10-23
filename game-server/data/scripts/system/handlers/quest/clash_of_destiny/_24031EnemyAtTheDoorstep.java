@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -124,9 +123,7 @@ public class _24031EnemyAtTheDoorstep extends AbstractQuestHandler {
 								NpcActions.delete(npc);
 							qs.setQuestVar(11);
 							updateQuestStatus(env);
-							QuestService.addNewSpawn(320040000, player.getInstanceId(), 730898, (float) 262.9, (float) 224.5, (float) 212.2, (byte) 95);// Broken
-																																																																					// Teleporter
-																																																																					// Device
+							spawn(730898, player, (float) 262.9, (float) 224.5, (float) 212.2, (byte) 95);// Broken Teleporter Device
 					}
 					break;
 				case 730898:// Broken Teleporter
@@ -189,10 +186,8 @@ public class _24031EnemyAtTheDoorstep extends AbstractQuestHandler {
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			int var = qs.getQuestVars().getQuestVars();
 			if (var == 9 && player.getWorldId() == 320040000) {
-				QuestService.addNewSpawn(320040000, player.getInstanceId(), 730888, (float) 262.9, (float) 224.5, (float) 211.2, (byte) 95);// Shattered Large
-																																																																		// Teleporter
-				QuestService.addNewSpawn(320040000, player.getInstanceId(), 233879, (float) 262.9, (float) 224.5, (float) 211.2, (byte) 95);// Captain
-																																																																		// Hagarkan
+				spawnForFiveMinutes(730888, player.getWorldMapInstance(), (float) 262.9, (float) 224.5, (float) 211.2, (byte) 95);// Shattered Large Teleporter
+				spawnForFiveMinutes(233879, player.getWorldMapInstance(), (float) 262.9, (float) 224.5, (float) 211.2, (byte) 95);// Captain Hagarkan
 			}
 		}
 		return false;

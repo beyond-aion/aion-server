@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -72,7 +71,7 @@ public class _1643TheStarOfHeiron extends AbstractQuestHandler {
 							removeQuestItem(env, 182201764, 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 0));
-							QuestService.addNewSpawn(210040000, player.getInstanceId(), 204614, (float) 1591.4327, (float) 2774.2283, (float) 127.63001, (byte) 0);
+							spawnForFiveMinutes(204614, player.getWorldMapInstance(), (float) 1591.4327, (float) 2774.2283, (float) 127.63001, (byte) 0);
 							return true;
 						}
 						case SET_SUCCEED: {

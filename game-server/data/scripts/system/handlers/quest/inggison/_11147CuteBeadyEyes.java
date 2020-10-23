@@ -8,7 +8,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -52,9 +51,8 @@ public class _11147CuteBeadyEyes extends AbstractQuestHandler {
 					else if (qs.getQuestVarById(0) == 1)
 						return sendQuestDialog(env, 1352);
 				} else if (dialogActionId == SETPRO1) {
-					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799079, player.getX(), player.getY(), player.getZ(), (byte) 0);
-					QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799081, player.getX() - 1, player.getY() + 2, player.getZ(),
-						(byte) 0);
+					spawnForFiveMinutesInFrontOf(799079, player, 1);
+					spawnForFiveMinutesInFrontOf(799081, player, -1);
 					return defaultCloseDialog(env, 0, 1);
 				} else if (dialogActionId == SETPRO2) {
 					return defaultCloseDialog(env, 1, 2);

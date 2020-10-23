@@ -12,9 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 import ai.AggressiveNpcAI;
@@ -96,18 +94,8 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 
 	protected void rndSpawn(int npcId) {
 		for (int i = 0; i < 10; i++) {
-			SpawnTemplate template = rndSpawnInRange(npcId);
-			SpawnEngine.spawnObject(template, getPosition().getInstanceId());
+			rndSpawnInRange(npcId, 5, 20);
 		}
-	}
-
-	private SpawnTemplate rndSpawnInRange(int npcId) {
-		float direction = Rnd.get(0, 199) / 100f;
-		int range = Rnd.get(5, 20);
-		float x1 = (float) (Math.cos(Math.PI * direction) * range);
-		float y1 = (float) (Math.sin(Math.PI * direction) * range);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1,
-			getPosition().getZ(), getPosition().getHeading());
 	}
 
 	protected Player getRandomTarget() {

@@ -46,7 +46,7 @@ public class MentorMonsterHunt extends MonsterHunt {
 						PlayerGroup group = player.getPlayerGroup();
 						for (Player member : group.getMembers()) {
 							if (member.getLevel() >= menteMinLevel && member.getLevel() <= menteMaxLevel
-								&& PositionUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE) {
+								&& PositionUtil.isInRange(player, member, GroupConfig.GROUP_MAX_DISTANCE)) {
 								return super.onKillEvent(env);
 							}
 						}
@@ -56,7 +56,7 @@ public class MentorMonsterHunt extends MonsterHunt {
 					if (player.isInGroup()) {
 						PlayerGroup group = player.getPlayerGroup();
 						for (Player member : group.getMembers()) {
-							if (member.isMentor() && PositionUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE)
+							if (member.isMentor() && PositionUtil.isInRange(player, member, GroupConfig.GROUP_MAX_DISTANCE))
 								return super.onKillEvent(env);
 						}
 					}

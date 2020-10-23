@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -19,9 +18,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author Artur
- * @modified Majka
- * @reworked Pad
+ * @author Artur, Majka, Pad
  */
 public class _14047ChainingMemories extends AbstractQuestHandler {
 
@@ -103,7 +100,7 @@ public class _14047ChainingMemories extends AbstractQuestHandler {
 					case SETPRO3:
 						changeQuestStep(env, 2, 3);
 						WorldMapInstance instance = InstanceService.getNextAvailableInstance(WorldMapType.AZOTURAN_FORTRESS.getId(), player);
-						QuestService.spawnQuestNpc(instance.getMapId(), instance.getInstanceId(), icaronixNormalId, 478.8f, 431.1f, 1062.0067f, (byte) 58);
+						spawn(icaronixNormalId, instance, 478.8f, 431.1f, 1062.0067f, (byte) 58);
 						TeleportService.teleportTo(player, instance, 305.8f, 334.46f, 1019.69f, (byte) 27, TeleportAnimation.FADE_OUT_BEAM);
 						return true;
 				}

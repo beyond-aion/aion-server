@@ -7,7 +7,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -121,13 +120,10 @@ public class _20506MuscleOverMind extends AbstractQuestHandler {
 
 	@Override
 	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
-
 		if (zoneName == ZoneName.get("DF5_SENSORYAREA_Q20506A_206376_2_220080000")) {
-
 			Player player = env.getPlayer();
-			if (player == null) {
+			if (player == null)
 				return false;
-			}
 
 			QuestState qs = player.getQuestStateList().getQuestState(questId);
 			if (qs != null && qs.getStatus() == QuestStatus.START) {
@@ -136,15 +132,8 @@ public class _20506MuscleOverMind extends AbstractQuestHandler {
 				if (var == 2) { // Step 2: Investigate the Mindboggle Waste.
 					qs.setQuestVar(var + 1);
 					updateQuestStatus(env);
-					QuestService.addNewSpawn(220080000, player.getInstanceId(), 219956, 1938.0f, 83.9f, 235.0f, (byte) 90, 10);
-
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							restoreQuestStep(env);
-						}
-					}, 600000);
+					spawnTemporarily(219956, player.getWorldMapInstance(), 1938.0f, 83.9f, 235.0f, (byte) 90, 10);
+					ThreadPoolManager.getInstance().schedule(() -> restoreQuestStep(env), 600000);
 				}
 			}
 			return true;
@@ -167,7 +156,7 @@ public class _20506MuscleOverMind extends AbstractQuestHandler {
 				if (var == 3) { // Step 3: Eliminate the Enigmatic Drakan who appears.
 					qs.setQuestVar(var + 1);
 					updateQuestStatus(env);
-					QuestService.addNewSpawn(220080000, player.getInstanceId(), 219957, 1938.0f, 83.9f, 235.0f, (byte) 90, 8);
+					spawnTemporarily(219957, player.getWorldMapInstance(), 1938.0f, 83.9f, 235.0f, (byte) 90, 8);
 					return true;
 				}
 				break;
@@ -175,9 +164,7 @@ public class _20506MuscleOverMind extends AbstractQuestHandler {
 				if (var == 4) { // Step 4: Defeat the Interhypno Ego.
 					qs.setQuestVar(var + 1);
 					updateQuestStatus(env);
-
-					if (player.getPosition().getWorldMapInstance().getNpc(804743) == null)
-						QuestService.addNewSpawn(220080000, player.getInstanceId(), 804743, 1938.0f, 83.9f, 235.0f, (byte) 90, 6); // Jadun
+					spawnTemporarily(804743, player.getWorldMapInstance(), 1938.0f, 83.9f, 235.0f, (byte) 90, 6); // Jadun
 					return true;
 				}
 				break;

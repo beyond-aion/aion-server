@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
@@ -147,7 +146,7 @@ public class _10031ARiskfortheObelisk extends AbstractQuestHandler {
 					case USE_OBJECT:
 						if (var == 8) {
 							removeQuestItem(env, 182215617, 1); // Obelisk
-							QuestService.addNewSpawn(210050000, player.getInstanceId(), 700600, 2192, 368, 431, (byte) 90, 1); // Enhanced Obelisk
+							spawnTemporarily(700600, player.getWorldMapInstance(), 2192, 368, 431, (byte) 90, 1); // Enhanced Obelisk
 							qs.setQuestVar(9); // 9
 							updateQuestStatus(env);
 							return true;

@@ -10,9 +10,7 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -171,31 +169,18 @@ public class AssaultsPodAI extends NpcAI {
 		}, 3000);
 	}
 
-	private void rndSpawn(int npcId, int count, final String walker) {
+	private void rndSpawn(int npcId, int count, String walker) {
 		for (int i = 0; i < count; i++) {
-			SpawnTemplate template = rndSpawnInRange(npcId);
-			final Npc npc = (Npc) SpawnEngine.spawnObject(template, getPosition().getInstanceId());
+			Npc npc = (Npc) rndSpawnInRange(npcId, 5);
 			if (!walker.isEmpty()) {
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						npc.getSpawn().setWalkerId(walker);
-						WalkManager.startWalking((NpcAI) npc.getAi());
-						npc.setState(CreatureState.ACTIVE, true);
-						PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
-					}
+				ThreadPoolManager.getInstance().schedule(() -> {
+					npc.getSpawn().setWalkerId(walker);
+					WalkManager.startWalking((NpcAI) npc.getAi());
+					npc.setState(CreatureState.ACTIVE, true);
+					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
 				}, 3000);
 			}
 		}
-	}
-
-	private SpawnTemplate rndSpawnInRange(int npcId) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
-		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(),
-			getPosition().getHeading());
 	}
 
 	@Override

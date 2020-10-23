@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -55,8 +54,7 @@ public class _30217GroupStigmasScars extends AbstractQuestHandler {
 								return sendQuestDialog(env, 1011);
 							return false;
 						case SETPRO1:
-							QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 799506, player.getX(), player.getY(), player.getZ(),
-								player.getHeading());
+							spawnForFiveMinutesInFrontOf(799506, player, 1.5f);
 							qs.setQuestVarById(0, 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

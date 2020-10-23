@@ -106,7 +106,7 @@ public class _14016AGateAgape extends AbstractQuestHandler {
 				return true;
 			} else if (var == 1 && player.getWorldId() == 310030000) {
 				changeQuestStep(env, 1, 2); // 2
-				QuestService.addNewSpawn(310030000, player.getInstanceId(), 233873, (float) 258.89917, (float) 237.20166, (float) 217.06035, (byte) 0);
+				spawnForFiveMinutes(233873, player.getWorldMapInstance(), (float) 258.89917, (float) 237.20166, (float) 217.06035, (byte) 0);
 				return true;
 			}
 		}

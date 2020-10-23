@@ -8,7 +8,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -65,7 +64,7 @@ public class _30056DirvisiasSorrow extends AbstractQuestHandler {
 				switch (dialogActionId) {
 					case USE_OBJECT:
 						if (var == 0) {
-							QuestService.addNewSpawn(600010000, player.getInstanceId(), 799034, 555.8842f, 307.8092f, 310.24997f, (byte) 0);
+							spawnForFiveMinutes(799034, player.getWorldMapInstance(), 555.8842f, 307.8092f, 310.24997f, (byte) 0);
 							return useQuestObject(env, 0, 0, false, 0, 0, 0, 182209223, 1);
 						}
 				}

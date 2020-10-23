@@ -21,7 +21,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.ClassChangeService;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.reward.WebRewardService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -61,7 +60,6 @@ public class _2008Ascension extends AbstractQuestHandler {
 	@Override
 	public boolean onKillEvent(QuestEnv env) {
 		Player player = env.getPlayer();
-		int instanceId = player.getInstanceId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START)
 			return false;
@@ -78,14 +76,14 @@ public class _2008Ascension extends AbstractQuestHandler {
 			} else if (var == 54) {
 				qs.setQuestVar(5);
 				updateQuestStatus(env);
-				Npc mob = (Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205041, 301f, 259f, 205.5f, (byte) 0);
+				Npc mob = (Npc) spawn(205041, player, 301f, 259f, 205.5f, (byte) 0);
 				mob.getAggroList().addHate(player, 1000);
 				return true;
 			}
 		} else if (targetId == 205041 && var == 5) {
 			playQuestMovie(env, 152);
-			player.getPosition().getWorldMapInstance().forEachNpc(NpcActions::delete);
-			QuestService.addNewSpawn(320020000, instanceId, 203550, 301.92999f, 274.26001f, 205.7f, (byte) 0);
+			player.getWorldMapInstance().forEachNpc(NpcActions::delete);
+			spawn(203550, player, 301.92999f, 274.26001f, 205.7f, (byte) 0);
 			qs.setQuestVar(6);
 			updateQuestStatus(env);
 			return true;
@@ -96,7 +94,6 @@ public class _2008Ascension extends AbstractQuestHandler {
 	@Override
 	public boolean onDialogEvent(final QuestEnv env) {
 		final Player player = env.getPlayer();
-		final int instanceId = player.getInstanceId();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
 			return false;
@@ -229,20 +226,16 @@ public class _2008Ascension extends AbstractQuestHandler {
 							PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 3001, 0));
 							qs.setQuestVar(50);
 							updateQuestStatus(env);
-							ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-								@Override
-								public void run() {
-									qs.setQuestVar(51);
-									updateQuestStatus(env);
-									List<Npc> mobs = new ArrayList<>();
-									mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 294f, 277f, 207f, (byte) 0));
-									mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 305f, 279f, 206.5f, (byte) 0));
-									mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 298f, 253f, 205.7f, (byte) 0));
-									mobs.add((Npc) QuestService.spawnQuestNpc(320020000, instanceId, 205040, 306f, 251f, 206f, (byte) 0));
-									for (Npc mob : mobs) {
-										mob.getAggroList().addHate(player, 1000);
-									}
+							ThreadPoolManager.getInstance().schedule(() -> {
+								qs.setQuestVar(51);
+								updateQuestStatus(env);
+								List<Npc> mobs = new ArrayList<>();
+								mobs.add((Npc) spawn(205040, player, 294f, 277f, 207f, (byte) 0));
+								mobs.add((Npc) spawn(205040, player, 305f, 279f, 206.5f, (byte) 0));
+								mobs.add((Npc) spawn(205040, player, 298f, 253f, 205.7f, (byte) 0));
+								mobs.add((Npc) spawn(205040, player, 306f, 251f, 206f, (byte) 0));
+								for (Npc mob : mobs) {
+									mob.getAggroList().addHate(player, 1000);
 								}
 							}, 43000);
 							return true;

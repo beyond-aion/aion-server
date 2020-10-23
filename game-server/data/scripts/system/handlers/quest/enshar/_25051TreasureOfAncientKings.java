@@ -9,8 +9,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
-import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @Author Majka
@@ -63,8 +61,7 @@ public class _25051TreasureOfAncientKings extends AbstractQuestHandler {
 
 						if (dialogActionId == SETPRO1) {
 							// Spawn of Zagmus
-							if (World.getInstance().getWorldMap(WorldMapType.ENSHAR.getId()).getMainWorldMapInstance().getNpc(805160) == null)
-								QuestService.addNewSpawn(WorldMapType.ENSHAR.getId(), 1, 805160, 2046.8f, 1588.8f, 348.4f, (byte) 90);
+							spawnForFiveMinutes(805160, env.getVisibleObject().getWorldMapInstance(), 2046.8f, 1588.8f, 348.4f, (byte) 90);
 							QuestService.invisibleTimerStart(env, 300);
 							return defaultCloseDialog(env, var, var + 1);
 						}
@@ -95,9 +92,7 @@ public class _25051TreasureOfAncientKings extends AbstractQuestHandler {
 
 						if (dialogActionId == SET_SUCCEED) {
 							Npc npc = (Npc) env.getVisibleObject();
-							if (npc != null)
-								QuestService.addNewSpawn(220080000, player.getInstanceId(), 220031, npc.getPosition().getX() - 2, npc.getPosition().getY() + 2,
-									npc.getPosition().getZ(), (byte) 10, 5);
+							spawnForFiveMinutes(220031, npc.getWorldMapInstance(), npc.getX() - 2, npc.getY() + 2, npc.getZ(), (byte) 10);
 							removeQuestItem(env, 182215720, 1);
 							qs.setQuestVar(var + 1);
 							return defaultCloseDialog(env, var + 1, var + 1, true, false);
@@ -119,24 +114,23 @@ public class _25051TreasureOfAncientKings extends AbstractQuestHandler {
 
 	@Override
 	public boolean onLogOutEvent(QuestEnv env) {
-		return RestoreQuestStep(env);
+		return restoreQuestStep(env);
 	}
 
 	@Override
 	public boolean onInvisibleTimerEndEvent(QuestEnv env) {
-		return RestoreQuestStep(env);
+		return restoreQuestStep(env);
 	}
 
-	private boolean RestoreQuestStep(QuestEnv env) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
+	private boolean restoreQuestStep(QuestEnv env) {
+		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
 
 		if (qs == null)
 			return false;
 
 		int var = qs.getQuestVarById(0);
 		if (var == 1) {
-			qs.setQuestVar(var - 1);
+			qs.setQuestVar(0);
 			updateQuestStatus(env);
 		}
 		return true;

@@ -10,7 +10,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Cheatkiller
@@ -56,9 +55,7 @@ public class _21105CoweringRefugee extends AbstractQuestHandler {
 				}
 			} else if (targetId == 700812) {
 				Npc npc = (Npc) env.getVisibleObject();
-				int npcIds[] = { 799366, 216086 };
-				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), Rnd.get(npcIds), npc.getX(), npc.getY(), npc.getZ(),
-					(byte) 0);
+				spawnForFiveMinutes(Rnd.nextBoolean() ? 799366 : 216086, npc.getPosition());
 				NpcActions.delete(npc, true);
 				return true;
 			}

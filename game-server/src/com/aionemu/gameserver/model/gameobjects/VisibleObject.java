@@ -4,10 +4,7 @@ import com.aionemu.gameserver.controllers.VisibleObjectController;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldDropType;
-import com.aionemu.gameserver.world.WorldPosition;
-import com.aionemu.gameserver.world.WorldType;
+import com.aionemu.gameserver.world.*;
 import com.aionemu.gameserver.world.knownlist.KnownList;
 
 /**
@@ -125,6 +122,10 @@ public abstract class VisibleObject extends AionObject {
 	 */
 	public WorldPosition getPosition() {
 		return position;
+	}
+
+	public WorldMapInstance getWorldMapInstance() {
+		return getPosition().getWorldMapInstance();
 	}
 
 	/**

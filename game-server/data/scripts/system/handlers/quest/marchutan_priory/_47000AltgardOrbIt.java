@@ -50,12 +50,9 @@ public class _47000AltgardOrbIt extends AbstractQuestHandler {
 			if (targetId == 700970) {
 				if (player.isInGroup()) {
 					PlayerGroup group = player.getPlayerGroup();
-					for (Player member : group.getMembers()) {
-						if (member.isMentor() && PositionUtil.getDistance(player, member) < GroupConfig.GROUP_MAX_DISTANCE)
-							return true;
-						else
-							PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentor());
-					}
+					if (group.getMembers().stream().anyMatch(member -> member.isMentor() && PositionUtil.isInRange(player, member, GroupConfig.GROUP_MAX_DISTANCE)))
+						return true;
+					PacketSendUtility.sendPacket(player, STR_MSG_DailyQuest_Ask_Mentor());
 				}
 			}
 			if (targetId == 799864) {

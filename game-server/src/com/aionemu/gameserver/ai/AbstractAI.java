@@ -11,12 +11,14 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.event.AIEventLog;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.event.AIListenable;
 import com.aionemu.gameserver.ai.handler.FreezeEventHandler;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.events.AbstractEventSource;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.animations.AttackHandAnimation;
 import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -30,6 +32,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.annotations.AnnotatedMethod;
 import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ATracer
@@ -466,6 +469,19 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, x, y, z, heading, owner.getObjectId());
 		template.setStaticId(staticId);
 		return SpawnEngine.spawnObject(template, owner.getInstanceId());
+	}
+
+	protected final VisibleObject rndSpawnInRange(int npcId, float distance) {
+		double directionRadian = Math.toRadians(Rnd.get(360));
+		WorldPosition p = getPosition();
+		float x = p.getX() + (float) (Math.cos(directionRadian) * distance);
+		float y = p.getY() + (float) (Math.sin(directionRadian) * distance);
+		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, x, y, p.getZ());
+		return spawn(npcId, pos.getX(), pos.getY(), pos.getZ(), p.getHeading());
+	}
+
+	protected final VisibleObject rndSpawnInRange(int npcId, float minDistance, float maxDistance) {
+		return rndSpawnInRange(npcId, minDistance + Rnd.nextFloat() * (maxDistance - minDistance));
 	}
 
 	@Override

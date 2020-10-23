@@ -104,14 +104,11 @@ public class _10506MindOverMatter extends AbstractQuestHandler {
 						}
 
 						if (dialogActionId == SETPRO6) {
-							// Spawn Noep's Ego [ID: 236263]
 							Npc npc = (Npc) env.getVisibleObject();
-							if (npc != null) {
-								QuestService.addNewSpawn(210070000, player.getInstanceId(), 236263, npc.getPosition().getX(), npc.getPosition().getY(),
-									npc.getPosition().getZ(), npc.getPosition().getHeading(), 2);
-								QuestService.invisibleTimerStart(env, 120);
-								return defaultCloseDialog(env, var, var + 1);
-							}
+							// Spawn Noep's Ego for two minutes
+							spawnTemporarily(236263, npc.getWorldMapInstance(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 2);
+							QuestService.invisibleTimerStart(env, 120);
+							return defaultCloseDialog(env, var, var + 1);
 						}
 					}
 

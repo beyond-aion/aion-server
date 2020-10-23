@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -164,7 +163,7 @@ public class _2900NoEscapingDestiny extends AbstractQuestHandler {
 						case SETPRO8:
 							if (var == 97) {
 								changeQuestStep(env, 97, 98); // 98
-								QuestService.addNewSpawn(320070000, player.getInstanceId(), 204263, 257.5f, 245f, 125f, (byte) 0);
+								spawnForFiveMinutes(204263, player.getWorldMapInstance(), 257.5f, 245f, 125f, (byte) 0);
 								return closeDialogWindow(env);
 							}
 					}

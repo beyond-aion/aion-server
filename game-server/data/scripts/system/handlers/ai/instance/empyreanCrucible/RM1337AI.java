@@ -14,7 +14,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldPosition;
 
 import ai.AggressiveNpcAI;
 
@@ -139,9 +138,8 @@ public class RM1337AI extends AggressiveNpcAI {
 				if (!isDead()) {
 					int count = Rnd.get(8, 12);
 					for (int i = 0; i < count; i++) {
-						rndSpawn(282373);
+						rndSpawnInRange(282373, 3, 12);
 					}
-
 				}
 			}
 		}, 4000);
@@ -155,14 +153,5 @@ public class RM1337AI extends AggressiveNpcAI {
 			}
 		});
 		return Rnd.get(players);
-	}
-
-	private void rndSpawn(int npcId) {
-		float direction = Rnd.get(0, 180) / 100f;
-		int distance = Rnd.get(3, 12);
-		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
-		WorldPosition p = getPosition();
-		spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), (byte) 0);
 	}
 }

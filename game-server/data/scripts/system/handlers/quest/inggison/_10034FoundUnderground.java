@@ -12,7 +12,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -34,7 +33,7 @@ public class _10034FoundUnderground extends AbstractQuestHandler {
 		// Titus ID: 798990
 		// Drakan Stone Statue ID: 730295
 		// Hidden Switch ID: 700604
-		// Traveller's bag ID: 730229
+		// Traveler's bag ID: 730229
 		int[] npcs = { 799030, 799029, 798990, 730295, 700604, 730229 };
 		qe.addHandlerSideQuestDrop(questId, 730229, 182215628, 1, 100);
 		for (int npc : npcs) {
@@ -118,7 +117,7 @@ public class _10034FoundUnderground extends AbstractQuestHandler {
 					break;
 				case 700604:
 					if (var == 4 && dialogActionId == USE_OBJECT) {
-						InstanceHandler instanceHandler = player.getPosition().getWorldMapInstance().getInstanceHandler();
+						InstanceHandler instanceHandler = player.getWorldMapInstance().getInstanceHandler();
 						instanceHandler.handleUseItemFinish(player, (Npc) env.getVisibleObject());
 						return useQuestObject(env, 4, 5, false, 0);
 					}
@@ -173,7 +172,6 @@ public class _10034FoundUnderground extends AbstractQuestHandler {
 	@Override
 	public boolean onKillEvent(final QuestEnv env) {
 		Player player = env.getPlayer();
-		int instanceId = player.getInstanceId();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null || qs.getStatus() != QuestStatus.START) {
 			return false;
@@ -182,8 +180,8 @@ public class _10034FoundUnderground extends AbstractQuestHandler {
 		switch (env.getTargetId()) {
 			case 216531:
 				if (var == 5) {
-					QuestService.addNewSpawn(300160000, instanceId, 730229, 744, 885, 154, (byte) 90);
-					QuestService.addNewSpawn(300160000, instanceId, 804815, 776, 876, 151, (byte) 90);
+					spawnForFiveMinutes(730229, player.getWorldMapInstance(), 744, 885, 154, (byte) 90); // Traveler's Bag
+					spawnForFiveMinutes(804815, player.getWorldMapInstance(), 776, 876, 151, (byte) 90);
 					qs.setQuestVarById(0, var + 1);
 					updateQuestStatus(env);
 					return true;

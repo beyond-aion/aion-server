@@ -79,49 +79,29 @@ public class BollvigAI extends AggressiveNpcAI {
 	private void firstSkill() {
 		int hpPercent = getLifeStats().getHpPercentage();
 		if (50 >= hpPercent && hpPercent > 25) {
-			firstTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					useSkill(18034);// Nerve Absorption
-					rndSpawnInRange(280804);
-				}
+			firstTask = ThreadPoolManager.getInstance().schedule(() -> {
+				useSkill(18034);// Nerve Absorption
+				rndSpawnInRange(280804);
 			}, 10000);
 		} else if (hpPercent <= 25) {
 			useSkill(18037);// Blood Cell Destruction
 		}
-		secondTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				skillThree();
-			}
-		}, 31000);
+		secondTask = ThreadPoolManager.getInstance().schedule(this::skillThree, 31000);
 	}
 
 	private void skillThree() {
 		useSkill(17899);// Charming Attraction
-		thirdTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				int hpPercent = getLifeStats().getHpPercentage();
-				if (hpPercent <= 75 && hpPercent > 50) {
-					useSkill(18025);// Curse of Soul
-					firstSkill();
-				} else if (hpPercent <= 50 && hpPercent > 25) {
-					useSkill(18025);// Curse of Soul
-					firstSkill();
-				} else if (hpPercent <= 25) {
-					useSkill(18027);// Mortal Cutting
-					lastTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							skillThree();
-						}
-					}, 11000);
-				}
+		thirdTask = ThreadPoolManager.getInstance().schedule(() -> {
+			int hpPercent = getLifeStats().getHpPercentage();
+			if (hpPercent <= 75 && hpPercent > 50) {
+				useSkill(18025);// Curse of Soul
+				firstSkill();
+			} else if (hpPercent <= 50 && hpPercent > 25) {
+				useSkill(18025);// Curse of Soul
+				firstSkill();
+			} else if (hpPercent <= 25) {
+				useSkill(18027);// Mortal Cutting
+				lastTask = ThreadPoolManager.getInstance().schedule(this::skillThree, 11000);
 			}
 		}, 5000);
 	}
@@ -150,7 +130,7 @@ public class BollvigAI extends AggressiveNpcAI {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[] { 75, 50, 25 });
+		Collections.addAll(percents, 75, 50, 25);
 	}
 
 	@Override

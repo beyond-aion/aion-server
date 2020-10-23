@@ -93,7 +93,7 @@ public class _39515UntruthUpset extends AbstractQuestHandler {
 			if (Rnd.chance() < 20) {
 				Npc npc = (Npc) env.getVisibleObject();
 				npc.getController().delete();
-				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 701154, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
+				spawnForFiveMinutes(701154, npc.getPosition());
 				return true;
 			}
 		}

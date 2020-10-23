@@ -14,12 +14,14 @@ import com.aionemu.gameserver.model.*;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.QuestStateList;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.quest.*;
 import com.aionemu.gameserver.model.templates.rewards.BonusType;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -32,8 +34,13 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -430,8 +437,7 @@ public abstract class AbstractQuestHandler {
 						return QuestEngine.getInstance().onDialog(new QuestEnv(npc, player, questId, DialogAction.USE_OBJECT));
 					} else if (!npcHasActiveQuest && qs2 != null && qs2.getStatus() == QuestStatus.START) {
 						boolean isQuestStartNpc = questNpc.getOnQuestStart().contains(questId);
-						if (!isQuestStartNpc
-							|| isQuestStartNpc && DataManager.QUEST_DATA.getQuestById(questId).isMission() && qs2.getQuestVars().getQuestVars() == 0)
+						if (!isQuestStartNpc || DataManager.QUEST_DATA.getQuestById(questId).isMission() && qs2.getQuestVars().getQuestVars() == 0)
 							npcHasActiveQuest = true; // TODO correct way to make sure that active quest can be continued at this npc
 					}
 				}
@@ -1228,4 +1234,56 @@ public abstract class AbstractQuestHandler {
 		return false;
 	}
 
+	public static VisibleObject spawn(int templateId, VisibleObject objectToGetInstanceFrom, float x, float y, float z, byte heading) {
+		return spawn(templateId, objectToGetInstanceFrom.getWorldMapInstance(), x, y, z, heading);
+	}
+
+	public static VisibleObject spawn(int templateId, WorldMapInstance worldMapInstance, float x, float y, float z, byte heading) {
+		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(worldMapInstance.getMapId(), templateId, x, y, z, heading);
+		return SpawnEngine.spawnObject(template, worldMapInstance.getInstanceId());
+	}
+
+	public static VisibleObject spawnInFrontOf(int templateId, VisibleObject referencePositionObject) {
+		return spawnInFront(templateId, referencePositionObject.getPosition(), null, 1.5f, 0);
+	}
+
+	public static VisibleObject spawnForFiveMinutesInFrontOf(int templateId, VisibleObject referencePositionObject, float distance) {
+		return spawnInFront(templateId, referencePositionObject.getPosition(), null, distance, 5);
+	}
+
+	public static VisibleObject spawnForFiveMinutesInFront(int templateId, VisibleObject referencePositionObject, byte heading, float distance) {
+		return spawnInFront(templateId, referencePositionObject.getPosition(), heading, distance, 5);
+	}
+
+	private static VisibleObject spawnInFront(int templateId, WorldPosition referencePosition, Byte heading, float distance, int timeInMin) {
+		if (heading == null) // make the spawn face towards referencePosition
+			heading = (byte) (referencePosition.getHeading() < 60 ? referencePosition.getHeading() + 60 : referencePosition.getHeading() - 60);
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(referencePosition.getHeading()));
+		float x = referencePosition.getX() + (float) (Math.cos(radian) * distance);
+		float y = referencePosition.getY() + (float) (Math.sin(radian) * distance);
+		float z = referencePosition.getZ();
+		float geoZ = GeoService.getInstance().getZ(referencePosition.getMapId(), x, y, z + 2, z - 1, referencePosition.getInstanceId());
+		if (!Float.isNaN(geoZ))
+			z = geoZ;
+		return spawnTemporarily(templateId, referencePosition.getWorldMapInstance(), x, y, z, heading, timeInMin);
+	}
+
+	public static VisibleObject spawnForFiveMinutes(int templateId, WorldPosition position) {
+		return spawnForFiveMinutes(templateId, position, position.getHeading());
+	}
+
+	public static VisibleObject spawnForFiveMinutes(int templateId, WorldPosition position, byte heading) {
+		return spawnTemporarily(templateId, position.getWorldMapInstance(), position.getX(), position.getY(), position.getZ(), heading, 5);
+	}
+
+	public static VisibleObject spawnForFiveMinutes(int templateId, WorldMapInstance worldMapInstance, float x, float y, float z, byte heading) {
+		return spawnTemporarily(templateId, worldMapInstance, x, y, z, heading, 5);
+	}
+
+	public static VisibleObject spawnTemporarily(int templateId, WorldMapInstance worldMapInstance, float x, float y, float z, byte heading, int timeInMin) {
+		VisibleObject object = spawn(templateId, worldMapInstance, x, y, z, heading);
+		if (timeInMin > 0)
+			ThreadPoolManager.getInstance().schedule(() -> object.getController().deleteIfAliveOrCancelRespawn(), 60000 * timeInMin);
+		return object;
+	}
 }

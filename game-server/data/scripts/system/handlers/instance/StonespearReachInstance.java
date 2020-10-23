@@ -14,7 +14,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.LegionDominionReward;
 import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.instanceinfo.LegionDominionScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
@@ -25,7 +24,6 @@ import com.aionemu.gameserver.services.abyss.GloryPointsService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -54,9 +52,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		super.onInstanceCreate(instance);
 		reward = new LegionDominionReward(mapId, instanceId);
 		reward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
-		SpawnTemplate temp = SpawnEngine.newSingleTimeSpawn(mapId, 833284, 231.14f, 264.399f, 96.23f, (byte) 1);
-		temp.setStaticId(14);
-		SpawnEngine.spawnObject(temp, instanceId);
+		spawn(833284, 231.14f, 264.399f, 96.23f, (byte) 1, 14);
 		addWorldPoints();
 		if (timer == null) {
 			startTime = System.currentTimeMillis();
@@ -321,10 +317,10 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			int npcId = 855765 + Rnd.get(0, 8);
 			// 2k points
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855764, 230.8977f, 285.5198f, 96.42f, (byte) 80), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855764, 211.254f, 264.134f, 96.53f, (byte) 0), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855764, 231.2034f, 243.8273f, 96.37f, (byte) 30), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855764, 251.3068f, 264.307f, 96.31f, (byte) 60), instanceId);
+			spawn(855764, 230.8977f, 285.5198f, 96.42f, (byte) 80);
+			spawn(855764, 211.254f, 264.134f, 96.53f, (byte) 0);
+			spawn(855764, 231.2034f, 243.8273f, 96.37f, (byte) 30);
+			spawn(855764, 251.3068f, 264.307f, 96.31f, (byte) 60);
 			startAethericFieldTask(1);
 
 			rndSpawnTask(500, npcId, 5, 8, 12);
@@ -342,7 +338,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private void startStage1_4() { // minute 3 - 5
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			// 12k points + 3k points
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855776, 231.14f, 264.399f, 96.5f, (byte) 10), instanceId); // kaliga 855776
+			spawn(855776, 231.14f, 264.399f, 96.5f, (byte) 10); // kaliga 855776
 			rndSpawnTask(35000, 856303, 2, 22, 23);
 			startStage2_1();
 		}, 60000));
@@ -394,10 +390,10 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
 			// 4k points
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855787, 230.8977f, 285.5198f, 96.42f, (byte) 80), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855787, 211.254f, 264.134f, 96.53f, (byte) 0), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855787, 231.2034f, 243.8273f, 96.37f, (byte) 30), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855787, 251.3068f, 264.307f, 96.31f, (byte) 60), instanceId);
+			spawn(855787, 230.8977f, 285.5198f, 96.42f, (byte) 80);
+			spawn(855787, 211.254f, 264.134f, 96.53f, (byte) 0);
+			spawn(855787, 231.2034f, 243.8273f, 96.37f, (byte) 30);
+			spawn(855787, 251.3068f, 264.307f, 96.31f, (byte) 60);
 			startAethericFieldTask(2);
 
 			// 2,6k + 1,2k = 3,8k
@@ -415,7 +411,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private void startStage2_4() { // minute 8 - 10
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			// 21k
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855799, 231.14f, 264.399f, 96.5f, (byte) 10), instanceId); // lanmark
+			spawn(855799, 231.14f, 264.399f, 96.5f, (byte) 10); // lanmark
 			// 3k
 			rndSpawnTask(35000, 856303, 1, 22, 23);
 			rndSpawnTask(45000, 856303, 1, 22, 23);
@@ -470,10 +466,10 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			int npcId = 855765 + Rnd.get(0, 8);
 			// 6k points
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855810, 230.8977f, 285.5198f, 96.42f, (byte) 80), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855810, 211.254f, 264.134f, 96.53f, (byte) 0), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855810, 231.2034f, 243.8273f, 96.37f, (byte) 30), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855810, 251.3068f, 264.307f, 96.31f, (byte) 60), instanceId);
+			spawn(855810, 230.8977f, 285.5198f, 96.42f, (byte) 80);
+			spawn(855810, 211.254f, 264.134f, 96.53f, (byte) 0);
+			spawn(855810, 231.2034f, 243.8273f, 96.37f, (byte) 30);
+			spawn(855810, 251.3068f, 264.307f, 96.31f, (byte) 60);
 			startAethericFieldTask(3);
 
 			// 2,5k points
@@ -503,7 +499,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private void startStage3_5() { // minute 14 - 16
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			// 30k points
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855822, 231.14f, 264.399f, 96.5f, (byte) 10), instanceId); // stormwing
+			spawn(855822, 231.14f, 264.399f, 96.5f, (byte) 10); // stormwing
 
 			// 3k points
 			rndSpawnTask(25000, 856303, 1, 22, 23);
@@ -633,10 +629,10 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			int npcId = 855765 + Rnd.get(0, 8);
 			int npcId2 = 855788 + Rnd.get(0, 8);
 			// 8k
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855833, 230.8977f, 285.5198f, 96.42f, (byte) 80), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855833, 211.254f, 264.134f, 96.53f, (byte) 0), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855833, 231.2034f, 243.8273f, 96.37f, (byte) 30), instanceId);
-			SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855833, 251.3068f, 264.307f, 96.31f, (byte) 60), instanceId);
+			spawn(855833, 230.8977f, 285.5198f, 96.42f, (byte) 80);
+			spawn(855833, 211.254f, 264.134f, 96.53f, (byte) 0);
+			spawn(855833, 231.2034f, 243.8273f, 96.37f, (byte) 30);
+			spawn(855833, 251.3068f, 264.307f, 96.31f, (byte) 60);
 			startAethericFieldTask(4);
 
 			// 2k + 2k + 3,2k = 7,2k
@@ -655,7 +651,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	private void startStage4_6() { // minute 21 - 30
 		// 42k
-		SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, 855843, 231.14f, 264.399f, 96.5f, (byte) 10), instanceId); // general of illusion
+		spawn(855843, 231.14f, 264.399f, 96.5f, (byte) 10); // general of illusion
 		// 6k
 		rndSpawnTask(25000, 856303, 1, 22, 23);
 		rndSpawnTask(30000, 856303, 1, 22, 23);
@@ -708,16 +704,14 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		if (index >= 0) {
 			WorldPosition point = points.get(index);
 			if (point != null) {
-				SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, npcId, point.getX(), point.getY(), point.getZ(), point.getHeading());
-				SpawnEngine.spawnObject(template, instanceId);
+				spawn(npcId, point.getX(), point.getY(), point.getZ(), point.getHeading());
 			}
 		} else {
 			for (WorldPosition point : points) {
 				if (!reward.isStartProgress()) {
 					break;
 				}
-				SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, npcId, point.getX(), point.getY(), point.getZ(), point.getHeading());
-				SpawnEngine.spawnObject(template, instanceId);
+				spawn(npcId, point.getX(), point.getY(), point.getZ(), point.getHeading());
 			}
 		}
 	}
@@ -738,14 +732,11 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			if (!reward.isStartProgress()) {
 				break;
 			}
-			SpawnTemplate template = getRndSpawnInRangeTemplate(npcId, minRange, maxRange);
-			if (template != null) {
-				SpawnEngine.spawnObject(template, instanceId);
-			}
+			spawnAtRandomPositionWithinRange(npcId, minRange, maxRange);
 		}
 	}
 
-	private SpawnTemplate getRndSpawnInRangeTemplate(int npcId, int minRange, int maxRange) {
+	private void spawnAtRandomPositionWithinRange(int npcId, int minRange, int maxRange) {
 		for (int i = 0; i < 10; i++) { // 10 tries should be enough to find a spot. if not fuck it. I'm not going to implement a while loop
 			if (!reward.isStartProgress()) {
 				break;
@@ -755,26 +746,26 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			float x = 231.14f + (float) (Math.cos(Math.PI * direction) * range);
 			float y = 264.399f + (float) (Math.sin(Math.PI * direction) * range);
 			if (isValidPoint(x, y)) {
-				return SpawnEngine.newSingleTimeSpawn(mapId, npcId, x, y, 96.51f, (byte) 50);
+				spawn(npcId, x, y, 96.51f, (byte) 50);
+				break;
 			}
 		}
-		return null;
 	}
 
 	private void spawnGuardianStone(boolean isElyos, int stage) {
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_OBJ_Start());
 		switch (stage) {
 			case 1:
-				SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, (isElyos ? 855763 : 856466), 231.14f, 264.399f, 96.5f, (byte) 10), instanceId);
+				spawn((isElyos ? 855763 : 856466), 231.14f, 264.399f, 96.5f, (byte) 10);
 				break;
 			case 2:
-				SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, (isElyos ? 855786 : 856467), 231.14f, 264.399f, 96.5f, (byte) 10), instanceId);
+				spawn((isElyos ? 855786 : 856467), 231.14f, 264.399f, 96.5f, (byte) 10);
 				break;
 			case 3:
-				SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, (isElyos ? 855809 : 856468), 231.14f, 264.399f, 96.5f, (byte) 10), instanceId);
+				spawn((isElyos ? 855809 : 856468), 231.14f, 264.399f, 96.5f, (byte) 10);
 				break;
 			case 4:
-				SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(mapId, (isElyos ? 855832 : 856469), 231.14f, 264.399f, 96.5f, (byte) 10), instanceId);
+				spawn((isElyos ? 855832 : 856469), 231.14f, 264.399f, 96.5f, (byte) 10);
 				break;
 		}
 	}
@@ -918,15 +909,11 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	private void startAethericFieldTask(final int stage) {
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_OBJ_Bomb());
-		tasks.add(ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (reward.isStartProgress()) {
-					if (aethericKills < stage * 4) {
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_OBJ_Bomb_Die());
-						checkRank(reward.getPoints(), false);
-					}
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
+			if (reward.isStartProgress()) {
+				if (aethericKills < stage * 4) {
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_OBJ_Bomb_Die());
+					checkRank(reward.getPoints(), false);
 				}
 			}
 		}, 120000));

@@ -10,7 +10,6 @@ import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -82,7 +81,7 @@ public class _25023SproutingDevelopments extends AbstractQuestHandler {
 	}
 
 	@Override
-	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
+	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		final QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs == null)
@@ -94,21 +93,14 @@ public class _25023SproutingDevelopments extends AbstractQuestHandler {
 
 		final int itemObjId = item.getObjectId();
 		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 1000, 0, 0), true);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
-				int var = qs.getQuestVarById(0);
-				if (var == 2) {
-					float xPlayer = player.getPosition().getX();
-					float yPlayer = player.getPosition().getY();
-					float zPlayer = player.getPosition().getZ();
-					QuestService.addNewSpawn(220080000, player.getInstanceId(), 805161, xPlayer + 2, yPlayer + 2, zPlayer, (byte) 60, 2);
-					qs.setStatus(QuestStatus.REWARD);
-					qs.setQuestVar(var + 1);
-					updateQuestStatus(env);
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+			int var = qs.getQuestVarById(0);
+			if (var == 2) {
+				spawnTemporarily(805161, player.getWorldMapInstance(), player.getX() + 2, player.getY() + 2, player.getZ(), (byte) 60, 2);
+				qs.setStatus(QuestStatus.REWARD);
+				qs.setQuestVar(var + 1);
+				updateQuestStatus(env);
 			}
 		}, 1000);
 		return HandlerResult.SUCCESS;

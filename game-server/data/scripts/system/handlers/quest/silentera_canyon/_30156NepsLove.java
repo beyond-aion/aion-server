@@ -8,7 +8,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -64,7 +63,7 @@ public class _30156NepsLove extends AbstractQuestHandler {
 				switch (dialogActionId) {
 					case USE_OBJECT:
 						if (var == 0) {
-							QuestService.addNewSpawn(600010000, player.getInstanceId(), 799339, (float) 545.308, (float) 1232.3855, (float) 304.35193, (byte) 73);
+							spawnForFiveMinutes(799339, player.getWorldMapInstance(), (float) 545.308, (float) 1232.3855, (float) 304.35193, (byte) 73);
 							return useQuestObject(env, 0, 0, false, 0, 0, 0, 182209223, 1);
 						}
 				}

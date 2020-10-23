@@ -25,14 +25,6 @@ public class TelepathyControllerAI extends AggressiveNpcAI {
 		super(owner);
 	}
 
-	private Npc spawnHelper() {
-		int distance = Rnd.get(7, 10);
-		float direction = Rnd.get(200) / 100f;
-		float xOff = (float) (Math.cos(Math.PI * direction) * distance);
-		float yOff = (float) (Math.sin(Math.PI * direction) * distance);
-		return (Npc) spawn(Rnd.get(2) == 0 ? 281150 : 281334, getPosition().getX() + xOff, getPosition().getY() + yOff, getPosition().getZ(), (byte) 0);
-	}
-
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
@@ -41,7 +33,7 @@ public class TelepathyControllerAI extends AggressiveNpcAI {
 				if (isAggred.get()) {
 					spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 						if (!isDead()) {
-							Npc spawn = spawnHelper();
+							Npc spawn = (Npc) rndSpawnInRange(Rnd.get(2) == 0 ? 281150 : 281334, 7, 10);
 							spawn.getKnownList().forEachPlayer(p -> spawn.getAggroList().addHate(p, 10));
 						}
 					}, 60000, 60000);

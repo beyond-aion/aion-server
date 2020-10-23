@@ -2,13 +2,11 @@ package quest.enshar;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @Author Majka
@@ -55,10 +53,7 @@ public class _25052AnOfferingPeace extends AbstractQuestHandler {
 							return sendQuestDialog(env, 1011);
 
 						if (dialogActionId == SET_SUCCEED) {
-							Npc npc = (Npc) env.getVisibleObject();
-							if (npc != null)
-								QuestService.addNewSpawn(220080000, player.getInstanceId(), 220032, npc.getPosition().getX(), npc.getPosition().getY(),
-									npc.getPosition().getZ(), (byte) 10, 5);
+							spawnForFiveMinutes(220032, env.getVisibleObject().getPosition(), (byte) 10);
 							giveQuestItem(env, 182215721, 1);
 							qs.setQuestVar(var + 1);
 							return defaultCloseDialog(env, var + 1, var + 1, true, false);

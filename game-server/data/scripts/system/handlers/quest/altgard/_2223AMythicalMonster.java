@@ -7,7 +7,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Mr. Poke
@@ -110,7 +109,7 @@ public class _2223AMythicalMonster extends AbstractQuestHandler {
 	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
 		Player player = env.getPlayer();
 		if (movieId == 67) {
-			QuestService.addNewSpawn(220030000, player.getInstanceId(), 211621, (float) 1547.1047, (float) 894.2969, (float) 248.019, (byte) 85);
+			spawnForFiveMinutes(211621, player.getWorldMapInstance(), (float) 1547.1047, (float) 894.2969, (float) 248.019, (byte) 85);
 			return true;
 		}
 		return false;

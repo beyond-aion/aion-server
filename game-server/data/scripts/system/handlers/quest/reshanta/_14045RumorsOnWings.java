@@ -12,7 +12,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -90,14 +89,12 @@ public class _14045RumorsOnWings extends AbstractQuestHandler {
 						case SETPRO3:
 							if (var == 2) {
 								Npc raithor = (Npc) env.getVisibleObject();
-								QuestService.addNewSpawn(raithor.getWorldId(), raithor.getInstanceId(), 214102, 2344.32f, 1789.96f, 2258.88f, (byte) 86, 5);
-								QuestService.addNewSpawn(raithor.getWorldId(), raithor.getInstanceId(), 214102, 2344.51f, 1786.01f, 2258.88f, (byte) 52, 5);
-								raithor.getKnownList().forEachNpc(npc -> {
-									if (npc.getNpcId() == 214102) {
-										npc.getAggroList().addHate(raithor, 1);
-										raithor.getAggroList().addHate(npc, 1);
-									}
-								});
+								Npc attacker1 = (Npc) spawnForFiveMinutes(214102, raithor.getWorldMapInstance(), 2344.32f, 1789.96f, 2258.88f, (byte) 86);
+								Npc attacker2 = (Npc) spawnForFiveMinutes(214102, raithor.getWorldMapInstance(), 2344.51f, 1786.01f, 2258.88f, (byte) 52);
+								attacker1.getAggroList().addHate(raithor, 1);
+								raithor.getAggroList().addHate(attacker1, 1);
+								attacker2.getAggroList().addHate(raithor, 1);
+								raithor.getAggroList().addHate(attacker2, 1);
 								qs.setQuestVarById(0, 3); // 3
 								return closeDialogWindow(env);
 							}

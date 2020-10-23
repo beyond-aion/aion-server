@@ -12,10 +12,8 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -139,15 +137,12 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 	}
 
 	private void rndSpawn(int npcId, int count) {
-		for (int i = 0; i < count; i++) {
-			SpawnTemplate template = rndSpawnInRange(npcId);
-			SpawnEngine.spawnObject(template, getPosition().getInstanceId());
-		}
+		for (int i = 0; i < count; i++)
+			rndSpawnInRange(npcId, 5);
 	}
 
 	private void spawnSouls() {
-		List<Point3D> points = new ArrayList<>();
-		points.addAll(soulLocations);
+		List<Point3D> points = new ArrayList<>(soulLocations);
 		int count = Rnd.get(3, 6);
 		for (int i = 0; i < count; i++) {
 			if (!points.isEmpty()) {
@@ -169,14 +164,6 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 
 	private void scheduleSpecial(int delay) {
 		spawnTask = ThreadPoolManager.getInstance().schedule(this::launchSpecial, delay);
-	}
-
-	private SpawnTemplate rndSpawnInRange(int npcId) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
-		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(),
-			getPosition().getHeading());
 	}
 
 	private void cancelTasks(Future<?>... tasks) {

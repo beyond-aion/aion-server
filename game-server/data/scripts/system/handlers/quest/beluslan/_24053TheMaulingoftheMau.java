@@ -11,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.questEngine.task.QuestTasks;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Ritsu
@@ -130,8 +129,7 @@ public class _24053TheMaulingoftheMau extends AbstractQuestHandler {
 					return false;
 				case SETPRO3:
 					if (var == 2) {
-						Npc survivor = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), 204806, player.getX(), player.getY(),
-							player.getZ(), (byte) 0);
+						Npc survivor = (Npc) spawnInFrontOf(204806, player);
 						survivor.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
 						player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, survivor, 204813));
 						return defaultCloseDialog(env, 2, 3);

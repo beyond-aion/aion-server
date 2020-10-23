@@ -3,7 +3,6 @@ package quest.eltnen;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import java.util.Arrays;
-import java.util.Collection;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIState;
@@ -21,7 +20,6 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
@@ -235,15 +233,8 @@ public class _14026ALoneDefense extends AbstractQuestHandler {
 				y = 237.5f;
 				break;
 		}
-		Npc spawn = (Npc) QuestService.spawnQuestNpc(310040000, player.getInstanceId(), mobToSpawn, x, y, z, (byte) 95);
-		Collection<Npc> allNpcs = World.getInstance().getNpcs();
-		Npc target = null;
-		for (Npc npc : allNpcs) {
-			if (npc.getNpcId() == 204044) {
-				target = npc;
-			}
-		}
-		if (target != null) {
+		Npc spawn = (Npc) spawn(mobToSpawn, player, x, y, z, (byte) 95);
+		if (spawn.getKnownList().findObject(204044) instanceof Npc target) {
 			spawn.setTarget(target);
 			spawn.getAi().setStateIfNot(AIState.WALKING);
 			spawn.setState(CreatureState.ACTIVE, true);

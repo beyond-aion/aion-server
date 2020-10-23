@@ -7,7 +7,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 
 /**
  * @author Balthazar
@@ -78,9 +77,9 @@ public class _1647DressingUpForBollvig extends AbstractQuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
 			if (movieId == 199) {
-				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX(), player.getY(), player.getZ(), (byte) 0);
-				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX() + 2, player.getY() - 2, player.getZ(), (byte) 0);
-				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 204635, player.getX() - 2, player.getY() + 2, player.getZ(), (byte) 0);
+				spawnForFiveMinutesInFrontOf(204635, player, 2);
+				spawnForFiveMinutes(204635, player.getWorldMapInstance(), player.getX() + 2, player.getY() - 2, player.getZ(), (byte) 0);
+				spawnForFiveMinutes(204635, player.getWorldMapInstance(), player.getX() - 2, player.getY() + 2, player.getZ(), (byte) 0);
 				return true;
 			}
 		}

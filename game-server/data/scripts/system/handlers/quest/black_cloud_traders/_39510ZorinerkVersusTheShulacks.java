@@ -57,11 +57,7 @@ public class _39510ZorinerkVersusTheShulacks extends AbstractQuestHandler {
 					case USE_OBJECT:
 						return sendQuestDialog(env, 1352);
 					case SETPRO1:
-						if (env.getVisibleObject() instanceof Npc) {
-							targetId = ((Npc) env.getVisibleObject()).getNpcId();
-							Npc npc = (Npc) env.getVisibleObject();
-							npc.getController().delete();
-						}
+						env.getVisibleObject().getController().delete();
 						return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 205629) {
@@ -93,7 +89,7 @@ public class _39510ZorinerkVersusTheShulacks extends AbstractQuestHandler {
 			if (Rnd.chance() < 20) {
 				Npc npc = (Npc) env.getVisibleObject();
 				npc.getController().delete();
-				QuestService.addNewSpawn(npc.getWorldId(), npc.getInstanceId(), 205983, npc.getX(), npc.getY(), npc.getZ(), (byte) 0);
+				spawnForFiveMinutes(205983, npc.getPosition());
 				return true;
 			}
 		}

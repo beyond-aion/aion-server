@@ -7,7 +7,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -151,10 +150,10 @@ public class _20503AncientEvilPlans extends AbstractQuestHandler {
 			float xPlayer = player.getPosition().getX();
 			float yPlayer = player.getPosition().getY();
 			float zPlayer = player.getPosition().getZ();
-			QuestService.addNewSpawn(220080000, player.getInstanceId(), 805221, xPlayer, yPlayer + 3, zPlayer, (byte) 0, 2); // Egzen
-			QuestService.addNewSpawn(220080000, player.getInstanceId(), 804859, xPlayer + 1, yPlayer + 1, zPlayer, (byte) 20, 2); // Archon Shadowthrash
-			QuestService.addNewSpawn(220080000, player.getInstanceId(), 804860, xPlayer + 3, yPlayer + 1, zPlayer, (byte) 60, 2); // Archon Shadowthrash
-			QuestService.addNewSpawn(220080000, player.getInstanceId(), 804861, xPlayer + 2, yPlayer + 3, zPlayer, (byte) 73, 2); // Archon Shadowthrash
+			spawnTemporarily(805221, player.getWorldMapInstance(), xPlayer, yPlayer + 3, zPlayer, (byte) 0, 2); // Egzen
+			spawnTemporarily(804859, player.getWorldMapInstance(), xPlayer + 1, yPlayer + 1, zPlayer, (byte) 20, 2); // Archon Shadowthrash
+			spawnTemporarily(804860, player.getWorldMapInstance(), xPlayer + 3, yPlayer + 1, zPlayer, (byte) 60, 2); // Archon Shadowthrash
+			spawnTemporarily(804861, player.getWorldMapInstance(), xPlayer + 2, yPlayer + 3, zPlayer, (byte) 73, 2); // Archon Shadowthrash
 		}
 		return true;
 	}

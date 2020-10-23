@@ -73,8 +73,7 @@ public class _25050TreasureInTheDeepSea extends AbstractQuestHandler {
 
 						if (dialogActionId == SETPRO3) {
 							// Spawn of Zagmus
-							if (player.getPosition().getWorldMapInstance().getNpc(805160) == null)
-								QuestService.addNewSpawn(220080000, player.getInstanceId(), 805160, 2046.8f, 1588.8f, 348.4f, (byte) 90, 5);
+							spawnForFiveMinutes(805160, env.getVisibleObject().getWorldMapInstance(), 2046.8f, 1588.8f, 348.4f, (byte) 90);
 							QuestService.invisibleTimerStart(env, 300);
 							return defaultCloseDialog(env, var, var + 1);
 						}

@@ -7,9 +7,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 import ai.AggressiveNpcAI;
@@ -76,17 +74,7 @@ public class TraitorKumbandaAI extends AggressiveNpcAI {
 	}
 
 	private void rndSpawn(int npcId, int count) {
-		for (int i = 0; i < count; i++) {
-			SpawnTemplate template = rndSpawnInRange(npcId, Rnd.get(10, 20));
-			SpawnEngine.spawnObject(template, getPosition().getInstanceId());
-		}
-	}
-
-	private SpawnTemplate rndSpawnInRange(int npcId, int dist) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x1 = (float) (Math.cos(Math.PI * direction) * dist);
-		float y1 = (float) (Math.sin(Math.PI * direction) * dist);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(),
-			getPosition().getHeading());
+		for (int i = 0; i < count; i++)
+			rndSpawnInRange(npcId, 10, 20);
 	}
 }

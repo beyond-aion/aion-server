@@ -8,7 +8,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
@@ -106,7 +105,7 @@ public class _1693AreYouMyFather extends AbstractQuestHandler {
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
 			if (player.getWorldId() == 110010000) {
-				QuestService.addNewSpawn(player.getWorldId(), player.getInstanceId(), 798388, player.getX(), player.getY(), player.getZ(), (byte) 0);
+				spawnForFiveMinutesInFrontOf(798388, player, 1.5f);
 				return true;
 			}
 		}

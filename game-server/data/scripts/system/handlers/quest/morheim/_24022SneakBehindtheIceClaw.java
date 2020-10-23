@@ -3,14 +3,12 @@ package quest.morheim;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
@@ -110,8 +108,7 @@ public class _24022SneakBehindtheIceClaw extends AbstractQuestHandler {
 					if (dialogActionId == USE_OBJECT) {
 						if (var == 3) {
 							if (player.getInventory().getItemCountByItemId(182215365) > 0) {
-								final Npc npc = (Npc) env.getVisibleObject();
-								QuestService.addNewSpawn(220020000, player.getInstanceId(), 204417, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
+								spawnForFiveMinutes(204417, env.getVisibleObject().getPosition());
 								removeQuestItem(env, 182215364, 1);
 								removeQuestItem(env, 182215365, 1);
 								changeQuestStep(env, 3, 4); // 4

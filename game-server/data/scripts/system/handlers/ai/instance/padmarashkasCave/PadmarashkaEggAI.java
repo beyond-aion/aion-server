@@ -9,10 +9,8 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -70,16 +68,7 @@ public class PadmarashkaEggAI extends NpcAI {
 	}
 
 	private void SpawnEliteCommander() {
-		SpawnTemplate template = rndSpawnInRange(282712);
-		protector = (Npc) SpawnEngine.spawnObject(template, getPosition().getInstanceId());
-	}
-
-	private SpawnTemplate rndSpawnInRange(int npcId) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
-		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.newSingleTimeSpawn(getPosition().getMapId(), npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(),
-			getPosition().getHeading());
+		protector = (Npc) rndSpawnInRange(282712, 5);
 	}
 
 	@Override

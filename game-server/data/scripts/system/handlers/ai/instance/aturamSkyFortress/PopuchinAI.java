@@ -2,7 +2,6 @@ package ai.instance.aturamSkyFortress;
 
 import java.util.concurrent.Future;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -86,13 +85,6 @@ public class PopuchinAI extends AggressiveNpcAI {
 		}
 	}
 
-	private void rndSpawnInRange(int npcId, float distance) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
-		spawn(npcId, getPosition().getX() + x1, getPosition().getY() + y1, getPosition().getZ(), (byte) 0);
-	}
-
 	@Override
 	protected void handleBackHome() {
 		isHome = true;
@@ -110,7 +102,7 @@ public class PopuchinAI extends AggressiveNpcAI {
 			public void run() {
 				if (!isDead() && !isHome) {
 					for (int i = 0; i < 10; i++) {
-						rndSpawnInRange(217375, Rnd.get(1, 12));
+						rndSpawnInRange(217375, 1, 12);
 					}
 				}
 			}

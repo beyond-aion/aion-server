@@ -9,6 +9,7 @@ import java.util.function.Consumer;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.EmotionType;
@@ -19,7 +20,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.NormalReward;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.instanceinfo.NormalScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -30,10 +30,10 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author Cheatkiller
@@ -641,17 +641,16 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 
 	private void rndSpawn(Npc npc, int npcId, int count) {
 		for (int i = 0; i < count; i++) {
-			SpawnTemplate template = rndSpawnInRange(npc, npcId);
-			SpawnEngine.spawnObject(template, instance.getInstanceId());
+			rndSpawnInRange(npc, npcId);
 		}
 	}
 
-	private SpawnTemplate rndSpawnInRange(Npc npc, int npcId) {
+	private void rndSpawnInRange(Npc npc, int npcId) {
 		float direction = Rnd.get(0, 199) / 100f;
 		float x1 = (float) (Math.cos(Math.PI * direction) * 5);
 		float y1 = (float) (Math.sin(Math.PI * direction) * 5);
-		return SpawnEngine.newSingleTimeSpawn(instance.getMapId(), npcId, npc.getPosition().getX() + x1, npc.getPosition().getY() + y1,
-			npc.getPosition().getZ(), npc.getPosition().getHeading());
+		Vector3f pos = GeoService.getInstance().getClosestCollision(npc, npc.getX() + x1, npc.getY() + y1, npc.getZ());
+		spawn(npcId, pos.getX(), pos.getY(), pos.getZ(), npc.getHeading());
 	}
 
 	@Override

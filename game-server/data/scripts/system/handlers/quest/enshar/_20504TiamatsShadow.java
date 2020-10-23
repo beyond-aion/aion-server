@@ -2,7 +2,6 @@ package quest.enshar;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -159,10 +158,7 @@ public class _20504TiamatsShadow extends AbstractQuestHandler {
 				if (var == 4) { // Step 4: Take down Cursed Gilgamesh. (1)
 					qs.setQuestVar(var + 1);
 					updateQuestStatus(env);
-					Npc npc = (Npc) env.getVisibleObject();
-					if (npc != null)
-						QuestService.addNewSpawn(220080000, player.getInstanceId(), 804742, npc.getPosition().getX(), npc.getPosition().getY(),
-							npc.getPosition().getZ(), npc.getPosition().getHeading(), 5);
+					spawnForFiveMinutes(804742, env.getVisibleObject().getPosition());
 					QuestService.invisibleTimerStart(env, 300);
 					return true;
 				}

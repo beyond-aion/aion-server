@@ -3,7 +3,6 @@ package quest.altgard;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
@@ -12,7 +11,6 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Ritsu
@@ -89,13 +87,9 @@ public class _2252ChasingtheLegend extends AbstractQuestHandler {
 							int chance = 95; // Chance to spawn biggest reward mob
 							int spawnTime = 3; // 3 min of spawn
 							int questSpawnedNpcId = Rnd.chance() < chance ? questKillNpc1Id : questKillNpc2Id;
-							final Npc questMob = (Npc) QuestService.spawnQuestNpc(player.getWorldId(), player.getInstanceId(), questSpawnedNpcId, npc.getX(),
-								npc.getY(), npc.getZ(), npc.getHeading()); // Minushan's Spirit or Minushan's Drakie
+							Npc questMob = (Npc) spawnTemporarily(questSpawnedNpcId, npc.getWorldMapInstance(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), spawnTime); // Minushan's Spirit or Minushan's Drakie
 							PacketSendUtility.broadcastMessage(questMob, 1100630, 500);
 							// TODO: set not usable icon to questStep1NpcId while mob is spawned, setting usable icon after mob is despawned
-							questMob.getController().addTask(TaskId.DESPAWN,
-								ThreadPoolManager.getInstance().schedule(() -> questMob.getController().delete(), spawnTime * 60000));
-
 						}
 				}
 			}

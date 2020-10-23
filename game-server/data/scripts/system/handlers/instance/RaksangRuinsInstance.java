@@ -5,6 +5,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
@@ -15,8 +16,10 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author Estrayl 14.04.2016
@@ -260,18 +263,16 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 	 * Used for way C (Torment's Forge).
 	 */
 	private void delaySpawn(Player p, int npcId, int delay) {
-		ThreadPoolManager.getInstance().schedule(() -> {
-			float[] pos = getRndPos(5);
-			spawn(npcId, p.getX() + pos[0], p.getY() + pos[1], p.getZ(), (byte) 0);
-		}, delay);
+		ThreadPoolManager.getInstance().schedule(() -> rndSpawnInRange(p, npcId, 5), delay);
 	}
 
-	private float[] getRndPos(int distance) {
+	private void rndSpawnInRange(Player player, int npcId, int distance) {
 		float direction = Rnd.get(0, 199) / 100f;
-		float[] array = { 0, 0 };
-		array[0] = (float) (Math.cos(Math.PI * direction) * distance);
-		array[1] = (float) (Math.sin(Math.PI * direction) * distance);
-		return array;
+		float x = player.getX() + (float) (Math.cos(Math.PI * direction) * distance);
+		float y = player.getY() + (float) (Math.sin(Math.PI * direction) * distance);
+		Vector3f pos = GeoService.getInstance().getClosestCollision(player, x, y, player.getZ());
+		byte headingTowardsPlayer = PositionUtil.getHeadingTowards(pos.getX(), pos.getY(), player.getX(), player.getY());
+		spawn(npcId, pos.getX(), pos.getY(), pos.getZ(), headingTowardsPlayer);
 	}
 
 	@Override

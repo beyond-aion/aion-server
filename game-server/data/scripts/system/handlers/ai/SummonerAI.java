@@ -130,13 +130,6 @@ public class SummonerAI extends AggressiveNpcAI {
 		}
 	}
 
-	protected VisibleObject rndSpawnInRange(int npcId, float distance) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x = (float) (Math.cos(Math.PI * direction) * distance);
-		float y = (float) (Math.sin(Math.PI * direction) * distance);
-		return spawn(npcId, getPosition().getX() + x, getPosition().getY() + y, getPosition().getZ(), getPosition().getHeading());
-	}
-
 	protected boolean checkBeforeSpawn() {
 		return true;
 	}
