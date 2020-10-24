@@ -6,7 +6,7 @@ clone:
 definitions:
   script: &resolve-dependencies
     (wget -q https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15.0.1%2B9/OpenJDK15U-jdk_x64_linux_hotspot_15.0.1_9.tar.gz; tar xzf OpenJDK15U-jdk_x64_linux_hotspot_15.0.1_9.tar.gz > /dev/null) &
-    GIT_LFS_SKIP_SMUDGE=1 git clone --branch="$BITBUCKET_BRANCH" --depth 1 $BITBUCKET_GIT_SSH_ORIGIN $BITBUCKET_CLONE_DIR;
+    GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 $BITBUCKET_GIT_SSH_ORIGIN $BITBUCKET_CLONE_DIR;
     cd $BITBUCKET_CLONE_DIR;
     git reset --hard $BITBUCKET_COMMIT;
     chmod 777 $BITBUCKET_CLONE_DIR;
