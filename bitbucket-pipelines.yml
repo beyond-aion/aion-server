@@ -1,7 +1,19 @@
-image: maven:3.6.3-openjdk-15
+image: atlassian/default-image:2
 
 clone:
-  depth: 1 # shallow git clone, since we don't need all the history
+  enabled: false # we clone manually because otherwise depth parameter is ignored
+
+definitions:
+  script: &resolve-dependencies
+    (wget -q https://github.com/AdoptOpenJDK/openjdk15-binaries/releases/download/jdk-15.0.1%2B9/OpenJDK15U-jdk_x64_linux_hotspot_15.0.1_9.tar.gz; tar xzf OpenJDK15U-jdk_x64_linux_hotspot_15.0.1_9.tar.gz > /dev/null) &
+    GIT_LFS_SKIP_SMUDGE=1 git clone --branch="$BITBUCKET_BRANCH" --depth 1 $BITBUCKET_GIT_SSH_ORIGIN $BITBUCKET_CLONE_DIR;
+    cd $BITBUCKET_CLONE_DIR;
+    git reset --hard $BITBUCKET_COMMIT;
+    chmod 777 $BITBUCKET_CLONE_DIR;
+    wait;
+    export JAVA_HOME=$PWD/jdk-15.0.1+9;
+    export PATH=$JAVA_HOME/bin:$PATH;
+    mvn -T 1C -f commons/pom.xml install -Dmaven.source.skip=true
 
 pipelines:
   custom: # triggered manually
@@ -10,7 +22,7 @@ pipelines:
           caches:
             - maven
           script:
-            - mvn -T 1C -f commons/pom.xml install -Dmaven.source.skip=true
+            - *resolve-dependencies
             - mvn -T 1C -f chat-server/pom.xml compile
             - mvn -T 1C -f login-server/pom.xml compile
             - mvn -T 1C -f game-server/pom.xml compile
@@ -19,7 +31,7 @@ pipelines:
           caches:
             - maven
           script:
-            - mvn -T 1C -f commons/pom.xml install -Dmaven.source.skip=true
+            - *resolve-dependencies
             - mvn -T 1C -f chat-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
     build-game-server:
       - step:
@@ -27,12 +39,12 @@ pipelines:
           caches:
             - maven
           script:
-            - mvn -T 1C -f commons/pom.xml install -Dmaven.source.skip=true
+            - *resolve-dependencies
             - mvn -T 1C -f game-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
     build-login-server:
       - step:
           caches:
             - maven
           script:
-            - mvn -T 1C -f commons/pom.xml install -Dmaven.source.skip=true
+            - *resolve-dependencies
             - mvn -T 1C -f login-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
