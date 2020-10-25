@@ -172,7 +172,7 @@ public class ConfigurableProcessor {
 		return input;
 	}
 
-	private static Map<?, ?> transform(Map<String, String> values, Field field) throws Exception {
+	public static Map<?, ?> transform(Map<String, String> values, Field field) throws Exception {
 		Type[] genericTypeArgs = {};
 		if (field.getGenericType() instanceof ParameterizedType)
 			genericTypeArgs = ((ParameterizedType) field.getGenericType()).getActualTypeArguments();

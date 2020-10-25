@@ -2,16 +2,13 @@ package admincommands;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.aionemu.commons.configuration.ConfigurableProcessor;
+import com.aionemu.commons.configuration.Properties;
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.TransformationException;
 import com.aionemu.gameserver.configs.Config;
@@ -19,9 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author ATracer
- * @modified Rolandas
- * @reworked Neon
+ * @author ATracer, Rolandas, Neon
  */
 public class Configure extends AdminCommand {
 
@@ -80,7 +75,7 @@ public class Configure extends AdminCommand {
 			String fieldName = params[1].toUpperCase();
 			try {
 				Field field = cls.getDeclaredField(fieldName);
-				if (!field.isAnnotationPresent(Property.class)) {
+				if (!field.isAnnotationPresent(Property.class) && !field.isAnnotationPresent(Properties.class)) {
 					sendInfo(admin, cls.getSimpleName() + "." + fieldName + " is not configurable.");
 					return;
 				}
@@ -88,7 +83,10 @@ public class Configure extends AdminCommand {
 				if (params.length > 2) {
 					String newValue = StringUtils.join(params, ' ', 2, params.length);
 					try {
-						field.set(null, ConfigurableProcessor.transform(newValue, field));
+						if (field.isAnnotationPresent(Properties.class))
+							field.set(null, ConfigurableProcessor.transform(toMap(newValue), field));
+						else
+							field.set(null, ConfigurableProcessor.transform(newValue, field));
 					} catch (TransformationException e) {
 						sendInfo(admin, "The new value could not be set: " + e.getCause().getMessage());
 						return;
@@ -104,6 +102,24 @@ public class Configure extends AdminCommand {
 				sendInfo(admin, "Could not access " + cls.getSimpleName() + "." + fieldName);
 			}
 		}
+	}
+
+	private Map<String, String> toMap(String value) {
+		Map<String, String> values = new LinkedHashMap<>();
+		if (value.startsWith("{") && value.endsWith("}"))
+			value = value.substring(1, value.length() - 1);
+		String[] entries = value.contains(",") ? value.split(" *, *") : value.split(" +");
+		try {
+			for (String entry : entries) {
+				int indexOfEqualsSign = entry.indexOf('=');
+				if (indexOfEqualsSign == -1)
+					throw new IllegalArgumentException("Missing value after " + entry + " (format: key=value)");
+				values.put(entry.substring(0, indexOfEqualsSign).trim(), entry.substring(indexOfEqualsSign + 1).trim());
+			}
+		} catch (Exception e) {
+			throw new TransformationException(null, e);
+		}
+		return values;
 	}
 
 	private String getFieldValue(Field field) throws IllegalArgumentException, IllegalAccessException {
@@ -122,6 +138,6 @@ public class Configure extends AdminCommand {
 	}
 
 	private static List<Field> getPropertyFields(Class<?> cls) {
-		return Arrays.stream(cls.getDeclaredFields()).filter(f -> f.isAnnotationPresent(Property.class)).collect(Collectors.toList());
+		return Arrays.stream(cls.getDeclaredFields()).filter(f -> f.isAnnotationPresent(Property.class) || f.isAnnotationPresent(Properties.class)).collect(Collectors.toList());
 	}
 }
