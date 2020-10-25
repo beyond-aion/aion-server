@@ -271,9 +271,9 @@ public class GeoMap extends Node {
 	}
 
 	private boolean terrainCollision(float x, float y, Ray ray, Vector3f p1, Vector3f p2, Vector3f p3, Vector3f p4, Vector3f result) {
-		// z1┌───┐z2 │ top view where z1 and z2 face north. each corner represents a terrainData z coordinate around given x/y.
-		//   │ ∕ │   │ the resolution of terrainData is 2x2m. this rectangle effectively consists of two adjacent triangles in 3d space,
-		// z3└───┘z4 │ the point where our ray collides with one of those triangles is the exact terrain coordinate (meaning the map ground)
+		// z1┌───┐z2 top view where z1 and z2 face north. each corner represents a terrainData z coordinate around given x/y.
+		// · │ ∕ │ · the resolution of terrainData is 2x2m. this rectangle effectively consists of two adjacent triangles in 3d space,
+		// z3└───┘z4 the point where our ray collides with one of those triangles is the exact terrain coordinate (meaning the map ground)
 		int z1x = (int) (x / TERRAIN_POINTS_DISTANCE);
 		int z1y = (int) (y / TERRAIN_POINTS_DISTANCE);
 		float z1, z2, z3, z4;

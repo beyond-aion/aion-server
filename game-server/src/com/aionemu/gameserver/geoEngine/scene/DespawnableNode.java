@@ -5,7 +5,6 @@ import java.util.BitSet;
 import com.aionemu.gameserver.geoEngine.collision.Collidable;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
-import com.aionemu.gameserver.model.EventTheme;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.services.SiegeService;
@@ -49,7 +48,7 @@ public class DespawnableNode extends Node {
 	@Override
 	public int collideWith(Collidable other, CollisionResults results) {
 		if (type == DespawnableType.EVENT) {
-			if (id != EventTheme.NONE.getId() && EventService.getInstance().getEventTheme().getId() != id)
+			if (EventService.getInstance().getEventTheme().getId() != id)
 				return 0;
 		} else {
 			if (type != DespawnableType.HOUSE && !isActive(results.getInstanceId())) {
