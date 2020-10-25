@@ -16,7 +16,7 @@ public class MapTransformer {
 		return transform(values, new TransformationTypeInfo(type, genericTypeArgs));
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static <K, V> Map<K, V> transform(Map<String, String> values, TransformationTypeInfo typeInfo) throws Exception {
 		Class<?> mapType = typeInfo.getType();
 		if (!Map.class.isAssignableFrom(mapType))
