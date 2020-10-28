@@ -98,7 +98,7 @@ public class PlayerAccountData {
 	}
 
 	public void updateBoundingRadius() {
-		playerCommonData.setBoundingRadius(new BoundRadius(0.5f, 0.5f, appearance.getBoundHeight()));
+		playerCommonData.setBoundingRadius(new BoundRadius(0.25f, 0.25f, appearance.getBoundHeight()));
 	}
 
 	/**

@@ -198,8 +198,8 @@ public class PositionUtil {
 	public static double getDistance(VisibleObject object, VisibleObject object2, boolean centerToCenter) {
 		double distance = getDistance(object.getX(), object.getY(), object.getZ(), object2.getX(), object2.getY(), object2.getZ());
 		if (!centerToCenter) {
-			distance -= object.getObjectTemplate().getBoundRadius().getFront();
-			distance -= object2.getObjectTemplate().getBoundRadius().getFront();
+			distance -= object.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide();
+			distance -= object2.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide();
 		}
 		return distance;
 	}
@@ -231,8 +231,8 @@ public class PositionUtil {
 		if (object.getWorldId() != object2.getWorldId() || object.getInstanceId() != object2.getInstanceId())
 			return false;
 		if (!centerToCenter) {
-			range += object.getObjectTemplate().getBoundRadius().getFront();
-			range += object2.getObjectTemplate().getBoundRadius().getFront();
+			range += object.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide();
+			range += object2.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide();
 		}
 		return isInRange(object.getX(), object.getY(), object.getZ(), object2.getX(), object2.getY(), object2.getZ(), range);
 	}

@@ -38,6 +38,10 @@ public class BoundRadius {
 		return side;
 	}
 
+	public float getMaxOfFrontAndSide() {
+		return Math.max(front, side);
+	}
+
 	public float getUpper() {
 		return upper;
 	}

@@ -58,7 +58,7 @@ public class HyperionAI extends AggressiveNpcAI {
 
 	@Override
 	public AttackTypeAnimation getAttackTypeAnimation(Creature target) {
-		dist = PositionUtil.getDistance(getOwner(), target) - getObjectTemplate().getBoundRadius().getFront() - target.getObjectTemplate().getBoundRadius().getFront();
+		dist = PositionUtil.getDistance(getOwner(), target) - getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide() - target.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide();
 		if (dist > 4) {
 			return AttackTypeAnimation.RANGED;
 		}

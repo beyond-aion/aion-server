@@ -95,13 +95,13 @@ public class GeoService {
 		float targetY = target.getY();
 		if (object instanceof Npc && ((Npc) object).getAi().ask(AIQuestion.SHOULD_CAN_SEE_ADD_BOUNDS_ON_ATTACK)) {
 			double rad = Math.toRadians(PositionUtil.calculateAngleFrom(object, target));
-			x += (float) (Math.cos(rad) * object.getObjectTemplate().getBoundRadius().getFront());
-			y += (float) (Math.sin(rad) * object.getObjectTemplate().getBoundRadius().getFront());
+			x += (float) (Math.cos(rad) * object.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide());
+			y += (float) (Math.sin(rad) * object.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide());
 		}
 		if (target instanceof Npc && ((Npc) target).getAi().ask(AIQuestion.SHOULD_CAN_SEE_ADD_BOUNDS_ON_ATTACKED)) {
 			double rad = Math.toRadians(PositionUtil.calculateAngleFrom(target, object));
-			targetX += (float) (Math.cos(rad) * target.getObjectTemplate().getBoundRadius().getFront());
-			targetY += (float) (Math.sin(rad) * target.getObjectTemplate().getBoundRadius().getFront());
+			targetX += (float) (Math.cos(rad) * target.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide());
+			targetY += (float) (Math.sin(rad) * target.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide());
 		}
 		Race race = null;
 		int staticId = -1;

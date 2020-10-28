@@ -87,7 +87,6 @@ public class SM_NPC_INFO extends AionServerPacket {
 		NpcEquippedGear gear = npc.getOverrideEquipment(); // dynamically overriden Equipment (only for NPCs, not summons)
 		if (gear == null) {
 			writeD(0x00);
-			writeF(npcTemplate.getBoundRadius().getFront());
 		} else {
 			writeD(gear.getItemsMask());
 			boolean hasWeapon = false;
@@ -101,9 +100,8 @@ public class SM_NPC_INFO extends AionServerPacket {
 				writeH(0x00);
 				writeH(0x00); // 4.7
 			}
-			// we don't know weapon dimensions, just add 0.1
-			writeF(npcTemplate.getBoundRadius().getFront() + 0.125f + (hasWeapon ? 0.1f : 0f));
 		}
+		writeF(npcTemplate.getBoundRadius().getMaxOfFrontAndSide());
 		writeF(npcTemplate.getHeight());
 		writeF(npc.getGameStats().getMovementSpeedFloat());// speed
 		writeH(npcTemplate.getAttackDelay());
