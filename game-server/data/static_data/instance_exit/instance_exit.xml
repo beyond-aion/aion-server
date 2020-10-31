@@ -116,6 +116,9 @@
 	<!-- Discipline Training Grounds -->
 	<instance_exit instance_id="300430000" exit_world="110070000" race="ELYOS" x="584.598" y="251.76744" z="127.008286" />
 	<instance_exit instance_id="300430000" exit_world="120080000" race="ASMODIANS" x="549.32" y="328.39505" z="93.49" />
+	<!-- Terath Dredgion -->
+	<instance_exit instance_id="300440000" exit_world="110010000" race="ELYOS" x="1444.5857" y="1511.3572" z="573.0719" h="60"/>
+	<instance_exit instance_id="300440000" exit_world="120010000" race="ASMODIANS" x="1275.561" y="1408.0289" z="208.125" h="34"/>
 	<!-- Padmarashka's Cave -->
 	<instance_exit instance_id="320150000" exit_world="210050000" race="ELYOS" x="138.09879" y="2005.2008" z="433.98132" />
 	<instance_exit instance_id="320150000" exit_world="220070000" race="ASMODIANS" x="2972.322" y="1212.870" z="242.125" />
@@ -141,8 +144,14 @@
 	<!-- Shugo Imperial Tomb-->
 	<instance_exit instance_id="300560000" exit_world="110010000" race="ELYOS" x="1450.5635" y="1502.4572" z="573.0719" />
 	<instance_exit instance_id="300560000" exit_world="120010000" race="ASMODIANS" x="1611.5364" y="1403.6775" z="193.12807" />
+	<!-- Harmony Training Grounds -->
+	<instance_exit instance_id="300570000" exit_world="110070000" race="ELYOS" x="584.598" y="251.76744" z="127.008286" />
+	<instance_exit instance_id="300570000" exit_world="120080000" race="ASMODIANS" x="549.32" y="328.39505" z="93.49" />
 	<!-- Hexway -->
 	<instance_exit instance_id="300700000" exit_world="600010000" x="524.7724" y="767.15015" z="299.61633" h="60" />
+	<!-- Unity Training Grounds -->
+	<instance_exit instance_id="301100000" exit_world="110070000" race="ELYOS" x="584.598" y="251.76744" z="127.008286" />
+	<instance_exit instance_id="301100000" exit_world="120080000" race="ASMODIANS" x="549.32" y="328.39505" z="93.49" />
 	<!-- Danuar Reliquary -->
 	<instance_exit instance_id="301110000" exit_world="600090000" x="775.7178" y="1029.159" z="112.1926" />
 	<!-- Infernal Danuar Reliquary -->
@@ -194,6 +203,14 @@
 	<!-- Idgel Dome -->
 	<instance_exit instance_id="301310000" exit_world="600090000" race="ELYOS" x="1301.1755" y="1322.0941" z="199.75026" />
 	<instance_exit instance_id="301310000" exit_world="600090000" race="ASMODIANS" x="400.58868" y="1361.6609" z="163.7344" h="100" />
+	<!-- Lucky Ophidan Bridge (4.8 update) -->
+	<instance_exit instance_id="301320000" exit_world="210070000" race="ELYOS" x="2782.2812" y="3003.5215" z="274.875" h="80"/>
+	<instance_exit instance_id="301320000" exit_world="220080000" race="ASMODIANS" x="491.57666" y="92.30605" z="199.21175" h="28"/>
+	<!-- Lucky Danuar Reliquary -->
+	<instance_exit instance_id="301330000" exit_world="600090000" race="PC_ALL" x="775.97034" y="1033.2181" z="111.394745" h="23"/>
+	<!-- The Shugo Emperor's Vault -->
+	<instance_exit instance_id="301400000" exit_world="110010000" race="ELYOS" x="1444.5857" y="1511.3572" z="573.0719" h="60"/>
+	<instance_exit instance_id="301400000" exit_world="120010000" race="ASMODIANS" x="1275.561" y="1408.0289" z="208.125" h="34"/>
 	<!-- Infernal Illuminary Obelisk -->
 	<instance_exit instance_id="301370000" exit_world="600100000" race="ELYOS" x="462.56534" y="1539.8868" z="242.66449" h="102" />
 	<instance_exit instance_id="301370000" exit_world="600100000" race="ASMODIANS" x="1398.4855" y="378.34225" z="248.37592" h="29" />
