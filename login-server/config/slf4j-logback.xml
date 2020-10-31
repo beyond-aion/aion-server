@@ -6,14 +6,13 @@
 	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
 		<withJansi>true</withJansi>
 		<encoder>
-			<charset>CP850</charset> <!-- UTF-8 on linux -->
+			<charset>${consoleEncoding}</charset>
 			<Pattern>${time} %highlight(%-5level) %gray([%thread]) - %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_console" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/server_console.log</file>
 		<encoder>
-			<charset>UTF-8</charset>
 			<Pattern>${date} %-5level [%thread] %logger - %message%n</Pattern>
 			<immediateFlush>false</immediateFlush>
 		</encoder>
