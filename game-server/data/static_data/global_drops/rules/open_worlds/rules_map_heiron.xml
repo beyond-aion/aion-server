@@ -602,7 +602,7 @@
 			<gd_item id="114600681"/><!-- Furol's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Rare)" chance="50"><!-- TODO Sykra chance -->
+	<gd_rule rule_name="Named Accessory (Rare)" chance="50">
 		<gd_maps>
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
