@@ -22,19 +22,15 @@ public class CompositeItemBlobEntry extends ItemBlobEntry {
 
 	@Override
 	public void writeThisBlob(ByteBuffer buf) {
-		Item item = ownerItem;
-
-		writeD(buf, item.getFusionedItemId());
+		writeD(buf, ownerItem.getFusionedItemId());
 		writeFusionStones(buf);
-		writeC(buf, item.getFusionedItemOptionalSockets()); // additional manastone sockets
-		writeC(buf, item.getFusionedItemBonusStatsId());
+		writeC(buf, ownerItem.getFusionedItemOptionalSockets()); // additional manastone sockets
+		writeC(buf, ownerItem.getFusionedItemBonusStatsId());
 	}
 
 	private void writeFusionStones(ByteBuffer buf) {
-		Item item = ownerItem;
-
-		if (item.hasFusionStones()) {
-			Set<ManaStone> itemStones = item.getFusionStones();
+		if (ownerItem.hasFusionStones()) {
+			Set<ManaStone> itemStones = ownerItem.getFusionStones();
 			HashMap<Integer, ManaStone> stonesBySlot = new HashMap<>();
 			for (ManaStone itemStone : itemStones) {
 				stonesBySlot.put(itemStone.getSlot(), itemStone);

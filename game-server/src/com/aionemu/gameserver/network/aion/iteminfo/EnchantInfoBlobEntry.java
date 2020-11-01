@@ -16,12 +16,11 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 /**
  * This blob sends info about enchantment, bonus attributes, mana stones, god stone etc.
  * 
- * @author -Nemesiss-
- * @modified Rolandas
+ * @author -Nemesiss-, Rolandas
  */
 public class EnchantInfoBlobEntry extends ItemBlobEntry {
 
-	public static int size = /* 8 + Item.MAX_BASIC_STONES * 4 + 4 + 13 + 5 + 5 + (18 * 4 + 1) */138;
+	public static int SIZE = 138; // 8 + Item.MAX_BASIC_STONES * 4 + 4 + 13 + 5 + 5 + (18 * 4 + 1)
 
 	EnchantInfoBlobEntry() {
 		super(ItemBlobType.ENCHANT_INFO);
@@ -111,6 +110,6 @@ public class EnchantInfoBlobEntry extends ItemBlobEntry {
 
 	@Override
 	public int getSize() {
-		return size;
+		return SIZE;
 	}
 }

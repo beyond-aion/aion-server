@@ -2,14 +2,12 @@ package com.aionemu.gameserver.network.aion.iteminfo;
 
 import java.nio.ByteBuffer;
 
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 
 /**
  * This blob sends info about conditioning.
  * 
- * @author -Nemesiss-
- * @modified Rolandas
+ * @author -Nemesiss-, Rolandas
  */
 public class ConditioningInfoBlobEntry extends ItemBlobEntry {
 
@@ -19,9 +17,7 @@ public class ConditioningInfoBlobEntry extends ItemBlobEntry {
 
 	@Override
 	public void writeThisBlob(ByteBuffer buf) {
-		Item item = ownerItem;
-
-		writeD(buf, item.getChargePoints());
+		writeD(buf, ownerItem.getChargePoints());
 	}
 
 	@Override

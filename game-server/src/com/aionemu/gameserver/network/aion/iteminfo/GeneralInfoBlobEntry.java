@@ -2,15 +2,13 @@ package com.aionemu.gameserver.network.aion.iteminfo;
 
 import java.nio.ByteBuffer;
 
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 
 /**
  * This blob entry is sent with ALL items. (unless partial blob is constructed, ie: sending equip slot only) It is the first and only block for
  * non-equipable items, and the last blob for EquipableItems
  * 
- * @author -Nemesiss-
- * @modified Rolandas
+ * @author -Nemesiss-, Rolandas
  */
 public class GeneralInfoBlobEntry extends ItemBlobEntry {
 
@@ -20,14 +18,13 @@ public class GeneralInfoBlobEntry extends ItemBlobEntry {
 
 	@Override
 	public void writeThisBlob(ByteBuffer buf) {// TODO what with kinah?
-		Item item = ownerItem;
-		writeH(buf, item.getItemMask(owner));
-		writeQ(buf, item.getItemCount());
-		writeS(buf, item.getItemCreator());// Creator name
+		writeH(buf, ownerItem.getItemMask(owner));
+		writeQ(buf, ownerItem.getItemCount());
+		writeS(buf, ownerItem.getItemCreator());// Creator name
 		writeC(buf, 0);
-		writeD(buf, item.secondsUntilExpiration()); // Disappear time
+		writeD(buf, ownerItem.secondsUntilExpiration()); // Disappear time
 		writeD(buf, 0);
-		writeD(buf, item.getTemporaryExchangeTimeRemaining());
+		writeD(buf, ownerItem.getTemporaryExchangeTimeRemaining());
 		writeH(buf, 0); // TODO: Item Sealing - 1=sealed, 2=unsealing state, 3=special sealed(gm), 4=special unsealing(gm)
 		writeD(buf, 0); // Remaining unsealing time
 		writeH(buf, 18); // unk 4.7.5

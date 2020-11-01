@@ -2,15 +2,13 @@ package com.aionemu.gameserver.network.aion.iteminfo;
 
 import java.nio.ByteBuffer;
 
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 
 /**
  * This blob is sent for accessory items (such as ring, earring, waist). It keeps info about slots that item can be equipped to.
  * 
- * @author -Nemesiss-
- * @modified Rolandas
+ * @author -Nemesiss-, Rolandas
  */
 public class AccessoryInfoBlobEntry extends ItemBlobEntry {
 
@@ -20,9 +18,7 @@ public class AccessoryInfoBlobEntry extends ItemBlobEntry {
 
 	@Override
 	public void writeThisBlob(ByteBuffer buf) {
-		Item item = ownerItem;
-
-		ItemSlot[] slots = ItemSlot.getSlotsFor(item.getItemTemplate().getItemSlot());
+		ItemSlot[] slots = ItemSlot.getSlotsFor(ownerItem.getItemTemplate().getItemSlot());
 		writeQ(buf, slots[0].getSlotIdMask());
 		writeQ(buf, slots.length > 1 ? slots[1].getSlotIdMask() : 0);
 	}

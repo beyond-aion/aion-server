@@ -202,7 +202,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 			if (item != null)
 				EnchantInfoBlobEntry.writeInfo(getBuf(), item);
 			else // sold items are null because they are not in item_location 126 (broker) anymore
-				writeB(new byte[EnchantInfoBlobEntry.size]);
+				writeB(new byte[EnchantInfoBlobEntry.SIZE]);
 
 			writeS(settledItem.getItemCreator());
 			/*

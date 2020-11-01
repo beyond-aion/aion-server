@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -17,7 +17,7 @@ public class CM_CHARGE_ITEM extends AionClientPacket {
 
 	private int targetNpcObjectId;
 	private int chargeLevel;
-	private Collection<Integer> itemIds;
+	private List<Integer> itemObjectIds;
 
 	public CM_CHARGE_ITEM(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -28,11 +28,9 @@ public class CM_CHARGE_ITEM extends AionClientPacket {
 		targetNpcObjectId = readD();
 		chargeLevel = readUC();
 		int itemsSize = readUH();
-		itemIds = new ArrayList<>();
-		for (int i = 0; i < itemsSize; i++) {
-			itemIds.add(readD());
-		}
-
+		itemObjectIds = new ArrayList<>();
+		for (int i = 0; i < itemsSize; i++)
+			itemObjectIds.add(readD());
 	}
 
 	@Override
@@ -42,17 +40,13 @@ public class CM_CHARGE_ITEM extends AionClientPacket {
 			return; // TODO audit?
 		}
 
-		for (int itemObjId : itemIds) {
+		List<Item> itemsToCharge = new ArrayList<>();
+		for (int itemObjId : itemObjectIds) {
 			Item item = player.getInventory().getItemByObjId(itemObjId);
-			if (item != null) {
-				int itemChargeLevel = item.getAvailableChargeLevel(player);
-				int possibleChargeLevel = Math.min(itemChargeLevel, chargeLevel);
-				if (possibleChargeLevel > 0) {
-					if (ItemChargeService.processPayment(player, item, possibleChargeLevel))
-						ItemChargeService.chargeItem(player, item, possibleChargeLevel);
-				}
-			}
+			if (item != null)
+				itemsToCharge.add(item);
 		}
+		ItemChargeService.chargeItems(player, itemsToCharge, chargeLevel, false, true);
 	}
 
 }

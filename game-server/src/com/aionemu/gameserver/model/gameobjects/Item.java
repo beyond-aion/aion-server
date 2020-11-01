@@ -159,7 +159,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	}
 
 	private void updateChargeInfo(int charge) {
-		int chargeLevel = getChargeLevelMax();
+		int chargeLevel = calculateMaxChargeLevel();
 		if (conditioningInfo == null && chargeLevel > 0)
 			conditioningInfo = new ChargeInfo(charge, this);
 		// when break fusioned item and second item has conditioned info - set to null
@@ -794,38 +794,37 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	/**
 	 * Calculate charge level based on main item and fusioned item
 	 */
-	public int getChargeLevelMax() {
-		int thisChargeLevel = 0;
+	public int calculateMaxChargeLevel() {
+		int chargeLevel = 0;
 		if (getImprovement() != null)
-			thisChargeLevel = getImprovement().getLevel();
+			chargeLevel = getImprovement().getLevel();
 
 		int fusionedChargeLevel = 0;
-		if (hasFusionedItem() && getFusionedItemTemplate().getImprovement() != null)
-			fusionedChargeLevel = getFusionedItemTemplate().getImprovement().getLevel();
-
-		return Math.max(thisChargeLevel, fusionedChargeLevel);
+		if (hasFusionedItem() && fusionedItemTemplate.getImprovement() != null)
+			fusionedChargeLevel = fusionedItemTemplate.getImprovement().getLevel();
+		return Math.max(chargeLevel, fusionedChargeLevel);
 	}
 
 	/*
 	 * Check for disabled charge levels due to recommend rank restriction
 	 */
-	public int getAvailableChargeLevel(Player player) {
-		int result = getChargeLevelMax();
-		ItemUseLimits limits = hasFusionedItem() && getFusionedItemTemplate().getLevel() > this.getItemTemplate().getLevel()
-			? getFusionedItemTemplate().getUseLimits()
-			: getItemTemplate().getUseLimits();
+	public int calculateAvailableChargeLevel(Player player) {
+		int maxAvailableChargeLevel = calculateMaxChargeLevel();
+		ItemUseLimits limits = hasFusionedItem() && fusionedItemTemplate.getLevel() > itemTemplate.getLevel()
+			? fusionedItemTemplate.getUseLimits()
+			: itemTemplate.getUseLimits();
 		if (limits.getRecommendRank() > 0) {
-			int diff = Math.max(0, limits.getRecommendRank() - player.getAbyssRank().getRank().getId());
-			result -= diff;
+			int rankLevelDiff = Math.max(0, limits.getRecommendRank() - player.getAbyssRank().getRank().getId());
+			maxAvailableChargeLevel -= rankLevelDiff;
 		}
-		return Math.max(0, result);
+		return Math.max(0, maxAvailableChargeLevel);
 	}
 
 	public Improvement getImprovement() {
-		if (getItemTemplate().getImprovement() != null)
-			return getItemTemplate().getImprovement();
-		else if (hasFusionedItem() && getFusionedItemTemplate().getImprovement() != null)
-			return getFusionedItemTemplate().getImprovement();
+		if (itemTemplate.getImprovement() != null)
+			return itemTemplate.getImprovement();
+		else if (hasFusionedItem() && fusionedItemTemplate.getImprovement() != null)
+			return fusionedItemTemplate.getImprovement();
 		return null;
 	}
 

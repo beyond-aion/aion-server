@@ -30,30 +30,18 @@ public class Improvement {
 	@XmlAttribute(name = "level")
 	private int level;
 
-	/**
-	 * @return the level
-	 */
 	public int getLevel() {
 		return level;
 	}
 
-	/**
-	 * @return the way
-	 */
 	public int getChargeWay() {
 		return way;
 	}
 
-	/**
-	 * @return the price1
-	 */
 	public int getPrice1() {
 		return price1;
 	}
 
-	/**
-	 * @return the price2
-	 */
 	public int getPrice2() {
 		return price2;
 	}

@@ -23828,6 +23828,27 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Magical power charging has canceled.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_ITEM_CHARGE2_CANCELED() {
+		return new SM_SYSTEM_MESSAGE(1401339);
+	}
+
+	/*
+	 * The equipped item has been magically charged.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_ITEM_CHARGE2_ALL_COMPLETE() {
+		return new SM_SYSTEM_MESSAGE(1401340);
+	}
+
+	/*
+	 * No equipped items are magically chargeable.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_ITEM_CHARGE2_ALL_FAIL_NO_CHARGEABLE_EQUIPMENT() {
+		return new SM_SYSTEM_MESSAGE(1401343);
+	}
+
+	/**
 	 * You cannot condition %0.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_ITEM_CHARGE_FAIL_NOT_CHARGEABLE(String value0) {

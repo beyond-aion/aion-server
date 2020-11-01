@@ -10,8 +10,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 /**
  * This blob contains stigma info.
  * 
- * @author -Nemesiss-
- * @modified Rolandas, Neon
+ * @author -Nemesiss-, Rolandas, Neon
  */
 public class StigmaInfoBlobEntry extends ItemBlobEntry {
 
@@ -38,6 +37,6 @@ public class StigmaInfoBlobEntry extends ItemBlobEntry {
 
 	@Override
 	public int getSize() {
-		return 12 + 192 + 4 + 96 + 2;
+		return 306; // 12 + 192 + 4 + 96 + 2
 	}
 }

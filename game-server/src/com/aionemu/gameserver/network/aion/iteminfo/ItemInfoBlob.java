@@ -16,15 +16,13 @@ import com.aionemu.gameserver.network.PacketWriteHelper;
 /**
  * Entry item info packet data (contains blob entries with detailed info).
  * 
- * @author -Nemesiss-
- * @modified Rolandas - complete rewrite, no trees (blob size must be known in advance!), just sequences
+ * @author -Nemesiss-, Rolandas
  */
 public class ItemInfoBlob extends PacketWriteHelper {
 
-	protected final Player player;
-	protected final Item item;
-
-	private List<ItemBlobEntry> itemBlobEntries = new ArrayList<>();
+	private final Player player;
+	private final Item item;
+	private final List<ItemBlobEntry> itemBlobEntries = new ArrayList<>();
 
 	public ItemInfoBlob(Player player, Item item) {
 		this.player = player;
@@ -81,9 +79,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
 					blob.addBlobEntry(ItemBlobType.SLOTS_ACCESSORY); // power shards, helmets, earrings, rings, belts
 				else
 					blob.addBlobEntry(ItemBlobType.SLOTS_ARMOR);
-			}
-			// SLOT INFO
-			else if (itemTemplate.isWeapon()) {
+			} else if (itemTemplate.isWeapon()) {
 				blob.addBlobEntry(ItemBlobType.SLOTS_WEAPON);
 			}
 
@@ -132,6 +128,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
 	}
 
 	public enum ItemBlobType {
+
 		GENERAL_INFO(0x00) {
 
 			@Override
@@ -263,7 +260,7 @@ public class ItemInfoBlob extends PacketWriteHelper {
 			}
 		};
 
-		private int entryId;
+		private final int entryId;
 
 		ItemBlobType(int entryId) {
 			this.entryId = entryId;
