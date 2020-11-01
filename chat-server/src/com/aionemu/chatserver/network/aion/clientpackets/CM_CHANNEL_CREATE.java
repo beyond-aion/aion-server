@@ -37,19 +37,12 @@ public class CM_CHANNEL_CREATE extends AbstractClientPacket {
 
 	@Override
 	protected void runImpl() {
-		/*
-		 * TODO:
-		 * - need some way to differentiate between language and "normal" user channels (both have "User" as the type identifier), otherwise users can
-		 * create password protected language channels
-		 * - rework broadcasting + channels, so each channel has its own user list, to remove unused private channels if the last one leaves it / logs out
-		 * - support for private channel password protection
-		 */
-//		try {
-//			System.out.println("Request id: " + channelRequestId);
-//			System.out.println("Channel identifier: " + new String(channelIdentifier, StandardCharsets.UTF_16LE));
-//			System.out.println("Password: " + new String(password, StandardCharsets.UTF_16LE));
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
+		// TODO differentiate between language and "normal" user channels (both have "User" as the type identifier),
+		// TODO otherwise users can create password protected language channels
+
+		// TODO rework broadcasting + channels, so each channel has its own user list,
+		// TODO to remove unused private channels if the last one leaves it / logs out
+
+		// TODO support for private channel password protection
 	}
 }

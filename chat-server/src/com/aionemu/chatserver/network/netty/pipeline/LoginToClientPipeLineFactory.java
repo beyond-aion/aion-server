@@ -24,8 +24,8 @@ public class LoginToClientPipeLineFactory implements ChannelPipelineFactory {
 	private static final int MEMORY_PER_CHANNEL = 1048576;
 	private static final int TOTAL_MEMORY = 134217728;
 	private static final int TIMEOUT = 100;
-	private ExecutionHandler executionHandler;
 	private final ClientPacketHandler clientPacketHandler;
+	private final ExecutionHandler executionHandler;
 
 	public LoginToClientPipeLineFactory(ClientPacketHandler clientPacketHandler) {
 		this.clientPacketHandler = clientPacketHandler;
@@ -33,10 +33,6 @@ public class LoginToClientPipeLineFactory implements ChannelPipelineFactory {
 			TimeUnit.MILLISECONDS, Executors.defaultThreadFactory()));
 	}
 
-	/**
-	 * Decoding process will include the following handlers: - framedecoder - packetdecoder - handler Encoding process: - packetencoder Please note the
-	 * sequence of handlers
-	 */
 	@Override
 	public ChannelPipeline getPipeline() throws Exception {
 		ChannelPipeline pipeline = Channels.pipeline();

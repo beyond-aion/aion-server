@@ -10,6 +10,7 @@ import org.jboss.netty.channel.ChannelFactory;
 import org.jboss.netty.channel.group.ChannelGroup;
 import org.jboss.netty.channel.group.DefaultChannelGroup;
 import org.jboss.netty.channel.socket.nio.NioServerSocketChannelFactory;
+import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.network.NetworkConfig;
@@ -20,42 +21,36 @@ import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public class NettyServer {
 
-	private static NettyServer instance = new NettyServer();
-	private ChannelFactory aionClientChannelFactory;
-	private ChannelGroup aionClientChannelGroup;
-	private NioServer nioServer;
-
-	public static NettyServer getInstance() {
-		return instance;
-	}
+	private static final Logger log = LoggerFactory.getLogger(NettyServer.class);
+	private static final NettyServer instance = new NettyServer();
+	private final ChannelFactory aionClientChannelFactory;
+	private final ChannelGroup aionClientChannelGroup;
+	private final NioServer nioServer;
 
 	private NettyServer() {
 		aionClientChannelFactory = new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool(),
 			NetworkConfig.NIO_READ_WRITE_THREADS + 1);
 		aionClientChannelGroup = new DefaultChannelGroup(NettyServer.class.getName());
-		aionClientChannelGroup.add(initChannel()); // why not handle aion client packets via NioServer?
-		LoggerFactory.getLogger(this.getClass()).info("Server listening on "
-			+ (NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().isAnyLocalAddress() ? "all interfaces,"
-				: "IP: " + NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().getHostAddress())
-			+ " Port: " + NetworkConfig.CLIENT_SOCKET_ADDRESS.getPort() + " for Aion Connections");
+		aionClientChannelGroup.add(initChannel());
+
+		log.info("Server listening on {} Port: {} for Aion Connections",
+			NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().isAnyLocalAddress() ? "all interfaces,"
+				: "IP: " + NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().getHostAddress(),
+			NetworkConfig.CLIENT_SOCKET_ADDRESS.getPort());
 
 		nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
 			new ServerCfg(NetworkConfig.GAMESERVER_SOCKET_ADDRESS, "GS Connections", new GsConnectionFactoryImpl()));
 		nioServer.connect(Executors.newSingleThreadExecutor());
 	}
 
-	/**
-	 * @param channelFactory
-	 * @param listenAddress
-	 * @param port
-	 * @param channelPipelineFactory
-	 * @return Channel
-	 */
+	public static NettyServer getInstance() {
+		return instance;
+	}
+
 	private Channel initChannel() {
 		ServerBootstrap bootstrap = new ServerBootstrap(aionClientChannelFactory);
 		bootstrap.setPipelineFactory(new LoginToClientPipeLineFactory(new ClientPacketHandler()));
@@ -68,9 +63,6 @@ public class NettyServer {
 		return bootstrap.bind(NetworkConfig.CLIENT_SOCKET_ADDRESS);
 	}
 
-	/**
-	 * Shutdown server
-	 */
 	public void shutdownAll() {
 		aionClientChannelGroup.close().awaitUninterruptibly();
 		aionClientChannelFactory.releaseExternalResources();

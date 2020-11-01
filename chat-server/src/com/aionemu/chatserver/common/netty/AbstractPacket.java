@@ -7,22 +7,16 @@ public abstract class AbstractPacket {
 
 	protected byte opCode;
 
-	/**
-	 * @param opCode
-	 */
 	public AbstractPacket(byte opCode) {
 		this.opCode = opCode;
 	}
 
-	/**
-	 * @return the opCode
-	 */
 	public byte getOpCode() {
 		return opCode;
 	}
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [opCode=" + String.format("0x%02X", getOpCode()) + "]";
+		return getClass().getSimpleName() + " [opCode=" + "0x%02X".formatted(getOpCode()) + "]";
 	}
 }

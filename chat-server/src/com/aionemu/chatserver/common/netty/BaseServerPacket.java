@@ -7,14 +7,13 @@ import org.jboss.netty.buffer.ChannelBuffer;
  */
 public abstract class BaseServerPacket extends AbstractPacket {
 
-	/**
-	 * @param opCode
-	 */
 	public BaseServerPacket(byte opCode) {
 		super(opCode);
 	}
 
 	/**
+	 * Write int to buffer
+	 * 
 	 * @param buf
 	 * @param value
 	 */
@@ -23,6 +22,8 @@ public abstract class BaseServerPacket extends AbstractPacket {
 	}
 
 	/**
+	 * Write short to buffer
+	 * 
 	 * @param buf
 	 * @param value
 	 */
@@ -31,6 +32,8 @@ public abstract class BaseServerPacket extends AbstractPacket {
 	}
 
 	/**
+	 * Write byte to Buffer
+	 * 
 	 * @param buf
 	 * @param value
 	 */
@@ -39,7 +42,7 @@ public abstract class BaseServerPacket extends AbstractPacket {
 	}
 
 	/**
-	 * Write double to buffer.
+	 * Write double to buffer
 	 * 
 	 * @param buf
 	 * @param value
@@ -49,7 +52,7 @@ public abstract class BaseServerPacket extends AbstractPacket {
 	}
 
 	/**
-	 * Write float to buffer.
+	 * Write float to buffer
 	 * 
 	 * @param buf
 	 * @param value
@@ -59,6 +62,8 @@ public abstract class BaseServerPacket extends AbstractPacket {
 	}
 
 	/**
+	 * Write byte array to buffer
+	 * 
 	 * @param buf
 	 * @param data
 	 */
@@ -73,17 +78,17 @@ public abstract class BaseServerPacket extends AbstractPacket {
 	 * @param text
 	 */
 	protected final void writeS(ChannelBuffer buf, String text) {
-		if (text == null) {
-			buf.writeChar('\000');
-		} else {
+		if (text != null) {
 			final int len = text.length();
 			for (int i = 0; i < len; i++)
 				buf.writeChar(text.charAt(i));
-			buf.writeChar('\000');
 		}
+		buf.writeChar('\000');
 	}
 
 	/**
+	 * Write long to buffer
+	 * 
 	 * @param buf
 	 * @param data
 	 */

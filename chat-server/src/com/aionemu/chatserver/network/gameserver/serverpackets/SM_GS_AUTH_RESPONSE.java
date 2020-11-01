@@ -10,10 +10,10 @@ import com.aionemu.chatserver.network.gameserver.GsServerPacket;
  */
 public class SM_GS_AUTH_RESPONSE extends GsServerPacket {
 
-	private GsAuthResponse response;
+	private final GsAuthResponse response;
 
-	public SM_GS_AUTH_RESPONSE(GsAuthResponse resp) {
-		this.response = resp;
+	public SM_GS_AUTH_RESPONSE(GsAuthResponse rsp) {
+		response = rsp;
 	}
 
 	@Override

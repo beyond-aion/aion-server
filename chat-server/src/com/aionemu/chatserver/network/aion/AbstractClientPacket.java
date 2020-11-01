@@ -10,13 +10,8 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
  */
 public abstract class AbstractClientPacket extends BaseClientPacket {
 
-	protected ClientChannelHandler clientChannelHandler;
+	protected final ClientChannelHandler clientChannelHandler;
 
-	/**
-	 * @param channelBuffer
-	 * @param clientChannelHandler
-	 * @param opCode
-	 */
 	public AbstractClientPacket(ChannelBuffer channelBuffer, ClientChannelHandler clientChannelHandler, byte opCode) {
 		super(channelBuffer, opCode);
 		this.clientChannelHandler = clientChannelHandler;

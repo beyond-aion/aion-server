@@ -1,16 +1,15 @@
 package com.aionemu.chatserver.model;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.chatserver.model.channel.Channel;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public class ChatClient {
 
@@ -28,8 +27,8 @@ public class ChatClient {
 	 * Map with all connected channels<br>
 	 * Support for 2 channels of ChannelType.JOB, since starting classes join both main class channels
 	 */
-	private Map<ChannelType, List<Channel>> channels = new HashMap<>();
-	private Map<ChannelType, Long> lastMessageTime = new HashMap<>();
+	private final Map<ChannelType, List<Channel>> channels = new ConcurrentHashMap<>();
+	private final Map<ChannelType, Long> lastMessageTime = new ConcurrentHashMap<>();
 
 	public ChatClient(int clientId, byte[] token, String accName, String nick, Race race, byte accessLevel) {
 		this.clientId = clientId;
@@ -40,16 +39,10 @@ public class ChatClient {
 		this.accessLevel = accessLevel;
 	}
 
-	/**
-	 * @return Unique id of the chat client (player id)
-	 */
 	public int getClientId() {
 		return clientId;
 	}
 
-	/**
-	 * @return Token used during auth with GS
-	 */
 	public byte[] getToken() {
 		return token;
 	}
@@ -70,9 +63,6 @@ public class ChatClient {
 		return accessLevel;
 	}
 
-	/**
-	 * @return Identifier used when sending messages
-	 */
 	public byte[] getIdentifier() {
 		return identifier;
 	}
@@ -122,14 +112,9 @@ public class ChatClient {
 		lastMessageTime.put(ct, System.currentTimeMillis());
 	}
 
-	/**
-	 * @param ct
-	 * @return The protection time (delay) in seconds, when the client can chat in the specified channel again.
-	 */
-	public int getFloodProtectionTime(ChannelType ct) {
+	public int nextMessageTimeSec(ChannelType ct) {
 		int delay = ct == ChannelType.LFG || ct == ChannelType.TRADE ? 30000 : 1000; // implemented same as on client-side
 		long floodProtectionTime = delay - (System.currentTimeMillis() - getLastMessageTime(ct));
-
 		return floodProtectionTime <= 0 ? 0 : Math.max(1, (int) (floodProtectionTime / 1000));
 	}
 
@@ -137,12 +122,12 @@ public class ChatClient {
 		return gagTime > 0 && System.currentTimeMillis() < gagTime;
 	}
 
-	public void setGagTime(long gagTime) {
-		this.gagTime = gagTime;
-	}
-
 	public long getGagTime() {
 		return this.gagTime;
+	}
+
+	public void setGagTime(long gagTime) {
+		this.gagTime = gagTime;
 	}
 
 	@Override

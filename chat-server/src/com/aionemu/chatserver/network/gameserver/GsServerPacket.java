@@ -11,12 +11,6 @@ import com.aionemu.commons.network.packet.BaseServerPacket;
  */
 public abstract class GsServerPacket extends BaseServerPacket {
 
-	/**
-	 * Constructs a new server packet with specified id.
-	 * 
-	 * @param opcode
-	 *          packet opcode.
-	 */
 	protected GsServerPacket() {
 		super(0);
 	}
@@ -25,7 +19,7 @@ public abstract class GsServerPacket extends BaseServerPacket {
 	 * Write this packet data for given connection, to given buffer.
 	 * 
 	 * @param con
-	 * @param buf
+	 * @param buffer
 	 */
 	public final void write(GsConnection con, ByteBuffer buffer) {
 		setBuf(buffer);
@@ -40,7 +34,6 @@ public abstract class GsServerPacket extends BaseServerPacket {
 	 * Write data that this packet represents to given byte buffer.
 	 * 
 	 * @param con
-	 * @param buf
 	 */
 	protected abstract void writeImpl(GsConnection con);
 }

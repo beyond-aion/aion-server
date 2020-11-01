@@ -7,26 +7,20 @@ import com.aionemu.chatserver.configs.network.NetworkConfig;
 import com.aionemu.chatserver.network.gameserver.GsAuthResponse;
 
 /**
- * @author ATracer, KID
- * @modified Neon
+ * @author ATracer, KID, Neon
  */
 public class GameServerService {
 
-	private Logger log = LoggerFactory.getLogger(GameServerService.class);
-	private static GameServerService instance = new GameServerService();
+	private static final Logger log = LoggerFactory.getLogger(GameServerService.class);
+	private static final GameServerService instance = new GameServerService();
 	public static byte GAMESERVER_ID;
+
 	private boolean isOnline = false;
 
 	public static GameServerService getInstance() {
 		return instance;
 	}
 
-	/**
-	 * @param gameChannelHandler
-	 * @param gameServerId
-	 * @param password
-	 * @return
-	 */
 	public GsAuthResponse registerGameServer(byte gameServerId, String password) {
 		if (isOnline)
 			return GsAuthResponse.ALREADY_REGISTERED;
@@ -38,7 +32,7 @@ public class GameServerService {
 	}
 
 	public void setOffline() {
-		log.info("Gameserver #" + GAMESERVER_ID + " is disconnected");
+		log.info("Gameserver #{} is disconnected", GAMESERVER_ID);
 		isOnline = false;
 	}
 }

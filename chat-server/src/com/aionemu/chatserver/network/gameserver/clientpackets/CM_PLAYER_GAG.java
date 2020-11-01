@@ -2,9 +2,6 @@ package com.aionemu.chatserver.network.gameserver.clientpackets;
 
 import java.nio.ByteBuffer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.chatserver.network.gameserver.GsClientPacket;
 import com.aionemu.chatserver.network.gameserver.GsConnection;
 import com.aionemu.chatserver.service.ChatService;
@@ -14,9 +11,8 @@ import com.aionemu.chatserver.service.ChatService;
  */
 public class CM_PLAYER_GAG extends GsClientPacket {
 
-	private static final Logger log = LoggerFactory.getLogger(CM_PLAYER_LOGOUT.class);
 	private int playerId;
-	private long gagTime;
+	private long gagTimeMillis;
 
 	public CM_PLAYER_GAG(ByteBuffer buf, GsConnection connection) {
 		super(buf, connection, 0x03);
@@ -25,12 +21,11 @@ public class CM_PLAYER_GAG extends GsClientPacket {
 	@Override
 	protected void readImpl() {
 		playerId = readD();
-		gagTime = readQ();
+		gagTimeMillis = readQ();
 	}
 
 	@Override
 	protected void runImpl() {
-		ChatService.getInstance().gagPlayer(playerId, gagTime);
-		log.info("Player was gagged " + playerId + " for " + (gagTime / 1000 / 60) + " minutes");
+		ChatService.getInstance().gagPlayer(playerId, gagTimeMillis);
 	}
 }

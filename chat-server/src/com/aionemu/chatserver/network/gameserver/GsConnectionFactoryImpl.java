@@ -20,7 +20,7 @@ public class GsConnectionFactoryImpl implements ConnectionFactory {
 	 * @param socket
 	 *          that new {@link AConnection} instance will represent.<br>
 	 * @param dispatcher
-	 *          to wich new connection will be registered.<br>
+	 *          to which new connection will be registered.<br>
 	 * @return a new instance of {@link AConnection}<br>
 	 * @throws IOException
 	 * @see AConnection

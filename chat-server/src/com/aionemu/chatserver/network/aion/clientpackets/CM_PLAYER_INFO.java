@@ -34,19 +34,6 @@ public class CM_PLAYER_INFO extends AbstractClientPacket {
 
 	@Override
 	protected void runImpl() {
-		/*
-		 * TODO:
-		 * Find out what other information is sent, maybe handle it if it's useful
-		 */
-//		PlayerClass playerClass = null;
-//		for (PlayerClass pc : PlayerClass.values())
-//			if (pc.getClassId() == classId)
-//				playerClass = pc;
-//		System.out.println("Class: " + playerClass);
-//		System.out.println("Level: " + level);
-//		StringBuilder sb = new StringBuilder(unk.length * 3);
-//		for (byte b : unk)
-//			sb.append(String.format("%02X ", b));
-//		System.out.println(sb.toString().trim());
+		// TODO Find out what other information is sent, maybe handle it if it's useful
 	}
 }

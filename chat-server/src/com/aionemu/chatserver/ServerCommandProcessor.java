@@ -20,7 +20,7 @@ public class ServerCommandProcessor extends Thread {
 	public void run() {
 		// commands are only accepted from stdin when <enter> is hit. Otherwise we will waste no time reading char by char.
 		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-		String command = null;
+		String command;
 		log.info("Server command processor thread started");
 		try {
 			while ((command = br.readLine()) != null) {
@@ -31,8 +31,9 @@ public class ServerCommandProcessor extends Thread {
 				if (command.equalsIgnoreCase("shutdown") || command.equalsIgnoreCase("quit") || command.equalsIgnoreCase("exit"))
 					System.exit(0); // this will run finalizers and shutdown hooks for a clean shutdown.
 				else if (command.equalsIgnoreCase("restart")) {
-					ShutdownHook.setRestartOnly(true);
-					ShutdownHook.getInstance().start();
+					ShutdownHook shutdownHook = ShutdownHook.getInstance();
+					shutdownHook.setRestartOnly(true);
+					shutdownHook.start();
 				}
 			}
 		} catch (IOException e) {

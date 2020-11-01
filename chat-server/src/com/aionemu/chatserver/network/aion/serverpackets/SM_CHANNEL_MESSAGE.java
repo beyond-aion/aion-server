@@ -11,7 +11,7 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
  */
 public class SM_CHANNEL_MESSAGE extends AbstractServerPacket {
 
-	private Message message;
+	private final Message message;
 
 	public SM_CHANNEL_MESSAGE(Message message) {
 		super((byte) 0x1A);

@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public enum ChannelType {
 
@@ -17,22 +16,22 @@ public enum ChannelType {
 
 	private static final Map<String, ChannelType> channelByIdentifier = new HashMap<>();
 
-	private final String identifier;
-
 	static {
 		for (ChannelType ct : values())
 			channelByIdentifier.put(ct.getIdentifier(), ct);
 	}
 
-	private ChannelType(String identifier) {
-		this.identifier = identifier;
-	}
+	private final String identifier;
 
-	public String getIdentifier() {
-		return identifier;
+	ChannelType(String identifier) {
+		this.identifier = identifier;
 	}
 
 	public static ChannelType getByIdentifier(String identifier) {
 		return channelByIdentifier.get(identifier);
+	}
+
+	public String getIdentifier() {
+		return identifier;
 	}
 }

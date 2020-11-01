@@ -10,25 +10,14 @@ import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
  */
 public abstract class AbstractServerPacket extends BaseServerPacket {
 
-	/**
-	 * @param opCode
-	 */
 	public AbstractServerPacket(byte opCode) {
 		super(opCode);
 	}
 
-	/**
-	 * @param clientChannelHandler
-	 * @param buf
-	 */
 	public void write(ClientChannelHandler clientChannelHandler, ChannelBuffer buf) {
 		buf.writeShort((short) 0);
 		writeImpl(clientChannelHandler, buf);
 	}
 
-	/**
-	 * @param cHandler
-	 * @param buf
-	 */
 	protected abstract void writeImpl(ClientChannelHandler cHandler, ChannelBuffer buf);
 }

@@ -4,11 +4,11 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public enum PlayerClass {
-	// Implemented languages (in order of appearance): Russian, Turkish, NA English, GF English, German, Spanish, Italian, French, Polish. Duplicate words were removed.
+
+	// Implemented languages (in order of appearance): Russian, Turkish, NA English, GF English, German, Spanish, Italian, French, Polish
 	WARRIOR(0),
 	GLADIATOR(1, "Гладиатор", "Gladyatör", "Gladiator", "Gladiador", "Gladiatore", "Gladiateur"),
 	TEMPLAR(2, "Страж", "Tapınakçı", "Templar", "Templer", "Templario", "Templare", "Templier", "Templariusz"),
@@ -27,10 +27,7 @@ public enum PlayerClass {
 	ARTIST(15),
 	BARD(16, "Бард", "Ozan", "Songweaver", "Bard", "Barde", "Bardo");
 
-	private static Map<String, PlayerClass> classIdentifiers = new HashMap<>();
-
-	private byte classId;
-	private String[] identifiers;
+	private static final Map<String, PlayerClass> classIdentifiers = new HashMap<>();
 
 	static {
 		for (PlayerClass playerClass : values())
@@ -38,9 +35,16 @@ public enum PlayerClass {
 				classIdentifiers.put(identifier, playerClass);
 	}
 
-	private PlayerClass(int classId, String... identifiers) {
+	private final byte classId;
+	private final String[] identifiers;
+
+	PlayerClass(int classId, String... identifiers) {
 		this.classId = (byte) classId;
 		this.identifiers = identifiers;
+	}
+
+	public static PlayerClass getClassByIdentifier(String classIdentifier) {
+		return classIdentifiers.get(classIdentifier.split("\\[f:")[0]);
 	}
 
 	public byte getClassId() {
@@ -49,9 +53,5 @@ public enum PlayerClass {
 
 	public String[] getIdentifiers() {
 		return identifiers;
-	}
-
-	public static PlayerClass getClassByIdentifier(String classIdentifier) {
-		return classIdentifiers.get(classIdentifier.split("\\[f:")[0]);
 	}
 }

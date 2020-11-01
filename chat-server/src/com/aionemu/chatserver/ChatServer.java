@@ -40,15 +40,10 @@ import ch.qos.logback.core.joran.spi.JoranException;
  */
 public class ChatServer {
 
-	/**
-	 * Logger for this class.
-	 */
 	private static final Logger log = LoggerFactory.getLogger(ChatServer.class);
 
-	/**
-	 * Prevent instantiation
-	 */
 	private ChatServer() {
+
 	}
 
 	private static void initializeLogger() {
@@ -82,7 +77,8 @@ public class ChatServer {
 			if (!files.isEmpty()) {
 				Files.createDirectories(oldLogsFolder);
 				SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH.mm");
-				String outFilename = (serverStartTime < serverEndTime[0] ? sdf.format(serverStartTime) : "Unknown") + " to " + sdf.format(serverEndTime[0]) + ".zip";
+				String outFilename = (serverStartTime < serverEndTime[0] ? sdf.format(serverStartTime) : "Unknown") + " to " + sdf.format(serverEndTime[0])
+					+ ".zip";
 				try (ZipOutputStream out = new ZipOutputStream(new FileOutputStream(oldLogsFolder + "/" + outFilename))) {
 					out.setMethod(ZipOutputStream.DEFLATED);
 					out.setLevel(Deflater.BEST_COMPRESSION);
@@ -114,16 +110,13 @@ public class ChatServer {
 		}
 	}
 
-	/**
-	 * @param args
-	 */
 	public static void main(final String[] args) {
 		long start = System.currentTimeMillis();
 
 		initializeLogger();
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
-		(new ServerCommandProcessor()).start(); // Launch the server command processor thread
+		new ServerCommandProcessor().start(); // Launch the server command processor thread
 		Config.load();
 		DatabaseFactory.init();
 		DAOManager.init();

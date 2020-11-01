@@ -4,7 +4,7 @@ import com.aionemu.chatserver.model.ChannelType;
 import com.aionemu.chatserver.model.Race;
 
 /**
- * @modified Neon
+ * @author Unknown, Neon
  */
 public class LangChannel extends RaceChannel {
 
@@ -26,6 +26,6 @@ public class LangChannel extends RaceChannel {
 
 	@Override
 	public String name() {
-		return getChannelType().name() + ": " + language + " (" + getRace().name().substring(0, 1) + ")";
+		return getChannelType().name() + ": " + language + " (" + getRace().name().charAt(0) + ")";
 	}
 }

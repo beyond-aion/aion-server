@@ -1,8 +1,5 @@
 package com.aionemu.chatserver.network.netty.coder;
 
-import org.jboss.netty.buffer.ChannelBuffer;
-import org.jboss.netty.channel.Channel;
-import org.jboss.netty.channel.ChannelHandlerContext;
 import org.jboss.netty.handler.codec.frame.LengthFieldBasedFrameDecoder;
 
 /**
@@ -20,8 +17,4 @@ public class PacketFrameDecoder extends LengthFieldBasedFrameDecoder {
 		super(MAX_PACKET_LENGTH, LENGTH_FIELD_OFFSET, LENGTH_FIELD_LENGTH, LENGTH_FIELD_ADJUSTMENT, INITIAL_BYTES_TO_STRIP);
 	}
 
-	@Override
-	protected Object decode(ChannelHandlerContext arg0, Channel arg1, ChannelBuffer arg2) throws Exception {
-		return super.decode(arg0, arg1, arg2);
-	}
 }

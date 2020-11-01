@@ -6,6 +6,7 @@ package com.aionemu.chatserver.network.gameserver;
  * @author -Nemesiss-
  */
 public enum GsAuthResponse {
+
 	/**
 	 * Everything is OK
 	 */
@@ -22,15 +23,9 @@ public enum GsAuthResponse {
 	/**
 	 * id of this enum that may be sent to client
 	 */
-	private byte responseId;
+	private final byte responseId;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param responseId
-	 *          id of the message
-	 */
-	private GsAuthResponse(int responseId) {
+	GsAuthResponse(int responseId) {
 		this.responseId = (byte) responseId;
 	}
 

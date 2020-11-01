@@ -23,25 +23,17 @@ public class ChatChannels {
 	private static Channel addChannel(ChannelType ct, String channelMeta, int gameServerId, Race race) {
 		Channel channel = null;
 		switch (ct) {
-			case REGION:
-				channel = new RegionChannel(gameServerId, race, channelMeta);
-				break;
-			case TRADE:
-				channel = new TradeChannel(gameServerId, race, channelMeta);
-				break;
-			case LFG:
-				channel = new LfgChannel(gameServerId, race);
-				break;
-			case JOB:
+			case REGION -> channel = new RegionChannel(gameServerId, race, channelMeta);
+			case TRADE -> channel = new TradeChannel(gameServerId, race, channelMeta);
+			case LFG -> channel = new LfgChannel(gameServerId, race);
+			case JOB -> {
 				PlayerClass playerClass = PlayerClass.getClassByIdentifier(channelMeta);
 				if (playerClass != null)
 					channel = new JobChannel(gameServerId, race, playerClass);
 				else
-					log.warn("Client requested non existent class channel: " + channelMeta);
-				break;
-			case LANG:
-				channel = new LangChannel(gameServerId, race, channelMeta);
-				break;
+					log.warn("Client requested non existent class channel: {}", channelMeta);
+			}
+			case LANG -> channel = new LangChannel(gameServerId, race, channelMeta);
 		}
 		if (channel != null)
 			channels.put(channel.getChannelId(), channel);
@@ -56,7 +48,7 @@ public class ChatChannels {
 	public static Channel getChannelById(int channelId) {
 		Channel channel = channels.get(channelId);
 		if (channel == null && LoggingConfig.LOG_CHANNEL_INVALID)
-			log.warn("No registered channel with id " + channelId);
+			log.warn("No registered channel with id {}", channelId);
 		return channel;
 	}
 
@@ -68,7 +60,7 @@ public class ChatChannels {
 	 */
 	public static Channel getOrCreate(ChatClient client, String identifier) {
 		if (LoggingConfig.LOG_CHANNEL_REQUEST)
-			log.info(client + " requested channel: " + identifier);
+			log.info("{} requested channel: {}", client, identifier);
 
 		String[] parts = identifier.split("\u0001"); // { @, trade_Housing_barrack, 1.0.AION.KOR }
 		if (parts.length != 3)
@@ -79,10 +71,10 @@ public class ChatChannels {
 
 		ChannelType ct = ChannelType.getByIdentifier(channelType[0]);
 		String channelMeta = channelType[1];
-		int gameServerId = Integer.valueOf(channelRestrictions[0]);
-		Race race = Race.getById(Integer.valueOf(channelRestrictions[1]));
+		int gameServerId = Integer.parseInt(channelRestrictions[0]);
+		Race race = Race.getById(Integer.parseInt(channelRestrictions[1]));
 		if (client.getRace() != race && client.getAccessLevel() == 0) {
-			log.warn(client + " requested channel of race: " + race);
+			log.warn("{} requested channel of race: {}", client, race);
 			return null;
 		}
 

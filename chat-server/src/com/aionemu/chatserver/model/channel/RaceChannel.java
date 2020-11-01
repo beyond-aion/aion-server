@@ -4,8 +4,7 @@ import com.aionemu.chatserver.model.ChannelType;
 import com.aionemu.chatserver.model.Race;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public abstract class RaceChannel extends Channel {
 
@@ -27,6 +26,6 @@ public abstract class RaceChannel extends Channel {
 
 	@Override
 	public String name() {
-		return getChannelType().name() + " (" + getRace().name().substring(0, 1) + ")";
+		return getChannelType().name() + " (" + getRace().name().charAt(0) + ")";
 	}
 }

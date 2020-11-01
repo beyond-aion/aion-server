@@ -5,8 +5,7 @@ import com.aionemu.chatserver.model.PlayerClass;
 import com.aionemu.chatserver.model.Race;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public class JobChannel extends RaceChannel {
 
@@ -24,6 +23,6 @@ public class JobChannel extends RaceChannel {
 
 	@Override
 	public String name() {
-		return playerClass + " (" + getRace().name().substring(0, 1) + ")";
+		return playerClass + " (" + getRace().name().charAt(0) + ")";
 	}
 }

@@ -4,8 +4,7 @@ import com.aionemu.chatserver.model.ChannelType;
 import com.aionemu.chatserver.model.Race;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public class TradeChannel extends RaceChannel {
 

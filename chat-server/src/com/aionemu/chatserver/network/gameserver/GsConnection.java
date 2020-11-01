@@ -25,17 +25,13 @@ public class GsConnection extends AConnection<GsServerPacket> {
 
 	private static final Logger log = LoggerFactory.getLogger(GsConnection.class);
 	private static final ExecutorService PACKET_EXECUTOR = Executors.newCachedThreadPool();
-	private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<>();
-	private State state;
 
 	static {
 		((ThreadPoolExecutor) PACKET_EXECUTOR).setCorePoolSize(1);
 	}
 
-	public enum State {
-		CONNECTED,
-		AUTHED
-	}
+	private final Deque<GsServerPacket> sendMsgQueue = new ArrayDeque<>();
+	private GameServerConnectionState state;
 
 	public GsConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 8, 8192 * 8);
@@ -76,17 +72,24 @@ public class GsConnection extends AConnection<GsServerPacket> {
 		PACKET_EXECUTOR.shutdown();
 	}
 
-	public State getState() {
+	public GameServerConnectionState getState() {
 		return state;
 	}
 
-	public void setState(State state) {
+	public void setState(GameServerConnectionState state) {
 		this.state = state;
 	}
 
 	@Override
 	protected void initialized() {
-		state = State.CONNECTED;
-		log.info("Gameserver connection attempt from: " + getIP());
+		state = GameServerConnectionState.CONNECTED;
+		log.info("Gameserver connection attempt from: {}", getIP());
+	}
+
+	public enum GameServerConnectionState {
+
+		CONNECTED,
+		AUTHED
+
 	}
 }

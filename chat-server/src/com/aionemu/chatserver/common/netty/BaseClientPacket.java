@@ -10,12 +10,8 @@ public abstract class BaseClientPacket extends AbstractPacket {
 
 	private static final Logger log = LoggerFactory.getLogger(BaseClientPacket.class);
 
-	private ChannelBuffer buf;
+	private final ChannelBuffer buf;
 
-	/**
-	 * @param channelBuffer
-	 * @param opCode
-	 */
 	public BaseClientPacket(ChannelBuffer channelBuffer, byte opCode) {
 		super(opCode);
 		this.buf = channelBuffer;
@@ -35,7 +31,8 @@ public abstract class BaseClientPacket extends AbstractPacket {
 		try {
 			readImpl();
 			if (getRemainingBytes() > 0)
-				log.warn(this + " was not fully read! Last " + getRemainingBytes() + " bytes were not read from buffer:\n" + NetworkUtils.toHex(buf.toByteBuffer(startPos, buf.writerIndex() - startPos)));
+				log.warn("{} was not fully read! Last {} bytes were not read from buffer: \n {}", this, getRemainingBytes(),
+					NetworkUtils.toHex(buf.toByteBuffer(startPos, buf.writerIndex() - startPos)));
 			return true;
 		} catch (Exception ex) {
 			String msg = "Reading failed for packet " + this + ". Buffer Info";
@@ -71,7 +68,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 		try {
 			return buf.readInt();
 		} catch (Exception e) {
-			log.error("Missing D for: " + this);
+			log.error("Missing D for: {}", this);
 		}
 		return 0;
 	}
@@ -85,7 +82,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 		try {
 			return buf.readByte() & 0xFF;
 		} catch (Exception e) {
-			log.error("Missing C for: " + this);
+			log.error("Missing C for: {}", this);
 		}
 		return 0;
 	}
@@ -99,7 +96,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 		try {
 			return buf.readShort() & 0xFFFF;
 		} catch (Exception e) {
-			log.error("Missing H for: " + this);
+			log.error("Missing H for: {}", this);
 		}
 		return 0;
 	}
@@ -113,7 +110,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 		try {
 			return buf.readDouble();
 		} catch (Exception e) {
-			log.error("Missing DF for: " + this);
+			log.error("Missing DF for: {}", this);
 		}
 		return 0;
 	}
@@ -127,7 +124,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 		try {
 			return buf.readFloat();
 		} catch (Exception e) {
-			log.error("Missing F for: " + this);
+			log.error("Missing F for: {}", this);
 		}
 		return 0;
 	}
@@ -141,7 +138,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 		try {
 			return buf.readLong();
 		} catch (Exception e) {
-			log.error("Missing Q for: " + this);
+			log.error("Missing Q for: {}", this);
 		}
 		return 0;
 	}
@@ -158,7 +155,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 			while ((ch = buf.readChar()) != 0)
 				sb.append(ch);
 		} catch (Exception e) {
-			log.error("Missing S for: " + this);
+			log.error("Missing S for: {}", this);
 		}
 		return sb.toString();
 	}
@@ -174,7 +171,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 		try {
 			buf.readBytes(result);
 		} catch (Exception e) {
-			log.error("Missing byte[] for: " + this);
+			log.error("Missing byte[] for: {}", this);
 		}
 		return result;
 	}

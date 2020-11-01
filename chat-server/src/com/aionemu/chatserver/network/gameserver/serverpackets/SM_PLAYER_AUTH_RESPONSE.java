@@ -9,11 +9,11 @@ import com.aionemu.chatserver.network.gameserver.GsServerPacket;
  */
 public class SM_PLAYER_AUTH_RESPONSE extends GsServerPacket {
 
-	private int playerId;
-	private byte[] token;
+	private final int playerId;
+	private final byte[] token;
 
 	public SM_PLAYER_AUTH_RESPONSE(ChatClient chatClient) {
-		this.playerId = chatClient.getClientId();
+		playerId = chatClient.getClientId();
 		token = chatClient.getToken();
 	}
 

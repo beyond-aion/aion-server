@@ -35,6 +35,7 @@ public class CM_CHANNEL_REQUEST extends AbstractClientPacket {
 
 	@Override
 	protected void runImpl() {
-		ChatService.getInstance().registerPlayerWithChannel(clientChannelHandler, channelRequestId, new String(channelIdentifier, StandardCharsets.UTF_16LE));
+		ChatService.getInstance().registerPlayerWithChannel(clientChannelHandler, channelRequestId,
+			new String(channelIdentifier, StandardCharsets.UTF_16LE));
 	}
 }

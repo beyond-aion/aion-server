@@ -5,8 +5,7 @@ import com.aionemu.chatserver.model.Race;
 import com.aionemu.chatserver.utils.IdFactory;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public abstract class Channel {
 

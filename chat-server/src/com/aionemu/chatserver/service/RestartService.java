@@ -23,6 +23,10 @@ public class RestartService {
 			setTimer();
 	}
 
+	public static RestartService getInstance() {
+		return instance;
+	}
+
 	private void setTimer() {
 		// get time to restart
 		String[] time = getRestartTime();
@@ -55,9 +59,10 @@ public class RestartService {
 
 			@Override
 			public void run() {
-				RestartService.log.info("Restart task is triggered - restarting chatserver!");
-				ShutdownHook.setRestartOnly(true);
-				ShutdownHook.getInstance().start();
+				log.info("Restart task is triggered - restarting chatserver!");
+				ShutdownHook shutdownHook = ShutdownHook.getInstance();
+				shutdownHook.setRestartOnly(true);
+				shutdownHook.start();
 			}
 		}, calendar.getTime());
 		log.info("Scheduled next restart for " + calendar.getTime().toString());
@@ -70,9 +75,5 @@ public class RestartService {
 			return new String[] { "5", "0" };
 		}
 		return time;
-	}
-
-	public static RestartService getInstance() {
-		return instance;
 	}
 }

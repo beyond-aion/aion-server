@@ -35,15 +35,6 @@ public class CM_CHANNEL_JOIN extends AbstractClientPacket {
 
 	@Override
 	protected void runImpl() {
-		/*
-		 * TODO: see comments in CM_CHANNEL_CREATE
-		 */
-//		try {
-//			System.out.println("Request id: " + channelRequestId);
-//			System.out.println("Channel identifier: " + new String(channelIdentifier, StandardCharsets.UTF_16LE));
-//			System.out.println("Password: " + new String(password, StandardCharsets.UTF_16LE));
-//		} catch (UnsupportedEncodingException e) {
-//			e.printStackTrace();
-//		}
+		// TODO see comments in CM_CHANNEL_CREATE
 	}
 }

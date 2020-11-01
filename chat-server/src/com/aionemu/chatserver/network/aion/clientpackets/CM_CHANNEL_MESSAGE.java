@@ -39,8 +39,8 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 		readD();
 		channelId = readD();
 		readC();
-		int lenght = readH() * 2;
-		content = readB(lenght);
+		int contentLength = readH() * 2;
+		content = readB(contentLength);
 	}
 
 	@Override
@@ -51,12 +51,12 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 		ChatClient client = clientChannelHandler.getChatClient();
 		Message message = new Message(channel, content, client);
 		if (client.isGagged()) {
-			long endTime = (client.getGagTime() - System.currentTimeMillis()) / 1000 / 60;
-			message.setText("You have been gagged for " + endTime + " minutes.");
+			long gagTimeMin = (client.getGagTime() - System.currentTimeMillis()) / 1000 / 60;
+			message.setText("You have been gagged for " + gagTimeMin + " minutes.");
 			clientChannelHandler.sendPacket(new SM_CHANNEL_MESSAGE(message));
 			return;
 		}
-		int floodProtectionTime = client.getFloodProtectionTime(channel.getChannelType());
+		int floodProtectionTime = client.nextMessageTimeSec(channel.getChannelType());
 		if (floodProtectionTime > 0) {
 			message.setText("You can chat again in this channel in " + floodProtectionTime + " second" + (floodProtectionTime == 1 ? "." : "s."));
 			clientChannelHandler.sendPacket(new SM_CHANNEL_MESSAGE(message));
@@ -65,13 +65,11 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 		client.updateLastMessageTime(channel.getChannelType());
 		BroadcastService.getInstance().broadcastMessage(message);
 
-		if (LoggingConfig.LOG_CHAT) {
+		if (LoggingConfig.LOG_CHAT)
 			LoggerFactory.getLogger("CHAT_LOG").info("[{}] {}: {}", message.getChannel().name(), message.getSender().getName(), message.getTextString());
-		}
 
-		if (LoggingConfig.LOG_CHAT_TO_DB) {
-			DAOManager.getDAO(ChatLogDAO.class).add_ChannelChat(message.getSender().getName(), message.getTextString(), "", message.getChannel().name());
-		}
+		if (LoggingConfig.LOG_CHAT_TO_DB)
+			DAOManager.getDAO(ChatLogDAO.class).logChannelChat(message.getSender().getName(), message.getTextString(), "", message.getChannel().name());
 	}
 
 	@Override

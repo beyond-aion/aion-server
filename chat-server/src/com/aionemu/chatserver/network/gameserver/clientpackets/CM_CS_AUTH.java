@@ -8,7 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.chatserver.network.gameserver.GsAuthResponse;
 import com.aionemu.chatserver.network.gameserver.GsClientPacket;
 import com.aionemu.chatserver.network.gameserver.GsConnection;
-import com.aionemu.chatserver.network.gameserver.GsConnection.State;
+import com.aionemu.chatserver.network.gameserver.GsConnection.GameServerConnectionState;
 import com.aionemu.chatserver.network.gameserver.serverpackets.SM_GS_AUTH_RESPONSE;
 import com.aionemu.chatserver.service.GameServerService;
 
@@ -17,15 +17,8 @@ import com.aionemu.chatserver.service.GameServerService;
  */
 public class CM_CS_AUTH extends GsClientPacket {
 
-	private Logger log = LoggerFactory.getLogger(CM_CS_AUTH.class);
-	/**
-	 * Password for authentication
-	 */
+	private static final Logger log = LoggerFactory.getLogger(CM_CS_AUTH.class);
 	private String password;
-
-	/**
-	 * Id of GameServer
-	 */
 	private byte gameServerId;
 
 	public CM_CS_AUTH(ByteBuffer buf, GsConnection connection) {
@@ -41,21 +34,14 @@ public class CM_CS_AUTH extends GsClientPacket {
 	@Override
 	protected void runImpl() {
 		GsAuthResponse resp = GameServerService.getInstance().registerGameServer(gameServerId, password);
-
 		switch (resp) {
-			case AUTHED:
-				getConnection().setState(State.AUTHED);
-				getConnection().sendPacket(new SM_GS_AUTH_RESPONSE(resp));
-				log.info("Gameserver #" + gameServerId + " is now online");
-				break;
-			case NOT_AUTHED:
-				log.warn("Gameserver #" + gameServerId + " (IP: " + getConnection().getIP() + ") tried to register with invalid password");
-				getConnection().sendPacket(new SM_GS_AUTH_RESPONSE(resp));
-				break;
-			case ALREADY_REGISTERED:
-				log.info("Gameserver #" + gameServerId + " is already registered");
-				getConnection().sendPacket(new SM_GS_AUTH_RESPONSE(resp));
-				break;
+			case AUTHED -> {
+				getConnection().setState(GameServerConnectionState.AUTHED);
+				log.info("Gameserver #{} is now online", gameServerId);
+			}
+			case NOT_AUTHED -> log.warn("Gameserver #{} (IP: {}) tried to register with an invalid password", gameServerId, getConnection().getIP());
+			case ALREADY_REGISTERED -> log.info("Gameserver #{} is already registered", gameServerId);
 		}
+		sendPacket(new SM_GS_AUTH_RESPONSE(resp));
 	}
 }
