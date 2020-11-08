@@ -829,7 +829,7 @@ public class EnchantService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_CANNOT_02());
 			return;
 		}
-		if (targetItem.getItemId() != material.getItemId() && material.getItemId() != 166500002) {
+		if (targetItem.getItemId() != material.getItemId() && material.getItemId() != 166500002 && material.getItemId() != 166500005) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXCEED_NO_TARGET_ITEM());
 			return;
 		}
