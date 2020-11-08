@@ -14,20 +14,20 @@ import com.aionemu.gameserver.services.HousingService;
  */
 public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 
-	private final boolean isFirst, hasMore;
+	private final boolean isFirst, isLast;
 	private final List<LegionMemberEx> legionMembers;
 
-	public SM_LEGION_MEMBERLIST(List<LegionMemberEx> legionMembers, boolean hasMore, boolean isFirst) {
+	public SM_LEGION_MEMBERLIST(List<LegionMemberEx> legionMembers, boolean isFirst, boolean isLast) {
 		this.legionMembers = legionMembers;
 		this.isFirst = isFirst;
-		this.hasMore = hasMore;
+		this.isLast = isLast;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		int size = legionMembers.size();
 		writeC(isFirst ? 1 : 0);
-		writeH(hasMore ? size : -size);
+		writeH(isLast ? -size : size);
 		for (LegionMemberEx legionMember : legionMembers) {
 			writeD(legionMember.getObjectId());
 			writeS(legionMember.getName());

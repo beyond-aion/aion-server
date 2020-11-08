@@ -129,7 +129,7 @@ public class SystemMailService {
 			// refresh letters if recipient is currently looking into his mailbox
 			if (mailbox.mailBoxState != 0) {
 				boolean isPostman = (mailbox.mailBoxState & PlayerMailboxState.EXPRESS) == PlayerMailboxState.EXPRESS;
-				PacketSendUtility.sendPacket(recipient, new SM_MAIL_SERVICE(recipient, mailbox.getLetters(), isPostman));
+				MailService.sendMailList(recipient, isPostman, false);
 			}
 
 			if (newLetter.getLetterType() == LetterType.EXPRESS)

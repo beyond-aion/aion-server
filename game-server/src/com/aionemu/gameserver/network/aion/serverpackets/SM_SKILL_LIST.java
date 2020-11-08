@@ -1,21 +1,23 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.network.aion.skillinfo.SkillEntryWriter;
 
 /**
- * @author MrPoke
- * @modified ATracer, Neon
+ * @author MrPoke, ATracer, Neon
  */
 public class SM_SKILL_LIST extends AionServerPacket {
 
-	private List<PlayerSkillEntry> skillList;
-	private int messageId;
+	public static final int STATIC_BODY_SIZE = 7;
+
+	private final List<PlayerSkillEntry> skillList;
+	private final int messageId;
 	private String skillNameL10n;
 	private String skillLvl;
 	boolean silentUpdate = false;
@@ -27,7 +29,7 @@ public class SM_SKILL_LIST extends AionServerPacket {
 	}
 
 	public SM_SKILL_LIST(PlayerSkillEntry skill, int messageId) {
-		this.skillList = Arrays.asList(skill);
+		this.skillList = Collections.singletonList(skill);
 		this.messageId = messageId;
 		this.skillNameL10n = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId()).getL10n();
 		this.skillLvl = String.valueOf(skill.getSkillLevel());
@@ -37,14 +39,8 @@ public class SM_SKILL_LIST extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		writeH(skillList.size()); // skills list size
 		writeC(silentUpdate ? 1 : 0); // 1 only list in skill list, 0 list in skill list, update skill bar level and notify if new
-		for (PlayerSkillEntry entry : skillList) {
-			writeH(entry.getSkillId());// id
-			writeH(entry.isNormalSkill() ? 1 : entry.getSkillLevel()); // don't ask me, it's retail like...
-			writeC(0x00);
-			writeC(entry.getProfessionSkillBarSize());
-			writeD(entry.isProfessionSkill() ? entry.getProfessionFlag() : entry.getFlag());
-			writeC(entry.getSkillType()); // 0 normal skill , 1 stigma skill , 3 linked stigma skill
-		}
+		for (PlayerSkillEntry entry : skillList)
+			SkillEntryWriter.writeSkillEntry(entry, getBuf());
 		writeD(messageId);
 		if (messageId != 0) {
 			writeS(skillNameL10n);

@@ -1,10 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.Collection;
-import java.util.Comparator;
 import java.util.List;
-import java.util.stream.Collectors;
-import java.util.stream.Stream;
+import java.util.function.Function;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Letter;
@@ -22,6 +19,10 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob;
  */
 public class SM_MAIL_SERVICE extends AionServerPacket {
 
+	public static final int STATIC_BODY_SIZE = 8;
+	public static final Function<Letter, Integer> DYNAMIC_BODY_PART_SIZE_CALCULATOR = (letter) -> 22 + byteLengthForString(letter.getSenderName())
+		+ byteLengthForString(letter.getTitle());
+
 	private Player player;
 	private int serviceId;
 	private List<Letter> letters;
@@ -31,6 +32,7 @@ public class SM_MAIL_SERVICE extends AionServerPacket {
 	private int letterId;
 	private int[] letterIds;
 	private byte attachmentType;
+	private boolean isLastPacket;
 
 	public SM_MAIL_SERVICE() {
 		this.serviceId = 0;
@@ -47,14 +49,11 @@ public class SM_MAIL_SERVICE extends AionServerPacket {
 	/**
 	 * Send mailbox info
 	 */
-	public SM_MAIL_SERVICE(Player player, Collection<Letter> letters, boolean isExpress) {
+	public SM_MAIL_SERVICE(Player player, List<Letter> letters, boolean isLastPacket) {
 		this.player = player;
 		this.serviceId = 2;
-		Stream<Letter> letterStream = letters.stream();
-		if (isExpress)
-			letterStream = letterStream.filter(letter -> letter.isExpress() && letter.isUnread());
-		letterStream = letterStream.sorted(Comparator.comparing(Letter::getTimeStamp).reversed()); // sort descending by date (newest to the top)
-		this.letters = letterStream.collect(Collectors.toList());
+		this.letters = letters;
+		this.isLastPacket = isLastPacket;
 	}
 
 	/**
@@ -93,40 +92,26 @@ public class SM_MAIL_SERVICE extends AionServerPacket {
 		int unreadBlackCloudCount = mailbox.getUnreadCountByType(LetterType.BLACKCLOUD);
 		writeC(serviceId);
 		switch (serviceId) {
-			case 0:
-				writeMailboxState(totalCount, unreadCount, unreadExpressCount, unreadBlackCloudCount);
-				break;
-			case 1:
-				writeMailMessage(mailMessage);
-				break;
-			case 2:
-				writeLettersList(letters);
-				break;
-			case 3:
-				writeLetterRead(letter, time, totalCount, unreadCount, unreadExpressCount, unreadBlackCloudCount);
-				break;
-			case 5:
-				writeLetterState(letterId, attachmentType);
-				break;
-			case 6:
-				writeLetterDelete(totalCount, unreadCount, unreadExpressCount, unreadBlackCloudCount, letterIds);
-				break;
+			case 0 -> writeMailboxState(totalCount, unreadCount, unreadExpressCount, unreadBlackCloudCount);
+			case 1 -> writeMailMessage(mailMessage);
+			case 2 -> writeLettersList(letters);
+			case 3 -> writeLetterRead(letter, time, totalCount, unreadCount, unreadExpressCount, unreadBlackCloudCount);
+			case 5 -> writeLetterState(letterId, attachmentType);
+			case 6 -> writeLetterDelete(totalCount, unreadCount, unreadExpressCount, unreadBlackCloudCount, letterIds);
 		}
 	}
 
 	private void writeLettersList(List<Letter> letters) {
-		int lettersToDisplay = Math.min(120, letters.size()); // cap at 120 to limit packet size
 		writeD(player.getObjectId());
 		writeC(0);
-		writeH(-lettersToDisplay);
-		for (int i = 0; i < lettersToDisplay; i++) { // mail #101+ will be hidden on client side until you delete some
-			Letter letter = letters.get(i);
+		writeH(isLastPacket ? letters.size() * -1 : letters.size());
+		for (Letter letter : letters) {
 			writeD(letter.getObjectId());
 			writeS(letter.getSenderName());
 			writeS(letter.getTitle());
 			writeC(letter.isUnread() ? 0 : 1); // isRead
 			writeD(letter.getAttachedItem() == null ? 0 : letter.getAttachedItem().getObjectId());
-			writeD(letter.getAttachedItem() == null ? 0 :letter.getAttachedItem().getItemTemplate().getTemplateId());
+			writeD(letter.getAttachedItem() == null ? 0 : letter.getAttachedItem().getItemTemplate().getTemplateId());
 			writeQ(letter.getAttachedKinah());
 			writeC(letter.getLetterType().getId());
 		}

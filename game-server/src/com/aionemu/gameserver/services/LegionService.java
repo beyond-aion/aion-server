@@ -32,6 +32,7 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.collections.FixedElementCountSplitter;
 import com.aionemu.gameserver.utils.collections.ListSplitter;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
@@ -774,10 +775,9 @@ public class LegionService {
 			List<Item> items = player.getLegion().getLegionWarehouse().getItems();
 			int storageId = StorageType.LEGION_WAREHOUSE.getId();
 
-			ListSplitter<Item> splitter = new ListSplitter<>(items, 10, false);
-			while (splitter.hasMore()) {
-				PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(splitter.getNext(), storageId, whLvl, splitter.isFirst(), player));
-			}
+			ListSplitter<Item> splitter = new FixedElementCountSplitter<>(items, false, 10);
+			splitter.forEachRemaining(
+				splitItems -> PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(splitItems, storageId, whLvl, splitter.isFirstSplit(), player)));
 			PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(null, storageId, whLvl, items.isEmpty(), player));
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.LEGION_WAREHOUSE.id()));
 		}
@@ -1041,11 +1041,7 @@ public class LegionService {
 
 		// Send the new legion member the required legion packets
 		PacketSendUtility.sendPacket(player, new SM_LEGION_INFO(legion));
-		List<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, player.getObjectId());
-		ListSplitter<LegionMemberEx> splitter = new ListSplitter<>(totalMembers, 80, true);
-		while (splitter.hasMore()) {
-			PacketSendUtility.sendPacket(player, new SM_LEGION_MEMBERLIST(splitter.getNext(), splitter.hasMore(), splitter.isFirst()));
-		}
+		updateLegionMemberList(player, false);
 
 		// Send legion member info to the members
 		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_ADD_MEMBER(player, false, 1300260, player.getName()), player.getObjectId());
@@ -1213,11 +1209,7 @@ public class LegionService {
 
 		// Send legion info packets
 		PacketSendUtility.sendPacket(activePlayer, new SM_LEGION_INFO(legion));
-		List<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, null);
-		ListSplitter<LegionMemberEx> splitter = new ListSplitter<>(totalMembers, 80, true);
-		while (splitter.hasMore()) {
-			PacketSendUtility.sendPacket(activePlayer, new SM_LEGION_MEMBERLIST(splitter.getNext(), splitter.hasMore(), splitter.isFirst()));
-		}
+		updateLegionMemberList(activePlayer, false);
 
 		// Send current announcement to player
 		displayLegionMessage(activePlayer, legion.getCurrentAnnouncement());
@@ -1682,17 +1674,17 @@ public class LegionService {
 		return false;
 	}
 
-	/**
-	 * for name changes
-	 */
-	public void updateLegionMemberList(Player activePlayer) {
-		if (activePlayer != null && activePlayer.getLegion() != null) {
-			Legion legion = activePlayer.getLegion();
+	public void updateLegionMemberList(Player player, boolean broadcastToLegion) {
+		if (player != null && player.getLegion() != null) {
+			Legion legion = player.getLegion();
 			List<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, null);
-			ListSplitter<LegionMemberEx> splitter = new ListSplitter<>(totalMembers, 80, true);
-			while (splitter.hasMore()) {
-				PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_MEMBERLIST(splitter.getNext(), splitter.hasMore(), splitter.isFirst()));
-			}
+			ListSplitter<LegionMemberEx> splitter = new FixedElementCountSplitter<>(totalMembers, true, 80);
+			splitter.forEachRemaining(legionMembers -> {
+				if (broadcastToLegion)
+					PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_MEMBERLIST(legionMembers, splitter.isFirstSplit(), splitter.isLastSplit()));
+				else
+					PacketSendUtility.sendPacket(player, new SM_LEGION_MEMBERLIST(legionMembers, splitter.isFirstSplit(), splitter.isLastSplit()));
+			});
 		}
 	}
 

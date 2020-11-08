@@ -2,6 +2,10 @@ package com.aionemu.gameserver.services.mail;
 
 import java.sql.Timestamp;
 import java.util.Collections;
+import java.util.Comparator;
+import java.util.List;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,6 +35,8 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitter;
+import com.aionemu.gameserver.utils.collections.ListSplitter;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 
@@ -246,7 +252,6 @@ public class MailService {
 
 	public static void deleteMail(Player player, int[] mailObjId) {
 		Mailbox mailbox = player.getMailbox();
-
 		for (int letterId : mailObjId) {
 			mailbox.removeLetter(letterId);
 			DAOManager.getDAO(MailDAO.class).deleteLetter(letterId);
@@ -259,8 +264,17 @@ public class MailService {
 		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE());
 	}
 
-	public static void refreshMail(Player player) {
-		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE());
-		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player, player.getMailbox().getLetters(), false));
+	public static void sendMailList(Player player, boolean isExpress, boolean sendRefreshPacket) {
+		if (sendRefreshPacket)
+			PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE());
+
+		Stream<Letter> letterStream = player.getMailbox().getLetters().stream();
+		if (isExpress)
+			letterStream = letterStream.filter(letter -> letter.isExpress() && letter.isUnread());
+		List<Letter> letters = letterStream.sorted(Comparator.comparing(Letter::getTimeStamp).reversed()).collect(Collectors.toList());
+		ListSplitter<Letter> splitter = new DynamicServerPacketBodySplitter<>(letters, true, SM_MAIL_SERVICE.STATIC_BODY_SIZE,
+			SM_MAIL_SERVICE.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
+		splitter.forEachRemaining(letterSlice -> PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player, letterSlice, splitter.isLastSplit())));
 	}
+
 }

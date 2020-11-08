@@ -12,6 +12,16 @@ import com.aionemu.gameserver.network.Crypt;
  */
 public abstract class AionServerPacket extends BaseServerPacket {
 
+	public static int byteLengthForString(String text) {
+		if (text == null || text.isEmpty())
+			return 2;
+		return (text.length() + 1) * 2;
+	}
+
+	public static int byteLengthForFixedString(int fixedLength) {
+		return (fixedLength + 1) * 2;
+	}
+
 	/**
 	 * Constructs new server packet
 	 */
@@ -59,7 +69,6 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	 * Write data that this packet represents to given byte buffer.
 	 * 
 	 * @param con
-	 * @param buf
 	 */
 	protected void writeImpl(AionConnection con) {
 
@@ -77,7 +86,7 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	 */
 	protected final void writeS(String text, int fixedLength) {
 		if (text == null || text.isEmpty()) {
-			buf.put(new byte[(fixedLength + 1) * 2]);
+			buf.put(new byte[byteLengthForFixedString(fixedLength)]);
 		} else {
 			for (int i = 0; i < fixedLength; i++)
 				buf.putChar(i < text.length() ? text.charAt(i) : '\000');

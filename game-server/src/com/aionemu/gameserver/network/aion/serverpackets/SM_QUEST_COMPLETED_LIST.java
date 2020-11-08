@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.List;
+import java.util.function.Function;
 
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -11,14 +12,17 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
  */
 public class SM_QUEST_COMPLETED_LIST extends AionServerPacket {
 
-	private int updateMode;
-	private List<QuestState> questStates;
+	public static final int STATIC_BODY_SIZE = 4;
+	public static final Function<QuestState, Integer> DYNAMIC_BODY_PART_SIZE_CALCULATOR = (questState) -> 6;
+
+	private final int updateMode;
+	private final List<QuestState> questStates;
 
 	/**
 	 * @param updateMode
-	 *          - 0 = rewrite all entries, 1 = insert new entries
-	 * @param questState
-	 *          - list of affected quests
+	 *          0 = rewrite all entries, 1 = insert new entries
+	 * @param questStates
+	 *          list of affected quests
 	 */
 	public SM_QUEST_COMPLETED_LIST(int updateMode, List<QuestState> questStates) {
 		this.updateMode = updateMode;

@@ -1,79 +1,108 @@
 package com.aionemu.gameserver.utils.collections;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 /**
- * @author xTz, Rolandas
+ * Generic list splitter class based on the {@link Iterator}-Interface. This class handles the splitting of a given collection into multiple
+ * sublists. The determination if an element can be included in the current iteration must be handled in subclasses.
+ *
+ * @param <Type>
+ *          Type of the collection element that will be split
+ * @author xTz, Rolandas, Sykra
  */
-public class ListSplitter<T> {
+public abstract class ListSplitter<Type> implements Iterator<List<Type>> {
 
-	private T[] objects;
-	private Class<?> componentType;
+	private final List<Type> data;
+	private final boolean oneTimeSplitOnEmptyData;
 	private int splitCount;
-	private int nextStartIndex = 0;
-	private int length = 0;
-	private boolean fetchedFirst = false;
-	private boolean calledNext = false;
-	private boolean emptyIsOk = false;
+	private int currentIndex;
 
-	@SuppressWarnings("unchecked")
-	public ListSplitter(Collection<T> collection, int splitCount, boolean emptyIsOk) {
-		if (collection != null && collection.size() > 0) {
-			this.splitCount = splitCount;
-			length = collection.size();
-			this.objects = collection.toArray((T[]) new Object[length]);
-			componentType = objects.getClass().getComponentType();
-		}
-		this.emptyIsOk = emptyIsOk;
-	}
-
-	public List<T> getNext() {
-		fetchedFirst = true;
-		calledNext = true;
-
-		if (length == 0)
-			return new ArrayList<>();
-		@SuppressWarnings("unchecked")
-		T[] subArray = (T[]) Array.newInstance(componentType, Math.min(splitCount, length - nextStartIndex));
-		if (subArray.length > 0) {
-			System.arraycopy(objects, nextStartIndex, subArray, 0, subArray.length);
-			nextStartIndex += subArray.length;
-		}
-		return Arrays.asList(subArray);
-	}
-
-	public int size() {
-		return length;
-	}
-
-	public boolean isFirst() {
-		return !fetchedFirst || calledNext && nextStartIndex - splitCount <= 0;
-	}
-
-	public void reset() {
-		fetchedFirst = false;
-		calledNext = false;
-		nextStartIndex = 0;
+	/**
+	 * @param objects
+	 *          Collection of elements to split
+	 * @param oneTimeSplitOnEmptyData
+	 *          true if an empty collection should produce one split with an empty list
+	 */
+	public ListSplitter(Collection<Type> objects, boolean oneTimeSplitOnEmptyData) {
+		if (objects == null || objects.isEmpty())
+			data = Collections.emptyList();
+		else
+			data = new ArrayList<>(objects);
+		this.oneTimeSplitOnEmptyData = oneTimeSplitOnEmptyData;
 	}
 
 	/**
-	 * Always return true even the array is empty until it was fetched with {@link #getNext()}. Allows to send empty collections as packets using while
-	 * loop
+	 * This method checks whether the passed in element can be included in the current split iteration in {@link #next()}. It's possible that this
+	 * method can create or modify a cross-element state.
+	 * 
+	 * @param element
+	 *          Element that need to be checked
+	 * @return true, if the element should be included in the current split. false will include the element in the next split iteration
 	 */
-	public boolean hasMore() {
-		if (!emptyIsOk && length == 0)
-			return false;
-		calledNext = false;
-		return !fetchedFirst || nextStartIndex < length;
+	public abstract boolean hasSpaceForElement(Type element);
+
+	/**
+	 * This method should clear any state created by {@link #hasSpaceForElement(Object)}.
+	 */
+	public abstract void resetState();
+
+	@Override
+	public synchronized boolean hasNext() {
+		if (shouldSplitEmptyList())
+			return splitCount == 0;
+		return currentIndex != data.size();
 	}
 
-	public boolean isLast() {
-		int realNextStart = calledNext ? nextStartIndex - splitCount : nextStartIndex;
-		return realNextStart >= length - splitCount;
+	@Override
+	public synchronized List<Type> next() {
+		if (shouldSplitEmptyList()) {
+			if (splitCount == 0) {
+				splitCount++;
+				resetState();
+				return Collections.emptyList();
+			} else {
+				throw new NoSuchElementException("cannot split empty list more than one time");
+			}
+		}
+
+		if (currentIndex == data.size())
+			throw new NoSuchElementException("reached end of collection - no more data available");
+
+		List<Type> splitElements = new ArrayList<>();
+		for (int i = currentIndex; i < data.size(); i++) {
+			Type element = data.get(i);
+			if (hasSpaceForElement(element)) {
+				splitElements.add(element);
+				currentIndex++;
+			} else {
+				break;
+			}
+		}
+		resetState();
+		splitCount++;
+		return splitElements;
+	}
+
+	private boolean shouldSplitEmptyList() {
+		return data.isEmpty() && oneTimeSplitOnEmptyData;
+	}
+
+	public int getSplitCount() {
+		return splitCount;
+	}
+
+	public boolean hasNotBeenSplit() {
+		return splitCount == 0;
+	}
+
+	public boolean isFirstSplit() {
+		return splitCount == 1;
+	}
+
+	public boolean isLastSplit() {
+		if (shouldSplitEmptyList())
+			return splitCount == 1;
+		return currentIndex == data.size();
 	}
 
 }

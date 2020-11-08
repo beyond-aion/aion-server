@@ -40,6 +40,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitter;
 import com.aionemu.gameserver.utils.collections.ListSplitter;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
@@ -244,11 +245,10 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void sendCompletedQuests(Player player) {
-		ListSplitter<QuestState> splittedQs = new ListSplitter<>(player.getQuestStateList().getCompletedQuests(), 1345, true);
-		while (splittedQs.hasMore()) {
-			int updateMode = splittedQs.isFirst() ? 0 : 1; // first packet sent resets players list
-			PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(updateMode, splittedQs.getNext()));
-		}
+		ListSplitter<QuestState> questStateSplitter = new DynamicServerPacketBodySplitter<>(player.getQuestStateList().getAllQuestState(), true,
+			SM_QUEST_COMPLETED_LIST.STATIC_BODY_SIZE, SM_QUEST_COMPLETED_LIST.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
+		questStateSplitter.forEachRemaining(
+			questStates -> PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(questStateSplitter.isFirstSplit() ? 0 : 1, questStates)));
 	}
 
 	/**

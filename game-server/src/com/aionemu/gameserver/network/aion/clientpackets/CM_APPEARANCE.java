@@ -97,7 +97,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 			LegionService.getInstance().updateCachedPlayerName(oldName, player);
 			PacketSendUtility.broadcastPacket(player, new SM_RENAME(player.getObjectId(), oldName, newName), true);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_SUCCESS(newName));
-			LegionService.getInstance().updateLegionMemberList(player);
+			LegionService.getInstance().updateLegionMemberList(player, true);
 			PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.UPDATE);
 			PlayerGroupService.updateGroup(player, GroupEvent.UPDATE);
 			if (!player.getHouses().isEmpty())

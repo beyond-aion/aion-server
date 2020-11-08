@@ -1,11 +1,13 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
+import java.util.List;
 import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
+import com.aionemu.gameserver.utils.collections.FixedElementCountSplitter;
 import com.aionemu.gameserver.utils.collections.ListSplitter;
 import com.aionemu.gameserver.utils.collections.Predicates;
 
@@ -33,9 +35,9 @@ public class CM_INSTANCE_INFO extends AionClientPacket {
 		Player firstObject = player.isInTeam() ? player.getCurrentTeam().getLeaderObject() : player; // always the team leader
 		sendPacket(new SM_INSTANCE_INFO(updateType, firstObject));
 		if (updateType == 1 && player.isInTeam()) {
-			ListSplitter<Player> splitter = new ListSplitter<>(player.getCurrentTeam().filterMembers(Predicates.Players.allExcept(firstObject)), 3, false);
-			while (splitter.hasMore())
-				sendPacket(new SM_INSTANCE_INFO((byte) 2, splitter.getNext())); // send info for max 3 members at once
+			List<Player> filteredTeamMembers = player.getCurrentTeam().filterMembers(Predicates.Players.allExcept(firstObject));
+			ListSplitter<Player> playerSplitter = new FixedElementCountSplitter<>(filteredTeamMembers, false, 3);
+			playerSplitter.forEachRemaining(players -> sendPacket(new SM_INSTANCE_INFO((byte) 2, players)));
 		}
 	}
 }

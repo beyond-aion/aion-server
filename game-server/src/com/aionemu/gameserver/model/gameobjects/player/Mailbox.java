@@ -13,8 +13,7 @@ import com.aionemu.gameserver.services.mail.MailService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author kosyachok
- * @modified Atracer
+ * @author kosyachok, Atracer
  */
 public class Mailbox {
 
@@ -139,12 +138,8 @@ public class Mailbox {
 				} else
 					break;
 			}
-			MailService.refreshMail(getOwner());
+			MailService.sendMailList(getOwner(), false, true);
 		}
-	}
-
-	public void sendMailList(boolean expressOnly) {
-		PacketSendUtility.sendPacket(owner, new SM_MAIL_SERVICE(owner, getLetters(), expressOnly));
 	}
 
 	public Player getOwner() {

@@ -2,6 +2,7 @@ package com.aionemu.gameserver.services.player;
 
 import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.function.Consumer;
@@ -48,6 +49,7 @@ import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ENTER_WORLD_CHECK.Msg;
+import com.aionemu.gameserver.network.aion.skillinfo.SkillEntryWriter;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.PunishmentService.PunishmentType;
@@ -69,6 +71,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.GMService;
+import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitter;
+import com.aionemu.gameserver.utils.collections.FixedElementCountSplitter;
 import com.aionemu.gameserver.utils.collections.ListSplitter;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.utils.time.ServerTime;
@@ -270,12 +274,9 @@ public final class PlayerEnterWorldService {
 		if (player.hasAccess(AdminConfig.GM_SKILLS))
 			GMService.getInstance().addGmSkills(player);
 		AbyssSkillService.updateSkills(player);
-		ListSplitter<PlayerSkillEntry> splitter = new ListSplitter<>(player.getSkillList().getAllSkills(), 700, false); // split every 700 (729 worked,
-																																																										// 745 crashed)
-		while (splitter.hasMore()) {
-			client.sendPacket(new SM_SKILL_LIST(splitter.getNext()));
-		}
-
+		ListSplitter<PlayerSkillEntry> skillEntrySplitter = new DynamicServerPacketBodySplitter<>(player.getSkillList().getAllSkills(), false,
+			SM_SKILL_LIST.STATIC_BODY_SIZE, SkillEntryWriter.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
+		skillEntrySplitter.forEachRemaining(skillEntries -> PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skillEntries)));
 		if (player.getSkillCoolDowns() != null)
 			client.sendPacket(new SM_SKILL_COOLDOWN(player.getSkillCoolDowns(), true));
 
@@ -499,11 +500,9 @@ public final class PlayerEnterWorldService {
 		allItems.addAll(player.getEquipment().getEquippedItems());
 		allItems.addAll(inventory.getItems());
 
-		ListSplitter<Item> splitter = new ListSplitter<>(allItems, 10, true);
-		while (splitter.hasMore()) {
-			client.sendPacket(new SM_INVENTORY_INFO(splitter.isFirst(), splitter.getNext(), player));
-		}
-		client.sendPacket(new SM_INVENTORY_INFO(false, new ArrayList<>(), player));
+		ListSplitter<Item> splitter = new FixedElementCountSplitter<>(allItems, true, 10);
+		splitter.forEachRemaining(items -> client.sendPacket(new SM_INVENTORY_INFO(splitter.isFirstSplit(), items, player)));
+		client.sendPacket(new SM_INVENTORY_INFO(false, Collections.emptyList(), player));
 	}
 
 	private static void sendWarehouseItemInfos(AionConnection client, Player player) {
@@ -517,10 +516,10 @@ public final class PlayerEnterWorldService {
 				client.sendPacket(new SM_WAREHOUSE_INFO(null, i, 0, true, player));
 				continue;
 			}
-			ListSplitter<Item> splitter = new ListSplitter<>(storage.getItemsWithKinah(), 10, true);
-			while (splitter.hasMore()) {
-				client.sendPacket(new SM_WAREHOUSE_INFO(splitter.getNext(), i, 0, splitter.isFirst(), player));
-			}
+			ListSplitter<Item> splitter = new FixedElementCountSplitter<>(storage.getItemsWithKinah(), true, 10);
+			int storageType = i;
+			splitter.forEachRemaining(items -> client.sendPacket(new SM_WAREHOUSE_INFO(items, storageType, 0, splitter.isFirstSplit(), player)));
+			client.sendPacket(new SM_WAREHOUSE_INFO(null, storageType, 0, false, player));
 			client.sendPacket(new SM_WAREHOUSE_INFO(null, i, 0, false, player));
 		}
 	}

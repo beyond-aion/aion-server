@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.List;
+import java.util.function.Function;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.House;
@@ -15,6 +16,9 @@ import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
  * @author Rolandas, Neon
  */
 public class SM_HOUSE_BIDS extends AionServerPacket {
+
+	public static final int STATIC_BODY_SIZE = 28;
+	public static final Function<HouseBids, Integer> DYNAMIC_BODY_PART_SIZE_CALCULATOR = (bid) -> 44;
 
 	private final boolean isFirst;
 	private final boolean isLast;
