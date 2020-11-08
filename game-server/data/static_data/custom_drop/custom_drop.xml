@@ -4587,25 +4587,22 @@
 		<drop_group>
 			<drop item_id="188053618" chance="20" /><!-- Honorable Elim's Idian Bundle -->
 			<drop item_id="166500002" chance="20" min_amount="3" /><!-- Amplification Stone -->
-			<drop item_id="166020000" chance="20" min_amount="3" /><!-- Omega Enchantment Stone -->
+			<drop item_id="166020003" chance="20" min_amount="3" /><!-- [Event] Omega Enchantment Stone -->
 			<drop item_id="166030007" chance="20" min_amount="3" /><!-- [Event] Tempering Solution -->
 			<drop item_id="186000242" chance="20" min_amount="2" /><!-- Ceramium Medal -->
 			<drop item_id="188053610" chance="20" min_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 			<drop item_id="186000247" chance="20" min_amount="5" /><!-- Major Danuar Relic -->
-			<drop item_id="188053207" chance="20" /><!-- [Event] Ancient Spirit's Eternal Armor Chest -->
-			<drop item_id="188052073" chance="20" /><!-- [Event] Ancient Spirit's Wing Box -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="188053099" chance="5" /><!-- Pure Modor's Equipment Crux Box -->
-			<drop item_id="188052831" chance="5" /><!-- Dynatoum's Brazen Armor Box -->
-			<drop item_id="188053295" chance="5" /><!-- Empyrean Plume Chest -->
+			<drop item_id="188053100" chance="5" /><!-- Pure Dynatoum's Equipment Crux Box -->
+			<drop item_id="188052394" chance="5" /><!-- Modor's Mythic Armor Box -->
 			<drop item_id="168310019" chance="5" /><!-- Major Blessed Augment: Level 2 -->
-			<drop item_id="188053728" chance="5" /><!-- Beritra's Equipment Box -->
+			<drop item_id="188053113" chance="5" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</drop_group>
 		<drop_group>
 			<drop item_id="169610093" chance="1" /><!-- [Title Card] Top Gun -->
-			<drop item_id="188053611" chance="1" /><!-- [Event] Wing Box -->
-			<drop item_id="188054260" chance="1" /><!-- Ride Box of Conquest -->
+			<drop item_id="188053033" chance="1" /><!-- Kunax's Equipment Box -->
+			<drop item_id="188053728" chance="1" /><!-- Beritra's Equipment Box -->
 		</drop_group>
 	</npc_drop>
 </custom_drop>
