@@ -267,17 +267,6 @@
 					<spot x="1408.028" y="753.6305" z="312.8755" />
 				</spawn>
 			</spawn_map>
-			<!-- GM Isle (TEST Purpose)
-			<spawn_map map_id="900110000">
-				<spawn npc_id="701983" respawn_time="30" pool="3">
-					<spot x="2631.983" y="139.489" z="116.862" />
-					<spot x="2641.197" y="139.744" z="116.862" />
-					<spot x="2647.901" y="135.704" z="116.853" />
-					<spot x="2647.091" y="118.578" z="116.853" />
-					<spot x="2638.081" y="115.325" z="116.862" />
-					<spot x="2625.937" y="123.794" z="116.862" />
-				</spawn>
-			</spawn_map> -->
 		</spawns>
 	</event>
 	<event name="Summer Event" start="2020-07-10T00:00:00" end="2020-07-26T23:59:59">
