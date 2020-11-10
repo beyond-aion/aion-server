@@ -28,10 +28,10 @@ public class CM_CHANNEL_CREATE extends AbstractClientPacket {
 		channelRequestId = readD();
 		readB(16); // 0
 		int identifierLength = readH() * 2;
-		channelIdentifier = readB(identifierLength);
+		channelIdentifier = readB(identifierLength); // encoded in UTF_16LE
 		readB(7); // 0
 		int passwordLength = readH() * 2;
-		password = readB(passwordLength);
+		password = readB(passwordLength); // encoded in UTF_16LE
 		readH(); // -1
 	}
 

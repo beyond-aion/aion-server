@@ -16,22 +16,22 @@ public enum ChannelType {
 
 	private static final Map<String, ChannelType> channelByIdentifier = new HashMap<>();
 
+	private final String identifier;
+
 	static {
 		for (ChannelType ct : values())
 			channelByIdentifier.put(ct.getIdentifier(), ct);
 	}
 
-	private final String identifier;
-
 	ChannelType(String identifier) {
 		this.identifier = identifier;
 	}
 
-	public static ChannelType getByIdentifier(String identifier) {
-		return channelByIdentifier.get(identifier);
-	}
-
 	public String getIdentifier() {
 		return identifier;
+	}
+
+	public static ChannelType getByIdentifier(String identifier) {
+		return channelByIdentifier.get(identifier);
 	}
 }

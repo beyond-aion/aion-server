@@ -13,9 +13,6 @@ public abstract class BaseServerPacket extends AbstractPacket {
 
 	/**
 	 * Write int to buffer
-	 * 
-	 * @param buf
-	 * @param value
 	 */
 	protected final void writeD(ChannelBuffer buf, int value) {
 		buf.writeInt(value);
@@ -23,9 +20,6 @@ public abstract class BaseServerPacket extends AbstractPacket {
 
 	/**
 	 * Write short to buffer
-	 * 
-	 * @param buf
-	 * @param value
 	 */
 	protected final void writeH(ChannelBuffer buf, int value) {
 		buf.writeShort((short) value);
@@ -33,9 +27,6 @@ public abstract class BaseServerPacket extends AbstractPacket {
 
 	/**
 	 * Write byte to Buffer
-	 * 
-	 * @param buf
-	 * @param value
 	 */
 	protected final void writeC(ChannelBuffer buf, int value) {
 		buf.writeByte((byte) value);
@@ -43,9 +34,6 @@ public abstract class BaseServerPacket extends AbstractPacket {
 
 	/**
 	 * Write double to buffer
-	 * 
-	 * @param buf
-	 * @param value
 	 */
 	protected final void writeDF(ChannelBuffer buf, double value) {
 		buf.writeDouble(value);
@@ -53,9 +41,6 @@ public abstract class BaseServerPacket extends AbstractPacket {
 
 	/**
 	 * Write float to buffer
-	 * 
-	 * @param buf
-	 * @param value
 	 */
 	protected final void writeF(ChannelBuffer buf, float value) {
 		buf.writeFloat(value);
@@ -63,9 +48,6 @@ public abstract class BaseServerPacket extends AbstractPacket {
 
 	/**
 	 * Write byte array to buffer
-	 * 
-	 * @param buf
-	 * @param data
 	 */
 	protected final void writeB(ChannelBuffer buf, byte[] data) {
 		buf.writeBytes(data);
@@ -73,9 +55,6 @@ public abstract class BaseServerPacket extends AbstractPacket {
 
 	/**
 	 * Write String to buffer
-	 * 
-	 * @param buf
-	 * @param text
 	 */
 	protected final void writeS(ChannelBuffer buf, String text) {
 		if (text != null) {
@@ -88,9 +67,6 @@ public abstract class BaseServerPacket extends AbstractPacket {
 
 	/**
 	 * Write long to buffer
-	 * 
-	 * @param buf
-	 * @param data
 	 */
 	protected final void writeQ(ChannelBuffer buf, long data) {
 		buf.writeLong(data);

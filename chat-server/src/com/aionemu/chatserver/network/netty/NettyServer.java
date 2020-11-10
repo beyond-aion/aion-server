@@ -31,6 +31,10 @@ public class NettyServer {
 	private final ChannelGroup aionClientChannelGroup;
 	private final NioServer nioServer;
 
+	public static NettyServer getInstance() {
+		return instance;
+	}
+
 	private NettyServer() {
 		aionClientChannelFactory = new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool(),
 			NetworkConfig.NIO_READ_WRITE_THREADS + 1);
@@ -45,10 +49,6 @@ public class NettyServer {
 		nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
 			new ServerCfg(NetworkConfig.GAMESERVER_SOCKET_ADDRESS, "GS Connections", new GsConnectionFactoryImpl()));
 		nioServer.connect(Executors.newSingleThreadExecutor());
-	}
-
-	public static NettyServer getInstance() {
-		return instance;
 	}
 
 	private Channel initChannel() {

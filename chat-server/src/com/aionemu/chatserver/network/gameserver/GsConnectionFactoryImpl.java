@@ -22,7 +22,6 @@ public class GsConnectionFactoryImpl implements ConnectionFactory {
 	 * @param dispatcher
 	 *          to which new connection will be registered.<br>
 	 * @return a new instance of {@link AConnection}<br>
-	 * @throws IOException
 	 * @see AConnection
 	 * @see Dispatcher
 	 */

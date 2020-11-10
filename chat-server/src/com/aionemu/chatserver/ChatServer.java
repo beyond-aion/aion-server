@@ -132,6 +132,6 @@ public class ChatServer {
 
 		NettyServer.getInstance();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
-		log.info("Chat Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
+		log.info("Chat Server started in {} seconds.", (System.currentTimeMillis() - start) / 1000);
 	}
 }

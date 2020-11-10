@@ -17,6 +17,6 @@ public abstract class AbstractPacket {
 
 	@Override
 	public String toString() {
-		return getClass().getSimpleName() + " [opCode=" + "0x%02X".formatted(getOpCode()) + "]";
+		return getClass().getSimpleName() + " [opCode=0x%02X]".formatted(getOpCode());
 	}
 }

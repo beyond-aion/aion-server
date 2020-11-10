@@ -29,22 +29,18 @@ public enum PlayerClass {
 
 	private static final Map<String, PlayerClass> classIdentifiers = new HashMap<>();
 
+	private final byte classId;
+	private final String[] identifiers;
+
 	static {
 		for (PlayerClass playerClass : values())
 			for (String identifier : playerClass.getIdentifiers())
 				classIdentifiers.put(identifier, playerClass);
 	}
 
-	private final byte classId;
-	private final String[] identifiers;
-
 	PlayerClass(int classId, String... identifiers) {
 		this.classId = (byte) classId;
 		this.identifiers = identifiers;
-	}
-
-	public static PlayerClass getClassByIdentifier(String classIdentifier) {
-		return classIdentifiers.get(classIdentifier.split("\\[f:")[0]);
 	}
 
 	public byte getClassId() {
@@ -53,5 +49,9 @@ public enum PlayerClass {
 
 	public String[] getIdentifiers() {
 		return identifiers;
+	}
+
+	public static PlayerClass getClassByIdentifier(String classIdentifier) {
+		return classIdentifiers.get(classIdentifier.split("\\[f:")[0]);
 	}
 }

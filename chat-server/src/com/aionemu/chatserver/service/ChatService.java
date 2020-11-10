@@ -106,7 +106,7 @@ public class ChatService {
 		ChatClient client = players.get(playerId);
 		if (client != null) {
 			client.setGagTime(gagTimeMillis);
-			log.info("Player[id={}] was gagged for {} minutes", playerId, gagTimeMillis / 1000 / 60);
+			log.info("Player[id={}] was gagged for {} minutes", playerId, gagTimeMillis / 60000);
 		}
 	}
 }

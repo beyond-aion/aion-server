@@ -65,7 +65,7 @@ public class RestartService {
 				shutdownHook.start();
 			}
 		}, calendar.getTime());
-		log.info("Scheduled next restart for " + calendar.getTime().toString());
+		log.info("Scheduled next restart for {}", calendar.getTime().toString());
 	}
 
 	private String[] getRestartTime() {

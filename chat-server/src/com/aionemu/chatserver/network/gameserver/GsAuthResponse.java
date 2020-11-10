@@ -20,20 +20,12 @@ public enum GsAuthResponse {
 	 */
 	ALREADY_REGISTERED(2);
 
-	/**
-	 * id of this enum that may be sent to client
-	 */
 	private final byte responseId;
 
 	GsAuthResponse(int responseId) {
 		this.responseId = (byte) responseId;
 	}
 
-	/**
-	 * Message Id that may be sent to client.
-	 * 
-	 * @return message id
-	 */
 	public byte getResponseId() {
 		return responseId;
 	}

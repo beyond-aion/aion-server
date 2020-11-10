@@ -23,15 +23,13 @@ public abstract class BaseClientPacket extends AbstractPacket {
 
 	/**
 	 * Perform packet read
-	 * 
-	 * @return boolean
 	 */
 	public boolean read() {
 		int startPos = buf.readerIndex();
 		try {
 			readImpl();
 			if (getRemainingBytes() > 0)
-				log.warn("{} was not fully read! Last {} bytes were not read from buffer: \n {}", this, getRemainingBytes(),
+				log.warn("{} was not fully read! Last {} bytes were not read from buffer: \n{}", this, getRemainingBytes(),
 					NetworkUtils.toHex(buf.toByteBuffer(startPos, buf.writerIndex() - startPos)));
 			return true;
 		} catch (Exception ex) {
@@ -51,7 +49,7 @@ public abstract class BaseClientPacket extends AbstractPacket {
 		try {
 			runImpl();
 		} catch (Exception ex) {
-			log.error("Running failed for packet " + this, ex);
+			log.error("Running failed for packet {}", this, ex);
 		}
 	}
 
@@ -61,8 +59,6 @@ public abstract class BaseClientPacket extends AbstractPacket {
 
 	/**
 	 * Read int from this packet buffer.
-	 * 
-	 * @return int
 	 */
 	protected final int readD() {
 		try {
@@ -75,8 +71,6 @@ public abstract class BaseClientPacket extends AbstractPacket {
 
 	/**
 	 * Read byte from this packet buffer.
-	 * 
-	 * @return int
 	 */
 	protected final int readC() {
 		try {
@@ -89,8 +83,6 @@ public abstract class BaseClientPacket extends AbstractPacket {
 
 	/**
 	 * Read short from this packet buffer.
-	 * 
-	 * @return int
 	 */
 	protected final int readH() {
 		try {
@@ -103,8 +95,6 @@ public abstract class BaseClientPacket extends AbstractPacket {
 
 	/**
 	 * Read double from this packet buffer.
-	 * 
-	 * @return double
 	 */
 	protected final double readDF() {
 		try {
@@ -117,8 +107,6 @@ public abstract class BaseClientPacket extends AbstractPacket {
 
 	/**
 	 * Read double from this packet buffer.
-	 * 
-	 * @return double
 	 */
 	protected final float readF() {
 		try {
@@ -131,8 +119,6 @@ public abstract class BaseClientPacket extends AbstractPacket {
 
 	/**
 	 * Read long from this packet buffer.
-	 * 
-	 * @return long
 	 */
 	protected final long readQ() {
 		try {
@@ -145,8 +131,6 @@ public abstract class BaseClientPacket extends AbstractPacket {
 
 	/**
 	 * Read String from this packet buffer.
-	 * 
-	 * @return String
 	 */
 	protected final String readS() {
 		StringBuilder sb = new StringBuilder();
@@ -162,9 +146,6 @@ public abstract class BaseClientPacket extends AbstractPacket {
 
 	/**
 	 * Read n bytes from this packet buffer, n = length.
-	 * 
-	 * @param length
-	 * @return byte[]
 	 */
 	protected final byte[] readB(int length) {
 		byte[] result = new byte[length];

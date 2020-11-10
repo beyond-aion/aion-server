@@ -42,7 +42,7 @@ public class Config {
 		Properties defaults = new Properties();
 		try {
 			for (String configDir : defaultsFolders) {
-				log.info("Loading default configuration values from: " + configDir + "/*");
+				log.info("Loading default configuration values from: {}/*", configDir);
 				PropertiesUtils.loadFromDirectory(defaults, configDir, false);
 			}
 			log.info("Loading: ./config/mycs.properties");

@@ -35,10 +35,6 @@ public abstract class Channel {
 	}
 
 	/**
-	 * @param channelType
-	 * @param gameServerId
-	 * @param race
-	 * @param channelMeta
 	 * @return True, if the channel matches the specified criteria. Used to determine if a clients request matches an existing channel or we need to
 	 *         create a new one.
 	 */

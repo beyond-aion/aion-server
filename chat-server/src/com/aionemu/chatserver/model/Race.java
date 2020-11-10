@@ -14,11 +14,11 @@ public enum Race {
 		this.raceId = raceId;
 	}
 
-	public static Race getById(int id) {
-		return id == ELYOS.raceId ? ELYOS : id == ASMODIANS.raceId ? ASMODIANS : null;
-	}
-
 	public int getRaceId() {
 		return raceId;
+	}
+
+	public static Race getById(int id) {
+		return id == ELYOS.raceId ? ELYOS : id == ASMODIANS.raceId ? ASMODIANS : null;
 	}
 }

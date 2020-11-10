@@ -15,12 +15,12 @@ public class BroadcastService {
 	private static final BroadcastService instance = new BroadcastService();
 	private final Map<Integer, ChatClient> clients = new ConcurrentHashMap<>();
 
-	private BroadcastService() {
-
-	}
-
 	public static BroadcastService getInstance() {
 		return instance;
+	}
+
+	private BroadcastService() {
+
 	}
 
 	public void addClient(ChatClient client) {
