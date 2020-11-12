@@ -1,12 +1,8 @@
 package mysql5;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.sql.Types;
+import java.sql.*;
 import java.util.Collection;
+import java.util.List;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -66,7 +62,7 @@ public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 
 	@Override
 	public void store(Player player) {
-		Collection<QuestState> qsList = player.getQuestStateList().getAllQuestState();
+		List<QuestState> qsList = player.getQuestStateList().getAllQuestState();
 		Set<Integer> delQsList = player.getQuestStateList().getDeletedQuestIds();
 		if (qsList.isEmpty() && delQsList.isEmpty())
 			return;

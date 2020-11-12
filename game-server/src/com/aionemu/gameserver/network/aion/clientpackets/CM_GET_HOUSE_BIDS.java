@@ -10,8 +10,8 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_BIDS;
 import com.aionemu.gameserver.services.HousingBidService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitter;
-import com.aionemu.gameserver.utils.collections.ListSplitter;
+import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitList;
+import com.aionemu.gameserver.utils.collections.SplitList;
 
 /**
  * @author Rolandas
@@ -30,11 +30,10 @@ public class CM_GET_HOUSE_BIDS extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-
 		List<HouseBids> houseBids = HousingBidService.getInstance().getBidInfo(player.getRace());
-		ListSplitter<HouseBids> splitter = new DynamicServerPacketBodySplitter<>(houseBids, true, SM_HOUSE_BIDS.STATIC_BODY_SIZE,
+		SplitList<HouseBids> bidsSplitList = new DynamicServerPacketBodySplitList<>(houseBids, true, SM_HOUSE_BIDS.STATIC_BODY_SIZE,
 			SM_HOUSE_BIDS.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
-		splitter.forEachRemaining(bids -> PacketSendUtility.sendPacket(player, new SM_HOUSE_BIDS(splitter.isFirstSplit(), splitter.isLastSplit(), bids)));
+		bidsSplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_HOUSE_BIDS(part.isFirst(), part.isLast(), part)));
 	}
 
 }

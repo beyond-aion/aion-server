@@ -71,9 +71,9 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.GMService;
-import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitter;
-import com.aionemu.gameserver.utils.collections.FixedElementCountSplitter;
-import com.aionemu.gameserver.utils.collections.ListSplitter;
+import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitList;
+import com.aionemu.gameserver.utils.collections.FixedElementCountSplitList;
+import com.aionemu.gameserver.utils.collections.SplitList;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
@@ -274,9 +274,9 @@ public final class PlayerEnterWorldService {
 		if (player.hasAccess(AdminConfig.GM_SKILLS))
 			GMService.getInstance().addGmSkills(player);
 		AbyssSkillService.updateSkills(player);
-		ListSplitter<PlayerSkillEntry> skillEntrySplitter = new DynamicServerPacketBodySplitter<>(player.getSkillList().getAllSkills(), false,
+		SplitList<PlayerSkillEntry> skillEntrySplitList = new DynamicServerPacketBodySplitList<>(player.getSkillList().getAllSkills(), false,
 			SM_SKILL_LIST.STATIC_BODY_SIZE, SkillEntryWriter.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
-		skillEntrySplitter.forEachRemaining(skillEntries -> PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(skillEntries)));
+		skillEntrySplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(part)));
 		if (player.getSkillCoolDowns() != null)
 			client.sendPacket(new SM_SKILL_COOLDOWN(player.getSkillCoolDowns(), true));
 
@@ -500,8 +500,8 @@ public final class PlayerEnterWorldService {
 		allItems.addAll(player.getEquipment().getEquippedItems());
 		allItems.addAll(inventory.getItems());
 
-		ListSplitter<Item> splitter = new FixedElementCountSplitter<>(allItems, true, 10);
-		splitter.forEachRemaining(items -> client.sendPacket(new SM_INVENTORY_INFO(splitter.isFirstSplit(), items, player)));
+		SplitList<Item> inventoryItemSplitList = new FixedElementCountSplitList<>(allItems, true, 10);
+		inventoryItemSplitList.forEach(part -> client.sendPacket(new SM_INVENTORY_INFO(part.isFirst(), part, player)));
 		client.sendPacket(new SM_INVENTORY_INFO(false, Collections.emptyList(), player));
 	}
 
@@ -516,9 +516,9 @@ public final class PlayerEnterWorldService {
 				client.sendPacket(new SM_WAREHOUSE_INFO(null, i, 0, true, player));
 				continue;
 			}
-			ListSplitter<Item> splitter = new FixedElementCountSplitter<>(storage.getItemsWithKinah(), true, 10);
+			SplitList<Item> warehouseItemSplitList = new FixedElementCountSplitList<>(storage.getItemsWithKinah(), true, 10);
 			int storageType = i;
-			splitter.forEachRemaining(items -> client.sendPacket(new SM_WAREHOUSE_INFO(items, storageType, 0, splitter.isFirstSplit(), player)));
+			warehouseItemSplitList.forEach(part -> client.sendPacket(new SM_WAREHOUSE_INFO(part, storageType, 0, part.isFirst(), player)));
 			client.sendPacket(new SM_WAREHOUSE_INFO(null, storageType, 0, false, player));
 			client.sendPacket(new SM_WAREHOUSE_INFO(null, i, 0, false, player));
 		}

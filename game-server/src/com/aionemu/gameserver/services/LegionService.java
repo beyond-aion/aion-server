@@ -32,8 +32,8 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-import com.aionemu.gameserver.utils.collections.FixedElementCountSplitter;
-import com.aionemu.gameserver.utils.collections.ListSplitter;
+import com.aionemu.gameserver.utils.collections.FixedElementCountSplitList;
+import com.aionemu.gameserver.utils.collections.SplitList;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.container.LegionContainer;
@@ -775,9 +775,9 @@ public class LegionService {
 			List<Item> items = player.getLegion().getLegionWarehouse().getItems();
 			int storageId = StorageType.LEGION_WAREHOUSE.getId();
 
-			ListSplitter<Item> splitter = new FixedElementCountSplitter<>(items, false, 10);
-			splitter.forEachRemaining(
-				splitItems -> PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(splitItems, storageId, whLvl, splitter.isFirstSplit(), player)));
+			SplitList<Item> legionMemberSplitList = new FixedElementCountSplitList<>(items, false, 10);
+			legionMemberSplitList.forEach(part -> PacketSendUtility.sendPacket(player,
+				new SM_WAREHOUSE_INFO(part, storageId, whLvl, part.isFirst(), player)));
 			PacketSendUtility.sendPacket(player, new SM_WAREHOUSE_INFO(null, storageId, whLvl, items.isEmpty(), player));
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), DialogPage.LEGION_WAREHOUSE.id()));
 		}
@@ -1677,13 +1677,13 @@ public class LegionService {
 	public void updateLegionMemberList(Player player, boolean broadcastToLegion) {
 		if (player != null && player.getLegion() != null) {
 			Legion legion = player.getLegion();
-			List<LegionMemberEx> totalMembers = loadLegionMemberExList(legion, null);
-			ListSplitter<LegionMemberEx> splitter = new FixedElementCountSplitter<>(totalMembers, true, 80);
-			splitter.forEachRemaining(legionMembers -> {
+			List<LegionMemberEx> allMembers = loadLegionMemberExList(legion, null);
+			SplitList<LegionMemberEx> legionMemberSplitList = new FixedElementCountSplitList<>(allMembers, true, 80);
+			legionMemberSplitList.forEach(part -> {
 				if (broadcastToLegion)
-					PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_MEMBERLIST(legionMembers, splitter.isFirstSplit(), splitter.isLastSplit()));
+					PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_MEMBERLIST(part, part.isFirst(), part.isLast()));
 				else
-					PacketSendUtility.sendPacket(player, new SM_LEGION_MEMBERLIST(legionMembers, splitter.isFirstSplit(), splitter.isLastSplit()));
+					PacketSendUtility.sendPacket(player, new SM_LEGION_MEMBERLIST(part, part.isFirst(), part.isLast()));
 			});
 		}
 	}

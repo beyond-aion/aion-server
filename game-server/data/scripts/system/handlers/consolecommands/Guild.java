@@ -10,8 +10,8 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_MEMBERLIST;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
-import com.aionemu.gameserver.utils.collections.FixedElementCountSplitter;
-import com.aionemu.gameserver.utils.collections.ListSplitter;
+import com.aionemu.gameserver.utils.collections.FixedElementCountSplitList;
+import com.aionemu.gameserver.utils.collections.SplitList;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -36,9 +36,9 @@ public class Guild extends ConsoleCommand {
 			if (target.getLegion() != null) {
 				PacketSendUtility.sendPacket(admin, new SM_GM_SHOW_LEGION_INFO(legion));
 				List<LegionMemberEx> allMembers = LegionService.getInstance().loadLegionMemberExList(legion, null);
-				ListSplitter<LegionMemberEx> splitter = new FixedElementCountSplitter<>(allMembers, true, 80);
-				splitter.forEachRemaining(legionMembers -> PacketSendUtility.sendPacket(admin,
-					new SM_LEGION_MEMBERLIST(legionMembers, splitter.isFirstSplit(), splitter.isLastSplit())));
+				SplitList<LegionMemberEx> legionMemberSplitList = new FixedElementCountSplitList<>(allMembers, true, 80);
+				legionMemberSplitList.forEach(part -> PacketSendUtility.sendPacket(admin,
+					new SM_LEGION_MEMBERLIST(part, part.isFirst(), part.isLast())));
 			}
 		}
 	}

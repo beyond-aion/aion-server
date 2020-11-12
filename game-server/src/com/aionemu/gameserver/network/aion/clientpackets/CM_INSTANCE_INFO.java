@@ -7,8 +7,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
-import com.aionemu.gameserver.utils.collections.FixedElementCountSplitter;
-import com.aionemu.gameserver.utils.collections.ListSplitter;
+import com.aionemu.gameserver.utils.collections.FixedElementCountSplitList;
+import com.aionemu.gameserver.utils.collections.SplitList;
 import com.aionemu.gameserver.utils.collections.Predicates;
 
 /**
@@ -36,8 +36,8 @@ public class CM_INSTANCE_INFO extends AionClientPacket {
 		sendPacket(new SM_INSTANCE_INFO(updateType, firstObject));
 		if (updateType == 1 && player.isInTeam()) {
 			List<Player> filteredTeamMembers = player.getCurrentTeam().filterMembers(Predicates.Players.allExcept(firstObject));
-			ListSplitter<Player> playerSplitter = new FixedElementCountSplitter<>(filteredTeamMembers, false, 3);
-			playerSplitter.forEachRemaining(players -> sendPacket(new SM_INSTANCE_INFO((byte) 2, players)));
+			SplitList<Player> playersSplitList = new FixedElementCountSplitList<>(filteredTeamMembers, false, 3);
+			playersSplitList.forEach(part -> sendPacket(new SM_INSTANCE_INFO((byte) 2, part)));
 		}
 	}
 }

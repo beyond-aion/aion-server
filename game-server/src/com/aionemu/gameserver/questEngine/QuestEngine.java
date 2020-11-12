@@ -40,8 +40,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
-import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitter;
-import com.aionemu.gameserver.utils.collections.ListSplitter;
+import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitList;
+import com.aionemu.gameserver.utils.collections.SplitList;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneName;
@@ -245,10 +245,9 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void sendCompletedQuests(Player player) {
-		ListSplitter<QuestState> questStateSplitter = new DynamicServerPacketBodySplitter<>(player.getQuestStateList().getAllQuestState(), true,
+		SplitList<QuestState> questStateSplitList = new DynamicServerPacketBodySplitList<>(player.getQuestStateList().getAllQuestState(), true,
 			SM_QUEST_COMPLETED_LIST.STATIC_BODY_SIZE, SM_QUEST_COMPLETED_LIST.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
-		questStateSplitter.forEachRemaining(
-			questStates -> PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(questStateSplitter.isFirstSplit() ? 0 : 1, questStates)));
+		questStateSplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(part.isFirst() ? 0 : 1, part)));
 	}
 
 	/**

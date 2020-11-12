@@ -35,8 +35,8 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitter;
-import com.aionemu.gameserver.utils.collections.ListSplitter;
+import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitList;
+import com.aionemu.gameserver.utils.collections.SplitList;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 
@@ -272,9 +272,9 @@ public class MailService {
 		if (isExpress)
 			letterStream = letterStream.filter(letter -> letter.isExpress() && letter.isUnread());
 		List<Letter> letters = letterStream.sorted(Comparator.comparing(Letter::getTimeStamp).reversed()).collect(Collectors.toList());
-		ListSplitter<Letter> splitter = new DynamicServerPacketBodySplitter<>(letters, true, SM_MAIL_SERVICE.STATIC_BODY_SIZE,
+		SplitList<Letter> mailSplitList = new DynamicServerPacketBodySplitList<>(letters, true, SM_MAIL_SERVICE.STATIC_BODY_SIZE,
 			SM_MAIL_SERVICE.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
-		splitter.forEachRemaining(letterSlice -> PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player, letterSlice, splitter.isLastSplit())));
+		mailSplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(player, part, part.isLast())));
 	}
 
 }

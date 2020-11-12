@@ -70,22 +70,22 @@ public class QuestStateList {
 	/**
 	 * @return All quests, including abandoned ones since login.
 	 */
-	public Collection<QuestState> getAllQuestState() {
-		return quests.values();
+	public List<QuestState> getAllQuestState() {
+		return new ArrayList<>(quests.values());
 	}
 
 	/**
 	 * @return All quests, that are completed.
 	 */
 	public List<QuestState> getCompletedQuests() {
-		return getAllQuestState().stream().filter(qs -> qs.getStatus() == QuestStatus.COMPLETE).collect(Collectors.toList());
+		return quests.values().stream().filter(qs -> qs.getStatus() == QuestStatus.COMPLETE).collect(Collectors.toList());
 	}
 
 	/**
 	 * @return All quests, that are currently active or locked.
 	 */
 	public List<QuestState> getUncompletedQuests() {
-		return getAllQuestState().stream().filter(qs -> qs.getStatus() != QuestStatus.COMPLETE).collect(Collectors.toList());
+		return quests.values().stream().filter(qs -> qs.getStatus() != QuestStatus.COMPLETE).collect(Collectors.toList());
 	}
 
 	/**
