@@ -38,7 +38,7 @@ public class IdianStone extends ItemStone {
 
 	public void onEquip(final Player player, long slot) {
 		if (polishCharge > 0 && (slot & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0) {
-			actionListener = new ActionObserver(ObserverType. ATTACK_DEFEND) {
+			actionListener = new ActionObserver(ObserverType.ATTACK_DEFEND) {
 
 				@Override
 				public void attacked(Creature creature, int skillId) {
@@ -56,11 +56,11 @@ public class IdianStone extends ItemStone {
 		}
 	}
 
-	private synchronized void decreasePolishCharge(Player player, boolean isAttacked) {
+	private void decreasePolishCharge(Player player, boolean isAttacked) {
 		decreasePolishCharge(player, isAttacked, 0);
 	}
 
-	public synchronized void decreasePolishCharge(Player player, int skillValue) {
+	public void decreasePolishCharge(Player player, int skillValue) {
 		decreasePolishCharge(player, false, skillValue);
 	}
 

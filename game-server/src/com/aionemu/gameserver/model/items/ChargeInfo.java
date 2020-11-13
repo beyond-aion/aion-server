@@ -64,13 +64,13 @@ public class ChargeInfo extends ActionObserver {
 	}
 
 	@Override
-	public synchronized void attacked(Creature creature, int skillId) {
+	public void attacked(Creature creature, int skillId) {
 		if (updateChargePoints(-defendBurn))
 			sendItemUpdate();
 	}
 
 	@Override
-	public synchronized void attack(Creature creature) {
+	public void attack(Creature creature) {
 		if (updateChargePoints(-attackBurn))
 			sendItemUpdate();
 	}
