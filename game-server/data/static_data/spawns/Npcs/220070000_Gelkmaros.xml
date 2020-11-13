@@ -7656,17 +7656,17 @@
 			<spot x="1316.12" y="2275.8" z="326.126"/>
 		</spawn>
 		<!-- Zinarunerk -->
-        <spawn npc_id="702746" respawn_time="295">
-            <spot x="358.6" y="2610.12" z="443.62253" h="62"/>
-        </spawn>
- 		<!-- Silentera Eastgate -->
+		<spawn npc_id="702746" respawn_time="295">
+			<spot x="358.6" y="2610.12" z="443.62253" h="62"/>
+		</spawn>
+		<!-- Silentera Eastgate -->
 		<spawn npc_id="730260" respawn_time="295">
-			<spot x="1449.23" y="903.722" z="302.27" h="34" static_id="1254"/>
+			<spot x="1449.23" y="903.722" z="294.02194" h="34" static_id="1254"/>
 		</spawn>
 		<!-- Loqui -->
 		<spawn npc_id="799589" respawn_time="295">
-            <spot x="1796.9581" y="1796.9708" z="405.82422" h="56"/>
-        </spawn>
+			<spot x="1796.9581" y="1796.9708" z="405.82422" h="56"/>
+		</spawn>
 		<!-- Attion -->
 		<spawn npc_id="802177" respawn_time="295">
 			<spot x="1715.51" y="2889.184" z="556.1448" h="83"/>

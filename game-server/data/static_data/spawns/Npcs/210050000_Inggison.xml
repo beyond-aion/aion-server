@@ -8378,16 +8378,16 @@
 			<spot x="1527.95" y="1910.4" z="312.482" h="61"/>
 		</spawn>
 		<!-- Zeirunerk -->
-        <spawn npc_id="702743" respawn_time="295">
-            <spot x="2094.8" y="1196.0" z="265.0" h="96"/>
-        </spawn>
+		<spawn npc_id="702743" respawn_time="295">
+			<spot x="2094.8" y="1196.0" z="265.0" h="96"/>
+		</spawn>
 		<!-- Zenobia -->
 		<spawn npc_id="798947" respawn_time="295">
 			<spot x="1417.35" y="337.624" z="558.125" h="26"/>
 		</spawn>
 		<!-- Silentera Westgate -->
-        <spawn npc_id="730256" respawn_time="295">
-			<spot x="1362.51" y="2304.22" z="304.922" h="93" static_id="1200"/>
+		<spawn npc_id="730256" respawn_time="295">
+			<spot x="1362.51" y="2304.22" z="296.6737" h="93" static_id="1200"/>
 		</spawn>
 		<!-- Obillos -->
 		<spawn npc_id="804500" respawn_time="295">
