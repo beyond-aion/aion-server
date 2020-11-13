@@ -12,14 +12,8 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_LEGION_INFO extends AionServerPacket {
 
-	/** Legion information **/
-	private Legion legion;
+	private final Legion legion;
 
-	/**
-	 * This constructor will handle legion info
-	 * 
-	 * @param legion
-	 */
 	public SM_LEGION_INFO(Legion legion) {
 		this.legion = legion;
 	}
@@ -36,21 +30,17 @@ public class SM_LEGION_INFO extends AionServerPacket {
 		writeQ(legion.getContributionPoints());
 		writeD(0x00); // unk
 		writeD(0x00); // unk
-		writeD(0x00); // unk 3.0 //time till delete
-		//TODO
-		writeD(legion.getOccupiedLegionDominion()); //occupied legionDominion
-		writeD(legion.getLastLegionDominion()); //legion Dominion applied last week
-		writeD(legion.getCurrentLegionDominion()); //legion Dominion applied this week
-		/** Get Announcements List From DB By Legion **/
+		writeD(legion.getDisbandTime());
+		writeD(legion.getOccupiedLegionDominion());
+		writeD(legion.getLastLegionDominion());
+		writeD(legion.getCurrentLegionDominion());
 		Map<Timestamp, String> announcementList = legion.getAnnouncementList().descendingMap();
-
-		/** Show max 7 announcements **/
+		// Show max 7 announcements
 		int i = 0;
 		for (Timestamp unixTime : announcementList.keySet()) {
 			writeS(announcementList.get(unixTime));
 			writeD((int) (unixTime.getTime() / 1000));
-			i++;
-			if (i >= 7)
+			if (++i >= 7)
 				break;
 		}
 	}
