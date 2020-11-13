@@ -56,6 +56,6 @@ public class GloryPointsService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_GAIN(gp));
 		else
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE(gp * -1));
-		PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player.getAbyssRank()));
+		PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player));
 	}
 }

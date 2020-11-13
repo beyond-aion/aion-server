@@ -337,7 +337,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 		byte[] ui = readB(uilen), sc = readB(shortlen);
 		int deny = readD(), penalty = readD();
 		player.setPlayerSettings(new PlayerSettings(uilen > 0 ? ui : null, shortlen > 0 ? sc : null, null, deny, penalty));
-		player.setAbyssRank(new AbyssRank(0, 0, 0, 1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0));
+		player.setAbyssRank(new AbyssRank(0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0, 0, 0, 0, 0));
 
 		// read skill data
 		cnt = readD();

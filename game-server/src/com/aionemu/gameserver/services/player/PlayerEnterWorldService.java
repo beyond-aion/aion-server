@@ -150,15 +150,10 @@ public final class PlayerEnterWorldService {
 		}
 
 		final Player player = PlayerService.getPlayer(objectId, account);
-		if (player == null) {
-			log.warn("Player enterWorld fail: couldn't load player with obj ID {}, account ID {}.", objectId, account.getId());
-			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
-			return;
-		}
 
 		if (SecurityConfig.DUALBOXING && !player.isStaff()) {
 			boolean[] kick = { false };
-			World.getInstance().forEachPlayer(new Consumer<Player>() {
+			World.getInstance().forEachPlayer(new Consumer<>() {
 
 				String pMac = client.getMacAddress() == null || client.getMacAddress().isEmpty() ? "empty" : client.getMacAddress();
 				String pHdd = client.getHddSerial() == null || client.getHddSerial().isEmpty() ? "empty" : client.getHddSerial();
@@ -336,7 +331,7 @@ public final class PlayerEnterWorldService {
 			AutoGroupService.getInstance().onPlayerLogin(player);
 		}
 		client.sendPacket(new SM_INSTANCE_INFO((byte) 2, player));
-		client.sendPacket(new SM_ABYSS_RANK(player.getAbyssRank()));
+		client.sendPacket(new SM_ABYSS_RANK(player));
 		client.sendPacket(new SM_STATS_INFO(player));
 		// ----------------------------- Retail sequence -----------------------------
 
@@ -483,10 +478,6 @@ public final class PlayerEnterWorldService {
 		}
 	}
 
-	/**
-	 * @param client
-	 * @param player
-	 */
 	private static void sendItemInfos(AionConnection client, Player player) {
 		player.setCubeLimit();
 		player.setWarehouseLimit();

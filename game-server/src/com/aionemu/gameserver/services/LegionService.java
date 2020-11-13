@@ -26,7 +26,6 @@ import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.team.legion.*;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
-import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -223,9 +222,6 @@ public class LegionService {
 		// Load Legion Warehouse
 		legion.setLegionWarehouse(DAOManager.getDAO(LegionDAO.class).loadLegionStorage(legion));
 		ItemService.loadItemStones(legion.getLegionWarehouse().getItems());
-
-		// Load Legion Rank
-		legion.setLegionRank(AbyssRankingCache.getInstance().getLegionRank(legion));
 
 		// Load Legion History
 		DAOManager.getDAO(LegionDAO.class).loadLegionHistory(legion);

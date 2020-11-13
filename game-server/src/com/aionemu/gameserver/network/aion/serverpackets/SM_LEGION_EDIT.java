@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 
 /**
  * @author Simple
@@ -38,42 +39,34 @@ public class SM_LEGION_EDIT extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		writeC(type);
 		switch (type) {
-		/** Change Legion Level **/
-			case 0x00:
+			case 0x00: // Change Legion Level
 				writeC(legion.getLegionLevel());
 				break;
-			/** Change Legion Rank **/
-			case 0x01:
-				writeD(legion.getLegionRank());
+			case 0x01: // Change Abyss Ranking List Position
+				writeD(AbyssRankingCache.getInstance().getRankingListPosition(legion));
 				break;
-			/** Change Legion Permissions **/
-			case 0x02:
+			case 0x02: // Change Legion Permissions
 				writeH(legion.getDeputyPermission());
 				writeH(legion.getCenturionPermission());
 				writeH(legion.getLegionaryPermission());
 				writeH(legion.getVolunteerPermission());
 				break;
-			/** Change Legion Contributions **/
-			case 0x03:
-				writeQ(legion.getContributionPoints()); // get Contributions
+			case 0x03: // Change Legion Contributions
+				writeQ(legion.getContributionPoints());
 				break;
 			case 0x04:
 				writeQ(legion.getLegionWarehouse().getKinah());
 				break;
-			/** Change Legion Announcement **/
-			case 0x05:
+			case 0x05: // Change Legion Announcement
 				writeS(announcement);
 				writeD(unixTime);
 				break;
-			/** Disband Legion **/
-			case 0x06:
+			case 0x06: // Disband Legion
 				writeD(unixTime);
 				break;
-			/** Recover Legion **/
-			case 0x07:
+			case 0x07: // Recover Legion
 				break;
-			/** Refresh Legion Announcement? **/
-			case 0x08:
+			case 0x08: // Refresh Legion Announcement?
 				break;
 		}
 	}

@@ -21,7 +21,6 @@ public class Legion extends AionObject {
 
 	private String legionName;
 	private int legionLevel = 1;
-	private int legionRank = 0;
 	private long contributionPoints = 0;
 	private Collection<Integer> legionMembers = new ArrayList<>();
 	private int onlineMembersCount = 0;
@@ -189,21 +188,6 @@ public class Legion extends AionObject {
 	 */
 	public void setLegionLevel(int legionLevel) {
 		this.legionLevel = legionLevel;
-	}
-
-	/**
-	 * @param legionRank
-	 *          the legionRank to set
-	 */
-	public void setLegionRank(int legionRank) {
-		this.legionRank = legionRank;
-	}
-
-	/**
-	 * @return the legionRank
-	 */
-	public int getLegionRank() {
-		return legionRank;
 	}
 
 	/**

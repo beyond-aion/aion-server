@@ -2,7 +2,6 @@ package admincommands;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.abyss.AbyssRankUpdateService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -11,20 +10,15 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class Ranking extends AdminCommand {
 
 	public Ranking() {
-		super("ranking");
+		super("ranking", "Abyss rank control.");
+		setSyntaxInfo("<update> - Runs the daily Abyss rank update task.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length == 0) {
-			info(admin, null);
-		} else if ("update".equalsIgnoreCase(params[0])) {
-			AbyssRankUpdateService.getInstance().performUpdate();
-		}
-	}
-
-	@Override
-	public void info(Player player, String message) {
-		PacketSendUtility.sendMessage(player, "syntax //ranking update");
+		if (params.length == 1 && "update".equalsIgnoreCase(params[0]))
+			AbyssRankUpdateService.performUpdate();
+		else 
+			sendInfo(admin);
 	}
 }

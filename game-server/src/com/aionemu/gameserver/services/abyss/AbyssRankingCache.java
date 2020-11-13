@@ -1,32 +1,28 @@
 package com.aionemu.gameserver.services.abyss;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.function.Consumer;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.configs.main.RankingConfig;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
-import com.aionemu.gameserver.model.AbyssRankingResult;
+import com.aionemu.gameserver.dao.AbyssRankDAO.RankingListLegion;
+import com.aionemu.gameserver.dao.AbyssRankDAO.RankingListPlayer;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANKING_LEGIONS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANKING_PLAYERS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_EDIT;
-import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author VladimirZ
- * @modified Neon
+ * @author VladimirZ, Neon
  */
 public class AbyssRankingCache {
 
+	private Map<Integer, RankingListPlayer> rankingListPlayers;
+	private Map<Integer, RankingListLegion> rankingListLegions;
 	/**
 	 * Player ranking list that will show up in the abyss ranking window
 	 */
@@ -38,11 +34,6 @@ public class AbyssRankingCache {
 	private Map<Race, SM_ABYSS_RANKING_LEGIONS> legionRankListPackets;
 
 	/**
-	 * Legion ranking map for legion initialization
-	 */
-	private Map<Integer, Integer> legionRanking;
-
-	/**
 	 * Last update time that will show up in the abyss ranking window
 	 */
 	private int lastUpdate;
@@ -51,7 +42,7 @@ public class AbyssRankingCache {
 		refreshCache();
 	}
 
-	public static final AbyssRankingCache getInstance() {
+	public static AbyssRankingCache getInstance() {
 		return SingletonHolder.INSTANCE;
 	}
 
@@ -60,28 +51,26 @@ public class AbyssRankingCache {
 	 */
 	private void refreshCache() {
 		List<Race> races = Arrays.asList(Race.ASMODIANS, Race.ELYOS);
+		List<RankingListPlayer> rankingListPlayers = DAOManager.getDAO(AbyssRankDAO.class).loadRankingListPlayers();
+		List<RankingListLegion> rankingListLegions = DAOManager.getDAO(AbyssRankDAO.class).loadRankingListLegions();
 		Map<Race, List<SM_ABYSS_RANKING_PLAYERS>> newPlayerRankListPackets = new HashMap<>();
 		Map<Race, SM_ABYSS_RANKING_LEGIONS> newLegionRankListPackets = new HashMap<>();
-		Map<Integer, Integer> newLegionRanking = new HashMap<>();
-		List<AbyssRankingResult> rankList;
 
 		int updateTime = (int) (System.currentTimeMillis() / 1000);
 
 		for (Race race : races) {
-			// load player ranks
-			rankList = getDAO().getAbyssRankingPlayers(race, RankingConfig.TOP_RANKING_MAX_OFFLINE_DAYS); // players ordered by GP
-			newPlayerRankListPackets.put(race, getPlayerRankListPackets(race, rankList));
+			List<RankingListPlayer> players = rankingListPlayers.stream().filter(p -> p.race() == race).collect(Collectors.toList());
+			newPlayerRankListPackets.put(race, getPlayerRankListPackets(race, players));
 
-			// load legion ranks
-			rankList = getDAO().getAbyssRankingLegions(race); // legions ordered by contribution points
-			newLegionRankListPackets.put(race, new SM_ABYSS_RANKING_LEGIONS(updateTime, rankList, race));
-			newLegionRanking.putAll(getLegionRanking(rankList));
+			List<RankingListLegion> legions = rankingListLegions.stream().filter(l -> l.race() == race).collect(Collectors.toList());
+			newLegionRankListPackets.put(race, new SM_ABYSS_RANKING_LEGIONS(updateTime, legions, race));
 		}
 
 		// assign the finished lists
+		this.rankingListPlayers = rankingListPlayers.stream().collect(Collectors.toMap(RankingListPlayer::id, p -> p));
+		this.rankingListLegions = rankingListLegions.stream().collect(Collectors.toMap(RankingListLegion::id, l -> l));
 		this.playerRankListPackets = newPlayerRankListPackets;
 		this.legionRankListPackets = newLegionRankListPackets;
-		this.legionRanking = newLegionRanking;
 		this.lastUpdate = updateTime;
 	}
 
@@ -92,37 +81,14 @@ public class AbyssRankingCache {
 		// update cache
 		refreshCache();
 
-		// notify online clients
-		updateAbyssRankList();
-		updateLegionRankingList();
-	}
-
-	/**
-	 * Updates the ranking list for all online players
-	 */
-	public void updateAbyssRankList() {
-		World.getInstance().forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				player.resetAbyssRankListUpdated();
-			}
+		World.getInstance().forEachPlayer(player -> {
+			player.resetAbyssRankListUpdated();
+			if (player.getLegion() != null) // update legion rank number
+				PacketSendUtility.sendPacket(player, new SM_LEGION_EDIT(0x01, player.getLegion()));
 		});
 	}
 
-	/**
-	 * Updates the ranking information for all cached legions
-	 */
-	public void updateLegionRankingList() {
-		for (Legion legion : LegionService.getInstance().getCachedLegions()) {
-			if (legionRanking.containsKey(legion.getLegionId())) {
-				legion.setLegionRank(getLegionRank(legion));
-				PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_EDIT(0x01, legion));
-			}
-		}
-	}
-
-	private List<SM_ABYSS_RANKING_PLAYERS> getPlayerRankListPackets(Race race, List<AbyssRankingResult> list) {
+	private List<SM_ABYSS_RANKING_PLAYERS> getPlayerRankListPackets(Race race, List<RankingListPlayer> list) {
 		List<SM_ABYSS_RANKING_PLAYERS> playerPackets = new ArrayList<>();
 		int page = 1;
 
@@ -138,48 +104,26 @@ public class AbyssRankingCache {
 		return playerPackets;
 	}
 
-	private Map<Integer, Integer> getLegionRanking(List<AbyssRankingResult> rankList) {
-		Map<Integer, Integer> rankMap = new HashMap<>();
-
-		for (AbyssRankingResult rank : rankList) {
-			rankMap.put(rank.getLegionId(), rank.getRankPos());
-		}
-
-		return rankMap;
-	}
-
-	/**
-	 * @return all players
-	 */
 	public List<SM_ABYSS_RANKING_PLAYERS> getPlayers(Race race) {
 		return playerRankListPackets.get(race);
 	}
 
-	/**
-	 * @return all legions
-	 */
 	public SM_ABYSS_RANKING_LEGIONS getLegions(Race race) {
 		return legionRankListPackets.get(race);
 	}
 
-	/**
-	 * @param legion
-	 * @return The rank position or 0, if not in ranking cache
-	 */
-	public int getLegionRank(Legion legion) {
-		Integer rankPos = legionRanking.get(legion.getLegionId());
-		return rankPos != null ? rankPos : 0;
+	public int getRankingListPosition(Player player) {
+		RankingListPlayer rank = rankingListPlayers.get(player.getObjectId());
+		return rank == null ? 0 : rank.position();
 	}
 
-	/**
-	 * @return last ranking update time
-	 */
+	public int getRankingListPosition(Legion legion) {
+		RankingListLegion rank = rankingListLegions.get(legion.getLegionId());
+		return rank == null ? 0 : rank.position();
+	}
+
 	public int getLastUpdate() {
 		return lastUpdate;
-	}
-
-	private AbyssRankDAO getDAO() {
-		return DAOManager.getDAO(AbyssRankDAO.class);
 	}
 
 	private static class SingletonHolder {

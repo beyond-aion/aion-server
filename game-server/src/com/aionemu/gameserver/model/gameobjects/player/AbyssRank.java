@@ -22,7 +22,6 @@ public class AbyssRank implements Persistable {
 	private int currentGp;
 	private int lastGP;
 	private AbyssRankEnum rank;
-	private int topRanking;
 	private PersistentState persistentState;
 	private int dailyKill;
 	private int weeklyKill;
@@ -31,26 +30,12 @@ public class AbyssRank implements Persistable {
 	private int lastKill;
 	private long lastUpdate;
 
-	/**
-	 * @param dailyAP
-	 * @param weeklyAP
-	 * @param ap
-	 * @param rank
-	 * @param dailyKill
-	 * @param weeklyKill
-	 * @param allKill
-	 * @param maxRank
-	 * @param lastKill
-	 * @param lastAP
-	 * @param lastUpdate
-	 */
-	public AbyssRank(int dailyAP, int weeklyAP, int ap, int rank, int topRanking, int dailyKill, int weeklyKill, int allKill, int maxRank, int lastKill,
-		int lastAP, long lastUpdate, int daily_gp, int weekly_gp, int gp, int last_gp) {
+	public AbyssRank(int dailyAP, int weeklyAP, int ap, int rank, int dailyKill, int weeklyKill, int allKill, int maxRank, int lastKill, int lastAP,
+		long lastUpdate, int daily_gp, int weekly_gp, int gp, int last_gp) {
 		this.dailyAP = dailyAP;
 		this.weeklyAP = weeklyAP;
 		this.currentAp = ap;
 		this.rank = AbyssRankEnum.getRankById(rank);
-		this.topRanking = topRanking;
 		this.dailyKill = dailyKill;
 		this.weeklyKill = weeklyKill;
 		this.allKill = allKill;
@@ -99,7 +84,7 @@ public class AbyssRank implements Persistable {
 				weeklyAP = 0;
 		}
 
-		int cappedCount = 0;
+		int cappedCount;
 		if (CustomConfig.ENABLE_AP_CAP)
 			cappedCount = currentAp + additionalAp > CustomConfig.AP_CAP_VALUE ? (int) (CustomConfig.AP_CAP_VALUE - currentAp) : additionalAp;
 		else
@@ -110,9 +95,8 @@ public class AbyssRank implements Persistable {
 			currentAp = 0;
 
 		AbyssRankEnum newRank = AbyssRankEnum.getRankForPoints(currentAp, currentGp);
-		if (newRank.getId() <= 9) {
+		if (newRank.getRequiredGP() == 0)
 			setRank(newRank);
-		}
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
@@ -159,18 +143,12 @@ public class AbyssRank implements Persistable {
 		return rank;
 	}
 
-	/**
-	 * @return The top ranking of the current rank
-	 */
-	public int getTopRanking() {
-		return topRanking;
-	}
+	public void setRank(AbyssRankEnum rank) {
+		if (rank.getId() > this.maxRank)
+			this.maxRank = rank.getId();
 
-	/**
-	 * @param topRanking
-	 */
-	public void setTopRanking(int topRanking) {
-		this.topRanking = topRanking;
+		this.rank = rank;
+		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	/**
@@ -222,21 +200,6 @@ public class AbyssRank implements Persistable {
 	 */
 	public int getLastAP() {
 		return lastAP;
-	}
-
-	/**
-	 * @param rank
-	 *          the rank to set
-	 */
-	public void setRank(AbyssRankEnum rank) {
-		if (rank.getId() > this.maxRank)
-			this.maxRank = rank.getId();
-
-		this.rank = rank;
-
-		// TODO top ranking for the rest is 0?
-		this.topRanking = rank.getQuota();
-		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	/**
@@ -308,31 +271,15 @@ public class AbyssRank implements Persistable {
 		return dailyGP;
 	}
 
-	public void setDailyGP(int dailyGP) {
-		this.dailyGP = dailyGP;
-	}
-
 	public int getWeeklyGP() {
 		return weeklyGP;
-	}
-
-	public void setWeeklyGP(int weeklyGP) {
-		this.weeklyGP = weeklyGP;
 	}
 
 	public int getCurrentGP() {
 		return currentGp;
 	}
 
-	public void setCurrentGP(int currentGp) {
-		this.currentGp = currentGp;
-	}
-
 	public int getLastGP() {
 		return lastGP;
-	}
-
-	public void setLastGP(int lastGP) {
-		this.lastGP = lastGP;
 	}
 }

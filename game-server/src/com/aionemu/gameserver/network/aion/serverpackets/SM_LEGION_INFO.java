@@ -6,6 +6,7 @@ import java.util.Map;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 
 /**
  * @author Simple
@@ -22,7 +23,7 @@ public class SM_LEGION_INFO extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		writeS(legion.getName());
 		writeC(legion.getLegionLevel());
-		writeD(legion.getLegionRank());
+		writeD(AbyssRankingCache.getInstance().getRankingListPosition(legion));
 		writeH(legion.getDeputyPermission());
 		writeH(legion.getCenturionPermission());
 		writeH(legion.getLegionaryPermission());

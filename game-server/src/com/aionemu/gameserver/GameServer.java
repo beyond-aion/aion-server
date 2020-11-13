@@ -274,7 +274,7 @@ public class GameServer {
 		RoadService.getInstance();
 		HTMLCache.getInstance();
 		AbyssRankingCache.getInstance();
-		AbyssRankUpdateService.getInstance().scheduleUpdate();
+		AbyssRankUpdateService.scheduleUpdate();
 		ConsoleUtil.printSection("Periodic Instances");
 		PeriodicInstanceManager.getInstance();
 		EventService.getInstance();

@@ -49,10 +49,6 @@ public class AbyssPointsService {
 		}
 	}
 
-	/**
-	 * @param player
-	 * @param value
-	 */
 	public static void setAp(Player player, int value) {
 		if (player == null)
 			return;
@@ -61,27 +57,18 @@ public class AbyssPointsService {
 
 		AbyssRankEnum oldAbyssRank = rank.getRank();
 		rank.addAp(value);
-		AbyssRankEnum newAbyssRank = rank.getRank();
 
-		checkRankChanged(player, oldAbyssRank, newAbyssRank);
-
-		PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player.getAbyssRank()));
+		onRankChanged(player, oldAbyssRank != rank.getRank(), null);
 	}
 
-	/**
-	 * @param player
-	 * @param oldAbyssRank
-	 * @param newAbyssRank
-	 */
-	public static void checkRankChanged(Player player, AbyssRankEnum oldAbyssRank, AbyssRankEnum newAbyssRank) {
-		if (oldAbyssRank == newAbyssRank) {
-			return;
+	public static void onRankChanged(Player player, boolean abyssRankChanged, Integer newRankingListPosition) {
+		if (abyssRankChanged || newRankingListPosition != null)
+			PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player, newRankingListPosition));
+		if (abyssRankChanged) {
+			PacketSendUtility.broadcastPacket(player, new SM_ABYSS_RANK_UPDATE(0, player));
+			player.getEquipment().checkRankLimitItems();
+			AbyssSkillService.updateSkills(player);
 		}
-
-		PacketSendUtility.broadcastPacketAndReceive(player, new SM_ABYSS_RANK_UPDATE(0, player));
-
-		player.getEquipment().checkRankLimitItems();
-		AbyssSkillService.updateSkills(player);
 	}
 
 }
