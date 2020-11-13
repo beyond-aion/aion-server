@@ -122,7 +122,7 @@ public class AbyssRankUpdateService {
 				// save to db now, so cache reload loads the correct rank for online players
 				DAOManager.getDAO(AbyssRankDAO.class).updateAbyssRank(playerId, newRank);
 			}
-			AbyssPointsService.onRankChanged(player, rankChanged, rankingPosition);
+			AbyssPointsService.onRankChanged(player, false, rankChanged, rankingPosition);
 		} else {
 			DAOManager.getDAO(AbyssRankDAO.class).updateAbyssRank(playerId, newRank);
 		}

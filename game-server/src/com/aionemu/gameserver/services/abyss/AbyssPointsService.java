@@ -58,11 +58,11 @@ public class AbyssPointsService {
 		AbyssRankEnum oldAbyssRank = rank.getRank();
 		rank.addAp(value);
 
-		onRankChanged(player, oldAbyssRank != rank.getRank(), null);
+		onRankChanged(player, value != 0, oldAbyssRank != rank.getRank(), null);
 	}
 
-	public static void onRankChanged(Player player, boolean abyssRankChanged, Integer newRankingListPosition) {
-		if (abyssRankChanged || newRankingListPosition != null)
+	public static void onRankChanged(Player player, boolean abyssPointChanged, boolean abyssRankChanged, Integer newRankingListPosition) {
+		if (abyssPointChanged || abyssRankChanged || newRankingListPosition != null)
 			PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player, newRankingListPosition));
 		if (abyssRankChanged) {
 			PacketSendUtility.broadcastPacket(player, new SM_ABYSS_RANK_UPDATE(0, player));
