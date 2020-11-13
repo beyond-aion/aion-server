@@ -89,8 +89,8 @@ public class EncryptionKeyPair {
 	/**
 	 * Check if packet was correctly decoded, also check if packet was correctly coded by aion client
 	 */
-	private final boolean validateClientPacket(ByteBuffer buf) {
-		return buf.getShort(0) == ~buf.getShort(3) && buf.get(2) == staticClientPacketCode;
+	private boolean validateClientPacket(ByteBuffer buf) {
+		return buf.limit() >= 5 && buf.getShort(0) == ~buf.getShort(3) && buf.get(2) == staticClientPacketCode;
 	}
 
 	/**
@@ -103,32 +103,32 @@ public class EncryptionKeyPair {
 		final int size = buf.remaining();
 		byte[] clientPacketKey = keys[CLIENT];
 
-		/** index to byte that should be decrypted now */
+		// index to byte that should be decrypted now
 		int arrayIndex = buf.arrayOffset() + buf.position();
 
-		/** prev encrypted byte */
+		// prev encrypted byte
 		int prev = data[arrayIndex];
 
-		/** decrypt first byte */
+		// decrypt first byte
 		data[arrayIndex++] ^= (clientPacketKey[0] & 0xff);
 
-		/** decrypt loop */
+		// decrypt loop
 		for (int i = 1; i < size; i++, arrayIndex++) {
 			int curr = data[arrayIndex] & 0xff;
 			data[arrayIndex] ^= (staticKey[i & 63] & 0xff) ^ (clientPacketKey[i & 7] & 0xff) ^ prev;
 			prev = curr;
 		}
 
-		/** oldKey value as long */
+		// oldKey value as long
 		long oldKey = (((long) clientPacketKey[0] & 0xff) << 0) | (((long) clientPacketKey[1] & 0xff) << 8) | (((long) clientPacketKey[2] & 0xff) << 16)
 			| (((long) clientPacketKey[3] & 0xff) << 24) | (((long) clientPacketKey[4] & 0xff) << 32) | (((long) clientPacketKey[5] & 0xff) << 40)
 			| (((long) clientPacketKey[6] & 0xff) << 48) | (((long) clientPacketKey[7] & 0xff) << 56);
 
-		/** change key */
+		// change key
 		oldKey += size;
 
 		if (validateClientPacket(buf)) {
-			/** set key new value */
+			// set key new value
 			clientPacketKey[0] = (byte) (oldKey >> 0 & 0xff);
 			clientPacketKey[1] = (byte) (oldKey >> 8 & 0xff);
 			clientPacketKey[2] = (byte) (oldKey >> 16 & 0xff);
@@ -150,30 +150,30 @@ public class EncryptionKeyPair {
 		final int size = buf.remaining();
 		byte[] serverPacketKey = keys[SERVER];
 
-		/** index to byte that should be encrypted now */
+		// index to byte that should be encrypted now
 		int arrayIndex = buf.arrayOffset() + buf.position();
 
-		/** encrypt first byte */
+		// encrypt first byte
 		data[arrayIndex] ^= (serverPacketKey[0] & 0xff);
 
-		/** prev encrypted byte */
+		// prev encrypted byte
 		int prev = data[arrayIndex++];
 
-		/** encrypt loop */
+		// encrypt loop
 		for (int i = 1; i < size; i++, arrayIndex++) {
 			data[arrayIndex] ^= (staticKey[i & 63] & 0xff) ^ (serverPacketKey[i & 7] & 0xff) ^ prev;
 			prev = data[arrayIndex];
 		}
 
-		/** oldKey value as long */
+		// oldKey value as long
 		long oldKey = (((long) serverPacketKey[0] & 0xff) << 0) | (((long) serverPacketKey[1] & 0xff) << 8) | (((long) serverPacketKey[2] & 0xff) << 16)
 			| (((long) serverPacketKey[3] & 0xff) << 24) | (((long) serverPacketKey[4] & 0xff) << 32) | (((long) serverPacketKey[5] & 0xff) << 40)
 			| (((long) serverPacketKey[6] & 0xff) << 48) | (((long) serverPacketKey[7] & 0xff) << 56);
 
-		/** change key */
+		// change key
 		oldKey += size;
 
-		/** set key new value */
+		// set key new value
 		serverPacketKey[0] = (byte) (oldKey >> 0 & 0xff);
 		serverPacketKey[1] = (byte) (oldKey >> 8 & 0xff);
 		serverPacketKey[2] = (byte) (oldKey >> 16 & 0xff);
