@@ -60,7 +60,7 @@ public class AbyssRankingCache {
 
 		for (Race race : races) {
 			List<RankingListPlayer> players = rankingListPlayers.stream().filter(p -> p.race() == race).collect(Collectors.toList());
-			newPlayerRankListPackets.put(race, getPlayerRankListPackets(race, players));
+			newPlayerRankListPackets.put(race, getPlayerRankListPackets(updateTime, race, players));
 
 			List<RankingListLegion> legions = rankingListLegions.stream().filter(l -> l.race() == race).collect(Collectors.toList());
 			newLegionRankListPackets.put(race, new SM_ABYSS_RANKING_LEGIONS(updateTime, legions, race));
@@ -88,15 +88,15 @@ public class AbyssRankingCache {
 		});
 	}
 
-	private List<SM_ABYSS_RANKING_PLAYERS> getPlayerRankListPackets(Race race, List<RankingListPlayer> list) {
+	private List<SM_ABYSS_RANKING_PLAYERS> getPlayerRankListPackets(int updateTime, Race race, List<RankingListPlayer> list) {
 		List<SM_ABYSS_RANKING_PLAYERS> playerPackets = new ArrayList<>();
 		int page = 1;
 
 		for (int i = 0; i < list.size(); i += 44) {
 			if (list.size() > i + 44) {
-				playerPackets.add(new SM_ABYSS_RANKING_PLAYERS(lastUpdate, list.subList(i, i + 44), race, page, false));
+				playerPackets.add(new SM_ABYSS_RANKING_PLAYERS(updateTime, list.subList(i, i + 44), race, page, false));
 			} else {
-				playerPackets.add(new SM_ABYSS_RANKING_PLAYERS(lastUpdate, list.subList(i, list.size()), race, page, true));
+				playerPackets.add(new SM_ABYSS_RANKING_PLAYERS(updateTime, list.subList(i, list.size()), race, page, true));
 			}
 			page++;
 		}
