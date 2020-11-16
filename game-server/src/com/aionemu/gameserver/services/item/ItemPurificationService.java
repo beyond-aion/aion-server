@@ -94,6 +94,7 @@ public class ItemPurificationService {
 		Item newItem = ItemFactory.newItem(targetItemId, 1);
 		newItem.setOptionalSockets(sourceItem.getOptionalSockets());
 		newItem.setItemCreator(sourceItem.getItemCreator());
+		newItem.setTuneCount(Math.max(0, newItem.getItemTemplate().getMaxTuneCount()));
 		newItem.setEnchantLevel(sourceItem.getEnchantLevel() - 5);
 		newItem.setEnchantBonus(sourceItem.getEnchantBonus());
 		newItem.setAmplified(sourceItem.isAmplified() && newItem.getEnchantLevel() >= newItem.getMaxEnchantLevel());
