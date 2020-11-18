@@ -245,7 +245,7 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void sendCompletedQuests(Player player) {
-		SplitList<QuestState> questStateSplitList = new DynamicServerPacketBodySplitList<>(player.getQuestStateList().getAllQuestState(), true,
+		SplitList<QuestState> questStateSplitList = new DynamicServerPacketBodySplitList<>(player.getQuestStateList().getCompletedQuests(), true,
 			SM_QUEST_COMPLETED_LIST.STATIC_BODY_SIZE, SM_QUEST_COMPLETED_LIST.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
 		questStateSplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_QUEST_COMPLETED_LIST(part.isFirst() ? 0 : 1, part)));
 	}
