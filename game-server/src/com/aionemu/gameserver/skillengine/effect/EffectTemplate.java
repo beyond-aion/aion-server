@@ -546,9 +546,6 @@ public abstract class EffectTemplate {
 			}
 		}
 
-		if (effect.getSkillTemplate().getGroup() != null && effect.getSkillTemplate().getGroup().equals("WA_AVENGINGCRASH"))
-			return true;
-
 		int effectPower = 1000;
 
 		if (isAlteredState(statEnum))
