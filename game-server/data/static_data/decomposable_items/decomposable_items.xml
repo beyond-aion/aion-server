@@ -575,7 +575,26 @@
 	<decomposable item_id="188050001" /><!-- Disassembled Item 2 -->
 	<decomposable item_id="188050002" /><!-- Disassembled Item 3 -->
 	<decomposable item_id="188050003" /><!-- Disassembled Item 1 -->
-	<decomposable item_id="188050004" /><!-- Red Solorius Stocking -->
+	<decomposable item_id="188050004"><!-- Red Solorius Stocking -->
+		<items>
+			<item id="169231091" /><!-- [Event] Dye: Bright Aqua -->
+		</items>
+		<items>
+			<item id="169231092" /><!-- [Event] Dye: Bright Green -->
+		</items>
+		<items>
+			<item id="169231093" /><!-- [Event] Dye: Bright Sky Blue -->
+		</items>
+		<items>
+			<item id="169231094" /><!-- [Event] Dye: Bright Magenta -->
+		</items>
+		<items>
+			<item id="169231095" /><!-- [Event] Dye: Bright Red -->
+		</items>
+		<items>
+			<item id="169231096" /><!-- [Event] Dye: Bright Blue -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188050005" /><!-- Yellow Solorius Stocking -->
 	<decomposable item_id="188050006"><!-- Green Solorius Stocking -->
 		<items>
@@ -591,7 +610,26 @@
 			<item id="169231008" /><!-- [Event] Concentrated Dye: True Black -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188050007" /><!-- Red Solorius Stocking -->
+	<decomposable item_id="188050007"><!-- Red Solorius Stocking -->
+		<items>
+			<item id="169231091" /><!-- [Event] Dye: Bright Aqua -->
+		</items>
+		<items>
+			<item id="169231092" /><!-- [Event] Dye: Bright Green -->
+		</items>
+		<items>
+			<item id="169231093" /><!-- [Event] Dye: Bright Sky Blue -->
+		</items>
+		<items>
+			<item id="169231094" /><!-- [Event] Dye: Bright Magenta -->
+		</items>
+		<items>
+			<item id="169231095" /><!-- [Event] Dye: Bright Red -->
+		</items>
+		<items>
+			<item id="169231096" /><!-- [Event] Dye: Bright Blue -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188050008" /><!-- Yellow Solorius Stocking -->
 	<decomposable item_id="188050009"><!-- Green Solorius Stocking -->
 		<items>
@@ -607,22 +645,8 @@
 			<item id="169231008" /><!-- [Event] Concentrated Dye: True Black -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188050010"><!-- Lenatinerk's Gift -->
-		<items>
-			<item id="160010087" /><!-- Lenatinerk's Chocolate -->
-		</items>
-		<items>
-			<item id="160010088" /><!-- Lenatinerk's Tange Juice -->
-		</items>
-	</decomposable>
-	<decomposable item_id="188050011"><!-- Lenatinerk's Gift -->
-		<items>
-			<item id="160010087" /><!-- Lenatinerk's Chocolate -->
-		</items>
-		<items>
-			<item id="160010088" /><!-- Lenatinerk's Tange Juice -->
-		</items>
-	</decomposable>
+	<decomposable item_id="188050010" /><!-- Lenatinerk's Gift -->
+	<decomposable item_id="188050011" /><!-- Lenatinerk's Gift -->
 	<decomposable item_id="188050012"><!-- Surreal Brand Package (3 days) -->
 		<items>
 			<item id="100000979" /><!-- Surreal Brand (3 days) -->
@@ -26363,40 +26387,33 @@
 		<items chance="1.0">
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="0.34">
-			<item id="162002030" min_count="30" /><!-- [Event] Premium Restoration Serum -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="0.33">
-			<item id="164002116" min_count="5" /><!-- [Event] Rx: Accelerox -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="0.33">
-			<item id="164002272" min_count="5" /><!-- [Event] Enduring Greater Raging Wind Scroll -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="0.33">
-			<item id="162000107" min_count="3" /><!-- Saam King's Herbs -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="0.33">
+		<items chance="0.43">
 			<item id="160010202" min_count="3" /><!-- [Event] Solorius Wine -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="0.33">
-			<item id="188052719" /><!-- [Event] Dye Bundle -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="0.33">
+		<items chance="0.43">
 			<item id="160010197" min_count="3" /><!-- [Event] Solorius Cake Slice -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="0.33">
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
+		<items chance="0.43">
+			<item id="188050004" race="ELYOS" /><!-- Red Solorius Stocking -->
+			<item id="188050007" race="ASMODIANS" /><!-- Red Solorius Stocking -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="0.33">
-			<item id="166000195" min_count="5" /><!-- Epsilon Enchantment Stone -->
+		<items chance="0.43">
+			<item id="186000399" min_count="5" /><!-- Honorable Conqueror's Mark -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="0.43">
+			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="0.43">
+			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="0.42">
+			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 	</decomposable>
@@ -26413,40 +26430,33 @@
 		<items chance="2.75">
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="0.92">
-			<item id="162002030" min_count="30" /><!-- [Event] Premium Restoration Serum -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="0.91">
-			<item id="164002116" min_count="5" /><!-- [Event] Rx: Accelerox -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="0.91">
-			<item id="164002272" min_count="5" /><!-- [Event] Enduring Greater Raging Wind Scroll -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="0.91">
-			<item id="162000107" min_count="3" /><!-- Saam King's Herbs -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="0.91">
+		<items chance="1.18">
 			<item id="160010202" min_count="3" /><!-- [Event] Solorius Wine -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="0.91">
-			<item id="188052719" /><!-- [Event] Dye Bundle -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="0.91">
+		<items chance="1.18">
 			<item id="160010197" min_count="3" /><!-- [Event] Solorius Cake Slice -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="0.91">
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
+		<items chance="1.18">
+			<item id="188050004" race="ELYOS" /><!-- Red Solorius Stocking -->
+			<item id="188050007" race="ASMODIANS" /><!-- Red Solorius Stocking -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="0.91">
-			<item id="166000195" min_count="5" /><!-- Epsilon Enchantment Stone -->
+		<items chance="1.18">
+			<item id="186000399" min_count="5" /><!-- Honorable Conqueror's Mark -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="1.18">
+			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="1.18">
+			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="1.17">
+			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 	</decomposable>
@@ -26463,40 +26473,33 @@
 		<items chance="4.5">
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="1.53">
-			<item id="162002030" min_count="30" /><!-- [Event] Premium Restoration Serum -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="1.5">
-			<item id="164002116" min_count="5" /><!-- [Event] Rx: Accelerox -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="1.5">
-			<item id="164002272" min_count="5" /><!-- [Event] Enduring Greater Raging Wind Scroll -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="1.5">
-			<item id="162000107" min_count="3" /><!-- Saam King's Herbs -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="1.5">
+		<items chance="1.93">
 			<item id="160010202" min_count="3" /><!-- [Event] Solorius Wine -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="1.5">
-			<item id="188052719" /><!-- [Event] Dye Bundle -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="1.5">
+		<items chance="1.93">
 			<item id="160010197" min_count="3" /><!-- [Event] Solorius Cake Slice -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="1.5">
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
+		<items chance="1.93">
+			<item id="188050004" race="ELYOS" /><!-- Red Solorius Stocking -->
+			<item id="188050007" race="ASMODIANS" /><!-- Red Solorius Stocking -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="1.5">
-			<item id="166000195" min_count="5" /><!-- Epsilon Enchantment Stone -->
+		<items chance="1.93">
+			<item id="186000399" min_count="5" /><!-- Honorable Conqueror's Mark -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="1.93">
+			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="1.93">
+			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="1.92">
+			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 	</decomposable>
@@ -26513,40 +26516,33 @@
 		<items chance="6.25">
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="2.08">
-			<item id="162002030" min_count="30" /><!-- [Event] Premium Restoration Serum -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="2.08">
-			<item id="164002116" min_count="5" /><!-- [Event] Rx: Accelerox -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="2.08">
-			<item id="164002272" min_count="5" /><!-- [Event] Enduring Greater Raging Wind Scroll -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="2.08">
-			<item id="162000107" min_count="3" /><!-- Saam King's Herbs -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="2.08">
+		<items chance="2.68">
 			<item id="160010202" min_count="3" /><!-- [Event] Solorius Wine -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="2.08">
-			<item id="188052719" /><!-- [Event] Dye Bundle -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="2.08">
+		<items chance="2.68">
 			<item id="160010197" min_count="3" /><!-- [Event] Solorius Cake Slice -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="2.08">
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
+		<items chance="2.68">
+			<item id="188050004" race="ELYOS" /><!-- Red Solorius Stocking -->
+			<item id="188050007" race="ASMODIANS" /><!-- Red Solorius Stocking -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="2.08">
-			<item id="166000195" min_count="5" /><!-- Epsilon Enchantment Stone -->
+		<items chance="2.68">
+			<item id="186000399" min_count="5" /><!-- Honorable Conqueror's Mark -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="2.68">
+			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="2.68">
+			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="2.67">
+			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 	</decomposable>
@@ -26563,40 +26559,33 @@
 		<items chance="8.0">
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="2.67">
-			<item id="162002030" min_count="30" /><!-- [Event] Premium Restoration Serum -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="2.66">
-			<item id="164002116" min_count="5" /><!-- [Event] Rx: Accelerox -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="2.66">
-			<item id="164002272" min_count="5" /><!-- [Event] Enduring Greater Raging Wind Scroll -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="2.66">
-			<item id="162000107" min_count="3" /><!-- Saam King's Herbs -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="2.66">
+		<items chance="3.43">
 			<item id="160010202" min_count="3" /><!-- [Event] Solorius Wine -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="2.66">
-			<item id="188052719" /><!-- [Event] Dye Bundle -->
-			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
-		</items>
-		<items chance="2.66">
+		<items chance="3.43">
 			<item id="160010197" min_count="3" /><!-- [Event] Solorius Cake Slice -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="2.66">
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
+		<items chance="3.43">
+			<item id="188050004" race="ELYOS" /><!-- Red Solorius Stocking -->
+			<item id="188050007" race="ASMODIANS" /><!-- Red Solorius Stocking -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
-		<items chance="2.66">
-			<item id="166000195" min_count="5" /><!-- Epsilon Enchantment Stone -->
+		<items chance="3.43">
+			<item id="186000399" min_count="5" /><!-- Honorable Conqueror's Mark -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="3.43">
+			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="3.43">
+			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
+		</items>
+		<items chance="3.42">
+			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 	</decomposable>
@@ -26663,50 +26652,47 @@
 	</decomposable>
 	<decomposable item_id="188052996"><!-- [Event] Broken Snow Bundle -->
 		<items>
+			<item id="186000409" min_count="25" /><!-- Daeva's Respite Coin -->
+		</items>
+		<items>
+			<item id="188053610" min_count="2" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+		</items>
+		<items>
 			<item id="188052822" min_count="2" /><!-- Noble Ancient Manastone Chest -->
-		</items>
-		<items>
-			<item id="188053113" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
-		</items>
-		<items>
-			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
 		</items>
 		<items>
 			<item id="166100020" min_count="250" /><!-- [Stamp] Greater Supplements (Eternal) -->
 		</items>
 		<items>
-			<item id="166100023" min_count="350" /><!-- [Stamp] Greater Supplements (Eternal) -->
-		</items>
-		<items>
-			<item id="188053610" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<item id="166100023" min_count="250" /><!-- [Stamp] Greater Supplements (Eternal) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052997"><!-- [Event] Crushed Snow Bundle -->
 		<items>
-			<item id="188052638" /><!-- [Event] Fabled Godstone Bundle -->
+			<item id="188053695" min_count="2" /><!-- High Grade Crafting Material Box of Conquest -->
 		</items>
 		<items>
-			<item id="188053295" /><!-- Empyrean Plume Chest -->
+			<item id="188053113" min_count="2" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</items>
 		<items>
-			<item id="166500002" min_count="1" max_count="3" /><!-- Amplification Stone -->
+			<item id="188053714" /><!-- Captured Shelter Idian Bundle -->
 		</items>
 		<items>
-			<item id="166030005" min_count="1" max_count="3" /><!-- Tempering Solution -->
+			<item id="166500005" min_count="2" /><!-- [Event] Amplification Stone -->
+		</items>
+		<items>
+			<item id="166030007" min_count="2" /><!-- [Event] Tempering Solution -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052998"><!-- [Event] Noble Melted Bundle -->
 		<items>
-			<item id="188053702" /><!-- Vasharti Equipment Box -->
-		</items>
-		<items>
-			<item id="188052388" /><!-- Modor's Equipment Box -->
+			<item id="188051879" /><!-- Solorius Furniture Set Box -->
 		</items>
 		<items>
 			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
 		</items>
 		<items>
-			<item id="166150018" /><!-- Greater Felicitous Socketing (Eternal) -->
+			<item id="188053000" /><!-- [Event] Assured Greater Felicitous Socketing Box -->
 		</items>
 		<items>
 			<item id="188053903" /><!-- Honorable Equipment of Conquest Box -->
@@ -26714,19 +26700,16 @@
 	</decomposable>
 	<decomposable item_id="188052999"><!-- [Event] Brilliant Ice Prism -->
 		<items chance="30.0">
-			<item id="188053033" /><!-- Kunax's Equipment Box -->
+			<item id="188053099" /><!-- Pure Modor's Equipment Crux Box -->
 		</items>
-		<items chance="35.0">
+		<items chance="45.0">
 			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
 		</items>
-		<items chance="10.0">
-			<item id="188054238" /><!-- Iron Wall Armor Box -->
+		<items chance="20.0">
+			<item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
 		</items>
 		<items chance="5.0">
-			<item id="190020088" /><!-- Pink Merek Egg -->
-		</items>
-		<items chance="20.0">
-			<item id="188053219" /><!-- [Event] Sauro Commander's Accessory Box -->
+			<item id="188054260" /><!-- Ride Box of Conquest -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053000"><!-- [Event] Assured Greater Felicitous Socketing Box -->
