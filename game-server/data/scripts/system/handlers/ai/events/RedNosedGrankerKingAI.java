@@ -31,13 +31,12 @@ public class RedNosedGrankerKingAI extends OneDmgAI {
 		if (hpPercentage <= 50) {
 			if (addsSpawned.compareAndSet(false, true)) {
 				switch (getNpcId()) {
-					case 219292:
-					case 219294:
+					case 219292, 219294 -> {
 						int npcId = getNpcId() + 1;
 						rndSpawnInRange(npcId, 1, 3);
 						rndSpawnInRange(npcId, 1, 3);
 						rndSpawnInRange(npcId, 1, 3);
-						break;
+					}
 				}
 			}
 		}
@@ -55,6 +54,11 @@ public class RedNosedGrankerKingAI extends OneDmgAI {
 			.filter(a -> a.getAttacker() instanceof Player && ((Player) a.getAttacker()).isOnline() && isInRange((Player) a.getAttacker(), 50)).count();
 		for (int i = 0; i < chestSpawnCount; i++)
 			rndSpawnInRange(701457, 1, 6); // stolen solorius box
+
+		getOwner().getKnownList().forEachNpc(n -> {
+			if (n.getNpcId() == 219293 || n.getNpcId() == 219295)
+				n.getController().delete();
+		});
 		super.handleDied();
 	}
 

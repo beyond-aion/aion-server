@@ -13516,8 +13516,19 @@
 	<decomposable item_id="188051683" /><!-- [Event] Greater Running Scroll Bundle -->
 	<decomposable item_id="188051684" /><!-- [Event] Ripe Fruit Box -->
 	<decomposable item_id="188051685" /><!-- [Event] Ripe Fruit Sacred Chalice Bundle -->
-	<decomposable item_id="188051686" /><!-- [Event] Ripe Crown Fruit Bundle -->
-	<decomposable item_id="188051687" /><!-- [Event] Ripe Enchantment Fruit Bundle -->
+	<decomposable item_id="188051686"><!-- [Event] Ripe Crown Fruit Bundle -->
+		<items>
+			<random_item type="ANCIENT_CROWN" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188051687"><!-- [Event] Ripe Enchantment Fruit Bundle -->
+		<items>
+			<item id="166000195" /><!-- Epsilon Enchantment Stone -->
+		</items>
+		<items>
+			<item id="166020003" /><!-- [Event] Omega Enchantment Stone -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051688" /><!-- [Event] Candy Pouch -->
 	<decomposable item_id="188051689" /><!-- [Event] Gift Box of the First Snow -->
 	<decomposable item_id="188051690" /><!-- [Event] Thank-you Enchantment Stone Box -->
@@ -13695,28 +13706,30 @@
 	<decomposable item_id="188051718" /><!-- [Event] Shadetouched Jacket Box -->
 	<decomposable item_id="188051719" /><!-- [Event] Shadetouched Pants Box -->
 	<decomposable item_id="188051720"><!-- [Event] Unidentifiable Solorius Box -->
-		<items chance="60.0">
-			<item id="152013028" /><!-- Urge of Wrath -->
+		<items chance="25.0">
+			<item id="160010201" min_count="5" /><!-- [Event] Solorius Cookie -->
+			<item id="160010202" min_count="5" /><!-- [Event] Solorius Wine -->
 		</items>
-		<items chance="2.0">
-			<item id="188051674" /><!-- Fabled Godstone Bundle -->
+		<items chance="10.0">
+			<item id="170030045" race="ELYOS" /><!-- Solorius Wreath -->
+			<item id="170035001" race="ASMODIANS" /><!-- Solorius Wreath -->
 		</items>
-		<items chance="2.0">
-			<item id="188051732" /><!-- [Event] Heroic Godstone Bundle -->
-		</items>
-		<items chance="6.0">
-			<item id="190010007" /><!-- [Event] Shugo Lass Egg -->
+		<items chance="10.0">
+			<item id="170110014" race="ELYOS" /><!-- Solorius Mantelpiece -->
+			<item id="170115014" race="ASMODIANS" /><!-- Solorius Mantelpiece -->
 		</items>
 		<items chance="10.0">
 			<item id="170170086" race="ELYOS" /><!-- Desktop Solorius Tree -->
 			<item id="170175063" race="ASMODIANS" /><!-- Desktop Solorius Tree -->
 		</items>
-		<items chance="10.0">
+		<items chance="15.0">
 			<item id="170190034" /><!-- [Event] Solorius Cake -->
 		</items>
-		<items chance="10.0">
-			<item id="170110014" race="ELYOS" /><!-- Solorius Mantelpiece -->
-			<item id="170115014" race="ASMODIANS" /><!-- Solorius Mantelpiece -->
+		<items chance="15.0">
+			<item id="188051686" /><!-- [Event] Ripe Crown Fruit Bundle -->
+		</items>
+		<items chance="15.0">
+			<item id="188051687" /><!-- [Event] Ripe Enchantment Fruit Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051721"><!-- [Event] Leaf Box -->
@@ -13801,35 +13814,29 @@
 	</decomposable>
 	<decomposable item_id="188051730" /><!-- Test Item: Random Manastone Slot Dismantling Box -->
 	<decomposable item_id="188051731"><!-- [Event] Lenatinerk's Lost Gift Box -->
-		<items chance="5.0">
-			<item id="187000037" race="ELYOS" /><!-- Lucky Wings -->
-			<item id="187000038" race="ASMODIANS" /><!-- Lucky Wings -->
-		</items>
-		<items chance="2.5">
-			<item id="188051674" /><!-- Fabled Godstone Bundle -->
-		</items>
-		<items chance="2.5">
-			<item id="188051732" /><!-- [Event] Heroic Godstone Bundle -->
-		</items>
-		<items chance="5.0">
-			<item id="190010007" /><!-- [Event] Shugo Lass Egg -->
-		</items>
-		<items chance="25.0">
+		<items chance="30.0">
 			<item id="169230002" /><!-- [Event] Dye: True White -->
-		</items>
-		<items chance="25.0">
 			<item id="169230008" /><!-- [Event] Dye: True Black -->
-		</items>
-		<items chance="15.0">
-			<item id="170190034" /><!-- [Event] Solorius Cake -->
 		</items>
 		<items chance="10.0">
 			<item id="170110014" race="ELYOS" /><!-- Solorius Mantelpiece -->
 			<item id="170115014" race="ASMODIANS" /><!-- Solorius Mantelpiece -->
 		</items>
+		<items chance="15.0">
+			<item id="170190034" /><!-- [Event] Solorius Cake -->
+		</items>
 		<items chance="10.0">
-			<item id="170030047" race="ELYOS" /><!-- Solorius Tree Stick Accessory -->
-			<item id="170035003" race="ASMODIANS" /><!-- Solorius Tree Stick Accessory -->
+			<item id="187000037" race="ELYOS" /><!-- Lucky Wings -->
+			<item id="187000038" race="ASMODIANS" /><!-- Lucky Wings -->
+		</items>
+		<items chance="10.0">
+			<item id="188051674" /><!-- Fabled Godstone Bundle -->
+		</items>
+		<items chance="10.0">
+			<item id="188051732" /><!-- [Event] Heroic Godstone Bundle -->
+		</items>
+		<items chance="15.0">
+			<item id="190010007" /><!-- [Event] Shugo Lass Egg -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051732"><!-- [Event] Heroic Godstone Bundle -->

@@ -1210,23 +1210,32 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Celebrate Solorius" start="2019-12-01T00:00:00" end="2019-12-31T23:59:59" theme="CHRISTMAS">
+	<event name="Celebrate Solorius" start="2020-12-01T00:00:00" end="2020-12-31T23:59:59" theme="CHRISTMAS">
 		<quests>
 			<maintainable>50007 50008 50009 51007 51008 51009</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="100">
+			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="100" member_limit="12">
 				<gd_npcs>
-					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
 					<gd_npc npc_id="219293" /><!-- Granker King's Second -->
-					<gd_npc npc_id="219294" /><!-- Red Nosed Granker King -->
 					<gd_npc npc_id="219295" /><!-- Granker King's Second -->
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="160010203" /><!-- [Event] Red Nose Granker Horn -->
+					<gd_item id="188051601" min_count="2" /><!-- Construction Flux Bundle -->
+					<gd_item id="186000146" max_count="3" /><!-- Guestpetal -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="50" member_limit="24">
+			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="100" member_limit="12">
+				<gd_npcs>
+					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
+					<gd_npc npc_id="219294" /><!-- Red Nosed Granker King -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="186000177" min_count="5" /><!-- [Event] Solorius Coin -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Celebrate Solorius Event Drop" chance="50" member_limit="12">
 				<gd_npcs>
 					<gd_npc npc_id="219292" /><!-- Red Nosed Granker King -->
 					<gd_npc npc_id="219294" /><!-- Red Nosed Granker King -->
@@ -1269,7 +1278,7 @@
 			<spawn_map map_id="110010000">
 				<!-- Lenatinerk -->
 				<spawn npc_id="831032" respawn_time="295">
-					<spot x="1527.1254" y="1515.9658" z="565.8988" h="60" />
+					<spot x="1522.5371" y="1518.1362" z="566.1982" h="60" />
 				</spawn>
 				<!-- Thauminerk -->
 				<spawn npc_id="831419" respawn_time="295">
@@ -1284,7 +1293,7 @@
 				</spawn>
 				<!-- Thauminerk -->
 				<spawn npc_id="831420" respawn_time="295">
-					<spot x="1208.1348" y="1401.1824" z="208.1250" />
+					<spot x="1208.631" y="1401.6238" z="208.4448" />
 				</spawn>
 			</spawn_map>
 			<!-- Oriel -->
@@ -1298,7 +1307,7 @@
 					<spot x="1283" y="1852" z="98" h="10" />
 				</spawn>
 				<!-- Red Nosed Granker King -->
-				<spawn npc_id="219292" respawn_time="28320">
+				<spawn npc_id="219292" respawn_time="21600">
 					<spot x="1392.76" y="1577.4191" z="91.39381" h="6" />
 				</spawn>
 				<!-- Lazy Shugo Courier -->
@@ -1351,7 +1360,7 @@
 					<spot x="1045" y="1537" z="98" h="60" />
 				</spawn>
 				<!-- Red Nosed Granker King -->
-				<spawn npc_id="219294" respawn_time="28320">
+				<spawn npc_id="219294" respawn_time="21600">
 					<spot x="780.65857" y="1643.0098" z="131.87744" />
 				</spawn>
 				<!-- Lazy Shugo Courier -->
