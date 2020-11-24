@@ -27375,6 +27375,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You cannot register unidentified items.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NO_IDENTIFY() {
+		return new SM_SYSTEM_MESSAGE(1402421);
+	}
+
+	/**
 	 * The Remodeled Dynatoum bomb has begun counting down.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_IDF5_U3_HARD_BOSS_TIMER_01() {

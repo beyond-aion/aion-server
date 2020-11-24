@@ -42,6 +42,11 @@ public class ItemPurificationService {
 			return false;
 		}
 
+		if (!baseItem.isIdentified()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT_NO_IDENTIFY());
+			return false;
+		}
+
 		if (baseItem.getEnchantLevel() < purificationResult.getMinEnchantCount()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REGISTER_ITEM_MSG_UPGRADE_CANNOT(baseItem.getL10n()));
 			return false;
@@ -94,7 +99,7 @@ public class ItemPurificationService {
 		Item newItem = ItemFactory.newItem(targetItemId, 1);
 		newItem.setOptionalSockets(sourceItem.getOptionalSockets());
 		newItem.setItemCreator(sourceItem.getItemCreator());
-		newItem.setTuneCount(Math.max(0, newItem.getItemTemplate().getMaxTuneCount()));
+		newItem.setTuneCount(Math.max(0, Math.min(sourceItem.getTuneCount(), newItem.getItemTemplate().getMaxTuneCount())));
 		newItem.setEnchantLevel(sourceItem.getEnchantLevel() - 5);
 		newItem.setEnchantBonus(sourceItem.getEnchantBonus());
 		newItem.setAmplified(sourceItem.isAmplified() && newItem.getEnchantLevel() >= newItem.getMaxEnchantLevel());

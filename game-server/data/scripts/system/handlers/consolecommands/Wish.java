@@ -77,12 +77,11 @@ public class Wish extends ConsoleCommand {
 				sendInfo(admin, objectName + " spawned");
 			}
 		} else { // add item
-			if (!(admin.getTarget() instanceof Player)) {
+			if (!(admin.getTarget() instanceof Player player)) {
 				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 				return;
 			}
 
-			Player target = (Player) admin.getTarget();
 			String itemName = params[0];
 			long addCount = 1;
 			int itemId = 0;
@@ -103,7 +102,7 @@ public class Wish extends ConsoleCommand {
 
 			if (itemTemplate != null) {
 				itemId = itemTemplate.getTemplateId();
-				if (!AdminService.getInstance().canOperate(admin, target, itemId, "command ///wish"))
+				if (!AdminService.getInstance().canOperate(admin, player, itemId, "command ///wish"))
 					return;
 
 				long addedCount = 0;
@@ -112,9 +111,10 @@ public class Wish extends ConsoleCommand {
 
 					if (newItem == null)
 						return;
-					if (enchant > 255)
-						enchant = 255;
+					enchant = Math.min(enchant, 255);
 					if (newItem.getItemTemplate().getEquipmentType() != EquipType.PLUME) {
+						if (newItem.getItemTemplate().canTune() && newItem.getItemTemplate().getMaxEnchantBonus() > 0)
+							enchant = Math.min(enchant, newItem.getItemTemplate().getMaxEnchantLevel());
 						newItem.setEnchantLevel(enchant);
 						if (enchant > newItem.getItemTemplate().getMaxEnchantLevel()) {
 							newItem.setAmplified(true);
@@ -124,17 +124,17 @@ public class Wish extends ConsoleCommand {
 					} else {
 						newItem.setTempering(enchant);
 					}
-					addedCount = addCount - ItemService.addItem(target, newItem);
+					addedCount = addCount - ItemService.addItem(player, newItem);
 				} else {
-					addedCount = addCount - ItemService.addItem(target, itemId, addCount, true);
+					addedCount = addCount - ItemService.addItem(player, itemId, addCount, true);
 				}
 
 				if (addedCount <= 0) {
 					sendInfo(admin, "Item couldn't be added");
 				} else {
-					if (!admin.equals(target)) {
-						sendInfo(admin, "You gave " + addedCount + " " + ChatUtil.item(itemId) + " to " + target.getName() + ".");
-						sendInfo(target, "You received " + addedCount + " " + ChatUtil.item(itemId) + " from " + admin.getName() + ".");
+					if (!admin.equals(player)) {
+						sendInfo(admin, "You gave " + addedCount + " " + ChatUtil.item(itemId) + " to " + player.getName() + ".");
+						sendInfo(player, "You received " + addedCount + " " + ChatUtil.item(itemId) + " from " + admin.getName() + ".");
 					}
 				}
 			}
