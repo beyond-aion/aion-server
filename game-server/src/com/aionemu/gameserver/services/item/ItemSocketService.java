@@ -108,7 +108,8 @@ public class ItemSocketService {
 			return;
 		}
 
-		if (!item.hasManaStones()) {
+		boolean hasManaStones = isFusionSocket ? item.hasFusionStones() : item.hasManaStones();
+		if (!hasManaStones) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REMOVE_ITEM_OPTION_NO_OPTION_TO_REMOVE(item.getL10n()));
 			return;
 		}
