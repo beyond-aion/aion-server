@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.ai;
 
-import java.io.File;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
@@ -14,10 +13,10 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
-import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -48,7 +47,7 @@ public class AIEngine implements GameEngine {
 		scriptManager.setGlobalClassListener(acl);
 
 		try {
-			scriptManager.load(new File("./data/scripts/system/aihandlers.xml"));
+			scriptManager.load(AIConfig.HANDLER_DIRECTORY);
 			validateScripts();
 			log.info("Loaded " + aiHandlers.size() + " ai handlers.");
 		} catch (Exception e) {
@@ -137,8 +136,7 @@ public class AIEngine implements GameEngine {
 		Class<?> currentClass = aiClass;
 		while (currentClass.getSuperclass() != AbstractAI.class) {
 			Type genericSuperClass = currentClass.getGenericSuperclass();
-			if (genericSuperClass instanceof ParameterizedType) {
-				ParameterizedType ownerTypeHolder = (ParameterizedType) genericSuperClass;
+			if (genericSuperClass instanceof ParameterizedType ownerTypeHolder) {
 				if (ownerTypeHolder.getActualTypeArguments().length == 1) {
 					Type type = ownerTypeHolder.getActualTypeArguments()[0];
 					if (type instanceof TypeVariable<?>)

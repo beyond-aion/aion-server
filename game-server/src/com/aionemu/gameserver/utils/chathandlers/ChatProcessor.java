@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.utils.chathandlers;
 
-import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -10,7 +9,7 @@ import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
+import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.configs.administration.CommandsConfig;
@@ -38,7 +37,7 @@ public class ChatProcessor implements GameEngine {
 		scriptManager.setGlobalClassListener(new ChatCommandsLoader(this));
 
 		try {
-			scriptManager.load(new File("./data/scripts/system/chatcommandhandlers.xml"));
+			scriptManager.load(CommandsConfig.HANDLER_DIRECTORIES);
 		} catch (Exception e) {
 			throw new GameServerError("Can't initialize chat handlers.", e);
 		} finally {

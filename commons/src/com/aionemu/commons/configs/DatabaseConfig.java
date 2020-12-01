@@ -30,7 +30,6 @@ public class DatabaseConfig {
 	 * Maximum amount of connections kept in connection pool
 	 */
 	@Property(key = "database.connectionpool.connections.max", defaultValue = "5")
-
 	public static int DATABASE_CONNECTIONS_MAX;
 	/**
 	 * Maximum wait time when getting a DB connection, before throwing a timeout error
@@ -39,9 +38,9 @@ public class DatabaseConfig {
 	public static int DATABASE_TIMEOUT;
 
 	/**
-	 * Location of database script context descriptor
+	 * Location of DAO .java implementations
 	 */
-	@Property(key = "database.scriptcontext.descriptor", defaultValue = "./data/scripts/system/database/database.xml")
-	public static File DATABASE_SCRIPTCONTEXT_DESCRIPTOR;
+	@Property(key = "database.dao_directory", defaultValue = "./data/scripts/system/database")
+	public static File DAO_DIRECTORY;
 
 }

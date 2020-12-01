@@ -120,14 +120,10 @@ public class ScriptClassLoaderImpl extends ScriptClassLoader {
 				while (file.getParentFile() != null && !file.getName().toLowerCase().endsWith(".jar!")) {
 					file = file.getParentFile();
 				}
-				// add jar file as library. Actually it's doesn't matter if we have it as library
-				// or as file in class path
-				addJarFile(file);
+				// add jar file as library. Actually it's doesn't matter if we have it as library or as file in class path
+				classNames.addAll(ClassUtils.getClassNamesFromJarFile(file));
 			}
 		}
-
-		// add library class names from this classloader to available classes
-		classNames.addAll(getLibraryClassNames());
 
 		// load classes for class names from this classloader
 		for (String cn : classNames) {

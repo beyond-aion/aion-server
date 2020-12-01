@@ -1,4 +1,4 @@
-package com.aionemu.commons.scripting.scriptmanager.listener;
+package com.aionemu.commons.scripting.listener;
 
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.commons.services.CronService;

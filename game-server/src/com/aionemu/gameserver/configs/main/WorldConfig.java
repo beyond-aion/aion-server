@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
+import java.io.File;
+
 import com.aionemu.commons.configuration.Property;
 
 /**
@@ -21,4 +23,10 @@ public class WorldConfig {
 
 	@Property(key = "gameserver.world.emulate.fasttrack", defaultValue = "true")
 	public static boolean WORLD_EMULATE_FASTTRACK;
+
+	/**
+	 * Location of zone *.java handlers
+	 */
+	@Property(key = "gameserver.world.zone_handler_directory", defaultValue = "./data/scripts/system/handlers/zone")
+	public static File ZONE_HANDLER_DIRECTORY;
 }

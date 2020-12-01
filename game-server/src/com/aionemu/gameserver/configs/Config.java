@@ -15,35 +15,7 @@ import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.configs.administration.DeveloperConfig;
-import com.aionemu.gameserver.configs.main.AIConfig;
-import com.aionemu.gameserver.configs.main.AutoGroupConfig;
-import com.aionemu.gameserver.configs.main.CleaningConfig;
-import com.aionemu.gameserver.configs.main.CraftConfig;
-import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.DropConfig;
-import com.aionemu.gameserver.configs.main.EventsConfig;
-import com.aionemu.gameserver.configs.main.FallDamageConfig;
-import com.aionemu.gameserver.configs.main.GSConfig;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
-import com.aionemu.gameserver.configs.main.GroupConfig;
-import com.aionemu.gameserver.configs.main.HTMLConfig;
-import com.aionemu.gameserver.configs.main.HousingConfig;
-import com.aionemu.gameserver.configs.main.InGameShopConfig;
-import com.aionemu.gameserver.configs.main.LegionConfig;
-import com.aionemu.gameserver.configs.main.LoggingConfig;
-import com.aionemu.gameserver.configs.main.MembershipConfig;
-import com.aionemu.gameserver.configs.main.NameConfig;
-import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
-import com.aionemu.gameserver.configs.main.PlayerTransferConfig;
-import com.aionemu.gameserver.configs.main.PricesConfig;
-import com.aionemu.gameserver.configs.main.PunishmentConfig;
-import com.aionemu.gameserver.configs.main.RankingConfig;
-import com.aionemu.gameserver.configs.main.RatesConfig;
-import com.aionemu.gameserver.configs.main.SecurityConfig;
-import com.aionemu.gameserver.configs.main.ShutdownConfig;
-import com.aionemu.gameserver.configs.main.SiegeConfig;
-import com.aionemu.gameserver.configs.main.ThreadConfig;
-import com.aionemu.gameserver.configs.main.WorldConfig;
+import com.aionemu.gameserver.configs.main.*;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.configs.network.PffConfig;
 
@@ -55,9 +27,9 @@ public class Config {
 	private static final List<Class<?>> CONFIGS = Arrays.asList(AdminConfig.class, CommandsConfig.class, DeveloperConfig.class, AIConfig.class,
 		AutoGroupConfig.class, CommonsConfig.class, CleaningConfig.class, CraftConfig.class, CustomConfig.class, DropConfig.class, EventsConfig.class,
 		FallDamageConfig.class, GSConfig.class, GeoDataConfig.class, GroupConfig.class, HousingConfig.class, HTMLConfig.class, InGameShopConfig.class,
-		LegionConfig.class, LoggingConfig.class, MembershipConfig.class, NameConfig.class, PeriodicSaveConfig.class, PlayerTransferConfig.class,
-		PricesConfig.class, PunishmentConfig.class, RankingConfig.class, RatesConfig.class, SecurityConfig.class, ShutdownConfig.class, SiegeConfig.class,
-		ThreadConfig.class, WorldConfig.class, DatabaseConfig.class, NetworkConfig.class, PffConfig.class);
+		InstanceConfig.class, LegionConfig.class, LoggingConfig.class, MembershipConfig.class, NameConfig.class, PeriodicSaveConfig.class,
+		PlayerTransferConfig.class, PricesConfig.class, PunishmentConfig.class, RankingConfig.class, RatesConfig.class, SecurityConfig.class,
+		ShutdownConfig.class, SiegeConfig.class, ThreadConfig.class, WorldConfig.class, DatabaseConfig.class, NetworkConfig.class, PffConfig.class);
 
 	/**
 	 * Load configs of the given classes or all if allowedConfigs is empty.

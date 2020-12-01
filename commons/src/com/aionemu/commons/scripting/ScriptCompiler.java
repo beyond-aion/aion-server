@@ -22,14 +22,6 @@ public interface ScriptCompiler {
 	void setParentClassLoader(ScriptClassLoader classLoader);
 
 	/**
-	 * List of jar files that are required for compilation
-	 * 
-	 * @param files
-	 *          list of jar files
-	 */
-	void setLibraries(Iterable<File> files);
-
-	/**
 	 * List of class files that are already compiled and should be loaded just like compilable source files
 	 *
 	 * @param classFiles

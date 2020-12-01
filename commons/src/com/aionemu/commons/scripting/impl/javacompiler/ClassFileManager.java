@@ -3,20 +3,10 @@ package com.aionemu.commons.scripting.impl.javacompiler;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
-import javax.tools.DiagnosticListener;
-import javax.tools.FileObject;
-import javax.tools.ForwardingJavaFileManager;
-import javax.tools.JavaCompiler;
-import javax.tools.JavaFileManager;
-import javax.tools.JavaFileObject;
+import javax.tools.*;
 import javax.tools.JavaFileObject.Kind;
-import javax.tools.StandardLocation;
 
 import com.aionemu.commons.scripting.ScriptClassLoader;
 
@@ -102,33 +92,6 @@ public class ClassFileManager extends ForwardingJavaFileManager<JavaFileManager>
 	 */
 	public void setParentClassLoader(ScriptClassLoader classLoader) {
 		this.parentClassLoader = classLoader;
-	}
-
-	/**
-	 * Adds library file. Library file must be a .jar archive
-	 *
-	 * @param file
-	 *          link to jar archive
-	 * @throws IOException
-	 *           if something goes wrong
-	 */
-	public void addLibrary(File file) throws IOException {
-		ScriptClassLoaderImpl classLoader = getClassLoader(null);
-		classLoader.addJarFile(file);
-	}
-
-	/**
-	 * Adds list of files as libraries. Files must be jar archives
-	 *
-	 * @param files
-	 *          list of jar archives
-	 * @throws IOException
-	 *           if something goes wrong
-	 */
-	public void addLibraries(Iterable<File> files) throws IOException {
-		for (File f : files) {
-			addLibrary(f);
-		}
 	}
 
 	public void addClass(String className, File classFile) {

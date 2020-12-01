@@ -9,10 +9,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.configs.DatabaseConfig;
+import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
-import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
 
 /**
  * This class manages {@link DAO} implementations, it resolves valid implementation for current database
@@ -50,7 +50,7 @@ public class DAOManager {
 			acl.addClassListener(new DAOLoader());
 			scriptManager.setGlobalClassListener(acl);
 
-			scriptManager.load(DatabaseConfig.DATABASE_SCRIPTCONTEXT_DESCRIPTOR);
+			scriptManager.load(DatabaseConfig.DAO_DIRECTORY);
 		} catch (RuntimeException e) {
 			throw new Error(e.getMessage(), e);
 		} catch (Exception e) {
@@ -103,8 +103,8 @@ public class DAOManager {
 	/**
 	 * Registers {@link DAO}.<br>
 	 * First it creates new instance of DAO, then invokes {@link DAO#supports(String, int, int)} <br>
-	 * . If the result was possitive - it associates DAO instance with {@link com.aionemu.commons.database.dao.DAO#getClassName()} <br>
-	 * If another DAO was registed - {@link com.aionemu.commons.database.dao.DAOAlreadyRegisteredException} will be thrown
+	 * . If the result was positive - it associates DAO instance with {@link com.aionemu.commons.database.dao.DAO#getClassName()} <br>
+	 * If another DAO was registered - {@link com.aionemu.commons.database.dao.DAOAlreadyRegisteredException} will be thrown
 	 * 
 	 * @param daoClass
 	 *          DAO implementation
@@ -125,19 +125,14 @@ public class DAOManager {
 		synchronized (DAOManager.class) {
 			DAO oldDao = daoMap.get(dao.getClassName());
 			if (oldDao != null) {
-				StringBuilder sb = new StringBuilder();
-				sb.append("DAO with className ").append(dao.getClassName()).append(" is used by ");
-				sb.append(oldDao.getClass().getName()).append(". Can't override with ");
-				sb.append(daoClass.getName()).append(".");
-				String s = sb.toString();
-				log.error(s);
-				throw new DAOAlreadyRegisteredException(s);
+				throw new DAOAlreadyRegisteredException(
+					"Couldn't register " + daoClass.getName() + ": className " + dao.getClassName() + " is used by " + oldDao.getClass().getName() + ".");
 			}
 			daoMap.put(dao.getClassName(), dao);
 		}
 
 		if (log.isDebugEnabled())
-			log.debug("DAO " + dao.getClassName() + " was successfuly registered.");
+			log.debug("Registered DAO " + dao.getClassName());
 	}
 
 	/**
@@ -153,7 +148,7 @@ public class DAOManager {
 					daoMap.remove(dao.getClassName());
 
 					if (log.isDebugEnabled())
-						log.debug("DAO " + dao.getClassName() + " was successfuly unregistered.");
+						log.debug("Unregistered DAO " + dao.getClassName());
 
 					break;
 				}
@@ -162,6 +157,5 @@ public class DAOManager {
 	}
 
 	private DAOManager() {
-		// empty
 	}
 }

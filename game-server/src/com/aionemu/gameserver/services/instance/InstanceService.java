@@ -6,7 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
-import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.InstanceConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
@@ -301,10 +301,10 @@ public class InstanceService {
 	}
 
 	public static int getInstanceRate(Player player, int mapId) {
-		return player.hasPermission(MembershipConfig.INSTANCES_COOLDOWN) && !CustomConfig.INSTANCE_COOLDOWN_RATE_EXCLUDED_MAPS.contains(mapId) ? CustomConfig.INSTANCE_COOLDOWN_RATE : 1;
+		return player.hasPermission(MembershipConfig.INSTANCES_COOLDOWN) && !InstanceConfig.INSTANCE_COOLDOWN_RATE_EXCLUDED_MAPS.contains(mapId) ? InstanceConfig.INSTANCE_COOLDOWN_RATE : 1;
 	}
 
 	public static int getDestroyDelaySeconds(WorldMapInstance worldMapInstance) {
-		return worldMapInstance.getMaxPlayers() == 1 ? CustomConfig.SOLO_INSTANCE_DESTROY_DELAY_SECONDS : CustomConfig.INSTANCE_DESTROY_DELAY_SECONDS;
+		return worldMapInstance.getMaxPlayers() == 1 ? InstanceConfig.SOLO_INSTANCE_DESTROY_DELAY_SECONDS : InstanceConfig.INSTANCE_DESTROY_DELAY_SECONDS;
 	}
 }

@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.configs.main;
 
+import java.io.File;
 import java.time.ZoneId;
 
 import com.aionemu.commons.configuration.Property;
@@ -78,4 +79,10 @@ public class GSConfig {
 
 	@Property(key = "gameserver.analysis.quest_handlers", defaultValue = "true")
 	public static boolean ANALYZE_QUESTHANDLERS;
+
+	/**
+	 * Location of quest *.java handlers
+	 */
+	@Property(key = "gameserver.quest.handler_directory", defaultValue = "./data/scripts/system/handlers/quest")
+	public static File QUEST_HANDLER_DIRECTORY;
 }

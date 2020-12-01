@@ -1,17 +1,17 @@
 package com.aionemu.gameserver.instance;
 
-import java.io.File;
 import java.util.HashMap;
 import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
-import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
 import com.aionemu.gameserver.GameServerError;
+import com.aionemu.gameserver.configs.main.InstanceConfig;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -38,7 +38,7 @@ public class InstanceEngine implements GameEngine {
 		scriptManager.setGlobalClassListener(acl);
 
 		try {
-			scriptManager.load(new File("./data/scripts/system/instancehandlers.xml"));
+			scriptManager.load(InstanceConfig.HANDLER_DIRECTORY);
 			log.info("Loaded " + instanceHandlers.size() + " instance handlers.");
 		} catch (Exception e) {
 			throw new GameServerError("Can't initialize instance handlers.", e);
@@ -67,9 +67,6 @@ public class InstanceEngine implements GameEngine {
 		return instanceHandler != null ? instanceHandler : new GeneralInstanceHandler();
 	}
 
-	/**
-	 * @param handler
-	 */
 	final void addInstanceHandlerClass(Class<? extends InstanceHandler> handler) {
 		InstanceID idAnnotation = handler.getAnnotation(InstanceID.class);
 		if (idAnnotation != null) {
@@ -77,14 +74,11 @@ public class InstanceEngine implements GameEngine {
 		}
 	}
 
-	/**
-	 * @param instance
-	 */
 	public void onInstanceCreate(WorldMapInstance instance) {
 		instance.getInstanceHandler().onInstanceCreate(instance);
 	}
 
-	public static final InstanceEngine getInstance() {
+	public static InstanceEngine getInstance() {
 		return SingletonHolder.instance;
 	}
 

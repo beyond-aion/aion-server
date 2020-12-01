@@ -7,7 +7,7 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.InstanceConfig;
 import com.aionemu.gameserver.model.DuelResult;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.SummonedObject;
@@ -57,7 +57,7 @@ public class DuelService {
 			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_NO_USER_TO_REQUEST());
 			return;
 		}
-		if (requester.isInInstance() && !CustomConfig.INSTANCE_DUEL_ENABLE) {
+		if (requester.isInInstance() && !InstanceConfig.INSTANCE_DUEL_ENABLE) {
 			PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_MSG_DUEL_CANT_IN_THIS_ZONE());
 			return;
 		}
@@ -85,7 +85,7 @@ public class DuelService {
 			}
 		}
 
-		RequestResponseHandler<Player> rrh = new RequestResponseHandler<Player>(requester) {
+		RequestResponseHandler<Player> rrh = new RequestResponseHandler<>(requester) {
 
 			@Override
 			public void denyRequest(Player requester, Player responder) {
@@ -120,7 +120,7 @@ public class DuelService {
 		if (requester.isEnemy(targetPlayer))
 			return;
 
-		RequestResponseHandler<Player> rrh = new RequestResponseHandler<Player>(targetPlayer) {
+		RequestResponseHandler<Player> rrh = new RequestResponseHandler<>(targetPlayer) {
 
 			@Override
 			public void acceptRequest(Player targetPlayer, Player responder) {
@@ -190,11 +190,11 @@ public class DuelService {
 	 * Lets the given player lose the duel, ending it
 	 */
 	public void loseDuel(Player loser) {
-		Integer opponnentId = getOpponentId(loser);
-		if (opponnentId == null) // not dueling
+		Integer opponentId = getOpponentId(loser);
+		if (opponentId == null) // not dueling
 			return;
 
-		Player winner = World.getInstance().getPlayer(opponnentId);
+		Player winner = World.getInstance().getPlayer(opponentId);
 		if (winner != null) {
 			winner.getEffectController().removeByDispelSlotType(DispelSlotType.DEBUFF); // all debuffs are removed from winner, but buffs will remain
 			winner.getController().cancelCurrentSkill(null);
@@ -212,13 +212,11 @@ public class DuelService {
 	private void cancelSlaveAttacks(Player... players) {
 		for (Player player : players) {
 			player.getKnownList().forEachObject(visibleObject -> { // cancel summoned object attacking
-				if (visibleObject instanceof SummonedObject) {
-					SummonedObject<?> summonedObject = (SummonedObject<?>) visibleObject;
+				if (visibleObject instanceof SummonedObject<?> summonedObject) {
 					Skill castingSkill = summonedObject.getCastingSkill();
 					if (castingSkill != null && player.equals(castingSkill.getFirstTarget()) && !summonedObject.isEnemy(player))
 						summonedObject.getController().cancelCurrentSkill(null);
-				} else if (visibleObject instanceof Summon) { // cancel summon attacking
-					Summon summon = (Summon) visibleObject;
+				} else if (visibleObject instanceof Summon summon) { // cancel summon attacking
 					if (summon.getMode() == SummonMode.ATTACK && player.equals(summon.getTarget()) && !summon.isEnemy(player))
 						SummonsService.doMode(SummonMode.GUARD, summon);
 				}

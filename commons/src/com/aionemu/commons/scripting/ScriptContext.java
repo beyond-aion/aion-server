@@ -1,8 +1,5 @@
 package com.aionemu.commons.scripting;
 
-import java.io.File;
-import java.util.Collection;
-
 import com.aionemu.commons.scripting.classlistener.ClassListener;
 
 /**
@@ -28,13 +25,6 @@ public interface ScriptContext {
 	void reload();
 
 	/**
-	 * Returns the root directory for script engine. Only one script engine per root directory is allowed.
-	 * 
-	 * @return root directory for script engine
-	 */
-	String getDirPattern();
-
-	/**
 	 * Returns compilation result of this script context
 	 * 
 	 * @return compilation result
@@ -47,45 +37,6 @@ public interface ScriptContext {
 	 * @return true if context is initialized
 	 */
 	boolean isInitialized();
-
-	/**
-	 * Sets files that represents jar files, they will be used as libraries
-	 * 
-	 * @param files
-	 *          that points to jar file, will be used as libraries
-	 */
-	void setLibraries(Iterable<File> files);
-
-	/**
-	 * Returns list of files that are used as libraries for this script context
-	 * 
-	 * @return list of libraries
-	 */
-	Iterable<File> getLibraries();
-
-	/**
-	 * Returns parent script context of this context. Returns null if none.
-	 * 
-	 * @return parent Script context of this context or null
-	 */
-	ScriptContext getParentScriptContext();
-
-	/**
-	 * Returns list of child contexts or null if no contextes present
-	 * 
-	 * @return list of child contexts or null
-	 */
-	Collection<ScriptContext> getChildScriptContexts();
-
-	/**
-	 * Adds child contexts to this context. If this context is initialized - chiled context will be initialized immideatly. In other case child context
-	 * will be just added and initialized when {@link #init()} would be called. Duplicated child contexts are not allowed, in such case child will be
-	 * ignored
-	 * 
-	 * @param context
-	 *          child context
-	 */
-	void addChildScriptContext(ScriptContext context);
 
 	/**
 	 * Sets the class listener for this script context.

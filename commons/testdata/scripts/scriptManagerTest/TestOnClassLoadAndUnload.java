@@ -1,6 +1,6 @@
 import com.aionemu.commons.scripting.metadata.OnClassLoad;
 import com.aionemu.commons.scripting.metadata.OnClassUnload;
-import com.aionemu.commons.scripting.scriptmanager.ScriptManagerTest;
+import com.aionemu.commons.scripting.ScriptManagerTest;
 
 public class TestOnClassLoadAndUnload {
 

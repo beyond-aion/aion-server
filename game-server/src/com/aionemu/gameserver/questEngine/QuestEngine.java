@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.questEngine;
 
-import java.io.File;
 import java.util.*;
 
 import org.apache.commons.lang3.StringUtils;
@@ -8,10 +7,10 @@ import org.quartz.JobDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
-import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.main.GSConfig;
@@ -117,7 +116,7 @@ public class QuestEngine implements GameEngine {
 		scriptManager.setGlobalClassListener(acl);
 
 		try {
-			scriptManager.load(new File("./data/scripts/system/quest_handlers.xml"));
+			scriptManager.load(GSConfig.QUEST_HANDLER_DIRECTORY);
 			for (XMLQuest xmlQuest : DataManager.XML_QUESTS.getAllQuests())
 				xmlQuest.register(this);
 			log.info("Loaded " + questHandlers.size() + " quest handlers.");

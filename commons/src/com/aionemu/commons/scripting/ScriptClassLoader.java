@@ -1,20 +1,15 @@
 package com.aionemu.commons.scripting;
 
-import java.io.File;
-import java.io.IOException;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.net.URLClassLoader;
 import java.net.URLStreamHandlerFactory;
-import java.util.Collections;
-import java.util.HashSet;
 import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.scripting.url.VirtualClassURLStreamHandler;
-import com.aionemu.commons.utils.ClassUtils;
 
 /**
  * Abstract class loader that should be extended by child classloaders. If needed, this class should wrap another classloader.
@@ -32,16 +27,6 @@ public abstract class ScriptClassLoader extends URLClassLoader {
 	 * URL Stream handler to allow valid url generation by {@link #getResource(String)}
 	 */
 	private final VirtualClassURLStreamHandler urlStreamHandler = new VirtualClassURLStreamHandler(this);
-
-	/**
-	 * Classes that were loaded from libraries. They are no parsed for any annotations, but they are needed by JavaCompiler to perform valid compilation
-	 */
-	private Set<String> libraryClassNames = new HashSet<>();
-
-	/**
-	 * List of jar files that were scanned by this classloader for classes
-	 */
-	private Set<File> loadedLibraries = new HashSet<>();
 
 	/**
 	 * Just for compatibility with {@link URLClassLoader}
@@ -77,22 +62,6 @@ public abstract class ScriptClassLoader extends URLClassLoader {
 	 */
 	public ScriptClassLoader(URL[] urls, ClassLoader parent, URLStreamHandlerFactory factory) {
 		super(urls, parent, factory);
-	}
-
-	/**
-	 * Adds library to this classloader, it shuould be jar file
-	 *
-	 * @param file
-	 *          jar file
-	 * @throws IOException
-	 *           if can't add library
-	 */
-	public void addJarFile(File file) throws IOException {
-		if (!loadedLibraries.contains(file)) {
-			Set<String> jarFileClasses = ClassUtils.getClassNamesFromJarFile(file);
-			libraryClassNames.addAll(jarFileClasses);
-			loadedLibraries.add(file);
-		}
 	}
 
 	@Override
@@ -136,10 +105,6 @@ public abstract class ScriptClassLoader extends URLClassLoader {
 			setDefinedClass(name, c);
 		}
 		return c;
-	}
-
-	protected Set<String> getLibraryClassNames() {
-		return Collections.unmodifiableSet(libraryClassNames);
 	}
 
 	/**

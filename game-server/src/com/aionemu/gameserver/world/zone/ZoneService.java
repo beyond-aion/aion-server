@@ -1,17 +1,17 @@
 package com.aionemu.gameserver.world.zone;
 
-import java.io.File;
 import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
 import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
-import com.aionemu.commons.scripting.scriptmanager.ScriptManager;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.ZoneData;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
@@ -57,7 +57,7 @@ public final class ZoneService implements GameEngine {
 		scriptManager.setGlobalClassListener(acl);
 
 		try {
-			scriptManager.load(new File("./data/scripts/system/zonehandlers.xml"));
+			scriptManager.load(WorldConfig.ZONE_HANDLER_DIRECTORY);
 			log.info("Loaded " + zoneHandlers.size() + " zone handlers.");
 		} catch (Exception e) {
 			throw new GameServerError("Can't initialize instance handlers.", e);

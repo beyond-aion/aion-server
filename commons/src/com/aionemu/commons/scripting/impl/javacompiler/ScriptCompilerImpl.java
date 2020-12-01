@@ -1,7 +1,6 @@
 package com.aionemu.commons.scripting.impl.javacompiler;
 
 import java.io.File;
-import java.io.IOException;
 import java.lang.management.ManagementFactory;
 import java.lang.management.RuntimeMXBean;
 import java.util.ArrayList;
@@ -48,11 +47,6 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	protected final JavaCompiler javaCompiler;
 
 	/**
-	 * List of jar files
-	 */
-	protected Iterable<File> libraries;
-
-	/**
 	 * List of class files
 	 */
 	protected Map<String, File> classFiles;
@@ -83,17 +77,6 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 	@Override
 	public void setParentClassLoader(ScriptClassLoader classLoader) {
 		this.parentClassLoader = classLoader;
-	}
-
-	/**
-	 * Sets jar files that should be used for this compiler as libraries
-	 * 
-	 * @param files
-	 *          list of jar files
-	 */
-	@Override
-	public void setLibraries(Iterable<File> files) {
-		libraries = files;
 	}
 
 	@Override
@@ -181,13 +164,6 @@ public class ScriptCompilerImpl implements ScriptCompiler {
 		ClassFileManager manager = new ClassFileManager(javaCompiler, listener);
 		manager.setParentClassLoader(parentClassLoader);
 
-		if (libraries != null) {
-			try {
-				manager.addLibraries(libraries);
-			} catch (IOException e) {
-				log.error("Can't set libraries for compiler.", e);
-			}
-		}
 		if (classFiles != null)
 			classFiles.forEach(manager::addClass);
 

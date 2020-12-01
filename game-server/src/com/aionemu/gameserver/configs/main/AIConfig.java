@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs.main;
 
+import java.io.File;
+
 import com.aionemu.commons.configuration.Property;
 
 /**
@@ -42,4 +44,10 @@ public class AIConfig {
 	 */
 	@Property(key = "gameserver.npcshouts.enable", defaultValue = "false")
 	public static boolean SHOUTS_ENABLE;
+
+	/**
+	 * Location of AI *.java handlers
+	 */
+	@Property(key = "gameserver.ai.handler_directory", defaultValue = "./data/scripts/system/handlers/ai")
+	public static File HANDLER_DIRECTORY;
 }
