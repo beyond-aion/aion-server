@@ -17,6 +17,6 @@ public class CommandsConfig {
 	/**
 	 * Location of chat command *.java handlers
 	 */
-	@Property(key = "gameserver.commands.handler_directories", defaultValue = "./data/scripts/system/handlers/admincommands, ./data/scripts/system/handlers/playercommands, ./data/scripts/system/handlers/consolecommands")
+	@Property(key = "gameserver.commands.handler_directories", defaultValue = "./data/handlers/admincommands, ./data/handlers/playercommands, ./data/handlers/consolecommands")
 	public static File[] HANDLER_DIRECTORIES;
 }

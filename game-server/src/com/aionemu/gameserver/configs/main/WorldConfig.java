@@ -27,6 +27,6 @@ public class WorldConfig {
 	/**
 	 * Location of zone *.java handlers
 	 */
-	@Property(key = "gameserver.world.zone_handler_directory", defaultValue = "./data/scripts/system/handlers/zone")
+	@Property(key = "gameserver.world.zone_handler_directory", defaultValue = "./data/handlers/zone")
 	public static File ZONE_HANDLER_DIRECTORY;
 }

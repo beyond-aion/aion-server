@@ -25,6 +25,6 @@ public class InstanceConfig {
 	/**
 	 * Location of instance *.java handlers
 	 */
-	@Property(key = "gameserver.instance.handler_directory", defaultValue = "./data/scripts/system/handlers/instance")
+	@Property(key = "gameserver.instance.handler_directory", defaultValue = "./data/handlers/instance")
 	public static File HANDLER_DIRECTORY;
 }

@@ -83,6 +83,6 @@ public class GSConfig {
 	/**
 	 * Location of quest *.java handlers
 	 */
-	@Property(key = "gameserver.quest.handler_directory", defaultValue = "./data/scripts/system/handlers/quest")
+	@Property(key = "gameserver.quest.handler_directory", defaultValue = "./data/handlers/quest")
 	public static File QUEST_HANDLER_DIRECTORY;
 }

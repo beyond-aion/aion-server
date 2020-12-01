@@ -48,6 +48,6 @@ public class AIConfig {
 	/**
 	 * Location of AI *.java handlers
 	 */
-	@Property(key = "gameserver.ai.handler_directory", defaultValue = "./data/scripts/system/handlers/ai")
+	@Property(key = "gameserver.ai.handler_directory", defaultValue = "./data/handlers/ai")
 	public static File HANDLER_DIRECTORY;
 }
