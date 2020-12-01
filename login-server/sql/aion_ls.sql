@@ -52,7 +52,7 @@ CREATE TABLE `account_rewards` (
   `received` varchar(70) NOT NULL DEFAULT '0',
   `rewarded` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`uniqId`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- banned_ip
@@ -85,7 +85,7 @@ CREATE TABLE IF NOT EXISTS `banned_mac` (
   `time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP,
   `details` varchar(255) NOT NULL DEFAULT '',
   PRIMARY KEY (`uniId`)
-) ENGINE=InnoDB AUTO_INCREMENT=1 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `player_transfers`
@@ -117,7 +117,7 @@ CREATE TABLE `tasks` (
   `exec_param` text,
   `trigger_param` text NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Table structure for `banned_hdd`
