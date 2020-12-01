@@ -2,11 +2,7 @@ package com.aionemu.gameserver.services.event;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Objects;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.quartz.JobDetail;
@@ -74,11 +70,11 @@ public class EventService {
 	}
 
 	private void validateConfiguredEventNames() {
-		if (!isAllEvents(EventsConfig.ENABLED_EVENTS)) {
+		if (!isAllEvents(EventsConfig.DISABLED_EVENTS)) {
 			Set<String> eventNames = DataManager.EVENT_DATA.getEvents().stream().map(EventTemplate::getName).collect(Collectors.toSet());
-			EventsConfig.ENABLED_EVENTS.forEach(eventName -> {
+			EventsConfig.DISABLED_EVENTS.forEach(eventName -> {
 				if (!eventNames.contains(eventName))
-					log.warn("Unknown event \"" + eventName + "\" configured");
+					log.warn("Unknown event \"" + eventName + "\" configured as disabled");
 			});
 		}
 	}
@@ -132,22 +128,18 @@ public class EventService {
 		activeEvents.forEach(event -> event.onPvpKill(killer, victim));
 	}
 
-	private boolean isAllEvents(List<String> list) {
-		return list.size() == 1 && "*".equals(list.get(0));
+	private boolean isAllEvents(Set<String> list) {
+		return list.size() == 1 && "*".equals(list.iterator().next());
 	}
 
 	private Set<Event> collectActiveEvents() {
-		List<EventTemplate> enabledEvents = isAllEvents(EventsConfig.ENABLED_EVENTS) ? DataManager.EVENT_DATA.getEvents()
-			: DataManager.EVENT_DATA.getEvents(EventsConfig.ENABLED_EVENTS);
-		if (enabledEvents.isEmpty())
+		if (isAllEvents(EventsConfig.DISABLED_EVENTS))
 			return Collections.emptySet();
-		Set<Event> newActiveEvents = new HashSet<>();
 		LocalDateTime now = ServerTime.now().toLocalDateTime();
-		for (EventTemplate et : enabledEvents) {
-			if (et.isInEventPeriod(now))
-				newActiveEvents.add(findOrCreateEvent(et));
-		}
-		return newActiveEvents;
+		return DataManager.EVENT_DATA.getEvents().stream()
+				.filter(et -> !EventsConfig.DISABLED_EVENTS.contains(et.getName()) && et.isInEventPeriod(now))
+				.map(this::findOrCreateEvent)
+				.collect(Collectors.toSet());
 	}
 
 	private Event findOrCreateEvent(EventTemplate et) {

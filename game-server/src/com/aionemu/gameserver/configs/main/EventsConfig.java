@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.configs.main;
 
-import java.util.List;
 import java.util.Set;
 
 import com.aionemu.commons.configuration.Property;
@@ -10,8 +9,8 @@ import com.aionemu.commons.configuration.Property;
  */
 public class EventsConfig {
 
-	@Property(key = "gameserver.event.service.enabled_events")
-	public static List<String> ENABLED_EVENTS;
+	@Property(key = "gameserver.event.service.disabled_events")
+	public static Set<String> DISABLED_EVENTS;
 
 	/**
 	 * Event Upgrade Arcade
