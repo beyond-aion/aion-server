@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.commons.database.dao.DAOManager;
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dao.VeteranRewardDAO;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,6 +20,10 @@ import com.aionemu.gameserver.utils.time.ServerTime;
 public final class VeteranRewardService {
 
 	private static final List<List<RewardItem>> rewards = new ArrayList<>();
+
+	private static final List<RewardItem> randomRewards = new ArrayList<>();
+
+	private static final int RANDOM_ITEMS_PER_MONTH = 4;
 
 	static {
 		for (int i = 0; i < 60; i++)
@@ -404,6 +409,37 @@ public final class VeteranRewardService {
 		rewards.get(59).add(new RewardItem(162000107, 50)); // Saam King's Herb
 		rewards.get(59).add(new RewardItem(186000399, 125)); // Honorable Conqueror's Mark
 		rewards.get(59).add(new RewardItem(166150027, 2)); // [Stamp] Greater Felicitous Socketing (Mythic)
+
+		// random rewards for month 61+
+		randomRewards.add(new RewardItem(161001001, 5)); // Revival Stone
+		randomRewards.add(new RewardItem(162000137, 15)); // Sublime Life Serum
+		randomRewards.add(new RewardItem(162000139, 15)); // Sublime Mana Serum
+		randomRewards.add(new RewardItem(162000141, 15)); // Sublime Wind Serum
+		randomRewards.add(new RewardItem(164002167, 15)); // Drana Coffee
+		randomRewards.add(new RewardItem(188054198, 3)); // Greater Scroll Bundle
+		randomRewards.add(new RewardItem(186000051, 5)); // Major Ancient Crown
+		randomRewards.add(new RewardItem(186000247, 5)); // Major Danuar Relic
+		randomRewards.add(new RewardItem(188053666, 2)); // [Event] Ceramium Medal Box
+		randomRewards.add(new RewardItem(188053667, 1)); // [Event] Mithril Medal Box
+		randomRewards.add(new RewardItem(186000243, 10)); // Fragmented Ceramium
+		randomRewards.add(new RewardItem(186000236, 75)); // Blood Mark
+		randomRewards.add(new RewardItem(188053610, 3)); // [Event] Level 70 Composite Manastone Bundle
+		randomRewards.add(new RewardItem(169620094, 1)); // Crafting Boost Charm III - 100%
+		randomRewards.add(new RewardItem(169620082, 1)); // Gathering Boost Charm II - 100%
+		randomRewards.add(new RewardItem(169620072, 1)); // AP Boost Charm II - 30%
+		randomRewards.add(new RewardItem(166020003, 5)); // [Event] Omega Enchantment Stone
+		randomRewards.add(new RewardItem(166030007, 5)); // [Event] Tempering Solution
+		randomRewards.add(new RewardItem(166500005, 5)); // [Event] Amplification Stone
+		randomRewards.add(new RewardItem(188053526, 5)); // [Event] Aion's Steel Form Candy Box
+		randomRewards.add(new RewardItem(188052719, 5)); // [Event] Dye Bundle
+		randomRewards.add(new RewardItem(186000238, 150)); // Conqueror's Herb
+		randomRewards.add(new RewardItem(186000399, 125)); // Honorable Conqueror's Mark
+		randomRewards.add(new RewardItem(186000409, 50)); // Daeva's Respite Coin
+		randomRewards.add(new RewardItem(188052761, 3)); // [Event] Bonus Entry Scroll Bundle
+		randomRewards.add(new RewardItem(166150018, 3)); // Assured Greater Felicitous Socketing (Eternal)
+		randomRewards.add(new RewardItem(166150019, 3)); // Assured Greater Felicitous Socketing (Mythic)
+		randomRewards.add(new RewardItem(166100020, 250)); // [Stamp] High Grade Enchanting Supplement (Eternal)
+		randomRewards.add(new RewardItem(166100023, 250)); // [Stamp] High Grade Enchanting Supplement (Mythic)
 	}
 
 	/**
@@ -426,18 +462,24 @@ public final class VeteranRewardService {
 			return;
 
 		ZonedDateTime accCreationTime = ServerTime.ofEpochMilli(player.getAccount().getCreationDate());
-		long months = ChronoUnit.MONTHS.between(accCreationTime, now);
-		if (months < 1) // return if account is younger than a month
+		int maxMonthsToReceive = (int) ChronoUnit.MONTHS.between(accCreationTime, now);
+		if (maxMonthsToReceive < 1) // return if account is younger than a month
 			return;
 
-		int monthsToReceive = (int) Math.min(months, rewards.size());
 		int receivedMonths = DAOManager.getDAO(VeteranRewardDAO.class).loadReceivedMonths(player); // -1 means error
-		if (receivedMonths < 0 || receivedMonths >= monthsToReceive)
+		if (receivedMonths < 0 || receivedMonths >= maxMonthsToReceive)
 			return;
 
-		if (DAOManager.getDAO(VeteranRewardDAO.class).storeReceivedMonths(player, monthsToReceive))
-			for (int i = receivedMonths; i < monthsToReceive; i++) {
-				List<RewardItem> items = rewards.get(i);
+		if (DAOManager.getDAO(VeteranRewardDAO.class).storeReceivedMonths(player, maxMonthsToReceive))
+			for (int i = receivedMonths; i < maxMonthsToReceive; i++) {
+				List<RewardItem> items;
+				if (i < 60) {
+					items = rewards.get(i);
+				} else {
+					items = new ArrayList<>(randomRewards);
+					while (items.size() > RANDOM_ITEMS_PER_MONTH)
+						items.remove(Rnd.get(items.size()));
+				}
 				if (player.getMailbox().getLetters().size() >= 100) { // abort on mailbox overflow and save the correct month
 					DAOManager.getDAO(VeteranRewardDAO.class).storeReceivedMonths(player, i);
 					return;
