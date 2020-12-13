@@ -160,8 +160,8 @@ public class ItemEquipmentListener {
 				// add 10% of Magic Boost and Attack
 				WeaponStats weaponStats = fusionedItemTemplate.getWeaponStats();
 				if (weaponStats != null) {
-					int boostMagicalSkill = Math.round(0.1f * weaponStats.getBoostMagicalSkill());
-					int attack = Math.round(0.1f * weaponStats.getMeanDamage());
+					int boostMagicalSkill = (int) (0.1f * weaponStats.getBoostMagicalSkill());
+					int attack = (int) (0.1f * weaponStats.getMeanDamage());
 					if (weaponType == ItemGroup.ORB || weaponType == ItemGroup.STAFF || weaponType == ItemGroup.SPELLBOOK || weaponType == ItemGroup.GUN
 						|| weaponType == ItemGroup.CANNON || weaponType == ItemGroup.HARP || weaponType == ItemGroup.KEYBLADE) {
 						modifiersToApply.add(new StatAddFunction(StatEnum.BOOST_MAGICAL_SKILL, boostMagicalSkill, false));

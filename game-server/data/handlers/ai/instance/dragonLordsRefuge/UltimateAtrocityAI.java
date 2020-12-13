@@ -32,7 +32,7 @@ public class UltimateAtrocityAI extends GeneralNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		return damage / 4;
 	}
 

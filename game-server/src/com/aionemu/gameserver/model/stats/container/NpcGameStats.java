@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author xavier, Estrayl
@@ -59,8 +60,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	@Override
-	public Stat2 getStat(StatEnum statEnum, Stat2 stat) {
-		Stat2 s = super.getStat(statEnum, stat);
+	public Stat2 getStat(StatEnum statEnum, Stat2 stat, CalculationType... calculationTypes) {
+		Stat2 s = super.getStat(statEnum, stat, calculationTypes);
 		owner.getAi().modifyOwnerStat(s);
 		return s;
 	}

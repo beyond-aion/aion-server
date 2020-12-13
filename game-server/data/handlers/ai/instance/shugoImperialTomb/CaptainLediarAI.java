@@ -70,7 +70,7 @@ public class CaptainLediarAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		return 1;
 	}
 

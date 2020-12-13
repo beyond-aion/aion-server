@@ -117,18 +117,18 @@ public class AdjutantGalamatAI extends SummonerAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
-		return (int) (damage * damageMultiplicator);
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
+		return damage * damageMultiplicator;
 	}
 
 	@Override
-	public int modifyDamage(Creature attacker, int damage, Effect effect) {
+	public float modifyDamage(Creature attacker, float damage, Effect effect) {
 		if (shieldPhase.get()) {
 			if (getEffectController().findBySkillId(21799) == null) {
 				getOwner().getQueuedSkills().clear();
 				resetVariablesAndCancelTasks();
 			} else {
-				damageInShieldPhase.addAndGet(damage);
+				damageInShieldPhase.addAndGet((int) damage);
 			}
 		}
 		return damage;

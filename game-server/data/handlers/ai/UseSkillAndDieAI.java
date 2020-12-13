@@ -54,7 +54,7 @@ public class UseSkillAndDieAI extends NpcAI {
 	}
 
 	@Override
-	public int modifyDamage(Creature attacker, int damage, Effect effect) {
+	public float modifyDamage(Creature attacker, float damage, Effect effect) {
 		return canDie ? damage : 0;
 	}
 

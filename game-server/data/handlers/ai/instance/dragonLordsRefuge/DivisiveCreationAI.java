@@ -46,7 +46,7 @@ public class DivisiveCreationAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		if (effect != null) {
 				switch (effect.getSkillId()) {
 						case 20986:

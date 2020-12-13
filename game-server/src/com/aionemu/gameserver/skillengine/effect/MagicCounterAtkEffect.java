@@ -43,7 +43,7 @@ public class MagicCounterAtkEffect extends EffectTemplate {
 					return;
 				if (skill.getSkillTemplate().getType() == SkillType.MAGICAL) {
 					int damage = Math.min(maxdmg, (int) (effected.getGameStats().getMaxHp().getBase() / 100f * value));
-					effected.getController().onAttack(effect, TYPE.MAGICCOUNTERATK, damage, false, LOG.MAGICCOUNTERATK, hopType);
+					effected.getController().onAttack(effect, TYPE.MAGICCOUNTERATK, damage, false, LOG.MAGICCOUNTERATK, hopType, false);
 				}
 			}
 		};

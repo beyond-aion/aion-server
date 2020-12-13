@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.stats.container;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author ATracer
@@ -13,8 +14,8 @@ public class SummonedObjectGameStats extends NpcGameStats {
 	}
 
 	@Override
-	public Stat2 getStat(StatEnum statEnum, int base) {
-		Stat2 stat = super.getStat(statEnum, base);
+	public Stat2 getStat(StatEnum statEnum, float base, CalculationType... calculationTypes) {
+		Stat2 stat = super.getStat(statEnum, base, calculationTypes);
 		if (owner.getMaster() == null)
 			return stat;
 		switch (statEnum) {

@@ -72,8 +72,8 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
-		return (int) (damage * multiplier);
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
+		return damage * multiplier;
 	}
 
 	private synchronized void checkPercentage(int hpPercentage) {

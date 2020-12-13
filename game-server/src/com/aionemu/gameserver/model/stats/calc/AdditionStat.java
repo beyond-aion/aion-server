@@ -8,21 +8,21 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
  */
 public class AdditionStat extends Stat2 {
 
-	public AdditionStat(StatEnum stat, int base, Creature owner) {
+	public AdditionStat(StatEnum stat, float base, Creature owner) {
 		super(stat, base, owner);
 	}
 
-	public AdditionStat(StatEnum stat, int base, Creature owner, float bonusRate) {
+	public AdditionStat(StatEnum stat, float base, Creature owner, float bonusRate) {
 		super(stat, base, owner, bonusRate);
 	}
 
 	@Override
-	public final void addToBase(int base) {
+	public final void addToBase(float base) {
 		this.base += base;
 	}
 
 	@Override
-	public final void addToBonus(int bonus) {
+	public final void addToBonus(float bonus) {
 		this.bonus += bonusRate * bonus;
 	}
 

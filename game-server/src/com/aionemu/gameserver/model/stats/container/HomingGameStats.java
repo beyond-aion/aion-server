@@ -5,6 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.Homing;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author Cheatkiller
@@ -16,8 +17,8 @@ public class HomingGameStats extends SummonedObjectGameStats {
 	}
 
 	@Override
-	public Stat2 getStat(StatEnum statEnum, int base) {
-		Stat2 stat = super.getStat(statEnum, base);
+	public Stat2 getStat(StatEnum statEnum, float base, CalculationType... calculationTypes) {
+		Stat2 stat = super.getStat(statEnum, base, calculationTypes);
 		if (owner.getMaster() == null)
 			return stat;
 		switch (statEnum) {
@@ -30,7 +31,7 @@ public class HomingGameStats extends SummonedObjectGameStats {
 	}
 
 	@Override
-	public Stat2 getMainHandMAttack() {
+	public Stat2 getMainHandMAttack(CalculationType... calculationTypes) {
 		Homing homing = (Homing) owner;
 		int power = getStatsTemplate().getMagicalAttack();
 		SkillTemplate skill = DataManager.SKILL_DATA.getSkillTemplate(homing.getSkillId());
@@ -75,6 +76,6 @@ public class HomingGameStats extends SummonedObjectGameStats {
 				break;
 		}
 
-		return getStat(StatEnum.MAGICAL_ATTACK, power);
+		return getStat(StatEnum.MAGICAL_ATTACK, power, calculationTypes);
 	}
 }

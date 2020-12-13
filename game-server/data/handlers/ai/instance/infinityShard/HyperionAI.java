@@ -73,12 +73,12 @@ public class HyperionAI extends AggressiveNpcAI {
 
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		if (effect == null) {
 			if (dist > 10) {
-				return (int) (damage * 4.5);
+				return damage * 4.5f;
 			} else if (dist > 4) {
-				return (int) (damage * 1.5);
+				return damage * 1.5f;
 			}
 		}
 		return damage;

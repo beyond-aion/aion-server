@@ -9,7 +9,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
-import com.aionemu.gameserver.model.stats.calc.functions.StatDualWeaponMasteryFunction;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -18,28 +17,22 @@ public class WeaponDualEffect extends BufEffect {
 
 	@Override
 	public void startEffect(Effect effect) {
-		if (change == null)
-			return;
-
-		if (effect.getEffected() instanceof Player)
-			((Player) effect.getEffected()).setDualEffectValue(value);
-
-		List<IStatFunction> modifiers = getModifiers(effect);
-		List<IStatFunction> masteryModifiers = new ArrayList<>();
-		for (IStatFunction modifier : modifiers) {
-			masteryModifiers.add(new StatDualWeaponMasteryFunction(effect, modifier));
-		}
-		if (masteryModifiers.size() > 0) {
-			effect.getEffected().getGameStats().addEffect(effect, masteryModifiers);
+		if (effect.getEffected() instanceof Player p) {
+			p.getGameStats().setSkillEfficiency(skillEfficiency / 100f);
+			p.getGameStats().setMaxDamageChance(maxDamageChance + effect.getSkillLevel() * maxDamageDelta);
+			p.getGameStats().setMinDamageRatio((value + effect.getSkillLevel() * delta) / 100f);
+			p.getGameStats().updateStatsVisually();
 		}
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		if (effect.getEffected() instanceof Player)
-			((Player) effect.getEffected()).setDualEffectValue(0);
-
+		if (effect.getEffected() instanceof Player p) {
+			p.getGameStats().setSkillEfficiency(0);
+			p.getGameStats().setMaxDamageChance(0);
+			p.getGameStats().setMinDamageRatio(0);
+			p.getGameStats().updateStatsVisually();
+		}
 		super.endEffect(effect);
 	}
-
 }

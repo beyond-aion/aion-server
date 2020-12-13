@@ -24,8 +24,8 @@ public class BrigadeGeneralShebaAI extends AggressiveNpcAI {
 	private boolean spawnCenter = true;
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
-		return (int) (damage * multiplier);
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
+		return damage * multiplier;
 	}
 
 	@Override

@@ -4,51 +4,45 @@ package com.aionemu.gameserver.controllers.attack;
  * @author ATracer
  */
 public enum AttackStatus {
-	DODGE(0, 0, true, false),
-	OFFHAND_DODGE(1, 1, true, false),
-	PARRY(2, 2, true, false),
-	OFFHAND_PARRY(3, 3, true, false),
-	BLOCK(4, 4, true, false),
-	OFFHAND_BLOCK(5, 5, true, false),
-	RESIST(6, 0, true, false),
-	OFFHAND_RESIST(7, 7, true, false),
+	DODGE(0, true, false),
+	OFFHAND_DODGE(1, true, false),
+	PARRY(2, true, false),
+	OFFHAND_PARRY(3, true, false),
+	BLOCK(4, true, false),
+	OFFHAND_BLOCK(5, true, false),
+	RESIST(6, true, false),
+	OFFHAND_RESIST(7, true, false),
 	BUF(8), // ??
 	OFFHAND_BUF(9),
 	NORMALHIT(10),
 	OFFHAND_NORMALHIT(11),
-	CRITICAL_DODGE(-64, -64, true, true),
-	CRITICAL_PARRY(-62, -62, true, true),
-	CRITICAL_BLOCK(-60, -60, true, true),
-	CRITICAL_RESIST(-58, -58, true, true),
-	CRITICAL(-54, -54, false, true),
-	OFFHAND_CRITICAL_DODGE(-474, -471, true, true),
-	OFFHAND_CRITICAL_PARRY(-454, -454, true, true),
-	OFFHAND_CRITICAL_BLOCK(-434, -434, true, true),
-	OFFHAND_CRITICAL_RESIST(-41, -41, true, true),
-	OFFHAND_CRITICAL(-37, -37, false, true);
+	CRITICAL_DODGE(-64, true, true),
+	CRITICAL_PARRY(-62, true, true),
+	CRITICAL_BLOCK(-60, true, true),
+	CRITICAL_RESIST(-58, true, true),
+	CRITICAL(-54, false, true),
+	OFFHAND_CRITICAL_DODGE(-47, true, true),
+	OFFHAND_CRITICAL_PARRY(-45, true, true),
+	OFFHAND_CRITICAL_BLOCK(-43, true, true),
+	OFFHAND_CRITICAL_RESIST(-41, true, true),
+	OFFHAND_CRITICAL(-37, false, true);
 
-	private final int type;
-	private final int resultType;
+	private final int id;
 	private final boolean counterSkill;
 	private final boolean isCritical;
 
-	private AttackStatus(int type) {
-		this(type, type, false, false);
+	AttackStatus(int id) {
+		this(id, false, false);
 	}
 
-	private AttackStatus(int type, int resultType, boolean counterSkill, boolean isCritical) {
-		this.type = type;
-		this.resultType = resultType;
+	AttackStatus(int id, boolean counterSkill, boolean isCritical) {
+		this.id = id;
 		this.counterSkill = counterSkill;
 		this.isCritical = isCritical;
 	}
 
 	public final int getId() {
-		return type;
-	}
-
-	public final int getResultId() {
-		return resultType;
+		return id;
 	}
 
 	public final boolean isCounterSkill() {

@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 public class EnchantEffect implements StatOwner {
 
 	private List<IStatFunction> functions = new ArrayList<>();
+	private ItemSlot itemSlot;
 
 	public EnchantEffect(Item item, Player player, List<EnchantStat> enchantStats) {
 		Long itemSlot = item.getEquipmentSlot();
@@ -24,12 +25,11 @@ public class EnchantEffect implements StatOwner {
 			switch (enchantStat.getStat()) {
 				case PHYSICAL_ATTACK:
 				case MAGICAL_ATTACK:
-					StatEnum stat = null;
 					if (itemSlot == ItemSlot.MAIN_HAND.getSlotIdMask() || itemSlot == ItemSlot.MAIN_OR_SUB.getSlotIdMask())
-						stat = StatEnum.MAIN_HAND_POWER;
+						this.itemSlot = ItemSlot.MAIN_HAND;
 					else
-						stat = StatEnum.OFF_HAND_POWER;
-					functions.add(new StatAddFunction(stat, enchantStat.getValue(), false));
+						this.itemSlot = ItemSlot.SUB_HAND;
+					functions.add(new StatAddFunction(enchantStat.getStat(), enchantStat.getValue(), false));
 					break;
 				case BOOST_MAGICAL_SKILL:
 					if (itemSlot == ItemSlot.MAIN_HAND.getSlotIdMask() || itemSlot == ItemSlot.MAIN_OR_SUB.getSlotIdMask())
@@ -46,6 +46,10 @@ public class EnchantEffect implements StatOwner {
 	public void endEffect(Player player) {
 		functions.clear();
 		player.getGameStats().endEffect(this);
+	}
+
+	public ItemSlot getItemSlot() {
+		return itemSlot;
 	}
 
 }

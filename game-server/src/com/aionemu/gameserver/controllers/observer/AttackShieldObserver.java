@@ -80,7 +80,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 						continue;
 					break;
 				default:
-					if (attackResult.getDamageType() != null && hitType != attackResult.getDamageType())
+					if (attackResult.getHitType() != null && hitType != attackResult.getHitType())
 						continue;
 			}
 
@@ -133,7 +133,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					}
 					attackResult.setShieldType(shieldType.getId());
 					if (attacker instanceof Npc) {
-						reflectedHit = attacker.getAi().modifyDamage(attacker, reflectedHit, effect);
+						reflectedHit = (int) attacker.getAi().modifyDamage(attacker, reflectedHit, effect);
 					}
 					attackResult.setReflectedDamage(reflectedHit);
 					attackResult.setReflectedSkillId(effect.getSkillId());
@@ -143,7 +143,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 						effect.endEffect(); // one skill reflection ends the shield effect
 						return;
 					} else { // apply reflect damage
-						attacker.getController().onAttack(effect.getEffected(), 0, TYPE.REGULAR, reflectedHit, false, LOG.REGULAR, null, false, null);
+						attacker.getController().onAttack(effect.getEffected(), 0, TYPE.REGULAR, reflectedHit, false, LOG.REGULAR, null, false, null, false);
 					}
 				}
 				break;
@@ -177,7 +177,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 					attackResult.setProtectedDamage(effectorDamage);
 					attackResult.setProtectorId(effect.getEffectorId());
 					effect.getEffector().getController().onAttack(attacker, effect.getSkillId(), TYPE.PROTECTDMG, effectorDamage, false, LOG.REGULAR,
-						attackResult.getAttackStatus(), attackerEffect != null ? attackerEffect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED : true, null);
+						attackResult.getAttackStatus(), attackerEffect != null ? attackerEffect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED : true, null, false);
 					// dont launch subeffect if damage is fully absorbed
 					if (!isPunchShield(attackerEffect))
 						attackResult.setLaunchSubEffect(false);

@@ -319,6 +319,9 @@
 		<xs:attribute name="onfly" type="xs:boolean" default="false" />
 		<xs:attribute name="delta" type="xs:int" />
 		<xs:attribute name="value" type="xs:int" />
+		<xs:attribute name="skill_efficiency" type="xs:int" />
+		<xs:attribute name="max_damage_chance" type="xs:int" />
+		<xs:attribute name="max_damage_delta" type="xs:int" />
 	</xs:complexType>
 	<xs:complexType name="Property" abstract="true" />
 	<xs:complexType name="ActionModifier" abstract="true">

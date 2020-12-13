@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.model.stats.container;
 
+import org.apache.commons.lang3.ArrayUtils;
+
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.PlayerMode;
@@ -9,11 +12,13 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.stats.calc.AdditionStat;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author xavier
@@ -22,10 +27,10 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 
 	private int cachedSpeed;
 	private int cachedAttackSpeed;
+	private int maxDamageChance;
+	private float minDamageRatio;
+	private float skillEfficiency;
 
-	/**
-	 * @param owner
-	 */
 	public PlayerGameStats(Player owner) {
 		super(owner);
 	}
@@ -82,8 +87,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			if (offWeapon != null)
 				base += offWeapon.getItemTemplate().getWeaponStats().getAttackSpeed() / 4;
 		}
-		Stat2 aSpeed = getStat(StatEnum.ATTACK_SPEED, base);
-		return aSpeed;
+		return getStat(StatEnum.ATTACK_SPEED, base);
 	}
 
 	@Override
@@ -119,12 +123,10 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 		Equipment equipment = owner.getEquipment();
 		Item mainHandWeapon = equipment.getMainHandWeapon();
 		Item offHandWeapon = equipment.getOffHandWeapon();
-		if (mainHandWeapon != null) {
-			minWeaponRange = Math.min(minWeaponRange, mainHandWeapon.getItemTemplate().getWeaponStats().getAttackRange());
-		}
-		if (offHandWeapon != null && !equipment.isShieldEquipped()) {
+		if (mainHandWeapon != null)
+			minWeaponRange = mainHandWeapon.getItemTemplate().getWeaponStats().getAttackRange();
+		if (offHandWeapon != null && !equipment.isShieldEquipped())
 			minWeaponRange = Math.min(minWeaponRange, offHandWeapon.getItemTemplate().getWeaponStats().getAttackRange());
-		}
 		return getStat(StatEnum.ATTACK_RANGE, minWeaponRange == Integer.MAX_VALUE ? base : minWeaponRange);
 	}
 
@@ -139,53 +141,87 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	}
 
 	@Override
-	public Stat2 getMainHandPAttack() {
-		int base = getStatsTemplate().getAttack();
+	public Stat2 getMainHandPAttack(CalculationType... calculationTypes) {
+		calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.MAIN_HAND);
+		float base = getStatsTemplate().getAttack();
 		Equipment equipment = owner.getEquipment();
 		Item mainHandWeapon = equipment.getMainHandWeapon();
 		if (mainHandWeapon != null) {
 			if (mainHandWeapon.getItemTemplate().getAttackType().isMagical())
 				return new AdditionStat(StatEnum.MAIN_HAND_POWER, 0, owner);
-			base = mainHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
+			if (ArrayUtils.contains(calculationTypes, CalculationType.DISPLAY)) {
+				base = mainHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
+			} else {
+				base = Rnd.get(mainHandWeapon.getItemTemplate().getWeaponStats().getMinDamage(),
+						mainHandWeapon.getItemTemplate().getWeaponStats().getMaxDamage());
+			}
+			if (ArrayUtils.contains(calculationTypes, CalculationType.APPLY_POWER_SHARD_DAMAGE)) {
+				base += getPowerShardDamage(true, ArrayUtils.contains(calculationTypes, CalculationType.REMOVE_POWER_SHARD));
+			}
 		}
-		Stat2 stat = getStat(StatEnum.PHYSICAL_ATTACK, base);
-		return getStat(StatEnum.MAIN_HAND_POWER, stat);
+		Stat2 stat = getStat(StatEnum.PHYSICAL_ATTACK, base, calculationTypes);
+		calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.MAIN_HAND);
+		return getStat(StatEnum.MAIN_HAND_POWER, stat, calculationTypes);
 	}
 
-	public Stat2 getOffHandPAttack() {
+	public Stat2 getOffHandPAttack(CalculationType... calculationTypes) {
 		Equipment equipment = owner.getEquipment();
 		Item offHandWeapon = equipment.getOffHandWeapon();
 		if (offHandWeapon != null && !offHandWeapon.equals(equipment.getMainHandWeapon()) && offHandWeapon.getItemTemplate().isWeapon()) {
-			int base = offHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
-			Stat2 stat = getStat(StatEnum.PHYSICAL_ATTACK, base);
-			stat.setBaseRate(stat.getBaseRate() * 0.98f);
-			return getStat(StatEnum.OFF_HAND_POWER, stat);
+			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.OFF_HAND);
+			float base;
+			if (ArrayUtils.contains(calculationTypes, CalculationType.DISPLAY)) {
+				base = offHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
+			} else {
+				base = Rnd.get(offHandWeapon.getItemTemplate().getWeaponStats().getMinDamage(),
+						offHandWeapon.getItemTemplate().getWeaponStats().getMaxDamage());
+			}
+			if (ArrayUtils.contains(calculationTypes, CalculationType.APPLY_POWER_SHARD_DAMAGE))
+				base += getPowerShardDamage(false, ArrayUtils.contains(calculationTypes, CalculationType.REMOVE_POWER_SHARD));
+			Stat2 stat = getStat(StatEnum.PHYSICAL_ATTACK, base, calculationTypes);
+			if (ArrayUtils.contains(calculationTypes, CalculationType.DISPLAY)) {
+				stat.setBaseRate(stat.getBaseRate() * getOffHandDamageRatio());
+				stat.setBonusRate(stat.getBonusRate() * getOffHandDamageRatio());
+			}
+			calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.OFF_HAND);
+			return getStat(StatEnum.OFF_HAND_POWER, stat, calculationTypes);
 		}
 		return new AdditionStat(StatEnum.OFF_HAND_POWER, 0, owner);
 	}
 
 	@Override
-	public Stat2 getMainHandMAttack() {
-		int base = getStatsTemplate().getMagicalAttack();
+	public Stat2 getMainHandMAttack(CalculationType... calculationTypes) {
+		calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.MAIN_HAND);
+		float base = getStatsTemplate().getMagicalAttack();
 		Equipment equipment = owner.getEquipment();
 		Item mainHandWeapon = equipment.getMainHandWeapon();
 		if (mainHandWeapon != null) {
 			if (!mainHandWeapon.getItemTemplate().getAttackType().isMagical())
 				return new AdditionStat(StatEnum.MAIN_HAND_POWER, 0, owner);
-			base += mainHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
+			base = mainHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
+			if (ArrayUtils.contains(calculationTypes, CalculationType.APPLY_POWER_SHARD_DAMAGE))
+				base += getPowerShardDamage(true, ArrayUtils.contains(calculationTypes, CalculationType.REMOVE_POWER_SHARD));
 		}
-		Stat2 stat = getStat(StatEnum.MAGICAL_ATTACK, base);
-		return getStat(StatEnum.MAIN_HAND_POWER, stat);
+		Stat2 stat = getStat(StatEnum.MAGICAL_ATTACK, base, calculationTypes);
+		calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.MAIN_HAND);
+		return getStat(StatEnum.MAIN_HAND_POWER, stat, calculationTypes);
 	}
 
-	public Stat2 getOffHandMAttack() {
+	public Stat2 getOffHandMAttack(CalculationType... calculationTypes) {
 		Equipment equipment = owner.getEquipment();
 		Item offHandWeapon = equipment.getOffHandWeapon();
 		if (offHandWeapon != null && !offHandWeapon.equals(equipment.getMainHandWeapon()) && offHandWeapon.getItemTemplate().isWeapon()) {
-			int base = offHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
-			Stat2 stat = getStat(StatEnum.MAGICAL_ATTACK, base);
-			stat.setBaseRate(stat.getBaseRate() * 0.82f);
-			return getStat(StatEnum.OFF_HAND_POWER, stat);
+			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.OFF_HAND);
+			float base = offHandWeapon.getItemTemplate().getWeaponStats().getMeanDamage();
+			if (ArrayUtils.contains(calculationTypes, CalculationType.APPLY_POWER_SHARD_DAMAGE))
+				base += getPowerShardDamage(false, ArrayUtils.contains(calculationTypes, CalculationType.REMOVE_POWER_SHARD));
+			Stat2 stat = getStat(StatEnum.MAGICAL_ATTACK, base, calculationTypes);
+			if (ArrayUtils.contains(calculationTypes, CalculationType.DISPLAY)) {
+				stat.setBaseRate(stat.getBaseRate() * getOffHandDamageRatio());
+				stat.setBonusRate(stat.getBonusRate() * getOffHandDamageRatio());
+			}
+			calculationTypes = ArrayUtils.removeElement(calculationTypes, CalculationType.OFF_HAND);
+			return getStat(StatEnum.OFF_HAND_POWER, stat, calculationTypes);
 		}
 		return new AdditionStat(StatEnum.OFF_HAND_POWER, 0, owner);
 	}
@@ -322,5 +358,63 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 
 	private int calculateBaseStatDependentAdditionalValue(Stat2 baseStat, int multiplier) {
 		return (int) ((baseStat.getCurrent() - 100) / 100f * multiplier);
+	}
+
+	private int getPowerShardDamage(boolean mainHand, boolean removePowerShards) {
+		if (owner.isInState(CreatureState.POWERSHARD)) {
+			Equipment equipment = owner.getEquipment();
+			Item weapon = mainHand ? equipment.getMainHandWeapon() : equipment.getOffHandWeapon();
+			Item firstShard = equipment.getMainHandPowerShard();
+			Item secondShard = equipment.getOffHandPowerShard();
+			if (weapon != null && weapon.getItemTemplate().getItemSubType() != ItemSubType.SHIELD) {
+				int dmg = 0;
+				if (mainHand) {
+					if (firstShard != null) {
+						dmg = firstShard.getItemTemplate().getWeaponBoost();
+						if (removePowerShards)
+							owner.getEquipment().usePowerShard(firstShard, 1);
+					}
+					if (weapon.getItemTemplate().isTwoHandWeapon() && secondShard != null) {
+						dmg += secondShard.getItemTemplate().getWeaponBoost();
+						if (removePowerShards)
+							owner.getEquipment().usePowerShard(secondShard, 1);
+					}
+				} else if (secondShard != null) {
+					dmg = secondShard.getItemTemplate().getWeaponBoost();
+					if (removePowerShards)
+						owner.getEquipment().usePowerShard(secondShard, 1);
+				}
+				return dmg;
+			}
+		}
+		return 0;
+	}
+
+	public float getSkillEfficiency() {
+		return skillEfficiency;
+	}
+
+	public int getMaxDamageChance() {
+		return maxDamageChance;
+	}
+
+	public float getMinDamageRatio() {
+		return minDamageRatio;
+	}
+
+	public void setSkillEfficiency(float skillEfficiency) {
+		this.skillEfficiency = skillEfficiency;
+	}
+
+	public void setMaxDamageChance(int maxDamageChance) {
+		this.maxDamageChance = maxDamageChance;
+	}
+
+	public void setMinDamageRatio(float minDamageRatio) {
+		this.minDamageRatio = minDamageRatio;
+	}
+
+	public float getOffHandDamageRatio() {
+		return getMinDamageRatio() * (1 - getMaxDamageChance() / 1000f) + getMaxDamageChance() / 1000f;
 	}
 }

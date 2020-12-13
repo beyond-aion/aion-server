@@ -45,6 +45,10 @@ public class StatCapUtil {
 		return limits.get(stat).upperCap;
 	}
 
+	public static int getDifferenceLimit(StatEnum stat) {
+		return limits.get(stat).diffLimit;
+	}
+
 	private static void calculate(Stat2 stat2, int lowerCap, int upperCap) {
 		if (stat2.getCurrent() > upperCap) {
 			stat2.setBonus(upperCap - stat2.getBase());
@@ -57,10 +61,12 @@ public class StatCapUtil {
 
 		private final int lowerCap;
 		private final int upperCap;
+		private final int diffLimit;
 
 		private StatLimits(StatEnum stat) {
 			this.lowerCap = lowerCapFor(stat);
 			this.upperCap = upperCapFor(stat);
+			this.diffLimit = differenceLimitFor(stat);
 		}
 
 		private static int lowerCapFor(StatEnum stat) {
@@ -121,6 +127,23 @@ public class StatCapUtil {
 					break;
 			}
 			return value;
+		}
+
+		private static int differenceLimitFor(StatEnum stat) {
+			switch (stat) {
+				case BLOCK:
+				case PHYSICAL_CRITICAL:
+				case MAGICAL_CRITICAL:
+				case MAGICAL_RESIST:
+					return 500;
+				case EVASION:
+					return 300;
+				case PARRY:
+					return 400;
+				case BOOST_MAGICAL_SKILL:
+					return 2900;
+			}
+			return Integer.MAX_VALUE;
 		}
 	}
 }

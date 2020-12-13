@@ -324,7 +324,7 @@ public class Equipment implements Persistable {
 				return true;
 		}
 
-		return false;
+		return false; // FIXME leather skill allows you to wear leather. You don't need cloth skill too!
 	}
 
 	public Item getEquippedItemByObjId(int itemObjId) {

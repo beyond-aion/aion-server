@@ -4,6 +4,7 @@ import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author ATracer
@@ -27,7 +28,7 @@ public class SM_SUMMON_UPDATE extends AionServerPacket {
 		Stat2 maxHp = summon.getGameStats().getMaxHp();
 		writeD(maxHp.getCurrent());
 
-		Stat2 mainHandPAttack = summon.getGameStats().getMainHandPAttack();
+		Stat2 mainHandPAttack = summon.getGameStats().getMainHandPAttack(CalculationType.DISPLAY);
 		writeD(mainHandPAttack.getCurrent());
 
 		Stat2 pDef = summon.getGameStats().getPDef();

@@ -55,7 +55,7 @@ public interface AI {
 	 *          - The effect which caused the damage (may be null)
 	 * @return The effectively received damage
 	 */
-	int modifyDamage(Creature attacker, int damage, Effect effect);
+	float modifyDamage(Creature attacker, float damage, Effect effect);
 
 	/**
 	 * @param damage
@@ -64,7 +64,7 @@ public interface AI {
 	 * @param effect
 	 * @return The effective damage output of this creature
 	 */
-	int modifyOwnerDamage(int damage, Creature effected, Effect effect);
+	float modifyOwnerDamage(float damage, Creature effected, Effect effect);
 
 	/**
 	 * Used to manipulate any game stat of the owner.

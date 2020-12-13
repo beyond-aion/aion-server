@@ -36,8 +36,8 @@ public class ModorsCloneAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
-		return (int) (damage * modifier);
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
+		return damage * modifier;
 	}
 
 	@Override

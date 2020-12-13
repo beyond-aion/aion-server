@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.stats.container;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author Yeats 18.03.2016.
@@ -16,8 +17,8 @@ public class ServantGameStats extends SummonedObjectGameStats {
 	}
 
 	@Override
-	public Stat2 getStat(StatEnum statEnum, int base) {
-		return super.getStat(statEnum, statEnum == StatEnum.HEAL_BOOST ? fixedHealBoost : base);
+	public Stat2 getStat(StatEnum statEnum, float base, CalculationType... calculationTypes) {
+		return super.getStat(statEnum, statEnum == StatEnum.HEAL_BOOST ? fixedHealBoost : base, calculationTypes);
 	}
 
 	@Override

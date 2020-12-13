@@ -26,8 +26,8 @@ public class MaliciousIceStormAI extends NpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
-		return (int) (damage * 0.5f);
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
+		return damage * 0.5f;
 	}
 
 	@Override

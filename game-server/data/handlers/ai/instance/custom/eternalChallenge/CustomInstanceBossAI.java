@@ -42,6 +42,7 @@ import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -66,13 +67,13 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 	}
 
 	@Override
-	public int modifyDamage(Creature attacker, int damage, Effect effect) {
-		return Math.round(damage * 0.42f); // pseudo PvP reduce
+	public float modifyDamage(Creature attacker, float damage, Effect effect) {
+		return damage * 0.42f; // pseudo PvP reduce
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
-		return Math.round(damage * 0.58f); // pseudo PvP reduce
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
+		return damage * 0.58f; // pseudo PvP reduce
 	}
 
 	@Override
@@ -268,7 +269,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		functions.add(new StatSetFunction(StatEnum.MAGICAL_RESIST, pgs.getMResist().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.MAGICAL_ACCURACY, pgs.getMAccuracy().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.MAGICAL_CRITICAL, pgs.getMCritical().getCurrent()));
-		functions.add(new StatSetFunction(StatEnum.MAIN_HAND_POWER, pgs.getMainHandPAttack().getCurrent()));
+		functions.add(new StatSetFunction(StatEnum.MAIN_HAND_POWER, pgs.getMainHandPAttack(CalculationType.DISPLAY).getCurrent()));
 		int maxHP = pgs.getMaxHp().getCurrent();
 		maxHP += maxHP * rank / 10f;
 		if (onlyAttack)
@@ -278,7 +279,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		functions.add(new StatSetFunction(StatEnum.OFF_HAND_ACCURACY, pgs.getOffHandPAccuracy().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.OFF_HAND_ATTACK_SPEED, pgs.getAttackSpeed().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.OFF_HAND_CRITICAL, pgs.getOffHandPCritical().getCurrent()));
-		functions.add(new StatSetFunction(StatEnum.OFF_HAND_POWER, pgs.getOffHandPAttack().getCurrent()));
+		functions.add(new StatSetFunction(StatEnum.OFF_HAND_POWER, pgs.getOffHandPAttack(CalculationType.DISPLAY).getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.PARRY, pgs.getParry().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.PHYSICAL_ACCURACY, pgs.getMainHandPAccuracy().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.PHYSICAL_DEFENSE, pgs.getPDef().getCurrent()));
@@ -290,7 +291,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		// Work-around for not considered dual wield stats for NPCs
 		int pAtk = pgs.getMainHandPAttack().getCurrent();
 		if (player.getEquipment().getOffHandWeapon() != null)
-			pAtk += pgs.getOffHandPAttack().getCurrent() / 2;
+			pAtk += pgs.getOffHandPAttack(CalculationType.DISPLAY).getCurrent() / 2;
 		functions.add(new StatSetFunction(StatEnum.PHYSICAL_ATTACK, pAtk));
 
 		if (player.getPlayerClass().isPhysicalClass()) {

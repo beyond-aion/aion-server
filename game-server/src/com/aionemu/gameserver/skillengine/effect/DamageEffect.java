@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
+import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.change.Func;
@@ -26,7 +27,7 @@ public abstract class DamageEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		effect.getEffected().getController().onAttack(effect, TYPE.REGULAR, effect.getReserveds(this.position).getValue(), true, LOG.REGULAR, hopType);
+		effect.getEffected().getController().onAttack(effect, TYPE.REGULAR, effect.getReserveds(this.position).getValue(), true, LOG.REGULAR, hopType, false);
 		if (effect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED)
 			effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected(), effect.getSkillId());
 	}
@@ -34,15 +35,8 @@ public abstract class DamageEffect extends EffectTemplate {
 	@Override
 	public void calculateDamage(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
-
-		switch (element) {
-			case NONE:
-				valueWithDelta *= effect.getEffector().getGameStats().getPower().getCurrent() * 0.01f;
-				break;
-			default:
-				valueWithDelta *= effect.getEffector().getGameStats().getKnowledge().getCurrent() * 0.01f;
-				break;
-		}
+		if (element != SkillElement.NONE)
+			valueWithDelta *= effect.getEffector().getGameStats().getKnowledge().getCurrent() / 100f;
 
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
 	}

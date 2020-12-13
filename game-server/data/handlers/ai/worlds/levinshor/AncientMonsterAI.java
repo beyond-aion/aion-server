@@ -37,10 +37,10 @@ public class AncientMonsterAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		float multi = 1.5f;
 		if (effect != null && effect.getSkillTemplate().getSkillId() == 21780)
 			multi = 3;
-		return super.modifyOwnerDamage((int) (damage * multi), effected, effect);
+		return super.modifyOwnerDamage(damage * multi, effected, effect);
 	}
 }

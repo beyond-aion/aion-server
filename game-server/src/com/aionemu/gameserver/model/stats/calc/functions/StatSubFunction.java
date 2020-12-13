@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.stats.calc.functions;
 
 import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author ATracer
@@ -8,7 +9,7 @@ import com.aionemu.gameserver.model.stats.calc.Stat2;
 public class StatSubFunction extends StatFunction {
 
 	@Override
-	public void apply(Stat2 stat) {
+	public void apply(Stat2 stat, CalculationType... calculationTypes) {
 		if (isBonus()) {
 			stat.addToBonus(-getValue());
 		} else {

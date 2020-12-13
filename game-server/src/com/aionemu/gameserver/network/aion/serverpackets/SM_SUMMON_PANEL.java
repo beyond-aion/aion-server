@@ -3,6 +3,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author ATracer, xTz
@@ -23,7 +24,7 @@ public class SM_SUMMON_PANEL extends AionServerPacket {
 		writeD(0);// unk
 		writeD(summon.getLifeStats().getCurrentHp());
 		writeD(summon.getGameStats().getMaxHp().getCurrent());
-		writeD(summon.getGameStats().getMainHandPAttack().getCurrent());
+		writeD(summon.getGameStats().getMainHandPAttack(CalculationType.DISPLAY).getCurrent());
 		writeH(summon.getGameStats().getPDef().getCurrent());
 		writeH(0);
 		writeH(summon.getGameStats().getMResist().getCurrent());

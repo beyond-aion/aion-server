@@ -75,7 +75,7 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		if (PvpMapService.getInstance().isRandomBoss(getOwner())) {
 			return damage > 7900 ? (7700 + Rnd.get(600)) : damage;
 		}
@@ -194,8 +194,8 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 		return pos;
 	}
 
-	private int getRandomDmg(int damage, float min, float max) {
-		return (int) (damage * (min + Rnd.nextFloat() * (max - min)));
+	private float getRandomDmg(float damage, float min, float max) {
+		return damage * (min + Rnd.nextFloat() * (max - min));
 	}
 
 	private void addPercents() {

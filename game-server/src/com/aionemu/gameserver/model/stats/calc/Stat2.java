@@ -8,18 +8,19 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
  */
 public abstract class Stat2 {
 
-	float bonusRate = 1f;
+	float bonusRate;
 	float baseRate = 1f;
-	int base;
-	int bonus;
+	float base;
+	float bonus;
+	float fixedBonusRate;
 	private final Creature owner;
 	protected final StatEnum stat;
 
-	public Stat2(StatEnum stat, int base, Creature owner) {
+	public Stat2(StatEnum stat, float base, Creature owner) {
 		this(stat, base, owner, 1);
 	}
 
-	public Stat2(StatEnum stat, int base, Creature owner, float bonusRate) {
+	public Stat2(StatEnum stat, float base, Creature owner, float bonusRate) {
 		this.stat = stat;
 		this.base = base;
 		this.owner = owner;
@@ -35,10 +36,18 @@ public abstract class Stat2 {
 	}
 
 	public final int getBaseWithoutBaseRate() {
+		return (int) base;
+	}
+
+	public final float getExactBaseWithoutBaseRate() {
 		return base;
 	}
 
-	public final void setBase(int base) {
+	public float getExactBonus() {
+		return bonus;
+	}
+
+	public final void setBase(float base) {
 		this.base = base;
 	}
 
@@ -50,18 +59,25 @@ public abstract class Stat2 {
 		this.baseRate = rate;
 	}
 
-	public abstract void addToBase(int base);
+	public abstract void addToBase(float base);
 
 	public final int getBonus() {
-		return bonus;
+		return (int) bonus;
 	}
 
 	public final int getCurrent() {
-		return (int) (this.base * baseRate + this.bonus);
-
+		return (int) (base * baseRate + bonus * bonusRate + base * fixedBonusRate);
 	}
 
-	public final void setBonus(int bonus) {
+	public final float getExactCurrent() {
+		return base * baseRate + bonus * bonusRate + base * fixedBonusRate;
+	}
+
+	public final float getExactCurrentWithoutFixedBonus() {
+		return base * baseRate + bonus * bonusRate;
+	}
+
+	public final void setBonus(float bonus) {
 		this.bonus = bonus;
 	}
 
@@ -73,7 +89,15 @@ public abstract class Stat2 {
 		this.bonusRate = bonusRate;
 	}
 
-	public abstract void addToBonus(int bonus);
+	public abstract void addToBonus(float bonus);
+
+	public void setFixedBonusRate(float fixedBonusRate) {
+		this.fixedBonusRate = fixedBonusRate;
+	}
+
+	public float getFixedBonusRate() {
+		return fixedBonusRate;
+	}
 
 	public abstract float calculatePercent(int delta);
 

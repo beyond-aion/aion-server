@@ -38,8 +38,8 @@ public class WeaponStats {
 		return maxDamage;
 	}
 
-	public final int getMeanDamage() {
-		return (minDamage + maxDamage) / 2;
+	public final float getMeanDamage() {
+		return (minDamage + maxDamage) / 2f;
 	}
 
 	public final int getAttackSpeed() {

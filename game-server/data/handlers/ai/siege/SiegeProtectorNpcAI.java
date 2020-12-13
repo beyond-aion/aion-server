@@ -34,7 +34,7 @@ public class SiegeProtectorNpcAI extends SiegeNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		if (effected instanceof Npc)
 			return damage * 5;
 		return damage;

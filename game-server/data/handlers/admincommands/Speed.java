@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author ATracer
@@ -64,7 +65,7 @@ public class Speed extends AdminCommand implements StatOwner {
 		}
 
 		@Override
-		public void apply(Stat2 otherStat) {
+		public void apply(Stat2 otherStat, CalculationType... calculationTypes) {
 			otherStat.setBase(speed);
 			otherStat.setBaseRate(1);
 			otherStat.setBonus(0);

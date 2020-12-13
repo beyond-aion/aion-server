@@ -156,7 +156,6 @@ public class Player extends Creature {
 	private ChainSkills chainSkills;
 	private Map<AttackStatus, Long> lastCounterSkill = new HashMap<>();
 
-	private int dualEffectValue = 0;
 	private long prisonEndTimeMillis = 0;
 	private long gatherRestrictionMillis;
 	private String captchaWord;
@@ -1233,21 +1232,6 @@ public class Player extends Creature {
 			return 0;
 
 		return lastCounterSkill.get(status);
-	}
-
-	/**
-	 * @return the dualEffectValue
-	 */
-	public int getDualEffectValue() {
-		return dualEffectValue;
-	}
-
-	/**
-	 * @param dualEffectValue
-	 *          the dualEffectValue to set
-	 */
-	public void setDualEffectValue(int dualEffectValue) {
-		this.dualEffectValue = dualEffectValue;
 	}
 
 	/**

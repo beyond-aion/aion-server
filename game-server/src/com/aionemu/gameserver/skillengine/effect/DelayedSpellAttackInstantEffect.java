@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
+import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -24,22 +25,19 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 	@Override
 	public void applyEffect(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
+		if (element != SkillElement.NONE)
+			valueWithDelta *= effect.getEffector().getGameStats().getKnowledge().getCurrent() / 100;
 
-		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, true);// ignores shields on retail
+		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, true); // ignores shields on retail
 		final int finalPosition = this.position;
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
+		ThreadPoolManager.getInstance().schedule(() ->  {
 				effect.getEffected().getController().onAttack(effect, TYPE.DELAYDAMAGE, effect.getReserveds(finalPosition).getValue(), true,
-					LOG.DELAYEDSPELLATKINSTANT, hopType);
+					LOG.DELAYEDSPELLATKINSTANT, hopType, false);
 				effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected(), effect.getSkillId());
-			}
 		}, delay);
 	}
 
 	@Override
 	public void calculateDamage(Effect effect) {
-
 	}
 }

@@ -86,7 +86,12 @@ public abstract class EffectTemplate {
 	protected int value;
 	@XmlAttribute
 	protected int delta;
-
+	@XmlAttribute(name = "skill_efficiency")
+	protected int skillEfficiency;
+	@XmlAttribute(name = "max_damage_chance")
+	protected int maxDamageChance;
+	@XmlAttribute(name = "max_damage_delta")
+	protected int maxDamageDelta;
 	/**
 	 * @return the value
 	 */
@@ -344,7 +349,7 @@ public abstract class EffectTemplate {
 					}
 				}
 				if (!noResist && !isCannotMiss()) {
-					if (!calculateEffectResistRate(effect, statEnum)) {
+					if (!calculateEffectResistRate(effect, statEnum) || isDodgedOrResisted(effect)) {
 						if (!(firstEffect instanceof DamageEffect)) {
 							effect.getSuccessEffects().remove(firstEffect);
 						}
@@ -372,7 +377,7 @@ public abstract class EffectTemplate {
 		int accMod = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost() + boostResist;
 		switch (element) {
 			case NONE:
-				return StatFunctions.calculatePhysicalDodgeRate(effect.getEffector(), effect.getEffected(), accMod);
+				return StatFunctions.checkIsDodgedHit(effect.getEffector(), effect.getEffected(), accMod);
 			default:
 				return Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accMod, element);
 		}

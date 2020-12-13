@@ -1,28 +1,25 @@
 package com.aionemu.gameserver.model.stats.container;
 
-import java.util.ArrayList;
-import java.util.EnumMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.Map.Entry;
-import java.util.TreeSet;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
+import org.apache.commons.lang3.ArrayUtils;
+
 import com.aionemu.gameserver.model.SkillElement;
+import com.aionemu.gameserver.model.enchants.EnchantEffect;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.RandomBonusEffect;
-import com.aionemu.gameserver.model.stats.calc.AdditionStat;
-import com.aionemu.gameserver.model.stats.calc.ReverseStat;
-import com.aionemu.gameserver.model.stats.calc.Stat2;
-import com.aionemu.gameserver.model.stats.calc.StatCapUtil;
-import com.aionemu.gameserver.model.stats.calc.StatOwner;
+import com.aionemu.gameserver.model.stats.calc.*;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunctionProxy;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author xavier
@@ -105,9 +102,9 @@ public abstract class CreatureGameStats<T extends Creature> {
 			onStatsChange();
 	}
 
-	public int getPositiveStat(StatEnum statEnum, int base) {
+	public float getPositiveStat(StatEnum statEnum, float base) {
 		Stat2 stat = getStat(statEnum, base);
-		int value = stat.getCurrent();
+		float value = stat.getCurrent();
 		return value > 0 ? value : 0;
 	}
 
@@ -117,32 +114,44 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return value > 0 ? value : 0;
 	}
 
-	public Stat2 getStat(StatEnum statEnum, int base) {
+	public Stat2 getStat(StatEnum statEnum, float base) {
 		Stat2 stat = new AdditionStat(statEnum, base, owner);
 		return getStat(statEnum, stat);
 	}
 
-	public Stat2 getStat(StatEnum statEnum, int base, float bonusRate) {
-		Stat2 stat = new AdditionStat(statEnum, base, owner, bonusRate);
-		return getStat(statEnum, stat);
+	public Stat2 getStat(StatEnum statEnum, float base, CalculationType... calculationTypes) {
+		Stat2 stat = new AdditionStat(statEnum, base, owner);
+		return getStat(statEnum, stat, calculationTypes);
 	}
 
-	public Stat2 getReverseStat(StatEnum statEnum, int base) {
+	public Stat2 getStat(StatEnum statEnum, float base, float bonusRate, CalculationType... calculationTypes) {
+		Stat2 stat = new AdditionStat(statEnum, base, owner, bonusRate);
+		return getStat(statEnum, stat, calculationTypes);
+	}
+
+	public Stat2 getReverseStat(StatEnum statEnum, float base) {
 		Stat2 stat = new ReverseStat(statEnum, base, owner);
 		return getStat(statEnum, stat);
 	}
 
-	public Stat2 getReverseStat(StatEnum statEnum, int base, float bonusRate) {
+	public Stat2 getReverseStat(StatEnum statEnum, float base, float bonusRate) {
 		Stat2 stat = new ReverseStat(statEnum, base, owner, bonusRate);
 		return getStat(statEnum, stat);
 	}
 
-	public Stat2 getStat(StatEnum statEnum, Stat2 stat) {
+	public Stat2 getStat(StatEnum statEnum, Stat2 stat, CalculationType... calculationTypes) {
 		List<IStatFunction> functions = getStatsSorted(statEnum);
 		if (functions != null) {
 			for (IStatFunction func : functions) {
 				if (func.validate(stat)) {
-					func.apply(stat);
+					if ((statEnum == StatEnum.PHYSICAL_ATTACK || statEnum == StatEnum.MAGICAL_ATTACK) && func.getOwner() instanceof EnchantEffect ef) {
+						if (ef.getItemSlot() == ItemSlot.MAIN_HAND && ArrayUtils.contains(calculationTypes, CalculationType.MAIN_HAND)
+								|| ef.getItemSlot() == ItemSlot.SUB_HAND && ArrayUtils.contains(calculationTypes, CalculationType.OFF_HAND)) {
+							func.apply(stat, calculationTypes);
+						}
+					} else {
+						func.apply(stat, calculationTypes);
+					}
 				}
 			}
 			StatCapUtil.calculateBaseValue(stat, owner);
@@ -229,8 +238,8 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return getStat(StatEnum.MAGICAL_CRITICAL_RESIST, getStatsTemplate().getSpellResist());
 	}
 
-	public Stat2 getMainHandPAttack() {
-		return getStat(StatEnum.PHYSICAL_ATTACK, getStatsTemplate().getAttack());
+	public Stat2 getMainHandPAttack(CalculationType... calculationTypes) {
+		return getStat(StatEnum.PHYSICAL_ATTACK, getStatsTemplate().getAttack(), calculationTypes);
 	}
 
 	public Stat2 getMainHandPCritical() {
@@ -241,8 +250,8 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return getStat(StatEnum.PHYSICAL_ACCURACY, getStatsTemplate().getAccuracy());
 	}
 
-	public Stat2 getMainHandMAttack() {
-		return getStat(StatEnum.MAGICAL_ATTACK, getStatsTemplate().getMagicalAttack());
+	public Stat2 getMainHandMAttack(CalculationType... calculationTypes) {
+		return getStat(StatEnum.MAGICAL_ATTACK, getStatsTemplate().getMagicalAttack(), calculationTypes);
 	}
 
 	public Stat2 getMCritical() {

@@ -5,6 +5,7 @@ import java.util.Map.Entry;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
+import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -22,10 +23,14 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.animations.AttackHandAnimation;
 import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
-import com.aionemu.gameserver.model.gameobjects.*;
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.GodStone;
+import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
@@ -47,6 +52,7 @@ import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneUpdateService;
@@ -184,12 +190,12 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks when Creature was attacked
 	 */
 	public final void onAttack(Creature creature, int damage, AttackStatus attackStatus) {
-		onAttack(creature, 0, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, true, HopType.DAMAGE);
+		onAttack(creature, 0, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, true, HopType.DAMAGE, true);
 	}
 
-	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, HopType hopType) {
+	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, HopType hopType, boolean allowCriticalEffectActivation) {
 		onAttack(effect.getEffector(), effect.getSkillId(), type, damage, notifyAttack, logId, effect.getAttackStatus(),
-			!effect.isGodstoneActivated() && !effect.isPeriodic() && effect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED, hopType);
+			!effect.isGodstoneActivated() && !effect.isPeriodic() && effect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED, hopType, allowCriticalEffectActivation);
 		if (type == TYPE.DELAYDAMAGE)
 			effect.broadcastHate();
 	}
@@ -198,7 +204,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks when Creature was attacked
 	 */
 	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status,
-						 boolean allowGodstoneActivation, HopType hopType) {
+						 boolean allowGodstoneActivation, HopType hopType, boolean allowCriticalEffectActivation) {
 		if (damage != 0 && notifyAttack) {
 			Skill skill = getOwner().getCastingSkill();
 			if (skill != null) {
@@ -229,7 +235,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		if (!getOwner().isDead() && attacker instanceof Player) {
 			Player player = (Player) attacker;
-			if (status == AttackStatus.CRITICAL && Rnd.chance() < 10)
+			if (allowCriticalEffectActivation && status == AttackStatus.CRITICAL && Rnd.chance() < 10)
 				applyEffectOnCritical(player, skillId);
 			if (allowGodstoneActivation && status != AttackStatus.DODGE && status != AttackStatus.RESIST)
 				calculateGodStoneEffects(player);
@@ -329,16 +335,15 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		AttackHandAnimation attackHandAnimation = AttackHandAnimation.MAIN_HAND;
 		AttackTypeAnimation attackTypeAnimation = AttackTypeAnimation.MELEE;
 		List<AttackResult> attackResult;
-		if (getOwner() instanceof Homing) {
-			attackResult = AttackUtil.calculateHomingAttackResult(getOwner(), target, getOwner().getAttackType().getMagicalElement());
+
+		CalculationType[] calculationTypes = new CalculationType[] { CalculationType.APPLY_POWER_SHARD_DAMAGE, CalculationType.REMOVE_POWER_SHARD };
+		if (getOwner() instanceof Player p && p.getEquipment().hasDualWeaponEquipped(ItemSlot.LEFT_HAND))
+			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.DUAL_WIELD);
+		if (getOwner().getAttackType() == ItemAttackType.PHYSICAL)
+			attackResult = AttackUtil.calculatePhysAttackResult(getOwner(), target, calculationTypes);
+		else {
+			attackResult = AttackUtil.calculateMagAttackResult(getOwner(), target, getOwner().getAttackType().getMagicalElement(), calculationTypes);
 			attackHandAnimation = AttackHandAnimation.OFF_HAND;
-		} else {
-			if (getOwner().getAttackType() == ItemAttackType.PHYSICAL)
-				attackResult = AttackUtil.calculatePhysicalAttackResult(getOwner(), target);
-			else {
-				attackResult = AttackUtil.calculateMagicalAttackResult(getOwner(), target, getOwner().getAttackType().getMagicalElement());
-				attackHandAnimation = AttackHandAnimation.OFF_HAND;
-			}
 		}
 		if (getOwner() instanceof Npc) {
 			attackHandAnimation = getOwner().getAi().modifyAttackHandAnimation(attackHandAnimation);

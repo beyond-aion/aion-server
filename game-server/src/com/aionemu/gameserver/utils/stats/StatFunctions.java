@@ -1,13 +1,14 @@
 package com.aionemu.gameserver.utils.stats;
 
-import java.util.Objects;
+import java.util.ArrayList;
+import java.util.List;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.commons.lang3.ArrayUtils;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.FallDamageConfig;
 import com.aionemu.gameserver.configs.main.RatesConfig;
+import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
 import com.aionemu.gameserver.model.SkillElement;
@@ -15,15 +16,17 @@ import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.siege.Influence;
 import com.aionemu.gameserver.model.stats.calc.AdditionStat;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
+import com.aionemu.gameserver.model.stats.calc.StatCapUtil;
 import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
 import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
+import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
+import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -37,8 +40,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @author ATracer, alexa026, Neon
  */
 public class StatFunctions {
-
-	private static final Logger log = LoggerFactory.getLogger(StatFunctions.class);
 
 	/**
 	 * @param maxLevelInRange
@@ -102,7 +103,7 @@ public class StatFunctions {
 		// TODO: fix to see monster Rating level, NORMAL lvl 1, 2 | ELITE lvl 1, 2 etc..
 		// look at:
 		// http://www.aionsource.com/forum/mechanic-analysis/42597-character-stats-xp-dp-origin-gerbator-team-july-2009-a.html
-		int baseDP = targetLevel * calculateRatingMultipler(npcRating);
+		int baseDP = targetLevel * calculateRatingMultiplier(npcRating);
 		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - playerLevel);
 		return (int) Rates.DP_PVE.calcResult(player, (int) Math.floor(baseDP * xpPercentage / 100f));
 	}
@@ -269,192 +270,108 @@ public class StatFunctions {
 		return creature.getGameStats().getStat(StatEnum.BOOST_HATE, stat).getCurrent();
 	}
 
-	/**
-	 * @return Damage made to target (-hp value)
-	 */
-	public static int calculateAttackDamage(Creature attacker, Creature target, boolean isMainHand, SkillElement element) {
-		int resultDamage;
+	public static List<AttackResult> calculateAttackDamage(Creature attacker,
+														   SkillElement element, AttackStatus status, CalculationType... calculationTypes) {
+		List<AttackResult> attackResultList = new ArrayList<>();
+		if (AttackStatus.getBaseStatus(status) == AttackStatus.DODGE || AttackStatus.getBaseStatus(status) == AttackStatus.RESIST) {
+			attackResultList.add(new AttackResult(0, AttackStatus.getBaseStatus(status)));
+			return attackResultList;
+		}
+		Stat2 mainHandAttack;
+		Stat2 offHandAttack = null;
+		HitType hitType = HitType.PHHIT;
 		if (element == SkillElement.NONE) {
-			// physical damage
-			resultDamage = calculatePhysicalAttackDamage(attacker, target, isMainHand, false);
+			mainHandAttack = attacker.getGameStats().getMainHandPAttack(calculationTypes);
+			if (attacker instanceof Player p)
+				offHandAttack = p.getGameStats().getOffHandPAttack(calculationTypes);
 		} else {
-			// magical damage
-			resultDamage = calculateMagicalAttackDamage(attacker, target, element, isMainHand);
+			hitType = HitType.MAHIT;
+			mainHandAttack = attacker.getGameStats().getMainHandMAttack(calculationTypes);
+			if (attacker instanceof Player p)
+				offHandAttack = p.getGameStats().getOffHandMAttack(calculationTypes);
 		}
 
-		resultDamage = adjustDamageByMovementModifier(attacker, resultDamage);
-		// adjusting baseDamages by pve/pvp modifiers
-		resultDamage = adjustDamageByPvpOrPveModifiers(attacker, target, resultDamage, 0, false, element);
-
-		if (target instanceof Npc)
-			return target.getAi().modifyDamage(attacker, resultDamage, null);
-		if (attacker instanceof Npc)
-			return attacker.getAi().modifyOwnerDamage(resultDamage, null, null);
-
-		return resultDamage;
+		if (attacker instanceof Player p) {
+			Equipment equipment = p.getEquipment();
+			Item mainHandWeapon = equipment.getMainHandWeapon();
+			if (mainHandWeapon != null) {
+				Item offHandWeapon = equipment.getOffHandWeapon();
+				WeaponStats mainWeaponStats = mainHandWeapon.getItemTemplate().getWeaponStats();
+				WeaponStats offWeaponStats = (offHandWeapon == null || offHandWeapon.getItemTemplate().getItemSubType() == ItemSubType.SHIELD)
+						? null : offHandWeapon.getItemTemplate().getWeaponStats();
+				if (mainWeaponStats != null) {
+					float mainHandDamage = mainHandAttack.getExactCurrent();
+					float offHandDamage = offHandAttack.getExactCurrent();
+					if (ArrayUtils.contains(calculationTypes, CalculationType.SKILL)) { // 80% of damage is added on retail
+						if (offWeaponStats != null) {
+							float totalBaseDamage = (offHandAttack.getExactBaseWithoutBaseRate() * p.getGameStats().getSkillEfficiency() + mainHandAttack.getExactBaseWithoutBaseRate()) * 0.8f;
+							mainHandDamage = (mainHandAttack.getExactCurrentWithoutFixedBonus() + totalBaseDamage * offHandAttack.getFixedBonusRate()) * 0.8f;
+							offHandDamage = (offHandAttack.getExactCurrentWithoutFixedBonus() + totalBaseDamage * mainHandAttack.getFixedBonusRate()) * 0.8f * p.getGameStats().getSkillEfficiency();
+						}
+					} else {
+						if (Rnd.get(1000) >= p.getGameStats().getMaxDamageChance()) {
+							offHandDamage *= p.getGameStats().getMinDamageRatio();
+							if (offHandDamage <= 0 && offWeaponStats != null) {
+								offHandDamage = 1;
+							}
+						}
+					}
+					attackResultList.add(new AttackResult(mainHandDamage, status, hitType));
+					if (offWeaponStats != null)
+						attackResultList.add(new AttackResult(offHandDamage, AttackStatus.getOffHandStats(status), hitType));
+				}
+			} else { // Attack without weapon
+				// "no weapon" damage has a power of 70, whereas weapons have their own power
+				// TODO: parse values, but for now we can ignore it since most player weapons have a power of 100
+				float damage = Rnd.get(16, 20) * (1 + ((p.getGameStats().getPower().getCurrent() - 100) / 100f * 70f) / 100f) + mainHandAttack.getBonus();
+				attackResultList.add(new AttackResult(damage, status, hitType));
+			}
+		} else {
+			int val = attacker instanceof Homing ? 100 : Rnd.get(80, 120);
+			attackResultList.add(new AttackResult(mainHandAttack.getCurrent() * val / 100f, status, hitType));
+		}
+		return attackResultList;
 	}
 
 	/**
-	 * @return Damage made to target (-hp value)
+	 * elemental resistance, 145 = 10% magical damage reduction (cap at +-1150)
+	 * @return damage reduced by elemental resistance
 	 */
-	public static int calculatePhysicalAttackDamage(Creature attacker, Creature target, boolean isMainHand, boolean isSkill) {
-		Stat2 pAttack;
-		if (isMainHand)
-			pAttack = attacker.getGameStats().getMainHandPAttack();
-		else
-			pAttack = ((Player) attacker).getGameStats().getOffHandPAttack();
-		float resultDamage = pAttack.getCurrent();
-		if (attacker instanceof Player) {
-			resultDamage = calculateAttackDamageForPlayers((Player) attacker, pAttack, isMainHand, isSkill, false);
-		} else if (resultDamage > 1) {
-			int rnd = (int) (resultDamage * 0.20f);
-			resultDamage += Rnd.get(-rnd, rnd);
-		}
-
-		// damage is reduced by 100 per 1000 pdef
-		float pDef = target.getGameStats().getPDef().getBonus()
-			+ getMovementModifier(target, StatEnum.PHYSICAL_DEFENSE, target.getGameStats().getPDef().getBase());
-		resultDamage -= (pDef * 0.10f);
-
-		if (resultDamage <= 0)
-			resultDamage = 1;
-
-		return Math.round(resultDamage);
+	private static float reduceDamageByElementalResistance(Creature attacked, SkillElement element, float damage) {
+		return damage * (1 - getMovementModifier(attacked, SkillElement.getResistanceForElement(element), attacked.getGameStats().getMagicalDefenseFor(element))/ 1450f);
 	}
 
-	public static int calculateMagicalAttackDamage(Creature attacker, Creature target, SkillElement element, boolean isMainHand) {
-		Objects.requireNonNull(element, "Skill element should be NONE instead of null");
-		Stat2 mAttack;
-		if (isMainHand)
-			mAttack = attacker.getGameStats().getMainHandMAttack();
-		else
-			mAttack = ((Player) attacker).getGameStats().getOffHandMAttack();
-		float resultDamage = mAttack.getCurrent();
-		if (attacker instanceof Player) {
-			resultDamage = calculateAttackDamageForPlayers((Player) attacker, mAttack, isMainHand, false, true);
-		}
 
-		// elemental resistance, 145 = 10% damage reduction (cap at +-1150)
-		float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element),
-			target.getGameStats().getMagicalDefenseFor(element));
-		resultDamage = resultDamage * (1 - elementalDef / 1450f);
-
-		// damage is reduced by 100 per 1000 mdef
-		resultDamage -= target.getGameStats().getMDef().getCurrent() * 0.10f;
-
-		if (resultDamage <= 0)
-			resultDamage = 1;
-
-		// 15% seems to be correct
-		resultDamage *= 1.15f;
-
-		return Math.round(resultDamage);
-	}
-
-	private static float calculateAttackDamageForPlayers(Player attacker, Stat2 attack, boolean isMainHand, boolean isSkill, boolean isMagical) {
-		Equipment equipment = attacker.getEquipment();
-		Item weapon;
-		if (isMainHand)
-			weapon = equipment.getMainHandWeapon();
-		else
-			weapon = equipment.getOffHandWeapon();
-
-		float resultDamage = attack.getCurrent();
-		if (weapon != null) {
-			WeaponStats weaponStat = weapon.getItemTemplate().getWeaponStats();
-			if (weaponStat == null)
-				return 0;
-			int totalMin = weaponStat.getMinDamage();
-			int totalMax = weaponStat.getMaxDamage();
-			if (totalMax - totalMin < 1) {
-				log.warn("Weapon stat MIN_MAX_DAMAGE resulted average zero in main-hand calculation");
-				log.warn("Weapon ID: " + equipment.getMainHandWeapon().getItemTemplate().getTemplateId());
-				log.warn("MIN_DAMAGE = " + totalMin);
-				log.warn("MAX_DAMAGE = " + totalMax);
-			}
-			float baseAttribute = isMagical ? attacker.getGameStats().getKnowledge().getCurrent() * 0.01f
-				: attacker.getGameStats().getPower().getCurrent() * 0.01f;
-			int diff = Math.round((totalMax - totalMin) * baseAttribute / 2);
-			// adjust with value from WeaponDualEffect
-			// it makes lower cap of damage lower, so damage is more random on offhand
-			int negativeDiff = diff;
-			if (!isMainHand)
-				negativeDiff = (int) Math.round((200 - attacker.getDualEffectValue()) * 0.01 * diff);
-
-			if (isMagical) {
-				int bonusDmg = isMainHand ? attack.getBonus() : Math.round(attack.getBonus() * 0.82f);
-				resultDamage = bonusDmg + attack.getBase();
-			}
-			resultDamage += Rnd.get(-negativeDiff, diff);
-			// add powerShard damage
-			if (attacker.isInState(CreatureState.POWERSHARD)) {
-				Item firstShard;
-				Item secondShard = null;
-				if (isMainHand || isSkill) {
-					firstShard = equipment.getMainHandPowerShard();
-					if (weapon.getItemTemplate().isTwoHandWeapon() || isSkill && equipment.getOffHandWeapon() != null && equipment.getEquippedShield() == null)
-						secondShard = equipment.getOffHandPowerShard();
-				} else
-					firstShard = equipment.getOffHandPowerShard();
-
-				if (firstShard != null) {
-					equipment.usePowerShard(firstShard, 1);
-					resultDamage += firstShard.getItemTemplate().getWeaponBoost();
-				}
-
-				if (secondShard != null) {
-					equipment.usePowerShard(secondShard, 1);
-					resultDamage += secondShard.getItemTemplate().getWeaponBoost();
-				}
-			}
-		} else {// if hand attack
-			int totalMin = 16;
-			int totalMax = 20;
-
-			float power = attacker.getGameStats().getPower().getCurrent() * 0.01f;
-			int diff = Math.round((totalMax - totalMin) * power / 2);
-			int bonusDmg = isMainHand ? attack.getBonus() : Math.round(attack.getBonus() * 0.98f);
-			resultDamage = bonusDmg + attack.getBase();
-			resultDamage += Rnd.get(-diff, diff);
-		}
-		return resultDamage;
-	}
-
-	public static int calculateMagicalSkillDamage(Creature speller, Creature target, int baseDamage, int bonus, SkillElement element,
-		boolean useMagicBoost, boolean useKnowledge) {
+	public static float calculateMagicalSkillDamage(Creature speller, Creature target, float baseDamage, int bonus, SkillElement element,
+													boolean useMagicBoost, boolean useKnowledge) {
 		CreatureGameStats<?> sgs = speller.getGameStats();
 		CreatureGameStats<?> tgs = target.getGameStats();
 
-		int magicBoost = useMagicBoost ? sgs.getMBoost().getCurrent() : 0;
+		float magicBoost = useMagicBoost ? sgs.getMBoost().getCurrent() : 0;
 		magicBoost -= speller instanceof Trap ? 0 : tgs.getMBResist().getCurrent();
 
-		if (magicBoost < 0) {
-			magicBoost = 0;
-		} else if (magicBoost > 2900) {
-			magicBoost = 2900;
-		}
-		int knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
-		float damage = baseDamage * (1 + (magicBoost / (knowledge * 10f)));
+		magicBoost = (int) Math.max(0, limit(StatEnum.BOOST_MAGICAL_SKILL, magicBoost));
+		float knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
+		float damage = baseDamage * (1 + (magicBoost / (knowledge * 10)));
+
 
 		damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
 		// add bonus damage
 		damage += bonus;
-		// elemental resistance, 145 = 10% magical damage reduction (cap at +-1150)
 		if (element != SkillElement.NONE) {
-			float elementalDef = getMovementModifier(target, SkillElement.getResistanceForElement(element), tgs.getMagicalDefenseFor(element));
-			damage = damage * (1 - (elementalDef / 1450f));
+			damage = reduceDamageByElementalResistance(target, element, damage);
 			// damage is reduced by 100 per 1000 mdef
-			damage -= target.getGameStats().getMDef().getCurrent() * 0.10f;
+			damage -= target.getGameStats().getMDef().getCurrent()/10f;
 		}
 
-		if (damage < 1) {
-			damage = 1;
+		if (damage < 0) {
+			damage = 0;
 		} else if (speller instanceof Npc && !(speller instanceof SummonedObject<?>)) {
 			int rnd = (int) (damage * 0.08f);
 			damage += Rnd.get(-rnd, rnd);
 		}
 
-		return Math.round(damage);
+		return damage;
 	}
 
 	/**
@@ -464,25 +381,18 @@ public class StatFunctions {
 		if (attacker instanceof Servant || attacker instanceof Homing || !applyMcrit)
 			return false;
 
-		int critical = attacker.getGameStats().getMCritical().getCurrent() - attacked.getGameStats().getMCR().getCurrent();
-		if (critical <= 0)
-			critical = 1;
+		float critical = attacker.getGameStats().getMCritical().getCurrent() - attacked.getGameStats().getMCR().getCurrent();
 		// add critical Prob
-		critical *= criticalProb / 100f;
+		if (criticalProb != 100) {
+			if (critical <= 0)
+				critical = 1;
+			critical *= criticalProb / 100f;
+		}
 
-		double criticalRate;
-
-		if (critical <= 440)
-			criticalRate = critical * 0.1f;
-		else if (critical <= 560)
-			criticalRate = (440 * 0.1f) + ((critical - 440) * 0.05f);
-		else
-			criticalRate = (440 * 0.1f) + (120 * 0.05f) + ((critical - 560) * 0.01f);
-
-		return Rnd.chance() < criticalRate;
+		return Rnd.get(1000) < limit(StatEnum.MAGICAL_CRITICAL, critical);
 	}
 
-	public static int calculateRatingMultipler(NpcRating npcRating) {
+	public static int calculateRatingMultiplier(NpcRating npcRating) {
 		// FIXME: to correct formula, have any reference?
 		switch (npcRating) {
 			case JUNK:
@@ -519,7 +429,7 @@ public class StatFunctions {
 	/**
 	 * @return adjusted damage according to PVE or PVP modifiers
 	 */
-	public static int adjustDamageByPvpOrPveModifiers(Creature attacker, Creature target, int baseDamage, int pvpDamage, boolean useTemplateDmg,
+	public static float adjustDamageByPvpOrPveModifiers(Creature attacker, Creature target, float baseDamage, int pvpDamage, boolean useTemplateDmg,
 		SkillElement element) {
 		float attackBonus = 1;
 		float defenseBonus = 1;
@@ -561,15 +471,13 @@ public class StatFunctions {
 					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
 			}
 		}
-		return Math.round(damage + (damage * attackBonus) - (damage * defenseBonus));
+		return damage + (damage * attackBonus) - (damage * defenseBonus);
 	}
 
 	/**
-	 * Calculates DODGE chance
-	 *
-	 * @return boolean
+	 * Must be called only once since this method triggers observe controller checks with side effects (e.g. consume one always dodge effect activation)
 	 */
-	public static boolean calculatePhysicalDodgeRate(Creature attacker, Creature attacked, int accMod) {
+	public static boolean checkIsDodgedHit(Creature attacker, Creature attacked, int accMod) {
 		// check if attacker is blinded
 		if (attacker.getObserveController().checkAttackerStatus(AttackStatus.DODGE))
 			return true;
@@ -581,112 +489,75 @@ public class StatFunctions {
 		float dodge = attacked.getGameStats().getEvasion().getBonus()
 			+ getMovementModifier(attacked, StatEnum.EVASION, attacked.getGameStats().getEvasion().getBase());
 		float dodgeRate = dodge - accuracy;
-		if (attacked instanceof Npc) {
+		if (attacked instanceof Npc npc) {
+			// static npcs never dodge
+			if (npc.hasStatic())
+				return false;
 			int levelDiff = attacked.getLevel() - attacker.getLevel();
 			dodgeRate *= 1 + getNpcLevelDiffMod(levelDiff, 0);
-
-			// static npcs never dodge
-			if (((Npc) attacked).hasStatic())
-				return false;
 		}
-
-		return calculatePhysicalEvasion(dodgeRate, 300);
+		return Rnd.get(1000) < limit(StatEnum.EVASION, dodgeRate);
 	}
 
 	/**
-	 * Calculates PARRY chance
-	 *
-	 * @return int
+	 * Must be called only once since this method triggers observe controller checks with side effects (e.g. consume one always parry effect activation)
 	 */
-	public static boolean calculatePhysicalParryRate(Creature attacker, Creature attacked) {
+	public static boolean checkIsParriedHit(Creature attacker, Creature attacked, int accMod) {
 		// check always parry
 		if (attacked.getObserveController().checkAttackStatus(AttackStatus.PARRY))
 			return true;
 
-		float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent();
+		float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent() + accMod;
 		float parry = attacked.getGameStats().getParry().getBonus()
 			+ getMovementModifier(attacked, StatEnum.PARRY, attacked.getGameStats().getParry().getBase());
-		float parryRate = parry - accuracy;
-		return calculatePhysicalEvasion(parryRate, 400);
+		return Rnd.get(1000) < limit(StatEnum.PARRY, parry - accuracy);
 	}
 
 	/**
-	 * Calculates BLOCK chance
-	 *
-	 * @return int
+	 * Must be called only once since this method triggers observe controller checks with side effects (e.g. consume one always block effect activation)
 	 */
-	public static boolean calculatePhysicalBlockRate(Creature attacker, Creature attacked) {
+	public static boolean checkIsBlockedHit(Creature attacker, Creature attacked, int accMod) {
 		// check always block
 		if (attacked.getObserveController().checkAttackStatus(AttackStatus.BLOCK))
 			return true;
 
-		float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent();
+		float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent() + accMod;
 
 		float block = attacked.getGameStats().getBlock().getBonus()
 			+ getMovementModifier(attacked, StatEnum.BLOCK, attacked.getGameStats().getBlock().getBase());
-		float blockRate = block - accuracy;
-		// blockRate = blockRate*0.6f+50;
-		if (blockRate > 500)
-			blockRate = 500;
-		return Rnd.get(1000) < blockRate;
+		return Rnd.get(1000) < limit(StatEnum.BLOCK, block - accuracy);
 	}
 
 	/**
-	 * Accuracy (includes evasion/parry/block formulas): Accuracy formula is based on opponents evasion/parry/block vs your own Accuracy. If your
-	 * Accuracy is 300 or more above opponents evasion/parry/block then you can not be evaded, parried or blocked. <br>
-	 * https://docs.google.com/spreadsheet/ccc?key=0AqxBGNJV9RrzdF9tOWpwUlVLOXE5bVRWeHQtbGQxaUE&hl=en_US#gid=2
-	 */
-	public static boolean calculatePhysicalEvasion(float diff, int upperCap) {
-		diff = diff * 0.6f + 50;
-		if (diff > upperCap)
-			diff = upperCap;
-		return Rnd.get(1000) < diff;
-	}
-
-	/**
-	 * Calculates CRITICAL chance
 	 * http://www.wolframalpha.com/input/?i=-0.000126341+x%5E2%2B0.184411+x-13.7738
 	 * https://docs.google.com/spreadsheet/ccc?key=0AqxBGNJV9RrzdGNjbEhQNHN3S3M5bUVfUVQxRkVIT3c&hl=en_US#gid=0
 	 * https://docs.google.com/spreadsheets/d/1QEET5QAnxqxgT2T82g80C_9yH2D5iFos2TadR_UqPQs/edit#gid=1008537650
-	 *
-	 * @return double
 	 */
-	public static boolean calculatePhysicalCriticalRate(Creature attacker, Creature attacked, boolean isMainHand, int criticalProb, boolean isSkill) {
+	public static boolean checkIsPhysicalCriticalHit(Creature attacker, Creature attacked, boolean isMainHand, int criticalProb, boolean isSkill) {
 		if (attacker instanceof Servant || attacker instanceof Homing)
 			return false;
-		int critical;
+		float criticalRate;
 		if (attacker instanceof Player && !isMainHand)
-			critical = ((PlayerGameStats) attacker.getGameStats()).getOffHandPCritical().getCurrent();
+			criticalRate = ((PlayerGameStats) attacker.getGameStats()).getOffHandPCritical().getCurrent();
 		else
-			critical = attacker.getGameStats().getMainHandPCritical().getCurrent();
+			criticalRate = attacker.getGameStats().getMainHandPCritical().getCurrent();
 
 		// check one time boost skill critical
 		AttackerCriticalStatus acStatus = attacker.getObserveController().checkAttackerCriticalStatus(AttackStatus.CRITICAL, isSkill);
 		if (acStatus.isResult()) {
 			if (acStatus.isPercent())
-				critical *= (1 + acStatus.getValue() / 100);
+				criticalRate *= (1 + acStatus.getValue() / 100);
 			else
 				return Rnd.get(1000) < acStatus.getValue();
 		}
 
-		critical -= attacked.getGameStats().getPCR().getCurrent();
-		if (critical <= 0) {
-			critical = 1;
-		}
+		criticalRate -= attacked.getGameStats().getPCR().getCurrent();
 
 		// add critical Prob
-		critical *= criticalProb / 100f;
-
-		double criticalChance;
-
-		if (critical <= 440)
-			criticalChance = critical * 0.1f;
-		else if (critical <= 560)
-			criticalChance = (440 * 0.1f) + ((critical - 440) * 0.05f);
-		else
-			criticalChance = (440 * 0.1f) + (120 * 0.05f) + ((critical - 560) * 0.01f);
-
-		return Rnd.chance() < criticalChance;
+		if (criticalProb != 100 && criticalRate > 0) {
+			criticalRate *= criticalProb / 100f;
+		}
+		return Rnd.get(1000) < limit(StatEnum.PHYSICAL_CRITICAL, criticalRate);
 	}
 
 	/**
@@ -704,18 +575,16 @@ public class StatFunctions {
 		}
 
 		int levelDiff = attacked.getLevel() - attacker.getLevel();
-		int mResi = attacked.getGameStats().getMResist().getCurrent();
-		int resistRate = mResi - attacker.getGameStats().getMAccuracy().getCurrent() - accMod;
+		float mResi = attacked.getGameStats().getMResist().getCurrent();
+		float resistRate = mResi - attacker.getGameStats().getMAccuracy().getCurrent() - accMod;
 
 		if (mResi > 0 && levelDiff > 2) // only apply if creature has mres > 0 (to keep effect of AI.modifyStat())
 			resistRate += (levelDiff - 2) * 100;
 
-		if (resistRate <= 0) // 0.1% min cap
-			resistRate = 1;
-		else if (resistRate > 500 && attacker instanceof Player && attacked instanceof Player) // checked on retail: only applies to PvP
-			resistRate = 500;
+		if (attacker instanceof Player && attacked instanceof Player) // checked on retail: only applies to PvP
+			resistRate = (int) limit(StatEnum.MAGICAL_RESIST, resistRate);
 
-		return resistRate;
+		return (int) resistRate;
 	}
 
 	public static int calculateFallDamage(Player player, float distance) {
@@ -781,7 +650,7 @@ public class StatFunctions {
 		return value;
 	}
 
-	public static int adjustDamageByMovementModifier(Creature creature, int value) {
+	public static float adjustDamageByMovementModifier(Creature creature, float value) {
 		if (!(creature instanceof Player))
 			return value;
 		int h = ((Player) creature).getMoveController().getMovementHeading();
@@ -803,7 +672,7 @@ public class StatFunctions {
 				value *= 0.8f; // correct? it's only 30% according to https://web.archive.org/web/20170429204823/gameguide.na.aiononline.com/aion/Combat
 				break;
 		}
-		return Math.round(value);
+		return value;
 	}
 
 	private static float getNpcLevelDiffMod(int levelDiff, int base) {
@@ -827,6 +696,13 @@ public class StatFunctions {
 					return 0.8f;
 		}
 		return base;
+	}
+
+	/**
+	 * @return		the smaller of {@code value} and {@code differenceLimit} for this StatEnum
+	 */
+	public static float limit(StatEnum statEnum, float value) {
+		return Math.min(StatCapUtil.getDifferenceLimit(statEnum), value);
 	}
 
 }

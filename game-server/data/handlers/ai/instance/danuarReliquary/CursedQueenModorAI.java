@@ -61,8 +61,8 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
-		return (int) (damage * multiplier);  // fix skill dmg until new calculations are available
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
+		return damage * multiplier;  // fix skill dmg until new calculations are available
 	}
 
 	private synchronized void checkPercentage(int hpPercentage) {

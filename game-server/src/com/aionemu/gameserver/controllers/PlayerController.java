@@ -427,7 +427,7 @@ public class PlayerController extends CreatureController<Player> {
 
 	@Override
 	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
-						 boolean allowGodstoneActivation, HopType hopType) {
+						 boolean allowGodstoneActivation, HopType hopType, boolean allowCriticalEffectActivation) {
 		if (getOwner().isDead())
 			return;
 
@@ -440,7 +440,7 @@ public class PlayerController extends CreatureController<Player> {
 
 		cancelUseItem();
 		cancelGathering();
-		super.onAttack(attacker, skillId, type, damage, notifyAttack, logId, attackStatus, allowGodstoneActivation, hopType);
+		super.onAttack(attacker, skillId, type, damage, notifyAttack, logId, attackStatus, allowGodstoneActivation, hopType, allowCriticalEffectActivation);
 
 		if (attacker instanceof Npc) {
 			ShoutEventHandler.onAttack((NpcAI) attacker.getAi(), getOwner());

@@ -393,7 +393,7 @@ public class Skill {
 				}
 				castDuration -= baseCastDuration - boostValue;
 			} else {
-				castDuration = effector.getGameStats().getPositiveStat(StatEnum.ATTACK_SPEED, baseCastDuration);
+				castDuration = (int) effector.getGameStats().getPositiveStat(StatEnum.ATTACK_SPEED, baseCastDuration);
 			}
 		}
 
@@ -435,7 +435,7 @@ public class Skill {
 		}
 		Times time = motionTime.getTimesFor(player.getRace(), player.getGender(), weapons, player.isInRobotMode(), motionId);
 		if (time != null) {
-			float atkSpeed2 = ((float) player.getGameStats().getAttackSpeed().getCurrent() / (float) player.getGameStats().getAttackSpeed().getBase());
+			float atkSpeed2 = player.getGameStats().getAttackSpeed().getCurrent() / player.getGameStats().getAttackSpeed().getBase();
 			animationTime = (int)(time.getMaxTime() * motion.getSpeed() * atkSpeed2 * 10);
 			serverHitTime = ((player.isInRobotMode() ? time.getAnimationLength() : time.getMinTime()) * motion.getSpeed() * atkSpeed2 * 10);
 		}

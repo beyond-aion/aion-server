@@ -17,12 +17,12 @@ public class OneDmgAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyDamage(Creature attacker, int damage, Effect effect) {
+	public float modifyDamage(Creature attacker, float damage, Effect effect) {
 		return 1;
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		return 1;
 	}
 

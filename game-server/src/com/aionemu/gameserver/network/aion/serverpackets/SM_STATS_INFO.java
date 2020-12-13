@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.GameTimeService;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * In this packet Server is sending User Info?
@@ -85,14 +86,14 @@ public class SM_STATS_INFO extends AionServerPacket {
 		writeC(player.getFlyState());// [fly state]
 		writeC(player.getMoveController().getMovementMask());// [movementMask]
 
-		writeH(pgs.getMainHandPAttack().getCurrent());// [current main hand attack]
-		writeH(pgs.getOffHandPAttack().getBase() + Math.round(pgs.getOffHandPAttack().getBonus() * 0.98f));// [off hand attack]
+		writeH(pgs.getMainHandPAttack(CalculationType.DISPLAY).getCurrent());// [current main hand attack]
+		writeH(pgs.getOffHandPAttack(CalculationType.DISPLAY).getCurrent());// [current off hand attack]
 
 		writeH(0);// unk 3.0
 
 		writeD(pgs.getPDef().getCurrent());// [current pdef]
-		writeH(pgs.getMainHandMAttack().getCurrent());// [current magic attack]
-		writeH(pgs.getOffHandMAttack().getBase() + Math.round(pgs.getOffHandMAttack().getBonus() * 0.82f));
+		writeH(pgs.getMainHandMAttack(CalculationType.DISPLAY).getCurrent());// [current magic attack]
+		writeH(pgs.getOffHandMAttack(CalculationType.DISPLAY).getCurrent());// [current off hand magic attack]
 		writeD(pgs.getMDef().getCurrent()); // [Current magic def]
 		writeH(pgs.getMResist().getCurrent());// [current mres]
 		writeH(0);// unk 3.0
@@ -163,10 +164,10 @@ public class SM_STATS_INFO extends AionServerPacket {
 		writeH(pgs.getMaxDp().getBase());// [base dp]
 		writeH(21592);// to do display_max_point
 		writeD(pgs.getFlyTime().getBase());// [fly time]
-		writeH(pgs.getMainHandPAttack().getBase());// [base main hand attack]
-		writeH(pgs.getOffHandPAttack().getBase());// [base off hand attack]
-		writeH(pgs.getMainHandMAttack().getBase());// [current magic attack]
-		writeH(pgs.getOffHandMAttack().getBase());
+		writeH(pgs.getMainHandPAttack(CalculationType.DISPLAY).getBase());// [base main hand attack]
+		writeH(pgs.getOffHandPAttack(CalculationType.DISPLAY).getBase());// [base off hand attack]
+		writeH(pgs.getMainHandMAttack(CalculationType.DISPLAY).getBase());// [base main hand magic attack]
+		writeH(pgs.getOffHandMAttack(CalculationType.DISPLAY).getBase());// [base off hand magic attack]
 		writeD(pgs.getPDef().getBase()); // [base pdef]
 		writeD(pgs.getMDef().getBase());// [base magic def]
 		writeH(pgs.getMResist().getBase());// [base magic res]

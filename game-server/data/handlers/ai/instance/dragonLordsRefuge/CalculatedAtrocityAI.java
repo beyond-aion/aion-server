@@ -38,13 +38,13 @@ public class CalculatedAtrocityAI extends GeneralNpcAI {
 	}
 
 	@Override
-	public int modifyDamage(Creature attacker, int damage, Effect effect) {
+	public float modifyDamage(Creature attacker, float damage, Effect effect) {
 		return 0;
 	}
 
 		@Override
-		public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
-				return Math.round(damage * 0.7f);
+		public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
+				return damage * 0.7f;
 		}
 
 		@Override

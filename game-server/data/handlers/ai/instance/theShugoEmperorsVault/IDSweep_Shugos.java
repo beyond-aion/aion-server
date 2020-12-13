@@ -40,7 +40,7 @@ public class IDSweep_Shugos extends AggressiveNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		if (effect == null) {
 			int rndDamage = Rnd.get(-Math.round(baseDamage * 0.2f), Math.round(baseDamage * 0.25f));
 			damage = baseDamage + rndDamage;

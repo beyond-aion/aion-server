@@ -3,6 +3,7 @@ package admincommands;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Pet;
@@ -22,6 +23,7 @@ import com.aionemu.gameserver.spawnengine.ClusteredNpc;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 
 /**
@@ -55,50 +57,90 @@ public class Info extends AdminCommand {
 					+ "Town ID: " + TownService.getInstance().getTownResidence(player));
 				PlayerGameStats pgs = player.getGameStats();
 				sendInfo(admin,
-					"[Stats]\n\tPvP attack: " + pgs.getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.1f + "%\n\tPvP p. attack: "
-						+ pgs.getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.1f + "%\n\tPvP m. attack: "
-						+ pgs.getStat(StatEnum.PVP_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.1f + "%\n\tPvP defend: "
-						+ pgs.getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.1f + "%\n\tPvP p. defend: "
-						+ pgs.getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.1f + "%\n\tPvP m. defend: "
-						+ pgs.getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.1f + "%\n\tCast Time Boost: +"
-						+ (pgs.getStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() * 0.1f - 100) + "%\n\tAttack Speed: "
-						+ pgs.getAttackSpeed().getCurrent() * 0.001f + "\n\tMovement Speed: " + pgs.getMovementSpeedFloat()
-						+ "\n\t----------Main Hand------------\n\tAttack: " + pgs.getMainHandPAttack().getCurrent() + "\n\tAccuracy: "
-						+ pgs.getMainHandPAccuracy().getCurrent() + "\n\tCritical: " + pgs.getMainHandPCritical().getCurrent()
-						+ "\n\t------------Off Hand------------\n\tFinal-Attack: "
-						+ (pgs.getOffHandPAttack().getBase() + Math.round(pgs.getOffHandPAttack().getBonus() * 0.98f)) + "\n\t[Current]Attack: "
-						+ pgs.getOffHandPAttack().getCurrent() + "\n\tAccuracy: " + pgs.getOffHandPAccuracy().getCurrent() + "\n\tCritical: "
-						+ pgs.getOffHandPCritical().getCurrent() + "\n\t-------------Magical-------------\n\tFinal-Attack: "
-						+ (pgs.getOffHandMAttack().getBase() + Math.round(pgs.getOffHandMAttack().getBonus() * 0.82f)) + "\n\t[Current]Attack: "
-						+ pgs.getMainHandMAttack().getCurrent() + "\n\tAccuracy: " + pgs.getMAccuracy().getCurrent() + "\n\tCritical: "
-						+ pgs.getMCritical().getCurrent() + "\n\tBoost: " + pgs.getMBoost().getCurrent()
-						+ "\n\t-------------Protect--------------\n\tPhysical Defence: " + pgs.getPDef().getCurrent() + "\n\tBlock: "
-						+ pgs.getBlock().getCurrent() + "\n\tParry: " + pgs.getParry().getCurrent() + "\n\tEvasion: " + pgs.getEvasion().getCurrent()
-						+ "\n\tMagic Resist: " + pgs.getMResist().getCurrent());
+					"[Stats]"
+							+ "\n\tHP: " +  player.getLifeStats().getCurrentHp() +  "/" + pgs.getMaxHp().getCurrent()
+							+ ", MP: " + player.getLifeStats().getCurrentMp() + "/" + pgs.getMaxMp().getCurrent()
+							+ ", FP: " + player.getLifeStats().getCurrentFp() + "/" + pgs.getFlyTime().getCurrent()
+							+ ", DP: " + player.getCommonData().getDp() + "/" + pgs.getMaxDp().getCurrent()
+							+ "\n\tPower: " + pgs.getPower().getCurrent()
+							+ ", Health: " + pgs.getHealth().getCurrent()
+							+ ", Agility: " + pgs.getAgility().getCurrent()
+							+ ", Accuracy: " + pgs.getAccuracy().getCurrent()
+							+ ", Knowledge: " + pgs.getKnowledge().getCurrent()
+							+ ", Will: " + pgs.getWill().getCurrent()
+							+ "\n\tCast Time Boost: " + (pgs.getStat(StatEnum.BOOST_CASTING_TIME, 1000).getCurrent() * 0.1f - 100) + "%"
+							+ "\n\tBase Attack Speed " + pgs.getAttackSpeed().getBase() * 0.001f
+							+ "\n\tCurrent Attack Speed: " + pgs.getAttackSpeed().getCurrent() * 0.001f
+							+ "\n\tMovement Speed: " + pgs.getMovementSpeedFloat()
+							+ "\n\t-------------Offence-------------"
+							+ "\n\tMagic Boost: " + pgs.getMBoost().getCurrent()
+							+ "\n\tM. Accuracy: " + pgs.getMAccuracy().getCurrent()
+							+ "\n\tM. Critical: " + pgs.getMCritical().getCurrent()
+							+ "\n\t\t---------Main Hand-----------"
+							+ "\n\t\tM. Attack: " + (pgs.getMainHandMAttack(CalculationType.DISPLAY).getCurrent())
+							+ "\n\t\tP. Attack: " + pgs.getMainHandPAttack(CalculationType.DISPLAY).getCurrent()
+							+ "\n\t\tP. Accuracy: " + pgs.getMainHandPAccuracy().getCurrent()
+							+ "\n\t\tP. Critical: " + pgs.getMainHandPCritical().getCurrent()
+							+ "\n\t\t-----------Off Hand-----------"
+							+ "\n\t\tM. Attack displayed: " + (pgs.getOffHandMAttack(CalculationType.DISPLAY).getCurrent())
+							+ ", min: " + (int) (pgs.getOffHandMAttack().getCurrent() * pgs.getMinDamageRatio())
+							+ ", max: " + pgs.getOffHandMAttack().getCurrent()
+							+ "\n\t\tP. Attack displayed: " + (pgs.getOffHandPAttack(CalculationType.DISPLAY).getCurrent())
+							+ ", min: " + (int) (pgs.getOffHandPAttack().getCurrent() * pgs.getMinDamageRatio())
+							+ ", max: " + pgs.getOffHandPAttack().getCurrent()
+							+ "\n\t\tP. Accuracy: " + pgs.getOffHandPAccuracy().getCurrent()
+							+ "\n\t\tP. Critical: " + pgs.getOffHandPCritical().getCurrent()
+							+ "\n\t-------------Defence--------------"
+							+ "\n\t\tM. Defence: " + pgs.getMDef().getCurrent()
+							+ "\n\t\tMagic Resist: " + pgs.getMResist().getCurrent()
+							+ "\n\t\tCrit. Spell Resist: " + pgs.getMCR()
+							+ "\n\t\tCrit. Spell Fortitude: " + pgs.getStat(StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, 0).getCurrent()
+							+ "\n\t\tP. Defence: " + pgs.getPDef().getCurrent()
+							+ "\n\t\tBlock: " + pgs.getBlock().getCurrent()
+							+ "\n\t\tParry: " + pgs.getParry().getCurrent()
+							+ "\n\t\tEvasion: " + pgs.getEvasion().getCurrent()
+							+ "\n\t\tCrit. Strike Resist: " + pgs.getPCR().getCurrent()
+							+ "\n\t\tCrit. Strike Fortitude: " + pgs.getStat(StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, 0).getCurrent()
+							+ "\n\t\tWind Resist: " + pgs.getMagicalDefenseFor(SkillElement.WIND)
+							+ "\n\t\tWater Resist: " + pgs.getMagicalDefenseFor(SkillElement.WATER)
+							+ "\n\t\tEarth Resist: " + pgs.getMagicalDefenseFor(SkillElement.EARTH)
+							+ "\n\t\tFire Resist: " + pgs.getMagicalDefenseFor(SkillElement.FIRE)
+							+ "\n\t\tDark Resist: " + pgs.getMagicalDefenseFor(SkillElement.DARK)
+							+ "\n\t\tLight Resist: " + pgs.getMagicalDefenseFor(SkillElement.LIGHT)
+							+ "\n\t-------------PvP Stats-------------"
+							+ "\n\tPvP attack: " + pgs.getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.1f + "%"
+							+ "\n\tPvP p. attack: " + pgs.getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.1f + "%"
+							+ "\n\tPvP m. attack: " + pgs.getStat(StatEnum.PVP_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.1f + "%"
+							+ "\n\tPvP defend: " + pgs.getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.1f + "%"
+							+ "\n\tPvP p. defend: " + pgs.getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.1f + "%"
+							+ "\n\tPvP m. defend: " + pgs.getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.1f + "%");
 
 				for (int i = 0; i < 2; i++) {
 					NpcFaction faction = player.getNpcFactions().getActiveNpcFaction(i == 0);
 					if (faction != null) {
 						sendInfo(admin,
-							player.getName() + " have join to " + (i == 0 ? "mentor" : "daily") + " faction: "
-								+ DataManager.NPC_FACTIONS_DATA.getNpcFactionById(faction.getId()).getName() + "\n\tCurrent quest state: " + faction.getState().name()
-								+ (faction.getState().equals(ENpcFactionQuestState.COMPLETE)
-									? ("\n\tNext after: " + ((faction.getTime() - System.currentTimeMillis() / 1000) / 3600f) + " h.") : ""));
+							player.getName() + " have join to " + (i == 0 ? "mentor" : "daily") + " faction: " + DataManager.NPC_FACTIONS_DATA.getNpcFactionById(faction.getId()).getName()
+									+ "\n\tCurrent quest state: " + faction.getState().name()
+									+ (faction.getState().equals(ENpcFactionQuestState.COMPLETE) ? ("\n\tNext after: " + ((faction.getTime() - System.currentTimeMillis() / 1000) / 3600f) + " h.") : ""));
 					}
 				}
 			} else if (creature instanceof Npc) {
 				Npc npc = (Npc) creature;
-				sendInfo(admin, "[Template info]\n\tRating: " + npc.getRating() + ", Rank: " + npc.getRank() + "\n\tTemplateType: " + npc.getNpcTemplateType()
-					+ ", AbyssType: " + npc.getAbyssNpcType() + "\n\tRelative XP reward: " + StatFunctions.calculateExperienceReward(admin.getLevel(), npc));
+				sendInfo(admin, "[Template info]\n\tRating: " + npc.getRating() + ", Rank: " + npc.getRank()
+						+ "\n\tTemplateType: " + npc.getNpcTemplateType() + ", AbyssType: " + npc.getAbyssNpcType()
+						+ "\n\tRelative XP reward: " + StatFunctions.calculateExperienceReward(admin.getLevel(), npc));
 				if (npc instanceof SiegeNpc)
 					sendInfo(admin, "[Siege info]\n\tSiegeId: " + ((SiegeNpc) npc).getSiegeId() + ", SiegeRace: " + ((SiegeNpc) npc).getSiegeRace());
 				sendInfo(admin,
-					"[AI info]\n\tAI: " + npc.getAi().getName() + "\n\tState: " + npc.getAi().getState() + ", SubState: " + npc.getAi().getSubState());
+					"[AI info]\n\tAI: " + npc.getAi().getName()
+							+ "\n\tState: " + npc.getAi().getState() + ", SubState: " + npc.getAi().getSubState());
 				sendInfo(admin,
-					"[Sense range]\n\tRadius: " + npc.getAggroRange() + "\n\tShort-Radius: " + npc.getShortAggroRange() + "\n\tAngle: " + npc.getAggroAngle() + "\n\tSide: " + npc.getObjectTemplate().getBoundRadius().getSide() + ", Front: "
-						+ npc.getObjectTemplate().getBoundRadius().getFront() + ", Upper: " + npc.getObjectTemplate().getBoundRadius().getUpper()
-						+ "\n\tDirectional bound: " + PositionUtil.getDirectionalBound(npc, admin, true) + "\n\tDistance: "
-						+ (npc.getAggroRange() + PositionUtil.getDirectionalBound(npc, admin, true)));
+					"[Sense range]\n\tRadius: " + npc.getAggroRange()
+							+ "\n\tShort-Radius: " + npc.getShortAggroRange()
+							+ "\n\tAngle: " + npc.getAggroAngle()
+							+ "\n\tSide: " + npc.getObjectTemplate().getBoundRadius().getSide() + ", Front: " + npc.getObjectTemplate().getBoundRadius().getFront() + ", Upper: " + npc.getObjectTemplate().getBoundRadius().getUpper()
+							+ "\n\tDirectional bound: " + PositionUtil.getDirectionalBound(npc, admin, true)
+							+ "\n\tDistance: " + (npc.getAggroRange() + PositionUtil.getDirectionalBound(npc, admin, true)));
 				sendInfo(admin, "[Spawn info]\n\tStaticId: " + npc.getSpawn().getStaticId() + ", DistToSpawn: " + npc.getDistanceToSpawnLocation() + "m");
 				if (npc.isPathWalker()) {
 					sendInfo(admin, "\tRouteId: " + npc.getSpawn().getWalkerId());
@@ -116,8 +158,8 @@ public class Info extends AdminCommand {
 			sendInfo(admin, "[Your relation]\n\tisEnemy: " + admin.isEnemy(creature) + ", canAttack: " + PlayerRestrictions.canAttack(admin, target));
 			sendInfo(admin, "[Targets relation]\n\tisEnemy: " + creature.isEnemy(admin)
 				+ (creature instanceof Npc ? ", Hostility: " + ((Npc) creature).getType(admin) : ""));
-			sendInfo(admin, "[Life stats]\n\tHP: " + creature.getLifeStats().getCurrentHp() + " / " + creature.getLifeStats().getMaxHp() + "\n\tMP: "
-				+ creature.getLifeStats().getCurrentMp() + " / " + creature.getLifeStats().getMaxMp());
+			sendInfo(admin, "[Life stats]\n\tHP: " + creature.getLifeStats().getCurrentHp() + " / " + creature.getLifeStats().getMaxHp()
+					+ "\n\tMP: " + creature.getLifeStats().getCurrentMp() + " / " + creature.getLifeStats().getMaxMp());
 			sendInfo(admin, createAggroInfo(creature));
 		} else if (target.getSpawn() != null && target.getSpawn().getStaticId() != 0) {
 			sendInfo(admin, "\tStaticId: " + target.getSpawn().getStaticId());

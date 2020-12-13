@@ -56,9 +56,9 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 	}
 
 	@Override
-	public int modifyOwnerDamage(int damage, Creature effected, Effect effect) {
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		if (fortressBoss != null && effect != null && effect.getEffected() == fortressBoss && effect.getStack().equals("DGFI_ONESHOTONEKILL_WARPDR"))
-			damage = Math.round(fortressBoss.getLifeStats().getMaxHp() * 0.1f);
+			damage = fortressBoss.getLifeStats().getMaxHp() * 0.1f;
 		return damage;
 	}
 

@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_UPDATE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
  * @author ATracer
@@ -48,8 +49,8 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 	}
 
 	@Override
-	public Stat2 getStat(StatEnum statEnum, int base) {
-		Stat2 stat = super.getStat(statEnum, base);
+	public Stat2 getStat(StatEnum statEnum, float base, CalculationType... calculationTypes) {
+		Stat2 stat = super.getStat(statEnum, base, calculationTypes);
 		if (owner.getMaster() == null)
 			return stat;
 		switch (statEnum) {

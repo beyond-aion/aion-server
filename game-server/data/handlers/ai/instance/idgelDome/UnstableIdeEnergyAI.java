@@ -31,7 +31,7 @@ public class UnstableIdeEnergyAI extends NpcAI {
 	}
 
 	@Override
-	public int modifyDamage(Creature attacker, int damage, Effect effect) {
+	public float modifyDamage(Creature attacker, float damage, Effect effect) {
 		return 0;
 	}
 

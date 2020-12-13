@@ -7,7 +7,7 @@ import com.aionemu.gameserver.skillengine.model.HitType;
  */
 public class AttackResult {
 
-	private int damage;
+	private float damage;
 
 	private AttackStatus attackStatus;
 
@@ -27,68 +27,48 @@ public class AttackResult {
 
 	private boolean launchSubEffect = true;
 
-	public AttackResult(int damage, AttackStatus attackStatus) {
+	public AttackResult(float damage, AttackStatus attackStatus) {
 		this.damage = damage;
 		this.attackStatus = attackStatus;
 	}
 
-	public AttackResult(int damage, AttackStatus attackStatus, HitType type) {
+	public AttackResult(float damage, AttackStatus attackStatus, HitType type) {
 		this(damage, attackStatus);
 		this.hitType = type;
 	}
 
-	/**
-	 * @return the damage
-	 */
 	public int getDamage() {
+		return (int) damage;
+	}
+
+	public float getExactDamage() {
 		return damage;
 	}
 
-	/**
-	 * @param damage
-	 *          the damage to set
-	 */
-	public void setDamage(int damage) {
+	public void setDamage(float damage) {
 		this.damage = damage;
 	}
 
-	/**
-	 * @return the attackStatus
-	 */
 	public AttackStatus getAttackStatus() {
 		return attackStatus;
 	}
 
-	/**
-	 * @return the Damage Type
-	 */
-	public HitType getDamageType() {
+	public HitType getHitType() {
 		return hitType;
 	}
 
-	/**
-	 * @param type
-	 *          the Damage Type to set
-	 */
-	public void setDamageType(HitType type) {
+	public void setHitType(HitType type) {
 		this.hitType = type;
 	}
 
-	/**
+	/*
 	 * shield effects related
 	 */
 
-	/**
-	 * @return the shieldType
-	 */
 	public int getShieldType() {
 		return shieldType;
 	}
 
-	/**
-	 * @param shieldType
-	 *          the shieldType to set
-	 */
 	public void setShieldType(int shieldType) {
 		this.shieldType |= shieldType;
 	}
@@ -149,17 +129,10 @@ public class AttackResult {
 		this.mpAbsorbed = mpAbsorbed;
 	}
 
-	/**
-	 * @return the mpShieldSkillId
-	 */
 	public int getMpShieldSkillId() {
 		return mpShieldSkillId;
 	}
 
-	/**
-	 * @param mpShieldSkillId
-	 *          the mpShieldSkillId to set
-	 */
 	public void setMpShieldSkillId(int mpShieldSkillId) {
 		this.mpShieldSkillId = mpShieldSkillId;
 	}

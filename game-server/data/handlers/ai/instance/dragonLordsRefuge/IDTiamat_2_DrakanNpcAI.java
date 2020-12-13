@@ -25,7 +25,7 @@ public class IDTiamat_2_DrakanNpcAI extends OneDmgAI {
 	}
 
 	@Override
-	public int modifyDamage(Creature attacker, int damage, Effect effect) {
+	public float modifyDamage(Creature attacker, float damage, Effect effect) {
 		return damage;
 	}
 
