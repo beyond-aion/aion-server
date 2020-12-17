@@ -418,7 +418,7 @@
 				</spawn>
 			</simple_race>
 		</base_spawn>
-			<base_spawn id="6103"> 
+		<base_spawn id="6103">
 			<simple_race race="ELYOS">
 				<!-- North Outpost -->
 				<spawn npc_id="832122" handler="FLAG">
@@ -1917,7 +1917,7 @@
 				</spawn>
 				<!-- Tomul Shaman PR -->
 				<spawn npc_id="235364" handler="OUTRIDER_ENHANCED" respawn_time="295">
-					<spot x="1635.9349" y="1403.4926" z="288.22827" h="82"/>
+					<spot x="1635.9349" y="1403.4926" z="266.22827" h="82"/>
 					<spot x="1634.5841" y="1482.7504" z="258.31772"/>
 					<spot x="1634.5544" y="1610.3077" z="254.25583" h="83"/>
 					<spot x="1476.8923" y="1552.4363" z="268.82070" h="94"/>
@@ -2003,7 +2003,7 @@
 				</spawn>
 				<!-- Denku Restorer PR -->
 				<spawn npc_id="235368" handler="OUTRIDER_ENHANCED" respawn_time="295">
-					<spot x="1635.9349" y="1403.4926" z="288.22827" h="82"/>
+					<spot x="1635.9349" y="1403.4926" z="266.22827" h="82"/>
 					<spot x="1634.5841" y="1482.7504" z="258.31772"/>
 					<spot x="1634.5544" y="1610.3077" z="254.25583" h="83"/>
 					<spot x="1476.8923" y="1552.4363" z="268.82070" h="94"/>
