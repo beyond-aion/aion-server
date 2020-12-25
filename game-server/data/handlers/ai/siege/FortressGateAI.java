@@ -50,13 +50,11 @@ public class FortressGateAI extends NpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_LOOT:
-			case SHOULD_RESPAWN:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case SHOULD_REWARD, SHOULD_REWARD_AP -> true;
+			case SHOULD_LOOT, SHOULD_RESPAWN -> false;
+			default -> super.ask(question);
+		};
 	}
 
 	@Override

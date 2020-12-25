@@ -1,7 +1,8 @@
 package ai.siege;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SHIELD_EFFECT;
 import com.aionemu.gameserver.services.SiegeService;
@@ -18,31 +19,36 @@ public class ShieldNpcAI extends SiegeNpcAI {
 	}
 
 	@Override
+	public boolean canThink() {
+		// prevent field stone from resetting
+		return getOwner().getRace() != Race.CONSTRUCT;
+	}
+
+	@Override
 	protected void handleDespawned() {
-		sendShieldPacket(false);
+		updateFortressShieldStatus(false);
 		super.handleDespawned();
 	}
 
 	@Override
 	protected void handleSpawned() {
-		sendShieldPacket(true);
+		updateFortressShieldStatus(true);
 		super.handleSpawned();
 	}
-	
+
 	@Override
-	protected void handleAttack(Creature creature) {
-		switch (getOwner().getRace()) {
-			case CONSTRUCT:
-				getOwner().getController().loseAggro(false);
-		}
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_REWARD, SHOULD_REWARD_AP -> true;
+			case SHOULD_LOOT, SHOULD_RESPAWN -> false;
+			default -> super.ask(question);
+		};
 	}
 
-	private void sendShieldPacket(boolean shieldStatus) {
-		int id = getSpawnTemplate().getSiegeId();
-		SiegeService.getInstance().getFortress(id).setUnderShield(shieldStatus);
-
-		final SM_SHIELD_EFFECT packet = new SM_SHIELD_EFFECT(id);
-		getPosition().getWorldMapInstance().forEachPlayer(p -> PacketSendUtility.sendPacket(p, packet));
+	private void updateFortressShieldStatus(boolean hasShield) {
+		int siegeLocationId = getSpawnTemplate().getSiegeId();
+		SiegeService.getInstance().getFortress(siegeLocationId).setUnderShield(hasShield);
+		PacketSendUtility.broadcastToMap(getPosition().getWorldMapInstance(), new SM_SHIELD_EFFECT(siegeLocationId));
 	}
 
 }
