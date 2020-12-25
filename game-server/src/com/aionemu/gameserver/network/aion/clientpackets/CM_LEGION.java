@@ -135,7 +135,7 @@ public class CM_LEGION extends AionClientPacket {
 			} else {
 				switch (exOpcode) {
 					case 0x02: // leave legion
-						LegionService.getInstance().leaveLegion(activePlayer);
+						LegionService.getInstance().leaveLegion(activePlayer, false);
 						break;
 					case 0x08: // refresh legion info
 						sendPacket(new SM_LEGION_INFO(legion));

@@ -126,7 +126,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 			for (Player member : legion.getOnlineLegionMembers()) {
 				PacketSendUtility.broadcastPacket(member, new SM_LEGION_UPDATE_TITLE(member.getObjectId(), legion.getLegionId(), legion.getName(),
-					member.getLegionMember().getRank().getRankId()), true);
+					member.getLegionMember().getRank()), true);
 			}
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_SUCCESS(newName));
 		}

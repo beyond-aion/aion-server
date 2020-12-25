@@ -119,8 +119,8 @@ public class LegionCommand extends AdminCommand {
 			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 			for (Player legionMember : legion.getOnlineLegionMembers()) {
 				PacketSendUtility.broadcastPacket(legionMember,
-					new SM_LEGION_UPDATE_TITLE(legionMember.getObjectId(), legion.getLegionId(), legion.getName(), legionMember.getLegionMember().getRank()
-						.getRankId()), true);
+					new SM_LEGION_UPDATE_TITLE(legionMember.getObjectId(), legion.getLegionId(), legion.getName(), legionMember.getLegionMember().getRank()),
+					true);
 			}
 			PacketSendUtility.sendMessage(player, "legion " + old + " has changed name from " + old + " to " + params[2] + ".");
 		} else if (params[0].equalsIgnoreCase("info")) {
@@ -166,7 +166,7 @@ public class LegionCommand extends AdminCommand {
 				return;
 			}
 
-			if (service.removePlayerFromLegionAsItself(target))
+			if (service.leaveLegion(target, true))
 				PacketSendUtility.sendMessage(player, "player " + target.getName() + " was kicked from legion.");
 			else
 				PacketSendUtility.sendMessage(player, "You have failed to kick player " + target.getName() + " from legion.");
