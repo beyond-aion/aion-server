@@ -23,6 +23,8 @@ public class SignetBurstEffect extends DamageEffect {
 	protected int signetlvl;
 	@XmlAttribute
 	protected String signet;
+	@XmlAttribute(name = "add_effect_prob_multi")
+	protected int addEffectProbMultiplier = 0;
 
 	@Override
 	public void calculateDamage(Effect effect) {
@@ -33,7 +35,7 @@ public class SignetBurstEffect extends DamageEffect {
 		SignetData signetData = DataManager.SIGNET_DATA_TEMPLATES.getSignetData(SignetEnum.valueOf(signet), signetEffect == null ? 0 : signetEffect.getSkillLevel());
 		if (signetData != null) {
 			valueWithDelta *= signetData.getDamageMultiplier();
-			effectProb = signetData.getAddEffectProb();
+			effectProb = signetData.getAddEffectProb() * addEffectProbMultiplier;
 		}
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
 		effect.setLaunchSubEffect(Rnd.chance() < effectProb);

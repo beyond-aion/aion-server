@@ -772,6 +772,7 @@
 				<xs:attribute name="signet" type="xs:string" use="required" />
 				<xs:attribute name="signetlvl" type="xs:int" use="required" />
 				<xs:attribute name="absorb" type="xs:int" />
+				<xs:attribute name="add_effect_prob_multi" type="xs:int"/>
 			</xs:extension>
 		</xs:complexContent>
 	</xs:complexType>
