@@ -39,8 +39,10 @@ public class RootEffect extends EffectTemplate {
 		effected.getEffectController().setAbnormal(AbnormalState.ROOT);
 		effect.setAbnormal(AbnormalState.ROOT);
 		// PacketSendUtility.broadcastPacketAndReceive(effected, new SM_TARGET_IMMOBILIZE(effected));
-		if (effected instanceof Player)
-			((Player) effected).getFlyController().onStopGliding();
+		if (effected instanceof Player player) {
+			player.getFlyController().onStopGliding();
+			player.getMoveController().abortMove();
+		}
 
 		ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
 

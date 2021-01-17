@@ -56,8 +56,10 @@ public class PulledEffect extends EffectTemplate {
 		Creature effected = effect.getEffected();
 		if (!effect.isReflected()) {
 			effected.getController().cancelCurrentSkill(effect.getEffector());
-			if (effected instanceof Player)
-				((Player) effected).getFlyController().onStopGliding();
+			if (effected instanceof Player player) {
+				player.getFlyController().onStopGliding();
+				player.getMoveController().abortMove();
+			}
 		}
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PULLED);
 		effect.setAbnormal(AbnormalState.PULLED);

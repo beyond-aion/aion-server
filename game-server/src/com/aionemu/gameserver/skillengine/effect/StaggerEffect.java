@@ -41,9 +41,11 @@ public class StaggerEffect extends EffectTemplate {
 	public void startEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill(effect.getEffector());
-		if (effected instanceof Player)
-			((Player) effected).getFlyController().onStopGliding();
 		effected.getEffectController().removeParalyzeEffects();
+		if (effected instanceof Player player) {
+			player.getFlyController().onStopGliding();
+			player.getMoveController().abortMove();
+		}
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STAGGER);
 		effect.setAbnormal(AbnormalState.STAGGER);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());

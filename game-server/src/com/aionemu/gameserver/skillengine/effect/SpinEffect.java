@@ -37,8 +37,10 @@ public class SpinEffect extends EffectTemplate {
 	public void startEffect(Effect effect) {
 		final Creature effected = effect.getEffected();
 		effected.getController().cancelCurrentSkill(effect.getEffector());
-		if (effected instanceof Player)
-			((Player) effected).getFlyController().onStopGliding();
+		if (effected instanceof Player player) {
+			player.getFlyController().onStopGliding();
+			player.getMoveController().abortMove();
+		}
 		effect.getEffected().getEffectController().removeParalyzeEffects();
 		effected.getEffectController().setAbnormal(AbnormalState.SPIN);
 		effect.setAbnormal(AbnormalState.SPIN);

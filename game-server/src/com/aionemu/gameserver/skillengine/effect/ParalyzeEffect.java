@@ -32,6 +32,7 @@ public class ParalyzeEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill(effect.getEffector());
 		if (effected instanceof Player player) {
 			player.getFlyController().onStopGliding();
+			player.getMoveController().abortMove();
 			if (effect.getEffector().getMaster() instanceof Player) {
 				long duration = getDuration2() + ((long) getDuration1()) * effect.getSkillLevel();
 				if (getRandomTime() > 0 )
