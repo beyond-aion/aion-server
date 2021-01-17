@@ -79,8 +79,8 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		return isDead;
 	}
 
-	public void setIsAboutToDie(boolean value) {
-		this.isAboutToDie = value;
+	public void setIsAboutToDie() {
+		this.isAboutToDie = true;
 	}
 
 	public boolean isAboutToDie() {
@@ -130,9 +130,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 */
 	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker, boolean sendDiePacket) {
 		Objects.requireNonNull(attacker, "attacker");
-
 		if (getOwner().isInvulnerable()) {
-			if (isAboutToDie())
 				unsetIsAboutToDie();
 			return currentHp;
 		}
@@ -150,8 +148,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 				currentHp = newHp;
 				if (currentHp == 0) {
 					currentMp = 0;
-					isDead = died = true;
-					unsetIsAboutToDie();
+					setIsDead(died = true);
 				}
 			}
 		} finally {
@@ -239,7 +236,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			currentHp = newHp;
 			if (hpIncreased < 0 && currentHp <= 0) { // some skills reduce hp via a negative heal (ghost absorption)
 				currentHp = 0;
-				isDead = died = true;
+				setIsDead(died = true);
 			}
 		} finally {
 			hpLock.unlock();
@@ -439,7 +436,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			currentHp = (int) (hpPercent / 100f * getMaxHp());
 			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
 			if (currentHp > 0)
-				isDead = false;
+				setIsDead(false);
 		} finally {
 			hpLock.unlock();
 		}
@@ -453,7 +450,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		hpLock.lock();
 		try {
 			currentHp = Math.max(0, Math.min(hp, getMaxHp()));
-			isDead = currentHp == 0;
+			setIsDead(currentHp == 0);
 		} finally {
 			hpLock.unlock();
 		}
@@ -506,5 +503,11 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	protected void onMpChanged() {
+	}
+
+	private void setIsDead(boolean isDead) {
+		if (this.isDead != isDead)
+			unsetIsAboutToDie();
+		this.isDead = isDead;
 	}
 }
