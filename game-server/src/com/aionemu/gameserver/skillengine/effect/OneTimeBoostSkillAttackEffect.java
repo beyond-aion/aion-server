@@ -38,16 +38,10 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 
 					@Override
 					public float getBaseMagicalDamageMultiplier() {
-						if (boostCount++ < count)
+						if (boostCount++ < count) {
+							if (boostCount == count)
+								removeEffect(effect);
 							return percent;
-						else {
-							ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-								@Override
-								public void run() {
-									effect.getEffected().getEffectController().removeEffect(effect.getSkillId());
-								}
-							}, 100);
 						}
 						return 1.0f;
 					}
@@ -64,15 +58,8 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 							return 1f;
 
 						if (boostCount++ < count) {
-							if (boostCount == count) {
-								ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-									@Override
-									public void run() {
-										effect.getEffected().getEffectController().removeEffect(effect.getSkillId());
-									}
-								}, 100);
-							}
+							if (boostCount == count)
+								removeEffect(effect);
 							return percent;
 						}
 						return 1.0f;
@@ -90,15 +77,8 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 							return 1f;
 
 						if (boostCount++ < count) {
-							if (boostCount == count) {
-								ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-									@Override
-									public void run() {
-										effect.getEffected().getEffectController().removeEffect(effect.getSkillId());
-									}
-								}, 100);
-							}
+							if (boostCount == count)
+								removeEffect(effect);
 							return percent;
 						}
 						return 1.0f;
@@ -106,16 +86,10 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 
 					@Override
 					public float getBaseMagicalDamageMultiplier() {
-						if (boostCount++ < count)
+						if (boostCount++ < count) {
+							if (boostCount == count)
+								removeEffect(effect);
 							return percent;
-						else {
-							ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-								@Override
-								public void run() {
-									effect.getEffected().getEffectController().removeEffect(effect.getSkillId());
-								}
-							}, 100);
 						}
 						return 1.0f;
 					}
@@ -133,4 +107,10 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 		AttackCalcObserver observer = effect.getAttackStatusObserver(position);
 		effect.getEffected().getObserveController().removeAttackCalcObserver(observer);
 	}
+
+
+	private void removeEffect(Effect effect) {
+		ThreadPoolManager.getInstance().schedule(() -> effect.getEffected().getEffectController().removeEffect(effect.getSkillId()), 100);
+	}
+
 }
