@@ -13776,63 +13776,73 @@
 	</decomposable>
 	<decomposable item_id="188051722"><!-- [Event] Guardian Squad Leader's Shoe/Glove Box -->
 		<items>
-			<item id="114100926" /><!-- Elite Guardian Squad Leader's Shoes -->
-			<item id="111100887" /><!-- Elite Guardian Squad Leader's Gloves -->
+			<item id="111100815" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Guardian Squad Leader's Gloves -->
+			<item id="114100851" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Guardian Squad Leader's Shoes -->
+			<item id="111300819" player_classes="ASSASSIN RANGER GUNNER" /><!-- Guardian Squad Leader's Vambrace -->
+			<item id="114300877" player_classes="ASSASSIN RANGER GUNNER" /><!-- Guardian Squad Leader's Boots -->
+			<item id="111500802" player_classes="CHANTER CLERIC RIDER" /><!-- Guardian Squad Leader's Handguards -->
+			<item id="114500823" player_classes="CHANTER CLERIC RIDER" /><!-- Guardian Squad Leader's Brogans -->
+			<item id="111600794" player_classes="GLADIATOR TEMPLAR" /><!-- Guardian Squad Leader's Gauntlets -->
+			<item id="114600780" player_classes="GLADIATOR TEMPLAR" /><!-- Guardian Squad Leader's Sabatons -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051723"><!-- [Event] Archon Squad Leader's Shoe/Glove Box -->
 		<items>
-			<item id="114100853" /><!-- Archon Squad Leader's Shoes -->
-			<item id="111100817" /><!-- Archon Squad Leader's Gloves -->
+			<item id="111100817" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Archon Squad Leader's Gloves -->
+			<item id="114100853" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Archon Squad Leader's Shoes -->
+			<item id="111300821" player_classes="ASSASSIN RANGER GUNNER" /><!-- Archon Squad Leader's Vambrace -->
+			<item id="114300879" player_classes="ASSASSIN RANGER GUNNER" /><!-- Archon Squad Leader's Boots -->
+			<item id="111500804" player_classes="CHANTER CLERIC RIDER" /><!-- Archon Squad Leader's Handguards -->
+			<item id="114500825" player_classes="CHANTER CLERIC RIDER" /><!-- Archon Squad Leader's Brogans -->
+			<item id="111600796" player_classes="GLADIATOR TEMPLAR" /><!-- Archon Squad Leader's Gauntlets -->
+			<item id="114600782" player_classes="GLADIATOR TEMPLAR" /><!-- Archon Squad Leader's Sabatons -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051724"><!-- [Event] Guardian Centurion's Shoe/Glove Box -->
 		<items>
-			<item id="114100852" /><!-- Guardian Centurion's Shoes -->
-			<item id="111100816" /><!-- Guardian Centurion's Gloves -->
+			<item id="111100816" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Guardian Centurion's Gloves -->
+			<item id="114100852" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Guardian Centurion's Shoes -->
+			<item id="111300820" player_classes="ASSASSIN RANGER GUNNER" /><!-- Guardian Centurion's Vambrace -->
+			<item id="114300878" player_classes="ASSASSIN RANGER GUNNER" /><!-- Guardian Centurion's Boots -->
+			<item id="111500803" player_classes="CHANTER CLERIC RIDER" /><!-- Guardian Centurion's Handguards -->
+			<item id="114500824" player_classes="CHANTER CLERIC RIDER" /><!-- Guardian Centurion's Brogans -->
+			<item id="111600795" player_classes="GLADIATOR TEMPLAR" /><!-- Guardian Centurion's Gauntlets -->
+			<item id="114600781" player_classes="GLADIATOR TEMPLAR" /><!-- Guardian Centurion's Sabatons -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051725"><!-- [Event] Archon Centurion's Shoe/Glove Box -->
 		<items>
-			<item id="114100854" /><!-- Archon Centurion's Shoes -->
-			<item id="111100818" /><!-- Archon Centurion's Gloves -->
+			<item id="111100818" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Archon Centurion's Gloves -->
+			<item id="114100854" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Archon Centurion's Shoes -->
+			<item id="111300822" player_classes="ASSASSIN RANGER GUNNER" /><!-- Archon Centurion's Vambrace -->
+			<item id="114300880" player_classes="ASSASSIN RANGER GUNNER" /><!-- Archon Centurion's Boots -->
+			<item id="111500805" player_classes="CHANTER CLERIC RIDER" /><!-- Archon Centurion's Handguards -->
+			<item id="114500826" player_classes="CHANTER CLERIC RIDER" /><!-- Archon Centurion's Brogans -->
+			<item id="111600797" player_classes="GLADIATOR TEMPLAR" /><!-- Archon Centurion's Gauntlets -->
+			<item id="114600783" player_classes="GLADIATOR TEMPLAR" /><!-- Archon Centurion's Sabatons -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051726"><!-- [Event] Steel Beard Pirate's Tunic/Leggings Box -->
 		<items>
 			<item id="110100974" /><!-- Steel Beard Pirate's Tunic -->
-		</items>
-		<items>
 			<item id="113100878" /><!-- Steel Beard Pirate's Leggings -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051727"><!-- [Event] Steel Beard Pirate's Jerkin/Breeches Box -->
 		<items>
 			<item id="110300919" /><!-- Steel Beard Pirate's Jerkin -->
-		</items>
-		<items>
-			<item id="110301590" /><!-- Steel Beard Pirate's Magic Jerkin -->
-		</items>
-		<items>
 			<item id="113300895" /><!-- Steel Beard Pirate's Breeches -->
-		</items>
-		<items>
-			<item id="113301556" /><!-- Steel Beard Pirate's Magic Breeches -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051728"><!-- [Event] Steel Beard Pirate's Hauberk/Chausses Box -->
 		<items>
 			<item id="110500887" /><!-- Steel Beard Pirate's Hauberk -->
-		</items>
-		<items>
 			<item id="113500861" /><!-- Steel Beard Pirate's Chausses -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051729"><!-- [Event] Steel Beard Pirate's Breastplate/Greaves Box -->
 		<items>
 			<item id="110600871" /><!-- Steel Beard Pirate's Breastplate -->
-		</items>
-		<items>
 			<item id="113600836" /><!-- Steel Beard Pirate's Greaves -->
 		</items>
 	</decomposable>
