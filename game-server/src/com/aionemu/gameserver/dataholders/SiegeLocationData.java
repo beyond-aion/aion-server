@@ -5,17 +5,9 @@ import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
-import com.aionemu.gameserver.model.siege.AgentLocation;
-import com.aionemu.gameserver.model.siege.ArtifactLocation;
-import com.aionemu.gameserver.model.siege.FortressLocation;
-import com.aionemu.gameserver.model.siege.OutpostLocation;
-import com.aionemu.gameserver.model.siege.SiegeLocation;
+import com.aionemu.gameserver.model.siege.*;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
 
 /**
@@ -27,9 +19,6 @@ public class SiegeLocationData {
 
 	@XmlElement(name = "siege_location")
 	private List<SiegeLocationTemplate> siegeLocationTemplates;
-	/**
-	 * Map that contains skillId - SkillTemplate key-value pair
-	 */
 	@XmlTransient
 	private Map<Integer, ArtifactLocation> artifactLocations = new LinkedHashMap<>();
 	@XmlTransient
@@ -48,26 +37,30 @@ public class SiegeLocationData {
 		siegeLocations.clear();
 		for (SiegeLocationTemplate template : siegeLocationTemplates)
 			switch (template.getType()) {
-				case FORTRESS:
+				case FORTRESS -> {
 					FortressLocation fortress = new FortressLocation(template);
 					fortressLocations.put(template.getId(), fortress);
 					siegeLocations.put(template.getId(), fortress);
 					artifactLocations.put(template.getId(), new ArtifactLocation(template));
-					break;
-				case ARTIFACT:
+				}
+				case ARTIFACT -> {
 					ArtifactLocation artifact = new ArtifactLocation(template);
 					artifactLocations.put(template.getId(), artifact);
 					siegeLocations.put(template.getId(), artifact);
-					break;
-				case OUTPOST:
-					OutpostLocation protector = new OutpostLocation(template);
-					outpostLocations.put(template.getId(), protector);
-					siegeLocations.put(template.getId(), protector);
-					break;
-				case AGENT_FIGHT:
+				}
+				case OUTPOST -> {
+					OutpostLocation outpost = new OutpostLocation(template);
+					if (outpost.getLocationId() == 2111)
+						outpost.setRace(SiegeRace.ELYOS);
+					else if (outpost.getLocationId() == 3111)
+						outpost.setRace(SiegeRace.ASMODIANS);
+					outpostLocations.put(template.getId(), outpost);
+					siegeLocations.put(template.getId(), outpost);
+				}
+				case AGENT_FIGHT -> {
 					agentLoc = new AgentLocation(template);
 					siegeLocations.put(template.getId(), agentLoc);
-					break;
+				}
 			}
 	}
 
@@ -90,7 +83,7 @@ public class SiegeLocationData {
 	public Map<Integer, SiegeLocation> getSiegeLocations() {
 		return siegeLocations;
 	}
-	
+
 	public AgentLocation getAgentLoc() {
 		return agentLoc;
 	}
