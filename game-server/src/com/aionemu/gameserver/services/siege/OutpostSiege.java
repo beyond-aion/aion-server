@@ -12,7 +12,6 @@ import com.aionemu.gameserver.model.siege.OutpostLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.mail.SiegeResult;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -31,8 +30,6 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 
 	@Override
 	protected void onSiegeStart() {
-		SiegeService.getInstance().deSpawnNpcs(getSiegeLocationId());
-
 		getSiegeLocation().setVulnerable(true);
 		GlobalCallbackHelper.addCallback(apListener);
 		despawnNpcs(getSiegeLocationId());

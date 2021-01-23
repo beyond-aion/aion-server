@@ -1,21 +1,12 @@
 package com.aionemu.gameserver.services;
 
 import java.text.ParseException;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.function.Consumer;
 import java.util.stream.Collectors;
 
-import com.aionemu.gameserver.model.templates.siegelocation.DoorRepairData;
-import com.aionemu.gameserver.model.templates.siegelocation.DoorRepairStone;
 import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -29,33 +20,14 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
-import com.aionemu.gameserver.model.siege.AgentLocation;
-import com.aionemu.gameserver.model.siege.ArtifactLocation;
-import com.aionemu.gameserver.model.siege.FortressLocation;
-import com.aionemu.gameserver.model.siege.Influence;
-import com.aionemu.gameserver.model.siege.OutpostLocation;
-import com.aionemu.gameserver.model.siege.SiegeLocation;
-import com.aionemu.gameserver.model.siege.SiegeModType;
-import com.aionemu.gameserver.model.siege.SiegeRace;
+import com.aionemu.gameserver.model.siege.*;
+import com.aionemu.gameserver.model.templates.siegelocation.DoorRepairData;
+import com.aionemu.gameserver.model.templates.siegelocation.DoorRepairStone;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_ARTIFACT_INFO3;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_AFTER_SIEGE_LOCINFO_475;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FORTRESS_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FORTRESS_STATUS;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INFLUENCE_RATIO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_RIFT_ANNOUNCE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SHIELD_EFFECT;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SIEGE_LOCATION_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.siege.AgentSiege;
-import com.aionemu.gameserver.services.siege.ArtifactSiege;
-import com.aionemu.gameserver.services.siege.FortressSiege;
-import com.aionemu.gameserver.services.siege.OutpostSiege;
-import com.aionemu.gameserver.services.siege.Siege;
-import com.aionemu.gameserver.services.siege.SiegeException;
-import com.aionemu.gameserver.services.siege.SiegeStartRunnable;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.services.siege.*;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -192,28 +164,18 @@ public class SiegeService {
 		updateFortressNextState();
 
 		// Schedule siege status broadcast (every hour)
-		CronService.getInstance().schedule(new Runnable() {
+		CronService.getInstance().schedule(() -> {
+			updateNextStateUpdateTime();
+			updateFortressNextState();
+			World.getInstance().forEachPlayer(player -> {
+				for (FortressLocation fortress : getFortresses().values())
+					PacketSendUtility.sendPacket(player, new SM_FORTRESS_INFO(fortress.getLocationId(), false));
 
-			@Override
-			public void run() {
-				updateNextStateUpdateTime();
-				updateFortressNextState();
-				World.getInstance().forEachPlayer(new Consumer<Player>() {
+				PacketSendUtility.sendPacket(player, new SM_FORTRESS_STATUS());
 
-					@Override
-					public void accept(Player player) {
-						for (FortressLocation fortress : getFortresses().values())
-							PacketSendUtility.sendPacket(player, new SM_FORTRESS_INFO(fortress.getLocationId(), false));
-
-						PacketSendUtility.sendPacket(player, new SM_FORTRESS_STATUS());
-
-						for (FortressLocation fortress : getFortresses().values())
-							PacketSendUtility.sendPacket(player, new SM_FORTRESS_INFO(fortress.getLocationId(), true));
-					}
-
-				});
-			}
-
+				for (FortressLocation fortress : getFortresses().values())
+					PacketSendUtility.sendPacket(player, new SM_FORTRESS_INFO(fortress.getLocationId(), true));
+			});
 		}, SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE);
 		log.debug("Broadcasting Siege Location status based on expression: " + SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE);
 	}
@@ -237,101 +199,76 @@ public class SiegeService {
 		}
 	}
 
-	public void startSiege(final int siegeLocationId) {
+	public synchronized void startSiege(final int siegeLocationId) {
 		log.debug("Starting siege of siege location: " + siegeLocationId);
 
-		// Siege should not be started two times. Never.
-		Siege<? extends SiegeLocation> siege;
-		synchronized (this) {
-			if (activeSieges.containsKey(siegeLocationId)) {
-				log.error("Attempt to start siege twice for siege location: " + siegeLocationId);
-				return;
-			}
-			siege = newSiege(siegeLocationId);
-			activeSieges.put(siegeLocationId, siege);
+		// Siege should not be started two times
+		if (activeSieges.containsKey(siegeLocationId)) {
+			log.error("Attempt to start siege twice for siege location: " + siegeLocationId, new Exception());
+			return;
 		}
+		Siege<? extends SiegeLocation> siege = newSiege(siegeLocationId);
+		activeSieges.put(siegeLocationId, siege);
 
 		siege.startSiege();
 
 		// certain sieges are endless
 		// should end only manually on siege boss death
-		if (siege.isEndless()) {
+		if (siege.isEndless())
 			return;
-		}
 
 		// schedule siege end
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				stopSiege(siegeLocationId);
-			}
-
-		}, siege.getSiegeLocation().getSiegeDuration() * 1000);
+		ThreadPoolManager.getInstance().schedule(() -> stopSiege(siegeLocationId), siege.getSiegeLocation().getSiegeDuration() * 1000);
 	}
 
-	public void stopSiege(int siegeLocationId) {
+	public synchronized void stopSiege(int siegeLocationId) {
 		log.debug("Stopping siege of siege location: " + siegeLocationId);
 
-		// Just a check here...
-		// If fortresses was captured in 99% the siege timer will return here
-		// without concurrent race
-		if (!isSiegeInProgress(siegeLocationId)) {
+		Siege<? extends SiegeLocation> siege = activeSieges.remove(siegeLocationId);
+		if (siege == null) {
 			log.debug("Siege of siege location " + siegeLocationId + " is not in progress, it was captured earlier?");
 			return;
 		}
-
-		// We need synchronization here for that 1% of cases :)
-		// It may happen that fortresses siege is stopping in the same time by 2 different threads
-		// 1 is for killing the boss
-		// 2 is for the schedule
-		// it might happen that siege will be stopping by other thread, but in such case siege object will be null
-		Siege<?> siege;
-		synchronized (this) {
-			siege = activeSieges.remove(siegeLocationId);
-		}
-		if (siege == null || siege.isFinished()) {
+		if (siege.isFinished())
 			return;
-		}
-
 		siege.stopSiege();
 	}
 
 	/**
 	 * Used to capture fortresses or artifacts without regular siege
 	 */
-	public void captureSiege(SiegeRace sr, int legionId, int locId) {
-		SiegeLocation loc = SiegeService.getInstance().getSiegeLocation(locId);
-		Siege<?> s = SiegeService.getInstance().getSiege(locId);
+	public synchronized void captureSiege(SiegeRace sr, int legionId, int locId) {
+		SiegeLocation loc = getSiegeLocation(locId);
+		Siege<?> s = getSiege(locId);
 		if (s != null) {
 			s.getSiegeCounter().addRaceDamage(sr, s.getBoss().getLifeStats().getMaxHp() + 1);
 			s.setBossKilled(true);
-			SiegeService.getInstance().stopSiege(locId);
+			stopSiege(locId);
 			loc.setLegionId(legionId);
 		} else {
-			SiegeService.getInstance().deSpawnNpcs(locId);
+			deSpawnNpcs(locId);
 			loc.setVulnerable(false);
 			loc.setUnderShield(false);
 			loc.setRace(sr);
 			loc.setLegionId(legionId);
-			SiegeService.getInstance().spawnNpcs(locId, sr, SiegeModType.PEACE);
+			spawnNpcs(locId, sr, SiegeModType.PEACE);
 			DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(loc);
 			switch (locId) {
 				case 2011:
 				case 2021:
 				case 3011:
 				case 3021:
-					SiegeService.getInstance().updateOutpostSiegeState((FortressLocation) loc);
+					updateOutpostSiegeState((FortressLocation) loc);
 					break;
 			}
 		}
-		SiegeService.getInstance().broadcastUpdate(loc);
+		broadcastUpdate(loc);
 	}
 
 	/*
 	 * Return location to balaur control
 	 */
-	private void resetSiegeLocation(SiegeLocation loc) {
+	private synchronized void resetSiegeLocation(SiegeLocation loc) {
 		// Despawn old npc
 		deSpawnNpcs(loc.getLocationId());
 		loc.clearLocation(); // remove all players
@@ -522,7 +459,7 @@ public class SiegeService {
 		}
 	}
 
-	public void updateOutpostSiegeState(FortressLocation fortressLoc) {
+	public synchronized void updateOutpostSiegeState(FortressLocation fortressLoc) {
 		for (OutpostLocation outpost : getOutposts().values()) {
 			List<Integer> dependencies = outpost.getFortressDependency();
 			if (!dependencies.contains(fortressLoc.getLocationId()))
@@ -540,7 +477,7 @@ public class SiegeService {
 					break;
 				}
 			}
-			
+
 			stopSiege(outpost.getLocationId());
 			deSpawnNpcs(outpost.getLocationId());
 
