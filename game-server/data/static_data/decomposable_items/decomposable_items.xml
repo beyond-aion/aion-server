@@ -11062,8 +11062,16 @@
 	<decomposable item_id="188051426" /><!-- Manastone Box Bundle -->
 	<decomposable item_id="188051427" /><!-- Felicitous Manastone Bundle - Fabled -->
 	<decomposable item_id="188051428" /><!-- Felicitous Manastone Bundle - Eternal -->
-	<decomposable item_id="188051429" /><!-- Felicitous Socketing (Fabled) -->
-	<decomposable item_id="188051430" /><!-- Felicitous Socketing (Eternal) -->
+	<decomposable item_id="188051429"><!-- Felicitous Socketing (Fabled) -->
+		<items>
+			<item id="166150003" /><!-- Felicitous Socketing (Fabled) -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051430"><!-- Felicitous Socketing (Eternal) -->
+		<items>
+			<item id="166150004" /><!-- Felicitous Socketing (Eternal) -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051431" /><!-- Refilling Enchantment Stone Box -->
 	<decomposable item_id="188051432" /><!-- Refilling Manastone Box -->
 	<decomposable item_id="188051433" /><!-- Bride's Makeup Box -->
