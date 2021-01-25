@@ -18514,89 +18514,70 @@
 	<decomposable item_id="188052317" /><!-- [Event] Broken Heart Box -->
 	<decomposable item_id="188052318"><!-- [Event] Mended Heart -->
 		<items chance="1">
-			<item id="169610093" /><!-- [Title Card] Top Gun -->
+			<item id="110900340" /><!-- Sweet Couples' Costume -->
 		</items>
 		<items chance="1">
-			<item id="188053099" /><!-- Pure Modor's Equipment Crux Box -->
+			<item id="187060103" /><!-- Prestige Wings -->
 		</items>
 		<items chance="1">
-			<item id="187050031" /><!-- Ornate Butterfly Wing Feather -->
+			<item id="188053295" /><!-- Empyrean Plume Chest-->
 		</items>
 		<items chance="1">
-			<item id="187060176" /><!-- Strengthened Glider -->
-		</items>
-		<items chance="1">
-			<item id="190100139" /><!-- Sleek Hovercycle -->
-		</items>
-		<items chance="1">
-			<item id="168310018" /><!-- Major Blessed Augment: Level 2 -->
+			<item id="188053228" /><!-- [Event] Heartseeker Equipment Box -->
 		</items>
 		<items chance="2">
-			<item id="169620072" /><!-- AP Boost Charm II - 30% -->
+			<item id="166200013" /><!-- Enduring Mythic Weapon Tuning Scroll -->
+		</items>
+		<items chance="2">
+			<item id="166200014" /><!-- Enduring Mythic Armor Tuning Scroll -->
 		</items>
 		<items chance="2">
 			<item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
 		</items>
-		<items chance="2">
-			<item id="166200009" /><!-- Mythic Weapon Tuning Scroll -->
-		</items>
-		<items chance="2">
-			<item id="165020014" /><!-- Weapon Wrapping Scroll (Eternal/Lv. 65 and lower) -->
-		</items>
-		<items chance="2">
-			<item id="188053614" /><!-- Illusion Godstone Bundle -->
-		</items>
-		<items chance="2">
-			<item id="188053295" /><!-- Empyrean Plume Chest-->
+		<items chance="3">
+			<item id="188053667" /><!-- [Event] Mithril Medal Box -->
 		</items>
 		<items chance="3">
 			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
 		</items>
-		<items chance="3">
-			<item id="188053610" /><!-- [Event] Level 70 Composite Manastone Bundle -->
-		</items>
-		<items chance="3">
+		<items chance="4">
 			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
 		</items>
-		<items chance="3">
-			<item id="186000051" min_count="3" /><!-- Major Ancient Crown -->
+		<items chance="4">
+			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
 		</items>
-		<items chance="3">
-			<item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
-		</items>
-		<items chance="3">
+		<items chance="4">
 			<item id="166030005" min_count="3" /><!-- Tempering Solution -->
 		</items>
-		<items chance="5">
-			<item id="160010111" min_count="5" race="ELYOS" /><!-- [Event] Jumpy Monk Form Candy -->
-			<item id="160010112" min_count="5" race="ASMODIANS" /><!-- [Event] Jumpy Monk Form Candy -->
-		</items>
-		<items chance="5">
-			<item id="186000238" min_count="25" /><!-- Conqueror's Mark -->
+		<items chance="6">
+			<item id="188053610" min_count="2" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 		</items>
 		<items chance="6">
+			<item id="188052321" min_count="2" /><!-- [Event] Protectorate Key Box -->
+		</items>
+		<items chance="7">
+			<item id="186000143" min_count="25" /><!-- Kahrun's Symbol -->
+		</items>
+		<items chance="7">
+			<item id="188050714" /><!-- Chocolate Candy Box -->
+		</items>
+		<items chance="7">
 			<item id="160010337" /><!-- [Event] Heartfelt Chocolate -->
 		</items>
-		<items chance="6">
+		<items chance="7">
 			<item id="160010338" /><!-- [Event] Loving Chocolate -->
 		</items>
-		<items chance="7">
-			<item id="164002269" min_count="3" /><!-- Love Firecracker No.1 -->
-		</items>
-		<items chance="7">
-			<item id="164002143" min_count="3" /><!-- Love Firecracker No.2 -->
-		</items>
-		<items chance="7">
+		<items chance="8">
 			<item id="160010208" min_count="3" /><!-- [Event] Sweet Chocolate -->
 		</items>
-		<items chance="7">
-			<item id="162002001" min_count="5" /><!-- Love Potion -->
+		<items chance="8">
+			<item id="162002001" min_count="3" /><!-- Love Potion -->
 		</items>
-		<items chance="7">
-			<item id="164000118" min_count="5" /><!-- Major Crit Strike Scroll -->
+		<items chance="8">
+			<item id="169231017" /><!-- Dye: Indian Pink -->
 		</items>
-		<items chance="7">
-			<item id="164000122" min_count="5" /><!-- Major Crit Spell Scroll -->
+		<items chance="8">
+			<item id="169231023" /><!-- Dye: Indian Blue -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052319"><!-- [Event] Dragon Lord's Wing Box -->
@@ -29314,7 +29295,24 @@
 	<decomposable item_id="188053225" /><!-- Seed of Transformation Chest -->
 	<decomposable item_id="188053226" /><!-- [Event] Sharptooth Repulser Box -->
 	<decomposable item_id="188053227" /><!-- [Event] Flying Pagati Box (30 days) -->
-	<decomposable item_id="188053228" /><!-- [Event] Heartseeker Equipment Box -->
+	<decomposable item_id="188053228" selectable="true"><!-- [Event] Heartseeker Equipment Box -->
+		<items>
+			<item id="100001724" /><!-- [Event] Heartseeker Sword -->
+			<item id="100101318" /><!-- [Event] Heartseeker Mace -->
+			<item id="100201488" /><!-- [Event] Heartseeker Dagger -->
+			<item id="100501302" /><!-- [Event] Heartseeker Orb -->
+			<item id="100601417" /><!-- [Event] Heartseeker Tome -->
+			<item id="100901360" /><!-- [Event] Heartseeker Greatsword -->
+			<item id="101301253" /><!-- [Event] Heartseeker Spear -->
+			<item id="101501345" /><!-- [Event] Heartseeker Staff -->
+			<item id="101701355" /><!-- [Event] Heartseeker Bow -->
+			<item id="101801207" /><!-- [Event] Heartseeker Pistol -->
+			<item id="101901116" /><!-- [Event] Heartseeker Aethercannon -->
+			<item id="102001235" /><!-- [Event] Heartseeker Harp -->
+			<item id="102101049" /><!-- [Event] Heartseeker Cipher-Blade -->
+			<item id="115001750" /><!-- [Event] Heartseeker Shield -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053229" /><!-- [Event] Kahrun's Lavish Box -->
 	<decomposable item_id="188053230" /><!-- [Event] Invader's Bundle -->
 	<decomposable item_id="188053231" /><!-- [Event] Alukina's Weapon Chest -->
