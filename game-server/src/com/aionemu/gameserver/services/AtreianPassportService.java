@@ -3,15 +3,16 @@ package com.aionemu.gameserver.services;
 import java.sql.Timestamp;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.time.LocalTime;
+import java.util.*;
+
+import org.quartz.JobDetail;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.AttendType;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.Passport;
 import com.aionemu.gameserver.model.account.PassportsList;
@@ -30,30 +31,65 @@ import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author ViAl
- * @reworked Luzien
+ * @author ViAl, Luzien
  */
 public class AtreianPassportService {
 
+	private LocalDateTime expireDate;
+	private JobDetail cronInfo;
+
 	private AtreianPassportService() {
-		CronService.getInstance().schedule(() -> {
-			boolean isFirstDayOfMonth = ServerTime.now().getDayOfMonth() == 1;
-			DAOManager.getDAO(AccountPassportsDAO.class).resetAllPassports();
-			if (isFirstDayOfMonth)
-				DAOManager.getDAO(AccountPassportsDAO.class).resetAllStamps();
-
-			World.getInstance().forEachPlayer(player -> {
-				player.getAccount().setLastStamp(null);
-
+		expireDate = calculatePassportExpireDate();
+		if (!isAtreianPassportDisabled()) {
+			cronInfo = CronService.getInstance().schedule(() -> {
+				// stop cron task if atreian passport is disabled between scheduled runs
+				if (isAtreianPassportDisabled()) {
+					CronService.getInstance().cancel(cronInfo);
+					cronInfo = null;
+					return;
+				}
+				boolean isFirstDayOfMonth = ServerTime.now().getDayOfMonth() == 1;
+				DAOManager.getDAO(AccountPassportsDAO.class).resetAllPassports();
 				if (isFirstDayOfMonth)
-					player.getAccount().setPassportStamps(0);
+					DAOManager.getDAO(AccountPassportsDAO.class).resetAllStamps();
 
-				onLogin(player);
-			});
-		}, "0 0 9 ? * *");
+				World.getInstance().forEachPlayer(player -> {
+					player.getAccount().setLastStamp(null);
+					if (isFirstDayOfMonth)
+						player.getAccount().setPassportStamps(0);
+					onLogin(player);
+				});
+			}, "0 0 9 ? * *");
+		}
+	}
+
+	private boolean isAtreianPassportDisabled() {
+		return isAtreianPassportDisabled(ServerTime.now().toLocalDateTime());
+	}
+
+	private boolean isAtreianPassportDisabled(LocalDateTime checkDateTime) {
+		return expireDate != null && checkDateTime.isAfter(expireDate);
+	}
+
+	private LocalDateTime findLastRewardTime() {
+		Optional<AtreianPassport> lastPossibleReward = DataManager.ATREIAN_PASSPORT_DATA.getAll().values().stream()
+			.filter(v -> v.getAttendType() == AttendType.DAILY || v.getAttendType() == AttendType.CUMULATIVE)
+			.max(Comparator.comparing(AtreianPassport::getPeriodEnd));
+		if (lastPossibleReward.isEmpty())
+			return null;
+		return lastPossibleReward.get().getPeriodEnd();
+	}
+
+	private LocalDateTime calculatePassportExpireDate() {
+		LocalDateTime disableDateTime = findLastRewardTime();
+		if (disableDateTime == null)
+			return null;
+		return disableDateTime.toLocalDate().atTime(LocalTime.MAX).plusDays(14);
 	}
 
 	public void takeReward(Player player, Map<Integer, Set<Integer>> passports) {
+		if (isAtreianPassportDisabled())
+			return;
 		List<Passport> toRemove = new ArrayList<>();
 		PassportsList ppl = player.getAccount().getPassportsList();
 		for (Map.Entry<Integer, Set<Integer>> e : passports.entrySet()) {
@@ -89,8 +125,10 @@ public class AtreianPassportService {
 	}
 
 	public void onLogin(Player player) {
-		Account pa = player.getAccount();
 		LocalDateTime now = ServerTime.now().toLocalDateTime();
+		if (isAtreianPassportDisabled(now))
+			return;
+		Account pa = player.getAccount();
 		boolean doReward = checkOnlineDate(pa) && pa.getPassportStamps() < 28;
 
 		for (AtreianPassport atp : DataManager.ATREIAN_PASSPORT_DATA.getAll().values()) {
