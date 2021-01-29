@@ -33,7 +33,7 @@ public final class CompressUtil {
 			decompressor.end();
 		}
 
-		return bos.toString("UTF-16LE");
+		return bos.toString(StandardCharsets.UTF_16LE);
 	}
 
 	public static byte[] compress(String text) {
