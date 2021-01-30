@@ -15,28 +15,26 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.utils.xml.CompressUtil;
 
 /**
- * @author Rolandas
- * @modified Neon
+ * @author Rolandas, Neon, Sykra
  */
 public class MySQL5HouseScriptsDAO extends HouseScriptsDAO {
 
-	private static Logger log = LoggerFactory.getLogger(MySQL5HouseScriptsDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(MySQL5HouseScriptsDAO.class);
 
-	public static final String INSERT_QUERY = "INSERT INTO `house_scripts` (`house_id`,`script_id`,`script`) VALUES (?,?,?) ON DUPLICATE KEY UPDATE house_id=VALUES(house_id), script_id=VALUES(script_id), script=VALUES(script)";
-	public static final String DELETE_QUERY = "DELETE FROM `house_scripts` WHERE `house_id`=? AND `script_id`=?";
+	private static final String INSERT_QUERY = "INSERT INTO `house_scripts` (`house_id`,`script_id`,`script`) VALUES (?,?,?) ON DUPLICATE KEY UPDATE house_id=VALUES(house_id), script_id=VALUES(script_id), script=VALUES(script)";
+	private static final String DELETE_QUERY = "DELETE FROM `house_scripts` WHERE `house_id`=? AND `script_id`=?";
+	private static final String DELETE_ALL_QUERY = "DELETE FROM `house_scripts` WHERE `house_id`=?";
 	private static final String SELECT_QUERY = "SELECT `script_id`, `script` FROM `house_scripts` WHERE `house_id`=? ORDER BY `date_added`";
 
 	@Override
 	public void storeScript(int houseId, int scriptId, String scriptXML) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
-				stmt.setInt(1, houseId);
-				stmt.setInt(2, scriptId);
-				stmt.setString(3, scriptXML);
-				stmt.executeUpdate();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
+			stmt.setInt(1, houseId);
+			stmt.setInt(2, scriptId);
+			stmt.setString(3, scriptXML);
+			stmt.executeUpdate();
 		} catch (Exception e) {
-			log.error("Could not save script data for houseId: " + houseId + " in DB: " + e.getMessage(), e);
+			log.error("Could not save script data for houseId: {}", houseId, e);
 		}
 	}
 
@@ -51,21 +49,29 @@ public class MySQL5HouseScriptsDAO extends HouseScriptsDAO {
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore script data for houseId: " + houseId + " from DB: " + e.getMessage(), e);
+			log.error("Could not restore script data for houseId: {}", houseId, e);
 		}
 		return scripts;
 	}
 
 	@Override
 	public void deleteScript(int houseId, int scriptId) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
-				stmt.setInt(1, houseId);
-				stmt.setInt(2, scriptId);
-				stmt.executeUpdate();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
+			stmt.setInt(1, houseId);
+			stmt.setInt(2, scriptId);
+			stmt.executeUpdate();
 		} catch (Exception e) {
-			log.error("Could not delete script for houseId: " + houseId + " from DB: " + e.getMessage(), e);
+			log.error("Could not delete script for houseId: {}", houseId, e);
+		}
+	}
+
+	@Override
+	public void deleteScriptsForHouse(int houseId) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_ALL_QUERY)) {
+			stmt.setInt(1, houseId);
+			stmt.executeUpdate();
+		} catch (Exception e) {
+			log.error("Could not delete script for houseId: {}", houseId, e);
 		}
 	}
 

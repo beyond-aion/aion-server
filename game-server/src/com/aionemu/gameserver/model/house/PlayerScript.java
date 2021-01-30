@@ -1,24 +1,12 @@
 package com.aionemu.gameserver.model.house;
 
 /**
- * @author Rolandas
- * @modified Neon
+ * @author Rolandas, Neon, Sykra
  */
-public final class PlayerScript {
+public record PlayerScript(int id, byte[] compressedBytes, int uncompressedSize) {
 
-	private byte[] compressedBytes;
-	private int uncompressedSize;
-
-	public PlayerScript(byte[] compressedBytes, int uncompressedSize) {
-		this.compressedBytes = compressedBytes;
-		this.uncompressedSize = uncompressedSize;
+	public boolean hasData() {
+		return compressedBytes != null && compressedBytes.length > 0;
 	}
 
-	public int getUncompressedSize() {
-		return uncompressedSize;
-	}
-
-	public byte[] getCompressedBytes() {
-		return compressedBytes;
-	}
 }

@@ -397,4 +397,11 @@ public class House extends VisibleObject implements Persistable {
 		boolean isEly = DataManager.NPC_DATA.getNpcTemplate(getLand().getManagerNpcId()).getTribe() == TribeClass.GENERAL;
 		return race == Race.ELYOS && isEly || race == Race.ASMODIANS && !isEly;
 	}
+
+	public void sendScripts(Player player) {
+		if (playerScripts == null)
+			return;
+		playerScripts.sendToPlayer(player, address.getId());
+	}
+
 }

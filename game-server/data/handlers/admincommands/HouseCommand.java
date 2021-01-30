@@ -14,10 +14,8 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.templates.housing.HouseType;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_SCRIPTS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.player.PlayerService;
@@ -171,14 +169,8 @@ public class HouseCommand extends AdminCommand {
 			sendInfo(admin, "No butler was found for house with address " + house.getAddress().getId());
 			return;
 		}
-		PlayerScripts emptyScriptContainer = new PlayerScripts(house.getObjectId());
-		int[] oldScriptIds =  house.getPlayerScripts().getIds().stream().mapToInt(i -> i).toArray();
 		house.reloadPlayerScripts();
-
-		butler.getKnownList().forEachPlayer(player -> {
-			PacketSendUtility.sendPacket(player, new SM_HOUSE_SCRIPTS(house.getAddress().getId(), emptyScriptContainer, oldScriptIds));
-			PacketSendUtility.sendPacket(player, new SM_HOUSE_SCRIPTS(house.getAddress().getId(), house.getPlayerScripts()));
-		});
+		butler.getKnownList().forEachPlayer(house::sendScripts);
 		sendInfo(admin, "Script reload successful");
 	}
 
