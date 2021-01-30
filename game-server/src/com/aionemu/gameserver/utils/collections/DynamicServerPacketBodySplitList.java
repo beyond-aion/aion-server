@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.utils.collections;
 
+import com.aionemu.gameserver.network.aion.AionServerPacket;
+
 import java.util.List;
 import java.util.function.Function;
 
@@ -11,8 +13,6 @@ import java.util.function.Function;
  * @author Sykra, Neon
  */
 public class DynamicServerPacketBodySplitList<Type> extends DynamicElementCountSplitList<Type> {
-
-	public static final int MAX_BODY_BYTE_SIZE = 8185; // 8192 - 2 (body length) - 2 (opCode) - 1 (staticServerPacketCode) - 2 (opCode flipped bits)
 
 	/**
 	 * @param listToSplit
@@ -26,7 +26,7 @@ public class DynamicServerPacketBodySplitList<Type> extends DynamicElementCountS
 	 */
 	public DynamicServerPacketBodySplitList(List<Type> listToSplit, boolean oneTimeSplitOnEmptyData, int staticBodyByteSize,
 		Function<Type, Integer> byteLengthCalculator) {
-		super(listToSplit, oneTimeSplitOnEmptyData, MAX_BODY_BYTE_SIZE - staticBodyByteSize, byteLengthCalculator);
+		super(listToSplit, oneTimeSplitOnEmptyData, AionServerPacket.MAX_USABLE_PACKET_BODY_SIZE - staticBodyByteSize, byteLengthCalculator);
 	}
 
 }
