@@ -84,7 +84,6 @@ public final class DataManager {
 	public static PetSkillData PET_SKILL_DATA;
 	public static PlayerExperienceTable PLAYER_EXPERIENCE_TABLE;
 	public static PlayerInitialData PLAYER_INITIAL_DATA;
-	public static PlayerStatsData PLAYER_STATS_DATA;
 	public static Portal2Data PORTAL2_DATA;
 	public static PortalLocData PORTAL_LOC_DATA;
 	public static QuestsData QUEST_DATA;
@@ -138,7 +137,6 @@ public final class DataManager {
 		MATERIAL_DATA = data.materiaData;
 		MAP_WEATHER_DATA = data.mapWeatherData;
 		PLAYER_EXPERIENCE_TABLE = data.playerExperienceTable;
-		PLAYER_STATS_DATA = data.playerStatsData;
 		ABSOLUTE_STATS_DATA = data.absoluteStatsData;
 		ITEM_CLEAN_UP = data.itemCleanup;
 		ITEM_DATA = data.itemData;

@@ -63,6 +63,9 @@ public class StatsTemplate {
 	@XmlTransient
 	private int abnormalResistance;
 
+	@XmlTransient
+	private int power = 100, health = 100, agility = 100, baseAccuracy = 100, knowledge = 100, will = 100;
+
 	/* ======================================= */
 
 	public int getMaxHp() {
@@ -145,6 +148,10 @@ public class StatsTemplate {
 
 	public int getSpellResist() {
 		return spellResist;
+	}
+
+	public void setSpellResist(int spellResist) {
+		this.spellResist = spellResist;
 	}
 
 	/* ======================================= */
@@ -235,5 +242,57 @@ public class StatsTemplate {
 
 	public void setAbnormalResistance(int abnormalResistance) {
 		this.abnormalResistance = abnormalResistance;
+	}
+
+	public void setSpeeds(CreatureSpeeds speeds) {
+		this.speeds = speeds;
+	}
+
+	public int getPower() {
+		return power;
+	}
+
+	public void setPower(int power) {
+		this.power = power;
+	}
+
+	public int getHealth() {
+		return health;
+	}
+
+	public void setHealth(int health) {
+		this.health = health;
+	}
+
+	public int getAgility() {
+		return agility;
+	}
+
+	public void setAgility(int agility) {
+		this.agility = agility;
+	}
+
+	public int getBaseAccuracy() {
+		return baseAccuracy;
+	}
+
+	public void setBaseAccuracy(int baseAccuracy) {
+		this.baseAccuracy = baseAccuracy;
+	}
+
+	public int getKnowledge() {
+		return knowledge;
+	}
+
+	public void setKnowledge(int knowledge) {
+		this.knowledge = knowledge;
+	}
+
+	public int getWill() {
+		return will;
+	}
+
+	public void setWill(int will) {
+		this.will = will;
 	}
 }

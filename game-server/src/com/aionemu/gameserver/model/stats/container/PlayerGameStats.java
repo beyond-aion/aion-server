@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.stats.container;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -11,7 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.stats.calc.AdditionStat;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
-import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
+import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -57,8 +56,8 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	}
 
 	@Override
-	public PlayerStatsTemplate getStatsTemplate() {
-		return DataManager.PLAYER_STATS_DATA.getTemplate(owner.getPlayerClass(), owner.getLevel());
+	public StatsTemplate getStatsTemplate() {
+		return owner.getPlayerClass().getStatsTemplateFor(owner.getLevel());
 	}
 
 	public Stat2 getMaxDp() {
@@ -90,7 +89,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	@Override
 	public Stat2 getMovementSpeed() {
 		Stat2 movementSpeed;
-		PlayerStatsTemplate pst = getStatsTemplate();
+		StatsTemplate pst = getStatsTemplate();
 		if (owner.isInPlayerMode(PlayerMode.RIDE)) {
 			RideInfo ride = owner.ride;
 			int runSpeed = (int) pst.getRunSpeed() * 1000;
@@ -127,36 +126,6 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 			minWeaponRange = Math.min(minWeaponRange, offHandWeapon.getItemTemplate().getWeaponStats().getAttackRange());
 		}
 		return getStat(StatEnum.ATTACK_RANGE, minWeaponRange == Integer.MAX_VALUE ? base : minWeaponRange);
-	}
-
-	@Override
-	public Stat2 getPower() {
-		return getStat(StatEnum.POWER, getStatsTemplate().getPower());
-	}
-
-	@Override
-	public Stat2 getHealth() {
-		return getStat(StatEnum.HEALTH, getStatsTemplate().getHealth());
-	}
-
-	@Override
-	public Stat2 getAccuracy() {
-		return getStat(StatEnum.ACCURACY, getStatsTemplate().getBaseAccuracy());
-	}
-
-	@Override
-	public Stat2 getAgility() {
-		return getStat(StatEnum.AGILITY, getStatsTemplate().getAgility());
-	}
-
-	@Override
-	public Stat2 getKnowledge() {
-		return getStat(StatEnum.KNOWLEDGE, getStatsTemplate().getKnowledge());
-	}
-
-	@Override
-	public Stat2 getWill() {
-		return getStat(StatEnum.WILL, getStatsTemplate().getWill());
 	}
 
 	@Override
@@ -321,5 +290,37 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	@Override
 	public void updateSpeedInfo() {
 		PacketSendUtility.broadcastToSightedPlayers(owner, new SM_EMOTION(owner, EmotionType.START_EMOTE2), true);
+	}
+
+	public int getHealthDependentAdditionalHp() {
+		return calculateBaseStatDependentAdditionalValue(getHealth(), owner.getPlayerClass().getHealthMultiplier());
+	}
+
+	public int getWillDependentAdditionalMp() {
+		return calculateBaseStatDependentAdditionalValue(getWill(), owner.getPlayerClass().getWillMultiplier());
+	}
+
+	public int getAgilityDependentAdditionalBaseBlock() {
+		return calculateBaseStatDependentAdditionalValue(getAgility(), owner.getPlayerClass().getAgilityMultiplier());
+	}
+
+	public int getAgilityDependentAdditionalBaseParry() {
+		return calculateBaseStatDependentAdditionalValue(getAgility(), owner.getPlayerClass().getAgilityMultiplier());
+	}
+
+	public int getAgilityDependentAdditionalBaseEvasion() {
+		return calculateBaseStatDependentAdditionalValue(getAgility(), owner.getPlayerClass().getAgilityMultiplier());
+	}
+
+	public int getAccuracyDependentAdditionalBasePhysicalAccuracy() {
+		return calculateBaseStatDependentAdditionalValue(getAccuracy(), owner.getPlayerClass().getAccuracyMultiplier());
+	}
+
+	public int getAccuracyDependentAdditionalBasePhysicalCritical() {
+		return calculateBaseStatDependentAdditionalValue(getAccuracy(), owner.getPlayerClass().getAccuracyMultiplier()/20);
+	}
+
+	private int calculateBaseStatDependentAdditionalValue(Stat2 baseStat, int multiplier) {
+		return (int) ((baseStat.getCurrent() - 100) / 100f * multiplier);
 	}
 }

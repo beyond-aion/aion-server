@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 
 /**
@@ -28,6 +27,11 @@ public class PlayerStatFunctions {
 		FUNCTIONS.add(new PDefFunction());
 		FUNCTIONS.add(new MaxHpFunction());
 		FUNCTIONS.add(new MaxMpFunction());
+		FUNCTIONS.add(new BlockFunction());
+		FUNCTIONS.add(new ParryFunction());
+		FUNCTIONS.add(new EvasionFunction());
+		FUNCTIONS.add(new PhysicalCriticalFunction());
+		FUNCTIONS.add(new PhysicalAccuracyFunction());
 		FUNCTIONS.add(new PvEAttackRatioFunction());
 		FUNCTIONS.add(new PvEDefendRatioFunction());
 	}
@@ -49,13 +53,14 @@ class PhysicalAttackFunction extends StatFunction {
 
 	@Override
 	public void apply(Stat2 stat) {
-		if (stat.getOwner() instanceof Player) {
-			PlayerStatsTemplate pst = ((Player) stat.getOwner()).getGameStats().getStatsTemplate();
-			if (stat.getBase() == pst.getAttack())
-				return;
+		if (stat.getOwner() instanceof Player player) {
+			float power = stat.getOwner().getGameStats().getPower().getCurrent();
+			if (player.getEquipment().getMainHandWeapon() == null) {
+				stat.setBaseRate(1 + ((power - 100) * player.getPlayerClass().getNoWeaponPowerMultiplier())/10000f);
+			} else {
+				stat.setBaseRate(power * 0.01f);
+			}
 		}
-		float power = stat.getOwner().getGameStats().getPower().getCurrent();
-		stat.setBaseRate(power * 0.01f);
 	}
 
 	@Override
@@ -72,8 +77,8 @@ class MaxHpFunction extends StatFunction {
 
 	@Override
 	public void apply(Stat2 stat) {
-		float health = stat.getOwner().getGameStats().getHealth().getCurrent();
-		stat.setBaseRate(health * 0.01f);
+		if (stat.getOwner() instanceof Player player)
+			stat.addToBase(player.getGameStats().getHealthDependentAdditionalHp());
 	}
 
 	@Override
@@ -90,8 +95,8 @@ class MaxMpFunction extends StatFunction {
 
 	@Override
 	public void apply(Stat2 stat) {
-		float will = stat.getOwner().getGameStats().getWill().getCurrent();
-		stat.setBaseRate(will * 0.01f);
+		if (stat.getOwner() instanceof Player player)
+			stat.addToBase(player.getGameStats().getWillDependentAdditionalMp());
 	}
 
 	@Override
@@ -133,6 +138,67 @@ class PDefFunction extends StatFunction {
 	@Override
 	public int getPriority() {
 		return 60;
+	}
+}
+
+class BlockFunction extends StatFunction {
+	BlockFunction() {
+		stat = StatEnum.BLOCK;
+	}
+
+	@Override
+	public void apply(Stat2 stat) {
+		if (stat.getOwner() instanceof Player player)
+			stat.addToBase(player.getGameStats().getAgilityDependentAdditionalBaseBlock());
+	}
+}
+
+class ParryFunction extends StatFunction {
+	ParryFunction() {
+		stat = StatEnum.PARRY;
+	}
+
+	@Override
+	public void apply(Stat2 stat) {
+		if (stat.getOwner() instanceof Player player)
+			stat.addToBase(player.getGameStats().getAgilityDependentAdditionalBaseParry());
+	}
+}
+
+class EvasionFunction extends StatFunction {
+	EvasionFunction() {
+		stat = StatEnum.EVASION;
+	}
+
+	@Override
+	public void apply(Stat2 stat) {
+		if (stat.getOwner() instanceof Player player)
+			stat.addToBase(player.getGameStats().getAgilityDependentAdditionalBaseEvasion());
+	}
+}
+
+class PhysicalCriticalFunction extends StatFunction {
+	PhysicalCriticalFunction() {
+		stat = StatEnum.PHYSICAL_CRITICAL;
+	}
+
+	@Override
+	public void apply(Stat2 stat) {
+		if (stat.getOwner() instanceof Player player)
+			stat.addToBase(player.getGameStats().getAccuracyDependentAdditionalBasePhysicalCritical());
+	}
+}
+
+class PhysicalAccuracyFunction extends StatFunction {
+
+	PhysicalAccuracyFunction() {
+		stat = StatEnum.PHYSICAL_ACCURACY;
+	}
+
+	@Override
+	public void apply(Stat2 stat) {
+		if (stat.getOwner() instanceof Player player)
+			stat.addToBase(player.getGameStats().getAccuracyDependentAdditionalBasePhysicalAccuracy());
 	}
 }
 

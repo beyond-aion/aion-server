@@ -158,7 +158,6 @@
 					<xs:element ref="pets" minOccurs="0" />
 					<xs:element ref="player_experience_table" minOccurs="0" />
 					<xs:element ref="player_initial_data" minOccurs="0" />
-					<xs:element ref="player_stats_templates" minOccurs="0" />
 					<xs:element ref="player_titles" minOccurs="0" />
 					<xs:element ref="polymorph_panels" minOccurs="0" />
 					<xs:element ref="portal_locs" minOccurs="0" />

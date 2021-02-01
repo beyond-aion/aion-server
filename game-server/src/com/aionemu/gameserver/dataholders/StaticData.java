@@ -52,9 +52,6 @@ public class StaticData {
 	@XmlElement(name = "player_experience_table")
 	public PlayerExperienceTable playerExperienceTable;
 
-	@XmlElement(name = "player_stats_templates")
-	public PlayerStatsData playerStatsData;
-
 	@XmlElement(name = "absolute_stats")
 	public AbsoluteStatsData absoluteStatsData;
 
@@ -319,7 +316,6 @@ public class StaticData {
 		log.info("Loaded " + materiaData.size() + " material ids");
 		log.info("Loaded weather for " + mapWeatherData.size() + " maps");
 		log.info("Loaded " + playerExperienceTable.getMaxLevel() + " player experience table entries");
-		log.info("Loaded " + playerStatsData.size() + " player stat templates");
 		log.info("Loaded " + absoluteStatsData.size() + " absolute stat templates");
 		log.info("Loaded " + itemCleanup.size() + " item cleanup entries");
 		log.info("Loaded " + itemData.size() + " item templates");

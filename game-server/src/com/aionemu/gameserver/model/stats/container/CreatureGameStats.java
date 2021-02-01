@@ -166,27 +166,27 @@ public abstract class CreatureGameStats<T extends Creature> {
 	public abstract StatsTemplate getStatsTemplate();
 
 	public Stat2 getPower() {
-		return getStat(StatEnum.POWER, 100);
+		return getStat(StatEnum.POWER, getStatsTemplate().getPower());
 	}
 
 	public Stat2 getHealth() {
-		return getStat(StatEnum.HEALTH, 100);
+		return getStat(StatEnum.HEALTH, getStatsTemplate().getHealth());
 	}
 
-	public Stat2 getAccuracy() { // FIXME unused
-		return getStat(StatEnum.ACCURACY, 100);
+	public Stat2 getAccuracy() {
+		return getStat(StatEnum.ACCURACY, getStatsTemplate().getBaseAccuracy());
 	}
 
-	public Stat2 getAgility() { // FIXME unused
-		return getStat(StatEnum.AGILITY, 100);
+	public Stat2 getAgility() {
+		return getStat(StatEnum.AGILITY, getStatsTemplate().getAgility());
 	}
 
 	public Stat2 getKnowledge() {
-		return getStat(StatEnum.KNOWLEDGE, 100);
+		return getStat(StatEnum.KNOWLEDGE, getStatsTemplate().getKnowledge());
 	}
 
 	public Stat2 getWill() {
-		return getStat(StatEnum.WILL, 100);
+		return getStat(StatEnum.WILL, getStatsTemplate().getWill());
 	}
 
 	public Stat2 getMaxHp() {

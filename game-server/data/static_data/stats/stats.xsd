@@ -2,33 +2,6 @@
 <xs:schema version="1.0" xmlns:xs="http://www.w3.org/2001/XMLSchema">
 	<xs:include schemaLocation="../global_types.xsd"/>
 	<xs:include schemaLocation="../import.xsd"/>
-	<xs:element name="player_stats_templates">
-		<xs:complexType>
-			<xs:sequence>
-				<xs:element ref="import" minOccurs="0" maxOccurs="unbounded"/>
-				<xs:element name="player_stats" type="playerStatsTemplateType" minOccurs="0" maxOccurs="unbounded"/>
-			</xs:sequence>
-		</xs:complexType>
-	</xs:element>
-	<xs:complexType name="playerStatsTemplateType">
-		<xs:sequence>
-			<xs:element name="stats_template" type="playerStatsTemplate" minOccurs="0"/>
-		</xs:sequence>
-		<xs:attribute name="class" type="playerClass" use="required"/>
-		<xs:attribute name="level" type="xs:byte" use="required"/>
-	</xs:complexType>
-	<xs:complexType name="playerStatsTemplate">
-		<xs:complexContent>
-			<xs:extension base="statsTemplate">
-				<xs:attribute name="power" type="xs:int" use="required"/>
-				<xs:attribute name="health" type="xs:int" use="required"/>
-				<xs:attribute name="agility" type="xs:int" use="required"/>
-				<xs:attribute name="base_accuracy" type="xs:int" use="required"/>
-				<xs:attribute name="knowledge" type="xs:int" use="required"/>
-				<xs:attribute name="will" type="xs:int" use="required"/>
-			</xs:extension>
-		</xs:complexContent>
-	</xs:complexType>
 	<xs:complexType name="statsTemplate">
 		<xs:sequence>
 			<xs:element name="speeds" type="CreatureSpeeds" minOccurs="0" maxOccurs="1"/>

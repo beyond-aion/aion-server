@@ -131,7 +131,6 @@
 	<import file="spawns" singleRootTag="true" />
 	<import file="staticdoors/staticdoor_templates.xml" />
 	<import file="stats/absolute_stats.xml" />
-	<import file="stats/player" singleRootTag="true" />
 	<import file="storage_expander/cube_expander.xml" />
 	<import file="storage_expander/warehouse_expander.xml" />
 	<import file="teleport_location.xml" />
