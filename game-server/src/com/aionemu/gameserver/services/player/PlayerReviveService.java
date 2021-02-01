@@ -46,7 +46,7 @@ public class PlayerReviveService {
 			AuditLogger.log(player, "possibly tried to use a selfres hack (accepted missing res by another player)");
 			return;
 		}
-		revive(player, 10, 10, true, player.getResurrectionSkill());
+		revive(player, 35, 35, true, player.getResurrectionSkill());
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		// if player was flying before res, start flying
@@ -149,7 +149,7 @@ public class PlayerReviveService {
 			kisk.resurrectionUsed();
 			if (skillId > 0)
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-			revive(player, 25, 25, false, skillId);
+			revive(player, 30, 30, false, skillId);
 			player.getGameStats().updateStatsAndSpeedVisually();
 			player.unsetResPosState();
 			TeleportService.teleportTo(player, kisk.getPosition());
