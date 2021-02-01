@@ -33,8 +33,7 @@ public enum PlayerClass implements L10n {
 	RIDER(13, 904315, ENGINEER),
 	GUNNER(14, 904316, ENGINEER),
 	ARTIST(15, 904317, true),
-	BARD(16, 904318, ARTIST),
-	ALL(null, 0, false);
+	BARD(16, 904318, ARTIST);
 
 	/** This id is used on client side */
 	private final byte classId;
@@ -162,7 +161,6 @@ public enum PlayerClass implements L10n {
 			case GUNNER -> "textures/ui/EMBLEM/Icon_emblem_Gunner.dds";
 			case ARTIST -> "textures/ui/EMBLEM/Icon_emblem_Artist.dds";
 			case BARD -> "textures/ui/EMBLEM/Icon_emblem_Bard.dds";
-			case ALL -> null;
 		};
 	}
 }

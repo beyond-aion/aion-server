@@ -30,13 +30,20 @@ public class SkillTreeData {
 	private final TIntObjectHashMap<List<SkillLearnTemplate>> templatesById = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		for (SkillLearnTemplate template : skillTemplates)
-			addTemplate(template);
+		for (SkillLearnTemplate template : skillTemplates) {
+			if (template.getClassId() == null) {
+				for (PlayerClass pClass: PlayerClass.values()) {
+					addTemplate(pClass, template);
+				}
+			} else {
+				addTemplate(template.getClassId(), template);
+			}
+		}
 		skillTemplates = null;
 	}
 
-	private void addTemplate(SkillLearnTemplate template) {
-		int hash = makeHash(template.getClassId().ordinal(), template.getRace().ordinal(), template.getMinLevel());
+	private void addTemplate(PlayerClass playerClass, SkillLearnTemplate template) {
+		int hash = makeHash(playerClass.ordinal(), template.getRace().ordinal(), template.getMinLevel());
 		List<SkillLearnTemplate> value = templates.get(hash);
 		if (value == null) {
 			value = new ArrayList<>();
@@ -74,17 +81,19 @@ public class SkillTreeData {
 
 		List<SkillLearnTemplate> classRaceSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), race.ordinal(), level));
 		List<SkillLearnTemplate> classSpecificTemplates = templates.get(makeHash(playerClass.ordinal(), Race.PC_ALL.ordinal(), level));
-		List<SkillLearnTemplate> raceSpecificTemplates = templates.get(makeHash(PlayerClass.ALL.ordinal(), race.ordinal(), level));
-		List<SkillLearnTemplate> generalTemplates = templates.get(makeHash(PlayerClass.ALL.ordinal(), Race.PC_ALL.ordinal(), level));
+
+		//List<SkillLearnTemplate> raceSpecificTemplates = templates.get(makeHash(PlayerClass.ALL.ordinal(), race.ordinal(), level));
+		//List<SkillLearnTemplate> generalTemplates = templates.get(makeHash(PlayerClass.ALL.ordinal(), Race.PC_ALL.ordinal(), level));
 
 		if (classRaceSpecificTemplates != null)
 			newSkills.addAll(classRaceSpecificTemplates);
 		if (classSpecificTemplates != null)
 			newSkills.addAll(classSpecificTemplates);
-		if (raceSpecificTemplates != null)
+		/*if (raceSpecificTemplates != null)
 			newSkills.addAll(raceSpecificTemplates);
 		if (generalTemplates != null)
 			newSkills.addAll(generalTemplates);
+		*/
 
 		return newSkills;
 	}
@@ -146,8 +155,8 @@ public class SkillTreeData {
 		List<SkillLearnTemplate> byId = templatesById.get(skillId);
 		if (byId != null) {
 			for (SkillLearnTemplate template : byId)
-				if ((template.getClassId() == PlayerClass.ALL || template.getClassId() == playerClass)
-					&& (template.getRace() == Race.PC_ALL || template.getRace() == race))
+				if (template.getClassId() == playerClass &&
+						(template.getRace() == Race.PC_ALL || template.getRace() == race))
 					searchSkills.add(template);
 		}
 		return searchSkills;

@@ -48,7 +48,7 @@ public class Classup extends ConsoleCommand {
 		PlayerClass playerClass;
 		try {
 			playerClass = PlayerClass.valueOf(newClass.toUpperCase());
-			if (playerClass.isStartingClass() || playerClass == PlayerClass.ALL)
+			if (playerClass.isStartingClass())
 				throw new IllegalArgumentException();
 		} catch (IllegalArgumentException e) {
 			sendInfo(admin, "Invalid player class.");

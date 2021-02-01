@@ -17,8 +17,8 @@ import com.aionemu.gameserver.model.Race;
 @XmlType(name = "skill")
 public class SkillLearnTemplate {
 
-	@XmlAttribute(name = "classId", required = true)
-	private PlayerClass classId = PlayerClass.ALL;
+	@XmlAttribute(name = "classId")
+	private PlayerClass classId = null;
 	@XmlAttribute(name = "skillId", required = true)
 	private int skillId;
 	@XmlAttribute(name = "skillLearn", required = false)

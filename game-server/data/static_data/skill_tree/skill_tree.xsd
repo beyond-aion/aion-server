@@ -11,7 +11,7 @@
 		</xs:complexType>
 	</xs:element>
 	<xs:complexType name="SkillTreeEntry">
-		<xs:attribute name="classId" type="playerClass" use="required"/>
+		<xs:attribute name="classId" type="playerClass"/>
 		<xs:attribute name="skillId" type="xs:int" use="required"/>
 		<xs:attribute name="skillLearn" type="xs:int" use="optional"/>
 		<xs:attribute name="name" type="xs:string" use="required"/>

@@ -73,7 +73,7 @@ public class ResultedItem {
 	 * @return True if the specified player is allowed to acquire this item. False if any condition does not match.
 	 */
 	public boolean isObtainableFor(Player player) {
-		return (playerClasses == null || playerClasses.contains(player.getPlayerClass()) || playerClasses.contains(PlayerClass.ALL))
+		return (playerClasses == null || playerClasses.contains(player.getPlayerClass()))
 			&& (race == Race.PC_ALL || race == player.getRace());
 	}
 }

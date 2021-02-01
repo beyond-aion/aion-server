@@ -416,7 +416,7 @@
 	<skill skillId="1798" name="Backshock" minLevel="53" autolearn="true" race="PC_ALL" classId="CHANTER"/>
 	<skill skillId="1799" name="Backshock" minLevel="58" autolearn="true" skillLearn="1798" race="PC_ALL" classId="CHANTER"/>
 	<skill skillId="1800" name="Backshock" minLevel="63" autolearn="true" skillLearn="1799" race="PC_ALL" classId="CHANTER"/>
-	<skill skillId="245" name="Bandage Heal" minLevel="1" autolearn="true" race="PC_ALL" classId="ALL"/>
+	<skill skillId="245" name="Bandage Heal" minLevel="1" autolearn="true" race="PC_ALL"/>
 	<skill skillId="2993" name="Barricade of Steel" minLevel="20" race="PC_ALL" classId="TEMPLAR" stigma="1"/>
 	<skill skillId="2994" name="Barricade of Steel" minLevel="26" skillLearn="2993" race="PC_ALL" classId="TEMPLAR" stigma="1"/>
 	<skill skillId="2995" name="Barricade of Steel" minLevel="32" skillLearn="2994" race="PC_ALL" classId="TEMPLAR" stigma="1"/>
@@ -1422,7 +1422,7 @@
 	<skill skillId="1457" name="Erosion" minLevel="55" autolearn="true" skillLearn="1456" race="PC_ALL" classId="SPIRIT_MASTER"/>
 	<skill skillId="1458" name="Erosion" minLevel="60" autolearn="true" skillLearn="1457" race="PC_ALL" classId="SPIRIT_MASTER"/>
 	<skill skillId="1459" name="Erosion" minLevel="65" autolearn="true" skillLearn="1458" race="PC_ALL" classId="SPIRIT_MASTER"/>
-	<skill skillId="302" name="Escape" minLevel="1" autolearn="true" race="PC_ALL" classId="ALL"/>
+	<skill skillId="302" name="Escape" minLevel="1" autolearn="true" race="PC_ALL"/>
 	<skill skillId="2915" name="Eternal Denial" minLevel="55" race="PC_ALL" classId="TEMPLAR" stigma="4"/>
 	<skill skillId="2916" name="Eternal Denial" minLevel="59" skillLearn="2915" race="PC_ALL" classId="TEMPLAR" stigma="4"/>
 	<skill skillId="2917" name="Eternal Denial" minLevel="63" skillLearn="2916" race="PC_ALL" classId="TEMPLAR" stigma="4"/>
@@ -2060,8 +2060,8 @@
 	<skill skillId="2964" name="Holy Shield" minLevel="38" skillLearn="2963" race="PC_ALL" classId="TEMPLAR" stigma="1"/>
 	<skill skillId="2965" name="Holy Shield" minLevel="44" skillLearn="2964" race="PC_ALL" classId="TEMPLAR" stigma="1"/>
 	<skill skillId="2966" name="Holy Shield" minLevel="50" skillLearn="2965" race="PC_ALL" classId="TEMPLAR" stigma="1"/>
-	<skill skillId="296" name="Homeward Bound" minLevel="21" race="ASMODIANS" classId="ALL"/>
-	<skill skillId="295" name="Homeward Bound" minLevel="21" race="ELYOS" classId="ALL"/>
+	<skill skillId="296" name="Homeward Bound" minLevel="21" race="ASMODIANS"/>
+	<skill skillId="295" name="Homeward Bound" minLevel="21" race="ELYOS"/>
 	<skill skillId="1942" name="Hot Shot" minLevel="9" autolearn="true" race="PC_ALL" classId="ENGINEER"/>
 	<skill skillId="1943" name="Hot Shot" minLevel="14" autolearn="true" skillLearn="1942" race="PC_ALL" classId="GUNNER"/>
 	<skill skillId="1944" name="Hot Shot" minLevel="19" autolearn="true" skillLearn="1943" race="PC_ALL" classId="GUNNER"/>
@@ -3169,7 +3169,7 @@
 	<skill skillId="4141" name="Retribution Lightning" minLevel="50" skillLearn="4140" race="PC_ALL" classId="CLERIC" stigma="1"/>
 	<skill skillId="4142" name="Retribution Lightning" minLevel="56" skillLearn="4141" race="PC_ALL" classId="CLERIC" stigma="1"/>
 	<skill skillId="4143" name="Retribution Lightning" minLevel="62" skillLearn="4142" race="PC_ALL" classId="CLERIC" stigma="1"/>
-	<skill skillId="243" name="Return" minLevel="1" autolearn="true" race="PC_ALL" classId="ALL"/>
+	<skill skillId="243" name="Return" minLevel="1" autolearn="true" race="PC_ALL"/>
 	<skill skillId="1910" name="Revealing Scope" minLevel="31" autolearn="true" race="PC_ALL" classId="GUNNER"/>
 	<skill skillId="3904" name="Reverse Condition" minLevel="20" race="PC_ALL" classId="CLERIC" stigma="1"/>
 	<skill skillId="1746" name="Revival Mantra" minLevel="22" autolearn="true" race="PC_ALL" classId="CHANTER"/>
@@ -3968,10 +3968,10 @@
 	<skill skillId="2681" name="Steel Storm" minLevel="50" skillLearn="2678" race="PC_ALL" classId="RIDER" stigma="1"/>
 	<skill skillId="2684" name="Steel Storm" minLevel="56" skillLearn="2681" race="PC_ALL" classId="RIDER" stigma="1"/>
 	<skill skillId="2687" name="Steel Storm" minLevel="62" skillLearn="2684" race="PC_ALL" classId="RIDER" stigma="1"/>
-	<skill skillId="11505" name="Stigma Flame Cage I" minLevel="20" race="PC_ALL" classId="ALL" stigma="1"/>
-	<skill skillId="11504" name="Stigma Healing Light II" minLevel="20" race="PC_ALL" classId="ALL" stigma="1"/>
-	<skill skillId="11507" name="Stigma Hydro Eruption II" minLevel="20" race="PC_ALL" classId="ALL" stigma="1"/>
-	<skill skillId="11506" name="Stigma: Ferocious Strike III" minLevel="20" race="PC_ALL" classId="ALL" stigma="1"/>
+	<skill skillId="11505" name="Stigma Flame Cage I" minLevel="20" race="PC_ALL" stigma="1"/>
+	<skill skillId="11504" name="Stigma Healing Light II" minLevel="20" race="PC_ALL" stigma="1"/>
+	<skill skillId="11507" name="Stigma Hydro Eruption II" minLevel="20" race="PC_ALL" stigma="1"/>
+	<skill skillId="11506" name="Stigma: Ferocious Strike III" minLevel="20" race="PC_ALL" stigma="1"/>
 	<skill skillId="1754" name="Stilling Word" minLevel="50" autolearn="true" race="PC_ALL" classId="CHANTER"/>
 	<skill skillId="4543" name="Stinging Note" minLevel="20" race="PC_ALL" classId="BARD" stigma="1"/>
 	<skill skillId="4544" name="Stinging Note" minLevel="26" skillLearn="4543" race="PC_ALL" classId="BARD" stigma="1"/>

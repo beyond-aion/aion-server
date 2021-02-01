@@ -48,8 +48,6 @@ public class Changeclass extends ConsoleCommand {
 		PlayerClass playerClass;
 		try {
 			playerClass = PlayerClass.valueOf(newClass.toUpperCase());
-			if (playerClass == PlayerClass.ALL)
-				throw new IllegalArgumentException();
 		} catch (IllegalArgumentException e) {
 			sendInfo(admin, "Invalid player class.");
 			return;
