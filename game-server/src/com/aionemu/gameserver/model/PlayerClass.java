@@ -53,27 +53,8 @@ public enum PlayerClass implements L10n {
 
 	PlayerClass(Integer classId, int nameId, boolean isStartingClass) {
 		this.nameId = nameId;
-		if (classId == null) {
-			byte id = 0;
-			int mask = 0;
-			List<Field> fields = Arrays.stream(PlayerClass.class.getDeclaredFields()).filter(Field::isEnumConstant).collect(Collectors.toList());
-			for (Field field : fields) {
-				try {
-					PlayerClass playerClass = (PlayerClass) field.get(null);
-					if (playerClass != null) { // PlayerClass.ALL (this) is null and must be ignored
-						id |= playerClass.getClassId();
-						mask |= playerClass.getMask();
-					}
-				} catch (IllegalAccessException e) { // should never happen
-					throw new GameServerError(e);
-				}
-			}
-			this.classId = id;
-			this.idMask = mask;
-		} else {
-			this.classId = classId.byteValue();
-			this.idMask = (int) Math.pow(2, classId);
-		}
+		this.classId = classId.byteValue();
+		this.idMask = (int) Math.pow(2, classId);
 		if (isStartingClass)
 			this.startingClass = this;
 	}
