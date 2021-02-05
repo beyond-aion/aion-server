@@ -301,7 +301,7 @@ public final class VeteranRewardService {
 		rewards.get(42).add(new RewardItem(186000238, 150)); // Conqueror's Mark
 
 		// month 44
-		rewards.get(43).add(new RewardItem(165020014, 5)); // Weapon Wrapping Scroll (Eternal/Lv. 65 and lower)
+		rewards.get(43).add(new RewardItem(165020014, 1)); // Weapon Wrapping Scroll (Eternal/Lv. 65 and lower)
 		rewards.get(43).add(new RewardItem(186000242, 15)); // Ceramium Medal
 		rewards.get(43).add(new RewardItem(188053610, 3)); // [Event] Level 70 Composite Manastone Bundle
 		rewards.get(43).add(new RewardItem(186000247, 5)); // Major Danuar Relic
