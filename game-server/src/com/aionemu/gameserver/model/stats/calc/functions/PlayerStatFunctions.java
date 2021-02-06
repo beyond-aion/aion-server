@@ -3,12 +3,14 @@ package com.aionemu.gameserver.model.stats.calc.functions;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.stats.PlayerStatsTemplate;
+import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 
 /**
  * @author ATracer
@@ -26,6 +28,8 @@ public class PlayerStatFunctions {
 		FUNCTIONS.add(new PDefFunction());
 		FUNCTIONS.add(new MaxHpFunction());
 		FUNCTIONS.add(new MaxMpFunction());
+		FUNCTIONS.add(new PvEAttackRatioFunction());
+		FUNCTIONS.add(new PvEDefendRatioFunction());
 	}
 
 	public static final List<IStatFunction> getFunctions() {
@@ -144,6 +148,32 @@ class BoostCastingTimeFunction extends DuplicateStatFunction {
 
 	BoostCastingTimeFunction() {
 		stat = StatEnum.BOOST_CASTING_TIME;
+	}
+}
+
+class PvEAttackRatioFunction extends StatFunction {
+
+	PvEAttackRatioFunction() {
+		stat = StatEnum.PVE_ATTACK_RATIO;
+	}
+
+	@Override
+	public void apply(Stat2 stat) {
+		WorldMapTemplate template = DataManager.WORLD_MAPS_DATA.getTemplate(stat.getOwner().getWorldId());
+		stat.addToBonus(template.getPvEAttackRatio());
+	}
+}
+
+class PvEDefendRatioFunction extends StatFunction {
+
+	PvEDefendRatioFunction() {
+		stat = StatEnum.PVE_DEFEND_RATIO;
+	}
+
+	@Override
+	public void apply(Stat2 stat) {
+		WorldMapTemplate template = DataManager.WORLD_MAPS_DATA.getTemplate(stat.getOwner().getWorldId());
+		stat.addToBonus(template.getPvEAttackRatio());
 	}
 }
 

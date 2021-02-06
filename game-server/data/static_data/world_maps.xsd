@@ -23,6 +23,8 @@
  			<xs:attribute name="drop_type" type="worldDropType" />
 			<xs:attribute name="except_buff" type="xs:boolean" />
             <xs:attribute name="flags" type="AttributeList" use="required" />
+            <xs:attribute name="pve_attack_ratio" type="xs:int"/>
+            <xs:attribute name="pve_defend_ratio" type="xs:int"/>
           </xs:complexType>
         </xs:element>
       </xs:sequence>

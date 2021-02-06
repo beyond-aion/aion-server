@@ -71,6 +71,13 @@ public class WorldMapTemplate {
 	@XmlAttribute(name = "flags")
 	private List<ZoneAttributes> flagValues;
 
+	@XmlAttribute(name = "pve_attack_ratio")
+	private int pveAttackRatio = 0;
+
+	@XmlAttribute(name = "pve_defend_ratio")
+	private int pveDefendRatio = 0;
+
+
 	@XmlTransient
 	private int flags;
 
@@ -176,6 +183,14 @@ public class WorldMapTemplate {
 
 	public int getFlags() {
 		return flags;
+	}
+
+	public int getPvEAttackRatio() {
+		return pveAttackRatio;
+	}
+
+	public int getPveDefendRatio() {
+		return pveDefendRatio;
 	}
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {

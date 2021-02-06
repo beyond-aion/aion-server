@@ -546,7 +546,6 @@ public class StatFunctions {
 			}
 		} else if (!useTemplateDmg) {
 			if (attacker instanceof Player) {
-				damage *= 1.15f; // 15% pve boost, last checked on NA & GF (4.9) 19.03.2016
 				int levelDiff = target.getLevel() - attacker.getLevel(); // npcs dmg is not reduced because of the level difference GF (4.9) 23.04.2016
 				damage *= (1f - getNpcLevelDiffMod(levelDiff, 0));
 			}
