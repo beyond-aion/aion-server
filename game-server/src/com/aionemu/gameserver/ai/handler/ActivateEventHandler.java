@@ -2,6 +2,7 @@ package com.aionemu.gameserver.ai.handler;
 
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
 /**
@@ -21,7 +22,7 @@ public class ActivateEventHandler {
 		Npc npc = npcAI.getOwner();
 		npc.updateKnownlist();
 		npc.getController().loseAggro(false);
-		if (!npc.isInInstance())
+		if (npcAI.ask(AIQuestion.SHOULD_REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE))
 			npc.getEffectController().removeAllEffects();
 	}
 }

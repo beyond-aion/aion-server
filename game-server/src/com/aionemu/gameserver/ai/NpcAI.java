@@ -169,6 +169,8 @@ public abstract class NpcAI extends AITemplate<Npc> {
 			case SHOULD_REWARD_AP:
 				WorldType wt = getOwner().getWorldType();
 				return wt == WorldType.ABYSS || wt != WorldType.ELYSEA && wt != WorldType.ASMODAE && apRewardingRaces.contains(getRace());
+			case SHOULD_REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE:
+				return !getOwner().isInInstance();
 			default:
 				return false;
 		}
