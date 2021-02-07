@@ -17400,6 +17400,66 @@
 			<item id="111301331" /><!-- Tiamat Guard's Vambrace -->
 		</items>
 		<items>
+			<item id="110101459" /><!-- Tiamat Guard's Tunic -->
+		</items>
+		<items>
+			<item id="110301369" /><!-- Tiamat Guard's Jerkin -->
+		</items>
+		<items>
+			<item id="110501344" /><!-- Tiamat Guard's Hauberk -->
+		</items>
+		<items>
+			<item id="110601317" /><!-- Tiamat Guard's Breastplate -->
+		</items>
+		<items>
+			<item id="111101317" /><!-- Tiamat Guard's Gloves -->
+		</items>
+		<items>
+			<item id="111301312" /><!-- Tiamat Guard's Vambrace -->
+		</items>
+		<items>
+			<item id="111501304" /><!-- Tiamat Guard's Handguards -->
+		</items>
+		<items>
+			<item id="111601282" /><!-- Tiamat Guard's Gauntlets -->
+		</items>
+		<items>
+			<item id="112101274" /><!-- Tiamat Guard's Pauldrons -->
+		</items>
+		<items>
+			<item id="112301255" /><!-- Tiamat Guard's Shoulderguards -->
+		</items>
+		<items>
+			<item id="112501244" /><!-- Tiamat Guard's Spaulders -->
+		</items>
+		<items>
+			<item id="112601262" /><!-- Tiamat Guard's Shoulderplates -->
+		</items>
+		<items>
+			<item id="113101334" /><!-- Tiamat Guard's Leggings -->
+		</items>
+		<items>
+			<item id="113301336" /><!-- Tiamat Guard's Breeches -->
+		</items>
+		<items>
+			<item id="113501319" /><!-- Tiamat Guard's Chausses -->
+		</items>
+		<items>
+			<item id="113601271" /><!-- Tiamat Guard's Greaves -->
+		</items>
+		<items>
+			<item id="114101363" /><!-- Tiamat Guard's Shoes -->
+		</items>
+		<items>
+			<item id="114301369" /><!-- Tiamat Guard's Boots -->
+		</items>
+		<items>
+			<item id="114501325" /><!-- Tiamat Guard's Brogans -->
+		</items>
+		<items>
+			<item id="114601266" /><!-- Tiamat Guard's Sabatons -->
+		</items>
+		<items>
 			<item id="166100011" min_count="20" max_count="30" /><!-- Greater Supplements (Mythic) -->
 		</items>
 		<items>

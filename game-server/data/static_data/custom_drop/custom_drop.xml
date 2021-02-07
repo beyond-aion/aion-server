@@ -3972,7 +3972,7 @@
 			<drop item_id="186000096" max_amount="2" /><!-- Platinum Medal -->
 		</drop_group>
 		<drop_group><!-- Named Coin -->
-			<drop item_id="186000201" each_member="true" /><!-- Protectorate Coin -->
+			<drop item_id="186000201" max_amount="3" each_member="true" /><!-- Protectorate Coin -->
 		</drop_group>
 		<drop_group><!-- Named Souvenir -->
 			<drop item_id="170170090" chance="15" /><!-- [Souvenir] Tiamat Statue -->
