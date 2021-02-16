@@ -595,6 +595,8 @@ public class Skill {
 		if (motion != null && motion.isInstantSkill() || hitTime == 0)
 			instantSkill = true;
 
+		endCondCheck();
+
 		// Perform necessary actions (use mp,dp items etc)
 		Actions skillActions = skillTemplate.getActions();
 		if (skillActions != null) {
@@ -686,15 +688,14 @@ public class Skill {
 		if (setCooldowns)
 			setCooldowns();
 
-		if (instantSkill)
-			applyEffect(effects);
-		else
-			ThreadPoolManager.getInstance().schedule(() -> applyEffect(effects), hitTime);
 
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE)
 			sendCastspellEnd(dashStatus, effects);
 
-		endCondCheck();
+		if (instantSkill)
+			applyEffect(effects);
+		else
+			ThreadPoolManager.getInstance().schedule(() -> applyEffect(effects), hitTime);
 
 		if (getSkillTemplate().isDeityAvatar() && effector instanceof Player) {
 			AbyssService.announceAbyssSkillUsage((Player) effector, getSkillTemplate().getL10n());
