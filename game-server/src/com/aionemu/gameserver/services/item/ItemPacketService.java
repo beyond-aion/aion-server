@@ -33,6 +33,7 @@ public class ItemPacketService {
 	public static enum ItemUpdateType {
 		EQUIP_UNEQUIP(-1, false), // internal usage only
 		CHARGE(-2, false), // internal usage only
+		POLISH_CHARGE(-3, false), // internal usage only
 		STATS_CHANGE(0, true), // soul healer pay, manastone socketing, armor/weapons/arrows
 		INC_ITEM_MERGE(0x01, true),
 		INC_KINAH_MERGE(0x05, true),

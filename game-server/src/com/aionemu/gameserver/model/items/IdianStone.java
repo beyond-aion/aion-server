@@ -11,7 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -85,10 +85,14 @@ public class IdianStone extends ItemStone {
 		} else {
 			polishCharge -= result;
 		}
+		if (polishCharge <= 300000 && polishCharge + result > 300000) { // we just dropped to or below 300k
+			PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item, ItemPacketService.ItemUpdateType.POLISH_CHARGE));
+		} else if (polishCharge < 0) {
+			polishCharge = 0;
+		}
 		if (polishCharge == 0) {
 			onUnEquip(player);
 			PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_POLISH_CHANGE_CONDITION_END(item.getL10n()));
 			item.setIdianStone(null);
 			setPersistentState(PersistentState.DELETED);
 			DAOManager.getDAO(ItemStoneListDAO.class).storeIdianStones(this);
