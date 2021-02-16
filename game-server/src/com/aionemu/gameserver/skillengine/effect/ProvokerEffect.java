@@ -47,7 +47,7 @@ public class ProvokerEffect extends ShieldEffect {
 				observer = new ActionObserver(ObserverType.ATTACK) {
 
 					@Override
-					public void attack(Creature creature) {
+					public void attack(Creature creature, int skillId) {
 						if (Rnd.chance() < prob2) {
 							Creature target = getProvokeTarget(provokeTarget, effector, creature);
 							createProvokedEffect(effector, target);
@@ -112,7 +112,7 @@ public class ProvokerEffect extends ShieldEffect {
 				observer = new ActionObserver(ObserverType.ATTACK) {
 
 					@Override
-					public void attack(Creature creature) {
+					public void attack(Creature creature, int skillId) {
 						if (PositionUtil.isBehind(effector, creature)) {
 							if (Rnd.chance() < prob2) {
 								Creature target = getProvokeTarget(provokeTarget, effector, creature);

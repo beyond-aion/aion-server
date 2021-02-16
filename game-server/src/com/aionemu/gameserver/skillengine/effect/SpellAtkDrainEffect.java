@@ -28,7 +28,7 @@ public class SpellAtkDrainEffect extends AbstractOverTimeEffect {
 		int critAddDmg = critAddDmg2 + critAddDmg1 * effect.getSkillLevel();
 		int damage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, position, true, critProbMod2, critAddDmg);
 		effect.getEffected().getController().onAttack(effect, TYPE.DAMAGE, damage, true, LOG.SPELLATKDRAIN, hopType);
-		effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected());
+		effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected(), effect.getSkillId());
 
 		// Drain (heal) portion of damage inflicted
 		if (hpPercent != 0) {

@@ -129,7 +129,7 @@ public class ObserveController {
 	private void notifyAction(ObserverType type, ActionObserver observer, Object... object) {
 		switch (type) {
 			case ATTACK:
-				observer.attack((Creature) object[0]);
+				observer.attack((Creature) object[0], (int) object[1]);
 				break;
 			case ATTACKED:
 				observer.attacked((Creature) object[0], (int) object[1]);
@@ -203,11 +203,12 @@ public class ObserveController {
 
 	/**
 	 * notify that creature attacking
-	 * 
+	 *
 	 * @param damage
+	 * @param skillId
 	 */
-	public void notifyAttackObservers(Creature creature) {
-		notifyObservers(ObserverType.ATTACK, creature);
+	public void notifyAttackObservers(Creature creature, int skillId) {
+		notifyObservers(ObserverType.ATTACK, creature, skillId);
 	}
 
 	/**

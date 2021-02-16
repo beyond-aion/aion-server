@@ -111,7 +111,7 @@ public class HideEffect extends BufEffect {
 			effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACK) {
 
 				@Override
-				public void attack(Creature creature) {
+				public void attack(Creature creature, int skillId) {
 					effect.endEffect();
 				}
 			});
@@ -145,7 +145,7 @@ public class HideEffect extends BufEffect {
 				effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACK) {
 
 					@Override
-					public void attack(Creature creature) {
+					public void attack(Creature creature, int skillId) {
 						effect.endEffect();
 					}
 

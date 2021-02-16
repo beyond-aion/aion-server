@@ -16,7 +16,7 @@ public abstract class ItemUseObserver extends ActionObserver {
 	}
 
 	@Override
-	public final void attack(Creature creature) {
+	public final void attack(Creature creature, int skillId) {
 		abort();
 	}
 

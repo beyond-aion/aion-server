@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -38,7 +39,12 @@ public class IdianStone extends ItemStone {
 
 	public void onEquip(final Player player, long slot) {
 		if (polishCharge > 0 && (slot & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0) {
-			actionListener = new ActionObserver(ObserverType.ATTACK_DEFEND) {
+			actionListener = new ActionObserver(ObserverType.DOT_ATTACK_DEFEND) {
+
+				@Override
+				public void dotattacked(Creature creature, Effect dotEffect) {
+					decreasePolishCharge(player, true);
+				}
 
 				@Override
 				public void attacked(Creature creature, int skillId) {
@@ -46,8 +52,9 @@ public class IdianStone extends ItemStone {
 				}
 
 				@Override
-				public void attack(Creature creature) {
-					decreasePolishCharge(player, false);
+				public void attack(Creature creature, int skillId) {
+					if (skillId == 0)
+						decreasePolishCharge(player, false);
 				}
 
 			};

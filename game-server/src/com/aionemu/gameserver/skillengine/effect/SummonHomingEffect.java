@@ -49,7 +49,7 @@ public class SummonHomingEffect extends SummonEffect {
 				ActionObserver observer = new ActionObserver(ObserverType.ATTACK) {
 
 					@Override
-					public void attack(Creature creature) {
+					public void attack(Creature creature, int skillId) {
 						homing.setAttackCount(homing.getAttackCount() - 1);
 						if (homing.getAttackCount() <= 0)
 							homing.getController().delete();

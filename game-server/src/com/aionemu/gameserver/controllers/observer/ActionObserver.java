@@ -45,7 +45,7 @@ public class ActionObserver {
 	public void attacked(Creature creature, int skillId) {
 	}
 
-	public void attack(Creature creature) {
+	public void attack(Creature creature, int skillId) {
 	}
 
 	public void equip(Item item, Player owner) {

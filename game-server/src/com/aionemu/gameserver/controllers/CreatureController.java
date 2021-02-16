@@ -360,7 +360,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		getOwner().getGameStats().increaseAttackCounter();
 		if (addAttackObservers) {
-			getOwner().getObserveController().notifyAttackObservers(target);
+			getOwner().getObserveController().notifyAttackObservers(target, 0);
 		}
 
 		if (time == 0)
