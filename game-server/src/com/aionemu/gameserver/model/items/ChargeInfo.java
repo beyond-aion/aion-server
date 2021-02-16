@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
 import com.aionemu.gameserver.services.item.ItemPacketService;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -24,7 +25,7 @@ public class ChargeInfo extends ActionObserver {
 	private Player player;
 
 	public ChargeInfo(int chargePoints, Item item) {
-		super(ObserverType.ATTACK_DEFEND);
+		super(ObserverType.DOT_ATTACK_DEFEND);
 		this.chargePoints = chargePoints;
 		this.item = item;
 		if (item.getImprovement() != null) {
@@ -64,14 +65,20 @@ public class ChargeInfo extends ActionObserver {
 	}
 
 	@Override
-	public void attacked(Creature creature, int skillId) {
+	public void dotattacked(Creature creature, Effect dotEffect) {
 		if (updateChargePoints(-defendBurn))
 			sendItemUpdate();
 	}
 
 	@Override
+	public void attacked(Creature creature, int skillId) {
+		if (skillId == 0 && updateChargePoints(-defendBurn))
+			sendItemUpdate();
+	}
+
+	@Override
 	public void attack(Creature creature, int skillId) {
-		if (updateChargePoints(-attackBurn))
+		if (skillId == 0 && updateChargePoints(-attackBurn))
 			sendItemUpdate();
 	}
 
