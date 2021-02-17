@@ -6,6 +6,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.HealType;
+import com.aionemu.gameserver.skillengine.model.SkillMoveType;
 
 /**
  * @author ATracer
@@ -17,6 +18,7 @@ public class MPHealInstantEffect extends AbstractHealEffect {
 	@Override
 	public void calculate(Effect effect) {
 		super.calculate(effect, HealType.MP);
+		effect.setSkillMoveType(SkillMoveType.MOVEBEHIND); // not movetype, displays message in chat "You recovered X MP after using Y" TODO: find out real purpose
 	}
 
 	@Override
