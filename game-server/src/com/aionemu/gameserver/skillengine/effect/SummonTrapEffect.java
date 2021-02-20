@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.skillengine.effect;
 
-import java.util.concurrent.Future;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
@@ -13,6 +11,7 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Trap;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.services.summons.TrapService;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
@@ -49,15 +48,8 @@ public class SummonTrapEffect extends SummonEffect {
 		int instanceId = effector.getInstanceId();
 
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(worldId, npcId, x, y, z, heading);
-		final Trap trap = VisibleObjectSpawner.spawnTrap(spawn, instanceId, effector);
-
-		Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				trap.getController().delete();
-			}
-		}, time * 1000);
-		trap.getController().addTask(TaskId.DESPAWN, task);
+		Trap trap = VisibleObjectSpawner.spawnTrap(spawn, instanceId, effector);
+		TrapService.registerTrap(effector.getObjectId(), trap, true);
+		trap.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> trap.getController().delete(), time * 1000L));
 	}
 }

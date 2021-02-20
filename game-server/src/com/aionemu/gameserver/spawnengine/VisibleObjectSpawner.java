@@ -174,7 +174,7 @@ public class VisibleObjectSpawner {
 	}
 
 	public static Trap spawnTrap(SpawnTemplate spawn, int instanceIndex, Creature creator) {
-		Trap trap = new Trap(new NpcController(), spawn, creator);
+		Trap trap = new Trap(new TrapController(), spawn, creator);
 		SpawnEngine.bringIntoWorld(trap, spawn, instanceIndex);
 		PacketSendUtility.broadcastPacket(trap, new SM_PLAYER_STATE(trap));
 		return trap;
