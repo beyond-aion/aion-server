@@ -5019,9 +5019,9 @@
 		<item id="182007170" level="8" count="10" chance="20"/>
 		<item id="182007170" level="8" count="50" chance="20"/>
 		<!-- 80707 Magic Fountain -->
-		<item id="188054029" level="9" count="1" chance="10"/>
+		<item id="188054029" level="9" count="1" chance="5"/>
 		<item id="188054028" level="9" count="1" chance="20"/>
-		<item id="186000406" level="9" count="1" chance="20"/>
+		<item id="186000406" level="9" count="1" chance="25"/>
 		<item id="186000407" level="9" count="1" chance="50"/>
 	</events>
 	<boss_rare bonusType="BOSS">
