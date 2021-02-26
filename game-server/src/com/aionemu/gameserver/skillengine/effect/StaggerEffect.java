@@ -8,11 +8,8 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.SkillMoveType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -26,14 +23,6 @@ public class StaggerEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		final Creature effector = effect.getEffector();
-		final Creature effected = effect.getEffected();
-		// Move effected 3 meters backward as on retail
-		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
-		float x1 = (float) (Math.cos(radian) * 3);
-		float y1 = (float) (Math.sin(radian) * 3);
-		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ());
-		effect.setTargetLoc(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 		effect.addToEffectedController();
 	}
 
@@ -49,8 +38,6 @@ public class StaggerEffect extends EffectTemplate {
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STAGGER);
 		effect.setAbnormal(AbnormalState.STAGGER);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
-		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(),
-			new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
 	}
 
 	@Override
@@ -63,9 +50,14 @@ public class StaggerEffect extends EffectTemplate {
 
 		if (!super.calculate(effect, StatEnum.STAGGER_RESISTANCE, SpellStatus.STAGGER))
 			return;
-
-		// Check for packets if this must be fixed someway, but for now it works good so
-		effect.setSkillMoveType(SkillMoveType.STAGGER);
+		final Creature effector = effect.getEffector();
+		final Creature effected = effect.getEffected();
+		// Move effected 3 meters backward as on retail
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
+		float x1 = (float) (Math.cos(radian) * 3);
+		float y1 = (float) (Math.sin(radian) * 3);
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ());
+		effect.setTargetLoc(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 	}
 
 	@Override

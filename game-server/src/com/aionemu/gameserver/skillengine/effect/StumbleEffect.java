@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.SkillMoveType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -26,13 +25,6 @@ public class StumbleEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		final Creature effector = effect.getEffector();
-		final Creature effected = effect.getEffected();
-		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
-		float x1 = (float) (Math.cos(radian) * 1.3f);
-		float y1 = (float) (Math.sin(radian) * 1.3f);
-		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ());
-		effect.setTargetLoc(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 		effect.addToEffectedController();
 	}
 
@@ -64,7 +56,13 @@ public class StumbleEffect extends EffectTemplate {
 
 		if (!super.calculate(effect, StatEnum.STUMBLE_RESISTANCE, SpellStatus.STUMBLE))
 			return;
-		effect.setSkillMoveType(SkillMoveType.STUMBLE_OR_OPENAERIAL);
+		final Creature effector = effect.getEffector();
+		final Creature effected = effect.getEffected();
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
+		float x1 = (float) (Math.cos(radian) * 1.3f);
+		float y1 = (float) (Math.sin(radian) * 1.3f);
+		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ());
+		effect.setTargetLoc(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 	}
 
 	@Override
