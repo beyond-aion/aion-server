@@ -8,7 +8,6 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.model.DashStatus;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.SkillMoveType;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -23,7 +22,6 @@ public class MoveBehindEffect extends DamageEffect {
 	@Override
 	public void calculate(Effect effect) {
 		effect.setDashStatus(DashStatus.MOVEBEHIND);
-		effect.setSkillMoveType(SkillMoveType.MOVEBEHIND);
 		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effected.getHeading()));

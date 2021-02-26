@@ -261,7 +261,7 @@ public abstract class EffectTemplate {
 
 	/**
 	 * Calculate effect result
-	 * 
+	 *
 	 * @param effect
 	 */
 	public void calculate(Effect effect) {
@@ -282,6 +282,9 @@ public abstract class EffectTemplate {
 	 * @param spellStatus
 	 */
 	public boolean calculate(Effect effect, StatEnum statEnum, SpellStatus spellStatus, SkillElement element) {
+		Creature effected = effect.getEffected();
+		if (effected != null && effected.getEffectController().isConflicting(effect, effect.getEffectTemplates().get(getPosition() - 1)))
+			return false;
 		if (effect.getSkillTemplate().isPassive()) {
 			this.addSuccessEffect(effect, spellStatus);
 			return true;
@@ -448,14 +451,14 @@ public abstract class EffectTemplate {
 			level = effect.getSignetBurstedCount();
 			accBoost = Short.MAX_VALUE; // sub effects cannot be resisted by magic resist in case of signet bursts
 		}
-		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, null, effect.getForceType());
+		Effect newEffect = new Effect(effect.getEffector(), effect.getOriginalEffected(), template, level, null, effect.getForceType(), true);
 		newEffect.setShieldDefense(effect.getShieldDefense());
 		newEffect.setAccModBoost(accBoost);
 		newEffect.initialize();
 		if (newEffect.getSpellStatus() != SpellStatus.DODGE && newEffect.getSpellStatus() != SpellStatus.RESIST)
 			effect.setSpellStatus(newEffect.getSpellStatus());
 		effect.setSubEffect(newEffect);
-		effect.setSkillMoveType(newEffect.getSkillMoveType());
+		effect.setSubEffectType(newEffect.getSubEffectType());
 		effect.setTargetLoc(newEffect.getTargetX(), newEffect.getTargetY(), newEffect.getTargetZ());
 	}
 

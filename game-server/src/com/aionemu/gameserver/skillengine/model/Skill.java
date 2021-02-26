@@ -613,36 +613,23 @@ public class Skill {
 		boolean blockedStance = false;
 		final List<Effect> effects = new ArrayList<>();
 		if (skillTemplate.getEffects() != null) {
-			boolean blockAOESpread = false;
 			for (Creature effected : effectedList) {
-				// Find logic. Skill Steam Rushe Twice dmg
-				String skillGroup = getSkillTemplate().getGroup();
-				int count = 1;
-				if (skillGroup != null && skillGroup.equalsIgnoreCase("RI_CHARGEATTACK"))
-					count = 2;
-				for (int i = 0; i < count; i++) {
-					Effect effect = new Effect(this, effected);
-					if (effected instanceof Player) {
-						if (effect.getEffectResult() == EffectResult.CONFLICT)
-							blockedStance = true;
-					}
-					// Force RESIST status if AOE spell spread must be blocked
-					if (blockAOESpread)
-						effect.setAttackStatus(AttackStatus.RESIST);
-					effect.initialize();
-					final int worldId = effector.getWorldId();
-					final int instanceId = effector.getInstanceId();
-					effect.setWorldPosition(worldId, instanceId, x, y, z);
-
-					effects.add(effect);
-					dashStatus = effect.getDashStatus().getId();
-					// Block AOE propagation if firstTarget resists the spell
-					if ((!blockAOESpread) && (effect.getAttackStatus() == AttackStatus.RESIST) && (isTargetAOE()))
-						blockAOESpread = true;
-
-					if (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE) {
-						resistCount++;
-					}
+				// TODO: RI_CHARGEATTACK fix: effect is not applied twice, but its Dash effect inflicts (weapon) damage.
+				// Seems like Offi is creating a new "Effect" for each DamageEffect. Last one contains relevant info about spell status etc.
+				// Client displays the wrong chat output in these cases. (e.g. RI_CHARGEATTACK displays 2x the spellatkinstant damage)
+				Effect effect = new Effect(this, effected);
+				effect.initialize();
+				if (effected instanceof Player) {
+					if (effect.getEffectResult() == EffectResult.CONFLICT)
+						blockedStance = true;
+				}
+				final int worldId = effector.getWorldId();
+				final int instanceId = effector.getInstanceId();
+				effect.setWorldPosition(worldId, instanceId, x, y, z);
+				effects.add(effect);
+				dashStatus = effect.getDashStatus().getId();
+				if (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE) {
+					resistCount++;
 				}
 			}
 

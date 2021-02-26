@@ -9,7 +9,9 @@ public enum EffectResult {
 	ABSORBED(1),
 	CONFLICT(2),
 	DODGE(3),
-	RESIST(4);
+	RESIST(4),
+	IMMUNE(5), // TODO: IMPLEMENT
+	CANCELED_DUE_TO_TOO_MANY_EFFECTS(6);
 
 	private int id;
 

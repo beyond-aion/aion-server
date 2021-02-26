@@ -43,7 +43,7 @@ public class Effect implements StatOwner {
 	private int skillLevel;
 	private Integer duration;
 	private long endTime;
-	private SkillMoveType skillMoveType = SkillMoveType.DEFAULT;
+	private SubEffectType subEffectType = SubEffectType.NONE;
 	private Future<?> endTask = null;
 	private Future<?>[] periodicTasks = null;
 	private Future<?> periodicActionsTask = null;
@@ -123,6 +123,9 @@ public class Effect implements StatOwner {
 
 	private Effect designatedDispelEffect = null;
 
+	// Whether this effect is a sub effect of another effect
+	private boolean isSubEffect = false;
+
 	public Effect(Skill skill, Creature effected) {
 		this(skill.getEffector(), effected, skill.getSkillTemplate(), skill.getSkillLevel(), null, null);
 		this.effectHate = skill.getHate();
@@ -131,6 +134,17 @@ public class Effect implements StatOwner {
 
 	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel) {
 		this(effector, effected, skillTemplate, skillLevel, null, null);
+	}
+
+	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel, Integer duration, ForceType forceType, boolean isSubEffect) {
+		this.effector = effector;
+		this.effected = effected;
+		this.skillTemplate = skillTemplate;
+		this.skillLevel = skillLevel;
+		this.duration = duration;
+		this.forceType = forceType;
+		this.isSubEffect = true;
+		this.power = initializePower();
 	}
 
 	/**
@@ -562,13 +576,14 @@ public class Effect implements StatOwner {
 		}
 
 		if (successEffects.isEmpty()) {
-			if (isPhysicalEffect()) {
+			if (effectResult == EffectResult.CONFLICT) {
+				setAttackStatus(AttackStatus.DODGE);
+			} else if (isPhysicalEffect()) {
 				if (getAttackStatus() == AttackStatus.CRITICAL)
 					setAttackStatus(AttackStatus.CRITICAL_DODGE);
 				else
 					setAttackStatus(AttackStatus.DODGE);
 				setSpellStatus(SpellStatus.DODGE2);
-				skillMoveType = SkillMoveType.DODGE;
 				effectResult = EffectResult.DODGE;
 			} else {
 				if (getAttackStatus() == AttackStatus.CRITICAL)
@@ -576,7 +591,6 @@ public class Effect implements StatOwner {
 				else
 					setAttackStatus(AttackStatus.RESIST);
 				setSpellStatus(SpellStatus.NONE);
-				skillMoveType = SkillMoveType.RESIST;
 				effectResult = EffectResult.RESIST;
 			}
 		}
@@ -584,7 +598,8 @@ public class Effect implements StatOwner {
 		// set spellstatus for sm_castspell_end packet
 		switch (AttackStatus.getBaseStatus(getAttackStatus())) {
 			case DODGE:
-				setSpellStatus(SpellStatus.DODGE);
+				if (effectResult != EffectResult.CONFLICT)
+					setSpellStatus(SpellStatus.DODGE);
 				break;
 			case PARRY:
 				if (getSpellStatus() == SpellStatus.NONE)
@@ -1006,18 +1021,42 @@ public class Effect implements StatOwner {
 	}
 
 	/**
-	 * @return the skillMoveType
+	 * @return the subEffectType
 	 */
-	public SkillMoveType getSkillMoveType() {
-		return skillMoveType;
+	public SubEffectType getSubEffectType() {
+		return subEffectType;
 	}
 
 	/**
-	 * @param skillMoveType
-	 *          the skillMoveType to set
+	 * Client expects one byte(8bits) determining which effect positions (and sub effect type) were successful: <br>
+	 *     If effect is dodged -> 0000 0000 <br>
+	 *     If effect is resisted -> 0000 0001 <br>
+	 *     If e1 is successful -> 0001 0000 <br>
+	 *         If e1 is successful and has openaerial as a sub effect -> 0001 0100 <br>
+	 *     If e1 and e4 are successful -> 1001 0000 <br><br>
+	 *     This byte is used to output the corresponding chat messages.
+	 * @return an integer containing all successful effect positions and a subeffect (if one exists)
 	 */
-	public void setSkillMoveType(SkillMoveType skillMoveType) {
-		this.skillMoveType = skillMoveType;
+	public byte getSuccessfulEffectsAsByte() {
+		if (effectResult == EffectResult.DODGE)
+			return 0;
+		if (effectResult == EffectResult.RESIST)
+			return 1;
+		byte sucEffects = 0;
+		for (EffectTemplate effectTemplate : getSuccessEffects()) {
+			// e1 = 1000, e2 = 11000, e3 = 111000, e4 = 1111000
+			sucEffects += 1 << (effectTemplate.getPosition() + 3);
+		}
+		sucEffects += subEffectType.getId();
+		return sucEffects;
+	}
+
+	/**
+	 * @param subEffectType
+	 *          the subEffectType to set
+	 */
+	public void setSubEffectType(SubEffectType subEffectType) {
+		this.subEffectType = subEffectType;
 	}
 
 	/**
@@ -1366,5 +1405,9 @@ public class Effect implements StatOwner {
 
 	public void resetDesignatedDispelEffect() {
 		designatedDispelEffect = null;
+	}
+
+	public boolean isSubEffect() {
+		return isSubEffect;
 	}
 }

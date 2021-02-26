@@ -7,10 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.EffectReserved;
-import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.skillengine.model.SkillMoveType;
+import com.aionemu.gameserver.skillengine.model.*;
 
 /**
  * This packet show cast spell result (including hit time).
@@ -123,9 +120,9 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 				writeC(effect.getEffectResult().getId());// 0 - NORMAL, 1 - ABSORBED, 2 - CONFLICT, 3 - DODGE, 4 - RESIST
 				writeC(effect.getEffectedHp() == -1 ? effected.getLifeStats().getHpPercentage() : effect.getEffectedHp()); // target %hp
 			} else { // point point skills
-				writeD(0);
+				writeD(effector.getObjectId());
 				writeC(0);
-				writeC(0);
+				writeC(100);
 			}
 
 			writeC(effector.getLifeStats().getHpPercentage()); // attacker %hp
@@ -134,10 +131,9 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 			 * Spell Status 1 : stumble 2 : knockback 4 : open aerial 8 : close aerial 16 : spin 32 : block 64 : parry 128 : dodge 256 : resist
 			 */
 			writeC(effect.getSpellStatus().getId());
-			writeC(effect.getSkillMoveType().getId());
+			writeC(effect.getSuccessfulEffectsAsByte());
 			writeH(0);
 			writeC(effect.getCarvedSignet()); // current carve signet count
-
 			switch (effect.getSpellStatus().getId()) {
 				case 1:
 				case 2:
@@ -151,7 +147,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 					writeC(effect.getEffector().getHeading());
 					break;
 				default:
-					switch (effect.getSkillMoveType()) {
+					switch (effect.getSubEffectType()) {
 						case PULL:
 						case KNOCKBACK:
 							writeF(effect.getTargetX());
@@ -166,16 +162,14 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 			for (EffectReserved er : effect.getReservedsToSend()) {
 				writeC(er.getType().getValue());// HP - 0 , MP - 1, FP - 2, DP - 3?
 				writeD(er.getValueToSend());
-
 				writeC(effect.getAttackStatus().getId());
-
 				boolean isCounter = effect.getAttackStatus().isCounterSkill();
-				if (effect.getSkillMoveType() == SkillMoveType.RESIST)
+				if (effect.getEffectResult() == EffectResult.RESIST)
 					isCounter = true;
 				// setting counter skill from packet to have the best synchronization of time with client
 				if (effect.getEffected() instanceof Player) {
 					if (isCounter)
-						((Player) effect.getEffected()).setLastCounterSkill(effect.getSkillMoveType() == SkillMoveType.RESIST ? AttackStatus.RESIST : effect
+						((Player) effect.getEffected()).setLastCounterSkill(effect.getEffectResult() == EffectResult.RESIST ? AttackStatus.RESIST : effect
 							.getAttackStatus());
 				}
 

@@ -195,6 +195,47 @@ public class EffectController {
 		return false;
 	}
 
+	/**
+	 * Checks whether {@code newEffectTemplate} is in conflict
+	 * with any existing effects without removing any effects. <br>
+	 *     {@code newEffect}'s EffectResult is set to {@code EffectResult.CONFLICT} if a conflict is found. <br>
+	 *         Note: EffectResult is not changed in case of passive effects or effects with {@code SkillTargetSlot.DEBUFF}.
+	 * @param newEffect The effect {@code newEffectTemplate} belongs to.
+	 * @param newEffectTemplate The {@code EffectTemplate} to check for conflicts.
+	 * @return True if {@code newEffectTemplate} is in conflict with another existing effect.
+	 */
+	public boolean isConflicting(Effect newEffect, EffectTemplate newEffectTemplate) {
+		if (newEffectTemplate.getEffectId() == 0)
+			return false;
+		Map<String, Effect> mapToUpdate = getMapForEffect(newEffect);
+		lock.readLock().lock();
+		try {
+			mainLoop:
+			for (Effect currentEffect : mapToUpdate.values()) {
+				if (currentEffect.getSkillSubType() == newEffect.getSkillSubType() || currentEffect.getTargetSlot() == newEffect.getTargetSlot()) {
+					for (EffectTemplate currentEffectTemplate : currentEffect.getEffectTemplates()) {
+						if (currentEffectTemplate.getEffectId() == 0)
+							continue;
+						if ((currentEffectTemplate.getEffectId() == newEffectTemplate.getEffectId()) || (currentEffectTemplate instanceof SilenceEffect && newEffectTemplate instanceof SilenceEffect)) {
+							if (currentEffectTemplate.getBasicLvl() > newEffectTemplate.getBasicLvl()) {
+								if (!newEffect.isPassive() && newEffect.getTargetSlot() != SkillTargetSlot.DEBUFF) {
+									newEffect.setEffectResult(EffectResult.CONFLICT);
+								}
+								return true;
+							} else {
+								break mainLoop;
+							}
+						}
+					}
+				}
+			}
+		} finally {
+			lock.readLock().unlock();
+		}
+		return false;
+	}
+
+
 	private boolean checkExtraEffect(Map<String, Effect> effectMap, Effect nextEffect) {
 		if (nextEffect.isPassive() || nextEffect.getDispelCategory() != DispelCategoryType.EXTRA)
 			return false;

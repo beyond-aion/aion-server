@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.SubEffectType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
@@ -50,6 +51,8 @@ public class StaggerEffect extends EffectTemplate {
 
 		if (!super.calculate(effect, StatEnum.STAGGER_RESISTANCE, SpellStatus.STAGGER))
 			return;
+		if (effect.isSubEffect())
+			effect.setSubEffectType(SubEffectType.STAGGER);
 		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();
 		// Move effected 3 meters backward as on retail

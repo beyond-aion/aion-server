@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.SkillMoveType;
+import com.aionemu.gameserver.skillengine.model.SubEffectType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -33,7 +33,8 @@ public class SimpleRootEffect extends EffectTemplate {
 	public void calculate(Effect effect) {
 		if (effect.getEffected().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE))
 			return;
-		super.calculate(effect, StatEnum.STAGGER_RESISTANCE, null);
+		if (super.calculate(effect, StatEnum.STAGGER_RESISTANCE, null) && effect.isSubEffect())
+			effect.setSubEffectType(SubEffectType.KNOCKBACK);
 	}
 
 	@Override
@@ -41,7 +42,6 @@ public class SimpleRootEffect extends EffectTemplate {
 		final Creature effected = effect.getEffected();
 		byte heading = effect.getEffector().getHeading();
 		effect.setSpellStatus(SpellStatus.NONE);
-		effect.setSkillMoveType(SkillMoveType.KNOCKBACK);
 		if (effected instanceof Player player)
 			player.getMoveController().abortMove();
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.KNOCKBACK);

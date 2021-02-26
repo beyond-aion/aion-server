@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.model.DashStatus;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.skillengine.model.SkillMoveType;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -39,7 +38,6 @@ public class RandomMoveLocEffect extends EffectTemplate {
 	public void calculate(Effect effect) {
 		effect.addSuccessEffect(this);
 		DashStatus ds = reserved5 == 1 ? DashStatus.RANDOMMOVELOC_NEW : DashStatus.RANDOMMOVELOC;
-		effect.setSkillMoveType(SkillMoveType.MOVEBEHIND);
 		effect.setDashStatus(ds);
 
 		Creature effector = effect.getEffector();

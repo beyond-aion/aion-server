@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.SubEffectType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -56,6 +57,8 @@ public class StumbleEffect extends EffectTemplate {
 
 		if (!super.calculate(effect, StatEnum.STUMBLE_RESISTANCE, SpellStatus.STUMBLE))
 			return;
+		if (effect.isSubEffect())
+			effect.setSubEffectType(SubEffectType.STUMBLE);
 		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));

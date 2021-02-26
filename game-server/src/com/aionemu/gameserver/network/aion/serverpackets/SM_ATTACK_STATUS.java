@@ -77,6 +77,8 @@ public class SM_ATTACK_STATUS extends AionServerPacket {
 		PROCATKINSTANT(93), // changed in 4.5
 		DELAYEDSPELLATKINSTANT(97), // changed in 4.5
 		MAGICCOUNTERATK(112),
+		// 119 unk
+		// 131 unk
 		SPELLATKDRAIN(132), // changed in 4.5
 		FPHEAL(134), // changed in 4.5
 		FPATTACK(137),

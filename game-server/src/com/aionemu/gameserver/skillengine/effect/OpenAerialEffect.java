@@ -7,12 +7,9 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.SkillMoveType;
+import com.aionemu.gameserver.skillengine.model.SubEffectType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -39,7 +36,8 @@ public class OpenAerialEffect extends EffectTemplate {
 
 		if(!super.calculate(effect, StatEnum.OPENAERIAL_RESISTANCE, SpellStatus.OPENAERIAL))
 			return;
-		effect.setSkillMoveType(SkillMoveType.STUMBLE_OR_OPENAERIAL);
+		if (effect.isSubEffect())
+			effect.setSubEffectType(SubEffectType.OPENAERIAL);
 		float z = effect.getEffected().getZ();
 		if (!effect.getEffected().isFlying()) {
 			float geoZ = GeoService.getInstance().getZ(effect.getEffected().getWorldId(),effect.getEffected().getX(), effect.getEffected().getY(), effect.getEffected().getZ() + 2, effect.getEffected().getZ() - 1, effect.getEffected().getInstanceId());
@@ -62,8 +60,6 @@ public class OpenAerialEffect extends EffectTemplate {
 		effected.getEffectController().setAbnormal(AbnormalState.OPENAERIAL);
 		effect.setAbnormal(AbnormalState.OPENAERIAL);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
-		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(),
-				effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
 	}
 
 	@Override
