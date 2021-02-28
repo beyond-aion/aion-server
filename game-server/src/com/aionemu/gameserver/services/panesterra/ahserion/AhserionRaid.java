@@ -131,7 +131,7 @@ public class AhserionRaid {
 		panesterraTeams.values().forEach(team -> {
 			WorldPosition startPosition = team.getStartPosition();
 			team.forEachMember(player -> {
-				if (!PositionUtil.isInRange(player, startPosition.getX(), startPosition.getY(), startPosition.getZ(), 81f)) {
+				if (player.getPosition().getMapId() == 400030000 && !PositionUtil.isInRange(player, startPosition.getX(), startPosition.getY(), startPosition.getZ(), 81f)) {
 					AuditLogger.log(player, "bugged himself through the " + team.getFaction() + " start door");
 					team.movePlayerToStartPosition(player);
 				}
