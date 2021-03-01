@@ -8,9 +8,11 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SubEffectType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -39,6 +41,9 @@ public class StaggerEffect extends EffectTemplate {
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STAGGER);
 		effect.setAbnormal(AbnormalState.STAGGER);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
+		if (effected instanceof Player p)
+			PacketSendUtility.broadcastPacketAndReceive(p, new SM_FORCED_MOVE(effect.getEffector(), p.getObjectId(),
+					effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
 	}
 
 	@Override

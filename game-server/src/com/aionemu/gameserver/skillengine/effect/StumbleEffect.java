@@ -42,8 +42,9 @@ public class StumbleEffect extends EffectTemplate {
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUMBLE);
 		effect.setAbnormal(AbnormalState.STUMBLE);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
-		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(),
-			new SM_FORCED_MOVE(effect.getEffector(), effect.getEffected().getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
+		if (effected instanceof Player p)  // TODO: FI_RobustCrash_G1 or FI_Whirlwind_G1 don't send anything, find pattern
+			PacketSendUtility.broadcastPacketAndReceive(p, new SM_FORCED_MOVE(effect.getEffector(), p.getObjectId(),
+					effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
 	}
 
 	@Override
