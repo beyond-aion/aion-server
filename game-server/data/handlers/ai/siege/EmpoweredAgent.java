@@ -4,6 +4,8 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
@@ -46,6 +48,7 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 	private final List<Integer> guardIds = new ArrayList<>();
 	private final List<Integer> percents = new ArrayList<>();
 	private boolean canThink = true;
+	private Npc flagNpc = null;
 
 	@Override
 	public boolean canThink() {
@@ -59,14 +62,10 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 		canThink = false;
 		EmoteManager.emoteStopAttacking(getOwner());
 		switch (getOwner().getNpcId()) {
-			case 235064:
-				Collections.addAll(guardIds, new Integer[] { 235334, 235335, 235336, 235337, 235338, 235339 });
-				break;
-			case 235065:
-				Collections.addAll(guardIds, new Integer[] { 235340, 235341, 235342, 235343, 235344, 235345 });
-				break;
+			case 235064 -> Collections.addAll(guardIds, 235334, 235335, 235336, 235337, 235338, 235339);
+			case 235065 -> Collections.addAll(guardIds, 235340, 235341, 235342, 235343, 235344, 235345);
 		}
-		Collections.addAll(percents, new Integer[] { 80, 70, 60, 50, 40, 30, 25, 20, 5 });
+		Collections.addAll(percents, 80, 70, 60, 50, 40, 30, 25, 20, 5);
 	}
 
 	@Override
@@ -79,19 +78,8 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 		for (Integer percent : percents) {
 			if (hpPercentage <= percent) {
 				switch (percent) {
-					case 80:
-					case 70:
-					case 60:
-					case 50:
-					case 40:
-					case 30:
-					case 20:
-						onGuardSpawnEvent();
-						break;
-					case 25:
-					case 5:
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21778, 1, 100, 0, 3000, NpcSkillTargetAttribute.ME)));
-						break;
+					case 80, 70, 60, 50, 40, 30, 20 -> onGuardSpawnEvent();
+					case 25, 5 -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21778, 1, 100, 0, 3000, NpcSkillTargetAttribute.ME)));
 				}
 				percents.remove(percent);
 				break;
@@ -106,19 +94,13 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 		if (walkerId == null)
 			return;
 		int step = getOwner().getMoveController().getCurrentStep().getStepIndex();
-		int stop = 0;
-		switch (getOwner().getNpcId()) {
-			case 235064:
-				stop = 48;
-				break;
-			case 235065:
-				stop = 37;
-				break;
-		}
-		if (stop == step) {
-			ThreadPoolManager.getInstance().schedule(() -> onDestinationArrived(), 5000);
-
-		}
+		int stop = switch (getOwner().getNpcId()) {
+			case 235064 -> 48;
+			case 235065 -> 37;
+			default -> 0;
+		};
+		if (stop == step)
+			ThreadPoolManager.getInstance().schedule(this::onDestinationArrived, 5000);
 	}
 
 	private void onDestinationArrived() {
@@ -129,20 +111,17 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 		WalkManager.stopWalking(this);
 		getOwner().getEffectController().removeEffect(21779);
 		getOwner().getLifeStats().setCurrentHpPercent(100);
+		spawnFlag();
 		onAddHateEvent();
 		onReactiveThinking();
 	}
 
 	private void onAddHateEvent() {
-		Npc target = null;
-		switch (getOwner().getNpcId()) {
-			case 235064: // Veille
-				target = getOwner().getPosition().getWorldMapInstance().getNpc(235065);
-				break;
-			case 235065: // Mastarius
-				target = getOwner().getPosition().getWorldMapInstance().getNpc(235064);
-				break;
-		}
+		Npc target = switch (getOwner().getNpcId()) {
+			case 235064 -> getOwner().getPosition().getWorldMapInstance().getNpc(235065); // Veille
+			case 235065 -> getOwner().getPosition().getWorldMapInstance().getNpc(235064); // Mastarius
+			default -> null;
+		};
 		if (target != null)
 			getOwner().getAggroList().addHate(target, Integer.MAX_VALUE / 2);
 	}
@@ -165,6 +144,29 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 			handleMoveValidate();
 			EmoteManager.emoteStartAttacking(getOwner(), creature);
 			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+		}
+	}
+
+	private void spawnFlag() {
+		if (flagNpc != null) {
+			LoggerFactory.getLogger(EmpoweredAgent.class).warn("Tried to spawn flag for empowered agent {} twice!", getNpcId(), new Exception());
+			return;
+		}
+		int flagNpcId = switch (getNpcId()) {
+			case 235064 -> 832830; // Veille
+			case 235065 -> 832831; // Mastarius
+			default -> 0;
+		};
+		if (flagNpcId != 0) {
+			WorldPosition pos = getPosition();
+			flagNpc = (Npc) spawn(flagNpcId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
+		}
+	}
+
+	private void despawnFlag() {
+		if (flagNpc != null) {
+			flagNpc.getController().delete();
+			flagNpc = null;
 		}
 	}
 
@@ -193,18 +195,21 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDied() {
-		super.handleDied();
+		despawnFlag();
+		super.handleDespawned();
+	}
 
+	@Override
+	protected void handleDespawned() {
+		despawnFlag();
+		super.handleDespawned();
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_RESPAWN:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		if (question == AIQuestion.SHOULD_RESPAWN)
+			return false;
+		return super.ask(question);
 	}
 
 	@Override

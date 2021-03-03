@@ -178,11 +178,14 @@ public class AgentSiege extends Siege<AgentLocation> {
 	}
 
 	private void removeListeners() {
-		veille.getAggroList().removeEventListener(veilleDoAddDamageListener);
-		veille.getAi().removeEventListener(veilleDeathListener);
-
-		masta.getAggroList().removeEventListener(mastaDoAddDamageListener);
-		masta.getAi().removeEventListener(mastaDeathListener);
+		if (veille != null) {
+			veille.getAggroList().removeEventListener(veilleDoAddDamageListener);
+			veille.getAi().removeEventListener(veilleDeathListener);
+		}
+		if (masta != null) {
+			masta.getAggroList().removeEventListener(mastaDoAddDamageListener);
+			masta.getAi().removeEventListener(mastaDeathListener);
+		}
 	}
 
 	public void setWinnerRace(SiegeRace race) {
