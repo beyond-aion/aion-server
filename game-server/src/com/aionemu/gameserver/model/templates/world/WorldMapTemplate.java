@@ -189,7 +189,7 @@ public class WorldMapTemplate {
 		return pveAttackRatio;
 	}
 
-	public int getPveDefendRatio() {
+	public int getPvEDefendRatio() {
 		return pveDefendRatio;
 	}
 

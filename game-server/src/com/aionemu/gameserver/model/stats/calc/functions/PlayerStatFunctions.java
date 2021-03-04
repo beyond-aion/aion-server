@@ -173,7 +173,7 @@ class PvEDefendRatioFunction extends StatFunction {
 	@Override
 	public void apply(Stat2 stat) {
 		WorldMapTemplate template = DataManager.WORLD_MAPS_DATA.getTemplate(stat.getOwner().getWorldId());
-		stat.addToBonus(template.getPvEAttackRatio());
+		stat.addToBonus(template.getPvEDefendRatio());
 	}
 }
 
