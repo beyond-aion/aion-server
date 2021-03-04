@@ -196,7 +196,7 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 	@Override
 	protected void handleDied() {
 		despawnFlag();
-		super.handleDespawned();
+		super.handleDied();
 	}
 
 	@Override
