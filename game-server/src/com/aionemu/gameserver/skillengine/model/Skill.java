@@ -468,7 +468,7 @@ public class Skill {
 		if (penaltySkill == 0)
 			return;
 		if (getSkillTemplate().shouldPenaltySkillSendMsg()) {
-			PenaltySkill penaltySkill1 = SkillEngine.getInstance().getPenaltySkill(effector, penaltySkill, 1, effector);
+			PenaltySkill penaltySkill1 = SkillEngine.getInstance().getPenaltySkill(effector, penaltySkill, 1);
 			if (penaltySkill1 != null) {
 				penaltySkill1.useSkill();
 			}

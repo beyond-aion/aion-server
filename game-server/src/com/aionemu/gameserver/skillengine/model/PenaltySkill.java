@@ -4,9 +4,8 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 
 public class PenaltySkill extends Skill {
 
-    public PenaltySkill(SkillTemplate skillTemplate, Creature effector, int skillLevel, Creature firstTarget) {
+    public PenaltySkill(SkillTemplate skillTemplate, Creature effector, int skillLevel) {
         super(skillTemplate, effector, skillLevel, effector, null);
-        setFirstTarget(firstTarget);
     }
 
     @Override
