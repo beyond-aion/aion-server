@@ -95,7 +95,10 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 			writeD(skill.getItemTemplate().getTemplateId());
 			writeC(0); // unk 0
 		} else {
-			writeC(0);
+			if (skill.getSkillMethod() == Skill.SkillMethod.PENALTY)
+				writeC(4);
+			else
+				writeC(0);
 			writeC(this.dashStatus);
 			switch (this.dashStatus) {
 				case 1:

@@ -64,7 +64,7 @@ public class Skill {
 	private Creature firstTarget;
 	protected final Creature effector;
 	private final int skillLevel;
-	private final SkillMethod skillMethod;
+	protected SkillMethod skillMethod;
 	protected final StartMovingListener conditionChangeListener;
 	private final SkillTemplate skillTemplate;
 	private boolean firstTargetRangeCheck = true;
@@ -103,7 +103,8 @@ public class Skill {
 		ITEM,
 		PASSIVE,
 		PROVOKED,
-		CHARGE
+		CHARGE,
+		PENALTY
 	}
 
 	/**
@@ -131,7 +132,10 @@ public class Skill {
 		this.baseCastDuration = skillTemplate.getDuration();
 		this.castDuration = skillTemplate.getDuration();
 		this.itemTemplate = itemTemplate;
+		initializeSkillMethod();
+	}
 
+	protected void initializeSkillMethod() {
 		if (itemTemplate != null)
 			skillMethod = SkillMethod.ITEM;
 		else if (skillTemplate.isPassive())
@@ -459,34 +463,14 @@ public class Skill {
 		return true;
 	}
 
-	/**
-	 * Penalty success skill
-	 */
 	private void startPenaltySkill() {
 		int penaltySkill = skillTemplate.getPenaltySkillId();
 		if (penaltySkill == 0)
 			return;
-
-		SkillTemplate penaltyTemplate = DataManager.SKILL_DATA.getSkillTemplate(penaltySkill);
-		String stack = penaltyTemplate.getStack();
-		if (stack != null && (stack.equals("BA_N_SONGOFWARMTH_ADDEFFECT") || stack.equals("BA_N_SONGOFWIND_ADDEFFECT"))) {
-			SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, effector);
-			if (effector instanceof Player) {
-				int count = 1;
-				if (((Player) effector).isInTeam()) {
-					for (Player p : ((Player) effector).getCurrentTeam().getMembers()) {
-						if (count >= penaltyTemplate.getProperties().getTargetMaxCount()) {
-							break;
-						}
-						if (p == null || !p.isOnline() || effector.equals(p) || p.isDead()) {
-							continue;
-						}
-						if (PositionUtil.isInRange(effector, p, penaltyTemplate.getProperties().getEffectiveRange(), false)) {
-							SkillEngine.getInstance().applyEffectDirectly(penaltySkill, effector, p);
-							count++;
-						}
-					}
-				}
+		if (getSkillTemplate().shouldPenaltySkillSendMsg()) {
+			PenaltySkill penaltySkill1 = SkillEngine.getInstance().getPenaltySkill(effector, penaltySkill, 1, effector);
+			if (penaltySkill1 != null) {
+				penaltySkill1.useSkill();
 			}
 		} else {
 			SkillEngine.getInstance().applyEffectDirectly(penaltySkill, firstTarget, effector);
@@ -639,12 +623,13 @@ public class Skill {
 			}
 
 			// exception for point point skills(example Ice Sheet)
-			if (effectedList.isEmpty() && this.isPointPointSkill()) {
-				Effect effect = new Effect(this, null);
-				effect.initialize();
-				effect.setWorldPosition(effector.getWorldId(), effector.getInstanceId(), x, y, z);
-				effects.add(effect);
-				// spellStatus = effect.getSpellStatus().getId();
+			if (effectedList.isEmpty()) {
+				if (skillMethod == SkillMethod.PENALTY || this.isPointPointSkill()) {
+					Effect effect = new Effect(this, null);
+					effect.initialize();
+					effect.setWorldPosition(effector.getWorldId(), effector.getInstanceId(), x, y, z);
+					effects.add(effect);
+				}
 			}
 		}
 
@@ -675,8 +660,10 @@ public class Skill {
 		if (setCooldowns)
 			setCooldowns();
 
-
-		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE)
+		// Use penalty skill (now 100% success)
+		if (!blockedPenaltySkill)
+			startPenaltySkill();
+		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE)
 			sendCastspellEnd(dashStatus, effects);
 
 		if (instantSkill)
@@ -732,10 +719,6 @@ public class Skill {
 		effects.forEach(Effect::applyEffect);
 
 		addResistedEffectHateAndNotifyFriends(effects);
-
-		// Use penalty skill (now 100% success)
-		if (!blockedPenaltySkill)
-			startPenaltySkill();
 	}
 
 	/**
@@ -745,7 +728,7 @@ public class Skill {
 	private void sendCastspellEnd(int dashStatus, List<Effect> effects) {
 		boolean needsCast = itemTemplate != null && itemTemplate.isCombatActivated();
 		AIEventType et = null;
-		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE || needsCast) {
+		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE || needsCast) {
 			if (this.getSkillTemplate().getSubType() == SkillSubType.ATTACK) {
 				et = AIEventType.CREATURE_NEEDS_HELP;
 			}

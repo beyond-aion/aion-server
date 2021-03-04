@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.skillengine;
 
+import com.aionemu.gameserver.skillengine.model.*;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -7,12 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.skillengine.model.ActivationAttribute;
-import com.aionemu.gameserver.skillengine.model.ChargeSkill;
-import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
-import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author ATracer
@@ -112,6 +108,18 @@ public class SkillEngine {
 			target = (Creature) firstTarget;
 		return new ChargeSkill(template, creature, skillLevel, target, itemTemplate);
 	}
+
+	public PenaltySkill getPenaltySkill(Creature creature, int skillId, int skillLevel, VisibleObject firstTarget) {
+		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+		if (template == null)
+			return null;
+
+		Creature target = null;
+		if (firstTarget instanceof Creature)
+			target = (Creature) firstTarget;
+		return new PenaltySkill(template, creature, skillLevel, target);
+	}
+
 
 	public static SkillEngine getInstance() {
 		return skillEngine;

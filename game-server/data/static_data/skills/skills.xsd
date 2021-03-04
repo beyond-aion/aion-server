@@ -24,6 +24,7 @@
 		</xs:sequence>
 		<xs:attribute name="counter_skill" type="xs:string" />
 		<xs:attribute name="penalty_skill_id" type="skillId" />
+		<xs:attribute name="penalty_skill_send_msg" type="xs:boolean" default="false"/>
 		<xs:attribute name="skill_id" type="skillId" use="required" />
 		<xs:attribute name="name" type="xs:string" />
 		<xs:attribute name="nameId" type="xs:int" />

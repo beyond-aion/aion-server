@@ -82,6 +82,8 @@ public class SkillTemplate implements L10n {
 	private int cooldownDeltaLv;
 	@XmlAttribute(name = "penalty_skill_id")
 	private int penaltySkillId;
+	@XmlAttribute(name = "penalty_skill_send_msg")
+	private boolean penaltySkillSendMsg = false;
 	@XmlAttribute(name = "pvp_damage")
 	private int pvpDamage;
 	@XmlAttribute(name = "pvp_duration")
@@ -345,6 +347,10 @@ public class SkillTemplate implements L10n {
 	 */
 	public int getPenaltySkillId() {
 		return penaltySkillId;
+	}
+
+	public boolean shouldPenaltySkillSendMsg() {
+		return penaltySkillSendMsg;
 	}
 
 	/**
