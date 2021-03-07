@@ -44,10 +44,10 @@ public class PulledEffect extends EffectTemplate {
 			effect.setSubEffectType(SubEffectType.PULL);
 		final Creature effector = effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector();
 		// Target must be pulled just one meter away from effector, not IN place of effector
-		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(PositionUtil.getHeadingTowards(effector, effect.getEffected())));
 		float z = effector.getZ();
-		final float x1 = (float) Math.cos(radian);
-		final float y1 = (float) Math.sin(radian);
+		final float x1 = (float) Math.cos(radian) * 1.5f;
+		final float y1 = (float) Math.sin(radian) * 1.5f;
 		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effect.getEffected(),effector.getX() + x1, effector.getY() + y1, z);
 		effect.setTargetLoc(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 	}
