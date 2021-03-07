@@ -41,9 +41,8 @@ public class StaggerEffect extends EffectTemplate {
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STAGGER);
 		effect.setAbnormal(AbnormalState.STAGGER);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
-		if (effected instanceof Player p)
-			PacketSendUtility.broadcastPacketAndReceive(p, new SM_FORCED_MOVE(effect.getEffector(), p.getObjectId(),
-					effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
+		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(),
+				effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
 	}
 
 	@Override
