@@ -60,7 +60,7 @@ public class StaggerEffect extends EffectTemplate {
 			effect.setSubEffectType(SubEffectType.STAGGER);
 		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();
-		// Move effected 3 meters backward as on retail
+		// Move effected 2 meters backward as on retail
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
 		float x1 = (float) (Math.cos(radian) * 2);
 		float y1 = (float) (Math.sin(radian) * 2);

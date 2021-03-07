@@ -33,26 +33,29 @@ public class SimpleRootEffect extends EffectTemplate {
 	public void calculate(Effect effect) {
 		if (effect.getEffected().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE))
 			return;
-		if (super.calculate(effect, StatEnum.STAGGER_RESISTANCE, null) && effect.isSubEffect())
+		if (super.calculate(effect, StatEnum.STAGGER_RESISTANCE, null) && effect.isSubEffect()) {
 			effect.setSubEffectType(SubEffectType.KNOCKBACK);
+			final Creature effected = effect.getEffected();
+			byte heading = effect.getEffector().getHeading();
+			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(heading));
+			float x1 = (float) (Math.cos(radian) * 0.7f);
+			float y1 = (float) (Math.sin(radian) * 0.7f);
+			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ());
+			effect.setTargetLoc(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
+		}
 	}
 
 	@Override
 	public void startEffect(final Effect effect) {
 		final Creature effected = effect.getEffected();
-		byte heading = effect.getEffector().getHeading();
 		effect.setSpellStatus(SpellStatus.NONE);
 		if (effected instanceof Player player)
 			player.getMoveController().abortMove();
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.KNOCKBACK);
 		effect.setAbnormal(AbnormalState.KNOCKBACK);
-		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(heading));
-		float x1 = (float) (Math.cos(radian) * 0.7f);
-		float y1 = (float) (Math.sin(radian) * 0.7f);
-		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ());
-		World.getInstance().updatePosition(effected, closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), heading, false);
+		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading(), false);
 		PacketSendUtility.broadcastPacketAndReceive(effected,
-			new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(), closestCollision.getX(), closestCollision.getY(), closestCollision.getZ()));
+			new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
 	}
 
 	@Override
