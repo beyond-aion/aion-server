@@ -76,7 +76,7 @@ public class SM_CHAT_WINDOW extends AionServerPacket {
 				writeC(alliance.size());
 				writeH(alliance.getMinExpPlayerLevel());// LVL
 				writeH(alliance.getMaxExpPlayerLevel());
-				short[] counts = new short[PlayerClass.values().length - 1];
+				short[] counts = new short[PlayerClass.values().length];
 				for (Player groupMember : members) {
 					counts[groupMember.getPlayerClass().getClassId()]++;
 				}
