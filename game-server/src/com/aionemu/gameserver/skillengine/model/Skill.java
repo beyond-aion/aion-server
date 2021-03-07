@@ -611,7 +611,8 @@ public class Skill {
 				final int instanceId = effector.getInstanceId();
 				effect.setWorldPosition(worldId, instanceId, x, y, z);
 				effects.add(effect);
-				dashStatus = effect.getDashStatus().getId();
+				if (firstTarget == null || firstTarget.equals(effected))
+					dashStatus = effect.getDashStatus().getId();
 				if (effect.getAttackStatus() == AttackStatus.RESIST || effect.getAttackStatus() == AttackStatus.DODGE) {
 					resistCount++;
 				}

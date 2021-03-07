@@ -4,10 +4,13 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.model.DashStatus;
 import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ATracer
@@ -21,8 +24,13 @@ public class DashEffect extends DamageEffect {
 		Creature effected = effect.getEffected();
 		if (effected.equals(effect.getSkill().getFirstTarget())) { // move only once for Dash-AoE (e.g 2705)
 			effect.setDashStatus(DashStatus.DASH);
-			effect.getSkill().setTargetPosition(effected.getX(), effected.getY(), effected.getZ(), effected.getHeading());
-			World.getInstance().updatePosition(effect.getEffector(), effected.getX(), effected.getY(), effected.getZ(), effect.getEffector().getHeading());
+			byte h = PositionUtil.getHeadingTowards(effect.getEffector(), effected);
+			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(h));
+			final float x1 = (float) Math.cos(Math.PI + radian) * 1.3F;
+			final float y1 = (float) Math.sin(Math.PI + radian) * 1.3F;
+			Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effect.getEffected(),effected.getX() + x1, effected.getY() + y1, effected.getZ());
+			effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), h);
+			World.getInstance().updatePosition(effect.getEffector(), closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), h);
 		}
 		super.calculate(effect);
 	}
