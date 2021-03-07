@@ -27,10 +27,11 @@ public class BackDashEffect extends DamageEffect {
 	public void calculate(Effect effect) {
 		effect.setDashStatus(DashStatus.BACKDASH);
 		Creature effector = effect.getEffector();
-		float inverseAngle = PositionUtil.convertHeadingToAngle(effector.getHeading()) + 180; // flip by 180 degrees for opposite direction
+		byte h = PositionUtil.getHeadingTowards(effector, effect.getEffected());
+		float inverseAngle = PositionUtil.convertHeadingToAngle(h) + 180; // flip by 180 degrees for opposite direction
 		Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effector, inverseAngle, distance);
-		effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effector.getHeading());
-		World.getInstance().updatePosition(effector, closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effector.getHeading());
+		effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), h);
+		World.getInstance().updatePosition(effector, closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), h);
 		super.calculate(effect);
 	}
 }
