@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.List;
+import java.util.Set;
 
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -161,8 +162,9 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 					break;
 			}
 
-			writeC(effect.getReservedsToSend().size()); // it's success effect count (MP and HP heal, for example, always atleast 1)
-			for (EffectReserved er : effect.getReservedsToSend()) {
+			Set<EffectReserved> reservedEffects = effect.getReservedEffectsToSend();
+			writeC(reservedEffects.size()); // it's success effect count (MP and HP heal, for example, always atleast 1)
+			for (EffectReserved er : reservedEffects) {
 				writeC(er.getType().getValue());// HP - 0 , MP - 1, FP - 2, DP - 3?
 				writeD(er.getValueToSend());
 				writeC(effect.getAttackStatus().getId());

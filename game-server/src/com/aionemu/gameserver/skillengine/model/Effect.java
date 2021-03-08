@@ -50,7 +50,7 @@ public class Effect implements StatOwner {
 
 	private int effectedHp = -1;
 
-	private HashSet<EffectReserved> reserveds = new HashSet<>();
+	private final Set<EffectReserved> reservedEffects = new HashSet<>();
 
 	private SpellStatus spellStatus = SpellStatus.NONE;
 	private DashStatus dashStatus = DashStatus.NONE;
@@ -336,10 +336,12 @@ public class Effect implements StatOwner {
 		return effectedHp;
 	}
 
-	public EffectReserved getReserveds(int i) {
-		for (EffectReserved er : this.reserveds) {
-			if (er.getPosition() == i)
-				return er;
+	public EffectReserved getReserveds(int position) {
+		synchronized (reservedEffects) {
+			for (EffectReserved er : reservedEffects) {
+				if (er.getPosition() == position)
+					return er;
+			}
 		}
 		return new EffectReserved(0, 0, ResourceType.HP, true, false);
 	}
@@ -364,21 +366,21 @@ public class Effect implements StatOwner {
 			}
 			effectedHp = (int) (100f * value / effected.getLifeStats().getMaxHp());
 		}
-
-		this.reserveds.add(er);
+		synchronized (reservedEffects) {
+			reservedEffects.add(er);
+		}
 	}
 
-	public TreeSet<EffectReserved> getReservedsToSend() {
-		TreeSet<EffectReserved> toSend = new TreeSet<>();
-
-		for (EffectReserved er : this.reserveds) {
-			if (er.isSend() && er.getValue() != 0)
-				toSend.add(er);
+	public Set<EffectReserved> getReservedEffectsToSend() {
+		Set<EffectReserved> toSend = new TreeSet<>();
+		synchronized (reservedEffects) {
+			for (EffectReserved er : reservedEffects) {
+				if (er.isSend() && er.getValue() != 0)
+					toSend.add(er);
+			}
 		}
-
 		if (toSend.isEmpty())
-			toSend.add(new EffectReserved(0, 0, ResourceType.HP, true));
-
+			return Collections.singleton(new EffectReserved(0, 0, ResourceType.HP, true));
 		return toSend;
 	}
 
