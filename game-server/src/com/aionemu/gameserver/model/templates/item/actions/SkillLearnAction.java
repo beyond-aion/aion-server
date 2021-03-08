@@ -67,6 +67,6 @@ public class SkillLearnAction extends AbstractItemAction {
 	}
 
 	private boolean validateClass(PlayerClass pc) {
-		return playerClass == pc || playerClass == pc.getStartingClass();
+		return playerClass == null || playerClass == pc || playerClass == pc.getStartingClass();
 	}
 }
