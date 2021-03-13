@@ -68,7 +68,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_ABNORMAL_EFFECT.class, 0x32);
 		addPacketOpcode(SM_SKILL_COOLDOWN.class, 0x33);
 		addPacketOpcode(SM_QUESTION_WINDOW.class, 0x34);
-		addPacketOpcode(SM_SYSTEM_MESSAGE_2.class, 0x35);
+		addPacketOpcode(SM_CLOSE_QUESTION_WINDOW.class, 0x35);
 		addPacketOpcode(SM_ATTACK.class, 0x36);
 		addPacketOpcode(SM_MOVE.class, 0x37);
 		// 56

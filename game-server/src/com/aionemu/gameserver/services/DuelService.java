@@ -15,10 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.summons.SummonMode;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DUEL;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.model.DispelSlotType;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -142,13 +139,13 @@ public class DuelService {
 	 *          the duel responder
 	 */
 	private void rejectDuelRequest(Player requester, Player responder) {
-		PacketSendUtility.sendPacket(requester, SM_SYSTEM_MESSAGE.STR_DUEL_HE_REJECT_DUEL(responder.getName()));
+		PacketSendUtility.sendPacket(requester, SM_CLOSE_QUESTION_WINDOW.STR_DUEL_HE_REJECT_DUEL(responder.getName()));
 		PacketSendUtility.sendPacket(responder, SM_SYSTEM_MESSAGE.STR_DUEL_REJECT_DUEL(requester.getName()));
 		requester.getResponseRequester().remove(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST);
 	}
 
 	private void cancelDuelRequest(Player canceller, Player target) {
-		PacketSendUtility.sendPacket(target, SM_SYSTEM_MESSAGE.STR_DUEL_REQUESTER_WITHDRAW_REQUEST(canceller.getName()));
+		PacketSendUtility.sendPacket(target, SM_CLOSE_QUESTION_WINDOW.STR_DUEL_REQUESTER_WITHDRAW_REQUEST(canceller.getName()));
 		PacketSendUtility.sendPacket(canceller, SM_SYSTEM_MESSAGE.STR_DUEL_WITHDRAW_REQUEST(target.getName()));
 		target.getResponseRequester().remove(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_ACCEPT_REQUEST);
 	}
