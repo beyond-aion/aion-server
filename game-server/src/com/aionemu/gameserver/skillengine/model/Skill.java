@@ -664,13 +664,14 @@ public class Skill {
 		// Use penalty skill (now 100% success)
 		if (!blockedPenaltySkill)
 			startPenaltySkill();
-		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE)
-			sendCastspellEnd(dashStatus, effects);
 
 		if (instantSkill)
 			applyEffect(effects);
 		else
 			ThreadPoolManager.getInstance().schedule(() -> applyEffect(effects), hitTime);
+
+		if (skillMethod == SkillMethod.PENALTY || skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.ITEM || skillMethod == SkillMethod.CHARGE)
+			sendCastspellEnd(dashStatus, effects);
 
 		if (getSkillTemplate().isDeityAvatar() && effector instanceof Player) {
 			AbyssService.announceAbyssSkillUsage((Player) effector, getSkillTemplate().getL10n());
