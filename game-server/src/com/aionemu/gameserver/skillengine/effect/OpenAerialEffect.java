@@ -38,7 +38,7 @@ public class OpenAerialEffect extends EffectTemplate {
 
 		if(!super.calculate(effect, StatEnum.OPENAERIAL_RESISTANCE, SpellStatus.OPENAERIAL))
 			return;
-		if (effect.isSubEffect())
+		if (effect.isSubEffect() && !(effect.getEffected() instanceof Player))
 			effect.setSubEffectType(SubEffectType.OPENAERIAL);
 		float z = effect.getEffected().getZ();
 		if (!effect.getEffected().isFlying()) {
@@ -59,11 +59,12 @@ public class OpenAerialEffect extends EffectTemplate {
 			player.getFlyController().onStopGliding();
 			player.getMoveController().abortMove();
 		}
-		effected.getEffectController().setAbnormal(AbnormalState.OPENAERIAL);
-		effect.setAbnormal(AbnormalState.OPENAERIAL);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
-		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(),
-				effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
+		if (effected instanceof Player)
+			PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(),
+					effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
+		effect.setAbnormal(AbnormalState.OPENAERIAL);
+		effected.getEffectController().setAbnormal(AbnormalState.OPENAERIAL);
 	}
 
 	@Override

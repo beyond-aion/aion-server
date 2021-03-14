@@ -39,12 +39,13 @@ public class StumbleEffect extends EffectTemplate {
 			player.getFlyController().onStopGliding();
 			player.getMoveController().abortMove();
 		}
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUMBLE);
-		effect.setAbnormal(AbnormalState.STUMBLE);
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
 		// TODO: FI_RobustCrash_G1 or FI_Whirlwind_G1 don't send anything, find pattern
-		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(),
-				effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
+		if (effected instanceof Player)
+			PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(),
+					effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STUMBLE);
+		effect.setAbnormal(AbnormalState.STUMBLE);
 	}
 
 	@Override
@@ -58,7 +59,7 @@ public class StumbleEffect extends EffectTemplate {
 
 		if (!super.calculate(effect, StatEnum.STUMBLE_RESISTANCE, SpellStatus.STUMBLE))
 			return;
-		if (effect.isSubEffect())
+		if (effect.isSubEffect() && !(effect.getEffected() instanceof Player))
 			effect.setSubEffectType(SubEffectType.STUMBLE);
 		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();

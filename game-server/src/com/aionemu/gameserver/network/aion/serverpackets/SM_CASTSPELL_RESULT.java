@@ -153,6 +153,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 				default:
 					switch (effect.getSubEffectType()) {
 						case PULL:
+						case PULL_NPC:
 						case KNOCKBACK:
 							writeF(effect.getTargetX());
 							writeF(effect.getTargetY());

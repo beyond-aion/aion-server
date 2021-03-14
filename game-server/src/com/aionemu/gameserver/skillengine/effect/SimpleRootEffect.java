@@ -8,7 +8,7 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_IMMOBILIZE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SubEffectType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
@@ -51,11 +51,13 @@ public class SimpleRootEffect extends EffectTemplate {
 		effect.setSpellStatus(SpellStatus.NONE);
 		if (effected instanceof Player player)
 			player.getMoveController().abortMove();
+		if (effect.isSubEffect()) {
+			World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading(), false);
+			if (!(effected instanceof Player))
+				PacketSendUtility.broadcastPacket(effected, new SM_TARGET_IMMOBILIZE(effected));
+		}
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.KNOCKBACK);
 		effect.setAbnormal(AbnormalState.KNOCKBACK);
-		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading(), false);
-		PacketSendUtility.broadcastPacketAndReceive(effected,
-			new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(), effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
 	}
 
 	@Override

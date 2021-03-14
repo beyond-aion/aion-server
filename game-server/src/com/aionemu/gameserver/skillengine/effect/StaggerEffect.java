@@ -38,11 +38,12 @@ public class StaggerEffect extends EffectTemplate {
 			player.getFlyController().onStopGliding();
 			player.getMoveController().abortMove();
 		}
+		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
+		if (effected instanceof Player)
+			PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(),
+					effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.STAGGER);
 		effect.setAbnormal(AbnormalState.STAGGER);
-		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
-		PacketSendUtility.broadcastPacketAndReceive(effected, new SM_FORCED_MOVE(effect.getEffector(), effected.getObjectId(),
-				effect.getTargetX(), effect.getTargetY(), effect.getTargetZ()));
 	}
 
 	@Override
@@ -55,7 +56,7 @@ public class StaggerEffect extends EffectTemplate {
 
 		if (!super.calculate(effect, StatEnum.STAGGER_RESISTANCE, SpellStatus.STAGGER))
 			return;
-		if (effect.isSubEffect())
+		if (effect.isSubEffect() && !(effect.getEffected() instanceof Player))
 			effect.setSubEffectType(SubEffectType.STAGGER);
 		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();

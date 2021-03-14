@@ -7,7 +7,8 @@ public enum SubEffectType {
 
 	NONE(0),
 	SPIN(0),
-	PULL(6),
+	PULL(2),
+	PULL_NPC(6),
 	STUMBLE(4),
 	STAGGER(4),
 	OPENAERIAL(4),
