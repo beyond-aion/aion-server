@@ -130,7 +130,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_LEGION_LEAVE_MEMBER.class, 0x70);
 		addPacketOpcode(SM_LEGION_UPDATE_MEMBER.class, 0x71);
 		addPacketOpcode(SM_LEGION_UPDATE_TITLE.class, 0x72);
-		// 115 TODO: format c (msg id 1-6) geo related messages, like target invalid, too far away or behind obstacle
+		addPacketOpcode(SM_ATTACK_RESPONSE.class, 0x73);
 		addPacketOpcode(SM_HOUSE_REGISTRY.class, 0x74);
 		// 117
 		// 118

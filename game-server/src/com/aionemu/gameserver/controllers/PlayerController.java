@@ -398,12 +398,12 @@ public class PlayerController extends CreatureController<Player> {
 
 		// client handles most distance checks beforehand, but for some cases we need to check it also
 		if (!PositionUtil.isInAttackRange(getOwner(), target, getOwner().getGameStats().getAttackRange().getCurrent() / 1000f + 1)) {
-			PacketSendUtility.sendPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_ATTACK_TOO_FAR_FROM_TARGET());
+			PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.TARGET_TOO_FAR_AWAY(gameStats.getAttackCounter()));
 			return;
 		}
 
 		if (!GeoService.getInstance().canSee(getOwner(), target)) {
-			PacketSendUtility.sendPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_ATTACK_OBSTACLE_EXIST());
+			PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.STOP_OBSTACLE_IN_THE_WAY(gameStats.getAttackCounter()));
 			return;
 		}
 
@@ -417,6 +417,7 @@ public class PlayerController extends CreatureController<Player> {
 		// network ping..
 		if (milis - lastAttackMillis + 300 < attackSpeed) {
 			// hack
+			PacketSendUtility.sendPacket(getOwner(), SM_ATTACK_RESPONSE.STOP_WITHOUT_MESSAGE(gameStats.getAttackCounter()));
 			return;
 		}
 		lastAttackMillis = milis;

@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_RESPONSE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.AutoGroupService;
@@ -233,18 +234,19 @@ public class PlayerRestrictions {
 
 		if (!player.canAttack()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_CAN_NOT_ATTACK_WHILE_IN_ABNORMAL_STATE());
+			PacketSendUtility.sendPacket(player, SM_ATTACK_RESPONSE.STOP_WITHOUT_MESSAGE(player.getGameStats().getAttackCounter()));
 			return false;
 		}
 
 		if (!(target instanceof Creature)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
+			PacketSendUtility.sendPacket(player, SM_ATTACK_RESPONSE.STOP_INVALID_TARGET(player.getGameStats().getAttackCounter()));
 			return false;
 		}
 
 		Creature creature = (Creature) target;
 
 		if (creature.isDead() || creature.getLifeStats().isAboutToDie()) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
+			PacketSendUtility.sendPacket(player, SM_ATTACK_RESPONSE.STOP_INVALID_TARGET(player.getGameStats().getAttackCounter()));
 			return false;
 		}
 
