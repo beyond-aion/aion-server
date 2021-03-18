@@ -135,7 +135,7 @@ public class AbyssRankUpdateService {
 		}
 		for (Player p : World.getInstance().getAllPlayers()) {
 			if (p.getAbyssRank().getRank().getGpLossPerDay() > 0) {
-				GloryPointsService.addGp(p, -p.getAbyssRank().getRank().getGpLossPerDay());
+				GloryPointsService.decreaseGpBy(p.getObjectId(), p.getAbyssRank().getRank().getGpLossPerDay());
 			}
 		}
 	}

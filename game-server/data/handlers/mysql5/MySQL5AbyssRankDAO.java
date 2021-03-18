@@ -36,6 +36,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 	private static final String DECREASE_GP_DAILY = "UPDATE abyss_rank SET gp = gp - ? WHERE rank = ?";
 	private static final String DECREASE_GP_QUERY = "UPDATE abyss_rank SET gp = gp - ? WHERE player_id = ?";
 	private static final String INCREASE_GP_QUERY = "UPDATE abyss_rank SET gp = gp + ? WHERE player_id = ?";
+	private static final String INCREASE_GP_QUERY_WITH_STATS = "UPDATE abyss_rank SET gp = gp + ?, daily_gp = daily_gp + ?, weekly_gp = weekly_gp + ? WHERE player_id = ?";
 	private static final String UPDATE_RANK = "UPDATE abyss_rank SET rank = ? WHERE player_id = ?";
 	private static final String SELECT_RANKING_LIST_PLAYERS = "SELECT a.rank_pos, a.old_rank_pos, p.id, p.name, p.race, p.exp, a.rank, a.ap, a.gp, p.title_id, p.player_class, p.gender, l.name FROM abyss_rank a JOIN players p ON a.player_id = p.id LEFT JOIN legion_members lm ON lm.player_id = p.id LEFT JOIN legions l ON l.id = lm.legion_id WHERE a.rank_pos > 0";
 	private static final String SELECT_RANKING_LIST_LEGIONS = "SELECT l.rank_pos, l.old_rank_pos, l.id, l.name, p.race, l.level, l.contribution_points FROM legions l, legion_members lm, players p WHERE lm.rank = 'BRIGADE_GENERAL' AND lm.player_id = p.id AND lm.legion_id = l.id AND l.rank_pos > 0 GROUP BY id";
@@ -169,13 +170,21 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 	}
 
 	@Override
-	public void increaseGp(int playerObjId, int additionalGp) {
-		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INCREASE_GP_QUERY)) {
-			stmt.setInt(1, additionalGp);
-			stmt.setInt(2, playerObjId);
+	public void increaseGp(int playerObjId, int additionalGp, boolean modifyStats) {
+		String updateQuery = modifyStats ? INCREASE_GP_QUERY_WITH_STATS : INCREASE_GP_QUERY;
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(updateQuery)) {
+			if (modifyStats) {
+				stmt.setInt(1, additionalGp);
+				stmt.setInt(2, additionalGp);
+				stmt.setInt(3, additionalGp);
+				stmt.setInt(4, playerObjId);
+			} else {
+				stmt.setInt(1, additionalGp);
+				stmt.setInt(2, playerObjId);
+			}
 			stmt.execute();
 		} catch (SQLException e) {
-			log.error("Couldn't increase " + additionalGp + " GP for player " + playerObjId, e);
+			log.error("Couldn't increase {} GP for player {}", additionalGp, playerObjId, e);
 		}
 	}
 
@@ -186,7 +195,7 @@ public class MySQL5AbyssRankDAO extends AbyssRankDAO {
 			stmt.setInt(2, playerObjId);
 			stmt.execute();
 		} catch (SQLException e) {
-			log.error("Couldn't decrease " + gpToRemove + " GP from player " + playerObjId, e);
+			log.error("Couldn't decrease {} GP from player {}", gpToRemove, playerObjId, e);
 		}
 	}
 

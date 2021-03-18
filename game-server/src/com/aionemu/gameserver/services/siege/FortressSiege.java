@@ -355,8 +355,8 @@ public class FortressSiege extends Siege<FortressLocation> {
 					log.info(this + ": Distributed no GP to the members of " + legion + " because no one made AP");
 			} else {
 				int gp = Math.min(Math.round(legionGp / (float) participatedLegionMembers.size()), SiegeConfig.LEGION_GP_CAP_PER_MEMBER);
-				for (Integer participant : participatedLegionMembers)
-					GloryPointsService.increaseGp(participant, gp);
+				for (int participant : participatedLegionMembers)
+					GloryPointsService.increaseGpBy(participant, gp);
 				if (LoggingConfig.LOG_SIEGE)
 					log.info(this + ": Distributed " + gp + " GP each, to the following members of " + legion + ": " + participatedLegionMembers);
 			}

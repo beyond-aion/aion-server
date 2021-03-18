@@ -243,7 +243,8 @@ public class KamarBattlefieldInstance extends GeneralInstanceHandler {
 				}
 				sendPacket(new SM_INSTANCE_SCORE(new KamarBattlefieldScoreInfo(kamarReward, 5, player.getObjectId()), kamarReward, getTime()));
 				AbyssPointsService.addAp(player, reward.getBaseReward() + reward.getBonusReward());
-				GloryPointsService.addGp(player, reward.getGloryPoints());
+				if (reward.getGloryPoints() > 0)
+					GloryPointsService.increaseGpBy(player.getObjectId(), reward.getGloryPoints());
 				if (reward.getBloodMarks() > 0) {
 					ItemService.addItem(player, 1860000236, reward.getBloodMarks());
 				}

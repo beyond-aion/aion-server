@@ -241,8 +241,7 @@ public final class QuestService {
 		if (rewards.getDp() != null)
 			player.getCommonData().addDp(rewards.getDp());
 		if (rewards.getGp() != null)
-			GloryPointsService.addGp(player, rewards.getGp());
-
+			GloryPointsService.modifyGpBy(player.getObjectId(), rewards.getGp());
 		if (rewards.getExtendInventory() != null) {
 			if (rewards.getExtendInventory() == 1)
 				CubeExpandService.questExpand(player);

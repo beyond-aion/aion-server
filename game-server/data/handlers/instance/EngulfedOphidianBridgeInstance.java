@@ -255,7 +255,8 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 				sendPacket(
 					new SM_INSTANCE_SCORE(new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 5, player.getObjectId()), engulfedOBReward, getTime()));
 				AbyssPointsService.addAp(player, reward.getBaseReward() + reward.getBonusReward());
-				GloryPointsService.addGp(player, reward.getGloryPoints());
+				if (reward.getGloryPoints() > 0)
+					GloryPointsService.increaseGpBy(player.getObjectId(), reward.getGloryPoints());
 				if (reward.getOphidianBox() > 0) {
 					ItemService.addItem(player, 188052681, reward.getOphidianBox());
 				}

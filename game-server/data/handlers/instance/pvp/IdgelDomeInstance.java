@@ -113,7 +113,9 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 			}
 			sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.SHOW_REWARD, p.getObjectId(), 0), idi, getTime()));
 			AbyssPointsService.addAp(p, reward.getBaseAp() + reward.getBonusAp());
-			GloryPointsService.addGp(p, reward.getBaseGp() + reward.getBonusGp());
+			int gpToAdd = reward.getBaseGp() + reward.getBonusGp();
+			if (gpToAdd > 0)
+				GloryPointsService.increaseGpBy(p.getObjectId(), gpToAdd);
 			if (reward.getReward1ItemId() > 0)
 				ItemService.addItem(p, reward.getReward1ItemId(), reward.getReward1Count() + reward.getReward1BonusCount());
 			if (reward.getReward2ItemId() > 0)

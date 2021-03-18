@@ -99,7 +99,8 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 				}
 				sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 5, player.getObjectId()), ironWallFrontReward, getTime()));
 				AbyssPointsService.addAp(player, reward.getBaseReward() + reward.getBonusReward());
-				GloryPointsService.addGp(player, reward.getGloryPoints());
+				if (reward.getGloryPoints() > 0)
+					GloryPointsService.increaseGpBy(player.getObjectId(), reward.getGloryPoints());
 				if (reward.getIronWarFrontBox() > 0) {
 					ItemService.addItem(player, 188052729, reward.getIronWarFrontBox());
 				}

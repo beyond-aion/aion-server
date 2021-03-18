@@ -87,8 +87,7 @@ public class Set extends AdminCommand {
 				PacketSendUtility.sendMessage(admin, "You should enter valid second params!");
 				return;
 			}
-
-			GloryPointsService.addGp(target, gp, false);
+			GloryPointsService.modifyGpBy(target.getObjectId(), gp, false, false);
 			if (target == admin) {
 				PacketSendUtility.sendMessage(admin, "Set your Glory Points to " + gp + ".");
 			} else {

@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.abyss;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
-import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK;
@@ -12,50 +11,58 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author ViAl
+ * @author ViAl, Sykra
  */
 public class GloryPointsService {
 
-	public static void increaseGp(int playerObjId, int additionalGp) {
-		increaseGp(playerObjId, additionalGp, true);
+	private GloryPointsService() {
 	}
 
-	public static void increaseGp(int playerObjId, int additionalGp, boolean addRates) {
-		Player onlinePlayer = World.getInstance().getPlayer(playerObjId);
-		if (onlinePlayer != null) {
-			addGp(onlinePlayer, additionalGp, addRates);
-		} else {
-			if (addRates) { // TODO: different memberships
-				additionalGp *= RatesConfig.GP_RATES[0];
-			}
-			DAOManager.getDAO(AbyssRankDAO.class).increaseGp(playerObjId, additionalGp);
-		}
+	public static void modifyGpBy(int playerObjId, int amount) {
+		modifyGpBy(playerObjId, amount, true, true);
 	}
 
-	public static void decreaseGp(int playerObjId, int gpToRemove) {
-		Player onlinePlayer = World.getInstance().getPlayer(playerObjId);
-		if (onlinePlayer != null) {
-			addGp(onlinePlayer, -gpToRemove, false);
-		} else {
-			DAOManager.getDAO(AbyssRankDAO.class).decreaseGp(playerObjId, gpToRemove);
-		}
-	}
-
-	public static void addGp(Player player, int additionalGp) {
-		addGp(player, additionalGp, true);
-	}
-
-	public static void addGp(Player player, int gp, boolean addRates) {
-		if (player == null)
+	public static void modifyGpBy(int playerObjId, int amount, boolean applyRatesOnIncrease, boolean modifyStatsOnIncrease) {
+		if (amount == 0)
 			return;
-		AbyssRank rank = player.getAbyssRank();
-		if (addRates)
-			gp = (int) Rates.GP.calcResult(player, gp);
-		rank.addGp(gp);
-		if (gp >= 0)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_GAIN(gp));
+		if (amount > 0)
+			increaseGpBy(playerObjId, amount, applyRatesOnIncrease, modifyStatsOnIncrease);
 		else
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE(gp * -1));
-		PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player));
+			decreaseGpBy(playerObjId, amount);
 	}
+
+	public static void increaseGpBy(int playerObjId, int amount) {
+		increaseGpBy(playerObjId, amount, true, true);
+	}
+
+	public static void increaseGpBy(int playerObjId, int amount, boolean applyRates, boolean modifyStats) {
+		if (amount == 0)
+			return;
+		Player player = World.getInstance().getPlayer(playerObjId);
+		if (player == null) {
+			if (applyRates)
+				amount *= RatesConfig.GP_RATES[0]; // TODO different memberships
+			DAOManager.getDAO(AbyssRankDAO.class).increaseGp(playerObjId, amount, modifyStats);
+		} else {
+			if (applyRates)
+				amount = (int) Rates.GP.calcResult(player, amount);
+			player.getAbyssRank().increaseGp(amount, modifyStats);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_GAIN(amount));
+			PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player));
+		}
+	}
+
+	public static void decreaseGpBy(int playerObjId, int amount) {
+		if (amount == 0)
+			return;
+		Player player = World.getInstance().getPlayer(playerObjId);
+		if (player == null) {
+			DAOManager.getDAO(AbyssRankDAO.class).decreaseGp(playerObjId, amount);
+		} else {
+			player.getAbyssRank().reduceGp(amount);
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE(amount));
+			PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player));
+		}
+	}
+
 }

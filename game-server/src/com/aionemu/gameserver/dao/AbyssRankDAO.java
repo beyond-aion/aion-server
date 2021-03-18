@@ -41,7 +41,7 @@ public abstract class AbyssRankDAO implements DAO {
 
 	public abstract void dailyUpdateGp(AbyssRankEnum rank);
 
-	public abstract void increaseGp(int playerObjId, int additionalGp);
+	public abstract void increaseGp(int playerObjId, int additionalGp, boolean modifyStats);
 
 	public abstract void decreaseGp(int playerObjId, int gpToRemove);
 

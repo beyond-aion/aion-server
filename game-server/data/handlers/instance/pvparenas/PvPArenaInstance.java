@@ -396,7 +396,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 				AbyssPointsService.addAp(player, reward.getBasicAP() + reward.getRankingAP() + reward.getScoreAP());
 				int gpToAdd = reward.getBasicGP() + reward.getRankingGP() + reward.getScoreGP();
 				if (gpToAdd > 0)
-					GloryPointsService.addGp(player, gpToAdd, false); // already added arena rates
+					GloryPointsService.increaseGpBy(player.getObjectId(), gpToAdd, false, true); // already added arena rates
 				int courage = reward.getBasicCourage() + reward.getRankingCourage() + reward.getScoreCourage();
 				if (courage != 0) {
 					ItemService.addItem(player, 186000137, courage);

@@ -266,7 +266,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			ItemService.addItem(player, reward.getRewardItem2(), reward.getRewardItem2Count(), true);
 			ItemService.addItem(player, reward.getRewardItem3(), reward.getRewardItem3Count(), true);
 			if (reward.getFinalGP() > 0) {
-				GloryPointsService.addGp(player, reward.getFinalGP());
+				GloryPointsService.increaseGpBy(player.getObjectId(), reward.getFinalAp());
 			}
 			if (reward.getFinalAp() > 0) {
 				AbyssPointsService.addAp(player, reward.getFinalAp());

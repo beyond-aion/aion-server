@@ -234,7 +234,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 
 					if (gp > 0) {
 						rewardedGpPlayers.add(playerId);
-						GloryPointsService.increaseGp(playerId, gp);
+						GloryPointsService.increaseGpBy(playerId, gp);
 					}
 				}
 				if (LoggingConfig.LOG_SIEGE && !rewardedGpPlayers.isEmpty()) {
