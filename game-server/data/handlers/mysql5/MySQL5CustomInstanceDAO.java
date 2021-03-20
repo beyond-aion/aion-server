@@ -23,7 +23,7 @@ public class MySQL5CustomInstanceDAO extends CustomInstanceDAO {
 	private static final Logger log = LoggerFactory.getLogger(MySQL5CustomInstanceDAO.class);
 	private static final String SELECT_QUERY = "SELECT * FROM `custom_instance` WHERE ? = player_id";
 	private static final String UPDATE_QUERY = "REPLACE INTO `custom_instance` (`player_id`, `rank`, `last_entry`) VALUES (?,?,?)";
-	private static final String SELECT_TOP10_QUERY = "SELECT c.*, p.name, p.player_class FROM custom_instance c, players p WHERE c.player_id = p.id AND p.race = ? ORDER BY c.rank DESC, c.last_entry DESC LIMIT 10";
+	private static final String SELECT_TOP10_QUERY = "SELECT c.*, p.name, p.player_class FROM custom_instance c, players p WHERE c.player_id = p.id AND p.race = ? AND c.last_entry > NOW() - INTERVAL 14 DAY ORDER BY c.rank DESC, c.last_entry DESC LIMIT 10";
 
 	@Override
 	public CustomInstanceRank loadPlayerRankObject(int playerId) {
