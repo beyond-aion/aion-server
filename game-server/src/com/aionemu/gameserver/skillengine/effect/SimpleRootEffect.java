@@ -50,7 +50,7 @@ public class SimpleRootEffect extends EffectTemplate {
 		final Creature effected = effect.getEffected();
 		effect.setSpellStatus(SpellStatus.NONE);
 		if (effected instanceof Player player)
-			player.getMoveController().abortMove();
+			player.getController().onStopMove();
 		if (effect.isSubEffect()) {
 			World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading(), false);
 			if (!(effected instanceof Player))

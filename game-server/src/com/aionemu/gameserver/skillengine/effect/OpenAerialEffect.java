@@ -57,7 +57,7 @@ public class OpenAerialEffect extends EffectTemplate {
 		effect.getEffected().getEffectController().removeParalyzeEffects();
 		if (effected instanceof Player player) {
 			player.getFlyController().onStopGliding();
-			player.getMoveController().abortMove();
+			player.getController().onStopMove();
 		}
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
 		if (effected instanceof Player)

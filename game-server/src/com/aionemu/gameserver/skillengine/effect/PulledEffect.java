@@ -6,11 +6,9 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SubEffectType;
@@ -61,7 +59,7 @@ public class PulledEffect extends EffectTemplate {
 			effected.getController().cancelCurrentSkill(effect.getEffector());
 			if (effected instanceof Player player) {
 				player.getFlyController().onStopGliding();
-				player.getMoveController().abortMove();
+				player.getController().onStopMove();
 			}
 		}
 		World.getInstance().updatePosition(effected, effect.getTargetX(), effect.getTargetY(), effect.getTargetZ(), effected.getHeading());
@@ -69,7 +67,6 @@ public class PulledEffect extends EffectTemplate {
 			PacketSendUtility.broadcastPacketAndReceive(effected,
 					new SM_FORCED_MOVE(effect.isReflected() ? effect.getOriginalEffected() : effect.getEffector(), effected.getObjectId(), effect.getTargetX(),
 							effect.getTargetY(), effect.getTargetZ()));
-		PacketSendUtility.broadcastPacket(effected, new SM_EMOTION(effected, EmotionType.START_EMOTE2));
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.PULLED);
 		effect.setAbnormal(AbnormalState.PULLED);
 	}
