@@ -404,23 +404,22 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Agrint Event" start="2020-09-25T00:00:00" end="2020-10-11T23:59:59">
+	<event name="Agrint Event" start="2021-03-29T00:00:00" end="2021-04-11T23:59:59">
 		<event_drops>
-			<gd_rule rule_name="Agrint Event (Agrint)" chance="100" member_limit="18" max_drop_rule="2">
+			<gd_rule rule_name="Agrint Event (Agrint)" chance="100" member_limit="18">
 				<gd_maps>
 					<gd_map map_id="110010000" /><!-- Sanctum -->
 					<gd_map map_id="120010000" /><!-- Pandaemonium -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="218852" /><!-- Autumn Agrint -->
-					<gd_npc npc_id="218864" /><!-- Autumn Agrint -->
+					<gd_npc npc_id="218850" /><!-- Spring Agrint -->
+					<gd_npc npc_id="218862" /><!-- Spring Agrint -->
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="188100060" /><!-- [Event] Smooth Eggshell -->
-					<gd_item id="188052282" /><!-- [Event] Autumn Harvest Welcome Package -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Agrint Event (Shared)" chance="25" member_limit="6">
+			<gd_rule rule_name="Agrint Event (Shared)" chance="30" member_limit="6">
 				<gd_maps>
 					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
@@ -474,12 +473,12 @@
 			</gd_rule>
 			<gd_rule rule_name="Agrint Event (Boss)" chance="100" member_limit="12">
 				<gd_maps>
-					<gd_map map_id="300630000" /><!-- Anguished_Dragon_Lords_Refuge -->
-					<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-					<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
+					<gd_map map_id="300630000" /><!-- Anguished Dragon Lords Refuge -->
+					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
+					<gd_map map_id="300610000" /><!-- Raksang Ruins -->
 					<gd_map map_id="300700000" /><!-- The Hexway -->
-					<gd_map map_id="300800000" /><!-- Infinity_Shard -->
-					<gd_map map_id="301360000" /><!-- Infernal_Danuar_Reliquary -->
+					<gd_map map_id="300800000" /><!-- Infinity Shard -->
+					<gd_map map_id="301360000" /><!-- Infernal Danuar Reliquary -->
 				</gd_maps>
 				<gd_npcs>
 					<gd_npc npc_id="702729" /><!-- Tiamat's Huge Treasure Crate -->
@@ -501,15 +500,15 @@
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
-				<!-- Autumn Agrint -->
-				<spawn npc_id="218852" respawn_time="14400">
+				<!-- Spring Agrint -->
+				<spawn npc_id="218850" respawn_time="14400">
 					<spot x="1532.3938" y="1511.6124" z="565.8824" h="60" />
 				</spawn>
 			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- Autumn Agrint -->
-				<spawn npc_id="218864" respawn_time="14400">
+				<!-- Spring Agrint -->
+				<spawn npc_id="218862" respawn_time="14400">
 					<spot x="1275.8656" y="1335.5107" z="204.4200" h="90" />
 				</spawn>
 			</spawn_map>

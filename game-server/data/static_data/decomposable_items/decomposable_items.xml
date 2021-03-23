@@ -13505,38 +13505,51 @@
 	</decomposable>
 	<decomposable item_id="188051675" /><!-- Mysterious Box -->
 	<decomposable item_id="188051676"><!-- [Event] Noble Box of Life -->
-		<items>
-			<item id="162001030" min_count="10" /><!-- [Event] Premium Recovery Potion -->
-		</items>
-		<items>
+		<items chance="7">
 			<item id="164002167" min_count="5" /><!-- Drana Coffee -->
 		</items>
-		<items>
-			<item id="166100020" min_count="150" /><!-- [Stamp] Greater Supplements (Eternal) -->
+		<items chance="7">
+			<item id="166100020" min_count="250" /><!-- [Stamp] Greater Supplements (Eternal) -->
 		</items>
-		<items>
-			<item id="166100023" min_count="150" /><!-- [Stamp] Greater Supplements (Eternal) -->
+		<items chance="7">
+			<item id="166100023" min_count="250" /><!-- [Stamp] Greater Supplements (Eternal) -->
 		</items>
-		<items>
-			<item id="185000216" /><!-- Ancestor's Relic -->
+		<items chance="7">
+			<item id="169620030" /><!-- [Favorable Luck] Face of Spring Burgeoning -->
 		</items>
-		<items>
-			<item id="186000399" min_count="10" /><!-- Honorable Conqueror's Mark -->
+		<items chance="7">
+			<item id="169405253" /><!-- Weapon Shard -->
 		</items>
-		<items>
-			<item id="188052090" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- [Event] Magic Food Bundle -->
-			<item id="188052091" race="ELYOS" player_classes="GLADIATOR TEMPLAR ASSASSIN RANGER CHANTER" /><!-- [Event] Melee Food Bundle -->
-			<item id="188052092" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- [Event] Magic Food Bundle -->
-			<item id="188052093" race="ASMODIANS" player_classes="GLADIATOR TEMPLAR ASSASSIN RANGER CHANTER" /><!-- [Event] Melee Food Bundle -->
+		<items chance="7">
+			<item id="188053695" /><!-- High Grade Crafting Material Box of Conquest -->
 		</items>
-		<items>
-			<item id="188053452" /><!-- Autumn Guy's Lucky Box -->
+		<items chance="7">
+			<item id="188053959" /><!-- [Camping] Display Furniture Bag -->
 		</items>
-		<items>
-			<item id="188053623" /><!-- Fire Dragon King's Weapon Bundle -->
+		<items chance="7">
+			<item id="186000100" min_count="5" race="ELYOS" /><!-- Progress Token -->
+			<item id="186000103" min_count="5" race="ASMODIANS" /><!-- Ward Token -->
 		</items>
-		<items>
-			<item id="188053628" /><!-- Pallasite Bundle -->
+		<items chance="7">
+			<item id="188053276" /><!-- Anuhart's Fabled Pants Box -->
+		</items>
+		<items chance="7">
+			<item id="188053277" /><!-- Anuhart's Fabled Shoes Box -->
+		</items>
+		<items chance="7">
+			<item id="188053278" /><!-- Anuhart's Fabled Gloves Box -->
+		</items>
+		<items chance="7">
+			<item id="188053279" /><!-- Anuhart's Fabled Chest Box -->
+		</items>
+		<items chance="7">
+			<item id="188053280" /><!-- Anuhart's Fabled Shoulders Box -->
+		</items>
+		<items chance="4.5">
+			<item id="188052075" /><!-- [Event] Tahabata Weapon Box -->
+		</items>
+		<items chance="4.5">
+			<item id="190020028" /><!-- Pink Griffo Egg -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051677" /><!-- [Event] Eternal Treasure Chest -->
