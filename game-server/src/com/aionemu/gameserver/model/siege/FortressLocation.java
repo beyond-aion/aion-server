@@ -2,6 +2,7 @@ package com.aionemu.gameserver.model.siege;
 
 import java.util.List;
 
+import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
@@ -102,10 +103,10 @@ public class FortressLocation extends SiegeLocation {
 	public void clearLocation() {
 		forEachCreature(creature -> {
 			if (isEnemy(creature)) {
-				if (creature instanceof Kisk)
-					((Kisk) creature).getController().die();
-				else if (creature instanceof Player)
-					TeleportService.moveToBindLocation((Player) creature);
+				if (creature instanceof Kisk kisk)
+					kisk.getController().die();
+				else if (creature instanceof Player player && !(player.isStaff() && SiegeConfig.IGNORE_STAFF_ON_LOCATION_CLEAR))
+					TeleportService.moveToBindLocation(player);
 			}
 		});
 	}
