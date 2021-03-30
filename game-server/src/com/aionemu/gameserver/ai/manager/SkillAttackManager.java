@@ -230,7 +230,8 @@ public class SkillAttackManager {
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(entry.getSkillId());
 		Properties prop = template.getProperties();
 		if (prop.getFirstTarget() != FirstTargetAttribute.ME && entry.getTemplate().getTarget() != NpcSkillTargetAttribute.NONE
-			&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.MOST_HATED) {
+			&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.MOST_HATED
+				&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.ME) {
 			if (owner.getTarget() instanceof Creature) {
 				Creature target = (Creature) owner.getTarget();
 				if (target.isDead() || !owner.canSee(target)) {
