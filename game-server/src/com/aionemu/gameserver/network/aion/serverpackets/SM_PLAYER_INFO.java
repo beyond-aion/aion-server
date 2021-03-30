@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.templates.cp.CPType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.CPInfo;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
-import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
 /**
  * This packet is displaying visible players.
@@ -206,7 +205,7 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeH(player.getLevel()); // [level]
 		writeH(player.getPlayerSettings().getDisplay()); // unk - 0x04
 		writeH(player.getPlayerSettings().getDeny()); // unk - 0x00
-		writeH(isAprilFoolsAppearance ? AbyssRankEnum.SUPREME_COMMANDER.getId() : player.getAbyssRank().getRank().getId()); // abyss rank
+		writeH(player.getAbyssRank().getRank().getId()); // abyss rank
 		writeH(0x00); // unk - 0x01
 		writeD(player.getTarget() == null ? 0 : player.getTarget().getObjectId());
 		writeC(0); // suspect id
