@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.time.Month;
+import java.time.ZonedDateTime;
 import java.util.Map.Entry;
 
 import com.aionemu.gameserver.controllers.movement.CreatureMoveController;
@@ -15,6 +17,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.TownService;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * This packet is displaying visible npc/monsters.
@@ -88,13 +91,15 @@ public class SM_NPC_INFO extends AionServerPacket {
 		if (gear == null) {
 			writeD(0x00);
 		} else {
+			ZonedDateTime serverTime = ServerTime.now();
+			boolean isAprilFoolsAppearance = serverTime.getDayOfMonth() == 1 && serverTime.getMonth() == Month.APRIL;
 			writeD(gear.getItemsMask());
 			boolean hasWeapon = false;
 			// getting it from template (later if we make sure that npcs actually use items, we'll make Item from it)
 			for (Entry<ItemSlot, ItemTemplate> item : gear) {
 				if (!hasWeapon)
 					hasWeapon = item.getValue().isWeapon();
-				writeD(item.getValue().getTemplateId());
+				writeD(isAprilFoolsAppearance ? AbstractPlayerInfoPacket.getAprilFoolsItemId(item.getValue()) : item.getValue().getTemplateId());
 				writeD(0x00);
 				writeD(0x00);
 				writeH(0x00);

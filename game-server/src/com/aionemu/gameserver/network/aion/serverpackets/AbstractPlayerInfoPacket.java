@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.time.Month;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,8 +14,10 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.ItemSlot;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.BrokerService;
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author AEJTester, Nemesiss, Niato
@@ -25,6 +29,13 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 	 * The maximum number of characters the client can display. The client expects a fixed size text buffer in various packets. 
 	 */
 	public static final int CHARNAME_MAX_LENGTH = 25;
+
+	final boolean isAprilFoolsAppearance;
+
+	protected AbstractPlayerInfoPacket() {
+		ZonedDateTime serverTime = ServerTime.now();
+		isAprilFoolsAppearance = serverTime.getDayOfMonth() == 1 && serverTime.getMonth() == Month.APRIL;
+	}
 
 	protected void writePlayerInfo(PlayerAccountData accPlData) {
 		PlayerCommonData pcd = accPlData.getPlayerCommonData();
@@ -161,11 +172,32 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 
 		writeD(mask);
 		for (Item item : items) {
-			writeD(item.getItemSkinTemplate().getTemplateId());
+			writeD(isAprilFoolsAppearance ? getAprilFoolsItemId(item.getItemSkinTemplate()) : item.getItemSkinTemplate().getTemplateId());
 			writeD(item.getGodStoneId());
 			writeDyeInfo(item.getItemColor());
 			writeH(item.getItemEnchantParam());
 			writeH(0); // 4.7
 		}
+	}
+
+	static int getAprilFoolsItemId(ItemTemplate item) {
+		return switch (item.getItemGroup()) {
+			case SWORD -> 100001071;
+			case GREATSWORD -> 100900800;
+			case DAGGER -> 100201481;
+			case MACE -> 100100613;
+			case ORB -> 100501303;
+			case SPELLBOOK -> 100600894;
+			case POLEARM -> 101301254;
+			case STAFF -> 101500561;
+			case BOW -> 101701358;
+			case HARP -> 102001236;
+			case GUN -> 101801071;
+			case CANNON -> 101901109;
+			case KEYBLADE -> 102101000;
+			case SHIELD -> 115001743;
+			case WING -> 187060088;
+			default -> item.getTemplateId();
+		};
 	}
 }
