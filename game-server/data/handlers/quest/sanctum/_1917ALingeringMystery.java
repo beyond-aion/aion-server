@@ -2,6 +2,7 @@ package quest.sanctum;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
+import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
@@ -40,12 +41,30 @@ public class _1917ALingeringMystery extends AbstractQuestHandler {
 			return false;
 
 		if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 203075) {
+			if (targetId == 203075) { // Namus
 				if (env.getDialogActionId() == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0)
 						return sendQuestDialog(env, 1352);
 				} else if (env.getDialogActionId() == SETPRO1) {
-					return defaultCloseDialog(env, 0, 1, true, false);
+					return defaultCloseDialog(env, 0, 1, false, false);
+				}
+			} else if (targetId == 203835) { // Seirenia
+				if (env.getDialogActionId() == QUEST_SELECT) {
+					if (qs.getQuestVarById(0) == 1)
+						return sendQuestDialog(env, 1693);
+				} else {
+					Integer rewardGroup = switch (env.getDialogActionId()) {
+						case SETPRO1 -> 0;
+						case SETPRO2 -> 1;
+						case SETPRO3 -> 2;
+						default -> null;
+					};
+					if (rewardGroup != null) {
+						qs.setRewardGroup(rewardGroup);
+						qs.setStatus(QuestStatus.REWARD);
+						updateQuestStatus(env);
+						return sendQuestDialog(env, DialogPage.getRewardPageByIndex(qs.getRewardGroup()).id());
+					}
 				}
 			}
 		}
