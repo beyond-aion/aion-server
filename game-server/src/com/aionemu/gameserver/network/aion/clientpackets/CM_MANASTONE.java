@@ -13,7 +13,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.EnchantService;
 import com.aionemu.gameserver.services.StigmaService;
 import com.aionemu.gameserver.services.item.ItemSocketService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
@@ -66,9 +65,13 @@ public class CM_MANASTONE extends AionClientPacket {
 			case 1: // enchant stone
 			case 2: // add manastone
 				Item stone = player.getInventory().getItemByObjId(stoneUniqueId);
+				if (stone == null)
+					return;
 				Item targetItem = player.getEquipment().getEquippedItemByObjId(targetItemUniqueId);
-				if (targetItem == null)
-					targetItem = player.getInventory().getItemByObjId(targetItemUniqueId);
+				if (targetItem == null && (targetItem = player.getInventory().getItemByObjId(targetItemUniqueId)) == null) {
+					sendPacket(actionType == 1 ? SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_NO_TARGET_ITEM() : SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_NO_TARGET_ITEM());
+					return;
+				}
 
 				if (stone.getItemTemplate().isStigma() && targetItem.getItemTemplate().isStigma()) {
 					StigmaService.chargeStigma(player, targetItem, stone);
@@ -92,7 +95,8 @@ public class CM_MANASTONE extends AionClientPacket {
 			case 4: // add godstone
 				Item weaponItem = player.getInventory().getItemByObjId(targetItemUniqueId);
 				if (weaponItem == null) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_CANNOT_GIVE_PROC_TO_EQUIPPED_ITEM());
+					boolean isEquipped = player.getEquipment().getEquippedItemByObjId(targetItemUniqueId) != null;
+					sendPacket(isEquipped ? SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_CANNOT_GIVE_PROC_TO_EQUIPPED_ITEM() : SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_PROC_NO_TARGET_ITEM());
 					return;
 				}
 				ItemSocketService.socketGodstone(player, weaponItem, stoneUniqueId);

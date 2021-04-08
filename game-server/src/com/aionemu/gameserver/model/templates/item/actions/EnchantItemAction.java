@@ -45,11 +45,11 @@ public class EnchantItemAction extends AbstractItemAction {
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
 		if (isSupplementAction())
 			return false;
-		if (targetItem == null) { // no item selected.
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ITEM_COLOR_ERROR());
+		if (parentItem == null)
 			return false;
-		}
-		if (parentItem == null) {
+		if (targetItem == null) { // no item selected.
+			boolean isEnchantmentStone = parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT;
+			PacketSendUtility.sendPacket(player, isEnchantmentStone ? SM_SYSTEM_MESSAGE.STR_ENCHANT_ITEM_NO_TARGET_ITEM() : SM_SYSTEM_MESSAGE.STR_GIVE_ITEM_OPTION_NO_TARGET_ITEM());
 			return false;
 		}
 		if (parentItem.getItemTemplate().getItemGroup() == ItemGroup.ENCHANTMENT) {
