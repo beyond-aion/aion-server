@@ -21,7 +21,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.siege.FortressLocation;
-import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.npc.TalkInfo;
@@ -355,7 +354,7 @@ public class DialogService {
 		boolean playerIsCreator = player.getObjectId() == npc.getCreatorId();
 		return switch (npc.getSummonOwner()) {
 			case PRIVATE -> playerIsCreator;
-			case GROUP -> playerIsCreator || player.getCurrentGroup() instanceof TemporaryPlayerTeam<?> group && group.hasMember(npc.getCreatorId());
+			case GROUP -> playerIsCreator || player.getCurrentGroup() != null && player.getCurrentGroup().hasMember(npc.getCreatorId());
 			case ALLIANCE -> playerIsCreator || player.getCurrentTeam() instanceof PlayerAlliance alliance && alliance.hasMember(npc.getCreatorId());
 			case LEGION -> playerIsCreator || player.isLegionMember() && player.getLegion().isMember(npc.getCreatorId());
 		};

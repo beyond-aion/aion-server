@@ -86,7 +86,7 @@ public class FirstTargetProperty {
 				}
 
 				if (relation == TargetRelationAttribute.FRIEND) {
-					if (!(skill.getFirstTarget() instanceof Creature firstTarget) || effector.isEnemy(firstTarget)) {
+					if (skill.getFirstTarget() == null || effector.isEnemy(skill.getFirstTarget())) {
 						if (effector instanceof Player playerEffector)
 							PacketSendUtility.sendPacket(playerEffector, SM_SYSTEM_MESSAGE.STR_SKILL_INVALID_TARGET_NOTENEMY_ONLY());
 						return false;

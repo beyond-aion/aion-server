@@ -13,7 +13,6 @@
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.test.skip>true</maven.test.skip>
-		<maven.test.argLine>--enable-preview</maven.test.argLine>
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -42,9 +41,8 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.8.1</version>
 				<configuration>
-					<release>15</release>
+					<release>16</release>
 					<compilerArgs>
-						<arg>--enable-preview</arg>
 						<arg>-Xlint:all,-preview</arg>
 					</compilerArgs>
 					<showWarnings>true</showWarnings>

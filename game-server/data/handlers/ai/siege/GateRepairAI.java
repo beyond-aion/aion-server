@@ -15,13 +15,13 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.ActionAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.team.legion.LegionPermissionsMask;
 import com.aionemu.gameserver.model.templates.siegelocation.DoorRepairData;
+import com.aionemu.gameserver.model.templates.siegelocation.DoorRepairStone;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ACTION_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
@@ -83,24 +83,23 @@ public class GateRepairAI extends NpcAI {
 	}
 
 	public void onActivate(Player player, DoorRepairData repairData) {
-		if (getSpawnTemplate() instanceof SiegeSpawnTemplate spawnTemplate) {
-			VisibleObject obj = getPosition().getWorldMapInstance().getObjectByStaticId(repairData.getRepairStone(spawnTemplate.getStaticId()).getDoorId());
-
-			if (obj instanceof Creature door) {
-				int healValue = (int) Math.round(door.getLifeStats().getMaxHp() * SiegeConfig.DOOR_REPAIR_HEAL_PERCENT);
-				if (door.getLifeStats().getCurrentHp() + healValue > door.getLifeStats().getMaxHp()) {
-					healValue = door.getLifeStats().getMaxHp() - door.getLifeStats().getCurrentHp();
-				}
-
-				if (LoggingConfig.LOG_SIEGE)
-					log.info("Gate Repair Stone with staticId: " + getSpawnTemplate().getStaticId() + " siege: " + getSpawnTemplate().getSiegeId() + " activated by " + player + " (race: " + player.getRace() + ") to heal door with staticId: " + (door.getSpawn().getStaticId()) + " by " + healValue);
-				nextActivationTime.set(System.currentTimeMillis() + repairData.getCd());
-				PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_REPAIR_ABYSS_DOOR(player.getName(), "" + healValue));
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_ACTION_ANIMATION(getObjectId(), ActionAnimation.REPAIR_GATE, door.getObjectId()));
-				door.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.DOOR_REPAIR, healValue);
-			} else {
-				throw new SiegeException("Could not find a door to repair for siege " + spawnTemplate.getSiegeId() + " for npc_id = " + getNpcId() + " with static_id = " + getSpawnTemplate().getStaticId());
+		DoorRepairStone repairStone = getSpawnTemplate() == null ? null : repairData.getRepairStone(getSpawnTemplate().getStaticId());
+		if (repairStone == null)
+			return;
+		if (getPosition().getWorldMapInstance().getObjectByStaticId(repairStone.getDoorId()) instanceof Creature door) {
+			int healValue = (int) Math.round(door.getLifeStats().getMaxHp() * SiegeConfig.DOOR_REPAIR_HEAL_PERCENT);
+			if (door.getLifeStats().getCurrentHp() + healValue > door.getLifeStats().getMaxHp()) {
+				healValue = door.getLifeStats().getMaxHp() - door.getLifeStats().getCurrentHp();
 			}
+
+			if (LoggingConfig.LOG_SIEGE)
+				log.info("Gate Repair Stone with staticId: " + getSpawnTemplate().getStaticId() + " siege: " + getSpawnTemplate().getSiegeId() + " activated by " + player + " (race: " + player.getRace() + ") to heal door with staticId: " + (door.getSpawn().getStaticId()) + " by " + healValue);
+			nextActivationTime.set(System.currentTimeMillis() + repairData.getCd());
+			PacketSendUtility.broadcastPacket(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_REPAIR_ABYSS_DOOR(player.getName(), "" + healValue));
+			PacketSendUtility.broadcastPacket(getOwner(), new SM_ACTION_ANIMATION(getObjectId(), ActionAnimation.REPAIR_GATE, door.getObjectId()));
+			door.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.DOOR_REPAIR, healValue);
+		} else {
+			throw new SiegeException("Could not find a door to repair for siege " + getSpawnTemplate().getSiegeId() + " for npc_id = " + getNpcId() + " with static_id = " + getSpawnTemplate().getStaticId());
 		}
 	}
 
