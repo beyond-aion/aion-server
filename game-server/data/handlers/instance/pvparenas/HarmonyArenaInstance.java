@@ -94,7 +94,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 			return;
 		}
 
-		int bonus = 0;
+		int bonus;
 		int rank = 0;
 
 		// Decrease victim points
@@ -107,23 +107,21 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 		} else
 			bonus = getNpcBonus(((Npc) victim).getNpcId());
 
-		if (bonus == 0) {
+		if (bonus == 0)
 			return;
-		}
 
+		if (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0)
+			bonus *= 3;
+
+		int totalDamage = victim.getAggroList().getTotalDamage();
 		// Reward all damagers
-		for (AggroInfo damager : victim.getAggroList().getFinalDamageList(false)) {
-			if (!(damager.getAttacker() instanceof Creature)) {
+		for (AggroInfo aggroInfo : victim.getAggroList().getFinalDamageList(false)) {
+			if (aggroInfo.getDamage() == 0)
 				continue;
-			}
-			Creature master = ((Creature) damager.getAttacker()).getMaster();
-			if (master == null) {
+			if (!(aggroInfo.getAttacker() instanceof Creature))
 				continue;
-			}
-			if (master instanceof Player) {
-				Player attacker = (Player) master;
-				int rewardPoints = (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0 ? bonus * 3 : bonus) * damager.getDamage()
-					/ victim.getAggroList().getTotalDamage();
+			if (((Creature) aggroInfo.getAttacker()).getMaster() instanceof Player attacker) {
+				int rewardPoints = bonus * aggroInfo.getDamage() / totalDamage;
 				instanceReward.getHarmonyGroupReward(attacker.getObjectId()).addPoints(rewardPoints);
 				sendSystemMsg(attacker, victim, rewardPoints);
 				instanceReward.sendPacket(10, attacker);

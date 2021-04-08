@@ -83,11 +83,11 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 		} else
 			bonus = getNpcBonus(((Npc) victim).getNpcId());
 
-		if (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0)
-			bonus *= 3;
-
 		if (bonus == 0)
 			return;
+
+		if (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0)
+			bonus *= 3;
 
 		int totalDamage = victim.getAggroList().getTotalDamage();
 		// Reward all damagers
@@ -96,11 +96,10 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 				continue;
 			if (!(aggroInfo.getAttacker() instanceof Creature))
 				continue;
-			Creature master = ((Creature) aggroInfo.getAttacker()).getMaster();
-			if (master instanceof Player) {
+			if (((Creature) aggroInfo.getAttacker()).getMaster() instanceof Player attacker) {
 				int rewardPoints = bonus * aggroInfo.getDamage() / totalDamage;
-				getPlayerReward(master.getObjectId()).addPoints(rewardPoints);
-				sendSystemMsg((Player) master, victim, rewardPoints);
+				getPlayerReward(attacker.getObjectId()).addPoints(rewardPoints);
+				sendSystemMsg(attacker, victim, rewardPoints);
 			}
 		}
 		if (instanceReward.hasCapPoints()) {
