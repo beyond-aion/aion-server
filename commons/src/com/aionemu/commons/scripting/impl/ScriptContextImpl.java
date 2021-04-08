@@ -6,6 +6,7 @@ import java.lang.ref.Cleaner;
 import java.nio.file.Files;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
 import java.util.List;
 import java.util.stream.Stream;
 
@@ -103,7 +104,16 @@ public class ScriptContextImpl implements ScriptContext {
 		List<File> sourceFiles = findFiles();
 		if (CommonsConfig.SCRIPT_COMPILER_CACHING)
 			scriptCompiler.setClasses(ScriptCompilerCache.findValidCachedClassFiles(sourceFiles));
-		state.compilationResult = scriptCompiler.compile(sourceFiles);
+		try {
+			state.compilationResult = scriptCompiler.compile(sourceFiles);
+		} catch (ClassFormatError e) {
+			if (!CommonsConfig.SCRIPT_COMPILER_CACHING)
+				throw e;
+			log.warn("Couldn't load cached classes from " + ScriptCompilerCache.CACHE_DIR + ", refreshing files in cache...", e);
+			ScriptCompilerCache.invalidate(sourceFiles = findFiles());
+			scriptCompiler.setClasses(Collections.emptyMap());
+			state.compilationResult = scriptCompiler.compile(sourceFiles);
+		}
 		if (CommonsConfig.SCRIPT_COMPILER_CACHING)
 			ScriptCompilerCache.cacheClasses(state.compilationResult.getBinaryClasses());
 

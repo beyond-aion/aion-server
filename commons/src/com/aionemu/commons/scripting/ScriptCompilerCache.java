@@ -58,6 +58,13 @@ public class ScriptCompilerCache {
 		}
 	}
 
+	public static synchronized void invalidate(List<File> sourceFiles) {
+		ACCESSORS.incrementAndGet();
+		sourceFiles.forEach(CLASS_FILES_BY_SOURCE_FILE::remove);
+		if (ACCESSORS.decrementAndGet() == 0 && SHOULD_PERSIST.get())
+			saveClassFileMap();
+	}
+
 	public static Map<String, File> findValidCachedClassFiles(List<File> sourceFiles) {
 		ACCESSORS.incrementAndGet();
 		if (!CACHE_DIR.toFile().exists())
