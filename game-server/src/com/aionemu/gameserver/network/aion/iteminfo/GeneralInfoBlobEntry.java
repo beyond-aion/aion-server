@@ -2,6 +2,7 @@ package com.aionemu.gameserver.network.aion.iteminfo;
 
 import java.nio.ByteBuffer;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 
 /**
@@ -25,7 +26,7 @@ public class GeneralInfoBlobEntry extends ItemBlobEntry {
 		writeD(buf, ownerItem.secondsUntilExpiration()); // Disappear time
 		writeD(buf, 0);
 		writeD(buf, ownerItem.getTemporaryExchangeTimeRemaining());
-		writeH(buf, 0); // TODO: Item Sealing - 1=sealed, 2=unsealing state, 3=special sealed(gm), 4=special unsealing(gm)
+		writeH(buf, DataManager.ITEM_CLEAN_UP.hasAccountOrLegionWhStorabilityDisabled(ownerItem.getItemId()) ? 3 : 0); // TODO: Item Sealing - 1=sealed, 2=unsealing state, 3=special sealed(gm), 4=special unsealing(gm)
 		writeD(buf, 0); // Remaining unsealing time
 		writeH(buf, 18); // unk 4.7.5
 	}

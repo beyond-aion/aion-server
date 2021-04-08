@@ -27,4 +27,8 @@ public class ItemRestrictionCleanupData {
 	public List<ItemCleanupTemplate> getList() {
 		return bplist == null ? Collections.emptyList() : bplist;
 	}
+
+	public boolean hasAccountOrLegionWhStorabilityDisabled(int itemId) {
+		return bplist.stream().anyMatch(t -> t.getId() == itemId && (t.resultAccountWH() == 0 || t.resultLegionWH() == 0));
+	}
 }

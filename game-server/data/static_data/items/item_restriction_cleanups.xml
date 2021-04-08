@@ -9,4 +9,5 @@
 		Forbidding tradability (trade="0") however works without patching the client, although players won't see the info in the item tooltip in that 
 		case.
 	-->
+	<cleanup id="188053996" awh="0" lwh="0" /> <!-- Emperor Trillirunerk's Feather Box -->
 </item_restriction_cleanups>
