@@ -1,13 +1,7 @@
 package com.aionemu.gameserver.model;
 
-import java.lang.reflect.Field;
-import java.util.Arrays;
-import java.util.List;
-import java.util.stream.Collectors;
-
 import javax.xml.bind.annotation.XmlEnum;
 
-import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.model.templates.L10n;
 
 /**

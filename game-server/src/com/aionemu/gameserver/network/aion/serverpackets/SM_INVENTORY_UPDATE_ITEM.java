@@ -49,6 +49,7 @@ public class SM_INVENTORY_UPDATE_ITEM extends AionServerPacket {
 			case POLISH_CHARGE:
 				itemInfoBlob = new ItemInfoBlob(player, item);
 				itemInfoBlob.addBlobEntry(ItemBlobType.POLISH_INFO);
+				break;
 			default:
 				itemInfoBlob = ItemInfoBlob.getFullBlob(player, item);
 				break;
