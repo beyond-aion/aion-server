@@ -17019,40 +17019,45 @@
 	<decomposable item_id="188052114"><!-- Krotan Refuge Siege Defense Reward Box -->
 		<items>
 			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052115"><!-- Kysis Fortress Siege Defense Reward Box -->
 		<items>
 			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052116"><!-- Miren Fortress Siege Defense Reward Box -->
 		<items>
 			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052117"><!-- Divine Fortress Siege Defense Reward Box -->
 		<items>
 			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052118"><!-- Altar of Avarice Fortress Siege Defense Reward Box -->
 		<items>
 			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 			<item id="122001654" /><!-- Altar of Avarice Fortress Seal Ring (7 days) -->
 		</items>
@@ -17060,8 +17065,9 @@
 	<decomposable item_id="188052119"><!-- Temple of Scales Fortress Siege Defense Reward Box -->
 		<items>
 			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 			<item id="122001655" /><!-- Temple of Scales Fortress Seal Ring (7 days) -->
 		</items>
@@ -17069,8 +17075,9 @@
 	<decomposable item_id="188052120"><!-- Vorgaltem Citadel Fortress Siege Defense Reward Box -->
 		<items>
 			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 			<item id="122001656" /><!-- Vorgaltem Citadel Fortress Seal Ring (7 days) -->
 		</items>
@@ -17078,8 +17085,9 @@
 	<decomposable item_id="188052121"><!-- Crimson Temple Fortress Siege Defense Reward Box -->
 		<items>
 			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 			<item id="122001657" /><!-- Crimson Temple Fortress Seal Ring (7 days) -->
 		</items>
@@ -19356,8 +19364,9 @@
 			<item id="162000143" min_count="5" /><!-- Brigade General's Liquid Courage -->
 			<item id="188052544" race="ELYOS" /><!-- Greater Stigma Bundle -->
 			<item id="188052545" race="ASMODIANS" /><!-- Greater Stigma Bundle -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
 	</decomposable>
@@ -19376,8 +19385,9 @@
 			<item id="162000143" min_count="5" /><!-- Brigade General's Liquid Courage -->
 			<item id="188052544" race="ELYOS" /><!-- Greater Stigma Bundle -->
 			<item id="188052545" race="ASMODIANS" /><!-- Greater Stigma Bundle -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
 	</decomposable>
@@ -19396,8 +19406,9 @@
 			<item id="162000143" min_count="5" /><!-- Brigade General's Liquid Courage -->
 			<item id="188052544" race="ELYOS" /><!-- Greater Stigma Bundle -->
 			<item id="188052545" race="ASMODIANS" /><!-- Greater Stigma Bundle -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
 	</decomposable>
@@ -28799,8 +28810,9 @@
 	<decomposable item_id="188053136"><!-- Balaurea Fortress Siege Defense Consumables Box -->
 		<items>
 			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="188053137" min_count="20" /><!-- Balaurea Buffet Bundle -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
@@ -28817,7 +28829,8 @@
 		<items>
 			<item id="162000143" min_count="5" /><!-- Brigade General's Liquid Courage -->
 			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000073" min_count="50" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="100" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
 	</decomposable>
@@ -28827,7 +28840,6 @@
 			<item id="162000123" min_count="500" /><!-- Superior Mana Serum -->
 			<item id="162000124" min_count="500" /><!-- Superior Recovery Serum -->
 			<item id="164000259" min_count="50" /><!-- Premium Anti-Shock Scroll -->
-			<item id="164000073" min_count="50" /><!-- Greater Courage Scroll -->
 			<item id="188052375" min_count="20" /><!-- Nourishing Combat Bundle -->
 		</items>
 	</decomposable>
@@ -29745,8 +29757,9 @@
 	<decomposable item_id="188053296"><!-- Divine Fortress Siege Defense Reward Box -->
 		<items>
 			<item id="162000143" /><!-- Brigade General's Liquid Courage -->
-			<item id="164000134" min_count="50" /><!-- Greater Awakening Scroll -->
-			<item id="164000076" min_count="50" /><!-- Greater Running Scroll -->
+			<item id="164000134" min_count="35" /><!-- Greater Awakening Scroll -->
+			<item id="164000073" min_count="35" /><!-- Greater Courage Scroll -->
+			<item id="164000076" min_count="70" /><!-- Greater Running Scroll -->
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
 	</decomposable>
