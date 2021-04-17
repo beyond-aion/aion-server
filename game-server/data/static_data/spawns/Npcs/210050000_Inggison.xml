@@ -8617,5 +8617,13 @@
 			<spot x="617.7991" y="1588.1835" z="365.39026" h="56"/>
 			<spot x="1147.8693" y="2095.7" z="347.76755" h="36"/>
 		</spawn>
+		<!-- Chenshurunerk -->
+		<spawn npc_id="799063">
+			<temporary_spawn spawn_time="4.*.*" despawn_time="6.*.*" />
+			<spot x="2251.5461" y="2369.6189" z="58.875" h="93" random_walk="2" />
+			<spot x="2123.9028" y="2312.5454" z="61.478" h="36" random_walk="2" />
+			<spot x="1049.2362" y="1053.7286" z="204.687" h="60" random_walk="2" />
+			<spot x="715.6351" y="1050.1130" z="218.618" random_walk="2" />
+		</spawn>
 	</spawn_map>
 </spawns>

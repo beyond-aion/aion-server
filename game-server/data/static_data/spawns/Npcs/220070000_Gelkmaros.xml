@@ -7899,5 +7899,13 @@
 			<spot x="2957.4968" y="2459.2258" z="535.57117" h="72"/>
 			<spot x="2769.8667" y="2709.3855" z="476.40274" h="50"/>
 		</spawn>
+		<!-- Kenshurunerk -->
+		<spawn npc_id="799376">
+			<temporary_spawn spawn_time="4.*.*" despawn_time="6.*.*" />
+			<spot x="988.4362" y="2252.0962" z="108.857" h="113" random_walk="2" />
+			<spot x="1134.1715" y="2025.0472" z="146.081" h="116" random_walk="2" />
+			<spot x="1000.3398" y="1362.5409" z="59.737" h="35" random_walk="2" />
+			<spot x="1153.3059" y="1610.8378" z="50.125" h="71" random_walk="2" />
+		</spawn>
 	</spawn_map>
 </spawns>
