@@ -67,7 +67,7 @@ public class _4943LuckandPersistence extends AbstractQuestHandler {
 								return sendQuestDialog(env, 1693);
 							case CHECK_USER_HAS_QUEST_ITEM:
 								if (QuestService.collectItemCheck(env, true)) {
-									removeQuestItem(env, 182207123, 1);
+									removeQuestItem(env, 122001275, 1);
 									changeQuestStep(env, 2, 3);
 									return sendQuestDialog(env, 10000);
 								} else
@@ -83,8 +83,8 @@ public class _4943LuckandPersistence extends AbstractQuestHandler {
 								return sendQuestDialog(env, 1352);
 							case SELECT2_1_1:
 								if (player.getInventory().tryDecreaseKinah(3400000)) {
-									if (player.getInventory().getItemCountByItemId(182207123) == 0) {
-										if (!giveQuestItem(env, 182207123, 1))
+									if (player.getInventory().getItemCountByItemId(122001275) == 0) {
+										if (!giveQuestItem(env, 122001275, 1))
 											return true;
 									}
 									changeQuestStep(env, 1, 2);
