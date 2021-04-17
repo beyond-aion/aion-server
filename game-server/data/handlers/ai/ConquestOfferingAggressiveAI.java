@@ -3,10 +3,9 @@ package ai;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 
 /**
- * @author Yeats 16.03.2016.
+ * @author Yeats
  */
 @AIName("conquest_offering_aggressive")
 public class ConquestOfferingAggressiveAI extends AggressiveNpcAI {
@@ -24,21 +23,17 @@ public class ConquestOfferingAggressiveAI extends AggressiveNpcAI {
 	}
 
 	private void findAndSetCreator() {
-		if (getCreatorId() != 0) {
-			VisibleObject object = getPosition().getWorldMapInstance().getObject(getCreatorId());
-			if (object instanceof Npc) {
-				spawner = (Npc) object;
-			}
-		}
+		if (getCreatorId() != 0 && getPosition().getWorldMapInstance().getObject(getCreatorId()) instanceof Npc npc)
+			spawner = npc;
 	}
 
 	@Override
 	public void handleDied() {
-		super.handleDied();
 		if (spawner != null && !spawner.isDead()) {
 			spawner.getAi().onCustomEvent(1); // notify spawner that npc died
 			spawnRandomNpc();
 		}
+		super.handleDied();
 	}
 
 	// spawn a shugo or a portal

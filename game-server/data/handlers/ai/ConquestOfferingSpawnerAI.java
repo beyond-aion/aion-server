@@ -7,15 +7,13 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * this ai handles (re-)spawns of random npc with the title "conquest offering"
  * 
- * @author Yeats 15.03.2016.
+ * @author Yeats
  */
 @AIName("conquest_offering_spawner")
 public class ConquestOfferingSpawnerAI extends NpcAI {
@@ -107,11 +105,8 @@ public class ConquestOfferingSpawnerAI extends NpcAI {
 			}
 		}
 
-		if (npcId != 0) {
-			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(getOwner().getWorldId(), npcId, getOwner().getX(), getOwner().getY(), getOwner().getZ(),
-				getOwner().getHeading(), getObjectId());
-			SpawnEngine.spawnObject(template, getOwner().getInstanceId());
-		}
+		if (npcId != 0)
+			spawn(npcId, getOwner().getX(), getOwner().getY(), getOwner().getZ(), getOwner().getHeading());
 	}
 
 	private int getRndNpc(int curId) {
@@ -130,11 +125,10 @@ public class ConquestOfferingSpawnerAI extends NpcAI {
 	@Override
 	protected void handleCustomEvent(int eventId, Object... args) {
 		if (eventId == 1) { // spawned npc died, schedule respawn
-			if (respawnTask != null && !respawnTask.isCancelled() && !respawnTask.isDone()) {
+			if (respawnTask != null && !respawnTask.isCancelled() && !respawnTask.isDone())
 				return;
-			}
-			long respawnDelay = 600000 + (Rnd.get(0, 2) * 300000); // random 10, 15 or 20 minutes
-			respawnTask = ThreadPoolManager.getInstance().schedule(() -> spawnRandomNpc(), respawnDelay);
+			long respawnDelay = 600000 + (Rnd.get(0, 2) * 300000L); // random 10, 15 or 20 minutes
+			respawnTask = ThreadPoolManager.getInstance().schedule(this::spawnRandomNpc, respawnDelay);
 		}
 	}
 
