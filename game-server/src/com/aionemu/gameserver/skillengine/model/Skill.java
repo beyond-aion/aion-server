@@ -625,7 +625,7 @@ public class Skill {
 
 			// exception for point point skills(example Ice Sheet)
 			if (effectedList.isEmpty()) {
-				if (skillMethod == SkillMethod.PENALTY || this.isPointPointSkill()) {
+				if (this.isPointPointSkill()) {
 					Effect effect = new Effect(this, null);
 					effect.initialize();
 					effect.setWorldPosition(effector.getWorldId(), effector.getInstanceId(), x, y, z);
