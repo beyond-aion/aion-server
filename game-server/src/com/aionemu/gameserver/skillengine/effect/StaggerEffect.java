@@ -61,7 +61,7 @@ public class StaggerEffect extends EffectTemplate {
 		final Creature effector = effect.getEffector();
 		final Creature effected = effect.getEffected();
 		// Move effected 2 meters backward as on retail
-		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effector.getHeading()));
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(PositionUtil.getHeadingTowards(effector, effect.getEffected())));
 		float x1 = (float) (Math.cos(radian) * 2);
 		float y1 = (float) (Math.sin(radian) * 2);
 		Vector3f closestCollision = GeoService.getInstance().getClosestCollision(effected, effected.getX() + x1, effected.getY() + y1, effected.getZ());

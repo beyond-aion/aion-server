@@ -36,7 +36,7 @@ public class SimpleRootEffect extends EffectTemplate {
 		if (super.calculate(effect, StatEnum.STAGGER_RESISTANCE, null) && effect.isSubEffect()) {
 			effect.setSubEffectType(SubEffectType.KNOCKBACK);
 			final Creature effected = effect.getEffected();
-			byte heading = effect.getEffector().getHeading();
+			byte heading = PositionUtil.getHeadingTowards(effect.getEffector(), effect.getEffected());
 			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(heading));
 			float x1 = (float) (Math.cos(radian) * 0.7f);
 			float y1 = (float) (Math.sin(radian) * 0.7f);
