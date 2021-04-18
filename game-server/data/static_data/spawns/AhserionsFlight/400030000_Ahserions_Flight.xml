@@ -176,7 +176,7 @@
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="5">
 				<spawn npc_id="297184">
-					<spot x="640.96" y="645.25" z="689.09" h="15" walker_id="gab1_sub_potal_3"/>	
+					<spot x="640.96" y="645.25" z="689.09" h="15" walker_id="gab1_sub_potal_4"/>	
 				</spawn>
 				<spawn npc_id="297194">
 					<spot x="638.83" y="648.45" z="689.15" h="5"/>
@@ -249,7 +249,7 @@
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="5">
 				<spawn npc_id="297184">
-					<spot x="640.76" y="381.65" z="689.09" h="105" walker_id="gab1_sub_potal_4"/>	
+					<spot x="640.76" y="381.65" z="689.09" h="105" walker_id="gab1_sub_potal_3"/>	
 				</spawn>
 				<spawn npc_id="297194">
 					<spot x="643.73" y="384.55" z="689.15" h="93"/>
@@ -377,22 +377,22 @@
 					<spot x="572.88" y="508.81" z="675.73" h="0"/>
 				</spawn>
 				<spawn npc_id="277196">
-					<spot x="622.09" y="451.7" z="685.93" h="17" walker_id="gab1_sub_npcpath08_path7"/>
-					<spot x="626.63" y="447.42" z="685.9" h="17" walker_id="gab1_sub_npcpath08_path8"/>
-					<spot x="572.36" y="400.26" z="685.9" h="75" walker_id="gab1_sub_npcpath08_path6"/>
-					<spot x="575.71" y="396.77" z="685.9" h="75" walker_id="gab1_sub_npcpath08_path4"/>
-					<spot x="442.91" y="395.83" z="685.94" h="107" walker_id="gab1_sub_npcpath08_path9"/>
-					<spot x="446.26" y="399.59" z="685.99" h="107" walker_id="gab1_sub_npcpath08_path10"/>
-					<spot x="395.24" y="449.74" z="685.95" h="44" walker_id="gab1_sub_npcpath08_path12"/>
-					<spot x="391.75" y="446.18" z="685.98" h="44" walker_id="gab1_sub_npcpath08_path11"/>
-					<spot x="394.49" y="575.9" z="685.92" h="75" walker_id="gab1_sub_npcpath08_path13"/>
-					<spot x="391.26" y="579.2" z="685.96" h="75" walker_id="gab1_sub_npcpath08_path14"/>
-					<spot x="445.42" y="626.85" z="685.96" h="15" walker_id="gab1_sub_npcpath08_path16"/>
-					<spot x="442.07" y="630.16" z="685.99" h="15" walker_id="gab1_sub_npcpath08_path15"/>
-					<spot x="626.3" y="580.71" z="685.95" h="105" walker_id="gab1_sub_npcpath08_path20"/>
-					<spot x="622.17" y="576.44" z="685.93" h="105" walker_id="gab1_sub_npcpath08_path19"/>
-					<spot x="574.85" y="631.08" z="685.96" h="45" walker_id="gab1_sub_npcpath08_path17"/>
-					<spot x="570.96" y="627.22" z="685.91" h="45" walker_id="gab1_sub_npcpath08_path18"/>
+					<spot x="622.09" y="451.7" z="686.93" h="17" walker_id="gab1_sub_npcpath08_path7"/>
+					<spot x="626.63" y="447.42" z="686.9" h="17" walker_id="gab1_sub_npcpath08_path8"/>
+					<spot x="572.36" y="400.26" z="686.9" h="75" walker_id="gab1_sub_npcpath08_path6"/>
+					<spot x="575.71" y="396.77" z="686.9" h="75" walker_id="gab1_sub_npcpath08_path4"/>
+					<spot x="442.91" y="395.83" z="686.94" h="107" walker_id="gab1_sub_npcpath08_path9"/>
+					<spot x="446.26" y="399.59" z="686.99" h="107" walker_id="gab1_sub_npcpath08_path10"/>
+					<spot x="395.24" y="449.74" z="686.95" h="44" walker_id="gab1_sub_npcpath08_path12"/>
+					<spot x="391.75" y="446.18" z="686.98" h="44" walker_id="gab1_sub_npcpath08_path11"/>
+					<spot x="394.49" y="575.9" z="686.92" h="75" walker_id="gab1_sub_npcpath08_path13"/>
+					<spot x="391.26" y="579.2" z="686.96" h="75" walker_id="gab1_sub_npcpath08_path14"/>
+					<spot x="445.42" y="626.85" z="686.96" h="15" walker_id="gab1_sub_npcpath08_path16"/>
+					<spot x="442.07" y="630.16" z="686.99" h="15" walker_id="gab1_sub_npcpath08_path15"/>
+					<spot x="626.3" y="580.71" z="686.95" h="105" walker_id="gab1_sub_npcpath08_path20"/>
+					<spot x="622.17" y="576.44" z="686.93" h="105" walker_id="gab1_sub_npcpath08_path19"/>
+					<spot x="574.85" y="631.08" z="686.96" h="45" walker_id="gab1_sub_npcpath08_path17"/>
+					<spot x="570.96" y="627.22" z="686.91" h="45" walker_id="gab1_sub_npcpath08_path18"/>
 				</spawn>
 				<spawn npc_id="277242">
 					<spot x="443.09" y="663.23" z="685.01" h="8"/>
