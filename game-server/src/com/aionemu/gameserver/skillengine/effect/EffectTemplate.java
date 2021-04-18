@@ -282,9 +282,6 @@ public abstract class EffectTemplate {
 	 * @param spellStatus
 	 */
 	public boolean calculate(Effect effect, StatEnum statEnum, SpellStatus spellStatus, SkillElement element) {
-		Creature effected = effect.getEffected();
-		if (effected != null && effected.getEffectController().isConflicting(effect, effect.getEffectTemplates().get(getPosition() - 1)))
-			return false;
 		if (effect.getSkillTemplate().isPassive()) {
 			this.addSuccessEffect(effect, spellStatus);
 			return true;
