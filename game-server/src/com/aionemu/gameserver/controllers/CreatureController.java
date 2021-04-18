@@ -190,21 +190,30 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks when Creature was attacked
 	 */
 	public final void onAttack(Creature creature, int damage, AttackStatus attackStatus) {
-		onAttack(creature, 0, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, true, HopType.DAMAGE, true);
+		onAttack(creature, 0, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, true, HopType.DAMAGE);
 	}
 
-	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, HopType hopType, boolean allowCriticalEffectActivation) {
+	public final void onAttack(Creature creature, int damage, AttackStatus attackStatus, Effect criticalEffect) {
+		onAttack(creature, 0, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, true, HopType.DAMAGE, criticalEffect);
+	}
+
+	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, HopType hopType) {
 		onAttack(effect.getEffector(), effect.getSkillId(), type, damage, notifyAttack, logId, effect.getAttackStatus(),
-			!effect.isGodstoneActivated() && !effect.isPeriodic() && effect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED, hopType, allowCriticalEffectActivation);
+			!effect.isGodstoneActivated() && !effect.isPeriodic() && effect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED, hopType);
 		if (type == TYPE.DELAYDAMAGE)
 			effect.broadcastHate();
+	}
+
+	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status,
+						 boolean allowGodstoneActivation, HopType hopType) {
+		onAttack(attacker, skillId, type, damage, notifyAttack, logId, status, allowGodstoneActivation, hopType, null);
 	}
 
 	/**
 	 * Perform tasks when Creature was attacked
 	 */
 	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status,
-						 boolean allowGodstoneActivation, HopType hopType, boolean allowCriticalEffectActivation) {
+						 boolean allowGodstoneActivation, HopType hopType, Effect criticalEffect) {
 		if (damage != 0 && notifyAttack) {
 			Skill skill = getOwner().getCastingSkill();
 			if (skill != null) {
@@ -235,43 +244,12 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		if (!getOwner().isDead() && attacker instanceof Player) {
 			Player player = (Player) attacker;
-			if (allowCriticalEffectActivation && status == AttackStatus.CRITICAL && Rnd.chance() < 10)
-				applyEffectOnCritical(player, skillId);
+			if (criticalEffect != null) {
+				criticalEffect.applyEffect();
+			}
 			if (allowGodstoneActivation && status != AttackStatus.DODGE && status != AttackStatus.RESIST)
 				calculateGodStoneEffects(player);
 		}
-	}
-
-	private void applyEffectOnCritical(Player attacker, int skillId) {
-		if (getOwner().getEffectController().isUnderShield())
-			return;
-
-		if (skillId != 0) {
-			SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
-			if (skillTemplate.getType() == SkillType.MAGICAL) // magical skills do not stun
-				return;
-			if (skillTemplate.hasAnyEffect(true, EffectType.PULLED)) // pull does not trigger stumble
-				return;
-		}
-
-		int id = 0;
-		ItemGroup mainHandWeaponType = attacker.getEquipment().getMainHandWeaponType();
-		if (mainHandWeaponType != null) {
-			switch (mainHandWeaponType) {
-				case POLEARM:
-				case STAFF:
-				case GREATSWORD:
-					id = 8218; // stumble
-					break;
-				case BOW:
-					id = 8217; // stun
-			}
-		}
-
-		if (id == 0)
-			return;
-
-		SkillEngine.getInstance().applyEffect(id, attacker, getOwner());
 	}
 
 	private void calculateGodStoneEffects(Player attacker) {
@@ -358,9 +336,14 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 
 		AttackStatus firstAttackStatus = AttackStatus.getBaseStatus(attackResult.get(0).getAttackStatus());
-
+		Effect criticalEffect = null;
+		if (getOwner() instanceof Player player && firstAttackStatus == AttackStatus.CRITICAL && !target.getEffectController().isUnderShield() && Rnd.chance() < 10) {
+			criticalEffect = SkillEngine.getInstance().createCriticalEffect(player, target, 0);
+			if (criticalEffect != null && (criticalEffect.getEffectResult() == EffectResult.DODGE || criticalEffect.getEffectResult() == EffectResult.RESIST))
+				criticalEffect = null;
+		}
 		PacketSendUtility.broadcastPacketAndReceive(getOwner(),
-			new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time, attackTypeAnimation, attackHandAnimation, attackResult),
+			new SM_ATTACK(getOwner(), target, getOwner().getGameStats().getAttackCounter(), time, attackTypeAnimation, attackHandAnimation, attackResult, criticalEffect),
 			AIEventType.CREATURE_NEEDS_HELP);
 
 		getOwner().getGameStats().increaseAttackCounter();
@@ -369,9 +352,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 
 		if (time == 0)
-			target.getController().onAttack(getOwner(), damage, firstAttackStatus);
+			target.getController().onAttack(getOwner(), damage, firstAttackStatus, criticalEffect);
 		else
-			ThreadPoolManager.getInstance().schedule(new DelayedOnAttack(target, getOwner(), damage, firstAttackStatus), time);
+			ThreadPoolManager.getInstance().schedule(new DelayedOnAttack(target, getOwner(), damage, firstAttackStatus, criticalEffect), time);
 	}
 
 	/**
@@ -583,19 +566,22 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		private Creature creature;
 		private int finalDamage;
 		private AttackStatus attackStatus;
+		private Effect criticalEffect;
 
-		private DelayedOnAttack(Creature target, Creature creature, int finalDamage, AttackStatus attackStatus) {
+		private DelayedOnAttack(Creature target, Creature creature, int finalDamage, AttackStatus attackStatus, Effect criticalEffect) {
 			this.target = target;
 			this.creature = creature;
 			this.finalDamage = finalDamage;
 			this.attackStatus = attackStatus;
+			this.criticalEffect = criticalEffect;
 		}
 
 		@Override
 		public void run() {
-			target.getController().onAttack(creature, finalDamage, attackStatus);
+			target.getController().onAttack(creature, finalDamage, attackStatus, criticalEffect);
 			target = null;
 			creature = null;
+			criticalEffect = null;
 		}
 
 	}

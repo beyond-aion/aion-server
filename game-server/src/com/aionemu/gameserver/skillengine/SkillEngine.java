@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.skillengine;
 
-import com.aionemu.gameserver.skillengine.model.*;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -8,6 +7,9 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
+import com.aionemu.gameserver.skillengine.effect.EffectType;
+import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 
 /**
@@ -172,6 +174,38 @@ public class SkillEngine {
 			return null;
 		}
 		return skillTemplate;
+	}
+
+	public Effect createCriticalEffect(Player attacker, Creature target, int skillId) {
+		if (skillId != 0) {
+			SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+			if (skillTemplate.getType() == SkillType.MAGICAL) // magical skills do not stun
+				return null;
+			if (skillTemplate.hasAnyEffect(true, EffectType.PULLED, EffectType.STUMBLE, EffectType.STAGGER, EffectType.STUN,
+					EffectType.BACKDASH, EffectType.DASH, EffectType.MOVEBEHIND, EffectType.RANDOMMOVELOC, EffectType.RECALLINSTANT)
+					|| !skillTemplate.hasAnyEffect(EffectType.SKILLATKDRAININSTANT, EffectType.SKILLATTACKINSTANT))
+				return null;
+		}
+
+		int id = 0;
+		ItemGroup mainHandWeaponType = attacker.getEquipment().getMainHandWeaponType();
+		if (mainHandWeaponType != null) {
+			switch (mainHandWeaponType) {
+				case POLEARM, STAFF, GREATSWORD -> id = 8218; // stumble
+				case BOW -> id = 8217; // stun
+			}
+		}
+
+		if (id == 0)
+			return null;
+
+		SkillTemplate skillTemplate = checkAndGetSkillTemplate(id);
+		if (skillTemplate != null) {
+			Effect ef = new Effect(attacker, target, skillTemplate, skillTemplate.getLvl(), null, null, true);
+			ef.initialize();
+			return ef;
+		}
+		return null;
 	}
 
 }

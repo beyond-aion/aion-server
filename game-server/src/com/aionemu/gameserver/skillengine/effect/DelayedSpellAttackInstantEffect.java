@@ -32,7 +32,7 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 		final int finalPosition = this.position;
 		ThreadPoolManager.getInstance().schedule(() ->  {
 				effect.getEffected().getController().onAttack(effect, TYPE.DELAYDAMAGE, effect.getReserveds(finalPosition).getValue(), true,
-					LOG.DELAYEDSPELLATKINSTANT, hopType, false);
+					LOG.DELAYEDSPELLATKINSTANT, hopType);
 				effect.getEffector().getObserveController().notifyAttackObservers(effect.getEffected(), effect.getSkillId());
 		}, delay);
 	}

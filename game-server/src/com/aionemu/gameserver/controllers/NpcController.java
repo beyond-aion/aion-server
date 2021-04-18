@@ -295,7 +295,7 @@ public class NpcController extends CreatureController<Npc> {
 
 	@Override
 	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
-                         boolean allowGodstoneActivation, HopType hopType, boolean allowCriticalEffectActivation) {
+                         boolean allowGodstoneActivation, HopType hopType) {
 		if (getOwner().isDead())
 			return;
 		final Creature actingCreature;
@@ -306,7 +306,7 @@ public class NpcController extends CreatureController<Npc> {
 		else
 			actingCreature = attacker.getActingCreature();
 
-		super.onAttack(actingCreature, skillId, type, damage, notifyAttack, logId, attackStatus, allowGodstoneActivation, hopType, allowCriticalEffectActivation);
+		super.onAttack(actingCreature, skillId, type, damage, notifyAttack, logId, attackStatus, allowGodstoneActivation, hopType);
 
 		Npc npc = getOwner();
 		ShoutEventHandler.onEnemyAttack((NpcAI) npc.getAi(), attacker);

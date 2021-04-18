@@ -91,7 +91,7 @@ public class SummonController extends CreatureController<Summon> {
 
 	@Override
 	public void onAttack(Creature creature, int skillId, TYPE type, int damage, boolean notifyAttack, LOG log, AttackStatus attackStatus,
-						 boolean allowGodstoneActivation, HopType hopType, boolean allowCriticalEffectActivation) {
+						 boolean allowGodstoneActivation, HopType hopType) {
 		if (getOwner().isDead())
 			return;
 
@@ -99,7 +99,7 @@ public class SummonController extends CreatureController<Summon> {
 		if (getOwner().getMode() == SummonMode.RELEASE)
 			return;
 
-		super.onAttack(creature, skillId, type, damage, notifyAttack, log, attackStatus, allowGodstoneActivation, hopType, allowCriticalEffectActivation);
+		super.onAttack(creature, skillId, type, damage, notifyAttack, log, attackStatus, allowGodstoneActivation, hopType);
 		PacketSendUtility.sendPacket(getOwner().getMaster(), new SM_SUMMON_UPDATE(getOwner()));
 	}
 

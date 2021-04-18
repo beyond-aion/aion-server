@@ -21,6 +21,7 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_ACTIVATION;
 import com.aionemu.gameserver.services.event.Event;
+import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
@@ -125,6 +126,7 @@ public class Effect implements StatOwner {
 
 	// Whether this effect is a sub effect of another effect
 	private boolean isSubEffect = false;
+	private boolean applyCriticalEffect = false;
 
 	public Effect(Skill skill, Creature effected) {
 		this(skill.getEffector(), effected, skill.getSkillTemplate(), skill.getSkillLevel(), null, null);
@@ -143,7 +145,7 @@ public class Effect implements StatOwner {
 		this.skillLevel = skillLevel;
 		this.duration = duration;
 		this.forceType = forceType;
-		this.isSubEffect = true;
+		this.isSubEffect = isSubEffect;
 		this.power = initializePower();
 	}
 
@@ -586,6 +588,16 @@ public class Effect implements StatOwner {
 					template.calculateSubEffect(this);
 				}
 			}
+			if (effector instanceof Player p && getAttackStatus() == AttackStatus.CRITICAL && !getEffected().getEffectController().isUnderShield() && getSubEffect() == null && !isPeriodic() && Rnd.chance() < 10) {
+				Effect criticalEffect = SkillEngine.getInstance().createCriticalEffect(p, getEffected(), skillTemplate.getSkillId());
+				if (criticalEffect != null && criticalEffect.getEffectResult() != EffectResult.DODGE && criticalEffect.getEffectResult() != EffectResult.RESIST) {
+					applyCriticalEffect = true;
+					setSpellStatus(criticalEffect.getSpellStatus());
+					setSubEffect(criticalEffect);
+					setSubEffectType(criticalEffect.getSubEffectType());
+					setTargetLoc(criticalEffect.getTargetX(), criticalEffect.getTargetY(), criticalEffect.getTargetZ());
+				}
+			}
 		}
 
 		if (successEffects.isEmpty()) {
@@ -654,6 +666,8 @@ public class Effect implements StatOwner {
 				break;
 			template.startSubEffect(this);
 		}
+		if (applyCriticalEffect && subEffect != null)
+			subEffect.applyEffect();
 		if (effected != null)
 			effected.getAi().onEffectApplied(this);
 	}

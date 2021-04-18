@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
+import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
  * @author -Nemesiss-, Sweetkr
@@ -22,9 +23,13 @@ public class SM_ATTACK extends AionServerPacket {
 	private List<AttackResult> attackList;
 	private Creature attacker;
 	private Creature target;
-
+	private Effect criticalEffect;
 
 	public SM_ATTACK(Creature attacker, Creature target, int attackno, int time, AttackTypeAnimation attackTypeAnimation, AttackHandAnimation attackHandAnimation, List<AttackResult> attackList) {
+		this(attacker, target, attackno, time, attackTypeAnimation, attackHandAnimation, attackList, null);
+	}
+
+	public SM_ATTACK(Creature attacker, Creature target, int attackno, int time, AttackTypeAnimation attackTypeAnimation, AttackHandAnimation attackHandAnimation, List<AttackResult> attackList, Effect criticalEffect) {
 		this.attacker = attacker;
 		this.target = target;
 		this.attackno = attackno;// empty
@@ -32,6 +37,7 @@ public class SM_ATTACK extends AionServerPacket {
 		this.attackHandAnimation = attackHandAnimation;
 		this.attackTypeAnimation = attackTypeAnimation;
 		this.attackList = attackList;
+		this.criticalEffect = criticalEffect;
 	}
 
 	@Override
@@ -72,7 +78,14 @@ public class SM_ATTACK extends AionServerPacket {
 				writeH(256); // need more info becuz sometimes 0
 				break;
 			default:
-				writeH(0);
+				if (criticalEffect != null) {
+					if (target instanceof Player)
+						writeH(criticalEffect.getSkillId() == 8218 ? 1 : 2);
+					else
+						writeH(criticalEffect.getSkillId() == 8218 ? 1025 : 1026);
+				} else {
+					writeH(0);
+				}
 				break;
 		}
 		// setting counter skill from packet to have the best synchronization of time with client
@@ -82,7 +95,11 @@ public class SM_ATTACK extends AionServerPacket {
 		}
 
 		writeH(0);
-
+		if (criticalEffect != null) {
+			writeF(criticalEffect.getTargetX());
+			writeF(criticalEffect.getTargetY());
+			writeF(criticalEffect.getTargetZ());
+		}
 		// TODO! those 2h (== d) up is some kind of very weird flag...
 		// writeD(attackFlag);
 		/*
