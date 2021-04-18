@@ -218,9 +218,6 @@ public class EffectController {
 							continue;
 						if ((currentEffectTemplate.getEffectId() == newEffectTemplate.getEffectId()) || (currentEffectTemplate instanceof SilenceEffect && newEffectTemplate instanceof SilenceEffect)) {
 							if (currentEffectTemplate.getBasicLvl() > newEffectTemplate.getBasicLvl()) {
-								if (!newEffect.isPassive() && newEffect.getTargetSlot() != SkillTargetSlot.DEBUFF) {
-									newEffect.setEffectResult(EffectResult.CONFLICT);
-								}
 								return true;
 							} else {
 								break mainLoop;

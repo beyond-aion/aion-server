@@ -564,7 +564,10 @@ public class Effect implements StatOwner {
 		if (effected != null) {
 			for (EffectTemplate template : getEffectTemplates()) {
 				if (effected.getEffectController().isConflicting(this, template)) {
-					break; // effectResult is set to Conflict -> stop
+					if (!isPassive() && getTargetSlot() != SkillTargetSlot.DEBUFF) {
+						setEffectResult(EffectResult.CONFLICT);
+						break;
+					}
 				}
 			}
 		}
