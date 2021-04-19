@@ -131,12 +131,12 @@ public class AttackUtil {
 
 	private static int[] calculateAdditionalHitCount(Creature attacker, AttackStatus status, List<AttackResult> attackList) {
 		int[] hitCount = new int[2];
-		if (attacker instanceof Player && (status != AttackStatus.DODGE || status != AttackStatus.RESIST)) {
-			Item mainHandWeapon = ((Player) attacker).getEquipment().getMainHandWeapon();
+		if (attacker instanceof Player p && (status != AttackStatus.DODGE && status != AttackStatus.RESIST)) {
+			Item mainHandWeapon = p.getEquipment().getMainHandWeapon();
 			if (mainHandWeapon != null) {
 				hitCount[0] = Rnd.get(0, mainHandWeapon.getItemTemplate().getWeaponStats().getHitCount()) - 1;
 				if (attackList.size() > 1) {
-					Item offHandWeapon = ((Player) attacker).getEquipment().getOffHandWeapon();
+					Item offHandWeapon = p.getEquipment().getOffHandWeapon();
 					if (offHandWeapon != null && offHandWeapon.getItemTemplate().getItemSubType() != ItemSubType.SHIELD) {
 						hitCount[1] = Rnd.get(0, offHandWeapon.getItemTemplate().getWeaponStats().getHitCount() - 1);
 					}
