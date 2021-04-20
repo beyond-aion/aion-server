@@ -68,21 +68,15 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 
 	@Override
 	public void onOpenDoor(int door) {
-		switch (door) {
-			case 430:
-				if (started.compareAndSet(false, true)) {
-					if (timer != null) {
-						timer.cancel(false);
-					}
-					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
-					startTime = System.currentTimeMillis();
-					sendPacket(null, 0);
-					startInstance();
-					if (failTimerTask == null) {
-						startFailTask();
-					}
-				}
-				break;
+		if (door == 430 && started.compareAndSet(false, true)) {
+			if (timer != null && !timer.isDone())
+				timer.cancel(false);
+			instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
+			startTime = System.currentTimeMillis();
+			sendPacket(null, 0);
+			startInstance();
+			if (failTimerTask == null)
+				startFailTask();
 		}
 	}
 
@@ -126,6 +120,15 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	@Override
 	public void onPlayerLogin(Player player) {
 		reApplyTransformation(player);
+	}
+
+	@Override
+	public void onInstanceDestroy() {
+		if (timer != null && !timer.isDone())
+			timer.cancel(true);
+		if (failTimerTask != null && !failTimerTask.isDone())
+			failTimerTask.cancel(true);
+		super.onInstanceDestroy();
 	}
 
 	private void reApplyTransformation(Player player) {
