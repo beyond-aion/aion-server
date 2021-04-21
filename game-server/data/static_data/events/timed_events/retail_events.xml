@@ -2970,9 +2970,9 @@
 		</spawns>
 	</event>
 	<event name="Shugo Emperor's Vault" start="2021-04-19T00:00:00" end="2021-05-02T23:59:59">
-		<!-- <quests>
+		<quests>
 			<maintainable>80689 80690 80691 80692 80693 80694 80695 80696</maintainable>
-		</quests> -->
+		</quests>
 		<event_drops>
 			<gd_rule rule_name="Emperor's Vault Entry Scroll" chance="100" member_limit="6">
 				<gd_maps>
