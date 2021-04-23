@@ -18,10 +18,6 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 
 	private int cachedSpeed;
 
-	/**
-	 * @param owner
-	 * @param statsTemplate
-	 */
 	public SummonGameStats(Summon owner) {
 		super(owner);
 	}
@@ -55,25 +51,67 @@ public class SummonGameStats extends CreatureGameStats<Summon> {
 			return stat;
 		switch (statEnum) {
 			case MAXHP:
-			case BOOST_MAGICAL_SKILL:
-			case MAGICAL_ACCURACY:
-			case PHYSICAL_DEFENSE:
+			case PHYSICAL_ATTACK:
+			case MAGICAL_ATTACK:
 			case EVASION:
 			case PARRY:
-			case MAGICAL_RESIST:
-			case MAGIC_SKILL_BOOST_RESIST: // needs some tests
-				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
-			case PHYSICAL_ACCURACY: // needs some tests
-				owner.getMaster().getGameStats().getItemStatBoost(StatEnum.MAIN_HAND_ACCURACY, stat);
-				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
-			case PHYSICAL_CRITICAL: // needs some tests
-				owner.getMaster().getGameStats().getItemStatBoost(StatEnum.MAIN_HAND_CRITICAL, stat);
-				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
+			case PHYSICAL_DEFENSE:
+			case MAGICAL_DEFEND:
+			case MAGIC_SKILL_BOOST_RESIST:
 			case MAGICAL_CRITICAL:
-				stat.setBonusRate(0.95f);
-				return owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
+			case MAGICAL_RESIST:
+				return getStatWithBonusRate(statEnum, stat, 0.5f);
+			case PHYSICAL_CRITICAL:
+				return getStatWithBonusRate(StatEnum.MAIN_HAND_CRITICAL, stat, 0.5f);
+			case PHYSICAL_ACCURACY:
+				return getStatWithBonusRate(StatEnum.MAIN_HAND_ACCURACY, stat, 0.5f);
+			case BOOST_MAGICAL_SKILL:
+			case MAGICAL_ACCURACY:
+				return getStatWithBonusRate(statEnum, stat, 0.8f);
+			case PARALYZE_RESISTANCE:
+			case SLEEP_RESISTANCE:
+			case POISON_RESISTANCE:
+				if ("lava spirit".equals(owner.getObjectTemplate().getName()) || "tempest spirit".equals(owner.getObjectTemplate().getName())) {
+					stat.addToBase(100);
+				}
+				break;
+			case EARTH_RESISTANCE:
+				if ("lava spirit".equals(owner.getObjectTemplate().getName())) {
+					stat.addToBase(200);
+				} else if ("wind spirit".equals(owner.getObjectTemplate().getName())) {
+					stat.addToBase(-200);
+				}
+				break;
+			case FIRE_RESISTANCE:
+				if ("lava spirit".equals(owner.getObjectTemplate().getName())) {
+					stat.addToBase(200);
+				} else if ("water spirit".equals(owner.getObjectTemplate().getName())) {
+					stat.addToBase(-200);
+				}
+				break;
+			case WIND_RESISTANCE:
+				if ("tempest spirit".equals(owner.getObjectTemplate().getName())) {
+					stat.addToBase(200);
+				} else if ("earth spirit".equals(owner.getObjectTemplate().getName())) {
+					stat.addToBase(-200);
+				}
+				break;
+			case WATER_RESISTANCE:
+				if ("tempest spirit".equals(owner.getObjectTemplate().getName())) {
+					stat.addToBase(200);
+				} else if ("fire spirit".equals(owner.getObjectTemplate().getName())) {
+					stat.addToBase(-200);
+				}
+				break;
+
 		}
 		return stat;
+	}
+
+	private Stat2 getStatWithBonusRate(StatEnum statEnum, Stat2 stat, float bonusRate) {
+		Stat2 statToReturn = owner.getMaster().getGameStats().getItemStatBoost(statEnum, stat);
+		statToReturn.setBonusRate(bonusRate);
+		return statToReturn;
 	}
 
 	@Override

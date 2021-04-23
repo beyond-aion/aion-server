@@ -12,10 +12,7 @@ public enum SkillElement {
 	WIND(3),
 	EARTH(4),
 	LIGHT(5),
-	DARK(6),
-
-	MAGMA(FIRE.getElementId() | EARTH.getElementId()),
-	TEMPEST(WATER.getElementId() | WIND.getElementId());
+	DARK(6);
 
 	private int element;
 

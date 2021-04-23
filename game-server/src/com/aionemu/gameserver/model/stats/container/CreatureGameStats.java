@@ -114,11 +114,6 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return value > 0 ? value : 0;
 	}
 
-	public Stat2 getStat(StatEnum statEnum, float base) {
-		Stat2 stat = new AdditionStat(statEnum, base, owner);
-		return getStat(statEnum, stat);
-	}
-
 	public Stat2 getStat(StatEnum statEnum, float base, CalculationType... calculationTypes) {
 		Stat2 stat = new AdditionStat(statEnum, base, owner);
 		return getStat(statEnum, stat, calculationTypes);

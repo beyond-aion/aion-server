@@ -51,12 +51,6 @@ public class Summon extends Creature {
 	private void setAlwaysResistElement(NpcTemplate template) {
 		if (template != null) {
 			switch (template.getName()) {
-				case "lava spirit":
-					this.alwaysResistElement = SkillElement.MAGMA;
-					break;
-				case "tempest spirit":
-					this.alwaysResistElement = SkillElement.TEMPEST;
-					break;
 				case "earth spirit":
 					this.alwaysResistElement = SkillElement.EARTH;
 					break;
