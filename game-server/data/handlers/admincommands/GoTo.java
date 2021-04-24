@@ -384,6 +384,7 @@ public class GoTo extends AdminCommand {
 		addLocation(IDGEL_DOME, 254, 179, 83, "Idgel Dome", "Ruhnatorium");
 		addLocation(LINKGATE_FOUNDRY, 362, 260, 312, "Linkgate Foundry", "Baruna Forschungslabor");
 		addLocation(INFERNAL_ILLUMINARY_OBELISK, 322.38f, 324.47f, 405.49997f, "Infernal Illuminary Obelisk", "IIO", "Schutzturm Heroisch");
+		addLocation(THE_SHUGO_EMPERORS_VAULT, 542.9366f, 299.9885f, 401f, (byte) 22, "Shugo Emperors Vault");
 
 		// New map 4.7
 		addLocation(KALDOR, 397, 1380, 163, "Kaldor");

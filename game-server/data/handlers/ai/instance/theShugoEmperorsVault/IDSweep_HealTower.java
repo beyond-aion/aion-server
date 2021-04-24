@@ -18,7 +18,6 @@ import ai.GeneralNpcAI;
 public class IDSweep_HealTower extends GeneralNpcAI {
 
 	private Future<?> schedule;
-	private Long startTime;
 
 	public IDSweep_HealTower(Npc owner) {
 		super(owner);
@@ -27,22 +26,19 @@ public class IDSweep_HealTower extends GeneralNpcAI {
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();
-		startTime = System.currentTimeMillis();
-		startSchedule();
+		schedule = ThreadPoolManager.getInstance().scheduleAtFixedRate(this::checkForHeal, 2000, 3000);
 	}
 
-	private void startSchedule() {
-		schedule = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
+	@Override
+	protected void handleDespawned() {
+		super.handleDespawned();
+		cancelTask();
+	}
 
-			@Override
-			public void run() {
-				checkForHeal();
-
-				if ((System.currentTimeMillis() - startTime) > 60000) {
-					cancelTask();
-				}
-			}
-		}, 2000, 3000);
+	@Override
+	protected void handleDied() {
+		super.handleDied();
+		cancelTask();
 	}
 
 	/**
@@ -64,8 +60,6 @@ public class IDSweep_HealTower extends GeneralNpcAI {
 		if (schedule != null && !schedule.isCancelled()) {
 			schedule.cancel(true);
 		}
-
-		getOwner().getController().delete();
 	}
 
 	private void doHeal() {

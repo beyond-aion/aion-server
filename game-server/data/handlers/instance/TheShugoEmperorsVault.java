@@ -1,30 +1,33 @@
 package instance;
 
 import java.util.ArrayList;
-import java.util.HashMap;
+import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.model.instance.instancereward.NormalReward;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.instanceinfo.TheShugoEmperorsVaultScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.services.player.PlayerReviveService;
+import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -35,13 +38,13 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(301400000)
 public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 
-	private Map<Integer, Integer> transformationCache = new HashMap<>(); // saves the applied transformation to avoid effect loss during sendlogs
-	private List<Integer> spawns = new ArrayList<>();
-	private AtomicBoolean started = new AtomicBoolean();
+	private final Map<Integer, Integer> transformationCache = new ConcurrentHashMap<>(); // saves the applied transformation to avoid effect loss during sendlogs
+	private final AtomicBoolean started = new AtomicBoolean();
+	private final List<Integer> spawns = new ArrayList<>();
 	private NormalReward instanceReward;
 	private Future<?> timer, failTimerTask;
 	private long startTime;
-	private int amount, stage;
+	private volatile int amount, stage;
 	private boolean lastStage;
 
 	@Override
@@ -172,67 +175,66 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 
 	private void spawnRoom3() {
 		spawn(235634, 485.096f, 639.773f, 395.92987f, (byte) 94);
-		spawn(832922, 465.98782f, 645.2775f, 395.66122f, (byte) 110);
 	}
 
 	private void spawnRoom4() {
-		respawn(301400000, 235637, 423.61447f, 729.6906f, 398.42203f, (byte) 33, 90);
-		respawn(301400000, 235635, 352.69745f, 712.68024f, 398.42203f, (byte) 15, 90);
-		respawn(301400000, 235680, 400.42035f, 727.32336f, 398.42203f, (byte) 2, 90);
-		respawn(301400000, 235650, 378.0228f, 684.02826f, 398.42203f, (byte) 84, 90);
-		respawn(301400000, 235635, 379.9993f, 691.18524f, 398.42203f, (byte) 116, 90);
-		respawn(301400000, 235635, 381.25742f, 697.28516f, 398.42203f, (byte) 105, 90);
-		respawn(301400000, 235635, 385.989f, 699.4102f, 398.42203f, (byte) 101, 90);
-		respawn(301400000, 235681, 381.38754f, 713.63446f, 398.42203f, (byte) 15, 90);
-		respawn(301400000, 235681, 383.76205f, 711.30884f, 398.42203f, (byte) 16, 90);
-		respawn(301400000, 235637, 405.62924f, 762.81384f, 398.42203f, (byte) 114, 90);
-		respawn(301400000, 235635, 423.06882f, 735.8446f, 398.42203f, (byte) 0, 90);
-		respawn(301400000, 235650, 399.2653f, 695.98505f, 398.42203f, (byte) 74, 90);
-		respawn(301400000, 235650, 402.23898f, 782.25745f, 398.42203f, (byte) 49, 90);
-		respawn(301400000, 235635, 393.6548f, 766.0695f, 398.42203f, (byte) 108, 90);
-		respawn(301400000, 235635, 394.32178f, 701.4838f, 398.42203f, (byte) 74, 90);
-		respawn(301400000, 235680, 390.20734f, 777.6227f, 398.42203f, (byte) 17, 90);
-		respawn(301400000, 235650, 388.70392f, 764.589f, 398.42203f, (byte) 45, 90);
-		respawn(301400000, 235651, 389.43408f, 687.66925f, 398.42203f, (byte) 28, 90);
-		respawn(301400000, 235637, 397.21872f, 776.68567f, 398.42203f, (byte) 56, 90);
-		respawn(301400000, 235635, 378.5506f, 746.2136f, 398.42203f, (byte) 85, 90);
-		respawn(301400000, 235635, 382.0421f, 769.5312f, 398.42203f, (byte) 44, 90);
-		respawn(301400000, 235637, 386.8663f, 734.6197f, 398.42203f, (byte) 93, 90);
-		respawn(301400000, 235651, 383.6482f, 779.2648f, 398.42203f, (byte) 93, 90);
-		respawn(301400000, 235681, 389.91922f, 734.438f, 398.42203f, (byte) 100, 90);
-		respawn(301400000, 235637, 344.79205f, 746.1171f, 398.42203f, (byte) 70, 90);
-		respawn(301400000, 235637, 392.1462f, 738.2172f, 398.42203f, (byte) 108, 90);
-		respawn(301400000, 235635, 374.55893f, 777.6737f, 398.42203f, (byte) 29, 90);
-		respawn(301400000, 235635, 361.5572f, 735.9487f, 398.42203f, (byte) 26, 90);
-		respawn(301400000, 235635, 350.42673f, 743.33057f, 398.42203f, (byte) 21, 90);
-		respawn(301400000, 235636, 361.23822f, 728.20465f, 398.42203f, (byte) 13, 90);
-		respawn(301400000, 235650, 423.15427f, 741.9008f, 398.42203f, (byte) 44, 90);
-		respawn(301400000, 235637, 341.50488f, 722.87396f, 398.42203f, (byte) 23, 90);
-		respawn(301400000, 235650, 336.37634f, 723.83484f, 398.42203f, (byte) 88, 90);
-		respawn(301400000, 235650, 351.52338f, 734.4255f, 398.42203f, (byte) 70, 90);
-		respawn(301400000, 235635, 349.0813f, 727.07935f, 398.42203f, (byte) 92, 90);
-		respawn(301400000, 235635, 426.55957f, 746.3025f, 398.42203f, (byte) 102, 90);
-		respawn(301400000, 235637, 385.46777f, 716.5629f, 398.42203f, (byte) 72, 90);
-		respawn(301400000, 235637, 400.8014f, 713.61847f, 398.42203f, (byte) 117, 90);
-		respawn(301400000, 235681, 403.21252f, 719.55286f, 398.42203f, (byte) 104, 90);
-		respawn(301400000, 235637, 407.94897f, 721.49384f, 398.42203f, (byte) 102, 90);
-		respawn(301400000, 235638, 351.84393f, 719.6718f, 398.42203f, (byte) 77, 90);
-		respawn(301400000, 235637, 433.31375f, 751.8881f, 398.42203f, (byte) 22, 90);
-		respawn(301400000, 235637, 372.8639f, 715.69763f, 398.42203f, (byte) 14, 90);
-		respawn(301400000, 235651, 340.65656f, 735.55255f, 398.42203f, (byte) 116, 90);
-		respawn(301400000, 235681, 367.5229f, 709.8396f, 398.42203f, (byte) 14, 90);
-		respawn(301400000, 235681, 365.3486f, 711.52545f, 398.42203f, (byte) 13, 90);
-		respawn(301400000, 235680, 423.1627f, 755.64795f, 398.42203f, (byte) 107, 90);
-		respawn(301400000, 235681, 369.784f, 707.38403f, 398.42203f, (byte) 15, 90);
-		respawn(301400000, 235681, 404.43335f, 744.22394f, 398.42203f, (byte) 47, 90);
-		respawn(301400000, 235681, 352.79605f, 705.9181f, 398.42203f, (byte) 12, 90);
-		respawn(301400000, 235681, 410.6537f, 750.42694f, 398.42203f, (byte) 113, 90);
-		respawn(301400000, 235681, 409.7045f, 766.54474f, 398.42203f, (byte) 79, 90);
-		respawn(301400000, 235681, 411.96558f, 763.2033f, 398.42203f, (byte) 74, 90);
-		respawn(301400000, 235650, 426.9842f, 724.7398f, 398.42203f, (byte) 6, 90);
-		respawn(301400000, 235681, 406.22287f, 767.8437f, 398.42203f, (byte) 85, 90);
-		respawn(301400000, 235680, 359.43243f, 721.8015f, 398.42203f, (byte) 24, 90);
-		respawn(301400000, 235651, 436.61176f, 736.3438f, 398.42203f, (byte) 63, 90);
+		spawnAndSetRespawn(235637, 423.61447f, 729.6906f, 398.42203f, (byte) 33, 90);
+		spawnAndSetRespawn(235635, 352.69745f, 712.68024f, 398.42203f, (byte) 15, 90);
+		spawnAndSetRespawn(235680, 400.42035f, 727.32336f, 398.42203f, (byte) 2, 90);
+		spawnAndSetRespawn(235650, 378.0228f, 684.02826f, 398.42203f, (byte) 84, 90);
+		spawnAndSetRespawn(235635, 379.9993f, 691.18524f, 398.42203f, (byte) 116, 90);
+		spawnAndSetRespawn(235635, 381.25742f, 697.28516f, 398.42203f, (byte) 105, 90);
+		spawnAndSetRespawn(235635, 385.989f, 699.4102f, 398.42203f, (byte) 101, 90);
+		spawnAndSetRespawn(235681, 381.38754f, 713.63446f, 398.42203f, (byte) 15, 90);
+		spawnAndSetRespawn(235681, 383.76205f, 711.30884f, 398.42203f, (byte) 16, 90);
+		spawnAndSetRespawn(235637, 405.62924f, 762.81384f, 398.42203f, (byte) 114, 90);
+		spawnAndSetRespawn(235635, 423.06882f, 735.8446f, 398.42203f, (byte) 0, 90);
+		spawnAndSetRespawn(235650, 399.2653f, 695.98505f, 398.42203f, (byte) 74, 90);
+		spawnAndSetRespawn(235650, 402.23898f, 782.25745f, 398.42203f, (byte) 49, 90);
+		spawnAndSetRespawn(235635, 393.6548f, 766.0695f, 398.42203f, (byte) 108, 90);
+		spawnAndSetRespawn(235635, 394.32178f, 701.4838f, 398.42203f, (byte) 74, 90);
+		spawnAndSetRespawn(235680, 390.20734f, 777.6227f, 398.42203f, (byte) 17, 90);
+		spawnAndSetRespawn(235650, 388.70392f, 764.589f, 398.42203f, (byte) 45, 90);
+		spawnAndSetRespawn(235651, 389.43408f, 687.66925f, 398.42203f, (byte) 28, 90);
+		spawnAndSetRespawn(235637, 397.21872f, 776.68567f, 398.42203f, (byte) 56, 90);
+		spawnAndSetRespawn(235635, 378.5506f, 746.2136f, 398.42203f, (byte) 85, 90);
+		spawnAndSetRespawn(235635, 382.0421f, 769.5312f, 398.42203f, (byte) 44, 90);
+		spawnAndSetRespawn(235637, 386.8663f, 734.6197f, 398.42203f, (byte) 93, 90);
+		spawnAndSetRespawn(235651, 383.6482f, 779.2648f, 398.42203f, (byte) 93, 90);
+		spawnAndSetRespawn(235681, 389.91922f, 734.438f, 398.42203f, (byte) 100, 90);
+		spawnAndSetRespawn(235637, 344.79205f, 746.1171f, 398.42203f, (byte) 70, 90);
+		spawnAndSetRespawn(235637, 392.1462f, 738.2172f, 398.42203f, (byte) 108, 90);
+		spawnAndSetRespawn(235635, 374.55893f, 777.6737f, 398.42203f, (byte) 29, 90);
+		spawnAndSetRespawn(235635, 361.5572f, 735.9487f, 398.42203f, (byte) 26, 90);
+		spawnAndSetRespawn(235635, 350.42673f, 743.33057f, 398.42203f, (byte) 21, 90);
+		spawnAndSetRespawn(235636, 361.23822f, 728.20465f, 398.42203f, (byte) 13, 90);
+		spawnAndSetRespawn(235650, 423.15427f, 741.9008f, 398.42203f, (byte) 44, 90);
+		spawnAndSetRespawn(235637, 341.50488f, 722.87396f, 398.42203f, (byte) 23, 90);
+		spawnAndSetRespawn(235650, 336.37634f, 723.83484f, 398.42203f, (byte) 88, 90);
+		spawnAndSetRespawn(235650, 351.52338f, 734.4255f, 398.42203f, (byte) 70, 90);
+		spawnAndSetRespawn(235635, 349.0813f, 727.07935f, 398.42203f, (byte) 92, 90);
+		spawnAndSetRespawn(235635, 426.55957f, 746.3025f, 398.42203f, (byte) 102, 90);
+		spawnAndSetRespawn(235637, 385.46777f, 716.5629f, 398.42203f, (byte) 72, 90);
+		spawnAndSetRespawn(235637, 400.8014f, 713.61847f, 398.42203f, (byte) 117, 90);
+		spawnAndSetRespawn(235681, 403.21252f, 719.55286f, 398.42203f, (byte) 104, 90);
+		spawnAndSetRespawn(235637, 407.94897f, 721.49384f, 398.42203f, (byte) 102, 90);
+		spawnAndSetRespawn(235638, 351.84393f, 719.6718f, 398.42203f, (byte) 77, 90);
+		spawnAndSetRespawn(235637, 433.31375f, 751.8881f, 398.42203f, (byte) 22, 90);
+		spawnAndSetRespawn(235637, 372.8639f, 715.69763f, 398.42203f, (byte) 14, 90);
+		spawnAndSetRespawn(235651, 340.65656f, 735.55255f, 398.42203f, (byte) 116, 90);
+		spawnAndSetRespawn(235681, 367.5229f, 709.8396f, 398.42203f, (byte) 14, 90);
+		spawnAndSetRespawn(235681, 365.3486f, 711.52545f, 398.42203f, (byte) 13, 90);
+		spawnAndSetRespawn(235680, 423.1627f, 755.64795f, 398.42203f, (byte) 107, 90);
+		spawnAndSetRespawn(235681, 369.784f, 707.38403f, 398.42203f, (byte) 15, 90);
+		spawnAndSetRespawn(235681, 404.43335f, 744.22394f, 398.42203f, (byte) 47, 90);
+		spawnAndSetRespawn(235681, 352.79605f, 705.9181f, 398.42203f, (byte) 12, 90);
+		spawnAndSetRespawn(235681, 410.6537f, 750.42694f, 398.42203f, (byte) 113, 90);
+		spawnAndSetRespawn(235681, 409.7045f, 766.54474f, 398.42203f, (byte) 79, 90);
+		spawnAndSetRespawn(235681, 411.96558f, 763.2033f, 398.42203f, (byte) 74, 90);
+		spawnAndSetRespawn(235650, 426.9842f, 724.7398f, 398.42203f, (byte) 6, 90);
+		spawnAndSetRespawn(235681, 406.22287f, 767.8437f, 398.42203f, (byte) 85, 90);
+		spawnAndSetRespawn(235680, 359.43243f, 721.8015f, 398.42203f, (byte) 24, 90);
+		spawnAndSetRespawn(235651, 436.61176f, 736.3438f, 398.42203f, (byte) 63, 90);
 	}
 
 	@Override
@@ -320,7 +322,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		}
 	}
 
-	private void checkStage(int points) {
+	private synchronized void checkStage(int points) {
 		switch (stage) {
 			case 0:
 				if (points >= 50000 && !spawns.contains(235640)) {
@@ -355,7 +357,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		}
 	}
 
-	private void addPoints(Npc npc, int points) {
+	private synchronized void addPoints(Npc npc, int points) {
 		if (instanceReward.getInstanceProgressionType().isStartProgress()) {
 			instanceReward.addPoints(points);
 			sendPacket(npc.getObjectTemplate().getL10n(), points);
@@ -405,10 +407,18 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	}
 
 	private void spawnVaultDoorAndHealingSpring() {
-		spawn(832925, 469.500f, 658.475f, 397.0672f, (byte) 106);
-		spawn(832919, 464.428f, 640.168f, 395.475f, (byte) 59);
-		spawn(832918, 464.428f, 640.168f, 394.475f, (byte) 59);
+		spawn(832925, 469.500f, 658.475f, 397.0672f, (byte) 106, 432);
+		spawn(832919, 464.428f, 640.168f, 395.475f, (byte) 59, 251);
+		Npc healingTowerNpc = (Npc) spawn(832918, 464.428f, 640.168f, 394.475f, (byte) 59);
+		// despawn healing function after 1 min
+		healingTowerNpc.getController().addTask(TaskId.DESPAWN,
+			ThreadPoolManager.getInstance().schedule(() -> healingTowerNpc.getController().delete(), 1, TimeUnit.MINUTES));
 		spawn(832922, 465.9878f, 645.2775f, 395.6612f, (byte) 110);
+
+		// spawn portal and healing tower at instance start location
+		spawn(832919, 543.7689f, 305.1814f, 400.4406f, (byte) 0, 252);
+		spawn(832924, 549.1239f, 313.5525f, 400.3768f, (byte) 31, 433);
+		spawn(832918, 543.7689f, 305.1814f, 400.5525f, (byte) 31);
 		spawnRoom4();
 	}
 
@@ -535,14 +545,10 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		spawn(832930, 174.70316f, 523.2922f, 395.0f, (byte) 57);
 	}
 
-	private void respawn(int mapId, int npcId, float x, float y, float z, byte heading, int respawnTime) {
-		SpawnTemplate template = SpawnEngine.newSpawn(mapId, npcId, x, y, z, heading, respawnTime);
-		SpawnEngine.spawnObject(template, instanceId);
-	}
-
 	private void despawnAll() {
+		List<Integer> ignoreNpcIds = Arrays.asList(832919, 832924, 832918, 832925);
 		instance.forEachNpc(npc -> {
-			if (npc.getNpcId() != 832925)
+			if (!ignoreNpcIds.contains(npc.getNpcId()))
 				npc.getController().delete();
 		});
 	}
@@ -574,4 +580,17 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		return true;
 	}
 
+	@Override
+	public boolean onReviveEvent(Player player) {
+		PlayerReviveService.revive(player, 25, 25, false, 0);
+		player.getGameStats().updateStatsAndSpeedVisually();
+		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
+		TeleportService.teleportTo(player, mapId, instanceId, 542.9366f, 299.9885f, 401f, (byte) 22);
+		return true;
+	}
+
+	@Override
+	public void onExitInstance(Player player) {
+		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
+	}
 }
