@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../spawns.xsd">
+	<!-- Idian Depths Light-->
+	<spawn_map map_id="210090000">
+		<!-- Mailbox -->
+		<spawn npc_id="700000">
+			<spot x="735.2366" y="863.0561" z="514.7782" h="47" />
+			<spot x="712.0575" y="675.7379" z="514.8631" h="56" />
+		</spawn>
+	</spawn_map>
+	<!-- Idian Depths Dark-->
+	<spawn_map map_id="220100000">
+		<!-- Mailbox -->
+		<spawn npc_id="700079">
+			<spot x="735.2366" y="863.0561" z="514.7782" h="47" />
+			<spot x="712.0575" y="675.7379" z="514.8631" h="56" />
+		</spawn>
+	</spawn_map>
+</spawns>
