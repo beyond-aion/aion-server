@@ -15,8 +15,10 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.EquipType;
+import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.itemset.ItemPart;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_RIDE_ROBOT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -115,13 +117,22 @@ public class Preview extends PlayerCommand {
 			for (ItemTemplate template : items)
 				previewItemsSlotMask |= addFakeItem(previewItems, previewItemsSlotMask, template.getTemplateId(), itemColor);
 		}
-		for (Item previewItem : previewItems)
+		int previewRobotId = 0;
+		for (Item previewItem : previewItems) {
 			itemNames += "\n\t" + ChatUtil.item(previewItem.getItemId());
+			if (player.isInRobotMode() && previewItem.getItemTemplate().getItemGroup() == ItemGroup.KEYBLADE)
+				previewRobotId = previewItem.getItemTemplate().getRobotId();
+		}
 
 		addOwnEquipment(player, previewItems, previewItemsSlotMask);
 		previewItems.sort(Comparator.comparingLong(Item::getEquipmentSlot)); // order by equipment slot ids (ascending) to avoid display bugs
 		PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), previewItems));
-		schedulePreviewReset(player, PREVIEW_TIME_SECONDS);
+		int switchRobotAnimationSeconds = 0;
+		if (previewRobotId != 0) {
+			switchRobotAnimationSeconds = 1;
+			updateRobotAppearance(player, previewRobotId);
+		}
+		schedulePreviewReset(player, PREVIEW_TIME_SECONDS + switchRobotAnimationSeconds, previewRobotId != 0);
 		if (onlyColor)
 			sendInfo(player, "Previewing your equipment for " + PREVIEW_TIME_SECONDS + " seconds in color " + colorText);
 		else
@@ -203,16 +214,26 @@ public class Preview extends PlayerCommand {
 		}
 	}
 
-	private static void schedulePreviewReset(Player player, int duration) {
+	private static void schedulePreviewReset(Player player, int duration, boolean previewRobot) {
 		PREVIEW_RESETS.compute(player.getObjectId(), (k, resetTask) -> {
-			if (resetTask != null) // cancel previous scheduled preview reset thread
+			if (resetTask != null) { // cancel previous scheduled preview reset thread
+				if (!previewRobot && player.isInRobotMode()) // restore robot appearance in case it was previewed just a few seconds ago
+					updateRobotAppearance(player, player.getRobotId());
 				resetTask.cancel(true);
+			}
 			resetTask = ThreadPoolManager.getInstance().schedule(() -> {
 				PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForAppearance()));
+				if (previewRobot && player.isInRobotMode())
+					updateRobotAppearance(player, player.getRobotId());
 				PacketSendUtility.sendMessage(player, "Preview time ended.");
 				PREVIEW_RESETS.remove(player.getObjectId());
 			}, duration * 1000);
 			return resetTask;
 		});
+	}
+
+	private static void updateRobotAppearance(Player player, int robotId) {
+		PacketSendUtility.sendPacket(player, new SM_RIDE_ROBOT(player, 0));
+		PacketSendUtility.sendPacket(player, new SM_RIDE_ROBOT(player, robotId));
 	}
 }

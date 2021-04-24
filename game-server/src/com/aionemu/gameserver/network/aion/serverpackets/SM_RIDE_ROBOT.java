@@ -13,8 +13,12 @@ public class SM_RIDE_ROBOT extends AionServerPacket {
 	private int objectId;
 
 	public SM_RIDE_ROBOT(Player player) {
+		this(player, player.getRobotId());
+	}
+
+	public SM_RIDE_ROBOT(Player player, int robotId) {
 		this.objectId = player.getObjectId();
-		this.robotId = player.getRobotId();
+		this.robotId = robotId;
 	}
 
 	@Override

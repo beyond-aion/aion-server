@@ -21,10 +21,9 @@ public class RideRobotEffect extends EffectTemplate {
 	}
 
 	@Override
-	public void startEffect(final Effect effect) {
+	public void startEffect(Effect effect) {
 		Player player = (Player) effect.getEffected();
-		Item key = player.getEquipment().getMainHandWeapon();
-		player.setRobotId(DataManager.ITEM_DATA.getItemTemplate(key.getItemSkinTemplate().getTemplateId()).getRobotId());
+		player.setRobotId(player.getEquipment().getMainHandWeapon().getItemSkinTemplate().getRobotId());
 		PacketSendUtility.broadcastPacketAndReceive(player, new SM_RIDE_ROBOT(player));
 
 		ActionObserver observer = new ActionObserver(ObserverType.UNEQUIP) {
