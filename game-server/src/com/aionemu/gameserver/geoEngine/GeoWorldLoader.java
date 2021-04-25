@@ -9,7 +9,6 @@ import java.nio.MappedByteBuffer;
 import java.nio.ShortBuffer;
 import java.nio.channels.FileChannel;
 import java.util.*;
-import java.util.concurrent.CountDownLatch;
 
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
@@ -20,7 +19,6 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.geoEngine.scene.*;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.DummyGeoData;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
@@ -32,23 +30,19 @@ public class GeoWorldLoader {
 
 	private static final String GEO_DIR = "data/geo/";
 
-	public static Map<String, Node> loadMeshes(String fileName) throws IOException {
-		List<CountDownLatch> latches = new ArrayList<>();
+	public static Map<String, Node> loadMeshes(File meshFile) {
 		Map<String, Node> geoms = new HashMap<>();
-		File geoFile = new File(fileName);
-		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r"); FileChannel roChannel = file.getChannel()) {
+		try (RandomAccessFile file = new RandomAccessFile(meshFile, "r"); FileChannel roChannel = file.getChannel()) {
 			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size()).load();
 			while (geo.hasRemaining()) {
-				short namelenght = geo.getShort();
-				byte[] nameByte = new byte[namelenght];
+				short nameLength = geo.getShort();
+				byte[] nameByte = new byte[nameLength];
 				geo.get(nameByte);
-				String name = new String(nameByte).replace('\\', '/').toLowerCase();
+				String name = new String(nameByte);
 				Node node = new Node(null);
 				byte intentions = 0;
 				int singleChildMaterialId = 0;
-				int modelCount = geo.getShort() & 0xFFFF;
-				CountDownLatch latch = new CountDownLatch(modelCount);
-				latches.add(latch);
+				int modelCount = geo.get() & 0xFF;
 				for (int c = 0; c < modelCount; c++) {
 					Mesh m = new Mesh();
 
@@ -59,7 +53,7 @@ public class GeoWorldLoader {
 						vertices.put(geo.getFloat());
 					}
 
-					int triangles = geo.getInt();
+					int triangles = (geo.getShort() & 0xFFFF) * 3;
 					ByteBuffer shortBuffer = MappedByteBuffer.allocateDirect(triangles * 2);
 					ShortBuffer indexes = shortBuffer.asShortBuffer();
 					for (int x = 0; x < triangles; x++) {
@@ -74,26 +68,25 @@ public class GeoWorldLoader {
 						node.setName(name);
 					if (modelCount == 1)
 						singleChildMaterialId = m.getMaterialId();
-					ThreadPoolManager.getInstance().execute(() -> {
-						m.createCollisionData();
-						Geometry geom = new Geometry(name, m);
-						synchronized (node) {
-							node.attachChild(geom);
-						}
-						latch.countDown();
-					});
+					node.attachChild(new Geometry(name, m));
 				}
 				node.setCollisionIntentions(intentions);
 				node.setMaterialId((byte) singleChildMaterialId);
-				geoms.put(name, node);
+				if (!name.contains("|")) {
+					geoms.put(name, node);
+				} else {
+					for (String n : name.split("\\|")) {
+						Node clone = node.clone();
+						if (clone.getName() != null)
+							clone.setName(n);
+						clone.getChild(name).setName(n);
+						geoms.put(n, clone);
+					}
+				}
 			}
+		} catch (IOException | CloneNotSupportedException e) {
+			throw new GameServerError("Could not load " + meshFile, e);
 		}
-		latches.forEach(l -> {
-			try {
-				l.await();
-			} catch (InterruptedException ignored) {
-			}
-		});
 		return geoms;
 	}
 
@@ -130,7 +123,7 @@ public class GeoWorldLoader {
 				int nameLength = geo.getShort();
 				byte[] nameByte = new byte[nameLength];
 				geo.get(nameByte);
-				String name = new String(nameByte).replace('\\', '/').toLowerCase();
+				String name = new String(nameByte);
 				Vector3f loc = new Vector3f(geo.getFloat(), geo.getFloat(), geo.getFloat());
 				Matrix3f matrix3f = new Matrix3f();
 				for (int i = 0; i < 3; i++)

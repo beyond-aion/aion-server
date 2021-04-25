@@ -1,9 +1,7 @@
 package com.aionemu.gameserver.world.geo;
 
-import java.io.IOException;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.io.File;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.stream.Collectors;
@@ -11,11 +9,12 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.GeoWorldLoader;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
+import com.aionemu.gameserver.geoEngine.scene.Geometry;
 import com.aionemu.gameserver.geoEngine.scene.Node;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 
@@ -57,11 +56,23 @@ public class RealGeoData implements GeoData {
 
 	private Map<String, Node> loadMeshes() {
 		log.info("Loading meshes..");
-		try {
-			return GeoWorldLoader.loadMeshes("data/geo/models/geo.mesh");
-		} catch (IOException e) {
-			throw new GameServerError("Could not load meshes", e);
+		File[] meshFiles = new File("data/geo").listFiles((file, name) -> name.endsWith(".mesh"));
+		if (meshFiles == null || meshFiles.length == 0) {
+			log.warn("No *.mesh files present in ./data/geo");
+			return Collections.emptyMap();
 		}
+		Map<String, Node> meshes = new HashMap<>();
+		for (File meshFile : meshFiles)
+			meshes.putAll(GeoWorldLoader.loadMeshes(meshFile));
+		triggerCollisionDataInitialization(meshes.values()); // async since there's no need to wait for completion
+		return meshes;
+	}
+
+	public static void triggerCollisionDataInitialization(Collection<Node> meshes) {
+		meshes.forEach(node -> node.getChildren().forEach(child -> {
+			if (child instanceof Geometry geometry)
+				ThreadPoolManager.getInstance().execute(() -> geometry.getMesh().createCollisionData());
+		}));
 	}
 
 	@Override
