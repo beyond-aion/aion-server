@@ -89,6 +89,7 @@ public class Acceptor {
 		AConnection<?> con = factory.create(socketChannel, dispatcher);
 
 		if (con == null) {
+			socketChannel.close();
 			return;
 		}
 
