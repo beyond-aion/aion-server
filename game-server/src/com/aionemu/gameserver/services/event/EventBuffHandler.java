@@ -131,7 +131,7 @@ public class EventBuffHandler {
 	}
 
 	public void onEnteredTeam(Player player, TemporaryPlayerTeam<? extends TeamMember<Player>> team) {
-		team.forEach(member -> endRestrictedEventBuffs(member));
+		team.forEach(this::endRestrictedEventBuffs);
 		tryBuff(player, Buff.TriggerCondition.ENTER_TEAM);
 	}
 
@@ -195,7 +195,7 @@ public class EventBuffHandler {
 					continue;
 				Effect effect = SkillEngine.getInstance().applyEffectDirectly(skillId, player, player, buff.isPermanent() ? 0 : null, effectForceType);
 				if (effect != null) {
-					int msgId = 1400697; // You reveived %0: %1.
+					int msgId = 1400697; // You received %0: %1.
 					SM_SYSTEM_MESSAGE message = new SM_SYSTEM_MESSAGE(ChatType.BRIGHT_YELLOW_CENTER, player, msgId, "[Server Buff]",
 						effect.getSkillTemplate().getL10n());
 					PacketSendUtility.sendPacket(player, message);
