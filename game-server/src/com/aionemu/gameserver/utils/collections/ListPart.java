@@ -5,6 +5,7 @@ import java.util.ArrayList;
 /**
  * @author Neon
  */
+@SuppressWarnings("serial")
 public abstract class ListPart<Type> extends ArrayList<Type> {
 
 	private final int partNo;

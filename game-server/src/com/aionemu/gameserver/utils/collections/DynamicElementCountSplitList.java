@@ -37,6 +37,7 @@ public class DynamicElementCountSplitList<Type> extends SplitList<Type> {
 		return new DynamicElementCountListPart(partNo, isLast);
 	}
 
+	@SuppressWarnings("serial")
 	private class DynamicElementCountListPart extends ListPart<Type> {
 
 		private int currentLength;

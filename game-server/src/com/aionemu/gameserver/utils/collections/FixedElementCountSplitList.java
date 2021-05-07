@@ -31,6 +31,7 @@ public class FixedElementCountSplitList<Type> extends SplitList<Type> {
 		return new FixedElementCountListPart(partNo, isLast);
 	}
 
+	@SuppressWarnings("serial")
 	private class FixedElementCountListPart extends ListPart<Type> {
 
 		protected FixedElementCountListPart(int partNo, boolean isLast) {
