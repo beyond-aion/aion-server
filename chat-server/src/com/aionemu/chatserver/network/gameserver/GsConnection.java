@@ -87,6 +87,11 @@ public class GsConnection extends AConnection<GsServerPacket> {
 	}
 
 	@Override
+	public String toString() {
+		return "Gameserver " + getIP();
+	}
+
+	@Override
 	protected void initialized() {
 		state = GameServerConnectionState.CONNECTED;
 		log.info("Gameserver connection attempt from: {}", getIP());

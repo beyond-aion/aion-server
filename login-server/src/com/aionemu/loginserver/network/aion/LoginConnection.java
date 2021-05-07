@@ -100,13 +100,6 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 		AUTHED_LOGIN
 	}
 
-	/**
-	 * Constructor
-	 * 
-	 * @param sc
-	 * @param d
-	 * @throws IOException
-	 */
 	public LoginConnection(SocketChannel sc, Dispatcher d) throws IOException {
 		super(sc, d, 8192 * 2, 8192 * 2);
 
@@ -303,7 +296,7 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	 */
 	@Override
 	public String toString() {
-		return (account != null) ? account + " " + getIP() : "not logged " + getIP();
+		return (account == null ? "Client " : account + " ") + getIP();
 	}
 
 	/**
@@ -326,7 +319,6 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 		cryptEngine = new CryptEngine();
 		cryptEngine.updateKey(blowfishKey.getEncoded());
 
-		/** Send Init packet */
 		sendPacket(new SM_INIT(this, blowfishKey));
 	}
 }
