@@ -1038,11 +1038,11 @@ public class LegionService {
 
 		// Send the new legion member the required legion packets
 		PacketSendUtility.sendPacket(player, new SM_LEGION_INFO(legion));
-		updateLegionMemberList(player, false);
+		// do not include invited player in member list since he will be added via SM_LEGION_ADD_MEMBER
+		updateLegionMemberList(player, false, player.getObjectId());
 
 		// Send legion member info to the members
-		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_ADD_MEMBER(player, false, 1300260, player.getName()), player.getObjectId());
-		PacketSendUtility.sendPacket(player, new SM_LEGION_ADD_MEMBER(player, false, 0, ""));
+		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_ADD_MEMBER(player, false, 1300260, player.getName()));
 		// Send legion emblem information
 		LegionEmblem legionEmblem = legion.getLegionEmblem();
 		PacketSendUtility.broadcastPacket(player, new SM_LEGION_UPDATE_EMBLEM(legion.getLegionId(), legionEmblem), true);
@@ -1626,9 +1626,13 @@ public class LegionService {
 	}
 
 	public void updateLegionMemberList(Player player, boolean broadcastToLegion) {
+		updateLegionMemberList(player, broadcastToLegion, 0);
+	}
+
+	public void updateLegionMemberList(Player player, boolean broadcastToLegion, int excludedPlayerId) {
 		if (player != null && player.getLegion() != null) {
 			Legion legion = player.getLegion();
-			List<LegionMemberEx> allMembers = loadLegionMemberExList(legion, null);
+			List<LegionMemberEx> allMembers = loadLegionMemberExList(legion, excludedPlayerId);
 			SplitList<LegionMemberEx> legionMemberSplitList = new FixedElementCountSplitList<>(allMembers, true, 80);
 			legionMemberSplitList.forEach(part -> {
 				if (broadcastToLegion)
