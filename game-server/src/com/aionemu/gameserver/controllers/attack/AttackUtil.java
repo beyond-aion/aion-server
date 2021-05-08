@@ -53,6 +53,7 @@ public class AttackUtil {
 		List<AttackResult> attackResultList = StatFunctions.calculateAttackDamage(attacker, SkillElement.NONE, attackStatus, calculationTypes);
 		adjustDamageByStatModifiers(attacker, attacked, attackStatus, attackResultList, SkillElement.NONE);
 		amplifyDamageByAdditionalHitCount(attacker, attackStatus, attackResultList);
+		modifyDamageByNpcAi(attacker, attacked, attackResultList);
 		attacked.getObserveController().checkShieldStatus(attackResultList, null, attacker);
 		return attackResultList;
 	}
@@ -157,6 +158,15 @@ public class AttackUtil {
 				if (attackList.get(1).getDamage() >= 10)
 					attackList.add(new AttackResult((int)(attackList.get(1).getDamage() * 0.1), AttackStatus.OFFHAND_NORMALHIT, attackList.get(1).getHitType()));
 			}
+		}
+	}
+
+	private static void modifyDamageByNpcAi(Creature attacker, Creature attacked, List<AttackResult> attackStatus) {
+		if (!(attacked instanceof Npc))
+			return;
+		for (AttackResult status : attackStatus) {
+			float modifiedDamage = attacked.getAi().modifyDamage(attacker, status.getDamage(), null);
+			status.setDamage(modifiedDamage);
 		}
 	}
 
@@ -475,6 +485,7 @@ public class AttackUtil {
 		List<AttackResult> attackResultList = StatFunctions.calculateAttackDamage(attacker, element, attackStatus, calculationTypes);
 		adjustDamageByStatModifiers(attacker, attacked, attackStatus, attackResultList, element);
 		amplifyDamageByAdditionalHitCount(attacker, attackStatus, attackResultList);
+		modifyDamageByNpcAi(attacker, attacked, attackResultList);
 		attacked.getObserveController().checkShieldStatus(attackResultList, null, attacker);
 		return attackResultList;
 	}
