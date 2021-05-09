@@ -41,6 +41,20 @@
 			<Pattern>${date} %logger - %message%n</Pattern>
 		</encoder>
 	</appender>
+	<appender name="app_status_discord" class="com.aionemu.commons.logging.DiscordChannelAppender">
+		<layout>
+			<pattern>%logger{0} [%thread]|${chatserver.log.status.discord.avatar_url}|%msg%replace(%n```qml%n%ex```){\r?\n```qml\r?\n```, ''}%nopex</pattern>
+		</layout>
+		<webhookUrl>${chatserver.log.status.discord.webhook_url}</webhookUrl>
+		<userName_avatarUrl_msg_separator>\|</userName_avatarUrl_msg_separator>
+	</appender>
+	<appender name="app_status_discord_async" class="ch.qos.logback.classic.AsyncAppender">
+		<filter class="ch.qos.logback.classic.filter.ThresholdFilter">
+			<level>WARN</level>
+		</filter>
+		<neverBlock>true</neverBlock>
+		<appender-ref ref="app_status_discord" />
+	</appender>
 	<appender name="app_chat" class="ch.qos.logback.core.FileAppender">
 		<file>${logFolder}/chat.log</file>
 		<encoder>
@@ -67,5 +81,6 @@
 		<appender-ref ref="app_console" />
 		<appender-ref ref="app_error" />
 		<appender-ref ref="app_warn" />
+		<appender-ref ref="app_status_discord_async" />
 	</root>
 </configuration>

@@ -10,7 +10,7 @@ import com.aionemu.loginserver.dao.AccountsLogDAO;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 
 /**
- * @author Neon
+ * @author ViAl, Neon
  */
 public class CM_ACCOUNT_CONNECTION_INFO extends GsClientPacket {
 

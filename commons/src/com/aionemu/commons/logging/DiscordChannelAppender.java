@@ -7,11 +7,7 @@ import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.nio.charset.StandardCharsets;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -186,11 +182,11 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 				long now = System.currentTimeMillis();
 				String ratelimitDurationMillis = con.getHeaderField("Retry-After");
 				if (ratelimitDurationMillis != null && ratelimitDurationMillis.matches("\\d+")) {
-					resetTime = now + Long.valueOf(ratelimitDurationMillis);
+					resetTime = now + Long.parseLong(ratelimitDurationMillis);
 				} else {
 					String ratelimitResetTime = con.getHeaderField("X-Ratelimit-Reset");
 					if (ratelimitResetTime != null && ratelimitResetTime.matches("\\d+")) {
-						resetTime = Long.valueOf(ratelimitResetTime) * 1000;
+						resetTime = Long.parseLong(ratelimitResetTime) * 1000;
 					}
 				}
 				floodResetTimeMillis.set(resetTime > now ? resetTime : now + 3000);

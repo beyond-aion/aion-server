@@ -111,6 +111,8 @@ public class Config {
 		Logger log = LoggerFactory.getLogger(Config.class);
 		Properties defaults = new Properties();
 		try {
+			log.info("Loading default configuration values from: ./config/main/*");
+			PropertiesUtils.loadFromDirectory(defaults, "./config/main", false);
 			log.info("Loading default configuration values from: ./config/network/*");
 			PropertiesUtils.loadFromDirectory(defaults, "./config/network", false);
 			log.info("Loading: ./config/myls.properties");
