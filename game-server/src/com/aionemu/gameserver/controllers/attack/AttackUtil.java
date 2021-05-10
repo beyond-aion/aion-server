@@ -162,10 +162,14 @@ public class AttackUtil {
 	}
 
 	private static void modifyDamageByNpcAi(Creature attacker, Creature attacked, List<AttackResult> attackStatus) {
-		if (!(attacked instanceof Npc))
+		if (!(attacker instanceof Npc || attacked instanceof Npc))
 			return;
 		for (AttackResult status : attackStatus) {
-			float modifiedDamage = attacked.getAi().modifyDamage(attacker, status.getDamage(), null);
+			float modifiedDamage;
+			if (attacker instanceof Npc)
+				modifiedDamage = attacker.getAi().modifyOwnerDamage(status.getDamage(), attacked, null);
+			else
+				modifiedDamage = attacked.getAi().modifyDamage(attacker, status.getDamage(), null);
 			status.setDamage(modifiedDamage);
 		}
 	}
