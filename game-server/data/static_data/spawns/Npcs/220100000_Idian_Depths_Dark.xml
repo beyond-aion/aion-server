@@ -1049,6 +1049,7 @@
 		<!-- obelisk -->
 		<spawn npc_id="730849" respawn_time="295">
 			<spot x="686.4871" y="695.9924" z="514.8972" static_id="682"/>
+			<spot x="681.3403" y="843.1965" z="514.8972" static_id="694"/>
 		</spawn>
 		<!-- classified document -->
 		<spawn npc_id="730821" respawn_time="295">
