@@ -12,7 +12,8 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_LEGION_TABS extends AionServerPacket {
 
-	private static final int entriesPerPage = 8;
+	private static final int ENTRIES_PER_PAGE = 8;
+
 	private final int totalEntries;
 	private final int page;
 	private final List<LegionHistory> pageEntries;
@@ -23,9 +24,12 @@ public class SM_LEGION_TABS extends AionServerPacket {
 	}
 
 	/**
-	 * @param legionHistory - whole history entries for given tab
-	 * @param page - current viewed page on this tab
-	 * @param tabId - 0 = general legion history, 1 = legion siege reward history, 2 = legion warehouse history
+	 * @param legionHistory
+	 *          whole history entries for given tab
+	 * @param page
+	 *          current viewed page on this tab
+	 * @param tabId
+	 *          0 = general legion history, 1 = legion siege reward history, 2 = legion warehouse history
 	 */
 	public SM_LEGION_TABS(List<LegionHistory> legionHistory, int page, int tabId) {
 		this.totalEntries = legionHistory.size();
@@ -52,10 +56,10 @@ public class SM_LEGION_TABS extends AionServerPacket {
 	}
 
 	private List<LegionHistory> findEntriesForCurrentPage(List<LegionHistory> legionHistory) {
-		int startIndex = page * entriesPerPage;
+		int startIndex = page * ENTRIES_PER_PAGE;
 		if (startIndex >= legionHistory.size())
 			return Collections.emptyList();
-		int endIndex = Math.min(startIndex + entriesPerPage, legionHistory.size());
+		int endIndex = Math.min(startIndex + ENTRIES_PER_PAGE, legionHistory.size());
 		return legionHistory.subList(startIndex, endIndex);
 	}
 }

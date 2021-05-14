@@ -4,6 +4,7 @@ package com.aionemu.gameserver.model.team.legion;
  * @author Simple
  */
 public enum LegionHistoryType {
+
 	CREATE(0), // No parameters
 	JOIN(1), // Parameter: name
 	KICK(2), // Parameter: name
@@ -23,7 +24,7 @@ public enum LegionHistoryType {
 
 	private final byte historyType;
 
-	private LegionHistoryType(int historyType) {
+	LegionHistoryType(int historyType) {
 		this.historyType = (byte) historyType;
 	}
 
