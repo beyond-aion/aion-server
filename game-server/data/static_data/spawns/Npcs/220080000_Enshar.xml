@@ -1903,7 +1903,7 @@
 			<spot x="1664.73999" y="66.52000" z="188.55006" h="43"/>
 		</spawn>
 		<!-- captain wigthor -->
-		<spawn npc_id="219874" respawn_time="295">
+		<spawn npc_id="219874" respawn_time="1800">
 			<spot x="921.83173" y="2753.85962" z="257.04031" h="12"/>
 		</spawn>
 		<!-- carke -->
@@ -2416,19 +2416,19 @@
 			<spot x="1775.79663" y="1015.90637" z="142.23729" h="45"/>
 		</spawn>
 		<!-- defense corps shadeblade -->
-		<spawn npc_id="219882" respawn_time="295">
+		<spawn npc_id="219882" respawn_time="1800">
 			<spot x="1609.92004" y="2561.78003" z="285.86127" h="113"/>
 		</spawn>
 		<!-- defense corps shadeblade -->
-		<spawn npc_id="219895" respawn_time="295">
+		<spawn npc_id="219895" respawn_time="1800">
 			<spot x="2239.14990" y="1420.16003" z="345.37628" h="113"/>
 		</spawn>
 		<!-- defense corps shadeblade -->
-		<spawn npc_id="220195" respawn_time="295">
+		<spawn npc_id="220195" respawn_time="1800">
 			<spot x="1590.43994" y="2564.40991" z="286.15063" h="113"/>
 		</spawn>
 		<!-- defense corps shadeblade -->
-		<spawn npc_id="220203" respawn_time="295">
+		<spawn npc_id="220203" respawn_time="1800">
 			<spot x="2217.94995" y="1424.01001" z="346.75000" h="113"/>
 		</spawn>
 		<!-- defense corps shadeblast -->
@@ -2446,7 +2446,7 @@
 			<spot x="2875.46655" y="1869.85706" z="255.15891" h="30"/>
 		</spawn>
 		<!-- defense corps shadeblast -->
-		<spawn npc_id="219901" respawn_time="295">
+		<spawn npc_id="219901" respawn_time="1800">
 			<spot x="792.65997" y="757.59003" z="206.50000" h="93"/>
 		</spawn>
 		<!-- defense corps shadeblast -->
@@ -2468,67 +2468,67 @@
 			<spot x="1480.44080" y="502.42517" z="219.20667" h="30"/>
 		</spawn>
 		<!-- defense corps shadeblast -->
-		<spawn npc_id="219921" respawn_time="295">
+		<spawn npc_id="219921" respawn_time="1800">
 			<spot x="2032.55005" y="324.67001" z="227.58313" h="10"/>
 		</spawn>
 		<!-- defense corps shadeblast -->
-		<spawn npc_id="220207" respawn_time="295">
+		<spawn npc_id="220207" respawn_time="1800">
 			<spot x="796.46002" y="777.20001" z="206.30000" h="93"/>
 		</spawn>
 		<!-- defense corps shadeblast -->
-		<spawn npc_id="220219" respawn_time="295">
+		<spawn npc_id="220219" respawn_time="1800">
 			<spot x="2011.02002" y="323.13000" z="227.30438" h="10"/>
 		</spawn>
 		<!-- defense corps shadecaster -->
-		<spawn npc_id="219883" respawn_time="295">
+		<spawn npc_id="219883" respawn_time="1800">
 			<spot x="1605.26001" y="2556.30005" z="286.04626" h="113"/>
 		</spawn>
 		<!-- defense corps shadecaster -->
-		<spawn npc_id="219896" respawn_time="295">
+		<spawn npc_id="219896" respawn_time="1800">
 			<spot x="2234.73999" y="1422.58997" z="346.03250" h="113"/>
 		</spawn>
 		<!-- defense corps shadecaster -->
-		<spawn npc_id="220198" respawn_time="295">
+		<spawn npc_id="220198" respawn_time="1800">
 			<spot x="1571.07996" y="2561.68994" z="286.03876" h="57"/>
 		</spawn>
 		<!-- defense corps shadecaster -->
-		<spawn npc_id="220206" respawn_time="295">
+		<spawn npc_id="220206" respawn_time="1800">
 			<spot x="2200.85010" y="1431.76001" z="345.43939" h="50"/>
 		</spawn>
 		<!-- defense corps shadeguard -->
-		<spawn npc_id="219881" respawn_time="295">
+		<spawn npc_id="219881" respawn_time="1800">
 			<spot x="1608.78003" y="2555.63989" z="285.79999" h="113"/>
 		</spawn>
 		<!-- defense corps shadeguard -->
-		<spawn npc_id="219894" respawn_time="295">
+		<spawn npc_id="219894" respawn_time="1800">
 			<spot x="2235.76001" y="1413.43994" z="345.37000" h="113"/>
 		</spawn>
 		<!-- defense corps shadeguard -->
-		<spawn npc_id="220197" respawn_time="295">
+		<spawn npc_id="220197" respawn_time="1800">
 			<spot x="1572.37000" y="2569.58008" z="285.99689" h="57"/>
 		</spawn>
 		<!-- defense corps shadeguard -->
-		<spawn npc_id="220205" respawn_time="295">
+		<spawn npc_id="220205" respawn_time="1800">
 			<spot x="2203.90991" y="1437.94995" z="345.99438" h="50"/>
 		</spawn>
 		<!-- defense corps shademagus -->
-		<spawn npc_id="219886" respawn_time="295">
+		<spawn npc_id="219886" respawn_time="1800">
 			<spot x="1606.42004" y="2562.38989" z="285.99811" h="113"/>
 		</spawn>
 		<!-- defense corps shademagus -->
-		<spawn npc_id="219899" respawn_time="295">
+		<spawn npc_id="219899" respawn_time="1800">
 			<spot x="2231.57007" y="1416.08997" z="345.90750" h="113"/>
 		</spawn>
 		<!-- defense corps shademagus -->
-		<spawn npc_id="220196" respawn_time="295">
+		<spawn npc_id="220196" respawn_time="1800">
 			<spot x="1590.01001" y="2559.80005" z="286.13751" h="113"/>
 		</spawn>
 		<!-- defense corps shademagus -->
-		<spawn npc_id="220204" respawn_time="295">
+		<spawn npc_id="220204" respawn_time="1800">
 			<spot x="2220.40991" y="1428.69995" z="346.70624" h="113"/>
 		</spawn>
 		<!-- defense corps shademender -->
-		<spawn npc_id="219880" respawn_time="295">
+		<spawn npc_id="219880" respawn_time="1800">
 			<spot x="882.04108" y="2736.40601" z="257.15295" h="72"/>
 			<spot x="894.14001" y="2742.50000" z="257.91501"/>
 			<spot x="906.24402" y="2748.60303" z="258.12500" h="12"/>
@@ -2539,11 +2539,11 @@
 			<spot x="2868.12817" y="1852.49304" z="256.93835" h="30"/>
 		</spawn>
 		<!-- defense corps shademender -->
-		<spawn npc_id="219905" respawn_time="295">
+		<spawn npc_id="219905" respawn_time="1800">
 			<spot x="799.47998" y="763.14001" z="206.50000" h="93"/>
 		</spawn>
 		<!-- defense corps shademender -->
-		<spawn npc_id="219912" respawn_time="295">
+		<spawn npc_id="219912" respawn_time="1800">
 			<spot x="748.77826" y="267.11771" z="230.00000" h="67"/>
 			<spot x="762.85999" y="269.10001" z="230.00000"/>
 			<spot x="776.93134" y="271.13724" z="230.00000" h="7"/>
@@ -2555,31 +2555,31 @@
 			<spot x="1470.47473" y="481.79678" z="218.00000" h="30"/>
 		</spawn>
 		<!-- defense corps shademender -->
-		<spawn npc_id="219925" respawn_time="295">
+		<spawn npc_id="219925" respawn_time="1800">
 			<spot x="2024.26001" y="330.22000" z="227.40500" h="10"/>
 		</spawn>
 		<!-- defense corps shademender -->
-		<spawn npc_id="220200" respawn_time="295">
+		<spawn npc_id="220200" respawn_time="1800">
 			<spot x="2868.19995" y="1836.73999" z="257.70374" h="30"/>
 		</spawn>
 		<!-- defense corps shademender -->
-		<spawn npc_id="220208" respawn_time="295">
+		<spawn npc_id="220208" respawn_time="1800">
 			<spot x="791.64001" y="776.23999" z="206.26500" h="93"/>
 		</spawn>
 		<!-- defense corps shademender -->
-		<spawn npc_id="220212" respawn_time="295">
+		<spawn npc_id="220212" respawn_time="1800">
 			<spot x="765.51001" y="269.53000" z="230.00000" h="67"/>
 		</spawn>
 		<!-- defense corps shademender -->
-		<spawn npc_id="220216" respawn_time="295">
+		<spawn npc_id="220216" respawn_time="1800">
 			<spot x="1470.42004" y="464.39999" z="218.00000" h="30"/>
 		</spawn>
 		<!-- defense corps shademender -->
-		<spawn npc_id="220220" respawn_time="295">
+		<spawn npc_id="220220" respawn_time="1800">
 			<spot x="2013.98999" y="317.48999" z="227.68875" h="10"/>
 		</spawn>
 		<!-- defense corps shaderaider -->
-		<spawn npc_id="219878" respawn_time="295">
+		<spawn npc_id="219878" respawn_time="1800">
 			<spot x="872.57355" y="2764.97681" z="264.09720" h="72"/>
 			<spot x="877.78455" y="2773.46313" z="266.70572" h="72"/>
 			<spot x="893.14001" y="2742.51001" z="257.85312"/>
@@ -2598,7 +2598,7 @@
 			<spot x="2903.26855" y="1834.28125" z="265.88892" h="90"/>
 		</spawn>
 		<!-- defense corps shaderaider -->
-		<spawn npc_id="219903" respawn_time="295">
+		<spawn npc_id="219903" respawn_time="1800">
 			<spot x="759.26001" y="778.28003" z="211.57828" h="33"/>
 			<spot x="826.29999" y="789.94000" z="211.61356" h="33"/>
 		</spawn>
@@ -2622,12 +2622,12 @@
 			<spot x="1505.73291" y="461.34769" z="225.18890" h="90"/>
 		</spawn>
 		<!-- defense corps shaderaider -->
-		<spawn npc_id="219923" respawn_time="295">
+		<spawn npc_id="219923" respawn_time="1800">
 			<spot x="1994.17004" y="349.82001" z="235.46069" h="70"/>
 			<spot x="2022.97998" y="287.26999" z="235.27737" h="70"/>
 		</spawn>
 		<!-- defense corps shaderanger -->
-		<spawn npc_id="219879" respawn_time="295">
+		<spawn npc_id="219879" respawn_time="1800">
 			<spot x="865.98474" y="2748.08740" z="260.86951" h="72"/>
 			<spot x="867.96753" y="2754.91675" z="263.64792" h="72"/>
 			<spot x="880.68402" y="2717.17188" z="260.91135" h="72"/>
@@ -2650,7 +2650,7 @@
 			<spot x="2883.22437" y="1813.10925" z="259.95386" h="60"/>
 		</spawn>
 		<!-- defense corps shaderanger -->
-		<spawn npc_id="219904" respawn_time="295">
+		<spawn npc_id="219904" respawn_time="1800">
 			<spot x="777.57935" y="795.16437" z="206.72371" h="33"/>
 			<spot x="786.99774" y="758.95007" z="216.90042" h="93"/>
 			<spot x="793.84003" y="780.06000" z="206.25000"/>
@@ -2682,7 +2682,7 @@
 			<spot x="1496.91809" y="441.81277" z="224.16771" h="90"/>
 		</spawn>
 		<!-- defense corps shaderanger -->
-		<spawn npc_id="219924" respawn_time="295">
+		<spawn npc_id="219924" respawn_time="1800">
 			<spot x="1987.38171" y="322.13962" z="228.27992" h="70"/>
 			<spot x="1997.80847" y="299.84384" z="229.27173" h="70"/>
 			<spot x="2008.83997" y="318.59000" z="227.62375"/>
@@ -2690,17 +2690,17 @@
 			<spot x="2030.57190" y="317.86615" z="238.56837" h="10"/>
 		</spawn>
 		<!-- defense corps shadescout -->
-		<spawn npc_id="219884" respawn_time="295">
+		<spawn npc_id="219884" respawn_time="1800">
 			<spot x="1579.33997" y="2529.07007" z="292.68646" h="57"/>
 			<spot x="1590.53003" y="2597.38989" z="292.82321" h="57"/>
 		</spawn>
 		<!-- defense corps shadescout -->
-		<spawn npc_id="219897" respawn_time="295">
+		<spawn npc_id="219897" respawn_time="1800">
 			<spot x="2199.62988" y="1397.10999" z="353.48285" h="50"/>
 			<spot x="2229.68994" y="1459.54004" z="353.27899" h="50"/>
 		</spawn>
 		<!-- defense corps shadesorcerer -->
-		<spawn npc_id="219877" respawn_time="295">
+		<spawn npc_id="219877" respawn_time="1800">
 			<spot x="907.25861" y="2753.65479" z="258.27475" h="12"/>
 			<spot x="909.20001" y="2750.00000" z="258.12500"/>
 			<spot x="911.13733" y="2746.33521" z="258.30014" h="12"/>
@@ -2711,11 +2711,11 @@
 			<spot x="2871.33838" y="1854.85840" z="256.76770" h="30"/>
 		</spawn>
 		<!-- defense corps shadesorcerer -->
-		<spawn npc_id="219902" respawn_time="295">
+		<spawn npc_id="219902" respawn_time="1800">
 			<spot x="792.10999" y="761.83002" z="206.50000" h="93"/>
 		</spawn>
 		<!-- defense corps shadesorcerer -->
-		<spawn npc_id="219909" respawn_time="295">
+		<spawn npc_id="219909" respawn_time="1800">
 			<spot x="743.95026" y="269.16107" z="230.00000" h="67"/>
 			<spot x="744.89001" y="265.70999" z="230.00000"/>
 			<spot x="745.83350" y="262.26129" z="230.00000" h="67"/>
@@ -2727,22 +2727,22 @@
 			<spot x="1473.62915" y="484.68280" z="217.97682" h="30"/>
 		</spawn>
 		<!-- defense corps shadesorcerer -->
-		<spawn npc_id="219922" respawn_time="295">
+		<spawn npc_id="219922" respawn_time="1800">
 			<spot x="2027.93994" y="322.39999" z="227.60001" h="10"/>
 		</spawn>
 		<!-- defense corps shadesorcerer -->
-		<spawn npc_id="220194" respawn_time="295">
+		<spawn npc_id="220194" respawn_time="1800">
 			<spot x="878.72150" y="2738.33740" z="257.27109" h="72"/>
 			<spot x="880.28998" y="2735.25000" z="257.12500"/>
 			<spot x="881.85736" y="2732.17114" z="257.23932" h="72"/>
 		</spawn>
 		<!-- defense corps shadesorcerer -->
-		<spawn npc_id="220202" respawn_time="295">
+		<spawn npc_id="220202" respawn_time="1800">
 			<spot x="2863.64966" y="1822.97327" z="259.69403" h="90"/>
 			<spot x="2869.62256" y="1822.84399" z="259.22083" h="90"/>
 		</spawn>
 		<!-- defense corps shadesorcerer -->
-		<spawn npc_id="220210" respawn_time="295">
+		<spawn npc_id="220210" respawn_time="1800">
 			<spot x="794.69000" y="796.01001" z="206.37500" h="33"/>
 		</spawn>
 		<!-- defense corps shadesorcerer -->
@@ -2752,17 +2752,17 @@
 			<spot x="779.01123" y="267.70657" z="230.26297" h="7"/>
 		</spawn>
 		<!-- defense corps shadesorcerer -->
-		<spawn npc_id="220218" respawn_time="295">
+		<spawn npc_id="220218" respawn_time="1800">
 			<spot x="1466.81848" y="451.31607" z="218.66774" h="90"/>
 			<spot x="1470.14001" y="451.32999" z="218.66687"/>
 			<spot x="1473.46082" y="451.34631" z="218.66586" h="90"/>
 		</spawn>
 		<!-- defense corps shadesorcerer -->
-		<spawn npc_id="220222" respawn_time="295">
+		<spawn npc_id="220222" respawn_time="1800">
 			<spot x="1994.52002" y="316.39001" z="228.10062" h="70"/>
 		</spawn>
 		<!-- defense corps shadestrike -->
-		<spawn npc_id="219875" respawn_time="295">
+		<spawn npc_id="219875" respawn_time="1800">
 			<spot x="924.46759" y="2761.89160" z="256.05087" h="12"/>
 			<spot x="927.26001" y="2756.87012" z="256.08435"/>
 			<spot x="930.05957" y="2751.84204" z="256.19434" h="12"/>
@@ -2773,21 +2773,21 @@
 			<spot x="2873.01221" y="1869.02930" z="254.93460" h="30"/>
 		</spawn>
 		<!-- defense corps shadestrike -->
-		<spawn npc_id="219900" respawn_time="295">
+		<spawn npc_id="219900" respawn_time="1800">
 			<spot x="800.14001" y="758.71002" z="206.50000" h="93"/>
 		</spawn>
 		<!-- defense corps shadestrike -->
-		<spawn npc_id="219907" respawn_time="295">
+		<spawn npc_id="219907" respawn_time="1800">
 			<spot x="728.59003" y="265.04422" z="225.54205" h="67"/>
 			<spot x="730.69000" y="259.32001" z="226.01187"/>
 			<spot x="732.78870" y="253.58698" z="227.36853" h="67"/>
 		</spawn>
 		<!-- defense corps shadestrike -->
-		<spawn npc_id="219920" respawn_time="295">
+		<spawn npc_id="219920" respawn_time="1800">
 			<spot x="2029.21997" y="332.62000" z="227.57750" h="10"/>
 		</spawn>
 		<!-- defense corps shadestrike -->
-		<spawn npc_id="220193" respawn_time="295">
+		<spawn npc_id="220193" respawn_time="1800">
 			<spot x="874.21381" y="2738.11816" z="257.38379" h="72"/>
 			<spot x="874.28040" y="2731.74341" z="256.76752" h="72"/>
 			<spot x="876.65997" y="2733.22998" z="256.91626"/>
@@ -2818,11 +2818,11 @@
 			<spot x="1474.94434" y="444.61731" z="218.96143" h="90"/>
 		</spawn>
 		<!-- defense corps shadestrike -->
-		<spawn npc_id="220221" respawn_time="295">
+		<spawn npc_id="220221" respawn_time="1800">
 			<spot x="1998.28003" y="309.23001" z="228.54813" h="70"/>
 		</spawn>
 		<!-- defense corps shadewatch -->
-		<spawn npc_id="219885" respawn_time="295">
+		<spawn npc_id="219885" respawn_time="1800">
 			<spot x="1568.39722" y="2553.69629" z="286.75000" h="57"/>
 			<spot x="1572.36707" y="2577.73193" z="286.75620" h="57"/>
 			<spot x="1587.78003" y="2562.84009" z="286.13873"/>
@@ -2830,7 +2830,7 @@
 			<spot x="1608.01025" y="2569.92529" z="297.06259" h="113"/>
 		</spawn>
 		<!-- defense corps shadewatch -->
-		<spawn npc_id="219898" respawn_time="295">
+		<spawn npc_id="219898" respawn_time="1800">
 			<spot x="2195.28516" y="1424.17944" z="347.32794" h="50"/>
 			<spot x="2206.14941" y="1446.41187" z="347.30148" h="60"/>
 			<spot x="2216.62012" y="1427.53003" z="346.75000"/>

@@ -1568,50 +1568,50 @@
 			<spot x="2231.20435" y="2856.29541" z="325.48154" h="75" />
 		</spawn>
 		<!-- eighth brighteye -->
-		<spawn npc_id="236072" respawn_time="295">
+		<spawn npc_id="236072" respawn_time="1800">
 			<spot x="1613.34021" y="2722.80933" z="337.42676" h="47" />
 			<spot x="1626.54065" y="2757.99902" z="337.48923" h="47" />
 			<spot x="1656.58704" y="2717.06299" z="344.96869" h="107" />
 			<spot x="1662.62866" y="2732.88062" z="344.96851" h="107" />
 		</spawn>
 		<!-- eighth dawnrunner -->
-		<spawn npc_id="236071" respawn_time="295">
+		<spawn npc_id="236071" respawn_time="1800">
 			<spot x="1622.35559" y="2703.33081" z="339.64728" />
 			<spot x="1645.65112" y="2766.51172" z="339.64728" />
 		</spawn>
 		<!-- eighth ironlight -->
-		<spawn npc_id="220251" respawn_time="295">
+		<spawn npc_id="220251" respawn_time="1800">
 			<spot x="1620.18799" y="2736.45972" z="334.75000" h="47" />
 		</spawn>
 		<!-- eighth ironlight -->
-		<spawn npc_id="236068" respawn_time="295">
+		<spawn npc_id="236068" respawn_time="1800">
 			<spot x="1667.15747" y="2725.33130" z="335.12500" h="107" />
 		</spawn>
 		<!-- eighth lightbinder -->
-		<spawn npc_id="220254" respawn_time="295">
+		<spawn npc_id="220254" respawn_time="1800">
 			<spot x="1641.74976" y="2727.95312" z="335.12500" h="107" />
 		</spawn>
 		<!-- eighth lightbinder -->
-		<spawn npc_id="236073" respawn_time="295">
+		<spawn npc_id="236073" respawn_time="1800">
 			<spot x="1658.48425" y="2721.52100" z="335.12500" h="107" />
 		</spawn>
 		<!-- eighth sunblade -->
-		<spawn npc_id="220252" respawn_time="295">
+		<spawn npc_id="220252" respawn_time="1800">
 			<spot x="1644.46106" y="2734.50073" z="335.12500" h="107" />
 		</spawn>
 		<!-- eighth sunblade -->
-		<spawn npc_id="236069" respawn_time="295">
+		<spawn npc_id="236069" respawn_time="1800">
 			<spot x="1665.01746" y="2719.42529" z="335.12500" h="107" />
 			<spot x="1666.08337" y="2676.70557" z="335.88022" h="15" />
 			<spot x="1676.91516" y="2673.24170" z="336.43219" h="27" />
 			<spot x="1687.28345" y="2741.83569" z="335.12500" h="105" />
 		</spawn>
 		<!-- eighth sunmage -->
-		<spawn npc_id="220253" respawn_time="295">
+		<spawn npc_id="220253" respawn_time="1800">
 			<spot x="1622.92932" y="2743.58105" z="334.68307" h="47" />
 		</spawn>
 		<!-- eighth sunmage -->
-		<spawn npc_id="236070" respawn_time="295">
+		<spawn npc_id="236070" respawn_time="1800">
 			<spot x="1660.94592" y="2727.69580" z="335.12500" h="107" />
 		</spawn>
 		<!-- elzer -->
@@ -1978,49 +1978,49 @@
 			<spot x="624.72021" y="2310.75537" z="280.04501" h="33" />
 		</spawn>
 		<!-- fifth brighteye -->
-		<spawn npc_id="236066" respawn_time="295">
+		<spawn npc_id="236066" respawn_time="1800">
 			<spot x="2740.70288" y="1742.44812" z="390.36880" h="37" />
 			<spot x="2748.40112" y="1699.38098" z="382.85110" h="97" />
 			<spot x="2755.92944" y="1749.37170" z="390.36890" h="37" />
 			<spot x="2782.30273" y="1714.63391" z="382.64737" h="97" />
 		</spawn>
 		<!-- fifth dawnrunner -->
-		<spawn npc_id="236065" respawn_time="295">
+		<spawn npc_id="236065" respawn_time="1800">
 			<spot x="2729.23145" y="1706.54309" z="385.04758" h="45" />
 			<spot x="2788.09668" y="1731.47693" z="385.04758" h="45" />
 		</spawn>
 		<!-- fifth ironlight -->
-		<spawn npc_id="220247" respawn_time="295">
+		<spawn npc_id="220247" respawn_time="1800">
 			<spot x="2769.67480" y="1708.28027" z="380.12500" h="97" />
 		</spawn>
 		<!-- fifth ironlight -->
-		<spawn npc_id="236062" respawn_time="295">
+		<spawn npc_id="236062" respawn_time="1800">
 			<spot x="2743.09985" y="1748.82654" z="380.12500" h="37" />
 		</spawn>
 		<!-- fifth lightbinder -->
-		<spawn npc_id="220250" respawn_time="295">
+		<spawn npc_id="220250" respawn_time="1800">
 			<spot x="2758.74316" y="1731.13721" z="380.12500" h="37" />
 		</spawn>
 		<!-- fifth lightbinder -->
-		<spawn npc_id="236067" respawn_time="295">
+		<spawn npc_id="236067" respawn_time="1800">
 			<spot x="2752.75098" y="1744.13916" z="380.12500" h="37" />
 		</spawn>
 		<!-- fifth sunblade -->
-		<spawn npc_id="220248" respawn_time="295">
+		<spawn npc_id="220248" respawn_time="1800">
 			<spot x="2752.55249" y="1728.17725" z="380.12500" h="37" />
 		</spawn>
 		<!-- fifth sunblade -->
-		<spawn npc_id="236063" respawn_time="295">
+		<spawn npc_id="236063" respawn_time="1800">
 			<spot x="2748.83569" y="1669.11487" z="381.84009" />
 			<spot x="2749.16650" y="1751.76929" z="380.12500" h="37" />
 			<spot x="2789.12354" y="1681.35400" z="382.02597" h="67" />
 		</spawn>
 		<!-- fifth sunmage -->
-		<spawn npc_id="220249" respawn_time="295">
+		<spawn npc_id="220249" respawn_time="1800">
 			<spot x="2762.19385" y="1704.74878" z="380.12500" h="97" />
 		</spawn>
 		<!-- fifth sunmage -->
-		<spawn npc_id="236064" respawn_time="295">
+		<spawn npc_id="236064" respawn_time="1800">
 			<spot x="2745.99316" y="1741.09436" z="380.12500" h="37" />
 		</spawn>
 		<!-- finderyux -->
@@ -2028,7 +2028,7 @@
 			<spot x="1311.36536" y="632.33575" z="582.99652" h="105" />
 		</spawn>
 		<!-- first brighteye -->
-		<spawn npc_id="236027" respawn_time="295">
+		<spawn npc_id="236027" respawn_time="1800">
 			<spot x="2498.30298" y="401.27423" z="597.96381" h="75" />
 			<spot x="2500.94971" y="399.46194" z="597.95331" h="75" />
 			<spot x="2509.87793" y="384.28656" z="598.03680" h="60" />
@@ -2039,7 +2039,7 @@
 			<spot x="2551.47925" y="397.59662" z="590.73767" h="15" />
 		</spawn>
 		<!-- first dawnrunner -->
-		<spawn npc_id="236026" respawn_time="295">
+		<spawn npc_id="236026" respawn_time="1800">
 			<spot x="2498.07080" y="439.96750" z="597.31500" h="75" />
 			<spot x="2513.91724" y="432.93896" z="592.63208" h="75" />
 			<spot x="2520.13257" y="405.36697" z="589.37500" h="75" />
@@ -2048,7 +2048,7 @@
 			<spot x="2545.28467" y="380.16495" z="592.71552" h="75" />
 		</spawn>
 		<!-- first ironlight -->
-		<spawn npc_id="220223" respawn_time="295">
+		<spawn npc_id="220223" respawn_time="1800">
 			<spot x="2498.47681" y="394.42215" z="589.37500" h="75" />
 			<spot x="2504.47510" y="385.34680" z="589.37500" h="75" />
 			<spot x="2542.82910" y="422.50128" z="588.11505" h="15" />
@@ -2056,20 +2056,20 @@
 			<spot x="2548.82739" y="413.42593" z="588.27002" h="15" />
 		</spawn>
 		<!-- first ironlightian deity general -->
-		<spawn npc_id="236022" respawn_time="295">
+		<spawn npc_id="236022" respawn_time="1800">
 			<spot x="2498.33691" y="388.44785" z="589.37500" h="75" />
 		</spawn>
 		<!-- first lightbinder -->
-		<spawn npc_id="220226" respawn_time="295">
+		<spawn npc_id="220226" respawn_time="1800">
 			<spot x="2525.91504" y="404.86716" z="589.37500" h="75" />
 		</spawn>
 		<!-- first lightbinder -->
-		<spawn npc_id="236028" respawn_time="295">
+		<spawn npc_id="236028" respawn_time="1800">
 			<spot x="2505.26221" y="393.20810" z="589.37500" h="75" />
 			<spot x="2542.79053" y="416.18280" z="588.56415" h="15" />
 		</spawn>
 		<!-- first sunblade -->
-		<spawn npc_id="236024" respawn_time="295">
+		<spawn npc_id="236024" respawn_time="1800">
 			<spot x="2496.05933" y="398.43359" z="589.37500" h="75" />
 			<spot x="2506.65869" y="381.52670" z="589.37500" h="75" />
 			<spot x="2540.41162" y="426.51273" z="588.19855" h="15" />
@@ -2080,14 +2080,14 @@
 			<spot x="2593.06323" y="415.91580" z="588.37500" h="40" />
 		</spawn>
 		<!-- first sunmage -->
-		<spawn npc_id="220225" respawn_time="295">
+		<spawn npc_id="220225" respawn_time="1800">
 			<spot x="2507.76587" y="398.23111" z="589.37500" h="75" />
 			<spot x="2510.66968" y="393.39478" z="589.37500" h="75" />
 			<spot x="2537.43750" y="416.30386" z="589.01617" h="15" />
 			<spot x="2540.34131" y="411.46753" z="589.00000" h="15" />
 		</spawn>
 		<!-- first sunmage -->
-		<spawn npc_id="236025" respawn_time="295">
+		<spawn npc_id="236025" respawn_time="1800">
 			<spot x="2599.39697" y="408.11780" z="588.37500" h="45" />
 		</spawn>
 		<!-- fluttering seatrico skyray -->
@@ -2151,47 +2151,47 @@
 			<spot x="2977.99756" y="2585.36035" z="221.50000" />
 		</spawn>
 		<!-- fourth brighteye -->
-		<spawn npc_id="236046" respawn_time="295">
+		<spawn npc_id="236046" respawn_time="1800">
 			<spot x="950.41925" y="1646.88220" z="488.24323" h="60" />
 			<spot x="950.91486" y="1663.77368" z="488.24585" h="60" />
 			<spot x="992.28430" y="1635.68457" z="480.26379" />
 			<spot x="993.45697" y="1673.71497" z="481.45602" />
 		</spawn>
 		<!-- fourth dawnrunner -->
-		<spawn npc_id="236045" respawn_time="295">
+		<spawn npc_id="236045" respawn_time="1800">
 			<spot x="976.60376" y="1619.66736" z="482.92438" h="60" />
 			<spot x="978.78906" y="1688.50378" z="482.92438" h="60" />
 		</spawn>
 		<!-- fourth ironlight -->
-		<spawn npc_id="220235" respawn_time="295">
+		<spawn npc_id="220235" respawn_time="1800">
 			<spot x="994.11432" y="1657.37805" z="477.97540" />
 		</spawn>
 		<!-- fourth ironlight -->
-		<spawn npc_id="236042" respawn_time="295">
+		<spawn npc_id="236042" respawn_time="1800">
 			<spot x="946.73309" y="1651.69421" z="477.04581" h="60" />
 		</spawn>
 		<!-- fourth lightbinder -->
-		<spawn npc_id="220238" respawn_time="295">
+		<spawn npc_id="220238" respawn_time="1800">
 			<spot x="969.03308" y="1658.76843" z="477.75000" h="60" />
 		</spawn>
 		<!-- fourth lightbinder -->
-		<spawn npc_id="236047" respawn_time="295">
+		<spawn npc_id="236047" respawn_time="1800">
 			<spot x="954.19427" y="1658.83826" z="477.51215" h="60" />
 		</spawn>
 		<!-- fourth sunblade -->
-		<spawn npc_id="220236" respawn_time="295">
+		<spawn npc_id="220236" respawn_time="1800">
 			<spot x="968.57635" y="1651.14771" z="477.62500" h="60" />
 		</spawn>
 		<!-- fourth sunblade -->
-		<spawn npc_id="236043" respawn_time="295">
+		<spawn npc_id="236043" respawn_time="1800">
 			<spot x="946.79822" y="1658.89124" z="477.04990" h="60" />
 		</spawn>
 		<!-- fourth sunmage -->
-		<spawn npc_id="220237" respawn_time="295">
+		<spawn npc_id="220237" respawn_time="1800">
 			<spot x="994.14789" y="1650.13745" z="477.88425" />
 		</spawn>
 		<!-- fourth sunmage -->
-		<spawn npc_id="236044" respawn_time="295">
+		<spawn npc_id="236044" respawn_time="1800">
 			<spot x="953.94348" y="1651.41870" z="477.37500" h="60" />
 		</spawn>
 		<!-- frohton -->
@@ -4402,46 +4402,46 @@
 			<spot x="3022.53003" y="2933.27515" z="288.89468" random_walk="1" />
 		</spawn>
 		<!-- second brighteye -->
-		<spawn npc_id="236033" respawn_time="295">
+		<spawn npc_id="236033" respawn_time="1800">
 			<spot x="1546.99536" y="401.50980" z="582.45239" h="53" />
 			<spot x="1584.86975" y="380.67908" z="575.24054" h="113" />
 			<spot x="1594.45496" y="418.31418" z="575.66919" h="113" />
 		</spawn>
 		<!-- second dawnrunner -->
-		<spawn npc_id="236032" respawn_time="295">
+		<spawn npc_id="236032" respawn_time="1800">
 			<spot x="1569.04431" y="371.17560" z="577.13123" h="53" />
 			<spot x="1583.93616" y="431.49005" z="577.48535" h="53" />
 		</spawn>
 		<!-- second ironlight -->
-		<spawn npc_id="220227" respawn_time="295">
+		<spawn npc_id="220227" respawn_time="1800">
 			<spot x="1592.28113" y="403.62329" z="572.95886" h="113" />
 		</spawn>
 		<!-- second ironlight -->
-		<spawn npc_id="236029" respawn_time="295">
+		<spawn npc_id="236029" respawn_time="1800">
 			<spot x="1542.74414" y="407.67838" z="571.92151" h="53" />
 		</spawn>
 		<!-- second lightbinder -->
-		<spawn npc_id="220230" respawn_time="295">
+		<spawn npc_id="220230" respawn_time="1800">
 			<spot x="1567.11597" y="408.75232" z="573.44476" h="53" />
 		</spawn>
 		<!-- second lightbinder -->
-		<spawn npc_id="236034" respawn_time="295">
+		<spawn npc_id="236034" respawn_time="1800">
 			<spot x="1552.87024" y="412.12991" z="572.42938" h="53" />
 		</spawn>
 		<!-- second sunblade -->
-		<spawn npc_id="220228" respawn_time="295">
+		<spawn npc_id="220228" respawn_time="1800">
 			<spot x="1565.35229" y="402.32584" z="573.12854" h="53" />
 		</spawn>
 		<!-- second sunblade -->
-		<spawn npc_id="236030" respawn_time="295">
+		<spawn npc_id="236030" respawn_time="1800">
 			<spot x="1544.82227" y="414.66791" z="571.92639" h="53" />
 		</spawn>
 		<!-- second sunmage -->
-		<spawn npc_id="220229" respawn_time="295">
+		<spawn npc_id="220229" respawn_time="1800">
 			<spot x="1590.64758" y="395.72446" z="572.58453" h="113" />
 		</spawn>
 		<!-- second sunmage -->
-		<spawn npc_id="236031" respawn_time="295">
+		<spawn npc_id="236031" respawn_time="1800">
 			<spot x="1550.90735" y="405.51620" z="572.31049" h="53" />
 		</spawn>
 		<!-- seoron -->
