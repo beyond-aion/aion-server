@@ -1,6 +1,7 @@
 package admincommands;
 
 import org.apache.commons.lang3.StringUtils;
+import org.apache.commons.lang3.math.NumberUtils;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -13,8 +14,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author ATracer, Wakizashi
- * @modified Neon
+ * @author ATracer, Wakizashi, Neon, Sykra
  */
 public class Kill extends AdminCommand {
 
@@ -24,8 +24,8 @@ public class Kill extends AdminCommand {
 		// @formatter:off
 		setSyntaxInfo(
 			" - kills your target (can be NPC or player)",
-			"<all> [neutral|enemy] - kills all NPCs in the surrounding area (default: all, optional: only neutral/hostile NPCs)",
-			"<range (in meters)> [neutral|enemy] - kills NPCs in the specified radius around you (default: all, optional: only neutral/hostile NPCs)"
+			"<all> [neutral|enemy|npcId] - kills all NPCs in the surrounding area (default: all, optional: only neutral/hostile NPCs/specific NPC)",
+			"<range (in meters)> [neutral|enemy|npcId] - kills NPCs in the specified radius around you (default: all, optional: only neutral/hostile NPCs/specific NPC)"
 		);
 		// @formatter:on
 	}
@@ -40,13 +40,13 @@ public class Kill extends AdminCommand {
 		}
 
 		if (params.length == 0) {
-			if (target instanceof Creature) {
+			if (target instanceof Creature creature) {
 				String targetInfo = target.getClass().getSimpleName().toLowerCase() + ": ";
 				if (target instanceof Npc)
 					targetInfo += ChatUtil.path(target, true);
 				else
 					targetInfo += StringUtils.capitalize(target.getName());
-				if (kill(player, (Creature) target))
+				if (kill(player, creature))
 					sendInfo(player, "Killed " + targetInfo);
 				else
 					sendInfo(player, "Couldn't kill " + targetInfo);
@@ -55,7 +55,8 @@ public class Kill extends AdminCommand {
 			}
 		} else {
 			int count = 0;
-			float range = 0;
+			float range;
+			int npcId = 0;
 
 			if (params[0].equalsIgnoreCase("all")) {
 				range = -1;
@@ -75,15 +76,25 @@ public class Kill extends AdminCommand {
 				}
 			}
 
+			if (params.length == 2 && NumberUtils.isCreatable(params[1])) {
+				try {
+					npcId = Integer.parseInt(params[1]);
+				} catch (NumberFormatException nfe) {
+					sendInfo(player, "Invalid npcId parameter.");
+					return;
+				}
+			}
+
 			for (VisibleObject obj : player.getKnownList().getKnownObjects().values()) {
 				// is npc or summon
-				if (obj instanceof Creature && !(obj instanceof Player)) {
+				if (obj instanceof Creature creature && !(obj instanceof Player)) {
 					// is in range
 					if (range == -1 || (range > 0 && PositionUtil.isInRange(player, obj, range))) {
 						// is target
-						if (params.length <= 1 || (params[1].equalsIgnoreCase("neutral") && !player.isEnemy((Creature) obj))
-							|| (params[1].equalsIgnoreCase("enemy") && player.isEnemy((Creature) obj))) {
-							if (kill(player, (Creature) obj))
+						if (params.length <= 1 || (params[1].equalsIgnoreCase("neutral") && !player.isEnemy(creature))
+							|| (params[1].equalsIgnoreCase("enemy") && player.isEnemy(creature))
+							|| (npcId != 0 && creature.getObjectTemplate().getTemplateId() == npcId)) {
+							if (kill(player, creature))
 								count += 1;
 						}
 					}
