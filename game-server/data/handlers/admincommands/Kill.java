@@ -1,5 +1,6 @@
 package admincommands;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
@@ -61,26 +62,20 @@ public class Kill extends AdminCommand {
 			if (params[0].equalsIgnoreCase("all")) {
 				range = -1;
 			} else {
-				try {
-					range = Float.parseFloat(params[0]);
-					if (range < 0) {
-						sendInfo(player);
-						return;
-					}
-					// if input was integer, add 0.999 so it matches the clients displayed target distance (client doesn't round up at .5)
-					if (range == Math.round(range))
-						range += 0.999;
-				} catch (NumberFormatException e) {
-					sendInfo(player, "Invalid range parameter.");
+				range = Float.parseFloat(params[0]);
+				if (range < 0) {
+					sendInfo(player, "The given range must be larger than 0.");
 					return;
 				}
+				// if input was integer, add 0.999 so it matches the clients displayed target distance (client doesn't round up at .5)
+				if (range == Math.round(range))
+					range += 0.999;
 			}
 
-			if (params.length == 2 && NumberUtils.isCreatable(params[1])) {
-				try {
-					npcId = Integer.parseInt(params[1]);
-				} catch (NumberFormatException nfe) {
-					sendInfo(player, "Invalid npcId parameter.");
+			if (params.length == 2 && NumberUtils.isDigits(params[1])) {
+				npcId = Integer.parseInt(params[1]);
+				if (DataManager.NPC_DATA.getNpcTemplate(npcId) == null) {
+					sendInfo(player, npcId + " isn't a valid npcId.");
 					return;
 				}
 			}
