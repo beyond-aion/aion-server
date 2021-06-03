@@ -593,17 +593,13 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Ascension Energy Inventory" start="2015-09-21T00:00:00" end="2015-10-26T23:59:59">
-		<inventory_drop item_id="186000127" startlevel="8" interval="15" />
+	<event name="Ascension Energy Inventory" start="2021-06-04T00:00:00" end="2021-06-20T23:59:59">
+		<inventory_drop item_id="186000127" startlevel="30" interval="240" count="15" />
 	</event>
-	<event name="Ascension Energy" start="2016-11-15T00:00:00" end="2016-11-30T23:59:59">
+	<event name="Ascension Energy" start="2021-06-04T00:00:00" end="2021-06-20T23:59:59">
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
-				<!-- Daeva's Day 3-tier Cake -->
-				<spawn npc_id="831921" respawn_time="295">
-					<spot x="1532.4474" y="1511.6154" z="565.8823" h="60" />
-				</spawn>
 				<!-- Gracia -->
 				<spawn npc_id="799933" respawn_time="295">
 					<spot x="1527.2402" y="1513.146" z="565.89545" h="60" />
@@ -643,10 +639,6 @@
 			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- Daeva's Day 3-tier Cake -->
-				<spawn npc_id="831922" respawn_time="295">
-					<spot x="1275.8658" y="1333.3451" z="204.42003" h="90" />
-				</spawn>
 				<!-- Emma -->
 				<spawn npc_id="799939" respawn_time="295">
 					<spot x="1277.3303" y="1328.2611" z="204.42003" h="90" />
@@ -679,7 +671,7 @@
 			</spawn_map>
 		</spawns>
 		<event_drops>
-			<gd_rule rule_name="Ascension Energy" chance="50" level_based_chance_reduction="true">
+			<gd_rule rule_name="Ascension Energy (Single)" chance="15" level_based_chance_reduction="true">
 				<gd_items>
 					<gd_item id="186000127" /><!-- Ascension Energy -->
 				</gd_items>
@@ -694,6 +686,78 @@
 					<gd_rating rating="ELITE" />
 					<gd_rating rating="HERO" />
 				</gd_ratings>
+			</gd_rule>
+			<gd_rule rule_name="Ascension Energy (Boss I)" chance="100" member_limit="6">
+				<gd_items>
+					<gd_item id="186000127" min_count="5" max_count="10" /><!-- Ascension Energy -->
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="210070000" /><!-- Cygnea -->
+					<gd_map map_id="220080000" /><!-- Enshar -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="219926" /><!-- Rootrage Rotron -->
+					<gd_npc npc_id="219927" /><!-- Chromascale Dreadclaw -->
+					<gd_npc npc_id="219928" /><!-- Seabrine Jotun -->
+					<gd_npc npc_id="219929" /><!-- Tidalsail Spirit -->
+					<gd_npc npc_id="219930" /><!-- Infernomane Vortile -->
+					<gd_npc npc_id="219931" /><!-- Usurper Demaluk -->
+					<gd_npc npc_id="219932" /><!-- Deputy Brigade General Amar -->
+					<gd_npc npc_id="235963" /><!-- Chromaleaf Flowershot -->
+					<gd_npc npc_id="235965" /><!-- Shatterroar Kirrin -->
+					<gd_npc npc_id="235967" /><!-- Betrayer Squallo -->
+					<gd_npc npc_id="235968" /><!-- Garden Protector Nenupar -->
+					<gd_npc npc_id="235969" /><!-- Tenacious Sashirr -->
+					<gd_npc npc_id="235972" /><!-- Commander Ratash -->
+					<gd_npc npc_id="235973" /><!-- Fierce Sandmane Tigric -->
+				</gd_npcs>
+			</gd_rule>
+			<gd_rule rule_name="Ascension Energy (Boss II)" chance="100" member_limit="12">
+				<gd_items>
+					<gd_item id="186000127" min_count="20" /><!-- Ascension Energy -->
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="210070000" /><!-- Cygnea -->
+					<gd_map map_id="220080000" /><!-- Enshar -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="219933" /><!-- Arcticore Aizenka -->
+					<gd_npc npc_id="219934" /><!-- Prectaz -->
+					<gd_npc npc_id="235971" /><!-- Machine Spirit Tottal -->
+					<gd_npc npc_id="235975" /><!-- Gatekeeper Flox -->
+				</gd_npcs>
+			</gd_rule>
+			<gd_rule rule_name="Ascension Energy (Boss III)" chance="100" member_limit="12">
+				<gd_items>
+					<gd_item id="186000127" min_count="10" max_count="15" /><!-- Ascension Energy -->
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="210070000" /><!-- Cygnea -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="235966" /><!-- Aurelian Dadar -->
+					<gd_npc npc_id="235970" /><!-- Deadly Sunayaka -->
+				</gd_npcs>
+			</gd_rule>
+			<gd_rule rule_name="Ascension Energy (Boss IV)" chance="100" member_limit="6">
+				<gd_items>
+					<gd_item id="186000127" min_count="10" /><!-- Ascension Energy -->
+				</gd_items>
+				<gd_maps>
+					<gd_map map_id="600090000" /><!-- Kaldor -->
+					<gd_map map_id="600100000" /><!-- Levinshor -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="235217" /><!-- Lava Arm Cruego -->
+					<gd_npc npc_id="235218" /><!-- Cruel Lamia -->
+					<gd_npc npc_id="235219" /><!-- Destroyer Feld -->
+					<gd_npc npc_id="235220" /><!-- Ruthless Tyrannica -->
+					<gd_npc npc_id="218540" /><!-- Flaming Breath Byak -->
+					<gd_npc npc_id="218745" /><!-- Ruthless Ossek -->
+					<gd_npc npc_id="217964" /><!-- Deputy Chieftain Aruru -->
+					<gd_npc npc_id="218326" /><!-- Continuum Guardian Arachi -->
+					<gd_npc npc_id="218004" /><!-- Chaburat the Noble -->
+				</gd_npcs>
 			</gd_rule>
 		</event_drops>
 	</event>
