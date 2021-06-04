@@ -733,8 +733,11 @@
 				</gd_items>
 				<gd_maps>
 					<gd_map map_id="210070000" /><!-- Cygnea -->
+					<gd_map map_id="220080000" /><!-- Enshar -->
 				</gd_maps>
 				<gd_npcs>
+					<gd_npc npc_id="220019" /><!-- Tatar's Blaze -->
+					<gd_npc npc_id="220020" /><!-- Berserker Sunayaka -->
 					<gd_npc npc_id="235966" /><!-- Aurelian Dadar -->
 					<gd_npc npc_id="235970" /><!-- Deadly Sunayaka -->
 				</gd_npcs>
