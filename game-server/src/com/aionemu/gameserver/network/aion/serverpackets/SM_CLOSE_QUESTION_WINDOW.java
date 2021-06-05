@@ -22,6 +22,10 @@ public class SM_CLOSE_QUESTION_WINDOW extends AionServerPacket {
 		return new SM_CLOSE_QUESTION_WINDOW(1300097, value0);
 	}
 
+	public static SM_CLOSE_QUESTION_WINDOW CLOSE_QUESTION_WINDOW() {
+		return new SM_CLOSE_QUESTION_WINDOW(0);
+	}
+
 	private static final int MAX_PARAM_COUNT = 3;
 
 	private final int msgId;

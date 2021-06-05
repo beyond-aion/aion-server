@@ -159,9 +159,10 @@ public class DuelService {
 	 *          the other player
 	 */
 	private void startDuel(Player requester, Player responder) {
+		if (requester.getResponseRequester().remove(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST))
+			PacketSendUtility.sendPacket(requester, SM_CLOSE_QUESTION_WINDOW.CLOSE_QUESTION_WINDOW());
 		PacketSendUtility.sendPacket(requester, SM_DUEL.SM_DUEL_STARTED(responder.getObjectId()));
 		PacketSendUtility.sendPacket(responder, SM_DUEL.SM_DUEL_STARTED(requester.getObjectId()));
-		requester.getResponseRequester().remove(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_WITHDRAW_REQUEST);
 		registerDuel(requester.getObjectId(), responder.getObjectId());
 		createTask(requester, responder);
 		if (requester.isInAnyHide())
