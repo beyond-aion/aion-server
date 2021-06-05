@@ -18,7 +18,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class CM_HOUSE_SCRIPT extends AionClientPacket {
 
 	/**
-	 * Maximum (compressed) size of a script. The size is determined by subtracting the maximum usable packet body size in bits by the overhead bits
+	 * Maximum (compressed) size of a script. The size is determined by subtracting the maximum usable packet body size in bytes by the overhead bytes
 	 * required to send a single script via SM_HOUSE_SCRIPTS
 	 */
 	private final static int MAX_COMPRESSED_SIZE = AionServerPacket.MAX_USABLE_PACKET_BODY_SIZE - 136;
