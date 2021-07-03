@@ -17,13 +17,10 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.World;
 
 import ai.AggressiveNpcAI;
 
 /**
- * Last modified: March 24th, 2018
- * 
  * @author Ritsu, Estrayl
  */
 @AIName("berserk_anoha")
@@ -46,7 +43,7 @@ public class BerserkAnohaAI extends AggressiveNpcAI {
 		getOwner().getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead()) {
 				getOwner().getController().delete();
-				broadcastAnnounce(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DESPAWN());
+				PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DESPAWN());
 			}
 		}, 60 * 60000)); // 1hour
 	}
@@ -57,12 +54,12 @@ public class BerserkAnohaAI extends AggressiveNpcAI {
 		if (flag != null)
 			flag.getController().delete();
 		super.handleDespawned();
-	};
+	}
 
 	@Override
 	protected void handleDied() {
 		getOwner().getController().cancelTask(TaskId.DESPAWN);
-		broadcastAnnounce(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DIE());
+		PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DIE());
 		checkForFactionReward();
 		super.handleDied();
 	}
@@ -72,31 +69,24 @@ public class BerserkAnohaAI extends AggressiveNpcAI {
 		ca.getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> ca.getController().delete(), 60, TimeUnit.MINUTES));
 	}
 
-	private void broadcastAnnounce(SM_SYSTEM_MESSAGE msg) {
-		World.getInstance().forEachPlayer(player -> PacketSendUtility.sendPacket(player, msg));
-	}
-
 	@Override
 	protected void handleCreatureSee(Creature creature) {
 		super.handleCreatureSee(creature);
-		if (creature instanceof Player) {
+		if (creature instanceof Player player) {
 			if (occupier == SiegeRace.ASMODIANS) {
-				startQuest((Player) creature, creature.getRace() == Race.ELYOS ? 13818 : 23817);
+				startQuest(player, creature.getRace() == Race.ELYOS ? 13818 : 23817);
 			} else if (occupier == SiegeRace.ELYOS) {
-				startQuest((Player) creature, creature.getRace() == Race.ELYOS ? 13817 : 23818);
+				startQuest(player, creature.getRace() == Race.ELYOS ? 13817 : 23818);
 			}
 		}
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_LOOT:
-				return false;
-		}
-		return super.ask(question);
+		return switch (question) {
+			case SHOULD_DECAY, SHOULD_RESPAWN, SHOULD_LOOT -> false;
+			default -> super.ask(question);
+		};
 	}
 
 	private void startQuest(Player player, int questId) {
