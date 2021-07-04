@@ -7308,50 +7308,50 @@
 	<decomposable item_id="188051089" /><!-- Major Pudgy Porgus Bundle -->
 	<decomposable item_id="188051090" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="125045165"/><!-- NPC Summer Flower -->
-			<item id="125040042"/><!-- Summer Sunglasses -->
-			<item id="125045297"/><!-- Lawful Shades -->
-			<item id="125045242"/><!-- Aquablue Sunhat -->
-			<item id="125045346"/><!-- Dapper Fedora -->
-			<item id="188053793" min_count="5"/><!-- Rare Manastone of Aetheric Field Bundle -->
+			<item id="171130034" /><!-- Fresh Summer Camp Wallpaper -->
+			<item id="171130038" /><!-- Fresh Summer Camp Floor -->
+			<item id="125003888" /><!-- NPC Crafted Goggles -->
+			<item id="125045076" /><!-- Cool Swim Cap -->
+			<item id="125045242" /><!-- Aquablue Sunhat -->
+			<item id="164002167" min_count="3" /><!-- Drana Coffee -->
+			<item id="160005060" min_count="3" /><!-- [Event] Zeraka Aether Jelly -->
+			<item id="188052090" /><!-- [Event] Magic Food Bundle -->
+			<item id="188052091" /><!-- [Event] Melee Food Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051091" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
-			<item id="169600087"/><!-- [Emotion Card] 'Bad Girl' Dance -->
-			<item id="169600217"/><!-- [Emotion Card] Summer Vacation -->
-			<item id="169600096"/><!-- [Emotion Card] Blow Bubbles -->
-			<item id="169600100"/><!-- [Emotion Card] Paper Airplane -->
-			<item id="110900485"/><!-- Proud Single's Costume -->
-			<item id="110900847"/><!-- Urban Summer Lime -->
-			<item id="110900846"/><!-- Urban Summer Blue -->
-			<item id="110900848"/><!-- Urban Summer Red -->
-			<item id="188053113" min_count="3"/><!-- Ahserion's Flight Ancient Manastone Bundle -->
-			<item id="188053609" min_count="3"/><!-- [Event] Level 60 Composite Manastone Bundle -->
+			<item id="169600090" /><!-- [Emotion Card] 'Fluttering Heart' Dance -->
+			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
+			<item id="110900552" /><!-- Aquablue Swimsuit -->
+			<item id="110900824" /><!-- Inked-Up Swimsuit -->
+			<item id="110900108" /><!-- NPC Hot Swimsuit -->
+			<item id="160010342" min_count="3" /><!-- Unstoppable Ailu Form -->
+			<item id="160010343" min_count="3" /><!-- Indomitable Ailu Form -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051092" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="125045165"/><!-- NPC Summer Flower -->
-			<item id="125040042"/><!-- Summer Sunglasses -->
-			<item id="125045297"/><!-- Lawful Shades -->
-			<item id="125045242"/><!-- Aquablue Sunhat -->
-			<item id="125045346"/><!-- Dapper Fedora -->
-			<item id="188053793" min_count="5"/><!-- Rare Manastone of Aetheric Field Bundle -->
+			<item id="171130034" /><!-- Fresh Summer Camp Wallpaper -->
+			<item id="171130038" /><!-- Fresh Summer Camp Floor -->
+			<item id="125003888" /><!-- NPC Crafted Goggles -->
+			<item id="125045076" /><!-- Cool Swim Cap -->
+			<item id="125045242" /><!-- Aquablue Sunhat -->
+			<item id="164002167" min_count="3" /><!-- Drana Coffee -->
+			<item id="160005060" min_count="3" /><!-- [Event] Zeraka Aether Jelly -->
+			<item id="188052092" /><!-- [Event] Magic Food Bundle -->
+			<item id="188052093" /><!-- [Event] Melee Food Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051093" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
-			<item id="169600087"/><!-- [Emotion Card] 'Bad Girl' Dance -->
-			<item id="169600217"/><!-- [Emotion Card] Summer Vacation -->
-			<item id="169600096"/><!-- [Emotion Card] Blow Bubbles -->
-			<item id="169600100"/><!-- [Emotion Card] Paper Airplane -->
-			<item id="110900485"/><!-- Proud Single's Costume -->
-			<item id="110900847"/><!-- Urban Summer Lime -->
-			<item id="110900846"/><!-- Urban Summer Blue -->
-			<item id="110900848"/><!-- Urban Summer Red -->
-			<item id="188053113" min_count="3"/><!-- Ahserion's Flight Ancient Manastone Bundle -->
-			<item id="188053609" min_count="3"/><!-- [Event] Level 60 Composite Manastone Bundle -->
+			<item id="169600090" /><!-- [Emotion Card] 'Fluttering Heart' Dance -->
+			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
+			<item id="110900552" /><!-- Aquablue Swimsuit -->
+			<item id="110900824" /><!-- Inked-Up Swimsuit -->
+			<item id="110900108" /><!-- NPC Hot Swimsuit -->
+			<item id="160010344" min_count="3" /><!-- Unstoppable Ailu Form -->
+			<item id="160010345" min_count="3" /><!-- Indomitable Ailu Form -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051094" /><!-- Scorching Heat Pouch -->
@@ -23367,98 +23367,89 @@
 	<decomposable item_id="188052623" /><!-- [Event] Romantic Dye Box -->
 	<decomposable item_id="188052624" /><!-- [Event] Dramata's Bone Wing Box -->
 	<decomposable item_id="188052625"><!-- [Event] Ice-hot Box -->
-		<items chance="9">
-			<item id="162000124" min_count="10"/><!-- Superior Recovery Serum -->
+		<items chance="7.0">
+			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
 		</items>
-		<items chance="7">
-			<item id="160001316" min_count="3" race="ELYOS"/><!-- Tasty Beshu Cocktail -->
-			<item id="160002314" min_count="3" race="ASMODIANS"/><!-- Tasty Drupa Cocktail -->
+		<items chance="7.0">
+			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
 		</items>
-		<items chance="7">
-			<item id="166000195" min_count="3"/><!-- Epsilon Enchantment Stone -->
+		<items chance="7.0">
+			<item id="162000141" min_count="3" /><!-- Sublime Wind Serum -->
 		</items>
-		<items chance="6">
-			<item id="160010101" min_count="3" race="ELYOS"/><!-- Summer-Loving Inquin Form Candy -->
-			<item id="160010102" min_count="3" race="ASMODIANS"/><!-- Summer-Loving Inquin Form Candy -->
+		<items chance="7.0">
+			<item id="186000237" min_count="50" /><!-- Ancient Coin -->
 		</items>
-		<items chance="6">
-			<item id="162000107" min_count="5"/><!-- Saam King's Herb -->
+		<items chance="7.0">
+			<item id="186000238" min_count="50" /><!-- Conqueror's Mark -->
 		</items>
-		<items chance="6">
-			<item id="162000137" min_count="3"/><!-- Sublime Life Serum -->
+		<items chance="6.0">
+			<item id="186000399" min_count="20" /><!-- Honorable Conqueror's Mark -->
 		</items>
-		<items chance="6">
-			<item id="162000139" min_count="3"/><!-- Sublime Mana Serum -->
+		<items chance="6.0">
+			<item id="166000194" min_count="3" /><!-- Delta Enchantment Stone -->
 		</items>
-		<items chance="6">
-			<item id="164000256" min_count="5"/><!-- Fine Crit Spell Scroll -->
+		<items chance="6.0">
+			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
-		<items chance="6">
-			<item id="164000255" min_count="5"/><!-- Fine Crit Strike Scroll -->
+		<items chance="4.0">
+			<item id="169620067" /><!-- AP Boost Charm II - 50% -->
 		</items>
-		<items chance="4">
-			<item id="188054198"/><!-- Greater Scroll Bundle -->
+		<items chance="4.0">
+			<item id="169620079" /><!-- Gathering Boost Charm II - 100% -->
 		</items>
-		<items chance="4">
-			<item id="166030005" min_count="2"/><!-- Tempering Solution -->
+		<items chance="4.0">
+			<item id="188052321" /><!-- [Event] Protectorate Key Box -->
 		</items>
-		<items chance="4">
-			<item id="166020000" min_count="3"/><!-- Omega Enchantment Stone -->
+		<items chance="4.0">
+			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
 		</items>
-		<items chance="4">
-			<item id="186000409" min_count="50"/><!-- Daeva's Respite Coin -->
+		<items chance="4.0">
+			<item id="188054198" /><!-- Greater Scroll Bundle -->
 		</items>
-		<items chance="4">
-			<item id="166150018" min_count="2"/><!--Greater Felicitous Socketing (Eternal) -->
+		<items chance="4.0">
+			<item id="188053614" /><!-- Illusion Godstone Bundle -->
 		</items>
-		<items chance="3">
-			<item id="186000399" min_count="25"/><!-- Honorable Conqueror's Mark -->
+		<items chance="4.0">
+			<item id="188053208" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
 		</items>
-		<items chance="3">
-			<item id="186000236" min_count="25"/><!-- Blood Mark -->
+		<items chance="3.0">
+			<item id="166500005" min_count="3" /><!-- [Event] Amplification Stone -->
 		</items>
-		<items chance="3">
-			<item id="186000051" min_count="3"/><!-- Major Ancient Crown -->
+		<items chance="3.0">
+			<item id="166020003" min_count="3" /><!-- [Event] Omega Enchantment Stone -->
 		</items>
-		<items chance="3">
-			<item id="186000135" min_count="2"/><!-- Arena Ticket -->
+		<items chance="3.0">
+			<item id="166030007" min_count="3" /><!-- [Event] Tempering Solution -->
 		</items>
-		<items chance="2">
-			<item id="188052321"/><!-- [Event] Protectorate Key Box -->
+		<items chance="3.0">
+			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
 		</items>
-		<items chance="1.3">
-			<item id="188053206"/><!-- [Event] Stormwing's Eternal Armor Chest -->
+		<items chance="1.5">
+			<item id="188052831" /><!-- Dynatoum's Brazen Armor Box -->
 		</items>
-		<items chance="1.2">
-			<item id="188053903"/><!-- Honorable Equipment of Conquest Box -->
+		<items chance="1.5">
+			<item id="188053099" /><!-- Pure Modor's Equipment Crux Box -->
 		</items>
-		<items chance="1">
-			<item id="188053006"/><!-- [Event] Hyperion's Mythic Armor Chest -->
+		<items chance="1.0">
+			<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
 		</items>
-		<items chance="1">
-			<item id="188053702"/><!-- Vasharti's Equipment Box -->
+		<items chance="1.0">
+			<item id="188053033" /><!-- Kunax's Equipment Box -->
 		</items>
-		<items chance="1">
-			<item id="169620072"/><!-- AP Boost Charm II - 30% -->
+		<items chance="1.0">
+			<item id="188053219" /><!-- [Event] Sauro Commander's Accessory Box -->
 		</items>
-		<items chance="0.8">
-			<item id="188053219"/><!-- [Event] Sauro Commander's Accessory Box -->
-		</items>
-		<items chance="0.5">
-			<item id="168310018" race="ELYOS"/><!-- Major Blessed Augment: Level 2 -->
-			<item id="168310019" race="ASMODIANS"/><!-- Major Blessed Augment: Level 2 -->
-		</items>
-		<items chance="0.2">
-			<item id="187000090"/><!-- Tiamat's Spectral Wings -->
+		<items chance="1.0">
+			<item id="187000090" /><!-- Tiamat's Spectral Wings -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052626" /><!-- [Event] Cocktail Shaker -->
 	<decomposable item_id="188052627"><!-- [Event] Bag of Ice -->
 		<items>
-			<item id="188100124" min_count="3" max_count="5"/><!-- Ice Block -->
+			<item id="188100124" min_count="3" max_count="5" /><!-- Ice Block -->
 		</items>
 		<items>
-			<item id="188100125" min_count="3" max_count="5"/><!-- Ice Pick -->
+			<item id="188100125" min_count="3" max_count="5" /><!-- Ice Pick -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052628" /><!-- [Event] Icy Idian Box -->
@@ -29381,7 +29372,48 @@
 			<item id="125003833" player_classes="RIDER" /><!-- Ancient Spirit's Magic Helm -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053208" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+	<decomposable item_id="188053208"><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+		<items>
+			<item id="110601317" player_classes="GLADIATOR TEMPLAR" /><!-- Tiamat Guard's Breastplate -->
+			<item id="110501344" player_classes="CHANTER CLERIC" /><!-- Tiamat Guard's Hauberk -->
+			<item id="110551042" player_classes="RIDER" /><!-- Tiamat Guard's Magic Hauberk -->
+			<item id="110301369" player_classes="ASSASSIN RANGER" /><!-- Tiamat Guard's Jerkin -->
+			<item id="110101459" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Tiamat Guard's Tunic -->
+			<item id="110301580" player_classes="GUNNER" /><!-- Tiamat Guard's Magic Jerkin -->
+		</items>
+		<items>
+			<item id="113601271" player_classes="GLADIATOR TEMPLAR" /><!-- Tiamat Guard's Greaves -->
+			<item id="113501319" player_classes="CHANTER CLERIC" /><!-- Tiamat Guard's Chausses -->
+			<item id="113501618" player_classes="RIDER" /><!-- Tiamat Guard's Magic Chausses -->
+			<item id="113301336" player_classes="ASSASSIN RANGER" /><!-- Tiamat Guard's Breeches -->
+			<item id="113101334" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Tiamat Guard's Leggings -->
+			<item id="113301546" player_classes="GUNNER" /><!-- Tiamat Guard's Magic Breeches -->
+		</items>
+		<items>
+			<item id="111601282" player_classes="GLADIATOR TEMPLAR" /><!-- Tiamat Guard's Gauntlets -->
+			<item id="111501304" player_classes="CHANTER CLERIC" /><!-- Tiamat Guard's Handguards -->
+			<item id="111501600" player_classes="RIDER" /><!-- Tiamat Guard's Magic Handguards -->
+			<item id="111301312" player_classes="ASSASSIN RANGER" /><!-- Tiamat Guard's Vambrace -->
+			<item id="111101317" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Tiamat Guard's Gloves -->
+			<item id="111301518" player_classes="GUNNER" /><!-- Tiamat Guard's Magic Vambrace -->
+		</items>
+		<items>
+			<item id="114601266" player_classes="GLADIATOR TEMPLAR" /><!-- Tiamat Guard's Sabatons -->
+			<item id="114501325" player_classes="CHANTER CLERIC" /><!-- Tiamat Guard's Brogans -->
+			<item id="114501627" player_classes="RIDER" /><!-- Tiamat Guard's Magic Brogans -->
+			<item id="114301369" player_classes="ASSASSIN RANGER" /><!-- Tiamat Guard's Boots -->
+			<item id="114101363" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Tiamat Guard's Shoes -->
+			<item id="114301584" player_classes="GUNNER" /><!-- Tiamat Guard's Magic Boots -->
+		</items>
+		<items>
+			<item id="112601262" player_classes="GLADIATOR TEMPLAR" /><!-- Tiamat Guard's Shoulderplates -->
+			<item id="112501244" player_classes="CHANTER CLERIC" /><!-- Tiamat Guard's Spaulders -->
+			<item id="112501542" player_classes="RIDER" /><!-- Tiamat Guard's Magic Spaulders -->
+			<item id="112301255" player_classes="ASSASSIN RANGER" /><!-- Tiamat Guard's Shoulderguards -->
+			<item id="112101274" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Tiamat Guard's Pauldrons -->
+			<item id="112301459" player_classes="GUNNER" /><!-- Tiamat Guard's Magic Shoulderguards -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053209"><!-- Ophidan Bridge Opportunity Bundle -->
 		<items>
 			<item id="186000237" min_count="5" /><!-- Ancient Coin -->
