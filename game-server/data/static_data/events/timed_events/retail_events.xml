@@ -3735,49 +3735,104 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Joker's Wild Event" start="2020-08-01T00:00:00" end="2020-08-01T23:59:59">
+	<event name="Joker's Wild Event" start="2021-10-29T00:00:00" end="2021-11-07T23:59:59">
 		<quests>
 			<maintainable>80623 80624 80625 80626 80627 80628 80629 80630 80631 80632 80633 80634</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Trump Rift Drop" chance="50" member_limit="6">
-				<gd_items>
-					<gd_item id="188053528" /><!-- [Event] Heart Mini Trump -->
-					<gd_item id="188053529" /><!-- [Event] Club Mini Trump -->
-				</gd_items>
-				<gd_maps>
-					<gd_map map_id="210050000" /><!-- Inggison -->
-					<gd_map map_id="220070000" /><!-- Gelkmaros -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="209520" /><!-- Inggison Sentinel -->
-					<gd_npc npc_id="209523" /><!-- Gelkmaros Protector -->
-					<gd_npc npc_id="209534" /><!-- Inggison Elite Templar -->
-					<gd_npc npc_id="209535" /><!-- Inggison Elite Gladiator -->
-					<gd_npc npc_id="209536" /><!-- Inggison Elite Ranger -->
-					<gd_npc npc_id="209537" /><!-- Inggison Elite Sorcerer -->
-					<gd_npc npc_id="209538" /><!-- Inggison Elite Cleric -->
-					<gd_npc npc_id="209549" /><!-- Gelkmaros Elite Templar -->
-					<gd_npc npc_id="209550" /><!-- Gelkmaros Elite Gladiator -->
-					<gd_npc npc_id="209551" /><!-- Gelkmaros Elite Ranger -->
-					<gd_npc npc_id="209552" /><!-- Gelkmaros Elite Sorcerer -->
-					<gd_npc npc_id="209553" /><!-- Gelkmaros Elite Cleric -->
-				</gd_npcs>
-			</gd_rule>
 			<gd_rule rule_name="Trump Single Drop" chance="8">
-				<gd_items>
-					<gd_item id="188053528" /><!-- [Event] Heart Mini Trump -->
-					<gd_item id="188053529" /><!-- [Event] Club Mini Trump -->
-				</gd_items>
 				<gd_maps>
 					<gd_map map_id="600010000" /><!-- Silentera Canyon -->
 				</gd_maps>
-			</gd_rule>
-			<gd_rule rule_name="Trump Boss Drop" chance="100" member_limit="12">
+				<gd_races>
+					<gd_race race="BEAST" />
+					<gd_race race="MAGICALMONSTER" />
+					<gd_race race="DEMIHUMANOID" />
+					<gd_race race="CONSTRUCT" />
+					<gd_race race="UNDEAD" />
+				</gd_races>
+				<gd_excluded_npcs npc_ids="218085" />
 				<gd_items>
 					<gd_item id="188053528" /><!-- [Event] Heart Mini Trump -->
 					<gd_item id="188053529" /><!-- [Event] Club Mini Trump -->
 				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Trump Elite Drop" chance="25" member_limit="3">
+				<gd_maps>
+					<gd_map map_id="600010000" /><!-- Silentera Canyon -->
+				</gd_maps>
+				<gd_races>
+					<gd_race race="DRAKAN" />
+				</gd_races>
+				<gd_items>
+					<gd_item id="188053528" /><!-- [Event] Heart Mini Trump -->
+					<gd_item id="188053529" /><!-- [Event] Club Mini Trump -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Trump Legendary Drop" chance="100" member_limit="6">
+				<gd_maps>
+					<gd_map map_id="600010000" /><!-- Silentera Canyon -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="218085" /><!-- Debarim the Omnipotent -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053528" min_count="3" /><!-- [Event] Heart Mini Trump -->
+					<gd_item id="188053529" min_count="3" /><!-- [Event] Club Mini Trump -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Trump Single Drop" chance="25" member_limit="6">
+				<gd_maps>
+					<gd_map map_id="600100000" /><!-- Levinshor -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="235346" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235347" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235348" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235349" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235350" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235351" /><!-- Denku Fang -->
+					<gd_npc npc_id="235352" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235353" /><!-- Denku Feralmage -->
+					<gd_npc npc_id="235354" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235355" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235356" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235357" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235358" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235359" /><!-- Denku Fang -->
+					<gd_npc npc_id="235360" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235361" /><!-- Denku Feralmage -->
+					<gd_npc npc_id="235362" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235363" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235364" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235365" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235366" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235367" /><!-- Denku Fang -->
+					<gd_npc npc_id="235368" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235369" /><!-- Denku Feralmage -->
+					<gd_npc npc_id="235370" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235371" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235372" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235373" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235374" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235375" /><!-- Denku Fang -->
+					<gd_npc npc_id="235376" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235377" /><!-- Denku Feralmage -->
+					<gd_npc npc_id="235378" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235379" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235380" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235381" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235382" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235383" /><!-- Denku Fang -->
+					<gd_npc npc_id="235384" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235385" /><!-- Denku Feralmage -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053528" /><!-- [Event] Heart Mini Trump -->
+					<gd_item id="188053529" /><!-- [Event] Club Mini Trump -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Trump Boss Drop" chance="100" member_limit="12">
 				<gd_maps>
 					<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
 					<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
@@ -3809,6 +3864,10 @@
 					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
 					<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
 				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053528" max_count="3" /><!-- [Event] Heart Mini Trump -->
+					<gd_item id="188053529" max_count="3" /><!-- [Event] Club Mini Trump -->
+				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Joker's Secret Box (regular)" chance="100" max_drop_rule="3">
 				<gd_maps>
@@ -3822,7 +3881,6 @@
 					<gd_item id="162000137" min_count="2" /><!-- Sublime Life Serum -->
 					<gd_item id="162000139" min_count="2" /><!-- Sublime Mana Serum -->
 					<gd_item id="162000141" min_count="2" /><!-- Sublime Wind Serum -->
-					<gd_item id="162000107" min_count="5" /><!-- Saam King's Herbs -->
 					<gd_item id="162000023" min_count="5" /><!-- Greater Healing Potion -->
 					<gd_item id="186000237" min_count="25" /><!-- Ancient Coin -->
 					<gd_item id="186000238" min_count="25" /><!-- Conqueror's Mark -->
@@ -4724,7 +4782,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Nightmare Circus" start="2020-10-23T00:00:00" end="2020-11-01T23:59:59" theme="HALLOWEEN">
+	<event name="Nightmare Circus" start="2021-10-29T00:00:00" end="2021-11-07T23:59:59" theme="HALLOWEEN">
 		<quests>
 			<maintainable>80341 80342 80343</maintainable>
 		</quests>
