@@ -4537,41 +4537,41 @@
 			<drop item_id="162000137" min_amount="3" /><!-- Sublime Life Serum -->
 			<drop item_id="162000139" min_amount="3" /><!-- Sublime Mana Serum -->
 			<drop item_id="162000141" min_amount="3" /><!-- Sublime Wind Serum -->
-			<drop item_id="186000236" min_amount="10" max_amount="15" /><!-- Blood Mark -->
-			<drop item_id="186000146" min_amount="3" max_amount="5" /><!-- Guestpetal -->
-			<drop item_id="186000130" min_amount="100" max_amount="150" /><!-- Crucible Insignia -->
-			<drop item_id="186000237" min_amount="50" max_amount="100" /><!-- Ancient Coin -->
+			<drop item_id="186000236" min_amount="15" /><!-- Blood Mark -->
+			<drop item_id="186000146" min_amount="5" /><!-- Guestpetal -->
+			<drop item_id="186000130" min_amount="150" /><!-- Crucible Insignia -->
+			<drop item_id="186000237" min_amount="100" /><!-- Ancient Coin -->
 			<drop item_id="160010354" /><!-- Greater Seed of Transformation -->
 		</drop_group>
 		<drop_group race="ASMODIANS">
 			<drop item_id="162000137" min_amount="3" /><!-- Sublime Life Serum -->
 			<drop item_id="162000139" min_amount="3" /><!-- Sublime Mana Serum -->
 			<drop item_id="162000141" min_amount="3" /><!-- Sublime Wind Serum -->
-			<drop item_id="186000236" min_amount="10" max_amount="15" /><!-- Blood Mark -->
-			<drop item_id="186000146" min_amount="3" max_amount="5" /><!-- Guestpetal -->
-			<drop item_id="186000130" min_amount="100" max_amount="150" /><!-- Crucible Insignia -->
-			<drop item_id="186000237" min_amount="50" max_amount="100" /><!-- Ancient Coin -->
+			<drop item_id="186000236" min_amount="15" /><!-- Blood Mark -->
+			<drop item_id="186000146" min_amount="5" /><!-- Guestpetal -->
+			<drop item_id="186000130" min_amount="150" /><!-- Crucible Insignia -->
+			<drop item_id="186000237" min_amount="100" /><!-- Ancient Coin -->
 			<drop item_id="160010355" /><!-- Greater Seed of Transformation -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="166500005" chance="20" min_amount="2" /><!-- [Event] Amplification Stone -->
-			<drop item_id="166020003" chance="20" min_amount="2" /><!-- [Event] Omega Enchantment Stone -->
-			<drop item_id="166030007" chance="20" min_amount="3" /><!-- [Event] Tempering Solution -->
-			<drop item_id="186000242" chance="20" min_amount="2" /><!-- Ceramium Medal -->
-			<drop item_id="188053610" chance="20" min_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
-			<drop item_id="186000247" chance="20" min_amount="3" /><!-- Major Danuar Relic -->
+			<drop item_id="166500002" chance="25" min_amount="2" /><!-- Amplification Stone -->
+			<drop item_id="166020000" chance="25" min_amount="2" /><!-- Omega Enchantment Stone -->
+			<drop item_id="166030005" chance="25" min_amount="3" /><!-- Tempering Solution -->
+			<drop item_id="186000242" chance="25" min_amount="2" /><!-- Ceranium Medal -->
+			<drop item_id="188053610" chance="25" min_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<drop item_id="186000247" chance="25" min_amount="3" /><!-- Major Danuar Relic -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="188053618" chance="5" /><!-- Honorable Elim's Idian Bundle -->
-			<drop item_id="188053100" chance="5" /><!-- Pure Dynatoum's Equipment Crux Box -->
-			<drop item_id="188052388" chance="5" /><!-- Modor's Equipment Box -->
-			<drop item_id="168310019" chance="5" /><!-- Major Blessed Augment: Level 2 -->
-			<drop item_id="188053113" chance="5" min_amount="2" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<drop item_id="188053618" chance="8" /><!-- Honorable Elim's Idian Bundle -->
+			<drop item_id="188052827" chance="8" /><!-- Dynatoum's Equipment Chest -->
+			<drop item_id="188053099" chance="8" /><!-- Pure Modor's Equipment Crux Box -->
+			<drop item_id="186000409" chance="8" min_amount="10" /><!-- Daeva's Respite Coin -->
+			<drop item_id="188053113" chance="8" min_amount="2" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="169610093" chance="1" /><!-- [Title Card] Top Gun -->
-			<drop item_id="188053033" chance="1" /><!-- Kunax's Equipment Box -->
-			<drop item_id="188053728" chance="1" /><!-- Beritra's Equipment Box -->
+			<drop item_id="188053295" chance="3" /><!-- Empyrean Plume Chest -->
+			<drop item_id="188053033" chance="3" /><!-- Kunax's Equipment Box -->
+			<drop item_id="188053728" chance="3" /><!-- Beritra's Equipment Box -->
 		</drop_group>
 	</npc_drop>
 </custom_drop>
