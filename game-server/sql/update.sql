@@ -1,6 +1,10 @@
 /*
- * DB changes since a5bfa744 (03.07.2021)
+ * DB changes since ec7c95de (14.11.2021)
  */
 
--- remove old event items
-DELETE FROM inventory WHERE item_id IN (186000111, 188051090, 188051091, 188051092, 188051093, 188052625, 188052627, 188100124, 188100125);
+-- create advent calendar table
+CREATE TABLE `advent` (
+  `account_id` int(11) NOT NULL,
+  `last_day_received` tinyint(4) NOT NULL,
+  PRIMARY KEY (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
