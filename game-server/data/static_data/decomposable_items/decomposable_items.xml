@@ -26841,7 +26841,7 @@
 			<item id="188051879" /><!-- Solorius Furniture Set Box -->
 		</items>
 		<items>
-			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
+			<item id="188052388" /><!-- Modor's Equipment Box -->
 		</items>
 		<items>
 			<item id="188053000" /><!-- [Event] Assured Greater Felicitous Socketing Box -->
@@ -26852,7 +26852,7 @@
 	</decomposable>
 	<decomposable item_id="188052999"><!-- [Event] Brilliant Ice Prism -->
 		<items chance="30.0">
-			<item id="188053099" /><!-- Pure Modor's Equipment Crux Box -->
+			<item id="188053100" /><!-- Pure Dynatoum's Equipment Crux Box -->
 		</items>
 		<items chance="45.0">
 			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
