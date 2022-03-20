@@ -393,11 +393,7 @@ public class GameServer {
 	}
 
 	public static void initShutdown(int exitCode, int delaySeconds) {
-		ThreadPoolManager.getInstance().executeLongRunning(() -> ShutdownHook.getInstance().shutdown(exitCode, delaySeconds));
-	}
-
-	public static boolean abortShutdown() {
-		return ShutdownHook.getInstance().abortShutdown();
+		ShutdownHook.getInstance().initShutdown(exitCode, delaySeconds);
 	}
 
 	public static void updateRatio(Race race, int i) {

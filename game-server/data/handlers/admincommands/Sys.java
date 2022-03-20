@@ -23,11 +23,10 @@ public class Sys extends AdminCommand {
 
 		// @formatter:off
 		setSyntaxInfo(
-			"<info> - Shows general system information",
-			"<memory> [gc] - Shows memory usage statistics and optionally runs the garbage collector",
-			"<threadpool> - Shows thread pool manager info",
-			"<restart|shutdown> [delay] - Restarts or shuts down the server after the specified delay in seconds (default: uses delay from config).",
-			"<restart|shutdown> <abort> - Stops the shutdown task."
+			"<info> - Shows general system information.",
+			"<memory> [gc] - Shows memory usage statistics and optionally runs the garbage collector.",
+			"<threadpool> - Shows thread pool manager info.",
+			"<restart|shutdown> [delay] - Restarts or shuts down the server after the specified delay in seconds (default: uses delay from config)."
 		);
 		// @formatter:on
 	}
@@ -66,28 +65,17 @@ public class Sys extends AdminCommand {
 				sendInfo(player, stat.replaceAll("\t", ""));
 			}
 		} else if ("shutdown".equalsIgnoreCase(params[0])) {
-			runOrAbortShutdown(player, ExitCode.NORMAL, params.length == 1 ? null : params[1]);
+			initShutdown(ExitCode.NORMAL, params.length == 1 ? null : params[1]);
 		} else if ("restart".equalsIgnoreCase(params[0])) {
-			runOrAbortShutdown(player, ExitCode.RESTART, params.length == 1 ? null : params[1]);
+			initShutdown(ExitCode.RESTART, params.length == 1 ? null : params[1]);
 		} else {
 			sendInfo(player);
 		}
 	}
 
-	private void runOrAbortShutdown(Player player, int exitCode, String delay) {
-		if ("abort".equalsIgnoreCase(delay)) {
-			if (!GameServer.isShutdownScheduled())
-				sendInfo(player, "There is no shutdown in progress.");
-			else
-				sendInfo(player, GameServer.abortShutdown() ? "Successfully aborted server shutdown." : "Couldn't abort server shutdown.");
-		} else {
-			try {
-				int delaySeconds = delay == null ? ShutdownConfig.DELAY : Integer.parseInt(delay);
-				GameServer.initShutdown(exitCode, delaySeconds);
-			} catch (NumberFormatException e) {
-				sendInfo(player, delay + " is no valid number!");
-			}
-		}
+	private void initShutdown(int exitCode, String delay) {
+		int delaySeconds = delay == null ? ShutdownConfig.DELAY : Integer.parseInt(delay);
+		GameServer.initShutdown(exitCode, delaySeconds);
 	}
 
 }
