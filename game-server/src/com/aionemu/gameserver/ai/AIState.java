@@ -9,7 +9,7 @@ import com.aionemu.gameserver.ai.event.AIEventType;
  * @modified Neon
  */
 public enum AIState {
-	CREATED(AIEventType.SPAWNED),
+	CREATED(AIEventType.BEFORE_SPAWNED, AIEventType.SPAWNED),
 	DIED(AIEventType.DESPAWNED, AIEventType.DROP_REGISTERED),
 	DESPAWNED(AIEventType.BEFORE_SPAWNED, AIEventType.SPAWNED),
 	IDLE,
