@@ -100,6 +100,6 @@ public class CM_MAC_ADDRESS extends AionClientPacket {
 		} else if (hddSerial.matches("^[a-zA-Z0-9] [a-zA-Z0-9_-].*|.*[a-zA-Z0-9_-] [a-zA-Z0-9]$")) { // check if second or penultimate char is a space
 			return hddSerial.replaceAll("(.)(.)", "$2$1").trim(); // for some reason some clients send switched chars
 		}
-		return hddSerial;
+		return hddSerial.trim();
 	}
 }
