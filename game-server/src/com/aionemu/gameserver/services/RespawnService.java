@@ -16,6 +16,8 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
+import com.aionemu.gameserver.services.event.Event;
+import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
@@ -24,8 +26,7 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author ATracer, Source, xTz
- * @modified Neon
+ * @author ATracer, Source, xTz, Neon
  */
 public class RespawnService {
 
@@ -107,7 +108,7 @@ public class RespawnService {
 	 */
 	public static boolean cancelRespawn(int objectId, SpawnTemplate spawnTemplate) {
 		RespawnTask respawnTask = pendingRespawns.get(objectId);
-		if (respawnTask != null && respawnTask.spawnTemplate == spawnTemplate) {
+		if (respawnTask != null && respawnTask.future != null && respawnTask.spawnTemplate == spawnTemplate) {
 			respawnTask.cancel();
 			return true;
 		}
@@ -143,7 +144,7 @@ public class RespawnService {
 
 	}
 
-	private static class RespawnTask implements Runnable {
+	public static class RespawnTask implements Runnable {
 
 		private final SpawnTemplate spawnTemplate;
 		private final int instanceId;
@@ -151,7 +152,7 @@ public class RespawnService {
 		private Future<?> future;
 		private boolean releaseIdOnUnregister;
 
-		private RespawnTask(VisibleObject object) {
+		public RespawnTask(VisibleObject object) {
 			this.spawnTemplate = object.getSpawn();
 			this.instanceId = object.getInstanceId();
 			this.oldObjectId = object.getObjectId(); // ID of corpse or already despawned object
@@ -159,8 +160,25 @@ public class RespawnService {
 
 		@Override
 		public void run() {
+			if (tryRegisterOnEventEndTask()) {
+				future = null;
+				return;
+			}
 			unregister();
 			respawn();
+		}
+
+		private boolean tryRegisterOnEventEndTask() {
+			if (spawnTemplate.isEventSpawn())
+				return false;
+			for (Event activeEvent : EventService.getInstance().getActiveEvents()) {
+				if (activeEvent.getEventTemplate().getSpawns() == null)
+					continue;
+				// if a currently active event contains an event spawn with custom="true" for this non-event spawn, we register it for respawn when the event ends
+				if (activeEvent.getEventTemplate().getSpawns().getTemplates().stream().anyMatch(m -> m.getMapId() == spawnTemplate.getWorldId() && m.getSpawns().stream().anyMatch(spawn -> spawn.getNpcId() == spawnTemplate.getNpcId() && spawn.isCustom())))
+					return activeEvent.addOnEventEndTask(this);
+			}
+			return false;
 		}
 
 		private void respawn() {

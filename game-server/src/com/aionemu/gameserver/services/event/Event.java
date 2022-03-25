@@ -2,13 +2,17 @@ package com.aionemu.gameserver.services.event;
 
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
+import java.util.ArrayList;
 import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.Future;
+import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamMember;
@@ -48,8 +52,10 @@ public class Event {
 	private static final String EFFECT_FORCE_TYPE_PREFIX = "[EVENT] ";
 
 	private final EventTemplate eventTemplate;
+	private final AtomicBoolean started = new AtomicBoolean();
 	private EventBuffHandler eventBuffHandler;
 	private Future<?> inventoryDropTask;
+	private List<Runnable> onEventEndTasks;
 
 	public Event(EventTemplate eventTemplate) {
 		this.eventTemplate = eventTemplate;
@@ -68,6 +74,8 @@ public class Event {
 	}
 
 	public void start() {
+		if (!started.compareAndSet(false, true))
+			return;
 		if (eventTemplate.getSpawns() != null && eventTemplate.getSpawns().size() > 0) { // TODO refactor SpawnEngine to use its methods
 			for (SpawnMap map : eventTemplate.getSpawns().getTemplates()) {
 				DataManager.SPAWNS_DATA.addNewSpawnMap(map);
@@ -92,6 +100,8 @@ public class Event {
 								spawnCount++;
 							}
 						}
+						if (spawn.isCustom())
+							despawnNonEventSpawns(spawn.getNpcId(), map.getMapId(), instanceId);
 					}
 					log.info("Spawned event objects in " + map.getMapId() + " [" + instanceId + "]: " + spawnCount + " (" + eventTemplate.getName() + ")");
 				}
@@ -132,6 +142,7 @@ public class Event {
 	}
 
 	public void stop() {
+		started.set(false);
 		if (eventTemplate.getSpawns() != null && eventTemplate.getSpawns().size() > 0) {
 			int[] count = { 0 };
 			World.getInstance().forEachObject(o -> {
@@ -144,6 +155,19 @@ public class Event {
 			count[0] += RespawnService.cancelEventRespawns(eventTemplate);
 			DataManager.SPAWNS_DATA.removeEventSpawnObjects(eventTemplate);
 			log.info("Removed " + count[0] + " event spawns (" + eventTemplate.getName() + ")");
+		}
+
+		synchronized (this) {
+			if (onEventEndTasks != null) {
+				for (Runnable task : onEventEndTasks) {
+					try {
+						task.run();
+					} catch (Exception e) {
+						log.error("Could not execute task on end of event " + getEventTemplate().getName(), e);
+					}
+				}
+				onEventEndTasks = null;
+			}
 		}
 
 		if (inventoryDropTask != null) {
@@ -244,5 +268,25 @@ public class Event {
 		if (!QuestService.checkStartConditions(player, questId, false, 0, true, true, false))
 			return false;
 		return true;
+	}
+
+	private void despawnNonEventSpawns(int npcId, int mapId, int instanceId) {
+		World.getInstance().getWorldMap(mapId).getWorldMapInstance(instanceId).getNpcs(npcId).forEach(npc -> {
+			if (npc.getSpawn() != null && !npc.getSpawn().isEventSpawn() && !npc.getController().hasScheduledTask(TaskId.DECAY)) {
+				if (npc.getController().delete() && !RespawnService.hasRespawnTask(npc))
+					addOnEventEndTask(new RespawnService.RespawnTask(npc));
+			}
+		});
+	}
+
+	public boolean addOnEventEndTask(Runnable task) {
+		if (!started.get())
+			return false;
+		synchronized (this) {
+			if (onEventEndTasks == null)
+				onEventEndTasks = new ArrayList<>();
+			onEventEndTasks.add(task);
+			return true;
+		}
 	}
 }

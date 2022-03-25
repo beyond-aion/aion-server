@@ -27,8 +27,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
- * @author Rolandas
- * @reworked Neon
+ * @author Rolandas, Neon
  */
 public class EventService {
 
@@ -177,6 +176,10 @@ public class EventService {
 	private List<GlobalRule> collectDropRules(Set<Event> events) {
 		return events.stream().filter(e -> e.getEventTemplate().getEventDropRules() != null)
 			.flatMap(e -> e.getEventTemplate().getEventDropRules().stream()).collect(Collectors.toList());
+	}
+
+	public Set<Event> getActiveEvents() {
+		return activeEvents;
 	}
 
 	public boolean isEventActive(String eventName) {

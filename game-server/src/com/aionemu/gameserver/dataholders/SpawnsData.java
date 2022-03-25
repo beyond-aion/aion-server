@@ -75,7 +75,7 @@ public class SpawnsData extends AbstractLockManager {
 				for (Spawn spawn : map.getSpawns()) {
 					if (customs.contains(spawn.getNpcId()))
 						continue;
-					if (spawn.isCustom()) {
+					if (spawn.isCustom() && spawn.getEventTemplate() == null) { // custom event spawns are handled in Event class
 						mapSpawns.remove(spawn.getNpcId());
 						customs.add(spawn.getNpcId());
 					}
