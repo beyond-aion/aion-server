@@ -14,7 +14,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
  */
 public class CM_BROKER_SETTLE_LIST extends AionClientPacket {
 
-	private int brokerObjId;
+	private int brokerObjId, startPageIndex;
 
 	public CM_BROKER_SETTLE_LIST(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -23,14 +23,14 @@ public class CM_BROKER_SETTLE_LIST extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		brokerObjId = readD();
-		readH();
+		startPageIndex = readUH();
 	}
 
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 		if (player.isTargetingNpcWithFunction(brokerObjId, DialogAction.OPEN_VENDOR))
-			BrokerService.getInstance().showSettledItems(player);
+			BrokerService.getInstance().showSettledItems(player, startPageIndex);
 		else
 			AuditLogger.log(player, "tried to open the broker sold item list without targeting a broker");
 	}

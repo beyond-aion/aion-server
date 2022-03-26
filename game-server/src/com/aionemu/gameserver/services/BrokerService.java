@@ -33,6 +33,9 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitList;
+import com.aionemu.gameserver.utils.collections.ListPart;
+import com.aionemu.gameserver.utils.collections.SplitList;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -58,14 +61,7 @@ public class BrokerService {
 		initBrokerService();
 
 		saveManager = new BrokerPeriodicTaskManager(DELAY_BROKER_SAVE);
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				checkExpiredItems();
-			}
-
-		}, DELAY_BROKER_CHECK, DELAY_BROKER_CHECK);
+		ThreadPoolManager.getInstance().scheduleAtFixedRate(this::checkExpiredItems, DELAY_BROKER_CHECK, DELAY_BROKER_CHECK);
 	}
 
 	private void initBrokerService() {
@@ -563,9 +559,16 @@ public class BrokerService {
 		showRegisteredItems(player);
 	}
 
-	public void showSettledItems(Player player) {
+	public void showSettledItems(Player player, int startPageIndex) {
+		int itemsPerPage = 9;
 		List<BrokerItem> settledItems = getSettledItemsForPlayer(player.getRace(), player.getObjectId());
-		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(settledItems.toArray(new BrokerItem[settledItems.size()]), extractEarnedKinahForSoldItems(settledItems)));
+		List<BrokerItem> itemsToSend = settledItems.subList(itemsPerPage * startPageIndex, settledItems.size());
+		SplitList<BrokerItem> itemSplitList = new DynamicServerPacketBodySplitList<>(itemsToSend, true, SM_BROKER_SERVICE.SETTLED_ITEMS_STATIC_BODY_SIZE,
+			SM_BROKER_SERVICE.SETTLED_ITEMS_DYNAMIC_BODY_PART_SIZE_CALCULATOR);
+		ListPart<BrokerItem> pagesToSend = itemSplitList.iterator().next(); // client only supports one packet worth of pages
+		int lastFullPageIndex = pagesToSend.size() <= itemsPerPage ? pagesToSend.size() : pagesToSend.size() - pagesToSend.size() % itemsPerPage;
+		List<BrokerItem> firstFullPages = pagesToSend.subList(0, lastFullPageIndex); // incomplete pages create gaps, so we trim sent items to full pages
+		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(firstFullPages, settledItems.size(), startPageIndex, extractEarnedKinahForSoldItems(settledItems)));
 	}
 
 	private List<BrokerItem> getSettledItemsForPlayer(Race playerRace, int playerId) {
@@ -646,7 +649,7 @@ public class BrokerService {
 
 		player.getInventory().increaseKinah(kinahCollect);
 
-		showSettledItems(player);
+		showSettledItems(player, 0);
 
 		if (!itemsLeft)
 			PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(false, 0));

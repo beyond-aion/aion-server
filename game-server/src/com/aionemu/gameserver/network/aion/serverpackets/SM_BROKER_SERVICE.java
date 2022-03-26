@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
+import java.util.List;
 import java.util.concurrent.TimeUnit;
+import java.util.function.Function;
 
 import com.aionemu.gameserver.model.gameobjects.BrokerItem;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -16,12 +18,16 @@ import com.aionemu.gameserver.services.player.PlayerService;
  */
 public class SM_BROKER_SERVICE extends AionServerPacket {
 
+	public static final int SETTLED_ITEMS_STATIC_BODY_SIZE = 18;
+	public static final Function<BrokerItem, Integer> SETTLED_ITEMS_DYNAMIC_BODY_PART_SIZE_CALCULATOR = 
+			item -> 32 + EnchantInfoBlobEntry.SIZE + (item.getItemCreator() == null ? 2 : item.getItemCreator().length() * 2 + 2);
+
 	private enum BrokerPacketType {
 		SEARCHED_ITEMS(0),
 		REGISTERED_ITEMS(1),
 		BUY_ITEMS(2),
 		REGISTER_ITEM(3),
-		CANCEL_REGISTRED_ITEM(4),
+		CANCEL_REGISTERED_ITEM(4),
 		SHOW_SETTLED_ICON(5),
 		SETTLED_ITEMS(5),
 		REMOVE_SETTLED_ICON(6),
@@ -43,7 +49,8 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 	private int itemsCount;
 	private int startPage;
 	private int message;
-	private long settled_kinah, currentLow, currentHigh;
+	private int totalItemCount, pageIndex;
+	private long settledKinah, currentLow, currentHigh;
 	private int itemId;
 	private byte unk;
 
@@ -64,10 +71,12 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		this.brokerItems = brokerItems;
 	}
 
-	public SM_BROKER_SERVICE(BrokerItem[] brokerItems, long settled_kinah) {
+	public SM_BROKER_SERVICE(List<BrokerItem> brokerItems, int totalItemCount, int pageIndex, long settledKinah) {
 		this.type = BrokerPacketType.SETTLED_ITEMS;
-		this.brokerItems = brokerItems;
-		this.settled_kinah = settled_kinah;
+		this.totalItemCount = totalItemCount;
+		this.pageIndex = pageIndex;
+		this.brokerItems = brokerItems.toArray(BrokerItem[]::new);
+		this.settledKinah = settledKinah;
 	}
 
 	public SM_BROKER_SERVICE(BrokerItem[] brokerItems, int itemsCount, int startPage) {
@@ -77,13 +86,13 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 		this.startPage = startPage;
 	}
 
-	public SM_BROKER_SERVICE(boolean showSettledIcon, long settled_kinah) {
+	public SM_BROKER_SERVICE(boolean showSettledIcon, long settledKinah) {
 		this.type = showSettledIcon ? BrokerPacketType.SHOW_SETTLED_ICON : BrokerPacketType.REMOVE_SETTLED_ICON;
-		this.settled_kinah = settled_kinah;
+		this.settledKinah = settledKinah;
 	}
 
 	public SM_BROKER_SERVICE(byte unk, int itemId) {
-		this.type = BrokerPacketType.CANCEL_REGISTRED_ITEM;
+		this.type = BrokerPacketType.CANCEL_REGISTERED_ITEM;
 		this.itemId = itemId;
 		this.unk = unk;
 	}
@@ -108,8 +117,8 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 			case REGISTER_ITEM:
 				writeRegisterItem();
 				break;
-			case CANCEL_REGISTRED_ITEM:
-				writeCancelRegistredItem();
+			case CANCEL_REGISTERED_ITEM:
+				writeCancelRegisteredItem();
 				break;
 			case SHOW_SETTLED_ICON:
 				writeShowSettledIcon();
@@ -127,7 +136,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 
 	}
 
-	private void writeCancelRegistredItem() {
+	private void writeCancelRegisteredItem() {
 		writeC(type.getId());
 		writeC(unk);
 		writeD(itemId);
@@ -173,7 +182,7 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 
 	private void writeShowSettledIcon() {
 		writeC(type.getId());
-		writeQ(settled_kinah);
+		writeQ(settledKinah);
 		writeD(0x00);
 		writeH(0x00);
 		writeH(0x01);
@@ -186,30 +195,22 @@ public class SM_BROKER_SERVICE extends AionServerPacket {
 
 	private void writeShowSettledItems() {
 		writeC(type.getId());
-		writeQ(settled_kinah);
-		writeH(brokerItems.length);
-		writeD(0x00);
-		writeC(0x00);
-		writeH(brokerItems.length);
+		writeQ(settledKinah);
+		writeD(totalItemCount); // total item count to determine total page count
+		writeH(pageIndex); // zero-based index of the currently selected page
+		writeC(0); // 1 clears the list (no items must be sent)
+		writeH(brokerItems.length); // items sent in this packet (client will request items of unsent pages when needed)
 		for (BrokerItem settledItem : brokerItems) {
 			writeD(settledItem.getItemId());
 			writeQ(settledItem.isSold() ? settledItem.getPrice() * settledItem.getItemCount() : 0);
 			writeQ(settledItem.getItemCount());
 			writeQ(settledItem.getItemCount());
 			writeD((int) (settledItem.getSettleTime().getTime() / 60000));
-
-			Item item = settledItem.getItem();
-			if (item != null)
-				EnchantInfoBlobEntry.writeInfo(getBuf(), item);
-			else // sold items are null because they are not in item_location 126 (broker) anymore
+			if (settledItem.getItem() == null) // sold items are null because they are not in item_location 126 (broker) anymore
 				writeB(new byte[EnchantInfoBlobEntry.SIZE]);
-
+			else
+				EnchantInfoBlobEntry.writeInfo(getBuf(), settledItem.getItem());
 			writeS(settledItem.getItemCreator());
-			/*
-			 * writeH(0); writeC(0); if (item != null) ItemInfoBlob.newBlobEntry(ItemBlobType.POLISH_INFO, null, item).writeThisBlob(getBuf());
-			 * ItemInfoBlob.newBlobEntry(ItemBlobType.WRAP_INFO, null, item).writeThisBlob(getBuf());
-			 */
-
 		}
 	}
 
