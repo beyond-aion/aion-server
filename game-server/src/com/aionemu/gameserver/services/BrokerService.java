@@ -566,7 +566,7 @@ public class BrokerService {
 		SplitList<BrokerItem> itemSplitList = new DynamicServerPacketBodySplitList<>(itemsToSend, true, SM_BROKER_SERVICE.SETTLED_ITEMS_STATIC_BODY_SIZE,
 			SM_BROKER_SERVICE.SETTLED_ITEMS_DYNAMIC_BODY_PART_SIZE_CALCULATOR);
 		ListPart<BrokerItem> pagesToSend = itemSplitList.iterator().next(); // client only supports one packet worth of pages
-		int lastFullPageIndex = pagesToSend.size() <= itemsPerPage ? pagesToSend.size() : pagesToSend.size() - pagesToSend.size() % itemsPerPage;
+		int lastFullPageIndex = pagesToSend.isLast() || pagesToSend.size() <= itemsPerPage ? pagesToSend.size() : pagesToSend.size() - pagesToSend.size() % itemsPerPage;
 		List<BrokerItem> firstFullPages = pagesToSend.subList(0, lastFullPageIndex); // incomplete pages create gaps, so we trim sent items to full pages
 		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(firstFullPages, settledItems.size(), startPageIndex, extractEarnedKinahForSoldItems(settledItems)));
 	}
