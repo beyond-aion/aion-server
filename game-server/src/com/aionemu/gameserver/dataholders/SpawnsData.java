@@ -261,9 +261,9 @@ public class SpawnsData extends AbstractLockManager {
 			else
 				data.templates.add(spawnMap);
 		}
-		Spawn oldGroup = findSpawnTemplate(spawnMap, spawn); // find in new file
+		Spawn oldGroup = findSpawnTemplate(spawnMap, spawn, delete); // find in new file
 		if (oldGroup == null) {
-			oldGroup = loadSpawnsFromTemplateFiles(folder, schema, spawn); // load from old files
+			oldGroup = loadSpawnsFromTemplateFiles(folder, schema, spawn, delete); // load from old files
 			if (oldGroup != null)
 				spawnMap.getSpawns().add(oldGroup);
 		}
@@ -310,7 +310,7 @@ public class SpawnsData extends AbstractLockManager {
 		return true;
 	}
 
-	private Spawn loadSpawnsFromTemplateFiles(String folder, String schema, SpawnTemplate spawn) {
+	private Spawn loadSpawnsFromTemplateFiles(String folder, String schema, SpawnTemplate spawn, boolean exactMatch) {
 		AtomicReference<Spawn> match = new AtomicReference<>();
 		try {
 			Files.walkFileTree(Paths.get(folder), new SimpleFileVisitor<>() {
@@ -319,7 +319,7 @@ public class SpawnsData extends AbstractLockManager {
 				public FileVisitResult visitFile(Path file, BasicFileAttributes attrs) {
 					if (attrs.isRegularFile() && file.toString().toLowerCase().endsWith(".xml")) {
 						for (SpawnMap spawnMap : JAXBUtil.deserialize(file.toFile(), SpawnsData.class, schema).templates) {
-							Spawn s = findSpawnTemplate(spawnMap, spawn);
+							Spawn s = findSpawnTemplate(spawnMap, spawn, exactMatch);
 							if (s != null) {
 								match.set(s);
 								return FileVisitResult.TERMINATE;
@@ -335,9 +335,13 @@ public class SpawnsData extends AbstractLockManager {
 		return match.get();
 	}
 
-	private Spawn findSpawnTemplate(SpawnMap spawnMap, SpawnTemplate spawn) {
-		return spawnMap.getSpawns().stream().filter(s -> s.getSpawnSpotTemplates().stream().anyMatch(spot -> positionMatches(spawn, spot))).findFirst()
-			.orElse(null);
+	private Spawn findSpawnTemplate(SpawnMap spawnMap, SpawnTemplate spawn, boolean exactMatch) {
+		if (spawnMap.getMapId() != spawn.getWorldId())
+			return null;
+		return spawnMap.getSpawns().stream()
+			.filter(
+				s -> s.getNpcId() == spawn.getNpcId() && (!exactMatch || s.getSpawnSpotTemplates().stream().anyMatch(spot -> positionMatches(spawn, spot))))
+			.findFirst().orElse(null);
 	}
 
 	private boolean positionMatches(SpawnTemplate spawn, SpawnSpotTemplate spawnSpotTemplate) {
