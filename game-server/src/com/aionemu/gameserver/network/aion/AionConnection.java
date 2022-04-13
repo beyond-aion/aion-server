@@ -115,6 +115,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		String ip = getIP();
 		log.debug("connection from: " + ip);
 
+		lastClientMessageTime = System.currentTimeMillis();
 		connectionAliveChecker = new ConnectionAliveChecker();
 
 		if (PffConfig.PFF_MODE > 0 && PffConfig.THRESHOLD_MILLIS_BY_PACKET_OPCODE != null)
