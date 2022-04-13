@@ -6,7 +6,6 @@ import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.configs.administration.DeveloperConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -104,8 +103,7 @@ public class SpawnEngine {
 	 */
 	public static SiegeSpawnTemplate newSiegeSpawn(int worldId, int npcId, int siegeId, SiegeRace race, SiegeModType mod, float x, float y, float z,
 		byte heading) {
-		SiegeSpawnTemplate spawnTemplate = new SiegeSpawnTemplate(siegeId, race, mod, new SpawnGroup(worldId, npcId, 0), x, y, z, heading, 0, null, 0, 0);
-		return spawnTemplate;
+		return new SiegeSpawnTemplate(siegeId, race, mod, new SpawnGroup(worldId, npcId, 0), x, y, z, heading, 0, null, 0, 0);
 	}
 
 	static void bringIntoWorld(VisibleObject visibleObject, SpawnTemplate spawn, int instanceIndex) {
@@ -131,10 +129,6 @@ public class SpawnEngine {
 	 * Spawn all NPC's from templates
 	 */
 	public static void spawnAll() {
-		if (!DeveloperConfig.SPAWN_ENABLE) {
-			log.info("Spawns are disabled");
-			return;
-		}
 		DataManager.WORLD_MAPS_DATA.forEachParalllel(worldMapTemplate -> {
 			if (!worldMapTemplate.isInstance())
 				spawnBasedOnTemplate(worldMapTemplate);

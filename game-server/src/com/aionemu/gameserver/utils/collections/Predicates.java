@@ -17,7 +17,7 @@ public class Predicates {
 	private static final Predicate ALWAYS_TRUE = x -> true;
 
 	@SuppressWarnings("unchecked")
-	public static final <T> Predicate<T> alwaysTrue() {
+	public static <T> Predicate<T> alwaysTrue() {
 		return ALWAYS_TRUE;
 	}
 
@@ -26,35 +26,22 @@ public class Predicates {
 		private Players() {
 		}
 
-		public static final Predicate<Player> ONLINE = player -> player.isOnline();
+		public static final Predicate<Player> ONLINE = Player::isOnline;
 
 		public static final Predicate<Player> WITH_LOOT_PET = player -> player.getPet() != null
 			&& player.getPet().getObjectTemplate().containsFunction(PetFunctionType.LOOT);
 
-		public static final Predicate<Player> sameRace(Player p) {
+		public static Predicate<Player> sameRace(Player p) {
 			return player -> p.getRace() == player.getRace();
 		}
-		public static final Predicate<Player> allExcept(Player skipped) {
-			return player -> !player.equals(skipped);
+
+		public static Predicate<Player> allExcept(Player ignored) {
+			return player -> !player.equals(ignored);
 		}
 
-		public static final Predicate<Player> canBeMentoredBy(Player mentor) {
+		public static Predicate<Player> canBeMentoredBy(Player mentor) {
 			return player -> player.getLevel() + 10 <= mentor.getLevel();
 		}
 
-		public static final class SameInstanceFilter implements Predicate<Player> {
-
-			private final Player player;
-
-			public SameInstanceFilter(Player player) {
-				this.player = player;
-			}
-
-			@Override
-			public boolean test(Player member) {
-				return member.getInstanceId() == player.getInstanceId();
-			}
-
-		}
 	}
 }

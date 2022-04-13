@@ -13,7 +13,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.configs.administration.DeveloperConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -34,7 +33,7 @@ public class MapRegion {
 	private static final Logger log = LoggerFactory.getLogger(MapRegion.class);
 
 	/**
-	 * Region id of this map region [NOT WORLD ID!]
+	 * Region ID of this map region (not world ID).
 	 */
 	private final int regionId;
 	/**
@@ -44,9 +43,9 @@ public class MapRegion {
 	/**
 	 * Surrounding regions + self.
 	 */
-	private volatile MapRegion[] neighbours = new MapRegion[0];
+	private MapRegion[] neighbours = new MapRegion[] { this };
 	/**
-	 * Objects on this map region.
+	 * Objects in this map region.
 	 */
 	private final Map<Integer, VisibleObject> objects = new ConcurrentHashMap<>();
 
@@ -61,58 +60,31 @@ public class MapRegion {
 	 */
 	private Map<Integer, TreeSet<ZoneInstance>> zoneMap;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param id
-	 * @param parent
-	 */
 	MapRegion(int id, WorldMapInstance parent, ZoneInstance[] zones) {
 		this.regionId = id;
 		this.parent = parent;
 		this.zoneCount = zones.length;
 		createZoneMap(zones);
-		addNeighbourRegion(this);
 	}
 
-	/**
-	 * Returns region id of this map region. [NOT WORLD ID!]
-	 * 
-	 * @return region id.
-	 */
 	public int getRegionId() {
 		return regionId;
 	}
 
-	/**
-	 * Returns WorldMapInstance which is parent of this instance
-	 * 
-	 * @return parent
-	 */
 	public WorldMapInstance getParent() {
 		return parent;
 	}
 
-	/**
-	 * Returns iterator over AionObjects on this region
-	 * 
-	 * @return objects iterator
-	 */
 	public Map<Integer, VisibleObject> getObjects() {
 		return objects;
 	}
 
-	/**
-	 * @return the neighbours
-	 */
 	public MapRegion[] getNeighbours() {
 		return neighbours;
 	}
 
 	/**
 	 * Add neighbour region to this region neighbours list.
-	 * 
-	 * @param neighbour
 	 */
 	void addNeighbourRegion(MapRegion neighbour) {
 		neighbours = ArrayUtils.add(neighbours, neighbour);
@@ -120,31 +92,16 @@ public class MapRegion {
 
 	/**
 	 * Add AionObject to this region objects list.
-	 * 
-	 * @param object
 	 */
 	void add(VisibleObject object) {
 		if (objects.put(object.getObjectId(), object) == null) {
-			if (object instanceof Player) {
+			if (object instanceof Player)
 				checkActiveness(playerCount.incrementAndGet() > 0);
-			} else if (DeveloperConfig.SPAWN_CHECK) {
-				for (TreeSet<ZoneInstance> zones : zoneMap.values()) {
-					for (ZoneInstance zone : zones) {
-						if (!zone.isInsideCordinate(object.getX(), object.getY(), object.getZ()))
-							continue;
-						if (zone.getZoneTemplate().getZoneType() != ZoneClassName.DUMMY)
-							return;
-					}
-				}
-				log.warn("Outside any zones: id=" + object + " > X:" + object.getX() + ",Y:" + object.getY() + ",Z:" + object.getZ());
-			}
 		}
 	}
 
 	/**
 	 * Remove AionObject from region objects list.
-	 * 
-	 * @param object
 	 */
 	void remove(VisibleObject object) {
 		if (objects.remove(object.getObjectId()) != null)
@@ -153,7 +110,7 @@ public class MapRegion {
 			}
 	}
 
-	final void checkActiveness(boolean active) {
+	private void checkActiveness(boolean active) {
 		if (active && regionActive.compareAndSet(false, true)) {
 			startActivation();
 		} else if (!active && !parent.getParent().isInstanceType() && parent.getMapId() != 400030000) {
@@ -161,41 +118,33 @@ public class MapRegion {
 		}
 	}
 
-	final void startActivation() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				log.debug("Activating in map {} region {}", getParent().getMapId(), regionId);
-				MapRegion.this.activateObjects();
-				for (MapRegion neighbor : getNeighbours()) {
-					neighbor.activate();
-				}
+	private void startActivation() {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			log.debug("Activating in map {} region {}", getParent().getMapId(), regionId);
+			MapRegion.this.activateObjects();
+			for (MapRegion neighbor : getNeighbours()) {
+				neighbor.activate();
 			}
 		}, 1000);
 	}
 
-	final void startDeactivation() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				log.debug("Deactivating inactive regions around region {} on map {} [{}]", regionId, getParent().getMapId(), getParent().getInstanceId());
-				List<Creature> walkers = new ArrayList<>();
-				for (MapRegion neighbor : getNeighbours()) {
-					if (!neighbor.isNeighboursActive() && neighbor.deactivate()) {
-						for (VisibleObject o : neighbor.getObjects().values()) {
-							if (o instanceof Creature && ((Creature) o).getAi().getState() == AIState.WALKING)
-								walkers.add((Creature) o);
-						}
+	private void startDeactivation() {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			log.debug("Deactivating inactive regions around region {} on map {} [{}]", regionId, getParent().getMapId(), getParent().getInstanceId());
+			List<Creature> walkers = new ArrayList<>();
+			for (MapRegion neighbor : getNeighbours()) {
+				if (!neighbor.isNeighboursActive() && neighbor.deactivate()) {
+					for (VisibleObject o : neighbor.getObjects().values()) {
+						if (o instanceof Creature creature && creature.getAi().getState() == AIState.WALKING)
+							walkers.add(creature);
 					}
 				}
-				walkers.removeIf(w -> w.getPosition().isMapRegionActive());
-				if (walkers.size() > 2) { // small threshold to accommodate the walkers near the borders of deactivated regions
-					String npcs = walkers.stream().map(o -> o.toString()).collect(Collectors.joining("\n"));
-					log.warn("There are {} objects walking on inactive map {} [{}]:\n{}", walkers.size(), getParent().getMapId(), getParent().getInstanceId(),
-						npcs);
-				}
+			}
+			walkers.removeIf(w -> w.getPosition().isMapRegionActive());
+			if (walkers.size() > 2) { // small threshold to accommodate the walkers near the borders of deactivated regions
+				String npcs = walkers.stream().map(VisibleObject::toString).collect(Collectors.joining("\n"));
+				log.warn("There are {} objects walking on inactive map {} [{}]:\n{}", walkers.size(), getParent().getMapId(), getParent().getInstanceId(),
+					npcs);
 			}
 		}, 60000);
 	}
@@ -211,10 +160,9 @@ public class MapRegion {
 	/**
 	 * Send ACTIVATE event to all objects with AI
 	 */
-	private final void activateObjects() {
+	private void activateObjects() {
 		for (VisibleObject visObject : objects.values()) {
-			if (visObject instanceof Creature) {
-				Creature creature = (Creature) visObject;
+			if (visObject instanceof Creature creature) {
 				creature.getAi().onGeneralEvent(AIEventType.ACTIVATE);
 			}
 		}
@@ -233,9 +181,9 @@ public class MapRegion {
 	 */
 	private void deactivateObjects() {
 		for (VisibleObject visObject : objects.values()) {
-			if (visObject instanceof Creature && !(SiegeConfig.BALAUR_AUTO_ASSAULT && visObject instanceof SiegeNpc) && !((Creature) visObject).isFlag()
-				&& !((Creature) visObject).isRaidMonster()) {
-				((Creature) visObject).getAi().onGeneralEvent(AIEventType.DEACTIVATE);
+			if (visObject instanceof Creature creature && !(SiegeConfig.BALAUR_AUTO_ASSAULT && visObject instanceof SiegeNpc) && !creature.isFlag()
+				&& !creature.isRaidMonster()) {
+				creature.getAi().onGeneralEvent(AIEventType.DEACTIVATE);
 			}
 		}
 	}
@@ -244,7 +192,7 @@ public class MapRegion {
 		return regionActive.get();
 	}
 
-	boolean isNeighboursActive() {
+	private boolean isNeighboursActive() {
 		for (MapRegion r : neighbours) {
 			if (r.regionActive.get() && r.playerCount.get() > 0)
 				return true;
@@ -262,8 +210,7 @@ public class MapRegion {
 					zone.onLeave(creature);
 					continue;
 				}
-				boolean result = zone.revalidate(creature);
-				if (!result) {
+				if (!zone.revalidate(creature)) {
 					zone.onLeave(creature);
 					continue;
 				}
@@ -326,10 +273,6 @@ public class MapRegion {
 
 	/**
 	 * Item use zones always have the same names instances, while we have unique names; Thus, a special check for item use.
-	 * 
-	 * @param zoneName
-	 * @param creature
-	 * @return
 	 */
 	public boolean isInsideItemUseZone(ZoneName zoneName, Creature creature) {
 		boolean checkFortresses = "_ABYSS_CASTLE_AREA_".equals(zoneName.name()); // some items have this special zonename in uselimits
@@ -357,12 +300,7 @@ public class MapRegion {
 			if (zone.getZoneTemplate().getPriority() != 0) {
 				category = zone.getZoneTemplate().getZoneType().ordinal();
 			}
-			TreeSet<ZoneInstance> zoneCategory = zoneMap.get(category);
-			if (zoneCategory == null) {
-				zoneCategory = new TreeSet<>();
-				zoneMap.put(category, zoneCategory);
-			}
-			zoneCategory.add(zone);
+			zoneMap.computeIfAbsent(category, k -> new TreeSet<>()).add(zone);
 		}
 	}
 
