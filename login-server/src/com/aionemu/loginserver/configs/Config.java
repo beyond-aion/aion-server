@@ -2,6 +2,7 @@ package com.aionemu.loginserver.configs;
 
 import java.net.InetSocketAddress;
 import java.util.Properties;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,10 +80,10 @@ public class Config {
 	public static int FAST_RECONNECTION_TIME;
 
 	/**
-	 * IP's excluded from flood protection
+	 * IPs excluded from flood protection
 	 */
 	@Property(key = "loginserver.server.floodprotector.excluded.ips", defaultValue = "")
-	public static String EXCLUDED_IP;
+	public static Set<String> FLOODPROTECTOR_EXCLUDED_IPS;
 
 	/**
 	 * Enable\disable brute-force protector from 1 IP on account login

@@ -1,14 +1,12 @@
 package com.aionemu.loginserver.utils;
 
-import java.sql.Timestamp;
-import java.util.HashMap;
 import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.loginserver.configs.Config;
-import com.aionemu.loginserver.controller.BannedIpController;
 import com.aionemu.loginserver.network.aion.clientpackets.CM_LOGIN;
 
 /**
@@ -16,66 +14,30 @@ import com.aionemu.loginserver.network.aion.clientpackets.CM_LOGIN;
  */
 public class FloodProtector {
 
-	/**
-	 * Logger for this class.
-	 */
 	private static final Logger log = LoggerFactory.getLogger(CM_LOGIN.class);
+	private static final Map<String, FloodInfo> flooders = new ConcurrentHashMap<>();
 
-	private Map<String, Long> flood = new HashMap<>();
-	private Map<String, Long> ban = new HashMap<>();
-
-	public static final FloodProtector getInstance() {
-		return SingletonHolder.instance;
-	}
-
-	@Deprecated
-	public boolean addIp_nn(String ip) {
-		Long time = flood.get(ip);
-		if (time == null || System.currentTimeMillis() - time > Config.FAST_RECONNECTION_TIME) {
-			flood.put(ip, System.currentTimeMillis());
+	public static boolean tooFast(String ip) {
+		if (Config.FLOODPROTECTOR_EXCLUDED_IPS.contains(ip))
 			return false;
-		}
-		Timestamp newTime = new Timestamp(System.currentTimeMillis() + Config.WRONG_LOGIN_BAN_TIME * 60000);
-		if (!BannedIpController.isBanned(ip)) {
-			log.info("[AUDIT]FloodProtector:" + ip + " IP banned for " + Config.WRONG_LOGIN_BAN_TIME + " min");
-			return BannedIpController.banIp(ip, newTime);
-		}
-		// in this case this ip is already banned
-
-		return true;
-	}
-
-	public boolean tooFast(String ip) {
-		String[] exclIps = Config.EXCLUDED_IP.split(",");
-		for (String exclIp : exclIps) {
-			if (ip.equals(exclIp))
-				return false;
-		}
-		Long banned = ban.get(ip);
-		if (banned != null) {
-			if (System.currentTimeMillis() < banned)
-				return true;
-			else {
-				ban.remove(ip);
-				return false;
+		return flooders.compute(ip, (k, floodInfo) -> {
+			if (floodInfo == null) {
+				floodInfo = new FloodInfo();
+			} else if (!floodInfo.isBanned() && floodInfo.lastAllowedRequestMillis + Config.FAST_RECONNECTION_TIME * 1000 > System.currentTimeMillis()) {
+				log.info("Blocked " + ip + " for " + Config.WRONG_LOGIN_BAN_TIME + " minutes (reconnected too fast)");
+				floodInfo.banExpirationMillis = System.currentTimeMillis() + Config.WRONG_LOGIN_BAN_TIME * 60000;
 			}
-		}
-		Long time = flood.get(ip);
-		if (time == null) {
-			flood.put(ip, System.currentTimeMillis() + Config.FAST_RECONNECTION_TIME * 1000);
-			return false;
-		} else {
-			if (time > System.currentTimeMillis()) {
-				log.info("[AUDIT]FloodProtector:" + ip + " IP too fast connection attemp. blocked for " + Config.WRONG_LOGIN_BAN_TIME + " min");
-				ban.put(ip, System.currentTimeMillis() + Config.WRONG_LOGIN_BAN_TIME * 60000);
-				return true;
-			} else
-				return false;
-		}
+			if (!floodInfo.isBanned())
+				floodInfo.lastAllowedRequestMillis = System.currentTimeMillis();
+			return floodInfo;
+		}).isBanned();
 	}
 
-	private static class SingletonHolder {
+	private static class FloodInfo {
+		private long banExpirationMillis, lastAllowedRequestMillis;
 
-		protected static final FloodProtector instance = new FloodProtector();
+		private boolean isBanned() {
+			return banExpirationMillis > System.currentTimeMillis();
+		}
 	}
 }
