@@ -2,32 +2,25 @@ package admincommands;
 
 import java.lang.reflect.Array;
 import java.lang.reflect.Field;
+import java.lang.reflect.Modifier;
 import java.util.*;
+import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
 import org.apache.commons.lang3.StringUtils;
 
 import com.aionemu.commons.configuration.ConfigurableProcessor;
 import com.aionemu.commons.configuration.Properties;
-import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.configuration.TransformationException;
 import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.utils.collections.Predicates;
 
 /**
  * @author ATracer, Rolandas, Neon
  */
 public class Configure extends AdminCommand {
-
-	private static final Map<String, Class<?>> configs = new LinkedHashMap<>();
-
-	static {
-		Config.getClasses().stream()
-				.filter(cls -> !getPropertyFields(cls).isEmpty())
-				.sorted(Comparator.comparing(Class::getSimpleName, String.CASE_INSENSITIVE_ORDER))
-				.forEach(cls -> configs.put(cls.getSimpleName().toLowerCase().replace("config", ""), cls));
-	}
 
 	public Configure() {
 		super("configure", "Shows/changes config settings.");
@@ -49,6 +42,9 @@ public class Configure extends AdminCommand {
 			return;
 		}
 
+		Map<String, Class<?>> configs = Config.getClasses().stream()
+					.sorted(Comparator.comparing(Class::getSimpleName, String.CASE_INSENSITIVE_ORDER))
+					.collect(Collectors.toMap(cls -> cls.getSimpleName().toLowerCase().replace("config", ""), cls -> cls, (u, v) -> u, LinkedHashMap::new));
 		if ("list".equalsIgnoreCase(params[0])) {
 			StringBuilder sb = new StringBuilder("List of available configuration names:");
 			for (String configname : configs.keySet())
@@ -62,11 +58,12 @@ public class Configure extends AdminCommand {
 			}
 			if (params.length < 2) {
 				StringBuilder sb = new StringBuilder("List of available properties for ").append(cls.getSimpleName()).append(":");
-				for (Field field : getPropertyFields(cls)) {
+				for (Field field : findStaticFields(cls, Predicates.alwaysTrue())) {
 					try {
 						String value = getFieldValue(field);
 						sb.append("\n\t").append(field.getName()).append("\t=\t").append(value);
-					} catch (IllegalArgumentException | IllegalAccessException e) { // skip this property
+					} catch (IllegalArgumentException | IllegalAccessException e) {
+						sb.append("\n\t").append(field.getName()).append("\t=\t").append("Error reading value: ").append(e.getMessage());
 					}
 				}
 				sendInfo(admin, sb.toString());
@@ -74,11 +71,12 @@ public class Configure extends AdminCommand {
 			}
 			String fieldName = params[1].toUpperCase();
 			try {
-				Field field = cls.getDeclaredField(fieldName);
-				if (!field.isAnnotationPresent(Property.class) && !field.isAnnotationPresent(Properties.class)) {
-					sendInfo(admin, cls.getSimpleName() + "." + fieldName + " is not configurable.");
+				List<Field> fields = findStaticFields(cls, field -> field.getName().equals(fieldName));
+				if (fields.isEmpty()) {
+					sendInfo(admin, cls.getSimpleName() + "." + fieldName + " does not exist.");
 					return;
 				}
+				Field field = fields.get(0);
 				String value = getFieldValue(field);
 				if (params.length > 2) {
 					String newValue = StringUtils.join(params, ' ', 2, params.length);
@@ -96,8 +94,6 @@ public class Configure extends AdminCommand {
 				} else {
 					sendInfo(admin, "The current value of " + cls.getSimpleName() + "." + fieldName + " is " + value);
 				}
-			} catch (NoSuchFieldException e) {
-				sendInfo(admin, "The property " + cls.getSimpleName() + "." + fieldName + " does not exist.");
 			} catch (Exception e) {
 				sendInfo(admin, "Could not access " + cls.getSimpleName() + "." + fieldName);
 			}
@@ -137,7 +133,7 @@ public class Configure extends AdminCommand {
 		return String.valueOf(value);
 	}
 
-	private static List<Field> getPropertyFields(Class<?> cls) {
-		return Arrays.stream(cls.getDeclaredFields()).filter(f -> f.isAnnotationPresent(Property.class) || f.isAnnotationPresent(Properties.class)).collect(Collectors.toList());
+	private static List<Field> findStaticFields(Class<?> cls, Predicate<Field> filter) {
+		return Arrays.stream(cls.getDeclaredFields()).filter(filter.and(field -> Modifier.isStatic(field.getModifiers()))).toList();
 	}
 }
