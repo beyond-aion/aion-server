@@ -9,7 +9,7 @@ public class NetworkConfig {
 	/**
 	 * Address where Aion clients will attempt to connect to (host/domain name or IP)
 	 */
-	@Property(key = "gameserver.network.client.connect_address", defaultValue = "127.0.0.1:7777")
+	@Property(key = "gameserver.network.client.connect_address", defaultValue = "*:7777")
 	public static InetSocketAddress CLIENT_CONNECT_ADDRESS;
 
 	/**

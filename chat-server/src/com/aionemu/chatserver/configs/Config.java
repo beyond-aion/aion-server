@@ -1,5 +1,7 @@
 package com.aionemu.chatserver.configs;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -13,6 +15,7 @@ import com.aionemu.chatserver.configs.network.NetworkConfig;
 import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.configuration.ConfigurableProcessor;
+import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.commons.utils.PropertiesUtils;
 
 /**
@@ -34,6 +37,14 @@ public class Config {
 		// Network
 		ConfigurableProcessor.process(DatabaseConfig.class, properties);
 		ConfigurableProcessor.process(NetworkConfig.class, properties);
+
+		if (NetworkConfig.CLIENT_CONNECT_ADDRESS.getAddress().isAnyLocalAddress()) {
+			InetAddress localIPv4 = NetworkUtils.findLocalIPv4();
+			if (localIPv4 == null)
+				throw new Error("No connect IP for Aion client configured and local IP discovery failed. Please configure chatserver.network.client.connect_address");
+			NetworkConfig.CLIENT_CONNECT_ADDRESS = new InetSocketAddress(localIPv4, NetworkConfig.CLIENT_CONNECT_ADDRESS.getPort());
+			LoggerFactory.getLogger(Config.class).info("No connect IP for Aion client configured, using " + localIPv4.getHostAddress());
+		}
 	}
 
 	private static Properties loadProperties() {

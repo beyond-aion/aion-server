@@ -9,7 +9,7 @@ public class NetworkConfig {
 	/**
 	 * Address where Aion clients will attempt to connect to (host/domain name or IP)
 	 */
-	@Property(key = "chatserver.network.client.connect_address", defaultValue = "127.0.0.1:10241")
+	@Property(key = "chatserver.network.client.connect_address", defaultValue = "*:10241")
 	public static InetSocketAddress CLIENT_CONNECT_ADDRESS;
 
 	/**

@@ -1,6 +1,5 @@
 package com.aionemu.commons.configuration.transformers;
 
-import java.net.InetAddress;
 import java.net.InetSocketAddress;
 
 import com.aionemu.commons.configuration.TransformationTypeInfo;
@@ -23,14 +22,11 @@ public class InetSocketAddressTransformer extends PropertyTransformer<InetSocket
 
 	@Override
 	protected InetSocketAddress parseObject(String value, TransformationTypeInfo typeInfo) throws Exception {
-		String[] parts = value.split(":", 2);
-		if (parts.length != 2)
-			throw new IllegalArgumentException("InetSocketAdress must be specified in the following format: \"adress:port\" or \"*:port\"");
-		int port = Integer.parseInt(parts[1]);
-		if ("*".equals(parts[0])) {
-			return new InetSocketAddress(port);
-		}
-		InetAddress address = InetAddress.getByName(parts[0]);
-		return new InetSocketAddress(address, port);
+		int delimiterIndex = value.lastIndexOf(':');
+		if (delimiterIndex < 1 || value.length() < 3)
+			throw new IllegalArgumentException("InetSocketAddress must be specified in the following format: \"address:port\" or \"*:port\"");
+		String address = value.substring(0, delimiterIndex);
+		int port = Integer.parseInt(value.substring(delimiterIndex + 1));
+		return "*".equals(address) ? new InetSocketAddress(port) : new InetSocketAddress(address, port);
 	}
 }

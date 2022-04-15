@@ -1,5 +1,7 @@
 package com.aionemu.gameserver.configs;
 
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
@@ -10,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.configuration.ConfigurableProcessor;
+import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.commons.utils.PropertiesUtils;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -38,6 +41,13 @@ public class Config {
 		for (Class<?> config : CONFIGS) {
 			if (allowedConfigs.length == 0 || matches(allowedConfigs, config))
 				ConfigurableProcessor.process(config, properties);
+		}
+		if (NetworkConfig.CLIENT_CONNECT_ADDRESS.getAddress().isAnyLocalAddress()) {
+			InetAddress localIPv4 = NetworkUtils.findLocalIPv4();
+			if (localIPv4 == null)
+				throw new GameServerError("No IP for Aion client advertisement configured and local IP discovery failed. Please configure gameserver.network.client.connect_address");
+			NetworkConfig.CLIENT_CONNECT_ADDRESS = new InetSocketAddress(localIPv4, NetworkConfig.CLIENT_CONNECT_ADDRESS.getPort());
+			LoggerFactory.getLogger(Config.class).info("No IP for Aion client advertisement configured, using " + localIPv4.getHostAddress());
 		}
 	}
 

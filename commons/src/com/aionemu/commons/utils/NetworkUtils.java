@@ -1,11 +1,30 @@
 package com.aionemu.commons.utils;
 
+import java.net.Inet4Address;
+import java.net.InetAddress;
+import java.net.NetworkInterface;
+import java.net.SocketException;
 import java.nio.ByteBuffer;
 
 /**
  * @author KID, -Nemesiss-
  */
 public class NetworkUtils {
+
+	/**
+	 * @return The first matching non-loopback IPv4 address on this machine (meaning network reachable, so ignoring IPs like 127.0.0.1)
+	 */
+	public static InetAddress findLocalIPv4() {
+		try {
+			return NetworkInterface.networkInterfaces()
+														 .flatMap(NetworkInterface::inetAddresses)
+														 .filter(inetAddress -> inetAddress instanceof Inet4Address && !inetAddress.isLoopbackAddress() && !inetAddress.isMulticastAddress())
+														 .findFirst()
+														 .orElse(null);
+		} catch (SocketException ignored) {
+			return null;
+		}
+	}
 
 	/**
 	 * check if IP address match pattern
