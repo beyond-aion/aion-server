@@ -2,7 +2,6 @@ package com.aionemu.loginserver.configs;
 
 import java.net.InetSocketAddress;
 import java.util.Properties;
-import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -66,24 +65,6 @@ public class Config {
 	 */
 	@Property(key = "loginserver.accounts.externalauth.url", defaultValue = "")
 	public static String AUTH_EXTERNAL_JSON_URL;
-
-	/**
-	 * Enable\disable flood protector from 1 IP on account login
-	 */
-	@Property(key = "loginserver.server.floodprotector", defaultValue = "true")
-	public static boolean ENABLE_FLOOD_PROTECTION;
-
-	/**
-	 * Legal reconnection time. if faster - ban for loginserver.network.client.bantimeforbruteforcing min
-	 */
-	@Property(key = "loginserver.server.floodprotector.fastreconnection.time", defaultValue = "10")
-	public static int FAST_RECONNECTION_TIME;
-
-	/**
-	 * IPs excluded from flood protection
-	 */
-	@Property(key = "loginserver.server.floodprotector.excluded.ips", defaultValue = "")
-	public static Set<String> FLOODPROTECTOR_EXCLUDED_IPS;
 
 	/**
 	 * Enable\disable brute-force protector from 1 IP on account login

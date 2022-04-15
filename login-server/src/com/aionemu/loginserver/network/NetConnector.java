@@ -6,8 +6,8 @@ import java.util.concurrent.Executors;
 import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
 import com.aionemu.loginserver.configs.Config;
-import com.aionemu.loginserver.network.aion.AionConnectionFactoryImpl;
-import com.aionemu.loginserver.network.gameserver.GsConnectionFactoryImpl;
+import com.aionemu.loginserver.network.aion.LoginConnection;
+import com.aionemu.loginserver.network.gameserver.GsConnection;
 
 /**
  * @author KID, Neon
@@ -21,8 +21,8 @@ public class NetConnector {
 	private final static ExecutorService dcExecutor = Executors.newCachedThreadPool();
 
 	static {
-		ServerCfg aion = new ServerCfg(Config.CLIENT_SOCKET_ADDRESS, "Aion Connections", new AionConnectionFactoryImpl());
-		ServerCfg gs = new ServerCfg(Config.GAMESERVER_SOCKET_ADDRESS, "GS Connections", new GsConnectionFactoryImpl());
+		ServerCfg aion = new ServerCfg(Config.CLIENT_SOCKET_ADDRESS, "Aion Connections", LoginConnection::new);
+		ServerCfg gs = new ServerCfg(Config.GAMESERVER_SOCKET_ADDRESS, "GS Connections", GsConnection::new);
 		instance = new NioServer(Config.NIO_READ_WRITE_THREADS, gs, aion);
 	}
 
