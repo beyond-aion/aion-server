@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -10,6 +9,7 @@ import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
 
 /**
@@ -17,11 +17,6 @@ import com.aionemu.gameserver.services.LegionService;
  */
 public class CM_LEGION extends AionClientPacket {
 
-	private static final Logger log = LoggerFactory.getLogger(CM_LEGION.class);
-
-	/**
-	 * exOpcode and the rest
-	 */
 	private int exOpcode;
 	private short deputyPermission;
 	private short centurionPermission;
@@ -35,11 +30,6 @@ public class CM_LEGION extends AionClientPacket {
 	private String announcement;
 	private String newSelfIntro;
 
-	/**
-	 * Constructs new instance of CM_LEGION packet
-	 * 
-	 * @param opcode
-	 */
 	public CM_LEGION(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}
@@ -49,64 +39,61 @@ public class CM_LEGION extends AionClientPacket {
 		exOpcode = readUC();
 
 		switch (exOpcode) {
-		/** Create a legion **/
+			// Create a legion
 			case 0x00:
 				readD(); // 00 78 19 00 40
 				legionName = readS();
 				break;
-			/** Invite to legion **/
+			// Invite to legion
 			case 0x01:
 				readD(); // empty
 				charName = readS();
 				break;
-			/** Leave legion **/
+			// Leave legion
 			case 0x02:
 				readD(); // empty
 				readH(); // empty
 				break;
-			/** Kick member from legion **/
+			// Kick member from legion
 			case 0x04:
 				readD(); // empty
 				charName = readS();
 				break;
-			/** Appoint a new Brigade General **/
+			// Appoint a new Brigade General
 			case 0x05:
 				readD();
 				charName = readS();
 				break;
-			/** Appoint Centurion **/
+			// Change rank
 			case 0x06:
 				rank = readD();
 				charName = readS();
 				break;
-			/** Demote to Legionary **/
+			// Show current announcement (via /gnotice)
 			case 0x07:
-				readD(); // char id? 00 78 19 00 40
-				charName = readS();
-				break;
-			/** Refresh legion info **/
+			// Refresh legion info
 			case 0x08:
-				readD();
-				readH();
+				readD(); // 0
+				readH(); // empty
 				break;
-			/** Edit announcements **/
+			// Edit current announcement (from legion window or via /gnotice New text)
 			case 0x09:
 				readD(); // empty or char id?
 				announcement = readS();
 				break;
-			/** Change self introduction **/
+			// Change self introduction
 			case 0x0A:
 				readD(); // empty char id?
 				newSelfIntro = readS();
 				break;
-			/** Edit permissions **/
+			// Edit permissions
 			case 0x0D:
 				deputyPermission = readH();
 				centurionPermission = readH();
 				legionarPermission = readH();
 				volunteerPermission = readH();
 				break;
-			/** Level legion up **/
+			// Level legion up
 			case 0x0E:
 				readD(); // empty
 				readH(); // empty
@@ -119,7 +106,7 @@ public class CM_LEGION extends AionClientPacket {
 				legionDominionId = readD();
 				break;
 			default:
-				log.info("Unknown Legion exOpcode? 0x" + Integer.toHexString(exOpcode).toUpperCase());
+				LoggerFactory.getLogger(CM_LEGION.class).warn("Unknown Legion exOpcode 0x" + Integer.toHexString(exOpcode).toUpperCase());
 				break;
 		}
 	}
@@ -136,6 +123,12 @@ public class CM_LEGION extends AionClientPacket {
 				switch (exOpcode) {
 					case 0x02: // leave legion
 						LegionService.getInstance().leaveLegion(activePlayer, false);
+						break;
+					case 0x07: // show legion notice (from /gnotice chat command)
+						if (legion.getCurrentAnnouncement() == null)
+							sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_NOSET_GUILD_NOTICE());
+						else
+							sendPacket(SM_SYSTEM_MESSAGE.STR_GUILD_NOTICE(legion.getCurrentAnnouncement().getValue(), (int) (legion.getCurrentAnnouncement().getKey().getTime() / 1000)));
 						break;
 					case 0x08: // refresh legion info
 						sendPacket(new SM_LEGION_INFO(legion));
@@ -159,8 +152,7 @@ public class CM_LEGION extends AionClientPacket {
 			}
 		} else {
 			switch (exOpcode) {
-			/** Create a legion **/
-				case 0x00:
+				case 0x00: // create a legion
 					LegionService.getInstance().createLegion(activePlayer, legionName);
 					break;
 			}
