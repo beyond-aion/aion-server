@@ -95,7 +95,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_EXCHANGE_ADD_KINAH.class, 0x4D);
 		addPacketOpcode(SM_EXCHANGE_CONFIRMATION.class, 0x4E);
 		addPacketOpcode(SM_EMOTION_LIST.class, 0x4F);
-		// 0x50 SM_UNK_REQUEST client answers with CM_UNK_RESPONSE (0x181) with 16 (static) bytes which change every 5s, maybe some kind of consistency check
+		// 80 SM_UNK_REQUEST client answers with CM_UNK_RESPONSE (190) with 16 (static) bytes which change every 5s, maybe some kind of consistency check
 		addPacketOpcode(SM_TARGET_UPDATE.class, 0x51);
 		addPacketOpcode(SM_HOUSE_EDIT.class, 0x52);
 		addPacketOpcode(SM_PLASTIC_SURGERY.class, 0x53);
@@ -202,7 +202,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_ITEM_USAGE_ANIMATION.class, 0xB7);
 		addPacketOpcode(SM_CUSTOM_SETTINGS.class, 0xB8);
 		addPacketOpcode(SM_DUEL.class, 0xB9);
-		// 0xBA SM_UNK_REQUEST2 client answers with CM_UNK_RESPONSE2 (0x16F). first D in CM and SM is identical (//fsc 0xBA d 1)
+		// 186 SM_UNK_REQUEST2 client answers with CM_UNK_RESPONSE2 (204). first D in CM and SM is identical (//fsc 0xBA d 1)
 		addPacketOpcode(SM_PET_EMOTE.class, 0xBB);
 		// 188 destroy your ui & get kicked!
 		// 189

@@ -6,6 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_VERSION_CHECK;
 
 /**
  * Crypt will encrypt server packet and decrypt client packet.
@@ -81,12 +82,16 @@ public class Crypt {
 	}
 
 	/**
-	 * Server packet opcodec obfuscation.
-	 * 
-	 * @param op
-	 * @return obfuscated opcodec
+	 * @return Obfuscated server packet opcode
 	 */
-	public static int encodeOpcodec(int op) {
-		return (op + 0xCF) ^ 0xDF;
+	public static int encodeServerPacketOpcode(int opcode) {
+		return (opcode + SM_VERSION_CHECK.INTERNAL_VERSION) ^ 0xDF;
+	}
+
+	/**
+	 * @return Deobfuscated client packet opcode
+	 */
+	public static int decodeClientPacketOpcode(int opcode) {
+		return ((opcode ^ 0xEF) - 0xC ^ 0xEF) - SM_VERSION_CHECK.INTERNAL_VERSION;
 	}
 }

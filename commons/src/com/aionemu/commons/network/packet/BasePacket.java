@@ -57,15 +57,15 @@ public abstract class BasePacket {
 	}
 
 	protected int getOpCodeZeroPadding() {
-		return 2;
+		return 3;
 	}
 
 	public String toFormattedPacketNameString() {
 		return toFormattedPacketNameString(getOpCodeZeroPadding(), getOpCode(), getPacketName());
 	}
 
-	public static String toFormattedPacketNameString(int zeroPadding, int opCode, String packetName) {
-		return String.format("[0x%0" + zeroPadding + "X] %s", opCode, packetName);
+	public static String toFormattedPacketNameString(int zeroPadding, int opcode, String packetName) {
+		return String.format("[%0" + zeroPadding + "d] %s", opcode, packetName);
 	}
 
 	/**

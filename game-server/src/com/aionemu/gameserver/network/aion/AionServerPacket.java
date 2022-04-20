@@ -41,7 +41,7 @@ public abstract class AionServerPacket extends BaseServerPacket {
 	 */
 	private void writeOP() {
 		// obfuscate packet id
-		int op = Crypt.encodeOpcodec(getOpCode());
+		int op = Crypt.encodeServerPacketOpcode(getOpCode());
 		buf.putShort((short) (op));
 		// put static server packet code
 		buf.put(Crypt.staticServerPacketCode);
