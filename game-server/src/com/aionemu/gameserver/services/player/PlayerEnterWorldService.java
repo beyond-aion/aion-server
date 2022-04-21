@@ -213,7 +213,7 @@ public final class PlayerEnterWorldService {
 		Account account = player.getAccount();
 		PlayerCommonData pcd = player.getCommonData();
 
-		client.resetPingFailCount(); // each character login triggers CM_PING_INGAME
+		client.resetPingFailCount();
 		activatePassiveSkillEffects(player); // before setClientConnection to avoid packet spam
 		player.setClientConnection(client);
 		if (!client.setActivePlayer(player))

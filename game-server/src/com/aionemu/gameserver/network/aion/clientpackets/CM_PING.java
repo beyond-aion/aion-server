@@ -2,13 +2,14 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
+import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PONG;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author -Nemesiss-
- * @modified Undertrey, Neon
+ * @author -Nemesiss-, Undertrey, Neon
  */
 public class CM_PING extends AionClientPacket {
 
@@ -25,7 +26,27 @@ public class CM_PING extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		getConnection().setLastPingTime(System.currentTimeMillis(), true);
+		long lastPingMillis = getConnection().getLastPingTime();
+		long nowMillis = System.currentTimeMillis();
+		getConnection().setLastPingTime(nowMillis);
 		sendPacket(new SM_PONG());
+
+		if (lastPingMillis > 0) {
+			long pingInterval = nowMillis - lastPingMillis;
+			if (pingInterval + 2000 < CLIENT_PING_INTERVAL) { // client timer cheat
+				if (getConnection().increaseAndGetPingFailCount() == 3) {
+					if (SecurityConfig.PINGCHECK_KICK) {
+						AuditLogger.log(getConnection().getActivePlayer(),
+								"possibly using time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + "), kicking player");
+						getConnection().close();
+					} else {
+						AuditLogger.log(getConnection().getActivePlayer(), "possibly using time/speed hack (client ping interval: " + pingInterval + "/" + CLIENT_PING_INTERVAL + ")");
+						getConnection().resetPingFailCount();
+					}
+				}
+			} else {
+				getConnection().resetPingFailCount();
+			}
+		}
 	}
 }

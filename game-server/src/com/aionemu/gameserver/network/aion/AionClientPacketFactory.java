@@ -236,7 +236,7 @@ public class AionClientPacketFactory {
 			packets[208] = new PacketInfo<>(CM_COMPOSITE_STONES.class, State.IN_GAME); // [C_COMPOUND_ENCHANT_ITEM (FUN_1406457b0)]
 			// packets[209] = new PacketInfo<>(CM_TIME_CHECK_QUIT.class, State.IN_GAME); // [C_ASK_GLOBAL_PLAYTIME_FATIGUE_INFO (AskGlobalPlaytimeFatigueInfoPacket)]
 			packets[210] = new PacketInfo<>(CM_CHARACTER_PASSKEY.class, State.AUTHED); // [C_2ND_PASSWORD (SecondPasswordPacket)]
-			// packets[211] = new PacketInfo<>(CM_SECURITY_TOKEN_REQUEST.class, State.IN_GAME);
+			// packets[211] = 
 			// packets[212] = 
 			packets[213] = new PacketInfo<>(CM_CHECK_MAIL_UNK.class, State.IN_GAME); // [C_SA_GOODSLIST (ShopAgent2GoodsList)] TODO
 			// packets[214] = [C_SA_CONFIRMGOODS (ShopAgent2ConfirmGoods)]
@@ -254,7 +254,7 @@ public class AionClientPacketFactory {
 			packets[226] = new PacketInfo<>(CM_HOUSE_OPEN_DOOR.class, State.IN_GAME); // [C_USE_HOUSING_DOOR (UseHousingDoorPacket)]
 			// packets[227] = new PacketInfo<>(CM_IN_GAME_SHOP_INFO.class, State.IN_GAME); // [C_REQUEST_WEBNOTIFY_CLEAR (WebNotifyClearPacket)]
 			// packets[228] = [C_HOUSING_REFRESH_TOKEN_REQ (HousingRefreshTokenReqPacket)]
-			packets[229] = new PacketInfo<>(CM_PING_INGAME.class, State.IN_GAME); // [C_GF_WEBSHOP_TOKEN_REQ (GFWebshopTokenReqPacket)]
+			packets[229] = new PacketInfo<>(CM_GF_WEBSHOP_TOKEN_REQUEST.class, State.IN_GAME); // [C_GF_WEBSHOP_TOKEN_REQ (GFWebshopTokenReqPacket)]
 			packets[230] = new PacketInfo<>(CM_SHOW_FRIENDLIST.class, State.IN_GAME); // [C_OFFLINE_BUDDY_LIST (OfflineBuddyList)]
 			// packets[231] = [C_ANSWER_OFFLINE_BUDDY_REQUEST (AnswerOfflineBuddy)]
 			packets[232] = new PacketInfo<>(CM_CHALLENGE_LIST.class, State.IN_GAME); // [C_CHALLENGE_TASK (&LAB_140645410)]

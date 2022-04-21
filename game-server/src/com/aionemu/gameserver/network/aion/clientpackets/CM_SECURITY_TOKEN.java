@@ -13,11 +13,6 @@ import com.aionemu.gameserver.services.player.SecurityTokenService;
  */
 public class CM_SECURITY_TOKEN extends AionClientPacket {
 
-	/**
-	 * @param opcode
-	 * @param state
-	 * @param restStates
-	 */
 	public CM_SECURITY_TOKEN(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}
@@ -33,7 +28,7 @@ public class CM_SECURITY_TOKEN extends AionClientPacket {
 		if (account == null)
 			return;
 		if (account.getSecurityToken().equals(""))
-			SecurityTokenService.getInstance().generateToken(account, getConnection());
+			SecurityTokenService.generateToken(account);
 		sendPacket(new SM_SECURITY_TOKEN(account.getSecurityToken().getBytes()));
 	}
 }

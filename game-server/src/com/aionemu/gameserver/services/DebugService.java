@@ -6,9 +6,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.clientpackets.CM_PING;
-import com.aionemu.gameserver.network.aion.clientpackets.CM_PING_INGAME;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -40,14 +38,11 @@ public class DebugService {
 				continue;
 			}
 
-			long lastAlternativePing = Math.min(connection.getLastPingTime(false), connection.getLastPingTime(true));
-			long lastPing = Math.max(connection.getLastPingTime(false), connection.getLastPingTime(true));
+			long lastPing = connection.getLastPingTime();
 			if (lastPing > 0) {
 				long pingInterval = System.currentTimeMillis() - lastPing;
-				if (pingInterval - 5000 > CM_PING_INGAME.CLIENT_PING_INTERVAL)
+				if (pingInterval - 5000 > CM_PING.CLIENT_PING_INTERVAL)
 					log.warn("[DEBUG SERVICE] Found {} with large ping interval: Spawned {}, PingMS {}", player, player.isSpawned(), pingInterval);
-				if (lastAlternativePing > 0 && lastPing - lastAlternativePing > CM_PING.CLIENT_PING_INTERVAL)
-					AuditLogger.log(player, "has conspicuous ping pattern, may be using speedhack or anti speedhack detection of some sort.");
 			}
 		}
 

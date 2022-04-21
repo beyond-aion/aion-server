@@ -25,11 +25,9 @@ import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.configs.network.PffConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.account.Account;
-import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.Crypt;
 import com.aionemu.gameserver.network.aion.clientpackets.CM_PING;
-import com.aionemu.gameserver.network.aion.clientpackets.CM_PING_INGAME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_KEY;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
@@ -93,7 +91,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 	private final AtomicReference<Player> activePlayer = new AtomicReference<>();
 
 	private volatile long lastClientMessageTime;
-	private volatile long lastPingTime, lastPingPongPingTime;
+	private volatile long lastPingTime;
 	private volatile int pingFailCount;
 
 	private final static int MAX_CORRUPT_PACKETS_BEFORE_DISCONNECT = 3;
@@ -361,22 +359,12 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		return lastClientMessageTime;
 	}
 
-	/**
-	 * @param pingPong
-	 *          if true returns CM_PING time (less frequent than CM_PING_INGAME)
-	 * @return Last ping time from client. Either from CM_PING or from CM_PING_INGAME.
-	 */
-	public long getLastPingTime(boolean pingPong) {
-		if (pingPong)
-			return lastPingPongPingTime;
+	public long getLastPingTime() {
 		return lastPingTime;
 	}
 
-	public void setLastPingTime(long time, boolean pingPong) {
-		if (pingPong)
-			lastPingPongPingTime = time;
-		else
-			lastPingTime = time;
+	public void setLastPingTime(long time) {
+		lastPingTime = time;
 	}
 
 	public int increaseAndGetPingFailCount() {
@@ -416,8 +404,7 @@ public class AionConnection extends AConnection<AionServerPacket> {
 		private ConnectionAliveChecker() {
 			if (connectionAliveChecker != null)
 				throw new IllegalStateException("ConnectionAliveChecker for " + AionConnection.this + " is already assigned.");
-			int checkIntervalMillis = Math.min(CM_PING_INGAME.CLIENT_PING_INTERVAL, CM_PING.CLIENT_PING_INTERVAL);
-			task = ThreadPoolManager.getInstance().scheduleAtFixedRate(this, checkIntervalMillis * 2, checkIntervalMillis);
+			task = ThreadPoolManager.getInstance().scheduleAtFixedRate(this, CM_PING.CLIENT_PING_INTERVAL, CM_PING.CLIENT_PING_INTERVAL);
 		}
 
 		private void stop() {
@@ -426,23 +413,11 @@ public class AionConnection extends AConnection<AionServerPacket> {
 
 		@Override
 		public void run() {
-			Player player = getActivePlayer();
-			// just checking lastPingTime is not sufficient, CM_PING_INGAME interval seems to vary or skip from time to time / under certain circumstances
 			long millisSinceLastClientPacket = System.currentTimeMillis() - lastClientMessageTime;
-			if (millisSinceLastClientPacket - 5000 > getMaxInactivityTimeMillis(player)) {
+			if (millisSinceLastClientPacket - 5000 > CM_PING.CLIENT_PING_INTERVAL) {
 				log.info("Closing hanged up connection of " + AionConnection.this + " (last sign of life was " + millisSinceLastClientPacket + "ms ago)");
 				close();
 			}
-		}
-
-		private long getMaxInactivityTimeMillis(Player player) {
-			if (player == null || !player.isSpawned())
-				return CM_PING.CLIENT_PING_INTERVAL;
-			if (player.getController().isInCombat())
-				return CM_PING_INGAME.CLIENT_PING_INTERVAL;
-			if (player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE))
-				return TimeUnit.MINUTES.toMillis(4);
-			return CM_PING_INGAME.CLIENT_PING_INTERVAL * 2;
 		}
 	}
 }

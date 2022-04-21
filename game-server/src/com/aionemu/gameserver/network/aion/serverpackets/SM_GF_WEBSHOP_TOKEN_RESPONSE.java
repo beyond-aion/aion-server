@@ -6,11 +6,11 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * @author Artur
  */
-public class SM_SECURITY_TOKEN_REQUEST_STATUS extends AionServerPacket {
+public class SM_GF_WEBSHOP_TOKEN_RESPONSE extends AionServerPacket {
 
-	private String token;
+	private final String token;
 
-	public SM_SECURITY_TOKEN_REQUEST_STATUS(String token) {
+	public SM_GF_WEBSHOP_TOKEN_RESPONSE(String token) {
 		this.token = token;
 	}
 
@@ -18,5 +18,4 @@ public class SM_SECURITY_TOKEN_REQUEST_STATUS extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		writeS(token, 32);
 	}
-
 }

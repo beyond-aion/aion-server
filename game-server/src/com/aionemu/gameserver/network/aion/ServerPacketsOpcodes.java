@@ -290,7 +290,7 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(SM_HOUSE_RENDER.class, 0x10F);
 		addPacketOpcode(SM_DELETE_HOUSE.class, 0x110);
 		// 273
-		addPacketOpcode(SM_SECURITY_TOKEN_REQUEST_STATUS.class, 0x112);
+		addPacketOpcode(SM_GF_WEBSHOP_TOKEN_RESPONSE.class, 0x112);
 		addPacketOpcode(SM_HOUSE_ACQUIRE.class, 0x113);
 		addPacketOpcode(SM_STATS_STATUS_UNK.class, 0x114);
 		// 277 // download parts, "client is restricted youve to download part 1 first"
