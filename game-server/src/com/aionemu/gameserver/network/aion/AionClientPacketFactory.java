@@ -215,7 +215,7 @@ public class AionClientPacketFactory {
 			// packets[187] = [C_SA_ACCOUNT_ITEM_ACK (SAAccountItemAckPacket)]
 			packets[188] = new PacketInfo<>(CM_ABYSS_RANKING_PLAYERS.class, State.IN_GAME); // [C_REQUEST_ABYSS_RANKER_INFO (RequestAbyssRankerInfoPacket)]
 			packets[189] = new PacketInfo<>(CM_MAC_ADDRESS.class, State.CONNECTED, State.AUTHED, State.IN_GAME); // [C_ROUTE_INFO (RouteInfoPacket)]
-			// packets[190] = new PacketInfo<>(CM_UNK_RESPONSE.class, State.IN_GAME); // [C_CHECK_MESSAGE (&LAB_140639ed0)] sent when receiving SM_UNK_REQUEST (opcode 80)
+			// packets[190] = // [C_CHECK_MESSAGE (&LAB_140639ed0)] sent when receiving S_CHECK_MESSAGE (opcode 80), contains 16 (static) bytes which change every 5s, maybe some kind of consistency check
 			packets[191] = new PacketInfo<>(CM_REPORT_PLAYER.class, State.IN_GAME); // [C_ACCUSE_CHARACTER (AccuseCharacterPacket)]
 			packets[192] = new PacketInfo<>(CM_INSTANCE_INFO.class, State.IN_GAME); // [C_INSTANCE_DUNGEON_COOLTIMES (InstanceDungeonCooltimePacket)]
 			// packets[193] = 
@@ -229,7 +229,7 @@ public class AionClientPacketFactory {
 			packets[201] = new PacketInfo<>(CM_SUMMON_MOVE.class, State.IN_GAME); // [C_CLIENTSIDE_NPC_MOVE (NpcMovePacket)]
 			packets[202] = new PacketInfo<>(CM_SUMMON_EMOTION.class, State.IN_GAME); // [C_CLIENTSIDE_NPC_ACTION (NpcActionPacket)]
 			packets[203] = new PacketInfo<>(CM_SUMMON_ATTACK.class, State.IN_GAME); // [C_CLIENTSIDE_NPC_ATTACK (NpcAttackPacket)]
-			// packets[204] = new PacketInfo<>(CM_UNK_RESPONSE2.class, State.IN_GAME); // [C_CLIENTSIDE_NPC_BLINK (NpcReturnBlinkPacket)] sent when receiving SM_UNK_REQUEST2 (opcode 186)
+			// packets[204] = // [C_CLIENTSIDE_NPC_BLINK (NpcReturnBlinkPacket)] sent when receiving S_CLIENTSIDE_NPC_BLINK (opcode 186)
 			packets[205] = new PacketInfo<>(CM_SUMMON_CASTSPELL.class, State.IN_GAME); // [C_CLIENTSIDE_NPC_USE_SKILL (NpcUseSkillPacket)]
 			packets[206] = new PacketInfo<>(CM_FUSION_WEAPONS.class, State.IN_GAME); // [C_COMPOUND_2H_WEAPON (&LAB_14063f670)]
 			packets[207] = new PacketInfo<>(CM_BREAK_WEAPONS.class, State.IN_GAME); // [C_REMOVE_COMPOUND (RemoveCompoundOfTwoHandWeaponPacket)]
