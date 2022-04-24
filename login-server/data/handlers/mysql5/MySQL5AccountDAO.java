@@ -75,7 +75,7 @@ public class MySQL5AccountDAO extends AccountDAO {
 				account = new Account();
 
 				account.setId(rs.getInt("id"));
-				account.setName(rs.getString("name"));
+				account.setName(rs.getString(MySQL5DAOUtils.MYSQL_TABLE_ACCOUNT_NAME));
 				account.setPasswordHash(rs.getString("password"));
 				account.setCreationDate(rs.getTimestamp("creation_date"));
 				account.setAccessLevel(rs.getByte("access_level"));
