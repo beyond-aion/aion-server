@@ -16,7 +16,6 @@
 		<file>${logFolder}/server_console.log</file>
 		<encoder>
 			<Pattern>${date} %-5level [%thread] %logger - %message%n</Pattern>
-			<immediateFlush>false</immediateFlush>
 		</encoder>
 	</appender>
 	<appender name="app_warn" class="ch.qos.logback.core.FileAppender">
