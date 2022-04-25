@@ -1,4 +1,4 @@
-package com.aionemu.commons.utils.xml;
+package com.aionemu.gameserver.utils.xml;
 
 import java.io.*;
 import java.nio.file.Files;

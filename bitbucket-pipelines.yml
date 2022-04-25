@@ -1,4 +1,4 @@
-image: maven:3.8.1-openjdk-16
+image: maven:3.8.5-openjdk-18
 
 clone:
   enabled: false # we clone manually because the depth parameter is ignored for scheduled builds

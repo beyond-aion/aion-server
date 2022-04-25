@@ -3,17 +3,12 @@ package com.aionemu.gameserver.configs.schedule;
 import java.io.File;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
-import com.aionemu.commons.utils.xml.JAXBUtil;
+import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
 /**
- * @author SoulKeeper, Source
- * @modified Estrayl
+ * @author SoulKeeper, Source, Estrayl
  */
 @XmlRootElement(name = "siege_schedule")
 @XmlAccessorType(XmlAccessType.FIELD)

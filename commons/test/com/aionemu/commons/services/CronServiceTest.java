@@ -1,12 +1,12 @@
 package com.aionemu.commons.services;
 
-import static org.junit.Assert.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 import java.util.concurrent.atomic.AtomicInteger;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.quartz.JobDetail;
 import org.slf4j.LoggerFactory;
 
@@ -20,7 +20,7 @@ import ch.qos.logback.classic.Logger;
  */
 public class CronServiceTest {
 
-	@BeforeClass
+	@BeforeAll
 	public static void init() {
 		((Logger) LoggerFactory.getLogger("org.quartz")).setLevel(Level.OFF);
 		CronService.initSingleton(CurrentThreadRunnableRunner.class, null);
@@ -83,7 +83,7 @@ public class CronServiceTest {
 		assertEquals(1, CronService.getInstance().getJobTriggers(jd).size());
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void shutdown() {
 		CronService.getInstance().shutdown();
 	}

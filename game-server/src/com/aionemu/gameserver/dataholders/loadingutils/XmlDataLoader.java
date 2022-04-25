@@ -13,11 +13,11 @@ import javax.xml.transform.stax.StAXSource;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.utils.xml.JAXBUtil;
-import com.aionemu.commons.utils.xml.XmlUtil;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.dataholders.StaticData;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.xml.JAXBUtil;
+import com.aionemu.gameserver.utils.xml.XmlUtil;
 
 /**
  * This class is responsible for loading xml files. It uses JAXB to do the job.<br>

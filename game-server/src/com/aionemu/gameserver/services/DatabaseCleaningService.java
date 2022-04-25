@@ -12,12 +12,12 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.ConsoleUtil;
-import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.configs.main.CleaningConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.PlayerExperienceTable;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
 /**
  * Offers the functionality to delete all data about inactive players

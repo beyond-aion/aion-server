@@ -9,8 +9,8 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.templates.ingameshop.IGCategory;
+import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
 /**
  * @author xTz

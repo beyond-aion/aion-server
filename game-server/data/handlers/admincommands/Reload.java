@@ -5,8 +5,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.aionemu.commons.utils.xml.JAXBUtil;
-import com.aionemu.commons.utils.xml.XmlUtil;
 import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.dataholders.*;
@@ -19,10 +17,11 @@ import com.aionemu.gameserver.questEngine.handlers.models.XMLQuest;
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
+import com.aionemu.gameserver.utils.xml.JAXBUtil;
+import com.aionemu.gameserver.utils.xml.XmlUtil;
 
 /**
- * @author MrPoke
- * @reworked Neon
+ * @author MrPoke, Neon
  */
 public class Reload extends AdminCommand {
 

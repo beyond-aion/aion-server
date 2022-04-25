@@ -3,7 +3,7 @@ package com.aionemu.commons.configuration.transformers;
 import java.io.InvalidClassException;
 
 import org.reflections.Reflections;
-import org.reflections.scanners.SubTypesScanner;
+import org.reflections.scanners.Scanners;
 import org.reflections.util.ClasspathHelper;
 import org.reflections.util.ConfigurationBuilder;
 
@@ -40,7 +40,7 @@ public class ClassTransformer extends PropertyTransformer<Class<?>> {
 			if (superClass != null) { // search for class via reflection: this supports simple class names without package names
 				if (rfl == null) // initialize reflections only for servers class paths, so it loads faster
 					rfl = new Reflections(new ConfigurationBuilder().setUrls(ClasspathHelper.forPackage("com.aionemu", getClass().getClassLoader()))
-						.setScanners(new SubTypesScanner()));
+						.setScanners(Scanners.SubTypes));
 				for (Class<?> cls : rfl.getSubTypesOf(superClass)) {
 					if (cls.getSimpleName().equals(value) || cls.getName().equals(value))
 						return cls;

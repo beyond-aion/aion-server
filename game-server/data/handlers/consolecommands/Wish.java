@@ -6,7 +6,6 @@ import java.util.List;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
-import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -21,10 +20,10 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
+import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
 /**
- * @author ginho1
- * @modified Neon
+ * @author ginho1, Neon
  */
 public class Wish extends ConsoleCommand {
 
@@ -53,23 +52,20 @@ public class Wish extends ConsoleCommand {
 			NpcData data = JAXBUtil.deserialize(xml, NpcData.class);
 			NpcTemplate npcTemplate = data.getNpcTemplate(npcName);
 
-			if (npcTemplate != null) {
-				int npcId = npcTemplate.getTemplateId();
-				SpawnTemplate spawn = SpawnEngine.newSpawn(admin.getWorldId(), npcId, admin.getX(), admin.getY(), admin.getZ(), admin.getHeading(), 0);
-				if (spawn == null) {
-					sendInfo(admin, "There is no template with id " + npcId);
-					return;
-				}
-
-				VisibleObject visibleObject = SpawnEngine.spawnObject(spawn, admin.getInstanceId());
-				if (visibleObject == null) {
-					sendInfo(admin, "Spawn id " + npcId + " was not found!");
-					return;
-				}
-
-				String objectName = visibleObject.getObjectTemplate().getName();
-				sendInfo(admin, objectName + " spawned");
+			if (npcTemplate == null) {
+				sendInfo(admin, "There is no template with this name");
+				return;
 			}
+			int npcId = npcTemplate.getTemplateId();
+			SpawnTemplate spawn = SpawnEngine.newSpawn(admin.getWorldId(), npcId, admin.getX(), admin.getY(), admin.getZ(), admin.getHeading(), 0);
+			VisibleObject visibleObject = SpawnEngine.spawnObject(spawn, admin.getInstanceId());
+			if (visibleObject == null) {
+				sendInfo(admin, "Spawn id " + npcId + " was not found!");
+				return;
+			}
+
+			String objectName = visibleObject.getObjectTemplate().getName();
+			sendInfo(admin, objectName + " spawned");
 		} else { // add item
 			if (!(admin.getTarget() instanceof Player player)) {
 				PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
@@ -78,7 +74,7 @@ public class Wish extends ConsoleCommand {
 
 			String itemName = params[0];
 			long addCount = 1;
-			int itemId = 0;
+			int itemId;
 			int enchant = 0;
 			try {
 				addCount = Integer.parseInt(params[0]);
@@ -99,7 +95,7 @@ public class Wish extends ConsoleCommand {
 				if (!AdminService.getInstance().canOperate(admin, player, itemId, "command ///wish"))
 					return;
 
-				long addedCount = 0;
+				long addedCount;
 				if (enchant > 0) {
 					Item newItem = ItemFactory.newItem(itemId);
 
@@ -227,10 +223,10 @@ public class Wish extends ConsoleCommand {
 		@XmlElement(name = "npc")
 		private List<NpcTemplate> its;
 
-		public NpcTemplate getNpcTemplate(String npc) {
+		public NpcTemplate getNpcTemplate(String npcName) {
 
 			for (NpcTemplate it : getData()) {
-				if (it.getName().toLowerCase().equals(npc.toLowerCase()))
+				if (it.getName().equalsIgnoreCase(npcName))
 					return it;
 			}
 			return null;

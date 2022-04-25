@@ -1,14 +1,14 @@
 package com.aionemu.commons.scripting;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.io.File;
 import java.lang.reflect.Constructor;
 import java.util.TimeZone;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-import org.junit.Test;
+import org.junit.jupiter.api.AfterAll;
+import org.junit.jupiter.api.BeforeAll;
+import org.junit.jupiter.api.Test;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
@@ -28,7 +28,7 @@ public class ScriptManagerTest {
 
 	private static CronService cronService;
 
-	@BeforeClass
+	@BeforeAll
 	public static void initCronService() throws Exception {
 		((Logger) LoggerFactory.getLogger("org.quartz")).setLevel(Level.OFF);
 		Constructor<CronService> constructor = CronService.class.getDeclaredConstructor(Class.class, TimeZone.class);
@@ -57,7 +57,7 @@ public class ScriptManagerTest {
 		assertEquals(cronService.findJobs(Runnable.class, true).size(), 0);
 	}
 
-	@AfterClass
+	@AfterAll
 	public static void afterTest() {
 		cronService.shutdown();
 	}

@@ -7,9 +7,6 @@
 	<version>4.8-SNAPSHOT</version>
 	<name>Aion Game Server</name>
 	<packaging>jar</packaging>
-	<scm>
-		<developerConnection>scm:git:https://none</developerConnection>
-	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.test.skip>true</maven.test.skip>
@@ -19,29 +16,11 @@
 		<testSourceDirectory>test</testSourceDirectory>
 		<plugins>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.4</version>
-				<configuration>
-					<revisionOnScmFailure>undefined</revisionOnScmFailure>
-					<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
-					<shortRevisionLength>7</shortRevisionLength>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>validate</phase>
-						<goals>
-							<goal>create</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
-					<release>16</release>
+					<release>18</release>
 					<compilerArgs>
 						<arg>-Xlint:all,-preview</arg>
 					</compilerArgs>
@@ -51,7 +30,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.3.0</version>
 				<configuration>
 					<descriptors>
 						<descriptor>assembly.xml</descriptor>
@@ -69,14 +48,33 @@
 				</executions>
 			</plugin>
 			<plugin>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<version>5.0.0</version>
+				<configuration>
+					<includeOnlyProperties>
+						<includeOnlyProperty>^git.branch$</includeOnlyProperty>
+						<includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
+					</includeOnlyProperties>
+				</configuration>
+				<executions>
+					<execution>
+						<phase>initialize</phase>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+					</execution>
+				</executions>
+			</plugin>
+			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.2.2</version>
 				<configuration>
 					<archive>
 						<manifestEntries>
 							<POMVersion>${project.version}</POMVersion>
-							<Revision>${buildNumber}</Revision>
-							<Branch>${scmBranch}</Branch>
+							<Revision>${git.commit.id.abbrev}</Revision>
+							<Branch>${git.branch}</Branch>
 							<Date>${maven.build.timestamp}</Date>
 						</manifestEntries>
 					</archive>
@@ -85,12 +83,12 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M5</version>
+				<version>3.0.0-M6</version>
 			</plugin>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-antrun-plugin</artifactId>
-				<version>1.8</version>
+				<version>3.1.0</version>
 				<configuration>
 					<exportAntProperties>true</exportAntProperties>
 				</configuration>
@@ -126,7 +124,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.8</version>
+						<version>3.1.0</version>
 						<executions>
 							<execution>
 								<phase>package</phase>
@@ -163,6 +161,16 @@
 			<version>2.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
+			<groupId>javax.xml.bind</groupId>
+			<artifactId>jaxb-api</artifactId>
+			<version>2.3.1</version>
+		</dependency>
+		<dependency>
+			<groupId>com.sun.xml.bind</groupId>
+			<artifactId>jaxb-impl</artifactId>
+			<version>2.3.6</version>
+		</dependency>
+		<dependency>
 			<groupId>net.sf.trove4j</groupId>
 			<artifactId>trove4j</artifactId>
 			<version>3.0.3</version>
@@ -170,7 +178,7 @@
 		<dependency>
 			<groupId>com.github.spotbugs</groupId>
 			<artifactId>spotbugs-annotations</artifactId>
-			<version>4.0.2</version>
+			<version>4.6.0</version>
 			<scope>provided</scope> <!-- don't include on build, since it's only needed for IDE validation -->
 		</dependency>
 	</dependencies>

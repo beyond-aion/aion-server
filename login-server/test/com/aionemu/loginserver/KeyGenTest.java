@@ -6,7 +6,7 @@ import java.security.spec.RSAKeyGenParameterSpec;
 
 import javax.crypto.Cipher;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 import com.aionemu.loginserver.network.ncrypt.EncryptedRSAKeyPair;
 import com.aionemu.loginserver.network.ncrypt.KeyGen;

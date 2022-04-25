@@ -14,11 +14,11 @@ import javax.xml.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.utils.xml.XmlUtil;
 import com.aionemu.gameserver.model.geometry.*;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
+import com.aionemu.gameserver.utils.xml.XmlUtil;
 
 import gnu.trove.map.hash.TIntObjectHashMap;
 

@@ -1,6 +1,5 @@
-package com.aionemu.commons.utils.xml;
+package com.aionemu.gameserver.utils.xml;
 
-import java.io.IOException;
 import java.io.StringWriter;
 
 import javax.xml.bind.SchemaOutputResolver;
@@ -12,7 +11,7 @@ public class StringSchemaOutputResolver extends SchemaOutputResolver {
 	private StringWriter sw = null;
 
 	@Override
-	public Result createOutput(String namespaceUri, String suggestedFileName) throws IOException {
+	public Result createOutput(String namespaceUri, String suggestedFileName) {
 		sw = new StringWriter();
 		StreamResult sr = new StreamResult();
 

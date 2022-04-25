@@ -7,13 +7,9 @@
 	<version>2.0-SNAPSHOT</version>
 	<name>Aion Commons</name>
 	<packaging>jar</packaging>
-	<scm>
-		<developerConnection>scm:git:https://none</developerConnection>
-	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.test.skip>true</maven.test.skip>
-		<maven.test.argLine>-javaagent:"${project.build.directory}/${project.build.finalName}.jar"</maven.test.argLine> <!-- jar must be present in order to run CallbacksTest -->
 	</properties>
 	<build>
 		<sourceDirectory>src</sourceDirectory>
@@ -22,9 +18,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
-					<release>16</release>
+					<release>18</release>
 					<compilerArgs>
 						<arg>-Xlint:all,-preview</arg>
 					</compilerArgs>
@@ -48,26 +44,27 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.4</version>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<version>5.0.0</version>
 				<configuration>
-					<revisionOnScmFailure>undefined</revisionOnScmFailure>
-					<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
-					<shortRevisionLength>7</shortRevisionLength>
+					<includeOnlyProperties>
+						<includeOnlyProperty>^git.branch$</includeOnlyProperty>
+						<includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
+					</includeOnlyProperties>
 				</configuration>
 				<executions>
 					<execution>
-						<phase>validate</phase>
+						<phase>initialize</phase>
 						<goals>
-							<goal>create</goal>
+							<goal>revision</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.2.2</version>
 				<configuration>
 					<archive>
 						<manifestEntries>
@@ -75,8 +72,8 @@
 							<Can-Redefine-Classes>true</Can-Redefine-Classes>
 							<Can-Retransform-Classes>true</Can-Retransform-Classes>
 							<POMVersion>${project.version}</POMVersion>
-							<Revision>${buildNumber}</Revision>
-							<Branch>${scmBranch}</Branch>
+							<Revision>${git.commit.id.abbrev}</Revision>
+							<Branch>${git.branch}</Branch>
 							<Date>${maven.build.timestamp}</Date>
 						</manifestEntries>
 					</archive>
@@ -85,107 +82,96 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M5</version>
+				<version>3.0.0-M6</version>
+				<configuration>
+					<argLine>-javaagent:"${project.build.directory}/${project.build.finalName}.jar"</argLine> <!-- jar must be present in order to run CallbacksTest -->
+				</configuration>
 			</plugin>
 		</plugins>
 	</build>
 	<dependencies>
 		<dependency>
-			<groupId>javax.xml.bind</groupId>
-			<artifactId>jaxb-api</artifactId>
-			<version>2.3.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-core</artifactId>
-			<version>2.3.0.1</version>
-		</dependency>
-		<dependency>
-			<groupId>com.sun.xml.bind</groupId>
-			<artifactId>jaxb-impl</artifactId>
-			<version>2.3.2</version>
-		</dependency>
-		<dependency>
 			<groupId>ch.qos.logback</groupId>
 			<artifactId>logback-classic</artifactId>
-			<version>1.2.3</version>
+			<version>1.2.11</version>
 		</dependency>
 		<dependency>
 			<groupId>com.google.code.gson</groupId>
 			<artifactId>gson</artifactId>
-			<version>2.8.6</version>
+			<version>2.9.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.zaxxer</groupId>
 			<artifactId>HikariCP</artifactId>
-			<version>3.4.2</version>
-			<scope>compile</scope>
-			<exclusions>
-				<exclusion>
-					<artifactId>javassist</artifactId>
-					<groupId>org.javassist</groupId>
-				</exclusion>
-				<exclusion>
-					<artifactId>slf4j-api</artifactId>
-					<groupId>org.slf4j</groupId>
-				</exclusion>
-			</exclusions>
+			<version>5.0.1</version>
 		</dependency>
 		<dependency>
 			<groupId>mysql</groupId>
 			<artifactId>mysql-connector-java</artifactId>
-			<version>8.0.19</version>
+			<version>8.0.28</version>
+			<exclusions>
+				<exclusion>
+					<groupId>com.google.protobuf</groupId>
+					<artifactId>protobuf-java</artifactId>
+				</exclusion>
+			</exclusions>
 		</dependency>
+		<dependency>
+			<groupId>com.google.protobuf</groupId>
+			<artifactId>protobuf-java</artifactId>
+			<version>3.20.1</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.quartz-scheduler</groupId>
 			<artifactId>quartz</artifactId>
 			<version>2.3.2</version>
 			<exclusions>
 				<exclusion>
-					<artifactId>c3p0</artifactId>
 					<groupId>com.mchange</groupId>
+					<artifactId>c3p0</artifactId>
 				</exclusion>
 				<exclusion>
-					<artifactId>slf4j-api</artifactId>
-					<groupId>org.slf4j</groupId>
+					<groupId>com.mchange</groupId>
+					<artifactId>mchange-commons-java</artifactId>
 				</exclusion>
 				<exclusion>
-					<artifactId>HikariCP-java7</artifactId>
 					<groupId>com.zaxxer</groupId>
+					<artifactId>HikariCP-java7</artifactId>
 				</exclusion>
 			</exclusions>
 		</dependency>
 		<dependency>
 			<groupId>org.javassist</groupId>
 			<artifactId>javassist</artifactId>
-			<version>3.27.0-GA</version>
+			<version>3.28.0-GA</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>
 			<artifactId>commons-lang3</artifactId>
-			<version>3.10</version>
+			<version>3.12.0</version>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.8.2</version>
 			<scope>test</scope>
 		</dependency>
 		<dependency>
 			<groupId>org.fusesource.jansi</groupId>
 			<artifactId>jansi</artifactId>
-			<version>1.14</version>
+			<version>2.4.0</version>
 		</dependency>
 		<dependency>
 			<groupId>com.github.spotbugs</groupId>
 			<artifactId>spotbugs-annotations</artifactId>
-			<version>4.0.2</version>
+			<version>4.6.0</version>
 			<scope>provided</scope> <!-- don't include on build, since it's only needed for IDE validation -->
 		</dependency>
 		<dependency>
 			<groupId>org.reflections</groupId>
 			<artifactId>reflections</artifactId>
-			<version>0.9.12</version>
+			<version>0.10.2</version>
 		</dependency>
 	</dependencies>
 </project>

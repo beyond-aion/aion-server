@@ -25,7 +25,7 @@ import org.xml.sax.SAXParseException;
 import org.xml.sax.helpers.DefaultHandler;
 
 import com.aionemu.commons.utils.PropertiesUtils;
-import com.aionemu.commons.utils.xml.XmlUtil;
+import com.aionemu.gameserver.utils.xml.XmlUtil;
 
 /**
  * <p>

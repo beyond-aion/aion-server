@@ -2,7 +2,7 @@ package com.aionemu.loginserver.network.ncrypt;
 
 import java.security.GeneralSecurityException;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
 /**
  * Simple test to check blowfish cipher encryption and decryption results.

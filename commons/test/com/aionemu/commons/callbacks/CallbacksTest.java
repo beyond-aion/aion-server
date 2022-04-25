@@ -1,16 +1,12 @@
 package com.aionemu.commons.callbacks;
 
-import static org.junit.Assert.*;
+import static org.junit.jupiter.api.Assertions.*;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import org.junit.Test;
+import org.junit.jupiter.api.Test;
 
-import com.aionemu.commons.callbacks.files.AbstractCallback;
-import com.aionemu.commons.callbacks.files.InheritanceTestCallback;
-import com.aionemu.commons.callbacks.files.InheritanceTestChild;
-import com.aionemu.commons.callbacks.files.TestCallbackIntObject;
-import com.aionemu.commons.callbacks.files.TestGlobalCallbacksCaller;
+import com.aionemu.commons.callbacks.files.*;
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 
 import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;

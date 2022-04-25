@@ -8,13 +8,13 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
-import com.aionemu.commons.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_PACKET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_PACKET.PacketElementType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.utils.xml.JAXBUtil;
 
 /**
  * This admin command is used for sending custom packets from server to client.
@@ -27,8 +27,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
  * <p/>
  * Created on: 14.07.2009 13:54:46
  * 
- * @author Aquanox
- * @modified Neon
+ * @author Aquanox, Neon
  */
 public class Send extends AdminCommand {
 
@@ -72,9 +71,9 @@ public class Send extends AdminCommand {
 
 				String value = part.getValue();
 
-				if (value.indexOf("${objectId}") != -1)
+				if (value.contains("${objectId}"))
 					value = value.replace("${objectId}", senderObjectId);
-				if (value.indexOf("${targetObjectId}") != -1)
+				if (value.contains("${targetObjectId}"))
 					value = value.replace("${targetObjectId}", targetObjectId);
 
 				for (int i = 0; i < part.getRepeatCount(); i++)
@@ -110,12 +109,7 @@ public class Send extends AdminCommand {
 
 		@Override
 		public String toString() {
-			final StringBuilder sb = new StringBuilder();
-			sb.append("Packets");
-			sb.append("{delay=").append(delay);
-			sb.append(", packets=").append(packets);
-			sb.append('}');
-			return sb.toString();
+			return "Packets" + "{delay=" + delay + ", packets=" + packets + '}';
 		}
 	}
 
@@ -146,12 +140,7 @@ public class Send extends AdminCommand {
 
 		@Override
 		public String toString() {
-			final StringBuilder sb = new StringBuilder();
-			sb.append("Packet");
-			sb.append("{opcode=").append(opcode);
-			sb.append(", parts=").append(parts);
-			sb.append('}');
-			return sb.toString();
+			return "Packet" + "{opcode=" + opcode + ", parts=" + parts + '}';
 		}
 	}
 
@@ -182,13 +171,7 @@ public class Send extends AdminCommand {
 
 		@Override
 		public String toString() {
-			final StringBuilder sb = new StringBuilder();
-			sb.append("Part");
-			sb.append("{type='").append(type).append('\'');
-			sb.append(", value='").append(value).append('\'');
-			sb.append(", repeatCount=").append(repeatCount);
-			sb.append('}');
-			return sb.toString();
+			return "Part" + "{type='" + type + '\'' + ", value='" + value + '\'' + ", repeatCount=" + repeatCount + '}';
 		}
 	}
 }

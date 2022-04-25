@@ -7,9 +7,6 @@
 	<version>4.8-SNAPSHOT</version>
 	<name>Aion Login Server</name>
 	<packaging>jar</packaging>
-	<scm>
-		<developerConnection>scm:git:https://none</developerConnection>
-	</scm>
 	<properties>
 		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
 		<maven.test.skip>true</maven.test.skip>
@@ -21,11 +18,11 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.8.1</version>
+				<version>3.10.1</version>
 				<configuration>
-					<release>16</release>
+					<release>18</release>
 					<compilerArgs>
-						<arg>-Xlint:all,-preview,-classfile</arg>
+						<arg>-Xlint:all,-preview</arg>
 					</compilerArgs>
 					<showWarnings>true</showWarnings>
 					<debug>true</debug>
@@ -33,7 +30,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.3.0</version>
 				<configuration>
 					<descriptors>
 						<descriptor>assembly.xml</descriptor>
@@ -51,32 +48,33 @@
 				</executions>
 			</plugin>
 			<plugin>
-				<groupId>org.codehaus.mojo</groupId>
-				<artifactId>buildnumber-maven-plugin</artifactId>
-				<version>1.4</version>
+				<groupId>io.github.git-commit-id</groupId>
+				<artifactId>git-commit-id-maven-plugin</artifactId>
+				<version>5.0.0</version>
 				<configuration>
-					<revisionOnScmFailure>undefined</revisionOnScmFailure>
-					<getRevisionOnlyOnce>true</getRevisionOnlyOnce>
-					<shortRevisionLength>7</shortRevisionLength>
+					<includeOnlyProperties>
+						<includeOnlyProperty>^git.branch$</includeOnlyProperty>
+						<includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
+					</includeOnlyProperties>
 				</configuration>
 				<executions>
 					<execution>
-						<phase>validate</phase>
+						<phase>initialize</phase>
 						<goals>
-							<goal>create</goal>
+							<goal>revision</goal>
 						</goals>
 					</execution>
 				</executions>
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.2.0</version>
+				<version>3.2.2</version>
 				<configuration>
 					<archive>
 						<manifestEntries>
 							<POMVersion>${project.version}</POMVersion>
-							<Revision>${buildNumber}</Revision>
-							<Branch>${scmBranch}</Branch>
+							<Revision>${git.commit.id.abbrev}</Revision>
+							<Branch>${git.branch}</Branch>
 							<Date>${maven.build.timestamp}</Date>
 						</manifestEntries>
 					</archive>
@@ -85,7 +83,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M5</version>
+				<version>3.0.0-M6</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -103,7 +101,7 @@
 					<plugin>
 						<groupId>org.apache.maven.plugins</groupId>
 						<artifactId>maven-antrun-plugin</artifactId>
-						<version>1.8</version>
+						<version>3.1.0</version>
 						<executions>
 							<execution>
 								<phase>package</phase>
@@ -125,7 +123,7 @@
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant-jsch</artifactId>
-								<version>1.10.7</version>
+								<version>1.10.12</version>
 							</dependency>
 						</dependencies>
 					</plugin>
@@ -140,9 +138,9 @@
 			<version>2.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
-			<groupId>junit</groupId>
-			<artifactId>junit</artifactId>
-			<version>4.13.1</version>
+			<groupId>org.junit.jupiter</groupId>
+			<artifactId>junit-jupiter-api</artifactId>
+			<version>5.8.2</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>
