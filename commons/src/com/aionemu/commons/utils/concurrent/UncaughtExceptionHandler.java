@@ -24,5 +24,15 @@ public class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler
 				+ " is not binary compatible to a class it imports, because of some signature change in the imported class. Please delete "
 				+ ScriptCompilerCache.CACHE_DIR + " and restart");
 		}
+		if (isMainThread(t) && anyExitBlockingThread(t)) // crashed main thread should exit immediately
+			System.exit(ExitCode.ERROR);
+	}
+
+	private boolean isMainThread(Thread t) {
+		return t.getId() == 1;
+	}
+
+	private boolean anyExitBlockingThread(Thread ignoredThread) {
+		return Thread.getAllStackTraces().keySet().stream().anyMatch(lt -> lt != ignoredThread && !lt.isDaemon());
 	}
 }
