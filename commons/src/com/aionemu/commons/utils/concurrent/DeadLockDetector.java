@@ -1,47 +1,27 @@
 package com.aionemu.commons.utils.concurrent;
 
-import java.lang.management.LockInfo;
-import java.lang.management.ManagementFactory;
-import java.lang.management.MonitorInfo;
-import java.lang.management.ThreadInfo;
-import java.lang.management.ThreadMXBean;
+import java.lang.management.*;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.aionemu.commons.utils.ExitCode;
 
 /**
  * @author -Nemesiss-, ATracer
  */
 public class DeadLockDetector extends Thread {
 
-	private static final Logger log = LoggerFactory.getLogger(DeadLockDetector.class);
-	/** What should we do on DeadLock */
-	public static final byte NOTHING = 0;
-	/** What should we do on DeadLock */
-	public static final byte RESTART = 1;
-
-	/** how often check for deadlocks */
-	private final int sleepTime;
-	/**
-	 * ThreadMXBean
-	 */
+	private final int sleepTime, exitOnDeadlock;
 	private final ThreadMXBean tmx;
-	/** What should we do on DeadLock */
-	private final byte doWhenDL;
 
 	/**
-	 * Create new DeadLockDetector with given values.
-	 * 
-	 * @param sleepTime
-	 * @param doWhenDL
+	 * @param sleepTime - Interval in seconds when deadlock checks are performed
+	 * @param exitOnDeadlock - If nonzero, {@code System.exit(exitOnDeadlock)} will be called
 	 */
-	public DeadLockDetector(final int sleepTime, final byte doWhenDL) {
+	public DeadLockDetector(int sleepTime, int exitOnDeadlock) {
 		super("DeadLockDetector");
 		this.sleepTime = sleepTime * 1000;
+		this.exitOnDeadlock = exitOnDeadlock;
 		this.tmx = ManagementFactory.getThreadMXBean();
-		this.doWhenDL = doWhenDL;
+		setDaemon(true);
 	}
 
 	/**
@@ -49,46 +29,45 @@ public class DeadLockDetector extends Thread {
 	 */
 	@Override
 	public final void run() {
-		boolean deadlock = false;
-		while (!deadlock)
+		while (!detectDeadlock()) {
 			try {
-				long[] ids = tmx.findDeadlockedThreads();
-
-				if (ids != null) {
-					/** deadlock found :/ */
-					deadlock = true;
-					ThreadInfo[] tis = tmx.getThreadInfo(ids, true, true);
-					String info = "DeadLock Found!\n";
-					for (ThreadInfo ti : tis)
-						info += ti.toString();
-
-					for (ThreadInfo ti : tis) {
-						LockInfo[] locks = ti.getLockedSynchronizers();
-						MonitorInfo[] monitors = ti.getLockedMonitors();
-						if (locks.length == 0 && monitors.length == 0)
-							/** this thread is deadlocked but its not guilty */
-							continue;
-
-						ThreadInfo dl = ti;
-						info += "Java-level deadlock:\n";
-						info += createShortLockInfo(dl);
-						while ((dl = tmx.getThreadInfo(new long[] { dl.getLockOwnerId() }, true, true)[0]).getThreadId() != ti.getThreadId())
-							info += createShortLockInfo(dl);
-
-						info += "\nDumping all threads:\n";
-						for (ThreadInfo dumpedTI : tmx.dumpAllThreads(true, true)) {
-							info += printDumpedThreadInfo(dumpedTI);
-						}
-					}
-					log.warn(info);
-
-					if (doWhenDL == RESTART)
-						System.exit(ExitCode.RESTART);
-				}
 				Thread.sleep(sleepTime);
-			} catch (Exception e) {
-				log.warn("DeadLockDetector: " + e, e);
+			} catch (InterruptedException ignored) {
 			}
+		}
+		if (exitOnDeadlock != 0)
+			System.exit(exitOnDeadlock);
+	}
+
+	private boolean detectDeadlock() {
+		long[] ids = tmx.findDeadlockedThreads();
+		if (ids == null)
+			return false;
+		ThreadInfo[] tis = tmx.getThreadInfo(ids, true, true);
+		String info = "DeadLock Found!\n";
+		for (ThreadInfo ti : tis)
+			info += ti.toString();
+
+		for (ThreadInfo ti : tis) {
+			LockInfo[] locks = ti.getLockedSynchronizers();
+			MonitorInfo[] monitors = ti.getLockedMonitors();
+			if (locks.length == 0 && monitors.length == 0)
+				// this thread is deadlocked but its not guilty
+				continue;
+
+			ThreadInfo dl = ti;
+			info += "Java-level deadlock:\n";
+			info += createShortLockInfo(dl);
+			while ((dl = tmx.getThreadInfo(new long[]{dl.getLockOwnerId()}, true, true)[0]).getThreadId() != ti.getThreadId())
+				info += createShortLockInfo(dl);
+
+			info += "\nDumping all threads:\n";
+			for (ThreadInfo dumpedTI : tmx.dumpAllThreads(true, true)) {
+				info += printDumpedThreadInfo(dumpedTI);
+			}
+		}
+		LoggerFactory.getLogger(DeadLockDetector.class).warn(info);
+		return true;
 	}
 
 	/**
@@ -100,18 +79,12 @@ public class DeadLockDetector extends Thread {
 	 * </p>
 	 */
 	private String createShortLockInfo(ThreadInfo threadInfo) {
-		StringBuilder sb = new StringBuilder("\t");
-		sb.append(threadInfo.getThreadName());
-		sb.append(" is waiting to lock ");
-		sb.append(threadInfo.getLockInfo().toString());
-		sb.append(" which is held by ");
-		sb.append(threadInfo.getLockOwnerName());
-		sb.append(". Locked synchronizers:");
-		sb.append(threadInfo.getLockedSynchronizers().length);
-		sb.append(" monitors:");
-		sb.append(threadInfo.getLockedMonitors().length);
-		sb.append("\n");
-		return sb.toString();
+		return "\t" + threadInfo.getThreadName() +
+				" is waiting to lock " + threadInfo.getLockInfo().toString() +
+				" which is held by " + threadInfo.getLockOwnerName() + ". " +
+				"Locked synchronizers: " + threadInfo.getLockedSynchronizers().length + ", " +
+				"monitors: " + threadInfo.getLockedMonitors().length +
+				"\n";
 	}
 
 	/**

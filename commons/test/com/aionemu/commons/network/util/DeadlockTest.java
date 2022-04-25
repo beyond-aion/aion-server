@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
+import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.concurrent.DeadLockDetector;
 
 /**
@@ -17,8 +18,7 @@ public class DeadlockTest {
 	private static final Object lock2 = new Object();
 
 	public static void main(String... args) {
-		DeadLockDetector dd = new DeadLockDetector(2, DeadLockDetector.NOTHING);
-		dd.start();
+		new DeadLockDetector(2, ExitCode.ERROR).start();
 		createDeadlock();
 	}
 
@@ -41,8 +41,7 @@ public class DeadlockTest {
 					}).start();
 					try {
 						Thread.sleep(100);
-					} catch (InterruptedException e) {
-						e.printStackTrace();
+					} catch (InterruptedException ignored) {
 					}
 					synchronized (lock2) {
 						System.out.println("This will not be printed");

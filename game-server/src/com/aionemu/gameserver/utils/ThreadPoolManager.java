@@ -7,6 +7,7 @@ import java.util.concurrent.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.concurrent.AionRejectedExecutionHandler;
 import com.aionemu.commons.utils.concurrent.DeadLockDetector;
 import com.aionemu.commons.utils.concurrent.PriorityThreadFactory;
@@ -31,7 +32,7 @@ public final class ThreadPoolManager implements Executor {
 		// common ForkJoin (for .parallelStream() calls) uses the calling thread too, so we need to subtract 1 to use exactly the number of threads desired
 		System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", String.valueOf(instantPoolSize - 1));
 
-		new DeadLockDetector(60, DeadLockDetector.RESTART).start();
+		new DeadLockDetector(60, ExitCode.RESTART).start();
 		instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100000),
 			new PriorityThreadFactory("InstantPool", ThreadConfig.USE_PRIORITIES ? 7 : Thread.NORM_PRIORITY));
 		instantPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
