@@ -39,7 +39,7 @@ public class SuramaTheTraitorAI extends GeneralNpcAI {
 		setStateIfNot(AIState.WALKING);
 		getOwner().setState(CreatureState.ACTIVE, true);
 		getMoveController().moveToPoint(651, 1319, 487);
-		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getOwner().getObjectId()));
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override

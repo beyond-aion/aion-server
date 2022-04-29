@@ -325,7 +325,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 
 	@Override
 	public void updateSpeedInfo() {
-		PacketSendUtility.broadcastToSightedPlayers(owner, new SM_EMOTION(owner, EmotionType.START_EMOTE2), true);
+		PacketSendUtility.broadcastToSightedPlayers(owner, new SM_EMOTION(owner, EmotionType.CHANGE_SPEED), true);
 	}
 
 	public int getHealthDependentAdditionalHp() {

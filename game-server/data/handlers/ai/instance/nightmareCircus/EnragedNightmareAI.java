@@ -69,13 +69,13 @@ public class EnragedNightmareAI extends AggressiveNpcAI {
 			WalkManager.startWalking((NpcAI) getOwner().getAi());
 			getOwner().setState(CreatureState.ACTIVE, true);
 			getOwner().getMoveController().moveToPoint(521.60913f, 551.00684f, 198.75f);
-			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getOwner().getObjectId()));
 		} else {
 			getOwner().getAi().setStateIfNot(AIState.WALKING);
 			WalkManager.startWalking((NpcAI) getOwner().getAi());
 			getOwner().setState(CreatureState.ACTIVE, true);
 			getOwner().getMoveController().moveToPoint(525.3831f, 585.3808f, 199.0476f);
-			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getOwner().getObjectId()));
 		}
 
 	}

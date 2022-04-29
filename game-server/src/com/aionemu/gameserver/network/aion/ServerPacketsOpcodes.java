@@ -108,10 +108,10 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(90, SM_GROUP_INFO.class); // [S_PARTY_INFO]
 		addPacketOpcode(91, SM_GROUP_MEMBER_INFO.class); // [S_PARTY_MEMBER_INFO]
 		addPacketOpcode(92, SM_RIDE_ROBOT.class); // [S_RIDE_ROBOT]
-		// addPacketOpcode(93, ); // [S_UNUSED__05]
-		// addPacketOpcode(94, ); // [S_UNUSED__06]
-		// addPacketOpcode(95, ); // [S_UNUSED__07]
-		// addPacketOpcode(96, ); // [S_UNUSED__14]
+		// addPacketOpcode(93, ); // [S_USE_CP_STATUS]
+		// addPacketOpcode(94, ); // [S_UPDATE_USE_CP_RESULT]
+		// addPacketOpcode(95, ); // [S_USE_CP_RESET_COST_ACK]
+		// addPacketOpcode(96, ); // [S_ENCHANT_EVENT_LIST]
 		// addPacketOpcode(97, ); // [S_GGAUTH_CHECK_QUERY]
 		addPacketOpcode(98, SM_QUIT_RESPONSE.class); // [S_ASK_QUIT_RESULT]
 		addPacketOpcode(99, SM_CHAT_WINDOW.class); // [S_ASK_INFO_RESULT] 2.1
@@ -306,19 +306,19 @@ public class ServerPacketsOpcodes {
 		addPacketOpcode(288, SM_TUNE_RESULT.class); // [S_REIDENTIFY_PREVIEW]
 		addPacketOpcode(289, SM_UNWRAP_ITEM.class); // [S_UNPACK_ITEM]
 		addPacketOpcode(290, SM_QUEST_REPEAT.class); // [S_RESET_REPEAT_QUEST]
-		// addPacketOpcode(291, SM_UNK_4_5.class); // [S_PROTOCOL_MAX]
-		addPacketOpcode(292, SM_AFTER_TIME_CHECK_4_7_5.class);
-		addPacketOpcode(293, SM_AFTER_SIEGE_LOCINFO_475.class);
-		// addPacketOpcode(294, );
-		// addPacketOpcode(295, );
-		addPacketOpcode(296, SM_BIND_POINT_TELEPORT.class);
-		// addPacketOpcode(297, );
-		addPacketOpcode(298, SM_UPGRADE_ARCADE.class);
-		addPacketOpcode(299, SM_ATREIAN_PASSPORT.class);
-		// addPacketOpcode(300, );
-		// addPacketOpcode(301, );
-		addPacketOpcode(302, SM_LEGION_DOMINION_RANK.class);
-		addPacketOpcode(303, SM_LEGION_DOMINION_LOC_INFO.class);
+		// addPacketOpcode(291, SM_UNK_4_5.class); // [S_REPLY_NP_LOGIN_GAMESVR]
+		addPacketOpcode(292, SM_AFTER_TIME_CHECK_4_7_5.class); // [S_LAUNCHER_ARGS]
+		addPacketOpcode(293, SM_AFTER_SIEGE_LOCINFO_475.class); // [S_ABYSS_INFO_GAB1_SPEC]
+		// addPacketOpcode(294, ); // [S_REPLY_NP_CONSUME_TOKEN_RESULT]
+		// addPacketOpcode(295, ); // [S_REPLY_NP_AUTH_TOKEN]
+		addPacketOpcode(296, SM_BIND_POINT_TELEPORT.class); // [S_HOTSPOT]
+		// addPacketOpcode(297, ); // [S_CHAT_ACCUSE]
+		addPacketOpcode(298, SM_UPGRADE_ARCADE.class); // [S_GOTCHA_NOTIFY]
+		addPacketOpcode(299, SM_ATREIAN_PASSPORT.class); // [S_LOGIN_EVENT_LIST]
+		// addPacketOpcode(300, ); // [S_PROC_BREAK_NOTI]
+		// addPacketOpcode(301, ); // [S_REP_REGISTER_MONEY_TRADE]
+		addPacketOpcode(302, SM_LEGION_DOMINION_RANK.class); // [S_LEGION_DOMINION_RANKING]
+		addPacketOpcode(303, SM_LEGION_DOMINION_LOC_INFO.class); // [S_LEGION_DOMINION_OWNERSHIP_INFO]
 	}
 
 	static int getOpcode(Class<? extends AionServerPacket> packetClass) {

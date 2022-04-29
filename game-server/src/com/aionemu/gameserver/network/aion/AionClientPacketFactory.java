@@ -21,7 +21,7 @@ import com.aionemu.gameserver.network.aion.clientpackets.*;
 public class AionClientPacketFactory {
 
 	private static final Logger log = LoggerFactory.getLogger(AionClientPacketFactory.class);
-	private static final PacketInfo<? extends AionClientPacket>[] packets = new PacketInfo<?>[249];
+	private static final PacketInfo<? extends AionClientPacket>[] packets = new PacketInfo<?>[250];
 
 	static {
 		try {
@@ -54,7 +54,7 @@ public class AionClientPacketFactory {
 			// packets[26] = [C_PETITION (PetitionPacket)]
 			packets[27] = new PacketInfo<>(CM_CHAT_MESSAGE_PUBLIC.class, State.IN_GAME); // [C_SAY (SayPacket)]
 			packets[28] = new PacketInfo<>(CM_CHAT_MESSAGE_WHISPER.class, State.IN_GAME); // [C_WHISPER (WhisperPacket)]
-			packets[29] = new PacketInfo<>(CM_LEGION_DOMINION_REQUEST_RANKING.class, State.IN_GAME);
+			packets[29] = new PacketInfo<>(CM_LEGION_DOMINION_REQUEST_RANKING.class, State.IN_GAME); // [C_REQUEST_LEGION_DOMINION_RANKIN]
 			packets[30] = new PacketInfo<>(CM_HOUSE_SCRIPT.class, State.IN_GAME); // [C_SAVE_HOUSE_SCRIPT (SaveHouseScriptPacket)]
 			packets[31] = new PacketInfo<>(CM_TARGET_SELECT.class, State.IN_GAME); // [C_CHANGE_TARGET (ChangeTargetPacket)]
 			packets[32] = new PacketInfo<>(CM_ATTACK.class, State.IN_GAME); // [C_ATTACK (AttackPacket)]
@@ -85,7 +85,7 @@ public class AionClientPacketFactory {
 			// packets[57] = [C_DELETE_BOOKMARK (DeleteBookmarkPacket)]
 			packets[58] = new PacketInfo<>(CM_SET_NOTE.class, State.IN_GAME); // [C_TODAY_WORDS (TodayWordsPacket)]
 			packets[59] = new PacketInfo<>(CM_LEGION_MODIFY_EMBLEM.class, State.IN_GAME); // [C_CHANGE_EMBLEM_VER (ChangeEmblemVerPacket)]
-			// packets[60] = 
+			// packets[60] = [C_REQUEST_ABYSS_OP_POINTS]
 			packets[61] = new PacketInfo<>(CM_CHAT_GROUP_INFO.class, State.IN_GAME); // [C_ASK_PARTY_INFO (AskPartyInfoPacket)]
 			packets[62] = new PacketInfo<>(CM_CHECK_PAK.class, State.IN_GAME); // [C_ASK_LOG (AskLogPacket)]
 			packets[63] = new PacketInfo<>(CM_EXCHANGE_REQUEST.class, State.IN_GAME); // [C_ASK_XCHG (AskExchangePacket)]
@@ -110,7 +110,7 @@ public class AionClientPacketFactory {
 			packets[82] = new PacketInfo<>(CM_HOUSE_EDIT.class, State.IN_GAME); // [C_HOUSING_OBJECT (HousingObjectPacket)]
 			// packets[83] = [C_HOUSING_OBJECT_LIST (HousingObjectListPacket)]
 			packets[84] = new PacketInfo<>(CM_STOP_TRAINING.class, State.IN_GAME); // [C_ACCOUNT_INSTANTDUNGEON (AccountInstantDungeon)]
-			// packets[85] = 
+			// packets[85] = [C_UNUSED_NEW_5]
 			// packets[86] = [C_QUERY_NUMBER_RESULT (QueryNumberResultPacket)]
 			// packets[87] = [C_FATIGUE_KOREA (&LAB_140621240)]
 			packets[88] = new PacketInfo<>(CM_BUY_TRADE_IN_TRADE.class, State.IN_GAME); // [C_TRADE_IN (&LAB_140621590)]
@@ -124,13 +124,13 @@ public class AionClientPacketFactory {
 			packets[96] = new PacketInfo<>(CM_PLAYER_STATUS_INFO.class, State.IN_GAME); // [C_PARTY (PartyPacket)]
 			packets[97] = new PacketInfo<>(CM_INVITE_TO_GROUP.class, State.IN_GAME); // [C_PARTY_BY_NAME (&LAB_1406224a0)]
 			// packets[98] = [C_ALLI_CHANGE_GROUP (AllianceChangeGroupPacket)]
-			// packets[99] = 
+			// packets[99] = [C_UNUSED_19]
 			packets[100] = new PacketInfo<>(CM_VIEW_PLAYER_DETAILS.class, State.IN_GAME); // [C_VIEW_OTHER_INVENTORY (ViewOtherInventoryPacket)]
-			// packets[101] = 
-			// packets[102] = 
+			// packets[101] = [C_USE_CP_RESET_COST_REQ]
+			// packets[102] = [C_UPDATE_USE_CP]
 			packets[103] = new PacketInfo<>(CM_PING_REQUEST.class, State.IN_GAME); // [C_PING (&LAB_140632c80)]
 			packets[104] = new PacketInfo<>(CM_GAMEGUARD.class, State.IN_GAME, State.AUTHED); // [C_NCGUARD (FUN_140632e50)]
-			// packets[105] = 
+			// packets[105] = [C_UNUSED_21]
 			// packets[106] = [C_PLATE (PlatePacket)]
 			packets[107] = new PacketInfo<>(CM_CLIENT_COMMAND_ROLL.class, State.IN_GAME); // [C_SIMPLE_DICE (SimpleDicePacket)]
 			packets[108] = new PacketInfo<>(CM_GROUP_DISTRIBUTION.class, State.IN_GAME); // [C_SPLIT_GOLD (SplitGoldPacket)]
@@ -140,9 +140,9 @@ public class AionClientPacketFactory {
 			packets[112] = new PacketInfo<>(CM_FRIEND_DEL.class, State.IN_GAME); // [C_REMOVE_BUDDY (RemoveBuddyPacket)]
 			// packets[113] = [C_SMS (SMSPacket)]
 			packets[114] = new PacketInfo<>(CM_DUEL_REQUEST.class, State.IN_GAME); // [C_DUEL (DuelPacket)]
-			// packets[115] = 
+			// packets[115] = [C_UNUSED__03]
 			packets[116] = new PacketInfo<>(CM_DELETE_ITEM.class, State.IN_GAME); // [C_DESTROY_ITEM (DestroyItemPacket)]
-			packets[117] = new PacketInfo<>(CM_BROKER_SELL_WINDOW.class, State.IN_GAME);
+			packets[117] = new PacketInfo<>(CM_BROKER_SELL_WINDOW.class, State.IN_GAME); // [C_VENDOR_AVG_SOLDPRICE]
 			packets[118] = new PacketInfo<>(CM_ABYSS_RANKING_LEGIONS.class, State.IN_GAME); // [C_REQUEST_ABYSS_GUILD_INFO (RequestAbyssGuildInfoPacket)]
 			packets[119] = new PacketInfo<>(CM_PRIVATE_STORE.class, State.IN_GAME); // [C_PERSONAL_SHOP (PersonalShopPacket)]
 			packets[120] = new PacketInfo<>(CM_PRIVATE_STORE_NAME.class, State.IN_GAME); // [C_SHOP_MSG (ShopMsgPacket)]
@@ -193,7 +193,7 @@ public class AionClientPacketFactory {
 			// packets[165] = [C_ADD_BUDDY_ANS (&LAB_140633c60)]
 			packets[166] = new PacketInfo<>(CM_BLOCK_ADD.class, State.IN_GAME); // [C_ADD_BLOCK (AddBlockPacket)]
 			packets[167] = new PacketInfo<>(CM_BLOCK_DEL.class, State.IN_GAME); // [C_REMOVE_BLOCK (RemoveBlockPacket)]
-			// packets[168] = new PacketInfo<>(CM_ADMIN_PANEL.class, State.IN_GAME); // [C_QUERY_BLOCK (QueryBlockPacket)]
+			// packets[168] = [C_QUERY_BLOCK (QueryBlockPacket)]
 			// packets[169] = [C_CHANGE_BLOCK_NAME (ChangeBlockNamePacket)]
 			packets[170] = new PacketInfo<>(CM_FRIEND_STATUS.class, State.IN_GAME); // [C_CUR_STATUS (CurrentStatusPacket)]
 			// packets[171] = new PacketInfo<>(CM_VIRTUAL_AUTH.class, State.AUTHED, State.IN_GAME); // [C_VIRTUAL_AUTH (VirtualAuthPacket)]
@@ -218,7 +218,7 @@ public class AionClientPacketFactory {
 			// packets[190] = // [C_CHECK_MESSAGE (&LAB_140639ed0)] sent when receiving S_CHECK_MESSAGE (opcode 80), contains 16 (static) bytes which change every 5s, maybe some kind of consistency check
 			packets[191] = new PacketInfo<>(CM_REPORT_PLAYER.class, State.IN_GAME); // [C_ACCUSE_CHARACTER (AccuseCharacterPacket)]
 			packets[192] = new PacketInfo<>(CM_INSTANCE_INFO.class, State.IN_GAME); // [C_INSTANCE_DUNGEON_COOLTIMES (InstanceDungeonCooltimePacket)]
-			// packets[193] = 
+			// packets[193] = // [C_SHOP_REQUEST]
 			packets[194] = new PacketInfo<>(CM_SHOW_RESTRICTIONS.class, State.IN_GAME); // [C_ASK_BOT_POINT (&LAB_14063b3e0)] when writing /restriction in chat
 			// packets[195] = new PacketInfo<>(CM_SUMMON_TELEPORT_RESPONSE.class, State.IN_GAME); // [C_RECALLED_BY_OTHER_ANSWER (&LAB_14063b5b0)] when player accepts/declines SM_SUMMON_TELEPORT_REQUEST window
 			packets[196] = new PacketInfo<>(CM_SHOW_MAP.class, State.IN_GAME); // [C_REQUEST_SERIAL_KILLER_LIST (RequestSerialKillerListPacket)]
@@ -236,8 +236,8 @@ public class AionClientPacketFactory {
 			packets[208] = new PacketInfo<>(CM_COMPOSITE_STONES.class, State.IN_GAME); // [C_COMPOUND_ENCHANT_ITEM (FUN_1406457b0)]
 			// packets[209] = new PacketInfo<>(CM_TIME_CHECK_QUIT.class, State.IN_GAME); // [C_ASK_GLOBAL_PLAYTIME_FATIGUE_INFO (AskGlobalPlaytimeFatigueInfoPacket)]
 			packets[210] = new PacketInfo<>(CM_CHARACTER_PASSKEY.class, State.AUTHED); // [C_2ND_PASSWORD (SecondPasswordPacket)]
-			// packets[211] = 
-			// packets[212] = 
+			// packets[211] = [C_UNUSED_2ND_PASSWORD1]
+			// packets[212] = [C_UNUSED_2ND_PASSWORD2]
 			packets[213] = new PacketInfo<>(CM_CHECK_MAIL_UNK.class, State.IN_GAME); // [C_SA_GOODSLIST (ShopAgent2GoodsList)] TODO
 			// packets[214] = [C_SA_CONFIRMGOODS (ShopAgent2ConfirmGoods)]
 			// packets[215] = new PacketInfo<>(CM_DIRECT_ENTER_WORLD.class, State.IN_GAME); // [C_REQUEST_DIRECT_ENTER_WORLD (RequestDirectEnterWorldPacket)]
@@ -245,7 +245,7 @@ public class AionClientPacketFactory {
 			// packets[217] = new PacketInfo<>(CM_REQUEST_RETURN_SERVER.class, State.IN_GAME); // [C_REQUEST_RETURN_SERVER (RequestReturnServerPacket)]
 			packets[218] = new PacketInfo<>(CM_GET_HOUSE_BIDS.class, State.IN_GAME); // [C_REQUEST_AUCTION_LIST (RequestAuctionList)]
 			packets[219] = new PacketInfo<>(CM_REGISTER_HOUSE.class, State.IN_GAME); // [C_REQUEST_AUCTION_REGISTER (&LAB_140642310)]
-			// packets[220] = 
+			// packets[220] = [C_REQUEST_AUCTION_CANCEL]
 			packets[221] = new PacketInfo<>(CM_PLACE_BID.class, State.IN_GAME); // [C_REQUEST_AUCTION_BET (RequestAuctionBet)]
 			packets[222] = new PacketInfo<>(CM_HOUSE_TELEPORT.class, State.IN_GAME); // [C_REQUEST_HOUSING_TELEPORT (RequestHousingTeleport)]
 			packets[223] = new PacketInfo<>(CM_HOUSE_PAY_RENT.class, State.IN_GAME); // [C_REQUEST_HOUSING_CHARGE_FEE (RequestHousingChargeFee)]
@@ -266,14 +266,15 @@ public class AionClientPacketFactory {
 			packets[238] = new PacketInfo<>(CM_TUNE_RESULT.class, State.IN_GAME); // [C_ANSWER_REIDENTIFY (AnswerReidentifyPacket)]
 			packets[239] = new PacketInfo<>(CM_FRIEND_SET_MEMO.class, State.IN_GAME); // [C_CHANGE_BUDDY_MEMO (FUN_140647090)]
 			packets[240] = new PacketInfo<>(CM_UNWRAP_ITEM.class, State.IN_GAME); // [C_UNPACK_ITEM (UnpackItemPacket)]
-			// packets[241] = [C_ACCUSE_CHAT_SPAMMER]
-			// packets[242] = 
-			// packets[243] = 
-			packets[244] = new PacketInfo<>(CM_BIND_POINT_TELEPORT.class, State.IN_GAME);
-			// packets[245] = 
-			packets[246] = new PacketInfo<>(CM_UPGRADE_ARCADE.class, State.IN_GAME);
-			packets[247] = new PacketInfo<>(CM_ITEM_PURIFICATION.class, State.IN_GAME);
-			packets[248] = new PacketInfo<>(CM_ATREIAN_PASSPORT.class, State.IN_GAME);
+			// packets[241] = [C_REQUEST_NP_LOGIN_GAMESVR]
+			// packets[242] = [C_REQUEST_NP_CONSUME_TOKEN]
+			// packets[243] = [C_REQUEST_NP_AUTH_TOKEN]
+			packets[244] = new PacketInfo<>(CM_BIND_POINT_TELEPORT.class, State.IN_GAME);// [C_HOTSPOT]
+			// packets[245] = [C_ACCUSE_CHAT_SPAMMER]
+			packets[246] = new PacketInfo<>(CM_UPGRADE_ARCADE.class, State.IN_GAME); // [C_GOTCHA_REQUEST]
+			packets[247] = new PacketInfo<>(CM_ITEM_PURIFICATION.class, State.IN_GAME); // [C_ITEM_UPGRADE]
+			packets[248] = new PacketInfo<>(CM_ATREIAN_PASSPORT.class, State.IN_GAME); // [C_REQ_LOGIN_EVENT_REWARD]
+			// packets[249] = [C_REQ_REGISTER_MONEY_TRADE]
 		} catch (NoSuchMethodException e) { // should never happen
 			throw new ExceptionInInitializerError(e);
 		}

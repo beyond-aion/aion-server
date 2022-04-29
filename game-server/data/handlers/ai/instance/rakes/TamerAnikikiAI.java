@@ -44,7 +44,7 @@ public class TamerAnikikiAI extends GeneralNpcAI {
 				getSpawnTemplate().setWalkerId("3004600001");
 				WalkManager.startWalking(this);
 				getOwner().setState(CreatureState.ACTIVE, true);
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
 				// Key Box
 				spawn(700553, 611, 481, 936, (byte) 90);
 				spawn(700553, 657, 482, 936, (byte) 60);
@@ -68,7 +68,7 @@ public class TamerAnikikiAI extends GeneralNpcAI {
 			} else if (point == 8) {
 				super.handleMoveArrived();
 				getOwner().setState(CreatureState.WALK_MODE, true);
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
 				return;
 			}
 		}

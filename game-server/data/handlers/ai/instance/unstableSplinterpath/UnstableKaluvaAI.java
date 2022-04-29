@@ -49,7 +49,7 @@ public class UnstableKaluvaAI extends AggressiveNpcAI {
 			EmoteManager.emoteStopAttacking(getOwner());
 			setStateIfNot(AIState.FOLLOWING);
 			getOwner().setState(CreatureState.ACTIVE, true);
-			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
 			AIActions.targetCreature(this, getPosition().getWorldMapInstance().getNpc(egg));
 			getMoveController().moveToTargetObject();
 		}

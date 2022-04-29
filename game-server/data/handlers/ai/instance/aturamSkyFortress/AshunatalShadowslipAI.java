@@ -65,7 +65,7 @@ public class AshunatalShadowslipAI extends AggressiveNpcAI {
 				getSpawnTemplate().setWalkerId("3002400001");
 				getOwner().setState(CreatureState.ACTIVE, true);
 				WalkManager.startWalking(this);
-				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+				PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
 				ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 4000);
 			}, 3000);
 		}

@@ -8,20 +8,13 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.loginserver.network.aion.AionClientPacket;
 import com.aionemu.loginserver.network.aion.LoginConnection;
 import com.aionemu.loginserver.network.aion.LoginConnection.State;
-import com.aionemu.loginserver.network.aion.clientpackets.CM_AUTH_GG;
-import com.aionemu.loginserver.network.aion.clientpackets.CM_LOGIN;
-import com.aionemu.loginserver.network.aion.clientpackets.CM_PLAY;
-import com.aionemu.loginserver.network.aion.clientpackets.CM_SERVER_LIST;
-import com.aionemu.loginserver.network.aion.clientpackets.CM_UPDATE_SESSION;
+import com.aionemu.loginserver.network.aion.clientpackets.*;
 
 /**
  * @author -Nemesiss-
  */
 public class AionPacketHandlerFactory {
 
-	/**
-	 * logger for this class
-	 */
 	private static final Logger log = LoggerFactory.getLogger(AionPacketHandlerFactory.class);
 
 	/**
@@ -32,6 +25,43 @@ public class AionPacketHandlerFactory {
 	 * @return AionClientPacket object from binary data
 	 */
 	public static AionClientPacket handle(ByteBuffer data, LoginConnection client) {
+		/*
+			retail (KOR 8.2.22) client packet names for opcodes:
+			0 AQ_LOGIN
+			1 AQ_SERVER_LIST
+			2 AQ_ABOUT_TO_PLAY
+			3 AQ_LOGOUT
+			4 AQ_LOGIN_MD5
+			5 AQ_SERVER_LIST_EX
+			6 AQ_SCCHECK
+			7 AQ_GAMEGUARD
+			8 AQ_UPDATE_SESSION_REQ
+			9 AQ_WEBSESSION_LOGIN
+			10 AQ_OTPCHECK
+			11 AQ_EXTERNAL_TOKEN_LOGIN
+			12 AQ_AUX_AUTHENTICATION_ACK
+			16 AQ_IOVATION_CHECK
+			18 AQ_LOGIN_TOKEN
+			---------------------------
+			retail (KOR 8.2.22) server packet names for opcodes:
+			0 AC_PROTOCOL_VER
+			1 AC_LOGIN_FAIL
+			2 AC_BLOCKED_ACCOUNT
+			3 AC_LOGIN_OK
+			4 AC_SEND_SERVER_LIST
+			5 AC_SEND_SERVER_FAIL
+			6 AC_PLAY_FAIL
+			7 AC_PLAY_OK
+			8 AC_ACCOUNT_KICKED
+			9 AC_BLOCKED_ACCOUNT_WITH_MSG
+			10 AC_SCCHECK_REQ
+			11 AC_GAMEGUARD
+			12 AC_UPDATE_SESSION_ACK
+			13 AC_OTPCHECK_REQ
+			14 AC_AUX_AUTHENTICATION_REQ
+			15 AC_TELEPHONEAUTH_STARTED
+			19 AC_IOVATION_CHECK_REQ
+		 */
 		AionClientPacket msg = null;
 		State state = client.getState();
 		int opCode = data.get() & 0xFF;

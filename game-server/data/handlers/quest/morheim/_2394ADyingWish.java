@@ -65,7 +65,7 @@ public class _2394ADyingWish extends AbstractQuestHandler {
 					Npc orlan = (Npc) spawnInFrontOf(790021, player);
 					WalkManager.startWalking((NpcAI) orlan.getAi());
 					orlan.getAi().onCreatureEvent(AIEventType.FOLLOW_ME, player);
-					PacketSendUtility.broadcastPacket(orlan, new SM_EMOTION(orlan, EmotionType.START_EMOTE2, 0, orlan.getObjectId()));
+					PacketSendUtility.broadcastPacket(orlan, new SM_EMOTION(orlan, EmotionType.CHANGE_SPEED, 0, orlan.getObjectId()));
 					player.getController().addTask(TaskId.QUEST_FOLLOW,
 						QuestTasks.newFollowingToTargetCheckTask(env, orlan, ZoneName.get("HALABANA_HOT_SPRINGS_220020000")));
 					return defaultCloseDialog(env, 0, 1);

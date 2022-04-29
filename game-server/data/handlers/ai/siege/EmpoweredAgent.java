@@ -143,7 +143,7 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 			getOwner().setState(CreatureState.ACTIVE, true);
 			handleMoveValidate();
 			EmoteManager.emoteStartAttacking(getOwner(), creature);
-			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getOwner().getObjectId()));
 		}
 	}
 

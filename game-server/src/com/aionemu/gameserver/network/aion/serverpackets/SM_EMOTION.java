@@ -194,7 +194,7 @@ public class SM_EMOTION extends AionServerPacket {
 				writeH(emotion);
 				writeC(1);
 				break;
-			case START_EMOTE2:
+			case CHANGE_SPEED:
 				// emote startloop
 				writeH(baseAttackSpeed);
 				writeH(currentAttackSpeed);

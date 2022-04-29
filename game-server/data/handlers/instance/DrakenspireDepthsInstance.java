@@ -533,7 +533,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 			if (state == CreatureState.ACTIVE) {
 				npc.unsetState(CreatureState.WALK_MODE);
 				npc.setState(state);
-				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2));
+				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED));
 			}
 		}, 2000);
 	}

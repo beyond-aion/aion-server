@@ -139,7 +139,7 @@ public class CaptainXastaAI extends AggressiveNpcAI {
 
 	private void startRun(Npc npc) {
 		npc.setState(CreatureState.ACTIVE, true);
-		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
+		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
 	}
 
 	private void spawnHelpers(final NpcAI ai) {

@@ -128,7 +128,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 				ThreadPoolManager.getInstance().schedule(() -> {
 					WalkManager.startForcedWalking(this, 188.17f, 414.06f, 260.75488f);
 					getOwner().setState(CreatureState.ACTIVE, true);
-					PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+					PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
 				}, 800);
 				break;
 			case 20533:

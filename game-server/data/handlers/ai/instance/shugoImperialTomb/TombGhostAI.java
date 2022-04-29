@@ -28,7 +28,7 @@ public class TombGhostAI extends AggressiveNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		getOwner().setState(CreatureState.ACTIVE, true);
-		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
 	}
 
 }

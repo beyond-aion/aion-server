@@ -104,7 +104,7 @@ public class RideAction extends AbstractItemAction {
 				player.getObserveController().removeObserver(observer);
 				ItemTemplate itemTemplate = parentItem.getItemTemplate();
 				player.setPlayerMode(PlayerMode.RIDE, getRideInfo());
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_EMOTE2, 0, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.CHANGE_SPEED, 0, 0), true);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RIDE, 0, getRideInfo().getNpcId()), true);
 				PacketSendUtility.broadcastPacket(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 1), true);

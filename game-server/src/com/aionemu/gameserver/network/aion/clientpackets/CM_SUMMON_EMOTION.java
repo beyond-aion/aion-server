@@ -47,7 +47,7 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 		switch (emotionType) {
 			case FLY:
 			case LAND:
-				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, EmotionType.START_EMOTE2));
+				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, EmotionType.CHANGE_SPEED));
 				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
 				break;
 			case JUMP:
@@ -62,8 +62,9 @@ public class CM_SUMMON_EMOTION extends AionClientPacket {
 				summon.unsetState(CreatureState.WEAPON_EQUIPPED);
 				PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, emotionType));
 				break;
-			case UNK:
-				log.warn("Unknown emotion type? 0x" + Integer.toHexString(emotionTypeId).toUpperCase() + " from " + player);
+			case NONE:
+				if (emotionTypeId != EmotionType.NONE.getTypeId())
+					log.warn("Unknown emotion type " + emotionTypeId + " from " + player);
 		}
 	}
 }

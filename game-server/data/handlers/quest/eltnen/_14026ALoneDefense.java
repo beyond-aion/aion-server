@@ -239,7 +239,7 @@ public class _14026ALoneDefense extends AbstractQuestHandler {
 			spawn.getAi().setStateIfNot(AIState.WALKING);
 			spawn.setState(CreatureState.ACTIVE, true);
 			spawn.getMoveController().moveToTargetObject();
-			PacketSendUtility.broadcastPacket(spawn, new SM_EMOTION(spawn, EmotionType.START_EMOTE2, 0, spawn.getObjectId()));
+			PacketSendUtility.broadcastPacket(spawn, new SM_EMOTION(spawn, EmotionType.CHANGE_SPEED, 0, spawn.getObjectId()));
 		}
 	}
 }

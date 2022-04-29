@@ -58,7 +58,7 @@ public class PlayerActions extends VisibleObjectActions {
 				player.unsetState(CreatureState.RESTING);
 				player.unsetState(CreatureState.FLOATING_CORPSE);
 				player.setState(CreatureState.ACTIVE);
-				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.START_EMOTE2, 0, 0), true);
+				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.CHANGE_SPEED, 0, 0), true);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RIDE_END), true);
 
 				player.getGameStats().updateStatsAndSpeedVisually();

@@ -75,7 +75,7 @@ public class MuraganAI extends GeneralNpcAI {
 		setStateIfNot(AIState.WALKING);
 		getOwner().setState(CreatureState.ACTIVE, true);
 		getMoveController().moveToPoint(838, 1317, 396);
-		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getOwner().getObjectId()));
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override

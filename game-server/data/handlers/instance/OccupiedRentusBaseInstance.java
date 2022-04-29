@@ -165,7 +165,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				npc.getSpawn().setWalkerId(walkern);
 				WalkManager.startWalking((NpcAI) npc.getAi());
 				npc.setState(CreatureState.WALK_MODE, true);
-				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
+				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
 			}
 
 		}, time);

@@ -113,7 +113,7 @@ public class BrigadeGeneralTerathAI extends AggressiveNpcAI {
 						getOwner().getMoveController().moveToPoint(getOwner().getSpawn().getX(), getOwner().getSpawn().getY(), getOwner().getSpawn().getZ());
 						WalkManager.startWalking(BrigadeGeneralTerathAI.this);
 						getOwner().setState(CreatureState.ACTIVE, true);
-						PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+						PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getOwner().getObjectId()));
 					}
 				}, 4000);
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -147,7 +147,7 @@ public class BrigadeGeneralTerathAI extends AggressiveNpcAI {
 							setStateIfNot(AIState.WALKING);
 							getOwner().setState(CreatureState.ACTIVE, true);
 							getOwner().getMoveController().moveToTargetObject();
-							PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+							PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getOwner().getObjectId()));
 						}
 					}
 				}, 30000);

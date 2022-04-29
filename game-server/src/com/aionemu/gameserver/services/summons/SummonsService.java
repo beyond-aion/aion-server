@@ -14,12 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_OWNER_REMOVE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_PANEL;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_PANEL_REMOVE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SUMMON_UPDATE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -41,7 +36,7 @@ public class SummonsService {
 		Summon summon = VisibleObjectSpawner.spawnSummon(master, npcId, skillId, time);
 		master.setSummon(summon);
 		PacketSendUtility.sendPacket(master, new SM_SUMMON_PANEL(summon));
-		PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, EmotionType.START_EMOTE2));
+		PacketSendUtility.broadcastPacket(summon, new SM_EMOTION(summon, EmotionType.CHANGE_SPEED));
 		PacketSendUtility.broadcastPacket(summon, new SM_SUMMON_UPDATE(summon));
 		return summon;
 	}

@@ -10,44 +10,47 @@ import java.util.Map;
  */
 public enum ChatType {
 
-	NORMAL(0), // Normal chat (White)
-	NPC(1), // Npc chat (Light Blue)
-	SHOUT(3), // Shout chat (Orange)
-	WHISPER(4), // Whisper chat (Green)
-	GROUP(5), // Group chat (Blue)
-	ALLIANCE(6), // Alliance chat (Aqua)
-	GROUP_LEADER(7), // Group Leader chat (Orange)
-	LEAGUE(8), // League chat (Dark Blue)
-	LEAGUE_ALERT(9), // League chat (Orange)
-	LEGION(10), // Legion chat (Green)
+	NORMAL(0), // [MT_SAY] Normal chat (White)
+	NPC(1), // [MT_THINK] Npc chat (Light Blue)
+	SHOUT(3), // [MT_SHOUT] Shout chat (Orange)
+	WHISPER(4), // [MT_WHISPER] Whisper chat (Green)
+	GROUP(5), // [MT_PARTY] Group chat (Blue)
+	ALLIANCE(6), // [MT_ALLIANCE] Alliance chat (Aqua)
+	GROUP_LEADER(7), // [MT_ALERT] Group Leader chat (Orange)
+	LEAGUE(8), // [MT_UNION] League chat (Dark Blue)
+	LEAGUE_ALERT(9), // [MT_UNIONALERT] League chat (Orange)
+	LEGION(10), // [MT_GUILD] Legion chat (Green)
+	// (11), // [MT_GUILD_LORD]
+	// (12), // [MT_GLOBAL_CHAT]
+	// (13), // [MT_TRADE_CHAT]
+	CH1(14), // [MT_CHANNEL_0]
+	CH2(15), // [MT_CHANNEL_1]
+	CH3(16), // [MT_CHANNEL_2]
+	CH4(17), // [MT_CHANNEL_3]
+	CH5(18), // [MT_CHANNEL_4]
+	CH6(19), // [MT_CHANNEL_5]
+	CH7(20), // [MT_CHANNEL_6]
+	CH8(21), // [MT_CHANNEL_7]
+	CH9(22), // [MT_CHANNEL_8]
+	CH10(23), // [MT_CHANNEL_9]
 
-	CH1(14),
-	CH2(15),
-	CH3(16),
-	CH4(17),
-	CH5(18),
-	CH6(19),
-	CH7(20),
-	CH8(21),
-	CH9(22),
-	CH10(23),
-
-	COMMAND(24), // Command chat (Yellow)
+	COMMAND(24), // [MT_RANKER_CHAT] Command chat (Yellow), usable by commanders and supreme commanders via /c
 
 	/**
 	 * Global chat types
 	 */
-	GOLDEN_YELLOW(25, true), // System message (Dark Yellow), most commonly used, no "center" equivalent.
+	GOLDEN_YELLOW(25, true), // [MT_SYSMSG_HIGH_PRI] System message (Dark Yellow), most commonly used, no "center" equivalent.
+	// (26), // [MT_SYSMSG_LOW_PRI]
+	GM_CHAT(27, false), // [MT_SYSMSG_PETITION] Message used in petition/support packet (S_PETITION_STATUS opcode 239), has its own window and icon next to skill bar and is used to communicate with a gm.
+	// (28), // [MT_SYSMSG_MSGBOX]
+	// (29), // [MT_NOTICEBOX]
+	WHITE(31, true), // [MT_GMMSG_NORMAL_LEVEL_1] System message (White), visible in "All" chat thumbnail only !
+	YELLOW(32, true), // [MT_GMMSG_NORMAL_LEVEL_2] System message (Yellow), visible in "All" chat thumbnail only !
+	BRIGHT_YELLOW(33, true), // [MT_GMMSG_NORMAL_LEVEL_3] System message (Light Yellow), visible in "All" chat thumbnail only !
 
-	GM_CHAT(27, false), // Message used in petition/support packet(0xEF), has its own window and icon next to skill bar and is used to communicate with a gm.
-
-	WHITE(31, true), // System message (White), visible in "All" chat thumbnail only !
-	YELLOW(32, true), // System message (Yellow), visible in "All" chat thumbnail only !
-	BRIGHT_YELLOW(33, true), // System message (Light Yellow), visible in "All" chat thumbnail only !
-
-	WHITE_CENTER(34, true), // Periodic Notice (White && Box on screen center)
-	YELLOW_CENTER(35, true), // Periodic Announcement(Yellow && Box on screen center)
-	BRIGHT_YELLOW_CENTER(36, true); // System Notice (Light Yellow && Box on screen center)
+	WHITE_CENTER(34, true), // [MT_GMMSG_HIGH_LEVEL_1] Periodic Notice (White && Box on screen center)
+	YELLOW_CENTER(35, true), // [MT_GMMSG_HIGH_LEVEL_2] Periodic Announcement (Yellow && Box on screen center)
+	BRIGHT_YELLOW_CENTER(36, true); // [MT_GMMSG_HIGH_LEVEL_3] System Notice (Light Yellow && Box on screen center)
 
 	private static final Map<Byte, ChatType> chatTypes = new HashMap<>();
 	private final byte id;

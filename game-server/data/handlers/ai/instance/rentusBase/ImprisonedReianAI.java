@@ -78,7 +78,7 @@ public class ImprisonedReianAI extends GeneralNpcAI {
 						getSpawnTemplate().setWalkerId(walkerId);
 						WalkManager.startWalking(this);
 						getOwner().setState(CreatureState.ACTIVE, true);
-						PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+						PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
 						switch (Rnd.get(1, 10)) {
 							case 1:
 								PacketSendUtility.broadcastMessage(getOwner(), 342410);

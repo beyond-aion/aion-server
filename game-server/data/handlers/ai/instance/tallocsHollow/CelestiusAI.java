@@ -59,7 +59,7 @@ public class CelestiusAI extends AggressiveNpcAI {
 		npc.getSpawn().setWalkerId(walkId);
 		WalkManager.startWalking((NpcAI) npc.getAi());
 		npc.setState(CreatureState.ACTIVE, true);
-		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
+		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
 	}
 
 	private void deleteHelpers() {

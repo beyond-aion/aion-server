@@ -97,7 +97,7 @@ public class SiegeDrill extends NpcAI {
 			getOwner().getSpawn().setWalkerId("2A2D7F6EA351DCCEAA3CD097B9311ED308DCD2EC");
 			WalkManager.startWalking(this);
 			getOwner().setState(CreatureState.ACTIVE, true);
-			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
 			ThreadPoolManager.getInstance().schedule(() -> {
 				Npc npc = getPosition().getWorldMapInstance().getNpc(233189);
 				if (npc != null) {

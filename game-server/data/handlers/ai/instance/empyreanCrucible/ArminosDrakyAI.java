@@ -31,7 +31,7 @@ public class ArminosDrakyAI extends GeneralNpcAI {
 		getSpawnTemplate().setWalkerId(walkerId);
 		WalkManager.startWalking(this);
 		getOwner().setState(CreatureState.ACTIVE, true);
-		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getObjectId()));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
 	}
 
 	@Override

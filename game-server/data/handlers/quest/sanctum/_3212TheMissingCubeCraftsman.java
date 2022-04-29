@@ -77,7 +77,7 @@ public class _3212TheMissingCubeCraftsman extends AbstractQuestHandler {
 					Npc npc = (Npc) env.getVisibleObject();
 					npc.getSpawn().setWalkerId("4212");
 					WalkManager.startWalking((NpcAI) npc.getAi());
-					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.START_EMOTE2, 0, npc.getObjectId()));
+					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
 					player.getController().addTask(TaskId.QUEST_FOLLOW, QuestTasks.newFollowingToTargetCheckTask(env, npc, 505.69427f, 437.69382f, 885.1844f));
 					return defaultCloseDialog(env, 2, 3);
 				}

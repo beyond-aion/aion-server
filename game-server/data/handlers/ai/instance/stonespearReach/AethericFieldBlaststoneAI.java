@@ -28,7 +28,7 @@ public class AethericFieldBlaststoneAI extends NpcAI {
 			getOwner().getSpawn().setWalkerId("301500000_clown_path");
 			WalkManager.startWalking(this);
 			getOwner().setState(CreatureState.WALK_MODE);
-			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.START_EMOTE2, 0, getOwner().getObjectId()));
+			PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getOwner().getObjectId()));
 		}
 	}
 
