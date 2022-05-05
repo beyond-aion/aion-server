@@ -68,47 +68,49 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		}
 
 		if (version != INTERNAL_VERSION) {
-			writeC(0x01); // Send wrong client version
+			writeC(1); // answerID
+			// 0 - ok (no message)
+			// 1 - The client version is not compatible with the game server.
+			// 2 - The NPC script version is not compatible with the game server.
+			// 3, 4, ... - An unknown error has occurred while checking the game server version.
 			return;
 		}
-		writeC(0x00); // version ok
-		writeC(NetworkConfig.GAMESERVER_ID);
-		writeD(150602); // start year month day
-		writeD(150326); // start year month day
-		writeD(0x00); // spacing
-		writeD(150317); // year month day
+		writeC(0); // answerID
+		writeC(NetworkConfig.GAMESERVER_ID); // serverId
+		writeD(150602); // GSServBuildDate (year month day)
+		writeD(150326); // DBServBuildDate (year month day)
+		writeD(0x00); // 0
+		writeD(150317); // NPCServBuildDate (year month day)
 		writeD(GameServer.START_TIME_SECONDS); // start server time in seconds
-		writeC(0x00); // unk
-		writeC(GSConfig.SERVER_COUNTRY_CODE); // country code;
-		writeC(0x00); // unk
-		writeC((characterLimitCount * LoginServer.getInstance().getGameServerCount() * 0x10) | (limitFactionMode * 4) | GSConfig.CHARACTER_CREATION_MODE);
-		writeD((int) (System.currentTimeMillis() / 1000)); // current UTC time in seconds
-		writeH(350); // unk
-		writeC(1); // unk (always 1)
-		writeC(10); // time or level restriction (now 5 on official)
-		writeC(1); // time or level restriction (now 15 on official)
-		writeC(10); // time or level restriction
-		writeC(GSConfig.CHAT_SERVER_MIN_LEVEL); // min level to write in channel chats
-		writeC(20); // time or level restriction (now 1 on official)
-		writeC(20); // level restriction (before 30, now 66 on official)
-		writeC(1); // unk (always 1)
-		writeH(2); // unk (always 2)
+		writeC(0x00); // 0
+		writeC(GSConfig.SERVER_COUNTRY_CODE); // country code
+		writeC(0x00); // 0
+		writeC((characterLimitCount * LoginServer.getInstance().getGameServerCount() * 0x10) | (limitFactionMode * 4) | GSConfig.CHARACTER_CREATION_MODE); // ServerFlag
+		writeD((int) (System.currentTimeMillis() / 1000)); // PacketGenTimeOnServ (current UTC time in seconds)
+		writeH(350); // skillPacketDelay
+		writeC(1); // enableClientPet (always 1)
+		writeC(10); // minSendMailLevel (now 5 on official)
+		writeC(1); // minReceiveWhisperLevel (now 15 on official)
+		writeC(10); // minReceiveMailLevel
+		writeC(GSConfig.CHAT_SERVER_MIN_LEVEL); // ChannelChatLevel (min level to write in channel chats)
+		writeC(20); // Trial_ChannelChatLevel (now 1 on official)
+		writeC(20); // Trial_Channelchatwritelevel1 (before 30, now 66 on official)
+		writeC(1); // Trial_Channelchatwritelevel2 (always 1)
+		writeH(2); // MatchingCoolTimeSEC (always 2)
 		writeC(GSConfig.CHARACTER_REENTRY_TIME);
-		writeC(cityDecoration.getId());
-		writeD(0); // unk
-		writeD(-(ServerTime.getStandardOffset())); // server time zone offset relative to UTC in seconds (excluding daylight savings)
-		writeC(0x04); // unk
-		writeC(120); // unk
-		writeH(25233); // unk
-		writeC(2); // 4.0
-		writeC(1); // unk
-		writeD(0); // 4.0
-		writeD(0); // 4.5
-		writeH(3000); // 4.5
-		writeH(1); // 4.5
-		writeC(0); // 4.7
-		writeC(1); // 4.7
-		writeD(-(ServerTime.getDaylightSavings())); // servers current daylight saving time offset in seconds
+		writeD(cityDecoration.getId()); // SceneStatus
+		writeC(0); // fatigueKoreaUse
+		writeD(-ServerTime.getStandardOffset()); // server time zone offset relative to UTC in seconds (excluding daylight savings)
+		writeC(0x04); // MaxHousingChargePerid
+		writeD(40014200); // spawn_version (4.0)
+		writeC(1); // DisposableItemTrade
+		writeD(0); // EnableNeutralChat (4.0)
+		writeD(0); // updateServerAddr (4.5)
+		writeH(3000); // updateServerPort (4.5)
+		writeH(1); // updateServerVersionCheckType (4.5)
+		writeC(0); // ReduceSellPriceforGold (4.7)
+		writeC(1); // RestrictWareandChargebyRank (4.7)
+		writeD(-ServerTime.getDaylightSavings()); // TimeDstBias (servers current daylight saving time offset in seconds)
 		writeC(1); // 4.8
 		writeC(1); // 1 = activate stonespear siege
 		writeC(0); // 1 = master Server
@@ -133,7 +135,7 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(0); // 4.8
 		writeC(64); // 4.8
 		writeC(64); // 4.8
-		writeH(ChatServer.getInstance().getPublicIP().length > 0 ? 1 : 0);
+		writeH(ChatServer.getInstance().getPublicIP().length > 0 ? 1 : 0); // ChatServersCount
 		if (ChatServer.getInstance().getPublicIP().length > 0) {
 			writeC(0); // spacer or maybe id
 			writeB(ChatServer.getInstance().getPublicIP());
