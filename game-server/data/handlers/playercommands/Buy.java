@@ -43,23 +43,23 @@ public class Buy extends PlayerCommand {
 	}
 
 	private void initRewards() {
-		addReward(166000194, 5, 50); // Delta Enchantment Stone
-		addReward(166000195, 5, 70); // Epsilon Enchantment Stone
-		addReward(188051516, 1, 150); // Smart Greater Scroll Bundle
-		addReward(162000107, 30, 150); // Saam King's Herb
-		addReward(162000124, 50, 150); // Superior Recovery Serum
-		addReward(188051868, 1, 60); // [Event] Strongest Inquin Form Candy Pouch
-		addReward(188053610, 3, 200); // [Event] Level 70 Composite Manastone Bundle
-		addReward(188053618, 1, 300); // Honorable Elim's Idian Bundle
-		addReward(166500002, 2, 60); // Amplification Stone
-		addReward(166030005, 2, 100); // Tempering Solution
-		addReward(188053295, 1, 300); // Empyrean Plume Chest
-		addReward(188950015, 1, 800); // Special Courier Pass (Eternal/Lv. 61-65)
-		addReward(188950019, 1, 1000); // Special Courier Pass (Mythic/Lv. 61-65)
-		addReward(165020015, 1, 2000); // Armor Wrapping Scroll (Eternal/Lv. 65 and lower)
-		addReward(165020014, 1, 2250); // Weapon Wrapping Scroll (Eternal/Lv. 65 and lower)
-		addReward(165020021, 1, 2750); // Noble Armor Wrapping Scroll (Mythic/Lv. 65 and lower)
-		addReward(165020020, 1, 3000); // Noble Weapon Wrapping Scroll (Mythic/Lv. 65 and lower)
+		addReward(166000194, 5, 40); // Delta Enchantment Stone
+		addReward(166000195, 5, 50); // Epsilon Enchantment Stone
+		addReward(188051516, 1, 100); // Smart Greater Scroll Bundle
+		addReward(162000107, 30, 100); // Saam King's Herb
+		addReward(162000124, 50, 100); // Superior Recovery Serum
+		addReward(188051868, 1, 50); // [Event] Strongest Inquin Form Candy Pouch
+		addReward(188053610, 3, 150); // [Event] Level 70 Composite Manastone Bundle
+		addReward(188053618, 1, 200); // Honorable Elim's Idian Bundle
+		addReward(166500002, 2, 50); // Amplification Stone
+		addReward(166030005, 2, 80); // Tempering Solution
+		addReward(188053295, 1, 200); // Empyrean Plume Chest
+		addReward(188950015, 1, 400); // Special Courier Pass (Eternal/Lv. 61-65)
+		addReward(188950019, 1, 500); // Special Courier Pass (Mythic/Lv. 61-65)
+		addReward(165020015, 1, 1000); // Armor Wrapping Scroll (Eternal/Lv. 65 and lower)
+		addReward(165020014, 1, 1150); // Weapon Wrapping Scroll (Eternal/Lv. 65 and lower)
+		addReward(165020021, 1, 1350); // Noble Armor Wrapping Scroll (Mythic/Lv. 65 and lower)
+		addReward(165020020, 1, 1500); // Noble Weapon Wrapping Scroll (Mythic/Lv. 65 and lower)
 		addReward(190020175, 1, 1500); // Tahabata Egg
 		addReward(187060103, 1, 1300); // Prestige Wings
 		addReward(169610342, 1, 1000); // [Title] Forgotten Conqueror
