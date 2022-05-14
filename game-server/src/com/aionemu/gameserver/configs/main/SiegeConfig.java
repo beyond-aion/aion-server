@@ -48,6 +48,9 @@ public class SiegeConfig {
 	@Property(key = "gameserver.siege.door.repair.heal.percent", defaultValue = "0.01")
 	public static double DOOR_REPAIR_HEAL_PERCENT;
 
+	@Property(key = "gameserver.siege.reward.balaur.victory", defaultValue = "false")
+	public static boolean SIEGE_REWARD_BALAUR_VICTORY;
+
 	@Property(key = "gameserver.siege.ignore_staff_on_location_clear", defaultValue = "false")
 	public static boolean IGNORE_STAFF_ON_LOCATION_CLEAR;
 

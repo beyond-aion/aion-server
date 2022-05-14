@@ -173,15 +173,17 @@ public class FortressSiege extends Siege<FortressLocation> {
 		SiegeService.getInstance().spawnNpcs(getSiegeLocationId(), getSiegeLocation().getRace(), SiegeModType.PEACE);
 
 		// Reward players and owning legion
-		// If fortress was not captured by balaur
-		if (SiegeRace.BALAUR != getSiegeLocation().getRace()) {
-			SiegeRace winnerRace = getSiegeLocation().getRace();
+		SiegeRace winnerRace = getSiegeLocation().getRace();
+		if (winnerRace != SiegeRace.BALAUR) {
 			SiegeRace loserRace = winnerRace == SiegeRace.ASMODIANS ? SiegeRace.ELYOS : SiegeRace.ASMODIANS;
 			SiegeRaceCounter winnerRaceCounter = getSiegeCounter().getRaceCounter(winnerRace);
 			SiegeRaceCounter loserRaceCounter = getSiegeCounter().getRaceCounter(loserRace);
 			sendRewardsToParticipants(winnerRaceCounter, isBossKilled() ? SiegeResult.OCCUPY : SiegeResult.DEFENDER);
 			sendRewardsToParticipants(loserRaceCounter, isBossKilled() ? SiegeResult.FAIL : SiegeResult.EMPTY);
 			distributeLegionRewards(winnerRaceCounter);
+		} else if (SiegeConfig.SIEGE_REWARD_BALAUR_VICTORY) {
+			sendRewardsToParticipants(getSiegeCounter().getRaceCounter(SiegeRace.ASMODIANS), isBossKilled() ? SiegeResult.FAIL : SiegeResult.EMPTY);
+			sendRewardsToParticipants(getSiegeCounter().getRaceCounter(SiegeRace.ELYOS), isBossKilled() ? SiegeResult.FAIL : SiegeResult.EMPTY);
 		}
 
 		// Update outpost status
