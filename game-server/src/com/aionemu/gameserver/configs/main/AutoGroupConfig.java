@@ -59,4 +59,7 @@ public class AutoGroupConfig {
 
 	@Property(key = "gameserver.idgel_dome.time", defaultValue = "0 0 23 ? * *")
 	public static CronExpression[] IDGEL_DOME_TIMES;
+
+	@Property(key = "gameserver.autogroup.announce_battleground_registrations", defaultValue = "false")
+	public static boolean ANNOUNCE_BATTLEGROUND_REGISTRATIONS;
 }

@@ -3,11 +3,12 @@ package com.aionemu.gameserver.model.autogroup;
 import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.templates.L10n;
 
 /**
  * @author xTz
  */
-public enum AutoGroupType {
+public enum AutoGroupType implements L10n {
 	BARANATH_DREDGION(1, 600000) {
 
 		@Override
@@ -328,6 +329,7 @@ public enum AutoGroupType {
 		return instanceMaskId;
 	}
 
+	@Override
 	public int getL10nId() {
 		return template.getL10nId();
 	}

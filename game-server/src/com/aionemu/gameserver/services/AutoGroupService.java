@@ -5,8 +5,10 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
+import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
+import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.autogroup.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
@@ -14,6 +16,7 @@ import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.instance.PvPArenaService;
@@ -77,6 +80,8 @@ public class AutoGroupService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_REGISTER_SUCCESS());
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 1, ert.getId(), player.getName()));
 		}
+		if (agt.isIconInvite() && AutoGroupConfig.ANNOUNCE_BATTLEGROUND_REGISTRATIONS && searchers.values().stream().filter(s -> s.getPlayer() != null && s.getPlayer().getRace() == player.getRace() && s.getSearchInstance(instanceMaskId) != null).count() == 1)
+			PacketSendUtility.broadcastToWorld(new SM_MESSAGE(0, null, player.getRace().getL10n() + " have registered for " + agt.getL10n() + ".", ChatType.BRIGHT_YELLOW_CENTER), p -> p.getRace() != player.getRace() && agt.hasLevelPermit(p.getLevel()));
 		startSort(ert, instanceMaskId, true);
 	}
 
