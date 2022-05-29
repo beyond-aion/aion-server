@@ -658,18 +658,22 @@ public class Effect implements StatOwner {
 		}
 
 		Creature effected = getEffected();
-		for (EffectTemplate template : successEffects.values()) {
-			if (!shouldApplyFurtherEffects(effected))
-				break;
-			template.applyEffect(this);
-			if (!shouldApplyFurtherEffects(effected))
-				break;
-			template.startSubEffect(this);
+		try {
+			for (EffectTemplate template : successEffects.values()) {
+				if (!shouldApplyFurtherEffects(effected))
+					break;
+				template.applyEffect(this);
+				if (!shouldApplyFurtherEffects(effected))
+					break;
+				template.startSubEffect(this);
+			}
+			if (applyCriticalEffect && subEffect != null)
+				subEffect.applyEffect();
+			if (effected != null)
+				effected.getAi().onEffectApplied(this);
+		} catch (Exception e) {
+			throw new RuntimeException("Error applying effect of skill " + getSkillId() + " from " + effector + " to " + effected, e);
 		}
-		if (applyCriticalEffect && subEffect != null)
-			subEffect.applyEffect();
-		if (effected != null)
-			effected.getAi().onEffectApplied(this);
 	}
 
 	public void broadcastHate() {
