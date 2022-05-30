@@ -10,6 +10,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.chatserver.ChatServer;
 import com.aionemu.gameserver.network.loginserver.LoginServer;
+import com.aionemu.gameserver.services.AtreianPassportService;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
@@ -111,30 +112,31 @@ public class SM_VERSION_CHECK extends AionServerPacket {
 		writeC(0); // ReduceSellPriceforGold (4.7)
 		writeC(1); // RestrictWareandChargebyRank (4.7)
 		writeD(-ServerTime.getDaylightSavings()); // TimeDstBias (servers current daylight saving time offset in seconds)
-		writeC(1); // 4.8
-		writeC(1); // 1 = activate stonespear siege
-		writeC(0); // 1 = master Server
-		writeC(0);
-		writeH(0);
-		writeD(0); // 4.8
-		writeD(0); // 4.8
-		writeD(0); // 4.8
-		writeD(1000); // 4.8
-		writeD(1000); // 4.8
-		writeD(1000); // 4.8
-		writeD(1000); // 4.8
-		writeD(1000); // 4.8
-		writeD(1000); // 4.8
-		writeD(1000); // 4.8
-		writeD(1000); // 4.8
-		writeD(1000); // 4.8
-		writeD(1000); // 4.8
-		writeD(1000); // 4.8
-		writeC(0); // 4.8
-		writeC(0); // 4.8
-		writeC(0); // 4.8
-		writeC(64); // 4.8
-		writeC(64); // 4.8
+		writeC(1); // SetDefaultAnimLength (4.7)
+		writeC(1); // 1 = activate stonespear siege (4.8)
+		writeD(0); // 1 = activate master server (4.8)
+		writeC(0); // unk/not used? (4.8)
+		writeC(AtreianPassportService.getInstance().isAtreianPassportDisabled() ? 1 : 0); // remove Atreian Passport menu entry 0/1 (4.8)
+		writeC(0); // Newbie or comeback icons/etc disable/enable? 0/1 (4.8)
+		writeC(0); // Disable evolution? 0/1 (4.8)
+		writeC(0); // Item destroy on Enchant? 0/1 (4.8)
+		writeC(0); // Disable some item wear level check? 0/1 (4.8)
+		writeC(0); // Item related enable/disable? 0/1 (4.8)
+		writeC(0); // Special page(rank points?) enable/disable? / CreateAllPlayerClass? 0/1 (4.8) // TODO test
+		writeD(GSConfig.ITEM_WRAP_LIMIT); // incFreeTradePackCount (4.8)
+		writeD(1000); // decDropProb (rate modifier, divide by 1000) not used? (4.8)
+		writeD(1000); // decUserSellItemPrice (rate modifier, divide by 1000) (4.8)
+		writeD(1000); // decUserSellAPPrice (rate modifier, divide by 1000) (4.8)
+		writeD(1000); // incNpcSellItemMedalPrice (rate modifier, divide by 1000) (4.8)
+		writeD(1000); // incNpcSellItemCoinPrice (rate modifier, divide by 1000) (4.8)
+		writeD(1000); // incNpcSellItemAPPrice (rate modifier, divide by 1000) (4.8)
+		writeD(1000); // incNpcSellItemQinaPrice (rate modifier, divide by 1000) (4.8)
+		writeD(1000); // incNpcSellItemAPQinaPrice (rate modifier, divide by 1000) (4.8)
+		writeD(1000); // incItemUpgradeItemCnt (rate modifier, divide by 1000) (4.8)
+		writeD(1000); // incItemUpgradeAP (rate modifier, divide by 1000) (4.8)
+		writeD(1000); // incItemUpgradeQina (rate modifier, divide by 1000) (4.8)
+		writeC(0); // Augment disable or limit? 0/1 (4.8)
+		writeF(3.0f); // exp rate modifier? (4.8)
 		writeH(ChatServer.getInstance().getPublicIP().length > 0 ? 1 : 0); // ChatServersCount
 		if (ChatServer.getInstance().getPublicIP().length > 0) {
 			writeC(0); // spacer or maybe id

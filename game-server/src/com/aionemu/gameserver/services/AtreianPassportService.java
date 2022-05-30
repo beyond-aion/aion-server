@@ -63,7 +63,7 @@ public class AtreianPassportService {
 		}
 	}
 
-	private boolean isAtreianPassportDisabled() {
+	public boolean isAtreianPassportDisabled() {
 		return isAtreianPassportDisabled(ServerTime.now().toLocalDateTime());
 	}
 

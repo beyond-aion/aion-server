@@ -74,6 +74,9 @@ public class GSConfig {
 	@Property(key = "gameserver.character.reentry.time", defaultValue = "20")
 	public static int CHARACTER_REENTRY_TIME;
 
+	@Property(key = "gameserver.item_wrap_limit", defaultValue = "0")
+	public static int ITEM_WRAP_LIMIT;
+
 	@Property(key = "gameserver.web_rewards.enable", defaultValue = "false")
 	public static boolean ENABLE_WEB_REWARDS;
 
