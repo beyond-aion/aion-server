@@ -1,6 +1,6 @@
 /*
- * DB changes since 4307ddf3 (18.12.2021)
+ * DB changes since 737e5e7d (31.05.2022)
  */
 
 -- remove old event items
-DELETE FROM inventory WHERE item_id IN (188052318, 188100091, 188100092, 188100093, 188100094);
+DELETE FROM inventory WHERE item_id IN (185000221);
