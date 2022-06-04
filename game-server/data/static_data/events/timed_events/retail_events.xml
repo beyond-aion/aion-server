@@ -3036,7 +3036,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Shugo Emperor's Vault" start="2021-04-19T00:00:00" end="2021-05-02T23:59:59">
+	<event name="Shugo Emperor's Vault" start="2022-06-05T00:00:00" end="2022-06-19T23:59:59">
 		<quests>
 			<maintainable>80689 80690 80691 80692 80693 80694 80695 80696</maintainable>
 		</quests>
@@ -3045,13 +3045,16 @@
 				<gd_maps>
 					<gd_map map_id="300170000" /><!-- Beshmundir Temple -->
 					<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-					<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
+					<gd_map map_id="300590000" /><!-- Ophidan Bridge -->
 				</gd_maps>
 				<gd_npcs>
 					<gd_npc npc_id="216183" /><!-- Stormwing -->
 					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
 					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
-					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
+					<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+					<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
+					<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
+					<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="188600311" /><!-- Shugo Emperor's Vault Bonus Entry Scroll -->
@@ -3059,6 +3062,7 @@
 			</gd_rule>
 		</event_drops>
 		<spawns>
+			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
 				<!-- Indinerk Jonakak's Secret Passage -->
 				<spawn npc_id="832920" respawn_time="295">
@@ -3073,6 +3077,7 @@
 					<spot x="1457.3" y="1508.8" z="573.07" h="60" />
 				</spawn>
 			</spawn_map>
+			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
 				<!-- Indinerk Jonakak's Secret Passage -->
 				<spawn npc_id="832920" respawn_time="295">
