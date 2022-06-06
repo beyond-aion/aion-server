@@ -131,6 +131,9 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 		WorldMapInstance wmi = getPosition().getWorldMapInstance();
 		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler))
 			return;
-		wmi.getPlayersInside().forEach(p -> getOwner().getAggroList().addHate(p, 1000));
+		wmi.getPlayersInside().forEach(p -> {
+			if (!getOwner().getAggroList().isHating(p))
+				getOwner().getAggroList().addHate(p, 1000);
+		});
 	}
 }
