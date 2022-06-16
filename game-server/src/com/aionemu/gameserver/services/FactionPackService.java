@@ -25,8 +25,8 @@ public class FactionPackService {
 	private static final FactionPackService INSTANCE = new FactionPackService();
 	private final LocalDateTime elyosMinCreationTime = LocalDateTime.of(2020, Month.SEPTEMBER, 14, 0, 0, 0);
 	private final LocalDateTime elyosMaxCreationTime = LocalDateTime.of(2020, Month.SEPTEMBER, 26, 23, 59, 59);
-	private final LocalDateTime asmodianMinCreationTime = null;
-	private final LocalDateTime asmodianMaxCreationTime = null;
+	private final LocalDateTime asmodianMinCreationTime = LocalDateTime.of(2022, Month.JUNE, 20, 0, 0, 0);
+	private final LocalDateTime asmodianMaxCreationTime = LocalDateTime.of(2022, Month.JULY, 19, 23, 59, 59);
 	private final FactionPackDAO dao = DAOManager.getDAO(FactionPackDAO.class);
 	private final List<RewardItem> rewards = new ArrayList<>();
 
@@ -44,11 +44,7 @@ public class FactionPackService {
 	}
 
 	public void addPlayerCustomReward(Player player) {
-		if (rewards.isEmpty())
-			return;
-		if (player.getLevel() != 65)
-			return;
-		if (player.getCommonData().getMailboxLetters() + rewards.size() > 100)
+		if (rewards.isEmpty() || player.getLevel() != 65 || (player.getCommonData().getMailboxLetters() + rewards.size() > 100))
 			return;
 		if (player.getRace() == Race.ASMODIANS)
 			sendRewards(player, asmodianMinCreationTime, asmodianMaxCreationTime);
@@ -73,7 +69,7 @@ public class FactionPackService {
 				continue;
 			SystemMailService.sendMail(
 				"Beyond Aion", player.getName(), "Faction Pack", "Greetings Daeva!\n\n"
-					+ "In gratitude for your decision to join the Elyos faction we prepared an additional item pack.\n\n" + "Enjoy your stay on Beyond Aion!",
+					+ "In gratitude for your decision to join this faction we prepared an additional item pack.\n\n" + "Enjoy your stay on Beyond Aion!",
 				e.getId(), e.getCount(), 0, LetterType.EXPRESS);
 		}
 	}
