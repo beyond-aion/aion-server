@@ -20,22 +20,26 @@ public enum StorageType {
 	CASH_PET_BAG_26(41, 26, 6),
 	CASH_PET_BAG_32(42, 32, 6),
 	CASH_PET_BAG_34(43, 34, 6),
-	HOUSE_STORAGE_01(60, 9, 9),
-	HOUSE_STORAGE_02(61, 9, 9),
-	HOUSE_STORAGE_03(62, 9, 9),
-	HOUSE_STORAGE_04(63, 9, 9),
-	HOUSE_STORAGE_05(64, 9, 9),
-	HOUSE_STORAGE_06(65, 9, 9),
-	HOUSE_STORAGE_07(66, 9, 9),
-	HOUSE_STORAGE_08(67, 9, 9),
-	HOUSE_STORAGE_09(68, 18, 9),
-	HOUSE_STORAGE_10(69, 18, 9),
-	HOUSE_STORAGE_11(70, 18, 9),
-	HOUSE_STORAGE_12(71, 18, 9),
-	HOUSE_STORAGE_14(73, 18, 9),
-	HOUSE_STORAGE_16(75, 27, 9),
-	HOUSE_STORAGE_18(77, 27, 9),
-	HOUSE_STORAGE_20(79, 0, 0),
+	HOUSE_STORAGE_01(60, 9, 9), // Plain 1-Drawer Cabinet
+	HOUSE_STORAGE_02(61, 9, 9), // Simple 1-Drawer Cabinet
+	HOUSE_STORAGE_03(62, 9, 9), // Clean 1-Drawer Cabinet
+	HOUSE_STORAGE_04(63, 9, 9), // Convenient 1-Drawer Cabinet
+	HOUSE_STORAGE_05(64, 9, 9), // Strong 1-Drawer Cabinet
+	HOUSE_STORAGE_06(65, 9, 9), // Firm 1-Drawer Cabinet
+	HOUSE_STORAGE_07(66, 9, 9), // Fine 1-Drawer Cabinet
+	HOUSE_STORAGE_08(67, 9, 9), // Decorated 1-Drawer Cabinet
+	HOUSE_STORAGE_09(68, 18, 9), // Small 2-Drawer Cabinet
+	HOUSE_STORAGE_10(69, 18, 9), // Simple 2-Drawer Cabinet
+	HOUSE_STORAGE_11(70, 18, 9), // Clean 2-Drawer Cabinet
+	HOUSE_STORAGE_12(71, 18, 9), // Convenient 2-Drawer Cabinet
+	HOUSE_STORAGE_13(72, 18, 9), // Strong 2-Drawer Cabinet
+	HOUSE_STORAGE_14(73, 18, 9), // Firm 2-Drawer Cabinet
+	HOUSE_STORAGE_15(74, 27, 9), // Spacious 3-Drawer Cabinet
+	HOUSE_STORAGE_16(75, 27, 9), // Simple 3-Drawer Cabinet
+	HOUSE_STORAGE_17(76, 27, 9), // Clean 3-Drawer Cabinet
+	HOUSE_STORAGE_18(77, 27, 9), // Convenient 3-Drawer Cabinet
+	HOUSE_STORAGE_19(78, 27, 9), // Strong 3-Drawer Cabinet
+	HOUSE_STORAGE_20(79, 27, 9), // Firm 3-Drawer Cabinet
 	BROKER(126),
 	MAILBOX(127);
 
