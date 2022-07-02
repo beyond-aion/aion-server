@@ -1,6 +1,6 @@
 /*
- * DB changes since 737e5e7d (31.05.2022)
+ * DB changes since d1b22999 (02.07.2022)
  */
 
--- remove old event items
-DELETE FROM inventory WHERE item_id IN (185000221);
+-- drop advent calendar table
+drop table advent;
