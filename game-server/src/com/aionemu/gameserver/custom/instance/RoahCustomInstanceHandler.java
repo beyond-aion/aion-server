@@ -64,9 +64,9 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	private static final int MIN_REWARD = 2;
 	private static final float REWARD_SCALE = 2f;
 
-	private AtomicLong startTime = new AtomicLong();
-	private AtomicBoolean isInitialized = new AtomicBoolean();
-	private AtomicBoolean isCompleted = new AtomicBoolean();
+	private final AtomicLong startTime = new AtomicLong();
+	private final AtomicBoolean isInitialized = new AtomicBoolean();
+	private final AtomicBoolean isCompleted = new AtomicBoolean();
 
 	private int playerObjId;
 	private PlayerModel model;
@@ -148,7 +148,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 							mob.getAggroList().addHate(player, 1000);
 						}
 					}
-				}, 60000, 60000 - rank * 1000); // 60s ... 30s
+				}, 60000, 60000 - rank * 1000L); // 60s ... 30s
 			}
 
 			if (rank >= CustomInstanceRankEnum.SILVER.getMinRank()) {
@@ -180,7 +180,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	@Override
 	public void onDie(Npc npc) {
 		switch (npc.getNpcId()) {
-			case CENTER_ARTIFACT_ID:
+			case CENTER_ARTIFACT_ID -> {
 				cancelAllTasks();
 				// use pcd for rare cases in which the artifact got destroyed by dots/servants and the player got DC'ed before
 				PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(playerObjId);
@@ -189,50 +189,31 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 					pcd.getPlayerObjId(), pcd.getName(), pcd.getPlayerClass(), CustomInstanceRankEnum.getRankDescription(rank), rank, usedTime,
 					npc.getLifeStats().getMaxHp() / usedTime));
 				despawnNpcs(TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
-
 				PacketSendUtility.broadcastToMap(instance,
 					new SM_MESSAGE(0, null, "You feel a shadowy presence from the throne room.", ChatType.BRIGHT_YELLOW_CENTER));
-
 				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
-
 				int bossID = BOSS_MOB_AT_ID;
 				if (pcd.getPlayerClass() != PlayerClass.RIDER) {
 					switch (pcd.getRace()) {
-						case ASMODIANS:
-							switch (pcd.getGender()) {
-								case MALE:
-									bossID = BOSS_MOB_A_M_ID;
-									break;
-								case FEMALE:
-									bossID = BOSS_MOB_A_F_ID;
-									break;
-							}
-							break;
-						case ELYOS:
-							switch (pcd.getGender()) {
-								case MALE:
-									bossID = BOSS_MOB_E_M_ID;
-									break;
-								case FEMALE:
-									bossID = BOSS_MOB_E_F_ID;
-									break;
-							}
-							break;
+						case ASMODIANS -> bossID = switch (pcd.getGender()) {
+								case MALE -> BOSS_MOB_A_M_ID;
+								case FEMALE -> BOSS_MOB_A_F_ID;
+							};
+						case ELYOS -> bossID = switch (pcd.getGender()) {
+								case MALE -> BOSS_MOB_E_M_ID;
+								case FEMALE -> BOSS_MOB_E_F_ID;
+							};
 					}
 				}
 				spawn(bossID, 503.96774f, 631.935f, 104.548775f, (byte) 90); // spawn bossMob
 				isBossPhase = true;
 				npc.getController().delete();
-				break;
-			case BOSS_MOB_A_M_ID:
-			case BOSS_MOB_A_F_ID:
-			case BOSS_MOB_E_M_ID:
-			case BOSS_MOB_E_F_ID:
-			case BOSS_MOB_AT_ID:
+			}
+			case BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID -> {
 				setResult(true);
 				calcBossDrop(npc.getObjectId());
 				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
-				break;
+			}
 		}
 	}
 
@@ -261,12 +242,9 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private void calcBossDrop(int npcObjId) {
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
-		if (dropItems != null) {
+		if (dropItems != null) { // dropItems can possibly null if the player died right before the boss
 			dropItems.clear();
 			dropItems.add(DropRegistrationService.getInstance().regDropItem(0, playerObjId, npcObjId, REWARD_COIN_ID, getRewardCoinAmount(rank)));
-		} else {
-			log.error("[CI_Roah] Could not register final rewards for player [id=" + playerObjId + "] [coins=" + getRewardCoinAmount(rank) + "].",
-				new Exception());
 		}
 	}
 
@@ -274,36 +252,31 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		return Math.round(MIN_REWARD + rank * REWARD_SCALE);
 	}
 
-	private void adaptNPC(Npc npc, int rank, Player player) {
+	private void adaptNPC(Npc npc, int rank) {
 		List<StatSetFunction> functions = new ArrayList<>();
 
 		switch (npc.getNpcId()) { // IRON ... ANCIENT+
-			case CENTER_ARTIFACT_ID: // ~5 ... 10min
+			case CENTER_ARTIFACT_ID -> { // ~5 ... 10min
 				int maxHP = 300 * AVG_DPS + rank * 10 * AVG_DPS;
 				if (rank > 21)
 					maxHP += (rank - 21) * 150000;
 				functions.add(new StatSetFunction(StatEnum.MAXHP, maxHP));
-				break;
-			case TRASH_MOB_ID: // ~1s fix (AoE-able)
+			}
+			case TRASH_MOB_ID -> { // ~1s fix (AoE-able)
 				functions.add(new StatSetFunction(StatEnum.MAXHP, 1));
 				functions.add(new StatSetFunction(StatEnum.SPEED, 6000 + rank * 100));
-				break;
-			case BULKY_MOB_ID: // ~10 ... 25s
+			}
+			case BULKY_MOB_ID -> // ~10 ... 25s
 				functions.add(new StatSetFunction(StatEnum.MAXHP, 10 * AVG_DPS + rank * AVG_DPS / 2));
-				break;
-			case DOMINATOR_MOB_ID: // ~10s fix
+			case DOMINATOR_MOB_ID -> { // ~10s fix
 				functions.add(new StatSetFunction(StatEnum.MAXHP, 10 * AVG_DPS));
 				functions.add(new StatSetFunction(StatEnum.PHYSICAL_ATTACK, 0)); // only debuffs, no dmg
 				functions.add(new StatSetFunction(StatEnum.ATTACK_SPEED, 2000 - rank * 30));
-				break;
+			}
 		}
 
 		npc.getGameStats().addEffect(null, functions);
 		npc.getLifeStats().setCurrentHp(npc.getLifeStats().getMaxHp());
-	}
-
-	private void adaptNPC(Npc npc, int rank) {
-		adaptNPC(npc, rank, null);
 	}
 
 	private void setResult(boolean success) {
