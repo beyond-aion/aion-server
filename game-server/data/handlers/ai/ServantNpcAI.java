@@ -42,16 +42,12 @@ public class ServantNpcAI extends GeneralNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		if (getCreator() != null) {
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					if (getOwner().getNpcObjectType() != NpcObjectType.TOTEM)
-						AIActions.targetCreature(ServantNpcAI.this, (Creature) getCreator().getTarget());
-					else
-						AIActions.targetSelf(ServantNpcAI.this);
-					healOrAttack();
-				}
+			ThreadPoolManager.getInstance().schedule(() -> {
+				if (getOwner().getNpcObjectType() != NpcObjectType.TOTEM)
+					AIActions.targetCreature(ServantNpcAI.this, (Creature) getCreator().getTarget());
+				else
+					AIActions.targetSelf(ServantNpcAI.this);
+				healOrAttack();
 			}, 200);
 		}
 	}
@@ -65,42 +61,25 @@ public class ServantNpcAI extends GeneralNpcAI {
 		int startDelay = 1000;
 		switch (getOwner().getNpcId()) {
 			// Taunting Spirit
-			case 833403:
-			case 833404:
-			case 833478:
-			case 833479:
-			case 833480:
-			case 833481:
-				duration = 5000;
-				startDelay = 1000;
-				break;
+			case 833403, 833404, 833478, 833479, 833480, 833481 -> duration = 5000;
 			// Battle Banner
-			case 833077:
-			case 833078:
-			case 833452:
-			case 833453:
-			case 833454:
-			case 833455:
+			case 833077, 833078, 833452, 833453, 833454, 833455 -> {
 				duration = 3000;
 				startDelay = 100;
-				break;
+			}
 		}
 		final Creature target = (Creature) getOwner().getTarget();
-		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (target == null || target.isDead()) {
-					AIActions.deleteOwner(ServantNpcAI.this);
-					cancelTask();
-				} else {
-					SkillTemplate template = skill.getTemplate().getSkillTemplate();
-					if ((template.getType() != SkillType.MAGICAL || !getOwner().getEffectController().isAbnormalSet(AbnormalState.SILENCE))
-							&& (template.getType() != SkillType.PHYSICAL || !getOwner().getEffectController().isAbnormalSet(AbnormalState.BIND))
-							&& (!getOwner().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
-							&& (!getOwner().getTransformModel().isActive() || getOwner().getTransformModel().getBanUseSkills() != 1)) {
-						SkillEngine.getInstance().getSkill(getOwner(), skill.getSkillId(), skill.getSkillLevel(), getOwner().getTarget()).useSkill();
-					}
+		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (target == null || target.isDead()) {
+				AIActions.deleteOwner(ServantNpcAI.this);
+				cancelTask();
+			} else {
+				SkillTemplate template = skill.getTemplate().getSkillTemplate();
+				if ((template.getType() != SkillType.MAGICAL || !getOwner().getEffectController().isAbnormalSet(AbnormalState.SILENCE))
+					&& (template.getType() != SkillType.PHYSICAL || !getOwner().getEffectController().isAbnormalSet(AbnormalState.BIND))
+					&& (!getOwner().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
+					&& (!getOwner().getTransformModel().isActive() || getOwner().getTransformModel().getBanUseSkills() != 1)) {
+					SkillEngine.getInstance().getSkill(getOwner(), skill.getSkillId(), skill.getSkillLevel(), getOwner().getTarget()).useSkill();
 				}
 			}
 		}, startDelay, duration);
@@ -119,13 +98,9 @@ public class ServantNpcAI extends GeneralNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case SHOULD_DECAY, SHOULD_RESPAWN, SHOULD_REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

@@ -30,13 +30,16 @@ import com.aionemu.gameserver.world.geo.GeoService;
 @XmlType(name = "SummonServantEffect")
 public class SummonServantEffect extends SummonEffect {
 
+	private final static int INITIAL_SPAWN_DELAY = 3000; // Seems to be around 2.5s
+
 	@Override
 	public void applyEffect(Effect effect) {
 		Creature effector = effect.getEffector();
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(effect.getEffector().getHeading()));
 		float x = effector.getX() + (float) (Math.cos(radian) * 2);
 		float y = effector.getY() + (float) (Math.sin(radian) * 2);
-		Vector3f pos = GeoService.getInstance().getClosestCollision(effector, x, y, effector.getZ(), true, CollisionIntention.DEFAULT_COLLISIONS.getId(), IgnoreProperties.of(effector.getRace()));
+		Vector3f pos = GeoService.getInstance().getClosestCollision(effector, x, y, effector.getZ(), true, CollisionIntention.DEFAULT_COLLISIONS.getId(),
+			IgnoreProperties.of(effector.getRace()));
 		Servant servant = spawnServant(effect, time, NpcObjectType.SERVANT, pos.getX(), pos.getY(), pos.getZ());
 		servant.getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
 	}
@@ -49,7 +52,7 @@ public class SummonServantEffect extends SummonEffect {
 		SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(effector.getWorldId(), npcId, x, y, z, effector.getHeading());
 		final Servant servant = VisibleObjectSpawner.spawnServant(spawn, effector.getInstanceId(), effector, effect.getSkillLevel(), npcObjectType);
 
-		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> servant.getController().delete(), spawnDuration * 1000);
+		Future<?> task = ThreadPoolManager.getInstance().schedule(() -> servant.getController().delete(), spawnDuration * 1000L + INITIAL_SPAWN_DELAY);
 		servant.getController().addTask(TaskId.DESPAWN, task);
 		return servant;
 	}
