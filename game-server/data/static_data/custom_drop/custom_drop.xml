@@ -4370,7 +4370,7 @@
 			<drop item_id="152013045" min_amount="3" /><!-- Malicious Pride -->
 		</drop_group>
 		<drop_group><!-- RARE -->
-			<drop item_id="188051874" chance="20" /><!-- Harvest Revel Furniture Set Box -->
+			<drop item_id="188054035" chance="20" /><!-- [Club] Full Furniture Bundle -->
 			<drop item_id="110900374" chance="2" /><!-- [Event] Alchemist's Dress -->
 			<drop item_id="125040244" chance="2" /><!-- [Event] Alchemist's Hat -->
 		</drop_group>
