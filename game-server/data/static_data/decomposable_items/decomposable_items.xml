@@ -35605,10 +35605,110 @@
 	<decomposable item_id="188053946" /><!-- Prestige Badge Box - 7-day pass -->
 	<decomposable item_id="188053947" /><!-- Prestige Badge Box - 15-day pass -->
 	<decomposable item_id="188053948" /><!-- Prestige Badge Box - 30-day pass -->
-	<decomposable item_id="188053949" /><!-- Elite Legionnaire Weapon Box -->
+	<decomposable item_id="188053949" selectable="true"><!-- Elite Legionnaire Weapon Box -->
+		<items>
+			<item id="100001038" race="ELYOS" player_classes="ASSASSIN RANGER GLADIATOR TEMPLAR" /><!-- Sundrenched Sword -->
+			<item id="100001054" race="ASMODIANS" player_classes="ASSASSIN RANGER GLADIATOR TEMPLAR" /><!-- Shadedrenched Sword -->
+			<item id="100100783" race="ELYOS" player_classes="CLERIC CHANTER GLADIATOR TEMPLAR" /><!-- Sundrenched Mace -->
+			<item id="100100799" race="ASMODIANS" player_classes="CLERIC CHANTER GLADIATOR TEMPLAR" /><!-- Shadedrenched Mace -->
+			<item id="100200918" race="ELYOS" player_classes="ASSASSIN RANGER GLADIATOR" /><!-- Sundrenched Dagger -->
+			<item id="100200934" race="ASMODIANS" player_classes="ASSASSIN RANGER GLADIATOR" /><!-- Shadedrenched Dagger -->
+			<item id="100500803" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Sundrenched Orb -->
+			<item id="100500819" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Shadedrenched Orb -->
+			<item id="100600858" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Sundrenched Spellbook -->
+			<item id="100600874" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Shadedrenched Spellbook -->
+			<item id="100900780" race="ELYOS" player_classes="GLADIATOR TEMPLAR" /><!-- Sundrenched Greatsword -->
+			<item id="100900796" race="ASMODIANS" player_classes="GLADIATOR TEMPLAR" /><!-- Shadedrenched Greatsword -->
+			<item id="101300752" race="ELYOS" player_classes="GLADIATOR" /><!-- Sundrenched Polearm -->
+			<item id="101300768" race="ASMODIANS" player_classes="GLADIATOR" /><!-- Shadedrenched Polearm -->
+			<item id="101500808" race="ELYOS" player_classes="CLERIC CHANTER" /><!-- Sundrenched Staff -->
+			<item id="101500824" race="ASMODIANS" player_classes="CLERIC CHANTER" /><!-- Shadedrenched Staff -->
+			<item id="101700825" race="ELYOS" player_classes="ASSASSIN RANGER GLADIATOR" /><!-- Sundrenched Bow -->
+			<item id="101700841" race="ASMODIANS" player_classes="ASSASSIN RANGER GLADIATOR" /><!-- Shadedrenched Bow -->
+			<item id="101800682" race="ELYOS" player_classes="GUNNER RIDER" /><!-- Sundrenched Pistol -->
+			<item id="101800698" race="ASMODIANS" player_classes="GUNNER RIDER" /><!-- Shadedrenched Pistol -->
+			<item id="101900685" race="ELYOS" player_classes="GUNNER" /><!-- Sundrenched Aethercannon -->
+			<item id="101900701" race="ASMODIANS" player_classes="GUNNER" /><!-- Shadedrenched Aethercannon -->
+			<item id="102000719" race="ELYOS" player_classes="BARD" /><!-- Sundrenched Harp -->
+			<item id="102000735" race="ASMODIANS" player_classes="BARD" /><!-- Shadedrenched Harp -->
+			<item id="102100604" race="ELYOS" player_classes="RIDER" /><!-- Sundrenched Cipher-Blade -->
+			<item id="102100616" race="ASMODIANS" player_classes="RIDER" /><!-- Shadedrenched Cipher-Blade -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053950" /><!-- Special Legionnaire Weapon Box -->
 	<decomposable item_id="188053951" /><!-- Legionnaire Weapon Box -->
-	<decomposable item_id="188053952" /><!-- Elite Legionnaire Armor Box -->
+	<decomposable item_id="188053952"><!-- Elite Legionnaire Armor Box -->
+		<items>
+			<item id="110101189" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Sundrenched Tunic -->
+			<item id="110101205" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Shadedrenched Tunic -->
+			<item id="110301124" race="ELYOS" player_classes="ASSASSIN RANGER" /><!-- Sundrenched Jerkin -->
+			<item id="110301140" race="ASMODIANS" player_classes="ASSASSIN RANGER" /><!-- Shadedrenched Jerkin -->
+			<item id="110301552" race="ELYOS" player_classes="GUNNER" /><!-- Sundrenched Mystic Jerkin -->
+			<item id="110301595" race="ASMODIANS" player_classes="GUNNER" /><!-- Shadedrenched Mystic Jerkin -->
+			<item id="110501094" race="ELYOS" player_classes="CLERIC CHANTER" /><!-- Sundrenched Hauberk -->
+			<item id="110501110" race="ASMODIANS" player_classes="CLERIC CHANTER" /><!-- Shadedrenched Hauberk -->
+			<item id="110550973" race="ELYOS" player_classes="RIDER" /><!-- Sundrenched Mystic Hauberk -->
+			<item id="110551024" race="ASMODIANS" player_classes="RIDER" /><!-- Shadedrenched Mystic Hauberk -->
+			<item id="110601076" race="ELYOS" player_classes="GLADIATOR TEMPLAR" /><!-- Sundrenched Breastplate -->
+			<item id="110601092" race="ASMODIANS" player_classes="GLADIATOR TEMPLAR" /><!-- Shadedrenched Breastplate -->
+		</items>
+		<items>
+			<item id="111101079" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Sundrenched Gloves -->
+			<item id="111101095" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Shadedrenched Gloves -->
+			<item id="111301078" race="ELYOS" player_classes="ASSASSIN RANGER" /><!-- Sundrenched Vambrace -->
+			<item id="111301094" race="ASMODIANS" player_classes="ASSASSIN RANGER" /><!-- Shadedrenched Vambrace -->
+			<item id="111301490" race="ELYOS" player_classes="GUNNER" /><!-- Sundrenched Mystic Vambrace -->
+			<item id="111301533" race="ASMODIANS" player_classes="GUNNER" /><!-- Shadedrenched Mystic Vambrace -->
+			<item id="111501063" race="ELYOS" player_classes="CLERIC CHANTER" /><!-- Sundrenched Handguards -->
+			<item id="111501079" race="ASMODIANS" player_classes="CLERIC CHANTER" /><!-- Shadedrenched Handguards -->
+			<item id="111501531" race="ELYOS" player_classes="RIDER" /><!-- Sundrenched Mystic Handguards -->
+			<item id="111501582" race="ASMODIANS" player_classes="RIDER" /><!-- Shadedrenched Mystic Handguards -->
+			<item id="111601053" race="ELYOS" player_classes="GLADIATOR TEMPLAR" /><!-- Sundrenched Gauntlets -->
+			<item id="111601069" race="ASMODIANS" player_classes="GLADIATOR TEMPLAR" /><!-- Shadedrenched Gauntlets -->
+		</items>
+		<items>
+			<item id="112101038" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Sundrenched Pauldrons -->
+			<item id="112101054" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Shadedrenched Pauldrons -->
+			<item id="112301024" race="ELYOS" player_classes="ASSASSIN RANGER" /><!-- Sundrenched Shoulderguards -->
+			<item id="112301040" race="ASMODIANS" player_classes="ASSASSIN RANGER" /><!-- Shadedrenched Shoulderguards -->
+			<item id="112301431" race="ELYOS" player_classes="GUNNER" /><!-- Sundrenched Mystic Shoulderguards -->
+			<item id="112301474" race="ASMODIANS" player_classes="GUNNER" /><!-- Shadedrenched Mystic Shoulderguards -->
+			<item id="112501013" race="ELYOS" player_classes="CLERIC CHANTER" /><!-- Sundrenched Spaulders -->
+			<item id="112501029" race="ASMODIANS" player_classes="CLERIC CHANTER" /><!-- Shadedrenched Spaulders -->
+			<item id="112501473" race="ELYOS" player_classes="RIDER" /><!-- Sundrenched Mystic Spaulders -->
+			<item id="112501524" race="ASMODIANS" player_classes="RIDER" /><!-- Shadedrenched Mystic Spaulders -->
+			<item id="112601027" race="ELYOS" player_classes="GLADIATOR TEMPLAR" /><!-- Sundrenched Shoulderplates -->
+			<item id="112601043" race="ASMODIANS" player_classes="GLADIATOR TEMPLAR" /><!-- Shadedrenched Shoulderplates -->
+		</items>
+		<items>
+			<item id="113101093" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Sundrenched Leggings -->
+			<item id="113101109" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Shadedrenched Leggings -->
+			<item id="113301096" race="ELYOS" player_classes="ASSASSIN RANGER" /><!-- Sundrenched Breeches -->
+			<item id="113301112" race="ASMODIANS" player_classes="ASSASSIN RANGER" /><!-- Shadedrenched Breeches -->
+			<item id="113301518" race="ELYOS" player_classes="GUNNER" /><!-- Sundrenched Mystic Breeches -->
+			<item id="113301561" race="ASMODIANS" player_classes="GUNNER" /><!-- Shadedrenched Mystic Breeches -->
+			<item id="113501072" race="ELYOS" player_classes="CLERIC CHANTER" /><!-- Sundrenched Chausses -->
+			<item id="113501088" race="ASMODIANS" player_classes="CLERIC CHANTER" /><!-- Shadedrenched Chausses -->
+			<item id="113501549" race="ELYOS" player_classes="RIDER" /><!-- Sundrenched Mystic Chausses -->
+			<item id="113501600" race="ASMODIANS" player_classes="RIDER" /><!-- Shadedrenched Mystic Chausses -->
+			<item id="113601037" race="ELYOS" player_classes="GLADIATOR TEMPLAR" /><!-- Sundrenched Greaves -->
+			<item id="113601053" race="ASMODIANS" player_classes="GLADIATOR TEMPLAR" /><!-- Shadedrenched Greaves -->
+		</items>
+		<items>
+			<item id="114101120" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Sundrenched Shoes -->
+			<item id="114101136" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER" /><!-- Shadedrenched Shoes -->
+			<item id="114301130" race="ELYOS" player_classes="ASSASSIN RANGER" /><!-- Sundrenched Boots -->
+			<item id="114301146" race="ASMODIANS" player_classes="ASSASSIN RANGER" /><!-- Shadedrenched Boots -->
+			<item id="114301556" race="ELYOS" player_classes="GUNNER" /><!-- Sundrenched Mystic Boots -->
+			<item id="114301599" race="ASMODIANS" player_classes="GUNNER" /><!-- Shadedrenched Mystic Boots -->
+			<item id="114501079" race="ELYOS" player_classes="CLERIC CHANTER" /><!-- Sundrenched Brogans -->
+			<item id="114501095" race="ASMODIANS" player_classes="CLERIC CHANTER" /><!-- Shadedrenched Brogans -->
+			<item id="114501558" race="ELYOS" player_classes="RIDER" /><!-- Sundrenched Mystic Brogans -->
+			<item id="114501609" race="ASMODIANS" player_classes="RIDER" /><!-- Shadedrenched Mystic Brogans -->
+			<item id="114601033" race="ELYOS" player_classes="GLADIATOR TEMPLAR" /><!-- Sundrenched Sabatons -->
+			<item id="114601049" race="ASMODIANS" player_classes="GLADIATOR TEMPLAR" /><!-- Shadedrenched Sabatons -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053953" /><!-- Special Legionnaire Armor Box -->
 	<decomposable item_id="188053954" /><!-- Legionnaire Armor Box -->
 	<decomposable item_id="188053955" /><!-- [Event] Ice Sculptor's Box -->
