@@ -9,3 +9,5 @@ drop table advent;
 ALTER TABLE `custom_instance`
 ADD `max_rank` int(11) NOT NULL,
 ADD `dps` int(11) NOT NULL;
+
+UPDATE `custom_instance` SET `max_rank` = `rank`;
