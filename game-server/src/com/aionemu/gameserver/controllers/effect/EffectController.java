@@ -19,15 +19,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ABNORMAL_EFFECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.*;
-import com.aionemu.gameserver.skillengine.model.ActivationAttribute;
-import com.aionemu.gameserver.skillengine.model.DispelCategoryType;
-import com.aionemu.gameserver.skillengine.model.DispelSlotType;
-import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.EffectResult;
-import com.aionemu.gameserver.skillengine.model.SkillSubType;
-import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
-import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.skillengine.model.TransformType;
+import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -198,10 +190,13 @@ public class EffectController {
 	/**
 	 * Checks whether {@code newEffectTemplate} is in conflict
 	 * with any existing effects without removing any effects. <br>
-	 *     {@code newEffect}'s EffectResult is set to {@code EffectResult.CONFLICT} if a conflict is found. <br>
-	 *         Note: EffectResult is not changed in case of passive effects or effects with {@code SkillTargetSlot.DEBUFF}.
-	 * @param newEffect The effect {@code newEffectTemplate} belongs to.
-	 * @param newEffectTemplate The {@code EffectTemplate} to check for conflicts.
+	 * {@code newEffect}'s EffectResult is set to {@code EffectResult.CONFLICT} if a conflict is found. <br>
+	 * Note: EffectResult is not changed in case of passive effects or effects with {@code SkillTargetSlot.DEBUFF}.
+	 * 
+	 * @param newEffect
+	 *          The effect {@code newEffectTemplate} belongs to.
+	 * @param newEffectTemplate
+	 *          The {@code EffectTemplate} to check for conflicts.
 	 * @return True if {@code newEffectTemplate} is in conflict with another existing effect.
 	 */
 	public boolean isConflicting(Effect newEffect, EffectTemplate newEffectTemplate) {
@@ -216,8 +211,9 @@ public class EffectController {
 					for (EffectTemplate currentEffectTemplate : currentEffect.getEffectTemplates()) {
 						if (currentEffectTemplate.getEffectId() == 0)
 							continue;
-						if ((currentEffectTemplate.getEffectId() == newEffectTemplate.getEffectId()) || (currentEffectTemplate instanceof SilenceEffect && newEffectTemplate instanceof SilenceEffect)) {
-							if (currentEffectTemplate.getBasicLvl() > newEffectTemplate.getBasicLvl()) {
+						if ((currentEffectTemplate.getEffectId() == newEffectTemplate.getEffectId())
+							|| (currentEffectTemplate instanceof SilenceEffect && newEffectTemplate instanceof SilenceEffect)) {
+							if (currentEffectTemplate.getBasicLvl() > newEffectTemplate.getBasicLvl() && !(currentEffectTemplate instanceof HideEffect)) {
 								return true;
 							} else {
 								break mainLoop;
@@ -231,7 +227,6 @@ public class EffectController {
 		}
 		return false;
 	}
-
 
 	private boolean checkExtraEffect(Map<String, Effect> effectMap, Effect nextEffect) {
 		if (nextEffect.isPassive() || nextEffect.getDispelCategory() != DispelCategoryType.EXTRA)
@@ -652,6 +647,7 @@ public class EffectController {
 
 	/**
 	 * Calculates effects that will be removed and reduces their power. Used only in DispelBuffCounterAtkEffect
+	 * 
 	 * @return number of effects that will be removed
 	 */
 	public int calculateBuffsOrEffectorDebuffsToRemove(Effect effect, int count, int dispelLevel, int power) {
@@ -679,7 +675,7 @@ public class EffectController {
 
 				// check for targetslot, effects with target slot higher or equal to 2 cant be removed (ex. skillId: 11885)
 				if (targetSlot != SkillTargetSlot.BUFF && (targetSlot != SkillTargetSlot.DEBUFF && dispelCat != DispelCategoryType.ALL)
-						|| ef.getTargetSlotLevel() >= 2)
+					|| ef.getTargetSlotLevel() >= 2)
 					continue;
 
 				// remove only debuffs of the effector
