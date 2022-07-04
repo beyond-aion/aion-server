@@ -195,13 +195,12 @@ public class AttackUtil {
 		}
 
 		if (stat != null && attacked instanceof Player) { // Strike Fortitude lowers the crit multiplier
-			switch (stat) {
-				case PHYSICAL_CRITICAL_DAMAGE_REDUCE:
-				case MAGICAL_CRITICAL_DAMAGE_REDUCE:
-					int fortitude = attacked.getGameStats().getStat(stat, 0).getCurrent();
-					coeficient = isMain ? (coeficient - fortitude / 1000f) : (coeficient + fortitude / 1000f);
-					break;
-			}
+				switch (stat) {
+						case PHYSICAL_CRITICAL_DAMAGE_REDUCE, MAGICAL_CRITICAL_DAMAGE_REDUCE -> {
+								int fortitude = attacked.getGameStats().getStat(stat, 0).getCurrent();
+								coeficient = isMain ? (coeficient - fortitude / 1000f) : (coeficient + fortitude / 1000f);
+						}
+				}
 		}
 
 		// add critical add dmg
@@ -210,22 +209,14 @@ public class AttackUtil {
 	}
 
 	private static float getWeaponMultiplier(ItemGroup group) {
-		switch (group) {
-			case DAGGER:
-				return 2.3f;
-			case SWORD:
-				return 2.2f;
-			case MACE:
-				return 2f;
-			case GREATSWORD:
-			case POLEARM:
-				return 1.8f;
-			case STAFF:
-			case BOW:
-				return 1.7f;
-			default:
-				return 1.5f;
-		}
+			return switch (group) {
+					case DAGGER -> 2.3f;
+					case SWORD -> 2.2f;
+					case MACE -> 2f;
+					case GREATSWORD, POLEARM -> 1.8f;
+					case STAFF, BOW -> 1.7f;
+					default -> 1.5f;
+			};
 	}
 
 	public static void calculateSkillResult(Effect effect, int skillDamage, EffectTemplate template, boolean ignoreShield) {
@@ -239,6 +230,7 @@ public class AttackUtil {
 		int critAddDmg = template.getCritAddDmg2() + template.getCritAddDmg1() * effect.getSkillLevel();
 		boolean useTemplateDmg = isUseTemplateDmg(effect, template);
 		boolean send = !(template instanceof DelayedSpellAttackInstantEffect) && !(template instanceof ProcAtkInstantEffect);
+		boolean shouldIncreaseByOneTimeBoost = !(template instanceof ProcAtkInstantEffect);
 
 		AttackStatus status;
 		switch (element) {
@@ -298,14 +290,10 @@ public class AttackUtil {
 		}
 		// add skill damage
 		if (func != null) {
-			switch (func) {
-				case ADD:
-					damage += skillDamage;
-					break;
-				case PERCENT:
-					damage += baseAttack * skillDamage / 100f;
-					break;
-			}
+				switch (func) {
+						case ADD -> damage += skillDamage;
+						case PERCENT -> damage += baseAttack * skillDamage / 100f;
+				}
 		}
 
 		// add bonus damage
@@ -323,14 +311,14 @@ public class AttackUtil {
 		if (!useTemplateDmg) {
 			float damageMultiplier;
 			switch (element) {
-				case NONE:
-					damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
-					damage += bonus;
-					break;
-				default:
-					damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
-					damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, element, true, true);
-					break;
+					case NONE -> {
+							damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
+							damage += bonus;
+					}
+					default -> {
+							damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
+							damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, element, true, true);
+					}
 			}
 			damage = StatFunctions.adjustDamageByMovementModifier(effector, damage);
 			damage *= damageMultiplier;
@@ -339,14 +327,11 @@ public class AttackUtil {
 		if (randomDamageType > 0)
 			damage = randomizeDamage(randomDamageType, damage);
 
-		switch (status) {
-			case CRITICAL_BLOCK:
-			case CRITICAL_PARRY:
-			case CRITICAL:
-				damage = calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, element == SkillElement.NONE ?
-						StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE : StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
-				break;
-		}
+			damage = switch (status) {
+					case CRITICAL_BLOCK, CRITICAL_PARRY, CRITICAL -> calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, element == SkillElement.NONE ?
+									StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE : StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
+					default -> damage;
+			};
 
 		if (element == SkillElement.NONE) {
 			float def = effected.getGameStats().getPDef().getBonus() + StatFunctions.getMovementModifier(effected, StatEnum.PHYSICAL_DEFENSE,
@@ -354,14 +339,10 @@ public class AttackUtil {
 			damage -= def/10;
 		}
 
-		switch (AttackStatus.getBaseStatus(status)) {
-			case BLOCK:
-				damage = calculateBlockedDamage(effected, damage);
-				break;
-			case PARRY:
-				damage *= 0.6;
-				break;
-		}
+			switch (AttackStatus.getBaseStatus(status)) {
+					case BLOCK -> damage = calculateBlockedDamage(effected, damage);
+					case PARRY -> damage *= 0.6;
+			}
 
 		if (effector instanceof Npc) {
 			damage = effector.getAi().modifyOwnerDamage(damage, effected, effect);
@@ -416,14 +397,10 @@ public class AttackUtil {
 	private static float randomizeDamage(int randomDamageType, float damage) {
 		switch (randomDamageType) {
 			case 1:
-				switch (Rnd.get(1, 3)) {
-					case 1:
-						damage *= 0.5f;
-						break;
-					case 2:
-						damage *= 1.5f;
-						break;
-				}
+					switch (Rnd.get(1, 3)) {
+							case 1 -> damage *= 0.5f;
+							case 2 -> damage *= 1.5f;
+					}
 				break;
 			case 2:
 				if (Rnd.chance() < 70)
@@ -432,14 +409,10 @@ public class AttackUtil {
 					damage *= 2;
 				break;
 			case 3:
-				switch (Rnd.get(1, 3)) {
-					case 1:
-						damage *= 1.15f;
-						break;
-					case 2:
-						damage *= 1.25f;
-						break;
-				}
+					switch (Rnd.get(1, 3)) {
+							case 1 -> damage *= 1.15f;
+							case 2 -> damage *= 1.25f;
+					}
 				break;
 			case 4:
 				damage *= (Rnd.get(25, 100) * 0.02f);
@@ -583,9 +556,8 @@ public class AttackUtil {
 
 	public static void cancelCastOn(Creature target) {
 		target.getKnownList().forEachObject(visibleObject -> {
-			if (visibleObject instanceof Creature && visibleObject.getTarget() == target) {
-				Creature creature = (Creature) visibleObject;
-				if (creature.getCastingSkill() != null && creature.getCastingSkill().getFirstTarget().equals(target))
+			if (visibleObject instanceof Creature creature && visibleObject.getTarget() == target) {
+					if (creature.getCastingSkill() != null && creature.getCastingSkill().getFirstTarget().equals(target))
 					creature.getController().cancelCurrentSkill(null);
 			}
 		});
