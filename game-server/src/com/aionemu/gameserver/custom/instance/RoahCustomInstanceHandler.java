@@ -47,8 +47,6 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
 
-	private static final int AVG_DPS = 4000; // adjustable for debugging and testing
-
 	private static final int CENTER_ARTIFACT_ID = 234029;
 	private static final int TRASH_MOB_ID = 218483;
 	private static final int BULKY_MOB_ID = 282757;
@@ -68,11 +66,11 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	private final AtomicBoolean isInitialized = new AtomicBoolean();
 	private final AtomicBoolean isCompleted = new AtomicBoolean();
 
-	private int playerObjId;
+	private int avgClassDps, achievedDps, playerObjId;
 	private PlayerModel model;
 	private List<Integer> skillSet;
 
-	private boolean isBossPhase;
+	private boolean isBossPhase, isPrebuffed;
 	private int rank;
 	private Future<?> despawnTask, trashMobSpawnTask, bulkyMobSpawnTask, dominatorMobSpawnTask;
 
@@ -180,14 +178,17 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	@Override
 	public void onDie(Npc npc) {
 		switch (npc.getNpcId()) {
+			case TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID -> npc.getController().delete();
 			case CENTER_ARTIFACT_ID -> {
 				cancelAllTasks();
 				// use pcd for rare cases in which the artifact got destroyed by dots/servants and the player got DC'ed before
 				PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(playerObjId);
 				float usedTime = (System.currentTimeMillis() - startTime.get()) / 1000f;
-				log.info(String.format("[CI_ROAH] Player [id=%d, name=%s, class=%s, rank=%s(%d)] succeeded in destroying the artifact in %.3fs (DPS:%.4f).",
-					pcd.getPlayerObjId(), pcd.getName(), pcd.getPlayerClass(), CustomInstanceRankEnum.getRankDescription(rank), rank, usedTime,
-					npc.getLifeStats().getMaxHp() / usedTime));
+				achievedDps = Math.round(npc.getLifeStats().getMaxHp() / usedTime);
+				log.info(String.format(
+					"[CI_ROAH] Player [id=%d, name=%s, class=%s, rank=%s(%d), isPrebuffed=%b] succeeded in destroying the artifact in %.3fs (DPS:%d).",
+					pcd.getPlayerObjId(), pcd.getName(), pcd.getPlayerClass(), CustomInstanceRankEnum.getRankDescription(rank), rank, isPrebuffed, usedTime,
+					achievedDps));
 				despawnNpcs(TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
 				PacketSendUtility.broadcastToMap(instance,
 					new SM_MESSAGE(0, null, "You feel a shadowy presence from the throne room.", ChatType.BRIGHT_YELLOW_CENTER));
@@ -220,6 +221,8 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(Player player) {
 		if (isInitialized.compareAndSet(false, true)) {
+			isPrebuffed = checkForPrebuffOnEntry(player); // check for Word of Wind and Symphony of Destruction
+			setAverageDpsByPlayerClass(player.getPlayerClass());
 			playerObjId = instance.getRegisteredObjects().iterator().next();
 			rank = CustomInstanceService.getInstance().loadOrCreateRank(playerObjId).getRank();
 			PacketSendUtility.broadcastToMap(instance, new SM_MESSAGE(0, null,
@@ -228,6 +231,18 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			// train player model from previous boss runs
 			skillSet = PlayerModelController.getSkillSetForPlayer(playerObjId);
 			model = PlayerModelController.trainModelForPlayer(playerObjId, skillSet);
+		}
+	}
+
+	private boolean checkForPrebuffOnEntry(Player player) {
+		return player.getEffectController().findBySkillId(1810) != null || player.getEffectController().findBySkillId(4469) != null;
+	}
+
+	private void setAverageDpsByPlayerClass(PlayerClass playerClass) {
+		switch (playerClass) {
+			case TEMPLAR, CHANTER -> avgClassDps = 2500;
+			case SORCERER, SPIRIT_MASTER -> avgClassDps = 5000;
+			default -> avgClassDps = 4000;
 		}
 	}
 
@@ -257,9 +272,9 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 		switch (npc.getNpcId()) { // IRON ... ANCIENT+
 			case CENTER_ARTIFACT_ID -> { // ~5 ... 10min
-				int maxHP = 300 * AVG_DPS + rank * 10 * AVG_DPS;
-				if (rank > 21)
-					maxHP += (rank - 21) * 150000;
+				int maxHP = 300 * avgClassDps + rank * 10 * avgClassDps;
+				if (rank > CustomInstanceRankEnum.ANCIENT.getMinRank())
+					maxHP += (rank - CustomInstanceRankEnum.ANCIENT.getMinRank()) * 150000;
 				functions.add(new StatSetFunction(StatEnum.MAXHP, maxHP));
 			}
 			case TRASH_MOB_ID -> { // ~1s fix (AoE-able)
@@ -267,9 +282,9 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				functions.add(new StatSetFunction(StatEnum.SPEED, 6000 + rank * 100));
 			}
 			case BULKY_MOB_ID -> // ~10 ... 25s
-				functions.add(new StatSetFunction(StatEnum.MAXHP, 10 * AVG_DPS + rank * AVG_DPS / 2));
+				functions.add(new StatSetFunction(StatEnum.MAXHP, 10 * avgClassDps + rank * avgClassDps / 2));
 			case DOMINATOR_MOB_ID -> { // ~10s fix
-				functions.add(new StatSetFunction(StatEnum.MAXHP, 10 * AVG_DPS));
+				functions.add(new StatSetFunction(StatEnum.MAXHP, 10 * avgClassDps));
 				functions.add(new StatSetFunction(StatEnum.PHYSICAL_ATTACK, 0)); // only debuffs, no dmg
 				functions.add(new StatSetFunction(StatEnum.ATTACK_SPEED, 2000 - rank * 30));
 			}
@@ -282,6 +297,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	private void setResult(boolean success) {
 		cancelAllTasks();
 		if (isCompleted.compareAndSet(false, true)) {
+			int oldRank = rank;
 			if (success) {
 				rank++;
 				PacketSendUtility.broadcastToMap(instance,
@@ -298,7 +314,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 						ItemService.addItem(player, REWARD_COIN_ID, getRewardCoinAmount(rank), true);
 				}
 			}
-			CustomInstanceService.getInstance().changePlayerRank(playerObjId, rank);
+			CustomInstanceService.getInstance().changePlayerRank(playerObjId, oldRank, rank, achievedDps);
 			CustomInstanceService.getInstance().saveNewPlayerModelEntries(playerObjId);
 		}
 	}
@@ -368,14 +384,16 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
 		if (!isCompleted.get()) {
-			setResult(false);
 			if (isBossPhase) {
 				PacketSendUtility.sendMessage(player, "At last! I have become .. your greatest nightmare!", ChatType.BRIGHT_YELLOW_CENTER);
 				despawnNpcs(BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID);
 			} else {
+				float usedTime = (System.currentTimeMillis() - startTime.get()) / 1000f;
+				achievedDps = Math.round(getNpc(CENTER_ARTIFACT_ID).getLifeStats().getMaxHp() / usedTime);
 				PacketSendUtility.sendMessage(player, "You shall not pass!", ChatType.BRIGHT_YELLOW_CENTER);
 				despawnNpcs(CENTER_ARTIFACT_ID, TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
 			}
+			setResult(false);
 		}
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 0));
 		return true;

@@ -6,13 +6,13 @@ package com.aionemu.gameserver.custom.instance;
 public enum CustomInstanceRankEnum {
 
 	IRON(0, '\uE02B'),
-	BRONZE(3, '\uE02C'),
-	SILVER(6, '\uE02D'),
-	GOLD(9, '\uE02E'),
-	PLATINUM(12, '\uE02F'),
-	MITHRIL(15, '\uE030'),
-	CERANIUM(18, '\uE0A8'),
-	ANCIENT(21, '\uE0AA'),
+	BRONZE(1, '\uE02C'),
+	SILVER(3, '\uE02D'),
+	GOLD(5, '\uE02E'),
+	PLATINUM(8, '\uE02F'),
+	MITHRIL(12, '\uE030'),
+	CERANIUM(16, '\uE0A8'),
+	ANCIENT(20, '\uE0AA'),
 	ANCIENT_PLUS(24, '\uE0AA');
 
 	private final int minRank;

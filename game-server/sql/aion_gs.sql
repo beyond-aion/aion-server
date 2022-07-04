@@ -162,6 +162,8 @@ CREATE TABLE `custom_instance` (
   `player_id` int(11) NOT NULL,
   `rank` int(11) NOT NULL,
   `last_entry` timestamp NOT NULL,
+  `max_rank` int(11) NOT NULL,
+  `dps` int(11) NOT NULL,
   PRIMARY KEY (`player_id`),
   KEY `rank` (`rank`),
   KEY `last_entry` (`last_entry`),

@@ -76,7 +76,7 @@ public class CustomInstanceService {
 	public CustomInstanceRank loadOrCreateRank(int playerId) {
 		CustomInstanceRank customInstanceRank = DAOManager.getDAO(CustomInstanceDAO.class).loadPlayerRankObject(playerId);
 		if (customInstanceRank == null)
-			customInstanceRank = new CustomInstanceRank(playerId, 0, System.currentTimeMillis());
+			customInstanceRank = new CustomInstanceRank(playerId, 0, System.currentTimeMillis(), 0, 0);
 		return customInstanceRank;
 	}
 
@@ -103,15 +103,25 @@ public class CustomInstanceService {
 		return DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj);
 	}
 
-	public void changePlayerRank(int playerId, int newRank) {
+	public void changePlayerRank(int playerId, int oldRank, int newRank, int achievedDps) {
 		CustomInstanceRank rankObj = loadOrCreateRank(playerId);
-		int oldRank = rankObj.getRank();
-		rankObj.setRank(newRank);
+		changeRank(rankObj, newRank);
+		rankObj.setDps(achievedDps);
+		storeNewRankData(rankObj, oldRank, newRank);
+	}
+
+	private void storeNewRankData(CustomInstanceRank rankObj, int oldRank, int newRank) {
 		if (DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj)) {
-			String name = DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(playerId);
-			log.info(String.format("[CI_ROAH] Rank changed for Player [id=%d, name=%s, oldRank=%s(%d), newRank=%s(%d)]", playerId, name,
+			String name = DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(rankObj.getPlayerId());
+			log.info(String.format("[CI_ROAH] Rank changed for Player [id=%d, name=%s, oldRank=%s(%d), newRank=%s(%d)]", rankObj.getPlayerId(), name,
 				CustomInstanceRankEnum.getRankDescription(oldRank), oldRank, CustomInstanceRankEnum.getRankDescription(newRank), newRank));
 		}
+	}
+
+	private void changeRank(CustomInstanceRank rankObj, int newRank) {
+		rankObj.setRank(newRank);
+		if (newRank > rankObj.getMaxRank())
+			rankObj.setMaxRank(newRank);
 	}
 
 	public void recordPlayerModelEntry(Player player, Skill skill, VisibleObject target) {

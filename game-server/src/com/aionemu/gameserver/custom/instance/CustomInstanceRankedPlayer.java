@@ -10,8 +10,8 @@ public class CustomInstanceRankedPlayer extends CustomInstanceRank {
 	private final String name;
 	private final PlayerClass playerClass;
 
-	public CustomInstanceRankedPlayer(int playerId, int rank, long lastEntry, String name, PlayerClass playerClass) {
-		super(playerId, rank, lastEntry);
+	public CustomInstanceRankedPlayer(int playerId, int rank, long lastEntry, int maxRank, int dps, String name, PlayerClass playerClass) {
+		super(playerId, rank, lastEntry, maxRank, dps);
 		this.name = name;
 		this.playerClass = playerClass;
 	}
