@@ -722,7 +722,7 @@
 			<gd_item id="152012644"/><!-- Sandwash Tomul's Head Crux -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Mote" chance="5">
+	<gd_rule rule_name="Named Mote" chance="7.5">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
@@ -740,7 +740,7 @@
 			<gd_item id="152012608"/><!-- Protection Mote -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Mote" chance="5">
+	<gd_rule rule_name="Named Mote" chance="7.5">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
@@ -758,7 +758,7 @@
 			<gd_item id="152012597"/><!-- Unity Mote -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Mote" chance="5">
+	<gd_rule rule_name="Named Mote" chance="7.5">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
@@ -776,7 +776,7 @@
 			<gd_item id="152012596"/><!-- Harmony Mote -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Mote" chance="5">
+	<gd_rule rule_name="Named Mote" chance="7.5">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
@@ -794,7 +794,7 @@
 			<gd_item id="152012609"/><!-- Vigor Mote -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Mote" chance="5">
+	<gd_rule rule_name="Named Mote" chance="7.5">
 		<gd_maps>
 			<gd_map map_id="600100000"/><!-- Levinshor -->
 		</gd_maps>
