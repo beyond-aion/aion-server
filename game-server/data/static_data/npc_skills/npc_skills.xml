@@ -26534,16 +26534,17 @@
 		<npc_skill id="18641" lv="46" prob="20" min_hp="20" max_hp="65" />
 		<npc_skill id="18642" lv="46" prob="25" />
 	</npc_skills>
+	<!-- Debilkarim The Maker -->
 	<npc_skills npc_ids="215795">
-		<npc_skill id="18630" lv="46" prob="25" />
-		<npc_skill id="18631" lv="46" prob="25" />
-		<npc_skill id="18632" lv="46" prob="20" max_hp="70" />
-		<npc_skill id="18633" lv="46" prob="25" />
-		<npc_skill id="18634" lv="46" prob="25" />
-		<npc_skill id="18635" lv="46" prob="30" max_hp="75" />
-		<npc_skill id="18636" lv="46" prob="25" max_hp="60" />
-		<npc_skill id="18637" lv="46" prob="20" max_hp="70" />
-		<npc_skill id="19000" lv="46" prob="25" />
+		<npc_skill id="18630" lv="1" prob="0" is_post_spawn="true" /><!-- Strong Shock Tolerance -->
+		<npc_skill id="18631" lv="1" prob="100" chain_id="1" cd="300000" next_skill_time="0" /><!-- Strong Magic Tolerance -->
+		<npc_skill id="18632" lv="46" prob="100" max_hp="80" cd="18000" /><!-- Seismic Wave -->
+		<npc_skill id="18633" lv="46" prob="100" cd="10000" /><!-- Rockfall -->
+		<npc_skill id="18634" lv="46" prob="100" cd="23000" /><!-- Stone Curse -->
+		<npc_skill id="18635" lv="46" prob="100" cd="30000" /><!-- Wave of Fear -->
+		<npc_skill id="18636" lv="46" prob="100" prio="1" max_hp="50" cd="300000" next_skill_time="0" next_chain_id="1" /><!-- Invoke Energy (Heal) -->
+		<npc_skill id="18637" lv="46" prob="100" max_hp="70" cd="30000" /><!-- Temblor -->
+		<npc_skill id="19000" lv="46" prob="100" prio="4" max_hp="10" cd="60000" /><!-- Infernal Rift -->
 	</npc_skills>
 	<npc_skills npc_ids="215796">
 		<npc_skill id="18638" lv="46" prob="25" />

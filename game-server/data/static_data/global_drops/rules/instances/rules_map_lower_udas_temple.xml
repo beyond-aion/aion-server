@@ -19,7 +19,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Named Weapon (Unique)" chance="15">
+	<gd_rule rule_name="Named Weapon (Unique)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -51,7 +51,7 @@
 			<gd_item id="102100753" /><!-- Debilkarim's Cipher-Blade -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Legend)" chance="25">
+	<gd_rule rule_name="Named Shield (Legend)" chance="50">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -63,7 +63,7 @@
 			<gd_item id="115000961" /><!-- Anvilface's Malevite Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Shield (Unique)" chance="20">
+	<gd_rule rule_name="Named Shield (Unique)" chance="35">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -75,7 +75,7 @@
 			<gd_item id="115000963" /><!-- Kingspin's Malevite Shield -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" chance="100">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -87,7 +87,7 @@
 			<gd_item id="111300963" /><!-- Deserter's Vambrace -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" chance="100">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -99,7 +99,7 @@
 			<gd_item id="111600941" /><!-- Deserter's Gauntlets -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" chance="100">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -111,7 +111,7 @@
 			<gd_item id="114600920" /><!-- Deserter's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" chance="100">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -125,7 +125,7 @@
 			<gd_item id="113600925" /><!-- Deserter's Greaves -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Rare)" chance="60">
+	<gd_rule rule_name="Named Armor (Rare)" chance="100">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -137,7 +137,7 @@
 			<gd_item id="114500961" /><!-- Deserter's Brogans -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" chance="30">
+	<gd_rule rule_name="Named Armor (Legend)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -151,7 +151,7 @@
 			<gd_item id="114601061" /><!-- Sabatons of the Destroyed Temple -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" chance="30">
+	<gd_rule rule_name="Named Armor (Legend)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -165,7 +165,7 @@
 			<gd_item id="114501107" /><!-- Brogans of the Destroyed Temple -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" chance="30">
+	<gd_rule rule_name="Named Armor (Legend)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -179,7 +179,7 @@
 			<gd_item id="112501042" /><!-- Spaulders of the Destroyed Temple -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" chance="30">
+	<gd_rule rule_name="Named Armor (Legend)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -197,7 +197,7 @@
 			<gd_item id="110601105" /><!-- Breastplate of the Destroyed Temple -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Legend)" chance="30">
+	<gd_rule rule_name="Named Armor (Legend)" chance="80">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -211,7 +211,7 @@
 			<gd_item id="112601056" /><!-- Shoulderplates of the Destroyed Temple -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="20">
+	<gd_rule rule_name="Named Armor (Unique)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -225,7 +225,7 @@
 			<gd_item id="114600922" /><!-- Malika's Sabatons -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="20">
+	<gd_rule rule_name="Named Armor (Unique)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -239,7 +239,7 @@
 			<gd_item id="110600964" /><!-- Jotun's Breastplate -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Armor (Unique)" chance="20">
+	<gd_rule rule_name="Named Armor (Unique)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -264,7 +264,7 @@
 			<gd_item id="122001161" /><!-- Chura Twinblade's Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Legend)" chance="30">
+	<gd_rule rule_name="Named Accessory (Legend)" chance="60">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
@@ -298,7 +298,7 @@
 			<gd_item id="122001281" /><!-- Kingspin's Turquoise Ring -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Named Accessory (Epic)" chance="10">
+	<gd_rule rule_name="Named Accessory (Epic)" chance="20">
 		<gd_maps>
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
