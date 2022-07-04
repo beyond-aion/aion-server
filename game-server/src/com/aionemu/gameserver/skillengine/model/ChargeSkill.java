@@ -25,6 +25,7 @@ public class ChargeSkill extends Skill {
 			effector.getController().cancelCurrentSkill(null);
 			return false;
 		}
+		effector.getObserveController().notifyBoostSkillCostObservers(this);
 		effector.getObserveController().notifyStartSkillCastObservers(this);
 		effector.setCasting(this);
 		effector.getObserveController().attach(conditionChangeListener);
