@@ -3135,21 +3135,17 @@
 		<spawns>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- Victoria -->
-				<spawn npc_id="831808" respawn_time="295">
-					<spot x="1208.1000" y="1392.6000" z="208.3000" h="10" />
-				</spawn>
-				<!-- Oltrit -->
-				<spawn npc_id="831811" respawn_time="295">
-					<spot x="1202.6000" y="1394.9000" z="208.3000" h="6" />
+				<!-- Summer Beach Bar -->
+				<spawn npc_id="701937" respawn_time="295">
+					<spot x="1198.1000" y="1398.5000" z="208" h="3" />
 				</spawn>
 				<!-- Lamoralf -->
 				<spawn npc_id="831807" respawn_time="295">
 					<spot x="1200.5000" y="1413.9000" z="208.3000" h="118" />
 				</spawn>
-				<!-- Summer Beach Bar -->
-				<spawn npc_id="701937" respawn_time="295">
-					<spot x="1198.1000" y="1398.5000" z="208" h="3" />
+				<!-- Victoria -->
+				<spawn npc_id="831808" respawn_time="295">
+					<spot x="1208.1000" y="1392.6000" z="208.3000" h="10" />
 				</spawn>
 				<!-- Supia -->
 				<spawn npc_id="831809" respawn_time="295">
@@ -3159,32 +3155,36 @@
 				<spawn npc_id="831810" respawn_time="295">
 					<spot x="1197.3000" y="1386" z="208.3000" h="24" />
 				</spawn>
+				<!-- Oltrit -->
+				<spawn npc_id="831811" respawn_time="295">
+					<spot x="1202.6000" y="1394.9000" z="208.3000" h="6" />
+				</spawn>
 			</spawn_map>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
 				<!-- Illaidah -->
-				<spawn npc_id="831799" respawn_time="295">
-					<spot x="1519.1000" y="1508.8000" z="565.9000" h="56" />
+				<!-- Summer Beach Bar -->
+				<spawn npc_id="701937" respawn_time="295">
+					<spot x="1533.1000" y="1511.6000" z="565.9000" h="58" />
 				</spawn>
 				<!-- Walker -->
 				<spawn npc_id="831798" respawn_time="295">
 					<spot x="1533.9000" y="1498.4000" z="566.2000" h="43" />
 				</spawn>
-				<!-- Adolpha -->
-				<spawn npc_id="831802" respawn_time="295">
-					<spot x="1531.9000" y="1523.9000" z="566.2000" h="61" />
+				<spawn npc_id="831799" respawn_time="295">
+					<spot x="1519.1000" y="1508.8000" z="565.9000" h="56" />
 				</spawn>
-				<!-- Summer Beach Bar -->
-				<spawn npc_id="701937" respawn_time="295">
-					<spot x="1533.1000" y="1511.6000" z="565.9000" h="58" />
+				<!-- Ibiza -->
+				<spawn npc_id="831800" respawn_time="295">
+					<spot x="1542.2000" y="1517.6000" z="566.2000" h="62" />
 				</spawn>
 				<!-- Elena -->
 				<spawn npc_id="831801" respawn_time="295">
 					<spot x="1541.7000" y="1522.2000" z="566.2000" h="62" />
 				</spawn>
-				<!-- Ibiza -->
-				<spawn npc_id="831800" respawn_time="295">
-					<spot x="1542.2000" y="1517.6000" z="566.2000" h="62" />
+				<!-- Adolpha -->
+				<spawn npc_id="831802" respawn_time="295">
+					<spot x="1531.9000" y="1523.9000" z="566.2000" h="61" />
 				</spawn>
 			</spawn_map>
 		</spawns>
