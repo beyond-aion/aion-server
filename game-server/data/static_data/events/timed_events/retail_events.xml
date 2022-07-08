@@ -3094,12 +3094,12 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Summer Block Party" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
+	<event name="Summer Party" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
 		<quests>
-			<maintainable>80351 80352 80353 80354 80355 80356 80357 80358 80359 80360 80361 80362 80363 80364 80365 80366 80367 80368</maintainable>
+			<maintainable>80351 80352 80360 80361</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Summer Block Party Drop" chance="2" dynamic_chance="true" level_based_chance_reduction="true">
+			<gd_rule rule_name="Summer Party Drop" chance="2" dynamic_chance="true" level_based_chance_reduction="true">
 				<gd_worlds>
 					<gd_world wd_type="ABYSS_INSTANCE" />
 					<gd_world wd_type="ARENA_INSTANCE" />
@@ -3114,20 +3114,68 @@
 					<gd_rating rating="LEGENDARY" />
 				</gd_ratings>
 				<gd_items>
-					<gd_item id="188052627" /><!-- [Event] Bag of Ice -->
+					<gd_item id="188100124" /><!-- Ice Block -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
 		<spawns>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Cocktail Party -->
+				<!-- Summer Beach Bar -->
+				<spawn npc_id="701937" respawn_time="295">
+					<spot x="1533.1000" y="1511.6000" z="565.9000" h="58" />
+				</spawn>
+				<!-- Callubriz -->
+				<spawn npc_id="831797" respawn_time="295">
+					<spot x="1521.9000" y="1515.2000" z="566.2000" h="65" />
+				</spawn>
+				<!-- Walker -->
+				<spawn npc_id="831798" respawn_time="295">
+					<spot x="1533.9000" y="1498.4000" z="566.2000" h="43" />
+				</spawn>
+				<!-- Illaidah -->
+				<spawn npc_id="831799" respawn_time="295">
+					<spot x="1519.1000" y="1508.8000" z="565.9000" h="56" />
+				</spawn>
+				<!-- Ibiza -->
+				<spawn npc_id="831800" respawn_time="295">
+					<spot x="1542.2000" y="1517.6000" z="566.2000" h="62" />
+				</spawn>
+				<!-- Elena -->
+				<spawn npc_id="831801" respawn_time="295">
+					<spot x="1541.7000" y="1522.2000" z="566.2000" h="62" />
+				</spawn>
+				<!-- Adolpha -->
+				<spawn npc_id="831802" respawn_time="295">
+					<spot x="1531.9000" y="1523.9000" z="566.2000" h="61" />
+				</spawn>
+				<!-- Block party general -->
+				<!-- Frozen Box -->
+				<spawn npc_id="701968" respawn_time="295">
+					<spot x="1529.3000" y="1484.3000" z="565.9000" h="31" />
+					<spot x="1535.6000" y="1483.9000" z="565.8000" h="34" />
+					<spot x="1540.3000" y="1485.2000" z="565.9000" h="41" />
+				</spawn>
+				<!-- Chasinerk -->
+				<spawn npc_id="831819" respawn_time="295">
+					<spot x="1532.4000" y="1488.6000" z="565.9000" h="28" />
+				</spawn>
+				<!-- Wachovinerk -->
+				<spawn npc_id="831821" respawn_time="295">
+					<spot x="1534.7000" y="1488.7000" z="565.9000" h="30" />
+				</spawn>
+				<!-- Sachsinerk -->
+				<spawn npc_id="831824" respawn_time="295">
+					<spot x="1537" y="1489" z="565.9000" h="47" />
+				</spawn>
+			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- Victoria -->
-				<spawn npc_id="831808" respawn_time="295">
-					<spot x="1208.1000" y="1392.6000" z="208.3000" h="10" />
-				</spawn>
-				<!-- Oltrit -->
-				<spawn npc_id="831811" respawn_time="295">
-					<spot x="1202.6000" y="1394.9000" z="208.3000" h="6" />
+				<!-- Cocktail Party -->
+				<!-- Summer Beach Bar -->
+				<spawn npc_id="701937" respawn_time="295">
+					<spot x="1198.1000" y="1398.5000" z="208" h="3" />
 				</spawn>
 				<!-- Rezar -->
 				<spawn npc_id="831806" respawn_time="295">
@@ -3137,19 +3185,9 @@
 				<spawn npc_id="831807" respawn_time="295">
 					<spot x="1200.5000" y="1413.9000" z="208.3000" h="118" />
 				</spawn>
-				<!-- Summer Beach Bar -->
-				<spawn npc_id="701937" respawn_time="295">
-					<spot x="1198.1000" y="1398.5000" z="208" h="3" />
-				</spawn>
-				<!-- Slim -->
-				<spawn npc_id="831827" respawn_time="295">
-					<spot x="1185.1000" y="1414.4000" z="208.1000" h="111" />
-				</spawn>
-				<!-- Frozen Box -->
-				<spawn npc_id="701968" respawn_time="295">
-					<spot x="1177.3000" y="1407.6000" z="208.1000" h="2" />
-					<spot x="1179.4000" y="1414.9000" z="208.1000" h="109" />
-					<spot x="1176.9000" y="1411.6000" z="208.1000" h="113" />
+				<!-- Victoria -->
+				<spawn npc_id="831808" respawn_time="295">
+					<spot x="1208.1000" y="1392.6000" z="208.3000" h="10" />
 				</spawn>
 				<!-- Supia -->
 				<spawn npc_id="831809" respawn_time="295">
@@ -3159,70 +3197,120 @@
 				<spawn npc_id="831810" respawn_time="295">
 					<spot x="1197.3000" y="1386" z="208.3000" h="24" />
 				</spawn>
+				<!-- Oltrit -->
+				<spawn npc_id="831811" respawn_time="295">
+					<spot x="1202.6000" y="1394.9000" z="208.3000" h="6" />
+				</spawn>
+				<!-- Block party general -->
+				<!-- Frozen Box -->
+				<spawn npc_id="701968" respawn_time="295">
+					<spot x="1177.3000" y="1407.6000" z="208.1000" h="2" />
+					<spot x="1179.4000" y="1414.9000" z="208.1000" h="109" />
+					<spot x="1176.9000" y="1411.6000" z="208.1000" h="113" />
+				</spawn>
 				<!-- Chasinerk -->
 				<spawn npc_id="831819" respawn_time="295">
 					<spot x="1182.9000" y="1412" z="208.1000" h="110" />
 				</spawn>
-				<!-- Sachsinerk -->
-				<spawn npc_id="831825" respawn_time="295">
-					<spot x="1180.6000" y="1408" z="208.1000" />
-				</spawn>
 				<!-- Wachovinerk -->
-				<spawn npc_id="831822" respawn_time="295">
+				<spawn npc_id="831821" respawn_time="295">
 					<spot x="1181.2000" y="1410.2000" z="208.1000" h="114" />
 				</spawn>
+				<!-- Sachsinerk -->
+				<spawn npc_id="831824" respawn_time="295">
+					<spot x="1180.6000" y="1408" z="208.1000" />
+				</spawn>
 			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Block Party Part 1" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
+		<quests>
+			<maintainable>80353 80356 80362 80365</maintainable>
+		</quests>
+		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
-				<!-- Illaidah -->
-				<spawn npc_id="831799" respawn_time="295">
-					<spot x="1519.1000" y="1508.8000" z="565.9000" h="56" />
-				</spawn>
-				<!-- Chasinerk -->
-				<spawn npc_id="831819" respawn_time="295">
-					<spot x="1532.4000" y="1488.6000" z="565.9000" h="28" />
-				</spawn>
-				<!-- Wachovinerk -->
-				<spawn npc_id="831822" respawn_time="295">
-					<spot x="1534.7000" y="1488.7000" z="565.9000" h="30" />
-				</spawn>
-				<!-- Walker -->
-				<spawn npc_id="831798" respawn_time="295">
-					<spot x="1533.9000" y="1498.4000" z="566.2000" h="43" />
-				</spawn>
 				<!-- Slim -->
 				<spawn npc_id="831815" respawn_time="295">
 					<spot x="1529.8000" y="1488.7000" z="565.9000" h="27" />
 				</spawn>
-				<!-- Adolpha -->
-				<spawn npc_id="831802" respawn_time="295">
-					<spot x="1531.9000" y="1523.9000" z="566.2000" h="61" />
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Slim -->
+				<spawn npc_id="831827" respawn_time="295">
+					<spot x="1185.1000" y="1414.4000" z="208.1000" h="111" />
 				</spawn>
-				<!-- Summer Beach Bar -->
-				<spawn npc_id="701937" respawn_time="295">
-					<spot x="1533.1000" y="1511.6000" z="565.9000" h="58" />
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Block Party Part 2" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
+		<quests>
+			<maintainable>80354 80357 80363 80366</maintainable>
+		</quests>
+		<spawns>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Slim -->
+				<spawn npc_id="831816" respawn_time="295">
+					<spot x="1529.8000" y="1488.7000" z="565.9000" h="27" />
 				</spawn>
-				<!-- Callubriz -->
-				<spawn npc_id="831797" respawn_time="295">
-					<spot x="1521.9000" y="1515.2000" z="566.2000" h="65" />
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Slim -->
+				<spawn npc_id="831828" respawn_time="295">
+					<spot x="1185.1000" y="1414.4000" z="208.1000" h="111" />
 				</spawn>
-				<!-- Frozen Box -->
-				<spawn npc_id="701968" respawn_time="295">
-					<spot x="1529.3000" y="1484.3000" z="565.9000" h="31" />
-					<spot x="1535.6000" y="1483.9000" z="565.8000" h="34" />
-					<spot x="1540.3000" y="1485.2000" z="565.9000" h="41" />
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Block Party Part 3" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
+		<quests>
+			<maintainable>80355 80358 80364 80367</maintainable>
+		</quests>
+		<spawns>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Slim -->
+				<spawn npc_id="831817" respawn_time="295">
+					<spot x="1529.8000" y="1488.7000" z="565.9000" h="27" />
 				</spawn>
-				<!-- Sachsinerk -->
-				<spawn npc_id="831825" respawn_time="295">
-					<spot x="1537" y="1489" z="565.9000" h="47" />
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Slim -->
+				<spawn npc_id="831829" respawn_time="295">
+					<spot x="1185.1000" y="1414.4000" z="208.1000" h="111" />
 				</spawn>
-				<!-- Elena -->
-				<spawn npc_id="831801" respawn_time="295">
-					<spot x="1541.7000" y="1522.2000" z="566.2000" h="62" />
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Block Party Part 4" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
+		<quests>
+			<maintainable>80359 80368</maintainable>
+		</quests>
+		<spawns>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Slim -->
+				<spawn npc_id="831818" respawn_time="295">
+					<spot x="1515.124" y="1512.5271" z="565.9260" h="59" />
 				</spawn>
-				<!-- Ibiza -->
-				<spawn npc_id="831800" respawn_time="295">
-					<spot x="1542.2000" y="1517.6000" z="566.2000" h="62" />
+				<!-- Morganyerk -->
+				<spawn npc_id="831826" respawn_time="295">
+					<spot x="1515.2982" y="1510.5134" z="565.9260" h="59" />
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Slim -->
+				<spawn npc_id="831830" respawn_time="295">
+					<spot x="1231.8376" y="1430.1973" z="209.0907" h="109" />
+				</spawn>
+				<!-- Morganyerk -->
+				<spawn npc_id="831826" respawn_time="295">
+					<spot x="1230.8685" y="1428.1682" z="209.0907" h="115" />
 				</spawn>
 			</spawn_map>
 		</spawns>

@@ -252,13 +252,13 @@
 	<report_to id="80329" start_npc_ids="831531"/>
 	<report_to id="80344" start_npc_ids="831787"/>
 	<report_to id="80351" start_npc_ids="831797"/>
-	<report_to id="80353" start_npc_ids="831830"/>
-	<report_to id="80354" start_npc_ids="831830"/>
-	<report_to id="80355" start_npc_ids="831830"/>
+	<report_to id="80353" start_npc_ids="831815" end_npc_ids="831818"/>
+	<report_to id="80354" start_npc_ids="831816" end_npc_ids="831818"/>
+	<report_to id="80355" start_npc_ids="831817" end_npc_ids="831818"/>
 	<report_to id="80360" start_npc_ids="831806"/>
-	<report_to id="80362" start_npc_ids="831830"/>
-	<report_to id="80363" start_npc_ids="831830"/>
-	<report_to id="80364" start_npc_ids="831830"/>
+	<report_to id="80362" start_npc_ids="831827" end_npc_ids="831830"/>
+	<report_to id="80363" start_npc_ids="831828" end_npc_ids="831830"/>
+	<report_to id="80364" start_npc_ids="831829" end_npc_ids="831830"/>
 	<report_to id="80369" start_npc_ids="831833" end_npc_ids="831837"/>
 	<report_to id="80370" start_npc_ids="831833" end_npc_ids="831838"/>
 	<report_to id="80371" start_npc_ids="831833" end_npc_ids="831839"/>
@@ -300,15 +300,15 @@
 	<item_collecting id="80284" start_npc_ids="831248"/>
 	<item_collecting id="80285" start_npc_ids="831248"/>
 	<item_collecting id="80352" start_npc_ids="831797"/>
-	<item_collecting id="80356" start_npc_ids="831820" end_npc_ids="831830"/>
-	<item_collecting id="80357" start_npc_ids="831823" end_npc_ids="831830"/>
-	<item_collecting id="80358" start_npc_ids="831825" end_npc_ids="831830"/>
-	<item_collecting id="80359" start_npc_ids="831826" end_npc_ids="831830"/>
-	<item_collecting id="80361" start_npc_ids="831806" end_npc_ids="831806"/>
-	<item_collecting id="80365" start_npc_ids="831820" end_npc_ids="831830"/>
-	<item_collecting id="80366" start_npc_ids="831823" end_npc_ids="831830"/>
-	<item_collecting id="80367" start_npc_ids="831825" end_npc_ids="831830"/>
-	<item_collecting id="80368" start_npc_ids="831826" end_npc_ids="831830"/>
+	<item_collecting id="80356" start_npc_ids="831815" end_npc_ids="831819"/>
+	<item_collecting id="80357" start_npc_ids="831816" end_npc_ids="831821"/>
+	<item_collecting id="80358" start_npc_ids="831817" end_npc_ids="831824"/>
+	<item_collecting id="80359" start_npc_ids="831826"/>
+	<item_collecting id="80361" start_npc_ids="831806"/>
+	<item_collecting id="80365" start_npc_ids="831827" end_npc_ids="831819"/>
+	<item_collecting id="80366" start_npc_ids="831828" end_npc_ids="831821"/>
+	<item_collecting id="80367" start_npc_ids="831829" end_npc_ids="831824"/>
+	<item_collecting id="80368" start_npc_ids="831826"/>
 	<item_collecting id="80405" start_npc_ids="831841"/>
 	<item_collecting id="80424" start_npc_ids="831845"/>
 	<item_collecting id="80438" start_npc_ids="831849"/>

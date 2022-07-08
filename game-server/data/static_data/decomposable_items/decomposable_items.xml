@@ -23443,7 +23443,24 @@
 			<item id="187000090" /><!-- Tiamat's Spectral Wings -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052626" /><!-- [Event] Cocktail Shaker -->
+	<decomposable item_id="188052626"><!-- [Event] Cocktail Shaker -->
+		<items>
+			<item id="160010269" /><!-- [Event] Manduri Sour -->
+		</items>
+		<items>
+			<item id="160010270" /><!-- [Event] Blue Atreia -->
+		</items>
+		<items>
+			<item id="160010271" /><!-- [Event] Ribbit Sunrise -->
+		</items>
+		<items>
+			<item id="160010272" /><!-- [Event] Brommeltini -->
+		</items>
+		<items>
+			<item id="182007056" race="ELYOS" /><!-- Shugo Warranty -->
+			<item id="182007057" race="ASMODIANS" /><!-- Shugo Warranty -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052627"><!-- [Event] Bag of Ice -->
 		<items>
 			<item id="188100124" min_count="3" max_count="5" /><!-- Ice Block -->
