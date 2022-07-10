@@ -3094,27 +3094,82 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Summer Party" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
+	<event name="Summer Party" start="2022-08-01T00:00:00" end="2022-08-21T23:59:59">
 		<quests>
 			<maintainable>80351 80352 80360 80361</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Summer Party Drop" chance="2" dynamic_chance="true" level_based_chance_reduction="true">
-				<gd_worlds>
-					<gd_world wd_type="ABYSS_INSTANCE" />
-					<gd_world wd_type="ARENA_INSTANCE" />
-					<gd_world wd_type="BALAUREA_INSTANCE" />
-					<gd_world wd_type="DREDGION_INSTANCE" />
-					<gd_world wd_type="STEEL_RAKE_INSTANCE" />
-				</gd_worlds>
-				<gd_ratings>
-					<gd_rating rating="NORMAL" />
-					<gd_rating rating="ELITE" />
-					<gd_rating rating="HERO" />
-					<gd_rating rating="LEGENDARY" />
-				</gd_ratings>
+			<gd_rule rule_name="Summer Party Drop (Shared)" chance="20" member_limit="3" level_based_chance_reduction="true">
+				<gd_maps>
+					<gd_map map_id="301220000" /><!-- PvPvE-Map -->
+					<gd_map map_id="600100000" /><!-- Levinshor -->
+				</gd_maps>
 				<gd_items>
 					<gd_item id="188100124" /><!-- Ice Block -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Summer Party Drop (Single)" chance="10">
+				<gd_maps>
+					<gd_map map_id="210090000" /><!-- Idian_Depths_L -->
+					<gd_map map_id="220100000" /><!-- Idian_Depths_D -->
+				</gd_maps>
+				<gd_items>
+					<gd_item id="188100124" /><!-- Ice Block -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Bag of Ice" chance="100" member_limit="12" level_based_chance_reduction="true">
+				<gd_maps>
+					<gd_map map_id="300240000" /><!-- Aturam Sky Fortress -->
+					<gd_map map_id="300280000" /><!-- Rentus Base -->
+					<gd_map map_id="300510000" /><!-- Tiamat Stronghold -->
+					<gd_map map_id="300520000" /><!-- Dragon Lords Refuge -->
+					<gd_map map_id="300590000" /><!-- Ophidan Bridge -->
+					<gd_map map_id="300610000" /><!-- Raksang Ruins -->
+					<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
+					<gd_map map_id="300630000" /><!-- Anguished Dragon Lords Refuge -->
+					<gd_map map_id="300800000" /><!-- Infinity Shard -->
+					<gd_map map_id="301110000" /><!-- Danuar Reliquary -->
+					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
+					<gd_map map_id="301140000" /><!-- Seized Danuar Sanctuary -->
+					<gd_map map_id="301230000" /><!-- Illuminary Obelisk -->
+					<gd_map map_id="301270000" /><!-- Linkgate Foundry -->
+					<gd_map map_id="301360000" /><!-- Infernal Danuar Reliquary -->
+					<gd_map map_id="301370000" /><!-- Infernal Illuminary Obelisk -->
+					<gd_map map_id="301380000" /><!-- Danuar Sanctuary -->
+					<gd_map map_id="301390000" /><!-- Drakenspire Depths -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="217376" /><!-- Ahunatal Shadowslip -->
+					<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
+					<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest -->
+					<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate (Dragon Lord's Refuge) -->
+					<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+					<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
+					<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
+					<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
+					<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
+					<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
+					<gd_npc npc_id="702729" /><!-- Tiamat's Huge Treasure Crate -->
+					<gd_npc npc_id="231073" /><!-- Hyperion -->
+					<gd_npc npc_id="701795" /><!-- Treasure Box (Danuar Reliquary) -->
+					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+					<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
+					<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
+					<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
+					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
+					<gd_npc npc_id="234990" /><!-- Wounded Belsagos -->
+					<gd_npc npc_id="233898" /><!-- Volatile Belsagos -->
+					<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
+					<gd_npc npc_id="234691" /><!-- Crazed Modor -->
+					<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
+					<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
+					<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
+					<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
+					<gd_npc npc_id="833012" /><!-- Cloak of Balaur Lord Beritra -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188052627" /><!-- [Event] Bag of Ice -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -3223,7 +3278,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Block Party Part 1" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
+	<event name="Block Party Part 1" start="2022-08-01T00:00:00" end="2022-08-07T23:59:59">
 		<quests>
 			<maintainable>80353 80356 80362 80365</maintainable>
 		</quests>
@@ -3244,7 +3299,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Block Party Part 2" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
+	<event name="Block Party Part 2" start="2022-08-08T00:00:00" end="2022-08-14T23:59:59">
 		<quests>
 			<maintainable>80354 80357 80363 80366</maintainable>
 		</quests>
@@ -3265,7 +3320,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Block Party Part 3" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
+	<event name="Block Party Part 3" start="2022-08-15T00:00:00" end="2022-08-21T23:59:59">
 		<quests>
 			<maintainable>80355 80358 80364 80367</maintainable>
 		</quests>
@@ -3286,7 +3341,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Block Party Part 4" start="2015-08-01T00:00:00" end="2015-09-04T23:59:59">
+	<event name="Block Party Part 4" start="2022-08-22T00:00:00" end="2022-08-28T23:59:59">
 		<quests>
 			<maintainable>80359 80368</maintainable>
 		</quests>

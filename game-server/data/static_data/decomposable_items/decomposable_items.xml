@@ -23367,80 +23367,53 @@
 	<decomposable item_id="188052623" /><!-- [Event] Romantic Dye Box -->
 	<decomposable item_id="188052624" /><!-- [Event] Dramata's Bone Wing Box -->
 	<decomposable item_id="188052625"><!-- [Event] Ice-hot Box -->
-		<items chance="7.0">
+		<items chance="10.0">
 			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
 		</items>
-		<items chance="7.0">
+		<items chance="10.0">
 			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
 		</items>
-		<items chance="7.0">
-			<item id="162000141" min_count="3" /><!-- Sublime Wind Serum -->
-		</items>
-		<items chance="7.0">
+		<items chance="10.0">
 			<item id="186000237" min_count="50" /><!-- Ancient Coin -->
 		</items>
-		<items chance="7.0">
+		<items chance="10.0">
 			<item id="186000238" min_count="50" /><!-- Conqueror's Mark -->
 		</items>
-		<items chance="6.0">
-			<item id="186000399" min_count="20" /><!-- Honorable Conqueror's Mark -->
-		</items>
-		<items chance="6.0">
-			<item id="166000194" min_count="3" /><!-- Delta Enchantment Stone -->
-		</items>
-		<items chance="6.0">
+		<items chance="7.0">
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
-		<items chance="4.0">
-			<item id="169620067" /><!-- AP Boost Charm II - 50% -->
-		</items>
-		<items chance="4.0">
-			<item id="169620079" /><!-- Gathering Boost Charm II - 100% -->
-		</items>
-		<items chance="4.0">
-			<item id="188052321" /><!-- [Event] Protectorate Key Box -->
-		</items>
-		<items chance="4.0">
+		<items chance="7.0">
 			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
 		</items>
-		<items chance="4.0">
+		<items chance="7.0">
+			<item id="169629003" min_count="2" /><!-- Shiny Vinna -->
+		</items>
+		<items chance="7.0">
+			<item id="186000399" min_count="20" /><!-- Honorable Conqueror's Mark -->
+		</items>
+		<items chance="5.0">
 			<item id="188054198" /><!-- Greater Scroll Bundle -->
 		</items>
-		<items chance="4.0">
+		<items chance="5.0">
 			<item id="188053614" /><!-- Illusion Godstone Bundle -->
 		</items>
 		<items chance="4.0">
-			<item id="188053208" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
 		</items>
-		<items chance="3.0">
-			<item id="166500005" min_count="3" /><!-- [Event] Amplification Stone -->
+		<items chance="4.0">
+			<item id="166030005" min_count="3" /><!-- Tempering Solution -->
 		</items>
-		<items chance="3.0">
-			<item id="166020003" min_count="3" /><!-- [Event] Omega Enchantment Stone -->
-		</items>
-		<items chance="3.0">
-			<item id="166030007" min_count="3" /><!-- [Event] Tempering Solution -->
-		</items>
-		<items chance="3.0">
+		<items chance="4.0">
 			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
 		</items>
-		<items chance="1.5">
-			<item id="188052831" /><!-- Dynatoum's Brazen Armor Box -->
+		<items chance="4.0">
+			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
 		</items>
-		<items chance="1.5">
-			<item id="188053099" /><!-- Pure Modor's Equipment Crux Box -->
+		<items chance="3.0">
+			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
 		</items>
-		<items chance="1.0">
-			<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
-		</items>
-		<items chance="1.0">
-			<item id="188053033" /><!-- Kunax's Equipment Box -->
-		</items>
-		<items chance="1.0">
-			<item id="188053219" /><!-- [Event] Sauro Commander's Accessory Box -->
-		</items>
-		<items chance="1.0">
-			<item id="187000090" /><!-- Tiamat's Spectral Wings -->
+		<items chance="3.0">
+			<item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052626"><!-- [Event] Cocktail Shaker -->
@@ -23462,11 +23435,11 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052627"><!-- [Event] Bag of Ice -->
-		<items>
+		<items chance="85">
 			<item id="188100124" min_count="3" max_count="5" /><!-- Ice Block -->
 		</items>
-		<items>
-			<item id="188100125" min_count="3" max_count="5" /><!-- Ice Pick -->
+		<items chance="15">
+			<item id="188100125" /><!-- Ice Pick -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052628" /><!-- [Event] Icy Idian Box -->
