@@ -25074,7 +25074,23 @@
 			<item id="184002017" race="ASMODIANS" /><!-- [Event] Birthday Cake Kisk -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052723" /><!-- [Event] Tatar's Weapon Box -->
+	<decomposable item_id="188052723" selectable="true"><!-- [Event] Tatar's Weapon Box -->
+		<items>
+			<item id="100001608" /><!-- [Event] Tatar's Sword -->
+			<item id="100101235" /><!-- [Event] Tatar's Mace -->
+			<item id="100201410" /><!-- [Event] Tatar's Dagger -->
+			<item id="100501225" /><!-- [Event] Tatar's Orb -->
+			<item id="100601328" /><!-- [Event] Tatar's Spellbook -->
+			<item id="100901247" /><!-- [Event] Tatar's Greatsword -->
+			<item id="101301171" /><!-- [Event] Tatar's Polearm -->
+			<item id="101501259" /><!-- [Event] Tatar's Staff -->
+			<item id="101701274" /><!-- [Event] Tatar's Bow -->
+			<item id="101801112" /><!-- [Event] Tatar's Pistol -->
+			<item id="101901031" /><!-- [Event] Tatar's Aethercannon -->
+			<item id="102001138" /><!-- [Event] Tatar's Harp -->
+			<item id="102100903" /><!-- [Event] Tatar's Flawless Cipher-Blade -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052724"><!-- Beritran Hoard -->
 		<items chance="22.0">
 			<item id="162000122" min_count="2" /><!-- Superior Life Serum -->
@@ -26255,7 +26271,24 @@
 			<item id="160010299" race="ASMODIANS" /><!-- [Event] Stalwart Dandi Form Candy -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052915" /><!-- [Event] Stormwing Weapon Chest -->
+	<decomposable item_id="188052915" selectable="true"><!-- [Event] Stormwing Weapon Chest -->
+		<items>
+			<item id="100000893" /><!-- Stormwing's Azure Scale Sword -->
+			<item id="100001080" /><!-- Stormwing Scale Sword -->
+			<item id="100100676" /><!-- Stormwing's Warhammer -->
+			<item id="100200807" /><!-- Stormwing's Dagger -->
+			<item id="100500698" /><!-- Stormwing's Jewel -->
+			<item id="100600755" /><!-- Stormwing's Tome -->
+			<item id="100900684" /><!-- Stormwing's Greatsword -->
+			<item id="101300655" /><!-- Stormwing's Spear -->
+			<item id="101500698" /><!-- Stormwing's Staff -->
+			<item id="101700722" /><!-- Stormwing's Longbow -->
+			<item id="101800867" /><!-- Stormwing's Pistol -->
+			<item id="101900627" /><!-- Stormwing's Aethercannon -->
+			<item id="102000662" /><!-- Stormwing's Harp -->
+			<item id="102100756" /><!-- Stormwing's Cipher-Blade -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052916" /><!-- [Event] Triniel's Shadow Wraith Weapon Chest -->
 	<decomposable item_id="188052917" /><!-- [Event] Triniel's Shadow Wraith Attire Chest -->
 	<decomposable item_id="188052918" /><!-- [Event] Angel Wings Chest -->
