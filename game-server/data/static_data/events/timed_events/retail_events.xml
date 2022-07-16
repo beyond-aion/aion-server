@@ -2135,88 +2135,71 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Scorching Heat Inventory" start="2021-07-05T00:00:00" end="2021-08-01T23:59:59">
+	<event name="Scorching Heat Inventory" start="2022-08-01T00:00:00" end="2022-08-21T23:59:59">
 		<inventory_drop item_id="186000111" startlevel="1" interval="30" count="3" />
 	</event>
-	<event name="Scorching Heat" start="2021-07-05T00:00:00" end="2021-08-01T23:59:59">
+	<event name="Scorching Heat" start="2022-08-01T00:00:00" end="2022-08-21T23:59:59">
 		<spawns>
-			<!-- Pandaemonium -->
-			<spawn_map map_id="120010000">
-				<!-- Elma -->
-				<spawn npc_id="799792" respawn_time="295">
-					<spot x="1246.69" y="1356.16" z="204.42001" />
-				</spawn>
-				<!-- Sihein -->
-				<spawn npc_id="799793" respawn_time="295">
-					<spot x="1244.6205" y="1351.6508" z="204.42001" />
-				</spawn>
-				<!-- Murea -->
-				<spawn npc_id="799794" respawn_time="295">
-					<spot x="1246.9843" y="1363.0145" z="204.42001" />
-				</spawn>
-			</spawn_map>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
 				<!-- Zena -->
 				<spawn npc_id="799704" respawn_time="295">
-					<spot x="1535.91" y="1474.44" z="565.962" h="33" />
+					<spot x="1533.8049" y="1474.3649" z="565.9609" h="30" />
 				</spawn>
 				<!-- Cartiros -->
 				<spawn npc_id="799705" respawn_time="295">
-					<spot x="1535.4037" y="1496.5366" z="565.91974" h="45" />
+					<spot x="1520.6157" y="1498.9816" z="565.9241" h="53" />
 				</spawn>
 				<!-- Eliana -->
 				<spawn npc_id="799706" respawn_time="295">
-					<spot x="1530.75" y="1496.0077" z="565.91974" h="29" />
+					<spot x="1538.3533" y="1474.9008" z="565.9632" h="33" />
 				</spawn>
-			</spawn_map>
-			<!-- Gelkmaros -->
-			<spawn_map map_id="220070000">
-				<!-- Darian -->
-				<spawn npc_id="799798" respawn_time="295">
-					<spot x="1774" y="2899" z="549" h="110" />
-				</spawn>
-			</spawn_map>
-			<!-- Beluslan -->
-			<spawn_map map_id="220040000">
-				<!-- Odel -->
-				<spawn npc_id="799797" respawn_time="295">
-					<spot x="386.28958" y="343.31763" z="229.1838" h="53" />
-				</spawn>
-			</spawn_map>
-			<!-- Morheim -->
-			<spawn_map map_id="220020000">
-				<!-- Jennis -->
-				<spawn npc_id="799796" respawn_time="295">
-					<spot x="322" y="2377" z="443" h="77" />
-				</spawn>
-			</spawn_map>
-			<!-- Inggison -->
-			<spawn_map map_id="210050000">
-				<!-- Larsa -->
-				<spawn npc_id="799710" respawn_time="295">
-					<spot x="1360.7979" y="358.68234" z="589.5762" h="93" />
-				</spawn>
-			</spawn_map>
-			<!-- Heiron -->
-			<spawn_map map_id="210040000">
-				<!-- Pollig -->
-				<spawn npc_id="799709" respawn_time="295">
-					<spot x="2519.3638" y="384.1401" z="408.25" h="42" />
-				</spawn>
-			</spawn_map>
-			<!-- Eltnen -->
-			<spawn_map map_id="210020000">
-				<!-- Divani -->
-				<spawn npc_id="799708" respawn_time="295">
-					<spot x="386" y="2706" z="266.24893" h="53" />
-				</spawn>
-			</spawn_map>
-			<!-- Poeta -->
-			<spawn_map map_id="210010000">
 				<!-- Thenon -->
 				<spawn npc_id="799707" respawn_time="295">
-					<spot x="865.9374" y="1225.0037" z="118.875" h="66" />
+					<spot x="1542.5652" y="1494.2714" z="565.9306" h="57" />
+				</spawn>
+				<!-- Divani -->
+				<spawn npc_id="799708" respawn_time="295">
+					<spot x="1519.1749" y="1522.514" z="565.9235" h="63" />
+				</spawn>
+				<!-- Pollig -->
+				<spawn npc_id="799709" respawn_time="295">
+					<spot x="1529.2344" y="1474.5374" z="565.9603" h="31" />
+				</spawn>
+				<!-- Larsa -->
+				<spawn npc_id="799710" respawn_time="295">
+					<spot x="1542.658" y="1529.0775" z="565.9311" h="65" />
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Elma -->
+				<spawn npc_id="799792" respawn_time="295">
+					<spot x="1187.5569" y="1421.4822" z="208.125" h="109" />
+				</spawn>
+				<!-- Sihein -->
+				<spawn npc_id="799793" respawn_time="295">
+					<spot x="1183.3492" y="1419.5531" z="208.125" h="116" />
+				</spawn>
+				<!-- Murea -->
+				<spawn npc_id="799794" respawn_time="295">
+					<spot x="1209.4912" y="1410.2329" z="208.125" h="3" />
+				</spawn>
+				<!-- Heims -->
+				<spawn npc_id="799795" respawn_time="295">
+					<spot x="1210.647" y="1389.0502" z="208.125" h="16" />
+				</spawn>
+				<!-- Jennis -->
+				<spawn npc_id="799796" respawn_time="295">
+					<spot x="1184.998" y="1390.3882" z="208.125" h="14" />
+				</spawn>
+				<!-- Odel -->
+				<spawn npc_id="799797" respawn_time="295">
+					<spot x="1189.5242" y="1425.8042" z="208.125" h="109" />
+				</spawn>
+				<!-- Darian -->
+				<spawn npc_id="799798" respawn_time="295">
+					<spot x="1179.1106" y="1404.0919" z="208.125" h="7" />
 				</spawn>
 			</spawn_map>
 		</spawns>

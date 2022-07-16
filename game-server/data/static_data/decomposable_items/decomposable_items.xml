@@ -7308,54 +7308,58 @@
 	<decomposable item_id="188051089" /><!-- Major Pudgy Porgus Bundle -->
 	<decomposable item_id="188051090" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="171130034" /><!-- Fresh Summer Camp Wallpaper -->
-			<item id="171130038" /><!-- Fresh Summer Camp Floor -->
-			<item id="125045164" /><!-- Rattan Hat -->
-			<item id="125045076" /><!-- Cool Swim Cap -->
-			<item id="125045242" /><!-- Aquablue Sunhat -->
-			<item id="164002167" min_count="3" /><!-- Drana Coffee -->
-			<item id="160005060" min_count="3" /><!-- [Event] Zeraka Aether Jelly -->
+			<item id="125040022" /><!-- Ribbit Hat -->
+			<item id="125045241" /><!-- Hot Shades -->
+			<item id="125040042" /><!-- Summer Sunglasses -->
+			<item id="125040045" /><!-- Diving Helmet/Summer Headwrap -->
+			<item id="125040180" /><!-- Sports Cap -->
 			<item id="188052090" /><!-- [Event] Magic Food Bundle -->
 			<item id="188052091" /><!-- [Event] Melee Food Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051091" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
-			<item id="169600090" /><!-- [Emotion Card] 'Fluttering Heart' Dance -->
-			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
-			<item id="110900552" /><!-- Aquablue Swimsuit -->
-			<item id="110900824" /><!-- Inked-Up Swimsuit -->
-			<item id="110900108" /><!-- NPC Hot Swimsuit -->
-			<item id="160010342" min_count="3" /><!-- Unstoppable Ailu Form -->
-			<item id="160010343" min_count="3" /><!-- Indomitable Ailu Form -->
+			<item id="169650007" /><!-- [Event] Plastic Surgery Ticket -->
+			<item id="170205025" /><!-- Vinyl Dancefloor -->
+			<item id="169600086" /><!-- [Emotion Card] 'Shut Up' Dance -->
+			<item id="110900062" /><!-- Ribbit Costume -->
+			<item id="110900420" /><!-- Cool Summer Look -->
+			<item id="110900103" /><!-- Cute Swimsuit -->
+			<item id="188051516" /><!-- Smart Greater Scroll Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051092" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="171130034" /><!-- Fresh Summer Camp Wallpaper -->
-			<item id="171130038" /><!-- Fresh Summer Camp Floor -->
-			<item id="125045164" /><!-- Rattan Hat -->
-			<item id="125045076" /><!-- Cool Swim Cap -->
-			<item id="125045242" /><!-- Aquablue Sunhat -->
-			<item id="164002167" min_count="3" /><!-- Drana Coffee -->
-			<item id="160005060" min_count="3" /><!-- [Event] Zeraka Aether Jelly -->
+			<item id="125040022" /><!-- Ribbit Hat -->
+			<item id="125045241" /><!-- Hot Shades -->
+			<item id="125040042" /><!-- Summer Sunglasses -->
+			<item id="125040045" /><!-- Diving Helmet/Summer Headwrap -->
+			<item id="125040180" /><!-- Sports Cap -->
 			<item id="188052092" /><!-- [Event] Magic Food Bundle -->
 			<item id="188052093" /><!-- [Event] Melee Food Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051093" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
-			<item id="169600090" /><!-- [Emotion Card] 'Fluttering Heart' Dance -->
-			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
-			<item id="110900552" /><!-- Aquablue Swimsuit -->
-			<item id="110900824" /><!-- Inked-Up Swimsuit -->
-			<item id="110900108" /><!-- NPC Hot Swimsuit -->
-			<item id="160010344" min_count="3" /><!-- Unstoppable Ailu Form -->
-			<item id="160010345" min_count="3" /><!-- Indomitable Ailu Form -->
+			<item id="169650007" /><!-- [Event] Plastic Surgery Ticket -->
+			<item id="170205025" /><!-- Vinyl Dancefloor -->
+			<item id="169600086" /><!-- [Emotion Card] 'Shut Up' Dance -->
+			<item id="110900062" /><!-- Ribbit Costume -->
+			<item id="110900420" /><!-- Cool Summer Look -->
+			<item id="110900103" /><!-- Cute Swimsuit -->
+			<item id="188051516" /><!-- Smart Greater Scroll Bundle -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188051094" /><!-- Scorching Heat Pouch -->
-	<decomposable item_id="188051095" /><!-- Noble Scorching Heat Pouch -->
+	<decomposable item_id="188051094"><!-- Scorching Heat Pouch -->
+		<items>
+			<item id="186000111" min_count="20" /><!-- Scorching Heat -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051095"><!-- Noble Scorching Heat Pouch -->
+		<items>
+			<item id="186000111" min_count="50" /><!-- Scorching Heat -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051096" /><!-- Archive Document Box -->
 	<decomposable item_id="188051097" /><!-- Report Box -->
 	<decomposable item_id="188051098" /><!-- Command Box -->
