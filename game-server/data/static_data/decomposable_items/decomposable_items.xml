@@ -13583,51 +13583,39 @@
 	</decomposable>
 	<decomposable item_id="188051675" /><!-- Mysterious Box -->
 	<decomposable item_id="188051676"><!-- [Event] Noble Box of Life -->
-		<items chance="7">
+		<items chance="15">
 			<item id="164002167" min_count="5" /><!-- Drana Coffee -->
 		</items>
-		<items chance="7">
-			<item id="166100020" min_count="250" /><!-- [Stamp] Greater Supplements (Eternal) -->
-		</items>
-		<items chance="7">
+		<items chance="15">
 			<item id="166100023" min_count="250" /><!-- [Stamp] Greater Supplements (Eternal) -->
 		</items>
-		<items chance="7">
+		<items chance="15">
+			<item id="186000101" min_count="10" race="ELYOS" /><!-- Radiant Token -->
+			<item id="186000104" min_count="10" race="ASMODIANS" /><!-- Crusader Token -->
+		</items>
+		<items chance="12">
 			<item id="169620030" /><!-- [Favorable Luck] Face of Spring Burgeoning -->
 		</items>
-		<items chance="7">
-			<item id="169405253" /><!-- Weapon Shard -->
-		</items>
-		<items chance="7">
+		<items chance="12">
 			<item id="188053695" /><!-- High Grade Crafting Material Box of Conquest -->
 		</items>
-		<items chance="7">
+		<items chance="10">
+			<item id="169405253" /><!-- Weapon Shard -->
+		</items>
+		<items chance="5">
+			<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+		</items>
+		<items chance="5">
+			<item id="188052915" /><!-- [Event] Stormwing Weapon Chest -->
+		</items>
+		<items chance="5">
+			<item id="188052723" /><!-- [Event] Tatar's Weapon Box -->
+		</items>
+		<items chance="3">
 			<item id="188053959" /><!-- [Camping] Display Furniture Bag -->
 		</items>
-		<items chance="7">
-			<item id="186000100" min_count="5" race="ELYOS" /><!-- Progress Token -->
-			<item id="186000103" min_count="5" race="ASMODIANS" /><!-- Ward Token -->
-		</items>
-		<items chance="7">
-			<item id="188053276" /><!-- Anuhart's Fabled Pants Box -->
-		</items>
-		<items chance="7">
-			<item id="188053277" /><!-- Anuhart's Fabled Shoes Box -->
-		</items>
-		<items chance="7">
-			<item id="188053278" /><!-- Anuhart's Fabled Gloves Box -->
-		</items>
-		<items chance="7">
-			<item id="188053279" /><!-- Anuhart's Fabled Chest Box -->
-		</items>
-		<items chance="7">
-			<item id="188053280" /><!-- Anuhart's Fabled Shoulders Box -->
-		</items>
-		<items chance="4.5">
-			<item id="188052075" /><!-- [Event] Tahabata Weapon Box -->
-		</items>
-		<items chance="4.5">
-			<item id="190020028" /><!-- Pink Griffo Egg -->
+		<items chance="3">
+			<item id="190020031" /><!-- Aqua Griffo Egg -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051677" /><!-- [Event] Eternal Treasure Chest -->

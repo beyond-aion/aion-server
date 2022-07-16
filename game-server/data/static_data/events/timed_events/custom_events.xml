@@ -3131,7 +3131,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Agrint Event" start="2021-03-29T00:00:00" end="2021-04-11T23:59:59">
+	<event name="Agrint Event" start="2022-07-22T00:00:00" end="2022-07-29T23:59:59">
 		<event_drops>
 			<gd_rule rule_name="Agrint Event (Agrint)" chance="100" member_limit="18">
 				<gd_maps>
@@ -3139,8 +3139,8 @@
 					<gd_map map_id="120010000" /><!-- Pandaemonium -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="218850" /><!-- Spring Agrint -->
-					<gd_npc npc_id="218862" /><!-- Spring Agrint -->
+					<gd_npc npc_id="218851" /><!-- Summer Agrint -->
+					<gd_npc npc_id="218863" /><!-- Summer Agrint -->
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="188100060" /><!-- [Event] Smooth Eggshell -->
@@ -3227,15 +3227,15 @@
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
-				<!-- Spring Agrint -->
-				<spawn npc_id="218850" respawn_time="14400">
+				<!-- Summer Agrint -->
+				<spawn npc_id="218851" respawn_time="14400">
 					<spot x="1532.3938" y="1511.6124" z="565.8824" h="60" />
 				</spawn>
 			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- Spring Agrint -->
-				<spawn npc_id="218862" respawn_time="14400">
+				<!-- Summer Agrint -->
+				<spawn npc_id="218863" respawn_time="14400">
 					<spot x="1275.8656" y="1335.5107" z="204.4200" h="90" />
 				</spawn>
 			</spawn_map>
