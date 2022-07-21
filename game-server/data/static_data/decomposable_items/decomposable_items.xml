@@ -22907,70 +22907,73 @@
 	</decomposable>
 	<decomposable item_id="188052600"><!-- Beritran Supply Box -->
 		<items>
-			<item id="167000646" /><!-- Manastone: Attack +5 / HP +42 -->
+			<item id="167000682" /><!-- Manastone: Attack +5 / HP +47 -->
 		</items>
 		<items>
-			<item id="167000648" /><!-- Manastone: Attack +5 / Accuracy +12 -->
+			<item id="167000684" /><!-- Manastone: Attack +5 / Accuracy +13 -->
 		</items>
 		<items>
-			<item id="167000651" /><!-- Manastone: Attack +5 / Block +12 -->
+			<item id="167000687" /><!-- Manastone: Attack +5 / Block +13 -->
 		</items>
 		<items>
-			<item id="167000652" /><!-- Manastone: Attack +5 / Crit Strike +7 -->
+			<item id="167000749" /><!-- Manastone: Attack +5 / Crit Strike +8 -->
 		</items>
 		<items>
-			<item id="167000653" /><!-- Manastone: Attack +5 / Resist Magic +6 -->
+			<item id="167000750" /><!-- Manastone: Attack +5 / Resist Magic +7 -->
 		</items>
 		<items>
-			<item id="167000654" /><!-- Manastone: Attack +5 / Magical Accuracy +6 -->
+			<item id="167000751" /><!-- Manastone: Attack +5 / Magical Accuracy +7 -->
 		</items>
 		<items>
-			<item id="167000655" /><!-- Manastone: Crit Strike +15 / HP +42 -->
+			<item id="167000688" /><!-- Manastone: Crit Strike +17 / HP +47 -->
 		</items>
 		<items>
-			<item id="167000657" /><!-- Manastone: Crit Strike +15 / Attack +2 -->
+			<item id="167000690" /><!-- Manastone: Crit Strike +17 / Attack +2 -->
 		</items>
 		<items>
-			<item id="167000658" /><!-- Manastone: Crit Strike +15 / Accuracy +12 -->
+			<item id="167000691" /><!-- Manastone: Crit Strike +17 / Accuracy +13 -->
 		</items>
 		<items>
-			<item id="167000661" /><!-- Manastone: Crit Strike +15 / Block +12 -->
+			<item id="167000694" /><!-- Manastone: Crit Strike +17 / Block +13 -->
 		</items>
 		<items>
-			<item id="167000662" /><!-- Manastone: Crit Strike +15 / Resist Magic +6 -->
+			<item id="167000695" /><!-- Manastone: Crit Strike +17 / Resist Magic +7 -->
 		</items>
 		<items>
-			<item id="167000663" /><!-- Manastone: Crit Strike +15 / Magical Accuracy +6 -->
+			<item id="167000696" /><!-- Manastone: Crit Strike +17 / Magical Accuracy +7 -->
 		</items>
 		<items>
-			<item id="167000664" /><!-- Manastone: Magic Boost +25 / HP +42 -->
+			<item id="167000697" /><!-- Manastone: Magic Boost +27 / HP +47 -->
 		</items>
 		<items>
-			<item id="167000669" /><!-- Manastone: Magic Boost +25 / Block +12 -->
+			<item id="167000702" /><!-- Manastone: Magic Boost +27 / Block +13 -->
 		</items>
 		<items>
-			<item id="167000670" /><!-- Manastone: Magic Boost +25 / Crit Strike +7 -->
+			<item id="167000703" /><!-- Manastone: Magic Boost +27 / Crit Strike +8 -->
 		</items>
 		<items>
-			<item id="167000671" /><!-- Manastone: Magic Boost +25 / Resist Magic +6 -->
+			<item id="167000704" /><!-- Manastone: Magic Boost +27 / Resist Magic +7 -->
 		</items>
 		<items>
-			<item id="167000672" /><!-- Manastone: Magic Boost +25 / Magical Accuracy +6 -->
+			<item id="167000705" /><!-- Manastone: Magic Boost +27 / Magical Accuracy +7 -->
 		</items>
 		<items>
-			<item id="167000664" /><!-- Manastone: Magic Boost +25 / HP +42 -->
+			<item id="167000706" /><!-- Manastone: Magic Accuracy +14 / HP +47 -->
 		</items>
 		<items>
-			<item id="167000669" /><!-- Manastone: Magic Boost +25 / Block +12 -->
+			<item id="167000708" /><!-- Manastone: Magic Accuracy +14 / Magic Boost +13 -->
 		</items>
 		<items>
-			<item id="167000670" /><!-- Manastone: Magic Boost +25 / Crit Strike +7 -->
+			<item id="167000709" /><!-- Manastone: Magic Accuracy +14 / Accuracy +13 -->
 		</items>
 		<items>
-			<item id="167000671" /><!-- Manastone: Magic Boost +25 / Resist Magic +6 -->
+			<item id="167000712" /><!-- Manastone: Magic Accuracy +14 / Block +13 -->
 		</items>
 		<items>
-			<item id="167000672" /><!-- Manastone: Magic Boost +25 / Magical Accuracy +6 -->
+			<item id="167000713" /><!-- Manastone: Magic Accuracy +14 / Crit Strike +8 -->
+		</items>
+		<items>
+			<item id="167000714" /><!-- Manastone: Magic Accuracy +14 / Resist Magic +7 -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052601"><!-- Composite Manastone Bundle: Attack -->

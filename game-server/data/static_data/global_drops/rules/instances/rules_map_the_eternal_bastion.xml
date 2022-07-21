@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<global_rules xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../global_rules.xsd">
+	<gd_rule rule_name="Mobile Turret Key" chance="100">
+		<gd_maps>
+			<gd_map map_id="300540000" /><!-- The_Eternal_Bastion -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230753" /><!-- Pashid Assault Rider -->
+			<gd_npc npc_id="230757" /><!-- Pashid Assault Dragon -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="185000137" /><!-- Mobile Turret Key -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Balaur Supply Box" chance="100">
+		<gd_maps>
+			<gd_map map_id="300540000" /><!-- The_Eternal_Bastion -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="230753" /><!-- Pashid Assault Rider -->
+			<gd_npc npc_id="230757" /><!-- Pashid Assault Dragon -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188052600" /><!-- Balaur Supply Box -->
+		</gd_items>
+	</gd_rule>
+</global_rules>

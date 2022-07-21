@@ -2010,8 +2010,8 @@
 			<drop item_id="186000052" min_amount="2" chance="5" /><!-- Greater Ancient Crown -->
 		</drop_group>
 	</npc_drop>
-	<!-- Eternal Bastion S-Grade -->
-	<npc_drop npc_id="701917">
+	<!-- The Eternal Bastion -->
+	<npc_drop npc_id="701917"> <!-- S-Grade Reward Box -->
 		<drop_group><!-- Conqueror's Mark -->
 			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
@@ -2179,6 +2179,32 @@
 		</drop_group>
 		<drop_group><!-- Named Tempering Solution Chest -->
 			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="801268"><!-- Supply Box -->
+		<drop_group>
+			<drop item_id="185000136" min_amount="24" /><!-- Aetheric Power Crystal -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="801269"><!-- Supply Box -->
+		<drop_group>
+			<drop item_id="182006995" min_amount="48" /><!-- Aetheric Cannonball -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="831328"><!-- Cannon Supplies Box -->
+		<drop_group>
+			<drop item_id="182006995" min_amount="8" /><!-- Aetheric Cannonball -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="831329"><!-- Ammo Box -->
+		<drop_group>
+			<drop item_id="182006995" min_amount="2" /><!-- Aetheric Cannonball -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="182006996" /><!-- Case Shot -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="182006997" min_amount="2" /><!-- Armor-piercing Shot -->
 		</drop_group>
 	</npc_drop>
 	<!-- Haramel -->
