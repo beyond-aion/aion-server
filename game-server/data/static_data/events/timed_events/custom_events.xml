@@ -3131,159 +3131,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Summer Event" start="2021-07-09T00:00:00" end="2021-07-25T23:59:59">
-		<spawns>
-			<!-- Pandaemonium -->
-			<spawn_map map_id="120010000">
-				<!-- Victoria -->
-				<spawn npc_id="831808" respawn_time="295">
-					<spot x="1208.1000" y="1392.6000" z="208.3000" h="10" />
-				</spawn>
-				<!-- Oltrit -->
-				<spawn npc_id="831811" respawn_time="295">
-					<spot x="1202.6000" y="1394.9000" z="208.3000" h="6" />
-				</spawn>
-				<!-- Lamoralf -->
-				<spawn npc_id="831807" respawn_time="295">
-					<spot x="1200.5000" y="1413.9000" z="208.3000" h="118" />
-				</spawn>
-				<!-- Summer Beach Bar -->
-				<spawn npc_id="701937" respawn_time="295">
-					<spot x="1198.1000" y="1398.5000" z="208" h="3" />
-				</spawn>
-				<!-- Supia -->
-				<spawn npc_id="831809" respawn_time="295">
-					<spot x="1192.8000" y="1387.5000" z="208.3000" h="15" />
-				</spawn>
-				<!-- Jeanne -->
-				<spawn npc_id="831810" respawn_time="295">
-					<spot x="1197.3000" y="1386" z="208.3000" h="24" />
-				</spawn>
-			</spawn_map>
-			<!-- Sanctum -->
-			<spawn_map map_id="110010000">
-				<!-- Illaidah -->
-				<spawn npc_id="831799" respawn_time="295">
-					<spot x="1519.1000" y="1508.8000" z="565.9000" h="56" />
-				</spawn>
-				<!-- Walker -->
-				<spawn npc_id="831798" respawn_time="295">
-					<spot x="1533.9000" y="1498.4000" z="566.2000" h="43" />
-				</spawn>
-				<!-- Adolpha -->
-				<spawn npc_id="831802" respawn_time="295">
-					<spot x="1531.9000" y="1523.9000" z="566.2000" h="61" />
-				</spawn>
-				<!-- Summer Beach Bar -->
-				<spawn npc_id="701937" respawn_time="295">
-					<spot x="1533.1000" y="1511.6000" z="565.9000" h="58" />
-				</spawn>
-				<!-- Elena -->
-				<spawn npc_id="831801" respawn_time="295">
-					<spot x="1541.7000" y="1522.2000" z="566.2000" h="62" />
-				</spawn>
-				<!-- Ibiza -->
-				<spawn npc_id="831800" respawn_time="295">
-					<spot x="1542.2000" y="1517.6000" z="566.2000" h="62" />
-				</spawn>
-			</spawn_map>
-		</spawns>
-		<event_drops>
-			<gd_rule rule_name="Ice Block" chance="20" member_limit="3">
-				<gd_maps>
-					<gd_map map_id="301220000" /><!-- PvPvE-Map -->
-				</gd_maps>
-				<gd_items>
-					<gd_item id="188100124" /><!-- Ice Block -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Ice Pick (Single)" chance="10">
-				<gd_maps>
-					<gd_map map_id="210090000" /><!-- Idian_Depths_L -->
-					<gd_map map_id="220100000" /><!-- Idian_Depths_D -->
-				</gd_maps>
-				<gd_items>
-					<gd_item id="188100125" /><!-- Ice Pick -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Ice Pick (Shared)" chance="15" member_limit="3" level_based_chance_reduction="true">
-				<gd_ratings>
-					<gd_rating rating="ELITE" />
-					<gd_rating rating="HERO" />
-				</gd_ratings>
-				<gd_zones>
-					<gd_zone zone="TWILIGHT_DRANA_FARM_220070000" />
-					<gd_zone zone="VISCUM_SWAMP_220070000" />
-					<gd_zone zone="HANARKAND_210050000" />
-					<gd_zone zone="HANARKAND_GATE_210050000" />
-					<gd_zone zone="HANARKAND_OBSERVATION_POST_210050000" />
-					<gd_zone zone="HANARKAND_ORACLE_CHAMBER_210050000" />
-					<gd_zone zone="HANARKAND_PLAINS_210050000" />
-					<gd_zone zone="HANARKAND_PRISON_ENTRANCE_210050000" />
-					<gd_zone zone="HANARKAND_PROTECTION_ALTAR_210050000" />
-				</gd_zones>
-				<gd_items>
-					<gd_item id="188100125" /><!-- Ice Pick -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Bag of Ice" chance="100" member_limit="12" level_based_chance_reduction="true">
-				<gd_maps>
-					<gd_map map_id="300240000" /><!-- Aturam Sky Fortress -->
-					<gd_map map_id="300280000" /><!-- Rentus Base -->
-					<gd_map map_id="300510000" /><!-- Tiamat Stronghold -->
-					<gd_map map_id="300520000" /><!-- Dragon Lords Refuge -->
-					<gd_map map_id="300590000" /><!-- Ophidan Bridge -->
-					<gd_map map_id="300610000" /><!-- Raksang Ruins -->
-					<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
-					<gd_map map_id="300630000" /><!-- Anguished Dragon Lords Refuge -->
-					<gd_map map_id="300800000" /><!-- Infinity Shard -->
-					<gd_map map_id="301110000" /><!-- Danuar Reliquary -->
-					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
-					<gd_map map_id="301140000" /><!-- Seized Danuar Sanctuary -->
-					<gd_map map_id="301230000" /><!-- Illuminary Obelisk -->
-					<gd_map map_id="301270000" /><!-- Linkgate Foundry -->
-					<gd_map map_id="301360000" /><!-- Infernal Danuar Reliquary -->
-					<gd_map map_id="301370000" /><!-- Infernal Illuminary Obelisk -->
-					<gd_map map_id="301380000" /><!-- Danuar Sanctuary -->
-					<gd_map map_id="301390000" /><!-- Drakenspire Depths -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="217376" /><!-- Ahunatal Shadowslip -->
-					<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
-					<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest -->
-					<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate (Dragon Lord's Refuge) -->
-					<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
-					<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
-					<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
-					<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
-					<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
-					<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
-					<gd_npc npc_id="702729" /><!-- Tiamat's Huge Treasure Crate -->
-					<gd_npc npc_id="231073" /><!-- Hyperion -->
-					<gd_npc npc_id="701795" /><!-- Treasure Box (Danuar Reliquary) -->
-					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
-					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
-					<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
-					<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
-					<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
-					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
-					<gd_npc npc_id="234990" /><!-- Wounded Belsagos -->
-					<gd_npc npc_id="233898" /><!-- Volatile Belsagos -->
-					<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
-					<gd_npc npc_id="234691" /><!-- Crazed Modor -->
-					<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
-					<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
-					<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
-					<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
-					<gd_npc npc_id="833012" /><!-- Cloak of Balaur Lord Beritra -->
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="188052627" /><!-- [Event] Bag of Ice -->
-				</gd_items>
-			</gd_rule>
-		</event_drops>
-	</event>
-	<event name="Agrint Event" start="2021-03-29T00:00:00" end="2021-04-11T23:59:59">
+	<event name="Agrint Event" start="2022-07-22T00:00:00" end="2022-07-29T23:59:59">
 		<event_drops>
 			<gd_rule rule_name="Agrint Event (Agrint)" chance="100" member_limit="18">
 				<gd_maps>
@@ -3291,8 +3139,8 @@
 					<gd_map map_id="120010000" /><!-- Pandaemonium -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="218850" /><!-- Spring Agrint -->
-					<gd_npc npc_id="218862" /><!-- Spring Agrint -->
+					<gd_npc npc_id="218851" /><!-- Summer Agrint -->
+					<gd_npc npc_id="218863" /><!-- Summer Agrint -->
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="188100060" /><!-- [Event] Smooth Eggshell -->
@@ -3379,15 +3227,15 @@
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
-				<!-- Spring Agrint -->
-				<spawn npc_id="218850" respawn_time="14400">
+				<!-- Summer Agrint -->
+				<spawn npc_id="218851" respawn_time="14400">
 					<spot x="1532.3938" y="1511.6124" z="565.8824" h="60" />
 				</spawn>
 			</spawn_map>
 			<!-- Pandaemonium -->
 			<spawn_map map_id="120010000">
-				<!-- Spring Agrint -->
-				<spawn npc_id="218862" respawn_time="14400">
+				<!-- Summer Agrint -->
+				<spawn npc_id="218863" respawn_time="14400">
 					<spot x="1275.8656" y="1335.5107" z="204.4200" h="90" />
 				</spawn>
 			</spawn_map>

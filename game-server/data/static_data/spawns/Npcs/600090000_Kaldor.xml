@@ -85,7 +85,7 @@
 			<spot x="1118.033" y="214.2295" z="133.2216" h="23"/>
 		</spawn>
 		<!-- Arrogant Darok -->
-		<spawn npc_id="234305" respawn_time="295">
+		<spawn npc_id="234305" respawn_time="7200">
 			<!-- <spot x="625.3223" y="1356.89" z="150.4134" h="31"/> -->
 			<spot x="812.6155" y="1492.668" z="156.3324" h="6"/>
 		</spawn>
@@ -785,7 +785,7 @@
 			<spot x="772.6" y="1026.4" z="112.675" h="18"/>
 		</spawn>
 		<!-- Magma Belcher Buldon -->
-		<spawn npc_id="234310" respawn_time="295">
+		<spawn npc_id="234310" respawn_time="3600">
 			<spot x="1029.101" y="463.7933" z="188.1308" h="16"/>
 		</spawn>
 		<!-- Mailbox -->
@@ -860,7 +860,7 @@
 			<spot x="359.5689" y="978.1563" z="89.875"/>
 		</spawn>
 		<!-- Moaning Throil -->
-		<spawn npc_id="234306" respawn_time="295">
+		<spawn npc_id="234306" respawn_time="3600">
 			<spot x="674.8568" y="691.4427" z="176.284" h="15"/>
 		</spawn>
 		<!-- Nightlord Karnif -->

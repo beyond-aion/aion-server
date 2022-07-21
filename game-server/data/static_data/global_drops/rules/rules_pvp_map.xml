@@ -746,7 +746,7 @@
 		</gd_items>
 	</gd_rule>
 	<!-- Manastones -->
-	<gd_rule rule_name="Lv40 Composite Manastone" chance="3.75" dynamic_chance="true">
+	<gd_rule rule_name="Composite Manastone Bundle" chance="3.75" dynamic_chance="true">
 		<gd_maps>
 			<gd_map map_id="301220000" /><!-- Iron_Wall_Warfront -->
 		</gd_maps>
@@ -784,38 +784,7 @@
 			<gd_npc npc_id="230858" /><!-- brigade general sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="167000614" /><!-- Manastone: Attack +4 / HP +37 -->
-			<gd_item id="167000616" /><!-- Manastone: Attack +4 / Crit Strike +6 -->
-			<gd_item id="167000617" /><!-- Manastone: Attack +4 / Resist Magic +5 -->
-			<gd_item id="167000618" /><!-- Manastone: Attack +4 / Magical Accuracy +5 -->
-			<gd_item id="167000619" /><!-- Manastone: Crit Strike +13 / HP +37 -->
-			<gd_item id="167000621" /><!-- Manastone: Crit Strike +13 / Attack +2 -->
-			<gd_item id="167000622" /><!-- Manastone: Crit Strike +13 / Accuracy +11 -->
-			<gd_item id="167000623" /><!-- Manastone: Crit Strike +13 / Evasion +11 -->
-			<gd_item id="167000624" /><!-- Manastone: Crit Strike +13 / Parry +11 -->
-			<gd_item id="167000625" /><!-- Manastone: Crit Strike +13 / Block +11 -->
-			<gd_item id="167000626" /><!-- Manastone: Crit Strike +13 / Resist Magic +5 -->
-			<gd_item id="167000627" /><!-- Manastone: Crit Strike +13 / Magical Accuracy +5 -->
-			<gd_item id="167000628" /><!-- Manastone: Magic Boost +23 / HP +37 -->
-			<gd_item id="167000630" /><!-- Manastone: Magic Boost +23 / Accuracy +11 -->
-			<gd_item id="167000631" /><!-- Manastone: Magic Boost +23 / Evasion +11 -->
-			<gd_item id="167000632" /><!-- Manastone: Magic Boost +23 / Parry +11 -->
-			<gd_item id="167000633" /><!-- Manastone: Magic Boost +23 / Block +11 -->
-			<gd_item id="167000634" /><!-- Manastone: Magic Boost +23 / Crit Strike +6 -->
-			<gd_item id="167000635" /><!-- Manastone: Magic Boost +23 / Resist Magic +5 -->
-			<gd_item id="167000636" /><!-- Manastone: Magic Boost +23 / Magical Accuracy +5 -->
-			<gd_item id="167000637" /><!-- Manastone: Magical Accuracy +10 / HP +37 -->
-			<gd_item id="167000639" /><!-- Manastone: Magical Accuracy +10 / Magic Boost +11-->
-			<gd_item id="167000640" /><!-- Manastone: Magical Accuracy +10 / Accuracy +11 -->
-			<gd_item id="167000641" /><!-- Manastone: Magical Accuracy +10 / Evasion +11 -->
-			<gd_item id="167000642" /><!-- Manastone: Magical Accuracy +10 / Parry +11 -->
-			<gd_item id="167000643" /><!-- Manastone: Magical Accuracy +10 / Block +11 -->
-			<gd_item id="167000644" /><!-- Manastone: Magical Accuracy +10 / Crit Strike +6 -->
-			<gd_item id="167000645" /><!-- Manastone: Magical Accuracy +10 / Resist Magic +5 -->
-			<gd_item id="167000745" /><!-- Manastone: Attack +4 / Accuracy +11 -->
-			<gd_item id="167000746" /><!-- Manastone: Attack +4 / Evasion +11 -->
-			<gd_item id="167000747" /><!-- Manastone: Attack +4 / Parry +11 -->
-			<gd_item id="167000748" /><!-- Manastone: Attack +4 / Block +11 -->
+			<gd_item id="188052577" /><!-- Veteran's Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

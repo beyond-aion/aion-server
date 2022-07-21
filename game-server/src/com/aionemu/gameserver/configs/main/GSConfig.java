@@ -12,7 +12,7 @@ public class GSConfig {
 	 */
 
 	/* Server Country Code */
-	@Property(key = "gameserver.country.code", defaultValue = "1")
+	@Property(key = "gameserver.country.code", defaultValue = "99")
 	public static int SERVER_COUNTRY_CODE;
 
 	/* Server MOTD */

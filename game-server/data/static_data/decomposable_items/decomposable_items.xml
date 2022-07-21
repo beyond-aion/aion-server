@@ -7308,54 +7308,58 @@
 	<decomposable item_id="188051089" /><!-- Major Pudgy Porgus Bundle -->
 	<decomposable item_id="188051090" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="171130034" /><!-- Fresh Summer Camp Wallpaper -->
-			<item id="171130038" /><!-- Fresh Summer Camp Floor -->
-			<item id="125045164" /><!-- Rattan Hat -->
-			<item id="125045076" /><!-- Cool Swim Cap -->
-			<item id="125045242" /><!-- Aquablue Sunhat -->
-			<item id="164002167" min_count="3" /><!-- Drana Coffee -->
-			<item id="160005060" min_count="3" /><!-- [Event] Zeraka Aether Jelly -->
+			<item id="125040022" /><!-- Ribbit Hat -->
+			<item id="125045241" /><!-- Hot Shades -->
+			<item id="125040042" /><!-- Summer Sunglasses -->
+			<item id="125040045" /><!-- Diving Helmet/Summer Headwrap -->
+			<item id="125040180" /><!-- Sports Cap -->
 			<item id="188052090" /><!-- [Event] Magic Food Bundle -->
 			<item id="188052091" /><!-- [Event] Melee Food Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051091" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
-			<item id="169600090" /><!-- [Emotion Card] 'Fluttering Heart' Dance -->
-			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
-			<item id="110900552" /><!-- Aquablue Swimsuit -->
-			<item id="110900824" /><!-- Inked-Up Swimsuit -->
-			<item id="110900108" /><!-- NPC Hot Swimsuit -->
-			<item id="160010342" min_count="3" /><!-- Unstoppable Ailu Form -->
-			<item id="160010343" min_count="3" /><!-- Indomitable Ailu Form -->
+			<item id="169650007" /><!-- [Event] Plastic Surgery Ticket -->
+			<item id="170205025" /><!-- Vinyl Dancefloor -->
+			<item id="169600086" /><!-- [Emotion Card] 'Shut Up' Dance -->
+			<item id="110900062" /><!-- Ribbit Costume -->
+			<item id="110900420" /><!-- Cool Summer Look -->
+			<item id="110900103" /><!-- Cute Swimsuit -->
+			<item id="188051516" /><!-- Smart Greater Scroll Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051092" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="171130034" /><!-- Fresh Summer Camp Wallpaper -->
-			<item id="171130038" /><!-- Fresh Summer Camp Floor -->
-			<item id="125045164" /><!-- Rattan Hat -->
-			<item id="125045076" /><!-- Cool Swim Cap -->
-			<item id="125045242" /><!-- Aquablue Sunhat -->
-			<item id="164002167" min_count="3" /><!-- Drana Coffee -->
-			<item id="160005060" min_count="3" /><!-- [Event] Zeraka Aether Jelly -->
+			<item id="125040022" /><!-- Ribbit Hat -->
+			<item id="125045241" /><!-- Hot Shades -->
+			<item id="125040042" /><!-- Summer Sunglasses -->
+			<item id="125040045" /><!-- Diving Helmet/Summer Headwrap -->
+			<item id="125040180" /><!-- Sports Cap -->
 			<item id="188052092" /><!-- [Event] Magic Food Bundle -->
 			<item id="188052093" /><!-- [Event] Melee Food Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051093" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
-			<item id="169600090" /><!-- [Emotion Card] 'Fluttering Heart' Dance -->
-			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
-			<item id="110900552" /><!-- Aquablue Swimsuit -->
-			<item id="110900824" /><!-- Inked-Up Swimsuit -->
-			<item id="110900108" /><!-- NPC Hot Swimsuit -->
-			<item id="160010344" min_count="3" /><!-- Unstoppable Ailu Form -->
-			<item id="160010345" min_count="3" /><!-- Indomitable Ailu Form -->
+			<item id="169650007" /><!-- [Event] Plastic Surgery Ticket -->
+			<item id="170205025" /><!-- Vinyl Dancefloor -->
+			<item id="169600086" /><!-- [Emotion Card] 'Shut Up' Dance -->
+			<item id="110900062" /><!-- Ribbit Costume -->
+			<item id="110900420" /><!-- Cool Summer Look -->
+			<item id="110900103" /><!-- Cute Swimsuit -->
+			<item id="188051516" /><!-- Smart Greater Scroll Bundle -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188051094" /><!-- Scorching Heat Pouch -->
-	<decomposable item_id="188051095" /><!-- Noble Scorching Heat Pouch -->
+	<decomposable item_id="188051094"><!-- Scorching Heat Pouch -->
+		<items>
+			<item id="186000111" min_count="20" /><!-- Scorching Heat -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051095"><!-- Noble Scorching Heat Pouch -->
+		<items>
+			<item id="186000111" min_count="50" /><!-- Scorching Heat -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051096" /><!-- Archive Document Box -->
 	<decomposable item_id="188051097" /><!-- Report Box -->
 	<decomposable item_id="188051098" /><!-- Command Box -->
@@ -13583,51 +13587,39 @@
 	</decomposable>
 	<decomposable item_id="188051675" /><!-- Mysterious Box -->
 	<decomposable item_id="188051676"><!-- [Event] Noble Box of Life -->
-		<items chance="7">
+		<items chance="15">
 			<item id="164002167" min_count="5" /><!-- Drana Coffee -->
 		</items>
-		<items chance="7">
-			<item id="166100020" min_count="250" /><!-- [Stamp] Greater Supplements (Eternal) -->
-		</items>
-		<items chance="7">
+		<items chance="15">
 			<item id="166100023" min_count="250" /><!-- [Stamp] Greater Supplements (Eternal) -->
 		</items>
-		<items chance="7">
+		<items chance="15">
+			<item id="186000101" min_count="10" race="ELYOS" /><!-- Radiant Token -->
+			<item id="186000104" min_count="10" race="ASMODIANS" /><!-- Crusader Token -->
+		</items>
+		<items chance="12">
 			<item id="169620030" /><!-- [Favorable Luck] Face of Spring Burgeoning -->
 		</items>
-		<items chance="7">
-			<item id="169405253" /><!-- Weapon Shard -->
-		</items>
-		<items chance="7">
+		<items chance="12">
 			<item id="188053695" /><!-- High Grade Crafting Material Box of Conquest -->
 		</items>
-		<items chance="7">
+		<items chance="10">
+			<item id="169405253" /><!-- Weapon Shard -->
+		</items>
+		<items chance="5">
+			<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+		</items>
+		<items chance="5">
+			<item id="188052915" /><!-- [Event] Stormwing Weapon Chest -->
+		</items>
+		<items chance="5">
+			<item id="188052723" /><!-- [Event] Tatar's Weapon Box -->
+		</items>
+		<items chance="3">
 			<item id="188053959" /><!-- [Camping] Display Furniture Bag -->
 		</items>
-		<items chance="7">
-			<item id="186000100" min_count="5" race="ELYOS" /><!-- Progress Token -->
-			<item id="186000103" min_count="5" race="ASMODIANS" /><!-- Ward Token -->
-		</items>
-		<items chance="7">
-			<item id="188053276" /><!-- Anuhart's Fabled Pants Box -->
-		</items>
-		<items chance="7">
-			<item id="188053277" /><!-- Anuhart's Fabled Shoes Box -->
-		</items>
-		<items chance="7">
-			<item id="188053278" /><!-- Anuhart's Fabled Gloves Box -->
-		</items>
-		<items chance="7">
-			<item id="188053279" /><!-- Anuhart's Fabled Chest Box -->
-		</items>
-		<items chance="7">
-			<item id="188053280" /><!-- Anuhart's Fabled Shoulders Box -->
-		</items>
-		<items chance="4.5">
-			<item id="188052075" /><!-- [Event] Tahabata Weapon Box -->
-		</items>
-		<items chance="4.5">
-			<item id="190020028" /><!-- Pink Griffo Egg -->
+		<items chance="3">
+			<item id="190020031" /><!-- Aqua Griffo Egg -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051677" /><!-- [Event] Eternal Treasure Chest -->
@@ -23367,89 +23359,79 @@
 	<decomposable item_id="188052623" /><!-- [Event] Romantic Dye Box -->
 	<decomposable item_id="188052624" /><!-- [Event] Dramata's Bone Wing Box -->
 	<decomposable item_id="188052625"><!-- [Event] Ice-hot Box -->
-		<items chance="7.0">
+		<items chance="10.0">
 			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
 		</items>
-		<items chance="7.0">
+		<items chance="10.0">
 			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
 		</items>
-		<items chance="7.0">
-			<item id="162000141" min_count="3" /><!-- Sublime Wind Serum -->
-		</items>
-		<items chance="7.0">
+		<items chance="10.0">
 			<item id="186000237" min_count="50" /><!-- Ancient Coin -->
 		</items>
-		<items chance="7.0">
+		<items chance="10.0">
 			<item id="186000238" min_count="50" /><!-- Conqueror's Mark -->
 		</items>
-		<items chance="6.0">
-			<item id="186000399" min_count="20" /><!-- Honorable Conqueror's Mark -->
-		</items>
-		<items chance="6.0">
-			<item id="166000194" min_count="3" /><!-- Delta Enchantment Stone -->
-		</items>
-		<items chance="6.0">
+		<items chance="7.0">
 			<item id="186000247" /><!-- Major Danuar Relic -->
 		</items>
-		<items chance="4.0">
-			<item id="169620067" /><!-- AP Boost Charm II - 50% -->
-		</items>
-		<items chance="4.0">
-			<item id="169620079" /><!-- Gathering Boost Charm II - 100% -->
-		</items>
-		<items chance="4.0">
-			<item id="188052321" /><!-- [Event] Protectorate Key Box -->
-		</items>
-		<items chance="4.0">
+		<items chance="7.0">
 			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
 		</items>
-		<items chance="4.0">
+		<items chance="7.0">
+			<item id="169629003" min_count="2" /><!-- Shiny Vinna -->
+		</items>
+		<items chance="7.0">
+			<item id="186000399" min_count="20" /><!-- Honorable Conqueror's Mark -->
+		</items>
+		<items chance="5.0">
 			<item id="188054198" /><!-- Greater Scroll Bundle -->
 		</items>
-		<items chance="4.0">
+		<items chance="5.0">
 			<item id="188053614" /><!-- Illusion Godstone Bundle -->
 		</items>
 		<items chance="4.0">
-			<item id="188053208" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
 		</items>
-		<items chance="3.0">
-			<item id="166500005" min_count="3" /><!-- [Event] Amplification Stone -->
+		<items chance="4.0">
+			<item id="166030005" min_count="3" /><!-- Tempering Solution -->
 		</items>
-		<items chance="3.0">
-			<item id="166020003" min_count="3" /><!-- [Event] Omega Enchantment Stone -->
-		</items>
-		<items chance="3.0">
-			<item id="166030007" min_count="3" /><!-- [Event] Tempering Solution -->
-		</items>
-		<items chance="3.0">
+		<items chance="4.0">
 			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
 		</items>
-		<items chance="1.5">
-			<item id="188052831" /><!-- Dynatoum's Brazen Armor Box -->
+		<items chance="4.0">
+			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
 		</items>
-		<items chance="1.5">
-			<item id="188053099" /><!-- Pure Modor's Equipment Crux Box -->
+		<items chance="3.0">
+			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
 		</items>
-		<items chance="1.0">
-			<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
-		</items>
-		<items chance="1.0">
-			<item id="188053033" /><!-- Kunax's Equipment Box -->
-		</items>
-		<items chance="1.0">
-			<item id="188053219" /><!-- [Event] Sauro Commander's Accessory Box -->
-		</items>
-		<items chance="1.0">
-			<item id="187000090" /><!-- Tiamat's Spectral Wings -->
+		<items chance="3.0">
+			<item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052626" /><!-- [Event] Cocktail Shaker -->
-	<decomposable item_id="188052627"><!-- [Event] Bag of Ice -->
+	<decomposable item_id="188052626"><!-- [Event] Cocktail Shaker -->
 		<items>
-			<item id="188100124" min_count="3" max_count="5" /><!-- Ice Block -->
+			<item id="160010269" /><!-- [Event] Manduri Sour -->
 		</items>
 		<items>
-			<item id="188100125" min_count="3" max_count="5" /><!-- Ice Pick -->
+			<item id="160010270" /><!-- [Event] Blue Atreia -->
+		</items>
+		<items>
+			<item id="160010271" /><!-- [Event] Ribbit Sunrise -->
+		</items>
+		<items>
+			<item id="160010272" /><!-- [Event] Brommeltini -->
+		</items>
+		<items>
+			<item id="182007056" race="ELYOS" /><!-- Shugo Warranty -->
+			<item id="182007057" race="ASMODIANS" /><!-- Shugo Warranty -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188052627"><!-- [Event] Bag of Ice -->
+		<items chance="85">
+			<item id="188100124" min_count="3" max_count="5" /><!-- Ice Block -->
+		</items>
+		<items chance="15">
+			<item id="188100125" /><!-- Ice Pick -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052628" /><!-- [Event] Icy Idian Box -->
@@ -25057,7 +25039,23 @@
 			<item id="184002017" race="ASMODIANS" /><!-- [Event] Birthday Cake Kisk -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052723" /><!-- [Event] Tatar's Weapon Box -->
+	<decomposable item_id="188052723" selectable="true"><!-- [Event] Tatar's Weapon Box -->
+		<items>
+			<item id="100001608" /><!-- [Event] Tatar's Sword -->
+			<item id="100101235" /><!-- [Event] Tatar's Mace -->
+			<item id="100201410" /><!-- [Event] Tatar's Dagger -->
+			<item id="100501225" /><!-- [Event] Tatar's Orb -->
+			<item id="100601328" /><!-- [Event] Tatar's Spellbook -->
+			<item id="100901247" /><!-- [Event] Tatar's Greatsword -->
+			<item id="101301171" /><!-- [Event] Tatar's Polearm -->
+			<item id="101501259" /><!-- [Event] Tatar's Staff -->
+			<item id="101701274" /><!-- [Event] Tatar's Bow -->
+			<item id="101801112" /><!-- [Event] Tatar's Pistol -->
+			<item id="101901031" /><!-- [Event] Tatar's Aethercannon -->
+			<item id="102001138" /><!-- [Event] Tatar's Harp -->
+			<item id="102100903" /><!-- [Event] Tatar's Flawless Cipher-Blade -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052724"><!-- Beritran Hoard -->
 		<items chance="22.0">
 			<item id="162000122" min_count="2" /><!-- Superior Life Serum -->
@@ -26238,7 +26236,24 @@
 			<item id="160010299" race="ASMODIANS" /><!-- [Event] Stalwart Dandi Form Candy -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188052915" /><!-- [Event] Stormwing Weapon Chest -->
+	<decomposable item_id="188052915" selectable="true"><!-- [Event] Stormwing Weapon Chest -->
+		<items>
+			<item id="100000893" /><!-- Stormwing's Azure Scale Sword -->
+			<item id="100001080" /><!-- Stormwing Scale Sword -->
+			<item id="100100676" /><!-- Stormwing's Warhammer -->
+			<item id="100200807" /><!-- Stormwing's Dagger -->
+			<item id="100500698" /><!-- Stormwing's Jewel -->
+			<item id="100600755" /><!-- Stormwing's Tome -->
+			<item id="100900684" /><!-- Stormwing's Greatsword -->
+			<item id="101300655" /><!-- Stormwing's Spear -->
+			<item id="101500698" /><!-- Stormwing's Staff -->
+			<item id="101700722" /><!-- Stormwing's Longbow -->
+			<item id="101800867" /><!-- Stormwing's Pistol -->
+			<item id="101900627" /><!-- Stormwing's Aethercannon -->
+			<item id="102000662" /><!-- Stormwing's Harp -->
+			<item id="102100756" /><!-- Stormwing's Cipher-Blade -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052916" /><!-- [Event] Triniel's Shadow Wraith Weapon Chest -->
 	<decomposable item_id="188052917" /><!-- [Event] Triniel's Shadow Wraith Attire Chest -->
 	<decomposable item_id="188052918" /><!-- [Event] Angel Wings Chest -->
