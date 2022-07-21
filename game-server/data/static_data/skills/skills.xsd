@@ -758,9 +758,9 @@
 		<xs:complexContent>
 			<xs:extension base="DamageEffect">
 				<xs:attribute name="prob" type="xs:int" />
-				<xs:attribute name="signetlvlstart" type="xs:int" />
-				<xs:attribute name="signetlvl" type="xs:int" use="required" />
-				<xs:attribute name="signetid" type="xs:int" use="required" />
+				<xs:attribute name="signet_increment" type="xs:int" default="1" />
+				<xs:attribute name="signet_cap" type="xs:int" use="required" />
+				<xs:attribute name="signet_id" type="xs:int" use="required" />
 				<xs:attribute name="signet" type="xs:string" use="required" />
 			</xs:extension>
 		</xs:complexContent>
