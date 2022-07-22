@@ -67,11 +67,11 @@ public class NpcTemplate extends CreatureTemplate {
 	@XmlAttribute(name = "arange")
 	private int attackRange;
 
-	@XmlAttribute(name = "arate")
-	private int attackRate;
+	@XmlAttribute(name = "attack_speed")
+	private int attackSpeed = 2000;
 
-	@XmlAttribute(name = "adelay")
-	private int attackDelay;
+	@XmlAttribute(name = "cast_speed")
+	private int castSpeed = 1000;
 
 	@XmlAttribute(name = "mevent")
 	private int mobileEvent;
@@ -217,12 +217,12 @@ public class NpcTemplate extends CreatureTemplate {
 		return attackRange;
 	}
 
-	public int getAttackRate() {
-		return attackRate;
+	public int getCastSpeed() {
+		return castSpeed;
 	}
 
-	public int getAttackDelay() {
-		return attackDelay;
+	public int getAttackSpeed() {
+		return attackSpeed;
 	}
 
 	public int getMobileEvent() {

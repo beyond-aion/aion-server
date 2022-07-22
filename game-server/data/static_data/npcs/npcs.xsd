@@ -40,8 +40,8 @@
 		<xs:attribute name="race" type="Race"/>
 		<xs:attribute name="hpgauge" type="xs:int"/>
 		<xs:attribute name="arange" type="xs:int"/>
-		<xs:attribute name="arate" type="xs:int"/>
-		<xs:attribute name="adelay" type="xs:int" default="2000"/>
+		<xs:attribute name="cast_speed" type="xs:int" default="1000"/>
+		<xs:attribute name="attack_speed" type="xs:int" default="2000"/>
 		<xs:attribute name="state" type="xs:int"/>
 		<xs:attribute name="floatcorpse" type="xs:boolean" default="false"/>
 		<xs:attribute name="stare_range" type="xs:int" default="10"/>

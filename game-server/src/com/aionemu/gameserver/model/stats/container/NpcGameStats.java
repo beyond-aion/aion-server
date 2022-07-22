@@ -68,7 +68,7 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 
 	@Override
 	public Stat2 getAttackSpeed() {
-		return getStat(StatEnum.ATTACK_SPEED, owner.getObjectTemplate().getAttackDelay());
+		return getStat(StatEnum.ATTACK_SPEED, owner.getObjectTemplate().getAttackSpeed());
 	}
 
 	@Override
@@ -119,6 +119,10 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	@Override
 	public Stat2 getMpRegenRate() {
 		throw new IllegalStateException("No mp regen for NPC");
+	}
+
+	public int getCastSpeed() {
+		return owner.getObjectTemplate().getCastSpeed();
 	}
 
 	public int getLastAttackTimeDelta() {

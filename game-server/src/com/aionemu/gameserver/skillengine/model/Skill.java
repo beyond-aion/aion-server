@@ -109,10 +109,6 @@ public class Skill {
 
 	/**
 	 * Each skill is a separate object upon invocation Skill level will be populated from player SkillList
-	 * 
-	 * @param skillTemplate
-	 * @param effector
-	 * @param firstTarget
 	 */
 	public Skill(SkillTemplate skillTemplate, Player effector, Creature firstTarget) {
 		this(skillTemplate, effector, effector.getSkillList().getSkillLevel(skillTemplate.getSkillId()), firstTarget, null);
@@ -164,8 +160,7 @@ public class Skill {
 			return false;
 
 		// check for counter skill
-		if (effector instanceof Player) {
-			Player player = (Player) effector;
+		if (effector instanceof Player player) {
 			if ((skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE) && chainCategory == null) // category gets set in preCastCheck()
 				player.getChainSkills().resetChain();
 
@@ -294,8 +289,7 @@ public class Skill {
 
 		effector.getObserveController().attach(conditionChangeListener);
 
-		if (effector instanceof Npc) {
-			Npc npc = (Npc) effector;
+		if (effector instanceof Npc npc) {
 			NpcSkillEntry currentNpcSkillEntry = npc.getGameStats().getLastSkill();
 			if (currentNpcSkillEntry != null) {
 				currentNpcSkillEntry.setLastTimeUsed();
@@ -355,10 +349,9 @@ public class Skill {
 
 		int boostValue;
 		boolean noBaseDurationCap = false;
-		boolean isPhysicalCharge = false;
-		if (skillMethod == SkillMethod.CHARGE && (effector instanceof Player) && (((Player) effector).getPlayerClass().isPhysicalClass()
-			|| ((Player) effector).getPlayerClass() == PlayerClass.RIDER || ((Player) effector).getPlayerClass() == PlayerClass.GUNNER))
-			isPhysicalCharge = true;
+		boolean isPhysicalCharge = skillMethod == SkillMethod.CHARGE && (effector instanceof Player)
+			&& (((Player) effector).getPlayerClass().isPhysicalClass() || ((Player) effector).getPlayerClass() == PlayerClass.RIDER
+				|| ((Player) effector).getPlayerClass() == PlayerClass.GUNNER);
 
 		if (skillTemplate.getType() == SkillType.MAGICAL || skillMethod == SkillMethod.CHARGE) {
 			if (!isPhysicalCharge) {
@@ -406,14 +399,16 @@ public class Skill {
 			}
 		}
 
+		if (effector instanceof Npc npc) // TODO: check if all skills should be effected
+			castDuration = Math.round(baseCastDuration * (npc.getGameStats().getCastSpeed() / 1000f));
+
 		if (castDuration < 0)
 			castDuration = 0;
 	}
 
 	private boolean checkAnimationTime() {
-		if (!(effector instanceof Player) || skillMethod != SkillMethod.CAST && skillMethod != SkillMethod.CHARGE)// TODO item skills?
+		if (!(effector instanceof Player player) || skillMethod != SkillMethod.CAST && skillMethod != SkillMethod.CHARGE)// TODO item skills?
 			return true;
-		Player player = (Player) effector;
 
 		if (player.getTransformModel().isActive() && player.getTransformModel().getType() == TransformType.FORM1)
 			return true;
@@ -436,7 +431,7 @@ public class Skill {
 		Times time = motionTime.getTimesFor(player.getRace(), player.getGender(), weapons, player.isInRobotMode(), motionId);
 		if (time != null) {
 			float atkSpeed2 = player.getGameStats().getAttackSpeed().getCurrent() / player.getGameStats().getAttackSpeed().getBase();
-			animationTime = (int)(time.getMaxTime() * motion.getSpeed() * atkSpeed2 * 10);
+			animationTime = (int) (time.getMaxTime() * motion.getSpeed() * atkSpeed2 * 10);
 			serverHitTime = ((player.isInRobotMode() ? time.getAnimationLength() : time.getMinTime()) * motion.getSpeed() * atkSpeed2 * 10);
 		}
 
@@ -451,14 +446,15 @@ public class Skill {
 		if (motion.isInstantSkill() && clientTime == 0) {
 			this.serverTime = (int) ammoTime;
 		} else if (clientTime < finalTime) {
-			AuditLogger.log(player, "Modified skill time for client skill: " + getSkillId() + " (clientTime < finalTime: " + clientTime + "/" + finalTime + "). Player is in move: " + player.getMoveController().isInMove());
+			AuditLogger.log(player, "Modified skill time for client skill: " + getSkillId() + " (clientTime < finalTime: " + clientTime + "/" + finalTime
+				+ "). Player is in move: " + player.getMoveController().isInMove());
 			this.serverTime = Math.round(finalTime);
 		} else {
 			this.serverTime = clientTime;
 		}
-		
+
 		if (skillMethod != SkillMethod.CHARGE)
-			player.setNextSkillUse(System.currentTimeMillis() + castDuration + (long)(animationTime * 0.8f));
+			player.setNextSkillUse(System.currentTimeMillis() + castDuration + (long) (animationTime * 0.8f));
 
 		return true;
 	}
@@ -678,8 +674,7 @@ public class Skill {
 		}
 
 		effector.getAi().onEndUseSkill(skillTemplate, skillLevel);
-		if (effector instanceof Npc) {
-			Npc npc = (Npc) effector;
+		if (effector instanceof Npc npc) {
 			NpcSkillEntry lastSkill = npc.getGameStats().getLastSkill();
 			if (lastSkill != null) {
 				if (lastSkill.isQueued()) {
@@ -696,7 +691,7 @@ public class Skill {
 		}
 		if (effector instanceof Player) {
 			if (this instanceof ChargeSkill) {
-				((Player) effector).setNextSkillUse(System.currentTimeMillis() + (long)(animationTime * 0.8f));
+				((Player) effector).setNextSkillUse(System.currentTimeMillis() + (long) (animationTime * 0.8f));
 			}
 			CustomInstanceService.getInstance().recordPlayerModelEntry((Player) effector, this, effector.getTarget());
 		}
@@ -723,10 +718,6 @@ public class Skill {
 		addResistedEffectHateAndNotifyFriends(effects);
 	}
 
-	/**
-	 * @param dashStatus
-	 * @param effects
-	 */
 	private void sendCastspellEnd(int dashStatus, List<Effect> effects) {
 		boolean needsCast = itemTemplate != null && itemTemplate.isCombatActivated();
 		AIEventType et = null;
@@ -956,12 +947,6 @@ public class Skill {
 		this.targetRangeAttribute = targetRangeAttribute;
 	}
 
-	/**
-	 * @param targetType
-	 * @param x
-	 * @param y
-	 * @param z
-	 */
 	public void setTargetType(int targetType, float x, float y, float z) {
 		this.targetType = targetType;
 		this.x = x;
@@ -971,11 +956,6 @@ public class Skill {
 
 	/**
 	 * Calculated position after skill
-	 * 
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param h
 	 */
 	public void setTargetPosition(float x, float y, float z, byte h) {
 		this.x = x;
@@ -1006,7 +986,7 @@ public class Skill {
 	public int getHitTime() {
 		return hitTime;
 	}
-	
+
 	public void setHitTime(int time) {
 		this.hitTime = time;
 	}
