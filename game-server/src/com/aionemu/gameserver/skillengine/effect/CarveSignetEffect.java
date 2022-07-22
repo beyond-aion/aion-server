@@ -53,7 +53,7 @@ public class CarveSignetEffect extends DamageEffect {
 		Effect activeSignet = effect.getEffected().getEffectController().getAbnormalEffect(signet);
 
 		if (activeSignet != null)
-			nextSignetLevel = Math.min(activeSignet.getCarvedSignet() + signetIncrement, signetCap);
+			nextSignetLevel = Math.min(activeSignet.getCarvedSignet() + signetIncrement, Math.max(signetCap, activeSignet.getCarvedSignet()));
 		else
 			nextSignetLevel = signetIncrement;
 	}
