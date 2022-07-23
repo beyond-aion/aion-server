@@ -19,7 +19,7 @@ public class NormalScoreInfo extends InstanceScoreInfo {
 	public void writeMe(ByteBuffer buf) {
 		writeD(buf, nr.getPoints());
 		writeD(buf, nr.getBasicAp());
-		writeD(buf, 0);
+		writeD(buf, 0); // Possibly bonus AP
 		writeD(buf, nr.getRank());
 		writeD(buf, nr.getFinalAp());
 		writeD(buf, nr.getRewardItem1());

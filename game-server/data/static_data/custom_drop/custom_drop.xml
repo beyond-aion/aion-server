@@ -2011,174 +2011,393 @@
 		</drop_group>
 	</npc_drop>
 	<!-- The Eternal Bastion -->
-	<npc_drop npc_id="701917"> <!-- S-Grade Reward Box -->
+	<npc_drop npc_id="701913"> <!-- S-Grade Reward Box -->
 		<drop_group><!-- Conqueror's Mark -->
 			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
 		<drop_group><!-- Named Epic Weapon -->
-			<drop item_id="100001584" chance="80" /><!-- Bastion Aggressor Sword -->
-			<drop item_id="100101222" chance="80" /><!-- Bastion Aggressor Mace -->
-			<drop item_id="100201392" chance="80" /><!-- Bastion Aggressor Dagger -->
-			<drop item_id="100501212" chance="80" /><!-- Bastion Aggressor Orb -->
-			<drop item_id="100601304" chance="80" /><!-- Bastion Aggressor Spellbook -->
-			<drop item_id="100901234" chance="80" /><!-- Bastion Aggressor Greatsword -->
-			<drop item_id="101301160" chance="80" /><!-- Bastion Aggressor Polearm -->
-			<drop item_id="101501248" chance="80" /><!-- Bastion Aggressor Staff -->
-			<drop item_id="101701263" chance="80" /><!-- Bastion Aggressor Bow -->
-			<drop item_id="101801069" chance="80" /><!-- Bastion Aggressor Pistol -->
-			<drop item_id="101901020" chance="80" /><!-- Bastion Aggressor Aethercannon -->
-			<drop item_id="102001094" chance="80" /><!-- Bastion Aggressor Harp -->
-			<drop item_id="102100846" chance="80" /><!-- Bastion Defender Cipher-Blade -->
+			<drop item_id="100001584" /><!-- Bastion Aggressor Sword -->
+			<drop item_id="100101222" /><!-- Bastion Aggressor Mace -->
+			<drop item_id="100201392" /><!-- Bastion Aggressor Dagger -->
+			<drop item_id="100501212" /><!-- Bastion Aggressor Orb -->
+			<drop item_id="100601304" /><!-- Bastion Aggressor Spellbook -->
+			<drop item_id="100901234" /><!-- Bastion Aggressor Greatsword -->
+			<drop item_id="101301160" /><!-- Bastion Aggressor Polearm -->
+			<drop item_id="101501248" /><!-- Bastion Aggressor Staff -->
+			<drop item_id="101701263" /><!-- Bastion Aggressor Bow -->
+			<drop item_id="101801069" /><!-- Bastion Aggressor Pistol -->
+			<drop item_id="101901020" /><!-- Bastion Aggressor Aethercannon -->
+			<drop item_id="102001094" /><!-- Bastion Aggressor Harp -->
+			<drop item_id="102100846" /><!-- Bastion Defender Cipher-Blade -->
 		</drop_group>
 		<drop_group><!-- Named Mythic Weapon -->
-			<drop item_id="100001585" /><!-- Bastion Aggressor Firm Sword -->
-			<drop item_id="100101223" /><!-- Bastion Aggressor Firm Mace -->
-			<drop item_id="100201393" /><!-- Bastion Aggressor Firm Dagger -->
-			<drop item_id="100501213" /><!-- Bastion Aggressor Firm Orb -->
-			<drop item_id="100601305" /><!-- Bastion Aggressor Firm Spellbook -->
-			<drop item_id="100901235" /><!-- Bastion Aggressor Firm Greatsword -->
-			<drop item_id="101301161" /><!-- Bastion Aggressor Firm Polearm -->
-			<drop item_id="101501249" /><!-- Bastion Aggressor Firm Staff -->
-			<drop item_id="101701264" /><!-- Bastion Aggressor Firm Bow -->
-			<drop item_id="101801070" /><!-- Bastion Aggressor Firm Pistol -->
-			<drop item_id="101901021" /><!-- Bastion Aggressor Firm Aethercannon -->
-			<drop item_id="102001095" /><!-- Bastion Aggressor Firm Harp -->
-			<drop item_id="102100847" /><!-- Bastion Aggressor Firm Cipher-Blade -->
+			<drop item_id="100001585" chance="80" /><!-- Bastion Aggressor Firm Sword -->
+			<drop item_id="100101223" chance="80" /><!-- Bastion Aggressor Firm Mace -->
+			<drop item_id="100201393" chance="80" /><!-- Bastion Aggressor Firm Dagger -->
+			<drop item_id="100501213" chance="80" /><!-- Bastion Aggressor Firm Orb -->
+			<drop item_id="100601305" chance="80" /><!-- Bastion Aggressor Firm Spellbook -->
+			<drop item_id="100901235" chance="80" /><!-- Bastion Aggressor Firm Greatsword -->
+			<drop item_id="101301161" chance="80" /><!-- Bastion Aggressor Firm Polearm -->
+			<drop item_id="101501249" chance="80" /><!-- Bastion Aggressor Firm Staff -->
+			<drop item_id="101701264" chance="80" /><!-- Bastion Aggressor Firm Bow -->
+			<drop item_id="101801070" chance="80" /><!-- Bastion Aggressor Firm Pistol -->
+			<drop item_id="101901021" chance="80" /><!-- Bastion Aggressor Firm Aethercannon -->
+			<drop item_id="102001095" chance="80" /><!-- Bastion Aggressor Firm Harp -->
+			<drop item_id="102100847" chance="80" /><!-- Bastion Aggressor Firm Cipher-Blade -->
 		</drop_group>
-		<drop_group><!-- Named Mythic Cloth Armor -->
-			<drop item_id="110101686" chance="25" /><!-- Bastion Defender Firm Tunic -->
-			<drop item_id="111101518" chance="25" /><!-- Bastion Defender Firm Gloves -->
-			<drop item_id="112101471" chance="25" /><!-- Bastion Defender Firm Pauldrons -->
-			<drop item_id="113101533" chance="25" /><!-- Bastion Defender Firm Leggings -->
-			<drop item_id="114101567" chance="25" /><!-- Bastion Defender Firm Shoes -->
-			<drop item_id="110101688" chance="25" /><!-- Bastion Protector Firm Tunic -->
-			<drop item_id="111101520" chance="25" /><!-- Bastion Protector Firm Gloves -->
-			<drop item_id="112101473" chance="25" /><!-- Bastion Protector Firm Pauldrons -->
-			<drop item_id="113101535" chance="25" /><!-- Bastion Protector Firm Leggings -->
-			<drop item_id="114101569" chance="25" /><!-- Bastion Protector Firm Shoes -->
+		<drop_group><!-- Named Mythic Armor -->
+			<!-- Mythic Cloth Armor -->
+			<drop item_id="110101686" /><!-- Bastion Defender Firm Tunic -->
+			<drop item_id="111101518" /><!-- Bastion Defender Firm Gloves -->
+			<drop item_id="112101471" /><!-- Bastion Defender Firm Pauldrons -->
+			<drop item_id="113101533" /><!-- Bastion Defender Firm Leggings -->
+			<drop item_id="114101567" /><!-- Bastion Defender Firm Shoes -->
+			<drop item_id="110101688" /><!-- Bastion Protector Firm Tunic -->
+			<drop item_id="111101520" /><!-- Bastion Protector Firm Gloves -->
+			<drop item_id="112101473" /><!-- Bastion Protector Firm Pauldrons -->
+			<drop item_id="113101535" /><!-- Bastion Protector Firm Leggings -->
+			<drop item_id="114101569" /><!-- Bastion Protector Firm Shoes -->
+			<!-- Mythic Leather Armor -->
+			<drop item_id="110301694" /><!-- Bastion Defender Firm Jerkin -->
+			<drop item_id="111301632" /><!-- Bastion Defender Firm Vambrace -->
+			<drop item_id="112301571" /><!-- Bastion Defender Firm Shoulderguards -->
+			<drop item_id="113301663" /><!-- Bastion Defender Firm Breeches -->
+			<drop item_id="114301700" /><!-- Bastion Defender Firm Boots -->
+			<drop item_id="110301696" /><!-- Bastion Protector Firm Jerkin -->
+			<drop item_id="111301634" /><!-- Bastion Protector Firm Vambrace -->
+			<drop item_id="112301573" /><!-- Bastion Protector Firm Shoulderguards -->
+			<drop item_id="113301665" /><!-- Bastion Protector Firm Breeches -->
+			<drop item_id="114301702" /><!-- Bastion Protector Firm Boots -->
+			<!-- Mythic Chain Armor -->
+			<drop item_id="110501523" /><!-- Bastion Defender Firm Hauberk -->
+			<drop item_id="111501478" /><!-- Bastion Defender Firm Handguards -->
+			<drop item_id="112501420" /><!-- Bastion Defender Firm Spaulders -->
+			<drop item_id="113501496" /><!-- Bastion Defender Firm Chausses -->
+			<drop item_id="114501505" /><!-- Bastion Defender Firm Brogans -->
+			<drop item_id="110501528" /><!-- Bastion Protector Firm Hauberk -->
+			<drop item_id="111501480" /><!-- Bastion Protector Firm Handguards -->
+			<drop item_id="112501422" /><!-- Bastion Protector Firm Spaulders -->
+			<drop item_id="113501498" /><!-- Bastion Protector Firm Chausses -->
+			<drop item_id="114501507" /><!-- Bastion Protector Firm Brogans -->
+			<drop item_id="110550929" /><!-- Bastion Defender Firm Magic Hauberk -->
+			<drop item_id="111501487" /><!-- Bastion Defender Firm Magic Handguards -->
+			<drop item_id="112501429" /><!-- Bastion Defender Firm Magic Spaulders -->
+			<drop item_id="113501505" /><!-- Bastion Defender Firm Magic Chausses -->
+			<drop item_id="114501514" /><!-- Bastion Defender Firm Magic Brogans -->
+			<!-- Mythic Plate Armor -->
+			<drop item_id="110601497" /><!-- Bastion Defender Firm Breastplate -->
+			<drop item_id="111601460" /><!-- Bastion Defender Firm Gauntlets -->
+			<drop item_id="112601441" /><!-- Bastion Defender Firm Shoulderplates -->
+			<drop item_id="113601443" /><!-- Bastion Defender Firm Greaves -->
+			<drop item_id="114601450" /><!-- Bastion Defender Firm Sabatons -->
+			<drop item_id="110601499" /><!-- Bastion Protector Firm Breastplate -->
+			<drop item_id="111601462" /><!-- Bastion Protector Firm Gauntlets -->
+			<drop item_id="112601443" /><!-- Bastion Protector Firm Shoulderplates -->
+			<drop item_id="113601445" /><!-- Bastion Protector Firm Greaves -->
+			<drop item_id="114601452" /><!-- Bastion Protector Firm Sabatons -->
 		</drop_group>
-		<drop_group><!-- Named Mythic Leather Armor -->
-			<drop item_id="110301694" chance="25" /><!-- Bastion Defender Firm Jerkin -->
-			<drop item_id="111301632" chance="25" /><!-- Bastion Defender Firm Vambrace -->
-			<drop item_id="112301571" chance="25" /><!-- Bastion Defender Firm Shoulderguards -->
-			<drop item_id="113301663" chance="25" /><!-- Bastion Defender Firm Breeches -->
-			<drop item_id="114301700" chance="25" /><!-- Bastion Defender Firm Boots -->
-			<drop item_id="110301696" chance="25" /><!-- Bastion Protector Firm Jerkin -->
-			<drop item_id="111301634" chance="25" /><!-- Bastion Protector Firm Vambrace -->
-			<drop item_id="112301573" chance="25" /><!-- Bastion Protector Firm Shoulderguards -->
-			<drop item_id="113301665" chance="25" /><!-- Bastion Protector Firm Breeches -->
-			<drop item_id="114301702" chance="25" /><!-- Bastion Protector Firm Boots -->
-		</drop_group>
-		<drop_group><!-- Named Mythic Chain Armor -->
-			<drop item_id="110501523" chance="30" /><!-- Bastion Defender Firm Hauberk -->
-			<drop item_id="111501478" chance="30" /><!-- Bastion Defender Firm Handguards -->
-			<drop item_id="112501420" chance="30" /><!-- Bastion Defender Firm Spaulders -->
-			<drop item_id="113501496" chance="30" /><!-- Bastion Defender Firm Chausses -->
-			<drop item_id="114501505" chance="30" /><!-- Bastion Defender Firm Brogans -->
-			<drop item_id="110501528" chance="30" /><!-- Bastion Protector Firm Hauberk -->
-			<drop item_id="111501480" chance="30" /><!-- Bastion Protector Firm Handguards -->
-			<drop item_id="112501422" chance="30" /><!-- Bastion Protector Firm Spaulders -->
-			<drop item_id="113501498" chance="30" /><!-- Bastion Protector Firm Chausses -->
-			<drop item_id="114501507" chance="30" /><!-- Bastion Protector Firm Brogans -->
-			<drop item_id="110550929" chance="30" /><!-- Bastion Defender Firm Magic Hauberk -->
-			<drop item_id="111501487" chance="30" /><!-- Bastion Defender Firm Magic Handguards -->
-			<drop item_id="112501429" chance="30" /><!-- Bastion Defender Firm Magic Spaulders -->
-			<drop item_id="113501505" chance="30" /><!-- Bastion Defender Firm Magic Chausses -->
-			<drop item_id="114501514" chance="30" /><!-- Bastion Defender Firm Magic Brogans -->
-		</drop_group>
-		<drop_group><!-- Named Mythic Plate Armor -->
-			<drop item_id="110601497" chance="25" /><!-- Bastion Defender Firm Breastplate -->
-			<drop item_id="111601460" chance="25" /><!-- Bastion Defender Firm Gauntlets -->
-			<drop item_id="112601441" chance="25" /><!-- Bastion Defender Firm Shoulderplates -->
-			<drop item_id="113601443" chance="25" /><!-- Bastion Defender Firm Greaves -->
-			<drop item_id="114601450" chance="25" /><!-- Bastion Defender Firm Sabatons -->
-			<drop item_id="110601499" chance="25" /><!-- Bastion Protector Firm Breastplate -->
-			<drop item_id="111601462" chance="25" /><!-- Bastion Protector Firm Gauntlets -->
-			<drop item_id="112601443" chance="25" /><!-- Bastion Protector Firm Shoulderplates -->
-			<drop item_id="113601445" chance="25" /><!-- Bastion Protector Firm Greaves -->
-			<drop item_id="114601452" chance="25" /><!-- Bastion Protector Firm Sabatons -->
-		</drop_group>
-		<drop_group><!-- Named Epic Cloth Armor -->
-			<drop item_id="110101685" chance="25" /><!-- Bastion Defender Tunic -->
-			<drop item_id="111101517" chance="25" /><!-- Bastion Defender Gloves -->
-			<drop item_id="112101470" chance="25" /><!-- Bastion Defender Pauldrons -->
-			<drop item_id="113101532" chance="25" /><!-- Bastion Defender Leggings -->
-			<drop item_id="114101566" chance="25" /><!-- Bastion Defender Shoes -->
-			<drop item_id="110101687" chance="25" /><!-- Bastion Protector Tunic -->
-			<drop item_id="111101519" chance="25" /><!-- Bastion Protector Gloves -->
-			<drop item_id="112101472" chance="25" /><!-- Bastion Protector Pauldrons -->
-			<drop item_id="113101534" chance="25" /><!-- Bastion Protector Leggings -->
-			<drop item_id="114101568" chance="25" /><!-- Bastion Protector Shoes -->
-		</drop_group>
-		<drop_group><!-- Named Epic Leather Armor -->
-			<drop item_id="110301693" chance="25" /><!-- Bastion Defender Jerkin -->
-			<drop item_id="111301631" chance="25" /><!-- Bastion Defender Vambrace -->
-			<drop item_id="112301570" chance="25" /><!-- Bastion Defender Shoulderguards -->
-			<drop item_id="113301662" chance="25" /><!-- Bastion Defender Breeches -->
-			<drop item_id="114301699" chance="25" /><!-- Bastion Defender Boots -->
-			<drop item_id="110301695" chance="25" /><!-- Bastion Protector Jerkin -->
-			<drop item_id="111301633" chance="25" /><!-- Bastion Protector Vambrace -->
-			<drop item_id="112301572" chance="25" /><!-- Bastion Protector Shoulderguards -->
-			<drop item_id="113301664" chance="25" /><!-- Bastion Protector Breeches -->
-			<drop item_id="114301701" chance="25" /><!-- Bastion Protector Boots -->
-		</drop_group>
-		<drop_group><!-- Named Epic Chain Armor -->
-			<drop item_id="110501522" chance="30" /><!-- Bastion Defender Hauberk -->
-			<drop item_id="111501477" chance="30" /><!-- Bastion Defender Handguards -->
-			<drop item_id="112501419" chance="30" /><!-- Bastion Defender Spaulders -->
-			<drop item_id="113501495" chance="30" /><!-- Bastion Defender Chausses -->
-			<drop item_id="114501504" chance="30" /><!-- Bastion Defender Brogans -->
-			<drop item_id="110501527" chance="30" /><!-- Bastion Protector Hauberk -->
-			<drop item_id="111501479" chance="30" /><!-- Bastion Protector Handguards -->
-			<drop item_id="112501421" chance="30" /><!-- Bastion Protector Spaulders -->
-			<drop item_id="113501497" chance="30" /><!-- Bastion Protector Chausses -->
-			<drop item_id="114501506" chance="30" /><!-- Bastion Protector Brogans -->
-			<drop item_id="110550929" chance="30" /><!-- Bastion Defender Magic Hauberk -->
-			<drop item_id="111501487" chance="30" /><!-- Bastion Defender Magic Handguards -->
-			<drop item_id="112501429" chance="30" /><!-- Bastion Defender Magic Spaulders -->
-			<drop item_id="113501505" chance="30" /><!-- Bastion Defender Magic Chausses -->
-			<drop item_id="114501514" chance="30" /><!-- Bastion Defender Magic Brogans -->
-		</drop_group>
-		<drop_group><!-- Named Epic Plate Armor -->
-			<drop item_id="110601496" chance="25" /><!-- Bastion Defender Breastplate -->
-			<drop item_id="111601459" chance="25" /><!-- Bastion Defender Gauntlets -->
-			<drop item_id="112601440" chance="25" /><!-- Bastion Defender Shoulderplates -->
-			<drop item_id="113601442" chance="25" /><!-- Bastion Defender Greaves -->
-			<drop item_id="114601449" chance="25" /><!-- Bastion Defender Sabatons -->
-			<drop item_id="110601498" chance="25" /><!-- Bastion Protector Breastplate -->
-			<drop item_id="111601461" chance="25" /><!-- Bastion Protector Gauntlets -->
-			<drop item_id="112601442" chance="25" /><!-- Bastion Protector Shoulderplates -->
-			<drop item_id="113601444" chance="25" /><!-- Bastion Protector Greaves -->
-			<drop item_id="114601451" chance="25" /><!-- Bastion Protector Sabatons -->
+		<drop_group><!-- Named Mythic Shield -->
+			<drop item_id="115001631" chance="5" /><!-- Bastion Aggressor Firm Battle Shield -->
+			<drop item_id="115001633" chance="5" /><!-- Bastion Aggressor Firm Scale Shield -->
 		</drop_group>
 		<drop_group><!-- Named Mythic Headgear -->
-			<drop item_id="125003748" chance="25" /><!-- Bastion Protector Helm -->
-			<drop item_id="125003756" chance="25" /><!-- Bastion Protector Helm -->
-			<drop item_id="125003749" chance="25" /><!-- Bastion Protector Chain Hood -->
-			<drop item_id="125003757" chance="25" /><!-- Bastion Protector Chain Hood -->
-			<drop item_id="125003783" chance="25" /><!-- Bastion Protector Magic Helm -->
-			<drop item_id="125003750" chance="25" /><!-- Bastion Protector Hat -->
-			<drop item_id="125003758" chance="25" /><!-- Bastion Protector Hat -->
-			<drop item_id="125003751" chance="25" /><!-- Bastion Protector Headband -->
-			<drop item_id="125003759" chance="25" /><!-- Bastion Protector Headband -->
+			<drop item_id="125003748" chance="20" /><!-- Bastion Defender Helm -->
+			<drop item_id="125003749" chance="20" /><!-- Bastion Defender Chain Hood -->
+			<drop item_id="125003750" chance="20" /><!-- Bastion Defender Hat -->
+			<drop item_id="125003751" chance="20" /><!-- Bastion Defender Headband -->
+			<drop item_id="125003756" chance="20" /><!-- Bastion Protector Firm Helm -->
+			<drop item_id="125003757" chance="20" /><!-- Bastion Protector Firm Chain Hood -->
+			<drop item_id="125003758" chance="20" /><!-- Bastion Protector Firm Hat -->
+			<drop item_id="125003759" chance="20" /><!-- Bastion Protector Firm Headband -->
+			<drop item_id="125003783" chance="20" /><!-- Bastion Defender Firm Mystic Helm -->
+		</drop_group>
+		<drop_group><!-- Named Epic Armor -->
+			<!-- Epic Cloth Armor -->
+			<drop item_id="110101685" /><!-- Bastion Defender Tunic -->
+			<drop item_id="111101517" /><!-- Bastion Defender Gloves -->
+			<drop item_id="112101470" /><!-- Bastion Defender Pauldrons -->
+			<drop item_id="113101532" /><!-- Bastion Defender Leggings -->
+			<drop item_id="114101566" /><!-- Bastion Defender Shoes -->
+			<drop item_id="110101687" /><!-- Bastion Protector Tunic -->
+			<drop item_id="111101519" /><!-- Bastion Protector Gloves -->
+			<drop item_id="112101472" /><!-- Bastion Protector Pauldrons -->
+			<drop item_id="113101534" /><!-- Bastion Protector Leggings -->
+			<drop item_id="114101568" /><!-- Bastion Protector Shoes -->
+			<!-- Epic Leather Armor -->
+			<drop item_id="110301693" /><!-- Bastion Defender Jerkin -->
+			<drop item_id="111301631" /><!-- Bastion Defender Vambrace -->
+			<drop item_id="112301570" /><!-- Bastion Defender Shoulderguards -->
+			<drop item_id="113301662" /><!-- Bastion Defender Breeches -->
+			<drop item_id="114301699" /><!-- Bastion Defender Boots -->
+			<drop item_id="110301695" /><!-- Bastion Protector Jerkin -->
+			<drop item_id="111301633" /><!-- Bastion Protector Vambrace -->
+			<drop item_id="112301572" /><!-- Bastion Protector Shoulderguards -->
+			<drop item_id="113301664" /><!-- Bastion Protector Breeches -->
+			<drop item_id="114301701" /><!-- Bastion Protector Boots -->
+			<!-- Epic Chain Armor -->
+			<drop item_id="110501522" /><!-- Bastion Defender Hauberk -->
+			<drop item_id="111501477" /><!-- Bastion Defender Handguards -->
+			<drop item_id="112501419" /><!-- Bastion Defender Spaulders -->
+			<drop item_id="113501495" /><!-- Bastion Defender Chausses -->
+			<drop item_id="114501504" /><!-- Bastion Defender Brogans -->
+			<drop item_id="110501527" /><!-- Bastion Protector Hauberk -->
+			<drop item_id="111501479" /><!-- Bastion Protector Handguards -->
+			<drop item_id="112501421" /><!-- Bastion Protector Spaulders -->
+			<drop item_id="113501497" /><!-- Bastion Protector Chausses -->
+			<drop item_id="114501506" /><!-- Bastion Protector Brogans -->
+			<drop item_id="110550929" /><!-- Bastion Defender Magic Hauberk -->
+			<drop item_id="111501487" /><!-- Bastion Defender Magic Handguards -->
+			<drop item_id="112501429" /><!-- Bastion Defender Magic Spaulders -->
+			<drop item_id="113501505" /><!-- Bastion Defender Magic Chausses -->
+			<drop item_id="114501514" /><!-- Bastion Defender Magic Brogans -->
+			<!-- Epic Plate Armor -->
+			<drop item_id="110601496" /><!-- Bastion Defender Breastplate -->
+			<drop item_id="111601459" /><!-- Bastion Defender Gauntlets -->
+			<drop item_id="112601440" /><!-- Bastion Defender Shoulderplates -->
+			<drop item_id="113601442" /><!-- Bastion Defender Greaves -->
+			<drop item_id="114601449" /><!-- Bastion Defender Sabatons -->
+			<drop item_id="110601498" /><!-- Bastion Protector Breastplate -->
+			<drop item_id="111601461" /><!-- Bastion Protector Gauntlets -->
+			<drop item_id="112601442" /><!-- Bastion Protector Shoulderplates -->
+			<drop item_id="113601444" /><!-- Bastion Protector Greaves -->
+			<drop item_id="114601451" /><!-- Bastion Protector Sabatons -->
+		</drop_group>
+		<drop_group><!-- Named Epic Shield -->
+			<drop item_id="115001630" chance="5" /><!-- Bastion Aggressor Battle Shield -->
+			<drop item_id="115001632" chance="5" /><!-- Bastion Aggressor Scale Shield -->
+		</drop_group>
+		<drop_group><!-- Named Epic Helm -->
+			<drop item_id="125003744" chance="20" /><!-- Bastion Defender Helm -->
+			<drop item_id="125003745" chance="20" /><!-- Bastion Defender Chain Hood -->
+			<drop item_id="125003746" chance="20" /><!-- Bastion Defender Hat -->
+			<drop item_id="125003747" chance="20" /><!-- Bastion Defender Headband -->
+			<drop item_id="125003752" chance="20" /><!-- Bastion Protector Helm -->
+			<drop item_id="125003753" chance="20" /><!-- Bastion Protector Chain Hood -->
+			<drop item_id="125003754" chance="20" /><!-- Bastion Protector Hat -->
+			<drop item_id="125003755" chance="20" /><!-- Bastion Protector Headband -->
+			<drop item_id="125003782" chance="20" /><!-- Bastion Defender Mystic Helm -->
 		</drop_group>
 		<drop_group><!-- Named Augment Bundle -->
 			<drop item_id="188052614" /><!-- Defender's Augment Bundle -->
 		</drop_group>
 		<drop_group><!-- Named Quest Bundle -->
-			<drop item_id="188052619" /><!-- Pashid's Claw Bundle -->
+			<drop item_id="188052619" each_member="true" /><!-- Pashid's Claw Bundle -->
+		</drop_group>
+		<drop_group max_items="4"><!-- Named Composite Bundle -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
 		</drop_group>
 		<drop_group><!-- Named Relic Bundle -->
-			<drop item_id="188052607" max_amount="4" /><!-- Major Relic Box -->
-		</drop_group>
-		<drop_group><!-- Named Composite Bundle -->
-			<drop item_id="188052599" min_amount="4" /><!-- Defender's Supply Box -->
+			<drop item_id="188052607" each_member="true" /><!-- Major Relic Box -->
 		</drop_group>
 		<drop_group><!-- Named Amplification Stone -->
 			<drop item_id="166500002" chance="10" /><!-- Amplification Stone -->
 		</drop_group>
 		<drop_group><!-- Named Tempering Solution Chest -->
 			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701914"><!-- A-Rank Chest -->
+		<drop_group><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
+		</drop_group>
+		<drop_group><!-- Named Epic Weapon -->
+			<drop item_id="100001584" /><!-- Bastion Aggressor Sword -->
+			<drop item_id="100101222" /><!-- Bastion Aggressor Mace -->
+			<drop item_id="100201392" /><!-- Bastion Aggressor Dagger -->
+			<drop item_id="100501212" /><!-- Bastion Aggressor Orb -->
+			<drop item_id="100601304" /><!-- Bastion Aggressor Spellbook -->
+			<drop item_id="100901234" /><!-- Bastion Aggressor Greatsword -->
+			<drop item_id="101301160" /><!-- Bastion Aggressor Polearm -->
+			<drop item_id="101501248" /><!-- Bastion Aggressor Staff -->
+			<drop item_id="101701263" /><!-- Bastion Aggressor Bow -->
+			<drop item_id="101801069" /><!-- Bastion Aggressor Pistol -->
+			<drop item_id="101901020" /><!-- Bastion Aggressor Aethercannon -->
+			<drop item_id="102001094" /><!-- Bastion Aggressor Harp -->
+			<drop item_id="102100846" /><!-- Bastion Defender Cipher-Blade -->
+		</drop_group>
+		<drop_group><!-- Named Epic Armor -->
+			<!-- Epic Cloth Armor -->
+			<drop item_id="110101685" /><!-- Bastion Defender Tunic -->
+			<drop item_id="111101517" /><!-- Bastion Defender Gloves -->
+			<drop item_id="112101470" /><!-- Bastion Defender Pauldrons -->
+			<drop item_id="113101532" /><!-- Bastion Defender Leggings -->
+			<drop item_id="114101566" /><!-- Bastion Defender Shoes -->
+			<drop item_id="110101687" /><!-- Bastion Protector Tunic -->
+			<drop item_id="111101519" /><!-- Bastion Protector Gloves -->
+			<drop item_id="112101472" /><!-- Bastion Protector Pauldrons -->
+			<drop item_id="113101534" /><!-- Bastion Protector Leggings -->
+			<drop item_id="114101568" /><!-- Bastion Protector Shoes -->
+			<!-- Epic Leather Armor -->
+			<drop item_id="110301693" /><!-- Bastion Defender Jerkin -->
+			<drop item_id="111301631" /><!-- Bastion Defender Vambrace -->
+			<drop item_id="112301570" /><!-- Bastion Defender Shoulderguards -->
+			<drop item_id="113301662" /><!-- Bastion Defender Breeches -->
+			<drop item_id="114301699" /><!-- Bastion Defender Boots -->
+			<drop item_id="110301695" /><!-- Bastion Protector Jerkin -->
+			<drop item_id="111301633" /><!-- Bastion Protector Vambrace -->
+			<drop item_id="112301572" /><!-- Bastion Protector Shoulderguards -->
+			<drop item_id="113301664" /><!-- Bastion Protector Breeches -->
+			<drop item_id="114301701" /><!-- Bastion Protector Boots -->
+			<!-- Epic Chain Armor -->
+			<drop item_id="110501522" /><!-- Bastion Defender Hauberk -->
+			<drop item_id="111501477" /><!-- Bastion Defender Handguards -->
+			<drop item_id="112501419" /><!-- Bastion Defender Spaulders -->
+			<drop item_id="113501495" /><!-- Bastion Defender Chausses -->
+			<drop item_id="114501504" /><!-- Bastion Defender Brogans -->
+			<drop item_id="110501527" /><!-- Bastion Protector Hauberk -->
+			<drop item_id="111501479" /><!-- Bastion Protector Handguards -->
+			<drop item_id="112501421" /><!-- Bastion Protector Spaulders -->
+			<drop item_id="113501497" /><!-- Bastion Protector Chausses -->
+			<drop item_id="114501506" /><!-- Bastion Protector Brogans -->
+			<drop item_id="110550929" /><!-- Bastion Defender Magic Hauberk -->
+			<drop item_id="111501487" /><!-- Bastion Defender Magic Handguards -->
+			<drop item_id="112501429" /><!-- Bastion Defender Magic Spaulders -->
+			<drop item_id="113501505" /><!-- Bastion Defender Magic Chausses -->
+			<drop item_id="114501514" /><!-- Bastion Defender Magic Brogans -->
+			<!-- Epic Plate Armor -->
+			<drop item_id="110601496" /><!-- Bastion Defender Breastplate -->
+			<drop item_id="111601459" /><!-- Bastion Defender Gauntlets -->
+			<drop item_id="112601440" /><!-- Bastion Defender Shoulderplates -->
+			<drop item_id="113601442" /><!-- Bastion Defender Greaves -->
+			<drop item_id="114601449" /><!-- Bastion Defender Sabatons -->
+			<drop item_id="110601498" /><!-- Bastion Protector Breastplate -->
+			<drop item_id="111601461" /><!-- Bastion Protector Gauntlets -->
+			<drop item_id="112601442" /><!-- Bastion Protector Shoulderplates -->
+			<drop item_id="113601444" /><!-- Bastion Protector Greaves -->
+			<drop item_id="114601451" /><!-- Bastion Protector Sabatons -->
+		</drop_group>
+		<drop_group><!-- Named Epic Shield -->
+			<drop item_id="115001630" chance="5" /><!-- Bastion Aggressor Battle Shield -->
+			<drop item_id="115001632" chance="5" /><!-- Bastion Aggressor Scale Shield -->
+		</drop_group>
+		<drop_group><!-- Named Epic Helm -->
+			<drop item_id="125003744" chance="20" /><!-- Bastion Defender Helm -->
+			<drop item_id="125003745" chance="20" /><!-- Bastion Defender Chain Hood -->
+			<drop item_id="125003746" chance="20" /><!-- Bastion Defender Hat -->
+			<drop item_id="125003747" chance="20" /><!-- Bastion Defender Headband -->
+			<drop item_id="125003752" chance="20" /><!-- Bastion Protector Helm -->
+			<drop item_id="125003753" chance="20" /><!-- Bastion Protector Chain Hood -->
+			<drop item_id="125003754" chance="20" /><!-- Bastion Protector Hat -->
+			<drop item_id="125003755" chance="20" /><!-- Bastion Protector Headband -->
+			<drop item_id="125003782" chance="20" /><!-- Bastion Defender Mystic Helm -->
+		</drop_group>
+		<drop_group><!-- Named Quest Bundle -->
+			<drop item_id="188052619" each_member="true" /><!-- Pashid's Claw Bundle -->
+		</drop_group>
+		<drop_group max_items="3"><!-- Named Composite Bundle -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+		</drop_group>
+		<drop_group><!-- Named Relic Bundle -->
+			<drop item_id="188052608" each_member="true" /><!-- Greater Relic Box -->
+		</drop_group>
+		<drop_group><!-- Named Amplification Stone -->
+			<drop item_id="166500002" chance="10" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group><!-- Named Tempering Solution Chest -->
+			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701915"><!-- B-Rank Chest -->
+		<drop_group><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
+		</drop_group>
+		<drop_group><!-- Named Epic Armor -->
+			<!-- Epic Cloth Armor -->
+			<drop item_id="110101685" /><!-- Bastion Defender Tunic -->
+			<drop item_id="111101517" /><!-- Bastion Defender Gloves -->
+			<drop item_id="112101470" /><!-- Bastion Defender Pauldrons -->
+			<drop item_id="113101532" /><!-- Bastion Defender Leggings -->
+			<drop item_id="114101566" /><!-- Bastion Defender Shoes -->
+			<drop item_id="110101687" /><!-- Bastion Protector Tunic -->
+			<drop item_id="111101519" /><!-- Bastion Protector Gloves -->
+			<drop item_id="112101472" /><!-- Bastion Protector Pauldrons -->
+			<drop item_id="113101534" /><!-- Bastion Protector Leggings -->
+			<drop item_id="114101568" /><!-- Bastion Protector Shoes -->
+			<!-- Epic Leather Armor -->
+			<drop item_id="110301693" /><!-- Bastion Defender Jerkin -->
+			<drop item_id="111301631" /><!-- Bastion Defender Vambrace -->
+			<drop item_id="112301570" /><!-- Bastion Defender Shoulderguards -->
+			<drop item_id="113301662" /><!-- Bastion Defender Breeches -->
+			<drop item_id="114301699" /><!-- Bastion Defender Boots -->
+			<drop item_id="110301695" /><!-- Bastion Protector Jerkin -->
+			<drop item_id="111301633" /><!-- Bastion Protector Vambrace -->
+			<drop item_id="112301572" /><!-- Bastion Protector Shoulderguards -->
+			<drop item_id="113301664" /><!-- Bastion Protector Breeches -->
+			<drop item_id="114301701" /><!-- Bastion Protector Boots -->
+			<!-- Epic Chain Armor -->
+			<drop item_id="110501522" /><!-- Bastion Defender Hauberk -->
+			<drop item_id="111501477" /><!-- Bastion Defender Handguards -->
+			<drop item_id="112501419" /><!-- Bastion Defender Spaulders -->
+			<drop item_id="113501495" /><!-- Bastion Defender Chausses -->
+			<drop item_id="114501504" /><!-- Bastion Defender Brogans -->
+			<drop item_id="110501527" /><!-- Bastion Protector Hauberk -->
+			<drop item_id="111501479" /><!-- Bastion Protector Handguards -->
+			<drop item_id="112501421" /><!-- Bastion Protector Spaulders -->
+			<drop item_id="113501497" /><!-- Bastion Protector Chausses -->
+			<drop item_id="114501506" /><!-- Bastion Protector Brogans -->
+			<drop item_id="110550929" /><!-- Bastion Defender Magic Hauberk -->
+			<drop item_id="111501487" /><!-- Bastion Defender Magic Handguards -->
+			<drop item_id="112501429" /><!-- Bastion Defender Magic Spaulders -->
+			<drop item_id="113501505" /><!-- Bastion Defender Magic Chausses -->
+			<drop item_id="114501514" /><!-- Bastion Defender Magic Brogans -->
+			<!-- Epic Plate Armor -->
+			<drop item_id="110601496" /><!-- Bastion Defender Breastplate -->
+			<drop item_id="111601459" /><!-- Bastion Defender Gauntlets -->
+			<drop item_id="112601440" /><!-- Bastion Defender Shoulderplates -->
+			<drop item_id="113601442" /><!-- Bastion Defender Greaves -->
+			<drop item_id="114601449" /><!-- Bastion Defender Sabatons -->
+			<drop item_id="110601498" /><!-- Bastion Protector Breastplate -->
+			<drop item_id="111601461" /><!-- Bastion Protector Gauntlets -->
+			<drop item_id="112601442" /><!-- Bastion Protector Shoulderplates -->
+			<drop item_id="113601444" /><!-- Bastion Protector Greaves -->
+			<drop item_id="114601451" /><!-- Bastion Protector Sabatons -->
+		</drop_group>
+		<drop_group><!-- Named Epic Helm -->
+			<drop item_id="125003744" chance="20" /><!-- Bastion Defender Helm -->
+			<drop item_id="125003745" chance="20" /><!-- Bastion Defender Chain Hood -->
+			<drop item_id="125003746" chance="20" /><!-- Bastion Defender Hat -->
+			<drop item_id="125003747" chance="20" /><!-- Bastion Defender Headband -->
+			<drop item_id="125003752" chance="20" /><!-- Bastion Protector Helm -->
+			<drop item_id="125003753" chance="20" /><!-- Bastion Protector Chain Hood -->
+			<drop item_id="125003754" chance="20" /><!-- Bastion Protector Hat -->
+			<drop item_id="125003755" chance="20" /><!-- Bastion Protector Headband -->
+			<drop item_id="125003782" chance="20" /><!-- Bastion Defender Mystic Helm -->
+		</drop_group>
+		<drop_group max_items="2"><!-- Named Composite Bundle -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+		</drop_group>
+		<drop_group><!-- Named Relic Bundle -->
+			<drop item_id="188052609" each_member="true" /><!-- Standard Relic Box -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701916"><!-- C-Rank Chest -->
+		<drop_group><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
+		</drop_group>
+		<drop_group max_items="2"><!-- Named Composite Bundle -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+		</drop_group>
+		<drop_group><!-- Named Relic Bundle -->
+			<drop item_id="188052610" each_member="true" /><!-- Lesser Relic Box -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="701917"><!-- D-Rank Chest -->
+		<drop_group><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
+		</drop_group>
+		<drop_group max_items="2"><!-- Named Composite Bundle -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+			<drop item_id="188052599" /><!-- Defender's Supply Box -->
+		</drop_group>
+		<drop_group><!-- Named Relic Bundle -->
+			<drop item_id="188052611" each_member="true" /><!-- Minor Relic Box -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="801268"><!-- Supply Box -->
