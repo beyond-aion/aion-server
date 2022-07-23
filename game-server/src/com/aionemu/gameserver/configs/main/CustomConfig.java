@@ -90,7 +90,7 @@ public class CustomConfig {
 
 	@Property(key = "gameserver.friendlist.gm_restrict", defaultValue = "false")
 	public static boolean FRIENDLIST_GM_RESTRICT;
-	
+
 	/**
 	 * Friendlist size
 	 */
@@ -238,11 +238,11 @@ public class CustomConfig {
 
 	@Property(key = "character.deletion.time.minutes", defaultValue = "5")
 	public static int CHARACTER_DELETION_TIME_MINUTES;
-	
+
 	/**
 	 * Custom Reward Packages
 	 */
-	@Property(key = "gameserver.custom.starter_kit.enable", defaultValue= "false")
+	@Property(key = "gameserver.custom.starter_kit.enable", defaultValue = "false")
 	public static boolean ENABLE_STARTER_KIT;
 
 	@Property(key = "gameserver.pvpmap.apmultiplier", defaultValue = "2")
@@ -256,4 +256,7 @@ public class CustomConfig {
 
 	@Property(key = "gameserver.pvpmap.random_boss.time", defaultValue = "0 30 14,18,21 ? * *")
 	public static CronExpression PVP_MAP_RANDOM_BOSS_SCHEDULE;
+
+	@Property(key = "gameserver.rates.godstone.activation.rate", defaultValue = "1.0")
+	public static float GODSTONE_ACTIVATION_RATE;
 }

@@ -13,6 +13,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
@@ -36,7 +37,6 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -45,7 +45,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_CANCEL;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
 import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
@@ -140,16 +139,12 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	/**
 	 * Will be called by ZoneManager when creature enters specific zone
-	 * 
-	 * @param zoneInstance
 	 */
 	public void onEnterZone(ZoneInstance zoneInstance) {
 	}
 
 	/**
 	 * Will be called by ZoneManager when player leaves specific zone
-	 * 
-	 * @param zoneInstance
 	 */
 	public void onLeaveZone(ZoneInstance zoneInstance) {
 	}
@@ -158,9 +153,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks on Creature death.<br>
 	 * Should ONLY be called from {@link com.aionemu.gameserver.model.stats.container.CreatureLifeStats#reduceHp(TYPE, int, int, LOG, Creature, boolean)
 	 * reduceHp()} to avoid duplicate death events.
-	 * 
-	 * @param lastAttacker
-	 * @param sendDiePacket
 	 */
 	public void onDie(Creature lastAttacker, boolean sendDiePacket) {
 		getOwner().getMoveController().abortMove();
@@ -178,9 +170,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	/**
 	 * Called when the creature gains or loses hate towards the attacker
-	 * 
-	 * @param attacker
-	 * @param isNewInAggroList
 	 */
 	public void onAddHate(Creature attacker, boolean isNewInAggroList) {
 		getOwner().getAi().onCreatureEvent(AIEventType.ATTACK, attacker);
@@ -242,9 +231,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		getOwner().getLifeStats().reduceHp(type, damage, skillId, logId, attacker, true);
 		getOwner().incrementAttackedCount();
 
-		if (!getOwner().isDead() && attacker instanceof Player) {
-			Player player = (Player) attacker;
-			if (criticalEffect != null) {
+		if (!getOwner().isDead() && attacker instanceof Player player) {
+				if (criticalEffect != null) {
 				criticalEffect.applyEffect();
 			}
 			if (allowGodstoneActivation && status != AttackStatus.DODGE && status != AttackStatus.RESIST)
@@ -266,6 +254,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			return;
 
 		int procProbability = isMainHandWeapon ? godStoneInfo.getProbability() : godStoneInfo.getProbabilityLeft();
+		procProbability *= CustomConfig.GODSTONE_ACTIVATION_RATE;
 		procProbability -= getOwner().getGameStats().getStat(StatEnum.PROC_REDUCE_RATE, 0).getCurrent();
 
 		if (Rnd.get(1, 1000) <= procProbability) {
@@ -394,9 +383,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	/**
 	 * If task already exist - it will be canceled
-	 * 
-	 * @param taskId
-	 * @param task
 	 */
 	public void addTask(TaskId taskId, Future<?> task) {
 		tasks.compute(taskId.ordinal(), (k, oldTask) -> {
@@ -455,8 +441,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	/**
-	 * @param skillId
-	 * @param skillLevel
 	 * @return true if successful usage
 	 */
 	public boolean useSkill(int skillId, int skillLevel) {
@@ -515,9 +499,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			return;
 
 		PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_SKILL_CANCEL(getOwner(), castingSkill.getSkillTemplate().getSkillId()));
-		if (getOwner().getAi() instanceof NpcAI) {
-			NpcAI npcAI = (NpcAI) getOwner().getAi();
-			npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
+		if (getOwner().getAi() instanceof NpcAI npcAI) {
+				npcAI.onGeneralEvent(AIEventType.ATTACK_COMPLETE);
 		}
 		if (lastAttacker instanceof Player) {
 			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED());
