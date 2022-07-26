@@ -27,8 +27,6 @@ public class CarveSignetEffect extends DamageEffect {
 	@XmlAttribute(required = true)
 	protected int prob = 100;
 
-	private int nextSignetLevel = 1;
-
 	@Override
 	public void applyEffect(Effect effect) {
 		super.applyEffect(effect);
@@ -36,25 +34,13 @@ public class CarveSignetEffect extends DamageEffect {
 		if (Rnd.chance() >= prob)
 			return;
 
-		Effect placedSignet = effect.getEffected().getEffectController().getAbnormalEffect(signet);
-
-		if (placedSignet != null)
-			placedSignet.endEffect();
-
+		int nextSignetLevel = signetIncrement;
+		Effect activeSignet = effect.getEffected().getEffectController().getAbnormalEffect(signet);
+		if (activeSignet != null) {
+			activeSignet.endEffect();
+			nextSignetLevel = Math.min(activeSignet.getCarvedSignet() + signetIncrement, Math.max(signetCap, activeSignet.getCarvedSignet()));
+		}
 		Effect signet = SkillEngine.getInstance().applyEffect(signetId + nextSignetLevel - 1, effect.getEffector(), effect.getEffected());
 		signet.setCarvedSignet(nextSignetLevel);
-	}
-
-	@Override
-	public void calculate(Effect effect) {
-		if (!super.calculate(effect, null, null))
-			return;
-
-		Effect activeSignet = effect.getEffected().getEffectController().getAbnormalEffect(signet);
-
-		if (activeSignet != null)
-			nextSignetLevel = Math.min(activeSignet.getCarvedSignet() + signetIncrement, Math.max(signetCap, activeSignet.getCarvedSignet()));
-		else
-			nextSignetLevel = signetIncrement;
 	}
 }
