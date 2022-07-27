@@ -340,12 +340,7 @@ public abstract class Creature extends VisibleObject {
 	}
 
 	public boolean isInVisualState(CreatureVisualState visualState) {
-		int isVisualState = this.visualState & visualState.getId();
-
-		if (isVisualState == visualState.getId())
-			return true;
-
-		return false;
+		return (this.visualState & visualState.getId()) == visualState.getId();
 	}
 
 	public boolean isInAnyHide() {
@@ -456,10 +451,9 @@ public abstract class Creature extends VisibleObject {
 
 	@Override
 	public boolean canSee(VisibleObject object) {
-		if (object instanceof Creature) {
-			Creature creature = (Creature) object;
-			int visualState = creature.getVisualState();
-			if (visualState <= getSeeState() || visualState == CreatureVisualState.BLINKING.getId())
+		if (object instanceof Creature creature) {
+			int visualStateExcludingBlinking = creature.getVisualState() & ~CreatureVisualState.BLINKING.getId();
+			if (visualStateExcludingBlinking <= getSeeState())
 				return true;
 			return equals(creature.getMaster()); // traps, summons, etc. should always be visible to the master
 		}
@@ -523,7 +517,6 @@ public abstract class Creature extends VisibleObject {
 			if ((template.getDuration() + template.getCooldown() * 100 + skillCoolDownsBase.get(cooldownId)) < System.currentTimeMillis())
 				return false;
 		}
-
 		return true;
 	}
 

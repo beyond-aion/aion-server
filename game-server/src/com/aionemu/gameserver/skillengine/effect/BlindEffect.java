@@ -21,7 +21,8 @@ public class BlindEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		if (effect.getEffected().getVisualState() < CreatureVisualState.HIDE10.getId())
+		int visualStateExcludingBlinking = effect.getEffected().getVisualState() & ~CreatureVisualState.BLINKING.getId();
+		if (visualStateExcludingBlinking < CreatureVisualState.HIDE10.getId())
 			effect.getEffected().getEffectController().removeHideEffects();
 		effect.addToEffectedController();
 	}
