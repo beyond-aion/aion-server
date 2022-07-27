@@ -12,7 +12,7 @@ public enum SubEffectType {
 	STUMBLE(4),
 	STAGGER(4),
 	OPENAERIAL(4),
-	KNOCKBACK(12); // SimpleMoveBack
+	SIMPLE_MOVE_BACK(12);
 
 
 	private byte id;

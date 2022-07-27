@@ -11,6 +11,7 @@ import com.aionemu.gameserver.model.templates.hotspot.HotspotTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_TELEPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -77,7 +78,7 @@ public class BindPointTeleportService {
 
 	private static long computePrice(Player player, HotspotTemplate hotspot, long kinah) {
 		long price = kinah > hotspot.getPrice() ? kinah : hotspot.getPrice();
-		if (player.getEffectController().isHiPassInEffect() || price < 1)
+		if (price < 1 || player.getEffectController().hasAbnormalEffect(Effect::isHiPass))
 			price = 1;
 		return price;
 	}

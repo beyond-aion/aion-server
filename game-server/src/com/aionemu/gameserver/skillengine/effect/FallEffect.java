@@ -23,7 +23,7 @@ public class FallEffect extends EffectTemplate {
 
 	@Override
 	public void applyEffect(Effect effect) {
-		if (!((Player) effect.getEffected()).isInvulnerableWing())
+		if (!effect.getEffected().getEffectController().isInAnyAbnormalState(AbnormalState.INVULNERABLE_WING))
 			((Player) effect.getEffected()).getFlyController().endFly(true);
 	}
 }

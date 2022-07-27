@@ -10,15 +10,15 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_IMMOBILIZE;
 import com.aionemu.gameserver.skillengine.model.Effect;
-import com.aionemu.gameserver.skillengine.model.SubEffectType;
 import com.aionemu.gameserver.skillengine.model.SpellStatus;
+import com.aionemu.gameserver.skillengine.model.SubEffectType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * @author VladimirZ, @modified Cheatkiller
+ * @author VladimirZ, Cheatkiller
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SimpleRootEffect")
@@ -34,7 +34,7 @@ public class SimpleRootEffect extends EffectTemplate {
 		if (effect.getEffected().getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE))
 			return;
 		if (super.calculate(effect, StatEnum.STAGGER_RESISTANCE, null) && effect.isSubEffect()) {
-			effect.setSubEffectType(SubEffectType.KNOCKBACK);
+			effect.setSubEffectType(SubEffectType.SIMPLE_MOVE_BACK);
 			final Creature effected = effect.getEffected();
 			byte heading = PositionUtil.getHeadingTowards(effect.getEffector(), effect.getEffected());
 			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(heading));
@@ -56,12 +56,12 @@ public class SimpleRootEffect extends EffectTemplate {
 			if (!(effected instanceof Player))
 				PacketSendUtility.broadcastPacket(effected, new SM_TARGET_IMMOBILIZE(effected));
 		}
-		effect.getEffected().getEffectController().setAbnormal(AbnormalState.KNOCKBACK);
-		effect.setAbnormal(AbnormalState.KNOCKBACK);
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.SIMPLE_MOVE_BACK);
+		effect.setAbnormal(AbnormalState.SIMPLE_MOVE_BACK);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.KNOCKBACK);
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.SIMPLE_MOVE_BACK);
 	}
 }

@@ -14,15 +14,11 @@ import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.vortex.VortexLocation;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
@@ -195,7 +191,7 @@ public class PlayerReviveService {
 				PacketSendUtility.sendPacket(p, new SM_TARGET_SELECTED(null));
 			}
 		});
-		boolean isNoResurrectPenalty = player.getEffectController().isNoResurrectPenaltyInEffect();
+		boolean isNoResurrectPenalty = player.getEffectController().hasAbnormalEffect(Effect::isNoResurrectPenalty);
 		player.setPlayerResActivate(false);
 		player.getLifeStats().setCurrentHpPercent(isNoResurrectPenalty ? 100 : hpPercent);
 		player.getLifeStats().setCurrentMpPercent(isNoResurrectPenalty ? 100 : mpPercent);

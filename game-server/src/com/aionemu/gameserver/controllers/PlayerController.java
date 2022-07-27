@@ -317,7 +317,7 @@ public class PlayerController extends CreatureController<Player> {
 		doReward();
 
 		if (master instanceof Npc || master.equals(player)) {
-			if (player.getLevel() > 4 && !player.getEffectController().isNoDeathPenaltyInEffect())
+			if (player.getLevel() > 4 && !player.getEffectController().hasAbnormalEffect(Effect::isNoDeathPenalty))
 				player.getCommonData().calculateExpLoss();
 		}
 

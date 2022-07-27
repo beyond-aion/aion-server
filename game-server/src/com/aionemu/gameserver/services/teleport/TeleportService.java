@@ -44,6 +44,7 @@ import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.trade.PricesService;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -156,7 +157,7 @@ public class TeleportService {
 		long transportationPrice;
 
 		// If HiPassEffect is active, then all flight/teleport prices are 1 kinah
-		if (player.getEffectController().isHiPassInEffect())
+		if (player.getEffectController().hasAbnormalEffect(Effect::isHiPass))
 			transportationPrice = 1;
 		else {
 			int basePrice = location.getPrice();

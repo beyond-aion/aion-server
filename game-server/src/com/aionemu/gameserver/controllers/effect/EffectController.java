@@ -322,10 +322,6 @@ public class EffectController {
 		return abnormalEffectMap;
 	}
 
-	/**
-	 * @param stack
-	 * @return abnormalEffectMap
-	 */
 	public Effect getAbnormalEffect(String stack) {
 		lock.readLock().lock();
 		try {
@@ -335,75 +331,12 @@ public class EffectController {
 		}
 	}
 
-	/**
-	 * @param skillId
-	 * @return
-	 */
+	public boolean hasAbnormalEffect(Predicate<Effect> predicate) {
+		return findFirstEffect(abnormalEffectMap, predicate) != null;
+	}
+
 	public boolean hasAbnormalEffect(int skillId) {
-		lock.readLock().lock();
-		try {
-			for (Effect effect : abnormalEffectMap.values()) {
-				if (effect.getSkillId() == skillId)
-					return true;
-			}
-		} finally {
-			lock.readLock().unlock();
-		}
-		return false;
-	}
-
-	/**
-	 * Check if NoDeathPenalty is active
-	 * 
-	 * @return boolean
-	 */
-	public boolean isNoDeathPenaltyInEffect() {
-		lock.readLock().lock();
-		try {
-			for (Effect effect : abnormalEffectMap.values()) {
-				if (effect.isNoDeathPenalty())
-					return true;
-			}
-		} finally {
-			lock.readLock().unlock();
-		}
-		return false;
-	}
-
-	/**
-	 * Check if NoResurrectPenalty is active
-	 * 
-	 * @return boolean
-	 */
-	public boolean isNoResurrectPenaltyInEffect() {
-		lock.readLock().lock();
-		try {
-			for (Effect effect : abnormalEffectMap.values()) {
-				if (effect.isNoResurrectPenalty())
-					return true;
-			}
-		} finally {
-			lock.readLock().unlock();
-		}
-		return false;
-	}
-
-	/**
-	 * Check if HiPass is active
-	 * 
-	 * @return boolean
-	 */
-	public boolean isHiPassInEffect() {
-		lock.readLock().lock();
-		try {
-			for (Effect effect : abnormalEffectMap.values()) {
-				if (effect.isHiPass())
-					return true;
-			}
-			return false;
-		} finally {
-			lock.readLock().unlock();
-		}
+		return hasAbnormalEffect(effect -> effect.getSkillId() == skillId);
 	}
 
 	public void broadCastEffects(Effect effect) {
@@ -600,49 +533,6 @@ public class EffectController {
 		for (Effect effect : effectsToEnd)
 			effect.endEffect();
 		return count;
-	}
-
-	/**
-	 * Method used to calculate number of effects of given dispelcategory, targetslot and dispelLevel used only in DispelBuffCounterAtk, therefore rest
-	 * of cases are skipped
-	 * 
-	 * @param dispelLevel
-	 * @return
-	 */
-	public int calculateNumberOfEffects(int dispelLevel) {
-		int number = 0;
-
-		lock.readLock().lock();
-		try {
-			for (Effect effect : abnormalEffectMap.values()) {
-				DispelCategoryType dispelCat = effect.getDispelCategory();
-				SkillTargetSlot tragetSlot = effect.getSkillTemplate().getTargetSlot();
-				// effects with duration 86400000 cant be dispelled
-				// TODO recheck
-				if (effect.getDuration() >= 86400000 && !isRemovableEffect(effect))
-					continue;
-
-				if (effect.isSanctuaryEffect())
-					continue;
-
-				// check for targetslot, effects with target slot higher or equal to 2 cant be removed (ex. skillId: 11885)
-				if (tragetSlot != SkillTargetSlot.BUFF && (tragetSlot != SkillTargetSlot.DEBUFF && dispelCat != DispelCategoryType.ALL)
-					|| effect.getTargetSlotLevel() >= 2)
-					continue;
-
-				switch (dispelCat) {
-					case ALL:
-					case BUFF:// DispelBuffCounterAtkEffect
-						if (effect.getReqDispelLevel() <= dispelLevel)
-							number++;
-						break;
-				}
-			}
-		} finally {
-			lock.readLock().unlock();
-		}
-
-		return number;
 	}
 
 	/**
@@ -946,7 +836,7 @@ public class EffectController {
 	 * @return
 	 */
 	public boolean isAbnormalSet(AbnormalState state) {
-		if (state == AbnormalState.BUFF)
+		if (state == AbnormalState.NONE)
 			return abnormals == 0;
 		return (abnormals & state.getId()) == state.getId();
 	}
@@ -958,7 +848,7 @@ public class EffectController {
 	 * @return
 	 */
 	public boolean isInAnyAbnormalState(AbnormalState state) {
-		if (state == AbnormalState.BUFF)
+		if (state == AbnormalState.NONE)
 			return abnormals == 0;
 		return (abnormals & state.getId()) != 0;
 	}

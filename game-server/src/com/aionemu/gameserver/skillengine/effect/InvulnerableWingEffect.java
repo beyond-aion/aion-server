@@ -24,11 +24,11 @@ public class InvulnerableWingEffect extends EffectTemplate {
 	@Override
 	public void applyEffect(final Effect effect) {
 		effect.addToEffectedController();
-		((Player) effect.getEffected()).setInvulnerableWing(true);
+		effect.getEffected().getEffectController().setAbnormal(AbnormalState.INVULNERABLE_WING);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		((Player) effect.getEffected()).setInvulnerableWing(false);
+		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.INVULNERABLE_WING);
 	}
 }

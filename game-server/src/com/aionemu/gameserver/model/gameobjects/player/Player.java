@@ -74,7 +74,6 @@ import com.aionemu.gameserver.services.DuelService;
 import com.aionemu.gameserver.services.ExchangeService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.skillengine.condition.ChainCondition;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.effect.RebirthEffect;
 import com.aionemu.gameserver.skillengine.model.ChainSkills;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -142,7 +141,6 @@ public class Player extends Creature {
 	private float resPosX = 0;
 	private float resPosY = 0;
 	private float resPosZ = 0;
-	private boolean isUnderInvulnerableWing = false;
 
 	private int abyssRankListUpdateMask = 0;
 
@@ -1305,13 +1303,6 @@ public class Player extends Creature {
 		}
 	}
 
-	/**
-	 * @return true if player is under NoFly Effect
-	 */
-	public boolean isUnderNoFly() {
-		return getEffectController().isAbnormalSet(AbnormalState.NOFLY);
-	}
-
 	public boolean hasPermission(byte perm) {
 		return playerAccount.getMembership() >= perm;
 	}
@@ -1356,14 +1347,6 @@ public class Player extends Creature {
 
 	public FlyPathEntry getCurrentFlyPath() {
 		return flyLocationId;
-	}
-
-	public boolean isInvulnerableWing() {
-		return isUnderInvulnerableWing;
-	}
-
-	public void setInvulnerableWing(boolean value) {
-		this.isUnderInvulnerableWing = value;
 	}
 
 	public void resetAbyssRankListUpdated() {

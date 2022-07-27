@@ -8,7 +8,10 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.skillengine.model.*;
+import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.EffectReserved;
+import com.aionemu.gameserver.skillengine.model.EffectResult;
+import com.aionemu.gameserver.skillengine.model.Skill;
 
 /**
  * This packet show cast spell result (including hit time).
@@ -154,7 +157,7 @@ public class SM_CASTSPELL_RESULT extends AionServerPacket {
 					switch (effect.getSubEffectType()) {
 						case PULL:
 						case PULL_NPC:
-						case KNOCKBACK:
+						case SIMPLE_MOVE_BACK:
 							writeF(effect.getTargetX());
 							writeF(effect.getTargetY());
 							writeF(effect.getTargetZ());

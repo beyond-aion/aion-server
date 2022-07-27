@@ -7,7 +7,7 @@ import javax.xml.bind.annotation.XmlEnum;
  */
 @XmlEnum
 public enum AbnormalState {
-	BUFF(0),
+	NONE(0),
 	POISON(1 << 0),
 	BLEED(1 << 1),
 	PARALYZE(1 << 2),
@@ -23,7 +23,7 @@ public enum AbnormalState {
 	STUN(1 << 12),
 	PETRIFICATION(1 << 13),
 	STUMBLE(1 << 14),
-	STAGGER(1 << 15),
+	STAGGER(1 << 15), // knockback
 	OPENAERIAL(1 << 16),
 	SNARE(1 << 17),
 	SLOW(1 << 18),
@@ -32,13 +32,13 @@ public enum AbnormalState {
 	DEFORM(1 << 21),
 	PULLED(1 << 22),
 	NOFLY(1 << 23),
-	KNOCKBACK(1 << 24),
-	UNK_2(1 << 25),
-	UNK_3(1 << 26),
-	UNK_4(1 << 27),
-	UNK_5(1 << 28),
+	SIMPLE_MOVE_BACK(1 << 24),
+	STUNLIKE(1 << 25),
+	CANT_MOVE_OR_ATTACK(1 << 26),
+	UNK(1 << 27),
+	UNK_2(1 << 28),
 	HIDE(1 << 29),
-	UNK_6(1 << 30),
+	INVULNERABLE_WING(1 << 30),
 	SANCTUARY(1 << 31),
 
 	/**
