@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.world;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -19,18 +22,23 @@ public class WorldMap3DInstance extends WorldMapInstance {
 
 	@Override
 	protected void initMapRegions() {
-		int size = this.getParent().getWorldSize();
+		int size = getParent().getWorldSize();
 		float maxZ = Math.round((float) size / regionSize) * regionSize;
 
-		// Create all mapRegion
+		List<Integer> regionIds = new ArrayList<>();
 		for (int x = 0; x <= size; x = x + regionSize) {
 			for (int y = 0; y <= size; y = y + regionSize) {
 				for (int z = 0; z < maxZ; z = z + regionSize) {
-					int regionId = RegionUtil.get3dRegionId(x, y, z);
-					regions.put(regionId, createMapRegion(regionId));
+					regionIds.add(RegionUtil.get3dRegionId(x, y, z));
 				}
 			}
 		}
+		regionIds.parallelStream().forEach(regionId -> {
+			MapRegion mapRegion = createMapRegion(regionId);
+			synchronized (regions) {
+					regions.put(regionId, mapRegion);
+			}
+		});
 
 		// Add Neighbour
 		for (int x = 0; x <= size; x = x + regionSize) {

@@ -335,17 +335,14 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	}
 
 	protected ZoneInstance[] filterZones(int mapId, int regionId, float startX, float startY, float minZ, float maxZ) {
-		List<ZoneInstance> regionZones = new ArrayList<>();
 		RegionZone regionZone = new RegionZone(startX, startY, minZ, maxZ);
-
-		for (ZoneInstance zoneInstance : zones.values()) {
+		return zones.values().stream().filter(zoneInstance -> {
 			if (zoneInstance.getAreaTemplate().intersectsRectangle(regionZone))
-				regionZones.add(zoneInstance);
-			else if (zoneInstance.getZoneTemplate().getZoneType() == ZoneClassName.DUMMY) {
+				return true;
+			if (zoneInstance.getZoneTemplate().getZoneType() == ZoneClassName.DUMMY)
 				log.error("Region " + regionId + " should intersect with whole map zone!!! (map=" + mapId + ")");
-			}
-		}
-		return regionZones.toArray(new ZoneInstance[regionZones.size()]);
+			return false;
+		}).toArray(ZoneInstance[]::new);
 	}
 
 	public boolean isInsideZone(VisibleObject object, ZoneName zoneName) {
