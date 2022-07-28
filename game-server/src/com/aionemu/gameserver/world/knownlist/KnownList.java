@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -176,13 +175,8 @@ public class KnownList {
 	 */
 	private void delFromVisibleObjects(VisibleObject object, ObjectDeleteAnimation animation) {
 		if (visualObjects.remove(object.getObjectId()) != null) {
-			if (object instanceof Player) {
-				Player player = (Player) object;
-				if (player.getEffectController().isAbnormalSet(AbnormalState.HIDE))
-					animation = ObjectDeleteAnimation.DELAYED; // fix to show players hide skill animation
-				if (player.getPet() != null) // pets have no visual/see state, so we sync visibility with their master
-					delFromVisibleObjects(player.getPet(), ObjectDeleteAnimation.FADE_OUT);
-			}
+			if (object instanceof Player player && player.getPet() != null) // pets have no visual/see state, so we sync visibility with their master
+				delFromVisibleObjects(player.getPet(), ObjectDeleteAnimation.FADE_OUT);
 			try {
 				owner.getController().notSee(object, animation);
 			} catch (Exception e) {
