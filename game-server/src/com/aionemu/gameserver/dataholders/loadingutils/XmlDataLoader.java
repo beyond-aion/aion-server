@@ -54,12 +54,12 @@ public class XmlDataLoader {
 		File cleanMainXml = new File(MAIN_XML_FILE);
 
 		log.info("Merging static data into cache file...");
-		mergeXmlFiles(cachedXml, cleanMainXml);
+		boolean updated = mergeXmlFiles(cachedXml, cleanMainXml);
 
 		try {
 			log.info("Processing cache file...");
 			// passing the xsd for auto schema validation in JAXBUtil.deserialize slows down the server start, so we validate manually in another thread and don't let the server start on error
-			Future<?> validationTask = validateAsync(cachedXml);
+			Future<?> validationTask = updated ? validateAsync(cachedXml) : null;
 			StaticData staticData = JAXBUtil.deserialize(cachedXml, StaticData.class);
 			staticData.setValidationTask(validationTask);
 			return staticData;
@@ -77,6 +77,7 @@ public class XmlDataLoader {
 				XmlUtil.getSchema(XML_SCHEMA_FILE).newValidator().validate(new StAXSource(xmlStreamReader));
 				log.info("Validated " + cachedXml + " in " + (System.currentTimeMillis() - time) + "ms");
 			} catch (Throwable t) {
+				cachedXml.setLastModified(0); // mark file as outdated so validation will run again on next start
 				throw new GameServerError("Error validating " + cachedXml, t);
 			}
 		});
@@ -84,17 +85,13 @@ public class XmlDataLoader {
 
 	/**
 	 * Merges xml files(if are newer than cache file) and puts output to cache file.
-	 * 
-	 * @see XmlMerger
-	 * @param cachedXml
-	 * @param cleanMainXml
-	 * @throws Error
-	 *           is thrown if some problem occurred.
+	 *
+	 * @return True if the file was created/updated, false if cachedXml is already up to date.
 	 */
-	private void mergeXmlFiles(File cachedXml, File cleanMainXml) throws Error {
+	private boolean mergeXmlFiles(File cachedXml, File cleanMainXml) throws Error {
 		XmlMerger merger = new XmlMerger(cleanMainXml, cachedXml);
 		try {
-			merger.process();
+			return merger.process();
 		} catch (Throwable e) {
 			throw new GameServerError("Error while merging xml files", e);
 		}

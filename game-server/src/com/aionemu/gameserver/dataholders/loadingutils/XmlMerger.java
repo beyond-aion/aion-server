@@ -131,7 +131,7 @@ public class XmlMerger {
 	 * @throws XMLStreamException
 	 *           when XML processing error was occurred.
 	 */
-	public void process() throws Exception {
+	public boolean process() throws Exception {
 		log.debug("Processing " + sourceFile + " files into " + destFile);
 
 		if (!sourceFile.exists())
@@ -145,10 +145,11 @@ public class XmlMerger {
 			log.info("Modifications found. Updating...");
 		} else {
 			log.info("Cache file is up to date");
-			return;
+			return false;
 		}
 
 		doUpdate();
+		return true;
 	}
 
 	/**
@@ -163,9 +164,7 @@ public class XmlMerger {
 	 *           if a SAX parser cannot be created which satisfies the requested configuration.
 	 */
 	private boolean checkFileModifications() throws Exception {
-		long destFileTime = destFile.lastModified();
-
-		if (sourceFile.lastModified() > destFileTime) {
+		if (sourceFile.lastModified() > destFile.lastModified()) {
 			log.debug("Source file was modified ");
 			return true;
 		}
