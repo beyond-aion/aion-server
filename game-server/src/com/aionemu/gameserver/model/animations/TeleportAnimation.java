@@ -58,11 +58,6 @@ public enum TeleportAnimation {
 
 	public ObjectDeleteAnimation getDefaultObjectDeleteAnimation() {
 		switch (this) {
-			case NONE:
-			case BATTLEGROUND:
-				return ObjectDeleteAnimation.NONE;
-			case FADE_OUT:
-				return ObjectDeleteAnimation.FADE_OUT;
 			case FADE_OUT_BEAM:
 				return ObjectDeleteAnimation.FADE_OUT_BEAM;
 			case JUMP_IN:
