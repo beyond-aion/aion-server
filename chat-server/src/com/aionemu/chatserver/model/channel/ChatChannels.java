@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.chatserver.configs.main.LoggingConfig;
 import com.aionemu.chatserver.model.ChannelType;
 import com.aionemu.chatserver.model.ChatClient;
-import com.aionemu.chatserver.model.PlayerClass;
 import com.aionemu.chatserver.model.Race;
 
 /**
@@ -20,23 +19,15 @@ public class ChatChannels {
 	private static final Logger log = LoggerFactory.getLogger(ChatChannels.class);
 	private static final Map<Integer, Channel> channels = new ConcurrentHashMap<>();
 
-	private static Channel addChannel(ChannelType ct, String channelMeta, int gameServerId, Race race) {
-		Channel channel = null;
-		switch (ct) {
-			case REGION -> channel = new RegionChannel(gameServerId, race, channelMeta);
-			case TRADE -> channel = new TradeChannel(gameServerId, race, channelMeta);
-			case LFG -> channel = new LfgChannel(gameServerId, race);
-			case JOB -> {
-				PlayerClass playerClass = PlayerClass.getClassByIdentifier(channelMeta);
-				if (playerClass != null)
-					channel = new JobChannel(gameServerId, race, playerClass);
-				else
-					log.warn("Client requested non existent class channel: {}", channelMeta);
-			}
-			case LANG -> channel = new LangChannel(gameServerId, race, channelMeta);
-		}
-		if (channel != null)
-			channels.put(channel.getChannelId(), channel);
+	private static Channel addChannel(ChannelType ct, int gameServerId, Race race, String channelMeta) {
+		Channel channel = switch (ct) {
+			case REGION -> new RegionChannel(gameServerId, race, channelMeta);
+			case TRADE -> new TradeChannel(gameServerId, race, channelMeta);
+			case LFG -> new LfgChannel(gameServerId, race);
+			case JOB -> new JobChannel(gameServerId, race, channelMeta);
+			case LANG -> new LangChannel(gameServerId, race, channelMeta);
+		};
+		channels.put(channel.getChannelId(), channel);
 		return channel;
 	}
 
@@ -82,6 +73,10 @@ public class ChatChannels {
 			if (channel.matches(ct, gameServerId, race, channelMeta))
 				return channel;
 		}
-		return addChannel(ct, channelMeta, gameServerId, race);
+		Channel channel = addChannel(ct, gameServerId, race, channelMeta);
+		if (channel instanceof JobChannel jobChannel && !jobChannel.hasAliases()) {
+			log.warn("{} requested channel for unknown class: {}", client, channelMeta);
+		}
+		return channel;
 	}
 }

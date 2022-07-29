@@ -1,7 +1,11 @@
 package com.aionemu.chatserver.model.channel;
 
+import java.util.Collections;
+import java.util.LinkedHashSet;
+import java.util.List;
+import java.util.Set;
+
 import com.aionemu.chatserver.model.ChannelType;
-import com.aionemu.chatserver.model.PlayerClass;
 import com.aionemu.chatserver.model.Race;
 
 /**
@@ -9,20 +13,48 @@ import com.aionemu.chatserver.model.Race;
  */
 public class JobChannel extends RaceChannel {
 
-	private final PlayerClass playerClass;
+	private static final List<Set<String>> aliasSets = List.of(
+		// Order of languages: NA English, GF English, German, Spanish, Italian, French, Polish, Turkish, Russian, Chinese
+		newOrderedSet("Gladiator", "Gladiador", "Gladiatore", "Gladiateur", "Gladyatör", "Гладиатор", "剑星"),
+		newOrderedSet("Templar", "Templer", "Templario", "Templare", "Templier", "Templariusz", "Tapınakçı", "Страж", "守护星"),
+		newOrderedSet("Assassin", "Assassine", "Asesino", "Assassino", "Asasyn", "Suikastçı", "Убийца", "杀星"),
+		newOrderedSet("Ranger", "Jäger", "Cazador", "Cacciatore", "Rôdeur", "Łowca", "Avcı", "Стрелок", "弓星"),
+		newOrderedSet("Sorcerer", "Zauberer", "Hechicero", "Fattucchiere", "Sorcier", "Czarodziej", "Sihirbaz", "Волшебник", "魔道星"),
+		newOrderedSet("Spiritmaster", "Beschwörer", "Invocador", "Incantatore", "Spiritualiste", "Zaklinacz", "Ruh Çağırıcı", "Заклинатель", "精灵星"),
+		newOrderedSet("Cleric", "Kleriker", "Clérigo", "Chierico", "Clerc", "Kleryk", "Ruhban", "Целитель", "治愈星"),
+		newOrderedSet("Chanter", "Kantor", "Cantor", "Cantore", "Aède", "Чародей", "护法星"),
+		newOrderedSet("Aethertech", "Äthertech", "Técnico del éter", "Tecnico dell'etere", "Éthertech", "EterTech", "Etertek", "Пилот", "机甲星"),
+		newOrderedSet("Gunslinger", "Gunner", "Schütze", "Tirador", "Tiratore", "Pistolero", "Strzelec", "Nişancı", "Снайпер", "枪炮星"),
+		newOrderedSet("Songweaver", "Bard", "Barde", "Bardo", "Ozan", "Бард", "吟游星")
+	);
 
-	public JobChannel(int gameServerId, Race race, PlayerClass playerClass) {
+	private final Set<String> classIdentifiers;
+
+	public JobChannel(int gameServerId, Race race, String classIdentifier) {
 		super(ChannelType.JOB, gameServerId, race);
-		this.playerClass = playerClass;
+		this.classIdentifiers = withAliases(classIdentifier.split("\\[f:")[0]);
+	}
+
+	public boolean hasAliases() {
+		return classIdentifiers.size() > 1;
 	}
 
 	@Override
 	public boolean matches(ChannelType channelType, int gameServerId, Race race, String classIdentifier) {
-		return super.matches(channelType, gameServerId, race, classIdentifier) && PlayerClass.getClassByIdentifier(classIdentifier) == playerClass;
+		return super.matches(channelType, gameServerId, race, classIdentifier) && classIdentifiers.contains(classIdentifier);
 	}
 
 	@Override
 	public String name() {
-		return playerClass + " (" + getRace().name().charAt(0) + ")";
+		return classIdentifiers.iterator().next() + " (" + getRace().name().charAt(0) + ")";
+	}
+
+	private Set<String> withAliases(String classIdentifier) {
+		return aliasSets.stream().filter(aliases -> aliases.contains(classIdentifier)).findFirst()
+			.orElseGet(() -> Collections.singleton(classIdentifier));
+	}
+
+	private static Set<String> newOrderedSet(String... values) {
+		return new LinkedHashSet<>(List.of(values));
 	}
 }
