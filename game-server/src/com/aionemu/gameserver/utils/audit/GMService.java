@@ -14,23 +14,20 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.FriendList.Status;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.SkillLearnService;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 
 /**
  * @author MrPoke, Neon
  */
 public class GMService {
 
-	public static final GMService getInstance() {
+	public static GMService getInstance() {
 		return SingletonHolder.instance;
 	}
 
@@ -50,30 +47,7 @@ public class GMService {
 
 	public void onPlayerLogin(Player player) {
 		if (player.isStaff()) {
-			String delimiter = "=============================";
-			StringBuilder sb = new StringBuilder(delimiter);
-			if (AdminConfig.LOGIN_INVISIBLE) {
-				player.getEffectController().setAbnormal(AbnormalState.HIDE);
-				player.setVisualState(CreatureVisualState.HIDE20);
-				PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
-				sb.append("\n>> Connection in Invisible mode <<");
-			}
-			if (AdminConfig.LOGIN_INVULNERABLE) {
-				player.setCustomState(CustomPlayerState.INVULNERABLE);
-				sb.append("\n>> Connection in Invulnerable mode <<");
-			}
-			if (AdminConfig.LOGIN_NEUTRAL) {
-				player.setCustomState(CustomPlayerState.NEUTRAL_TO_EVERYONE);
-				sb.append("\n>> Connection in Neutral mode <<");
-			}
-			if (AdminConfig.LOGIN_VISION) {
-				player.setSeeState(CreatureSeeState.SEARCH10);
-				PacketSendUtility.broadcastPacket(player, new SM_PLAYER_STATE(player), true);
-				sb.append("\n>> Connection in Vision mode <<");
-			}
-			if (sb.length() > delimiter.length())
-				PacketSendUtility.sendMessage(player, sb.append("\n" + delimiter).toString());
-
+			AdminConfig.LOGIN_EXECUTE_COMMANDS.forEach(cmd -> ChatProcessor.getInstance().handleChatCommand(player, cmd));
 			staffMembers.put(player.getObjectId(), player);
 			scheduleBroadcastLogin(player);
 		}
@@ -108,16 +82,12 @@ public class GMService {
 		byte delay = 15;
 		PacketSendUtility.sendMessage(gm,
 			"Your login will be announced in " + delay + "s.\nYou can disable this by setting whisper off or changing your online status to invisible.");
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isAnnounceable(gm)) {
-					broadcastConnectionStatus(gm, true);
-					PacketSendUtility.sendMessage(gm, "Your login has been announced.");
-				} else {
-					PacketSendUtility.sendMessage(gm, "Your login has not been announced.");
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (isAnnounceable(gm)) {
+				broadcastConnectionStatus(gm, true);
+				PacketSendUtility.sendMessage(gm, "Your login has been announced.");
+			} else {
+				PacketSendUtility.sendMessage(gm, "Your login has not been announced.");
 			}
 		}, delay * 1000);
 	}

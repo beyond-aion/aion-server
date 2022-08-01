@@ -72,20 +72,10 @@ public class AdminConfig {
 	public static byte CMD_QUEST_ADV_PARAMS;
 
 	/**
-	 * Login options
+	 * Login/logout options
 	 */
-	@Property(key = "gameserver.administration.login.invisible", defaultValue = "false")
-	public static boolean LOGIN_INVISIBLE;
-	@Property(key = "gameserver.administration.login.invulnerable", defaultValue = "false")
-	public static boolean LOGIN_INVULNERABLE;
-	@Property(key = "gameserver.administration.login.neutral", defaultValue = "false")
-	public static boolean LOGIN_NEUTRAL;
-	@Property(key = "gameserver.administration.login.vision", defaultValue = "false")
-	public static boolean LOGIN_VISION;
-
-	/**
-	 * Login/logout announce options
-	 */
+	@Property(key = "gameserver.administration.login.execute_commands", defaultValue = "//invis, //invul, //enemy none, //see")
+	public static List<String> LOGIN_EXECUTE_COMMANDS;
 	@Property(key = "gameserver.administration.login.announce_levels", defaultValue = "*")
 	public static List<String> ANNOUNCE_LEVELS;
 	@Property(key = "gameserver.administration.login.announce_to_all_players", defaultValue = "true")

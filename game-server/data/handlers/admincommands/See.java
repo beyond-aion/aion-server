@@ -18,10 +18,10 @@ public class See extends AdminCommand {
 	@Override
 	public void execute(Player admin, String... params) {
 		if (admin.getSeeState() < 2) {
-			admin.setSeeState(CreatureSeeState.SEARCH10);
+			admin.setSeeState(CreatureSeeState.SEARCH20);
 			sendInfo(admin, "You got vision.");
 		} else {
-			admin.unsetSeeState(CreatureSeeState.SEARCH10);
+			admin.unsetSeeState(CreatureSeeState.SEARCH20);
 			sendInfo(admin, "You lost vision.");
 		}
 		PacketSendUtility.broadcastPacket(admin, new SM_PLAYER_STATE(admin), true);

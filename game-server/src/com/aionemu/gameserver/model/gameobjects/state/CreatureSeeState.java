@@ -8,7 +8,8 @@ public enum CreatureSeeState {
 	SEARCH1(1), // See-Through: Hide I
 	SEARCH2(2), // See-Through: Hide II
 	SEARCH5(5), // npc stealth
-	SEARCH10(10); // 3.0 npc stealth
+	SEARCH10(10), // 3.0 npc stealth
+	SEARCH20(20);
 
 	private int id;
 
