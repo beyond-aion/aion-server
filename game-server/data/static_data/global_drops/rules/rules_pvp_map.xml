@@ -784,7 +784,7 @@
 			<gd_npc npc_id="230858" /><!-- brigade general sheba -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188052577" /><!-- Veteran's Composite Manastone Bundle -->
+			<gd_item id="188052556" /><!-- Veteran's Composite Manastone Bundle -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

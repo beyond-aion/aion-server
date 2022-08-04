@@ -21910,8 +21910,11 @@
 		<items chance="50.0">
 			<random_item type="MANASTONE_LEGEND_GRADE_40" />
 		</items>
-		<items chance="50.0">
+		<items chance="40.0">
 			<random_item type="MANASTONE_LEGEND_GRADE_50" />
+		</items>
+		<items chance="10.0">
+			<random_item type="MANASTONE_LEGEND_GRADE_60" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052557"><!-- Harlequin Card Box -->
