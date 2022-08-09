@@ -959,8 +959,8 @@
 				<spawn npc_id="802614" handler="MERCHANT" respawn_time="295">
 					<spot x="892.21436" y="1850.1084" z="229.42825" h="52"/>
 				</spawn>
-				<!-- Rotos -->
-				<spawn npc_id="802615" handler="MERCHANT" respawn_time="295">
+				<!-- Antos -->
+				<spawn npc_id="802558" handler="MERCHANT" respawn_time="295">
 					<spot x="878.75586" y="1860.849" z="229.23175"/>
 				</spawn>
 				<!-- Logiste -->
@@ -1413,8 +1413,8 @@
 				<spawn npc_id="802567" handler="MERCHANT" respawn_time="295">
 					<spot x="1897.313" y="799.8699" z="237.875" h="21"/>
 				</spawn>
-				<!-- Anemone -->
-				<spawn npc_id="802570" handler="MERCHANT" respawn_time="295">
+				<!-- Rotos -->
+				<spawn npc_id="802615" handler="MERCHANT" respawn_time="295">
 					<spot x="1894.93" y="822.0237" z="237.8082" h="105"/>
 				</spawn>
 				<!-- Nekado -->
@@ -1633,8 +1633,8 @@
 				<spawn npc_id="804564" handler="MERCHANT" respawn_time="295">
 					<spot x="1395.686" y="853.3888" z="259.5404" h="118"/>
 				</spawn>
-				<!-- Camelia -->
-				<spawn npc_id="802564" handler="MERCHANT" respawn_time="295">
+				<!-- Elia -->
+				<spawn npc_id="802613" handler="MERCHANT" respawn_time="295">
 					<spot x="1444.612" y="870.0577" z="258.25" h="60"/>
 				</spawn>
 				<!-- Konos -->
