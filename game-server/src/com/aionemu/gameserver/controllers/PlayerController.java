@@ -83,10 +83,8 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void see(VisibleObject object) {
 		super.see(object);
-		if (object instanceof Creature) {
-			Creature creature = (Creature) object;
-			if (creature instanceof Npc) {
-				Npc npc = (Npc) creature;
+		if (object instanceof Creature creature) {
+			if (creature instanceof Npc npc) {
 				PacketSendUtility.sendPacket(getOwner(), new SM_NPC_INFO(npc, getOwner()));
 				if (npc instanceof Kisk) {
 					if (getOwner().getRace() == ((Kisk) npc).getOwnerRace())
@@ -94,8 +92,7 @@ public class PlayerController extends CreatureController<Player> {
 				} else {
 					QuestEngine.getInstance().onAtDistance(new QuestEnv(npc, getOwner(), 0));
 				}
-			} else if (creature instanceof Player) {
-				Player player = (Player) creature;
+			} else if (creature instanceof Player player) {
 				PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_INFO(player, getOwner().isAggroIconTo(player)));
 				PacketSendUtility.sendPacket(getOwner(), new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
 				if (player.isInPlayerMode(PlayerMode.RIDE))
@@ -107,8 +104,7 @@ public class PlayerController extends CreatureController<Player> {
 				PacketSendUtility.sendPacket(getOwner(), new SM_ABNORMAL_EFFECT(creature));
 		} else if (object instanceof Gatherable || object instanceof StaticObject) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_GATHERABLE_INFO(object));
-		} else if (object instanceof Pet) {
-			Pet pet = (Pet) object;
+		} else if (object instanceof Pet pet) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_PET(pet));
 			if (pet.getMaster().isInFlyingState())
 				PacketSendUtility.sendPacket(getOwner(), new SM_PET_EMOTE(pet, PetEmote.FLY_START));
@@ -570,8 +566,7 @@ public class PlayerController extends CreatureController<Player> {
 
 	public void cancelGathering() {
 		Player player = getOwner();
-		if (player.getTarget() instanceof Gatherable) {
-			Gatherable g = (Gatherable) player.getTarget();
+		if (player.getTarget() instanceof Gatherable g) {
 			g.getController().finishGathering(player);
 		}
 	}
@@ -645,7 +640,7 @@ public class PlayerController extends CreatureController<Player> {
 			getOwner().setVisualState(CreatureVisualState.BLINKING);
 			AttackUtil.cancelCastOn(getOwner());
 			AttackUtil.removeTargetFrom(getOwner());
-			PacketSendUtility.broadcastPacket(getOwner(), new SM_PLAYER_STATE(getOwner()), true);
+			PacketSendUtility.broadcastToSightedPlayers(getOwner(), new SM_PLAYER_STATE(getOwner()), true);
 			addTask(TaskId.PROTECTION_ACTIVE, ThreadPoolManager.getInstance().schedule(this::stopProtectionActiveTask, 60000));
 		}
 	}

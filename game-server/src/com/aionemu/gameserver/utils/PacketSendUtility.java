@@ -111,30 +111,27 @@ public class PacketSendUtility {
 
 	/**
 	 * Broadcasts a packet to all players, that the given object knows and the object itself, if it's a player.
-	 *
-	 * @param visibleObject
-	 * @param packet
 	 */
 	public static void broadcastPacketAndReceive(VisibleObject visibleObject, AionServerPacket packet) {
-		if (visibleObject instanceof Player)
-			sendPacket((Player) visibleObject, packet);
+		if (visibleObject instanceof Player player)
+			sendPacket(player, packet);
 
 		broadcastPacket(visibleObject, packet);
 	}
 
 	public static void broadcastPacketAndReceive(Creature creature, AionServerPacket packet, AIEventType et) {
-		if (creature instanceof Player)
-			sendPacket((Player) creature, packet);
+		if (creature instanceof Player player)
+			sendPacket(player, packet);
 
 		broadcastPacketAndAIEvent(creature, packet, et);
 	}
 
 	public static void broadcastPacketAndAIEvent(Creature creature, AionServerPacket packet, AIEventType et) {
 		creature.getKnownList().forEachObject(object -> {
-			if (object instanceof Player)
-				sendPacket((Player) object, packet);
-			else if (et != null && object instanceof Npc)
-				((Npc) object).getAi().onCreatureEvent(et, creature);
+			if (object instanceof Player player)
+				sendPacket(player, packet);
+			else if (et != null && object instanceof Npc npc)
+				npc.getAi().onCreatureEvent(et, creature);
 		});
 	}
 
@@ -150,8 +147,8 @@ public class PacketSendUtility {
 	 *          filter determining who should be messaged
 	 */
 	public static void broadcastPacket(VisibleObject object, AionServerPacket packet, boolean toSelf, Predicate<Player> filter) {
-		if (toSelf && object instanceof Player)
-			sendPacket((Player) object, packet);
+		if (toSelf && object instanceof Player player)
+			sendPacket(player, packet);
 
 		object.getKnownList().forEachPlayer(player -> {
 			if (filter.test(player))
