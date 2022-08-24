@@ -391,8 +391,6 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				PacketSendUtility.sendMessage(player, "At last! I have become .. your greatest nightmare!", ChatType.BRIGHT_YELLOW_CENTER);
 				despawnNpcs(BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID);
 			} else {
-				float usedTime = (System.currentTimeMillis() - startTime.get()) / 1000f;
-				achievedDps = Math.round(getNpc(CENTER_ARTIFACT_ID).getLifeStats().getMaxHp() / usedTime);
 				PacketSendUtility.sendMessage(player, "You shall not pass!", ChatType.BRIGHT_YELLOW_CENTER);
 				despawnNpcs(CENTER_ARTIFACT_ID, TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
 			}
