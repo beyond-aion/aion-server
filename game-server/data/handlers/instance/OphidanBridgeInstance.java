@@ -24,8 +24,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @InstanceID(300590000)
 public class OphidanBridgeInstance extends GeneralInstanceHandler {
 
-	private AtomicBoolean isNormalMode = new AtomicBoolean(false); // instance starts always in hardmode
-	private AtomicBoolean used = new AtomicBoolean(false);
+	private final AtomicBoolean isNormalMode = new AtomicBoolean(false); // instance starts always in hardmode
+	private final AtomicBoolean used = new AtomicBoolean(false);
 	private byte bossKills = 0;
 	private byte endBossKills = 0;
 	private Future<?> task;
@@ -37,9 +37,9 @@ public class OphidanBridgeInstance extends GeneralInstanceHandler {
 		}
 	}
 
-
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
 			case 235764: // Escapee Asachin, triggers normal mode
 				isNormalMode.set(true);
@@ -85,30 +85,21 @@ public class OphidanBridgeInstance extends GeneralInstanceHandler {
 	}
 
 	private void scheduleEnrage() {
-		task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-			@Override
-			public void run() {
-				if (endBossKills < 2){
+		task = ThreadPoolManager.getInstance().schedule(() -> {
+				if (endBossKills < 2) {
 					spawn(856059, 322.4960f, 488.3117f, 656.4463f, (byte) 50);
 				}
-			}
-		}, 10000);
+			}, 10000);
 	}
 
 	private void spawnRandomBosses() {
 		int npcId = 235759 + (Rnd.get(0, 2) * 4);
 		spawn(npcId, 325.1554f, 483.4476f, 607.6434f, (byte) 0);
-		switch (npcId) {
-			case 235759:
-				spawn(235769, 323.016f, 489.295f, 607.645f, (byte) 0); // Velkur Aethercaster
-				break;
-			case 235763:
-				spawn(235770, 323.016f, 489.295f, 607.645f, (byte) 0); // Velkur Aetherpriest
-				break;
-			case 235767:
-				spawn(235771, 323.016f, 489.295f, 607.645f, (byte) 0); // Velkur Aetherknife
-				break;
-		}
+			switch (npcId) {
+					case 235759 -> spawn(235769, 323.016f, 489.295f, 607.645f, (byte) 0); // Velkur Aethercaster
+					case 235763 -> spawn(235770, 323.016f, 489.295f, 607.645f, (byte) 0); // Velkur Aetherpriest
+					case 235767 -> spawn(235771, 323.016f, 489.295f, 607.645f, (byte) 0); // Velkur Aetherknife
+			}
 	}
 
 	@Override

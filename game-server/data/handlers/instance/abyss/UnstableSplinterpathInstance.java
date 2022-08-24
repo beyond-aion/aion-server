@@ -16,9 +16,8 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author zhkchi
- * @reworked vlog, Luzien
- * @edit Cheatkiller
+ * @author zhkchi, vlog, Luzien, Cheatkiller
+ * @see <a href="https://aion.fandom.com/wiki/Abyssal_Splinter">Abyssal Splinter</a>
  */
 @InstanceID(300600000)
 public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
@@ -28,6 +27,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		final int npcId = npc.getNpcId();
 		switch (npcId) {
 			case 219554: // (ex 219942) Pazuzu the Life Current
@@ -49,23 +49,13 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 					spawnDayshadeAbyssalTreasureChest();
 				} else {
 					sendMsg(npcId == 219551 ? SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_Light_Die() : SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_Dark_Die());
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-
-							if (getNpc(npcId == 219552 ? 219551 : 219552) != null) {
-								switch (npcId) {
-									case 219551:
-										spawn(219552, 447.1937f, 683.72217f, 433.1805f, (byte) 108); // rukril
-										break;
-									case 219552:
-										spawn(219551, 455.5502f, 702.09485f, 433.13727f, (byte) 108); // ebonsoul
-										break;
-								}
+					ThreadPoolManager.getInstance().schedule(() -> {
+						if (getNpc(npcId == 219552 ? 219551 : 219552) != null) {
+							switch (npcId) {
+								case 219551 -> spawn(219552, 447.1937f, 683.72217f, 433.1805f, (byte) 108); // rukril
+								case 219552 -> spawn(219551, 455.5502f, 702.09485f, 433.13727f, (byte) 108); // ebonsoul
 							}
 						}
-
 					}, 60000);
 				}
 				npc.getController().delete();
@@ -232,18 +222,14 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	}
 
 	private void onFragmentKill() {
-		switch (destroyedFragments) {
-			case 1:
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_01());
-				break;
-			case 2:
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_02());
-				break;
-			case 3:
-				deleteNpcs(instance.getNpcs(701589));
-				spawn(700957, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79);
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_03());
-				break;
-		}
+			switch (destroyedFragments) {
+					case 1 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_01());
+					case 2 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_02());
+					case 3 -> {
+							deleteNpcs(instance.getNpcs(701589));
+							spawn(700957, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79);
+							sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_03());
+					}
+			}
 	}
 }

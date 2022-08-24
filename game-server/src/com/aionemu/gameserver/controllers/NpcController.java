@@ -111,6 +111,7 @@ public class NpcController extends CreatureController<Npc> {
 		cancelCurrentSkill(null);
 		owner.getEffectController().removeAllEffects();
 		DropService.getInstance().unregisterDrop(owner);
+		owner.getPosition().getWorldMapInstance().getInstanceHandler().onDespawn(owner);
 		owner.getAi().onGeneralEvent(AIEventType.DESPAWNED);
 		getOwner().getObserveController().clear();
 		super.onDespawn();
@@ -295,7 +296,7 @@ public class NpcController extends CreatureController<Npc> {
 
 	@Override
 	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
-                         boolean allowGodstoneActivation, HopType hopType) {
+		boolean allowGodstoneActivation, HopType hopType) {
 		if (getOwner().isDead())
 			return;
 		final Creature actingCreature;

@@ -153,6 +153,7 @@ public class DragonLordsRefugeInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
 			case 219359: // Calindi Flamelord
 				despawnNpc(730695); // Surkana

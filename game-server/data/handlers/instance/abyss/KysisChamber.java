@@ -39,53 +39,23 @@ public class KysisChamber extends AbstractInnerUpperAbyssInstance {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
-			case 215145:
-				openDoor(5);
-				break;
-			case 215146:
-				openDoor(10);
-				break;
-			case 215147:
-				openDoor(30);
-				break;
-			case 215148:
-				openDoor(6);
-				break;
-			case 215157:
-				openDoor(29);
-				break;
-			case 215158:
-				openDoor(31);
-				break;
-			case 215159:
-				openDoor(12);
-				break;
-			case 215160:
-				openDoor(32);
-				break;
-			case 215169:
-				openDoor(8);
-				break;
-			case 215170:
-				openDoor(9);
-				break;
-			case 215171:
-				openDoor(13);
-				break;
-			case 215172:
-				openDoor(7);
-				break;
-			case 215177:
-				openDoor(16);
-				break;
-			case 215178:
-			case 215179:
-				spawnChests();
-				break;
-			case 215414:
-				switchToEasyMode();
-				break;
+			case 215145 -> openDoor(5);
+			case 215146 -> openDoor(10);
+			case 215147 -> openDoor(30);
+			case 215148 -> openDoor(6);
+			case 215157 -> openDoor(29);
+			case 215158 -> openDoor(31);
+			case 215159 -> openDoor(12);
+			case 215160 -> openDoor(32);
+			case 215169 -> openDoor(8);
+			case 215170 -> openDoor(9);
+			case 215171 -> openDoor(13);
+			case 215172 -> openDoor(7);
+			case 215177 -> openDoor(16);
+			case 215178, 215179 -> spawnChests();
+			case 215414 -> switchToEasyMode();
 		}
 	}
 

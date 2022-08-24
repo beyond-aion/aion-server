@@ -26,8 +26,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class SeizedDanuarSanctuaryInstance extends GeneralInstanceHandler {
 
 	private Race instanceRace;
-	private AtomicBoolean started = new AtomicBoolean(false);
-	private AtomicBoolean cannonUsed = new AtomicBoolean(false);
+	private final AtomicBoolean started = new AtomicBoolean(false);
+	private final AtomicBoolean cannonUsed = new AtomicBoolean(false);
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
@@ -45,6 +45,7 @@ public class SeizedDanuarSanctuaryInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
 			case 233187:
 				spawn(233087, 906.4945f, 861.5854f, 280.5441f, (byte) 73, 1699);
@@ -113,22 +114,22 @@ public class SeizedDanuarSanctuaryInstance extends GeneralInstanceHandler {
 	private void spawnQuestNpcs() {
 		if (instanceRace == Race.ELYOS) {
 			spawn(233129, 1022.065f, 465.547f, 290.2684f, (byte) 10);
-			spawn(233129 , 867.786f, 911.695f, 293.007f, (byte) 80);
+			spawn(233129, 867.786f, 911.695f, 293.007f, (byte) 80);
 			spawn(233129, 1068.531f, 481.1384f, 285.4618f, (byte) 110);
-			spawn(233129 , 920.645f, 923.6408f, 293.1628f, (byte) 110);
+			spawn(233129, 920.645f, 923.6408f, 293.1628f, (byte) 110);
 			spawn(233130, 1034.348f, 482.7226f, 290.3569f, (byte) 40);
 			spawn(233130, 972.4765f, 1327.148f, 335.876f, (byte) 100);
 			spawn(233131, 1103.7655f, 440.8195f, 284.6165f, (byte) 70);
-			spawn(233131 , 954.9696f, 910.779f, 299.523f, (byte) 110);
+			spawn(233131, 954.9696f, 910.779f, 299.523f, (byte) 110);
 		} else {
 			spawn(233126, 1022.065f, 465.547f, 290.2684f, (byte) 10);
 			spawn(233126, 1068.531f, 481.1384f, 285.4618f, (byte) 110);
-			spawn(233126 , 867.786f, 911.695f, 293.007f, (byte) 80);
-			spawn(233126 , 920.645f, 923.6408f, 293.1628f, (byte) 110);
+			spawn(233126, 867.786f, 911.695f, 293.007f, (byte) 80);
+			spawn(233126, 920.645f, 923.6408f, 293.1628f, (byte) 110);
 			spawn(233127, 1034.348f, 482.7226f, 290.3569f, (byte) 40);
 			spawn(233127, 972.4765f, 1327.148f, 335.876f, (byte) 100);
 			spawn(233128, 1103.7655f, 440.8195f, 284.6165f, (byte) 70);
-			spawn(233128 , 954.9696f, 910.779f, 299.523f, (byte) 110);
+			spawn(233128, 954.9696f, 910.779f, 299.523f, (byte) 110);
 		}
 	}
 

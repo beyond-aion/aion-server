@@ -39,62 +39,26 @@ public class KysisBarracks extends AbstractInnerUpperAbyssInstance {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
-			case 233642:
-				openDoor(5);
-				break;
-			case 233643:
-				openDoor(10);
-				break;
-			case 233644:
-				openDoor(30);
-				break;
-			case 233645:
-				openDoor(6);
-				break;
-			case 233654:
-				openDoor(29);
-				break;
-			case 233655:
-				openDoor(31);
-				break;
-			case 233656:
-				openDoor(12);
-				break;
-			case 233657:
-				openDoor(32);
-				break;
-			case 233666:
-				openDoor(8);
-				break;
-			case 233667:
-				openDoor(9);
-				break;
-			case 233668:
-				openDoor(13);
-				break;
-			case 233669:
-				openDoor(7);
-				break;
-			case 233674:
-				openDoor(16);
-				break;
-			case 233675:
-			case 233676:
-				spawnChests();
-				break;
-			case 215414:
-				switchToEasyMode();
-				break;
-			case 235536:
-				rewardStatueKill(3000);
-				break;
-			case 235537:
-				rewardStatueKill(6000);
-				break;
-			case 235538:
-				rewardStatueKill(12000);
-				break;
+			case 233642 -> openDoor(5);
+			case 233643 -> openDoor(10);
+			case 233644 -> openDoor(30);
+			case 233645 -> openDoor(6);
+			case 233654 -> openDoor(29);
+			case 233655 -> openDoor(31);
+			case 233656 -> openDoor(12);
+			case 233657 -> openDoor(32);
+			case 233666 -> openDoor(8);
+			case 233667 -> openDoor(9);
+			case 233668 -> openDoor(13);
+			case 233669 -> openDoor(7);
+			case 233674 -> openDoor(16);
+			case 233675, 233676 -> spawnChests();
+			case 215414 -> switchToEasyMode();
+			case 235536 -> rewardStatueKill(3000);
+			case 235537 -> rewardStatueKill(6000);
+			case 235538 -> rewardStatueKill(12000);
 		}
 	}
 

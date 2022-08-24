@@ -72,7 +72,7 @@ public class CustomInstance extends AdminCommand {
 		}
 		VisibleObject target = player.getTarget();
 		if (player.getTarget() instanceof Player targetPlayer) {
-			CustomInstanceService.getInstance().changePlayerRank(targetPlayer.getObjectId(), 0, rank, 0);
+			CustomInstanceService.getInstance().changePlayerRank(targetPlayer.getObjectId(), rank, 0);
 			PacketSendUtility.sendMessage(player,
 				"Changed " + target.getName() + " to " + rank + " which is equivalent to " + CustomInstanceRankEnum.getRankDescription(rank));
 		} else {

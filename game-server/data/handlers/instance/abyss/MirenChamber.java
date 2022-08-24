@@ -39,53 +39,23 @@ public class MirenChamber extends AbstractInnerUpperAbyssInstance {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
-			case 215188:
-				openDoor(78);
-				break;
-			case 215189:
-				openDoor(77);
-				break;
-			case 215190:
-				openDoor(15);
-				break;
-			case 215191:
-				openDoor(11);
-				break;
-			case 215200:
-				openDoor(12);
-				break;
-			case 215201:
-				openDoor(7);
-				break;
-			case 215202:
-				openDoor(81);
-				break;
-			case 215203:
-				openDoor(8);
-				break;
-			case 215212:
-				openDoor(13);
-				break;
-			case 215213:
-				openDoor(75);
-				break;
-			case 215214:
-				openDoor(16);
-				break;
-			case 215215:
-				openDoor(82);
-				break;
-			case 215220:
-				openDoor(73);
-				break;
-			case 215221:
-			case 215222:
-				spawnChests();
-				break;
-			case 215415:
-				switchToEasyMode();
-				break;
+			case 215188 -> openDoor(78);
+			case 215189 -> openDoor(77);
+			case 215190 -> openDoor(15);
+			case 215191 -> openDoor(11);
+			case 215200 -> openDoor(12);
+			case 215201 -> openDoor(7);
+			case 215202 -> openDoor(81);
+			case 215203 -> openDoor(8);
+			case 215212 -> openDoor(13);
+			case 215213 -> openDoor(75);
+			case 215214 -> openDoor(16);
+			case 215215 -> openDoor(82);
+			case 215220 -> openDoor(73);
+			case 215221, 215222 -> spawnChests();
+			case 215415 -> switchToEasyMode();
 		}
 	}
 }

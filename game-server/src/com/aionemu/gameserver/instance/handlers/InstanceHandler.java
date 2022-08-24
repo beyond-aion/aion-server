@@ -60,6 +60,8 @@ public interface InstanceHandler {
 
 	void onStopTraining(Player player);
 
+	void onDespawn(Npc npc);
+
 	void onDie(Npc npc);
 
 	void onSpawn(VisibleObject obj);

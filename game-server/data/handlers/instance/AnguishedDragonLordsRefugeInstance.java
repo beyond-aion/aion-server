@@ -141,6 +141,7 @@ public class AnguishedDragonLordsRefugeInstance extends DragonLordsRefugeInstanc
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
 			case 236274: // Calindi Flamelord
 				despawnNpc(730695); // Surkana
@@ -201,11 +202,8 @@ public class AnguishedDragonLordsRefugeInstance extends DragonLordsRefugeInstanc
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
 		super.handleUseItemFinish(player, npc);
-		switch (npc.getNpcId()) {
-			case 833482: // Exit
-				TeleportService.moveToInstanceExit(player, mapId, player.getRace());
-				break;
-		}
+		if (npc.getNpcId() == 833482) // Exit
+			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
 	private void handlePhaseProgress() {

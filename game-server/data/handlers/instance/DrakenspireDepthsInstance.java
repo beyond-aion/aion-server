@@ -119,6 +119,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		int npcId = npc.getNpcId();
 		switch (npcId) {
 			case 236227: // Lava Protector

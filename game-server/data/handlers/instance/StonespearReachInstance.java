@@ -93,6 +93,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
 			// trash mobs
 			case 855765:

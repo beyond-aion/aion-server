@@ -24,7 +24,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(301380000)
 public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 
-	private AtomicBoolean cannonUsed = new AtomicBoolean(false);
+	private final AtomicBoolean cannonUsed = new AtomicBoolean(false);
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
@@ -34,6 +34,7 @@ public class DanuarSanctuaryInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
 			case 233187:
 				spawn(233087, 906.4945f, 861.5854f, 280.5441f, (byte) 73, 1699);

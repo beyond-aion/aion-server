@@ -1,5 +1,11 @@
 package com.aionemu.gameserver.instance.handlers;
 
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -8,6 +14,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.StageList;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
+import com.aionemu.gameserver.model.templates.npc.NpcRating;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -22,6 +29,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class GeneralInstanceHandler implements InstanceHandler {
 
+	protected final Logger log = LoggerFactory.getLogger("INSTANCE_LOG");
 	protected final long creationTime;
 	protected WorldMapInstance instance;
 	protected int instanceId;
@@ -136,7 +144,25 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
+	public void onDespawn(Npc npc) {
+		if (isBoss(npc) && !npc.isDead())
+			logNpcWithReason(npc, "despawned without dying.");
+	}
+
+	@Override
 	public void onDie(Npc npc) {
+		if (isBoss(npc))
+			logNpcWithReason(npc, "was killed.");
+	}
+
+	public void logNpcWithReason(Npc npc, String reason) {
+		log.info("[{}] {} (ID:{}) {} Involved player(s): {}", DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getName(), npc.getName(), npc.getNpcId(),
+			reason,
+			instance.getPlayersInside().stream().map(p -> String.format("%s (ID:%d)", p.getName(), p.getObjectId())).collect(Collectors.joining(", ")));
+	}
+
+	public boolean isBoss(Npc npc) {
+		return npc.getLevel() >= 60 && (npc.getRating() == NpcRating.HERO || npc.getRating() == NpcRating.LEGENDARY);
 	}
 
 	@Override
@@ -221,4 +247,5 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	public float getInstanceApMultiplier() {
 		return 1f;
 	}
+
 }

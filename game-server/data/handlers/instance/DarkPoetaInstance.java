@@ -76,15 +76,11 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 	private int getTime() {
 		int current = (int) (System.currentTimeMillis() - startTime);
-		switch (instanceReward.getInstanceProgressionType()) {
-			case PREPARING:
-				return 120000 - current;
-			case START_PROGRESS:
-			case END_PROGRESS:
-				return 14400000 - current;
-			default:
-				return 0;
-		}
+			return switch (instanceReward.getInstanceProgressionType()) {
+					case PREPARING -> 120000 - current;
+					case START_PROGRESS, END_PROGRESS -> 14400000 - current;
+					default -> 0;
+			};
 	}
 
 	private void sendPacket(Npc npc, int points) {

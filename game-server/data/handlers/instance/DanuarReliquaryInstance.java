@@ -19,8 +19,8 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @InstanceID(301110000)
 public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 
-	private AtomicBoolean isCursedModorActive = new AtomicBoolean();
-	private AtomicInteger cloneKills = new AtomicInteger();
+	private final AtomicBoolean isCursedModorActive = new AtomicBoolean();
+	private final AtomicInteger cloneKills = new AtomicInteger();
 	private ScheduledFuture<?> wipeTask;
 
 	protected int getExitId() {
@@ -49,6 +49,7 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		final int npcId = npc.getNpcId();
 		switch (npcId) {
 			case 284377: // Idean Obscura
@@ -59,8 +60,8 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 					spawn(getCursedModorId(), 256.62f, 257.79f, 241.79f, (byte) 90);
 					Npc cursedModor = getNpc(getCursedModorId());
 					if (cursedModor != null) {
-						//SkillEngine.getInstance().getSkill(cursedModor, 21168, 1, cursedModor).useWithoutPropSkill();
-						//sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_INDER_RUNE_START());
+						// SkillEngine.getInstance().getSkill(cursedModor, 21168, 1, cursedModor).useWithoutPropSkill();
+						// sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_INDER_RUNE_START());
 						scheduleWipe();
 					}
 				}
@@ -69,14 +70,11 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 			case 855244: // Modor's Clone
 				despawnNpcs(getFakeCloneId());
 				despawnNpc(npc);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-					@Override
-					public void run() {
-						if (cloneKills.incrementAndGet() >= 3) {
-							spawn(getEnragedModorId(), 256.62f, 257.79f, 241.79f, (byte) 90);
-						} else {
-							spawnClones();
-						}
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (cloneKills.incrementAndGet() >= 3) {
+						spawn(getEnragedModorId(), 256.62f, 257.79f, 241.79f, (byte) 90);
+					} else {
+						spawnClones();
 					}
 				}, 2000);
 				break;
@@ -96,21 +94,11 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 	private void spawnClones() {
 		int spawnCase = Rnd.get(1, 5);
 		switch (spawnCase) {
-			case 1:
-				spawn(getRealCloneId(), 255.5489f, 293.42154f, 253.78925f, (byte) 90);
-				break;
-			case 2:
-				spawn(getRealCloneId(), 232.5363f, 263.90112f, 248.65384f, (byte) 114);
-				break;
-			case 3:
-				spawn(getRealCloneId(), 240.11194f, 235.08876f, 251.14906f, (byte) 17);
-				break;
-			case 4:
-				spawn(getRealCloneId(), 271.23627f, 230.30913f, 250.92981f, (byte) 42);
-				break;
-			case 5:
-				spawn(getRealCloneId(), 284.6919f, 262.7201f, 248.75252f, (byte) 63);
-				break;
+			case 1 -> spawn(getRealCloneId(), 255.5489f, 293.42154f, 253.78925f, (byte) 90);
+			case 2 -> spawn(getRealCloneId(), 232.5363f, 263.90112f, 248.65384f, (byte) 114);
+			case 3 -> spawn(getRealCloneId(), 240.11194f, 235.08876f, 251.14906f, (byte) 17);
+			case 4 -> spawn(getRealCloneId(), 271.23627f, 230.30913f, 250.92981f, (byte) 42);
+			case 5 -> spawn(getRealCloneId(), 284.6919f, 262.7201f, 248.75252f, (byte) 63);
 		}
 
 		if (spawnCase != 1)

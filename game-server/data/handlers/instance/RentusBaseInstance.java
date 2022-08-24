@@ -33,11 +33,12 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @InstanceID(300280000)
 public class RentusBaseInstance extends GeneralInstanceHandler {
 
-	private AtomicBoolean isRaceKnown = new AtomicBoolean();
-	private AtomicBoolean isXastaEventStarted = new AtomicBoolean();
+	private final AtomicBoolean isRaceKnown = new AtomicBoolean();
+	private final AtomicBoolean isXastaEventStarted = new AtomicBoolean();
 
 	@Override
 	public void onDie(final Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
 			case 217315: // Umatha the Crazed
 				if (isDeadNpc(217316)) {
@@ -156,17 +157,12 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 
 	private void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time, final String walkern) {
 		final Npc npc = (Npc) spawn(npcId, x, y, z, h);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
+		ThreadPoolManager.getInstance().schedule(() -> {
 				npc.getSpawn().setWalkerId(walkern);
 				WalkManager.startWalking((NpcAI) npc.getAi());
 				npc.setState(CreatureState.WALK_MODE, true);
 				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
-			}
-
-		}, time);
+			}, time);
 	}
 
 	private void despawnNpc(Npc npc) {

@@ -49,19 +49,19 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 	/**
 	 * For final fight trigger
 	 */
-	private AtomicBoolean isFlyringPassed = new AtomicBoolean();
+	private final AtomicBoolean isFlyringPassed = new AtomicBoolean();
 
 	/**
 	 * The instance will start in hard mode and can be switched to an easier version due the killing
 	 * of the artifact in the room in front of the end boss (Only available in legion and level 40+ version).
 	 */
-	private AtomicBoolean isEasyMode = new AtomicBoolean();
+	private final AtomicBoolean isEasyMode = new AtomicBoolean();
 
 	/**
 	 * Needs to count passed time to reduce chest spawns. This is currently a custom feature to bring difficulty.
 	 * On retail it is not necessary to be fast to get all chests.
 	 */
-	private AtomicInteger failCounter = new AtomicInteger();
+	private final AtomicInteger failCounter = new AtomicInteger();
 
 	private Future<?> chestReductionTask;
 
@@ -186,5 +186,10 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 	protected void rewardStatueKill(int ap) {
 		int rewardAp = ap / instance.getPlayerCount();
 		instance.getPlayersInside().forEach(p -> AbyssPointsService.addAp(p, rewardAp));
+	}
+
+	@Override
+	public boolean isBoss(Npc npc) {
+		return npc.getNpcId() == getBossId();
 	}
 }

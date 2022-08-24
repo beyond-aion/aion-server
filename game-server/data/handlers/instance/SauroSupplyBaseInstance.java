@@ -90,6 +90,7 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
 			case 230837:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDVritra_Base_DoorOpen_03());
@@ -146,7 +147,7 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 			case 284446:
 				if (instance.getNpc(230857) != null && !instance.getNpc(230857).isDead()) {
 					spawn(npc.getNpcId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
-					Npc ahuradim =  instance.getNpc(230857);
+					Npc ahuradim = instance.getNpc(230857);
 					if (ahuradim != null && !ahuradim.isDead()) {
 						if (npc.getNpcId() == 284437) {
 							startGeneratorTask(Rnd.nextBoolean() ? 284445 : 284446, ahuradim);

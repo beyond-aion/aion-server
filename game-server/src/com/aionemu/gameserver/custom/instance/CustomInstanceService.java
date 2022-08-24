@@ -6,15 +6,11 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
 import com.aionemu.gameserver.dao.CustomInstanceDAO;
 import com.aionemu.gameserver.dao.CustomInstancePlayerModelEntryDAO;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -39,7 +35,6 @@ public class CustomInstanceService {
 		2425, 2565, 2778, 3331, 3643, 3663, 3683, 3705, 3729, 3788, 3789, 3833, 3835, 3837, 3839, 3904, 3991, 4407, 8291, 10164, 11011, 13010, 13234,
 		13231);
 
-	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
 	public static final int REWARD_COIN_ID = 186000409;
 	private static final int CUSTOM_INSTANCE_WORLD_ID = 300070000; // roah chamber
 	private static final int LEADERBOARD_WINDOW_OBJECT_ID = IDFactory.getInstance().nextId();
@@ -103,19 +98,15 @@ public class CustomInstanceService {
 		return DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj);
 	}
 
-	public void changePlayerRank(int playerId, int oldRank, int newRank, int achievedDps) {
+	public boolean changePlayerRank(int playerId, int newRank, int achievedDps) {
 		CustomInstanceRank rankObj = loadOrCreateRank(playerId);
 		changeRank(rankObj, newRank);
 		rankObj.setDps(achievedDps);
-		storeNewRankData(rankObj, oldRank, newRank);
+		return storeNewRankData(rankObj);
 	}
 
-	private void storeNewRankData(CustomInstanceRank rankObj, int oldRank, int newRank) {
-		if (DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj)) {
-			String name = DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(rankObj.getPlayerId());
-			log.info(String.format("[CI_ROAH] Rank changed for Player [id=%d, name=%s, oldRank=%s(%d), newRank=%s(%d)]", rankObj.getPlayerId(), name,
-				CustomInstanceRankEnum.getRankDescription(oldRank), oldRank, CustomInstanceRankEnum.getRankDescription(newRank), newRank));
-		}
+	private boolean storeNewRankData(CustomInstanceRank rankObj) {
+		return DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj);
 	}
 
 	private void changeRank(CustomInstanceRank rankObj, int newRank) {
@@ -156,35 +147,35 @@ public class CustomInstanceService {
 
 	public void openLeaderboard(Player player, Race race) {
 		List<CustomInstanceRankedPlayer> rankedPlayers = DAOManager.getDAO(CustomInstanceDAO.class).loadTop10(race);
-		String content = """
-			<br><br><br>
-			<font color='3E2601' size='4'>Eternal Challenge Leaderboard</font><br>
-			<br>
-			<img src='textures/ui/basic_sep1.dds' width='300' height='2'><br>
-			<br><br>
-			<table>
-				<tr>
-					<th align='right'><font color='3E2601'>#</font></th>
-					<th>&nbsp;&nbsp;</th>
-					<th colspan='2' align='center'><font color='3E2601'>Name</font></th>
-					<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
-					<th align='center'><font color='3E2601'>Rank</font></th>
-				</tr>
-			""";
+		StringBuilder content = new StringBuilder("""
+						<br><br><br>
+						<font color='3E2601' size='4'>Eternal Challenge Leaderboard</font><br>
+						<br>
+						<img src='textures/ui/basic_sep1.dds' width='300' height='2'><br>
+						<br><br>
+						<table>
+							<tr>
+								<th align='right'><font color='3E2601'>#</font></th>
+								<th>&nbsp;&nbsp;</th>
+								<th colspan='2' align='center'><font color='3E2601'>Name</font></th>
+								<th>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</th>
+								<th align='center'><font color='3E2601'>Rank</font></th>
+							</tr>
+						""");
 		int rank = 1;
 		for (CustomInstanceRankedPlayer p : rankedPlayers) {
-			content += "<tr>";
-			content += "  <td align='right'><font color='3E2601'>" + rank++ + "</font></td>";
-			content += "  <td></td>";
-			content += "  <td background='textures/black_smoke2.DDS'><img src='" + p.getPlayerClass().getIconImage() + "' width='24'></td>";
-			content += "  <td><font color='3E2601'>" + p.getName() + "</font></td>";
-			content += "  <td></td>";
-			content += "  <td><font color='3E2601'>" + CustomInstanceRankEnum.getRankDescription(p.getRank()) + "</font></td>";
-			content += "</tr>";
+			content.append("<tr>");
+			content.append("  <td align='right'><font color='3E2601'>").append(rank++).append("</font></td>");
+			content.append("  <td></td>");
+			content.append("  <td background='textures/black_smoke2.DDS'><img src='").append(p.getPlayerClass().getIconImage()).append("' width='24'></td>");
+			content.append("  <td><font color='3E2601'>").append(p.getName()).append("</font></td>");
+			content.append("  <td></td>");
+			content.append("  <td><font color='3E2601'>").append(CustomInstanceRankEnum.getRankDescription(p.getRank())).append("</font></td>");
+			content.append("</tr>");
 		}
-		content += "</table>";
+		content.append("</table>");
 		String page = HTMLCache.getInstance().getHTML("simplePageTemplate.xhtml");
-		HTMLService.sendData(player, LEADERBOARD_WINDOW_OBJECT_ID, page.replace("%content%", content));
+		HTMLService.sendData(player, LEADERBOARD_WINDOW_OBJECT_ID, page.replace("%content%", content.toString()));
 	}
 
 	private static class SingletonHolder {

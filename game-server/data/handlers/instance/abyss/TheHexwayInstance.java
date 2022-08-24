@@ -86,7 +86,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 					int scheduleDelaySeconds = bonusChestTimeLimitSeconds - notifyTimeSecond;
 					if (scheduleDelaySeconds > 0)
 						timerProgressMsgTasks
-							.add(ThreadPoolManager.getInstance().schedule(() -> sendTimeStringToPlayers(notifyTimeSecond), scheduleDelaySeconds * 1000));
+							.add(ThreadPoolManager.getInstance().schedule(() -> sendTimeStringToPlayers(notifyTimeSecond), scheduleDelaySeconds * 1000L));
 				}
 			}
 		} else if (flyingRing.startsWith("HEXWAY_BOSS_")) {
@@ -143,6 +143,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
 			// manager jarka
 			case 219609:
@@ -268,30 +269,30 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 
 	private void spawnBossChest(int bossIndex) {
 		switch (bossIndex) {
-			case 0:
+			case 0 -> {
 				spawn(701663, 223.6263f, 427.2576f, 364.6045f, (byte) 117);
 				spawn(701662, 223.5121f, 409.0381f, 365.0105f, (byte) 25);
-				break;
-			case 1:
+			}
+			case 1 -> {
 				spawn(701663, 195.7458f, 494.1713f, 365.0105f, (byte) 2);
 				spawn(701662, 193.7205f, 499.2636f, 365.0105f, (byte) 103);
-				break;
-			case 2:
+			}
+			case 2 -> {
 				spawn(701663, 197.9107f, 566.2823f, 365.0105f, (byte) 91);
 				spawn(701662, 181.2328f, 537.9518f, 365.0105f, (byte) 17);
-				break;
-			case 3:
+			}
+			case 3 -> {
 				spawn(701663, 185.4841f, 630.1168f, 365.0105f, (byte) 108);
 				spawn(701662, 201.0349f, 612.7051f, 364.6045f, (byte) 25);
-				break;
-			case 4:
+			}
+			case 4 -> {
 				spawn(701663, 192.4604f, 673.4794f, 365.0105f, (byte) 13);
 				spawn(701662, 213.7684f, 696.3926f, 365.0105f, (byte) 25);
-				break;
-			case 5:
+			}
+			case 5 -> {
 				spawn(701663, 241.1405f, 754.4207f, 365.0105f, (byte) 96);
 				spawn(701662, 214.3266f, 743.3648f, 365.0105f, (byte) 25);
-				break;
+			}
 		}
 	}
 

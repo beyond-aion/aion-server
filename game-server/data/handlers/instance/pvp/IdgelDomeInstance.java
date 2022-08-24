@@ -44,8 +44,8 @@ import com.aionemu.gameserver.world.WorldPosition;
 @InstanceID(301310000)
 public class IdgelDomeInstance extends GeneralInstanceHandler {
 
-	private List<WorldPosition> chestPositions = new ArrayList<>();
-	private List<Future<?>> tasks = new ArrayList<>();
+	private final List<WorldPosition> chestPositions = new ArrayList<>();
+	private final List<Future<?>> tasks = new ArrayList<>();
 	private IdgelDomeInfo idi;
 	private long startTime;
 
@@ -160,6 +160,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		Player player = npc.getAggroList().getMostPlayerDamage();
 		if (player == null)
 			return;
@@ -167,20 +168,12 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		int points = 0;
 		boolean isKunaxKilled = false;
 		switch (npc.getNpcId()) {
-			case 234186:
-			case 234187:
-			case 234189:
-				points = 120;
-				break;
-			case 234751:
-			case 234752:
-			case 234753:
-				points = 200;
-				break;
-			case 234190:
+			case 234186, 234187, 234189 -> points = 120;
+			case 234751, 234752, 234753 -> points = 200;
+			case 234190 -> {
 				points = 6000;
 				isKunaxKilled = true;
-				break;
+			}
 		}
 		if (points > 0)
 			updatePoints(points, player.getRace(), npc.getObjectTemplate().getL10n(), player);
@@ -225,18 +218,12 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
-			case 702581:
-			case 702582:
-			case 702583:
+			case 702581, 702582, 702583 -> {
 				chestPositions.add(npc.getPosition());
 				scheduleChestRespawn();
-				break;
-			case 802548:
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_FORTRESS_RE_FIRESPAWN_A());
-				break;
-			case 802549:
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_FORTRESS_RE_FIRESPAWN_B());
-				break;
+			}
+			case 802548 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_FORTRESS_RE_FIRESPAWN_A());
+			case 802549 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_FORTRESS_RE_FIRESPAWN_B());
 		}
 	}
 
@@ -287,15 +274,11 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 
 	private int getTime() {
 		int current = (int) (System.currentTimeMillis() - startTime);
-		switch (idi.getInstanceProgressionType()) {
-			case PREPARING:
-				return 120000 - current;
-			case START_PROGRESS:
-			case END_PROGRESS:
-				return 1200000 - current;
-			default:
-				return 0;
-		}
+		return switch (idi.getInstanceProgressionType()) {
+			case PREPARING -> 120000 - current;
+			case START_PROGRESS, END_PROGRESS -> 1200000 - current;
+			default -> 0;
+		};
 	}
 
 	private void updatePoints(int points, Race race, String npcL10n, Player player) {

@@ -20,18 +20,17 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Cheatkiller
- * @modified Luzien
- * @reworked Estrayl March 6th, 2018
+ * @author Cheatkiller, Luzien, Estrayl
  */
 @InstanceID(300800000)
 public class InfinityShardInstance extends GeneralInstanceHandler {
 
-	private List<Future<?>> tasks = new ArrayList<>();
-	private AtomicBoolean isRunning = new AtomicBoolean(true);
+	private final List<Future<?>> tasks = new ArrayList<>();
+	private final AtomicBoolean isRunning = new AtomicBoolean(true);
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		switch (npc.getNpcId()) {
 			case 231083:
 				instance.getNpc(231074).getEffectController().removeEffect(21371);
@@ -83,19 +82,13 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 		Creature effected = effect.getEffected();
 		if (effected instanceof Npc && ((Npc) effected).getNpcId() == 231073)
 			switch (effect.getSkillId()) {
-				case 21258:
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_CHARGER1_COMPLETED());
-					break;
-				case 21382:
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_CHARGER2_COMPLETED());
-					break;
-				case 21384:
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_CHARGER3_COMPLETED());
-					break;
-				case 21416:
+				case 21258 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_CHARGER1_COMPLETED());
+				case 21382 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_CHARGER2_COMPLETED());
+				case 21384 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_CHARGER3_COMPLETED());
+				case 21416 -> {
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_CHARGER4_COMPLETED());
 					ThreadPoolManager.getInstance().schedule(() -> failInstance(true), 12000);
-					break;
+				}
 			}
 	}
 
@@ -121,7 +114,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 		Npc hyperion = instance.getNpc(231073);
 		Player nearest = null;
 		double dist = Double.MAX_VALUE;
-		for(Player p: instance.getPlayersInside()) {
+		for (Player p : instance.getPlayersInside()) {
 			if (!p.isDead()) {
 				double locDist = PositionUtil.getDistance(hyperion, p, false);
 				if (locDist < dist) {
@@ -135,12 +128,12 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 		}
 	}
 
-
 	private void startFailTimer() {
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
 			Npc hyperion = instance.getNpc(231073);
-			if (hyperion != null && !hyperion.isDead())
+			if (hyperion != null && !hyperion.isDead()) {
 				failInstance(false);
+			}
 		}, 20 * 60 * 1000)); // 20 min
 	}
 
@@ -209,5 +202,10 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceDestroy() {
 		cancelTasks();
+	}
+
+	@Override
+	public boolean isBoss(Npc npc) {
+		return npc.getNpcId() == 231073; // Hyperion
 	}
 }

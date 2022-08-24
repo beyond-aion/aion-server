@@ -10,12 +10,11 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModel;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelController;
+import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -44,8 +43,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @author Jo, Estrayl
  */
 public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
-
-	private static final Logger log = LoggerFactory.getLogger("CUSTOM_INSTANCE_LOG");
 
 	private static final int CENTER_ARTIFACT_ID = 234029;
 	private static final int TRASH_MOB_ID = 218483;
@@ -239,11 +236,11 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	}
 
 	private void setAverageDpsByPlayerClass(PlayerClass playerClass) {
-			avgClassDps = switch (playerClass) {
-					case TEMPLAR, CHANTER -> 2500;
-					case SORCERER, SPIRIT_MASTER -> 5000;
-					default -> 4000;
-			};
+		avgClassDps = switch (playerClass) {
+			case TEMPLAR, CHANTER -> 2500;
+			case SORCERER, SPIRIT_MASTER -> 5000;
+			default -> 4000;
+		};
 	}
 
 	private void despawnNpcs(int... npcIds) {
@@ -298,6 +295,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		cancelAllTasks();
 		if (isCompleted.compareAndSet(false, true)) {
 			int oldRank = rank;
+			Player player = instance.getPlayer(playerObjId);
 			if (success) {
 				rank++;
 				PacketSendUtility.broadcastToMap(instance,
@@ -305,7 +303,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 						+ ". Stay steadfast for tougher challenges and higher rewards!", ChatType.BRIGHT_YELLOW_CENTER));
 			} else {
 				rank = Math.max(0, --rank);
-				Player player = instance.getPlayer(playerObjId);
+
 				if (player != null) {
 					PacketSendUtility.sendPacket(player, new SM_MESSAGE(0, null,
 						"Your rank has been decreased to " + CustomInstanceRankEnum.getRankDescription(rank) + ".", ChatType.BRIGHT_YELLOW_CENTER));
@@ -314,8 +312,13 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 						ItemService.addItem(player, REWARD_COIN_ID, getRewardCoinAmount(rank), true);
 				}
 			}
-			CustomInstanceService.getInstance().changePlayerRank(playerObjId, oldRank, rank, achievedDps);
+
 			CustomInstanceService.getInstance().saveNewPlayerModelEntries(playerObjId);
+			if (CustomInstanceService.getInstance().changePlayerRank(playerObjId, rank, achievedDps)) {
+				String name = player != null ? player.getName() : DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(playerObjId);
+				log.info(String.format("[CI_ROAH] Rank changed for Player [id=%d, name=%s, oldRank=%s(%d), newRank=%s(%d)]", playerObjId, name,
+					CustomInstanceRankEnum.getRankDescription(oldRank), oldRank, CustomInstanceRankEnum.getRankDescription(rank), rank));
+			}
 		}
 	}
 

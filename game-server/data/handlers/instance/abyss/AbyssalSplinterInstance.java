@@ -17,9 +17,8 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author zhkchi
- * @reworked vlog, Luzien
- * @see http://gameguide.na.aiononline.com/aion/Abyssal+Splinter+Walkthrough
+ * @author zhkchi, vlog, Luzien
+ * @see <a href="https://aion.fandom.com/wiki/Abyssal_Splinter">Abyssal Spliter</a>
  */
 @InstanceID(300220000)
 public class AbyssalSplinterInstance extends GeneralInstanceHandler {
@@ -29,6 +28,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
+		super.onDie(npc);
 		final int npcId = npc.getNpcId();
 		switch (npcId) {
 			case 216951: // Pazuzu the Life Current
@@ -50,23 +50,13 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 					spawnDayshadeAbyssalTreasureChest();
 				} else {
 					sendMsg(npcId == 216948 ? SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_Light_Die() : SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_Dark_Die());
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-
-							if (getNpc(npcId == 216949 ? 216948 : 216949) != null) {
-								switch (npcId) {
-									case 216948:
-										spawn(216948, 447.1937f, 683.72217f, 433.1805f, (byte) 108); // rukril
-										break;
-									case 216949:
-										spawn(216949, 455.5502f, 702.09485f, 433.13727f, (byte) 108); // ebonsoul
-										break;
-								}
+					ThreadPoolManager.getInstance().schedule(() -> {
+						if (getNpc(npcId == 216949 ? 216948 : 216949) != null) {
+							switch (npcId) {
+								case 216948 -> spawn(216948, 447.1937f, 683.72217f, 433.1805f, (byte) 108); // rukril
+								case 216949 -> spawn(216949, 455.5502f, 702.09485f, 433.13727f, (byte) 108); // ebonsoul
 							}
 						}
-
 					}, 60000);
 				}
 				npc.getController().delete();
