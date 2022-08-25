@@ -3881,13 +3881,13 @@
 	</decomposable>
 	<decomposable item_id="188050572"><!-- Lesser Radiant Ops Reward -->
 		<items chance="40.0">
-			<item id="186000066" min_count="1" max_count="4" /><!-- Lesser Ancient Icon -->
+			<item id="186000066" max_count="4" /><!-- Lesser Ancient Icon -->
 		</items>
 		<items chance="30.0">
-			<item id="186000065" min_count="1" max_count="3" /><!-- Ancient Icon -->
+			<item id="186000065" max_count="3" /><!-- Ancient Icon -->
 		</items>
 		<items chance="20.0">
-			<item id="186000064" min_count="1" max_count="2" /><!-- Greater Ancient Icon -->
+			<item id="186000064" max_count="2" /><!-- Greater Ancient Icon -->
 		</items>
 		<items chance="10.0">
 			<item id="186000063" /><!-- Major Ancient Icon -->
@@ -3895,13 +3895,13 @@
 	</decomposable>
 	<decomposable item_id="188050573"><!-- Radiant Ops Reward -->
 		<items chance="40.0">
-			<item id="186000062" min_count="1" max_count="4" /><!-- Lesser Ancient Seal -->
+			<item id="186000062" max_count="4" /><!-- Lesser Ancient Seal -->
 		</items>
 		<items chance="30.0">
-			<item id="186000061" min_count="1" max_count="3" /><!-- Ancient Seal -->
+			<item id="186000061" max_count="3" /><!-- Ancient Seal -->
 		</items>
 		<items chance="20.0">
-			<item id="186000060" min_count="1" max_count="2" /><!-- Greater Ancient Seal -->
+			<item id="186000060" max_count="2" /><!-- Greater Ancient Seal -->
 		</items>
 		<items chance="10.0">
 			<item id="186000059" /><!-- Major Ancient Seal -->
@@ -3909,13 +3909,13 @@
 	</decomposable>
 	<decomposable item_id="188050574"><!-- Greater Radiant Ops Reward -->
 		<items chance="40.0">
-			<item id="186000058" min_count="1" max_count="4" /><!-- Lesser Ancient Goblet -->
+			<item id="186000058" max_count="4" /><!-- Lesser Ancient Goblet -->
 		</items>
 		<items chance="30.0">
-			<item id="186000057" min_count="1" max_count="3" /><!-- Ancient Goblet -->
+			<item id="186000057" max_count="3" /><!-- Ancient Goblet -->
 		</items>
 		<items chance="20.0">
-			<item id="186000056" min_count="1" max_count="2" /><!-- Greater Ancient Goblet -->
+			<item id="186000056" max_count="2" /><!-- Greater Ancient Goblet -->
 		</items>
 		<items chance="10.0">
 			<item id="186000055" /><!-- Major Ancient Goblet -->
@@ -3923,13 +3923,13 @@
 	</decomposable>
 	<decomposable item_id="188050575"><!-- Major Radiant Ops Reward -->
 		<items chance="40.0">
-			<item id="186000054" min_count="1" max_count="4" /><!-- Lesser Ancient Crown -->
+			<item id="186000054" max_count="4" /><!-- Lesser Ancient Crown -->
 		</items>
 		<items chance="30.0">
-			<item id="186000053" min_count="1" max_count="3" /><!-- Ancient Crown -->
+			<item id="186000053" max_count="3" /><!-- Ancient Crown -->
 		</items>
 		<items chance="20.0">
-			<item id="186000052" min_count="1" max_count="2" /><!-- Greater Ancient Crown -->
+			<item id="186000052" max_count="2" /><!-- Greater Ancient Crown -->
 		</items>
 		<items chance="10.0">
 			<item id="186000051" /><!-- Major Ancient Crown -->
@@ -3937,13 +3937,13 @@
 	</decomposable>
 	<decomposable item_id="188050576"><!-- Lesser Blood Crusade Reward -->
 		<items chance="40.0">
-			<item id="186000066" min_count="1" max_count="4" /><!-- Lesser Ancient Icon -->
+			<item id="186000066" max_count="4" /><!-- Lesser Ancient Icon -->
 		</items>
 		<items chance="30.0">
-			<item id="186000065" min_count="1" max_count="3" /><!-- Ancient Icon -->
+			<item id="186000065" max_count="3" /><!-- Ancient Icon -->
 		</items>
 		<items chance="20.0">
-			<item id="186000064" min_count="1" max_count="2" /><!-- Greater Ancient Icon -->
+			<item id="186000064" max_count="2" /><!-- Greater Ancient Icon -->
 		</items>
 		<items chance="10.0">
 			<item id="186000063" /><!-- Major Ancient Icon -->
@@ -3951,13 +3951,13 @@
 	</decomposable>
 	<decomposable item_id="188050577"><!-- Blood Crusade Reward -->
 		<items chance="40.0">
-			<item id="186000062" min_count="1" max_count="4" /><!-- Lesser Ancient Seal -->
+			<item id="186000062" max_count="4" /><!-- Lesser Ancient Seal -->
 		</items>
 		<items chance="30.0">
-			<item id="186000061" min_count="1" max_count="3" /><!-- Ancient Seal -->
+			<item id="186000061" max_count="3" /><!-- Ancient Seal -->
 		</items>
 		<items chance="20.0">
-			<item id="186000060" min_count="1" max_count="2" /><!-- Greater Ancient Seal -->
+			<item id="186000060" max_count="2" /><!-- Greater Ancient Seal -->
 		</items>
 		<items chance="10.0">
 			<item id="186000059" /><!-- Major Ancient Seal -->
@@ -3965,13 +3965,13 @@
 	</decomposable>
 	<decomposable item_id="188050578"><!-- Greater Blood Crusade Reward -->
 		<items chance="40.0">
-			<item id="186000058" min_count="1" max_count="4" /><!-- Lesser Ancient Goblet -->
+			<item id="186000058" max_count="4" /><!-- Lesser Ancient Goblet -->
 		</items>
 		<items chance="30.0">
-			<item id="186000057" min_count="1" max_count="3" /><!-- Ancient Goblet -->
+			<item id="186000057" max_count="3" /><!-- Ancient Goblet -->
 		</items>
 		<items chance="20.0">
-			<item id="186000056" min_count="1" max_count="2" /><!-- Greater Ancient Goblet -->
+			<item id="186000056" max_count="2" /><!-- Greater Ancient Goblet -->
 		</items>
 		<items chance="10.0">
 			<item id="186000055" /><!-- Major Ancient Goblet -->
@@ -3979,13 +3979,13 @@
 	</decomposable>
 	<decomposable item_id="188050579"><!-- Major Blood Crusade Reward -->
 		<items chance="40.0">
-			<item id="186000054" min_count="1" max_count="4" /><!-- Lesser Ancient Crown -->
+			<item id="186000054" max_count="4" /><!-- Lesser Ancient Crown -->
 		</items>
 		<items chance="30.0">
-			<item id="186000053" min_count="1" max_count="3" /><!-- Ancient Crown -->
+			<item id="186000053" max_count="3" /><!-- Ancient Crown -->
 		</items>
 		<items chance="20.0">
-			<item id="186000052" min_count="1" max_count="2" /><!-- Greater Ancient Crown -->
+			<item id="186000052" max_count="2" /><!-- Greater Ancient Crown -->
 		</items>
 		<items chance="10.0">
 			<item id="186000051" /><!-- Major Ancient Crown -->
@@ -4013,37 +4013,37 @@
 	</decomposable>
 	<decomposable item_id="188050584"><!-- Suspicious Old Sack -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="3" />
+			<random_item type="ENCHANTMENT" max_count="3" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050585"><!-- Suspicious Green Sack -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="4" />
+			<random_item type="ENCHANTMENT" max_count="4" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050586"><!-- Suspicious Red Sack -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="5" />
+			<random_item type="ENCHANTMENT" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050587"><!-- Suspicious Yellow Sack -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="5" />
+			<random_item type="ENCHANTMENT" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050588"><!-- Old Green Sack -->
 		<items>
-			<random_item type="MANASTONE" min_count="1" max_count="3" />
+			<random_item type="MANASTONE" max_count="3" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050589"><!-- Old Red Sack -->
 		<items>
-			<random_item type="MANASTONE" min_count="1" max_count="4" />
+			<random_item type="MANASTONE" max_count="4" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050590"><!-- Old Yellow Sack -->
 		<items>
-			<random_item type="MANASTONE" min_count="1" max_count="5" />
+			<random_item type="MANASTONE" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050591"><!-- Aurunerk's Package -->
@@ -4078,12 +4078,12 @@
 	</decomposable>
 	<decomposable item_id="188050700"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050701"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050702"><!-- Veille's 1st Grade Reward -->
@@ -4114,13 +4114,13 @@
 		<items>
 			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
 			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
-			<item id="182006281" min_count="1" /><!-- Veille's Favor -->
+			<item id="182006281" /><!-- Veille's Favor -->
 			<random_item type="ANCIENT_SEAL" min_count="3" max_count="5" />
 		</items>
 		<items>
 			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
 			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
-			<item id="182006281" min_count="1" /><!-- Veille's Favor -->
+			<item id="182006281" /><!-- Veille's Favor -->
 			<random_item type="ANCIENT_SEAL" min_count="3" max_count="5" />
 			<random_item type="ILLUSION_GODSTONE" />
 		</items>
@@ -4128,14 +4128,14 @@
 	<decomposable item_id="188050705"><!-- Veille's 4th Grade Reward -->
 		<items chance="80">
 			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
-			<item id="186000242" min_count="1" /><!-- Ceramium Medal -->
-			<item id="182006281" min_count="1" /><!-- Veille's Favor -->
+			<item id="186000242" /><!-- Ceramium Medal -->
+			<item id="182006281" /><!-- Veille's Favor -->
 			<random_item type="ANCIENT_ICON" min_count="3" max_count="5" />
 		</items>
 		<items chance="20">
 			<item id="169610112" /><!-- [Title] Vanquisher of Mastarius -->
-			<item id="186000242" min_count="1" /><!-- Ceramium Medal -->
-			<item id="182006281" min_count="1" /><!-- Veille's Favor -->
+			<item id="186000242" /><!-- Ceramium Medal -->
+			<item id="182006281" /><!-- Veille's Favor -->
 			<random_item type="ANCIENT_ICON" min_count="3" max_count="5" />
 			<random_item type="ILLUSION_GODSTONE" />
 		</items>
@@ -4168,13 +4168,13 @@
 		<items>
 			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
 			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
-			<item id="182006282" min_count="1" /><!-- Mastarius' Favor -->
+			<item id="182006282" /><!-- Mastarius' Favor -->
 			<random_item type="ANCIENT_SEAL" min_count="3" max_count="5" />
 		</items>
 		<items>
 			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
 			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
-			<item id="182006282" min_count="1" /><!-- Mastarius' Favor -->
+			<item id="182006282" /><!-- Mastarius' Favor -->
 			<random_item type="ANCIENT_SEAL" min_count="3" max_count="5" />
 			<random_item type="ILLUSION_GODSTONE" />
 		</items>
@@ -4182,21 +4182,21 @@
 	<decomposable item_id="188050709"><!-- Mastarius' 4th Grade Reward -->
 		<items chance="80">
 			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
-			<item id="186000242" min_count="1" /><!-- Ceramium Medal -->
-			<item id="182006282" min_count="1" /><!-- Mastarius' Favor -->
+			<item id="186000242" /><!-- Ceramium Medal -->
+			<item id="182006282" /><!-- Mastarius' Favor -->
 			<random_item type="ANCIENT_ICON" min_count="3" max_count="5" />
 		</items>
 		<items chance="20">
 			<item id="169610312" /><!-- [Title] Vanquisher of Veille -->
-			<item id="186000242" min_count="1" /><!-- Ceramium Medal -->
-			<item id="182006282" min_count="1" /><!-- Mastarius' Favor -->
+			<item id="186000242" /><!-- Ceramium Medal -->
+			<item id="182006282" /><!-- Mastarius' Favor -->
 			<random_item type="ANCIENT_ICON" min_count="3" max_count="5" />
 			<random_item type="ILLUSION_GODSTONE" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050710"><!-- Proposal Candy Box -->
 		<items>
-			<item id="160010015" min_count="1" max_count="10" /><!-- Proposal Candy -->
+			<item id="160010015" max_count="10" /><!-- Proposal Candy -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050711"><!-- Sweet Candy Box -->
@@ -4938,1161 +4938,1161 @@
 	</decomposable>
 	<decomposable item_id="188050753"><!-- Minor Mellow Ksellid Bundle -->
 		<items>
-			<item id="152000101" min_count="1" max_count="5" /><!-- Silver Ore -->
+			<item id="152000101" max_count="5" /><!-- Silver Ore -->
 		</items>
 		<items>
-			<item id="152000201" min_count="1" max_count="5" /><!-- Iron Ore -->
+			<item id="152000201" max_count="5" /><!-- Iron Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050754"><!-- Lesser Mellow Ksellid Bundle -->
 		<items>
-			<item id="152000102" min_count="1" max_count="5" /><!-- Gold Ore -->
+			<item id="152000102" max_count="5" /><!-- Gold Ore -->
 		</items>
 		<items>
-			<item id="152000202" min_count="1" max_count="5" /><!-- Titanium Ore -->
+			<item id="152000202" max_count="5" /><!-- Titanium Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050755"><!-- Mellow Ksellid Bundle -->
 		<items>
-			<item id="152000104" min_count="1" max_count="5" /><!-- Platinum Ore -->
+			<item id="152000104" max_count="5" /><!-- Platinum Ore -->
 		</items>
 		<items>
-			<item id="152000204" min_count="1" max_count="5" /><!-- Adamantium Ore -->
+			<item id="152000204" max_count="5" /><!-- Adamantium Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050756"><!-- Greater Mellow Ksellid Bundle -->
 		<items>
-			<item id="152000107" min_count="1" max_count="5" /><!-- Mithril Ore -->
+			<item id="152000107" max_count="5" /><!-- Mithril Ore -->
 		</items>
 		<items>
-			<item id="152000207" min_count="1" max_count="5" /><!-- Orichalcum Ore -->
+			<item id="152000207" max_count="5" /><!-- Orichalcum Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050757"><!-- Major Mellow Ksellid Bundle -->
 		<items>
-			<item id="152000113" min_count="1" max_count="5" /><!-- Malevite Ore -->
+			<item id="152000113" max_count="5" /><!-- Malevite Ore -->
 		</items>
 		<items>
-			<item id="152000117" min_count="1" max_count="5" /><!-- Malevite Miasma -->
+			<item id="152000117" max_count="5" /><!-- Malevite Miasma -->
 		</items>
 		<items>
-			<item id="152000118" min_count="1" max_count="5" /><!-- Voluspar Ore -->
+			<item id="152000118" max_count="5" /><!-- Voluspar Ore -->
 		</items>
 		<items>
-			<item id="152000214" min_count="1" max_count="5" /><!-- Drenite Ore -->
+			<item id="152000214" max_count="5" /><!-- Drenite Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050758"><!-- Minor Button-Eye Mookie Bundle -->
 		<items>
-			<item id="152000301" min_count="1" max_count="5" /><!-- Rose Quartz Ore -->
+			<item id="152000301" max_count="5" /><!-- Rose Quartz Ore -->
 		</items>
 		<items>
-			<item id="152000302" min_count="1" max_count="5" /><!-- Amethyst Ore -->
+			<item id="152000302" max_count="5" /><!-- Amethyst Ore -->
 		</items>
 		<items>
-			<item id="152000303" min_count="1" max_count="5" /><!-- Crystal Ore -->
+			<item id="152000303" max_count="5" /><!-- Crystal Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050759"><!-- Lesser Button-Eye Mookie Bundle -->
 		<items>
-			<item id="152000304" min_count="1" max_count="5" /><!-- Topaz Ore -->
+			<item id="152000304" max_count="5" /><!-- Topaz Ore -->
 		</items>
 		<items>
-			<item id="152000305" min_count="1" max_count="5" /><!-- Aquamarine Ore -->
+			<item id="152000305" max_count="5" /><!-- Aquamarine Ore -->
 		</items>
 		<items>
-			<item id="152000306" min_count="1" max_count="5" /><!-- Zircon Ore -->
+			<item id="152000306" max_count="5" /><!-- Zircon Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050760"><!-- Button-Eye Mookie Bundle -->
 		<items>
-			<item id="152000307" min_count="1" max_count="5" /><!-- Garnet Ore -->
+			<item id="152000307" max_count="5" /><!-- Garnet Ore -->
 		</items>
 		<items>
-			<item id="152000309" min_count="1" max_count="5" /><!-- Lazuli Ore -->
+			<item id="152000309" max_count="5" /><!-- Lazuli Ore -->
 		</items>
 		<items>
-			<item id="152000311" min_count="1" max_count="5" /><!-- Moonstone Ore -->
+			<item id="152000311" max_count="5" /><!-- Moonstone Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050761"><!-- Greater Button-Eye Mookie Bundle -->
 		<items>
-			<item id="152000313" min_count="1" max_count="5" /><!-- Ruby Ore -->
+			<item id="152000313" max_count="5" /><!-- Ruby Ore -->
 		</items>
 		<items>
-			<item id="152000315" min_count="1" max_count="5" /><!-- Sapphire Ore -->
+			<item id="152000315" max_count="5" /><!-- Sapphire Ore -->
 		</items>
 		<items>
-			<item id="152000317" min_count="1" max_count="5" /><!-- Diamond Ore -->
+			<item id="152000317" max_count="5" /><!-- Diamond Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050762"><!-- Major Button-Eye Mookie Bundle -->
 		<items>
-			<item id="152000320" min_count="1" max_count="5" /><!-- Corundum Ore -->
+			<item id="152000320" max_count="5" /><!-- Corundum Ore -->
 		</items>
 		<items>
-			<item id="152000322" min_count="1" max_count="5" /><!-- Turquoise Ore -->
+			<item id="152000322" max_count="5" /><!-- Turquoise Ore -->
 		</items>
 		<items>
-			<item id="152000324" min_count="1" max_count="5" /><!-- Elatrite Ore -->
+			<item id="152000324" max_count="5" /><!-- Elatrite Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050763"><!-- Minor Pudgy Porgus Bundle -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="5" />
+			<random_item type="ENCHANTMENT" max_count="5" />
 		</items>
 		<items>
-			<random_item type="MANASTONE" min_count="1" max_count="5" />
+			<random_item type="MANASTONE" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050764"><!-- Lesser Pudgy Porgus Bundle -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="5" />
+			<random_item type="ENCHANTMENT" max_count="5" />
 		</items>
 		<items>
-			<random_item type="MANASTONE" min_count="1" max_count="5" />
+			<random_item type="MANASTONE" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050765"><!-- Pudgy Porgus Bundle -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="5" />
+			<random_item type="ENCHANTMENT" max_count="5" />
 		</items>
 		<items>
-			<random_item type="MANASTONE" min_count="1" max_count="5" />
+			<random_item type="MANASTONE" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050766"><!-- Greater Pudgy Porgus Bundle -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="5" />
+			<random_item type="ENCHANTMENT" max_count="5" />
 		</items>
 		<items>
-			<random_item type="MANASTONE" min_count="1" max_count="5" />
+			<random_item type="MANASTONE" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050767"><!-- Major Pudgy Porgus Bundle -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="5" />
+			<random_item type="ENCHANTMENT" max_count="5" />
 		</items>
 		<items>
-			<random_item type="MANASTONE" min_count="1" max_count="5" />
+			<random_item type="MANASTONE" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188050768"><!-- Minor Aether Bundle -->
 		<items>
-			<item id="152000901" min_count="1" max_count="5" /><!-- Aether Powder -->
+			<item id="152000901" max_count="5" /><!-- Aether Powder -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050769"><!-- Lesser Aether Bundle -->
 		<items>
-			<item id="152000902" min_count="1" max_count="5" /><!-- Aether Crystal -->
+			<item id="152000902" max_count="5" /><!-- Aether Crystal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050770"><!-- Aether Bundle -->
 		<items>
-			<item id="152000904" min_count="1" max_count="5" /><!-- Aether Gem -->
+			<item id="152000904" max_count="5" /><!-- Aether Gem -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050771"><!-- Greater Aether Bundle -->
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 		<items>
-			<item id="152003007" min_count="1" max_count="5" /><!-- Dazzling Aether -->
+			<item id="152003007" max_count="5" /><!-- Dazzling Aether -->
 		</items>
 		<items>
-			<item id="152003008" min_count="1" max_count="5" /><!-- Luminous Aether -->
+			<item id="152003008" max_count="5" /><!-- Luminous Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050772"><!-- Major Aether Bundle -->
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 		<items>
-			<item id="152000915" min_count="1" max_count="5" /><!-- Bright Magical Aether -->
+			<item id="152000915" max_count="5" /><!-- Bright Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050773"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050774"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050775"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050776"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050777"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050778"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050779"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050780"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050781"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050782"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050783"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050784"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050785"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050786"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050787"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050788"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050789"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050790"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000002" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050791"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050792"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050793"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050794"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050795"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050796"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050797"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050798"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050799"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050800"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050801"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050802"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050803"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050804"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050805"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050806"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050807"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050808"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000003" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000003" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050809"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050810"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050811"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050812"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050813"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050814"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050815"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050816"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050817"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050818"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050819"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050820"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050821"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050822"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050823"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050824"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050825"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050826"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050827"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050828"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000004" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000004" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050829"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050830"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050831"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050832"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050833"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050834"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050835"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050836"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050837"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050838"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050839"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050840"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050841"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050842"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050843"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050844"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000005" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050845"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050846"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050847"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050848"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050849"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050850"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050851"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050852"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050853"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050854"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050855"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050856"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050857"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050858"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050859"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050860"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050861"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050862"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000018" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050863"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050864"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050865"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050866"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050867"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050868"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050869"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050870"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050871"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050872"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050873"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050874"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050875"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050876"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050877"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050878"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050879"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050880"><!-- Bronze Coin Chest -->
 		<items>
-			<item id="186000007" min_count="1" max_count="10" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="10" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050881"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050882"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050883"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050884"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050885"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050886"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050887"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050888"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050889"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050890"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050891"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050892"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050893"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050894"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050895"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050896"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050897"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050898"><!-- Silver Coin Chest -->
 		<items>
-			<item id="186000008" min_count="1" max_count="10" /><!-- Silver Coin -->
+			<item id="186000008" max_count="10" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050899"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050900"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050901"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050902"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050903"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050904"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050905"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050906"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050907"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050908"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050909"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050910"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050911"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050912"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050913"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050914"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050915"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050916"><!-- Gold Coin Chest -->
 		<items>
-			<item id="186000009" min_count="1" max_count="10" /><!-- Gold Coin -->
+			<item id="186000009" max_count="10" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050917"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050918"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050919"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050920"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050921"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050922"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050923"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050924"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050925"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050926"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050927"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050928"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050929"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050930"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050931"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050932"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050933"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050934"><!-- Platinum Coin Chest -->
 		<items>
-			<item id="186000010" min_count="1" max_count="10" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="10" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050935"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050936"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050937"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050938"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050939"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050940"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050941"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050942"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050943"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050944"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050945"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050946"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050947"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050948"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050949"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050950"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050951"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050952"><!-- Mithril Coin Chest -->
 		<items>
-			<item id="186000019" min_count="1" max_count="10" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="10" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050953"><!-- Minor Azure Drakie Bundle -->
 		<items>
-			<item id="152014001" min_count="1" max_count="5" /><!-- Thick Balaur Horn -->
+			<item id="152014001" max_count="5" /><!-- Thick Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014002" min_count="1" max_count="5" /><!-- Thick Balaur Scale -->
+			<item id="152014002" max_count="5" /><!-- Thick Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014003" min_count="1" max_count="5" /><!-- Thick Balaur Skin -->
+			<item id="152014003" max_count="5" /><!-- Thick Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014004" min_count="1" max_count="5" /><!-- Cold Balaur Blood Stain -->
+			<item id="152014004" max_count="5" /><!-- Cold Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014005" min_count="1" max_count="5" /><!-- Tough Balaur Meat -->
+			<item id="152014005" max_count="5" /><!-- Tough Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050954"><!-- Lesser Azure Drakie Bundle -->
 		<items>
-			<item id="152014006" min_count="1" max_count="5" /><!-- Hard Balaur Horn -->
+			<item id="152014006" max_count="5" /><!-- Hard Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014007" min_count="1" max_count="5" /><!-- Hard Balaur Scale -->
+			<item id="152014007" max_count="5" /><!-- Hard Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014008" min_count="1" max_count="5" /><!-- Hard Balaur Skin -->
+			<item id="152014008" max_count="5" /><!-- Hard Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014009" min_count="1" max_count="5" /><!-- Hot Balaur Blood Stain -->
+			<item id="152014009" max_count="5" /><!-- Hot Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014010" min_count="1" max_count="5" /><!-- Tender Balaur Meat -->
+			<item id="152014010" max_count="5" /><!-- Tender Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050955"><!-- Azure Drakie Bundle -->
 		<items>
-			<item id="152014011" min_count="1" max_count="5" /><!-- Solid Balaur Horn -->
+			<item id="152014011" max_count="5" /><!-- Solid Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014012" min_count="1" max_count="5" /><!-- Solid Balaur Scale -->
+			<item id="152014012" max_count="5" /><!-- Solid Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014013" min_count="1" max_count="5" /><!-- Solid Balaur Skin -->
+			<item id="152014013" max_count="5" /><!-- Solid Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014014" min_count="1" max_count="5" /><!-- Boiling Balaur Blood Stain -->
+			<item id="152014014" max_count="5" /><!-- Boiling Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014015" min_count="1" max_count="5" /><!-- Fresh Balaur Meat -->
+			<item id="152014015" max_count="5" /><!-- Fresh Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050956"><!-- Greater Azure Drakie Bundle -->
 		<items>
-			<item id="152014016" min_count="1" max_count="5" /><!-- Firm Balaur Horn -->
+			<item id="152014016" max_count="5" /><!-- Firm Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014017" min_count="1" max_count="5" /><!-- Firm Balaur Scale -->
+			<item id="152014017" max_count="5" /><!-- Firm Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014018" min_count="1" max_count="5" /><!-- Firm Balaur Skin -->
+			<item id="152014018" max_count="5" /><!-- Firm Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014019" min_count="1" max_count="5" /><!-- Burning Balaur Blood Stain -->
+			<item id="152014019" max_count="5" /><!-- Burning Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014020" min_count="1" max_count="5" /><!-- Lustrous Balaur Meat -->
+			<item id="152014020" max_count="5" /><!-- Lustrous Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050957" /><!-- Major Azure Drakie Bundle -->
 	<decomposable item_id="188050958"><!-- Lesser Tin Narky Gift -->
 		<items>
-			<item id="152000901" min_count="1" max_count="5" /><!-- Aether Powder -->
+			<item id="152000901" max_count="5" /><!-- Aether Powder -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050959"><!-- Tin Narky Gift -->
 		<items>
-			<item id="152000902" min_count="1" max_count="5" /><!-- Aether Crystal -->
+			<item id="152000902" max_count="5" /><!-- Aether Crystal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050960"><!-- Greater Tin Narky Gift -->
 		<items>
-			<item id="152000904" min_count="1" max_count="5" /><!-- Aether Gem -->
+			<item id="152000904" max_count="5" /><!-- Aether Gem -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050961"><!-- Lesser Pudgy Porgus Gift -->
@@ -6112,136 +6112,136 @@
 	</decomposable>
 	<decomposable item_id="188050964"><!-- Lesser Azure Drakie Gift -->
 		<items>
-			<item id="152014001" min_count="1" max_count="5" /><!-- Thick Balaur Horn -->
+			<item id="152014001" max_count="5" /><!-- Thick Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014002" min_count="1" max_count="5" /><!-- Thick Balaur Scale -->
+			<item id="152014002" max_count="5" /><!-- Thick Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014003" min_count="1" max_count="5" /><!-- Thick Balaur Skin -->
+			<item id="152014003" max_count="5" /><!-- Thick Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014004" min_count="1" max_count="5" /><!-- Cold Balaur Blood Stain -->
+			<item id="152014004" max_count="5" /><!-- Cold Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014005" min_count="1" max_count="5" /><!-- Tough Balaur Meat -->
+			<item id="152014005" max_count="5" /><!-- Tough Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050965"><!-- Azure Drakie Gift -->
 		<items>
-			<item id="152014006" min_count="1" max_count="5" /><!-- Hard Balaur Horn -->
+			<item id="152014006" max_count="5" /><!-- Hard Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014007" min_count="1" max_count="5" /><!-- Hard Balaur Scale -->
+			<item id="152014007" max_count="5" /><!-- Hard Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014008" min_count="1" max_count="5" /><!-- Hard Balaur Skin -->
+			<item id="152014008" max_count="5" /><!-- Hard Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014009" min_count="1" max_count="5" /><!-- Hot Balaur Blood Stain -->
+			<item id="152014009" max_count="5" /><!-- Hot Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014010" min_count="1" max_count="5" /><!-- Tender Balaur Meat -->
+			<item id="152014010" max_count="5" /><!-- Tender Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050966"><!-- Greater Azure Drakie Gift -->
 		<items>
-			<item id="152014011" min_count="1" max_count="5" /><!-- Solid Balaur Horn -->
+			<item id="152014011" max_count="5" /><!-- Solid Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014012" min_count="1" max_count="5" /><!-- Solid Balaur Scale -->
+			<item id="152014012" max_count="5" /><!-- Solid Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014013" min_count="1" max_count="5" /><!-- Solid Balaur Skin -->
+			<item id="152014013" max_count="5" /><!-- Solid Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014014" min_count="1" max_count="5" /><!-- Boiling Balaur Blood Stain -->
+			<item id="152014014" max_count="5" /><!-- Boiling Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014015" min_count="1" max_count="5" /><!-- Fresh Balaur Meat -->
+			<item id="152014015" max_count="5" /><!-- Fresh Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050967"><!-- Minor Tin Narky Bundle -->
 		<items>
-			<item id="152000901" min_count="1" max_count="5" /><!-- Aether Powder -->
+			<item id="152000901" max_count="5" /><!-- Aether Powder -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050968"><!-- Lesser Tin Narky Bundle -->
 		<items>
-			<item id="152000902" min_count="1" max_count="5" /><!-- Aether Crystal -->
+			<item id="152000902" max_count="5" /><!-- Aether Crystal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050969"><!-- Tin Narky Bundle -->
 		<items>
-			<item id="152000904" min_count="1" max_count="5" /><!-- Aether Gem -->
+			<item id="152000904" max_count="5" /><!-- Aether Gem -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050970"><!-- Greater Tin Narky Bundle -->
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 		<items>
-			<item id="152000912" min_count="1" max_count="5" /><!-- Greater Magical Aether -->
+			<item id="152000912" max_count="5" /><!-- Greater Magical Aether -->
 		</items>
 		<items>
-			<item id="152000913" min_count="1" max_count="5" /><!-- Pure Magical Aether -->
+			<item id="152000913" max_count="5" /><!-- Pure Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050971"><!-- Major Tin Narky Bundle -->
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 		<items>
-			<item id="152000912" min_count="1" max_count="5" /><!-- Greater Magical Aether -->
+			<item id="152000912" max_count="5" /><!-- Greater Magical Aether -->
 		</items>
 		<items>
-			<item id="152000913" min_count="1" max_count="5" /><!-- Pure Magical Aether -->
+			<item id="152000913" max_count="5" /><!-- Pure Magical Aether -->
 		</items>
 		<items>
-			<item id="152000914" min_count="1" max_count="5" /><!-- Brilliant Magical Aether -->
+			<item id="152000914" max_count="5" /><!-- Brilliant Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050972"><!-- Minor Pink Griffo Bundle -->
 		<items>
-			<item id="152000901" min_count="1" max_count="5" /><!-- Aether Powder -->
+			<item id="152000901" max_count="5" /><!-- Aether Powder -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050973"><!-- Lesser Pink Griffo Bundle -->
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050974"><!-- Pink Griffo Bundle -->
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 		<items>
-			<item id="152000912" min_count="1" max_count="5" /><!-- Greater Magical Aether -->
+			<item id="152000912" max_count="5" /><!-- Greater Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050975"><!-- Greater Pink Griffo Bundle -->
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 		<items>
-			<item id="152000912" min_count="1" max_count="5" /><!-- Greater Magical Aether -->
+			<item id="152000912" max_count="5" /><!-- Greater Magical Aether -->
 		</items>
 		<items>
-			<item id="152000913" min_count="1" max_count="5" /><!-- Pure Magical Aether -->
+			<item id="152000913" max_count="5" /><!-- Pure Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050976"><!-- Major Pink Griffo Bundle -->
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 		<items>
-			<item id="152000912" min_count="1" max_count="5" /><!-- Greater Magical Aether -->
+			<item id="152000912" max_count="5" /><!-- Greater Magical Aether -->
 		</items>
 		<items>
-			<item id="152000913" min_count="1" max_count="5" /><!-- Pure Magical Aether -->
+			<item id="152000913" max_count="5" /><!-- Pure Magical Aether -->
 		</items>
 		<items>
-			<item id="152000914" min_count="1" max_count="5" /><!-- Brilliant Magical Aether -->
+			<item id="152000914" max_count="5" /><!-- Brilliant Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050977"><!-- Minor Teasing Jefi Bundle -->
@@ -6301,46 +6301,46 @@
 	</decomposable>
 	<decomposable item_id="188050988"><!-- Minor Rotund Ayas Bundle -->
 		<items>
-			<item id="169240001" min_count="1" max_count="5" /><!-- Wiki Petal -->
+			<item id="169240001" max_count="5" /><!-- Wiki Petal -->
 		</items>
 		<items>
-			<item id="169240002" min_count="1" max_count="5" /><!-- Omblic Petal -->
+			<item id="169240002" max_count="5" /><!-- Omblic Petal -->
 		</items>
 		<items>
-			<item id="169240003" min_count="1" max_count="5" /><!-- Meon Petal -->
+			<item id="169240003" max_count="5" /><!-- Meon Petal -->
 		</items>
 		<items>
-			<item id="169240004" min_count="1" max_count="5" /><!-- Ormea Petal -->
+			<item id="169240004" max_count="5" /><!-- Ormea Petal -->
 		</items>
 		<items>
-			<item id="169240005" min_count="1" max_count="5" /><!-- Tange Petal -->
+			<item id="169240005" max_count="5" /><!-- Tange Petal -->
 		</items>
 		<items>
-			<item id="169240006" min_count="1" max_count="5" /><!-- Ervio Petal -->
+			<item id="169240006" max_count="5" /><!-- Ervio Petal -->
 		</items>
 		<items>
-			<item id="169240007" min_count="1" max_count="5" /><!-- Lunime Petal -->
+			<item id="169240007" max_count="5" /><!-- Lunime Petal -->
 		</items>
 		<items>
-			<item id="169240008" min_count="1" max_count="5" /><!-- Vinna Petal -->
+			<item id="169240008" max_count="5" /><!-- Vinna Petal -->
 		</items>
 		<items>
-			<item id="169240009" min_count="1" max_count="5" /><!-- Kirka Petal -->
+			<item id="169240009" max_count="5" /><!-- Kirka Petal -->
 		</items>
 		<items>
-			<item id="169240010" min_count="1" max_count="5" /><!-- Brommel Petal -->
+			<item id="169240010" max_count="5" /><!-- Brommel Petal -->
 		</items>
 		<items>
-			<item id="169240011" min_count="1" max_count="5" /><!-- Pressa Petal -->
+			<item id="169240011" max_count="5" /><!-- Pressa Petal -->
 		</items>
 		<items>
-			<item id="169240012" min_count="1" max_count="5" /><!-- Merone Petal -->
+			<item id="169240012" max_count="5" /><!-- Merone Petal -->
 		</items>
 		<items>
-			<item id="169240013" min_count="1" max_count="5" /><!-- Kukar Petal -->
+			<item id="169240013" max_count="5" /><!-- Kukar Petal -->
 		</items>
 		<items>
-			<item id="169240014" min_count="1" max_count="5" /><!-- Leopis Petal -->
+			<item id="169240014" max_count="5" /><!-- Leopis Petal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188050989"><!-- Lesser Rotund Ayas Bundle -->
@@ -6581,169 +6581,169 @@
 	</decomposable>
 	<decomposable item_id="188051013"><!-- Minor Golden Drakie Bundle -->
 		<items>
-			<item id="152014001" min_count="1" max_count="5" /><!-- Thick Balaur Horn -->
+			<item id="152014001" max_count="5" /><!-- Thick Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014002" min_count="1" max_count="5" /><!-- Thick Balaur Scale -->
+			<item id="152014002" max_count="5" /><!-- Thick Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014003" min_count="1" max_count="5" /><!-- Thick Balaur Skin -->
+			<item id="152014003" max_count="5" /><!-- Thick Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014004" min_count="1" max_count="5" /><!-- Cold Balaur Blood Stain -->
+			<item id="152014004" max_count="5" /><!-- Cold Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014005" min_count="1" max_count="5" /><!-- Tough Balaur Meat -->
+			<item id="152014005" max_count="5" /><!-- Tough Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051014"><!-- Lesser Golden Drakie Bundle -->
 		<items>
-			<item id="152014006" min_count="1" max_count="5" /><!-- Hard Balaur Horn -->
+			<item id="152014006" max_count="5" /><!-- Hard Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014007" min_count="1" max_count="5" /><!-- Hard Balaur Scale -->
+			<item id="152014007" max_count="5" /><!-- Hard Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014008" min_count="1" max_count="5" /><!-- Hard Balaur Skin -->
+			<item id="152014008" max_count="5" /><!-- Hard Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014009" min_count="1" max_count="5" /><!-- Hot Balaur Blood Stain -->
+			<item id="152014009" max_count="5" /><!-- Hot Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014010" min_count="1" max_count="5" /><!-- Tender Balaur Meat -->
+			<item id="152014010" max_count="5" /><!-- Tender Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051015"><!-- Golden Drakie Bundle -->
 		<items>
-			<item id="152014011" min_count="1" max_count="5" /><!-- Solid Balaur Horn -->
+			<item id="152014011" max_count="5" /><!-- Solid Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014012" min_count="1" max_count="5" /><!-- Solid Balaur Scale -->
+			<item id="152014012" max_count="5" /><!-- Solid Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014013" min_count="1" max_count="5" /><!-- Solid Balaur Skin -->
+			<item id="152014013" max_count="5" /><!-- Solid Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014014" min_count="1" max_count="5" /><!-- Boiling Balaur Blood Stain -->
+			<item id="152014014" max_count="5" /><!-- Boiling Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014015" min_count="1" max_count="5" /><!-- Fresh Balaur Meat -->
+			<item id="152014015" max_count="5" /><!-- Fresh Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051016"><!-- Greater Golden Drakie Bundle -->
 		<items>
-			<item id="152014016" min_count="1" max_count="5" /><!-- Firm Balaur Horn -->
+			<item id="152014016" max_count="5" /><!-- Firm Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014017" min_count="1" max_count="5" /><!-- Firm Balaur Scale -->
+			<item id="152014017" max_count="5" /><!-- Firm Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014018" min_count="1" max_count="5" /><!-- Firm Balaur Skin -->
+			<item id="152014018" max_count="5" /><!-- Firm Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014019" min_count="1" max_count="5" /><!-- Burning Balaur Blood Stain -->
+			<item id="152014019" max_count="5" /><!-- Burning Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014020" min_count="1" max_count="5" /><!-- Lustrous Balaur Meat -->
+			<item id="152014020" max_count="5" /><!-- Lustrous Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051017"><!-- Major Golden Drakie Bundle -->
 		<items>
-			<item id="152014016" min_count="1" max_count="5" /><!-- Firm Balaur Horn -->
+			<item id="152014016" max_count="5" /><!-- Firm Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014017" min_count="1" max_count="5" /><!-- Firm Balaur Scale -->
+			<item id="152014017" max_count="5" /><!-- Firm Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014018" min_count="1" max_count="5" /><!-- Firm Balaur Skin -->
+			<item id="152014018" max_count="5" /><!-- Firm Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014019" min_count="1" max_count="5" /><!-- Burning Balaur Blood Stain -->
+			<item id="152014019" max_count="5" /><!-- Burning Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014020" min_count="1" max_count="5" /><!-- Lustrous Balaur Meat -->
+			<item id="152014020" max_count="5" /><!-- Lustrous Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051018"><!-- Minor Sunset Drakie Bundle -->
 		<items>
-			<item id="152014001" min_count="1" max_count="5" /><!-- Thick Balaur Horn -->
+			<item id="152014001" max_count="5" /><!-- Thick Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014002" min_count="1" max_count="5" /><!-- Thick Balaur Scale -->
+			<item id="152014002" max_count="5" /><!-- Thick Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014003" min_count="1" max_count="5" /><!-- Thick Balaur Skin -->
+			<item id="152014003" max_count="5" /><!-- Thick Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014004" min_count="1" max_count="5" /><!-- Cold Balaur Blood Stain -->
+			<item id="152014004" max_count="5" /><!-- Cold Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014005" min_count="1" max_count="5" /><!-- Tough Balaur Meat -->
+			<item id="152014005" max_count="5" /><!-- Tough Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051019"><!-- Lesser Sunset Drakie Bundle -->
 		<items>
-			<item id="152014006" min_count="1" max_count="5" /><!-- Hard Balaur Horn -->
+			<item id="152014006" max_count="5" /><!-- Hard Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014007" min_count="1" max_count="5" /><!-- Hard Balaur Scale -->
+			<item id="152014007" max_count="5" /><!-- Hard Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014008" min_count="1" max_count="5" /><!-- Hard Balaur Skin -->
+			<item id="152014008" max_count="5" /><!-- Hard Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014009" min_count="1" max_count="5" /><!-- Hot Balaur Blood Stain -->
+			<item id="152014009" max_count="5" /><!-- Hot Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014010" min_count="1" max_count="5" /><!-- Tender Balaur Meat -->
+			<item id="152014010" max_count="5" /><!-- Tender Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051020"><!-- Sunset Drakie Bundle -->
 		<items>
-			<item id="152014011" min_count="1" max_count="5" /><!-- Solid Balaur Horn -->
+			<item id="152014011" max_count="5" /><!-- Solid Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014012" min_count="1" max_count="5" /><!-- Solid Balaur Scale -->
+			<item id="152014012" max_count="5" /><!-- Solid Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014013" min_count="1" max_count="5" /><!-- Solid Balaur Skin -->
+			<item id="152014013" max_count="5" /><!-- Solid Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014014" min_count="1" max_count="5" /><!-- Boiling Balaur Blood Stain -->
+			<item id="152014014" max_count="5" /><!-- Boiling Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014015" min_count="1" max_count="5" /><!-- Fresh Balaur Meat -->
+			<item id="152014015" max_count="5" /><!-- Fresh Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051021"><!-- Greater Sunset Drakie Bundle -->
 		<items>
-			<item id="152014016" min_count="1" max_count="5" /><!-- Firm Balaur Horn -->
+			<item id="152014016" max_count="5" /><!-- Firm Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014017" min_count="1" max_count="5" /><!-- Firm Balaur Scale -->
+			<item id="152014017" max_count="5" /><!-- Firm Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014018" min_count="1" max_count="5" /><!-- Firm Balaur Skin -->
+			<item id="152014018" max_count="5" /><!-- Firm Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014019" min_count="1" max_count="5" /><!-- Burning Balaur Blood Stain -->
+			<item id="152014019" max_count="5" /><!-- Burning Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014020" min_count="1" max_count="5" /><!-- Lustrous Balaur Meat -->
+			<item id="152014020" max_count="5" /><!-- Lustrous Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051022"><!-- Major Sunset Drakie Bundle -->
 		<items>
-			<item id="152014016" min_count="1" max_count="5" /><!-- Firm Balaur Horn -->
+			<item id="152014016" max_count="5" /><!-- Firm Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014017" min_count="1" max_count="5" /><!-- Firm Balaur Scale -->
+			<item id="152014017" max_count="5" /><!-- Firm Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014018" min_count="1" max_count="5" /><!-- Firm Balaur Skin -->
+			<item id="152014018" max_count="5" /><!-- Firm Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014019" min_count="1" max_count="5" /><!-- Burning Balaur Blood Stain -->
+			<item id="152014019" max_count="5" /><!-- Burning Balaur Blood Stain -->
 		</items>
 		<items>
 			<item id="152014020" min_count="10" max_count="20" /><!-- Lustrous Balaur Meat -->
@@ -6751,39 +6751,39 @@
 	</decomposable>
 	<decomposable item_id="188051023"><!-- Minor Aqua Griffo Bundle -->
 		<items>
-			<item id="152000901" min_count="1" max_count="5" /><!-- Aether Powder -->
+			<item id="152000901" max_count="5" /><!-- Aether Powder -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051024"><!-- Lesser Aqua Griffo Bundle -->
 		<items>
-			<item id="152000902" min_count="1" max_count="5" /><!-- Aether Crystal -->
+			<item id="152000902" max_count="5" /><!-- Aether Crystal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051025"><!-- Aqua Griffo Bundle -->
 		<items>
-			<item id="152000904" min_count="1" max_count="5" /><!-- Aether Gem -->
+			<item id="152000904" max_count="5" /><!-- Aether Gem -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051026"><!-- Greater Aqua Griffo Bundle -->
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051027"><!-- Major Aqua Griffo Bundle -->
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 		<items>
-			<item id="152000912" min_count="1" max_count="5" /><!-- Greater Magical Aether -->
+			<item id="152000912" max_count="5" /><!-- Greater Magical Aether -->
 		</items>
 		<items>
-			<item id="152000913" min_count="1" max_count="5" /><!-- Pure Magical Aether -->
+			<item id="152000913" max_count="5" /><!-- Pure Magical Aether -->
 		</items>
 		<items>
-			<item id="152000914" min_count="1" max_count="5" /><!-- Brilliant Magical Aether -->
+			<item id="152000914" max_count="5" /><!-- Brilliant Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051028"><!-- Lesser Mean Poroco Gift -->
@@ -6860,152 +6860,152 @@
 	</decomposable>
 	<decomposable item_id="188051037"><!-- Lesser Golden Drakie Gift -->
 		<items>
-			<item id="152014001" min_count="1" max_count="5" /><!-- Thick Balaur Horn -->
+			<item id="152014001" max_count="5" /><!-- Thick Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014002" min_count="1" max_count="5" /><!-- Thick Balaur Scale -->
+			<item id="152014002" max_count="5" /><!-- Thick Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014003" min_count="1" max_count="5" /><!-- Thick Balaur Skin -->
+			<item id="152014003" max_count="5" /><!-- Thick Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014004" min_count="1" max_count="5" /><!-- Cold Balaur Blood Stain -->
+			<item id="152014004" max_count="5" /><!-- Cold Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014005" min_count="1" max_count="5" /><!-- Tough Balaur Meat -->
+			<item id="152014005" max_count="5" /><!-- Tough Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051038"><!-- Golden Drakie Gift -->
 		<items>
-			<item id="152014006" min_count="1" max_count="5" /><!-- Hard Balaur Horn -->
+			<item id="152014006" max_count="5" /><!-- Hard Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014007" min_count="1" max_count="5" /><!-- Hard Balaur Scale -->
+			<item id="152014007" max_count="5" /><!-- Hard Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014008" min_count="1" max_count="5" /><!-- Hard Balaur Skin -->
+			<item id="152014008" max_count="5" /><!-- Hard Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014009" min_count="1" max_count="5" /><!-- Hot Balaur Blood Stain -->
+			<item id="152014009" max_count="5" /><!-- Hot Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014010" min_count="1" max_count="5" /><!-- Tender Balaur Meat -->
+			<item id="152014010" max_count="5" /><!-- Tender Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051039"><!-- Greater Golden Drakie Gift -->
 		<items>
-			<item id="152014011" min_count="1" max_count="5" /><!-- Solid Balaur Horn -->
+			<item id="152014011" max_count="5" /><!-- Solid Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014012" min_count="1" max_count="5" /><!-- Solid Balaur Scale -->
+			<item id="152014012" max_count="5" /><!-- Solid Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014013" min_count="1" max_count="5" /><!-- Solid Balaur Skin -->
+			<item id="152014013" max_count="5" /><!-- Solid Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014014" min_count="1" max_count="5" /><!-- Boiling Balaur Blood Stain -->
+			<item id="152014014" max_count="5" /><!-- Boiling Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014015" min_count="1" max_count="5" /><!-- Fresh Balaur Meat -->
+			<item id="152014015" max_count="5" /><!-- Fresh Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051040"><!-- Lesser Sunset Drakie Gift -->
 		<items>
-			<item id="152014001" min_count="1" max_count="5" /><!-- Thick Balaur Horn -->
+			<item id="152014001" max_count="5" /><!-- Thick Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014002" min_count="1" max_count="5" /><!-- Thick Balaur Scale -->
+			<item id="152014002" max_count="5" /><!-- Thick Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014003" min_count="1" max_count="5" /><!-- Thick Balaur Skin -->
+			<item id="152014003" max_count="5" /><!-- Thick Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014004" min_count="1" max_count="5" /><!-- Cold Balaur Blood Stain -->
+			<item id="152014004" max_count="5" /><!-- Cold Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014005" min_count="1" max_count="5" /><!-- Tough Balaur Meat -->
+			<item id="152014005" max_count="5" /><!-- Tough Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051041"><!-- Sunset Drakie Gift -->
 		<items>
-			<item id="152014006" min_count="1" max_count="5" /><!-- Hard Balaur Horn -->
+			<item id="152014006" max_count="5" /><!-- Hard Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014007" min_count="1" max_count="5" /><!-- Hard Balaur Scale -->
+			<item id="152014007" max_count="5" /><!-- Hard Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014008" min_count="1" max_count="5" /><!-- Hard Balaur Skin -->
+			<item id="152014008" max_count="5" /><!-- Hard Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014009" min_count="1" max_count="5" /><!-- Hot Balaur Blood Stain -->
+			<item id="152014009" max_count="5" /><!-- Hot Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014010" min_count="1" max_count="5" /><!-- Tender Balaur Meat -->
+			<item id="152014010" max_count="5" /><!-- Tender Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051042"><!-- Greater Sunset Drakie Gift -->
 		<items>
-			<item id="152014011" min_count="1" max_count="5" /><!-- Solid Balaur Horn -->
+			<item id="152014011" max_count="5" /><!-- Solid Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014012" min_count="1" max_count="5" /><!-- Solid Balaur Scale -->
+			<item id="152014012" max_count="5" /><!-- Solid Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014013" min_count="1" max_count="5" /><!-- Solid Balaur Skin -->
+			<item id="152014013" max_count="5" /><!-- Solid Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014014" min_count="1" max_count="5" /><!-- Boiling Balaur Blood Stain -->
+			<item id="152014014" max_count="5" /><!-- Boiling Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014015" min_count="1" max_count="5" /><!-- Fresh Balaur Meat -->
+			<item id="152014015" max_count="5" /><!-- Fresh Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051043"><!-- Lesser Pink Griffo Gift -->
 		<items>
-			<item id="152000901" min_count="1" max_count="5" /><!-- Aether Powder -->
+			<item id="152000901" max_count="5" /><!-- Aether Powder -->
 		</items>
 		<items>
-			<item id="152000904" min_count="1" max_count="5" /><!-- Aether Gem -->
+			<item id="152000904" max_count="5" /><!-- Aether Gem -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051044"><!-- Pink Griffo Gift -->
 		<items>
-			<item id="152000904" min_count="1" max_count="5" /><!-- Aether Gem -->
+			<item id="152000904" max_count="5" /><!-- Aether Gem -->
 		</items>
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051045"><!-- Greater Pink Griffo Gift -->
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051046"><!-- Lesser Aqua Griffo Gift -->
 		<items>
-			<item id="152000901" min_count="1" max_count="5" /><!-- Aether Powder -->
+			<item id="152000901" max_count="5" /><!-- Aether Powder -->
 		</items>
 		<items>
-			<item id="152000904" min_count="1" max_count="5" /><!-- Aether Gem -->
+			<item id="152000904" max_count="5" /><!-- Aether Gem -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051047"><!-- Aqua Griffo Gift -->
 		<items>
-			<item id="152000904" min_count="1" max_count="5" /><!-- Aether Gem -->
+			<item id="152000904" max_count="5" /><!-- Aether Gem -->
 		</items>
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051048"><!-- Greater Aqua Griffo Gift -->
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051049" /><!-- Gorgos' Loot -->
@@ -7057,77 +7057,77 @@
 	</decomposable>
 	<decomposable item_id="188051057"><!-- Lesser Pointytail Acarun Gift -->
 		<items>
-			<item id="152014001" min_count="1" max_count="5" /><!-- Thick Balaur Horn -->
+			<item id="152014001" max_count="5" /><!-- Thick Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014002" min_count="1" max_count="5" /><!-- Thick Balaur Scale -->
+			<item id="152014002" max_count="5" /><!-- Thick Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014003" min_count="1" max_count="5" /><!-- Thick Balaur Skin -->
+			<item id="152014003" max_count="5" /><!-- Thick Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014004" min_count="1" max_count="5" /><!-- Cold Balaur Blood Stain -->
+			<item id="152014004" max_count="5" /><!-- Cold Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014005" min_count="1" max_count="5" /><!-- Tough Balaur Meat -->
+			<item id="152014005" max_count="5" /><!-- Tough Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051058"><!-- Pointytail Acarun Gift -->
 		<items>
-			<item id="152014006" min_count="1" max_count="5" /><!-- Hard Balaur Horn -->
+			<item id="152014006" max_count="5" /><!-- Hard Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014007" min_count="1" max_count="5" /><!-- Hard Balaur Scale -->
+			<item id="152014007" max_count="5" /><!-- Hard Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014008" min_count="1" max_count="5" /><!-- Hard Balaur Skin -->
+			<item id="152014008" max_count="5" /><!-- Hard Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014009" min_count="1" max_count="5" /><!-- Hot Balaur Blood Stain -->
+			<item id="152014009" max_count="5" /><!-- Hot Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014010" min_count="1" max_count="5" /><!-- Tender Balaur Meat -->
+			<item id="152014010" max_count="5" /><!-- Tender Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051059"><!-- Greater Pointytail Acarun Gift -->
 		<items>
-			<item id="152014011" min_count="1" max_count="5" /><!-- Solid Balaur Horn -->
+			<item id="152014011" max_count="5" /><!-- Solid Balaur Horn -->
 		</items>
 		<items>
-			<item id="152014012" min_count="1" max_count="5" /><!-- Solid Balaur Scale -->
+			<item id="152014012" max_count="5" /><!-- Solid Balaur Scale -->
 		</items>
 		<items>
-			<item id="152014013" min_count="1" max_count="5" /><!-- Solid Balaur Skin -->
+			<item id="152014013" max_count="5" /><!-- Solid Balaur Skin -->
 		</items>
 		<items>
-			<item id="152014014" min_count="1" max_count="5" /><!-- Boiling Balaur Blood Stain -->
+			<item id="152014014" max_count="5" /><!-- Boiling Balaur Blood Stain -->
 		</items>
 		<items>
-			<item id="152014015" min_count="1" max_count="5" /><!-- Fresh Balaur Meat -->
+			<item id="152014015" max_count="5" /><!-- Fresh Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051060"><!-- Lesser Golden Radama Gift -->
 		<items>
-			<item id="152000901" min_count="1" max_count="5" /><!-- Aether Powder -->
+			<item id="152000901" max_count="5" /><!-- Aether Powder -->
 		</items>
 		<items>
-			<item id="152000904" min_count="1" max_count="5" /><!-- Aether Gem -->
+			<item id="152000904" max_count="5" /><!-- Aether Gem -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051061"><!-- Golden Radama Gift -->
 		<items>
-			<item id="152000904" min_count="1" max_count="5" /><!-- Aether Gem -->
+			<item id="152000904" max_count="5" /><!-- Aether Gem -->
 		</items>
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051062"><!-- Greater Golden Radama Gift -->
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051063"><!-- Minor Spurred Crestlich Bundle -->
@@ -7197,36 +7197,36 @@
 	</decomposable>
 	<decomposable item_id="188051073"><!-- Minor Golden Radama Bundle -->
 		<items>
-			<item id="152000901" min_count="1" max_count="5" /><!-- Aether Powder -->
+			<item id="152000901" max_count="5" /><!-- Aether Powder -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051074"><!-- Lesser Golden Radama Bundle -->
 		<items>
-			<item id="152000902" min_count="1" max_count="5" /><!-- Aether Crystal -->
+			<item id="152000902" max_count="5" /><!-- Aether Crystal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051075"><!-- Golden Radama Bundle -->
 		<items>
-			<item id="152000904" min_count="1" max_count="5" /><!-- Aether Gem -->
+			<item id="152000904" max_count="5" /><!-- Aether Gem -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051076"><!-- Greater Golden Radama Bundle -->
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 		<items>
-			<item id="152003007" min_count="1" max_count="5" /><!-- Dazzling Aether -->
+			<item id="152003007" max_count="5" /><!-- Dazzling Aether -->
 		</items>
 		<items>
-			<item id="152003008" min_count="1" max_count="5" /><!-- Luminous Aether -->
+			<item id="152003008" max_count="5" /><!-- Luminous Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051077"><!-- Major Golden Radama Bundle -->
 		<items>
-			<item id="152000911" min_count="1" max_count="5" /><!-- Magical Aether -->
+			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 		<items>
-			<item id="152000915" min_count="1" max_count="5" /><!-- Bright Magical Aether -->
+			<item id="152000915" max_count="5" /><!-- Bright Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051078" /><!-- Lesser Hungry Porgus Gift -->
@@ -7365,7 +7365,7 @@
 	<decomposable item_id="188051098" /><!-- Command Box -->
 	<decomposable item_id="188051099"><!-- Shugo Enchantment Stone Pouch -->
 		<items>
-			<item id="166000195" min_count="1" max_count="3" /><!-- Epsilon Enchantment Stone -->
+			<item id="166000195" max_count="3" /><!-- Epsilon Enchantment Stone -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051100"><!-- Acute Shugo Set -->
@@ -7395,13 +7395,13 @@
 	</decomposable>
 	<decomposable item_id="188051103"><!-- [Event] Pumpkin King's Present Box -->
 		<items>
-			<item id="166000194" min_count="1" max_count="2" /><!-- Delta Enchantment Stone -->
+			<item id="166000194" max_count="2" /><!-- Delta Enchantment Stone -->
 		</items>
 		<items>
-			<item id="166000195" min_count="1" max_count="2" /><!-- Epsilon Enchantment Stone -->
+			<item id="166000195" max_count="2" /><!-- Epsilon Enchantment Stone -->
 		</items>
 		<items>
-			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="2" />
+			<random_item type="MANASTONE_RARE_GRADE_70" max_count="2" />
 		</items>
 		<items>
 			<item id="166030007" /><!-- [Event] Tempering Solution -->
@@ -7613,10 +7613,10 @@
 	</decomposable>
 	<decomposable item_id="188051118"><!-- [Event] Blessed Present -->
 		<items chance="10.0">
-			<item id="186000031" min_count="1" max_count="2" /><!-- Silver Medal -->
+			<item id="186000031" max_count="2" /><!-- Silver Medal -->
 		</items>
 		<items chance="10.0">
-			<item id="186000030" min_count="1" max_count="2" /><!-- Gold Medal -->
+			<item id="186000030" max_count="2" /><!-- Gold Medal -->
 		</items>
 		<items chance="25.0">
 			<random_item type="POTION" />
@@ -7636,10 +7636,10 @@
 	</decomposable>
 	<decomposable item_id="188051119"><!-- [Event] Lucky Present -->
 		<items chance="15.0">
-			<item id="186000031" min_count="1" max_count="2" /><!-- Silver Medal -->
+			<item id="186000031" max_count="2" /><!-- Silver Medal -->
 		</items>
 		<items chance="15.0">
-			<item id="186000030" min_count="1" max_count="2" /><!-- Gold Medal -->
+			<item id="186000030" max_count="2" /><!-- Gold Medal -->
 		</items>
 		<items chance="20.0">
 			<random_item type="POTION" />
@@ -8352,10 +8352,10 @@
 	</decomposable>
 	<decomposable item_id="188051160"><!-- Antique Enchantment Stone Box -->
 		<items>
-			<item id="166000194" min_count="1" max_count="5" /><!-- Delta Enchantment Stone -->
+			<item id="166000194" max_count="5" /><!-- Delta Enchantment Stone -->
 		</items>
 		<items>
-			<item id="166000195" min_count="1" max_count="5" /><!-- Epsilon Enchantment Stone -->
+			<item id="166000195" max_count="5" /><!-- Epsilon Enchantment Stone -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051161"><!-- Antique Enchantment Stone Box Bundle -->
@@ -9145,7 +9145,7 @@
 	<decomposable item_id="188051226" /><!-- Networking Daeva Gift Set -->
 	<decomposable item_id="188051227"><!-- Platinum Medal Box -->
 		<items>
-			<item id="186000096" min_count="1" max_count="10" /><!-- Platinum Medal -->
+			<item id="186000096" max_count="10" /><!-- Platinum Medal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051228"><!-- Minor Headstrong Poroco Bundle -->
@@ -10303,25 +10303,25 @@
 			<item id="125040157" /><!-- [Event] Enchanting Sorcerer Hat (7 days) -->
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_50" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_50" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_60" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_60" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_70" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_50" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_50" max_count="3" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_60" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_60" max_count="3" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_RARE_GRADE_70" max_count="5" />
 		</items>
 		<items chance="34.0">
-			<random_item type="ENCHANTMENT" min_count="1" max_count="3" />
+			<random_item type="ENCHANTMENT" max_count="3" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051333"><!-- [Event] Witch's Hoard -->
@@ -10344,25 +10344,25 @@
 			<item id="125040157" /><!-- [Event] Enchanting Sorcerer Hat (7 days) -->
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_50" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_50" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_60" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_60" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_70" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_50" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_50" max_count="3" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_60" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_60" max_count="3" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_RARE_GRADE_70" max_count="5" />
 		</items>
 		<items chance="34.0">
-			<random_item type="ENCHANTMENT" min_count="1" max_count="3" />
+			<random_item type="ENCHANTMENT" max_count="3" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051334"><!-- [Event] Witch's Surprise -->
@@ -10385,25 +10385,25 @@
 			<item id="125040157" /><!-- [Event] Enchanting Sorcerer Hat (7 days) -->
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_50" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_50" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_60" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_60" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_70" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_50" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_50" max_count="3" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_60" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_60" max_count="3" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_RARE_GRADE_70" max_count="5" />
 		</items>
 		<items chance="34.0">
-			<random_item type="ENCHANTMENT" min_count="1" max_count="3" />
+			<random_item type="ENCHANTMENT" max_count="3" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051335"><!-- [Event] Witch's Bundle -->
@@ -10426,39 +10426,39 @@
 			<item id="125040157" /><!-- [Event] Enchanting Sorcerer Hat (7 days) -->
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_50" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_50" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_60" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_60" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_COMMON_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_70" max_count="5" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_50" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_50" max_count="3" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_60" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_60" max_count="3" />
 		</items>
 		<items chance="6.0">
-			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_RARE_GRADE_70" max_count="5" />
 		</items>
 		<items chance="11.3">
-			<item id="166000193" min_count="1" max_count="3" /><!-- Gamma Enchantment Stone -->
+			<item id="166000193" max_count="3" /><!-- Gamma Enchantment Stone -->
 		</items>
 		<items chance="11.3">
-			<item id="166000194" min_count="1" max_count="3" /><!-- Delta Enchantment Stone -->
+			<item id="166000194" max_count="3" /><!-- Delta Enchantment Stone -->
 		</items>
 		<items chance="11.3">
-			<item id="166000195" min_count="1" max_count="3" /><!-- Epsilon Enchantment Stone -->
+			<item id="166000195" max_count="3" /><!-- Epsilon Enchantment Stone -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051336"><!-- [Event] Witchy Mystery -->
 		<items chance="14.0">
-			<item id="186000031" min_count="1" max_count="10" /><!-- Silver Medal -->
+			<item id="186000031" max_count="10" /><!-- Silver Medal -->
 		</items>
 		<items chance="14.0">
-			<item id="186000030" min_count="1" max_count="5" /><!-- Gold Medal -->
+			<item id="186000030" max_count="5" /><!-- Gold Medal -->
 		</items>
 		<items chance="6.0">
 			<item id="161000003" /><!-- Reviving Elemental Stone -->
@@ -10488,22 +10488,22 @@
 			<item id="125040157" /><!-- [Event] Enchanting Sorcerer Hat (7 days) -->
 		</items>
 		<items chance="5.0">
-			<random_item type="MANASTONE_COMMON_GRADE_50" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_50" max_count="5" />
 		</items>
 		<items chance="5.0">
-			<random_item type="MANASTONE_COMMON_GRADE_60" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_60" max_count="5" />
 		</items>
 		<items chance="5.0">
-			<random_item type="MANASTONE_COMMON_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_70" max_count="5" />
 		</items>
 		<items chance="5.0">
-			<random_item type="MANASTONE_RARE_GRADE_50" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_50" max_count="3" />
 		</items>
 		<items chance="5.0">
-			<random_item type="MANASTONE_RARE_GRADE_60" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_60" max_count="3" />
 		</items>
 		<items chance="5.0">
-			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_RARE_GRADE_70" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051337"><!-- [Event] Sugarcrook's Pack -->
@@ -10588,10 +10588,10 @@
 			<random_item type="MANASTONE_COMMON_GRADE_70" min_count="2" max_count="5" />
 		</items>
 		<items>
-			<random_item type="MANASTONE_RARE_GRADE_60" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_60" max_count="3" />
 		</items>
 		<items>
-			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_RARE_GRADE_70" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051338"><!-- [Event] Case of Harvest Revel Ale -->
@@ -10625,16 +10625,16 @@
 	</decomposable>
 	<decomposable item_id="188051339"><!-- [Event] Potcrab's Love -->
 		<items chance="10.0">
-			<item id="186000031" min_count="1" max_count="10" /><!-- Silver Medal -->
+			<item id="186000031" max_count="10" /><!-- Silver Medal -->
 		</items>
 		<items chance="10.0">
-			<item id="186000030" min_count="1" max_count="5" /><!-- Gold Medal -->
+			<item id="186000030" max_count="5" /><!-- Gold Medal -->
 		</items>
 		<items chance="10.0">
 			<item id="161000003" /><!-- Reviving Elemental Stone -->
 		</items>
 		<items chance="10.0">
-			<item id="169000009" min_count="1" max_count="50" /><!-- Premium Power Shard -->
+			<item id="169000009" max_count="50" /><!-- Premium Power Shard -->
 		</items>
 		<items chance="3.0">
 			<item id="110900175" /><!-- Solorius Tunic (7 days) -->
@@ -10670,54 +10670,54 @@
 			<random_item type="SCROLLS" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_10" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_10" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_20" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_20" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_30" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_30" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_40" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_40" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_50" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_50" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_60" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_60" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_10" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_10" max_count="3" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_20" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_20" max_count="3" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_30" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_30" max_count="3" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_40" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_40" max_count="3" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_50" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_50" max_count="3" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_60" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_60" max_count="3" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051340"><!-- [Event] Aion's Star -->
 		<items chance="9.0">
-			<item id="186000031" min_count="1" max_count="10" /><!-- Silver Medal -->
+			<item id="186000031" max_count="10" /><!-- Silver Medal -->
 		</items>
 		<items chance="9.0">
-			<item id="186000030" min_count="1" max_count="5" /><!-- Gold Medal -->
+			<item id="186000030" max_count="5" /><!-- Gold Medal -->
 		</items>
 		<items chance="9.0">
 			<item id="161000003" /><!-- Reviving Elemental Stone -->
 		</items>
 		<items chance="9.0">
-			<item id="169000009" min_count="1" max_count="50" /><!-- Premium Power Shard -->
+			<item id="169000009" max_count="50" /><!-- Premium Power Shard -->
 		</items>
 		<items chance="3.0">
 			<item id="110900175" /><!-- Solorius Tunic (7 days) -->
@@ -10753,40 +10753,40 @@
 			<random_item type="SCROLLS" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_10" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_10" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_20" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_20" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_30" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_30" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_40" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_40" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_50" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_50" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_COMMON_GRADE_60" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_COMMON_GRADE_60" max_count="5" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_10" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_10" max_count="3" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_20" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_20" max_count="3" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_30" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_30" max_count="3" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_40" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_40" max_count="3" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_50" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_50" max_count="3" />
 		</items>
 		<items chance="1.0">
-			<random_item type="MANASTONE_RARE_GRADE_60" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_RARE_GRADE_60" max_count="3" />
 		</items>
 		<items chance="4.0">
 			<item id="169610046" /><!-- [Title] Festival Crab – 15-day pass -->
@@ -11179,17 +11179,17 @@
 	<decomposable item_id="188051453" /><!-- Tasty Candy -->
 	<decomposable item_id="188051454"><!-- Outremus' Royal Gift -->
 		<items>
-			<random_item type="ANCIENT_ICON" min_count="1" max_count="4" />
-			<random_item type="ANCIENT_SEAL" min_count="1" max_count="3" />
-			<random_item type="ANCIENT_GOBLET" min_count="1" max_count="2" />
+			<random_item type="ANCIENT_ICON" max_count="4" />
+			<random_item type="ANCIENT_SEAL" max_count="3" />
+			<random_item type="ANCIENT_GOBLET" max_count="2" />
 			<random_item type="ANCIENT_CROWN" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051455"><!-- Richelle's Royal Gift -->
 		<items>
-			<random_item type="ANCIENT_ICON" min_count="1" max_count="4" />
-			<random_item type="ANCIENT_SEAL" min_count="1" max_count="3" />
-			<random_item type="ANCIENT_GOBLET" min_count="1" max_count="2" />
+			<random_item type="ANCIENT_ICON" max_count="4" />
+			<random_item type="ANCIENT_SEAL" max_count="3" />
+			<random_item type="ANCIENT_GOBLET" max_count="2" />
 			<random_item type="ANCIENT_CROWN" />
 		</items>
 	</decomposable>
@@ -11197,17 +11197,17 @@
 	<decomposable item_id="188051457" /><!-- Richelle's Supply Package -->
 	<decomposable item_id="188051458"><!-- Veille's Royal Gift -->
 		<items>
-			<random_item type="ANCIENT_ICON" min_count="1" max_count="4" />
-			<random_item type="ANCIENT_SEAL" min_count="1" max_count="3" />
-			<random_item type="ANCIENT_GOBLET" min_count="1" max_count="2" />
+			<random_item type="ANCIENT_ICON" max_count="4" />
+			<random_item type="ANCIENT_SEAL" max_count="3" />
+			<random_item type="ANCIENT_GOBLET" max_count="2" />
 			<random_item type="ANCIENT_CROWN" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051459"><!-- Mastarius' Royal Gift -->
 		<items>
-			<random_item type="ANCIENT_ICON" min_count="1" max_count="4" />
-			<random_item type="ANCIENT_SEAL" min_count="1" max_count="3" />
-			<random_item type="ANCIENT_GOBLET" min_count="1" max_count="2" />
+			<random_item type="ANCIENT_ICON" max_count="4" />
+			<random_item type="ANCIENT_SEAL" max_count="3" />
+			<random_item type="ANCIENT_GOBLET" max_count="2" />
 			<random_item type="ANCIENT_CROWN" />
 		</items>
 	</decomposable>
@@ -11317,88 +11317,88 @@
 	<decomposable item_id="188051496" /><!-- Gathered Items Pouch -->
 	<decomposable item_id="188051497"><!-- Aether Pouch -->
 		<items>
-			<item id="152000904" min_count="1" max_count="15" /><!-- Aether Gem -->
+			<item id="152000904" max_count="15" /><!-- Aether Gem -->
 		</items>
 		<items>
-			<item id="152000905" min_count="1" max_count="10" /><!-- Greater Aether Gem -->
+			<item id="152000905" max_count="10" /><!-- Greater Aether Gem -->
 		</items>
 		<items>
-			<item id="152000906" min_count="1" max_count="5" /><!-- Pure Aether Gem -->
+			<item id="152000906" max_count="5" /><!-- Pure Aether Gem -->
 		</items>
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 		<items>
-			<item id="152000908" min_count="1" max_count="5" /><!-- Greater Aether -->
+			<item id="152000908" max_count="5" /><!-- Greater Aether -->
 		</items>
 		<items>
-			<item id="152000909" min_count="1" max_count="3" /><!-- Pure Aether -->
+			<item id="152000909" max_count="3" /><!-- Pure Aether -->
 		</items>
 		<items>
 			<item id="152000910" /><!-- Brilliant Aether -->
 		</items>
 		<items>
-			<item id="152000911" min_count="1" max_count="10" /><!-- Magical Aether -->
+			<item id="152000911" max_count="10" /><!-- Magical Aether -->
 		</items>
 		<items>
-			<item id="152000912" min_count="1" max_count="5" /><!-- Greater Magical Aether -->
+			<item id="152000912" max_count="5" /><!-- Greater Magical Aether -->
 		</items>
 		<items>
-			<item id="152000913" min_count="1" max_count="3" /><!-- Pure Magical Aether -->
+			<item id="152000913" max_count="3" /><!-- Pure Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051498"><!-- Leather Pouch -->
 		<items>
-			<item id="152014005" min_count="1" max_count="15" /><!-- Tough Balaur Meat -->
+			<item id="152014005" max_count="15" /><!-- Tough Balaur Meat -->
 		</items>
 		<items>
-			<item id="152014010" min_count="1" max_count="15" /><!-- Tender Balaur Meat -->
+			<item id="152014010" max_count="15" /><!-- Tender Balaur Meat -->
 		</items>
 		<items>
-			<item id="152014015" min_count="1" max_count="15" /><!-- Fresh Balaur Meat -->
+			<item id="152014015" max_count="15" /><!-- Fresh Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051499"><!-- Aether Pouch -->
 		<items>
-			<item id="152000904" min_count="1" max_count="15" /><!-- Aether Gem -->
+			<item id="152000904" max_count="15" /><!-- Aether Gem -->
 		</items>
 		<items>
-			<item id="152000905" min_count="1" max_count="10" /><!-- Greater Aether Gem -->
+			<item id="152000905" max_count="10" /><!-- Greater Aether Gem -->
 		</items>
 		<items>
-			<item id="152000906" min_count="1" max_count="5" /><!-- Pure Aether Gem -->
+			<item id="152000906" max_count="5" /><!-- Pure Aether Gem -->
 		</items>
 		<items>
-			<item id="152000907" min_count="1" max_count="5" /><!-- Aether -->
+			<item id="152000907" max_count="5" /><!-- Aether -->
 		</items>
 		<items>
-			<item id="152000908" min_count="1" max_count="5" /><!-- Greater Aether -->
+			<item id="152000908" max_count="5" /><!-- Greater Aether -->
 		</items>
 		<items>
-			<item id="152000909" min_count="1" max_count="3" /><!-- Pure Aether -->
+			<item id="152000909" max_count="3" /><!-- Pure Aether -->
 		</items>
 		<items>
 			<item id="152000910" /><!-- Brilliant Aether -->
 		</items>
 		<items>
-			<item id="152000911" min_count="1" max_count="10" /><!-- Magical Aether -->
+			<item id="152000911" max_count="10" /><!-- Magical Aether -->
 		</items>
 		<items>
-			<item id="152000912" min_count="1" max_count="5" /><!-- Greater Magical Aether -->
+			<item id="152000912" max_count="5" /><!-- Greater Magical Aether -->
 		</items>
 		<items>
-			<item id="152000913" min_count="1" max_count="3" /><!-- Pure Magical Aether -->
+			<item id="152000913" max_count="3" /><!-- Pure Magical Aether -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051500"><!-- Leather Pouch -->
 		<items>
-			<item id="152014005" min_count="1" max_count="15" /><!-- Tough Balaur Meat -->
+			<item id="152014005" max_count="15" /><!-- Tough Balaur Meat -->
 		</items>
 		<items>
-			<item id="152014010" min_count="1" max_count="15" /><!-- Tender Balaur Meat -->
+			<item id="152014010" max_count="15" /><!-- Tender Balaur Meat -->
 		</items>
 		<items>
-			<item id="152014015" min_count="1" max_count="15" /><!-- Fresh Balaur Meat -->
+			<item id="152014015" max_count="15" /><!-- Fresh Balaur Meat -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051501"><!-- Weapon Material Pouch -->
@@ -11712,7 +11712,7 @@
 	</decomposable>
 	<decomposable item_id="188051535"><!-- Enchantment Stone Bundle -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="2" />
+			<random_item type="ENCHANTMENT" max_count="2" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188051538"><!-- Manastone Bundle -->
@@ -11724,168 +11724,168 @@
 	<decomposable item_id="188051544" /><!-- Crystal and Elixir Bundle -->
 	<decomposable item_id="188051545"><!-- Ore Bundle -->
 		<items>
-			<item id="152000214" min_count="1" max_count="5" /><!-- Drenite Ore -->
+			<item id="152000214" max_count="5" /><!-- Drenite Ore -->
 		</items>
 		<items>
-			<item id="152000113" min_count="1" max_count="5" /><!-- Malevite Ore -->
+			<item id="152000113" max_count="5" /><!-- Malevite Ore -->
 		</items>
 		<items>
-			<item id="152000207" min_count="1" max_count="5" /><!-- Orichalcum Ore -->
+			<item id="152000207" max_count="5" /><!-- Orichalcum Ore -->
 		</items>
 		<items>
-			<item id="152000107" min_count="1" max_count="5" /><!-- Mithril Ore -->
+			<item id="152000107" max_count="5" /><!-- Mithril Ore -->
 		</items>
 		<items>
-			<item id="152000204" min_count="1" max_count="5" /><!-- Adamantium Ore -->
+			<item id="152000204" max_count="5" /><!-- Adamantium Ore -->
 		</items>
 		<items>
-			<item id="152000104" min_count="1" max_count="5" /><!-- Platinum Ore -->
+			<item id="152000104" max_count="5" /><!-- Platinum Ore -->
 		</items>
 		<items>
-			<item id="152000202" min_count="1" max_count="5" /><!-- Titanium Ore -->
+			<item id="152000202" max_count="5" /><!-- Titanium Ore -->
 		</items>
 		<items>
-			<item id="152000102" min_count="1" max_count="5" /><!-- Gold Ore -->
+			<item id="152000102" max_count="5" /><!-- Gold Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051546"><!-- Forest Material Bundle -->
 		<items>
-			<item id="152000501" min_count="1" max_count="15" /><!-- Betua Log -->
+			<item id="152000501" max_count="15" /><!-- Betua Log -->
 		</items>
 		<items>
-			<item id="152000502" min_count="1" max_count="15" /><!-- Koa Log -->
+			<item id="152000502" max_count="15" /><!-- Koa Log -->
 		</items>
 		<items>
-			<item id="152000503" min_count="1" max_count="15" /><!-- Ulmus Log -->
+			<item id="152000503" max_count="15" /><!-- Ulmus Log -->
 		</items>
 		<items>
-			<item id="152000504" min_count="1" max_count="15" /><!-- Egrasi Log -->
+			<item id="152000504" max_count="15" /><!-- Egrasi Log -->
 		</items>
 		<items>
-			<item id="152000505" min_count="1" max_count="15" /><!-- Nanyu Log -->
+			<item id="152000505" max_count="15" /><!-- Nanyu Log -->
 		</items>
 		<items>
-			<item id="152000601" min_count="1" max_count="15" /><!-- Ruko Fiber -->
+			<item id="152000601" max_count="15" /><!-- Ruko Fiber -->
 		</items>
 		<items>
-			<item id="152000602" min_count="1" max_count="15" /><!-- Fess Fiber -->
+			<item id="152000602" max_count="15" /><!-- Fess Fiber -->
 		</items>
 		<items>
-			<item id="152000603" min_count="1" max_count="15" /><!-- Sobi Fiber -->
+			<item id="152000603" max_count="15" /><!-- Sobi Fiber -->
 		</items>
 		<items>
-			<item id="152000604" min_count="1" max_count="15" /><!-- Linon Fiber -->
+			<item id="152000604" max_count="15" /><!-- Linon Fiber -->
 		</items>
 		<items>
-			<item id="152000605" min_count="1" max_count="15" /><!-- Prolix Fiber -->
+			<item id="152000605" max_count="15" /><!-- Prolix Fiber -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051547"><!-- Forest Material Bundle -->
 		<items>
-			<item id="152000551" min_count="1" max_count="15" /><!-- Tecoma Log -->
+			<item id="152000551" max_count="15" /><!-- Tecoma Log -->
 		</items>
 		<items>
-			<item id="152000552" min_count="1" max_count="15" /><!-- Wrud Log -->
+			<item id="152000552" max_count="15" /><!-- Wrud Log -->
 		</items>
 		<items>
-			<item id="152000553" min_count="1" max_count="15" /><!-- Salix Log -->
+			<item id="152000553" max_count="15" /><!-- Salix Log -->
 		</items>
 		<items>
-			<item id="152000554" min_count="1" max_count="15" /><!-- Asvata Log -->
+			<item id="152000554" max_count="15" /><!-- Asvata Log -->
 		</items>
 		<items>
-			<item id="152000556" min_count="1" max_count="15" /><!-- Korie Log -->
+			<item id="152000556" max_count="15" /><!-- Korie Log -->
 		</items>
 		<items>
-			<item id="152000651" min_count="1" max_count="15" /><!-- Tikel Fiber -->
+			<item id="152000651" max_count="15" /><!-- Tikel Fiber -->
 		</items>
 		<items>
-			<item id="152000652" min_count="1" max_count="15" /><!-- Twisp Fiber -->
+			<item id="152000652" max_count="15" /><!-- Twisp Fiber -->
 		</items>
 		<items>
-			<item id="152000653" min_count="1" max_count="15" /><!-- Xilix Fiber -->
+			<item id="152000653" max_count="15" /><!-- Xilix Fiber -->
 		</items>
 		<items>
-			<item id="152000654" min_count="1" max_count="15" /><!-- Anathe Fiber -->
+			<item id="152000654" max_count="15" /><!-- Anathe Fiber -->
 		</items>
 		<items>
-			<item id="152000656" min_count="1" max_count="15" /><!-- Hoca Fiber -->
+			<item id="152000656" max_count="15" /><!-- Hoca Fiber -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051548"><!-- Cooking Ingredient Bundle -->
 		<items>
-			<item id="152000701" min_count="1" max_count="20" /><!-- Mela -->
+			<item id="152000701" max_count="20" /><!-- Mela -->
 		</items>
 		<items>
-			<item id="152000702" min_count="1" max_count="20" /><!-- Rubus -->
+			<item id="152000702" max_count="20" /><!-- Rubus -->
 		</items>
 		<items>
-			<item id="152000703" min_count="1" max_count="20" /><!-- Caprauna -->
+			<item id="152000703" max_count="20" /><!-- Caprauna -->
 		</items>
 		<items>
-			<item id="152000704" min_count="1" max_count="20" /><!-- Wiki -->
+			<item id="152000704" max_count="20" /><!-- Wiki -->
 		</items>
 		<items>
-			<item id="152000705" min_count="1" max_count="20" /><!-- Omblic -->
+			<item id="152000705" max_count="20" /><!-- Omblic -->
 		</items>
 		<items>
-			<item id="152000706" min_count="1" max_count="20" /><!-- Meon -->
+			<item id="152000706" max_count="20" /><!-- Meon -->
 		</items>
 		<items>
-			<item id="152000707" min_count="1" max_count="20" /><!-- Ormea -->
+			<item id="152000707" max_count="20" /><!-- Ormea -->
 		</items>
 		<items>
-			<item id="152000708" min_count="1" max_count="20" /><!-- Tange -->
+			<item id="152000708" max_count="20" /><!-- Tange -->
 		</items>
 		<items>
-			<item id="152000709" min_count="1" max_count="20" /><!-- Ervio -->
+			<item id="152000709" max_count="20" /><!-- Ervio -->
 		</items>
 		<items>
-			<item id="152000710" min_count="1" max_count="20" /><!-- Lunime -->
+			<item id="152000710" max_count="20" /><!-- Lunime -->
 		</items>
 		<items>
-			<item id="152000711" min_count="1" max_count="20" /><!-- Nenana -->
+			<item id="152000711" max_count="20" /><!-- Nenana -->
 		</items>
 		<items>
-			<item id="152000712" min_count="1" max_count="20" /><!-- Beshu -->
+			<item id="152000712" max_count="20" /><!-- Beshu -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051549"><!-- Cooking Ingredient Bundle -->
 		<items>
-			<item id="152000751" min_count="1" max_count="20" /><!-- Raydam -->
+			<item id="152000751" max_count="20" /><!-- Raydam -->
 		</items>
 		<items>
-			<item id="152000752" min_count="1" max_count="20" /><!-- Otombliss -->
+			<item id="152000752" max_count="20" /><!-- Otombliss -->
 		</items>
 		<items>
-			<item id="152000753" min_count="1" max_count="20" /><!-- Ringa -->
+			<item id="152000753" max_count="20" /><!-- Ringa -->
 		</items>
 		<items>
-			<item id="152000754" min_count="1" max_count="20" /><!-- Vinna -->
+			<item id="152000754" max_count="20" /><!-- Vinna -->
 		</items>
 		<items>
-			<item id="152000755" min_count="1" max_count="20" /><!-- Kirka -->
+			<item id="152000755" max_count="20" /><!-- Kirka -->
 		</items>
 		<items>
-			<item id="152000756" min_count="1" max_count="20" /><!-- Brommel -->
+			<item id="152000756" max_count="20" /><!-- Brommel -->
 		</items>
 		<items>
-			<item id="152000757" min_count="1" max_count="20" /><!-- Pressa -->
+			<item id="152000757" max_count="20" /><!-- Pressa -->
 		</items>
 		<items>
-			<item id="152000758" min_count="1" max_count="20" /><!-- Merone -->
+			<item id="152000758" max_count="20" /><!-- Merone -->
 		</items>
 		<items>
-			<item id="152000759" min_count="1" max_count="20" /><!-- Kukar -->
+			<item id="152000759" max_count="20" /><!-- Kukar -->
 		</items>
 		<items>
-			<item id="152000760" min_count="1" max_count="20" /><!-- Leopis -->
+			<item id="152000760" max_count="20" /><!-- Leopis -->
 		</items>
 		<items>
-			<item id="152000762" min_count="1" max_count="20" /><!-- Manzu -->
+			<item id="152000762" max_count="20" /><!-- Manzu -->
 		</items>
 		<items>
-			<item id="152000763" min_count="1" max_count="20" /><!-- Drupa -->
+			<item id="152000763" max_count="20" /><!-- Drupa -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051550"><!-- Spring Light Box -->
@@ -13362,7 +13362,7 @@
 	</decomposable>
 	<decomposable item_id="188051654"><!-- Birthday Cake Bundle -->
 		<items>
-			<item id="160010216" min_count="1" max_count="5" /><!-- [Event] Birthday Cake Piece -->
+			<item id="160010216" max_count="5" /><!-- [Event] Birthday Cake Piece -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051655"><!-- Guestbloom Fertilizer Bundle -->
@@ -13704,7 +13704,7 @@
 	</decomposable>
 	<decomposable item_id="188051698"><!-- Small Medal Box -->
 		<items>
-			<item id="186000031" min_count="1" max_count="2" /><!-- Silver Medal -->
+			<item id="186000031" max_count="2" /><!-- Silver Medal -->
 		</items>
 		<items>
 			<item id="186000030" /><!-- Gold Medal -->
@@ -13718,7 +13718,7 @@
 			<item id="186000031" min_count="2" /><!-- Silver Medal -->
 		</items>
 		<items>
-			<item id="186000030" min_count="1" max_count="2" /><!-- Gold Medal -->
+			<item id="186000030" max_count="2" /><!-- Gold Medal -->
 		</items>
 		<items>
 			<item id="186000096" /><!-- Platinum Medal -->
@@ -14115,28 +14115,28 @@
 	</decomposable>
 	<decomposable item_id="188051735"><!-- Ore Bundle -->
 		<items>
-			<item id="152000214" min_count="1" max_count="5" /><!-- Drenite Ore -->
+			<item id="152000214" max_count="5" /><!-- Drenite Ore -->
 		</items>
 		<items>
-			<item id="152000113" min_count="1" max_count="5" /><!-- Malevite Ore -->
+			<item id="152000113" max_count="5" /><!-- Malevite Ore -->
 		</items>
 		<items>
-			<item id="152000207" min_count="1" max_count="5" /><!-- Orichalcum Ore -->
+			<item id="152000207" max_count="5" /><!-- Orichalcum Ore -->
 		</items>
 		<items>
-			<item id="152000107" min_count="1" max_count="5" /><!-- Mithril Ore -->
+			<item id="152000107" max_count="5" /><!-- Mithril Ore -->
 		</items>
 		<items>
-			<item id="152000204" min_count="1" max_count="5" /><!-- Adamantium Ore -->
+			<item id="152000204" max_count="5" /><!-- Adamantium Ore -->
 		</items>
 		<items>
-			<item id="152000104" min_count="1" max_count="5" /><!-- Platinum Ore -->
+			<item id="152000104" max_count="5" /><!-- Platinum Ore -->
 		</items>
 		<items>
-			<item id="152000202" min_count="1" max_count="5" /><!-- Titanium Ore -->
+			<item id="152000202" max_count="5" /><!-- Titanium Ore -->
 		</items>
 		<items>
-			<item id="152000102" min_count="1" max_count="5" /><!-- Gold Ore -->
+			<item id="152000102" max_count="5" /><!-- Gold Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051736"><!-- Dye Petal Bundle -->
@@ -14574,7 +14574,7 @@
 	<decomposable item_id="188051783" /><!-- [Event] Large Chaos Candy Box -->
 	<decomposable item_id="188051784"><!-- Birthday Cake Bundle -->
 		<items>
-			<item id="160010217" min_count="1" max_count="5" /><!-- [Event] Birthday Cake Piece -->
+			<item id="160010217" max_count="5" /><!-- [Event] Birthday Cake Piece -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051785" /><!-- [Event] Festival Bundle -->
@@ -15716,7 +15716,7 @@
 	<decomposable item_id="188051926" /><!-- [Event] Consolation Medal Box -->
 	<decomposable item_id="188051927"><!-- [World] Guestpetal Bundle -->
 		<items>
-			<item id="186000146" min_count="1" max_count="3" /><!-- Guestpetal -->
+			<item id="186000146" max_count="3" /><!-- Guestpetal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051928" /><!-- [Event] Eternal Combat Items Bundle -->
@@ -15862,12 +15862,12 @@
 	</decomposable>
 	<decomposable item_id="188051957"><!-- Dazzling Turquoise Ore Bundle -->
 		<items>
-			<item id="152000327" min_count="1" max_count="5" /><!-- Dazzling Turquoise Ore -->
+			<item id="152000327" max_count="5" /><!-- Dazzling Turquoise Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051958"><!-- Dazzling Corundum Ore Bundle -->
 		<items>
-			<item id="152000326" min_count="1" max_count="5" /><!-- Dazzling Corundum Ore -->
+			<item id="152000326" max_count="5" /><!-- Dazzling Corundum Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051959"><!-- Pure Malevite Ore Bundle -->
@@ -15877,27 +15877,27 @@
 	</decomposable>
 	<decomposable item_id="188051960"><!-- Dazzling Elatrite Ore Bundle -->
 		<items>
-			<item id="152000328" min_count="1" max_count="5" /><!-- Dazzling Elatrite Ore -->
+			<item id="152000328" max_count="5" /><!-- Dazzling Elatrite Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051961"><!-- Brilliant Orichalcum Ore Bundle -->
 		<items>
-			<item id="152000213" min_count="1" max_count="2" /><!-- Brilliant Orichalcum Ore -->
+			<item id="152000213" max_count="2" /><!-- Brilliant Orichalcum Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051962"><!-- Brilliant Mithril Ore Bundle -->
 		<items>
-			<item id="152000112" min_count="1" max_count="2" /><!-- Brilliant Mithril Ore -->
+			<item id="152000112" max_count="2" /><!-- Brilliant Mithril Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051963"><!-- Brilliant Drenite Ore Bundle -->
 		<items>
-			<item id="152000217" min_count="1" max_count="2" /><!-- Brilliant Drenite Ore -->
+			<item id="152000217" max_count="2" /><!-- Brilliant Drenite Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051964"><!-- Brilliant Malevite Ore Bundle -->
 		<items>
-			<item id="152000116" min_count="1" max_count="2" /><!-- Brilliant Malevite Ore -->
+			<item id="152000116" max_count="2" /><!-- Brilliant Malevite Ore -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051965"><!-- Nepeta Bundle -->
@@ -16052,7 +16052,7 @@
 	</decomposable>
 	<decomposable item_id="188051995"><!-- Guestpetal Bundle -->
 		<items>
-			<item id="186000146" min_count="1" max_count="3" /><!-- Guestpetal -->
+			<item id="186000146" max_count="3" /><!-- Guestpetal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051996"><!-- A bundle containing Innocent Aris' weapon. -->
@@ -16307,7 +16307,7 @@
 	</decomposable>
 	<decomposable item_id="188052040"><!-- Kadomatsu Enchantment Stone Box -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="5" />
+			<random_item type="ENCHANTMENT" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052041" /><!-- Omblic Bundle -->
@@ -16986,7 +16986,7 @@
 	</decomposable>
 	<decomposable item_id="188052085"><!-- Coin-collector's Pouch -->
 		<items>
-			<item id="182006999" min_count="1" max_count="10" /><!-- Shugo Coin -->
+			<item id="182006999" max_count="10" /><!-- Shugo Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052086" /><!-- Big GM Gift Box -->
@@ -17361,30 +17361,30 @@
 	</decomposable>
 	<decomposable item_id="188052166"><!-- Token Pouch -->
 		<items>
-			<item id="186000143" min_count="1" max_count="3" /><!-- Kahrun's Symbol -->
+			<item id="186000143" max_count="3" /><!-- Kahrun's Symbol -->
 		</items>
 		<items>
-			<item id="186000146" min_count="1" max_count="3" /><!-- Guestpetal -->
+			<item id="186000146" max_count="3" /><!-- Guestpetal -->
 		</items>
 		<items>
-			<item id="186000114" min_count="1" max_count="3" race="ELYOS" /><!-- Orichalcum Token -->
-			<item id="186000115" min_count="1" max_count="3" race="ASMODIANS" /><!-- Circle Token -->
+			<item id="186000114" max_count="3" race="ELYOS" /><!-- Orichalcum Token -->
+			<item id="186000115" max_count="3" race="ASMODIANS" /><!-- Circle Token -->
 		</items>
 		<items>
-			<item id="186000102" min_count="1" max_count="3" race="ELYOS" /><!-- Fortuneers Token -->
-			<item id="186000105" min_count="1" max_count="3" race="ASMODIANS" /><!-- Daemon Token -->
+			<item id="186000102" max_count="3" race="ELYOS" /><!-- Fortuneers Token -->
+			<item id="186000105" max_count="3" race="ASMODIANS" /><!-- Daemon Token -->
 		</items>
 		<items>
-			<item id="186000100" min_count="1" max_count="3" race="ELYOS" /><!-- Progress Token -->
-			<item id="186000103" min_count="1" max_count="3" race="ASMODIANS" /><!-- Ward Token -->
+			<item id="186000100" max_count="3" race="ELYOS" /><!-- Progress Token -->
+			<item id="186000103" max_count="3" race="ASMODIANS" /><!-- Ward Token -->
 		</items>
 		<items>
-			<item id="186000101" min_count="1" max_count="3" race="ELYOS" /><!-- Radiant Token -->
-			<item id="186000104" min_count="1" max_count="3" race="ASMODIANS" /><!-- Crusader Token -->
+			<item id="186000101" max_count="3" race="ELYOS" /><!-- Radiant Token -->
+			<item id="186000104" max_count="3" race="ASMODIANS" /><!-- Crusader Token -->
 		</items>
 		<items>
-			<item id="186000132" min_count="1" max_count="3" race="ELYOS" /><!-- Wright's Token -->
-			<item id="186000133" min_count="1" max_count="3" race="ASMODIANS" /><!-- Shaper's Token -->
+			<item id="186000132" max_count="3" race="ELYOS" /><!-- Wright's Token -->
+			<item id="186000133" max_count="3" race="ASMODIANS" /><!-- Shaper's Token -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052167"><!-- Fairy Tail -->
@@ -17910,22 +17910,22 @@
 	<decomposable item_id="188052276" /><!-- [Test] Optional Bundle Test 08 -->
 	<decomposable item_id="188052277"><!-- Ceramium Coin Chest -->
 		<items>
-			<item id="186000231" min_count="1" max_count="10" /><!-- Ceramium Coin -->
+			<item id="186000231" max_count="10" /><!-- Ceramium Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052278"><!-- Engraved Ceramium Coin Chest -->
 		<items>
-			<item id="186000232" min_count="1" max_count="10" /><!-- Ceramium Coin -->
+			<item id="186000232" max_count="10" /><!-- Ceramium Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052279"><!-- Ceramium Coin Chest -->
 		<items>
-			<item id="186000231" min_count="1" max_count="10" /><!-- Ceramium Coin -->
+			<item id="186000231" max_count="10" /><!-- Ceramium Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052280"><!-- Engraved Ceramium Coin Chest -->
 		<items>
-			<item id="186000232" min_count="1" max_count="10" /><!-- Ceramium Coin -->
+			<item id="186000232" max_count="10" /><!-- Ceramium Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052281"><!-- Autumn Harvest Fruit Gift Set -->
@@ -18636,7 +18636,7 @@
 	</decomposable>
 	<decomposable item_id="188052314"><!-- Suspicious Yellow Sack -->
 		<items>
-			<random_item type="ENCHANTMENT" min_count="1" max_count="5" />
+			<random_item type="ENCHANTMENT" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052315"><!-- Worn Yellow Sack -->
@@ -18738,7 +18738,7 @@
 	</decomposable>
 	<decomposable item_id="188052320"><!-- [Event] Manastone Bundle -->
 		<items>
-			<random_item type="MANASTONE_RARE_GRADE_70" min_count="1" max_count="5" />
+			<random_item type="MANASTONE_RARE_GRADE_70" max_count="5" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188052321"><!-- [Event] Protectorate Key Box -->
@@ -20212,10 +20212,10 @@
 	</decomposable>
 	<decomposable item_id="188052420"><!-- Cool Enchantment Stone Bundle -->
 		<items>
-			<item id="166000193" min_count="1" max_count="3" /><!-- Gamma Enchantment Stone -->
+			<item id="166000193" max_count="3" /><!-- Gamma Enchantment Stone -->
 		</items>
 		<items>
-			<item id="166000194" min_count="1" max_count="3" /><!-- Delta Enchantment Stone -->
+			<item id="166000194" max_count="3" /><!-- Delta Enchantment Stone -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052421"><!-- Lv. 4113 Composite Manastone Bundle -->
@@ -20904,55 +20904,55 @@
 	</decomposable>
 	<decomposable item_id="188052500"><!-- Danuar Reliquary Expedition's Idian Bundle -->
 		<items>
-			<item id="166050031" min_count="1" max_count="2" /><!-- Esoteric Idian: Physical Attack -->
+			<item id="166050031" max_count="2" /><!-- Esoteric Idian: Physical Attack -->
 		</items>
 		<items>
-			<item id="166050032" min_count="1" max_count="2" /><!-- Esoteric Idian: Magical Attack -->
+			<item id="166050032" max_count="2" /><!-- Esoteric Idian: Magical Attack -->
 		</items>
 		<items>
-			<item id="166050033" min_count="1" max_count="2" /><!-- Esoteric Idian: Physical Defense -->
+			<item id="166050033" max_count="2" /><!-- Esoteric Idian: Physical Defense -->
 		</items>
 		<items>
-			<item id="166050034" min_count="1" max_count="2" /><!-- Esoteric Idian: Magical Defense -->
+			<item id="166050034" max_count="2" /><!-- Esoteric Idian: Magical Defense -->
 		</items>
 		<items>
-			<item id="166050035" min_count="1" max_count="2" /><!-- Esoteric Idian: Assistance -->
+			<item id="166050035" max_count="2" /><!-- Esoteric Idian: Assistance -->
 		</items>
 		<items>
-			<item id="166050036" min_count="1" max_count="2" /><!-- Esoteric Idian: Resistance -->
+			<item id="166050036" max_count="2" /><!-- Esoteric Idian: Resistance -->
 		</items>
 		<items>
-			<item id="166050037" min_count="1" max_count="2" /><!-- Esoteric Idian: Physical/Magical Attack -->
+			<item id="166050037" max_count="2" /><!-- Esoteric Idian: Physical/Magical Attack -->
 		</items>
 		<items>
-			<item id="166050038" min_count="1" max_count="2" /><!-- Esoteric Idian: Physical/Magical Defense -->
+			<item id="166050038" max_count="2" /><!-- Esoteric Idian: Physical/Magical Defense -->
 		</items>
 		<items>
-			<item id="166050039" min_count="1" max_count="2" /><!-- Glossy Esoteric Idian: Physical Attack -->
+			<item id="166050039" max_count="2" /><!-- Glossy Esoteric Idian: Physical Attack -->
 		</items>
 		<items>
-			<item id="166050040" min_count="1" max_count="2" /><!-- Glossy Esoteric Idian: Magical Attack -->
+			<item id="166050040" max_count="2" /><!-- Glossy Esoteric Idian: Magical Attack -->
 		</items>
 		<items>
-			<item id="166050041" min_count="1" max_count="2" /><!-- Glossy Esoteric Idian: Physical Defense -->
+			<item id="166050041" max_count="2" /><!-- Glossy Esoteric Idian: Physical Defense -->
 		</items>
 		<items>
-			<item id="166050042" min_count="1" max_count="2" /><!-- Glossy Esoteric Idian: Magical Defense -->
+			<item id="166050042" max_count="2" /><!-- Glossy Esoteric Idian: Magical Defense -->
 		</items>
 		<items>
-			<item id="166050043" min_count="1" max_count="2" /><!-- Glossy Esoteric Idian: Assistance -->
+			<item id="166050043" max_count="2" /><!-- Glossy Esoteric Idian: Assistance -->
 		</items>
 		<items>
-			<item id="166050044" min_count="1" max_count="2" /><!-- Glossy Esoteric Idian: Resistance -->
+			<item id="166050044" max_count="2" /><!-- Glossy Esoteric Idian: Resistance -->
 		</items>
 		<items>
-			<item id="166050045" min_count="1" max_count="2" /><!-- Glossy Esoteric Idian: Physical/Magical Attack -->
+			<item id="166050045" max_count="2" /><!-- Glossy Esoteric Idian: Physical/Magical Attack -->
 		</items>
 		<items>
-			<item id="166050046" min_count="1" max_count="2" /><!-- Glossy Esoteric Idian: Physical/Magical Defense -->
+			<item id="166050046" max_count="2" /><!-- Glossy Esoteric Idian: Physical/Magical Defense -->
 		</items>
 		<items>
-			<item id="166050047" min_count="1" max_count="2" /><!-- Inspiring Idian: Physical Attack -->
+			<item id="166050047" max_count="2" /><!-- Inspiring Idian: Physical Attack -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052501"><!-- Infinity Shard Expedition's Excavation Box -->
@@ -23167,35 +23167,35 @@
 		<!-- Wind Fragment & extra -->
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012588" /><!-- Wind Fragment -->
 			<item id="152012621" /><!-- Pure Gemstone -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012588" /><!-- Wind Fragment -->
 			<item id="152012619" /><!-- Pure Ore -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012588" /><!-- Wind Fragment -->
 			<item id="152012617" /><!-- Pure Crystal -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012588" /><!-- Wind Fragment -->
 			<item id="169405252" /><!-- Fury Powder -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012588" /><!-- Wind Fragment -->
 			<item id="169405268" /><!-- Lightning Vitality -->
@@ -23203,28 +23203,28 @@
 		<!-- Fury Powder & extra -->
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="169405252" /><!-- Fury Powder -->
 			<item id="152012621" /><!-- Pure Gemstone -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="169405252" /><!-- Fury Powder -->
 			<item id="152012619" /><!-- Pure Ore -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="169405252" /><!-- Fury Powder -->
 			<item id="152012617" /><!-- Pure Crystal -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="169405252" /><!-- Fury Powder -->
 			<item id="169405268" /><!-- Lightning Vitality -->
@@ -23232,35 +23232,35 @@
 		<!-- Water Fragment & extra -->
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012591" /><!-- Water Fragment -->
 			<item id="152012621" /><!-- Pure Gemstone -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012591" /><!-- Water Fragment -->
 			<item id="152012619" /><!-- Pure Ore -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012591" /><!-- Water Fragment -->
 			<item id="152012617" /><!-- Pure Crystal -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012591" /><!-- Water Fragment -->
 			<item id="169405252" /><!-- Fury Powder -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012591" /><!-- Water Fragment -->
 			<item id="169405268" /><!-- Lightning Vitality -->
@@ -23268,35 +23268,35 @@
 		<!-- Wind Mote & extra -->
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012585" /><!-- Wind Mote -->
 			<item id="152012621" /><!-- Pure Gemstone -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012585" /><!-- Wind Mote -->
 			<item id="152012619" /><!-- Pure Ore -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012585" /><!-- Wind Mote -->
 			<item id="152012617" /><!-- Pure Crystal -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012585" /><!-- Wind Mote -->
 			<item id="169405252" /><!-- Fury Powder -->
 		</items>
 		<items>
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
-			<item id="186000238" min_count="1" max_count="5" /><!-- Conqueror's Mark -->
+			<item id="186000238" max_count="5" /><!-- Conqueror's Mark -->
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="152012585" /><!-- Wind Mote -->
 			<item id="169405268" /><!-- Lightning Vitality -->
@@ -23308,7 +23308,7 @@
 			<item id="152012585" /><!-- Wind Mote -->
 			<item id="152012617" /><!-- Pure Crystal -->
 			<item id="169405252" /><!-- Fury Powder -->
-			<random_item type="ANCIENTITEMS" min_count="1" max_count="2" />
+			<random_item type="ANCIENTITEMS" max_count="2" />
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
 		</items>
 		<items chance="20">
@@ -23316,7 +23316,7 @@
 			<item id="152012588" /><!-- Wind Fragment -->
 			<item id="152012619" /><!-- Pure Ore -->
 			<item id="169405254" /><!-- Earth Trace -->
-			<random_item type="ANCIENTITEMS" min_count="1" max_count="2" />
+			<random_item type="ANCIENTITEMS" max_count="2" />
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
 		</items>
 		<items chance="20">
@@ -23324,14 +23324,14 @@
 			<item id="152012591" /><!-- Water Fragment -->
 			<item id="152012621" /><!-- Pure Gemstone -->
 			<item id="186000242" /><!-- Ceramium Medal -->
-			<random_item type="ANCIENTITEMS" min_count="1" max_count="3" />
+			<random_item type="ANCIENTITEMS" max_count="3" />
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 		<items chance="40">
 			<item id="186000236" min_count="4" max_count="12" /><!-- Blood Mark -->
 			<item id="152012585" /><!-- Wind Mote -->
 			<item id="169405268" min_count="5" /><!-- Lightning Vitality -->
-			<random_item type="ANCIENTITEMS" min_count="1" max_count="3" />
+			<random_item type="ANCIENTITEMS" max_count="3" />
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 	</decomposable>
@@ -23838,10 +23838,10 @@
 	<decomposable item_id="188052666" /><!-- Godstone Box -->
 	<decomposable item_id="188052667"><!-- Exigent Enchantment -->
 		<items>
-			<item id="166000192" min_count="1" max_count="3" /><!-- Beta Enchantment Stone -->
+			<item id="166000192" max_count="3" /><!-- Beta Enchantment Stone -->
 		</items>
 		<items>
-			<item id="166000193" min_count="1" max_count="3" /><!-- Gamma Enchantment Stone -->
+			<item id="166000193" max_count="3" /><!-- Gamma Enchantment Stone -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052668" /><!-- Combat Supplies Box -->
@@ -24111,7 +24111,7 @@
 	</decomposable>
 	<decomposable item_id="188052677"><!-- [Event] Rapturous Wing -->
 		<items>
-			<item id="186000319" min_count="1" max_count="3" /><!-- [Event] Golden Feather -->
+			<item id="186000319" max_count="3" /><!-- [Event] Golden Feather -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052678"><!-- [Event] Alchemist's Pouch -->
@@ -25136,7 +25136,7 @@
 	<decomposable item_id="188052737" /><!-- Ceramium Coin Pouch -->
 	<decomposable item_id="188052738"><!-- Blood Mark Box -->
 		<items>
-			<item id="186000236" min_count="1" max_count="10" /><!-- Blood Mark -->
+			<item id="186000236" max_count="10" /><!-- Blood Mark -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052739"><!-- Ophidan Composite Manastone Bundle -->
@@ -25293,17 +25293,17 @@
 	</decomposable>
 	<decomposable item_id="188052762"><!-- Krotan Siege Reward Chest -->
 		<items>
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052763"><!-- Kysis Siege Reward Chest -->
 		<items>
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052764"><!-- Miren Siege Reward Chest -->
 		<items>
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052765" /><!-- Siege Defense Care Package -->
@@ -25782,62 +25782,62 @@
 	</decomposable>
 	<decomposable item_id="188052812"><!-- Bronze Coin Lockbox -->
 		<items>
-			<item id="186000002" min_count="1" max_count="5" race="ELYOS" /><!-- Bronze Coin -->
-			<item id="186000007" min_count="1" max_count="5" race="ASMODIANS" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="5" race="ELYOS" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="5" race="ASMODIANS" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052813"><!-- Silver Coin Lockbox -->
 		<items>
-			<item id="186000003" min_count="1" max_count="5" race="ELYOS" /><!-- Silver Coin -->
-			<item id="186000008" min_count="1" max_count="5" race="ASMODIANS" /><!-- Silver Coin -->
+			<item id="186000003" max_count="5" race="ELYOS" /><!-- Silver Coin -->
+			<item id="186000008" max_count="5" race="ASMODIANS" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052814"><!-- Gold Coin Lockbox -->
 		<items>
-			<item id="186000004" min_count="1" max_count="5" race="ELYOS" /><!-- Gold Coin -->
-			<item id="186000009" min_count="1" max_count="5" race="ASMODIANS" /><!-- Gold Coin -->
+			<item id="186000004" max_count="5" race="ELYOS" /><!-- Gold Coin -->
+			<item id="186000009" max_count="5" race="ASMODIANS" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052815"><!-- Platinum Coin Lockbox -->
 		<items>
-			<item id="186000005" min_count="1" max_count="5" race="ELYOS" /><!-- Platinum Coin -->
-			<item id="186000010" min_count="1" max_count="5" race="ASMODIANS" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="5" race="ELYOS" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="5" race="ASMODIANS" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052816"><!-- Mithril Coin Lockbox -->
 		<items>
-			<item id="186000018" min_count="1" max_count="5" race="ELYOS" /><!-- Mithril Coin -->
-			<item id="186000019" min_count="1" max_count="5" race="ASMODIANS" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="5" race="ELYOS" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="5" race="ASMODIANS" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052817"><!-- Bronze Coin Lockbox -->
 		<items>
-			<item id="186000002" min_count="1" max_count="5" race="ELYOS" /><!-- Bronze Coin -->
-			<item id="186000007" min_count="1" max_count="5" race="ASMODIANS" /><!-- Bronze Coin -->
+			<item id="186000002" max_count="5" race="ELYOS" /><!-- Bronze Coin -->
+			<item id="186000007" max_count="5" race="ASMODIANS" /><!-- Bronze Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052818"><!-- Silver Coin Lockbox -->
 		<items>
-			<item id="186000003" min_count="1" max_count="5" race="ELYOS" /><!-- Silver Coin -->
-			<item id="186000008" min_count="1" max_count="5" race="ASMODIANS" /><!-- Silver Coin -->
+			<item id="186000003" max_count="5" race="ELYOS" /><!-- Silver Coin -->
+			<item id="186000008" max_count="5" race="ASMODIANS" /><!-- Silver Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052819"><!-- Gold Coin Lockbox -->
 		<items>
-			<item id="186000004" min_count="1" max_count="5" race="ELYOS" /><!-- Gold Coin -->
-			<item id="186000009" min_count="1" max_count="5" race="ASMODIANS" /><!-- Gold Coin -->
+			<item id="186000004" max_count="5" race="ELYOS" /><!-- Gold Coin -->
+			<item id="186000009" max_count="5" race="ASMODIANS" /><!-- Gold Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052820"><!-- Platinum Coin Lockbox -->
 		<items>
-			<item id="186000005" min_count="1" max_count="5" race="ELYOS" /><!-- Platinum Coin -->
-			<item id="186000010" min_count="1" max_count="5" race="ASMODIANS" /><!-- Platinum Coin -->
+			<item id="186000005" max_count="5" race="ELYOS" /><!-- Platinum Coin -->
+			<item id="186000010" max_count="5" race="ASMODIANS" /><!-- Platinum Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052821"><!-- Mithril Coin Lockbox -->
 		<items>
-			<item id="186000018" min_count="1" max_count="5" race="ELYOS" /><!-- Mithril Coin -->
-			<item id="186000019" min_count="1" max_count="5" race="ASMODIANS" /><!-- Mithril Coin -->
+			<item id="186000018" max_count="5" race="ELYOS" /><!-- Mithril Coin -->
+			<item id="186000019" max_count="5" race="ASMODIANS" /><!-- Mithril Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052822"><!-- Noble Ancient Manastone Chest -->
@@ -27846,7 +27846,7 @@
 		<items>
 			<item id="186000242" /><!-- Ceramium Medal -->
 			<item id="188052185" /><!-- Composite Manastone Pouch -->
-			<random_item type="ENCHANTMENT" min_count="1" max_count="3" />
+			<random_item type="ENCHANTMENT" max_count="3" />
 		</items>
 		<items>
 			<item id="186000242" /><!-- Ceramium Medal -->
@@ -27975,7 +27975,7 @@
 	<decomposable item_id="188053111" /><!-- Ahserion's Flight Manastone Material Bundle -->
 	<decomposable item_id="188053112"><!-- Ahserion's Flight Composite Manastone Bundle -->
 		<items>
-			<random_item type="MANASTONE_LEGEND_GRADE_60" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_LEGEND_GRADE_60" max_count="3" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053113"><!-- Ahserion's Flight Ancient Manastone Bundle -->
@@ -29918,7 +29918,7 @@
 	</decomposable>
 	<decomposable item_id="188053300"><!-- Expeditionary Force Ceramium Medal Box -->
 		<items>
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 		</items>
 		<items>
 			<item id="186000243" min_count="3" max_count="10" /><!-- Fragmented Ceramium -->
@@ -29947,7 +29947,7 @@
 	</decomposable>
 	<decomposable item_id="188053304"><!-- Expeditionary Force Ceramium Medal Box -->
 		<items>
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 		</items>
 		<items>
 			<item id="186000243" min_count="3" max_count="10" /><!-- Fragmented Ceramium -->
@@ -31867,8 +31867,8 @@
 	</decomposable>
 	<decomposable item_id="188053624"><!-- Unified Return Scroll Bundle -->
 		<items>
-			<item id="164020005" min_count="1" race="ELYOS" /><!-- Integrated Return Scroll -->
-			<item id="164020006" min_count="1" race="ASMODIANS" /><!-- Integrated Return Scroll -->
+			<item id="164020005" race="ELYOS" /><!-- Integrated Return Scroll -->
+			<item id="164020006" race="ASMODIANS" /><!-- Integrated Return Scroll -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053625"><!-- Empyrean Plume Bundle -->
@@ -32742,70 +32742,70 @@
 	</decomposable>
 	<decomposable item_id="188053706"><!-- Rentus Base Supplies -->
 		<items>
-			<item id="152012601" min_count="1" max_count="2" /><!-- Conviction Crystal -->
+			<item id="152012601" max_count="2" /><!-- Conviction Crystal -->
 			<item id="166000195" /><!-- Epsilon Enchantment Stone -->
 		</items>
 		<items>
-			<item id="152012603" min_count="1" max_count="2" /><!-- Ore of Conviction -->
+			<item id="152012603" max_count="2" /><!-- Ore of Conviction -->
 			<item id="166000195" /><!-- Epsilon Enchantment Stone -->
 		</items>
 		<items>
-			<item id="152012598" min_count="1" max_count="2" /><!-- Heart of Destruction -->
+			<item id="152012598" max_count="2" /><!-- Heart of Destruction -->
 			<item id="166000195" /><!-- Epsilon Enchantment Stone -->
 		</items>
 		<items>
-			<item id="152012599" min_count="1" max_count="2" /><!-- Heart of Protection -->
+			<item id="152012599" max_count="2" /><!-- Heart of Protection -->
 			<item id="166000195" /><!-- Epsilon Enchantment Stone -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053707"><!-- Glimmering Treasure Chest of Balaur Lord Tiamat -->
 		<items>
-			<item id="152012580" min_count="1" max_count="2" /><!-- Fire Mote -->
+			<item id="152012580" max_count="2" /><!-- Fire Mote -->
 			<random_item type="MANASTONE_LEGEND_GRADE_50" />
 		</items>
 		<items>
-			<item id="152012582" min_count="1" max_count="2" /><!-- Fire Fragment -->
+			<item id="152012582" max_count="2" /><!-- Fire Fragment -->
 			<random_item type="MANASTONE_LEGEND_GRADE_60" />
 		</items>
 		<items>
-			<item id="152012584" min_count="1" max_count="2" /><!-- Water Source -->
+			<item id="152012584" max_count="2" /><!-- Water Source -->
 			<random_item type="MANASTONE_LEGEND_GRADE_60" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053708"><!-- Stolen Shelter Consumables Bundle -->
 		<items>
 			<item id="152012585" /><!-- Wind Mote -->
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 		<items>
 			<item id="152012588" /><!-- Wind Fragment -->
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
 		</items>
 		<items>
 			<item id="152012591" /><!-- Water Fragment -->
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 		<items>
 			<item id="152012617" /><!-- Pure Crystal -->
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
 		</items>
 		<items>
 			<item id="152012621" /><!-- Pure Gemstone -->
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 		<items>
 			<item id="152012619" /><!-- Pure Ore -->
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
 		</items>
 		<items>
 			<item id="169405268" /><!-- Lightning Vitality -->
-			<item id="186000242" min_count="1" max_count="2" /><!-- Ceramium Medal -->
+			<item id="186000242" max_count="2" /><!-- Ceramium Medal -->
 			<random_item type="SPECIAL_MANASTONE_UNIQUE_GRADE" />
 		</items>
 		<items>
@@ -32894,7 +32894,7 @@
 			<item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
 			<item id="182215750" race="ELYOS" /><!-- Asmodian Guardian General's Token -->
 			<item id="182215751" race="ASMODIANS" /><!-- Elyos Guardian General Token -->
-			<random_item type="MANASTONE_LEGEND_GRADE_70" min_count="1" max_count="3" />
+			<random_item type="MANASTONE_LEGEND_GRADE_70" max_count="3" />
 		</items>
 	</decomposable>
 	<decomposable item_id="188053718"><!-- Protectors Composite Manastone Bundle -->
