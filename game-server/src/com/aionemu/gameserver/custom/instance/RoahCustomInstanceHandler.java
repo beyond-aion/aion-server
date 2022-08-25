@@ -56,7 +56,6 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private static final int TIME_LIMIT = 900; // 15 minutes
 
-	private static final int MIN_REWARD = 2;
 	private static final float REWARD_SCALE = 2f;
 
 	private final AtomicLong startTime = new AtomicLong();
@@ -208,8 +207,8 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				npc.getController().delete();
 			}
 			case BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID -> {
-				setResult(true);
 				calcBossDrop(npc.getObjectId());
+				setResult(true);
 				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
 			}
 		}
@@ -254,14 +253,18 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private void calcBossDrop(int npcObjId) {
 		Set<DropItem> dropItems = DropRegistrationService.getInstance().getCurrentDropMap().get(npcObjId);
-		if (dropItems != null) { // dropItems can possibly null if the player died right before the boss
+		if (dropItems != null) { // dropItems can possibly be null if the player died right before the boss
 			dropItems.clear();
 			dropItems.add(DropRegistrationService.getInstance().regDropItem(0, playerObjId, npcObjId, REWARD_COIN_ID, getRewardCoinAmount(rank)));
 		}
 	}
 
 	private int getRewardCoinAmount(int rank) {
-		return Math.round(MIN_REWARD + rank * REWARD_SCALE);
+		CustomInstanceRankEnum rankEnum = CustomInstanceRankEnum.getByRank(rank);
+		if (rankEnum != CustomInstanceRankEnum.ANCIENT_PLUS)
+			return rankEnum.getMinReward();
+		else
+			return (int) (rankEnum.getMinReward() + (rank - rankEnum.getMinRank()) * REWARD_SCALE);
 	}
 
 	private void adaptNPC(Npc npc, int rank) {
@@ -309,7 +312,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 						"Your rank has been decreased to " + CustomInstanceRankEnum.getRankDescription(rank) + ".", ChatType.BRIGHT_YELLOW_CENTER));
 
 					if (rank > 0) // prevent suicide abuse || loss rewards
-						ItemService.addItem(player, REWARD_COIN_ID, getRewardCoinAmount(rank), true);
+						ItemService.addItem(player, REWARD_COIN_ID, getRewardCoinAmount(oldRank), true);
 				}
 			}
 
