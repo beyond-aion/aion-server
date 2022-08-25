@@ -28771,7 +28771,7 @@
 			<random_item type="SPECIAL_MANASTONE_EPIC_GRADE" />
 		</items>
 		<items chance="1.0">
-			<item id="188053179" /><!-- Level 3 Grand Invasion Reward Box -->
+			<item id="188053183" /><!-- Level 1 Grand Invasion Reward Box -->
 			<item id="188053123" /><!-- Illuminary Obelisk Loot [Armor] -->
 			<item id="188053628" /><!-- Pallasite Bundle -->
 			<item id="188052554" /><!-- [Event] Beritra Idian Pouch -->
