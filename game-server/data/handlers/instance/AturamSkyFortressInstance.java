@@ -39,6 +39,10 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 	private AtomicInteger chiefKilled = new AtomicInteger();
 	private AtomicInteger generators = new AtomicInteger();
 
+	public AturamSkyFortressInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public void onDie(Npc npc) {
 		if (isInstanceDestroyed) {
@@ -168,8 +172,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		instance.setDoorState(177, true);
 		Npc npc = instance.getNpc(217371);
 		if (npc != null) {

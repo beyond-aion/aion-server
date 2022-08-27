@@ -41,6 +41,10 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	private final List<Integer> movies = new ArrayList<>();
 	private final AtomicBoolean isQueenMosquaHome = new AtomicBoolean(true);
 
+	public TalocsHollowInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public void onEnterInstance(Player player) {
 		addItems(player);
@@ -176,8 +180,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		instance.setDoorState(48, true);
 		instance.setDoorState(7, true);
 		spawnRings();
@@ -185,10 +188,10 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 
 	private void spawnRings() {
 		FlyRing f1 = new FlyRing(new FlyRingTemplate("TALOCS_1", mapId, new Point3D(253.85039, 649.23535, 1171.8772),
-			new Point3D(253.85039, 649.23535, 1177.8772), new Point3D(262.84872, 649.4091, 1171.8772), 8), instanceId);
+			new Point3D(253.85039, 649.23535, 1177.8772), new Point3D(262.84872, 649.4091, 1171.8772), 8), instance.getInstanceId());
 		f1.spawn();
 		FlyRing f2 = new FlyRing(new FlyRingTemplate("TALOCS_2", mapId, new Point3D(592.32275, 844.056, 1295.0966),
-			new Point3D(592.32275, 844.056, 1301.0966), new Point3D(595.2305, 835.5387, 1295.0966), 8), instanceId);
+			new Point3D(592.32275, 844.056, 1301.0966), new Point3D(595.2305, 835.5387, 1295.0966), 8), instance.getInstanceId());
 		f2.spawn();
 	}
 
@@ -213,7 +216,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-		TeleportService.teleportTo(player, mapId, instanceId, 202.26694f, 226.0532f, 1098.236f, (byte) 30);
+		TeleportService.teleportTo(player, instance, 202.26694f, 226.0532f, 1098.236f, (byte) 30);
 		return true;
 	}
 

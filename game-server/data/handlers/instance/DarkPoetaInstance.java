@@ -37,7 +37,10 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	private DarkPoetaReward instanceReward;
 	private Future<?> instanceTimer;
 	private long startTime;
-	private boolean isInstanceDestroyed;
+
+	public DarkPoetaInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onDie(Npc npc) {
@@ -86,7 +89,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	private void sendPacket(Npc npc, int points) {
 		if (npc != null)
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npc.getObjectTemplate().getL10n(), points));
-		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(new DarkPoetaScoreInfo(instanceReward), instanceReward, getTime()));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new DarkPoetaScoreInfo(instanceReward), getTime()));
 	}
 
 	private int checkRank(int totalPoints) {
@@ -114,10 +117,8 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 	private void schedulePortalDespawn(Npc portal) {
 		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isInstanceDestroyed) {
 				if (portal != null)
 					portal.getController().delete();
-			}
 		}, 180000);
 	}
 
@@ -267,17 +268,14 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onInstanceDestroy() {
-		if (instanceTimer != null) {
+		if (instanceTimer != null)
 			instanceTimer.cancel(false);
-		}
-		isInstanceDestroyed = true;
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		excludedNpcs.addAll(Arrays.asList(700439, 700440, 700441, 700442, 700443, 700444, 700445, 700446, 700447, 281178));
-		instanceReward = new DarkPoetaReward(mapId, instanceId);
+		instanceReward = new DarkPoetaReward();
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		startTime = System.currentTimeMillis();
 		instanceTimer = ThreadPoolManager.getInstance().schedule(() -> onStart(false), 121000);
@@ -286,7 +284,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	@Override
 	public void onGather(Player player, Gatherable gatherable) {
 		instanceReward.addGather();
-		sendPacket(null, instanceId);
+		sendPacket(null, 1);
 	}
 
 	@Override

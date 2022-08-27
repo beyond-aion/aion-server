@@ -52,9 +52,12 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 		chestPoints.add(new WorldPosition(301130000, 666.21979f, 345.6026f, 204.63773f, (byte) 30));
 	}
 
+	public SauroSupplyBaseInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		// spawn Sauro Base Grave Robber (pool=1)
 		switch (Rnd.get(1, 5)) {
 			case 1:

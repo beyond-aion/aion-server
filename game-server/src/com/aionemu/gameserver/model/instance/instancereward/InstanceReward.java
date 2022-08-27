@@ -11,15 +11,8 @@ import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
  */
 public class InstanceReward<T extends InstancePlayerReward> {
 
-	protected final int mapId;
-	protected final int instanceId;
 	private final List<T> instanceRewards = new ArrayList<>();
 	private InstanceProgressionType instanceProgressionType = InstanceProgressionType.START_PROGRESS;
-
-	public InstanceReward(int mapId, int instanceId) {
-		this.mapId = mapId;
-		this.instanceId = instanceId;
-	}
 
 	public List<T> getInstanceRewards() {
 		return instanceRewards;
@@ -52,14 +45,6 @@ public class InstanceReward<T extends InstancePlayerReward> {
 
 	public InstanceProgressionType getInstanceProgressionType() {
 		return instanceProgressionType;
-	}
-
-	public int getMapId() {
-		return mapId;
-	}
-
-	public int getInstanceId() {
-		return instanceId;
 	}
 
 	public boolean isRewarded() {

@@ -3,12 +3,17 @@ package instance;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Yeats
  */
 @InstanceID(301360000)
 public class InfernalDanuarReliquaryInstance extends DanuarReliquaryInstance {
+
+	public InfernalDanuarReliquaryInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	protected int getExitId() {

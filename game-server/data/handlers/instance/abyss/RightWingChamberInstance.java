@@ -2,8 +2,6 @@ package instance.abyss;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_START_IDABRE;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -26,19 +24,16 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class RightWingChamberInstance extends GeneralInstanceHandler {
 
 	private AtomicLong startTime = new AtomicLong();
-	private boolean isInstanceDestroyed = false;
 	private Race instanceRace;
 
-	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		spawnRings();
+	public RightWingChamberInstance(WorldMapInstance instance) {
+		super(instance);
 	}
 
-	private void spawnRings() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("RIGHT_WING_1", mapId, new Point3D(271.87686, 361.04962, 107.83435), new Point3D(262.87686,
-			361.04962, 113.83435), new Point3D(256.22054, 358.58627, 107.83435), 8), instanceId);
-		f1.spawn();
+	@Override
+	public void onInstanceCreate() {
+		new FlyRing(new FlyRingTemplate("RIGHT_WING_1", mapId, new Point3D(271.87686, 361.04962, 107.83435), new Point3D(262.87686,
+			361.04962, 113.83435), new Point3D(256.22054, 358.58627, 107.83435), 8), instance.getInstanceId()).spawn();
 	}
 
 	@Override
@@ -47,15 +42,7 @@ public class RightWingChamberInstance extends GeneralInstanceHandler {
 			if (startTime.compareAndSet(0, System.currentTimeMillis())) {
 				PacketSendUtility.sendPacket(player, STR_MSG_INSTANCE_START_IDABRE());
 				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900));
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						despawnNpcs(getNpcs(700471));
-						despawnNpcs(getNpcs(701482));
-						despawnNpcs(getNpcs(701487));
-					}
-				}, 900000);
+				ThreadPoolManager.getInstance().schedule(() -> despawnNpcs(700471, 701482, 701487), 900000);
 			}
 		}
 		return false;
@@ -77,27 +64,12 @@ public class RightWingChamberInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	private List<Npc> getNpcs(int npcId) {
-		if (!isInstanceDestroyed) {
-			return instance.getNpcs(npcId);
-		}
-		return Collections.emptyList();
-	}
-
-	private void despawnNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
+	private void despawnNpcs(int... npcIds) {
+		for (Npc npc : instance.getNpcs(npcIds))
 			npc.getController().delete();
-		}
 	}
 
 	private void spawnGoldChest() {
-		final int chestId = instanceRace.equals(Race.ELYOS) ? 701482 : 701487;
-		spawn(chestId, 261.69f, 206.11f, 102.33f, (byte) 30);
-	}
-
-	@Override
-	public void onInstanceDestroy() {
-		isInstanceDestroyed = true;
-		startTime.set(0);
+		spawn(instanceRace == Race.ELYOS ? 701482 : 701487, 261.69f, 206.11f, 102.33f, (byte) 30);
 	}
 }

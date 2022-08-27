@@ -20,6 +20,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * aka Rukibuki Zirkus
@@ -32,6 +33,10 @@ public class NightmareCircus extends GeneralInstanceHandler {
 	private boolean isInstanceDestroyed;
 	private Future<?>[] despawnTasks = new Future<?>[2];
 	private AtomicBoolean moviePlayed = new AtomicBoolean();
+
+	public NightmareCircus(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onEnterInstance(Player player) {
@@ -367,7 +372,7 @@ public class NightmareCircus extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-		TeleportService.teleportTo(player, mapId, instanceId, 473.54022f, 567.6342f, 201.83635f, (byte) 118);
+		TeleportService.teleportTo(player, instance, 473.54022f, 567.6342f, 201.83635f, (byte) 118);
 		return true;
 	}
 

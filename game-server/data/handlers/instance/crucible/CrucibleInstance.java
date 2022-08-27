@@ -25,6 +25,10 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 	protected StageType stageType = StageType.DEFAULT;
 	protected InstanceReward<CruciblePlayerReward> instanceReward;
 
+	public CrucibleInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public void onEnterInstance(Player player) {
 		if (!instanceReward.containsPlayer(player.getObjectId())) {
@@ -33,12 +37,11 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		instanceReward = new InstanceReward<>(mapId, instanceId);
+	public void onInstanceCreate() {
+		instanceReward = new InstanceReward<>();
 	}
 
-	protected void addPlayerReward(Player player) {
+	private void addPlayerReward(Player player) {
 		instanceReward.addPlayerReward(new CruciblePlayerReward(player.getObjectId()));
 	}
 
@@ -81,7 +84,7 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 	}
 
 	protected void teleport(Player player, float x, float y, float z, byte h) {
-		TeleportService.teleportTo(player, mapId, instanceId, x, y, z, h);
+		TeleportService.teleportTo(player, instance, x, y, z, h);
 	}
 
 	@Override

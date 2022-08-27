@@ -2,8 +2,6 @@ package instance.abyss;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_START_IDABRE;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -26,19 +24,16 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class SulfurTreeNestInstance extends GeneralInstanceHandler {
 
 	private AtomicLong startTime = new AtomicLong();
-	private boolean isInstanceDestroyed = false;
 	private Race instanceRace;
 
-	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		spawnRings();
+	public SulfurTreeNestInstance(WorldMapInstance instance) {
+		super(instance);
 	}
 
-	private void spawnRings() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("SULFUR_1", mapId, new Point3D(462.9394, 380.34888, 168.97256), new Point3D(462.9394, 380.34888,
-			174.97256), new Point3D(468.9229, 380.7933, 168.97256), 6), instanceId);
-		f1.spawn();
+	@Override
+	public void onInstanceCreate() {
+		new FlyRing(new FlyRingTemplate("SULFUR_1", mapId, new Point3D(462.9394, 380.34888, 168.97256), new Point3D(462.9394, 380.34888,
+			174.97256), new Point3D(468.9229, 380.7933, 168.97256), 6), instance.getInstanceId()).spawn();
 	}
 
 	@Override
@@ -47,18 +42,7 @@ public class SulfurTreeNestInstance extends GeneralInstanceHandler {
 			if (startTime.compareAndSet(0, System.currentTimeMillis())) {
 				PacketSendUtility.sendPacket(player, STR_MSG_INSTANCE_START_IDABRE());
 				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900));
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						despawnNpcs(getNpcs(214804));
-						despawnNpcs(getNpcs(700463));
-						despawnNpcs(getNpcs(700462));
-						despawnNpcs(getNpcs(700464));
-						despawnNpcs(getNpcs(701485));
-						despawnNpcs(getNpcs(701480));
-					}
-				}, 900000);
+				ThreadPoolManager.getInstance().schedule(() -> despawnNpcs(214804, 700463, 700462, 700464, 701485, 701480), 900000);
 			}
 		}
 		return false;
@@ -81,27 +65,12 @@ public class SulfurTreeNestInstance extends GeneralInstanceHandler {
 
 	}
 
-	private List<Npc> getNpcs(int npcId) {
-		if (!isInstanceDestroyed) {
-			return instance.getNpcs(npcId);
-		}
-		return Collections.emptyList();
-	}
-
-	private void despawnNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
+	private void despawnNpcs(int... npcIds) {
+		for (Npc npc : instance.getNpcs(npcIds))
 			npc.getController().delete();
-		}
 	}
 
 	private void spawnGoldChest() {
-		final int chestId = instanceRace.equals(Race.ELYOS) ? 701480 : 701485;
-		spawn(chestId, 482.87f, 474.07f, 163.16f, (byte) 90);
-	}
-
-	@Override
-	public void onInstanceDestroy() {
-		isInstanceDestroyed = true;
-		startTime.set(0);
+		spawn(instanceRace == Race.ELYOS ? 701480 : 701485, 482.87f, 474.07f, 163.16f, (byte) 90);
 	}
 }

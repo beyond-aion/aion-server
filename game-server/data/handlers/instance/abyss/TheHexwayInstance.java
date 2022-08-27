@@ -62,9 +62,12 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 
 	private final AtomicBoolean handlingSecondBoss = new AtomicBoolean();
 
+	public TheHexwayInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		initTimerTrigger();
 	}
 
@@ -314,12 +317,12 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 
 	private void spawnBonusChestTimerTrigger() {
 		FlyRing f1 = new FlyRing(new FlyRingTemplate("HEXWAY_BONUSCHEST", mapId, new Point3D(576.2102, 585.4146, 353.90677),
-			new Point3D(576.2102, 585.4146, 359.90677), new Point3D(575.18384, 596.36664, 353.90677), 10), instanceId);
+			new Point3D(576.2102, 585.4146, 359.90677), new Point3D(575.18384, 596.36664, 353.90677), 10), instance.getInstanceId());
 		f1.spawn();
 	}
 
 	private void spawnBossTimerTrigger(int number, Point3D p1, Point3D center, Point3D p2) {
-		FlyRing timerBarrier = new FlyRing(new FlyRingTemplate("HEXWAY_BOSS_" + number, mapId, center, p1, p2, 10), instanceId);
+		FlyRing timerBarrier = new FlyRing(new FlyRingTemplate("HEXWAY_BOSS_" + number, mapId, center, p1, p2, 10), instance.getInstanceId());
 		timerBarrier.spawn();
 	}
 

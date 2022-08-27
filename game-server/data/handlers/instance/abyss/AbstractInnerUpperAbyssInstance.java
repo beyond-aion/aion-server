@@ -65,6 +65,10 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 
 	private Future<?> chestReductionTask;
 
+	public AbstractInnerUpperAbyssInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	/**
 	 * @return
 	 *         - the awakened boss id
@@ -96,8 +100,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 	protected abstract int getTimerNpcId();
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		spawn(getKeymasterId() + Rnd.get(4), 527.64f, 212.0511f, 178.4134f, (byte) 90);
 
 		chestLocations.add(new WorldPosition(mapId, 575.664f, 853.248f, 199.3737f, (byte) 63));

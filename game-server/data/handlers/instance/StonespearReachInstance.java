@@ -47,10 +47,13 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private final List<Integer> allowedPlayers = new ArrayList<>();
 	private final List<Integer> deadPlayers = new ArrayList<>();
 
+	public StonespearReachInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		reward = new LegionDominionReward(mapId, instanceId);
+	public void onInstanceCreate() {
+		reward = new LegionDominionReward();
 		reward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		spawn(833284, 231.14f, 264.399f, 96.23f, (byte) 1, 14);
 		addWorldPoints();
@@ -70,14 +73,14 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	public void onEnterInstance(Player player) {
 		if (!allowedPlayers.contains(player.getObjectId())) {
 			if (allowedPlayers.size() >= 12) {
-				TeleportService.teleportTo(player, mapId, instanceId, 152, 264, 103);
+				TeleportService.teleportTo(player, instance, 152, 264, 103);
 			} else {
 				allowedPlayers.add(player.getObjectId());
 			}
 		}
 
 		if (deadPlayers.contains(player.getObjectId())) {
-			TeleportService.teleportTo(player, mapId, instanceId, 152, 264, 103);
+			TeleportService.teleportTo(player, instance, 152, 264, 103);
 		}
 
 		if (reward != null && !reward.isRewarded()) {
@@ -674,7 +677,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private void sendPacket(String npcL10n, int points) {
 		if (npcL10n != null)
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(new LegionDominionScoreInfo(reward), reward, getTime()));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new LegionDominionScoreInfo(reward), getTime()));
 	}
 
 	private int getTime() {
@@ -812,7 +815,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		}
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		TeleportService.teleportTo(player, mapId, instanceId, 152, 264, 103);
+		TeleportService.teleportTo(player, instance, 152, 264, 103);
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_LEGION_DOMINION_MOVE_BIRTHAREA_FRIENDLY(player.getName()));
 		checkInstance();
 		return true;

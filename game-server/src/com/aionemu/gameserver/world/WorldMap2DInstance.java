@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.world;
 
+import java.util.function.Function;
+
+import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -9,8 +12,8 @@ public class WorldMap2DInstance extends WorldMapInstance {
 
 	private final int ownerId;
 
-	public WorldMap2DInstance(WorldMap parent, int instanceId, int ownerId, int maxPlayers) {
-		super(parent, instanceId, maxPlayers);
+	public WorldMap2DInstance(WorldMap parent, int instanceId, int ownerId, int maxPlayers, Function<WorldMapInstance, InstanceHandler> instanceHandlerSupplier) {
+		super(parent, instanceId, maxPlayers, instanceHandlerSupplier);
 		this.ownerId = ownerId;
 	}
 

@@ -14,6 +14,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -27,6 +28,10 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 	private byte timeInMin = -1;
 	private byte secretLabEntranceCount = 0;
 	private Race instanceRace;
+
+	public LinkgateFoundryInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onEnterInstance(Player player) {

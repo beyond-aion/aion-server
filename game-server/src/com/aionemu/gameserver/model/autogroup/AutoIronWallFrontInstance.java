@@ -73,7 +73,7 @@ public class AutoIronWallFrontInstance extends AutoInstance {
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
 		IronWallFrontService.getInstance().addCooldown(player);
-		((IronWallFrontReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player);
+		((IronWallFrontReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player, instance);
 	}
 
 	@Override

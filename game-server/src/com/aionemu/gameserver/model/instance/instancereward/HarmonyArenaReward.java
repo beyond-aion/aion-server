@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.instance.instancereward;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,8 +19,8 @@ public class HarmonyArenaReward extends PvPArenaReward {
 
 	private List<HarmonyGroupReward> groups = new ArrayList<>();
 
-	public HarmonyArenaReward(int mapId, int instanceId, WorldMapInstance instance) {
-		super(mapId, instanceId, instance);
+	public HarmonyArenaReward(WorldMapInstance instance) {
+		super(instance);
 	}
 
 	public HarmonyGroupReward getHarmonyGroupReward(int objectId) {
@@ -67,15 +66,12 @@ public class HarmonyArenaReward extends PvPArenaReward {
 
 	public void sendPacket(int type, Player owner) {
 		int time = getTime();
-		instance.forEachPlayer(player -> {
-			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(this, type, owner == null ? player : owner), this, time));
-		});
+		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(this, type, owner == null ? player : owner), time)));
 	}
 
 	@Override
 	public int getRank(int points) {
-		List<HarmonyGroupReward> sortedByPoints = groups.stream().sorted((r1, r2) -> Integer.compare(r2.getPoints(), r1.getPoints()))
-			.collect(Collectors.toList());
+		List<HarmonyGroupReward> sortedByPoints = groups.stream().sorted((r1, r2) -> Integer.compare(r2.getPoints(), r1.getPoints())).toList();
 		int rank = -1;
 		for (HarmonyGroupReward reward : sortedByPoints) {
 			if (reward.getPoints() >= points) {
@@ -87,7 +83,7 @@ public class HarmonyArenaReward extends PvPArenaReward {
 
 	@Override
 	public int getTotalPoints() {
-		return groups.stream().mapToInt(r -> r.getPoints()).sum();
+		return groups.stream().mapToInt(InstancePlayerReward::getPoints).sum();
 	}
 
 	@Override

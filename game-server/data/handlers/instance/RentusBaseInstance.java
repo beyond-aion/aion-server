@@ -19,6 +19,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * According to the version 4.8 the instance was simplified and shortened. The starting point of this
@@ -35,6 +36,10 @@ public class RentusBaseInstance extends GeneralInstanceHandler {
 
 	private final AtomicBoolean isRaceKnown = new AtomicBoolean();
 	private final AtomicBoolean isXastaEventStarted = new AtomicBoolean();
+
+	public RentusBaseInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onDie(final Npc npc) {

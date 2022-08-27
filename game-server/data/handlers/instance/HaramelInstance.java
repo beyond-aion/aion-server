@@ -9,12 +9,17 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Undertrey
  */
 @InstanceID(300200000)
 public class HaramelInstance extends GeneralInstanceHandler {
+
+	public HaramelInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onDie(Npc npc) {

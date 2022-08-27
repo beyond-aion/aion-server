@@ -33,25 +33,28 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @author xTz
  */
-public class PvPArenaInstance extends GeneralInstanceHandler {
+public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 	private boolean isInstanceDestroyed;
 	protected PvPArenaReward instanceReward;
 	protected int killBonus;
 	protected int deathFine;
 
+	public PvPArenaInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-		PvPArenaPlayerReward ownerReward = getPlayerReward(player.getObjectId());
+		PvPArenaPlayerReward ownerReward = getPlayerReward(player);
 		ownerReward.endBoostMoraleEffect(player);
 		ownerReward.applyBoostMoraleEffect(player);
 		sendPacket();
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
 
 		if (lastAttacker != null && lastAttacker != player) {
-			if (lastAttacker instanceof Player) {
-				Player winner = (Player) lastAttacker;
-				PvPArenaPlayerReward reward = getPlayerReward(winner.getObjectId());
+			if (lastAttacker instanceof Player winner) {
+				PvPArenaPlayerReward reward = getPlayerReward(winner);
 				reward.addPvPKillToPlayer();
 
 				// notify Kill-Quests
@@ -72,33 +75,27 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 		}
 
 		int bonus;
-		int rank = 0;
-
 		// Decrease victim points
-		if (victim instanceof Player) {
-			PvPArenaPlayerReward victimFine = getPlayerReward(victim.getObjectId());
+		if (victim instanceof Player player) {
+			PvPArenaPlayerReward victimFine = getPlayerReward(player);
 			victimFine.addPoints(deathFine);
 			bonus = killBonus;
-			rank = instanceReward.getRank(victimFine.getPoints());
+			if (instanceReward.getRound() == 3 && instanceReward.getRank(victimFine.getPoints()) == 0)
+				bonus *= 3;
 		} else
 			bonus = getNpcBonus(((Npc) victim).getNpcId());
 
 		if (bonus == 0)
 			return;
 
-		if (victim instanceof Player && instanceReward.getRound() == 3 && rank == 0)
-			bonus *= 3;
-
 		int totalDamage = victim.getAggroList().getTotalDamage();
 		// Reward all damagers
 		for (AggroInfo aggroInfo : victim.getAggroList().getFinalDamageList(false)) {
 			if (aggroInfo.getDamage() == 0) // e.g. when victim got killed by lava, but attacker only debuffed him without dealing damage
 				continue;
-			if (!(aggroInfo.getAttacker() instanceof Creature))
-				continue;
-			if (((Creature) aggroInfo.getAttacker()).getMaster() instanceof Player attacker) {
+			if (aggroInfo.getAttacker() instanceof Creature creature && creature.getMaster() instanceof Player attacker) {
 				int rewardPoints = bonus * aggroInfo.getDamage() / totalDamage;
-				getPlayerReward(attacker.getObjectId()).addPoints(rewardPoints);
+				getPlayerReward(attacker).addPoints(rewardPoints);
 				sendSystemMsg(attacker, victim, rewardPoints);
 			}
 		}
@@ -128,9 +125,8 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(Player player) {
 		int objectId = player.getObjectId();
-		if (!instanceReward.containsPlayer(objectId)) {
-			instanceReward.regPlayerReward(objectId);
-			getPlayerReward(objectId).applyBoostMoraleEffect(player);
+		if (instanceReward.regPlayerReward(player)) {
+			getPlayerReward(player).applyBoostMoraleEffect(player);
 			instanceReward.setRndPosition(objectId);
 		} else {
 			instanceReward.portToPosition(player);
@@ -143,15 +139,10 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnRndRelics(int time) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-					spawn(Rnd.get(1, 2) == 1 ? 701187 : 701188, 1841.951f, 1733.968f, 300.242f, (byte) 0);
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
+				spawn(Rnd.get(1, 2) == 1 ? 701187 : 701188, 1841.951f, 1733.968f, 300.242f, (byte) 0);
 			}
-
 		}, time);
 	}
 
@@ -231,79 +222,58 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onPlayerLogOut(Player player) {
-		getPlayerReward(player.getObjectId()).updateLogOutTime();
+		getPlayerReward(player).updateLogOutTime();
 	}
 
 	@Override
 	public void onPlayerLogin(Player player) {
-		getPlayerReward(player.getObjectId()).updateBonusTime();
+		getPlayerReward(player).updateBonusTime();
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		instanceReward = new PvPArenaReward(mapId, instanceId, instance);
+	public void onInstanceCreate() {
+		instanceReward = new PvPArenaReward(instance);
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		spawnRings();
 		if (!instanceReward.isSoloArena()) {
 			spawnRndRelics(0);
 		}
 		instanceReward.setInstanceStartTime();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				// start round 1
-				if (!isInstanceDestroyed && !instanceReward.isRewarded() && canStart()) {
-					instance.forEachDoor(door -> door.setOpen(true));
-					sendPacket(new SM_SYSTEM_MESSAGE(1401058));
-					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
-					sendPacket();
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							// start round 2
+		ThreadPoolManager.getInstance().schedule(() -> {
+			// start round 1
+			if (!isInstanceDestroyed && !instanceReward.isRewarded() && canStart()) {
+				instance.forEachDoor(door -> door.setOpen(true));
+				sendPacket(new SM_SYSTEM_MESSAGE(1401058));
+				instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
+				sendPacket();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					// start round 2
+					if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
+						instanceReward.setRound(2);
+						instanceReward.setRndZone();
+						sendPacket();
+						changeZone();
+						ThreadPoolManager.getInstance().schedule(() -> {
+							// start round 3
 							if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-								instanceReward.setRound(2);
+								instanceReward.setRound(3);
 								instanceReward.setRndZone();
+								sendPacket(new SM_SYSTEM_MESSAGE(1401203));
 								sendPacket();
 								changeZone();
-								ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-									@Override
-									public void run() {
-										// start round 3
-										if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-											instanceReward.setRound(3);
-											instanceReward.setRndZone();
-											sendPacket(new SM_SYSTEM_MESSAGE(1401203));
-											sendPacket();
-											changeZone();
-											ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-												@Override
-												public void run() {
-													// end
-													if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-														instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
-														reward();
-														sendPacket();
-													}
-												}
-
-											}, 180000);
-										}
+								ThreadPoolManager.getInstance().schedule(() -> {
+									// end
+									if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
+										instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
+										reward();
+										sendPacket();
 									}
-
 								}, 180000);
 							}
-						}
-
-					}, 180000);
-				}
+						}, 180000);
+					}
+				}, 180000);
 			}
-
 		}, 120000);
 	}
 
@@ -323,9 +293,8 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
-	protected PvPArenaPlayerReward getPlayerReward(int objectId) {
-		instanceReward.regPlayerReward(objectId);
-		return instanceReward.getPlayerReward(objectId);
+	protected PvPArenaPlayerReward getPlayerReward(Player player) {
+		return instanceReward.getPlayerReward(player.getObjectId());
 	}
 
 	@Override
@@ -342,7 +311,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	@Override
 	public void onLeaveInstance(Player player) {
 		clearDebuffs(player);
-		PvPArenaPlayerReward playerReward = getPlayerReward(player.getObjectId());
+		PvPArenaPlayerReward playerReward = getPlayerReward(player);
 		if (playerReward != null) {
 			playerReward.endBoostMoraleEffect(player);
 			instanceReward.clearPosition(playerReward.getPosition(), Boolean.FALSE);
@@ -361,9 +330,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	protected void sendPacket() {
-		instanceReward.sendPacket();
-	}
+	protected abstract void sendPacket();
 
 	@Override
 	public void onInstanceDestroy() {
@@ -372,16 +339,11 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 	}
 
 	private void changeZone() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				for (Player player : instance.getPlayersInside()) {
-					instanceReward.portToPosition(player);
-				}
-				sendPacket();
+		ThreadPoolManager.getInstance().schedule(() -> {
+			for (Player player : instance.getPlayersInside()) {
+				instanceReward.portToPosition(player);
 			}
-
+			sendPacket();
 		}, 1000);
 	}
 
@@ -389,7 +351,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 		for (Player player : instance.getPlayersInside()) {
 			if (player.isDead())
 				PlayerReviveService.duelRevive(player);
-			PvPArenaPlayerReward reward = getPlayerReward(player.getObjectId());
+			PvPArenaPlayerReward reward = getPlayerReward(player);
 			if (!reward.isRewarded()) {
 				reward.setRewarded();
 				AbyssPointsService.addAp(player, reward.getBasicAP() + reward.getRankingAP() + reward.getScoreAP());
@@ -470,7 +432,7 @@ public class PvPArenaInstance extends GeneralInstanceHandler {
 		if (skill != 0) {
 			useSkill(npc, player, skill >> 8, skill & 0xFF);
 		}
-		getPlayerReward(player.getObjectId()).addPoints(rewardetPoints);
+		getPlayerReward(player).addPoints(rewardetPoints);
 		sendSystemMsg(player, npc, rewardetPoints);
 		sendPacket();
 	}

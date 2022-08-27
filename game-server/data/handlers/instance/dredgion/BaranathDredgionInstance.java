@@ -8,12 +8,17 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author xTz
  */
 @InstanceID(300110000)
-public class BaranathDredgionInstance2 extends DredgionInstance2 {
+public class BaranathDredgionInstance extends DredgionInstance {
+
+	public BaranathDredgionInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onEnterInstance(Player player) {
@@ -33,11 +38,11 @@ public class BaranathDredgionInstance2 extends DredgionInstance2 {
 		super.onEnterInstance(player);
 	}
 
-	private void onDieSurkan(Npc npc, Player mostPlayerDamage, int points) {
+	private void onDieSurkana(Npc npc, Player mostPlayerDamage, int points) {
 		Race race = mostPlayerDamage.getRace();
 		captureRoom(race, npc.getNpcId() + 14 - 700498);
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_ROOM_DESTROYED(race.getL10n(), npc.getObjectTemplate().getL10n()));
-		if (++surkanKills == 5) {
+		if (killedSurkanas.incrementAndGet() == 5) {
 			spawn(214823, 485.423f, 808.826f, 416.868f, (byte) 30);
 			sendMsgByRace(1401416, Race.PC_ALL, 0);
 		}
@@ -58,26 +63,26 @@ public class BaranathDredgionInstance2 extends DredgionInstance2 {
 			case 700486:
 			case 700495:
 			case 700496:
-				onDieSurkan(npc, mostPlayerDamage, 500);
+				onDieSurkana(npc, mostPlayerDamage, 500);
 				return;
 			case 700497:
 			case 700498:
-				onDieSurkan(npc, mostPlayerDamage, 700);
+				onDieSurkana(npc, mostPlayerDamage, 700);
 				return;
 			case 700493:
 			case 700492:
-				onDieSurkan(npc, mostPlayerDamage, 800);
+				onDieSurkana(npc, mostPlayerDamage, 800);
 				return;
 			case 700487:
-				onDieSurkan(npc, mostPlayerDamage, 900);
+				onDieSurkana(npc, mostPlayerDamage, 900);
 				return;
 			case 700490:
 			case 700491:
-				onDieSurkan(npc, mostPlayerDamage, 600);
+				onDieSurkana(npc, mostPlayerDamage, 600);
 				return;
 			case 700488:
 			case 700489:
-				onDieSurkan(npc, mostPlayerDamage, 1080);
+				onDieSurkana(npc, mostPlayerDamage, 1080);
 				return;
 			case 214823:
 				updateScore(mostPlayerDamage, npc, 1000, false);

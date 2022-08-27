@@ -3,48 +3,44 @@ package com.aionemu.gameserver.network.aion.instanceinfo;
 import java.nio.ByteBuffer;
 
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.KamarReward;
 import com.aionemu.gameserver.model.instance.playerreward.KamarPlayerReward;
 
 /**
  * @author xTz
  */
-public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
+public class KamarBattlefieldScoreInfo extends InstanceScoreInfo<KamarReward> {
 
-	private final KamarReward kamarReward;
 	private final int type;
 	private final int objectId;
-	private final InstanceProgressionType instanceScoreType;
 
-	public KamarBattlefieldScoreInfo(KamarReward kamarReward, int type, int objectId) {
-		this.kamarReward = kamarReward;
+	public KamarBattlefieldScoreInfo(KamarReward reward, int type, int objectId) {
+		super(reward);
 		this.type = type;
 		this.objectId = objectId;
-		this.instanceScoreType = kamarReward.getInstanceProgressionType();
 	}
 
 	@Override
 	public void writeMe(ByteBuffer buf) {
 		writeC(buf, type);
 
-		KamarPlayerReward kamarPlayerReward = null;
+		KamarPlayerReward kamarPlayerReward;
 		switch (type) {
 			case 3:
-				kamarPlayerReward = kamarReward.getPlayerReward(objectId);
+				kamarPlayerReward = reward.getPlayerReward(objectId);
 				writeD(buf, 10); // buff id
 				writeD(buf, kamarPlayerReward.getRemaningTime()); // bufftime
 				writeD(buf, kamarPlayerReward.getOwnerId()); // objectId
-				writeD(buf, kamarPlayerReward.getRace().equals(Race.ELYOS) ? 0 : 1); // elyos 0 asmodians 1
+				writeD(buf, kamarPlayerReward.getRace() == Race.ELYOS ? 0 : 1);
 				break;
 			case 4:
-				kamarPlayerReward = kamarReward.getPlayerReward(objectId);
+				kamarPlayerReward = reward.getPlayerReward(objectId);
 				writeD(buf, 10); // buff id
 				writeD(buf, kamarPlayerReward.getRemaningTime()); // bufftime
 				writeD(buf, kamarPlayerReward.getOwnerId()); // objectId
 				break;
 			case 5: // reward
-				kamarPlayerReward = kamarReward.getPlayerReward(objectId);
+				kamarPlayerReward = reward.getPlayerReward(objectId);
 				writeD(buf, 100); // partitipation
 				writeD(buf, kamarPlayerReward.getBaseReward());
 				writeD(buf, kamarPlayerReward.getBonusReward());
@@ -73,7 +69,7 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 				break;
 			case 6:
 				writeD(buf, 100);
-				KamarPlayerReward[] kamarElyos = kamarReward.getPlayersByRace(Race.ELYOS);
+				KamarPlayerReward[] kamarElyos = reward.getPlayersByRace(Race.ELYOS);
 				for (KamarPlayerReward reward : kamarElyos) {
 					if (reward != null) {
 						writeD(buf, 10); // buff id
@@ -85,7 +81,7 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 						writeD(buf, 0);
 					}
 				}
-				KamarPlayerReward[] kamarAsmodians = kamarReward.getPlayersByRace(Race.ASMODIANS);
+				KamarPlayerReward[] kamarAsmodians = reward.getPlayersByRace(Race.ASMODIANS);
 				for (KamarPlayerReward reward : kamarAsmodians) {
 					if (reward != null) {
 						writeD(buf, 10); // buff id
@@ -99,21 +95,21 @@ public class KamarBattlefieldScoreInfo extends InstanceScoreInfo {
 				}
 				// elyos reward
 				writeC(buf, 0);
-				writeD(buf, kamarReward.getElyosKills().intValue());
-				writeD(buf, kamarReward.getElyosPoints().intValue());
+				writeD(buf, reward.getElyosKills());
+				writeD(buf, reward.getElyosPoints());
 				writeD(buf, 0); // asmodians 0
-				writeD(buf, instanceScoreType.isReinforcing() ? 1 : 0xFFFF);// 1 | 65535 - 0xFFFF | 0
+				writeD(buf, reward.getInstanceProgressionType().isReinforcing() ? 1 : 0xFFFF);// 1 | 65535 - 0xFFFF | 0
 				// asmodians reward
 				writeC(buf, 0);
-				writeD(buf, kamarReward.getAsmodiansKills().intValue());
-				writeD(buf, kamarReward.getAsmodiansPoint().intValue());
+				writeD(buf, reward.getAsmodiansKills());
+				writeD(buf, reward.getAsmodiansPoints());
 				writeD(buf, 1); // elyos
-				writeD(buf, instanceScoreType.isReinforcing() ? 1 : 0xFFFF); // 1 | 65535 - 0xFFFF | 0
+				writeD(buf, reward.getInstanceProgressionType().isReinforcing() ? 1 : 0xFFFF); // 1 | 65535 - 0xFFFF | 0
 				break;
 			case 10:
 				writeC(buf, 0);
-				writeD(buf, kamarReward.getKillsByRace(objectId == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
-				writeD(buf, kamarReward.getPointsByRace(objectId == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
+				writeD(buf, objectId == 0 ? reward.getElyosKills() : reward.getAsmodiansKills());
+				writeD(buf, objectId == 0 ? reward.getElyosPoints() : reward.getAsmodiansPoints());
 				writeD(buf, objectId); // elyos 0 asmodians 1
 				writeD(buf, 0);
 				break;

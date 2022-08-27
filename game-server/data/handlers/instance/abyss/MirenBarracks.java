@@ -2,6 +2,7 @@ package instance.abyss;
 
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * Created on June 23rd, 2016
@@ -11,6 +12,10 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
  */
 @InstanceID(301290000)
 public class MirenBarracks extends AbstractInnerUpperAbyssInstance {
+
+	public MirenBarracks(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	protected int getBossId() {

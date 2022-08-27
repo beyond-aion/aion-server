@@ -15,6 +15,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * After activating the start device one of three game events will be chosen.
@@ -41,6 +42,10 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 
 	private List<Future<?>> tasks;
 
+	public DanuarMysticariumInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public void onOpenDoor(int door) {
 			switch (door) {
@@ -62,11 +67,11 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 				startTasks();
 				instance.setDoorState(3, true);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_1());
-				TeleportService.teleportTo(player, mapId, instanceId, 140.45f, 182.2f, 242f, (byte) 10, TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, instance, 140.45f, 182.2f, 242f, (byte) 10, TeleportAnimation.FADE_OUT_BEAM);
 				npc.getController().delete();
 				break;
 			case 702715:
-				TeleportService.teleportTo(player, mapId, instanceId, 236.1f, 488.86f, 152f, (byte) 25, TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, instance, 236.1f, 488.86f, 152f, (byte) 25, TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 702717:
 				TeleportService.moveToInstanceExit(player, mapId, player.getRace());

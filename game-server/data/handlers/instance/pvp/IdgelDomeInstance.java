@@ -49,10 +49,13 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 	private IdgelDomeInfo idi;
 	private long startTime;
 
+	public IdgelDomeInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		idi = new IdgelDomeInfo(mapId, instanceId);
+	public void onInstanceCreate() {
+		idi = new IdgelDomeInfo();
 		idi.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		startTime = System.currentTimeMillis();
 		tasks.add(ThreadPoolManager.getInstance().schedule(this::onStart, 120000));
@@ -61,9 +64,9 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 	private void onStart() {
 		idi.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 		startTime = System.currentTimeMillis();
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PROGRESS), idi, getTime()));
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), idi, getTime()));
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), idi, getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PROGRESS), getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), getTime()));
 		instance.forEachDoor(door -> door.setOpen(true));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> spawn(234190, 264.4382f, 258.58527f, 88.452042f, (byte) 31), 600000));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> onStop(false), 1200000));
@@ -77,10 +80,10 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		cancelTasks();
 
 		idi.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PROGRESS), idi, getTime()));
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), idi, getTime()));
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), idi, getTime()));
-		Race winningrace = idi.getWinningRace();
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PROGRESS), getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), getTime()));
+		Race winningrace = idi.getRaceWithHighestPoints();
 		int winnerBonusAp = Rnd.get(10000, 14000);
 		int loserBonusAp = Rnd.get(3000, 6000);
 		boolean isEventActive = ServerTime.now().isAfter(ServerTime.of(LocalDateTime.of(2020, 3, 27, 0, 0)))
@@ -88,7 +91,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		instance.forEachPlayer(p -> {
 			IdgelDomePlayerInfo reward = idi.getPlayerReward(p.getObjectId());
 			if (reward.getRace() == winningrace) {
-				reward.setBaseAp(IdgelDomeInfo.WIN_AP);
+				reward.setBaseAp(idi.getWinnerApReward());
 				reward.setBonusAp(winnerBonusAp);
 				reward.setBaseGp(50);
 				reward.setReward1(186000242, 3, 0);
@@ -103,7 +106,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				if (isEventActive)
 					reward.setBonusReward(186000388, 35);
 			} else {
-				reward.setBaseAp(IdgelDomeInfo.DEFEAT_AP);
+				reward.setBaseAp(idi.getLoserApReward());
 				reward.setBonusAp(loserBonusAp);
 				reward.setBaseGp(10);
 				reward.setReward1(186000242, 1, 0);
@@ -111,7 +114,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 				if (isEventActive)
 					reward.setBonusReward(186000388, 15);
 			}
-			sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.SHOW_REWARD, p.getObjectId(), 0), idi, getTime()));
+			sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.SHOW_REWARD, p.getObjectId(), 0), getTime()));
 			AbyssPointsService.addAp(p, reward.getBaseAp() + reward.getBonusAp());
 			int gpToAdd = reward.getBaseGp() + reward.getBonusGp();
 			if (gpToAdd > 0)
@@ -183,20 +186,20 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_STATUS, player.getObjectId(), 60), idi, getTime()));
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.INIT_PLAYER, player.getObjectId(), 60), idi, getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_STATUS, player.getObjectId(), 60), getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.INIT_PLAYER, player.getObjectId(), 60), getTime()));
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), false, 0, 8));
 		if (lastAttacker instanceof Player) {
 			if (lastAttacker.getRace() != player.getRace()) {
 				int killPoints = 200;
 				// After 10 minutes the outplayed faction gets bonus points
-				if (idi.isStartProgress() && getTime() >= 600000 && !player.getRace().equals(idi.getWinningRace()))
+				if (idi.isStartProgress() && getTime() >= 600000 && player.getRace() != idi.getRaceWithHighestPoints())
 					killPoints += 100;
 
 				updatePoints(killPoints, lastAttacker.getRace(), null, (Player) lastAttacker);
 				PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE_FOR_ENEMY(killPoints));
 				idi.incrementKillsByRace(lastAttacker.getRace());
-				sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), idi, getTime()));
+				sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), getTime()));
 			}
 		}
 		updatePoints(-100, player.getRace(), null, player);
@@ -232,8 +235,8 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		idi.teleportToStartPosition(player);
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_STATUS, player.getObjectId(), 0), idi, getTime()));
+		idi.teleportToStartPosition(player, instance);
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_STATUS, player.getObjectId(), 0), getTime()));
 		return true;
 	}
 
@@ -245,15 +248,15 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		if (!idi.containsPlayer(player.getObjectId()))
 			idi.addPlayerReward(new IdgelDomePlayerInfo(player.getObjectId(), player.getRace()));
 
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), idi, getTime()));
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_STATUS, player.getObjectId(), 0), idi, getTime()));
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), idi, getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_STATUS, player.getObjectId(), 0), getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), getTime()));
 	}
 
 	@Override
 	public void onExitInstance(Player player) {
 		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), idi, getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));
 	}
 
 	@Override
@@ -264,7 +267,7 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onLeaveInstance(Player player) {
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), idi, getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));
 	}
 
 	@Override
@@ -288,8 +291,8 @@ public class IdgelDomeInstance extends GeneralInstanceHandler {
 		idi.addPointsByRace(race, points);
 		if (npcL10n != null)
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), idi, getTime()));
-		sendPacket(new SM_INSTANCE_SCORE(new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), idi, getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_SCORE, instance.getPlayersInside()), getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IdgelDomeScoreInfo(idi, InstanceScoreType.UPDATE_PLAYER_INFO, instance.getPlayersInside()), getTime()));
 	}
 
 	private void sendPacket(AionServerPacket packet) {

@@ -47,11 +47,13 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	private volatile int amount, stage;
 	private boolean lastStage;
 
-	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public TheShugoEmperorsVault(WorldMapInstance instance) {
+		super(instance);
+	}
 
-		instanceReward = new NormalReward(mapId, instanceId);
+	@Override
+	public void onInstanceCreate() {
+		instanceReward = new NormalReward();
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		spawnMorphShugos();
 		if (timer == null) {
@@ -556,7 +558,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	private void sendPacket(String npcL10n, int points) {
 		if (npcL10n != null)
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(new TheShugoEmperorsVaultScoreInfo(instanceReward), instanceReward, getTime()));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new TheShugoEmperorsVaultScoreInfo(instanceReward), getTime()));
 	}
 
 	private int getTime() {
@@ -585,7 +587,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-		TeleportService.teleportTo(player, mapId, instanceId, 542.9366f, 299.9885f, 401f, (byte) 22);
+		TeleportService.teleportTo(player, instance, 542.9366f, 299.9885f, 401f, (byte) 22);
 		return true;
 	}
 

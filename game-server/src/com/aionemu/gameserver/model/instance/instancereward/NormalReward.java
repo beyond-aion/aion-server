@@ -9,7 +9,7 @@ public class NormalReward extends InstanceReward<InstancePlayerReward> {
 
 	private int points;
 	private int basicAp;
-	private int finalAp = 0;
+	private int finalAp;
 	private int rank = 7;
 	private int rewardItem1;
 	private int rewardItem2;
@@ -19,10 +19,6 @@ public class NormalReward extends InstanceReward<InstancePlayerReward> {
 	private int rewardItem2Count;
 	private int rewardItem3Count;
 	private int rewardItem4Count;
-
-	public NormalReward(int mapId, int instanceId) {
-		super(mapId, instanceId);
-	}
 
 	public void addPoints(int points) {
 		this.points += points;

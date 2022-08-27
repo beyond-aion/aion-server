@@ -1,6 +1,9 @@
 package instance.pvparenas;
 
 import com.aionemu.gameserver.instance.handlers.InstanceID;
+import com.aionemu.gameserver.network.aion.instanceinfo.DisciplineScoreInfo;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -9,11 +12,19 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300430000)
 public class DisciplineTrainingGroundsInstance extends PvPArenaInstance {
 
-	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		killBonus = 200;
-		deathFine = -100;
-		super.onInstanceCreate(instance);
+	public DisciplineTrainingGroundsInstance(WorldMapInstance instance) {
+		super(instance);
 	}
 
+	@Override
+	public void onInstanceCreate() {
+		killBonus = 200;
+		deathFine = -100;
+		super.onInstanceCreate();
+	}
+
+	@Override
+	protected void sendPacket() {
+		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new DisciplineScoreInfo(instanceReward, player.getObjectId()))));
+	}
 }

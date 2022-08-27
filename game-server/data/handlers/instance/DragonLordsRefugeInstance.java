@@ -22,6 +22,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author bobobear, Luzien, Estrayl
@@ -33,6 +34,10 @@ public class DragonLordsRefugeInstance extends GeneralInstanceHandler {
 	protected AtomicInteger incarnationKills = new AtomicInteger();
 	protected AtomicInteger progress = new AtomicInteger();
 	protected Future<?> failTask;
+
+	public DragonLordsRefugeInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onSpawn(VisibleObject object) {

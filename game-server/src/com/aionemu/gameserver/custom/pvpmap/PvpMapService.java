@@ -21,20 +21,19 @@ public class PvpMapService {
 
 	private static final PvpMapService instance = new PvpMapService();
 	private static final Logger log = LoggerFactory.getLogger(PvpMapService.class);
-	private final PvpMapHandler handler = new PvpMapHandler();
+	private PvpMapHandler handler;
 
 	public static PvpMapService getInstance() {
 		return instance;
 	}
 
 	public void init() {
-		WorldMapInstance instance = InstanceService.getNextAvailableInstance(301220000, 0, (byte) 0, handler, 0);
-		instance.getEmptyInstanceTask().cancel(false);
-		instance.setEmptyInstanceTask(null);
+		WorldMapInstance instance = InstanceService.getNextAvailableInstance(301220000, 0, (byte) 0, PvpMapHandler::new, 0, false);
+		handler = (PvpMapHandler) instance.getInstanceHandler();
 	}
 
 	public void onLogin(Player player) {
-		if (handler.isActive() && handler.isRandomBossAlive())
+		if (handler != null && handler.isActive() && handler.isRandomBossAlive())
 			notifyBossSpawn(player);
 	}
 
@@ -50,29 +49,29 @@ public class PvpMapService {
 	}
 
 	public boolean isRandomBoss(Npc npc) {
-		return handler.isRandomBoss(npc.getObjectId());
+		return handler != null && handler.isRandomBoss(npc.getObjectId());
 	}
 
 	public void joinMap(Player p) {
-		if (!handler.isOnMap(p))
+		if (handler != null && !handler.isOnMap(p))
 			handler.join(p);
 	}
 
 	public void leaveMap(Player p) {
-		if (handler.isOnMap(p))
+		if (handler != null && handler.isOnMap(p))
 			handler.leave(p);
 	}
 
 	public boolean isOnPvPMap(Creature creature) {
-		return handler.isOnMap(creature);
+		return handler != null && handler.isOnMap(creature);
 	}
 
 	public int getParticipantsSize() {
-		return handler.getParticipantsSize();
+		return handler == null ? 0 : handler.getParticipantsSize();
 	}
 
 	public boolean activate(Player admin) {
-		if (handler.setActive(true)) {
+		if (handler != null && handler.setActive(true)) {
 			log.info("[PvpMapService] Admin " + admin.getName() + " activated the PvP-Map.");
 			return true;
 		}
@@ -80,7 +79,7 @@ public class PvpMapService {
 	}
 
 	public boolean deactivate(Player admin) {
-		if (handler.setActive(false)) {
+		if (handler != null && handler.setActive(false)) {
 			log.info("[PvpMapService] Admin " + admin.getName() + " deactivated the PvP-Map");
 			return true;
 		}

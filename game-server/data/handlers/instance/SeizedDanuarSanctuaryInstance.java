@@ -29,9 +29,12 @@ public class SeizedDanuarSanctuaryInstance extends GeneralInstanceHandler {
 	private final AtomicBoolean started = new AtomicBoolean(false);
 	private final AtomicBoolean cannonUsed = new AtomicBoolean(false);
 
+	public SeizedDanuarSanctuaryInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		spawnRndBoss();
 	}
 
@@ -69,13 +72,13 @@ public class SeizedDanuarSanctuaryInstance extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
 			case 701873:
-				TeleportService.teleportTo(player, mapId, instanceId, 1029.273f, 362.651f, 297.89f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, instance, 1029.273f, 362.651f, 297.89f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 701871:
-				TeleportService.teleportTo(player, mapId, instanceId, 1006.0412f, 1366.468f, 337.26f, (byte) 105, TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, instance, 1006.0412f, 1366.468f, 337.26f, (byte) 105, TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 701872:
-				TeleportService.teleportTo(player, mapId, instanceId, 846.172f, 991.731f, 300.04f, (byte) 110, TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, instance, 846.172f, 991.731f, 300.04f, (byte) 110, TeleportAnimation.FADE_OUT_BEAM);
 				break;
 			case 730863:
 				if (cannonUsed.compareAndSet(false, true)) {
@@ -98,7 +101,7 @@ public class SeizedDanuarSanctuaryInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, true, 0);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
-		TeleportService.teleportTo(player, mapId, instanceId, 388.6437f, 1184.639f, 55.30134f);
+		TeleportService.teleportTo(player, instance, 388.6437f, 1184.639f, 55.30134f);
 		return true;
 	}
 

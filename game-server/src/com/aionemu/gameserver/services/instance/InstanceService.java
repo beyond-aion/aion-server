@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.instance;
 
+import java.util.function.Function;
 import java.util.function.Predicate;
 
 import org.slf4j.Logger;
@@ -10,7 +11,7 @@ import com.aionemu.gameserver.configs.main.InstanceConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.InstanceEngine;
-import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
+import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -37,43 +38,42 @@ public class InstanceService {
 
 	private static final Logger log = LoggerFactory.getLogger(InstanceService.class);
 
-	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult, GeneralInstanceHandler handler, int maxPlayers) {
+	public static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficultyId, Function<WorldMapInstance, InstanceHandler> instanceHandlerSupplier, int maxPlayers, boolean autoDestroy) {
 		WorldMap map = World.getInstance().getWorldMap(worldId);
 
-		if (!map.isInstanceType())
+		if (!map.isInstanceType() || map.getWorldType() == WorldType.PANESTERRA && !map.getAvailableInstanceIds().isEmpty())
 			throw new UnsupportedOperationException("Invalid call for next available instance  of " + worldId);
 
-		int nextInstanceId = map.getNextInstanceId();
-		log.info("Creating new instance:" + worldId + " id:" + nextInstanceId + " owner:" + ownerId + " difficult:" + difficult);
-		WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, ownerId, handler, maxPlayers);
-
-		map.addInstance(nextInstanceId, worldMapInstance);
-
-		if (handler == null)
-			SpawnEngine.spawnInstance(worldId, worldMapInstance.getInstanceId(), difficult, ownerId);
-
-		InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);
+		WorldMapInstance instance;
+		if (instanceHandlerSupplier == null) {
+			instance = WorldMapInstanceFactory.createWorldMapInstance(map, ownerId, InstanceEngine.getInstance()::getNewInstanceHandler, maxPlayers);
+			SpawnEngine.spawnInstance(worldId, instance.getInstanceId(), difficultyId, ownerId);
+		}	else {
+			instance = WorldMapInstanceFactory.createWorldMapInstance(map, ownerId, instanceHandlerSupplier, maxPlayers);
+		}
+		instance.getInstanceHandler().onInstanceCreate();
 
 		// finally start the checker
-		if (map.isInstanceType())
-			startInstanceChecker(worldMapInstance);
+		if (autoDestroy)
+			instance.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(instance), 60000, 60000));
 
-		return worldMapInstance;
+		log.info("Created new instance: " + worldId + " [" + instance.getInstanceId() + "] owner:" + ownerId + " difficultyId:" + difficultyId);
+		return instance;
 	}
 
-	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult, int maxPlayers) {
-		return getNextAvailableInstance(worldId, ownerId, difficult, null, maxPlayers);
+	public static WorldMapInstance getNextAvailableInstance(int worldId, int ownerId, byte difficult, int maxPlayers, boolean autoDestroy) {
+		return getNextAvailableInstance(worldId, ownerId, difficult, null, maxPlayers, autoDestroy);
 	}
 
-	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, Player player) {
+	public static WorldMapInstance getNextAvailableInstance(int worldId, Player player) {
 		int maxPlayers = DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(worldId, player.getRace());
-		WorldMapInstance instance = getNextAvailableInstance(worldId, 0, (byte) 0, maxPlayers);
+		WorldMapInstance instance = getNextAvailableInstance(worldId, 0, (byte) 0, null, maxPlayers, true);
 		instance.register(player.getObjectId());
 		return instance;
 	}
 
-	public synchronized static WorldMapInstance getNextAvailableInstance(int worldId, byte difficult, int maxPlayers) {
-		return getNextAvailableInstance(worldId, 0, difficult, maxPlayers);
+	public static WorldMapInstance getNextAvailableInstance(int worldId, byte difficult, int maxPlayers) {
+		return getNextAvailableInstance(worldId, 0, difficult, null, maxPlayers, true);
 	}
 
 	/**
@@ -142,7 +142,7 @@ public class InstanceService {
 			if (instance.isPersonal() && instance.getOwnerId() == ownerId)
 				return instance;
 		}
-		return getNextAvailableInstance(worldId, ownerId, (byte) 0, 0);
+		return getNextAvailableInstance(worldId, ownerId, (byte) 0, 0, true);
 	}
 
 	public static WorldMapInstance getBeginnerInstance(int worldId, int registeredId) {
@@ -206,12 +206,6 @@ public class InstanceService {
 
 	public static boolean instanceExists(int worldId, int instanceId) {
 		return World.getInstance().getWorldMap(worldId).getWorldMapInstance(instanceId) != null;
-	}
-
-	private static void startInstanceChecker(WorldMapInstance worldMapInstance) {
-		int period = 60000; // 1 minute
-		worldMapInstance
-			.setEmptyInstanceTask(ThreadPoolManager.getInstance().scheduleAtFixedRate(new EmptyInstanceCheckerTask(worldMapInstance), period, period));
 	}
 
 	private static class EmptyInstanceCheckerTask implements Runnable {

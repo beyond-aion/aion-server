@@ -12,10 +12,6 @@ public class DarkPoetaReward extends InstanceReward<InstancePlayerReward> {
 	private int rank = 7;
 	private int collections;
 
-	public DarkPoetaReward(int mapId, int instanceId) {
-		super(mapId, instanceId);
-	}
-
 	public void addPoints(int points) {
 		this.points += points;
 	}

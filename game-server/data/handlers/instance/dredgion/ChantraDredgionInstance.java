@@ -8,12 +8,17 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author xTz
  */
 @InstanceID(300210000)
-public class ChantraDredgionInstance2 extends DredgionInstance2 {
+public class ChantraDredgionInstance extends DredgionInstance {
+
+	public ChantraDredgionInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onEnterInstance(Player player) {
@@ -53,7 +58,7 @@ public class ChantraDredgionInstance2 extends DredgionInstance2 {
 		captureRoom(race, npc.getNpcId() + 14 - 700851);
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_ROOM_DESTROYED(race.getL10n(), npc.getObjectTemplate().getL10n()));
 		getPlayerReward(mostPlayerDamage).captureZone();
-		if (++surkanKills == 5) {
+		if (killedSurkanas.incrementAndGet() == 5) {
 			spawn(216886, 485.33f, 832.26f, 416.64f, (byte) 55);
 			sendMsgByRace(1400632, Race.PC_ALL, 0);
 		}
@@ -125,7 +130,7 @@ public class ChantraDredgionInstance2 extends DredgionInstance2 {
 				return;
 			case 216882: // Captain's Cabin teleport
 				sendMsgByRace(1400652, Race.PC_ALL, 0);
-				if (race.equals(Race.ASMODIANS)) {
+				if (race == Race.ASMODIANS) {
 					spawn(730358, 496.178f, 761.770f, 390.805f, (byte) 0, 186);
 				} else {
 					spawn(730357, 473.759f, 761.864f, 390.805f, (byte) 0, 33);
@@ -138,15 +143,8 @@ public class ChantraDredgionInstance2 extends DredgionInstance2 {
 			case 216886:
 				if (!dredgionReward.isRewarded()) {
 					updateScore(mostPlayerDamage, npc, 1000, false);
-					Race winningRace = dredgionReward.getWinningRaceByScore();
-					stopInstance(winningRace);
+					stopInstance(dredgionReward.getRaceWithHighestPoints());
 				}
-				// if (winningRace.equals(Race.ELYOS)) {
-				// sendMsgByRace(1400230, Race.ELYOS, 0);
-				// }
-				// else {
-				// sendMsgByRace(1400231, Race.ASMODIANS, 0);
-				// }
 				return;
 			case 216941:
 				updateScore(mostPlayerDamage, npc, 1000, false);

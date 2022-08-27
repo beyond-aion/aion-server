@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.instanceinfo;
 
 import java.nio.ByteBuffer;
 import java.util.List;
-import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -14,10 +13,8 @@ import com.aionemu.gameserver.model.instance.playerreward.IdgelDomePlayerInfo;
 /**
  * @author Ritsu, Estrayl
  */
-public class IdgelDomeScoreInfo extends InstanceScoreInfo {
+public class IdgelDomeScoreInfo extends InstanceScoreInfo<IdgelDomeInfo> {
 
-	private final IdgelDomeInfo idi;
-	private final InstanceProgressionType ipt;
 	private final InstanceScoreType ist;
 	private List<Player> participants;
 	private Race race;
@@ -25,29 +22,25 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 	private int status;
 
 	public IdgelDomeScoreInfo(IdgelDomeInfo idi, InstanceScoreType ist) {
-		this.idi = idi;
+		super(idi);
 		this.ist = ist;
-		this.ipt = idi.getInstanceProgressionType();
 	}
 
 	public IdgelDomeScoreInfo(IdgelDomeInfo idi, InstanceScoreType ist, Race race) {
-		this.idi = idi;
+		super(idi);
 		this.ist = ist;
 		this.race = race;
-		this.ipt = idi.getInstanceProgressionType();
 	}
 
 	public IdgelDomeScoreInfo(IdgelDomeInfo idi, InstanceScoreType ist, int objectId, int status) {
-		this.idi = idi;
+		super(idi);
 		this.ist = ist;
 		this.objectId = objectId;
-		this.ipt = idi.getInstanceProgressionType();
 		this.status = status;
 	}
 
 	public IdgelDomeScoreInfo(IdgelDomeInfo idi, InstanceScoreType ist, List<Player> participants) {
-		this.idi = idi;
-		this.ipt = idi.getInstanceProgressionType();
+		super(idi);
 		this.ist = ist;
 		this.participants = participants;
 	}
@@ -57,13 +50,13 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 		writeC(buf, ist.getId());
 		switch (ist) {
 			case UPDATE_PROGRESS:
-				writeD(buf, ipt == InstanceProgressionType.START_PROGRESS ? 0 : 2);
+				writeD(buf, reward.getInstanceProgressionType() == InstanceProgressionType.START_PROGRESS ? 0 : 2);
 				break;
 			case INIT_PLAYER:
 				writeD(buf, 0); // unk
 				writeD(buf, status); // player is dead: 60 else 0
 				writeD(buf, objectId);
-				writeD(buf, idi.getPlayerReward(objectId).getRace().getRaceId());
+				writeD(buf, reward.getPlayerReward(objectId).getRace().getRaceId());
 				break;
 			case UPDATE_PLAYER_STATUS:
 				writeD(buf, 0);
@@ -71,7 +64,7 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 				writeD(buf, objectId); // PlayerObjectId
 				break;
 			case SHOW_REWARD: // reward
-				IdgelDomePlayerInfo info = idi.getPlayerReward(objectId);
+				IdgelDomePlayerInfo info = reward.getPlayerReward(objectId);
 				writeD(buf, 100); // Participation
 				writeD(buf, info.getBaseAp());
 				writeD(buf, info.getBonusAp());
@@ -93,14 +86,14 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 				break;
 			case UPDATE_SCORE:
 				writeD(buf, 100);
-				List<Player> elyos = participants.stream().filter(p -> p.getRace() == Race.ELYOS).collect(Collectors.toList());
+				List<Player> elyos = participants.stream().filter(p -> p.getRace() == Race.ELYOS).toList();
 				for (Player p : elyos) {
 					writeD(buf, 0); // unk
 					writeD(buf, p.isDead() ? 60 : 0);
 					writeD(buf, p.getObjectId());
 				}
 				writeB(buf, new byte[12 * (24 - elyos.size())]);
-				List<Player> asmodians = participants.stream().filter(p -> p.getRace() == Race.ASMODIANS).collect(Collectors.toList());
+				List<Player> asmodians = participants.stream().filter(p -> p.getRace() == Race.ASMODIANS).toList();
 				for (Player p : asmodians) {
 					writeD(buf, 0); // unk
 					writeD(buf, p.isDead() ? 60 : 0);
@@ -109,21 +102,21 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 				writeB(buf, new byte[12 * (24 - asmodians.size())]);
 				// Elyos status
 				writeC(buf, 0);
-				writeD(buf, idi.getElyosKills());
-				writeD(buf, idi.getElyosPoints());
+				writeD(buf, reward.getElyosKills());
+				writeD(buf, reward.getElyosPoints());
 				writeD(buf, 0); // asmodians
-				writeD(buf, ipt.isPreparing() ? 0xFFFF : 1);
+				writeD(buf, reward.getInstanceProgressionType().isPreparing() ? 0xFFFF : 1);
 				// Asmodian status
 				writeC(buf, 0);
-				writeD(buf, idi.getAsmodianKills());
-				writeD(buf, idi.getAsmodianPoints());
+				writeD(buf, reward.getAsmodiansKills());
+				writeD(buf, reward.getAsmodiansPoints());
 				writeD(buf, 1); // elyos
-				writeD(buf, ipt.isPreparing() ? 0xFFFF : 1);
+				writeD(buf, reward.getInstanceProgressionType().isPreparing() ? 0xFFFF : 1);
 				break;
 			case UPDATE_PLAYER_INFO:
-				List<Player> elys = participants.stream().filter(p -> p.getRace() == Race.ELYOS).collect(Collectors.toList());
+				List<Player> elys = participants.stream().filter(p -> p.getRace() == Race.ELYOS).toList();
 				for (Player p : elys) { // 69 bytes per player
-					IdgelDomePlayerInfo pi = idi.getPlayerReward(p.getObjectId());
+					IdgelDomePlayerInfo pi = reward.getPlayerReward(p.getObjectId());
 					if (pi == null)
 						continue;
 					writeD(buf, p.getObjectId());
@@ -136,9 +129,9 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 					writeS(buf, p.getName(), 52);
 				}
 				writeB(buf, new byte[69 * (24 - elys.size())]); // places
-				List<Player> asmos = participants.stream().filter(p -> p.getRace() == Race.ASMODIANS).collect(Collectors.toList());
+				List<Player> asmos = participants.stream().filter(p -> p.getRace() == Race.ASMODIANS).toList();
 				for (Player p : asmos) { // 69 bytes per player
-					IdgelDomePlayerInfo pi = idi.getPlayerReward(p.getObjectId());
+					IdgelDomePlayerInfo pi = reward.getPlayerReward(p.getObjectId());
 					if (pi == null)
 						continue;
 					writeD(buf, p.getObjectId());
@@ -157,10 +150,10 @@ public class IdgelDomeScoreInfo extends InstanceScoreInfo {
 				break;
 			case NPC_DIED:
 				writeC(buf, 0);
-				writeD(buf, idi.getKillsByRace(race));
-				writeD(buf, idi.getPointsByRace(race));
+				writeD(buf, race == Race.ELYOS ? reward.getElyosKills() : reward.getAsmodiansKills());
+				writeD(buf, race == Race.ELYOS ? reward.getElyosPoints() : reward.getAsmodiansPoints());
 				writeD(buf, race.getRaceId());
-				writeD(buf, idi.getAsmodianPoints() == idi.getElyosPoints() ? 0xFFFF : 0);
+				writeD(buf, reward.getAsmodiansPoints() == reward.getElyosPoints() ? 0xFFFF : 0);
 				break;
 		}
 	}

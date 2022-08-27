@@ -17,6 +17,7 @@ import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Yeats 25.03.2016
@@ -29,6 +30,10 @@ public class OphidanBridgeInstance extends GeneralInstanceHandler {
 	private byte bossKills = 0;
 	private byte endBossKills = 0;
 	private Future<?> task;
+
+	public OphidanBridgeInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onInstanceDestroy() {
@@ -125,7 +130,7 @@ public class OphidanBridgeInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, true, 0);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
 		player.getGameStats().updateStatsAndSpeedVisually();
-		TeleportService.teleportTo(player, mapId, instanceId, 755.21f, 559.292f, 572.9508f, (byte) 86);
+		TeleportService.teleportTo(player, instance, 755.21f, 559.292f, 572.9508f, (byte) 86);
 		return true;
 	}
 

@@ -41,6 +41,10 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 	private Future<?> cancelSpawnTask;
 	private Future<?> cancelMessageTask;
 
+	public ShugoImperialTombInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public void onExitInstance(Player player) {
 		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
@@ -191,19 +195,11 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 			skillId = player.getRace() == Race.ASMODIANS ? 21104 : 21095;
 		else if (st == 3)
 			skillId = player.getRace() == Race.ASMODIANS ? 21105 : 21096;
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				SkillEngine.getInstance().applyEffectDirectly(skillId, player, player);
-			}
-
-		}, 1000);
+		ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().applyEffectDirectly(skillId, player, player), 1000);
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		stage.set(0);
 		destroyedTowers.set(0);
 		sp(831110, 177.84564f, 233.56879f, 536.16974f, (byte) 80);

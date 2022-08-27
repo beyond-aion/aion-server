@@ -18,6 +18,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Cheatkiller, Luzien, Estrayl
@@ -27,6 +28,10 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 
 	private final List<Future<?>> tasks = new ArrayList<>();
 	private final AtomicBoolean isRunning = new AtomicBoolean(true);
+
+	public InfinityShardInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onDie(Npc npc) {

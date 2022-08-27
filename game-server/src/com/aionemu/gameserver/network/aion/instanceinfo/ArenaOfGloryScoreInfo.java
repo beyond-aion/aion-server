@@ -1,9 +1,7 @@
 package com.aionemu.gameserver.network.aion.instanceinfo;
 
 import java.nio.ByteBuffer;
-import java.util.List;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancereward.PvPArenaReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 
@@ -12,19 +10,14 @@ import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
  */
 public class ArenaOfGloryScoreInfo extends ArenaScoreInfo {
 
-	private final Integer ownerObject;
-
-	public ArenaOfGloryScoreInfo(PvPArenaReward arenaReward, Integer ownerObject, List<Player> players) {
-		super(arenaReward, players);
-		this.ownerObject = ownerObject;
+	public ArenaOfGloryScoreInfo(PvPArenaReward reward, int ownerObjectId) {
+		super(reward, ownerObjectId, false);
 	}
 
 	@Override
-	public void writeMe(ByteBuffer buf) {
-		PvPArenaPlayerReward rewardedPlayer = arenaReward.getPlayerReward(ownerObject);
-
-		writePlayerRewards(buf);
-		if (arenaReward.isRewarded() && arenaReward.canRewarded() && rewardedPlayer != null) {
+	protected void writeOwnerRewards(ByteBuffer buf) {
+		PvPArenaPlayerReward rewardedPlayer = reward.getPlayerReward(ownerObjectId);
+		if (reward.isRewarded() && reward.canRewarded() && rewardedPlayer != null) {
 			writeAP(buf, rewardedPlayer);
 			writeGP(buf, rewardedPlayer);
 			writeB(buf, new byte[32]);
@@ -52,14 +45,7 @@ public class ArenaOfGloryScoreInfo extends ArenaScoreInfo {
 				writeD(buf, 0);
 			}
 		} else {
-			writeB(buf, new byte[60]);
+			writeB(buf, new byte[72]);
 		}
-		writeD(buf, arenaReward.getBuffId()); // instance buff id
-		writeD(buf, 0); // unk
-		writeD(buf, arenaReward.getRound()); // round
-		writeD(buf, arenaReward.getCapPoints()); // cap points
-		writeD(buf, 3); // possible rounds
-		writeD(buf, 0); // unk
 	}
-
 }

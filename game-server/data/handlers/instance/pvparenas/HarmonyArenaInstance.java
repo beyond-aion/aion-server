@@ -42,6 +42,10 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	protected HarmonyArenaReward instanceReward;
 	protected boolean isInstanceDestroyed;
 
+	public HarmonyArenaInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public InstanceReward<?> getInstanceReward() {
 		return instanceReward;
@@ -50,8 +54,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	@Override
 	public void onEnterInstance(final Player player) {
 		int objectId = player.getObjectId();
-		if (!instanceReward.containsPlayer(objectId)) {
-			instanceReward.regPlayerReward(objectId);
+		if (instanceReward.regPlayerReward(player)) {
 			instanceReward.getPlayerReward(objectId).applyBoostMoraleEffect(player);
 			instanceReward.setRndPosition(objectId);
 		} else {
@@ -67,24 +70,24 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 			return;
 		}
 
-		instance.forEachPlayer((Player opponent) -> {
+		instance.forEachPlayer(opponent -> {
 			if (!group.containPlayer(opponent.getObjectId())) {
 				PacketSendUtility.sendPacket(opponent,
-					new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, player), getInstanceReward(), getTime()));
+					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 10, player), getTime()));
 				PacketSendUtility.sendPacket(player,
-					new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, opponent), getInstanceReward(), getTime()));
+					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 10, opponent), getTime()));
 				PacketSendUtility.sendPacket(opponent,
-					new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 3, player), getInstanceReward(), getTime()));
+					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 3, player), getTime()));
 			} else {
 				PacketSendUtility.sendPacket(opponent,
-					new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 10, opponent), getInstanceReward(), getTime()));
+					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 10, opponent), getTime()));
 				if (!Objects.equals(objectId, opponent.getObjectId())) {
 					PacketSendUtility.sendPacket(opponent,
-						new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 3, player), getInstanceReward(), getTime()));
+						new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 3, player), getTime()));
 				}
 			}
 		});
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new HarmonyScoreInfo(instanceReward, 6, player), getInstanceReward(), getTime()));
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 6, player), getTime()));
 		instanceReward.sendPacket(4, player);
 	}
 
@@ -171,71 +174,50 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onInstanceCreate(final WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		instanceReward = new HarmonyArenaReward(mapId, instanceId, instance);
+	public void onInstanceCreate() {
+		instanceReward = new HarmonyArenaReward(instance);
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		instanceReward.setInstanceStartTime();
 		spawnRings();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				// start round 1
-				if (!isInstanceDestroyed && !instanceReward.isRewarded() && canStart()) {
-					instance.forEachDoor(door -> door.setOpen(true));
-					sendMsg(new SM_SYSTEM_MESSAGE(1401058));
-					instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
-					instanceReward.sendPacket(10, null);
-					instanceReward.sendPacket(2, null);
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							// start round 2
+		ThreadPoolManager.getInstance().schedule(() -> {
+			// start round 1
+			if (!isInstanceDestroyed && !instanceReward.isRewarded() && canStart()) {
+				instance.forEachDoor(door -> door.setOpen(true));
+				sendMsg(new SM_SYSTEM_MESSAGE(1401058));
+				instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
+				instanceReward.sendPacket(10, null);
+				instanceReward.sendPacket(2, null);
+				ThreadPoolManager.getInstance().schedule(() -> {
+					// start round 2
+					if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
+						instanceReward.setRound(2);
+						instanceReward.setRndZone();
+						instanceReward.sendPacket(10, null);
+						instanceReward.sendPacket(2, null);
+						changeZone();
+						ThreadPoolManager.getInstance().schedule(() -> {
+							// start round 3
 							if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-								instanceReward.setRound(2);
+								instanceReward.setRound(3);
 								instanceReward.setRndZone();
+								sendMsg(new SM_SYSTEM_MESSAGE(1401203));
 								instanceReward.sendPacket(10, null);
 								instanceReward.sendPacket(2, null);
 								changeZone();
-								ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-									@Override
-									public void run() {
-										// start round 3
-										if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-											instanceReward.setRound(3);
-											instanceReward.setRndZone();
-											sendMsg(new SM_SYSTEM_MESSAGE(1401203));
-											instanceReward.sendPacket(10, null);
-											instanceReward.sendPacket(2, null);
-											changeZone();
-											ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-												@Override
-												public void run() {
-													// end
-													if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-														instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
-														reward();
-														instanceReward.sendPacket(5, null);
-													}
-												}
-
-											}, 180000);
-
-										}
+								ThreadPoolManager.getInstance().schedule(() -> {
+									// end
+									if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
+										instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
+										reward();
+										instanceReward.sendPacket(5, null);
 									}
-
 								}, 180000);
+
 							}
-						}
-
-					}, 180000);
-				}
+						}, 180000);
+					}
+				}, 180000);
 			}
-
 		}, 120000);
 	}
 
@@ -254,16 +236,11 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	}
 
 	private void changeZone() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				for (Player player : instance.getPlayersInside()) {
-					instanceReward.portToPosition(player);
-					instanceReward.sendPacket(4, player);
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			for (Player player : instance.getPlayersInside()) {
+				instanceReward.portToPosition(player);
+				instanceReward.sendPacket(4, player);
 			}
-
 		}, 1000);
 	}
 
@@ -344,8 +321,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
 
 		if (lastAttacker != null && lastAttacker != player) {
-			if (lastAttacker instanceof Player) {
-				Player winner = (Player) lastAttacker;
+			if (lastAttacker instanceof Player winner) {
 				int winnerObj = winner.getObjectId();
 				instanceReward.getHarmonyGroupReward(winnerObj).addPvPKillToPlayer();
 				// notify Kill-Quests

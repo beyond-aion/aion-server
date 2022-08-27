@@ -15,6 +15,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author zhkchi, vlog, Luzien
@@ -25,6 +26,10 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 
 	private int destroyedFragments;
 	private int killedPazuzuWorms = 0;
+
+	public AbyssalSplinterInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onDie(Npc npc) {

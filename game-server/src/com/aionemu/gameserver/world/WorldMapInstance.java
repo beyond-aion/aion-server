@@ -4,6 +4,7 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 import java.util.function.Consumer;
+import java.util.function.Function;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -37,54 +38,31 @@ import gnu.trove.map.hash.TIntObjectHashMap;
  */
 public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 
-	/**
-	 * Logger for this class.
-	 */
 	private static final Logger log = LoggerFactory.getLogger(WorldMapInstance.class);
-	/**
-	 * Size of region
-	 */
 	public static final int regionSize = WorldConfig.WORLD_REGION_SIZE;
-	/**
-	 * WorldMap which is parent of this instance.
-	 */
-	private final WorldMap parent;
-	/**
-	 * Map of active regions.
-	 */
-	protected final TIntObjectHashMap<MapRegion> regions = new TIntObjectHashMap<>();
-	/**
-	 * All objects spawned in this world map instance
-	 */
-	private final Map<Integer, VisibleObject> worldMapObjects = new ConcurrentHashMap<>();
-	/**
-	 * All npcs spawned in this world map instance
-	 */
-	private final Map<Integer, Npc> worldMapNpcs = new ConcurrentHashMap<>();
-	/**
-	 * All players spawned in this world map instance
-	 */
-	private final Map<Integer, Player> worldMapPlayers = new ConcurrentHashMap<>();
-	private final Set<Integer> registeredObjects = ConcurrentHashMap.newKeySet();
-	private GeneralTeam<?, ?> registeredTeam = null;
-	private Future<?> emptyInstanceTask = null;
-	private Future<?> updateNearbyQuestsTask = null;
-	/**
-	 * Id of this instance (channel)
-	 */
-	private int instanceId;
-	private final List<Integer> questIds = new ArrayList<>();
-	private InstanceHandler instanceHandler;
-	private final Map<ZoneName, ZoneInstance> zones;
-	private WorldPosition startPos;
-	private final int maxPlayers;
-	private long lastPlayerLeaveTime;
 
-	public WorldMapInstance(WorldMap parent, int instanceId, int maxPlayers) {
+	private final WorldMap parent;
+	protected final TIntObjectHashMap<MapRegion> regions = new TIntObjectHashMap<>();
+	private final Map<Integer, VisibleObject> worldMapObjects = new ConcurrentHashMap<>(); // All objects spawned in this world map instance
+	private final Map<Integer, Npc> worldMapNpcs = new ConcurrentHashMap<>(); // All npcs spawned in this world map instance
+	private final Map<Integer, Player> worldMapPlayers = new ConcurrentHashMap<>(); // All players spawned in this world map instance
+	private final Set<Integer> registeredObjects = ConcurrentHashMap.newKeySet();
+	private final Set<Integer> questIds = ConcurrentHashMap.newKeySet();
+	private final Map<ZoneName, ZoneInstance> zones;
+	private final InstanceHandler instanceHandler;
+	private final int instanceId; // Id of this instance (channel)
+	private final int maxPlayers;
+	private WorldPosition startPos;
+	private long lastPlayerLeaveTime;
+	private GeneralTeam<?, ?> registeredTeam;
+	private Future<?> emptyInstanceTask, updateNearbyQuestsTask;
+
+	public WorldMapInstance(WorldMap parent, int instanceId, int maxPlayers, Function<WorldMapInstance, InstanceHandler> instanceHandlerSupplier) {
 		this.parent = parent;
+		this.zones = ZoneService.getInstance().getZoneInstancesByWorldId(parent.getMapId());
+		this.instanceHandler = instanceHandlerSupplier.apply(this);
 		this.instanceId = instanceId;
 		this.maxPlayers = maxPlayers;
-		this.zones = ZoneService.getInstance().getZoneInstancesByWorldId(parent.getMapId());
 		initMapRegions();
 	}
 
@@ -156,8 +134,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 			if (qNpc != null) {
 				boolean updateNearbyQuests = false;
 				for (int id : qNpc.getOnQuestStart()) {
-					if (!questIds.contains(id)) {
-						questIds.add(id);
+					if (questIds.add(id)) {
 						updateNearbyQuests = true;
 					}
 				}
@@ -292,9 +269,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return registeredObjects.contains(objectId);
 	}
 
-	/**
-	 * @return the emptyInstanceTask
-	 */
 	public Future<?> getEmptyInstanceTask() {
 		return emptyInstanceTask;
 	}
@@ -307,23 +281,16 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		this.emptyInstanceTask = emptyInstanceTask;
 	}
 
-	/**
-	 * @return the registeredTeam
-	 */
 	public GeneralTeam<?, ?> getRegisteredTeam() {
 		return registeredTeam;
 	}
 
-	public List<Integer> getQuestIds() {
+	public Set<Integer> getQuestIds() {
 		return questIds;
 	}
 
 	public final InstanceHandler getInstanceHandler() {
 		return instanceHandler;
-	}
-
-	public final void setInstanceHandler(InstanceHandler instanceHandler) {
-		this.instanceHandler = instanceHandler;
 	}
 
 	public void setStartPos(WorldPosition startPos) {

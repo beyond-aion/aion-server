@@ -29,21 +29,17 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class GeneralInstanceHandler implements InstanceHandler {
 
-	protected final Logger log = LoggerFactory.getLogger("INSTANCE_LOG");
-	protected final long creationTime;
-	protected WorldMapInstance instance;
-	protected int instanceId;
-	protected int mapId;
+	protected static final Logger log = LoggerFactory.getLogger("INSTANCE_LOG");
+	protected final WorldMapInstance instance;
+	protected final int mapId;
 
-	public GeneralInstanceHandler() {
-		creationTime = System.currentTimeMillis();
+	public GeneralInstanceHandler(WorldMapInstance instance) {
+		this.instance = instance;
+		this.mapId = instance.getMapId();
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		this.instance = instance;
-		this.instanceId = instance.getInstanceId();
-		this.mapId = instance.getMapId();
+	public void onInstanceCreate() {
 	}
 
 	@Override
@@ -89,18 +85,18 @@ public class GeneralInstanceHandler implements InstanceHandler {
 
 	protected VisibleObject spawn(int npcId, float x, float y, float z, byte heading) {
 		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, npcId, x, y, z, heading);
-		return SpawnEngine.spawnObject(template, instanceId);
+		return SpawnEngine.spawnObject(template, instance.getInstanceId());
 	}
 
 	protected VisibleObject spawn(int npcId, float x, float y, float z, byte heading, int staticId) {
 		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, npcId, x, y, z, heading);
 		template.setStaticId(staticId);
-		return SpawnEngine.spawnObject(template, instanceId);
+		return SpawnEngine.spawnObject(template, instance.getInstanceId());
 	}
 
 	protected VisibleObject spawnAndSetRespawn(int npcId, float x, float y, float z, byte heading, int respawnTime) {
 		SpawnTemplate template = SpawnEngine.newSpawn(mapId, npcId, x, y, z, heading, respawnTime);
-		return SpawnEngine.spawnObject(template, instanceId);
+		return SpawnEngine.spawnObject(template, instance.getInstanceId());
 	}
 
 	protected Npc getNpc(int npcId) {

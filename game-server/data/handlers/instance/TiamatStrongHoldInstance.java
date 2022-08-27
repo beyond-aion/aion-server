@@ -31,6 +31,10 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 	private AtomicInteger drakans = new AtomicInteger();
 	private AtomicBoolean startSuramaEvent = new AtomicBoolean();
 
+	public TiamatStrongHoldInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public void onDie(Npc npc) {
 		if (isInstanceDestroyed) {
@@ -282,8 +286,7 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		instance.setDoorState(610, true);
 		// instance.setDoorState(20, true);
 		instance.setDoorState(706, true);

@@ -72,7 +72,7 @@ public class AutoDredgionInstance extends AutoInstance {
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
 		DredgionService.getInstance().addCooldown(player);
-		((DredgionReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player);
+		((DredgionReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player, instance);
 	}
 
 	@Override

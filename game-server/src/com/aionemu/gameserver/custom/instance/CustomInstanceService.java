@@ -63,7 +63,7 @@ public class CustomInstanceService {
 			return;
 		}
 		playerModelEntriesCache.put(player.getObjectId(), loadPlayerModelEntries(player.getObjectId()));
-		WorldMapInstance wmi = InstanceService.getNextAvailableInstance(CUSTOM_INSTANCE_WORLD_ID, 0, (byte) 1, new RoahCustomInstanceHandler(), 1);
+		WorldMapInstance wmi = InstanceService.getNextAvailableInstance(CUSTOM_INSTANCE_WORLD_ID, 0, (byte) 1, RoahCustomInstanceHandler::new, 1, true);
 		wmi.register(player.getObjectId());
 		TeleportService.teleportTo(player, wmi.getMapId(), wmi.getInstanceId(), 504.0f, 396.0f, 94.0f, (byte) 30, TeleportAnimation.FADE_OUT_BEAM);
 	}

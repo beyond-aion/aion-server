@@ -23,6 +23,7 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -36,6 +37,10 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	private boolean isPlayerInManor = false;
 	private AtomicBoolean isBossSpawned = new AtomicBoolean();
 	private List<Integer> sentMovies = new ArrayList<>();
+
+	public KromedesTrialInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onEnterInstance(Player player) {
@@ -89,7 +94,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 			if (magasPotion != null && PositionUtil.isInRange(player, magasPotion, 20)) {
 				int relicKeyId = 185000109;
 				player.getInventory().decreaseByItemId(relicKeyId, player.getInventory().getItemCountByItemId(relicKeyId));
-				TeleportService.teleportTo(player, mapId, instanceId, 687.56116f, 681.68225f, 200.28648f, (byte) 30);
+				TeleportService.teleportTo(player, instance, 687.56116f, 681.68225f, 200.28648f, (byte) 30);
 			}
 		}
 	}
@@ -125,9 +130,9 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
 		if (!isPlayerInManor)
-			TeleportService.teleportTo(player, mapId, instanceId, 248, 244, 189);
+			TeleportService.teleportTo(player, instance, 248, 244, 189);
 		else
-			TeleportService.teleportTo(player, mapId, instanceId, 686, 676, 201);
+			TeleportService.teleportTo(player, instance, 686, 676, 201);
 		SkillEngine.getInstance().applyEffectDirectly(skillId, player, player);
 		return true;
 	}
@@ -150,7 +155,7 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 					SpawnTemplate newST = SpawnEngine.newSingleTimeSpawn(npcST.getWorldId(), npc.getNpcId(), npcST.getX(), npcST.getY(), npcST.getZ(),
 						npcST.getHeading());
 					newST.setStaticId(npcST.getStaticId());
-					SpawnEngine.spawnObject(newST, instanceId);
+					SpawnEngine.spawnObject(newST, instance.getInstanceId());
 				}
 			}
 		}, 10000);

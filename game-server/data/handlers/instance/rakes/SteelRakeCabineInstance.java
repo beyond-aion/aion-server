@@ -15,9 +15,12 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300460000)
 public class SteelRakeCabineInstance extends GeneralInstanceHandler {
 
+	public SteelRakeCabineInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		if (Rnd.get(1, 2) == 1) { // Sweeper Nunukin
 			spawn(219026, 353.814f, 491.557f, 949.466f, (byte) 119);
 		} else {
@@ -30,7 +33,7 @@ public class SteelRakeCabineInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
+	public boolean onDie(Player player, Creature lastAttacker) {
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
 		return true;
 	}

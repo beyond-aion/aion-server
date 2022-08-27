@@ -29,12 +29,14 @@ public class DraupnirCaveInstance extends GeneralInstanceHandler {
 	private final AtomicBoolean isInstanceStartMessageSend = new AtomicBoolean();
 	private int adjutantsKilled;
 
-	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public DraupnirCaveInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
+	@Override
+	public void onInstanceCreate() {
 		new FlyRing(new FlyRingTemplate("INSTANCE_MSG_START", mapId, new Point3D(475.8222f, 427.8852f, 618.3719f),
-			new Point3D(478.3698f, 450.1829f, 624.6974f), new Point3D(473.2742f, 405.5875f, 612.0464f), 20), instanceId).spawn();
+			new Point3D(478.3698f, 450.1829f, 624.6974f), new Point3D(473.2742f, 405.5875f, 612.0464f), 20), instance.getInstanceId()).spawn();
 
 		switch (Rnd.get(1, 4)) {
 			case 1 -> spawn(213587, 567.438f, 700.875f, 538.701f, (byte) 7); // Hungry Ooze
@@ -78,7 +80,7 @@ public class DraupnirCaveInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, true, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-		TeleportService.teleportTo(player, mapId, instanceId, 492.83383f, 375.46542f, 622.26920f, (byte) 29);
+		TeleportService.teleportTo(player, instance, 492.83383f, 375.46542f, 622.26920f, (byte) 29);
 		return true;
 	}
 

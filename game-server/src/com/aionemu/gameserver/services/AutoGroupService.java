@@ -7,7 +7,6 @@ import java.util.concurrent.locks.ReentrantLock;
 
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.instance.InstanceEngine;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.autogroup.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -21,13 +20,10 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.instance.PvPArenaService;
 import com.aionemu.gameserver.services.instance.periodic.*;
-import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMap;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.WorldMapInstanceFactory;
 
 /**
  * @author xTz
@@ -361,7 +357,7 @@ public class AutoGroupService {
 					}
 				}
 				if (canCreate) {
-					WorldMapInstance instance = createInstance(agt.getInstanceMapId(), agt.getDifficultId(), autoInstance.getMaxPlayers());
+					WorldMapInstance instance = InstanceService.getNextAvailableInstance(agt.getInstanceMapId(), 0, agt.getDifficultId(), null, autoInstance.getMaxPlayers(), false);
 					autoInstance.onInstanceCreate(instance);
 					autoInstances.put(instance.getInstanceId(), autoInstance);
 					for (Player player : players) {
@@ -500,16 +496,6 @@ public class AutoGroupService {
 			useDelay = instanceCooldown / instanceCooldownRate;
 		}
 		return player.getPortalCooldownList().isPortalUseDisabled(worldId) && useDelay > 0;
-	}
-
-	private WorldMapInstance createInstance(int worldId, byte difficultId, int maxPlayers) {
-		WorldMap map = World.getInstance().getWorldMap(worldId);
-		int nextInstanceId = map.getNextInstanceId();
-		WorldMapInstance worldMapInstance = WorldMapInstanceFactory.createWorldMapInstance(map, nextInstanceId, maxPlayers);
-		map.addInstance(nextInstanceId, worldMapInstance);
-		SpawnEngine.spawnInstance(worldId, worldMapInstance.getInstanceId(), difficultId);
-		InstanceEngine.getInstance().onInstanceCreate(worldMapInstance);
-		return worldMapInstance;
 	}
 
 	private void startPenalty(final Integer obj) {

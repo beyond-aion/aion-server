@@ -69,10 +69,13 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	private Future<?> supplyTask, despawnTask;
 	private int currentRandomBossObjId;
 
+	public PvpMapHandler(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		StaticDoorSpawnManager.spawnTemplate(mapId, instanceId);
+	public void onInstanceCreate() {
+		StaticDoorSpawnManager.spawnTemplate(mapId, instance.getInstanceId());
 		instance.forEachDoor(door -> door.setOpen(true));
 		addRespawnLocations();
 		startSupplyTask();
@@ -103,12 +106,12 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(player.getHeading()));
 			float x = player.getX() + (float) (Math.cos(radian) * 2);
 			float y = player.getY() + (float) (Math.sin(radian) * 2);
-			float z = GeoService.getInstance().getZ(player.getWorldId(), x, y, player.getZ(), instanceId);
+			float z = GeoService.getInstance().getZ(player.getWorldId(), x, y, player.getZ(), instance.getInstanceId());
 			if (Float.isNaN(z))
 				z = player.getZ() + 0.5f;
 			byte heading = PositionUtil.getHeadingTowards(x, y, player.getX(), player.getY());
 			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, 833543, x, y, z, heading, 0, "customcdreset");
-			SpawnEngine.spawnObject(template, instanceId);
+			SpawnEngine.spawnObject(template, instance.getInstanceId());
 		}
 	}
 
@@ -177,7 +180,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				Npc npc = new Npc(new NpcController(), spawn, template);
 				npc.setKnownlist(new NpcKnownList(npc));
 				npc.setEffectController(new EffectController(npc));
-				SpawnEngine.bringIntoWorld(npc, mapId, instanceId, spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getHeading());
+				SpawnEngine.bringIntoWorld(npc, mapId, instance.getInstanceId(), spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getHeading());
 				currentRandomBossObjId = npc.getObjectId();
 				scheduleRandomBossDespawn(npc);
 				World.getInstance().forEachPlayer(PvpMapService.getInstance()::notifyBossSpawn);
@@ -236,8 +239,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 						updateJoinOrLeaveTime(p);
 						instance.register(p.getObjectId());
 						WorldPosition pos = Rnd.get(respawnLocations.get(p.getRace()));
-						TeleportService.teleportTo(p, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
-							TeleportAnimation.BATTLEGROUND);
+						TeleportService.teleportTo(p, instance, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.BATTLEGROUND);
 					}
 				}
 			}, 1000);
@@ -305,8 +307,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			}
 		} else {
 			WorldPosition pos = Rnd.get(respawnLocations.get(player.getRace()));
-			TeleportService.teleportTo(player, pos.getMapId(), instanceId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(),
-				TeleportAnimation.BATTLEGROUND);
+			TeleportService.teleportTo(player, instance, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading(), TeleportAnimation.BATTLEGROUND);
 		}
 		return true;
 	}
@@ -454,10 +455,6 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			}
 		}
 		return playerCount;
-	}
-
-	public int getInstanceId() {
-		return instanceId;
 	}
 
 	private synchronized void removePlayer(Player p) {

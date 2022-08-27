@@ -1,27 +1,12 @@
 package com.aionemu.gameserver.model.instance.instancereward;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.IntSummaryStatistics;
-import java.util.List;
-import java.util.Map;
-import java.util.stream.Collectors;
+import java.util.*;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.instanceposition.ChaosInstancePosition;
-import com.aionemu.gameserver.model.instance.instanceposition.DisciplineInstancePosition;
-import com.aionemu.gameserver.model.instance.instanceposition.GeneralInstancePosition;
-import com.aionemu.gameserver.model.instance.instanceposition.GloryInstancePosition;
-import com.aionemu.gameserver.model.instance.instanceposition.HarmonyInstancePosition;
+import com.aionemu.gameserver.model.instance.instanceposition.*;
+import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
-import com.aionemu.gameserver.network.aion.instanceinfo.ArenaOfGloryScoreInfo;
-import com.aionemu.gameserver.network.aion.instanceinfo.ChaosScoreInfo;
-import com.aionemu.gameserver.network.aion.instanceinfo.DisciplineScoreInfo;
-import com.aionemu.gameserver.network.aion.instanceinfo.InstanceScoreInfo;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -40,8 +25,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	protected WorldMapInstance instance;
 	private GeneralInstancePosition instancePosition;
 
-	public PvPArenaReward(int mapId, int instanceId, WorldMapInstance instance) {
-		super(mapId, instanceId);
+	public PvPArenaReward(WorldMapInstance instance) {
 		this.instance = instance;
 		boolean isSolo = isSoloArena();
 		capPoints = isSolo ? 14400 : 50000;
@@ -56,7 +40,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 			buffId = 7;
 			positionSize = 8;
 			instancePosition = new GloryInstancePosition();
-		} else if (mapId == 300450000 || mapId == 300570000) {
+		} else if (instance.getMapId() == 300450000 || instance.getMapId() == 300570000) {
 			buffId = 7;
 			positionSize = 12;
 			instancePosition = new HarmonyInstancePosition();
@@ -65,7 +49,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 			positionSize = 12;
 			instancePosition = new ChaosInstancePosition();
 		}
-		instancePosition.initialize(mapId, instanceId);
+		instancePosition.initialize(instance.getMapId(), instance.getInstanceId());
 		for (int i = 1; i <= positionSize; i++) {
 			positions.put(i, Boolean.FALSE);
 		}
@@ -73,11 +57,11 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	public final boolean isSoloArena() {
-		return mapId == 300430000 || mapId == 300360000;
+		return instance.getMapId() == 300430000 || instance.getMapId() == 300360000;
 	}
 
 	public final boolean isGlory() {
-		return mapId == 300550000;
+		return instance.getMapId() == 300550000;
 	}
 
 	public int getCapPoints() {
@@ -125,10 +109,12 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 		this.round = round;
 	}
 
-	public void regPlayerReward(int objectId) {
-		if (!containsPlayer(objectId)) {
-			addPlayerReward(new PvPArenaPlayerReward(objectId, bonusTime, buffId));
+	public boolean regPlayerReward(Player player) {
+		if (!containsPlayer(player.getObjectId())) {
+			addPlayerReward(new PvPArenaPlayerReward(player, bonusTime, buffId));
+			return true;
 		}
+		return false;
 	}
 
 	@Override
@@ -138,7 +124,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 
 	public void portToPosition(Player player) {
 		int objectId = player.getObjectId();
-		regPlayerReward(objectId);
+		regPlayerReward(player);
 		setRndPosition(objectId);
 		PvPArenaPlayerReward playerReward = getPlayerReward(objectId);
 		playerReward.applyBoostMoraleEffect(player);
@@ -154,8 +140,10 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	public int getRank(int points) {
+		List<PvPArenaPlayerReward> rewardsSortedByScorePoints = getInstanceRewards().stream().sorted((r1, r2) -> Integer.compare(r2.getScorePoints(), r1.getScorePoints()))
+			.toList();
 		int rank = -1;
-		for (PvPArenaPlayerReward reward : getRewardsSortedByScorePoints()) {
+		for (PvPArenaPlayerReward reward : rewardsSortedByScorePoints) {
 			if (reward.getScorePoints() >= points) {
 				rank++;
 			}
@@ -163,12 +151,8 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 		return rank;
 	}
 
-	public List<PvPArenaPlayerReward> getRewardsSortedByScorePoints() {
-		return getInstanceRewards().stream().sorted((r1, r2) -> Integer.compare(r2.getScorePoints(), r1.getScorePoints())).collect(Collectors.toList());
-	}
-
 	public boolean hasCapPoints() {
-		IntSummaryStatistics points = getInstanceRewards().stream().mapToInt(r -> r.getPoints()).summaryStatistics();
+		IntSummaryStatistics points = getInstanceRewards().stream().mapToInt(InstancePlayerReward::getPoints).summaryStatistics();
 		int maxPoints = points.getMax();
 		if (isSoloArena() && maxPoints - points.getMin() >= 1500)
 			return true;
@@ -176,11 +160,11 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	public int getTotalPoints() {
-		return getInstanceRewards().stream().mapToInt(r -> r.getScorePoints()).sum();
+		return getInstanceRewards().stream().mapToInt(PvPArenaPlayerReward::getScorePoints).sum();
 	}
 
 	public boolean canRewarded() {
-		return mapId == 300350000 || mapId == 300360000 || mapId == 300550000 || mapId == 300450000;
+		return instance.getMapId() == 300350000 || instance.getMapId() == 300360000 || instance.getMapId() == 300550000 || instance.getMapId() == 300450000;
 	}
 
 	public int getNpcBonusSkill(int npcId) {
@@ -227,28 +211,6 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 
 	public void setInstanceStartTime() {
 		this.instanceTime = System.currentTimeMillis();
-	}
-
-	public void sendPacket() {
-		int time = getTime();
-		instance.forEachPlayer(player -> {
-			PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(getInstanceScoreInfo(player.getObjectId()), this, time));
-		});
-	}
-
-	public InstanceScoreInfo getInstanceScoreInfo(Integer owner) {
-		final List<Player> players = instance.getPlayersInside();
-		switch (mapId) {
-			case 300360000:
-			case 300430000:
-				return new DisciplineScoreInfo(this, owner, players);
-			case 300350000:
-			case 300420000:
-				return new ChaosScoreInfo(this, owner, players);
-			case 300550000:
-				return new ArenaOfGloryScoreInfo(this, owner, players);
-		}
-		return null;
 	}
 
 	public byte getBuffId() {

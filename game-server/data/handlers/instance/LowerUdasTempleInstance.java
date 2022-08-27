@@ -45,9 +45,12 @@ public class LowerUdasTempleInstance extends GeneralInstanceHandler {
 	private List<Npc> traps = new ArrayList<>();
 	private AtomicBoolean wasSpawned = new AtomicBoolean();
 
+	public LowerUdasTempleInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		float chance = Rnd.chance();
 		if (chance < 20) { // spawn named drop chests, 20% both, 30% epic, 50% fabled chest
 			spawn(216150, 455.984f, 1192.506f, 190.221f, (byte) 116);

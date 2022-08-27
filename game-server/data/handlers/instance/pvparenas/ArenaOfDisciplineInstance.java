@@ -6,12 +6,17 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author xTz
  */
 @InstanceID(300360000)
 public class ArenaOfDisciplineInstance extends DisciplineTrainingGroundsInstance {
+
+	public ArenaOfDisciplineInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	protected void reward() {

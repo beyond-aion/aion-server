@@ -2,8 +2,6 @@ package instance.abyss;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_START_IDABRE;
 
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicLong;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -26,19 +24,16 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class AsteriaInstance extends GeneralInstanceHandler {
 
 	private AtomicLong startTime = new AtomicLong();
-	private boolean isInstanceDestroyed = false;
 	private Race instanceRace;
 
-	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		spawnRings();
+	public AsteriaInstance(WorldMapInstance instance) {
+		super(instance);
 	}
 
-	private void spawnRings() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("ASTERIA_WING_1", mapId, new Point3D(479.24, 572.57, 202.72), new Point3D(477.95, 567.64, 212.9),
-			new Point3D(477.97, 563.35, 202.12), 10), instanceId);
-		f1.spawn();
+	@Override
+	public void onInstanceCreate() {
+		new FlyRing(new FlyRingTemplate("ASTERIA_WING_1", mapId, new Point3D(479.24, 572.57, 202.72), new Point3D(477.95, 567.64, 212.9),
+			new Point3D(477.97, 563.35, 202.12), 10), instance.getInstanceId()).spawn();
 	}
 
 	@Override
@@ -47,18 +42,7 @@ public class AsteriaInstance extends GeneralInstanceHandler {
 			if (startTime.compareAndSet(0, System.currentTimeMillis())) {
 				PacketSendUtility.sendPacket(player, STR_MSG_INSTANCE_START_IDABRE());
 				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900));
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						despawnNpcs(getNpcs(700475));
-						despawnNpcs(getNpcs(700476));
-						despawnNpcs(getNpcs(700477));
-						despawnNpcs(getNpcs(701483));
-						despawnNpcs(getNpcs(701488));
-					}
-
-				}, 900000);
+				ThreadPoolManager.getInstance().schedule(() -> despawnNpcs(700475, 700476, 700477, 701483, 701488), 900000);
 			}
 		}
 		return false;
@@ -81,27 +65,12 @@ public class AsteriaInstance extends GeneralInstanceHandler {
 
 	}
 
-	private List<Npc> getNpcs(int npcId) {
-		if (!isInstanceDestroyed) {
-			return instance.getNpcs(npcId);
-		}
-		return Collections.emptyList();
-	}
-
-	private void despawnNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
+	private void despawnNpcs(int... npcIds) {
+		for (Npc npc : instance.getNpcs(npcIds))
 			npc.getController().delete();
-		}
 	}
 
 	private void spawnGoldChest() {
-		final int chestId = instanceRace.equals(Race.ELYOS) ? 701483 : 701488;
-		spawn(chestId, 512.8f, 565.35f, 198f, (byte) 60);
-	}
-
-	@Override
-	public void onInstanceDestroy() {
-		isInstanceDestroyed = true;
-		startTime.set(0);
+		spawn(instanceRace == Race.ELYOS ? 701483 : 701488, 512.8f, 565.35f, 198f, (byte) 60);
 	}
 }

@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.rift;
 
 import java.util.Collections;
-import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -29,7 +28,7 @@ public class RiftManager {
 
 	private static Logger log = LoggerFactory.getLogger(RiftManager.class);
 	private static Map<Integer, List<Npc>> riftsPerWorld = new ConcurrentHashMap<>();
-	private static Map<String, SpawnTemplate> riftGroups = new HashMap<>();
+	private static Map<String, SpawnTemplate> riftGroups = new ConcurrentHashMap<>();
 
 	public static void addRiftSpawnTemplate(SpawnGroup spawn) {
 		if (spawn.hasPool()) {
@@ -102,12 +101,7 @@ public class RiftManager {
 	}
 
 	private static void addSpawnedRift(Npc rift) {
-		List<Npc> rifts = riftsPerWorld.get(rift.getWorldId());
-		if (rifts == null) {
-			rifts = new CopyOnWriteArrayList<>();
-			riftsPerWorld.put(rift.getWorldId(), rifts);
-		}
-		rifts.add(rift);
+		riftsPerWorld.computeIfAbsent(rift.getWorldId(), k -> new CopyOnWriteArrayList<>()).add(rift);
 	}
 
 	public static List<Npc> getSpawnedRifts(int worldId) {

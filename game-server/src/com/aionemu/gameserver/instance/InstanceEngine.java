@@ -53,18 +53,18 @@ public class InstanceEngine implements GameEngine {
 		log.info("Instance engine shutdown complete");
 	}
 
-	public InstanceHandler getNewInstanceHandler(int worldId) {
-		Class<? extends InstanceHandler> instanceClass = instanceHandlers.get(worldId);
+	public InstanceHandler getNewInstanceHandler(WorldMapInstance instance) {
+		Class<? extends InstanceHandler> handlerClass = instanceHandlers.get(instance.getMapId());
 		InstanceHandler instanceHandler = null;
-		if (instanceClass != null) {
+		if (handlerClass != null) {
 			try {
-				instanceHandler = instanceClass.getDeclaredConstructor().newInstance();
+				instanceHandler = handlerClass.getDeclaredConstructor(WorldMapInstance.class).newInstance(instance);
 			} catch (Exception ex) {
-				log.warn("Can't instantiate instance handler " + worldId, ex);
+				log.warn("Can't instantiate instance handler for map " + instance.getMapId() + " (instanceId: " + instance.getInstanceId() + ')', ex);
 			}
 		}
 
-		return instanceHandler != null ? instanceHandler : new GeneralInstanceHandler();
+		return instanceHandler != null ? instanceHandler : new GeneralInstanceHandler(instance);
 	}
 
 	final void addInstanceHandlerClass(Class<? extends InstanceHandler> handler) {
@@ -72,10 +72,6 @@ public class InstanceEngine implements GameEngine {
 		if (idAnnotation != null) {
 			instanceHandlers.put(idAnnotation.value(), handler);
 		}
-	}
-
-	public void onInstanceCreate(WorldMapInstance instance) {
-		instance.getInstanceHandler().onInstanceCreate(instance);
 	}
 
 	public static InstanceEngine getInstance() {

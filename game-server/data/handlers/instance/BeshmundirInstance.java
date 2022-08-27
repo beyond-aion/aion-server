@@ -31,6 +31,10 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 	private AtomicInteger kills = new AtomicInteger();
 	private Race instanceRace;
 
+	public BeshmundirInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public void onEnterInstance(final Player player) {
 		if (instanceRace == null) {
@@ -159,8 +163,7 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		instance.setDoorState(535, true);
 	}
 

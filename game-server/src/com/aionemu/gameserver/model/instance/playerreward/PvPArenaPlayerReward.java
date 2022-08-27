@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.instance.playerreward;
 
+import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceBuff;
 
@@ -8,6 +9,8 @@ import com.aionemu.gameserver.model.instance.InstanceBuff;
  */
 public class PvPArenaPlayerReward extends InstancePlayerReward {
 
+	private final PlayerClass playerClass;
+	private final String playerName;
 	private int position;
 	private int timeBonus;
 	private float timeBonusModifier;
@@ -38,12 +41,30 @@ public class PvPArenaPlayerReward extends InstancePlayerReward {
 	private boolean isRewarded = false;
 	private InstanceBuff boostMorale;
 
+	public PvPArenaPlayerReward(Player player, int timeBonus, byte buffId) {
+		this(player.getObjectId(), player.getPlayerClass(), player.getName(), timeBonus, buffId);
+	}
+
 	public PvPArenaPlayerReward(int objectId, int timeBonus, byte buffId) {
+		this(objectId, null, null, timeBonus, buffId);
+	}
+
+	private PvPArenaPlayerReward(int objectId, PlayerClass playerClass, String playerName, int timeBonus, byte buffId) {
 		super(objectId);
 		super.addPoints(13000);
+		this.playerClass = playerClass;
+		this.playerName = playerName;
 		this.timeBonus = timeBonus;
 		timeBonusModifier = ((float) this.timeBonus / (float) 660000);
 		boostMorale = new InstanceBuff(buffId);
+	}
+
+	public PlayerClass getPlayerClass() {
+		return playerClass;
+	}
+
+	public String getPlayerName() {
+		return playerName;
 	}
 
 	public int getPosition() {

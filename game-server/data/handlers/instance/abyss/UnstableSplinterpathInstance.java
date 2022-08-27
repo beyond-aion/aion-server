@@ -14,6 +14,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author zhkchi, vlog, Luzien, Cheatkiller
@@ -24,6 +25,10 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 
 	private int destroyedFragments;
 	private int killedPazuzuWorms = 0;
+
+	public UnstableSplinterpathInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onDie(Npc npc) {

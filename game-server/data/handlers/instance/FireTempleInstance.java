@@ -15,9 +15,12 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(320100000)
 public class FireTempleInstance extends GeneralInstanceHandler {
 
+	public FireTempleInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		// Random spawns of bosses
 		if (Rnd.chance() < 75) { // Blue Crystal Molgat
 			spawn(212839, 127.1218f, 176.1912f, 99.67548f, (byte) 15);

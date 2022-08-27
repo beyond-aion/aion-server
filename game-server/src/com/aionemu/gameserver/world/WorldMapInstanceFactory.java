@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.world;
 
+import java.util.function.Function;
+
 import com.aionemu.gameserver.instance.InstanceEngine;
-import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 
 /**
@@ -9,24 +10,18 @@ import com.aionemu.gameserver.instance.handlers.InstanceHandler;
  */
 public class WorldMapInstanceFactory {
 
-	public static WorldMapInstance createWorldMapInstance(WorldMap parent, int instanceId, int maxPlayers) {
-		return createWorldMapInstance(parent, instanceId, 0, null, maxPlayers);
+	public static WorldMapInstance createWorldMapInstance(WorldMap parent, int maxPlayers) {
+		return createWorldMapInstance(parent, 0, InstanceEngine.getInstance()::getNewInstanceHandler, maxPlayers);
 	}
 
-	public static WorldMapInstance createWorldMapInstance(WorldMap parent, int instanceId, int ownerId, GeneralInstanceHandler customHandler, int maxPlayers) {
-		WorldMapInstance worldMapInstance;
+	public static WorldMapInstance createWorldMapInstance(WorldMap parent, int ownerId, Function<WorldMapInstance, InstanceHandler> instanceHandlerSupplier, int maxPlayers) {
+		WorldMapInstance instance;
 		if (parent.getMapId() == WorldMapType.RESHANTA.getId()) {
-			worldMapInstance = new WorldMap3DInstance(parent, instanceId, maxPlayers);
+			instance = new WorldMap3DInstance(parent, parent.getNextInstanceId(), maxPlayers, instanceHandlerSupplier);
 		} else {
-			worldMapInstance = new WorldMap2DInstance(parent, instanceId, ownerId, maxPlayers);
+			instance = new WorldMap2DInstance(parent, parent.getNextInstanceId(), ownerId, maxPlayers, instanceHandlerSupplier);
 		}
-
-		if (customHandler != null) {
-			worldMapInstance.setInstanceHandler(customHandler);
-		} else {
-			InstanceHandler instanceHandler = InstanceEngine.getInstance().getNewInstanceHandler(parent.getMapId());
-			worldMapInstance.setInstanceHandler(instanceHandler);
-		}
-		return worldMapInstance;
+		parent.addInstance(instance.getInstanceId(), instance);
+		return instance;
 	}
 }

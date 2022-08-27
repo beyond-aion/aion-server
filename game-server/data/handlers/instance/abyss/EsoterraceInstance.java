@@ -23,9 +23,12 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 @InstanceID(300250000)
 public class EsoterraceInstance extends GeneralInstanceHandler {
 
+	public EsoterraceInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		instance.setDoorState(367, true);
 		if (Rnd.chance() < 21) {
 			spawn(799580, 1034.11f, 985.01f, 327.35095f, (byte) 105);
@@ -99,7 +102,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
-		TeleportService.teleportTo(player, mapId, instanceId, 384.57535f, 535.4073f, 321.6642f, (byte) 17);
+		TeleportService.teleportTo(player, instance, 384.57535f, 535.4073f, 321.6642f, (byte) 17);
 		return true;
 	}
 

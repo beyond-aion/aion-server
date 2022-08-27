@@ -16,6 +16,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
@@ -29,6 +30,10 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 	private AtomicBoolean moviePlayed = new AtomicBoolean();
 	private AtomicInteger killedPadmarashkaProtector = new AtomicInteger();
 	private AtomicInteger killedEggs = new AtomicInteger();
+
+	public PadmarashkasCaveInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onDie(Npc npc) {

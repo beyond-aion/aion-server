@@ -15,6 +15,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Estrayl
@@ -22,10 +23,14 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 @InstanceID(300630000)
 public class AnguishedDragonLordsRefugeInstance extends DragonLordsRefugeInstance {
 
+	public AnguishedDragonLordsRefugeInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public void onSpawn(VisibleObject object) {
-		if (object instanceof Npc) {
-			switch (((Npc) object).getNpcId()) {
+		if (object instanceof Npc npc) {
+			switch (npc.getNpcId()) {
 				case 236276: // Tiamat Dragon
 					ThreadPoolManager.getInstance().schedule(() -> {
 						spawn(730673, 459.548f, 456.849f, 417.405f, (byte) 21);

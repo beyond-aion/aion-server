@@ -3,7 +3,6 @@ package instance;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
 import java.util.concurrent.Future;
-import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -41,6 +40,10 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	private Future<?> instanceTask;
 	private boolean isInstanceDestroyed = false;
 
+	public IronWallFrontInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	private void addPlayerToReward(Player player) {
 		ironWallFrontReward.addPlayerReward(new IronWallFrontPlayerReward(player.getObjectId(), player.getRace()));
 	}
@@ -54,58 +57,46 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 		if (!containPlayer(player.getObjectId())) {
 			addPlayerToReward(player);
 		}
-		sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 3, player.getObjectId()), ironWallFrontReward, getTime()));
-		PacketSendUtility.sendPacket(player,
-			new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 6, player.getObjectId()), ironWallFrontReward, getTime()));
-		// sendPacket();
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IronWallFrontScoreInfo(ironWallFrontReward, 3, player.getObjectId()), getTime()));
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new IronWallFrontScoreInfo(ironWallFrontReward, 6, player.getObjectId()), getTime()));
 	}
 
-	protected void startInstanceTask() {
+	private void startInstanceTask() {
 		instanceTime = System.currentTimeMillis();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				openFirstDoors();
-				ironWallFrontReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
-				sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 6, 0), ironWallFrontReward, getTime()));
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			openFirstDoors();
+			ironWallFrontReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
+			sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IronWallFrontScoreInfo(ironWallFrontReward, 6, 0), getTime()));
 		}, 120000);
 		instanceTask = ThreadPoolManager.getInstance().schedule(this::stopInstance, 1320000);
 	}
 
-	public void stopInstance() {
+	private void stopInstance() {
 		if (instanceTask != null && !instanceTask.isDone())
 			instanceTask.cancel(true);
 		if (ironWallFrontReward.isRewarded())
 			return;
 		ironWallFrontReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
-		final Race winningrace = ironWallFrontReward.getWinningRace();
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				IronWallFrontPlayerReward reward = ironWallFrontReward.getPlayerReward(player.getObjectId());
-				reward.setBonusReward(Rnd.get(2300, 2700));
-				if (reward.getRace().equals(winningrace)) {
-					reward.setGloryPoints(100);
-					reward.setFragmentedCeramium(9);
-					reward.setIronWarFrontBox(1);
-					reward.setBaseReward(IronWallFrontReward.winningPoints);
-				} else {
-					reward.setGloryPoints(10);
-					reward.setBaseReward(IronWallFrontReward.looserPoints);
-				}
-				sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 5, player.getObjectId()), ironWallFrontReward, getTime()));
-				AbyssPointsService.addAp(player, reward.getBaseReward() + reward.getBonusReward());
-				if (reward.getGloryPoints() > 0)
-					GloryPointsService.increaseGpBy(player.getObjectId(), reward.getGloryPoints());
-				if (reward.getIronWarFrontBox() > 0) {
-					ItemService.addItem(player, 188052729, reward.getIronWarFrontBox());
-				}
+		Race winnerRace = ironWallFrontReward.getRaceWithHighestPoints();
+		instance.forEachPlayer(player -> {
+			IronWallFrontPlayerReward reward = ironWallFrontReward.getPlayerReward(player.getObjectId());
+			reward.setBonusReward(Rnd.get(2300, 2700));
+			if (reward.getRace() == winnerRace) {
+				reward.setGloryPoints(100);
+				reward.setFragmentedCeramium(9);
+				reward.setIronWarFrontBox(1);
+				reward.setBaseReward(ironWallFrontReward.getWinnerApReward());
+			} else {
+				reward.setGloryPoints(10);
+				reward.setBaseReward(ironWallFrontReward.getLoserApReward());
 			}
-
+			sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IronWallFrontScoreInfo(ironWallFrontReward, 5, player.getObjectId()), getTime()));
+			AbyssPointsService.addAp(player, reward.getBaseReward() + reward.getBonusReward());
+			if (reward.getGloryPoints() > 0)
+				GloryPointsService.increaseGpBy(player.getObjectId(), reward.getGloryPoints());
+			if (reward.getIronWarFrontBox() > 0) {
+				ItemService.addItem(player, 188052729, reward.getIronWarFrontBox());
+			}
 		});
 		instance.forEachNpc(npc -> npc.getController().delete());
 		ThreadPoolManager.getInstance().schedule(() -> {
@@ -131,7 +122,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			instanceTask.cancel(true);
 	}
 
-	public void updatePoints(int points, Race race, boolean check, String npcL10n, Player player) {
+	private void updatePoints(int points, Race race, boolean check, String npcL10n, Player player) {
 		if (check && !ironWallFrontReward.isStartProgress()) {
 			return;
 		}
@@ -139,8 +130,8 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 		ironWallFrontReward.addPointsByRace(race, points);
 		sendPacket(
-			new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 10, race.equals(Race.ELYOS) ? 0 : 1), ironWallFrontReward, getTime()));
-		int diff = Math.abs(ironWallFrontReward.getAsmodiansPoint().intValue() - ironWallFrontReward.getElyosPoints().intValue());
+			new SM_INSTANCE_SCORE(instance.getMapId(), new IronWallFrontScoreInfo(ironWallFrontReward, 10, race == Race.ELYOS ? 0 : 1), getTime()));
+		int diff = Math.abs(ironWallFrontReward.getAsmodiansPoints() - ironWallFrontReward.getElyosPoints());
 		if (diff >= 30000) {
 			stopInstance();
 		}
@@ -202,7 +193,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 			case 730879:
 			case 730880:
 				updatePoints(200, player.getRace(), false, npc.getObjectTemplate().getL10n(), player);
-				if (player.getRace().equals(Race.ELYOS)) {
+				if (player.getRace() == Race.ELYOS) {
 					spawn(701900, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				} else {
 					spawn(701901, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
@@ -216,7 +207,7 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 		}
 	}
 
-	public void openFirstDoors() {
+	private void openFirstDoors() {
 		instance.setDoorState(177, true);
 		instance.setDoorState(176, true);
 	}
@@ -226,9 +217,8 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		ironWallFrontReward = new IronWallFrontReward(mapId, instanceId);
+	public void onInstanceCreate() {
+		ironWallFrontReward = new IronWallFrontReward();
 		ironWallFrontReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		startInstanceTask();
 	}
@@ -243,13 +233,13 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		ironWallFrontReward.portToPosition(player);
+		ironWallFrontReward.portToPosition(player, instance);
 		return true;
 	}
 
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-		sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 3, player.getObjectId()), ironWallFrontReward, getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new IronWallFrontScoreInfo(ironWallFrontReward, 3, player.getObjectId()), getTime()));
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), false, 0, 8));
 		if (lastAttacker instanceof Player) {
 			if (lastAttacker.getRace() != player.getRace()) {
@@ -259,9 +249,9 @@ public class IronWallFrontInstance extends GeneralInstanceHandler {
 				}
 				updatePoints(killPoints, lastAttacker.getRace(), true, null, (Player) lastAttacker);
 				PacketSendUtility.sendPacket((Player) lastAttacker, new SM_SYSTEM_MESSAGE(1400277, killPoints));
-				ironWallFrontReward.getKillsByRace(lastAttacker.getRace()).increment();
-				sendPacket(new SM_INSTANCE_SCORE(new IronWallFrontScoreInfo(ironWallFrontReward, 10, lastAttacker.getRace().equals(Race.ELYOS) ? 0 : 1),
-					ironWallFrontReward, getTime()));
+				ironWallFrontReward.incrementKillsByRace(lastAttacker.getRace());
+				sendPacket(
+					new SM_INSTANCE_SCORE(instance.getMapId(), new IronWallFrontScoreInfo(ironWallFrontReward, 10, lastAttacker.getRace() == Race.ELYOS ? 0 : 1), getTime()));
 			}
 		}
 		PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1400277, -100));

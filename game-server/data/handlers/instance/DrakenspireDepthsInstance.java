@@ -28,6 +28,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -60,6 +61,10 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 	private final AtomicInteger eventCounter = new AtomicInteger();
 	private final AtomicReference<Race> race = new AtomicReference<>();
 	private Future<?> currentEventTask, additionalEventTask; // re-usable for all stages
+
+	public DrakenspireDepthsInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onInstanceDestroy() {
@@ -484,7 +489,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-		TeleportService.teleportTo(player, mapId, instanceId, 361.706f, 182.503f, 1684.290f, (byte) 0);
+		TeleportService.teleportTo(player, instance, 361.706f, 182.503f, 1684.290f, (byte) 0);
 		return true;
 	}
 

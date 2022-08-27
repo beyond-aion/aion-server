@@ -1,12 +1,17 @@
 package instance;
 
 import com.aionemu.gameserver.instance.handlers.InstanceID;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Estrayl
  */
 @InstanceID(301370000)
 public class InfernalIlluminaryObelisk extends IlluminaryObeliskInstance {
+
+	public InfernalIlluminaryObelisk(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	protected void spawnEndboss(int npcId) {

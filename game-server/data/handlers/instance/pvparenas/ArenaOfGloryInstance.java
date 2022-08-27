@@ -6,6 +6,9 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
+import com.aionemu.gameserver.network.aion.instanceinfo.ArenaOfGloryScoreInfo;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -14,11 +17,20 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300550000)
 public class ArenaOfGloryInstance extends PvPArenaInstance {
 
+	public ArenaOfGloryInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
+	public void onInstanceCreate() {
 		killBonus = 1000;
 		deathFine = -200;
-		super.onInstanceCreate(instance);
+		super.onInstanceCreate();
+	}
+
+	@Override
+	protected void sendPacket() {
+		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new ArenaOfGloryScoreInfo(instanceReward, player.getObjectId()))));
 	}
 
 	@Override

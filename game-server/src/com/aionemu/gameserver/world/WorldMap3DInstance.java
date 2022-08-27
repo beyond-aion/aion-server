@@ -2,7 +2,9 @@ package com.aionemu.gameserver.world;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.function.Function;
 
+import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -10,8 +12,8 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  */
 public class WorldMap3DInstance extends WorldMapInstance {
 
-	public WorldMap3DInstance(WorldMap parent, int instanceId, int maxPlayers) {
-		super(parent, instanceId, maxPlayers);
+	public WorldMap3DInstance(WorldMap parent, int instanceId, int maxPlayers, Function<WorldMapInstance, InstanceHandler> instanceHandlerSupplier) {
+		super(parent, instanceId, maxPlayers, instanceHandlerSupplier);
 	}
 
 	@Override

@@ -3,7 +3,6 @@ package instance.crucible;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Set;
-import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -35,18 +34,22 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300300000)
 public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
-	private List<Npc> npcs = new ArrayList<>();
-	private List<EmpyreanStage> empyreanStage = new ArrayList<>();
+	private final List<Npc> npcs = new ArrayList<>();
+	private final List<EmpyreanStage> empyreanStage = new ArrayList<>();
 	private byte stage;
 	private boolean isDoneStage4 = false;
 	private boolean isDoneStage6Round2 = false;
 	private boolean isDoneStage6Round1 = false;
 
+	public EmpyreanCrucibleInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	private class EmpyreanStage {
 
 		private final List<Npc> stageNpcs;
 
-		public EmpyreanStage(List<Npc> npcs) {
+		private EmpyreanStage(List<Npc> npcs) {
 			this.stageNpcs = npcs;
 		}
 
@@ -63,8 +66,8 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
+		super.onInstanceCreate();
 		stage = 0;
 		sp(799567, 345.25107f, 349.40176f, 96.09097f, (byte) 0);
 		sp(799573, 384.51f, 352.61078f, 96.747635f, (byte) 83);
@@ -87,50 +90,31 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				return;
 			}
 		}
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward), instanceReward));
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreInfo(instanceReward)));
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, stageType.getId(), stageType.getType()));
 	}
 
-	private void sendPacket(int points, Npc npc) {
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				if (player.isOnline()) {
-					CruciblePlayerReward playerReward = getPlayerReward(player.getObjectId());
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npc.getObjectTemplate().getL10n(), points));
-					if (!playerReward.isRewarded()) {
-						playerReward.addPoints(points);
-					}
-					PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward), instanceReward));
+	private void addPointsAndSendPacket(int points, Npc npc) {
+		instance.forEachPlayer(player -> {
+			if (player.isOnline()) {
+				CruciblePlayerReward playerReward = getPlayerReward(player.getObjectId());
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npc.getObjectTemplate().getL10n(), points));
+				if (!playerReward.isRewarded()) {
+					playerReward.addPoints(points);
 				}
+				PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreInfo(instanceReward)));
 			}
-
 		});
 	}
 
-	private void sendEventPacket(final StageType type, final int time) {
+	private void setStage(StageType type, final int time) {
 		this.stageType = type;
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				instance.forEachPlayer(new Consumer<Player>() {
-
-					@Override
-					public void accept(Player player) {
-						PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, type.getId(), type.getType()));
-					}
-
-				});
-			}
-
-		}, time);
+		ThreadPoolManager.getInstance().schedule(() -> instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, type.getId(), type.getType()))), time);
 	}
 
 	@Override
 	public void onDie(Npc npc) {
-		if (npcs.contains(npc)) {
+		synchronized (npcs) {
 			npcs.remove(npc);
 		}
 		EmpyreanStage es = getEmpyreanStage(npc);
@@ -302,7 +286,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		}
 
 		if (point != 0) {
-			sendPacket(point, npc);
+			addPointsAndSendPacket(point, npc);
 		}
 		switch (npc.getNpcId()) {
 			case 217486:
@@ -336,7 +320,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				}
 				break;
 			case 217493:
-				sendEventPacket(StageType.PASS_GROUP_STAGE_1, 0);
+				setStage(StageType.PASS_GROUP_STAGE_1, 0);
 				sp(217756, 342.65106f, 357.4013f, 96.09094f, (byte) 0);
 				sp(217756, 349.07376f, 357.5898f, 96.090965f, (byte) 0);
 				sp(217756, 345.69272f, 359.40958f, 96.09094f, (byte) 0);
@@ -415,7 +399,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				break;
 			case 217509:
 				despawnNpc(npc);
-				sendEventPacket(StageType.START_STAGE_2_ROUND_4, 2000);
+				setStage(StageType.START_STAGE_2_ROUND_4, 2000);
 				sp(217505, 341.95056f, 334.77692f, 96.09093f, (byte) 0, 6000);
 				sp(217508, 344.17813f, 334.42462f, 96.090935f, (byte) 0, 6000);
 				break;
@@ -434,37 +418,22 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217510:
 			case 217501:
 				despawnNpc(npc);
-				sendEventPacket(StageType.PASS_GROUP_STAGE_2, 0);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
+				setStage(StageType.PASS_GROUP_STAGE_2, 0);
+				ThreadPoolManager.getInstance().schedule(() -> {
+					sp(217737, 334.49496f, 349.2322f, 96.090935f, (byte) 0);
+					setStage(StageType.START_BONUS_STAGE_2, 0);
 
-					@Override
-					public void run() {
-						sp(217737, 334.49496f, 349.2322f, 96.090935f, (byte) 0);
-						sendEventPacket(StageType.START_BONUS_STAGE_2, 0);
-
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
+					ThreadPoolManager.getInstance().schedule(() -> {
+						if (getNpc(217737) != null) {
+							sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_S2_Saam1_01());
+							ThreadPoolManager.getInstance().schedule(() -> {
 								if (getNpc(217737) != null) {
-									sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_S2_Saam1_01());
-									ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-										@Override
-										public void run() {
-											if (getNpc(217737) != null) {
-												despawnNpc(getNpc(217737));
-												sp(799569, 345.25f, 349.24f, 96.09097f, (byte) 0);
-											}
-										}
-
-									}, 30000);
+									despawnNpc(getNpc(217737));
+									sp(799569, 345.25f, 349.24f, 96.09097f, (byte) 0);
 								}
-							}
-
-						}, 30000);
-					}
-
+							}, 30000);
+						}
+					}, 30000);
 				}, 8000);
 				break;
 			case 217737:
@@ -477,7 +446,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217514:
 				despawnNpc(npc);
 				if (getNpcs(217511).isEmpty() && getNpcs(217512).isEmpty() && getNpcs(217513).isEmpty() && getNpcs(217514).isEmpty()) {
-					sendEventPacket(StageType.START_STAGE_3_ROUND_2, 2000);
+					setStage(StageType.START_STAGE_3_ROUND_2, 2000);
 					sp(217515, 336.32092f, 345.0251f, 96.090935f, (byte) 0, 6000);
 					sp(217516, 347.16144f, 361.89084f, 96.09093f, (byte) 0, 6000);
 					sp(217518, 352.77557f, 360.97845f, 96.09091f, (byte) 0, 6000);
@@ -498,7 +467,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217518:
 				despawnNpc(npc);
 				if (getNpcs(217515).isEmpty() && getNpcs(217516).isEmpty() && getNpcs(217517).isEmpty() && getNpcs(217518).isEmpty()) {
-					sendEventPacket(StageType.START_STAGE_3_ROUND_3, 2000);
+					setStage(StageType.START_STAGE_3_ROUND_3, 2000);
 					sp(217519, 351.08026f, 341.61298f, 96.090935f, (byte) 0, 6000);
 					sp(217521, 333.4532f, 354.7357f, 96.09094f, (byte) 0, 6000);
 					sp(217522, 342.1805f, 360.534f, 96.09092f, (byte) 0, 6000);
@@ -513,7 +482,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217522:
 				despawnNpc(npc);
 				if (getNpcs(217519).isEmpty() && getNpcs(217520).isEmpty() && getNpcs(217521).isEmpty() && getNpcs(217522).isEmpty()) {
-					sendEventPacket(StageType.START_STAGE_3_ROUND_4, 2000);
+					setStage(StageType.START_STAGE_3_ROUND_4, 2000);
 					sp(217524, 349.66446f, 341.4752f, 96.090965f, (byte) 0, 6000);
 					sp(217525, 338.32742f, 356.29636f, 96.090935f, (byte) 0, 6000);
 					sp(217526, 349.31473f, 358.43762f, 96.09096f, (byte) 0, 6000);
@@ -526,7 +495,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217526:
 				despawnNpc(npc);
 				if (getNpcs(217523).isEmpty() && getNpcs(217524).isEmpty() && getNpcs(217525).isEmpty() && getNpcs(217526).isEmpty()) {
-					sendEventPacket(StageType.START_STAGE_3_ROUND_5, 2000);
+					setStage(StageType.START_STAGE_3_ROUND_5, 2000);
 					sp(217527, 335.37524f, 346.34567f, 96.09094f, (byte) 0, 6000);
 					sp(217528, 335.36105f, 353.16922f, 96.09094f, (byte) 0, 6000);
 				}
@@ -535,16 +504,9 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217528:
 				despawnNpc(npc);
 				if (getNpcs(217527).isEmpty() && getNpcs(217528).isEmpty()) {
-					sendEventPacket(StageType.START_BONUS_STAGE_3, 7000);
+					setStage(StageType.START_BONUS_STAGE_3, 7000);
 					sp(217744, 342.45215f, 349.339f, 96.09096f, (byte) 0, 7000);
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							startBonusStage3();
-						}
-
-					}, 39000);
+					ThreadPoolManager.getInstance().schedule(this::startBonusStage3, 39000);
 				}
 				break;
 			case 217557:
@@ -571,23 +533,17 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				switch (stageType) {
 					case START_STAGE_4_ROUND_1:
 						if (getNpcs(217558).isEmpty()) {
-							sendEventPacket(StageType.START_STAGE_4_ROUND_2, 2000);
+							setStage(StageType.START_STAGE_4_ROUND_2, 2000);
 							sp(217559, 330.53665f, 349.23523f, 96.09093f, (byte) 0, 6000);
 							sp(217562, 334.89508f, 363.78442f, 96.090904f, (byte) 105, 6000);
 							sp(217560, 334.61942f, 334.80353f, 96.090904f, (byte) 15, 6000);
-							ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-								@Override
-								public void run() {
-									List<Npc> round = new ArrayList<>();
-									round.add(sp(217557, 357.24625f, 338.30093f, 96.09104f, (byte) 65));
-									round.add(sp(217558, 357.20663f, 359.28714f, 96.091064f, (byte) 75));
-									round.add(sp(217561, 365.109f, 349.1218f, 96.09114f, (byte) 60));
-									empyreanStage.add(new EmpyreanStage(round));
-								}
-
+							ThreadPoolManager.getInstance().schedule(() -> {
+								List<Npc> round = new ArrayList<>();
+								round.add(sp(217557, 357.24625f, 338.30093f, 96.09104f, (byte) 65));
+								round.add(sp(217558, 357.20663f, 359.28714f, 96.091064f, (byte) 75));
+								round.add(sp(217561, 365.109f, 349.1218f, 96.09114f, (byte) 60));
+								empyreanStage.add(new EmpyreanStage(round));
 							}, 47000);
-
 						}
 						break;
 					case START_STAGE_4_ROUND_2:
@@ -601,7 +557,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217566:
 				despawnNpc(npc);
 				if (es != null && !es.containsNpcs()) {
-					sendEventPacket(StageType.START_STAGE_4_ROUND_4, 2000);
+					setStage(StageType.START_STAGE_4_ROUND_4, 2000);
 					sp(217567, 345.73895f, 349.49786f, 96.09097f, (byte) 0, 6000);
 				}
 				break;
@@ -620,7 +576,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				break;
 			case 217567:
 				despawnNpc(npc);
-				sendEventPacket(StageType.START_STAGE_4_ROUND_5, 2000);
+				setStage(StageType.START_STAGE_4_ROUND_5, 2000);
 				sp(217653, 327.76917f, 349.26215f, 96.09092f, (byte) 0, 6000);
 				sp(217651, 364.8972f, 349.25653f, 96.09114f, (byte) 60, 18000);
 				sp(217652, 361.1795f, 339.99252f, 96.09112f, (byte) 50, 35000);
@@ -631,14 +587,9 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				sp(217652, 353.92606f, 364.92636f, 96.090904f, (byte) 80, 110000);
 				sp(217653, 361.13452f, 358.90424f, 96.091156f, (byte) 65, 130000);
 				sp(217652, 346.34402f, 329.9449f, 96.09091f, (byte) 30, 142000);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						sp(217653, 331.53894f, 339.8832f, 96.09091f, (byte) 10);
-						isDoneStage4 = true;
-					}
-
+				ThreadPoolManager.getInstance().schedule(() -> {
+					sp(217653, 331.53894f, 339.8832f, 96.09091f, (byte) 10);
+					isDoneStage4 = true;
 				}, 174000);
 				break;
 			case 217651:
@@ -646,17 +597,10 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217653:
 				despawnNpc(npc);
 				if (isDoneStage4 && getNpcs(217651).isEmpty() && getNpcs(217652).isEmpty() && getNpcs(217653).isEmpty()) {
-					sendEventPacket(StageType.PASS_GROUP_STAGE_4, 0);
+					setStage(StageType.PASS_GROUP_STAGE_4, 0);
 					sp(217749, 340.59f, 349.32166f, 96.09096f, (byte) 0, 6000);
-					sendEventPacket(StageType.START_BONUS_STAGE_4, 6000);
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							startBonusStage4();
-						}
-
-					}, 33000);
+					setStage(StageType.START_BONUS_STAGE_4, 6000);
+					ThreadPoolManager.getInstance().schedule(this::startBonusStage4, 33000);
 				}
 				break;
 			case 217547:
@@ -672,13 +616,13 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217545:
 				despawnNpc(npc);
 				if (getNpcs(217550).isEmpty() && getNpcs(217545).isEmpty()) {
-					sendEventPacket(StageType.START_STAGE_5_ROUND_2, 2000);
+					setStage(StageType.START_STAGE_5_ROUND_2, 2000);
 					sp(217552, 1246.0197f, 788.8341f, 358.60556f, (byte) 11, 6000);
 				}
 				break;
 			case 217552:
 				despawnNpc(npc);
-				sendEventPacket(StageType.START_STAGE_5_ROUND_3, 2000);
+				setStage(StageType.START_STAGE_5_ROUND_3, 2000);
 				sp(700527, 1253.3123f, 789.38385f, 358.60562f, (byte) 119);
 				sp(700528, 1260.2015f, 800.14886f, 358.6056f, (byte) 16);
 				sp(217553, 1259.4706f, 812.30505f, 358.6056f, (byte) 30, 6000);
@@ -695,7 +639,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				sp(281113, 1275.894f, 780.51544f, 358.60565f, (byte) 0);
 				sp(281108, 1260.003f, 810.555f, 358.6056f, (byte) 0);
 				sp(281114, 1244.3293f, 780.4284f, 358.60562f, (byte) 0);
-				sendEventPacket(StageType.START_STAGE_5_ROUND_4, 2000);
+				setStage(StageType.START_STAGE_5_ROUND_4, 2000);
 				sp(217554, 1243.1877f, 796.79553f, 358.6056f, (byte) 0, 6000);
 				break;
 			case 217554:
@@ -708,7 +652,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				despawnNpc(getNpc(281113));
 				despawnNpc(getNpc(281114));
 				despawnNpc(getNpc(281322));
-				sendEventPacket(StageType.START_STAGE_5_ROUND_5, 2000);
+				setStage(StageType.START_STAGE_5_ROUND_5, 2000);
 				sp(217556, 1259.8387f, 785.6266f, 358.60562f, (byte) 30, 6000);
 				sp(281191, 1261.8f, 804.5f, 358.7f, (byte) 0, 6000);
 				sp(281192, 1267.6f, 793.9f, 358.7f, (byte) 0, 6000);
@@ -721,26 +665,21 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				despawnNpc(getNpc(281192));
 				despawnNpc(getNpc(281193));
 				despawnNpc(getNpc(281194));
-				sendEventPacket(StageType.PASS_GROUP_STAGE_5, 0);
+				setStage(StageType.PASS_GROUP_STAGE_5, 0);
 				sp(205339, 1260.1465f, 795.07495f, 358.60562f, (byte) 30);
 				break;
 			case 217568:
 				sp(205413, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				despawnNpc(npc);
 				if (isDoneStage6Round1 && getNpcs(217568).isEmpty()) {
-					sendEventPacket(StageType.START_STAGE_6_ROUND_2, 2000);
+					setStage(StageType.START_STAGE_6_ROUND_2, 2000);
 					sp(217570, 1629.4642f, 154.8044f, 126f, (byte) 30, 6000);
 					sp(217569, 1643.7776f, 161.63562f, 126f, (byte) 46, 6000);
 					sp(217569, 1639.7843f, 142.09268f, 126f, (byte) 40, 6000);
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							sp(217569, 1614.6377f, 164.04999f, 126.00113f, (byte) 3);
-							sp(217569, 1625.8965f, 135.62509f, 126f, (byte) 30);
-							isDoneStage6Round2 = true;
-						}
-
+					ThreadPoolManager.getInstance().schedule(() -> {
+						sp(217569, 1614.6377f, 164.04999f, 126.00113f, (byte) 3);
+						sp(217569, 1625.8965f, 135.62509f, 126f, (byte) 30);
+						isDoneStage6Round2 = true;
 					}, 12000);
 				}
 				break;
@@ -752,7 +691,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				sp(205414, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				despawnNpc(npc);
 				if (stageType == StageType.START_STAGE_6_ROUND_2 && isDoneStage6Round2 && getNpcs(217569).isEmpty() && getNpcs(217570).isEmpty()) {
-					sendEventPacket(StageType.START_STAGE_6_ROUND_3, 2000);
+					setStage(StageType.START_STAGE_6_ROUND_3, 2000);
 					sp(217572, 1629.5837f, 138.38435f, 126f, (byte) 30, 9000);
 					sp(217569, 1635.01535f, 150.01535f, 126f, (byte) 45, 6000);
 					sp(217569, 1638.3817f, 152.84074f, 126f, (byte) 45, 6000);
@@ -761,77 +700,77 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 			case 217572:
 				despawnNpc(npc);
 				sp(217573, 1634.7891f, 141.99077f, 126f, (byte) 0);
-				sendEventPacket(StageType.START_STAGE_6_ROUND_4, 2000);
+				setStage(StageType.START_STAGE_6_ROUND_4, 2000);
 				break;
 			case 217573:
 				despawnNpc(npc);
-				sendEventPacket(StageType.PASS_GROUP_STAGE_6, 0);
+				setStage(StageType.PASS_GROUP_STAGE_6, 0);
 				// sendMsg(1400977);
 				// TODO: 2 boxes ready room!
 				sp(217750, 1624.1908f, 155.16148f, 126f, (byte) 0, 8000);
-				sendEventPacket(StageType.START_BONUS_STAGE_6, 8000);
+				setStage(StageType.START_BONUS_STAGE_6, 8000);
 				break;
 			case 217750:
 				sp(205340, 1625.08f, 159.15f, 126f, (byte) 0);
 				break;
 			case 217582:
 			case 217578:
-				sendEventPacket(StageType.START_STAGE_7_ROUND_2, 2000);
+				setStage(StageType.START_STAGE_7_ROUND_2, 2000);
 				sp(217579, 1794.81f, 779.53925f, 469.35016f, (byte) 40, 6000);
 				// sp(217583, 1794.81f, 779.53925f, 469.35016f, (byte) 40, 6000);
 				break;
 			case 217579:
 			case 217583:
-				sendEventPacket(StageType.START_STAGE_7_ROUND_3, 2000);
+				setStage(StageType.START_STAGE_7_ROUND_3, 2000);
 				sp(217580, 1775.6254f, 811.43225f, 469.35022f, (byte) 100, 6000);
 				// sp(217584, 1775.6254f, 811.43225f, 469.35022f, (byte) 100, 6000);
 				break;
 			case 217580:
 			case 217584:
-				sendEventPacket(StageType.START_STAGE_7_ROUND_4, 2000);
+				setStage(StageType.START_STAGE_7_ROUND_4, 2000);
 				sp(217581, 1775.716f, 779.630f, 469.564f, (byte) 20, 6000);
 				// sp(217585, 1775.716f, 779.630f, 469.564f, (byte) 20, 6000);
 				break;
 			case 217581:
 			case 217585:
-				sendEventPacket(StageType.START_STAGE_7_ROUND_5, 2000);
+				setStage(StageType.START_STAGE_7_ROUND_5, 2000);
 				sp(217586, 1773.194f, 796.537f, 469.350f, (byte) 0, 6000);
 				// sp(217587, 1773.194f, 796.537f, 469.350f, (byte) 0, 6000);
 				break;
 			case 217586:
 			case 217587:
-				sendEventPacket(StageType.PASS_GROUP_STAGE_7, 0);
+				setStage(StageType.PASS_GROUP_STAGE_7, 0);
 				sp(217753, 1782.881f, 800.114f, 469.420f, (byte) 0, 2000);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_S7_BookBox_01());
 				sp(205341, 1781.610f, 796.920f, 469.350f, (byte) 0, 2000);
 				break;
 			case 217588:
-				sendEventPacket(StageType.START_STAGE_8_ROUND_2, 2000);
+				setStage(StageType.START_STAGE_8_ROUND_2, 2000);
 				sp(217590, 1764.377f, 1761.510f, 303.695f, (byte) 0, 6000);
 				break;
 			case 217590:
-				sendEventPacket(StageType.START_STAGE_8_ROUND_3, 2000);
+				setStage(StageType.START_STAGE_8_ROUND_3, 2000);
 				sp(217591, 1776.946f, 1749.255f, 303.696f, (byte) 30, 6000);
 				break;
 			case 217591:
-				sendEventPacket(StageType.START_STAGE_8_ROUND_4, 2000);
+				setStage(StageType.START_STAGE_8_ROUND_4, 2000);
 				sp(217592, 1790.693f, 1761.911f, 303.877f, (byte) 60, 6000);
 				break;
 			case 217592:
-				sendEventPacket(StageType.START_STAGE_8_ROUND_5, 2000);
+				setStage(StageType.START_STAGE_8_ROUND_5, 2000);
 				sp(280790, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				sp(217593, 1777.065f, 1763.706f, 303.695f, (byte) 90, 6000);
 				break;
 			case 217593:
-				sendEventPacket(StageType.PASS_GROUP_STAGE_8, 0);
+				setStage(StageType.PASS_GROUP_STAGE_8, 0);
 				sp(205342, 1776.757f, 1764.624f, 303.695f, (byte) 90);
 				break;
 			case 217594:
-				sendEventPacket(StageType.START_STAGE_9_ROUND_2, 2000);
+				setStage(StageType.START_STAGE_9_ROUND_2, 2000);
 				sp(217595, 1322.311f, 1741.508f, 316.349f, (byte) 65, 6000);
 				break;
 			case 217595:
-				sendEventPacket(StageType.START_STAGE_9_ROUND_3, 2000);
+				setStage(StageType.START_STAGE_9_ROUND_3, 2000);
 				sp(217596, 1308.038f, 1729.718f, 315.996f, (byte) 36, 6000);
 				sp(217597, 1302.290f, 1745.471f, 316.092f, (byte) 96, 6000);
 				break;
@@ -855,43 +794,24 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		sp(217740, 332.12f, 349.22f, 96.1f, (byte) 0);
 		sp(217741, 346.42f, 335.1f, 96.1f, (byte) 87);
 
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S3_Bonus_01()); // 30 sec
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S3_Bonus_02()); // 10 sec
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S3_Bonus_03()); // 5 sec
-								ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-									@Override
-									public void run() {
-										despawnNpc(getNpc(217740));
-										despawnNpc(getNpc(217741));
-										despawnNpc(getNpc(217742));
-										despawnNpc(getNpc(217743));
-										sp(205331, 345.25f, 349.24f, 96.09097f, (byte) 0);
-										sp(217735, 378.9331f, 346.74878f, 96.74762f, (byte) 0);
-										sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_S3_ResurBox1_01()); // A Ticket Box appeared
-										despawnNpc(getNpc(217744));
-									}
-
-								}, 5000);
-							}
-
-						}, 5000);
-					}
-
-				}, 20000);
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S3_Bonus_01()); // 30 sec
+			ThreadPoolManager.getInstance().schedule(() -> {
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S3_Bonus_02()); // 10 sec
+				ThreadPoolManager.getInstance().schedule(() -> {
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_S3_Bonus_03()); // 5 sec
+					ThreadPoolManager.getInstance().schedule(() -> {
+						despawnNpc(getNpc(217740));
+						despawnNpc(getNpc(217741));
+						despawnNpc(getNpc(217742));
+						despawnNpc(getNpc(217743));
+						sp(205331, 345.25f, 349.24f, 96.09097f, (byte) 0);
+						sp(217735, 378.9331f, 346.74878f, 96.74762f, (byte) 0);
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_S3_ResurBox1_01()); // A Ticket Box appeared
+						despawnNpc(getNpc(217744));
+					}, 5000);
+				}, 5000);
+			}, 20000);
 		}, 30000);
 	}
 
@@ -934,19 +854,14 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		sp(217747, 345.3226f, 367.7414f, 96.0909f, (byte) 60, 96000);
 		sp(217747, 345.4836f, 367.3886f, 96.090904f, (byte) 60, 99000);
 		sp(217747, 345.80862f, 366.0682f, 96.09092f, (byte) 60, 102000);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				despawnNpcs(getNpcs(217745));
-				despawnNpcs(getNpcs(217746));
-				despawnNpcs(getNpcs(217747));
-				despawnNpcs(getNpcs(217748));
-				despawnNpc(getNpc(217749));
-				despawnNpc(getNpc(217778));
-				sp(205338, 345.25f, 349.24f, 96.09097f, (byte) 0);
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			despawnNpcs(getNpcs(217745));
+			despawnNpcs(getNpcs(217746));
+			despawnNpcs(getNpcs(217747));
+			despawnNpcs(getNpcs(217748));
+			despawnNpc(getNpc(217749));
+			despawnNpc(getNpc(217778));
+			sp(205338, 345.25f, 349.24f, 96.09097f, (byte) 0);
 		}, 102000);
 	}
 
@@ -954,39 +869,29 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		List<Npc> round = new ArrayList<>();
 		round.add(sp(217508, 334.06754f, 339.84393f, 96.09091f, (byte) 0));
 		empyreanStage.add(new EmpyreanStage(round));
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				List<Npc> round1 = new ArrayList<>();
-				round1.add(sp(217506, 342.12405f, 364.4922f, 96.09093f, (byte) 0));
-				round1.add(sp(217507, 344.4953f, 365.14444f, 96.09092f, (byte) 0));
-				empyreanStage.add(new EmpyreanStage(round1));
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			List<Npc> round1 = new ArrayList<>();
+			round1.add(sp(217506, 342.12405f, 364.4922f, 96.09093f, (byte) 0));
+			round1.add(sp(217507, 344.4953f, 365.14444f, 96.09092f, (byte) 0));
+			empyreanStage.add(new EmpyreanStage(round1));
 		}, 5000);
 	}
 
 	private void startStage4Round3() {
-		sendEventPacket(StageType.START_STAGE_4_ROUND_3, 2000);
+		setStage(StageType.START_STAGE_4_ROUND_3, 2000);
 		sp(217563, 339.70975f, 333.54272f, 96.090904f, (byte) 20, 6000);
 		sp(217564, 342.92892f, 333.43994f, 96.09092f, (byte) 18, 6000);
 		sp(217565, 341.55396f, 330.70847f, 96.09093f, (byte) 23, 16000);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				List<Npc> round = new ArrayList<>();
-				round.add(sp(217566, 362.87164f, 357.87164f, 96.091125f, (byte) 73));
-				round.add(sp(217563, 359.1135f, 359.6953f, 96.091125f, (byte) 80));
-				empyreanStage.add(new EmpyreanStage(round));
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			List<Npc> round = new ArrayList<>();
+			round.add(sp(217566, 362.87164f, 357.87164f, 96.091125f, (byte) 73));
+			round.add(sp(217563, 359.1135f, 359.6953f, 96.091125f, (byte) 80));
+			empyreanStage.add(new EmpyreanStage(round));
 		}, 43000);
 	}
 
 	private void startStage2Round2() {
-		sendEventPacket(StageType.START_STAGE_2_ROUND_2, 2000);
+		setStage(StageType.START_STAGE_2_ROUND_2, 2000);
 		sp(217502, 328.78433f, 348.77353f, 96.09092f, (byte) 0, 6000);
 		sp(217508, 329.01874f, 343.79257f, 96.09092f, (byte) 0, 6000);
 		sp(217507, 329.2849f, 355.2314f, 96.090935f, (byte) 0, 6000);
@@ -994,12 +899,12 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	private void startStage2Round3() {
-		sendEventPacket(StageType.START_STAGE_2_ROUND_3, 2000);
+		setStage(StageType.START_STAGE_2_ROUND_3, 2000);
 		sp(217509, 332.24298f, 349.49286f, 96.090935f, (byte) 0, 6000);
 	}
 
 	private void startStage2Round5() {
-		sendEventPacket(StageType.START_STAGE_2_ROUND_5, 2000);
+		setStage(StageType.START_STAGE_2_ROUND_5, 2000);
 		sp(Rnd.get(1, 2) == 1 ? 217510 : 217501, 332.0035f, 349.55893f, 96.09093f, (byte) 0, 6000);
 	}
 
@@ -1023,9 +928,8 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		} else {
 			TeleportService.teleportTo(player, mapId, player.getInstanceId(), 381.41684f, 346.78162f, 96.74763f, (byte) 43);
 		}
-
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward, InstanceProgressionType.END_PROGRESS),
-			instanceReward, InstanceProgressionType.END_PROGRESS));
+		instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreInfo(instanceReward)));
 	}
 
 	@Override
@@ -1058,16 +962,11 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	public boolean onReviveEvent(final Player player) {
 		super.onReviveEvent(player);
 		moveToReadyRoom(player);
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player p) {
-				if (player.equals(p)) {
-					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400932));
-				} else
-					PacketSendUtility.sendPacket(p, new SM_SYSTEM_MESSAGE(1400933, player.getName()));
-			}
-
+		instance.forEachPlayer(p -> {
+			if (player.equals(p)) {
+				PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_MOVE_BIRTHAREA_ME_IDARENA());
+			} else
+				PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_MOVE_BIRTHAREA_FRIENDLY_IDARENA(player.getName()));
 		});
 		return true;
 	}
@@ -1094,38 +993,33 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	public void onChangeStage(final StageType type) {
 		switch (type) {
 			case START_STAGE_1_ELEVATOR:
-				sendEventPacket(type, 0);
-				sendEventPacket(StageType.START_STAGE_1_ROUND_1, 5000);
+				setStage(type, 0);
+				setStage(StageType.START_STAGE_1_ROUND_1, 5000);
 				stage = 1;
 				final List<Integer> round = new ArrayList<>();
 				round.add(217486);
 				round.add(217489);
 				sp(217486, 327.73657f, 347.96228f, 96.09092f, (byte) 0, 9000);
 				sp(217489, 327.81943f, 350.948f, 96.09093f, (byte) 0, 9000);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						if (!isSpawn(round)) {
-							startStage1Round2();
-						}
-						round.clear();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (!isSpawn(round)) {
+						startStage1Round2();
 					}
-
+					round.clear();
 				}, 62000);
 				break;
 			case START_STAGE_2_ELEVATOR:
-				sendEventPacket(type, 0);
+				setStage(type, 0);
 				despawnNpcs(getNpcs(217756));
 				stage = 2;
-				sendEventPacket(StageType.START_STAGE_2_ROUND_1, 5000);
+				setStage(StageType.START_STAGE_2_ROUND_1, 5000);
 				sp(217503, 325.71194f, 352.81027f, 96.09092f, (byte) 0, 9000);
 				sp(217502, 325.78696f, 346.07263f, 96.090904f, (byte) 0, 9000);
 				sp(217504, 325.06122f, 349.4784f, 96.090904f, (byte) 0, 9000);
 				break;
 			case START_STAGE_3_ELEVATOR:
-				sendEventPacket(type, 0);
-				sendEventPacket(StageType.START_STAGE_3_ROUND_1, 5000);
+				setStage(type, 0);
+				setStage(StageType.START_STAGE_3_ROUND_1, 5000);
 				stage = 3;
 				sp(217512, 344.23056f, 347.89594f, 96.09096f, (byte) 0, 9000);
 				sp(217513, 341.09082f, 337.95187f, 96.09097f, (byte) 0, 9000);
@@ -1153,50 +1047,45 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				sp(217513, 330.90952f, 350.7164f, 96.09093f, (byte) 0, 9000);
 				break;
 			case START_STAGE_4_ELEVATOR:
-				sendEventPacket(type, 0);
+				setStage(type, 0);
 				despawnNpc(getNpc(217735));
-				sendEventPacket(StageType.START_STAGE_4_ROUND_1, 5000);
+				setStage(StageType.START_STAGE_4_ROUND_1, 5000);
 				stage = 4;
 				sp(217557, 328.88104f, 349.55392f, 96.090904f, (byte) 0, 9000);
 				sp(217559, 328.38922f, 342.39066f, 96.09091f, (byte) 5, 9000);
 				sp(217557, 333.17947f, 336.4504f, 96.090904f, (byte) 8, 9000);
 				break;
 			case START_STAGE_5_ROUND_1:
-				sendEventPacket(type, 2000);
+				setStage(type, 2000);
 				sp(217549, 1263.1987f, 778.4129f, 358.6056f, (byte) 30, 6000);
 				sp(217548, 1260.1381f, 778.84644f, 358.60562f, (byte) 30, 6000);
 				sp(217547, 1257.3065f, 778.35016f, 358.60562f, (byte) 30, 6000);
 				break;
 			case START_STAGE_6_ROUND_1:
-				sendEventPacket(type, 2000);
+				setStage(type, 2000);
 				sp(217568, 1636.7102f, 166.87984f, 126f, (byte) 60, 6000);
 				sp(217568, 1619.4432f, 153.83188f, 126f, (byte) 60, 6000);
 				sp(217568, 1636.6416f, 164.15344f, 126f, (byte) 60, 6000);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						sp(217568, 1638.7107f, 165.40533f, 126f, (byte) 60);
-						sp(217568, 1638.6783f, 162.67389f, 126f, (byte) 60);
-						isDoneStage6Round1 = true;
-					}
-
+				ThreadPoolManager.getInstance().schedule(() -> {
+					sp(217568, 1638.7107f, 165.40533f, 126f, (byte) 60);
+					sp(217568, 1638.6783f, 162.67389f, 126f, (byte) 60);
+					isDoneStage6Round1 = true;
 				}, 12000);
 				break;
 			case START_STAGE_6_ROUND_5:
-				sendEventPacket(type, 0);
+				setStage(type, 0);
 				break;
 			case START_STAGE_7_ROUND_1:
-				sendEventPacket(type, 2000);
+				setStage(type, 2000);
 				sp(217578, 1784.848f, 806.7728f, 469.82202f, (byte) 0, 6000); // elyos
 				// sp(217582, 1794.908f, 811.9936f, 469.3501f, (byte) 80, 6000); //asmo, need sniff
 				break;
 			case START_STAGE_8_ROUND_1:
-				sendEventPacket(type, 2000);
+				setStage(type, 2000);
 				sp(217588, 1776.578f, 1773.231f, 303.695f, (byte) 90, 6000);
 				break;
 			case START_STAGE_9_ROUND_1:
-				sendEventPacket(type, 2000);
+				setStage(type, 2000);
 				sp(217594, 1274.890f, 1730.676f, 318.194f, (byte) 3, 6000);
 				break;
 			case START_STAGE_5:
@@ -1204,95 +1093,80 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				sp(205426, 1256.2872f, 834.28986f, 358.60565f, (byte) 103);
 				sp(205332, 1260.1292f, 795.06964f, 358.60562f, (byte) 30);
 				teleport(1260.15f, 812.34f, 358.6056f, (byte) 90);
-				sendEventPacket(type, 1000);
+				setStage(type, 1000);
 				break;
 			case START_STAGE_6:
 				stage = 6;
 				sp(205427, 1594.4756f, 145.26898f, 128.67778f, (byte) 16);
 				sp(205333, 1625.1771f, 159.15244f, 126f, (byte) 70);
 				teleport(1616.0248f, 154.43837f, 126f, (byte) 10);
-				sendEventPacket(type, 1000);
+				setStage(type, 1000);
 				break;
 			case START_STAGE_7:
 				stage = 7;
 				sp(205428, 1820.39f, 800.81805f, 470.1394f, (byte) 86);
 				sp(205334, 1781.6106f, 796.9224f, 469.35016f, (byte) 0);
 				teleport(1793.9233f, 796.92f, 469.36542f, (byte) 60);
-				sendEventPacket(type, 1000);
+				setStage(type, 1000);
 				break;
 			case START_STAGE_8:
 				stage = 8;
 				sp(205335, 1776.759f, 1764.705f, 303.695f, (byte) 90);
 				sp(205429, 1780.103f, 1723.458f, 304.039f, (byte) 53);
 				teleport(1776.4169f, 1749.9952f, 303.69553f, (byte) 0); // get retail
-				sendEventPacket(type, 1000);
+				setStage(type, 1000);
 				break;
 			case START_STAGE_9:
 				stage = 9;
 				sp(205430, 1359.375f, 1758.057f, 319.625f, (byte) 90);
 				sp(205336, 1309.309f, 1732.540f, 315.782f, (byte) 7);
 				teleport(1320.4513f, 1738.4838f, 316.1746f, (byte) 66);
-				sendEventPacket(type, 1000);
+				setStage(type, 1000);
 				break;
 		}
 	}
 
 	private void startStage1Round2() {
-		sendEventPacket(StageType.START_STAGE_1_ROUND_2, 2000);
+		setStage(StageType.START_STAGE_1_ROUND_2, 2000);
 		final List<Integer> round = new ArrayList<>();
 		round.add(217492);
 		sp(217492, 332.7714f, 358.48206f, 96.09092f, (byte) 106, 6000);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isSpawn(round)) {
-					startStage1Round3();
-				}
-				round.clear();
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isSpawn(round)) {
+				startStage1Round3();
 			}
-
+			round.clear();
 		}, 59000);
 	}
 
 	private void startStage1Round3() {
-		sendEventPacket(StageType.START_STAGE_1_ROUND_3, 2000);
+		setStage(StageType.START_STAGE_1_ROUND_3, 2000);
 		final List<Integer> round = new ArrayList<>();
 		round.add(217487);
 		sp(217487, 334.844f, 339.92618f, 96.09094f, (byte) 18, 6000);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isSpawn(round)) {
-					startStage1Round4();
-				}
-				round.clear();
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isSpawn(round)) {
+				startStage1Round4();
 			}
-
+			round.clear();
 		}, 63000);
 	}
 
 	private void startStage1Round4() {
-		sendEventPacket(StageType.START_STAGE_1_ROUND_4, 2000);
+		setStage(StageType.START_STAGE_1_ROUND_4, 2000);
 		final List<Integer> round = new ArrayList<>();
 		round.add(217491);
 		sp(217491, 341.03156f, 361.04315f, 96.09093f, (byte) 90, 6000);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isSpawn(round)) {
-					startStage1Round5();
-				}
-				round.clear();
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isSpawn(round)) {
+				startStage1Round5();
 			}
-
+			round.clear();
 		}, 167000);
 	}
 
 	private void startStage1Round5() {
-		sendEventPacket(StageType.START_STAGE_1_ROUND_5, 2000);
+		setStage(StageType.START_STAGE_1_ROUND_5, 2000);
 		sp(217493, 332.093f, 349.36847f, 96.090935f, (byte) 0, 8000);
 	}
 
@@ -1355,15 +1229,12 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	private void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed) {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed) {
+				synchronized (npcs) {
 					npcs.add((Npc) spawn(npcId, x, y, z, h));
 				}
 			}
-
 		}, time);
 	}
 
@@ -1371,7 +1242,9 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		Npc npc = null;
 		if (!isInstanceDestroyed) {
 			npc = (Npc) spawn(npcId, x, y, z, h);
-			npcs.add(npc);
+			synchronized (npcs) {
+				npcs.add(npc);
+			}
 		}
 		return npc;
 	}
@@ -1463,10 +1336,10 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 							itemId = 169500933;
 							break;
 						case 3:
-							itemId = race.equals(Race.ELYOS) ? 169500947 : 169500951;
+							itemId = race == Race.ELYOS ? 169500947 : 169500951;
 							break;
 						case 4:
-							itemId = race.equals(Race.ELYOS) ? 169500927 : 169500931;
+							itemId = race == Race.ELYOS ? 169500927 : 169500931;
 							break;
 					}
 				}

@@ -28,22 +28,21 @@ import com.aionemu.gameserver.world.geo.GeoService;
 @InstanceID(300610000)
 public class RaksangRuinsInstance extends GeneralInstanceHandler {
 
+	private final int way = Rnd.get(0, 2);
+	private final AtomicInteger spawns = new AtomicInteger();
+	private final AtomicBoolean isEventStarted = new AtomicBoolean();
+	private final AtomicInteger waveKillz = new AtomicInteger();
 	private volatile boolean isInstanceDestroyed;
-	private AtomicBoolean isEventStarted = new AtomicBoolean();
-	private AtomicInteger waveKillz = new AtomicInteger();
 	private Future<?> spawnTask;
 	private boolean isDoorAccessible = false;
-	private byte way, spawns;
+
+	public RaksangRuinsInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public float getInstanceExpMultiplier() {
 		return 1.8f;
-	}
-
-	@Override
-	public void onInstanceCreate(WorldMapInstance wmi) {
-		super.onInstanceCreate(wmi);
-		way = (byte) Rnd.get(3);
 	}
 
 	@Override
@@ -86,7 +85,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 					case 28:
 						spawnTask.cancel(false);
 						spawnTask = null;
-						spawns = 0;
+						spawns.set(0);
 						instance.setDoorState(107, true);
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_B_END());
 						break;
@@ -140,7 +139,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 				break;
 			case 730438: // Terror' Vault
 				if (isDoorAccessible)
-					TeleportService.teleportTo(player, mapId, instanceId, 711.10895f, 312.82013f, 910.6781f);
+					TeleportService.teleportTo(player, instance, 711.10895f, 312.82013f, 910.6781f);
 				else
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_DOOR_CONDITION());
 				break;
@@ -159,13 +158,13 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 
 	private void delaySpawn(byte step, int delay) {
 		spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (++spawns > 8 || isInstanceDestroyed) {
+			if (spawns.incrementAndGet() > 8 || isInstanceDestroyed) {
 				spawnTask.cancel(false);
 				return;
 			}
 			switch (step) {
 				case 1:
-					switch (spawns) {
+					switch (spawns.get()) {
 						case 1:
 						case 3:
 						case 5:
@@ -186,7 +185,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 					}
 					break;
 				case 2:
-					switch (spawns) {
+					switch (spawns.get()) {
 						case 1:
 						case 3:
 						case 5:
@@ -207,7 +206,7 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 					}
 					break;
 				case 3:
-					switch (spawns) {
+					switch (spawns.get()) {
 						case 1:
 							delaySpawn(236010, 1000);
 							delaySpawn(236010, 4000);

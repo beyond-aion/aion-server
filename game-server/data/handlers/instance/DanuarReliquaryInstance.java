@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Ritsu, Estrayl, Yeats
@@ -22,6 +23,10 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 	private final AtomicBoolean isCursedModorActive = new AtomicBoolean();
 	private final AtomicInteger cloneKills = new AtomicInteger();
 	private ScheduledFuture<?> wipeTask;
+
+	public DanuarReliquaryInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	protected int getExitId() {
 		return 730843;

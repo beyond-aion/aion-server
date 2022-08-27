@@ -20,6 +20,10 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 	private boolean isDead1 = false;
 	private boolean isDead2 = false;
 
+	public TheobomosLabInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public void onDie(Npc npc) {
 		if (isInstanceDestroyed)
@@ -73,32 +77,21 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 	}
 
 	private void removeBuff() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed && isDead1 && isDead2) {
-					getNpc(214668).getEffectController().removeEffect(18481);
-					getNpc(280973).getController().delete();
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed && isDead1 && isDead2) {
+				getNpc(214668).getEffectController().removeEffect(18481);
+				getNpc(280973).getController().delete();
 			}
 		}, 1000);
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		if (Rnd.nextBoolean()) {
 			switch (Rnd.get(1, 3)) {
-				case 1:
-					spawn(798223, 256.26215f, 512.9742f, 187.79453f, (byte) 0);
-					break;
-				case 2:
-					spawn(798223, 360.16098f, 526.9446f, 186.20251f, (byte) 105);
-					break;
-				case 3:
-					spawn(798223, 476.77145f, 541.5697f, 187.79453f, (byte) 90);
-					break;
+				case 1 -> spawn(798223, 256.26215f, 512.9742f, 187.79453f, (byte) 0);
+				case 2 -> spawn(798223, 360.16098f, 526.9446f, 186.20251f, (byte) 105);
+				case 3 -> spawn(798223, 476.77145f, 541.5697f, 187.79453f, (byte) 90);
 			}
 		}
 	}

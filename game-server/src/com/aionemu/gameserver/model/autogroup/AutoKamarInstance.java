@@ -76,7 +76,7 @@ public class AutoKamarInstance extends AutoInstance {
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
 		KamarBattlefieldService.getInstance().addCooldown(player);
-		((KamarReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player);
+		((KamarReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player, instance);
 	}
 
 	@Override

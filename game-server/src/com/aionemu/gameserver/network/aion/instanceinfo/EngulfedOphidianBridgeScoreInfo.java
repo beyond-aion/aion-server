@@ -3,41 +3,37 @@ package com.aionemu.gameserver.network.aion.instanceinfo;
 import java.nio.ByteBuffer;
 
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancereward.EngulfedOphidianBridgeReward;
 import com.aionemu.gameserver.model.instance.playerreward.EngulfedOphidianBridgePlayerReward;
 
 /**
  * @author xTz
  */
-public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
+public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo<EngulfedOphidianBridgeReward> {
 
-	private final EngulfedOphidianBridgeReward engulfedOBReward;
 	private final int type;
 	private final int objectId;
-	private final InstanceProgressionType instanceScoreType;
 
-	public EngulfedOphidianBridgeScoreInfo(EngulfedOphidianBridgeReward engulfedOBReward, int type, int objectId) {
-		this.engulfedOBReward = engulfedOBReward;
+	public EngulfedOphidianBridgeScoreInfo(EngulfedOphidianBridgeReward reward, int type, int objectId) {
+		super(reward);
 		this.type = type;
 		this.objectId = objectId;
-		this.instanceScoreType = engulfedOBReward.getInstanceProgressionType();
 	}
 
 	@Override
 	public void writeMe(ByteBuffer buf) {
 		writeC(buf, type);
-		EngulfedOphidianBridgePlayerReward engulfedOBPlayerReward = null;
+		EngulfedOphidianBridgePlayerReward engulfedOBPlayerReward;
 		switch (type) {
 			case 3:
-				engulfedOBPlayerReward = engulfedOBReward.getPlayerReward(objectId);
+				engulfedOBPlayerReward = reward.getPlayerReward(objectId);
 				writeD(buf, 0);
 				writeD(buf, 0);
 				writeD(buf, engulfedOBPlayerReward.getOwnerId()); // objectId
-				writeD(buf, engulfedOBPlayerReward.getRace().equals(Race.ELYOS) ? 0 : 1); // elyos 0 asmodians 1
+				writeD(buf, engulfedOBPlayerReward.getRace() == Race.ELYOS ? 0 : 1);
 				break;
 			case 5: // reward
-				engulfedOBPlayerReward = engulfedOBReward.getPlayerReward(objectId);
+				engulfedOBPlayerReward = reward.getPlayerReward(objectId);
 				writeD(buf, 100); // partitipation
 				writeD(buf, engulfedOBPlayerReward.getBaseReward());
 				writeD(buf, engulfedOBPlayerReward.getBonusReward());
@@ -66,24 +62,24 @@ public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
 				break;
 			case 6:
 				writeD(buf, 100);
-				EngulfedOphidianBridgePlayerReward[] engulfedOBElyos = engulfedOBReward.getPlayersByRace(Race.ELYOS);
-				for (EngulfedOphidianBridgePlayerReward reward : engulfedOBElyos) {
-					if (reward != null) {
+				EngulfedOphidianBridgePlayerReward[] engulfedOBElyos = reward.getPlayersByRace(Race.ELYOS);
+				for (EngulfedOphidianBridgePlayerReward elyosReward : engulfedOBElyos) {
+					if (elyosReward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);
-						writeD(buf, reward.getOwnerId());
+						writeD(buf, elyosReward.getOwnerId());
 					} else {
 						writeD(buf, 0);
 						writeD(buf, 0);
 						writeD(buf, 0);
 					}
 				}
-				EngulfedOphidianBridgePlayerReward[] engulfedOBAsmodians = engulfedOBReward.getPlayersByRace(Race.ASMODIANS);
-				for (EngulfedOphidianBridgePlayerReward reward : engulfedOBAsmodians) {
-					if (reward != null) {
+				EngulfedOphidianBridgePlayerReward[] engulfedOBAsmodians = reward.getPlayersByRace(Race.ASMODIANS);
+				for (EngulfedOphidianBridgePlayerReward asmoReward : engulfedOBAsmodians) {
+					if (asmoReward != null) {
 						writeD(buf, 0);
 						writeD(buf, 0);
-						writeD(buf, reward.getOwnerId());
+						writeD(buf, asmoReward.getOwnerId());
 					} else {
 						writeD(buf, 0);
 						writeD(buf, 0);
@@ -92,21 +88,21 @@ public class EngulfedOphidianBridgeScoreInfo extends InstanceScoreInfo {
 				}
 				// elyos reward
 				writeC(buf, 0);
-				writeD(buf, engulfedOBReward.getElyosKills().intValue());
-				writeD(buf, engulfedOBReward.getElyosPoints().intValue());
+				writeD(buf, reward.getElyosKills());
+				writeD(buf, reward.getElyosPoints());
 				writeD(buf, 0); // asmodians 0
-				writeD(buf, instanceScoreType.isReinforcing() ? 1 : 0xFFFF);// 1 | 65535 - 0xFFFF | 0
+				writeD(buf, reward.getInstanceProgressionType().isReinforcing() ? 1 : 0xFFFF);// 1 | 65535 - 0xFFFF | 0
 				// asmodians reward
 				writeC(buf, 0);
-				writeD(buf, engulfedOBReward.getAsmodiansKills().intValue());
-				writeD(buf, engulfedOBReward.getAsmodiansPoint().intValue());
+				writeD(buf, reward.getAsmodiansKills());
+				writeD(buf, reward.getAsmodiansPoints());
 				writeD(buf, 1); // elyos
-				writeD(buf, instanceScoreType.isReinforcing() ? 1 : 0xFFFF); // 1 | 65535 - 0xFFFF | 0
+				writeD(buf, reward.getInstanceProgressionType().isReinforcing() ? 1 : 0xFFFF); // 1 | 65535 - 0xFFFF | 0
 				break;
 			case 10:
 				writeC(buf, 0);
-				writeD(buf, engulfedOBReward.getKillsByRace(objectId == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
-				writeD(buf, engulfedOBReward.getPointsByRace(objectId == 0 ? Race.ELYOS : Race.ASMODIANS).intValue());
+				writeD(buf, objectId == 0 ? reward.getElyosKills() : reward.getAsmodiansKills());
+				writeD(buf, objectId == 0 ? reward.getElyosPoints() : reward.getAsmodiansPoints());
 				writeD(buf, objectId); // elyos 0 asmodians 1
 				writeD(buf, 0);
 				break;

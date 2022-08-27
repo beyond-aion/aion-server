@@ -70,9 +70,12 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 	private int rank;
 	private Future<?> despawnTask, trashMobSpawnTask, bulkyMobSpawnTask, dominatorMobSpawnTask;
 
+	public RoahCustomInstanceHandler(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
 		spawnRings();
 		spawn(730588, 505.2431f, 377.0414f, 93.8944f, (byte) 30, 33); // Exit
 	}
@@ -84,9 +87,8 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	private void spawnRings() {
 		// transparent entry gate
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("ROAH_WING_1", mapId, new Point3D(501.77, 409.53, 94.12), new Point3D(503.93, 409.65, 98.9),
-			new Point3D(506.26, 409.7, 94.15), 10), instanceId);
-		f1.spawn();
+		new FlyRing(new FlyRingTemplate("ROAH_WING_1", mapId, new Point3D(501.77, 409.53, 94.12), new Point3D(503.93, 409.65, 98.9),
+			new Point3D(506.26, 409.7, 94.15), 10), instance.getInstanceId()).spawn();
 	}
 
 	@Override

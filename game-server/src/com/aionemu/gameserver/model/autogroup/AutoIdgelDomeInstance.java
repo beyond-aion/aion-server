@@ -72,7 +72,7 @@ public class AutoIdgelDomeInstance extends AutoInstance {
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
 		IdgelDomeService.getInstance().addCooldown(player);
-		((IdgelDomeInfo) instance.getInstanceHandler().getInstanceReward()).teleportToStartPosition(player);
+		((IdgelDomeInfo) instance.getInstanceHandler().getInstanceReward()).teleportToStartPosition(player, instance);
 	}
 
 	@Override

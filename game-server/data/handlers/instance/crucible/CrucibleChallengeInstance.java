@@ -2,7 +2,6 @@ package instance.crucible;
 
 import java.util.Set;
 import java.util.concurrent.Future;
-import java.util.function.Consumer;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -43,9 +42,13 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	private int dieCount;
 	private int rewardCount;
 
+	public CrucibleChallengeInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
+	public void onInstanceCreate() {
+		super.onInstanceCreate();
 		sp(205668, 345.77954f, 1662.6697f, 95.25f, (byte) 0, 0);
 		sp(205682, 383.3434f, 1667.2977f, 97.79293f, (byte) 60, 0);
 	}
@@ -58,17 +61,9 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private void sendPacket(String npcL10n, int points) {
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				if (player.isOnline()) {
-					PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward), instanceReward));
-					if (npcL10n != null)
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-				}
-			}
-		});
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreInfo(instanceReward)));
+		if (npcL10n != null)
+			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 	}
 
 	private void sendEventPacket() {
@@ -171,27 +166,22 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				break;
 			case 217819:
 				if (changeStage(StageType.PASS_STAGE_6, 0)) {
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							Player player = null;
-							if (!instance.getPlayersInside().isEmpty()) {
-								player = instance.getPlayersInside().get(0);
-							}
-							despawnNpc(npc);
-							if (player != null) {
-								QuestState qs = player.getQuestStateList().getQuestState(player.getRace() == Race.ASMODIANS ? 28208 : 18208);
-								if (qs != null && qs.getStatus() == QuestStatus.START) {
-									if (qs.getQuestVarById(0) == 1 || qs.getQuestVarById(1) == 4) { // 5 x Vanktrist Spacetwine killed
-										sp(730459, 1765.7104f, 1281.2388f, 389.11743f, (byte) 0, 2000);
-										return;
-									}
+					ThreadPoolManager.getInstance().schedule(() -> {
+						Player player = null;
+						if (!instance.getPlayersInside().isEmpty()) {
+							player = instance.getPlayersInside().get(0);
+						}
+						despawnNpc(npc);
+						if (player != null) {
+							QuestState qs = player.getQuestStateList().getQuestState(player.getRace() == Race.ASMODIANS ? 28208 : 18208);
+							if (qs != null && qs.getStatus() == QuestStatus.START) {
+								if (qs.getQuestVarById(0) == 1 || qs.getQuestVarById(1) == 4) { // 5 x Vanktrist Spacetwine killed
+									sp(730459, 1765.7104f, 1281.2388f, 389.11743f, (byte) 0, 2000);
+									return;
 								}
 							}
-							sp(205679, 1765.522f, 1282.1051f, 389.11743f, (byte) 0, 2000);
 						}
-
+						sp(205679, 1765.522f, 1282.1051f, 389.11743f, (byte) 0, 2000);
 					}, 4000);
 				}
 				return; // return instead of break since despawn is delayed
@@ -384,7 +374,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			playerReward.setInsignia((int) reward);
 			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 		}
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(new CrucibleScoreInfo(instanceReward), instanceReward));
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreInfo(instanceReward)));
 	}
 
 	private void startBonusStage2() {
@@ -393,30 +383,20 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 
 		ThreadPoolManager.getInstance().schedule(() -> changeStage(StageType.START_BONUS_STAGE_2, 1000), 2000);
 
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed) {
-					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_Solo_SB1_START_BROADCAST());
-					SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, 217802, 1780.5665f, 307.40463f, 469.25f, (byte) 0);
-					template.setWalkerId("3003200001");
-					SpawnEngine.spawnObject(template, instanceId);
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed) {
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDArena_Solo_SB1_START_BROADCAST());
+				SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, 217802, 1780.5665f, 307.40463f, 469.25f, (byte) 0);
+				template.setWalkerId("3003200001");
+				SpawnEngine.spawnObject(template, instance.getInstanceId());
 			}
-
 		}, 6000);
 
-		bonusTimer = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				spawnCount++;
-				spawnBonus2();
-				if (spawnCount == 10)
-					bonusTimer.cancel(false);
-			}
-
+		bonusTimer = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			spawnCount++;
+			spawnBonus2();
+			if (spawnCount == 10)
+				bonusTimer.cancel(false);
 		}, 10000, 4000);
 	}
 
@@ -748,41 +728,23 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				switch (rewardCount) {
 					case 0:
 						switch (Rnd.get(1, 3)) {
-							case 1:
-								count = 1;
-								break;
-							case 2:
-								count = 10;
-								break;
-							case 3:
-								count = 0;
-								break;
+							case 1 -> count = 1;
+							case 2 -> count = 10;
+							case 3 -> count = 0;
 						}
 						break;
 					case 1:
 						switch (Rnd.get(1, 3)) {
-							case 1:
-								count = 2;
-								break;
-							case 2:
-								count = 18;
-								break;
-							case 3:
-								count = 0;
-								break;
+							case 1 -> count = 2;
+							case 2 -> count = 18;
+							case 3 -> count = 0;
 						}
 						break;
 					case 2:
 						switch (Rnd.get(1, 3)) {
-							case 1:
-								count = 3;
-								break;
-							case 2:
-								count = 26;
-								break;
-							case 3:
-								count = 250;
-								break;
+							case 1 -> count = 3;
+							case 2 -> count = 26;
+							case 3 -> count = 250;
 						}
 						break;
 				}

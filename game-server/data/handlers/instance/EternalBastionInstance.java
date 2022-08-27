@@ -59,6 +59,10 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	private final AtomicInteger killedOfficer = new AtomicInteger();
 	private Future<?> failTimerTask;
 
+	public EternalBastionInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
 	public void onDie(Npc npc) {
 		Creature master = npc.getMaster();
@@ -206,7 +210,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	protected void sendPacket(String npcL10n, int points) {
 		if (npcL10n != null)
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(new NormalScoreInfo(instanceReward), instanceReward, getTime()));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new NormalScoreInfo(instanceReward), getTime()));
 	}
 
 	/*
@@ -396,9 +400,8 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
-		super.onInstanceCreate(instance);
-		instanceReward = new NormalReward(mapId, instanceId);
+	public void onInstanceCreate() {
+		instanceReward = new NormalReward();
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		instanceReward.setBasicAp(20000);
 		instanceReward.setPoints(20000);
@@ -622,7 +625,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	public boolean onReviveEvent(Player player) {
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		TeleportService.teleportTo(player, mapId, instanceId, 449.5f, 448.9f, 270.74f, (byte) 70);
+		TeleportService.teleportTo(player, instance, 449.5f, 448.9f, 270.74f, (byte) 70);
 		return true;
 	}
 

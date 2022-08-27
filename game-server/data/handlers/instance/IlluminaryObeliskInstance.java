@@ -35,9 +35,12 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 	private final List<Future<?>> tasks = new ArrayList<>();
 	public boolean isInstanceDestroyed;
 
+	public IlluminaryObeliskInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance wmi) {
-		super.onInstanceCreate(wmi);
+	public void onInstanceCreate() {
 		scheduleInstanceStart();
 	}
 
@@ -328,11 +331,11 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 	public void handleUseItemFinish(Player player, Npc npc) {
 		switch (npc.getNpcId()) {
 			case 730886:
-				TeleportService.teleportTo(player, mapId, instanceId, 265.45142f, 264.52875f, 455.1256f, (byte) 75);
+				TeleportService.teleportTo(player, instance, 265.45142f, 264.52875f, 455.1256f, (byte) 75);
 				break;
 			case 702009:
 				SkillEngine.getInstance().getSkill(npc, 21511, 1, player).useSkill();
-				TeleportService.teleportTo(player, mapId, instanceId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
+				TeleportService.teleportTo(player, instance, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), TeleportAnimation.FADE_OUT_BEAM);
 				npc.getController().delete();
 				break;
 			case 730905:
@@ -381,7 +384,7 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 		PlayerReviveService.revive(player, 25, 25, true, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-		TeleportService.teleportTo(player, mapId, instanceId, 271.1714f, 271.4455f, 276.67294f, (byte) 75);
+		TeleportService.teleportTo(player, instance, 271.1714f, 271.4455f, 276.67294f, (byte) 75);
 		return true;
 	}
 

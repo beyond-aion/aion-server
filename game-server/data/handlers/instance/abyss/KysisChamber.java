@@ -2,6 +2,7 @@ package instance.abyss;
 
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * Created on June 23rd, 2016
@@ -11,6 +12,10 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
  */
 @InstanceID(300120000)
 public class KysisChamber extends AbstractInnerUpperAbyssInstance {
+
+	public KysisChamber(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	protected int getBossId() {

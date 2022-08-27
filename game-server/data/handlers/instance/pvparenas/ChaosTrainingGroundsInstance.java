@@ -9,6 +9,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.utils3d.Point3D;
+import com.aionemu.gameserver.network.aion.instanceinfo.ChaosScoreInfo;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -19,11 +21,20 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300420000)
 public class ChaosTrainingGroundsInstance extends PvPArenaInstance {
 
+	public ChaosTrainingGroundsInstance(WorldMapInstance instance) {
+		super(instance);
+	}
+
 	@Override
-	public void onInstanceCreate(WorldMapInstance instance) {
+	public void onInstanceCreate() {
 		killBonus = 1000;
 		deathFine = -125;
-		super.onInstanceCreate(instance);
+		super.onInstanceCreate();
+	}
+
+	@Override
+	protected void sendPacket() {
+		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new ChaosScoreInfo(instanceReward, player.getObjectId()))));
 	}
 
 	@Override
@@ -31,36 +42,34 @@ public class ChaosTrainingGroundsInstance extends PvPArenaInstance {
 		if (!instanceReward.isStartProgress()) {
 			return;
 		}
-		getPlayerReward(player.getObjectId()).addPoints(1250);
+		getPlayerReward(player).addPoints(1250);
 		sendPacket();
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(gatherable.getObjectTemplate().getL10n(), 1250));
 	}
 
 	@Override
 	protected void spawnRings() {
-		FlyRing f1 = new FlyRing(new FlyRingTemplate("PVP_ARENA_1", mapId, new Point3D(674.66974, 1792.8499, 149.77501), new Point3D(674.66974,
-			1792.8499, 155.77501), new Point3D(678.83636, 1788.5325, 149.77501), 6), instanceId);
-		f1.spawn();
-		FlyRing f2 = new FlyRing(new FlyRingTemplate("PVP_ARENA_2", mapId, new Point3D(688.30615, 1769.7937, 149.88556), new Point3D(688.30615,
-			1769.7937, 155.88556), new Point3D(689.42096, 1763.8982, 149.88556), 6), instanceId);
-		f2.spawn();
-		FlyRing f3 = new FlyRing(new FlyRingTemplate("PVP_ARENA_3", mapId, new Point3D(664.2252, 1761.671, 170.95732), new Point3D(664.2252, 1761.671,
-			176.95732), new Point3D(669.2843, 1764.8967, 170.95732), 6), instanceId);
-		f3.spawn();
-		FlyRing fv1 = new FlyRing(new FlyRingTemplate("PVP_ARENA_VOID_1", mapId, new Point3D(690.28625, 1753.8561, 192.07726), new Point3D(690.28625,
-			1753.8561, 198.07726), new Point3D(689.4365, 1747.9165, 192.07726), 6), instanceId);
-		fv1.spawn();
-		FlyRing fv2 = new FlyRing(new FlyRingTemplate("PVP_ARENA_VOID_2", mapId, new Point3D(690.1935, 1797.0029, 203.79236), new Point3D(690.1935,
-			1797.0029, 209.79236), new Point3D(692.8295, 1802.3928, 203.79236), 6), instanceId);
-		fv2.spawn();
-		FlyRing fv3 = new FlyRing(new FlyRingTemplate("PVP_ARENA_VOID_3", mapId, new Point3D(659.2784, 1766.0273, 207.25465), new Point3D(659.2784,
-			1766.0273, 213.25465), new Point3D(665.2619, 1766.4718, 207.25465), 6), instanceId);
-		fv3.spawn();
+		spawnFlyRing("PVP_ARENA_1", new Point3D(674.66974, 1792.8499, 149.77501), new Point3D(674.66974, 1792.8499, 155.77501),
+			new Point3D(678.83636, 1788.5325, 149.77501));
+		spawnFlyRing("PVP_ARENA_2", new Point3D(688.30615, 1769.7937, 149.88556), new Point3D(688.30615, 1769.7937, 155.88556),
+			new Point3D(689.42096, 1763.8982, 149.88556));
+		spawnFlyRing("PVP_ARENA_3", new Point3D(664.2252, 1761.671, 170.95732), new Point3D(664.2252, 1761.671, 176.95732),
+			new Point3D(669.2843, 1764.8967, 170.95732));
+		spawnFlyRing("PVP_ARENA_VOID_1", new Point3D(690.28625, 1753.8561, 192.07726), new Point3D(690.28625, 1753.8561, 198.07726),
+			new Point3D(689.4365, 1747.9165, 192.07726));
+		spawnFlyRing("PVP_ARENA_VOID_2", new Point3D(690.1935, 1797.0029, 203.79236), new Point3D(690.1935, 1797.0029, 209.79236),
+			new Point3D(692.8295, 1802.3928, 203.79236));
+		spawnFlyRing("PVP_ARENA_VOID_3", new Point3D(659.2784, 1766.0273, 207.25465), new Point3D(659.2784, 1766.0273, 213.25465),
+			new Point3D(665.2619, 1766.4718, 207.25465));
+	}
+
+	private void spawnFlyRing(String name, Point3D center, Point3D p1, Point3D p2) {
+		new FlyRing(new FlyRingTemplate(name, mapId, center, p1, p2, 6), instance.getInstanceId()).spawn();
 	}
 
 	@Override
 	public boolean onPassFlyingRing(Player player, String flyingRing) {
-		PvPArenaPlayerReward playerReward = getPlayerReward(player.getObjectId());
+		PvPArenaPlayerReward playerReward = getPlayerReward(player);
 		if (playerReward == null || !instanceReward.isStartProgress()) {
 			return false;
 		}

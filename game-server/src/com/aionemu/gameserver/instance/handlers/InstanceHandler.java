@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -21,11 +20,8 @@ public interface InstanceHandler {
 	/**
 	 * Executed during instance creation.<br>
 	 * This method will run after spawns are loaded
-	 * 
-	 * @param instance
-	 *          created
 	 */
-	void onInstanceCreate(WorldMapInstance instance);
+	void onInstanceCreate();
 
 	/**
 	 * Executed during instance destroy.<br>

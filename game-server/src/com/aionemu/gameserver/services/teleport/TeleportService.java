@@ -66,10 +66,6 @@ public class TeleportService {
 
 	/**
 	 * Performs flight teleportation
-	 *
-	 * @param template
-	 * @param locId
-	 * @param player
 	 */
 	public static void teleport(TeleporterTemplate template, int locId, Player player, Npc npc, TeleportAnimation animation) {
 		TribeClass tribe = npc.getTribe();
@@ -144,13 +140,6 @@ public class TeleportService {
 		}
 	}
 
-	/**
-	 * Check kinah in inventory for teleportation
-	 *
-	 * @param location
-	 * @param player
-	 * @return
-	 */
 	private static boolean checkKinahForTransportation(TeleportLocation location, Player player) {
 		Storage inventory = player.getInventory();
 
@@ -261,6 +250,10 @@ public class TeleportService {
 		teleportTo(player, instance.getMapId(), instance.getInstanceId(), x, y, z, player.getHeading(), TeleportAnimation.NONE);
 	}
 
+	public static void teleportTo(Player player, WorldMapInstance instance, float x, float y, float z, byte h) {
+		teleportTo(player, instance.getMapId(), instance.getInstanceId(), x, y, z, h, TeleportAnimation.NONE);
+	}
+
 	public static void teleportTo(Player player, WorldMapInstance instance, float x, float y, float z, byte h, TeleportAnimation animation) {
 		teleportTo(player, instance.getMapId(), instance.getInstanceId(), x, y, z, h, animation);
 	}
@@ -276,10 +269,6 @@ public class TeleportService {
 		sendLoc(player, worldId, instanceId, x, y, z, heading, animation);
 	}
 
-	/**
-	 * @param player
-	 * @param npc
-	 */
 	public static void showMap(Player player, Npc npc) {
 		TeleporterTemplate template = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npc.getNpcId());
 		if (template == null)
@@ -290,17 +279,6 @@ public class TeleportService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_WRONG_NPC());
 		else
 			PacketSendUtility.sendPacket(player, new SM_TELEPORT_MAP(npc.getObjectId(), template.getTeleportId()));
-	}
-
-	public static void teleportToCapital(Player player) {
-		switch (player.getRace()) {
-			case ELYOS:
-				TeleportService.teleportTo(player, WorldMapType.SANCTUM.getId(), 1, 1322, 1511, 568);
-				break;
-			case ASMODIANS:
-				TeleportService.teleportTo(player, WorldMapType.PANDAEMONIUM.getId(), 1, 1679, 1400, 195);
-				break;
-		}
 	}
 
 	public static void teleportToPrison(Player player) {
@@ -370,11 +348,6 @@ public class TeleportService {
 			PacketSendUtility.sendPacket(player, new SM_BIND_POINT_INFO(player.getKisk()));
 	}
 
-	/**
-	 * This method will move a player to their bind location
-	 *
-	 * @param player
-	 */
 	public static void moveToBindLocation(Player player) {
 		float x, y, z;
 		int worldId;

@@ -3,35 +3,26 @@ package com.aionemu.gameserver.model.instance.instancereward;
 import java.util.ArrayList;
 import java.util.List;
 
-import org.apache.commons.lang3.mutable.MutableInt;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.instance.playerreward.DredgionPlayerReward;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author xTz
  */
-public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
+public class DredgionReward extends AbstractInstancePointsReward<DredgionPlayerReward> {
 
-	private int winnerPoints;
-	private int looserPoints;
 	@SuppressWarnings("unused")
 	private int drawPoints;
-	private MutableInt asmodiansPoints = new MutableInt();
-	private MutableInt elyosPoints = new MutableInt();
-	private Race race;
 	private List<DredgionRooms> dredgionRooms = new ArrayList<>();
-	private Point3D asmodiansStartPosition;
-	private Point3D elyosStartPosition;
+	private Point3D asmodiansStartPosition, elyosStartPosition;
 
-	public DredgionReward(int mapId, int instanceId) {
-		super(mapId, instanceId);
-		winnerPoints = mapId == 300110000 ? 3000 : 4500;
-		looserPoints = mapId == 300110000 ? 1500 : 2500;
+	public DredgionReward(int mapId) {
+		super(mapId == 300110000 ? 3000 : 4500, mapId == 300110000 ? 1500 : 2500);
 		drawPoints = mapId == 300110000 ? 2250 : 3750;
 		setStartPositions();
 		for (int i = 1; i < 15; i++) {
@@ -43,7 +34,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 		Point3D a = new Point3D(570.468f, 166.897f, 432.28986f);
 		Point3D b = new Point3D(400.741f, 166.713f, 432.290f);
 
-		if (Rnd.get(2) == 0) {
+		if (Rnd.nextBoolean()) {
 			asmodiansStartPosition = a;
 			elyosStartPosition = b;
 		} else {
@@ -52,12 +43,11 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 		}
 	}
 
-	public void portToPosition(Player player) {
+	public void portToPosition(Player player, WorldMapInstance instance) {
 		if (player.getRace() == Race.ASMODIANS) {
-			TeleportService.teleportTo(player, mapId, instanceId, asmodiansStartPosition.getX(), asmodiansStartPosition.getY(),
-				asmodiansStartPosition.getZ());
+			TeleportService.teleportTo(player, instance, asmodiansStartPosition.getX(), asmodiansStartPosition.getY(), asmodiansStartPosition.getZ());
 		} else {
-			TeleportService.teleportTo(player, mapId, instanceId, elyosStartPosition.getX(), elyosStartPosition.getY(), elyosStartPosition.getZ());
+			TeleportService.teleportTo(player, instance, elyosStartPosition.getX(), elyosStartPosition.getY(), elyosStartPosition.getZ());
 		}
 	}
 
@@ -79,7 +69,7 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 		}
 
 		public void captureRoom(Race race) {
-			state = race.equals(Race.ASMODIANS) ? 0x01 : 0x00;
+			state = race == Race.ASMODIANS ? 0x01 : 0x00;
 		}
 
 		public int getState() {
@@ -98,44 +88,6 @@ public class DredgionReward extends InstanceReward<DredgionPlayerReward> {
 			}
 		}
 		return null;
-	}
-
-	public MutableInt getPointsByRace(Race race) {
-		switch (race) {
-			case ELYOS:
-				return elyosPoints;
-			case ASMODIANS:
-				return asmodiansPoints;
-		}
-		return null;
-	}
-
-	public void addPointsByRace(Race race, int points) {
-		MutableInt racePoints = getPointsByRace(race);
-		racePoints.add(points);
-		if (racePoints.intValue() < 0) {
-			racePoints.setValue(0);
-		}
-	}
-
-	public int getLooserPoints() {
-		return looserPoints;
-	}
-
-	public int getWinnerPoints() {
-		return winnerPoints;
-	}
-
-	public void setWinningRace(Race race) {
-		this.race = race;
-	}
-
-	public Race getWinningRace() {
-		return race;
-	}
-
-	public Race getWinningRaceByScore() {
-		return asmodiansPoints.compareTo(elyosPoints) > 0 ? Race.ASMODIANS : Race.ELYOS;
 	}
 
 	@Override

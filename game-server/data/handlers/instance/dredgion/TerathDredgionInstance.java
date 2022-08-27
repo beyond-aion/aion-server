@@ -9,12 +9,17 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author xTz
  */
 @InstanceID(300440000)
-public class TerathDredgionInstance2 extends DredgionInstance2 {
+public class TerathDredgionInstance extends DredgionInstance {
+
+	public TerathDredgionInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	public void onEnterInstance(Player player) {
@@ -55,7 +60,7 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 		for (Player player : instance.getPlayersInside()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_ROOM_DESTROYED(race.getL10n(), npc.getObjectTemplate().getL10n()));
 		}
-		if (++surkanKills == 5) {
+		if (killedSurkanas.incrementAndGet() == 5) {
 			spawn(233371, 485.423f, 808.826f, 416.868f, (byte) 30);
 			sendMsgByRace(1401416, Race.PC_ALL, 0);
 		}
@@ -116,7 +121,7 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 				break;
 			case 233378: // Master at Arms Vandukar
 				sendMsgByRace(1401419, Race.PC_ALL, 0);
-				if (race.equals(Race.ASMODIANS)) {
+				if (race == Race.ASMODIANS) {
 					spawn(730563, 496.178f, 761.770f, 390.805f, (byte) 0, 186);
 				} else {
 					spawn(730562, 473.759f, 761.864f, 390.805f, (byte) 0, 33);
@@ -135,8 +140,7 @@ public class TerathDredgionInstance2 extends DredgionInstance2 {
 			case 233371: // Captain Anusa
 				if (!dredgionReward.isRewarded()) {
 					updateScore(mostPlayerDamage, npc, 1000, false);
-					Race winningRace = dredgionReward.getWinningRaceByScore();
-					stopInstance(winningRace);
+					stopInstance(dredgionReward.getRaceWithHighestPoints());
 				}
 				return;
 			case 701439:

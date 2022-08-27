@@ -72,7 +72,7 @@ public class AutoEngulfedOphidianBridgeInstance extends AutoInstance {
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
 		EngulfedOphidianBridgeService.getInstance().addCooldown(player);
-		((EngulfedOphidianBridgeReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player);
+		((EngulfedOphidianBridgeReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player, instance);
 	}
 
 	@Override

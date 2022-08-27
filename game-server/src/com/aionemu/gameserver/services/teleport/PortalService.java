@@ -346,7 +346,7 @@ public class PortalService {
 		WorldMapTemplate worldTemplate = DataManager.WORLD_MAPS_DATA.getTemplate(loc.getWorldId());
 		if (worldTemplate.isInstance()) {
 			boolean isPersonal = WorldMapType.getWorld(loc.getWorldId()).isPersonal();
-			WorldMapInstance instance = InstanceService.getNextAvailableInstance(loc.getWorldId(), isPersonal ? requester.getObjectId() : 0, (byte) 0, maxPlayers);
+			WorldMapInstance instance = InstanceService.getNextAvailableInstance(loc.getWorldId(), isPersonal ? requester.getObjectId() : 0, (byte) 0, maxPlayers, true);
 			instance.register(requester.getObjectId());
 			transfer(requester, loc, instance, reenter);
 		} else {

@@ -2,12 +2,17 @@ package instance.pvparenas;
 
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author xTz
  */
 @InstanceID(300450000)
 public class ArenaOfHarmonyInstance extends HaramoniousTrainingCenterInstance {
+
+	public ArenaOfHarmonyInstance(WorldMapInstance instance) {
+		super(instance);
+	}
 
 	@Override
 	protected void reward() {
