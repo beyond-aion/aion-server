@@ -167,7 +167,8 @@ public class AnguishedDragonLordsRefugeInstance extends DragonLordsRefugeInstanc
 				// TODO: play movie
 				endInstance(Arrays.asList(219490, 219493, 219362, 730625, 730633, 730634, 730635, 730636));
 				spawn(702729, 480f, 514f, 417.405f, (byte) 0); // Treasure Chest
-				spawn(800431, 482.872f, 514.705f, 417.405f, (byte) 0);
+				spawn(800430, 506.8f, 511.4f, 417.405f, (byte) 60); // Kahrun
+				spawn(800350 + raceId.get() * 6, 506.7f, 518.4f, 417.405f, (byte) 60); // human Kaisinel/Marchutan
 				spawn(800464, 544.964f, 517.898f, 417.405f, (byte) 113);
 				spawn(800465, 545.605f, 510.325f, 417.405f, (byte) 17);
 				break;

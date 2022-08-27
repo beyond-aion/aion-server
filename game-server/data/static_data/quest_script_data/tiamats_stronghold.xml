@@ -2,65 +2,86 @@
 <quest_scripts xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="quest_script_data.xsd">
 	<!--
   		[BEGIN] SUMMARY
-			30700 [UNK] [Group] Race for the Relics
-			30701 [UNK] [Alliance] The Lord of Illusion
-			30702 [UNK] [Group] The Dredgion Fleet
+			30700 [XML] [Group] Race for the Relics
+			30701 [XML] [Alliance] The Lord of Illusion
+			30702 [XML] [Group] The Dredgion Fleet
 			30703 [REMOVED] [Group] The Last of the Dredgions
 			30704 [REMOVED] Black Market Drazma
 			30705 [REMOVED] [Group] Fixing the Future
-			30706 [UNK] [Group] The Prophet's Book
+			30706 [XML] [Group] The Prophet's Book
 			30707 [REMOVED] [Group] Olive Branches
-			30708 [UNK] [Group] Surama the Betrayer
-			30709 [UNK] [Group] Soul Searching
-			30710 [UNK] [Group] The Great Release
-			30711 [UNK] The Dark Dagger
+			30708 [SCRIPT] [Group] Surama the Betrayer
+			30709 [XML] [Group] Soul Searching
+			30710 [XML] [Group] The Great Release
+			30711 [XML] The Dark Dagger
 			30712 [REMOVED] [Group] Harnessing the Hatred
 			30713 [REMOVED] Just a Test
-			30714 [UNK] The Tahabata Legion's Future Plans
-			30715 [UNK] [Group] Anuhart-less
-			30716 [UNK] [Group] Breaking Through
-			30717 [UNK] The Finer Things
-			30718 [UNK] [Group] Alpha Strike
-			30719 [UNK] Treachery's Reward
+			30714 [XML] The Tahabata Legion's Future Plans
+			30715 [XML] [Group] Anuhart-less
+			30716 [XML] [Group] Breaking Through
+			30717 [XML] The Finer Things
+			30718 [XML] [Group] Alpha Strike
+			30719 [XML] Treachery's Reward
 			30720 [XML] [Alliance] Dragon Song
-			30721 [UNK] Ominous Debris Energy
-			30722 [UNK] [Spy] Checking the Gate
+			30721 [SCRIPT] Ominous Debris Energy
+			30722 [SCRIPT] [Spy] Checking the Gate
 			30723 [XML] [Spy/Alliance] Sabat's Song
-			30750 [UNK] [Group] Attack on Tiamat Stronghold
-			30751 [UNK] [Alliance] Death to the Dragon Lord!
-			30752 [UNK] [Group] Dredgion Control Infiltration
+			30750 [XML] [Group] Attack on Tiamat Stronghold
+			30751 [XML] [Alliance] Death to the Dragon Lord!
+			30752 [XML] [Group] Dredgion Control Infiltration
 			30753 [REMOVED] [Group] The Last Dredgion
 			30754 [REMOVED] Illegal Distribution of Drazma Fragment
 			30755 [REMOVED] [Group] Stop the Professor
 			30756 [XML] [Group] Prophets United
-			30757 [UNK] [Group] Sympathy Reigns
-			30758 [UNK] [Group] Surama the Bitter
-			30759 [UNK] [Group] Counting Statues
-			30760 [UNK] [Group] Petrified Hero of the Asmodians
-			30761 [UNK] Apsu's Grudge
+			30757 [REMOVED] [Group] Sympathy Reigns
+			30758 [SCRIPT] [Group] Surama the Bitter
+			30759 [XML] [Group] Counting Statues
+			30760 [XML] [Group] Petrified Hero of the Asmodians
+			30761 [XML] Apsu's Grudge
 			30762 [REMOVED] [Group] Shulack Technology
 			30763 [REMOVED] Extract Apsu's Grudge
-			30764 [UNK] Poeta Orders?
-			30765 [UNK] [Group] Dark Poeta Prevention
-			30766 [UNK] [Group] Run the Savage Gauntlet
-			30767 [UNK] An Asmodian Hero
-			30768 [UNK] [Group] Leading the Charge
-			30769 [UNK] To Steal from Tiamat
-			30771 [UNK] Impending Debris Energy
-			30772 [UNK] [Spy] Investigate the Gate
+			30764 [XML] Poeta Orders?
+			30765 [XML] [Group] Dark Poeta Prevention
+			30766 [XML] [Group] Run the Savage Gauntlet
+			30767 [XML] An Asmodian Hero
+			30768 [XML] [Group] Leading the Charge
+			30769 [XML] To Steal from Tiamat
+			30771 [SCRIPT] Impending Debris Energy
+			30772 [SCRIPT] [Spy] Investigate the Gate
 		[END] SUMMARY
 	-->
 	
 	<!-- REPORTING QUESTS -->
+	<report_to id="30714" start_npc_ids="730703" end_npc_ids="804870" />
+	<report_to id="30717" start_npc_ids="800460" /><!-- Dialog is client-side broken -->
+	<report_to id="30719" start_npc_ids="800438" end_npc_ids="800462" />
 	<report_to id="30720" end_npc_ids="804897 804898" />
 	<report_to id="30723" end_npc_ids="804897 804898" />
-	<report_to id="30764" start_npc_ids="730703" end_npc_ids="800462" />
-	<!-- <report_to id="30769" start_npc_ids="800438 800462" /> -->
+	<report_to id="30764" start_npc_ids="730703" end_npc_ids="804871" />
+	<report_to id="30767" start_npc_ids="800460" /><!-- Dialog is client-side broken -->
+	<report_to id="30769" start_npc_ids="800438" end_npc_ids="800462" />
+	<report_to_many id="30711" start_npc_ids="730701">
+		<npc_infos npc_ids="804868" />
+		<npc_infos npc_ids="804870" />
+	</report_to_many>
+	<report_to_many id="30761" start_npc_ids="730701">
+		<npc_infos npc_ids="804869" />
+		<npc_infos npc_ids="804871" />
+	</report_to_many>
 	
 	<!-- COLLECTION QUESTS -->
+	<item_collecting id="30706" start_npc_ids="800368" end_npc_ids="804870" />
 	<item_collecting id="30756" start_npc_ids="800368" end_npc_ids="804871" />
 	
 	<!-- HUNTING QUESTS -->
-	
+	<monster_hunt id="30702" start_npc_ids="800424" end_npc_ids="800461" end_dialog_id="2375" />
+	<monster_hunt id="30715" start_npc_ids="804870" end_dialog_id="2375" />
+	<monster_hunt id="30716" start_npc_ids="800423" end_npc_ids="800460" />
+	<monster_hunt id="30718" start_npc_ids="800424" end_npc_ids="800461" />
+	<monster_hunt id="30752" start_npc_ids="800424" end_npc_ids="800461" end_dialog_id="2375" />
+	<monster_hunt id="30765" start_npc_ids="804871" end_dialog_id="2375" />
+	<monster_hunt id="30766" start_npc_ids="800423" end_npc_ids="800460" />
+	<monster_hunt id="30768" start_npc_ids="800424" end_npc_ids="800461" />
+
 	<!-- ITEM ORDERS QUESTS -->
 </quest_scripts>

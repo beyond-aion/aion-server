@@ -40,13 +40,7 @@ public class SuramaTheTraitorAI extends GeneralNpcAI {
 		getOwner().setState(CreatureState.ACTIVE, true);
 		getMoveController().moveToPoint(651, 1319, 487);
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getOwner().getObjectId()));
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				startDialog();
-			}
-		}, 10000);
+		ThreadPoolManager.getInstance().schedule(this::startDialog, 10000);
 	}
 
 	private void startDialog() {
@@ -54,14 +48,10 @@ public class SuramaTheTraitorAI extends GeneralNpcAI {
 		PacketSendUtility.broadcastMessage(getOwner(), 390841);
 		PacketSendUtility.broadcastMessage(getOwner(), 390842, 3000);
 		PacketSendUtility.broadcastMessage(raksha, 390843, 6000);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				raksha.setTarget(getOwner());
-				SkillEngine.getInstance().getSkill(raksha, 20952, 60, getOwner()).useNoAnimationSkill();
-				raksha.overrideNpcType(CreatureType.ATTACKABLE);
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			raksha.setTarget(getOwner());
+			SkillEngine.getInstance().getSkill(raksha, 20952, 60, getOwner()).useNoAnimationSkill();
+			raksha.overrideNpcType(CreatureType.ATTACKABLE);
 		}, 8000);
 	}
 }

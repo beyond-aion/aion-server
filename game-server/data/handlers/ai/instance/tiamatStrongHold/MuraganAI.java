@@ -1,19 +1,16 @@
 package ai.instance.tiamatStrongHold;
 
+import java.util.concurrent.atomic.AtomicBoolean;
+
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION.ActionType;
-import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -27,7 +24,7 @@ import ai.GeneralNpcAI;
 @AIName("muragan")
 public class MuraganAI extends GeneralNpcAI {
 
-	private boolean isMove;
+	private final AtomicBoolean isInMove = new AtomicBoolean(false);
 
 	public MuraganAI(Npc owner) {
 		super(owner);
@@ -43,47 +40,35 @@ public class MuraganAI extends GeneralNpcAI {
 
 	@Override
 	protected void handleCreatureSee(Creature creature) {
-		checkDistance(this, creature);
+		checkDistance(creature);
 	}
 
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
-		checkDistance(this, creature);
+		checkDistance(creature);
 	}
 
-	private void checkDistance(NpcAI ai, Creature creature) {
-		if (creature instanceof Player) {
-			if (PositionUtil.isInRange(getOwner(), creature, 15) && !isMove) {
-				isMove = true;
-				openSuramaDoor();
-				startWalk((Player) creature);
-			}
+	private void checkDistance(Creature creature) {
+		if (creature instanceof Player && PositionUtil.isInRange(getOwner(), creature, 15) && isInMove.compareAndSet(false, true)) {
+			openSuramaDoor();
+			startWalk();
 		}
 	}
 
-	private void startWalk(final Player player) {
-		int owner = getOwner().getNpcId();
+	private void startWalk() {
+		int owner = getNpcId();
 		if (owner == 800436 || owner == 800438)
 			return;
-		switch (owner) {
-			case 800435:
-				PacketSendUtility.broadcastMessage(getOwner(), 390837);
-				PacketSendUtility.broadcastMessage(getOwner(), 390838, 4000);
-				killGuardCaptain();
-				break;
+		if (owner == 800435) {
+			PacketSendUtility.broadcastMessage(getOwner(), 390837);
+			PacketSendUtility.broadcastMessage(getOwner(), 390838, 4000);
+			killGuardCaptain();
 		}
 		setStateIfNot(AIState.WALKING);
 		getOwner().setState(CreatureState.ACTIVE, true);
 		getMoveController().moveToPoint(838, 1317, 396);
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getOwner().getObjectId()));
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				forQuest(player);
-				AIActions.deleteOwner(MuraganAI.this);
-			}
-		}, 10000);
+		ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(MuraganAI.this), 10000);
 	}
 
 	private void openSuramaDoor() {
@@ -99,15 +84,6 @@ public class MuraganAI extends GeneralNpcAI {
 		for (Npc npc : instance.getNpcs(219392)) {
 			spawn(283145, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());// 4.0
 			npc.getController().delete();
-		}
-	}
-
-	private void forQuest(Player player) {
-		int quest = player.getRace().equals(Race.ELYOS) ? 30708 : 30758;
-		final QuestState qs = player.getQuestStateList().getQuestState(quest);
-		if (qs != null && qs.getQuestVarById(0) != 5) {
-			qs.setQuestVar(qs.getQuestVarById(0) + 1);
-			PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 		}
 	}
 }
