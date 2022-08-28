@@ -157,7 +157,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 			case 207099: // 2nd Floor Bomb
 				return 200;
 			case 219285: // Lurking Fangwing
-			case 219376: // Plaza Wall
+			case 219328: // Plaza Wall
 				return 50;
 			default:
 				return 0;
