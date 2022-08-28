@@ -141,13 +141,13 @@ public class GeneralInstanceHandler implements InstanceHandler {
 
 	@Override
 	public void onDespawn(Npc npc) {
-		if (isBoss(npc) && !npc.isDead())
+		if (npc.getPosition().isInstanceMap() && isBoss(npc) && !npc.isDead())
 			logNpcWithReason(npc, "despawned without dying.");
 	}
 
 	@Override
 	public void onDie(Npc npc) {
-		if (isBoss(npc))
+		if (npc.getPosition().isInstanceMap() && isBoss(npc))
 			logNpcWithReason(npc, "was killed.");
 	}
 
