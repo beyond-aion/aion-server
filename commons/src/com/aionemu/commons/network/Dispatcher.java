@@ -173,7 +173,7 @@ public abstract class Dispatcher extends Thread {
 		}
 
 		rb.flip();
-		while (rb.remaining() > 2 && rb.remaining() >= rb.getShort(rb.position())) {
+		while (rb.remaining() > 2 && rb.remaining() >= (rb.getShort(rb.position()) & 0xFFFF)) {
 			// got full message
 			if (!parse(con, rb)) {
 				closeConnectionImpl(con);
@@ -203,7 +203,7 @@ public abstract class Dispatcher extends Thread {
 	private boolean parse(AConnection<?> con, ByteBuffer buf) {
 		int size = (buf.getShort() & 0xFFFF) - 2; // size includes size of the read short, so we need to subtract two bytes
 		if (size <= 0) {
-			log.error("Received empty packet without opCode from " + con + ", content: " + NetworkUtils.toHex(buf));
+			log.warn("Received empty packet without opcode from " + con + ", content: " + NetworkUtils.toHex(buf));
 			return false;
 		}
 		ByteBuffer b = buf.slice().order(buf.order());

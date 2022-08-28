@@ -119,6 +119,7 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	@Override
 	protected final boolean processData(ByteBuffer data) {
 		if (!decrypt(data)) {
+			log.warn("Wrong checksum from " + this);
 			return false;
 		}
 
@@ -174,14 +175,8 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	 */
 	private boolean decrypt(ByteBuffer buf) {
 		int size = buf.remaining();
-		final int offset = buf.arrayOffset() + buf.position();
-		boolean ret = cryptEngine.decrypt(buf.array(), offset, size);
-
-		if (!ret) {
-			log.warn("Wrong checksum from client: " + this);
-		}
-
-		return ret;
+		int offset = buf.arrayOffset() + buf.position();
+		return cryptEngine.decrypt(buf.array(), offset, size);
 	}
 
 	/**
@@ -192,11 +187,8 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	 */
 	public final int encrypt(ByteBuffer buf) {
 		int size = buf.limit() - 2;
-		final int offset = buf.arrayOffset() + buf.position();
-
-		size = cryptEngine.encrypt(buf.array(), offset, size);
-
-		return size;
+		int offset = buf.arrayOffset() + buf.position();
+		return cryptEngine.encrypt(buf.array(), offset, size);
 	}
 
 	/**
@@ -297,16 +289,6 @@ public class LoginConnection extends AConnection<AionServerPacket> {
 	@Override
 	public String toString() {
 		return (account == null ? "Client " : account + " ") + getIP();
-	}
-
-	/**
-	 * This method should no be modified, hashcode in this class is used to ensure that each connection hash unique id
-	 * 
-	 * @return unique identifier
-	 */
-	@Override
-	public int hashCode() {
-		return super.hashCode();
 	}
 
 	@Override
