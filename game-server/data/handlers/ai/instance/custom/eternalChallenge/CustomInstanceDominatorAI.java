@@ -10,6 +10,7 @@ import com.aionemu.gameserver.custom.instance.RoahCustomInstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
@@ -27,7 +28,8 @@ import ai.AggressiveNpcAI;
 @AIName("custom_instance_dominator")
 public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 
-	private int rank;
+	private int challengerObjId;
+	private int challengerRank;
 	private Future<?> debuffTask;
 
 	public CustomInstanceDominatorAI(Npc owner) {
@@ -42,10 +44,11 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler))
 			return;
 
-		int playerObjId = wmi.getRegisteredObjects().iterator().next();
-		rank = CustomInstanceService.getInstance().loadOrCreateRank(playerObjId).getRank();
+		challengerObjId = wmi.getRegisteredObjects().iterator().next();
+		challengerRank = CustomInstanceService.getInstance().loadOrCreateRank(challengerObjId).getRank();
 
 		debuffTask = ThreadPoolManager.getInstance().schedule(this::debuffTarget, 1000);
+		getOwner().setSeeState(CreatureSeeState.SEARCH2);
 	}
 
 	@Override
@@ -65,45 +68,45 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 			if (getOwner().getSkillCoolDowns() != null)
 				getOwner().getSkillCoolDowns().clear(); // Make CD rank-dependent, not skill-dependent
 
-			if (rank >= CustomInstanceRankEnum.ANCIENT.getMinRank())
+			if (challengerRank >= CustomInstanceRankEnum.ANCIENT.getMinRank())
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3539, 65, 100))); // Ignite Aether
 
-			if (rank >= CustomInstanceRankEnum.CERANIUM.getMinRank())
+			if (challengerRank >= CustomInstanceRankEnum.CERANIUM.getMinRank())
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(618, 65, 100))); // Ankle Snare
-			else if (rank >= CustomInstanceRankEnum.GOLD.getMinRank())
+			else if (challengerRank >= CustomInstanceRankEnum.GOLD.getMinRank())
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(1328, 65, 100))); // Restraint (^)
 
-			if (rank >= CustomInstanceRankEnum.ANCIENT_PLUS.getMinRank())
+			if (challengerRank >= CustomInstanceRankEnum.ANCIENT_PLUS.getMinRank())
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3775, 65, 100))); // Fear
-			else if (rank >= CustomInstanceRankEnum.GOLD.getMinRank())
+			else if (challengerRank >= CustomInstanceRankEnum.GOLD.getMinRank())
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(1417, 65, 100))); // Curse Tree (^)
 
 			// SILVER:
 			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3581, 65, 100))); // Withering Gloom
 
-			if (rank >= CustomInstanceRankEnum.PLATINUM.getMinRank())
+			if (challengerRank >= CustomInstanceRankEnum.PLATINUM.getMinRank())
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3574, 65, 100))); // Shackle of Vulnerability
 			else // SILVER:
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3780, 65, 100))); // Root of Enervation (^)
 
-			if (rank >= CustomInstanceRankEnum.MITHRIL.getMinRank())
+			if (challengerRank >= CustomInstanceRankEnum.MITHRIL.getMinRank())
 				if (getOwner().getTarget() != null && getOwner().getTarget() instanceof Player
 					&& ((Player) (getOwner().getTarget())).getPlayerClass().isPhysicalClass())
 					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3571, 65, 100))); // Body Root
 				else
 					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3572, 65, 100))); // Sigil of Silence
 
-			if (rank >= CustomInstanceRankEnum.CERANIUM.getMinRank())
+			if (challengerRank >= CustomInstanceRankEnum.CERANIUM.getMinRank())
 				if (getOwner().getTarget() != null && getOwner().getTarget() instanceof Player
 					&& ((Player) (getOwner().getTarget())).getPlayerClass().isPhysicalClass())
 					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(4135, 65, 100))); // Blinding Light
 				else
 					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(1336, 65, 100))); // Curse of Weakness
 
-			if (rank >= CustomInstanceRankEnum.ANCIENT.getMinRank())
+			if (challengerRank >= CustomInstanceRankEnum.ANCIENT.getMinRank())
 				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(4490, 65, 100))); // Paralysis Resonation
 
-			debuffTask = ThreadPoolManager.getInstance().schedule(this::debuffTarget, 30000 - rank * 1000 / 3); // 30s ... 20s
+			debuffTask = ThreadPoolManager.getInstance().schedule(this::debuffTarget, 30000 - challengerRank * 1000 / 3); // 30s ... 20s
 		}
 
 	}
@@ -128,12 +131,12 @@ public class CustomInstanceDominatorAI extends AggressiveNpcAI {
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
-		WorldMapInstance wmi = getPosition().getWorldMapInstance();
-		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler))
-			return;
-		wmi.getPlayersInside().forEach(p -> {
-			if (!getOwner().getAggroList().isHating(p))
-				getOwner().getAggroList().addHate(p, 1000);
-		});
+		if (challengerObjId != 0) {
+			ThreadPoolManager.getInstance().schedule(() -> {
+				Player challenger = getPosition().getWorldMapInstance().getPlayer(challengerObjId);
+				if (challenger != null && !getOwner().getAggroList().isHating(challenger) && getOwner().canSee(challenger))
+					getOwner().getAggroList().addHate(challenger, 1000);
+			}, 1000);
+		}
 	}
 }
