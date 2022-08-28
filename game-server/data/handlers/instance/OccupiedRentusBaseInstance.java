@@ -165,11 +165,11 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 	private void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time, final String walkern) {
 		final Npc npc = (Npc) spawn(npcId, x, y, z, h);
 		ThreadPoolManager.getInstance().schedule(() -> {
-				npc.getSpawn().setWalkerId(walkern);
-				WalkManager.startWalking((NpcAI) npc.getAi());
-				npc.setState(CreatureState.WALK_MODE, true);
-				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
-			}, time);
+			npc.getSpawn().setWalkerId(walkern);
+			WalkManager.startWalking((NpcAI) npc.getAi());
+			npc.setState(CreatureState.WALK_MODE, true);
+			PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
+		}, time);
 	}
 
 	private void despawnNpc(Npc npc) {
@@ -230,5 +230,13 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				}
 			}
 		}
+	}
+
+	@Override
+	public boolean isBoss(Npc npc) {
+		return switch (npc.getNpcId()) {
+			case 236296, 236297, 236298, 236299, 236300, 236301, 236302 -> true;
+			default -> false;
+		};
 	}
 }
