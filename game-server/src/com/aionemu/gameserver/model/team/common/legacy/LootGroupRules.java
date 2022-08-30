@@ -19,24 +19,24 @@ public class LootGroupRules {
 
 	private final LootRuleType lootRule;
 	private int misc;
-	private final int common_item_above;
-	private final int superior_item_above;
-	private final int heroic_item_above;
-	private final int fabled_item_above;
-	private final int eternal_item_above;
-	private final int mythic_item_above;
+	private final int commonItemAbove;
+	private final int superiorItemAbove;
+	private final int heroicItemAbove;
+	private final int fabledItemAbove;
+	private final int eternalItemAbove;
+	private final int mythicItemAbove;
 	private int nrMisc;
 	private int nrRoundRobin;
 	private final Deque<DropItem> itemsToBeDistributed = new ConcurrentLinkedDeque<>();
 
 	public LootGroupRules() {
 		lootRule = LootRuleType.ROUNDROBIN;
-		common_item_above = 0;
-		superior_item_above = 2;
-		heroic_item_above = 2;
-		fabled_item_above = 2;
-		eternal_item_above = 2;
-		mythic_item_above = 2;
+		commonItemAbove = 0;
+		superiorItemAbove = 2;
+		heroicItemAbove = 2;
+		fabledItemAbove = 2;
+		eternalItemAbove = 2;
+		mythicItemAbove = 2;
 	}
 
 	public LootGroupRules(LootRuleType lootRule, int misc, int commonItemAbove, int superiorItemAbove, int heroicItemAbove, int fabledItemAbove,
@@ -44,30 +44,24 @@ public class LootGroupRules {
 		super();
 		this.lootRule = lootRule;
 		this.misc = misc;
-		common_item_above = commonItemAbove;
-		superior_item_above = superiorItemAbove;
-		heroic_item_above = heroicItemAbove;
-		fabled_item_above = fabledItemAbove;
-		eternal_item_above = eternalItemAbove;
-		mythic_item_above = mythicItemAbove;
+		this.commonItemAbove = commonItemAbove;
+		this.superiorItemAbove = superiorItemAbove;
+		this.heroicItemAbove = heroicItemAbove;
+		this.fabledItemAbove = fabledItemAbove;
+		this.eternalItemAbove = eternalItemAbove;
+		this.mythicItemAbove = mythicItemAbove;
 	}
 
 	public boolean getQualityRule(ItemQuality quality) {
-		switch (quality) {
-			case COMMON: // White
-				return common_item_above != 0;
-			case RARE: // Green
-				return superior_item_above != 0;
-			case LEGEND: // Blue
-				return heroic_item_above != 0;
-			case UNIQUE: // Yellow
-				return fabled_item_above != 0;
-			case EPIC: // Orange
-				return eternal_item_above != 0;
-			case MYTHIC: // Purple
-				return mythic_item_above != 0;
-		}
-		return false;
+		return switch (quality) {
+			case COMMON -> commonItemAbove != 0; // White
+			case RARE -> superiorItemAbove != 0; // Green
+			case LEGEND -> heroicItemAbove != 0; // Blue
+			case UNIQUE -> fabledItemAbove != 0; // Yellow
+			case EPIC -> eternalItemAbove != 0; // Orange
+			case MYTHIC -> mythicItemAbove != 0; // Purple
+			default -> false;
+		};
 	}
 
 	public boolean isMisc(ItemQuality quality) {
@@ -79,33 +73,33 @@ public class LootGroupRules {
 	}
 
 	public int getAutodistributionId() {
-		boolean isBid = mythic_item_above == 3;
-		boolean isRoll = mythic_item_above == 2;
+		boolean isBid = mythicItemAbove == 3;
+		boolean isRoll = mythicItemAbove == 2;
 		return isBid ? 3 : isRoll ? 2 : 0;
 	}
 
 	public int getCommonItemAbove() {
-		return common_item_above;
+		return commonItemAbove;
 	}
 
 	public int getSuperiorItemAbove() {
-		return superior_item_above;
+		return superiorItemAbove;
 	}
 
 	public int getHeroicItemAbove() {
-		return heroic_item_above;
+		return heroicItemAbove;
 	}
 
 	public int getFabledItemAbove() {
-		return fabled_item_above;
+		return fabledItemAbove;
 	}
 
 	public int getEternalItemAbove() {
-		return eternal_item_above;
+		return eternalItemAbove;
 	}
 
 	public int getMythicItemAbove() {
-		return mythic_item_above;
+		return mythicItemAbove;
 	}
 
 	public int getNrMisc() {

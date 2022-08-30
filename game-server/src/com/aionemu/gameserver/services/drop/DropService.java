@@ -180,7 +180,7 @@ public class DropService {
 			if (dropNpc.isFreeForAll()) {
 				PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, 0));
 			} else {
-				PacketSendUtility.broadcastPacket(player, new SM_LOOT_STATUS(npcObjectId, 0), true, p -> dropNpc.isAllowedLooter(p));
+				PacketSendUtility.broadcastPacket(player, new SM_LOOT_STATUS(npcObjectId, 0), true, dropNpc::isAllowedLooter);
 			}
 		}
 	}
@@ -220,18 +220,14 @@ public class DropService {
 					}
 					lootGrouRules.setPlayersInRoll(dropNpc.getInRangePlayers(), dropNpc.getDistributionId() == 2 ? 17000 : 32000, requestedItem.getIndex(),
 						npcId);
-					if (!containDropItem) {
-						lootGrouRules.addItemToBeDistributed(requestedItem);
-					}
-					return false;
 				} else {
 					PacketSendUtility.sendPacket(player,
 						SM_SYSTEM_MESSAGE.STR_MSG_LOOT_ALREADY_DISTRIBUTING_ITEM(DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n()));
-					if (!containDropItem) {
-						lootGrouRules.addItemToBeDistributed(requestedItem);
-					}
-					return false;
 				}
+				if (!containDropItem) {
+					lootGrouRules.addItemToBeDistributed(requestedItem);
+				}
+				return false;
 			}
 		}
 		return true;
@@ -405,11 +401,8 @@ public class DropService {
 			remainingCount = ItemService.addItem(requestedItem.getWinningPlayer(), itemId, remainingCount, false, new TempTradeDropPredicate(dropNpc));
 
 			switch (dropNpc.getDistributionId()) {
-				case 2:
-					winningRollActions(requestedItem.getWinningPlayer(), itemId, npcObjectId);
-					break;
-				case 3:
-					winningBidActions(requestedItem.getWinningPlayer(), npcObjectId, requestedItem.getHighestValue());
+				case 2 -> winningRollActions(requestedItem.getWinningPlayer(), itemId, npcObjectId);
+				case 3 -> winningBidActions(requestedItem.getWinningPlayer(), npcObjectId, requestedItem.getHighestValue());
 			}
 		}
 

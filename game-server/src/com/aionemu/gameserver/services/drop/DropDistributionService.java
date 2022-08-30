@@ -60,7 +60,7 @@ public class DropDistributionService {
 			if (roll == 0) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_GIVEUP_ME());
 			} else {
-				maxRoll = player.isInGroup() ? 100 : 1000;
+				maxRoll = player.isInLeague() ? 10000 : player.isInGroup() ? 100 : 1000;
 				luck = Rnd.get(1, maxRoll);
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DICE_RESULT_ME(luck, maxRoll));
 			}

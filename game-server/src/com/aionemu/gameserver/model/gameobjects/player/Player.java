@@ -1472,6 +1472,9 @@ public class Player extends Creature {
 		if (isInGroup()) {
 			return getPlayerGroup().getLootGroupRules();
 		}
+		if (isInLeague()) {
+			return getPlayerAlliance().getLeague().getLootGroupRules();
+		}
 		if (isInAlliance()) {
 			return getPlayerAlliance().getLootGroupRules();
 		}

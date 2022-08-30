@@ -20,15 +20,15 @@ public class CM_DISTRIBUTION_SETTINGS extends AionClientPacket {
 
 	@SuppressWarnings("unused")
 	private int isLeague;
-	private int lootrul;
+	private int lootRule;
 	private int misc;
-	private LootRuleType lootrules;
-	private int common_item_above;
-	private int superior_item_above;
-	private int heroic_item_above;
-	private int fabled_item_above;
-	private int ethernal_item_above;
-	private int mythic_item_above;
+	private LootRuleType lootRules;
+	private int commonItemAbove;
+	private int superiorItemAbove;
+	private int heroicItemAbove;
+	private int fabledItemAbove;
+	private int ethernalItemAbove;
+	private int mythicItemAbove;
 	@SuppressWarnings("unused")
 	private int unk;
 
@@ -39,28 +39,20 @@ public class CM_DISTRIBUTION_SETTINGS extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		isLeague = readD();
-		lootrul = readD();
-		switch (lootrul) {
-			case 0:
-				lootrules = LootRuleType.FREEFORALL;
-				break;
-			case 1:
-				lootrules = LootRuleType.ROUNDROBIN;
-				break;
-			case 2:
-				lootrules = LootRuleType.LEADER;
-				break;
-			default:
-				lootrules = LootRuleType.FREEFORALL;
-				break;
+		lootRule = readD();
+		switch (lootRule) {
+			case 0 -> lootRules = LootRuleType.FREEFORALL;
+			case 1 -> lootRules = LootRuleType.ROUNDROBIN;
+			case 2 -> lootRules = LootRuleType.LEADER;
+			default -> lootRules = LootRuleType.FREEFORALL;
 		}
 		misc = readD();
-		common_item_above = readD();
-		superior_item_above = readD();
-		heroic_item_above = readD();
-		fabled_item_above = readD();
-		ethernal_item_above = readD();
-		mythic_item_above = readD();
+		commonItemAbove = readD();
+		superiorItemAbove = readD();
+		heroicItemAbove = readD();
+		fabledItemAbove = readD();
+		ethernalItemAbove = readD();
+		mythicItemAbove = readD();
 		unk = readD();
 	}
 
@@ -70,17 +62,17 @@ public class CM_DISTRIBUTION_SETTINGS extends AionClientPacket {
 
 		PlayerGroup group = leader.getPlayerGroup();
 		if (group != null) {
-			PlayerGroupService.changeGroupRules(group, new LootGroupRules(lootrules, misc, common_item_above, superior_item_above, heroic_item_above,
-				fabled_item_above, ethernal_item_above, mythic_item_above));
+			PlayerGroupService.changeGroupRules(group, new LootGroupRules(lootRules, misc, commonItemAbove, superiorItemAbove, heroicItemAbove,
+				fabledItemAbove, ethernalItemAbove, mythicItemAbove));
 		}
 		PlayerAlliance alliance = leader.getPlayerAlliance();
 		if (alliance != null) {
 			if (alliance.isInLeague())
-				LeagueService.changeGroupRules(alliance.getLeague(), new LootGroupRules(lootrules, misc, common_item_above, superior_item_above,
-					heroic_item_above, fabled_item_above, ethernal_item_above, mythic_item_above));
+				LeagueService.changeGroupRules(alliance.getLeague(), new LootGroupRules(lootRules, misc, commonItemAbove, superiorItemAbove, heroicItemAbove,
+					fabledItemAbove, ethernalItemAbove, mythicItemAbove));
 			else
-				PlayerAllianceService.changeGroupRules(alliance, new LootGroupRules(lootrules, misc, common_item_above, superior_item_above,
-					heroic_item_above, fabled_item_above, ethernal_item_above, mythic_item_above));
+				PlayerAllianceService.changeGroupRules(alliance, new LootGroupRules(lootRules, misc, commonItemAbove, superiorItemAbove, heroicItemAbove,
+					fabledItemAbove, ethernalItemAbove, mythicItemAbove));
 		}
 	}
 

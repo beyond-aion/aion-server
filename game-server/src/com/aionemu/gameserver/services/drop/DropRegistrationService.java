@@ -124,20 +124,20 @@ public class DropRegistrationService {
 		DropNpc dropNpc = new DropNpc(npcObjId);
 		// Distributing drops to players
 		if (player.isInGroup() || player.isInAlliance()) {
-			LootGroupRules lootGrouRules = player.getLootGroupRules();
+			LootGroupRules lootGroupRules = player.getLootGroupRules();
 
-			switch (lootGrouRules.getLootRule()) {
+			switch (lootGroupRules.getLootRule()) {
 				case ROUNDROBIN:
 					int size = groupMembers.size();
-					if (size > lootGrouRules.getNrRoundRobin())
-						lootGrouRules.setNrRoundRobin(lootGrouRules.getNrRoundRobin() + 1);
+					if (size > lootGroupRules.getNrRoundRobin())
+						lootGroupRules.setNrRoundRobin(lootGroupRules.getNrRoundRobin() + 1);
 					else
-						lootGrouRules.setNrRoundRobin(1);
+						lootGroupRules.setNrRoundRobin(1);
 
 					int i = 0;
 					for (Player p : groupMembers) {
 						i++;
-						if (i == lootGrouRules.getNrRoundRobin()) {
+						if (i == lootGroupRules.getNrRoundRobin()) {
 							allowedLooters.add(p);
 							looter = p;
 							break;
@@ -153,7 +153,6 @@ public class DropRegistrationService {
 					looter = leader;
 					break;
 			}
-
 			dropNpc.setInRangePlayers(groupMembers);
 			dropNpc.setGroupSize(groupMembers.size());
 		} else {
@@ -452,37 +451,24 @@ public class DropRegistrationService {
 	}
 
 	private float getRankModifier(Npc npc) {
-		switch (npc.getRank()) {
-			case NOVICE:
-				return 0.9f;
-			case DISCIPLINED:
-				return 1f;
-			case SEASONED:
-				return 1.05f;
-			case EXPERT:
-				return 1.1f;
-			case VETERAN:
-				return 1.15f;
-			case MASTER:
-				return 1.2f;
-		}
-		return 1f;
+		return switch (npc.getRank()) {
+			case NOVICE -> 0.9f;
+			case DISCIPLINED -> 1f;
+			case SEASONED -> 1.05f;
+			case EXPERT -> 1.1f;
+			case VETERAN -> 1.15f;
+			case MASTER -> 1.2f;
+		};
 	}
 
 	private float getRatingModifier(Npc npc) {
-		switch (npc.getRating()) {
-			case JUNK:
-				return 0.5f;
-			case NORMAL:
-				return 1f;
-			case ELITE:
-				return 1.3f;
-			case HERO:
-				return 1.8f;
-			case LEGENDARY:
-				return 2f;
-		}
-		return 1f;
+		return switch (npc.getRating()) {
+			case JUNK -> 0.5f;
+			case NORMAL -> 1f;
+			case ELITE -> 1.3f;
+			case HERO -> 1.8f;
+			case LEGENDARY -> 2f;
+		};
 	}
 
 	private static class SingletonHolder {

@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
@@ -36,7 +37,11 @@ public class PlayerTeamDistributionService {
 		// Find team's members and determine highest level
 		boolean disableRangeChecks = DropConfig.DISABLE_RANGE_CHECK_MAPS.contains(owner.getPosition().getMapId());
 		PlayerTeamRewardStats filteredStats = new PlayerTeamRewardStats(owner, disableRangeChecks);
-		team.forEach(filteredStats);
+		if (team instanceof PlayerAlliance alli && alli.isInLeague()) {
+			alli.getLeague().getMembers().forEach(a -> a.forEach(filteredStats));
+		} else {
+			team.forEach(filteredStats);
+		}
 
 		// All non-mentors are not nearby or dead
 		if (filteredStats.players.isEmpty() || !filteredStats.hasLivingPlayer) {
