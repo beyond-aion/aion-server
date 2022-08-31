@@ -8,7 +8,7 @@ import com.aionemu.gameserver.network.PacketWriteHelper;
 /**
  * @author xTz
  */
-public abstract class InstanceScoreInfo<T extends InstanceReward> extends PacketWriteHelper {
+public abstract class InstanceScoreInfo<T extends InstanceReward<?>> extends PacketWriteHelper {
 
 	protected final T reward;
 

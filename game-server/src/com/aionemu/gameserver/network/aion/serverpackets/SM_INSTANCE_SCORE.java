@@ -12,17 +12,17 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
 
 	private final int mapId;
 	private final int instanceTime;
-	private final InstanceScoreInfo isi;
+	private final InstanceScoreInfo<?> isi;
 
 	public SM_INSTANCE_SCORE(int mapId, ArenaScoreInfo arenaScoreInfo) {
 		this(mapId, arenaScoreInfo, arenaScoreInfo.getReward().getTime());
 	}
 
-	public SM_INSTANCE_SCORE(int mapId, InstanceScoreInfo instanceScoreInfo) {
+	public SM_INSTANCE_SCORE(int mapId, InstanceScoreInfo<?> instanceScoreInfo) {
 		this(mapId, instanceScoreInfo, 0);
 	}
 
-	public SM_INSTANCE_SCORE(int mapId, InstanceScoreInfo instanceScoreInfo, int instanceTime) {
+	public SM_INSTANCE_SCORE(int mapId, InstanceScoreInfo<?> instanceScoreInfo, int instanceTime) {
 		this.mapId = mapId;
 		this.instanceTime = instanceTime;
 		this.isi = instanceScoreInfo;
