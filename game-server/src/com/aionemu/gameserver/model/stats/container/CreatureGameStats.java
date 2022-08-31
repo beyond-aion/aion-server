@@ -1,7 +1,10 @@
 package com.aionemu.gameserver.model.stats.container;
 
-import java.util.*;
-import java.util.Map.Entry;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Map;
+import java.util.TreeSet;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -30,7 +33,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 	private static final int ATTACK_MAX_COUNTER = Integer.MAX_VALUE;
 
 	protected final T owner;
-	private final Map<StatEnum, TreeSet<IStatFunction>> stats = new EnumMap<>(StatEnum.class);
+	private final Map<StatEnum, TreeSet<IStatFunction>> stats = new ConcurrentHashMap<>();
 	private final ReentrantReadWriteLock lock = new ReentrantReadWriteLock();
 
 	private long lastGeoUpdate = 0;
@@ -69,18 +72,15 @@ public abstract class CreatureGameStats<T extends Creature> {
 	}
 
 	public final void addEffectOnly(StatOwner statOwner, List<? extends IStatFunction> functions) {
-		lock.writeLock().lock();
-		try {
 			for (IStatFunction function : functions) {
 				TreeSet<IStatFunction> statFunctions = stats.computeIfAbsent(function.getName(), k -> new TreeSet<>());
-				if (function instanceof StatFunction)
-					statFunctions.add(new StatFunctionProxy(statOwner, function));
-				else
-					statFunctions.add(function);
+				lock.writeLock().lock();
+				try {
+					statFunctions.add(function instanceof StatFunction ? new StatFunctionProxy(statOwner, function) : function);
+				} finally {
+					lock.writeLock().unlock();
+				}
 			}
-		} finally {
-			lock.writeLock().unlock();
-		}
 	}
 
 	public final void addEffect(StatOwner statOwner, List<? extends IStatFunction> functions) {
@@ -89,14 +89,13 @@ public abstract class CreatureGameStats<T extends Creature> {
 	}
 
 	public final void endEffect(StatOwner statOwner) {
-		lock.writeLock().lock();
-		try {
-			for (Entry<StatEnum, TreeSet<IStatFunction>> e : stats.entrySet()) {
-				TreeSet<IStatFunction> value = e.getValue();
-				value.removeIf(statFunction -> statOwner.equals(statFunction.getOwner()));
+		for (TreeSet<IStatFunction> functions : stats.values()) {
+			lock.writeLock().lock();
+			try {
+				functions.removeIf(statFunction -> statOwner.equals(statFunction.getOwner()));
+			} finally {
+				lock.writeLock().unlock();
 			}
-		} finally {
-			lock.writeLock().unlock();
 		}
 		if (!owner.isDead())
 			onStatsChange();
@@ -318,10 +317,12 @@ public abstract class CreatureGameStats<T extends Creature> {
 	 * @return All stat functions for the given stat sorted by priority
 	 */
 	public List<IStatFunction> getStatsSorted(StatEnum stat) {
+		TreeSet<IStatFunction> allStats = stats.get(stat);
+		if (allStats == null)
+			return null;
 		lock.readLock().lock();
 		try {
-			TreeSet<IStatFunction> allStats = stats.get(stat);
-			return allStats == null ? null : new ArrayList<>(allStats);
+				return new ArrayList<>(allStats);
 		} finally {
 			lock.readLock().unlock();
 		}
