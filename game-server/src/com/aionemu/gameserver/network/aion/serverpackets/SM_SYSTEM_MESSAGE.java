@@ -26218,6 +26218,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * %0 has been defeated and the number of points has been reduced from %1 by %num2.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_LOSE_SCORE_ENEMY(String defeated, String faction, int points) {
+		return new SM_SYSTEM_MESSAGE(1401721, defeated, faction, points);
+	}
+
+	/**
 	 * Join the fight in the Kamar Battlefield.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_OPEN_IDKamar() {
@@ -28547,7 +28554,7 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 * The Invasion Rift to Elysea has opened.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_LIGHT_SIDE_LEGION_DIRECT_PORTAL_OPEN() {
-		return new SM_SYSTEM_MESSAGE (1402877);
+		return new SM_SYSTEM_MESSAGE(1402877);
 	}
 
 	/**

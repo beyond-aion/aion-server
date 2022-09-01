@@ -24,14 +24,10 @@ public class BaranathDredgionInstance extends DredgionInstance {
 	public void onEnterInstance(Player player) {
 		if (isInstanceStarted.compareAndSet(false, true)) {
 			if (Rnd.chance() < 51) {
-				switch (Rnd.get(2)) {
-					case 0:
-						spawn(215093, 416.3429f, 282.32785f, 409.7311f, (byte) 80);
-						break;
-					default:
-						spawn(215093, 552.07446f, 289.058f, 409.7311f, (byte) 80);
-						break;
-				}
+				if (Rnd.nextBoolean())
+					spawn(215093, 416.3429f, 282.32785f, 409.7311f, (byte) 80);
+				else
+					spawn(215093, 552.07446f, 289.058f, 409.7311f, (byte) 80);
 			}
 			startInstanceTask();
 		}
@@ -54,7 +50,7 @@ public class BaranathDredgionInstance extends DredgionInstance {
 	@Override
 	public void onDie(Npc npc) {
 		Player mostPlayerDamage = npc.getAggroList().getMostPlayerDamage();
-		if (mostPlayerDamage == null || dredgionReward.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS) {
+		if (mostPlayerDamage == null || pInstanceReward.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS) {
 			return;
 		}
 		Race race = mostPlayerDamage.getRace();
@@ -119,6 +115,11 @@ public class BaranathDredgionInstance extends DredgionInstance {
 				return;
 		}
 		super.onDie(npc);
+	}
+
+	@Override
+	public void onInstanceCreate() {
+		initializeInstance(3000, 1500, 2250);
 	}
 
 	@Override

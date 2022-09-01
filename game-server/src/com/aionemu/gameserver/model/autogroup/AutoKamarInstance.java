@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.autogroup;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.instancereward.KamarReward;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
@@ -76,7 +75,7 @@ public class AutoKamarInstance extends AutoInstance {
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
 		KamarBattlefieldService.getInstance().addCooldown(player);
-		((KamarReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player, instance);
+		instance.getInstanceHandler().portToStartPosition(player);
 	}
 
 	@Override

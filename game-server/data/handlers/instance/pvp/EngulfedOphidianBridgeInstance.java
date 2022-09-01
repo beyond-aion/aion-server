@@ -1,32 +1,19 @@
-package instance;
-
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
+package instance.pvp;
 
 import java.util.List;
-import java.util.concurrent.Future;
 
-import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.EngulfedOphidianBridgeReward;
-import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
-import com.aionemu.gameserver.model.instance.playerreward.EngulfedOphidianBridgePlayerReward;
-import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.network.aion.instanceinfo.EngulfedOphidianBridgeScoreInfo;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
+import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.instancereward.PvpInstanceReward;
+import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
+import com.aionemu.gameserver.network.aion.instanceinfo.PvpInstanceScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.abyss.AbyssPointsService;
-import com.aionemu.gameserver.services.abyss.GloryPointsService;
-import com.aionemu.gameserver.services.item.ItemService;
-import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -34,51 +21,25 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @author Tibald
  */
 @InstanceID(301210000)
-public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
+public class EngulfedOphidianBridgeInstance extends BasicPvpInstance {
 
-	private EngulfedOphidianBridgeReward engulfedOBReward;
-	private long instanceTime;
-	private Future<?> instanceTask;
-	private Future<?> timeCheckTask;
+	private final static int MAX_PLAYERS_PER_FACTION = 6;
 	private int timeInMin = 0;
-	private boolean isInstanceDestroyed = false;
-	private int racePosition = 0;
 
 	public EngulfedOphidianBridgeInstance(WorldMapInstance instance) {
 		super(instance);
 	}
 
-	private void addPlayerToReward(Player player) {
-		engulfedOBReward.addPlayerReward(new EngulfedOphidianBridgePlayerReward(player.getObjectId(), player.getRace()));
-	}
-
-	private boolean containPlayer(int objectId) {
-		return engulfedOBReward.containsPlayer(objectId);
-	}
-
 	@Override
-	public void onEnterInstance(Player player) {
-		if (!containPlayer(player.getObjectId())) {
-			addPlayerToReward(player);
-		}
-		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 3, player.getObjectId()), getTime()));
-		PacketSendUtility.sendPacket(player,
-			new SM_INSTANCE_SCORE(instance.getMapId(), new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 6, player.getObjectId()), getTime()));
-	}
-
-	private void startInstanceTask() {
-		instanceTime = System.currentTimeMillis();
-		ThreadPoolManager.getInstance().schedule(() -> {
-			openFirstDoors();
-			engulfedOBReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
-			sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 6, 0), getTime()));
-			startTimeCheck();
-		}, 120000);
-		instanceTask = ThreadPoolManager.getInstance().schedule(this::stopInstance, 1320000);
+	protected void onStart() {
+		updateProgress(InstanceProgressionType.START_PROGRESS);
+		openFirstDoors();
+		startTimeCheck();
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> onStop(false), 1200000));
 	}
 
 	private void startTimeCheck() {
-		timeCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+		tasks.add(ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 			timeInMin += 30;
 			switch (timeInMin) {
 				case 300: // 5 minutes *TODO Spawn supply on captured bases
@@ -111,12 +72,12 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 						spawn(702044, 499.52756f, 522.5279f, 597.6485f, (byte) 25); // Bridge
 					}
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GuardDarkHeroTrigger_Spawn_IDLDF5_Under_01_War());
-					spawn((racePosition == 0 ? 701988 : 701989), 758.5892f, 564.36304f, 576.8448f, (byte) 83);
-					spawn((racePosition == 0 ? 701984 : 701985), 761.9165f, 561.8183f, 577.1422f, (byte) 83);
-					spawn((racePosition == 0 ? 701986 : 701987), 754.92f, 563.0107f, 577.17413f, (byte) 83);
-					spawn((racePosition == 0 ? 701989 : 701988), 320.97195f, 490.1614f, 596.14105f, (byte) 0);
-					spawn((racePosition == 0 ? 701985 : 701984), 320.28528f, 494.81866f, 596.2401f, (byte) 0);
-					spawn((racePosition == 0 ? 701987 : 701986), 320.01007f, 485.90097f, 596.2371f, (byte) 0);
+					spawn((raceStartPosition == 0 ? 701988 : 701989), 758.5892f, 564.36304f, 576.8448f, (byte) 83);
+					spawn((raceStartPosition == 0 ? 701984 : 701985), 761.9165f, 561.8183f, 577.1422f, (byte) 83);
+					spawn((raceStartPosition == 0 ? 701986 : 701987), 754.92f, 563.0107f, 577.17413f, (byte) 83);
+					spawn((raceStartPosition == 0 ? 701989 : 701988), 320.97195f, 490.1614f, 596.14105f, (byte) 0);
+					spawn((raceStartPosition == 0 ? 701985 : 701984), 320.28528f, 494.81866f, 596.2401f, (byte) 0);
+					spawn((raceStartPosition == 0 ? 701987 : 701986), 320.01007f, 485.90097f, 596.2371f, (byte) 0);
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_Under_01_War_Drop_MSG_01());
 					break;
 				case 480: // 8 minutes
@@ -156,7 +117,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 					spawn(702018, 759.98627f, 549.6435f, 577.5169f, (byte) 30); // supply box
 					spawn(702018, 332.92816f, 486.6423f, 596.86804f, (byte) 0); // supply box
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GUARDLIGHTHERO_SPAWN_IDLDF5_UNDER_01_WAR());
-					if (racePosition == 0) {
+					if (raceStartPosition == 0) {
 						spawn(233491, 612.2644f, 569.6577f, 590.75f, (byte) 77); // Captain Avran
 						spawn(233490, 615.8132f, 568.7348f, 590.75f, (byte) 77); // Avran crusher
 						spawn(233490, 611.1977f, 571.6211f, 590.75f, (byte) 80); // Avran crusher
@@ -204,14 +165,9 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 					spawn(701976, 619.3583f, 515.6447f, 592.1339f, (byte) 0); // hidden box supply
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_Under_01_War_Drop_MSG_01());
 					break;
-				case 1500: // 25 minutes
-					if (timeCheckTask != null && !timeCheckTask.isDone()) {
-						timeCheckTask.cancel(true);
-					}
-					break;
 			}
 			checkBases();
-		}, 30000, 30000);
+		}, 30000, 30000));
 	}
 
 	private void checkBases() {
@@ -219,96 +175,47 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		updatePointsByGenerators(instance.getNpcs(701943), Race.ELYOS, true);
 	}
 
-	private void stopInstance() {
-		if (instanceTask != null && !instanceTask.isDone()) {
-			instanceTask.cancel(true);
+	@Override
+	protected void setAndDistributeRewards(Player player, PvpInstancePlayerReward reward, Race winningRace, boolean isBossKilled) {
+		int scorePoints = pInstanceReward.getPointsByRace(reward.getRace());
+		if (reward.getRace() == winningRace) {
+			reward.setBaseAp(pInstanceReward.getWinnerApReward());
+			reward.setBonusAp(2 * scorePoints / MAX_PLAYERS_PER_FACTION);
+			reward.setBaseGp(50);
+			reward.setReward1(188052681, 1, 0);
+		} else {
+			reward.setBaseAp(pInstanceReward.getLoserApReward());
+			reward.setBonusAp(scorePoints / MAX_PLAYERS_PER_FACTION);
+			reward.setBaseGp(10);
+			reward.setReward1(188053209, 1, 0);
+			if (winningRace == Race.NONE)
+				reward.setBaseAp(pInstanceReward.getDrawApReward()); // Base AP are overridden in a draw case
 		}
-		if (timeCheckTask != null && !timeCheckTask.isDone()) {
-			timeCheckTask.cancel(true);
-		}
-		if (engulfedOBReward.isRewarded()) {
-			return;
-		}
-		engulfedOBReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
-		Race winnerRace = engulfedOBReward.getRaceWithHighestPoints();
-		instance.forEachPlayer(player -> {
-			EngulfedOphidianBridgePlayerReward reward = engulfedOBReward.getPlayerReward(player.getObjectId());
-			reward.setBonusReward(Rnd.get(8000, 12000));
-			if (reward.getRace() == winnerRace) {
-				reward.setOphidianBox(1);
-				reward.setGloryPoints(50);
-				reward.setBaseReward(engulfedOBReward.getWinnerApReward());
-			} else {
-				reward.setOBOpportunityBundle(1);
-				reward.setGloryPoints(10);
-				reward.setBaseReward(engulfedOBReward.getLoserApReward());
-			}
-			sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 5, player.getObjectId()), getTime()));
-			AbyssPointsService.addAp(player, reward.getBaseReward() + reward.getBonusReward());
-			if (reward.getGloryPoints() > 0)
-				GloryPointsService.increaseGpBy(player.getObjectId(), reward.getGloryPoints());
-			if (reward.getOphidianBox() > 0) {
-				ItemService.addItem(player, 188052681, reward.getOphidianBox());
-			}
-			if (reward.getOBOpportunityBundle() > 0) {
-				ItemService.addItem(player, 188053209, reward.getOBOpportunityBundle());
-			}
-		});
-		instance.forEachNpc(npc -> npc.getController().delete());
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isInstanceDestroyed) {
-				for (Player player : instance.getPlayersInside()) {
-					if (player.isDead())
-						PlayerReviveService.duelRevive(player);
-					onExitInstance(player);
-				}
-			}
-		}, 10000);
+		distributeRewards(player, reward);
 	}
 
 	@Override
-	public void onExitInstance(Player player) {
-		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
-	}
+	protected void updatePoints(Player player, Race race, String npcL10n, int points) {
+		super.updatePoints(player, race, npcL10n, points);
 
-	@Override
-	public void onInstanceDestroy() {
-		isInstanceDestroyed = true;
-		if (instanceTask != null && !instanceTask.isDone()) {
-			instanceTask.cancel(true);
-		}
-		if (timeCheckTask != null && !timeCheckTask.isDone()) {
-			timeCheckTask.cancel(true);
-		}
-	}
-
-	private void updatePoints(int points, Race race, boolean check, String npcL10n, Player player) {
-		if (check && !engulfedOBReward.isStartProgress()) {
-			return;
-		}
-		if (npcL10n != null)
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-		engulfedOBReward.addPointsByRace(race, points);
-		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 10, race == Race.ELYOS ? 0 : 1), getTime()));
-		int diff = Math.abs(engulfedOBReward.getAsmodiansPoints() - engulfedOBReward.getElyosPoints());
-		if (diff >= 30000) {
-			stopInstance();
-		}
+		int diff = Math.abs(pInstanceReward.getAsmodiansPoints() - pInstanceReward.getElyosPoints());
+		if (diff >= 30000)
+			onStop(false);
 	}
 
 	private void updatePointsByGenerators(List<Npc> generators, Race race, boolean check) {
-		if (check && !engulfedOBReward.isStartProgress())
+		if (check && !pInstanceReward.isStartProgress())
 			return;
 		if (generators.isEmpty())
 			return;
 		int points = generators.size() * 100;
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(generators.get(0).getObjectTemplate().getL10n(), points));
-		engulfedOBReward.addPointsByRace(race, points);
-		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 10, race == Race.ELYOS ? 0 : 1), getTime()));
-		int diff = Math.abs(engulfedOBReward.getAsmodiansPoints() - engulfedOBReward.getElyosPoints());
-		if (diff >= 30000) {
-			stopInstance();
-		}
+		pInstanceReward.addPointsByRace(race, points);
+		sendPacket(
+			new SM_INSTANCE_SCORE(instance.getMapId(), new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.UPDATE_FACTION_SCORE, race), getTime()));
+		int diff = Math.abs(pInstanceReward.getAsmodiansPoints() - pInstanceReward.getElyosPoints());
+		if (diff >= 30000)
+			onStop(false);
 	}
 
 	@Override
@@ -356,7 +263,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 				break;
 		}
 		if (points > 0) {
-			updatePoints(points, player.getRace(), true, npc.getObjectTemplate().getL10n(), player);
+			updatePoints(player, player.getRace(), npc.getObjectTemplate().getL10n(), points);
 		}
 	}
 
@@ -389,7 +296,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 160);
 					break;
 			}
-			updatePoints(-5000, npc.getRace(), true, null, null);
+			updatePoints(null, npc.getRace(), null, -5000);
 			npc.getController().delete();
 		}
 	}
@@ -431,7 +338,7 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
 					break;
 			}
-			updatePoints(5000, player.getRace(), true, npc.getObjectTemplate().getL10n(), player);
+			updatePoints(player, player.getRace(), npc.getObjectTemplate().getL10n(), 5000);
 			npc.getController().delete();
 		}
 	}
@@ -441,78 +348,37 @@ public class EngulfedOphidianBridgeInstance extends GeneralInstanceHandler {
 		instance.setDoorState(176, true);
 	}
 
-	private void sendPacket(AionServerPacket packet) {
-		PacketSendUtility.broadcastToMap(instance, packet);
-	}
-
 	@Override
 	public void onInstanceCreate() {
-		engulfedOBReward = new EngulfedOphidianBridgeReward();
-		engulfedOBReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
-		racePosition = engulfedOBReward.getRaceStartPosition();
-		spawn((racePosition == 0 ? 802025 : 802026), 753.31775f, 570.89905f, 577.3619f, (byte) 36);
-		spawn((racePosition == 0 ? 701949 : 701948), 753.31775f, 570.89905f, 577.3619f, (byte) 87);
-		spawn((racePosition == 0 ? 701949 : 701948), 767.931f, 569.22375f, 577.3449f, (byte) 87);
-		spawn((racePosition == 0 ? 701949 : 701948), 768.46606f, 534.54016f, 576.375f, (byte) 87);
-		spawn((racePosition == 0 ? 701949 : 701948), 773.47577f, 552.68604f, 576.5519f, (byte) 87);
-		spawn((racePosition == 0 ? 701949 : 701948), 776.1901f, 569.8358f, 576.91437f, (byte) 87);
-		spawn((racePosition == 0 ? 701947 : 701950), 739.6952f, 536.6952f, 576.5571f, (byte) 87);
-		spawn((racePosition == 0 ? 701947 : 701950), 741.9557f, 557.69574f, 576.7407f, (byte) 87);
-		spawn((racePosition == 0 ? 701947 : 701950), 744.59814f, 573.4721f, 577.14624f, (byte) 87);
-		spawn((racePosition == 0 ? 802025 : 802026), 311.8876f, 570.89905f, 597.13184f, (byte) 70);
-		spawn((racePosition == 0 ? 701948 : 701949), 300.15576f, 500.93283f, 597.13184f, (byte) 0);
-		spawn((racePosition == 0 ? 701948 : 701949), 300.3278f, 476.23727f, 597.13184f, (byte) 0);
-		spawn((racePosition == 0 ? 701948 : 701949), 309.21387f, 509.46008f, 596.54047f, (byte) 0);
-		spawn((racePosition == 0 ? 701948 : 701949), 327.29257f, 506.21063f, 596.5348f, (byte) 0);
-		spawn((racePosition == 0 ? 701948 : 701949), 347.668f, 504.71292f, 595.2064f, (byte) 0);
-		spawn((racePosition == 0 ? 701950 : 701947), 311.0972f, 469.62903f, 596.54047f, (byte) 0);
-		spawn((racePosition == 0 ? 701950 : 701947), 328.51215f, 474.87762f, 596.53375f, (byte) 0);
-		spawn((racePosition == 0 ? 701950 : 701947), 346.49152f, 478.24072f, 595.2064f, (byte) 0);
-		startInstanceTask();
+		pInstanceReward = new PvpInstanceReward<>(5600, 1120, 3360); // No info found for draws, so let's guess
+
+		spawn((raceStartPosition == 0 ? 802025 : 802026), 753.31775f, 570.89905f, 577.3619f, (byte) 36);
+		spawn((raceStartPosition == 0 ? 701949 : 701948), 753.31775f, 570.89905f, 577.3619f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701949 : 701948), 767.931f, 569.22375f, 577.3449f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701949 : 701948), 768.46606f, 534.54016f, 576.375f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701949 : 701948), 773.47577f, 552.68604f, 576.5519f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701949 : 701948), 776.1901f, 569.8358f, 576.91437f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701947 : 701950), 739.6952f, 536.6952f, 576.5571f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701947 : 701950), 741.9557f, 557.69574f, 576.7407f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701947 : 701950), 744.59814f, 573.4721f, 577.14624f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 802025 : 802026), 311.8876f, 570.89905f, 597.13184f, (byte) 70);
+		spawn((raceStartPosition == 0 ? 701948 : 701949), 300.15576f, 500.93283f, 597.13184f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701948 : 701949), 300.3278f, 476.23727f, 597.13184f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701948 : 701949), 309.21387f, 509.46008f, 596.54047f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701948 : 701949), 327.29257f, 506.21063f, 596.5348f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701948 : 701949), 347.668f, 504.71292f, 595.2064f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701950 : 701947), 311.0972f, 469.62903f, 596.54047f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701950 : 701947), 328.51215f, 474.87762f, 596.53375f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701950 : 701947), 346.49152f, 478.24072f, 595.2064f, (byte) 0);
+		super.onInstanceCreate();
 	}
 
 	@Override
-	public InstanceReward<?> getInstanceReward() {
-		return engulfedOBReward;
-	}
-
-	@Override
-	public boolean onReviveEvent(Player player) {
-		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
-		PlayerReviveService.revive(player, 100, 100, false, 0);
-		player.getGameStats().updateStatsAndSpeedVisually();
-		engulfedOBReward.portToPosition(player, instance);
-		return true;
-	}
-
-	@Override
-	public boolean onDie(Player player, Creature lastAttacker) {
-		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(), new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 3, player.getObjectId()), getTime()));
-		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), false, 0, 8));
-		if (lastAttacker instanceof Player) {
-			if (lastAttacker.getRace() != player.getRace()) {
-				int killPoints = 100;
-				if (engulfedOBReward.isStartProgress() && getTime() >= 900000) {
-					killPoints = 300;
-				}
-				updatePoints(killPoints, lastAttacker.getRace(), true, null, (Player) lastAttacker);
-				PacketSendUtility.sendPacket((Player) lastAttacker, new SM_SYSTEM_MESSAGE(1400277, killPoints));
-				engulfedOBReward.incrementKillsByRace(lastAttacker.getRace());
-				sendPacket(
-					new SM_INSTANCE_SCORE(instance.getMapId(), new EngulfedOphidianBridgeScoreInfo(engulfedOBReward, 10, lastAttacker.getRace() == Race.ELYOS ? 0 : 1), getTime()));
-			}
+	public void portToStartPosition(Player player) {
+		if (player.getRace() == Race.ELYOS && raceStartPosition == 0 || player.getRace() == Race.ASMODIANS && raceStartPosition != 0) {
+			TeleportService.teleportTo(player, instance, 760.9035f, 575.408f, 578.4075f, (byte) 86);
+		} else {
+			TeleportService.teleportTo(player, instance, 305.4604f, 488.341f, 598.5838f);
 		}
-		updatePoints(-100, player.getRace(), true, null, player);
-		return true;
-	}
-
-	private int getTime() {
-		long result = System.currentTimeMillis() - instanceTime;
-		if (result < 120000) {
-			return (int) (120000 - result);
-		} else if (result < 1320000) {
-			return (int) (1200000 - (result - 120000));
-		}
-		return 0;
 	}
 }

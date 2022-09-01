@@ -5,19 +5,22 @@ import java.util.List;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.instancereward.DredgionReward;
-import com.aionemu.gameserver.model.instance.playerreward.DredgionPlayerReward;
+import com.aionemu.gameserver.model.instance.DredgionRooms;
+import com.aionemu.gameserver.model.instance.instancereward.PvpInstanceReward;
+import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 
 /**
  * @author xTz
  */
-public class DredgionScoreInfo extends InstanceScoreInfo<DredgionReward> {
+public class DredgionScoreInfo extends InstanceScoreInfo<PvpInstanceReward<PvpInstancePlayerReward>> {
 
 	private final List<Player> players;
+	private final List<DredgionRooms> dredgionRooms;
 
-	public DredgionScoreInfo(DredgionReward reward, List<Player> players) {
+	public DredgionScoreInfo(PvpInstanceReward<PvpInstancePlayerReward> reward, List<Player> players, List<DredgionRooms> dredgionRooms) {
 		super(reward);
 		this.players = players;
+		this.dredgionRooms = dredgionRooms;
 	}
 
 	@Override
@@ -29,9 +32,7 @@ public class DredgionScoreInfo extends InstanceScoreInfo<DredgionReward> {
 		writeD(buf, reward.getInstanceProgressionType().isEndProgress() ? (asmosScore > elyosScore ? 1 : 0) : 255);
 		writeD(buf, elyosScore);
 		writeD(buf, asmosScore);
-		for (DredgionReward.DredgionRooms dredgionRoom : reward.getDredgionRooms()) {
-			writeC(buf, dredgionRoom.getState());
-		}
+		dredgionRooms.forEach(d -> writeC(buf, d.getState()));
 	}
 
 	private void fillTableWithGroup(ByteBuffer buf, Race race) {
@@ -40,18 +41,17 @@ public class DredgionScoreInfo extends InstanceScoreInfo<DredgionReward> {
 			if (race != player.getRace()) {
 				continue;
 			}
-			DredgionPlayerReward dpr = reward.getPlayerReward(player.getObjectId());
-			writeD(buf, dpr.getOwnerId()); // playerObjectId
+			PvpInstancePlayerReward playerReward = reward.getPlayerReward(player.getObjectId());
+			writeD(buf, playerReward.getOwnerId()); // playerObjectId
 			writeD(buf, player.getAbyssRank().getRank().getId()); // playerRank
-			writeD(buf, dpr.getPvPKills()); // pvpKills
-			writeD(buf, dpr.getMonsterKills()); // monsterKills
-			writeD(buf, dpr.getZoneCaptured()); // captured
-			writeD(buf, dpr.getPoints()); // playerScore
+			writeD(buf, playerReward.getPvPKills()); // pvpKills
+			writeD(buf, playerReward.getMonsterKills()); // monsterKills
+			writeD(buf, playerReward.getCapturedZones()); // captured
+			writeD(buf, playerReward.getPoints()); // playerScore
 
 			if (reward.getInstanceProgressionType().isEndProgress()) {
-				boolean winner = race == reward.getRaceWithHighestPoints();
-				writeD(buf, (winner ? reward.getWinnerApReward() : reward.getLoserApReward()) + (int) (dpr.getPoints() * 1.6f)); // apBonus1
-				writeD(buf, (winner ? reward.getWinnerApReward() : reward.getLoserApReward())); // apBonus2
+				writeD(buf, playerReward.getBonusAp() + playerReward.getBaseAp()); // Client needs to know the sum here
+				writeD(buf, playerReward.getBaseAp());
 			} else {
 				writeB(buf, new byte[8]);
 			}

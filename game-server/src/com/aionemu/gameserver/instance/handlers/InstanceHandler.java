@@ -92,6 +92,8 @@ public interface InstanceHandler {
 
 	void onBackHome(Npc npc);
 
+	void portToStartPosition(Player player);
+
 	boolean canEnter(Player player);
 
 	float getInstanceExpMultiplier();

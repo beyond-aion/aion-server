@@ -18,11 +18,11 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
+import com.aionemu.gameserver.model.instance.DredgionRooms;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.DredgionReward;
 import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
-import com.aionemu.gameserver.model.instance.playerreward.DredgionPlayerReward;
-import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
+import com.aionemu.gameserver.model.instance.instancereward.PvpInstanceReward;
+import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 import com.aionemu.gameserver.network.aion.instanceinfo.DredgionScoreInfo;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
@@ -43,95 +43,112 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class DredgionInstance extends GeneralInstanceHandler {
 
+	protected final List<DredgionRooms> dredgionRooms = new ArrayList<>();
 	protected final AtomicInteger killedSurkanas = new AtomicInteger();
-	protected DredgionReward dredgionReward;
-	private float losingGroupMultiplier = 1;
-	private boolean isInstanceDestroyed = false;
-	protected AtomicBoolean isInstanceStarted = new AtomicBoolean(false);
-	private long instanceTime;
+	protected AtomicBoolean isInstanceStarted = new AtomicBoolean();
+	protected PvpInstanceReward<PvpInstancePlayerReward> pInstanceReward;
+	private final static int MAX_PLAYERS_PER_FACTION = 6;
+	private final int raceStartPosition = Rnd.get(2);
 	private Future<?> instanceTask;
+	private long instanceTime;
+	private float losingGroupMultiplier = 1;
+	private boolean isInstanceDestroyed;
 
 	public DredgionInstance(WorldMapInstance instance) {
 		super(instance);
 	}
 
-	protected DredgionPlayerReward getPlayerReward(Player player) {
-		if (dredgionReward.getPlayerReward(player.getObjectId()) == null) {
+	protected PvpInstancePlayerReward getPlayerReward(Player player) {
+		if (pInstanceReward.getPlayerReward(player.getObjectId()) == null) {
 			addPlayerToReward(player);
 		}
-		return dredgionReward.getPlayerReward(player.getObjectId());
+		return pInstanceReward.getPlayerReward(player.getObjectId());
 	}
 
 	protected void captureRoom(Race race, int roomId) {
-		dredgionReward.getDredgionRoomById(roomId).captureRoom(race);
+		for (DredgionRooms dredgionRoom : dredgionRooms) {
+			if (dredgionRoom.getRoomId() == roomId) {
+				dredgionRoom.captureRoom(race);
+			}
+		}
 	}
 
 	private void addPlayerToReward(Player player) {
-		dredgionReward.addPlayerReward(new DredgionPlayerReward(player.getObjectId()));
-	}
-
-	private boolean containPlayer(int objectId) {
-		return dredgionReward.containsPlayer(objectId);
+		pInstanceReward.addPlayerReward(new PvpInstancePlayerReward(player.getObjectId(), player.getRace()));
 	}
 
 	protected void startInstanceTask() {
 		instanceTime = System.currentTimeMillis();
 		ThreadPoolManager.getInstance().schedule(() -> {
 			openFirstDoors();
-			dredgionReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
+			pInstanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
 			sendPacket();
 		}, 120000);
-		instanceTask = ThreadPoolManager.getInstance().schedule(() -> stopInstance(dredgionReward.getRaceWithHighestPoints()), 2520000);
+		instanceTask = ThreadPoolManager.getInstance().schedule(() -> stopInstance(pInstanceReward.getRaceWithHighestPoints()), 2520000);
 	}
 
 	@Override
 	public void onEnterInstance(final Player player) {
-		if (!containPlayer(player.getObjectId())) {
-			addPlayerToReward(player);
-		}
+		if (!pInstanceReward.containsPlayer(player.getObjectId()))
+			pInstanceReward.addPlayerReward(new PvpInstancePlayerReward(player.getObjectId(), player.getRace()));
 		sendPacket();
 	}
 
 	@Override
 	public void onInstanceCreate() {
-		dredgionReward = new DredgionReward(instance.getMapId());
-		dredgionReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
+		initializeInstance(4500, 2500, 3750);
+	}
+
+	protected void initializeInstance(int winnerAp, int loserAp, int drawAp) {
+		pInstanceReward = new PvpInstanceReward<>(winnerAp, loserAp, drawAp);
+		pInstanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
+		for (int i = 1; i < 15; i++) {
+			dredgionRooms.add(new DredgionRooms(i));
+		}
 	}
 
 	protected void stopInstance(Race winnerRace) {
 		stopInstanceTask();
-		dredgionReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
-		doReward(winnerRace);
+		pInstanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
+		instance.forEachPlayer(p -> doReward(p, getPlayerReward(p), winnerRace));
+		instance.forEachNpc(npc -> npc.getController().delete());
+		ThreadPoolManager.getInstance().schedule(() -> instance.getPlayersInside().forEach(this::revivePlayerOnEnd), 10000);
+		ThreadPoolManager.getInstance().schedule(() -> instance.getPlayersInside().forEach(this::onExitInstance), 60000);
 		sendPacket();
 	}
 
-	public void doReward(Race winnerRace) {
-		for (Player player : instance.getPlayersInside()) {
-			InstancePlayerReward playerReward = getPlayerReward(player);
-			int abyssPoint = playerReward.getPoints(); // to do find out on what depend this modifier
-			if (player.getRace() == winnerRace) {
-				abyssPoint += dredgionReward.getWinnerApReward();
-				ItemService.addItem(player, 186000242, 1); // Ceramium Medal
-				if (Rnd.chance() < 30)
-					ItemService.addItem(player, 188950017, 1); // Special Courier Pass (Abyss Eternal/Lv. 61-65)
-			} else {
-				abyssPoint += dredgionReward.getLoserApReward();
-				ItemService.addItem(player, 186000147, 1); // Mithril Medal
-			}
-			AbyssPointsService.addAp(player, (int) Rates.AP_DREDGION.calcResult(player, abyssPoint));
-			QuestEnv env = new QuestEnv(null, player, 0);
-			QuestEngine.getInstance().onDredgionReward(env);
+	public void doReward(Player player, PvpInstancePlayerReward reward, Race winningRace) {
+		int scorePoints = pInstanceReward.getPointsByRace(reward.getRace());
+		if (reward.getRace() == winningRace) {
+			reward.setBaseAp(pInstanceReward.getWinnerApReward());
+			reward.setBonusAp(2 * scorePoints / MAX_PLAYERS_PER_FACTION);
+			reward.setReward1(186000242, 1, 0); // CUSTOM: Ceramium Medal
+			if (Rnd.chance() < 30)
+				reward.setReward2(188053030, 1, 0); // CUSTOM: Special Courier Pass (Abyss Eternal/Lv. 61-65)
+		} else {
+			reward.setBaseAp(pInstanceReward.getLoserApReward());
+			reward.setBonusAp(scorePoints / MAX_PLAYERS_PER_FACTION);
+			reward.setReward1(186000147, 1, 0); // CUSTOM: Mithril Medal
+			if (winningRace == Race.NONE)
+				reward.setBaseAp(pInstanceReward.getDrawApReward()); // Base AP are overridden in a draw case
 		}
-		instance.forEachNpc(npc -> npc.getController().delete());
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isInstanceDestroyed) {
-				for (Player player : instance.getPlayersInside()) {
-					if (player.isDead())
-						PlayerReviveService.duelRevive(player);
-					onExitInstance(player);
-				}
-			}
-		}, 10000);
+		distributeRewards(player, reward);
+	}
+
+	private void distributeRewards(Player player, PvpInstancePlayerReward reward) {
+		QuestEnv env = new QuestEnv(null, player, 0);
+		QuestEngine.getInstance().onDredgionReward(env);
+		AbyssPointsService.addAp(player, (int) Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
+		if (reward.getReward1ItemId() > 0)
+			ItemService.addItem(player, reward.getReward1ItemId(), reward.getReward1Count() + reward.getReward1BonusCount());
+		if (reward.getReward2ItemId() > 0)
+			ItemService.addItem(player, reward.getReward2ItemId(), reward.getReward2Count() + reward.getReward2BonusCount());
+		if (reward.getReward3ItemId() > 0)
+			ItemService.addItem(player, reward.getReward3ItemId(), reward.getReward3Count());
+		if (reward.getReward4ItemId() > 0)
+			ItemService.addItem(player, reward.getReward4ItemId(), reward.getReward4Count());
+		if (reward.getBonusRewardItemId() > 0)
+			ItemService.addItem(player, reward.getBonusRewardItemId(), reward.getBonusRewardCount());
 	}
 
 	@Override
@@ -139,19 +156,27 @@ public class DredgionInstance extends GeneralInstanceHandler {
 		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		dredgionReward.portToPosition(player, instance);
+		portToStartPosition(player);
 		return true;
+	}
+
+	protected void revivePlayerOnEnd(Player player) {
+		if (player.isDead())
+			PlayerReviveService.duelRevive(player);
 	}
 
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), false, 0, 8));
 		int points = 60;
-		if (lastAttacker instanceof Player && lastAttacker.getRace() != player.getRace()) {
-			if (lastAttacker.getRace() != dredgionReward.getRaceWithHighestPoints())
+		if (lastAttacker instanceof Player killer && killer.getRace() != player.getRace()) {
+			if (killer.getRace() != pInstanceReward.getRaceWithHighestPoints())
 				points *= losingGroupMultiplier;
 			else if (losingGroupMultiplier == 10 || getPlayerReward(player).getPoints() == 0)
 				points = 0;
+
+			if (player.getAbyssRank().getRank().getId() - killer.getAbyssRank().getRank().getId() >= 4)
+				points *= 1.6f;
 
 			updateScore((Player) lastAttacker, player, points, true);
 		}
@@ -176,7 +201,7 @@ public class DredgionInstance extends GeneralInstanceHandler {
 			return;
 
 		// group score
-		dredgionReward.addPointsByRace(player.getRace(), points);
+		pInstanceReward.addPointsByRace(player.getRace(), points);
 
 		// player score
 		List<Player> playersToGainScore = new ArrayList<>();
@@ -204,7 +229,7 @@ public class DredgionInstance extends GeneralInstanceHandler {
 		}
 
 		// recalculate point multiplier
-		int pointDifference = dredgionReward.getAsmodiansPoints() - dredgionReward.getElyosPoints();
+		int pointDifference = pInstanceReward.getAsmodiansPoints() - pInstanceReward.getElyosPoints();
 		if (pointDifference < 0) {
 			pointDifference *= -1;
 		}
@@ -242,14 +267,15 @@ public class DredgionInstance extends GeneralInstanceHandler {
 	public void onInstanceDestroy() {
 		stopInstanceTask();
 		isInstanceDestroyed = true;
-		dredgionReward.clear();
+		pInstanceReward.clear();
 	}
 
 	protected void openFirstDoors() {
 	}
 
 	private void sendPacket() {
-		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new DredgionScoreInfo(dredgionReward, instance.getPlayersInside()), getTime()));
+		PacketSendUtility.broadcastToMap(instance,
+			new SM_INSTANCE_SCORE(instance.getMapId(), new DredgionScoreInfo(pInstanceReward, instance.getPlayersInside(), dredgionRooms), getTime()));
 	}
 
 	private int getTime() {
@@ -301,11 +327,20 @@ public class DredgionInstance extends GeneralInstanceHandler {
 
 	@Override
 	public InstanceReward<?> getInstanceReward() {
-		return dredgionReward;
+		return pInstanceReward;
 	}
 
 	@Override
 	public void onExitInstance(Player player) {
 		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
+	}
+
+	@Override
+	public void portToStartPosition(Player player) {
+		if (player.getRace() == Race.ELYOS && raceStartPosition == 0 || player.getRace() == Race.ASMODIANS && raceStartPosition != 0) {
+			TeleportService.teleportTo(player, instance.getMapId(), instance.getInstanceId(), 570.468f, 166.897f, 432.28986f);
+		} else {
+			TeleportService.teleportTo(player, instance.getMapId(), instance.getInstanceId(), 400.741f, 166.713f, 432.290f);
+		}
 	}
 }

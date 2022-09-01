@@ -68,7 +68,7 @@ public class ChantraDredgionInstance extends DredgionInstance {
 
 	@Override
 	public void onDie(Npc npc) {
-		if (dredgionReward.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS) {
+		if (pInstanceReward.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS) {
 			return;
 		}
 		switch (npc.getNpcId()) {
@@ -141,9 +141,9 @@ public class ChantraDredgionInstance extends DredgionInstance {
 				NpcActions.delete(npc);
 				return;
 			case 216886:
-				if (!dredgionReward.isRewarded()) {
+				if (!pInstanceReward.isRewarded()) {
 					updateScore(mostPlayerDamage, npc, 1000, false);
-					stopInstance(dredgionReward.getRaceWithHighestPoints());
+					stopInstance(pInstanceReward.getRaceWithHighestPoints());
 				}
 				return;
 			case 216941:

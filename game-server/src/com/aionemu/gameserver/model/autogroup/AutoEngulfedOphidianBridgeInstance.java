@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.autogroup;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.instancereward.EngulfedOphidianBridgeReward;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
@@ -72,7 +71,7 @@ public class AutoEngulfedOphidianBridgeInstance extends AutoInstance {
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
 		EngulfedOphidianBridgeService.getInstance().addCooldown(player);
-		((EngulfedOphidianBridgeReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player, instance);
+		instance.getInstanceHandler().portToStartPosition(player);
 	}
 
 	@Override

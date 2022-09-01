@@ -235,6 +235,11 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
+	public void portToStartPosition(Player player) {
+		throw new UnsupportedOperationException();
+	}
+
+	@Override
 	public boolean canEnter(Player player) {
 		return true;
 	}

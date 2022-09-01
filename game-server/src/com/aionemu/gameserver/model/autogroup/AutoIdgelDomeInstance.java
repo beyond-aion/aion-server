@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.autogroup;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.instancereward.IdgelDomeInfo;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
@@ -72,7 +71,7 @@ public class AutoIdgelDomeInstance extends AutoInstance {
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
 		IdgelDomeService.getInstance().addCooldown(player);
-		((IdgelDomeInfo) instance.getInstanceHandler().getInstanceReward()).teleportToStartPosition(player, instance);
+		instance.getInstanceHandler().portToStartPosition(player);
 	}
 
 	@Override

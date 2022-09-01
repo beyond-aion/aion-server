@@ -72,7 +72,7 @@ public class TerathDredgionInstance extends DredgionInstance {
 	@Override
 	public void onDie(Npc npc) {
 		Player mostPlayerDamage = npc.getAggroList().getMostPlayerDamage();
-		if (mostPlayerDamage == null || dredgionReward.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS) {
+		if (mostPlayerDamage == null || pInstanceReward.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS) {
 			return;
 		}
 		Race race = mostPlayerDamage.getRace();
@@ -138,9 +138,9 @@ public class TerathDredgionInstance extends DredgionInstance {
 				updateScore(mostPlayerDamage, npc, 500, false);
 				return;
 			case 233371: // Captain Anusa
-				if (!dredgionReward.isRewarded()) {
+				if (!pInstanceReward.isRewarded()) {
 					updateScore(mostPlayerDamage, npc, 1000, false);
-					stopInstance(dredgionReward.getRaceWithHighestPoints());
+					stopInstance(pInstanceReward.getRaceWithHighestPoints());
 				}
 				return;
 			case 701439:
