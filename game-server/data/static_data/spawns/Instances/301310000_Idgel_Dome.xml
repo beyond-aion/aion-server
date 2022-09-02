@@ -2,23 +2,27 @@
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
 	<spawn_map map_id="301310000">
 		<!--Danuar Icon Elyos -->
-		<spawn npc_id="702300" respawn_time="120">
-			<spot x="286.2041" y="338.77942" z="79.82739" h="83" />
-			<spot x="279.94434" y="332.16602" z="79.82739" h="108" />
+		<spawn npc_id="702300" respawn_time="20">
+			<spot x="286.2041" y="338.7794" z="79.8274" h="105" />
+			<spot x="279.9443" y="332.1660" z="79.8274" h="105" />
+			<spot x="263.9707" y="341.6699" z="79.7848" h="15" />
+			<spot x="277.0629" y="355.2583" z="79.7844" h="75" />
 		</spawn>
 		<!--Danuar Icon Asmodian -->
-		<spawn npc_id="702301" respawn_time="120">
-			<spot x="243.03052" y="179.22969" z="79.82412" h="42" />
-			<spot x="249.32625" y="185.85104" z="79.82412" h="49" />
+		<spawn npc_id="702301" respawn_time="20">
+			<spot x="243.0305" y="179.2297" z="79.8241" h="45" />
+			<spot x="249.3263" y="185.8511" z="79.8241" h="45" />
+			<spot x="252.1385" y="162.8889" z="79.7711" h="15" />
+			<spot x="265.3730" y="176.5772" z="79.7719" h="75" />
 		</spawn> 
 		<!--Unstable Ide Energy -->
 		<spawn npc_id="855008">
-			<spot x="288.04398" y="283.51678" z="92.962204" h="0" />
-			<spot x="303.85037" y="313.05411" z="79.86219" h="0" />
-			<spot x="262.40237" y="237.31337" z="85.375" h="0" />
-			<spot x="223.53351" y="206.04878" z="79.86219" h="0" />
-			<spot x="267.08759" y="280.76672" z="85.375" h="0" />
-			<spot x="239.78659" y="233.32512" z="92.962204" h="0" />
+			<spot x="288.04398" y="283.51678" z="92.962204" />
+			<spot x="303.85037" y="313.05411" z="79.86219" />
+			<spot x="262.40237" y="237.31337" z="85.375" />
+			<spot x="223.53351" y="206.04878" z="79.86219" />
+			<spot x="267.08759" y="280.76672" z="85.375" />
+			<spot x="239.78659" y="233.32512" z="92.962204" />
 		</spawn>
 		<!--Unstable Ide Energy -->
 		<spawn npc_id="855211">
@@ -26,22 +30,22 @@
 			<spot x="294.3988" y="324.03323" z="79.23065" h="119" />
 		</spawn>
 		<!--Sheban Elite Marauder -->
-		<spawn npc_id="234753" respawn_time="120">
+		<spawn npc_id="234753" respawn_time="240">
 			<spot x="256.33893" y="259.0221" z="85.81963" h="75" />
 			<spot x="278.2619" y="273.78964" z="92.94253" h="15" />
 		</spawn>
 		<!--Sheban Intelligence Unit Ridgeblade -->
-		<spawn npc_id="234186" respawn_time="120">
+		<spawn npc_id="234186" respawn_time="240">
 			<spot x="320.25806" y="258.70612" z="85.17249" h="61" />
-			<spot x="203.69226" y="255.72789" z="85.17249" h="0" />
+			<spot x="203.69226" y="255.72789" z="85.17249" />
 		</spawn>
 		<!--Salade -->
 		<spawn npc_id="802384">
 			<spot x="254.92552" y="179.36908" z="80.39035" h="90" />
 		</spawn>
 		<!--Sheban Intelligence Unit Stitch -->
-		<spawn npc_id="234189" respawn_time="120">
-			<spot x="206.96481" y="259.00137" z="85.17249" h="0" />
+		<spawn npc_id="234189" respawn_time="240">
+			<spot x="206.96481" y="259.00137" z="85.17249" />
 			<spot x="323.53064" y="261.9796" z="85.17249" h="61" />
 		</spawn>
 		<!--Talle -->
@@ -49,30 +53,30 @@
 			<spot x="274.57217" y="338.79578" z="80.645409" h="31" />
 		</spawn>
 		<!--Sheban Elite Stalwart -->
-		<spawn npc_id="234751" respawn_time="120">
+		<spawn npc_id="234751" respawn_time="240">
 			<spot x="273.76373" y="258.95422" z="85.81963" h="15" />
 			<spot x="250.63719" y="244.0336" z="92.94253" h="75" />
 		</spawn>
 		<!--Sheban Elite Medic -->
-		<spawn npc_id="234754" respawn_time="120">
+		<spawn npc_id="234754" respawn_time="240">
 			<spot x="264.97153" y="249.82945" z="85.81963" h="105" />
 		</spawn>
 		<!--Sheban Intelligence Unit Hunter -->
-		<spawn npc_id="234187" respawn_time="120">
-			<spot x="222.82352" y="207.73462" z="79.86219" h="0" />
-			<spot x="305.59592" y="312.74222" z="79.86219" h="0" />
+		<spawn npc_id="234187" respawn_time="240">
+			<spot x="222.82352" y="207.73462" z="79.86219" />
+			<spot x="305.59592" y="312.74222" z="79.86219" />
 		</spawn>
 		<!--Sheban Elite Sniper -->
-		<spawn npc_id="234752" respawn_time="120">
+		<spawn npc_id="234752" respawn_time="240">
 			<spot x="264.9393" y="267.92413" z="85.81963" h="45" />
 		</spawn>
 		<!--Faction Balance NPC
 		<spawn npc_id="702320" respawn_time="120">
-			<spot x="258.40732" y="169.4749" z="80.489204" h="0" />
+			<spot x="258.40732" y="169.4749" z="80.489204" />
 		</spawn> -->
 		<!--Faction Balance NPC
 		<spawn npc_id="702321" respawn_time="120">
-			<spot x="270.00262" y="347.99957" z="81.16256" h="0" />
+			<spot x="270.00262" y="347.99957" z="81.16256" />
 		</spawn> -->
 	</spawn_map>
 </spawns>
