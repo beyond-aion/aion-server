@@ -140,15 +140,15 @@ public class DredgionInstance extends GeneralInstanceHandler {
 		QuestEngine.getInstance().onDredgionReward(env);
 		AbyssPointsService.addAp(player, (int) Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
 		if (reward.getReward1ItemId() > 0)
-			ItemService.addItem(player, reward.getReward1ItemId(), reward.getReward1Count() + reward.getReward1BonusCount());
+			ItemService.addItem(player, reward.getReward1ItemId(), reward.getReward1Count() + reward.getReward1BonusCount(), true);
 		if (reward.getReward2ItemId() > 0)
-			ItemService.addItem(player, reward.getReward2ItemId(), reward.getReward2Count() + reward.getReward2BonusCount());
+			ItemService.addItem(player, reward.getReward2ItemId(), reward.getReward2Count() + reward.getReward2BonusCount(), true);
 		if (reward.getReward3ItemId() > 0)
-			ItemService.addItem(player, reward.getReward3ItemId(), reward.getReward3Count());
+			ItemService.addItem(player, reward.getReward3ItemId(), reward.getReward3Count(), true);
 		if (reward.getReward4ItemId() > 0)
-			ItemService.addItem(player, reward.getReward4ItemId(), reward.getReward4Count());
+			ItemService.addItem(player, reward.getReward4ItemId(), reward.getReward4Count(), true);
 		if (reward.getBonusRewardItemId() > 0)
-			ItemService.addItem(player, reward.getBonusRewardItemId(), reward.getBonusRewardCount());
+			ItemService.addItem(player, reward.getBonusRewardItemId(), reward.getBonusRewardCount(), true);
 	}
 
 	@Override

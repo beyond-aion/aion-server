@@ -39,8 +39,8 @@ public class ItemService {
 		}
 	}
 
-	public static long addItem(Player player, int itemId, long count, boolean allowInvetoryOverflow) {
-		return addItem(player, itemId, count, null, allowInvetoryOverflow, DEFAULT_UPDATE_PREDICATE);
+	public static long addItem(Player player, int itemId, long count, boolean allowInventoryOverflow) {
+		return addItem(player, itemId, count, null, allowInventoryOverflow, DEFAULT_UPDATE_PREDICATE);
 	}
 
 	public static long addItem(Player player, int itemId, long count) {
