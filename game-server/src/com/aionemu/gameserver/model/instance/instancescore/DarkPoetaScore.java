@@ -1,11 +1,11 @@
-package com.aionemu.gameserver.model.instance.instancereward;
+package com.aionemu.gameserver.model.instance.instancescore;
 
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 
 /**
  * @author xTz
  */
-public class DarkPoetaReward extends InstanceReward<InstancePlayerReward> {
+public class DarkPoetaScore extends InstanceScore<InstancePlayerReward> {
 
 	private int points;
 	private int npcKills;

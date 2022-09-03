@@ -9,16 +9,16 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Tibald, Sykra
  */
-public class EngulfedOphidianBridgeService extends PeriodicInstance {
+public class EngulfedOphidanBridgeService extends PeriodicInstance {
 
-	private static final EngulfedOphidianBridgeService INSTANCE = new EngulfedOphidianBridgeService();
+	private static final EngulfedOphidanBridgeService INSTANCE = new EngulfedOphidanBridgeService();
 
-	public static EngulfedOphidianBridgeService getInstance() {
+	public static EngulfedOphidanBridgeService getInstance() {
 		return INSTANCE;
 	}
 
-	private EngulfedOphidianBridgeService() {
-		super(ENGULFED_OB_ENABLE, ENGULFED_OB_TIMES, ENGULFED_OB_TIMER, new int[] { 108 }, (byte) 60, (byte) 66);
+	private EngulfedOphidanBridgeService() {
+		super(ENGULFED_OPHIDAN_BRIDGE_TIMES, ENGULFED_OPHIDAN_BRIDGE_REGISTRATION_PERIOD, new int[] { 108 }, (byte) 60, (byte) 66);
 	}
 
 	@Override

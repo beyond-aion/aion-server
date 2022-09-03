@@ -6,8 +6,8 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
-import com.aionemu.gameserver.model.instance.instancereward.PvPArenaReward;
+import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
+import com.aionemu.gameserver.model.instance.instancescore.PvPArenaScore;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 import ai.ShifterAI;
@@ -26,7 +26,7 @@ public class PlazaFlameThrowerAI extends ShifterAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		InstanceReward<?> instance = getPosition().getWorldMapInstance().getInstanceHandler().getInstanceReward();
+		InstanceScore<?> instance = getPosition().getWorldMapInstance().getInstanceHandler().getInstanceScore();
 		if (instance != null && !instance.isStartProgress()) {
 			return;
 		}
@@ -63,7 +63,7 @@ public class PlazaFlameThrowerAI extends ShifterAI {
 	}
 
 	private void useSkill(List<Npc> npcs) {
-		PvPArenaReward instance = (PvPArenaReward) getPosition().getWorldMapInstance().getInstanceHandler().getInstanceReward();
+		PvPArenaScore instance = (PvPArenaScore) getPosition().getWorldMapInstance().getInstanceHandler().getInstanceScore();
 		for (Npc npc : npcs) {
 			int skill = instance.getNpcBonusSkill(npc.getNpcId());
 			SkillEngine.getInstance().getSkill(npc, skill >> 8, skill & 0xFF, npc).useNoAnimationSkill();

@@ -18,7 +18,7 @@ public class IdgelDomeService extends PeriodicInstance {
 	}
 
 	private IdgelDomeService() {
-		super(IDGEL_DOME_ENABLE, IDGEL_DOME_TIMES, IDGEL_DOME_TIMER, new int[] { 111 }, (byte) 60, (byte) 66);
+		super(IDGEL_DOME_TIMES, IDGEL_DOME_REGISTRATION_PERIOD, new int[] { 111 }, (byte) 60, (byte) 66);
 	}
 
 	@Override

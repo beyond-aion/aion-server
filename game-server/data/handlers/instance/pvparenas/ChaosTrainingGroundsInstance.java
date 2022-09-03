@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.utils3d.Point3D;
-import com.aionemu.gameserver.network.aion.instanceinfo.ChaosScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.ChaosScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -34,7 +34,7 @@ public class ChaosTrainingGroundsInstance extends PvPArenaInstance {
 
 	@Override
 	protected void sendPacket() {
-		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new ChaosScoreInfo(instanceReward, player.getObjectId()))));
+		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new ChaosScoreWriter(instanceReward, player.getObjectId()))));
 	}
 
 	@Override

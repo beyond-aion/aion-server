@@ -6,14 +6,14 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.services.instance.periodic.IronWallFrontService;
+import com.aionemu.gameserver.services.instance.periodic.IronWallWarfrontService;
 
 /**
  * @author Tibald
  */
-public class AutoIronWallFrontInstance extends AutoInstance {
+public class AutoIronWallWarfrontInstance extends AutoInstance {
 
-	public AutoIronWallFrontInstance(AutoGroupType agt) {
+	public AutoIronWallWarfrontInstance(AutoGroupType agt) {
 		super(agt);
 	}
 
@@ -71,7 +71,7 @@ public class AutoIronWallFrontInstance extends AutoInstance {
 	@Override
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
-		IronWallFrontService.getInstance().addCooldown(player);
+		IronWallWarfrontService.getInstance().addCooldown(player);
 		instance.getInstanceHandler().portToStartPosition(player);
 	}
 

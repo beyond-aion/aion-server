@@ -6,12 +6,15 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
+import java.util.concurrent.atomic.AtomicInteger;
+
 /**
  * @author Estrayl
  */
 public class PvpInstancePlayerReward extends InstancePlayerReward {
 
 	private final Race race;
+	private final AtomicInteger capturedZones = new AtomicInteger();
 	private int[] reward1;
 	private int[] reward2;
 	private int[] reward3;
@@ -21,7 +24,6 @@ public class PvpInstancePlayerReward extends InstancePlayerReward {
 	private int bonusAp;
 	private int baseGp;
 	private int bonusGp;
-	private int capturedZones;
 
 	public PvpInstancePlayerReward(int objectId, Race race) {
 		super(objectId);
@@ -128,12 +130,12 @@ public class PvpInstancePlayerReward extends InstancePlayerReward {
 		this.bonusGp = bonusGp;
 	}
 
-	public void captureZone() {
-		capturedZones++;
+	public void incrementCapturedZones() {
+		capturedZones.incrementAndGet();
 	}
 
 	public int getCapturedZones() {
-		return capturedZones;
+		return capturedZones.get();
 	}
 
 	public Race getRace() {

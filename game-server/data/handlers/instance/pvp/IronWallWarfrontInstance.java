@@ -5,7 +5,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.PvpInstanceReward;
+import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -38,20 +38,20 @@ public class IronWallWarfrontInstance extends BasicPvpInstance {
 
 	@Override
 	protected void setAndDistributeRewards(Player player, PvpInstancePlayerReward reward, Race winningRace, boolean isBossKilled) {
-		int scorePoints = pInstanceReward.getPointsByRace(reward.getRace());
+		int scorePoints = instanceScore.getPointsByRace(reward.getRace());
 		if (reward.getRace() == winningRace) {
-			reward.setBaseAp(pInstanceReward.getWinnerApReward() + (isBossKilled ? 3850 : 0)); // increased by 3850 if pashid is killed
+			reward.setBaseAp(instanceScore.getWinnerApReward() + (isBossKilled ? 3850 : 0)); // increased by 3850 if pashid is killed
 			reward.setBonusAp(2 * scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(100);
 			reward.setReward1(186000243, 9, 0); // Fragmented Ceramium
 			if (isBossKilled)
 				reward.setReward2(188052729, 1, 0); // Eternal Bastion Warfront Reward Chest
 		} else {
-			reward.setBaseAp(pInstanceReward.getLoserApReward());
+			reward.setBaseAp(instanceScore.getLoserApReward());
 			reward.setBonusAp(scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(10);
 			if (winningRace == Race.NONE)
-				reward.setBaseAp(pInstanceReward.getDrawApReward()); // Base AP are overridden in a draw case
+				reward.setBaseAp(instanceScore.getDrawApReward()); // Base AP are overridden in a draw case
 		}
 		distributeRewards(player, reward);
 	}
@@ -60,7 +60,7 @@ public class IronWallWarfrontInstance extends BasicPvpInstance {
 	protected void updatePoints(Player player, Race race, String npcL10n, int points) {
 		super.updatePoints(player, race, npcL10n, points);
 
-		int diff = Math.abs(pInstanceReward.getAsmodiansPoints() - pInstanceReward.getElyosPoints());
+		int diff = Math.abs(instanceScore.getAsmodiansPoints() - instanceScore.getElyosPoints());
 		if (diff >= 30000)
 			onStop(false);
 	}
@@ -146,7 +146,7 @@ public class IronWallWarfrontInstance extends BasicPvpInstance {
 
 	@Override
 	public void onInstanceCreate() {
-		pInstanceReward = new PvpInstanceReward<>(8400, 1680, 5040); // No info found for draws, so let's guess
+		instanceScore = new PvpInstanceScore<>(8400, 1680, 5040); // No info found for draws, so let's guess
 		super.onInstanceCreate();
 	}
 

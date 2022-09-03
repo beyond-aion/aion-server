@@ -2,22 +2,22 @@ package com.aionemu.gameserver.network.aion.instanceinfo;
 
 import java.nio.ByteBuffer;
 
-import com.aionemu.gameserver.model.instance.instancereward.PvPArenaReward;
+import com.aionemu.gameserver.model.instance.instancescore.PvPArenaScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 
 /**
  * @author xTz
  */
-public class ArenaOfGloryScoreInfo extends ArenaScoreInfo {
+public class ArenaOfGloryScoreWriter extends ArenaScoreWriter {
 
-	public ArenaOfGloryScoreInfo(PvPArenaReward reward, int ownerObjectId) {
+	public ArenaOfGloryScoreWriter(PvPArenaScore reward, int ownerObjectId) {
 		super(reward, ownerObjectId, false);
 	}
 
 	@Override
 	protected void writeOwnerRewards(ByteBuffer buf) {
-		PvPArenaPlayerReward rewardedPlayer = reward.getPlayerReward(ownerObjectId);
-		if (reward.isRewarded() && reward.canRewarded() && rewardedPlayer != null) {
+		PvPArenaPlayerReward rewardedPlayer = instanceScore.getPlayerReward(ownerObjectId);
+		if (instanceScore.isRewarded() && instanceScore.canRewarded() && rewardedPlayer != null) {
 			writeAP(buf, rewardedPlayer);
 			writeGP(buf, rewardedPlayer);
 			writeB(buf, new byte[32]);

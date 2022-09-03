@@ -13,9 +13,9 @@ import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.DarkPoetaReward;
+import com.aionemu.gameserver.model.instance.instancescore.DarkPoetaScore;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
-import com.aionemu.gameserver.network.aion.instanceinfo.DarkPoetaScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.DarkPoetaScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -34,7 +34,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 	private final List<Integer> excludedNpcs = new ArrayList<>();
 	private final AtomicInteger killedGenerators = new AtomicInteger();
-	private DarkPoetaReward instanceReward;
+	private DarkPoetaScore instanceReward;
 	private Future<?> instanceTimer;
 	private long startTime;
 
@@ -89,7 +89,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	private void sendPacket(Npc npc, int points) {
 		if (npc != null)
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npc.getObjectTemplate().getL10n(), points));
-		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new DarkPoetaScoreInfo(instanceReward), getTime()));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new DarkPoetaScoreWriter(instanceReward), getTime()));
 	}
 
 	private int checkRank(int totalPoints) {
@@ -275,7 +275,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate() {
 		excludedNpcs.addAll(Arrays.asList(700439, 700440, 700441, 700442, 700443, 700444, 700445, 700446, 700447, 281178));
-		instanceReward = new DarkPoetaReward();
+		instanceReward = new DarkPoetaScore();
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		startTime = System.currentTimeMillis();
 		instanceTimer = ThreadPoolManager.getInstance().schedule(() -> onStart(false), 121000);

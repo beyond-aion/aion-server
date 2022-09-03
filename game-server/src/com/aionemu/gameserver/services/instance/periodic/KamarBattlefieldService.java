@@ -18,7 +18,7 @@ public class KamarBattlefieldService extends PeriodicInstance {
 	}
 
 	private KamarBattlefieldService() {
-		super(KAMAR_ENABLE, KAMAR_TIMES, KAMAR_TIMER, new int[] { 107 }, (byte) 60, (byte) 66);
+		super(KAMAR_BATTLEFIELD_TIMES, KAMAR_BATTLEFIELD_REGISTRATION_PERIOD, new int[] { 107 }, (byte) 60, (byte) 66);
 	}
 
 	@Override

@@ -57,7 +57,7 @@ public class ChantraDredgionInstance extends DredgionInstance {
 		Race race = mostPlayerDamage.getRace();
 		captureRoom(race, npc.getNpcId() + 14 - 700851);
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_ROOM_DESTROYED(race.getL10n(), npc.getObjectTemplate().getL10n()));
-		getPlayerReward(mostPlayerDamage).captureZone();
+		getPlayerReward(mostPlayerDamage).incrementCapturedZones();
 		if (killedSurkanas.incrementAndGet() == 5) {
 			spawn(216886, 485.33f, 832.26f, 416.64f, (byte) 55);
 			sendMsgByRace(1400632, Race.PC_ALL, 0);
@@ -68,7 +68,7 @@ public class ChantraDredgionInstance extends DredgionInstance {
 
 	@Override
 	public void onDie(Npc npc) {
-		if (pInstanceReward.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS) {
+		if (instanceScore.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS) {
 			return;
 		}
 		switch (npc.getNpcId()) {
@@ -141,9 +141,9 @@ public class ChantraDredgionInstance extends DredgionInstance {
 				NpcActions.delete(npc);
 				return;
 			case 216886:
-				if (!pInstanceReward.isRewarded()) {
+				if (!instanceScore.isRewarded()) {
 					updateScore(mostPlayerDamage, npc, 1000, false);
-					stopInstance(pInstanceReward.getRaceWithHighestPoints());
+					stopInstance(instanceScore.getRaceWithHighestPoints());
 				}
 				return;
 			case 216941:

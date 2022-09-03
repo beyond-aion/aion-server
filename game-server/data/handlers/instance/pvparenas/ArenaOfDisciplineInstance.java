@@ -21,13 +21,13 @@ public class ArenaOfDisciplineInstance extends DisciplineTrainingGroundsInstance
 	@Override
 	protected void reward() {
 		int totalPoints = instanceReward.getTotalPoints();
-		int size = instanceReward.getInstanceRewards().size() == 1 ? (instanceReward.getRound() == 1 ? 1 : 2) : 2; // enemy left before start: low reward,
+		int size = instanceReward.getPlayerRewards().size() == 1 ? (instanceReward.getRound() == 1 ? 1 : 2) : 2; // enemy left before start: low reward,
 																																																								// else full
 		// 100 * (rate * size) * (playerScore / playersScore)
 		float totalAP = (3.292f * size) * 100; // to do config
 		float totalCrucible = (1.964f * size) * 100; // to do config
 		float totalCourage = (0.174f * size) * 100; // to do config
-		for (InstancePlayerReward playerReward : instanceReward.getInstanceRewards()) {
+		for (InstancePlayerReward playerReward : instanceReward.getPlayerRewards()) {
 			PvPArenaPlayerReward reward = (PvPArenaPlayerReward) playerReward;
 			if (!reward.isRewarded()) {
 				Player player = instance.getPlayer(playerReward.getOwnerId());

@@ -9,16 +9,16 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author Tibald, Sykra
  */
-public class IronWallFrontService extends PeriodicInstance {
+public class IronWallWarfrontService extends PeriodicInstance {
 
-	private static final IronWallFrontService INSTANCE = new IronWallFrontService();
+	private static final IronWallWarfrontService INSTANCE = new IronWallWarfrontService();
 
-	public static IronWallFrontService getInstance() {
+	public static IronWallWarfrontService getInstance() {
 		return INSTANCE;
 	}
 
-	private IronWallFrontService() {
-		super(IRON_WALL_FRONT_ENABLE, IRON_WALL_FRONT_TIMES, IRON_WALL_FRONT_TIMER, new int[] { 109 }, (byte) 60, (byte) 66);
+	private IronWallWarfrontService() {
+		super(IRON_WALL_WARFRONT_TIMES, IRON_WALL_WARFRONT_REGISTRATION_PERIOD, new int[] { 109 }, (byte) 60, (byte) 66);
 	}
 
 	@Override

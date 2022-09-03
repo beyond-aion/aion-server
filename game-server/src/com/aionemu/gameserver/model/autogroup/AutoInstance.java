@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
+import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -84,8 +84,8 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 
 	protected boolean satisfyTime(SearchInstance searchInstance) {
 		if (instance != null) {
-			InstanceReward<?> instanceReward = instance.getInstanceHandler().getInstanceReward();
-			if ((instanceReward != null && instanceReward.getInstanceProgressionType().isEndProgress()))
+			InstanceScore<?> instanceScore = instance.getInstanceHandler().getInstanceScore();
+			if ((instanceScore != null && instanceScore.getInstanceProgressionType().isEndProgress()))
 				return false;
 		}
 		if (!searchInstance.getEntryRequestType().isQuickGroupEntry())

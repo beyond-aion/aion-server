@@ -15,7 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.playerreward.CruciblePlayerReward;
-import com.aionemu.gameserver.network.aion.instanceinfo.CrucibleScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.CrucibleScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_STAGE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -75,7 +75,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		boolean isNew = !instanceReward.containsPlayer(player.getObjectId());
+		boolean isNew = !instanceScore.containsPlayer(player.getObjectId());
 		super.onEnterInstance(player); // creates player reward
 		if (stage > 0) {
 			CruciblePlayerReward playerReward = getPlayerReward(player.getObjectId());
@@ -90,7 +90,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				return;
 			}
 		}
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreInfo(instanceReward)));
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreWriter(instanceScore)));
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, stageType.getId(), stageType.getType()));
 	}
 
@@ -102,7 +102,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				if (!playerReward.isRewarded()) {
 					playerReward.addPoints(points);
 				}
-				PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreInfo(instanceReward)));
+				PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreWriter(instanceScore)));
 			}
 		});
 	}
@@ -928,8 +928,8 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 		} else {
 			TeleportService.teleportTo(player, mapId, player.getInstanceId(), 381.41684f, 346.78162f, 96.74763f, (byte) 43);
 		}
-		instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreInfo(instanceReward)));
+		instanceScore.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreWriter(instanceScore)));
 	}
 
 	@Override

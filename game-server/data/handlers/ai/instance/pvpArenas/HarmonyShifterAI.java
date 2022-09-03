@@ -7,7 +7,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.instancereward.HarmonyArenaReward;
+import com.aionemu.gameserver.model.instance.instancescore.HarmonyArenaScore;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 import ai.ShifterAI;
@@ -44,7 +44,7 @@ public class HarmonyShifterAI extends ShifterAI {
 	}
 
 	private void useSkill(List<Npc> npcs) {
-		HarmonyArenaReward instance = (HarmonyArenaReward) getPosition().getWorldMapInstance().getInstanceHandler().getInstanceReward();
+		HarmonyArenaScore instance = (HarmonyArenaScore) getPosition().getWorldMapInstance().getInstanceHandler().getInstanceScore();
 		for (Npc npc : npcs) {
 			int skill = instance.getNpcBonusSkill(npc.getNpcId());
 			SkillEngine.getInstance().getSkill(npc, skill >> 8, skill & 0xFF, npc).useNoAnimationSkill();

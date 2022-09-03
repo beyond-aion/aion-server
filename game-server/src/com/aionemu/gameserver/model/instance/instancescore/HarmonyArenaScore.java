@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.model.instance.instancereward;
+package com.aionemu.gameserver.model.instance.instancescore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
-import com.aionemu.gameserver.network.aion.instanceinfo.HarmonyScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.HarmonyScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -15,11 +15,11 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @author xTz
  */
-public class HarmonyArenaReward extends PvPArenaReward {
+public class HarmonyArenaScore extends PvPArenaScore {
 
 	private List<HarmonyGroupReward> groups = new ArrayList<>();
 
-	public HarmonyArenaReward(WorldMapInstance instance) {
+	public HarmonyArenaScore(WorldMapInstance instance) {
 		super(instance);
 	}
 
@@ -66,7 +66,7 @@ public class HarmonyArenaReward extends PvPArenaReward {
 
 	public void sendPacket(int type, Player owner) {
 		int time = getTime();
-		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(this, type, owner == null ? player : owner), time)));
+		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter(this, type, owner == null ? player : owner), time)));
 	}
 
 	@Override

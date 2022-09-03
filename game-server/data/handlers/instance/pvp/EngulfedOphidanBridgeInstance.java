@@ -8,9 +8,9 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
-import com.aionemu.gameserver.model.instance.instancereward.PvpInstanceReward;
+import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
-import com.aionemu.gameserver.network.aion.instanceinfo.PvpInstanceScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.PvpInstanceScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -21,13 +21,35 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @author Tibald
  */
 @InstanceID(301210000)
-public class EngulfedOphidianBridgeInstance extends BasicPvpInstance {
+public class EngulfedOphidanBridgeInstance extends BasicPvpInstance {
 
 	private final static int MAX_PLAYERS_PER_FACTION = 6;
 	private int timeInMin = 0;
 
-	public EngulfedOphidianBridgeInstance(WorldMapInstance instance) {
+	public EngulfedOphidanBridgeInstance(WorldMapInstance instance) {
 		super(instance);
+	}
+
+	@Override
+	protected void spawnFactionRelatedNpcs() {
+		spawn((raceStartPosition == 0 ? 802025 : 802026), 753.31775f, 570.89905f, 577.3619f, (byte) 36);
+		spawn((raceStartPosition == 0 ? 701949 : 701948), 753.31775f, 570.89905f, 577.3619f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701949 : 701948), 767.931f, 569.22375f, 577.3449f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701949 : 701948), 768.46606f, 534.54016f, 576.375f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701949 : 701948), 773.47577f, 552.68604f, 576.5519f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701949 : 701948), 776.1901f, 569.8358f, 576.91437f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701947 : 701950), 739.6952f, 536.6952f, 576.5571f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701947 : 701950), 741.9557f, 557.69574f, 576.7407f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 701947 : 701950), 744.59814f, 573.4721f, 577.14624f, (byte) 87);
+		spawn((raceStartPosition == 0 ? 802025 : 802026), 311.8876f, 570.89905f, 597.13184f, (byte) 70);
+		spawn((raceStartPosition == 0 ? 701948 : 701949), 300.15576f, 500.93283f, 597.13184f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701948 : 701949), 300.3278f, 476.23727f, 597.13184f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701948 : 701949), 309.21387f, 509.46008f, 596.54047f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701948 : 701949), 327.29257f, 506.21063f, 596.5348f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701948 : 701949), 347.668f, 504.71292f, 595.2064f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701950 : 701947), 311.0972f, 469.62903f, 596.54047f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701950 : 701947), 328.51215f, 474.87762f, 596.53375f, (byte) 0);
+		spawn((raceStartPosition == 0 ? 701950 : 701947), 346.49152f, 478.24072f, 595.2064f, (byte) 0);
 	}
 
 	@Override
@@ -177,19 +199,19 @@ public class EngulfedOphidianBridgeInstance extends BasicPvpInstance {
 
 	@Override
 	protected void setAndDistributeRewards(Player player, PvpInstancePlayerReward reward, Race winningRace, boolean isBossKilled) {
-		int scorePoints = pInstanceReward.getPointsByRace(reward.getRace());
+		int scorePoints = instanceScore.getPointsByRace(reward.getRace());
 		if (reward.getRace() == winningRace) {
-			reward.setBaseAp(pInstanceReward.getWinnerApReward());
+			reward.setBaseAp(instanceScore.getWinnerApReward());
 			reward.setBonusAp(2 * scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(50);
 			reward.setReward1(188052681, 1, 0);
 		} else {
-			reward.setBaseAp(pInstanceReward.getLoserApReward());
+			reward.setBaseAp(instanceScore.getLoserApReward());
 			reward.setBonusAp(scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(10);
 			reward.setReward1(188053209, 1, 0);
 			if (winningRace == Race.NONE)
-				reward.setBaseAp(pInstanceReward.getDrawApReward()); // Base AP are overridden in a draw case
+				reward.setBaseAp(instanceScore.getDrawApReward()); // Base AP are overridden in a draw case
 		}
 		distributeRewards(player, reward);
 	}
@@ -198,22 +220,22 @@ public class EngulfedOphidianBridgeInstance extends BasicPvpInstance {
 	protected void updatePoints(Player player, Race race, String npcL10n, int points) {
 		super.updatePoints(player, race, npcL10n, points);
 
-		int diff = Math.abs(pInstanceReward.getAsmodiansPoints() - pInstanceReward.getElyosPoints());
+		int diff = Math.abs(instanceScore.getAsmodiansPoints() - instanceScore.getElyosPoints());
 		if (diff >= 30000)
 			onStop(false);
 	}
 
 	private void updatePointsByGenerators(List<Npc> generators, Race race, boolean check) {
-		if (check && !pInstanceReward.isStartProgress())
+		if (check && !instanceScore.isStartProgress())
 			return;
 		if (generators.isEmpty())
 			return;
 		int points = generators.size() * 100;
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(generators.get(0).getObjectTemplate().getL10n(), points));
-		pInstanceReward.addPointsByRace(race, points);
+		instanceScore.addPointsByRace(race, points);
 		sendPacket(
-			new SM_INSTANCE_SCORE(instance.getMapId(), new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.UPDATE_FACTION_SCORE, race), getTime()));
-		int diff = Math.abs(pInstanceReward.getAsmodiansPoints() - pInstanceReward.getElyosPoints());
+			new SM_INSTANCE_SCORE(instance.getMapId(), new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_FACTION_SCORE, race), getTime()));
+		int diff = Math.abs(instanceScore.getAsmodiansPoints() - instanceScore.getElyosPoints());
 		if (diff >= 30000)
 			onStop(false);
 	}
@@ -279,22 +301,10 @@ public class EngulfedOphidianBridgeInstance extends BasicPvpInstance {
 		if (npc.getNpcId() == 701944 || npc.getNpcId() == 701943) {
 			int npcId = 701945;
 			switch (npc.getSpawn().getStaticId()) {
-				case 172:
-				case 173:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 164);
-					break;
-				case 169:
-				case 166:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 158);
-					break;
-				case 170:
-				case 171:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 162);
-					break;
-				case 175:
-				case 174:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 160);
-					break;
+				case 172, 173 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 164);
+				case 169, 166 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 158);
+				case 170, 171 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 162);
+				case 175, 174 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), 160);
 			}
 			updatePoints(null, npc.getRace(), null, -5000);
 			npc.getController().delete();
@@ -309,34 +319,14 @@ public class EngulfedOphidianBridgeInstance extends BasicPvpInstance {
 				return;
 			}
 			switch (npc.getSpawn().getStaticId()) {
-				case 164:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 172 : 173);
-					break;
-				case 158:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 169 : 166);
-					break;
-				case 162:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 171 : 170);
-					break;
-				case 160:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
-					break;
-				case 172:
-				case 173:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 172 : 173);
-					break;
-				case 169:
-				case 166:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 169 : 166);
-					break;
-				case 170:
-				case 171:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 171 : 170);
-					break;
-				case 175:
-				case 174:
-					spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
-					break;
+				case 164 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 172 : 173);
+				case 158 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 169 : 166);
+				case 162 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 171 : 170);
+				case 160 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
+				case 172, 173 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 172 : 173);
+				case 169, 166 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 169 : 166);
+				case 170, 171 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 171 : 170);
+				case 175, 174 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
 			}
 			updatePoints(player, player.getRace(), npc.getObjectTemplate().getL10n(), 5000);
 			npc.getController().delete();
@@ -350,26 +340,7 @@ public class EngulfedOphidianBridgeInstance extends BasicPvpInstance {
 
 	@Override
 	public void onInstanceCreate() {
-		pInstanceReward = new PvpInstanceReward<>(5600, 1120, 3360); // No info found for draws, so let's guess
-
-		spawn((raceStartPosition == 0 ? 802025 : 802026), 753.31775f, 570.89905f, 577.3619f, (byte) 36);
-		spawn((raceStartPosition == 0 ? 701949 : 701948), 753.31775f, 570.89905f, 577.3619f, (byte) 87);
-		spawn((raceStartPosition == 0 ? 701949 : 701948), 767.931f, 569.22375f, 577.3449f, (byte) 87);
-		spawn((raceStartPosition == 0 ? 701949 : 701948), 768.46606f, 534.54016f, 576.375f, (byte) 87);
-		spawn((raceStartPosition == 0 ? 701949 : 701948), 773.47577f, 552.68604f, 576.5519f, (byte) 87);
-		spawn((raceStartPosition == 0 ? 701949 : 701948), 776.1901f, 569.8358f, 576.91437f, (byte) 87);
-		spawn((raceStartPosition == 0 ? 701947 : 701950), 739.6952f, 536.6952f, 576.5571f, (byte) 87);
-		spawn((raceStartPosition == 0 ? 701947 : 701950), 741.9557f, 557.69574f, 576.7407f, (byte) 87);
-		spawn((raceStartPosition == 0 ? 701947 : 701950), 744.59814f, 573.4721f, 577.14624f, (byte) 87);
-		spawn((raceStartPosition == 0 ? 802025 : 802026), 311.8876f, 570.89905f, 597.13184f, (byte) 70);
-		spawn((raceStartPosition == 0 ? 701948 : 701949), 300.15576f, 500.93283f, 597.13184f, (byte) 0);
-		spawn((raceStartPosition == 0 ? 701948 : 701949), 300.3278f, 476.23727f, 597.13184f, (byte) 0);
-		spawn((raceStartPosition == 0 ? 701948 : 701949), 309.21387f, 509.46008f, 596.54047f, (byte) 0);
-		spawn((raceStartPosition == 0 ? 701948 : 701949), 327.29257f, 506.21063f, 596.5348f, (byte) 0);
-		spawn((raceStartPosition == 0 ? 701948 : 701949), 347.668f, 504.71292f, 595.2064f, (byte) 0);
-		spawn((raceStartPosition == 0 ? 701950 : 701947), 311.0972f, 469.62903f, 596.54047f, (byte) 0);
-		spawn((raceStartPosition == 0 ? 701950 : 701947), 328.51215f, 474.87762f, 596.53375f, (byte) 0);
-		spawn((raceStartPosition == 0 ? 701950 : 701947), 346.49152f, 478.24072f, 595.2064f, (byte) 0);
+		instanceScore = new PvpInstanceScore<>(5600, 1120, 3360); // No info found for draws, so let's guess
 		super.onInstanceCreate();
 	}
 

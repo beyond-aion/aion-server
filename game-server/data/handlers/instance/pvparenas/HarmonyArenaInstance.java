@@ -12,11 +12,11 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.HarmonyArenaReward;
-import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
+import com.aionemu.gameserver.model.instance.instancescore.HarmonyArenaScore;
+import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
-import com.aionemu.gameserver.network.aion.instanceinfo.HarmonyScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.HarmonyScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -39,7 +39,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 
 	protected int killBonus = 1000;
 	protected int deathFine = -150;
-	protected HarmonyArenaReward instanceReward;
+	protected HarmonyArenaScore instanceReward;
 	protected boolean isInstanceDestroyed;
 
 	public HarmonyArenaInstance(WorldMapInstance instance) {
@@ -47,7 +47,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public InstanceReward<?> getInstanceReward() {
+	public InstanceScore<?> getInstanceScore() {
 		return instanceReward;
 	}
 
@@ -73,21 +73,21 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 		instance.forEachPlayer(opponent -> {
 			if (!group.containPlayer(opponent.getObjectId())) {
 				PacketSendUtility.sendPacket(opponent,
-					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 10, player), getTime()));
+					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter(instanceReward, 10, player), getTime()));
 				PacketSendUtility.sendPacket(player,
-					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 10, opponent), getTime()));
+					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter(instanceReward, 10, opponent), getTime()));
 				PacketSendUtility.sendPacket(opponent,
-					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 3, player), getTime()));
+					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter(instanceReward, 3, player), getTime()));
 			} else {
 				PacketSendUtility.sendPacket(opponent,
-					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 10, opponent), getTime()));
+					new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter(instanceReward, 10, opponent), getTime()));
 				if (!Objects.equals(objectId, opponent.getObjectId())) {
 					PacketSendUtility.sendPacket(opponent,
-						new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 3, player), getTime()));
+						new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter(instanceReward, 3, player), getTime()));
 				}
 			}
 		});
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreInfo(instanceReward, 6, player), getTime()));
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter(instanceReward, 6, player), getTime()));
 		instanceReward.sendPacket(4, player);
 	}
 
@@ -175,7 +175,7 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onInstanceCreate() {
-		instanceReward = new HarmonyArenaReward(instance);
+		instanceReward = new HarmonyArenaScore(instance);
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		instanceReward.setInstanceStartTime();
 		spawnRings();

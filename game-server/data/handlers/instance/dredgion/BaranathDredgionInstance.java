@@ -42,7 +42,7 @@ public class BaranathDredgionInstance extends DredgionInstance {
 			spawn(214823, 485.423f, 808.826f, 416.868f, (byte) 30);
 			sendMsgByRace(1401416, Race.PC_ALL, 0);
 		}
-		getPlayerReward(mostPlayerDamage).captureZone();
+		getPlayerReward(mostPlayerDamage).incrementCapturedZones();
 		updateScore(mostPlayerDamage, npc, points, false);
 		NpcActions.delete(npc);
 	}
@@ -50,7 +50,7 @@ public class BaranathDredgionInstance extends DredgionInstance {
 	@Override
 	public void onDie(Npc npc) {
 		Player mostPlayerDamage = npc.getAggroList().getMostPlayerDamage();
-		if (mostPlayerDamage == null || pInstanceReward.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS) {
+		if (mostPlayerDamage == null || instanceScore.getInstanceProgressionType() != InstanceProgressionType.START_PROGRESS) {
 			return;
 		}
 		Race race = mostPlayerDamage.getRace();

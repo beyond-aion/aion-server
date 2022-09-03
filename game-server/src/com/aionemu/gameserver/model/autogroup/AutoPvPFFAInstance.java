@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.autogroup;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.instancereward.PvPArenaReward;
+import com.aionemu.gameserver.model.instance.instancescore.PvPArenaScore;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -48,7 +48,7 @@ public class AutoPvPFFAInstance extends AutoInstance {
 				return;
 			}
 		}
-		((PvPArenaReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player);
+		((PvPArenaScore) instance.getInstanceHandler().getInstanceScore()).portToPosition(player);
 		instance.register(player.getObjectId());
 	}
 

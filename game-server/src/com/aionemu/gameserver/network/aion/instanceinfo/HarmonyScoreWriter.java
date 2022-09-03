@@ -5,19 +5,19 @@ import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
-import com.aionemu.gameserver.model.instance.instancereward.HarmonyArenaReward;
+import com.aionemu.gameserver.model.instance.instancescore.HarmonyArenaScore;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 
 /**
  * @author xTz
  */
-public class HarmonyScoreInfo extends InstanceScoreInfo<HarmonyArenaReward> {
+public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 
 	private final int type;
 	private final Player owner;
 
-	public HarmonyScoreInfo(HarmonyArenaReward reward, int type, Player owner) {
+	public HarmonyScoreWriter(HarmonyArenaScore reward, int type, Player owner) {
 		super(reward);
 		this.type = type;
 		this.owner = owner;
@@ -25,12 +25,12 @@ public class HarmonyScoreInfo extends InstanceScoreInfo<HarmonyArenaReward> {
 
 	@Override
 	public void writeMe(ByteBuffer buf) {
-		HarmonyGroupReward harmonyGroupReward = reward.getHarmonyGroupReward(owner.getObjectId());
+		HarmonyGroupReward harmonyGroupReward = instanceScore.getHarmonyGroupReward(owner.getObjectId());
 		writeC(buf, type);
 		switch (type) {
 			case 2:
 				writeD(buf, 0);
-				writeD(buf, reward.getRound());
+				writeD(buf, instanceScore.getRound());
 				break;
 			case 3:
 				writeD(buf, harmonyGroupReward.getOwnerId());
@@ -39,7 +39,7 @@ public class HarmonyScoreInfo extends InstanceScoreInfo<HarmonyArenaReward> {
 				writeD(buf, owner.getObjectId()); // memberObj
 				break;
 			case 4:
-				writeD(buf, reward.getPlayerReward(owner.getObjectId()).getRemaningTime()); // buffTime
+				writeD(buf, instanceScore.getPlayerReward(owner.getObjectId()).getRemaningTime()); // buffTime
 				writeD(buf, 0);
 				writeD(buf, 0);
 				writeD(buf, owner.getObjectId()); // memberObj
@@ -83,25 +83,25 @@ public class HarmonyScoreInfo extends InstanceScoreInfo<HarmonyArenaReward> {
 				break;
 			case 6:
 				writeD(buf, 0);
-				writeD(buf, reward.getCapPoints()); // capPoints
+				writeD(buf, instanceScore.getCapPoints()); // capPoints
 				writeD(buf, 3); // possible rounds
 				writeD(buf, 1);
-				writeD(buf, reward.getBuffId());
+				writeD(buf, instanceScore.getBuffId());
 				writeD(buf, 0);
 				writeD(buf, 0);
-				writeD(buf, reward.getRound()); // round
-				List<HarmonyGroupReward> groups = reward.getHarmonyGroupInside();
+				writeD(buf, instanceScore.getRound()); // round
+				List<HarmonyGroupReward> groups = instanceScore.getHarmonyGroupInside();
 				writeC(buf, groups.size()); // size
 				for (HarmonyGroupReward group : groups) {
-					writeC(buf, reward.getRank(group.getPoints()));
+					writeC(buf, instanceScore.getRank(group.getPoints()));
 					writeD(buf, group.getPvPKills());
 					writeD(buf, group.getPoints()); // groupScore
 					writeD(buf, group.getId()); // groupObj
-					List<Player> members = reward.getPlayersInside(group);
+					List<Player> members = instanceScore.getPlayersInside(group);
 					writeC(buf, members.size());
 					int i = 0;
 					for (Player p : members) {
-						PvPArenaPlayerReward rewardedPlayer = reward.getPlayerReward(p.getObjectId());
+						PvPArenaPlayerReward rewardedPlayer = instanceScore.getPlayerReward(p.getObjectId());
 						writeD(buf, 0);
 						writeD(buf, rewardedPlayer.getRemaningTime()); // buffTime
 						writeD(buf, 0);
@@ -115,7 +115,7 @@ public class HarmonyScoreInfo extends InstanceScoreInfo<HarmonyArenaReward> {
 				}
 				break;
 			case 10:
-				writeC(buf, reward.getRank(harmonyGroupReward.getPoints()));
+				writeC(buf, instanceScore.getRank(harmonyGroupReward.getPoints()));
 				writeD(buf, harmonyGroupReward.getPvPKills()); // kills
 				writeD(buf, harmonyGroupReward.getPoints()); // groupScore
 				writeD(buf, harmonyGroupReward.getId()); // groupObj

@@ -266,21 +266,21 @@ public enum AutoGroupType implements L10n {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoKamarInstance(this);
+			return new AutoKamarBattlefieldInstance(this);
 		}
 	},
 	ENGULFED_OPHIDIAN_BRIDGE(108, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoEngulfedOphidianBridgeInstance(this);
+			return new AutoEngulfedOphidanBridgeInstance(this);
 		}
 	},
 	IRON_WALL_WARFRONT(109, 600000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoIronWallFrontInstance(this);
+			return new AutoIronWallWarfrontInstance(this);
 		}
 	},
 	IDGEL_DOME(111, 600000) {
@@ -381,18 +381,18 @@ public enum AutoGroupType implements L10n {
 	}
 
 	public boolean isIconInvite() {
-		return isDredgion() || isKamar() || isEngulfedOB() || isIronWarFront() || isIdgelDome();
+		return isDredgion() || isKamarBattlefield() || isEngulfedOphidanBridge() || isIronWallWarfront() || isIdgelDome();
 	}
 
-	public boolean isKamar() {
+	public boolean isKamarBattlefield() {
 		return this.equals(AutoGroupType.KAMAR_BATTLEFIELD);
 	}
 
-	public boolean isEngulfedOB() {
+	public boolean isEngulfedOphidanBridge() {
 		return this.equals(AutoGroupType.ENGULFED_OPHIDIAN_BRIDGE);
 	}
 
-	public boolean isIronWarFront() {
+	public boolean isIronWallWarfront() {
 		return this.equals(AutoGroupType.IRON_WALL_WARFRONT);
 	}
 

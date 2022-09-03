@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.instancereward.HarmonyArenaReward;
+import com.aionemu.gameserver.model.instance.instancescore.HarmonyArenaScore;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
@@ -29,7 +29,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		HarmonyArenaReward reward = (HarmonyArenaReward) instance.getInstanceHandler().getInstanceReward();
+		HarmonyArenaScore reward = (HarmonyArenaScore) instance.getInstanceHandler().getInstanceScore();
 		reward.addHarmonyGroup(new HarmonyGroupReward(0, 12000, (byte) 7, group1, agt));
 		reward.addHarmonyGroup(new HarmonyGroupReward(1, 12000, (byte) 7, group2, agt));
 	}
@@ -72,7 +72,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 				return;
 			}
 		}
-		((HarmonyArenaReward) instance.getInstanceHandler().getInstanceReward()).portToPosition(player);
+		((HarmonyArenaScore) instance.getInstanceHandler().getInstanceScore()).portToPosition(player);
 		instance.register(player.getObjectId());
 	}
 
@@ -88,7 +88,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 			List<Player> _players = getPlayerFromGroup(group);
 			_players.remove(player);
 			if (_players.size() == 1 && !_players.get(0).isInGroup()) {
-				HarmonyArenaReward reward = (HarmonyArenaReward) instance.getInstanceHandler().getInstanceReward();
+				HarmonyArenaScore reward = (HarmonyArenaScore) instance.getInstanceHandler().getInstanceScore();
 				HarmonyGroupReward r = reward.getHarmonyGroupReward(objectId);
 				PlayerGroup newGroup = PlayerGroupService.createGroup(_players.get(0), player, TeamType.AUTO_GROUP, r.getId());
 				int groupId = newGroup.getObjectId();

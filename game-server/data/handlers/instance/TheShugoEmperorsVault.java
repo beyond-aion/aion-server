@@ -17,9 +17,9 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
-import com.aionemu.gameserver.model.instance.instancereward.NormalReward;
-import com.aionemu.gameserver.network.aion.instanceinfo.TheShugoEmperorsVaultScoreInfo;
+import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
+import com.aionemu.gameserver.model.instance.instancescore.NormalScore;
+import com.aionemu.gameserver.network.aion.instanceinfo.TheShugoEmperorsVaultScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -41,7 +41,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	private final Map<Integer, Integer> transformationCache = new ConcurrentHashMap<>(); // saves the applied transformation to avoid effect loss during sendlogs
 	private final AtomicBoolean started = new AtomicBoolean();
 	private final List<Integer> spawns = new ArrayList<>();
-	private NormalReward instanceReward;
+	private NormalScore instanceReward;
 	private Future<?> timer, failTimerTask;
 	private long startTime;
 	private volatile int amount, stage;
@@ -53,7 +53,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 
 	@Override
 	public void onInstanceCreate() {
-		instanceReward = new NormalReward();
+		instanceReward = new NormalScore();
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		spawnMorphShugos();
 		if (timer == null) {
@@ -558,7 +558,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	private void sendPacket(String npcL10n, int points) {
 		if (npcL10n != null)
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new TheShugoEmperorsVaultScoreInfo(instanceReward), getTime()));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new TheShugoEmperorsVaultScoreWriter(instanceReward), getTime()));
 	}
 
 	private int getTime() {
@@ -572,7 +572,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public InstanceReward<?> getInstanceReward() {
+	public InstanceScore<?> getInstanceScore() {
 		return instanceReward;
 	}
 

@@ -4,7 +4,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
+import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 
 import ai.ActionItemNpcAI;
 
@@ -22,7 +22,7 @@ public class RelicsAI extends ActionItemNpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		InstanceReward<?> instance = getPosition().getWorldMapInstance().getInstanceHandler().getInstanceReward();
+		InstanceScore<?> instance = getPosition().getWorldMapInstance().getInstanceHandler().getInstanceScore();
 		if (instance != null && !instance.isStartProgress()) {
 			return;
 		}

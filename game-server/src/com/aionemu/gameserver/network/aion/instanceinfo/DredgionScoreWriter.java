@@ -5,19 +5,19 @@ import java.util.List;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.instance.DredgionRooms;
-import com.aionemu.gameserver.model.instance.instancereward.PvpInstanceReward;
+import com.aionemu.gameserver.model.instance.DredgionRoom;
+import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 
 /**
  * @author xTz
  */
-public class DredgionScoreInfo extends InstanceScoreInfo<PvpInstanceReward<PvpInstancePlayerReward>> {
+public class DredgionScoreWriter extends InstanceScoreWriter<PvpInstanceScore<PvpInstancePlayerReward>> {
 
 	private final List<Player> players;
-	private final List<DredgionRooms> dredgionRooms;
+	private final List<DredgionRoom> dredgionRooms;
 
-	public DredgionScoreInfo(PvpInstanceReward<PvpInstancePlayerReward> reward, List<Player> players, List<DredgionRooms> dredgionRooms) {
+	public DredgionScoreWriter(PvpInstanceScore<PvpInstancePlayerReward> reward, List<Player> players, List<DredgionRoom> dredgionRooms) {
 		super(reward);
 		this.players = players;
 		this.dredgionRooms = dredgionRooms;
@@ -27,9 +27,9 @@ public class DredgionScoreInfo extends InstanceScoreInfo<PvpInstanceReward<PvpIn
 	public void writeMe(ByteBuffer buf) {
 		fillTableWithGroup(buf, Race.ELYOS);
 		fillTableWithGroup(buf, Race.ASMODIANS);
-		int elyosScore = reward.getElyosPoints();
-		int asmosScore = reward.getAsmodiansPoints();
-		writeD(buf, reward.getInstanceProgressionType().isEndProgress() ? (asmosScore > elyosScore ? 1 : 0) : 255);
+		int elyosScore = instanceScore.getElyosPoints();
+		int asmosScore = instanceScore.getAsmodiansPoints();
+		writeD(buf, instanceScore.getInstanceProgressionType().isEndProgress() ? (asmosScore > elyosScore ? 1 : 0) : 255);
 		writeD(buf, elyosScore);
 		writeD(buf, asmosScore);
 		dredgionRooms.forEach(d -> writeC(buf, d.getState()));
@@ -41,7 +41,7 @@ public class DredgionScoreInfo extends InstanceScoreInfo<PvpInstanceReward<PvpIn
 			if (race != player.getRace()) {
 				continue;
 			}
-			PvpInstancePlayerReward playerReward = reward.getPlayerReward(player.getObjectId());
+			PvpInstancePlayerReward playerReward = instanceScore.getPlayerReward(player.getObjectId());
 			writeD(buf, playerReward.getOwnerId()); // playerObjectId
 			writeD(buf, player.getAbyssRank().getRank().getId()); // playerRank
 			writeD(buf, playerReward.getPvPKills()); // pvpKills
@@ -49,7 +49,7 @@ public class DredgionScoreInfo extends InstanceScoreInfo<PvpInstanceReward<PvpIn
 			writeD(buf, playerReward.getCapturedZones()); // captured
 			writeD(buf, playerReward.getPoints()); // playerScore
 
-			if (reward.getInstanceProgressionType().isEndProgress()) {
+			if (instanceScore.getInstanceProgressionType().isEndProgress()) {
 				writeD(buf, playerReward.getBonusAp() + playerReward.getBaseAp()); // Client needs to know the sum here
 				writeD(buf, playerReward.getBaseAp());
 			} else {

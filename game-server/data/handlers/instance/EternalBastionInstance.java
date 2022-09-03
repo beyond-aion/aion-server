@@ -18,8 +18,8 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.NormalReward;
-import com.aionemu.gameserver.network.aion.instanceinfo.NormalScoreInfo;
+import com.aionemu.gameserver.model.instance.instancescore.NormalScore;
+import com.aionemu.gameserver.network.aion.instanceinfo.NormalScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
@@ -53,7 +53,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	private int assaultsMobsCount;
 	private Future<?> bombersTask;
 	private long startTime;
-	private NormalReward instanceReward;
+	private NormalScore instanceReward;
 	private boolean isInstanceDestroyed;
 	private boolean isSpawned = false;
 	private final AtomicInteger killedOfficer = new AtomicInteger();
@@ -210,7 +210,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	protected void sendPacket(String npcL10n, int points) {
 		if (npcL10n != null)
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new NormalScoreInfo(instanceReward), getTime()));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new NormalScoreWriter(instanceReward), getTime()));
 	}
 
 	/*
@@ -401,7 +401,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onInstanceCreate() {
-		instanceReward = new NormalReward();
+		instanceReward = new NormalScore();
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		instanceReward.setBasicAp(20000);
 		instanceReward.setPoints(20000);

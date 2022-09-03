@@ -14,11 +14,11 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
-import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
-import com.aionemu.gameserver.model.instance.instancereward.PvpInstanceReward;
+import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
+import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.network.aion.instanceinfo.PvpInstanceScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.PvpInstanceScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -44,7 +44,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 
 	protected final List<Future<?>> tasks = new ArrayList<>();
 	protected final int raceStartPosition = Rnd.get(2);
-	protected PvpInstanceReward<PvpInstancePlayerReward> pInstanceReward;
+	protected PvpInstanceScore<PvpInstancePlayerReward> instanceScore;
 	protected long startTime;
 
 	public BasicPvpInstance(WorldMapInstance instance) {
@@ -53,11 +53,11 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onInstanceCreate() {
-		if (pInstanceReward == null)
+		if (instanceScore == null)
 			return;
 
-		pInstanceReward.addPointsByRace(Race.ELYOS, 1000);
-		pInstanceReward.addPointsByRace(Race.ASMODIANS, 1000);
+		instanceScore.addPointsByRace(Race.ELYOS, 1000);
+		instanceScore.addPointsByRace(Race.ASMODIANS, 1000);
 		updateProgress(InstanceProgressionType.REINFORCE_MEMBER);
 		spawnFactionRelatedNpcs();
 		tasks.add(ThreadPoolManager.getInstance().schedule(this::startPreparation, getReinforceMemberPhaseDelay()));
@@ -78,8 +78,8 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 		cancelTasks();
 		updateProgress(InstanceProgressionType.END_PROGRESS);
 
-		Race winningRace = pInstanceReward.getRaceWithHighestPoints();
-		instance.forEachPlayer(p -> setAndDistributeRewards(p, pInstanceReward.getPlayerReward(p.getObjectId()), winningRace, isBossKilled));
+		Race winningRace = instanceScore.getRaceWithHighestPoints();
+		instance.forEachPlayer(p -> setAndDistributeRewards(p, instanceScore.getPlayerReward(p.getObjectId()), winningRace, isBossKilled));
 		instance.forEachNpc(npc -> npc.getController().delete());
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> instance.getPlayersInside().forEach(this::revivePlayerOnEnd), 10000));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> instance.getPlayersInside().forEach(this::onExitInstance), 60000));
@@ -91,7 +91,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 
 	protected void distributeRewards(Player player, PvpInstancePlayerReward reward) {
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.SHOW_REWARD, player.getObjectId(), 0), getTime()));
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.SHOW_REWARD, player.getObjectId(), 0), getTime()));
 		AbyssPointsService.addAp(player, (int) Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
 		int gpToAdd = reward.getBaseGp() + reward.getBonusGp();
 		if (gpToAdd > 0)
@@ -115,17 +115,17 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 
 		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));
 	}
 
 	@Override
 	public boolean onDie(Player victim, Creature lastAttacker) {
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS, victim.getObjectId(), 60), getTime()));
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS, victim.getObjectId(), 60), getTime()));
 		PacketSendUtility.sendPacket(victim, new SM_DIE(victim.canUseRebirthRevive(), false, 0, 8));
 		if (lastAttacker instanceof Player killer && killer.getRace() != victim.getRace()) {
 			int killPoints = 200;
-			if (pInstanceReward.isStartProgress() && getTime() <= 600000 && victim.getRace() != pInstanceReward.getRaceWithHighestPoints())
+			if (instanceScore.isStartProgress() && getTime() <= 600000 && victim.getRace() != instanceScore.getRaceWithHighestPoints())
 				killPoints += 100; // After 10 minutes the outplayed faction gets bonus points
 
 			if (victim.getAbyssRank().getRank().getId() - killer.getAbyssRank().getRank().getId() >= 4)
@@ -145,7 +145,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 		player.getGameStats().updateStatsAndSpeedVisually();
 		portToStartPosition(player);
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS, player.getObjectId(), 0), getTime()));
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS, player.getObjectId(), 0), getTime()));
 		return true;
 	}
 
@@ -157,23 +157,23 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(Player player) {
-		if (!pInstanceReward.containsPlayer(player.getObjectId()))
-			pInstanceReward.addPlayerReward(new PvpInstancePlayerReward(player.getObjectId(), player.getRace()));
+		if (!instanceScore.containsPlayer(player.getObjectId()))
+			instanceScore.addPlayerReward(new PvpInstancePlayerReward(player.getObjectId(), player.getRace()));
 
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.INIT_PLAYER, player.getObjectId(), 0), getTime()));
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.INIT_PLAYER, player.getObjectId(), 0), getTime()));
 
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS, player.getObjectId(), 0), getTime()));
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS, player.getObjectId(), 0), getTime()));
 	}
 
 	@Override
 	public void onLeaveInstance(Player player) {
-		PvpInstancePlayerReward reward = pInstanceReward.getPlayerReward(player.getObjectId());
+		PvpInstancePlayerReward reward = instanceScore.getPlayerReward(player.getObjectId());
 		if (reward != null)
-			pInstanceReward.removePlayerReward(reward);
+			instanceScore.removePlayerReward(reward);
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));
 	}
 
 	@Override
@@ -187,7 +187,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 
 	protected int getTime() {
 		int current = (int) (System.currentTimeMillis() - startTime);
-		return switch (pInstanceReward.getInstanceProgressionType()) {
+		return switch (instanceScore.getInstanceProgressionType()) {
 			case REINFORCE_MEMBER -> 120000 - current;
 			case PREPARING -> 60000 - current;
 			case START_PROGRESS, END_PROGRESS -> 1200000 - current;
@@ -195,14 +195,14 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 	}
 
 	protected void updateProgress(InstanceProgressionType progressionType) {
-		pInstanceReward.setInstanceProgressionType(progressionType);
+		instanceScore.setInstanceProgressionType(progressionType);
 		startTime = System.currentTimeMillis(); // Reset start time
 		sendPacket(
-			new SM_INSTANCE_SCORE(instance.getMapId(), new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.UPDATE_INSTANCE_PROGRESS), getTime()));
+			new SM_INSTANCE_SCORE(instance.getMapId(), new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_INSTANCE_PROGRESS), getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.UPDATE_ALL_PLAYER_INFO, instance.getPlayersInside()), getTime()));
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_ALL_PLAYER_INFO, instance.getPlayersInside()), getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE, instance.getPlayersInside()), getTime()));
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE, instance.getPlayersInside()), getTime()));
 	}
 
 	protected void updatePoints(Player player, Race race, String npcL10n, int points) {
@@ -210,18 +210,18 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 	}
 
 	protected void updatePoints(Player player, Race race, String npcL10n, int points, boolean isVictim, boolean shouldRewardPvpKill) {
-		if (!pInstanceReward.isStartProgress())
+		if (!instanceScore.isStartProgress())
 			return;
 
-		pInstanceReward.addPointsByRace(race, points);
+		instanceScore.addPointsByRace(race, points);
 		if (player != null) {
-			PvpInstancePlayerReward pReward = pInstanceReward.getPlayerReward(player.getObjectId());
+			PvpInstancePlayerReward pReward = instanceScore.getPlayerReward(player.getObjectId());
 			pReward.addPoints(points);
 			if (isVictim) {
 				sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_LOSE_SCORE_ENEMY(player.getName(), race.getL10n(), points));
 			} else {
 				if (shouldRewardPvpKill) {
-					pInstanceReward.incrementKillsByRace(race);
+					instanceScore.incrementKillsByRace(race);
 					pReward.addPvPKillToPlayer();
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE_FOR_ENEMY(points));
 				} else if (npcL10n != null) {
@@ -230,9 +230,9 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 			}
 		}
 		sendPacket(
-			new SM_INSTANCE_SCORE(instance.getMapId(), new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.UPDATE_FACTION_SCORE, race), getTime()));
+			new SM_INSTANCE_SCORE(instance.getMapId(), new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_FACTION_SCORE, race), getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreInfo(pInstanceReward, InstanceScoreType.UPDATE_ALL_PLAYER_INFO, instance.getPlayersInside()), getTime()));
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_ALL_PLAYER_INFO, instance.getPlayersInside()), getTime()));
 	}
 
 	protected void revivePlayerOnEnd(Player player) {
@@ -251,7 +251,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public InstanceReward<?> getInstanceReward() {
-		return pInstanceReward;
+	public InstanceScore<?> getInstanceScore() {
+		return instanceScore;
 	}
 }

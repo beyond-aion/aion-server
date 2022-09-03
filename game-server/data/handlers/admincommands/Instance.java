@@ -6,126 +6,123 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author ViAl
+ * @author ViAl, Estrayl
  */
 public class Instance extends AdminCommand {
 
-	private static final String SYNTAX = "Syntax: //instance start (kamar|dredgion|ophidian_bridge|iron_wall_front|idgel_dome)>"
-		+ "//instance end (kamar|dredgion|ophidian_bridge|iron_wall_front|idgel_dome)";
-
 	public Instance() {
-		super("instance");
+		super("instance", "Activates or deactivates registration for pvp instances.");
+
+		// @formatter:off
+			setSyntaxInfo(
+							"<open|close> dredgion - Opens/closes the registration for Dredgion (6vs6)",
+							"<open|close> id - Opens/closes the registration for Idgel Dome (6vs6)",
+							"<open|close> eob - Opens/closes the registration for Engulfed Ophidan Bridge (6vs6)",
+							"<open|close> kb - Opens/closes the registration for Kamar Battlefield (12vs12)",
+							"<open|close> iww - Opens/closes the registration for Iron Wall Warfront (24vs24)"
+			);
+			// @formatter:on
 	}
 
 	@Override
 	public void execute(Player player, String... params) {
-		if (params == null || params.length == 0) {
-			PacketSendUtility.sendMessage(player, SYNTAX);
+		if (params.length < 2) {
+			sendInfo(player);
 			return;
 		}
-		String cmd = params[0];
-		if (cmd.equalsIgnoreCase("start")) {
-			if (params.length < 2) {
-				PacketSendUtility.sendMessage(player, SYNTAX);
-				return;
-			}
-			String instance = params[1];
-			startInstance(player, instance);
-		} else if (cmd.equalsIgnoreCase("end")) {
-			if (params.length < 2) {
-				PacketSendUtility.sendMessage(player, SYNTAX);
-				return;
-			}
-			String instance = params[1];
-			stopInstance(player, instance);
-		}
+		if (params[0].equalsIgnoreCase("open"))
+			openRegistration(player, params[1]);
+		else if (params[0].equalsIgnoreCase("close"))
+			closeRegistration(player, params[1]);
 	}
 
-	private void startInstance(Player admin, String instanceName) {
-		try {
-			if (instanceName.equalsIgnoreCase("kamar")) {
-				if (KamarBattlefieldService.getInstance().isRegisterAvailable()) {
-					PacketSendUtility.sendMessage(admin, instanceName + " is already started, can't start twice.");
-				} else {
-					KamarBattlefieldService.getInstance().startRegistration();
-					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
-				}
-			} else if (instanceName.equalsIgnoreCase("dredgion")) {
-				if (DredgionService.getInstance().isRegisterAvailable()) {
-					PacketSendUtility.sendMessage(admin, instanceName + " is already started, can't start twice.");
-				} else {
-					DredgionService.getInstance().startRegistration();
-					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
-				}
-			} else if (instanceName.equalsIgnoreCase("idgel_dome")) {
-				if (IdgelDomeService.getInstance().isRegisterAvailable()) {
-					PacketSendUtility.sendMessage(admin, instanceName + " is already started, can't start twice.");
-				} else {
-					IdgelDomeService.getInstance().startRegistration();
-					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
-				}
-			} else if (instanceName.equalsIgnoreCase("ophidian_bridge")) {
-				if (EngulfedOphidianBridgeService.getInstance().isRegisterAvailable()) {
-					PacketSendUtility.sendMessage(admin, instanceName + " is already started, can't start twice.");
-				} else {
-					EngulfedOphidianBridgeService.getInstance().startRegistration();
-					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
-				}
-			} else if (instanceName.equalsIgnoreCase("iron_wall_front")) {
-				if (IronWallFrontService.getInstance().isRegisterAvailable()) {
-					PacketSendUtility.sendMessage(admin, instanceName + " is already started, can't start twice.");
-				} else {
-					IronWallFrontService.getInstance().startRegistration();
-					PacketSendUtility.sendMessage(admin, instanceName + " started successfully.");
-				}
-			} else {
-				PacketSendUtility.sendMessage(admin, instanceName + " - unknown instance name.");
-			}
-		} catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Something went wrong, can't start requested instance. See \"error.log\" for more details");
-		}
-	}
-
-	private void stopInstance(Player admin, String instanceName) {
-		try {
-			if (instanceName.equalsIgnoreCase("kamar")) {
-				if (!KamarBattlefieldService.getInstance().isRegisterAvailable()) {
-					PacketSendUtility.sendMessage(admin, instanceName + " isn't started, can't end.");
-				} else {
-					KamarBattlefieldService.getInstance().stopRegistration();
-					PacketSendUtility.sendMessage(admin, instanceName + " stopped successfully.");
-				}
-			} else if (instanceName.equalsIgnoreCase("idgel_dome")) {
-				if (IdgelDomeService.getInstance().isRegisterAvailable()) {
-					PacketSendUtility.sendMessage(admin, instanceName + " isn't started, can't end.");
-				} else {
-					IdgelDomeService.getInstance().stopRegistration();
-					PacketSendUtility.sendMessage(admin, instanceName + " stopped successfully.");
-				}
-			} else if (instanceName.equalsIgnoreCase("dredgion")) {
+	private void openRegistration(Player admin, String instanceName) {
+		switch (instanceName.toLowerCase()) {
+			case "dredgion":
 				if (!DredgionService.getInstance().isRegisterAvailable()) {
-					PacketSendUtility.sendMessage(admin, instanceName + " isn't started, can't end.");
+					DredgionService.getInstance().startRegistration();
+					PacketSendUtility.sendMessage(admin, "Registration for Dredgion is now open.");
 				} else {
+					sendInfo(admin, "Registration for Dredgion is already open.");
+				}
+				break;
+			case "eob":
+				if (!EngulfedOphidanBridgeService.getInstance().isRegisterAvailable()) {
+					EngulfedOphidanBridgeService.getInstance().startRegistration();
+					PacketSendUtility.sendMessage(admin, "Registration for Engulfed Ophidan Bridge is now open.");
+				} else {
+					sendInfo(admin, "Registration for Engulfed Ophidan Bridge is already open.");
+				}
+				break;
+			case "id":
+				if (!IdgelDomeService.getInstance().isRegisterAvailable()) {
+					IdgelDomeService.getInstance().startRegistration();
+					PacketSendUtility.sendMessage(admin, "Registration for Idgel Dome is now open.");
+				} else {
+					sendInfo(admin, "Registration for Idgel Dome is already open.");
+				}
+				break;
+			case "iww":
+				if (!IronWallWarfrontService.getInstance().isRegisterAvailable()) {
+					IronWallWarfrontService.getInstance().startRegistration();
+					PacketSendUtility.sendMessage(admin, "Registration for Iron Wall Warfront is now open.");
+				} else {
+					sendInfo(admin, "Registration for Iron Wall Warfront is already open.");
+				}
+				break;
+			case "kb":
+				if (!KamarBattlefieldService.getInstance().isRegisterAvailable()) {
+					KamarBattlefieldService.getInstance().startRegistration();
+					PacketSendUtility.sendMessage(admin, "Registration for Kamar Battlefield is now open.");
+				} else {
+					sendInfo(admin, "Registration for Kamar Battlefield is already open.");
+				}
+				break;
+		}
+	}
+
+	private void closeRegistration(Player admin, String instanceName) {
+		switch (instanceName.toLowerCase()) {
+			case "dredgion":
+				if (DredgionService.getInstance().isRegisterAvailable()) {
 					DredgionService.getInstance().stopRegistration();
-					PacketSendUtility.sendMessage(admin, instanceName + " stopped successfully.");
-				}
-			} else if (instanceName.equalsIgnoreCase("ophidian_bridge")) {
-				if (!EngulfedOphidianBridgeService.getInstance().isRegisterAvailable()) {
-					PacketSendUtility.sendMessage(admin, instanceName + " isn't started, can't end.");
+					PacketSendUtility.sendMessage(admin, "Registration for Dredgion is now closed.");
 				} else {
-					EngulfedOphidianBridgeService.getInstance().stopRegistration();
-					PacketSendUtility.sendMessage(admin, instanceName + " stopped successfully.");
+					sendInfo(admin, "Registration for Dredgion is not open.");
 				}
-			} else if (instanceName.equalsIgnoreCase("iron_wall_front")) {
-				if (!IronWallFrontService.getInstance().isRegisterAvailable()) {
-					PacketSendUtility.sendMessage(admin, instanceName + " isn't started, can't end.");
+				break;
+			case "eob":
+				if (EngulfedOphidanBridgeService.getInstance().isRegisterAvailable()) {
+					EngulfedOphidanBridgeService.getInstance().stopRegistration();
+					PacketSendUtility.sendMessage(admin, "Registration for Engulfed Ophidan Bridge is now closed.");
 				} else {
-					IronWallFrontService.getInstance().stopRegistration();
-					PacketSendUtility.sendMessage(admin, instanceName + " stopped successfully.");
+					sendInfo(admin, "Registration for Engulfed Ophidan Bridge is not open.");
 				}
-			}
-		} catch (Exception e) {
-			PacketSendUtility.sendMessage(admin, "Something went wrong, can't start requested instance. See \"error.log\" for more details");
+				break;
+			case "id":
+				if (IdgelDomeService.getInstance().isRegisterAvailable()) {
+					IdgelDomeService.getInstance().stopRegistration();
+					PacketSendUtility.sendMessage(admin, "Registration for Idgel Dome is now closed.");
+				} else {
+					sendInfo(admin, "Registration for Idgel Dome is not open.");
+				}
+				break;
+			case "iww":
+				if (IronWallWarfrontService.getInstance().isRegisterAvailable()) {
+					IronWallWarfrontService.getInstance().stopRegistration();
+					PacketSendUtility.sendMessage(admin, "Registration for Iron Wall Warfront is now closed.");
+				} else {
+					sendInfo(admin, "Registration for Iron Wall Warfront is not open.");
+				}
+				break;
+			case "kb":
+				if (KamarBattlefieldService.getInstance().isRegisterAvailable()) {
+					KamarBattlefieldService.getInstance().stopRegistration();
+					PacketSendUtility.sendMessage(admin, "Registration for Kamar Battlefield is now closed.");
+				} else {
+					sendInfo(admin, "Registration for Kamar Battlefield is not open.");
+				}
+				break;
 		}
 	}
 

@@ -7,7 +7,7 @@ import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
+import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 import ai.AggressiveNpcAI;
@@ -28,9 +28,9 @@ public class IDSweep_Shugos extends AggressiveNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		InstanceHandler handler = getOwner().getPosition().getWorldMapInstance().getInstanceHandler();
-		InstanceReward<?> reward = null;
+		InstanceScore<?> reward = null;
 		if (handler != null) {
-			reward = handler.getInstanceReward();
+			reward = handler.getInstanceScore();
 			if (reward != null) {
 				if (reward.getInstanceProgressionType() == InstanceProgressionType.END_PROGRESS)
 					getOwner().getController().delete();

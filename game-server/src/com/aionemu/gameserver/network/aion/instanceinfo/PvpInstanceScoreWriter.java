@@ -7,13 +7,13 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.InstanceScoreType;
-import com.aionemu.gameserver.model.instance.instancereward.PvpInstanceReward;
+import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 
 /**
  * @author Estrayl
  */
-public class PvpInstanceScoreInfo extends InstanceScoreInfo<PvpInstanceReward<PvpInstancePlayerReward>> {
+public class PvpInstanceScoreWriter extends InstanceScoreWriter<PvpInstanceScore<PvpInstancePlayerReward>> {
 
 	private static final int MAXIMUM_PLAYER_COUNT_PER_FACTION = 24;
 	private final InstanceScoreType instanceScoreType;
@@ -22,25 +22,25 @@ public class PvpInstanceScoreInfo extends InstanceScoreInfo<PvpInstanceReward<Pv
 	private int objectId;
 	private int status;
 
-	public PvpInstanceScoreInfo(PvpInstanceReward<PvpInstancePlayerReward> reward, InstanceScoreType instanceScoreType) {
+	public PvpInstanceScoreWriter(PvpInstanceScore<PvpInstancePlayerReward> reward, InstanceScoreType instanceScoreType) {
 		super(reward);
 		this.instanceScoreType = instanceScoreType;
 	}
 
-	public PvpInstanceScoreInfo(PvpInstanceReward<PvpInstancePlayerReward> reward, InstanceScoreType instanceScoreType, Race race) {
+	public PvpInstanceScoreWriter(PvpInstanceScore<PvpInstancePlayerReward> reward, InstanceScoreType instanceScoreType, Race race) {
 		super(reward);
 		this.instanceScoreType = instanceScoreType;
 		this.race = race;
 	}
 
-	public PvpInstanceScoreInfo(PvpInstanceReward<PvpInstancePlayerReward> reward, InstanceScoreType instanceScoreType, int objectId, int status) {
+	public PvpInstanceScoreWriter(PvpInstanceScore<PvpInstancePlayerReward> reward, InstanceScoreType instanceScoreType, int objectId, int status) {
 		super(reward);
 		this.instanceScoreType = instanceScoreType;
 		this.objectId = objectId;
 		this.status = status;
 	}
 
-	public PvpInstanceScoreInfo(PvpInstanceReward<PvpInstancePlayerReward> reward, InstanceScoreType instanceScoreType, List<Player> participants) {
+	public PvpInstanceScoreWriter(PvpInstanceScore<PvpInstancePlayerReward> reward, InstanceScoreType instanceScoreType, List<Player> participants) {
 		super(reward);
 		this.instanceScoreType = instanceScoreType;
 		this.participants = participants;
@@ -50,12 +50,12 @@ public class PvpInstanceScoreInfo extends InstanceScoreInfo<PvpInstanceReward<Pv
 	public void writeMe(ByteBuffer buf) {
 		writeC(buf, instanceScoreType.getId());
 		switch (instanceScoreType) {
-			case UPDATE_INSTANCE_PROGRESS -> writeD(buf, reward.getInstanceProgressionType() == InstanceProgressionType.START_PROGRESS ? 0 : 2);
+			case UPDATE_INSTANCE_PROGRESS -> writeD(buf, instanceScore.getInstanceProgressionType() == InstanceProgressionType.START_PROGRESS ? 0 : 2);
 			case INIT_PLAYER -> {
 				writeD(buf, 0); // unk
 				writeD(buf, status); // player is dead: 60 else 0
 				writeD(buf, objectId);
-				writeD(buf, reward.getPlayerReward(objectId).getRace().getRaceId());
+				writeD(buf, instanceScore.getPlayerReward(objectId).getRace().getRaceId());
 			}
 			case UPDATE_PLAYER_BUFF_STATUS -> {
 				writeD(buf, 0);
@@ -68,34 +68,34 @@ public class PvpInstanceScoreInfo extends InstanceScoreInfo<PvpInstanceReward<Pv
 			case PLAYER_QUIT -> writeD(buf, objectId);
 			case UPDATE_FACTION_SCORE -> {
 				writeC(buf, 0);
-				writeD(buf, race == Race.ELYOS ? reward.getElyosKills() : reward.getAsmodiansKills());
-				writeD(buf, race == Race.ELYOS ? reward.getElyosPoints() : reward.getAsmodiansPoints());
+				writeD(buf, race == Race.ELYOS ? instanceScore.getElyosKills() : instanceScore.getAsmodiansKills());
+				writeD(buf, race == Race.ELYOS ? instanceScore.getElyosPoints() : instanceScore.getAsmodiansPoints());
 				writeD(buf, race.getRaceId());
-				writeD(buf, reward.getRaceWithHighestPoints().getRaceId());
+				writeD(buf, instanceScore.getRaceWithHighestPoints().getRaceId());
 			}
 		}
 	}
 
 	private void writeShowReward(ByteBuffer buf) {
-		PvpInstancePlayerReward info = reward.getPlayerReward(objectId);
+		PvpInstancePlayerReward reward = instanceScore.getPlayerReward(objectId);
 		writeD(buf, 100); // Participation
-		writeD(buf, info.getBaseAp());
-		writeD(buf, info.getBonusAp());
-		writeD(buf, info.getBaseGp());
-		writeD(buf, info.getBonusGp());
-		writeD(buf, info.getReward1ItemId());
-		writeD(buf, info.getReward1Count());
-		writeD(buf, info.getReward1BonusCount());
-		writeD(buf, info.getReward2ItemId());
-		writeD(buf, info.getReward2Count());
-		writeD(buf, info.getReward2BonusCount());
-		writeD(buf, info.getReward3ItemId());
-		writeD(buf, info.getReward3Count());
-		writeD(buf, info.getReward4ItemId());
-		writeD(buf, info.getReward4Count());
-		writeD(buf, info.getBonusRewardItemId());
-		writeD(buf, info.getBonusRewardCount());
-		writeC(buf, info.getBonusRewardItemId() > 0 ? 1 : 0); // showBonusReward flag
+		writeD(buf, reward.getBaseAp());
+		writeD(buf, reward.getBonusAp());
+		writeD(buf, reward.getBaseGp());
+		writeD(buf, reward.getBonusGp());
+		writeD(buf, reward.getReward1ItemId());
+		writeD(buf, reward.getReward1Count());
+		writeD(buf, reward.getReward1BonusCount());
+		writeD(buf, reward.getReward2ItemId());
+		writeD(buf, reward.getReward2Count());
+		writeD(buf, reward.getReward2BonusCount());
+		writeD(buf, reward.getReward3ItemId());
+		writeD(buf, reward.getReward3Count());
+		writeD(buf, reward.getReward4ItemId());
+		writeD(buf, reward.getReward4Count());
+		writeD(buf, reward.getBonusRewardItemId());
+		writeD(buf, reward.getBonusRewardCount());
+		writeC(buf, reward.getBonusRewardItemId() > 0 ? 1 : 0); // showBonusReward flag
 	}
 
 	private void writeUpdateScoreToBuffer(ByteBuffer buf) {
@@ -116,46 +116,46 @@ public class PvpInstanceScoreInfo extends InstanceScoreInfo<PvpInstanceReward<Pv
 		}
 		writeEmptyDataToBuffer(buf, 12, MAXIMUM_PLAYER_COUNT_PER_FACTION - asmodians.size());
 		writeC(buf, 0);
-		writeD(buf, reward.getElyosKills());
-		writeD(buf, reward.getElyosPoints());
+		writeD(buf, instanceScore.getElyosKills());
+		writeD(buf, instanceScore.getElyosPoints());
 		writeD(buf, Race.ELYOS.getRaceId());
 		writeD(buf, 0);
 		writeC(buf, 0);
-		writeD(buf, reward.getAsmodiansKills());
-		writeD(buf, reward.getAsmodiansPoints());
+		writeD(buf, instanceScore.getAsmodiansKills());
+		writeD(buf, instanceScore.getAsmodiansPoints());
 		writeD(buf, Race.ASMODIANS.getRaceId());
-		writeD(buf, reward.getRaceWithHighestPoints().getRaceId());
+		writeD(buf, instanceScore.getRaceWithHighestPoints().getRaceId());
 	}
 
 	private void writeUpdatePlayerInfoToBuffer(ByteBuffer buf) {
 		List<Player> elyos = participants.stream().filter(p -> p.getRace() == Race.ELYOS).toList();
-		for (Player p : elyos) { // 69 bytes per player
-			PvpInstancePlayerReward pi = reward.getPlayerReward(p.getObjectId());
-			if (pi == null)
+		for (Player player : elyos) { // 69 bytes per player
+			PvpInstancePlayerReward reward = instanceScore.getPlayerReward(player.getObjectId());
+			if (reward == null)
 				continue;
-			writeD(buf, p.getObjectId());
-			writeC(buf, p.getPlayerClass().getClassId());
-			writeC(buf, p.getAbyssRank().getRank().getId());
+			writeD(buf, player.getObjectId());
+			writeC(buf, player.getPlayerClass().getClassId());
+			writeC(buf, player.getAbyssRank().getRank().getId());
 			writeC(buf, 0);
 			writeH(buf, 0);
-			writeD(buf, pi.getPvPKills());
-			writeD(buf, pi.getPoints());
-			writeS(buf, p.getName(), 52);
+			writeD(buf, reward.getPvPKills());
+			writeD(buf, reward.getPoints());
+			writeS(buf, player.getName(), 52);
 		}
 		writeEmptyDataToBuffer(buf, 69, MAXIMUM_PLAYER_COUNT_PER_FACTION - elyos.size());
 		List<Player> asmodians = participants.stream().filter(p -> p.getRace() == Race.ASMODIANS).toList();
-		for (Player p : asmodians) { // 69 bytes per player
-			PvpInstancePlayerReward pi = reward.getPlayerReward(p.getObjectId());
-			if (pi == null)
+		for (Player player : asmodians) { // 69 bytes per player
+			PvpInstancePlayerReward reward = instanceScore.getPlayerReward(player.getObjectId());
+			if (reward == null)
 				continue;
-			writeD(buf, p.getObjectId());
-			writeC(buf, p.getPlayerClass().getClassId());
-			writeC(buf, p.getAbyssRank().getRank().getId());
+			writeD(buf, player.getObjectId());
+			writeC(buf, player.getPlayerClass().getClassId());
+			writeC(buf, player.getAbyssRank().getRank().getId());
 			writeC(buf, 0);
 			writeH(buf, 0);
-			writeD(buf, pi.getPvPKills());
-			writeD(buf, pi.getPoints());
-			writeS(buf, p.getName(), 52);
+			writeD(buf, reward.getPvPKills());
+			writeD(buf, reward.getPoints());
+			writeS(buf, player.getName(), 52);
 		}
 		writeEmptyDataToBuffer(buf, 69, MAXIMUM_PLAYER_COUNT_PER_FACTION - asmodians.size());
 	}

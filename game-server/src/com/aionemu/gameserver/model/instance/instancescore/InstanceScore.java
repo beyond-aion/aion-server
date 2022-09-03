@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.model.instance.instancereward;
+package com.aionemu.gameserver.model.instance.instancescore;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -9,13 +9,13 @@ import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 /**
  * @author xTz
  */
-public class InstanceReward<T extends InstancePlayerReward> {
+public class InstanceScore<T extends InstancePlayerReward> {
 
-	private final List<T> instanceRewards = new ArrayList<>();
+	private final List<T> playerRewards = new ArrayList<>();
 	private InstanceProgressionType instanceProgressionType = InstanceProgressionType.START_PROGRESS;
 
-	public List<T> getInstanceRewards() {
-		return instanceRewards;
+	public List<T> getPlayerRewards() {
+		return playerRewards;
 	}
 
 	public boolean containsPlayer(int objectId) {
@@ -23,20 +23,20 @@ public class InstanceReward<T extends InstancePlayerReward> {
 	}
 
 	public void removePlayerReward(T reward) {
-		instanceRewards.remove(reward);
+		playerRewards.remove(reward);
 	}
 
 	public T getPlayerReward(int objectId) {
-		for (T instanceReward : instanceRewards) {
-			if (instanceReward.getOwnerId() == objectId) {
-				return instanceReward;
+		for (T playerReward : playerRewards) {
+			if (playerReward.getOwnerId() == objectId) {
+				return playerReward;
 			}
 		}
 		return null;
 	}
 
 	public void addPlayerReward(T reward) {
-		instanceRewards.add(reward);
+		playerRewards.add(reward);
 	}
 
 	public void setInstanceProgressionType(InstanceProgressionType instanceProgressionType) {
@@ -64,7 +64,7 @@ public class InstanceReward<T extends InstancePlayerReward> {
 	}
 
 	public void clear() {
-		instanceRewards.clear();
+		playerRewards.clear();
 	}
 
 }

@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.model.instance.instancereward;
+package com.aionemu.gameserver.model.instance.instancescore;
 
 import java.util.*;
 
@@ -12,7 +12,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @author xTz
  */
-public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
+public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 
 	private Map<Integer, Boolean> positions = new HashMap<>();
 	private List<Integer> zones = new ArrayList<>();
@@ -25,7 +25,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	protected WorldMapInstance instance;
 	private GeneralInstancePosition instancePosition;
 
-	public PvPArenaReward(WorldMapInstance instance) {
+	public PvPArenaScore(WorldMapInstance instance) {
 		this.instance = instance;
 		boolean isSolo = isSoloArena();
 		capPoints = isSolo ? 14400 : 50000;
@@ -140,7 +140,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	public int getRank(int points) {
-		List<PvPArenaPlayerReward> rewardsSortedByScorePoints = getInstanceRewards().stream().sorted((r1, r2) -> Integer.compare(r2.getScorePoints(), r1.getScorePoints()))
+		List<PvPArenaPlayerReward> rewardsSortedByScorePoints = getPlayerRewards().stream().sorted((r1, r2) -> Integer.compare(r2.getScorePoints(), r1.getScorePoints()))
 			.toList();
 		int rank = -1;
 		for (PvPArenaPlayerReward reward : rewardsSortedByScorePoints) {
@@ -152,7 +152,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	public boolean hasCapPoints() {
-		IntSummaryStatistics points = getInstanceRewards().stream().mapToInt(InstancePlayerReward::getPoints).summaryStatistics();
+		IntSummaryStatistics points = getPlayerRewards().stream().mapToInt(InstancePlayerReward::getPoints).summaryStatistics();
 		int maxPoints = points.getMax();
 		if (isSoloArena() && maxPoints - points.getMin() >= 1500)
 			return true;
@@ -160,7 +160,7 @@ public class PvPArenaReward extends InstanceReward<PvPArenaPlayerReward> {
 	}
 
 	public int getTotalPoints() {
-		return getInstanceRewards().stream().mapToInt(PvPArenaPlayerReward::getScorePoints).sum();
+		return getPlayerRewards().stream().mapToInt(PvPArenaPlayerReward::getScorePoints).sum();
 	}
 
 	public boolean canRewarded() {

@@ -9,8 +9,8 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.InstanceReward;
-import com.aionemu.gameserver.model.instance.instancereward.PvPArenaReward;
+import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
+import com.aionemu.gameserver.model.instance.instancescore.PvPArenaScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -36,7 +36,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 	private boolean isInstanceDestroyed;
-	protected PvPArenaReward instanceReward;
+	protected PvPArenaScore instanceReward;
 	protected int killBonus;
 	protected int deathFine;
 
@@ -216,7 +216,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public InstanceReward<?> getInstanceReward() {
+	public InstanceScore<?> getInstanceScore() {
 		return instanceReward;
 	}
 
@@ -232,7 +232,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onInstanceCreate() {
-		instanceReward = new PvPArenaReward(instance);
+		instanceReward = new PvPArenaScore(instance);
 		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		spawnRings();
 		if (!instanceReward.isSoloArena()) {

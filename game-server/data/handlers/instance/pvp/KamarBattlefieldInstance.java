@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.PvpInstanceReward;
+import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -28,9 +28,9 @@ import com.aionemu.gameserver.world.WorldPosition;
 @InstanceID(301120000)
 public class KamarBattlefieldInstance extends BasicPvpInstance {
 
-	private final static List<WorldPosition> generalsPos = new ArrayList<>();
-	private final static List<WorldPosition> garnonPos = new ArrayList<>();
-	private final static int MAX_PLAYERS_PER_FACTION = 12;
+	private static final List<WorldPosition> generalsPos = new ArrayList<>();
+	private static final List<WorldPosition> garnonPos = new ArrayList<>();
+	private static final int MAX_PLAYERS_PER_FACTION = 12;
 	private byte timeInMin = -1;
 
 	static {
@@ -149,18 +149,18 @@ public class KamarBattlefieldInstance extends BasicPvpInstance {
 
 	@Override
 	protected void setAndDistributeRewards(Player player, PvpInstancePlayerReward reward, Race winningRace, boolean isBossKilled) {
-		int scorePoints = pInstanceReward.getPointsByRace(reward.getRace());
+		int scorePoints = instanceScore.getPointsByRace(reward.getRace());
 		if (reward.getRace() == winningRace) {
-			reward.setBaseAp(pInstanceReward.getWinnerApReward() + (isBossKilled ? 3850 : 0));
+			reward.setBaseAp(instanceScore.getWinnerApReward() + (isBossKilled ? 3850 : 0));
 			reward.setBonusAp(2 * scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(100);
 			reward.setReward1(188052670, 1, 0); // Kamar Victory Box
 		} else {
-			reward.setBaseAp(pInstanceReward.getLoserApReward());
+			reward.setBaseAp(instanceScore.getLoserApReward());
 			reward.setBonusAp(scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(10);
 			if (winningRace == Race.NONE)
-				reward.setBaseAp(pInstanceReward.getDrawApReward()); // Base AP are overridden in a draw case
+				reward.setBaseAp(instanceScore.getDrawApReward()); // Base AP are overridden in a draw case
 		}
 		distributeRewards(player, reward);
 	}
@@ -169,7 +169,7 @@ public class KamarBattlefieldInstance extends BasicPvpInstance {
 	protected void updatePoints(Player player, Race race, String npcL10n, int points) {
 		super.updatePoints(player, race, npcL10n, points);
 
-		int diff = Math.abs(pInstanceReward.getAsmodiansPoints() - pInstanceReward.getElyosPoints());
+		int diff = Math.abs(instanceScore.getAsmodiansPoints() - instanceScore.getElyosPoints());
 		if (diff >= 20000)
 			onStop(false);
 	}
@@ -277,7 +277,7 @@ public class KamarBattlefieldInstance extends BasicPvpInstance {
 
 	@Override
 	public void onInstanceCreate() {
-		pInstanceReward = new PvpInstanceReward<>(8750, 1750, 5250); // No info found for draws, so let's guess
+		instanceScore = new PvpInstanceScore<>(8750, 1750, 5250); // No info found for draws, so let's guess
 		super.onInstanceCreate();
 	}
 

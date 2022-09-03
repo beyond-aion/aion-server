@@ -11,7 +11,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.PvpInstanceReward;
+import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -36,10 +36,11 @@ public class IdgelDomeInstance extends BasicPvpInstance {
 
 	@Override
 	public void onInstanceCreate() {
-		pInstanceReward = new PvpInstanceReward<>(5600, 1120, 3360); // No info found for draws, so let's guess
+		instanceScore = new PvpInstanceScore<>(5600, 1120, 3360); // No info found for draws, so let's guess
 		super.onInstanceCreate();
 	}
 
+	@Override
 	protected void spawnFactionRelatedNpcs() {
 		spawn((raceStartPosition == 0 ? 802384 : 802383), 254.9255f, 179.3691f, 80.3904f, (byte) 90); // Quest Npcs
 		spawn((raceStartPosition == 0 ? 802383 : 802384), 274.5722f, 338.7958f, 80.6454f, (byte) 31);
@@ -67,28 +68,28 @@ public class IdgelDomeInstance extends BasicPvpInstance {
 
 	@Override
 	protected void setAndDistributeRewards(Player player, PvpInstancePlayerReward reward, Race winningRace, boolean isBossKilled) {
-		int scorePoints = pInstanceReward.getPointsByRace(reward.getRace());
+		int scorePoints = instanceScore.getPointsByRace(reward.getRace());
 		if (reward.getRace() == winningRace) {
-			reward.setBaseAp(pInstanceReward.getWinnerApReward() + (isBossKilled ? 2000 : 0));
+			reward.setBaseAp(instanceScore.getWinnerApReward() + (isBossKilled ? 2000 : 0));
 			reward.setBonusAp(2 * scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(50);
-			reward.setReward1(186000242, 3, 0);
-			reward.setReward2(188053030, 1, 0);
+			reward.setReward1(186000242, 3, 0); // Custom: Ceramium Medal
+			reward.setReward2(188053030, 1, 0); // Idgel Dome Reward Box
 			if (isBossKilled) {
 				int mythicKunaxEqItemId = 0;
 				if (Rnd.chance() < 20)
 					mythicKunaxEqItemId = reward.getMythicKunaxEquipment(player);
 				reward.setReward3(mythicKunaxEqItemId, mythicKunaxEqItemId == 0 ? 0 : 1);
-				reward.setReward4(188053032, 1);
+				reward.setReward4(188053032, 1); // Idgel Dome Tribute Box
 			}
 		} else {
-			reward.setBaseAp(pInstanceReward.getLoserApReward());
+			reward.setBaseAp(instanceScore.getLoserApReward());
 			reward.setBonusAp(scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(10);
-			reward.setReward1(186000242, 1, 0);
-			reward.setReward2(188053031, 1, 0);
+			reward.setReward1(186000242, 1, 0); // Custom: Ceramium Medal
+			reward.setReward2(188053031, 1, 0); // Idgel Dome Consolation Prize
 			if (winningRace == Race.NONE)
-				reward.setBaseAp(pInstanceReward.getDrawApReward()); // Base AP are overridden in a draw case
+				reward.setBaseAp(instanceScore.getDrawApReward()); // Base AP are overridden in a draw case
 		}
 		distributeRewards(player, reward);
 	}

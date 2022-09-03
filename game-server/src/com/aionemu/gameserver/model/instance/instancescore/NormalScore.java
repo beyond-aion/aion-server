@@ -1,11 +1,11 @@
-package com.aionemu.gameserver.model.instance.instancereward;
+package com.aionemu.gameserver.model.instance.instancescore;
 
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 
 /**
  * @author Cheatkiller
  */
-public class NormalReward extends InstanceReward<InstancePlayerReward> {
+public class NormalScore extends InstanceScore<InstancePlayerReward> {
 
 	private int points;
 	private int basicAp;

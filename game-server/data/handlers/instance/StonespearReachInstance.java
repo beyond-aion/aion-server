@@ -12,9 +12,9 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
-import com.aionemu.gameserver.model.instance.instancereward.LegionDominionReward;
+import com.aionemu.gameserver.model.instance.instancescore.LegionDominionScore;
 import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.network.aion.instanceinfo.LegionDominionScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.LegionDominionScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -36,7 +36,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 @InstanceID(301500000)
 public class StonespearReachInstance extends GeneralInstanceHandler {
 
-	private LegionDominionReward reward;
+	private LegionDominionScore reward;
 	private Long startTime;
 	private final List<Future<?>> tasks = new ArrayList<>();
 	private final List<WorldPosition> points = new ArrayList<>();
@@ -53,7 +53,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onInstanceCreate() {
-		reward = new LegionDominionReward();
+		reward = new LegionDominionScore();
 		reward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		spawn(833284, 231.14f, 264.399f, 96.23f, (byte) 1, 14);
 		addWorldPoints();
@@ -677,7 +677,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	private void sendPacket(String npcL10n, int points) {
 		if (npcL10n != null)
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
-		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new LegionDominionScoreInfo(reward), getTime()));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new LegionDominionScoreWriter(reward), getTime()));
 	}
 
 	private int getTime() {

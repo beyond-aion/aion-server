@@ -15,47 +15,32 @@ public class AutoGroupConfig {
 	@Property(key = "gameserver.startTime.enable", defaultValue = "true")
 	public static boolean START_TIME_ENABLE;
 
-	@Property(key = "gameserver.dredgion.enable", defaultValue = "true")
-	public static boolean DREDGION_ENABLE;
-
-	@Property(key = "gameserver.dredgion.timer", defaultValue = "120")
-	public static long DREDGION_TIMER;
+	@Property(key = "gameserver.dredgion.registration_period", defaultValue = "60")
+	public static long DREDGION_REGISTRATION_PERIOD;
 
 	@Property(key = "gameserver.dredgion.time", defaultValue = "\"0 0 0,12,20 ? * *\"")
 	public static CronExpression[] DREDGION_TIMES;
 
-	@Property(key = "gameserver.kamar.timer", defaultValue = "120")
-	public static long KAMAR_TIMER;
+	@Property(key = "gameserver.kamar_battlefield.registration_period", defaultValue = "60")
+	public static long KAMAR_BATTLEFIELD_REGISTRATION_PERIOD;
 
-	@Property(key = "gameserver.kamar.enable", defaultValue = "true")
-	public static boolean KAMAR_ENABLE;
+	@Property(key = "gameserver.kamar_battlefield.time", defaultValue = "\"0 0 0,20 ? * MON,WED,SAT\"")
+	public static CronExpression[] KAMAR_BATTLEFIELD_TIMES;
 
-	@Property(key = "gameserver.kamar.time", defaultValue = "\"0 0 0,20 ? * MON,WED,SAT\"")
-	public static CronExpression[] KAMAR_TIMES;
+	@Property(key = "gameserver.engulfed_ophidan_bridge.registration_period", defaultValue = "60")
+	public static long ENGULFED_OPHIDAN_BRIDGE_REGISTRATION_PERIOD;
 
-	@Property(key = "gameserver.engulfed_ob.timer", defaultValue = "120")
-	public static long ENGULFED_OB_TIMER;
+	@Property(key = "gameserver.engulfed_ophidan_bridge.time", defaultValue = "\"0 0 12,19 ? * *\"")
+	public static CronExpression[] ENGULFED_OPHIDAN_BRIDGE_TIMES;
 
-	@Property(key = "gameserver.engulfed_ob.enable", defaultValue = "true")
-	public static boolean ENGULFED_OB_ENABLE;
+	@Property(key = "gameserver.iron_wall_warfront.registration_period", defaultValue = "60")
+	public static long IRON_WALL_WARFRONT_REGISTRATION_PERIOD;
 
-	@Property(key = "gameserver.engulfed_ob.time", defaultValue = "\"0 0 12,19 ? * *\"")
-	public static CronExpression[] ENGULFED_OB_TIMES;
+	@Property(key = "gameserver.iron_wall_warfront.time", defaultValue = "\"0 0 0,12 ? * SUN\"")
+	public static CronExpression[] IRON_WALL_WARFRONT_TIMES;
 
-	@Property(key = "gameserver.iron_wall_front.timer", defaultValue = "120")
-	public static long IRON_WALL_FRONT_TIMER;
-
-	@Property(key = "gameserver.iron_wall_front.enable", defaultValue = "true")
-	public static boolean IRON_WALL_FRONT_ENABLE;
-
-	@Property(key = "gameserver.iron_wall_front.time", defaultValue = "\"0 0 0,12 ? * SUN\"")
-	public static CronExpression[] IRON_WALL_FRONT_TIMES;
-
-	@Property(key = "gameserver.idgel_dome.timer", defaultValue = "60")
-	public static long IDGEL_DOME_TIMER;
-
-	@Property(key = "gameserver.idgel_dome.enable", defaultValue = "true")
-	public static boolean IDGEL_DOME_ENABLE;
+	@Property(key = "gameserver.idgel_dome.registration_period", defaultValue = "60")
+	public static long IDGEL_DOME_REGISTRATION_PERIOD;
 
 	@Property(key = "gameserver.idgel_dome.time", defaultValue = "0 0 23 ? * *")
 	public static CronExpression[] IDGEL_DOME_TIMES;

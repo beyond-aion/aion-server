@@ -1,9 +1,9 @@
-package com.aionemu.gameserver.model.instance.instancereward;
+package com.aionemu.gameserver.model.instance.instancescore;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 
-public class PvpInstanceReward<T extends InstancePlayerReward> extends InstanceReward<T> {
+public class PvpInstanceScore<T extends InstancePlayerReward> extends InstanceScore<T> {
 
 	private final int winnerApReward;
 	private final int loserApReward;
@@ -13,7 +13,7 @@ public class PvpInstanceReward<T extends InstancePlayerReward> extends InstanceR
 	private int asmodiansKills;
 	private int elyosKills;
 
-	public PvpInstanceReward(int winnerApReward, int loserApReward, int drawApReward) {
+	public PvpInstanceScore(int winnerApReward, int loserApReward, int drawApReward) {
 		this.winnerApReward = winnerApReward;
 		this.loserApReward = loserApReward;
 		this.drawApReward = drawApReward;

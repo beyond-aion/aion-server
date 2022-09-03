@@ -21,7 +21,7 @@ public class ArenaOfChaosInstance extends ChaosTrainingGroundsInstance {
 	@Override
 	protected void reward() {
 		int totalPoints = instanceReward.getTotalPoints();
-		int size = instanceReward.getInstanceRewards().size();
+		int size = instanceReward.getPlayerRewards().size();
 		// 100 * (rate * size) * (playerScore / playersScore)
 		float totalScoreAP = (3.292f * size) * 100;
 		float totalScoreCrucible = (1.964f * size) * 100;
@@ -34,7 +34,7 @@ public class ArenaOfChaosInstance extends ChaosTrainingGroundsInstance {
 		float totalRankingAP = 1453 - 1453 * rankingRate;
 		float totalRankingCrucible = 865 - 865 * rankingRate;
 		float totalRankingCourage = 101 - 101 * rankingRate;
-		for (InstancePlayerReward playerReward : instanceReward.getInstanceRewards()) {
+		for (InstancePlayerReward playerReward : instanceReward.getPlayerRewards()) {
 			PvPArenaPlayerReward reward = (PvPArenaPlayerReward) playerReward;
 			if (!reward.isRewarded()) {
 				Player player = instance.getPlayer(playerReward.getOwnerId());

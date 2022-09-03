@@ -17,7 +17,7 @@ public class DredgionService extends PeriodicInstance {
 	private final byte maskLvlGradeC = 1, maskLvlGradeB = 2, maskLvlGradeA = 3;
 
 	public DredgionService() {
-		super(DREDGION_ENABLE, DREDGION_TIMES, DREDGION_TIMER, new int[] { 1, 2, 3 }, (byte) 45, (byte) 66);
+		super(DREDGION_TIMES, DREDGION_REGISTRATION_PERIOD, new int[] { 1, 2, 3 }, (byte) 45, (byte) 66);
 	}
 
 	public static DredgionService getInstance() {

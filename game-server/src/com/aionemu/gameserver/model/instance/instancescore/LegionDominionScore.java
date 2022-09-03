@@ -1,4 +1,4 @@
-package com.aionemu.gameserver.model.instance.instancereward;
+package com.aionemu.gameserver.model.instance.instancescore;
 
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 
@@ -6,7 +6,7 @@ import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
  * @author Yeats
  *
  */
-public class LegionDominionReward  extends InstanceReward<InstancePlayerReward> {
+public class LegionDominionScore extends InstanceScore<InstancePlayerReward> {
 
 	private int points;
 	private int finalGP;

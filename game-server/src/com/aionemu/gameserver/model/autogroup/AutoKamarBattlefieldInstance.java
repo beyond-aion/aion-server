@@ -4,16 +4,18 @@ import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
-import com.aionemu.gameserver.model.team.group.PlayerGroup;
-import com.aionemu.gameserver.model.team.group.PlayerGroupService;
-import com.aionemu.gameserver.services.instance.periodic.EngulfedOphidianBridgeService;
+import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
+import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
+import com.aionemu.gameserver.services.instance.periodic.KamarBattlefieldService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author xTz
  */
-public class AutoEngulfedOphidianBridgeInstance extends AutoInstance {
+public class AutoKamarBattlefieldInstance extends AutoInstance {
 
-	public AutoEngulfedOphidianBridgeInstance(AutoGroupType agt) {
+	public AutoKamarBattlefieldInstance(AutoGroupType agt) {
 		super(agt);
 	}
 
@@ -27,16 +29,16 @@ public class AutoEngulfedOphidianBridgeInstance extends AutoInstance {
 			EntryRequestType ert = searchInstance.getEntryRequestType();
 			List<AGPlayer> playersByRace = getAGPlayersByRace(player.getRace());
 			if (ert.isGroupEntry()) {
-				if (searchInstance.getMembers().size() + playersByRace.size() > 6) {
+				if (searchInstance.getMembers().size() + playersByRace.size() > 12) {
 					return AGQuestion.FAILED;
 				}
-				for (Player member : player.getPlayerGroup().getOnlineMembers()) {
+				for (Player member : player.getPlayerAlliance().getOnlineMembers()) {
 					if (searchInstance.getMembers().contains(member.getObjectId())) {
 						players.put(member.getObjectId(), new AGPlayer(player));
 					}
 				}
 			} else {
-				if (playersByRace.size() >= 6) {
+				if (playersByRace.size() >= 12) {
 					return AGQuestion.FAILED;
 				}
 				players.put(player.getObjectId(), new AGPlayer(player));
@@ -52,31 +54,33 @@ public class AutoEngulfedOphidianBridgeInstance extends AutoInstance {
 		super.onEnterInstance(player);
 		List<Player> playersByRace = getPlayersByRace(player.getRace());
 		playersByRace.remove(player);
-		if (playersByRace.size() == 1 && !playersByRace.get(0).isInGroup()) {
-			PlayerGroup newGroup = PlayerGroupService.createGroup(playersByRace.get(0), player, TeamType.AUTO_GROUP, 0);
-			int groupId = newGroup.getObjectId();
-			if (!instance.isRegistered(groupId)) {
-				instance.register(groupId);
+
+		if (playersByRace.size() == 1 && !playersByRace.get(0).isInAlliance()) {
+			PlayerAlliance alliance = PlayerAllianceService.createAlliance(playersByRace.get(0), player, TeamType.AUTO_ALLIANCE);
+			int allianceId = alliance.getObjectId();
+			if (!instance.isRegistered(allianceId)) {
+				instance.register(allianceId);
 			}
-		} else if (!playersByRace.isEmpty() && playersByRace.get(0).isInGroup()) {
-			PlayerGroupService.addPlayer(playersByRace.get(0).getPlayerGroup(), player);
+		} else if (!playersByRace.isEmpty() && playersByRace.get(0).isInAlliance()) {
+			PlayerAllianceService.addPlayer(playersByRace.get(0).getPlayerAlliance(), player);
 		}
 		int objectId = player.getObjectId();
 		if (!instance.isRegistered(objectId)) {
 			instance.register(objectId);
 		}
+		PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE((byte) 1, 27));
 	}
 
 	@Override
 	public void onPressEnter(Player player) {
 		super.onPressEnter(player);
-		EngulfedOphidianBridgeService.getInstance().addCooldown(player);
+		KamarBattlefieldService.getInstance().addCooldown(player);
 		instance.getInstanceHandler().portToStartPosition(player);
 	}
 
 	@Override
 	public void onLeaveInstance(Player player) {
 		super.unregister(player);
-		PlayerGroupService.removePlayer(player);
+		PlayerAllianceService.removePlayer(player);
 	}
 }

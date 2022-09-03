@@ -14,7 +14,7 @@ import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.StageType;
 import com.aionemu.gameserver.model.instance.playerreward.CruciblePlayerReward;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.network.aion.instanceinfo.CrucibleScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.CrucibleScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_STAGE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -61,7 +61,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private void sendPacket(String npcL10n, int points) {
-		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreInfo(instanceReward)));
+		PacketSendUtility.broadcastToMap(instance, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreWriter(instanceScore)));
 		if (npcL10n != null)
 			PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));
 	}
@@ -372,9 +372,9 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			playerReward.setRewarded();
 			ItemService.addItem(player, 186000130, (int) reward);
 			playerReward.setInsignia((int) reward);
-			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
+			instanceScore.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 		}
-		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreInfo(instanceReward)));
+		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new CrucibleScoreWriter(instanceScore)));
 	}
 
 	private void startBonusStage2() {

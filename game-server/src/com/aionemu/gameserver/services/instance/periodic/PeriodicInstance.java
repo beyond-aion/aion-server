@@ -26,7 +26,6 @@ public abstract class PeriodicInstance {
 
 	// required properties
 	private final CronExpression[] startExpressions;
-	private final boolean isEnabled;
 	protected final int[] maskIds;
 	protected final byte minLevel;
 	protected final byte maxLevel;
@@ -37,8 +36,7 @@ public abstract class PeriodicInstance {
 	private final List<Integer> playersWithCooldown = new CopyOnWriteArrayList<>();
 	private Future<?> unregisterTask;
 
-	public PeriodicInstance(boolean isEnabled, CronExpression[] startExpressions, long regPeriod, int[] maskIds, byte minLevel, byte maxLevel) {
-		this.isEnabled = isEnabled;
+	public PeriodicInstance(CronExpression[] startExpressions, long regPeriod, int[] maskIds, byte minLevel, byte maxLevel) {
 		this.startExpressions = startExpressions;
 		this.registrationPeriod = regPeriod;
 		this.maskIds = maskIds;
@@ -47,12 +45,10 @@ public abstract class PeriodicInstance {
 	}
 
 	public final void scheduleRegistrationIfEnabled() {
-		if (isEnabled) {
-			for (CronExpression startExpression : startExpressions) {
-				CronService.getInstance().schedule(this::startRegistration, startExpression);
-				log.info("Scheduled " + getClass().getSimpleName() + ": based on cron expression: " + startExpression + " Duration: " + registrationPeriod
-					+ " in minutes");
-			}
+		for (CronExpression startExpression : startExpressions) {
+			CronService.getInstance().schedule(this::startRegistration, startExpression);
+			log.info("Scheduled " + getClass().getSimpleName() + ": based on cron expression: " + startExpression + " Duration: " + registrationPeriod
+				+ " in minutes");
 		}
 	}
 

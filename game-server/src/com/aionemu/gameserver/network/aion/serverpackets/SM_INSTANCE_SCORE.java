@@ -2,8 +2,8 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.network.aion.instanceinfo.ArenaScoreInfo;
-import com.aionemu.gameserver.network.aion.instanceinfo.InstanceScoreInfo;
+import com.aionemu.gameserver.network.aion.instanceinfo.ArenaScoreWriter;
+import com.aionemu.gameserver.network.aion.instanceinfo.InstanceScoreWriter;
 
 /**
  * @author Dns, ginho1, nrg, xTz
@@ -12,27 +12,27 @@ public class SM_INSTANCE_SCORE extends AionServerPacket {
 
 	private final int mapId;
 	private final int instanceTime;
-	private final InstanceScoreInfo<?> isi;
+	private final InstanceScoreWriter<?> instanceScoreWriter;
 
-	public SM_INSTANCE_SCORE(int mapId, ArenaScoreInfo arenaScoreInfo) {
-		this(mapId, arenaScoreInfo, arenaScoreInfo.getReward().getTime());
+	public SM_INSTANCE_SCORE(int mapId, ArenaScoreWriter arenaScoreInfo) {
+		this(mapId, arenaScoreInfo, arenaScoreInfo.getInstanceScore().getTime());
 	}
 
-	public SM_INSTANCE_SCORE(int mapId, InstanceScoreInfo<?> instanceScoreInfo) {
-		this(mapId, instanceScoreInfo, 0);
+	public SM_INSTANCE_SCORE(int mapId, InstanceScoreWriter<?> instanceScoreWriter) {
+		this(mapId, instanceScoreWriter, 0);
 	}
 
-	public SM_INSTANCE_SCORE(int mapId, InstanceScoreInfo<?> instanceScoreInfo, int instanceTime) {
+	public SM_INSTANCE_SCORE(int mapId, InstanceScoreWriter<?> instanceScoreWriter, int instanceTime) {
 		this.mapId = mapId;
 		this.instanceTime = instanceTime;
-		this.isi = instanceScoreInfo;
+		this.instanceScoreWriter = instanceScoreWriter;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
 		writeD(mapId);
 		writeD(instanceTime);
-		writeD(isi.getReward().getInstanceProgressionType().getId());
-		isi.writeMe(buf);
+		writeD(instanceScoreWriter.getInstanceScore().getInstanceProgressionType().getId());
+		instanceScoreWriter.writeMe(buf);
 	}
 }

@@ -24,8 +24,8 @@ public class PeriodicInstanceManager {
 		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
 			registerServiceAndScheduleRegistration(DredgionService.getInstance());
 			registerServiceAndScheduleRegistration(KamarBattlefieldService.getInstance());
-			registerServiceAndScheduleRegistration(EngulfedOphidianBridgeService.getInstance());
-			registerServiceAndScheduleRegistration(IronWallFrontService.getInstance());
+			registerServiceAndScheduleRegistration(EngulfedOphidanBridgeService.getInstance());
+			registerServiceAndScheduleRegistration(IronWallWarfrontService.getInstance());
 			registerServiceAndScheduleRegistration(IdgelDomeService.getInstance());
 		}
 	}
