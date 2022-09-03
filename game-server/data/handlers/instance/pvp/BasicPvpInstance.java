@@ -59,7 +59,11 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 		pInstanceReward.addPointsByRace(Race.ELYOS, 1000);
 		pInstanceReward.addPointsByRace(Race.ASMODIANS, 1000);
 		updateProgress(InstanceProgressionType.REINFORCE_MEMBER);
+		spawnFactionRelatedNpcs();
 		tasks.add(ThreadPoolManager.getInstance().schedule(this::startPreparation, getReinforceMemberPhaseDelay()));
+	}
+
+	protected void spawnFactionRelatedNpcs() {
 	}
 
 	private void startPreparation() {
@@ -68,7 +72,6 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 	}
 
 	protected void onStart() {
-
 	}
 
 	protected void onStop(boolean isBossKilled) {

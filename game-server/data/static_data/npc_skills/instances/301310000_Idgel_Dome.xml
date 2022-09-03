@@ -1,17 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
 	<!-- Destroyer Kunax -->
-	<npc_skills npc_ids="234190">
-		<npc_skill id="21744" prob="0" is_post_spawn="true" /><!-- Ide Scale -->
-		<npc_skill id="21550" prob="100" cd="20000" /><!-- Aggressive Shot -->
-		<npc_skill id="21551" prob="100" cd="20000" /><!-- Slaughtering Cleave -->
-		<npc_skill id="21552" prob="100" /><!-- Onslaught -->
-		<npc_skill id="21553" prob="100" cd="20000" /><!-- Cleaving Massacre -->
-		<npc_skill id="21554" prob="100" cd="20000" /><!-- Butcher's Sweep -->
-		<npc_skill id="21555" prob="100" cd="60000" prio="2" min_time="60000" /><!-- Aerial Confinement -->
-		<npc_skill id="21558" prob="100" cd="60000" prio="1" min_time="30000" /><!-- Aether Prison -->
+	<npc_skills npc_ids="287249">
+		<npc_skill id="21744" lv="56" prob="0" is_post_spawn="true" /><!-- Ide Scale -->
+		<npc_skill id="21551" lv="56" prob="100" cd="16000" /><!-- Slaughtering Cleave -->
+		<npc_skill id="21552" lv="56" prob="100" /><!-- Onslaught -->
+		<npc_skill id="21553" lv="56" prob="100" cd="14000" /><!-- Cleaving Massacre -->
+		<npc_skill id="21554" lv="56" prob="100" cd="8000" /><!-- Butcher's Sweep -->
+		<npc_skill id="21555" lv="56" prob="100" cd="40000" prio="2" next_chain_id="1" next_skill_time="3000" min_time="60000" /><!-- Aerial Confinement -->
+		<npc_skill id="21556" lv="56" prob="100" chain_id="1" />
+		<npc_skill id="21558" lv="56" prob="100" cd="60000" prio="1" min_time="30000" /><!-- Aether Prison -->
 	</npc_skills>
 	<npc_skills npc_ids="702300 702301">
-		<npc_skill id="21420" lv="65" prob="100" next_skill_time="3000" /><!-- Wide Area Bombardment -->
+		<npc_skill id="21420" lv="65" prob="100" next_skill_time="0" /><!-- Wide Area Bombardment -->
 	</npc_skills>
 </npc_skill_templates>

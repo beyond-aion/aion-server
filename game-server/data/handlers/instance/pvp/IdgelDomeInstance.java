@@ -22,9 +22,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- * Random positioning is currently missing.
- * AP reward could possibly be higher if kunax is defeated
- *
  * @author Ritsu, Estrayl
  */
 @InstanceID(301310000)
@@ -43,14 +40,27 @@ public class IdgelDomeInstance extends BasicPvpInstance {
 		super.onInstanceCreate();
 	}
 
+	protected void spawnFactionRelatedNpcs() {
+		spawn((raceStartPosition == 0 ? 802384 : 802383), 254.9255f, 179.3691f, 80.3904f, (byte) 90); // Quest Npcs
+		spawn((raceStartPosition == 0 ? 802383 : 802384), 274.5722f, 338.7958f, 80.6454f, (byte) 31);
+		spawnAndSetRespawn((raceStartPosition == 0 ? 702300 : 702301), 286.2041f, 338.7794f, 79.8274f, (byte) 105, 20); // Defense Turrets
+		spawnAndSetRespawn((raceStartPosition == 0 ? 702300 : 702301), 279.9443f, 332.1660f, 79.8274f, (byte) 105, 20);
+		spawnAndSetRespawn((raceStartPosition == 0 ? 702300 : 702301), 263.9707f, 341.6699f, 79.7848f, (byte) 15, 20);
+		spawnAndSetRespawn((raceStartPosition == 0 ? 702300 : 702301), 277.0629f, 355.2583f, 79.7844f, (byte) 75, 20);
+		spawnAndSetRespawn((raceStartPosition == 0 ? 702301 : 702300), 243.0305f, 179.2297f, 79.8241f, (byte) 45, 20);
+		spawnAndSetRespawn((raceStartPosition == 0 ? 702301 : 702300), 249.3263f, 185.8511f, 79.8241f, (byte) 45, 20);
+		spawnAndSetRespawn((raceStartPosition == 0 ? 702301 : 702300), 252.1385f, 162.8889f, 79.7711f, (byte) 15, 20);
+		spawnAndSetRespawn((raceStartPosition == 0 ? 702301 : 702300), 265.3730f, 176.5772f, 79.7719f, (byte) 75, 20);
+		spawnAndSetRespawn((raceStartPosition == 0 ? 802548 : 802549), 199.187f, 191.761f, 80.7466f, (byte) 15, 180); // Lever
+		spawnAndSetRespawn((raceStartPosition == 0 ? 802549 : 802548), 329.799f, 326.113f, 81.8731f, (byte) 75, 180);
+	}
+
 	@Override
 	protected void onStart() {
 		updateProgress(InstanceProgressionType.START_PROGRESS);
 		instance.forEachDoor(door -> door.setOpen(true));
-		tasks.add(ThreadPoolManager.getInstance().schedule(() -> spawn(234190, 264.4382f, 258.58527f, 88.452042f, (byte) 31), 600000));
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> spawn(287249, 264.4382f, 258.58527f, 88.452042f, (byte) 31), 600000));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> onStop(false), 1200000));
-		spawnAndSetRespawn(802548, 199.187f, 191.761f, 80.7466f, (byte) 15, 180);
-		spawnAndSetRespawn(802549, 329.799f, 326.113f, 81.8731f, (byte) 75, 180);
 		spawnChest();
 		spawnChest();
 	}
@@ -59,7 +69,7 @@ public class IdgelDomeInstance extends BasicPvpInstance {
 	protected void setAndDistributeRewards(Player player, PvpInstancePlayerReward reward, Race winningRace, boolean isBossKilled) {
 		int scorePoints = pInstanceReward.getPointsByRace(reward.getRace());
 		if (reward.getRace() == winningRace) {
-			reward.setBaseAp(pInstanceReward.getWinnerApReward());
+			reward.setBaseAp(pInstanceReward.getWinnerApReward() + (isBossKilled ? 2000 : 0));
 			reward.setBonusAp(2 * scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(50);
 			reward.setReward1(186000242, 3, 0);
@@ -87,7 +97,7 @@ public class IdgelDomeInstance extends BasicPvpInstance {
 	public void onSpawn(VisibleObject object) {
 		if (object instanceof Npc) {
 			switch (((Npc) object).getNpcId()) {
-				case 234190 -> { // Kunax
+				case 287249 -> { // Kunax
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5_FORTRESS_RE_BOSS_SPAWN());
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_FORTRESS_RE_BOSSSPAWN());
 				}
@@ -113,7 +123,7 @@ public class IdgelDomeInstance extends BasicPvpInstance {
 		switch (npc.getNpcId()) {
 			case 234186, 234187, 234189 -> points = 120;
 			case 234751, 234752, 234753 -> points = 200;
-			case 234190 -> {
+			case 287249 -> {
 				points = 6000;
 				isKunaxKilled = true;
 			}
@@ -159,10 +169,9 @@ public class IdgelDomeInstance extends BasicPvpInstance {
 
 	@Override
 	public void portToStartPosition(Player player) {
-		if (player.getRace() == Race.ELYOS) {
+		if (player.getRace() == Race.ELYOS && raceStartPosition == 0 || player.getRace() == Race.ASMODIANS && raceStartPosition != 0)
 			TeleportService.teleportTo(player, instance.getMapId(), instance.getInstanceId(), 269.76874f, 348.35953f, 79.44365f, (byte) 105);
-		} else {
+		else
 			TeleportService.teleportTo(player, instance.getMapId(), instance.getInstanceId(), 259.3971f, 169.18243f, 79.430855f, (byte) 45);
-		}
 	}
 }
