@@ -138,16 +138,6 @@ public class SpawnEngine {
 	}
 
 	/**
-	 * @param worldId
-	 */
-	public static void spawnWorldMap(int worldId) {
-		WorldMapTemplate template = DataManager.WORLD_MAPS_DATA.getTemplate(worldId);
-		if (template != null && !template.isInstance()) {
-			spawnBasedOnTemplate(template);
-		}
-	}
-
-	/**
 	 * @param worldMapTemplate
 	 */
 	private static void spawnBasedOnTemplate(WorldMapTemplate worldMapTemplate) {
