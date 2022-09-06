@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.questEngine;
 
 import java.util.*;
+import java.util.stream.Collectors;
 
-import org.apache.commons.lang3.StringUtils;
 import org.quartz.JobDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -31,7 +31,6 @@ import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.handlers.QuestHandlerLoader;
 import com.aionemu.gameserver.questEngine.handlers.models.XMLQuest;
-import com.aionemu.gameserver.questEngine.handlers.template.AbstractTemplateQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestActionType;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -50,8 +49,7 @@ import gnu.trove.map.hash.TIntIntHashMap;
 import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
- * @author MrPoke, Hilgert
- * @modified vlog, Neon
+ * @author MrPoke, Hilgert, vlog, Neon
  */
 public class QuestEngine implements GameEngine {
 
@@ -1031,38 +1029,28 @@ public class QuestEngine implements GameEngine {
 			if (nft.getNpcIds() == null || nft.getNpcIds().stream().anyMatch(this::existsSpawnData))
 				factionIds.add(nft.getId());
 		}
-		StringBuilder obsoleteHandlers = new StringBuilder();
 		for (AbstractQuestHandler qh : questHandlers.valueCollection()) {
 			QuestTemplate qt = DataManager.QUEST_DATA.getQuestById(qh.getQuestId());
-			if (qt.getMinlevelPermitted() == 99) {
-				// don't log as obsolete, because players can still have the active quest from before an update
-				unobtainableQuests.add(qh.getQuestId());
-			} else if (qt.getNpcFactionId() > 0 && !factionIds.contains(qt.getNpcFactionId())) { // outdated or unimplemented npc faction
-				if (!(qh instanceof AbstractTemplateQuestHandler)) // since xml handlers aren't expensive, we ignore them. only log manually scripted handlers
-					obsoleteHandlers.append("\n\tQuest ").append(qh.getQuestId()).append(" (npcFactionId=").append(qt.getNpcFactionId()).append(", handler=")
-						.append(qh.getClass().getName()).append(")");
-				unobtainableQuests.add(qh.getQuestId());
-			}
+			if (qt.getMinlevelPermitted() == 99 || qt.getNpcFactionId() > 0 && !factionIds.contains(qt.getNpcFactionId()))
+				unobtainableQuests.add(qh.getQuestId()); // players can still have these quests from before an update
 		}
-		StringBuilder missingSpawns = new StringBuilder();
-		for (int npcId : questNpcs.keys()) {
+		Map<String, String> missingSpawnsByQuests = new LinkedHashMap<>();
+		for (int npcId : Arrays.stream(questNpcs.keys()).sorted().toArray()) {
 			if (!existsSpawnData(npcId)) { // if the npc doesn't appear in any spawn template (world, instance, base, siege, temporary, event, ...)
 				Set<Integer> questIds = getQuestNpc(npcId).findAllRegisteredQuestIds();
 				if (ignoreEventQuests && questIds.stream().allMatch(id -> id >= 80000))
 					continue;
 				if (questIds.stream().allMatch(id -> unobtainableQuests.contains(id) || existsSpawnDataForAnyAlternativeNpc(id, npcId)))
 					continue; // don't log unobtainable quests or if alternative npcs appear in spawn data (many quests support outdated + current npcs)
-				missingSpawns.append("\n\tNpc ").append(npcId).append(" (quests: ").append(StringUtils.join(questIds, ", ")).append(")");
+				missingSpawnsByQuests.compute(questIds.stream().sorted().map(String::valueOf).collect(Collectors.joining(", ")),
+					(k, npcIds) -> npcIds == null ? String.valueOf(npcId) : npcIds + '/' + npcId);
 			}
 		}
-		if (obsoleteHandlers.length() > 0)
-			log.warn("Possibly obsolete quest handlers (quests are not obtainable):{}", obsoleteHandlers.toString());
-		if (missingSpawns.length() > 0)
-			log.warn("Missing quest npc spawns:{}", missingSpawns.toString());
-		if (obsoleteHandlers.length() == 0 && missingSpawns.length() == 0)
+		if (missingSpawnsByQuests.isEmpty())
 			log.info("Quest handler analysis finished without errors!");
 		else
-			log.info("Quest handler analysis finished (see above log messages for found errors)");
+			log.warn("Missing quest npc spawns:{}", missingSpawnsByQuests.entrySet().stream()
+				.map(e -> "\n\tNpc " + e.getValue() + " (quests: " + e.getKey() + ")").collect(Collectors.joining()));
 	}
 
 	private boolean existsSpawnData(int npcId) {
