@@ -34,7 +34,10 @@ import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.Config;
-import com.aionemu.gameserver.configs.main.*;
+import com.aionemu.gameserver.configs.main.CleaningConfig;
+import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.GSConfig;
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.custom.instance.CustomInstanceService;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
@@ -231,8 +234,6 @@ public class GameServer {
 		TownService.getInstance();
 		FlyRingService.getInstance();
 		RiftService.getInstance().initRifts();
-		if (SiegeConfig.SIEGE_ENABLED)
-			ShieldService.getInstance().spawnAll();
 
 		ConsoleUtil.printSection("Limits");
 		if (GSConfig.ENABLE_RATIO_LIMITATION) { // TODO move all of this stuff in a separate class / service

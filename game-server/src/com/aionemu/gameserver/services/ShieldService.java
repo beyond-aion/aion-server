@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services;
 
 import java.util.ArrayList;
-import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -16,7 +15,7 @@ import com.aionemu.gameserver.controllers.observer.ShieldObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.shield.Shield;
+import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeShield;
 import com.aionemu.gameserver.model.siege.SiegeType;
@@ -36,7 +35,7 @@ public class ShieldService {
 		protected static final ShieldService instance = new ShieldService();
 	}
 
-	private final LinkedHashMap<Integer, Shield> sphereShields = new LinkedHashMap<>();
+	private final Map<Integer, ShieldTemplate> sphereShields = new ConcurrentHashMap<>();
 	private final Map<Integer, List<SiegeShield>> registeredShields = new ConcurrentHashMap<>();
 
 	public static ShieldService getInstance() {
@@ -44,32 +43,21 @@ public class ShieldService {
 	}
 
 	private ShieldService() {
-	}
-
-	public void load(int mapId) {
 		for (ShieldTemplate template : DataManager.SHIELD_DATA.getShieldTemplates()) {
-			if (template.getMap() != mapId)
-				continue;
-			Shield f = new Shield(template);
-			sphereShields.put(f.getId(), f);
+			sphereShields.put(template.getId(), template);
 		}
 	}
 
-	public void spawnAll() {
-		for (Shield shield : sphereShields.values()) {
-			shield.spawn();
-			log.debug("Added " + shield.getName() + " at m=" + shield.getWorldId() + ",x=" + shield.getX() + ",y=" + shield.getY() + ",z=" + shield.getZ());
-		}
-		for (List<SiegeShield> otherShields : registeredShields.values()) {
-			for (SiegeShield shield : otherShields)
-				log.warn("Not bound shield " + shield.getGeometry().getName());
-		}
+	public void logDetachedShields() {
+		registeredShields.forEach((mapId, shields) -> {
+			if (!shields.isEmpty())
+				log.warn(shields.size() + " geo shield(s) are not attached to a SiegeLocation on map " + mapId + ": " + shields);
+		});
 	}
 
-	public ActionObserver createShieldObserver(int locationId, Creature observed) {
-		if (sphereShields.containsKey(locationId))
-			return new ShieldObserver(sphereShields.get(locationId), observed);
-		return null;
+	public ShieldObserver createShieldObserver(FortressLocation location, Creature observed) {
+		ShieldTemplate template = sphereShields.get(location.getLocationId());
+		return template == null ? null : new ShieldObserver(location, template, observed);
 	}
 
 	public ActionObserver createShieldObserver(SiegeShield geoShield, Creature observed) {
@@ -106,10 +94,7 @@ public class ShieldService {
 			if (zone.getAreaTemplate().isInside3D(center.x, center.y, center.z)) {
 				shields.add(shield);
 				mapShields.remove(index);
-				Shield sphereShield = sphereShields.get(location.getLocationId());
-				if (sphereShield != null) {
-					sphereShields.remove(location.getLocationId());
-				}
+				sphereShields.remove(location.getLocationId());
 				shield.setSiegeLocationId(location.getLocationId());
 			}
 		}

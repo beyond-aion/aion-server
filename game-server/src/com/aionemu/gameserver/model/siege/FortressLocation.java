@@ -1,8 +1,11 @@
 package com.aionemu.gameserver.model.siege;
 
 import java.util.List;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.configs.main.SiegeConfig;
+import com.aionemu.gameserver.controllers.observer.ShieldObserver;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Kisk;
@@ -12,6 +15,7 @@ import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplat
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -21,6 +25,8 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  * @author Source
  */
 public class FortressLocation extends SiegeLocation {
+
+	private final Map<Integer, ShieldObserver> shieldObservers = new ConcurrentHashMap<>();
 
 	public FortressLocation(SiegeLocationTemplate template) {
 		super(template);
@@ -46,6 +52,13 @@ public class FortressLocation extends SiegeLocation {
 		super.onEnterZone(creature, zone);
 		creature.setInsideZoneType(ZoneType.SIEGE);
 		checkForBalanceBuff(creature, SiegeBuffAction.ADD);
+		if (isUnderShield() && getRace() != SiegeRace.getByRace(creature.getRace())) {
+			ShieldObserver observer = ShieldService.getInstance().createShieldObserver(this, creature);
+			if (observer != null) {
+				creature.getObserveController().addObserver(observer);
+				shieldObservers.put(creature.getObjectId(), observer);
+			}
+		}
 	}
 
 	@Override
@@ -53,7 +66,9 @@ public class FortressLocation extends SiegeLocation {
 		super.onLeaveZone(creature, zone);
 		creature.unsetInsideZoneType(ZoneType.SIEGE);
 		checkForBalanceBuff(creature, SiegeBuffAction.LEAVE_ZONE_REMOVE);
-
+		ShieldObserver observer = shieldObservers.remove(creature.getObjectId());
+		if (observer != null)
+			creature.getObserveController().removeObserver(observer);
 	}
 
 	public void checkForBalanceBuff(Creature creature, SiegeBuffAction siegeBuffAction) {

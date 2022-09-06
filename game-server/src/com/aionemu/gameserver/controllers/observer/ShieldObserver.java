@@ -2,9 +2,10 @@ package com.aionemu.gameserver.controllers.observer;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.shield.Shield;
+import com.aionemu.gameserver.model.siege.FortressLocation;
+import com.aionemu.gameserver.model.templates.shield.ShieldPoint;
+import com.aionemu.gameserver.model.templates.shield.ShieldTemplate;
 import com.aionemu.gameserver.model.utils3d.Point3D;
-import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -13,16 +14,18 @@ import com.aionemu.gameserver.world.WorldPosition;
  */
 public class ShieldObserver extends ActionObserver {
 
-	private Creature creature;
-	private Shield shield;
-	private Point3D oldPosition;
+	private final FortressLocation location;
+	private final Creature creature;
+	private final ShieldTemplate shield;
+	private final Point3D oldPosition;
 
-	public ShieldObserver(Shield shield, Creature creature) {
+	public ShieldObserver(FortressLocation location, ShieldTemplate shield, Creature creature) {
 		super(ObserverType.MOVE);
+		this.location = location;
 		this.creature = creature;
 		this.shield = shield;
 		WorldPosition lastPos;
-		if (creature instanceof Player && (lastPos = ((Player) creature).getMoveController().getLastPositionFromClient()) != null) {
+		if (creature instanceof Player player && (lastPos = player.getMoveController().getLastPositionFromClient()) != null) {
 			this.oldPosition = new Point3D(lastPos.getX(), lastPos.getY(), lastPos.getZ());
 		} else {
 			this.oldPosition = new Point3D(creature.getX(), creature.getY(), creature.getZ());
@@ -31,22 +34,25 @@ public class ShieldObserver extends ActionObserver {
 
 	@Override
 	public void moved() {
+		ShieldPoint shieldCenter = shield.getCenter();
 		boolean passedThrough = false;
-
-		if (SiegeService.getInstance().getFortress(shield.getId()).isUnderShield())
-			if (!(creature.getZ() < shield.getZ() && oldPosition.getZ() < shield.getZ()))
-				if (PositionUtil.isInRange(shield, (float) oldPosition.getX(), (float) oldPosition.getY(), (float) oldPosition.getZ(),
-					shield.getTemplate().getRadius()) != PositionUtil.isInRange(shield, creature, shield.getTemplate().getRadius()))
-					passedThrough = true;
+		// only collide with upper half of sphere
+		if (location.isUnderShield() && !(creature.getZ() < shieldCenter.getZ() && oldPosition.getZ() < shieldCenter.getZ())) {
+			boolean wasInside = PositionUtil.isInRange((float) oldPosition.getX(), (float) oldPosition.getY(), (float) oldPosition.getZ(), shieldCenter.getX(), shieldCenter.getY(), shieldCenter.getZ(), shield.getRadius());
+			boolean isInside = PositionUtil.isInRange(creature, shieldCenter.getX(), shieldCenter.getY(), shieldCenter.getZ(), shield.getRadius());
+			passedThrough = wasInside != isInside;
+		}
 
 		if (passedThrough && creature.getController().die()) {
-			if (creature instanceof Player)
-				((Player) creature).getFlyController().endFly(true);
+			if (creature instanceof Player player)
+				player.getFlyController().endFly(true);
 			creature.getObserveController().removeObserver(this);
 		} else {
-			oldPosition.x = creature.getX();
-			oldPosition.y = creature.getY();
-			oldPosition.z = creature.getZ();
+			synchronized (oldPosition) {
+				oldPosition.x = creature.getX();
+				oldPosition.y = creature.getY();
+				oldPosition.z = creature.getZ();
+			}
 		}
 	}
 }

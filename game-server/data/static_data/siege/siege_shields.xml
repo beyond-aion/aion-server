@@ -21,9 +21,6 @@
 	<shield id="1231" map="400010000" name="KYSIS_FORTRESS" radius="45.0">
 		<center x="2506.1921" y="2108.306" z="3062.717"/>
 	</shield>
-	<shield id="1241" map="400010000" name="MIREN_FORTRESS" radius="50.0">
-		<center x="1782.4957" y="2281.958" z="2963.6975"/>
-	</shield>
 	<shield id="1251" map="400010000" name="ASTERIA_FORTRESS" radius="55.0">
 		<center x="720.9435" y="2960.121" z="2907.4785"/>
 	</shield>

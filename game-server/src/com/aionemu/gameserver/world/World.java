@@ -24,6 +24,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
@@ -77,7 +78,7 @@ public class World {
 				worldMaps.put(template.getMapId(), worldMap);
 			}
 		});
-
+		ShieldService.getInstance().logDetachedShields();
 		log.info("World: " + worldMaps.size() + " world maps created.");
 	}
 

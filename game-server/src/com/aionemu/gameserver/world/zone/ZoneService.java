@@ -128,7 +128,6 @@ public final class ZoneService implements GameEngine {
 		Collection<ZoneInfo> areas = this.zoneByMapIdMap.get(mapId);
 		if (areas == null)
 			return zones;
-		ShieldService.getInstance().load(mapId);
 
 		for (ZoneInfo area : areas) {
 			ZoneInstance instance;
