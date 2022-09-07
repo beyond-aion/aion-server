@@ -43,10 +43,8 @@ public class ShieldObserver extends ActionObserver {
 			passedThrough = wasInside != isInside;
 		}
 
-		if (passedThrough && creature.getController().die()) {
-			if (creature instanceof Player player)
-				player.getFlyController().endFly(true);
-			creature.getObserveController().removeObserver(this);
+		if (passedThrough) {
+			CollisionDieActor.kill(creature);
 		} else {
 			synchronized (oldPosition) {
 				oldPosition.x = creature.getX();

@@ -27,7 +27,6 @@ public class DestroyerKunaxAI extends AggressiveNpcAI {
 		}
 		if (dist > 3 && dist <= 30) {
 			SkillEngine.getInstance().getSkill(getOwner(), 21550, 56, getTarget()).useSkill();
-			System.out.println("hello");
 			return AttackIntention.SKILL_ATTACK;
 		}
 		return super.chooseAttackIntention();
