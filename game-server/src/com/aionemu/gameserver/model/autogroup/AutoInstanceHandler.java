@@ -10,7 +10,7 @@ public interface AutoInstanceHandler {
 
 	void onInstanceCreate(WorldMapInstance instance);
 
-	AGQuestion addPlayer(Player player, SearchInstance searchInstance);
+	AGQuestion addLookingForParty(LookingForParty lookingForParty);
 
 	void onEnterInstance(Player player);
 

@@ -150,6 +150,14 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
+	public void onPlayerLogin(Player player) {
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.INIT_PLAYER, player.getObjectId(), 0), getTime()));
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE, player.getObjectId(), 0), getTime()));
+	}
+
+	@Override
 	public void onPlayerLogOut(Player player) {
 		if (player.isDead())
 			onReviveEvent(player);
@@ -162,7 +170,6 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.INIT_PLAYER, player.getObjectId(), 0), getTime()));
-
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS, player.getObjectId(), 0), getTime()));
 	}

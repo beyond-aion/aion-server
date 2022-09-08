@@ -36,7 +36,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
-import com.aionemu.gameserver.services.instance.periodic.DredgionService;
+import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
 import com.aionemu.gameserver.services.item.ItemChargeService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
@@ -49,8 +49,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
- * @author VladimirZ
- * @modified Neon
+ * @author VladimirZ, Neon
  */
 public class DialogService {
 
@@ -249,10 +248,10 @@ public class DialogService {
 					player.getCommonData().setInEditMode(true);
 					break;
 				case MATCH_MAKER: // dredgion
-					if (AutoGroupConfig.AUTO_GROUP_ENABLE && DredgionService.getInstance().isRegisterAvailable()) {
+					if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
 						AutoGroupType agt = AutoGroupType.getAutoGroup(npc.getNpcId());
-						if (agt != null && agt.isDredgion())
-							PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId()));
+						if (agt != null && PeriodicInstanceManager.getInstance().isRegistrationOpen(agt.getTemplate().getMaskId()))
+							PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getTemplate().getMaskId()));
 					} else {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, 1011));
 					}
@@ -355,7 +354,7 @@ public class DialogService {
 		return switch (npc.getSummonOwner()) {
 			case PRIVATE -> playerIsCreator;
 			case GROUP -> playerIsCreator || player.getCurrentGroup() != null && player.getCurrentGroup().hasMember(npc.getCreatorId());
-			case ALLIANCE -> playerIsCreator || player.getCurrentTeam() instanceof PlayerAlliance alliance && alliance.hasMember(npc.getCreatorId());
+			case ALLIANCE -> playerIsCreator || player.getCurrentTeam()instanceof PlayerAlliance alliance && alliance.hasMember(npc.getCreatorId());
 			case LEGION -> playerIsCreator || player.isLegionMember() && player.getLegion().isMember(npc.getCreatorId());
 		};
 	}
@@ -403,16 +402,12 @@ public class DialogService {
 				if (LegionDominionService.getInstance().isInCalculationTime())
 					return true;
 				if (player.getLegion() != null) {
-					if (player.getLegion().getCurrentLegionDominion() == talkInfo.getSubDialogValue()) {
-						return false;
-					}
+					return player.getLegion().getCurrentLegionDominion() != talkInfo.getSubDialogValue();
 				}
 				return true;
 			case LEGION_DOMINION_NPC:
 				if (player.getLegion() != null) {
-					if (player.getLegion().getOccupiedLegionDominion() == talkInfo.getSubDialogValue()) {
-						return false;
-					}
+					return player.getLegion().getOccupiedLegionDominion() != talkInfo.getSubDialogValue();
 				}
 				return true;
 			default:

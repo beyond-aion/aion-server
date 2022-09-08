@@ -365,8 +365,6 @@ public final class PlayerEnterWorldService {
 		BrokerService.getInstance().onPlayerLogin(player);
 		HousingService.getInstance().onPlayerLogin(player); // must ensure player mailbox is initialized first
 		// ----------------------------- Retail sequence -----------------------------
-		if (AutoGroupConfig.AUTO_GROUP_ENABLE)
-			AutoGroupService.getInstance().onPlayerLogin(player);
 		if (CustomConfig.ENABLE_SIMPLE_2NDCLASS)
 			ClassChangeService.showClassChangeDialog(player);
 

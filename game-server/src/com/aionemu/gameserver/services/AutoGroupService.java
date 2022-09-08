@@ -2,96 +2,176 @@ package com.aionemu.gameserver.services;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.autogroup.*;
+import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
-import com.aionemu.gameserver.model.templates.InstanceCooltime;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.autogroup.AutoGroupUtility;
 import com.aionemu.gameserver.services.instance.InstanceService;
+import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
 import com.aionemu.gameserver.services.instance.PvPArenaService;
-import com.aionemu.gameserver.services.instance.periodic.*;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author xTz
+ * @author xTz, Estrayl
  */
 public class AutoGroupService {
 
-	private Map<Integer, LookingForParty> searchers = new ConcurrentHashMap<>();
-	private Map<Integer, AutoInstance> autoInstances = new ConcurrentHashMap<>();
-	private List<Integer> penalties = Collections.synchronizedList(new ArrayList<>());
-	private Lock lock = new ReentrantLock();
+	private final Map<Integer, AutoInstance> autoInstances = new ConcurrentHashMap<>();
+	private final Map<Integer, List<LookingForParty>> lookingParties = new ConcurrentHashMap<>();
+	private final Set<Integer> penalties = Collections.synchronizedSet(new HashSet<>());
 
 	private AutoGroupService() {
 	}
 
-	public void startLooking(Player player, int instanceMaskId, EntryRequestType ert) {
-		AutoGroupType agt = AutoGroupType.getAGTByMaskId(instanceMaskId);
-		if (agt == null) {
+	public void startLooking(Player player, int maskId, EntryRequestType ert) {
+		AutoGroupType agt = AutoGroupType.getAGTByMaskId(maskId);
+		if (agt == null || !canRegister(player, ert, agt))
 			return;
-		}
-		if (!canEnter(player, ert, agt)) {
-			return;
-		}
-		int obj = player.getObjectId();
-		LookingForParty lfp = searchers.get(obj);
-		if (penalties.contains(obj)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED(agt.getInstanceMapId()));
-			return;
-		}
+		lookingParties.putIfAbsent(maskId, new LinkedList<>());
+		LookingForParty lfp = getLookingForPartyOfPlayer(player.getObjectId(), maskId);
 		if (lfp == null) {
-			searchers.putIfAbsent(obj, new LookingForParty(player, instanceMaskId, ert));
-		} else if (lfp.hasPenalty() || lfp.isRegistredInstance(instanceMaskId)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED(agt.getInstanceMapId()));
+			lfp = new LookingForParty(
+				player.isInTeam() ? player.getCurrentTeam().getOnlineMembers().stream().map(AionObject::getObjectId).collect(Collectors.toList())
+					: List.of(player.getObjectId()),
+				player.getRace(), ert, maskId, player.getObjectId());
+
+			lookingParties.get(maskId).add(lfp);
+		} else if (lfp.getMaskId() == maskId) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED(agt.getTemplate().getInstanceMapId()));
 			return;
-		} else {
-			lfp.addInstanceMaskId(instanceMaskId, ert);
 		}
 
-		if (ert.isGroupEntry()) {
-			for (Player member : player.getPlayerGroup().getOnlineMembers()) {
-				if (agt.isIconInvite()) {
-					PacketSendUtility.sendPacket(member, new SM_AUTO_GROUP(instanceMaskId, 6, true));
-				}
-				PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_REGISTER_SUCCESS());
-				PacketSendUtility.sendPacket(member, new SM_AUTO_GROUP(instanceMaskId, 1, ert.getId(), player.getName()));
-			}
-		} else {
-			if (agt.isIconInvite()) {
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6, true));
-			}
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_REGISTER_SUCCESS());
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 1, ert.getId(), player.getName()));
+		AutoGroupUtility.sendSuccessfulRegistration(lfp, player.getName(), agt, maskId);
+		if (AutoGroupConfig.ANNOUNCE_BATTLEGROUND_REGISTRATIONS && agt.isPeriodicInstance() && ert == EntryRequestType.GROUP_ENTRY
+			&& lookingParties.get(maskId).stream().filter(s -> s.getRace() == player.getRace() && s.getMaskId() == maskId).count() == 1) {
+			PacketSendUtility.broadcastToWorld(
+				new SM_MESSAGE(0, null, player.getRace().getL10n() + " have registered for " + agt.getL10n() + ".", ChatType.BRIGHT_YELLOW_CENTER),
+				p -> p.getRace() != player.getRace() && agt.isInLvlRange(p.getLevel()));
 		}
-		if (agt.isIconInvite() && AutoGroupConfig.ANNOUNCE_BATTLEGROUND_REGISTRATIONS && searchers.values().stream().filter(s -> s.getPlayer() != null && s.getPlayer().getRace() == player.getRace() && s.getSearchInstance(instanceMaskId) != null).count() == 1)
-			PacketSendUtility.broadcastToWorld(new SM_MESSAGE(0, null, player.getRace().getL10n() + " have registered for " + agt.getL10n() + ".", ChatType.BRIGHT_YELLOW_CENTER), p -> p.getRace() != player.getRace() && agt.hasLevelPermit(p.getLevel()));
-		startSort(ert, instanceMaskId, true);
+
+		if (checkInstancesForOpenQuickEntries(lfp, maskId))
+			return;
+		checkQueueForNewMatches(maskId);
 	}
 
-	public synchronized void pressEnter(Player player, int instanceMaskId) {
-		AutoInstance instance = getAutoInstance(player, instanceMaskId);
-		if (instance == null || instance.players.get(player.getObjectId()).isPressedEnter()) {
+	private void checkQueueForNewMatches(int maskId) {
+		List<LookingForParty> queuedParties = lookingParties.get(maskId);
+		if (queuedParties == null || queuedParties.isEmpty())
 			return;
+		Collections.sort(queuedParties);
+		AutoGroupType agt = AutoGroupType.getAGTByMaskId(maskId);
+		if (agt == null)
+			return;
+		AutoInstance autoInstance = agt.getAutoInstance();
+		boolean canCreateNewInstance = false;
+
+		List<LookingForParty> filteredParties = new LinkedList<>();
+		for (LookingForParty lfp : queuedParties) {
+			if (lfp.getLeaderObjId() == 0 || lfp.isOnStartEnterTask()) {
+				continue;
+			}
+			AGQuestion question = autoInstance.addLookingForParty(lfp);
+			if (question != AGQuestion.FAILED) {
+				filteredParties.add(lfp);
+			}
+			if (question == AGQuestion.READY) {
+				canCreateNewInstance = true;
+				break;
+			}
 		}
-		if (player.isInGroup()) {
+		if (canCreateNewInstance)
+			createNewInstance(autoInstance, agt, filteredParties, maskId);
+		else
+			autoInstance.clear();
+
+		filteredParties.clear();
+	}
+
+	private void createNewInstance(AutoInstance autoInstance, AutoGroupType agt, List<LookingForParty> filteredParties, int maskId) {
+		WorldMapInstance instance = InstanceService.getNextAvailableInstance(agt.getTemplate().getInstanceMapId(), 0, agt.getDifficultId(), null,
+			autoInstance.getMaxPlayers(), false);
+		autoInstance.onInstanceCreate(instance);
+		autoInstances.put(instance.getInstanceId(), autoInstance);
+		for (LookingForParty lfp : filteredParties) {
+			lookingParties.get(maskId).remove(lfp);
+			lfp.setStartEnterTime();
+			lfp.getMemberObjectIds().forEach(id -> {
+				searchAndRemoveAdditionalRegistrations(id);
+				AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 4);
+			});
+		}
+	}
+
+	private boolean checkInstancesForOpenQuickEntries(LookingForParty lfp, int maskId) {
+		if (lfp.getEntryRequestType() != EntryRequestType.QUICK_GROUP_ENTRY || lfp.isOnStartEnterTask())
+			return false;
+		for (AutoInstance autoInstance : autoInstances.values()) {
+			if (autoInstance.getAutoGroupType().getTemplate().getMaskId() == maskId && autoInstance.addLookingForParty(lfp) == AGQuestion.ADDED) {
+				lookingParties.get(maskId).remove(lfp);
+				lfp.setStartEnterTime();
+				AutoGroupUtility.sendWindowToPlayerIfOnline(lfp.getLeaderObjId(), maskId, 4);
+				searchAndRemoveAdditionalRegistrations(lfp.getLeaderObjId());
+				return true;
+			}
+		}
+		return false;
+	}
+
+	private void checkQueueForQuickEntries(AutoInstance autoInstance) {
+		int maskId = autoInstance.getAutoGroupType().getTemplate().getMaskId();
+		List<LookingForParty> parties = lookingParties.get(maskId);
+		if (parties == null || parties.isEmpty())
+			return;
+		for (LookingForParty lfp : parties) {
+			if (lfp.getEntryRequestType() == EntryRequestType.QUICK_GROUP_ENTRY && !lfp.isOnStartEnterTask()
+				&& autoInstance.addLookingForParty(lfp) == AGQuestion.ADDED) {
+				lookingParties.get(maskId).remove(lfp);
+				lfp.setStartEnterTime();
+				AutoGroupUtility.sendWindowToPlayerIfOnline(lfp.getLeaderObjId(), maskId, 4);
+				searchAndRemoveAdditionalRegistrations(lfp.getLeaderObjId());
+				return;
+			}
+		}
+	}
+
+	private void searchAndRemoveAdditionalRegistrations(int objectId) {
+		List<LookingForParty> partiesToRemove = getAllPartiesOfPlayer(objectId);
+		for (LookingForParty lfp : partiesToRemove) {
+			int maskId = lfp.getMaskId();
+			if (lfp.isLeader(objectId)) {
+				lookingParties.get(maskId).remove(lfp);
+				penaliseParty(lfp);
+				lfp.getMemberObjectIds().forEach(id -> AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 2));
+			} else {
+				lfp.unregisterMember(objectId);
+				AutoGroupUtility.sendWindowToPlayerIfOnline(objectId, maskId, 2);
+				penalisePlayerAndScheduleRemoval(objectId);
+				checkQueueForNewMatches(maskId);
+			}
+		}
+	}
+
+	public void pressEnter(Player player, int instanceMaskId) {
+		AutoInstance instance = getAutoInstance(player, instanceMaskId);
+		if (instance == null)
+			return;
+
+		if (player.isInGroup())
 			PlayerGroupService.removePlayer(player);
-		}
-		if (player.isInAlliance()) {
+		if (player.isInAlliance())
 			PlayerAllianceService.removePlayer(player);
-		}
+
 		instance.onPressEnter(player);
 		PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 5));
 	}
@@ -100,169 +180,77 @@ public class AutoGroupService {
 		if (player.isInInstance()) {
 			int obj = player.getObjectId();
 			AutoInstance autoInstance = autoInstances.get(player.getInstanceId());
-			if (autoInstance != null && autoInstance.players.containsKey(obj)) {
+			if (autoInstance != null && autoInstance.getRegisteredAGPlayers().containsKey(obj))
 				autoInstance.onEnterInstance(player);
-			}
-		}
-	}
-
-	public void unregisterLooking(Player player, int instanceMaskId) {
-		int obj = player.getObjectId();
-		LookingForParty lfp = searchers.get(obj);
-		SearchInstance si;
-		if (lfp != null) {
-			lfp.setPenaltyTime();
-			si = lfp.getSearchInstance(instanceMaskId);
-			if (si != null) {
-				if (lfp.unregisterInstance(instanceMaskId) == 0) {
-					searchers.remove(obj);
-					startPenalty(obj);
-				}
-				unregisterSearchInstance(player, si);
-			}
 		}
 	}
 
 	public void cancelEnter(Player player, int instanceMaskId) {
 		AutoInstance autoInstance = getAutoInstance(player, instanceMaskId);
 		if (autoInstance != null) {
-			int obj = player.getObjectId();
-			if (!autoInstance.players.get(obj).isInInstance()) {
+			int objectId = player.getObjectId();
+			if (!autoInstance.getRegisteredAGPlayers().get(objectId).isInInstance()) {
 				autoInstance.unregister(player);
-				if (!searchers.containsKey(obj)) {
-					startPenalty(obj);
-				}
-				if (autoInstance.agt.hasRegisterQuick()) {
-					startSort(EntryRequestType.QUICK_GROUP_ENTRY, instanceMaskId, false);
-				}
-				if (autoInstance.players.isEmpty()) {
-					WorldMapInstance instance = autoInstance.instance;
-					autoInstance = autoInstances.remove(instance.getInstanceId());
-					InstanceService.destroyInstance(instance);
-					autoInstance.clear();
-				}
-			}
-			if (autoInstance.agt.isIronWallWarfront() && IronWallWarfrontService.getInstance().isRegisterAvailable()) {
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6));
-			} else if (autoInstance.agt.isDredgion() && DredgionService.getInstance().isRegisterAvailable()) {
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6));
-			} else if (autoInstance.agt.isKamarBattlefield() && KamarBattlefieldService.getInstance().isRegisterAvailable()) {
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6));
-			} else if (autoInstance.agt.isEngulfedOphidanBridge() && EngulfedOphidanBridgeService.getInstance().isRegisterAvailable()) {
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6));
-			} else if (autoInstance.agt.isIdgelDome() && IdgelDomeService.getInstance().isRegisterAvailable()) {
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6));
+				penalisePlayerAndScheduleRemoval(objectId);
+				if (destroyInstanceIfPossible(autoInstance, player.getInstanceId()))
+					return;
+				if (autoInstance.getAutoGroupType().getTemplate().canRegisterQuickEntry())
+					checkQueueForQuickEntries(autoInstance);
 			}
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 2));
 		}
 	}
 
 	public void onPlayerLogin(Player player) {
-		for (int maskId : DredgionService.getInstance().getMaskIds()) {
-			boolean closed = true;
-			if (DredgionService.getInstance().getInstanceMaskId(player) == maskId) {
-				closed = !DredgionService.getInstance().isEnterAvailable(player);
-			}
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, closed));
-		}
-		for (int maskId : KamarBattlefieldService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player,
-				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !KamarBattlefieldService.getInstance().isEnterAvailable(player)));
-		for (int maskId : EngulfedOphidanBridgeService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player,
-				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !EngulfedOphidanBridgeService.getInstance().isEnterAvailable(player)));
-		for (int maskId : IronWallWarfrontService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player,
-				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IronWallWarfrontService.getInstance().isEnterAvailable(player)));
-		for (int maskId : IdgelDomeService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player,
-				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IdgelDomeService.getInstance().isEnterAvailable(player)));
-		int obj = player.getObjectId();
-		LookingForParty lfp = searchers.get(obj);
-		if (lfp != null) {
-			for (SearchInstance searchInstance : lfp.getSearchInstances()) {
-				if (searchInstance.getEntryRequestType().isGroupEntry() && !player.isInGroup()) {
-					int instanceMaskId = searchInstance.getInstanceMaskId();
-					lfp.unregisterInstance(instanceMaskId);
-					if (searchInstance.isIronWallWarfront() && IronWallWarfrontService.getInstance().isRegisterAvailable()) {
-						PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, SM_AUTO_GROUP.wnd_EntryIcon));
-					} else if (searchInstance.isDredgion() && DredgionService.getInstance().isRegisterAvailable()) {
-						PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, SM_AUTO_GROUP.wnd_EntryIcon));
-					} else if (searchInstance.isKamarBattlefield() && KamarBattlefieldService.getInstance().isRegisterAvailable()) {
-						PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, SM_AUTO_GROUP.wnd_EntryIcon));
-					} else if (searchInstance.isEngulfedOphidanBridge() && EngulfedOphidanBridgeService.getInstance().isRegisterAvailable()) {
-						PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, SM_AUTO_GROUP.wnd_EntryIcon));
-					} else if (searchInstance.isIdgelDome() && IdgelDomeService.getInstance().isRegisterAvailable()) {
-						PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, SM_AUTO_GROUP.wnd_EntryIcon));
-					}
-					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 2));
-					continue;
-				}
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(searchInstance.getInstanceMaskId(), 8,
-					searchInstance.getRemainingTime() + searchInstance.getEntryRequestType().getId(), player.getName()));
-				if (searchInstance.isDredgion()) {
-					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(searchInstance.getInstanceMaskId(), SM_AUTO_GROUP.wnd_EntryIcon, true));
-				}
-			}
-			if (lfp.getSearchInstances().isEmpty()) {
-				searchers.remove(obj);
-				return;
-			}
-			lfp.setPlayer(player);
-			for (SearchInstance si : lfp.getSearchInstances()) {
-				startSort(si.getEntryRequestType(), si.getInstanceMaskId(), true);
-			}
-		}
+		PeriodicInstanceManager.getInstance().checkAndSendOpenRegistrations(player);
 	}
 
-	public void onEnterWorld(Player player) {
-		for (int maskId : DredgionService.getInstance().getMaskIds()) {
-			boolean closed = true;
-			if (DredgionService.getInstance().getInstanceMaskId(player) == maskId) {
-				closed = !DredgionService.getInstance().isEnterAvailable(player);
-			}
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, closed));
+	public List<LookingForParty> getAllPartiesOfPlayer(int objectId) {
+		List<LookingForParty> parties = new ArrayList<>();
+		for (int maskId : lookingParties.keySet()) {
+			LookingForParty lfp = getLookingForPartyOfPlayer(objectId, maskId);
+			if (lfp != null)
+				parties.add(lfp);
 		}
-		for (int maskId : KamarBattlefieldService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player,
-				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !KamarBattlefieldService.getInstance().isEnterAvailable(player)));
-		for (int maskId : EngulfedOphidanBridgeService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player,
-				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !EngulfedOphidanBridgeService.getInstance().isEnterAvailable(player)));
-		for (int maskId : IronWallWarfrontService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player,
-				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IronWallWarfrontService.getInstance().isEnterAvailable(player)));
-		for (int maskId : IdgelDomeService.getInstance().getMaskIds())
-			PacketSendUtility.sendPacket(player,
-				new SM_AUTO_GROUP(maskId, SM_AUTO_GROUP.wnd_EntryIcon, !IdgelDomeService.getInstance().isEnterAvailable(player)));
+		return parties;
+	}
+
+	public LookingForParty getLookingForPartyOfPlayer(int objectId, int maskId) {
+		List<LookingForParty> parties = lookingParties.get(maskId);
+		if (parties != null && !parties.isEmpty()) {
+			for (LookingForParty lfp : lookingParties.get(maskId))
+				if (lfp.isMember(objectId))
+					return lfp;
+		}
+		return null;
 	}
 
 	public void onPlayerLogOut(Player player) {
-		int obj = player.getObjectId();
+		int objectId = player.getObjectId();
 		int instanceId = player.getInstanceId();
-		LookingForParty lfp = searchers.get(obj);
-		if (lfp != null) {
-			lfp.setPlayer(null);
+		for (LookingForParty lfp : getAllPartiesOfPlayer(objectId)) {
 			if (lfp.isOnStartEnterTask()) {
 				for (AutoInstance autoInstance : autoInstances.values()) {
-					if (autoInstance.players.containsKey(obj) && !autoInstance.players.get(obj).isInInstance()) {
-						cancelEnter(player, autoInstance.agt.getInstanceMaskId());
-					}
+					if (autoInstance.getRegisteredAGPlayers().containsKey(objectId) && !autoInstance.getRegisteredAGPlayers().get(objectId).isInInstance())
+						cancelEnter(player, autoInstance.getAutoGroupType().getTemplate().getMaskId());
 				}
+			} else if (lfp.isLeader(objectId)) {
+				lfp.setLeaderObjId(lfp.getMemberObjectIds().stream().filter(id -> id != objectId).findFirst().orElse(0));
+				if (lfp.getLeaderObjId() == 0)
+					lookingParties.get(lfp.getMaskId()).remove(lfp);
+			} else {
+				lfp.unregisterMember(objectId);
+				checkQueueForNewMatches(lfp.getMaskId());
 			}
 		}
 
 		if (player.isInInstance()) {
 			AutoInstance autoInstance = autoInstances.get(instanceId);
-			if (autoInstance != null && autoInstance.players.containsKey(obj)) {
-				WorldMapInstance instance = autoInstance.instance;
+			if (autoInstance != null && autoInstance.getRegisteredAGPlayers().containsKey(objectId)) {
+				WorldMapInstance instance = autoInstance.getInstance();
 				if (instance != null) {
-					autoInstance.players.get(obj).setOnline(false);
-					if (autoInstance.players.values().stream().noneMatch(AGPlayer::isOnline)) {
-						autoInstance = autoInstances.remove(instanceId);
-						InstanceService.destroyInstance(instance);
-						autoInstance.clear();
-					}
+					autoInstance.getRegisteredAGPlayers().get(objectId).setOnline(false);
+					destroyInstanceIfPossible(autoInstance, instanceId);
 				}
 			}
 		}
@@ -273,282 +261,95 @@ public class AutoGroupService {
 			int obj = player.getObjectId();
 			int instanceId = player.getInstanceId();
 			AutoInstance autoInstance = autoInstances.get(instanceId);
-			if (autoInstance != null && autoInstance.players.containsKey(obj)) {
+			if (autoInstance != null && autoInstance.getRegisteredAGPlayers().containsKey(obj)) {
 				autoInstance.onLeaveInstance(player);
-				if (autoInstance.players.values().stream().noneMatch(AGPlayer::isOnline)) {
-					WorldMapInstance instance = autoInstance.instance;
-					autoInstances.remove(instanceId);
-					if (instance != null)
-						InstanceService.destroyInstance(instance);
-					autoInstance.clear();
-				} else if (autoInstance.agt.hasRegisterQuick()) {
-					startSort(EntryRequestType.QUICK_GROUP_ENTRY, autoInstance.agt.getInstanceMaskId(), false);
-				}
+				if (destroyInstanceIfPossible(autoInstance, instanceId))
+					return;
+				if (autoInstance.getAutoGroupType().getTemplate().canRegisterQuickEntry())
+					checkQueueForQuickEntries(autoInstance);
 			}
 		}
+		PeriodicInstanceManager.getInstance().checkAndSendOpenRegistrations(player);
 	}
 
-	private void startSort(EntryRequestType ert, Integer instanceMaskId, boolean checkNewGroup) {
-		lock.lock();
-		try {
-			Collection<Player> players = new HashSet<>();
-			if (ert.isQuickGroupEntry()) {
-				for (LookingForParty lfp : searchers.values()) {
-					if (lfp.getPlayer() == null || lfp.isOnStartEnterTask()) {
-						continue;
-					}
-					for (AutoInstance autoInstance : autoInstances.values()) {
-						int searchMaskId = autoInstance.agt.getInstanceMaskId();
-						SearchInstance searchInstance = lfp.getSearchInstance(searchMaskId);
-						if (searchInstance != null && searchInstance.getEntryRequestType().isQuickGroupEntry()) {
-							Player owner = lfp.getPlayer();
-							if (autoInstance.addPlayer(owner, searchInstance).isAdded()) {
-								lfp.setStartEnterTime();
-								if (lfp.unregisterInstance(searchMaskId) == 0) {
-									players.add(owner);
-								}
-								PacketSendUtility.sendPacket(lfp.getPlayer(), new SM_AUTO_GROUP(searchMaskId, 4));
-							}
-						}
-					}
-				}
-				for (Player p : players) {
-					searchers.remove(p.getObjectId());
-				}
-				players.clear();
-			}
-			if (checkNewGroup) {
-				AutoGroupType agt = AutoGroupType.getAGTByMaskId(instanceMaskId);
-				AutoInstance autoInstance = agt.getAutoInstance();
-				boolean canCreate = false;
-				Iterator<LookingForParty> iter = searchers.values().iterator();
-				LookingForParty lfp;
-				while (iter.hasNext()) {
-					lfp = iter.next();
-					if (lfp.getPlayer() == null || lfp.isOnStartEnterTask()) {
-						continue;
-					}
-					SearchInstance searchInstance = lfp.getSearchInstance(instanceMaskId);
-					if (searchInstance != null) {
-						if (searchInstance.getEntryRequestType().isGroupEntry()) {
-							if (!lfp.getPlayer().isInGroup()) {
-								if (lfp.unregisterInstance(instanceMaskId) == 0) {
-									iter.remove();
-								}
-								continue;
-							}
-						}
-						AGQuestion question = autoInstance.addPlayer(lfp.getPlayer(), searchInstance);
-						if (!question.isFailed()) {
-							if (searchInstance.getEntryRequestType().isGroupEntry()) {
-								for (Player member : lfp.getPlayer().getPlayerGroup().getOnlineMembers()) {
-									if (searchInstance.getMembers().contains(member.getObjectId())) {
-										players.add(member);
-									}
-								}
-							} else {
-								players.add(lfp.getPlayer());
-							}
-						}
-						if (question.isReady()) {
-							canCreate = true;
-							break;
-						}
-					}
-				}
-				if (canCreate) {
-					WorldMapInstance instance = InstanceService.getNextAvailableInstance(agt.getInstanceMapId(), 0, agt.getDifficultId(), null, autoInstance.getMaxPlayers(), false);
-					autoInstance.onInstanceCreate(instance);
-					autoInstances.put(instance.getInstanceId(), autoInstance);
-					for (Player player : players) {
-						int obj = player.getObjectId();
-						lfp = searchers.get(obj);
-						if (lfp != null) {
-							lfp.setStartEnterTime();
-							if (lfp.unregisterInstance(autoInstance.agt.getInstanceMaskId()) == 0) {
-								searchers.remove(obj);
-							}
-						}
-						PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 4));
-					}
-				} else {
-					autoInstance.clear();
-				}
-				players.clear();
-			}
-		} finally {
-			lock.unlock();
-		}
-	}
-
-	private boolean canEnter(Player player, EntryRequestType ert, AutoGroupType agt) {
-		int mapId = agt.getInstanceMapId();
-		int instanceMaskId = agt.getInstanceMaskId();
-		if (!agt.hasLevelPermit(player.getLevel())) {
+	private boolean canRegister(Player player, EntryRequestType ert, AutoGroupType agt) {
+		int mapId = agt.getTemplate().getInstanceMapId();
+		int instanceMaskId = agt.getTemplate().getMaskId();
+		if (!agt.isInLvlRange(player.getLevel())) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_LEVEL());
-			return false;
-		}
-		if (agt.isIronWallWarfront() && !IronWallWarfrontService.getInstance().isRegisterAvailable()) {
-			return false;
-		} else if (agt.isKamarBattlefield() && !KamarBattlefieldService.getInstance().isRegisterAvailable()) {
-			return false;
-		} else if (agt.isEngulfedOphidanBridge() && !EngulfedOphidanBridgeService.getInstance().isRegisterAvailable()) {
-			return false;
-		} else if (agt.isIdgelDome() && !IdgelDomeService.getInstance().isRegisterAvailable()) {
-			return false;
-		} else if (agt.isDredgion() && !DredgionService.getInstance().isRegisterAvailable()) {
 			return false;
 		} else if ((agt.isPvPFFAArena() || agt.isPvPSoloArena() || agt.isHarmonyArena() || agt.isGloryArena())
 			&& !PvPArenaService.isPvPArenaAvailable(player, agt)) {
 			return false;
-		} else if (hasCoolDown(player, mapId)) {
+		} else if (AutoGroupUtility.hasCoolDown(player, mapId)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANNOT_MAKE_INSTANCE_COOL_TIME());
 			return false;
 		}
-		switch (ert) {
-			case NEW_GROUP_ENTRY:
-				if (!agt.hasRegisterNew()) {
-					return false;
-				}
-				break;
-			case QUICK_GROUP_ENTRY:
-				if (!agt.hasRegisterQuick()) {
-					return false;
-				}
-				break;
-			case GROUP_ENTRY:
-				if (!agt.hasRegisterGroup()) {
-					return false;
-				}
-				PlayerGroup group = player.getPlayerGroup();
-				if (group == null || !group.isLeader(player)) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_NOT_LEADER());
-					return false;
-				}
-				if (agt.isHarmonyArena() || agt.isTrainigHarmonyArena()) {
-					if (group.getOnlineMembers().size() > 3) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_TOO_MANY_MEMBERS(3, mapId));
-						return false;
-					}
-				}
-				for (Player member : group.getMembers()) {
-					if (group.getLeaderObject().equals(member)) {
-						continue;
-					}
-					LookingForParty lfp = searchers.get(member.getObjectId());
-					if (lfp != null && lfp.isRegistredInstance(instanceMaskId)) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
-						return false;
-					}
-					if (agt.isHarmonyArena() && !PvPArenaService.checkItem(member, agt)) {
-						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_ENTER_WITHOUT_ITEM());
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
-						return false;
-					}
-					if (agt.isIronWallWarfront() && IronWallWarfrontService.getInstance().hasCooldown(member)) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
-						return false;
-					} else if (agt.isEngulfedOphidanBridge() && EngulfedOphidanBridgeService.getInstance().hasCooldown(member)) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
-						return false;
-					} else if (agt.isIdgelDome() && IdgelDomeService.getInstance().hasCooldown(member)) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
-						return false;
-					} else if (agt.isKamarBattlefield() && KamarBattlefieldService.getInstance().hasCooldown(member)) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
-						return false;
-					} else if (agt.isDredgion() && DredgionService.getInstance().hasCooldown(member)) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
-						return false;
-					} else if (hasCoolDown(member, mapId)) {
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
-						return false;
-					}
-					if (!agt.hasLevelPermit(member.getLevel())) {
-						PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_LEVEL());
-						PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
-						return false;
-					}
-				}
-				break;
-		}
-		return true;
+		return switch (ert) {
+			case NEW_GROUP_ENTRY -> AutoGroupUtility.canRegisterNewEntry(player, agt);
+			case QUICK_GROUP_ENTRY -> AutoGroupUtility.canRegisterQuickEntry(player, agt);
+			case GROUP_ENTRY -> AutoGroupUtility.canRegisterGroupEntry(player, agt, mapId, instanceMaskId);
+		};
 	}
 
-	private AutoInstance getAutoInstance(Player player, int instanceMaskId) {
-		for (AutoInstance autoInstance : autoInstances.values()) {
-			if (autoInstance.agt.getInstanceMaskId() == instanceMaskId && autoInstance.players.containsKey(player.getObjectId())) {
-				return autoInstance;
-			}
-		}
-		return null;
+	private void penaliseParty(LookingForParty lfp) {
+		lfp.getMemberObjectIds().forEach(this::penalisePlayerAndScheduleRemoval);
 	}
 
-	private boolean hasCoolDown(Player player, int worldId) {
-		int instanceCooldownRate = InstanceService.getInstanceRate(player, worldId);
-		int useDelay = 0;
-		int instanceCooldown = 0;
-		InstanceCooltime clt = DataManager.INSTANCE_COOLTIME_DATA.getInstanceCooltimeByWorldId(worldId);
-		if (clt != null) {
-			instanceCooldown = clt.getEntCoolTime();
+	private void penalisePlayerAndScheduleRemoval(int objectId) {
+		if (!penalties.contains(objectId)) {
+			penalties.add(objectId);
+			ThreadPoolManager.getInstance().schedule(() -> {
+				penalties.remove(objectId);
+				PeriodicInstanceManager.getInstance().checkAndSendOpenRegistrations(objectId);
+			}, 10000);
 		}
-		if (instanceCooldownRate > 0) {
-			useDelay = instanceCooldown / instanceCooldownRate;
-		}
-		return player.getPortalCooldownList().isPortalUseDisabled(worldId) && useDelay > 0;
 	}
 
-	private void startPenalty(final Integer obj) {
-		if (penalties.contains(obj))
-			return;
-		penalties.add(obj);
-		ThreadPoolManager.getInstance().schedule(() -> penalties.remove(obj), 10000);
+	public void stopRegistrationsByMaskId(int maskId) {
+		List<LookingForParty> parties = lookingParties.remove(maskId);
+		if (parties != null && !parties.isEmpty())
+			parties.forEach(lfp -> lfp.getMemberObjectIds().forEach(id -> AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 2)));
 	}
 
-	public void unregisterInstance(int instanceMaskId) {
-		for (LookingForParty lfp : searchers.values()) {
-			if (lfp.isRegistredInstance(instanceMaskId)) {
-				if (lfp.getPlayer() != null) {
-					unregisterLooking(lfp.getPlayer(), instanceMaskId);
-				} else {
-					unregisterSearchInstance(null, lfp.getSearchInstance(instanceMaskId));
-					if (lfp.unregisterInstance(instanceMaskId) == 0) {
-						searchers.values().remove(lfp);
-					}
-				}
+	public void cancelRegistration(Player player, int maskId) {
+		cancelRegistration(getLookingForPartyOfPlayer(player.getObjectId(), maskId), player, maskId);
+	}
+
+	public void cancelRegistration(LookingForParty lfp, Player player, int maskId) {
+		int objectId = player.getObjectId();
+		if (lfp != null) {
+			if (lfp.isLeader(objectId)) {
+				lookingParties.get(maskId).remove(lfp);
+				penaliseParty(lfp);
+				lfp.getMemberObjectIds().forEach(id -> AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 2));
+			} else {
+				lfp.unregisterMember(objectId);
+				AutoGroupUtility.sendWindowToPlayer(player, maskId, 2);
+				penalisePlayerAndScheduleRemoval(objectId);
+				checkQueueForNewMatches(maskId);
 			}
 		}
 	}
 
-	private void unregisterSearchInstance(Player player, SearchInstance si) {
-		int instanceMaskId = si.getInstanceMaskId();
-		if (si.getEntryRequestType().isGroupEntry() && si.getMembers() != null) {
-			for (Integer obj : si.getMembers()) {
-				Player member = World.getInstance().getPlayer(obj);
-				if (member != null) {
-					if (si.isDredgion() && DredgionService.getInstance().isRegisterAvailable()) {
-						PacketSendUtility.sendPacket(member, new SM_AUTO_GROUP(instanceMaskId, 6));
-					}
-					PacketSendUtility.sendPacket(member, new SM_AUTO_GROUP(instanceMaskId, 2));
-				}
-			}
-		}
-		if (player != null) {
-			if (si.isDredgion() && DredgionService.getInstance().isRegisterAvailable()) {
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 6));
-			}
-			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 2));
-		}
-	}
-
-	public void unregisterAndDestroyInstance(int instanceId) {
-		AutoInstance autoInstance = autoInstances.remove(instanceId);
-		if (autoInstance != null) {
-			WorldMapInstance instance = autoInstance.instance;
+	public boolean destroyInstanceIfPossible(AutoInstance autoInstance, int instanceId) {
+		if (autoInstance.getRegisteredAGPlayers().values().stream().noneMatch(AGPlayer::isOnline)) {
+			WorldMapInstance instance = autoInstance.getInstance();
+			autoInstances.remove(instanceId);
 			if (instance != null)
 				InstanceService.destroyInstance(instance);
 			autoInstance.clear();
+			return true;
 		}
+		return false;
+	}
+
+	private AutoInstance getAutoInstance(Player player, int instanceMaskId) {
+		for (AutoInstance autoInstance : autoInstances.values())
+			if (autoInstance.getAutoGroupType().getTemplate().getMaskId() == instanceMaskId
+				&& autoInstance.getRegisteredAGPlayers().containsKey(player.getObjectId()))
+				return autoInstance;
+		return null;
 	}
 
 	public boolean isAutoInstance(int instanceId) {

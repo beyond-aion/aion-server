@@ -8,7 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.AutoGroupService;
-import com.aionemu.gameserver.services.instance.periodic.PeriodicInstanceManager;
+import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -47,7 +47,7 @@ public class CM_AUTO_GROUP extends AionClientPacket {
 				AutoGroupService.getInstance().startLooking(player, instanceMaskId, ert);
 				break;
 			case 101:
-				AutoGroupService.getInstance().unregisterLooking(player, instanceMaskId);
+				AutoGroupService.getInstance().cancelRegistration(player, instanceMaskId);
 				break;
 			case 102:
 				AutoGroupService.getInstance().pressEnter(player, instanceMaskId);
@@ -56,6 +56,7 @@ public class CM_AUTO_GROUP extends AionClientPacket {
 				AutoGroupService.getInstance().cancelEnter(player, instanceMaskId);
 				break;
 			case 104:
+				// is sent if a player clicks the icon
 				PeriodicInstanceManager.getInstance().handleRequest(player, instanceMaskId);
 				break;
 			case 105:

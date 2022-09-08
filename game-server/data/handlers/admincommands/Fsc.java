@@ -35,10 +35,7 @@ public class Fsc extends AdminCommand {
 		}
 
 		int id = Integer.decode(params[0]);
-		String format = "";
-
-		if (params.length > 1)
-			format = params[1];
+		String format = params[1];
 
 		SM_CUSTOM_PACKET packet = new SM_CUSTOM_PACKET(id);
 

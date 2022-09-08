@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.team.group.events;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent;
 import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
@@ -39,25 +40,17 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 			PacketSendUtility.sendPacket(member, new SM_GROUP_MEMBER_INFO(team, leavedPlayer, GroupEvent.LEAVE));
 
 			switch (reason) {
-				case LEAVE:
-					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_LEAVE_PARTY(leavedPlayer.getName()));
-					break;
-				case LEAVE_TIMEOUT:
-					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_BECOME_OFFLINE_TIMEOUT(leavedPlayer.getName()));
-					break;
-				case BAN:
-					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_BANISHED(leavedPlayer.getName()));
-					break;
-				case DISBAND:
-					PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_IS_DISPERSED());
-					break;
+				case LEAVE -> PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_LEAVE_PARTY(leavedPlayer.getName()));
+				case LEAVE_TIMEOUT -> PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_BECOME_OFFLINE_TIMEOUT(leavedPlayer.getName()));
+				case BAN -> PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_HE_IS_BANISHED(leavedPlayer.getName()));
+				case DISBAND -> PacketSendUtility.sendPacket(member, SM_SYSTEM_MESSAGE.STR_PARTY_IS_DISPERSED());
 			}
 		});
 
 		switch (reason) {
 			case BAN:
 			case LEAVE:
-				if (team.shouldDisband()) {
+				if (team.getTeamType() != TeamType.AUTO_GROUP && team.shouldDisband()) {
 					PlayerGroupService.disband(team);
 				} else {
 					if (leavedPlayer.equals(team.getLeader().getObject())) {
@@ -69,7 +62,7 @@ public class PlayerGroupLeavedEvent extends PlayerLeavedEvent<PlayerGroupMember,
 				}
 				break;
 			case LEAVE_TIMEOUT:
-				if (team.shouldDisband()) {
+				if (team.getTeamType() != TeamType.AUTO_GROUP && team.shouldDisband()) {
 					PlayerGroupService.disband(team);
 				}
 				break;

@@ -24,8 +24,7 @@ import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author xTz
- * @reworked vlog
+ * @author xTz, vlog
  */
 @AIName("portal_dialog")
 public class PortalDialogAI extends PortalAI {
@@ -67,16 +66,16 @@ public class PortalDialogAI extends PortalAI {
 		switch (dialogActionId) {
 			case INSTANCE_PARTY_MATCH: // auto groups
 				if (agt != null)
-					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId()));
+					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getTemplate().getMaskId()));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 				return true;
 			case OPEN_INSTANCE_RECRUIT:
 				if (agt != null)
-					PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(0x1A, agt.getInstanceMapId()));
+					PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(0x1A, agt.getTemplate().getInstanceMapId()));
 				return true;
 			case SELECT1_1:
 				if (agt != null) {
-					int maxMemberCount = DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getInstanceMapId(), player.getRace());
+					int maxMemberCount = DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getTemplate().getInstanceMapId(), player.getRace());
 					if (maxMemberCount <= 6 && !player.isInGroup() || maxMemberCount > 6 && !player.isInAlliance()) {
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1182));
 						return true;

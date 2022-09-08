@@ -12,24 +12,25 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author xTz
+ * @author xTz, Estrayl
  */
 public abstract class AutoInstance extends AbstractLockManager implements AutoInstanceHandler {
 
-	public final AutoGroupType agt;
-	public long startInstanceTime;
-	public WorldMapInstance instance;
-	public Map<Integer, AGPlayer> players = new ConcurrentHashMap<>();
+	protected final AutoGroupType agt;
+	protected final Map<Integer, AGPlayer> registeredAGPlayers = new ConcurrentHashMap<>();
+	protected WorldMapInstance instance;
+	protected long startInstanceTime;
 
 	public AutoInstance(AutoGroupType agt) {
 		this.agt = agt;
 	}
 
-	protected boolean decrease(Player player, int itemId, long requiredCount) {
+	protected boolean removeItem(Player player, int itemId, long requiredCount) {
 		long itemCount = 0;
 		List<Item> items = player.getInventory().getItemsByItemId(itemId);
 		for (Item item : items)
@@ -52,15 +53,12 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 	}
 
 	@Override
-	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
+	public AGQuestion addLookingForParty(LookingForParty lookingForParty) {
 		return AGQuestion.FAILED;
 	}
 
 	@Override
 	public void onEnterInstance(Player player) {
-		AGPlayer autoGroupPlayer = players.get(player.getObjectId());
-		autoGroupPlayer.setInInstance(true);
-		autoGroupPlayer.setOnline(true);
 	}
 
 	@Override
@@ -69,39 +67,56 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 
 	@Override
 	public void onPressEnter(Player player) {
-		players.get(player.getObjectId()).setPressEnter(true);
+		long instanceCoolTime = DataManager.INSTANCE_COOLTIME_DATA.calculateInstanceEntranceCooltime(player, instance.getMapId());
+		if (instanceCoolTime > 0)
+			player.getPortalCooldownList().addPortalCooldown(instance.getMapId(), instanceCoolTime);
 	}
 
 	@Override
 	public void unregister(Player player) {
-		players.remove(player.getObjectId());
+		registeredAGPlayers.remove(player.getObjectId());
 	}
 
 	@Override
 	public void clear() {
-		players.clear();
+		registeredAGPlayers.clear();
 	}
 
-	protected boolean satisfyTime(SearchInstance searchInstance) {
+	protected boolean isRegistrationDisabled(LookingForParty lfp) {
 		if (instance != null) {
 			InstanceScore<?> instanceScore = instance.getInstanceHandler().getInstanceScore();
-			if ((instanceScore != null && instanceScore.getInstanceProgressionType().isEndProgress()))
-				return false;
+			if (instanceScore != null && instanceScore.getInstanceProgressionType() == InstanceProgressionType.END_PROGRESS)
+				return true;
 		}
-		if (!searchInstance.getEntryRequestType().isQuickGroupEntry())
-			return startInstanceTime == 0;
-		int time = agt.getTime();
-		if (time == 0 || startInstanceTime == 0)
-			return true;
-		return System.currentTimeMillis() - startInstanceTime < time;
+		if (startInstanceTime == 0)
+			return false;
+		else if (lfp.getEntryRequestType() == EntryRequestType.QUICK_GROUP_ENTRY)
+			return System.currentTimeMillis() - startInstanceTime > agt.getMaximumJoinTime();
+		return true;
+	}
+
+	public AutoGroupType getAutoGroupType() {
+		return agt;
+	}
+
+	public Map<Integer, AGPlayer> getRegisteredAGPlayers() {
+		return registeredAGPlayers;
+	}
+
+	public WorldMapInstance getInstance() {
+		return instance;
+	}
+
+	public long getStartInstanceTime() {
+		return startInstanceTime;
 	}
 
 	protected List<AGPlayer> getAGPlayersByRace(Race race) {
-		return players.values().stream().filter(p -> p.getRace() == race).collect(Collectors.toList());
+		return registeredAGPlayers.values().stream().filter(p -> p.getRace() == race).collect(Collectors.toList());
 	}
 
 	protected List<AGPlayer> getAGPlayersByClass(PlayerClass playerClass) {
-		return players.values().stream().filter(p -> p.getPlayerClass() == playerClass).collect(Collectors.toList());
+		return registeredAGPlayers.values().stream().filter(p -> p.getPlayerClass() == playerClass).collect(Collectors.toList());
 	}
 
 	protected List<Player> getPlayersByRace(Race race) {
@@ -111,10 +126,7 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 	public int getMaxPlayers() {
 		if (instance != null)
 			return instance.getMaxPlayers();
-		Race race = players.isEmpty() ? Race.ELYOS : players.values().iterator().next().getRace();
-		int maxMemberCount = DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getInstanceMapId(), race);
-		if (agt.isIconInvite()) // fix for dreds and battlefields, since instance_cooltime limits are per faction, not total. arena counts are ok though
-			maxMemberCount += DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getInstanceMapId(), race == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS);
-		return maxMemberCount;
+		Race race = registeredAGPlayers.isEmpty() ? Race.ELYOS : registeredAGPlayers.values().iterator().next().getRace();
+		return DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getTemplate().getInstanceMapId(), race);
 	}
 }

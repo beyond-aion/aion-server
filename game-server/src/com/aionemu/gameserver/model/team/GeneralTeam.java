@@ -126,11 +126,11 @@ public abstract class GeneralTeam<M extends AionObject, TM extends TeamMember<M>
 	}
 
 	public List<M> filterMembers(Predicate<M> predicate) {
-		return members.values().stream().map(tm -> tm.getObject()).filter(predicate).collect(Collectors.toList());
+		return members.values().stream().map(TeamMember::getObject).filter(predicate).collect(Collectors.toList());
 	}
 
 	public List<M> getMembers() {
-		return members.values().stream().map(tm -> tm.getObject()).collect(Collectors.toList());
+		return members.values().stream().map(TeamMember::getObject).collect(Collectors.toList());
 	}
 
 	public int size() {

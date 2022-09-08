@@ -1,8 +1,11 @@
 package admincommands;
 
+import static com.aionemu.gameserver.configs.main.AutoGroupConfig.*;
+
+import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.services.instance.periodic.*;
-import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -37,92 +40,71 @@ public class Instance extends AdminCommand {
 	}
 
 	private void openRegistration(Player admin, String instanceName) {
+		SM_SYSTEM_MESSAGE openingMsg;
+		int maskId;
+		long registrationPeriod;
+
 		switch (instanceName.toLowerCase()) {
-			case "dredgion":
-				if (!DredgionService.getInstance().isRegisterAvailable()) {
-					DredgionService.getInstance().startRegistration();
-					PacketSendUtility.sendMessage(admin, "Registration for Dredgion is now open.");
-				} else {
-					sendInfo(admin, "Registration for Dredgion is already open.");
-				}
-				break;
-			case "eob":
-				if (!EngulfedOphidanBridgeService.getInstance().isRegisterAvailable()) {
-					EngulfedOphidanBridgeService.getInstance().startRegistration();
-					PacketSendUtility.sendMessage(admin, "Registration for Engulfed Ophidan Bridge is now open.");
-				} else {
-					sendInfo(admin, "Registration for Engulfed Ophidan Bridge is already open.");
-				}
-				break;
-			case "id":
-				if (!IdgelDomeService.getInstance().isRegisterAvailable()) {
-					IdgelDomeService.getInstance().startRegistration();
-					PacketSendUtility.sendMessage(admin, "Registration for Idgel Dome is now open.");
-				} else {
-					sendInfo(admin, "Registration for Idgel Dome is already open.");
-				}
-				break;
-			case "iww":
-				if (!IronWallWarfrontService.getInstance().isRegisterAvailable()) {
-					IronWallWarfrontService.getInstance().startRegistration();
-					PacketSendUtility.sendMessage(admin, "Registration for Iron Wall Warfront is now open.");
-				} else {
-					sendInfo(admin, "Registration for Iron Wall Warfront is already open.");
-				}
-				break;
-			case "kb":
-				if (!KamarBattlefieldService.getInstance().isRegisterAvailable()) {
-					KamarBattlefieldService.getInstance().startRegistration();
-					PacketSendUtility.sendMessage(admin, "Registration for Kamar Battlefield is now open.");
-				} else {
-					sendInfo(admin, "Registration for Kamar Battlefield is already open.");
-				}
-				break;
+			case "dredgion" -> { // Only opening Terath Dredgion
+				openingMsg = SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDDREADGION_03();
+				maskId = 3;
+				registrationPeriod = DREDGION_REGISTRATION_PERIOD;
+			}
+			case "eob" -> {
+				openingMsg = SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDLDF5_Under_01_War();
+				maskId = 108;
+				registrationPeriod = ENGULFED_OPHIDAN_BRIDGE_REGISTRATION_PERIOD;
+			}
+			case "id" -> {
+				openingMsg = SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDLDF5_Fortress_Re();
+				maskId = 111;
+				registrationPeriod = IDGEL_DOME_REGISTRATION_PERIOD;
+			}
+			case "iww" -> {
+				openingMsg = SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDF5_TD_war();
+				maskId = 109;
+				registrationPeriod = IRON_WALL_WARFRONT_REGISTRATION_PERIOD;
+			}
+			case "kb" -> {
+				openingMsg = SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_OPEN_IDKamar();
+				maskId = 107;
+				registrationPeriod = KAMAR_BATTLEFIELD_REGISTRATION_PERIOD;
+			}
+			default -> {
+				openingMsg = null;
+				maskId = 0;
+				registrationPeriod = 0;
+			}
+		}
+		if (maskId != 0) {
+			if (PeriodicInstanceManager.getInstance().openRegistration(openingMsg, maskId, registrationPeriod))
+				sendInfo(admin, "Registration for " + AutoGroupType.getAGTByMaskId(maskId) + " is now open.");
+			else
+				sendInfo(admin, "Registration for " + AutoGroupType.getAGTByMaskId(maskId) + " is already open.");
+		} else {
+			sendInfo(admin, "No instance found for " + instanceName);
 		}
 	}
 
 	private void closeRegistration(Player admin, String instanceName) {
+		int maskId;
+
 		switch (instanceName.toLowerCase()) {
-			case "dredgion":
-				if (DredgionService.getInstance().isRegisterAvailable()) {
-					DredgionService.getInstance().stopRegistration();
-					PacketSendUtility.sendMessage(admin, "Registration for Dredgion is now closed.");
-				} else {
-					sendInfo(admin, "Registration for Dredgion is not open.");
-				}
-				break;
-			case "eob":
-				if (EngulfedOphidanBridgeService.getInstance().isRegisterAvailable()) {
-					EngulfedOphidanBridgeService.getInstance().stopRegistration();
-					PacketSendUtility.sendMessage(admin, "Registration for Engulfed Ophidan Bridge is now closed.");
-				} else {
-					sendInfo(admin, "Registration for Engulfed Ophidan Bridge is not open.");
-				}
-				break;
-			case "id":
-				if (IdgelDomeService.getInstance().isRegisterAvailable()) {
-					IdgelDomeService.getInstance().stopRegistration();
-					PacketSendUtility.sendMessage(admin, "Registration for Idgel Dome is now closed.");
-				} else {
-					sendInfo(admin, "Registration for Idgel Dome is not open.");
-				}
-				break;
-			case "iww":
-				if (IronWallWarfrontService.getInstance().isRegisterAvailable()) {
-					IronWallWarfrontService.getInstance().stopRegistration();
-					PacketSendUtility.sendMessage(admin, "Registration for Iron Wall Warfront is now closed.");
-				} else {
-					sendInfo(admin, "Registration for Iron Wall Warfront is not open.");
-				}
-				break;
-			case "kb":
-				if (KamarBattlefieldService.getInstance().isRegisterAvailable()) {
-					KamarBattlefieldService.getInstance().stopRegistration();
-					PacketSendUtility.sendMessage(admin, "Registration for Kamar Battlefield is now closed.");
-				} else {
-					sendInfo(admin, "Registration for Kamar Battlefield is not open.");
-				}
-				break;
+			case "dredgion" -> maskId = 3;
+			case "eob" -> maskId = 108;
+			case "id" -> maskId = 111;
+			case "iww" -> maskId = 109;
+			case "kb" -> maskId = 107;
+			default -> maskId = 0;
+		}
+
+		if (maskId != 0) {
+			if (PeriodicInstanceManager.getInstance().closeRegistration(maskId))
+				sendInfo(admin, "Registration for " + AutoGroupType.getAGTByMaskId(maskId) + " is now closed.");
+			else
+				sendInfo(admin, "Registration for " + AutoGroupType.getAGTByMaskId(maskId) + " is not open.");
+		} else {
+			sendInfo(admin, "No instance found for " + instanceName);
 		}
 	}
 

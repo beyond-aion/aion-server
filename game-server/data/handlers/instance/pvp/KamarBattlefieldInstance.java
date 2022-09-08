@@ -22,6 +22,8 @@ import com.aionemu.gameserver.world.WorldPosition;
  * REINFORCE_MEMBER for 2 minutes
  * PREPARING for 1 minute
  * START_PROGRESS for 30 minutes
+ *
+ * PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE((byte) 1, 27));
  * 
  * @author xTz
  */

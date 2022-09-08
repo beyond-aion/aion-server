@@ -9,13 +9,16 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
  */
 public class AGPlayer {
 
-	private int objectId;
+	private final int objectId;
 	private Race race;
 	private PlayerClass playerClass;
 	private String name;
 	private boolean isInInstance;
 	private boolean isOnline;
-	private boolean isPressEnter;
+
+	public AGPlayer(int objectId) {
+			this.objectId = objectId;
+	}
 
 	public AGPlayer(Player player) {
 		objectId = player.getObjectId();
@@ -56,13 +59,4 @@ public class AGPlayer {
 	public void setOnline(boolean result) {
 		isOnline = result;
 	}
-
-	public boolean isPressedEnter() {
-		return isPressEnter;
-	}
-
-	public void setPressEnter(boolean result) {
-		isPressEnter = result;
-	}
-
 }

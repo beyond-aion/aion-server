@@ -42,7 +42,7 @@ public class BeshmundirsWalkAI extends ActionItemNpcAI {
 			case OPEN_INSTANCE_RECRUIT:
 				AutoGroupType agt = AutoGroupType.getAutoGroup(player.getLevel(), getNpcId());
 				if (agt != null) {
-					PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(0x1A, agt.getInstanceMapId()));
+					PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(0x1A, agt.getTemplate().getInstanceMapId()));
 				}
 				break;
 			case INSTANCE_ENTRY: // I'm ready to enter

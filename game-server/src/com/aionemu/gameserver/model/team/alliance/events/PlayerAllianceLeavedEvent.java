@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.team.alliance.events;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceMember;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
@@ -37,22 +38,12 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 
 		PlayerAllianceMember leavedTeamMember = team.removeMember(leavedPlayer.getObjectId());
 
-		SM_SYSTEM_MESSAGE leaveMsg;
-		switch (reason) {
-			case LEAVE:
-				leaveMsg = SM_SYSTEM_MESSAGE.STR_FORCE_LEAVE_HIM(leavedPlayer.getName());
-				break;
-			case LEAVE_TIMEOUT:
-				leaveMsg = SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_LEAVED_PARTY_OFFLINE_TIMEOUT(leavedPlayer.getName());
-				break;
-			case BAN:
-				leaveMsg = SM_SYSTEM_MESSAGE.STR_FORCE_BAN_HIM(banPersonName, leavedPlayer.getName());
-				break;
-			case DISBAND:
-			default:
-				leaveMsg = SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_DISPERSED();
-				break;
-		}
+		SM_SYSTEM_MESSAGE leaveMsg = switch (reason) {
+			case LEAVE -> SM_SYSTEM_MESSAGE.STR_FORCE_LEAVE_HIM(leavedPlayer.getName());
+			case LEAVE_TIMEOUT -> SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_HE_LEAVED_PARTY_OFFLINE_TIMEOUT(leavedPlayer.getName());
+			case BAN -> SM_SYSTEM_MESSAGE.STR_FORCE_BAN_HIM(banPersonName, leavedPlayer.getName());
+			default -> SM_SYSTEM_MESSAGE.STR_PARTY_ALLIANCE_DISPERSED();
+		};
 		team.forEach(player -> {
 			PacketSendUtility.sendPacket(player, leaveMsg);
 			if (reason != LeaveReson.DISBAND) {
@@ -67,7 +58,7 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 					// update general alliance info for all other alliances in league
 					team.getLeague().broadcast(team);
 				}
-				if (team.shouldDisband()) {
+				if (team.getTeamType() != TeamType.AUTO_ALLIANCE && team.shouldDisband()) {
 					PlayerAllianceService.disband(team, true);
 				}
 				if (reason == LeaveReson.BAN) {
@@ -75,7 +66,7 @@ public class PlayerAllianceLeavedEvent extends PlayerLeavedEvent<PlayerAllianceM
 				}
 				break;
 			case LEAVE_TIMEOUT:
-				if (team.shouldDisband()) {
+				if (team.getTeamType() != TeamType.AUTO_ALLIANCE && team.shouldDisband()) {
 					PlayerAllianceService.disband(team, true);
 				}
 				break;

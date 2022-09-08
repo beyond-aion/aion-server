@@ -5,102 +5,76 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author SheppeR, Guapo, nrg
+ * @author SheppeR, Guapo, nrg, Estrayl
  */
 public class SM_AUTO_GROUP extends AionServerPacket {
 
-	private byte windowId;
-	private int instanceMaskId;
-	private int mapId;
-	private int messageId;
-	private int titleId;
-	private int waitTime;
+	public static final byte WND_ENTRY_ICON = 6;
+	private final int maskId;
+	private final int mapId;
+	private final int messageId;
+	private final int titleId;
+	private int windowId;
+	private int requestTypeId;
 	private boolean close;
 	private String name = "";
 
-	public static final byte wnd_EntryIcon = 6;
-
-	public SM_AUTO_GROUP(int instanceMaskId) {
-		AutoGroupType agt = AutoGroupType.getAGTByMaskId(instanceMaskId);
+	public SM_AUTO_GROUP(int maskId) {
+		AutoGroupType agt = AutoGroupType.getAGTByMaskId(maskId);
 		if (agt == null) {
-			throw new IllegalArgumentException("Auto Groups Type no found for Instance MaskId: " + instanceMaskId);
+			throw new IllegalArgumentException("AutoGroupType not found for maskId: " + maskId);
 		}
 
-		this.instanceMaskId = instanceMaskId;
+		this.maskId = maskId;
 		this.messageId = agt.getL10nId();
-		this.titleId = agt.getTitleId();
-		this.mapId = agt.getInstanceMapId();
+		this.titleId = agt.getTemplate().getTitleId();
+		this.mapId = agt.getTemplate().getInstanceMapId();
 	}
 
-	public SM_AUTO_GROUP(int instanceMaskId, Number windowId) {
-		this(instanceMaskId);
-		this.windowId = windowId.byteValue();
+	public SM_AUTO_GROUP(int maskId, int windowId) {
+		this(maskId);
+		this.windowId = windowId;
 	}
 
-	public SM_AUTO_GROUP(int instanceMaskId, Number windowId, boolean close) {
-		this(instanceMaskId);
-		this.windowId = windowId.byteValue();
+	public SM_AUTO_GROUP(int maskId, int windowId, boolean close) {
+		this(maskId);
+		this.windowId = windowId;
 		this.close = close;
 	}
 
-	public SM_AUTO_GROUP(int instanceMaskId, Number windowId, int waitTime, String name) {
-		this(instanceMaskId);
-		this.windowId = windowId.byteValue();
-		this.waitTime = waitTime;
+	public SM_AUTO_GROUP(int maskId, int windowId, int requestTypeId, String name) {
+		this(maskId);
+		this.windowId = windowId;
+		this.requestTypeId = requestTypeId;
 		this.name = name;
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeD(instanceMaskId);
+		writeD(maskId);
 		writeC(windowId);
 		writeD(mapId);
 		switch (windowId) {
-			case 0: // request entry
+			case 0, 7 -> { // 0 = request entry, 7 = failed window
 				writeD(messageId);
 				writeD(titleId);
 				writeD(0);
-				break;
-			case 1: // waiting window
+			}
+			case 1, 3, 8 -> { // 1 = waiting window, 3 = pass window, 8 = on login
+				writeD(0); // progression type: 0 = Group Formation in Progress, 1 = Opponent Group formation in progress
 				writeD(0);
-				writeD(0);
-				writeD(waitTime);
-				break;
-			case 2: // cancel looking
-				writeD(0);
-				writeD(0);
-				writeD(0);
-				break;
-			case 3: // pass window
-				writeD(0);
-				writeD(0);
-				writeD(waitTime);
-				break;
-			case 4: // enter window
+				writeD(requestTypeId);
+			}
+			case 2, 4, 5 -> { // 2 = cancel looking, 4 = enter window, 5 = after clicking enter
 				writeD(0);
 				writeD(0);
 				writeD(0);
-				break;
-			case 5: // after you click enter
-				writeD(0);
-				writeD(0);
-				writeD(0);
-				break;
-			case wnd_EntryIcon: // entry icon
+			}
+			case WND_ENTRY_ICON -> { // entry icon
 				writeD(messageId);
 				writeD(titleId);
 				writeD(close ? 0 : 1);
-				break;
-			case 7: // failed window
-				writeD(messageId);
-				writeD(titleId);
-				writeD(0);
-				break;
-			case 8: // on login
-				writeD(0);
-				writeD(0);
-				writeD(waitTime);
-				break;
+			}
 		}
 		writeC(0);
 		writeS(name);

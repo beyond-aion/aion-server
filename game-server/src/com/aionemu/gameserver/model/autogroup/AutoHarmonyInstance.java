@@ -11,16 +11,17 @@ import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.services.AutoGroupService;
+import com.aionemu.gameserver.services.autogroup.AutoGroupUtility;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author xTz
+ * @author xTz, Estrayl
  */
 public class AutoHarmonyInstance extends AutoInstance {
 
-	private List<AGPlayer> group1 = new ArrayList<>();
-	private List<AGPlayer> group2 = new ArrayList<>();
+	private final List<AGPlayer> group1 = new ArrayList<>();
+	private final List<AGPlayer> group2 = new ArrayList<>();
 
 	public AutoHarmonyInstance(AutoGroupType agt) {
 		super(agt);
@@ -35,25 +36,16 @@ public class AutoHarmonyInstance extends AutoInstance {
 	}
 
 	@Override
-	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
+	public AGQuestion addLookingForParty(LookingForParty lookingForParty) {
 		super.writeLock();
 		try {
-			if (!satisfyTime(searchInstance) || (players.size() >= getMaxPlayers())) {
+			if (isRegistrationDisabled(lookingForParty) || registeredAGPlayers.size() >= getMaxPlayers())
 				return AGQuestion.FAILED;
-			}
-			AGQuestion result;
-			if (searchInstance.getEntryRequestType().isGroupEntry()) {
-				result = canAddGroup(group1, player, searchInstance);
-				if (result.isFailed()) {
-					result = canAddGroup(group2, player, searchInstance);
-				}
-				return result;
-			}
-			result = canAddPlayer(group1, player);
-			if (result.isFailed()) {
-				result = canAddPlayer(group2, player);
-			}
-			return result;
+
+			AGQuestion question = canAddParty(group1, lookingForParty);
+			if (question == AGQuestion.FAILED)
+				question = canAddParty(group2, lookingForParty);
+			return question;
 		} finally {
 			super.writeUnlock();
 		}
@@ -61,14 +53,12 @@ public class AutoHarmonyInstance extends AutoInstance {
 
 	@Override
 	public void onPressEnter(Player player) {
-		super.onPressEnter(player);
 		if (agt.isHarmonyArena()) {
-			if (!decrease(player, 186000184, 1)) {
-				players.remove(player.getObjectId());
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId(), 5));
-				if (players.isEmpty()) {
-					AutoGroupService.getInstance().unregisterAndDestroyInstance(instance.getInstanceId());
-				}
+			if (!removeItem(player, 186000184, 1)) {
+				registeredAGPlayers.remove(player.getObjectId());
+				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getTemplate().getMaskId(), 5));
+				if (registeredAGPlayers.isEmpty())
+					AutoGroupService.getInstance().destroyInstanceIfPossible(this, instance.getInstanceId());
 				return;
 			}
 		}
@@ -112,13 +102,12 @@ public class AutoHarmonyInstance extends AutoInstance {
 
 	@Override
 	public void unregister(Player player) {
-		AGPlayer agp = players.get(player.getObjectId());
+		AGPlayer agp = registeredAGPlayers.get(player.getObjectId());
 		if (agp != null) {
-			if (group1.contains(agp)) {
+			if (group1.contains(agp))
 				group1.remove(agp);
-			} else if (group2.contains(agp)) {
+			else
 				group2.remove(agp);
-			}
 		}
 		super.unregister(player);
 	}
@@ -144,56 +133,29 @@ public class AutoHarmonyInstance extends AutoInstance {
 	}
 
 	private List<AGPlayer> getGroup(Integer obj) {
-		AGPlayer agp = players.get(obj);
+		AGPlayer agp = registeredAGPlayers.get(obj);
 		if (agp != null) {
-			if (group1.contains(agp)) {
+			if (group1.contains(agp))
 				return group1;
-			} else if (group2.contains(agp)) {
+			else if (group2.contains(agp))
 				return group2;
-			}
 		}
 		return null;
 	}
 
-	private AGQuestion canAddGroup(List<AGPlayer> group, Player player, SearchInstance searchInstance) {
-		if (group.size() > 0) {
-			if (!group.get(0).getRace().equals(player.getRace())) {
-				return AGQuestion.FAILED;
-			}
-		}
-		if (group.size() + searchInstance.getMembers().size() <= 3) {
-			for (Player member : player.getPlayerGroup().getOnlineMembers()) {
-				int obj = member.getObjectId();
-				if (searchInstance.getMembers().contains(obj)) {
-					AGPlayer agp = new AGPlayer(member);
-					group.add(agp);
-					players.put(obj, agp);
-				}
-			}
-			return instance != null ? AGQuestion.ADDED : (players.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED);
-		}
-		return AGQuestion.FAILED;
-	}
+	private AGQuestion canAddParty(List<AGPlayer> group, LookingForParty lfp) {
+		if (group.size() + lfp.getMemberObjectIds().size() > 1)
+			return AGQuestion.FAILED;
+		if (group.size() > 0 && group.get(0).getRace() != lfp.getRace())
+			return AGQuestion.FAILED;
 
-	private AGQuestion canAddPlayer(List<AGPlayer> group, Player player) {
-		int obj = player.getObjectId();
-		AGPlayer agp = new AGPlayer(player);
-		if (group.size() < 3) {
-			if (group.isEmpty()) {
+		for (int objectId : lfp.getMemberObjectIds()) {
+			AGPlayer agp = AutoGroupUtility.getNewAutoGroupPlayer(objectId);
+			if (agp != null) {
 				group.add(agp);
-				players.put(obj, agp);
-				return AGQuestion.ADDED;
-			} else if (getAGPlayerByIndex(group, 0).getRace().equals(player.getRace())) {
-				group.add(agp);
-				players.put(obj, agp);
-				return instance != null ? AGQuestion.ADDED : (players.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED);
+				registeredAGPlayers.put(objectId, agp);
 			}
 		}
-		return AGQuestion.FAILED;
+		return instance != null ? AGQuestion.ADDED : registeredAGPlayers.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED;
 	}
-
-	private AGPlayer getAGPlayerByIndex(List<AGPlayer> group, int index) {
-		return group.get(index);
-	}
-
 }

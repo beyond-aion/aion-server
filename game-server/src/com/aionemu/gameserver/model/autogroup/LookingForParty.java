@@ -1,103 +1,95 @@
 package com.aionemu.gameserver.model.autogroup;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import com.aionemu.commons.taskmanager.AbstractLockManager;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.Race;
 
 /**
  * @author xTz
  */
-public class LookingForParty extends AbstractLockManager {
+public class LookingForParty implements Comparable<LookingForParty> {
 
-	private List<SearchInstance> searchInstances = new ArrayList<>();
-	private Player player;
+	private final List<Integer> memberObjectIds;
+	private final EntryRequestType ert;
+	private final Race race;
+	private final long registrationTime = System.currentTimeMillis();
+	private final int maskId;
 	private long startEnterTime;
-	private long penaltyTime;
+	private int leaderObjId;
 
-	public LookingForParty(Player player, int instanceMaskId, EntryRequestType ert) {
-		this.player = player;
-		searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry() ? player.getPlayerGroup().getOnlineMembers() : null));
+	public LookingForParty(List<Integer> memberObjectIds, Race race, EntryRequestType ert, int maskId, int leaderObjId) {
+		this.memberObjectIds = memberObjectIds;
+		this.ert = ert;
+		this.race = race;
+		this.maskId = maskId;
+		this.leaderObjId = leaderObjId;
 	}
 
-	public int unregisterInstance(int instanceMaskId) {
-		super.writeLock();
-		try {
-			for (SearchInstance si : searchInstances) {
-				if (si.getInstanceMaskId() == instanceMaskId) {
-					searchInstances.remove(si);
-					return searchInstances.size();
-				}
-			}
-			return searchInstances.size();
-		} finally {
-			super.writeUnlock();
-		}
+	public List<Integer> getMemberObjectIds() {
+		return memberObjectIds;
 	}
 
-	public List<SearchInstance> getSearchInstances() {
-		List<SearchInstance> tempList = new ArrayList<>();
-		for (SearchInstance si : searchInstances) {
-			tempList.add(si);
-		}
-		return tempList;
+	public boolean isMember(int objectId) {
+		return memberObjectIds.contains(objectId);
 	}
 
-	public void addInstanceMaskId(int instanceMaskId, EntryRequestType ert) {
-		super.writeLock();
-		try {
-			searchInstances.add(new SearchInstance(instanceMaskId, ert, ert.isGroupEntry() ? player.getPlayerGroup().getOnlineMembers() : null));
-		} finally {
-			super.writeUnlock();
-		}
+	public void unregisterMember(Integer objectId) {
+		memberObjectIds.remove(objectId);
 	}
 
-	public SearchInstance getSearchInstance(int instanceMaskId) {
-		super.readLock();
-		try {
-			for (SearchInstance si : searchInstances) {
-				if (si.getInstanceMaskId() == instanceMaskId) {
-					return si;
-				}
-			}
-			return null;
-		} finally {
-			super.readUnlock();
-		}
+	public EntryRequestType getEntryRequestType() {
+		return ert;
 	}
 
-	public boolean isRegistredInstance(int instanceMaskId) {
-		for (SearchInstance si : searchInstances) {
-			if (si.getInstanceMaskId() == instanceMaskId) {
-				return true;
-			}
-		}
-		return false;
+	public Race getRace() {
+		return race;
 	}
 
-	public Player getPlayer() {
-		return player;
+	public long getRegistrationTime() {
+		return registrationTime;
 	}
 
-	public void setPlayer(Player player) {
-		this.player = player;
+	public int getMaskId() {
+		return maskId;
 	}
 
-	public void setPenaltyTime() {
-		penaltyTime = System.currentTimeMillis();
+	public int getLeaderObjId() {
+		return leaderObjId;
 	}
 
-	public boolean hasPenalty() {
-		return System.currentTimeMillis() - penaltyTime <= 10000;
+	public void setLeaderObjId(int leaderObjId) {
+		this.leaderObjId = leaderObjId;
+	}
+
+	public boolean isLeader(int objectId) {
+		return objectId == leaderObjId;
 	}
 
 	public void setStartEnterTime() {
 		startEnterTime = System.currentTimeMillis();
 	}
 
+	public int getRemainingTime() {
+		return (int) (System.currentTimeMillis() - registrationTime) / 1000 * 256;
+	}
+
 	public boolean isOnStartEnterTask() {
 		return System.currentTimeMillis() - startEnterTime <= 120000;
 	}
 
+	public boolean canMatch(LookingForParty lfp) {
+		return !this.equals(lfp) && race == lfp.getRace();
+	}
+
+	@Override
+	public int compareTo(LookingForParty lfp) {
+		if (ert != lfp.ert)
+			return ert.ordinal() - lfp.ert.ordinal();
+
+		int memberDiff = memberObjectIds.size() - lfp.memberObjectIds.size();
+		if (memberDiff != 0)
+			return memberDiff;
+
+		return (int) (registrationTime - lfp.registrationTime);
+	}
 }

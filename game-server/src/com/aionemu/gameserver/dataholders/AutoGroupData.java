@@ -3,12 +3,7 @@ package com.aionemu.gameserver.dataholders;
 import java.util.List;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.autogroup.AutoGroup;
 
@@ -28,7 +23,7 @@ public class AutoGroupData {
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		for (AutoGroup ag : autoGroup) {
-			autoGroupByInstanceId.put(ag.getId(), ag);
+			autoGroupByInstanceId.put(ag.getMaskId(), ag);
 
 			if (!ag.getNpcIds().isEmpty()) {
 				for (int npcId : ag.getNpcIds()) {
@@ -40,7 +35,7 @@ public class AutoGroupData {
 		autoGroup = null;
 	}
 
-	public AutoGroup getTemplateByInstaceMaskId(int maskId) {
+	public AutoGroup getTemplateByInstanceMaskId(int maskId) {
 		return autoGroupByInstanceId.get(maskId);
 	}
 

@@ -1,33 +1,34 @@
 package com.aionemu.gameserver.model.autogroup;
 
-import java.util.List;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.templates.L10n;
 
 /**
- * @author xTz
+ * @author xTz, Estrayl
  */
 public enum AutoGroupType implements L10n {
-	BARANATH_DREDGION(1, 600000) {
+
+	BARANATH_DREDGION(1, 420000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoDredgionInstance(this);
+			return new AutoPvpInstance(this);
 		}
 	},
-	CHANTRA_DREDGION(2, 600000) {
+	CHANTRA_DREDGION(2, 420000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoDredgionInstance(this);
+			return new AutoPvpInstance(this);
 		}
 	},
-	TERATH_DREDGION(3, 600000) {
+	TERATH_DREDGION(3, 420000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoDredgionInstance(this);
+			return new AutoPvpInstance(this);
 		}
 	},
 	ELYOS_FIRE_TEMPLE(4, 300000) {
@@ -262,32 +263,32 @@ public enum AutoGroupType implements L10n {
 			return new AutoHarmonyInstance(this);
 		}
 	},
-	KAMAR_BATTLEFIELD(107, 600000) {
+	KAMAR_BATTLEFIELD(107, 230000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoKamarBattlefieldInstance(this);
+			return new AutoPvpInstance(this);
 		}
 	},
-	ENGULFED_OPHIDIAN_BRIDGE(108, 600000) {
+	ENGULFED_OPHIDIAN_BRIDGE(108, 230000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoEngulfedOphidanBridgeInstance(this);
+			return new AutoPvpInstance(this);
 		}
 	},
-	IRON_WALL_WARFRONT(109, 600000) {
+	IRON_WALL_WARFRONT(109, 230000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoIronWallWarfrontInstance(this);
+			return new AutoPvpInstance(this);
 		}
 	},
-	IDGEL_DOME(111, 600000) {
+	IDGEL_DOME(111, 170000) {
 
 		@Override
 		AutoInstance newAutoInstance() {
-			return new AutoIdgelDomeInstance(this);
+			return new AutoPvpInstance(this);
 		}
 	},
 	STEEL_RAKE_ELYOS(308, 600000) {
@@ -305,28 +306,24 @@ public enum AutoGroupType implements L10n {
 		}
 	};
 
-	private int instanceMaskId;
-	private int time;
+	private final AutoGroup template;
+	private final int maximumJoinTime;
 	private byte difficultId;
-	private AutoGroup template;
 
-	AutoGroupType(int instanceMaskId, int time, int difficultId) {
-		this(instanceMaskId, time);
+	AutoGroupType(int instanceMaskId, int maximumJoinTime, int difficultId) {
+		this(instanceMaskId, maximumJoinTime);
 		this.difficultId = (byte) difficultId;
 	}
 
-	AutoGroupType(int instanceMaskId, int time) {
-		this.instanceMaskId = instanceMaskId;
-		this.time = time;
-		template = DataManager.AUTO_GROUP.getTemplateByInstaceMaskId(this.instanceMaskId);
+	AutoGroupType(int instanceMaskId, int maximumJoinTime) {
+		this.maximumJoinTime = maximumJoinTime;
+		template = DataManager.AUTO_GROUP.getTemplateByInstanceMaskId(instanceMaskId);
+		if (template == null)
+			LoggerFactory.getLogger(AutoGroupType.class).warn("No auto group template for instanceMaskId={} found.", instanceMaskId);
 	}
 
-	public int getInstanceMapId() {
-		return template.getInstanceId();
-	}
-
-	public int getInstanceMaskId() {
-		return instanceMaskId;
+	public AutoGroup getTemplate() {
+		return template;
 	}
 
 	@Override
@@ -334,76 +331,23 @@ public enum AutoGroupType implements L10n {
 		return template.getL10nId();
 	}
 
-	public int getTitleId() {
-		return template.getTitleId();
-	}
-
-	public int getTime() {
-		return time;
-	}
-
-	public int getMinLevel() {
-		return template.getMinLvl();
-	}
-
-	public int getMaxLevel() {
-		return template.getMaxLvl();
-	}
-
-	public boolean hasRegisterGroup() {
-		return template.hasRegisterGroup();
-	}
-
-	public boolean hasRegisterQuick() {
-		return template.hasRegisterQuick();
-	}
-
-	public boolean hasRegisterNew() {
-		return template.hasRegisterNew();
+	public int getMaximumJoinTime() {
+		return maximumJoinTime;
 	}
 
 	public boolean containNpcId(int npcId) {
 		return template.getNpcIds().contains(npcId);
 	}
 
-	public List<Integer> getNpcIds() {
-		return template.getNpcIds();
-	}
-
-	public boolean isDredgion() {
-		switch (this) {
-			case BARANATH_DREDGION:
-			case CHANTRA_DREDGION:
-			case TERATH_DREDGION:
-				return true;
-		}
-		return false;
-	}
-
-	public boolean isIconInvite() {
-		return isDredgion() || isKamarBattlefield() || isEngulfedOphidanBridge() || isIronWallWarfront() || isIdgelDome();
-	}
-
-	public boolean isKamarBattlefield() {
-		return this.equals(AutoGroupType.KAMAR_BATTLEFIELD);
-	}
-
-	public boolean isEngulfedOphidanBridge() {
-		return this.equals(AutoGroupType.ENGULFED_OPHIDIAN_BRIDGE);
-	}
-
-	public boolean isIronWallWarfront() {
-		return this.equals(AutoGroupType.IRON_WALL_WARFRONT);
-	}
-
-	public boolean isIdgelDome() {
-		return this.equals(AutoGroupType.IDGEL_DOME);
+	public boolean isPeriodicInstance() {
+		return this == KAMAR_BATTLEFIELD || this == ENGULFED_OPHIDIAN_BRIDGE || this == IDGEL_DOME || this == IRON_WALL_WARFRONT
+			|| this == CHANTRA_DREDGION || this == BARANATH_DREDGION || this == TERATH_DREDGION;
 	}
 
 	public static AutoGroupType getAGTByMaskId(int instanceMaskId) {
-		for (AutoGroupType autoGroupsType : values()) {
-			if (autoGroupsType.getInstanceMaskId() == instanceMaskId) {
-				return autoGroupsType;
+		for (AutoGroupType autoGroupType : values()) {
+			if (autoGroupType.getTemplate().getMaskId() == instanceMaskId) {
+				return autoGroupType;
 			}
 		}
 		return null;
@@ -411,7 +355,7 @@ public enum AutoGroupType implements L10n {
 
 	public static AutoGroupType getAutoGroup(int level, int npcId) {
 		for (AutoGroupType agt : values()) {
-			if (agt.hasLevelPermit(level) && agt.containNpcId(npcId)) {
+			if (agt.isInLvlRange(level) && agt.containNpcId(npcId)) {
 				return agt;
 			}
 		}
@@ -420,7 +364,7 @@ public enum AutoGroupType implements L10n {
 
 	public static AutoGroupType getAutoGroupByWorld(int level, int worldId) {
 		for (AutoGroupType agt : values()) {
-			if (agt.getInstanceMapId() == worldId && agt.hasLevelPermit(level)) {
+			if (agt.getTemplate().getMaskId() == worldId && agt.isInLvlRange(level)) {
 				return agt;
 			}
 		}
@@ -437,86 +381,60 @@ public enum AutoGroupType implements L10n {
 	}
 
 	public boolean isPvPSoloArena() {
-		switch (this) {
-			case ARENA_OF_DISCIPLINE_1:
-			case ARENA_OF_DISCIPLINE_2:
-			case ARENA_OF_DISCIPLINE_3:
-			case ARENA_OF_DISCIPLINE_4:
-				return true;
-		}
-		return false;
+		return switch (this) {
+			case ARENA_OF_DISCIPLINE_1, ARENA_OF_DISCIPLINE_2, ARENA_OF_DISCIPLINE_3, ARENA_OF_DISCIPLINE_4 -> true;
+			default -> false;
+		};
 	}
 
-	public boolean isTrainigPvPSoloArena() {
-		switch (this) {
-			case DISCIPLINE_TRAINING_GROUNDS_1:
-			case DISCIPLINE_TRAINING_GROUNDS_2:
-			case DISCIPLINE_TRAINING_GROUNDS_3:
-			case DISCIPLINE_TRAINING_GROUNDS_4:
-				return true;
-		}
-		return false;
+	public boolean isTrainingPvPSoloArena() {
+		return switch (this) {
+			case DISCIPLINE_TRAINING_GROUNDS_1, DISCIPLINE_TRAINING_GROUNDS_2, DISCIPLINE_TRAINING_GROUNDS_3, DISCIPLINE_TRAINING_GROUNDS_4 -> true;
+			default -> false;
+		};
 	}
 
 	public boolean isPvPFFAArena() {
-		switch (this) {
-			case ARENA_OF_CHAOS_1:
-			case ARENA_OF_CHAOS_2:
-			case ARENA_OF_CHAOS_3:
-			case ARENA_OF_CHAOS_4:
-				return true;
-		}
-		return false;
+		return switch (this) {
+			case ARENA_OF_CHAOS_1, ARENA_OF_CHAOS_2, ARENA_OF_CHAOS_3, ARENA_OF_CHAOS_4 -> true;
+			default -> false;
+		};
 	}
 
-	public boolean isTrainigPvPFFAArena() {
-		switch (this) {
-			case CHAOS_TRAINING_GROUNDS_1:
-			case CHAOS_TRAINING_GROUNDS_2:
-			case CHAOS_TRAINING_GROUNDS_3:
-			case CHAOS_TRAINING_GROUNDS_4:
-				return true;
-		}
-		return false;
+	public boolean isTrainingPvPFFAArena() {
+		return switch (this) {
+			case CHAOS_TRAINING_GROUNDS_1, CHAOS_TRAINING_GROUNDS_2, CHAOS_TRAINING_GROUNDS_3, CHAOS_TRAINING_GROUNDS_4 -> true;
+			default -> false;
+		};
 	}
 
-	public boolean isTrainigHarmonyArena() {
-		switch (this) {
-			case HARAMONIOUS_TRAINING_CENTER_1:
-			case HARAMONIOUS_TRAINING_CENTER_2:
-			case HARAMONIOUS_TRAINING_CENTER_3:
-			case HARAMONIOUS_TRAINING_CENTER_4:
-				return true;
-		}
-		return false;
+	public boolean isTrainingHarmonyArena() {
+		return switch (this) {
+			case HARAMONIOUS_TRAINING_CENTER_1, HARAMONIOUS_TRAINING_CENTER_2, HARAMONIOUS_TRAINING_CENTER_3, HARAMONIOUS_TRAINING_CENTER_4 -> true;
+			default -> false;
+		};
 	}
 
 	public boolean isHarmonyArena() {
-		switch (this) {
-			case ARENA_OF_HARMONY_1:
-			case ARENA_OF_HARMONY_2:
-			case ARENA_OF_HARMONY_3:
-			case ARENA_OF_HARMONY_4:
-				return true;
-		}
-		return false;
+		return switch (this) {
+			case ARENA_OF_HARMONY_1, ARENA_OF_HARMONY_2, ARENA_OF_HARMONY_3, ARENA_OF_HARMONY_4 -> true;
+			default -> false;
+		};
 	}
 
 	public boolean isGloryArena() {
-		switch (this) {
-			case ARENA_OF_GLORY_1:
-			case ARENA_OF_GLORY_2:
-				return true;
-		}
-		return false;
+		return switch (this) {
+			case ARENA_OF_GLORY_1, ARENA_OF_GLORY_2 -> true;
+			default -> false;
+		};
 	}
 
 	public boolean isPvpArena() {
-		return isTrainigPvPFFAArena() || isPvPFFAArena() || isTrainigPvPSoloArena() || isPvPSoloArena();
+		return isTrainingPvPFFAArena() || isPvPFFAArena() || isTrainingPvPSoloArena() || isPvPSoloArena();
 	}
 
-	public boolean hasLevelPermit(int level) {
-		return level >= getMinLevel() && level <= getMaxLevel();
+	public boolean isInLvlRange(int level) {
+		return level >= template.getMinLvl() && level <= template.getMaxLvl();
 	}
 
 	public byte getDifficultId() {

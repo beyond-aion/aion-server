@@ -18,31 +18,31 @@ import com.aionemu.gameserver.model.templates.L10n;
 public class AutoGroup implements L10n {
 
 	@XmlAttribute(required = true)
-	protected int id;
+	private int id;
 	@XmlAttribute(required = true)
-	protected int instanceId;
+	private int instanceId;
 	@XmlAttribute(name = "name_id")
-	protected int nameId;
+	private int nameId;
 	@XmlAttribute(name = "title_id")
-	protected int titleId;
+	private int titleId;
 	@XmlAttribute(name = "min_lvl")
-	protected int minLvl;
+	private int minLvl;
 	@XmlAttribute(name = "max_lvl")
-	protected int maxLvl;
+	private int maxLvl;
 	@XmlAttribute(name = "register_quick")
-	protected boolean registerQuick;
+	private boolean registerQuick;
 	@XmlAttribute(name = "register_group")
-	protected boolean registerGroup;
+	private boolean registerGroup;
 	@XmlAttribute(name = "register_new")
-	protected boolean registerNew;
+	private boolean registerNew;
 	@XmlAttribute(name = "npc_ids")
-	protected List<Integer> npcIds;
+	private List<Integer> npcIds;
 
-	public int getId() {
+	public int getMaskId() {
 		return id;
 	}
 
-	public int getInstanceId() {
+	public int getInstanceMapId() {
 		return instanceId;
 	}
 
@@ -63,7 +63,7 @@ public class AutoGroup implements L10n {
 		return maxLvl;
 	}
 
-	public boolean hasRegisterQuick() {
+	public boolean canRegisterQuickEntry() {
 		return registerQuick;
 	}
 
@@ -71,7 +71,7 @@ public class AutoGroup implements L10n {
 		return registerGroup;
 	}
 
-	public boolean hasRegisterNew() {
+	public boolean canRegisterNewEntry() {
 		return registerNew;
 	}
 

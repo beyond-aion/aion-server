@@ -141,12 +141,17 @@ public class PlayerGroupService {
 		Objects.requireNonNull(banGiver, "Bangiver player should not be null");
 		PlayerGroup group = banGiver.getPlayerGroup();
 		if (group != null) {
-			if (banGiver.equals(bannedPlayer))
+			if (banGiver.equals(bannedPlayer)) {
 				PacketSendUtility.sendPacket(banGiver, SM_SYSTEM_MESSAGE.STR_PARTY_CANT_BAN_SELF());
-			else if (group.hasMember(bannedPlayer.getObjectId()))
+			} else if (!group.isLeader(banGiver)) {
+				PacketSendUtility.sendPacket(banGiver, SM_SYSTEM_MESSAGE.STR_FORCE_ONLY_LEADER_CAN_BANISH());
+			} else if (group.getTeamType() == TeamType.AUTO_GROUP) {
+				PacketSendUtility.sendPacket(banGiver, SM_SYSTEM_MESSAGE.STR_MSG_PARTY_FORCE_NO_RIGHT_TO_DECIDE());
+			} else if (group.hasMember(bannedPlayer.getObjectId())) {
 				group.onEvent(new PlayerGroupLeavedEvent(group, bannedPlayer, LeaveReson.BAN, banGiver.getName()));
-			else
+			} else {
 				log.warn("TEAM: banning {} not in group {}", bannedPlayer, group.getMembers());
+			}
 		}
 	}
 

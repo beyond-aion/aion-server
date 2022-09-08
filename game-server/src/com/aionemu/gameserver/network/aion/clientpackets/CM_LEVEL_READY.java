@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
-import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.animations.ArrivalAnimation;
@@ -14,16 +13,8 @@ import com.aionemu.gameserver.model.templates.windstreams.Location2D;
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamTemplate;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ACCOUNT_PROPERTIES;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_CUBE_UPDATE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_HOUSE_OBJECTS;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_COUNT_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_UPGRADE_ARCADE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_WINDSTREAM_ANNOUNCE;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
-import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.services.WeatherService;
@@ -84,11 +75,6 @@ public class CM_LEVEL_READY extends AionClientPacket {
 
 		// SM_RIFT_ANNOUNCE
 		RiftInformer.sendRiftsInfo(activePlayer);
-
-		// SM_AUTO_GROUP's
-		if (AutoGroupConfig.AUTO_GROUP_ENABLE) {
-			AutoGroupService.getInstance().onEnterWorld(activePlayer);
-		}
 
 		// SM_UPGRADE_ARCADE
 		if (EventsConfig.ENABLE_EVENT_ARCADE)

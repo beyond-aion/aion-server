@@ -14,20 +14,13 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class PortalCooldownList {
 
-	private Player owner;
+	private final Player owner;
 	private Map<Integer, PortalCooldown> portalCooldowns;
 
-	/**
-	 * @param owner
-	 */
 	PortalCooldownList(Player owner) {
 		this.owner = owner;
 	}
 
-	/**
-	 * @param worldId
-	 ** @return
-	 */
 	public boolean isPortalUseDisabled(int worldId) {
 		if (portalCooldowns == null || !portalCooldowns.containsKey(worldId))
 			return false;
@@ -41,17 +34,9 @@ public class PortalCooldownList {
 			return false;
 		}
 
-		if (coolDown.getEnterCount() < DataManager.INSTANCE_COOLTIME_DATA.getInstanceMaxCountByWorldId(worldId)) {
-			return false;
-		}
-
-		return true;
+		return coolDown.getEnterCount() >= DataManager.INSTANCE_COOLTIME_DATA.getInstanceMaxCountByWorldId(worldId);
 	}
 
-	/**
-	 * @param worldId
-	 * @return
-	 */
 	public long getPortalCooldownTime(int worldId) {
 		if (portalCooldowns == null || !portalCooldowns.containsKey(worldId))
 			return 0;
@@ -77,10 +62,6 @@ public class PortalCooldownList {
 		this.portalCooldowns = portalCoolDowns;
 	}
 
-	/**
-	 * @param worldId
-	 * @param time
-	 */
 	public void addPortalCooldown(int worldId, long useDelay) {
 		if (portalCooldowns == null)
 			portalCooldowns = new HashMap<>();
@@ -100,24 +81,15 @@ public class PortalCooldownList {
 			PacketSendUtility.sendPacket(owner, new SM_INSTANCE_INFO((byte) 2, owner, worldId));
 	}
 
-	/**
-	 * @param worldId
-	 */
 	public void removePortalCooldown(int worldId) {
 		if (portalCooldowns != null)
 			portalCooldowns.remove(worldId);
 	}
 
-	/**
-	 * @return
-	 */
 	public boolean hasCooldowns() {
 		return portalCooldowns != null && portalCooldowns.size() > 0;
 	}
 
-	/**
-	 * @return
-	 */
 	public int size() {
 		return portalCooldowns != null ? portalCooldowns.size() : 0;
 	}

@@ -17,7 +17,7 @@ public class PvPArenaService {
 
 	public static boolean isPvPArenaAvailable(Player player, AutoGroupType agt) {
 		if (AutoGroupConfig.START_TIME_ENABLE && !checkTime(agt)) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CLOSED_TIME(agt.getInstanceMapId()));
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CLOSED_TIME(agt.getTemplate().getInstanceMapId()));
 			return false;
 		}
 		if (!checkItem(player, agt)) {

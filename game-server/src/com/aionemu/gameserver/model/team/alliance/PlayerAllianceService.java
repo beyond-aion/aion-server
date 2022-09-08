@@ -160,16 +160,18 @@ public class PlayerAllianceService {
 	/**
 	 * Remove player from alliance (ban)
 	 */
-	public static final void banPlayer(Player bannedPlayer, Player banGiver) {
+	public static void banPlayer(Player bannedPlayer, Player banGiver) {
 		Objects.requireNonNull(bannedPlayer, "Banned player should not be null");
 		Objects.requireNonNull(banGiver, "Bangiver player should not be null");
 		PlayerAlliance alliance = banGiver.getPlayerAlliance();
 		if (alliance != null) {
-			if (banGiver.equals(bannedPlayer))
+			if (banGiver.equals(bannedPlayer)) {
 				PacketSendUtility.sendPacket(banGiver, SM_SYSTEM_MESSAGE.STR_FORCE_CANT_BAN_SELF());
-			else if (!alliance.isLeader(banGiver))
+			} else if (!alliance.isLeader(banGiver)) {
 				PacketSendUtility.sendPacket(banGiver, SM_SYSTEM_MESSAGE.STR_FORCE_ONLY_LEADER_CAN_BANISH());
-			else {
+			} else if (alliance.getTeamType() == TeamType.AUTO_ALLIANCE) {
+				PacketSendUtility.sendPacket(banGiver, SM_SYSTEM_MESSAGE.STR_MSG_PARTY_FORCE_NO_RIGHT_TO_DECIDE());
+			} else {
 				if (alliance.getTeamType().isDefence())
 					VortexService.getInstance().removeDefenderPlayer(bannedPlayer);
 				if (alliance.hasMember(bannedPlayer.getObjectId()))

@@ -4,6 +4,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancescore.PvPArenaScore;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.services.AutoGroupService;
+import com.aionemu.gameserver.services.autogroup.AutoGroupUtility;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -16,14 +17,19 @@ public class AutoPvPFFAInstance extends AutoInstance {
 	}
 
 	@Override
-	public AGQuestion addPlayer(Player player, SearchInstance searchInstance) {
+	public AGQuestion addLookingForParty(LookingForParty lookingForParty) {
 		super.writeLock();
 		try {
-			if (!satisfyTime(searchInstance) || (players.size() >= getMaxPlayers())) {
+			if (isRegistrationDisabled(lookingForParty) || lookingForParty.getMemberObjectIds().size() > 1
+				|| registeredAGPlayers.size() >= getMaxPlayers()) {
 				return AGQuestion.FAILED;
 			}
-			players.put(player.getObjectId(), new AGPlayer(player));
-			return instance != null ? AGQuestion.ADDED : (players.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED);
+
+			AGPlayer agp = AutoGroupUtility.getNewAutoGroupPlayer(lookingForParty.getLeaderObjId());
+			if (agp == null)
+				return AGQuestion.FAILED;
+			registeredAGPlayers.put(lookingForParty.getLeaderObjId(), agp);
+			return instance == null && registeredAGPlayers.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED;
 		} finally {
 			super.writeUnlock();
 		}
@@ -31,7 +37,6 @@ public class AutoPvPFFAInstance extends AutoInstance {
 
 	@Override
 	public void onPressEnter(Player player) {
-		super.onPressEnter(player);
 		if (agt.isPvPFFAArena() || agt.isPvPSoloArena() || agt.isGloryArena()) {
 			long size = 1;
 			int itemId = 186000135;
@@ -39,12 +44,11 @@ public class AutoPvPFFAInstance extends AutoInstance {
 				size = 3;
 				itemId = 186000185;
 			}
-			if (!decrease(player, itemId, size)) {
-				players.remove(player.getObjectId());
-				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getInstanceMaskId(), 5));
-				if (players.isEmpty()) {
-					AutoGroupService.getInstance().unregisterAndDestroyInstance(instance.getInstanceId());
-				}
+			if (!removeItem(player, itemId, size)) {
+				registeredAGPlayers.remove(player.getObjectId());
+				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getTemplate().getMaskId(), 5));
+				if (registeredAGPlayers.isEmpty())
+					AutoGroupService.getInstance().destroyInstanceIfPossible(this, instance.getInstanceId());
 				return;
 			}
 		}
