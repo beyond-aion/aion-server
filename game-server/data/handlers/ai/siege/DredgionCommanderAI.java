@@ -35,10 +35,10 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 
 	private void findFortressBoss() {
 		for (VisibleObject vo : getKnownList().getKnownObjects().values()) {
-			if (vo instanceof Npc) {
-				if (((Npc) vo).getRace() == Race.GCHIEF_LIGHT || ((Npc) vo).getRace() == Race.GCHIEF_DARK) {
-					fortressBoss = (Npc) vo;
-					getAggroList().addHate(fortressBoss, 600000);
+			if (vo instanceof Npc boss) {
+				if (boss.getRace() == Race.GCHIEF_LIGHT || boss.getRace() == Race.GCHIEF_DARK) {
+					fortressBoss = boss;
+					getAggroList().addHate(fortressBoss, 500000);
 					break;
 				}
 			}
@@ -57,8 +57,8 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 
 	@Override
 	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
-		if (fortressBoss != null && effect != null && effect.getEffected() == fortressBoss && effect.getStack().equals("DGFI_ONESHOTONEKILL_WARPDR"))
-			damage = fortressBoss.getLifeStats().getMaxHp() * 0.1f;
+		if (effected == fortressBoss)
+			damage *= SiegeConfig.SIEGE_HEALTH_MULTIPLIER;
 		return damage;
 	}
 
