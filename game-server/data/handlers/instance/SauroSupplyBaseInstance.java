@@ -24,7 +24,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 @InstanceID(301130000)
 public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 
-	private static List<WorldPosition> chestPoints = new ArrayList<>();
+	private static final List<WorldPosition> chestPoints = new ArrayList<>();
 	private Future<?> scheduledGeneratorTask;
 	static {
 		chestPoints.add(new WorldPosition(301130000, 253.97533f, 363.97156f, 159.64023f, (byte) 0));
@@ -60,21 +60,11 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 	public void onInstanceCreate() {
 		// spawn Sauro Base Grave Robber (pool=1)
 		switch (Rnd.get(1, 5)) {
-			case 1:
-				spawn(230846, 460.69705f, 390.10602f, 182.75943f, (byte) 0);
-				break;
-			case 2:
-				spawn(230846, 463.92523f, 402.63937f, 183.31064f, (byte) 0);
-				break;
-			case 3:
-				spawn(230846, 496.42526f, 412.04755f, 182.72771f, (byte) 0);
-				break;
-			case 4:
-				spawn(230846, 497.27997f, 361.05948f, 182.45613f, (byte) 0);
-				break;
-			case 5:
-				spawn(230846, 497.55908f, 389.86649f, 182.8175f, (byte) 0);
-				break;
+			case 1 -> spawn(230846, 460.69705f, 390.10602f, 182.75943f, (byte) 0);
+			case 2 -> spawn(230846, 463.92523f, 402.63937f, 183.31064f, (byte) 0);
+			case 3 -> spawn(230846, 496.42526f, 412.04755f, 182.72771f, (byte) 0);
+			case 4 -> spawn(230846, 497.27997f, 361.05948f, 182.45613f, (byte) 0);
+			case 5 -> spawn(230846, 497.55908f, 389.86649f, 182.8175f, (byte) 0);
 		}
 
 		// spawn Commander Ranodim
@@ -223,5 +213,13 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 					TeleportAnimation.FADE_OUT_BEAM);
 				break;
 		}
+	}
+
+	@Override
+	public boolean isBoss(Npc npc) {
+		return switch (npc.getNpcId()) {
+			case 230849, 230850, 230851, 230853, 230857, 230858, 233255, 233256, 233257, 233258 -> true;
+			default -> false;
+		};
 	}
 }

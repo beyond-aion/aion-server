@@ -175,4 +175,9 @@ public class IdgelDomeInstance extends BasicPvpInstance {
 		else
 			TeleportService.teleportTo(player, instance.getMapId(), instance.getInstanceId(), 259.3971f, 169.18243f, 79.430855f, (byte) 45);
 	}
+
+	@Override
+	public boolean isBoss(Npc npc) {
+		return npc.getNpcId() == 287249;
+	}
 }

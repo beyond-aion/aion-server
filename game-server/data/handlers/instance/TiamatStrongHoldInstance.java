@@ -278,11 +278,8 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
-		switch (npc.getNpcId()) {
-			case 701494:
-				instance.setDoorState(22, true);
-				break;
-		}
+			if (npc.getNpcId() == 701494)
+					instance.setDoorState(22, true);
 	}
 
 	@Override
@@ -302,5 +299,13 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 	public boolean onDie(final Player player, Creature lastAttacker) {
 		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
 		return true;
+	}
+
+	@Override
+	public boolean isBoss(Npc npc) {
+		return switch (npc.getNpcId()) {
+			case 219352, 219353, 219354, 219355, 219356, 219357, 219358 -> true;
+			default -> false;
+		};
 	}
 }
