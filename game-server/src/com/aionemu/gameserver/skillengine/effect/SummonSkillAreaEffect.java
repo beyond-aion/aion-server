@@ -37,15 +37,20 @@ public class SummonSkillAreaEffect extends SummonServantEffect {
 		int spawnDuration = time;
 
 		String group = effect.getSkillTemplate().getGroup();
-		if (group != null && group.equals("KN_THREATENINGWAVE")) {
-			spawnDuration = 15; // client files say 11s but description 15s
-			tickDelay = 2000;
-		} else if (group != null && group.equals("WI_SUMMONTORNADO")) {
-			tickDelay = 1000;
-		} else if (group.equals("WI_DELAYEDSTRIKE")) {
-			tickDelay = 5000;
-			spawnDuration = 9;
+		if (group != null) {
+			switch (group) {
+				case "KN_THREATENINGWAVE" -> {
+					spawnDuration = 15; // client files say 11s but description 15s
+					tickDelay = 2000;
+				}
+				case "WI_SUMMONTORNADO" -> tickDelay = 1900;
+				case "WI_DELAYEDSTRIKE" -> {
+					tickDelay = 5000;
+					spawnDuration = 9;
+				}
+			}
 		}
+
 		Servant servant = spawnServant(effect, spawnDuration, NpcObjectType.SKILLAREA, x, y, z);
 		if (effect.getEffected() != null) // point skill without any initial target (we cannot trigger handleAttack with a null target)
 			servant.getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
