@@ -4173,7 +4173,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Legendary Symphony" start="2020-04-10T00:00:00" end="2020-04-22T23:59:59">
+	<event name="Legendary Symphony" start="2022-09-30T00:00:00" end="2022-10-09T23:59:59">
 		<quests>
 			<maintainable>80673 80674 80675 80676 80677 80678 80679 80680 80681 80682 80697 80698 80699 80700 80701 80702 80703 80704 80705 80706</maintainable>
 		</quests>
@@ -4214,10 +4214,10 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Legendary Symphony Drop" start="2020-04-10T00:00:00" end="2020-04-19T23:59:59">
+	<event name="Legendary Symphony Drop" start="2022-09-30T00:00:00" end="2022-10-09T23:59:59">
 		<event_drops>
 			<!-- Green Garrisons -->
-			<gd_rule rule_name="Symphony of Legend - The First Movement" chance="40">
+			<gd_rule rule_name="Symphony of Legend - The First Movement" chance="100" member_limit="3">
 				<gd_maps>
 					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
@@ -4236,7 +4236,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Blue Garrions -->
-			<gd_rule rule_name="Symphony of Legend - The Second Movement" chance="40">
+			<gd_rule rule_name="Symphony of Legend - The Second Movement" chance="100" member_limit="3">
 				<gd_maps>
 					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
@@ -4255,7 +4255,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Yellow Garrions -->
-			<gd_rule rule_name="Symphony of Legend - The Third Movement" chance="40">
+			<gd_rule rule_name="Symphony of Legend - The Third Movement" chance="100" member_limit="3">
 				<gd_maps>
 					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
@@ -4274,7 +4274,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Red Garrions -->
-			<gd_rule rule_name="Symphony of Legend - The Fourth Movement" chance="40">
+			<gd_rule rule_name="Symphony of Legend - The Fourth Movement" chance="100" member_limit="3">
 				<gd_maps>
 					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
@@ -4293,7 +4293,7 @@
 				</gd_items>
 			</gd_rule>
 			<!-- Central Garrions -->
-			<gd_rule rule_name="Symphony of Legend - Epilogue" chance="40">
+			<gd_rule rule_name="Symphony of Legend - Epilogue" chance="100" member_limit="3">
 				<gd_maps>
 					<gd_map map_id="600100000" /><!-- Levinshor -->
 				</gd_maps>
@@ -4309,6 +4309,56 @@
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="188100256" /><!-- Symphony of Legend - Epilogue -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Symphony of Legend - Legend Copy" chance="10" member_limit="3">
+				<gd_maps>
+					<gd_map map_id="600100000" /><!-- Levinshor -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="235370" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235371" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235372" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235373" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235374" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235375" /><!-- Denku Fang -->
+					<gd_npc npc_id="235376" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235377" /><!-- Denku Feralmage -->
+					<gd_npc npc_id="235346" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235347" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235348" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235349" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235350" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235351" /><!-- Denku Fang -->
+					<gd_npc npc_id="235352" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235353" /><!-- Denku Feralmage -->
+					<gd_npc npc_id="235354" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235355" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235356" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235357" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235358" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235359" /><!-- Denku Fang -->
+					<gd_npc npc_id="235360" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235361" /><!-- Denku Feralmage -->
+					<gd_npc npc_id="235362" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235363" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235364" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235365" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235366" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235367" /><!-- Denku Fang -->
+					<gd_npc npc_id="235368" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235369" /><!-- Denku Feralmage -->
+					<gd_npc npc_id="235378" /><!-- Tomul Brawler -->
+					<gd_npc npc_id="235379" /><!-- Tomul Cutthroat -->
+					<gd_npc npc_id="235380" /><!-- Tomul Shaman -->
+					<gd_npc npc_id="235381" /><!-- Tomul Aquamancer -->
+					<gd_npc npc_id="235382" /><!-- Denku Feralclaw -->
+					<gd_npc npc_id="235383" /><!-- Denku Fang -->
+					<gd_npc npc_id="235384" /><!-- Denku Restorer -->
+					<gd_npc npc_id="235385" /><!-- Denku Feralmage -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="182007170" /><!-- Symphony of Legend Copy -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
