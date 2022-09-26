@@ -1,6 +1,6 @@
 /*
- * DB changes since d1b22999 (25.08.2022)
+ * DB changes since 0f84ab98 (19.09.2022)
  */
 
--- replace incorrect items
-UPDATE inventory SET item_id=188053183 AND item_skin=188053183 WHERE item_id=188053179;
+-- remove old event items
+DELETE FROM inventory WHERE item_id IN (182007170, 186000111, 188052627, 188100124, 188100125, 188100252, 188100253, 188100254, 188100255, 188100256);
