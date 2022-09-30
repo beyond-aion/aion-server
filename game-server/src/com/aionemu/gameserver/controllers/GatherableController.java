@@ -213,16 +213,17 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 
 			int skillId = getOwner().getObjectTemplate().getHarvestSkill();
 			int gainedGatherXp = (int) Rates.SKILL_XP_GATHERING.calcResult(player, xpReward);
-			float statRate = player.getGameStats().getStat(StatEnum.getModifier(skillId), 100).getCurrent() / 100f;
-			if (statRate > 0)
-				gainedGatherXp *= statRate;
+			StatEnum boostStat = StatEnum.getModifier(skillId);
+			if (boostStat != null)
+				gainedGatherXp *= player.getGameStats().getStat(boostStat, 100).getCurrent() / 100f;
+			gainedGatherXp = Math.max(1, gainedGatherXp);
 
 			if (player.getSkillList().addSkillXp(player, skillId, gainedGatherXp, skillLvl)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_EXTRACT_GATHERING_SUCCESS_GETEXP());
 				player.getCommonData().addExp(xpReward, Rates.XP_GATHERING);
 			} else
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE
-					.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(getOwner().getObjectTemplate().getHarvestSkill()).getL10n()));
+					.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n()));
 		}
 	}
 

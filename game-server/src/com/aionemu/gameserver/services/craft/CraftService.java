@@ -39,7 +39,7 @@ public class CraftService {
 
 	private static final Logger log = LoggerFactory.getLogger("CRAFT_LOG");
 
-	public static void finishCrafting(final Player player, RecipeTemplate recipetemplate, int critCount, int bonus) {
+	public static void finishCrafting(Player player, RecipeTemplate recipetemplate, int critCount, int bonus) {
 
 		if (recipetemplate.getMaxProductionCount() != null) {
 			player.getRecipeList().deleteRecipe(player, recipetemplate.getId());
@@ -49,9 +49,23 @@ public class CraftService {
 			}
 		}
 
+		int skillId = recipetemplate.getSkillId();
 		int skillLvl = recipetemplate.getSkillpoint();
 		int xpReward = (int) ((0.008 * (skillLvl + 100) * (skillLvl + 100) + 60));
 		xpReward = xpReward + (xpReward * bonus / 100); // bonus
+		int gainedCraftXp = (int) Rates.SKILL_XP_CRAFTING.calcResult(player, xpReward);
+		StatEnum boostStat = StatEnum.getModifier(skillId);
+		if (boostStat != null) // there is no boost for morphing (40009)
+			gainedCraftXp *= player.getGameStats().getStat(boostStat, 100).getCurrent() / 100f;
+		gainedCraftXp = Math.max(1, gainedCraftXp);
+
+		if (player.getSkillList().addSkillXp(player, skillId, gainedCraftXp, skillLvl)) {
+			player.getCommonData().addExp(xpReward, Rates.XP_CRAFTING);
+		} else {
+			PacketSendUtility.sendPacket(player,
+				SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n()));
+		}
+
 		int productItemId = critCount > 0 ? recipetemplate.getComboProduct(critCount) : recipetemplate.getProductId();
 
 		ItemService.addItem(player, productItemId, recipetemplate.getQuantity(), true,
@@ -71,19 +85,6 @@ public class CraftService {
 			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(productItemId);
 			log.info("Player " + player.getName() + " crafted item " + productItemId + " [" + itemTemplate.getName() + "] (count: "
 				+ recipetemplate.getQuantity() + ")" + (critCount > 0 ? " - critical" : ""));
-		}
-
-		int skillId = recipetemplate.getSkillId();
-		int gainedCraftXp = (int) Rates.SKILL_XP_CRAFTING.calcResult(player, xpReward);
-		float statRate = player.getGameStats().getStat(StatEnum.getModifier(skillId), 100).getCurrent() / 100f;
-		if (statRate > 0)
-			gainedCraftXp *= statRate;
-
-		if (player.getSkillList().addSkillXp(player, skillId, gainedCraftXp, skillLvl)) {
-			player.getCommonData().addExp(xpReward, Rates.XP_CRAFTING);
-		} else {
-			PacketSendUtility.sendPacket(player,
-				SM_SYSTEM_MESSAGE.STR_MSG_DONT_GET_PRODUCTION_EXP(DataManager.SKILL_DATA.getSkillTemplate(recipetemplate.getSkillId()).getL10n()));
 		}
 
 		if (recipetemplate.getCraftDelayId() != null) {
