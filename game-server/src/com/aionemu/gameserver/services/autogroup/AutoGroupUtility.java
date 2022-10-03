@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.autogroup;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.autogroup.LookingForParty;
@@ -47,7 +48,13 @@ public class AutoGroupUtility {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_NOT_LEADER());
 			return false;
 		}
-		if (agt.isHarmonyArena() || agt.isTrainingHarmonyArena()) {
+		if (agt.isPeriodicInstance()) {
+			int maxMemberPerTeam = DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getTemplate().getInstanceMapId(), player.getRace());
+			if (team.size() > maxMemberPerTeam) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_TOO_MANY_MEMBERS(maxMemberPerTeam, mapId));
+				return false;
+			}
+		} else if (agt.isHarmonyArena() || agt.isTrainingHarmonyArena()) {
 			if (team.size() > 3) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_TOO_MANY_MEMBERS(3, mapId));
 				return false;
