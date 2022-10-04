@@ -154,7 +154,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.INIT_PLAYER, player.getObjectId(), 0), getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE, player.getObjectId(), 0), getTime()));
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE, instance.getPlayersInside()), getTime()));
 	}
 
 	@Override
