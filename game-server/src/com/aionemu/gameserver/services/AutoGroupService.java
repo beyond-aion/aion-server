@@ -65,7 +65,7 @@ public class AutoGroupService {
 		checkQueueForNewMatches(maskId);
 	}
 
-	private void checkQueueForNewMatches(int maskId) {
+	private synchronized void checkQueueForNewMatches(int maskId) {
 		List<LookingForParty> queuedParties = lookingParties.get(maskId);
 		if (queuedParties == null || queuedParties.isEmpty())
 			return;
@@ -113,7 +113,7 @@ public class AutoGroupService {
 		}
 	}
 
-	private boolean checkInstancesForOpenQuickEntries(LookingForParty lfp, int maskId) {
+	private synchronized boolean checkInstancesForOpenQuickEntries(LookingForParty lfp, int maskId) {
 		if (lfp.getEntryRequestType() != EntryRequestType.QUICK_GROUP_ENTRY || lfp.isOnStartEnterTask())
 			return false;
 		for (AutoInstance autoInstance : autoInstances.values()) {
@@ -128,7 +128,7 @@ public class AutoGroupService {
 		return false;
 	}
 
-	private void checkQueueForQuickEntries(AutoInstance autoInstance) {
+	private synchronized void checkQueueForQuickEntries(AutoInstance autoInstance) {
 		int maskId = autoInstance.getAutoGroupType().getTemplate().getMaskId();
 		List<LookingForParty> parties = lookingParties.get(maskId);
 		if (parties == null || parties.isEmpty())

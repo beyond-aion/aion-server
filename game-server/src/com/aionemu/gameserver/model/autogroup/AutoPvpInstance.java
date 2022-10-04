@@ -39,7 +39,7 @@ public class AutoPvpInstance extends AutoInstance {
 						registeredAGPlayers.put(objectId, new AGPlayer(objectId));
 				}
 			} else {
-				if (playersByRace.size() >= getMaxPlayers())
+				if (playersByRace.size() >= getMaxPlayers() / 2)
 					return AGQuestion.FAILED;
 
 				AGPlayer agp = AutoGroupUtility.getNewAutoGroupPlayer(lookingForParty.getLeaderObjId());
