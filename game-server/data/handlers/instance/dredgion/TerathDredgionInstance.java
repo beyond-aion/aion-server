@@ -7,6 +7,7 @@ import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
+import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -149,6 +150,18 @@ public class TerathDredgionInstance extends DredgionInstance {
 				return;
 		}
 		super.onDie(npc);
+	}
+
+	@Override
+	public void doReward(Player player, PvpInstancePlayerReward reward, Race winningRace) {
+		if (reward.getRace() == winningRace) {
+			reward.setReward1(186000242, 1, 0); // CUSTOM: Ceramium Medal
+			if (Rnd.chance() < 20)
+				reward.setReward2(188950017, 1, 0); // CUSTOM: Special Courier Pass (Abyss Eternal/Lv. 61-65)
+		} else {
+			reward.setReward1(186000147, 1, 0); // CUSTOM: Mithril Medal
+		}
+		super.doReward(player, reward, winningRace);
 	}
 
 	@Override

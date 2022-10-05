@@ -446,6 +446,9 @@
 			<drop item_id="112501033" chance="10" /><!-- Forgotten Abyssal Spaulders -->
 			<drop item_id="112601047" chance="10" /><!-- Forgotten Abyssal Shoulderplates -->
 		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest -->
+			<drop item_id="188053083" chance="5" /><!-- Tempering Solution Chest -->
+		</drop_group>
 	</npc_drop>
 	<!-- 700861 >> Unstable Abyssal Splinter -->
 	<npc_drop npc_id="700934">
@@ -503,6 +506,12 @@
 			<drop item_id="186000057" chance="10" /><!-- Ancient Goblet -->
 			<drop item_id="186000056" chance="5" /><!-- Greater Ancient Goblet -->
 		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone -->
+			<drop item_id="166500002" chance="10" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest -->
+			<drop item_id="188053083" chance="5" /><!-- Tempering Solution Chest -->
+		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="700936">
 		<drop_group><!-- Named Medal -->
@@ -532,6 +541,12 @@
 			<drop item_id="114301149" chance="20" /><!-- Forgotten Abyssal Boots -->
 			<drop item_id="114501098" chance="20" /><!-- Forgotten Abyssal Brogans -->
 			<drop item_id="114601052" chance="20" /><!-- Forgotten Abyssal Sabatons -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone -->
+			<drop item_id="166500002" chance="10" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest -->
+			<drop item_id="188053083" chance="5" /><!-- Tempering Solution Chest -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="700937">
@@ -585,6 +600,19 @@
 			<drop item_id="186000058" chance="20" /><!-- Lesser Ancient Goblet -->
 			<drop item_id="186000057" chance="10" /><!-- Ancient Goblet -->
 			<drop item_id="186000056" chance="5" /><!-- Greater Ancient Goblet -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950002" chance="5" /><!-- Special Courier Pass (Fabled/Lv.50 and lower) -->
+			<drop item_id="188950005" chance="5" /><!-- Special Courier Pass (Eternal/Lv.50 and lower) -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="700938">
@@ -657,6 +685,19 @@
 			<drop item_id="186000057" chance="10" /><!-- Ancient Goblet -->
 			<drop item_id="186000056" chance="5" /><!-- Greater Ancient Goblet -->
 		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950002" chance="5" /><!-- Special Courier Pass (Fabled/Lv.50 and lower) -->
+			<drop item_id="188950005" chance="5" /><!-- Special Courier Pass (Eternal/Lv.50 and lower) -->
+		</drop_group>
 	</npc_drop>
 	<!-- Aetherogenetics Lab -->
 	<npc_drop npc_id="212335">
@@ -698,9 +739,6 @@
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701013">
-		<drop_group level_based_chance_reduction="true"><!-- Amplification Stone (Single) -->
-			<drop item_id="166500002" chance="5" /><!-- Amplification Stone -->
-		</drop_group>
 		<drop_group><!-- Named Armor (Epic) -->
 			<drop item_id="114101286" chance="5" /><!-- Primal Spirit Shoes -->
 			<drop item_id="114601192" chance="5" /><!-- Primal Spirit Sabatons -->
@@ -1424,38 +1462,29 @@
 	</npc_drop>
 	<!-- Danuar Reliquary -->
 	<npc_drop npc_id="701795">
-		<drop_group><!-- Conqueror's Mark -->
-			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
-		</drop_group>
-		<drop_group><!-- Amplification Stone (Multi) -->
-			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
-		</drop_group>
 		<drop_group><!-- Named Equipment Box (Epic) -->
 			<drop item_id="188052388" each_member="true" /><!-- Modor's Equipment Box -->
 		</drop_group>
 		<drop_group><!-- Named Supply Box (Unique) -->
 			<drop item_id="188052499" each_member="true" /><!-- Danuar Reliquary Expedition's Excavation Box -->
 		</drop_group>
-		<drop_group><!-- Loyalty Coins -->
-			<drop item_id="186000409" min_amount="30" each_member="true" /><!-- Daeva's Respite Coin -->
-		</drop_group>
-	</npc_drop>
-	<!-- Infernal Danuar Reliquary -->
-	<npc_drop npc_id="234691">
 		<drop_group><!-- Conqueror's Mark -->
 			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
-		<drop_group><!-- Amplification Stone (Multi) -->
-			<drop item_id="166500002" chance="12" each_member="true" /><!-- Amplification Stone -->
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
 		</drop_group>
-		<drop_group><!-- Modor's Curiosity Box -->
-			<drop item_id="188053091" each_member="true" /><!-- Modor's Curiosity Box -->
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
 		</drop_group>
-		<drop_group><!-- Danuar Reliquary Expedition's Artifacts -->
-			<drop item_id="188053092" each_member="true" /><!-- Danuar Reliquary Expedition's Artifacts -->
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950015" chance="5" /><!-- Special Courier Pass (Eternal/Lv.61-65) -->
 		</drop_group>
 		<drop_group><!-- Loyalty Coins -->
-			<drop item_id="186000409" min_amount="36" each_member="true" /><!-- Daeva's Respite Coin -->
+			<drop item_id="186000409" min_amount="30" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 	</npc_drop>
 	<!-- Danuar Sanctuary -->
@@ -1728,29 +1757,29 @@
 	</npc_drop>
 	<!-- Dragon Lords Refuge -->
 	<npc_drop npc_id="701542">
-		<drop_group><!-- Conqueror's Mark -->
-			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
-		</drop_group>
-		<drop_group><!-- Amplification Stone (Multi) -->
-			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
-		</drop_group>
 		<drop_group><!-- Named Box -->
 			<drop item_id="188052084" each_member="true" /><!-- Dragon Lord Tiamat Treasure Chest -->
 		</drop_group>
-		<drop_group><!-- Courier Pass -->
-			<drop item_id="188950018" chance="4" /><!-- Special Courier Pass (Mythic/Lv.56-60) -->
+		<drop_group><!-- Conqueror's Mark -->
+			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950018" chance="5" /><!-- Special Courier Pass (Mythic/Lv.56-60) -->
 		</drop_group>
 	</npc_drop>
 	<!-- Anguished Dragon Lord's Refuge -->
 	<npc_drop npc_id="702729">
 		<drop_group><!-- Consumable Chest-->
 			<drop item_id="188053707" each_member="true" /><!-- Glimmering Treasure Chest of Dragon Lord Tiamat -->
-		</drop_group>
-		<drop_group><!-- Amplification Stone (Multi) -->
-			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
-		</drop_group>
-		<drop_group>
-			<drop item_id="186000409" min_amount="62" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 		<drop_group><!-- Named Armor -->
 			<drop item_id="112101644" /><!-- Glimmering Dragon Lord's Pauldrons -->
@@ -1837,15 +1866,27 @@
 			<drop item_id="169405395" chance="25" /><!-- Upgraded Distorted Polearm of the Fierce Battle Prototype -->
 			<drop item_id="169405396" chance="25" /><!-- Upgraded Distorted Staff of the Fierce Battle Prototype -->
 		</drop_group>
-		<drop_group><!-- Courier Pass -->
-			<drop item_id="188950019" chance="4" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
-		</drop_group>
 		<drop_group><!-- Conqueror's Mark -->
 			<drop item_id="186000238" min_amount="60" max_amount="90" each_member="true" /><!-- Conqueror's Mark -->
 		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950019" chance="5" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="186000409" min_amount="62" each_member="true" /><!-- Daeva's Respite Coin -->
+		</drop_group>
 	</npc_drop>
 	<!-- Drakenspire Depths -->
-	<npc_drop npc_id="833012">
+	<npc_drop npc_id="833012"><!-- Beritra EM Chest -->
 		<drop_group>
 			<drop item_id="110101882" chance="20" /><!-- Dragon Lord's Sorcerer Jacket -->
 			<drop item_id="110101883" chance="20" /><!-- Dragon Lord's Spiritmaster Jacket -->
@@ -1913,8 +1954,54 @@
 			<drop item_id="125004284" chance="40" /><!-- Dragon Lord's Hat -->
 			<drop item_id="125004285" chance="40" /><!-- Dragon Lord's Bandana -->
 		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950019" chance="5" /><!-- Special Courier Pass (Mythic/Lv.61-65) -->
+		</drop_group>
 		<drop_group>
-			<drop item_id="166030005" chance="10" each_member="true" /><!-- Tempering Solution -->
+			<drop item_id="186000409" min_amount="122" each_member="true" /><!-- Daeva's Respite Coin -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="833013"><!-- Beritra NM Chest -->
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950019" chance="5" /><!-- Special Courier Pass (Mythic/Lv.61-65) -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="186000409" min_amount="146" each_member="true" /><!-- Daeva's Respite Coin -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="833015"><!-- Beritra HM Chest -->
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950019" chance="5" /><!-- Special Courier Pass (Mythic/Lv.61-65) -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="186000409" min_amount="170" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 	</npc_drop>
 	<!-- Esoterrace -->
@@ -2192,11 +2279,20 @@
 		<drop_group><!-- Named Relic Bundle -->
 			<drop item_id="188052607" each_member="true" /><!-- Major Relic Box -->
 		</drop_group>
-		<drop_group><!-- Named Amplification Stone -->
-			<drop item_id="166500002" chance="10" /><!-- Amplification Stone -->
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
 		</drop_group>
-		<drop_group><!-- Named Tempering Solution Chest -->
-			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950019" chance="5" /><!-- Special Courier Pass (Mythic/Lv.61-65) -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="186000409" min_amount="58" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701914"><!-- A-Rank Chest -->
@@ -2295,11 +2391,20 @@
 		<drop_group><!-- Named Relic Bundle -->
 			<drop item_id="188052608" each_member="true" /><!-- Greater Relic Box -->
 		</drop_group>
-		<drop_group><!-- Named Amplification Stone -->
-			<drop item_id="166500002" chance="10" /><!-- Amplification Stone -->
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
 		</drop_group>
-		<drop_group><!-- Named Tempering Solution Chest -->
-			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950019" chance="5" /><!-- Special Courier Pass (Mythic/Lv.61-65) -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="186000409" min_amount="50" each_member="true" /><!-- Daeva's Respite Coin -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701915"><!-- B-Rank Chest -->
@@ -2547,12 +2652,6 @@
 		<drop_group><!-- Named Supply -->
 			<drop item_id="188052919" each_member="true" /><!-- Fortress Supplies -->
 		</drop_group>
-		<drop_group><!-- Named Serum Box -->
-			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
-		</drop_group>
-		<drop_group><!-- Named Plume Box -->
-			<drop item_id="188053295" chance="5" /><!-- Empyrean Plume Chest -->
-		</drop_group>
 	</npc_drop>
 	<!-- Krotan Barracks (Legion) -->
 	<npc_drop npc_id="702290">
@@ -2577,12 +2676,6 @@
 		</drop_group>
 		<drop_group><!-- Named Supply -->
 			<drop item_id="188052742" each_member="true" /><!-- Fortress Supplies -->
-		</drop_group>
-		<drop_group><!-- Named Serum Box -->
-			<drop item_id="188053083" chance="15" /><!-- Tempering Solution Chest -->
-		</drop_group>
-		<drop_group><!-- Named Plume Box -->
-			<drop item_id="188053295" chance="10" /><!-- Empyrean Plume Chest -->
 		</drop_group>
 	</npc_drop>
 	<!-- Krotan Chamber -->
@@ -2722,12 +2815,6 @@
 		<drop_group><!-- Named Supply -->
 			<drop item_id="188052919" each_member="true" /><!-- Fortress Supplies -->
 		</drop_group>
-		<drop_group><!-- Named Serum Box -->
-			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
-		</drop_group>
-		<drop_group><!-- Named Plume Box -->
-			<drop item_id="188053295" chance="5" /><!-- Empyrean Plume Chest -->
-		</drop_group>
 	</npc_drop>
 	<!-- Kysis Barracks (Legion) -->
 	<npc_drop npc_id="702294">
@@ -2752,12 +2839,6 @@
 		</drop_group>
 		<drop_group><!-- Named Supply -->
 			<drop item_id="188052742" each_member="true" /><!-- Fortress Supplies -->
-		</drop_group>
-		<drop_group><!-- Named Serum Box -->
-			<drop item_id="188053083" chance="15" /><!-- Tempering Solution Chest -->
-		</drop_group>
-		<drop_group><!-- Named Plume Box -->
-			<drop item_id="188053295" chance="10" /><!-- Empyrean Plume Chest -->
 		</drop_group>
 	</npc_drop>
 	<!-- Kysis Chamber -->
@@ -3113,12 +3194,6 @@
 		<drop_group><!-- Named Supply -->
 			<drop item_id="188052919" each_member="true" /><!-- Fortress Supplies -->
 		</drop_group>
-		<drop_group><!-- Named Serum Box -->
-			<drop item_id="188053083" chance="10" /><!-- Tempering Solution Chest -->
-		</drop_group>
-		<drop_group><!-- Named Plume Box -->
-			<drop item_id="188053295" chance="5" /><!-- Empyrean Plume Chest -->
-		</drop_group>
 	</npc_drop>
 	<!-- Miren Barracks (Legion) -->
 	<npc_drop npc_id="702298">
@@ -3143,12 +3218,6 @@
 		</drop_group>
 		<drop_group><!-- Named Supply -->
 			<drop item_id="188052742" each_member="true" /><!-- Fortress Supplies -->
-		</drop_group>
-		<drop_group><!-- Named Serum Box -->
-			<drop item_id="188053083" chance="15" /><!-- Tempering Solution Chest -->
-		</drop_group>
-		<drop_group><!-- Named Plume Box -->
-			<drop item_id="188053295" chance="10" /><!-- Empyrean Plume Chest -->
 		</drop_group>
 	</npc_drop>
 	<!-- Miren Chamber -->
@@ -4227,12 +4296,6 @@
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701541">
-		<drop_group><!-- Tempering Solution (Shared) -->
-			<drop item_id="166030005" chance="2.5" /><!-- Tempering Solution -->
-		</drop_group>
-		<drop_group><!-- Tempering Solution Chest (Shared) -->
-			<drop item_id="188053083" chance="2.5" each_member="true" /><!-- Tempering Solution Chest -->
-		</drop_group>
 		<drop_group><!-- Named Weapon (Unique) -->
 			<drop item_id="100101075" chance="60" /><!-- Tahabata's Mace -->
 			<drop item_id="100501086" chance="60" /><!-- Tahabata's Orb -->
@@ -4260,6 +4323,18 @@
 			<drop item_id="110501365" chance="62" /><!-- Tiamat Guard's Hauberk -->
 			<drop item_id="110551002" chance="62" /><!-- Tiamat Guard's Magic Hauberk -->
 			<drop item_id="110601338" chance="62" /><!-- Tiamat Guard's Breastplate -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950007" chance="5" /><!-- Special Courier Pass (Eternal/Lv.56-60) -->
 		</drop_group>
 	</npc_drop>
 	<!-- Unstable Abyssal Splinter -->
@@ -4319,6 +4394,12 @@
 			<drop item_id="112301278" chance="10" /><!-- Unstable Abyssal Shoulderguards -->
 			<drop item_id="112501267" chance="10" /><!-- Unstable Abyssal Spaulders -->
 			<drop item_id="112601286" chance="10" /><!-- Unstable Abyssal Shoulderplates -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone -->
+			<drop item_id="166500002" chance="10" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest -->
+			<drop item_id="188053083" chance="5" /><!-- Tempering Solution Chest -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="700861">
@@ -4395,6 +4476,12 @@
 			<drop item_id="111501327" chance="10" /><!-- Unstable Abyssal Handguards -->
 			<drop item_id="111301335" chance="10" /><!-- Unstable Abyssal Vambrace -->
 		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone -->
+			<drop item_id="166500002" chance="10" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest -->
+			<drop item_id="188053083" chance="5" /><!-- Tempering Solution Chest -->
+		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701578">
 		<drop_group><!-- Named Legion Coin -->
@@ -4434,6 +4521,12 @@
 			<drop item_id="114601292" chance="10" /><!-- Unstable Abyssal Sabatons -->
 			<drop item_id="114101388" chance="10" /><!-- Unstable Abyssal Shoes -->
 		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone -->
+			<drop item_id="166500002" chance="10" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest -->
+			<drop item_id="188053083" chance="5" /><!-- Tempering Solution Chest -->
+		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701579">
 		<drop_group><!-- Named Souvenir -->
@@ -4471,6 +4564,18 @@
 		</drop_group>
 		<drop_group><!-- Named Shield (Unique) -->
 			<drop item_id="115001463" chance="10" /><!-- Unstable Abyssal Shield -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950007" chance="5" /><!-- Special Courier Pass (Eternal/Lv.56-60) -->
 		</drop_group>
 	</npc_drop>
 	<npc_drop npc_id="701580">
@@ -4530,6 +4635,18 @@
 		</drop_group>
 		<drop_group><!-- Named Shield (Unique) -->
 			<drop item_id="115001463" chance="15" /><!-- Unstable Abyssal Shield -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Amplification Stone (Shared) -->
+			<drop item_id="166500002" chance="10" each_member="true" /><!-- Amplification Stone -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Tempering Solution Chest (Shared) -->
+			<drop item_id="188053083" chance="10" each_member="true" /><!-- Tempering Solution Chest -->
+		</drop_group>
+		<drop_group level_based_chance_reduction="true"><!-- Named Empyrean Plume Chest (Shared) -->
+			<drop item_id="188053295" chance="5" each_member="true" /><!-- Empyrean Plume Chest -->
+		</drop_group>
+		<drop_group><!-- Named Courier Pass -->
+			<drop item_id="188950007" chance="5" /><!-- Special Courier Pass (Eternal/Lv.56-60) -->
 		</drop_group>
 	</npc_drop>
 	<!-- Void Cube -->

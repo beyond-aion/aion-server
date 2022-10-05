@@ -41,6 +41,7 @@
 	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301300000" /><!-- Krotan_Barracks -->
+			<gd_map map_id="301260000" /><!-- Legions_Krotan_Barracks -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="233632" /><!-- Weakened Krotan Lord -->
@@ -53,6 +54,7 @@
 	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301280000" /><!-- Kysis_Barracks -->
+			<gd_map map_id="301240000" /><!-- Legions_Kysis_Barracks -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="233675" /><!-- Weakened Kysis Duke -->
@@ -65,6 +67,7 @@
 	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
 		<gd_maps>
 			<gd_map map_id="301290000" /><!-- Miren_Barracks -->
+			<gd_map map_id="301250000" /><!-- Legions_Miren_Barracks -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="233718" /><!-- Weakened Miren Prince -->
@@ -119,6 +122,16 @@
 			<gd_item id="186000409" min_count="32" /><!-- Daeva's Respite Coin -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Loyalty Coins" chance="100" member_limit="6">
+		<gd_maps>
+			<gd_map map_id="301360000" /><!-- Infernal_Danuar_Reliquary -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="234691" /><!-- Enraged Queen Modor -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="186000409" min_count="36" /><!-- Daeva's Respite Coin -->
+		</gd_items>
+	</gd_rule>
 	<!-- TODO: Padmarashka's Cave min_count="34" -->
-	<!-- TODO: Drakenspire Depths min_count="122 146 170" -->
 </global_rules>

@@ -1,5 +1,6 @@
 package instance.pvp;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -44,8 +45,11 @@ public class IronWallWarfrontInstance extends BasicPvpInstance {
 			reward.setBonusAp(2 * scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(100);
 			reward.setReward1(186000243, 9, 0); // Fragmented Ceramium
-			if (isBossKilled)
+			if (isBossKilled) {
 				reward.setReward2(188052729, 1, 0); // Eternal Bastion Warfront Reward Chest
+				if (Rnd.chance() < 5)
+					reward.setReward3(188950020, 1); // CUSTOM: Special Courier Pass (Abyss Mythic/Lv. 61-65)
+			}
 		} else {
 			reward.setBaseAp(instanceScore.getLoserApReward());
 			reward.setBonusAp(scorePoints / MAX_PLAYERS_PER_FACTION);

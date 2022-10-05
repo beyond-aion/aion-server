@@ -2,6 +2,7 @@ package instance.pvp;
 
 import java.util.List;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -205,6 +206,8 @@ public class EngulfedOphidanBridgeInstance extends BasicPvpInstance {
 			reward.setBonusAp(2 * scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(50);
 			reward.setReward1(188052681, 1, 0);
+			if (Rnd.chance() < 20)
+				reward.setReward2(188950017, 1, 0); // CUSTOM: Special Courier Pass (Abyss Eternal/Lv. 61-65)
 		} else {
 			reward.setBaseAp(instanceScore.getLoserApReward());
 			reward.setBonusAp(scorePoints / MAX_PLAYERS_PER_FACTION);

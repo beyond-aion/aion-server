@@ -22,7 +22,6 @@ import com.aionemu.gameserver.world.WorldPosition;
  * REINFORCE_MEMBER for 2 minutes
  * PREPARING for 1 minute
  * START_PROGRESS for 30 minutes
- *
  * PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE((byte) 1, 27));
  * 
  * @author xTz
@@ -157,6 +156,8 @@ public class KamarBattlefieldInstance extends BasicPvpInstance {
 			reward.setBonusAp(2 * scorePoints / MAX_PLAYERS_PER_FACTION);
 			reward.setBaseGp(100);
 			reward.setReward1(188052670, 1, 0); // Kamar Victory Box
+			if (isBossKilled && Rnd.chance() < 5)
+				reward.setReward2(188950020, 1, 0); // CUSTOM: Special Courier Pass (Abyss Mythic/Lv. 61-65)
 		} else {
 			reward.setBaseAp(instanceScore.getLoserApReward());
 			reward.setBonusAp(scorePoints / MAX_PLAYERS_PER_FACTION);

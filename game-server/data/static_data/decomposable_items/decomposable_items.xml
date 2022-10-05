@@ -27293,17 +27293,17 @@
 	<decomposable item_id="188053028" /><!-- Infused Idian Shugo Box: Spell Resist -->
 	<decomposable item_id="188053029" /><!-- Infused Spring Box -->
 	<decomposable item_id="188053030"><!-- Idgel Dome Reward Box -->
-		<items chance="35">
+		<items chance="40">
 			<item id="152012598" min_count="2" /><!-- Heart of Destruction -->
 		</items>
-		<items chance="35">
+		<items chance="40">
 			<item id="152012599" min_count="2" /><!-- Heart of Protection -->
 		</items>
-		<items chance="15">
+		<items chance="10">
 			<item id="152012598" min_count="2" /><!-- Heart of Destruction -->
 			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</items>
-		<items chance="15">
+		<items chance="10">
 			<item id="152012599" min_count="2" /><!-- Heart of Protection -->
 			<item id="188950017" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
 		</items>

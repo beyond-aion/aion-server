@@ -469,6 +469,7 @@
 			<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
 			<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
 			<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
+			<gd_map map_id="300630000" /><!-- Anguished_Dragon_Lords_Refuge -->
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
@@ -508,9 +509,12 @@
 			<gd_npc npc_id="216157" /><!-- Captain Lakhara -->
 			<gd_npc npc_id="216241" /><!-- Manadar -->
 			<gd_npc npc_id="216160" /><!-- Manadar -->
-			<gd_npc npc_id="216735" /><!-- Macunbello -->
+			<gd_npc npc_id="216733" /><!-- Macunbello -->
 			<gd_npc npc_id="216734" /><!-- Macunbello -->
+			<gd_npc npc_id="216735" /><!-- Macunbello -->
+			<gd_npc npc_id="216736" /><!-- Macunbello -->
 			<gd_npc npc_id="216737" /><!-- Macunbello -->
+			<gd_npc npc_id="216738" /><!-- Macunbello -->
 			<gd_npc npc_id="216245" /><!-- Macunbello -->
 			<gd_npc npc_id="216244" /><!-- The Plaguebearer -->
 			<gd_npc npc_id="216163" /><!-- The Plaguebearer -->
@@ -526,12 +530,6 @@
 			<gd_npc npc_id="216167" /><!-- Taros Lifebane -->
 			<gd_npc npc_id="216263" /><!-- Isbariya the Resolute -->
 			<gd_npc npc_id="216182" /><!-- Isbariya the Resolute -->
-			<gd_npc npc_id="216159" /><!-- The Soulcaller -->
-			<gd_npc npc_id="216240" /><!-- The Soulcaller -->
-			<gd_npc npc_id="216166" /><!-- Shadowshift -->
-			<gd_npc npc_id="216247" /><!-- Shadowshift -->
-			<gd_npc npc_id="216525" /><!-- Thurzon the Undying -->
-			<gd_npc npc_id="216590" /><!-- Temadaro -->
 			<gd_npc npc_id="216249" /><!-- Flarestorm -->
 			<gd_npc npc_id="216168" /><!-- Flarestorm -->
 			<!-- Rentus Base -->
@@ -553,86 +551,106 @@
 			<gd_npc npc_id="219357" /><!-- Adjutant Anuhart -->
 			<!-- Dragon Lords Refuge -->
 			<gd_npc npc_id="219359" /><!-- Calindi Flamelord -->
+			<!-- Anguished Dragon Lord's Refuge -->
+			<gd_npc npc_id="236274" /><!-- Calindi Flamelord -->
 			<!-- Ophidan Bridge -->
 			<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
 			<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
 			<!-- Sauro Supply Base -->
 			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
-			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
-			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
 			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
 			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
-			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
 			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
-			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="166500002" /><!-- Amplification Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Amplification Stone (Multi)" chance="6" dynamic_chance="true" member_limit="192" level_based_chance_reduction="true">
+	<gd_rule rule_name="Amplification Stone (Multi)" chance="8" dynamic_chance="true" member_limit="192" level_based_chance_reduction="true">
 		<gd_maps>
-			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
-			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 			<gd_map map_id="320150000" /><!-- Padmarashkas_Cave -->
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 			<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
-			<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
-			<gd_map map_id="301140000" /><!-- Danuar_Sanctuary -->
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
+			<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
+			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
+			<gd_map map_id="301360000" /><!-- Infernal_Danuar_Reliquary -->
+			<gd_map map_id="301140000" /><!-- Danuar_Sanctuary -->
+			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 			<gd_map map_id="300800000" /><!-- Infinity_Shard -->
-			<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
-			<gd_map map_id="300540000" /><!-- The_Eternal_Bastion -->
+			<gd_map map_id="300700000" /><!-- The_Hexway -->
+			<gd_map map_id="301260000" /><!-- Legions_Krotan_Barracks -->
+			<gd_map map_id="301280000" /><!-- Kysis_Barracks -->
+			<gd_map map_id="301240000" /><!-- Legions_Kysis_Barracks -->
+			<gd_map map_id="301290000" /><!-- Miren_Barracks -->
+			<gd_map map_id="301250000" /><!-- Legions_Miren_Barracks -->
 		</gd_maps>
 		<gd_npcs>
-			<!-- Theobomos Lab -->
-			<gd_npc npc_id="214669" /><!-- Unstable Triroan -->
-			<!-- Adma Stronghold -->
-			<gd_npc npc_id="214696" /><!-- Lord Lannok -->
 			<!-- Dark Poeta -->
-			<gd_npc npc_id="215284" /><!-- Chramati Firetail -->
-			<gd_npc npc_id="215283" /><!-- Asaratu Bloodshade -->
-			<gd_npc npc_id="215282" /><!-- Vanuka Infernus -->
 			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
 			<gd_npc npc_id="217166" /><!-- Tahabata Pyrelord -->
+			<!-- Esoterrace -->
+			<gd_npc npc_id="217204" /><!-- Kexkra -->
+			<gd_npc npc_id="217206" /><!-- Warden Surama -->
 			<!-- Udas Temple -->
 			<gd_npc npc_id="215793" /><!-- Devoted Anurati -->
 			<!-- Lower Udas Temple -->
-			<gd_npc npc_id="215795" /><!-- Debilkarim the Maker -->
-			<!-- Beshmundir Temple -->
+			<gd_npc npc_id="215795" /><!-- Debilkarim the maker -->
+			<!-- Beshmundirs Temple -->
 			<gd_npc npc_id="216183" /><!-- Stormwing -->
 			<gd_npc npc_id="216264" /><!-- Stormwing -->
 			<!-- Padmarashkas Cave -->
-			<gd_npc npc_id="216580" /><!-- Padmarashka -->
 			<gd_npc npc_id="218756" /><!-- Padmarashka -->
 			<!-- Rentus Base -->
 			<gd_npc npc_id="218614" /><!-- Brigade General Vasharti -->
 			<!-- Occupied Rentus Base -->
 			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
-			<!-- Tiamat Stronghold -->
-			<gd_npc npc_id="219358" /><!-- Brigade General Tahabata -->
-			<!-- Danuar Sanctuary -->
-			<gd_npc npc_id="233089" /><!-- Chief Medic Tagnu -->
-			<gd_npc npc_id="233090" /><!-- Virulent Ukahim -->
-			<gd_npc npc_id="233086" /><!-- Warmage Suyaroka -->
 			<!-- Ophidan Bridge -->
 			<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+			<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
+			<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
 			<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
+			<!-- Illuminary Obelisk -->
+			<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
+			<!-- Infernal Illuminary Obelisk -->
+			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
+			<!-- Infernal Danuar Reliquary -->
+			<gd_npc npc_id="234691" /><!-- Enraged Queen Modor -->
+			<!-- Danuar Sanctuary -->
+			<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
+			<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
+			<!-- Seized Danuar Sanctuary -->
+			<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
+			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
 			<!-- Sauro Supply Base -->
 			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
 			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 			<!-- Infinity Shard -->
 			<gd_npc npc_id="231073" /><!-- Hyperion -->
-			<!-- Illuminary Obelisk -->
-			<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
-			<!-- Eternal Bastion -->
-			<gd_npc npc_id="231130" /><!-- Grand Commander Pashid -->
+			<!-- The Hexway -->
+			<gd_npc npc_id="219609" /><!-- Captain Jarka -->
+			<!-- Krotan Barracks -->
+			<gd_npc npc_id="233632" /><!-- Weakened Krotan Lord -->
+			<gd_npc npc_id="233633" /><!-- Enraged Krotan Lord -->
+			<!-- Kysis Barracks -->
+			<gd_npc npc_id="233675" /><!-- Weakened Kysis Duke -->
+			<gd_npc npc_id="233676" /><!-- Enraged Kysis Duke -->
+			<!-- Miren Barracks -->
+			<gd_npc npc_id="233718" /><!-- Weakened Miren Prince -->
+			<gd_npc npc_id="233719" /><!-- Enraged Miren Prince -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="166500002" /><!-- Amplification Stone -->
@@ -672,90 +690,200 @@
 			<gd_item id="166020000" /><!-- Omega Enchantment Stone -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Tempering Solution (Single)" chance="6" dynamic_chance="true" level_based_chance_reduction="true">
-		<gd_maps>
-			<gd_map map_id="320100000" /><!-- Fire_Temple -->
-			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
-			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
-			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
-			<gd_map map_id="301140000" /><!-- Danuar_Sanctuary -->
-			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
-			<gd_map map_id="301110000" /><!-- Danuar_Reliquary -->
-			<gd_map map_id="300800000" /><!-- Infinity_Shard -->
-			<gd_map map_id="301280000" /><!-- Kysis_Barracks -->
-			<gd_map map_id="301290000" /><!-- Miren_Barracks -->
-			<gd_map map_id="301300000" /><!-- Krotan_Barracks -->
-			<gd_map map_id="301240000" /><!-- Legions_Kysis_Barracks -->
-			<gd_map map_id="301250000" /><!-- Legions_Miren_Barracks -->
-			<gd_map map_id="301260000" /><!-- Legions_Krotan_Barracks -->
-		</gd_maps>
-		<gd_npcs>
-			<!-- Fire Temple -->
-			<gd_npc npc_id="212846" /><!-- Kromede the Corrupt -->
-			<gd_npc npc_id="214621" /><!-- Vile Judge Kromede -->
-			<!-- Dark Poeta -->
-			<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
-			<!-- Beshmundir Temple -->
-			<gd_npc npc_id="216183" /><!-- Stormwing -->
-			<gd_npc npc_id="216264" /><!-- Stormwing -->
-			<!-- Sauro Supply Base -->
-			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
-			<!-- Danuar Sanctuary -->
-			<gd_npc npc_id="233089" /><!-- Chief Medic Tagnu -->
-			<!-- Ophidan Bridge -->
-			<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
-			<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
-			<!-- Danuar Reliquary -->
-			<gd_npc npc_id="231305" /><!-- Enraged Queen Modor -->
-			<!-- Infinity Shard -->
-			<gd_npc npc_id="231073" /><!-- Hyperion -->
-			<!-- (Legions) Kysis Barracks -->
-			<gd_npc npc_id="233675" /><!-- Weakened Kysis Duke -->
-			<gd_npc npc_id="233676" /><!-- Enraged Kysis Duke -->
-			<!-- (Legions) Miren Barracks -->
-			<gd_npc npc_id="233718" /><!-- Weakend Miren Prince -->
-			<gd_npc npc_id="233719" /><!-- Enraged Miren Prince -->
-			<!-- (Legions) Krotan Barracks -->
-			<gd_npc npc_id="233632" /><!-- Weakened Krotan Lord -->
-			<gd_npc npc_id="233633" /><!-- Enraged Krotan Lord -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="166030005" /><!-- Tempering Solution -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Tempering Solution Chest (Shared)" chance="6" dynamic_chance="true" member_limit="192" level_based_chance_reduction="true">
+	<gd_rule rule_name="Tempering Solution Chest (Single)" chance="6" dynamic_chance="true" level_based_chance_reduction="true">
 		<gd_maps>
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
-			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
+			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+			<gd_map map_id="300150000" /><!-- Udas_Temple -->
+			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 			<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
-			<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
-			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
-			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
+			<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
+			<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
+			<gd_map map_id="300630000" /><!-- Anguished_Dragon_Lords_Refuge -->
+			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
 			<!-- Theobomos Lab -->
-			<gd_npc npc_id="214669" /><!-- Unstable Triroan -->
-			<!-- Draupnir Cave -->
-			<gd_npc npc_id="213780" /><!-- Commander Bakarma -->
+			<gd_npc npc_id="214663" /><!-- Torch Spirit Iprita -->
+			<gd_npc npc_id="214664" /><!-- Wistful Syripne -->
+			<gd_npc npc_id="214665" /><!-- Soul Spirit Nomura -->
+			<gd_npc npc_id="214666" /><!-- Water Spirit Undine -->
+			<gd_npc npc_id="214668" /><!-- Silikor of Memory -->
+			<!-- Adma Stronghold -->
+			<gd_npc npc_id="214691" /><!-- Captain Mundirve -->
+			<gd_npc npc_id="214692" /><!-- Butler Luitart -->
+			<gd_npc npc_id="214693" /><!-- Chief Maid Miladi -->
+			<gd_npc npc_id="214694" /><!-- Bloodthirster -->
+			<gd_npc npc_id="214695" /><!-- Princess Karemiwen -->
+			<!-- Dark Poeta -->
+			<gd_npc npc_id="214843" /><!-- Spiritmaster Atmach -->
+			<gd_npc npc_id="214864" /><!-- Noah's Furious Shade -->
+			<gd_npc npc_id="215386" /><!-- Professor Hewahewa -->
+			<gd_npc npc_id="215387" /><!-- Spectral Elim Elder -->
+			<gd_npc npc_id="215388" /><!-- Spaller Rakanatra -->
+			<gd_npc npc_id="215389" /><!-- Spaller Dhatra -->
+			<gd_npc npc_id="214880" /><!-- Spaller Echtra -->
+			<gd_npc npc_id="214895" /><!-- Main Power Generator -->
+			<gd_npc npc_id="214896" /><!-- Auxiliary Power Generator -->
+			<gd_npc npc_id="214897" /><!-- Emergency Generator -->
+			<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
+			<!-- Udas Temple -->
+			<gd_npc npc_id="215782" /><!-- Vallakhan -->
+			<gd_npc npc_id="215783" /><!-- Nexus -->
+			<!-- Lower Udas Temple -->
+			<gd_npc npc_id="215784" /><!-- Chura Twinblade -->
+			<gd_npc npc_id="215792" /><!-- Kingspin -->
+			<!-- Beshmundir Temple -->
+			<gd_npc npc_id="216238" /><!-- Captain Lakhara -->
+			<gd_npc npc_id="216157" /><!-- Captain Lakhara -->
+			<gd_npc npc_id="216241" /><!-- Manadar -->
+			<gd_npc npc_id="216160" /><!-- Manadar -->
+			<gd_npc npc_id="216733" /><!-- Macunbello -->
+			<gd_npc npc_id="216734" /><!-- Macunbello -->
+			<gd_npc npc_id="216735" /><!-- Macunbello -->
+			<gd_npc npc_id="216736" /><!-- Macunbello -->
+			<gd_npc npc_id="216737" /><!-- Macunbello -->
+			<gd_npc npc_id="216738" /><!-- Macunbello -->
+			<gd_npc npc_id="216245" /><!-- Macunbello -->
+			<gd_npc npc_id="216244" /><!-- The Plaguebearer -->
+			<gd_npc npc_id="216163" /><!-- The Plaguebearer -->
+			<gd_npc npc_id="216242" /><!-- Vehala the Cursed -->
+			<gd_npc npc_id="216161" /><!-- Vehala the Cursed -->
+			<gd_npc npc_id="216158" /><!-- Ahbana the Wicked -->
+			<gd_npc npc_id="216239" /><!-- Ahbana the Wicked -->
+			<gd_npc npc_id="216246" /><!-- The Great Virhana -->
+			<gd_npc npc_id="216165" /><!-- The Great Virhana -->
+			<gd_npc npc_id="216250" /><!-- Dorakiki the Bold -->
+			<gd_npc npc_id="216169" /><!-- Dorakiki the Bold -->
+			<gd_npc npc_id="216248" /><!-- Taros Lifebane -->
+			<gd_npc npc_id="216167" /><!-- Taros Lifebane -->
+			<gd_npc npc_id="216263" /><!-- Isbariya the Resolute -->
+			<gd_npc npc_id="216182" /><!-- Isbariya the Resolute -->
+			<gd_npc npc_id="216249" /><!-- Flarestorm -->
+			<gd_npc npc_id="216168" /><!-- Flarestorm -->
+			<!-- Rentus Base -->
+			<gd_npc npc_id="217308" /><!-- Tarotran -->
+			<gd_npc npc_id="217316" /><!-- Ambusher Kiriana -->
+			<gd_npc npc_id="217309" /><!-- Captain Xasta -->
+			<gd_npc npc_id="217311" /><!-- Kuhara the Volatile -->
+			<gd_npc npc_id="217317" /><!-- Archmagus Upadi -->
+			<!-- Occupied Rentus Base -->
+			<gd_npc npc_id="236301" /><!-- Ambusher Kiriana -->
+			<gd_npc npc_id="236302" /><!-- Archmagus Upadi -->
+			<gd_npc npc_id="236297" /><!-- Captain Xasta -->
+			<!-- Tiamat Stronghold -->
+			<gd_npc npc_id="219352" /><!-- Invincible Shabokan -->
+			<gd_npc npc_id="219353" /><!-- Brigade General Chantra -->
+			<gd_npc npc_id="219354" /><!-- Brigade General Terath -->
+			<gd_npc npc_id="219355" /><!-- Traitor Kumbanda -->
+			<gd_npc npc_id="219356" /><!-- Brigade General Laksyaka -->
+			<gd_npc npc_id="219357" /><!-- Adjutant Anuhart -->
+			<!-- Dragon Lords Refuge -->
+			<gd_npc npc_id="219359" /><!-- Calindi Flamelord -->
+			<!-- Anguished Dragon Lord's Refuge -->
+			<gd_npc npc_id="236274" /><!-- Calindi Flamelord -->
+			<!-- Ophidan Bridge -->
+			<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+			<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
+			<!-- Sauro Supply Base -->
+			<gd_npc npc_id="230849" /><!-- Guard Captain Rohuka -->
+			<gd_npc npc_id="230850" /><!-- Researcher Teselik -->
+			<gd_npc npc_id="230851" /><!-- Chief Gunner Kurmata -->
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
+			<gd_npc npc_id="230853" /><!-- Chief of Staff Moriata -->
+			<gd_npc npc_id="233255" /><!-- Gatekeeper Stranir -->
+			<gd_npc npc_id="233256" /><!-- Darkblade Ovanuka -->
+			<gd_npc npc_id="233257" /><!-- Archmagus Sayahum -->
+			<gd_npc npc_id="233258" /><!-- Derakanak the Reaver -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="188053083" /><!-- Tempering Solution Chest -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Tempering Solution Chest (Shared)" chance="6" dynamic_chance="true" member_limit="192" level_based_chance_reduction="true">
+		<gd_maps>
+			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
+			<gd_map map_id="300150000" /><!-- Udas_Temple -->
+			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
+			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
+			<gd_map map_id="320150000" /><!-- Padmarashkas_Cave -->
+			<gd_map map_id="300280000" /><!-- Rentus_Base -->
+			<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
+			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
+			<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
+			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
+			<gd_map map_id="301360000" /><!-- Infernal_Danuar_Reliquary -->
+			<gd_map map_id="301140000" /><!-- Danuar_Sanctuary -->
+			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
+			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
+			<gd_map map_id="300800000" /><!-- Infinity_Shard -->
+			<gd_map map_id="300700000" /><!-- The_Hexway -->
+			<gd_map map_id="301260000" /><!-- Legions_Krotan_Barracks -->
+			<gd_map map_id="301280000" /><!-- Kysis_Barracks -->
+			<gd_map map_id="301240000" /><!-- Legions_Kysis_Barracks -->
+			<gd_map map_id="301290000" /><!-- Miren_Barracks -->
+			<gd_map map_id="301250000" /><!-- Legions_Miren_Barracks -->
+		</gd_maps>
+		<gd_npcs>
 			<!-- Dark Poeta -->
 			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
 			<gd_npc npc_id="217166" /><!-- Tahabata Pyrelord -->
+			<!-- Esoterrace -->
+			<gd_npc npc_id="217204" /><!-- Kexkra -->
+			<gd_npc npc_id="217206" /><!-- Warden Surama -->
+			<!-- Udas Temple -->
+			<gd_npc npc_id="215793" /><!-- Devoted Anurati -->
+			<!-- Lower Udas Temple -->
+			<gd_npc npc_id="215795" /><!-- Debilkarim the maker -->
+			<!-- Beshmundirs Temple -->
+			<gd_npc npc_id="216183" /><!-- Stormwing -->
+			<gd_npc npc_id="216264" /><!-- Stormwing -->
+			<!-- Padmarashkas Cave -->
+			<gd_npc npc_id="218756" /><!-- Padmarashka -->
 			<!-- Rentus Base -->
 			<gd_npc npc_id="218614" /><!-- Brigade General Vasharti -->
 			<!-- Occupied Rentus Base -->
 			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
+			<!-- Ophidan Bridge -->
+			<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+			<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
+			<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
+			<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
 			<!-- Illuminary Obelisk -->
 			<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
-			<!-- Adma Stronghold -->
-			<gd_npc npc_id="214696" /><!-- Lord Lannok -->
-			<!-- Beshmundir Temple (HM) -->
-			<gd_npc npc_id="216182" /><!-- Isbariya the Resolute -->
+			<!-- Infernal Illuminary Obelisk -->
+			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
+			<!-- Infernal Danuar Reliquary -->
+			<gd_npc npc_id="234691" /><!-- Enraged Queen Modor -->
+			<!-- Danuar Sanctuary -->
+			<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
+			<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
+			<!-- Seized Danuar Sanctuary -->
+			<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
+			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
 			<!-- Sauro Supply Base -->
 			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
 			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+			<!-- Infinity Shard -->
+			<gd_npc npc_id="231073" /><!-- Hyperion -->
+			<!-- The Hexway -->
+			<gd_npc npc_id="219609" /><!-- Captain Jarka -->
+			<!-- Krotan Barracks -->
+			<gd_npc npc_id="233632" /><!-- Weakened Krotan Lord -->
+			<gd_npc npc_id="233633" /><!-- Enraged Krotan Lord -->
+			<!-- Kysis Barracks -->
+			<gd_npc npc_id="233675" /><!-- Weakened Kysis Duke -->
+			<gd_npc npc_id="233676" /><!-- Enraged Kysis Duke -->
+			<!-- Miren Barracks -->
+			<gd_npc npc_id="233718" /><!-- Weakened Miren Prince -->
+			<gd_npc npc_id="233719" /><!-- Enraged Miren Prince -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053083" /><!-- Tempering Solution Chest -->
@@ -772,7 +900,7 @@
 			<gd_item id="188053295" /><!-- Empyrean Plume Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Empyrean Plume Chest (Single)" chance="2">
+	<gd_rule rule_name="Empyrean Plume Chest (Single)" chance="3">
 		<gd_maps>
 			<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
 		</gd_maps>
@@ -783,13 +911,14 @@
 			<gd_item id="188053295" /><!-- Empyrean Plume Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Empyrean Plume Chest (Single)" chance="3" level_based_chance_reduction="true">
+	<gd_rule rule_name="Empyrean Plume Chest (Single)" chance="5" level_based_chance_reduction="true">
 		<gd_maps>
 			<gd_map map_id="320100000" /><!-- Fire_Temple -->
 			<gd_map map_id="320080000" /><!-- Draupnir_Cave -->
 			<gd_map map_id="310090000" /><!-- Indratu_Fortress -->
 			<gd_map map_id="310110000" /><!-- Theobomos_Lab -->
 			<gd_map map_id="320130000" /><!-- Adma_Stronghold -->
+			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 			<gd_map map_id="301270000" /><!-- Linkgate_Foundry -->
 		</gd_maps>
 		<gd_npcs>
@@ -804,6 +933,8 @@
 			<gd_npc npc_id="214669" /><!-- Unstable Triroan -->
 			<!-- Adma Stronghold -->
 			<gd_npc npc_id="214696" /><!-- Lord Lannok -->
+			<!-- Talloc's Hollow -->
+			<gd_npc npc_id="215488" /><!-- Celestius -->
 			<!-- Linkgate Foundry -->
 			<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
 		</gd_npcs>
@@ -811,28 +942,38 @@
 			<gd_item id="188053295" /><!-- Empyrean Plume Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Empyrean Plume Chest (Shared)" chance="3" member_limit="192" level_based_chance_reduction="true">
+	<gd_rule rule_name="Empyrean Plume Chest (Shared)" chance="5" member_limit="192" level_based_chance_reduction="true">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 			<gd_map map_id="320150000" /><!-- Padmarashkas_Cave -->
-			<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
 			<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 			<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
+			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
+			<gd_map map_id="301360000" /><!-- Infernal_Danuar_Reliquary -->
 			<gd_map map_id="301140000" /><!-- Danuar_Sanctuary -->
+			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 			<gd_map map_id="300800000" /><!-- Infinity_Shard -->
-			<gd_map map_id="301110000" /><!-- Danuar_Reliquary -->
-			<gd_map map_id="301340000" /><!-- Linkgate_Foundry -->
+			<gd_map map_id="300700000" /><!-- The_Hexway -->
+			<gd_map map_id="301260000" /><!-- Legions_Krotan_Barracks -->
+			<gd_map map_id="301280000" /><!-- Kysis_Barracks -->
+			<gd_map map_id="301240000" /><!-- Legions_Kysis_Barracks -->
+			<gd_map map_id="301290000" /><!-- Miren_Barracks -->
+			<gd_map map_id="301250000" /><!-- Legions_Miren_Barracks -->
 		</gd_maps>
 		<gd_npcs>
 			<!-- Dark Poeta -->
 			<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
 			<gd_npc npc_id="217166" /><!-- Tahabata Pyrelord -->
+			<!-- Esoterrace -->
+			<gd_npc npc_id="217204" /><!-- Kexkra -->
+			<gd_npc npc_id="217206" /><!-- Warden Surama -->
 			<!-- Udas Temple -->
 			<gd_npc npc_id="215793" /><!-- Devoted Anurati -->
 			<!-- Lower Udas Temple -->
@@ -842,34 +983,51 @@
 			<gd_npc npc_id="216264" /><!-- Stormwing -->
 			<!-- Padmarashkas Cave -->
 			<gd_npc npc_id="218756" /><!-- Padmarashka -->
-			<!-- Tiamat Stronghold -->
-			<gd_npc npc_id="219358" /><!-- Brigade General Tahabata -->
 			<!-- Rentus Base -->
 			<gd_npc npc_id="218614" /><!-- Brigade General Vasharti -->
 			<!-- Occupied Rentus Base -->
 			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 			<!-- Ophidan Bridge -->
 			<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
+			<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
+			<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
 			<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
 			<!-- Illuminary Obelisk -->
 			<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
+			<!-- Infernal Illuminary Obelisk -->
+			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
+			<!-- Infernal Danuar Reliquary -->
+			<gd_npc npc_id="234691" /><!-- Enraged Queen Modor -->
 			<!-- Danuar Sanctuary -->
-			<gd_npc npc_id="233090" /><!-- Virulent Ukahim -->
+			<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
+			<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
+			<!-- Seized Danuar Sanctuary -->
+			<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
+			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
+			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
 			<!-- Sauro Supply Base -->
 			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
 			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
 			<!-- Infinity Shard -->
 			<gd_npc npc_id="231073" /><!-- Hyperion -->
-			<!-- Danuar Reliquary -->
-			<gd_npc npc_id="231305" /><!-- Enraged Queen Modor -->
-			<!-- Linkgate Foundry -->
-			<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
+			<!-- The Hexway -->
+			<gd_npc npc_id="219609" /><!-- Captain Jarka -->
+			<!-- Krotan Barracks -->
+			<gd_npc npc_id="233632" /><!-- Weakened Krotan Lord -->
+			<gd_npc npc_id="233633" /><!-- Enraged Krotan Lord -->
+			<!-- Kysis Barracks -->
+			<gd_npc npc_id="233675" /><!-- Weakened Kysis Duke -->
+			<gd_npc npc_id="233676" /><!-- Enraged Kysis Duke -->
+			<!-- Miren Barracks -->
+			<gd_npc npc_id="233718" /><!-- Weakened Miren Prince -->
+			<gd_npc npc_id="233719" /><!-- Enraged Miren Prince -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188053295" /><!-- Empyrean Plume Chest -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Courier Pass Lv.50" chance="4">
+	<gd_rule rule_name="Courier Pass Lv.50" chance="5">
 		<gd_maps>
 			<gd_map map_id="300040000" /><!-- Dark_Poeta -->
 		</gd_maps>
@@ -877,17 +1035,20 @@
 			<gd_npc npc_id="217166" /><!-- Tahabata Pyrelord -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="188950002" /><!-- Special Courier Pass (Mythic/Lv.50 and lower) -->
+			<gd_item id="188950002" /><!-- Special Courier Pass (Fabled/Lv.50 and lower) -->
 			<gd_item id="188950005" /><!-- Special Courier Pass (Eternal/Lv.50 and lower) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Fabled Courier Pass Lv.51-55" chance="4">
+	<gd_rule rule_name="Fabled Courier Pass Lv.51-55" chance="5">
 		<gd_maps>
+			<gd_map map_id="300250000" /><!-- Esoterrace -->
 			<gd_map map_id="300190000" /><!-- Talocs_Hollow -->
 			<gd_map map_id="300150000" /><!-- Udas_Temple -->
 			<gd_map map_id="300160000" /><!-- Lower_Udas_Temple -->
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="217204" /><!-- Kexkra -->
+			<gd_npc npc_id="217206" /><!-- Warden Surama -->
 			<gd_npc npc_id="215488" /><!-- Celestius -->
 			<gd_npc npc_id="215793" /><!-- Devoted Anurati -->
 			<gd_npc npc_id="215795" /><!-- Debilkarim The Maker -->
@@ -896,7 +1057,7 @@
 			<gd_item id="188950003" /><!-- Special Courier Pass (Fabled/Lv.51-55) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Eternal Courier Pass Lv.51-55" chance="4">
+	<gd_rule rule_name="Eternal Courier Pass Lv.51-55" chance="5">
 		<gd_maps>
 			<gd_map map_id="300170000" /><!-- Beshmundir_Temple -->
 			<gd_map map_id="320150000" /><!-- Padmarashkas_Cave -->
@@ -909,44 +1070,43 @@
 			<gd_item id="188950006" /><!-- Special Courier Pass (Eternal/Lv.51-55) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Eternal Courier Pass Lv.56-60" chance="4">
+	<gd_rule rule_name="Eternal Courier Pass Lv.56-60" chance="5">
 		<gd_maps>
 			<gd_map map_id="300280000" /><!-- Rentus_Base -->
-			<gd_map map_id="300510000" /><!-- Tiamat_Stronghold -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="217313" /><!-- Brigade General Vasharti -->
-			<gd_npc npc_id="701541" /><!-- Tahabata's Treasure Chest -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188950007" /><!-- Special Courier Pass (Eternal/Lv.56-60) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mythic Courier Pass Lv.56-60" chance="4">
-		<gd_maps>
-			<gd_map map_id="300520000" /><!-- Dragon_Lords_Refuge -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="701542" /><!-- Tiamat's Huge Treasure Crate -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="188950018" /><!-- Special Courier Pass (Mythic/Lv.56-60) -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Eternal Courier Pass Lv.61-65" chance="4">
+	<gd_rule rule_name="Eternal Courier Pass Lv.61-65" chance="5">
 		<gd_maps>
 			<gd_map map_id="300610000" /><!-- Raksang_Ruins -->
+			<gd_map map_id="301300000" /><!-- Krotan_Barracks -->
+			<gd_map map_id="301260000" /><!-- Legions_Krotan_Barracks -->
+			<gd_map map_id="301280000" /><!-- Kysis_Barracks -->
+			<gd_map map_id="301240000" /><!-- Legions_Kysis_Barracks -->
+			<gd_map map_id="301290000" /><!-- Miren_Barracks -->
+			<gd_map map_id="301250000" /><!-- Legions_Miren_Barracks -->
 			<gd_map map_id="301380000" /><!-- Danuar_Sanctuary -->
 			<gd_map map_id="300590000" /><!-- Ophidan_Bridge -->
 			<gd_map map_id="301340000" /><!-- Linkgate_Foundry -->
 			<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
-			<gd_map map_id="301110000" /><!-- Danuar_Reliquary -->
 			<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
 			<gd_map map_id="301140000" /><!-- Seized_Danuar_Sanctuary -->
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
+			<gd_map map_id="300700000" /><!-- The_Hexway -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="236306" /><!-- Reviver Nasto -->
+			<gd_npc npc_id="233632" /><!-- Weakened Krotan Lord -->
+			<gd_npc npc_id="233633" /><!-- Enraged Krotan Lord -->
+			<gd_npc npc_id="233675" /><!-- Weakened Kysis Duke -->
+			<gd_npc npc_id="233676" /><!-- Enraged Kysis Duke -->
+			<gd_npc npc_id="233718" /><!-- Weakened Miren Prince -->
+			<gd_npc npc_id="233719" /><!-- Enraged Miren Prince -->
 			<gd_npc npc_id="235624" /><!-- Warmage Suyaroka -->
 			<gd_npc npc_id="235625" /><!-- Chief Medic Tagnu -->
 			<gd_npc npc_id="235626" /><!-- Virulent Ukahim -->
@@ -956,36 +1116,28 @@
 			<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
 			<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
 			<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
-			<gd_npc npc_id="701795" /><!-- Treasure Box -->
 			<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
-			<gd_npc npc_id="833048" /><!-- Rentus Quality Supplies Story Box -->
 			<gd_npc npc_id="235619" /><!-- Warmage Suyaroka -->
 			<gd_npc npc_id="235620" /><!-- Chief Medic Tagnu -->
 			<gd_npc npc_id="235621" /><!-- Virulent Ukahim -->
 			<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
 			<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+			<gd_npc npc_id="219609" /><!-- Captain Jarka -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188950015" /><!-- Special Courier Pass (Eternal/Lv.61-65) -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Mythic Courier Pass Lv.61-65" chance="4">
+	<gd_rule rule_name="Mythic Courier Pass Lv.61-65" chance="5">
 		<gd_maps>
 			<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 			<gd_map map_id="301360000" /><!-- Infernal_Danuar_Reliquary -->
 			<gd_map map_id="300800000" /><!-- Infinity_Shard -->
-			<gd_map map_id="300630000" /><!-- Anguished_Dragon_Lords_Refuge -->
-			<gd_map map_id="301390000" /><!-- Drakenspire_Depths -->
-			<gd_map map_id="301360000" /><!-- Infernal_Danuar_Reliquary -->
 		</gd_maps>
 		<gd_npcs>
 			<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
-			<gd_npc npc_id="284376" /><!-- Enraged Queen Modor -->
+			<gd_npc npc_id="234691" /><!-- Enraged Queen Modor -->
 			<gd_npc npc_id="231073" /><!-- Hyperion -->
-			<gd_npc npc_id="702729" /><!-- Tiamat's Huge Treasure Crate -->
-			<gd_npc npc_id="833013" /><!-- Cloak of Balaur Lord Beritra -->
-			<gd_npc npc_id="833015" /><!-- Sacred Beast of Balaur Lord Beritra -->
-			<gd_npc npc_id="701913" /><!-- Bastion's Eternal Treasure -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188950019" /><!-- Special Courier Pass (Mythic/Lv.61-65) -->

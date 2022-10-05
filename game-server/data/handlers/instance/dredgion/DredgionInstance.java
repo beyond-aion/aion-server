@@ -122,13 +122,9 @@ public class DredgionInstance extends GeneralInstanceHandler {
 		if (reward.getRace() == winningRace) {
 			reward.setBaseAp(instanceScore.getWinnerApReward());
 			reward.setBonusAp(2 * scorePoints / MAX_PLAYERS_PER_FACTION);
-			reward.setReward1(186000242, 1, 0); // CUSTOM: Ceramium Medal
-			if (Rnd.chance() < 30)
-				reward.setReward2(188053030, 1, 0); // CUSTOM: Special Courier Pass (Abyss Eternal/Lv. 61-65)
 		} else {
 			reward.setBaseAp(instanceScore.getLoserApReward());
 			reward.setBonusAp(scorePoints / MAX_PLAYERS_PER_FACTION);
-			reward.setReward1(186000147, 1, 0); // CUSTOM: Mithril Medal
 			if (winningRace == Race.NONE)
 				reward.setBaseAp(instanceScore.getDrawApReward()); // Base AP are overridden in a draw case
 		}
