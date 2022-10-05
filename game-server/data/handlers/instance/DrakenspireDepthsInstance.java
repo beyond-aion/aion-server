@@ -127,10 +127,17 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 		super.onDie(npc);
 		int npcId = npc.getNpcId();
 		switch (npcId) {
+			case 236225:
+			case 236226:
+				Npc oppositeProtector = getNpc(npcId == 236225 ? 236226 : 236225);
+				if (oppositeProtector == null || oppositeProtector.isDead())
+					onTwinsComplete();
+				break;
 			case 236227: // Lava Protector
 			case 236228: // Heatvent Protector
 				if (getNpc(npcId == 236227 ? 855709 : 855708) != null) {
 					onTwinsComplete();
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_07());
 				} else {
 					spawn(npcId == 236227 ? 855708 : 855709, npc.getX(), npc.getY(), npc.getZ(), (byte) 0); // Sphere
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_RESSURECT_02());
@@ -226,11 +233,12 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 					case 10 -> {
 						cancelTasks(currentEventTask, additionalEventTask);
 						onTwinsFail();
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_06());
 					}
 				}
 			}
 
-		}, 30000, 30 * 1000));
+		}, 30000, 10 * 1000));
 	}
 
 	private void onTwinRespawn() {
@@ -244,7 +252,6 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 
 	private void onTwinsComplete() {
 		cancelTasks(currentEventTask, additionalEventTask);
-		sendMsg(difficulty.get() == 5 ? SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_07() : SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_06());
 		deleteNpcsByIds(855708, 855709);
 
 		ThreadPoolManager.getInstance().schedule(() -> {
@@ -268,16 +275,20 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 
 	private void onTwinsFail() {
 		if (difficulty.compareAndSet(5, 3)) {
-			Npc protector = instance.getNpc(236227); // Lava Protector
-			if (protector != null)
-				protector.getController().delete();
-			protector = instance.getNpc(236228); // Heatvent Protector
-			if (protector != null)
-				protector.getController().delete();
+			getAndDeleteNpcIfPossible(236227); // Lava Protector
+			getAndDeleteNpcIfPossible(236228); // Heatvent Protector
+			getAndDeleteNpcIfPossible(855708);
+			getAndDeleteNpcIfPossible(855709);
 
 			spawn(236225, 531.0885f, 212.4381f, 1683.412f, (byte) 60); // Fountless Lava Protector
 			spawn(236226, 530.8584f, 151.8681f, 1683.412f, (byte) 60); // Fountless Heatvent Protector
 		}
+	}
+
+	private void getAndDeleteNpcIfPossible(int npcId) {
+		Npc npc = instance.getNpc(npcId);
+		if (npc != null)
+			npc.getController().delete();
 	}
 
 	/**
