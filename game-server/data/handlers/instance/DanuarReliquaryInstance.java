@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -60,8 +61,8 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 			case 284377: // Idean Obscura
 			case 284378: // Idean Lapilima
 			case 284379: // Danuar Reliquary Novun
-				despawnNpc(npc);
-				if (isNullOrDead(284377) && isNullOrDead(284378) && isNullOrDead(284379) && isCursedModorActive.compareAndSet(false, true)) {
+				npc.getController().delete();
+				if (instance.getNpcs(284377, 284378, 284379).stream().allMatch(Creature::isDead) && isCursedModorActive.compareAndSet(false, true)) {
 					spawn(getCursedModorId(), 256.62f, 257.79f, 241.79f, (byte) 90);
 					Npc cursedModor = getNpc(getCursedModorId());
 					if (cursedModor != null) {
@@ -73,8 +74,8 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 				break;
 			case 284383: // Modor's Clone
 			case 855244: // Modor's Clone
-				despawnNpcs(getFakeCloneId());
-				despawnNpc(npc);
+				deleteAliveNpcs(getFakeCloneId());
+				npc.getController().delete();
 				ThreadPoolManager.getInstance().schedule(() -> {
 					if (cloneKills.incrementAndGet() >= 3) {
 						spawn(getEnragedModorId(), 256.62f, 257.79f, 241.79f, (byte) 90);
@@ -91,7 +92,7 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 			case 802183:
 				break;
 			default:
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 		}
 	}
@@ -116,20 +117,6 @@ public class DanuarReliquaryInstance extends GeneralInstanceHandler {
 			spawn(getFakeCloneId(), 271.23627f, 230.30913f, 250.92981f, (byte) 42);
 		if (spawnCase != 5)
 			spawn(getFakeCloneId(), 284.6919f, 262.7201f, 248.75252f, (byte) 63);
-	}
-
-	private void despawnNpc(Npc npc) {
-		if (npc != null)
-			npc.getController().delete();
-	}
-
-	private boolean isNullOrDead(int npcId) {
-		return getNpc(npcId) == null || getNpc(npcId).isDead();
-	}
-
-	private void despawnNpcs(int npcId) {
-		for (Npc npc : instance.getNpcs(npcId))
-			despawnNpc(npc);
 	}
 
 	protected void onInstanceEnd(boolean successful) {

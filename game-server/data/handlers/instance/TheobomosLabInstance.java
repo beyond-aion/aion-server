@@ -61,12 +61,8 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 		Npc orb = getNpc(280973);
 		if (orb != null && PositionUtil.getDistance(orb, npc) <= 7) {
 			switch (npcId) {
-				case 280971:
-					isDead1 = true;
-					break;
-				case 280972:
-					isDead2 = true;
-					break;
+				case 280971 -> isDead1 = true;
+				case 280972 -> isDead2 = true;
 			}
 			return true;
 		} else {
@@ -80,7 +76,7 @@ public class TheobomosLabInstance extends GeneralInstanceHandler {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isInstanceDestroyed && isDead1 && isDead2) {
 				getNpc(214668).getEffectController().removeEffect(18481);
-				getNpc(280973).getController().delete();
+				deleteAliveNpcs(280973);
 			}
 		}, 1000);
 	}

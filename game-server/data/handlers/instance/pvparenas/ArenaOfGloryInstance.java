@@ -4,7 +4,6 @@ import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
-import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.network.aion.instanceinfo.ArenaOfGloryScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
@@ -49,18 +48,17 @@ public class ArenaOfGloryInstance extends PvPArenaInstance {
 		}
 		float totalRankingAP = 26500 - 26500 * rankingRate;
 		float totalRankingGP = 200 - 200 * gpRankingRate;
-		for (InstancePlayerReward playerReward : instanceReward.getPlayerRewards()) {
-			PvPArenaPlayerReward reward = (PvPArenaPlayerReward) playerReward;
-			if (!reward.isRewarded()) {
+		for (PvPArenaPlayerReward playerReward : instanceReward.getPlayerRewards()) {
+			if (!playerReward.isRewarded()) {
 				float playerRate = 1;
 				Player player = instance.getPlayer(playerReward.getOwnerId());
 				if (player != null) {
 					playerRate = Rates.get(player, RatesConfig.PVP_ARENA_GLORY_REWARD_RATES);
 				}
-				int score = reward.getScorePoints();
+				int score = playerReward.getScorePoints();
 				float scoreRate = ((float) score / (float) totalPoints);
 				int rank = instanceReward.getRound() > 1 ? instanceReward.getRank(score) : 3;
-				float percent = reward.getParticipation();
+				float percent = playerReward.getParticipation();
 				float generalRate = 0.167f + rank * 0.227f;
 				float generalGpRate = 0.2f + rank * 0.237f;
 				int basicAP = 0;
@@ -86,44 +84,44 @@ public class ArenaOfGloryInstance extends PvPArenaInstance {
 						rankingGP = 241;
 						scoreGP = 54;
 						if (level >= 56 && level <= 60) {
-							reward.setGloriousInsignia(1);
-							reward.setMithrilMedal(5);
+							playerReward.setGloriousInsignia(1);
+							playerReward.setMithrilMedal(5);
 						} else {
-							reward.setGloriousInsignia(1);
-							reward.setCeramiumMedal(3);
+							playerReward.setGloriousInsignia(1);
+							playerReward.setCeramiumMedal(3);
 						}
 						break;
 					case 1:
 						rankingGP = 135;
 						scoreGP = 25;
 						if (level >= 56 && level <= 60) {
-							reward.setMithrilMedal(1);
-							reward.setPlatinumMedal(3);
+							playerReward.setMithrilMedal(1);
+							playerReward.setPlatinumMedal(3);
 						} else {
-							reward.setCeramiumMedal(1);
+							playerReward.setCeramiumMedal(1);
 						}
 						break;
 					case 2:
 						rankingGP = 92;
 						scoreGP = 14;
 						if (level >= 56 && level <= 60) {
-							reward.setPlatinumMedal(3);
+							playerReward.setPlatinumMedal(3);
 						} else {
-							reward.setMithrilMedal(2);
+							playerReward.setMithrilMedal(2);
 						}
 						break;
 					case 3:
 						rankingGP = 54;
 						scoreGP = 6;
-						reward.setLifeSerum(1);
+						playerReward.setLifeSerum(1);
 						break;
 				}
-				reward.setBasicAP(basicAP);
-				reward.setRankingAP((int) rankingAP);
-				reward.setScoreAP(scoreAP);
-				reward.setBasicGP(basicGP);
-				reward.setRankingGP((int) rankingGP);
-				reward.setScoreGP(scoreGP);
+				playerReward.setBasicAP(basicAP);
+				playerReward.setRankingAP((int) rankingAP);
+				playerReward.setScoreAP(scoreAP);
+				playerReward.setBasicGP(basicGP);
+				playerReward.setRankingGP((int) rankingGP);
+				playerReward.setScoreGP(scoreGP);
 			}
 		}
 		super.reward();

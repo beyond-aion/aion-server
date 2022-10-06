@@ -1,7 +1,5 @@
 package instance.abyss;
 
-import java.util.List;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -71,7 +69,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 				if (ebonsoul != null && !ebonsoul.isDead()) {
 					if (PositionUtil.isInRange(npc, ebonsoul, 5)) {
 						ebonsoul.getEffectController().removeEffect(19159);
-						deleteNpcs(instance.getNpcs(281907));
+						deleteAliveNpcs(281907);
 						break;
 					}
 				}
@@ -82,7 +80,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 				if (rukril != null && !rukril.isDead()) {
 					if (PositionUtil.isInRange(npc, rukril, 5)) {
 						rukril.getEffectController().removeEffect(19266);
-						deleteNpcs(instance.getNpcs(281908));
+						deleteAliveNpcs(281908);
 						break;
 					}
 				}
@@ -92,7 +90,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 			case 216952: // Yamennes Blindsight
 				spawnYamennesGenesisTreasureBoxes();
 				spawnYamennesAbyssalTreasureBox(npcId == 216952 ? 700937 : 700938);
-				deleteNpcs(instance.getNpcs(282107));
+				deleteAliveNpcs(282107);
 				spawn(730317, 328.476f, 762.585f, 197.479f, (byte) 90); // Exit
 				break;
 			case 700955: // HugeAetherFragment
@@ -219,21 +217,9 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 		spawn(npcId, 330.891f, 733.2943f, 197.6404f, (byte) 113);
 	}
 
-	private void deleteNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
-			if (npc != null) {
-				npc.getController().delete();
-			}
-		}
-	}
-
 	private void removeSummoned() {
-		Npc gate1 = getNpc(282014);
-		Npc gate2 = getNpc(282015);
-		Npc gate3 = getNpc(282131);
-		if ((gate1 == null || gate1.isDead()) && (gate2 == null || gate2.isDead()) && (gate3 == null || gate3.isDead())) {
-			deleteNpcs(instance.getNpcs(281903));// Summoned Orkanimum
-			deleteNpcs(instance.getNpcs(281904));// Summoned Lapilima
+		if (instance.getNpcs(282014, 282015, 282131).stream().allMatch(Creature::isDead)) {
+			deleteAliveNpcs(281903, 281904); // Summoned Orkanimum, Summoned Lapilima
 		}
 	}
 
@@ -246,7 +232,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_02());
 				break;
 			case 3:
-				deleteNpcs(instance.getNpcs(700856));
+				deleteAliveNpcs(700856);
 				spawn(701593, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_03());
 				break;

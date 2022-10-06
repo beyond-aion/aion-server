@@ -2,12 +2,10 @@ package instance;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -109,9 +107,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 				instance.setDoorState(49, true);
 				break;
 			case 215457: // ancient octanus
-				Npc thornyVines = getNpc(700633);
-				if (thornyVines != null)
-					thornyVines.getController().delete();
+				deleteAliveNpcs(700633);
 				break;
 			case 215480: // queen mosqua
 				instance.setDoorState(7, true);
@@ -121,7 +117,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 					SpawnTemplate eggTemplate = insectEgg.getSpawn();
 					spawn(700739, eggTemplate.getX(), eggTemplate.getY(), eggTemplate.getZ(), eggTemplate.getHeading(), 11);
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDELIM_EGG_BREAK());
-					instance.getPlayersInside().stream().filter(Objects::nonNull).forEach(player -> {
+					instance.forEachPlayer(player -> {
 						Summon summon = player.getSummon();
 						if (summon != null) {
 							if (summon.getNpcId() == 799500 || summon.getNpcId() == 799501) {
@@ -157,11 +153,11 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 		switch (npc.getNpcId()) {
 			case 700940:
 				player.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, 20000, npc);
-				NpcActions.delete(npc);
+				npc.getController().delete();
 				break;
 			case 700941:
 				player.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, 30000, npc);
-				NpcActions.delete(npc);
+				npc.getController().delete();
 				break;
 		}
 	}

@@ -27,8 +27,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300170000)
 public class BeshmundirInstance extends GeneralInstanceHandler {
 
-	private AtomicInteger macunbello = new AtomicInteger();
-	private AtomicInteger kills = new AtomicInteger();
+	private final AtomicInteger macunbello = new AtomicInteger();
+	private final AtomicInteger kills = new AtomicInteger();
 	private Race instanceRace;
 
 	public BeshmundirInstance(WorldMapInstance instance) {
@@ -37,9 +37,8 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(final Player player) {
-		if (instanceRace == null) {
+		if (instanceRace == null)
 			instanceRace = player.getRace();
-		}
 	}
 
 	@Override
@@ -133,17 +132,10 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 			case 216211:
 			case 216212:
 			case 216213:
-				int killedMacunbello = macunbello.incrementAndGet();
-				switch (killedMacunbello) {
-					case 12:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness1());
-						break;
-					case 14:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness2());
-						break;
-					case 21:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness3());
-						break;
+				switch (macunbello.incrementAndGet()) {
+					case 12 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness1());
+					case 14 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness2());
+					case 21 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_NmdLich_weakness3());
 				}
 				break;
 		}
@@ -155,11 +147,8 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onPlayMovieEnd(Player player, int movieId) {
-		switch (movieId) {
-			case 443:
-				PacketSendUtility.sendPacket(player, STR_MSG_IDCatacombs_BigOrb_Spawn());
-				break;
-		}
+		if (movieId == 443)
+			PacketSendUtility.sendPacket(player, STR_MSG_IDCatacombs_BigOrb_Spawn());
 	}
 
 	@Override

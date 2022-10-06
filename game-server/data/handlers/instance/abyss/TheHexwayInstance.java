@@ -16,7 +16,6 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -49,7 +48,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 	private final int bonusChestTimeLimitSeconds = 1320;
 	private final int[] notifyTimesSeconds = new int[] { 900, 600, 300, 120, 60, 30, 10, 3, 2, 1 };
 
-	private final Future<?>[] scheduledBossDespawnTasks = new ScheduledFuture[6];
+	private final Future<?>[] scheduledBossDespawnTasks = new ScheduledFuture<?>[6];
 	private final AtomicLongArray stageStartMillis = new AtomicLongArray(6);
 	private final Map<Integer, Integer> playerStageMapping = new ConcurrentHashMap<>();
 
@@ -151,7 +150,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 			// manager jarka
 			case 219609:
 				// open barricades
-				instance.getNpcs(219617).forEach(NpcActions::delete);
+				deleteAliveNpcs(219617);
 				break;
 			case 219611:
 			case 286933:
@@ -211,7 +210,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 									bossNpc.getController().onAttack(bossNpc, dmgToApply, null);
 								}, 1000);
 							}
-							NpcActions.delete(secondNpc);
+							secondNpc.getController().delete();
 						}
 					}
 					handlingSecondBoss.set(false);
@@ -245,7 +244,7 @@ public class TheHexwayInstance extends GeneralInstanceHandler {
 	private void scheduleBossDespawn(int bossIndex, int despawnDelayMillis) {
 		ScheduledFuture<?> despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
 			boolean chestSpawnWasAllowed = bonusChestSpawnAllowed.getAndSet(false);
-			instance.getNpcs(bossNpcIds[bossIndex]).forEach(NpcActions::delete);
+			deleteAliveNpcs(bossNpcIds[bossIndex]);
 			cancelTimeInformTasks();
 			broadcastYellowMessage(chestSpawnWasAllowed ? MSG_BOSS_FAILED_NO_BOX : MSG_BOSS_FAILED);
 		}, despawnDelayMillis);

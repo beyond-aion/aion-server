@@ -44,11 +44,7 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 	@Override
 	public void onDie(Npc npc) {
 		switch (npc.getNpcId()) {
-			case 233898:
-			case 234990:
-			case 234991:
-				spawn(instanceRace == Race.ELYOS ? 702338 : 702389, 246.74345f, 258.35843f, 312.32327f, (byte) 10);
-				break;
+			case 233898, 234990, 234991 -> spawn(instanceRace == Race.ELYOS ? 702338 : 702389, 246.74345f, 258.35843f, 312.32327f, (byte) 10);
 		}
 	}
 
@@ -82,42 +78,27 @@ public class LinkgateFoundryInstance extends GeneralInstanceHandler {
 	}
 
 	private void startTimeCheck() {
-		timeCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				timeInMin++;
-				switch (timeInMin) {
-					case 5:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_02());
-						break;
-					case 10:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_03());
-						break;
-					case 15:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_04());
-						break;
-					case 17:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_05());
-						break;
-					case 19:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_06());
-						break;
-					case 20:
-						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_07());
-						instance.forEachNpc(npc -> {
-							if (npc.getNpcId() != 233898 && npc.getNpcId() != 234990 && npc.getNpcId() != 234991 // belsagos does not despawn
-								&& npc.getNpcId() != 702339 && npc.getNpcId() != 804629 // teleport device does not despawn
-								&& npc.getNpcId() != 702590 && npc.getNpcId() != 702591 && npc.getNpcId() != 234992) { // secret lab portal & chest do not despawn
-								npc.getController().delete();
-							}
-						});
-						if (timeCheckTask != null && !timeCheckTask.isDone()) {
-							timeCheckTask.cancel(true);
+		timeCheckTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			switch (++timeInMin) {
+				case 5 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_02());
+				case 10 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_03());
+				case 15 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_04());
+				case 17 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_05());
+				case 19 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_06());
+				case 20 -> {
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF4_Re_01_Time_07());
+					instance.forEachNpc(npc -> {
+						if (npc.getNpcId() != 233898 && npc.getNpcId() != 234990 && npc.getNpcId() != 234991 // belsagos does not despawn
+							&& npc.getNpcId() != 702339 && npc.getNpcId() != 804629 // teleport device does not despawn
+							&& npc.getNpcId() != 702590 && npc.getNpcId() != 702591 && npc.getNpcId() != 234992) { // secret lab portal & chest do not despawn
+							npc.getController().delete();
 						}
+					});
+					if (timeCheckTask != null && !timeCheckTask.isDone()) {
+						timeCheckTask.cancel(true);
+					}
 				}
 			}
-
 		}, 0, 60000);
 	}
 

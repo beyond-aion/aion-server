@@ -4,7 +4,6 @@ import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
-import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -34,17 +33,16 @@ public class ArenaOfChaosInstance extends ChaosTrainingGroundsInstance {
 		float totalRankingAP = 1453 - 1453 * rankingRate;
 		float totalRankingCrucible = 865 - 865 * rankingRate;
 		float totalRankingCourage = 101 - 101 * rankingRate;
-		for (InstancePlayerReward playerReward : instanceReward.getPlayerRewards()) {
-			PvPArenaPlayerReward reward = (PvPArenaPlayerReward) playerReward;
-			if (!reward.isRewarded()) {
+		for (PvPArenaPlayerReward playerReward : instanceReward.getPlayerRewards()) {
+			if (!playerReward.isRewarded()) {
 				Player player = instance.getPlayer(playerReward.getOwnerId());
 				if (player == null) // player left
 					continue;
 				float playerRate = Rates.get(player, RatesConfig.PVP_ARENA_CHAOS_REWARD_RATES);
-				int score = reward.getScorePoints();
+				int score = playerReward.getScorePoints();
 				float scoreRate = ((float) score / (float) totalPoints);
 				int rank = instanceReward.getRound() > 1 ? instanceReward.getRank(score) : 7;
-				float percent = reward.getParticipation();
+				float percent = playerReward.getParticipation();
 				float generalRate = 0.167f + rank * 0.095f;
 				int basicAP = 200;
 				float rankingAP = totalRankingAP;
@@ -55,9 +53,9 @@ public class ArenaOfChaosInstance extends ChaosTrainingGroundsInstance {
 				basicAP *= percent;
 				rankingAP *= percent;
 				rankingAP *= playerRate;
-				reward.setBasicAP(basicAP);
-				reward.setRankingAP((int) rankingAP);
-				reward.setScoreAP(scoreAP);
+				playerReward.setBasicAP(basicAP);
+				playerReward.setRankingAP((int) rankingAP);
+				playerReward.setScoreAP(scoreAP);
 				int basicCrI = 195;
 				basicCrI *= percent;
 				float rankingCrI = totalRankingCrucible;
@@ -67,9 +65,9 @@ public class ArenaOfChaosInstance extends ChaosTrainingGroundsInstance {
 				rankingCrI *= percent;
 				rankingCrI *= playerRate;
 				int scoreCrI = (int) (totalScoreCrucible * scoreRate);
-				reward.setBasicCrucible(basicCrI);
-				reward.setRankingCrucible((int) rankingCrI);
-				reward.setScoreCrucible(scoreCrI);
+				playerReward.setBasicCrucible(basicCrI);
+				playerReward.setRankingCrucible((int) rankingCrI);
+				playerReward.setScoreCrucible(scoreCrI);
 				int basicCoI = 0;
 				basicCoI *= percent;
 				float rankingCoI = totalRankingCourage;
@@ -78,14 +76,14 @@ public class ArenaOfChaosInstance extends ChaosTrainingGroundsInstance {
 				}
 				rankingCoI *= percent;
 				int scoreCoI = (int) (totalScoreCourage * scoreRate);
-				reward.setBasicCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, basicCoI));
-				reward.setRankingCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, (long) rankingCoI));
-				reward.setScoreCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, scoreCoI));
-				if (instanceReward.canRewardOpportunityToken(reward)) {
-					reward.setOpportunity(4);
+				playerReward.setBasicCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, basicCoI));
+				playerReward.setRankingCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, (long) rankingCoI));
+				playerReward.setScoreCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, scoreCoI));
+				if (instanceReward.canRewardOpportunityToken(playerReward)) {
+					playerReward.setOpportunity(4);
 				}
 				if (rank < 2) {
-					reward.setGloryTicket(1);
+					playerReward.setGloryTicket(1);
 				}
 			}
 		}

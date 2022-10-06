@@ -33,11 +33,11 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 @InstanceID(300240000)
 public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 
+	private final AtomicBoolean msgIsSent = new AtomicBoolean();
+	private final AtomicInteger officerKilled = new AtomicInteger();
+	private final AtomicInteger chiefKilled = new AtomicInteger();
+	private final AtomicInteger generators = new AtomicInteger();
 	private boolean isInstanceDestroyed;
-	private AtomicBoolean msgIsSent = new AtomicBoolean();
-	private AtomicInteger officerKilled = new AtomicInteger();
-	private AtomicInteger chiefKilled = new AtomicInteger();
-	private AtomicInteger generators = new AtomicInteger();
 
 	public AturamSkyFortressInstance(WorldMapInstance instance) {
 		super(instance);
@@ -70,8 +70,8 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				spawn(730375, 374.85f, 424.32f, 653.52f, (byte) 0);
 				break;
 			case 701043:
-				despawnNpc(npc);
-				despawnNpc(instance.getNpc(701030));
+				npc.getController().delete();
+				deleteAliveNpcs(701030);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_HugenNM_00());
 				break;
 			case 217371:
@@ -87,7 +87,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 					instance.setDoorState(175, true);
 					startMarbataWalkerEvent();
 				}
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 217656:
 				int killed2 = chiefKilled.incrementAndGet();
@@ -96,7 +96,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				} else if (killed2 == 2) {
 					instance.setDoorState(178, true);
 				}
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 217382:
 				instance.setDoorState(230, true);
@@ -129,12 +129,12 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_HugenNM_04());
 					}
 				}
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 217369:
 			case 217368:
 			case 217655:
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 		}
 	}
@@ -147,18 +147,13 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 	}
 
 	private void startWalk(final Npc npc, final String walkId) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed) {
-					npc.getSpawn().setWalkerId(walkId);
-					WalkManager.startWalking((NpcAI) npc.getAi());
-					npc.setState(CreatureState.ACTIVE, true);
-					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed) {
+				npc.getSpawn().setWalkerId(walkId);
+				WalkManager.startWalking((NpcAI) npc.getAi());
+				npc.setState(CreatureState.ACTIVE, true);
+				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
 			}
-
 		}, 2000);
 	}
 
@@ -206,7 +201,7 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				player.getLifeStats().increaseHp(SM_ATTACK_STATUS.TYPE.HP, 5205, npc);
 				player.getLifeStats().increaseMp(SM_ATTACK_STATUS.TYPE.MP, 5205, 0, LOG.REGULAR);
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDStation_Doping_02());
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 730397:
 				SkillEngine.getInstance().getSkill(npc, 19520, 51, player).useNoAnimationSkill();
@@ -231,12 +226,6 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 			if (msgIsSent.compareAndSet(false, true)) {
 				PacketSendUtility.sendPacket(player, STR_MSG_IDStation_Doping_01_AD());
 			}
-		}
-	}
-
-	private void despawnNpc(Npc npc) {
-		if (npc != null) {
-			npc.getController().delete();
 		}
 	}
 }

@@ -71,18 +71,6 @@ public class CrucibleInstance extends GeneralInstanceHandler {
 		return true;
 	}
 
-	protected void despawnNpc(Npc npc) {
-		if (npc != null) {
-			npc.getController().delete();
-		}
-	}
-
-	protected void despawnNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
-			npc.getController().delete();
-		}
-	}
-
 	protected void teleport(Player player, float x, float y, float z, byte h) {
 		TeleportService.teleportTo(player, instance, x, y, z, h);
 	}

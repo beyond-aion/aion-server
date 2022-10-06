@@ -149,10 +149,9 @@ public class AnguishedDragonLordsRefugeInstance extends DragonLordsRefugeInstanc
 		super.onDie(npc);
 		switch (npc.getNpcId()) {
 			case 236274: // Calindi Flamelord
-				despawnNpc(730695); // Surkana
-				despawnNpc(730696); // Surkana
+				deleteAliveNpcs(730695, 730696); // Surkana
 				ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(getNpc(236275).getAi(), 20919), 4000);
-				ThreadPoolManager.getInstance().schedule(() -> despawnNpc(730694), 6000); // Aetheric field
+				ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(730694), 6000); // Aetheric field
 				break;
 			case 236276: // Tiamat Dragon - killed by Empyrean Lord
 				getNpc(730699).getController().die(); // Animates roof destruction
@@ -220,7 +219,7 @@ public class AnguishedDragonLordsRefugeInstance extends DragonLordsRefugeInstanc
 
 		// schedule spawn of empyrean lords for final attack to tiamat before getting exhausted
 		ThreadPoolManager.getInstance().schedule(() -> {
-			despawnNpc(empyreanLordId);
+			deleteAliveNpcs(empyreanLordId);
 			spawn(856021 + raceId.get() * 3, 516.285f, 514.84f, 417.405f, (byte) 60);
 		}, 30000);
 	}

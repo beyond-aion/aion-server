@@ -23,7 +23,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300080000)
 public class LeftWingChamberInstance extends GeneralInstanceHandler {
 
-	private AtomicLong startTime = new AtomicLong();
+	private final AtomicLong startTime = new AtomicLong();
 	private Race instanceRace;
 
 	public LeftWingChamberInstance(WorldMapInstance instance) {
@@ -50,7 +50,7 @@ public class LeftWingChamberInstance extends GeneralInstanceHandler {
 		if (flyingRing.equals("LEFT_WING_1")) {
 			if (startTime.compareAndSet(0, System.currentTimeMillis())) {
 				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900));
-				ThreadPoolManager.getInstance().schedule(() -> despawnNpcs(700466, 701481, 701486), 900000);
+				ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(700466, 701481, 701486), 900000);
 			}
 		}
 		return false;
@@ -71,11 +71,6 @@ public class LeftWingChamberInstance extends GeneralInstanceHandler {
 			spawnGoldChest();
 		}
 
-	}
-
-	private void despawnNpcs(int... npcIds) {
-		for (Npc npc : instance.getNpcs(npcIds))
-			npc.getController().delete();
 	}
 
 	private void spawnGoldChest() {

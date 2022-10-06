@@ -66,7 +66,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 				break;
 			case 231073: // Hyperion
 				cancelTasks();
-				despawnAllAndSpawnExit(true);
+				despawnAllAndSpawnExit();
 				// rewardGP();
 				break;
 		}
@@ -77,7 +77,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 		if (npc.getNpcId() == 231073) { // hyperion
 			if (isRunning.getAndSet(false)) {
 				cancelTasks();
-				despawnAllAndSpawnExit(false);
+				despawnAllAndSpawnExit();
 			}
 		}
 	}
@@ -105,7 +105,7 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 			}
 		}
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_BROKENPROTECTIONALL());
-		instance.getNpc(730741).getController().delete(); // remove barrier in center
+		deleteAliveNpcs(730741); // remove barrier in center
 		instance.getNpc(231073).getEffectController().removeEffect(21254);
 		startHatingNearestPlayer();
 		SkillEngine.getInstance().getSkill(instance.getNpc(231073), 21255, 56, instance.getNpc(231073)).useWithoutPropSkill();
@@ -145,12 +145,12 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 	private void failInstance(boolean wipePlayers) {
 		if (isRunning.getAndSet(false)) {
 			cancelTasks();
-			instance.getNpc(231073).getController().delete();
+			deleteAliveNpcs(231073);
 			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDRUNEWP_USER_KILL());
 			if (wipePlayers)
 				for (Npc npc : instance.getNpcs(231104))
 					npc.getController().useSkill(21199);
-			ThreadPoolManager.getInstance().schedule(() -> despawnAllAndSpawnExit(false), 1500); // delay despawn for invisible NPCs to use the skill
+			ThreadPoolManager.getInstance().schedule(this::despawnAllAndSpawnExit, 1500); // delay despawn for invisible NPCs to use the skill
 		}
 	}
 
@@ -168,15 +168,8 @@ public class InfinityShardInstance extends GeneralInstanceHandler {
 		ThreadPoolManager.getInstance().schedule(() -> spawn(231102, 150.33377f, 132.67754f, 126.57981f, (byte) 50), Rnd.get(30000, 45000));
 	}
 
-	private void despawnAllAndSpawnExit(boolean hyperionKilled) {
-		instance.forEachNpc(npc -> {
-			if (hyperionKilled) {
-				if (npc.getNpcId() != 231073)
-					npc.getController().delete();
-			} else {
-				npc.getController().delete();
-			}
-		});
+	private void despawnAllAndSpawnExit() {
+		instance.forEachNpc(npc -> npc.getController().deleteIfAliveOrCancelRespawn());
 		spawn(730842, 146.65f, 135.33f, 112.18f, (byte) 59); // exit portal
 	}
 

@@ -146,15 +146,9 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			case 217816: // asmo
 				if (changeStage(StageType.START_STAGE_5_ROUND_2, 2000)) {
 					switch (Rnd.get(1, 3)) {
-						case 1:
-							sp(217806, 332.3786f, 349.31204f, 96.090935f, (byte) 0, 4000);
-							break;
-						case 2:
-							sp(218562, 332.3786f, 349.31204f, 96.090935f, (byte) 0, 4000);
-							break;
-						case 3:
-							sp(218565, 332.3786f, 349.31204f, 96.090935f, (byte) 0, 4000);
-							break;
+						case 1 -> sp(217806, 332.3786f, 349.31204f, 96.090935f, (byte) 0, 4000);
+						case 2 -> sp(218562, 332.3786f, 349.31204f, 96.090935f, (byte) 0, 4000);
+						case 3 -> sp(218565, 332.3786f, 349.31204f, 96.090935f, (byte) 0, 4000);
 					}
 				}
 				break;
@@ -171,7 +165,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 						if (!instance.getPlayersInside().isEmpty()) {
 							player = instance.getPlayersInside().get(0);
 						}
-						despawnNpc(npc);
+						npc.getController().delete();
 						if (player != null) {
 							QuestState qs = player.getQuestStateList().getQuestState(player.getRace() == Race.ASMODIANS ? 28208 : 18208);
 							if (qs != null && qs.getStatus() == QuestStatus.START) {
@@ -202,7 +196,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 					startBonusStage2();
 				break;
 			case 217802:
-				despawnNpcs(getNpcs(217803));
+				deleteAliveNpcs(217803);
 				bonusTimer.cancel(false);
 				passStage2();
 				break;
@@ -249,15 +243,14 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 					ThreadPoolManager.getInstance().schedule(() -> startStage3Round1_1(npcId), 5000);
 				break;
 			case 218185:
-				despawnNpc(getNpc(218190));
-				despawnNpc(getNpc(218191));
+				deleteAliveNpcs(218190, 218191);
 				sp(730460, 1759.2914f, 1786.37f, 389.11713f, (byte) 96, 0);
 				PacketSendUtility.broadcastMessage(npc, 342495);
 				break;
 			default:
 				return; // don't despawn
 		}
-		despawnNpc(npc);
+		npc.getController().delete();
 	}
 
 	private void increasePointsForKill(Npc npc, Player killer) {
@@ -342,23 +335,15 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	private void startStage3Round1_1(int npcId) {
-		int bossId = 0;
-		switch (npcId) {
-			case 217844:
-				bossId = 217845;
-				break;
-			case 217842:
-				bossId = 217843;
-				break;
-		}
+		int bossId = switch (npcId) {
+			case 217844 -> 217845;
+			case 217842 -> 217843;
+			default -> 0;
+		};
 		if (getNpc(bossId) != null)
 			return;
 		sp(bossId, 1287.6239f, 1724.2721f, 317.1485f, (byte) 6, 2000);
-		despawnNpcs(getNpcs(npcId));
-		despawnNpc(getNpc(217840));
-		despawnNpc(getNpc(218560));
-		despawnNpc(getNpc(218561));
-		despawnNpc(getNpc(217841));
+		deleteAliveNpcs(npcId, 217840, 218560, 218561, 217841);
 	}
 
 	@Override
@@ -402,36 +387,16 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 
 	private void spawnBonus2() {
 		switch (spawnCount) {
-			case 1:
-				sp(217803, 1789.923f, 310.853f, 469.25f, (byte) 0, 0);
-				break;
-			case 2:
-				sp(217803, 1780.9126f, 315.63382f, 469.25f, (byte) 0, 0);
-				break;
-			case 3:
-				sp(217803, 1784.4752f, 300.1912f, 469.25f, (byte) 0, 0);
-				break;
-			case 4:
-				sp(217803, 1793.2847f, 312.59842f, 469.25f, (byte) 0, 0);
-				break;
-			case 5:
-				sp(217803, 1777.6609f, 316.1443f, 469.25f, (byte) 0, 0);
-				break;
-			case 6:
-				sp(217803, 1776.5625f, 299.30347f, 469.25f, (byte) 0, 0);
-				break;
-			case 7:
-				sp(217803, 1793.6469f, 301.40973f, 469.25f, (byte) 0, 0);
-				break;
-			case 8:
-				sp(217803, 1797.4891f, 310.50418f, 469.25f, (byte) 0, 0);
-				break;
-			case 9:
-				sp(217803, 1782.552f, 319.43973f, 469.25f, (byte) 0, 0);
-				break;
-			case 10:
-				sp(217803, 1776.1577f, 305.80396f, 469.25f, (byte) 0, 0);
-				break;
+			case 1 -> sp(217803, 1789.923f, 310.853f, 469.25f, (byte) 0, 0);
+			case 2 -> sp(217803, 1780.9126f, 315.63382f, 469.25f, (byte) 0, 0);
+			case 3 -> sp(217803, 1784.4752f, 300.1912f, 469.25f, (byte) 0, 0);
+			case 4 -> sp(217803, 1793.2847f, 312.59842f, 469.25f, (byte) 0, 0);
+			case 5 -> sp(217803, 1777.6609f, 316.1443f, 469.25f, (byte) 0, 0);
+			case 6 -> sp(217803, 1776.5625f, 299.30347f, 469.25f, (byte) 0, 0);
+			case 7 -> sp(217803, 1793.6469f, 301.40973f, 469.25f, (byte) 0, 0);
+			case 8 -> sp(217803, 1797.4891f, 310.50418f, 469.25f, (byte) 0, 0);
+			case 9 -> sp(217803, 1782.552f, 319.43973f, 469.25f, (byte) 0, 0);
+			case 10 -> sp(217803, 1776.1577f, 305.80396f, 469.25f, (byte) 0, 0);
 		}
 	}
 
@@ -475,30 +440,14 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	public boolean onReviveEvent(Player player) {
 		super.onReviveEvent(player);
 		switch (getPlayerReward(player.getObjectId()).getSpawnPosition()) {
-			case 1:
-				teleport(player, 380.35417f, 1663.3583f, 97.60156f, (byte) 0);
-				break;
-			case 2:
-				teleport(player, 1819.8119f, 304.92932f, 469.4142f, (byte) 0);
-				break;
-			case 3:
-				teleport(player, 1354.9386f, 1748.1531f, 318.6173f, (byte) 70);
-				break;
-			case 4:
-				teleport(player, 1294.1417f, 234.49684f, 406.0368f, (byte) 0);
-				break;
-			case 5:
-				teleport(player, 1307.3776f, 790.7324f, 437.29678f, (byte) 0);
-				break;
-			case 6:
-				teleport(player, 381.7477f, 346.63913f, 96.74763f, (byte) 0);
-				break;
-			case 7:
-				teleport(player, 1750.2677f, 1253.5453f, 389.11765f, (byte) 10);
-				break;
-			default:
-				InstanceService.destroyInstance(player.getPosition().getWorldMapInstance());
-				break;
+			case 1 -> teleport(player, 380.35417f, 1663.3583f, 97.60156f, (byte) 0);
+			case 2 -> teleport(player, 1819.8119f, 304.92932f, 469.4142f, (byte) 0);
+			case 3 -> teleport(player, 1354.9386f, 1748.1531f, 318.6173f, (byte) 70);
+			case 4 -> teleport(player, 1294.1417f, 234.49684f, 406.0368f, (byte) 0);
+			case 5 -> teleport(player, 1307.3776f, 790.7324f, 437.29678f, (byte) 0);
+			case 6 -> teleport(player, 381.7477f, 346.63913f, 96.74763f, (byte) 0);
+			case 7 -> teleport(player, 1750.2677f, 1253.5453f, 389.11765f, (byte) 10);
+			default -> InstanceService.destroyInstance(player.getPosition().getWorldMapInstance());
 		}
 
 		if (player.getInventory().getFirstItemByItemId(186000134) == null) {
@@ -585,34 +534,22 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				sp(npcId, 1293.0376f, 1722.3871f, 316.93515f, (byte) 0, 4000);
 				break;
 			case START_STAGE_4_ROUND_1:
-				switch (Rnd.get(1, 3)) {
-					case 1:
-						npcId = 217788;
-						break;
-					case 2:
-						npcId = 217789;
-						break;
-					case 3:
-						npcId = 217790;
-						break;
-				}
+				npcId = switch (Rnd.get(1, 3)) {
+					case 1 -> 217788;
+					case 2 -> 217789;
+					default -> 217790;
+				};
 				sp(217786, 1263.4213f, 791.8533f, 436.64014f, (byte) 60, 4000);
 				sp(217786, 1267.2097f, 804.04456f, 436.64008f, (byte) 60, 4000);
 				sp(217786, 1267.0653f, 781.0253f, 436.64017f, (byte) 60, 4000);
 				sp(npcId, 1253.5984f, 791.6149f, 436.64008f, (byte) 0, 4000);
 				break;
 			case START_ALTERNATIVE_STAGE_4_ROUND_1:
-				switch (Rnd.get(1, 3)) {
-					case 1:
-						npcId = 217791; // http://www.aiondatabase.com/npc/217805 spawn 2 5%
-						break;
-					case 2:
-						npcId = 217792;
-						break;
-					case 3:
-						npcId = 217793;
-						break;
-				}
+				npcId = switch (Rnd.get(1, 3)) {
+					case 1 -> 217791; // http://www.aiondatabase.com/npc/217805 spawn 2 5%
+					case 2 -> 217792;
+					default -> 217793;
+				};
 				sp(217787, 1252.525f, 248.50781f, 405.38016f, (byte) 60, 4000);
 				sp(217787, 1250.0901f, 237.69656f, 405.39676f, (byte) 60, 4000);
 				sp(217787, 1253.0117f, 225.77977f, 405.3801f, (byte) 60, 4000);
@@ -620,46 +557,23 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				break;
 			case START_STAGE_5_ROUND_1:
 				if (player != null) {
-					switch (player.getRace()) {
-						case ELYOS:
-							switch (Rnd.get(1, 5)) {
-								case 1:
-									npcId = 217807;
-									break;
-								case 2:
-									npcId = 217808;
-									break;
-								case 3:
-									npcId = 217809;
-									break;
-								case 4:
-									npcId = 217810;
-									break;
-								case 5:
-									npcId = 217815;
-									break;
-							}
-							break;
-						case ASMODIANS:
-							switch (Rnd.get(1, 5)) {
-								case 1:
-									npcId = 217811;
-									break;
-								case 2:
-									npcId = 217812;
-									break;
-								case 3:
-									npcId = 217813;
-									break;
-								case 4:
-									npcId = 217814;
-									break;
-								case 5:
-									npcId = 217816;
-									break;
-							}
-							break;
-					}
+					npcId = switch (player.getRace()) {
+						case ELYOS -> switch (Rnd.get(1, 5)) {
+								case 1 -> 217807;
+								case 2 -> 217808;
+								case 3 -> 217809;
+								case 4 -> 217810;
+								default -> 217815;
+							};
+						case ASMODIANS -> switch (Rnd.get(1, 5)) {
+								case 1 -> 217811;
+								case 2 -> 217812;
+								case 3 -> 217813;
+								case 4 -> 217814;
+								default -> 217816;
+							};
+						default -> npcId;
+					};
 					sp(npcId, 335.7365f, 337.93097f, 96.0909f, (byte) 0, 4000);
 				}
 				break;
@@ -705,15 +619,9 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 			case 218571:
 				dropItems.clear();
 				switch (Rnd.get(1, 3)) {
-					case 1:
-						itemId = 182006429;
-						break;
-					case 2:
-						itemId = 182006430;
-						break;
-					case 3:
-						itemId = 182006431;
-						break;
+					case 1 -> itemId = 182006429;
+					case 2 -> itemId = 182006430;
+					case 3 -> itemId = 182006431;
 				}
 				dropItems.add(DropRegistrationService.getInstance().regDropItem(1, winnerObj, npcId, itemId, 1));
 				break;
@@ -730,14 +638,12 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 						switch (Rnd.get(1, 3)) {
 							case 1 -> count = 1;
 							case 2 -> count = 10;
-							case 3 -> count = 0;
 						}
 						break;
 					case 1:
 						switch (Rnd.get(1, 3)) {
 							case 1 -> count = 2;
 							case 2 -> count = 18;
-							case 3 -> count = 0;
 						}
 						break;
 					case 2:
@@ -750,18 +656,9 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 				}
 
 				switch (npcId) {
-					case 217827:
-						despawnNpc(getNpc(217828));
-						despawnNpc(getNpc(217829));
-						break;
-					case 217828:
-						despawnNpc(getNpc(217827));
-						despawnNpc(getNpc(217829));
-						break;
-					case 217829:
-						despawnNpc(getNpc(217827));
-						despawnNpc(getNpc(217828));
-						break;
+					case 217827 -> deleteAliveNpcs(217828, 217829);
+					case 217828 -> deleteAliveNpcs(217827, 217829);
+					case 217829 -> deleteAliveNpcs(217827, 217828);
 				}
 				if (count == 0) {
 					if (rewardCount == 0) {
@@ -769,7 +666,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 					} else if (rewardCount == 1) {
 						sp(217838, npc.getX(), npc.getY(), npc.getZ(), (byte) 0, 0);
 					}
-					despawnNpc(npc);
+					npc.getController().delete();
 					rewardCount++;
 					return;
 				}

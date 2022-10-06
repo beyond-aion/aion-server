@@ -105,7 +105,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 			despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
 				setResult(false);
-				despawnNpcs(CENTER_ARTIFACT_ID, TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID, BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID,
+				deleteAliveNpcs(CENTER_ARTIFACT_ID, TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID, BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID,
 					BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID);
 			}, TIME_LIMIT * 1000);
 
@@ -187,7 +187,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 					"[CI_ROAH] Player [id=%d, name=%s, class=%s, rank=%s(%d), isPrebuffed=%b] succeeded in destroying the artifact in %.3fs (DPS:%d).",
 					pcd.getPlayerObjId(), pcd.getName(), pcd.getPlayerClass(), CustomInstanceRankEnum.getRankDescription(rank), rank, isPrebuffed, usedTime,
 					achievedDps));
-				despawnNpcs(TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
+				deleteAliveNpcs(TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
 				PacketSendUtility.broadcastToMap(instance,
 					new SM_MESSAGE(0, null, "You feel a shadowy presence from the throne room.", ChatType.BRIGHT_YELLOW_CENTER));
 				PacketSendUtility.broadcastToMap(instance, new SM_QUEST_ACTION(0, 0));
@@ -244,15 +244,6 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			case SPIRIT_MASTER -> 6000;
 			default -> 4000;
 		};
-	}
-
-	private void despawnNpcs(int... npcIds) {
-		for (int npcId : npcIds) {
-			for (Npc npc : instance.getNpcs(npcId)) {
-				if (npc != null)
-					npc.getController().delete();
-			}
-		}
 	}
 
 	private void calcBossDrop(int npcObjId) {
@@ -396,10 +387,10 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		if (!isCompleted.get()) {
 			if (isBossPhase) {
 				PacketSendUtility.sendMessage(player, "At last! I have become .. your greatest nightmare!", ChatType.BRIGHT_YELLOW_CENTER);
-				despawnNpcs(BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID);
+				deleteAliveNpcs(BOSS_MOB_A_M_ID, BOSS_MOB_A_F_ID, BOSS_MOB_E_M_ID, BOSS_MOB_E_F_ID, BOSS_MOB_AT_ID);
 			} else {
 				PacketSendUtility.sendMessage(player, "You shall not pass!", ChatType.BRIGHT_YELLOW_CENTER);
-				despawnNpcs(CENTER_ARTIFACT_ID, TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
+				deleteAliveNpcs(CENTER_ARTIFACT_ID, TRASH_MOB_ID, BULKY_MOB_ID, DOMINATOR_MOB_ID);
 			}
 			setResult(false);
 		}

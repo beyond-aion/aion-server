@@ -2,7 +2,6 @@ package instance;
 
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.function.Consumer;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -22,14 +21,14 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Ritsu, Luzien
- * @see http://gameguide.na.aiononline.com/aion/Padmarashka%27s+Cave+Walkthrough
+ * @see <a href="http://gameguide.na.aiononline.com/aion/Padmarashka%27s+Cave+Walkthrough">Padmarashka's Cave</a>
  */
 @InstanceID(320150000)
 public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 
-	private AtomicBoolean moviePlayed = new AtomicBoolean();
-	private AtomicInteger killedPadmarashkaProtector = new AtomicInteger();
-	private AtomicInteger killedEggs = new AtomicInteger();
+	private final AtomicBoolean moviePlayed = new AtomicBoolean();
+	private final AtomicInteger killedPadmarashkaProtector = new AtomicInteger();
+	private final AtomicInteger killedEggs = new AtomicInteger();
 
 	public PadmarashkasCaveInstance(WorldMapInstance instance) {
 		super(instance);
@@ -51,13 +50,8 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 						// padmarashka.getEffectController().broadCastEffects(0);
 						SkillEngine.getInstance().getSkill(padmarashka, 19187, 55, padmarashka).useNoAnimationSkill();
 						padmarashka.getEffectController().removeEffect(19186); // skill should handle this TODO: fix
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								padmarashka.getAi().onCreatureEvent(AIEventType.CREATURE_AGGRO, instance.getPlayersInside().get(0));
-							}
-						}, 1000);
+						ThreadPoolManager.getInstance()
+							.schedule(() -> padmarashka.getAi().onCreatureEvent(AIEventType.CREATURE_AGGRO, instance.getPlayersInside().get(0)), 1000);
 					}
 				}
 				break;
@@ -75,26 +69,14 @@ public class PadmarashkasCaveInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterZone(Player player, ZoneInstance zone) {
-		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("PADMARASHKAS_NEST_320150000")) {
-			if (moviePlayed.compareAndSet(false, true))
-				sendMovie();
-		}
+		if (zone.getAreaTemplate().getZoneName() == ZoneName.get("PADMARASHKAS_NEST_320150000") && moviePlayed.compareAndSet(false, true))
+			PacketSendUtility.broadcastToMap(instance, new SM_PLAY_MOVIE(0, 488));
 	}
 
 	@Override
 	public boolean onDie(final Player player, Creature lastAttacker) {
 		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
 		return true;
-	}
-
-	private void sendMovie() {
-		instance.forEachPlayer(new Consumer<Player>() {
-
-			@Override
-			public void accept(Player player) {
-				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 488));
-			}
-		});
 	}
 
 	@Override

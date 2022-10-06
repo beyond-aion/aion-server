@@ -95,9 +95,9 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onSpawn(VisibleObject object) {
-		if (object instanceof Npc) {
-			int npcId = ((Npc) object).getNpcId();
-			switch (((Npc) object).getNpcId()) {
+		if (object instanceof Npc npc) {
+			int npcId = npc.getNpcId();
+			switch (npc.getNpcId()) {
 				case 702218:
 				case 702219:
 					PacketSendUtility.broadcastToMap(instance, SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_OBJ_CHARGE_01());
@@ -305,10 +305,10 @@ public class IlluminaryObeliskInstance extends GeneralInstanceHandler {
 			if (isInstanceDestroyed)
 				return;
 			instance.forEach(o -> {
-				if (o instanceof Npc)
-					o.getController().delete();
-				else if (o instanceof Player && !((Player) o).isDead())
-					((Player) o).getController().die();
+				if (o instanceof Npc npc)
+					npc.getController().delete();
+				else if (o instanceof Player p && !p.isDead())
+					p.getController().die();
 			});
 		}, 5000);
 	}

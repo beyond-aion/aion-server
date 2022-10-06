@@ -42,13 +42,13 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 			case 236299:
 				if (isDeadNpc(236301)) {
 					instance.setDoorState(145, true);
-					despawnNpc(instance.getNpc(701156));
+					deleteAliveNpcs(701156);
 				}
 				break;
 			case 236301:
 				if (isDeadNpc(236299)) {
 					instance.setDoorState(145, true);
-					despawnNpc(instance.getNpc(701156));
+					deleteAliveNpcs(701156);
 				}
 				break;
 			case 236298: // Kuhara
@@ -61,7 +61,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				instance.setDoorState(70, true);
 				break;
 			case 236300: // Brigade General Vasharti
-				deleteNpc(799669);
+				deleteAliveNpcs(799669);
 				instance.setDoorState(70, true);
 				spawn(730401, 193.6f, 436.5f, 262f, (byte) 86); // occupied rentus base exit
 				spawn(833048, 195.48f, 413.87f, 260.97f, (byte) 27); // Rentus Quality Supply Storage Box
@@ -81,15 +81,15 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 				break;
 			case 282394:
 				spawn(282395, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 283000:
 			case 283001:
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 217299:
 				spawn(217300, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 		}
 	}
@@ -132,7 +132,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 			case 702682:
 				TeleportService.teleportTo(player, npc.getWorldId(), npc.getInstanceId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				SkillEngine.getInstance().applyEffectDirectly(21806, npc, player);
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 702683:
 			case 702684:
@@ -142,18 +142,18 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 			case 702688:
 				TeleportService.teleportTo(player, npc.getWorldId(), npc.getInstanceId(), npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				SkillEngine.getInstance().applyEffectDirectly(21805, npc, player);
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 701151:
 				SkillEngine.getInstance().getSkill(npc, 19909, 60, npc).useNoAnimationSkill();
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 701152:
 				SkillEngine.getInstance().getSkill(npc, 19910, 60, npc).useNoAnimationSkill();
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 701097:
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 701100:
 				if (instance.getNpc(799543) == null)
@@ -172,17 +172,6 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 		}, time);
 	}
 
-	private void despawnNpc(Npc npc) {
-		if (npc != null)
-			npc.getController().delete();
-	}
-
-	private void deleteNpc(int npcId) {
-		Npc npc = getNpc(npcId);
-		if (npc != null && !npc.isDead())
-			npc.getController().delete();
-	}
-
 	private boolean isDeadNpc(int npcId) {
 		return (getNpc(npcId) == null || getNpc(npcId).isDead());
 	}
@@ -198,7 +187,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 		if (detected instanceof Player) {
 			if (detector.getNpcId() == 856056 && isXastaEventStarted.compareAndSet(false, true)) {
 				sp(236271, 521.33f, 499.49f, 179.946f, (byte) 27, 2000, "300620000_Xasta_Path");
-				despawnNpc(detector);
+				detector.getController().delete();
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDYUN_RASTA_SPAWN_01());
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDYUN_RASTA_SPAWN_02(), 2000);
 			}
@@ -215,7 +204,7 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 			Npc drakanBarricade = getNpc(856015);
 			if (drakanBarricade != null)
 				drakanBarricade.getController().die(npc);
-			despawnNpc(npc);
+			npc.getController().delete();
 		}
 	}
 
@@ -225,8 +214,8 @@ public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {
 			if (player.getRace() == Race.ELYOS) {
 				for (int npcId = 702677; npcId <= 702682; npcId++) {
 					Npc npc = getNpc(npcId);
-					despawnNpc(npc);
 					spawn(npcId + 6, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), npc.getSpawn().getStaticId());
+					npc.getController().delete();
 				}
 			}
 		}

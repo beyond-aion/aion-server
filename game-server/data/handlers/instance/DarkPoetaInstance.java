@@ -26,8 +26,7 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author Hilgert, xTz, Tiger, Ritsu
- * @reworked Estrayl 12.06.2017
+ * @author Hilgert, xTz, Tiger, Ritsu, Estrayl
  */
 @InstanceID(300040000)
 public class DarkPoetaInstance extends GeneralInstanceHandler {
@@ -79,11 +78,11 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 
 	private int getTime() {
 		int current = (int) (System.currentTimeMillis() - startTime);
-			return switch (instanceReward.getInstanceProgressionType()) {
-					case PREPARING -> 120000 - current;
-					case START_PROGRESS, END_PROGRESS -> 14400000 - current;
-					default -> 0;
-			};
+		return switch (instanceReward.getInstanceProgressionType()) {
+			case PREPARING -> 120000 - current;
+			case START_PROGRESS, END_PROGRESS -> 14400000 - current;
+			default -> 0;
+		};
 	}
 
 	private void sendPacket(Npc npc, int points) {
@@ -116,10 +115,7 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 	}
 
 	private void schedulePortalDespawn(Npc portal) {
-		ThreadPoolManager.getInstance().schedule(() -> {
-				if (portal != null)
-					portal.getController().delete();
-		}, 180000);
+		ThreadPoolManager.getInstance().schedule(() -> portal.getController().delete(), 180000);
 	}
 
 	private int calculatePointsReward(Npc npc) {

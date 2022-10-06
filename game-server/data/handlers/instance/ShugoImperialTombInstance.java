@@ -1,6 +1,5 @@
 package instance;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -32,11 +31,10 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300560000)
 public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 
+	private final AtomicInteger stage = new AtomicInteger();
+	private final AtomicInteger destroyedTowers = new AtomicInteger();
+	private final AtomicBoolean isCancelled = new AtomicBoolean();
 	private int skillId;
-	private AtomicInteger stage = new AtomicInteger();
-	private AtomicInteger destroyedTowers = new AtomicInteger();
-	private AtomicBoolean isCancelled = new AtomicBoolean();
-	private List<Npc> npcs = new ArrayList<>();
 	protected boolean isInstanceDestroyed = false;
 	private Future<?> cancelSpawnTask;
 	private Future<?> cancelMessageTask;
@@ -57,12 +55,6 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 		return null;
 	}
 
-	protected void despawnNpc(Npc npc) {
-		if (npc != null) {
-			npc.getController().delete();
-		}
-	}
-
 	private void cancelTask() {
 		if (cancelSpawnTask != null && !cancelSpawnTask.isCancelled()) {
 			cancelSpawnTask.cancel(true);
@@ -74,9 +66,6 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
-		if (npcs.contains(npc)) {
-			npcs.remove(npc);
-		}
 		switch (npc.getNpcId()) {
 			case 219508:
 			case 219509:
@@ -90,7 +79,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 			case 219527:
 			case 219528:
 			case 219529:
-				despawnNpc(npc);
+				npc.getController().delete();
 				break;
 			case 219514:
 				onChangeStageList(StageList.START_STAGE_1_PHASE_2);
@@ -110,7 +99,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 				break;
 			case 219531:
 				// Delete Imperial Tower
-				deleteNpcs(instance.getNpcs(831305));
+				deleteAliveNpcs(831305);
 				sp(831350, 451.58344f, 105.55769f, 212.20023f, (byte) 0);
 				sp(831116, 436.186f, 99.208008f, 212.20023f, (byte) 80);
 				spawnChest();
@@ -121,25 +110,18 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 			case 831130:
 			case 831304:
 			case 831305:
-				int towers = destroyedTowers.incrementAndGet();
-				if (towers == 3 && stage.get() == 1) {
-					sp(831306, 177.87117f, 233.5641f, 536.16974f, (byte) 80);
-					cancelTask();
-					isCancelled.set(true);
-					despawnNpcs();
-				}
-				if (towers == 3 && stage.get() == 2) {
-					sp(831195, 342.11075f, 426.13712f, 294.75793f, (byte) 80);
-					cancelTask();
-					isCancelled.set(true);
-					despawnNpcs();
-				}
-				if (towers == 3 && stage.get() == 3) {
-					deleteNpcs(instance.getNpcs(831305));
-					sp(831350, 451.58344f, 105.55769f, 212.20023f, (byte) 0);
-					sp(831307, 436.186f, 99.208008f, 212.20023f, (byte) 80);
-					spawnChest();
-					spawnExitPortal();
+				if (destroyedTowers.incrementAndGet() == 3 && stage.get() > 0) {
+					if (stage.get() == 1) {
+						sp(831306, 177.87117f, 233.5641f, 536.16974f, (byte) 80);
+					} else if (stage.get() == 2) {
+						sp(831195, 342.11075f, 426.13712f, 294.75793f, (byte) 80);
+					} else if (stage.get() == 3) {
+						deleteAliveNpcs(831305);
+						sp(831350, 451.58344f, 105.55769f, 212.20023f, (byte) 0);
+						sp(831307, 436.186f, 99.208008f, 212.20023f, (byte) 80);
+						spawnChest();
+						spawnExitPortal();
+					}
 					cancelTask();
 					isCancelled.set(true);
 					despawnNpcs();
@@ -149,41 +131,9 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 
 	}
 
-	private void deleteNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
-			if (npc != null && !npc.isDead()) {
-				npc.getController().delete();
-			}
-		}
-	}
-
 	private void despawnNpcs() {
-		deleteNpcs(instance.getNpcs(219543));
-		deleteNpcs(instance.getNpcs(219544));
-		deleteNpcs(instance.getNpcs(219505));
-		deleteNpcs(instance.getNpcs(219630));
-		deleteNpcs(instance.getNpcs(219507));
-		deleteNpcs(instance.getNpcs(219508));
-		deleteNpcs(instance.getNpcs(219509));
-		deleteNpcs(instance.getNpcs(219505));
-		deleteNpcs(instance.getNpcs(219514));
-		deleteNpcs(instance.getNpcs(219543));
-		deleteNpcs(instance.getNpcs(219515));
-		deleteNpcs(instance.getNpcs(219516));
-		deleteNpcs(instance.getNpcs(219517));
-		deleteNpcs(instance.getNpcs(219519));
-		deleteNpcs(instance.getNpcs(219520));
-		deleteNpcs(instance.getNpcs(219521));
-		deleteNpcs(instance.getNpcs(219522));
-		deleteNpcs(instance.getNpcs(219523));
-		deleteNpcs(instance.getNpcs(219524));
-		deleteNpcs(instance.getNpcs(219525));
-		deleteNpcs(instance.getNpcs(219527));
-		deleteNpcs(instance.getNpcs(219528));
-		deleteNpcs(instance.getNpcs(219529));
-		deleteNpcs(instance.getNpcs(219530));
-		deleteNpcs(instance.getNpcs(219531));
-		deleteNpcs(instance.getNpcs(219461));
+		deleteAliveNpcs(219461, 219505, 219507, 219508, 219509, 219514, 219515, 219516, 219517, 219519, 219520, 219521, 219522, 219523, 219524, 219525,
+			219527, 219528, 219529, 219530, 219531, 219543, 219544, 219630);
 	}
 
 	@Override
@@ -311,20 +261,9 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 				sp(219505, 199.23898f, 280.70059f, 550.49426f, (byte) 0);
 				sp(219505, 217.23492f, 266.69803f, 550.49426f, (byte) 0);
 				sp(219544, 210.49338f, 275.42099f, 550.49426f, (byte) 0);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE04());
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								deleteNpcs(instance.getNpcs(219544));
-								deleteNpcs(instance.getNpcs(219505));
-							}
-						}, 5000);
-					}
+				ThreadPoolManager.getInstance().schedule(() -> {
+					sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE04());
+					ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(219544, 219505), 5000);
 				}, 5000);
 				// Kobolds wave 1
 				sp(219508, 204.39177f, 288.3569f, 550.68805f, (byte) 0, 10000, "3005600001", false);
@@ -601,20 +540,9 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 				sp(219544, 316.4301f, 431.30615f, 294.58875f, (byte) 0);
 				sp(219505, 319.37946f, 438.7644f, 294.58875f, (byte) 0);
 				sp(219505, 316.30917f, 422.88278f, 294.58875f, (byte) 0);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE04());
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								deleteNpcs(instance.getNpcs(219544));
-								deleteNpcs(instance.getNpcs(219505));
-							}
-						}, 5000);
-					}
+				ThreadPoolManager.getInstance().schedule(() -> {
+					sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE04());
+					ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(219544, 219505), 5000);
 				}, 5000);
 
 				// Wave 1
@@ -832,13 +760,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 				sp(219524, 389.08893f, 107.85297f, 222.41093f, (byte) 0, 20000, "3005600065", false);
 
 				// Bonus spawn wave 1
-				cancelMessageTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						startBonusStage3();
-					}
-				}, 35000);
+				cancelMessageTask = ThreadPoolManager.getInstance().schedule(this::startBonusStage3, 35000);
 
 				// Wave 5
 				// side 5
@@ -905,21 +827,9 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 				sp(219543, 425.69678f, 85.350716f, 214.338f, (byte) 0);
 				sp(219544, 418.70923f, 100.76572f, 214.33798f, (byte) 0);
 				sp(219544, 421.16943f, 92.78562f, 214.33856f, (byte) 0);
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE10());
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								deleteNpcs(instance.getNpcs(219543));
-								deleteNpcs(instance.getNpcs(219544));
-								deleteNpcs(instance.getNpcs(219507));
-							}
-						}, 5000);
-					}
+				ThreadPoolManager.getInstance().schedule(() -> {
+					sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE10());
+					ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(219543, 219544, 219507), 5000);
 				}, 5000);
 
 				// Wave 1
@@ -1015,20 +925,9 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 		sp(219505, 217.23492f, 266.69803f, 550.49426f, (byte) 0);
 		sp(219543, 210.49338f, 275.42099f, 550.49426f, (byte) 0);
 		sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE());
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE02());
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						deleteNpcs(instance.getNpcs(219543));
-						deleteNpcs(instance.getNpcs(219505));
-					}
-				}, 5000);
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE02());
+			ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(219543, 219505), 5000);
 		}, 5000);
 	}
 
@@ -1037,20 +936,9 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 		sp(219507, 418.70923f, 100.76572f, 214.33798f, (byte) 0);
 		sp(219544, 421.16943f, 92.78562f, 214.33856f, (byte) 0);
 		sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE());
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE02());
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						deleteNpcs(instance.getNpcs(219507));
-						deleteNpcs(instance.getNpcs(219544));
-					}
-				}, 5000);
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			sendMsg(SM_SYSTEM_MESSAGE.STR_IDEVENT01_PHASE02());
+			ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(219507, 219544), 5000);
 		}, 5000);
 	}
 
@@ -1065,14 +953,7 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 		sp(219630, 319.10046f, 435.9833f, 294.58875f, (byte) 0);
 		sp(219630, 323.14096f, 426.51614f, 294.58875f, (byte) 0);
 		sp(219630, 322.4489f, 434.38107f, 294.58875f, (byte) 0);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				deleteNpcs(instance.getNpcs(219543));
-				deleteNpcs(instance.getNpcs(219630));
-			}
-		}, 5000);
+		ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(219543, 219630), 5000);
 	}
 
 	private void spawnExitPortal() {
@@ -1267,30 +1148,24 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 
 	private void sp(final int npcId, final float x, final float y, final float z, final byte h, final int time, final String walkerId,
 		final boolean isRun) {
-		cancelSpawnTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isInstanceDestroyed && isCancelled.get() == false) {
-					Npc npc = (Npc) spawn(npcId, x, y, z, h);
-					npcs.add(npc);
-					npc.getSpawn().setWalkerId(walkerId);
-					WalkManager.startWalking((NpcAI) npc.getAi());
-					if (isRun) {
-						npc.setState(CreatureState.ACTIVE, true);
-					} else {
-						npc.setState(CreatureState.WALK_MODE);
-					}
-					PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
+		cancelSpawnTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isInstanceDestroyed && !isCancelled.get()) {
+				Npc npc = (Npc) spawn(npcId, x, y, z, h);
+				npc.getSpawn().setWalkerId(walkerId);
+				WalkManager.startWalking((NpcAI) npc.getAi());
+				if (isRun) {
+					npc.setState(CreatureState.ACTIVE, true);
+				} else {
+					npc.setState(CreatureState.WALK_MODE);
 				}
+				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
 			}
 		}, time);
 	}
 
 	private void sp(int npcId, float x, float y, float z, byte h) {
 		if (!isInstanceDestroyed) {
-			Npc npc = (Npc) spawn(npcId, x, y, z, h);
-			npcs.add(npc);
+			spawn(npcId, x, y, z, h);
 		}
 	}
 

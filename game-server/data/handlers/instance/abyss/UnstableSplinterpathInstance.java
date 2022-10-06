@@ -1,7 +1,5 @@
 package instance.abyss;
 
-import java.util.List;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
@@ -70,7 +68,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				if (ebonsoul != null && !ebonsoul.isDead()) {
 					if (PositionUtil.isInRange(npc, ebonsoul, 5)) {
 						ebonsoul.getEffectController().removeEffect(19159);
-						deleteNpcs(instance.getNpcs(281907));
+						deleteAliveNpcs(281907);
 						break;
 					}
 				}
@@ -81,7 +79,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				if (rukril != null && !rukril.isDead()) {
 					if (PositionUtil.isInRange(npc, rukril, 5)) {
 						rukril.getEffectController().removeEffect(19266);
-						deleteNpcs(instance.getNpcs(281908));
+						deleteAliveNpcs(281908);
 						break;
 					}
 				}
@@ -91,7 +89,7 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 			case 219555: // ex 219943 strengthened Yamennes Blindsight
 				spawnYamennesGenesisTreasureBoxes();
 				spawnYamennesAbyssalTreasureBox(npcId == 219563 ? 701579 : 701580);
-				deleteNpcs(instance.getNpcs(219586)); // Ex 219974
+				deleteAliveNpcs(219586); // Ex 219974
 				spawn(730317, 328.476f, 762.585f, 197.479f, (byte) 90); // Exit
 				for (Player p : instance.getPlayersInside())
 					SkillEngine.getInstance().applyEffectDirectly(19283, p, p);
@@ -208,33 +206,21 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 		spawn(npcId, 330.891f, 733.2943f, 197.6404f, (byte) 113);
 	}
 
-	private void deleteNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
-			if (npc != null) {
-				npc.getController().delete();
-			}
-		}
-	}
-
 	private void removeSummoned() {
-		Npc gate1 = getNpc(219567);
-		Npc gate2 = getNpc(219579);
-		Npc gate3 = getNpc(219580);
-		if ((gate1 == null || gate1.isDead()) && (gate2 == null || gate2.isDead()) && (gate3 == null || gate3.isDead())) {
-			deleteNpcs(instance.getNpcs(219565));// Summoned Orkanimum
-			deleteNpcs(instance.getNpcs(219566));// Summoned Lapilima
+		if (instance.getNpcs(219567, 219579, 219580).stream().allMatch(Creature::isDead)) {
+			deleteAliveNpcs(219565, 219566); // Summoned Unstable Orkanimum, Summoned Unstable Lapilima
 		}
 	}
 
 	private void onFragmentKill() {
-			switch (destroyedFragments) {
-					case 1 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_01());
-					case 2 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_02());
-					case 3 -> {
-							deleteNpcs(instance.getNpcs(701589));
-							spawn(700957, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79);
-							sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_03());
-					}
+		switch (destroyedFragments) {
+			case 1 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_01());
+			case 2 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_02());
+			case 3 -> {
+				deleteAliveNpcs(701589);
+				spawn(700957, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79);
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_03());
 			}
+		}
 	}
 }

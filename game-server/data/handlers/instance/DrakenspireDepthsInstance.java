@@ -1,6 +1,5 @@
 package instance;
 
-import java.util.Objects;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
@@ -161,7 +160,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 			case 236231: // Exhausted Orissan
 			case 236234:
 				onOrissanComplete();
-				deleteNpcsByIds(855607, 855608, 855699, 855700);
+				deleteAliveNpcs(855607, 855608, 855699, 855700);
 				break;
 			case 236239: // Wave Commanders
 			case 236240:
@@ -246,13 +245,13 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 			spawn(236227, 531.0885f, 212.43806f, 1683.4116f, (byte) 60);
 		if (getNpc(855709) != null)
 			spawn(236228, 530.8584f, 151.8681f, 1683.4116f, (byte) 60);
-		deleteNpcsByIds(855708, 855709);
+		deleteAliveNpcs(855708, 855709);
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_RESSURECT_03());
 	}
 
 	private void onTwinsComplete() {
 		cancelTasks(currentEventTask, additionalEventTask);
-		deleteNpcsByIds(855708, 855709);
+		deleteAliveNpcs(855708, 855709);
 
 		ThreadPoolManager.getInstance().schedule(() -> {
 			sp(race.get() == Race.ELYOS ? 209690 : 209755, 543.35f, 149.81f, 1681.82f, (byte) 0, "301390000_NPCPathFunction_Npc_Path03", 4000);
@@ -275,20 +274,10 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 
 	private void onTwinsFail() {
 		if (difficulty.compareAndSet(5, 3)) {
-			getAndDeleteNpcIfPossible(236227); // Lava Protector
-			getAndDeleteNpcIfPossible(236228); // Heatvent Protector
-			getAndDeleteNpcIfPossible(855708);
-			getAndDeleteNpcIfPossible(855709);
-
+			deleteAliveNpcs(236227, 236228, 855708, 855709);
 			spawn(236225, 531.0885f, 212.4381f, 1683.412f, (byte) 60); // Fountless Lava Protector
 			spawn(236226, 530.8584f, 151.8681f, 1683.412f, (byte) 60); // Fountless Heatvent Protector
 		}
-	}
-
-	private void getAndDeleteNpcIfPossible(int npcId) {
-		Npc npc = instance.getNpc(npcId);
-		if (npc != null)
-			npc.getController().delete();
 	}
 
 	/**
@@ -360,7 +349,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 			sp(race.get() == Race.ELYOS ? 209722 : 209787, 633.95f, 847.58f, 1599.87f, (byte) 30, "301390000_NPCPathFunction_Npc_Path15", 2000);
 			sp(race.get() == Race.ELYOS ? 209722 : 209787, 633.95f, 847.58f, 1599.87f, (byte) 30, "301390000_NPCPathFunction_Npc_Path16", 2000);
 			ThreadPoolManager.getInstance().schedule(() -> {
-				deleteNpcsByIds(race.get() == Race.ELYOS ? 209720 : 209785);
+				deleteAliveNpcs(race.get() == Race.ELYOS ? 209720 : 209785);
 				spawn(race.get() == Race.ELYOS ? 209723 : 209788, 636.09f, 879.98f, 1600.82f, (byte) 33); // Main Npc
 				spawn(race.get() == Race.ELYOS ? 702719 : 702720, 635.68f, 883.03f, 1603.91f, (byte) 29); // Siege Weapon
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_01(), 3000);
@@ -429,7 +418,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 
 	private void onWaveEventComplete(boolean isSuccessful) {
 		cancelTasks(currentEventTask, additionalEventTask);
-		deleteNpcsByIds(236204, 236205, 236206, 236216, 236217, 236218, 236219, 236220, 236239, 236240, 236241, 236242, 236243, 731581);
+		deleteAliveNpcs(236204, 236205, 236206, 236216, 236217, 236218, 236219, 236220, 236239, 236240, 236241, 236242, 236243, 731581);
 		if (isSuccessful) {
 			SkillEngine.getInstance().getSkill(getNpc(race.get() == Race.ELYOS ? 702719 : 702720), 20838, 1, getNpc(731580)).useSkill();
 			switch (waveSurvivors.get()) {
@@ -448,7 +437,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 			 * }
 			 */
 		} else {
-			deleteNpcsByIds(702719, 702720);
+			deleteAliveNpcs(702719, 702720);
 			// TODO: find sys msg for fail
 		}
 
@@ -508,10 +497,6 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 	public boolean onDie(final Player player, Creature lastAttacker) {
 		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
 		return true;
-	}
-
-	private void deleteNpcsByIds(int... ids) {
-		instance.getNpcs(ids).stream().filter(Objects::nonNull).forEach(n -> n.getController().delete());
 	}
 
 	private synchronized void setCurrentEventTask(Future<?> task) {

@@ -103,6 +103,10 @@ public class GeneralInstanceHandler implements InstanceHandler {
 		return instance.getNpc(npcId);
 	}
 
+	protected void deleteAliveNpcs(int... npcIds) {
+		instance.getNpcs(npcIds).forEach(n -> n.getController().deleteIfAliveOrCancelRespawn());
+	}
+
 	/**
 	 * Sends a message to all players in this instance.
 	 */

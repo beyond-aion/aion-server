@@ -30,9 +30,9 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(301200000)
 public class NightmareCircus extends GeneralInstanceHandler {
 
+	private final Future<?>[] despawnTasks = new Future<?>[2];
+	private final AtomicBoolean moviePlayed = new AtomicBoolean();
 	private boolean isInstanceDestroyed;
-	private Future<?>[] despawnTasks = new Future<?>[2];
-	private AtomicBoolean moviePlayed = new AtomicBoolean();
 
 	public NightmareCircus(WorldMapInstance instance) {
 		super(instance);
@@ -61,7 +61,7 @@ public class NightmareCircus extends GeneralInstanceHandler {
 		if (movieId == 983) {
 			if (moviePlayed.compareAndSet(false, true)) {
 				sendMsg(831747, 1501114);
-				ThreadPoolManager.getInstance().schedule(() -> despawnNpcs(831747), 3000);
+				ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(831747), 3000);
 				spawnPhase();
 				startDespawnBossTask();
 			}
@@ -285,22 +285,8 @@ public class NightmareCircus extends GeneralInstanceHandler {
 	}
 
 	private void startDespawnBossTask() {
-		despawnTasks[0] = ThreadPoolManager.getInstance().schedule(() -> {
-			Npc npc = getNpc(233459);
-			if (npc != null)
-				npc.getController().deleteIfAliveOrCancelRespawn();
-		}, 210000);
-		despawnTasks[1] = ThreadPoolManager.getInstance().schedule(() -> {
-			Npc npc = getNpc(233453);
-			if (npc != null)
-				npc.getController().deleteIfAliveOrCancelRespawn();
-		}, 310000);
-	}
-
-	private void despawnNpcs(int... npcIds) {
-		for (Npc npc : instance.getNpcs(npcIds)) {
-			npc.getController().delete();
-		}
+		despawnTasks[0] = ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(233459), 210000);
+		despawnTasks[1] = ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(233453), 310000);
 	}
 
 	@Override
@@ -314,7 +300,7 @@ public class NightmareCircus extends GeneralInstanceHandler {
 				break;
 			case 233467:
 				instance.forEachPlayer(p -> PacketSendUtility.sendPacket(p, new SM_PLAY_MOVIE(0, 984)));
-				despawnNpcs(831740, 831627, 831741, 831718, 831551, 831552, 831553);
+				deleteAliveNpcs(831740, 831627, 831741, 831718, 831551, 831552, 831553);
 				// Open Cage
 				spawn(831598, 522.3982f, 564.6901f, 199.0337f, (byte) 60, 14);
 				// Yume

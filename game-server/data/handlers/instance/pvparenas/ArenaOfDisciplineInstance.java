@@ -4,7 +4,6 @@ import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
-import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -22,22 +21,21 @@ public class ArenaOfDisciplineInstance extends DisciplineTrainingGroundsInstance
 	protected void reward() {
 		int totalPoints = instanceReward.getTotalPoints();
 		int size = instanceReward.getPlayerRewards().size() == 1 ? (instanceReward.getRound() == 1 ? 1 : 2) : 2; // enemy left before start: low reward,
-																																																								// else full
+																																																							// else full
 		// 100 * (rate * size) * (playerScore / playersScore)
 		float totalAP = (3.292f * size) * 100; // to do config
 		float totalCrucible = (1.964f * size) * 100; // to do config
 		float totalCourage = (0.174f * size) * 100; // to do config
-		for (InstancePlayerReward playerReward : instanceReward.getPlayerRewards()) {
-			PvPArenaPlayerReward reward = (PvPArenaPlayerReward) playerReward;
-			if (!reward.isRewarded()) {
+		for (PvPArenaPlayerReward playerReward : instanceReward.getPlayerRewards()) {
+			if (!playerReward.isRewarded()) {
 				Player player = instance.getPlayer(playerReward.getOwnerId());
 				if (player == null) // player left
 					continue;
 				float playerRate = Rates.get(player, RatesConfig.PVP_ARENA_DISCIPLINE_REWARD_RATES);
-				int score = reward.getScorePoints();
+				int score = playerReward.getScorePoints();
 				float scoreRate = ((float) score / (float) totalPoints);
 				int rank = instanceReward.getRank(score);
-				float percent = reward.getParticipation();
+				float percent = playerReward.getParticipation();
 				int basicAP = 200;
 				// to do other formula
 				int rankingAP = 431;
@@ -48,9 +46,9 @@ public class ArenaOfDisciplineInstance extends DisciplineTrainingGroundsInstance
 				basicAP *= percent;
 				rankingAP *= percent;
 				rankingAP *= playerRate;
-				reward.setBasicAP(basicAP);
-				reward.setRankingAP(rankingAP);
-				reward.setScoreAP(scoreAP);
+				playerReward.setBasicAP(basicAP);
+				playerReward.setRankingAP(rankingAP);
+				playerReward.setScoreAP(scoreAP);
 				int basicCrI = 195;
 				basicCrI *= percent;
 				// to do other formula
@@ -61,9 +59,9 @@ public class ArenaOfDisciplineInstance extends DisciplineTrainingGroundsInstance
 				rankingCrI *= percent;
 				rankingCrI *= playerRate;
 				int scoreCrI = (int) (totalCrucible * scoreRate);
-				reward.setBasicCrucible(basicCrI);
-				reward.setRankingCrucible(rankingCrI);
-				reward.setScoreCrucible(scoreCrI);
+				playerReward.setBasicCrucible(basicCrI);
+				playerReward.setRankingCrucible(rankingCrI);
+				playerReward.setScoreCrucible(scoreCrI);
 				int basicCoI = 0;
 				basicCoI *= percent;
 				// to do other formula
@@ -73,22 +71,22 @@ public class ArenaOfDisciplineInstance extends DisciplineTrainingGroundsInstance
 				}
 				rankingCoI *= percent;
 				int scoreCoI = (int) (totalCourage * scoreRate);
-				reward.setBasicCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, basicCoI));
-				reward.setRankingCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, rankingCoI));
-				reward.setScoreCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, scoreCoI));
-				if (instanceReward.canRewardOpportunityToken(reward)) {
-					reward.setOpportunity(4);
+				playerReward.setBasicCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, basicCoI));
+				playerReward.setRankingCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, rankingCoI));
+				playerReward.setScoreCourage((int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, scoreCoI));
+				if (instanceReward.canRewardOpportunityToken(playerReward)) {
+					playerReward.setOpportunity(4);
 				}
 				switch (rank) {
 					case 0:
-						reward.setRankingGP(40);
-						reward.setScoreGP(11);
-						reward.setBasicGP(0);
+						playerReward.setRankingGP(40);
+						playerReward.setScoreGP(11);
+						playerReward.setBasicGP(0);
 						break;
 					case 1:
-						reward.setRankingGP(13);
-						reward.setScoreGP(11);
-						reward.setBasicGP(0);
+						playerReward.setRankingGP(13);
+						playerReward.setScoreGP(11);
+						playerReward.setBasicGP(0);
 						break;
 				}
 			}

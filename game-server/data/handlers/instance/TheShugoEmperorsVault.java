@@ -1,13 +1,14 @@
 package instance;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -38,13 +39,14 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(301400000)
 public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 
-	private final Map<Integer, Integer> transformationCache = new ConcurrentHashMap<>(); // saves the applied transformation to avoid effect loss during sendlogs
+	private final Map<Integer, Integer> transformationCache = new ConcurrentHashMap<>(); // save transformations to avoid effect loss during sendlogs
 	private final AtomicBoolean started = new AtomicBoolean();
-	private final List<Integer> spawns = new ArrayList<>();
+	private final AtomicInteger killedShugoTurncoats = new AtomicInteger();
+	private final AtomicInteger stage = new AtomicInteger();
+	private final Set<Integer> spawns = ConcurrentHashMap.newKeySet();
 	private NormalScore instanceReward;
 	private Future<?> timer, failTimerTask;
 	private long startTime;
-	private volatile int amount, stage;
 	private boolean lastStage;
 
 	public TheShugoEmperorsVault(WorldMapInstance instance) {
@@ -89,14 +91,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	public void onStartEffect(Effect effect) {
 		if (effect != null) {
 			switch (effect.getSkillId()) {
-				case 21829:
-				case 21830:
-				case 21831:
-				case 21832:
-				case 21833:
-				case 21834:
-					transformationCache.putIfAbsent(effect.getEffected().getObjectId(), effect.getSkillId());
-					break;
+				case 21829, 21830, 21831, 21832, 21833, 21834 -> transformationCache.putIfAbsent(effect.getEffected().getObjectId(), effect.getSkillId());
 			}
 		}
 	}
@@ -261,8 +256,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 				break;
 			case 235641: // Shugo Turncoat
 				addPoints(npc, 660);
-				amount++;
-				if (amount >= 2) {
+				if (killedShugoTurncoats.incrementAndGet() >= 2) {
 					instance.setDoorState(428, true);
 					spawnRoom3();
 				}
@@ -297,19 +291,19 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 				break;
 			case 235640: // Captain Mirez
 				addPoints(npc, 12000);
-				stage++;
+				stage.incrementAndGet();
 				break;
 			case 235685: // Longknife Zodica
 				addPoints(npc, 14400);
-				stage++;
+				stage.incrementAndGet();
 				break;
 			case 235684: // Sorcerer Budyn
 				addPoints(npc, 16000);
-				stage++;
+				stage.incrementAndGet();
 				break;
 			case 235683: // Elite captain rupasha
 				addPoints(npc, 88000);
-				stage++;
+				stage.incrementAndGet();
 				break;
 			case 235647: // Grand Commander Gradi
 				addPoints(npc, 224000);
@@ -325,34 +319,29 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	}
 
 	private synchronized void checkStage(int points) {
-		switch (stage) {
+		switch (stage.get()) {
 			case 0:
-				if (points >= 50000 && !spawns.contains(235640)) {
+				if (points >= 50000 && spawns.add(235640)) {
 					spawnCaptainMirez();
-					spawns.add(235640);
 				}
 				break;
 			case 1:
-				if (points >= 82500 && !spawns.contains(235685)) {
+				if (points >= 82500 && spawns.add(235685)) {
 					spawnLongknifeZodica();
-					spawns.add(235685);
 				}
 				break;
 			case 2:
-				if (points >= 120000 && !spawns.contains(235684)) {
-					spawns.add(235684);
+				if (points >= 120000 && spawns.add(235684)) {
 					spawnSorcererBudyn();
 				}
 				break;
 			case 3:
-				if (points >= 162000 && !spawns.contains(235683)) {
-					spawns.add(235683);
+				if (points >= 162000 && spawns.add(235683)) {
 					spawnEliteCaptainRupasha();
 				}
 				break;
 			case 4:
-				if (points >= 275000 && !spawns.contains(235647)) {
-					spawns.add(235647);
+				if (points >= 275000 && spawns.add(235647)) {
 					spawnCommanderGradi();
 				}
 				break;

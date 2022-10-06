@@ -280,10 +280,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void startInstance() {
-		Npc npc = instance.getNpc(833284);
-		if (npc != null) {
-			npc.getController().delete();
-		}
+		deleteAliveNpcs(833284);
 		startStage1_1();
 	}
 

@@ -322,14 +322,10 @@ public class EngulfedOphidanBridgeInstance extends BasicPvpInstance {
 				return;
 			}
 			switch (npc.getSpawn().getStaticId()) {
-				case 164 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 172 : 173);
-				case 158 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 169 : 166);
-				case 162 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 171 : 170);
-				case 160 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
-				case 172, 173 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 172 : 173);
-				case 169, 166 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 169 : 166);
-				case 170, 171 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 171 : 170);
-				case 175, 174 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
+				case 158, 169, 166 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 169 : 166);
+				case 162, 170, 171 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 171 : 170);
+				case 164, 172, 173 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 172 : 173);
+				case 160, 175, 174 -> spawn(npcId, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading(), player.getRace() == Race.ELYOS ? 175 : 174);
 			}
 			updatePoints(player, player.getRace(), npc.getObjectTemplate().getL10n(), 5000);
 			npc.getController().delete();

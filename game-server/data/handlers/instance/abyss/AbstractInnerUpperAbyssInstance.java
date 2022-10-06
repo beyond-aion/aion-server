@@ -122,9 +122,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 		if (detector.getNpcId() == getTimerNpcId() && detected instanceof Player && isFlyringPassed.compareAndSet(false, true)) {
 			chestReductionTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 				if (failCounter.incrementAndGet() >= 11) {
-					Npc boss = getNpc(getBossId());
-					if (boss != null)
-						boss.getController().delete();
+					deleteAliveNpcs(getBossId());
 					if (chestReductionTask != null && !chestReductionTask.isCancelled())
 						chestReductionTask.cancel(true);
 				}
@@ -188,7 +186,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 	 */
 	protected void rewardStatueKill(int ap) {
 		int rewardAp = ap / instance.getPlayerCount();
-		instance.getPlayersInside().forEach(p -> AbyssPointsService.addAp(p, rewardAp));
+		instance.forEachPlayer(p -> AbyssPointsService.addAp(p, rewardAp));
 	}
 
 	@Override

@@ -48,16 +48,16 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onOpenDoor(int door) {
-			switch (door) {
-					case 101 -> spawn(219963, 212.068f, 510.02f, 153.23f, (byte) 115);
-					case 7 -> spawn(219963, 241.602f, 541.79f, 152.591f, (byte) 95);
-					case 11 -> spawn(219963, 317.654f, 545.801f, 148.8f, (byte) 80);
-					case 6 -> spawn(219964, 225.53f, 529.7f, 153.04f, (byte) 100);
-					case 10 -> spawn(219964, 295.04f, 547.48f, 148.73f, (byte) 90);
-					case 8 -> spawn(219965, 262.17f, 545.68f, 150.51f, (byte) 85);
-					case 12 -> spawn(219965, 336.94f, 532.89f, 148.472f, (byte) 75);
-					case 13 -> spawn(219969, 348.14f, 512.56f, 148.19f, (byte) 65);
-			}
+		switch (door) {
+			case 6 -> spawn(219964, 225.53f, 529.7f, 153.04f, (byte) 100);
+			case 7 -> spawn(219963, 241.602f, 541.79f, 152.591f, (byte) 95);
+			case 8 -> spawn(219965, 262.17f, 545.68f, 150.51f, (byte) 85);
+			case 10 -> spawn(219964, 295.04f, 547.48f, 148.73f, (byte) 90);
+			case 11 -> spawn(219963, 317.654f, 545.801f, 148.8f, (byte) 80);
+			case 12 -> spawn(219965, 336.94f, 532.89f, 148.472f, (byte) 75);
+			case 13 -> spawn(219969, 348.14f, 512.56f, 148.19f, (byte) 65);
+			case 101 -> spawn(219963, 212.068f, 510.02f, 153.23f, (byte) 115);
+		}
 	}
 
 	@Override
@@ -85,10 +85,7 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_3()), 155000));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_4()), 175000));
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-			instance.forEachNpc(npc -> {
-				if (npc.getNpcId() == 219958 || npc.getNpcId() == 219959 || npc.getNpcId() == 702700 || npc.getNpcId() == 702701)
-					npc.getController().delete();
-			});
+			deleteAliveNpcs(219958, 219959, 702700, 702701);
 			spawn(702715, 169.366f, 208.93f, 188.02f, (byte) 0);
 			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_5());
 			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5Re_solo_game1_6());

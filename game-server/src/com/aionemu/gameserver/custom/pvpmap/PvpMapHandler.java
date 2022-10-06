@@ -57,13 +57,14 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private static final int SHUGO_SPAWN_RATE = 30;
-	private static final int[] RANDOM_BOSS_NPC_IDS = {231196, 233740, 235759, 235765, 235763, 235767, 235771, 235619, 235620, 235621, 855822,
-			855843, 230857, 230858, 277224, 855776, 219933, 219934, 235975, 855263, 231304};
+	private static final int[] RANDOM_BOSS_NPC_IDS = { 231196, 233740, 235759, 235765, 235763, 235767, 235771, 235619, 235620, 235621, 855822, 855843,
+		230857, 230858, 277224, 855776, 219933, 219934, 235975, 855263, 231304 };
 	private final Map<Integer, WorldPosition> origins = new HashMap<>();
 	private final Map<Integer, Long> joinOrLeaveTime = new HashMap<>();
 	private final Map<Race, List<WorldPosition>> respawnLocations = new HashMap<>();
-	private final List<WorldPosition> treasurePositions = new ArrayList<>(), supplyPositions = new ArrayList<>(),
-		keymasterPositions = new ArrayList<>();
+	private final List<WorldPosition> treasurePositions = new ArrayList<>();
+	private final List<WorldPosition> supplyPositions = new ArrayList<>();
+	private final List<WorldPosition> keymasterPositions = new ArrayList<>();
 	private final AtomicBoolean canJoin = new AtomicBoolean();
 	private List<Future<?>> tasks = new ArrayList<>();
 	private Future<?> supplyTask, despawnTask;
@@ -99,10 +100,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private void spawnShugo(Player player) {
 		if (canJoin.get() && Rnd.chance() < SHUGO_SPAWN_RATE) {
-			Npc oldShugo = instance.getNpc(833543);
-			if (oldShugo != null) {
-				oldShugo.getController().delete();
-			}
+			deleteAliveNpcs(833543);
 			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(player.getHeading()));
 			float x = player.getX() + (float) (Math.cos(radian) * 2);
 			float y = player.getY() + (float) (Math.sin(radian) * 2);
@@ -138,7 +136,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private void spawnKeymasters() {
 		addKeymasterPositions();
-		int npcIds[] = { 219218, 219218, 219218, 219191, 219191, 219192, 219192, 219193 };
+		int[] npcIds = { 219218, 219218, 219218, 219191, 219191, 219192, 219192, 219193 };
 		for (int id : npcIds) {
 			spawnKeymasterOrTreasureChest(id, true);
 		}
@@ -162,7 +160,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private void spawnTreasureChests() {
 		addTreasurePositions();
-		int npcIds[] = { 701388, 701388, 701388, 701388, 701388, 701389, 701389, 701389, 701390, 701390 };
+		int[] npcIds = { 701388, 701388, 701388, 701388, 701388, 701389, 701389, 701389, 701390, 701390 };
 		for (int id : npcIds) {
 			spawnKeymasterOrTreasureChest(id, false);
 		}
@@ -171,7 +169,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	private void startRandomBossTask() {
 		CronService.getInstance().schedule(() -> {
 			int bonus = World.getInstance().getAllPlayers().size() * 2;
-			bonus = bonus > 30 ? 30 : bonus;
+			bonus = Math.min(bonus, 30);
 			if (Rnd.chance() < (CustomConfig.PVP_MAP_RANDOM_BOSS_BASE_RATE + bonus)) {
 				int npcId = Rnd.get(RANDOM_BOSS_NPC_IDS);
 				NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
@@ -182,29 +180,24 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 				npc.setEffectController(new EffectController(npc));
 				SpawnEngine.bringIntoWorld(npc, mapId, instance.getInstanceId(), spawn.getX(), spawn.getY(), spawn.getZ(), spawn.getHeading());
 				currentRandomBossObjId = npc.getObjectId();
-				scheduleRandomBossDespawn(npc);
+				scheduleRandomBossDespawn();
 				World.getInstance().forEachPlayer(PvpMapService.getInstance()::notifyBossSpawn);
 			}
 		}, CustomConfig.PVP_MAP_RANDOM_BOSS_SCHEDULE);
 	}
 
-	private void scheduleRandomBossDespawn(final Npc npc) {
+	private void scheduleRandomBossDespawn() {
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-			if (npc != null && !npc.getLifeStats().isAboutToDie() && !npc.isDead()) {
-				npc.getController().delete();
-				if (npc.getObjectId() == currentRandomBossObjId)
-					currentRandomBossObjId = 0;
+			Npc boss = (Npc) instance.getObject(currentRandomBossObjId);
+			if (boss != null && !boss.getLifeStats().isAboutToDie() && !boss.isDead()) {
+				boss.getController().delete();
+				currentRandomBossObjId = 0;
 			}
 		}, 50, TimeUnit.MINUTES));
 	}
 
 	private void scheduleSupplyDespawn() {
-		despawnTask = ThreadPoolManager.getInstance().schedule(() -> {
-			instance.forEachNpc(npc -> {
-				if ((npc.getNpcId() == 831980 || npc.getNpcId() == 233192) && !npc.isDead())
-					npc.getController().delete();
-			});
-		}, 120000);
+		despawnTask = ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(831980, 233192), 120000);
 	}
 
 	public void join(Player p) {
@@ -857,38 +850,23 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private int getZoneNameL10nId(String zoneName) {
-		switch (zoneName) {
-			case "ANCILLARY_SENTRY_POST_301220000":
-				return 404085;
-			case "ARTILLERY_COMMAND_CENTER_301220000":
-				return 404088;
-			case "ASSAULT_COMMAND_CENTER_301220000":
-				return 404090;
-			case "AXIAL_SENTRY_POST_301220000":
-				return 404084;
-			case "CENTRAL_SUPPLY_BASE_301220000":
-				return 404086;
-			case "HEADQUARTERS_301220000":
-				return 404092;
-			case "HEADQUARTERS_ANNEX_301220000":
-				return 404093;
-			case "HOLY_GROUND_OF_RESURRECTION_301220000":
-				return 404094;
-			case "MILITARY_SUPPLY_BASE_2_301220000":
-				return 404089;
-			case "PASHID_ARMY_ENCAMPMENT_301220000":
-				return 404083;
-			case "PERIPHERAL_SUPPLY_BASE_301220000":
-				return 404087;
-			case "SIEGE_BASE_301220000":
-				return 404091;
-			case "THE_ETERNAL_BASTION_301220000":
-				return 404082;
-			case "UNDERGROUND_WATERWAY_1_301220000":
-				return 404095;
-			default:
-				return 0;
-		}
+		return switch (zoneName) {
+			case "ANCILLARY_SENTRY_POST_301220000" -> 404085;
+			case "ARTILLERY_COMMAND_CENTER_301220000" -> 404088;
+			case "ASSAULT_COMMAND_CENTER_301220000" -> 404090;
+			case "AXIAL_SENTRY_POST_301220000" -> 404084;
+			case "CENTRAL_SUPPLY_BASE_301220000" -> 404086;
+			case "HEADQUARTERS_301220000" -> 404092;
+			case "HEADQUARTERS_ANNEX_301220000" -> 404093;
+			case "HOLY_GROUND_OF_RESURRECTION_301220000" -> 404094;
+			case "MILITARY_SUPPLY_BASE_2_301220000" -> 404089;
+			case "PASHID_ARMY_ENCAMPMENT_301220000" -> 404083;
+			case "PERIPHERAL_SUPPLY_BASE_301220000" -> 404087;
+			case "SIEGE_BASE_301220000" -> 404091;
+			case "THE_ETERNAL_BASTION_301220000" -> 404082;
+			case "UNDERGROUND_WATERWAY_1_301220000" -> 404095;
+			default -> 0;
+		};
 	}
 
 	@Override

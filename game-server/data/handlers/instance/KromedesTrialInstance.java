@@ -27,16 +27,15 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
- * @author xTz, Gigi
- * @reworked Pad
+ * @author xTz, Gigi, Pad
  */
 @InstanceID(300230000)
 public class KromedesTrialInstance extends GeneralInstanceHandler {
 
+	private final AtomicBoolean isBossSpawned = new AtomicBoolean();
+	private final List<Integer> sentMovies = new ArrayList<>();
 	private int skillId;
-	private boolean isPlayerInManor = false;
-	private AtomicBoolean isBossSpawned = new AtomicBoolean();
-	private List<Integer> sentMovies = new ArrayList<>();
+	private boolean isPlayerInManor;
 
 	public KromedesTrialInstance(WorldMapInstance instance) {
 		super(instance);
@@ -145,18 +144,14 @@ public class KromedesTrialInstance extends GeneralInstanceHandler {
 	}
 
 	private void scheduleRespawn(Npc npc) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				Npc kaliga = instance.getNpc(217006);
-				if (kaliga != null && !kaliga.isDead()) {
-					SpawnTemplate npcST = npc.getSpawn();
-					SpawnTemplate newST = SpawnEngine.newSingleTimeSpawn(npcST.getWorldId(), npc.getNpcId(), npcST.getX(), npcST.getY(), npcST.getZ(),
-						npcST.getHeading());
-					newST.setStaticId(npcST.getStaticId());
-					SpawnEngine.spawnObject(newST, instance.getInstanceId());
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			Npc kaliga = instance.getNpc(217006);
+			if (kaliga != null && !kaliga.isDead()) {
+				SpawnTemplate npcST = npc.getSpawn();
+				SpawnTemplate newST = SpawnEngine.newSingleTimeSpawn(npcST.getWorldId(), npc.getNpcId(), npcST.getX(), npcST.getY(), npcST.getZ(),
+					npcST.getHeading());
+				newST.setStaticId(npcST.getStaticId());
+				SpawnEngine.spawnObject(newST, instance.getInstanceId());
 			}
 		}, 10000);
 	}

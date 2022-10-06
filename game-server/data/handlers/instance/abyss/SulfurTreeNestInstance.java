@@ -8,7 +8,6 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.flyring.FlyRing;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.utils3d.Point3D;
@@ -23,7 +22,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300060000)
 public class SulfurTreeNestInstance extends GeneralInstanceHandler {
 
-	private AtomicLong startTime = new AtomicLong();
+	private final AtomicLong startTime = new AtomicLong();
 	private Race instanceRace;
 
 	public SulfurTreeNestInstance(WorldMapInstance instance) {
@@ -42,7 +41,7 @@ public class SulfurTreeNestInstance extends GeneralInstanceHandler {
 			if (startTime.compareAndSet(0, System.currentTimeMillis())) {
 				PacketSendUtility.sendPacket(player, STR_MSG_INSTANCE_START_IDABRE());
 				PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(0, 900));
-				ThreadPoolManager.getInstance().schedule(() -> despawnNpcs(214804, 700463, 700462, 700464, 701485, 701480), 900000);
+				ThreadPoolManager.getInstance().schedule(() -> deleteAliveNpcs(214804, 700463, 700462, 700464, 701485, 701480), 900000);
 			}
 		}
 		return false;
@@ -62,12 +61,6 @@ public class SulfurTreeNestInstance extends GeneralInstanceHandler {
 			instanceRace = player.getRace();
 			spawnGoldChest();
 		}
-
-	}
-
-	private void despawnNpcs(int... npcIds) {
-		for (Npc npc : instance.getNpcs(npcIds))
-			npc.getController().delete();
 	}
 
 	private void spawnGoldChest() {

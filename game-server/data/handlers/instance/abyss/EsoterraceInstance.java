@@ -44,7 +44,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 				break;
 			case 282291: // Surkana Feeder enables "hardmode"
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_08());
-				getNpc(217204).getController().delete();
+				deleteAliveNpcs(217204);
 				spawn(217205, 1315.43f, 1171.04f, 51.8054f, (byte) 66);
 				break;
 			case 217289:
@@ -83,13 +83,10 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 				PacketSendUtility.broadcastMessage(keeningSirokin, 342359);
 				keeningSirokin.getController().delete();
 				break;
-			case 217284:
-			case 217283:
 			case 217282:
-				Npc npc1 = getNpc(217284);
-				Npc npc2 = getNpc(217283);
-				Npc npc3 = getNpc(217282);
-				if (isDead(npc1) && isDead(npc2) && isDead(npc3)) {
+			case 217283:
+			case 217284:
+				if (instance.getNpcs(217282, 217283, 217284).stream().allMatch(Creature::isDead)) {
 					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDF4Re_Drana_03());
 					instance.setDoorState(111, true);
 				}
@@ -110,10 +107,6 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 	public boolean onDie(final Player player, Creature lastAttacker) {
 		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
 		return true;
-	}
-
-	private boolean isDead(Npc npc) {
-		return (npc == null || npc.isDead());
 	}
 
 	@Override
