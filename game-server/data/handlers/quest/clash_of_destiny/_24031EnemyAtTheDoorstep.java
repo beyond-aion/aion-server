@@ -2,9 +2,7 @@ package quest.clash_of_destiny;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -114,24 +112,20 @@ public class _24031EnemyAtTheDoorstep extends AbstractQuestHandler {
 							return closeDialogWindow(env);
 					}
 					break;
-				case 730888:// Teleporter Device
+				case 730888: // Teleporter Device
 					switch (dialogActionId) {
 						case QUEST_SELECT:
 							// TODO:play movie find movie ID
-							Npc npc = (Npc) env.getVisibleObject();
-							if (targetId == 730888)
-								NpcActions.delete(npc);
+							env.getVisibleObject().getController().delete();
 							qs.setQuestVar(11);
 							updateQuestStatus(env);
-							spawn(730898, player, (float) 262.9, (float) 224.5, (float) 212.2, (byte) 95);// Broken Teleporter Device
+							spawn(730898, player, (float) 262.9, (float) 224.5, (float) 212.2, (byte) 95); // Broken Teleporter Device
 					}
 					break;
-				case 730898:// Broken Teleporter
+				case 730898: // Broken Teleporter
 					switch (dialogActionId) {
 						case QUEST_SELECT:
-							Npc npc = (Npc) env.getVisibleObject();
-							if (targetId == 730898)
-								NpcActions.delete(npc);
+							env.getVisibleObject().getController().delete();
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 					}
@@ -198,10 +192,8 @@ public class _24031EnemyAtTheDoorstep extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			Npc npc = (Npc) env.getVisibleObject();
-			int targetId = env.getTargetId();
-			if (targetId == 233879)
-				NpcActions.delete(npc);
+			if (env.getTargetId() == 233879)
+				env.getVisibleObject().getController().delete();
 			return defaultOnKillEvent(env, 233879, 9, 10);
 		}
 		return false;

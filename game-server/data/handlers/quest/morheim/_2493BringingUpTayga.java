@@ -2,8 +2,6 @@ package quest.morheim;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.actions.NpcActions;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -51,8 +49,7 @@ public class _2493BringingUpTayga extends AbstractQuestHandler {
 						return sendQuestDialog(env, 1011);
 					}
 				} else if (dialogActionId == SET_SUCCEED) {
-					final Npc npc = (Npc) env.getVisibleObject();
-					NpcActions.delete(npc, true);
+					env.getVisibleObject().getController().deleteAndScheduleRespawn();
 					changeQuestStep(env, 0, 0, true); // reward
 					return closeDialogWindow(env);
 				}

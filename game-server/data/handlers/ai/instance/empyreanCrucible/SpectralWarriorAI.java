@@ -3,7 +3,6 @@ package ai.instance.empyreanCrucible;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.instance.StageType;
@@ -32,15 +31,7 @@ public class SpectralWarriorAI extends AggressiveNpcAI {
 	private void checkPercentage(int hpPercentage) {
 		if (hpPercentage <= 50 && isDone.compareAndSet(false, true)) {
 			getPosition().getWorldMapInstance().getInstanceHandler().onChangeStage(StageType.START_STAGE_6_ROUND_5);
-
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					resurrectAllies();
-				}
-
-			}, 2000);
+			ThreadPoolManager.getInstance().schedule(this::resurrectAllies, 2000);
 		}
 	}
 
@@ -52,11 +43,11 @@ public class SpectralWarriorAI extends AggressiveNpcAI {
 			switch (npc.getNpcId()) {
 				case 205413:
 					spawn(217576, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
-					NpcActions.delete(npc);
+					npc.getController().delete();
 					break;
 				case 205414:
 					spawn(217577, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
-					NpcActions.delete(npc);
+					npc.getController().delete();
 					break;
 			}
 		});

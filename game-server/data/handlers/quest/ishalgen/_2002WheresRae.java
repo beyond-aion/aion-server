@@ -3,7 +3,6 @@ package quest.ishalgen;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -153,7 +152,7 @@ public class _2002WheresRae extends AbstractQuestHandler {
 						Npc npc = (Npc) env.getVisibleObject();
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), 10));
 						spawnForFiveMinutes(203553, npc.getPosition());
-						NpcActions.delete(npc, true);
+						npc.getController().deleteAndScheduleRespawn();
 						return true;
 					}
 					break;

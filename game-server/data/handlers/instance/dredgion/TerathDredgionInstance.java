@@ -3,7 +3,6 @@ package instance.dredgion;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
@@ -55,7 +54,7 @@ public class TerathDredgionInstance extends DredgionInstance {
 		super.onEnterInstance(player);
 	}
 
-	private void onDieSurkan(Npc npc, Player mostPlayerDamage, int points) {
+	private void onDieSurkana(Npc npc, Player mostPlayerDamage, int points) {
 		Race race = mostPlayerDamage.getRace();
 		captureRoom(race, npc.getNpcId() + 14 - 701454);
 		for (Player player : instance.getPlayersInside()) {
@@ -67,7 +66,7 @@ public class TerathDredgionInstance extends DredgionInstance {
 		}
 		getPlayerReward(mostPlayerDamage).incrementCapturedZones();
 		updateScore(mostPlayerDamage, npc, points, false);
-		NpcActions.delete(npc);
+		npc.getController().delete();
 	}
 
 	@Override
@@ -80,37 +79,37 @@ public class TerathDredgionInstance extends DredgionInstance {
 		switch (npc.getNpcId()) {
 			case 701441:
 			case 701442:
-				onDieSurkan(npc, mostPlayerDamage, 400);
+				onDieSurkana(npc, mostPlayerDamage, 400);
 				return;
 			case 701443:
 			case 701451:
 			case 701452:
 			case 701453:
 			case 701454:
-				onDieSurkan(npc, mostPlayerDamage, 700);
+				onDieSurkana(npc, mostPlayerDamage, 700);
 				return;
 			case 701448:
 			case 701449:
-				onDieSurkan(npc, mostPlayerDamage, 800);
+				onDieSurkana(npc, mostPlayerDamage, 800);
 				return;
 			case 701450:
-				onDieSurkan(npc, mostPlayerDamage, 900);
+				onDieSurkana(npc, mostPlayerDamage, 900);
 				return;
 			case 701444:
 			case 701445:
-				onDieSurkan(npc, mostPlayerDamage, 1000);
+				onDieSurkana(npc, mostPlayerDamage, 1000);
 				return;
 			case 701446:
 			case 701447:
-				onDieSurkan(npc, mostPlayerDamage, 1100);
+				onDieSurkana(npc, mostPlayerDamage, 1100);
 				return;
 			case 730572:
 				spawn(730566, 446.729f, 493.224f, 395.938f, (byte) 0, 12);
-				NpcActions.delete(npc);
+				npc.getController().delete();
 				return;
 			case 730573:
 				spawn(730567, 520.404f, 493.261f, 395.938f, (byte) 0, 133);
-				NpcActions.delete(npc);
+				npc.getController().delete();
 				return;
 			case 730570:
 				sendMsgByRace(1401418, race, 0);
@@ -146,7 +145,7 @@ public class TerathDredgionInstance extends DredgionInstance {
 				return;
 			case 701439:
 				updateScore(mostPlayerDamage, npc, 100, false);
-				NpcActions.delete(npc);
+				npc.getController().delete();
 				return;
 		}
 		super.onDie(npc);

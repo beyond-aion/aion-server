@@ -4,7 +4,6 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_DailyQuest_Ask_Mentee;
 
 import com.aionemu.gameserver.configs.main.GroupConfig;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
@@ -59,7 +58,7 @@ public class _47106TurningUpTheAmplifiers extends AbstractQuestHandler {
 					PlayerGroup group = player.getPlayerGroup();
 					if (group.getMembers().stream().anyMatch(member -> member.isMentor() && PositionUtil.isInRange(player, member, GroupConfig.GROUP_MAX_DISTANCE))) {
 						Npc npc = (Npc) env.getVisibleObject();
-						NpcActions.delete(npc, true);
+						npc.getController().deleteAndScheduleRespawn();
 						spawnForFiveMinutes(217175, npc.getPosition());
 						return true;
 					}

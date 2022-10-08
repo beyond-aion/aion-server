@@ -3,7 +3,6 @@ package quest.poeta;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ASCENSION_MORPH;
@@ -105,10 +104,10 @@ public class _1002RequestoftheElim extends AbstractQuestHandler {
 					if (dialogActionId == USE_OBJECT) {
 						if (player.getInventory().getItemCountByItemId(182200002) == 1) {
 							if (var == 2) {
-								NpcActions.delete(env.getVisibleObject(), true);
+								env.getVisibleObject().getController().deleteAndScheduleRespawn();
 								return useQuestObject(env, 2, 4, false, false); // 4
 							} else if (var == 4) {
-								NpcActions.delete(env.getVisibleObject(), true);
+								env.getVisibleObject().getController().deleteAndScheduleRespawn();
 								return useQuestObject(env, 4, 5, false, false); // 5
 							}
 						}

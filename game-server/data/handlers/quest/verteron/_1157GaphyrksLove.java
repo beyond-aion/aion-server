@@ -2,7 +2,6 @@ package quest.verteron;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
@@ -47,7 +46,7 @@ public class _1157GaphyrksLove extends AbstractQuestHandler {
 		if (PositionUtil.getDistance(892, 2024, 166, npc.getX(), npc.getY(), npc.getZ()) > 13) {
 			return false;
 		}
-		NpcActions.delete(npc, !npc.isDead());
+		npc.getController().deleteAndScheduleRespawn();
 		playQuestMovie(env, 17);
 		return true;
 	}

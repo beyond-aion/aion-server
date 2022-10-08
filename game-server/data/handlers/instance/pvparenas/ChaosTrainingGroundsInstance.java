@@ -1,7 +1,6 @@
 package instance.pvparenas;
 
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -73,47 +72,24 @@ public class ChaosTrainingGroundsInstance extends PvPArenaInstance {
 		if (playerReward == null || !instanceReward.isStartProgress()) {
 			return false;
 		}
-		Npc npc;
-		if (flyingRing.equals("PVP_ARENA_1")) {
-			npc = getNpc(674.841f, 1793.065f, 150.964f);
-			if (npc != null && npc.isSpawned()) {
-				NpcActions.delete(npc, true);
-				sendSystemMsg(player, npc, 250);
-				sendPacket();
-			}
-		} else if (flyingRing.equals("PVP_ARENA_2")) {
-			npc = getNpc(688.410f, 1769.611f, 150.964f);
-			if (npc != null && npc.isSpawned()) {
-				NpcActions.delete(npc, true);
+		Npc npc = switch (flyingRing) {
+			case "PVP_ARENA_1" -> getNpc(674.841f, 1793.065f, 150.964f); // Flame Loop
+			case "PVP_ARENA_2" -> getNpc(688.410f, 1769.611f, 150.964f); // Flame Loop
+			case "PVP_ARENA_3" -> getNpc(664.160f, 1761.933f, 171.504f); // Flame Loop
+			case "PVP_ARENA_VOID_1" -> getNpc(693.061f, 1752.479f, 186.750f); // Aether Vortex
+			case "PVP_ARENA_VOID_2" -> getNpc(688.061f, 1798.229f, 198.500f); // Aether Vortex
+			case "PVP_ARENA_VOID_3" -> getNpc(659.311f, 1768.979f, 201.500f); // Aether Vortex
+			default -> null;
+		};
+		if (npc != null && npc.isSpawned()) {
+			if (npc.getNpcId() == 701184 || npc.getNpcId() == 701198 || npc.getNpcId() == 701212) { // Flame Loop
+				npc.getController().deleteAndScheduleRespawn();
 				playerReward.addPoints(250);
 				sendSystemMsg(player, npc, 250);
 				sendPacket();
-			}
-		} else if (flyingRing.equals("PVP_ARENA_3")) {
-			npc = getNpc(664.160f, 1761.933f, 171.504f);
-			if (npc != null && npc.isSpawned()) {
-				NpcActions.delete(npc, true);
-				playerReward.addPoints(250);
-				sendSystemMsg(player, npc, 250);
-				sendPacket();
-			}
-		} else if (flyingRing.equals("PVP_ARENA_VOID_1")) {
-			npc = getNpc(693.061f, 1752.479f, 186.750f);
-			if (npc != null && npc.isSpawned()) {
+			} else if (npc.getNpcId() == 701183 || npc.getNpcId() == 701197 || npc.getNpcId() == 701211) { // Aether Vortex
 				useSkill(npc, player, 20059, 1);
-				NpcActions.delete(npc, true);
-			}
-		} else if (flyingRing.equals("PVP_ARENA_VOID_2")) {
-			npc = getNpc(688.061f, 1798.229f, 198.500f);
-			if (npc != null && npc.isSpawned()) {
-				useSkill(npc, player, 20059, 1);
-				NpcActions.delete(npc, true);
-			}
-		} else if (flyingRing.equals("PVP_ARENA_VOID_3")) {
-			npc = getNpc(659.311f, 1768.979f, 201.500f);
-			if (npc != null && npc.isSpawned()) {
-				useSkill(npc, player, 20059, 1);
-				NpcActions.delete(npc, true);
+				npc.getController().deleteAndScheduleRespawn();
 			}
 		}
 		return false;

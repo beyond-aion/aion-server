@@ -6,7 +6,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.controllers.effect.EffectController;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -53,7 +52,7 @@ public class ExplosiveDranaCrystalAI extends ActionItemNpcAI {
 			Npc invisibleNpc = (Npc) spawn(282529, p.getX(), p.getY(), p.getZ(), p.getHeading());
 			SkillEngine.getInstance().getSkill(npc, 19373, 60, npc).useNoAnimationSkill();
 			SkillEngine.getInstance().getSkill(invisibleNpc, 19654, 60, invisibleNpc).useNoAnimationSkill();
-			NpcActions.delete(invisibleNpc);
+			invisibleNpc.getController().delete();
 			AIActions.deleteOwner(this);
 		}
 	}
@@ -65,15 +64,9 @@ public class ExplosiveDranaCrystalAI extends ActionItemNpcAI {
 	}
 
 	private void startLifeTask() {
-		lifeTask = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					AIActions.deleteOwner(ExplosiveDranaCrystalAI.this);
-				}
-			}
-
+		lifeTask = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead())
+				AIActions.deleteOwner(ExplosiveDranaCrystalAI.this);
 		}, 60000);
 	}
 

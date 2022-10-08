@@ -8,7 +8,6 @@ import java.util.List;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -213,11 +212,10 @@ public class _1006Ascension extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			Npc npc = (Npc) env.getVisibleObject();
 			int var = qs.getQuestVarById(0);
 			int targetId = env.getTargetId();
 			if (targetId == 211042) {
-				NpcActions.delete(npc);
+				env.getVisibleObject().getController().delete();
 				if (var >= 51 && var < 54) {
 					return defaultOnKillEvent(env, 211042, 51, 54); // 52 - 54
 				} else if (var == 54) {
@@ -229,7 +227,7 @@ public class _1006Ascension extends AbstractQuestHandler {
 				}
 			} else if (targetId == 211043 && var == 4) {
 				playQuestMovie(env, 151);
-				player.getWorldMapInstance().forEachNpc(NpcActions::delete);
+				player.getWorldMapInstance().forEachNpc(npc -> npc.getController().delete());
 				spawn(790001, player, 220.6f, 247.8f, 206.0f, (byte) 0);
 				qs.setQuestVar(5); // 5
 				updateQuestStatus(env);

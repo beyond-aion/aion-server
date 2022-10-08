@@ -2,10 +2,8 @@ package quest.bare_truth;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -121,20 +119,20 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 							return closeDialogWindow(env);
 					}
 					break;
-				case 730888:// Large Teleporter
+				case 730888: // Large Teleporter
 					switch (dialogActionId) {
 						case QUEST_SELECT:
-							NpcActions.delete(env.getVisibleObject());
+							env.getVisibleObject().getController().delete();
 							qs.setQuestVar(11);
 							updateQuestStatus(env);
 							playQuestMovie(env, 888);
 							spawn(730898, player, 257, 257, (float) 226.35, (byte) 95); // Broken Teleporter Device
 					}
 					break;
-				case 730898:// Broken Large Teleporter
+				case 730898: // Broken Large Teleporter
 					switch (dialogActionId) {
 						case QUEST_SELECT:
-							NpcActions.delete(env.getVisibleObject());
+							env.getVisibleObject().getController().delete();
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							TeleportService.teleportTo(player, 110010000, 1876.29f, 1511f, 812.675f, (byte) 60, TeleportAnimation.FADE_OUT_BEAM);
@@ -211,10 +209,8 @@ public class _14031AHyperVention extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			Npc npc = (Npc) env.getVisibleObject();
-			int targetId = env.getTargetId();
-			if (targetId == 233878)
-				NpcActions.delete(npc);
+			if (env.getTargetId() == 233878)
+				env.getVisibleObject().getController().delete();
 			return defaultOnKillEvent(env, 233878, 9, 10);
 		}
 		return false;

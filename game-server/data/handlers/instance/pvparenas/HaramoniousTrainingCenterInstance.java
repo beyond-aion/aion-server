@@ -1,7 +1,6 @@
 package instance.pvparenas;
 
 import com.aionemu.gameserver.instance.handlers.InstanceID;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -106,130 +105,55 @@ public class HaramoniousTrainingCenterInstance extends HarmonyArenaInstance {
 		if (!instanceReward.isStartProgress()) {
 			return false;
 		}
-		Npc npc;
-		if (flyingRing.equals("PVP_ARENA_1")) {
-			npc = getNpc(526.5524f, 1799.9530f, 177.3270f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_2")) {
-			npc = getNpc(506.4008f, 1801.0159f, 177.3270f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_3")) {
-			npc = getNpc(537.6169f, 1772.0968f, 177.3270f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_4")) {
-			npc = getNpc(506.2996f, 1761.2419f, 177.3270f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_5")) {
-			npc = getNpc(526.5186f, 1761.3792f, 177.3270f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_6")) {
-			npc = getNpc(485.9503f, 1761.1323f, 177.3270f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_7")) {
-			npc = getNpc(463.6774f, 1761.2948f, 177.3270f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_8")) {
-			npc = getNpc(453.2310f, 1774.9258f, 177.3975f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_9")) {
-			npc = getNpc(453.3799f, 1791.6423f, 177.3270f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_10")) {
-			npc = getNpc(464.1622f, 1801.0581f, 177.3270f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_11")) {
-			npc = getNpc(485.8056f, 1801.1987f, 177.3270f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_12")) {
-			npc = getNpc(537.3194f, 1789.4381f, 177.3270f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_13")) {
-			npc = getNpc(520.1588f, 1767.9170f, 165.3259f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_14")) {
-			npc = getNpc(529.5792f, 1780.8058f, 153.6571f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_15")) {
-			npc = getNpc(519.9453f, 1792.4106f, 139.4744f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_16")) {
-			npc = getNpc(469.7408f, 1792.6573f, 165.4409f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_17")) {
-			npc = getNpc(459.6954f, 1783.1649f, 153.1804f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_18")) {
-			npc = getNpc(469.6530f, 1769.2192f, 138.8079f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_19")) {
-			npc = getNpc(494.7642f, 1759.5282f, 152.5068f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_20")) {
-			npc = getNpc(503.3351f, 1759.6985f, 158.4491f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_21")) {
-			npc = getNpc(494.9348f, 1802.1798f, 152.5857f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_22")) {
-			npc = getNpc(503.2661f, 1801.7520f, 143.9769f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_23")) {
-			npc = getNpc(486.9509f, 1801.9956f, 158.4124f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_24")) {
-			npc = getNpc(486.7321f, 1759.7345f, 144.8943f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_25")) {
-			npc = getNpc(495.0289f, 1769.2734f, 152.1635f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_26")) {
-			npc = getNpc(518.0588f, 1780.5404f, 152.5605f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_27")) {
-			npc = getNpc(539.5499f, 1767.9496f, 154.2043f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_28")) {
-			npc = getNpc(494.9674f, 1791.8362f, 152.1635f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_29")) {
-			npc = getNpc(495.0894f, 1781.0751f, 152.1635f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_30")) {
-			npc = getNpc(505.1635f, 1781.0885f, 152.3523f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_31")) {
-			npc = getNpc(539.3393f, 1791.3956f, 154.9766f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_32")) {
-			npc = getNpc(486.1324f, 1781.1040f, 152.0575f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_33")) {
-			npc = getNpc(472.1582f, 1781.9821f, 151.6493f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_34")) {
-			npc = getNpc(496.5575f, 1781.0718f, 152.1614f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_35")) {
-			npc = getNpc(450.1526f, 1771.6342f, 154.4948f);
-			checkRing(npc, player);
-		} else if (flyingRing.equals("PVP_ARENA_36")) {
-			npc = getNpc(451.9798f, 1789.6945f, 154.4945f);
-			checkRing(npc, player);
+		Npc npc = switch (flyingRing) {
+			case "PVP_ARENA_1" -> getNpc(526.5524f, 1799.9530f, 177.3270f);
+			case "PVP_ARENA_2" -> getNpc(506.4008f, 1801.0159f, 177.3270f);
+			case "PVP_ARENA_3" -> getNpc(537.6169f, 1772.0968f, 177.3270f);
+			case "PVP_ARENA_4" -> getNpc(506.2996f, 1761.2419f, 177.3270f);
+			case "PVP_ARENA_5" -> getNpc(526.5186f, 1761.3792f, 177.3270f);
+			case "PVP_ARENA_6" -> getNpc(485.9503f, 1761.1323f, 177.3270f);
+			case "PVP_ARENA_7" -> getNpc(463.6774f, 1761.2948f, 177.3270f);
+			case "PVP_ARENA_8" -> getNpc(453.2310f, 1774.9258f, 177.3975f);
+			case "PVP_ARENA_9" -> getNpc(453.3799f, 1791.6423f, 177.3270f);
+			case "PVP_ARENA_10" -> getNpc(464.1622f, 1801.0581f, 177.3270f);
+			case "PVP_ARENA_11" -> getNpc(485.8056f, 1801.1987f, 177.3270f);
+			case "PVP_ARENA_12" -> getNpc(537.3194f, 1789.4381f, 177.3270f);
+			case "PVP_ARENA_13" -> getNpc(520.1588f, 1767.9170f, 165.3259f);
+			case "PVP_ARENA_14" -> getNpc(529.5792f, 1780.8058f, 153.6571f);
+			case "PVP_ARENA_15" -> getNpc(519.9453f, 1792.4106f, 139.4744f);
+			case "PVP_ARENA_16" -> getNpc(469.7408f, 1792.6573f, 165.4409f);
+			case "PVP_ARENA_17" -> getNpc(459.6954f, 1783.1649f, 153.1804f);
+			case "PVP_ARENA_18" -> getNpc(469.6530f, 1769.2192f, 138.8079f);
+			case "PVP_ARENA_19" -> getNpc(494.7642f, 1759.5282f, 152.5068f);
+			case "PVP_ARENA_20" -> getNpc(503.3351f, 1759.6985f, 158.4491f);
+			case "PVP_ARENA_21" -> getNpc(494.9348f, 1802.1798f, 152.5857f);
+			case "PVP_ARENA_22" -> getNpc(503.2661f, 1801.7520f, 143.9769f);
+			case "PVP_ARENA_23" -> getNpc(486.9509f, 1801.9956f, 158.4124f);
+			case "PVP_ARENA_24" -> getNpc(486.7321f, 1759.7345f, 144.8943f);
+			case "PVP_ARENA_25" -> getNpc(495.0289f, 1769.2734f, 152.1635f);
+			case "PVP_ARENA_26" -> getNpc(518.0588f, 1780.5404f, 152.5605f);
+			case "PVP_ARENA_27" -> getNpc(539.5499f, 1767.9496f, 154.2043f);
+			case "PVP_ARENA_28" -> getNpc(494.9674f, 1791.8362f, 152.1635f);
+			case "PVP_ARENA_29" -> getNpc(495.0894f, 1781.0751f, 152.1635f);
+			case "PVP_ARENA_30" -> getNpc(505.1635f, 1781.0885f, 152.3523f);
+			case "PVP_ARENA_31" -> getNpc(539.3393f, 1791.3956f, 154.9766f);
+			case "PVP_ARENA_32" -> getNpc(486.1324f, 1781.1040f, 152.0575f);
+			case "PVP_ARENA_33" -> getNpc(472.1582f, 1781.9821f, 151.6493f);
+			case "PVP_ARENA_34" -> getNpc(496.5575f, 1781.0718f, 152.1614f);
+			case "PVP_ARENA_35" -> getNpc(450.1526f, 1771.6342f, 154.4948f);
+			case "PVP_ARENA_36" -> getNpc(451.9798f, 1789.6945f, 154.4945f);
+			default -> null;
+		};
+		if (npc != null && npc.isSpawned()) {
+			npc.getController().deleteAndScheduleRespawn();
+			HarmonyGroupReward groupReward = instanceReward.getHarmonyGroupReward(player.getObjectId());
+			if (groupReward != null) {
+				groupReward.addPoints(100);
+				sendSystemMsg(player, npc, 250);
+				instanceReward.sendPacket(10, player);
+			}
 		}
 		return false;
-	}
-
-	private void checkRing(Npc npc, Player player) {
-		HarmonyGroupReward group = instanceReward.getHarmonyGroupReward(player.getObjectId());
-		if (npc != null && npc.isSpawned()) {
-			NpcActions.delete(npc, true);
-			if (group == null) {
-				return;
-			}
-			group.addPoints(100);
-			sendSystemMsg(player, npc, 250);
-			instanceReward.sendPacket(10, player);
-		}
 	}
 
 	protected Npc getNpc(float x, float y, float z) {

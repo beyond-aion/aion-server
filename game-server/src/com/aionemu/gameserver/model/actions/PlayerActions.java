@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * @author xTz
  */
-public class PlayerActions extends VisibleObjectActions {
+public class PlayerActions {
 
 	public static boolean isInPlayerMode(Player player, PlayerMode mode) {
 		switch (mode) {

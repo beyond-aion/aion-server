@@ -2,7 +2,6 @@ package quest.brusthonin;
 
 import static com.aionemu.gameserver.model.DialogAction.QUEST_SELECT;
 
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
@@ -45,7 +44,7 @@ public class _4077PorgusRoundup extends AbstractQuestHandler {
 			}
 			qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 			updateQuestStatus(env);
-			NpcActions.delete(npc, !npc.isDead());
+			npc.getController().deleteAndScheduleRespawn();
 			return true;
 		} else if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 
@@ -54,7 +53,7 @@ public class _4077PorgusRoundup extends AbstractQuestHandler {
 			}
 			qs.setStatus(QuestStatus.REWARD);
 			updateQuestStatus(env);
-			NpcActions.delete(npc, !npc.isDead());
+			npc.getController().deleteAndScheduleRespawn();
 			return true;
 		}
 

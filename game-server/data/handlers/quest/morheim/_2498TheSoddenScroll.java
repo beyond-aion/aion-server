@@ -2,9 +2,7 @@ package quest.morheim;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -43,9 +41,8 @@ public class _2498TheSoddenScroll extends AbstractQuestHandler {
 					return closeDialogWindow(env);
 				}
 			} else if (targetId == 700302) {
-				Npc npc = (Npc) env.getVisibleObject();
 				giveQuestItem(env, 182204232, 1);
-				NpcActions.delete(npc, true);
+				env.getVisibleObject().getController().deleteAndScheduleRespawn();
 				return true;
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {

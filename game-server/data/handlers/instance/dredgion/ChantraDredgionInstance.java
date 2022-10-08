@@ -3,7 +3,6 @@ package instance.dredgion;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
@@ -53,7 +52,7 @@ public class ChantraDredgionInstance extends DredgionInstance {
 		super.onEnterInstance(player);
 	}
 
-	private void onDieSurkan(Npc npc, Player mostPlayerDamage, int points) {
+	private void onDieSurkana(Npc npc, Player mostPlayerDamage, int points) {
 		Race race = mostPlayerDamage.getRace();
 		captureRoom(race, npc.getNpcId() + 14 - 700851);
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_ROOM_DESTROYED(race.getL10n(), npc.getObjectTemplate().getL10n()));
@@ -63,7 +62,7 @@ public class ChantraDredgionInstance extends DredgionInstance {
 			sendMsgByRace(1400632, Race.PC_ALL, 0);
 		}
 		updateScore(mostPlayerDamage, npc, points, false);
-		NpcActions.delete(npc);
+		npc.getController().delete();
 	}
 
 	@Override
@@ -75,22 +74,22 @@ public class ChantraDredgionInstance extends DredgionInstance {
 			case 730350: // Secondary Hatch teleporter
 				sendMsgByRace(1400641, Race.PC_ALL, 0);
 				spawn(730315, 415.07663f, 173.85265f, 432.53436f, (byte) 0, 34);
-				NpcActions.delete(npc);
+				npc.getController().delete();
 				return;
 			case 730349: // Escape Hatch teleporter
 				sendMsgByRace(1400631, Race.PC_ALL, 0);
 				spawn(730314, 396.979f, 184.392f, 433.940f, (byte) 0, 42);
-				NpcActions.delete(npc);
+				npc.getController().delete();
 				return;
 			case 730351:
 				sendMsgByRace(1400226, Race.PC_ALL, 0);
 				spawn(730345, 448.391998f, 493.641998f, 394.131989f, (byte) 90, 12);
-				NpcActions.delete(npc);
+				npc.getController().delete();
 				return;
 			case 730352:
 				sendMsgByRace(1400227, Race.PC_ALL, 0);
 				spawn(730346, 520.875977f, 493.401001f, 394.433014f, (byte) 90, 133);
-				NpcActions.delete(npc);
+				npc.getController().delete();
 				return;
 			case 216890:
 			case 216889:
@@ -104,29 +103,29 @@ public class ChantraDredgionInstance extends DredgionInstance {
 		switch (npc.getNpcId()) {
 			case 700838:
 			case 700839:
-				onDieSurkan(npc, mostPlayerDamage, 400);
+				onDieSurkana(npc, mostPlayerDamage, 400);
 				return;
 			case 700840:
 			case 700848:
 			case 700849:
 			case 700850:
 			case 700851:
-				onDieSurkan(npc, mostPlayerDamage, 700);
+				onDieSurkana(npc, mostPlayerDamage, 700);
 				return;
 			case 700845:
 			case 700846:
-				onDieSurkan(npc, mostPlayerDamage, 800);
+				onDieSurkana(npc, mostPlayerDamage, 800);
 				return;
 			case 700847:
-				onDieSurkan(npc, mostPlayerDamage, 900);
+				onDieSurkana(npc, mostPlayerDamage, 900);
 				return;
 			case 700841:
 			case 700842:
-				onDieSurkan(npc, mostPlayerDamage, 1000);
+				onDieSurkana(npc, mostPlayerDamage, 1000);
 				return;
 			case 700843:
 			case 700844:
-				onDieSurkan(npc, mostPlayerDamage, 1100);
+				onDieSurkana(npc, mostPlayerDamage, 1100);
 				return;
 			case 216882: // Captain's Cabin teleport
 				sendMsgByRace(1400652, Race.PC_ALL, 0);
@@ -138,7 +137,7 @@ public class ChantraDredgionInstance extends DredgionInstance {
 				break;
 			case 700836:
 				updateScore(mostPlayerDamage, npc, 100, false);
-				NpcActions.delete(npc);
+				npc.getController().delete();
 				return;
 			case 216886:
 				if (!instanceScore.isRewarded()) {

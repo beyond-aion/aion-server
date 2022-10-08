@@ -3,7 +3,6 @@ package quest.event_quests;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.spawns.SpawnSearchResult;
@@ -69,7 +68,7 @@ public class _50008SoloriusShugoSlackers extends AbstractQuestHandler {
 				final SpawnSearchResult searchResult = DataManager.SPAWNS_DATA.getFirstSpawnByNpcId(npc.getWorldId(), 831036);
 				if (PositionUtil.getDistance(searchResult.getSpot().getX(), searchResult.getSpot().getY(), searchResult.getSpot().getZ(), npc.getX(), npc.getY(),
 					npc.getZ()) <= 15) {
-					NpcActions.delete(npc, !npc.isDead());
+					npc.getController().deleteAndScheduleRespawn();
 					if (var == 0)
 						changeQuestStep(env, 0, 1);
 					else

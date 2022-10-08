@@ -2,10 +2,8 @@ package quest.verteron;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -40,27 +38,20 @@ public class _1197KrallBook extends AbstractQuestHandler {
 		final Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
-		int targetId = 0;
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
-		if (targetId == 0) {
+		if (!(env.getVisibleObject() instanceof Npc npc)) {
 			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
 				QuestService.startQuest(env);
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
 				return true;
 			}
-		} else if (targetId == 700004) {
+		} else if (npc.getNpcId() == 700004) {
 			if (qs == null || qs.isStartable()) {
-				if (player.getInventory().getItemCountByItemId(182200558) == 0) {
-					if (giveQuestItem(env, 182200558, 1)) {
-						VisibleObject target = player.getTarget();
-						if (target instanceof Npc)
-							NpcActions.delete(target, true);
-					}
+				if (player.getInventory().getItemCountByItemId(182200558) == 0 && giveQuestItem(env, 182200558, 1)) {
+					npc.getController().deleteAndScheduleRespawn();
 				}
 			}
 			return true;
-		} else if (targetId == 203129) {
+		} else if (npc.getNpcId() == 203129) {
 			if (qs != null) {
 				if (env.getDialogActionId() == QUEST_SELECT && qs.getStatus() == QuestStatus.START) {
 					return sendQuestDialog(env, 2375);

@@ -9,7 +9,6 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -61,10 +60,8 @@ public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 		if (!canThink) {
 			VisibleObject target = getTarget();
 			getMoveController().abortMove();
-			if (target != null && target.isSpawned() && target instanceof Npc) {
-				Npc npc = (Npc) target;
-				int npcId = npc.getNpcId();
-				if (npcId == 281128 || npcId == 281129) {
+			if (target != null && target.isSpawned() && target instanceof Npc npc) {
+				if (npc.getNpcId() == 281128 || npc.getNpcId() == 281129) {
 					startFeedTime(npc);
 				}
 			}
@@ -72,41 +69,34 @@ public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 	}
 
 	private void startFeedTime(final Npc npc) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead() && npc != null) {
-					switch (npc.getNpcId()) {
-						case 281128:
-							// Feed Supply Device
-							getEffectController().removeEffect(20489);
-							spawn(701386, 716.508f, 508.571f, 939.607f, (byte) 119);
-							break;
-						case 281129:
-							// Water Supply Device
-							spawn(701387, 716.389f, 494.207f, 939.607f, (byte) 119);
-							getEffectController().removeEffect(20490);
-							break;
-					}
-					NpcActions.delete(npc);
-					canThink = true;
-					Creature creature = getAggroList().getMostHated();
-					if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
-						setStateIfNot(AIState.FIGHT);
-						think();
-					} else {
-						getOwner().setTarget(creature);
-						getOwner().getGameStats().renewLastAttackTime();
-						getOwner().getGameStats().renewLastAttackedTime();
-						getOwner().getGameStats().renewLastChangeTargetTime();
-						getOwner().getGameStats().renewLastSkillTime();
-						setStateIfNot(AIState.FIGHT);
-						handleMoveValidate();
-					}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead() && npc != null) {
+				switch (npc.getNpcId()) {
+					case 281128: // Feed Supply Device
+						getEffectController().removeEffect(20489);
+						spawn(701386, 716.508f, 508.571f, 939.607f, (byte) 119);
+						break;
+					case 281129: // Water Supply Device
+						getEffectController().removeEffect(20490);
+						spawn(701387, 716.389f, 494.207f, 939.607f, (byte) 119);
+						break;
+				}
+				npc.getController().delete();
+				canThink = true;
+				Creature creature = getAggroList().getMostHated();
+				if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
+					setStateIfNot(AIState.FIGHT);
+					think();
+				} else {
+					getOwner().setTarget(creature);
+					getOwner().getGameStats().renewLastAttackTime();
+					getOwner().getGameStats().renewLastAttackedTime();
+					getOwner().getGameStats().renewLastChangeTargetTime();
+					getOwner().getGameStats().renewLastSkillTime();
+					setStateIfNot(AIState.FIGHT);
+					handleMoveValidate();
 				}
 			}
-
 		}, 6000);
 	}
 
@@ -155,23 +145,9 @@ public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 	}
 
 	private void doSchedule() {
-		hungerTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				int rnd = Rnd.get(1, 2);
-				int skill = 0;
-				switch (rnd) {
-					case 1:
-						skill = 20489; // Hunger
-						break;
-					case 2:
-						skill = 20490; // Thirst
-						break;
-				}
-				SkillEngine.getInstance().getSkill(getOwner(), skill, 20, getOwner()).useNoAnimationSkill();
-			}
-
+		hungerTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			int skill = Rnd.nextBoolean() ?  20489 : 20490; // Hunger / Thirst
+			SkillEngine.getInstance().getSkill(getOwner(), skill, 20, getOwner()).useNoAnimationSkill();
 		}, 10000, 30000);
 	}
 

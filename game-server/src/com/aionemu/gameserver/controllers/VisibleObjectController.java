@@ -71,12 +71,22 @@ public abstract class VisibleObjectController<T extends VisibleObject> {
 	}
 
 	/**
+	 * Despawns the object (if spawned) and deletes it from the world. If allowed, a respawn task will be scheduled on successful deletion.
+	 *
+	 * @see World#removeObject(VisibleObject)
+	 */
+	public final void deleteAndScheduleRespawn() {
+		if (delete() && !RespawnService.hasRespawnTask(getOwner()))
+			RespawnService.scheduleRespawn(getOwner());
+	}
+
+	/**
 	 * Despawns the object and deletes it from the world if alive. Otherwise, cancels its respawn task if present.
 	 * 
 	 * @see #delete()
 	 */
 	public final void deleteIfAliveOrCancelRespawn() {
-		boolean isDead = getOwner() instanceof Creature && ((Creature) getOwner()).isDead();
+		boolean isDead = getOwner() instanceof Creature creature && creature.isDead();
 		if (isDead || !delete())
 			RespawnService.cancelRespawn(getOwner());
 	}

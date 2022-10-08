@@ -2,8 +2,6 @@ package quest.theobomos;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.actions.NpcActions;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -82,8 +80,7 @@ public class _3090InSearchOfPippiThePorgus extends AbstractQuestHandler {
 						return sendQuestDialog(env, 2034);
 					}
 				} else if (dialogActionId == SET_SUCCEED) {
-					Npc npc = (Npc) env.getVisibleObject();
-					NpcActions.delete(npc, true);
+					env.getVisibleObject().getController().deleteAndScheduleRespawn();
 					removeQuestItem(env, 182208050, 1);
 					giveQuestItem(env, 182208051, 1);
 					return defaultCloseDialog(env, 3, 3, true, false);

@@ -1,10 +1,8 @@
 package ai.instance.theHexway;
 
-import java.util.Objects;
 import java.util.concurrent.ScheduledFuture;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.ai.Percentage;
@@ -59,12 +57,13 @@ public class CaptainLakharaAI extends SummonerAI {
 	}
 
 	private void despawnNpc(int npcId) {
-		getPosition().getWorldMapInstance().getNpcs(npcId).stream().filter(Objects::nonNull).filter(npc -> !npc.isDead()).forEach(NpcActions::delete);
+		getPosition().getWorldMapInstance().getNpcs(npcId).forEach(npc -> npc.getController().deleteIfAliveOrCancelRespawn());
 	}
 
 	private void summonNpcWithSmoke(SummonGroup summon) {
 		spawnHelpers(summon);
-		NpcActions.delete(spawn(282465, summon.getX(), summon.getY(), summon.getZ(), summon.getH()));
+		Npc smoke = (Npc) spawn(282465, summon.getX(), summon.getY(), summon.getZ(), summon.getH());
+		smoke.getController().delete();
 	}
 
 }

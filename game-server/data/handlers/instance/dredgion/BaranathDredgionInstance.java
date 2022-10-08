@@ -3,7 +3,6 @@ package instance.dredgion;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
@@ -44,7 +43,7 @@ public class BaranathDredgionInstance extends DredgionInstance {
 		}
 		getPlayerReward(mostPlayerDamage).incrementCapturedZones();
 		updateScore(mostPlayerDamage, npc, points, false);
-		NpcActions.delete(npc);
+		npc.getController().delete();
 	}
 
 	@Override

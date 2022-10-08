@@ -12,7 +12,6 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -194,36 +193,17 @@ public class CaptainXastaAI extends AggressiveNpcAI {
 				final Npc ariana = instance.getNpc(799668);
 				if (ariana != null) {
 					ariana.getEffectController().removeEffect(19921);
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							ariana.getSpawn().setWalkerId("30028000016");
-							WalkManager.startWalking((NpcAI) ariana.getAi());
-						}
-
+					ThreadPoolManager.getInstance().schedule(() -> {
+						ariana.getSpawn().setWalkerId("30028000016");
+						WalkManager.startWalking((NpcAI) ariana.getAi());
 					}, 1000);
 					PacketSendUtility.broadcastMessage(ariana, 1500415, 4000);
 					PacketSendUtility.broadcastMessage(ariana, 1500416, 13000);
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							SkillEngine.getInstance().getSkill(ariana, 19358, 60, ariana).useNoAnimationSkill();
-							instance.setDoorState(145, true);
-							deleteNpcs(instance.getNpcs(701156));
-							ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-								@Override
-								public void run() {
-									if (!ariana.isDead()) {
-										NpcActions.delete(ariana);
-									}
-								}
-
-							}, 13000);
-						}
-
+					ThreadPoolManager.getInstance().schedule(() -> {
+						SkillEngine.getInstance().getSkill(ariana, 19358, 60, ariana).useNoAnimationSkill();
+						instance.setDoorState(145, true);
+						deleteNpcs(instance.getNpcs(701156));
+						ThreadPoolManager.getInstance().schedule(() -> ariana.getController().deleteIfAliveOrCancelRespawn(), 13000);
 					}, 13000);
 				}
 			}

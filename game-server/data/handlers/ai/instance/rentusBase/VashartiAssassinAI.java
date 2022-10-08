@@ -3,7 +3,6 @@ package ai.instance.rentusBase;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -29,7 +28,7 @@ public class VashartiAssassinAI extends AggressiveNpcAI {
 		if (isHome.compareAndSet(true, false)) {
 			WorldPosition p = getPosition();
 			Npc smoke = (Npc) spawn(282465, p.getX(), p.getY(), p.getZ(), p.getHeading());
-			NpcActions.delete(smoke);
+			smoke.getController().delete();
 		}
 		super.handleCreatureAggro(creature);
 	}
@@ -37,15 +36,9 @@ public class VashartiAssassinAI extends AggressiveNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					SkillEngine.getInstance().getSkill(getOwner(), 19915, 60, getOwner()).useNoAnimationSkill();
-				}
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead())
+				SkillEngine.getInstance().getSkill(getOwner(), 19915, 60, getOwner()).useNoAnimationSkill();
 		}, 2000);
 	}
 

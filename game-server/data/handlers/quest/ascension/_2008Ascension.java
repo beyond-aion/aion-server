@@ -8,7 +8,6 @@ import java.util.List;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.PlayerClass;
-import com.aionemu.gameserver.model.actions.NpcActions;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -66,9 +65,8 @@ public class _2008Ascension extends AbstractQuestHandler {
 
 		int var = qs.getQuestVarById(0);
 		int targetId = env.getTargetId();
-		Npc npc = (Npc) env.getVisibleObject();
-		if (targetId == 205040) {
-			NpcActions.delete(npc);
+		if (targetId == 205040) { // Guardian Assassin
+			env.getVisibleObject().getController().delete();
 			if (var >= 51 && var <= 53) {
 				qs.setQuestVar(qs.getQuestVars().getQuestVars() + 1);
 				updateQuestStatus(env);
@@ -82,7 +80,7 @@ public class _2008Ascension extends AbstractQuestHandler {
 			}
 		} else if (targetId == 205041 && var == 5) {
 			playQuestMovie(env, 152);
-			player.getWorldMapInstance().forEachNpc(NpcActions::delete);
+			player.getWorldMapInstance().forEachNpc(npc -> npc.getController().delete());
 			spawn(203550, player, 301.92999f, 274.26001f, 205.7f, (byte) 0);
 			qs.setQuestVar(6);
 			updateQuestStatus(env);
