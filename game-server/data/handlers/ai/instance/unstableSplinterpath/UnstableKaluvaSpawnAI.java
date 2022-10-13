@@ -6,6 +6,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -64,16 +65,11 @@ public class UnstableKaluvaSpawnAI extends NpcAI {
 	}
 
 	private void scheduleHatch() {
-		task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					hatchAdds();
-					checkKaluva();
-				}
+		task = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead()) {
+				hatchAdds();
+				checkKaluva();
 			}
-
 		}, 28000); // schedule hatch when debuff ends(20s)
 	}
 
@@ -99,6 +95,14 @@ public class UnstableKaluvaSpawnAI extends NpcAI {
 				spawn(219573, p.getX(), p.getY(), p.getZ(), p.getHeading());
 				break;
 		}
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
 	}
 
 }

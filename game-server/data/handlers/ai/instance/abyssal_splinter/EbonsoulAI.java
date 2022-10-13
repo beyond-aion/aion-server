@@ -4,6 +4,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -17,7 +18,7 @@ import ai.AggressiveNpcAI;
 @AIName("ebonsoul")
 public class EbonsoulAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isHome = new AtomicBoolean(true);
+	private final AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> skillTask;
 
 	public EbonsoulAI(Npc owner) {
@@ -37,18 +38,14 @@ public class EbonsoulAI extends AggressiveNpcAI {
 	}
 
 	private void startSkillTask() {
-		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead())
-					cancelTask();
-				else {
-					SkillEngine.getInstance().getSkill(getOwner(), 19159, 55, getOwner()).useNoAnimationSkill();
-					if (getPosition().getWorldMapInstance().getNpc(281908) == null) {
-						spawn(281908, 462.47913f, 707.4807f, 433.78372f, (byte) 93);
-						spawn(281908, 456.09427f, 707.4807f, 433.78372f, (byte) 93);
-					}
+		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (isDead())
+				cancelTask();
+			else {
+				SkillEngine.getInstance().getSkill(getOwner(), 19159, 55, getOwner()).useNoAnimationSkill();
+				if (getPosition().getWorldMapInstance().getNpc(281908) == null) {
+					spawn(281908, 462.47913f, 707.4807f, 433.78372f, (byte) 93);
+					spawn(281908, 456.09427f, 707.4807f, 433.78372f, (byte) 93);
 				}
 			}
 		}, 5000, 70000); // re-check delay
@@ -78,6 +75,14 @@ public class EbonsoulAI extends AggressiveNpcAI {
 	protected void handleDespawned() {
 		cancelTask();
 		super.handleDespawned();
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
 	}
 
 }

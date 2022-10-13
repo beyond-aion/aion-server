@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -17,8 +18,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Luzien
- * @edit Cheatkiller
+ * @author Luzien, Cheatkiller
  */
 @AIName("unstablekaluva")
 public class UnstableKaluvaAI extends AggressiveNpcAI {
@@ -57,35 +57,25 @@ public class UnstableKaluvaAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleMoveArrived() {
-		if (canThink == false) {
-			if (getOwner().getTarget() instanceof Npc) {
-				Npc spawner = (Npc) getOwner().getTarget();
-				if (spawner != null) {
-					spawner.getEffectController().removeEffect(19222);
-					SkillEngine.getInstance().getSkill(getOwner(), 19223, 55, spawner).useNoAnimationSkill();
-					getEffectController().removeEffect(19152);
-				}
+		if (!canThink) {
+			if (getOwner().getTarget()instanceof Npc spawner) {
+				spawner.getEffectController().removeEffect(19222);
+				SkillEngine.getInstance().getSkill(getOwner(), 19223, 55, spawner).useNoAnimationSkill();
+				getEffectController().removeEffect(19152);
 			}
 
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					canThink = true;
-					Creature creature = getAggroList().getMostHated();
-					if (creature == null || !getOwner().canSee(creature) || creature.isDead()) {
-						setStateIfNot(AIState.FIGHT);
-						think();
-					} else {
-						getOwner().setTarget(creature);
-						getOwner().getGameStats().renewLastAttackTime();
-						getOwner().getGameStats().renewLastAttackedTime();
-						getOwner().getGameStats().renewLastChangeTargetTime();
-						getOwner().getGameStats().renewLastSkillTime();
-						setStateIfNot(AIState.FIGHT);
-						think();
-					}
+			ThreadPoolManager.getInstance().schedule(() -> {
+				canThink = true;
+				Creature creature = getAggroList().getMostHated();
+				if (creature != null && getOwner().canSee(creature) && !creature.isDead()) {
+					getOwner().setTarget(creature);
+					getOwner().getGameStats().renewLastAttackTime();
+					getOwner().getGameStats().renewLastAttackedTime();
+					getOwner().getGameStats().renewLastChangeTargetTime();
+					getOwner().getGameStats().renewLastSkillTime();
 				}
+				setStateIfNot(AIState.FIGHT);
+				think();
 			}, 2000);
 			isInMove = false;
 		}
@@ -106,6 +96,14 @@ public class UnstableKaluvaAI extends AggressiveNpcAI {
 	@Override
 	public boolean canThink() {
 		return canThink;
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
 	}
 
 }

@@ -1,6 +1,7 @@
 package ai.instance.unstableSplinterpath;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -37,5 +38,13 @@ public class PieceOfSplendorAI extends AggressiveNpcAI {
 					rukril.getEffectController().removeEffect(19266);
 			}
 		}
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
 	}
 }

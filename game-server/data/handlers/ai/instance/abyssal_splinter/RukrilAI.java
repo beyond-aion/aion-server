@@ -4,6 +4,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -17,7 +18,7 @@ import ai.AggressiveNpcAI;
 @AIName("rukril")
 public class RukrilAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isHome = new AtomicBoolean(true);
+	private final AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> skillTask;
 
 	public RukrilAI(Npc owner) {
@@ -37,18 +38,14 @@ public class RukrilAI extends AggressiveNpcAI {
 	}
 
 	private void startSkillTask() {
-		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead())
-					cancelTask();
-				else {
-					SkillEngine.getInstance().getSkill(getOwner(), 19266, 55, getOwner()).useNoAnimationSkill();
-					if (getPosition().getWorldMapInstance().getNpc(281907) == null) {
-						spawn(281907, 447.3828f, 675.9968f, 433.95636f, (byte) 19);
-						spawn(281907, 441.49512f, 680.38495f, 434.02753f, (byte) 19);
-					}
+		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (isDead())
+				cancelTask();
+			else {
+				SkillEngine.getInstance().getSkill(getOwner(), 19266, 55, getOwner()).useNoAnimationSkill();
+				if (getPosition().getWorldMapInstance().getNpc(281907) == null) {
+					spawn(281907, 447.3828f, 675.9968f, 433.95636f, (byte) 19);
+					spawn(281907, 441.49512f, 680.38495f, 434.02753f, (byte) 19);
 				}
 			}
 		}, 5000, 70000);
@@ -80,4 +77,11 @@ public class RukrilAI extends AggressiveNpcAI {
 		super.handleDespawned();
 	}
 
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
+	}
 }

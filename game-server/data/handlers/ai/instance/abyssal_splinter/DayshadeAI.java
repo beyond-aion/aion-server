@@ -4,6 +4,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
@@ -15,7 +16,7 @@ import ai.AggressiveNpcAI;
 @AIName("dayshade")
 public class DayshadeAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isHome = new AtomicBoolean(true);
+	private final AtomicBoolean isHome = new AtomicBoolean(true);
 
 	public DayshadeAI(Npc owner) {
 		super(owner);
@@ -36,5 +37,13 @@ public class DayshadeAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		super.handleBackHome();
 		isHome.set(true);
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
 	}
 }

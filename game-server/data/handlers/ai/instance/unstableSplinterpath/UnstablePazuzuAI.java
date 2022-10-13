@@ -4,6 +4,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -13,13 +14,12 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Luzien
- * @edit Cheatkiller
+ * @author Luzien, Cheatkiller
  */
 @AIName("unstablepazuzu")
 public class UnstablePazuzuAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isHome = new AtomicBoolean(true);
+	private final AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> task;
 
 	public UnstablePazuzuAI(Npc owner) {
@@ -50,19 +50,14 @@ public class UnstablePazuzuAI extends AggressiveNpcAI {
 	}
 
 	private void startTask() {
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				SkillEngine.getInstance().getSkill(getOwner(), 19145, 55, getOwner()).useNoAnimationSkill();
-				if (getPosition().getWorldMapInstance().getNpc(283206) == null) {
-					spawn(283206, 651.351990f, 326.425995f, 465.523987f, (byte) 8);
-					spawn(283206, 666.604980f, 314.497009f, 465.394012f, (byte) 27);
-					spawn(283206, 685.588989f, 342.955994f, 465.908997f, (byte) 68);
-					spawn(283206, 651.322021f, 346.554993f, 465.563995f, (byte) 111);
-				}
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			SkillEngine.getInstance().getSkill(getOwner(), 19145, 55, getOwner()).useNoAnimationSkill();
+			if (getPosition().getWorldMapInstance().getNpc(283206) == null) {
+				spawn(283206, 651.351990f, 326.425995f, 465.523987f, (byte) 8);
+				spawn(283206, 666.604980f, 314.497009f, 465.394012f, (byte) 27);
+				spawn(283206, 685.588989f, 342.955994f, 465.908997f, (byte) 68);
+				spawn(283206, 651.322021f, 346.554993f, 465.563995f, (byte) 111);
 			}
-
 		}, 5000, 70000);
 	}
 
@@ -76,6 +71,14 @@ public class UnstablePazuzuAI extends AggressiveNpcAI {
 	protected void handleDespawned() {
 		cancelTask();
 		super.handleDespawned();
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
 	}
 
 }

@@ -6,6 +6,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -42,16 +43,11 @@ public class KaluvaSpawnAI extends NpcAI {
 	}
 
 	private void scheduleHatch() {
-		task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					hatchAdds();
-					checkKaluva();
-				}
+		task = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead()) {
+				hatchAdds();
+				checkKaluva();
 			}
-
 		}, 22000); // schedule hatch when debuff ends(20s)
 	}
 
@@ -77,6 +73,14 @@ public class KaluvaSpawnAI extends NpcAI {
 				spawn(281912, p.getX(), p.getY(), p.getZ(), p.getHeading());
 				break;
 		}
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
 	}
 
 }

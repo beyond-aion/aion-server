@@ -4,19 +4,19 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.AggressiveNpcAI;
 
 /**
- * @author Luzien, Ritsu
- * @edit Cheatkiller
+ * @author Luzien, Ritsu, Cheatkiller
  */
 @AIName("unstabledayshade")
 public class UnstableDayshadeAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isHome = new AtomicBoolean(true);
+	private final AtomicBoolean isHome = new AtomicBoolean(true);
 
 	public UnstableDayshadeAI(Npc owner) {
 		super(owner);
@@ -37,5 +37,13 @@ public class UnstableDayshadeAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		super.handleBackHome();
 		isHome.set(true);
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
 	}
 }

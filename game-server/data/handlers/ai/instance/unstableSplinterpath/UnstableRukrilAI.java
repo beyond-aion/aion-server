@@ -4,6 +4,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -14,13 +15,12 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Ritsu, Luzien
- * @edit Cheatkiler
+ * @author Ritsu, Luzien, Cheatkiler
  */
 @AIName("unstablerukril")
 public class UnstableRukrilAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isHome = new AtomicBoolean(true);
+	private final AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> skillTask;
 
 	public UnstableRukrilAI(Npc owner) {
@@ -42,21 +42,17 @@ public class UnstableRukrilAI extends AggressiveNpcAI {
 
 	private void startSkillTask() {
 		final Npc ebonsoul = getPosition().getWorldMapInstance().getNpc(219552);
-		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead())
-					cancelTask();
-				else {
-					if (getPosition().getWorldMapInstance().getNpc(283204) == null) {
-						SkillEngine.getInstance().getSkill(getOwner(), 19266, 55, getOwner()).useNoAnimationSkill();
-						spawn(283204, getOwner().getX() + 2, getOwner().getY() - 2, getOwner().getZ(), (byte) 0);
-					}
-					if (ebonsoul != null && !ebonsoul.isDead()) {
-						SkillEngine.getInstance().getSkill(ebonsoul, 19159, 55, ebonsoul).useNoAnimationSkill();
-						spawn(283205, ebonsoul.getX() + 2, ebonsoul.getY() - 2, ebonsoul.getZ(), (byte) 0);
-					}
+		skillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (isDead())
+				cancelTask();
+			else {
+				if (getPosition().getWorldMapInstance().getNpc(283204) == null) {
+					SkillEngine.getInstance().getSkill(getOwner(), 19266, 55, getOwner()).useNoAnimationSkill();
+					spawn(283204, getOwner().getX() + 2, getOwner().getY() - 2, getOwner().getZ(), (byte) 0);
+				}
+				if (ebonsoul != null && !ebonsoul.isDead()) {
+					SkillEngine.getInstance().getSkill(ebonsoul, 19159, 55, ebonsoul).useNoAnimationSkill();
+					spawn(283205, ebonsoul.getX() + 2, ebonsoul.getY() - 2, ebonsoul.getZ(), (byte) 0);
 				}
 			}
 		}, 5000, 70000);
@@ -96,4 +92,11 @@ public class UnstableRukrilAI extends AggressiveNpcAI {
 		super.handleDespawned();
 	}
 
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
+	}
 }

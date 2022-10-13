@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -18,16 +19,15 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Ritsu, Luzien
- * @edit Cheatkiller
+ * @author Ritsu, Luzien, Cheatkiller
  */
 @AIName("unstableyamennes")
 public class UnstableYamenesAI extends AggressiveNpcAI {
 
 	private boolean top;
-	private List<Integer> percents = new ArrayList<>();
+	private final List<Integer> percents = new ArrayList<>();
 	private Future<?> portalTask = null;
-	private AtomicBoolean isStart = new AtomicBoolean(false);
+	private final AtomicBoolean isStart = new AtomicBoolean();
 
 	public UnstableYamenesAI(Npc owner) {
 		super(owner);
@@ -50,42 +50,30 @@ public class UnstableYamenesAI extends AggressiveNpcAI {
 	}
 
 	private void startTasks() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					EmoteManager.emoteStopAttacking(getOwner());
-					SkillEngine.getInstance().getSkill(getOwner(), 19098, 55, getOwner()).useSkill();
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead()) {
+				EmoteManager.emoteStopAttacking(getOwner());
+				SkillEngine.getInstance().getSkill(getOwner(), 19098, 55, getOwner()).useSkill();
 			}
 		}, 600000);
 
-		portalTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead()) {
-					cancelTask();
-				} else {
-					spawnPortal();
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							WorldMapInstance instance = getPosition().getWorldMapInstance();
-							deleteNpcs(instance.getNpcs(219586));
-							Npc boss = getOwner();
-							EmoteManager.emoteStopAttacking(getOwner());
-							SkillEngine.getInstance().getSkill(boss, 19282, 55, getTarget()).useSkill();
-							spawn(219586, boss.getX() + 10, boss.getY() - 10, boss.getZ(), (byte) 0);
-							spawn(219586, boss.getX() - 10, boss.getY() + 10, boss.getZ(), (byte) 0);
-							spawn(219586, boss.getX() + 10, boss.getY() + 10, boss.getZ(), (byte) 0);
-							boss.clearAttackedCount();
-							PacketSendUtility.broadcastToMap(getOwner(), 1400729);
-						}
-					}, 3000);
-				}
+		portalTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (isDead()) {
+				cancelTask();
+			} else {
+				spawnPortal();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					WorldMapInstance instance = getPosition().getWorldMapInstance();
+					deleteNpcs(instance.getNpcs(219586));
+					Npc boss = getOwner();
+					EmoteManager.emoteStopAttacking(getOwner());
+					SkillEngine.getInstance().getSkill(boss, 19282, 55, getTarget()).useSkill();
+					spawn(219586, boss.getX() + 10, boss.getY() - 10, boss.getZ(), (byte) 0);
+					spawn(219586, boss.getX() - 10, boss.getY() + 10, boss.getZ(), (byte) 0);
+					spawn(219586, boss.getX() + 10, boss.getY() + 10, boss.getZ(), (byte) 0);
+					boss.clearAttackedCount();
+					PacketSendUtility.broadcastToMap(getOwner(), 1400729);
+				}, 3000);
 			}
 		}, 60000, 60000);
 	}
@@ -120,7 +108,7 @@ public class UnstableYamenesAI extends AggressiveNpcAI {
 
 	private void addPercent() {
 		percents.clear();
-		Collections.addAll(percents, new Integer[] { 100 });
+		Collections.addAll(percents, 100);
 	}
 
 	private void cancelTask() {
@@ -154,5 +142,13 @@ public class UnstableYamenesAI extends AggressiveNpcAI {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
 		deleteNpcs(instance.getNpcs(219586));
 		super.handleDied();
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
 	}
 }

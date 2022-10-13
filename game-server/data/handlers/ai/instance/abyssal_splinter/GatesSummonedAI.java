@@ -7,6 +7,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -79,5 +80,13 @@ public class GatesSummonedAI extends GeneralNpcAI {
 			}
 			SkillEngine.getInstance().getSkill(getOwner(), Rnd.nextBoolean() ? 19257 : 19281, 55, boss).useNoAnimationSkill();
 		}, 5000, 30000);
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			default -> super.ask(question);
+		};
 	}
 }
