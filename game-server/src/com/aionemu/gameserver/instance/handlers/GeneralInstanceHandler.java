@@ -156,9 +156,11 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	public void logNpcWithReason(Npc npc, String reason) {
-		log.info("[{}] {} (ID:{}) {} Involved player(s): {}", DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getName(), npc.getName(), npc.getNpcId(),
-			reason,
-			instance.getPlayersInside().stream().map(p -> String.format("%s (ID:%d)", p.getName(), p.getObjectId())).collect(Collectors.joining(", ")));
+		if (!instance.getPlayersInside().isEmpty()) {
+			log.info("[{}] {} (ID:{}) {} Player(s) in instance: {}", DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getName(), npc.getName(), npc.getNpcId(),
+				reason,
+				instance.getPlayersInside().stream().map(p -> String.format("%s (ID:%d)", p.getName(), p.getObjectId())).collect(Collectors.joining(", ")));
+		}
 	}
 
 	public boolean isBoss(Npc npc) {
