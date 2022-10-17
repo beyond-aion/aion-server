@@ -36,7 +36,6 @@ import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -47,7 +46,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
-import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -258,15 +256,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		procProbability -= getOwner().getGameStats().getStat(StatEnum.PROC_REDUCE_RATE, 0).getCurrent();
 
 		if (Rnd.get(1, 1000) <= procProbability) {
-			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId());
-			Skill skill = SkillEngine.getInstance().getSkill(attacker, godStoneInfo.getSkillId(), godStoneInfo.getSkillLevel(), getOwner(), template);
+			Skill skill = SkillEngine.getInstance().getSkill(attacker, godStoneInfo.getSkillId(), godStoneInfo.getSkillLevel(), getOwner());
 			skill.setFirstTargetRangeCheck(false);
-			if (!skill.canUseSkill(CastState.CAST_START))
-				return;
+			skill.useSkill();
 			PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getL10n()));
-			Effect effect = new Effect(skill, getOwner());
-			effect.initialize();
-			effect.applyEffect();
 			// Illusion Godstones
 			if (godStoneInfo.getBreakProb() > 0) {
 				godStone.increaseActivatedCount();
@@ -275,7 +268,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 					// PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getL10n(),
 					// itemTemplate.getL10nId()));
 					weapon.setGodStone(null);
-					PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getL10n(), template.getL10n()));
+					PacketSendUtility.sendPacket(attacker,
+						SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getL10n(), DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId()).getL10n()));
 					ItemPacketService.updateItemAfterInfoChange(attacker, weapon);
 				}
 			}
