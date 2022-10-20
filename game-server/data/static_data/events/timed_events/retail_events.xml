@@ -4363,19 +4363,15 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="The Scattered Deck" start="2017-10-23T00:00:00" end="2017-11-05T23:59:59" theme="HALLOWEEN">
+	<event name="The Scattered Deck" start="2022-10-21T00:00:00" end="2022-11-06T23:59:59" theme="HALLOWEEN">
 		<event_drops>
 			<gd_rule rule_name="Mysterious Card" chance="10">
 				<gd_maps>
-					<gd_map map_id="600100000" /><!-- Levinshor -->
+					<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+					<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
 				</gd_maps>
-				<gd_ratings>
-					<gd_rating rating="NORMAL" />
-					<gd_rating rating="ELITE" />
-					<gd_rating rating="HERO" />
-				</gd_ratings>
 				<gd_items>
-					<gd_item id="186000381" /><!-- Mysterious Card -->
+					<gd_item id="186000381" max_count="3" /><!-- Mysterious Card -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -4962,7 +4958,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Nightmare Circus" start="2021-10-29T00:00:00" end="2021-11-07T23:59:59" theme="HALLOWEEN">
+	<event name="Nightmare Circus" start="2022-10-21T00:00:00" end="2022-11-06T23:59:59" theme="HALLOWEEN">
 		<quests>
 			<maintainable>80341 80342 80343</maintainable>
 		</quests>
@@ -5035,7 +5031,7 @@
 					<gd_npc npc_id="831745" />
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188053636" /><!-- Blood Mark Box -->
+					<gd_item id="110900866" /><!-- Reveler's Reverie -->
 					<gd_item id="169600218" /><!-- [Emotion Card] Harvest Reveling -->
 					<gd_item id="125040110" /><!-- Jack-o-lantern Hat -->
 					<gd_item id="188051874" /><!-- Harvest Revel Furniture Set Box -->
@@ -5050,7 +5046,7 @@
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="188052589" /><!-- [Event] Consumables Bundle -->
-					<gd_item id="188051338" /><!-- [Event] Case of Harvest Revel Ale -->
+					<gd_item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
 					<gd_item id="188052685" /><!-- [Event] Dreamer's Reward -->
 					<gd_item id="188051516" /><!-- Smart Greater Scroll Bundle -->
 				</gd_items>
@@ -5064,9 +5060,9 @@
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="188053666" /><!-- [Event] Ceramium Medal Box -->
-					<gd_item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
-					<gd_item id="110900866" /><!-- Reveler's Reverie -->
-					<gd_item id="188051874" /><!-- Harvest Revel Furniture Set Box -->
+					<gd_item id="166500002" /><!-- Amplification Stone -->
+					<gd_item id="166020000" /><!-- Omega Enchantment Stone -->
+					<gd_item id="166030005" /><!-- Tempering Solution -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Nightmare Circus Bonus Entry Scroll" chance="100" member_limit="12">
@@ -5074,7 +5070,7 @@
 					<gd_map map_id="300170000" /><!-- Beshmundir Temple -->
 					<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
 					<gd_map map_id="300590000" /><!-- Ophidan Bridge -->
-					<gd_map map_id="300630000" /><!-- Anguished Dragon Lords Refuge -->
+					<gd_map map_id="300800000" /><!-- Infinity Shard -->
 				</gd_maps>
 				<gd_npcs>
 					<gd_npc npc_id="216183" /><!-- Stormwing -->
@@ -5083,7 +5079,7 @@
 					<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
 					<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
 					<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
-					<gd_npc npc_id="702729" /><!-- Tiamat's Huge Treasure Crate -->
+					<gd_npc npc_id="231073" /><!-- Hyperion -->
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="188600241" /><!-- Nightmare Circus Bonus Entry Scroll -->

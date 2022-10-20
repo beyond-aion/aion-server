@@ -27754,92 +27754,66 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053101"><!-- Mysterious Reward Box -->
-		<items chance="0.3">
-			<item id="170100024" /><!-- Harvest Revel Log Cabinet -->
+		<items>
+			<item id="188053219" /> <!-- [Event] Sauro Commander's Accessory Box -->
 		</items>
-		<items chance="0.3">
-			<item id="110900866" /><!-- Reveler's Reverie -->
+		<items>
+			<item id="188053208" /> <!-- [Event] Tiamat Guard's Eternal Armor Chest -->
 		</items>
-		<items chance="0.3">
-			<item id="190020087" /><!-- Green Diabol Egg -->
+		<items>
+			<item id="166150019" /> <!-- Assured Greater Felicitous Socketing (Mythic) -->
 		</items>
-		<items chance="0.3">
-			<item id="187050021" /><!-- [Event] Dramata Wings -->
+		<items>
+			<item id="166150018" /> <!-- Assured Greater Felicitous Socketing (Eternal) -->
 		</items>
-		<items chance="0.3">
-			<item id="169600218" /><!-- [Emotion Card] Harvest Reveling -->
+		<items>
+			<item id="160005027" min_count="3" /> <!-- [Event] Ale Jelly -->
 		</items>
-		<items chance="1.1">
-			<item id="188052638" /><!-- [Event] Fabled Godstone Bundle -->
+		<items>
+			<item id="162000119" min_count="5" /> <!-- Superior Life Potion -->
 		</items>
-		<items chance="1.1">
-			<item id="188950007" /><!-- Special Courier Pass (Eternal/Lv. 56 - 60) -->
+		<items>
+			<item id="162000120" min_count="5" /> <!-- Superior Mana Potion -->
 		</items>
-		<items chance="1.1">
-			<item id="188950015" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
+		<items>
+			<item id="188053113" /> <!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</items>
-		<items chance="1.1">
-			<item id="188950018" /><!-- Special Courier Pass (Mythic/Lv. 56-60) -->
+		<items>
+			<item id="186000146" min_count="10" /> <!-- Guestpetal -->
 		</items>
-		<items chance="1.1">
-			<item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
+		<items>
+			<item id="186000237" min_count="100" /> <!-- Ancient Coin -->
 		</items>
-		<items chance="2.875">
-			<item id="166050081" /><!-- Idian: Physical Attack -->
+		<items>
+			<item id="164002116" min_count="3" /> <!-- [Event] Rx: Accelerox -->
 		</items>
-		<items chance="2.875">
-			<item id="166050083" /><!-- Idian: Physical Defense -->
+		<items>
+			<item id="164002117" min_count="3" /> <!-- [Event] Rx: Blitzopan -->
 		</items>
-		<items chance="2.875">
-			<item id="166050082" /><!-- Idian: Magical Attack -->
+		<items>
+			<item id="164002118" min_count="3" /> <!-- [Event] Rx: Castafodin -->
 		</items>
-		<items chance="2.875">
-			<item id="166050084" /><!-- Idian: Magical Defense -->
+		<items>
+			<item id="164002272" min_count="3" /> <!-- [Event] Enduring Greater Raging Wind Scroll -->
 		</items>
-		<items chance="2.875">
-			<item id="166150018" /><!-- Greater Felicitous Socketing (Eternal) -->
+		<items>
+			<item id="164002119" min_count="3" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /> <!-- [Event] Rx: Critozyne -->
+			<item id="164002120" min_count="3" player_classes="CLERIC SORCERER SPIRIT_MASTER BARD GUNNER RIDER" /> <!-- [Event] Rx: Mojocycline -->
 		</items>
-		<items chance="2.875">
-			<item id="166150019" /><!-- Greater Felicitous Socketing (Mythic) -->
+		<items>
+			<item id="152012585" min_count="2" /> <!-- Wind Mote -->
 		</items>
-		<items chance="2.875">
-			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
+		<items>
+			<item id="152012586" min_count="2" /> <!-- Wind Breath -->
 		</items>
-		<items chance="2.875">
-			<item id="186000051" min_count="2" /><!-- Major Ancient Crown -->
+		<items>
+			<item id="152012590" min_count="2" /> <!-- Wind Origin -->
 		</items>
-		<items chance="6">
-			<item id="160002477" min_count="3" /><!-- Fresh Spicy Cheese Plucar -->
+		<items>
+			<item id="152012587" min_count="2" /> <!-- Wind Eternity -->
 		</items>
-		<items chance="6">
-			<item id="160002475" min_count="3" /><!-- Fresh Abex Cheese Soup -->
-		</items>
-		<items chance="6">
-			<item id="162000141" min_count="2" /><!-- Sumblime Wind Serum -->
-		</items>
-		<items chance="6">
-			<item id="162000137" min_count="2" /><!-- Sublime Life Serum -->
-		</items>
-		<items chance="6">
-			<item id="162000139" min_count="2" /><!-- Sublime Mana Serum -->
-		</items>
-		<items chance="6">
-			<item id="164002118" min_count="3" /><!-- [Event] Rx: Castafodin -->
-		</items>
-		<items chance="6">
-			<item id="164002117" min_count="3" /><!-- [Event] Rx: Blitzopan -->
-		</items>
-		<items chance="6">
-			<item id="164002116" min_count="3" /><!-- [Event] Rx: Accelerox -->
-		</items>
-		<items chance="6">
-			<item id="164002272" min_count="3" /><!-- [Event] Enduring Greater Raging Wind Scroll -->
-		</items>
-		<items chance="6">
-			<item id="160005027" min_count="2" /><!-- [Event] Ale Jelly -->
-		</items>
-		<items chance="10">
-			<item id="162001033" min_count="5" /><!-- [Event] Premium Recovery Serum -->
+		<items>
+			<item id="152012593" min_count="2" /> <!-- Valor's Heart -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053102"><!-- Lucky Danuar Reliquary Bundle -->
