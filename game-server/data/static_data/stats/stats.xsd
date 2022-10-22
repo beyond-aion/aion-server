@@ -12,6 +12,7 @@
 		<xs:attribute name="block" type="xs:int"/>
 		<xs:attribute name="parry" type="xs:int"/>
 		<xs:attribute name="pdef" type="xs:int"/>
+		<xs:attribute name="mdef" type="xs:int"/>
 		<xs:attribute name="mresist" type="xs:int"/>
 		<xs:attribute name="attack" type="xs:int"/>
 		<xs:attribute name="accuracy" type="xs:int"/>
