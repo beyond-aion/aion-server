@@ -865,10 +865,6 @@ public class Effect implements StatOwner {
 		return skill == null ? null : skill.getItemTemplate();
 	}
 
-	public boolean isGodstoneActivated() {
-		return getItemTemplate() != null && getItemTemplate().getGodstoneInfo() != null;
-	}
-
 	/**
 	 * Try to add this effect to effected controller
 	 */
