@@ -182,6 +182,8 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				return false;
 			case TARGET_IS_PLAYER:
 				return curTarget instanceof Player;
+			case TARGET_IS_NPC:
+				return curTarget instanceof Npc;
 			case TARGET_IS_MAGICAL_CLASS:
 				return curTarget instanceof Player && !((Player) curTarget).getPlayerClass().isPhysicalClass();
 			case TARGET_IS_PHYSICAL_CLASS:
@@ -201,6 +203,15 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				if (npc instanceof Npc)
 					return !((Npc) npc).isDead();
 				return false;
+			case TARGET_IS_IN_RANGE:
+				if (curTarget instanceof Creature target) {
+					if (target.isDead() || target.getLifeStats().isAboutToDie())
+						return false;
+					if (creature.canSee(target) && PositionUtil.isInRange(creature, target, condTemp.getRange(), false)
+						&& GeoService.getInstance().canSee(creature, target)) {
+						return true;
+					}
+				}
 			default:
 				return true;
 		}

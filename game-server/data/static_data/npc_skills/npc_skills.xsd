@@ -12,14 +12,14 @@
 	</xs:element>
 	<xs:complexType name="NpcSkillList">
 		<xs:sequence>
-			<xs:element name="npc_skill" type="NpcSkillTemplate" minOccurs="1" maxOccurs="unbounded" />
+			<xs:element name="npc_skill" type="NpcSkillTemplate" maxOccurs="unbounded" />
 		</xs:sequence>
 		<xs:attribute name="npc_ids" type="IntListType" />
 	</xs:complexType>
 	<xs:complexType name="NpcSkillTemplate">
 		<xs:sequence>
-			<xs:element name="cond" type="NpcSkillConditionTemplate" minOccurs="0" maxOccurs="1" />
-			<xs:element name="spawn_npc" type="NpcSkillSpawn" minOccurs="0" maxOccurs="1" />
+			<xs:element name="cond" type="NpcSkillConditionTemplate" minOccurs="0" />
+			<xs:element name="spawn_npc" type="NpcSkillSpawn" minOccurs="0" />
 		</xs:sequence>
 		<xs:attribute name="id" type="xs:int" />
 		<xs:attribute name="lv" type="xs:int" />
@@ -68,6 +68,7 @@
 			<xs:enumeration value="NONE" />
 			<xs:enumeration value="HELP_FRIEND" />
 			<xs:enumeration value="TARGET_IS_IN_ANY_STUN" />
+			<xs:enumeration value="TARGET_IS_IN_RANGE" />
 			<xs:enumeration value="TARGET_IS_IN_STUMBLE" />
 			<xs:enumeration value="TARGET_IS_STUNNED" />
 			<xs:enumeration value="TARGET_IS_SLEEPING" />
@@ -77,6 +78,7 @@
 			<xs:enumeration value="TARGET_IS_FLYING" />
 			<xs:enumeration value="TARGET_IS_GATE" />
 			<xs:enumeration value="TARGET_IS_PLAYER" />
+			<xs:enumeration value="TARGET_IS_NPC" />
 			<xs:enumeration value="TARGET_IS_PHYSICAL_CLASS" />
 			<xs:enumeration value="TARGET_IS_MAGICAL_CLASS" />
 			<xs:enumeration value="TARGET_HAS_CARVED_SIGNET" />
