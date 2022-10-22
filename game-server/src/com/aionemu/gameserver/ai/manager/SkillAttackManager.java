@@ -26,8 +26,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * @author ATracer
- * @reworked Yeats
+ * @author ATracer, Yeats
  */
 public class SkillAttackManager {
 
@@ -87,6 +86,13 @@ public class SkillAttackManager {
 					NpcSkillTemplate temp = lastSkill.getTemplate();
 					if (temp != null) {
 						switch (temp.getTarget()) {
+							case FRIEND:
+								owner.getKnownList().getKnownObjects().values().stream()
+									.filter(vo -> vo instanceof Npc npc && !npc.isDead() && !npc.getLifeStats().isAboutToDie() && !owner.isEnemy(npc)
+										&& owner.canSee(npc) && PositionUtil.isInRange(owner, npc, template.getProperties().getFirstTargetRange(), false)
+										&& GeoService.getInstance().canSee(owner, npc))
+									.findAny().ifPresent(owner::setTarget);
+								break;
 							case ME:
 								if (!target.equals(owner)) {
 									owner.setTarget(owner);
@@ -104,8 +110,7 @@ public class SkillAttackManager {
 							case RANDOM_EXCEPT_MOST_HATED:
 								List<Creature> knownCreatures = new ArrayList<>();
 								for (VisibleObject obj : owner.getKnownList().getKnownObjects().values()) {
-									if (obj instanceof Creature && !(obj instanceof Summon) && !(obj instanceof SummonedObject)) {
-										Creature target3 = (Creature) obj;
+									if (obj instanceof Creature target3 && !(obj instanceof Summon) && !(obj instanceof SummonedObject)) {
 										if (target3.isDead() || target3.getLifeStats().isAboutToDie())
 											continue;
 										if (temp.getTarget() == NpcSkillTargetAttribute.RANDOM_EXCEPT_MOST_HATED && owner.getAggroList().getMostHated().equals(target3))
@@ -230,10 +235,8 @@ public class SkillAttackManager {
 		SkillTemplate template = DataManager.SKILL_DATA.getSkillTemplate(entry.getSkillId());
 		Properties prop = template.getProperties();
 		if (prop.getFirstTarget() != FirstTargetAttribute.ME && entry.getTemplate().getTarget() != NpcSkillTargetAttribute.NONE
-			&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.MOST_HATED
-				&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.ME) {
-			if (owner.getTarget() instanceof Creature) {
-				Creature target = (Creature) owner.getTarget();
+			&& entry.getTemplate().getTarget() != NpcSkillTargetAttribute.MOST_HATED && entry.getTemplate().getTarget() != NpcSkillTargetAttribute.ME) {
+			if (owner.getTarget()instanceof Creature target) {
 				if (target.isDead() || !owner.canSee(target)) {
 					return true;
 				}

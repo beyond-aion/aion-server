@@ -92,6 +92,7 @@
 	</xs:simpleType>
 	<xs:simpleType name="NpcSkillTargetAttribute">
 		<xs:restriction base="xs:string">
+			<xs:enumeration value="FRIEND" />
 			<xs:enumeration value="ME" />
 			<xs:enumeration value="MOST_HATED" />
 			<xs:enumeration value="RANDOM" />
