@@ -2,13 +2,12 @@ package com.aionemu.gameserver.world.geo;
 
 import java.util.List;
 
-import com.aionemu.gameserver.ai.poll.AIQuestion;
-import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.utils.PositionUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
@@ -17,9 +16,12 @@ import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.geoEngine.scene.Node;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.HouseDoorState;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -35,12 +37,8 @@ public class GeoService {
 	 */
 	public void initializeGeo() {
 		switch (getConfiguredGeoType()) {
-			case GEO_MESHES:
-				geoData = new RealGeoData();
-				break;
-			case NO_GEO:
-				geoData = new DummyGeoData();
-				break;
+			case GEO_MESHES -> geoData = new RealGeoData();
+			case NO_GEO -> geoData = new DummyGeoData();
 		}
 		log.info("Configured Geo type: " + getConfiguredGeoType());
 		geoData.loadGeoMaps();
@@ -124,6 +122,11 @@ public class GeoService {
 
 	private float getSeeCheckOffset(VisibleObject object) {
 		float height = object.getObjectTemplate().getBoundRadius().getUpper();
+		if (object instanceof Player p && p.isTransformed() && p.getTransformModel().getBanMovement() == 1) {
+			NpcTemplate t = DataManager.NPC_DATA.getNpcTemplate(p.getTransformModel().getModelId());
+			if (t != null)
+				return t.getBoundRadius().getUpper();
+		}
 		if (height > 2.5f)
 			return height / 2;
 		return 1.25f;
@@ -164,7 +167,7 @@ public class GeoService {
 		WorldPosition lastPos = player.getMoveController().getLastPositionFromClient();
 		if (lastPos == null)
 			return new Vector3f(approximatePos.getX(), approximatePos.getY(), approximatePos.getZ());
-		// client sends CM_MOVE in intervals when moving straight, so we search for possible collisions between lastPos and the server side position 
+		// client sends CM_MOVE in intervals when moving straight, so we search for possible collisions between lastPos and the server side position
 		return geoData.getMap(approximatePos.getMapId()).getClosestCollision(lastPos.getX(), lastPos.getY(), lastPos.getZ(), approximatePos.getX(),
 			approximatePos.getY(), approximatePos.getZ(), true, approximatePos.getInstanceId(), CollisionIntention.DEFAULT_COLLISIONS.getId(),
 			IgnoreProperties.ANY_RACE);
@@ -185,12 +188,8 @@ public class GeoService {
 	public void updateTown(Race race, int townId, int level) {
 		if (GeoDataConfig.GEO_ENABLE) {
 			switch (race) {
-				case ELYOS:
-					geoData.getMap(700010000).updateTownToLevel(townId, level);
-					break;
-				case ASMODIANS:
-					geoData.getMap(710010000).updateTownToLevel(townId, level);
-					break;
+				case ELYOS -> geoData.getMap(700010000).updateTownToLevel(townId, level);
+				case ASMODIANS -> geoData.getMap(710010000).updateTownToLevel(townId, level);
 			}
 		}
 	}
