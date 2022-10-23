@@ -56,10 +56,6 @@ public class CM_SELECT_DECOMPOSABLE extends AionClientPacket {
 				if (index + 1 > selectableItems.size()) {
 					return;
 				}
-				if (player.getInventory().isFull()) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL());
-					return;
-				}
 				PacketSendUtility.broadcastPacketAndReceive(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), objectId, item.getItemId()));
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_UNCOMPRESS_COMPRESSED_ITEM_SUCCEEDED(item.getL10n()));
 				player.getInventory().decreaseByObjectId(objectId, 1);
