@@ -26372,6 +26372,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * The Commander is under attack.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_IDLDF5b_TD_Notice_05() {
+		return new SM_SYSTEM_MESSAGE(1401827);
+	}
+
+	/**
 	 * Reian Tribe supplies have been deposited in Peace Square.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_IDKamar_YunSupply_Spawn() {

@@ -1,0 +1,628 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Pashid Siege Volatile -->
+	<npc_skills npc_ids="231142">
+		<npc_skill id="21143" lv="1" /><!-- Activate Self-Destruction -->
+	</npc_skills>
+	<!-- Siege Mine SkillNpc -->
+	<npc_skills npc_ids="284696">
+		<npc_skill id="21272" lv="65" prob="100"><!-- Detonation -->
+			<cond despawn_time="3000" can_die="true" delay="500" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Shatter Mine SkillNpc -->
+	<!-- Pashid Siege Volatile SkillNpc -->
+	<npc_skills npc_ids="284695 284707">
+		<npc_skill id="21431" lv="65" prob="100"><!-- Detonation -->
+			<cond despawn_time="3000" can_die="true" delay="500" />
+		</npc_skill>
+	</npc_skills>
+	<!-- 2x Pashid Assault Pod SkillNpc -->
+	<!-- 2x Pashid Siege Dragon SkillNpc -->
+	<npc_skills npc_ids="284686 284699 284697 284698">
+		<npc_skill id="20776" lv="65" prob="100"><!-- Trooper Shock -->
+			<cond despawn_time="3000" can_die="true" delay="500" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Mine Trap -->
+	<npc_skills npc_ids="283633">
+		<npc_skill id="16560" lv="1" prob="100"><!-- Wide Pierce -->
+			<cond despawn_time="7000" can_die="true" delay="500" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Siege Detonator -->
+	<npc_skills npc_ids="284515">
+		<npc_skill id="21301" lv="1" prob="100" next_chain_id="1" next_skill_time="7000" target="RANDOM" /><!-- Power Attack -->
+		<npc_skill id="17048" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="9000" target="RANDOM" /><!-- Wide Successive Strike -->
+		<npc_skill id="20549" lv="1" prob="100" chain_id="2" target="ME"><!-- Activate Stun Trap -->
+			<spawn_npc npc_id="284759" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Siege Detonator SkillNpc -->
+	<npc_skills npc_ids="284759">
+		<npc_skill id="21206" lv="1" prob="100"><!-- Burn Zone -->
+			<cond despawn_time="3000" can_die="true" delay="500" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Revitalizing Servant -->
+	<npc_skills npc_ids="284441">
+		<npc_skill id="20520" lv="60" prob="100" /><!-- Healing Servant -->
+	</npc_skills>
+	<!-- Grand Commander Pashid -->
+	<npc_skills npc_ids="231130">
+		<npc_skill id="21236" lv="6" prob="100" prio="1" min_time="120000" cd="600000" next_skill_time="6500" /><!-- Exultation -->
+		<npc_skill id="20777" lv="5" prob="100" prio="2" min_time="180000" cd="600000" next_skill_time="6500" /><!-- Triumphant Roar -->
+		<npc_skill id="21237" lv="1" prob="100" prio="3" min_time="240000" cd="60000" next_skill_time="6500" /><!-- Trooper Shock -->
+		<npc_skill id="21234" lv="56" prob="100" next_chain_id="1" next_skill_time="6500" /><!-- Corruption Breath -->
+		<npc_skill id="21231" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7000" /><!-- Acid Bomb -->
+		<npc_skill id="21231" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="7000" /><!-- Acid Bomb -->
+		<npc_skill id="21234" lv="56" prob="100" chain_id="3" next_chain_id="4" next_skill_time="6500" /><!-- Corruption Breath -->
+		<npc_skill id="21239" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="0" /><!-- Gnaw -->
+		<npc_skill id="21235" lv="20" prob="100" chain_id="5" next_chain_id="6" next_skill_time="6000" /><!-- Breath of Utter Darkness -->
+		<npc_skill id="21238" lv="1" prob="100" chain_id="6" next_chain_id="7" next_skill_time="7000" /><!-- Tail Slash -->
+		<npc_skill id="21240" lv="1" chain_id="7" next_skill_time="7000" target="ME" /><!-- Brandish -->
+	</npc_skills>
+	<!-- Pashid Siege Dragon -->
+	<npc_skills npc_ids="231131 231132 231133 231134">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<!-- First Sequence -->
+		<npc_skill id="21231" lv="1" prob="100" prio="1" next_chain_id="3" next_skill_time="16000"><!-- Acid Bomb -->
+			<cond cond_type="TARGET_IS_NPC" />
+		</npc_skill>
+		<npc_skill id="21231" lv="1" prob="100" prio="2" next_chain_id="3" next_skill_time="9000"><!-- Acid Bomb -->
+			<cond cond_type="TARGET_IS_PLAYER" />
+		</npc_skill>
+		<npc_skill id="21239" lv="1" prob="100" prio="3" next_chain_id="2" next_skill_time="0"><!-- Gnaw -->
+			<cond cond_type="TARGET_IS_IN_RANGE" range="7" />
+		</npc_skill>
+		<npc_skill id="21240" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="9000" /><!-- Brandish -->
+		<!-- Second Sequence -->
+		<npc_skill id="21231" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="16000"><!-- Acid Bomb -->
+			<cond cond_type="TARGET_IS_NPC" />
+		</npc_skill>
+		<npc_skill id="21231" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="9000" target="RANDOM"><!-- Acid Bomb -->
+			<cond cond_type="TARGET_IS_PLAYER" />
+		</npc_skill>
+		<!-- Third Sequence -->
+		<npc_skill id="21231" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="16000"><!-- Acid Bomb -->
+			<cond cond_type="TARGET_IS_NPC" />
+		</npc_skill>
+		<npc_skill id="21231" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="9000"><!-- Acid Bomb -->
+			<cond cond_type="TARGET_IS_PLAYER" />
+		</npc_skill>
+		<!-- Fourth Sequence -->
+		<npc_skill id="21237" lv="1" prob="100" chain_id="5" next_skill_time="8500"><!-- Trooper Shock -->
+			<cond cond_type="TARGET_IS_IN_RANGE" range="7" />
+		</npc_skill>
+		<npc_skill id="21231" lv="1" prob="100" chain_id="5" next_skill_time="9000" target="RANDOM"><!-- Acid Bomb -->
+			<cond cond_type="TARGET_IS_PLAYER" />
+		</npc_skill>
+		<npc_skill id="21231" lv="1" prob="100" chain_id="4" next_skill_time="16000"><!-- Acid Bomb -->
+			<cond cond_type="TARGET_IS_NPC" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Advance Protector (Kn) -->
+	<npc_skills npc_ids="231105">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21284" lv="1" prob="100" cd="10000" /><!-- Wide Power Attack -->
+		<npc_skill id="20556" lv="1" prob="100" prio="1" cd="8000"><!-- Protective Shield (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="50" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Advance Ambusher (As) -->
+	<npc_skills npc_ids="231106">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17332" lv="1" prob="100" cd="11000" /><!-- Swift Edge -->
+		<npc_skill id="17321" lv="1" prob="30" target="RANDOM"><!-- Surprise Attack (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="20" range="10" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Advance Magus (Wi) -->
+	<npc_skills npc_ids="231107">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17335" lv="1" prob="100" cd="7000" /><!-- Flame Bolt -->
+		<npc_skill id="21298" lv="1" prob="30" target="RANDOM"><!-- Flame (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="20" range="10" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Advance Gunner (Gu) -->
+	<npc_skills npc_ids="231108">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21293" lv="1" prob="100" cd="12000" /><!-- Deadeye -->
+		<npc_skill id="21292" lv="1" prob="30" target="RANDOM"><!-- Powerful Shot (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="20" range="10" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Advance Medic (Pr) -->
+	<npc_skills npc_ids="231109">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17359" lv="1" prob="100" cd="10500" /><!-- Hallowed Strike -->
+		<npc_skill id="17360" lv="1" prob="100"><!-- Wide Area Hallowed Strike -->
+			<cond cond_type="HELP_FRIEND" hp_below="50" range="10" />
+		</npc_skill>
+		<npc_skill id="19036" lv="1" prob="30" target="RANDOM"><!-- Light of Recovery (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="50" range="10" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Strike Fighter (Fi) -->
+	<npc_skills npc_ids="231110">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17294" lv="1" prob="100" cd="10500" /><!-- Ferocious Strike I -->
+		<npc_skill id="21284" lv="1" prob="100" cd="10500" /><!-- Wide Power Attack -->
+		<npc_skill id="17714" lv="1" prob="100" target="RANDOM"><!-- Accurate Hit (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="20" range="10" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Strike Spellcaster (Wi) -->
+	<npc_skills npc_ids="231111">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17335" lv="1" prob="100" cd="10000" /><!-- Flame Bolt -->
+		<npc_skill id="21298" lv="1" prob="100" cd="10000" /><!-- Flame -->
+		<npc_skill id="16775" lv="1" prob="100" target="RANDOM"><!-- Large Magic Missile (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="20" range="13" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Strike Marksman (Ra) -->
+	<npc_skills npc_ids="231112">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17317" lv="1" prob="100" cd="10000" /><!-- Arrow Strike -->
+		<npc_skill id="17318" lv="1" prob="100" cd="11000" /><!-- Entangling Shot -->
+		<npc_skill id="17683" lv="1" prob="100" target="RANDOM"><!-- Throw Trap (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="20" range="10" />
+			<spawn_npc npc_id="283633" min_distance="2" max_distance="2" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Strike Cavalry (Ri) -->
+	<npc_skills npc_ids="231113">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21297" lv="1" prob="100" prio="1" cd="10000" /><!-- Wide Power Attack -->
+		<npc_skill id="21294" lv="1" prob="100" prio="2" cd="10500" /><!-- Thrash -->
+		<npc_skill id="20648" lv="1" prob="100" target="RANDOM"><!-- Pincer Attack (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="50" range="10" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Combat Striker (Gu) -->
+	<npc_skills npc_ids="231114">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21293" lv="1" prob="100" cd="12000" /><!-- Deadeye -->
+		<npc_skill id="21299" lv="1" prob="100" target="RANDOM"><!-- Area Shot (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="20" range="10" />
+			<spawn_npc npc_id="283633" min_distance="2" max_distance="2" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Siege Soldier & Combatant (Fi) -->
+	<npc_skills npc_ids="231115 233313">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17294" lv="1" prob="100" next_chain_id="1" next_skill_time="7500" /><!-- Ferocious Strike I -->
+		<npc_skill id="21284" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7000" /><!-- Wide Power Attack -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="7500" /><!-- Ferocious Strike I -->
+		<npc_skill id="21285" lv="1" prob="30" chain_id="3" next_chain_id="1" next_skill_time="7500" /><!-- Accurate Hit -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="3" next_chain_id="1" next_skill_time="7500" /><!-- Ferocious Strike I -->
+	</npc_skills>
+	<!-- Pashid Siege Mage (Wi) -->
+	<npc_skills npc_ids="231116">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17335" lv="1" prob="100" next_chain_id="1" next_skill_time="6000" /><!-- Flame Bolt -->
+		<npc_skill id="21288" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="6500" /><!-- Fire Burst -->
+		<npc_skill id="17335" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="6000" /><!-- Flame Bolt -->
+		<npc_skill id="17338" lv="1" prob="30" chain_id="3" next_chain_id="1" next_skill_time="9500" /><!-- Hydro Eruption -->
+		<npc_skill id="17335" lv="1" prob="100" chain_id="3" next_chain_id="1" next_skill_time="6000" /><!-- Flame Bolt -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Combatant (Fi) -->
+	<npc_skills npc_ids="231117">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21285" lv="1" prob="100" next_chain_id="1" next_skill_time="7500" /><!-- Accurate Hit -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7500" /><!-- Ferocious Strike I -->
+		<npc_skill id="21284" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="7000" /><!-- Wide Power Attack -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="7500" /><!-- Ferocious Strike I -->
+		<npc_skill id="20703" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="6500" /><!-- Blood Sucking -->
+		<npc_skill id="21285" lv="1" prob="100" chain_id="5" next_chain_id="1" next_skill_time="7500" target="RANDOM" /><!-- Accurate Hit -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Protector & Defender (Kn) -->
+	<npc_skills npc_ids="231118 233314">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20556" lv="1" prob="100" next_chain_id="1" next_skill_time="9000" /><!-- Protective Shield -->
+		<npc_skill id="21284" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="12000" /><!-- Wide Power Attack -->
+		<npc_skill id="17295" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="6000" /><!-- Ferocious Strike II -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="9500" /><!-- Ferocious Strike I -->
+		<npc_skill id="20556" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="5000" /><!-- Protective Shield -->
+		<npc_skill id="17295" lv="1" prob="100" chain_id="5" next_chain_id="6" next_skill_time="7000" /><!-- Ferocious Strike II -->
+		<npc_skill id="21284" lv="1" prob="100" chain_id="6" next_chain_id="7" next_skill_time="10000" /><!-- Wide Power Attack -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="7" next_chain_id="1" next_skill_time="7500" /><!-- Ferocious Strike I -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Ambusher (As) -->
+	<npc_skills npc_ids="231119">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17332" lv="1" prob="100" next_chain_id="1" next_skill_time="7000" /><!-- Swift Edge -->
+		<npc_skill id="17333" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="6500" /><!-- Wide Area Swift Edge -->
+		<npc_skill id="17332" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="7000" /><!-- Swift Edge -->
+		<npc_skill id="21286" lv="1" prob="30" chain_id="3" next_chain_id="1" next_skill_time="9500" /><!-- Fatal Disease -->
+		<npc_skill id="17332" lv="1" prob="100" chain_id="3" next_chain_id="1" next_skill_time="7000" /><!-- Swift Edge -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Troublemaker (As) -->
+	<npc_skills npc_ids="231120">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21432" lv="1" prob="0" is_post_spawn="true" /><!-- Reserved Step (Hide2) -->
+		<npc_skill id="17321" lv="1" prob="100" next_chain_id="1" next_skill_time="4000" cd="90000" /><!-- Surprise Attack -->
+		<npc_skill id="17332" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7000" /><!-- Swift Edge -->
+		<npc_skill id="21289" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="0" /><!-- Turn Back -->
+		<npc_skill id="21432" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="0" target="ME" /><!-- Reserved Step (Hide2) -->
+		<npc_skill id="17321" lv="1" prob="100" chain_id="4" next_chain_id="1" next_skill_time="9000" target="RANDOM" /><!-- Surprise Attack -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Scout (As) -->
+	<npc_skills npc_ids="231121">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17332" lv="1" prob="100" next_chain_id="1" next_skill_time="8000" /><!-- Swift Edge -->
+		<npc_skill id="17333" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7500" /><!-- Wide Area Swift Edge -->
+		<npc_skill id="17332" lv="1" prob="100" chain_id="2" next_skill_time="13000" /><!-- Swift Edge -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Marksman (Ra) -->
+	<npc_skills npc_ids="231122">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17318" lv="1" prob="100" next_chain_id="1" next_skill_time="8000" /><!-- Entangling Shot -->
+		<npc_skill id="17683" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="9000" target="ME"><!-- Throw Trap -->
+			<spawn_npc npc_id="283633" min_distance="5" max_distance="5" />
+		</npc_skill>
+		<npc_skill id="17317" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="0" /><!-- Arrow Strike -->
+		<npc_skill id="17314" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="11000" /><!-- Arrow Deluge -->
+		<npc_skill id="17317" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="7000" /><!-- Arrow Strike -->
+		<npc_skill id="17316" lv="1" prob="100" chain_id="5" next_chain_id="2" next_skill_time="7500" /><!-- Wedge Wave -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Magus (Wi) -->
+	<npc_skills npc_ids="231124">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21287" lv="1" prob="100" next_chain_id="1" next_skill_time="4500" /><!-- Agrint Curse -->
+		<npc_skill id="17335" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="0" /><!-- Flame Bolt -->
+		<npc_skill id="21298" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="0" /><!-- Flame -->
+		<npc_skill id="17335" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="3000" /><!-- Flame Bolt -->
+		<npc_skill id="21298" lv="1" prob="100" chain_id="4" /><!-- Flame -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Summoner (El) -->
+	<npc_skills npc_ids="231125">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21288" lv="1" prob="100" next_chain_id="1" next_skill_time="7500" /><!-- Fire Burst -->
+		<npc_skill id="20657" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7500"><!-- Summoning Ritual -->
+			<spawn_npc npc_id="284515" min_distance="3" max_distance="3" />
+		</npc_skill>
+		<npc_skill id="21288" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="15500" /><!-- Fire Burst -->
+		<npc_skill id="17338" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="11500" /><!-- Hydro Eruption -->
+		<npc_skill id="21288" lv="1" prob="100" chain_id="4" next_chain_id="1" next_skill_time="10500" /><!-- Fire Burst -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Cavalry (Ri) -->
+	<npc_skills npc_ids="231126">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20648" lv="1" prob="100" next_chain_id="1" next_skill_time="0" /><!-- Pincer Attack -->
+		<npc_skill id="20704" lv="10" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7000" /><!-- Area Press -->
+		<npc_skill id="21294" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="7500" /><!-- Thrash -->
+		<npc_skill id="21297" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="7000" /><!-- Wide Power Attack -->
+		<npc_skill id="21294" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="7500" /><!-- Thrash -->
+		<npc_skill id="21296" lv="10" prob="100" chain_id="5" next_chain_id="2" next_skill_time="6500" /><!-- Sweeping -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Striker & Gunner (Gu) -->
+	<npc_skills npc_ids="231127 233315">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20713" lv="1" prob="100" next_chain_id="1" next_skill_time="6500" target="RANDOM" /><!-- Thunder Crash Fallout -->
+		<npc_skill id="21292" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7500" /><!-- Powerful Shot -->
+		<npc_skill id="20858" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="6000" /><!-- Area Thunder Crash Fallout -->
+		<npc_skill id="21299" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="6500" /><!-- Area Shot -->
+		<npc_skill id="20713" lv="1" prob="100" chain_id="4" next_chain_id="1" next_skill_time="7500" /><!-- Thunder Crash Fallout  -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Medic (Pr) -->
+	<npc_skills npc_ids="231128">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17359" lv="1" prob="100" cd="17000" /><!-- Hallowed Strike -->
+		<npc_skill id="17700" lv="1" prob="100" cd="36000" /><!-- Hydro Eruption -->
+		<npc_skill id="21278" lv="1" prob="100" min_time="30000" cd="36000" /><!-- Wide Area Divine Touch -->
+		<npc_skill id="17361" lv="1" prob="100" cd="20000"><!-- Healing Light (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="50" range="10" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Elite Siege Drummer (Mu) -->
+	<npc_skills npc_ids="231129">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20715" lv="1" prob="100" prio="1" max_time="15000" /><!-- Deceleration Curse -->
+		<npc_skill id="20960" lv="1" prob="100" cd="16000" /><!-- Sound Wave Attack -->
+		<npc_skill id="20959" lv="1" prob="100" min_time="18000" cd="36000" /><!-- Sound Impact -->
+		<npc_skill id="20714" lv="1" prob="100" min_time="36000" cd="37000" /><!-- Magic's Freedom -->
+		<npc_skill id="17361" lv="1" prob="100" cd="20000"><!-- Healing Light (limit 3x on retail) -->
+			<cond cond_type="HELP_FRIEND" hp_below="50" range="10" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Siege Cannon -->
+	<npc_skills npc_ids="231144">
+		<npc_skill id="20378" lv="1" prob="100" next_chain_id="1" next_skill_time="9500" /><!-- Precision Bombardment -->
+		<npc_skill id="20381" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="9500" /><!-- Blanket Bombardment -->
+		<npc_skill id="20378" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="9500" /><!-- Precision Bombardment -->
+		<npc_skill id="20378" lv="1" prob="100" chain_id="3" next_chain_id="1" next_skill_time="9500" /><!-- Precision Bombardment -->
+	</npc_skills>
+	<!-- Pashid Scout Commander Azute & Zest + Artillery Commander Murat & Kaimdu (Ri) -->
+	<npc_skills npc_ids="231168 231169 231174 231175">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20701" lv="56" prob="0" is_post_spawn="true" /><!-- Blessing of Blood -->
+		<!-- First Chain -->
+		<npc_skill id="21294" lv="1" prob="100" min_hp="51" max_hp="100" next_chain_id="1" next_skill_time="5500" /><!-- Thrash -->
+		<!-- First Chain Variation 1 -->
+		<npc_skill id="20648" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="0" target="RANDOM" /><!-- Pincer Attack -->
+		<npc_skill id="20704" lv="10" prob="100" chain_id="2" next_chain_id="3" next_skill_time="5500" /><!-- Area Press -->
+		<npc_skill id="21297" lv="1" prob="100" chain_id="3" next_chain_id="5" next_skill_time="5000" /><!-- Wide Power Attack -->
+		<!-- First Chain Variation 2 -->
+		<npc_skill id="21296" lv="10" prob="100" chain_id="1" next_chain_id="4" next_skill_time="7500" /><!-- Sweeping -->
+		<npc_skill id="21297" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="5000" /><!-- Wide Power Attack -->
+		<npc_skill id="21294" lv="1" prob="100" chain_id="5" next_skill_time="5500" /><!-- Thrash -->
+		<!-- Second Chain -->
+		<npc_skill id="21296" lv="10" prob="100" min_hp="0" max_hp="50" next_chain_id="6" next_skill_time="0" /><!-- Sweeping -->
+		<npc_skill id="21294" lv="1" prob="100" chain_id="6" next_chain_id="7" next_skill_time="2000" /><!-- Thrash -->
+		<!-- Second Chain Variation 1 -->
+		<npc_skill id="20648" lv="1" prob="100" chain_id="7" next_chain_id="8" next_skill_time="0" target="RANDOM" /><!-- Pincer Attack -->
+		<npc_skill id="20704" lv="10" prob="100" chain_id="8" next_chain_id="11" next_skill_time="6000" /><!-- Area Press -->
+		<!-- Second Chain Variation 2 -->
+		<npc_skill id="20648" lv="1" prob="100" chain_id="7" next_chain_id="9" next_skill_time="0" target="RANDOM" /><!-- Pincer Attack -->
+		<npc_skill id="21296" lv="10" prob="100" chain_id="9" next_chain_id="10" next_skill_time="0" /><!-- Sweeping -->
+		<npc_skill id="20704" lv="10" prob="100" chain_id="10" next_chain_id="11" next_skill_time="3000" /><!-- Area Press -->
+		<npc_skill id="21294" lv="1" prob="100" chain_id="11" next_skill_time="5500" /><!-- Thrash -->
+	</npc_skills>
+	<!-- Pashid Scout Commander Sartas (El) -->
+	<npc_skills npc_ids="231170">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20701" lv="56" prob="0" is_post_spawn="true" /><!-- Blessing of Blood -->
+		<npc_skill id="20657" lv="1" prob="100" prio="1" max_time="12000" cd="20000"><!-- Summoning Ritual -->
+			<spawn_npc npc_id="284515" min_count="2" max_count="2" min_distance="5" max_distance="5" />
+		</npc_skill>
+		<!-- First Chain -->
+		<npc_skill id="17335" lv="1" prob="100" min_hp="61" max_hp="100" next_chain_id="1" next_skill_time="5000" /><!-- Flame Bolt -->
+		<npc_skill id="17335" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="5000" target="RANDOM" /><!-- Flame Bolt -->
+		<npc_skill id="21288" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="5500" /><!-- Fire Burst -->
+		<npc_skill id="17335" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="5000" /><!-- Flame Bolt -->
+		<npc_skill id="21288" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="5500" /><!-- Fire Burst -->
+		<npc_skill id="20657" lv="1" prob="100" chain_id="5" next_skill_time="5000"><!-- Summoning Ritual -->
+			<spawn_npc npc_id="284515" min_count="2" max_count="2" min_distance="5" max_distance="5" />
+		</npc_skill>
+		<!-- Second Chain -->
+		<npc_skill id="20657" lv="1" prob="100" min_hp="0" max_hp="60" next_chain_id="6" next_skill_time="7000"><!-- Summoning Ritual -->
+			<spawn_npc npc_id="284515" min_count="2" max_count="2" min_distance="5" max_distance="5" />
+		</npc_skill>
+		<npc_skill id="17335" lv="1" prob="100" chain_id="6" next_chain_id="7" next_skill_time="5000" /><!-- Flame Bolt -->
+		<npc_skill id="17335" lv="1" prob="100" chain_id="7" next_chain_id="8" next_skill_time="5000" /><!-- Flame Bolt -->
+		<npc_skill id="20657" lv="1" prob="100" chain_id="8" next_chain_id="9" next_skill_time="7000"><!-- Summoning Ritual -->
+			<spawn_npc npc_id="284515" min_count="2" max_count="2" min_distance="5" max_distance="5" />
+		</npc_skill>
+		<npc_skill id="17335" lv="1" prob="100" chain_id="9" next_chain_id="10" next_skill_time="5000" /><!-- Flame Bolt -->
+		<npc_skill id="21288" lv="1" prob="100" chain_id="10" next_chain_id="6" next_skill_time="5500" /><!-- Fire Burst -->
+	</npc_skills>
+	<!-- Pashid Infantry Commander Matuk (Wi) -->
+	<npc_skills npc_ids="231171">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20701" lv="56" prob="0" is_post_spawn="true" /><!-- Blessing of Blood -->
+		<!-- First Chain -->
+		<npc_skill id="17722" lv="1" prob="100" min_hp="51" max_hp="100" next_chain_id="1" next_skill_time="5500" /><!-- Head Wound -->
+		<npc_skill id="17335" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="8000" /><!-- Flame Bolt -->
+		<npc_skill id="21288" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="5500" /><!-- Fire Burst -->
+		<npc_skill id="17338" lv="1" prob="100" chain_id="3" next_skill_time="4500" /><!-- Hydro Eruption -->
+		<!-- Second Chain -->
+		<npc_skill id="20712" lv="1" prob="100" min_hp="0" max_hp="50" next_chain_id="4" next_skill_time="4500" /><!-- Withering Gloom -->
+		<npc_skill id="17338" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="4500" /><!-- Hydro Eruption -->
+		<npc_skill id="21288" lv="1" prob="100" chain_id="5" next_chain_id="6" next_skill_time="4500" /><!-- Fire Burst -->
+		<npc_skill id="21287" lv="1" prob="100" chain_id="6" next_chain_id="7" next_skill_time="8500" /><!-- Agrint Curse -->
+		<npc_skill id="17722" lv="1" prob="100" chain_id="6" next_chain_id="7" next_skill_time="8500" /><!-- Head Wound -->
+		<npc_skill id="17338" lv="1" prob="100" chain_id="7" next_chain_id="8" next_skill_time="4500" /><!-- Hydro Eruption -->
+		<npc_skill id="21288" lv="1" prob="100" chain_id="8" next_chain_id="4" next_skill_time="4500" /><!-- Fire Burst -->
+	</npc_skills>
+	<!-- Pashid Assault Commander Badute & Katsu (Gu) -->
+	<npc_skills npc_ids="231172 231173">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20701" lv="56" prob="0" is_post_spawn="true" /><!-- Blessing of Blood -->
+		<npc_skill id="17003" lv="1" prob="100" prio="1" max_time="12000" target="RANDOM" />
+		<!-- First Chain -->
+		<npc_skill id="20858" lv="1" prob="100" min_hp="51" max_hp="100" next_chain_id="1" next_skill_time="4000" /><!-- Area Thunder Crash Fallout -->
+		<npc_skill id="17003" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="8000" /><!-- Powerful Shot -->
+		<npc_skill id="21299" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="4500" /><!-- Area Shot -->
+		<npc_skill id="17003" lv="1" prob="100" chain_id="3" next_skill_time="5000" /><!-- Powerful Shot -->
+		<!-- Second Chain -->
+		<npc_skill id="21226" lv="1" prob="100" min_hp="0" max_hp="50" next_chain_id="4" next_skill_time="0" /><!-- Mid-Range Binding -->
+		<npc_skill id="21227" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="4500" /><!-- Mid-Range Binding Explosion -->
+		<npc_skill id="17003" lv="1" prob="100" chain_id="5" next_chain_id="6" next_skill_time="5000" /><!-- Powerful Shot -->
+		<npc_skill id="20858" lv="1" prob="100" chain_id="6" next_chain_id="7" next_skill_time="7000" /><!-- Area Thunder Crash Fallout -->
+		<npc_skill id="17003" lv="1" prob="100" chain_id="7" next_chain_id="8" next_skill_time="0" target="RANDOM" /><!-- Powerful Shot -->
+		<npc_skill id="21293" lv="1" prob="100" chain_id="8" next_chain_id="9" next_skill_time="7000" /><!-- Deadeye -->
+		<npc_skill id="17003" lv="1" prob="100" chain_id="9" next_chain_id="12" next_skill_time="5000" /><!-- Powerful Shot -->
+		<npc_skill id="21226" lv="1" prob="100" chain_id="7" next_chain_id="9" next_skill_time="0" /><!-- Mid-Range Binding -->
+		<npc_skill id="21227" lv="1" prob="100" chain_id="10" next_chain_id="11" next_skill_time="7500" /><!-- Mid-Range Binding Explosion -->
+		<npc_skill id="17003" lv="1" prob="100" chain_id="11" next_chain_id="12" next_skill_time="5000" target="RANDOM" /><!-- Powerful Shot -->
+		<npc_skill id="17003" lv="1" prob="100" chain_id="12" next_chain_id="13" next_skill_time="5000" /><!-- Powerful Shot -->
+		<npc_skill id="21299" lv="1" prob="100" chain_id="13" next_chain_id="4" next_skill_time="4500" /><!-- Area Shot -->
+	</npc_skills>
+	<!-- Pashid Infantry Commander Nirta (As) -->
+	<npc_skills npc_ids="231176">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20701" lv="56" prob="0" is_post_spawn="true" /><!-- Blessing of Blood -->
+		<npc_skill id="18159" lv="1" prob="100" prio="1" max_time="12000" /><!-- Powerful Ambush -->
+		<!-- First Chain -->
+		<npc_skill id="17446" lv="1" prob="100" min_hp="51" max_hp="100" next_chain_id="1" next_skill_time="6500" /><!-- Showering Strike -->
+		<npc_skill id="17332" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="5000" /><!-- Swift Edge -->
+		<npc_skill id="17332" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="5000" /><!-- Swift Edge -->
+		<npc_skill id="17320" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="0" /><!-- Frontal Strike -->
+		<npc_skill id="18159" lv="1" prob="100" chain_id="4" next_skill_time="7000" /><!-- Powerful Ambush -->
+		<npc_skill id="18159" lv="1" prob="100" chain_id="3" next_skill_time="5000" /><!-- Powerful Ambush -->
+		<!-- Second Chain -->
+		<npc_skill id="18158" lv="56" prob="100" min_hp="0" max_hp="50" next_chain_id="9" next_skill_time="6500" /><!-- Wrathful Venom Burst -->
+		<npc_skill id="18160" lv="1" prob="100" chain_id="10" next_chain_id="11" next_skill_time="5000" /><!-- Virulence -->
+		<npc_skill id="17320" lv="1" prob="100" chain_id="11" next_chain_id="12" next_skill_time="0" target="RANDOM" /><!-- Frontal Strike -->
+		<npc_skill id="18159" lv="1" prob="100" chain_id="12" next_chain_id="13" next_skill_time="8000" /><!-- Powerful Ambush -->
+		<npc_skill id="17446" lv="1" prob="100" chain_id="13" next_chain_id="14" next_skill_time="6500" /><!-- Showering Strike -->
+		<npc_skill id="18158" lv="56" prob="100" chain_id="14" next_chain_id="15" next_skill_time="4500" /><!-- Wrathful Venom Burst -->
+		<npc_skill id="18160" lv="1" prob="100" chain_id="15" next_chain_id="16" next_skill_time="5000" /><!-- Virulence -->
+		<npc_skill id="18159" lv="1" prob="100" chain_id="16" next_chain_id="17" next_skill_time="5000" /><!-- Powerful Ambush -->
+		<npc_skill id="17446" lv="1" prob="100" chain_id="17" next_chain_id="18" next_skill_time="6500" /><!-- Showering Strike -->
+		<npc_skill id="18158" lv="56" prob="100" chain_id="18" next_chain_id="10" next_skill_time="4500" /><!-- Wrathful Venom Burst -->
+	</npc_skills>
+	<!-- Deathbringer Tariksha (As) -->
+	<npc_skills npc_ids="231177">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="18159" lv="1" prob="100" next_chain_id="1" next_skill_time="0" /><!-- Powerful Ambush -->
+		<npc_skill id="21411" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="8000" /><!-- Rune Carve -->
+		<npc_skill id="17332" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="8000" /><!-- Swift Edge -->
+		<npc_skill id="17446" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="9500" /><!-- Showering Strike -->
+		<npc_skill id="17332" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="8000" /><!-- Swift Edge -->
+		<npc_skill id="21412" lv="56" prob="100" chain_id="5" next_chain_id="1" next_skill_time="7000" /><!-- Pain Rune -->
+	</npc_skills>
+	<!-- Commander Hakunta & Rakunta (Fi) -->
+	<npc_skills npc_ids="231178 231179">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20701" lv="56" prob="0" is_post_spawn="true" /><!-- Blessing of Blood -->
+		<npc_skill id="17875" lv="1" prob="100" prio="1" max_time="12000" /><!-- Sword Force -->
+		<!-- First Chain -->
+		<npc_skill id="17294" lv="1" prob="100" min_hp="51" max_hp="100" next_chain_id="1" next_skill_time="4500" /><!-- Ferocious Strike I -->
+		<npc_skill id="17714" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="0" target="RANDOM" /><!-- Accurate Hit -->
+		<npc_skill id="20703" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="5000" /><!-- Blood Sucking -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="4500" /><!-- Ferocious Strike I -->
+		<npc_skill id="21284" lv="1" prob="100" chain_id="4" next_skill_time="5000" /><!-- Wide Power Attack -->
+		<!-- Second Chain -->
+		<npc_skill id="17295" lv="1" prob="100" min_hp="0" max_hp="50" next_chain_id="5" next_skill_time="5000" /><!-- Ferocious Strike II -->
+		<npc_skill id="17714" lv="1" prob="100" chain_id="5" next_chain_id="6" next_skill_time="0" target="RANDOM" /><!-- Accurate Hit -->
+		<npc_skill id="22658" lv="1" prob="100" chain_id="6" next_chain_id="7" next_skill_time="7000" /><!-- Area Blood Sucking -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="7" next_chain_id="8" next_skill_time="5500" /><!-- Ferocious Strike I -->
+		<npc_skill id="17295" lv="1" prob="100" chain_id="8" next_chain_id="5" next_skill_time="5000" /><!-- Ferocious Strike II -->
+	</npc_skills>
+	<!-- Pashid Siege Ambusher (As) -->
+	<npc_skills npc_ids="233309">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17332" lv="1" prob="100" next_chain_id="1" next_skill_time="6500" /><!-- Swift Edge -->
+		<npc_skill id="17333" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="6500" /><!-- Wide Area Swift Edge -->
+		<npc_skill id="21286" lv="1" prob="30" chain_id="2" next_chain_id="1" next_skill_time="6500" /><!-- Fatal Disease -->
+		<npc_skill id="17332" lv="1" prob="100" chain_id="2" next_chain_id="1" next_skill_time="6500" /><!-- Swift Edge -->
+	</npc_skills>
+	<!-- Pashid Siege Cavalry (Ri) -->
+	<npc_skills npc_ids="233310">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21294" lv="1" prob="100" next_chain_id="1" next_skill_time="7500" /><!-- Thrash -->
+		<npc_skill id="21297" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7000" /><!-- Wide Power Attack -->
+		<npc_skill id="21294" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="7500" /><!-- Thrash -->
+		<npc_skill id="20648" lv="1" prob="30" chain_id="3" next_chain_id="1" next_skill_time="7000" target="RANDOM" /><!-- Pincer Attack -->
+		<npc_skill id="21294" lv="1" prob="100" chain_id="3" next_chain_id="1" next_skill_time="7500" /><!-- Thrash -->
+	</npc_skills>
+	<!-- Pashid Siege Engineer (Gu) -->
+	<npc_skills npc_ids="233311">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20713" lv="1" prob="100" next_chain_id="1" next_skill_time="6500" /><!-- Thunder Crash Fallout -->
+		<npc_skill id="21292" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7500" /><!-- Powerful Shot -->
+		<npc_skill id="20713" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="6500" /><!-- Thunder Crash Fallout -->
+		<npc_skill id="21299" lv="1" prob="30" chain_id="3" next_chain_id="1" next_skill_time="6500" /><!-- Area Shot -->
+		<npc_skill id="21292" lv="1" prob="100" chain_id="3" next_chain_id="1" next_skill_time="7500" /><!-- Powerful Shot -->
+	</npc_skills>
+	<!-- Pashid Assault Tribuni Combatant (Fi) -->
+	<npc_skills npc_ids="230744">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21285" lv="1" prob="100" next_chain_id="1" next_skill_time="7500" /><!-- Accurate Hit -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7500" /><!-- Ferocious Strike I -->
+		<npc_skill id="21284" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="7000" /><!-- Wide Power Attack -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="7500" /><!-- Ferocious Strike I -->
+		<npc_skill id="20703" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="6500" /><!-- Blood Sucking -->
+		<npc_skill id="21285" lv="1" prob="100" chain_id="5" next_chain_id="1" next_skill_time="7500" target="RANDOM" /><!-- Accurate Hit -->
+	</npc_skills>
+	<!-- Pashid Assault Tribuni Protector (Kn) -->
+	<npc_skills npc_ids="230745">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20556" lv="1" prob="100" next_chain_id="1" next_skill_time="9000" target="FRIEND" /><!-- Protective Shield -->
+		<npc_skill id="21284" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="12000" /><!-- Wide Power Attack -->
+		<npc_skill id="17295" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="6000" /><!-- Ferocious Strike II -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="9500" /><!-- Ferocious Strike I -->
+		<npc_skill id="20556" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="5000" /><!-- Protective Shield -->
+		<npc_skill id="17295" lv="1" prob="100" chain_id="5" next_chain_id="6" next_skill_time="7000" /><!-- Ferocious Strike II -->
+		<npc_skill id="21284" lv="1" prob="100" chain_id="6" next_chain_id="7" next_skill_time="10000" /><!-- Wide Power Attack -->
+		<npc_skill id="17294" lv="1" prob="100" chain_id="7" next_chain_id="1" next_skill_time="4500" /><!-- Ferocious Strike I -->
+	</npc_skills>
+	<!-- Pashid Assault Tribuni Sentry (As) -->
+	<npc_skills npc_ids="230746">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17332" lv="1" prob="100" next_chain_id="1" next_skill_time="7000" /><!-- Swift Edge -->
+		<npc_skill id="17333" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="6500" /><!-- Wide Area Swift Edge -->
+		<npc_skill id="17332" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="7000" /><!-- Swift Edge -->
+		<npc_skill id="21286" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="0" /><!-- Fatal Disease -->
+		<npc_skill id="21290" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="8000" /><!-- Boost Deadly Virulency -->
+		<npc_skill id="17332" lv="1" prob="100" chain_id="5" next_chain_id="1" next_skill_time="7000" /><!-- Swift Edge -->
+	</npc_skills>
+	<!-- Pashid Assault Tribuni Marksman (Ra) -->
+	<npc_skills npc_ids="230749">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="17318" lv="1" prob="100" next_chain_id="1" next_skill_time="8000" /><!-- Entangling Shot -->
+		<npc_skill id="17683" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="9000" target="ME"><!-- Throw Trap -->
+			<spawn_npc npc_id="283633" min_distance="5" max_distance="5" />
+		</npc_skill>
+		<npc_skill id="19022" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="0" /><!-- Arrow Strike -->
+		<npc_skill id="17314" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="13000" /><!-- Arrow Deluge -->
+		<npc_skill id="19022" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="7000" /><!-- Arrow Strike -->
+		<npc_skill id="17316" lv="1" prob="100" chain_id="5" next_chain_id="6" next_skill_time="7500" /><!-- Wedge Wave -->
+		<npc_skill id="17318" lv="1" prob="100" chain_id="6" next_chain_id="7" next_skill_time="8000" /><!-- Entangling Shot -->
+		<npc_skill id="19022" lv="1" prob="100" chain_id="7" next_chain_id="8" next_skill_time="12000" /><!-- Arrow Strike -->
+		<npc_skill id="17316" lv="1" prob="100" chain_id="8" next_chain_id="5" next_skill_time="6000" /><!-- Wedge Wave -->
+	</npc_skills>
+	<!-- Pashid Elite Siege Sorcerer & Rampager (Wi) -->
+	<npc_skills npc_ids="230750 231123">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21288" lv="1" prob="100" next_chain_id="1" next_skill_time="6500" /><!-- Fire Burst -->
+		<npc_skill id="19032" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="0" /><!-- Hydro Eruption -->
+		<npc_skill id="17722" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="2500" /><!-- Head Wound -->
+		<npc_skill id="17722" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="6500" /><!-- Head Wound -->
+		<npc_skill id="19032" lv="1" prob="100" chain_id="4" next_chain_id="1" next_skill_time="5500" /><!-- Hydro Eruption -->
+		<npc_skill id="17342" lv="1" prob="30" prio="1" target="RANDOM"><!-- Curse of Roots -->
+			<cond cond_type="HELP_FRIEND" hp_below="20" range="10" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Assault Rider (Ri) -->
+	<npc_skills npc_ids="230753">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20648" lv="1" prob="100" next_chain_id="1" next_skill_time="0" /><!-- Pincer Attack -->
+		<npc_skill id="20704" lv="10" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7000" /><!-- Area Press -->
+		<npc_skill id="21296" lv="10" prob="100" chain_id="2" next_chain_id="3" next_skill_time="6500" /><!-- Sweeping -->
+		<npc_skill id="21294" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="7500" /><!-- Thrash -->
+		<npc_skill id="21297" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="7000" /><!-- Wide Power Attack -->
+		<npc_skill id="21294" lv="1" prob="100" chain_id="5" next_chain_id="1" next_skill_time="7500" /><!-- Thrash -->
+	</npc_skills>
+	<!-- Pashid Assault Gunner (Gu) -->
+	<npc_skills npc_ids="230754">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<!-- First Chain -->
+		<npc_skill id="20713" lv="1" prob="100" next_chain_id="1" next_skill_time="6500" /><!-- Thunder Crash Fallout -->
+		<npc_skill id="21292" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7500" /><!-- Powerful Shot -->
+		<npc_skill id="20858" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="6000" /><!-- Area Thunder Crash Fallout -->
+		<npc_skill id="21299" lv="1" prob="100" chain_id="3" next_skill_time="6500" /><!-- Area Shot -->
+		<!-- Second Chain -->
+		<npc_skill id="21292" lv="1" prob="100" prio="1" next_chain_id="4" next_skill_time="0" cd="24000"><!-- Powerful Shot -->
+			<cond cond_type="HELP_FRIEND" hp_below="20" range="10" />
+		</npc_skill>
+		<npc_skill id="21293" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="0" /><!-- Deadeye -->
+		<npc_skill id="21293" lv="1" prob="100" chain_id="5" /><!-- Deadeye -->
+	</npc_skills>
+	<!-- Pashid Assault Supply Officer (Mu) -->
+	<npc_skills npc_ids="230756">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="20715" lv="1" prob="100" next_chain_id="1" next_skill_time="7000" /><!-- Deceleration Curse -->
+		<npc_skill id="20960" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7000" /><!-- Sound Wave Attack -->
+		<npc_skill id="20959" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="6000" /><!-- Sonic Impact -->
+		<npc_skill id="20960" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="7000" /><!-- Sound Wave Attack -->
+		<npc_skill id="20714" lv="1" prob="100" chain_id="4" next_skill_time="10000" /><!-- Magic's Freedom -->
+		<npc_skill id="17361" lv="1" prob="100" prio="1" cd="24000"><!-- Healing Light -->
+			<cond cond_type="HELP_FRIEND" hp_below="50" range="30" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Pashid Assault Dragon -->
+	<npc_skills npc_ids="230757">
+		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
+		<npc_skill id="21239" lv="1" prob="100" prio="1" next_chain_id="1" next_skill_time="0"><!-- Gnaw -->
+			<cond cond_type="TARGET_IS_IN_RANGE" range="7" />
+		</npc_skill>
+		<npc_skill id="21231" lv="1" prob="100" next_chain_id="2" next_skill_time="6000" /><!-- Acid Bomb -->
+		<npc_skill id="21240" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7000" /><!-- Brandish -->
+		<npc_skill id="21231" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="9000" target="RANDOM" /><!-- Acid Bomb -->
+		<npc_skill id="21231" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="9000" /><!-- Acid Bomb -->
+		<npc_skill id="21231" lv="1" prob="100" chain_id="4" next_chain_id="5" next_skill_time="9000" target="RANDOM" /><!-- Acid Bomb -->
+		<npc_skill id="20776" lv="1" prob="100" chain_id="5" next_skill_time="9000" /><!-- Trooper Shock -->
+	</npc_skills>
+	<!-- Pashid Assault Flamethrower -->
+	<npc_skills npc_ids="230785">
+		<npc_skill id="21118" lv="65" prob="100" next_chain_id="1" next_skill_time="9500" /><!-- Incendiary Shell -->
+		<npc_skill id="21119" lv="65" prob="100" chain_id="1" next_chain_id="2" next_skill_time="9000" /><!-- Carpet Incendiary Shell -->
+		<npc_skill id="21118" lv="65" prob="100" chain_id="2" next_chain_id="3" next_skill_time="9500" /><!-- Incendiary Shell -->
+		<npc_skill id="21118" lv="65" prob="100" chain_id="3" next_chain_id="1" next_skill_time="9500" /><!-- Incendiary Shell -->
+	</npc_skills>
+</npc_skill_templates>

@@ -484,7 +484,7 @@
 	<ai npcId="217233">
 		<summons>
 			<percentage percent="90">
-				<summonGroup npcId="282429" x="307.949" y="731.030" z="201.364" h="93"/> 
+				<summonGroup npcId="282429" x="307.949" y="731.030" z="201.364" h="93"/>
 				<summonGroup npcId="282429" x="304.200" y="729.456" z="201.411" h="91"/>
 				<summonGroup npcId="282299" x="304.200" y="729.456" z="201.411" h="91"/>
 			</percentage>
@@ -497,7 +497,7 @@
 			</percentage>
 			<percentage percent="60">
 				<summonGroup npcId="282299" x="295.066" y="734.855" z="200.998" h="86"/>
-				<summonGroup npcId="282429" x="302.825" y="755.631" z="202.576" h="92"/> 
+				<summonGroup npcId="282429" x="302.825" y="755.631" z="202.576" h="92"/>
 				<summonGroup npcId="282429" x="301.983" y="754.085" z="202.106" h="90"/>
 				<summonGroup npcId="282429" x="298.856" y="737.841" z="200.240" h="88"/>
 				<summonGroup npcId="282299" x="309.734" y="731.239" z="201.446" h="94"/>
@@ -822,6 +822,14 @@
 			<percentage percent="20" isIndividual="true">
 				<summonGroup npcId="219635" distance="10"/>
 				<summonGroup npcId="219636" distance="10"/>
+			</percentage>
+		</summons>
+	</ai>
+	<!-- Pashid Elite Siege Medic -->
+	<ai npcId="231128">
+		<summons>
+			<percentage percent="50">
+				<summonGroup npcId="284441" distance="5" />
 			</percentage>
 		</summons>
 	</ai>
