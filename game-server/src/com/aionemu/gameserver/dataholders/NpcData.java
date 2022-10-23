@@ -79,8 +79,14 @@ public class NpcData {
 					template.setPdef(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_DEFENSE, rating, rank, level));
 				if (template.getParry() == 0)
 					template.setParry(NpcStatCalculation.calculateStat(StatEnum.PARRY, rating, rank, level));
-				if (level >= 60 && template.getStrikeResist() == 0)
-					template.setStrikeResist(NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_CRITICAL_RESIST, rating, rank, level));
+				if (level >= 50 && template.getSpellResist() == 0)
+					template.setSpellResist(NpcStatCalculation.calculateStat(StatEnum.MAGICAL_CRITICAL_RESIST, rating, rank, level));
+				if (level >= 50 && template.getStrikeResist() == 0) {
+					int strikeResist = NpcStatCalculation.calculateStat(StatEnum.PHYSICAL_CRITICAL_RESIST, rating, rank, level);
+					if (strikeResist > 700) // In general strike resist cannot exceed 700 in retail templates, except bosses in Drakenspire Depths
+						strikeResist = 700;
+					template.setStrikeResist(strikeResist);
+				}
 
 				template.setAbnormalResistance(NpcStatCalculation.calculateStat(StatEnum.ABNORMAL_RESISTANCE_ALL, rating, rank, level));
 			}
