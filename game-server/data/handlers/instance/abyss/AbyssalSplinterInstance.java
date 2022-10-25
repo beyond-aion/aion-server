@@ -6,6 +6,7 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -27,6 +28,16 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 
 	public AbyssalSplinterInstance(WorldMapInstance instance) {
 		super(instance);
+	}
+
+	@Override
+	public void onSpawn(VisibleObject object) {
+		if (object instanceof Npc npc) {
+			switch (npc.getNpcId()) {
+				case 216960 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdDH_Wakeup());
+				case 216952 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdD_Wakeup());
+			}
+		}
 	}
 
 	@Override
@@ -133,12 +144,12 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 				if (player.getRace() == Race.ELYOS && player.getInventory().getFirstItemByItemId(182209803) == null)
 					ItemService.addItem(player, 182209803, 1);
 				break;
-			case 701593:
+			case 701593: // Artifact of Protection (Hard Mode)
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdDH_Wakeup());
 				spawn(216960, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
 				npc.getController().die();
 				break;
-			case 700856:
+			case 700856: // Artifact of Protection (Easy Mode)
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdD_Wakeup());
 				spawn(216952, 329.70886f, 733.8744f, 197.60938f, (byte) 0);
 				npc.getController().die();
@@ -208,8 +219,8 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 			case 1 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_01());
 			case 2 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_02());
 			case 3 -> {
-				deleteAliveNpcs(700856);
-				spawn(701593, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79);
+				deleteAliveNpcs(700856); // Artifact of Protection (Easy Mode)
+				spawn(701593, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79); // Artifact of Protection (Hard Mode)
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_03());
 			}
 		}

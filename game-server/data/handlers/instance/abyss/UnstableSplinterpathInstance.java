@@ -5,6 +5,7 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -26,6 +27,16 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 
 	public UnstableSplinterpathInstance(WorldMapInstance instance) {
 		super(instance);
+	}
+
+	@Override
+	public void onSpawn(VisibleObject object) {
+		if (object instanceof Npc npc) {
+			switch (npc.getNpcId()) {
+				case 219563 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdDH_Wakeup());
+				case 219555 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdD_Wakeup());
+			}
+		}
 	}
 
 	@Override
@@ -77,9 +88,9 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 				}
 				npc.getController().delete();
 				break;
-			case 219563: // Unstable Yamennes Painflare
 			case 219555: // Durable Yamennes Blindsight
-				spawnYamennesTreasureBoxes(npcId == 219563 ? 701579 : 701580);
+			case 219563: // Unstable Yamennes Painflare
+				spawnYamennesTreasureBoxes(npcId == 219555 ? 701579 : 701580);
 				deleteAliveNpcs(219586); // Summoned Unstable Ametgolem
 				spawn(730317, 328.476f, 762.585f, 197.479f, (byte) 90); // Exit
 				instance.forEachPlayer(p -> SkillEngine.getInstance().applyEffectDirectly(19283, p, p));
@@ -115,8 +126,8 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 	@Override
 	public void handleUseItemFinish(Player player, Npc npc) {
 		int bossId = switch (npc.getNpcId()) { // Artifact of Protection
-			case 700957 -> 219563;
-			case 701589 -> 219555;
+			case 700957 -> 219563; // Unstable Yamennes Painflare (Hard Mode)
+			case 701589 -> 219555; // Durable Yamennes Blindsight (Easy Mode)
 			default -> 0;
 		};
 		if (bossId != 0) {
@@ -188,8 +199,8 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 			case 1 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_01());
 			case 2 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_02());
 			case 3 -> {
-				deleteAliveNpcs(701589); // Artifact of Protection (Hard Mode)
-				spawn(700957, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79); // Artifact of Protection (Easy Mode)
+				deleteAliveNpcs(701589); // Artifact of Protection (Easy Mode)
+				spawn(700957, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79); // Artifact of Protection (Hard Mode)
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_03());
 			}
 		}
