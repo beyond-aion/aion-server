@@ -16990,7 +16990,23 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052086" /><!-- Big GM Gift Box -->
-	<decomposable item_id="188052087" /><!-- Abyssal Balaur Bundle -->
+	<decomposable item_id="188052087"><!-- Abyssal Balaur Bundle -->
+		<items chance="18">
+			<item id="152014016" min_count="5" /><!-- Firm Balaur Horn -->
+		</items>
+		<items chance="20">
+			<item id="152014017" min_count="5" /><!-- Firm Balaur Scale -->
+		</items>
+		<items chance="20">
+			<item id="152014018" min_count="5" /><!-- Firm Balaur Skin -->
+		</items>
+		<items chance="21">
+			<item id="152014019" min_count="5" /><!-- Burning Balaur Blood Stain -->
+		</items>
+		<items chance="21">
+			<item id="152014020" min_count="5" /><!-- Lustrous Balaur Meat -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052088" /><!-- [Event] Recovery Bundle -->
 	<decomposable item_id="188052089" /><!-- [Event] Scroll Bundle -->
 	<decomposable item_id="188052090"><!-- [Event] Magic Food Bundle -->
