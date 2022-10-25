@@ -1,6 +1,5 @@
 package instance.abyss;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -153,8 +152,6 @@ public class UnstableSplinterpathInstance extends GeneralInstanceHandler {
 		spawn(701576, 651.53204f, 357.085f, 466.1315f, (byte) 66); // Genesis Treasure Box
 		spawn(701576, 647.00446f, 357.2484f, 465.8960f, (byte) 0); // Genesis Treasure Box
 		spawn(701576, 653.8384f, 360.39508f, 466.4391f, (byte) 100); // Genesis Treasure Box
-		if (Rnd.chance() < 20) // 20% chance, not retail
-			spawn(700861, 649.243f, 362.338f, 466.0118f, (byte) 0); // Pazuzu's Treasure Box
 	}
 
 	private void spawnKaluvaFragment() {

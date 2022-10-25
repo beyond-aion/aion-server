@@ -172,8 +172,8 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 		spawn(700934, 647.00446f, 357.2484f, 465.8960f, (byte) 0); // Genesis Treasure Box
 		spawn(700934, 653.8384f, 360.39508f, 466.4391f, (byte) 100); // Genesis Treasure Box
 		spawn(700860, 649.24286f, 361.33755f, 466.0427f, (byte) 33); // Abyssal Treasure Box
-		if (Rnd.chance() < 20) // 20% chance, not retail
-			spawn(700861, 649.243f, 362.338f, 466.0118f, (byte) 0); // Pazuzu's Tresaure Box
+		if (Rnd.chance() < 12)
+			spawn(700861, 661.061f, 357.587f, 465.991f, (byte) 100, 67); // Pazuzu's Treasure Box
 		sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_NmdC_BoxSpawn());
 	}
 
