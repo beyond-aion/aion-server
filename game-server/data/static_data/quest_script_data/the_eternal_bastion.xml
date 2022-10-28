@@ -8,7 +8,7 @@
 			18032 [XML] [Alliance] Artillery Action
 			18033 [XML] [Alliance] Retreat Into Death
 			18034 [XML] [Alliance] The Follow-Through
-			18035 [SCRIPT] [Alliance] DRAKINT
+			18035 [SCRIPT] [Alliance] Sheba's Surveillance
 			18036 [SCRIPT] Bastions Are Eternal; Positions Are Not
 			23305 [XML] A Fierce Struggle
 			28030 [XML] [Alliance] Protecting The Eternal Bastion
@@ -20,22 +20,22 @@
 			28036 [SCRIPT] Interrogate Kvash
 		[END] SUMMARY
 	-->
-	
+
 	<!-- REPORTING QUESTS -->
-	<report_to id="13305" start_npc_ids="801281" end_npc_ids="801037"/>
-	<report_to id="23305" start_npc_ids="801280" end_npc_ids="801047"/>
-	
+	<report_to id="13305" start_npc_ids="804709" end_npc_ids="801281" />
+	<report_to id="23305" start_npc_ids="804927" end_npc_ids="801280" />
+
 	<!-- COLLECTING QUESTS -->
-	<item_collecting id="18034" start_npc_ids="801037"/>
-	<item_collecting id="28034" start_npc_ids="801047"/>
-	
+	<item_collecting id="18034" start_npc_ids="801281" />
+	<item_collecting id="28034" start_npc_ids="801280" />
+
 	<!-- HUNTING QUESTS -->
-	<monster_hunt id="18030" start_npc_ids="801037"/>
-	<monster_hunt id="18031" start_npc_ids="801037"/>
-	<monster_hunt id="18032" start_npc_ids="801037"/>
-	<monster_hunt id="18033" start_npc_ids="701625" end_npc_ids="801037"/>
-	<monster_hunt id="28030" start_npc_ids="801047"/>
-	<monster_hunt id="28031" start_npc_ids="801047"/>
-	<monster_hunt id="28032" start_npc_ids="801047"/>
-	<monster_hunt id="28033" start_npc_ids="701922" end_npc_ids="801047"/>
+	<monster_hunt id="18030" start_npc_ids="801281" />
+	<monster_hunt id="18031" start_npc_ids="801281" />
+	<monster_hunt id="18032" start_npc_ids="801281" />
+	<monster_hunt id="18033" start_npc_ids="801281" />
+	<monster_hunt id="28030" start_npc_ids="801280" />
+	<monster_hunt id="28031" start_npc_ids="801280" />
+	<monster_hunt id="28032" start_npc_ids="801280" />
+	<monster_hunt id="28033" start_npc_ids="801280" />
 </quest_scripts>

@@ -189,6 +189,10 @@
 		<spawn npc_id="730971" respawn_time="295">
 			<spot x="677.4652" y="709.744" z="174.125" h="60" static_id="321"/>
 		</spawn>
+		<!-- Captive Kvash -->
+		<spawn npc_id="802015" respawn_time="295">
+			<spot x="377.02" y="1387.93" z="163.630" h="116"/>
+		</spawn>
 		<!-- Cindery Tree -->
 		<spawn npc_id="730970" respawn_time="295">
 			<spot x="911.3271" y="800.3115" z="175.7328" h="60" static_id="331"/>
@@ -300,6 +304,10 @@
 			<spot x="517.4558" y="930.9934" z="95.58852" h="3"/>
 			<spot x="536.4691" y="941.7081" z="100.0746" h="73"/>
 			<spot x="537.9593" y="975.3896" z="102.8212" h="76"/>
+		</spawn>
+		<!-- Demades -->
+		<spawn npc_id="801281" respawn_time="295">
+			<spot x="1312.02" y="1316.43" z="199.751" h="57"/>
 		</spawn>
 		<!-- Derunerk -->
 		<spawn npc_id="802362" respawn_time="295">
@@ -757,6 +765,10 @@
 			<spot x="1293.855" y="1339.595" z="196.5581"/>
 			<spot x="1292.961" y="1344.865" z="196.5881"/>
 		</spawn>
+		<!-- Kvash -->
+		<spawn npc_id="802008" respawn_time="295">
+			<spot x="1291.52" y="1344.93" z="196.559" h="73"/>
+		</spawn>
 		<!-- Listless Nagolem -->
 		<spawn npc_id="234271" respawn_time="295">
 			<spot x="710.6918" y="888.3516" z="171.7749"/>
@@ -783,6 +795,10 @@
 		<!-- Lucky Danuar Reliquary Gatekeeper -->
 		<spawn npc_id="832272" respawn_time="295">
 			<spot x="772.6" y="1026.4" z="112.675" h="18"/>
+		</spawn>
+		<!-- Lundvarr -->
+		<spawn npc_id="801280">
+			<spot x="396.52" y="1359.43" z="164.039" h="20"/>
 		</spawn>
 		<!-- Magma Belcher Buldon -->
 		<spawn npc_id="234310" respawn_time="3600">

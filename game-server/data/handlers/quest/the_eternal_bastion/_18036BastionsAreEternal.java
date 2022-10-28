@@ -1,8 +1,8 @@
 package quest.the_eternal_bastion;
 
-import static com.aionemu.gameserver.model.DialogAction.*;
+import static com.aionemu.gameserver.model.DialogAction.QUEST_SELECT;
+import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
 
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -10,47 +10,46 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _18036BastionsAreEternal extends AbstractQuestHandler {
 
+	private static final int START_NPC_ID = 801281; // Demades
+	private static final int TALK_NPC_ID = 802008; // Kvash
+
 	public _18036BastionsAreEternal() {
 		super(18036);
 	}
 
 	@Override
 	public void register() {
-		qe.registerQuestNpc(801037).addOnQuestStart(questId);
-		qe.registerQuestNpc(801037).addOnTalkEvent(questId);
-		qe.registerQuestNpc(802008).addOnTalkEvent(questId);
+		qe.registerQuestNpc(START_NPC_ID).addOnQuestStart(questId);
+		qe.registerQuestNpc(START_NPC_ID).addOnTalkEvent(questId);
+		qe.registerQuestNpc(TALK_NPC_ID).addOnTalkEvent(questId);
 	}
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
-		Player player = env.getPlayer();
 		int targetId = env.getTargetId();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(questId);
 		int dialogActionId = env.getDialogActionId();
 
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 801037) {
-				if (dialogActionId == QUEST_SELECT) {
+			if (targetId == START_NPC_ID) {
+				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
-				} else {
+				else
 					return sendQuestStartDialog(env);
-				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 802008) {
+			if (targetId == TALK_NPC_ID) {
 				if (dialogActionId == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 
 				if (dialogActionId == SETPRO1) {
-					changeQuestStep(env, 0, 1, true);
-					updateQuestStatus(env);
+					changeQuestStep(env, 0, 0, true);
 					return closeDialogWindow(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 801037) {
+			if (targetId == START_NPC_ID)
 				return sendQuestEndDialog(env);
-			}
 		}
 		return false;
 	}

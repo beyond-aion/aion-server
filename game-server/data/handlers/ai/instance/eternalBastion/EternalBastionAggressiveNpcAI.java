@@ -20,7 +20,7 @@ public class EternalBastionAggressiveNpcAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case SHOULD_REWARD -> false;
+			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
 			default -> super.ask(question);
 		};
 	}
