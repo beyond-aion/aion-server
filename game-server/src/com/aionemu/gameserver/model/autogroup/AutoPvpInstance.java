@@ -30,7 +30,7 @@ public class AutoPvpInstance extends AutoInstance {
 			EntryRequestType ert = lookingForParty.getEntryRequestType();
 			List<AGPlayer> playersByRace = getAGPlayersByRace(lookingForParty.getRace());
 			if (ert == EntryRequestType.GROUP_ENTRY) {
-				if (lookingForParty.getMemberObjectIds().size() + playersByRace.size() >= getMaxPlayers() / 2)
+				if (lookingForParty.getMemberObjectIds().size() + playersByRace.size() > getMaxPlayers() / 2)
 					return AGQuestion.FAILED;
 
 				for (int objectId : lookingForParty.getMemberObjectIds()) {
