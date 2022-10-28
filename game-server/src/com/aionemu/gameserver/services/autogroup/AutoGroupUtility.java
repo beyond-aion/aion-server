@@ -82,7 +82,6 @@ public class AutoGroupUtility {
 	public static void sendSuccessfulRegistration(LookingForParty lfp, String leaderName, AutoGroupType agt, int maskId) {
 		for (int objectId : lfp.getMemberObjectIds()) {
 			Player player = World.getInstance().getPlayer(objectId);
-			System.out.println(player);
 			if (player != null) {
 				if (agt.isPeriodicInstance())
 					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(maskId, 6, true));
