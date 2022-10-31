@@ -36,6 +36,7 @@ import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
@@ -46,6 +47,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
+import com.aionemu.gameserver.skillengine.properties.Properties.CastState;
 import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -230,7 +232,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		getOwner().incrementAttackedCount();
 
 		if (!getOwner().isDead() && attacker instanceof Player player) {
-				if (criticalEffect != null) {
+			if (criticalEffect != null) {
 				criticalEffect.applyEffect();
 			}
 			if (allowGodstoneActivation && status != AttackStatus.DODGE && status != AttackStatus.RESIST)
@@ -256,9 +258,14 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		procProbability -= getOwner().getGameStats().getStat(StatEnum.PROC_REDUCE_RATE, 0).getCurrent();
 
 		if (Rnd.get(1, 1000) <= procProbability) {
-			Skill skill = SkillEngine.getInstance().getSkill(attacker, godStoneInfo.getSkillId(), godStoneInfo.getSkillLevel(), getOwner());
+			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId());
+			Skill skill = SkillEngine.getInstance().getSkill(attacker, godStoneInfo.getSkillId(), godStoneInfo.getSkillLevel(), getOwner(), template);
 			skill.setFirstTargetRangeCheck(false);
-			skill.useSkill();
+			if (!skill.canUseSkill(CastState.CAST_START))
+				return;
+			Effect effect = new Effect(skill, getOwner());
+			effect.initialize();
+			effect.applyEffect();
 			PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getL10n()));
 			// Illusion Godstones
 			if (godStoneInfo.getBreakProb() > 0) {
