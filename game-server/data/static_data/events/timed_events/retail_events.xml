@@ -4363,18 +4363,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="The Scattered Deck" start="2022-10-21T00:00:00" end="2022-11-06T23:59:59" theme="HALLOWEEN">
-		<event_drops>
-			<gd_rule rule_name="Mysterious Card" chance="10">
-				<gd_maps>
-					<gd_map map_id="210090000" /><!-- Idian Depths Light -->
-					<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
-				</gd_maps>
-				<gd_items>
-					<gd_item id="186000381" max_count="3" /><!-- Mysterious Card -->
-				</gd_items>
-			</gd_rule>
-		</event_drops>
+	<event name="The Scattered Deck" start="2022-10-21T00:00:00" end="2022-11-13T23:59:59" theme="HALLOWEEN">
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
@@ -4391,6 +4380,19 @@
 				</spawn>
 			</spawn_map>
 		</spawns>
+	</event>
+	<event name="The Scattered Deck Drop" start="2022-10-21T00:00:00" end="2022-11-11T23:59:59" theme="HALLOWEEN">
+		<event_drops>
+			<gd_rule rule_name="Mysterious Card" chance="10">
+				<gd_maps>
+					<gd_map map_id="210090000" /><!-- Idian Depths Light -->
+					<gd_map map_id="220100000" /><!-- Idian Depths Dark -->
+				</gd_maps>
+				<gd_items>
+					<gd_item id="186000381" max_count="3" /><!-- Mysterious Card -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
 	</event>
 	<event name="Blessing Of The Magic Fountain" start="2021-03-01T00:00:00" end="2021-03-14T23:59:59">
 		<event_drops>
@@ -4958,7 +4960,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Nightmare Circus" start="2022-10-21T00:00:00" end="2022-11-06T23:59:59" theme="HALLOWEEN">
+	<event name="Nightmare Circus" start="2022-10-21T00:00:00" end="2022-11-11T23:59:59" theme="HALLOWEEN">
 		<quests>
 			<maintainable>80341 80342 80343</maintainable>
 		</quests>
