@@ -784,7 +784,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 					Point3D pos = new Point3D(player.getX(), player.getY(), player.getZ());
 					Race race = player.getRace();
 					spawnTasks.add(ThreadPoolManager.getInstance().schedule(() -> {
-						if (getNpc(209516) == null && getNpc(209517) == null) // only spawn if commander is still alive
+						if (instanceReward.getInstanceProgressionType() == InstanceProgressionType.START_PROGRESS)
 							spawn(race == Race.ELYOS ? 701596 : 701610, pos.getX(), pos.getY(), pos.getZ(), (byte) 50);
 					}, 10, TimeUnit.SECONDS));
 				}
