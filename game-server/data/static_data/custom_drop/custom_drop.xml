@@ -5106,45 +5106,40 @@
 	</npc_drop>
 	<!-- Birthday Event -->
 	<npc_drop npc_id="701983">
-		<drop_group race="ELYOS">
-			<drop item_id="162000137" min_amount="3" /><!-- Sublime Life Serum -->
-			<drop item_id="162000139" min_amount="3" /><!-- Sublime Mana Serum -->
-			<drop item_id="162000141" min_amount="3" /><!-- Sublime Wind Serum -->
-			<drop item_id="186000236" min_amount="15" /><!-- Blood Mark -->
-			<drop item_id="186000146" min_amount="5" /><!-- Guestpetal -->
-			<drop item_id="186000130" min_amount="150" /><!-- Crucible Insignia -->
-			<drop item_id="186000237" min_amount="100" /><!-- Ancient Coin -->
-			<drop item_id="160010354" /><!-- Greater Seed of Transformation -->
+		<drop_group><!-- GUARANTEED -->
+			<drop item_id="162002030" min_amount="20" /><!-- [Event] Premium Restoration Serum -->
+			<drop item_id="166000195" min_amount="3" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="186000237" min_amount="50" /><!-- Ancient Coin -->
+			<drop item_id="188052722" /><!-- [Event] Daeva's Day Kisk Present -->
+			<drop item_id="160010217" min_amount="3" /><!-- [Event] Birthday Cake Piece -->
+			<drop item_id="188053225" min_amount="2" /><!-- Seed of Transformation Chest -->
 		</drop_group>
-		<drop_group race="ASMODIANS">
-			<drop item_id="162000137" min_amount="3" /><!-- Sublime Life Serum -->
-			<drop item_id="162000139" min_amount="3" /><!-- Sublime Mana Serum -->
-			<drop item_id="162000141" min_amount="3" /><!-- Sublime Wind Serum -->
-			<drop item_id="186000236" min_amount="15" /><!-- Blood Mark -->
-			<drop item_id="186000146" min_amount="5" /><!-- Guestpetal -->
-			<drop item_id="186000130" min_amount="150" /><!-- Crucible Insignia -->
-			<drop item_id="186000237" min_amount="100" /><!-- Ancient Coin -->
-			<drop item_id="160010355" /><!-- Greater Seed of Transformation -->
-		</drop_group>
-		<drop_group>
+		<drop_group><!-- COMMON -->
 			<drop item_id="166500002" chance="25" min_amount="2" /><!-- Amplification Stone -->
 			<drop item_id="166020000" chance="25" min_amount="2" /><!-- Omega Enchantment Stone -->
-			<drop item_id="166030005" chance="25" min_amount="3" /><!-- Tempering Solution -->
-			<drop item_id="186000242" chance="25" min_amount="2" /><!-- Ceranium Medal -->
-			<drop item_id="188053610" chance="25" min_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
-			<drop item_id="186000247" chance="25" min_amount="3" /><!-- Major Danuar Relic -->
+			<drop item_id="166030005" chance="25" min_amount="2" /><!-- Tempering Solution -->
+			<drop item_id="162000137" chance="25" min_amount="2" /><!-- Sublime Life Serum -->
+			<drop item_id="162000139" chance="25" min_amount="3" /><!-- Sublime Mana Serum -->
 		</drop_group>
-		<drop_group>
-			<drop item_id="188053618" chance="8" /><!-- Honorable Elim's Idian Bundle -->
-			<drop item_id="188052827" chance="8" /><!-- Dynatoum's Equipment Chest -->
-			<drop item_id="188053099" chance="8" /><!-- Pure Modor's Equipment Crux Box -->
-			<drop item_id="186000409" chance="8" min_amount="10" /><!-- Daeva's Respite Coin -->
-			<drop item_id="188053113" chance="8" min_amount="2" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+		<drop_group><!-- UNCOMMON -->
+			<drop item_id="188053610" chance="10" min_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<drop item_id="188053113" chance="10" min_amount="2" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<drop item_id="188053845" chance="10" /><!-- Summer-Loving Penguin Transformation Candy Box -->
+			<drop item_id="188052388" chance="10" /><!-- Modor's Equipment Box -->
 		</drop_group>
-		<drop_group>
-			<drop item_id="188053295" chance="3" /><!-- Empyrean Plume Chest -->
-			<drop item_id="188053033" chance="3" /><!-- Kunax's Equipment Box -->
-			<drop item_id="188053728" chance="3" /><!-- Beritra's Equipment Box -->
+		<drop_group><!-- RARE -->
+			<drop item_id="188053295" chance="5" /><!-- Empyrean Plume Chest -->
+			<drop item_id="188053099" chance="5" /><!-- Pure Modor's Equipment Crux Box -->
+			<drop item_id="188053100" chance="5" /><!-- Pure Dynatoum's Equipment Crux Box -->
+			<drop item_id="188053618" chance="5" /><!-- Honorable Elim's Idian Bundle -->
+			<drop item_id="188950015" chance="5" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
+		</drop_group>
+		<drop_group><!-- SUPER RARE -->
+			<drop item_id="188053611" chance="0.5" /><!-- [Event] Wing Box -->
+			<drop item_id="188051709" chance="0.5" /><!-- [Event] Silver Box -->
+			<drop item_id="188053623" chance="0.5" /><!-- Fire Dragon King's Weapon Bundle -->
+			<drop item_id="188053728" chance="0.5" /><!-- Beritra's Equipment Box -->
+			<drop item_id="188950019" chance="0.5" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
 		</drop_group>
 	</npc_drop>
 </custom_drop>
