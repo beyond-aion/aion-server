@@ -34,7 +34,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
  */
 public class Headhunting extends AdminCommand {
 
-	private static final Logger log = LoggerFactory.getLogger("EVENT");
+	private static final Logger log = LoggerFactory.getLogger("EVENT_LOG");
 
 	/**
 	 * Contains the rewards for different rankings (key value).

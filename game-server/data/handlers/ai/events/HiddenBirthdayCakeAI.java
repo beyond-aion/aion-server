@@ -25,7 +25,7 @@ import ai.ChestAI;
 @AIName("hidden_cake")
 public class HiddenBirthdayCakeAI extends ChestAI {
 
-	private final static Logger log = LoggerFactory.getLogger("EVENT");
+	private final static Logger log = LoggerFactory.getLogger("EVENT_LOG");
 	private final static AtomicInteger collectedCakes = new AtomicInteger();
 	private final static int JEST_SPAWN_CHANCE = 25;
 	private final static int[] JEST_SPAWN_IDS = { 210341, 214732, 210595 };
