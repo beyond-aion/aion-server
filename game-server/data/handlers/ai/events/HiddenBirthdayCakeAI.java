@@ -6,10 +6,10 @@ import java.util.concurrent.atomic.AtomicInteger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.TaskId;
+import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
@@ -29,28 +29,35 @@ public class HiddenBirthdayCakeAI extends ChestAI {
 	private final static AtomicInteger collectedCakes = new AtomicInteger();
 	private final static int JEST_SPAWN_CHANCE = 25;
 	private final static int[] JEST_SPAWN_IDS = { 210341, 214732, 210595 };
-	private static int lastCakeCount;
-
-	static {
-		CronService.getInstance().schedule(HiddenBirthdayCakeAI::logCollectedCakes, "0 0 * ? * * *");
-	}
-
-	private static void logCollectedCakes() {
-		int cakes = collectedCakes.get();
-		int deviation = cakes - lastCakeCount;
-		log.info("[EVENT] Total cakes collected: {}; Cakes collected during the last hour: {}.", cakes, deviation);
-		lastCakeCount = cakes;
-	}
+	private static volatile long lastLogTime = System.currentTimeMillis();
+	private static volatile int lastCakeCount;
 
 	public HiddenBirthdayCakeAI(Npc owner) {
 		super(owner);
+	}
+
+	private void logCollectedCakes(int cakes) {
+		int deviation = cakes - lastCakeCount;
+		long currentTime = System.currentTimeMillis();
+		if (currentTime - lastLogTime >= 3600 * 1000) { // Only log once every hour
+			log.info("[EVENT] Total cakes collected: {}; Cakes collected during the last hour: {}.", cakes, deviation);
+			lastCakeCount = cakes;
+			lastLogTime = currentTime;
+		}
+	}
+
+	@Override
+	protected void handleDialogStart(Player player) {
+		if (player.isInPlayerMode(PlayerMode.RIDE))
+			player.unsetPlayerMode(PlayerMode.RIDE);
+		super.handleDialogStart(player);
 	}
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
 		if (getOwner().isInState(CreatureState.DEAD))
 			return;
-		collectedCakes.incrementAndGet();
+		logCollectedCakes(collectedCakes.incrementAndGet());
 
 		if (Rnd.chance() < JEST_SPAWN_CHANCE) {
 			Npc npc = (Npc) spawn(Rnd.get(JEST_SPAWN_IDS), getOwner().getX(), getOwner().getY(), getOwner().getZ(), (byte) 0);
@@ -61,5 +68,4 @@ public class HiddenBirthdayCakeAI extends ChestAI {
 		}
 		super.handleUseItemFinish(player);
 	}
-
 }
