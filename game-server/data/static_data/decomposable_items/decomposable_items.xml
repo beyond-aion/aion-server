@@ -29499,7 +29499,12 @@
 	<decomposable item_id="188053222" /><!-- [Event] Lustrous Skymane (1 day) -->
 	<decomposable item_id="188053223" /><!-- [Expand Card] Expand Cube Ticket (lvl 3) -->
 	<decomposable item_id="188053224" /><!-- [Expand Card] Expand Warehouse Ticket (lvl 3) -->
-	<decomposable item_id="188053225" /><!-- Seed of Transformation Chest -->
+	<decomposable item_id="188053225"><!-- Seed of Transformation Chest -->
+		<items>
+			<item id="160010354" min_count="3" race="ELYOS" /><!-- Greater Seed of Transformation -->
+			<item id="160010355" min_count="3" race="ASMODIANS" /><!-- Greater Seed of Transformation -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053226" /><!-- [Event] Sharptooth Repulser Box -->
 	<decomposable item_id="188053227" /><!-- [Event] Flying Pagati Box (30 days) -->
 	<decomposable item_id="188053228" selectable="true"><!-- [Event] Heartseeker Equipment Box -->
