@@ -5111,7 +5111,7 @@
 			<drop item_id="166000195" min_amount="3" /><!-- Epsilon Enchantment Stone -->
 			<drop item_id="186000237" min_amount="50" /><!-- Ancient Coin -->
 			<drop item_id="188052722" /><!-- [Event] Daeva's Day Kisk Present -->
-			<drop item_id="160010217" min_amount="3" /><!-- [Event] Birthday Cake Piece -->
+			<drop item_id="188051784" /><!-- Birthday Cake Bundle -->
 			<drop item_id="188053225" /><!-- Seed of Transformation Chest -->
 		</drop_group>
 		<drop_group><!-- COMMON -->
