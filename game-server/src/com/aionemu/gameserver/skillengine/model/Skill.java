@@ -441,14 +441,20 @@ public class Skill {
 			ammoTime = Math.round(distance / getSkillTemplate().getAmmoSpeed() * 1000);// checked with client
 		}
 
-		float finalTime = motion.getDelay() + (serverHitTime + ammoTime) * 0.95f; // allow 5% diff -> when jumping
+		/*
+		 * FIXME: (Work-around) Client sends smaller hit times for consecutive casts, or casts followed by an interrupted cast
+		 * 19% for cast skills (best approach based on analyzed audit logs)
+		 * 5% for instant skills
+		 */
+		float tolerance = getSkillTemplate().getDuration() > 0 ? 0.81f : 0.95f;
+		int finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime) * tolerance); // client sends rounded times, too
 
 		if (motion.isInstantSkill() && clientTime == 0) {
 			this.serverTime = (int) ammoTime;
 		} else if (clientTime < finalTime) {
 			AuditLogger.log(player, "Modified skill time for client skill: " + getSkillId() + " (clientTime < finalTime: " + clientTime + "/" + finalTime
 				+ "). Player is in move: " + player.getMoveController().isInMove());
-			this.serverTime = Math.round(finalTime);
+			this.serverTime = finalTime;
 		} else {
 			this.serverTime = clientTime;
 		}
