@@ -26585,16 +26585,16 @@
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="0.43">
-			<item id="188050004" race="ELYOS" /><!-- Red Solorius Stocking -->
-			<item id="188050007" race="ASMODIANS" /><!-- Red Solorius Stocking -->
+			<item id="160010156" race="ELYOS" /><!-- [Event] Solorius Polar Bear Form Candy -->
+			<item id="160010157" race="ASMODIANS" /><!-- [Event] Solorius Polar Bear Form Candy -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="0.43">
-			<item id="186000399" min_count="5" /><!-- Honorable Conqueror's Mark -->
+			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="0.43">
-			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
+			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="0.43">
@@ -26628,16 +26628,16 @@
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.18">
-			<item id="188050004" race="ELYOS" /><!-- Red Solorius Stocking -->
-			<item id="188050007" race="ASMODIANS" /><!-- Red Solorius Stocking -->
+			<item id="160010156" race="ELYOS" /><!-- [Event] Solorius Polar Bear Form Candy -->
+			<item id="160010157" race="ASMODIANS" /><!-- [Event] Solorius Polar Bear Form Candy -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.18">
-			<item id="186000399" min_count="5" /><!-- Honorable Conqueror's Mark -->
+			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.18">
-			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
+			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.18">
@@ -26671,16 +26671,16 @@
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.93">
-			<item id="188050004" race="ELYOS" /><!-- Red Solorius Stocking -->
-			<item id="188050007" race="ASMODIANS" /><!-- Red Solorius Stocking -->
+			<item id="160010156" race="ELYOS" /><!-- [Event] Solorius Polar Bear Form Candy -->
+			<item id="160010157" race="ASMODIANS" /><!-- [Event] Solorius Polar Bear Form Candy -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.93">
-			<item id="186000399" min_count="5" /><!-- Honorable Conqueror's Mark -->
+			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.93">
-			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
+			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.93">
@@ -26714,16 +26714,16 @@
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="2.68">
-			<item id="188050004" race="ELYOS" /><!-- Red Solorius Stocking -->
-			<item id="188050007" race="ASMODIANS" /><!-- Red Solorius Stocking -->
+			<item id="160010156" race="ELYOS" /><!-- [Event] Solorius Polar Bear Form Candy -->
+			<item id="160010157" race="ASMODIANS" /><!-- [Event] Solorius Polar Bear Form Candy -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="2.68">
-			<item id="186000399" min_count="5" /><!-- Honorable Conqueror's Mark -->
+			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="2.68">
-			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
+			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="2.68">
@@ -26757,16 +26757,16 @@
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="3.43">
-			<item id="188050004" race="ELYOS" /><!-- Red Solorius Stocking -->
-			<item id="188050007" race="ASMODIANS" /><!-- Red Solorius Stocking -->
+			<item id="160010156" race="ELYOS" /><!-- [Event] Solorius Polar Bear Form Candy -->
+			<item id="160010157" race="ASMODIANS" /><!-- [Event] Solorius Polar Bear Form Candy -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="3.43">
-			<item id="186000399" min_count="5" /><!-- Honorable Conqueror's Mark -->
+			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="3.43">
-			<item id="186000143" min_count="5" /><!-- Kahrun's Symbol -->
+			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="3.43">
@@ -26841,13 +26841,10 @@
 	</decomposable>
 	<decomposable item_id="188052996"><!-- [Event] Broken Snow Bundle -->
 		<items>
-			<item id="186000409" min_count="25" /><!-- Daeva's Respite Coin -->
+			<item id="188053609" min_count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</items>
 		<items>
-			<item id="188053610" min_count="2" /><!-- [Event] Level 70 Composite Manastone Bundle -->
-		</items>
-		<items>
-			<item id="188052822" min_count="2" /><!-- Noble Ancient Manastone Chest -->
+			<item id="188053695" min_count="2" /><!-- High Grade Crafting Material Box of Conquest -->
 		</items>
 		<items>
 			<item id="166100020" min_count="250" /><!-- [Stamp] Greater Supplements (Eternal) -->
@@ -26857,9 +26854,6 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052997"><!-- [Event] Crushed Snow Bundle -->
-		<items>
-			<item id="188053695" min_count="2" /><!-- High Grade Crafting Material Box of Conquest -->
-		</items>
 		<items>
 			<item id="188053113" min_count="2" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</items>
@@ -26875,30 +26869,30 @@
 	</decomposable>
 	<decomposable item_id="188052998"><!-- [Event] Noble Melted Bundle -->
 		<items>
-			<item id="188051879" /><!-- Solorius Furniture Set Box -->
-		</items>
-		<items>
-			<item id="188052388" /><!-- Modor's Equipment Box -->
+			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
 		</items>
 		<items>
 			<item id="188053000" /><!-- [Event] Assured Greater Felicitous Socketing Box -->
 		</items>
 		<items>
-			<item id="188053903" /><!-- Honorable Equipment of Conquest Box -->
+			<item id="166200013" /><!-- Enduring Mythic Weapon Tuning Scroll -->
+		</items>
+		<items>
+			<item id="166200014" /><!-- Enduring Mythic Armor Tuning Scroll -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052999"><!-- [Event] Brilliant Ice Prism -->
 		<items chance="30.0">
 			<item id="188053100" /><!-- Pure Dynatoum's Equipment Crux Box -->
 		</items>
-		<items chance="45.0">
-			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
-		</items>
 		<items chance="20.0">
 			<item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
 		</items>
+		<items chance="45.0">
+			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
+		</items>
 		<items chance="5.0">
-			<item id="188054260" /><!-- Ride Box of Conquest -->
+			<item id="187000058" /><!-- Ancient Spirit's Wings -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053000"><!-- [Event] Assured Greater Felicitous Socketing Box -->

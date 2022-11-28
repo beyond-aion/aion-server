@@ -3749,7 +3749,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Frozen Magic Event" start="2021-12-20T00:00:00" end="2022-01-02T23:59:59">
+	<event name="Frozen Magic Event" start="2022-12-16T00:00:00" end="2022-12-31T23:59:59">
 		<quests>
 			<maintainable>80575 80576 80577 80578 80579 80580</maintainable>
 		</quests>
@@ -3761,6 +3761,7 @@
 				<gd_maps>
 					<gd_map map_id="210070000" /><!-- Cygnea -->
 					<gd_map map_id="220080000" /><!-- Enshar -->
+					<gd_map map_id="600090000" /><!-- Kaldor -->
 				</gd_maps>
 				<gd_ratings>
 					<gd_rating rating="NORMAL" />
