@@ -59,7 +59,6 @@ import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.mail.MailService;
 import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
-import com.aionemu.gameserver.services.reward.AdventService;
 import com.aionemu.gameserver.services.reward.VeteranRewardService;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -382,8 +381,6 @@ public final class PlayerEnterWorldService {
 
 		if (HTMLConfig.ENABLE_HTML_WELCOME)
 			HTMLService.showHTML(player, HTMLCache.getInstance().getHTML("welcome.xhtml"));
-
-		AdventService.getInstance().onLogin(player);
 
 		player.getNpcFactions().sendDailyQuest();
 
