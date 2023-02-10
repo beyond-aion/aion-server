@@ -18680,59 +18680,60 @@
 	<decomposable item_id="188052316" /><!-- Heavy Green Sack -->
 	<decomposable item_id="188052317" /><!-- [Event] Broken Heart Box -->
 	<decomposable item_id="188052318"><!-- [Event] Mended Heart -->
-		<items chance="1">
-			<item id="110900340" /><!-- Sweet Couples' Costume -->
+		<items chance="1.5">
+			<item id="110900220" /><!-- NPC Beatific Outfit -->
 		</items>
-		<items chance="1">
-			<item id="187060103" /><!-- Prestige Wings -->
+		<items chance="1.5">
+			<item id="188053109" /><!-- Ahserion's Equipment Box -->
 		</items>
-		<items chance="1">
-			<item id="188053295" /><!-- Empyrean Plume Chest-->
-		</items>
-		<items chance="1">
+		<items chance="1.5">
 			<item id="188053228" /><!-- [Event] Heartseeker Equipment Box -->
 		</items>
-		<items chance="2">
-			<item id="166200013" /><!-- Enduring Mythic Weapon Tuning Scroll -->
+		<items chance="1.5">
+			<item id="168310018" /><!-- Major Blessed Augment: Level 2 -->
 		</items>
 		<items chance="2">
-			<item id="166200014" /><!-- Enduring Mythic Armor Tuning Scroll -->
+			<item id="188950015" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
 		</items>
 		<items chance="2">
 			<item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
 		</items>
-		<items chance="3">
-			<item id="188053667" /><!-- [Event] Mithril Medal Box -->
+		<items chance="2">
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
 		</items>
 		<items chance="3">
-			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
+			<item id="169620072" /><!-- AP Boost Charm II - 30% -->
 		</items>
-		<items chance="4">
-			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
+		<items chance="5">
+			<item id="188053113" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</items>
-		<items chance="4">
-			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
-		</items>
-		<items chance="4">
-			<item id="166030005" min_count="3" /><!-- Tempering Solution -->
-		</items>
-		<items chance="6">
+		<items chance="5">
 			<item id="188053610" min_count="2" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 		</items>
-		<items chance="6">
-			<item id="188052321" min_count="2" /><!-- [Event] Protectorate Key Box -->
+		<items chance="5">
+			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
+		</items>
+		<items chance="5">
+			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items chance="5">
+			<item id="166030005" min_count="3" /><!-- Tempering Solution -->
 		</items>
 		<items chance="7">
-			<item id="186000143" min_count="25" /><!-- Kahrun's Symbol -->
+			<item id="188052822" min_count="2" /><!-- Noble Ancient Manastone Chest -->
 		</items>
 		<items chance="7">
-			<item id="188050714" /><!-- Chocolate Candy Box -->
+			<item id="160010111" min_count="5" race="ELYOS" /><!-- [Event] Jumpy Monk Form Candy -->
+			<item id="160010112" min_count="5" race="ASMODIANS" /><!-- [Event] Jumpy Monk Form Candy -->
 		</items>
 		<items chance="7">
-			<item id="160010337" /><!-- [Event] Heartfelt Chocolate -->
+			<item id="186000399" min_count="25" /><!-- Honorable Conqueror's Mark -->
 		</items>
 		<items chance="7">
 			<item id="160010338" /><!-- [Event] Loving Chocolate -->
+		</items>
+		<items chance="8">
+			<item id="188053793" min_count="3" /><!-- Rare Manastone of Aetheric Field Bundle -->
 		</items>
 		<items chance="8">
 			<item id="160010208" min_count="3" /><!-- [Event] Sweet Chocolate -->
@@ -18741,10 +18742,7 @@
 			<item id="162002001" min_count="3" /><!-- Love Potion -->
 		</items>
 		<items chance="8">
-			<item id="169231017" /><!-- Dye: Indian Pink -->
-		</items>
-		<items chance="8">
-			<item id="169231023" /><!-- Dye: Indian Blue -->
+			<item id="186000237" min_count="50" /><!-- Ancient Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052319"><!-- [Event] Dragon Lord's Wing Box -->

@@ -2918,9 +2918,9 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Beyond Aion Broken Hearts" start="2022-02-14T00:00:00" end="2022-02-27T23:59:59" theme="VALENTINE">
+	<event name="Beyond Aion Broken Hearts" start="2023-02-13T00:00:00" end="2023-02-26T23:59:59" theme="VALENTINE">
 		<event_drops>
-			<gd_rule rule_name="Broken Hearts L" chance="15" level_based_chance_reduction="true">
+			<gd_rule rule_name="Broken Hearts L" chance="20" level_based_chance_reduction="true">
 				<gd_items>
 					<gd_item id="188100091" /><!-- [Event] Broken Heart: L -->
 				</gd_items>
@@ -2931,7 +2931,7 @@
 					<gd_map map_id="301270000" /><!-- Linkgate Foundry -->
 				</gd_maps>
 			</gd_rule>
-			<gd_rule rule_name="Broken Hearts O" chance="10" dynamic_chance="true">
+			<gd_rule rule_name="Broken Hearts O" chance="15" dynamic_chance="true">
 				<gd_items>
 					<gd_item id="188100092" /><!-- [Event] Broken Heart: O -->
 				</gd_items>
@@ -2939,7 +2939,7 @@
 					<gd_map map_id="600090000" /><!-- Kaldor -->
 				</gd_maps>
 			</gd_rule>
-			<gd_rule rule_name="Broken Hearts V" chance="15" dynamic_chance="true">
+			<gd_rule rule_name="Broken Hearts V" chance="20" dynamic_chance="true">
 				<gd_items>
 					<gd_item id="188100093" /><!-- [Event] Broken Heart: V -->
 				</gd_items>
@@ -2947,7 +2947,7 @@
 					<gd_map map_id="301220000" /><!-- PvPvE-Map -->
 				</gd_maps>
 			</gd_rule>
-			<gd_rule rule_name="Broken Hearts E" chance="10" dynamic_chance="true">
+			<gd_rule rule_name="Broken Hearts E" chance="15" dynamic_chance="true">
 				<gd_items>
 					<gd_item id="188100094" /><!-- [Event] Broken Heart: E -->
 				</gd_items>
