@@ -134,8 +134,9 @@ public class StatCapUtil {
 				case BLOCK:
 				case PHYSICAL_CRITICAL:
 				case MAGICAL_CRITICAL:
-				case MAGICAL_RESIST:
 					return 500;
+				case MAGICAL_RESIST:
+					return 900; // in PvP: 500 (see StatFunctions#calculateMagicalResistRate)
 				case EVASION:
 					return 300;
 				case PARRY:

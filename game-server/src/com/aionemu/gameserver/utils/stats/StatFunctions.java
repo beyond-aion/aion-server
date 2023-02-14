@@ -560,31 +560,23 @@ public class StatFunctions {
 		return Rnd.get(1000) < limit(StatEnum.PHYSICAL_CRITICAL, criticalRate);
 	}
 
-	/**
-	 * Calculates RESIST chance
-	 *
-	 * @return int
-	 */
 	public static int calculateMagicalResistRate(Creature attacker, Creature attacked, int accMod, SkillElement element) {
 		if (attacked.getObserveController().checkAttackStatus(AttackStatus.RESIST))
 			return 1000;
-		if (element != SkillElement.NONE && attacked instanceof Summon) {
-			if (element == ((Summon) attacked).getAlwaysResistElement()) {
-				return 1000;
-			}
-		}
+		if (element != SkillElement.NONE && attacked instanceof Summon summon && element == summon.getAlwaysResistElement())
+			return 1000;
 
 		int levelDiff = attacked.getLevel() - attacker.getLevel();
-		float mResi = attacked.getGameStats().getMResist().getCurrent();
-		float resistRate = mResi - attacker.getGameStats().getMAccuracy().getCurrent() - accMod;
+		int mResi = attacked.getGameStats().getMResist().getCurrent();
+		int resistRate = mResi - attacker.getGameStats().getMAccuracy().getCurrent() - accMod;
 
-		if (mResi > 0 && levelDiff > 2) // only apply if creature has mres > 0 (to keep effect of AI.modifyStat())
-			resistRate += (levelDiff - 2) * 100;
+		if (mResi > 0 && levelDiff > 4) // only apply if creature has mres > 0 (to keep effect of AI#modifyOwnerStat)
+			resistRate += (levelDiff - 4) * 100;
 
 		if (attacker instanceof Player && attacked instanceof Player) // checked on retail: only applies to PvP
-			resistRate = (int) limit(StatEnum.MAGICAL_RESIST, resistRate);
+			return Math.min(500, resistRate);
 
-		return (int) resistRate;
+		return (int) limit(StatEnum.MAGICAL_RESIST, resistRate);
 	}
 
 	public static int calculateFallDamage(Player player, float distance) {
