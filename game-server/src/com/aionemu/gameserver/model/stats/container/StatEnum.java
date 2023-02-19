@@ -3,11 +3,8 @@ package com.aionemu.gameserver.model.stats.container;
 import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.items.ItemSlot;
-
 /**
- * @author xavier
- * @author ATracer
+ * @author xavier, ATracer
  */
 @XmlType(name = "StatEnum")
 @XmlEnum
@@ -17,23 +14,23 @@ public enum StatEnum {
 	MAXHP(18), // HP
 	MAXMP(20), // MP
 
-	AGILITY(9, true),
+	AGILITY(9),
 	BLOCK(33),
 	EVASION(31),
 	CONCENTRATION(41),
-	WILL(11, true),
-	HEALTH(7, true),
-	ACCURACY(8, true),
-	KNOWLEDGE(10, true),
+	WILL(11),
+	HEALTH(7),
+	ACCURACY(8),
+	KNOWLEDGE(10),
 	PARRY(32),
-	POWER(6, true),
-	SPEED(36, true),
+	POWER(6),
+	SPEED(36),
 	ALLSPEED,
-	WEIGHT(39, true),
-	HIT_COUNT(35, true),
+	WEIGHT(39),
+	HIT_COUNT(35),
 
-	ATTACK_RANGE(38, true), // Atk Range
-	ATTACK_SPEED(29, -1, true), // Atk Speed
+	ATTACK_RANGE(38),
+	ATTACK_SPEED(29, -1),
 	PHYSICAL_ATTACK(25), // Attack
 	PHYSICAL_ACCURACY(30), // Accuracy
 	PHYSICAL_CRITICAL(34), // Critical Strike
@@ -226,30 +223,19 @@ public enum StatEnum {
 	// If STAT id = 135 - Shrewd Cloth Set oOo
 	// Checked up to 160 in 3.5
 
-	private boolean replace;
-	private int sign;
-
-	private int itemStoneMask;
+	private final int sign;
+	private final int itemStoneMask;
 
 	private StatEnum() {
 		this(0);
 	}
 
 	private StatEnum(int stoneMask) {
-		this(stoneMask, 1, false);
-	}
-
-	private StatEnum(int stoneMask, boolean replace) {
-		this(stoneMask, 1, replace);
+		this(stoneMask, 1);
 	}
 
 	private StatEnum(int stoneMask, int sign) {
-		this(stoneMask, sign, false);
-	}
-
-	private StatEnum(int stoneMask, int sign, boolean replace) {
 		this.itemStoneMask = stoneMask;
-		this.replace = replace;
 		this.sign = sign;
 	}
 
@@ -257,66 +243,22 @@ public enum StatEnum {
 		return sign;
 	}
 
-	/**
-	 * @return the itemStoneMask
-	 */
 	public int getItemStoneMask() {
 		return itemStoneMask;
 	}
 
-	public StatEnum getHandStat(long itemSlot) {
-		switch (this) {
-			case PHYSICAL_ATTACK:
-				return itemSlot == ItemSlot.MAIN_HAND.getSlotIdMask() ? MAIN_HAND_POWER : OFF_HAND_POWER;
-			case PHYSICAL_ACCURACY:
-				return itemSlot == ItemSlot.MAIN_HAND.getSlotIdMask() ? MAIN_HAND_ACCURACY : OFF_HAND_ACCURACY;
-			case PHYSICAL_CRITICAL:
-				return itemSlot == ItemSlot.MAIN_HAND.getSlotIdMask() ? MAIN_HAND_CRITICAL : OFF_HAND_CRITICAL;
-			default:
-				return this;
-		}
-	}
-
-	public boolean isMainOrSubHandStat() {
-		switch (this) {
-			case PHYSICAL_ATTACK:
-			case POWER:
-			case PHYSICAL_ACCURACY:
-			case PHYSICAL_CRITICAL:
-				return true;
-
-			default:
-				return false;
-		}
-	}
-
-	public boolean isReplace() {
-		return replace;
-	}
-
 	public static StatEnum getModifier(int skillId) {
-		switch (skillId) {
-			case 30001:
-			case 30002:
-				return BOOST_ESSENCETAPPING_XP_RATE;
-			case 30003:
-				return BOOST_AETHERTAPPING_XP_RATE;
-			case 40001:
-				return BOOST_COOKING_XP_RATE;
-			case 40002:
-				return BOOST_WEAPONSMITHING_XP_RATE;
-			case 40003:
-				return BOOST_ARMORSMITHING_XP_RATE;
-			case 40004:
-				return BOOST_TAILORING_XP_RATE;
-			case 40007:
-				return BOOST_ALCHEMY_XP_RATE;
-			case 40008:
-				return BOOST_HANDICRAFTING_XP_RATE;
-			case 40010:
-				return BOOST_MENUISIER_XP_RATE;
-			default:
-				return null;
-		}
+		return switch (skillId) {
+			case 30001, 30002 -> BOOST_ESSENCETAPPING_XP_RATE;
+			case 30003 -> BOOST_AETHERTAPPING_XP_RATE;
+			case 40001 -> BOOST_COOKING_XP_RATE;
+			case 40002 -> BOOST_WEAPONSMITHING_XP_RATE;
+			case 40003 -> BOOST_ARMORSMITHING_XP_RATE;
+			case 40004 -> BOOST_TAILORING_XP_RATE;
+			case 40007 -> BOOST_ALCHEMY_XP_RATE;
+			case 40008 -> BOOST_HANDICRAFTING_XP_RATE;
+			case 40010 -> BOOST_MENUISIER_XP_RATE;
+			default -> null;
+		};
 	}
 }
