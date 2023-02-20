@@ -26,6 +26,7 @@ import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.team.legion.*;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -677,6 +678,7 @@ public class LegionService {
 				new SM_LEGION_UPDATE_TITLE(onlineLegionMember.getObjectId(), 0, "", onlineLegionMember.getLegionMember().getRank()), true);
 			PacketSendUtility.sendPacket(onlineLegionMember, new SM_LEGION_LEAVE_MEMBER(1300302, 0, legion.getName()));
 			onlineLegionMember.resetLegionMember();
+			ConquerorAndProtectorService.getInstance().onLeaveLegion(onlineLegionMember);
 		}
 	}
 
@@ -1091,6 +1093,7 @@ public class LegionService {
 			if (legion.hasBonus())
 				PacketSendUtility.sendPacket(player, new SM_ICON_INFO(1, false));
 			player.resetLegionMember();
+			ConquerorAndProtectorService.getInstance().onLeaveLegion(player);
 		}
 		legion.removeBonus();
 		return true;

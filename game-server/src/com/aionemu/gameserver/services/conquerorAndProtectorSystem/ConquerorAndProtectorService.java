@@ -105,37 +105,44 @@ public class ConquerorAndProtectorService {
 	public void onEnterZone(Player player, ZoneInstance zone) {
 		if (!CustomConfig.CONQUEROR_AND_PROTECTOR_SYSTEM_ENABLED)
 			return;
-		if (zone.isDominionZone()) {
-			if (player.getLegion() != null && player.getLegion().getOccupiedLegionDominion() > 0) {
-				LegionDominionLocation loc = LegionDominionService.getInstance().getLegionDominionLoc(player.getLegion().getOccupiedLegionDominion());
-				if (loc != null && loc.getZoneNameAsString().equalsIgnoreCase(zone.getAreaTemplate().getZoneName().name())) {
-					CPInfo cpInfo = protectors.computeIfAbsent(player.getObjectId(), key -> new CPInfo(CPType.PROTECTOR, player));
-					if (cpInfo.getLDRank() == 0) {
-						cpInfo.setLDRank(3);
-						cpInfo.getBuff().applyEffect(player, cpInfo.getType(), 3);
-						PacketSendUtility.sendPacket(player, new SM_CONQUEROR_PROTECTOR(7, cpInfo.getLDRank(), getOrRemoveCooldown(player.getObjectId())));
-					}
-				}
+		if (zone.isDominionZone() && isOccupiedLegionDominionZone(player, zone)) {
+			CPInfo cpInfo = protectors.computeIfAbsent(player.getObjectId(), key -> new CPInfo(CPType.PROTECTOR, player));
+			if (cpInfo.getLDRank() == 0) {
+				cpInfo.setLDRank(3);
+				cpInfo.getBuff().applyEffect(player, cpInfo.getType(), 3);
+				PacketSendUtility.sendPacket(player, new SM_CONQUEROR_PROTECTOR(7, cpInfo.getLDRank(), getOrRemoveCooldown(player.getObjectId())));
 			}
 		}
 	}
 
-	// for Legion Dominion Zones
 	public void onLeaveZone(Player player, ZoneInstance zone) {
 		if (!CustomConfig.CONQUEROR_AND_PROTECTOR_SYSTEM_ENABLED)
 			return;
-		if (zone.isDominionZone()) {
-			CPInfo cpInfo = protectors.get(player.getObjectId());
-			if (cpInfo != null && cpInfo.getLDRank() > 0) {
-				LegionDominionLocation loc = LegionDominionService.getInstance().getLegionDominionLoc(player.getLegion().getOccupiedLegionDominion());
-				if (loc != null && loc.getZoneNameAsString().equalsIgnoreCase(zone.getAreaTemplate().getZoneName().name())) {
-					cpInfo.setLDRank(0);
-					updateBuffAndNotifyNearbyPlayers(player, cpInfo);
-					if (cpInfo.getRank() == 0)
-						protectors.remove(player.getObjectId());
-				}
-			}
+		if (zone.isDominionZone() && isOccupiedLegionDominionZone(player, zone)) {
+			resetLegionDominionRank(player);
 		}
+	}
+
+	public void onLeaveLegion(Player player) {
+		if (CustomConfig.CONQUEROR_AND_PROTECTOR_SYSTEM_ENABLED)
+			resetLegionDominionRank(player);
+	}
+
+	private void resetLegionDominionRank(Player player) {
+		CPInfo cpInfo = protectors.get(player.getObjectId());
+		if (cpInfo != null && cpInfo.getLDRank() > 0) {
+			cpInfo.setLDRank(0);
+			updateBuffAndNotifyNearbyPlayers(player, cpInfo);
+			if (cpInfo.getRank() == 0)
+				protectors.remove(player.getObjectId());
+		}
+	}
+
+	private boolean isOccupiedLegionDominionZone(Player player, ZoneInstance zone) {
+		if (player.getLegion() == null)
+			return false;
+		LegionDominionLocation loc = LegionDominionService.getInstance().getLegionDominionLoc(player.getLegion().getOccupiedLegionDominion());
+		return loc != null && loc.getZoneNameAsString().equalsIgnoreCase(zone.getAreaTemplate().getZoneName().name());
 	}
 
 	public void onKill(Player killer, Player victim) {
