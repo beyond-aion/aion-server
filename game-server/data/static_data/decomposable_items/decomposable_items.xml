@@ -13587,39 +13587,44 @@
 	</decomposable>
 	<decomposable item_id="188051675" /><!-- Mysterious Box -->
 	<decomposable item_id="188051676"><!-- [Event] Noble Box of Life -->
-		<items chance="15">
-			<item id="164002167" min_count="5" /><!-- Drana Coffee -->
-		</items>
-		<items chance="15">
-			<item id="166100023" min_count="250" /><!-- [Stamp] Greater Supplements (Eternal) -->
-		</items>
-		<items chance="15">
-			<item id="186000101" min_count="10" race="ELYOS" /><!-- Radiant Token -->
-			<item id="186000104" min_count="10" race="ASMODIANS" /><!-- Crusader Token -->
+		<items chance="12">
+			<item id="186000146" min_count="5" /><!-- Guestpetal -->
 		</items>
 		<items chance="12">
-			<item id="169620030" /><!-- [Favorable Luck] Face of Spring Burgeoning -->
-		</items>
-		<items chance="12">
-			<item id="188053695" /><!-- High Grade Crafting Material Box of Conquest -->
+			<item id="162000107" min_count="25" /><!-- Saam King's Herbs -->
 		</items>
 		<items chance="10">
-			<item id="169405253" /><!-- Weapon Shard -->
+			<item id="166100023" min_count="250" /><!-- [Stamp] High Grade Enchanting Supplement (Mythic) -->
+		</items>
+		<items chance="10">
+			<item id="166100020" min_count="250" /><!-- [Stamp] High Grade Enchanting Supplement (Eternal) -->
+		</items>
+		<items chance="8">
+			<item id="188053617" /><!-- Noble Tidal Idian Bundle -->
+		</items>
+		<items chance="8">
+			<item id="188053695" /><!-- High Grade Crafting Material Box of Conquest -->
+		</items>
+		<items chance="8">
+			<item id="185000216" /><!-- Ancestor's Relic -->
+		</items>
+		<items chance="8">
+			<item id="169620030" /><!-- [Favorable Luck] Face of Spring Burgeoning -->
+		</items>
+		<items chance="8">
+			<item id="188053207" /><!-- [Event] Ancient Spirit's Eternal Armor Chest -->
 		</items>
 		<items chance="5">
-			<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+			<item id="188950015" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
 		</items>
 		<items chance="5">
-			<item id="188052915" /><!-- [Event] Stormwing Weapon Chest -->
-		</items>
-		<items chance="5">
-			<item id="188052723" /><!-- [Event] Tatar's Weapon Box -->
+			<item id="188053623" /><!-- Fire Dragon King's Weapon Bundle -->
 		</items>
 		<items chance="3">
-			<item id="188053959" /><!-- [Camping] Display Furniture Bag -->
+			<item id="188053963" /><!-- Camping Bundle -->
 		</items>
 		<items chance="3">
-			<item id="190020031" /><!-- Aqua Griffo Egg -->
+			<item id="190020028" /><!-- Pink Griffo Egg -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051677" /><!-- [Event] Eternal Treasure Chest -->
