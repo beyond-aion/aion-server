@@ -2873,6 +2873,21 @@
 			</spawn_map>
 		</spawns>
 	</event>
+	<event name="Beyond Easter" start="2023-04-07T00:00:00" end="2023-04-16T23:59:59">
+		<event_drops>
+			<gd_rule rule_name="Easter Event Drop" chance="15" member_limit="12">
+				<gd_ratings>
+					<gd_rating rating="NORMAL" />
+					<gd_rating rating="ELITE" />
+					<gd_rating rating="HERO" />
+					<gd_rating rating="LEGENDARY" />
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="186000175" /><!-- [Event] Mottled Egg -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
+	</event>
 	<event name="Upgrade Arcade" start="2020-04-06T00:00:00" end="2020-04-12T23:59:59">
 		<inventory_drop item_id="186000389" interval="60" /><!-- Arcade Token -->
 		<event_drops>
