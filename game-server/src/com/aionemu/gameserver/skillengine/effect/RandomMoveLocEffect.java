@@ -42,11 +42,8 @@ public class RandomMoveLocEffect extends EffectTemplate {
 
 		Creature effector = effect.getEffector();
 		// Move Effector backwards direction=1 or frontwards direction=0
-		if (distance != 0) {
-			float dir = PositionUtil.convertHeadingToAngle(effector.getHeading());
-			Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effector, direction == 1 ? dir + 180 : dir, distance);
-			effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effector.getHeading());
-		} else
-			effect.getSkill().setTargetPosition(effector.getX(), effector.getY(), effector.getZ(), effector.getHeading());
+		float dir = PositionUtil.convertHeadingToAngle(effector.getHeading());
+		Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effector, direction == 1 ? dir + 180 : dir, distance);
+		effect.getSkill().setTargetPosition(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), effector.getHeading());
 	}
 }
