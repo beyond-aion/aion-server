@@ -5018,75 +5018,126 @@
 	</npc_drop>
 	<!-- Shugo Emperor's Vault: Emperor's Treasure Box -->
 	<npc_drop npc_id="832929">
-		<drop_group race="ELYOS" max_items="2">
-			<drop item_id="186000237" min_amount="10" max_amount="20" /><!-- Ancient Coin -->
-			<drop item_id="186000238" min_amount="10" max_amount="15" /><!-- Conqueror's Mark -->
-			<drop item_id="164002235" min_amount="5" /><!-- Greater Running Scroll (10 Minutes) -->
-			<drop item_id="164002236" min_amount="5" /><!-- Greater Courage Scroll (10 Minutes) -->
-			<drop item_id="164002237" min_amount="5" /><!-- Greater Awakening Scroll (10 Minutes) -->
-			<drop item_id="160010158" /><!-- [Event] Shugo Disguise Candy -->
+		<drop_group race="ELYOS">
+			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
+			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
+			<drop item_id="169620110" /><!-- [Event] Celestial Crafting Boost -->
+			<drop item_id="166000195" min_amount="5" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="186000237" min_amount="50" /><!-- Ancient Coin -->
+			<drop item_id="160010158" min_amount="3" /><!-- [Event] Shugo Disguise Candy -->
 		</drop_group>
-		<drop_group race="ASMODIANS" max_items="2">
-			<drop item_id="186000237" min_amount="10" max_amount="20" /><!-- Ancient Coin -->
-			<drop item_id="186000238" min_amount="10" max_amount="15" /><!-- Conqueror's Mark -->
-			<drop item_id="164002235" min_amount="5" /><!-- Greater Running Scroll (10 Minutes) -->
-			<drop item_id="164002236" min_amount="5" /><!-- Greater Courage Scroll (10 Minutes) -->
-			<drop item_id="164002237" min_amount="5" /><!-- Greater Awakening Scroll (10 Minutes) -->
-			<drop item_id="160010159" /><!-- [Event] Shugo Disguise Candy -->
+		<drop_group race="ASMODIANS">
+			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
+			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
+			<drop item_id="169620110" /><!-- [Event] Celestial Crafting Boost -->
+			<drop item_id="166000195" min_amount="5" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="186000237" min_amount="50" /><!-- Ancient Coin -->
+			<drop item_id="160010159" min_amount="3" /><!-- [Event] Shugo Disguise Candy -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="186000051" /><!-- Major Ancient Crown -->
-			<drop item_id="188053636" /><!-- Blood Mark Box -->
-			<drop item_id="166000195" min_amount="5" /><!-- Epsilon Enchantment Stone -->
-			<drop item_id="169620110" chance="10" /><!-- [Event] Celestial Crafting Boost -->
-			<drop item_id="169620067" chance="10" /><!-- AP Boost Charm II - 50% -->
-			<drop item_id="169620079" chance="10" /><!-- Gathering Boost Charm II - 100% -->
+			<drop item_id="186000051" chance="50" min_amount="3" /><!-- Major Ancient Crown -->
+			<drop item_id="186000399" chance="50" min_amount="20" /><!-- Honorable Conqueror's Mark -->
+			<drop item_id="188053610" chance="50" min_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<drop item_id="188053113" chance="50" min_amount="2" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<drop item_id="188053636" chance="50" /><!-- Blood Mark Box -->
+			<drop item_id="166020000" chance="50" min_amount="5" /><!-- Omega Enchantment Stone -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="166200013" chance="20" min_amount="3" /><!-- Enduring Mythic Weapon Tuning Scroll -->
+			<drop item_id="165020014" chance="20" /><!-- Weapon Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<drop item_id="165020015" chance="20" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<drop item_id="165020016" chance="20" /><!-- Accessory Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<drop item_id="166500002" chance="20" min_amount="3" /><!-- Amplification Stone -->
+			<drop item_id="166030005" chance="20" min_amount="3" /><!-- Tempering Solution -->
 		</drop_group>
 	</npc_drop>
 	<!-- Shugo Emperor's Vault: Emperor's Quality Treasure Box -->
 	<npc_drop npc_id="832930">
-		<drop_group max_items="2">
-			<drop item_id="186000237" min_amount="25" max_amount="50" /><!-- Ancient Coin -->
-			<drop item_id="186000238" min_amount="25" max_amount="50" /><!-- Conqueror's Mark -->
-			<drop item_id="164002235" min_amount="10" /><!-- Greater Running Scroll (10 Minutes) -->
-			<drop item_id="164002236" min_amount="10" /><!-- Greater Courage Scroll (10 Minutes) -->
-			<drop item_id="164002237" min_amount="10" /><!-- Greater Awakening Scroll (10 Minutes) -->
-			<drop item_id="188053636" /><!-- Blood Mark Box -->
+		<drop_group race="ELYOS" max_items="2">
+			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
+			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
+			<drop item_id="169620110" /><!-- [Event] Celestial Crafting Boost -->
+			<drop item_id="166000195" min_amount="5" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="186000237" min_amount="50" /><!-- Ancient Coin -->
+			<drop item_id="160010158" min_amount="3" /><!-- [Event] Shugo Disguise Candy -->
+		</drop_group>
+		<drop_group race="ASMODIANS" max_items="2">
+			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
+			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
+			<drop item_id="169620110" /><!-- [Event] Celestial Crafting Boost -->
+			<drop item_id="166000195" min_amount="5" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="186000237" min_amount="50" /><!-- Ancient Coin -->
+			<drop item_id="160010159" min_amount="3" /><!-- [Event] Shugo Disguise Candy -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="186000051" min_amount="3" /><!-- Major Ancient Crown -->
-			<drop item_id="188052297" min_amount="3" /><!-- Noble Composite Manastone Bundle -->
-			<drop item_id="188052761" chance="50" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<drop item_id="186000051" chance="75" min_amount="3" /><!-- Major Ancient Crown -->
+			<drop item_id="186000399" chance="75" min_amount="20" /><!-- Honorable Conqueror's Mark -->
+			<drop item_id="188053610" chance="75" min_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<drop item_id="188053113" chance="75" min_amount="2" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<drop item_id="188053636" chance="75" /><!-- Blood Mark Box -->
+			<drop item_id="166020000" chance="75" min_amount="5" /><!-- Omega Enchantment Stone -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="166020000" min_amount="5" /><!-- Omega Enchantment Stone -->
-			<drop item_id="166030005" min_amount="2" /><!-- Tempering Solution -->
-			<drop item_id="188053667" chance="50" /><!-- [Event] Mithril Medal Box -->
+			<drop item_id="166200013" chance="40" min_amount="3" /><!-- Enduring Mythic Weapon Tuning Scroll -->
+			<drop item_id="165020014" chance="40" /><!-- Weapon Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<drop item_id="165020015" chance="40" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<drop item_id="165020016" chance="40" /><!-- Accessory Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<drop item_id="166500002" chance="40" min_amount="3" /><!-- Amplification Stone -->
+			<drop item_id="166030005" chance="40" min_amount="3" /><!-- Tempering Solution -->
 		</drop_group>
 	</npc_drop>
 	<!-- Shugo Emperor's Vault: Emperor's Premium Treasure Box -->
 	<npc_drop npc_id="832931">
-		<drop_group max_items="2">
-			<drop item_id="186000237" min_amount="50" max_amount="100" /><!-- Ancient Coin -->
-			<drop item_id="186000399" min_amount="10" max_amount="20" /><!-- Honorable Conqueror's Mark -->
-			<drop item_id="164002235" min_amount="15" /><!-- Greater Running Scroll (10 Minutes) -->
-			<drop item_id="164002236" min_amount="15" /><!-- Greater Courage Scroll (10 Minutes) -->
-			<drop item_id="164002237" min_amount="15" /><!-- Greater Awakening Scroll (10 Minutes) -->
-			<drop item_id="186000051" min_amount="5" /><!-- Major Ancient Crown -->
+		<drop_group race="ELYOS" max_items="2">
+			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
+			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
+			<drop item_id="169620110" /><!-- [Event] Celestial Crafting Boost -->
+			<drop item_id="166000195" min_amount="5" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="186000237" min_amount="50" /><!-- Ancient Coin -->
+			<drop item_id="160010158" min_amount="3" /><!-- [Event] Shugo Disguise Candy -->
+		</drop_group>
+		<drop_group race="ASMODIANS" max_items="2">
+			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
+			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
+			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
+			<drop item_id="169620110" /><!-- [Event] Celestial Crafting Boost -->
+			<drop item_id="166000195" min_amount="5" /><!-- Epsilon Enchantment Stone -->
+			<drop item_id="186000237" min_amount="50" /><!-- Ancient Coin -->
+			<drop item_id="160010159" min_amount="3" /><!-- [Event] Shugo Disguise Candy -->
 		</drop_group>
 		<drop_group max_items="2">
-			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
-			<drop item_id="166500002" chance="50" min_amount="5" /><!-- Amplification Stone -->
-			<drop item_id="166200013" chance="25" /><!-- Enduring Mythic Weapon Tuning Scroll -->
-			<drop item_id="166200014" chance="25" /><!-- Enduring Mythic Armor Tuning Scroll -->
+			<drop item_id="186000051" min_amount="3" /><!-- Major Ancient Crown -->
+			<drop item_id="186000399" min_amount="20" /><!-- Honorable Conqueror's Mark -->
+			<drop item_id="188053610" min_amount="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<drop item_id="188053113" min_amount="2" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<drop item_id="188053636" /><!-- Blood Mark Box -->
+			<drop item_id="166020000" min_amount="5" /><!-- Omega Enchantment Stone -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="188053666" chance="25" /><!-- [Event] Ceramium Medal Box -->
-			<drop item_id="188950019" chance="25" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
-			<drop item_id="188950017" chance="25" min_amount="2" /><!-- Special Courier Pass (Abyss Eternal/Lv. 61-65) -->
-			<drop item_id="110900876" chance="10" /><!-- Nyerkcarrier -->
-			<drop item_id="188052936" chance="10" /><!-- Shugo Icebox -->
-			<drop item_id="188053995" chance="10" /><!-- Emperor Trillirunerk's Feather Box -->
+			<drop item_id="166200013" chance="75" min_amount="3" /><!-- Enduring Mythic Weapon Tuning Scroll -->
+			<drop item_id="165020014" chance="75" /><!-- Weapon Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<drop item_id="165020015" chance="75" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<drop item_id="165020016" chance="75" /><!-- Accessory Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+			<drop item_id="166500002" chance="75" min_amount="3" /><!-- Amplification Stone -->
+			<drop item_id="166030005" chance="75" min_amount="3" /><!-- Tempering Solution -->
+		</drop_group>
+		<drop_group>
+			<drop item_id="188053995" chance="20" /><!-- Emperor Trillirunerk's Feather Box -->
+			<drop item_id="188052936" chance="20" /><!-- Shugo Icebox -->
+			<drop item_id="188950019" chance="20" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
+			<drop item_id="188053618" chance="20" min_amount="2" /><!-- Honorable Elim's Idian Bundle -->
+			<drop item_id="188053295" chance="20" /><!-- Empyrean Plume Chest -->
 		</drop_group>
 	</npc_drop>
 	<!-- Shugo Emperor's Vault: Indinerk Jonakak's Supply Box -->
