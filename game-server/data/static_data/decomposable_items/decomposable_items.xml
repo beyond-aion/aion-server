@@ -7308,10 +7308,9 @@
 	<decomposable item_id="188051089" /><!-- Major Pudgy Porgus Bundle -->
 	<decomposable item_id="188051090" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="125040022" /><!-- Ribbit Hat -->
-			<item id="125045241" /><!-- Hot Shades -->
 			<item id="125040042" /><!-- Summer Sunglasses -->
-			<item id="125040045" /><!-- Diving Helmet/Summer Headwrap -->
+			<item id="125040158" /><!-- [Event] Enchanting Sorcerer Hat -->
+			<item id="125045539" /><!-- Moon Rabbit's Picnic - Hat -->
 			<item id="125040180" /><!-- Sports Cap -->
 			<item id="188052090" /><!-- [Event] Magic Food Bundle -->
 			<item id="188052091" /><!-- [Event] Melee Food Bundle -->
@@ -7320,20 +7319,20 @@
 	<decomposable item_id="188051091" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
 			<item id="169650007" /><!-- [Event] Plastic Surgery Ticket -->
-			<item id="170205025" /><!-- Vinyl Dancefloor -->
-			<item id="169600086" /><!-- [Emotion Card] 'Shut Up' Dance -->
-			<item id="110900062" /><!-- Ribbit Costume -->
-			<item id="110900420" /><!-- Cool Summer Look -->
-			<item id="110900103" /><!-- Cute Swimsuit -->
-			<item id="188051516" /><!-- Smart Greater Scroll Bundle -->
+			<item id="110900848" /><!-- Urban Summer Red -->
+			<item id="110900824" /><!-- Inked-Up Swimsuit -->
+			<item id="110900935" /><!-- The Dragon's Training Suit -->
+			<item id="110900764" /><!-- Contemporary Dress -->
+			<item id="110900836" /><!-- Stylish Bathrobe -->
+			<item id="110900867" /><!-- Moon Rabbit's Picnic -->
+			<item id="110900955" /><!-- Suave Outfit -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051092" selectable="true"><!-- [Event] Cold Box -->
 		<items>
-			<item id="125040022" /><!-- Ribbit Hat -->
-			<item id="125045241" /><!-- Hot Shades -->
 			<item id="125040042" /><!-- Summer Sunglasses -->
-			<item id="125040045" /><!-- Diving Helmet/Summer Headwrap -->
+			<item id="125040158" /><!-- [Event] Enchanting Sorcerer Hat -->
+			<item id="125045539" /><!-- Moon Rabbit's Picnic - Hat -->
 			<item id="125040180" /><!-- Sports Cap -->
 			<item id="188052092" /><!-- [Event] Magic Food Bundle -->
 			<item id="188052093" /><!-- [Event] Melee Food Bundle -->
@@ -7342,12 +7341,13 @@
 	<decomposable item_id="188051093" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
 			<item id="169650007" /><!-- [Event] Plastic Surgery Ticket -->
-			<item id="170205025" /><!-- Vinyl Dancefloor -->
-			<item id="169600086" /><!-- [Emotion Card] 'Shut Up' Dance -->
-			<item id="110900062" /><!-- Ribbit Costume -->
-			<item id="110900420" /><!-- Cool Summer Look -->
-			<item id="110900103" /><!-- Cute Swimsuit -->
-			<item id="188051516" /><!-- Smart Greater Scroll Bundle -->
+			<item id="110900848" /><!-- Urban Summer Red -->
+			<item id="110900824" /><!-- Inked-Up Swimsuit -->
+			<item id="110900935" /><!-- The Dragon's Training Suit -->
+			<item id="110900764" /><!-- Contemporary Dress -->
+			<item id="110900836" /><!-- Stylish Bathrobe -->
+			<item id="110900867" /><!-- Moon Rabbit's Picnic -->
+			<item id="110900955" /><!-- Suave Outfit -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051094"><!-- Scorching Heat Pouch -->
@@ -23384,53 +23384,53 @@
 	<decomposable item_id="188052623" /><!-- [Event] Romantic Dye Box -->
 	<decomposable item_id="188052624" /><!-- [Event] Dramata's Bone Wing Box -->
 	<decomposable item_id="188052625"><!-- [Event] Ice-hot Box -->
-		<items chance="10.0">
-			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
+		<items chance="10">
+			<item id="186000130" min_count="500" /><!-- Crucible Insignia -->
 		</items>
-		<items chance="10.0">
-			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
+		<items chance="10">
+			<item id="162000107" min_count="10" /><!-- Saam King's Herbs -->
 		</items>
-		<items chance="10.0">
-			<item id="186000237" min_count="50" /><!-- Ancient Coin -->
+		<items chance="10">
+			<item id="164000130" min_count="5" /><!-- Major Spell Resist Scroll -->
 		</items>
-		<items chance="10.0">
-			<item id="186000238" min_count="50" /><!-- Conqueror's Mark -->
+		<items chance="10">
+			<item id="164000126" min_count="5" /><!-- Major Strike Resist Scroll -->
 		</items>
-		<items chance="7.0">
-			<item id="186000247" /><!-- Major Danuar Relic -->
+		<items chance="7">
+			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
 		</items>
-		<items chance="7.0">
-			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
+		<items chance="7">
+			<item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
 		</items>
-		<items chance="7.0">
-			<item id="169629003" min_count="2" /><!-- Shiny Vinna -->
-		</items>
-		<items chance="7.0">
-			<item id="186000399" min_count="20" /><!-- Honorable Conqueror's Mark -->
-		</items>
-		<items chance="5.0">
-			<item id="188054198" /><!-- Greater Scroll Bundle -->
-		</items>
-		<items chance="5.0">
-			<item id="188053614" /><!-- Illusion Godstone Bundle -->
-		</items>
-		<items chance="4.0">
-			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
-		</items>
-		<items chance="4.0">
+		<items chance="7">
 			<item id="166030005" min_count="3" /><!-- Tempering Solution -->
 		</items>
-		<items chance="4.0">
-			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
+		<items chance="7">
+			<item id="188053963" /><!-- Camping Bundle -->
 		</items>
-		<items chance="4.0">
-			<item id="169600217" /><!-- [Emotion Card] Summer Vacation -->
+		<items chance="5">
+			<item id="164002223" /><!-- Administrator's Boon – 7-Day Pass -->
 		</items>
-		<items chance="3.0">
-			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
+		<items chance="5">
+			<item id="169629002" /><!-- Lucky Vinna II -->
 		</items>
-		<items chance="3.0">
-			<item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
+		<items chance="5">
+			<item id="188053208" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+		</items>
+		<items chance="4">
+			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+		</items>
+		<items chance="4">
+			<item id="188053219" /><!-- [Event] Sauro Commander's Accessory Box -->
+		</items>
+		<items chance="3">
+			<item id="190070017" /><!-- Sidekick Akumu Summoning Lamp -->
+		</items>
+		<items chance="3">
+			<item id="169650008" /><!-- Plastic Surgery Ticket -->
+		</items>
+		<items chance="3">
+			<item id="188053004" /><!-- [Event] Dragon Lord's Weapon Chest -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052626"><!-- [Event] Cocktail Shaker -->
