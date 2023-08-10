@@ -7318,7 +7318,7 @@
 	</decomposable>
 	<decomposable item_id="188051091" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
-			<item id="169650007" /><!-- [Event] Plastic Surgery Ticket -->
+			<item id="169650000" /><!-- Plastic Surgery Ticket -->
 			<item id="110900848" /><!-- Urban Summer Red -->
 			<item id="110900824" /><!-- Inked-Up Swimsuit -->
 			<item id="110900935" /><!-- The Dragon's Training Suit -->
@@ -7340,7 +7340,7 @@
 	</decomposable>
 	<decomposable item_id="188051093" selectable="true"><!-- [Event] Frozen Box -->
 		<items>
-			<item id="169650007" /><!-- [Event] Plastic Surgery Ticket -->
+			<item id="169650000" /><!-- Plastic Surgery Ticket -->
 			<item id="110900848" /><!-- Urban Summer Red -->
 			<item id="110900824" /><!-- Inked-Up Swimsuit -->
 			<item id="110900935" /><!-- The Dragon's Training Suit -->
@@ -23427,7 +23427,7 @@
 			<item id="190070017" /><!-- Sidekick Akumu Summoning Lamp -->
 		</items>
 		<items chance="3">
-			<item id="169650008" /><!-- Plastic Surgery Ticket -->
+			<item id="169650000" /><!-- Plastic Surgery Ticket -->
 		</items>
 		<items chance="3">
 			<item id="188053004" /><!-- [Event] Dragon Lord's Weapon Chest -->
