@@ -46,10 +46,4 @@ public class GeoDataConfig {
 	@Property(key = "gameserver.geodata.shields.enable", defaultValue = "true")
 	public static boolean GEO_SHIELDS_ENABLE;
 
-	/**
-	 * Enable geo doors
-	 */
-	@Property(key = "gameserver.geodata.doors.enable", defaultValue = "true")
-	public static boolean GEO_DOORS_ENABLE;
-
 }

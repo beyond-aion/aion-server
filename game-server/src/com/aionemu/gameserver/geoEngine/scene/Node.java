@@ -493,17 +493,4 @@ public class Node extends Spatial implements Cloneable {
 	public void setMaterialId(byte materialId) {
 		this.materialId = materialId;
 	}
-
-	public List<Node> getGeometries(String name) {
-		List<Node> matchingGeometries = new ArrayList<>();
-		if (name.equals(this.name)) {
-			matchingGeometries.add(this);
-		}
-		for (Spatial child : children) {
-			if (child instanceof Node) {
-				matchingGeometries.addAll(((Node) child).getGeometries(name));
-			}
-		}
-		return matchingGeometries;
-	}
 }

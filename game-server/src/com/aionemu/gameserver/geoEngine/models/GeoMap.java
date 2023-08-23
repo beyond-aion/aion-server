@@ -4,11 +4,12 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
@@ -18,9 +19,12 @@ import com.aionemu.gameserver.geoEngine.math.Vector2f;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.DespawnableNode;
 import com.aionemu.gameserver.geoEngine.scene.DespawnableNode.DespawnableType;
+import com.aionemu.gameserver.geoEngine.scene.Geometry;
 import com.aionemu.gameserver.geoEngine.scene.Node;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.house.HouseDoorState;
+import com.aionemu.gameserver.world.RegionUtil;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author Mr. Poke
@@ -28,42 +32,34 @@ import com.aionemu.gameserver.model.house.HouseDoorState;
 public class GeoMap extends Node {
 
 	private static final Logger log = LoggerFactory.getLogger(GeoMap.class);
-	public static final float MAX_Z = 4000;
-	public static final float MIN_Z = 0;
 	public static final float COLLISION_CHECK_Z_OFFSET = 1;
 	private static final float COLLISION_BOUND_OFFSET = 0.5f;
 	private static final float TERRAIN_POINTS_DISTANCE = 2f;
+	private static final int NODE_CHUNK_SIZE = 256;
 
-	private short[] terrainData;
+	private short[] terrainData = new short[] { 0 };
 	private byte[] terrainMaterials;
 	private int terrainDataRows, terrainDataCols;
-	private List<BoundingBox> tmpBox = new ArrayList<>();
+	private final Map<Integer, Node> chunkById = new HashMap<>();
 
-	private Map<Integer, DespawnableNode> despawnables = new HashMap<>();
-	private Map<Integer, List<DespawnableNode>> despawnableTownObjects = new HashMap<>();
-	private Map<Integer, DespawnableNode> despawnableHouseDoors = new HashMap<>();
-	private Map<Integer, DespawnableNode[]> despawnableDoors = new HashMap<>();
-	private int mapId;
+	private final Map<Integer, DespawnableNode> despawnables = new HashMap<>();
+	private final Map<Integer, List<DespawnableNode>> despawnableTownObjects = new HashMap<>();
+	private final Map<Integer, DespawnableNode> despawnableHouseDoors = new HashMap<>();
+	private final Map<Integer, DespawnableNode[]> despawnableDoors = new HashMap<>();
+	private final int mapId;
 
-	public GeoMap(int mapId, int worldSize) {
+	public GeoMap(int mapId) {
+		super(null);
 		this.mapId = mapId;
-		setCollisionIntentions(CollisionIntention.ALL.getId());
-		for (int x = 0; x < worldSize; x += 256) {
-			for (int y = 0; y < worldSize; y += 256) {
-				Node geoNode = new Node("");
-				geoNode.setCollisionIntentions(CollisionIntention.ALL.getId());
-				tmpBox.add(new BoundingBox(new Vector3f(x, y, MIN_Z), new Vector3f(x + 256, y + 256, MAX_Z)));
-				super.attachChild(geoNode);
-			}
-		}
+	}
+
+	public int getMapId() {
+		return mapId;
 	}
 
 	@Override
 	public int attachChild(Spatial child) {
-		int i = 0;
-
-		if (child instanceof DespawnableNode) {
-			DespawnableNode desp = ((DespawnableNode) child);
+		if (child instanceof DespawnableNode desp) {
 			switch (desp.type) {
 				case EVENT: // event object
 					break;
@@ -87,20 +83,21 @@ public class GeoMap extends Node {
 					throw new IllegalArgumentException(desp.type + " is not implemented");
 			}
 		}
-
-		for (Spatial spatial : getChildren()) {
-			if (tmpBox.get(i).intersects(child.getWorldBound())) {
-				((Node) spatial).attachChild(child);
-			}
-			i++;
-		}
+		getOrCreateChunk(child).attachChild(child);
 		return 0;
 	}
 
-	/**
-	 * @param terrainData
-	 *          The terrainData to set.
-	 */
+	private Node getOrCreateChunk(Spatial child) {
+		int chunkId = RegionUtil.get2DRegionId(NODE_CHUNK_SIZE, child.getWorldBound().getCenter().x, child.getWorldBound().getCenter().y);
+		Node node = chunkById.get(chunkId);
+		if (node == null) {
+			node = new Node("");
+			chunkById.put(chunkId, node);
+			super.attachChild(node);
+		}
+		return node;
+	}
+
 	public void setTerrainData(short[] terrainData) {
 		this.terrainData = terrainData;
 		terrainDataRows = terrainDataCols = (int) Math.sqrt(terrainData.length);
@@ -402,14 +399,6 @@ public class GeoMap extends Node {
 		return collideWith(ray, results) == 0;
 	}
 
-	@Override
-	public void updateModelBound() {
-		if (getChildren() != null) {
-			getChildren().removeIf(s -> s instanceof Node && ((Node) s).getChildren().isEmpty());
-		}
-		super.updateModelBound();
-	}
-
 	public void spawnPlaceableObject(int instanceId, int staticId) {
 		DespawnableNode node = despawnables.get(staticId);
 		if (node != null) {
@@ -433,37 +422,29 @@ public class GeoMap extends Node {
 	}
 
 	public void setHouseDoorState(int instanceId, int houseAddress, HouseDoorState state) {
-		if (despawnableHouseDoors.containsKey(houseAddress)) {
-			switch (state) {
-				case OPEN:
-					despawnableHouseDoors.get(houseAddress).setActive(instanceId, false);
-					break;
-				case CLOSED:
-				case CLOSED_EXCEPT_FRIENDS:
-					despawnableHouseDoors.get(houseAddress).setActive(instanceId, true);
-					break;
-			}
-		}
+		DespawnableNode houseDoor = despawnableHouseDoors.get(houseAddress);
+		if (houseDoor != null)
+			houseDoor.setActive(instanceId, state != HouseDoorState.OPEN);
 	}
 
 	public void setDoorState(int instanceId, int doorId, boolean open) {
-		if (despawnableDoors.containsKey(doorId)) {
-			DespawnableNode[] doors = despawnableDoors.get(doorId);
+		DespawnableNode[] doors = despawnableDoors.get(doorId);
+		if (doors == null) {
+			// TODO mesh is excluded on purpose in geobuilder due to incorrect collision data: objects/npc/level_object/idyun_bridge/idyun_bridge_01a.cga
+			if (!GeoDataConfig.GEO_ENABLE || doorId == 145 && mapId == WorldMapType.OCCUPIED_RENTUS_BASE.getId())
+				return;
+			log.warn("No geometry found for door " + doorId + " in world " + mapId);
+		} else {
 			if (doors[0] != null) {
 				doors[0].setActive(instanceId, !open);
 			} else {
-				log.warn("door state 1 not available for door: " + doorId + " in " + mapId + " instance: " + instanceId);
+				log.warn("Door state 1 not available for door " + doorId + " in world " + mapId);
 			}
 			if (doors[1] != null) {
 				doors[1].setActive(instanceId, open);
 			} else {
-				log.warn("door state 2 not available for door: " + doorId + " in " + mapId + " instance: " + instanceId);
+				log.warn("Door state 2 not available for door " + doorId + " in world " + mapId);
 			}
-		} else {
-			// TODO mesh is excluded on purpose in geobuilder due to incorrect collision data: objects/npc/level_object/idyun_bridge/idyun_bridge_01a.cga
-			if (doorId == 145 && mapId == 300620000)
-				return;
-			log.warn("No geometry found for door: " + doorId + " in world: " + mapId);
 		}
 	}
 
@@ -526,14 +507,17 @@ public class GeoMap extends Node {
 		return matId;
 	}
 
-	public List<Node> getGeometries(String name) {
-		List<Node> matchingGeometries = new ArrayList<>();
-		for (Spatial child : children) {
-			if (child instanceof Node) {
-				matchingGeometries.addAll(((Node) child).getGeometries(name));
-			}
-		}
-		return matchingGeometries;
+	public Stream<Geometry> getGeometries() {
+		return getGeometries(getChildren());
+	}
+
+	private static Stream<Geometry> getGeometries(List<Spatial> spatials) {
+		return spatials.stream().mapMulti((child, consumer) -> {
+			if (child instanceof Geometry geometry)
+				consumer.accept(geometry);
+			else if (child instanceof Node node)
+				getGeometries(node.getChildren()).forEach(consumer);
+		});
 	}
 
 	/**

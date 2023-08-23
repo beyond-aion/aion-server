@@ -9,17 +9,19 @@ import java.nio.MappedByteBuffer;
 import java.nio.ShortBuffer;
 import java.nio.channels.FileChannel;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
+import java.util.stream.Collectors;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.GameServerError;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Matrix3f;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.geoEngine.scene.*;
-import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
-import com.aionemu.gameserver.world.geo.DummyGeoData;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
@@ -28,9 +30,36 @@ import com.aionemu.gameserver.world.zone.ZoneService;
  */
 public class GeoWorldLoader {
 
+	private static final Logger log = LoggerFactory.getLogger(GeoWorldLoader.class);
 	private static final String GEO_DIR = "data/geo/";
 
-	public static Map<String, Node> loadMeshes(File meshFile) {
+	public static void load(Collection<GeoMap> maps) {
+		load(maps, loadMeshes());
+	}
+
+	private static void load(Collection<GeoMap> maps, Map<String, Node> models) {
+		log.info("Loading geo maps...");
+		Set<String> missingMeshes = ConcurrentHashMap.newKeySet();
+		maps.parallelStream().forEach(map -> loadWorld(map, models, missingMeshes));
+		if (!missingMeshes.isEmpty())
+			log.warn(missingMeshes.size() + " meshes are missing:\n" + missingMeshes.stream().sorted().collect(Collectors.joining("\n")));
+		log.info("Loaded " + maps.size() + " geo maps.");
+	}
+
+	private static Map<String, Node> loadMeshes() {
+		log.info("Loading meshes...");
+		File[] meshFiles = new File(GEO_DIR).listFiles((file, name) -> name.toLowerCase().endsWith(".mesh"));
+		if (meshFiles == null || meshFiles.length == 0) {
+			log.warn("No *.mesh files present in ./" + GEO_DIR);
+			return Collections.emptyMap();
+		}
+		Map<String, Node> meshes = new HashMap<>();
+		for (File meshFile : meshFiles)
+			meshes.putAll(loadMeshes(meshFile));
+		return meshes;
+	}
+
+	private static Map<String, Node> loadMeshes(File meshFile) {
 		Map<String, Node> geoms = new HashMap<>();
 		try (RandomAccessFile file = new RandomAccessFile(meshFile, "r"); FileChannel roChannel = file.getChannel()) {
 			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size()).load();
@@ -90,11 +119,13 @@ public class GeoWorldLoader {
 		return geoms;
 	}
 
-	public static GeoMap loadWorld(WorldMapTemplate template, Map<String, Node> models, Set<String> missingMeshes) {
-		File geoFile = new File(GEO_DIR + template.getMapId() + ".geo");
-		if (!geoFile.exists())
-			return DummyGeoData.DUMMY_MAP;
-		GeoMap map = new GeoMap(template.getMapId(), template.getWorldSize());
+	private static void loadWorld(GeoMap map, Map<String, Node> models, Set<String> missingMeshes) {
+		File geoFile = new File(GEO_DIR + map.getMapId() + ".geo");
+		if (!geoFile.exists()) {
+			if (DataManager.WORLD_MAPS_DATA.getTemplate(map.getMapId()).getWorldSize() != 0) // don't warn about inaccessible (test) maps
+				log.warn(geoFile + " is missing");
+			return;
+		}
 		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r"); FileChannel roChannel = file.getChannel()) {
 			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size()).load();
 			if (geo.get() == 0)
@@ -146,17 +177,17 @@ public class GeoWorldLoader {
 					Node nodeClone = (Node) attachChild(map, node, matrix3f, loc, scale);
 					List<Spatial> children = nodeClone.getChildren();
 					for (int c = 0; c < children.size(); c++) {
-						createZone(children.get(c), template.getMapId(), children.size() == 1 ? 0 : c + 1);
+						createZone(children.get(c), map.getMapId(), children.size() == 1 ? 0 : c + 1);
 					}
 				} else {
 					missingMeshes.add(name);
 				}
 			}
-			map.updateModelBound();
 		} catch (Exception e) {
 			throw new GameServerError("Could not load " + geoFile, e);
 		}
-		return map;
+		map.updateModelBound();
+		map.getGeometries().map(Geometry::getMesh).distinct().forEach(Mesh::createCollisionData);
 	}
 
 	private static Spatial attachChild(GeoMap map, Spatial node, Matrix3f matrix, Vector3f location, Vector3f scale) throws CloneNotSupportedException {
@@ -168,7 +199,7 @@ public class GeoWorldLoader {
 	}
 
 	private static void createZone(Spatial geometry, int worldId, int childNumber) {
-		if (GeoDataConfig.GEO_MATERIALS_ENABLE && (geometry.getCollisionIntentions() & CollisionIntention.MATERIAL.getId()) != 0) {
+		if ((geometry.getCollisionIntentions() & CollisionIntention.MATERIAL.getId()) != 0) {
 			int regionId = getVectorHash(geometry.getWorldBound().getCenter());
 			int index = geometry.getName().lastIndexOf('/');
 			int dotIndex = geometry.getName().lastIndexOf('.');
