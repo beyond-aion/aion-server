@@ -226,25 +226,7 @@ public class DialogService {
 					break;
 				case EDIT_CHARACTER_ALL:
 				case EDIT_CHARACTER_GENDER: // (2.5) and (4.3)
-					byte changesex = 0; // 0 plastic surgery, 1 gender switch
-					byte check_ticket = 2; // 2 no ticket, 1 have ticket
-					if (dialogActionId == EDIT_CHARACTER_GENDER) {
-						// Gender Switch
-						changesex = 1;
-						if (player.getInventory().getItemCountByItemId(169660000) > 0 || player.getInventory().getItemCountByItemId(169660001) > 0
-							|| player.getInventory().getItemCountByItemId(169660002) > 0 || player.getInventory().getItemCountByItemId(169660003) > 0) {
-							check_ticket = 1;
-						}
-					} else {
-						// Plastic Surgery
-						if (player.getInventory().getItemCountByItemId(169650000) > 0 || player.getInventory().getItemCountByItemId(169650001) > 0
-							|| player.getInventory().getItemCountByItemId(169650002) > 0 || player.getInventory().getItemCountByItemId(169650003) > 0
-							|| player.getInventory().getItemCountByItemId(169650004) > 0 || player.getInventory().getItemCountByItemId(169650005) > 0
-							|| player.getInventory().getItemCountByItemId(169650006) > 0 || player.getInventory().getItemCountByItemId(169650007) > 0) {
-							check_ticket = 1;
-						}
-					}
-					PacketSendUtility.sendPacket(player, new SM_PLASTIC_SURGERY(player, check_ticket, changesex));
+					PacketSendUtility.sendPacket(player, new SM_PLASTIC_SURGERY(player, dialogActionId == EDIT_CHARACTER_GENDER));
 					player.getCommonData().setInEditMode(true);
 					break;
 				case MATCH_MAKER: // dredgion

@@ -1,7 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_EDIT_CHAR_GENDER_CANT_NO_ITEM;
-
 import java.util.Set;
 
 import com.aionemu.commons.database.dao.DAOManager;
@@ -11,9 +9,9 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerEnterWorldService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * In this packet the Aion client is requesting edit of a character.
@@ -41,34 +39,32 @@ public class CM_CHARACTER_EDIT extends AbstractCharacterEditPacket {
 		PlayerAccountData playerAccData = client.getAccount().getPlayerAccountData(objectId);
 		if (playerAccData == null || !playerAccData.getPlayerCommonData().isInEditMode())
 			return;
-		int[] appearanceTickets = { 169650000, 169650001, 169650002, 169650003, 169650004, 169650005, 169650006, 169650007, 169650008 };
-		int[] genderTickets = { 169660000, 169660001, 169660002, 169660003, 169660004 };
 		PlayerEnterWorldService.enterWorld(client, objectId);
 		Player player = client.getActivePlayer();
 
 		boolean isGenderSwitch = player.getGender() != gender;
-		int[] ticketIds = isGenderSwitch ? genderTickets : appearanceTickets;
-		SM_SYSTEM_MESSAGE errorMsg = isGenderSwitch ? STR_EDIT_CHAR_GENDER_CANT_NO_ITEM() : STR_EDIT_CHAR_GENDER_CANT_NO_ITEM();
+		if (checkOrRemoveTicket(player, isGenderSwitch, true)) {
+			if (isGenderSwitch)
+				player.getCommonData().setGender(gender);
+			player.setPlayerAppearance(playerAppearance);
+			DAOManager.getDAO(PlayerAppearanceDAO.class).store(player); // save new appearance
 
+			// broadcast new appearance (no need to save gender here, will be saved periodically and on logout)
+			player.clearKnownlist();
+			PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
+			player.updateKnownlist();
+		} else { // can only happen if you illegally enter the character edit screen
+			AuditLogger.log(player, "tried to apply their plastic surgery without a ticket.");
+		}
+	}
+
+	public static boolean checkOrRemoveTicket(Player player, boolean isGenderSwitch, boolean removeTicket) {
+		int[] ticketIds = isGenderSwitch ? new int[] { 169660000, 169660001, 169660002, 169660003, 169660004 } : new int[] { 169650000, 169650001, 169650002, 169650003, 169650004, 169650005, 169650006, 169650007, 169650008 };
 		for (int ticketId : ticketIds) {
-			if (player.getInventory().decreaseByItemId(ticketId, 1)) {
-				errorMsg = null;
-				break;
+			if (removeTicket && player.getInventory().decreaseByItemId(ticketId, 1) || !removeTicket && player.getInventory().getItemCountByItemId(ticketId) > 0) {
+				return true;
 			}
 		}
-		if (errorMsg != null) {
-			PacketSendUtility.sendPacket(player, errorMsg);
-			return;
-		}
-
-		if (isGenderSwitch)
-			player.getCommonData().setGender(gender);
-		player.setPlayerAppearance(playerAppearance);
-		DAOManager.getDAO(PlayerAppearanceDAO.class).store(player); // save new appearance
-
-		// broadcast new appearance (no need to save gender here, will be saved periodically and on logout)
-		player.clearKnownlist();
-		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
-		player.updateKnownlist();
+		return false;
 	}
 }
