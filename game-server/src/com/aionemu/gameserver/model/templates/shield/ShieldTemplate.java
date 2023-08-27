@@ -1,12 +1,6 @@
 package com.aionemu.gameserver.model.templates.shield;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-
-import com.aionemu.gameserver.model.utils3d.Point3D;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author M@xx, Wakizashi
@@ -48,15 +42,5 @@ public class ShieldTemplate {
 
 	public int getId() {
 		return id;
-	}
-
-	public ShieldTemplate() {
-	};
-
-	public ShieldTemplate(String name, int mapId, Point3D center) {
-		this.name = name;
-		this.map = mapId;
-		this.radius = 6;
-		this.center = new ShieldPoint(center);
 	}
 }

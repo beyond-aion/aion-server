@@ -1,12 +1,8 @@
 package com.aionemu.gameserver.model.templates.flyring;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
-import com.aionemu.gameserver.model.utils3d.Point3D;
+import com.aionemu.gameserver.model.geometry.Point3D;
 
 /**
  * @author M@xx

@@ -1,76 +1,46 @@
 package com.aionemu.gameserver.controllers.observer;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author xavier, Source
  */
 public class FlyRingObserver extends ActionObserver {
 
-	private Player player;
-
-	private FlyRing ring;
-
-	private Point3D oldPosition;
-
-	SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(265); // Wings of Aether
-
-	public FlyRingObserver() {
-		super(ObserverType.MOVE);
-		this.player = null;
-		this.ring = null;
-		this.oldPosition = null;
-	}
+	private final Player player;
+	private final FlyRing ring;
+	private Vector3f oldPosition;
 
 	public FlyRingObserver(FlyRing ring, Player player) {
 		super(ObserverType.MOVE);
 		this.player = player;
 		this.ring = ring;
-		this.oldPosition = new Point3D(player.getX(), player.getY(), player.getZ());
+		this.oldPosition = new Vector3f(player.getX(), player.getY(), player.getZ());
 	}
 
 	@Override
 	public void moved() {
-		Point3D newPosition = new Point3D(player.getX(), player.getY(), player.getZ());
-		boolean passedThrough = false;
-
-		if (ring.getPlane().intersect(oldPosition, newPosition)) {
-			Point3D intersectionPoint = ring.getPlane().intersection(oldPosition, newPosition);
-			if (intersectionPoint != null) {
-				double distance = Math.abs(ring.getPlane().getCenter().distance(intersectionPoint));
-
-				if (distance < ring.getTemplate().getRadius()) {
-					passedThrough = true;
-				}
-			} else {
-				if (PositionUtil.isInRange(ring, player, ring.getTemplate().getRadius())) {
-					passedThrough = true;
-				}
-			}
-		}
-
-		if (passedThrough) {
+		Vector3f newPosition = new Vector3f(player.getX(), player.getY(), player.getZ());
+		if (ring.isCrossed(oldPosition, newPosition)) {
 			if (ring.getTemplate().getMap() == 400010000 || isQuestactive() || isInstancetactive()) {
+				SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(265); // Wings of Aether
 				Effect speedUp = new Effect(player, player, skillTemplate, skillTemplate.getLvl());
 				speedUp.initialize();
 				speedUp.addAllEffectToSucess();
 				speedUp.applyEffect();
 			}
-
 			QuestEngine.getInstance().onPassFlyingRing(new QuestEnv(null, player, 0), ring.getName());
 		}
-
 		oldPosition = newPosition;
 	}
 

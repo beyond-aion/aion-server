@@ -4,10 +4,10 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**

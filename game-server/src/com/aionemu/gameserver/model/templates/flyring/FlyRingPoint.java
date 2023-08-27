@@ -5,7 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.utils3d.Point3D;
+import com.aionemu.gameserver.model.geometry.Point3D;
 
 /**
  * @author M@xx
@@ -39,8 +39,8 @@ public class FlyRingPoint {
 	}
 
 	public FlyRingPoint(Point3D p) {
-		x = (float) p.x;
-		y = (float) p.y;
-		z = (float) p.z;
+		x = p.getX();
+		y = p.getY();
+		z = p.getZ();
 	}
 }

@@ -2,10 +2,10 @@ package com.aionemu.gameserver.controllers.observer;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.templates.shield.ShieldPoint;
 import com.aionemu.gameserver.model.templates.shield.ShieldTemplate;
-import com.aionemu.gameserver.model.utils3d.Point3D;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -38,7 +38,7 @@ public class ShieldObserver extends ActionObserver {
 		boolean passedThrough = false;
 		// only collide with upper half of sphere
 		if (location.isUnderShield() && !(creature.getZ() < shieldCenter.getZ() && oldPosition.getZ() < shieldCenter.getZ())) {
-			boolean wasInside = PositionUtil.isInRange((float) oldPosition.getX(), (float) oldPosition.getY(), (float) oldPosition.getZ(), shieldCenter.getX(), shieldCenter.getY(), shieldCenter.getZ(), shield.getRadius());
+			boolean wasInside = PositionUtil.isInRange(oldPosition.getX(), oldPosition.getY(), oldPosition.getZ(), shieldCenter.getX(), shieldCenter.getY(), shieldCenter.getZ(), shield.getRadius());
 			boolean isInside = PositionUtil.isInRange(creature, shieldCenter.getX(), shieldCenter.getY(), shieldCenter.getZ(), shield.getRadius());
 			passedThrough = wasInside != isInside;
 		}
@@ -47,9 +47,9 @@ public class ShieldObserver extends ActionObserver {
 			CollisionDieActor.kill(creature);
 		} else {
 			synchronized (oldPosition) {
-				oldPosition.x = creature.getX();
-				oldPosition.y = creature.getY();
-				oldPosition.z = creature.getZ();
+				oldPosition.setX(creature.getX());
+				oldPosition.setY(creature.getY());
+				oldPosition.setZ(creature.getZ());
 			}
 		}
 	}

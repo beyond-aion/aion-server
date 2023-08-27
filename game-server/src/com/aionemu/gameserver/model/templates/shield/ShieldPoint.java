@@ -5,8 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.model.utils3d.Point3D;
-
 /**
  * @author M@xx, Wakizashi
  */
@@ -33,14 +31,5 @@ public class ShieldPoint {
 
 	public float getZ() {
 		return z;
-	}
-
-	public ShieldPoint() {
-	}
-
-	public ShieldPoint(Point3D p) {
-		x = (float) p.x;
-		y = (float) p.y;
-		z = (float) p.z;
 	}
 }

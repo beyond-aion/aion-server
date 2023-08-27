@@ -1,12 +1,6 @@
 package com.aionemu.gameserver.model.templates.road;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
-
-import com.aionemu.gameserver.model.utils3d.Point3D;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author SheppeR
@@ -62,18 +56,5 @@ public class RoadTemplate {
 
 	public RoadExit getRoadExit() {
 		return roadExit;
-	}
-
-	public RoadTemplate() {
-
-	};
-
-	public RoadTemplate(String name, int mapId, Point3D center, Point3D p1, Point3D p2) {
-		this.name = name;
-		this.map = mapId;
-		this.radius = 6;
-		this.center = new RoadPoint(center);
-		this.p1 = new RoadPoint(p1);
-		this.p2 = new RoadPoint(p2);
 	}
 }
