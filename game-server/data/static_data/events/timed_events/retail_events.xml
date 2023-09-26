@@ -3371,7 +3371,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Alchemy Event" start="2022-07-08T00:00:00" end="2022-07-17T23:59:59">
+	<event name="Alchemy Event" start="2023-09-29T00:00:00" end="2023-10-15T23:59:59">
 		<quests>
 			<maintainable>80344</maintainable>
 		</quests>
