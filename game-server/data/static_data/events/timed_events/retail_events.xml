@@ -2474,7 +2474,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Code Red: Atreia" start="2023-01-13T00:00:00" end="2023-01-22T23:59:59">
+	<event name="Code Red: Atreia" start="2023-10-29T00:00:00" end="2023-11-05T23:59:59">
 		<quests>
 			<maintainable>80324 80325 80326 80327</maintainable>
 		</quests>
@@ -4979,7 +4979,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Nightmare Circus" start="2022-10-21T00:00:00" end="2022-11-11T23:59:59" theme="HALLOWEEN">
+	<event name="Nightmare Circus" start="2023-10-29T00:00:00" end="2023-11-05T23:59:59" theme="HALLOWEEN">
 		<quests>
 			<maintainable>80341 80342 80343</maintainable>
 		</quests>
@@ -5041,7 +5041,7 @@
 					<gd_item id="188052589" /><!-- [Event] Consumables Bundle -->
 					<gd_item id="188051338" /><!-- [Event] Case of Harvest Revel Ale -->
 					<gd_item id="188052685" /><!-- [Event] Dreamer's Reward -->
-					<gd_item id="188054198" /><!-- Greater Scroll Bundle -->
+					<gd_item id="188053636" /><!-- Blood Mark Box -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Nightmare Crate (Rare)" chance="35">
@@ -5058,7 +5058,7 @@
 					<gd_item id="188051874" /><!-- Harvest Revel Furniture Set Box -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Greater Nightmare Crate" chance="100" max_drop_rule="4">
+			<gd_rule rule_name="Greater Nightmare Crate" chance="100" max_drop_rule="4" restriction_race="ELYOS">
 				<gd_maps>
 					<gd_map map_id="301200000" /><!-- Nightmare Circus -->
 				</gd_maps>
@@ -5066,8 +5066,22 @@
 					<gd_npc npc_id="831575" />
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188052589" /><!-- [Event] Consumables Bundle -->
-					<gd_item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
+					<gd_item id="160010101" min_count="3" /><!-- Summer-Loving Inquin Form Candy -->
+					<gd_item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
+					<gd_item id="188052685" /><!-- [Event] Dreamer's Reward -->
+					<gd_item id="188051516" /><!-- Smart Greater Scroll Bundle -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Greater Nightmare Crate" chance="100" max_drop_rule="4" restriction_race="ASMODIANS">
+				<gd_maps>
+					<gd_map map_id="301200000" /><!-- Nightmare Circus -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="831575" />
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="160010102" min_count="3" /><!-- Summer-Loving Inquin Form Candy -->
+					<gd_item id="166000195" min_count="5" /><!-- Omega Enchantment Stone -->
 					<gd_item id="188052685" /><!-- [Event] Dreamer's Reward -->
 					<gd_item id="188051516" /><!-- Smart Greater Scroll Bundle -->
 				</gd_items>
@@ -5080,27 +5094,29 @@
 					<gd_npc npc_id="831575" />
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188053666" /><!-- [Event] Ceramium Medal Box -->
-					<gd_item id="166500002" /><!-- Amplification Stone -->
-					<gd_item id="166020000" /><!-- Omega Enchantment Stone -->
-					<gd_item id="166030005" /><!-- Tempering Solution -->
+					<gd_item id="188053623" /><!-- Fire Dragon King's Weapon Bundle -->
+					<gd_item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+					<gd_item id="188053614" /><!-- Illusion Godstone Bundle -->
+					<gd_item id="166030005" min_count="5" /><!-- Tempering Solution -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Nightmare Circus Bonus Entry Scroll" chance="100" member_limit="12">
 				<gd_maps>
-					<gd_map map_id="300170000" /><!-- Beshmundir Temple -->
+					<gd_map map_id="300040000" /><!-- Dark Poeta -->
 					<gd_map map_id="300620000" /><!-- Occupied Rentus Base -->
 					<gd_map map_id="300590000" /><!-- Ophidan Bridge -->
-					<gd_map map_id="300800000" /><!-- Infinity Shard -->
+					<gd_map map_id="301390000" /><!-- Drakenspire Depths -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="216183" /><!-- Stormwing -->
+					<gd_npc npc_id="214904" /><!-- Brigade General Anuhart -->
+					<gd_npc npc_id="215280" /><!-- Tahabata Pyrelord -->
+					<gd_npc npc_id="215281" /><!-- Calindi Flamelord -->
 					<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
 					<gd_npc npc_id="235768" /><!-- Spirited Velkur -->
 					<gd_npc npc_id="235769" /><!-- Velkur Aethercaster -->
 					<gd_npc npc_id="235770" /><!-- Velkur Aetherpriest -->
 					<gd_npc npc_id="235771" /><!-- Velkur Aetherknife -->
-					<gd_npc npc_id="231073" /><!-- Hyperion -->
+					<gd_npc npc_id="833012" /><!-- Cloak of Balaur Lord Beritra -->
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="188600241" /><!-- Nightmare Circus Bonus Entry Scroll -->
