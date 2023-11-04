@@ -1,7 +1,6 @@
 package ai.worlds.panesterra.ahserionsflight;
 
-import java.util.*;
-
+import ai.AggressiveNpcAI;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
@@ -15,7 +14,7 @@ import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
 
-import ai.AggressiveNpcAI;
+import java.util.*;
 
 /**
  * @author Yeats, Estrayl
@@ -46,12 +45,8 @@ public class Ahserion extends AggressiveNpcAI {
 			if (hpPercentage <= hpEvent) {
 				hpEvents.remove(hpEvent);
 				switch (hpEvent) {
-					case 75:
-					case 50:
-					case 25:
-					case 10:
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21571, 1, 100, 0, 3000, NpcSkillTargetAttribute.ME)));
-						break;
+					case 75, 50, 25, 10 -> getOwner().getQueuedSkills()
+						.offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21571, 1, 100, 0, 3000, NpcSkillTargetAttribute.ME)));
 				}
 				break;
 			}
@@ -69,11 +64,7 @@ public class Ahserion extends AggressiveNpcAI {
 					PanesterraTeam team = AhserionRaid.getInstance().getPanesterraFactionTeam((Player) ai.getAttacker());
 					if (team != null && !team.isEliminated()) {
 						PanesterraFaction faction = team.getFaction();
-						Integer dmg = panesterraDamage.get(faction);
-						if (dmg != null)
-							panesterraDamage.put(faction, dmg + ai.getDamage());
-						else
-							panesterraDamage.put(faction, ai.getDamage());
+						panesterraDamage.merge(faction, ai.getDamage(), Integer::sum);
 					}
 				}
 			}
@@ -101,7 +92,7 @@ public class Ahserion extends AggressiveNpcAI {
 
 	private void initHpEvents() {
 		hpEvents.clear();
-		Collections.addAll(hpEvents, new Integer[] { 75, 50, 25, 10 });
+		Collections.addAll(hpEvents, 75, 50, 25, 10);
 	}
 
 	@Override

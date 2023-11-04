@@ -26,16 +26,12 @@ public class TribeRelationService {
 					return false;
 				break;
 			case AGGRESSIVESINGLEMONSTER:
-				switch (creature2.getTribe()) {
-					case YUN_GUARD:
-						return true;
-				}
+				if (creature2.getTribe() == TribeClass.YUN_GUARD)
+					return true;
 				break;
 			case IDF5U2_SHULACK:
-				switch (creature2.getTribe()) {
-					case FIELD_OBJECT_ALL_HOSTILEMONSTER:
-						return false;
-				}
+				if (creature2.getTribe() == TribeClass.FIELD_OBJECT_ALL_HOSTILEMONSTER)
+					return false;
 				break;
 		}
 		switch (creature1.getBaseTribe()) {
@@ -109,13 +105,8 @@ public class TribeRelationService {
 	public static boolean isFriend(Creature creature1, Creature creature2) {
 		if (creature1.getTribe() == creature2.getTribe()) // OR BASE ????
 			return true;
-		switch (creature1.getTribe()) {
-			case IDF5U2_SHULACK:
-				switch (creature2.getTribe()) {
-					case FIELD_OBJECT_ALL_HOSTILEMONSTER:
-						return true;
-				}
-		}
+		if (creature1.getTribe() == TribeClass.IDF5U2_SHULACK && creature2.getTribe() == TribeClass.FIELD_OBJECT_ALL_HOSTILEMONSTER)
+			return true;
 		switch (creature1.getBaseTribe()) {
 			case GAB1_01_POINT_01:
 			case GAB1_01_POINT_02:
@@ -174,16 +165,12 @@ public class TribeRelationService {
 				}
 				break;
 			case FIELD_OBJECT_LIGHT:
-				switch (creature2.getBaseTribe()) {
-					case PC:
-						return true;
-				}
+				if (creature2.getBaseTribe() == TribeClass.PC)
+					return true;
 				break;
 			case FIELD_OBJECT_DARK:
-				switch (creature2.getBaseTribe()) {
-					case PC_DARK:
-						return true;
-				}
+				if (creature2.getBaseTribe() == TribeClass.PC_DARK)
+					return true;
 				break;
 		}
 		return DataManager.TRIBE_RELATIONS_DATA.isFriendlyRelation(creature1.getTribe(), creature2.getTribe());
@@ -231,17 +218,12 @@ public class TribeRelationService {
 					return false;
 				break;
 			case GUARD_DARK:
-				switch (creature2.getBaseTribe()) {
-					case PC_DARK:
-						return true;
-				}
+				if (creature2.getBaseTribe() == TribeClass.PC_DARK)
+					return true;
 				break;
 			case GUARD:
-				switch (creature2.getBaseTribe()) {
-					case PC:
-						return true;
-
-				}
+				if (creature2.getBaseTribe() == TribeClass.PC)
+					return true;
 				break;
 		}
 		return DataManager.TRIBE_RELATIONS_DATA.isSupportRelation(creature1.getTribe(), creature2.getTribe());
@@ -259,17 +241,14 @@ public class TribeRelationService {
 				return true;
 			case GENERAL:
 			case FIELD_OBJECT_LIGHT:
-				switch (creature2.getBaseTribe()) {
-					case PC_DARK:
-						return true;
-				}
+				if (creature2.getBaseTribe() == TribeClass.PC_DARK)
+					return true;
+
 				break;
 			case GENERAL_DARK:
 			case FIELD_OBJECT_DARK:
-				switch (creature2.getBaseTribe()) {
-					case PC:
-						return true;
-				}
+				if (creature2.getBaseTribe() == TribeClass.PC)
+					return true;
 				break;
 		}
 		return DataManager.TRIBE_RELATIONS_DATA.isNoneRelation(creature1.getTribe(), creature2.getTribe());
@@ -280,17 +259,10 @@ public class TribeRelationService {
 	}
 
 	public static boolean isHostile(Creature creature1, Creature creature2) {
-		if (creature1 instanceof Npc && checkSiegeRelation((Npc) creature1, creature2)) {
+		if (creature1 instanceof Npc && checkSiegeRelation((Npc) creature1, creature2))
 			return true;
-		}
-		switch (creature1.getTribe()) {
-			case IDF5U2_SHULACK:
-				switch (creature2.getTribe()) {
-					case FIELD_OBJECT_ALL_HOSTILEMONSTER:
-						return false;
-				}
-				break;
-		}
+		if (creature1.getTribe() == TribeClass.IDF5U2_SHULACK && creature2.getTribe() == TribeClass.FIELD_OBJECT_ALL_HOSTILEMONSTER)
+			return false;
 		switch (creature1.getBaseTribe()) {
 			case GAB1_01_POINT_01:
 			case GAB1_01_POINT_02:
@@ -354,53 +326,20 @@ public class TribeRelationService {
 	 * So each _POINT_01 represents the fortress owner and the following four the possible attackers.
 	 */
 	public static boolean checkPanesterraRelation(Creature npc, Player player) {
-		int panesterraFortressId = 0;
-		switch (npc.getBaseTribe()) {
-			case GAB1_01_POINT_01:
-			case GAB1_01_POINT_02:
-			case GAB1_01_POINT_03:
-			case GAB1_01_POINT_04:
-			case GAB1_01_POINT_05:
-			case GAB1_SUB_DEST_69:
-			case GAB1_SUB_DEST_69_AGGRESSIVE:
-				panesterraFortressId = 10111;
-				break;
-			case GAB1_02_POINT_01:
-			case GAB1_02_POINT_02:
-			case GAB1_02_POINT_03:
-			case GAB1_02_POINT_04:
-			case GAB1_02_POINT_05:
-			case GAB1_SUB_DEST_70:
-			case GAB1_SUB_DEST_70_AGGRESSIVE:
-				panesterraFortressId = 10211;
-				break;
-			case GAB1_03_POINT_01:
-			case GAB1_03_POINT_02:
-			case GAB1_03_POINT_03:
-			case GAB1_03_POINT_04:
-			case GAB1_03_POINT_05:
-			case GAB1_SUB_DEST_71:
-			case GAB1_SUB_DEST_71_AGGRESSIVE:
-				panesterraFortressId = 10311;
-				break;
-			case GAB1_04_POINT_01:
-			case GAB1_04_POINT_02:
-			case GAB1_04_POINT_03:
-			case GAB1_04_POINT_04:
-			case GAB1_04_POINT_05:
-			case GAB1_SUB_DEST_72:
-			case GAB1_SUB_DEST_72_AGGRESSIVE:
-				panesterraFortressId = 10411;
-				break;
-		}
+		int panesterraFortressId = switch (npc.getBaseTribe()) {
+			case GAB1_01_POINT_01, GAB1_01_POINT_02, GAB1_01_POINT_03, GAB1_01_POINT_04, GAB1_01_POINT_05, GAB1_SUB_DEST_69, GAB1_SUB_DEST_69_AGGRESSIVE -> 10111;
+			case GAB1_02_POINT_01, GAB1_02_POINT_02, GAB1_02_POINT_03, GAB1_02_POINT_04, GAB1_02_POINT_05, GAB1_SUB_DEST_70, GAB1_SUB_DEST_70_AGGRESSIVE -> 10211;
+			case GAB1_03_POINT_01, GAB1_03_POINT_02, GAB1_03_POINT_03, GAB1_03_POINT_04, GAB1_03_POINT_05, GAB1_SUB_DEST_71, GAB1_SUB_DEST_71_AGGRESSIVE -> 10311;
+			case GAB1_04_POINT_01, GAB1_04_POINT_02, GAB1_04_POINT_03, GAB1_04_POINT_04, GAB1_04_POINT_05, GAB1_SUB_DEST_72, GAB1_SUB_DEST_72_AGGRESSIVE -> 10411;
+			default -> 0;
+		};
 		SiegeRace occupier = SiegeService.getInstance().getFortress(panesterraFortressId).getRace();
 		return SiegeRace.getByRace(player.getRace()) == occupier && npc.getRace() != Race.DRAKAN;
 	}
 
 	public static boolean canHelpCreature(Creature creature1, Creature creature2) {
-		return  creature1.getTribe() == creature2.getTribe() ||
-				DataManager.TRIBE_RELATIONS_DATA.isSupportRelation(creature1.getTribe(),creature2.getTribe()) ||
-				DataManager.TRIBE_RELATIONS_DATA.isFriendlyRelation(creature1.getTribe(), creature2.getTribe());
-
+		return creature1.getTribe() == creature2.getTribe()
+			|| DataManager.TRIBE_RELATIONS_DATA.isSupportRelation(creature1.getTribe(), creature2.getTribe())
+			|| DataManager.TRIBE_RELATIONS_DATA.isFriendlyRelation(creature1.getTribe(), creature2.getTribe());
 	}
 }

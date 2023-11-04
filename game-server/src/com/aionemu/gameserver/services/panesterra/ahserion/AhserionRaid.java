@@ -33,8 +33,8 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class AhserionRaid {
 
 	private final Map<PanesterraFaction, PanesterraTeam> panesterraTeams = Collections.synchronizedMap(new EnumMap<>(PanesterraFaction.class));
+	private final AtomicBoolean isStarted = new AtomicBoolean();
 	private PanesterraTeam winner;
-	private AtomicBoolean isStarted = new AtomicBoolean();
 	private Future<?> progressTask;
 
 	public static AhserionRaid getInstance() {
@@ -60,15 +60,19 @@ public class AhserionRaid {
 			}
 			panesterraTeams.clear();
 		}
+		cleanUp();
+	}
+
+	private void cleanUp() {
 		for (VisibleObject obj : World.getInstance().getWorldMap(400030000).getMainWorldMapInstance()) {
-			if (obj instanceof Player) {
-				Player player = (Player) obj;
+			if (obj instanceof Player player) {
 				if (!player.isStaff())
 					TeleportService.moveToBindLocation(player);
-			} else if (obj instanceof StaticDoor)
-				((StaticDoor) obj).setOpen(false);
-			else if (obj instanceof Npc)
+			} else if (obj instanceof StaticDoor door) {
+				door.setOpen(false);
+			} else if (obj instanceof Npc) {
 				obj.getController().delete();
+			}
 		}
 	}
 
@@ -131,7 +135,8 @@ public class AhserionRaid {
 		panesterraTeams.values().forEach(team -> {
 			WorldPosition startPosition = team.getStartPosition();
 			team.forEachMember(player -> {
-				if (player.getPosition().getMapId() == 400030000 && !PositionUtil.isInRange(player, startPosition.getX(), startPosition.getY(), startPosition.getZ(), 81f)) {
+				if (player.getPosition().getMapId() == 400030000
+					&& !PositionUtil.isInRange(player, startPosition.getX(), startPosition.getY(), startPosition.getZ(), 81f)) {
 					AuditLogger.log(player, "bugged himself through the " + team.getFaction() + " start door");
 					team.movePlayerToStartPosition(player);
 				}
@@ -212,22 +217,22 @@ public class AhserionRaid {
 		SpawnTemplate template = null;
 
 		switch (npcId) {
-			case 297306:
+			case 297306 -> {
 				eliminatedFaction = PanesterraFaction.BELUS;
 				template = SpawnEngine.newSingleTimeSpawn(400030000, 804106, 282.73f, 289.1f, 687.38f, (byte) 1);
-				break;
-			case 297307:
+			}
+			case 297307 -> {
 				eliminatedFaction = PanesterraFaction.ASPIDA;
 				template = SpawnEngine.newSingleTimeSpawn(400030000, 804108, 282.49f, 739.62f, 689.66f, (byte) 1);
-				break;
-			case 297308:
+			}
+			case 297308 -> {
 				eliminatedFaction = PanesterraFaction.ATANATOS;
 				template = SpawnEngine.newSingleTimeSpawn(400030000, 804110, 734.06f, 740.75f, 681.16f, (byte) 1);
-				break;
-			case 297309:
+			}
+			case 297309 -> {
 				eliminatedFaction = PanesterraFaction.DISILLON;
 				template = SpawnEngine.newSingleTimeSpawn(400030000, 804112, 738.58f, 286.02f, 680.71f, (byte) 1);
-				break;
+			}
 		}
 
 		PanesterraTeam eliminatedTeam = panesterraTeams.remove(eliminatedFaction);
@@ -239,7 +244,7 @@ public class AhserionRaid {
 		SpawnEngine.spawnObject(template, 1);
 	}
 
-	public void handleBossKilled(Npc owner, PanesterraFaction winnerFaction) {
+	public void handleBossKilled(Npc ahserion, PanesterraFaction winnerFaction) {
 		winner = panesterraTeams.get(winnerFaction);
 		if (winner == null || winner.isEliminated()) {
 			// something went wrong, remove all players from the map
@@ -254,10 +259,7 @@ public class AhserionRaid {
 				panesterraTeams.get(faction).moveTeamMembersToFortressPosition();
 			}
 		}
-		owner.getPosition().getWorldMapInstance().forEachNpc(npc -> {
-			if (npc.getNpcId() != owner.getNpcId())
-				npc.getController().delete();
-		});
+		ahserion.getPosition().getWorldMapInstance().forEachNpc(npc -> npc.getController().deleteIfAliveOrCancelRespawn());
 		SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(400030000, 804680 + winnerFaction.getId(), 509.239f, 513.011f, 675.089f, (byte) 48), 1); // Pasha
 		ThreadPoolManager.getInstance().schedule(this::stop, 900000); // 15min
 	}
@@ -269,8 +271,7 @@ public class AhserionRaid {
 	private void deleteNpcs(PanesterraFaction eliminatedFaction, int flagToDelete) {
 		World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().forEachNpc(npc -> {
 			if (npc.getNpcId() == flagToDelete || (!npc.isFlag() && (npc.getSpawn().getStaticId() < 180 || npc.getSpawn().getStaticId() > 183))) {
-				if (!npc.isDead() && npc.getSpawn() instanceof AhserionsFlightSpawnTemplate) {
-					AhserionsFlightSpawnTemplate template = (AhserionsFlightSpawnTemplate) npc.getSpawn();
+				if (!npc.isDead() && npc.getSpawn()instanceof AhserionsFlightSpawnTemplate template) {
 					if (template.getFaction() == eliminatedFaction)
 						npc.getController().delete();
 				}

@@ -1,5 +1,6 @@
 package ai.worlds.panesterra.ahserionsflight;
 
+import ai.GeneralNpcAI;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIRequest;
@@ -15,11 +16,10 @@ import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import ai.GeneralNpcAI;
+import java.util.concurrent.TimeUnit;
 
 /**
- * @author Yeats
- * @reworked Estrayl October 29th, 2017.
+ * @author Yeats, Estrayl
  */
 @AIName("ahserion_registration_corridor")
 public class AhserionRegistrationCorridor extends GeneralNpcAI {
@@ -35,20 +35,12 @@ public class AhserionRegistrationCorridor extends GeneralNpcAI {
 		super.handleSpawned();
 		PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_SVS_INVADE_DIRECT_PORTAL_OPEN());
 		switch (getNpcId()) {
-			case 802219:
-				faction = PanesterraFaction.BELUS;
-				break;
-			case 802221:
-				faction = PanesterraFaction.ASPIDA;
-				break;
-			case 802223:
-				faction = PanesterraFaction.ATANATOS;
-				break;
-			case 802225:
-				faction = PanesterraFaction.DISILLON;
-				break;
+			case 802219 -> faction = PanesterraFaction.BELUS;
+			case 802221 -> faction = PanesterraFaction.ASPIDA;
+			case 802223 -> faction = PanesterraFaction.ATANATOS;
+			case 802225 -> faction = PanesterraFaction.DISILLON;
 		}
-		ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 10 * 60000);
+		ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 10, TimeUnit.MINUTES);
 	}
 
 	@Override
