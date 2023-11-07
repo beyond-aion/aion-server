@@ -423,16 +423,22 @@ public class Skill {
 
 		WeaponTypeWrapper weapons = new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(), player.getEquipment().getOffHandWeaponType());
 		int clientTime = hitTime;
-		float serverHitTime = 0;
+		int serverHitTime = 0;
 		int motionId = 1;
 		if (isMulticast() && player.getChainSkills().getCurrentChainCount(chainCategory) > 0) {
 			motionId = player.getChainSkills().getCurrentChainCount(chainCategory) + 1;
 		}
 		Times time = motionTime.getTimesFor(player.getRace(), player.getGender(), weapons, player.isInRobotMode(), motionId);
 		if (time != null) {
-			float atkSpeed2 = player.getGameStats().getAttackSpeed().getCurrent() / (float) player.getGameStats().getAttackSpeed().getBase();
-			animationTime = (int) (time.getMaxTime() * motion.getSpeed() * atkSpeed2 * 10);
-			serverHitTime = ((player.isInRobotMode() ? time.getAnimationLength() : time.getMinTime()) * motion.getSpeed() * atkSpeed2 * 10);
+			float atkSpeed = player.getGameStats().getAttackSpeed().getCurrent() / (float) player.getGameStats().getAttackSpeed().getBase();
+
+			float castSpeed = player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, 1000) / 1000f;
+			if (castSpeed < 0.3f)
+				castSpeed = 0.3f;
+
+			float speedModifier = Math.min(atkSpeed, castSpeed);
+			animationTime = (int) (time.getMaxTime() * motion.getSpeed() * speedModifier * 10);
+			serverHitTime = (int) Math.ceil((player.isInRobotMode() ? time.getMaxTime() : time.getMinTime()) * motion.getSpeed() * speedModifier * 10);
 		}
 
 		long ammoTime = 0;
@@ -441,13 +447,7 @@ public class Skill {
 			ammoTime = Math.round(distance / getSkillTemplate().getAmmoSpeed() * 1000);// checked with client
 		}
 
-		/*
-		 * FIXME: (Work-around) Client sends smaller hit times for consecutive casts, or casts followed by an interrupted cast
-		 * 19% for cast skills (best approach based on analyzed audit logs)
-		 * 5% for instant skills
-		 */
-		float tolerance = getSkillTemplate().getDuration() > 0 ? 0.81f : 0.95f;
-		int finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime) * tolerance); // client sends rounded times, too
+		int finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime) * 0.98f); // client sends rounded times, too
 
 		if (motion.isInstantSkill() && clientTime == 0) {
 			this.serverTime = (int) ammoTime;
