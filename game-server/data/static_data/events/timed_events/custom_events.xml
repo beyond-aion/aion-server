@@ -2973,7 +2973,22 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Beyond Aion Birthday Event" start="2022-11-15T00:00:00" end="2022-11-27T23:59:59">
+	<event name="Beritra Lucky Week" start="2023-11-15T09:00:00" end="2023-11-29T23:59:59">
+		<event_drops>
+			<gd_rule rule_name="Beritra Equipment Chest" chance="100" member_limit="12">
+				<gd_maps>
+					<gd_map map_id="301390000" /><!-- Drakenspire Depths -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="833012" /><!-- Beritra -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053728" /><!-- Beritra's Equipment Box -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
+	</event>
+	<event name="Beyond Aion Birthday Event" start="2023-11-13T00:00:00" end="2023-11-26T23:59:59">
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
