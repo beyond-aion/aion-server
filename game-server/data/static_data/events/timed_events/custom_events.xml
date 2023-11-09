@@ -2973,7 +2973,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Beritra Lucky Week" start="2023-11-15T09:00:00" end="2023-11-29T23:59:59">
+	<event name="Beritra Lucky Week" start="2023-11-15T09:00:00" end="2023-11-28T23:59:59">
 		<event_drops>
 			<gd_rule rule_name="Beritra Equipment Chest" chance="100" member_limit="12">
 				<gd_maps>
