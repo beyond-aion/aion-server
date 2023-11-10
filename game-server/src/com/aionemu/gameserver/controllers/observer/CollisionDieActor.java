@@ -20,7 +20,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * @author Rolandas
  */
-public class CollisionDieActor extends AbstractCollisionObserver implements IActor {
+public class CollisionDieActor extends AbstractCollisionObserver {
 
 	public CollisionDieActor(Creature creature, Spatial geometry) {
 		super(creature, geometry, CollisionIntention.MATERIAL.getId(), CheckType.PASS);
@@ -35,17 +35,8 @@ public class CollisionDieActor extends AbstractCollisionObserver implements IAct
 			}
 			FortressLocation fortress = SiegeService.getInstance().findFortress(creature.getWorldId(), creature.getX(), creature.getY(), creature.getZ());
 			if (fortress != null && fortress.isUnderShield() && fortress.getRace() != SiegeRace.getByRace(creature.getRace()))
-				act();
+				kill(creature);
 		}
-	}
-
-	@Override
-	public void act() {
-		kill(creature);
-	}
-
-	@Override
-	public void abort() {
 	}
 
 	public static void kill(Creature creature) {

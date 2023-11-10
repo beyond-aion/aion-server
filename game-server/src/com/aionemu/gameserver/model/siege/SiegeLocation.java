@@ -163,9 +163,6 @@ public class SiegeLocation implements ZoneHandler {
 
 	public void setShields(List<SiegeShield> shields) {
 		this.shields = shields;
-		log.debug("Attached shields for locId: " + getLocationId());
-		for (SiegeShield shield : shields)
-			log.debug(shield.toString());
 	}
 
 	public boolean isCanTeleport(Player player) {

@@ -30,12 +30,9 @@ public class ZoneCollisionMaterialActor extends AbstractMaterialSkillActor {
 				act();
 			else
 				abort();
-			if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
-				Player player = (Player) creature;
-				if (player.isStaff()) {
-					Spatial geom = collisionResults.size() > 0 ? collisionResults.getClosestCollision().getGeometry() : geometry;
-					PacketSendUtility.sendMessage(player, (isTouched ? "Touched " : "Untouched ") + geom.getName());
-				}
+			if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player player && player.isStaff()) {
+				Spatial geom = collisionResults.size() > 0 ? collisionResults.getClosestCollision().getGeometry() : geometry;
+				PacketSendUtility.sendMessage(player, (isTouched ? "Touched " : "Untouched ") + geom.getName());
 			}
 		}
 	}

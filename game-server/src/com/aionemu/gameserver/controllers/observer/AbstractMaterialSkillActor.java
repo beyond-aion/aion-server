@@ -23,7 +23,7 @@ import com.aionemu.gameserver.utils.time.gametime.DayTime;
 /**
  * @author Yeats, Neon
  */
-public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserver implements IActor {
+public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserver {
 
 	private final AtomicReference<Future<?>> task = new AtomicReference<>();
 	private final TaskId taskId;
@@ -36,7 +36,6 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 		this.skills = skills;
 	}
 
-	@Override
 	public void act() {
 		if (!skills.isEmpty() && !creature.getController().hasTask(taskId)) {
 			Future<?> t = ThreadPoolManager.getInstance().scheduleAtFixedRate(new MaterialSkillTask(), 0, 1000);
@@ -47,7 +46,6 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 		}
 	}
 
-	@Override
 	public void abort() {
 		Future<?> t = task.getAndSet(null);
 		if (t != null)
@@ -99,15 +97,12 @@ public abstract class AbstractMaterialSkillActor extends AbstractCollisionObserv
 				return;
 			if (!creature.isSpawned() || creature.isDead())
 				return;
-			if (creature instanceof Player && ((Player) creature).isProtectionActive())
+			if (creature instanceof Player player && player.isProtectionActive())
 				return;
 			if ((skill = findFirstSkillWithMatchingCondition()) == null) // skip if currently nothing matches (fires are off while raining)
 				return;
-			if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player) {
-				Player player = (Player) creature;
-				if (player.isStaff())
-					PacketSendUtility.sendMessage(player, AbstractMaterialSkillActor.this.getClass().getSimpleName() + " use skill=" + skill.getId());
-			}
+			if (GeoDataConfig.GEO_MATERIALS_SHOWDETAILS && creature instanceof Player player && player.isStaff())
+				PacketSendUtility.sendMessage(player, AbstractMaterialSkillActor.this.getClass().getSimpleName() + " use skill=" + skill.getId());
 			SkillEngine.getInstance().applyEffectDirectly(skill.getId(), skill.getSkillLevel(), creature, creature, null, Effect.ForceType.MATERIAL_SKILL);
 		}
 	}
