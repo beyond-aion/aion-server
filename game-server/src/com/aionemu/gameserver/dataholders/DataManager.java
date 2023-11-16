@@ -130,7 +130,7 @@ public final class DataManager {
 
 	private DataManager() {
 		long start = System.currentTimeMillis();
-		StaticData data = XmlDataLoader.getInstance().loadStaticData();
+		StaticData data = XmlDataLoader.loadStaticData();
 		NPC_DATA = data.npcData;
 		CUSTOM_NPC_DROP = data.customNpcDrop;
 		WORLD_MAPS_DATA = data.worldMapsData;

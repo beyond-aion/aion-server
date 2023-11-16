@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.utils.xml;
 
 import java.io.*;
-import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -56,61 +55,31 @@ public class JAXBUtil {
 		return XmlUtil.getDocument(s);
 	}
 
-	/**
-	 * @see #deserialize(String, Class, String)
-	 */
-	public static <T> T deserialize(String xml, Class<T> clazz) {
-		return deserialize(xml, clazz, (Schema) null);
+	public static <T> T deserialize(String xmlCode, Class<T> clazz) {
+		return deserialize(xmlCode, clazz, (Schema) null);
+	}
+
+	public static <T> T deserialize(String xmlCode, Class<T> clazz, String schemaCode) {
+		return deserialize(xmlCode, clazz, XmlUtil.getSchema(schemaCode, true));
 	}
 
 	/**
-	 * Unmarshals a string to an instance of the given class.
-	 * 
-	 * @param xml
-	 *          - Plain XML code
-	 * @param clazz
-	 *          - Class which will hold the data
-	 * @param clazz
-	 *          - Schema code
-	 * @return
+	 * Automatically closes the reader after deserialization for convenience
 	 */
-	public static <T> T deserialize(String xml, Class<T> clazz, String schemaString) {
-		return deserialize(xml, clazz, XmlUtil.getSchema(schemaString, true));
+	public static <T> T deserialize(Reader reader, Class<T> clazz) throws IOException {
+		try (reader) {
+			return deserialize(reader, clazz, null);
+		}
 	}
 
-	/**
-	 * @see #deserialize(File, Class, String)
-	 */
 	public static <T> T deserialize(File file, Class<T> clazz) {
 		return deserialize(file, clazz, (Schema) null);
 	}
 
-	/**
-	 * Unmarshals a file to an instance of the given class.
-	 * 
-	 * @param file
-	 *          - Input file
-	 * @param clazz
-	 *          - Class which will hold the data
-	 * @param schemaFile
-	 *          - Path to the schema file
-	 * @return
-	 */
 	public static <T> T deserialize(File file, Class<T> clazz, String schemaFile) {
 		return deserialize(file, clazz, XmlUtil.getSchema(schemaFile));
 	}
 
-	/**
-	 * Unmarshals a document to an instance of the given class.
-	 * 
-	 * @param doc
-	 *          - Input document
-	 * @param clazz
-	 *          - Class which will hold the data
-	 * @param schemaFile
-	 *          - Path to the schema file
-	 * @return
-	 */
 	public static <T> T deserialize(Document doc, Class<T> clazz, String schemaFile) {
 		return deserialize(doc, clazz, XmlUtil.getSchema(schemaFile));
 	}
@@ -120,12 +89,12 @@ public class JAXBUtil {
 		Unmarshaller u = newUnmarshaller(clazz, schema);
 		try {
 			T obj;
-			if (xml instanceof File) {
-				try (InputStreamReader isr = new InputStreamReader(new FileInputStream((File) xml), StandardCharsets.UTF_8)) {
-					obj = (T) u.unmarshal(isr);
-				}
-			} else if (xml instanceof Node) { // superinterface of document
-				obj = u.unmarshal((Node) xml, clazz).getValue();
+			if (xml instanceof Reader reader) {
+				obj = (T) u.unmarshal(reader);
+			} else if (xml instanceof File file) {
+				obj = (T) u.unmarshal(file);
+			} else if (xml instanceof Node node) { // superinterface of document
+				obj = u.unmarshal(node, clazz).getValue();
 			} else {
 				try (StringReader sr = new StringReader(xml.toString())) {
 					obj = (T) u.unmarshal(sr);
@@ -141,14 +110,6 @@ public class JAXBUtil {
 
 	/**
 	 * Unmarshals a collection of files to instances of the given class.
-	 * 
-	 * @param file
-	 *          - Input files
-	 * @param clazz
-	 *          - Class which will hold the data
-	 * @param schemaFile
-	 *          - Path to the schema file
-	 * @return List of created objects
 	 */
 	@SuppressWarnings("unchecked")
 	public static <T> List<T> deserialize(Collection<File> files, Class<T> clazz, String schemaFile) {
@@ -156,10 +117,7 @@ public class JAXBUtil {
 		List<T> objects = new ArrayList<>();
 		for (File file : files) {
 			try {
-				T obj;
-				try (InputStreamReader isr = new InputStreamReader(new FileInputStream(file), StandardCharsets.UTF_8)) {
-					obj = (T) u.unmarshal(isr);
-				}
+				T obj = (T) u.unmarshal(file);
 				if (obj == null)
 					throw new NullPointerException("File " + file + " does not contain any content for " + clazz.getName());
 				objects.add(obj);
