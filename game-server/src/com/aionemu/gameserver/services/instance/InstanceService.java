@@ -45,12 +45,14 @@ public class InstanceService {
 			throw new UnsupportedOperationException("Invalid call for next available instance  of " + worldId);
 
 		WorldMapInstance instance;
+		boolean onlyEventSpawns = false;
 		if (instanceHandlerSupplier == null) {
 			instance = WorldMapInstanceFactory.createWorldMapInstance(map, ownerId, InstanceEngine.getInstance()::getNewInstanceHandler, maxPlayers);
-			SpawnEngine.spawnInstance(worldId, instance.getInstanceId(), difficultyId, ownerId);
 		}	else {
 			instance = WorldMapInstanceFactory.createWorldMapInstance(map, ownerId, instanceHandlerSupplier, maxPlayers);
+			onlyEventSpawns = true;
 		}
+		SpawnEngine.spawnInstance(worldId, instance.getInstanceId(), difficultyId, ownerId, onlyEventSpawns);
 		instance.getInstanceHandler().onInstanceCreate();
 
 		// finally start the checker

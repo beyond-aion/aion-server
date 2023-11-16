@@ -126,7 +126,7 @@ public class SpawnEngine {
 	}
 
 	/**
-	 * Spawn all NPC's from templates
+	 * Spawn all NPCs from templates
 	 */
 	public static void spawnAll() {
 		DataManager.WORLD_MAPS_DATA.forEachParalllel(worldMapTemplate -> {
@@ -137,9 +137,6 @@ public class SpawnEngine {
 		printWorldSpawnStats();
 	}
 
-	/**
-	 * @param worldMapTemplate
-	 */
 	private static void spawnBasedOnTemplate(WorldMapTemplate worldMapTemplate) {
 		int twinSpawns = worldMapTemplate.getTwinCount();
 		if (twinSpawns == 0)
@@ -153,24 +150,21 @@ public class SpawnEngine {
 	}
 
 	public static void spawnInstance(int worldId, int instanceId, byte difficultId) {
-		spawnInstance(worldId, instanceId, difficultId, 0);
+		spawnInstance(worldId, instanceId, difficultId, 0, false);
 	}
 
-	/**
-	 * @param worldId
-	 * @param instanceId
-	 */
-	public static void spawnInstance(int worldId, int instanceId, byte difficultId, int ownerId) {
+	public static void spawnInstance(int worldId, int instanceId, byte difficultId, int ownerId, boolean onlyEventSpawns) {
 		List<SpawnGroup> worldSpawns = DataManager.SPAWNS_DATA.getSpawnsByWorldId(worldId);
-		StaticDoorSpawnManager.spawnTemplate(worldId, instanceId);
+		if (!onlyEventSpawns)
+			StaticDoorSpawnManager.spawnTemplate(worldId, instanceId);
 
 		int spawnedCounter = 0;
 		if (worldSpawns != null) {
 			for (SpawnGroup spawn : worldSpawns) {
-				int difficult = spawn.getDifficultId();
-				if (difficult != 0 && difficult != difficultId) {
+				if (onlyEventSpawns && spawn.getEventTemplate() == null)
 					continue;
-				}
+				if (spawn.getDifficultId() != 0 && spawn.getDifficultId() != difficultId)
+					continue;
 
 				if (spawn.isTemporarySpawn()) {
 					TemporarySpawnEngine.addSpawnGroup(spawn, instanceId);
@@ -202,10 +196,12 @@ public class SpawnEngine {
 					}
 				}
 			}
-			WalkerFormator.organizeAndSpawn(worldId, instanceId);
+			if (!onlyEventSpawns)
+				WalkerFormator.organizeAndSpawn(worldId, instanceId);
 		}
 		log.info("Spawned " + worldId + " [" + instanceId + "]: " + spawnedCounter);
-		HousingService.getInstance().spawnHouses(worldId, instanceId, ownerId);
+		if (!onlyEventSpawns)
+			HousingService.getInstance().spawnHouses(worldId, instanceId, ownerId);
 	}
 
 	public static boolean checkPool(SpawnGroup spawn) {
