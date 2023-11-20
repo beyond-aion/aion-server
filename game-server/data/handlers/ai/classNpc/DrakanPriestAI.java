@@ -1,11 +1,13 @@
 package ai.classNpc;
 
-import java.util.function.Consumer;
+import java.util.ArrayList;
+import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Servant;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
@@ -27,14 +29,14 @@ public class DrakanPriestAI extends AggressiveNpcAI {
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (Rnd.chance() < 3) {
-			spawnServant();
+			spawnServants(282988,  Rnd.get(1, 3));
 		}
 	}
 
-	private void spawnServant() {
-		Npc healServant = getPosition().getWorldMapInstance().getNpc(282988);
-		if (healServant == null) {
-			rndSpawn(282988, Rnd.get(1, 3));
+	void spawnServants(int npcId, int count) {
+		final List<Servant> servants = findServants();
+		if (servants.isEmpty()) {
+			rndSpawn(npcId, count);
 			PacketSendUtility.broadcastMessage(getOwner(), 341784);
 		}
 	}
@@ -42,25 +44,33 @@ public class DrakanPriestAI extends AggressiveNpcAI {
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
-		despawnServant();
+		despawnServants();
+	}
+
+	@Override
+	protected void handleDespawned() {
+		super.handleDespawned();
+		despawnServants();
 	}
 
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		despawnServant();
+		despawnServants();
 	}
 
-	private void despawnServant() {
-		getOwner().getKnownList().forEachNpc(new Consumer<Npc>() {
+	private void despawnServants() {
+		findServants().forEach(servant -> servant.getController().deleteIfAliveOrCancelRespawn());
+	}
 
-			@Override
-			public void accept(Npc object) {
-				Npc healServant = getPosition().getWorldMapInstance().getNpc(282988);
-				if (healServant != null)
-					healServant.getController().delete();
+	private List<Servant> findServants() {
+		List<Servant> servants = new ArrayList<>();
+		getPosition().getWorldMapInstance().forEachNpc(npc -> {
+			if (npc instanceof Servant servant && getOwner().equals(servant.getCreator())) {
+				servants.add(servant);
 			}
 		});
+		return servants;
 	}
 
 	private void rndSpawn(int npcId, int count) {
