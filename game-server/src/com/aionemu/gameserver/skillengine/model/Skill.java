@@ -65,7 +65,7 @@ public class Skill {
 	protected final Creature effector;
 	private final int skillLevel;
 	protected SkillMethod skillMethod;
-	protected final StartMovingListener conditionChangeListener;
+	protected final StartMovingListener moveListener;
 	private final SkillTemplate skillTemplate;
 	private boolean firstTargetRangeCheck = true;
 	private final ItemTemplate itemTemplate;
@@ -120,7 +120,7 @@ public class Skill {
 
 	public Skill(SkillTemplate skillTemplate, Creature effector, int skillLvl, Creature firstTarget, ItemTemplate itemTemplate) {
 		this.effectedList = new ArrayList<>();
-		this.conditionChangeListener = new StartMovingListener();
+		this.moveListener = new StartMovingListener();
 		this.firstTarget = firstTarget;
 		this.skillLevel = skillLvl;
 		this.skillTemplate = skillTemplate;
@@ -287,7 +287,7 @@ public class Skill {
 				effector.getAi().setSubStateIfNot(AISubState.CAST);
 		}
 
-		effector.getObserveController().attach(conditionChangeListener);
+		effector.getObserveController().attach(moveListener);
 
 		if (effector instanceof Npc npc) {
 			NpcSkillEntry currentNpcSkillEntry = npc.getGameStats().getLastSkill();
@@ -553,6 +553,7 @@ public class Skill {
 	protected void endCast() {
 		if (firstTargetDieObserver != null)
 			firstTarget.getObserveController().removeObserver(firstTargetDieObserver);
+		effector.getObserveController().removeObserver(moveListener);
 		if (!effector.isCasting() || isCancelled)
 			return;
 		// check if target is out of skill range or other requirements are not met (anymore)
@@ -841,8 +842,8 @@ public class Skill {
 	/**
 	 * @return the conditionChangeListener
 	 */
-	public StartMovingListener getConditionChangeListener() {
-		return conditionChangeListener;
+	public StartMovingListener getMoveListener() {
+		return moveListener;
 	}
 
 	/**

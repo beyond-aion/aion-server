@@ -26,6 +26,6 @@ public class PlayerMovedCondition extends Condition {
 
 	@Override
 	public boolean validate(Skill skill) {
-		return allow == skill.getConditionChangeListener().isEffectorMoved();
+		return allow == skill.getMoveListener().isEffectorMoved();
 	}
 }
