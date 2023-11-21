@@ -5179,7 +5179,7 @@
 			<drop item_id="188053614" chance="10" /><!-- Illusion Godstone Bundle -->
 			<drop item_id="188053845" chance="10" /><!-- Summer-Loving Penguin Transformation Candy Box -->
 			<drop item_id="188053702" chance="10" /><!-- Vasharti's Equipment Box -->
-			<drop item_id="164002151" chance="10" /><!-- Administrator's Boon (15 days) -->
+			<drop item_id="164002224" chance="10" /><!-- Administrator's Boon IV - 15-Day Pass -->
 		</drop_group>
 		<drop_group><!-- RARE -->
 			<drop item_id="188053295" chance="5" /><!-- Empyrean Plume Chest -->
