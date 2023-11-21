@@ -228,7 +228,7 @@ public final class DataManager {
 
 		// subsequent data processing (must be called after initializing DataManager fields)
 		ITEM_DATA.cleanup();
-		Collection<NpcTemplate> npcTemplates = NPC_DATA.getNpcData().valueCollection();
+		Collection<NpcTemplate> npcTemplates = NPC_DATA.getNpcData();
 		GLOBAL_DROP_DATA.processRules(npcTemplates);
 		TRADE_LIST_DATA.validateBuyLists(npcTemplates);
 		SKILL_DATA.validateMotions();

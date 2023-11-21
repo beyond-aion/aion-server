@@ -42,7 +42,7 @@ public class HiddenTeleportNpcAI extends NpcAI {
 		int teleId = getTeleportId();
 		if (teleId == 0)
 			return;
-		FlyPathEntry flypath = DataManager.FLY_PATH.getPathTemplate((short) teleId);
+		FlyPathEntry flypath = DataManager.FLY_PATH.getPathTemplate(teleId);
 		player.setCurrentFlypath(flypath);
 		player.unsetPlayerMode(PlayerMode.RIDE);
 		player.setState(CreatureState.FLYING);

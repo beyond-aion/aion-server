@@ -101,7 +101,7 @@ public class TeleportService {
 
 		if (location.getType().equals(TeleportType.FLIGHT)) {
 			if (SecurityConfig.ENABLE_FLYPATH_VALIDATOR) {
-				FlyPathEntry flypath = DataManager.FLY_PATH.getPathTemplate((short) location.getLocId());
+				FlyPathEntry flypath = DataManager.FLY_PATH.getPathTemplate(location.getLocId());
 				if (flypath == null) {
 					AuditLogger.log(player, "tried to use invalid flyPath #" + location.getLocId());
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());

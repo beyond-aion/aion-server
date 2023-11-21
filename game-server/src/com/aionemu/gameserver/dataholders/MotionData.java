@@ -1,18 +1,15 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.skillengine.model.MotionTime;
 
-import gnu.trove.map.hash.THashMap;
 
 /**
  * @author kecimis
@@ -25,13 +22,12 @@ public class MotionData {
 	private List<MotionTime> motionTimes;
 
 	@XmlTransient
-	private THashMap<String, MotionTime> motionTimesMap = new THashMap<>();
+	private final Map<String, MotionTime> motionTimesMap = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (MotionTime motion : motionTimes) {
 			motionTimesMap.put(motion.getName(), motion);
 		}
-		motionTimes.clear();
 		motionTimes = null;
 	}
 

@@ -1,16 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -28,27 +25,24 @@ public class GoodsListData {
 	@XmlElement(name = "purchase_list")
 	protected List<GoodsList> purchaseList;
 
-	/** A map containing all goodslist templates */
-	private TIntObjectHashMap<GoodsList> goodsListData;
-	private TIntObjectHashMap<GoodsList> goodsInListData;
-	private TIntObjectHashMap<GoodsList> goodsPurchaseListData;
+	@XmlTransient
+	private final Map<Integer, GoodsList> goodsListData = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, GoodsList> goodsInListData = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, GoodsList> goodsPurchaseListData = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		goodsListData = new TIntObjectHashMap<>();
 		for (GoodsList it : list) {
 			goodsListData.put(it.getId(), it);
 		}
-		goodsInListData = new TIntObjectHashMap<>();
 		for (GoodsList it : inList) {
 			goodsInListData.put(it.getId(), it);
 		}
-		goodsPurchaseListData = new TIntObjectHashMap<>();
 		for (GoodsList it : purchaseList) {
 			goodsPurchaseListData.put(it.getId(), it);
 		}
-		list = null;
-		inList = null;
-		purchaseList = null;
+		list = inList = purchaseList = null;
 	}
 
 	public GoodsList getGoodsListById(int id) {

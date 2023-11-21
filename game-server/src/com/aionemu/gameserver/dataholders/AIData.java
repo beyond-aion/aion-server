@@ -1,16 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.ai.AITemplate;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author xTz
@@ -21,7 +18,9 @@ public class AIData {
 
 	@XmlElement(name = "ai", type = AITemplate.class)
 	private List<AITemplate> templates;
-	private TIntObjectHashMap<AITemplate> aiTemplate = new TIntObjectHashMap<>();
+
+	@XmlTransient
+	private final Map<Integer, AITemplate> aiTemplate = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		aiTemplate.clear();

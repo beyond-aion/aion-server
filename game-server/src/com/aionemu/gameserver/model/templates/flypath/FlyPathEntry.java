@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class FlyPathEntry {
 
 	@XmlAttribute(name = "id", required = true)
-	private short id;
+	private int id;
 
 	@XmlAttribute(name = "sx", required = true)
 	private float startX;
@@ -36,7 +36,7 @@ public class FlyPathEntry {
 	@XmlAttribute(name = "time", required = true)
 	private float time;
 
-	public short getId() {
+	public int getId() {
 		return id;
 	}
 

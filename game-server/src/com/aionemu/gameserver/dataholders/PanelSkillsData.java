@@ -1,16 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author xTz
@@ -22,13 +19,13 @@ public class PanelSkillsData {
 	@XmlElement(name = "panel")
 	protected List<SkillPanel> templates;
 
-	private TIntObjectHashMap<SkillPanel> skillPanels = new TIntObjectHashMap<>();
+	@XmlTransient
+	private final Map<Integer, SkillPanel> skillPanels = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		for (SkillPanel panel : templates) {
 			skillPanels.put(panel.getPanelId(), panel);
 		}
-		templates.clear();
 		templates = null;
 	}
 

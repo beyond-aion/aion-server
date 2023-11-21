@@ -2,7 +2,6 @@ package admincommands;
 
 import java.awt.Color;
 import java.util.Iterator;
-import java.util.stream.IntStream;
 
 import org.apache.commons.lang3.StringUtils;
 
@@ -42,7 +41,7 @@ public class Pet extends AdminCommand {
 		String action = params[0];
 		if (action.equalsIgnoreCase("list")) {
 			StringBuilder sb = new StringBuilder("List of pets:");
-			IntStream.of(DataManager.PET_DATA.getPetIds()).sorted().forEach(id -> {
+			DataManager.PET_DATA.getPetIds().stream().sorted().forEach(id -> {
 				PetTemplate template = DataManager.PET_DATA.getPetTemplate(id);
 				sb.append('\n');
 				sb.append(template.getTemplateId());

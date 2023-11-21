@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.limiteditems;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -7,14 +8,9 @@ import java.util.List;
  */
 public class LimitedTradeNpc {
 
-	private List<LimitedItem> limitedItems;
+	private final List<LimitedItem> limitedItems = new ArrayList<>();
 
-	public LimitedTradeNpc(List<LimitedItem> limitedItems) {
-		this.limitedItems = limitedItems;
-
-	}
-
-	public void putLimitedItems(List<LimitedItem> limitedItems) {
+	public void addLimitedItems(List<LimitedItem> limitedItems) {
 		this.limitedItems.addAll(limitedItems);
 	}
 

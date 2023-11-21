@@ -1,16 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
-
-import gnu.trove.map.hash.TShortObjectHashMap;
 
 /**
  * @author KID
@@ -22,19 +19,21 @@ public class FlyPathData {
 	@XmlElement(name = "flypath_location")
 	private List<FlyPathEntry> list;
 
-	private TShortObjectHashMap<FlyPathEntry> loctlistData = new TShortObjectHashMap<>();
+	@XmlTransient
+	private final Map<Integer, FlyPathEntry> loctlistData = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (FlyPathEntry loc : list) {
 			loctlistData.put(loc.getId(), loc);
 		}
+		list = null;
 	}
 
 	public int size() {
 		return loctlistData.size();
 	}
 
-	public FlyPathEntry getPathTemplate(short id) {
+	public FlyPathEntry getPathTemplate(int id) {
 		return loctlistData.get(id);
 	}
 }

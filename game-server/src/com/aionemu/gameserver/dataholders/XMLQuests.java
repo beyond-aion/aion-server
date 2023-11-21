@@ -1,35 +1,14 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
-import com.aionemu.gameserver.questEngine.handlers.models.CraftingRewardsData;
-import com.aionemu.gameserver.questEngine.handlers.models.FountainRewardsData;
-import com.aionemu.gameserver.questEngine.handlers.models.ItemCollectingData;
-import com.aionemu.gameserver.questEngine.handlers.models.ItemOrdersData;
-import com.aionemu.gameserver.questEngine.handlers.models.KillInWorldData;
-import com.aionemu.gameserver.questEngine.handlers.models.KillInZoneData;
-import com.aionemu.gameserver.questEngine.handlers.models.KillSpawnedData;
-import com.aionemu.gameserver.questEngine.handlers.models.MentorMonsterHuntData;
-import com.aionemu.gameserver.questEngine.handlers.models.MonsterHuntData;
-import com.aionemu.gameserver.questEngine.handlers.models.RelicRewardsData;
-import com.aionemu.gameserver.questEngine.handlers.models.ReportOnLevelUpData;
-import com.aionemu.gameserver.questEngine.handlers.models.ReportToData;
-import com.aionemu.gameserver.questEngine.handlers.models.ReportToManyData;
-import com.aionemu.gameserver.questEngine.handlers.models.SkillUseData;
-import com.aionemu.gameserver.questEngine.handlers.models.WorkOrdersData;
-import com.aionemu.gameserver.questEngine.handlers.models.XMLQuest;
-import com.aionemu.gameserver.questEngine.handlers.models.XmlQuestData;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
+import com.aionemu.gameserver.questEngine.handlers.models.*;
 
 /**
  * @author MrPoke
@@ -49,35 +28,24 @@ public class XMLQuests {
 	private List<XMLQuest> data;
 
 	@XmlTransient
-	private TIntObjectHashMap<XMLQuest> questsById = new TIntObjectHashMap<>();
+	private final Map<Integer, XMLQuest> questsById = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (data != null) {
 			questsById.clear();
 			data.forEach(quest -> questsById.put(quest.getId(), quest));
-			data.clear();
 			data = null;
 		}
 	}
 
-	/**
-	 * @return the data
-	 */
 	public Collection<XMLQuest> getAllQuests() {
-		return questsById.valueCollection();
+		return questsById.values();
 	}
 
-	/**
-	 * @return the data
-	 */
 	public XMLQuest getQuest(int questId) {
 		return questsById.get(questId);
 	}
 
-	/**
-	 * @param data
-	 *          the data to set
-	 */
 	public void setData(List<XMLQuest> data) {
 		this.data = data;
 		afterUnmarshal(null, null);

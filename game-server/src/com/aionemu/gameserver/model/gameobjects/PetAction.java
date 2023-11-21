@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ATracer
@@ -22,10 +23,9 @@ public enum PetAction {
 	H_ABANDON(17),
 	UNKNOWN(255);
 
-	private static TIntObjectHashMap<PetAction> petActions;
+	private static final Map<Integer, PetAction> petActions = new HashMap<>();
 
 	static {
-		petActions = new TIntObjectHashMap<>();
 		for (PetAction action : values()) {
 			petActions.put(action.getActionId(), action);
 		}

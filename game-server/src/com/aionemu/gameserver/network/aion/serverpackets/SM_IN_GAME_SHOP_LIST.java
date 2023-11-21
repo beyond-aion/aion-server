@@ -1,16 +1,12 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.ingameshop.IGItem;
 import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author xTz, KID
@@ -20,7 +16,6 @@ public class SM_IN_GAME_SHOP_LIST extends AionServerPacket {
 	private Player player;
 	private int nrList;
 	private int salesRanking;
-	private TIntObjectHashMap<List<IGItem>> allItems = new TIntObjectHashMap<>();
 
 	public SM_IN_GAME_SHOP_LIST(Player player, int nrList, int salesRanking) {
 		this.player = player;
@@ -30,6 +25,7 @@ public class SM_IN_GAME_SHOP_LIST extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
+		Map<Integer, List<IGItem>> allItems = new HashMap<>();
 		List<IGItem> inAllItems;
 		Collection<IGItem> items;
 		byte category = player.inGameShop.getCategory();
@@ -48,12 +44,7 @@ public class SM_IN_GAME_SHOP_LIST extends AionServerPacket {
 					tabSize += 9;
 					f++;
 				}
-				List<IGItem> template = allItems.get(f);
-				if (template == null) {
-					template = new ArrayList<>();
-					allItems.put(f, template);
-				}
-				template.add(a);
+				allItems.computeIfAbsent(f, k -> new ArrayList<>()).add(a);
 				size++;
 			}
 

@@ -1,19 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.Guides.GuideTemplate;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author xTz
@@ -24,7 +18,9 @@ public class GuideHtmlData {
 
 	@XmlElement(name = "guide", type = GuideTemplate.class)
 	private List<GuideTemplate> guideTemplates;
-	private final TIntObjectHashMap<List<GuideTemplate>> templates = new TIntObjectHashMap<>();
+
+	@XmlTransient
+	private final Map<Integer, List<GuideTemplate>> templates = new HashMap<>();
 	private final int CLASS_ALL = 255;
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
@@ -53,19 +49,12 @@ public class GuideHtmlData {
 		return templates.size();
 	}
 
-	public TIntObjectHashMap<List<GuideTemplate>> getTemplates() {
+	public Map<Integer, List<GuideTemplate>> getTemplates() {
 		return templates;
 	}
 
 	public GuideTemplate getTemplateByTitle(String title) {
-		for (int templateHash : templates.keys()) {
-			for (GuideTemplate template : templates.get(templateHash)) {
-				if (template.getTitle().equals(title)) {
-					return template;
-				}
-			}
-		}
-		return null;
+		return templates.values().stream().flatMap(Collection::stream).filter(t -> t.getTitle().equals(title)).findFirst().orElse(null);
 	}
 
 	public GuideTemplate[] getTemplatesFor(PlayerClass playerClass, Race race, int level) {

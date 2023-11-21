@@ -1,9 +1,8 @@
 package com.aionemu.gameserver.model;
 
 import java.lang.reflect.Field;
-
-import gnu.trove.map.TIntObjectMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * Converted from enum to regular class with int ID fields, since JVM only supports enums up to ~3000 values, due to the 64kB bytecode limit.
@@ -6222,30 +6221,28 @@ public final class DialogAction {
 	public static final int OPEN_WEB = 100000;
 	public static final int OPEN_WEB_SHOP = 100001;
 
-	private final static TIntObjectMap<String> idNames = new TIntObjectHashMap<>();
+	private final static Map<Integer, String> idNames = new HashMap<>();
 
 	static {
 		for (Field field : DialogAction.class.getDeclaredFields()) {
-			int dialogActionId;
 			String dialogActionName = field.getName();
 			try {
-				Object tmp = field.get(null);
-				if (tmp instanceof TIntObjectMap)
-					continue;
-				dialogActionId = (int) tmp;
+				Object fieldValue = field.get(null);
+				if (fieldValue instanceof Integer dialogActionId) {
+					if (idNames.putIfAbsent(dialogActionId, dialogActionName) != null)
+						throw new IllegalArgumentException(
+							"Dialog action id " + dialogActionId + " (" + dialogActionName + ") is already defined for " + idNames.get(dialogActionId));
+				}
 			} catch (IllegalArgumentException | IllegalAccessException e) {
 				throw new UnsupportedOperationException("Error accessing " + dialogActionName, e);
 			}
-			if (idNames.putIfAbsent(dialogActionId, dialogActionName) != null)
-				throw new IllegalArgumentException(
-					"Dialog action id " + dialogActionId + " (" + dialogActionName + ") is already defined for " + idNames.get(dialogActionId));
 		}
 	}
 
 	private DialogAction() {
 	}
 
-	public final static String nameOf(int dialogActionId) {
+	public static String nameOf(int dialogActionId) {
 		return idNames.get(dialogActionId);
 	}
 }

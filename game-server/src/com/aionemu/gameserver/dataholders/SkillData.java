@@ -1,27 +1,15 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
+import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.skillengine.model.Motion;
 import com.aionemu.gameserver.skillengine.model.MotionTime;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -38,19 +26,19 @@ public class SkillData {
 	 * Map that contains skillId - SkillTemplate key-value pair
 	 */
 	@XmlTransient
-	private TIntObjectHashMap<SkillTemplate> skillData = new TIntObjectHashMap<>();
+	private final Map<Integer, SkillTemplate> skillData = new HashMap<>();
 
 	@XmlTransient
-	private Map<String, List<SkillTemplate>> skillTemplatesByGroup = new LinkedHashMap<>();
+	private final Map<String, List<SkillTemplate>> skillTemplatesByGroup = new LinkedHashMap<>();
 
 	@XmlTransient
-	private Map<String, List<SkillTemplate>> skillTemplatesByStack = new LinkedHashMap<>();
+	private final Map<String, List<SkillTemplate>> skillTemplatesByStack = new LinkedHashMap<>();
 
 	/**
 	 * Map that contains cooldownId - skillId List
 	 */
 	@XmlTransient
-	private TIntObjectHashMap<List<Integer>> cooldownGroups = new TIntObjectHashMap<>();
+	private Map<Integer, List<Integer>> cooldownGroups = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		skillData.clear();
@@ -116,7 +104,7 @@ public class SkillData {
 	 * @return the skillTemplates
 	 */
 	public Collection<SkillTemplate> getSkillTemplates() {
-		return skillData.valueCollection();
+		return skillData.values();
 	}
 
 	/**

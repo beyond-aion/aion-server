@@ -1,18 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.portal.PortalLoc;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author xTz
@@ -26,14 +21,13 @@ public class PortalLocData {
 	protected List<PortalLoc> portalLoc;
 
 	@XmlTransient
-	private TIntObjectHashMap<PortalLoc> portalLocs = new TIntObjectHashMap<>();
+	private final Map<Integer, PortalLoc> portalLocs = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		for (PortalLoc loc : portalLoc) {
 			portalLocs.put(loc.getLocId(), loc);
 
 		}
-		portalLoc.clear();
 		portalLoc = null;
 	}
 

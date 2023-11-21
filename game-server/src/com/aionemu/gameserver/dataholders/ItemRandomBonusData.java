@@ -1,22 +1,17 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.EnumMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.model.templates.item.bonuses.RandomBonusSet;
 import com.aionemu.gameserver.model.templates.item.bonuses.StatBonusType;
 import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
-
-import gnu.trove.impl.hash.THash;
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * Generated on: 2012.04.21 at 10:56:19 PM EEST
@@ -30,11 +25,12 @@ public class ItemRandomBonusData {
 	@XmlElement(name = "random_bonus", required = true)
 	private List<RandomBonusSet> randomBonusSets;
 
-	private final Map<StatBonusType, TIntObjectHashMap<RandomBonusSet>> bonusData = new EnumMap<>(StatBonusType.class);
+	@XmlTransient
+	private final Map<StatBonusType, Map<Integer, RandomBonusSet>> bonusData = new EnumMap<>(StatBonusType.class);
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (StatBonusType statBonusType : StatBonusType.values())
-			bonusData.put(statBonusType, new TIntObjectHashMap<>());
+			bonusData.put(statBonusType, new HashMap<>());
 		for (RandomBonusSet bonus : randomBonusSets) {
 			bonusData.get(bonus.getBonusType()).put(bonus.getId(), bonus);
 		}
@@ -89,7 +85,7 @@ public class ItemRandomBonusData {
 	}
 
 	public int size() {
-		return bonusData.values().stream().mapToInt(THash::size).sum();
+		return bonusData.values().stream().mapToInt(Map::size).sum();
 	}
 
 }

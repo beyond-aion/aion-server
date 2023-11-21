@@ -4,9 +4,9 @@ import java.lang.reflect.Constructor;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
-import java.util.Collection;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 import java.util.Set;
 import java.util.stream.Collectors;
 
@@ -124,8 +124,7 @@ public class AIEngine implements GameEngine {
 				throw new GameServerError(
 					"Faulty AI handler: " + aiClass + " is missing constructor taking owner of type " + ownerType + " as the only argument");
 		});
-		Collection<NpcTemplate> npcTemplates = DataManager.NPC_DATA.getNpcData().valueCollection();
-		Set<String> npcAINames = npcTemplates.stream().filter(t -> t.getAiName() != null).map(NpcTemplate::getAiName).collect(Collectors.toSet());
+		Set<String> npcAINames = DataManager.NPC_DATA.getNpcData().stream().map(NpcTemplate::getAiName).filter(Objects::nonNull).collect(Collectors.toSet());
 		npcAINames.removeAll(aiHandlers.keySet());
 		if (!npcAINames.isEmpty())
 			throw new GameServerError("No AIs could be found for the following npc_template AI names: " + String.join(", ", npcAINames));

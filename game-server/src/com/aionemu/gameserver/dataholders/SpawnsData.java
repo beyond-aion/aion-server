@@ -7,7 +7,6 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
-import java.util.stream.IntStream;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -37,8 +36,6 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.WorldType;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 /**
  * @author xTz, Rolandas, Neon
  */
@@ -52,22 +49,30 @@ public class SpawnsData extends AbstractLockManager {
 	@XmlElement(name = "spawn_map", type = SpawnMap.class)
 	private List<SpawnMap> templates;
 
-	private TIntObjectHashMap<TIntObjectHashMap<List<SpawnGroup>>> allSpawnMaps = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<List<SpawnGroup>> baseSpawnMaps = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<List<SpawnGroup>> riftSpawnMaps = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<List<SpawnGroup>> siegeSpawnMaps = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<List<SpawnGroup>> vortexSpawnMaps = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<MercenarySpawn> mercenarySpawns = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<List<SpawnGroup>> ahserionSpawnMaps = new TIntObjectHashMap<>(); // Ahserion's flight
+	@XmlTransient
+	private final Map<Integer, Map<Integer, List<SpawnGroup>>> allSpawnMaps = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, List<SpawnGroup>> baseSpawnMaps = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, List<SpawnGroup>> riftSpawnMaps = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, List<SpawnGroup>> siegeSpawnMaps = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, List<SpawnGroup>> vortexSpawnMaps = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, MercenarySpawn> mercenarySpawns = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, List<SpawnGroup>> ahserionSpawnMaps = new HashMap<>(); // Ahserion's flight
+	@XmlTransient
 	private Set<Integer> allNpcIds;
 
 	public void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (SpawnMap map : templates) {
-			TIntObjectHashMap<List<SpawnGroup>> mapSpawns = allSpawnMaps.get(map.getMapId());
+			Map<Integer, List<SpawnGroup>> mapSpawns = allSpawnMaps.get(map.getMapId());
 			writeLock();
 			try {
 				if (mapSpawns == null) {
-					mapSpawns = new TIntObjectHashMap<>();
+					mapSpawns = new HashMap<>();
 						allSpawnMaps.put(map.getMapId(), mapSpawns);
 				}
 
@@ -177,15 +182,15 @@ public class SpawnsData extends AbstractLockManager {
 				}
 			}
 		}
-		allNpcIds = allSpawnMaps.valueCollection().stream().flatMap(spawn -> IntStream.of(spawn.keys()).boxed()).collect(Collectors.toSet());
-		allNpcIds.addAll(baseSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
+		allNpcIds = allSpawnMaps.values().stream().flatMap(spawn -> spawn.keySet().stream()).collect(Collectors.toSet());
+		allNpcIds.addAll(baseSpawnMaps.values().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
 		allNpcIds
-			.addAll(siegeSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
-		allNpcIds.addAll(riftSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
+			.addAll(siegeSpawnMaps.values().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
+		allNpcIds.addAll(riftSpawnMaps.values().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
 		allNpcIds
-			.addAll(vortexSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
+			.addAll(vortexSpawnMaps.values().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
 		allNpcIds
-			.addAll(ahserionSpawnMaps.valueCollection().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
+			.addAll(ahserionSpawnMaps.values().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
 	}
 
 	public void clearTemplates() {
@@ -195,10 +200,10 @@ public class SpawnsData extends AbstractLockManager {
 	public List<SpawnGroup> getSpawnsByWorldId(int worldId) {
 		readLock();
 		try {
-			TIntObjectHashMap<List<SpawnGroup>> spawnGroupsByNpcId = allSpawnMaps.get(worldId);
+			Map<Integer, List<SpawnGroup>> spawnGroupsByNpcId = allSpawnMaps.get(worldId);
 			if (spawnGroupsByNpcId == null)
 				return Collections.emptyList();
-			return spawnGroupsByNpcId.valueCollection().stream().flatMap(Collection::stream).collect(Collectors.toList());
+			return spawnGroupsByNpcId.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
 		} finally {
 			readUnlock();
 		}
@@ -207,7 +212,7 @@ public class SpawnsData extends AbstractLockManager {
 	public List<SpawnGroup> getSpawnsForNpc(int worldId, int npcId) {
 		readLock();
 		try {
-			TIntObjectHashMap<List<SpawnGroup>> spawnGroupsByNpcId = allSpawnMaps.get(worldId);
+			Map<Integer, List<SpawnGroup>> spawnGroupsByNpcId = allSpawnMaps.get(worldId);
 			List<SpawnGroup> spawnGroups = spawnGroupsByNpcId == null ? null : spawnGroupsByNpcId.get(npcId);
 			return spawnGroups == null ? Collections.emptyList() : spawnGroups;
 		} finally {
@@ -495,8 +500,8 @@ public class SpawnsData extends AbstractLockManager {
 	public void removeEventSpawnObjects(EventTemplate eventTemplate) {
 		writeLock();
 		try {
-			allSpawnMaps.valueCollection().forEach(spawnGroupsByNpcId -> {
-				Collection<List<SpawnGroup>> allSpawnGroups = spawnGroupsByNpcId.valueCollection();
+			allSpawnMaps.values().forEach(spawnGroupsByNpcId -> {
+				Collection<List<SpawnGroup>> allSpawnGroups = spawnGroupsByNpcId.values();
 				allSpawnGroups.forEach(spawnGroups -> spawnGroups.removeIf(spawnGroup -> eventTemplate.equals(spawnGroup.getEventTemplate())));
 				allSpawnGroups.removeIf(List::isEmpty);
 			});

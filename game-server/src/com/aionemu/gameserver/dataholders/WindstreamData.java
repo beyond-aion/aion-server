@@ -1,17 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamTemplate;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author LokiReborn
@@ -24,14 +20,13 @@ public class WindstreamData {
 	@XmlElement(name = "windstream")
 	private List<WindstreamTemplate> wts;
 
-	private TIntObjectHashMap<WindstreamTemplate> windstreams;
+	@XmlTransient
+	private final Map<Integer, WindstreamTemplate> windstreams = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		windstreams = new TIntObjectHashMap<>();
 		for (WindstreamTemplate wt : wts) {
 			windstreams.put(wt.getMapId(), wt);
 		}
-
 		wts = null;
 	}
 
@@ -39,9 +34,6 @@ public class WindstreamData {
 		return windstreams.get(mapId);
 	}
 
-	/**
-	 * @return items.size()
-	 */
 	public int size() {
 		return windstreams.size();
 	}

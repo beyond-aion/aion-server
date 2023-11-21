@@ -1,18 +1,14 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.petskill.PetSkillTemplate;
-
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntIntHashMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -24,26 +20,15 @@ public class PetSkillData {
 	@XmlElement(name = "pet_skill")
 	private List<PetSkillTemplate> petSkills;
 
-	/** A map containing all npc skill templates */
-	private TIntObjectHashMap<TIntIntHashMap> petSkillData = new TIntObjectHashMap<>();
-
-	private TIntObjectHashMap<TIntArrayList> petSkillsMap = new TIntObjectHashMap<>();
+	@XmlTransient
+	private final Map<Integer, Map<Integer, Integer>> petSkillData = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, List<Integer>> petSkillsMap = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (PetSkillTemplate petSkill : petSkills) {
-			TIntIntHashMap orderSkillMap = petSkillData.get(petSkill.getOrderSkill());
-			if (orderSkillMap == null) {
-				orderSkillMap = new TIntIntHashMap();
-				petSkillData.put(petSkill.getOrderSkill(), orderSkillMap);
-			}
-			orderSkillMap.put(petSkill.getPetId(), petSkill.getSkillId());
-
-			TIntArrayList skillList = petSkillsMap.get(petSkill.getPetId());
-			if (skillList == null) {
-				skillList = new TIntArrayList();
-				petSkillsMap.put(petSkill.getPetId(), skillList);
-			}
-			skillList.add(petSkill.getSkillId());
+			petSkillData.computeIfAbsent(petSkill.getOrderSkill(), k -> new HashMap<>()).put(petSkill.getPetId(), petSkill.getSkillId());
+			petSkillsMap.computeIfAbsent(petSkill.getPetId(), k -> new ArrayList<>()).add(petSkill.getSkillId());
 		}
 		petSkills = null;
 	}

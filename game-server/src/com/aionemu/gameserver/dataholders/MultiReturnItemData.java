@@ -1,17 +1,14 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.item.MultiReturnItem;
 import com.aionemu.gameserver.model.templates.item.ReturnLocList;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ginho1
@@ -22,12 +19,15 @@ public class MultiReturnItemData {
 
 	@XmlElement(name = "return_item")
 	private List<MultiReturnItem> multiReturnItemTemplate;
-	private TIntObjectHashMap<List<ReturnLocList>> returnLocList = new TIntObjectHashMap<>();
+
+	@XmlTransient
+	private final Map<Integer, List<ReturnLocList>> returnLocList = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		returnLocList.clear();
 		for (MultiReturnItem template : multiReturnItemTemplate)
 			returnLocList.put(template.getId(), template.getReturnLocList());
+		multiReturnItemTemplate = null;
 	}
 
 	public int size() {

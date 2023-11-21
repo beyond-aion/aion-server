@@ -1,13 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.autogroup.AutoGroup;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "", propOrder = { "autoGroup" })
@@ -16,10 +16,11 @@ public class AutoGroupData {
 
 	@XmlElement(name = "auto_group")
 	protected List<AutoGroup> autoGroup;
+
 	@XmlTransient
-	private TIntObjectHashMap<AutoGroup> autoGroupByInstanceId = new TIntObjectHashMap<>();
+	private final Map<Integer, AutoGroup> autoGroupByInstanceId = new HashMap<>();
 	@XmlTransient
-	private TIntObjectHashMap<AutoGroup> autoGroupByNpcId = new TIntObjectHashMap<>();
+	private final Map<Integer, AutoGroup> autoGroupByNpcId = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		for (AutoGroup ag : autoGroup) {
@@ -31,7 +32,6 @@ public class AutoGroupData {
 				}
 			}
 		}
-		autoGroup.clear();
 		autoGroup = null;
 	}
 

@@ -1,18 +1,15 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.Iterator;
+import java.util.LinkedHashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.function.Consumer;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * Object of this class is containing <tt>WorldMapTemplate</tt> objects for all world maps. World maps are defined in data/static_data/world_maps.xml
@@ -25,44 +22,37 @@ import gnu.trove.map.hash.TIntObjectHashMap;
 public class WorldMapsData implements Iterable<WorldMapTemplate> {
 
 	@XmlElement(name = "map")
-	protected List<WorldMapTemplate> worldMaps;
+	private List<WorldMapTemplate> worldMaps;
 
-	protected TIntObjectHashMap<WorldMapTemplate> worldIdMap = new TIntObjectHashMap<>();
+	@XmlTransient
+	private final Map<Integer, WorldMapTemplate> mapsById = new LinkedHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (WorldMapTemplate map : worldMaps) {
-			worldIdMap.put(map.getMapId(), map);
+			mapsById.put(map.getMapId(), map);
 		}
+		worldMaps = null;
 	}
 
 	@Override
 	public Iterator<WorldMapTemplate> iterator() {
-		return worldMaps.iterator();
+		return mapsById.values().iterator();
 	}
 
 	public void forEachParalllel(Consumer<WorldMapTemplate> consumer) {
-		worldMaps.parallelStream().forEach(consumer);
+		mapsById.values().parallelStream().forEach(consumer);
 	}
 
-	/**
-	 * Returns the count of maps.
-	 * 
-	 * @return worldMaps.size()
-	 */
 	public int size() {
-		return worldMaps == null ? 0 : worldMaps.size();
+		return mapsById.size();
 	}
 
-	/**
-	 * @param worldId
-	 * @return
-	 */
 	public WorldMapTemplate getTemplate(int worldId) {
-		return worldIdMap.get(worldId);
+		return mapsById.get(worldId);
 	}
 
 	public int getWorldIdByCName(String name) {
-		for (WorldMapTemplate template : worldMaps) {
+		for (WorldMapTemplate template : mapsById.values()) {
 			if (template.getCName().equalsIgnoreCase(name)) {
 				return template.getMapId();
 			}

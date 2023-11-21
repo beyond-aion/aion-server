@@ -1,16 +1,14 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
+import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * This is a container holding and serving all {@link PetTemplate} instances.<br>
@@ -24,14 +22,13 @@ public class PetData {
 	@XmlElement(name = "pet")
 	private List<PetTemplate> pets;
 
-	/** A map containing all pet templates */
-	private TIntObjectHashMap<PetTemplate> petData = new TIntObjectHashMap<>();
+	@XmlTransient
+	private final Map<Integer, PetTemplate> petData = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (PetTemplate pet : pets) {
 			petData.put(pet.getTemplateId(), pet);
 		}
-		pets.clear();
 		pets = null;
 	}
 
@@ -50,7 +47,7 @@ public class PetData {
 		return petData.get(id);
 	}
 
-	public int[] getPetIds() {
-		return petData.keys();
+	public Set<Integer> getPetIds() {
+		return petData.keySet();
 	}
 }

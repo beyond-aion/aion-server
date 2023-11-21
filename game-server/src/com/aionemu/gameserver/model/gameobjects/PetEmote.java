@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author ATracer
@@ -30,10 +31,9 @@ public enum PetEmote {
 	LOOT_STOP(150),
 	UNKNOWN(Integer.MAX_VALUE);
 
-	private static TIntObjectHashMap<PetEmote> petEmotes;
+	private static final Map<Integer, PetEmote> petEmotes = new HashMap<>();
 
 	static {
-		petEmotes = new TIntObjectHashMap<>();
 		for (PetEmote emote : values()) {
 			petEmotes.put(emote.getEmoteId(), emote);
 		}

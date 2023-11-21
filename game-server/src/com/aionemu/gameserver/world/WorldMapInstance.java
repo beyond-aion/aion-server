@@ -29,8 +29,6 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 /**
  * World map instance object.
  * 
@@ -42,7 +40,7 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	public static final int regionSize = WorldConfig.WORLD_REGION_SIZE;
 
 	private final WorldMap parent;
-	protected final TIntObjectHashMap<MapRegion> regions = new TIntObjectHashMap<>();
+	protected final Map<Integer, MapRegion> regions = new HashMap<>();
 	private final Map<Integer, VisibleObject> worldMapObjects = new ConcurrentHashMap<>(); // All objects spawned in this world map instance
 	private final Map<Integer, Npc> worldMapNpcs = new ConcurrentHashMap<>(); // All npcs spawned in this world map instance
 	private final Map<Integer, Player> worldMapPlayers = new ConcurrentHashMap<>(); // All players spawned in this world map instance

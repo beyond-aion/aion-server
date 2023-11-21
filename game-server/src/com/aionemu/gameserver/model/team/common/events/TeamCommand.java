@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.model.team.common.events;
 
+import java.util.HashMap;
+import java.util.Map;
 import java.util.Objects;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -31,10 +31,9 @@ public enum TeamCommand {
 	LEAGUE_ALLIANCE_MOVE(31),
 	LEAGUE_SET_LEADER(32);
 
-	private static final TIntObjectHashMap<TeamCommand> teamCommands;
+	private static final Map<Integer, TeamCommand> teamCommands = new HashMap<>();
 
 	static {
-		teamCommands = new TIntObjectHashMap<>();
 		for (TeamCommand eventCode : values()) {
 			teamCommands.put(eventCode.getCodeId(), eventCode);
 		}

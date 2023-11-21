@@ -1,16 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.gather.GatherableTemplate;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ATracer
@@ -22,8 +19,8 @@ public class GatherableData {
 	@XmlElement(name = "gatherable_template")
 	private List<GatherableTemplate> gatherables;
 
-	/** A map containing all npc templates */
-	private TIntObjectHashMap<GatherableTemplate> gatherableData = new TIntObjectHashMap<>();
+	@XmlTransient
+	private final Map<Integer, GatherableTemplate> gatherableData = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (GatherableTemplate gatherable : gatherables) {
@@ -40,13 +37,6 @@ public class GatherableData {
 		return gatherableData.size();
 	}
 
-	/**
-	 * /** Returns an {@link GatherableTemplate} object with given id.
-	 * 
-	 * @param id
-	 *          id of GatherableTemplate
-	 * @return GatherableTemplate object containing data about Gatherable with that id.
-	 */
 	public GatherableTemplate getGatherableTemplate(int id) {
 		return gatherableData.get(id);
 	}

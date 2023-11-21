@@ -4,6 +4,7 @@ import java.io.File;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -20,8 +21,6 @@ import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.utils.xml.XmlUtil;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 /**
  * @author ATracer
  */
@@ -36,10 +35,10 @@ public class ZoneData {
 	public List<ZoneTemplate> zoneList;
 
 	@XmlTransient
-	private TIntObjectHashMap<List<ZoneInfo>> zoneNameMap = new TIntObjectHashMap<>();
+	private final Map<Integer, List<ZoneInfo>> zoneNameMap = new HashMap<>();
 
 	@XmlTransient
-	private HashMap<ZoneTemplate, Integer> weatherZoneIds = new HashMap<>();
+	private final Map<ZoneTemplate, Integer> weatherZoneIds = new HashMap<>();
 
 	@XmlTransient
 	private int count;
@@ -87,7 +86,7 @@ public class ZoneData {
 		zoneList = null;
 	}
 
-	public TIntObjectHashMap<List<ZoneInfo>> getZones() {
+	public Map<Integer, List<ZoneInfo>> getZones() {
 		return zoneNameMap;
 	}
 

@@ -44,10 +44,6 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
-import gnu.trove.list.array.TIntArrayList;
-import gnu.trove.map.hash.TIntIntHashMap;
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 /**
  * @author MrPoke, Hilgert, vlog, Neon
  */
@@ -56,36 +52,36 @@ public class QuestEngine implements GameEngine {
 	private static final Logger log = LoggerFactory.getLogger(QuestEngine.class);
 	private ScriptManager scriptManager = new ScriptManager();
 	private JobDetail messageTask;
-	private TIntObjectHashMap<AbstractQuestHandler> questHandlers = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<QuestNpc> questNpcs = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<TIntArrayList> questItemRelated = new TIntObjectHashMap<>();
-	private TIntArrayList questHouseItems = new TIntArrayList();
-	private TIntObjectHashMap<TIntArrayList> questItems = new TIntObjectHashMap<>();
-	private TIntArrayList questOnCompleted = new TIntArrayList();
-	private Map<Race, TIntArrayList> questOnLevelUp = new EnumMap<>(Race.class);
-	private TIntArrayList questOnDie = new TIntArrayList();
-	private TIntArrayList questOnLogOut = new TIntArrayList();
-	private TIntArrayList questOnEnterWorld = new TIntArrayList();
-	private Map<ZoneName, TIntArrayList> questOnEnterZone = new HashMap<>();
-	private Map<ZoneName, TIntArrayList> questOnLeaveZone = new HashMap<>();
-	private Map<String, TIntArrayList> questOnPassFlyingRings = new HashMap<>();
-	private TIntObjectHashMap<TIntArrayList> questOnMovieEnd = new TIntObjectHashMap<>();
-	private TIntArrayList questOnTimerEnd = new TIntArrayList();
-	private TIntArrayList onInvisibleTimerEnd = new TIntArrayList();
-	private Map<AbyssRankEnum, TIntArrayList> questOnKillRanked = new EnumMap<>(AbyssRankEnum.class);
-	private TIntObjectHashMap<TIntArrayList> questOnKillInWorld = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<TIntArrayList> questOnUseSkill = new TIntObjectHashMap<>();
-	private TIntIntHashMap questOnFailCraft = new TIntIntHashMap();
-	private TIntObjectHashMap<TIntArrayList> questOnEquipItem = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<TIntArrayList> questCanAct = new TIntObjectHashMap<>();
-	private TIntArrayList questOnDredgionReward = new TIntArrayList();
-	private Map<BonusType, TIntArrayList> questOnBonusApply = new EnumMap<>(BonusType.class);
-	private TIntArrayList questUpdateItems = new TIntArrayList();
-	private TIntArrayList reachTarget = new TIntArrayList();
-	private TIntArrayList lostTarget = new TIntArrayList();
-	private TIntArrayList questOnEnterWindStream = new TIntArrayList();
-	private TIntArrayList questRideAction = new TIntArrayList();
-	private Map<String, TIntArrayList> questOnKillInZone = new HashMap<>();
+	private Map<Integer, AbstractQuestHandler> questHandlers = new HashMap<>();
+	private Map<Integer, QuestNpc> questNpcs = new HashMap<>();
+	private Map<Integer, List<Integer>> questItemRelated = new HashMap<>();
+	private List<Integer> questHouseItems = new ArrayList<>();
+	private Map<Integer, List<Integer>> questItems = new HashMap<>();
+	private List<Integer> questOnCompleted = new ArrayList<>();
+	private Map<Race, List<Integer>> questOnLevelUp = new EnumMap<>(Race.class);
+	private List<Integer> questOnDie = new ArrayList<>();
+	private List<Integer> questOnLogOut = new ArrayList<>();
+	private List<Integer> questOnEnterWorld = new ArrayList<>();
+	private Map<ZoneName, List<Integer>> questOnEnterZone = new HashMap<>();
+	private Map<ZoneName, List<Integer>> questOnLeaveZone = new HashMap<>();
+	private Map<String, List<Integer>> questOnPassFlyingRings = new HashMap<>();
+	private Map<Integer, List<Integer>> questOnMovieEnd = new HashMap<>();
+	private List<Integer> questOnTimerEnd = new ArrayList<>();
+	private List<Integer> onInvisibleTimerEnd = new ArrayList<>();
+	private Map<AbyssRankEnum, List<Integer>> questOnKillRanked = new EnumMap<>(AbyssRankEnum.class);
+	private Map<Integer, List<Integer>> questOnKillInWorld = new HashMap<>();
+	private Map<Integer, List<Integer>> questOnUseSkill = new HashMap<>();
+	private Map<Integer, Integer> questOnFailCraft = new HashMap<>();
+	private Map<Integer, List<Integer>> questOnEquipItem = new HashMap<>();
+	private Map<Integer, List<Integer>> questCanAct = new HashMap<>();
+	private List<Integer> questOnDredgionReward = new ArrayList<>();
+	private Map<BonusType, List<Integer>> questOnBonusApply = new EnumMap<>(BonusType.class);
+	private List<Integer> questUpdateItems = new ArrayList<>();
+	private List<Integer> reachTarget = new ArrayList<>();
+	private List<Integer> lostTarget = new ArrayList<>();
+	private List<Integer> questOnEnterWindStream = new ArrayList<>();
+	private List<Integer> questRideAction = new ArrayList<>();
+	private Map<String, List<Integer>> questOnKillInZone = new HashMap<>();
 
 	private QuestEngine() {
 	}
@@ -255,9 +251,8 @@ public class QuestEngine implements GameEngine {
 	 */
 	public void onLevelChanged(Player player) {
 		try {
-			TIntArrayList raceQuestsOnLevelUp = getOrCreateOnLevelUpForRace(player.getRace());
-			for (int index = 0; index < raceQuestsOnLevelUp.size(); index++) {
-				int questId = raceQuestsOnLevelUp.get(index);
+			List<Integer> raceQuestsOnLevelUp = getOrCreateOnLevelUpForRace(player.getRace());
+			for (int questId : raceQuestsOnLevelUp) {
 				QuestState qs = player.getQuestStateList().getQuestState(questId);
 				if (qs == null || qs.getStatus() != QuestStatus.COMPLETE) {
 					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
@@ -281,8 +276,8 @@ public class QuestEngine implements GameEngine {
 	public void onQuestCompleted(Player player, int questId) {
 		try {
 			QuestEnv env = new QuestEnv(null, player, questId);
-			for (int index = 0; index < questOnCompleted.size(); index++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questOnCompleted.get(index));
+			for (Integer onCompletedQuestId : questOnCompleted) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(onCompletedQuestId);
 				if (questHandler != null)
 					questHandler.onQuestCompletedEvent(env);
 			}
@@ -293,10 +288,10 @@ public class QuestEngine implements GameEngine {
 
 	public void onDie(QuestEnv env) {
 		try {
-			for (int index = 0; index < questOnDie.size(); index++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questOnDie.get(index));
+			for (int questId : questOnDie) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null) {
-					env.setQuestId(questOnDie.get(index));
+					env.setQuestId(questId);
 					questHandler.onDieEvent(env);
 				}
 			}
@@ -307,10 +302,10 @@ public class QuestEngine implements GameEngine {
 
 	public void onLogOut(QuestEnv env) {
 		try {
-			for (int index = 0; index < questOnLogOut.size(); index++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questOnLogOut.get(index));
+			for (int questId : questOnLogOut) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null) {
-					env.setQuestId(questOnLogOut.get(index));
+					env.setQuestId(questId);
 					questHandler.onLogOutEvent(env);
 				}
 			}
@@ -321,10 +316,10 @@ public class QuestEngine implements GameEngine {
 
 	public void onNpcReachTarget(QuestEnv env) {
 		try {
-			for (int index = 0; index < reachTarget.size(); index++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(reachTarget.get(index));
+			for (int questId : reachTarget) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null) {
-					env.setQuestId(reachTarget.get(index));
+					env.setQuestId(questId);
 					questHandler.onNpcReachTargetEvent(env);
 				}
 			}
@@ -335,10 +330,10 @@ public class QuestEngine implements GameEngine {
 
 	public void onNpcLostTarget(QuestEnv env) {
 		try {
-			for (int index = 0; index < lostTarget.size(); index++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(lostTarget.get(index));
+			for (int questId : lostTarget) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null) {
-					env.setQuestId(lostTarget.get(index));
+					env.setQuestId(questId);
 					questHandler.onNpcLostTargetEvent(env);
 				}
 			}
@@ -349,12 +344,12 @@ public class QuestEngine implements GameEngine {
 
 	public void onPassFlyingRing(QuestEnv env, String flyRing) {
 		try {
-			TIntArrayList questIds = questOnPassFlyingRings.get(flyRing);
+			List<Integer> questIds = questOnPassFlyingRings.get(flyRing);
 			if (questIds != null) {
-				for (int index = 0; index < questIds.size(); index++) {
-					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(index));
+				for (int questId : questIds) {
+					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 					if (questHandler != null) {
-						env.setQuestId(questIds.get(index));
+						env.setQuestId(questId);
 						questHandler.onPassFlyingRingEvent(env, flyRing);
 					}
 				}
@@ -366,8 +361,7 @@ public class QuestEngine implements GameEngine {
 
 	public void onEnterWorld(Player player) {
 		try {
-			for (int index = 0; index < questOnEnterWorld.size(); index++) {
-				int questId = questOnEnterWorld.get(index);
+			for (int questId : questOnEnterWorld) {
 				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null)
 					questHandler.onEnterWorldEvent(new QuestEnv(null, player, questId));
@@ -379,12 +373,12 @@ public class QuestEngine implements GameEngine {
 
 	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
 		try {
-			TIntArrayList questIds = questItemRelated.get(item.getItemId());
+			List<Integer> questIds = questItemRelated.get(item.getItemId());
 			if (questIds != null) {
-				for (int index = 0; index < questIds.size(); index++) {
-					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(index));
+				for (int questId : questIds) {
+					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 					if (questHandler != null) {
-						env.setQuestId(questIds.get(index));
+						env.setQuestId(questId);
 						HandlerResult result = questHandler.onItemUseEvent(env, item);
 						// allow other quests to process, the same item can be used in multiple quests
 						if (result != HandlerResult.UNKNOWN)
@@ -401,10 +395,10 @@ public class QuestEngine implements GameEngine {
 
 	public void onHouseItemUseEvent(QuestEnv env) {
 		try {
-			for (int index = 0; index < questHouseItems.size(); index++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questHouseItems.get(index));
+			for (Integer questHouseItem : questHouseItems) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questHouseItem);
 				if (questHandler != null) {
-					env.setQuestId(questHouseItems.get(index));
+					env.setQuestId(questHouseItem);
 					questHandler.onHouseItemUseEvent(env);
 				}
 			}
@@ -414,7 +408,7 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void onItemGet(Player player, int itemId) {
-		TIntArrayList questIds = questItems.get(itemId);
+		List<Integer> questIds = questItems.get(itemId);
 		if (questIds != null) {
 			for (int i = 0; i < questIds.size(); i++) {
 				int questId = questItems.get(itemId).get(i);
@@ -435,12 +429,12 @@ public class QuestEngine implements GameEngine {
 	public boolean onKillRanked(QuestEnv env, AbyssRankEnum playerRank) {
 		try {
 			if (playerRank != null) {
-				TIntArrayList questIds = questOnKillRanked.get(playerRank);
+				List<Integer> questIds = questOnKillRanked.get(playerRank);
 				if (questIds != null) {
-					for (int index = 0; index < questIds.size(); index++) {
-						AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(index));
+					for (int questId : questIds) {
+						AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 						if (questHandler != null) {
-							env.setQuestId(questIds.get(index));
+							env.setQuestId(questId);
 							questHandler.onKillRankedEvent(env);
 						}
 					}
@@ -455,12 +449,12 @@ public class QuestEngine implements GameEngine {
 
 	public boolean onKillInWorld(QuestEnv env, int worldId) {
 		try {
-			TIntArrayList questIds = questOnKillInWorld.get(worldId);
+			List<Integer> questIds = questOnKillInWorld.get(worldId);
 			if (questIds != null) {
-				for (int i = 0; i < questIds.size(); i++) {
-					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(i));
+				for (int questId : questIds) {
+					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 					if (questHandler != null) {
-						env.setQuestId(questIds.get(i));
+						env.setQuestId(questId);
 						questHandler.onKillInWorldEvent(env);
 					}
 				}
@@ -474,12 +468,12 @@ public class QuestEngine implements GameEngine {
 
 	public boolean onKillInZone(QuestEnv env, String zoneName) {
 		try {
-			TIntArrayList questIds = questOnKillInZone.get(zoneName);
+			List<Integer> questIds = questOnKillInZone.get(zoneName);
 			if (questIds != null) {
-				for (int i = 0; i < questIds.size(); i++) {
-					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(i));
+				for (int questId : questIds) {
+					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 					if (questHandler != null) {
-						env.setQuestId(questIds.get(i));
+						env.setQuestId(questId);
 						questHandler.onKillInZoneEvent(env);
 					}
 				}
@@ -493,12 +487,12 @@ public class QuestEngine implements GameEngine {
 
 	public boolean onEnterZone(QuestEnv env, ZoneName zoneName) {
 		try {
-			TIntArrayList questIds = questOnEnterZone.get(zoneName);
+			List<Integer> questIds = questOnEnterZone.get(zoneName);
 			if (questIds != null) {
-				for (int index = 0; index < questIds.size(); index++) {
-					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(index));
+				for (int questId : questIds) {
+					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 					if (questHandler != null) {
-						env.setQuestId(questIds.get(index));
+						env.setQuestId(questId);
 						questHandler.onEnterZoneEvent(env, zoneName);
 					}
 				}
@@ -512,12 +506,12 @@ public class QuestEngine implements GameEngine {
 
 	public boolean onLeaveZone(QuestEnv env, ZoneName zoneName) {
 		try {
-			TIntArrayList questIds = questOnLeaveZone.get(zoneName);
+			List<Integer> questIds = questOnLeaveZone.get(zoneName);
 			if (questIds != null) {
-				for (int i = 0; i < questIds.size(); i++) {
-					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(i));
+				for (int questId : questIds) {
+					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 					if (questHandler != null) {
-						env.setQuestId(questIds.get(i));
+						env.setQuestId(questId);
 						questHandler.onLeaveZoneEvent(env, zoneName);
 					}
 				}
@@ -531,12 +525,12 @@ public class QuestEngine implements GameEngine {
 
 	public boolean onMovieEnd(QuestEnv env, int movieId) {
 		try {
-			TIntArrayList questIds = questOnMovieEnd.get(movieId);
+			List<Integer> questIds = questOnMovieEnd.get(movieId);
 			if (questIds != null) {
-				for (int index = 0; index < questIds.size(); index++) {
-					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(index));
+				for (int questId : questIds) {
+					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 					if (questHandler != null) {
-						env.setQuestId(questIds.get(index));
+						env.setQuestId(questId);
 						if (questHandler.onMovieEndEvent(env, movieId))
 							return true;
 					}
@@ -550,10 +544,10 @@ public class QuestEngine implements GameEngine {
 
 	public void onQuestTimerEnd(QuestEnv env) {
 		try {
-			for (int index = 0; index < questOnTimerEnd.size(); index++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questOnTimerEnd.get(index));
+			for (int questId : questOnTimerEnd) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null) {
-					env.setQuestId(questOnTimerEnd.get(index));
+					env.setQuestId(questId);
 					questHandler.onQuestTimerEndEvent(env);
 				}
 			}
@@ -564,10 +558,10 @@ public class QuestEngine implements GameEngine {
 
 	public void onInvisibleTimerEnd(QuestEnv env) {
 		try {
-			for (int index = 0; index < onInvisibleTimerEnd.size(); index++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(onInvisibleTimerEnd.get(index));
+			for (int questId : onInvisibleTimerEnd) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null) {
-					env.setQuestId(onInvisibleTimerEnd.get(index));
+					env.setQuestId(questId);
 					questHandler.onInvisibleTimerEndEvent(env);
 				}
 			}
@@ -578,12 +572,12 @@ public class QuestEngine implements GameEngine {
 
 	public boolean onUseSkill(QuestEnv env, int skillId) {
 		try {
-			TIntArrayList questIds = questOnUseSkill.get(skillId);
+			List<Integer> questIds = questOnUseSkill.get(skillId);
 			if (questIds != null) {
-				for (int i = 0; i < questIds.size(); i++) {
-					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(i));
+				for (int questId : questIds) {
+					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 					if (questHandler != null) {
-						env.setQuestId(questIds.get(i));
+						env.setQuestId(questId);
 						questHandler.onUseSkillEvent(env, skillId);
 					}
 				}
@@ -596,8 +590,8 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void onFailCraft(QuestEnv env, int itemId) {
-		if (questOnFailCraft.containsKey(itemId)) {
-			int questId = questOnFailCraft.get(itemId);
+		Integer questId = questOnFailCraft.get(itemId);
+		if (questId != null) {
 			AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 			if (questHandler != null) {
 				if (env.getPlayer().getInventory().getItemCountByItemId(itemId) == 0) {
@@ -609,40 +603,39 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void onEquipItem(QuestEnv env, int itemId) {
-		TIntArrayList questIds = questOnEquipItem.get(itemId);
+		List<Integer> questIds = questOnEquipItem.get(itemId);
 		if (questIds != null) {
-			for (int i = 0; i < questIds.size(); i++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(i));
+			for (int questId : questIds) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null) {
-					env.setQuestId(questIds.get(i));
+					env.setQuestId(questId);
 					questHandler.onEquipItemEvent(env, itemId);
 				}
 			}
 		}
 	}
 
-	public boolean onCanAct(final QuestEnv env, int templateId, final QuestActionType questActionType, final Object... objects) {
-		TIntArrayList questIds = questCanAct.get(templateId);
+	public boolean onCanAct(QuestEnv env, int templateId, QuestActionType questActionType, Object... objects) {
+		List<Integer> questIds = questCanAct.get(templateId);
 		if (questIds != null) {
-			return !questIds.forEach(questId -> {
+			for (int questId : questIds) {
 				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null) {
 					env.setQuestId(questId);
 					if (questHandler.onCanAct(env, questActionType, objects))
-						return false; // Abort for
+						return true;
 				}
-				return true;
-			});
+			}
 		}
 		return false;
 	}
 
 	public void onDredgionReward(QuestEnv env) {
 		try {
-			for (int index = 0; index < questOnDredgionReward.size(); index++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questOnDredgionReward.get(index));
+			for (int questId : questOnDredgionReward) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null) {
-					env.setQuestId(questOnDredgionReward.get(index));
+					env.setQuestId(questId);
 					questHandler.onDredgionRewardEvent(env);
 				}
 			}
@@ -653,12 +646,12 @@ public class QuestEngine implements GameEngine {
 
 	public HandlerResult onBonusApplyEvent(QuestEnv env, BonusType bonusType, List<QuestItems> rewardItems) {
 		try {
-			TIntArrayList questIds = questOnBonusApply.get(bonusType);
+			List<Integer> questIds = questOnBonusApply.get(bonusType);
 			if (questIds != null) {
-				for (int index = 0; index < questIds.size(); index++) {
-					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questIds.get(index));
+				for (int questId : questIds) {
+					AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 					if (questHandler != null) {
-						env.setQuestId(questIds.get(index));
+						env.setQuestId(questId);
 						return questHandler.onBonusApplyEvent(env, bonusType, rewardItems);
 					}
 				}
@@ -716,10 +709,10 @@ public class QuestEngine implements GameEngine {
 
 	public void onEnterWindStream(QuestEnv env, int loc) {
 		try {
-			for (int index = 0; index < questOnEnterWindStream.size(); index++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questOnEnterWindStream.get(index));
+			for (int questId : questOnEnterWindStream) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null) {
-					env.setQuestId(questOnEnterWindStream.get(index));
+					env.setQuestId(questId);
 					questHandler.onEnterWindStreamEvent(env, loc);
 				}
 			}
@@ -730,10 +723,10 @@ public class QuestEngine implements GameEngine {
 
 	public void rideAction(QuestEnv env, int itemId) {
 		try {
-			for (int index = 0; index < questRideAction.size(); index++) {
-				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questRideAction.get(index));
+			for (int questId : questRideAction) {
+				AbstractQuestHandler questHandler = getQuestHandlerByQuestId(questId);
 				if (questHandler != null) {
-					env.setQuestId(questRideAction.get(index));
+					env.setQuestId(questId);
 					questHandler.rideAction(env, itemId);
 				}
 			}
@@ -757,12 +750,7 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void registerQuestItem(int itemId, int questId) {
-		TIntArrayList itemRelatedQuests = questItemRelated.get(itemId);
-		if (itemRelatedQuests == null) {
-			itemRelatedQuests = new TIntArrayList();
-			questItemRelated.put(itemId, itemRelatedQuests);
-		}
-		itemRelatedQuests.add(questId);
+		questItemRelated.computeIfAbsent(itemId, k -> new ArrayList<>()).add(questId);
 	}
 
 	public boolean isRegisteredQuestItem(int itemId) {
@@ -775,18 +763,13 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void registerOnGetItem(int itemId, int questId) {
-		TIntArrayList questIds = questItems.get(itemId);
-		if (questIds == null) {
-			questIds = new TIntArrayList();
-			questItems.put(itemId, questIds);
-		}
-		questIds.add(questId);
+		questItems.computeIfAbsent(itemId, k -> new ArrayList<>()).add(questId);
 	}
 
 	public void registerOnLevelChanged(int questId) {
 		QuestTemplate template = DataManager.QUEST_DATA.getQuestById(questId);
 		Race racePermitted = template.getRacePermitted();
-		TIntArrayList quests;
+		List<Integer> quests;
 		if (racePermitted == null) {
 			quests = getOrCreateOnLevelUpForRace(Race.ASMODIANS);
 			if (!quests.contains(questId))
@@ -801,13 +784,8 @@ public class QuestEngine implements GameEngine {
 		}
 	}
 
-	private TIntArrayList getOrCreateOnLevelUpForRace(Race race) {
-		TIntArrayList quests = questOnLevelUp.get(race);
-		if (quests == null) {
-			quests = new TIntArrayList();
-			questOnLevelUp.put(race, quests);
-		}
-		return quests;
+	private List<Integer> getOrCreateOnLevelUpForRace(Race race) {
+		return questOnLevelUp.computeIfAbsent(race, k -> new ArrayList<>());
 	}
 
 	public void registerOnQuestCompleted(int questId) {
@@ -831,70 +809,35 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void registerOnEnterZone(ZoneName zoneName, int questId) {
-		TIntArrayList questIds = questOnEnterZone.get(zoneName);
-		if (questIds == null) {
-			questIds = new TIntArrayList();
-			questOnEnterZone.put(zoneName, questIds);
-		}
-		questIds.add(questId);
+		questOnEnterZone.computeIfAbsent(zoneName, k -> new ArrayList<>()).add(questId);
 	}
 
 	public void registerOnKillInZone(String zone, int questId) {
-		TIntArrayList questIds = questOnKillInZone.get(zone);
-		if (questIds == null) {
-			questIds = new TIntArrayList();
-			questOnKillInZone.put(zone, questIds);
-		}
-		questIds.add(questId);
+		questOnKillInZone.computeIfAbsent(zone, k -> new ArrayList<>()).add(questId);
 	}
 
 	public void registerOnLeaveZone(ZoneName zoneName, int questId) {
-		TIntArrayList questIds = questOnLeaveZone.get(zoneName);
-		if (questIds == null) {
-			questIds = new TIntArrayList();
-			questOnLeaveZone.put(zoneName, questIds);
-		}
-		questIds.add(questId);
+		questOnLeaveZone.computeIfAbsent(zoneName, k -> new ArrayList<>()).add(questId);
 	}
 
 	public void registerOnKillRanked(AbyssRankEnum playerRank, int questId) {
 		for (AbyssRankEnum rank : AbyssRankEnum.values()) {
 			if (rank.getId() >= playerRank.getId()) {
-				TIntArrayList onKillRankedQuests = questOnKillRanked.get(rank);
-				if (onKillRankedQuests == null) {
-					onKillRankedQuests = new TIntArrayList();
-					questOnKillRanked.put(rank, onKillRankedQuests);
-				}
-				onKillRankedQuests.add(questId);
+				questOnKillRanked.computeIfAbsent(rank, k -> new ArrayList<>()).add(questId);
 			}
 		}
 	}
 
 	public void registerOnKillInWorld(int worldId, int questId) {
-		TIntArrayList questIds = questOnKillInWorld.get(worldId);
-		if (questIds == null) {
-			questIds = new TIntArrayList();
-			questOnKillInWorld.put(worldId, questIds);
-		}
-		questIds.add(questId);
+		questOnKillInWorld.computeIfAbsent(worldId, k -> new ArrayList<>()).add(questId);
 	}
 
 	public void registerOnPassFlyingRings(String flyingRing, int questId) {
-		TIntArrayList questIds = questOnPassFlyingRings.get(flyingRing);
-		if (questIds == null) {
-			questIds = new TIntArrayList();
-			questOnPassFlyingRings.put(flyingRing, questIds);
-		}
-		questIds.add(questId);
+		questOnPassFlyingRings.computeIfAbsent(flyingRing, k -> new ArrayList<>()).add(questId);
 	}
 
 	public void registerOnMovieEndQuest(int movieId, int questId) {
-		TIntArrayList questIds = questOnMovieEnd.get(movieId);
-		if (questIds == null) {
-			questIds = new TIntArrayList();
-			questOnMovieEnd.put(movieId, questIds);
-		}
-		questIds.add(questId);
+		questOnMovieEnd.computeIfAbsent(movieId, k -> new ArrayList<>()).add(questId);
 	}
 
 	public void registerOnQuestTimerEnd(int questId) {
@@ -908,12 +851,7 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void registerQuestSkill(int skillId, int questId) {
-		TIntArrayList questIds = questOnUseSkill.get(skillId);
-		if (questIds == null) {
-			questIds = new TIntArrayList();
-			questOnUseSkill.put(skillId, questIds);
-		}
-		questIds.add(questId);
+		questOnUseSkill.computeIfAbsent(skillId, k -> new ArrayList<>()).add(questId);
 	}
 
 	public void registerOnFailCraft(int itemId, int questId) {
@@ -921,12 +859,7 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void registerOnEquipItem(int itemId, int questId) {
-		TIntArrayList questIds = questOnEquipItem.get(itemId);
-		if (questIds == null) {
-			questIds = new TIntArrayList();
-			questOnEquipItem.put(itemId, questIds);
-		}
-		questIds.add(questId);
+		questOnEquipItem.computeIfAbsent(itemId, k -> new ArrayList<>()).add(questId);
 	}
 
 	public boolean registerCanAct(int questId, int npcId) {
@@ -936,12 +869,7 @@ public class QuestEngine implements GameEngine {
 			return false;
 		}
 		if ("quest_use_item".equals(template.getAiName())) {
-			TIntArrayList questNpcs = questCanAct.get(npcId);
-			if (questNpcs == null) {
-				questNpcs = new TIntArrayList();
-				questCanAct.put(npcId, questNpcs);
-			}
-			questNpcs.add(questId);
+			questCanAct.computeIfAbsent(npcId, k -> new ArrayList<>()).add(questId);
 			return true;
 		}
 		return false;
@@ -953,12 +881,7 @@ public class QuestEngine implements GameEngine {
 	}
 
 	public void registerOnBonusApply(int questId, BonusType bonusType) {
-		TIntArrayList onBonusApplyQuests = questOnBonusApply.get(bonusType);
-		if (onBonusApplyQuests == null) {
-			onBonusApplyQuests = new TIntArrayList();
-			questOnBonusApply.put(bonusType, onBonusApplyQuests);
-		}
-		onBonusApplyQuests.add(questId);
+		questOnBonusApply.computeIfAbsent(bonusType, k -> new ArrayList<>()).add(questId);
 	}
 
 	public void registerAddOnReachTargetEvent(int questId) {
@@ -1029,23 +952,23 @@ public class QuestEngine implements GameEngine {
 			if (nft.getNpcIds() == null || nft.getNpcIds().stream().anyMatch(this::existsSpawnData))
 				factionIds.add(nft.getId());
 		}
-		for (AbstractQuestHandler qh : questHandlers.valueCollection()) {
+		for (AbstractQuestHandler qh : questHandlers.values()) {
 			QuestTemplate qt = DataManager.QUEST_DATA.getQuestById(qh.getQuestId());
 			if (qt.getMinlevelPermitted() == 99 || qt.getNpcFactionId() > 0 && !factionIds.contains(qt.getNpcFactionId()))
 				unobtainableQuests.add(qh.getQuestId()); // players can still have these quests from before an update
 		}
 		Map<String, String> missingSpawnsByQuests = new LinkedHashMap<>();
-		for (int npcId : Arrays.stream(questNpcs.keys()).sorted().toArray()) {
+		questNpcs.forEach((npcId, npc) -> {
 			if (!existsSpawnData(npcId)) { // if the npc doesn't appear in any spawn template (world, instance, base, siege, temporary, event, ...)
-				Set<Integer> questIds = getQuestNpc(npcId).findAllRegisteredQuestIds();
+				Set<Integer> questIds = npc.findAllRegisteredQuestIds();
 				if (ignoreEventQuests && questIds.stream().allMatch(id -> id >= 80000))
-					continue;
+					return;
 				if (questIds.stream().allMatch(id -> unobtainableQuests.contains(id) || existsSpawnDataForAnyAlternativeNpc(id, npcId)))
-					continue; // don't log unobtainable quests or if alternative npcs appear in spawn data (many quests support outdated + current npcs)
+					return; // don't log unobtainable quests or if alternative npcs appear in spawn data (many quests support outdated + current npcs)
 				missingSpawnsByQuests.compute(questIds.stream().sorted().map(String::valueOf).collect(Collectors.joining(", ")),
 					(k, npcIds) -> npcIds == null ? String.valueOf(npcId) : npcIds + '/' + npcId);
 			}
-		}
+		});
 		if (missingSpawnsByQuests.isEmpty())
 			log.info("Quest handler analysis finished without errors!");
 		else

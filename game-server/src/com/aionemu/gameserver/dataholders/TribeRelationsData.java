@@ -1,17 +1,14 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.templates.tribe.Tribe;
-
-import gnu.trove.map.hash.THashMap;
 
 /**
  * @author ATracer
@@ -21,9 +18,10 @@ import gnu.trove.map.hash.THashMap;
 public class TribeRelationsData {
 
 	@XmlElement(name = "tribe", required = true)
-	protected List<Tribe> tribeList;
+	private List<Tribe> tribeList;
 
-	protected THashMap<TribeClass, Tribe> tribeNameMap = new THashMap<>();
+	@XmlTransient
+	private final Map<TribeClass, Tribe> tribeNameMap = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (Tribe tribe : tribeList) {
@@ -32,9 +30,6 @@ public class TribeRelationsData {
 		tribeList = null;
 	}
 
-	/**
-	 * @return tribeNameMap.size()
-	 */
 	public int size() {
 		return tribeNameMap.size();
 	}

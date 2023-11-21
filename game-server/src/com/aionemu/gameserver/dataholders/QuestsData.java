@@ -1,21 +1,14 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.List;
+import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.services.QuestService;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author MrPoke
@@ -26,8 +19,11 @@ public class QuestsData {
 
 	@XmlElement(name = "quest", required = true)
 	private List<QuestTemplate> questsData;
-	private TIntObjectHashMap<QuestTemplate> questTemplates = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<List<QuestTemplate>> sortedByFactionId = new TIntObjectHashMap<>();
+
+	@XmlTransient
+	private final Map<Integer, QuestTemplate> questTemplates = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, List<QuestTemplate>> sortedByFactionId = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		questTemplates.clear();
@@ -69,7 +65,7 @@ public class QuestsData {
 	}
 
 	public Collection<QuestTemplate> getQuestTemplates() {
-		return questTemplates.valueCollection();
+		return questTemplates.values();
 	}
 
 }

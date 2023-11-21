@@ -5,12 +5,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,8 +14,6 @@ import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.model.templates.portal.PortalScroll;
 import com.aionemu.gameserver.model.templates.portal.PortalUse;
 import com.aionemu.gameserver.services.teleport.PortalService;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author xTz
@@ -38,11 +31,11 @@ public class Portal2Data {
 	protected List<PortalScroll> portalScroll;
 
 	@XmlTransient
-	private TIntObjectHashMap<PortalUse> portalUses = new TIntObjectHashMap<>();
+	private final Map<Integer, PortalUse> portalUses = new HashMap<>();
 	@XmlTransient
-	private TIntObjectHashMap<PortalDialog> portalDialogs = new TIntObjectHashMap<>();
+	private final Map<Integer, PortalDialog> portalDialogs = new HashMap<>();
 	@XmlTransient
-	private Map<String, PortalScroll> portalScrolls = new HashMap<>();
+	private final Map<String, PortalScroll> portalScrolls = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller unmarshaller, Object parent) {
 		if (portalUse != null) {

@@ -1,14 +1,15 @@
 package com.aionemu.gameserver.model.templates.towns;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author ViAl
@@ -21,25 +22,17 @@ public class TownSpawnMap {
 	@XmlElement(name = "town_spawn")
 	private List<TownSpawn> townSpawns;
 
-	private TIntObjectHashMap<TownSpawn> townSpawnsData = new TIntObjectHashMap<>();
+	@XmlTransient
+	private final Map<Integer, TownSpawn> townSpawnsData = new HashMap<>();
 
-	/**
-	 * @param u
-	 * @param parent
-	 */
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		townSpawnsData.clear();
-
 		for (TownSpawn town : townSpawns) {
 			townSpawnsData.put(town.getTownId(), town);
 		}
-		townSpawns.clear();
 		townSpawns = null;
 	}
 
-	/**
-	 * @return the mapId
-	 */
 	public int getMapId() {
 		return mapId;
 	}
@@ -49,7 +42,7 @@ public class TownSpawnMap {
 	}
 
 	public Collection<TownSpawn> getTownSpawns() {
-		return townSpawnsData.valueCollection();
+		return townSpawnsData.values();
 	}
 
 }

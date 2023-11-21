@@ -1,16 +1,14 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.factions.NpcFactionTemplate;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author vlog
@@ -21,8 +19,11 @@ public class NpcFactionsData {
 
 	@XmlElement(name = "npc_faction", required = true)
 	protected List<NpcFactionTemplate> npcFactionsData;
-	private TIntObjectHashMap<NpcFactionTemplate> factionsById = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<NpcFactionTemplate> factionsByNpcId = new TIntObjectHashMap<>();
+
+	@XmlTransient
+	private final Map<Integer, NpcFactionTemplate> factionsById = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, NpcFactionTemplate> factionsByNpcId = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		factionsById.clear();
@@ -33,6 +34,7 @@ public class NpcFactionsData {
 					factionsByNpcId.put(npcId, template);
 			}
 		}
+		npcFactionsData = null;
 	}
 
 	public NpcFactionTemplate getNpcFactionById(int id) {
@@ -43,11 +45,11 @@ public class NpcFactionsData {
 		return factionsByNpcId.get(id);
 	}
 
-	public List<NpcFactionTemplate> getNpcFactionsData() {
-		return npcFactionsData;
+	public Collection<NpcFactionTemplate> getNpcFactionsData() {
+		return factionsById.values();
 	}
 
 	public int size() {
-		return npcFactionsData.size();
+		return factionsById.size();
 	}
 }

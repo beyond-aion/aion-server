@@ -29,8 +29,6 @@ import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.world.zone.handler.*;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 /**
  * @author ATracer
  * @modified antness
@@ -41,7 +39,7 @@ public final class ZoneService implements GameEngine {
 	private ScriptManager scriptManager = new ScriptManager();
 	private Map<ZoneName, Class<? extends ZoneHandler>> zoneHandlers = new HashMap<>();
 	private Map<ZoneName, ZoneHandler> collidableHandlers = new HashMap<>();
-	private TIntObjectHashMap<List<ZoneInfo>> zoneByMapIdMap = DataManager.ZONE_DATA.getZones();
+	private Map<Integer, List<ZoneInfo>> zoneByMapIdMap = DataManager.ZONE_DATA.getZones();
 
 	private ZoneService() {
 	}

@@ -1,16 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.StorageExpansionTemplate;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * This is for the Cube Expanders.
@@ -23,7 +20,9 @@ public class CubeExpandData {
 
 	@XmlElement(name = "expansion_npc")
 	private List<StorageExpansionTemplate> expansionTemplates;
-	private TIntObjectHashMap<StorageExpansionTemplate> expansionTemplatesByNpcId = new TIntObjectHashMap<>();
+
+	@XmlTransient
+	private final Map<Integer, StorageExpansionTemplate> expansionTemplatesByNpcId = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (StorageExpansionTemplate expansionTemplate : expansionTemplates) {

@@ -191,8 +191,7 @@ public class PetService {
 			AuditLogger.log(pet.getMaster(), "tried to set buff item " + itemId + " but " + pet + " doesn't support buffing");
 			return false;
 		}
-		short dopeId = (short) petFunction.getId();
-		PetDopingEntry dope = DataManager.PET_DOPING_DATA.getDopingTemplate(dopeId);
+		PetDopingEntry dope = DataManager.PET_DOPING_DATA.getDopingTemplate(petFunction.getId());
 		if (slot == 0 && !dope.isUseFood()) {
 			AuditLogger.log(pet.getMaster(), "tried to set item " + itemId + " in pet buff food slot but " + pet + " doesn't support buffing with food");
 			return false;

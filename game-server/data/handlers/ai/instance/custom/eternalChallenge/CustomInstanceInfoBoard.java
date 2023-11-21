@@ -1,6 +1,7 @@
 package ai.instance.custom.eternalChallenge;
 
 import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 import com.aionemu.gameserver.ai.AIName;
@@ -16,7 +17,7 @@ import ai.GeneralNpcAI;
 @AIName("custom_instance_info_board")
 public class CustomInstanceInfoBoard extends GeneralNpcAI {
 
-	private static final HashMap<Integer, Long> lastLeaderboardOpenTime = new HashMap<>();
+	private static final Map<Integer, Long> lastLeaderboardOpenTime = new HashMap<>();
 
 	public CustomInstanceInfoBoard(Npc owner) {
 		super(owner);

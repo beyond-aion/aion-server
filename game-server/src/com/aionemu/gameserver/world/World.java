@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.world;
 
-import java.util.Collection;
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
@@ -30,8 +27,6 @@ import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 /**
  * World object for storing and spawning, despawning etc players and other in-game objects. It also manage WorldMaps and instances.
  * 
@@ -54,7 +49,7 @@ public class World {
 	/**
 	 * Container with all SiegeNpcs in the world [SiegeNpcs,SiegeProtectors etc]
 	 */
-	private final TIntObjectHashMap<Collection<SiegeNpc>> localSiegeNpcs = new TIntObjectHashMap<>();
+	private final Map<Integer, Collection<SiegeNpc>> localSiegeNpcs = new HashMap<>();
 
 	/**
 	 * Container with all Npcs related to base spawns
@@ -69,7 +64,7 @@ public class World {
 	/**
 	 * World maps supported by server.
 	 */
-	private final TIntObjectHashMap<WorldMap> worldMaps = new TIntObjectHashMap<>();
+	private final Map<Integer, WorldMap> worldMaps = new HashMap<>();
 
 	private World() {
 		DataManager.WORLD_MAPS_DATA.forEachParalllel(template -> {

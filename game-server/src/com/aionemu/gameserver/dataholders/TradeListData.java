@@ -1,14 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.Collection;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import org.slf4j.LoggerFactory;
 
@@ -16,8 +15,6 @@ import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate} instances.<br>
@@ -39,24 +36,25 @@ public class TradeListData {
 	@XmlElement(name = "purchase_template")
 	private List<TradeListTemplate> plist;
 
-	/** A map containing all trade list templates */
-	private TIntObjectHashMap<TradeListTemplate> npctlistData = new TIntObjectHashMap<>();
+	@XmlTransient
+	private final Map<Integer, TradeListTemplate> npctlistData = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, TradeListTemplate> npcTradeInlistData = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, TradeListTemplate> npcPurchaseTemplateData = new HashMap<>();
 
-	private TIntObjectHashMap<TradeListTemplate> npcTradeInlistData = new TIntObjectHashMap<>();
-
-	private TIntObjectHashMap<TradeListTemplate> npcPurchaseTemplateData = new TIntObjectHashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (TradeListTemplate npc : tlist) {
 			npctlistData.put(npc.getNpcId(), npc);
 		}
-
 		for (TradeListTemplate npc : tInlist) {
 			npcTradeInlistData.put(npc.getNpcId(), npc);
 		}
 		for (TradeListTemplate npc : plist) {
 			npcPurchaseTemplateData.put(npc.getNpcId(), npc);
 		}
+		tlist = tInlist = plist = null;
 	}
 
 	public int size() {
@@ -82,10 +80,7 @@ public class TradeListData {
 		return npcPurchaseTemplateData.get(id);
 	}
 
-	/**
-	 * @return id of NPC.
-	 */
-	public TIntObjectHashMap<TradeListTemplate> getTradeListTemplate() {
+	public Map<Integer, TradeListTemplate> getTradeListTemplate() {
 		return npctlistData;
 	}
 

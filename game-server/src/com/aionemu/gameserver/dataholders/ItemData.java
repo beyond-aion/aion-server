@@ -11,8 +11,6 @@ import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.restriction.ItemCleanupTemplate;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 /**
  * @author Luno
  */
@@ -24,15 +22,13 @@ public class ItemData {
 	private List<ItemTemplate> its;
 
 	@XmlTransient
-	private TIntObjectHashMap<ItemTemplate> items;
-
+	private final Map<Integer, ItemTemplate> items = new HashMap<>();
 	@XmlTransient
-	private Map<Integer, List<ItemTemplate>> manastones = new HashMap<>();
+	private final Map<Integer, List<ItemTemplate>> manastones = new HashMap<>();
 	@XmlTransient
-	private Map<Integer, List<ItemTemplate>> ancientManastones = new HashMap<>();
+	private final Map<Integer, List<ItemTemplate>> ancientManastones = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		items = new TIntObjectHashMap<>();
 		for (ItemTemplate it : its) {
 			items.put(it.getTemplateId(), it);
 			if (it.getItemGroup() == ItemGroup.MANASTONE) {
@@ -73,7 +69,7 @@ public class ItemData {
 
 	public void cleanup() {
 		for (ItemCleanupTemplate ict : DataManager.ITEM_CLEAN_UP.getList()) {
-			ItemTemplate template = items.get(ict.getId());
+			ItemTemplate template = getItemTemplate(ict.getId());
 			applyCleanup(template, ict.resultTrade(), ItemMask.TRADEABLE);
 			applyCleanup(template, ict.resultSell(), ItemMask.SELLABLE);
 			applyCleanup(template, ict.resultWH(), ItemMask.STORABLE_IN_WH);
@@ -83,15 +79,9 @@ public class ItemData {
 	}
 
 	private void applyCleanup(ItemTemplate item, byte result, int mask) {
-		if (result != -1) {
-			switch (result) {
-				case 1:
-					item.modifyMask(true, mask);
-					break;
-				case 0:
-					item.modifyMask(false, mask);
-					break;
-			}
+		switch (result) {
+			case 1 -> item.modifyMask(true, mask);
+			case 0 -> item.modifyMask(false, mask);
 		}
 	}
 
@@ -100,7 +90,7 @@ public class ItemData {
 	}
 
 	public Collection<ItemTemplate> getItemTemplates() {
-		return items.valueCollection();
+		return items.values();
 	}
 
 	public int size() {

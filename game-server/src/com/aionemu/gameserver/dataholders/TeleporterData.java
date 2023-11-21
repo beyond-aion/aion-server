@@ -1,18 +1,15 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * This is a container holding and serving all {@link NpcTemplate} instances.<br>
@@ -28,8 +25,8 @@ public class TeleporterData {
 	@XmlElement(name = "teleporter_template")
 	private List<TeleporterTemplate> templates;
 
-	/** A map containing all trade list templates */
-	private TIntObjectHashMap<TeleporterTemplate> teleporterTemplates = new TIntObjectHashMap<>();
+	@XmlTransient
+	private final Map<Integer, TeleporterTemplate> teleporterTemplates = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (TeleporterTemplate template : templates) {
@@ -43,7 +40,7 @@ public class TeleporterData {
 	}
 
 	public TeleporterTemplate getTeleporterTemplateByNpcId(int npcId) {
-		for (TeleporterTemplate template : teleporterTemplates.valueCollection()) {
+		for (TeleporterTemplate template : teleporterTemplates.values()) {
 			if (template.containNpc(npcId)) {
 				return template;
 			}

@@ -1,17 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.pet.PetDopingEntry;
-
-import gnu.trove.map.hash.TShortObjectHashMap;
 
 /**
  * @author Rolandas
@@ -24,13 +20,11 @@ public class PetDopingData {
 	private List<PetDopingEntry> list;
 
 	@XmlTransient
-	private TShortObjectHashMap<PetDopingEntry> dopingsById = new TShortObjectHashMap<>();
+	private final Map<Integer, PetDopingEntry> dopingsById = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (PetDopingEntry dope : list)
 			dopingsById.put(dope.getId(), dope);
-
-		list.clear();
 		list = null;
 	}
 
@@ -38,7 +32,7 @@ public class PetDopingData {
 		return dopingsById.size();
 	}
 
-	public PetDopingEntry getDopingTemplate(short id) {
+	public PetDopingEntry getDopingTemplate(int id) {
 		return dopingsById.get(id);
 	}
 

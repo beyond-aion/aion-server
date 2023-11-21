@@ -2,7 +2,9 @@ package com.aionemu.gameserver.services.instance;
 
 import static com.aionemu.gameserver.configs.main.AutoGroupConfig.*;
 
+import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.Future;
 
@@ -22,8 +24,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
-
 /**
  * @author ViAl, Sykra, Estrayl
  */
@@ -32,7 +32,7 @@ public class PeriodicInstanceManager {
 	private static final Logger log = LoggerFactory.getLogger(PeriodicInstanceManager.class);
 	private static final PeriodicInstanceManager INSTANCE = new PeriodicInstanceManager();
 	private final Set<Integer> openedRegistrations = new HashSet<>();
-	private final TIntObjectHashMap<Future<?>> registrationCloseTasksByMaskId = new TIntObjectHashMap<>();
+	private final Map<Integer, Future<?>> registrationCloseTasksByMaskId = new HashMap<>();
 
 	public static PeriodicInstanceManager getInstance() {
 		return INSTANCE;

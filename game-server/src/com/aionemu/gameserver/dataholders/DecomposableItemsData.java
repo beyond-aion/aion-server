@@ -1,19 +1,16 @@
 package com.aionemu.gameserver.dataholders;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.item.DecomposableItemInfo;
 import com.aionemu.gameserver.model.templates.item.ExtractedItemsCollection;
 import com.aionemu.gameserver.model.templates.item.ResultedItem;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
 
 /**
  * @author antness
@@ -24,8 +21,11 @@ public class DecomposableItemsData {
 
 	@XmlElement(name = "decomposable")
 	private List<DecomposableItemInfo> decomposableItemsTemplates;
-	private TIntObjectHashMap<List<ExtractedItemsCollection>> decomposableItemsInfo = new TIntObjectHashMap<>();
-	private TIntObjectHashMap<List<ResultedItem>> selectableDecomposables = new TIntObjectHashMap<>();
+
+	@XmlTransient
+	private final Map<Integer, List<ExtractedItemsCollection>> decomposableItemsInfo = new HashMap<>();
+	@XmlTransient
+	private final Map<Integer, List<ResultedItem>> selectableDecomposables = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		decomposableItemsInfo.clear();

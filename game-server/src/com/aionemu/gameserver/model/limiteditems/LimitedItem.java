@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.limiteditems;
 
-import gnu.trove.map.hash.TIntObjectHashMap;
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * @author xTz
@@ -13,7 +14,7 @@ public class LimitedItem {
 	private int buyLimit;
 	private int defaultSellLimit;
 	private String salesTime;
-	private TIntObjectHashMap<Integer> buyCounts = new TIntObjectHashMap<>();
+	private Map<Integer, Integer> buyCounts = new HashMap<>();
 
 	public LimitedItem(int itemId, int sellLimit, int buyLimit, String salesTime) {
 		this.itemId = itemId;
@@ -41,7 +42,7 @@ public class LimitedItem {
 	}
 
 	public int getBuyCount(int playerObjectId) {
-		return buyCounts.containsKey(playerObjectId) ? buyCounts.get(playerObjectId) : 0;
+		return buyCounts.getOrDefault(playerObjectId, 0);
 	}
 
 	/**

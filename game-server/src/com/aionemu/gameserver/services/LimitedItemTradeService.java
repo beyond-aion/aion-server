@@ -1,15 +1,14 @@
 package com.aionemu.gameserver.services;
 
+import java.util.HashMap;
 import java.util.List;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.dataholders.GoodsListData;
-import com.aionemu.gameserver.dataholders.TradeListData;
 import com.aionemu.gameserver.model.limiteditems.LimitedItem;
 import com.aionemu.gameserver.model.limiteditems.LimitedTradeNpc;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
@@ -21,40 +20,26 @@ import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeT
 public class LimitedItemTradeService {
 
 	private static final Logger log = LoggerFactory.getLogger(LimitedItemTradeService.class);
-	private GoodsListData goodsListData = DataManager.GOODSLIST_DATA;
-	private TradeListData tradeListData = DataManager.TRADE_LIST_DATA;
-	private ConcurrentHashMap<Integer, LimitedTradeNpc> limitedTradeNpcs = new ConcurrentHashMap<>();
+	private final Map<Integer, LimitedTradeNpc> limitedTradeNpcs = new HashMap<>();
 
 	public void start() {
-		for (int npcId : tradeListData.getTradeListTemplate().keys()) {
-			for (TradeTab list : tradeListData.getTradeListTemplate(npcId).getTradeTablist()) {
-				GoodsList goodsList = goodsListData.getGoodsListById(list.getId());
+		DataManager.TRADE_LIST_DATA.getTradeListTemplate().forEach((npcId, npc) -> {
+			for (TradeTab list : npc.getTradeTablist()) {
+				GoodsList goodsList = DataManager.GOODSLIST_DATA.getGoodsListById(list.getId());
 				if (goodsList == null) {
 					log.warn("No goodslist for tradelist of npc " + npcId);
 					continue;
 				}
 				List<LimitedItem> limitedItems = goodsList.getLimitedItems();
-				if (limitedItems.isEmpty()) {
-					continue;
-				}
-				if (!limitedTradeNpcs.containsKey(npcId)) {
-					limitedTradeNpcs.putIfAbsent(npcId, new LimitedTradeNpc(limitedItems));
-				} else {
-					limitedTradeNpcs.get(npcId).putLimitedItems(limitedItems);
+				if (!limitedItems.isEmpty()) {
+					limitedTradeNpcs.computeIfAbsent(npcId, k -> new LimitedTradeNpc()).addLimitedItems(limitedItems);
 				}
 			}
-		}
+		});
 
 		for (LimitedTradeNpc limitedTradeNpc : limitedTradeNpcs.values()) {
 			for (final LimitedItem limitedItem : limitedTradeNpc.getLimitedItems()) {
-				CronService.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						limitedItem.setToDefault();
-					}
-
-				}, limitedItem.getSalesTime());
+				CronService.getInstance().schedule(limitedItem::setToDefault, limitedItem.getSalesTime());
 			}
 		}
 		log.info("Scheduled Limited Items based on cron expression size: " + limitedTradeNpcs.size());

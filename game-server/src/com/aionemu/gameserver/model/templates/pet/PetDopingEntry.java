@@ -13,7 +13,7 @@ import javax.xml.bind.annotation.XmlType;
 public class PetDopingEntry {
 
 	@XmlAttribute(name = "id", required = true)
-	private short id;
+	private int id;
 
 	@XmlAttribute(name = "usedrink", required = true)
 	private boolean usedrink;
@@ -24,30 +24,18 @@ public class PetDopingEntry {
 	@XmlAttribute(name = "usescroll", required = true)
 	private int usescroll;
 
-	/**
-	 * @return the id
-	 */
-	public short getId() {
+	public int getId() {
 		return id;
 	}
 
-	/**
-	 * @return the usedrink
-	 */
 	public boolean isUseDrink() {
 		return usedrink;
 	}
 
-	/**
-	 * @return the usefood
-	 */
 	public boolean isUseFood() {
 		return usefood;
 	}
 
-	/**
-	 * @return the usescroll
-	 */
 	public int getScrollsUsed() {
 		return usescroll;
 	}

@@ -1,30 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElements;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
-import com.aionemu.gameserver.model.templates.housing.HousingChair;
-import com.aionemu.gameserver.model.templates.housing.HousingEmblem;
-import com.aionemu.gameserver.model.templates.housing.HousingJukeBox;
-import com.aionemu.gameserver.model.templates.housing.HousingMoveableItem;
-import com.aionemu.gameserver.model.templates.housing.HousingMovieJukeBox;
-import com.aionemu.gameserver.model.templates.housing.HousingNpc;
-import com.aionemu.gameserver.model.templates.housing.HousingPassiveItem;
-import com.aionemu.gameserver.model.templates.housing.HousingPicture;
-import com.aionemu.gameserver.model.templates.housing.HousingPostbox;
-import com.aionemu.gameserver.model.templates.housing.HousingStorage;
-import com.aionemu.gameserver.model.templates.housing.HousingUseableItem;
-import com.aionemu.gameserver.model.templates.housing.PlaceableHouseObject;
-
-import gnu.trove.map.hash.TIntObjectHashMap;
+import com.aionemu.gameserver.model.templates.housing.*;
 
 /**
  * @author Rolandas
@@ -43,16 +26,13 @@ public class HousingObjectData {
 	protected List<PlaceableHouseObject> housingObjects;
 
 	@XmlTransient
-	protected TIntObjectHashMap<PlaceableHouseObject> objectTemplatesById = new TIntObjectHashMap<>();
+	private final Map<Integer, PlaceableHouseObject> objectTemplatesById = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		if (housingObjects == null)
-			return;
 		for (PlaceableHouseObject obj : housingObjects) {
 			objectTemplatesById.put(obj.getTemplateId(), obj);
 		}
 
-		housingObjects.clear();
 		housingObjects = null;
 	}
 

@@ -1,22 +1,13 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlIDREF;
-import javax.xml.bind.annotation.XmlRootElement;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
-
-import gnu.trove.map.hash.THashMap;
 
 /**
  * This table contains all nesessary data for new players. <br/>
@@ -29,21 +20,20 @@ import gnu.trove.map.hash.THashMap;
 public class PlayerInitialData {
 
 	@XmlElement(name = "player_data")
-	private List<PlayerCreationData> dataList = new ArrayList<>();
+	private List<PlayerCreationData> dataList;
 
 	@XmlElement(name = "elyos_spawn_location", required = true)
 	private LocationData elyosSpawnLocation;
 	@XmlElement(name = "asmodian_spawn_location", required = true)
 	private LocationData asmodianSpawnLocation;
 
-	private THashMap<PlayerClass, PlayerCreationData> data = new THashMap<>();
+	@XmlTransient
+	private final Map<PlayerClass, PlayerCreationData> data = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (PlayerCreationData pt : dataList) {
 			data.put(pt.getRequiredPlayerClass(), pt);
 		}
-
-		dataList.clear();
 		dataList = null;
 	}
 
