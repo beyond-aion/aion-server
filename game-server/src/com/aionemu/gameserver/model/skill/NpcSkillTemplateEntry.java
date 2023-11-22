@@ -199,19 +199,16 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			case TARGET_HAS_CARVED_SIGNET_LEVEL_V:
 				return hasCarvedSignet(curTarget, template.getSkillTemplate(), 4);
 			case NPC_IS_ALIVE:
-				VisibleObject npc = creature.getKnownList().findObject(condTemp.getNpcId());
-				if (npc instanceof Npc)
-					return !((Npc) npc).isDead();
-				return false;
+				VisibleObject object = creature.getKnownList().findObject(condTemp.getNpcId());
+				return object instanceof Creature npc && !npc.isDead();
 			case TARGET_IS_IN_RANGE:
-				if (curTarget instanceof Creature target) {
-					if (target.isDead() || target.getLifeStats().isAboutToDie())
-						return false;
-					if (creature.canSee(target) && PositionUtil.isInRange(creature, target, condTemp.getRange(), false)
-						&& GeoService.getInstance().canSee(creature, target)) {
-						return true;
-					}
-				}
+				if (curTarget instanceof Creature target && (target.isDead() || target.getLifeStats().isAboutToDie()))
+					return false;
+				if (!creature.canSee(curTarget) || !PositionUtil.isInRange(creature, curTarget, condTemp.getRange(), false))
+					return false;
+				if (!GeoService.getInstance().canSee(creature, curTarget))
+					return false;
+				return true;
 			default:
 				return true;
 		}
