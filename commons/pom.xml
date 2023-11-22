@@ -168,10 +168,5 @@
 			<version>4.6.0</version>
 			<scope>provided</scope> <!-- don't include on build, since it's only needed for IDE validation -->
 		</dependency>
-		<dependency>
-			<groupId>org.reflections</groupId>
-			<artifactId>reflections</artifactId>
-			<version>0.10.2</version>
-		</dependency>
 	</dependencies>
 </project>
