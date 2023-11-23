@@ -251,39 +251,30 @@ public class PacketProcessor<T extends AConnection<?>> {
 	 */
 	private final class CheckerTask implements Runnable {
 
-		/**
-		 * How often CheckerTask should do check.
-		 */
-		private final static int sleepTime = 60 * 1000;
-		/**
-		 * Number of packets waiting for execution on last check.
-		 */
-		private int lastSize = 0;
+		private static final int CHECK_INTERVAL = 60 * 1000;
+		private int previousPacketCount = 0;
 
 		@Override
 		public void run() {
-			/* Sleep for some time */
-			try {
-				Thread.sleep(sleepTime);
-			} catch (InterruptedException e) {
-				// we dont care
-			}
+			for (;;) {
+				try {
+					Thread.sleep(CHECK_INTERVAL);
+				} catch (InterruptedException e) {
+					return;
+				}
 
-			/* Number of packets waiting for execution */
-			int packetsToExecute = packets.size();
-
-			if (packetsToExecute <= lastSize) {
-				if (packetsToExecute <= threadKillThreshold) {
+				int packetsWaitingForExecution = packets.size();
+				if (packetsWaitingForExecution <= previousPacketCount && packetsWaitingForExecution <= threadKillThreshold) {
 					// reduce thread count by one
 					killThread();
+				} else if (packetsWaitingForExecution > threadSpawnThreshold) {
+					// too small amount of threads
+					if (!newThread() && packetsWaitingForExecution >= threadSpawnThreshold * 3)
+						log.warn("Lag detected! [" + packetsWaitingForExecution
+							+ " client packets are waiting for execution]. You should consider increasing PacketProcessor maxThreads or hardware upgrade.");
 				}
-			} else if (packetsToExecute > threadSpawnThreshold) {
-				// too small amount of threads
-				if (!newThread() && packetsToExecute >= threadSpawnThreshold * 3)
-					log.warn("Lagg detected! [" + packetsToExecute
-						+ " client packets are waiting for execution]. You should consider increasing PacketProcessor maxThreads or hardware upgrade.");
+				previousPacketCount = packetsWaitingForExecution;
 			}
-			lastSize = packetsToExecute;
 		}
 	}
 }
