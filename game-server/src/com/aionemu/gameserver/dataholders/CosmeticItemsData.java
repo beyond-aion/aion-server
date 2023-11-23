@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,13 +21,12 @@ public class CosmeticItemsData {
 
 	@XmlElement(name = "cosmetic_item", type = CosmeticItemTemplate.class)
 	private List<CosmeticItemTemplate> templates;
-	private final Map<String, CosmeticItemTemplate> cosmeticItemTemplates = new ConcurrentHashMap<>();
+	private final Map<String, CosmeticItemTemplate> cosmeticItemTemplates = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (CosmeticItemTemplate template : templates) {
 			cosmeticItemTemplates.put(template.getCosmeticName(), template);
 		}
-		templates.clear();
 		templates = null;
 	}
 

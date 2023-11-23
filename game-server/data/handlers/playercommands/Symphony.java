@@ -1,7 +1,5 @@
 package playercommands;
 
-import java.security.InvalidParameterException;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -66,11 +64,11 @@ public class Symphony extends PlayerCommand {
         try {
             int rewardIndex = Integer.parseInt(params[0]) - 1;
             if (rewardIndex < 0 || rewardIndex >= rewards.length)
-                throw new InvalidParameterException(null);
+                throw new IllegalArgumentException();
 
             int cost = rewards[rewardIndex][0];
             if (player.getInventory().getItemCountByItemId(requiredItem) < cost || !player.getInventory().decreaseByItemId(requiredItem, cost))
-                throw new InvalidParameterException("You need " + cost + " " + ChatUtil.item(requiredItem) + " for this.");
+                throw new IllegalArgumentException("You need " + cost + " " + ChatUtil.item(requiredItem) + " for this.");
 
             int itemId = rewards[rewardIndex][1];
             int itemCount = rewards[rewardIndex][2];
@@ -80,8 +78,8 @@ public class Symphony extends PlayerCommand {
             if (notAddedCount > 0) {
                 log.warn("[Legendary Symphony Event] " + notAddedCount + "x " + itemId + " could not be added to " + player.getName() + "'s inventory.");
             }
-        } catch (NumberFormatException | InvalidParameterException e) {
-            sendInfo(player, e instanceof InvalidParameterException ? e.getMessage() : "Invalid prize.");
+        } catch (IllegalArgumentException e) {
+            sendInfo(player, e instanceof NumberFormatException ? "Invalid prize." : e.getMessage());
         }
     }
 }

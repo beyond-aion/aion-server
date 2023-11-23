@@ -64,12 +64,10 @@ public class JAXBUtil {
 	}
 
 	/**
-	 * Automatically closes the reader after deserialization for convenience
+	 * Note: The unmarshaller automatically closes the reader
 	 */
 	public static <T> T deserialize(Reader reader, Class<T> clazz) throws IOException {
-		try (reader) {
-			return deserialize(reader, clazz, null);
-		}
+		return deserialize(reader, clazz, null);
 	}
 
 	public static <T> T deserialize(File file, Class<T> clazz) {
@@ -88,39 +86,27 @@ public class JAXBUtil {
 	private static <T> T deserialize(Object xml, Class<T> clazz, Schema schema) {
 		Unmarshaller u = newUnmarshaller(clazz, schema);
 		try {
-			T obj;
 			if (xml instanceof Reader reader) {
-				obj = (T) u.unmarshal(reader);
+				return (T) u.unmarshal(reader);
 			} else if (xml instanceof File file) {
-				obj = (T) u.unmarshal(file);
+				return (T) u.unmarshal(file);
 			} else if (xml instanceof Node node) { // superinterface of document
-				obj = u.unmarshal(node, clazz).getValue();
+				return u.unmarshal(node, clazz).getValue();
 			} else {
-				try (StringReader sr = new StringReader(xml.toString())) {
-					obj = (T) u.unmarshal(sr);
-				}
+				return (T) u.unmarshal(new StringReader(xml.toString()));
 			}
-			if (obj == null)
-				throw new NullPointerException("Xml input does not contain any content for " + clazz.getName());
-			return obj;
 		} catch (Exception e) {
-			throw new RuntimeException("Failed to unmarshal class " + clazz.getName() + " from xml:\n" + xml, e);
+			throw new RuntimeException("Failed to unmarshal class " + clazz.getName() + " from " + xml, e);
 		}
 	}
 
-	/**
-	 * Unmarshals a collection of files to instances of the given class.
-	 */
 	@SuppressWarnings("unchecked")
 	public static <T> List<T> deserialize(Collection<File> files, Class<T> clazz, String schemaFile) {
 		Unmarshaller u = newUnmarshaller(clazz, XmlUtil.getSchema(schemaFile));
 		List<T> objects = new ArrayList<>();
 		for (File file : files) {
 			try {
-				T obj = (T) u.unmarshal(file);
-				if (obj == null)
-					throw new NullPointerException("File " + file + " does not contain any content for " + clazz.getName());
-				objects.add(obj);
+				objects.add((T) u.unmarshal(file));
 			} catch (Exception e) {
 				throw new RuntimeException("Failed to unmarshal class " + clazz.getName() + " from file:\n" + file, e);
 			}

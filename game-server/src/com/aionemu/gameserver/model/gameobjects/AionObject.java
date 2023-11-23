@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
  */
 public abstract class AionObject {
 
-	private final static Cleaner CLEANER = Cleaner.create();
+	private static final Cleaner CLEANER = Cleaner.create();
 
 	/**
 	 * Unique id, for all game objects such as: items, players, monsters.
@@ -59,7 +59,7 @@ public abstract class AionObject {
 			return false;
 
 		if (objectId == 0) // object is a dummy (no unique ID from IDFactory)
-			return System.identityHashCode(this) == System.identityHashCode(obj);
+			return false;
 
 		return hashCode() == obj.hashCode(); // cheap direct objectId comparison (see above)
 	}

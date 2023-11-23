@@ -1,8 +1,8 @@
 package com.aionemu.gameserver.dataholders;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import java.util.concurrent.ConcurrentHashMap;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
@@ -21,13 +21,12 @@ public class AssembledNpcsData {
 
 	@XmlElement(name = "assembled_npc", type = AssembledNpcTemplate.class)
 	private List<AssembledNpcTemplate> templates;
-	private final Map<Integer, AssembledNpcTemplate> assembledNpcsTemplates = new ConcurrentHashMap<>();
+	private final Map<Integer, AssembledNpcTemplate> assembledNpcsTemplates = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (AssembledNpcTemplate template : templates) {
 			assembledNpcsTemplates.put(template.getNr(), template);
 		}
-		templates.clear();
 		templates = null;
 	}
 

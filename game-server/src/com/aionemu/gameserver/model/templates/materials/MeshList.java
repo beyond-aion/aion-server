@@ -6,12 +6,7 @@ import java.util.Map;
 import java.util.Set;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MeshList", propOrder = { "meshMaterials" })
@@ -39,7 +34,6 @@ public class MeshList {
 			meshMaterial.path = null;
 		}
 
-		meshMaterials.clear();
 		meshMaterials = null;
 	}
 
