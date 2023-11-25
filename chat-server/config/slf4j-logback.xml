@@ -6,7 +6,6 @@
 	<property name="time" value="%date{HH:mm:ssXXX}" />
 	<property name="date" value="%date{&quot;yyyy-MM-dd'T'HH:mm:ss,SSSXXX&quot;}" />
 	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
-		<withJansi>true</withJansi>
 		<encoder>
 			<charset>${consoleEncoding}</charset>
 			<Pattern>${time} %highlight(%-5level) %gray([%thread]) - %message%n</Pattern>

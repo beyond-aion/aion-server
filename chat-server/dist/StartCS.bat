@@ -1,5 +1,7 @@
 @ECHO off
-TITLE Aion Emu - Chat Server Console
+:: Run in Windows Terminal if available
+IF "%WT_SESSION%" == "" wt %0 2>nul && EXIT
+TITLE Aion Emu - Chat Server
 
 :START
 CLS
