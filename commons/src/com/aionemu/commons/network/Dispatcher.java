@@ -90,7 +90,7 @@ public abstract class Dispatcher extends Thread {
 				synchronized (gate) {
 				}
 			} catch (Exception e) {
-				log.error("Dispatcher error! " + e, e);
+				log.error("", e);
 			}
 		}
 	}
@@ -128,14 +128,12 @@ public abstract class Dispatcher extends Thread {
 
 	/**
 	 * Accept new connection.
-	 * 
-	 * @param key
 	 */
 	final void accept(SelectionKey key) {
 		try {
 			((Acceptor) key.attachment()).accept(key);
 		} catch (Exception e) {
-			log.error("Error while accepting connection: +" + e, e);
+			log.error("", e);
 		}
 	}
 

@@ -1,10 +1,6 @@
 package mysql5;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
@@ -36,32 +32,30 @@ public class MySQL5ChallengeTasksDAO extends ChallengeTasksDAO {
 	@Override
 	public Map<Integer, ChallengeTask> load(int ownerId, ChallengeType type) {
 		ConcurrentHashMap<Integer, ChallengeTask> tasks = new ConcurrentHashMap<>();
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, ownerId);
-				stmt.setString(2, type.toString());
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						int taskId = rset.getInt("task_id");
-						int questId = rset.getInt("quest_id");
-						int completeCount = rset.getInt("complete_count");
-						Timestamp date = rset.getTimestamp("complete_time");
-						ChallengeQuestTemplate template = DataManager.CHALLENGE_DATA.getQuestByQuestId(questId);
-						ChallengeQuest quest = new ChallengeQuest(template, completeCount);
-						quest.setPersistentState(PersistentState.UPDATED);
-						if (!tasks.containsKey(taskId)) {
-							Map<Integer, ChallengeQuest> quests = new HashMap<>(2);
-							quests.put(quest.getQuestId(), quest);
-							ChallengeTask task = new ChallengeTask(taskId, ownerId, quests, date);
-							tasks.putIfAbsent(taskId, task);
-						} else {
-							tasks.get(taskId).getQuests().put(questId, quest);
-						}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, ownerId);
+			stmt.setString(2, type.toString());
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int taskId = rset.getInt("task_id");
+					int questId = rset.getInt("quest_id");
+					int completeCount = rset.getInt("complete_count");
+					Timestamp date = rset.getTimestamp("complete_time");
+					ChallengeQuestTemplate template = DataManager.CHALLENGE_DATA.getQuestByQuestId(questId);
+					ChallengeQuest quest = new ChallengeQuest(template, completeCount);
+					quest.setPersistentState(PersistentState.UPDATED);
+					if (!tasks.containsKey(taskId)) {
+						Map<Integer, ChallengeQuest> quests = new HashMap<>(2);
+						quests.put(quest.getQuestId(), quest);
+						ChallengeTask task = new ChallengeTask(taskId, ownerId, quests, date);
+						tasks.putIfAbsent(taskId, task);
+					} else {
+						tasks.get(taskId).getQuests().put(questId, quest);
 					}
 				}
 			}
 		} catch (SQLException e) {
-			log.error("Error while loading challenge task. " + e);
+			log.error("Could not load " + type + " challenge tasks of owner " + ownerId, e);
 		}
 		return tasks;
 	}
@@ -70,46 +64,38 @@ public class MySQL5ChallengeTasksDAO extends ChallengeTasksDAO {
 	public void storeTask(ChallengeTask task) {
 		for (ChallengeQuest quest : task.getQuests().values()) {
 			switch (quest.getPersistentState()) {
-				case NEW:
-					insertQuestEntry(task, quest);
-					break;
-				case UPDATE_REQUIRED:
-					updateQuestEntry(task, quest);
-					break;
+				case NEW -> insertQuestEntry(task, quest);
+				case UPDATE_REQUIRED -> updateQuestEntry(task, quest);
 			}
 		}
 	}
 
 	private void insertQuestEntry(ChallengeTask task, ChallengeQuest quest) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
-				stmt.setInt(1, task.getTaskId());
-				stmt.setInt(2, quest.getQuestId());
-				stmt.setInt(3, task.getOwnerId());
-				stmt.setString(4, task.getTemplate().getType().toString());
-				stmt.setInt(5, quest.getCompleteCount());
-				stmt.setTimestamp(6, task.getCompleteTime());
-				stmt.executeUpdate();
-				quest.setPersistentState(PersistentState.UPDATED);
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
+			stmt.setInt(1, task.getTaskId());
+			stmt.setInt(2, quest.getQuestId());
+			stmt.setInt(3, task.getOwnerId());
+			stmt.setString(4, task.getTemplate().getType().toString());
+			stmt.setInt(5, quest.getCompleteCount());
+			stmt.setTimestamp(6, task.getCompleteTime());
+			stmt.executeUpdate();
+			quest.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
-			log.error("Error while inserting challenge task. " + e);
+			log.error("Could not insert challenge task " + task.getTaskId() + " of owner " + task.getOwnerId(), e);
 		}
 	}
 
 	private void updateQuestEntry(ChallengeTask task, ChallengeQuest quest) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
-				stmt.setInt(1, quest.getCompleteCount());
-				stmt.setTimestamp(2, task.getCompleteTime());
-				stmt.setInt(3, task.getTaskId());
-				stmt.setInt(4, quest.getQuestId());
-				stmt.setInt(5, task.getOwnerId());
-				stmt.executeUpdate();
-				quest.setPersistentState(PersistentState.UPDATED);
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
+			stmt.setInt(1, quest.getCompleteCount());
+			stmt.setTimestamp(2, task.getCompleteTime());
+			stmt.setInt(3, task.getTaskId());
+			stmt.setInt(4, quest.getQuestId());
+			stmt.setInt(5, task.getOwnerId());
+			stmt.executeUpdate();
+			quest.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
-			log.error("Error while updating challenge task. " + e);
+			log.error("Could not update challenge task " + task.getTaskId() + " of owner " + task.getOwnerId(), e);
 		}
 	}
 

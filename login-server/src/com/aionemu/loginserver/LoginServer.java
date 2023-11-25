@@ -26,7 +26,6 @@ import com.aionemu.commons.utils.info.SystemInfoUtil;
 import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.BannedIpController;
-import com.aionemu.loginserver.controller.PremiumController;
 import com.aionemu.loginserver.dao.BannedHddDAO;
 import com.aionemu.loginserver.dao.BannedMacDAO;
 import com.aionemu.loginserver.network.NetConnector;
@@ -136,7 +135,6 @@ public class LoginServer {
 		DAOManager.getDAO(BannedHddDAO.class).cleanExpiredBans();
 
 		PlayerTransferService.getInstance();
-		PremiumController.getController();
 
 		ConsoleUtil.printSection("System Info");
 		VersionInfoUtil.printAllInfo(LoginServer.class);

@@ -14,16 +14,13 @@ import com.aionemu.loginserver.network.gameserver.GsConnection;
  */
 public class NetConnector {
 
-	/**
-	 * NioServer instance that will handle io.
-	 */
 	private final static NioServer instance;
 	private final static ExecutorService dcExecutor = Executors.newCachedThreadPool();
 
 	static {
-		ServerCfg aion = new ServerCfg(Config.CLIENT_SOCKET_ADDRESS, "Aion Connections", LoginConnection::new);
-		ServerCfg gs = new ServerCfg(Config.GAMESERVER_SOCKET_ADDRESS, "GS Connections", GsConnection::new);
-		instance = new NioServer(Config.NIO_READ_WRITE_THREADS, gs, aion);
+		ServerCfg aion = new ServerCfg(Config.CLIENT_SOCKET_ADDRESS, "Aion game clients", LoginConnection::new);
+		ServerCfg gs = new ServerCfg(Config.GAMESERVER_SOCKET_ADDRESS, "game servers", GsConnection::new);
+		instance = new NioServer(Config.NIO_READ_WRITE_THREADS, aion, gs);
 	}
 
 	public static void connect() {

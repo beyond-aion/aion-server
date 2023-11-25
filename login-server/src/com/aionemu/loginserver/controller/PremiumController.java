@@ -14,27 +14,18 @@ import com.aionemu.loginserver.network.gameserver.serverpackets.SM_PREMIUM_RESPO
  */
 public class PremiumController {
 
-	private Logger log = LoggerFactory.getLogger("PREMIUM_CTRL");
-	private static PremiumController controller = new PremiumController();
+	private static final Logger log = LoggerFactory.getLogger("PREMIUM_CTRL");
+	private static final int RESULT_FAIL = 1;
+	private static final int RESULT_LOW_POINTS = 2;
+	private static final int RESULT_OK = 3;
+	private static final int RESULT_ADD = 4;
 
-	public static PremiumController getController() {
-		return controller;
+	private PremiumController() {
 	}
 
-	public static byte RESULT_FAIL = 1;
-	public static byte RESULT_LOW_POINTS = 2;
-	public static byte RESULT_OK = 3;
-	public static byte RESULT_ADD = 4;
-
-	private PremiumDAO dao;
-
-	public PremiumController() {
-		dao = DAOManager.getDAO(PremiumDAO.class);
-		log.info("PremiumController is ready for requests.");
-	}
-
-	public void requestBuy(int accountId, int requestId, long cost, byte serverId) {
-		long points = this.dao.getPoints(accountId);
+	public static void requestBuy(int accountId, int requestId, long cost, byte serverId) {
+		PremiumDAO dao = DAOManager.getDAO(PremiumDAO.class);
+		long points = dao.getPoints(accountId);
 
 		GameServerInfo server = GameServerTable.getGameServerInfo(serverId);
 		if (server == null || server.getConnection() == null || !server.isAccountOnGameServer(accountId)) {
@@ -58,10 +49,10 @@ public class PremiumController {
 		if (dao.updatePoints(accountId, points, cost)) {
 			points -= cost;
 			server.getConnection().sendPacket(new SM_PREMIUM_RESPONSE(requestId, RESULT_OK, points));
-			log.info("Acount " + accountId + " succed in purchasing lot #" + requestId + " for " + cost + " from server #" + serverId);
+			log.info("Account " + accountId + " purchased lot #" + requestId + " for " + cost + " from server #" + serverId);
 		} else {
 			server.getConnection().sendPacket(new SM_PREMIUM_RESPONSE(requestId, RESULT_FAIL, points));
-			log.info("Acount " + accountId + " failed in purchasing lot #" + requestId + " for " + cost + " from server #" + serverId + ". !updatePoints");
+			log.info("Account " + accountId + " failed in purchasing lot #" + requestId + " for " + cost + " from server #" + serverId);
 		}
 	}
 }

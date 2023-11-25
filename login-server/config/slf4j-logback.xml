@@ -3,12 +3,12 @@
 	<property file="config/main/logging.properties" />
 	<property file="config/myls.properties" />
 	<property name="logFolder" value="log/" />
-	<property name="time" value="%date{HH:mm:ssXXX}" />
+	<property name="consoleTime" value="%date{HH:mm:ss}" />
 	<property name="date" value="%date{&quot;yyyy-MM-dd'T'HH:mm:ss,SSSXXX&quot;}" />
 	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
 		<encoder>
-			<charset>${consoleEncoding}</charset>
-			<Pattern>${time} %highlight(%-5level) %gray([%thread]) - %message%n</Pattern>
+			<charset>${consoleEncoding:-UTF-8}</charset>
+			<Pattern>${consoleTime} %highlight(%-5level) %gray([%thread]) - %message%n</Pattern>
 		</encoder>
 	</appender>
 	<appender name="app_console" class="ch.qos.logback.core.FileAppender">

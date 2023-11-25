@@ -1,10 +1,6 @@
 package mysql5;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -31,22 +27,20 @@ public class MySQL5TownDAO extends TownDAO {
 	@Override
 	public Map<Integer, Town> load(Race race) {
 		Map<Integer, Town> towns = new HashMap<>();
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setString(1, race.toString());
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						int id = rset.getInt("id");
-						int level = rset.getInt("level");
-						int points = rset.getInt("points");
-						Timestamp levelUpDate = rset.getTimestamp("level_up_date");
-						Town town = new Town(id, level, points, race, levelUpDate);
-						towns.put(town.getId(), town);
-					}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setString(1, race.toString());
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int id = rset.getInt("id");
+					int level = rset.getInt("level");
+					int points = rset.getInt("points");
+					Timestamp levelUpDate = rset.getTimestamp("level_up_date");
+					Town town = new Town(id, level, points, race, levelUpDate);
+					towns.put(town.getId(), town);
 				}
 			}
 		} catch (SQLException e) {
-			log.error("Can't load towns info. " + e);
+			log.error("Could not load towns", e);
 		}
 		return towns;
 	}
@@ -54,42 +48,34 @@ public class MySQL5TownDAO extends TownDAO {
 	@Override
 	public void store(Town town) {
 		switch (town.getPersistentState()) {
-			case NEW:
-				insertTown(town);
-				break;
-			case UPDATE_REQUIRED:
-				updateTown(town);
-				break;
+			case NEW -> insertTown(town);
+			case UPDATE_REQUIRED -> updateTown(town);
 		}
 	}
 
 	private void insertTown(Town town) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
-				stmt.setInt(1, town.getId());
-				stmt.setInt(2, town.getLevel());
-				stmt.setInt(3, town.getPoints());
-				stmt.setString(4, town.getRace().toString());
-				stmt.executeUpdate();
-				town.setPersistentState(PersistentState.UPDATED);
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
+			stmt.setInt(1, town.getId());
+			stmt.setInt(2, town.getLevel());
+			stmt.setInt(3, town.getPoints());
+			stmt.setString(4, town.getRace().toString());
+			stmt.executeUpdate();
+			town.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
-			log.error("Can insert new town into database! Town id:" + town.getId() + ". " + e);
+			log.error("Could not insert town " + town.getId(), e);
 		}
 	}
 
 	private void updateTown(Town town) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
-				stmt.setInt(1, town.getLevel());
-				stmt.setInt(2, town.getPoints());
-				stmt.setTimestamp(3, town.getLevelUpDate());
-				stmt.setInt(4, town.getId());
-				stmt.executeUpdate();
-				town.setPersistentState(PersistentState.UPDATED);
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
+			stmt.setInt(1, town.getLevel());
+			stmt.setInt(2, town.getPoints());
+			stmt.setTimestamp(3, town.getLevelUpDate());
+			stmt.setInt(4, town.getId());
+			stmt.executeUpdate();
+			town.setPersistentState(PersistentState.UPDATED);
 		} catch (SQLException e) {
-			log.error("Can insert new town into database! Town id:" + town.getId() + ". " + e);
+			log.error("Could not update town " + town.getId(), e);
 		}
 	}
 

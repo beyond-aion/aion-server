@@ -3,11 +3,7 @@ package com.aionemu.commons.network;
 import java.io.IOException;
 import java.nio.channels.SelectionKey;
 import java.nio.channels.ServerSocketChannel;
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.concurrent.Executor;
 
 import org.slf4j.Logger;
@@ -40,32 +36,13 @@ public class NioServer {
 	 * Useful int to load balance connections between Dispatchers
 	 */
 	private int currentReadWriteDispatcher;
-	/**
-	 * Read Write Dispatchers
-	 */
 	private Dispatcher[] readWriteDispatchers;
 
-	/**
-	 * 
-	 */
 	private int readWriteThreads;
-	/**
-	 * 
-	 */
 	private ServerCfg[] cfgs;
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param readWriteThreads
-	 *          - number of threads that will be used for handling read and write.
-	 * @param cfgs
-	 *          - Server Configurations
-	 */
 	public NioServer(int readWriteThreads, ServerCfg... cfgs) {
-		/**
-		 * Test if this build should use assertion and enforce it. If NetworkAssertion == false javac will remove this code block
-		 */
+		// Test if this build should use assertion and enforce it. If NetworkAssertion == false javac will remove this code block
 		if (Assertion.NetworkAssertion) {
 			boolean assertionEnabled = false;
 			assert assertionEnabled = true;
@@ -81,32 +58,23 @@ public class NioServer {
 		try {
 			initDispatchers(readWriteThreads, dcExecutor);
 
-			/** Create a new non-blocking server socket channel for clients */
 			for (ServerCfg cfg : cfgs) {
 				ServerSocketChannel serverChannel = ServerSocketChannel.open();
 				serverChannel.configureBlocking(false);
 
-				/** Bind the server socket to the specified address and port */
-				serverChannel.socket().bind(cfg.getSocketAddress());
-				log.info("Server listening on " + (cfg.getInetAddress().isAnyLocalAddress() ? "all interfaces," : "IP: " + cfg.getIP()) + " Port: "
-					+ cfg.getPort() + " for " + cfg.getConnectionName());
+				serverChannel.socket().bind(cfg.address());
+				log.info("Listening on " + (cfg.isAnyLocalAddress() ? "all interfaces on port " : cfg.getIP() + ":") + cfg.getPort() + " for "
+					+ cfg.clientDescription());
 
-				/**
-				 * Register the server socket channel, indicating an interest in accepting new connections
-				 */
-				SelectionKey acceptKey = getAcceptDispatcher().register(serverChannel, SelectionKey.OP_ACCEPT,
-					new Acceptor(cfg.getConnectionFactory(), this));
+				// Register the server socket channel, indicating an interest in accepting new connections
+				SelectionKey acceptKey = getAcceptDispatcher().register(serverChannel, SelectionKey.OP_ACCEPT, new Acceptor(cfg.connectionFactory(), this));
 				serverChannelKeys.add(acceptKey);
 			}
 		} catch (Exception e) {
-			log.error("NioServer Initialization Error: " + e, e);
-			throw new Error("NioServer Initialization Error!");
+			throw new Error("Could not open server socket: " + e.getMessage(), e);
 		}
 	}
 
-	/**
-	 * @return Accept Dispatcher.
-	 */
 	public final Dispatcher getAcceptDispatcher() {
 		return acceptDispatcher;
 	}
@@ -126,13 +94,6 @@ public class NioServer {
 		return readWriteDispatchers[currentReadWriteDispatcher++];
 	}
 
-	/**
-	 * Initialize Dispatchers.
-	 * 
-	 * @param readWriteThreads
-	 * @param dcExecutor
-	 * @throws IOException
-	 */
 	private void initDispatchers(int readWriteThreads, Executor dcExecutor) throws IOException {
 		if (readWriteThreads < 1) {
 			acceptDispatcher = new AcceptReadWriteDispatcherImpl("AcceptReadWrite Dispatcher", dcExecutor);
@@ -149,9 +110,6 @@ public class NioServer {
 		}
 	}
 
-	/**
-	 * Shutdown.
-	 */
 	public final void shutdown() {
 		log.info("Closing ServerChannels...");
 		try {

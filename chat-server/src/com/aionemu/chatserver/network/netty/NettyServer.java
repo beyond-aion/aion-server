@@ -41,13 +41,13 @@ public class NettyServer {
 		aionClientChannelGroup = new DefaultChannelGroup(NettyServer.class.getName());
 		aionClientChannelGroup.add(initChannel());
 
-		log.info("Server listening on {} Port: {} for Aion Connections",
-			NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().isAnyLocalAddress() ? "all interfaces,"
-				: "IP: " + NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().getHostAddress(),
+		log.info("Listening on {}{} for Aion game clients",
+			NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().isAnyLocalAddress() ? "all interfaces on port "
+				: NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().getHostAddress() + ':',
 			NetworkConfig.CLIENT_SOCKET_ADDRESS.getPort());
 
 		nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
-			new ServerCfg(NetworkConfig.GAMESERVER_SOCKET_ADDRESS, "GS Connections", new GsConnectionFactoryImpl()));
+			new ServerCfg(NetworkConfig.GAMESERVER_SOCKET_ADDRESS, "game servers", new GsConnectionFactoryImpl()));
 		nioServer.connect(Executors.newSingleThreadExecutor());
 	}
 

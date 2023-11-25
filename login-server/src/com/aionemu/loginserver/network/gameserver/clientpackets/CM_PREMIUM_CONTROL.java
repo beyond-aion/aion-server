@@ -23,6 +23,6 @@ public class CM_PREMIUM_CONTROL extends GsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		PremiumController.getController().requestBuy(accountId, requestId, requiredCost, serverId);
+		PremiumController.requestBuy(accountId, requestId, requiredCost, serverId);
 	}
 }

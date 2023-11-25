@@ -23,20 +23,18 @@ public class MySQL5InGameShopLogDAO extends InGameShopLogDAO {
 	@Override
 	public void log(String transactionType, Timestamp transactionDate, String payerName, String payerAccountName, String receiverName, int itemId,
 		long itemCount, long itemPrice) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
-				stmt.setString(1, transactionType);
-				stmt.setTimestamp(2, transactionDate);
-				stmt.setString(3, payerName);
-				stmt.setString(4, payerAccountName);
-				stmt.setString(5, receiverName);
-				stmt.setInt(6, itemId);
-				stmt.setLong(7, itemCount);
-				stmt.setLong(8, itemPrice);
-				stmt.executeUpdate();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
+			stmt.setString(1, transactionType);
+			stmt.setTimestamp(2, transactionDate);
+			stmt.setString(3, payerName);
+			stmt.setString(4, payerAccountName);
+			stmt.setString(5, receiverName);
+			stmt.setInt(6, itemId);
+			stmt.setLong(7, itemCount);
+			stmt.setLong(8, itemPrice);
+			stmt.executeUpdate();
 		} catch (SQLException e) {
-			log.error("Error while inserting ingameshop log. " + e);
+			log.error("Could not insert ingameshop log", e);
 		}
 	}
 
