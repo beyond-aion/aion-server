@@ -62,38 +62,23 @@ public class DatabaseFactory {
 			return;
 		}
 
-		try {
-			DatabaseConfig.DATABASE_DRIVER.getDeclaredConstructor().newInstance();
-		} catch (Exception e) {
-			throw new Error("Error initializing DB driver", e);
-		}
-
 		HikariConfig config = new HikariConfig();
+		config.setJdbcUrl(DatabaseConfig.DATABASE_URL);
+		config.setUsername(DatabaseConfig.DATABASE_USER);
+		config.setPassword(DatabaseConfig.DATABASE_PASSWORD);
 		config.setMaximumPoolSize(DatabaseConfig.DATABASE_CONNECTIONS_MAX);
 		config.setConnectionTimeout(DatabaseConfig.DATABASE_TIMEOUT);
-		config.setDataSourceClassName(DatabaseConfig.DATABASE_DRIVER.getName());
-		config.addDataSourceProperty("url", DatabaseConfig.DATABASE_URL);
-		config.addDataSourceProperty("user", DatabaseConfig.DATABASE_USER);
-		config.addDataSourceProperty("password", DatabaseConfig.DATABASE_PASSWORD);
 
 		dataSource = new HikariDataSource(config);
 
-		/* test if connection is still valid before returning */
-		// connectionPool.setTestOnBorrow(true);
-
-		try {
-			Connection c = getConnection();
+		try (Connection c = getConnection()) {
 			DatabaseMetaData dmd = c.getMetaData();
 			databaseName = dmd.getDatabaseProductName();
 			databaseMajorVersion = dmd.getDatabaseMajorVersion();
 			databaseMinorVersion = dmd.getDatabaseMinorVersion();
-			c.close();
 		} catch (Exception e) {
-			log.error("Error with connection string: " + DatabaseConfig.DATABASE_URL, e);
-			throw new Error("DatabaseFactory not initialized!");
+			throw new Error("Could not connect to " + DatabaseConfig.DATABASE_URL, e);
 		}
-
-		log.info("Successfully connected to database");
 	}
 
 	/**

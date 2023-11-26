@@ -11,12 +11,6 @@ import com.aionemu.commons.configuration.Property;
  */
 public class DatabaseConfig {
 
-	/**
-	 * Fully qualified name of the database driver
-	 */
-	@Property(key = "database.driver")
-	public static Class<?> DATABASE_DRIVER;
-
 	@Property(key = "database.url")
 	public static String DATABASE_URL;
 
