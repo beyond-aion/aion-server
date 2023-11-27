@@ -14,13 +14,11 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.ConsoleUtil;
-import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfo;
 import com.aionemu.commons.utils.info.VersionInfo;
@@ -40,11 +38,6 @@ import ch.qos.logback.core.joran.spi.JoranException;
  * @author -Nemesiss-
  */
 public class LoginServer {
-
-	/**
-	 * Logger for this class.
-	 */
-	private static final Logger log = LoggerFactory.getLogger(LoginServer.class);
 
 	private static void initializeLogger() {
 		try {
@@ -116,13 +109,7 @@ public class LoginServer {
 		Config.load();
 		DatabaseFactory.init();
 		DAOManager.init();
-
-		try {
-			KeyGen.init();
-		} catch (Exception e) {
-			log.error("Failed initializing Key Generator", e);
-			System.exit(ExitCode.ERROR);
-		}
+		KeyGen.init();
 
 		GameServerTable.load();
 		BannedIpController.start();
