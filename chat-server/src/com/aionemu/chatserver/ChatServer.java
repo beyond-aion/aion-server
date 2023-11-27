@@ -14,7 +14,6 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.chatserver.configs.Config;
@@ -28,8 +27,8 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
-import com.aionemu.commons.utils.info.SystemInfoUtil;
-import com.aionemu.commons.utils.info.VersionInfoUtil;
+import com.aionemu.commons.utils.info.SystemInfo;
+import com.aionemu.commons.utils.info.VersionInfo;
 
 import ch.qos.logback.classic.LoggerContext;
 import ch.qos.logback.classic.joran.JoranConfigurator;
@@ -40,10 +39,7 @@ import ch.qos.logback.core.joran.spi.JoranException;
  */
 public class ChatServer {
 
-	private static final Logger log = LoggerFactory.getLogger(ChatServer.class);
-
 	private ChatServer() {
-
 	}
 
 	private static void initializeLogger() {
@@ -111,8 +107,6 @@ public class ChatServer {
 	}
 
 	public static void main(final String[] args) {
-		long start = System.currentTimeMillis();
-
 		initializeLogger();
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
@@ -127,11 +121,10 @@ public class ChatServer {
 		RestartService.getInstance();
 
 		ConsoleUtil.printSection("System Info");
-		VersionInfoUtil.printAllInfo(ChatServer.class);
-		SystemInfoUtil.printAllInfo();
+		VersionInfo.logAll(ChatServer.class);
+		SystemInfo.logAll();
 
 		NettyServer.getInstance();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
-		log.info("Chat Server started in {} seconds.", (System.currentTimeMillis() - start) / 1000);
 	}
 }

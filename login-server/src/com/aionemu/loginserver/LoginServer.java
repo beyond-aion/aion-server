@@ -22,8 +22,8 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
-import com.aionemu.commons.utils.info.SystemInfoUtil;
-import com.aionemu.commons.utils.info.VersionInfoUtil;
+import com.aionemu.commons.utils.info.SystemInfo;
+import com.aionemu.commons.utils.info.VersionInfo;
 import com.aionemu.loginserver.configs.Config;
 import com.aionemu.loginserver.controller.BannedIpController;
 import com.aionemu.loginserver.dao.BannedHddDAO;
@@ -109,12 +109,7 @@ public class LoginServer {
 		}
 	}
 
-	/**
-	 * @param args
-	 */
-	public static void main(final String[] args) {
-		long start = System.currentTimeMillis();
-
+	public static void main(String[] args) {
 		initializeLogger();
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
@@ -137,11 +132,10 @@ public class LoginServer {
 		PlayerTransferService.getInstance();
 
 		ConsoleUtil.printSection("System Info");
-		VersionInfoUtil.printAllInfo(LoginServer.class);
-		SystemInfoUtil.printAllInfo();
+		VersionInfo.logAll(LoginServer.class);
+		SystemInfo.logAll();
 
 		NetConnector.connect();
 		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
-		log.info("Login Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
 	}
 }

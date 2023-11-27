@@ -29,8 +29,8 @@ import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
-import com.aionemu.commons.utils.info.SystemInfoUtil;
-import com.aionemu.commons.utils.info.VersionInfoUtil;
+import com.aionemu.commons.utils.info.SystemInfo;
+import com.aionemu.commons.utils.info.VersionInfo;
 import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.Config;
@@ -92,6 +92,7 @@ public class GameServer {
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
 
 	public static final int START_TIME_SECONDS = (int) (ManagementFactory.getRuntimeMXBean().getStartTime() / 1000);
+	public static final VersionInfo versionInfo = new VersionInfo(GameServer.class);
 
 	private static NioServer nioServer;
 
@@ -296,8 +297,8 @@ public class GameServer {
 		System.gc();
 
 		ConsoleUtil.printSection("System Info");
-		VersionInfoUtil.printAllInfo(GameServer.class);
-		SystemInfoUtil.printAllInfo();
+		VersionInfo.logAll(versionInfo, GSConfig.TIME_ZONE_ID);
+		SystemInfo.logAll();
 
 		nioServer = initNioServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());

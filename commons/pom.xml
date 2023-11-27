@@ -46,12 +46,26 @@
 			<plugin>
 				<groupId>io.github.git-commit-id</groupId>
 				<artifactId>git-commit-id-maven-plugin</artifactId>
-				<version>5.0.0</version>
+				<version>7.0.0</version>
 				<configuration>
 					<includeOnlyProperties>
 						<includeOnlyProperty>^git.branch$</includeOnlyProperty>
 						<includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
+						<includeOnlyProperty>^git.dirty$</includeOnlyProperty>
 					</includeOnlyProperties>
+					<replacementProperties>
+						<replacementProperty>
+							<property>git.dirty</property>
+							<token>true</token>
+							<value>-DIRTY</value>
+						</replacementProperty>
+						<replacementProperty>
+							<property>git.dirty</property>
+							<token>false</token>
+							<value />
+						</replacementProperty>
+					</replacementProperties>
+					<failOnNoGitDirectory>false</failOnNoGitDirectory>
 				</configuration>
 				<executions>
 					<execution>
@@ -72,7 +86,7 @@
 							<Can-Redefine-Classes>true</Can-Redefine-Classes>
 							<Can-Retransform-Classes>true</Can-Retransform-Classes>
 							<POMVersion>${project.version}</POMVersion>
-							<Revision>${git.commit.id.abbrev}</Revision>
+							<Revision>${git.commit.id.abbrev}${git.dirty}</Revision>
 							<Branch>${git.branch}</Branch>
 							<Date>${maven.build.timestamp}</Date>
 						</manifestEntries>

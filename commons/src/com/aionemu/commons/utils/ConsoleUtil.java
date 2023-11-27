@@ -40,24 +40,4 @@ public class ConsoleUtil {
 	public static void printSection(String s) {
 		System.out.println("\n " + StringUtils.center(" [ " + s + " ] ", DEFAULT_CONSOLE_WIDTH - 2, "="));
 	}
-
-	public static String getSeparator() {
-		return getSeparator(DEFAULT_CONSOLE_WIDTH - 1);
-	}
-
-	public static String getSeparator(int length) {
-		return StringUtils.leftPad("", length, "·");
-	}
-
-	public static String getSeparatorForLogger() {
-		return getSeparator(DEFAULT_CONSOLE_WIDTH - 1 - (26 + Thread.currentThread().getName().length()));
-	}
-
-	public static void printSeparator() {
-		printSeparator(DEFAULT_CONSOLE_WIDTH - 1);
-	}
-
-	public static void printSeparator(int length) {
-		System.out.println(getSeparator(length));
-	}
 }

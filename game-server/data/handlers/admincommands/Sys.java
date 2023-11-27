@@ -4,9 +4,10 @@ import java.time.format.DateTimeFormatter;
 import java.util.List;
 
 import com.aionemu.commons.utils.ExitCode;
-import com.aionemu.commons.utils.info.SystemInfoUtil;
-import com.aionemu.commons.utils.info.VersionInfoUtil;
+import com.aionemu.commons.utils.info.SystemInfo;
+import com.aionemu.commons.utils.info.VersionInfo;
 import com.aionemu.gameserver.GameServer;
+import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.ShutdownConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -39,26 +40,17 @@ public class Sys extends AdminCommand {
 		}
 
 		if ("info".equalsIgnoreCase(params[0])) {
-			sendInfo(player, "System Information at: " + ServerTime.now().format(DateTimeFormatter.ofPattern("H:mm:ss")));
-			sendInfo(player, VersionInfoUtil.getVersionInfo(GameServer.class).getAllInfo());
-			sendInfo(player, SystemInfoUtil.getOsInfo());
-			sendInfo(player, SystemInfoUtil.getJvmCpuInfo());
-			sendInfo(player, SystemInfoUtil.getJreInfo());
-			sendInfo(player, SystemInfoUtil.getJvmInfo());
+			sendInfo(player, "System information at: " + ServerTime.now().format(DateTimeFormatter.ofPattern("H:mm:ss")));
+			sendInfo(player, VersionInfo.commons.toString(GSConfig.TIME_ZONE_ID));
+			sendInfo(player, GameServer.versionInfo.toString(GSConfig.TIME_ZONE_ID));
+			sendInfo(player, SystemInfo.getSystemInfo());
 		} else if ("memory".equalsIgnoreCase(params[0])) {
-			if (params.length == 1) {
-				sendInfo(player, SystemInfoUtil.getMemoryInfo());
-			} else if (params[1].equalsIgnoreCase("gc")) {
+			if (params.length > 1 && "gc".equalsIgnoreCase(params[1])) {
 				long time = System.currentTimeMillis();
-				sendInfo(player, "RAM Used (Before): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576) + " MiB");
 				System.gc();
-				sendInfo(player, "RAM Used (After): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576) + " MiB");
-				System.runFinalization();
-				sendInfo(player, "RAM Used (Final): " + ((Runtime.getRuntime().totalMemory() - Runtime.getRuntime().freeMemory()) / 1048576) + " MiB");
-				sendInfo(player, "Garbage Collection and Finalization finished in " + ((System.currentTimeMillis() - time) / 1000) + " second(s)");
-			} else {
-				sendInfo(player);
+				sendInfo(player, "Garbage collection took " + (System.currentTimeMillis() - time) + " ms");
 			}
+			sendInfo(player, SystemInfo.getMemoryInfo());
 		} else if ("threadpool".equalsIgnoreCase(params[0])) {
 			List<String> stats = ThreadPoolManager.getInstance().getStats();
 			for (String stat : stats) {

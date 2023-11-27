@@ -11,8 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.commons.utils.info.VersionInfo;
-import com.aionemu.commons.utils.info.VersionInfoUtil;
 import com.aionemu.gameserver.GameServer;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
@@ -76,18 +74,15 @@ import com.aionemu.gameserver.utils.collections.DynamicServerPacketBodySplitList
 import com.aionemu.gameserver.utils.collections.FixedElementCountSplitList;
 import com.aionemu.gameserver.utils.collections.SplitList;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
-import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public final class PlayerEnterWorldService {
 
 	private static final Logger log = LoggerFactory.getLogger("GAMECONNECTION_LOG");
-	private static final VersionInfo gsVer = VersionInfoUtil.getVersionInfo(GameServer.class);
-	private static final String versionInfo = "Server Revision: " + gsVer.getRevision() + ", built on " + ServerTime.parse(gsVer.getDate());
+	private static final String VERSION_INFO = "Server " + GameServer.versionInfo.getBuildInfo(GSConfig.TIME_ZONE_ID);
 	private static final ConcurrentLinkedQueue<Integer> enteringWorld = new ConcurrentLinkedQueue<>();
 
 	public static void enterWorld(final AionConnection client, int objectId) {
@@ -340,8 +335,8 @@ public final class PlayerEnterWorldService {
 		if (!GSConfig.SERVER_MOTD.isEmpty())
 			PacketSendUtility.sendMessage(player, GSConfig.SERVER_MOTD, ChatType.WHITE);
 
-		if (GSConfig.SERVER_MOTD_DISPLAY_REV && !versionInfo.isEmpty())
-			PacketSendUtility.sendMessage(player, versionInfo, ChatType.WHITE);
+		if (GSConfig.SERVER_MOTD_DISPLAY_REV)
+			PacketSendUtility.sendMessage(player, VERSION_INFO, ChatType.WHITE);
 
 		if (account.getMembership() > 0 && account.getMembership() <= MembershipConfig.MEMBERSHIP_TYPES.length) {
 			String accountType = MembershipConfig.MEMBERSHIP_TYPES[account.getMembership() - 1];
