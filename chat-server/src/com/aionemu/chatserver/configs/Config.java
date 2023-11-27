@@ -9,7 +9,6 @@ import java.util.Properties;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.chatserver.configs.main.CSConfig;
 import com.aionemu.chatserver.configs.main.LoggingConfig;
 import com.aionemu.chatserver.configs.network.NetworkConfig;
 import com.aionemu.commons.configs.CommonsConfig;
@@ -31,7 +30,6 @@ public class Config {
 
 		// Main
 		ConfigurableProcessor.process(CommonsConfig.class, properties);
-		ConfigurableProcessor.process(CSConfig.class, properties);
 		ConfigurableProcessor.process(LoggingConfig.class, properties);
 
 		// Network

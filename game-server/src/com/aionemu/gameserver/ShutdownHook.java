@@ -63,8 +63,7 @@ public class ShutdownHook extends Thread {
 					expectedSeconds = remainingSeconds.get();
 					announceInterval = 1;
 				}
-			} catch (InterruptedException e) {
-				// ignore
+			} catch (InterruptedException ignored) {
 			} catch (Exception e) {
 				log.error("", e);
 			}
@@ -75,11 +74,8 @@ public class ShutdownHook extends Thread {
 		RunnableStatsManager.dumpClassStats(SortBy.AVG);
 		PeriodicSaveService.getInstance().onShutdown();
 
-		// Save game time.
 		GameTimeService.getInstance().saveGameTime();
-		// Shutdown of cron service
 		CronService.getInstance().shutdown();
-		// ThreadPoolManager shutdown
 		ThreadPoolManager.getInstance().shutdown();
 
 		// shut down logger factory to flush all pending log messages

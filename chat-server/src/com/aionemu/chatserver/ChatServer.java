@@ -21,7 +21,6 @@ import com.aionemu.chatserver.network.netty.NettyServer;
 import com.aionemu.chatserver.service.BroadcastService;
 import com.aionemu.chatserver.service.ChatService;
 import com.aionemu.chatserver.service.GameServerService;
-import com.aionemu.chatserver.service.RestartService;
 import com.aionemu.chatserver.utils.IdFactory;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.dao.DAOManager;
@@ -110,7 +109,6 @@ public class ChatServer {
 		initializeLogger();
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
-		new ServerCommandProcessor().start(); // Launch the server command processor thread
 		Config.load();
 		DatabaseFactory.init();
 		DAOManager.init();
@@ -118,13 +116,22 @@ public class ChatServer {
 		GameServerService.getInstance();
 		ChatService.getInstance();
 		BroadcastService.getInstance();
-		RestartService.getInstance();
 
 		ConsoleUtil.printSection("System Info");
 		VersionInfo.logAll(ChatServer.class);
 		SystemInfo.logAll();
 
 		NettyServer.getInstance();
-		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
+		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
+	}
+
+	private static class ShutdownHook extends Thread {
+
+		@Override
+		public void run() {
+			NettyServer.getInstance().shutdownAll();
+			// shut down logger factory to flush all pending log messages
+			((LoggerContext) LoggerFactory.getILoggerFactory()).stop();
+		}
 	}
 }

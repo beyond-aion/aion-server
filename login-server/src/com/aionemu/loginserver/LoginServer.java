@@ -136,6 +136,17 @@ public class LoginServer {
 		SystemInfo.logAll();
 
 		NetConnector.connect();
-		Runtime.getRuntime().addShutdownHook(Shutdown.getInstance());
+		Runtime.getRuntime().addShutdownHook(new ShutdownHook());
+	}
+
+	private static class ShutdownHook extends Thread {
+
+		@Override
+		public void run() {
+			PlayerTransferService.getInstance().shutdown();
+			NetConnector.shutdown();
+			// shut down logger factory to flush all pending log messages
+			((LoggerContext) LoggerFactory.getILoggerFactory()).stop();
+		}
 	}
 }
