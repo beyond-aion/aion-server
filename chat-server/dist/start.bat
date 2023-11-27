@@ -1,25 +1,25 @@
 @ECHO off
 :: Run in Windows Terminal if available
 IF "%WT_SESSION%" == "" wt %0 2>nul && EXIT
-TITLE Aion Emu - Login Server
+TITLE Aion Emu - Chat Server
 
 :START
 CLS
-JAVA -Xms48m -Xmx48m -XX:+UseNUMA -DconsoleEncoding=CP850 -cp "libs/*" com.aionemu.loginserver.LoginServer
+JAVA -Xms72m -Xmx72m -XX:+UseNUMA -DconsoleEncoding=CP850 -cp "libs/*" com.aionemu.chatserver.ChatServer
 IF ERRORLEVEL 2 GOTO START
 IF ERRORLEVEL 1 GOTO ERROR
 IF ERRORLEVEL 0 GOTO END
 
 :ERROR
 ECHO.
-ECHO Login Server has terminated abnormally!
+ECHO Chat server has terminated abnormally!
 ECHO.
 PAUSE >nul
 EXIT
 
 :END
 ECHO.
-ECHO Login Server has shut down
+ECHO Chat server has shut down
 ECHO.
 PAUSE >nul
 EXIT

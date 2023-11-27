@@ -12,14 +12,14 @@ IF ERRORLEVEL 0 GOTO END
 
 :ERROR
 ECHO.
-ECHO Game Server has terminated abnormally!
+ECHO Game server has terminated abnormally!
 ECHO.
 PAUSE >nul
 EXIT
 
 :END
 ECHO.
-ECHO Game Server has shut down
+ECHO Game server has shut down
 ECHO.
 PAUSE >nul
 EXIT
