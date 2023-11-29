@@ -422,23 +422,9 @@ public class Skill {
 			return true;
 
 		WeaponTypeWrapper weapons = new WeaponTypeWrapper(player.getEquipment().getMainHandWeaponType(), player.getEquipment().getOffHandWeaponType());
-		int clientTime = hitTime;
-		int serverHitTime = 0;
 		int motionId = 1;
 		if (isMulticast() && player.getChainSkills().getCurrentChainCount(chainCategory) > 0) {
 			motionId = player.getChainSkills().getCurrentChainCount(chainCategory) + 1;
-		}
-		Times time = motionTime.getTimesFor(player.getRace(), player.getGender(), weapons, player.isInRobotMode(), motionId);
-		if (time != null) {
-			float atkSpeed = player.getGameStats().getAttackSpeed().getCurrent() / (float) player.getGameStats().getAttackSpeed().getBase();
-
-			float castSpeed = player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, 1000) / 1000f;
-			if (castSpeed < 0.3f)
-				castSpeed = 0.3f;
-
-			float speedModifier = Math.min(atkSpeed, castSpeed);
-			animationTime = (int) (time.getMaxTime() * motion.getSpeed() * speedModifier * 10);
-			serverHitTime = (int) Math.ceil((player.isInRobotMode() ? time.getMaxTime() : time.getMinTime()) * motion.getSpeed() * speedModifier * 10);
 		}
 
 		long ammoTime = 0;
@@ -447,11 +433,19 @@ public class Skill {
 			ammoTime = Math.round(distance / getSkillTemplate().getAmmoSpeed() * 1000);// checked with client
 		}
 
-		int finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime) * 0.98f); // client sends rounded times, too
+		Times time = motionTime.getTimesFor(player.getRace(), player.getGender(), weapons, player.isInRobotMode(), motionId);
+		float speedModifier = calcSpeedModifier(player, time, motion, ammoTime);
+			int finalTime = 0;
+		if (time != null) {
+				animationTime = (int) (time.getMinTime() * motion.getSpeed() * speedModifier * 10);
+				int serverHitTime = (int) Math.ceil((player.isInRobotMode() ? time.getMaxTime() : time.getMinTime()) * motion.getSpeed() * speedModifier * 10);
+				finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime));
+		}
 
+		int clientTime = hitTime;
 		if (motion.isInstantSkill() && clientTime == 0) {
 			this.serverTime = (int) ammoTime;
-		} else if (clientTime < finalTime) {
+		} else if (clientTime < finalTime * 0.99f) { // Allow 1% margin of error
 			AuditLogger.log(player, "Modified skill time for client skill: " + getSkillId() + " (clientTime < finalTime: " + clientTime + "/" + finalTime
 				+ "). Player is in move: " + player.getMoveController().isInMove());
 			this.serverTime = finalTime;
@@ -460,9 +454,27 @@ public class Skill {
 		}
 
 		if (skillMethod != SkillMethod.CHARGE)
-			player.setNextSkillUse(System.currentTimeMillis() + castDuration + (long) (animationTime * 0.8f));
+			player.setNextSkillUse(System.currentTimeMillis() + castDuration + animationTime);
 
 		return true;
+	}
+
+	private float calcSpeedModifier(Player player, Times time, Motion motion, long ammoTime) {
+		float atkSpeed = player.getGameStats().getAttackSpeed().getCurrent() / (float) player.getGameStats().getAttackSpeed().getBase();
+		float castSpeed = player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, 1000) / 1000f;
+		if (castSpeed < 0.3f)
+			castSpeed = 0.3f;
+
+		float animationLength = 0f;
+		if (time != null)
+			animationLength = player.isInRobotMode() ? time.getMaxTime() : time.getMinTime();
+
+		int serverHitTime = (int) Math.ceil(animationLength * motion.getSpeed() * atkSpeed * 10);
+		int finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime));
+		if (Math.abs(finalTime - hitTime) < 10)
+			return atkSpeed;
+
+		return (atkSpeed + castSpeed) / 2f;
 	}
 
 	private void startPenaltySkill() {
