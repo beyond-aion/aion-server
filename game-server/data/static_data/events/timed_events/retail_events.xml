@@ -1277,7 +1277,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Celebrate Solorius" start="2022-12-01T00:00:00" end="2022-12-31T23:59:59" theme="CHRISTMAS">
+	<event name="Celebrate Solorius" start="2023-12-01T00:00:00" end="2023-12-31T23:59:59" theme="CHRISTMAS">
 		<quests>
 			<maintainable>50007 50008 50009 51007 51008 51009</maintainable>
 		</quests>
