@@ -112,36 +112,34 @@ public class NioServer {
 
 	public final void shutdown() {
 		log.info("Closing ServerChannels...");
-		try {
-			for (SelectionKey key : serverChannelKeys)
-				key.cancel();
-			log.info("ServerChannel closed.");
-		} catch (Exception e) {
-			log.error("Error closing ServerChannel", e);
-		}
+		serverChannelKeys.forEach(SelectionKey::cancel);
+		log.info("ServerChannels closed.");
 
 		// find active connections once, at this point new ones cannot be added anymore
 		Set<AConnection<?>> activeConnections = findAllConnections();
-		log.info("\tClosing " + activeConnections.size() + " active connections...");
+		if (!activeConnections.isEmpty()) {
+			log.info("\tClosing " + activeConnections.size() + " connections...");
 
-		// notify connections about server close (they should close themselves)
-		activeConnections.forEach(AConnection::onServerClose);
+			// notify connections about server close (they should close themselves)
+			activeConnections.forEach(AConnection::onServerClose);
 
-		// wait max 10s for connections to close, else force close and wait another 5s
-		long timeout = System.currentTimeMillis() + 10000;
-		while (isAnyConnectionClosePending(activeConnections)) {
-			if (System.currentTimeMillis() > timeout) {
-				activeConnections.removeIf(AConnection::isClosed);
-				log.info("\tForcing " + activeConnections.size() + " non responding connections to disconnect...");
-				activeConnections.forEach(AConnection::close);
-				timeout = System.currentTimeMillis() + 5000;
-				while (isAnyConnectionClosePending(activeConnections) && timeout > System.currentTimeMillis()) {
+			// wait for connections to close or force close them
+			long timeout = System.currentTimeMillis() + 5000;
+			while (isAnyConnectionClosePending(activeConnections)) {
+				try {
+					Thread.sleep(100);
+				} catch (InterruptedException ignored) {
 				}
-				break;
+				if (System.currentTimeMillis() > timeout) {
+					activeConnections.removeIf(AConnection::isClosed);
+					log.info("\tForcing " + activeConnections.size() + " connections to disconnect...");
+					activeConnections.forEach(AConnection::close);
+					break;
+				}
 			}
+			activeConnections.removeIf(AConnection::isClosed);
+			log.info("\tActive connections left: " + activeConnections.size());
 		}
-		activeConnections.removeIf(AConnection::isClosed);
-		log.info("\tActive connections left: " + activeConnections.size());
 	}
 
 	private Set<AConnection<?>> findAllConnections() {
@@ -149,15 +147,14 @@ public class NioServer {
 		if (readWriteDispatchers != null) {
 			for (Dispatcher d : readWriteDispatchers)
 				for (SelectionKey key : d.selector().keys()) {
-					if (key.attachment() instanceof AConnection) {
-						activeConnections.add(((AConnection<?>) key.attachment()));
+					if (key.attachment() instanceof AConnection<?> connection) {
+						activeConnections.add(connection);
 					}
 				}
-		} else {
-			for (SelectionKey key : acceptDispatcher.selector().keys()) {
-				if (key.attachment() instanceof AConnection) {
-					activeConnections.add(((AConnection<?>) key.attachment()));
-				}
+		}
+		for (SelectionKey key : acceptDispatcher.selector().keys()) {
+			if (key.attachment() instanceof AConnection<?> connection) {
+				activeConnections.add(connection);
 			}
 		}
 		return activeConnections;

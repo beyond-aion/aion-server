@@ -35,34 +35,27 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 		int selected = selector.select();
 
 		if (selected != 0) {
-			Iterator<SelectionKey> selectedKeys = this.selector.selectedKeys().iterator();
-			while (selectedKeys.hasNext()) {
+			for (Iterator<SelectionKey> selectedKeys = selector.selectedKeys().iterator(); selectedKeys.hasNext();) {
 				SelectionKey key = selectedKeys.next();
 				selectedKeys.remove();
 
 				if (!key.isValid())
 					continue;
 
-				/** Check what event is available and deal with it */
+				// Check what event is available and deal with it
 				switch (key.readyOps()) {
-					case SelectionKey.OP_ACCEPT:
-						this.accept(key);
-						break;
-					case SelectionKey.OP_READ:
-						this.read(key);
-						break;
-					case SelectionKey.OP_WRITE:
-						this.write(key);
-						break;
-					case SelectionKey.OP_READ | SelectionKey.OP_WRITE:
-						this.read(key);
+					case SelectionKey.OP_ACCEPT -> accept(key);
+					case SelectionKey.OP_READ -> read(key);
+					case SelectionKey.OP_WRITE -> write(key);
+					case SelectionKey.OP_READ | SelectionKey.OP_WRITE -> {
+						read(key);
 						if (key.isValid())
-							this.write(key);
-						break;
+							write(key);
+					}
 				}
 			}
-			processPendingClose();
 		}
+		processPendingClose();
 	}
 
 	/**
