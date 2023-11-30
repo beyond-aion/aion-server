@@ -161,7 +161,7 @@ public class GameServer {
 	}
 
 	public static void main(String[] args) {
-		JAXBUtil.preLoadContext(StaticData.class); // do this early so DataManager doesn't need to wait as long
+		JAXBUtil.preLoadContextAsync(StaticData.class); // do this early so DataManager doesn't need to wait as long
 		initUtilityServicesAndConfig();
 
 		boolean enableExecutionTimeWarnings = CommonsConfig.EXECUTION_TIME_WARNING_ENABLE;

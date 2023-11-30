@@ -1,8 +1,7 @@
 package com.aionemu.commons.network.util;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
+import java.time.Duration;
+import java.util.stream.Stream;
 
 import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.concurrent.DeadLockDetector;
@@ -18,18 +17,14 @@ public class DeadlockTest {
 	private static final Object lock2 = new Object();
 
 	public static void main(String... args) {
-		new DeadLockDetector(2, ExitCode.ERROR).start();
+		DeadLockDetector.start(Duration.ofSeconds(2), () -> System.exit(ExitCode.ERROR));
 		createDeadlock();
 	}
 
-	/**
-	 * This complex logic is just to generate a longer stacktrace
-	 */
 	private static void createDeadlock() {
-		List<String> coll = new ArrayList<>(Collections.singletonList("1"));
 		synchronized (lock1) {
-			coll.stream().mapToInt(Integer::valueOf).forEach(intValue -> {
-
+			// The stream is just to generate a longer stack trace
+			Stream.of("").limit(1).forEach(ignore -> {
 					new Thread(() -> {
 						System.out.println("Locking lock 2 from thread 2");
 						synchronized (lock2) {

@@ -88,7 +88,7 @@ public class ShutdownHook extends Thread {
 		// update shutdown delay if possible (unset or more than one second left)
 		int previousValue = remainingSeconds.getAndUpdate(seconds -> seconds == UNSET_DELAY || seconds > 1 ? delaySeconds : seconds);
 		if (previousValue == UNSET_DELAY)
-			new Thread(() -> System.exit(exitCode)).start(); // run outside ThreadPoolManager so it can shut down properly
+			Thread.startVirtualThread(() -> System.exit(exitCode)); // async since System.exit indefinitely blocks the calling thread
 	}
 
 	/**

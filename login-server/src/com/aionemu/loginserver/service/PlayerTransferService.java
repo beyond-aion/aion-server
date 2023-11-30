@@ -4,7 +4,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Executors;
-import java.util.concurrent.Future;
+import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.TimeUnit;
 
 import org.slf4j.Logger;
@@ -37,16 +37,14 @@ public class PlayerTransferService {
 
 	private Map<Integer, PlayerTransferRequest> transfers = new HashMap<>();
 	private Map<Integer, PlayerTransferTask> tasks = new HashMap<>();
-	private final Future<?> verifyTask;
+	private final ScheduledExecutorService scheduledExecutorService;
 
 	private PlayerTransferService() {
-		verifyTask = Executors.newSingleThreadScheduledExecutor().scheduleAtFixedRate(this::verifyNewTasks, 10, 7 * 60, TimeUnit.SECONDS);
+		scheduledExecutorService = Executors.newSingleThreadScheduledExecutor();
+		scheduledExecutorService.scheduleAtFixedRate(this::verifyNewTasks, 10, 7 * 60, TimeUnit.SECONDS);
 		log.info("PlayerTransferService will be initialized in 10 sec.");
 	}
 
-	/**
-	 * first init. getting values from sql
-	 */
 	protected void verifyNewTasks() {
 		List<PlayerTransferTask> tasksNew = DAOManager.getDAO(PlayerTransferDAO.class).getNew();
 		log.info("PlayerTransfer perform task init. " + tasks.size() + " new tasks.");
@@ -82,7 +80,14 @@ public class PlayerTransferService {
 	}
 
 	public void shutdown() {
-		verifyTask.cancel(true);
+		scheduledExecutorService.shutdown();
+		if (!scheduledExecutorService.isTerminated()) {
+			log.info("Waiting for PlayerTransferService to finish...");
+			try {
+				scheduledExecutorService.awaitTermination(5, TimeUnit.SECONDS);
+			} catch (InterruptedException ignored) {
+			}
+		}
 	}
 
 	/**

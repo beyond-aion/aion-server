@@ -7,7 +7,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.ExecutionException;
-import java.util.concurrent.Executors;
+import java.util.concurrent.ForkJoinPool;
 import java.util.concurrent.Future;
 
 import javax.xml.bind.JAXBContext;
@@ -26,8 +26,8 @@ public class JAXBUtil {
 
 	private static final Map<Class<?>, Future<JAXBContext>> CONTEXTS = new ConcurrentHashMap<>();
 
-	public static void preLoadContext(Class<?> clazz) {
-		CONTEXTS.put(clazz, Executors.newSingleThreadExecutor().submit(() -> JAXBContext.newInstance(clazz)));
+	public static void preLoadContextAsync(Class<?> clazz) {
+		CONTEXTS.put(clazz, ForkJoinPool.commonPool().submit(() -> JAXBContext.newInstance(clazz)));
 	}
 
 	public static String serialize(Object obj) {
@@ -86,15 +86,12 @@ public class JAXBUtil {
 	private static <T> T deserialize(Object xml, Class<T> clazz, Schema schema) {
 		Unmarshaller u = newUnmarshaller(clazz, schema);
 		try {
-			if (xml instanceof Reader reader) {
-				return (T) u.unmarshal(reader);
-			} else if (xml instanceof File file) {
-				return (T) u.unmarshal(file);
-			} else if (xml instanceof Node node) { // superinterface of document
-				return u.unmarshal(node, clazz).getValue();
-			} else {
-				return (T) u.unmarshal(new StringReader(xml.toString()));
-			}
+			return switch (xml) {
+				case Reader reader -> (T) u.unmarshal(reader);
+				case File file -> (T) u.unmarshal(file);
+				case Node node -> u.unmarshal(node, clazz).getValue();
+				default -> (T) u.unmarshal(new StringReader(xml.toString()));
+			};
 		} catch (Exception e) {
 			throw new RuntimeException("Failed to unmarshal class " + clazz.getName() + " from " + xml, e);
 		}

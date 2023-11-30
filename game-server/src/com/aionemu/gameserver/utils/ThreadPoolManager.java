@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.utils;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.*;
@@ -32,7 +33,7 @@ public final class ThreadPoolManager implements Executor {
 		// common ForkJoin (for .parallelStream() calls) uses the calling thread too, so we need to subtract 1 to use exactly the number of threads desired
 		System.setProperty("java.util.concurrent.ForkJoinPool.common.parallelism", String.valueOf(instantPoolSize - 1));
 
-		new DeadLockDetector(60, ExitCode.RESTART).start();
+		DeadLockDetector.start(Duration.ofMinutes(1), () -> System.exit(ExitCode.RESTART));
 		instantPool = new ThreadPoolExecutor(instantPoolSize, instantPoolSize, 0, TimeUnit.SECONDS, new ArrayBlockingQueue<>(100000),
 			new PriorityThreadFactory("InstantPool", ThreadConfig.USE_PRIORITIES ? 7 : Thread.NORM_PRIORITY));
 		instantPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
@@ -49,9 +50,7 @@ public final class ThreadPoolManager implements Executor {
 		WorkStealThreadFactory forkJoinThreadFactory = new WorkStealThreadFactory("ForkJoinPool");
 		workStealingPool = new ForkJoinPool(instantPoolSize, forkJoinThreadFactory, null, true);
 
-		Thread maintainThread = new Thread(this::purge, "ThreadPool Purge Task");
-
-		maintainThread.setDaemon(true);
+		Thread maintainThread = Thread.ofVirtual().name("ThreadPool Purge Task").unstarted(this::purge);
 		scheduleAtFixedRate(maintainThread, 150000, 150000);
 
 		log.info("ThreadPoolManager: Initialized with " + instantPool.getPoolSize() + " instant, " + scheduledPool.getPoolSize() + " scheduler, "

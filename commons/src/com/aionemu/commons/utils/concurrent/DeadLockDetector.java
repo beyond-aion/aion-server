@@ -1,42 +1,39 @@
 package com.aionemu.commons.utils.concurrent;
 
 import java.lang.management.*;
+import java.time.Duration;
+import java.util.Arrays;
+import java.util.Set;
+import java.util.stream.Collectors;
 
 import org.slf4j.LoggerFactory;
 
 /**
  * @author -Nemesiss-, ATracer
  */
-public class DeadLockDetector extends Thread {
+public class DeadLockDetector implements Runnable {
 
-	private final int sleepTime, exitOnDeadlock;
+	private final Duration checkInterval;
+	private final Runnable actionOnDeadlock;
 	private final ThreadMXBean tmx;
 
-	/**
-	 * @param sleepTime - Interval in seconds when deadlock checks are performed
-	 * @param exitOnDeadlock - If nonzero, {@code System.exit(exitOnDeadlock)} will be called
-	 */
-	public DeadLockDetector(int sleepTime, int exitOnDeadlock) {
-		super("DeadLockDetector");
-		this.sleepTime = sleepTime * 1000;
-		this.exitOnDeadlock = exitOnDeadlock;
+	private DeadLockDetector(Duration checkInterval, Runnable actionOnDeadlock) {
+		this.checkInterval = checkInterval;
+		this.actionOnDeadlock = actionOnDeadlock;
 		this.tmx = ManagementFactory.getThreadMXBean();
-		setDaemon(true);
 	}
 
-	/**
-	 * Check if there is a DeadLock.
-	 */
 	@Override
 	public final void run() {
 		while (!detectDeadlock()) {
 			try {
-				Thread.sleep(sleepTime);
+				Thread.sleep(checkInterval);
 			} catch (InterruptedException ignored) {
+				return;
 			}
 		}
-		if (exitOnDeadlock != 0)
-			System.exit(exitOnDeadlock);
+		if (actionOnDeadlock != null)
+			actionOnDeadlock.run();
 	}
 
 	private boolean detectDeadlock() {
@@ -44,73 +41,85 @@ public class DeadLockDetector extends Thread {
 		if (ids == null)
 			return false;
 		ThreadInfo[] tis = tmx.getThreadInfo(ids, true, true);
-		String info = "DeadLock Found!\n";
-		for (ThreadInfo ti : tis)
-			info += ti.toString();
-
+		Long skippableThreadId = null;
+		String info = "Deadlock found:\n";
 		for (ThreadInfo ti : tis) {
-			LockInfo[] locks = ti.getLockedSynchronizers();
-			MonitorInfo[] monitors = ti.getLockedMonitors();
-			if (locks.length == 0 && monitors.length == 0)
-				// this thread is deadlocked but its not guilty
+			if (ti.getLockedSynchronizers().length == 0 && ti.getLockedMonitors().length == 0)
+				continue; // this thread is deadlocked but its not guilty
+			if (skippableThreadId != null && skippableThreadId == ti.getThreadId()) {
+				skippableThreadId = null; // don't log the same relations twice
 				continue;
+			}
 
+			info += createShortLockInfo(ti);
 			ThreadInfo dl = ti;
-			info += "Java-level deadlock:\n";
-			info += createShortLockInfo(dl);
-			while ((dl = tmx.getThreadInfo(new long[]{dl.getLockOwnerId()}, true, true)[0]).getThreadId() != ti.getThreadId())
+			while ((dl = tmx.getThreadInfo(new long[]{dl.getLockOwnerId()}, true, true)[0]).getThreadId() != ti.getThreadId()) {
 				info += createShortLockInfo(dl);
-
-			info += "\nDumping all threads:\n";
-			for (ThreadInfo dumpedTI : tmx.dumpAllThreads(true, true)) {
-				info += printDumpedThreadInfo(dumpedTI);
+				if (skippableThreadId == null)
+					skippableThreadId = dl.getThreadId();
 			}
 		}
-		LoggerFactory.getLogger(DeadLockDetector.class).warn(info);
+
+		info += "\nDeadlocked threads:\n";
+		for (ThreadInfo ti : tis)
+			info += toStringUnlimited(ti);
+		info += "\nRemaining threads:\n";
+		Set<Long> ignoredIds = Arrays.stream(ids).boxed().collect(Collectors.toSet());
+		for (ThreadInfo ti : tmx.dumpAllThreads(true, true)) {
+			if (!ignoredIds.contains(ti.getThreadId()))
+				info += toStringUnlimited(ti);
+		}
+		LoggerFactory.getLogger(DeadLockDetector.class).error(info);
 		return true;
 	}
 
-	/**
-	 * Example:
-	 * <p>
-	 * Java-level deadlock:<br>
-	 * Thread-0 is waiting to lock java.lang.Object@276af2 which is held by main. Locked synchronizers:0 monitors:1<br>
-	 * main is waiting to lock java.lang.Object@fa3ac1 which is held by Thread-0. Locked synchronizers:0 monitors:1<br>
-	 * </p>
-	 */
 	private String createShortLockInfo(ThreadInfo threadInfo) {
-		return "\t" + threadInfo.getThreadName() +
-				" is waiting to lock " + threadInfo.getLockInfo().toString() +
-				" which is held by " + threadInfo.getLockOwnerName() + ". " +
-				"Locked synchronizers: " + threadInfo.getLockedSynchronizers().length + ", " +
-				"monitors: " + threadInfo.getLockedMonitors().length +
-				"\n";
+		return "\t\"" + threadInfo.getThreadName() + "\" is waiting to lock " + threadInfo.getLockInfo().toString() + " which is held by \""
+			+ threadInfo.getLockOwnerName() + "\". " + "Locked synchronizers: " + threadInfo.getLockedSynchronizers().length + ", " + "monitors: "
+			+ threadInfo.getLockedMonitors().length + '\n';
 	}
 
 	/**
-	 * Full thread info (short info and stacktrace)<br>
-	 * Example:
-	 * <p>
-	 * "Thread-0" Id=10 BLOCKED <br>
-	 * at com.aionemu.gameserver.DeadlockTest$1$1.run(DeadlockTest.java:70)<br>
-	 * - locked java.lang.Object@fa3ac1<br>
-	 * at java.lang.Thread.run(Thread.java:662)
-	 * </p>
+	 * Same as threadInfo.toString() but with full stack trace instead of only the top 8 elements
 	 */
-	private String printDumpedThreadInfo(ThreadInfo threadInfo) {
-		StringBuilder sb = new StringBuilder();
-		sb.append("\n\"" + threadInfo.getThreadName() + "\"" + " Id=" + threadInfo.getThreadId() + " " + threadInfo.getThreadState() + "\n");
-		StackTraceElement[] stacktrace = threadInfo.getStackTrace();
-		for (int i = 0; i < stacktrace.length; i++) {
-			StackTraceElement ste = stacktrace[i];
-			sb.append("\t" + "at " + ste.toString() + "\n");
+	private String toStringUnlimited(ThreadInfo threadInfo) {
+		StringBuilder sb = new StringBuilder("\"" + threadInfo.getThreadName() + "\"" + (threadInfo.isDaemon() ? " daemon" : "") + " prio="
+			+ threadInfo.getPriority() + " Id=" + threadInfo.getThreadId() + " " + threadInfo.getThreadState());
+		if (threadInfo.getLockName() != null)
+			sb.append(" on " + threadInfo.getLockName());
+		if (threadInfo.getLockOwnerName() != null)
+			sb.append(" owned by \"" + threadInfo.getLockOwnerName() + "\" Id=" + threadInfo.getLockOwnerId());
+		if (threadInfo.isSuspended())
+			sb.append(" (suspended)");
+		if (threadInfo.isInNative())
+			sb.append(" (in native)");
+		sb.append('\n');
+		StackTraceElement[] stackTrace = threadInfo.getStackTrace();
+		for (int i = 0; i < stackTrace.length; i++) {
+			sb.append("\tat " + stackTrace[i].toString() + '\n');
+			if (i == 0 && threadInfo.getLockInfo() != null) {
+				switch (threadInfo.getThreadState()) {
+					case BLOCKED -> sb.append("\t-  blocked on " + threadInfo.getLockInfo() + '\n');
+					case WAITING, TIMED_WAITING -> sb.append("\t-  waiting on " + threadInfo.getLockInfo() + '\n');
+				}
+			}
 			for (MonitorInfo mi : threadInfo.getLockedMonitors()) {
 				if (mi.getLockedStackDepth() == i) {
-					sb.append("\t-  locked " + mi);
-					sb.append('\n');
+					sb.append("\t-  locked " + mi + '\n');
 				}
 			}
 		}
+		LockInfo[] locks = threadInfo.getLockedSynchronizers();
+		if (locks.length > 0) {
+			sb.append("\n\tNumber of locked synchronizers = " + locks.length + '\n');
+			for (LockInfo li : locks)
+				sb.append("\t- " + li + '\n');
+		}
+		sb.append('\n');
 		return sb.toString();
+	}
+
+	public static Thread start(Duration checkInterval, Runnable actionOnDeadlock) {
+		return Thread.ofVirtual().name("DeadLockDetector").start(new DeadLockDetector(checkInterval, actionOnDeadlock));
 	}
 }

@@ -1,5 +1,6 @@
 package com.aionemu.commons.network;
 
+import java.time.Duration;
 import java.util.ArrayList;
 import java.util.LinkedList;
 import java.util.List;
@@ -144,7 +145,7 @@ public class PacketProcessor<T extends AConnection<?>> {
 	 * Start Checker Thread. Checker is responsible for increasing / reducing PacketProcessor Thread count based on Runtime needs.
 	 */
 	private void startCheckerThread() {
-		new Thread(new CheckerTask(), "PacketProcessor:Checker").start();
+		Thread.ofVirtual().name("PacketProcessor:Checker").start(new CheckerTask());
 	}
 
 	/**
@@ -159,7 +160,7 @@ public class PacketProcessor<T extends AConnection<?>> {
 		String name = "PacketProcessor:" + threads.size();
 		log.debug("Creating new PacketProcessor Thread: " + name);
 
-		Thread t = new Thread(new PacketProcessorTask(), name);
+		Thread t = Thread.ofVirtual().name(name).unstarted(new PacketProcessorTask());
 		threads.add(t);
 		t.start();
 
@@ -171,7 +172,7 @@ public class PacketProcessor<T extends AConnection<?>> {
 	 */
 	private void killThread() {
 		if (threads.size() > minThreads) {
-			Thread t = threads.remove((threads.size() - 1));
+			Thread t = threads.removeLast();
 			log.debug("Killing PacketProcessor Thread: " + t.getName());
 			t.interrupt();
 		}
@@ -251,7 +252,7 @@ public class PacketProcessor<T extends AConnection<?>> {
 	 */
 	private final class CheckerTask implements Runnable {
 
-		private static final int CHECK_INTERVAL = 60 * 1000;
+		private static final Duration CHECK_INTERVAL = Duration.ofMinutes(1);
 		private int previousPacketCount = 0;
 
 		@Override
