@@ -6221,21 +6221,20 @@ public final class DialogAction {
 	public static final int OPEN_WEB = 100000;
 	public static final int OPEN_WEB_SHOP = 100001;
 
-	private final static Map<Integer, String> idNames = new HashMap<>();
+	private static final Map<Integer, String> nameById = new HashMap<>();
 
 	static {
-		for (Field field : DialogAction.class.getDeclaredFields()) {
-			String dialogActionName = field.getName();
-			try {
-				Object fieldValue = field.get(null);
-				if (fieldValue instanceof Integer dialogActionId) {
-					if (idNames.putIfAbsent(dialogActionId, dialogActionName) != null)
-						throw new IllegalArgumentException(
-							"Dialog action id " + dialogActionId + " (" + dialogActionName + ") is already defined for " + idNames.get(dialogActionId));
-				}
-			} catch (IllegalArgumentException | IllegalAccessException e) {
-				throw new UnsupportedOperationException("Error accessing " + dialogActionName, e);
+		Map<Integer, String> nameById = DialogAction.nameById; // this temporary variable fixes extremely slow map access times with OpenJDK 21 - TODO remove once solved
+		try {
+			for (Field publicField : DialogAction.class.getFields()) {
+					if (publicField.get(null) instanceof Integer dialogActionId) {
+						String previousName = nameById.put(dialogActionId, publicField.getName());
+						if (previousName != null)
+							throw new IllegalArgumentException("Duplicate id " + dialogActionId + ": " + publicField.getName() + ", " + previousName);
+					}
 			}
+		} catch (IllegalArgumentException | IllegalAccessException e) {
+			throw new ExceptionInInitializerError(e);
 		}
 	}
 
@@ -6243,6 +6242,6 @@ public final class DialogAction {
 	}
 
 	public static String nameOf(int dialogActionId) {
-		return idNames.get(dialogActionId);
+		return nameById.get(dialogActionId);
 	}
 }

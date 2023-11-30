@@ -29,7 +29,7 @@ public class UncaughtExceptionHandler implements Thread.UncaughtExceptionHandler
 	}
 
 	private boolean isMainThread(Thread t) {
-		return t.getId() == 1;
+		return t.threadId() == 1;
 	}
 
 	private boolean anyExitBlockingThread(Thread ignoredThread) {

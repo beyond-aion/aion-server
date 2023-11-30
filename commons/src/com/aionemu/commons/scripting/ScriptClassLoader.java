@@ -1,9 +1,6 @@
 package com.aionemu.commons.scripting;
 
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.net.URLClassLoader;
-import java.net.URLStreamHandlerFactory;
+import java.net.*;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -26,6 +23,7 @@ public abstract class ScriptClassLoader extends URLClassLoader {
 	/**
 	 * URL Stream handler to allow valid url generation by {@link #getResource(String)}
 	 */
+	@SuppressWarnings("this-escape")
 	private final VirtualClassURLStreamHandler urlStreamHandler = new VirtualClassURLStreamHandler(this);
 
 	/**
@@ -73,7 +71,7 @@ public abstract class ScriptClassLoader extends URLClassLoader {
 		newName = newName.replace('/', '.');
 		if (getCompiledClasses().contains(newName)) {
 			try {
-				return new URL(null, VirtualClassURLStreamHandler.HANDLER_PROTOCOL + newName, urlStreamHandler);
+				return URL.of(URI.create(VirtualClassURLStreamHandler.HANDLER_PROTOCOL + newName), urlStreamHandler);
 			} catch (MalformedURLException e) {
 				log.error("Can't create url for compiled class", e);
 			}

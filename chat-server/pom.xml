@@ -17,9 +17,9 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.10.1</version>
+				<version>3.11.0</version>
 				<configuration>
-					<release>18</release>
+					<release>21</release>
 					<compilerArgs>
 						<arg>-Xlint:all,-preview</arg>
 					</compilerArgs>
@@ -29,7 +29,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-assembly-plugin</artifactId>
-				<version>3.3.0</version>
+				<version>3.6.0</version>
 				<configuration>
 					<descriptors>
 						<descriptor>assembly.xml</descriptor>
@@ -81,7 +81,7 @@
 			</plugin>
 			<plugin>
 				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.2.2</version>
+				<version>3.3.0</version>
 				<configuration>
 					<archive>
 						<manifestEntries>
@@ -96,7 +96,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.0.0-M6</version>
+				<version>3.2.2</version>
 			</plugin>
 		</plugins>
 	</build>
@@ -136,7 +136,7 @@
 							<dependency>
 								<groupId>org.apache.ant</groupId>
 								<artifactId>ant-jsch</artifactId>
-								<version>1.10.12</version>
+								<version>1.10.14</version>
 							</dependency>
 						</dependencies>
 					</plugin>
