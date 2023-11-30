@@ -76,19 +76,20 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
-import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
+import ch.qos.logback.classic.ClassicConstants;
 
 /**
  * <tt>GameServer</tt> is the main class of the application and represents the whole game server.<br>
  * This class is also an entry point with main() method.
  * 
- * @author -Nemesiss-, SoulKeeper, cura
- * @modified Neon
+ * @author -Nemesiss-, SoulKeeper, cura, Neon
  */
 public class GameServer {
 
+	static {
+		System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY, "config/logback.xml"); // must be set before instantiating any logger
+		archiveLogs(); // must also run before instantiating any logger
+	}
 	private static final Logger log = LoggerFactory.getLogger(GameServer.class);
 
 	public static final int START_TIME_SECONDS = (int) (ManagementFactory.getRuntimeMXBean().getStartTime() / 1000);
@@ -103,16 +104,10 @@ public class GameServer {
 	private static float ASMOS_RATIO = 0f;
 	private static final ReentrantLock lock = new ReentrantLock();
 
-	/**
-	 * Prevent instantiation
-	 */
 	private GameServer() {
 	}
 
-	/**
-	 * Archives old logs in log folder (recursively) and configures the logging service.
-	 */
-	private static void initializeLogger() {
+	private static void archiveLogs() {
 		try {
 			Path logFolder = Paths.get("./log");
 			Path oldLogsFolder = Paths.get(logFolder + "/archived");
@@ -163,29 +158,10 @@ public class GameServer {
 		} catch (IOException | SecurityException e) {
 			throw new RuntimeException("Error gathering and archiving old logs, shutting down...", e);
 		}
-
-		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
-		try {
-			JoranConfigurator configurator = new JoranConfigurator();
-			configurator.setContext(lc);
-			lc.reset();
-			configurator.doConfigure("config/slf4j-logback.xml");
-		} catch (JoranException je) {
-			throw new RuntimeException("Failed to configure loggers, shutting down...", je);
-		}
 	}
 
-	/**
-	 * Launching method for GameServer
-	 * 
-	 * @param args
-	 *          arguments, not used
-	 */
 	public static void main(String[] args) {
-		long start = System.currentTimeMillis();
-
 		JAXBUtil.preLoadContext(StaticData.class); // do this early so DataManager doesn't need to wait as long
-		initializeLogger();
 		initUtilityServicesAndConfig();
 
 		boolean enableExecutionTimeWarnings = CommonsConfig.EXECUTION_TIME_WARNING_ENABLE;
@@ -303,7 +279,7 @@ public class GameServer {
 		nioServer = initNioServer();
 		Runtime.getRuntime().addShutdownHook(ShutdownHook.getInstance());
 		CommonsConfig.EXECUTION_TIME_WARNING_ENABLE = enableExecutionTimeWarnings;
-		log.info("Game Server started in " + (System.currentTimeMillis() - start) / 1000 + " seconds.");
+		log.info("Game server started in " + (System.currentTimeMillis() / 1000 - START_TIME_SECONDS) + " seconds.");
 
 		LoginServer.getInstance().connect(nioServer);
 		if (GSConfig.ENABLE_CHAT_SERVER)

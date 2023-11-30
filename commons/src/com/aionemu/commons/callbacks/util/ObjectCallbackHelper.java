@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.callbacks.Callback;
@@ -21,11 +20,6 @@ import com.aionemu.commons.utils.GenericValidator;
  */
 @SuppressWarnings("rawtypes")
 public class ObjectCallbackHelper {
-
-	/**
-	 * Logger
-	 */
-	private static final Logger log = LoggerFactory.getLogger(ObjectCallbackHelper.class);
 
 	/**
 	 * Private empty constructor to prevent initialization
@@ -86,7 +80,7 @@ public class ObjectCallbackHelper {
 			List<Callback> list = cbMap.get(callback.getBaseClass());
 			if (list == null || !list.remove(callback)) {
 				// noinspection ThrowableInstanceNeverThrown
-				log.error("Attempt to remove callback that doesn't exists", new RuntimeException());
+				LoggerFactory.getLogger(ObjectCallbackHelper.class).error("Attempt to remove callback that doesn't exists", new RuntimeException());
 				return;
 			}
 
@@ -142,7 +136,7 @@ public class ObjectCallbackHelper {
 					break;
 				}
 			} catch (Exception e) {
-				log.error("Uncaught exception in callback", e);
+				LoggerFactory.getLogger(ObjectCallbackHelper.class).error("Uncaught exception in callback", e);
 			}
 		}
 
@@ -190,7 +184,7 @@ public class ObjectCallbackHelper {
 					break;
 				}
 			} catch (Exception e) {
-				log.error("Uncaught exception in callback", e);
+				LoggerFactory.getLogger(ObjectCallbackHelper.class).error("Uncaught exception in callback", e);
 			}
 		}
 

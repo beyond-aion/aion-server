@@ -4,7 +4,6 @@ import java.lang.instrument.ClassFileTransformer;
 import java.lang.instrument.IllegalClassFormatException;
 import java.security.ProtectionDomain;
 
-import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.ExitCode;
@@ -15,8 +14,6 @@ import com.aionemu.commons.utils.ExitCode;
  * @author SoulKeeper
  */
 public abstract class CallbackClassFileTransformer implements ClassFileTransformer {
-
-	private static final Logger log = LoggerFactory.getLogger(CallbackClassFileTransformer.class);
 
 	/**
 	 * This method analyzes class and adds callback support if needed.
@@ -38,7 +35,6 @@ public abstract class CallbackClassFileTransformer implements ClassFileTransform
 		// no need to scan whole jvm boot classpath
 		// also there is no need to transform classes from jvm 'ext' dir
 		if (loader == null || loader.getClass().getName().equals("sun.misc.Launcher$ExtClassLoader")) {
-			log.trace("Class " + className + " ignored.");
 			return null;
 		}
 
@@ -46,13 +42,12 @@ public abstract class CallbackClassFileTransformer implements ClassFileTransform
 			// actual class transformation
 			return transformClass(loader, classfileBuffer);
 		} catch (Exception e) {
-
 			Error e1 = new Error("Can't transform class " + className, e);
-			log.error(e1.getMessage(), e1);
 
 			// if it is a class from core (not a script) - terminate server
 			// noinspection ConstantConditions
 			if (loader.getClass().getName().equals("sun.misc.Launcher$AppClassLoader")) {
+				LoggerFactory.getLogger(getClass()).error(e1.getMessage(), e1);
 				Runtime.getRuntime().halt(ExitCode.ERROR);
 			}
 

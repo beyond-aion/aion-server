@@ -6,9 +6,6 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.locks.ReentrantReadWriteLock;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.callbacks.Callback;
 import com.aionemu.commons.callbacks.CallbackResult;
 import com.aionemu.commons.callbacks.EnhancedObject;
@@ -16,18 +13,9 @@ import com.aionemu.commons.callbacks.metadata.ObjectCallback;
 import com.aionemu.commons.callbacks.util.CallbacksUtil;
 import com.aionemu.commons.callbacks.util.ObjectCallbackHelper;
 
-import javassist.CannotCompileException;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtField;
-import javassist.CtMethod;
-import javassist.LoaderClassPath;
-import javassist.Modifier;
-import javassist.NotFoundException;
+import javassist.*;
 
 public class ObjectCallbackEnhancer extends CallbackClassFileTransformer {
-
-	private static final Logger log = LoggerFactory.getLogger(ObjectCallbackEnhancer.class);
 
 	/**
 	 * Field name for callbacks map
@@ -74,17 +62,14 @@ public class ObjectCallbackEnhancer extends CallbackClassFileTransformer {
 				}
 			}
 
-			log.debug("Enhancing class: " + clazz.getName());
 			writeEnhancedObjectImpl(clazz);
 
 			for (CtMethod method : methdosToEnhance) {
-				log.debug("Enhancing method: " + method.getLongName());
 				enhanceMethod(method);
 			}
 
 			return clazz.toBytecode();
 		} else {
-			log.trace("Class " + clazz.getName() + " was not enhanced");
 			return null;
 		}
 	}

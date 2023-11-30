@@ -18,7 +18,8 @@ import org.slf4j.LoggerFactory;
 import com.google.gson.Gson;
 
 import ch.qos.logback.core.AppenderBase;
-import ch.qos.logback.core.Layout;
+import ch.qos.logback.core.CoreConstants;
+import ch.qos.logback.core.encoder.Encoder;
 
 /**
  * @author Neon
@@ -32,32 +33,36 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 	private static final String CODE_BLOCK_END = "```";
 	private final Gson gson = new Gson();
 	private final AtomicLong floodResetTimeMillis = new AtomicLong();
-	private Layout<E> layout; // required
+	private Encoder<E> encoder; // required
 	private String webhookUrl; // required
 	private String userName_avatarUrl_msg_separator; // if specified, extracts user name and avatar to use by splitting the message with the separator
 	private URL webhook;
 
 	@Override
 	public void start() {
-		if (checkEmpty(layout, "Layout") || checkEmpty(webhookUrl, "Webhook Url")) {
+		if (checkValueMissing(encoder, "<encoder>") || checkValueMissing(webhookUrl, "<webhookUrl>")) {
 			return;
 		}
-		try {
-			webhook = new URL(webhookUrl);
-		} catch (MalformedURLException e) {
-			addError("Invalid Webhook Url", e);
-			return;
+		if (webhookUrl.isEmpty()) {
+			addInfo("<webhookUrl> is empty, appender will not be used");
+		} else {
+			try {
+				webhook = new URL(webhookUrl);
+			} catch (MalformedURLException e) {
+				addError("Invalid Webhook Url", e);
+				return;
+			}
+			super.start();
 		}
-		super.start();
 	}
 
-	private boolean checkEmpty(Object value, String name) {
-		if (value == null || value instanceof String && (((String) value).isEmpty())) {
-			addError(name + " == null or not specified, but is mandatory");
+	private boolean checkValueMissing(Object value, String name) {
+		if (value == null) {
+			addError(name + " is missing");
 			return true;
 		}
-		if (value instanceof String && ((String) value).endsWith("_IS_UNDEFINED")) {
-			addError(name + " is empty (configuration value for ${" + ((String) value).substring(0, ((String) value).length() - 13) + "} is not set)");
+		if (value instanceof String v && v.endsWith(CoreConstants.UNDEFINED_PROPERTY_SUFFIX)) {
+			addError(name + " is unresolved (configuration value for ${" + v.substring(0, v.length() - CoreConstants.UNDEFINED_PROPERTY_SUFFIX.length()) + "} is not set)");
 			return true;
 		}
 		return false;
@@ -65,7 +70,7 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 
 	@Override
 	protected void append(E eventObject) {
-		String rawMessage = layout.doLayout(eventObject);
+		String rawMessage = new String(encoder.encode(eventObject));
 		String userName = null;
 		String avatarUrl = null;
 		String msg = rawMessage;
@@ -212,8 +217,8 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 		return true;
 	}
 
-	public void setLayout(Layout<E> layout) {
-		this.layout = layout;
+	public void setEncoder(Encoder<E> encoder) {
+		this.encoder = encoder;
 	}
 
 	public void setWebhookUrl(String webhookUrl) {

@@ -4,29 +4,17 @@ import java.io.ByteArrayInputStream;
 import java.util.HashSet;
 import java.util.Set;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.commons.callbacks.CallbackResult;
 import com.aionemu.commons.callbacks.metadata.GlobalCallback;
 import com.aionemu.commons.callbacks.util.CallbacksUtil;
 import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 
-import javassist.CannotCompileException;
-import javassist.ClassPool;
-import javassist.CtClass;
-import javassist.CtField;
-import javassist.CtMethod;
-import javassist.LoaderClassPath;
-import javassist.Modifier;
-import javassist.NotFoundException;
+import javassist.*;
 
 /**
  * @author SoulKeeper
  */
 public class GlobalCallbackEnhancer extends CallbackClassFileTransformer {
-
-	private static final Logger log = LoggerFactory.getLogger(GlobalCallbackEnhancer.class);
 
 	@Override
 	protected byte[] transformClass(ClassLoader loader, byte[] clazzBytes) throws Exception {
@@ -45,15 +33,12 @@ public class GlobalCallbackEnhancer extends CallbackClassFileTransformer {
 		}
 
 		if (!methdosToEnhance.isEmpty()) {
-			log.debug("Enhancing class: " + clazz.getName());
 			for (CtMethod method : methdosToEnhance) {
-				log.debug("Enhancing method: " + method.getLongName());
 				enhanceMethod(method);
 			}
 
 			return clazz.toBytecode();
 		} else {
-			log.trace("Class " + clazz.getName() + " was not enhanced");
 			return null;
 		}
 	}

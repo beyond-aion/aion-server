@@ -2,7 +2,7 @@
 <configuration>
 	<property file="config/main/logging.properties" />
 	<property file="config/myls.properties" />
-	<property name="logFolder" value="log/" />
+	<property name="logFolder" value="log" />
 	<property name="consoleTime" value="%date{HH:mm:ss}" />
 	<property name="date" value="%date{&quot;yyyy-MM-dd'T'HH:mm:ss,SSSXXX&quot;}" />
 	<appender name="out_console" class="ch.qos.logback.core.ConsoleAppender">
@@ -40,9 +40,9 @@
 		</encoder>
 	</appender>
 	<appender name="app_status_discord" class="com.aionemu.commons.logging.DiscordChannelAppender">
-		<layout>
+		<encoder>
 			<pattern>%logger{0} [%thread]|${loginserver.log.status.discord.avatar_url}|%msg%replace(%n```qml%n%ex```){\r?\n```qml\r?\n```, ''}%nopex</pattern>
-		</layout>
+		</encoder>
 		<webhookUrl>${loginserver.log.status.discord.webhook_url}</webhookUrl>
 		<userName_avatarUrl_msg_separator>\|</userName_avatarUrl_msg_separator>
 	</appender>

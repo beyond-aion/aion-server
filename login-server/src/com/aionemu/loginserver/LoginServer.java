@@ -30,16 +30,15 @@ import com.aionemu.loginserver.network.NetConnector;
 import com.aionemu.loginserver.network.ncrypt.KeyGen;
 import com.aionemu.loginserver.service.PlayerTransferService;
 
+import ch.qos.logback.classic.ClassicConstants;
 import ch.qos.logback.classic.LoggerContext;
-import ch.qos.logback.classic.joran.JoranConfigurator;
-import ch.qos.logback.core.joran.spi.JoranException;
 
 /**
  * @author -Nemesiss-
  */
 public class LoginServer {
 
-	private static void initializeLogger() {
+	private static void archiveLogs() {
 		try {
 			Path logFolder = Paths.get("./log");
 			Path oldLogsFolder = Paths.get(logFolder + "/archived");
@@ -90,20 +89,11 @@ public class LoginServer {
 		} catch (IOException | SecurityException e) {
 			throw new RuntimeException("Error gathering and archiving old logs, shutting down...", e);
 		}
-
-		LoggerContext lc = (LoggerContext) LoggerFactory.getILoggerFactory();
-		try {
-			JoranConfigurator configurator = new JoranConfigurator();
-			configurator.setContext(lc);
-			lc.reset();
-			configurator.doConfigure("config/slf4j-logback.xml");
-		} catch (JoranException je) {
-			throw new RuntimeException("Failed to configure loggers, shutting down...", je);
-		}
 	}
 
 	public static void main(String[] args) {
-		initializeLogger();
+		System.setProperty(ClassicConstants.CONFIG_FILE_PROPERTY, "config/logback.xml"); // must be set before instantiating any logger
+		archiveLogs(); // must also run before instantiating any logger
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
 		Config.load();
