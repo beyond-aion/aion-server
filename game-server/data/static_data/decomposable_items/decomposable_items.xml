@@ -26580,32 +26580,32 @@
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="0.43">
-			<item id="160010202" min_count="3" /><!-- [Event] Solorius Wine -->
+			<item id="186000236" min_count="5" /><!-- Blood Mark -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="0.43">
-			<item id="160010197" min_count="3" /><!-- [Event] Solorius Cake Slice -->
+			<item id="164000130" min_count="5" /><!-- Major Spell Resist Scroll -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="0.43">
-			<item id="160010156" race="ELYOS" /><!-- [Event] Solorius Polar Bear Form Candy -->
-			<item id="160010157" race="ASMODIANS" /><!-- [Event] Solorius Polar Bear Form Candy -->
+			<item id="164000126" min_count="5" /><!-- Major Strike Resist Scroll -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="0.43">
-			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
+			<item id="160010101" race="ELYOS" min_count="2" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="160010102" race="ASMODIANS" min_count="2" /><!-- Summer-Loving Inquin Form Candy -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="0.43">
-			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
+			<item id="186000147" /><!-- Mithril Medal -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="0.43">
-			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="162002030" min_count="10" /><!-- [Event] Premium Restoration Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="0.42">
-			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
+			<item id="186000130" min_count="250" /><!-- Crucible Insignia -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 	</decomposable>
@@ -26623,32 +26623,32 @@
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.18">
-			<item id="160010202" min_count="3" /><!-- [Event] Solorius Wine -->
+			<item id="186000236" min_count="5" /><!-- Blood Mark -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.18">
-			<item id="160010197" min_count="3" /><!-- [Event] Solorius Cake Slice -->
+			<item id="164000130" min_count="5" /><!-- Major Spell Resist Scroll -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.18">
-			<item id="160010156" race="ELYOS" /><!-- [Event] Solorius Polar Bear Form Candy -->
-			<item id="160010157" race="ASMODIANS" /><!-- [Event] Solorius Polar Bear Form Candy -->
+			<item id="164000126" min_count="5" /><!-- Major Strike Resist Scroll -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.18">
-			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
+			<item id="160010101" race="ELYOS" min_count="2" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="160010102" race="ASMODIANS" min_count="2" /><!-- Summer-Loving Inquin Form Candy -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.18">
-			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
+			<item id="186000147" /><!-- Mithril Medal -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.18">
-			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="162002030" min_count="10" /><!-- [Event] Premium Restoration Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.17">
-			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
+			<item id="186000130" min_count="250" /><!-- Crucible Insignia -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 	</decomposable>
@@ -26666,32 +26666,32 @@
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.93">
-			<item id="160010202" min_count="3" /><!-- [Event] Solorius Wine -->
+			<item id="186000236" min_count="5" /><!-- Blood Mark -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.93">
-			<item id="160010197" min_count="3" /><!-- [Event] Solorius Cake Slice -->
+			<item id="164000130" min_count="5" /><!-- Major Spell Resist Scroll -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.93">
-			<item id="160010156" race="ELYOS" /><!-- [Event] Solorius Polar Bear Form Candy -->
-			<item id="160010157" race="ASMODIANS" /><!-- [Event] Solorius Polar Bear Form Candy -->
+			<item id="164000126" min_count="5" /><!-- Major Strike Resist Scroll -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.93">
-			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
+			<item id="160010101" race="ELYOS" min_count="2" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="160010102" race="ASMODIANS" min_count="2" /><!-- Summer-Loving Inquin Form Candy -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.93">
-			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
+			<item id="186000147" /><!-- Mithril Medal -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.93">
-			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="162002030" min_count="10" /><!-- [Event] Premium Restoration Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="1.92">
-			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
+			<item id="186000130" min_count="250" /><!-- Crucible Insignia -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 	</decomposable>
@@ -26709,32 +26709,32 @@
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="2.68">
-			<item id="160010202" min_count="3" /><!-- [Event] Solorius Wine -->
+			<item id="186000236" min_count="5" /><!-- Blood Mark -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="2.68">
-			<item id="160010197" min_count="3" /><!-- [Event] Solorius Cake Slice -->
+			<item id="164000130" min_count="5" /><!-- Major Spell Resist Scroll -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="2.68">
-			<item id="160010156" race="ELYOS" /><!-- [Event] Solorius Polar Bear Form Candy -->
-			<item id="160010157" race="ASMODIANS" /><!-- [Event] Solorius Polar Bear Form Candy -->
+			<item id="164000126" min_count="5" /><!-- Major Strike Resist Scroll -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="2.68">
-			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
+			<item id="160010101" race="ELYOS" min_count="2" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="160010102" race="ASMODIANS" min_count="2" /><!-- Summer-Loving Inquin Form Candy -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="2.68">
-			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
+			<item id="186000147" /><!-- Mithril Medal -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="2.68">
-			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="162002030" min_count="10" /><!-- [Event] Premium Restoration Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="2.67">
-			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
+			<item id="186000130" min_count="250" /><!-- Crucible Insignia -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 	</decomposable>
@@ -26752,32 +26752,32 @@
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="3.43">
-			<item id="160010202" min_count="3" /><!-- [Event] Solorius Wine -->
+			<item id="186000236" min_count="5" /><!-- Blood Mark -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="3.43">
-			<item id="160010197" min_count="3" /><!-- [Event] Solorius Cake Slice -->
+			<item id="164000130" min_count="5" /><!-- Major Spell Resist Scroll -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="3.43">
-			<item id="160010156" race="ELYOS" /><!-- [Event] Solorius Polar Bear Form Candy -->
-			<item id="160010157" race="ASMODIANS" /><!-- [Event] Solorius Polar Bear Form Candy -->
+			<item id="164000126" min_count="5" /><!-- Major Strike Resist Scroll -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="3.43">
-			<item id="162000137" min_count="3" /><!-- Sublime Life Serum -->
+			<item id="160010101" race="ELYOS" min_count="2" /><!-- Summer-Loving Inquin Form Candy -->
+			<item id="160010102" race="ASMODIANS" min_count="2" /><!-- Summer-Loving Inquin Form Candy -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="3.43">
-			<item id="162000139" min_count="3" /><!-- Sublime Mana Serum -->
+			<item id="186000147" /><!-- Mithril Medal -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="3.43">
-			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
+			<item id="162002030" min_count="10" /><!-- [Event] Premium Restoration Serum -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 		<items chance="3.42">
-			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
+			<item id="186000130" min_count="250" /><!-- Crucible Insignia -->
 			<item id="182007148" /><!-- [Event] Snowflake Crystal -->
 		</items>
 	</decomposable>
@@ -26844,10 +26844,13 @@
 	</decomposable>
 	<decomposable item_id="188052996"><!-- [Event] Broken Snow Bundle -->
 		<items>
-			<item id="188053609" min_count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+			<item id="188053636" /><!-- Blood Mark Box -->
 		</items>
 		<items>
-			<item id="188053695" min_count="2" /><!-- High Grade Crafting Material Box of Conquest -->
+			<item id="188053609" min_count="2" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+		</items>
+		<items>
+			<item id="166000194" min_count="3" /><!-- Delta Enchantment Stone -->
 		</items>
 		<items>
 			<item id="166100020" min_count="250" /><!-- [Stamp] Greater Supplements (Eternal) -->
@@ -26858,44 +26861,50 @@
 	</decomposable>
 	<decomposable item_id="188052997"><!-- [Event] Crushed Snow Bundle -->
 		<items>
-			<item id="188053113" min_count="2" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<item id="188051879" /><!-- Solorius Furniture Set Box -->
+		</items>
+		<items>
+			<item id="166500002" min_count="2" /><!-- Amplification Stone -->
+		</items>
+		<items>
+			<item id="166030005" min_count="2" /><!-- Tempering Solution -->
 		</items>
 		<items>
 			<item id="188053714" /><!-- Captured Shelter Idian Bundle -->
 		</items>
 		<items>
-			<item id="166500005" min_count="2" /><!-- [Event] Amplification Stone -->
-		</items>
-		<items>
-			<item id="166030007" min_count="2" /><!-- [Event] Tempering Solution -->
+			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052998"><!-- [Event] Noble Melted Bundle -->
 		<items>
-			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
+			<item id="188053702" /><!-- Vasharti's Equipment Box -->
 		</items>
 		<items>
 			<item id="188053000" /><!-- [Event] Assured Greater Felicitous Socketing Box -->
 		</items>
 		<items>
-			<item id="166200013" /><!-- Enduring Mythic Weapon Tuning Scroll -->
+			<item id="166200013" min_count="2" /><!-- Enduring Mythic Weapon Tuning Scroll -->
 		</items>
 		<items>
-			<item id="166200014" /><!-- Enduring Mythic Armor Tuning Scroll -->
+			<item id="166200014" min_count="2" /><!-- Enduring Mythic Armor Tuning Scroll -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052999"><!-- [Event] Brilliant Ice Prism -->
-		<items chance="30.0">
-			<item id="188053100" /><!-- Pure Dynatoum's Equipment Crux Box -->
+		<items>
+			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
 		</items>
-		<items chance="20.0">
-			<item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
+		<items>
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
 		</items>
-		<items chance="45.0">
-			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
+		<items>
+			<item id="188053700" /><!-- Honorable Accessory Box of Conquest -->
 		</items>
-		<items chance="5.0">
-			<item id="187000058" /><!-- Ancient Spirit's Wings -->
+		<items>
+			<item id="188950015" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
+		</items>
+		<items>
+			<item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053000"><!-- [Event] Assured Greater Felicitous Socketing Box -->
