@@ -1,13 +1,14 @@
 package com.aionemu.commons.logging;
 
 import java.io.IOException;
-import java.io.OutputStream;
-import java.net.ConnectException;
-import java.net.HttpURLConnection;
-import java.net.MalformedURLException;
-import java.net.URL;
-import java.nio.charset.StandardCharsets;
-import java.util.*;
+import java.net.URI;
+import java.net.http.HttpClient;
+import java.net.http.HttpRequest;
+import java.net.http.HttpResponse;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Map;
 import java.util.concurrent.atomic.AtomicLong;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
@@ -15,13 +16,16 @@ import java.util.regex.Pattern;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.google.gson.Gson;
+import com.alibaba.fastjson2.JSON;
 
 import ch.qos.logback.core.AppenderBase;
 import ch.qos.logback.core.CoreConstants;
 import ch.qos.logback.core.encoder.Encoder;
 
 /**
+ * Sends messages via a webhook (see <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">API docs</a>).<br>
+ * If the message is longer than {@value #MAX_MESSAGE_LENGTH} characters (Discord limit) it will be sent in parts, while keeping code blocks intact.
+ * 
  * @author Neon
  */
 public class DiscordChannelAppender<E> extends AppenderBase<E> {
@@ -31,12 +35,12 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 	private static final int MAX_MESSAGE_LENGTH = 2000;
 	private static final Pattern CODE_BLOCK_TYPE_PATTERN = Pattern.compile("(```(?:[a-z]+\r?\n)?)");
 	private static final String CODE_BLOCK_END = "```";
-	private final Gson gson = new Gson();
 	private final AtomicLong floodResetTimeMillis = new AtomicLong();
 	private Encoder<E> encoder; // required
 	private String webhookUrl; // required
 	private String userName_avatarUrl_msg_separator; // if specified, extracts user name and avatar to use by splitting the message with the separator
-	private URL webhook;
+	private URI webhookUri;
+	private HttpClient httpClient;
 
 	@Override
 	public void start() {
@@ -46,12 +50,8 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 		if (webhookUrl.isEmpty()) {
 			addInfo("<webhookUrl> is empty, appender will not be used");
 		} else {
-			try {
-				webhook = new URL(webhookUrl);
-			} catch (MalformedURLException e) {
-				addError("Invalid Webhook Url", e);
-				return;
-			}
+			webhookUri = URI.create(webhookUrl);
+			httpClient = HttpClient.newHttpClient();
 			super.start();
 		}
 	}
@@ -66,6 +66,15 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 			return true;
 		}
 		return false;
+	}
+
+	@Override
+	public void stop() {
+		if (httpClient != null) {
+			httpClient.close();
+			httpClient = null;
+		}
+		super.stop();
 	}
 
 	@Override
@@ -89,7 +98,7 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 		if (userName != null && userName.length() > MAX_USERNAME_LENGTH)
 			userName = userName.substring(0, MAX_USERNAME_LENGTH - 1) + '…';
 		for (String messagePart : createMessageParts(msg)) {
-			sendMessage(userName, avatarUrl, messagePart);
+			sendMessage(messagePart, userName, avatarUrl);
 		}
 	}
 
@@ -133,10 +142,10 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 				sb.append(line, 0, line.length() - overflowingChars - 1).append('…');
 			}
 			if (isInsideCodeBlock) {
-				String codeBlockStarPlusNewLine = codeBlockStart + '\n';
-				if (sb.lastIndexOf(codeBlockStarPlusNewLine) == sb.length() - codeBlockStarPlusNewLine.length()) {
+				String codeBlockStartPlusNewLine = codeBlockStart + '\n';
+				if (sb.lastIndexOf(codeBlockStartPlusNewLine) == sb.length() - codeBlockStartPlusNewLine.length()) {
 					// don't generate an empty code block at the end of the string
-					sb.setLength(sb.length() - codeBlockStarPlusNewLine.length());
+					sb.setLength(sb.length() - codeBlockStartPlusNewLine.length());
 					if (sb.length() > 0 && sb.charAt(sb.length() - 1) == '\n') // remove empty line
 						sb.setLength(sb.length() - 1);
 				} else
@@ -160,61 +169,46 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 		return length;
 	}
 
-	private void sendMessage(String userName, String avatarUrl, String msg) {
-		if (!canSend())
+	private void sendMessage(String msg, String userName, String avatarUrl) {
+		if (isRateLimited())
 			return;
-
-		Map<String, Object> message = new LinkedHashMap<>(3);
-		message.put("content", msg);
-		message.put("username", userName);
-		message.put("avatar_url", avatarUrl);
-
 		try {
-			String json = gson.toJson(message);
-			byte[] bytes = json.getBytes(StandardCharsets.UTF_8);
-			HttpURLConnection con = (HttpURLConnection) webhook.openConnection();
-			con.setRequestMethod("POST");
-			con.setDoOutput(true);
-			con.setFixedLengthStreamingMode(bytes.length);
-			con.setRequestProperty("User-Agent", "DiscordChannelAppender/1.0");
-			con.setRequestProperty("Content-Type", "application/json");
-			con.connect();
-			try (OutputStream os = con.getOutputStream()) {
-				os.write(bytes);
-			}
-			if (con.getResponseCode() == 429) {
-				long resetTime = 0;
-				long now = System.currentTimeMillis();
-				String ratelimitDurationMillis = con.getHeaderField("Retry-After");
-				if (ratelimitDurationMillis != null && ratelimitDurationMillis.matches("\\d+")) {
-					resetTime = now + Long.parseLong(ratelimitDurationMillis);
-				} else {
-					String ratelimitResetTime = con.getHeaderField("X-Ratelimit-Reset");
-					if (ratelimitResetTime != null && ratelimitResetTime.matches("\\d+")) {
-						resetTime = Long.parseLong(ratelimitResetTime) * 1000;
-					}
-				}
-				floodResetTimeMillis.set(resetTime > now ? resetTime : now + 3000);
-				throw new ConnectException("Flood control for channel triggered, reset in " + (floodResetTimeMillis.get() - now) / 1000
-					+ "s. Meanwhile, all messages will be dropped.");
-			} else if (con.getResponseCode() >= 300) {
-				throw new ConnectException("HTTP Response " + con.getResponseCode() + ": " + con.getResponseMessage());
-			}
-		} catch (IOException e) {
+			byte[] json = JSON.toJSONBytes(Map.of("content", msg, "username", userName, "avatar_url", avatarUrl));
+			HttpRequest httpRequest = HttpRequest.newBuilder(webhookUri)
+					.headers("User-Agent", "DiscordChannelAppender/1.0")
+					.headers("Content-Type", "application/json")
+					.POST(HttpRequest.BodyPublishers.ofByteArray(json))
+					.build();
+			HttpResponse<String> response = httpClient.send(httpRequest, HttpResponse.BodyHandlers.ofString());
+			handleResponse(response);
+		} catch (InterruptedException ignored) {
+		} catch (Exception e) {
 			String errorHeader = "Error sending Discord message: ";
 			if (!msg.contains(errorHeader)) // avoid potential recursive message sending (if appender sends warnings)
 				log.warn(errorHeader + msg + "\nCaused by: " + e.getMessage());
 		}
 	}
 
-	public boolean canSend() {
-		long resetTime = floodResetTimeMillis.get();
-		if (resetTime == 0)
-			return true;
-		if (resetTime > System.currentTimeMillis())
-			return false;
-		floodResetTimeMillis.set(0);
-		return true;
+	private void handleResponse(HttpResponse<String> response) throws IOException {
+		if (response.statusCode() == 429) {
+			long resetTime;
+			long now = System.currentTimeMillis();
+			long rateLimitDurationMillis = response.headers().firstValueAsLong("Retry-After").orElse(0);
+			if (rateLimitDurationMillis > 0) {
+				resetTime = now + rateLimitDurationMillis;
+			} else {
+				resetTime = response.headers().firstValueAsLong("X-RateLimit-Reset").orElse(0) * 1000;
+			}
+			floodResetTimeMillis.set(resetTime > now ? resetTime : now + 3000);
+			throw new IOException(
+				"Flood control for channel triggered, reset in " + (floodResetTimeMillis.get() - now) / 1000 + "s. Meanwhile, all messages will be dropped.");
+		} else if (response.statusCode() != 204) {
+			throw new IOException("Server returned status code " + response.statusCode() + (response.body().isEmpty() ? "" : ": " + response.body()));
+		}
+	}
+
+	private boolean isRateLimited() {
+		return floodResetTimeMillis.get() > System.currentTimeMillis();
 	}
 
 	public void setEncoder(Encoder<E> encoder) {

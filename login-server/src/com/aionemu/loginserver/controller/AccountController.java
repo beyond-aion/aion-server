@@ -14,7 +14,6 @@ import com.aionemu.loginserver.dao.AccountTimeDAO;
 import com.aionemu.loginserver.dao.PremiumDAO;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.model.AccountTime;
-import com.aionemu.loginserver.model.ExternalAuth;
 import com.aionemu.loginserver.model.ReconnectingAccount;
 import com.aionemu.loginserver.network.aion.AionAuthResponse;
 import com.aionemu.loginserver.network.aion.LoginConnection;
@@ -28,7 +27,7 @@ import com.aionemu.loginserver.network.gameserver.GsConnection;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_ACCOUNT_AUTH_RESPONSE;
 import com.aionemu.loginserver.network.gameserver.serverpackets.SM_GS_CHARACTER_RESPONSE;
 import com.aionemu.loginserver.utils.AccountUtils;
-import com.aionemu.loginserver.utils.ExternalAuthUtil;
+import com.aionemu.loginserver.utils.ExternalAuth;
 
 /**
  * This class is responsible for controlling all account actions
@@ -151,36 +150,17 @@ public class AccountController {
 
 		String accountName = name;
 
-		if (Config.AUTH_EXTERNAL) {
-			// authenticate remotely and return received auth state on error
-			ExternalAuth auth = ExternalAuthUtil.requestInfo(name, password);
-
-			// if error during auth server connection
+		if (Config.useExternalAuth()) {
+			ExternalAuth.Response auth = ExternalAuth.authenticate(name, password);
 			if (auth == null) {
 				return AionAuthResponse.STR_L2AUTH_S_ACCOUNTCACHESERVER_DOWN;
 			}
 
-			// if received no auth state for account
-			if (auth.getAuthState() == null) {
-				return AionAuthResponse.STR_L2AUTH_UNKNOWN4;
+			AionAuthResponse response = AionAuthResponse.getByIdOrDefault(auth.aionAuthResponseId(), AionAuthResponse.STR_L2AUTH_UNKNOWN4);
+			if (response != AionAuthResponse.STR_L2AUTH_S_ALL_OK) {
+				return response;
 			}
-
-			AionAuthResponse response = AionAuthResponse.getResponseById(auth.getAuthState());
-
-			// if received invalid auth state
-			if (response == null) {
-				return AionAuthResponse.STR_L2AUTH_UNKNOWN4;
-			}
-
-			switch (response) {
-				case STR_L2AUTH_S_ALL_OK:
-					// name for this account as sent by external auth server
-					accountName = auth.getIdentifier();
-					break;
-				default:
-					// directly return received auth state
-					return response;
-			}
+			accountName = auth.accountId();
 		}
 
 		Account account = loadAccount(accountName);
@@ -196,7 +176,7 @@ public class AccountController {
 		}
 
 		// if not external authentication, verify password hash from database
-		if (!Config.AUTH_EXTERNAL && !account.getPasswordHash().equals(AccountUtils.encodePassword(password))) {
+		if (!Config.useExternalAuth() && !account.getPasswordHash().equals(AccountUtils.encodePassword(password))) {
 			return AionAuthResponse.STR_L2AUTH_S_INCORRECT_PWD;
 		}
 
@@ -300,7 +280,7 @@ public class AccountController {
 	 * @return account object or null
 	 */
 	public static Account createAccount(String name, String password) {
-		String passwordHash = (!Config.AUTH_EXTERNAL) ? AccountUtils.encodePassword(password) : "";
+		String passwordHash = Config.useExternalAuth() ? "" : AccountUtils.encodePassword(password);
 		Account account = new Account();
 
 		account.setName(name);

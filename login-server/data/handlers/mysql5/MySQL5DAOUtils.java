@@ -17,7 +17,7 @@ public class MySQL5DAOUtils {
 	/**
 	 * Constant for account name
 	 */
-	public static final String MYSQL_TABLE_ACCOUNT_NAME = (!Config.AUTH_EXTERNAL) ? "name" : "ext_auth_name";
+	public static final String MYSQL_TABLE_ACCOUNT_NAME = Config.useExternalAuth() ? "ext_auth_name" : "name";
 
 	/**
 	 * Returns true only if DB supports MySQL5

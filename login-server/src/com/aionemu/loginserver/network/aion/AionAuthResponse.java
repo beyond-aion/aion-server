@@ -325,45 +325,24 @@ public enum AionAuthResponse {
 	 */
 	STR_L2AUTH_S_ACCOUNTCACHESERVER_DOWN(62);
 
-	/**
-	 * id of this enum that may be sent to client
-	 */
-	private int msgId;
+	private final int id;
 
-	/**
-	 * Map which will hold all enum values and their ids.
-	 */
-	private final static Map<Integer, AionAuthResponse> map = new HashMap<>();
+	private static final Map<Integer, AionAuthResponse> responseById = new HashMap<>();
 
 	static {
 		for (AionAuthResponse val : values())
-			map.put(val.getId(), val);
+			responseById.put(val.getId(), val);
 	}
 
-	/**
-	 * Constructor.
-	 * 
-	 * @param msgId
-	 *          id of the message
-	 */
-	private AionAuthResponse(int msgId) {
-		this.msgId = msgId;
+	private AionAuthResponse(int id) {
+		this.id = id;
 	}
 
-	/**
-	 * Message Id that may be sent to client.
-	 * 
-	 * @return message id
-	 */
 	public int getId() {
-		return msgId;
+		return id;
 	}
 
-	/**
-	 * @param msgId
-	 * @return The auth response for the given message id or null if id was not found
-	 */
-	public static AionAuthResponse getResponseById(int msgId) {
-		return map.get(msgId);
+	public static AionAuthResponse getByIdOrDefault(int id, AionAuthResponse defaultValue) {
+		return responseById.getOrDefault(id, defaultValue);
 	}
 }

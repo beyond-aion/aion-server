@@ -55,16 +55,10 @@ public class Config {
 	public static boolean ACCOUNT_AUTO_CREATION;
 
 	/**
-	 * Enable\disable external authentication for accounts
-	 */
-	@Property(key = "loginserver.accounts.externalauth", defaultValue = "false")
-	public static boolean AUTH_EXTERNAL;
-
-	/**
 	 * URL for external authentication, that is used to receive an JSON encoded string, holding the auth status
 	 */
-	@Property(key = "loginserver.accounts.externalauth.url", defaultValue = "")
-	public static String AUTH_EXTERNAL_JSON_URL;
+	@Property(key = "loginserver.accounts.external_auth.url", defaultValue = "")
+	public static String EXTERNAL_AUTH_URL;
 
 	/**
 	 * Enable\disable brute-force protector from 1 IP on account login
@@ -77,6 +71,10 @@ public class Config {
 	 */
 	@Property(key = "loginserver.log.logins", defaultValue = "false")
 	public static boolean LOG_LOGINS;
+
+	public static boolean useExternalAuth() {
+		return !EXTERNAL_AUTH_URL.isBlank();
+	}
 
 	/**
 	 * Load configs from files.
