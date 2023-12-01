@@ -5,11 +5,11 @@ clone:
 
 definitions:
   script: &resolve-dependencies
-    GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 $BITBUCKET_GIT_SSH_ORIGIN $BITBUCKET_CLONE_DIR;
+    GIT_LFS_SKIP_SMUDGE=1 git clone --depth 1 https://x-token-auth:$REPOSITORY_OAUTH_ACCESS_TOKEN@bitbucket.org/$BITBUCKET_REPO_FULL_NAME.git $BITBUCKET_CLONE_DIR;
     cd $BITBUCKET_CLONE_DIR;
     git reset --hard $BITBUCKET_COMMIT;
     chmod 777 $BITBUCKET_CLONE_DIR;
-    mvn -T 1C -f commons/pom.xml install -Dmaven.source.skip=true
+    mvn -f commons/pom.xml install -Dmaven.source.skip=true
 
 pipelines:
   custom: # triggered manually
@@ -19,16 +19,16 @@ pipelines:
             - maven
           script:
             - *resolve-dependencies
-            - mvn -T 1C -f chat-server/pom.xml compile
-            - mvn -T 1C -f login-server/pom.xml compile
-            - mvn -T 1C -f game-server/pom.xml compile
+            - mvn -f chat-server/pom.xml compile
+            - mvn -f login-server/pom.xml compile
+            - mvn -f game-server/pom.xml compile
     build-chat-server:
       - step:
           caches:
             - maven
           script:
             - *resolve-dependencies
-            - mvn -T 1C -f chat-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
+            - mvn -f chat-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
     build-game-server:
       - step:
           deployment: production
@@ -36,11 +36,11 @@ pipelines:
             - maven
           script:
             - *resolve-dependencies
-            - mvn -T 1C -f game-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
+            - mvn -f game-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
     build-login-server:
       - step:
           caches:
             - maven
           script:
             - *resolve-dependencies
-            - mvn -T 1C -f login-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
+            - mvn -f login-server/pom.xml package -Dftp.url=$LIVESERVER_FTP_URL
