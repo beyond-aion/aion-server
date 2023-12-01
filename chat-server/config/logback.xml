@@ -1,5 +1,6 @@
 <?xml version="1.0"?>
 <configuration>
+	<statusListener class="com.aionemu.commons.logging.OnConsoleWarningStatusListener" />
 	<property file="config/main/logging.properties" />
 	<property file="config/mycs.properties" />
 	<property name="logFolder" value="log" />
