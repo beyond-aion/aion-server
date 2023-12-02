@@ -137,7 +137,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 
 	public abstract boolean isEndless();
 
-	public abstract void addAbyssPoints(Player player, int abysPoints);
+	public abstract void onAbyssPointsAdded(Player player, int abyssPoints);
 
 	public boolean isStarted() {
 		return started;

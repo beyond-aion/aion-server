@@ -9,7 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
@@ -56,7 +55,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
 	private final Map<Integer, MercenaryLocation> activeMercenaryLocs = new ConcurrentHashMap<>();
-	private final AbyssPointsListener addAPListener = new AbyssPointsListener(this);
 	private int oldLegionId;
 
 	public FortressSiege(FortressLocation fortress) {
@@ -75,10 +73,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 
 		// Clear fortress from enemys
 		getSiegeLocation().clearLocation();
-
-		// Register abyss points listener
-		// We should listen for abyss point callbacks that players are earning
-		GlobalCallbackHelper.addCallback(addAPListener);
 
 		// Remove all and spawn siege NPCs
 		despawnNpcs(getSiegeLocationId());
@@ -144,10 +138,6 @@ public class FortressSiege extends Siege<FortressLocation> {
 				log.info(this + ": Siege finished. No winner found. Race: " + oldRace + ", legion ID: " + oldLegionId);
 			}
 		}
-
-		// Unregister abyss points listener callback
-		// We really don't need to add abyss points anymore
-		GlobalCallbackHelper.removeCallback(addAPListener);
 
 		// Unregister siege boss listeners
 		// cleanup :)
@@ -408,8 +398,9 @@ public class FortressSiege extends Siege<FortressLocation> {
 	}
 
 	@Override
-	public void addAbyssPoints(Player player, int abysPoints) {
-		getSiegeCounter().addAbyssPoints(player, abysPoints);
+	public void onAbyssPointsAdded(Player player, int abyssPoints) {
+		if (getSiegeLocation().isVulnerable() && getSiegeLocation().isInsideLocation(player))
+			getSiegeCounter().addAbyssPoints(player, abyssPoints);
 	}
 
 	protected ArtifactLocation getArtifact() {

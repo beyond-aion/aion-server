@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.Objects;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
@@ -23,10 +22,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class LeagueService {
 
 	private static final Map<Integer, League> leagues = new ConcurrentHashMap<>();
-
-	static {
-		GlobalCallbackHelper.addCallback(new AllianceDisbandListener());
-	}
 
 	public static void inviteToLeague(final Player inviter, Player invited) {
 		if (canInvite(inviter, invited)) {

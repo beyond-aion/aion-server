@@ -70,7 +70,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
 import com.aionemu.gameserver.utils.cron.ThreadPoolManagerRunnableRunner;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
-import com.aionemu.gameserver.utils.javaagent.JavaAgentUtils;
 import com.aionemu.gameserver.utils.xml.JAXBUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -309,12 +308,6 @@ public class GameServer {
 		// Set default uncaught exception handler
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
-		// make sure that callback code was initialized
-		if (JavaAgentUtils.isConfigured())
-			log.info("JavaAgent [Callback Support] is configured.");
-
-		// init config
-		ConsoleUtil.printSection("Configuration");
 		Config.load();
 		// Second should be database factory
 		ConsoleUtil.printSection("Database");

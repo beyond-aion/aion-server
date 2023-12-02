@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.abyss;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.callbacks.metadata.GlobalCallback;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.AbyssRank;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -11,6 +10,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_EDIT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
@@ -21,12 +21,12 @@ public class AbyssPointsService {
 
 	private static final Logger log = LoggerFactory.getLogger(AbyssPointsService.class);
 
-	@GlobalCallback(AddAPGlobalCallback.class)
 	public static void addAp(Player player, VisibleObject obj, int value) {
 		if (value > 30000) {
 			log.warn("WARN BIG COUNT AP: " + value + " for " + player + " from " + obj);
 		}
 		addAp(player, value);
+		SiegeService.getInstance().onAbyssPointsAdded(player, obj, value);
 	}
 
 	public static void addAp(Player player, int value) {

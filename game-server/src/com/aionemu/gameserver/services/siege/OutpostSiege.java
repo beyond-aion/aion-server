@@ -4,7 +4,6 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.Map;
 
-import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
@@ -22,8 +21,6 @@ import com.aionemu.gameserver.world.World;
  */
 public class OutpostSiege extends Siege<OutpostLocation> {
 
-	private final AbyssPointsListener apListener = new AbyssPointsListener(this);
-
 	public OutpostSiege(OutpostLocation siegeLocation) {
 		super(siegeLocation);
 	}
@@ -31,7 +28,6 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 	@Override
 	protected void onSiegeStart() {
 		getSiegeLocation().setVulnerable(true);
-		GlobalCallbackHelper.addCallback(apListener);
 		despawnNpcs(getSiegeLocationId());
 		spawnNpcs(getSiegeLocationId(), getSiegeLocation().getRace(), SiegeModType.SIEGE);
 		initSiegeBoss();
@@ -43,7 +39,6 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 
 	@Override
 	protected void onSiegeFinish() {
-		GlobalCallbackHelper.removeCallback(apListener);
 		unregisterSiegeBossListeners();
 		getSiegeLocation().setVulnerable(false);
 		despawnSiegeNpcs();
@@ -107,8 +102,9 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 	}
 
 	@Override
-	public void addAbyssPoints(Player player, int abyssPoints) {
-		getSiegeCounter().addAbyssPoints(player, abyssPoints);
+	public void onAbyssPointsAdded(Player player, int abyssPoints) {
+		if (getSiegeLocation().isVulnerable() && getSiegeLocation().isInsideLocation(player))
+			getSiegeCounter().addAbyssPoints(player, abyssPoints);
 	}
 
 }

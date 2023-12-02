@@ -16,7 +16,6 @@
 			</excludes>
 		</fileSet>
 		<fileSet>
-			<filtered>true</filtered>
 			<directory>dist</directory>
 			<outputDirectory>./</outputDirectory>
 			<includes>
@@ -25,7 +24,6 @@
 			<fileMode>0744</fileMode><!-- include linux scripts with executable file permission -->
 		</fileSet>
 		<fileSet>
-			<filtered>true</filtered>
 			<directory>dist</directory>
 			<outputDirectory>./</outputDirectory>
 			<includes>

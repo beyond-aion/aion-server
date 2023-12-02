@@ -103,7 +103,7 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 	}
 
 	@Override
-	public void addAbyssPoints(Player player, int abysPoints) {
+	public void onAbyssPointsAdded(Player player, int abysPoints) {
 		// No need to control AP
 	}
 

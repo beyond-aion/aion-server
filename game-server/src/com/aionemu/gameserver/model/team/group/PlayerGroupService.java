@@ -8,21 +8,19 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.callbacks.metadata.GlobalCallback;
 import com.aionemu.gameserver.configs.main.GroupConfig;
+import com.aionemu.gameserver.model.gameobjects.FindGroup;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent.LeaveReson;
 import com.aionemu.gameserver.model.team.common.events.TeamKinahDistributionEvent;
 import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
-import com.aionemu.gameserver.model.team.group.callback.AddPlayerToGroupCallback;
-import com.aionemu.gameserver.model.team.group.callback.PlayerGroupCreateCallback;
-import com.aionemu.gameserver.model.team.group.callback.PlayerGroupDisbandCallback;
 import com.aionemu.gameserver.model.team.group.events.*;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.PlayerRestrictions;
+import com.aionemu.gameserver.services.findgroup.FindGroupService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.TimeUtil;
@@ -46,8 +44,7 @@ public class PlayerGroupService {
 		}
 	}
 
-	@GlobalCallback(PlayerGroupCreateCallback.class)
-	public static final PlayerGroup createGroup(Player leader, Player invited, TeamType type, int id) {
+	public static PlayerGroup createGroup(Player leader, Player invited, TeamType type, int id) {
 		PlayerGroup newGroup = new PlayerGroup(new PlayerGroupMember(leader), type, id);
 		groups.put(newGroup.getTeamId(), newGroup);
 		addPlayer(newGroup, leader);
@@ -55,6 +52,11 @@ public class PlayerGroupService {
 		if (offlineCheckStarted.compareAndSet(false, true)) {
 			initializeOfflineCheck();
 		}
+		FindGroup inviterFindGroup = FindGroupService.getInstance().removeFindGroup(leader.getRace(), 0x00, leader.getObjectId());
+		if (inviterFindGroup == null)
+			inviterFindGroup = FindGroupService.getInstance().removeFindGroup(leader.getRace(), 0x04, leader.getObjectId());
+		if (inviterFindGroup != null)
+			FindGroupService.getInstance().addFindGroupList(leader, 0x02, inviterFindGroup.getMessage(), inviterFindGroup.getGroupType());
 		return newGroup;
 	}
 
@@ -62,9 +64,12 @@ public class PlayerGroupService {
 		ThreadPoolManager.getInstance().scheduleAtFixedRate(new OfflinePlayerChecker(), 1000, 30 * 1000);
 	}
 
-	@GlobalCallback(AddPlayerToGroupCallback.class)
-	public static final void addPlayerToGroup(PlayerGroup group, Player invited) {
+	public static void addPlayerToGroup(PlayerGroup group, Player invited) {
+		FindGroupService.getInstance().removeFindGroup(invited.getRace(), 0x00, invited.getObjectId());
+		FindGroupService.getInstance().removeFindGroup(invited.getRace(), 0x04, invited.getObjectId());
 		group.addMember(new PlayerGroupMember(invited));
+		if (group.isFull())
+			FindGroupService.getInstance().removeFindGroup(group.getRace(), 0, group.getObjectId());
 	}
 
 	/**
@@ -158,8 +163,8 @@ public class PlayerGroupService {
 	/**
 	 * Disband group by removing all players one by one
 	 */
-	@GlobalCallback(PlayerGroupDisbandCallback.class)
 	public static void disband(PlayerGroup group) {
+		FindGroupService.getInstance().removeFindGroup(group.getRace(), 0, group.getTeamId());
 		groups.remove(group.getTeamId());
 		group.onEvent(new GroupDisbandEvent(group));
 	}

@@ -8,13 +8,10 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.callbacks.metadata.GlobalCallback;
 import com.aionemu.gameserver.configs.main.GroupConfig;
+import com.aionemu.gameserver.model.gameobjects.FindGroup;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
-import com.aionemu.gameserver.model.team.alliance.callback.AddPlayerToAllianceCallback;
-import com.aionemu.gameserver.model.team.alliance.callback.PlayerAllianceCreateCallback;
-import com.aionemu.gameserver.model.team.alliance.callback.PlayerAllianceDisbandCallback;
 import com.aionemu.gameserver.model.team.alliance.events.*;
 import com.aionemu.gameserver.model.team.alliance.events.AssignViceCaptainEvent.AssignType;
 import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent.LeaveReson;
@@ -23,10 +20,13 @@ import com.aionemu.gameserver.model.team.common.events.TeamKinahDistributionEven
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
+import com.aionemu.gameserver.model.team.league.League;
+import com.aionemu.gameserver.model.team.league.events.LeagueLeftEvent;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.services.VortexService;
+import com.aionemu.gameserver.services.findgroup.FindGroupService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.TimeUtil;
@@ -65,8 +65,7 @@ public class PlayerAllianceService {
 		}
 	}
 
-	@GlobalCallback(PlayerAllianceCreateCallback.class)
-	public static final PlayerAlliance createAlliance(Player leader, Player invited, TeamType type) {
+	public static PlayerAlliance createAlliance(Player leader, Player invited, TeamType type) {
 		PlayerAlliance newAlliance = new PlayerAlliance(new PlayerAllianceMember(leader), type);
 		alliances.put(newAlliance.getTeamId(), newAlliance);
 		addPlayer(newAlliance, leader);
@@ -74,6 +73,11 @@ public class PlayerAllianceService {
 		if (offlineCheckStarted.compareAndSet(false, true)) {
 			initializeOfflineCheck();
 		}
+		FindGroup inviterFindGroup = FindGroupService.getInstance().removeFindGroup(leader.getRace(), 0x00, leader.getObjectId());
+		if (inviterFindGroup == null)
+			inviterFindGroup = FindGroupService.getInstance().removeFindGroup(leader.getRace(), 0x04, leader.getObjectId());
+		if (inviterFindGroup != null)
+			FindGroupService.getInstance().addFindGroupList(leader, 0x02, inviterFindGroup.getMessage(), inviterFindGroup.getGroupType());
 		return newAlliance;
 	}
 
@@ -81,10 +85,13 @@ public class PlayerAllianceService {
 		ThreadPoolManager.getInstance().scheduleAtFixedRate(new OfflinePlayerAllianceChecker(), 1000, 30 * 1000);
 	}
 
-	@GlobalCallback(AddPlayerToAllianceCallback.class)
-	public static final PlayerAllianceMember addPlayerToAlliance(PlayerAlliance alliance, Player invited) {
+	public static PlayerAllianceMember addPlayerToAlliance(PlayerAlliance alliance, Player invited) {
+		FindGroupService.getInstance().removeFindGroup(invited.getRace(), 0x00, invited.getObjectId());
+		FindGroupService.getInstance().removeFindGroup(invited.getRace(), 0x04, invited.getObjectId());
 		PlayerAllianceMember member = new PlayerAllianceMember(invited);
 		alliance.addMember(member);
+		if (alliance.isFull())
+			FindGroupService.getInstance().removeFindGroup(alliance.getRace(), 0, alliance.getObjectId());
 		return member;
 	}
 
@@ -185,10 +192,15 @@ public class PlayerAllianceService {
 	/**
 	 * Disband alliance after minimum of members has been reached
 	 */
-	@GlobalCallback(PlayerAllianceDisbandCallback.class)
 	public static void disband(PlayerAlliance alliance, boolean onBefore) {
+		FindGroupService.getInstance().removeFindGroup(alliance.getRace(), 0, alliance.getTeamId());
+		League league = alliance.getLeague();
+		if (onBefore && league != null)
+			league.onEvent(new LeagueLeftEvent(league, alliance));
 		alliance.onEvent(new AllianceDisbandEvent(alliance));
 		alliances.remove(alliance.getTeamId());
+		if (!onBefore && league != null)
+			league.onEvent(new LeagueLeftEvent(league, alliance));
 	}
 
 	public static void changeLeader(Player player) {

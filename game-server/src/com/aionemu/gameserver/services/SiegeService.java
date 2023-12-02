@@ -18,6 +18,7 @@ import com.aionemu.gameserver.configs.schedule.SiegeSchedules;
 import com.aionemu.gameserver.dao.SiegeDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.siege.*;
@@ -606,6 +607,11 @@ public class SiegeService {
 
 		PacketSendUtility.sendPacket(player, new SM_SHIELD_EFFECT(worldLocations.values()));
 		PacketSendUtility.sendPacket(player, new SM_ABYSS_ARTIFACT_INFO3(worldArtifacts.values()));
+	}
+
+	public void onAbyssPointsAdded(Player player, VisibleObject obj, int abyssPoints) {
+		if (obj instanceof Player || obj instanceof SiegeNpc siegeNpc && siegeNpc.getSpawn().getSiegeModType() != SiegeModType.PEACE)
+			activeSieges.values().forEach(a -> a.onAbyssPointsAdded(player, abyssPoints));
 	}
 
 	public int getSiegeIdByLocId(int locId) {

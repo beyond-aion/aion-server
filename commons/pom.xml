@@ -82,9 +82,6 @@
 				<configuration>
 					<archive>
 						<manifestEntries>
-							<Premain-Class>com.aionemu.commons.callbacks.JavaAgentEnhancer</Premain-Class>
-							<Can-Redefine-Classes>true</Can-Redefine-Classes>
-							<Can-Retransform-Classes>true</Can-Retransform-Classes>
 							<POMVersion>${project.version}</POMVersion>
 							<Revision>${git.commit.id.abbrev}${git.dirty}</Revision>
 							<Branch>${git.branch}</Branch>
@@ -97,9 +94,6 @@
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-surefire-plugin</artifactId>
 				<version>3.2.2</version>
-				<configuration>
-					<argLine>-javaagent:"${project.build.directory}/${project.build.finalName}.jar"</argLine> <!-- jar must be present in order to run CallbacksTest -->
-				</configuration>
 			</plugin>
 		</plugins>
 	</build>
@@ -143,11 +137,6 @@
 					<artifactId>HikariCP-java7</artifactId>
 				</exclusion>
 			</exclusions>
-		</dependency>
-		<dependency>
-			<groupId>org.javassist</groupId>
-			<artifactId>javassist</artifactId>
-			<version>3.29.2-GA</version>
 		</dependency>
 		<dependency>
 			<groupId>org.apache.commons</groupId>

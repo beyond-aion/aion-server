@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.siege;
 import java.util.Collection;
 import java.util.List;
 
-import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -43,7 +42,6 @@ public class AgentSiege extends Siege<AgentLocation> {
 	private final AgentDeathListener mastaDeathListener = new AgentDeathListener(this);
 	private final SiegeBossDoAddDamageListener veilleDoAddDamageListener = new SiegeBossDoAddDamageListener(this);
 	private final SiegeBossDoAddDamageListener mastaDoAddDamageListener = new SiegeBossDoAddDamageListener(this);
-	private final AgentAbyssPointsListener apListener = new AgentAbyssPointsListener(this);
 	private byte startProgress = 1;
 	private SiegeNpc masta, veille;
 	private SiegeRace winner;
@@ -76,7 +74,6 @@ public class AgentSiege extends Siege<AgentLocation> {
 				broadcastAgentSpawn();
 				distributeQuest();
 				spawnSiegeNpcs(); // Should initialize Agents and their flags
-				GlobalCallbackHelper.addCallback(apListener);
 				return; // Interrupts the task
 			}
 			delayStart();
@@ -87,7 +84,6 @@ public class AgentSiege extends Siege<AgentLocation> {
 	protected void onSiegeFinish() {
 		PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_03());
 		getSiegeLocation().setVulnerable(false);
-		GlobalCallbackHelper.removeCallback(apListener);
 		removeListeners();
 		despawnSiegeNpcs();
 		if (winner == null)
@@ -198,8 +194,10 @@ public class AgentSiege extends Siege<AgentLocation> {
 	}
 
 	@Override
-	public void addAbyssPoints(Player player, int abysPoints) {
-		getSiegeCounter().addAbyssPoints(player, abysPoints);
+	public void onAbyssPointsAdded(Player player, int abyssPoints) {
+		if (startProgress >= 10 && getSiegeLocation().isVulnerable()
+				&& (player.isInsideZone(ZoneName.get("FLAMEBERTH_DOWNS_600100000")) || player.isInsideZone(ZoneName.get("DRAGON_LORDS_SHRINE_600100000"))))
+			getSiegeCounter().addAbyssPoints(player, abyssPoints);
 	}
 
 }

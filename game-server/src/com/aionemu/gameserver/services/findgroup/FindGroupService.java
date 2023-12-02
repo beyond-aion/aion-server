@@ -5,7 +5,6 @@ import java.util.Collection;
 import java.util.Collections;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.aionemu.commons.callbacks.util.GlobalCallbackHelper;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
@@ -30,13 +29,6 @@ public class FindGroupService {
 	private ConcurrentHashMap<Integer, FindGroup> asmodianApplyFindGroups = new ConcurrentHashMap<>();
 
 	private FindGroupService() {
-
-		GlobalCallbackHelper.addCallback(new AddPlayerToGroupListener());
-		GlobalCallbackHelper.addCallback(new PlayerGroupDisbandListener());
-		GlobalCallbackHelper.addCallback(new PlayerGroupCreateListener());
-		GlobalCallbackHelper.addCallback(new AddPlayerToAllianceListener());
-		GlobalCallbackHelper.addCallback(new AllianceDisbandListener());
-		GlobalCallbackHelper.addCallback(new AllianceCreateListener());
 	}
 
 	public void addFindGroupList(Player player, int action, String message, int groupType) {
