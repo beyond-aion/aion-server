@@ -21,6 +21,7 @@ import com.alibaba.fastjson2.JSON;
 import ch.qos.logback.core.AppenderBase;
 import ch.qos.logback.core.CoreConstants;
 import ch.qos.logback.core.encoder.Encoder;
+import ch.qos.logback.core.status.StatusManager;
 
 /**
  * Sends messages via a webhook (see <a href="https://discord.com/developers/docs/resources/webhook#execute-webhook">API docs</a>).<br>
@@ -49,6 +50,8 @@ public class DiscordChannelAppender<E> extends AppenderBase<E> {
 		}
 		if (webhookUrl.isEmpty()) {
 			addInfo("<webhookUrl> is empty, appender will not be used");
+			StatusManager statusManager = context.getStatusManager();
+			statusManager.getCopyOfStatusListenerList().forEach(statusManager::remove);
 		} else {
 			webhookUri = URI.create(webhookUrl);
 			httpClient = HttpClient.newHttpClient();
