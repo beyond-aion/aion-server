@@ -3,7 +3,6 @@ package com.aionemu.loginserver.controller;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.dao.PremiumDAO;
@@ -24,8 +23,7 @@ public class PremiumController {
 	}
 
 	public static void requestBuy(int accountId, int requestId, long cost, byte serverId) {
-		PremiumDAO dao = DAOManager.getDAO(PremiumDAO.class);
-		long points = dao.getPoints(accountId);
+		long points = PremiumDAO.getPoints(accountId);
 
 		GameServerInfo server = GameServerTable.getGameServerInfo(serverId);
 		if (server == null || server.getConnection() == null || !server.isAccountOnGameServer(accountId)) {
@@ -36,7 +34,7 @@ public class PremiumController {
 		// adding new tolls
 		if (cost < 0) {
 			long ncnt = points + (cost * -1);
-			dao.updatePoints(accountId, ncnt, 0);
+			PremiumDAO.updatePoints(accountId, ncnt, 0);
 			server.getConnection().sendPacket(new SM_PREMIUM_RESPONSE(requestId, RESULT_ADD, ncnt));
 			return;
 		}
@@ -46,7 +44,7 @@ public class PremiumController {
 			return;
 		}
 
-		if (dao.updatePoints(accountId, points, cost)) {
+		if (PremiumDAO.updatePoints(accountId, points, cost)) {
 			points -= cost;
 			server.getConnection().sendPacket(new SM_PREMIUM_RESPONSE(requestId, RESULT_OK, points));
 			log.info("Account " + accountId + " purchased lot #" + requestId + " for " + cost + " from server #" + serverId);

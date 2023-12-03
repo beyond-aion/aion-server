@@ -7,7 +7,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.loginserver.dao.GameServersDAO;
 import com.aionemu.loginserver.network.gameserver.GsAuthResponse;
@@ -51,7 +50,7 @@ public class GameServerTable {
 	 * Load GameServers from database.
 	 */
 	public static void load() {
-		gameservers = getDAO().getAllGameServers();
+		gameservers = GameServersDAO.getAllGameServers();
 		log.info("GameServerTable loaded " + gameservers.size() + " registered GameServers.");
 	}
 
@@ -144,14 +143,5 @@ public class GameServerTable {
 			return false;
 		gsi.getConnection().sendPacket(new SM_REQUEST_KICK_ACCOUNT(accountId, notifyDoubleLogin));
 		return true;
-	}
-
-	/**
-	 * Retuns {@link com.aionemu.loginserver.dao.GameServersDAO} , just a shortcut
-	 * 
-	 * @return {@link com.aionemu.loginserver.dao.GameServersDAO}
-	 */
-	private static GameServersDAO getDAO() {
-		return DAOManager.getDAO(GameServersDAO.class);
 	}
 }

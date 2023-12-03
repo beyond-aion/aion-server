@@ -1,101 +1,75 @@
 package com.aionemu.loginserver.dao;
 
 import java.sql.Timestamp;
+import java.util.HashSet;
 import java.util.Set;
 
-import com.aionemu.commons.database.dao.DAO;
+import com.aionemu.commons.database.DB;
 import com.aionemu.loginserver.model.BannedIP;
 
 /**
- * DAO that manages Banned IPs
- * 
  * @author SoulKeeper
  */
-public abstract class BannedIpDAO implements DAO {
+public class BannedIpDAO {
 
-	/**
-	 * Inserts ip mask to database, returns BannedIP object that represents inserted mask or null if error.<br>
-	 * Expire time is null so ban never expires.<br>
-	 * 
-	 * @param mask
-	 *          ip mask to ban
-	 * @return BannedIP object represetns mask or null if error happened
-	 */
-	public abstract BannedIP insert(String mask);
+	public static BannedIP insert(String mask) {
+		return insert(mask, null);
+	}
 
-	/**
-	 * Inserts ip mask to database with given expireTime.<br>
-	 * Null is allowed for expire time in case of infinite ban.<br>
-	 * Returns object that represents ip mask or null in case of error.<br>
-	 * 
-	 * @param mask
-	 *          ip mask to ban
-	 * @param expireTime
-	 *          expiration time of ban
-	 * @return object that represetns added ban or null in case of error
-	 */
-	public abstract BannedIP insert(String mask, Timestamp expireTime);
+	public static BannedIP insert(String mask, Timestamp expireTime) {
+		BannedIP result = new BannedIP();
+		result.setMask(mask);
+		result.setTimeEnd(expireTime);
+		return insert(result) ? result : null;
+	}
 
-	/**
-	 * Inserts BannedIP object to database.<br>
-	 * ID of object must be NULL.<br>
-	 * If insert was successfull - sets the assigned id to BannedIP object and returns true.<br>
-	 * In case of error returns false without modification of bannedIP object.<br>
-	 * 
-	 * @param bannedIP
-	 *          record to add to db
-	 * @return true in case of success or false
-	 */
-	public abstract boolean insert(BannedIP bannedIP);
+	public static boolean insert(BannedIP bannedIP) {
+		return DB.insertUpdate("INSERT INTO banned_ip(mask, time_end) VALUES (?, ?)", ps -> {
+			ps.setString(1, bannedIP.getMask());
+			ps.setTimestamp(2, bannedIP.getTimeEnd() == null ? null : bannedIP.getTimeEnd());
+			ps.execute();
+		});
+	}
 
-	/**
-	 * Updates BannedIP object.<br>
-	 * ID of object must NOT be null.<br>
-	 * In case of success returns true.<br>
-	 * In case of error returns false.<br>
-	 * 
-	 * @param bannedIP
-	 *          record to update
-	 * @return true in case of success or false in other case
-	 */
-	public abstract boolean update(BannedIP bannedIP);
+	public static boolean update(BannedIP bannedIP) {
+		return DB.insertUpdate("UPDATE banned_ip SET mask = ?, time_end = ? WHERE id = ?", ps -> {
+			ps.setString(1, bannedIP.getMask());
+			ps.setTimestamp(2, bannedIP.getTimeEnd() == null ? null : bannedIP.getTimeEnd());
+			ps.setInt(3, bannedIP.getId());
+			ps.execute();
+		});
+	}
 
-	/**
-	 * Removes ban by mask.<br>
-	 * Returns true in case of success, false othervise.<br>
-	 * 
-	 * @param mask
-	 *          ip mask to remove
-	 * @return true in case of success, false in other case
-	 */
-	public abstract boolean remove(String mask);
+	public static boolean remove(String mask) {
+		return DB.insertUpdate("DELETE FROM banned_ip WHERE mask = ?", ps -> {
+			ps.setString(1, mask);
+			ps.execute();
+		});
+	}
 
-	/**
-	 * Removes BannedIP record by ID. Id must not be null.<br>
-	 * Returns true in case of success, false in case of error
-	 * 
-	 * @param bannedIP
-	 *          record to unban
-	 * @return true if removeas wass successfull, false in case of error
-	 */
-	public abstract boolean remove(BannedIP bannedIP);
+	public static boolean remove(BannedIP bannedIP) {
+		return DB.insertUpdate("DELETE FROM banned_ip WHERE mask = ?", ps -> {
+			// Changed from id to mask because we don't get id of last inserted ban
+			ps.setString(1, bannedIP.getMask());
+			ps.execute();
+		});
+	}
 
-	/**
-	 * Returns all bans from database.
-	 * 
-	 * @return all bans from database.
-	 */
-	public abstract Set<BannedIP> getAllBans();
+	public static Set<BannedIP> getAllBans() {
+		Set<BannedIP> result = new HashSet<>();
+		DB.select("SELECT * FROM banned_ip", rs -> {
+			while (rs.next()) {
+				BannedIP ip = new BannedIP();
+				ip.setId(rs.getInt("id"));
+				ip.setMask(rs.getString("mask"));
+				ip.setTimeEnd(rs.getTimestamp("time_end"));
+				result.add(ip);
+			}
+		});
+		return result;
+	}
 
-	public abstract void cleanExpiredBans();
-
-	/**
-	 * Returns class name that will be uses as unique identifier for all DAO classes
-	 * 
-	 * @return class name
-	 */
-	@Override
-	public final String getClassName() {
-		return BannedIpDAO.class.getName();
+	public static void cleanExpiredBans() {
+		DB.insertUpdate("DELETE FROM banned_ip WHERE time_end < current_timestamp AND time_end IS NOT NULL");
 	}
 }

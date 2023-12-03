@@ -3,7 +3,6 @@ package com.aionemu.loginserver.controller;
 import java.sql.Timestamp;
 import java.util.Map;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.dao.BannedMacDAO;
 import com.aionemu.loginserver.model.base.BannedMacEntry;
 
@@ -12,31 +11,29 @@ import com.aionemu.loginserver.model.base.BannedMacEntry;
  */
 public class BannedMacManager {
 
-	private static BannedMacManager manager = new BannedMacManager();
+	private static final BannedMacManager manager = new BannedMacManager();
 
-	private Map<String, BannedMacEntry> bannedList;
+	private final Map<String, BannedMacEntry> bannedList;
 
 	public static BannedMacManager getInstance() {
 		return manager;
 	}
 
-	private BannedMacDAO dao = DAOManager.getDAO(BannedMacDAO.class);
-
 	private BannedMacManager() {
-		bannedList = dao.load();
+		bannedList = BannedMacDAO.load();
 	}
 
 	public void unban(String address, String details) {
 		if (bannedList.containsKey(address)) {
 			bannedList.remove(address);
-			dao.remove(address);
+			BannedMacDAO.remove(address);
 		}
 	}
 
 	public void ban(String address, long time, String details) {
 		BannedMacEntry mac = new BannedMacEntry(address, new Timestamp(time), details);
 		this.bannedList.put(address, mac);
-		this.dao.update(mac);
+		BannedMacDAO.update(mac);
 	}
 
 	public final Map<String, BannedMacEntry> getMap() {

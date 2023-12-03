@@ -15,7 +15,6 @@ import com.aionemu.chatserver.network.aion.AbstractClientPacket;
 import com.aionemu.chatserver.network.aion.serverpackets.SM_CHANNEL_MESSAGE;
 import com.aionemu.chatserver.network.netty.handler.ClientChannelHandler;
 import com.aionemu.chatserver.service.BroadcastService;
-import com.aionemu.commons.database.dao.DAOManager;
 
 /**
  * @author ATracer
@@ -69,7 +68,7 @@ public class CM_CHANNEL_MESSAGE extends AbstractClientPacket {
 			LoggerFactory.getLogger("CHAT_LOG").info("[{}] {}: {}", message.getChannel().name(), message.getSender().getName(), message.getTextString());
 
 		if (LoggingConfig.LOG_CHAT_TO_DB)
-			DAOManager.getDAO(ChatLogDAO.class).logChannelChat(message.getSender().getName(), message.getTextString(), "", message.getChannel().name());
+			ChatLogDAO.save(message.getSender().getName(), message.getTextString(), message.getChannel().name());
 	}
 
 	@Override

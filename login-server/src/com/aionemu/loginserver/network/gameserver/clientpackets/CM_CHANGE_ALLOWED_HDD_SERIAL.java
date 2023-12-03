@@ -1,6 +1,5 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 
@@ -15,6 +14,6 @@ public class CM_CHANGE_ALLOWED_HDD_SERIAL extends GsClientPacket {
 	}
 
 	protected void runImpl() {
-		DAOManager.getDAO(AccountDAO.class).updateAllowedHDDSerial(accountId, hddSerial);
+		AccountDAO.updateAllowedHDDSerial(accountId, hddSerial);
 	}
 }

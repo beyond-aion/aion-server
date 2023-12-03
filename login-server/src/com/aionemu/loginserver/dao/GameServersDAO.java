@@ -1,31 +1,27 @@
 package com.aionemu.loginserver.dao;
 
+import java.util.HashMap;
 import java.util.Map;
 
-import com.aionemu.commons.database.dao.DAO;
+import com.aionemu.commons.database.DB;
 import com.aionemu.loginserver.GameServerInfo;
 
 /**
- * DAO that manages GameServers
- * 
  * @author -Nemesiss-
  */
-public abstract class GameServersDAO implements DAO {
+public class GameServersDAO {
 
-	/**
-	 * Returns all gameservers from database.
-	 * 
-	 * @return all gameservers from database.
-	 */
-	public abstract Map<Byte, GameServerInfo> getAllGameServers();
-
-	/**
-	 * Returns class name that will be uses as unique identifier for all DAO classes
-	 * 
-	 * @return class name
-	 */
-	@Override
-	public final String getClassName() {
-		return GameServersDAO.class.getName();
+	public static Map<Byte, GameServerInfo> getAllGameServers() {
+		final Map<Byte, GameServerInfo> result = new HashMap<>();
+		DB.select("SELECT * FROM gameservers", resultSet -> {
+			while (resultSet.next()) {
+				byte id = resultSet.getByte("id");
+				String ipMask = resultSet.getString("mask");
+				String password = resultSet.getString("password");
+				GameServerInfo gsi = new GameServerInfo(id, ipMask, password);
+				result.put(id, gsi);
+			}
+		});
+		return result;
 	}
 }

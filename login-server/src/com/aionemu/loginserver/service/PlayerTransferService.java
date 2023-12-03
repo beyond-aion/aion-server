@@ -10,7 +10,6 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.controller.AccountController;
@@ -46,7 +45,7 @@ public class PlayerTransferService {
 	}
 
 	protected void verifyNewTasks() {
-		List<PlayerTransferTask> tasksNew = DAOManager.getDAO(PlayerTransferDAO.class).getNew();
+		List<PlayerTransferTask> tasksNew = PlayerTransferDAO.getNew();
 		log.info("PlayerTransfer perform task init. " + tasks.size() + " new tasks.");
 		for (PlayerTransferTask task : tasksNew) {
 			GameServerInfo server = GameServerTable.getGameServerInfo(task.sourceServerId);
@@ -73,7 +72,7 @@ public class PlayerTransferService {
 
 			task.status = PlayerTransferTask.STATUS_ACTIVE;
 			tasks.put(task.id, task);
-			DAOManager.getDAO(PlayerTransferDAO.class).update(task);
+			PlayerTransferDAO.update(task);
 			server.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.PERFORM_ACTION, task));
 			log.info("performing player transfer #" + task.id);
 		}
@@ -139,8 +138,8 @@ public class PlayerTransferService {
 
 		account.setActivated((byte) 0);
 		saccount.setActivated((byte) 0);
-		DAOManager.getDAO(AccountDAO.class).updateAccount(account);
-		DAOManager.getDAO(AccountDAO.class).updateAccount(saccount);
+		AccountDAO.updateAccount(account);
+		AccountDAO.updateAccount(saccount);
 
 		targetServer.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.SEND_INFO, request));
 		log.info("player transfer account " + task.targetServerId + " became active.");
@@ -153,7 +152,7 @@ public class PlayerTransferService {
 		PlayerTransferTask task = tasks.remove(taskId);
 		task.status = PlayerTransferTask.STATUS_ERROR;
 		task.comment = reason;
-		DAOManager.getDAO(PlayerTransferDAO.class).update(task);
+		PlayerTransferDAO.update(task);
 	}
 
 	/**
@@ -164,7 +163,7 @@ public class PlayerTransferService {
 		PlayerTransferTask task = tasks.remove(taskId);
 		task.status = PlayerTransferTask.STATUS_ERROR;
 		task.comment = reason;
-		DAOManager.getDAO(PlayerTransferDAO.class).update(task);
+		PlayerTransferDAO.update(task);
 		GameServerInfo targetServer = GameServerTable.getGameServerInfo(request.targetServerId);
 		if (targetServer == null || targetServer.getConnection() == null) {
 			log.error("Player transfer requests offline server! #" + request.targetServerId);
@@ -173,8 +172,8 @@ public class PlayerTransferService {
 
 		request.account.setActivated((byte) 1);
 		request.saccount.setActivated((byte) 1);
-		DAOManager.getDAO(AccountDAO.class).updateAccount(request.account);
-		DAOManager.getDAO(AccountDAO.class).updateAccount(request.saccount);
+		AccountDAO.updateAccount(request.account);
+		AccountDAO.updateAccount(request.saccount);
 
 		targetServer.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.ERROR, taskId, reason));
 	}
@@ -187,7 +186,7 @@ public class PlayerTransferService {
 		PlayerTransferTask task = tasks.remove(taskId);
 		task.status = PlayerTransferTask.STATUS_DONE;
 		task.comment = "task done";
-		DAOManager.getDAO(PlayerTransferDAO.class).update(task);
+		PlayerTransferDAO.update(task);
 		GameServerInfo sourceServer = GameServerTable.getGameServerInfo(request.serverId);
 		if (sourceServer == null || sourceServer.getConnection() == null) {
 			log.error("Player transfer requests offline server! #" + request.serverId);
@@ -195,8 +194,8 @@ public class PlayerTransferService {
 		}
 		request.account.setActivated((byte) 1);
 		request.saccount.setActivated((byte) 1);
-		DAOManager.getDAO(AccountDAO.class).updateAccount(request.account);
-		DAOManager.getDAO(AccountDAO.class).updateAccount(request.saccount);
+		AccountDAO.updateAccount(request.account);
+		AccountDAO.updateAccount(request.saccount);
 		log.info("transfer #" + taskId + " went onOK!");
 		sourceServer.getConnection().sendPacket(new SM_PTRANSFER_RESPONSE(PlayerTransferResultStatus.OK, request));
 	}

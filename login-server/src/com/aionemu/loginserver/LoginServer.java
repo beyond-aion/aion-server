@@ -17,7 +17,6 @@ import java.util.zip.ZipOutputStream;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfo;
@@ -98,13 +97,12 @@ public class LoginServer {
 
 		Config.load();
 		DatabaseFactory.init();
-		DAOManager.init();
 		KeyGen.init();
 
 		GameServerTable.load();
 		BannedIpController.start();
-		DAOManager.getDAO(BannedMacDAO.class).cleanExpiredBans();
-		DAOManager.getDAO(BannedHddDAO.class).cleanExpiredBans();
+		BannedMacDAO.cleanExpiredBans();
+		BannedHddDAO.cleanExpiredBans();
 
 		PlayerTransferService.getInstance();
 

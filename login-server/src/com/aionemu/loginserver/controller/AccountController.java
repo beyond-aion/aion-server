@@ -4,7 +4,6 @@ import java.util.HashMap;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
@@ -32,8 +31,7 @@ import com.aionemu.loginserver.utils.ExternalAuth;
 /**
  * This class is responsible for controlling all account actions
  * 
- * @author KID, SoulKeeper
- * @modified Neon
+ * @author KID, SoulKeeper, Neon
  */
 public class AccountController {
 
@@ -64,9 +62,6 @@ public class AccountController {
 
 	/**
 	 * This method is for answering GameServer question about account authentication on GameServer side.
-	 * 
-	 * @param key
-	 * @param gsConnection
 	 */
 	public static void checkAuth(SessionKey key, GsConnection gsConnection) {
 		LoginConnection con = accountsOnLS.get(key.accountId);
@@ -82,9 +77,9 @@ public class AccountController {
 			gsi.addAccountToGameServer(acc);
 
 			acc.setLastServer(gsi.getId());
-			getAccountDAO().updateLastServer(acc.getId(), acc.getLastServer());
+			AccountDAO.updateLastServer(acc.getId(), acc.getLastServer());
 
-			long toll = DAOManager.getDAO(PremiumDAO.class).getPoints(acc.getId());
+			long toll = PremiumDAO.getPoints(acc.getId());
 			// Send response to GameServer
 			gsConnection.sendPacket(new SM_ACCOUNT_AUTH_RESPONSE(key.accountId, true, acc.getName(), acc.getCreationDate().getTime(), acc.getAccessLevel(), acc.getMembership(), toll, acc.getAllowedHddSerial()));
 		} else {
@@ -92,11 +87,6 @@ public class AccountController {
 		}
 	}
 
-	/**
-	 * Add account to reconnectionAccount list
-	 * 
-	 * @param acc
-	 */
 	public static synchronized void addReconnectingAccount(ReconnectingAccount acc) {
 		reconnectingAccounts.put(acc.getAccount().getId(), acc);
 	}
@@ -219,9 +209,9 @@ public class AccountController {
 		AccountTimeController.updateOnLogin(account);
 
 		// if everything was OK
-		getAccountDAO().updateLastIp(account.getId(), connection.getIP());
+		AccountDAO.updateLastIp(account.getId(), connection.getIP());
 		// last mac is updated after receiving packet from gameserver
-		getAccountDAO().updateMembership(account.getId());
+		AccountDAO.updateMembership(account.getId());
 
 		return AionAuthResponse.STR_L2AUTH_S_ALL_OK;
 	}
@@ -250,21 +240,21 @@ public class AccountController {
 	 * @return loaded account or null
 	 */
 	public static Account loadAccount(String name) {
-		Account account = getAccountDAO().getAccount(name);
+		Account account = AccountDAO.getAccount(name);
 		if (account != null)
 			setAccountTime(account);
 		return account;
 	}
 
 	public static Account loadAccount(int id) {
-		Account account = getAccountDAO().getAccount(id);
+		Account account = AccountDAO.getAccount(id);
 		if (account != null)
 			setAccountTime(account);
 		return account;
 	}
 
 	private static void setAccountTime(Account account) {
-		AccountTime accTime = DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(account.getId());
+		AccountTime accTime = AccountTimeDAO.getAccountTime(account.getId());
 		if (accTime == null)
 			throw new NullPointerException("Account Time for account " + account + " is null");
 		account.setAccountTime(accTime);
@@ -289,24 +279,12 @@ public class AccountController {
 		account.setMembership((byte) 0);
 		account.setActivated((byte) 1);
 
-		if (getAccountDAO().insertAccount(account)) {
+		if (AccountDAO.insertAccount(account)) {
 			return account;
 		}
 		return null;
 	}
 
-	/**
-	 * Returns {@link com.aionemu.loginserver.dao.AccountDAO}, just a shortcut
-	 * 
-	 * @return {@link com.aionemu.loginserver.dao.AccountDAO}
-	 */
-	private static AccountDAO getAccountDAO() {
-		return DAOManager.getDAO(AccountDAO.class);
-	}
-
-	/**
-	 * @param accountId
-	 */
 	public static synchronized void loadGSCharactersCount(int accountId) {
 		Map<Byte, Integer> accountCharacterCount = new HashMap<>();
 		for (GameServerInfo gsi : GameServerTable.getGameServers()) {

@@ -7,7 +7,6 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.loginserver.dao.BannedIpDAO;
 import com.aionemu.loginserver.model.BannedIP;
@@ -35,7 +34,7 @@ public class BannedIpController {
 	}
 
 	private static void clean() {
-		getDAO().cleanExpiredBans();
+		BannedIpDAO.cleanExpiredBans();
 	}
 
 	/**
@@ -50,7 +49,7 @@ public class BannedIpController {
 	 */
 	public static void reload() {
 		// we are not going to make ip ban every minute, so it's ok to simplify a concurrent code a bit
-		banList = getDAO().getAllBans();
+		banList = BannedIpDAO.getAllBans();
 		log.info("BannedIpController loaded " + banList.size() + " IP bans.");
 	}
 
@@ -93,7 +92,7 @@ public class BannedIpController {
 		BannedIP ipBan = new BannedIP();
 		ipBan.setMask(ip);
 		ipBan.setTimeEnd(expireTime);
-		return banList.add(ipBan) && getDAO().insert(ipBan);
+		return banList.add(ipBan) && BannedIpDAO.insert(ipBan);
 	}
 
 	/**
@@ -105,13 +104,13 @@ public class BannedIpController {
 	 */
 	public static boolean addOrUpdateBan(BannedIP ipBan) {
 		if (ipBan.getId() == null) {
-			if (getDAO().insert(ipBan)) {
+			if (BannedIpDAO.insert(ipBan)) {
 				banList.add(ipBan);
 				return true;
 			}
 			return false;
 		}
-		return getDAO().update(ipBan);
+		return BannedIpDAO.update(ipBan);
 	}
 
 	/**
@@ -126,7 +125,7 @@ public class BannedIpController {
 		while (it.hasNext()) {
 			BannedIP ipBan = it.next();
 			if (ipBan.getMask().equals(ip)) {
-				if (getDAO().remove(ipBan)) {
+				if (BannedIpDAO.remove(ipBan)) {
 					it.remove();
 					return true;
 				}
@@ -134,14 +133,5 @@ public class BannedIpController {
 			}
 		}
 		return false;
-	}
-
-	/**
-	 * Retuns {@link com.aionemu.loginserver.dao.BannedIpDAO} , just a shortcut
-	 * 
-	 * @return {@link com.aionemu.loginserver.dao.BannedIpDAO}
-	 */
-	private static BannedIpDAO getDAO() {
-		return DAOManager.getDAO(BannedIpDAO.class);
 	}
 }

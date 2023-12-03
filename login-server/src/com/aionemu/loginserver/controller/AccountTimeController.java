@@ -2,7 +2,6 @@ package com.aionemu.loginserver.controller;
 
 import java.sql.Timestamp;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.dao.AccountTimeDAO;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.model.AccountTime;
@@ -42,7 +41,7 @@ public class AccountTimeController {
 
 		accountTime.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
 
-		DAOManager.getDAO(AccountTimeDAO.class).updateAccountTime(account.getId(), accountTime);
+		AccountTimeDAO.updateAccountTime(account.getId(), accountTime);
 		account.setAccountTime(accountTime);
 	}
 
@@ -58,7 +57,7 @@ public class AccountTimeController {
 		accountTime.setLastLoginTime(new Timestamp(System.currentTimeMillis()));
 		accountTime.setSessionDuration(System.currentTimeMillis() - accountTime.getLastLoginTime().getTime());
 		accountTime.setAccumulatedOnlineTime(accountTime.getAccumulatedOnlineTime() + accountTime.getSessionDuration());
-		DAOManager.getDAO(AccountTimeDAO.class).updateAccountTime(account.getId(), accountTime);
+		AccountTimeDAO.updateAccountTime(account.getId(), accountTime);
 		account.setAccountTime(accountTime);
 	}
 

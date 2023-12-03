@@ -23,7 +23,6 @@ import com.aionemu.chatserver.service.ChatService;
 import com.aionemu.chatserver.service.GameServerService;
 import com.aionemu.chatserver.utils.IdFactory;
 import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfo;
@@ -101,7 +100,6 @@ public class ChatServer {
 
 		Config.load();
 		DatabaseFactory.init();
-		DAOManager.init();
 		IdFactory.getInstance();
 		GameServerService.getInstance();
 		ChatService.getInstance();

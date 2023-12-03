@@ -1,6 +1,5 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.dao.AccountDAO;
 import com.aionemu.loginserver.model.Account;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
@@ -24,16 +23,12 @@ public class CM_LS_CONTROL extends GsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		Account account = DAOManager.getDAO(AccountDAO.class).getAccount(accountId);
+		Account account = AccountDAO.getAccount(accountId);
 		switch (type) {
-			case 1:
-				account.setAccessLevel(param);
-				break;
-			case 2:
-				account.setMembership(param);
-				break;
+			case 1 -> account.setAccessLevel(param);
+			case 2 -> account.setMembership(param);
 		}
-		boolean result = DAOManager.getDAO(AccountDAO.class).updateAccount(account);
+		boolean result = AccountDAO.updateAccount(account);
 		sendPacket(new SM_LS_CONTROL_RESPONSE(type, param, account.getId(), adminId, result));
 	}
 }

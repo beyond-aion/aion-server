@@ -2,7 +2,6 @@ package com.aionemu.loginserver.network.gameserver.clientpackets;
 
 import java.sql.Timestamp;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.GameServerTable;
 import com.aionemu.loginserver.controller.AccountController;
@@ -73,9 +72,9 @@ public class CM_BAN extends GsClientPacket {
 				Timestamp newTime = null;
 				newTime = new Timestamp(time == 0 ? 1000 : System.currentTimeMillis() + (time * 60000L));
 
-				AccountTime accTime = account != null ? account.getAccountTime() : DAOManager.getDAO(AccountTimeDAO.class).getAccountTime(accountId);
+				AccountTime accTime = account != null ? account.getAccountTime() : AccountTimeDAO.getAccountTime(accountId);
 				accTime.setPenaltyEnd(newTime);
-				result = DAOManager.getDAO(AccountTimeDAO.class).updateAccountTime(accountId, accTime);
+				result = AccountTimeDAO.updateAccountTime(accountId, accTime);
 			}
 		}
 
@@ -83,7 +82,7 @@ public class CM_BAN extends GsClientPacket {
 		if (type == 2 || type == 3) {
 			if (accountId != 0) // If we got account ID, then ban last IP
 			{
-				String newip = DAOManager.getDAO(AccountDAO.class).getLastIp(accountId);
+				String newip = AccountDAO.getLastIp(accountId);
 				if (!newip.isEmpty())
 					ip = newip;
 			}

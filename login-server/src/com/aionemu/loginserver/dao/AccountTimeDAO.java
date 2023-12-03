@@ -1,40 +1,56 @@
 package com.aionemu.loginserver.dao;
 
-import com.aionemu.commons.database.dao.DAO;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+
+import org.slf4j.LoggerFactory;
+
+import com.aionemu.commons.database.DB;
+import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.loginserver.model.AccountTime;
 
 /**
- * DAO to manage account time
+ * @author EvilSpirit
  */
-public abstract class AccountTimeDAO implements DAO {
+public class AccountTimeDAO {
 
-	/**
-	 * Updates {@link AccountTime} data of account
-	 * 
-	 * @param accountId
-	 *          account id
-	 * @param accountTime
-	 *          account time set
-	 * @return Update success status
-	 */
-	public abstract boolean updateAccountTime(int accountId, AccountTime accountTime);
+	public static boolean updateAccountTime(int accountId, AccountTime accountTime) {
+		return DB.insertUpdate(
+			"REPLACE INTO account_time (account_id, last_active, expiration_time, session_duration, accumulated_online, accumulated_rest, penalty_end) values "
+				+ "(?,?,?,?,?,?,?)",
+			ps -> {
+				ps.setLong(1, accountId);
+				ps.setTimestamp(2, accountTime.getLastLoginTime());
+				ps.setTimestamp(3, accountTime.getExpirationTime());
+				ps.setLong(4, accountTime.getSessionDuration());
+				ps.setLong(5, accountTime.getAccumulatedOnlineTime());
+				ps.setLong(6, accountTime.getAccumulatedRestTime());
+				ps.setTimestamp(7, accountTime.getPenaltyEnd());
+				ps.execute();
+			});
+	}
 
-	/**
-	 * Updates {@link AccountTime} data of account
-	 * 
-	 * @param accountId
-	 * @return AccountTime or null on error
-	 */
-	public abstract AccountTime getAccountTime(int accountId);
-
-	/**
-	 * Returns unique class name for all implementations
-	 * 
-	 * @return unique class name for all implementations
-	 */
-	@Override
-	public final String getClassName() {
-		return AccountTimeDAO.class.getName();
+	public static AccountTime getAccountTime(int accountId) {
+		try (Connection con = DatabaseFactory.getConnection();
+			PreparedStatement st = con.prepareStatement("SELECT * FROM account_time WHERE account_id = ?")) {
+			st.setLong(1, accountId);
+			try (ResultSet rs = st.executeQuery()) {
+				if (rs.next()) {
+					AccountTime accountTime = new AccountTime();
+					accountTime.setLastLoginTime(rs.getTimestamp("last_active"));
+					accountTime.setSessionDuration(rs.getLong("session_duration"));
+					accountTime.setAccumulatedOnlineTime(rs.getLong("accumulated_online"));
+					accountTime.setAccumulatedRestTime(rs.getLong("accumulated_rest"));
+					accountTime.setPenaltyEnd(rs.getTimestamp("penalty_end"));
+					accountTime.setExpirationTime(rs.getTimestamp("expiration_time"));
+					return accountTime;
+				}
+			}
+		} catch (Exception e) {
+			LoggerFactory.getLogger(AccountTimeDAO.class).error("Can't get account time for account with id: " + accountId, e);
+		}
+		return null;
 	}
 
 }

@@ -1,6 +1,5 @@
 package com.aionemu.loginserver.network.gameserver.clientpackets;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.loginserver.dao.PremiumDAO;
 import com.aionemu.loginserver.network.gameserver.GsClientPacket;
 
@@ -20,6 +19,6 @@ public class CM_ACCOUNT_TOLL_INFO extends GsClientPacket {
 
 	@Override
 	protected void runImpl() {
-		DAOManager.getDAO(PremiumDAO.class).updatePoints(accountId, toll, 0);
+		PremiumDAO.updatePoints(accountId, toll, 0);
 	}
 }
