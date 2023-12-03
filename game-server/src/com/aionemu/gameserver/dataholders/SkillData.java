@@ -21,11 +21,8 @@ public class SkillData {
 	@XmlElement(name = "skill_template")
 	private List<SkillTemplate> skillTemplates;
 
-	/**
-	 * Map that contains skillId - SkillTemplate key-value pair
-	 */
 	@XmlTransient
-	private final Map<Integer, SkillTemplate> skillData = new HashMap<>();
+	private final Map<Integer, SkillTemplate> skillTemplateById = new HashMap<>();
 
 	@XmlTransient
 	private final Map<String, List<SkillTemplate>> skillTemplatesByGroup = new LinkedHashMap<>();
@@ -33,49 +30,31 @@ public class SkillData {
 	@XmlTransient
 	private final Map<String, List<SkillTemplate>> skillTemplatesByStack = new LinkedHashMap<>();
 
-	/**
-	 * Map that contains cooldownId - skillId List
-	 */
 	@XmlTransient
-	private Map<Integer, List<Integer>> cooldownGroups = new HashMap<>();
-
+	private final Map<Integer, List<Integer>> skillIdsByCooldownId = new HashMap<>();
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		skillData.clear();
+		skillTemplateById.clear();
 		skillTemplatesByGroup.clear();
 		skillTemplatesByStack.clear();
-		cooldownGroups.clear();
+		skillIdsByCooldownId.clear();
 		for (SkillTemplate skillTemplate : skillTemplates) {
 			int skillId = skillTemplate.getSkillId();
 			int cooldownId = skillTemplate.getCooldownId();
-			skillData.put(skillId, skillTemplate);
-			if (!cooldownGroups.containsKey(cooldownId))
-				cooldownGroups.put(cooldownId, new ArrayList<>());
-			cooldownGroups.get(cooldownId).add(skillId);
-
-			if (skillTemplate.getGroup() != null) {
-				if (!skillTemplatesByGroup.containsKey(skillTemplate.getGroup()))
-					skillTemplatesByGroup.put(skillTemplate.getGroup(), new ArrayList<>());
-				skillTemplatesByGroup.get(skillTemplate.getGroup()).add(skillTemplate);
-			}
-			if (skillTemplate.getStack() != null) {
-				if (!skillTemplatesByStack.containsKey(skillTemplate.getGroup()))
-					skillTemplatesByStack.put(skillTemplate.getGroup(), new ArrayList<>());
-				skillTemplatesByStack.get(skillTemplate.getGroup()).add(skillTemplate);
-			}
+			skillTemplateById.put(skillId, skillTemplate);
+			skillIdsByCooldownId.computeIfAbsent(cooldownId, k -> new ArrayList<>()).add(skillId);
+			if (skillTemplate.getGroup() != null)
+				skillTemplatesByGroup.computeIfAbsent(skillTemplate.getGroup(), k -> new ArrayList<>()).add(skillTemplate);
+			if (skillTemplate.getStack() != null)
+				skillTemplatesByStack.computeIfAbsent(skillTemplate.getStack(), k -> new ArrayList<>()).add(skillTemplate);
 		}
 		skillTemplates = null;
 	}
 
-	/**
-	 * @param skillId
-	 * @return SkillTemplate
-	 */
 	public SkillTemplate getSkillTemplate(int skillId) {
-		return skillData.get(skillId);
+		return skillTemplateById.get(skillId);
 	}
 
 	/**
-	 * @param skillGroup
 	 * @return All skill templates of this group. A group is less precise and may be null.
 	 */
 	public List<SkillTemplate> getSkillTemplatesByGroup(String skillGroup) {
@@ -83,7 +62,6 @@ public class SkillData {
 	}
 
 	/**
-	 * @param skillStack
 	 * @return All skill templates of this stack. A stack is more precise than a group.
 	 *         For example: Charge skills have their own stack per charging level. Also, skills that are similar for both factions have the same group,
 	 *         but different stacks.
@@ -92,28 +70,16 @@ public class SkillData {
 		return skillTemplatesByStack.get(skillStack);
 	}
 
-	/**
-	 * @return skillData.size()
-	 */
 	public int size() {
-		return skillData.size();
+		return skillTemplateById.size();
 	}
 
-	/**
-	 * @return the skillTemplates
-	 */
 	public Collection<SkillTemplate> getSkillTemplates() {
-		return skillData.values();
+		return skillTemplateById.values();
 	}
 
-	/**
-	 * This method is used to get all skills assigned to a specific cooldownId
-	 * 
-	 * @param cooldownId
-	 * @return List including all skills for asked cooldownId
-	 */
 	public List<Integer> getSkillsForCooldownId(int cooldownId) {
-		return cooldownGroups.get(cooldownId);
+		return skillIdsByCooldownId.get(cooldownId);
 	}
 
 	public void validateMotions() {
