@@ -13,11 +13,10 @@
 	<xs:complexType name="SkillTreeEntry">
 		<xs:attribute name="classId" type="playerClass"/>
 		<xs:attribute name="skillId" type="xs:int" use="required"/>
-		<xs:attribute name="skillLearn" type="xs:int" use="optional"/>
-		<xs:attribute name="name" type="xs:string" use="required"/>
+		<xs:attribute name="skillLearn" type="xs:int"/>
 		<xs:attribute name="autolearn" type="xs:boolean"/>
 		<xs:attribute name="stigma" type="xs:byte"/>
-		<xs:attribute name="race" type="Race" use="required"/>
+		<xs:attribute name="race" type="Race"/>
 		<xs:attribute name="minLevel" type="xs:int" use="required"/>
 	</xs:complexType>
 </xs:schema>

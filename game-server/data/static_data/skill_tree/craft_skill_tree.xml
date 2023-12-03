@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <skill_tree xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="skill_tree.xsd">
-	<skill minLevel="1" autolearn="true" skillId="30001" name="Collection" race="PC_ALL" classId="ALL"/>
-	<skill minLevel="10" autolearn="true" skillId="30003" name="Extract Aether" race="PC_ALL" classId="ALL"/>
-	<skill minLevel="10" autolearn="true" skillId="40009" name="Morph Substances" race="PC_ALL" classId="ALL"/>
+	<skill skillId="30001" minLevel="1" autolearn="true" />
+	<skill skillId="30003" minLevel="10" autolearn="true" />
+	<skill skillId="40009" minLevel="10" autolearn="true" />
 </skill_tree>

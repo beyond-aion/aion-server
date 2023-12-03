@@ -10,21 +10,20 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "skill")
 public class SkillLearnTemplate {
 
 	@XmlAttribute(name = "classId")
-	private PlayerClass classId = null;
+	private PlayerClass classId;
 	@XmlAttribute(name = "skillId", required = true)
 	private int skillId;
-	@XmlAttribute(name = "skillLearn", required = false)
+	@XmlAttribute(name = "skillLearn")
 	private Integer skillLearn;
-	@XmlAttribute(name = "race", required = true)
-	private Race race;
+	@XmlAttribute(name = "race")
+	private Race race = Race.PC_ALL;
 	@XmlAttribute(name = "minLevel", required = true)
 	private int minLevel;
 	@XmlAttribute
@@ -32,58 +31,30 @@ public class SkillLearnTemplate {
 	@XmlAttribute
 	private byte stigma = 0;
 
-	/**
-	 * @return the classId
-	 */
 	public PlayerClass getClassId() {
 		return classId;
 	}
 
-	/**
-	 * @return the skillId
-	 */
 	public int getSkillId() {
 		return skillId;
 	}
 
-	/**
-	 * @return the skill level
-	 */
 	public int getSkillLevel() {
 		return DataManager.SKILL_DATA.getSkillTemplate(skillId).getLvl();
 	}
 
-	/**
-	 * @return the skill stack name
-	 */
-	public String getStack() {
-		return DataManager.SKILL_DATA.getSkillTemplate(skillId).getStack();
-	}
-
-	/**
-	 * @return the minLevel
-	 */
 	public int getMinLevel() {
 		return minLevel;
 	}
 
-	/**
-	 * @return the race
-	 */
 	public Race getRace() {
 		return race;
 	}
 
-	/**
-	 * @return the autolearn
-	 */
 	public boolean isAutolearn() {
 		return autolearn;
 	}
 
-	/**
-	 * @return the stigma
-	 */
 	public boolean isStigma() {
 		return stigma > 0;
 	}
