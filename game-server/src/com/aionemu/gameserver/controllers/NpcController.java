@@ -58,21 +58,14 @@ public class NpcController extends CreatureController<Npc> {
 	@Override
 	public void see(VisibleObject object) {
 		super.see(object);
-		Npc owner = getOwner();
-		if (object instanceof Creature) {
-			Creature creature = (Creature) object;
-			owner.getAi().onCreatureEvent(AIEventType.CREATURE_SEE, creature);
-			if (creature instanceof Player) {
-				if (owner.isDead())
-					DropService.getInstance().see((Player) creature, owner);
-			}
+		if (object instanceof Creature creature) {
+			getOwner().getAi().onCreatureEvent(AIEventType.CREATURE_SEE, creature);
 		}
 	}
 
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
-		if (object instanceof Creature) {
-			Creature creature = (Creature) object;
+		if (object instanceof Creature creature) {
 			getOwner().getAi().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, creature);
 		}
 		super.notSee(object, animation);

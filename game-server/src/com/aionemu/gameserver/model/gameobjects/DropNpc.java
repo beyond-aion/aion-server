@@ -40,11 +40,8 @@ public class DropNpc {
 		return allowedLooters;
 	}
 
-	/**
-	 * @return true if playerObjId is found in list
-	 */
-	public boolean isAllowedLooter(Player player) {
-		return allowedLooters.contains(player.getObjectId());
+	public boolean isAllowedToLoot(Player player) {
+		return isFreeForAll || allowedLooters.contains(player.getObjectId());
 	}
 
 	/**

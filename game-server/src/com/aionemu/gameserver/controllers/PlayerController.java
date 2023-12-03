@@ -92,6 +92,7 @@ public class PlayerController extends CreatureController<Player> {
 				} else {
 					QuestEngine.getInstance().onAtDistance(new QuestEnv(npc, getOwner(), 0));
 				}
+				DropService.getInstance().see(getOwner(), npc);
 			} else if (creature instanceof Player player) {
 				PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_INFO(player, getOwner().isAggroIconTo(player)));
 				PacketSendUtility.sendPacket(getOwner(), new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));

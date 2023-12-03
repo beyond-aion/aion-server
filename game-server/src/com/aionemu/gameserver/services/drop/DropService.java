@@ -92,7 +92,7 @@ public class DropService {
 		if (player.isLooting())
 			closeDropList(player, player.getLootingNpcOid());
 
-		if (!dropNpc.isFreeForAll() && !dropNpc.isAllowedLooter(player)) {
+		if (!dropNpc.isAllowedToLoot(player)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_LOOT_NO_RIGHT());
 			return;
 		}
@@ -177,11 +177,7 @@ public class DropService {
 					}
 				}
 			}
-			if (dropNpc.isFreeForAll()) {
-				PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, 0));
-			} else {
-				PacketSendUtility.broadcastPacket(player, new SM_LOOT_STATUS(npcObjectId, 0), true, dropNpc::isAllowedLooter);
-			}
+			PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, 0), dropNpc::isAllowedToLoot);
 		}
 	}
 
@@ -297,7 +293,7 @@ public class DropService {
 		}
 
 		// fix exploit
-		if (!requestedItem.isDistributeItem() && !dropNpc.isFreeForAll() && !dropNpc.isAllowedLooter(player)) {
+		if (!requestedItem.isDistributeItem() && !dropNpc.isAllowedToLoot(player)) {
 			return;
 		}
 
@@ -492,15 +488,12 @@ public class DropService {
 		}
 	}
 
-	public void see(final Player player, Npc owner) {
-		final int id = owner.getObjectId();
-		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(id);
-
-		if (dropNpc == null)
+	public void see(Player player, Npc npc) {
+		if (!npc.isDead())
 			return;
-
-		if (dropNpc.isFreeForAll() || dropNpc.isAllowedLooter(player)) {
-			ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(id, 0)), 5000);
+		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npc.getObjectId());
+		if (dropNpc != null && dropNpc.isAllowedToLoot(player)) {
+			PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npc.getObjectId(), 0));
 		}
 	}
 
