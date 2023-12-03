@@ -74,11 +74,15 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 	 * Process Pending Close connections.
 	 */
 	private void processPendingClose() {
+		if (pendingClose.isEmpty())
+			return;
 		synchronized (pendingClose) {
-			if (!pendingClose.isEmpty()) {
-				for (AConnection<?> connection : pendingClose)
+			for (Iterator<AConnection<?>> iterator = pendingClose.iterator(); iterator.hasNext();) {
+				AConnection<?> connection = iterator.next();
+				if (connection.getSendMsgQueue().isEmpty()) {
 					closeConnectionImpl(connection);
-				pendingClose.clear();
+					iterator.remove();
+				}
 			}
 		}
 	}
