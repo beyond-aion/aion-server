@@ -288,7 +288,9 @@ public class DropService {
 		}
 
 		if (requestedItem == null) {
-			log.warn(player + " requested drop at invalid index " + itemIndex + " from " + World.getInstance().findVisibleObject(npcObjectId));
+			log.warn(player + " requested drop at invalid index " + itemIndex + " from "
+				+ World.getInstance().findVisibleObject(npcObjectId).getObjectTemplate().getTemplateId() + " (autoloot=" + autoLoot + "), looted by "
+				+ dropNpc.getLooterInfo(itemIndex));
 			return;
 		}
 
@@ -406,6 +408,7 @@ public class DropService {
 		if (remainingCount <= 0) {
 			synchronized (dropItems) {
 				dropItems.remove(requestedItem);
+				dropNpc.addLooterInfo(player, requestedItem.getIndex(), autoLoot);
 			}
 			announceDrop(requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer() : player, template);
 		} else
