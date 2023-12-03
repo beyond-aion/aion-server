@@ -5,6 +5,7 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.model.DashStatus;
@@ -32,6 +33,8 @@ public class RandomMoveLocEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		Skill skill = effect.getSkill();
 		World.getInstance().updatePosition(effect.getEffector(), skill.getX(), skill.getY(), skill.getZ(), skill.getH());
+		if (effect.getEffector().getMoveController() instanceof PlayerMoveController pmc) 
+			pmc.setLastMoveByRandomLocEffect();
 	}
 
 	@Override

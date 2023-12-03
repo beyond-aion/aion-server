@@ -12,6 +12,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.services.antihack.AntiHackService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -72,12 +73,18 @@ public class CM_MOVE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
+		boolean lastMoveByRandomLocEffect = player.getMoveController().resetLastMoveByRandomLocEffect();
 		if (player.isDead())
 			return;
 		if (player.getEffectController().isUnderFear() || player.getEffectController().isConfused())
 			return;
 		if (player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE)) // client sends crap when watching cutscenes in transform state
 			return;
+		if (lastMoveByRandomLocEffect && player.getTarget() != null && !PositionUtil.isInRange(player, x, y, z, 1)) {
+			// work around a client bug: you get moved to your target when using Blind Leap right on landing after jumping down a hill 
+			sendPacket(new SM_MOVE(player));
+			return;
+		}
 
 		PlayerMoveController m = player.getMoveController();
 		boolean jumping = false;

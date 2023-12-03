@@ -21,6 +21,7 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	private byte lastMovementMask;
 	private long lastPositionFromClientMillis;
 	private WorldPosition lastPositionFromClient;
+	private boolean lastMoveByRandomLocEffect;
 
 	public PlayerMoveController(Player owner) {
 		super(owner);
@@ -108,5 +109,15 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 		fallDistance = 0;
 		lastFallZ = 0;
 		owner.getObserveController().notifyMoveObservers();
+	}
+
+	public void setLastMoveByRandomLocEffect() {
+		this.lastMoveByRandomLocEffect = true;
+	}
+
+	public boolean resetLastMoveByRandomLocEffect() {
+		boolean wasLastMoveBySkill = lastMoveByRandomLocEffect;
+		lastMoveByRandomLocEffect = false;
+		return wasLastMoveBySkill;
 	}
 }
