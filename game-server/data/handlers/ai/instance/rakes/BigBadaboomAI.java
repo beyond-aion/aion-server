@@ -17,8 +17,6 @@ public class BigBadaboomAI extends ActionItemNpcAI {
 
 	@Override
 	protected void handleUseItemFinish(Player player) {
-		if (player.isProtectionActive())
-			player.getController().stopProtectionActiveTask();
 		int morphSkill = 0;
 		switch (getNpcId()) {
 			case 231016: // Big Badaboom.

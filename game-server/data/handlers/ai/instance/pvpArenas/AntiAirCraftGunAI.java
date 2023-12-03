@@ -33,8 +33,6 @@ public class AntiAirCraftGunAI extends ActionItemNpcAI {
 	protected void handleUseItemFinish(Player player) {
 		Npc owner = getOwner();
 		TeleportService.teleportTo(player, owner.getWorldId(), owner.getInstanceId(), owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
-		if (player.isProtectionActive())
-			player.getController().stopProtectionActiveTask();
 		int morphSkill = 0;
 		switch (getNpcId()) {
 			case 701185: // 46 lvl morph 218803

@@ -37,8 +37,6 @@ public class SiegeCannonAI extends NpcAI {
 		if (dialogActionId == SETPRO1 && morphSkill != 0) {
 			TeleportService.teleportTo(player, owner.getWorldId(), owner.getInstanceId(), owner.getX(), owner.getY(), owner.getZ(), owner.getHeading());
 			SkillEngine.getInstance().getSkill(getOwner(), morphSkill >> 8, morphSkill & 0xFF, player).useNoAnimationSkill();
-			if (player.isProtectionActive())
-				player.getController().stopProtectionActiveTask();
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			AIActions.deleteOwner(this);
 		}

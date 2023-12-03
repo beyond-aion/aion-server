@@ -10,7 +10,6 @@ import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -22,8 +21,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author KKnD , orz, avol
- * @modified Pad
+ * @author KKnD , orz, avol, Pad
  */
 public class CM_DIALOG_SELECT extends AionClientPacket {
 
@@ -38,13 +36,6 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 	@SuppressWarnings("unused")
 	private int unk;
 
-	/**
-	 * Constructs new instance of <tt>CM_DIALOG_SELECT</tt> packet
-	 * 
-	 * @param opcode
-	 * @param state
-	 * @param restStates
-	 */
 	public CM_DIALOG_SELECT(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}
@@ -62,6 +53,9 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
+		if (player.isProtectionActive())
+			player.getController().stopProtectionActiveTask();
+
 		if (player.isTrading())
 			return;
 
@@ -110,10 +104,8 @@ public class CM_DIALOG_SELECT extends AionClientPacket {
 			return;
 		}
 
-		VisibleObject obj = player.getKnownList().getObject(targetObjectId);
-		if (obj instanceof Creature) {
-			Creature creature = (Creature) obj;
-			creature.getController().onDialogSelect(dialogActionId, lastPage, player, questId, extendedRewardIndex);
+		if (player.getKnownList().getObject(targetObjectId) instanceof Creature target) {
+			target.getController().onDialogSelect(dialogActionId, lastPage, player, questId, extendedRewardIndex);
 		}
 	}
 }
