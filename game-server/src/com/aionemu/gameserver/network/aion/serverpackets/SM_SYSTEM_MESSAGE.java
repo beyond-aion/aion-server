@@ -26974,6 +26974,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You cannot use the target in stealth mode.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_CANNOT_USE_INVISIBLE_TARGET() {
+		return new SM_SYSTEM_MESSAGE(1402204);
+	}
+
+	/**
+	 * You cannot chat to your counterparts in stealth mode.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_CANNOT_TALK_INVISIBLE_TARGET() {
+		return new SM_SYSTEM_MESSAGE(1402205);
+	}
+
+	/**
 	 * The amount of Glory Points to be deducted from you, %0, are: %1%[%gchar:glory_point].
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_GLORY_POINT_LOSE_PERSONAL(String playerName, int gpLoss) {
