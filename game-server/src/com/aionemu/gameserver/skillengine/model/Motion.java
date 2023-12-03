@@ -13,8 +13,12 @@ import javax.xml.bind.annotation.XmlType;
 @XmlType(name = "Motion")
 public class Motion {
 
-	@XmlAttribute(required = true)
-	private String name;// TODO enum
+	/**
+	 * name is null when instant_skill is true<br/>
+	 * Note: There are also several skill IDs of Ambush with no motion name and speed 85, which is just ignorable junk data parsed from the game client
+	 */
+	@XmlAttribute
+	private String name;
 
 	@XmlAttribute
 	private int speed = 100;
