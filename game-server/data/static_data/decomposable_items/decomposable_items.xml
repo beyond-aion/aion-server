@@ -35888,7 +35888,11 @@
 			<item id="186000054" /><!-- Lesser Ancient Crown -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188053998" /><!-- Ornate Enchantment Stone Bundle -->
+	<decomposable item_id="188053998"><!-- Ornate Enchantment Stone Bundle -->
+		<items>
+			<random_item type="ENCHANTMENT" min_count="5" />
+		</items>
+	</decomposable>
 	<decomposable item_id="188054007" /><!-- Lockbox Key Pouch -->
 	<decomposable item_id="188054008" /><!-- Lockbox Key Pouch -->
 	<decomposable item_id="188054009" /><!-- Lockbox Key Pouch -->
