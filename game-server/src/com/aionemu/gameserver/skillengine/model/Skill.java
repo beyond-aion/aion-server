@@ -434,18 +434,18 @@ public class Skill {
 		}
 
 		Times time = motionTime.getTimesFor(player.getRace(), player.getGender(), weapons, player.isInRobotMode(), motionId);
-		float speedModifier = calcSpeedModifier(player, time, motion, ammoTime);
-			int finalTime = 0;
+		float speedModifier = calcSpeedModifierTest(player, time, motion, ammoTime);
+		int finalTime = 0;
 		if (time != null) {
-				animationTime = (int) (time.getMinTime() * motion.getSpeed() * speedModifier * 10);
-				int serverHitTime = (int) Math.ceil((player.isInRobotMode() ? time.getMaxTime() : time.getMinTime()) * motion.getSpeed() * speedModifier * 10);
-				finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime));
+			animationTime = (int) (time.getMinTime() * motion.getSpeed() * speedModifier * 10);
+			int serverHitTime = (int) Math.ceil((player.isInRobotMode() ? time.getMaxTime() : time.getMinTime()) * motion.getSpeed() * speedModifier * 10);
+			finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime));
 		}
 
 		int clientTime = hitTime;
 		if (motion.isInstantSkill() && clientTime == 0) {
 			this.serverTime = (int) ammoTime;
-		} else if (clientTime < finalTime * 0.99f) { // Allow 1% margin of error
+		} else if (clientTime < finalTime * 0.95f) { // Allow 1% margin of error
 			AuditLogger.log(player, "Modified skill time for client skill: " + getSkillId() + " (clientTime < finalTime: " + clientTime + "/" + finalTime
 				+ "). Player is in move: " + player.getMoveController().isInMove());
 			this.serverTime = finalTime;
@@ -453,28 +453,117 @@ public class Skill {
 			this.serverTime = clientTime;
 		}
 
-		if (skillMethod != SkillMethod.CHARGE)
-			player.setNextSkillUse(System.currentTimeMillis() + castDuration + animationTime);
+		if (skillMethod != SkillMethod.CHARGE) {
+			int effectiveCastDuration = Math
+				.round(castDuration * (player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, 1000) / 1000f));
+			player.setNextSkillUse(System.currentTimeMillis() + effectiveCastDuration + animationTime);
+			PacketSendUtility.sendMessage(player,
+				"Skill: " + skillTemplate.getName() + "\n\tNextSkillUse: " + player.getNextSkillUse() + "\n\tAnimationTime: " + animationTime
+					+ "\n\tMotionDelay: " + motion.getDelay() + "\n\tClientTime: " + clientTime + "\n\tFinalTime: " + finalTime + "\n\tAmmo: " + ammoTime
+					+ "\n\tServerTime: " + serverTime + "\n\tCastDuration: " + effectiveCastDuration);
+		}
 
 		return true;
 	}
 
 	private float calcSpeedModifier(Player player, Times time, Motion motion, long ammoTime) {
-		float atkSpeed = player.getGameStats().getAttackSpeed().getCurrent() / (float) player.getGameStats().getAttackSpeed().getBase();
-		float castSpeed = player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, 1000) / 1000f;
-		if (castSpeed < 0.3f)
-			castSpeed = 0.3f;
-
 		float animationLength = 0f;
 		if (time != null)
 			animationLength = player.isInRobotMode() ? time.getMaxTime() : time.getMinTime();
 
+		float atkSpeed = player.getGameStats().getAttackSpeed().getCurrent() / (float) player.getGameStats().getAttackSpeed().getBase();
 		int serverHitTime = (int) Math.ceil(animationLength * motion.getSpeed() * atkSpeed * 10);
 		int finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime));
+		System.out.println("Base Atk: " + player.getGameStats().getAttackSpeed().getBase());
+		System.out.println("Current Cast: " + player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, 1000));
+		System.out.println("FIRST CHECK: " + finalTime + " / " + hitTime);
 		if (Math.abs(finalTime - hitTime) < 10)
 			return atkSpeed;
 
-		return (atkSpeed + castSpeed) / 2f;
+		int castSpeed = player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, 1000);
+		float skillCastSpeed = player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, castSpeed) / 1000f;
+
+		// float atkBoostSpeed = player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL,
+		// player.getGameStats().getAttackSpeed().getCurrent()) / (float) player.getGameStats().getAttackSpeed().getBase();
+		serverHitTime = (int) Math.ceil(animationLength * motion.getSpeed() * ((atkSpeed + skillCastSpeed) / 2f) * 10);
+		finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime));
+		System.out.println("SECOND CHECK: " + finalTime + " / " + hitTime);
+		return (atkSpeed + skillCastSpeed) / 2f;
+	}
+
+	private float calcSpeedModifierTest(Player player, Times time, Motion motion, long ammoTime) {
+		int currentAtkSpeed = player.getGameStats().getAttackSpeed().getCurrent();
+		int baseAtkSpeed = player.getGameStats().getAttackSpeed().getBase();
+		int castSpeed = player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, 1000);
+		int currentCastSpeed = player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, castSpeed);
+
+		int atkSpeedDiff = baseAtkSpeed - currentAtkSpeed;
+		int castSpeedDiff = 1000 - currentCastSpeed;
+
+		float speedMod;
+		if (atkSpeedDiff >= castSpeedDiff) {
+			speedMod = currentAtkSpeed / (float) baseAtkSpeed;
+		} else {
+			speedMod = (1 + (Math.max(currentCastSpeed, 500)) / 1000f) / 2f;
+		}
+
+		float animationLength = 0f;
+		if (time != null)
+			animationLength = player.isInRobotMode() ? time.getMaxTime() : time.getMinTime();
+		int serverHitTime = (int) Math.ceil(animationLength * motion.getSpeed() * speedMod * 10);
+		int finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime));
+		if (Math.abs(finalTime - hitTime) < 10)
+			return speedMod;
+
+		serverHitTime = (int) Math.ceil(animationLength * motion.getSpeed() * (currentAtkSpeed / (float) baseAtkSpeed) * 10);
+		finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime));
+		if (Math.abs(finalTime - hitTime) < 10)
+			return currentAtkSpeed / (float) baseAtkSpeed;
+
+		int speedUsed = atkSpeedDiff > 0 ? atkSpeedDiff : 1250;
+		return ((speedUsed / 1000f) + speedMod) / 2f;
+	}
+
+	private float calcSpeedModifier2(Player player, Times time, Motion motion, long ammoTime) {
+		int currentAtkSpeed = player.getGameStats().getAttackSpeed().getCurrent();
+		int baseAtkSpeed = player.getGameStats().getAttackSpeed().getBase();
+		int castSpeed = player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, 1000);
+		int currentCastSpeed = player.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, castSpeed);
+
+		int atkSpeedDiff = baseAtkSpeed - currentAtkSpeed;
+		int castSpeedDiff = 1000 - currentCastSpeed;
+
+		float speedMod = 1f;
+		System.out.println("AtkSpeedDiff: " + atkSpeedDiff + " CastSpeedDiff: " + castSpeedDiff);
+		if (atkSpeedDiff >= castSpeedDiff) {
+			System.out.println("If");
+			speedMod = currentAtkSpeed / (float) baseAtkSpeed;
+		} else {
+			System.out.println("Else: " + currentCastSpeed);
+			speedMod = (1 + (Math.max(currentCastSpeed, 500)) / 1000f) / 2f;
+		}
+
+		float animationLength = 0f;
+		if (time != null)
+			animationLength = player.isInRobotMode() ? time.getMaxTime() : time.getMinTime();
+		int serverHitTime = (int) Math.ceil(animationLength * motion.getSpeed() * speedMod * 10);
+		int finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime));
+		System.out.println("FIRST CHECK: " + finalTime + " / " + hitTime);
+		if (Math.abs(finalTime - hitTime) < 10) {
+			System.out.println("First done");
+			return speedMod;
+		}
+
+		serverHitTime = (int) Math.ceil(animationLength * motion.getSpeed() * (currentAtkSpeed / (float) baseAtkSpeed) * 10);
+		finalTime = Math.round(motion.getDelay() + (serverHitTime + ammoTime));
+		if (Math.abs(finalTime - hitTime) < 10) {
+			System.out.println("Second done");
+			return currentAtkSpeed / (float) baseAtkSpeed;
+		}
+
+		int speedUsed = atkSpeedDiff > 0 ? atkSpeedDiff : 1250;
+		System.out.println("Speed Used: " + speedUsed);
+		return ((speedUsed / 1000f) + speedMod) / 2f;
 	}
 
 	private void startPenaltySkill() {
@@ -650,8 +739,7 @@ public class Skill {
 		}
 
 		boolean setCooldowns = true;
-		if (effector instanceof Player) {
-			Player playerEffector = (Player) effector;
+		if (effector instanceof Player playerEffector) {
 			if (skillTemplate.isStance() && !blockedStance && skillMethod == SkillMethod.CAST)
 				playerEffector.getController().startStance(skillTemplate.getSkillId());
 			if (isMulticast() && playerEffector.getChainSkills().getCurrentChainCount(chainCategory) > 0)

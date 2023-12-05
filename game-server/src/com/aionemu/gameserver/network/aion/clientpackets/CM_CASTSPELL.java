@@ -9,6 +9,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ChatUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author alexa026
@@ -102,6 +103,7 @@ public class CM_CASTSPELL extends AionClientPacket {
 			player.getController().cancelUseItem();
 
 		long currentTime = System.currentTimeMillis();
+		PacketSendUtility.sendMessage(player, "Current Time: " + currentTime + " vs NextSkillUse: " + player.getNextSkillUse());
 		if (player.getNextSkillUse() > currentTime) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_SKILL_NOT_READY());
 			return;
