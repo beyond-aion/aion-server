@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.gameobjects;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 
+import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
@@ -189,12 +190,12 @@ public class DropNpc {
 
 	// TODO remove all this after fixing invalid loot requests
 	private final Map<Integer, LooterInfo> looterInfos = new ConcurrentHashMap<>();
-	public void addLooterInfo(Player player, int lootedItemIndex, boolean autoloot) {
-		looterInfos.put(lootedItemIndex, new LooterInfo(player.toString(), autoloot, System.currentTimeMillis()));
+	public void addLooterInfo(Player player, DropItem lootedItem, boolean autoloot) {
+		looterInfos.put(lootedItem.getIndex(), new LooterInfo(player.toString(), autoloot, lootedItem.getDropTemplate().getItemId(), System.currentTimeMillis()));
 	}
 	public String getLooterInfo(int lootedItemIndex) {
 		LooterInfo looterInfo = looterInfos.get(lootedItemIndex);
-		return looterInfo == null ? "" : looterInfo.looter + " (autoloot=" + looterInfo.autoloot + ") " + (System.currentTimeMillis() - looterInfo.time) + " ms ago";
+		return looterInfo == null ? "" : looterInfo.looter + " (autoloot=" + looterInfo.autoloot + ", itemId=" + looterInfo.itemId + ") " + (System.currentTimeMillis() - looterInfo.time) + " ms ago";
 	}
-	record LooterInfo(String looter, boolean autoloot, long time) {}
+	record LooterInfo(String looter, boolean autoloot, int itemId, long time) {}
 }

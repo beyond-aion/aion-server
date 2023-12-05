@@ -395,7 +395,7 @@ public class DropService {
 		if (requestedItem.getCount() <= 0) {
 			synchronized (dropItems) {
 				dropItems.remove(requestedItem);
-				dropNpc.addLooterInfo(player, requestedItem.getIndex(), autoLoot);
+				dropNpc.addLooterInfo(player, requestedItem, autoLoot);
 			}
 		}
 		if (requestedItem.getCount() < initialCount) {
