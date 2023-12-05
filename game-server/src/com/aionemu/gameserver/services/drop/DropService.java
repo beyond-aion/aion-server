@@ -1,6 +1,9 @@
 package com.aionemu.gameserver.services.drop;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.TimeUnit;
 
@@ -33,7 +36,6 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -326,34 +328,20 @@ public class DropService {
 			}
 		}
 
-		long remainingCount = requestedItem.getCount();
+		long initialCount = requestedItem.getCount();
 		// Kinah is distributed to all group/alliance members nearby.
 		if (itemId == 182400001) {
-			if (player.isInTeam()) {
-				List<Player> entitledPlayers = new ArrayList<>();
-				for (Player member : player.getCurrentTeam().getMembers()) {
-					if (member.isOnline() && !member.isDead() && !member.isMentor() && PositionUtil.isInRange(member, player, GroupConfig.GROUP_MAX_DISTANCE))
-						entitledPlayers.add(member);
-				}
-				if (entitledPlayers.isEmpty()) {
-					VisibleObject npc = World.getInstance().findVisibleObject(npcObjectId);
-					AuditLogger.log(player, "tried to loot kinah for team from " + npc + " but he is not allowed to (mentor=" + player.isMentor() + ", dead="
-						+ player.isDead() + ")");
-					return;
-				}
-				long remainder = remainingCount % entitledPlayers.size();
-				long kinahForEach = (remainingCount - remainder) / entitledPlayers.size();
-				remainingCount = 0;
-				for (Player member : entitledPlayers)
-					remainingCount += ItemService.addItem(member, itemId, member.equals(player) ? kinahForEach + remainder : kinahForEach);
+			var team = player.getCurrentTeam();
+			if (team == null) {
+				requestedItem.setCount(ItemService.addItem(player, itemId, requestedItem.getCount()));
 			} else {
-				remainingCount = ItemService.addItem(player, itemId, remainingCount);
+				List<Player> entitledPlayers = team
+					.filterMembers(m -> m.isOnline() && !m.isDead() && !m.isMentor() && PositionUtil.isInRange(m, player, GroupConfig.GROUP_MAX_DISTANCE));
+				distributeEqually(requestedItem, entitledPlayers);
 			}
 		} else if (!player.isInTeam() && !requestedItem.isItemWonNotCollected() && dropNpc.getDistributionId() == 0) {
-			remainingCount = ItemService.addItem(player, itemId, remainingCount);
-		}
-
-		if (!requestedItem.isDistributeItem()) {
+			requestedItem.setCount(ItemService.addItem(player, itemId, requestedItem.getCount()));
+		} else if (!requestedItem.isDistributeItem()) {
 			if (player.isInTeam()) {
 				lootGrouRules = player.getLootGroupRules();
 				ItemQuality quality = DataManager.ITEM_DATA.getItemTemplate(itemId).getItemQuality();
@@ -382,7 +370,7 @@ public class DropService {
 			}
 
 			if (requestedItem.getWinningPlayer() != null) {
-				remainingCount = ItemService.addItem(requestedItem.getWinningPlayer(), itemId, remainingCount, false, new TempTradeDropPredicate(dropNpc));
+				requestedItem.setCount(ItemService.addItem(requestedItem.getWinningPlayer(), itemId, requestedItem.getCount(), false, new TempTradeDropPredicate(dropNpc)));
 
 				winningNormalActions(player, dropNpc, requestedItem);
 			}
@@ -396,7 +384,7 @@ public class DropService {
 				return;
 			}
 
-			remainingCount = ItemService.addItem(requestedItem.getWinningPlayer(), itemId, remainingCount, false, new TempTradeDropPredicate(dropNpc));
+			requestedItem.setCount(ItemService.addItem(requestedItem.getWinningPlayer(), itemId, requestedItem.getCount(), false, new TempTradeDropPredicate(dropNpc)));
 
 			switch (dropNpc.getDistributionId()) {
 				case 2 -> winningRollActions(requestedItem.getWinningPlayer(), itemId, npcObjectId);
@@ -404,26 +392,34 @@ public class DropService {
 			}
 		}
 
-		long acquiredCount = requestedItem.getCount() - remainingCount;
-		if (remainingCount <= 0) {
+		if (requestedItem.getCount() <= 0) {
 			synchronized (dropItems) {
 				dropItems.remove(requestedItem);
 				dropNpc.addLooterInfo(player, requestedItem.getIndex(), autoLoot);
 			}
+		}
+		if (requestedItem.getCount() < initialCount) {
 			announceDrop(requestedItem.getWinningPlayer() != null ? requestedItem.getWinningPlayer() : player, template);
-		} else
-			requestedItem.setCount(remainingCount);
-
-		Pet pet = player.getPet();
-		if (acquiredCount > 0 && pet != null && pet.getCommonData().isSelling()) {
-			List<Item> stacks = player.getInventory().getItemsByItemId(requestedItem.getDropTemplate().getItemId());
-			if (stacks.stream().anyMatch(item -> item.isSellable() && item.getItemTemplate().getItemQuality() == ItemQuality.JUNK)) {
-				PetService.getInstance().sell(pet, stacks);
+			Pet pet = player.getPet();
+			if (pet != null && pet.getCommonData().isSelling()) {
+				List<Item> stacks = player.getInventory().getItemsByItemId(requestedItem.getDropTemplate().getItemId());
+				if (stacks.stream().anyMatch(item -> item.isSellable() && item.getItemTemplate().getItemQuality() == ItemQuality.JUNK)) {
+					PetService.getInstance().sell(pet, stacks);
+				}
 			}
 		}
 
 		if (!autoLoot)
 			resendDropList(dropNpc.getLootingPlayer(), npcObjectId, dropNpc, dropItems);
+	}
+
+	private static void distributeEqually(DropItem item, List<Player> players) {
+		long countPerPlayer = item.getCount() / players.size();
+		for (int i = players.size() - 1; i >= 0; i--) {
+			long count = i == 0 ? item.getCount() : countPerPlayer;
+			long remainingCount = ItemService.addItem(players.get(i), item.getDropTemplate().getItemId(), count);
+			item.setCount(item.getCount() - count + remainingCount);
+		}
 	}
 
 	private void resendDropList(Player player, int npcObjectId, DropNpc dropNpc, Set<DropItem> dropItems) {
