@@ -67,7 +67,7 @@ public abstract class Storage implements IStorage {
 
 	void increaseKinah(long amount, ItemUpdateType updateType, Player actor) {
 		if (kinahItem == null) {
-			add(ItemFactory.newItem(ItemId.KINAH.value(), 0), actor);
+			add(ItemFactory.newItem(ItemId.KINAH, 0), actor);
 		}
 		if (amount > 0) {
 			increaseItemCount(kinahItem, amount, updateType, actor);

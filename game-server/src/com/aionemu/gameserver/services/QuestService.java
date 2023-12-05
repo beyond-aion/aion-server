@@ -594,13 +594,13 @@ public final class QuestService {
 
 		for (CollectItem collectItem : collectItems.getCollectItem()) {
 			int itemId = collectItem.getItemId();
-			long count = itemId == ItemId.KINAH.value() ? player.getInventory().getKinah() : player.getInventory().getItemCountByItemId(itemId);
+			long count = itemId == ItemId.KINAH ? player.getInventory().getKinah() : player.getInventory().getItemCountByItemId(itemId);
 			if (collectItem.getCount() > count)
 				return false;
 		}
 		if (removeItem) {
 			for (CollectItem collectItem : collectItems.getCollectItem()) {
-				if (collectItem.getItemId() == ItemId.KINAH.value())
+				if (collectItem.getItemId() == ItemId.KINAH)
 					player.getInventory().decreaseKinah(collectItem.getCount());
 				else {
 					player.getInventory().decreaseByItemId(collectItem.getItemId(), collectItem.getCount());

@@ -445,7 +445,7 @@ public class DropRegistrationService {
 
 	private long getItemCount(GlobalDropItem item, Npc npc) {
 		long count = Rnd.get(item.getMinCount(), item.getMaxCount());
-		if (item.getId() == ItemId.KINAH.value())
+		if (item.getId() == ItemId.KINAH)
 			count *= npc.getLevel() * Math.pow(getRankModifier(npc) * getRatingModifier(npc), 6);
 		return count;
 	}

@@ -63,7 +63,7 @@ public class SurveyService {
 		if (DAOManager.getDAO(SurveyControllerDAO.class).useItem(item.uniqueId)) {
 
 			ItemService.addItem(player, item.itemId, item.count);
-			if (item.itemId == ItemId.KINAH.value())
+			if (item.itemId == ItemId.KINAH)
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_POLL_REWARD_MONEY(item.count));
 			else if (item.count == 1)
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_POLL_REWARD_ITEM(template.getL10n()));

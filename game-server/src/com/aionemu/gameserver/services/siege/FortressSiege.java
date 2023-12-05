@@ -18,6 +18,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
+import com.aionemu.gameserver.model.items.ItemId;
 import com.aionemu.gameserver.model.siege.ArtifactLocation;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
@@ -366,7 +367,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			int nonKinahItems = 0;
 			PlayerCommonData brigadeGeneral = PlayerService.getOrLoadPlayerCommonData(legion.getBrigadeGeneral());
 			for (SiegeLegionReward item : legionRewards) {
-				if (item.getItemId() == 182400001) { // handles kinah rewards
+				if (item.getItemId() == ItemId.KINAH) {
 					long kinah = isBossKilled() ? item.getItemCount() : Math.round(item.getItemCount() * 0.7f);
 					legion.getLegionWarehouse().increaseKinah(kinah);
 					LegionService.getInstance().addRewardHistory(legion, kinah, isBossKilled() ? LegionHistoryType.OCCUPATION : LegionHistoryType.DEFENSE,

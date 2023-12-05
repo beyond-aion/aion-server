@@ -76,7 +76,7 @@ public class WebRewardService {
 
 		int itemId = 0;
 		long kinahCount = 0, itemCount = 0;
-		if (item.getId() == ItemId.KINAH.value()) {
+		if (item.getId() == ItemId.KINAH) {
 			kinahCount = item.getCount();
 		} else {
 			itemId = item.getId();

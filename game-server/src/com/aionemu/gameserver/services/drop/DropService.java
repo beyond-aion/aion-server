@@ -21,6 +21,7 @@ import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.InRoll;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
+import com.aionemu.gameserver.model.items.ItemId;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
@@ -196,7 +197,7 @@ public class DropService {
 
 		int itemId = requestedItem.getDropTemplate().getItemId();
 		ItemQuality quality = DataManager.ITEM_DATA.getItemTemplate(itemId).getItemQuality();
-		if (itemId != 182400001) {
+		if (itemId != ItemId.KINAH) {
 			lootGrouRules = player.getLootGroupRules();
 			if (dropNpc.getGroupSize() > 1) {
 				dropNpc.setDistributionId(lootGrouRules.getAutodistributionId());
@@ -243,7 +244,7 @@ public class DropService {
 		}
 
 		int itemId = requestedItem.getDropTemplate().getItemId();
-		if (itemId == 182400001)
+		if (itemId == ItemId.KINAH)
 			return true;
 
 		int distId = lootGroupRules.getAutodistributionId();
@@ -330,7 +331,7 @@ public class DropService {
 
 		long initialCount = requestedItem.getCount();
 		// Kinah is distributed to all group/alliance members nearby.
-		if (itemId == 182400001) {
+		if (itemId == ItemId.KINAH) {
 			var team = player.getCurrentTeam();
 			if (team == null) {
 				requestedItem.setCount(ItemService.addItem(player, itemId, requestedItem.getCount()));

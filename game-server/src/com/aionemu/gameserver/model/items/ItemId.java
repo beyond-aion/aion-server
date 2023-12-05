@@ -3,16 +3,10 @@ package com.aionemu.gameserver.model.items;
 /**
  * @author ATracer
  */
-public enum ItemId {
-	KINAH(182400001);
+public class ItemId {
 
-	private int itemId;
+	public static final int KINAH = 182400001;
 
-	private ItemId(int itemId) {
-		this.itemId = itemId;
-	}
-
-	public int value() {
-		return itemId;
+	private ItemId() {
 	}
 }
