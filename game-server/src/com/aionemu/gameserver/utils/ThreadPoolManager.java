@@ -25,7 +25,6 @@ public final class ThreadPoolManager implements Executor {
 	private final ScheduledThreadPoolExecutor scheduledPool;
 	private final ThreadPoolExecutor instantPool;
 	private final ThreadPoolExecutor longRunningPool;
-	private final ForkJoinPool workStealingPool;
 
 	private ThreadPoolManager() {
 		int instantPoolSize = ThreadConfig.BASE_THREAD_POOL_SIZE == 0 ? Runtime.getRuntime().availableProcessors() : ThreadConfig.BASE_THREAD_POOL_SIZE;
@@ -47,14 +46,11 @@ public final class ThreadPoolManager implements Executor {
 		longRunningPool.setRejectedExecutionHandler(new AionRejectedExecutionHandler());
 		longRunningPool.prestartAllCoreThreads();
 
-		WorkStealThreadFactory forkJoinThreadFactory = new WorkStealThreadFactory("ForkJoinPool");
-		workStealingPool = new ForkJoinPool(instantPoolSize, forkJoinThreadFactory, null, true);
-
 		Thread maintainThread = Thread.ofVirtual().name("ThreadPool Purge Task").unstarted(this::purge);
 		scheduleAtFixedRate(maintainThread, 150000, 150000);
 
-		log.info("ThreadPoolManager: Initialized with " + instantPool.getPoolSize() + " instant, " + scheduledPool.getPoolSize() + " scheduler, "
-			+ longRunningPool.getPoolSize() + " long running, and " + workStealingPool.getPoolSize() + " forking thread(s).");
+		log.info("ThreadPoolManager: Initialized with " + instantPool.getPoolSize() + " instant, " + scheduledPool.getPoolSize() + " scheduler and "
+			+ longRunningPool.getPoolSize() + " long running thread(s).");
 	}
 
 	public final ScheduledFuture<?> schedule(Runnable r, long delay, TimeUnit unit) {
@@ -69,10 +65,6 @@ public final class ThreadPoolManager implements Executor {
 	public final ScheduledFuture<?> scheduleAtFixedRate(Runnable r, long delay, long period) {
 		r = new RunnableWrapper(r, ThreadConfig.MAXIMUM_RUNTIME_IN_MILLISEC_WITHOUT_WARNING, true);
 		return scheduledPool.scheduleAtFixedRate(r, delay, period, TimeUnit.MILLISECONDS);
-	}
-
-	public ForkJoinPool getForkingPool() {
-		return workStealingPool;
 	}
 
 	@Override
@@ -109,12 +101,10 @@ public final class ThreadPoolManager implements Executor {
 		log.info("\t... executing " + getTaskCount(scheduledPool) + " scheduled tasks.");
 		log.info("\t... executing " + getTaskCount(instantPool) + " instant tasks.");
 		log.info("\t... executing " + getTaskCount(longRunningPool) + " long running tasks.");
-		log.info("\t... " + (workStealingPool.getQueuedTaskCount() + workStealingPool.getQueuedSubmissionCount()) + " forking tasks left.");
 
 		scheduledPool.shutdown();
 		instantPool.shutdown();
 		longRunningPool.shutdown();
-		workStealingPool.shutdown();
 
 		boolean success = false;
 		try {
@@ -131,7 +121,6 @@ public final class ThreadPoolManager implements Executor {
 		log.info("\t... " + getTaskCount(scheduledPool) + " scheduled tasks left.");
 		log.info("\t... " + getTaskCount(instantPool) + " instant tasks left.");
 		log.info("\t... " + getTaskCount(longRunningPool) + " long running tasks left.");
-		log.info("\t... " + (workStealingPool.getQueuedTaskCount() + workStealingPool.getQueuedSubmissionCount()) + " forking tasks left.");
 	}
 
 	private int getTaskCount(ThreadPoolExecutor tp) {
@@ -174,14 +163,6 @@ public final class ThreadPoolManager implements Executor {
 		list.add("\tgetCompletedTaskCount: " + longRunningPool.getCompletedTaskCount());
 		list.add("\tgetQueuedTaskCount: .. " + longRunningPool.getQueue().size());
 		list.add("\tgetTaskCount: ........ " + longRunningPool.getTaskCount());
-		list.add("");
-		list.add("Work forking pool:");
-		list.add("=================================================");
-		list.add("\tgetActiveCount: ...... " + workStealingPool.getActiveThreadCount());
-		list.add("\tgetPoolSize: ......... " + workStealingPool.getPoolSize());
-		list.add("\tgetStealCount: ........" + workStealingPool.getStealCount());
-		list.add("\tgetQueuedTaskCount: .. " + workStealingPool.getQueuedTaskCount());
-		list.add("\tgetRunningThreadCount: " + workStealingPool.getRunningThreadCount());
 
 		return list;
 	}
@@ -194,9 +175,6 @@ public final class ThreadPoolManager implements Executor {
 				continue;
 
 			if (!instantPool.awaitTermination(10, TimeUnit.MILLISECONDS) && instantPool.getActiveCount() > 0)
-				continue;
-
-			if (!workStealingPool.awaitTermination(10, TimeUnit.MILLISECONDS) && workStealingPool.getActiveThreadCount() > 0)
 				continue;
 
 			if (!longRunningPool.awaitTermination(10, TimeUnit.MILLISECONDS) && longRunningPool.getActiveCount() > 0)
