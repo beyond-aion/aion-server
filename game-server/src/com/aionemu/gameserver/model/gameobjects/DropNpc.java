@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.util.*;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
-import com.aionemu.gameserver.model.drop.DropItem;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
@@ -187,15 +188,4 @@ public class DropNpc {
 	public void setRemaingDecayTime(long remaingDecayTime) {
 		this.remaingDecayTime = remaingDecayTime;
 	}
-
-	// TODO remove all this after fixing invalid loot requests
-	private final Map<Integer, LooterInfo> looterInfos = new ConcurrentHashMap<>();
-	public void addLooterInfo(Player player, DropItem lootedItem, boolean autoloot) {
-		looterInfos.put(lootedItem.getIndex(), new LooterInfo(player.toString(), autoloot, lootedItem.getDropTemplate().getItemId(), System.currentTimeMillis()));
-	}
-	public String getLooterInfo(int lootedItemIndex) {
-		LooterInfo looterInfo = looterInfos.get(lootedItemIndex);
-		return looterInfo == null ? "" : looterInfo.looter + " (autoloot=" + looterInfo.autoloot + ", itemId=" + looterInfo.itemId + ") " + (System.currentTimeMillis() - looterInfo.time) + " ms ago";
-	}
-	record LooterInfo(String looter, boolean autoloot, int itemId, long time) {}
 }

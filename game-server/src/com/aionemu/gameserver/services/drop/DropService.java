@@ -290,12 +290,8 @@ public class DropService {
 				}
 		}
 
-		if (requestedItem == null) {
-			log.warn(player + " requested drop at invalid index " + itemIndex + " from "
-				+ World.getInstance().findVisibleObject(npcObjectId).getObjectTemplate().getTemplateId() + " (autoloot=" + autoLoot + "), looted by "
-				+ dropNpc.getLooterInfo(itemIndex));
+		if (requestedItem == null) // lag can cause drops to be displayed long enough for the client to send multiple loot requests when spamming 'C'
 			return;
-		}
 
 		// fix exploit
 		if (!requestedItem.isDistributeItem() && !dropNpc.isAllowedToLoot(player)) {
@@ -396,7 +392,6 @@ public class DropService {
 		if (requestedItem.getCount() <= 0) {
 			synchronized (dropItems) {
 				dropItems.remove(requestedItem);
-				dropNpc.addLooterInfo(player, requestedItem, autoLoot);
 			}
 		}
 		if (requestedItem.getCount() < initialCount) {
