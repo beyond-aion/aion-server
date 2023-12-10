@@ -2,7 +2,6 @@ package com.aionemu.gameserver.geoEngine;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.RandomAccessFile;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
 import java.util.*;
@@ -62,8 +61,8 @@ public class GeoWorldLoader {
 
 	private static Map<String, Node> loadMeshes(File meshFile) {
 		Map<String, Node> geoms = new HashMap<>();
-		try (RandomAccessFile file = new RandomAccessFile(meshFile, "r"); FileChannel roChannel = file.getChannel()) {
-			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size()).load();
+		try (FileChannel roChannel = FileChannel.open(meshFile.toPath())) {
+			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size());
 			while (geo.hasRemaining()) {
 				short nameLength = geo.getShort();
 				byte[] nameByte = new byte[nameLength];
@@ -76,15 +75,20 @@ public class GeoWorldLoader {
 				for (int c = 0; c < modelCount; c++) {
 					Mesh m = new Mesh();
 
-					int vectorCount = geo.getShort() & 0xFFFF;
-					int vectorByteCount = vectorCount * 3 * 4; // 3 floats per vector (x, y, z), 4 bytes each
-					m.setBuffer(VertexBuffer.Type.Position, 3, geo.slice(geo.position(), vectorByteCount).asFloatBuffer());
-					geo.position(geo.position() + vectorByteCount);
+					int vertices = geo.getShort() & 0xFFFF;
+					int verticesBytes = vertices * 3 * 4; // 3 floats per vertex (x, y, z), 4 bytes each
+					m.setBuffer(VertexBuffer.Type.Position, 3, geo.slice(geo.position(), verticesBytes).asFloatBuffer());
+					geo.position(geo.position() + verticesBytes);
 
-					int triangleCount = geo.getShort() & 0xFFFF;
-					int triangleIndicesByteCount = triangleCount * 3 * 2; // 3 vector indices per triangle, 2 bytes each
-					m.setBuffer(VertexBuffer.Type.Index, 3, geo.slice(geo.position(), triangleIndicesByteCount).asShortBuffer());
-					geo.position(geo.position() + triangleIndicesByteCount);
+					int faces = geo.getShort() & 0xFFFF;
+					byte indexSize = geo.get();
+					int facesBytes = faces * 3 * indexSize; // 3 vertex indices per face, `indexSize` bytes each
+					switch (indexSize) {
+						case 1 -> m.setBuffer(VertexBuffer.Type.Index, 3, geo.slice(geo.position(), facesBytes));
+						case 2 -> m.setBuffer(VertexBuffer.Type.Index, 3, geo.slice(geo.position(), facesBytes).asShortBuffer());
+						default -> throw new IOException("Index size " + indexSize + " is not supported");
+					}
+					geo.position(geo.position() + facesBytes);
 
 					m.setMaterialId(geo.get());
 					m.setCollisionIntentions(geo.get());
@@ -122,8 +126,8 @@ public class GeoWorldLoader {
 				log.warn(geoFile + " is missing");
 			return;
 		}
-		try (RandomAccessFile file = new RandomAccessFile(geoFile, "r"); FileChannel roChannel = file.getChannel()) {
-			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size()).load();
+		try (FileChannel roChannel = FileChannel.open((geoFile.toPath()))) {
+			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size());
 			if (geo.get() == 0)
 				map.setTerrainData(new short[] { geo.getShort() });
 			else {

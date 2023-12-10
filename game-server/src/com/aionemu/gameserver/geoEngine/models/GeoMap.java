@@ -431,7 +431,7 @@ public class GeoMap extends Node {
 		DespawnableNode[] doors = despawnableDoors.get(doorId);
 		if (doors == null) {
 			// TODO mesh is excluded on purpose in geobuilder due to incorrect collision data: objects/npc/level_object/idyun_bridge/idyun_bridge_01a.cga
-			if (!GeoDataConfig.GEO_ENABLE || doorId == 145 && mapId == WorldMapType.OCCUPIED_RENTUS_BASE.getId())
+			if (!GeoDataConfig.GEO_ENABLE || doorId == 145 && (mapId == WorldMapType.OCCUPIED_RENTUS_BASE.getId() || mapId == WorldMapType.RENTUS_BASE.getId()))
 				return;
 			log.warn("No geometry found for door " + doorId + " in world " + mapId);
 		} else {

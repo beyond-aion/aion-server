@@ -32,8 +32,7 @@
 
 package com.aionemu.gameserver.geoEngine.collision.bih;
 
-import static java.lang.Math.max;
-import static java.lang.Math.min;
+import static java.lang.Math.*;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -42,6 +41,7 @@ import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.geoEngine.collision.Collidable;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
+import com.aionemu.gameserver.geoEngine.math.FastMath;
 import com.aionemu.gameserver.geoEngine.math.Matrix4f;
 import com.aionemu.gameserver.geoEngine.math.Ray;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
@@ -326,6 +326,8 @@ public final class BIHNode {
 						// taken from https://www.scratchapixel.com/lessons/3d-basic-rendering/ray-tracing-rendering-a-triangle/geometry-of-a-triangle
 						Vector3f planeNormal = v2.subtractLocal(v1).crossLocal(v3.subtractLocal(v1)).normalizeLocal();
 						double elevationAngleRad = planeNormal.angleBetween(Vector3f.UNIT_Z);
+						if (elevationAngleRad > FastMath.HALF_PI) // convert angle >90-180° to 0-90° range
+							elevationAngleRad = Math.PI - elevationAngleRad;
 						if (elevationAngleRad > results.getSlopingSurfaceAngleRad())
 							contactPoint.setZ(Float.NaN);
 					}
