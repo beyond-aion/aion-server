@@ -3,10 +3,7 @@ package com.aionemu.gameserver.geoEngine;
 import java.io.File;
 import java.io.IOException;
 import java.io.RandomAccessFile;
-import java.nio.ByteBuffer;
-import java.nio.FloatBuffer;
 import java.nio.MappedByteBuffer;
-import java.nio.ShortBuffer;
 import java.nio.channels.FileChannel;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
@@ -22,6 +19,7 @@ import com.aionemu.gameserver.geoEngine.math.Matrix3f;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
 import com.aionemu.gameserver.geoEngine.scene.*;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
 
@@ -35,6 +33,9 @@ public class GeoWorldLoader {
 
 	public static void load(Collection<GeoMap> maps) {
 		load(maps, loadMeshes());
+		// preload mesh collision data for responsive initial collision checks and predictable memory usage
+		ThreadPoolManager.getInstance()
+			.execute(() -> maps.parallelStream().flatMap(m -> m.getGeometries().map(Geometry::getMesh)).distinct().forEach(Mesh::createCollisionData));
 	}
 
 	private static void load(Collection<GeoMap> maps, Map<String, Node> models) {
@@ -75,24 +76,19 @@ public class GeoWorldLoader {
 				for (int c = 0; c < modelCount; c++) {
 					Mesh m = new Mesh();
 
-					int vectorCount = (geo.getShort() & 0xFFFF) * 3;
-					ByteBuffer floatBuffer = MappedByteBuffer.allocateDirect(vectorCount * 4);
-					FloatBuffer vertices = floatBuffer.asFloatBuffer();
-					for (int x = 0; x < vectorCount; x++) {
-						vertices.put(geo.getFloat());
-					}
+					int vectorCount = geo.getShort() & 0xFFFF;
+					int vectorByteCount = vectorCount * 3 * 4; // 3 floats per vector (x, y, z), 4 bytes each
+					m.setBuffer(VertexBuffer.Type.Position, 3, geo.slice(geo.position(), vectorByteCount).asFloatBuffer());
+					geo.position(geo.position() + vectorByteCount);
 
-					int triangles = (geo.getShort() & 0xFFFF) * 3;
-					ByteBuffer shortBuffer = MappedByteBuffer.allocateDirect(triangles * 2);
-					ShortBuffer indexes = shortBuffer.asShortBuffer();
-					for (int x = 0; x < triangles; x++) {
-						indexes.put(geo.getShort());
-					}
+					int triangleCount = geo.getShort() & 0xFFFF;
+					int triangleIndicesByteCount = triangleCount * 3 * 2; // 3 vector indices per triangle, 2 bytes each
+					m.setBuffer(VertexBuffer.Type.Index, 3, geo.slice(geo.position(), triangleIndicesByteCount).asShortBuffer());
+					geo.position(geo.position() + triangleIndicesByteCount);
+
 					m.setMaterialId(geo.get());
 					m.setCollisionIntentions(geo.get());
 					intentions |= m.getCollisionIntentions();
-					m.setBuffer(VertexBuffer.Type.Position, 3, vertices);
-					m.setBuffer(VertexBuffer.Type.Index, 3, indexes);
 					if (node.getName() == null && (m.getMaterialId() == 11 || DataManager.MATERIAL_DATA.getTemplate(m.getMaterialId()) != null))
 						node.setName(name);
 					if (modelCount == 1)
@@ -187,7 +183,6 @@ public class GeoWorldLoader {
 			throw new GameServerError("Could not load " + geoFile, e);
 		}
 		map.updateModelBound();
-		map.getGeometries().map(Geometry::getMesh).distinct().forEach(Mesh::createCollisionData);
 	}
 
 	private static Spatial attachChild(GeoMap map, Spatial node, Matrix3f matrix, Vector3f location, Vector3f scale) throws CloneNotSupportedException {

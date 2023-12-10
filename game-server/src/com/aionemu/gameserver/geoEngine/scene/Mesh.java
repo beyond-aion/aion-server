@@ -227,6 +227,7 @@ public class Mesh {
 			return;
 		}
 		BIHTree tree = new BIHTree(this);
+		buffers = null;
 		tree.construct();
 		collisionTree = tree;
 	}

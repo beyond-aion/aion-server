@@ -61,7 +61,6 @@ public class BIHTree implements CollisionData {
     private int maxTrisPerNode;
     private int numTris;
     private float[] pointData;
-    private int[] triIndices;
 
     private transient float[] bihSwapTmp;
 
@@ -84,10 +83,6 @@ public class BIHTree implements CollisionData {
             pointData[p++] = vb.get(vert++);
             pointData[p++] = vb.get(vert);
         }
-
-        triIndices = new int[numTris];
-        for (int i = 0; i < numTris; i++)
-            triIndices[i] = i;
     }
 
     public BIHTree(Mesh mesh, int maxTrisPerNode){
@@ -95,8 +90,6 @@ public class BIHTree implements CollisionData {
 
         if (maxTrisPerNode < 1 || mesh == null)
             throw new IllegalArgumentException();
-
-        bihSwapTmp = new float[9];
 
         FloatBuffer vb = (FloatBuffer) mesh.getBuffer(Type.Position).getData();
         IndexBuffer ib = mesh.getIndexBuffer();
@@ -114,7 +107,9 @@ public class BIHTree implements CollisionData {
 
     public void construct(){
         BoundingBox sceneBbox = createBox(0, numTris-1);
+        bihSwapTmp = new float[9];
         root = createNode(0, numTris-1, sceneBbox, 0);
+        bihSwapTmp = null;
     }
 
     private BoundingBox createBox(int l, int r) {
@@ -136,10 +131,6 @@ public class BIHTree implements CollisionData {
 
         BoundingBox bbox = new BoundingBox(min,max);
         return bbox;
-    }
-
-    int getTriangleIndex(int triIndex){
-        return triIndices[triIndex];
     }
 
      private int sortTriangles(int l, int r, float split, int axis){
@@ -277,11 +268,6 @@ public class BIHTree implements CollisionData {
 
         // copy tmp to p2
         System.arraycopy(bihSwapTmp, 0, pointData, p2, 9);
-
-        // swap indices
-        int tmp2 = triIndices[index1];
-        triIndices[index1] = triIndices[index2];
-        triIndices[index2] = tmp2;
     }
 
     private int collideWithRay(Ray r,
