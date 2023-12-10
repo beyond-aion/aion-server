@@ -48,11 +48,11 @@ public class MoveTo extends AdminCommand {
 			} else {
 				pos = parseWorldPosition(admin, params);
 			}
-			if (pos != null && pos.getZ() != 0) {
+			if (pos != null) {
 				pos.setH(admin.getHeading());
 				moveTo(admin, pos, "Teleported to " + WorldMapType.getWorld(pos.getMapId()) + "\nX:" + pos.getX() + " Y:" + pos.getY() + " Z:" + pos.getZ());
 				return;
-			} else if (pos != null || params.length > 1 || params[0].startsWith("[pos:"))
+			} else if (params.length > 1 || params[0].startsWith("[pos:"))
 				errorMsg = "Invalid map position or missing/deactivated geo.";
 		}
 
@@ -91,18 +91,18 @@ public class MoveTo extends AdminCommand {
 			mapId = admin.getPosition().getMapId();
 		}
 		Float x = null, y = null, z = null;
-		Pattern p = Pattern.compile("^((?<type>x|y|z)(=|:)\"?)?(?<coord>[1-9][0-9]*(\\.[0-9]+)?f?)\"?,?$");
+		Pattern p = Pattern.compile("^((?<type>x|y|z)(=|:)\"?)?(?<coord>[0-9]+(\\.[0-9]+)?f?)\"?,?$", Pattern.CASE_INSENSITIVE);
 		int maxIndex = Math.min(params.length, coordIndex + 3);
 		for (int i = coordIndex; i < maxIndex; i++) {
 			Matcher m = p.matcher(params[i]);
 			if (m.find()) {
 				float coord = NumberUtils.toFloat(m.group("coord"));
 				String type = m.group("type");
-				if ("x".equals(type) || x == null && type == null)
+				if ("x".equalsIgnoreCase(type) || x == null && type == null)
 					x = coord;
-				else if ("y".equals(type) || y == null && type == null)
+				else if ("y".equalsIgnoreCase(type) || y == null && type == null)
 					y = coord;
-				else if ("z".equals(type) || z == null && type == null)
+				else if ("z".equalsIgnoreCase(type) || z == null && type == null)
 					z = coord;
 			} else {
 				return null;
