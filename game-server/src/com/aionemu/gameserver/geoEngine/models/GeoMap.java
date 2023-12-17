@@ -416,7 +416,8 @@ public class GeoMap extends Node {
 	public void updateTownToLevel(int townId, int level) {
 		if (despawnableTownObjects.containsKey(townId) && !despawnableTownObjects.get(townId).isEmpty()) {
 			for (DespawnableNode despawnableNode : despawnableTownObjects.get(townId)) {
-				despawnableNode.setActive(1, despawnableNode.level == (byte) level);
+				int levelBitMask = 1 << (level - 1);
+				despawnableNode.setActive(1, (despawnableNode.levelBitMask & levelBitMask) != 0);
 			}
 		}
 	}

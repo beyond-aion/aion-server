@@ -14,7 +14,7 @@ public class DespawnableNode extends Node {
 
 	public DespawnableType type = DespawnableType.NONE;
 	public int id = 0; //
-	public byte level = 0;
+	public byte levelBitMask = 0;
 	private final BitSet instances = new BitSet();
 
 	public void setActive(int instanceId, boolean active) {
@@ -78,7 +78,7 @@ public class DespawnableNode extends Node {
 		DespawnableNode node = new DespawnableNode();
 		node.type = type;
 		node.id = id;
-		node.level = level;
+		node.levelBitMask = levelBitMask;
 		node.instances.or(instances);
 		node.name = name;
 		node.collisionIntentions = collisionIntentions;

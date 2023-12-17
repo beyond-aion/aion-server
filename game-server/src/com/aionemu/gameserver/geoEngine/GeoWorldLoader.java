@@ -171,13 +171,32 @@ public class GeoWorldLoader {
 						despawnableNode.copyFrom(node);
 						despawnableNode.type = DespawnableNode.DespawnableType.getById(type);
 						despawnableNode.id = id;
-						despawnableNode.level = level;
+						if (despawnableNode.type == DespawnableNode.DespawnableType.TOWN_OBJECT) {
+							if (level > 8)
+								throw new IllegalArgumentException(level + " doesn't fit in bit mask");
+							despawnableNode.levelBitMask = level < 1 ? 0 : (byte) (1 << (level - 1));
+						} else if (level != 0) {
+							throw new IllegalArgumentException("Unexpected value in town level field for non-town entity");
+						}
 						node = despawnableNode;
 					}
-					Node nodeClone = (Node) attachChild(map, node, matrix3f, loc, scale);
-					List<Spatial> children = nodeClone.getChildren();
-					for (int c = 0; c < children.size(); c++) {
-						createZone(children.get(c), map.getMapId(), children.size() == 1 ? 0 : c + 1);
+					Node nodeClone = attachToMapAndCreateZones(map, node, matrix3f, loc, scale);
+					if (nodeClone instanceof DespawnableNode townEntity && townEntity.type == DespawnableNode.DespawnableType.TOWN_OBJECT) {
+						// replicate client logic: find .cgfs for higher town levels or reuse current one
+						for (int townLevel = level + 1; townLevel <= 5; townLevel++) {
+							String townEntityName = name.replace("_01.cgf", "_0" + townLevel + ".cgf");
+							Node model = models.get(townEntityName);
+							if (model == null) {
+								townEntity.levelBitMask |= (byte) (1 << (townLevel - 1));
+							} else {
+								DespawnableNode townNode = new DespawnableNode();
+								townNode.copyFrom(model);
+								townNode.type = townEntity.type;
+								townNode.id = townEntity.id;
+								townNode.levelBitMask = (byte) (1 << (townLevel - 1));
+								townEntity = (DespawnableNode) attachToMapAndCreateZones(map, townNode, matrix3f, loc, scale);
+							}
+						}
 					}
 				} else {
 					missingMeshes.add(name);
@@ -187,6 +206,15 @@ public class GeoWorldLoader {
 			throw new GameServerError("Could not load " + geoFile, e);
 		}
 		map.updateModelBound();
+	}
+
+	private static Node attachToMapAndCreateZones(GeoMap map, Node node, Matrix3f matrix3f, Vector3f loc, Vector3f scale) throws CloneNotSupportedException {
+		Node nodeClone = (Node) attachChild(map, node, matrix3f, loc, scale);
+		List<Spatial> children = nodeClone.getChildren();
+		for (int c = 0; c < children.size(); c++) {
+			createZone(children.get(c), map.getMapId(), children.size() == 1 ? 0 : c + 1);
+		}
+		return nodeClone;
 	}
 
 	private static Spatial attachChild(GeoMap map, Spatial node, Matrix3f matrix, Vector3f location, Vector3f scale) throws CloneNotSupportedException {
