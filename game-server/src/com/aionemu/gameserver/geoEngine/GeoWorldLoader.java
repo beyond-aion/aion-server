@@ -1,12 +1,19 @@
 package com.aionemu.gameserver.geoEngine;
 
-import java.io.File;
+import java.awt.image.BufferedImage;
+import java.awt.image.DataBufferByte;
+import java.awt.image.DataBufferUShort;
 import java.io.IOException;
 import java.nio.MappedByteBuffer;
 import java.nio.channels.FileChannel;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
+
+import javax.imageio.ImageIO;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,7 +24,9 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.math.Matrix3f;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.models.GeoMap;
+import com.aionemu.gameserver.geoEngine.models.Terrain;
 import com.aionemu.gameserver.geoEngine.scene.*;
+import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.ZoneService;
@@ -28,40 +37,81 @@ import com.aionemu.gameserver.world.zone.ZoneService;
 public class GeoWorldLoader {
 
 	private static final Logger log = LoggerFactory.getLogger(GeoWorldLoader.class);
-	private static final String GEO_DIR = "data/geo/";
+	private static final Path GEO_DIR = Path.of("data/geo/");
 
 	public static void load(Collection<GeoMap> maps) {
 		load(maps, loadMeshes());
+		loadTerrains(maps);
 		// preload mesh collision data for responsive initial collision checks and predictable memory usage
 		ThreadPoolManager.getInstance()
 			.execute(() -> maps.parallelStream().flatMap(m -> m.getGeometries().map(Geometry::getMesh)).distinct().forEach(Mesh::createCollisionData));
 	}
 
+	/**
+	 * Loads heightmap and material data from PNG images and assigns it to all maps matching the file name.<br>
+	 * Since terrain data is static, it is safe to share it between maps.
+	 */
+	private static void loadTerrains(Collection<GeoMap> maps) {
+		Map<GeoMap, Terrain> terrainByMap = new ConcurrentHashMap<>();
+		try {
+			Files.find(GEO_DIR, 1, (p, attr) -> attr.isRegularFile() && p.toString().toLowerCase().endsWith(".png")).parallel().forEach(path -> {
+				BufferedImage image = null;
+				Set<String> mapIds = Stream.of(path.getFileName().toString().split(",")).collect(Collectors.toSet());
+				for (GeoMap map : maps) {
+					if (mapIds.isEmpty())
+						break;
+					if (mapIds.removeIf(mapId -> mapId.startsWith(String.valueOf(map.getMapId())))) {
+						if (image == null) {
+							try {
+								image = ImageIO.read(path.toFile());
+							} catch (IOException e) {
+								throw new RuntimeException(e);
+							}
+						}
+						Terrain terrain = terrainByMap.computeIfAbsent(map, k -> new Terrain());
+						switch (image.getRaster().getDataBuffer()) {
+							case DataBufferUShort heightmap -> terrain.setHeightmap(heightmap.getData(), image.getWidth(), image.getHeight());
+							case DataBufferByte materials -> terrain.setMaterials(materials.getData(), image.getWidth(), image.getHeight());
+							default -> log.warn(path + " is not a supported terrain data format");
+						}
+					}
+				}
+				mapIds.forEach(mapId -> log.warn(mapId + " of " + path + " could not be associated with a map"));
+			});
+		} catch (IOException e) {
+			throw new RuntimeException(e);
+		}
+		terrainByMap.forEach((map, terrain) -> {
+			if (terrain.hasHeightmap())
+				map.setTerrain(terrain);
+			else
+				log.warn("Missing terrain heightmap for " + map.getMapId());
+		});
+		long terrainMapCount = maps.stream().filter(GeoMap::hasTerrain).count();
+		if (terrainMapCount == 0)
+			log.warn("No terrains were loaded");
+		else
+			log.info("Loaded terrains for " + terrainMapCount + " maps");
+		if (maps.stream().noneMatch(GeoMap::hasTerrainMaterials))
+			log.warn("No terrain materials were loaded");
+	}
+
 	private static void load(Collection<GeoMap> maps, Map<String, Node> models) {
-		log.info("Loading geo maps...");
 		Set<String> missingMeshes = ConcurrentHashMap.newKeySet();
 		maps.parallelStream().forEach(map -> loadWorld(map, models, missingMeshes));
 		if (!missingMeshes.isEmpty())
 			log.warn(missingMeshes.size() + " meshes are missing:\n" + missingMeshes.stream().sorted().collect(Collectors.joining("\n")));
-		log.info("Loaded " + maps.size() + " geo maps.");
+		long loadedMaps = maps.stream().filter(m -> !m.getChildren().isEmpty()).count();
+		if (loadedMaps == 0) {
+			log.warn("No geo maps loaded.");
+		} else {
+			log.info("Loaded " + maps.stream().mapToLong(GeoMap::getEntityCount).sum() + " entities on " + loadedMaps + " maps");
+		}
 	}
 
 	private static Map<String, Node> loadMeshes() {
-		log.info("Loading meshes...");
-		File[] meshFiles = new File(GEO_DIR).listFiles((file, name) -> name.toLowerCase().endsWith(".mesh"));
-		if (meshFiles == null || meshFiles.length == 0) {
-			log.warn("No *.mesh files present in ./" + GEO_DIR);
-			return Collections.emptyMap();
-		}
-		Map<String, Node> meshes = new HashMap<>();
-		for (File meshFile : meshFiles)
-			meshes.putAll(loadMeshes(meshFile));
-		return meshes;
-	}
-
-	private static Map<String, Node> loadMeshes(File meshFile) {
 		Map<String, Node> geoms = new HashMap<>();
-		try (FileChannel roChannel = FileChannel.open(meshFile.toPath())) {
+		try (FileChannel roChannel = FileChannel.open(GEO_DIR.resolve("models.mesh"))) {
 			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size());
 			while (geo.hasRemaining()) {
 				short nameLength = geo.getShort();
@@ -114,42 +164,23 @@ public class GeoWorldLoader {
 				}
 			}
 		} catch (IOException | CloneNotSupportedException e) {
-			throw new GameServerError("Could not load " + meshFile, e);
+			throw new GameServerError("Could not load meshes", e);
 		}
+		log.info("Loaded " + geoms.size() + " meshes");
 		return geoms;
 	}
 
 	private static void loadWorld(GeoMap map, Map<String, Node> models, Set<String> missingMeshes) {
-		File geoFile = new File(GEO_DIR + map.getMapId() + ".geo");
-		if (!geoFile.exists()) {
-			if (DataManager.WORLD_MAPS_DATA.getTemplate(map.getMapId()).getWorldSize() != 0) // don't warn about inaccessible (test) maps
+		Path geoFile = GEO_DIR.resolve(map.getMapId() + ".geo");
+		if (!Files.isRegularFile(geoFile)) {
+			WorldMapTemplate template = DataManager.WORLD_MAPS_DATA.getTemplate(map.getMapId());
+			boolean shouldHaveEntities = template.getWorldSize() != 0 && !template.isPrison() && !template.getName().equalsIgnoreCase("IDTest_Dungeon") && !template.getName().equalsIgnoreCase("System_Basic");
+			if (shouldHaveEntities)
 				log.warn(geoFile + " is missing");
 			return;
 		}
-		try (FileChannel roChannel = FileChannel.open((geoFile.toPath()))) {
+		try (FileChannel roChannel = FileChannel.open((geoFile))) {
 			MappedByteBuffer geo = roChannel.map(FileChannel.MapMode.READ_ONLY, 0, roChannel.size());
-			if (geo.get() == 0)
-				map.setTerrainData(new short[] { geo.getShort() });
-			else {
-				int size = geo.getInt();
-				short[] terrainData = new short[size];
-				byte[] terrainMaterials = new byte[size];
-				boolean containsMat = false;
-				for (int i = 0; i < size; i++) {
-					short z = geo.getShort();
-					terrainData[i] = z;
-					byte mat = geo.get();
-					terrainMaterials[i] = mat;
-					if ((mat & 0xFF) > 0) {
-						containsMat = true;
-					}
-				}
-				map.setTerrainData(terrainData);
-				if (containsMat) {
-					map.setTerrainMaterials(terrainMaterials);
-				}
-			}
-
 			while (geo.hasRemaining()) {
 				int nameLength = geo.getShort();
 				byte[] nameByte = new byte[nameLength];

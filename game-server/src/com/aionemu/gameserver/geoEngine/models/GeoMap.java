@@ -34,12 +34,9 @@ public class GeoMap extends Node {
 	private static final Logger log = LoggerFactory.getLogger(GeoMap.class);
 	public static final float COLLISION_CHECK_Z_OFFSET = 1;
 	private static final float COLLISION_BOUND_OFFSET = 0.5f;
-	private static final float TERRAIN_POINTS_DISTANCE = 2f;
 	private static final int NODE_CHUNK_SIZE = 256;
 
-	private short[] terrainData = new short[] { 0 };
-	private byte[] terrainMaterials;
-	private int terrainDataRows, terrainDataCols;
+	private Terrain terrain;
 	private final Map<Integer, Node> chunkById = new HashMap<>();
 
 	private final Map<Integer, DespawnableNode> despawnables = new HashMap<>();
@@ -87,6 +84,18 @@ public class GeoMap extends Node {
 		return 0;
 	}
 
+	public boolean hasTerrain() {
+		return terrain != null;
+	}
+
+	public boolean hasTerrainMaterials() {
+		return terrain != null && terrain.hasMaterials();
+	}
+
+	public void setTerrain(Terrain terrain) {
+		this.terrain = terrain;
+	}
+
 	private Node getOrCreateChunk(Spatial child) {
 		int chunkId = RegionUtil.get2DRegionId(NODE_CHUNK_SIZE, child.getWorldBound().getCenter().x, child.getWorldBound().getCenter().y);
 		Node node = chunkById.get(chunkId);
@@ -98,13 +107,8 @@ public class GeoMap extends Node {
 		return node;
 	}
 
-	public void setTerrainData(short[] terrainData) {
-		this.terrainData = terrainData;
-		terrainDataRows = terrainDataCols = (int) Math.sqrt(terrainData.length);
-	}
-
-	public void setTerrainMaterials(byte[] terrainMaterials) {
-		this.terrainMaterials = terrainMaterials;
+	public int getEntityCount() {
+		return chunkById.values().stream().mapToInt(m->m.getChildren().size()).sum();
 	}
 
 	/**
@@ -127,37 +131,10 @@ public class GeoMap extends Node {
 		Ray r = new Ray(origin, target);
 		r.setLimit(zMax - zMin);
 		collideWith(r, results);
-		Vector3f terrain = null;
-		if (terrainData.length == 1) {
-			if (terrainData[0] != 0)
-				terrain = new Vector3f(x, y, terrainData[0] / 32f);
-		} else {
-			Vector3f p1 = new Vector3f(), p2 = new Vector3f(), p3 = new Vector3f(), p4 = new Vector3f(), result = new Vector3f();
-			if (terrainCollision(x, y, r, p1, p2, p3, p4, result)) {
-				terrain = result;
-				if (ignoreSlopingSurface && getMaximumHeightDiff(p1, p2, p3, p4) > TERRAIN_POINTS_DISTANCE) // height diff >2m means >45° elevation
-					terrain.setZ(Float.NaN);
-			}
-		}
-		if (terrain != null && terrain.z >= zMin && terrain.z <= zMax) {
-			CollisionResult result = new CollisionResult(terrain, zMax - terrain.z);
-			results.addCollision(result);
-		}
-		if (results.size() == 0) {
-			return Float.NaN;
-		}
-		return results.getClosestCollision().getContactPoint().z;
-	}
-
-	private float getMaximumHeightDiff(Vector3f vector1, Vector3f... vectors) {
-		float maxZ = vector1.getZ(), minZ = vector1.getZ();
-		for (Vector3f vector3f : vectors) {
-			if (Float.isNaN(maxZ) || vector3f.getZ() > maxZ)
-				maxZ = vector3f.getZ();
-			if (Float.isNaN(minZ) || vector3f.getZ() < minZ)
-				minZ = vector3f.getZ();
-		}
-		return maxZ - minZ;
+		if (terrain != null)
+			terrain.collideAtOrigin(r, results);
+		CollisionResult closestCollision = results.getClosestCollision();
+		return closestCollision == null ? Float.NaN : closestCollision.getContactPoint().z;
 	}
 
 	public Vector3f getClosestCollision(float x, float y, float z, float targetX, float targetY, float targetZ, boolean atNearGroundZ, int instanceId,
@@ -236,143 +213,11 @@ public class GeoMap extends Node {
 		target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
 		Ray r = new Ray(origin, target);
 		r.setLimit(limit);
-		Vector3f terrain = calculateTerrainCollision(origin.x, origin.y, targetX, targetY, r);
 		if (terrain != null) {
-			CollisionResult result = new CollisionResult(terrain, terrain.distance(origin));
-			results.addCollision(result);
+			terrain.collide(r, targetX, targetY, results);
 		}
-
 		collideWith(r, results);
 		return results;
-	}
-
-	private Vector3f calculateTerrainCollision(float x, float y, float targetX, float targetY, Ray ray) {
-		float distanceX = targetX - x;
-		float distanceY = targetY - y;
-		float maxDistance = Math.abs(ray.getLimit());
-
-		Vector3f p1 = new Vector3f(), p2 = new Vector3f(), p3 = new Vector3f(), p4 = new Vector3f(), result = new Vector3f();
-		for (int curDistance = 0; curDistance < maxDistance; curDistance += 2) {
-			float distanceFactor = curDistance / ray.getLimit();
-			float curX = x + distanceX * distanceFactor;
-			float curY = y + distanceY * distanceFactor;
-			if (terrainCollision(curX, curY, ray, p1, p2, p3, p4, result)) {
-				return result;
-			}
-		}
-		return null;
-	}
-
-	private boolean terrainCollision(float x, float y, Ray ray, Vector3f p1, Vector3f p2, Vector3f p3, Vector3f p4) {
-		return terrainCollision(x, y, ray, p1, p2, p3, p4, null);
-	}
-
-	private boolean terrainCollision(float x, float y, Ray ray, Vector3f p1, Vector3f p2, Vector3f p3, Vector3f p4, Vector3f result) {
-		// z1┌───┐z2 top view where z1 and z2 face north. each corner represents a terrainData z coordinate around given x/y.
-		// · │ ∕ │ · the resolution of terrainData is 2x2m. this rectangle effectively consists of two adjacent triangles in 3d space,
-		// z3└───┘z4 the point where our ray collides with one of those triangles is the exact terrain coordinate (meaning the map ground)
-		int z1x = (int) (x / TERRAIN_POINTS_DISTANCE);
-		int z1y = (int) (y / TERRAIN_POINTS_DISTANCE);
-		float z1, z2, z3, z4;
-		if (terrainData.length == 1) {
-			z1 = z2 = z3 = z4 = terrainData[0] == Short.MIN_VALUE ? Float.NaN : (terrainData[0] / 32f);
-		} else {
-			if (isOutsideValidBounds(z1x, z1y))
-				return false;
-			int z1Index = z1y + (z1x * terrainDataRows);
-			int z3Index = z1y + ((z1x + 1) * terrainDataRows);
-			if (z3Index + 1 >= terrainData.length)
-				return false;
-			z1 = terrainData[z1Index] == Short.MIN_VALUE ? Float.NaN : (terrainData[z1Index] / 32f);
-			z2 = terrainData[z1Index + 1] == Short.MIN_VALUE ? Float.NaN : (terrainData[z1Index + 1] / 32f);
-			z3 = terrainData[z3Index] == Short.MIN_VALUE ? Float.NaN : (terrainData[z3Index] / 32f);
-			z4 = terrainData[z3Index + 1] == Short.MIN_VALUE ? Float.NaN : (terrainData[z3Index + 1] / 32f);
-		}
-		int xMin = z1x * 2; // x coord for z1 & z2 (top of the rectangle)
-		float xMax = xMin + 2; // x coord for z3 & z4 (bottom of the rectangle)
-		int yMin = z1y * 2; // y coord for z1 & z3 (left of the rectangle)
-		float yMax = yMin + 2; // y coord for z2 & z4 (right of the rectangle)
-		if (!p1.equals(Vector3f.ZERO)) { // skip first call (p1-p4 have no data yet)
-			Vector3f overlappingPoint = findSingleOverlappingPoint(xMin, xMax, yMin, yMax, z1, z2, z3, z4, p1, p2, p3, p4);
-			// single overlap means that the old and new rectangle share one corner. this means we have a diagonal ray, so we check the adjacent triangles to
-			// the old and new rectangle
-			if (overlappingPoint != null) {
-				if (p1 == overlappingPoint) { // old p1 overlaps with new p4
-					if (!Float.isNaN(z2) && ray.intersectWhere(p1, p2, new Vector3f(xMin, yMax, z2), result) ||
-							!Float.isNaN(z3) && ray.intersectWhere(p1, p3, new Vector3f(xMax, yMin, z3), result))
-						return true;
-				} else if (p2 == overlappingPoint) { // old p2 overlaps with new p3
-					if (!Float.isNaN(z1) && ray.intersectWhere(p2, p1, new Vector3f(xMin, yMin, z1), result) ||
-							!Float.isNaN(z4) && ray.intersectWhere(p2, p4, new Vector3f(xMax, yMax, z4), result))
-						return true;
-				} else if (p3 == overlappingPoint) { // old p3 overlaps with new p2
-					if (!Float.isNaN(z1) && ray.intersectWhere(p3, p1, new Vector3f(xMin, yMin, z1), result) ||
-							!Float.isNaN(z4) && ray.intersectWhere(p3, p4, new Vector3f(xMax, yMax, z4), result))
-						return true;
-				} else if (p4 == overlappingPoint) { // old p4 overlaps with new p1
-					if (!Float.isNaN(z2) && ray.intersectWhere(p4, p2, new Vector3f(xMin, yMax, z2), result) ||
-							!Float.isNaN(z3) && ray.intersectWhere(p4, p3, new Vector3f(xMax, yMin, z3), result))
-						return true;
-				}
-			}
-		}
-		p1.set(xMin, yMin, z1);
-		p2.set(xMin, yMax, z2);
-		p3.set(xMax, yMin, z3);
-		p4.set(xMax, yMax, z4);
-		if (!Float.isNaN(z2) && !Float.isNaN(z3)) {
-			return (!Float.isNaN(z1) && ray.intersectWhere(p1, p2, p3, result) ||
-					!Float.isNaN(z4) && ray.intersectWhere(p4, p2, p3, result));
-		} else {
-			return false;
-		}
-	}
-
-	private boolean isOutsideValidBounds(int x, int y) {
-		return x < 0 || y < 0 || x >= terrainDataRows || y >= terrainDataCols;
-	}
-
-	/**
-	 * @return The only point which has one of the given coordinates. If none or more than one match, null will be returned.
-	 */
-	private Vector3f findSingleOverlappingPoint(float xMin, float xMax, float yMin, float yMax, float z1, float z2, float z3, float z4,
-		Vector3f... points) {
-		Vector3f singleMatch = null;
-		Vector3f comparator = new Vector3f(xMin, yMin, z1);
-		for (Vector3f point : points) {
-			if (comparator.equals(point)) {
-				singleMatch = point;
-				break;
-			}
-		}
-		comparator.set(xMin, yMax, z2);
-		for (Vector3f point : points) {
-			if (comparator.equals(point)) {
-				if (singleMatch != null)
-					return null;
-				singleMatch = point;
-				break;
-			}
-		}
-		comparator.set(xMax, yMin, z3);
-		for (Vector3f point : points) {
-			if (comparator.equals(point)) {
-				if (singleMatch != null)
-					return null;
-				singleMatch = point;
-				break;
-			}
-		}
-		comparator.set(xMax, yMax, z4);
-		for (Vector3f point : points) {
-			if (comparator.equals(point)) {
-				if (singleMatch != null)
-					return null;
-				singleMatch = point;
-				break;
-			}
-		}
-		return singleMatch;
 	}
 
 	public boolean canSee(float x, float y, float z, float targetX, float targetY, float targetZ, int instanceId, IgnoreProperties ignoreProperties) {
@@ -384,19 +229,33 @@ public class GeoMap extends Node {
 		target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
 		Ray ray = new Ray(origin, target);
 		ray.setLimit(distance);
-		float distanceX = x - targetX;
-		float distanceY = y - targetY;
-		float distance2d = (float) Math.sqrt(distanceX * distanceX + distanceY * distanceY);
-		Vector3f p1 = new Vector3f(), p2 = new Vector3f(), p3 = new Vector3f(), p4 = new Vector3f();
-		for (int curDistance = 2; curDistance < distance2d; curDistance += 2) {
-			float distanceFactor = curDistance / distance2d;
-			float curX = targetX + distanceX * distanceFactor;
-			float curY = targetY + distanceY * distanceFactor;
-			if (terrainCollision(curX, curY, ray, p1, p2, p3, p4))
-				return false;
-		}
+		if (terrain != null && terrain.collide(ray, targetX, targetY, null))
+			return false;
 		CollisionResults results = new CollisionResults(CollisionIntention.CANT_SEE_COLLISIONS.getId(), instanceId, true, ignoreProperties);
 		return collideWith(ray, results) == 0;
+	}
+
+	/**
+	 * @return The terrain materialId at given position if no obstacle is in between, otherwise 0
+	 */
+	public int getTerrainMaterialAt(float x, float y, float z, int instanceId) {
+		int matId = terrain == null ? 0 : terrain.getTerrainMaterialAt(x, y);
+		if (matId > 0) {
+			CollisionResults results = new CollisionResults(CollisionIntention.PHYSICAL.getId(), instanceId);
+			float zMax = z + 1;
+			float zMin = z - 1;
+			Vector3f origin = new Vector3f(x, y, zMax);
+			Vector3f target = new Vector3f(x, y, zMin);
+			target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
+			Ray r = new Ray(origin, target);
+			r.setLimit(zMax - zMin);
+			terrain.collideAtOrigin(r, results);
+			CollisionResult terrainCollision = results.getClosestCollision();
+			if (terrainCollision != null && (collideWith(r, results) == 0 || results.getClosestCollision().equals(terrainCollision))) {
+				return matId;
+			}
+		}
+		return 0;
 	}
 
 	public void spawnPlaceableObject(int instanceId, int staticId) {
@@ -449,65 +308,6 @@ public class GeoMap extends Node {
 		}
 	}
 
-	public boolean hasTerrainMaterials() {
-		return terrainMaterials != null;
-	}
-
-	/**
-	 * @return The terrain materialId at position x, y if no obstacle is in between, otherwise 0
-	 */
-	public int getTerrainMaterialAt(float x, float y, float z, int instanceId) {
-		int mat1x = (int) (x / TERRAIN_POINTS_DISTANCE);
-		int mat1y = (int) (y / TERRAIN_POINTS_DISTANCE);
-		if (isOutsideValidBounds(mat1x, mat1y))
-			return 0;
-		int width = (int) Math.sqrt(terrainMaterials.length);
-		int mat1Index = mat1y + (mat1x * width);
-		int mat3Index = mat1y + ((mat1x + 1) * width);
-		int matId = 0;
-		// check whether triangle points p1, p2, p3 have materials assigned
-		if (terrainMaterials[mat1Index] != 0 && terrainMaterials[mat1Index] == terrainMaterials[mat1Index + 1]  && terrainMaterials[mat1Index]  == terrainMaterials[mat3Index]) {
-			if (isLeft((mat1x * 2) + 2, mat1y * 2, mat1x * 2, (mat1y * 2) + 2, x, y)) { // check if x, y is in triangle
-				matId = terrainMaterials[mat1Index] & 0xFF;
-			}
-		}
-		if (matId == 0 && (mat3Index + 1) < terrainMaterials.length && terrainMaterials[mat3Index + 1] != 0 && terrainMaterials[mat3Index + 1] == terrainMaterials[mat3Index] && terrainMaterials[mat3Index + 1] == terrainMaterials[mat1Index + 1]) { // check whether triangle points p2, p3, p4 have materials assigned
-			if (!isLeft((mat1x * 2) + 2, mat1y * 2, mat1x * 2, (mat1y * 2) + 2, x, y)) { // check if x, y is in triangle
-				matId = terrainMaterials[mat3Index + 1] & 0xFF;
-			}
-		}
-
-		if (matId > 0) {
-			CollisionResults results = new CollisionResults(CollisionIntention.PHYSICAL.getId(), instanceId);
-			float zMax = z + 1;
-			float zMin = z - 1;
-			Vector3f origin = new Vector3f(x, y, zMax);
-			Vector3f target = new Vector3f(x, y, zMin);
-			target.subtractLocal(origin).normalizeLocal(); // convert to direction vector
-			Ray r = new Ray(origin, target);
-			r.setLimit(zMax - zMin);
-			Vector3f terrain = null;
-			if (terrainData.length == 1) {
-				if (terrainData[0] != 0)
-					terrain = new Vector3f(x, y, terrainData[0] / 32f);
-			} else {
-				Vector3f result = new Vector3f();
-				if (terrainCollision(x, y, r, new Vector3f(), new Vector3f(), new Vector3f(), new Vector3f(), result))
-					terrain = result;
-			}
-			if (terrain != null && terrain.z >= zMin && terrain.z <= zMax) {
-				CollisionResult result = new CollisionResult(terrain, zMax - terrain.z);
-				results.addCollision(result);
-				collideWith(r, results);
-				if (results.getClosestCollision().equals(result)) {
-					return matId;
-				}
-			}
-			matId = 0;
-		}
-		return matId;
-	}
-
 	public Stream<Geometry> getGeometries() {
 		return getGeometries(getChildren());
 	}
@@ -519,12 +319,5 @@ public class GeoMap extends Node {
 			else if (child instanceof Node node)
 				getGeometries(node.getChildren()).forEach(consumer);
 		});
-	}
-
-	/**
-	 * @return True if (targetX, targetY) is left of the line made by (startX, startY) -> (endX, endY)
-	 */
-	private boolean isLeft(float startX, float startY, float endX, float endY, float targetX, float targetY){
-		return ((endX - startX)*(targetY - startY) - (endY - startY)*(targetX - startX)) > 0;
 	}
 }

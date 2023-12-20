@@ -1,12 +1,6 @@
 ![Aion 4.8 Banner](https://github.com/beyond-aion/aion-server/assets/1169307/494205be-399a-4e2e-8435-1f0774d92262)
 # Aion 4.8 Server Emulator
 
-> [!NOTE]  
-> **The history of this repository has been rewritten to meet GitHub's file size requirements.**  
-> As a result, this revision no longer contains any *.geo files. You can either run this revision with `gameserver.geodata.enable = false` or you can
-  generate the necessary files with our [Aion GeoBuilder](https://github.com/beyond-aion/aion-geobuilder). Depending on the version of the builder
-  used, the file parsing in `GeoWorldLoader.java` may also need to be changed.
-
 ## Building
 All projects are Maven based. The game server, login server and chat server can be built using `mvn package` from the root directory.  
 The resulting zip files in each server's target folder can be deployed on any system with a suitable JDK and access to a MySQL server.  
