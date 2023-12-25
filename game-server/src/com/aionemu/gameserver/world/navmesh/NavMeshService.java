@@ -27,14 +27,15 @@ public class NavMeshService {
     public boolean mapSupportsNavMesh(int worldId) {
         return navMeshMaps.containsKey(worldId) && navMeshMaps.get(worldId).getNavMesh() != null;
     }
-    public List<StraightPathItem> calculatePath(VisibleObject object, VisibleObject target) {
-        NavMeshMap navMeshMap = navMeshMaps.get(object.getWorldId());
+
+    public List<StraightPathItem> calculatePath(int worldId, float startX, float startY, float startZ, float endX, float endY, float endZ) {
+        NavMeshMap navMeshMap = navMeshMaps.get(worldId);
         if (navMeshMap != null) {
-            logger.warn("Found NavMesh.java for " + DataManager.WORLD_MAPS_DATA.getTemplate(object.getWorldId()).getName());
+            logger.warn("Found NavMesh.java for " + DataManager.WORLD_MAPS_DATA.getTemplate(worldId).getName());
             NavMeshQuery query = new NavMeshQuery(navMeshMap.getNavMesh());
             QueryFilter filter = new DefaultQueryFilter();
-            float[] startPos = { object.getY(), object.getZ(), object.getX() };
-            float[] endPos = { target.getY(), target.getZ(), target.getX() };
+            float[] startPos = { startY, startZ, startX };
+            float[] endPos = { endY, endZ, endX };
             float[] polyPickExt = { 2, 4, 2 };
             Result<FindNearestPolyResult> startRefNearestResult = query.findNearestPoly(startPos, polyPickExt, filter);
             Result<FindNearestPolyResult> endRefNearestResult =query.findNearestPoly(endPos, polyPickExt, filter);
@@ -69,9 +70,16 @@ public class NavMeshService {
                 logger.warn("Start Ref or End Ref are null");
             }
         } else {
-            logger.warn("NavMesh.java for map is null " + DataManager.WORLD_MAPS_DATA.getTemplate(object.getWorldId()).getName());
+            logger.warn("NavMesh.java for map is null " + DataManager.WORLD_MAPS_DATA.getTemplate(worldId).getName());
         }
         return null;
+    }
+
+    public List<StraightPathItem> calculatePath(VisibleObject object, float targetX, float targetY, float targetZ) {
+        return calculatePath(object.getWorldId(), object.getX(), object.getY(), object.getZ(), targetX, targetY, targetZ);
+    }
+    public List<StraightPathItem> calculatePath(VisibleObject object, VisibleObject target) {
+        return calculatePath(object, target.getX(), target.getY(), target.getZ());
     }
 
     public static NavMeshService getInstance() {

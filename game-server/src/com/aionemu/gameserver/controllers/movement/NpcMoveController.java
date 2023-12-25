@@ -94,7 +94,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		}
 		pathItems = NavMeshService.getInstance().calculatePath(owner, owner.getTarget());
 		if (pathItems != null && !pathItems.isEmpty()) {
-			pathItems.removeFirst();
+			pathItems.removeFirst(); // first is current position
 		}
 	}
 
@@ -541,6 +541,34 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		}
 
 		return result;
+	}
+
+	public synchronized Point3D getNextNavMeshStepToHome() {
+		if (pathItems == null) {
+			pathItems = NavMeshService.getInstance().calculatePath(owner, owner.getSpawn().getX(), owner.getSpawn().getY(), owner.getSpawn().getZ());
+			if (pathItems != null && !pathItems.isEmpty())
+				pathItems.removeFirst(); // remove current pos
+		} else {
+			if (owner.getAi().isLogging())
+				AILogger.moveinfo(owner, "get next navMesh step to home: path items not null");
+		}
+
+		StraightPathItem pathItem = !pathItems.isEmpty() ? pathItems.removeFirst() : null;
+		if (pathItem != null) {
+			if (pathItem.getPos() == null || pathItem.getPos().length == 0) {
+				if (owner.getAi().isLogging())
+					AILogger.moveinfo(owner, "get next navMesh step to home: spawn point");
+				return new Point3D(owner.getSpawn().getX(), owner.getSpawn().getY(), owner.getSpawn().getZ());
+			} else {
+				if (owner.getAi().isLogging())
+					AILogger.moveinfo(owner, "get next navMesh step to home: x=" + pathItem.getPos()[2] + " y=" + pathItem.getPos()[0] + " z=" + pathItem.getPos()[1]);
+				return new Point3D(pathItem.getPos()[2], pathItem.getPos()[0], pathItem.getPos()[1]);
+			}
+		} else {
+			if (owner.getAi().isLogging())
+				AILogger.moveinfo(owner, "get next navMesh step to home pathItem is null");
+		}
+		return null;
 	}
 
 	public synchronized void clearBackSteps() {
