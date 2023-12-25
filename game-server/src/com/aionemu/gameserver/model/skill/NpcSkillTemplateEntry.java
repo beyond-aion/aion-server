@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.skill;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -23,6 +24,7 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
+import com.aionemu.gameserver.world.navmesh.NavMeshService;
 
 /**
  * Skill entry which inherits properties from template (regular npc skills)
@@ -248,19 +250,37 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	private void spawnNpc(Npc npc, NpcSkillSpawn spawn) {
 		int count = spawn.getMaxCount() > 1 ? Rnd.get(spawn.getMinCount(), spawn.getMaxCount()) : spawn.getMinCount();
-		for (int i = 0; i < count; i++) {
-			float x1 = 0;
-			float y1 = 0;
-			if (spawn.getMinDistance() > 0) {
-				float directionMod = (float) (Rnd.get() * 2 * Math.PI); // 0 = normal direction, PI = opposite direction
-				double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(npc.getHeading())) + directionMod;
-				float distance = spawn.getMaxDistance() > 0 ? Rnd.get(spawn.getMinDistance(), spawn.getMaxDistance()) : spawn.getMinDistance();
-				x1 = (float) (Math.cos(radian) * distance);
-				y1 = (float) (Math.sin(radian) * distance);
+		if (NavMeshService.getInstance().mapSupportsNavMesh(npc.getWorldId())) {
+			if (npc.getAi().isLogging())
+				AILogger.moveinfo(npc, "NpcSkillTemplateEntry: spawnNpc with navmesh");
+			for (int i = 0; i < count; i++) {
+				int minDistance = spawn.getMinDistance() > 0 ? spawn.getMinDistance() : 2;
+				float distance = spawn.getMaxDistance() > 0 ? Rnd.get(minDistance, spawn.getMaxDistance()) : minDistance;
+				float[] randomPoint = NavMeshService.getInstance().getRandomPoint(npc, distance);
+				if (randomPoint != null) {
+					SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(npc.getWorldId(), spawn.getNpcId(), randomPoint[0], randomPoint[1], randomPoint[2],
+							npc.getHeading(), npc.getObjectId());
+					SpawnEngine.spawnObject(template, npc.getInstanceId());
+				} else {
+					if (npc.getAi().isLogging())
+						AILogger.moveinfo(npc, "NpcSkillTemplateEntry: spawnNpc with navmesh failed, randomPoint is null");
+				}
 			}
-			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(npc.getWorldId(), spawn.getNpcId(), npc.getX() + x1, npc.getY() + y1, npc.getZ(),
-				npc.getHeading(), npc.getObjectId());
-			SpawnEngine.spawnObject(template, npc.getInstanceId());
+		} else {
+			for (int i = 0; i < count; i++) {
+				float x1 = 0;
+				float y1 = 0;
+				if (spawn.getMinDistance() > 0) {
+					float directionMod = (float) (Rnd.get() * 2 * Math.PI); // 0 = normal direction, PI = opposite direction
+					double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(npc.getHeading())) + directionMod;
+					float distance = spawn.getMaxDistance() > 0 ? Rnd.get(spawn.getMinDistance(), spawn.getMaxDistance()) : spawn.getMinDistance();
+					x1 = (float) (Math.cos(radian) * distance);
+					y1 = (float) (Math.sin(radian) * distance);
+				}
+				SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(npc.getWorldId(), spawn.getNpcId(), npc.getX() + x1, npc.getY() + y1, npc.getZ(),
+						npc.getHeading(), npc.getObjectId());
+				SpawnEngine.spawnObject(template, npc.getInstanceId());
+			}
 		}
 	}
 

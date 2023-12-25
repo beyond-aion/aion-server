@@ -40,7 +40,7 @@ public class NavMeshService {
             Result<FindNearestPolyResult> startRefNearestResult = query.findNearestPoly(startPos, polyPickExt, filter);
             Result<FindNearestPolyResult> endRefNearestResult =query.findNearestPoly(endPos, polyPickExt, filter);
 
-            if (startRefNearestResult != null && endRefNearestResult != null) {
+            if (startRefNearestResult.succeeded() && endRefNearestResult.succeeded()) {
                 logger.warn("Found Start and End Ref: " + startRefNearestResult.result.getNearestRef() + "/" + endRefNearestResult.result.getNearestRef());
                 long startRef = startRefNearestResult.result.getNearestRef();
                 long endRef = endRefNearestResult.result.getNearestRef();
@@ -80,6 +80,25 @@ public class NavMeshService {
     }
     public List<StraightPathItem> calculatePath(VisibleObject object, VisibleObject target) {
         return calculatePath(object, target.getX(), target.getY(), target.getZ());
+    }
+
+    public float[] getRandomPoint(VisibleObject object, float radius)  {
+        NavMeshMap navMeshMap = navMeshMaps.get(object.getWorldId());
+        if (navMeshMap != null) {
+            NavMeshQuery query = new NavMeshQuery(navMeshMap.getNavMesh());
+            QueryFilter filter = new DefaultQueryFilter();
+            float[] startPos = { object.getY(), object.getZ(), object.getX() };
+            float[] polyPickExt = { 2, 4, 2 };
+            Result<FindNearestPolyResult> startRefNearestResult = query.findNearestPoly(startPos, polyPickExt, filter);
+            if (startRefNearestResult.succeeded()) {
+                Result<FindRandomPointResult> result = query.findRandomPointAroundCircle(startRefNearestResult.result.getNearestRef(), startPos, radius, filter, new NavMeshQuery.FRand(), PolygonByCircleConstraint.strict());
+                if (result.succeeded()) {
+                    float[] point = result.result.getRandomPt();
+                    return new float[]{point[2], point[0], point[1]};
+                }
+            }
+        }
+        return null;
     }
 
     public static NavMeshService getInstance() {
