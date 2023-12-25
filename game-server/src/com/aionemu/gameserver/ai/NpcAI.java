@@ -30,6 +30,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.NpcShoutsService;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldType;
+import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.knownlist.KnownList;
 
 /**
@@ -184,7 +185,8 @@ public abstract class NpcAI extends AITemplate<Npc> {
 				return PositionUtil.isInRange(getOwner(), getOwner().getMoveController().getTargetX2(), getOwner().getMoveController().getTargetY2(),
 					getOwner().getMoveController().getTargetZ2(), 1);
 			case FIGHT:
-				return SimpleAttackManager.isTargetInAttackRange(getOwner());
+				boolean canSee = getTarget() != null && GeoService.getInstance().canSee(getOwner(), getTarget());
+				return canSee && SimpleAttackManager.isTargetInAttackRange(getOwner());
 			case RETURNING:
 				SpawnTemplate spawn = getOwner().getSpawn();
 				return PositionUtil.isInRange(getOwner(), spawn.getX(), spawn.getY(), spawn.getZ(), 1);

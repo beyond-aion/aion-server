@@ -17,6 +17,7 @@ import java.util.zip.Deflater;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipOutputStream;
 
+import com.aionemu.gameserver.world.navmesh.NavMeshService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -177,6 +178,8 @@ public class GameServer {
 
 		ConsoleUtil.printSection("Geodata");
 		GeoService.getInstance().initializeGeo();
+		ConsoleUtil.printSection("Navmesh");
+		NavMeshService.getInstance().initializeNavMeshes();
 		// ZoneService.getInstance().saveMaterialZones();
 
 		ConsoleUtil.printSection("World");

@@ -155,5 +155,36 @@
 			<version>4.6.0</version>
 			<scope>provided</scope> <!-- don't include on build, since it's only needed for IDE validation -->
 		</dependency>
+		<dependency>
+			<groupId>org.recast4j</groupId>
+			<artifactId>recast</artifactId>
+			<version>1.5.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.recast4j</groupId>
+			<artifactId>detour</artifactId>
+			<version>1.5.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.recast4j</groupId>
+			<artifactId>detour-crowd</artifactId>
+			<version>1.5.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.recast4j</groupId>
+			<artifactId>detour-tile-cache</artifactId>
+			<version>1.5.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.recast4j</groupId>
+			<artifactId>detour-extras</artifactId>
+			<version>1.5.5</version>
+		</dependency>
+		<dependency>
+			<groupId>org.recast4j</groupId>
+			<artifactId>detour-dynamic</artifactId>
+			<version>1.5.5</version>
+		</dependency>
+
 	</dependencies>
 </project>

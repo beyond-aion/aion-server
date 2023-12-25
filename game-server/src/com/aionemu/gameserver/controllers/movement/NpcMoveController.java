@@ -2,6 +2,9 @@ package com.aionemu.gameserver.controllers.movement;
 
 import java.util.List;
 
+import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.world.navmesh.NavMeshService;
+import org.recast4j.detour.StraightPathItem;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -54,6 +57,9 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	private RouteStep currentStep;
 	private float cachedTargetZ;
 
+	private List<StraightPathItem> pathItems = null;
+	private StraightPathItem currentPathItem = null;
+
 	public NpcMoveController(Npc owner) {
 		super(owner);
 	}
@@ -73,8 +79,22 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				AILogger.moveinfo(owner, "MC: moveToTarget started");
 			}
 			destination = Destination.TARGET_OBJECT;
+
+			if (NavMeshService.getInstance().mapSupportsNavMesh(owner.getWorldId())) {
+				calculateNavMeshPath();
+			}
 			updateLastMove();
 			owner.getController().onStartMove();
+		}
+	}
+
+	private void calculateNavMeshPath() {
+		if (owner.getAi().isLogging()) {
+			AILogger.moveinfo(owner, "MC: calculating navmesh path");
+		}
+		pathItems = NavMeshService.getInstance().calculatePath(owner, owner.getTarget());
+		if (pathItems != null && !pathItems.isEmpty()) {
+			pathItems.removeFirst();
 		}
 	}
 
@@ -154,7 +174,74 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				VisibleObject target = owner.getTarget();// todo no target
 				if (!(target instanceof Creature))
 					return;
-				if (!PositionUtil.isInRange(target, pointX, pointY, pointZ, MOVE_CHECK_OFFSET)) {
+				if (NavMeshService.getInstance().mapSupportsNavMesh(owner.getWorldId())) {
+					if (pathItems != null) {
+						if (owner.getAi().isLogging()) {
+							AILogger.moveinfo(owner, "moveToDestination navmesh path items not null, size: " + pathItems.size());
+						}
+						float[] lastPos = pathItems.isEmpty() ? (currentPathItem != null ? currentPathItem.getPos() : null) : pathItems.getLast().getPos();
+						if (lastPos != null && !PositionUtil.isInRange(target, lastPos[2], lastPos[0], lastPos[1], MOVE_CHECK_OFFSET)) {
+							if (owner.getAi().isLogging()) {
+								AILogger.moveinfo(owner, "moveToDestination navmesh target moved");
+							}
+							calculateNavMeshPath();
+							if (pathItems == null || pathItems.isEmpty()) {
+								if (owner.getAi().isLogging()) {
+									AILogger.moveinfo(owner, "moveToDestination navmesh recalculated null");
+								}
+								abortMove();
+								return;
+							} else {
+								if (owner.getAi().isLogging()) {
+									AILogger.moveinfo(owner, "moveToDestination navmesh recalculated, size:  " + pathItems.size());
+								}
+								currentPathItem = pathItems.removeFirst();
+							}
+						}
+						if (currentPathItem == null) {
+							if (!pathItems.isEmpty()) {
+								if (owner.getAi().isLogging()) {
+									AILogger.moveinfo(owner, "moveToDestination navmesh cur Path item null but pathItems not empty");
+								}
+								currentPathItem = pathItems.removeFirst();
+							} else {
+								if (owner.getAi().isLogging()) {
+									AILogger.moveinfo(owner, "moveToDestination navmesh cur Path item null and pathItems empty, aborting");
+								}
+								abortMove();
+								return;
+							}
+						}
+						float[] dest = currentPathItem.getPos();
+						if (PositionUtil.isInRange(owner, dest[2], dest[0], dest[1], MOVE_CHECK_OFFSET) && !pathItems.isEmpty()) {
+							if (owner.getAi().isLogging()) {
+								AILogger.moveinfo(owner, "moveToDestination navmesh cur Path item near, moving to next point");
+							}
+							currentPathItem = pathItems.removeFirst();
+							dest = currentPathItem.getPos();
+							pointX = dest[2];
+							pointY = dest[0];
+							pointZ = dest[1];
+						} else {
+							if (owner.getAi().isLogging()) {
+								AILogger.moveinfo(owner, "moveToDestination navmesh cur Path item not near, continue on prev path");
+							}
+							pointX = dest[2];
+							pointY = dest[0];
+							pointZ = dest[1];
+						}
+					} else {
+						if (owner.getAi().isLogging()) {
+							AILogger.moveinfo(owner, "moveToDestination navmesh path items null ");
+						}
+						abortMove();
+						owner.getAi().onGeneralEvent(AIEventType.TARGET_GIVEUP);
+					}
+				}
+				else if (!PositionUtil.isInRange(target, pointX, pointY, pointZ, MOVE_CHECK_OFFSET)) {
+					if (owner.getAi().isLogging()) {
+						AILogger.moveinfo(owner, "moveToDestination target not in range of points");
+					}
 					Creature creature = (Creature) target;
 					pointX = target.getX();
 					pointY = target.getY();
@@ -329,6 +416,8 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		pointX = 0;
 		pointY = 0;
 		pointZ = 0;
+		pathItems = null;
+		currentPathItem = null;
 	}
 
 	public WalkerTemplate getWalkerTemplate() {

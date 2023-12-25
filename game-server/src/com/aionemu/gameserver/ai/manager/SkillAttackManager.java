@@ -53,6 +53,9 @@ public class SkillAttackManager {
 	}
 
 	protected static void skillAction(NpcAI npcAI) {
+		if (npcAI.isLogging()) {
+			AILogger.info(npcAI, "SkillAttackManager: skillAction " + npcAI.getSubState());
+		}
 		if (npcAI.getSubState() != AISubState.CAST)
 			return;
 		Npc owner = npcAI.getOwner();
@@ -135,6 +138,9 @@ public class SkillAttackManager {
 			}
 			boolean success = owner.getController().useSkill(skill.getSkillId(), skill.getSkillLevel());
 			if (!success) {
+				if (npcAI.isLogging()) {
+					AILogger.info(npcAI, "AttackManager: chooseAttack skill unsuccessfull ");
+				}
 				afterUseSkill(npcAI);
 			}
 		}

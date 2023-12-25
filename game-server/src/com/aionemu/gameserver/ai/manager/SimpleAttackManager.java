@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
+import com.aionemu.gameserver.world.navmesh.NavMeshService;
 
 /**
  * @author ATracer
@@ -78,13 +79,27 @@ public class SimpleAttackManager {
 			if (mostHated != null && !mostHated.isDead() && !target.equals(mostHated)) {
 				npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 			} else if (!npc.canSee(target)) {
+				if (npcAI.isLogging()) {
+					AILogger.info(npcAI, "attackAction cant see");
+				}
 				npc.getController().abortCast();
 				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 			} else if (!isTargetInAttackRange(npc)) {
+				if (npcAI.isLogging()) {
+					AILogger.info(npcAI, "attackAction out of range");
+				}
 				npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
 			} else if (!GeoService.getInstance().canSee(npc, target)) { // delete geo check when we've implemented a pathfinding system
+				if (npcAI.isLogging()) {
+					AILogger.info(npcAI, "attackAction geo cant see");
+				}
 				npc.getController().cancelCurrentSkill(null);
-				if (((System.currentTimeMillis() - npc.getMoveController().getLastMoveUpdate()) > 15000)
+				if (NavMeshService.getInstance().mapSupportsNavMesh(npc.getWorldId())) {
+					if (npcAI.isLogging()) {
+						AILogger.info(npcAI, "Simple Attack Manager: chooseAttack navmesh map supported");
+					}
+					npcAI.onGeneralEvent(AIEventType.TARGET_TOOFAR);
+				} else if (((System.currentTimeMillis() - npc.getMoveController().getLastMoveUpdate()) > 15000)
 					&& npc.getGameStats().getLastAttackedTimeDelta() > 15) {
 					npcAI.onGeneralEvent(AIEventType.TARGET_GIVEUP);
 				} else {
