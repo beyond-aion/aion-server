@@ -10,6 +10,7 @@ import com.aionemu.gameserver.model.templates.staticdoor.StaticDoorTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.geo.GeoService;
+import com.aionemu.gameserver.world.navmesh.NavMeshService;
 
 /**
  * @author MrPoke, Rolandas
@@ -59,6 +60,7 @@ public class StaticDoor extends StaticObject {
 			states.add(StaticDoorState.OPENED); // 1001
 			packetState = 0x9;
 			GeoService.getInstance().setDoorState(getWorldId(), getInstanceId(), getSpawn().getStaticId(), true);
+			NavMeshService.getInstance().setDoorState(getWorldId(), getInstanceId(), getSpawn(), true);
 		} else {
 			emotion = EmotionType.CLOSE_DOOR;
 			if (getObjectTemplate().getInitialStates().contains(StaticDoorState.CLICKABLE))
@@ -66,6 +68,7 @@ public class StaticDoor extends StaticObject {
 			states.remove(StaticDoorState.OPENED); // 1010
 			packetState = 0xA;
 			GeoService.getInstance().setDoorState(getWorldId(), getInstanceId(), this.getSpawn().getStaticId(), false);
+			NavMeshService.getInstance().setDoorState(getWorldId(), getInstanceId(), getSpawn(), false);
 		}
 		// int stateFlags = StaticDoorState.getFlags(states);
 		PacketSendUtility.broadcastPacket(this, new SM_EMOTION(this.getSpawn().getStaticId(), emotion, packetState));

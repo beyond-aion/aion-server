@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.spawnengine;
 
+import com.aionemu.gameserver.world.navmesh.NavMeshService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -39,6 +40,7 @@ public class StaticDoorSpawnManager {
 			bringIntoWorld(staticDoor, spawn, instanceIndex);
 			counter++;
 			GeoService.getInstance().setDoorState(worldId, instanceIndex, data.getDoorId(), staticDoor.isOpen());
+			NavMeshService.getInstance().setDoorState(worldId, instanceIndex, spawn, staticDoor.isOpen());
 		}
 		if (counter > 0)
 			log.info("Spawned static doors " + worldId + " [" + instanceIndex + "]: " + counter);

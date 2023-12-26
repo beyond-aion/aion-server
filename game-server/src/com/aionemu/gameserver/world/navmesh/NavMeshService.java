@@ -2,9 +2,11 @@ package com.aionemu.gameserver.world.navmesh;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.navEngine.NavMeshMap;
 import com.aionemu.gameserver.navEngine.NavMeshWorldLoader;
 import org.recast4j.detour.*;
+import org.recast4j.recast.AreaModification;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,6 +20,10 @@ public class NavMeshService {
 
     private final Map<Integer, NavMeshMap> navMeshMaps = new HashMap<>();
 
+    private final int DOOR_POLYAREA = 0x02;
+    private final int ALL_AREA = 0xfffff;
+    private final AreaModification DOOR_AREA = new AreaModification(DOOR_POLYAREA);
+
     public void initializeNavMeshes() {
         DataManager.WORLD_MAPS_DATA.forEach(map -> navMeshMaps.put(map.getMapId(), new NavMeshMap(map.getMapId())));
         NavMeshWorldLoader.load(navMeshMaps.values());
@@ -29,11 +35,11 @@ public class NavMeshService {
     }
 
     public List<StraightPathItem> calculatePath(int worldId, float startX, float startY, float startZ, float endX, float endY, float endZ) {
-        NavMeshMap navMeshMap = navMeshMaps.get(worldId);
-        if (navMeshMap != null) {
+        if (mapSupportsNavMesh(worldId)) {
+            NavMeshMap navMeshMap = navMeshMaps.get(worldId);
             logger.warn("Found NavMesh.java for " + DataManager.WORLD_MAPS_DATA.getTemplate(worldId).getName());
             NavMeshQuery query = new NavMeshQuery(navMeshMap.getNavMesh());
-            QueryFilter filter = new DefaultQueryFilter();
+            QueryFilter filter = new DefaultQueryFilter(ALL_AREA, DOOR_POLYAREA, new float[]{});
             float[] startPos = { startY, startZ, startX };
             float[] endPos = { endY, endZ, endX };
             float[] polyPickExt = { 2, 4, 2 };
@@ -83,10 +89,10 @@ public class NavMeshService {
     }
 
     public float[] getRandomPoint(VisibleObject object, float radius)  {
-        NavMeshMap navMeshMap = navMeshMaps.get(object.getWorldId());
-        if (navMeshMap != null) {
+        if (mapSupportsNavMesh(object.getWorldId())) {
+            NavMeshMap navMeshMap = navMeshMaps.get(object.getWorldId());
             NavMeshQuery query = new NavMeshQuery(navMeshMap.getNavMesh());
-            QueryFilter filter = new DefaultQueryFilter();
+            QueryFilter filter = new DefaultQueryFilter(ALL_AREA, DOOR_POLYAREA, new float[]{});
             float[] startPos = { object.getY(), object.getZ(), object.getX() };
             float[] polyPickExt = { 2, 4, 2 };
             Result<FindNearestPolyResult> startRefNearestResult = query.findNearestPoly(startPos, polyPickExt, filter);
@@ -99,6 +105,43 @@ public class NavMeshService {
             }
         }
         return null;
+    }
+
+    public void setDoorState(int worldId, int instanceId, SpawnTemplate template, boolean isOpen) {
+        if (mapSupportsNavMesh(worldId)) {
+            NavMeshMap navMeshMap = navMeshMaps.get(worldId);
+            logger.warn("Setting DoorState " + worldId + " door: " + template.getStaticId() + " to isOpen=" + isOpen);
+            Long doorRef = navMeshMap.getDoorRef(template.getStaticId());
+            if (doorRef == null || doorRef == 0) {
+                NavMeshQuery query = new NavMeshQuery(navMeshMap.getNavMesh());
+                QueryFilter filter = new DefaultQueryFilter();
+                float[] startPos = { template.getY(), template.getZ(), template.getX() };
+                float[] polyPickExt = {2, 4, 2};
+                Result<FindNearestPolyResult> startRefNearestResult = query.findNearestPoly(startPos, polyPickExt, filter);
+                if (startRefNearestResult.succeeded()) {
+                    FindNearestPolyResult rs = startRefNearestResult.result;
+                    long ref = rs.getNearestRef();
+                    navMeshMap.setDoorRef(template.getStaticId(), ref);
+                    logger.warn("found door ref for " + template.getStaticId() + " in world: " + worldId + " ref: " + ref);
+                    doorRef = ref;
+                } else {
+                    logger.warn("Could not find ref for door: " + template.getStaticId() + " in world: " + worldId);
+                    return;
+                }
+            }
+            Result<Integer> flags = navMeshMap.getNavMesh().getPolyFlags(doorRef);
+            if (flags.succeeded()) {
+                logger.warn("Current flag: " + flags.result);
+                navMeshMap.getNavMesh().setPolyFlags(doorRef, isOpen ? 1 : DOOR_POLYAREA);
+                logger.warn("new flag: " + (isOpen ? 1 : DOOR_POLYAREA));
+            } else {
+                navMeshMap.getNavMesh().setPolyFlags(doorRef, isOpen ? 1 :  DOOR_POLYAREA);
+                flags = navMeshMap.getNavMesh().getPolyFlags(doorRef);
+                logger.warn("could not read flags. set to new: " + (flags.succeeded() ? flags.result : "no success"));
+            }
+        } else {
+            logger.warn("Set door state for unsupported map: " + worldId + " door: " + template.getStaticId());
+        }
     }
 
     public static NavMeshService getInstance() {
