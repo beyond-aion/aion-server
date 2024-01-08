@@ -14792,7 +14792,25 @@
 			<item id="186000096" /><!-- Platinum Medal -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188051845" /><!-- Radiant Supply Box -->
+<decomposable item_id="188051845"><!-- Radiant Supply Box -->
+	<items chance="60.0">
+		<item id="162000023" min_count="3" /><!-- Greater Healing Potion -->
+		<item id="162000069" min_count="3" /><!-- Major Divine Life Serum -->
+		<item id="162000070" min_count="3" /><!-- Major Divine Mana Serum -->
+	</items>
+	<items chance="36.4">
+		<item id="162000023" min_count="3" /><!-- Greater Healing Potion -->
+		<item id="162000069" min_count="3" /><!-- Major Divine Life Serum -->
+		<item id="162000070" min_count="3" /><!-- Major Divine Mana Serum -->
+		<item id="186000096" /><!-- Platinum Medal -->
+	</items>
+	<items chance="3.6">
+		<item id="162000023" min_count="3" /><!-- Greater Healing Potion -->
+		<item id="162000069" min_count="3" /><!-- Major Divine Life Serum -->
+		<item id="162000070" min_count="3" /><!-- Major Divine Mana Serum -->
+		<item id="186000147" /><!-- Mithril Medal -->
+	</items>
+</decomposable>
 	<decomposable item_id="188051846"><!-- [Event] Alchemical Transformation Formula Bundle for Guardian's Necklace -->
 		<items chance="25.0">
 			<item id="152230351" /><!-- [Event] Alchemical Transformation Formula for Archon Centurion's Garnet Necklace -->
