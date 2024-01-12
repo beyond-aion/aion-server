@@ -4,6 +4,7 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.Ray;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
+import com.aionemu.gameserver.geoEngine.utils.TempVars;
 
 public class Terrain {
 
@@ -53,7 +54,9 @@ public class Terrain {
 	}
 
 	public void collideAtOrigin(Ray r, CollisionResults results) {
-		collideNearXY(r.origin.x, r.origin.y, r, new Vector3f(), new Vector3f(), new Vector3f(), results);
+		TempVars vars = TempVars.get();
+		collideNearXY(r.origin.x, r.origin.y, r, vars.vect1, vars.vect2, vars.vect3, results);
+		vars.release();
 	}
 
 	public boolean collide(Ray ray, float targetX, float targetY, CollisionResults results) {
@@ -61,16 +64,19 @@ public class Terrain {
 		float distanceY = targetY - ray.origin.y;
 		float distance2D = (float) Math.sqrt(distanceX * distanceX + distanceY * distanceY);
 		float checkDistanceLimit = distance2D + HEIGHTMAP_UNIT_SIZE;
-		Vector3f p1or4 = new Vector3f(), p2 = new Vector3f(), p3 = new Vector3f();
+		TempVars vars = TempVars.get();
 		for (int checkDistance = 0; checkDistance < checkDistanceLimit; checkDistance += HEIGHTMAP_UNIT_SIZE) {
 			float distanceFactor = checkDistance / distance2D;
 			float x = ray.origin.x + distanceX * distanceFactor;
 			float y = ray.origin.y + distanceY * distanceFactor;
-			if (collideNearXY(x, y, ray, p1or4, p2, p3, results)
-				|| collideNearXY(x + HEIGHTMAP_UNIT_SIZE, y, ray, p1or4, p2, p3, results)
-				|| collideNearXY(x, y + HEIGHTMAP_UNIT_SIZE, ray, p1or4, p2, p3, results))
+			if (collideNearXY(x, y, ray, vars.vect1, vars.vect2, vars.vect3, results)
+				|| collideNearXY(x + HEIGHTMAP_UNIT_SIZE, y, ray, vars.vect1, vars.vect2, vars.vect3, results)
+				|| collideNearXY(x, y + HEIGHTMAP_UNIT_SIZE, ray, vars.vect1, vars.vect2, vars.vect3, results)) {
+				vars.release();
 				return true;
+			}
 		}
+		vars.release();
 		return false;
 	}
 

@@ -44,6 +44,7 @@ import com.aionemu.gameserver.geoEngine.math.Matrix4f;
 import com.aionemu.gameserver.geoEngine.math.Ray;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.utils.BufferUtils;
+import com.aionemu.gameserver.geoEngine.utils.TempVars;
 
 /**
  * <code>BoundingSphere</code> defines a sphere that defines a container for a group of vertices of a particular piece
@@ -336,50 +337,6 @@ public class BoundingSphere extends BoundingVolume {
 	}
 
 	/**
-	 * <code>merge</code> combines this sphere with a second bounding sphere. This new sphere contains both bounding
-	 * spheres and is returned.
-	 * 
-	 * @param volume
-	 *          the sphere to combine with this sphere.
-	 * @return a new sphere
-	 */
-	@Override
-	public BoundingVolume merge(BoundingVolume volume) {
-		if (volume == null) {
-			return this;
-		}
-
-		switch (volume.getType()) {
-
-			case Sphere: {
-				BoundingSphere sphere = (BoundingSphere) volume;
-				float temp_radius = sphere.getRadius();
-				Vector3f temp_center = sphere.center;
-				BoundingSphere rVal = new BoundingSphere();
-				return merge(temp_radius, temp_center, rVal);
-			}
-
-			case AABB: {
-				BoundingBox box = (BoundingBox) volume;
-				Vector3f radVect = new Vector3f(box.xExtent, box.yExtent, box.zExtent);
-				Vector3f temp_center = box.center;
-				BoundingSphere rVal = new BoundingSphere();
-				return merge(radVect.length(), temp_center, rVal);
-			}
-
-			// case OBB: {
-			// OrientedBoundingBox box = (OrientedBoundingBox) volume;
-			// BoundingSphere rVal = (BoundingSphere) this.clone(null);
-			// return rVal.mergeOBB(box);
-			// }
-
-			default:
-				return null;
-
-		}
-	}
-
-	/**
 	 * <code>mergeLocal</code> combines this sphere with a second bounding sphere locally. Altering this sphere to contain
 	 * both the original and the additional sphere volumes;
 	 * 
@@ -404,10 +361,12 @@ public class BoundingSphere extends BoundingVolume {
 
 			case AABB: {
 				BoundingBox box = (BoundingBox) volume;
-				Vector3f radVect = new Vector3f();
+				TempVars vars = TempVars.get();
+				Vector3f radVect = vars.vect1;
 				radVect.set(box.xExtent, box.yExtent, box.zExtent);
 				Vector3f temp_center = box.center;
 				float len = radVect.length();
+				vars.release();
 				return merge(len, temp_center, this);
 			}
 
@@ -458,8 +417,8 @@ public class BoundingSphere extends BoundingVolume {
 	// }
 
 	private BoundingVolume merge(float temp_radius, Vector3f temp_center, BoundingSphere rVal) {
-		Vector3f vect1 = new Vector3f();
-		Vector3f diff = temp_center.subtract(center, vect1);
+		TempVars vars = TempVars.get();
+		Vector3f diff = temp_center.subtract(center, vars.vect1);
 		float lengthSquared = diff.lengthSquared();
 		float radiusDiff = temp_radius - radius;
 
@@ -467,6 +426,7 @@ public class BoundingSphere extends BoundingVolume {
 
 		if (fRDiffSqr >= lengthSquared) {
 			if (radiusDiff <= 0.0f) {
+				vars.release();
 				return this;
 			}
 
@@ -476,6 +436,7 @@ public class BoundingSphere extends BoundingVolume {
 			}
 			rCenter.set(temp_center);
 			rVal.setRadius(temp_radius);
+			vars.release();
 			return rVal;
 		}
 
@@ -493,6 +454,7 @@ public class BoundingSphere extends BoundingVolume {
 		}
 
 		rVal.setRadius(0.5f * (length + radius + temp_radius));
+		vars.release();
 		return rVal;
 	}
 
@@ -538,10 +500,11 @@ public class BoundingSphere extends BoundingVolume {
 	public boolean intersectsSphere(BoundingSphere bs) {
 		assert Vector3f.isValidVector(center) && Vector3f.isValidVector(bs.center);
 
-		Vector3f vect1 = new Vector3f();
-		Vector3f diff = center.subtract(bs.center, vect1);
+		TempVars vars = TempVars.get();
+		Vector3f diff = center.subtract(bs.center, vars.vect1);
 		float rsum = getRadius() + bs.getRadius();
 		boolean eq = (diff.dot(diff) <= rsum * rsum);
+		vars.release();
 		return eq;
 	}
 
@@ -560,17 +523,19 @@ public class BoundingSphere extends BoundingVolume {
 	public boolean intersects(Ray ray) {
 		assert Vector3f.isValidVector(center);
 
-		Vector3f vect1 = new Vector3f();
-		Vector3f diff = vect1.set(ray.getOrigin()).subtractLocal(center);
+		TempVars vars = TempVars.get();
+		Vector3f diff = vars.vect1.set(ray.getOrigin()).subtractLocal(center);
 		float radiusSquared = getRadius() * getRadius();
 		float a = diff.dot(diff) - radiusSquared;
 		if (a <= 0.0) {
+			vars.release();
 			// in sphere
 			return true;
 		}
 
 		// outside sphere
 		float b = ray.getDirection().dot(diff);
+		vars.release();
 		if (b >= 0.0) {
 			return false;
 		}
@@ -578,13 +543,13 @@ public class BoundingSphere extends BoundingVolume {
 	}
 
 	public int collideWithRay(Ray ray, CollisionResults results) {
-		Vector3f vect1 = new Vector3f();
-		Vector3f diff = vect1.set(ray.getOrigin()).subtractLocal(center);
+		TempVars vars = TempVars.get();
+		Vector3f diff = vars.vect1.set(ray.getOrigin()).subtractLocal(center);
 		float a = diff.dot(diff) - (getRadius() * getRadius());
-		float a1, discr, root;
+		float a1 = ray.direction.dot(diff), discr, root;
+		vars.release();
 		if (a <= 0.0) {
 			// inside sphere
-			a1 = ray.direction.dot(diff);
 			discr = (a1 * a1) - a;
 			root = FastMath.sqrt(discr);
 
@@ -598,7 +563,6 @@ public class BoundingSphere extends BoundingVolume {
 			return 1;
 		}
 
-		a1 = ray.direction.dot(diff);
 		if (a1 >= 0.0) {
 			return 0;
 		}
@@ -635,12 +599,10 @@ public class BoundingSphere extends BoundingVolume {
 
 	@Override
 	public int collideWith(Collidable other, CollisionResults results) {
-		if (other instanceof Ray) {
-			Ray ray = (Ray) other;
+		if (other instanceof Ray ray) {
 			return collideWithRay(ray, results);
-		} else {
-			throw new UnsupportedCollisionException();
 		}
+		throw new UnsupportedCollisionException();
 	}
 
 	@Override

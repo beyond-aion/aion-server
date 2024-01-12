@@ -35,16 +35,14 @@ package com.aionemu.gameserver.geoEngine.collision.bih;
 import static java.lang.Math.*;
 
 import java.util.ArrayList;
-import java.util.List;
 
-import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
-import com.aionemu.gameserver.geoEngine.collision.Collidable;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.math.FastMath;
 import com.aionemu.gameserver.geoEngine.math.Matrix4f;
 import com.aionemu.gameserver.geoEngine.math.Ray;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
+import com.aionemu.gameserver.geoEngine.utils.TempVars;
 
 /**
  * Bounding Interval Hierarchy. Based on: Instant Ray Tracing: The Bounding Interval Hierarchy By Carsten Wächter and
@@ -118,122 +116,13 @@ public final class BIHNode {
 
 	}
 
-	public final int intersectWhere(Collidable col, BoundingBox box, Matrix4f worldMatrix, BIHTree tree, CollisionResults results) {
-
-		List<BIHStackData> stack = new ArrayList<>();
-
-		float[] minExts = { box.getCenter().x - box.getXExtent(), box.getCenter().y - box.getYExtent(), box.getCenter().z - box.getZExtent() };
-
-		float[] maxExts = { box.getCenter().x + box.getXExtent(), box.getCenter().y + box.getYExtent(), box.getCenter().z + box.getZExtent() };
-
-		stack.add(new BIHStackData(this, 0, 0));
-
-		Vector3f pointA = new Vector3f(), pointB = new Vector3f(), pointC = new Vector3f();
-		int cols = 0;
-
-		stackloop:
-		while (stack.size() > 0) {
-			BIHNode node = stack.remove(stack.size() - 1).node;
-
-			while (node.axis != 3) {
-				int a = node.axis;
-
-				float maxExt = maxExts[a];
-				float minExt = minExts[a];
-
-				if (node.leftPlane < node.rightPlane) {
-					// means there's a gap in the middle
-					// if the box is in that gap, we stop there
-					if (minExt > node.leftPlane && maxExt < node.rightPlane)
-						continue stackloop;
-				}
-
-				if (maxExt < node.rightPlane) {
-					node = node.left;
-				} else if (minExt > node.leftPlane) {
-					node = node.right;
-				} else {
-					stack.add(new BIHStackData(node.right, 0, 0));
-					node = node.left;
-				}
-			}
-
-			for (int i = node.leftIndex; i <= node.rightIndex; i++) {
-				tree.getTriangle(i, pointA, pointB, pointC);
-				if (worldMatrix != null) {
-					worldMatrix.mult(pointA, pointA);
-					worldMatrix.mult(pointB, pointB);
-					worldMatrix.mult(pointC, pointC);
-				}
-
-				/*
-				 * Original code had this
-				 * int added = col.collideWith(t, results, 1);
-				 * if (added > 0) {
-				 * cols += added;
-				 * }
-				 */
-			}
-		}
-		stack.clear();
-		return cols;
-	}
-
-	public final int intersectBrute(Ray r, Matrix4f worldMatrix, BIHTree tree, float sceneMin, float sceneMax, CollisionResults results) {
-		float tHit = Float.POSITIVE_INFINITY;
-
-		Vector3f v1 = new Vector3f(), v2 = new Vector3f(), v3 = new Vector3f();
-
-		int cols = 0;
-
-		List<BIHStackData> stack = new ArrayList<>();
-		stack.clear();
-		stack.add(new BIHStackData(this, 0, 0));
-		while (stack.size() > 0) {
-
-			BIHStackData data = stack.remove(stack.size() - 1);
-			BIHNode node = data.node;
-
-			while (node.axis != 3) { // while node is not a leaf
-				BIHNode nearNode, farNode;
-				nearNode = node.left;
-				farNode = node.right;
-
-				stack.add(new BIHStackData(farNode, 0, 0));
-				node = nearNode;
-			}
-
-			// a leaf
-			for (int i = node.leftIndex; i <= node.rightIndex; i++) {
-				tree.getTriangle(i, v1, v2, v3);
-
-				if (worldMatrix != null) {
-					worldMatrix.mult(v1, v1);
-					worldMatrix.mult(v2, v2);
-					worldMatrix.mult(v3, v3);
-				}
-
-				float t = r.intersects(v1, v2, v3);
-				if (t < tHit) {
-					tHit = t;
-					Vector3f contactPoint = new Vector3f(r.direction).multLocal(tHit).addLocal(r.origin);
-					CollisionResult cr = new CollisionResult(contactPoint, tHit);
-					results.addCollision(cr);
-					cols++;
-				}
-			}
-		}
-		stack.clear();
-		return cols;
-	}
-
 	public final int intersectWhere(Ray r, Matrix4f worldMatrix, BIHTree tree, float sceneMin, float sceneMax, CollisionResults results) {
-		List<BIHStackData> stack = new ArrayList<>();
+		TempVars vars = TempVars.get();
+		ArrayList<BIHStackData> stack = vars.bihStack;
+		stack.clear();
 
-		// float tHit = Float.POSITIVE_INFINITY;
-
-		Vector3f o = r.getOrigin().clone();
-		Vector3f d = r.getDirection().clone();
+		Vector3f o = vars.vect1.set(r.getOrigin());
+		Vector3f d = vars.vect2.set(r.getDirection());
 
 		Matrix4f inv = worldMatrix.invert();
 
@@ -249,7 +138,7 @@ public final class BIHNode {
 
 		r.getDirection().normalizeLocal();
 
-		Vector3f v1 = new Vector3f(), v2 = new Vector3f(), v3 = new Vector3f();
+		Vector3f v1 = vars.vect3, v2 = vars.vect4, v3 = vars.vect5;
 		int cols = 0;
 
 		stack.add(new BIHStackData(this, sceneMin, sceneMax));
@@ -317,8 +206,8 @@ public final class BIHNode {
 					float t_world = new Ray(o, d).intersects(v1, v2, v3);
 					t = t_world;
 
-					Vector3f contactPoint = new Vector3f(d).multLocal(t).addLocal(o);
-					float worldSpaceDist = o.distance(contactPoint);
+					Vector3f tempVarsContactPoint = vars.vect6.set(d).multLocal(t).addLocal(o);
+					float worldSpaceDist = o.distance(tempVarsContactPoint);
 					// fix invisible walls
 					if (worldSpaceDist > r.limit)
 						continue;
@@ -329,16 +218,16 @@ public final class BIHNode {
 						if (elevationAngleRad > FastMath.HALF_PI) // convert angle >90-180° to 0-90° range
 							elevationAngleRad = Math.PI - elevationAngleRad;
 						if (elevationAngleRad > results.getSlopingSurfaceAngleRad())
-							contactPoint.setZ(Float.NaN);
+							tempVarsContactPoint.setZ(Float.NaN);
 					}
-					results.addCollision(new CollisionResult(contactPoint, worldSpaceDist));
+					results.addCollision(new CollisionResult(new Vector3f(tempVarsContactPoint), worldSpaceDist));
 					cols++;
 					if (results.isOnlyFirst())
 						break stackloop;
 				}
 			}
 		}
-
+		vars.release();
 		r.setOrigin(o);
 		r.setDirection(d);
 		return cols;

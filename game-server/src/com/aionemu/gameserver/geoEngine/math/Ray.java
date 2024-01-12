@@ -36,6 +36,7 @@ import com.aionemu.gameserver.geoEngine.bounding.BoundingVolume;
 import com.aionemu.gameserver.geoEngine.collision.Collidable;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.collision.UnsupportedCollisionException;
+import com.aionemu.gameserver.geoEngine.utils.TempVars;
 
 /**
  * <code>Ray</code> defines a line segment which has an origin and a direction. That is, a point and an infinite ray is
@@ -52,11 +53,6 @@ public final class Ray implements Cloneable, Collidable {
 	public Vector3f direction;
 
 	public float limit = Float.POSITIVE_INFINITY;
-
-	// protected static final Vector3f tempVa=new Vector3f();
-	// protected static final Vector3f tempVb=new Vector3f();
-	// protected static final Vector3f tempVc=new Vector3f();
-	// protected static final Vector3f tempVd=new Vector3f();
 
 	/**
 	 * Constructor instantiates a new <code>Ray</code> object. As default, the origin is (0,0,0) and the direction is
@@ -115,8 +111,8 @@ public final class Ray implements Cloneable, Collidable {
 	 * @return true if ray intersects triangle
 	 */
 	private boolean intersects(Vector3f v0, Vector3f v1, Vector3f v2, Vector3f store, boolean doPlanar, boolean quad) {
-
-		Vector3f tempVa = new Vector3f(), tempVb = new Vector3f(), tempVc = new Vector3f(), tempVd = new Vector3f();
+		TempVars vars = TempVars.get();
+		Vector3f tempVa = vars.vect1, tempVb = vars.vect2, tempVc = vars.vect3, tempVd = vars.vect4;
 
 		Vector3f diff = origin.subtract(v0, tempVa);
 		Vector3f edge1 = v1.subtract(v0, tempVb);
@@ -132,6 +128,7 @@ public final class Ray implements Cloneable, Collidable {
 			dirDotNorm = -dirDotNorm;
 		} else {
 			// ray and triangle/quad are parallel
+			vars.release();
 			return false;
 		}
 
@@ -144,6 +141,7 @@ public final class Ray implements Cloneable, Collidable {
 					float diffDotNorm = -sign * diff.dot(norm);
 					if (diffDotNorm >= 0.0f) {
 						// this method always returns
+						vars.release();
 
 						// ray intersects triangle
 						// if storage vector is null, just return true,
@@ -171,6 +169,7 @@ public final class Ray implements Cloneable, Collidable {
 				}
 			}
 		}
+		vars.release();
 		return false;
 	}
 
@@ -267,7 +266,8 @@ public final class Ray implements Cloneable, Collidable {
 	}
 
 	public float distanceSquared(Vector3f point) {
-		Vector3f tempVa = new Vector3f(), tempVb = new Vector3f();
+		TempVars vars = TempVars.get();
+		Vector3f tempVa = vars.vect1, tempVb = vars.vect2;
 
 		point.subtract(origin, tempVa);
 		float rayParam = direction.dot(tempVa);
@@ -278,7 +278,9 @@ public final class Ray implements Cloneable, Collidable {
 		}
 
 		tempVb.subtract(point, tempVa);
-		return tempVa.lengthSquared();
+		float len = tempVa.lengthSquared();
+		vars.release();
+		return len;
 	}
 
 	/**
@@ -355,10 +357,6 @@ public final class Ray implements Cloneable, Collidable {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [Origin: " + origin + ", Direction: " + direction + "]";
-	}
-
-	public Class<? extends Ray> getClassTag() {
-		return this.getClass();
 	}
 
 	@Override

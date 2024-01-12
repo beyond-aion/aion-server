@@ -51,6 +51,7 @@ import com.aionemu.gameserver.geoEngine.scene.CollisionData;
 import com.aionemu.gameserver.geoEngine.scene.Mesh;
 import com.aionemu.gameserver.geoEngine.scene.VertexBuffer.Type;
 import com.aionemu.gameserver.geoEngine.scene.mesh.IndexBuffer;
+import com.aionemu.gameserver.geoEngine.utils.TempVars;
 
 public class BIHTree implements CollisionData {
 
@@ -61,8 +62,6 @@ public class BIHTree implements CollisionData {
     private int maxTrisPerNode;
     private int numTris;
     private float[] pointData;
-
-    private transient float[] bihSwapTmp;
 
     private void initTriList(FloatBuffer vb, IndexBuffer ib){
         pointData = new float[numTris * 3 * 3];
@@ -107,20 +106,15 @@ public class BIHTree implements CollisionData {
 
     public void construct(){
         BoundingBox sceneBbox = createBox(0, numTris-1);
-        bihSwapTmp = new float[9];
         root = createNode(0, numTris-1, sceneBbox, 0);
-        bihSwapTmp = null;
     }
 
     private BoundingBox createBox(int l, int r) {
-        Vector3f min = new Vector3f();
-        Vector3f max = new Vector3f();
-        min.set(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY);
-        max.set(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY);
+        TempVars vars = TempVars.get();
+        Vector3f min = vars.vect1.set(Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY, Float.POSITIVE_INFINITY);
+        Vector3f max = vars.vect2.set(Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY, Float.NEGATIVE_INFINITY);
 
-        Vector3f v1 = new Vector3f();
-        Vector3f v2 = new Vector3f();
-        Vector3f v3 = new Vector3f();
+        Vector3f v1 = vars.vect3, v2 = vars.vect4, v3 = vars.vect5;
 
         for (int i = l; i <= r; i++) {
             getTriangle(i, v1,v2,v3);
@@ -130,16 +124,16 @@ public class BIHTree implements CollisionData {
         }
 
         BoundingBox bbox = new BoundingBox(min,max);
+        vars.release();
         return bbox;
     }
 
-     private int sortTriangles(int l, int r, float split, int axis){
+    private int sortTriangles(int l, int r, float split, int axis) {
         int pivot = l;
         int j = r;
 
-        Vector3f v1 = new Vector3f(),
-                 v2 = new Vector3f(),
-                 v3 = new Vector3f();
+        TempVars vars = TempVars.get();
+        Vector3f v1 = vars.vect1, v2 = vars.vect2, v3 = vars.vect3;
 
         while (pivot <= j){
             getTriangle(pivot, v1, v2, v3);
@@ -147,11 +141,12 @@ public class BIHTree implements CollisionData {
             if (v1.get(axis) > split){
                 swapTriangles(pivot, j);
                 --j;
-            }else{
+            } else {
                 ++pivot;
             }
         }
 
+        vars.release();
         pivot = (pivot == l && j < pivot) ? j : pivot;
         return pivot;
     }
@@ -253,21 +248,23 @@ public class BIHTree implements CollisionData {
 
         v3.x = pointData[pointIndex++];
         v3.y = pointData[pointIndex++];
-        v3.z = pointData[pointIndex++];
+        v3.z = pointData[pointIndex];
     }
 
     public void swapTriangles(int index1, int index2){
         int p1 = index1 * 9;
         int p2 = index2 * 9;
 
+        TempVars vars = TempVars.get();
         // store p1 in tmp
-        System.arraycopy(pointData, p1, bihSwapTmp, 0, 9);
+        System.arraycopy(pointData, p1, vars.bihSwapTmp, 0, 9);
 
         // copy p2 to p1
         System.arraycopy(pointData, p2, pointData, p1, 9);
 
         // copy tmp to p2
-        System.arraycopy(bihSwapTmp, 0, pointData, p2, 9);
+        System.arraycopy(vars.bihSwapTmp, 0, pointData, p2, 9);
+        vars.release();
     }
 
     private int collideWithRay(Ray r,
@@ -306,35 +303,12 @@ public class BIHTree implements CollisionData {
         return collisions;
     }
 
-    private int collideWithBoundingVolume(BoundingVolume bv,
-                                          Matrix4f worldMatrix,
-                                          CollisionResults results){
-        BoundingBox bbox;
-        if (bv instanceof BoundingBox){
-            bbox = new BoundingBox( (BoundingBox) bv );
-        }else{
-            throw new UnsupportedCollisionException();
-        }
-
-        bbox.transform(worldMatrix.invert(), bbox);
-        return root.intersectWhere(bv, bbox, worldMatrix, this, results);
-    }
-
     @Override
-		public int collideWith(Collidable other,
-                           Matrix4f worldMatrix,
-                           BoundingVolume worldBound,
-                           CollisionResults results){
-        
-    	if (other instanceof Ray){
-            Ray ray = (Ray) other;
+		public int collideWith(Collidable other, Matrix4f worldMatrix, BoundingVolume worldBound, CollisionResults results) {
+        if (other instanceof Ray ray) {
             return collideWithRay(ray, worldMatrix, worldBound, results);
-        }else if (other instanceof BoundingVolume){
-            BoundingVolume bv = (BoundingVolume) other;
-            return collideWithBoundingVolume(bv, worldMatrix, results);
-        }else{
-            throw new UnsupportedCollisionException();
         }
+        throw new UnsupportedCollisionException();
     }
 
 }

@@ -90,16 +90,6 @@ public abstract class BoundingVolume implements Collidable {
 	public abstract void computeFromPoints(FloatBuffer points);
 
 	/**
-	 * <code>merge</code> combines two bounding volumes into a single bounding volume that contains both this bounding
-	 * volume and the parameter volume.
-	 * 
-	 * @param volume
-	 *          the volume to combine.
-	 * @return the new merged bounding volume.
-	 */
-	public abstract BoundingVolume merge(BoundingVolume volume);
-
-	/**
 	 * <code>mergeLocal</code> combines two bounding volumes into a single bounding volume that contains both this
 	 * bounding volume and the parameter volume. The result is stored locally.
 	 * 
