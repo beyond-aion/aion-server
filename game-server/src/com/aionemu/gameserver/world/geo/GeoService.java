@@ -35,7 +35,10 @@ public class GeoService {
 	public void initializeGeo() {
 		DataManager.WORLD_MAPS_DATA.forEach(map -> geoMaps.put(map.getMapId(), new GeoMap(map.getMapId())));
 		if (GeoDataConfig.GEO_ENABLE) {
-			GeoWorldLoader.load(geoMaps.values());
+			try {
+				GeoWorldLoader.load(geoMaps.values());
+			} catch (InterruptedException ignored) {
+			}
 		} else {
 			LoggerFactory.getLogger(GeoService.class).warn("Geo data is disabled");
 		}
