@@ -84,9 +84,9 @@ public class LookingForParty implements Comparable<LookingForParty> {
 	@Override
 	public int compareTo(LookingForParty lfp) {
 		if (ert != lfp.ert)
-			return ert.ordinal() - lfp.ert.ordinal();
+			return lfp.ert.ordinal() - ert.ordinal();
 
-		int memberDiff = memberObjectIds.size() - lfp.memberObjectIds.size();
+		int memberDiff = lfp.memberObjectIds.size() - memberObjectIds.size();
 		if (memberDiff != 0)
 			return memberDiff;
 
