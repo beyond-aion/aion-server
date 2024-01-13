@@ -2,6 +2,8 @@ package com.aionemu.gameserver.model.autogroup;
 
 import java.util.List;
 
+import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
@@ -24,30 +26,20 @@ public class AutoPvpInstance extends AutoInstance {
 	public AGQuestion addLookingForParty(LookingForParty lookingForParty) {
 		writeLock();
 		try {
-			if (isRegistrationDisabled(lookingForParty) || registeredAGPlayers.size() >= getMaxPlayers())
+			int maxPlayers = getMaxPlayers();
+			if (isRegistrationDisabled(lookingForParty) || registeredAGPlayers.size() >= maxPlayers)
 				return AGQuestion.FAILED;
 
-			EntryRequestType ert = lookingForParty.getEntryRequestType();
 			List<AGPlayer> playersByRace = getAGPlayersByRace(lookingForParty.getRace());
-			if (ert == EntryRequestType.GROUP_ENTRY) {
-				if (lookingForParty.getMemberObjectIds().size() + playersByRace.size() > getMaxPlayers() / 2)
-					return AGQuestion.FAILED;
+			if (lookingForParty.getMemberObjectIds().size() + playersByRace.size() > maxPlayers / 2)
+				return AGQuestion.FAILED;
 
-				for (int objectId : lookingForParty.getMemberObjectIds()) {
-					AGPlayer agp = AutoGroupUtility.getNewAutoGroupPlayer(objectId);
-					if (agp != null)
-						registeredAGPlayers.put(objectId, new AGPlayer(objectId));
-				}
-			} else {
-				if (playersByRace.size() >= getMaxPlayers() / 2)
-					return AGQuestion.FAILED;
-
-				AGPlayer agp = AutoGroupUtility.getNewAutoGroupPlayer(lookingForParty.getLeaderObjId());
-				if (agp == null)
-					return AGQuestion.FAILED;
-				registeredAGPlayers.put(lookingForParty.getLeaderObjId(), agp);
+			for (int objectId : lookingForParty.getMemberObjectIds()) {
+				AGPlayer agp = AutoGroupUtility.getNewAutoGroupPlayer(objectId);
+				if (agp != null)
+					registeredAGPlayers.put(objectId, new AGPlayer(objectId));
 			}
-			return instance == null && registeredAGPlayers.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED;
+			return instance == null && registeredAGPlayers.size() == maxPlayers ? AGQuestion.READY : AGQuestion.ADDED;
 		} finally {
 			writeUnlock();
 		}
@@ -60,7 +52,7 @@ public class AutoPvpInstance extends AutoInstance {
 		playersByRace.remove(player);
 		if (playersByRace.isEmpty()) {
 			TemporaryPlayerTeam<?> team;
-			if (getMaxPlayers() <= 12)
+			if (getMaxPlayers(player.getRace()) <= 6)
 				team = PlayerGroupService.createGroup(player, player, TeamType.AUTO_GROUP, 0);
 			else
 				team = PlayerAllianceService.createAlliance(player, player, TeamType.AUTO_ALLIANCE);
@@ -93,8 +85,12 @@ public class AutoPvpInstance extends AutoInstance {
 			PlayerAllianceService.removePlayer(player);
 	}
 
+	private int getMaxPlayers(Race race) {
+		return DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getTemplate().getInstanceMapId(), race);
+	}
+
 	@Override
 	public int getMaxPlayers() {
-		return super.getMaxPlayers() * 2; // INSTANCE_COOLTIME only asks for faction specific count, so we need to double the amount here
+		return instance == null ? getMaxPlayers(Race.ASMODIANS) + getMaxPlayers(Race.ELYOS) : instance.getMaxPlayers();
 	}
 }

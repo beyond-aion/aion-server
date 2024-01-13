@@ -21,8 +21,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public abstract class AutoInstance extends AbstractLockManager implements AutoInstanceHandler {
 
-	protected final AutoGroupType agt;
 	protected final Map<Integer, AGPlayer> registeredAGPlayers = new ConcurrentHashMap<>();
+	protected final AutoGroupType agt;
 	protected WorldMapInstance instance;
 	protected long startInstanceTime;
 
