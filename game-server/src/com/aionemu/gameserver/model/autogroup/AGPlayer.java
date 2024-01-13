@@ -13,11 +13,9 @@ public class AGPlayer {
 	private Race race;
 	private PlayerClass playerClass;
 	private String name;
-	private boolean isInInstance;
-	private boolean isOnline;
 
 	public AGPlayer(int objectId) {
-			this.objectId = objectId;
+		this.objectId = objectId;
 	}
 
 	public AGPlayer(Player player) {
@@ -25,7 +23,6 @@ public class AGPlayer {
 		race = player.getRace();
 		playerClass = player.getPlayerClass();
 		name = player.getName();
-		isOnline = true;
 	}
 
 	public int getObjectId() {
@@ -42,21 +39,5 @@ public class AGPlayer {
 
 	public PlayerClass getPlayerClass() {
 		return playerClass;
-	}
-
-	public void setInInstance(boolean result) {
-		isInInstance = result;
-	}
-
-	public boolean isInInstance() {
-		return isInInstance;
-	}
-
-	public boolean isOnline() {
-		return isOnline;
-	}
-
-	public void setOnline(boolean result) {
-		isOnline = result;
 	}
 }

@@ -24,10 +24,9 @@ public class HarmonyArenaScore extends PvPArenaScore {
 	}
 
 	public HarmonyGroupReward getHarmonyGroupReward(int objectId) {
-		for (InstancePlayerReward reward : groups) {
-			HarmonyGroupReward harmonyReward = (HarmonyGroupReward) reward;
-			if (harmonyReward.containPlayer(objectId)) {
-				return harmonyReward;
+		for (HarmonyGroupReward reward : groups) {
+			if (reward.containPlayer(objectId)) {
+				return reward;
 			}
 		}
 		return null;
@@ -37,7 +36,8 @@ public class HarmonyArenaScore extends PvPArenaScore {
 		List<HarmonyGroupReward> harmonyGroups = new ArrayList<>();
 		for (HarmonyGroupReward group : groups) {
 			for (AGPlayer agp : group.getAGPlayers()) {
-				if (agp.isInInstance()) {
+				Player p = instance.getPlayer(agp.getObjectId());
+				if (p != null) {
 					harmonyGroups.add(group);
 					break;
 				}
@@ -66,7 +66,8 @@ public class HarmonyArenaScore extends PvPArenaScore {
 
 	public void sendPacket(int type, Player owner) {
 		int time = getTime();
-		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter(this, type, owner == null ? player : owner), time)));
+		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player,
+			new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter(this, type, owner == null ? player : owner), time)));
 	}
 
 	@Override

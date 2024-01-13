@@ -189,14 +189,12 @@ public class AutoGroupService {
 		AutoInstance autoInstance = getAutoInstance(player, instanceMaskId);
 		if (autoInstance != null) {
 			int objectId = player.getObjectId();
-			if (!autoInstance.getRegisteredAGPlayers().get(objectId).isInInstance()) {
-				autoInstance.unregister(player);
-				penalisePlayerAndScheduleRemoval(objectId);
-				if (destroyInstanceIfPossible(autoInstance, player.getInstanceId()))
-					return;
-				if (autoInstance.getAutoGroupType().getTemplate().canRegisterQuickEntry())
-					checkQueueForQuickEntries(autoInstance);
-			}
+			autoInstance.unregister(player);
+			penalisePlayerAndScheduleRemoval(objectId);
+			if (destroyInstanceIfPossible(autoInstance, player.getInstanceId()))
+				return;
+			if (autoInstance.getAutoGroupType().getTemplate().canRegisterQuickEntry())
+				checkQueueForQuickEntries(autoInstance);
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 2));
 		}
 	}
@@ -231,8 +229,7 @@ public class AutoGroupService {
 		for (LookingForParty lfp : getAllPartiesOfPlayer(objectId)) {
 			if (lfp.isOnStartEnterTask()) {
 				for (AutoInstance autoInstance : autoInstances.values()) {
-					if (autoInstance.getRegisteredAGPlayers().containsKey(objectId) && !autoInstance.getRegisteredAGPlayers().get(objectId).isInInstance())
-						cancelEnter(player, autoInstance.getAutoGroupType().getTemplate().getMaskId());
+					cancelEnter(player, autoInstance.getAutoGroupType().getTemplate().getMaskId());
 				}
 			} else if (lfp.isLeader(objectId)) {
 				lfp.setLeaderObjId(lfp.getMemberObjectIds().stream().filter(id -> id != objectId).findFirst().orElse(0));
@@ -249,7 +246,6 @@ public class AutoGroupService {
 			if (autoInstance != null && autoInstance.getRegisteredAGPlayers().containsKey(objectId)) {
 				WorldMapInstance instance = autoInstance.getInstance();
 				if (instance != null) {
-					autoInstance.getRegisteredAGPlayers().get(objectId).setOnline(false);
 					destroyInstanceIfPossible(autoInstance, instanceId);
 				}
 			}
@@ -333,11 +329,10 @@ public class AutoGroupService {
 	}
 
 	public boolean destroyInstanceIfPossible(AutoInstance autoInstance, int instanceId) {
-		if (autoInstance.getRegisteredAGPlayers().values().stream().noneMatch(AGPlayer::isOnline)) {
-			WorldMapInstance instance = autoInstance.getInstance();
+		WorldMapInstance instance = autoInstance.getInstance();
+		if (instance != null && instance.getPlayersInside().stream().noneMatch(Player::isOnline)) {
 			autoInstances.remove(instanceId);
-			if (instance != null)
-				InstanceService.destroyInstance(instance);
+			InstanceService.destroyInstance(instance);
 			autoInstance.clear();
 			return true;
 		}
