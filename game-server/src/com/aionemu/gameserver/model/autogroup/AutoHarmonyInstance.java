@@ -144,9 +144,9 @@ public class AutoHarmonyInstance extends AutoInstance {
 	}
 
 	private AGQuestion canAddParty(List<AGPlayer> group, LookingForParty lfp) {
-		if (group.size() + lfp.getMemberObjectIds().size() > 1)
+		if (group.size() + lfp.getMemberObjectIds().size() > 3)
 			return AGQuestion.FAILED;
-		if (group.size() > 0 && group.get(0).getRace() != lfp.getRace())
+		if (!group.isEmpty() && group.get(0).getRace() != lfp.getRace())
 			return AGQuestion.FAILED;
 
 		for (int objectId : lfp.getMemberObjectIds()) {
