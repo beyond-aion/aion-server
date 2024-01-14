@@ -12,7 +12,8 @@ import com.aionemu.gameserver.network.Crypt;
  */
 public abstract class AionServerPacket extends BaseServerPacket {
 
-	public static final int MAX_USABLE_PACKET_BODY_SIZE = 8185; // 8192 - 2 (body length) - 2 (opCode) - 1 (staticServerPacketCode) - 2 (opCode flipped bits)
+	public static final int MAX_CLIENT_SUPPORTED_PACKET_SIZE = 8192;
+	public static final int MAX_USABLE_PACKET_BODY_SIZE = MAX_CLIENT_SUPPORTED_PACKET_SIZE - 7; // 8192 - 2 (body length) - 2 (opCode) - 1 (staticServerPacketCode) - 2 (opCode flipped bits)
 
 	public static int byteLengthForString(String text) {
 		if (text == null || text.isEmpty())

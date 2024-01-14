@@ -214,6 +214,8 @@ public class AionConnection extends AConnection<AionServerPacket> {
 				long duration = System.nanoTime() - begin;
 				RunnableStatsManager.handleStats(packet.getClass(), "runImpl()", duration);
 			}
+			if (data.limit() > AionServerPacket.MAX_CLIENT_SUPPORTED_PACKET_SIZE)
+				log.warn(packet + " contains " + (data.limit() - AionServerPacket.MAX_CLIENT_SUPPORTED_PACKET_SIZE) + " more bytes than the game client of " + getActivePlayer() + " can read");
 			return true;
 		}
 	}
