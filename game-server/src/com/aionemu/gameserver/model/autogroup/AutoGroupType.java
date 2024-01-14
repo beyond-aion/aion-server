@@ -364,7 +364,7 @@ public enum AutoGroupType implements L10n {
 
 	public static AutoGroupType getAutoGroupByWorld(int level, int worldId) {
 		for (AutoGroupType agt : values()) {
-			if (agt.getTemplate().getMaskId() == worldId && agt.isInLvlRange(level)) {
+			if (agt.getTemplate().getInstanceMapId() == worldId && agt.isInLvlRange(level)) {
 				return agt;
 			}
 		}
