@@ -46,8 +46,10 @@ public class Id extends PlayerCommand {
 			}
 
 			String msg = target.getClass().getSimpleName() + ": " + ChatUtil.path(target, true);
-			if (player.isStaff())
-				msg += " (Object ID: " + target.getObjectId() + ")";
+			if (player.isStaff()) {
+				int staticId = target.getSpawn() == null ? 0 : target.getSpawn().getStaticId();
+				msg += " (Object ID: " + target.getObjectId() + (staticId == 0 ? "" : ", Static ID: " + staticId) + ")";
+			}
 			sendInfo(player, msg);
 			return;
 		} else {
