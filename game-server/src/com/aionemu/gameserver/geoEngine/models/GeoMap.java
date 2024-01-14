@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.geoEngine.models;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 import java.util.stream.Stream;
 
 import org.slf4j.Logger;
@@ -290,10 +287,8 @@ public class GeoMap extends Node {
 	public void setDoorState(int instanceId, int doorId, boolean open) {
 		DespawnableNode[] doors = despawnableDoors.get(doorId);
 		if (doors == null) {
-			// TODO mesh is excluded on purpose in geobuilder due to incorrect collision data: objects/npc/level_object/idyun_bridge/idyun_bridge_01a.cga
-			if (!GeoDataConfig.GEO_ENABLE || doorId == 145 && (mapId == WorldMapType.OCCUPIED_RENTUS_BASE.getId() || mapId == WorldMapType.RENTUS_BASE.getId()))
-				return;
-			log.warn("No geometry found for door " + doorId + " in world " + mapId);
+			if (GeoDataConfig.GEO_ENABLE && !getIgnorableDoorIds().contains(doorId))
+				log.warn("No geometry found for door " + doorId + " in world " + mapId);
 		} else {
 			if (doors[0] != null) {
 				doors[0].setActive(instanceId, !open);
@@ -306,6 +301,21 @@ public class GeoMap extends Node {
 				log.warn("Door state 2 not available for door " + doorId + " in world " + mapId);
 			}
 		}
+	}
+
+	private Set<Integer> getIgnorableDoorIds() {
+		return switch (WorldMapType.getWorld(mapId)) {
+			// TODO mesh is excluded on purpose in geobuilder due to incorrect collision data: objects/npc/level_object/idyun_bridge/idyun_bridge_01a.cga
+			case RENTUS_BASE, OCCUPIED_RENTUS_BASE -> Set.of(145);
+			// all of the following doors have no collision mesh in the game client (you can walk right through them)
+			case ABYSSAL_SPLINTER, UNSTABLE_SPLINTER -> Set.of(15, 16, 18, 69);
+			case ATURAM_SKY_FORTRESS -> Set.of(128, 138, 308, 307);
+			case ESOTERRACE -> Set.of(78);
+			case Test_MRT_IDZone -> Set.of(49, 50, 51, 52, 53, 54, 55, 56, 57, 58, 59, 60, 73);
+			case RAKSANG_RUINS -> Set.of(219);
+			case KAMAR_BATTLEFIELD -> Set.of(5, 144);
+			default -> Set.of();
+		};
 	}
 
 	public Stream<Geometry> getGeometries() {
