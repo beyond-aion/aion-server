@@ -199,11 +199,15 @@
 		<staticdoor keyid="1" doorid="90" x="554.2595" y="148.924347" z="615.766663" mesh="idstation_door1f_1.cga" state="0x2"/>
 		<staticdoor doorid="103" x="378.1342" y="837.041443" z="907.264648" mesh="surkana_control_door_03.cga" state="0x4"/>
 		<staticdoor doorid="126" x="435.212952" y="424.529083" z="657.418335" mesh="idstation_door3f_01.cga" state="0x4"/>
+		<staticdoor doorid="128" x="710.944946" y="118.498260" z="606.205627" state="0x4"/>
+		<staticdoor doorid="138" x="710.944946" y="91.852448" z="606.205627" state="0x4"/>
 		<staticdoor keyid="1" doorid="174" x="151.089264" y="710.359131" z="898.198059" mesh="idstation_doorf3_01a.cga" state="0x4"/>
 		<staticdoor keyid="1" doorid="175" x="204.390717" y="795.7427" z="898.252869" mesh="idstation_doorf3_01a.cga" state="0x4"/>
 		<staticdoor keyid="1" doorid="177" x="175.958618" y="657.4433" z="909.1862" mesh="idstation_doobigrf3_01a.cga" state="0x5"/>
 		<staticdoor keyid="1" doorid="178" x="221.916367" y="728.011841" z="899.3623" mesh="idstation_doobigrf3_01a.cga" state="0x4"/>
 		<staticdoor keyid="1" doorid="230" x="260.9991" y="801.86145" z="914.90155" mesh="idstation_doobigrf3_01a.cga" state="0x4"/>
+		<staticdoor doorid="307" x="244.581055" y="769.170593" z="919.444824" state="0x6"/>
+		<staticdoor doorid="308" x="196.669937" y="687.929932" z="919.699890" state="0x6"/>
 	</world>
 	<world world="300250000">
 		<staticdoor keyid="1" doorid="39" x="1267.43616" y="1130.06812" z="187.90033" mesh="door_st3_01.cga" state="0x4"/>
@@ -704,6 +708,7 @@
 		<staticdoor doorid="189" x="622.9599" y="713.640442" z="1204.2655" mesh="shield_generator_plug.cga" state="0x0"/>
 		<staticdoor doorid="200" x="637.8341" y="699.364868" z="1209.95544" mesh="shield_generator_plug.cga" state="0x0"/>
 		<staticdoor doorid="205" x="640.7976" y="695.325867" z="1204.2655" mesh="shield_generator_plug.cga" state="0x0"/>
+		<staticdoor doorid="219" x="322.549652" y="572.756104" z="127.404411" state="0x0"/>
 		<staticdoor doorid="294" keyid="1" x="751.62" y="310.34" z="910.630554" mesh="stone_gate_jail.cga" state="0x0"/>
 		<staticdoor doorid="295" x="749.5" y="270.969482" z="910.642" mesh="stone_gate_jail.cga" state="0x0"/>
 		<staticdoor doorid="307" keyid="1" x="552.1979" y="255.455322" z="929.0113" mesh="idraksha_3fprison_door.cga" state="0x0"/>

@@ -68,6 +68,7 @@ public class EsoterraceInstance extends GeneralInstanceHandler {
 				instance.setDoorState(367, false);
 				break;
 			case 217204:
+				instance.setDoorState(78, true); // collapse walls of Kexkra's chamber
 				spawn(205437, 1309.390259f, 1163.644287f, 51.493992f, (byte) 13);
 				spawn(701027, 1318.669800f, 1180.467651f, 52.879887f, (byte) 75, 727);
 				break;

@@ -102,9 +102,9 @@
         <spawn npc_id="701370">
             <spot x="572.063" y="218.895" z="927.991" static_id="92"/>
         </spawn>
-		<!-- Sensory NPC -->
+		<!-- Sensory NPC near collapsing pathway -->
 		<spawn npc_id="206197">
-			<spot x="605.661" y="220.939" z="925.107"/>
+			<spot x="321.7" y="554.9" z="129.8195"/>
 		</spawn>
 		<!-- Sensory NPC Hellway First -->
 		<spawn npc_id="206198">

@@ -95,10 +95,13 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 					startOfficerWalkerEvent();
 				} else if (killed2 == 2) {
 					instance.setDoorState(178, true);
+					instance.setDoorState(308, false); // reopen side windows
+					ThreadPoolManager.getInstance().schedule(() -> instance.setDoorState(307, true), 10000); // close side windows
 				}
 				npc.getController().delete();
 				break;
 			case 217382:
+				instance.setDoorState(307, false); // reopen side windows
 				instance.setDoorState(230, true);
 				Player player = npc.getAggroList().getMostPlayerDamage();
 				if (player != null) {
@@ -227,5 +230,11 @@ public class AturamSkyFortressInstance extends GeneralInstanceHandler {
 				PacketSendUtility.sendPacket(player, STR_MSG_IDStation_Doping_01_AD());
 			}
 		}
+	}
+
+	@Override
+	public void onPlayMovieEnd(Player player, int movieId) {
+		if (movieId == 471)
+			ThreadPoolManager.getInstance().schedule(() -> instance.setDoorState(308, true), 10000); // close side windows
 	}
 }

@@ -16,6 +16,8 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
+import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * Morale Boost is applied to re-spawning players which are a part of the loosing side (ID: 10)
@@ -297,6 +299,15 @@ public class KamarBattlefieldInstance extends BasicPvpInstance {
 				TeleportService.teleportTo(player, instance.getMapId(), instance.getInstanceId(), 1446.6449f, 1232.9314f, 585.0623f);
 			else
 				TeleportService.teleportTo(player, instance.getMapId(), instance.getInstanceId(), 1204.9689f, 1350.8196f, 612.91205f);
+		}
+	}
+
+	@Override
+	public void onEnterZone(Player player, ZoneInstance zone) {
+		if (zone.getZoneTemplate().getName() == ZoneName.get("LAMINA_301120000")) {
+			instance.setDoorState(144, true); // crash airship
+		} else if (zone.getZoneTemplate().getName() == ZoneName.get("SPERO_301120000")) {
+			instance.setDoorState(5, true); // crash airship
 		}
 	}
 }

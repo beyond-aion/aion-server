@@ -38,8 +38,7 @@ public class AlarmAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
-		if (creature instanceof Player) {
-			final Player player = (Player) creature;
+		if (creature instanceof Player player) {
 			if (PositionUtil.getDistance(getOwner(), player) <= 23) {
 				if (startedEvent.compareAndSet(false, true)) {
 					canThink = false;
@@ -49,17 +48,14 @@ public class AlarmAI extends AggressiveNpcAI {
 					WalkManager.startWalking(this);
 					getOwner().setState(CreatureState.ACTIVE, true);
 					PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
+					// both doors are inverted, they visually close by opening.
+					// they also have no collision but there are invisible walls anyway, as you are never supposed to enter the rooms behind them
 					getPosition().getWorldMapInstance().setDoorState(128, true);
 					getPosition().getWorldMapInstance().setDoorState(138, true);
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							if (!isDead()) {
-								despawn();
-							}
+					ThreadPoolManager.getInstance().schedule(() -> {
+						if (!isDead()) {
+							despawn();
 						}
-
 					}, 3000);
 				}
 			}
