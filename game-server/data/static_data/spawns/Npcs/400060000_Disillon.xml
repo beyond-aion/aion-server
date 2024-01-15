@@ -1,5 +1,15 @@
 <?xml version="1.0" encoding="utf-8"?>
 <spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../spawns.xsd">
+	<!-- TODO Fortress Gates:
+		x="1024" y="913.624146" z="1530.673" static_id="500"
+		x="1134.711" y="1134.65222" z="1530.24133" static_id="502"
+		x="913.25" y="1024" z="1530.67676" static_id="515"
+		x="1024" y="1134.39856" z="1530.64209" static_id="517"
+		x="1134.8783" y="912.9952" z="1530.23157" static_id="558"
+		x="913.5634" y="1134.343" z="1530.27222" static_id="559"
+		x="913.6413" y="913.3702" z="1530.25269" static_id="560"
+		x="1136.02" y="1024" z="1530.71155" static_id="562"
+	-->
 	<spawn_map map_id="400060000">
 		<!-- Advance Corridor -->
 		<spawn npc_id="730962" respawn_time="295">

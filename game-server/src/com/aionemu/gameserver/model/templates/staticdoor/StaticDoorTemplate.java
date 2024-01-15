@@ -1,11 +1,8 @@
 package com.aionemu.gameserver.model.templates.staticdoor;
 
-import java.util.EnumSet;
-
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlTransient;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
@@ -18,49 +15,40 @@ import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
 public class StaticDoorTemplate extends VisibleObjectTemplate {
 
 	@XmlAttribute
-	protected DoorType type = DoorType.DOOR;
-	@XmlAttribute
-	protected Float x;
-	@XmlAttribute
-	protected Float y;
-	@XmlAttribute
-	protected Float z;
-	@XmlAttribute(name = "doorid")
-	protected int doorId;
+	private int id;
 	@XmlAttribute(name = "keyid")
-	protected int keyId;
+	private int keyId;
+	@XmlAttribute
+	private float x;
+	@XmlAttribute
+	private float y;
+	@XmlAttribute
+	private float z;
 	@XmlAttribute(name = "state")
-	protected String statesHex;
-	@XmlAttribute(name = "mesh")
-	private String meshFile;
+	private int state;
 
-	@XmlTransient
-	EnumSet<StaticDoorState> states = EnumSet.noneOf(StaticDoorState.class);
+	public int getId() {
+		return id;
+	}
 
-	public Float getX() {
+	public int getKeyId() {
+		return keyId;
+	}
+
+	public float getX() {
 		return x;
 	}
 
-	public Float getY() {
+	public float getY() {
 		return y;
 	}
 
-	public Float getZ() {
+	public float getZ() {
 		return z;
 	}
 
-	/**
-	 * @return the doorId
-	 */
-	public int getDoorId() {
-		return doorId;
-	}
-
-	/**
-	 * @return the keyItem
-	 */
-	public int getKeyId() {
-		return keyId;
+	public int getState() {
+		return state;
 	}
 
 	@Override
@@ -77,30 +65,4 @@ public class StaticDoorTemplate extends VisibleObjectTemplate {
 	public int getL10nId() {
 		return 0;
 	}
-
-	public EnumSet<StaticDoorState> getInitialStates() {
-		if (statesHex != null) {
-			int radix = 16;
-			if (statesHex.startsWith("0x")) {
-				statesHex = statesHex.replace("0x", "");
-			} else
-				radix = 10;
-			try {
-				StaticDoorState.setStates(Integer.parseInt(statesHex, radix), states);
-			} catch (NumberFormatException ex) {
-			} finally {
-				statesHex = null;
-			}
-		}
-		return states;
-	}
-
-	public String getMeshFile() {
-		return meshFile;
-	}
-
-	public DoorType getDoorType() {
-		return type;
-	}
-
 }

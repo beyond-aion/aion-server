@@ -21,7 +21,8 @@ public class StaticDoor extends StaticObject {
 
 	public StaticDoor(StaticObjectController controller, SpawnTemplate spawnTemplate, StaticDoorTemplate objectTemplate, int instanceId) {
 		super(controller, spawnTemplate, objectTemplate);
-		states = EnumSet.copyOf(getObjectTemplate().getInitialStates());
+		states = EnumSet.noneOf(StaticDoorState.class);
+		StaticDoorState.setStates(getObjectTemplate().getState(), states);
 		if (objectTemplate.getKeyId() < 2) {
 			isLocked = false;
 		}
@@ -61,7 +62,7 @@ public class StaticDoor extends StaticObject {
 			GeoService.getInstance().setDoorState(getWorldId(), getInstanceId(), getSpawn().getStaticId(), true);
 		} else {
 			emotion = EmotionType.CLOSE_DOOR;
-			if (getObjectTemplate().getInitialStates().contains(StaticDoorState.CLICKABLE))
+			if ((getObjectTemplate().getState() & StaticDoorState.CLICKABLE.getFlag()) == StaticDoorState.CLICKABLE.getFlag())
 				states.add(StaticDoorState.CLICKABLE);
 			states.remove(StaticDoorState.OPENED); // 1010
 			packetState = 0xA;

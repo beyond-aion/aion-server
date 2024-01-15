@@ -252,11 +252,11 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257193">
-						<spot x="1763.7252" y="2114.2976" z="321.69666" h="95" static_id="380"/>
+						<spot x="1763.60925" y="2114.7002" z="321.6866" h="95" static_id="380"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257240">
-						<spot x="1748.795" y="2173.725" z="323.4778" h="95" static_id="390"/>
+						<spot x="1746.88452" y="2172.96313" z="323.305328" h="95" static_id="390"/>
 					</spawn>
 					<!-- Stallari -->
 					<spawn npc_id="257005">
@@ -429,11 +429,11 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257194">
-						<spot x="1763.7252" y="2114.2976" z="321.69666" h="95" static_id="380"/>
+						<spot x="1763.60925" y="2114.7002" z="321.6866" h="95" static_id="380"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257241">
-						<spot x="1748.795" y="2173.725" z="323.4778" h="95" static_id="390"/>
+						<spot x="1746.88452" y="2172.96313" z="323.305328" h="95" static_id="390"/>
 					</spawn>	
 					<!-- Ulsaruk -->
 					<spawn npc_id="257010">
@@ -678,11 +678,11 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257192">
-						<spot x="1763.7252" y="2114.2976" z="321.69666" h="95" static_id="380"/>
+						<spot x="1763.60925" y="2114.7002" z="321.6866" h="95" static_id="380"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257239">
-						<spot x="1748.795" y="2173.725" z="323.4778" h="95" static_id="390"/>
+						<spot x="1746.88452" y="2172.96313" z="323.305328" h="95" static_id="390"/>
 					</spawn>
 					<!-- Fortress Gun -->
 					<spawn npc_id="256749">
@@ -1277,11 +1277,11 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257493">
-						<spot x="833.95294" y="1862.9146" z="334.08118" h="80" static_id="374"/>
+						<spot x="834.1229" y="1863.29761" z="334.071136" h="80" static_id="374"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257540">
-						<spot x="859.5812" y="1918.496" z="335.8995" h="80" static_id="389"/>
+						<spot x="858.857239" y="1918.75842" z="335.747528" h="80" static_id="389"/>
 					</spawn>
 					<!-- Stallari -->
 					<spawn npc_id="257305">
@@ -1480,11 +1480,11 @@
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257494">
-						<spot x="833.95294" y="1862.9146" z="334.08118" h="80" static_id="374"/>
+						<spot x="834.1229" y="1863.29761" z="334.071136" h="80" static_id="374"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257541">
-						<spot x="859.5812" y="1918.496" z="335.8995" h="80" static_id="389"/>
+						<spot x="858.857239" y="1918.75842" z="335.747528" h="80" static_id="389"/>
 					</spawn>
 					<!-- Ulsaruk -->
 					<spawn npc_id="257310">
@@ -1731,11 +1731,11 @@
 					</spawn>		
 					<!-- Fortress Gate -->
 					<spawn npc_id="257492">
-						<spot x="833.95294" y="1862.9146" z="334.08118" h="80" static_id="374"/>
+						<spot x="834.1229" y="1863.29761" z="334.071136" h="80" static_id="374"/>
 					</spawn>
 					<!-- Fortress Gate -->
 					<spawn npc_id="257539">
-						<spot x="859.5812" y="1918.496" z="335.8995" h="80" static_id="389"/>
+						<spot x="858.857239" y="1918.75842" z="335.747528" h="80" static_id="389"/>
 					</spawn>		
 					<!-- Fortress Gun -->
 					<spawn npc_id="256752">
@@ -2279,9 +2279,9 @@
 					</spawn>
 					<!-- Gate -->
 					<spawn npc_id="258230">
-						<spot x="1343.769" y="1668.1753" z="364.0014" h="5" static_id="372" />
-						<spot x="1779.027" y="1326.3145" z="380.8222" h="25" static_id="379" />
-						<spot x="618.9230" y="1248.7430" z="395.7374" h="18" static_id="437" />
+						<spot x="1343.769" y="1668.17529" z="363.949127" h="5" static_id="372" />
+						<spot x="1779.02649" y="1326.31445" z="380.776581" h="25" static_id="379" />
+						<spot x="618.923" y="1248.743" z="395.66156" h="18" static_id="437" />
 					</spawn>
 					<!-- Veille's Aetheric Concentrator
 					<spawn npc_id="296908" respawn_time="295">

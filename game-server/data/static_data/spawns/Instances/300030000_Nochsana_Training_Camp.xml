@@ -44,7 +44,7 @@
 		</spawn>
 		<!-- Nochsana Fortress Gate -->
 		<spawn npc_id="256694">
-			<spot x="346.237" y="356.817" z="378.701" static_id="23"/>
+			<spot x="346.379974" y="356.947449" z="378.26767" static_id="23"/>
 		</spawn>
 		<!-- Nochsana General -->
 		<spawn npc_id="256693">

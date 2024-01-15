@@ -6,12 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 /**
  * @author xTz
@@ -30,8 +25,8 @@ public class StaticDoorWorld {
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		templatesByStaticId = new HashMap<>();
 		for (StaticDoorTemplate template : templates) {
-			if (templatesByStaticId.putIfAbsent(template.getDoorId(), template) != null)
-				throw new IllegalArgumentException("Duplicate door template for world " + worldId + ", id: " + template.getDoorId());
+			if (templatesByStaticId.putIfAbsent(template.getId(), template) != null)
+				throw new IllegalArgumentException("Duplicate door template for world " + worldId + ", id: " + template.getId());
 		}
 		templates = null;
 	}

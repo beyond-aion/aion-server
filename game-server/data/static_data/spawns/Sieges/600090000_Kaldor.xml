@@ -544,13 +544,13 @@
 					</spawn>
 					<!-- Asmodian Gate (LDF5_Fortress_7011_Door_D_Da) -->
 					<spawn npc_id="881579">
-						<spot x="786.43964" y="564.2377" z="149.01819" static_id="276"/>
+						<spot x="786.43964" y="564.19983" z="149.10477" static_id="276"/>
 					</spawn>
 					<!-- Asmodian Barricade -->
 					<spawn npc_id="272258"> <!-- 272259 and 272260 are stronger asmodian barricades -->
-						<spot x="742.86737" y="988.29895" z="151.11795" static_id="185"/> <!-- 282 is another static ID, most likely for a stronger barricade -->
-						<spot x="557.69177" y="672.47235" z="152.78025" static_id="258"/>
-						<spot x="1076.5396" y="706.71893" z="185.26739" static_id="540"/>
+						<spot x="742.86737" y="988.29895" z="151.11795" static_id="185"/> <!-- 282 is an EntityClass="AbyssDoor" variant which notifies when attacked -->
+						<spot x="557.69177" y="672.47235" z="152.77025" static_id="258"/>
+						<spot x="1076.5396" y="706.71893" z="185.25739" static_id="540"/>
 					</spawn>
 					<!-- BLDF5_Fortress_Dhealer_1 -->
 					<spawn npc_id="297537">
@@ -1138,13 +1138,13 @@
 					</spawn>
 					<!-- Elyos Gate (LDF5_Fortress_7011_Door_D_Li) -->
 					<spawn npc_id="881578">
-						<spot x="786.43964" y="564.2377" z="149.01819" static_id="151"/>
+						<spot x="786.43964" y="564.19983" z="148.77126" static_id="151"/>
 					</spawn>
 					<!-- Elyos Fence -->
 					<spawn npc_id="272255"> <!-- 272256 and 272257 are stronger elyos barricades -->
-						<spot x="742.86737" y="988.29895" z="151.11795" static_id="160"/> <!-- 338 is another static ID, most likely for a stronger barricade -->
-						<spot x="557.69177" y="672.47235" z="152.78025" static_id="158"/>
-						<spot x="1076.5396" y="706.71893" z="185.26739" static_id="539"/>
+						<spot x="742.86737" y="988.29895" z="151.11795" static_id="160"/> <!-- 338 is an EntityClass="AbyssDoor" variant which notifies when attacked -->
+						<spot x="557.69177" y="672.47235" z="152.60912" static_id="158"/>
+						<spot x="1076.5396" y="706.71893" z="185.25739" static_id="539"/>
 					</spawn>
 					<!-- BLDF5_Fortress_Lhealer_1 -->
 					<spawn npc_id="297534">
@@ -1611,13 +1611,13 @@
 					</spawn>
 					<!-- Balaur Gate (LDF5_Fortress_7011_Door_D_Dr) -->
 					<spawn npc_id="881580">
-						<spot x="786.43964" y="564.2377" z="149.01819" static_id="269"/>
+						<spot x="786.43964" y="564.19983" z="149.10423" static_id="269"/>
 					</spawn>
 					<!-- Balaur Picket (LDF5a_5011_barricade01_DR) -->
 					<spawn npc_id="272261"> <!-- 272262 and 272263 are stronger balaur barricades -->
-						<spot x="742.86737" y="988.29895" z="151.11795" static_id="347"/>  <!-- 451 is another static ID, most likely for a stronger barricade -->
-						<spot x="557.69177" y="672.47235" z="152.78025" static_id="159"/>
-						<spot x="1076.5396" y="706.71893" z="185.26739" static_id="541"/>
+						<spot x="742.86737" y="988.29895" z="151.27908" static_id="451"/>  <!-- 347 is an EntityClass="AbyssDoor" variant which notifies when attacked -->
+						<spot x="557.69177" y="672.47235" z="152.77025" static_id="159"/>
+						<spot x="1076.5396" y="706.71893" z="185.25739" static_id="541"/>
 					</spawn>
 					<!-- Pashid Veteran Guardian General (LDF5_Fortress_7011_Boss_Dr_4) -->
 					<spawn npc_id="251838">

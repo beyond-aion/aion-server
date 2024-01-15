@@ -17,20 +17,11 @@
 		<xs:attribute name="world" type="xs:int" use="required" />
 	</xs:complexType>
 	<xs:complexType name="StaticDoor">
-		<xs:attribute name="type" type="DoorType" default="DOOR" />
+		<xs:attribute name="id" type="xs:int" />
+		<xs:attribute name="keyid" type="xs:int" />
 		<xs:attribute name="x" type="xs:float" />
 		<xs:attribute name="y" type="xs:float" />
 		<xs:attribute name="z" type="xs:float" />
-		<xs:attribute name="doorid" type="xs:int" />
-		<xs:attribute name="keyid" type="xs:int" />
-		<xs:attribute name="mesh" type="xs:string" />
-		<xs:attribute name="state" type="xs:string" />
+		<xs:attribute name="state" type="xs:int" />
 	</xs:complexType>
-	<xs:simpleType name="DoorType">
-		<xs:restriction base="xs:string">
-			<xs:enumeration value="DOOR" />
-			<xs:enumeration value="ABYSS" />
-			<xs:enumeration value="HOUSE" />
-		</xs:restriction>
-	</xs:simpleType>
 </xs:schema>
