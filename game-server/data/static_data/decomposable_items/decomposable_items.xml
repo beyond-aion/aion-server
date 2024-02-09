@@ -18703,35 +18703,41 @@
 	<decomposable item_id="188052316" /><!-- Heavy Green Sack -->
 	<decomposable item_id="188052317" /><!-- [Event] Broken Heart Box -->
 	<decomposable item_id="188052318"><!-- [Event] Mended Heart -->
-		<items chance="1.5">
+		<items chance="1">
 			<item id="110900220" /><!-- NPC Beatific Outfit -->
 		</items>
-		<items chance="1.5">
-			<item id="188053109" /><!-- Ahserion's Equipment Box -->
+		<items chance="1">
+			<item id="188051710" /><!-- [Event] Gold Box -->
 		</items>
-		<items chance="1.5">
+		<items chance="1">
 			<item id="188053228" /><!-- [Event] Heartseeker Equipment Box -->
 		</items>
-		<items chance="1.5">
+		<items chance="1">
 			<item id="168310018" /><!-- Major Blessed Augment: Level 2 -->
 		</items>
-		<items chance="2">
-			<item id="188950015" /><!-- Special Courier Pass (Eternal/Lv. 61-65) -->
+		<items chance="1">
+			<item id="165020021" /><!-- Noble Armor Wrapping Scroll (Mythic/Lv. 65 and lower) -->
 		</items>
 		<items chance="2">
-			<item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
+			<item id="165020014" /><!-- Weapon Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+		</items>
+		<items chance="2">
+			<item id="165020015" /><!-- Armor Wrapping Scroll (Eternal/Lv. 65 and lower) -->
+		</items>
+		<items chance="2">
+			<item id="165020016" /><!-- Accessory Wrapping Scroll (Eternal/Lv. 65 and lower) -->
 		</items>
 		<items chance="2">
 			<item id="188053295" /><!-- Empyrean Plume Chest -->
 		</items>
-		<items chance="3">
-			<item id="169620072" /><!-- AP Boost Charm II - 30% -->
+		<items chance="2">
+			<item id="169620072" min_count="2" /><!-- AP Boost Charm II - 30% -->
 		</items>
 		<items chance="5">
-			<item id="188053113" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+			<item id="188053617" /><!-- Noble Tidal Idian Bundle -->
 		</items>
 		<items chance="5">
-			<item id="188053610" min_count="2" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+			<item id="188053609" min_count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</items>
 		<items chance="5">
 			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
@@ -18740,7 +18746,7 @@
 			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
 		</items>
 		<items chance="5">
-			<item id="166030005" min_count="3" /><!-- Tempering Solution -->
+			<item id="166000195" min_count="5" /><!-- Epsilon Enchantment Stone -->
 		</items>
 		<items chance="7">
 			<item id="188052822" min_count="2" /><!-- Noble Ancient Manastone Chest -->

@@ -2933,7 +2933,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Beyond Aion Broken Hearts" start="2023-02-13T00:00:00" end="2023-02-26T23:59:59" theme="VALENTINE">
+	<event name="Beyond Aion Broken Hearts" start="2024-02-14T00:00:00" end="2024-02-25T23:59:59" theme="VALENTINE">
 		<event_drops>
 			<gd_rule rule_name="Broken Hearts L" chance="20" level_based_chance_reduction="true">
 				<gd_items>
