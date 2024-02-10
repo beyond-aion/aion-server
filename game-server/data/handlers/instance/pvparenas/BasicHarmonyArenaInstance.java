@@ -262,15 +262,17 @@ public class BasicHarmonyArenaInstance extends GeneralInstanceHandler {
 			}
 		}
 		instance.forEachNpc(npc -> npc.getController().delete());
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isInstanceDestroyed) {
-				for (Player player : instance.getPlayersInside()) {
-					if (player.isDead())
-						PlayerReviveService.duelRevive(player);
-					onExitInstance(player);
-				}
+		ThreadPoolManager.getInstance().schedule(this::cleanUp, 60000);
+	}
+
+	private void cleanUp() {
+		if (!isInstanceDestroyed) {
+			for (Player player : instance.getPlayersInside()) {
+				if (player.isDead())
+					PlayerReviveService.duelRevive(player);
+				onExitInstance(player);
 			}
-		}, 10000);
+		}
 	}
 
 	@Override
