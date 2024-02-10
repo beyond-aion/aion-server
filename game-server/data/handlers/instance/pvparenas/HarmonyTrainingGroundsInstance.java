@@ -15,7 +15,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @author xTz
  */
 @InstanceID(300570000)
-public class HarmonyTrainingGroundsInstance extends HarmonyArenaInstance {
+public class HarmonyTrainingGroundsInstance extends BasicHarmonyArenaInstance {
 
 	public HarmonyTrainingGroundsInstance(WorldMapInstance instance) {
 		super(instance);

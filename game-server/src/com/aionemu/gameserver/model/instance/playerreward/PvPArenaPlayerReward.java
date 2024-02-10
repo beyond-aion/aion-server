@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.instance.playerreward;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceBuff;
+import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 
 /**
  * @author xTz
@@ -33,10 +34,8 @@ public class PvPArenaPlayerReward extends InstancePlayerReward {
 	private int ceramiumMedal;
 	private int gloriousInsignia;
 	private int lifeSerum;
-	private int victoryReward;
-	private int consolationReward;
-	private int arenaSupply;
-	private int arenaSuperiorSupply;
+	private RewardItem rewardItem1;
+	private RewardItem rewardItem2;
 	private long logoutTime;
 	private boolean isRewarded = false;
 	private InstanceBuff boostMorale;
@@ -216,22 +215,6 @@ public class PvPArenaPlayerReward extends InstancePlayerReward {
 		this.gloryTicket = gloryTicket;
 	}
 
-	public int getVictoryReward() {
-		return victoryReward;
-	}
-
-	public void setVictoryReward(int victoryReward) {
-		this.victoryReward = victoryReward;
-	}
-
-	public int getConsolationReward() {
-		return consolationReward;
-	}
-
-	public void setConsolationReward(int consolationReward) {
-		this.consolationReward = consolationReward;
-	}
-
 	public int getMithrilMedal() {
 		return mithrilMedal;
 	}
@@ -268,20 +251,20 @@ public class PvPArenaPlayerReward extends InstancePlayerReward {
 		this.lifeSerum = lifeSerum;
 	}
 
-	public int getArenaSupply() {
-		return arenaSupply;
+	public RewardItem getRewardItem1() {
+		return rewardItem1;
 	}
 
-	public void setArenaSupply(int arenaSupply) {
-		this.arenaSupply = arenaSupply;
+	public void setRewardItem1(RewardItem rewardItem1) {
+		this.rewardItem1 = rewardItem1;
 	}
 
-	public int getArenaSuperiorSupply() {
-		return arenaSuperiorSupply;
+	public RewardItem getRewardItem2() {
+		return rewardItem2;
 	}
 
-	public void setArenaSuperiorSupply(int arenaSuperiorSupply) {
-		this.arenaSuperiorSupply = arenaSuperiorSupply;
+	public void setRewardItem2(RewardItem rewardItem2) {
+		this.rewardItem2 = rewardItem2;
 	}
 
 	public int getScorePoints() {

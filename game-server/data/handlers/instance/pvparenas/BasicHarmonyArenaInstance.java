@@ -15,6 +15,7 @@ import com.aionemu.gameserver.model.instance.instancescore.HarmonyArenaScore;
 import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
+import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.network.aion.instanceinfo.HarmonyScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
@@ -36,14 +37,14 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @author xTz
  */
-public class HarmonyArenaInstance extends GeneralInstanceHandler {
+public class BasicHarmonyArenaInstance extends GeneralInstanceHandler {
 
-	protected int killBonus = 1000;
-	protected int deathFine = -150;
+	private static final int POINTS_GAINED_PER_PLAYER_KILL = 800;
+	private static final int POINTS_LOST_PER_DEATH = -150;
 	protected HarmonyArenaScore instanceReward;
 	protected boolean isInstanceDestroyed;
 
-	public HarmonyArenaInstance(WorldMapInstance instance) {
+	public BasicHarmonyArenaInstance(WorldMapInstance instance) {
 		super(instance);
 	}
 
@@ -83,8 +84,8 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 		// Decrease victim points
 		if (victim instanceof Player) {
 			HarmonyGroupReward victimGroup = instanceReward.getHarmonyGroupReward(victim.getObjectId());
-			victimGroup.addPoints(deathFine);
-			bonus = killBonus;
+			victimGroup.addPoints(POINTS_LOST_PER_DEATH);
+			bonus = POINTS_GAINED_PER_PLAYER_KILL;
 			rank = instanceReward.getRank(victimGroup.getPoints());
 			broadcastUpdate((Player) victim, InstanceScoreType.UPDATE_RANK);
 		} else
@@ -249,21 +250,14 @@ public class HarmonyArenaInstance extends GeneralInstanceHandler {
 				if (courage != 0) {
 					ItemService.addItem(player, 186000137, Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(player, courage));
 				}
-				int victoryReward = group.getVictoryReward();
-				if (victoryReward != 0) {
-					ItemService.addItem(player, 188052605, victoryReward);
+
+				RewardItem rewardItem1 = group.getRewardItem1();
+				if (rewardItem1 != null) {
+					ItemService.addItem(player, rewardItem1.getId(), rewardItem1.getCount());
 				}
-				int consolationReward = group.getConsolationReward();
-				if (victoryReward != 0) {
-					ItemService.addItem(player, 188052606, consolationReward);
-				}
-				int arenaSupply = group.getArenaSupply();
-				if (arenaSupply != 0) {
-					ItemService.addItem(player, 188052181, arenaSupply);
-				}
-				int arenaSuperiorSupply = group.getArenaSuperiorSupply();
-				if (arenaSuperiorSupply != 0) {
-					ItemService.addItem(player, 188052482, arenaSuperiorSupply);
+				RewardItem rewardItem2 = group.getRewardItem2();
+				if (rewardItem2 != null) {
+					ItemService.addItem(player, rewardItem2.getId(), rewardItem2.getCount());
 				}
 			}
 		}

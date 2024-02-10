@@ -9,6 +9,7 @@ import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancescore.HarmonyArenaScore;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
+import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 
 /**
  * @author xTz
@@ -26,14 +27,15 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 		this.playerObjId = owner.getObjectId();
 	}
 
-		public HarmonyScoreWriter(HarmonyArenaScore reward, InstanceScoreType type) {
-				super(reward);
-				this.type = type;
-		}
+	public HarmonyScoreWriter(HarmonyArenaScore reward, InstanceScoreType type) {
+		super(reward);
+		this.type = type;
+	}
 
 	@Override
 	public void writeMe(ByteBuffer buf) {
 		HarmonyGroupReward harmonyGroupReward = instanceScore.getHarmonyGroupReward(playerObjId);
+
 		writeC(buf, type.getId());
 		switch (type) {
 			case UPDATE_INSTANCE_PROGRESS:
@@ -41,6 +43,9 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 				writeD(buf, instanceScore.getRound());
 				break;
 			case INIT_PLAYER:
+				if (harmonyGroupReward == null)
+					return;
+
 				writeD(buf, harmonyGroupReward.getOwnerId());
 				writeS(buf, harmonyGroupReward.getAGPlayer(playerObjId).getName(), 52); // playerName
 				writeD(buf, harmonyGroupReward.getId()); // groupObj
@@ -52,39 +57,38 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 				writeD(buf, 0);
 				writeD(buf, playerObjId); // memberObj
 				break;
-			case SHOW_REWARD: // Reward Display
-				writeD(buf, harmonyGroupReward.getBasicAP()); // basicRewardAp
-				writeD(buf, harmonyGroupReward.getScoreAP()); // scoreRewardAp
-				writeD(buf, harmonyGroupReward.getRankingAP()); // rankingRewardAp
-				writeD(buf, harmonyGroupReward.getBasicGP()); // basicRewardGp
-				writeD(buf, harmonyGroupReward.getScoreGP()); // scoreRewardGp
-				writeD(buf, harmonyGroupReward.getRankingGP()); // rankingRewardGp
+			case SHOW_REWARD:
+				if (harmonyGroupReward == null)
+					return;
+
+				writeD(buf, harmonyGroupReward.getBasicAP());
+				writeD(buf, harmonyGroupReward.getScoreAP());
+				writeD(buf, harmonyGroupReward.getRankingAP());
+				writeD(buf, harmonyGroupReward.getBasicGP());
+				writeD(buf, harmonyGroupReward.getScoreGP());
+				writeD(buf, harmonyGroupReward.getRankingGP());
 				writeD(buf, 186000137); // Courage Insignia
-				writeD(buf, (int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(owner, harmonyGroupReward.getBasicCourage())); // basicRewardCourageIn
-				writeD(buf, (int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(owner, harmonyGroupReward.getScoreCourage())); // scoreRewardCourageIn
-				writeD(buf, (int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(owner, harmonyGroupReward.getRankingCourage())); // rankingRewardCourageIn
-				if (harmonyGroupReward.getVictoryReward() != 0) {
-					writeD(buf, 188052605); // 188052605
-					writeD(buf, harmonyGroupReward.getVictoryReward());
+				writeD(buf, (int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(owner, harmonyGroupReward.getBasicCourage()));
+				writeD(buf, (int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(owner, harmonyGroupReward.getScoreCourage()));
+				writeD(buf, (int) Rates.ARENA_COURAGE_INSIGNIA_COUNT.calcResult(owner, harmonyGroupReward.getRankingCourage()));
+				writeD(buf, 0); // Placeholder for Crucible Insignia
+				writeD(buf, 0); // Basic Reward
+				writeD(buf, 0); // Score Reward
+				writeD(buf, 0); // Rank Reward
+				RewardItem rewardItem1 = harmonyGroupReward.getRewardItem1();
+				if (rewardItem1 != null) {
+					writeD(buf, rewardItem1.getId());
+					writeD(buf, (int) rewardItem1.getCount());
 				} else {
 					writeEmptyItem(buf);
 				}
-				if (harmonyGroupReward.getArenaSupply() != 0) {
-					writeD(buf, 188052181);
-					writeD(buf, harmonyGroupReward.getArenaSupply());
+				RewardItem rewardItem2 = harmonyGroupReward.getRewardItem2();
+				if (rewardItem2 != null) {
+					writeD(buf, rewardItem2.getId());
+					writeD(buf, (int) rewardItem2.getCount());
 				} else {
 					writeEmptyItem(buf);
 				}
-				if (harmonyGroupReward.getConsolationReward() != 0) {
-					writeD(buf, 188052606); // 188052606
-					writeD(buf, harmonyGroupReward.getConsolationReward());
-				} else {
-					writeEmptyItem(buf);
-				}
-				writeD(buf, 0);
-				writeD(buf, 0);
-				writeD(buf, (int) harmonyGroupReward.getParticipation() * 100); // progressType
-				writeD(buf, harmonyGroupReward.getPoints()); // score
 				break;
 			case UPDATE_INSTANCE_BUFFS_AND_SCORE:
 				writeD(buf, 0);
@@ -120,6 +124,9 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 				}
 				break;
 			case UPDATE_RANK:
+				if (harmonyGroupReward == null)
+					return;
+
 				writeC(buf, instanceScore.getRank(harmonyGroupReward.getPoints()));
 				writeD(buf, harmonyGroupReward.getPvPKills()); // kills
 				writeD(buf, harmonyGroupReward.getPoints()); // groupScore
