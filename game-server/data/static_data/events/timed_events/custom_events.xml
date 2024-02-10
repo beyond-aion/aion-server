@@ -26,7 +26,7 @@
 			</buff>
 		</buffs>
 	</event>
-	<event name="April Fool's" start="2022-04-01T00:00:00" end="2022-04-01T23:59:59">
+	<event name="April Fool's" start="2024-04-01T00:00:00" end="2024-04-01T23:59:59">
 		<spawns>
 			<spawn_map map_id="110010000">
 				<!-- Sematariux -->
