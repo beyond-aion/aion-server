@@ -160,8 +160,7 @@ public class PlayerRestrictions {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DISABLE("FFA mode"));
 			return false;
 		}
-		if (player.isInInstance() && AutoGroupService.getInstance().isAutoInstance(player.getInstanceId())
-				|| target.isInInstance() && AutoGroupService.getInstance().isAutoInstance(target.getInstanceId())) {
+		if (AutoGroupService.getInstance().isInAutoInstance(player) || AutoGroupService.getInstance().isInAutoInstance(target)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_CANT_INVITE_PARTY_COMMAND());
 			return false;
 		}

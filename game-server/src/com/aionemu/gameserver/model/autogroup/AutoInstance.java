@@ -77,11 +77,6 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 		registeredAGPlayers.remove(player.getObjectId());
 	}
 
-	@Override
-	public void clear() {
-		registeredAGPlayers.clear();
-	}
-
 	protected boolean isRegistrationDisabled(LookingForParty lfp) {
 		if (instance != null) {
 			InstanceScore<?> instanceScore = instance.getInstanceHandler().getInstanceScore();

@@ -58,7 +58,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 				registeredAGPlayers.remove(player.getObjectId());
 				PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getTemplate().getMaskId(), 5));
 				if (registeredAGPlayers.isEmpty())
-					AutoGroupService.getInstance().destroyInstanceIfPossible(this, instance.getInstanceId());
+					AutoGroupService.getInstance().destroyIfPossible(this);
 				return;
 			}
 		}
@@ -110,13 +110,6 @@ public class AutoHarmonyInstance extends AutoInstance {
 				group2.remove(agp);
 		}
 		super.unregister(player);
-	}
-
-	@Override
-	public void clear() {
-		super.clear();
-		group1.clear();
-		group2.clear();
 	}
 
 	private List<Player> getPlayerFromGroup(List<AGPlayer> group) {

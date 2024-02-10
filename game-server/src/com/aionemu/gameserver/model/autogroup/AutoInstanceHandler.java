@@ -19,6 +19,4 @@ public interface AutoInstanceHandler {
 	void onPressEnter(Player player);
 
 	void unregister(Player player);
-
-	void clear();
 }

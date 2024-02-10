@@ -441,7 +441,7 @@ public enum AutoGroupType implements L10n {
 		return difficultId;
 	}
 
-	public AutoInstance getAutoInstance() {
+	public AutoInstance createAutoInstance() {
 		return newAutoInstance();
 	}
 

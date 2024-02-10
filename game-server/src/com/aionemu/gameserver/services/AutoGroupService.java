@@ -2,12 +2,10 @@ package com.aionemu.gameserver.services;
 
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.autogroup.*;
-import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
@@ -27,9 +25,9 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class AutoGroupService {
 
-	private final Map<Integer, AutoInstance> autoInstances = new ConcurrentHashMap<>();
+	private final Map<WorldMapInstance, AutoInstance> autoInstances = new ConcurrentHashMap<>();
 	private final Map<Integer, List<LookingForParty>> lookingParties = new ConcurrentHashMap<>();
-	private final Set<Integer> penalties = Collections.synchronizedSet(new HashSet<>());
+	private final Set<Integer> penalties = ConcurrentHashMap.newKeySet();
 
 	private AutoGroupService() {
 	}
@@ -38,73 +36,74 @@ public class AutoGroupService {
 		AutoGroupType agt = AutoGroupType.getAGTByMaskId(maskId);
 		if (agt == null || !canRegister(player, ert, agt))
 			return;
-		lookingParties.putIfAbsent(maskId, new LinkedList<>());
-		LookingForParty lfp = getLookingForPartyOfPlayer(player.getObjectId(), maskId);
-		if (lfp == null) {
-			lfp = new LookingForParty(
-				player.isInTeam() ? player.getCurrentTeam().getOnlineMembers().stream().map(AionObject::getObjectId).collect(Collectors.toList())
-					: List.of(player.getObjectId()),
-				player.getRace(), ert, maskId, player.getObjectId());
+		List<LookingForParty> lfps = lookingParties.computeIfAbsent(maskId, k -> new ArrayList<>());
+		LookingForParty lfp;
+		synchronized (lfps) {
+			lfp = getSearchEntry(player.getObjectId(), lfps);
+			if (lfp != null) {
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED(agt.getTemplate().getInstanceMapId()));
+				return;
+			}
+			lfp = new LookingForParty(player, ert, maskId);
+			lfps.add(lfp);
 
-			lookingParties.get(maskId).add(lfp);
-		} else if (lfp.getMaskId() == maskId) {
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED(agt.getTemplate().getInstanceMapId()));
-			return;
+			AutoGroupUtility.sendSuccessfulRegistration(lfp, player.getName(), agt, maskId);
+			if (AutoGroupConfig.ANNOUNCE_BATTLEGROUND_REGISTRATIONS && agt.isPeriodicInstance() && ert == EntryRequestType.GROUP_ENTRY
+				&& lfps.stream().filter(s -> s.getRace() == player.getRace()).count() == 1) {
+				PacketSendUtility.broadcastToWorld(
+					new SM_MESSAGE(0, null, player.getRace().getL10n() + " have registered for " + agt.getL10n() + ".", ChatType.BRIGHT_YELLOW_CENTER),
+					p -> p.getRace() != player.getRace() && agt.isInLvlRange(p.getLevel()));
+			}
+
+			if (!checkInstancesForOpenQuickEntries(lfp, maskId))
+				checkQueueForNewMatches(maskId);
 		}
-
-		AutoGroupUtility.sendSuccessfulRegistration(lfp, player.getName(), agt, maskId);
-		if (AutoGroupConfig.ANNOUNCE_BATTLEGROUND_REGISTRATIONS && agt.isPeriodicInstance() && ert == EntryRequestType.GROUP_ENTRY
-			&& lookingParties.get(maskId).stream().filter(s -> s.getRace() == player.getRace() && s.getMaskId() == maskId).count() == 1) {
-			PacketSendUtility.broadcastToWorld(
-				new SM_MESSAGE(0, null, player.getRace().getL10n() + " have registered for " + agt.getL10n() + ".", ChatType.BRIGHT_YELLOW_CENTER),
-				p -> p.getRace() != player.getRace() && agt.isInLvlRange(p.getLevel()));
-		}
-
-		if (checkInstancesForOpenQuickEntries(lfp, maskId))
-			return;
-		checkQueueForNewMatches(maskId);
 	}
 
-	private synchronized void checkQueueForNewMatches(int maskId) {
+	private void checkQueueForNewMatches(int maskId) {
 		List<LookingForParty> queuedParties = lookingParties.get(maskId);
 		if (queuedParties == null || queuedParties.isEmpty())
 			return;
-		Collections.sort(queuedParties);
 		AutoGroupType agt = AutoGroupType.getAGTByMaskId(maskId);
 		if (agt == null)
 			return;
-		AutoInstance autoInstance = agt.getAutoInstance();
-		boolean canCreateNewInstance = false;
+		synchronized (queuedParties) {
+			queuedParties.sort(null);
 
-		List<LookingForParty> filteredParties = new LinkedList<>();
-		for (LookingForParty lfp : queuedParties) {
-			if (lfp.getLeaderObjId() == 0 || lfp.isOnStartEnterTask()) {
-				continue;
-			}
-			AGQuestion question = autoInstance.addLookingForParty(lfp);
-			if (question != AGQuestion.FAILED) {
+			for (int i = 0; i < queuedParties.size(); i++) {
+				AutoInstance autoInstance = agt.createAutoInstance();
+				LookingForParty lfp = queuedParties.get(i);
+				AGQuestion question = autoInstance.addLookingForParty(lfp);
+				if (question == AGQuestion.FAILED)
+					continue;
+				List<LookingForParty> filteredParties = new ArrayList<>();
 				filteredParties.add(lfp);
-			}
-			if (question == AGQuestion.READY) {
-				canCreateNewInstance = true;
-				break;
+				if (question != AGQuestion.READY) {
+					for (int j = i + 1; j < queuedParties.size(); j++) {
+						lfp = queuedParties.get(j);
+						question = autoInstance.addLookingForParty(lfp);
+						if (question != AGQuestion.FAILED) {
+							filteredParties.add(lfp);
+							if (question == AGQuestion.READY)
+								break;
+						}
+					}
+				}
+				if (question == AGQuestion.READY) {
+					createNewInstance(autoInstance, agt, filteredParties, maskId);
+					break;
+				}
 			}
 		}
-		if (canCreateNewInstance)
-			createNewInstance(autoInstance, agt, filteredParties, maskId);
-		else
-			autoInstance.clear();
-
-		filteredParties.clear();
 	}
 
 	private void createNewInstance(AutoInstance autoInstance, AutoGroupType agt, List<LookingForParty> filteredParties, int maskId) {
 		WorldMapInstance instance = InstanceService.getNextAvailableInstance(agt.getTemplate().getInstanceMapId(), 0, agt.getDifficultId(), null,
 			autoInstance.getMaxPlayers(), false);
 		autoInstance.onInstanceCreate(instance);
-		autoInstances.put(instance.getInstanceId(), autoInstance);
+		autoInstances.put(instance, autoInstance);
 		for (LookingForParty lfp : filteredParties) {
-			lookingParties.get(maskId).remove(lfp);
+			removeSearchEntry(lfp);
 			lfp.setStartEnterTime();
 			lfp.getMemberObjectIds().forEach(id -> {
 				searchAndRemoveAdditionalRegistrations(id);
@@ -113,12 +112,12 @@ public class AutoGroupService {
 		}
 	}
 
-	private synchronized boolean checkInstancesForOpenQuickEntries(LookingForParty lfp, int maskId) {
+	private boolean checkInstancesForOpenQuickEntries(LookingForParty lfp, int maskId) {
 		if (lfp.getEntryRequestType() != EntryRequestType.QUICK_GROUP_ENTRY || lfp.isOnStartEnterTask())
 			return false;
 		for (AutoInstance autoInstance : autoInstances.values()) {
 			if (autoInstance.getAutoGroupType().getTemplate().getMaskId() == maskId && autoInstance.addLookingForParty(lfp) == AGQuestion.ADDED) {
-				lookingParties.get(maskId).remove(lfp);
+				removeSearchEntry(lfp);
 				lfp.setStartEnterTime();
 				AutoGroupUtility.sendWindowToPlayerIfOnline(lfp.getLeaderObjId(), maskId, 4);
 				searchAndRemoveAdditionalRegistrations(lfp.getLeaderObjId());
@@ -128,29 +127,31 @@ public class AutoGroupService {
 		return false;
 	}
 
-	private synchronized void checkQueueForQuickEntries(AutoInstance autoInstance) {
+	private void checkQueueForQuickEntries(AutoInstance autoInstance) {
 		int maskId = autoInstance.getAutoGroupType().getTemplate().getMaskId();
 		List<LookingForParty> parties = lookingParties.get(maskId);
 		if (parties == null || parties.isEmpty())
 			return;
-		for (LookingForParty lfp : parties) {
-			if (lfp.getEntryRequestType() == EntryRequestType.QUICK_GROUP_ENTRY && !lfp.isOnStartEnterTask()
-				&& autoInstance.addLookingForParty(lfp) == AGQuestion.ADDED) {
-				lookingParties.get(maskId).remove(lfp);
-				lfp.setStartEnterTime();
-				AutoGroupUtility.sendWindowToPlayerIfOnline(lfp.getLeaderObjId(), maskId, 4);
-				searchAndRemoveAdditionalRegistrations(lfp.getLeaderObjId());
-				return;
+		synchronized (parties) {
+			for (LookingForParty lfp : parties) {
+				if (lfp.getEntryRequestType() == EntryRequestType.QUICK_GROUP_ENTRY && !lfp.isOnStartEnterTask()
+					&& autoInstance.addLookingForParty(lfp) == AGQuestion.ADDED) {
+					removeSearchEntry(lfp);
+					lfp.setStartEnterTime();
+					AutoGroupUtility.sendWindowToPlayerIfOnline(lfp.getLeaderObjId(), maskId, 4);
+					searchAndRemoveAdditionalRegistrations(lfp.getLeaderObjId());
+					return;
+				}
 			}
 		}
 	}
 
 	private void searchAndRemoveAdditionalRegistrations(int objectId) {
-		List<LookingForParty> partiesToRemove = getAllPartiesOfPlayer(objectId);
+		List<LookingForParty> partiesToRemove = getSearchEntries(objectId);
 		for (LookingForParty lfp : partiesToRemove) {
 			int maskId = lfp.getMaskId();
 			if (lfp.isLeader(objectId)) {
-				lookingParties.get(maskId).remove(lfp);
+				removeSearchEntry(lfp);
 				penaliseParty(lfp);
 				lfp.getMemberObjectIds().forEach(id -> AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 2));
 			} else {
@@ -179,7 +180,7 @@ public class AutoGroupService {
 	public void onEnterInstance(Player player) {
 		if (player.isInInstance()) {
 			int obj = player.getObjectId();
-			AutoInstance autoInstance = autoInstances.get(player.getInstanceId());
+			AutoInstance autoInstance = autoInstances.get(player.getWorldMapInstance());
 			if (autoInstance != null && autoInstance.getRegisteredAGPlayers().containsKey(obj))
 				autoInstance.onEnterInstance(player);
 		}
@@ -191,10 +192,7 @@ public class AutoGroupService {
 			int objectId = player.getObjectId();
 			autoInstance.unregister(player);
 			penalisePlayerAndScheduleRemoval(objectId);
-			if (destroyInstanceIfPossible(autoInstance, player.getInstanceId()))
-				return;
-			if (autoInstance.getAutoGroupType().getTemplate().canRegisterQuickEntry())
-				checkQueueForQuickEntries(autoInstance);
+			destroyOrAddPlayersFromQuickEntries(autoInstance);
 			PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(instanceMaskId, 2));
 		}
 	}
@@ -203,67 +201,65 @@ public class AutoGroupService {
 		PeriodicInstanceManager.getInstance().checkAndSendOpenRegistrations(player);
 	}
 
-	public List<LookingForParty> getAllPartiesOfPlayer(int objectId) {
-		List<LookingForParty> parties = new ArrayList<>();
-		for (int maskId : lookingParties.keySet()) {
-			LookingForParty lfp = getLookingForPartyOfPlayer(objectId, maskId);
-			if (lfp != null)
-				parties.add(lfp);
-		}
-		return parties;
+	public boolean isSearching(Player player, int maskId) {
+		return getSearchEntry(player.getObjectId(), lookingParties.get(maskId)) != null;
 	}
 
-	public LookingForParty getLookingForPartyOfPlayer(int objectId, int maskId) {
-		List<LookingForParty> parties = lookingParties.get(maskId);
-		if (parties != null && !parties.isEmpty()) {
-			for (LookingForParty lfp : lookingParties.get(maskId))
-				if (lfp.isMember(objectId))
-					return lfp;
+	private LookingForParty getSearchEntry(Player player, int maskId) {
+		return getSearchEntry(player.getObjectId(), lookingParties.get(maskId));
+	}
+
+	private LookingForParty getSearchEntry(int playerObjectId, List<LookingForParty> parties) {
+		if (parties != null) {
+			synchronized (parties) {
+				for (LookingForParty lfp : parties)
+					if (lfp.isMember(playerObjectId))
+						return lfp;
+			}
 		}
 		return null;
 	}
 
+	private List<LookingForParty> getSearchEntries(int playerObjectId) {
+		return lookingParties.values().stream().map(parties -> getSearchEntry(playerObjectId, parties)).filter(Objects::nonNull).toList();
+	}
+
 	public void onPlayerLogOut(Player player) {
 		int objectId = player.getObjectId();
-		int instanceId = player.getInstanceId();
-		for (LookingForParty lfp : getAllPartiesOfPlayer(objectId)) {
+		for (LookingForParty lfp : getSearchEntries(objectId)) {
 			if (lfp.isOnStartEnterTask()) {
 				for (AutoInstance autoInstance : autoInstances.values()) {
 					cancelEnter(player, autoInstance.getAutoGroupType().getTemplate().getMaskId());
 				}
 			} else if (lfp.isLeader(objectId)) {
 				lfp.setLeaderObjId(lfp.getMemberObjectIds().stream().filter(id -> id != objectId).findFirst().orElse(0));
-				if (lfp.getLeaderObjId() == 0)
-					lookingParties.get(lfp.getMaskId()).remove(lfp);
+				if (lfp.getLeaderObjId() == 0) {
+					removeSearchEntry(lfp);
+				}
 			} else {
 				lfp.unregisterMember(objectId);
 				checkQueueForNewMatches(lfp.getMaskId());
 			}
 		}
 
-		if (player.isInInstance()) {
-			AutoInstance autoInstance = autoInstances.get(instanceId);
-			if (autoInstance != null && autoInstance.getRegisteredAGPlayers().containsKey(objectId)) {
-				WorldMapInstance instance = autoInstance.getInstance();
-				if (instance != null) {
-					destroyInstanceIfPossible(autoInstance, instanceId);
-				}
-			}
+		AutoInstance autoInstance = autoInstances.get(player.getWorldMapInstance());
+		if (autoInstance != null && autoInstance.getRegisteredAGPlayers().containsKey(objectId)) {
+			destroyIfPossible(autoInstance);
+		}
+	}
+
+	private void removeSearchEntry(LookingForParty lfp) {
+		List<LookingForParty> lfps = lookingParties.get(lfp.getMaskId());
+		synchronized (lfps) {
+			lfps.remove(lfp);
 		}
 	}
 
 	public void onLeaveInstance(Player player) {
-		if (player.isInInstance()) {
-			int obj = player.getObjectId();
-			int instanceId = player.getInstanceId();
-			AutoInstance autoInstance = autoInstances.get(instanceId);
-			if (autoInstance != null && autoInstance.getRegisteredAGPlayers().containsKey(obj)) {
-				autoInstance.onLeaveInstance(player);
-				if (destroyInstanceIfPossible(autoInstance, instanceId))
-					return;
-				if (autoInstance.getAutoGroupType().getTemplate().canRegisterQuickEntry())
-					checkQueueForQuickEntries(autoInstance);
-			}
+		AutoInstance autoInstance = autoInstances.get(player.getWorldMapInstance());
+		if (autoInstance != null && autoInstance.getRegisteredAGPlayers().containsKey(player.getObjectId())) {
+			autoInstance.onLeaveInstance(player);
+			destroyOrAddPlayersFromQuickEntries(autoInstance);
 		}
 		PeriodicInstanceManager.getInstance().checkAndSendOpenRegistrations(player);
 	}
@@ -293,8 +289,7 @@ public class AutoGroupService {
 	}
 
 	private void penalisePlayerAndScheduleRemoval(int objectId) {
-		if (!penalties.contains(objectId)) {
-			penalties.add(objectId);
+		if (penalties.add(objectId)) {
 			ThreadPoolManager.getInstance().schedule(() -> {
 				penalties.remove(objectId);
 				PeriodicInstanceManager.getInstance().checkAndSendOpenRegistrations(objectId);
@@ -309,7 +304,7 @@ public class AutoGroupService {
 	}
 
 	public void cancelRegistration(Player player, int maskId) {
-		cancelRegistration(getLookingForPartyOfPlayer(player.getObjectId(), maskId), player, maskId);
+		cancelRegistration(getSearchEntry(player, maskId), player, maskId);
 	}
 
 	public void cancelRegistration(LookingForParty lfp, Player player, int maskId) {
@@ -328,12 +323,16 @@ public class AutoGroupService {
 		}
 	}
 
-	public boolean destroyInstanceIfPossible(AutoInstance autoInstance, int instanceId) {
+	private void destroyOrAddPlayersFromQuickEntries(AutoInstance autoInstance) {
+		if (!destroyIfPossible(autoInstance) && autoInstance.getAutoGroupType().getTemplate().canRegisterQuickEntry())
+			checkQueueForQuickEntries(autoInstance);
+	}
+
+	public boolean destroyIfPossible(AutoInstance autoInstance) {
 		WorldMapInstance instance = autoInstance.getInstance();
-		if (instance != null && instance.getPlayersInside().stream().noneMatch(Player::isOnline)) {
-			autoInstances.remove(instanceId);
+		if (instance.getPlayersInside().stream().noneMatch(Player::isOnline)) {
+			autoInstances.remove(instance);
 			InstanceService.destroyInstance(instance);
-			autoInstance.clear();
 			return true;
 		}
 		return false;
@@ -347,8 +346,8 @@ public class AutoGroupService {
 		return null;
 	}
 
-	public boolean isAutoInstance(int instanceId) {
-		return autoInstances.containsKey(instanceId);
+	public boolean isInAutoInstance(Player player) {
+		return autoInstances.containsKey(player.getWorldMapInstance());
 	}
 
 	public static AutoGroupService getInstance() {

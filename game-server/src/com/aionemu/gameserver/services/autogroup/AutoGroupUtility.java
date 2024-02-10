@@ -70,8 +70,7 @@ public class AutoGroupUtility {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
 				return false;
 			}
-			LookingForParty lfp = AutoGroupService.getInstance().getLookingForPartyOfPlayer(member.getObjectId(), maskId);
-			if (hasCoolDown(member, mapId) || !agt.isInLvlRange(member.getLevel()) || lfp != null && lfp.getMaskId() == maskId) {
+			if (hasCoolDown(member, mapId) || !agt.isInLvlRange(member.getLevel()) || AutoGroupService.getInstance().isSearching(member, maskId)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ENTER_MEMBER(member.getName()));
 				return false;
 			}

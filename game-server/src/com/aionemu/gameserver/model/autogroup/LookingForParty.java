@@ -1,8 +1,11 @@
 package com.aionemu.gameserver.model.autogroup;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.model.Race;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
  * @author xTz
@@ -17,12 +20,14 @@ public class LookingForParty implements Comparable<LookingForParty> {
 	private long startEnterTime;
 	private int leaderObjId;
 
-	public LookingForParty(List<Integer> memberObjectIds, Race race, EntryRequestType ert, int maskId, int leaderObjId) {
-		this.memberObjectIds = memberObjectIds;
+	public LookingForParty(Player player, EntryRequestType ert, int maskId) {
+		this.memberObjectIds = player.isInTeam()
+			? player.getCurrentTeam().getOnlineMembers().stream().map(Player::getObjectId).collect(Collectors.toList())
+			: new ArrayList<>(List.of(player.getObjectId()));
 		this.ert = ert;
-		this.race = race;
+		this.race = player.getRace();
 		this.maskId = maskId;
-		this.leaderObjId = leaderObjId;
+		this.leaderObjId = player.getObjectId();
 	}
 
 	public List<Integer> getMemberObjectIds() {
@@ -69,16 +74,8 @@ public class LookingForParty implements Comparable<LookingForParty> {
 		startEnterTime = System.currentTimeMillis();
 	}
 
-	public int getRemainingTime() {
-		return (int) (System.currentTimeMillis() - registrationTime) / 1000 * 256;
-	}
-
 	public boolean isOnStartEnterTask() {
 		return System.currentTimeMillis() - startEnterTime <= 120000;
-	}
-
-	public boolean canMatch(LookingForParty lfp) {
-		return !this.equals(lfp) && race == lfp.getRace();
 	}
 
 	@Override
