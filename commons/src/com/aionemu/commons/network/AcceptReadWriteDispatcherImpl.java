@@ -79,7 +79,7 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 		synchronized (pendingClose) {
 			for (Iterator<AConnection<?>> iterator = pendingClose.iterator(); iterator.hasNext();) {
 				AConnection<?> connection = iterator.next();
-				if (connection.getSendMsgQueue().isEmpty()) {
+				if (connection.getSendMsgQueue().isEmpty() || !connection.getSocketChannel().isConnected()) {
 					closeConnectionImpl(connection);
 					iterator.remove();
 				}
