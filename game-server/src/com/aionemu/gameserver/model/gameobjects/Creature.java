@@ -652,29 +652,37 @@ public abstract class Creature extends VisibleObject {
 	 * Increments an internal counter for the given zone type, to support nested zones
 	 */
 	public void setInsideZoneType(ZoneType zoneType) {
-		zoneTypes[zoneType.getValue()]++;
+		synchronized (zoneTypes) {
+			zoneTypes[zoneType.ordinal()]++;
+		}
 	}
 
 	/**
 	 * Decrements an internal counter for the given zone type, to support nested zones
 	 */
 	public void unsetInsideZoneType(ZoneType zoneType) {
-		zoneTypes[zoneType.getValue()]--;
+		synchronized (zoneTypes) {
+			zoneTypes[zoneType.ordinal()]--;
+		}
 	}
 
 	/**
 	 * @return True, if the creature is inside one or more zones of the specified type.
 	 */
 	public boolean isInsideZoneType(ZoneType zoneType) {
-		return zoneTypes[zoneType.getValue()] > 0;
+		synchronized (zoneTypes) {
+			return zoneTypes[zoneType.ordinal()] > 0;
+		}
 	}
 
 	public boolean isInsidePvPZone() {
-		if (zoneTypes[ZoneType.SIEGE.getValue()] > 0) {
-			return true;
+		synchronized (zoneTypes) {
+			if (zoneTypes[ZoneType.SIEGE.ordinal()] > 0) {
+				return true;
+			}
+			int pvpValue = zoneTypes[ZoneType.PVP.ordinal()];
+			return pvpValue == 0 || pvpValue == 2;
 		}
-		int pvpValue = zoneTypes[ZoneType.PVP.getValue()];
-		return pvpValue == 0 || pvpValue == 2;
 	}
 
 	public Race getRace() {
