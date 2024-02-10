@@ -12,7 +12,7 @@ public enum InstanceScoreType {
 	UPDATE_INSTANCE_BUFFS_AND_SCORE(6),
 	UPDATE_ALL_PLAYER_INFO(7),
 	PLAYER_QUIT(8),
-	UNK(10),
+	UPDATE_RANK(10),
 	UPDATE_FACTION_SCORE(11);
 
 	private final int id;

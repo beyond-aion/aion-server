@@ -5,6 +5,7 @@ import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
+import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -14,9 +15,9 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @author xTz
  */
 @InstanceID(300570000)
-public class HaramoniousTrainingCenterInstance extends HarmonyArenaInstance {
+public class HarmonyTrainingGroundsInstance extends HarmonyArenaInstance {
 
-	public HaramoniousTrainingCenterInstance(WorldMapInstance instance) {
+	public HarmonyTrainingGroundsInstance(WorldMapInstance instance) {
 		super(instance);
 	}
 
@@ -149,8 +150,9 @@ public class HaramoniousTrainingCenterInstance extends HarmonyArenaInstance {
 			HarmonyGroupReward groupReward = instanceReward.getHarmonyGroupReward(player.getObjectId());
 			if (groupReward != null) {
 				groupReward.addPoints(100);
-				sendSystemMsg(player, npc, 250);
-				instanceReward.sendPacket(10, player);
+				sendSystemMsg(player, npc, 100);
+				broadcastUpdate(player, InstanceScoreType.UPDATE_RANK);
+				broadcastUpdate(InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE);
 			}
 		}
 		return false;

@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
+import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancescore.HarmonyArenaScore;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
@@ -14,37 +15,44 @@ import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
  */
 public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 
-	private final int type;
-	private final Player owner;
+	private final InstanceScoreType type;
+	private Player owner;
+	private int playerObjId;
 
-	public HarmonyScoreWriter(HarmonyArenaScore reward, int type, Player owner) {
+	public HarmonyScoreWriter(HarmonyArenaScore reward, InstanceScoreType type, Player owner) {
 		super(reward);
 		this.type = type;
 		this.owner = owner;
+		this.playerObjId = owner.getObjectId();
 	}
+
+		public HarmonyScoreWriter(HarmonyArenaScore reward, InstanceScoreType type) {
+				super(reward);
+				this.type = type;
+		}
 
 	@Override
 	public void writeMe(ByteBuffer buf) {
-		HarmonyGroupReward harmonyGroupReward = instanceScore.getHarmonyGroupReward(owner.getObjectId());
-		writeC(buf, type);
+		HarmonyGroupReward harmonyGroupReward = instanceScore.getHarmonyGroupReward(playerObjId);
+		writeC(buf, type.getId());
 		switch (type) {
-			case 2:
+			case UPDATE_INSTANCE_PROGRESS:
 				writeD(buf, 0);
 				writeD(buf, instanceScore.getRound());
 				break;
-			case 3:
+			case INIT_PLAYER:
 				writeD(buf, harmonyGroupReward.getOwnerId());
-				writeS(buf, harmonyGroupReward.getAGPlayer(owner.getObjectId()).getName(), 52); // playerName
+				writeS(buf, harmonyGroupReward.getAGPlayer(playerObjId).getName(), 52); // playerName
 				writeD(buf, harmonyGroupReward.getId()); // groupObj
 				writeD(buf, owner.getObjectId()); // memberObj
 				break;
-			case 4:
-				writeD(buf, instanceScore.getPlayerReward(owner.getObjectId()).getRemaningTime()); // buffTime
+			case UPDATE_PLAYER_BUFF_STATUS:
+				writeD(buf, instanceScore.getPlayerReward(playerObjId).getRemaningTime()); // buffTime
 				writeD(buf, 0);
 				writeD(buf, 0);
-				writeD(buf, owner.getObjectId()); // memberObj
+				writeD(buf, playerObjId); // memberObj
 				break;
-			case 5:
+			case SHOW_REWARD: // Reward Display
 				writeD(buf, harmonyGroupReward.getBasicAP()); // basicRewardAp
 				writeD(buf, harmonyGroupReward.getScoreAP()); // scoreRewardAp
 				writeD(buf, harmonyGroupReward.getRankingAP()); // rankingRewardAp
@@ -59,29 +67,26 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 					writeD(buf, 188052605); // 188052605
 					writeD(buf, harmonyGroupReward.getVictoryReward());
 				} else {
-					writeD(buf, 0);
-					writeD(buf, 0);
+					writeEmptyItem(buf);
 				}
 				if (harmonyGroupReward.getArenaSupply() != 0) {
 					writeD(buf, 188052181);
 					writeD(buf, harmonyGroupReward.getArenaSupply());
 				} else {
-					writeD(buf, 0);
-					writeD(buf, 0);
+					writeEmptyItem(buf);
 				}
 				if (harmonyGroupReward.getConsolationReward() != 0) {
 					writeD(buf, 188052606); // 188052606
 					writeD(buf, harmonyGroupReward.getConsolationReward());
 				} else {
-					writeD(buf, 0);
-					writeD(buf, 0);
+					writeEmptyItem(buf);
 				}
 				writeD(buf, 0);
 				writeD(buf, 0);
 				writeD(buf, (int) harmonyGroupReward.getParticipation() * 100); // progressType
 				writeD(buf, harmonyGroupReward.getPoints()); // score
 				break;
-			case 6:
+			case UPDATE_INSTANCE_BUFFS_AND_SCORE:
 				writeD(buf, 0);
 				writeD(buf, instanceScore.getCapPoints()); // capPoints
 				writeD(buf, 3); // possible rounds
@@ -114,7 +119,7 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 					}
 				}
 				break;
-			case 10:
+			case UPDATE_RANK:
 				writeC(buf, instanceScore.getRank(harmonyGroupReward.getPoints()));
 				writeD(buf, harmonyGroupReward.getPvPKills()); // kills
 				writeD(buf, harmonyGroupReward.getPoints()); // groupScore
@@ -123,4 +128,8 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 		}
 	}
 
+	private void writeEmptyItem(ByteBuffer buf) {
+		writeD(buf, 0);
+		writeD(buf, 0);
+	}
 }

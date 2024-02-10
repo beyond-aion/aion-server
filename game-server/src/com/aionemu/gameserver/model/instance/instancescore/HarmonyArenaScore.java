@@ -7,9 +7,6 @@ import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
-import com.aionemu.gameserver.network.aion.instanceinfo.HarmonyScoreWriter;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -17,25 +14,20 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class HarmonyArenaScore extends PvPArenaScore {
 
-	private List<HarmonyGroupReward> groups = new ArrayList<>();
+	private final List<HarmonyGroupReward> groups = new ArrayList<>();
 
 	public HarmonyArenaScore(WorldMapInstance instance) {
 		super(instance);
 	}
 
 	public HarmonyGroupReward getHarmonyGroupReward(int objectId) {
-		for (HarmonyGroupReward reward : groups) {
-			if (reward.containPlayer(objectId)) {
-				return reward;
-			}
-		}
-		return null;
+		return groups.stream().filter(reward -> reward.containsPlayer(objectId)).findFirst().orElse(null);
 	}
 
 	public List<HarmonyGroupReward> getHarmonyGroupInside() {
 		List<HarmonyGroupReward> harmonyGroups = new ArrayList<>();
 		for (HarmonyGroupReward group : groups) {
-			for (AGPlayer agp : group.getAGPlayers()) {
+			for (AGPlayer agp : group.getAssociatedPlayers()) {
 				Player p = instance.getPlayer(agp.getObjectId());
 				if (p != null) {
 					harmonyGroups.add(group);
@@ -49,7 +41,7 @@ public class HarmonyArenaScore extends PvPArenaScore {
 	public List<Player> getPlayersInside(HarmonyGroupReward group) {
 		List<Player> players = new ArrayList<>();
 		for (Player playerInside : instance.getPlayersInside()) {
-			if (group.containPlayer(playerInside.getObjectId())) {
+			if (group.containsPlayer(playerInside.getObjectId())) {
 				players.add(playerInside);
 			}
 		}
@@ -62,12 +54,6 @@ public class HarmonyArenaScore extends PvPArenaScore {
 
 	public List<HarmonyGroupReward> getGroups() {
 		return groups;
-	}
-
-	public void sendPacket(int type, Player owner) {
-		int time = getTime();
-		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player,
-			new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter(this, type, owner == null ? player : owner), time)));
 	}
 
 	@Override

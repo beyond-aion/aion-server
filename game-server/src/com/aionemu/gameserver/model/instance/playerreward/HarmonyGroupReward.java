@@ -26,30 +26,25 @@ public class HarmonyGroupReward extends PvPArenaPlayerReward {
 		return agt;
 	}
 
-	public List<AGPlayer> getAGPlayers() {
+	public List<AGPlayer> getAssociatedPlayers() {
 		return players;
 	}
 
-	public boolean containPlayer(int objectId) {
-		for (AGPlayer agp : players) {
-			if (agp.getObjectId() == objectId) {
-				return true;
-			}
-		}
-		return false;
+	public boolean containsPlayer(int objectId) {
+		return players.stream().anyMatch(agp -> agp.getObjectId() == objectId);
 	}
 
-	public AGPlayer getAGPlayer(int objectId) {
-		for (AGPlayer agp : players) {
-			if (agp.getObjectId() == objectId) {
-				return agp;
-			}
+		public AGPlayer getAGPlayer(int objectId) {
+				for (AGPlayer agp : players) {
+						if (agp.getObjectId() == objectId) {
+								return agp;
+						}
+				}
+				return null;
 		}
-		return null;
-	}
 
-	public int getId() {
-		return id;
-	}
+		public int getId() {
+				return id;
+		}
 
 }

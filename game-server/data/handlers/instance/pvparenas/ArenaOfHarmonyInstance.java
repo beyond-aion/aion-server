@@ -8,7 +8,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  * @author xTz
  */
 @InstanceID(300450000)
-public class ArenaOfHarmonyInstance extends HaramoniousTrainingCenterInstance {
+public class ArenaOfHarmonyInstance extends HarmonyTrainingGroundsInstance {
 
 	public ArenaOfHarmonyInstance(WorldMapInstance instance) {
 		super(instance);
