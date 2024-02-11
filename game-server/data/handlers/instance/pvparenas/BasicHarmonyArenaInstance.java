@@ -203,14 +203,26 @@ public class BasicHarmonyArenaInstance extends GeneralInstanceHandler {
 		switch (npcId) {
 			case 207102: // Recovery Relics
 			case 207116: // 1st Floor Stunner
-			case 219279: // Roaming Volcanic Petrahulk
-			case 219481: // Volcanic Heart Crystal
+			case 219277: // Roaming Volcanic Petrahulk Lv 50
+			case 219278: // Roaming Volcanic Petrahulk Lv 55
+			case 219279: // Roaming Volcanic Petrahulk Lv 60
+			case 219481: // Volcanic Heart Crystal Lv 50
+			case 219485: // Volcanic Heart Crystal Lv 55
+			case 219486: // Volcanic Heart Crystal Lv 60
+			case 219648: // Roaming Volcanic Petrahulk Lv 65
+			case 219652: // Volcanic Heart Crystal Lv 65
 				return 400;
 			case 207099: // 2nd Floor Bomb
 				return 200;
-			case 219282: // Heated Negotiator Grangvolkan
+			case 219280: // Heated Negotiator Grangvolkan Lv 50
+			case 219281: // Heated Negotiator Grangvolkan Lv 55
+			case 219282: // Heated Negotiator Grangvolkan Lv 60
+			case 219649: // Heated Negotiator Grangvolkan Lv 65
 				return 100;
-			case 219285: // Lurking Fangwing
+			case 219283: // Lurking Fangwing Lv 50
+			case 219284: // Lurking Fangwing Lv 55
+			case 219285: // Lurking Fangwing Lv 60
+			case 219650: // Lurking Fangwing Lv 65
 			case 219328: // Plaza Wall
 				return 50;
 			default:

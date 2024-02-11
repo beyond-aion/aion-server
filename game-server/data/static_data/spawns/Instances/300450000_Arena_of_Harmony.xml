@@ -147,7 +147,19 @@
 			<spot x="538.1978" y="1778.9984" z="157.7597"/>
 		</spawn>
 		<!-- Heated Negotiator Grangvolkan -->
-		<spawn npc_id="219282" respawn_time="105">
+		<spawn npc_id="219280" respawn_time="105" difficult_id="1">
+			<spot x="1564.4677" y="364.2271" z="199.1643"/>
+		</spawn>
+		<!-- Heated Negotiator Grangvolkan -->
+		<spawn npc_id="219281" respawn_time="105" difficult_id="2">
+			<spot x="1564.4677" y="364.2271" z="199.1643"/>
+		</spawn>
+		<!-- Heated Negotiator Grangvolkan -->
+		<spawn npc_id="219282" respawn_time="105" difficult_id="3">
+			<spot x="1564.4677" y="364.2271" z="199.1643"/>
+		</spawn>
+		<!-- Heated Negotiator Grangvolkan -->
+		<spawn npc_id="219649" respawn_time="105" difficult_id="4">
 			<spot x="1564.4677" y="364.2271" z="199.1643"/>
 		</spawn>
 		<!-- IDArena_pvp01_InviNPC_10 -->
@@ -184,7 +196,34 @@
 			<spot x="498.2446" y="1790.5735" z="169.7353"/>
 		</spawn>
 		<!-- Lurking Fangwing -->
-		<spawn npc_id="219285" respawn_time="105">
+		<spawn npc_id="219283" respawn_time="105" difficult_id="1">
+			<spot x="1809.6660" y="1150.4698" z="217.4545" h="30"/>
+			<spot x="1810.3248" y="1162.9425" z="217.4545" h="30"/>
+			<spot x="1810.6987" y="1176.5928" z="217.4545" h="90"/>
+			<spot x="1850.7114" y="1148.5380" z="217.5226" h="90"/>
+			<spot x="1851.5396" y="1141.2166" z="217.4248" h="30"/>
+			<spot x="1852.3782" y="1133.2284" z="217.5058" h="30"/>
+		</spawn>
+		<!-- Lurking Fangwing -->
+		<spawn npc_id="219284" respawn_time="105" difficult_id="2">
+			<spot x="1809.6660" y="1150.4698" z="217.4545" h="30"/>
+			<spot x="1810.3248" y="1162.9425" z="217.4545" h="30"/>
+			<spot x="1810.6987" y="1176.5928" z="217.4545" h="90"/>
+			<spot x="1850.7114" y="1148.5380" z="217.5226" h="90"/>
+			<spot x="1851.5396" y="1141.2166" z="217.4248" h="30"/>
+			<spot x="1852.3782" y="1133.2284" z="217.5058" h="30"/>
+		</spawn>
+		<!-- Lurking Fangwing -->
+		<spawn npc_id="219285" respawn_time="105" difficult_id="3">
+			<spot x="1809.6660" y="1150.4698" z="217.4545" h="30"/>
+			<spot x="1810.3248" y="1162.9425" z="217.4545" h="30"/>
+			<spot x="1810.6987" y="1176.5928" z="217.4545" h="90"/>
+			<spot x="1850.7114" y="1148.5380" z="217.5226" h="90"/>
+			<spot x="1851.5396" y="1141.2166" z="217.4248" h="30"/>
+			<spot x="1852.3782" y="1133.2284" z="217.5058" h="30"/>
+		</spawn>
+		<!-- Lurking Fangwing -->
+		<spawn npc_id="219650" respawn_time="105" difficult_id="4">
 			<spot x="1809.6660" y="1150.4698" z="217.4545" h="30"/>
 			<spot x="1810.3248" y="1162.9425" z="217.4545" h="30"/>
 			<spot x="1810.6987" y="1176.5928" z="217.4545" h="90"/>
@@ -210,10 +249,24 @@
 			<spot x="1581.2941" y="349.9125" z="198.6813"/>
 		</spawn>
 		<!-- Roaming Volcanic Petrahulk -->
-		<spawn npc_id="219279" respawn_time="105">
+		<spawn npc_id="219277" respawn_time="105" difficult_id="1">
 			<spot x="1573.4233" y="342.6342" z="202.3725"/>
-			<spot x="1574.8400" y="377.7373" z="202.7942"/>
-			<spot x="1575.7498" y="377.7747" z="202.6114"/>
+			<spot x="1547.9806" y="385.5891" z="203.7188"/>
+		</spawn>
+		<!-- Roaming Volcanic Petrahulk -->
+		<spawn npc_id="219278" respawn_time="105" difficult_id="2">
+			<spot x="1573.4233" y="342.6342" z="202.3725"/>
+			<spot x="1547.9806" y="385.5891" z="203.7188"/>
+		</spawn>
+		<!-- Roaming Volcanic Petrahulk -->
+		<spawn npc_id="219279" respawn_time="105" difficult_id="3">
+			<spot x="1573.4233" y="342.6342" z="202.3725"/>
+			<spot x="1547.9806" y="385.5891" z="203.7188"/>
+		</spawn>
+		<!-- Roaming Volcanic Petrahulk -->
+		<spawn npc_id="219648" respawn_time="105" difficult_id="4">
+			<spot x="1573.4233" y="342.6342" z="202.3725"/>
+			<spot x="1547.9806" y="385.5891" z="203.7188"/>
 		</spawn>
 		<!-- Sky Loop -->
 		<spawn npc_id="207101" respawn_time="105">
@@ -255,7 +308,28 @@
 			<spot x="539.5499" y="1767.9496" z="154.2043" h="15"/>
 		</spawn>
 		<!-- Volcanic Heart Crystal -->
-		<spawn npc_id="219481" respawn_time="105">
+		<spawn npc_id="219481" respawn_time="105" difficult_id="1">
+			<spot x="1548.6801" y="355.3476" z="198.2500"/>
+			<spot x="1552.7791" y="367.5700" z="198.2500"/>
+			<spot x="1579.1322" y="364.9623" z="198.2500"/>
+			<spot x="1585.3311" y="372.1372" z="198.2500"/>
+		</spawn>
+		<!-- Volcanic Heart Crystal -->
+		<spawn npc_id="219485" respawn_time="105" difficult_id="2">
+			<spot x="1548.6801" y="355.3476" z="198.2500"/>
+			<spot x="1552.7791" y="367.5700" z="198.2500"/>
+			<spot x="1579.1322" y="364.9623" z="198.2500"/>
+			<spot x="1585.3311" y="372.1372" z="198.2500"/>
+		</spawn>
+		<!-- Volcanic Heart Crystal -->
+		<spawn npc_id="219486" respawn_time="105" difficult_id="3">
+			<spot x="1548.6801" y="355.3476" z="198.2500"/>
+			<spot x="1552.7791" y="367.5700" z="198.2500"/>
+			<spot x="1579.1322" y="364.9623" z="198.2500"/>
+			<spot x="1585.3311" y="372.1372" z="198.2500"/>
+		</spawn>
+		<!-- Volcanic Heart Crystal -->
+		<spawn npc_id="219652" respawn_time="105" difficult_id="4">
 			<spot x="1548.6801" y="355.3476" z="198.2500"/>
 			<spot x="1552.7791" y="367.5700" z="198.2500"/>
 			<spot x="1579.1322" y="364.9623" z="198.2500"/>

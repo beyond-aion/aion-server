@@ -112,6 +112,10 @@
 		<spawn npc_id="218719" respawn_time="105" difficult_id="3">
 			<spot x="1856.197" y="1071.305" z="337.287" h="90"/>
 		</spawn>
+		<!-- Red Sand Tog -->
+		<spawn npc_id="233058" respawn_time="105" difficult_id="4">
+			<spot x="1856.197" y="1071.305" z="337.287" h="90"/>
+		</spawn>
 		<!-- Tog Manger -->
 		<spawn npc_id="218757" respawn_time="105">
 			<spot x="1853.310" y="1072.531" z="337.734"/>

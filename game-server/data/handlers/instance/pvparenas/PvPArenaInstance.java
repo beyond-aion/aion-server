@@ -203,6 +203,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 			case 218693: // Red Sand Tog
 			case 218706: // Red Sand Tog
 			case 218719: // Red Sand Tog
+			case 233058: // Red Sand Tog
 			case 701215: // Blesed Relic
 			case 701220: // Blesed Relic
 			case 701225: // Blesed Relic
