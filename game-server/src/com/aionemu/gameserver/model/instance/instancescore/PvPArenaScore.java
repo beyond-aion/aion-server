@@ -19,7 +19,9 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 	private int round = 1;
 	private Integer zone;
 	private int bonusTime;
-	private int capPoints;
+	private int lowerScoreCap;
+	private int upperScoreCap;
+	private int maxScoreGap;
 	private long instanceTime;
 	private final byte buffId;
 	protected WorldMapInstance instance;
@@ -28,8 +30,10 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 	public PvPArenaScore(WorldMapInstance instance) {
 		this.instance = instance;
 		boolean isSolo = isSoloArena();
-		capPoints = isSolo ? 14400 : 50000;
-		bonusTime = isSolo ? 8100 : 12000;
+		upperScoreCap = 50000;
+		lowerScoreCap = isSolo ? 10000 : 7000;
+		maxScoreGap = isSolo ? 1500 : 43000;
+		bonusTime = isSolo ? 8100 : 12000; // TODO: Glory = 10800
 		Collections.addAll(zones, isSolo ? new Integer[] { 1, 2, 3, 4 } : new Integer[] { 1, 2, 3, 4, 5, 6 });
 		int positionSize;
 		if (isSolo) {
@@ -62,10 +66,6 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 
 	public final boolean isGlory() {
 		return instance.getMapId() == 300550000;
-	}
-
-	public int getCapPoints() {
-		return capPoints;
 	}
 
 	public final void setRndZone() {
@@ -105,8 +105,10 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 		return round;
 	}
 
-	public void setRound(int round) {
-		this.round = round;
+	public void incrementRound() {
+		this.round++;
+		if (round > 3)
+			round = 3;
 	}
 
 	public boolean regPlayerReward(Player player) {
@@ -140,8 +142,8 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 	}
 
 	public int getRank(int points) {
-		List<PvPArenaPlayerReward> rewardsSortedByScorePoints = getPlayerRewards().stream().sorted((r1, r2) -> Integer.compare(r2.getScorePoints(), r1.getScorePoints()))
-			.toList();
+		List<PvPArenaPlayerReward> rewardsSortedByScorePoints = getPlayerRewards().stream()
+			.sorted((r1, r2) -> Integer.compare(r2.getScorePoints(), r1.getScorePoints())).toList();
 		int rank = -1;
 		for (PvPArenaPlayerReward reward : rewardsSortedByScorePoints) {
 			if (reward.getScorePoints() >= points) {
@@ -151,12 +153,11 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 		return rank;
 	}
 
-	public boolean hasCapPoints() {
+	public boolean reachedScoreCap() {
 		IntSummaryStatistics points = getPlayerRewards().stream().mapToInt(InstancePlayerReward::getPoints).summaryStatistics();
 		int maxPoints = points.getMax();
-		if (isSoloArena() && maxPoints - points.getMin() >= 1500)
-			return true;
-		return maxPoints >= capPoints;
+		int minPoints = points.getMin();
+		return maxPoints >= upperScoreCap || minPoints <= lowerScoreCap || maxPoints - minPoints >= maxScoreGap;
 	}
 
 	public int getTotalPoints() {
@@ -164,7 +165,8 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 	}
 
 	public boolean canRewarded() {
-		return instance.getMapId() == 300350000 || instance.getMapId() == 300360000 || instance.getMapId() == 300550000 || instance.getMapId() == 300450000;
+		return instance.getMapId() == 300350000 || instance.getMapId() == 300360000 || instance.getMapId() == 300550000
+			|| instance.getMapId() == 300450000;
 	}
 
 	public int getNpcBonusSkill(int npcId) {
@@ -207,6 +209,26 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 		} else {
 			return (int) (180000 * getRound() - (result - 120000));
 		}
+	}
+
+	public int getLowerScoreCap() {
+		return lowerScoreCap;
+	}
+
+	public void setLowerScoreCap(int lowerScoreCap) {
+		this.lowerScoreCap = lowerScoreCap;
+	}
+
+	public int getUpperScoreCap() {
+		return upperScoreCap;
+	}
+
+	public void setUpperScoreCap(int upperScoreCap) {
+		this.upperScoreCap = upperScoreCap;
+	}
+
+	public void setMaxScoreGap(int maxScoreGap) {
+		this.maxScoreGap = maxScoreGap;
 	}
 
 	public void setInstanceStartTime() {

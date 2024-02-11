@@ -37,7 +37,7 @@ public class InstancePlayerReward {
 		}
 	}
 
-	public void addPvPKillToPlayer() {
+	public void addPvPKill() {
 		playerPvPKills++;
 	}
 

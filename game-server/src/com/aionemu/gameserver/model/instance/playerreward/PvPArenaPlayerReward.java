@@ -75,7 +75,7 @@ public class PvPArenaPlayerReward extends InstancePlayerReward {
 	}
 
 	public int getTimeBonus() {
-		return timeBonus > 0 ? timeBonus : 0;
+		return Math.max(timeBonus, 0);
 	}
 
 	public void updateLogOutTime() {

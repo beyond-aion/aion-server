@@ -185,7 +185,7 @@ public class DredgionInstance extends GeneralInstanceHandler {
 	}
 
 	private void addPvPKillToPlayer(Player player) {
-		getPlayerReward(player).addPvPKillToPlayer();
+		getPlayerReward(player).addPvPKill();
 	}
 
 	private void addBalaurKillToPlayer(Player player) {

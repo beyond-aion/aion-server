@@ -229,7 +229,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 			} else {
 				if (shouldRewardPvpKill) {
 					instanceScore.incrementKillsByRace(race);
-					pReward.addPvPKillToPlayer();
+					pReward.addPvPKill();
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE_FOR_ENEMY(points));
 				} else if (npcL10n != null) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(npcL10n, points));

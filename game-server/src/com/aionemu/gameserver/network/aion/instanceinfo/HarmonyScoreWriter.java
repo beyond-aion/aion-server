@@ -91,8 +91,8 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 				}
 				break;
 			case UPDATE_INSTANCE_BUFFS_AND_SCORE:
-				writeD(buf, 0);
-				writeD(buf, instanceScore.getCapPoints()); // capPoints
+				writeD(buf, instanceScore.getLowerScoreCap());
+				writeD(buf, instanceScore.getUpperScoreCap()); // capPoints
 				writeD(buf, 3); // possible rounds
 				writeD(buf, 1);
 				writeD(buf, instanceScore.getBuffId());

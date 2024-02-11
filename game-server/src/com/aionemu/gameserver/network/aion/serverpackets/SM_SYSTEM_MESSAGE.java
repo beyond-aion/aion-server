@@ -25212,6 +25212,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Defeating a higher rank player in this round will result in additional points.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_INSTANCE_START_SCOREMOD() {
+		return new SM_SYSTEM_MESSAGE(1401203);
+	}
+
+	/**
 	 * You cannot mount while %0.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_CANT_RIDE(String l10n) {

@@ -5,7 +5,6 @@ import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -148,23 +147,16 @@ public class HarmonyTrainingGroundsInstance extends BasicHarmonyArenaInstance {
 		if (npc != null && npc.isSpawned()) {
 			npc.getController().deleteAndScheduleRespawn();
 			HarmonyGroupReward groupReward = instanceReward.getHarmonyGroupReward(player.getObjectId());
-			if (groupReward != null) {
-				groupReward.addPoints(100);
-				sendSystemMsg(player, npc, 100);
-				broadcastUpdate(player, InstanceScoreType.UPDATE_RANK);
-				broadcastUpdate(InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE);
-			}
+			updatePoints(groupReward, player, npc, 100);
 		}
 		return false;
 	}
 
 	protected Npc getNpc(float x, float y, float z) {
-		if (!isInstanceDestroyed) {
-			for (Npc npc : instance.getNpcs()) {
-				SpawnTemplate st = npc.getSpawn();
-				if (st.getX() == x && st.getY() == y && st.getZ() == z) {
-					return npc;
-				}
+		for (Npc npc : instance.getNpcs()) {
+			SpawnTemplate st = npc.getSpawn();
+			if (st.getX() == x && st.getY() == y && st.getZ() == z) {
+				return npc;
 			}
 		}
 		return null;

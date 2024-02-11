@@ -26,7 +26,7 @@ public abstract class ArenaScoreWriter extends InstanceScoreWriter<PvPArenaScore
 		writeD(buf, instanceScore.getBuffId()); // instance buff id
 		writeD(buf, 0); // unk
 		writeD(buf, instanceScore.getRound()); // round
-		writeD(buf, instanceScore.getCapPoints()); // cap points
+		writeD(buf, instanceScore.getUpperScoreCap()); // cap points
 		writeD(buf, 3); // possible rounds
 		writeD(buf, rewardTable ? 1 : 0); // possible reward table
 	}

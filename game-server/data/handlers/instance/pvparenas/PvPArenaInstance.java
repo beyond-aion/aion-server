@@ -55,7 +55,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		if (lastAttacker != null && lastAttacker != player) {
 			if (lastAttacker instanceof Player winner) {
 				PvPArenaPlayerReward reward = getPlayerReward(winner);
-				reward.addPvPKillToPlayer();
+				reward.addPvPKill();
 
 				// notify Kill-Quests
 				int worldId = winner.getWorldId();
@@ -99,7 +99,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 				sendSystemMsg(attacker, victim, rewardPoints);
 			}
 		}
-		if (instanceReward.hasCapPoints()) {
+		if (instanceReward.reachedScoreCap()) {
 			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 			reward();
 		}
@@ -249,14 +249,14 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 				ThreadPoolManager.getInstance().schedule(() -> {
 					// start round 2
 					if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-						instanceReward.setRound(2);
+						instanceReward.incrementRound();
 						instanceReward.setRndZone();
 						sendPacket();
 						changeZone();
 						ThreadPoolManager.getInstance().schedule(() -> {
 							// start round 3
 							if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-								instanceReward.setRound(3);
+								instanceReward.incrementRound();
 								instanceReward.setRndZone();
 								sendPacket(new SM_SYSTEM_MESSAGE(1401203));
 								sendPacket();
