@@ -26,7 +26,7 @@ public class _30211GroupTheRodandtheOrb extends AbstractQuestHandler {
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
-		final Player player = env.getPlayer();
+		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		int targetId = env.getTargetId();
@@ -49,7 +49,7 @@ public class _30211GroupTheRodandtheOrb extends AbstractQuestHandler {
 			switch (targetId) {
 				case 730275:
 					switch (dialogActionId) {
-						case SETPRO1: {
+						case SETPRO1, QUEST_SELECT -> {
 							removeQuestItem(env, 182209614, 1);
 							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
@@ -59,14 +59,11 @@ public class _30211GroupTheRodandtheOrb extends AbstractQuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798941) {
-				switch (dialogActionId) {
-					case USE_OBJECT:
-						return sendQuestDialog(env, 10002);
-					case SELECT_QUEST_REWARD:
-						return sendQuestDialog(env, 5);
-					default:
-						return sendQuestEndDialog(env);
-				}
+				return switch (dialogActionId) {
+					case USE_OBJECT -> sendQuestDialog(env, 10002);
+					case SELECT_QUEST_REWARD -> sendQuestDialog(env, 5);
+					default -> sendQuestEndDialog(env);
+				};
 			}
 		}
 		return false;

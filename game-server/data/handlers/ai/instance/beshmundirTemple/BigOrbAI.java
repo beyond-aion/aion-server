@@ -21,7 +21,7 @@ public class BigOrbAI extends NpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		if (!isSpawned(730276)) { // Portal isn't spawned
+		if (!isPortalSpawned()) { // Portal isn't spawned
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1011));
 		} else { // Portal is already spawned
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10));
@@ -34,10 +34,10 @@ public class BigOrbAI extends NpcAI {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			spawn(730276, 1604.6683f, 1606.5886f, 306.8665f, (byte) 90);
 		}
-		return true;
+		return false;
 	}
 
-	private boolean isSpawned(int npcId) {
-		return !getPosition().getWorldMapInstance().getNpcs(npcId).isEmpty();
+	private boolean isPortalSpawned() {
+		return !getPosition().getWorldMapInstance().getNpcs(730276).isEmpty();
 	}
 }
