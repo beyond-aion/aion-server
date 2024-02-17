@@ -3,6 +3,7 @@ package instance.pvparenas;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -18,18 +19,18 @@ public class ArenaOfHarmonyInstance extends HarmonyTrainingGroundsInstance {
 	}
 
 	@Override
-	protected BaseValuesPerPlayer getBaseValuesPerPlayer(int difficultyId) {
+	protected BaseRewards getBaseRewardsPerPlayer(int difficultyId) {
 		return switch (difficultyId) {
-			case 2 -> new BaseValuesPerPlayer(2200, 0, 0, 22);
-			case 3 -> new BaseValuesPerPlayer(3200, 0, 0, 34);
-			case 4 -> new BaseValuesPerPlayer(2500, 31, 0, 34);
-			default -> new BaseValuesPerPlayer(1200, 0, 0, 12);
+			case 2 -> new BaseRewards(2200, 0, 0, 22);
+			case 3 -> new BaseRewards(3200, 0, 0, 34);
+			case 4 -> new BaseRewards(2500, 31, 0, 34);
+			default -> new BaseRewards(1200, 0, 0, 12);
 		};
 	}
 
 	@Override
-	protected int getBaseAp(int difficultyId) {
-		return 200;
+	protected BaseRewards getBaseRewards(int difficultyId) {
+		return new BaseRewards(200, 0, 0, 0);
 	}
 
 	@Override
@@ -62,7 +63,8 @@ public class ArenaOfHarmonyInstance extends HarmonyTrainingGroundsInstance {
 
 	@Override
 	protected float getConfigRate(Player player) {
-		float[] rates = RatesConfig.PVP_ARENA_HARMONY_REWARD_RATES;
-		return rates != null && rates.length > 0 ? rates[0] : 1f;
+		if (player == null) // Happens during calculation for group rewards
+			return 1f;
+		return Rates.get(player, RatesConfig.PVP_ARENA_HARMONY_REWARD_RATES);
 	}
 }

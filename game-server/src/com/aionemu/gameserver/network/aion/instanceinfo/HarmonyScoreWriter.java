@@ -40,8 +40,10 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 				writeD(buf, instanceScore.getRound());
 				break;
 			case INIT_PLAYER:
-				if (harmonyGroupReward == null)
+				if (harmonyGroupReward == null) {
+					writeB(buf, new byte[64]);
 					return;
+				}
 
 				writeD(buf, harmonyGroupReward.getOwnerId());
 				writeS(buf, harmonyGroupReward.getAGPlayer(playerObjId).getName(), 52); // playerName
@@ -50,8 +52,10 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 				break;
 			case UPDATE_PLAYER_BUFF_STATUS:
 				PvPArenaPlayerReward reward = instanceScore.getPlayerReward(playerObjId);
-				if (reward == null)
+				if (reward == null) {
+					writeB(buf, new byte[16]);
 					return;
+				}
 
 				writeD(buf, reward.getRemainingTime()); // buffTime
 				writeD(buf, reward.hasBoostMorale() ? instanceScore.getBuffId() : 0); // Buff ID
@@ -59,15 +63,18 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 				writeD(buf, playerObjId); // memberObj
 				break;
 			case SHOW_REWARD:
-				if (harmonyGroupReward == null)
+				PvPArenaPlayerReward playerReward = instanceScore.getPlayerReward(playerObjId);
+				if (playerReward == null) {
+					writeB(buf, new byte[72]);
 					return;
+				}
 
-				writePoints(buf, harmonyGroupReward.getAp());
-				writePoints(buf, harmonyGroupReward.getGp());
-				writeReward(buf, harmonyGroupReward.getCourageInsignia());
-				writeReward(buf, harmonyGroupReward.getCrucibleInsignia());
-				writeSimpleReward(buf, harmonyGroupReward.getRewardItem1());
-				writeSimpleReward(buf, harmonyGroupReward.getRewardItem2());
+				writePoints(buf, playerReward.getAp());
+				writePoints(buf, playerReward.getGp());
+				writeReward(buf, playerReward.getCourageInsignia());
+				writeReward(buf, playerReward.getCrucibleInsignia());
+				writeSimpleReward(buf, playerReward.getRewardItem1());
+				writeSimpleReward(buf, playerReward.getRewardItem2());
 				break;
 			case UPDATE_INSTANCE_BUFFS_AND_SCORE:
 				writeD(buf, instanceScore.getLowerScoreCap());
@@ -105,8 +112,10 @@ public class HarmonyScoreWriter extends InstanceScoreWriter<HarmonyArenaScore> {
 				}
 				break;
 			case UPDATE_RANK:
-				if (harmonyGroupReward == null)
+				if (harmonyGroupReward == null) {
+					writeB(buf, new byte[13]);
 					return;
+				}
 
 				writeC(buf, instanceScore.getRank(harmonyGroupReward));
 				writeD(buf, harmonyGroupReward.getPvPKills()); // kills

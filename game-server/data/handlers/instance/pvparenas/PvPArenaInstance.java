@@ -9,6 +9,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -44,8 +45,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
-	private static final int START_DELAY = 20000; // 120000
-	private static final int ROUND_DURATION = 200000; // 180000
+	private static final int START_DELAY = 120000;
+	private static final int ROUND_DURATION = 180000;
 	protected static final float RANK_REWARD_RATE = 0.7f;
 	protected static final float SCORE_REWARD_RATE = 0.3f;
 
@@ -76,8 +77,6 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		instanceScore.setInstanceProgressionType(InstanceProgressionType.PREPARING);
 		instanceScore.setInstanceStartTime();
 		spawnRings();
-		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-		}, 3000, 3000);
 		instanceTask = ThreadPoolManager.getInstance().schedule(this::startInstance, START_DELAY);
 	}
 
@@ -120,7 +119,6 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		instance.forEachNpc(npc -> npc.getController().delete());
 		instanceScore.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
 		instanceTask = ThreadPoolManager.getInstance().schedule(() -> instance.forEachPlayer(this::leaveInstance), 60000);
-		ThreadPoolManager.getInstance().schedule(this::reviveAllPlayers, 5000); // Necessary delay, otherwise the resurrect pop-up will not close
 
 		calculateRewards();
 		reward();
@@ -430,13 +428,6 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		broadcastUpdate(player, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS);
 	}
 
-	private void reviveAllPlayers() {
-		instance.forEachPlayer(p -> {
-			if (p.isDead())
-				PlayerReviveService.duelRevive(p);
-		});
-	}
-
 	private void spawnRndRelics() {
 		if (instanceScore != null && !instanceScore.isRewarded())
 			spawn(Rnd.get(1, 2) == 1 ? 701187 : 701188, 1841.951f, 1733.968f, 300.242f, (byte) 0);
@@ -485,24 +476,12 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		return false;
 	}
 
-	protected BaseValuesPerPlayer getBaseValuesPerPlayer(int difficultyId) {
-		return new BaseValuesPerPlayer(0, 0, 0, 0);
+	protected BaseRewards getBaseRewardsPerPlayer(int difficultyId) {
+		return new BaseRewards(0, 0, 0, 0);
 	}
 
-	protected int getBaseAp(int difficultyId) {
-		return 0;
-	}
-
-	protected int getBaseGp(int difficultyId) {
-		return 0;
-	}
-
-	protected int getBaseCrucibleInsignia(int difficultyId) {
-		return 0;
-	}
-
-	protected int getBaseCourageInsignia(int difficultyId) {
-		return 0;
+	protected BaseRewards getBaseRewards(int difficultyId) {
+		return new BaseRewards(0, 0, 0, 0);
 	}
 
 	protected float getRewardRate(int rank, int difficultyId) {
@@ -518,13 +497,13 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 	protected void calculateRewards() {
 		int difficultyId = instanceScore.getDifficultyId();
-		BaseValuesPerPlayer baseValues = getBaseValuesPerPlayer(difficultyId);
+		BaseRewards baseValues = getBaseRewardsPerPlayer(difficultyId);
 
 		int playerCount = instanceScore.getPlayerRewards().size();
-		int totalAp = baseValues.getTotalAp(playerCount);
-		int totalGp = baseValues.getTotalGp(playerCount);
-		int totalCrucibleInsignia = baseValues.getTotalCrucibleInsignia(playerCount);
-		int totalCourageInsignia = baseValues.getTotalCourageInsignia(playerCount);
+		int totalAp = baseValues.ap() * playerCount;
+		int totalGp = baseValues.gp() * playerCount;
+		int totalCrucibleInsignia = baseValues.crucibleInsignia() * playerCount;
+		int totalCourageInsignia = baseValues.courageInsignia() * playerCount;
 
 		int rankAp = calcAndFloor(totalAp, RANK_REWARD_RATE);
 		int rankGp = calcAndFloor(totalGp, RANK_REWARD_RATE);
@@ -550,7 +529,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 			int score = reward.getScorePoints();
 			// Score Formula to verify: floor(scoreAp * winnerKills * winnerPoints / (winnerKills * winnerPoints + loserKills * loserPoints))
-			float scoreRate = (score / (float) totalPoints);
+			float scoreRate = score / (float) totalPoints;
 
 			int rank = instanceScore.getRank(reward);
 			if (instanceScore.getRound() == 1)
@@ -567,12 +546,13 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 			int scoreRewardCrucibleInsignia = calcAndFloor(scoreCrucibleInsignia, scoreRate, configRate);
 			int scoreRewardCourageInsignia = calcAndFloor(scoreCourageInsignia, scoreRate, configRate);
 
-			reward.setAp(new ArenaRewardItem(0, getBaseAp(difficultyId), rankRewardAp, scoreRewardAp));
-			reward.setGp(new ArenaRewardItem(0, getBaseGp(difficultyId), rankRewardGp, scoreRewardGp));
+			BaseRewards baseRewards = getBaseRewards(difficultyId);
+			reward.setAp(new ArenaRewardItem(0, baseRewards.ap(), rankRewardAp, scoreRewardAp));
+			reward.setGp(new ArenaRewardItem(0, baseRewards.gp(), rankRewardGp, scoreRewardGp));
 
-			ArenaRewardItem crucibleInsignia = new ArenaRewardItem(186000130, getBaseCrucibleInsignia(difficultyId), rankRewardCrucibleInsignia,
+			ArenaRewardItem crucibleInsignia = new ArenaRewardItem(186000130, baseRewards.crucibleInsignia(), rankRewardCrucibleInsignia,
 				scoreRewardCrucibleInsignia);
-			ArenaRewardItem courageInsignia = new ArenaRewardItem(186000137, getBaseCourageInsignia(difficultyId), rankRewardCourageInsignia,
+			ArenaRewardItem courageInsignia = new ArenaRewardItem(186000137, baseRewards.courageInsignia(), rankRewardCourageInsignia,
 				scoreRewardCourageInsignia);
 
 			if (crucibleInsignia.getTotalCount() > 0)
@@ -581,7 +561,41 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 				reward.setCourageInsignia(courageInsignia);
 
 			setRewardItems(reward, rank, difficultyId);
+
+			if (reward instanceof HarmonyGroupReward harmonyGroupReward) {
+				splitGroupRewards(harmonyGroupReward);
+			}
 		}
+	}
+
+	private void splitGroupRewards(HarmonyGroupReward groupReward) {
+		List<AGPlayer> associatedPlayers = groupReward.getAssociatedPlayers();
+		if (associatedPlayers.isEmpty())
+			return;
+
+		int size = associatedPlayers.size();
+
+		for (AGPlayer agPlayer : associatedPlayers) {
+			PvPArenaPlayerReward apr = instanceScore.getPlayerReward(agPlayer.getObjectId());
+			Player player = instance.getPlayer(agPlayer.getObjectId());
+			if (apr == null || player == null)
+				continue;
+
+			float configRate = getConfigRate(player);
+			apr.setAp(calculateIndividualReward(groupReward.getAp(), size, configRate));
+			apr.setGp(calculateIndividualReward(groupReward.getGp(), size, 1f));
+			apr.setCrucibleInsignia(calculateIndividualReward(groupReward.getCrucibleInsignia(), size, configRate));
+			apr.setCourageInsignia(calculateIndividualReward(groupReward.getCourageInsignia(), size, configRate));
+			apr.setRewardItem1(groupReward.getRewardItem1());
+			apr.setRewardItem2(groupReward.getRewardItem2());
+		}
+	}
+
+	private ArenaRewardItem calculateIndividualReward(ArenaRewardItem rewardItem, int size, float configRate) {
+		int baseCount = Math.round(rewardItem.baseCount() * configRate / size);
+		int rankingCount = Math.round(rewardItem.rankingCount() * configRate / size);
+		int scoreCount = Math.round(rewardItem.scoreCount() * configRate / size);
+		return new ArenaRewardItem(rewardItem.itemId(), baseCount, rankingCount, scoreCount);
 	}
 
 	private void reward() {
@@ -647,23 +661,6 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 	protected void sendPacket(Player receiver, InstanceScoreType scoreType) {
 	}
 
-	protected record BaseValuesPerPlayer(int apPerPlayer, int gpPerPlayer, int crucibleInsigniaPerPlayer, int courageInsigniaPerPlayer) {
-
-		public int getTotalAp(int playerCount) {
-			return apPerPlayer * playerCount;
-		}
-
-		public int getTotalGp(int playerCount) {
-			return gpPerPlayer * playerCount;
-		}
-
-		public int getTotalCrucibleInsignia(int playerCount) {
-			return crucibleInsigniaPerPlayer * playerCount;
-		}
-
-		public int getTotalCourageInsignia(int playerCount) {
-			return courageInsigniaPerPlayer * playerCount;
-		}
+	protected record BaseRewards(int ap, int gp, int crucibleInsignia, int courageInsignia) {
 	}
-
 }

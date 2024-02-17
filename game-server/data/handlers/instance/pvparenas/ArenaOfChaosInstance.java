@@ -19,27 +19,22 @@ public class ArenaOfChaosInstance extends ChaosTrainingGroundsInstance {
 	}
 
 	@Override
-	protected BaseValuesPerPlayer getBaseValuesPerPlayer(int difficultyId) {
+	protected BaseRewards getBaseRewardsPerPlayer(int difficultyId) {
 		// Extracted values from instant_dungeon_idarenapvp.xml (Retail Leak 4.6, also verified by different videos)
 		return switch (difficultyId) {
-			case 2 -> new BaseValuesPerPlayer(900, 0, 425, 50);
-			case 3 -> new BaseValuesPerPlayer(1100, 0, 655, 77);
-			case 4 -> new BaseValuesPerPlayer(1300, 31, 655, 77);
-			default -> new BaseValuesPerPlayer(700, 0, 310, 27);
+			case 2 -> new BaseRewards(900, 0, 425, 50);
+			case 3 -> new BaseRewards(1100, 0, 655, 77);
+			case 4 -> new BaseRewards(1300, 31, 655, 77);
+			default -> new BaseRewards(700, 0, 310, 27);
 		};
 	}
 
 	@Override
-	protected int getBaseAp(int difficultyId) {
-		return 200;
-	}
-
-	@Override
-	protected int getBaseCrucibleInsignia(int difficultyId) {
+	protected BaseRewards getBaseRewards(int difficultyId) {
 		return switch (difficultyId) {
-			case 1 -> 90;
-			case 2 -> 125;
-			default -> 195;
+			case 1 -> new BaseRewards(200, 0, 90, 0);
+			case 2 -> new BaseRewards(200, 0, 125, 0);
+			default -> new BaseRewards(200, 0, 195, 0);
 		};
 	}
 

@@ -49,7 +49,7 @@ public class ArenaOfGloryInstance extends PvPArenaInstance {
 	}
 
 	@Override
-	protected BaseValuesPerPlayer getBaseValuesPerPlayer(int difficultyId) {
+	protected BaseRewards getBaseRewardsPerPlayer(int difficultyId) {
 		// Extracted values from instant_dungeon_idarenapvp.xml (Retail Leak 4.6, also verified by different videos)
 		// Retail4.6, there are 4 difficultyIds - maybe they were removed
 		// 1 new BaseValuesPerPlayer(700, 0, 310, 27);
@@ -57,8 +57,8 @@ public class ArenaOfGloryInstance extends PvPArenaInstance {
 		// 3 new BaseValuesPerPlayer(1100, 0, 655, 77)
 		// 4 new BaseValuesPerPlayer(1300, 31, 655, 77);
 		return switch (difficultyId) {
-			case 2 -> new BaseValuesPerPlayer(1300, 31, 655, 77);
-			default -> new BaseValuesPerPlayer(1100, 0, 655, 77);
+			case 2 -> new BaseRewards(1300, 31, 655, 77);
+			default -> new BaseRewards(1100, 0, 655, 77);
 		};
 	}
 

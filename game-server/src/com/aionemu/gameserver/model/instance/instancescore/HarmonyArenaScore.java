@@ -7,7 +7,6 @@ import java.util.List;
 import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
-import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -72,7 +71,7 @@ public class HarmonyArenaScore extends PvPArenaScore {
 
 	@Override
 	public int getTotalPoints() {
-		return groups.stream().mapToInt(InstancePlayerReward::getPoints).sum();
+		return groups.stream().mapToInt(HarmonyGroupReward::getScorePoints).sum();
 	}
 
 	@Override
