@@ -110,7 +110,7 @@ public class DanuarMysticariumInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onExitInstance(Player player) {
+	public void leaveInstance(Player player) {
 		// remove keys
 		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}

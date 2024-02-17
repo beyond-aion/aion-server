@@ -581,7 +581,7 @@ public class TheShugoEmperorsVault extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onExitInstance(Player player) {
+	public void leaveInstance(Player player) {
 		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 }

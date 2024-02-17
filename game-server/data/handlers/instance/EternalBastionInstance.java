@@ -848,7 +848,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onExitInstance(Player player) {
+	public void leaveInstance(Player player) {
 		if (instanceReward.getInstanceProgressionType() == InstanceProgressionType.END_PROGRESS)
 			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}

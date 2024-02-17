@@ -36,6 +36,8 @@ public interface InstanceHandler {
 
 	void onEnterInstance(Player player);
 
+	void leaveInstance(Player player);
+
 	void onLeaveInstance(Player player);
 
 	void onOpenDoor(int door);
@@ -47,8 +49,6 @@ public interface InstanceHandler {
 	void onPlayMovieEnd(Player player, int movieId);
 
 	boolean onReviveEvent(Player player);
-
-	void onExitInstance(Player player);
 
 	void doReward(Player player);
 

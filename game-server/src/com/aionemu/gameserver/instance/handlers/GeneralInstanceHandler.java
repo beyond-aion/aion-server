@@ -59,6 +59,10 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
+	public void leaveInstance(Player player) {
+	}
+
+	@Override
 	public void onLeaveInstance(Player player) {
 	}
 
@@ -127,10 +131,6 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
-	public void onExitInstance(Player player) {
-	}
-
-	@Override
 	public void doReward(Player player) {
 	}
 
@@ -157,8 +157,8 @@ public class GeneralInstanceHandler implements InstanceHandler {
 
 	public void logNpcWithReason(Npc npc, String reason) {
 		if (!instance.getPlayersInside().isEmpty()) {
-			log.info("[{}] {} (ID:{}) {} Player(s) in instance: {}", DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getName(), npc.getName(), npc.getNpcId(),
-				reason,
+			log.info("[{}] {} (ID:{}) {} Player(s) in instance: {}", DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getName(), npc.getName(),
+				npc.getNpcId(), reason,
 				instance.getPlayersInside().stream().map(p -> String.format("%s (ID:%d)", p.getName(), p.getObjectId())).collect(Collectors.joining(", ")));
 		}
 	}

@@ -82,7 +82,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 		instance.forEachPlayer(p -> setAndDistributeRewards(p, instanceScore.getPlayerReward(p.getObjectId()), winningRace, isBossKilled));
 		instance.forEachNpc(npc -> npc.getController().delete());
 		tasks.add(ThreadPoolManager.getInstance().schedule(() -> instance.getPlayersInside().forEach(this::revivePlayerOnEnd), 10000));
-		tasks.add(ThreadPoolManager.getInstance().schedule(() -> instance.getPlayersInside().forEach(this::onExitInstance), 60000));
+		tasks.add(ThreadPoolManager.getInstance().schedule(() -> instance.getPlayersInside().forEach(this::leaveInstance), 60000));
 	}
 
 	protected void setAndDistributeRewards(Player player, PvpInstancePlayerReward reward, Race winningRace, boolean isBossKilled) {
@@ -109,11 +109,20 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onExitInstance(Player player) {
+	public void leaveInstance(Player player) {
 		if (player.getPosition().getMapId() != mapId) // Check if player has not already left
 			return;
 
 		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
+		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
+			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));
+	}
+
+	@Override
+	public void onLeaveInstance(Player player) {
+		PvpInstancePlayerReward reward = instanceScore.getPlayerReward(player.getObjectId());
+		if (reward != null)
+			instanceScore.removePlayerReward(reward);
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));
 	}
@@ -172,15 +181,6 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.INIT_PLAYER, player.getObjectId(), 0), getTime()));
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS, player.getObjectId(), 0), getTime()));
-	}
-
-	@Override
-	public void onLeaveInstance(Player player) {
-		PvpInstancePlayerReward reward = instanceScore.getPlayerReward(player.getObjectId());
-		if (reward != null)
-			instanceScore.removePlayerReward(reward);
-		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));
 	}
 
 	@Override

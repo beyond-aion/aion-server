@@ -113,7 +113,7 @@ public class DredgionInstance extends GeneralInstanceHandler {
 		instance.forEachPlayer(p -> doReward(p, getPlayerReward(p), winnerRace));
 		instance.forEachNpc(npc -> npc.getController().delete());
 		ThreadPoolManager.getInstance().schedule(() -> instance.getPlayersInside().forEach(this::revivePlayerOnEnd), 10000);
-		ThreadPoolManager.getInstance().schedule(() -> instance.getPlayersInside().forEach(this::onExitInstance), 60000);
+		ThreadPoolManager.getInstance().schedule(() -> instance.getPlayersInside().forEach(this::leaveInstance), 60000);
 		sendPacket();
 	}
 
@@ -327,7 +327,7 @@ public class DredgionInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onExitInstance(Player player) {
+	public void leaveInstance(Player player) {
 		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 

@@ -79,7 +79,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 				moveToReadyRoom(player); // send player to team and wait for end of the stage
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ENTERED_BIRTHAREA_IDARENA());
 			} else if (playerReward.isPlayerLeave()) {
-				onExitInstance(player);
+				leaveInstance(player);
 				return;
 			} else if (playerReward.isRewarded()) {
 				doReward(player);
@@ -105,7 +105,9 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 
 	private void setStage(StageType type, final int time) {
 		this.stageType = type;
-		ThreadPoolManager.getInstance().schedule(() -> instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, type.getId(), type.getType()))), time);
+		ThreadPoolManager.getInstance().schedule(
+			() -> instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_STAGE_INFO(2, type.getId(), type.getType()))),
+			time);
 	}
 
 	@Override
@@ -1187,16 +1189,16 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	@Override
+	public void leaveInstance(Player player) {
+		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
+	}
+
+	@Override
 	public void onLeaveInstance(Player player) {
 		CruciblePlayerReward reward = getPlayerReward(player.getObjectId());
 		if (reward != null) {
 			reward.setPlayerLeave();
 		}
-	}
-
-	@Override
-	public void onExitInstance(Player player) {
-		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
 	@Override

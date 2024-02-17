@@ -119,7 +119,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 	private void endInstance() {
 		instance.forEachNpc(npc -> npc.getController().delete());
 		instanceScore.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
-		instanceTask = ThreadPoolManager.getInstance().schedule(() -> instance.forEachPlayer(this::onExitInstance), 60000);
+		instanceTask = ThreadPoolManager.getInstance().schedule(() -> instance.forEachPlayer(this::leaveInstance), 60000);
 		ThreadPoolManager.getInstance().schedule(this::reviveAllPlayers, 5000); // Necessary delay, otherwise the resurrect pop-up will not close
 
 		calculateRewards();
@@ -364,12 +364,6 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		getPlayerSpecificReward(player).updateLogOutTime();
 	}
 
-	@Override
-	public void onExitInstance(Player player) {
-		if (player.getWorldMapInstance().equals(instance))
-			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
-	}
-
 	private void clearDebuffs(Player player) {
 		for (Effect ef : player.getEffectController().getAbnormalEffects()) {
 			switch (ef.getSkillTemplate().getDispelCategory()) {
@@ -392,6 +386,12 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		player.getGameStats().updateStatsAndSpeedVisually();
 		instanceScore.portToPosition(player);
 		return true;
+	}
+
+	@Override
+	public void leaveInstance(Player player) {
+		if (player.getWorldMapInstance().equals(instance))
+			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
 	@Override

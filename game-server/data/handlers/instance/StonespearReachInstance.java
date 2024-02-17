@@ -878,7 +878,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	@Override
-	public void onExitInstance(Player player) {
+	public void leaveInstance(Player player) {
 		if (instanceLegion != null) {
 			switch (instanceLegion.getCurrentLegionDominion()) {
 				case 1:

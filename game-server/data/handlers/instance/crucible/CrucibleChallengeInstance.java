@@ -457,7 +457,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	@Override
-	public void onExitInstance(Player player) {
+	public void leaveInstance(Player player) {
 		InstanceService.destroyInstance(player.getPosition().getWorldMapInstance());
 	}
 

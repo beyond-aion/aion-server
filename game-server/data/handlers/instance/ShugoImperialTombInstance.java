@@ -43,11 +43,6 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 		super(instance);
 	}
 
-	@Override
-	public void onExitInstance(Player player) {
-		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
-	}
-
 	protected List<Npc> getNpcs(int npcId) {
 		if (!isInstanceDestroyed) {
 			return instance.getNpcs(npcId);
@@ -1167,6 +1162,11 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 		if (!isInstanceDestroyed) {
 			spawn(npcId, x, y, z, h);
 		}
+	}
+
+	@Override
+	public void leaveInstance(Player player) {
+		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
 	@Override
