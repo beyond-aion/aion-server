@@ -39,9 +39,7 @@ public class EternalBastionSnareTurretAI extends EternalBastionAggressiveNpcAI {
 	protected void handleCreatureAggro(Creature creature) {
 		super.handleCreatureAggro(creature);
 		if (isSkillDisabled.compareAndSet(false, true)) {
-				System.out.println("Hello");
-				//SkillEngine.getInstance().applyEffectDirectly(21116, getOwner(), creature);
-				SkillEngine.getInstance().getSkill(getOwner(), 21116, 65, creature).useNoAnimationSkill(); // Magnetic Pull
+			SkillEngine.getInstance().getSkill(getOwner(), 21116, 65, creature).useNoAnimationSkill(); // Magnetic Pull
 		}
 	}
 

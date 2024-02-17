@@ -2,19 +2,29 @@ package instance.pvparenas;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
+import java.util.List;
+import java.util.concurrent.Future;
+
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
+import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
+import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.model.instance.instancescore.PvPArenaScore;
+import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
+import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
+import com.aionemu.gameserver.model.templates.rewards.ArenaRewardItem;
+import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -24,129 +34,208 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.skillengine.model.DispelCategoryType;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author xTz
+ * @author xTz, Estrayl
  */
 public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
-	private boolean isInstanceDestroyed;
-	protected PvPArenaScore instanceReward;
-	protected int killBonus;
-	protected int deathFine;
+	private static final int START_DELAY = 20000; // 120000
+	private static final int ROUND_DURATION = 200000; // 180000
+	protected static final float RANK_REWARD_RATE = 0.7f;
+	protected static final float SCORE_REWARD_RATE = 0.3f;
+
+	protected int pointsPerKill = 800;
+	protected int pointsPerDeath = -150;
+
+	protected PvPArenaScore instanceScore;
+	private Future<?> instanceTask;
 
 	public PvPArenaInstance(WorldMapInstance instance) {
 		super(instance);
 	}
 
+	protected PvPArenaScore createNewArenaScore() {
+		return new PvPArenaScore(instance);
+	}
+
+	protected void setScoreCaps() {
+		instanceScore.setLowerScoreCap(7000);
+		instanceScore.setUpperScoreCap(50000);
+		instanceScore.setMaxScoreGap(43000);
+	}
+
 	@Override
-	public boolean onDie(Player player, Creature lastAttacker) {
-		PvPArenaPlayerReward ownerReward = getPlayerReward(player);
-		ownerReward.endBoostMoraleEffect(player);
-		ownerReward.applyBoostMoraleEffect(player);
-		sendPacket();
-		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
+	public void onInstanceCreate() {
+		instanceScore = createNewArenaScore();
+		setScoreCaps();
+		instanceScore.setInstanceProgressionType(InstanceProgressionType.PREPARING);
+		instanceScore.setInstanceStartTime();
+		spawnRings();
+		ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+		}, 3000, 3000);
+		instanceTask = ThreadPoolManager.getInstance().schedule(this::startInstance, START_DELAY);
+	}
 
-		if (lastAttacker != null && lastAttacker != player) {
-			if (lastAttacker instanceof Player winner) {
-				PvPArenaPlayerReward reward = getPlayerReward(winner);
-				reward.addPvPKill();
+	private void startInstance() {
+		if (instanceScore.isRewarded())
+			return;
 
-				// notify Kill-Quests
-				int worldId = winner.getWorldId();
-				QuestEngine.getInstance().onKillInWorld(new QuestEnv(player, winner, 0), worldId);
-			}
+		if (!canStart()) {
+			endInstance();
+			return;
 		}
 
-		updatePoints(player);
+		instance.forEachDoor(door -> door.setOpen(true));
+		instanceScore.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
+		broadcastUpdate(InstanceScoreType.UPDATE_INSTANCE_PROGRESS);
 
+		instanceTask = ThreadPoolManager.getInstance().schedule(this::startNextRound, ROUND_DURATION);
+	}
+
+	private void startNextRound() {
+		if (instanceScore.isRewarded())
+			return;
+		if (isFinalRound()) {
+			endInstance();
+			return;
+		}
+
+		instanceScore.incrementRound();
+		instanceScore.setRndZone();
+		broadcastUpdate(InstanceScoreType.UPDATE_INSTANCE_PROGRESS);
+		changeZone();
+
+		if (isFinalRound())
+			sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_START_SCOREMOD());
+
+		instanceTask = ThreadPoolManager.getInstance().schedule(this::startNextRound, ROUND_DURATION);
+	}
+
+	private void endInstance() {
+		instance.forEachNpc(npc -> npc.getController().delete());
+		instanceScore.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
+		instanceTask = ThreadPoolManager.getInstance().schedule(() -> instance.forEachPlayer(this::onExitInstance), 60000);
+		ThreadPoolManager.getInstance().schedule(this::reviveAllPlayers, 5000); // Necessary delay, otherwise the resurrect pop-up will not close
+
+		calculateRewards();
+		reward();
+		broadcastResults();
+	}
+
+	@Override
+	public boolean onDie(Player victim, Creature lastAttacker) {
+		PacketSendUtility.sendPacket(victim, new SM_DIE(false, false, 0, 8));
+
+		PvPArenaPlayerReward victimReward = getStatReward(victim);
+		PvPArenaPlayerReward winnerReward = null;
+		if (lastAttacker != victim && lastAttacker instanceof Player winner) {
+			winnerReward = getStatReward(winner);
+			winnerReward.addPvPKill();
+			QuestEngine.getInstance().onKillInWorld(new QuestEnv(victim, winner, 0), winner.getWorldId()); // Notify Kill-Quests
+		}
+		calculateAndUpdatePoints(victim, Math.round(pointsPerKill * getRunnerUpScoreMod(victimReward, winnerReward)));
+		updatePoints(victimReward, victim, lastAttacker, pointsPerDeath, false); // Update victim points after rewarding the winner
+		applyMoraleBoost(victim);
 		return true;
-	}
-
-	private void updatePoints(Creature victim) {
-
-		if (!instanceReward.isStartProgress()) {
-			return;
-		}
-
-		int bonus;
-		// Decrease victim points
-		if (victim instanceof Player player) {
-			PvPArenaPlayerReward victimFine = getPlayerReward(player);
-			victimFine.addPoints(deathFine);
-			bonus = killBonus;
-			if (instanceReward.getRound() == 3 && instanceReward.getRank(victimFine.getPoints()) == 0)
-				bonus *= 3;
-		} else
-			bonus = getNpcBonus(((Npc) victim).getNpcId());
-
-		if (bonus == 0)
-			return;
-
-		int totalDamage = victim.getAggroList().getTotalDamage();
-		// Reward all damagers
-		for (AggroInfo aggroInfo : victim.getAggroList().getFinalDamageList(false)) {
-			if (aggroInfo.getDamage() == 0) // e.g. when victim got killed by lava, but attacker only debuffed him without dealing damage
-				continue;
-			if (aggroInfo.getAttacker() instanceof Creature creature && creature.getMaster() instanceof Player attacker) {
-				int rewardPoints = bonus * aggroInfo.getDamage() / totalDamage;
-				getPlayerReward(attacker).addPoints(rewardPoints);
-				sendSystemMsg(attacker, victim, rewardPoints);
-			}
-		}
-		if (instanceReward.reachedScoreCap()) {
-			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
-			reward();
-		}
-		sendPacket();
-	}
-
-	protected void sendSystemMsg(Player player, Creature creature, int rewardPoints) {
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(creature.getObjectTemplate().getL10n(), rewardPoints));
 	}
 
 	@Override
 	public void onDie(Npc npc) {
-		if (npc.getAggroList().getMostPlayerDamage() == null) {
+		int npcId = npc.getNpcId();
+		if (npcId == 701187 || npcId == 701188)
+			ThreadPoolManager.getInstance().schedule(this::spawnRndRelics, 30000);
+
+		int points = getPoints(npcId);
+		if (points == 0)
 			return;
-		}
-		updatePoints(npc);
-		final int npcId = npc.getNpcId();
-		if (npcId == 701187 || npcId == 701188) {
-			spawnRndRelics(30000);
+
+		calculateAndUpdatePoints(npc, points);
+	}
+
+	private void calculateAndUpdatePoints(Creature victim, int points) {
+		if (!instanceScore.isStartProgress())
+			return;
+
+		int totalDamage = victim.getAggroList().getTotalDamage();
+		for (AggroInfo aggroInfo : victim.getAggroList().getFinalDamageList(shouldMergeGroupDamage())) {
+			if (aggroInfo.getDamage() == 0)
+				continue;
+			int rewardPoints = points * aggroInfo.getDamage() / totalDamage;
+			if (aggroInfo.getAttacker() instanceof Creature && ((Creature) aggroInfo.getAttacker()).getMaster() instanceof Player attacker) {
+				updatePoints(getStatReward(attacker), attacker, victim, rewardPoints);
+			} else if (aggroInfo.getAttacker() instanceof TemporaryPlayerTeam<?> team) {
+				Player leader = team.getLeaderObject();
+				updatePoints(getStatReward(leader), leader, victim, rewardPoints);
+				team.getOnlineMembers().stream().filter(p -> !p.equals(leader)).forEach(p -> sendSystemMsg(p, victim, rewardPoints));
+			}
 		}
 	}
 
 	@Override
-	public void onEnterInstance(Player player) {
-		int objectId = player.getObjectId();
-		if (instanceReward.regPlayerReward(player)) {
-			getPlayerReward(player).applyBoostMoraleEffect(player);
-			instanceReward.setRndPosition(objectId);
-		} else {
-			instanceReward.portToPosition(player);
+	public void handleUseItemFinish(Player player, Npc npc) {
+		PvPArenaPlayerReward arenaReward = getStatReward(player);
+		if (!instanceScore.isStartProgress() || arenaReward == null)
+			return;
+
+		int rewardPoints = getPoints(npc.getNpcId());
+		int skill = instanceScore.getNpcBonusSkill(npc.getNpcId());
+		if (skill != 0)
+			useSkill(npc, player, skill >> 8, skill & 0xFF);
+
+		updatePoints(arenaReward, player, npc, rewardPoints);
+	}
+
+	protected void updatePoints(PvPArenaPlayerReward receiver, Player player, VisibleObject victim, int rewardPoints) {
+		updatePoints(receiver, player, victim, rewardPoints, true);
+	}
+
+	protected void updatePoints(PvPArenaPlayerReward receiver, Player player, VisibleObject victim, int rewardPoints, boolean broadcastPackets) {
+		if (receiver == null)
+			return;
+
+		receiver.addPoints(rewardPoints, instanceScore);
+
+		if (broadcastPackets) {
+			broadcastUpdate(InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE);
+			broadcastUpdate(player, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS);
 		}
-		sendPacket();
+		sendSystemMsg(player, victim, rewardPoints);
+
+		if (instanceScore.reachedScoreGap())
+			endInstance();
 	}
 
-	private void sendPacket(AionServerPacket packet) {
-		PacketSendUtility.broadcastToMap(instance, packet);
+	protected boolean isFinalRound() {
+		return instanceScore.getRound() == 3;
 	}
 
-	private void spawnRndRelics(int time) {
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-				spawn(Rnd.get(1, 2) == 1 ? 701187 : 701188, 1841.951f, 1733.968f, 300.242f, (byte) 0);
-			}
-		}, time);
+	protected void sendSystemMsg(Player player, VisibleObject creature, int rewardPoints) {
+		if (rewardPoints <= 0) // Checked with retail, only net gain is sent as msg
+			return;
+		if (creature instanceof Player)
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE_FOR_ENEMY(rewardPoints));
+		else
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(creature.getObjectTemplate().getL10n(), rewardPoints));
 	}
 
-	private int getNpcBonus(int npcId) {
+	private int calcAndFloor(int number, float rate) {
+		return (int) (number * rate);
+	}
+
+	private int calcAndFloor(int number, float rate, float configRate) {
+		return (int) (number * rate * configRate);
+	}
+
+	protected List<PvPArenaPlayerReward> getArenaRewards() {
+		return instanceScore.getPlayerRewards();
+	}
+
+	private int getPoints(int npcId) {
 		switch (npcId) {
 			case 701187: // Blessed Relics
 			case 701188: // Cursed Relics
@@ -162,16 +251,17 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 			case 218695: // MuMu Rake Gatherer
 			case 218708: // MuMu Rake Gatherer
 				return 1250;
-			case 218685: // Casus Manor Guard
-			case 218698: // Casus Manor Guard
-			case 218711: // Casus Manor Guard
-			case 218687: // Casus Manor Maid
-			case 218700: // Casus Manor Maid
-			case 218713: // Casus Manor Maid
-			case 218686: // Casus Manor Maidservant
-			case 218699: // Casus Manor Maidservant
-			case 218712: // Casus Manor Maidservant
-				return 250;
+			case 701181: // Cursed Relics
+			case 701195: // Cursed Relics
+			case 701209: // Cursed Relics
+			case 218689: // Casus Manor Noble
+			case 218702: // Casus Manor Noble
+			case 218715: // Casus Manor Noble
+				return 750;
+			case 218701: // Casus Manor Butler
+			case 218688: // Casus Manor Butler
+			case 218714: // Casus Manor Butler
+				return 650;
 			case 701172: // Plaza Flame Thrower
 			case 701171: // Plaza Flame Thrower
 			case 701170: // Plaza Flame Thrower
@@ -183,17 +273,29 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 			case 701318: // Blessed Relics
 			case 701319: // Blessed Relics
 				return 500;
-			case 218701: // Casus Manor Butler
-			case 218688: // Casus Manor Butler
-			case 218714: // Casus Manor Butler
-				return 650;
-			case 701181: // Cursed Relics
-			case 701195: // Cursed Relics
-			case 701209: // Cursed Relics
-			case 218689: // Casus Manor Noble
-			case 218702: // Casus Manor Noble
-			case 218715: // Casus Manor Noble
-				return 750;
+			case 207102: // Recovery Relics
+			case 207116: // 1st Floor Stunner
+			case 219277: // Roaming Volcanic Petrahulk Lv 50
+			case 219278: // Roaming Volcanic Petrahulk Lv 55
+			case 219279: // Roaming Volcanic Petrahulk Lv 60
+			case 219481: // Volcanic Heart Crystal Lv 50
+			case 219485: // Volcanic Heart Crystal Lv 55
+			case 219486: // Volcanic Heart Crystal Lv 60
+			case 219648: // Roaming Volcanic Petrahulk Lv 65
+			case 219652: // Volcanic Heart Crystal Lv 65
+				return 400;
+			case 218685: // Casus Manor Guard
+			case 218698: // Casus Manor Guard
+			case 218711: // Casus Manor Guard
+			case 218687: // Casus Manor Maid
+			case 218700: // Casus Manor Maid
+			case 218713: // Casus Manor Maid
+			case 218686: // Casus Manor Maidservant
+			case 218699: // Casus Manor Maidservant
+			case 218712: // Casus Manor Maidservant
+				return 250;
+			case 207099: // 2nd Floor Bomb
+				return 200;
 			case 218683: // Black Claw Scratcher
 			case 218696: // Black Claw Scratcher
 			case 218709: // Black Claw Scratcher
@@ -203,6 +305,10 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 			case 218693: // Red Sand Tog
 			case 218706: // Red Sand Tog
 			case 218719: // Red Sand Tog
+			case 219280: // Heated Negotiator Grangvolkan Lv 50
+			case 219281: // Heated Negotiator Grangvolkan Lv 55
+			case 219282: // Heated Negotiator Grangvolkan Lv 60
+			case 219649: // Heated Negotiator Grangvolkan Lv 65
 			case 233058: // Red Sand Tog
 			case 701215: // Blesed Relic
 			case 701220: // Blesed Relic
@@ -211,91 +317,72 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 			case 701221: // Blesed Relic
 			case 701226: // Blesed Relic
 				return 100;
+			case 219283: // Lurking Fangwing Lv 50
+			case 219284: // Lurking Fangwing Lv 55
+			case 219285: // Lurking Fangwing Lv 60
+			case 219650: // Lurking Fangwing Lv 65
+			case 219328: // Plaza Wall
+				return 50;
 			default:
 				return 0;
 		}
 	}
 
-	@Override
-	public InstanceScore<?> getInstanceScore() {
-		return instanceReward;
+	private void changeZone() {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			for (Player player : instance.getPlayersInside()) {
+				if (player.isDead()) {
+					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
+					PlayerReviveService.revive(player, 100, 100, false, 0);
+					player.getGameStats().updateStatsAndSpeedVisually();
+				}
+				instanceScore.portToPosition(player);
+				broadcastUpdate(player, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS);
+			}
+		}, 1000);
 	}
 
 	@Override
-	public void onPlayerLogOut(Player player) {
-		getPlayerReward(player).updateLogOutTime();
+	public void onEnterInstance(Player player) {
+		int objectId = player.getObjectId();
+		if (instanceScore.regPlayerReward(player)) {
+			instanceScore.setRndPosition(objectId);
+		} else {
+			instanceScore.portToPosition(player);
+		}
+		sendEntryPacket(player);
 	}
 
 	@Override
 	public void onPlayerLogin(Player player) {
-		getPlayerReward(player).updateBonusTime();
+		getPlayerSpecificReward(player).updateBonusTime();
+		sendEntryPacket(player);
 	}
 
 	@Override
-	public void onInstanceCreate() {
-		instanceReward = new PvPArenaScore(instance);
-		instanceReward.setInstanceProgressionType(InstanceProgressionType.PREPARING);
-		spawnRings();
-		if (!instanceReward.isSoloArena()) {
-			spawnRndRelics(0);
-		}
-		instanceReward.setInstanceStartTime();
-		ThreadPoolManager.getInstance().schedule(() -> {
-			// start round 1
-			if (!isInstanceDestroyed && !instanceReward.isRewarded() && canStart()) {
-				instance.forEachDoor(door -> door.setOpen(true));
-				sendPacket(new SM_SYSTEM_MESSAGE(1401058));
-				instanceReward.setInstanceProgressionType(InstanceProgressionType.START_PROGRESS);
-				sendPacket();
-				ThreadPoolManager.getInstance().schedule(() -> {
-					// start round 2
-					if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-						instanceReward.incrementRound();
-						instanceReward.setRndZone();
-						sendPacket();
-						changeZone();
-						ThreadPoolManager.getInstance().schedule(() -> {
-							// start round 3
-							if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-								instanceReward.incrementRound();
-								instanceReward.setRndZone();
-								sendPacket(new SM_SYSTEM_MESSAGE(1401203));
-								sendPacket();
-								changeZone();
-								ThreadPoolManager.getInstance().schedule(() -> {
-									// end
-									if (!isInstanceDestroyed && !instanceReward.isRewarded()) {
-										instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
-										reward();
-										sendPacket();
-									}
-								}, 180000);
-							}
-						}, 180000);
-					}
-				}, 180000);
-			}
-		}, 120000);
-	}
-
-	private boolean canStart() {
-		if (instance.getPlayersInside().size() < 2) {
-			sendPacket(new SM_SYSTEM_MESSAGE(1401303));
-			instanceReward.setInstanceProgressionType(InstanceProgressionType.END_PROGRESS);
-			reward();
-			sendPacket();
-			return false;
-		}
-		return true;
+	public void onPlayerLogOut(Player player) {
+		getPlayerSpecificReward(player).updateLogOutTime();
 	}
 
 	@Override
 	public void onExitInstance(Player player) {
-		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
+		if (player.getWorldMapInstance().equals(instance))
+			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
-	protected PvPArenaPlayerReward getPlayerReward(Player player) {
-		return instanceReward.getPlayerReward(player.getObjectId());
+	private void clearDebuffs(Player player) {
+		for (Effect ef : player.getEffectController().getAbnormalEffects()) {
+			switch (ef.getSkillTemplate().getDispelCategory()) {
+				case DEBUFF, DEBUFF_MENTAL, DEBUFF_PHYSICAL, ALL -> {
+					ef.endEffect();
+					player.getEffectController().clearEffect(ef);
+				}
+			}
+		}
+	}
+
+	protected void useSkill(Npc npc, Player player, int skillId, int level) {
+		SkillEngine.getInstance().getSkill(npc, skillId, level, player).useNoAnimationSkill();
 	}
 
 	@Override
@@ -303,143 +390,280 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		PacketSendUtility.sendPacket(player, STR_REBIRTH_MASSAGE_ME());
 		PlayerReviveService.revive(player, 100, 100, false, 0);
 		player.getGameStats().updateStatsAndSpeedVisually();
-		if (!isInstanceDestroyed) {
-			instanceReward.portToPosition(player);
-		}
+		instanceScore.portToPosition(player);
 		return true;
 	}
 
 	@Override
 	public void onLeaveInstance(Player player) {
 		clearDebuffs(player);
-		PvPArenaPlayerReward playerReward = getPlayerReward(player);
+		PvPArenaPlayerReward playerReward = getPlayerSpecificReward(player);
 		if (playerReward != null) {
-			playerReward.endBoostMoraleEffect(player);
-			instanceReward.clearPosition(playerReward.getPosition(), Boolean.FALSE);
-			instanceReward.removePlayerReward(playerReward);
+			endMoraleBoost(player);
+			instanceScore.clearPosition(playerReward.getPosition(), Boolean.FALSE);
+			instanceScore.removePlayerReward(playerReward);
+			broadcastUpdate(InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE);
 		}
 	}
-
-	private void clearDebuffs(Player player) {
-		for (Effect ef : player.getEffectController().getAbnormalEffects()) {
-			DispelCategoryType category = ef.getSkillTemplate().getDispelCategory();
-			if (category == DispelCategoryType.DEBUFF || category == DispelCategoryType.DEBUFF_MENTAL || category == DispelCategoryType.DEBUFF_PHYSICAL
-				|| category == DispelCategoryType.ALL) {
-				ef.endEffect();
-				player.getEffectController().clearEffect(ef);
-			}
-		}
-	}
-
-	protected abstract void sendPacket();
 
 	@Override
 	public void onInstanceDestroy() {
-		isInstanceDestroyed = true;
-		instanceReward.clear();
+		instanceScore.clear();
+		if (instanceTask != null && !instanceTask.isCancelled())
+			instanceTask.cancel(true);
 	}
 
-	private void changeZone() {
-		ThreadPoolManager.getInstance().schedule(() -> {
-			for (Player player : instance.getPlayersInside()) {
-				instanceReward.portToPosition(player);
-			}
-			sendPacket();
-		}, 1000);
+	private void applyMoraleBoost(Player player) {
+		PvPArenaPlayerReward reward = getPlayerSpecificReward(player);
+		if (reward == null)
+			return;
+
+		reward.applyBoostMoraleEffect(player, getBoostMoraleEffectDuration(instanceScore.getRank(reward)));
+		broadcastUpdate(player, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS);
 	}
 
-	protected void reward() {
-		for (Player player : instance.getPlayersInside()) {
-			if (player.isDead())
-				PlayerReviveService.duelRevive(player);
-			PvPArenaPlayerReward reward = getPlayerReward(player);
-			if (!reward.isRewarded()) {
-				reward.setRewarded();
-				AbyssPointsService.addAp(player, reward.getBasicAP() + reward.getRankingAP() + reward.getScoreAP());
-				int gpToAdd = reward.getBasicGP() + reward.getRankingGP() + reward.getScoreGP();
-				if (gpToAdd > 0)
-					GloryPointsService.increaseGpBy(player.getObjectId(), gpToAdd, false, true); // already added arena rates
-				int courage = reward.getBasicCourage() + reward.getRankingCourage() + reward.getScoreCourage();
-				if (courage != 0) {
-					ItemService.addItem(player, 186000137, courage);
-				}
-				int crucible = reward.getBasicCrucible() + reward.getRankingCrucible() + reward.getScoreCrucible();
-				if (crucible != 0) {
-					ItemService.addItem(player, 186000130, crucible);
-				}
-				int opportunity = reward.getOpportunity();
-				if (opportunity != 0) {
-					ItemService.addItem(player, 186000165, opportunity);
-				}
-				int gloryTicket = reward.getGloryTicket();
-				if (gloryTicket != 0) {
-					ItemService.addItem(player, 186000185, gloryTicket);
-				}
-				int ceraniumMedal = reward.getCeramiumMedal();
-				if (ceraniumMedal != 0) {
-					ItemService.addItem(player, 186000242, ceraniumMedal);
-				}
-				int mithrilMedal = reward.getMithrilMedal();
-				if (mithrilMedal != 0) {
-					ItemService.addItem(player, 186000147, mithrilMedal);
-				}
-				int platinumMedal = reward.getPlatinumMedal();
-				if (platinumMedal != 0) {
-					ItemService.addItem(player, 186000096, platinumMedal);
-				}
-
-				int gloriousInsignia = reward.getGloriousInsignia();
-				if (gloriousInsignia != 0) {
-					ItemService.addItem(player, 182213259, gloriousInsignia);
-				}
-				int lifeSerum = reward.getLifeSerum();
-				if (lifeSerum != 0) {
-					ItemService.addItem(player, 162000077, lifeSerum);
-				}
-			}
+	private void endMoraleBoost(Player player) {
+		PvPArenaPlayerReward reward = getPlayerSpecificReward(player);
+		if (reward != null && reward.hasBoostMorale()) {
+			reward.endBoostMoraleEffect(player);
 		}
-		instance.forEachNpc(npc -> npc.getController().delete());
-		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isInstanceDestroyed) {
-				for (Player player : instance.getPlayersInside()) {
-					onExitInstance(player);
-				}
-			}
-		}, 10000);
+		broadcastUpdate(player, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS);
+	}
+
+	private void reviveAllPlayers() {
+		instance.forEachPlayer(p -> {
+			if (p.isDead())
+				PlayerReviveService.duelRevive(p);
+		});
+	}
+
+	private void spawnRndRelics() {
+		if (instanceScore != null && !instanceScore.isRewarded())
+			spawn(Rnd.get(1, 2) == 1 ? 701187 : 701188, 1841.951f, 1733.968f, 300.242f, (byte) 0);
+	}
+
+	@Override
+	public InstanceScore<?> getInstanceScore() {
+		return instanceScore;
+	}
+
+	/**
+	 * Overridden in HarmonyTrainingGroundsInstance to differentiate between player and group specific reward objects
+	 */
+	protected PvPArenaPlayerReward getStatReward(Player player) {
+		return getPlayerSpecificReward(player);
+	}
+
+	protected PvPArenaPlayerReward getPlayerSpecificReward(Player player) {
+		return instanceScore.getPlayerReward(player.getObjectId());
+	}
+
+	protected boolean canStart() {
+		return instance.getPlayersInside().size() > 1;
 	}
 
 	protected void spawnRings() {
 	}
 
-	protected Npc getNpc(float x, float y, float z) {
-		if (!isInstanceDestroyed) {
-			for (Npc npc : instance.getNpcs()) {
-				SpawnTemplate st = npc.getSpawn();
-				if (st.getX() == x && st.getY() == y && st.getZ() == z) {
-					return npc;
-				}
+	protected float getRunnerUpScoreMod(PvPArenaPlayerReward victim, PvPArenaPlayerReward winner) {
+		if (winner == null || !isFinalRound())
+			return 1f;
+
+		int victimRank = instanceScore.getRank(victim);
+		return victimRank < instanceScore.getRank(winner) ? getRunnerUpScoreMod(victimRank) : 1f;
+	}
+
+	protected int getBoostMoraleEffectDuration(int rank) {
+		return 15000; // Retail Default
+	}
+
+	protected float getRunnerUpScoreMod(int victimRank) {
+		return 3f;
+	}
+
+	protected boolean shouldMergeGroupDamage() {
+		return false;
+	}
+
+	protected BaseValuesPerPlayer getBaseValuesPerPlayer(int difficultyId) {
+		return new BaseValuesPerPlayer(0, 0, 0, 0);
+	}
+
+	protected int getBaseAp(int difficultyId) {
+		return 0;
+	}
+
+	protected int getBaseGp(int difficultyId) {
+		return 0;
+	}
+
+	protected int getBaseCrucibleInsignia(int difficultyId) {
+		return 0;
+	}
+
+	protected int getBaseCourageInsignia(int difficultyId) {
+		return 0;
+	}
+
+	protected float getRewardRate(int rank, int difficultyId) {
+		return 0f;
+	}
+
+	protected void setRewardItems(PvPArenaPlayerReward reward, int rank, int difficultyId) {
+	}
+
+	protected float getConfigRate(Player player) {
+		return 1f;
+	}
+
+	protected void calculateRewards() {
+		int difficultyId = instanceScore.getDifficultyId();
+		BaseValuesPerPlayer baseValues = getBaseValuesPerPlayer(difficultyId);
+
+		int playerCount = instanceScore.getPlayerRewards().size();
+		int totalAp = baseValues.getTotalAp(playerCount);
+		int totalGp = baseValues.getTotalGp(playerCount);
+		int totalCrucibleInsignia = baseValues.getTotalCrucibleInsignia(playerCount);
+		int totalCourageInsignia = baseValues.getTotalCourageInsignia(playerCount);
+
+		int rankAp = calcAndFloor(totalAp, RANK_REWARD_RATE);
+		int rankGp = calcAndFloor(totalGp, RANK_REWARD_RATE);
+		int rankCrucibleInsignia = calcAndFloor(totalCrucibleInsignia, RANK_REWARD_RATE);
+		int rankCourageInsignia = calcAndFloor(totalCourageInsignia, RANK_REWARD_RATE);
+
+		int scoreAp = calcAndFloor(totalAp, SCORE_REWARD_RATE);
+		int scoreGp = calcAndFloor(totalGp, SCORE_REWARD_RATE);
+		int scoreCrucibleInsignia = calcAndFloor(totalCrucibleInsignia, SCORE_REWARD_RATE);
+		int scoreCourageInsignia = calcAndFloor(totalCourageInsignia, SCORE_REWARD_RATE);
+
+		int totalPoints = instanceScore.getTotalPoints();
+
+		for (PvPArenaPlayerReward reward : getArenaRewards()) {
+			if (reward.isRewarded())
+				continue;
+
+			Player player = instance.getPlayer(reward.getOwnerId());
+			if (!(reward instanceof HarmonyGroupReward) && player == null) // player left
+				continue;
+
+			float configRate = getConfigRate(player);
+
+			int score = reward.getScorePoints();
+			// Score Formula to verify: floor(scoreAp * winnerKills * winnerPoints / (winnerKills * winnerPoints + loserKills * loserPoints))
+			float scoreRate = (score / (float) totalPoints);
+
+			int rank = instanceScore.getRank(reward);
+			if (instanceScore.getRound() == 1)
+				rank = reward instanceof HarmonyGroupReward ? 1 : instance.getMaxPlayers() - 1;
+			float rankRewardRate = getRewardRate(rank, difficultyId);
+
+			int rankRewardAp = calcAndFloor(rankAp, rankRewardRate, configRate);
+			int rankRewardGp = calcAndFloor(rankGp, rankRewardRate, 1f);
+			int rankRewardCrucibleInsignia = calcAndFloor(rankCrucibleInsignia, rankRewardRate, configRate);
+			int rankRewardCourageInsignia = calcAndFloor(rankCourageInsignia, rankRewardRate, configRate);
+
+			int scoreRewardAp = calcAndFloor(scoreAp, scoreRate, configRate);
+			int scoreRewardGp = calcAndFloor(scoreGp, scoreRate, 1f);
+			int scoreRewardCrucibleInsignia = calcAndFloor(scoreCrucibleInsignia, scoreRate, configRate);
+			int scoreRewardCourageInsignia = calcAndFloor(scoreCourageInsignia, scoreRate, configRate);
+
+			reward.setAp(new ArenaRewardItem(0, getBaseAp(difficultyId), rankRewardAp, scoreRewardAp));
+			reward.setGp(new ArenaRewardItem(0, getBaseGp(difficultyId), rankRewardGp, scoreRewardGp));
+
+			ArenaRewardItem crucibleInsignia = new ArenaRewardItem(186000130, getBaseCrucibleInsignia(difficultyId), rankRewardCrucibleInsignia,
+				scoreRewardCrucibleInsignia);
+			ArenaRewardItem courageInsignia = new ArenaRewardItem(186000137, getBaseCourageInsignia(difficultyId), rankRewardCourageInsignia,
+				scoreRewardCourageInsignia);
+
+			if (crucibleInsignia.getTotalCount() > 0)
+				reward.setCrucibleInsignia(crucibleInsignia);
+			if (courageInsignia.getTotalCount() > 0)
+				reward.setCourageInsignia(courageInsignia);
+
+			setRewardItems(reward, rank, difficultyId);
+		}
+	}
+
+	private void reward() {
+		for (Player player : instance.getPlayersInside()) {
+			if (player.isDead())
+				PlayerReviveService.duelRevive(player);
+			PvPArenaPlayerReward reward = getPlayerSpecificReward(player);
+			if (!reward.isRewarded()) {
+				reward.setRewarded();
+
+				ArenaRewardItem apReward = reward.getAp();
+				if (apReward.getTotalCount() > 0)
+					AbyssPointsService.addAp(player, apReward.getTotalCount());
+
+				ArenaRewardItem gpReward = reward.getGp();
+				if (gpReward.getTotalCount() > 0)
+					GloryPointsService.increaseGpBy(player.getObjectId(), gpReward.getTotalCount(), false, true);
+
+				ArenaRewardItem courageInsigniaReward = reward.getCourageInsignia();
+				if (courageInsigniaReward.getTotalCount() > 0)
+					ItemService.addItem(player, courageInsigniaReward.itemId(), courageInsigniaReward.getTotalCount());
+
+				ArenaRewardItem crucibleInsigniaReward = reward.getCrucibleInsignia();
+				if (crucibleInsigniaReward.getTotalCount() > 0)
+					ItemService.addItem(player, crucibleInsigniaReward.itemId(), crucibleInsigniaReward.getTotalCount());
+
+				RewardItem rewardItem1 = reward.getRewardItem1();
+				if (rewardItem1 != null)
+					ItemService.addItem(player, rewardItem1.getId(), rewardItem1.getCount());
+
+				RewardItem rewardItem2 = reward.getRewardItem2();
+				if (rewardItem2 != null)
+					ItemService.addItem(player, rewardItem2.getId(), rewardItem2.getCount());
 			}
+		}
+	}
+
+	protected Npc getNpc(float x, float y, float z) {
+		for (Npc npc : instance.getNpcs()) {
+			SpawnTemplate st = npc.getSpawn();
+			if (st.getX() == x && st.getY() == y && st.getZ() == z)
+				return npc;
 		}
 		return null;
 	}
 
-	@Override
-	public void handleUseItemFinish(Player player, Npc npc) {
-		if (!instanceReward.isStartProgress()) {
-			return;
-		}
-		int rewardetPoints = getNpcBonus(npc.getNpcId());
-		int skill = instanceReward.getNpcBonusSkill(npc.getNpcId());
-		if (skill != 0) {
-			useSkill(npc, player, skill >> 8, skill & 0xFF);
-		}
-		getPlayerReward(player).addPoints(rewardetPoints);
-		sendSystemMsg(player, npc, rewardetPoints);
-		sendPacket();
+	protected void sendEntryPacket(Player player) {
+		sendPacket(null, null);
 	}
 
-	protected void useSkill(Npc npc, Player player, int skillId, int level) {
-		SkillEngine.getInstance().getSkill(npc, skillId, level, player).useNoAnimationSkill();
+	protected void broadcastUpdate(Player target, InstanceScoreType scoreType) {
+		sendPacket(null, null);
+	}
+
+	protected void broadcastUpdate(InstanceScoreType scoreType) {
+		sendPacket(null, null);
+	}
+
+	protected void broadcastResults() {
+		instance.forEachPlayer(player -> sendPacket(player, InstanceScoreType.SHOW_REWARD));
+	}
+
+	protected void sendPacket(Player receiver, InstanceScoreType scoreType) {
+	}
+
+	protected record BaseValuesPerPlayer(int apPerPlayer, int gpPerPlayer, int crucibleInsigniaPerPlayer, int courageInsigniaPerPlayer) {
+
+		public int getTotalAp(int playerCount) {
+			return apPerPlayer * playerCount;
+		}
+
+		public int getTotalGp(int playerCount) {
+			return gpPerPlayer * playerCount;
+		}
+
+		public int getTotalCrucibleInsignia(int playerCount) {
+			return crucibleInsigniaPerPlayer * playerCount;
+		}
+
+		public int getTotalCourageInsignia(int playerCount) {
+			return courageInsigniaPerPlayer * playerCount;
+		}
 	}
 
 }

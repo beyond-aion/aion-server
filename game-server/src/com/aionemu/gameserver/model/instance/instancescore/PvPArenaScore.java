@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.instance.instanceposition.*;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldMapType;
 
 /**
  * @author xTz
@@ -19,6 +20,7 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 	private int round = 1;
 	private Integer zone;
 	private int bonusTime;
+	private int difficultyId;
 	private int lowerScoreCap;
 	private int upperScoreCap;
 	private int maxScoreGap;
@@ -29,30 +31,39 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 
 	public PvPArenaScore(WorldMapInstance instance) {
 		this.instance = instance;
-		boolean isSolo = isSoloArena();
-		upperScoreCap = 50000;
-		lowerScoreCap = isSolo ? 10000 : 7000;
-		maxScoreGap = isSolo ? 1500 : 43000;
-		bonusTime = isSolo ? 8100 : 12000; // TODO: Glory = 10800
+
+		WorldMapType wmt = WorldMapType.getWorld(instance.getMapId());
+		boolean isSolo = isSoloArena(wmt);
+		buffId = (byte) (isSolo ? 8 : 7);
 		Collections.addAll(zones, isSolo ? new Integer[] { 1, 2, 3, 4 } : new Integer[] { 1, 2, 3, 4, 5, 6 });
-		int positionSize;
-		if (isSolo) {
-			positionSize = 4;
-			buffId = 8;
-			instancePosition = new DisciplineInstancePosition();
-		} else if (isGlory()) {
-			buffId = 7;
-			positionSize = 8;
-			instancePosition = new GloryInstancePosition();
-		} else if (instance.getMapId() == 300450000 || instance.getMapId() == 300570000) {
-			buffId = 7;
-			positionSize = 12;
-			instancePosition = new HarmonyInstancePosition();
-		} else {
-			buffId = 7;
-			positionSize = 12;
-			instancePosition = new ChaosInstancePosition();
+
+		int positionSize = 0;
+		switch (wmt) {
+			case DISCIPLINE_TRAINING_GROUNDS, ARENA_OF_DISCIPLINE -> {
+				bonusTime = 8100;
+				positionSize = 4;
+				instancePosition = new DisciplineInstancePosition();
+			}
+			case ARENA_OF_GLORY -> {
+				bonusTime = 10800;
+				positionSize = 8;
+				instancePosition = new GloryInstancePosition();
+			}
+			case HARMONY_TRAINING_GROUNDS, ARENA_OF_HARMONY -> {
+				bonusTime = 12000;
+				positionSize = 12;
+				instancePosition = new HarmonyInstancePosition();
+			}
+			case CHAOS_TRAINING_GROUNDS, ARENA_OF_CHAOS -> {
+				bonusTime = 12000;
+				positionSize = 12;
+				instancePosition = new ChaosInstancePosition();
+			}
+			case null, default -> {
+				return;
+			}
 		}
+
 		instancePosition.initialize(instance.getMapId(), instance.getInstanceId());
 		for (int i = 1; i <= positionSize; i++) {
 			positions.put(i, Boolean.FALSE);
@@ -60,12 +71,8 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 		setRndZone();
 	}
 
-	public final boolean isSoloArena() {
-		return instance.getMapId() == 300430000 || instance.getMapId() == 300360000;
-	}
-
-	public final boolean isGlory() {
-		return instance.getMapId() == 300550000;
+	public final boolean isSoloArena(WorldMapType wmt) {
+		return wmt == WorldMapType.DISCIPLINE_TRAINING_GROUNDS || wmt == WorldMapType.ARENA_OF_DISCIPLINE;
 	}
 
 	public final void setRndZone() {
@@ -128,45 +135,37 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 		int objectId = player.getObjectId();
 		regPlayerReward(player);
 		setRndPosition(objectId);
-		PvPArenaPlayerReward playerReward = getPlayerReward(objectId);
-		playerReward.applyBoostMoraleEffect(player);
-		instancePosition.port(player, zone, playerReward.getPosition());
+		instancePosition.port(player, zone, getPlayerReward(objectId).getPosition());
 	}
 
-	public boolean canRewardOpportunityToken(PvPArenaPlayerReward rewardedPlayer) {
-		if (rewardedPlayer != null) {
-			int rank = getRank(rewardedPlayer.getScorePoints());
-			return isSoloArena() && rank == 1 || rank > 2;
-		}
-		return false;
-	}
+	public int getRank(PvPArenaPlayerReward reward) {
+		List<PvPArenaPlayerReward> sortedByPoints = getPlayerRewards().stream().sorted(Comparator.comparing(PvPArenaPlayerReward::getScorePoints))
+			.toList();
 
-	public int getRank(int points) {
-		List<PvPArenaPlayerReward> rewardsSortedByScorePoints = getPlayerRewards().stream()
-			.sorted((r1, r2) -> Integer.compare(r2.getScorePoints(), r1.getScorePoints())).toList();
 		int rank = -1;
-		for (PvPArenaPlayerReward reward : rewardsSortedByScorePoints) {
-			if (reward.getScorePoints() >= points) {
+		for (PvPArenaPlayerReward r : sortedByPoints) {
+			if (r.getScorePoints() >= reward.getScorePoints())
 				rank++;
-			}
 		}
 		return rank;
 	}
 
-	public boolean reachedScoreCap() {
+	public boolean reachedScoreGap() {
 		IntSummaryStatistics points = getPlayerRewards().stream().mapToInt(InstancePlayerReward::getPoints).summaryStatistics();
 		int maxPoints = points.getMax();
 		int minPoints = points.getMin();
-		return maxPoints >= upperScoreCap || minPoints <= lowerScoreCap || maxPoints - minPoints >= maxScoreGap;
+		return maxPoints - minPoints >= maxScoreGap;
 	}
 
 	public int getTotalPoints() {
 		return getPlayerRewards().stream().mapToInt(PvPArenaPlayerReward::getScorePoints).sum();
 	}
 
-	public boolean canRewarded() {
-		return instance.getMapId() == 300350000 || instance.getMapId() == 300360000 || instance.getMapId() == 300550000
-			|| instance.getMapId() == 300450000;
+	public boolean canReward() {
+		return switch (WorldMapType.getWorld(instance.getMapId())) {
+			case ARENA_OF_DISCIPLINE, ARENA_OF_GLORY, ARENA_OF_CHAOS, ARENA_OF_HARMONY -> true;
+			case null, default -> false;
+		};
 	}
 
 	public int getNpcBonusSkill(int npcId) {
@@ -209,6 +208,14 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 		} else {
 			return (int) (180000 * getRound() - (result - 120000));
 		}
+	}
+
+	public int getDifficultyId() {
+		return difficultyId;
+	}
+
+	public void setDifficultyId(int difficultyId) {
+		this.difficultyId = difficultyId;
 	}
 
 	public int getLowerScoreCap() {

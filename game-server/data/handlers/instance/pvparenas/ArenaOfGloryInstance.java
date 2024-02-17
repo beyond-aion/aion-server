@@ -4,14 +4,16 @@ import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
+import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
-import com.aionemu.gameserver.network.aion.instanceinfo.ArenaOfGloryScoreWriter;
+import com.aionemu.gameserver.model.templates.rewards.RewardItem;
+import com.aionemu.gameserver.network.aion.instanceinfo.ArenaScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author xTz
+ * @author xTz, Estrayl
  */
 @InstanceID(300550000)
 public class ArenaOfGloryInstance extends PvPArenaInstance {
@@ -22,109 +24,95 @@ public class ArenaOfGloryInstance extends PvPArenaInstance {
 
 	@Override
 	public void onInstanceCreate() {
-		killBonus = 1000;
-		deathFine = -200;
+		pointsPerKill = 1000;
+		pointsPerDeath = -200;
 		super.onInstanceCreate();
 	}
 
 	@Override
-	protected void sendPacket() {
-		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new ArenaOfGloryScoreWriter(instanceReward, player.getObjectId()))));
+	protected int getBoostMoraleEffectDuration(int rank) {
+		return switch (rank) {
+			case 0, 1 -> 14000;
+			default -> 15000;
+		};
 	}
 
 	@Override
-	protected void reward() {
-		int totalPoints = instanceReward.getTotalPoints();
-		int size = instanceReward.getPlayerRewards().size();
-		// 100 * (rate * size) * (playerScore / playersScore)
-		float totalScoreAP = (59.952f * size) * 100;
-		float totalScoreGP = 45.8f * size;
-		// to do other formula
-		float rankingRate = 0;
-		float gpRankingRate = 0;
-		if (size > 1) {
-			rankingRate = (0.077f * (4 - size));
-			gpRankingRate = (0.5f * (4 - size));
-		}
-		float totalRankingAP = 26500 - 26500 * rankingRate;
-		float totalRankingGP = 200 - 200 * gpRankingRate;
-		for (PvPArenaPlayerReward playerReward : instanceReward.getPlayerRewards()) {
-			if (!playerReward.isRewarded()) {
-				float playerRate = 1;
-				Player player = instance.getPlayer(playerReward.getOwnerId());
-				if (player != null) {
-					playerRate = Rates.get(player, RatesConfig.PVP_ARENA_GLORY_REWARD_RATES);
-				}
-				int score = playerReward.getScorePoints();
-				float scoreRate = ((float) score / (float) totalPoints);
-				int rank = instanceReward.getRound() > 1 ? instanceReward.getRank(score) : 3;
-				float percent = playerReward.getParticipation();
-				float generalRate = 0.167f + rank * 0.227f;
-				float generalGpRate = 0.2f + rank * 0.237f;
-				int basicAP = 0;
-				int basicGP = 0;
-				float rankingAP = totalRankingAP;
-				float rankingGP = totalRankingGP;
-				if (rank > 0) {
-					rankingAP = rankingAP - rankingAP * generalRate;
-					rankingGP = rankingGP - rankingGP * generalGpRate;
-				}
-				int scoreAP = (int) (totalScoreAP * scoreRate);
-				int scoreGP = (int) (totalScoreGP * scoreRate);
-				rankingAP *= percent;
-				rankingGP *= percent;
-				rankingAP *= playerRate;
-				rankingGP *= playerRate;
-				byte level = 0;
-				if (player != null) {
-					level = player.getLevel();
-				}
-				switch (rank) {
-					case 0:
-						rankingGP = 241;
-						scoreGP = 54;
-						if (level >= 56 && level <= 60) {
-							playerReward.setGloriousInsignia(1);
-							playerReward.setMithrilMedal(5);
-						} else {
-							playerReward.setGloriousInsignia(1);
-							playerReward.setCeramiumMedal(3);
-						}
-						break;
-					case 1:
-						rankingGP = 135;
-						scoreGP = 25;
-						if (level >= 56 && level <= 60) {
-							playerReward.setMithrilMedal(1);
-							playerReward.setPlatinumMedal(3);
-						} else {
-							playerReward.setCeramiumMedal(1);
-						}
-						break;
-					case 2:
-						rankingGP = 92;
-						scoreGP = 14;
-						if (level >= 56 && level <= 60) {
-							playerReward.setPlatinumMedal(3);
-						} else {
-							playerReward.setMithrilMedal(2);
-						}
-						break;
-					case 3:
-						rankingGP = 54;
-						scoreGP = 6;
-						playerReward.setLifeSerum(1);
-						break;
-				}
-				playerReward.setBasicAP(basicAP);
-				playerReward.setRankingAP((int) rankingAP);
-				playerReward.setScoreAP(scoreAP);
-				playerReward.setBasicGP(basicGP);
-				playerReward.setRankingGP((int) rankingGP);
-				playerReward.setScoreGP(scoreGP);
-			}
-		}
-		super.reward();
+	protected float getRunnerUpScoreMod(int victimRank) {
+		return 4f;
 	}
 
+	@Override
+	protected void sendPacket(Player player, InstanceScoreType scoreType) {
+		instance.forEachPlayer(
+			p -> PacketSendUtility.sendPacket(p, new SM_INSTANCE_SCORE(instance.getMapId(), new ArenaScoreWriter(instanceScore, p.getObjectId(), false))));
+	}
+
+	@Override
+	protected BaseValuesPerPlayer getBaseValuesPerPlayer(int difficultyId) {
+		// Extracted values from instant_dungeon_idarenapvp.xml (Retail Leak 4.6, also verified by different videos)
+		// Retail4.6, there are 4 difficultyIds - maybe they were removed
+		// 1 new BaseValuesPerPlayer(700, 0, 310, 27);
+		// 2 new BaseValuesPerPlayer(900, 0, 425, 50);
+		// 3 new BaseValuesPerPlayer(1100, 0, 655, 77)
+		// 4 new BaseValuesPerPlayer(1300, 31, 655, 77);
+		return switch (difficultyId) {
+			case 2 -> new BaseValuesPerPlayer(1300, 31, 655, 77);
+			default -> new BaseValuesPerPlayer(1100, 0, 655, 77);
+		};
+	}
+
+	@Override
+	protected float getRewardRate(int rank, int difficultyId) {
+		return switch (rank) {
+			case 0 -> 0.55f;
+			case 1 -> 0.25f;
+			case 2 -> 0.15f;
+			default -> 0.05f;
+		};
+	}
+
+	@Override
+	protected void setRewardItems(PvPArenaPlayerReward reward, int rank, int difficultyId) {
+		switch (rank) {
+			case 0 -> {
+				switch (difficultyId) {
+					case 2 -> {
+						reward.setRewardItem1(new RewardItem(186000242, 3)); // Ceramium Medal
+						reward.setRewardItem2(new RewardItem(182213259, 1)); // Arena of Glory Ticket
+					}
+					default -> {
+						reward.setRewardItem1(new RewardItem(186000147, 5)); // Mithril Medal
+						reward.setRewardItem2(new RewardItem(182213259, 1)); // Arena of Glory Ticket
+					}
+				}
+			}
+			case 1 -> {
+				switch (difficultyId) {
+					case 2 -> reward.setRewardItem1(new RewardItem(186000242, 1)); // Ceramium Medal
+					default -> {
+						reward.setRewardItem1(new RewardItem(186000147, 1)); // Mithril Medal
+						reward.setRewardItem1(new RewardItem(186000096, 3)); // Platinum Medal
+					}
+				}
+			}
+			case 2 -> {
+				switch (difficultyId) {
+					case 2 -> reward.setRewardItem1(new RewardItem(186000147, 2)); // Mithril Medal
+					default -> reward.setRewardItem1(new RewardItem(186000096, 3)); // Platinum Medal
+				}
+			}
+			default -> {
+				switch (difficultyId) {
+					case 2 -> reward.setRewardItem1(new RewardItem(162000124, 5)); // Superior Recovery Serum
+					default -> reward.setRewardItem1(new RewardItem(162000077, 1)); // Fine Life Serum
+				}
+			}
+		}
+	}
+
+	@Override
+	protected float getConfigRate(Player player) {
+		return Rates.get(player, RatesConfig.PVP_ARENA_GLORY_REWARD_RATES);
+	}
 }

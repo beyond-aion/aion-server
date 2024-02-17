@@ -6,11 +6,11 @@ import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
+import com.aionemu.gameserver.model.instance.InstanceScoreType;
 import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
-import com.aionemu.gameserver.network.aion.instanceinfo.ChaosScoreWriter;
+import com.aionemu.gameserver.network.aion.instanceinfo.ArenaScoreWriter;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -26,24 +26,41 @@ public class ChaosTrainingGroundsInstance extends PvPArenaInstance {
 
 	@Override
 	public void onInstanceCreate() {
-		killBonus = 1000;
-		deathFine = -125;
+		pointsPerKill = 1000;
+		pointsPerDeath = -125;
 		super.onInstanceCreate();
 	}
 
 	@Override
-	protected void sendPacket() {
-		instance.forEachPlayer(player -> PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(), new ChaosScoreWriter(instanceReward, player.getObjectId()))));
+	protected int getBoostMoraleEffectDuration(int rank) {
+		return switch (rank) {
+			case 0, 1 -> 14000;
+			case 4, 5 -> 16000;
+			case 6, 7 -> 17000;
+			default -> 15000;
+		};
+	}
+
+	@Override
+	protected float getRunnerUpScoreMod(int victimRank) {
+		return switch (victimRank) {
+			case 0 -> 3f;
+			case 1 -> 2f;
+			default -> 1f;
+		};
+	}
+
+	@Override
+	protected void sendPacket(Player player, InstanceScoreType scoreType) {
+		instance.forEachPlayer(
+			p -> PacketSendUtility.sendPacket(p, new SM_INSTANCE_SCORE(instance.getMapId(), new ArenaScoreWriter(instanceScore, p.getObjectId(), false))));
 	}
 
 	@Override
 	public void onGather(Player player, Gatherable gatherable) {
-		if (!instanceReward.isStartProgress()) {
+		if (!instanceScore.isStartProgress())
 			return;
-		}
-		getPlayerReward(player).addPoints(1250);
-		sendPacket();
-		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GET_SCORE(gatherable.getObjectTemplate().getL10n(), 1250));
+		updatePoints(getPlayerSpecificReward(player), player, gatherable, 1250);
 	}
 
 	@Override
@@ -68,8 +85,8 @@ public class ChaosTrainingGroundsInstance extends PvPArenaInstance {
 
 	@Override
 	public boolean onPassFlyingRing(Player player, String flyingRing) {
-		PvPArenaPlayerReward playerReward = getPlayerReward(player);
-		if (playerReward == null || !instanceReward.isStartProgress()) {
+		PvPArenaPlayerReward playerReward = getPlayerSpecificReward(player);
+		if (playerReward == null || !instanceScore.isStartProgress()) {
 			return false;
 		}
 		Npc npc = switch (flyingRing) {
@@ -84,9 +101,7 @@ public class ChaosTrainingGroundsInstance extends PvPArenaInstance {
 		if (npc != null && npc.isSpawned()) {
 			if (npc.getNpcId() == 701184 || npc.getNpcId() == 701198 || npc.getNpcId() == 701212) { // Flame Loop
 				npc.getController().deleteAndScheduleRespawn();
-				playerReward.addPoints(250);
-				sendSystemMsg(player, npc, 250);
-				sendPacket();
+				updatePoints(playerReward, player, npc, 250);
 			} else if (npc.getNpcId() == 701183 || npc.getNpcId() == 701197 || npc.getNpcId() == 701211) { // Aether Vortex
 				useSkill(npc, player, 20059, 1);
 				npc.getController().deleteAndScheduleRespawn();

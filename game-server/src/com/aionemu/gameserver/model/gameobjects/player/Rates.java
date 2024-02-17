@@ -140,13 +140,6 @@ public enum Rates {
 			return (long) (gatherCount * get(player, RatesConfig.GATHERING_COUNT_RATES));
 		}
 	},
-	ARENA_COURAGE_INSIGNIA_COUNT {
-
-		@Override
-		public long calcResult(Player player, long courageInsigniaCount) {
-			return (long) (courageInsigniaCount * get(player, RatesConfig.PVP_ARENA_COURAGE_INSIGNIA_RATES));
-		}
-	},
 	SELL_LIMIT {
 
 		@Override

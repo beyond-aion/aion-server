@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.autogroup;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.*;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.instancescore.HarmonyArenaScore;
@@ -20,19 +19,19 @@ import com.aionemu.gameserver.world.WorldMapInstance;
  */
 public class AutoHarmonyInstance extends AutoInstance {
 
-	private final List<AGPlayer> group1 = new ArrayList<>();
-	private final List<AGPlayer> group2 = new ArrayList<>();
+	private final HashMap<Integer, List<AGPlayer>> groups = new HashMap<>();
 
 	public AutoHarmonyInstance(AutoGroupType agt) {
 		super(agt);
+		groups.put(0, new ArrayList<>());
+		groups.put(1, new ArrayList<>());
 	}
 
 	@Override
 	public void onInstanceCreate(WorldMapInstance instance) {
 		super.onInstanceCreate(instance);
-		HarmonyArenaScore reward = (HarmonyArenaScore) instance.getInstanceHandler().getInstanceScore();
-		reward.addHarmonyGroup(new HarmonyGroupReward(0, 12000, (byte) 7, group1, agt));
-		reward.addHarmonyGroup(new HarmonyGroupReward(1, 12000, (byte) 7, group2, agt));
+		HarmonyArenaScore score = (HarmonyArenaScore) instance.getInstanceHandler().getInstanceScore();
+		score.setDifficultyId(agt.getDifficultId());
 	}
 
 	@Override
@@ -42,9 +41,9 @@ public class AutoHarmonyInstance extends AutoInstance {
 			if (isRegistrationDisabled(lookingForParty) || registeredAGPlayers.size() >= getMaxPlayers())
 				return AGQuestion.FAILED;
 
-			AGQuestion question = canAddParty(group1, lookingForParty);
+			AGQuestion question = canAddParty(groups.get(0), lookingForParty);
 			if (question == AGQuestion.FAILED)
-				question = canAddParty(group2, lookingForParty);
+				question = canAddParty(groups.get(1), lookingForParty);
 			return question;
 		} finally {
 			super.writeUnlock();
@@ -72,25 +71,33 @@ public class AutoHarmonyInstance extends AutoInstance {
 		if (player.isInGroup()) {
 			return;
 		}
-		int objectId = player.getObjectId();
-		List<AGPlayer> group = getGroup(objectId);
-		if (group != null) {
-			List<Player> _players = getPlayerFromGroup(group);
-			_players.remove(player);
-			if (_players.size() == 1 && !_players.get(0).isInGroup()) {
-				HarmonyArenaScore reward = (HarmonyArenaScore) instance.getInstanceHandler().getInstanceScore();
-				HarmonyGroupReward r = reward.getHarmonyGroupReward(objectId);
-				PlayerGroup newGroup = PlayerGroupService.createGroup(_players.get(0), player, TeamType.AUTO_GROUP, r.getId());
-				int groupId = newGroup.getObjectId();
-				if (!instance.isRegistered(groupId)) {
-					instance.register(groupId);
-				}
-			} else if (!_players.isEmpty() && _players.get(0).isInGroup()) {
-				PlayerGroupService.addPlayer(_players.get(0).getPlayerGroup(), player);
+		int playerId = player.getObjectId();
+		Map.Entry<Integer, List<AGPlayer>> groupEntry = getGroupEntry(playerId);
+		if (groupEntry == null)
+			return;
+
+		HarmonyArenaScore score = (HarmonyArenaScore) instance.getInstanceHandler().getInstanceScore();
+		List<Player> players = findPlayersInInstance(groupEntry.getValue());
+		players.remove(player);
+
+		if (players.isEmpty()) { // Create Group
+			PlayerGroup newGroup = PlayerGroupService.createGroup(player, player, TeamType.AUTO_GROUP, 0);
+			int groupId = newGroup.getObjectId();
+			if (!instance.isRegistered(groupId)) {
+				instance.register(groupId);
+				HarmonyGroupReward reward = new HarmonyGroupReward(groupEntry.getKey(), 12000, (byte) 7, groupId);
+				reward.addPlayer(registeredAGPlayers.get(player.getObjectId()));
+				score.addHarmonyGroup(reward);
 			}
-			if (!instance.isRegistered(objectId)) {
-				instance.register(objectId);
-			}
+		} else { // Add To Group
+			PlayerGroup pg = players.getFirst().getPlayerGroup();
+			PlayerGroupService.addPlayer(pg, player);
+			HarmonyGroupReward reward = score.getGroupReward(pg.getLeader().getObjectId());
+			reward.addPlayer(registeredAGPlayers.get(player.getObjectId()));
+		}
+
+		if (!instance.isRegistered(playerId)) {
+			instance.register(playerId);
 		}
 	}
 
@@ -104,15 +111,13 @@ public class AutoHarmonyInstance extends AutoInstance {
 	public void unregister(Player player) {
 		AGPlayer agp = registeredAGPlayers.get(player.getObjectId());
 		if (agp != null) {
-			if (group1.contains(agp))
-				group1.remove(agp);
-			else
-				group2.remove(agp);
+			groups.get(0).remove(agp);
+			groups.get(1).remove(agp);
 		}
 		super.unregister(player);
 	}
 
-	private List<Player> getPlayerFromGroup(List<AGPlayer> group) {
+	private List<Player> findPlayersInInstance(List<AGPlayer> group) {
 		List<Player> _players = new ArrayList<>();
 		for (AGPlayer agp : group) {
 			for (Player p : instance.getPlayersInside()) {
@@ -125,13 +130,14 @@ public class AutoHarmonyInstance extends AutoInstance {
 		return _players;
 	}
 
-	private List<AGPlayer> getGroup(Integer obj) {
-		AGPlayer agp = registeredAGPlayers.get(obj);
+	private Map.Entry<Integer, List<AGPlayer>> getGroupEntry(int playerObjId) {
+		AGPlayer agp = registeredAGPlayers.get(playerObjId);
 		if (agp != null) {
-			if (group1.contains(agp))
-				return group1;
-			else if (group2.contains(agp))
-				return group2;
+			Set<Map.Entry<Integer, List<AGPlayer>>> entrySet = groups.entrySet();
+			for (Map.Entry<Integer, List<AGPlayer>> entry : entrySet) {
+				if (entry.getValue().contains(agp))
+					return entry;
+			}
 		}
 		return null;
 	}
@@ -139,7 +145,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 	private AGQuestion canAddParty(List<AGPlayer> group, LookingForParty lfp) {
 		if (group.size() + lfp.getMemberObjectIds().size() > 3)
 			return AGQuestion.FAILED;
-		if (!group.isEmpty() && group.get(0).getRace() != lfp.getRace())
+		if (!group.isEmpty() && group.getFirst().getRace() != lfp.getRace())
 			return AGQuestion.FAILED;
 
 		for (int objectId : lfp.getMemberObjectIds()) {

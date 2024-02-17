@@ -1,23 +1,41 @@
 package instance.pvparenas;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.flyring.FlyRing;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
+import com.aionemu.gameserver.model.instance.InstanceScoreType;
+import com.aionemu.gameserver.model.instance.instancescore.HarmonyArenaScore;
+import com.aionemu.gameserver.model.instance.instancescore.PvPArenaScore;
 import com.aionemu.gameserver.model.instance.playerreward.HarmonyGroupReward;
+import com.aionemu.gameserver.model.instance.playerreward.PvPArenaPlayerReward;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
-import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.instanceinfo.HarmonyScoreWriter;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author xTz
  */
 @InstanceID(300570000)
-public class HarmonyTrainingGroundsInstance extends BasicHarmonyArenaInstance {
+public class HarmonyTrainingGroundsInstance extends PvPArenaInstance {
 
 	public HarmonyTrainingGroundsInstance(WorldMapInstance instance) {
 		super(instance);
+	}
+
+	@Override
+	protected int getBoostMoraleEffectDuration(int rank) {
+		return switch (rank) {
+			case 0 -> 14000;
+			default -> 15000;
+		};
 	}
 
 	@Override
@@ -102,9 +120,9 @@ public class HarmonyTrainingGroundsInstance extends BasicHarmonyArenaInstance {
 
 	@Override
 	public boolean onPassFlyingRing(Player player, String flyingRing) {
-		if (!instanceReward.isStartProgress()) {
+		if (!instanceScore.isStartProgress())
 			return false;
-		}
+
 		Npc npc = switch (flyingRing) {
 			case "PVP_ARENA_1" -> getNpc(526.5524f, 1799.9530f, 177.3270f);
 			case "PVP_ARENA_2" -> getNpc(506.4008f, 1801.0159f, 177.3270f);
@@ -146,19 +164,86 @@ public class HarmonyTrainingGroundsInstance extends BasicHarmonyArenaInstance {
 		};
 		if (npc != null && npc.isSpawned()) {
 			npc.getController().deleteAndScheduleRespawn();
-			HarmonyGroupReward groupReward = instanceReward.getHarmonyGroupReward(player.getObjectId());
-			updatePoints(groupReward, player, npc, 100);
+			HarmonyGroupReward reward = ((HarmonyArenaScore) instanceScore).getGroupReward(player.getObjectId());
+			updatePoints(reward, player, npc, 100);
 		}
 		return false;
 	}
 
-	protected Npc getNpc(float x, float y, float z) {
-		for (Npc npc : instance.getNpcs()) {
-			SpawnTemplate st = npc.getSpawn();
-			if (st.getX() == x && st.getY() == y && st.getZ() == z) {
-				return npc;
-			}
-		}
-		return null;
+	@Override
+	protected void updatePoints(PvPArenaPlayerReward receiver, Player player, VisibleObject victim, int rewardPoints) {
+		super.updatePoints(receiver, player, victim, rewardPoints);
+	}
+
+	@Override
+	public void onInstanceCreate() {
+		pointsPerKill = 800;
+		pointsPerDeath = -150;
+		super.onInstanceCreate();
+	}
+
+	@Override
+	protected float getRunnerUpScoreMod(int victimRank) {
+		return 4f;
+	}
+
+	@Override
+	protected PvPArenaScore createNewArenaScore() {
+		return new HarmonyArenaScore(instance);
+	}
+
+	@Override
+	protected List<PvPArenaPlayerReward> getArenaRewards() {
+		return new ArrayList<>(((HarmonyArenaScore) instanceScore).getHarmonyGroupInside());
+	}
+
+	@Override
+	protected PvPArenaPlayerReward getStatReward(Player player) {
+		return ((HarmonyArenaScore) instanceScore).getGroupReward(player.getObjectId());
+	}
+
+	@Override
+	protected boolean canStart() {
+		return ((HarmonyArenaScore) instanceScore).getHarmonyGroupInside().size() > 1;
+	}
+
+	@Override
+	protected boolean shouldMergeGroupDamage() {
+		return true;
+	}
+
+	@Override
+	protected void sendEntryPacket(Player player) {
+		broadcastUpdate(player, InstanceScoreType.UPDATE_RANK);
+		broadcastUpdate(player, InstanceScoreType.INIT_PLAYER);
+		broadcastUpdate(player, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS);
+		broadcastUpdate(InstanceScoreType.UPDATE_INSTANCE_BUFFS_AND_SCORE);
+	}
+
+	@Override
+	protected void broadcastUpdate(Player target, InstanceScoreType scoreType) {
+		PacketSendUtility.broadcastToMap(instance,
+			new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter((HarmonyArenaScore) instanceScore, scoreType, target), getTime()));
+	}
+
+	@Override
+	protected void broadcastUpdate(InstanceScoreType scoreType) {
+		PacketSendUtility.broadcastToMap(instance,
+			new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter((HarmonyArenaScore) instanceScore, scoreType), getTime()));
+	}
+
+	@Override
+	protected void broadcastResults() {
+		instance.forEachPlayer(player -> sendPacket(player, InstanceScoreType.SHOW_REWARD));
+	}
+
+	@Override
+	protected void sendPacket(Player receiver, InstanceScoreType scoreType) {
+		PacketSendUtility.sendPacket(receiver,
+			new SM_INSTANCE_SCORE(instance.getMapId(), new HarmonyScoreWriter((HarmonyArenaScore) instanceScore, scoreType, receiver), getTime()));
+	}
+
+	private int getTime() {
+		return instanceScore.getTime();
 	}
 }

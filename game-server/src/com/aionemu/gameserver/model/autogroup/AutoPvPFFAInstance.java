@@ -6,6 +6,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.services.AutoGroupService;
 import com.aionemu.gameserver.services.autogroup.AutoGroupUtility;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author xTz
@@ -14,6 +15,13 @@ public class AutoPvPFFAInstance extends AutoInstance {
 
 	public AutoPvPFFAInstance(AutoGroupType agt) {
 		super(agt);
+	}
+
+	@Override
+	public void onInstanceCreate(WorldMapInstance instance) {
+		super.onInstanceCreate(instance);
+		PvPArenaScore score = (PvPArenaScore) instance.getInstanceHandler().getInstanceScore();
+		score.setDifficultyId(agt.getDifficultId());
 	}
 
 	@Override

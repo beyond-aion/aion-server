@@ -64,7 +64,7 @@ public class PvpInstanceScoreWriter extends InstanceScoreWriter<PvpInstanceScore
 			}
 			case SHOW_REWARD -> writeShowReward(buf);
 			case UPDATE_INSTANCE_BUFFS_AND_SCORE -> writeUpdateScoreToBuffer(buf);
-			case UPDATE_ALL_PLAYER_INFO -> writeUpdatePlayerInfoToBuffer(buf);
+			case UPDATE_ALL_PLAYER_INFO -> writePlayerFullData(buf);
 			case PLAYER_QUIT -> writeD(buf, objectId);
 			case UPDATE_FACTION_SCORE -> {
 				writeC(buf, 0);
@@ -100,21 +100,8 @@ public class PvpInstanceScoreWriter extends InstanceScoreWriter<PvpInstanceScore
 
 	private void writeUpdateScoreToBuffer(ByteBuffer buf) {
 		writeD(buf, 100); // Should be differentiated between asmos and elyos
-		List<Player> elyos = participants.stream().filter(p -> p.getRace() == Race.ELYOS).toList();
-		for (Player p : elyos) {
-			writeD(buf, 0); // should be instance buff ID
-			writeD(buf, p.isDead() ? 60 : 0); // was previously used for remaining instance buff time
-			writeD(buf, p.getObjectId());
-		}
-		writeEmptyDataToBuffer(buf, 12, MAXIMUM_PLAYER_COUNT_PER_FACTION - elyos.size());
-
-		List<Player> asmodians = participants.stream().filter(p -> p.getRace() == Race.ASMODIANS).toList();
-		for (Player p : asmodians) {
-			writeD(buf, 0); // should be instance buff ID
-			writeD(buf, p.isDead() ? 60 : 0); // was previously used for remaining instance buff time
-			writeD(buf, p.getObjectId());
-		}
-		writeEmptyDataToBuffer(buf, 12, MAXIMUM_PLAYER_COUNT_PER_FACTION - asmodians.size());
+		writePlayerBuffInfo(buf, participants.stream().filter(p -> p.getRace() == Race.ELYOS).toList());
+		writePlayerBuffInfo(buf, participants.stream().filter(p -> p.getRace() == Race.ASMODIANS).toList());
 		writeC(buf, 0);
 		writeD(buf, instanceScore.getElyosKills());
 		writeD(buf, instanceScore.getElyosPoints());
@@ -127,9 +114,13 @@ public class PvpInstanceScoreWriter extends InstanceScoreWriter<PvpInstanceScore
 		writeD(buf, instanceScore.getRaceWithHighestPoints().getRaceId());
 	}
 
-	private void writeUpdatePlayerInfoToBuffer(ByteBuffer buf) {
-		List<Player> elyos = participants.stream().filter(p -> p.getRace() == Race.ELYOS).toList();
-		for (Player player : elyos) { // 69 bytes per player
+	private void writePlayerFullData(ByteBuffer buf) {
+		writePlayerFullData(buf, participants.stream().filter(p -> p.getRace() == Race.ELYOS).toList());
+		writePlayerFullData(buf, participants.stream().filter(p -> p.getRace() == Race.ASMODIANS).toList());
+	}
+
+	private void writePlayerFullData(ByteBuffer buf, List<Player> players) {
+		for (Player player : players) { // 69 bytes per player
 			PvpInstancePlayerReward reward = instanceScore.getPlayerReward(player.getObjectId());
 			if (reward == null)
 				continue;
@@ -142,22 +133,16 @@ public class PvpInstanceScoreWriter extends InstanceScoreWriter<PvpInstanceScore
 			writeD(buf, reward.getPoints());
 			writeS(buf, player.getName(), 52);
 		}
-		writeEmptyDataToBuffer(buf, 69, MAXIMUM_PLAYER_COUNT_PER_FACTION - elyos.size());
-		List<Player> asmodians = participants.stream().filter(p -> p.getRace() == Race.ASMODIANS).toList();
-		for (Player player : asmodians) { // 69 bytes per player
-			PvpInstancePlayerReward reward = instanceScore.getPlayerReward(player.getObjectId());
-			if (reward == null)
-				continue;
+		writeEmptyDataToBuffer(buf, 69, MAXIMUM_PLAYER_COUNT_PER_FACTION - players.size());
+	}
+
+	private void writePlayerBuffInfo(ByteBuffer buf, List<Player> players) {
+		for (Player player : players) {
+			writeD(buf, 0); // should be instance buff ID
+			writeD(buf, player.isDead() ? 60 : 0); // was previously used for remaining instance buff time
 			writeD(buf, player.getObjectId());
-			writeC(buf, player.getPlayerClass().getClassId());
-			writeC(buf, player.getAbyssRank().getRank().getId());
-			writeC(buf, 0);
-			writeH(buf, 0);
-			writeD(buf, reward.getPvPKills());
-			writeD(buf, reward.getPoints());
-			writeS(buf, player.getName(), 52);
 		}
-		writeEmptyDataToBuffer(buf, 69, MAXIMUM_PLAYER_COUNT_PER_FACTION - asmodians.size());
+		writeEmptyDataToBuffer(buf, 12, MAXIMUM_PLAYER_COUNT_PER_FACTION - players.size());
 	}
 
 	private void writeEmptyDataToBuffer(ByteBuffer buf, int dataSize, int missingPlayerCount) {

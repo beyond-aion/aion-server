@@ -84,9 +84,6 @@ public class RatesConfig {
 	@Property(key = "gameserver.rates.gathering.count", defaultValue = "1.0, 2.0")
 	public static float[] GATHERING_COUNT_RATES;
 
-	@Property(key = "gameserver.rates.pvparena.courage_insignia", defaultValue = "1.0, 2.0")
-	public static float[] PVP_ARENA_COURAGE_INSIGNIA_RATES;
-
 	@Property(key = "gameserver.rates.pvparena.discipline", defaultValue = "1.0, 2.0")
 	public static float[] PVP_ARENA_DISCIPLINE_REWARD_RATES;
 

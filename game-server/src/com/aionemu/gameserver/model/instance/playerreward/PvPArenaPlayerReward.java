@@ -3,6 +3,8 @@ package com.aionemu.gameserver.model.instance.playerreward;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.instance.InstanceBuff;
+import com.aionemu.gameserver.model.instance.instancescore.PvPArenaScore;
+import com.aionemu.gameserver.model.templates.rewards.ArenaRewardItem;
 import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 
 /**
@@ -15,25 +17,11 @@ public class PvPArenaPlayerReward extends InstancePlayerReward {
 	private int position;
 	private int timeBonus;
 	private float timeBonusModifier;
-	private int basicAP;
-	private int rankingAP;
-	private int scoreAP;
-	private int basicGP;
-	private int rankingGP;
-	private int scoreGP;
-	private int basicCrucible;
-	private int rankingCrucible;
-	private int scoreCrucible;
-	private int basicCourage;
-	private int rankingCourage;
-	private int scoreCourage;
-	private int opportunity;
-	private int gloryTicket;
-	private int mithrilMedal;
-	private int platinumMedal;
-	private int ceramiumMedal;
-	private int gloriousInsignia;
-	private int lifeSerum;
+	// Default values for training arenas
+	private ArenaRewardItem ap = new ArenaRewardItem(0, 0, 0, 0);
+	private ArenaRewardItem gp = new ArenaRewardItem(0, 0, 0, 0);
+	private ArenaRewardItem crucibleInsignia = new ArenaRewardItem(0, 0, 0, 0);
+	private ArenaRewardItem courageInsignia = new ArenaRewardItem(0, 0, 0, 0);
 	private RewardItem rewardItem1;
 	private RewardItem rewardItem2;
 	private long logoutTime;
@@ -50,12 +38,20 @@ public class PvPArenaPlayerReward extends InstancePlayerReward {
 
 	private PvPArenaPlayerReward(int objectId, PlayerClass playerClass, String playerName, int timeBonus, byte buffId) {
 		super(objectId);
-		super.addPoints(13000);
+		super.setPoints(13000);
 		this.playerClass = playerClass;
 		this.playerName = playerName;
 		this.timeBonus = timeBonus;
 		timeBonusModifier = ((float) this.timeBonus / (float) 660000);
 		boostMorale = new InstanceBuff(buffId);
+	}
+
+	public void addPoints(int points, PvPArenaScore instanceScore) {
+		super.addPoints(points);
+		if (getPoints() > instanceScore.getUpperScoreCap())
+			setPoints(instanceScore.getUpperScoreCap());
+		else if (getPoints() < instanceScore.getLowerScoreCap())
+			setPoints(instanceScore.getLowerScoreCap());
 	}
 
 	public PlayerClass getPlayerClass() {
@@ -95,160 +91,40 @@ public class PvPArenaPlayerReward extends InstancePlayerReward {
 		isRewarded = true;
 	}
 
-	public int getBasicAP() {
-		return basicAP;
-	}
-
-	public int getRankingAP() {
-		return rankingAP;
-	}
-
-	public int getScoreAP() {
-		return scoreAP;
-	}
-
-	public void setBasicAP(int ap) {
-		this.basicAP = ap;
-	}
-
-	public void setRankingAP(int ap) {
-		this.rankingAP = ap;
-	}
-
-	public void setScoreAP(int ap) {
-		this.scoreAP = ap;
-	}
-
-	public void setBasicGP(int gp) {
-		this.basicGP = gp;
-	}
-
-	public void setRankingGP(int gp) {
-		this.rankingGP = gp;
-	}
-
-	public void setScoreGP(int gp) {
-		this.scoreGP = gp;
-	}
-
-	public int getBasicGP() {
-		return basicGP;
-	}
-
-	public int getRankingGP() {
-		return rankingGP;
-	}
-
-	public int getScoreGP() {
-		return scoreGP;
-	}
-
 	public float getParticipation() {
 		return (float) getTimeBonus() / timeBonus;
 	}
 
-	public int getBasicCrucible() {
-		return basicCrucible;
+	public ArenaRewardItem getAp() {
+		return ap;
 	}
 
-	public int getRankingCrucible() {
-		return rankingCrucible;
+	public void setAp(ArenaRewardItem ap) {
+		this.ap = ap;
 	}
 
-	public int getScoreCrucible() {
-		return scoreCrucible;
+	public ArenaRewardItem getGp() {
+		return gp;
 	}
 
-	public void setCeramiumMedal(int ceramiumMedal) {
-		this.ceramiumMedal = ceramiumMedal;
+	public void setGp(ArenaRewardItem gp) {
+		this.gp = gp;
 	}
 
-	public void setBasicCrucible(int basicCrucible) {
-		this.basicCrucible = basicCrucible;
+	public ArenaRewardItem getCrucibleInsignia() {
+		return crucibleInsignia;
 	}
 
-	public void setRankingCrucible(int rankingCrucible) {
-		this.rankingCrucible = rankingCrucible;
+	public void setCrucibleInsignia(ArenaRewardItem crucibleInsignia) {
+		this.crucibleInsignia = crucibleInsignia;
 	}
 
-	public void setScoreCrucible(int scoreCrucible) {
-		this.scoreCrucible = scoreCrucible;
+	public ArenaRewardItem getCourageInsignia() {
+		return courageInsignia;
 	}
 
-	public void setBasicCourage(int basicCourage) {
-		this.basicCourage = basicCourage;
-	}
-
-	public void setRankingCourage(int rankingCourage) {
-		this.rankingCourage = rankingCourage;
-	}
-
-	public void setScoreCourage(int scoreCourage) {
-		this.scoreCourage = scoreCourage;
-	}
-
-	public int getBasicCourage() {
-		return basicCourage;
-	}
-
-	public int getRankingCourage() {
-		return rankingCourage;
-	}
-
-	public int getScoreCourage() {
-		return scoreCourage;
-	}
-
-	public int getOpportunity() {
-		return opportunity;
-	}
-
-	public void setOpportunity(int opportunity) {
-		this.opportunity = opportunity;
-	}
-
-	public int getGloryTicket() {
-		return gloryTicket;
-	}
-
-	public void setGloryTicket(int gloryTicket) {
-		this.gloryTicket = gloryTicket;
-	}
-
-	public int getMithrilMedal() {
-		return mithrilMedal;
-	}
-
-	public int getCeramiumMedal() {
-		return ceramiumMedal;
-	}
-
-	public void setMithrilMedal(int mithrilMedal) {
-		this.mithrilMedal = mithrilMedal;
-	}
-
-	public int getPlatinumMedal() {
-		return platinumMedal;
-	}
-
-	public void setPlatinumMedal(int platinumMedal) {
-		this.platinumMedal = platinumMedal;
-	}
-
-	public int getGloriousInsignia() {
-		return gloriousInsignia;
-	}
-
-	public void setGloriousInsignia(int gloriousInsignia) {
-		this.gloriousInsignia = gloriousInsignia;
-	}
-
-	public int getLifeSerum() {
-		return lifeSerum;
-	}
-
-	public void setLifeSerum(int lifeSerum) {
-		this.lifeSerum = lifeSerum;
+	public void setCourageInsignia(ArenaRewardItem courageInsignia) {
+		this.courageInsignia = courageInsignia;
 	}
 
 	public RewardItem getRewardItem1() {
@@ -271,23 +147,20 @@ public class PvPArenaPlayerReward extends InstancePlayerReward {
 		return timeBonus + getPoints();
 	}
 
-	public boolean hasBoostMorale() {
-		return boostMorale.hasInstanceBuff();
+	public int getRemainingTime() {
+		return boostMorale.getRemainingTime();
 	}
 
-	public void applyBoostMoraleEffect(Player player) {
-		boostMorale.applyEffect(player, 20000);
+	public boolean hasBoostMorale() {
+		return boostMorale.getRemainingTime() > 0;
+	}
+
+	public void applyBoostMoraleEffect(Player player, int duration) {
+		boostMorale.applyEffect(player, duration);
 	}
 
 	public void endBoostMoraleEffect(Player player) {
 		boostMorale.endEffect(player);
 	}
 
-	public int getRemaningTime() {
-		int time = boostMorale.getRemaningTime();
-		if (time >= 0 && time < 20) {
-			return 20 - time;
-		}
-		return 0;
-	}
 }
