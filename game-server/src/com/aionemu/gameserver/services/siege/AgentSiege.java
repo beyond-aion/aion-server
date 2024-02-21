@@ -3,22 +3,16 @@ package com.aionemu.gameserver.services.siege;
 import java.util.Collection;
 import java.util.List;
 
-import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
-import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.siege.AgentLocation;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -95,15 +89,6 @@ public class AgentSiege extends Siege<AgentLocation> {
 		sendRewardsToParticipants(getSiegeCounter().getRaceCounter(looser), SiegeResult.FAIL);
 	}
 
-	private void initNpcWalking(Npc npc, String walkerId) {
-		if (npc == null)
-			return;
-		npc.getSpawn().setWalkerId(walkerId);
-		WalkManager.startWalking((NpcAI) npc.getAi());
-		npc.setState(CreatureState.WALK_MODE);
-		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
-	}
-
 	private void broadcastAgentSpawn() {
 		WorldMapInstance levinshorWorldInstance = World.getInstance().getWorldMap(600100000).getMainWorldMapInstance();
 		if (levinshorWorldInstance != null)
@@ -152,13 +137,11 @@ public class AgentSiege extends Siege<AgentLocation> {
 				if (veille != null)
 					throw new SiegeException("Tried to init veille twice!");
 				veille = target;
-				initNpcWalking(veille, "600100000_npcpathgod_l");
 				break;
 			case GHENCHMAN_DARK:
 				if (masta != null)
 					throw new SiegeException("Tried to init masta twice!");
 				masta = target;
-				initNpcWalking(masta, "600100000_npcpathgod_d");
 				break;
 			default:
 				throw new SiegeException("Tried to init a npc with not supported TemplateType " + target.getNpcTemplateType() + " for agent fight!");
