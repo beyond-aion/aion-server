@@ -85,7 +85,7 @@ public class KiskAI extends NpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case SHOULD_DECAY, SHOULD_RESPAWN, SHOULD_REWARD, SHOULD_REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE -> false;
+			case DECAY, RESPAWN, REWARD, REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE -> false;
 			default -> super.ask(question);
 		};
 	}

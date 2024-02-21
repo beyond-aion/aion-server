@@ -79,7 +79,7 @@ public class PlayerTeamDistributionService {
 
 			member.getCommonData().addExp(rewardXp, Rates.XP_GROUP_HUNTING, owner.getObjectTemplate().getL10n());
 			member.getCommonData().addDp(rewardDp);
-			if (owner.getAi().ask(AIQuestion.SHOULD_REWARD_AP) && !(filteredStats.mentorCount > 0 && CustomConfig.MENTOR_GROUP_AP)) {
+			if (owner.getAi().ask(AIQuestion.REWARD_AP) && !(filteredStats.mentorCount > 0 && CustomConfig.MENTOR_GROUP_AP)) {
 				rewardAp *= StatFunctions.calculatePvEApGained(member, owner);
 				int ap = (int) rewardAp / filteredStats.players.size();
 				if (ap >= 1) {
@@ -87,7 +87,7 @@ public class PlayerTeamDistributionService {
 				}
 			}
 		}
-		if (owner.getAi().ask(AIQuestion.SHOULD_LOOT)) {
+		if (owner.getAi().ask(AIQuestion.LOOT)) {
 			// Give Drop
 			Player mostDamagePlayer = owner.getAggroList().getMostPlayerDamageOfMembers(team.getMembers(), filteredStats.highestLevel);
 			if (mostDamagePlayer == null) {

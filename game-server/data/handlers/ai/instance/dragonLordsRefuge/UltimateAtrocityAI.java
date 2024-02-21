@@ -39,21 +39,15 @@ public class UltimateAtrocityAI extends GeneralNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		int skill;
-		switch (getNpcId()) {
-			case 283244:
-				skill = 21160;
-				break;
-			case 283240:
-				skill = 21156;
-				break;
-			case 283237:
-			case 283241:
-				skill = 20923;
-				break;
-			default:
-				return;
-		}
+		int skill = switch (getNpcId()) {
+			case 283244 -> 21160;
+			case 283240 -> 21156;
+			case 283237, 283241 -> 20923;
+			default -> 0;
+		};
+
+		if (skill == 0)
+			return;
 
 		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(this, skill), 500, 2000);
 
@@ -68,13 +62,9 @@ public class UltimateAtrocityAI extends GeneralNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

@@ -99,7 +99,7 @@ public class ServantNpcAI extends GeneralNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case SHOULD_DECAY, SHOULD_RESPAWN, SHOULD_REWARD -> false;
+			case DECAY, RESPAWN, REWARD -> false;
 			default -> super.ask(question);
 		};
 	}

@@ -21,12 +21,12 @@ public class TiamatSkillHelperAI extends NpcAI {
 		super(owner);
 	}
 
-		@Override
-		public float modifyDamage(Creature attacker, float damage, Effect effect) {
-				return 0;
-		}
+	@Override
+	public float modifyDamage(Creature attacker, float damage, Effect effect) {
+		return 0;
+	}
 
-		@Override
+	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
 		handleSkillTask();
@@ -48,11 +48,9 @@ public class TiamatSkillHelperAI extends NpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

@@ -28,24 +28,16 @@ public class DistortedSpaceAI extends NpcAI {
 	}
 
 	private void useskill() {
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (getOwner().getNpcId() == 283097)
-					AIActions.useSkill(DistortedSpaceAI.this, 20740);
-			}
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (getOwner().getNpcId() == 283097)
+				AIActions.useSkill(DistortedSpaceAI.this, 20740);
 		}, 500, 2000);
 
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				cancelTask();
-				if (getOwner().getNpcId() == 283097)
-					AIActions.useSkill(DistortedSpaceAI.this, 20742);
-				getOwner().getController().die();
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			cancelTask();
+			if (getOwner().getNpcId() == 283097)
+				AIActions.useSkill(DistortedSpaceAI.this, 20742);
+			getOwner().getController().die();
 		}, 8000);
 	}
 
@@ -70,13 +62,9 @@ public class DistortedSpaceAI extends NpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

@@ -17,11 +17,11 @@ import ai.AggressiveNpcAI;
  */
 @AIName("IDSweep_shugos")
 public class IDSweep_Shugos extends AggressiveNpcAI {
-	
+
 	private int baseDamage;
 
 	public IDSweep_Shugos(Npc owner) {
-		super(owner); 
+		super(owner);
 	}
 
 	@Override
@@ -50,11 +50,9 @@ public class IDSweep_Shugos extends AggressiveNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_LOOT:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case LOOT -> false;
+			default -> super.ask(question);
+		};
 	}
 }

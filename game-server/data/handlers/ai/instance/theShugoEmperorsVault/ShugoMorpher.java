@@ -73,36 +73,12 @@ public class ShugoMorpher extends GeneralNpcAI {
 
 	private void handleUseItemFinish(Player player) {
 		Race race = player.getRace();
-		boolean morphed = false;
-		switch (getOwner().getNpcId()) {
-			case 833491:
-			case 833494:
-			case 832935:
-				if (race == Race.ELYOS) {
-					morphed = SkillEngine.getInstance().getSkill(getOwner(), 21829, 1, player).useSkill();
-				} else {
-					morphed = SkillEngine.getInstance().getSkill(getOwner(), 21832, 1, player).useSkill();
-				}
-				break;
-			case 833492:
-			case 833495:
-			case 832936:
-				if (race == Race.ELYOS) {
-					morphed = SkillEngine.getInstance().getSkill(getOwner(), 21830, 1, player).useSkill();
-				} else {
-					morphed = SkillEngine.getInstance().getSkill(getOwner(), 21833, 1, player).useSkill();
-				}
-				break;
-			case 833493:
-			case 833496:
-			case 832937:
-				if (race == Race.ELYOS) {
-					morphed = SkillEngine.getInstance().getSkill(getOwner(), 21831, 1, player).useSkill();
-				} else {
-					morphed = SkillEngine.getInstance().getSkill(getOwner(), 21834, 1, player).useSkill();
-				}
-				break;
-		}
+		boolean morphed = switch (getOwner().getNpcId()) {
+			case 833491, 833494, 832935 -> SkillEngine.getInstance().getSkill(getOwner(), race == Race.ELYOS ? 21829 : 21832, 1, player).useSkill();
+			case 833492, 833495, 832936 -> SkillEngine.getInstance().getSkill(getOwner(), race == Race.ELYOS ? 21830 : 21833, 1, player).useSkill();
+			case 833493, 833496, 832937 -> SkillEngine.getInstance().getSkill(getOwner(), race == Race.ELYOS ? 21831 : 21834, 1, player).useSkill();
+			default -> false;
+		};
 
 		if (morphed) {
 			getOwner().getController().delete();
@@ -118,13 +94,9 @@ public class ShugoMorpher extends GeneralNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case CAN_ATTACK_PLAYER:
-			case SHOULD_REWARD:
-			case SHOULD_LOOT:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case ATTACK_PLAYER, REWARD, LOOT -> false;
+			default -> super.ask(question);
+		};
 	}
 }

@@ -21,7 +21,7 @@ import ai.AggressiveNpcAI;
 @AIName("vasuki_lifespark")
 public class VasukiLifesparkAI extends AggressiveNpcAI {
 
-	private AtomicBoolean startedEvent = new AtomicBoolean(false);
+	private final AtomicBoolean startedEvent = new AtomicBoolean();
 	private boolean think = false;
 
 	public VasukiLifesparkAI(Npc owner) {
@@ -38,15 +38,9 @@ public class VasukiLifesparkAI extends AggressiveNpcAI {
 		if (getNpcId() == 217764) {
 			think = true;
 		} else {
-			ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					if (!isDead()) {
-						SkillEngine.getInstance().getSkill(getOwner(), 19126, 46, getOwner()).useNoAnimationSkill();
-					}
-				}
-
+			ThreadPoolManager.getInstance().schedule(() -> {
+				if (!isDead())
+					SkillEngine.getInstance().getSkill(getOwner(), 19126, 46, getOwner()).useNoAnimationSkill();
 			}, 3000);
 		}
 		super.handleSpawned();
@@ -54,8 +48,7 @@ public class VasukiLifesparkAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
-		if (creature instanceof Player) {
-			final Player player = (Player) creature;
+		if (creature instanceof Player player) {
 			if (PositionUtil.getDistance(getOwner(), player) <= 30) {
 				if (startedEvent.compareAndSet(false, true)) {
 					final int level;
@@ -88,29 +81,18 @@ public class VasukiLifesparkAI extends AggressiveNpcAI {
 					}
 					SkillEngine.getInstance().getSkill(getOwner(), skill, level, getOwner()).useNoAnimationSkill();
 					if (getNpcId() != 217764) {
-						ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-							@Override
-							public void run() {
-								if (!isDead()) {
-									if (getNpcId() == 217763) {
-										getPosition().getWorldMapInstance().setDoorState(219, true);
-									}
-									SkillEngine.getInstance().getSkill(getOwner(), 19967, level, getOwner()).useNoAnimationSkill();
-									ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-										@Override
-										public void run() {
-											if (!isDead()) {
-												AIActions.deleteOwner(VasukiLifesparkAI.this);
-											}
-										}
-
-									}, 3500);
-
+						ThreadPoolManager.getInstance().schedule(() -> {
+							if (!isDead()) {
+								if (getNpcId() == 217763) {
+									getPosition().getWorldMapInstance().setDoorState(219, true);
 								}
-							}
+								SkillEngine.getInstance().getSkill(getOwner(), 19967, level, getOwner()).useNoAnimationSkill();
+								ThreadPoolManager.getInstance().schedule(() -> {
+									if (!isDead())
+										AIActions.deleteOwner(VasukiLifesparkAI.this);
+								}, 3500);
 
+							}
 						}, 3500);
 					} else {
 						SkillEngine.getInstance().getSkill(getOwner(), 19974, 46, getOwner()).useNoAnimationSkill();
@@ -122,12 +104,10 @@ public class VasukiLifesparkAI extends AggressiveNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case CAN_RESIST_ABNORMAL:
-				return true;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case RESIST_ABNORMAL -> true;
+			default -> super.ask(question);
+		};
 	}
 
 	@Override

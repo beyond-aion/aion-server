@@ -42,15 +42,10 @@ public class KebbitAI extends GeneralNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-			case SHOULD_LOOT:
-			case CAN_ATTACK_PLAYER:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case RESPAWN, REWARD, LOOT, ATTACK_PLAYER -> false;
+			default -> super.ask(question);
+		};
 	}
 
 	@Override

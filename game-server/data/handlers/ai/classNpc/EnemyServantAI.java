@@ -24,38 +24,24 @@ public class EnemyServantAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (getCreator() == null || getCreator().getTarget() == null)
-					return;
-				AIActions.targetCreature(EnemyServantAI.this, (Creature) getCreator().getTarget());
-				attack();
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (getCreator() == null || getCreator().getTarget() == null)
+				return;
+			AIActions.targetCreature(EnemyServantAI.this, (Creature) getCreator().getTarget());
+			attack();
 		}, 2000);
 	}
 
 	private void attack() {
-		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				getOwner().getController().useSkill(16907, 55);
-			}
-		}, 1000, 6000);
+		Future<?> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> getOwner().getController().useSkill(16907, 55), 1000, 6000);
 		getOwner().getController().addTask(TaskId.SKILL_USE, task);
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

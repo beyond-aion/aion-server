@@ -18,24 +18,12 @@ public class MarabataControllerAI extends NpcAI {
 	}
 
 	private Npc getBoss() {
-		Npc npc = null;
-		switch (getNpcId()) {
-			case 700443:
-			case 700444:
-			case 700442:
-				npc = getPosition().getWorldMapInstance().getNpc(214850);
-				break;
-			case 700446:
-			case 700447:
-			case 700445:
-				npc = getPosition().getWorldMapInstance().getNpc(214851);
-				break;
-			case 700440:
-			case 700441:
-			case 700439:
-				npc = getPosition().getWorldMapInstance().getNpc(214849);
-				break;
-		}
+		Npc npc = switch (getNpcId()) {
+			case 700443, 700444, 700442 -> getPosition().getWorldMapInstance().getNpc(214850);
+			case 700446, 700447, 700445 -> getPosition().getWorldMapInstance().getNpc(214851);
+			case 700440, 700441, 700439 -> getPosition().getWorldMapInstance().getNpc(214849);
+			default -> null;
+		};
 		return npc;
 	}
 
@@ -78,7 +66,7 @@ public class MarabataControllerAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		ThreadPoolManager.getInstance().schedule(() -> useSkill(), 3500);
+		ThreadPoolManager.getInstance().schedule(this::useSkill, 3500);
 		ThreadPoolManager.getInstance().schedule(() -> applyEffect(false), 10000);
 	}
 
@@ -87,36 +75,20 @@ public class MarabataControllerAI extends NpcAI {
 			return;
 
 		AIActions.targetSelf(this);
-		int skill = 0;
-		switch (getNpcId()) {
-			case 700443:
-			case 700446:
-			case 700440:
-				skill = 18554;
-				break;
-			case 700444:
-			case 700447:
-			case 700441:
-				skill = 18555;
-				break;
-			case 700442:
-			case 700445:
-			case 700439:
-				skill = 18553;
-				break;
-		}
+		int skill = switch (getNpcId()) {
+			case 700443, 700446, 700440 -> 18554;
+			case 700444, 700447, 700441 -> 18555;
+			case 700442, 700445, 700439 -> 18553;
+			default -> 0;
+		};
 		AIActions.useSkill(this, skill);
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

@@ -79,7 +79,7 @@ public class PazuzuAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case SHOULD_LOOT, SHOULD_REWARD_AP -> false;
+			case LOOT, REWARD_AP -> false;
 			default -> super.ask(question);
 		};
 	}

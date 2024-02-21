@@ -24,13 +24,7 @@ public class TahabataAltarFinalAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.useSkill(TahabataAltarFinalAI.this, 20972);
-			}
-		}, 0, 2000);
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(TahabataAltarFinalAI.this, 20972), 0, 2000);
 	}
 
 	@Override
@@ -41,13 +35,9 @@ public class TahabataAltarFinalAI extends NpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

@@ -42,12 +42,12 @@ public class CalculatedAtrocityAI extends GeneralNpcAI {
 		return 0;
 	}
 
-		@Override
-		public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
-				return damage * 0.7f;
-		}
+	@Override
+	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
+		return damage * 0.7f;
+	}
 
-		@Override
+	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
 
@@ -59,7 +59,7 @@ public class CalculatedAtrocityAI extends GeneralNpcAI {
 	private void calculateAndApplyDamage() {
 		getKnownList().forEachPlayer(p -> {
 			if (getOwner().canSee(p) && PositionUtil.isInRange(getOwner(), p, 45) && PositionUtil.isInFrontOf(p, getOwner(), 45))
-					SkillEngine.getInstance().applyEffectDirectly(21894, getOwner(), p);
+				SkillEngine.getInstance().applyEffectDirectly(21894, getOwner(), p);
 		});
 	}
 
@@ -71,13 +71,9 @@ public class CalculatedAtrocityAI extends GeneralNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

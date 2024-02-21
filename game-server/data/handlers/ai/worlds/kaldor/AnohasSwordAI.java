@@ -88,6 +88,6 @@ public class AnohasSwordAI extends NpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		return question == AIQuestion.SHOULD_RESPAWN ? false : super.ask(question);
+		return question == AIQuestion.RESPAWN ? false : super.ask(question);
 	}
 }

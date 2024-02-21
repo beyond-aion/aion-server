@@ -39,28 +39,22 @@ public class StonespearGuardianStoneAI extends NpcAI {
 	public void handleDied() {
 		super.handleDied();
 		getOwner().getController().delete();
-		if (task != null && !task.isCancelled()) {
+		if (task != null && !task.isCancelled())
 			task.cancel(true);
-		}
 	}
 
 	@Override
 	public void handleDespawned() {
-		if (task != null && !task.isCancelled()) {
+		if (task != null && !task.isCancelled())
 			task.cancel(true);
-		}
 		super.handleDespawned();
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-			case SHOULD_LOOT:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case RESPAWN, REWARD, LOOT -> false;
+			default -> super.ask(question);
+		};
 	}
 }

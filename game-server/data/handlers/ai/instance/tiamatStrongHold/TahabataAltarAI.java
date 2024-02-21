@@ -31,15 +31,11 @@ public class TahabataAltarAI extends NpcAI {
 
 	private void checkDistance(Creature creature) {
 		int owner = getNpcId();
-		int debuff = 0;
-		switch (owner) {
-			case 283116:
-				debuff = 20970;
-				break;
-			case 283118:
-				debuff = 20971;
-				break;
-		}
+		int debuff = switch (owner) {
+			case 283116 -> 20970;
+			case 283118 -> 20971;
+			default -> 0;
+		};
 		if (creature instanceof Player) {
 			if (getNpcId() == 283253 && PositionUtil.isInRangeLimited(getOwner(), creature, 25, 37)
 				|| getNpcId() == 283255 && PositionUtil.isInRangeLimited(getOwner(), creature, 20, 25)) {
@@ -52,13 +48,9 @@ public class TahabataAltarAI extends NpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

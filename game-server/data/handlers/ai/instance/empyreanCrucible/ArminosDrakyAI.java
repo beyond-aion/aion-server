@@ -49,14 +49,10 @@ public class ArminosDrakyAI extends GeneralNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case CAN_RESIST_ABNORMAL:
-				return true;
-			case SHOULD_REWARD_AP:
-				return true;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case RESIST_ABNORMAL, REWARD_AP -> true;
+			default -> super.ask(question);
+		};
 	}
 
 	@Override

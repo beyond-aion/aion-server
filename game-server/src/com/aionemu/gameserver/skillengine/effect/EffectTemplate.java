@@ -92,6 +92,7 @@ public abstract class EffectTemplate {
 	protected int maxDamageChance;
 	@XmlAttribute(name = "max_damage_delta")
 	protected int maxDamageDelta;
+
 	/**
 	 * @return the value
 	 */
@@ -258,7 +259,7 @@ public abstract class EffectTemplate {
 	}
 
 	/**
-	 * @return the base value (damage, heal, etc.) according to the skill template, it should equal the value stated in the skill description 
+	 * @return the base value (damage, heal, etc.) according to the skill template, it should equal the value stated in the skill description
 	 */
 	protected int calculateBaseValue(Effect effect) {
 		return value + delta * effect.getSkillLevel();
@@ -536,15 +537,18 @@ public abstract class EffectTemplate {
 
 		// calculate cumulative resist chance for fear, sleep and paralyze if effector & effected are players
 		if (effector.getMaster() instanceof Player && effected instanceof Player) {
-			if (statEnum == StatEnum.FEAR_RESISTANCE && ((Player) effected).getFearCount() >= 3 && ((Player) effected).validateCumulativeFearResistExpirationTime()) {
+			if (statEnum == StatEnum.FEAR_RESISTANCE && ((Player) effected).getFearCount() >= 3
+				&& ((Player) effected).validateCumulativeFearResistExpirationTime()) {
 				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getFearCount())) {
 					return false;
 				}
-			} else if (statEnum == StatEnum.SLEEP_RESISTANCE && ((Player) effected).getSleepCount() >= 3 && ((Player) effected).validateCumulativeSleepResistExpirationTime()) {
+			} else if (statEnum == StatEnum.SLEEP_RESISTANCE && ((Player) effected).getSleepCount() >= 3
+				&& ((Player) effected).validateCumulativeSleepResistExpirationTime()) {
 				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getSleepCount())) {
 					return false;
 				}
-			} else if (statEnum == StatEnum.PARALYZE_RESISTANCE && ((Player) effected).getParalyzeCount() >= 3 && ((Player) effected).validateCumulativeParalyzeResistExpirationTime()) {
+			} else if (statEnum == StatEnum.PARALYZE_RESISTANCE && ((Player) effected).getParalyzeCount() >= 3
+				&& ((Player) effected).validateCumulativeParalyzeResistExpirationTime()) {
 				if (Rnd.get(1, 1000) <= getCumulativeResistChanceFor(((Player) effected).getParalyzeCount())) {
 					return false;
 				}
@@ -583,7 +587,7 @@ public abstract class EffectTemplate {
 		if (effected != effect.getEffector()) {
 			if (effected instanceof Npc) {
 				Npc npc = (Npc) effected;
-				if (npc.isBoss() || npc.hasStatic() || npc instanceof Kisk || npc.getAi().ask(AIQuestion.CAN_RESIST_ABNORMAL))
+				if (npc.isBoss() || npc.hasStatic() || npc instanceof Kisk || npc.getAi().ask(AIQuestion.RESIST_ABNORMAL))
 					return true;
 				if (npc.getObjectTemplate().getStatsTemplate().getRunSpeed() == 0) {
 					if (statEnum == StatEnum.PULLED_RESISTANCE || statEnum == StatEnum.STAGGER_RESISTANCE || statEnum == StatEnum.STUMBLE_RESISTANCE)

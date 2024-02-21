@@ -18,6 +18,7 @@ public class CalindiSummonsAI extends NpcAI {
 
 	private Future<?> task;
 	private VisibleObject textureObject = null;
+
 	public CalindiSummonsAI(Npc owner) {
 		super(owner);
 	}
@@ -87,13 +88,9 @@ public class CalindiSummonsAI extends NpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

@@ -1,8 +1,8 @@
 package ai.worlds.panesterra.ahserionsflight;
 
-import ai.AggressiveNpcAI;
+import java.util.*;
+
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -14,7 +14,7 @@ import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction;
 import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
 
-import java.util.*;
+import ai.AggressiveNpcAI;
 
 /**
  * @author Yeats, Estrayl
@@ -99,15 +99,5 @@ public class Ahserion extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		super.handleBackHome();
 		initHpEvents();
-	}
-
-	@Override
-	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case CAN_RESIST_ABNORMAL:
-				return true;
-			default:
-				return super.ask(question);
-		}
 	}
 }

@@ -22,15 +22,15 @@ public class EarthQuakeAI extends NpcAI {
 
 	@Override
 	protected void handleCreatureSee(Creature creature) {
-		checkDistance(this, creature);
+		checkDistance(creature);
 	}
 
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
-		checkDistance(this, creature);
+		checkDistance(creature);
 	}
 
-	private void checkDistance(NpcAI ai, Creature creature) {
+	private void checkDistance(Creature creature) {
 		if (creature instanceof Player) {
 			if (PositionUtil.isInRange(getOwner(), creature, 5) && !creature.getEffectController().hasAbnormalEffect(20718)) {
 				AIActions.useSkill(this, 20718);
@@ -45,24 +45,14 @@ public class EarthQuakeAI extends NpcAI {
 	}
 
 	private void despawn() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				getOwner().getController().delete();
-			}
-		}, 9000);
+		ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 9000);
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

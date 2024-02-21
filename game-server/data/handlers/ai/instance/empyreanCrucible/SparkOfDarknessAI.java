@@ -27,36 +27,21 @@ public class SparkOfDarknessAI extends GeneralNpcAI {
 	}
 
 	private void startEventTask() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					SkillEngine.getInstance().getSkill(getOwner(), 19554, 1, getOwner()).useNoAnimationSkill();
-				}
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead())
+				SkillEngine.getInstance().getSkill(getOwner(), 19554, 1, getOwner()).useNoAnimationSkill();
 		}, 500);
 	}
 
 	private void startLifeTask() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.deleteOwner(SparkOfDarknessAI.this);
-			}
-
-		}, 6500);
+		ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(SparkOfDarknessAI.this), 6500);
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case CAN_ATTACK_PLAYER:
-				return true;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case ATTACK_PLAYER -> true;
+			default -> super.ask(question);
+		};
 	}
 }

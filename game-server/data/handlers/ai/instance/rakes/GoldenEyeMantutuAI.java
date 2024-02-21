@@ -27,7 +27,7 @@ import ai.AggressiveNpcAI;
 public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 
 	private boolean canThink = true;
-	private AtomicBoolean isHome = new AtomicBoolean(true);
+	private final AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> hungerTask;
 
 	public GoldenEyeMantutuAI(Npc owner) {
@@ -102,12 +102,10 @@ public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case CAN_RESIST_ABNORMAL:
-				return true;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case RESIST_ABNORMAL -> true;
+			default -> super.ask(question);
+		};
 	}
 
 	@Override
@@ -146,7 +144,7 @@ public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 
 	private void doSchedule() {
 		hungerTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			int skill = Rnd.nextBoolean() ?  20489 : 20490; // Hunger / Thirst
+			int skill = Rnd.nextBoolean() ? 20489 : 20490; // Hunger / Thirst
 			SkillEngine.getInstance().getSkill(getOwner(), skill, 20, getOwner()).useNoAnimationSkill();
 		}, 10000, 30000);
 	}

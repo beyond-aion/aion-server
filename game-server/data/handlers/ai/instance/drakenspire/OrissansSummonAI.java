@@ -56,8 +56,8 @@ public class OrissansSummonAI extends GeneralNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case CAN_RESIST_ABNORMAL -> true;
-			case SHOULD_REWARD -> false;
+			case RESIST_ABNORMAL -> true;
+			case REWARD -> false;
 			default -> super.ask(question);
 		};
 	}

@@ -23,14 +23,9 @@ public class DefenseWallAI extends GeneralNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_REWARD:
-				return false;
-			case CAN_RESIST_ABNORMAL:
-				return true;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

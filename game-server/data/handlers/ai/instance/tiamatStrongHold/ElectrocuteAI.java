@@ -24,24 +24,12 @@ public class ElectrocuteAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.useSkill(ElectrocuteAI.this, 20757);
-			}
-		}, 0, 2000);
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(ElectrocuteAI.this, 20757), 0, 2000);
 		despawn();
 	}
 
 	private void despawn() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				getOwner().getController().delete();
-			}
-		}, 10500);
+		ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 10500);
 	}
 
 	@Override
@@ -52,13 +40,9 @@ public class ElectrocuteAI extends NpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

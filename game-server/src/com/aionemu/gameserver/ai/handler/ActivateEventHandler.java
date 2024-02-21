@@ -22,7 +22,7 @@ public class ActivateEventHandler {
 		Npc npc = npcAI.getOwner();
 		npc.updateKnownlist();
 		npc.getController().loseAggro(false);
-		if (npcAI.ask(AIQuestion.SHOULD_REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE))
+		if (npcAI.ask(AIQuestion.REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE))
 			npc.getEffectController().removeAllEffects();
 	}
 }

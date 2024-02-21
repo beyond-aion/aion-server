@@ -21,7 +21,7 @@ public class ShulackGuidedBombAI extends AggressiveNpcAI {
 
 	private boolean isDestroyed;
 	private boolean isHome = true;
-	Future<?> task;
+	private Future<?> task;
 
 	public ShulackGuidedBombAI(Npc owner) {
 		super(owner);
@@ -30,9 +30,8 @@ public class ShulackGuidedBombAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDespawned() {
 		super.handleDespawned();
-		if (task != null) {
+		if (task != null)
 			task.cancel(true);
-		}
 	}
 
 	@Override
@@ -51,33 +50,22 @@ public class ShulackGuidedBombAI extends AggressiveNpcAI {
 	}
 
 	private void starLifeTask() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead() && !isDestroyed) {
-					despawn();
-				}
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead() && !isDestroyed)
+				despawn();
 		}, 10000);
 	}
 
 	private void doSchedule(final Creature creature) {
 
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead() && !isDestroyed) {
-					destroy(creature);
-				} else {
-					if (task != null) {
-						task.cancel(true);
-					}
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (!isDead() && !isDestroyed) {
+				destroy(creature);
+			} else {
+				if (task != null) {
+					task.cancel(true);
 				}
 			}
-
 		}, 1000, 1000);
 
 	}
@@ -93,29 +81,17 @@ public class ShulackGuidedBombAI extends AggressiveNpcAI {
 			if (creature != null && PositionUtil.getDistance(getOwner(), creature) <= 4) {
 				isDestroyed = true;
 				SkillEngine.getInstance().getSkill(getOwner(), 19415, 49, getOwner()).useNoAnimationSkill();
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						despawn();
-					}
-
-				}, 3200);
+				ThreadPoolManager.getInstance().schedule(this::despawn, 3200);
 			}
 		}
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			case CAN_RESIST_ABNORMAL:
-				return true;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			case RESIST_ABNORMAL -> true;
+			default -> super.ask(question);
+		};
 	}
 }

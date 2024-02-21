@@ -18,7 +18,7 @@ import ai.AggressiveNpcAI;
 @AIName("aggressive_stonespear")
 public class StonespearAggressiveNpcAI extends AggressiveNpcAI {
 
-	private List<Integer> guardIds = new ArrayList<>();
+	private final List<Integer> guardIds = new ArrayList<>();
 
 	public StonespearAggressiveNpcAI(Npc owner) {
 		super(owner);
@@ -31,7 +31,7 @@ public class StonespearAggressiveNpcAI extends AggressiveNpcAI {
 	}
 
 	private void findGuardianStone() {
-		Collections.addAll(guardIds, new Integer[] { 855763, 855832, 855786, 856466, 856467, 856468 });
+		Collections.addAll(guardIds, 855763, 855832, 855786, 856466, 856467, 856468);
 		Creature target = null;
 		for (Integer npcId : guardIds) {
 			target = getOwner().getPosition().getWorldMapInstance().getNpc(npcId.intValue());
@@ -54,13 +54,9 @@ public class StonespearAggressiveNpcAI extends AggressiveNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-			case SHOULD_LOOT:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case RESPAWN, REWARD, LOOT -> false;
+			default -> super.ask(question);
+		};
 	}
 }

@@ -4,13 +4,7 @@ import java.util.EnumSet;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.event.AIListenable;
-import com.aionemu.gameserver.ai.handler.ActivateEventHandler;
-import com.aionemu.gameserver.ai.handler.CreatureEventHandler;
-import com.aionemu.gameserver.ai.handler.DiedEventHandler;
-import com.aionemu.gameserver.ai.handler.FollowEventHandler;
-import com.aionemu.gameserver.ai.handler.MoveEventHandler;
-import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
-import com.aionemu.gameserver.ai.handler.SpawnEventHandler;
+import com.aionemu.gameserver.ai.handler.*;
 import com.aionemu.gameserver.ai.manager.SimpleAttackManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
@@ -159,17 +153,17 @@ public abstract class NpcAI extends AITemplate<Npc> {
 		switch (question) {
 			case DESTINATION_REACHED:
 				return isDestinationReached();
-			case CAN_SHOUT:
+			case SHOUT:
 				return AIConfig.SHOUTS_ENABLE && NpcShoutsService.getInstance().mayShout(getOwner());
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-			case SHOULD_LOOT:
+			case DECAY:
+			case RESPAWN:
+			case REWARD:
+			case LOOT:
 				return true;
-			case SHOULD_REWARD_AP:
+			case REWARD_AP:
 				WorldType wt = getOwner().getWorldType();
 				return wt == WorldType.ABYSS || wt != WorldType.ELYSEA && wt != WorldType.ASMODAE && apRewardingRaces.contains(getRace());
-			case SHOULD_REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE:
+			case REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE:
 				return !getOwner().isInInstance();
 			default:
 				return false;

@@ -30,39 +30,29 @@ public class IdeResonatorAI extends NpcAI {
 		AIActions.targetCreature(this, hyperion);
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead() && hyperion != null && !hyperion.isDead()) {
-				int firstBuff = 0;
-				switch (getNpcId()) {
-					case 231093:
-						firstBuff = 21381;
-						break;
-					case 231094:
-						firstBuff = 21383;
-						break;
-					default: // NCSoft only implemented 3 different skill IDs for those temporary buffs
-						firstBuff = 21257;
-						break;
-				}
+				int firstBuff = switch (getNpcId()) {
+					case 231093 -> 21381;
+					case 231094 -> 21383;
+					default -> 21257;// NCSoft only implemented 3 different skill IDs for those temporary buffs
+				};
 				AIActions.useSkill(this, firstBuff);
 			}
 		}, 8000);
-		task = ThreadPoolManager.getInstance().schedule(new Runnable() {
 
-			@Override
-			public void run() {
-				if (!isDead() && hyperion != null && !hyperion.isDead()) {
-					int secondBuff = 0;
-					if (!hyperion.getEffectController().hasAbnormalEffect(21258))
-						secondBuff = 21258;
-					else if (!hyperion.getEffectController().hasAbnormalEffect(21382))
-						secondBuff = 21382;
-					else if (!hyperion.getEffectController().hasAbnormalEffect(21384))
-						secondBuff = 21384;
-					else if (!hyperion.getEffectController().hasAbnormalEffect(21416))
-						secondBuff = 21416;
+		task = ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead() && hyperion != null && !hyperion.isDead()) {
+				int secondBuff = 0;
+				if (!hyperion.getEffectController().hasAbnormalEffect(21258))
+					secondBuff = 21258;
+				else if (!hyperion.getEffectController().hasAbnormalEffect(21382))
+					secondBuff = 21382;
+				else if (!hyperion.getEffectController().hasAbnormalEffect(21384))
+					secondBuff = 21384;
+				else if (!hyperion.getEffectController().hasAbnormalEffect(21416))
+					secondBuff = 21416;
 
-					if (secondBuff != 0)
-						AIActions.useSkill(IdeResonatorAI.this, secondBuff);
-				}
+				if (secondBuff != 0)
+					AIActions.useSkill(IdeResonatorAI.this, secondBuff);
 			}
 		}, 18000);
 	}
@@ -70,12 +60,7 @@ public class IdeResonatorAI extends NpcAI {
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
-			case 21258:
-			case 21382:
-			case 21384:
-			case 21416:
-				SkillEngine.getInstance().applyEffectDirectly(21371, getOwner(), getOwner());
-				break;
+			case 21258, 21382, 21384, 21416 -> SkillEngine.getInstance().applyEffectDirectly(21371, getOwner(), getOwner());
 		}
 	}
 
@@ -98,13 +83,9 @@ public class IdeResonatorAI extends NpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

@@ -47,11 +47,9 @@ public class TiamatDragonAI extends AggressiveNpcAI {
 	}
 
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

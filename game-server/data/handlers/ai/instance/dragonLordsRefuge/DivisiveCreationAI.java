@@ -48,15 +48,15 @@ public class DivisiveCreationAI extends AggressiveNpcAI {
 	@Override
 	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		if (effect != null) {
-				switch (effect.getSkillId()) {
-						case 20986:
-								damage *= 0.6f;
-								break;
-						case 21897:
-						case 21898:
-								damage *= 0.5f;
-								break;
-				}
+			switch (effect.getSkillId()) {
+				case 20986:
+					damage *= 0.6f;
+					break;
+				case 21897:
+				case 21898:
+					damage *= 0.5f;
+					break;
+			}
 		}
 		return damage;
 	}
@@ -68,13 +68,9 @@ public class DivisiveCreationAI extends AggressiveNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

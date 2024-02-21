@@ -23,38 +23,24 @@ public class WalkingTalkingBombAI extends AggressiveNpcAI {
 	}
 
 	private void doSchedule() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					SkillEngine.getInstance().getSkill(getOwner(), 19416, 49, getOwner()).useNoAnimationSkill();
-					ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-						@Override
-						public void run() {
-							if (!isDead()) {
-								despawn();
-							}
-						}
-					}, 4000);
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead()) {
+				SkillEngine.getInstance().getSkill(getOwner(), 19416, 49, getOwner()).useNoAnimationSkill();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (!isDead())
+						despawn();
+				}, 4000);
 			}
 		}, 2000);
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			case CAN_RESIST_ABNORMAL:
-				return true;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			case RESIST_ABNORMAL -> true;
+			default -> super.ask(question);
+		};
 	}
 
 	private void despawn() {

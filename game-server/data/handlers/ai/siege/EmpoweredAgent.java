@@ -234,7 +234,7 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case SHOULD_RESPAWN, SHOULD_REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE -> false;
+			case RESPAWN, REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE -> false;
 			default -> super.ask(question);
 		};
 	}

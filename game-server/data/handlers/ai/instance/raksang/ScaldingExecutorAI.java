@@ -19,7 +19,7 @@ import ai.AggressiveNpcAI;
 @AIName("scalding_executor")
 public class ScaldingExecutorAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isDestroyed = new AtomicBoolean(false);
+	private final AtomicBoolean isDestroyed = new AtomicBoolean();
 
 	public ScaldingExecutorAI(Npc owner) {
 		super(owner);
@@ -202,16 +202,11 @@ public class ScaldingExecutorAI extends AggressiveNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			case CAN_RESIST_ABNORMAL:
-				return true;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			case RESIST_ABNORMAL -> true;
+			default -> super.ask(question);
+		};
 	}
 
 	@Override

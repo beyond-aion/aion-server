@@ -120,10 +120,10 @@ public class NpcController extends CreatureController<Npc> {
 		boolean shouldRespawn = true;
 		boolean shouldLoot = true;
 		try {
-			shouldDecay = owner.getAi().ask(AIQuestion.SHOULD_DECAY);
-			shouldRespawn = owner.getAi().ask(AIQuestion.SHOULD_RESPAWN);
-			shouldLoot = owner.getAi().ask(AIQuestion.SHOULD_LOOT);
-			if (owner.getAi().ask(AIQuestion.SHOULD_REWARD))
+			shouldDecay = owner.getAi().ask(AIQuestion.DECAY);
+			shouldRespawn = owner.getAi().ask(AIQuestion.RESPAWN);
+			shouldLoot = owner.getAi().ask(AIQuestion.LOOT);
+			if (owner.getAi().ask(AIQuestion.REWARD))
 				doReward();
 			owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
 			owner.getAi().onGeneralEvent(AIEventType.DIED);
@@ -233,7 +233,7 @@ public class NpcController extends CreatureController<Npc> {
 					EventService.getInstance().onPveKill(player, getOwner());
 					player.getCommonData().addExp(rewardXp, Rates.XP_HUNTING, getOwner().getObjectTemplate().getL10n());
 					player.getCommonData().addDp(rewardDp);
-					if (getOwner().getAi().ask(AIQuestion.SHOULD_REWARD_AP)) {
+					if (getOwner().getAi().ask(AIQuestion.REWARD_AP)) {
 						int calculatedAp = StatFunctions.calculatePvEApGained(player, getOwner());
 						rewardAp *= calculatedAp;
 						if (rewardAp >= 1) {
@@ -241,7 +241,7 @@ public class NpcController extends CreatureController<Npc> {
 						}
 					}
 				}
-				if (attacker.equals(winner) && getOwner().getAi().ask(AIQuestion.SHOULD_LOOT))
+				if (attacker.equals(winner) && getOwner().getAi().ask(AIQuestion.LOOT))
 					DropRegistrationService.getInstance().registerDrop(getOwner(), player, player.getLevel(), null);
 			}
 		}

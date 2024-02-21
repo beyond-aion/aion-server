@@ -21,18 +21,17 @@ public class TimeAcceleratorAI extends NpcAI {
 
 	@Override
 	protected void handleCreatureSee(Creature creature) {
-		checkDistance(this, creature);
+		checkDistance(creature);
 	}
 
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
-		checkDistance(this, creature);
+		checkDistance(creature);
 	}
 
-	private void checkDistance(NpcAI ai, Creature creature) {
-		if (PositionUtil.isInRange(getOwner(), creature, 5) && !creature.getEffectController().hasAbnormalEffect(20727)) {
+	private void checkDistance(Creature creature) {
+		if (PositionUtil.isInRange(getOwner(), creature, 5) && !creature.getEffectController().hasAbnormalEffect(20727))
 			AIActions.useSkill(this, 20727);
-		}
 	}
 
 	@Override
@@ -42,24 +41,14 @@ public class TimeAcceleratorAI extends NpcAI {
 	}
 
 	private void despawn() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				getOwner().getController().delete();
-			}
-		}, 20000);
+		ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 20000);
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

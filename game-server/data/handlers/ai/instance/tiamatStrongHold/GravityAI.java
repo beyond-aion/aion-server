@@ -24,20 +24,8 @@ public class GravityAI extends NpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.useSkill(GravityAI.this, 20738);
-			}
-		}, 0, 3250);
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.deleteOwner(GravityAI.this);
-			}
-		}, 20000);
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> AIActions.useSkill(GravityAI.this, 20738), 0, 3250);
+		ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(GravityAI.this), 20000);
 	}
 
 	@Override
@@ -49,13 +37,9 @@ public class GravityAI extends NpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

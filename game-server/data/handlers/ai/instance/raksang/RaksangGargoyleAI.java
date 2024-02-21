@@ -22,26 +22,18 @@ public class RaksangGargoyleAI extends AggressiveNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					SkillEngine.getInstance().getSkill(getOwner(), 19126, 46, getOwner()).useNoAnimationSkill();
-				}
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead())
+				SkillEngine.getInstance().getSkill(getOwner(), 19126, 46, getOwner()).useNoAnimationSkill();
 		}, 2000);
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case CAN_RESIST_ABNORMAL:
-				return true;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case RESIST_ABNORMAL -> true;
+			default -> super.ask(question);
+		};
 	}
 
 	@Override

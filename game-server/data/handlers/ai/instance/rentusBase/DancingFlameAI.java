@@ -64,16 +64,11 @@ public class DancingFlameAI extends GeneralNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case CAN_ATTACK_PLAYER:
-				return true;
-			case SHOULD_RESPAWN:
-			case SHOULD_LOOT:
-			case SHOULD_DECAY:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case ATTACK_PLAYER -> true;
+			case RESPAWN, LOOT, DECAY -> false;
+			default -> super.ask(question);
+		};
 	}
 
 }

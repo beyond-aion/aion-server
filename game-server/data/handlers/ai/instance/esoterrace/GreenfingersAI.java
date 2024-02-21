@@ -18,7 +18,7 @@ import ai.AggressiveNpcAI;
 @AIName("greenfingers")
 public class GreenfingersAI extends AggressiveNpcAI {
 
-	private AtomicBoolean isDestroyed = new AtomicBoolean(false);
+	private final AtomicBoolean isDestroyed = new AtomicBoolean();
 	private int walkPosition;
 	private int helperSkill;
 
@@ -68,29 +68,18 @@ public class GreenfingersAI extends AggressiveNpcAI {
 	}
 
 	private void startDespawnTask() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					AIActions.deleteOwner(GreenfingersAI.this);
-				}
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead())
+				AIActions.deleteOwner(GreenfingersAI.this);
 		}, 3000);
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case CAN_RESIST_ABNORMAL:
-				return true;
-			case SHOULD_DECAY:
-			case SHOULD_RESPAWN:
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case RESIST_ABNORMAL -> true;
+			case DECAY, RESPAWN, REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

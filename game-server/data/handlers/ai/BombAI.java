@@ -48,7 +48,7 @@ public class BombAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case SHOULD_DECAY, SHOULD_REWARD, SHOULD_LOOT -> false;
+			case DECAY, REWARD, LOOT -> false;
 			default -> super.ask(question);
 		};
 	}

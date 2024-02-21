@@ -18,7 +18,7 @@ import ai.ActionItemNpcAI;
 @AIName("defensive_cannon")
 public class DefensiveCannonAI extends ActionItemNpcAI {
 
-	private AtomicBoolean canUse = new AtomicBoolean(true);
+	private final AtomicBoolean canUse = new AtomicBoolean(true);
 
 	public DefensiveCannonAI(Npc owner) {
 		super(owner);
@@ -38,11 +38,9 @@ public class DefensiveCannonAI extends ActionItemNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_REWARD:
-				return false;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case REWARD -> false;
+			default -> super.ask(question);
+		};
 	}
 }

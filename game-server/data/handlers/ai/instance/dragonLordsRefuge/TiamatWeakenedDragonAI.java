@@ -236,14 +236,10 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case SHOULD_LOOT:
-				return false;
-			case SHOULD_CAN_SEE_ADD_BOUNDS_ON_ATTACKED:
-			case SHOULD_CAN_SEE_ADD_BOUNDS_ON_ATTACK:
-				return true;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case LOOT -> false;
+			case ADD_BOUNDS_ON_ATTACKED, ADD_BOUNDS_ON_ATTACK -> true;
+			default -> super.ask(question);
+		};
 	}
 }

@@ -19,7 +19,7 @@ import ai.AggressiveNpcAI;
 @AIName("seal_generator")
 public class SealGeneratorAI extends AggressiveNpcAI {
 
-	private AtomicBoolean startedEvent = new AtomicBoolean(false);
+	private final AtomicBoolean startedEvent = new AtomicBoolean();
 
 	public SealGeneratorAI(Npc owner) {
 		super(owner);
@@ -32,24 +32,18 @@ public class SealGeneratorAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
-		if (creature instanceof Player) {
-			final Player player = (Player) creature;
-			if (PositionUtil.getDistance(getOwner(), player) <= 30) {
-				if (startedEvent.compareAndSet(false, true)) {
-					PacketSendUtility.broadcastToMap(getOwner(), 1401156);
-				}
-			}
+		if (creature instanceof Player player) {
+			if (PositionUtil.getDistance(getOwner(), player) <= 30 && startedEvent.compareAndSet(false, true))
+				PacketSendUtility.broadcastToMap(getOwner(), 1401156);
 		}
 	}
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case CAN_RESIST_ABNORMAL:
-				return true;
-			default:
-				return super.ask(question);
-		}
+		return switch (question) {
+			case RESIST_ABNORMAL -> true;
+			default -> super.ask(question);
+		};
 	}
 
 	@Override
