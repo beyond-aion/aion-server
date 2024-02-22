@@ -330,7 +330,7 @@ public class AutoGroupService {
 
 	public boolean destroyIfPossible(AutoInstance autoInstance) {
 		WorldMapInstance instance = autoInstance.getInstance();
-		if (instance.getPlayersInside().stream().noneMatch(Player::isOnline)) {
+		if (autoInstance.getRegisteredAGPlayers().isEmpty() && instance.getPlayersInside().stream().noneMatch(Player::isOnline)) {
 			autoInstances.remove(instance);
 			InstanceService.destroyInstance(instance);
 			return true;
