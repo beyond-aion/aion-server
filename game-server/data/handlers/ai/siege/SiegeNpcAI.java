@@ -18,7 +18,7 @@ public class SiegeNpcAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case DECAY, RESPAWN, LOOT, REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE -> false;
+			case ALLOW_DECAY, ALLOW_RESPAWN, REWARD_LOOT, REMOVE_EFFECTS_ON_MAP_REGION_DEACTIVATE -> false;
 			default -> super.ask(question);
 		};
 	}

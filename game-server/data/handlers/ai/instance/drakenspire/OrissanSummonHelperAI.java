@@ -55,7 +55,7 @@ public class OrissanSummonHelperAI extends GeneralNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		if (question == AIQuestion.REWARD)
+		if (question == AIQuestion.REWARD_AP_XP_DP_LOOT)
 			return false;
 		return super.ask(question);
 	}

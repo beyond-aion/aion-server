@@ -92,7 +92,7 @@ public class SematariuxAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	protected boolean isDestinationReached() {
+	public boolean isDestinationReached() {
 		if (getState() == AIState.FORCED_WALKING) {
 			if (PositionUtil.isInRange(getOwner(), 141.77f, 2142.31f, 440.0f, 4f) && isEggEventActive.compareAndSet(false, true)) {
 				Npc egg = (Npc) spawn(281451, 141.77f, 2142.31f, 440.0f, (byte) 0);

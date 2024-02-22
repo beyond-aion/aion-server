@@ -13,12 +13,11 @@ import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.SkillElement;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.model.templates.npc.NpcRating;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.skillengine.change.Change;
 import com.aionemu.gameserver.skillengine.condition.Conditions;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
@@ -220,10 +219,6 @@ public abstract class EffectTemplate {
 		return effectSubConditions;
 	}
 
-	/**
-	 * @param value
-	 * @return
-	 */
 	public ActionModifier getActionModifiers(Effect effect) {
 		if (modifiers == null)
 			return null;
@@ -585,19 +580,11 @@ public abstract class EffectTemplate {
 	private boolean isImmuneToAbnormal(Effect effect, StatEnum statEnum) {
 		Creature effected = effect.getEffected();
 		if (effected != effect.getEffector()) {
-			if (effected instanceof Npc) {
-				Npc npc = (Npc) effected;
-				if (npc.isBoss() || npc.hasStatic() || npc instanceof Kisk || npc.getAi().ask(AIQuestion.RESIST_ABNORMAL))
+			if (effected instanceof Npc || effected instanceof Summon) {
+				if (effected.getAi().ask(AIQuestion.IS_IMMUNE_TO_ABNORMAL_STATES))
 					return true;
-				if (npc.getObjectTemplate().getStatsTemplate().getRunSpeed() == 0) {
-					if (statEnum == StatEnum.PULLED_RESISTANCE || statEnum == StatEnum.STAGGER_RESISTANCE || statEnum == StatEnum.STUMBLE_RESISTANCE)
-						return true;
-				}
-			} else if (effected instanceof Summon) {
-				Summon summon = (Summon) effected;
-				if (summon.getObjectTemplate().getRating() == NpcRating.HERO || summon.getObjectTemplate().getRating() == NpcRating.LEGENDARY) {
-					return true;
-				}
+				if (((NpcTemplate) effected.getObjectTemplate()).getStatsTemplate().getRunSpeed() == 0)
+					return statEnum == StatEnum.PULLED_RESISTANCE || statEnum == StatEnum.STAGGER_RESISTANCE || statEnum == StatEnum.STUMBLE_RESISTANCE;
 			}
 		}
 		return false;
@@ -608,12 +595,10 @@ public abstract class EffectTemplate {
 	 * @return true = it's an altered state effect, false = it is Poison/Bleed dot (normal Dots have statEnum null here)
 	 */
 	private boolean isAlteredState(StatEnum stat) {
-		switch (stat) {
-			case BLEED_RESISTANCE:
-			case POISON_RESISTANCE:
-				return false;
-		}
-		return true;
+		return switch (stat) {
+			case BLEED_RESISTANCE, POISON_RESISTANCE -> false;
+			default -> true;
+		};
 	}
 
 	private StatEnum getPenetrationStat(StatEnum statEnum) {
@@ -627,17 +612,11 @@ public abstract class EffectTemplate {
 	}
 
 	private int getCumulativeResistChanceFor(int resistCount) {
-		switch (resistCount) {
-			case 0:
-			case 1:
-			case 2:
-				return 0;
-			case 3:
-				return 200;
-			case 4:
-				return 400;
-			default:
-				return 1000;
-		}
+		return switch (resistCount) {
+			case 0, 1, 2 -> 0;
+			case 3 -> 200;
+			case 4 -> 400;
+			default -> 1000;
+		};
 	}
 }

@@ -45,7 +45,7 @@ public class MosquaEggAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case DECAY, REWARD, LOOT -> false;
+			case ALLOW_DECAY, REWARD_AP_XP_DP_LOOT, REWARD_LOOT -> false;
 			default -> super.ask(question);
 		};
 	}

@@ -72,7 +72,7 @@ public class CalculatedAtrocityAI extends GeneralNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case DECAY, RESPAWN, REWARD -> false;
+			case ALLOW_DECAY, ALLOW_RESPAWN, REWARD_AP_XP_DP_LOOT -> false;
 			default -> super.ask(question);
 		};
 	}

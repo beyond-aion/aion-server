@@ -39,8 +39,8 @@ public class ShieldNpcAI extends SiegeNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case REWARD, REWARD_AP -> true;
-			case LOOT, RESPAWN -> false;
+			case REWARD_AP_XP_DP_LOOT, REWARD_AP -> true;
+			case REWARD_LOOT, ALLOW_RESPAWN -> false;
 			default -> super.ask(question);
 		};
 	}

@@ -48,7 +48,7 @@ public class EternalBastionDragonAI extends EternalBastionAggressiveNpcAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		if (question == AIQuestion.RESIST_ABNORMAL)
+		if (question == AIQuestion.IS_IMMUNE_TO_ABNORMAL_STATES)
 			return true;
 		return super.ask(question);
 	}

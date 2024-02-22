@@ -42,8 +42,8 @@ public class EternalBastionConstructAI extends NpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case RESIST_ABNORMAL -> true;
-			case LOOT, REWARD_AP -> false;
+			case IS_IMMUNE_TO_ABNORMAL_STATES -> true;
+			case REWARD_LOOT, REWARD_AP -> false;
 			default -> super.ask(question);
 		};
 	}

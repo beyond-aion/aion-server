@@ -40,7 +40,7 @@ public class RaksangRubbleAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case RESIST_ABNORMAL -> true;
+			case IS_IMMUNE_TO_ABNORMAL_STATES -> true;
 			default -> super.ask(question);
 		};
 	}

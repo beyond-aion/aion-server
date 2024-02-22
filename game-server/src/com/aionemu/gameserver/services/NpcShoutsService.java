@@ -115,7 +115,7 @@ public class NpcShoutsService {
 
 		@Override
 		public void run() {
-			if (npc.getPosition().isMapRegionActive() && npc.getAi().ask(AIQuestion.SHOUT))
+			if (npc.getPosition().isMapRegionActive() && npc.getAi().ask(AIQuestion.CAN_SHOUT))
 				shoutRandom(npc, null, shouts, 0);
 		}
 	}

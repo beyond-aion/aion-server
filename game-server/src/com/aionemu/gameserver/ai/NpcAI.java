@@ -15,6 +15,7 @@ import com.aionemu.gameserver.controllers.movement.NpcMoveController;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
@@ -150,45 +151,33 @@ public abstract class NpcAI extends AITemplate<Npc> {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case DESTINATION_REACHED:
-				return isDestinationReached();
-			case SHOUT:
-				return AIConfig.SHOUTS_ENABLE && NpcShoutsService.getInstance().mayShout(getOwner());
-			case DECAY:
-			case RESPAWN:
-			case REWARD:
-			case LOOT:
-				return true;
-			case REWARD_AP:
+		return switch (question) {
+			case CAN_SHOUT -> AIConfig.SHOUTS_ENABLE && NpcShoutsService.getInstance().mayShout(getOwner());
+			case ALLOW_DECAY, ALLOW_RESPAWN, REWARD_AP_XP_DP_LOOT, REWARD_LOOT -> true;
+			case IS_IMMUNE_TO_ABNORMAL_STATES -> getOwner().isBoss() || getOwner().hasStatic() || getOwner() instanceof Kisk;
+			case REWARD_AP -> {
 				WorldType wt = getOwner().getWorldType();
-				return wt == WorldType.ABYSS || wt != WorldType.ELYSEA && wt != WorldType.ASMODAE && apRewardingRaces.contains(getRace());
-			case REMOVE_EFFECTS_ON_MAPREGION_DEACTIVATE:
-				return !getOwner().isInInstance();
-			default:
-				return false;
-		}
+				yield wt == WorldType.ABYSS || wt != WorldType.ELYSEA && wt != WorldType.ASMODAE && apRewardingRaces.contains(getRace());
+			}
+			case REMOVE_EFFECTS_ON_MAP_REGION_DEACTIVATE -> !getOwner().isInInstance();
+			default -> false;
+		};
 	}
 
-	protected boolean isDestinationReached() {
-		AIState state = getState();
-		switch (state) {
-			case CONFUSE:
-			case FEAR:
-				return PositionUtil.isInRange(getOwner(), getOwner().getMoveController().getTargetX2(), getOwner().getMoveController().getTargetY2(),
-					getOwner().getMoveController().getTargetZ2(), 1);
-			case FIGHT:
-				return SimpleAttackManager.isTargetInAttackRange(getOwner());
-			case RETURNING:
+	@Override
+	public boolean isDestinationReached() {
+		return switch (getState()) {
+			case CONFUSE, FEAR -> PositionUtil.isInRange(getOwner(), getOwner().getMoveController().getTargetX2(),
+				getOwner().getMoveController().getTargetY2(), getOwner().getMoveController().getTargetZ2(), 1);
+			case FIGHT -> SimpleAttackManager.isTargetInAttackRange(getOwner());
+			case RETURNING -> {
 				SpawnTemplate spawn = getOwner().getSpawn();
-				return PositionUtil.isInRange(getOwner(), spawn.getX(), spawn.getY(), spawn.getZ(), 1);
-			case FOLLOWING:
-				return FollowEventHandler.isInRange(this, getOwner().getTarget());
-			case WALKING:
-			case FORCED_WALKING:
-				return getSubState() == AISubState.TALK || WalkManager.isArrivedAtPoint(this);
-		}
-		return true;
+				yield PositionUtil.isInRange(getOwner(), spawn.getX(), spawn.getY(), spawn.getZ(), 1);
+			}
+			case FOLLOWING -> FollowEventHandler.isInRange(this, getOwner().getTarget());
+			case WALKING, FORCED_WALKING -> getSubState() == AISubState.TALK || WalkManager.isArrivedAtPoint(this);
+			default -> true;
+		};
 	}
 
 	@Override
@@ -206,7 +195,7 @@ public abstract class NpcAI extends AITemplate<Npc> {
 	}
 
 	/**
-	 * NCsoft uses different non visible npcs as a sensor to trigger different events
+	 * NCsoft uses different non-visible npcs as a sensor to trigger different events
 	 */
 	public void handleCreatureDetected(Creature creature) {
 

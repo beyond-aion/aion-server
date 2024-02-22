@@ -39,7 +39,7 @@ public class AhserionGate extends NoActionAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case LOOT -> false;
+			case REWARD_LOOT -> false;
 			default -> super.ask(question);
 		};
 	}

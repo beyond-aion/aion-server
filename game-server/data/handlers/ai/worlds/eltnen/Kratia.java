@@ -39,7 +39,7 @@ public class Kratia extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case RESPAWN -> false;
+			case ALLOW_RESPAWN -> false;
 			default -> super.ask(question);
 		};
 	}

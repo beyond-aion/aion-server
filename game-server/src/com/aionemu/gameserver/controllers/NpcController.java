@@ -116,14 +116,14 @@ public class NpcController extends CreatureController<Npc> {
 		if (owner.getSpawn().hasPool())
 			owner.getSpawn().setUse(owner.getInstanceId(), false);
 
-		boolean shouldDecay = true;
-		boolean shouldRespawn = true;
+		boolean allowDecay = true;
+		boolean allowRespawn = true;
 		boolean shouldLoot = true;
 		try {
-			shouldDecay = owner.getAi().ask(AIQuestion.DECAY);
-			shouldRespawn = owner.getAi().ask(AIQuestion.RESPAWN);
-			shouldLoot = owner.getAi().ask(AIQuestion.LOOT);
-			if (owner.getAi().ask(AIQuestion.REWARD))
+			allowDecay = owner.getAi().ask(AIQuestion.ALLOW_DECAY);
+			allowRespawn = owner.getAi().ask(AIQuestion.ALLOW_RESPAWN);
+			shouldLoot = owner.getAi().ask(AIQuestion.REWARD_LOOT);
+			if (owner.getAi().ask(AIQuestion.REWARD_AP_XP_DP_LOOT))
 				doReward();
 			owner.getPosition().getWorldMapInstance().getInstanceHandler().onDie(owner);
 			owner.getAi().onGeneralEvent(AIEventType.DIED);
@@ -133,10 +133,10 @@ public class NpcController extends CreatureController<Npc> {
 
 		super.onDie(lastAttacker, sendDiePacket);
 
-		if (shouldRespawn && SiegeService.getInstance().isRespawnAllowed(owner))
+		if (allowRespawn && SiegeService.getInstance().isRespawnAllowed(owner))
 			RespawnService.scheduleRespawn(getOwner());
 
-		if (shouldDecay) {
+		if (allowDecay) {
 			if (shouldLoot)
 				petLoot(owner);
 			RespawnService.scheduleDecayTask(owner);
@@ -241,7 +241,7 @@ public class NpcController extends CreatureController<Npc> {
 						}
 					}
 				}
-				if (attacker.equals(winner) && getOwner().getAi().ask(AIQuestion.LOOT))
+				if (attacker.equals(winner) && getOwner().getAi().ask(AIQuestion.REWARD_LOOT))
 					DropRegistrationService.getInstance().registerDrop(getOwner(), player, player.getLevel(), null);
 			}
 		}

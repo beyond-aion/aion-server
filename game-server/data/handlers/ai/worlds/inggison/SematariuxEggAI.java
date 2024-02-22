@@ -58,7 +58,7 @@ public class SematariuxEggAI extends NpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case DECAY, LOOT, REWARD -> false;
+			case ALLOW_DECAY, REWARD_LOOT, REWARD_AP_XP_DP_LOOT -> false;
 			default -> super.ask(question);
 		};
 	}

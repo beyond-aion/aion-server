@@ -84,7 +84,7 @@ public class BerserkAnohaAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case DECAY, RESPAWN, LOOT -> false;
+			case ALLOW_DECAY, ALLOW_RESPAWN, REWARD_LOOT -> false;
 			default -> super.ask(question);
 		};
 	}

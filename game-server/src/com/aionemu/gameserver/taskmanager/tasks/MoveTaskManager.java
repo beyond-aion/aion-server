@@ -6,7 +6,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.taskmanager.AbstractPeriodicTaskManager;
 import com.aionemu.gameserver.world.zone.ZoneUpdateService;
@@ -45,7 +44,7 @@ public class MoveTaskManager extends AbstractPeriodicTaskManager {
 				return;
 			}
 			creature.getMoveController().moveToDestination();
-			if (creature.getAi().ask(AIQuestion.DESTINATION_REACHED)) {
+			if (creature.getAi().isDestinationReached()) {
 				removeCreature(creature);
 				creature.getAi().onGeneralEvent(AIEventType.MOVE_ARRIVED);
 				ZoneUpdateService.getInstance().add(creature);

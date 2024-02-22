@@ -40,7 +40,7 @@ public class EternalBastionAssaulterNpcAI extends EternalBastionAggressiveNpcAI 
 	}
 
 	@Override
-	protected boolean isDestinationReached() {
+	public boolean isDestinationReached() {
 		getOwner().unsetState(CreatureState.WALK_MODE);
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.CHANGE_SPEED, 0, getObjectId()));
 		hateCommander();

@@ -34,7 +34,7 @@ public class SiegeWeaponAI extends AITemplate<Summon> {
 	protected void handleSpawned() {
 		this.setStateIfNot(AIState.IDLE);
 		SummonsService.doMode(SummonMode.GUARD, getOwner());
-		NpcSkillTemplate skillTemplate = getNpcSkillTemplates().getNpcSkills().get(0);
+		NpcSkillTemplate skillTemplate = getNpcSkillTemplates().getNpcSkills().getFirst();
 		skill = skillTemplate.getSkillId();
 		skillLvl = skillTemplate.getSkillLevel();
 		duration = DataManager.SKILL_DATA.getSkillTemplate(skill).getDuration();
@@ -74,12 +74,8 @@ public class SiegeWeaponAI extends AITemplate<Summon> {
 
 	@Override
 	protected void handleAttack(Creature creature) {
-		if (creature == null) {
+		if (creature == null || getOwner().getMode() != SummonMode.ATTACK)
 			return;
-		}
-		if (getOwner().getMode() != SummonMode.ATTACK) {
-			return;
-		}
 		if (getOwner().getController() instanceof SiegeWeaponController && ((SiegeWeaponController) getOwner().getController()).isValidTarget(creature)) {
 			if (System.currentTimeMillis() - lastAttackTime > duration + 2000) {
 				lastAttackTime = System.currentTimeMillis();
@@ -89,24 +85,21 @@ public class SiegeWeaponAI extends AITemplate<Summon> {
 	}
 
 	@Override
-	public boolean ask(AIQuestion question) {
-		switch (question) {
-			case DESTINATION_REACHED:
-				return destinationReached();
-			default:
-				return super.ask(question);
-		}
-	}
-
-	private boolean destinationReached() {
+	public boolean isDestinationReached() {
 		AIState state = getState();
-		switch (state) {
-			case FOLLOWING:
-				return FollowEventHandler.isInRange(this, getOwner().getTarget());
-			default:
-				AILogger.info(this, "[siege_weapon] calling destinationReached with unhandled state: " + state.toString());
-				break;
+		if (state == AIState.FOLLOWING) {
+			return FollowEventHandler.isInRange(this, getOwner().getTarget());
+		} else {
+			AILogger.info(this, "[siege_weapon] calling destinationReached with unhandled state: " + state);
 		}
 		return true;
 	}
+
+		@Override
+		public boolean ask(AIQuestion question) {
+				return switch (question) {
+						case IS_IMMUNE_TO_ABNORMAL_STATES -> true;
+						default -> super.ask(question);
+				};
+		}
 }

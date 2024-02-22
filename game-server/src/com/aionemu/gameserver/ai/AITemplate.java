@@ -173,4 +173,9 @@ public abstract class AITemplate<T extends Creature> extends AbstractAI<T> {
 	@Override
 	public void onEffectEnd(Effect effect) {
 	}
+
+	@Override
+	public boolean isDestinationReached() {
+		return false;
+	}
 }

@@ -87,8 +87,8 @@ public class NpcData {
 						strikeResist = 700;
 					template.setStrikeResist(strikeResist);
 				}
-
-				template.setAbnormalResistance(NpcStatCalculation.calculateStat(StatEnum.ABNORMAL_RESISTANCE_ALL, rating, rank, level));
+				if (template.getAbnormalResistance() == 0)
+					template.setAbnormalResistance(NpcStatCalculation.calculateStat(StatEnum.ABNORMAL_RESISTANCE_ALL, rating, rank, level));
 			}
 		}
 		npcs = null;

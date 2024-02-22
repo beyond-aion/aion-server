@@ -95,7 +95,7 @@ public class ShugoMorpher extends GeneralNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case ATTACK_PLAYER, REWARD, LOOT -> false;
+			case REWARD_AP_XP_DP_LOOT, REWARD_LOOT -> false;
 			default -> super.ask(question);
 		};
 	}

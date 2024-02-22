@@ -21,7 +21,7 @@ import com.aionemu.gameserver.services.NpcShoutsService;
 public final class ShoutEventHandler {
 
 	public static void onSee(NpcAI npcAI, Creature target) {
-		if (target instanceof Player && npcAI.ask(AIQuestion.SHOUT)) {
+		if (target instanceof Player && npcAI.ask(AIQuestion.CAN_SHOUT)) {
 			Npc npc = npcAI.getOwner();
 			List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(npc.getPosition().getMapId(), npc.getNpcId(), ShoutEventType.SEE);
 			NpcShoutsService.getInstance().shoutRandom(npc, (Player) target, shouts, 0);
@@ -29,14 +29,14 @@ public final class ShoutEventHandler {
 	}
 
 	public static void onSpawn(NpcAI npcAI) {
-		if (npcAI.ask(AIQuestion.SHOUT)) {
+		if (npcAI.ask(AIQuestion.CAN_SHOUT)) {
 			Npc npc = npcAI.getOwner();
 			NpcShoutsService.getInstance().registerShoutTask(npc);
 		}
 	}
 
 	public static void onBeforeDespawn(NpcAI npcAI) {
-		if (npcAI.ask(AIQuestion.SHOUT)) {
+		if (npcAI.ask(AIQuestion.CAN_SHOUT)) {
 			Npc npc = npcAI.getOwner();
 			List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(npc.getPosition().getMapId(), npc.getNpcId(), ShoutEventType.BEFORE_DESPAWN);
 			NpcShoutsService.getInstance().shoutRandom(npc, null, shouts, 0);
@@ -45,7 +45,7 @@ public final class ShoutEventHandler {
 	}
 
 	public static void onReachedWalkPoint(NpcAI npcAI) {
-		if (npcAI.ask(AIQuestion.SHOUT)) {
+		if (npcAI.ask(AIQuestion.CAN_SHOUT)) {
 			Npc npc = npcAI.getOwner();
 			String walkerId = npc.getSpawn().getWalkerId();
 			if (walkerId == null)
@@ -66,7 +66,7 @@ public final class ShoutEventHandler {
 	}
 
 	public static void onSwitchedTarget(NpcAI npcAI, Creature target) {
-		if (target instanceof Player && npcAI.ask(AIQuestion.SHOUT)) {
+		if (target instanceof Player && npcAI.ask(AIQuestion.CAN_SHOUT)) {
 			Npc npc = npcAI.getOwner();
 			List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(npc.getPosition().getMapId(), npc.getNpcId(), ShoutEventType.SWITCH_TARGET);
 			NpcShoutsService.getInstance().shoutRandom(npc, (Player) target, shouts, 0);
@@ -74,7 +74,7 @@ public final class ShoutEventHandler {
 	}
 
 	public static void onDied(NpcAI npcAI) {
-		if (npcAI.ask(AIQuestion.SHOUT)) {
+		if (npcAI.ask(AIQuestion.CAN_SHOUT)) {
 			Npc npc = npcAI.getOwner();
 			List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(npc.getPosition().getMapId(), npc.getNpcId(), ShoutEventType.DIED);
 			NpcShoutsService.getInstance().shoutRandom(npc, null, shouts, 0);
@@ -85,7 +85,7 @@ public final class ShoutEventHandler {
 	 * Called on Aggro when NPC is ready to attack
 	 */
 	public static void onAttackBegin(NpcAI npcAI) {
-		if (npcAI.ask(AIQuestion.SHOUT)) {
+		if (npcAI.ask(AIQuestion.CAN_SHOUT)) {
 			Npc npc = npcAI.getOwner();
 			List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(npc.getPosition().getMapId(), npc.getNpcId(), ShoutEventType.ATTACK_BEGIN);
 			NpcShoutsService.getInstance().shoutRandom(npc, null, shouts, 0);
@@ -98,7 +98,7 @@ public final class ShoutEventHandler {
 	public static void onEnemyAttack(NpcAI npcAI, Creature attacker) {
 		// TODO: [RR] change AI or randomize behavior for "cowards" and "fanatics" ???
 		// TODO: Figure out what the difference between ATTACK_BEGIN and HELP; HELPCALL should make NPC run
-		if (npcAI.ask(AIQuestion.SHOUT)) {
+		if (npcAI.ask(AIQuestion.CAN_SHOUT)) {
 			Npc npc = npcAI.getOwner();
 			if (attacker.getActingCreature() instanceof Player) {
 				if (npc.getAttackedCount() == 0) {
@@ -121,7 +121,7 @@ public final class ShoutEventHandler {
 	}
 
 	public static void onCast(NpcAI npcAI, Creature firstTarget) {
-		if (firstTarget instanceof Player && npcAI.ask(AIQuestion.SHOUT))
+		if (firstTarget instanceof Player && npcAI.ask(AIQuestion.CAN_SHOUT))
 			handleNumericEvent(npcAI, (Player) firstTarget, ShoutEventType.CAST_K);
 	}
 
@@ -129,7 +129,7 @@ public final class ShoutEventHandler {
 	 * Handle target attacked events
 	 */
 	public static void onAttack(NpcAI npcAI, Creature attacked) {
-		if (attacked instanceof Player && npcAI.ask(AIQuestion.SHOUT))
+		if (attacked instanceof Player && npcAI.ask(AIQuestion.CAN_SHOUT))
 			handleNumericEvent(npcAI, (Player) attacked, ShoutEventType.ATTACK_K);
 	}
 
@@ -152,7 +152,7 @@ public final class ShoutEventHandler {
 	}
 
 	public static void onAttackEnd(NpcAI npcAI) {
-		if (npcAI.ask(AIQuestion.SHOUT)) {
+		if (npcAI.ask(AIQuestion.CAN_SHOUT)) {
 			Npc npc = npcAI.getOwner();
 			List<NpcShout> shouts = DataManager.NPC_SHOUT_DATA.getNpcShouts(npc.getPosition().getMapId(), npc.getNpcId(), ShoutEventType.ATTACK_END);
 			NpcShoutsService.getInstance().shoutRandom(npc, null, shouts, 0);

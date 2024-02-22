@@ -1,11 +1,6 @@
 package com.aionemu.gameserver.model.templates.stats;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 /**
  * This class is only a container for Stats. Created on: 04.08.2009 14:59:10
@@ -57,11 +52,11 @@ public class StatsTemplate {
 	@XmlAttribute(name = "mboost")
 	private int magicBoost;
 
+	@XmlAttribute(name = "abnormal_resist")
+	private int abnormalResistance;
+
 	@XmlElement
 	private CreatureSpeeds speeds;
-
-	@XmlTransient
-	private int abnormalResistance;
 
 	@XmlTransient
 	private int power = 100, health = 100, agility = 100, baseAccuracy = 100, knowledge = 100, will = 100;

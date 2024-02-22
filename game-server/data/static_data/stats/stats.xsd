@@ -24,6 +24,7 @@
 		<xs:attribute name="msup" type="xs:int"/>
 		<xs:attribute name="strike_resist" type="xs:int"/>
 		<xs:attribute name="spell_resist" type="xs:int"/>
+		<xs:attribute name="abnormal_resist" type="xs:int"/>
 	</xs:complexType>
 	<xs:complexType name="CreatureSpeeds">
 		<xs:attribute name="walk" type="xs:float"/>

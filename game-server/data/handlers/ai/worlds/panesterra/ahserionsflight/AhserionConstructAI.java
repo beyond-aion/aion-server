@@ -264,7 +264,7 @@ public class AhserionConstructAI extends NpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case RESPAWN, LOOT -> false;
+			case ALLOW_RESPAWN, REWARD_LOOT -> false;
 			default -> super.ask(question);
 		};
 	}

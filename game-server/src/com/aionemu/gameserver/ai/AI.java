@@ -92,4 +92,6 @@ public interface AI {
 	AttackTypeAnimation getAttackTypeAnimation(Creature target);
 
 	int modifyInitialSkillDelay(int delay);
+
+	boolean isDestinationReached();
 }

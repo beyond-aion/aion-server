@@ -2,7 +2,6 @@ package ai.instance.empyreanCrucible;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -35,13 +34,5 @@ public class SparkOfDarknessAI extends GeneralNpcAI {
 
 	private void startLifeTask() {
 		ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(SparkOfDarknessAI.this), 6500);
-	}
-
-	@Override
-	public boolean ask(AIQuestion question) {
-		return switch (question) {
-			case ATTACK_PLAYER -> true;
-			default -> super.ask(question);
-		};
 	}
 }

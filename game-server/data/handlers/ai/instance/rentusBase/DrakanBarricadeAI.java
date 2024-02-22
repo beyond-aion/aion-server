@@ -18,7 +18,7 @@ public class DrakanBarricadeAI extends NoActionAI {
 
 	@Override
 	public boolean ask(AIQuestion question) {
-		if (question == AIQuestion.LOOT)
+		if (question == AIQuestion.REWARD_LOOT)
 			return false;
 		return super.ask(question);
 	}

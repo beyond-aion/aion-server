@@ -145,7 +145,7 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 				handleCreatureEvent(event, creature);
 			} catch (StackOverflowError e) {
 				StackOverflowError error = new StackOverflowError(
-						"Aborted never ending AI event loop for " + getOwner() + " with AIEventType." + event + " and target: " + creature);
+					"Aborted never ending AI event loop for " + getOwner() + " with AIEventType." + event + " and target: " + creature);
 				error.setStackTrace(Arrays.copyOfRange(e.getStackTrace(), Math.max(e.getStackTrace().length - 42, 0), e.getStackTrace().length));
 				throw error;
 			}

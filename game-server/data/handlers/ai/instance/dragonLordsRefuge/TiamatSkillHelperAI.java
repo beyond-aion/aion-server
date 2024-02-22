@@ -49,7 +49,7 @@ public class TiamatSkillHelperAI extends NpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case REWARD -> false;
+			case REWARD_AP_XP_DP_LOOT -> false;
 			default -> super.ask(question);
 		};
 	}

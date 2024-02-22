@@ -87,7 +87,7 @@ public class PlayerTeamDistributionService {
 				}
 			}
 		}
-		if (owner.getAi().ask(AIQuestion.LOOT)) {
+		if (owner.getAi().ask(AIQuestion.REWARD_LOOT)) {
 			// Give Drop
 			Player mostDamagePlayer = owner.getAggroList().getMostPlayerDamageOfMembers(team.getMembers(), filteredStats.highestLevel);
 			if (mostDamagePlayer == null) {

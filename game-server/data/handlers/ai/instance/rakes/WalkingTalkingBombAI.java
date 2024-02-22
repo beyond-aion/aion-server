@@ -37,8 +37,8 @@ public class WalkingTalkingBombAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case DECAY, RESPAWN, REWARD -> false;
-			case RESIST_ABNORMAL -> true;
+			case ALLOW_DECAY, ALLOW_RESPAWN, REWARD_AP_XP_DP_LOOT -> false;
+			case IS_IMMUNE_TO_ABNORMAL_STATES -> true;
 			default -> super.ask(question);
 		};
 	}

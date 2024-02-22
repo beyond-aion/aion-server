@@ -84,12 +84,12 @@ public class GeoService {
 		float y = object.getY();
 		float targetX = target.getX();
 		float targetY = target.getY();
-		if (object instanceof Npc npc && npc.getAi().ask(AIQuestion.ADD_BOUNDS_ON_ATTACK)) {
+		if (object instanceof Npc npc && npc.getAi().ask(AIQuestion.CONSIDER_BOUNDS_IN_CAN_SEE_CHECK_WHEN_ATTACKING)) {
 			double rad = Math.toRadians(PositionUtil.calculateAngleFrom(object, target));
 			x += (float) (Math.cos(rad) * object.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide());
 			y += (float) (Math.sin(rad) * object.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide());
 		}
-		if (target instanceof Npc npc && npc.getAi().ask(AIQuestion.ADD_BOUNDS_ON_ATTACKED)) {
+		if (target instanceof Npc npc && npc.getAi().ask(AIQuestion.CONSIDER_BOUNDS_IN_CAN_SEE_CHECK_WHEN_ATTACKED)) {
 			double rad = Math.toRadians(PositionUtil.calculateAngleFrom(target, object));
 			targetX += (float) (Math.cos(rad) * target.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide());
 			targetY += (float) (Math.sin(rad) * target.getObjectTemplate().getBoundRadius().getMaxOfFrontAndSide());

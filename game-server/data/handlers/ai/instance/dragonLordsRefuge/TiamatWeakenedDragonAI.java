@@ -237,8 +237,8 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case LOOT -> false;
-			case ADD_BOUNDS_ON_ATTACKED, ADD_BOUNDS_ON_ATTACK -> true;
+			case REWARD_LOOT -> false;
+			case CONSIDER_BOUNDS_IN_CAN_SEE_CHECK_WHEN_ATTACKED, CONSIDER_BOUNDS_IN_CAN_SEE_CHECK_WHEN_ATTACKING -> true;
 			default -> super.ask(question);
 		};
 	}

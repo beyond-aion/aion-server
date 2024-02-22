@@ -3,6 +3,7 @@ package ai.instance.rentusBase;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -158,7 +159,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	protected boolean isDestinationReached() {
+	public boolean isDestinationReached() {
 		if (getState() == AIState.FORCED_WALKING && PositionUtil.getDistance(getOwner().getX(), getOwner().getY(), 188.17f, 414.06f) <= 1f
 			&& isInFlameShowerEvent.compareAndSet(false, true)) {
 			SkillEngine.getInstance().getSkill(getOwner(), 20533, 1, getOwner()).useSkill(); // off (skill name)
@@ -184,7 +185,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 	}
 
 	private void deleteNpcs(List<Npc> npcs) {
-		npcs.stream().filter(npc -> npc != null).forEach(npc -> npc.getController().delete());
+		npcs.stream().filter(Objects::nonNull).forEach(npc -> npc.getController().delete());
 	}
 
 	private void addPercent() {

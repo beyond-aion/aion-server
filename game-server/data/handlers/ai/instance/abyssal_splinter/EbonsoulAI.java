@@ -80,7 +80,7 @@ public class EbonsoulAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case LOOT, REWARD_AP -> false;
+			case REWARD_LOOT, REWARD_AP -> false;
 			default -> super.ask(question);
 		};
 	}

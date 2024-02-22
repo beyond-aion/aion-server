@@ -17,7 +17,7 @@ public class SiegeRaceProtectorAI extends SiegeNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case DECAY, REWARD, LOOT -> true;
+			case ALLOW_DECAY, REWARD_AP_XP_DP_LOOT, REWARD_LOOT -> true;
 			default -> super.ask(question);
 		};
 	}
