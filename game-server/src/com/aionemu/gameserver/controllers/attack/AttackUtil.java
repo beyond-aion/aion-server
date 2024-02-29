@@ -113,7 +113,7 @@ public class AttackUtil {
 		for (int i = 0; i < maxListIndex; i++) {
 			StatEnum defenseStat = element == SkillElement.NONE ? StatEnum.PHYSICAL_DEFENSE : StatEnum.MAGICAL_DEFEND;
 			float def = attacked.getGameStats().getPDef().getBonus() + StatFunctions.getMovementModifier(attacked, defenseStat,
-					defenseStat == StatEnum.PHYSICAL_DEFENSE ? attacked.getGameStats().getPDef().getBase() : attacked.getGameStats().getMDef().getBase());
+				defenseStat == StatEnum.PHYSICAL_DEFENSE ? attacked.getGameStats().getPDef().getBase() : attacked.getGameStats().getMDef().getBase());
 			float damage = (StatFunctions.adjustDamageByMovementModifier(attacker,attackResultList.get(i).getDamage()) - (def/10)) * (i == 0 ? mainMultiplier : offMultiplier);
 			if (reduceRatio > 0) {
 				float dmgToReduce = damage - (damage * reduceRatio);
@@ -153,7 +153,7 @@ public class AttackUtil {
 		for (int i = 0; i < hitCount[0] + hitCount[1]; i++) {
 			if (i < hitCount[0]) { // amplify main hand damage
 				if (attackList.get(0).getDamage() >= 10)
-					attackList.add(new AttackResult((int)(attackList.get(0).getDamage() * 0.1), AttackStatus.NORMALHIT, attackList.get(0).getHitType()));
+					attackList.add(new AttackResult((int) (attackList.get(0).getDamage() * 0.1), AttackStatus.NORMALHIT, attackList.get(0).getHitType()));
 			} else { // amplify off hand damage
 				if (attackList.get(1).getDamage() >= 10)
 					attackList.add(new AttackResult((int)(attackList.get(1).getDamage() * 0.1), AttackStatus.OFFHAND_NORMALHIT, attackList.get(1).getHitType()));
@@ -195,12 +195,12 @@ public class AttackUtil {
 		}
 
 		if (stat != null && attacked instanceof Player) { // Strike Fortitude lowers the crit multiplier
-				switch (stat) {
-						case PHYSICAL_CRITICAL_DAMAGE_REDUCE, MAGICAL_CRITICAL_DAMAGE_REDUCE -> {
-								int fortitude = attacked.getGameStats().getStat(stat, 0).getCurrent();
-								coeficient = isMain ? (coeficient - fortitude / 1000f) : (coeficient + fortitude / 1000f);
-						}
+			switch (stat) {
+				case PHYSICAL_CRITICAL_DAMAGE_REDUCE, MAGICAL_CRITICAL_DAMAGE_REDUCE -> {
+					int fortitude = attacked.getGameStats().getStat(stat, 0).getCurrent();
+					coeficient = isMain ? (coeficient - fortitude / 1000f) : (coeficient + fortitude / 1000f);
 				}
+			}
 		}
 
 		// add critical add dmg
@@ -209,14 +209,14 @@ public class AttackUtil {
 	}
 
 	private static float getWeaponMultiplier(ItemGroup group) {
-			return switch (group) {
-					case DAGGER -> 2.3f;
-					case SWORD -> 2.2f;
-					case MACE -> 2f;
-					case GREATSWORD, POLEARM -> 1.8f;
-					case STAFF, BOW -> 1.7f;
-					default -> 1.5f;
-			};
+		return switch (group) {
+			case DAGGER -> 2.3f;
+			case SWORD -> 2.2f;
+			case MACE -> 2f;
+			case GREATSWORD, POLEARM -> 1.8f;
+			case STAFF, BOW -> 1.7f;
+			default -> 1.5f;
+		};
 	}
 
 	public static void calculateSkillResult(Effect effect, int skillDamage, EffectTemplate template, boolean ignoreShield) {
@@ -290,10 +290,10 @@ public class AttackUtil {
 		}
 		// add skill damage
 		if (func != null) {
-				switch (func) {
-						case ADD -> damage += skillDamage;
-						case PERCENT -> damage += baseAttack * skillDamage / 100f;
-				}
+			switch (func) {
+				case ADD -> damage += skillDamage;
+				case PERCENT -> damage += baseAttack * skillDamage / 100f;
+			}
 		}
 
 		// add bonus damage
@@ -311,14 +311,14 @@ public class AttackUtil {
 		if (!useTemplateDmg) {
 			float damageMultiplier;
 			switch (element) {
-					case NONE -> {
-							damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
-							damage += bonus;
-					}
-					default -> {
-							damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
-							damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, element, true, true);
-					}
+				case NONE -> {
+					damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
+					damage += bonus;
+				}
+				default -> {
+					damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
+					damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, element, true, true);
+				}
 			}
 			damage = StatFunctions.adjustDamageByMovementModifier(effector, damage);
 			damage *= damageMultiplier;
@@ -327,11 +327,11 @@ public class AttackUtil {
 		if (randomDamageType > 0)
 			damage = randomizeDamage(randomDamageType, damage);
 
-			damage = switch (status) {
-					case CRITICAL_BLOCK, CRITICAL_PARRY, CRITICAL -> calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, element == SkillElement.NONE ?
-									StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE : StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
-					default -> damage;
-			};
+		damage = switch (status) {
+			case CRITICAL_BLOCK, CRITICAL_PARRY, CRITICAL -> calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, element == SkillElement.NONE ?
+						StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE : StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
+			default -> damage;
+		};
 
 		if (element == SkillElement.NONE) {
 			float def = effected.getGameStats().getPDef().getBonus() + StatFunctions.getMovementModifier(effected, StatEnum.PHYSICAL_DEFENSE,
@@ -339,10 +339,10 @@ public class AttackUtil {
 			damage -= def/10;
 		}
 
-			switch (AttackStatus.getBaseStatus(status)) {
-					case BLOCK -> damage = calculateBlockedDamage(effected, damage);
-					case PARRY -> damage *= 0.6;
-			}
+		switch (AttackStatus.getBaseStatus(status)) {
+			case BLOCK -> damage = calculateBlockedDamage(effected, damage);
+			case PARRY -> damage *= 0.6f;
+		}
 
 		if (effector instanceof Npc) {
 			damage = effector.getAi().modifyOwnerDamage(damage, effected, effect);
@@ -365,7 +365,7 @@ public class AttackUtil {
 	private static boolean isUseTemplateDmg(Effect effect, EffectTemplate template) {
 		if (template instanceof NoReduceSpellATKInstantEffect)
 			return true;
-		if (template instanceof ProcAtkInstantEffect && effect.getSkillTemplate().isProvoked()) { // proc effects of skills like 8583
+		if (template instanceof ProcAtkInstantEffect && effect.getSkillTemplate().isProvoked() || effect.getStack().startsWith("IDEVENT")) { // proc effects of skills like 8583
 			// TODO: find pattern or extract <apply_magical_skill_boost_bonus> and <apply_magical_critical> from server files. What about missing ones?
 			switch (effect.getStack().toLowerCase()) {
 				case "nwi_delayspell_dd_proca_tal":
@@ -388,6 +388,7 @@ public class AttackUtil {
 				case "ldf4b_d3_buff_poison_proc":
 				case "ldf4b_tatar_procatk":
 				case "idforest_wave_trico_proclight":
+				case "idevent01_areadot":
 					return true;
 			}
 		}

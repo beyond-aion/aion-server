@@ -17427,37 +17427,37 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052167"><!-- Fairy Tail -->
-		<items>
+		<items chance="45">
 			<item id="188052168" /><!-- Fairy Horn -->
 		</items>
-		<items>
+		<items chance="55">
 			<item id="182006999" /><!-- Shugo Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052168"><!-- Fairy Horn -->
-		<items>
+		<items chance="45">
 			<item id="188052169" /><!-- Fairy Wing -->
 		</items>
-		<items>
+		<items chance="55">
 			<item id="182006999" /><!-- Shugo Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052169"><!-- Fairy Wing -->
-		<items>
+		<items chance="45">
 			<item id="188052170" /><!-- Fairy Heart -->
 		</items>
-		<items>
+		<items chance="55">
 			<item id="182006999" /><!-- Shugo Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052170"><!-- Fairy Heart -->
-		<items>
+		<items chance="55">
 			<item id="182006999" min_count="50" /><!-- Shugo Coin -->
 		</items>
-		<items>
+		<items chance="30">
 			<item id="182006999" min_count="100" /><!-- Shugo Coin -->
 		</items>
-		<items>
+		<items chance="15">
 			<item id="182006999" min_count="150" /><!-- Shugo Coin -->
 		</items>
 	</decomposable>
@@ -18412,13 +18412,13 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052304"><!-- Magical Map Box -->
-		<items>
+		<items chance="14.28">
 			<item id="182006989" /><!-- Emperor's Golden Tag -->
 		</items>
-		<items>
+		<items chance="28.57">
 			<item id="182006990" /><!-- Empress' Silver Tag -->
 		</items>
-		<items>
+		<items chance="57.15">
 			<item id="182006991" /><!-- Crown Prince's Brass Tag -->
 		</items>
 	</decomposable>

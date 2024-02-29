@@ -6,8 +6,6 @@
 			<gd_map map_id="300560000" /><!-- Shugo_Imperial_Tomb -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219505" /><!-- Tomb Ghost -->
-			<gd_npc npc_id="219507" /><!-- Tomb Ghost -->
 			<gd_npc npc_id="219543" /><!-- Guardian Fairy -->
 			<gd_npc npc_id="219544" /><!-- Awakened Guardian -->
 		</gd_npcs>
@@ -18,17 +16,13 @@
 			<gd_item id="164002157" /><!-- Powerful Trickster's Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Event Instance Tools" chance="16.5">
+	<gd_rule rule_name="Event Instance Tools" chance="35">
 		<gd_maps>
 			<gd_map map_id="300560000" /><!-- Shugo_Imperial_Tomb -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219461" /><!-- Modo -->
-			<gd_npc npc_id="219514" /><!-- Strong Kobold Worker -->
-			<gd_npc npc_id="219515" /><!-- Powerful Kobold Foreman -->
-			<gd_npc npc_id="219522" /><!-- Elite Krall Lookout -->
-			<gd_npc npc_id="219523" /><!-- Elite Krall Lookout Leader -->
-			<gd_npc npc_id="219530" /><!-- Letu Erezat -->
+			<gd_npc npc_id="219543" /><!-- Guardian Fairy -->
+			<gd_npc npc_id="219544" /><!-- Awakened Guardian -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="164002158" /><!-- Cursed Chill -->
@@ -37,17 +31,58 @@
 			<gd_item id="164002157" /><!-- Powerful Trickster's Essence -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Event Map Piece" chance="100" member_limit="6">
+	<gd_rule rule_name="Event Instance Tools" max_drop_rule="2" chance="100">
 		<gd_maps>
 			<gd_map map_id="300560000" /><!-- Shugo_Imperial_Tomb -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219461" /><!-- Modo -->
 			<gd_npc npc_id="219514" /><!-- Strong Kobold Worker -->
 			<gd_npc npc_id="219515" /><!-- Powerful Kobold Foreman -->
 			<gd_npc npc_id="219522" /><!-- Elite Krall Lookout -->
 			<gd_npc npc_id="219523" /><!-- Elite Krall Lookout Leader -->
 			<gd_npc npc_id="219530" /><!-- Letu Erezat -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="164002158" /><!-- Cursed Chill -->
+			<gd_item id="164002158" /><!-- Cursed Chill -->
+			<gd_item id="164002161" /><!-- Repair -->
+			<gd_item id="164002161" /><!-- Repair -->
+			<gd_item id="164002156" /><!-- Trickster's Essence -->
+			<gd_item id="164002156" /><!-- Trickster's Essence -->
+			<gd_item id="164002157" /><!-- Powerful Trickster's Essence -->
+			<gd_item id="164002157" /><!-- Powerful Trickster's Essence -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Event Instance Tools" max_drop_rule="2" chance="35">
+		<gd_maps>
+			<gd_map map_id="300560000" /><!-- Shugo_Imperial_Tomb -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219515" /><!-- Powerful Kobold Foreman -->
+			<gd_npc npc_id="219523" /><!-- Elite Krall Lookout Leader -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="164002158" /><!-- Cursed Chill -->
+			<gd_item id="164002158" /><!-- Cursed Chill -->
+			<gd_item id="164002161" /><!-- Repair -->
+			<gd_item id="164002161" /><!-- Repair -->
+			<gd_item id="164002156" /><!-- Trickster's Essence -->
+			<gd_item id="164002156" /><!-- Trickster's Essence -->
+			<gd_item id="164002157" /><!-- Powerful Trickster's Essence -->
+			<gd_item id="164002157" /><!-- Powerful Trickster's Essence -->
+		</gd_items>
+	</gd_rule>
+	<gd_rule rule_name="Event Map Piece" chance="100" max_drop_rule="2" member_limit="3">
+		<gd_maps>
+			<gd_map map_id="300560000" /><!-- Shugo_Imperial_Tomb -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="219514" /><!-- Strong Kobold Worker -->
+			<gd_npc npc_id="219515" /><!-- Powerful Kobold Foreman -->
+			<gd_npc npc_id="219522" /><!-- Elite Krall Lookout -->
+			<gd_npc npc_id="219523" /><!-- Elite Krall Lookout Leader -->
+			<gd_npc npc_id="219530" /><!-- Letu Erezat -->
+			<gd_npc npc_id="219531" /><!-- Captain Lediar -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="188100087" /><!-- Treasure Room Map Piece 1 -->
@@ -56,35 +91,34 @@
 			<gd_item id="188100090" /><!-- Treasure Room Map Piece 4 -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Event Key" chance="100" member_limit="6">
+	<gd_rule rule_name="Event Key" chance="35" member_limit="3">
 		<gd_maps>
 			<gd_map map_id="300560000" /><!-- Shugo_Imperial_Tomb -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="219461" /><!-- Modo -->
 			<gd_npc npc_id="219514" /><!-- Strong Kobold Worker -->
-			<gd_npc npc_id="219515" /><!-- Powerful Kobold Foreman -->
 			<gd_npc npc_id="219522" /><!-- Elite Krall Lookout -->
-			<gd_npc npc_id="219523" /><!-- Elite Krall Lookout Leader -->
 			<gd_npc npc_id="219530" /><!-- Letu Erezat -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="185000129" /><!-- Common Treasure Chest Key -->
 		</gd_items>
 	</gd_rule>
-	<!-- Single Monster Drops -->
-	<gd_rule rule_name="Event Key" chance="100" member_limit="6">
+	<gd_rule rule_name="Event Key" chance="100" member_limit="3">
 		<gd_maps>
 			<gd_map map_id="300560000" /><!-- Shugo_Imperial_Tomb -->
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="219515" /><!-- Powerful Kobold Foreman -->
+			<gd_npc npc_id="219523" /><!-- Elite Krall Lookout Leader -->
 			<gd_npc npc_id="219531" /><!-- Captain Lediar -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="185000129" max_count="3" /><!-- Common Treasure Chest Key -->
+			<gd_item id="185000129" max_count="1" /><!-- Common Treasure Chest Key -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Event Bundle" chance="100" member_limit="6">
+	<!-- Single Monster Drops -->
+	<gd_rule rule_name="Event Bundle" chance="100" member_limit="3">
 		<gd_maps>
 			<gd_map map_id="300560000" /><!-- Shugo_Imperial_Tomb -->
 		</gd_maps>
@@ -95,7 +129,7 @@
 			<gd_item id="188052085" /><!-- Coin-collector's Pouch -->
 		</gd_items>
 	</gd_rule>
-	<gd_rule rule_name="Event Tag Golden" chance="100">
+	<gd_rule rule_name="Event Tag" chance="100" max_drop_rule="3">
 		<gd_maps>
 			<gd_map map_id="300560000" /><!-- Shugo_Imperial_Tomb -->
 		</gd_maps>
@@ -103,29 +137,15 @@
 			<gd_npc npc_id="219531" /><!-- Captain Lediar -->
 		</gd_npcs>
 		<gd_items>
-			<gd_item id="182006989" /><!-- Emperor's Golden Tag -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Event Tag Silver" chance="100">
-		<gd_maps>
-			<gd_map map_id="300560000" /><!-- Shugo_Imperial_Tomb -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="219531" /><!-- Captain Lediar -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="182006990" /><!-- Empress' Silver Tag -->
-		</gd_items>
-	</gd_rule>
-	<gd_rule rule_name="Event Tag Bronze" chance="100">
-		<gd_maps>
-			<gd_map map_id="300560000" /><!-- Shugo_Imperial_Tomb -->
-		</gd_maps>
-		<gd_npcs>
-			<gd_npc npc_id="219531" /><!-- Captain Lediar -->
-		</gd_npcs>
-		<gd_items>
-			<gd_item id="182006991" /><!-- Crown Prince's Brass Tag -->
+			<gd_item id="182006989" chance="4.76" /><!-- Emperor's Golden Tag -->
+			<gd_item id="182006989" chance="4.76" /><!-- Emperor's Golden Tag -->
+			<gd_item id="182006989" chance="4.76" /><!-- Emperor's Golden Tag -->
+			<gd_item id="182006990" chance="9.52" /><!-- Empress' Silver Tag -->
+			<gd_item id="182006990" chance="9.52" /><!-- Empress' Silver Tag -->
+			<gd_item id="182006990" chance="9.53" /><!-- Empress' Silver Tag -->
+			<gd_item id="182006991" chance="19.05" /><!-- Crown Prince's Brass Tag -->
+			<gd_item id="182006991" chance="19.05" /><!-- Crown Prince's Brass Tag -->
+			<gd_item id="182006991" chance="19.05" /><!-- Crown Prince's Brass Tag -->
 		</gd_items>
 	</gd_rule>
 </global_rules>

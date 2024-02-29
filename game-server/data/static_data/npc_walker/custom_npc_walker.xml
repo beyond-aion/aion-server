@@ -824,8 +824,8 @@
 		<routestep z="885.1844" y="437.69382" x="505.69427" rest_time="20000"/>
 	</walker_template>
 	<!-- Shugo Imperial Tomb -->
-	<!--Level 1 Side 1-->
-	<walker_template route_id="3005600001">
+	<!--Level 1 Left 1-->
+	<walker_template route_id="3005600001" loop_type="NONE">
 		<routestep x="204.39177" y="288.3569" z="550.68805"/>
 		<routestep x="203.40654" y="286.93723" z="550.68805"/>
 		<routestep x="202.45816" y="285.63885" z="550.68805"/>
@@ -855,12 +855,12 @@
 		<routestep x="178.76753" y="253.47545" z="537.9395"/>
 		<routestep x="177.85768" y="252.2539" z="537.8776"/>
 		<routestep x="176.91214" y="250.98448" z="537.1935"/>
-		<routestep x="176.98816" y="249.19962" z="536.4308"/>
-		<routestep x="177.08928" y="247.09875" z="535.81213"/>
-		<routestep x="177.19093" y="244.9871" z="535.81213"/>
-		<routestep x="177.27133" y="243.31673" z="535.81213"/>
+		<routestep x="176.07898" y="249.83328" z="536.40967"/>
+		<routestep x="175.20996" y="248.617" z="535.81213"/>
+		<routestep x="174.20007" y="247.22345" z="535.81213"/>
+		<routestep x="173.30849" y="245.9933" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600002">
+	<walker_template route_id="3005600002" loop_type="NONE">
 		<routestep x="203.40654" y="286.93723" z="550.68805"/>
 		<routestep x="202.45816" y="285.63885" z="550.68805"/>
 		<routestep x="201.28186" y="284.0284" z="550.68805"/>
@@ -889,12 +889,12 @@
 		<routestep x="178.76753" y="253.47545" z="537.9395"/>
 		<routestep x="177.85768" y="252.2539" z="537.8776"/>
 		<routestep x="176.91214" y="250.98448" z="537.1935"/>
-		<routestep x="176.98816" y="249.19962" z="536.4308"/>
-		<routestep x="177.08928" y="247.09875" z="535.81213"/>
-		<routestep x="177.19093" y="244.9871" z="535.81213"/>
-		<routestep x="177.27133" y="243.31673" z="535.81213"/>
+		<routestep x="176.07898" y="249.83328" z="536.40967"/>
+		<routestep x="175.20996" y="248.617" z="535.81213"/>
+		<routestep x="174.20007" y="247.22345" z="535.81213"/>
+		<routestep x="173.30849" y="245.9933" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600003">
+	<walker_template route_id="3005600003" loop_type="NONE">
 		<routestep x="202.45816" y="285.63885" z="550.68805"/>
 		<routestep x="201.28186" y="284.0284" z="550.68805"/>
 		<routestep x="200.2524" y="282.61893" z="550.49426"/>
@@ -922,12 +922,12 @@
 		<routestep x="178.76753" y="253.47545" z="537.9395"/>
 		<routestep x="177.85768" y="252.2539" z="537.8776"/>
 		<routestep x="176.91214" y="250.98448" z="537.1935"/>
-		<routestep x="176.98816" y="249.19962" z="536.4308"/>
-		<routestep x="177.08928" y="247.09875" z="535.81213"/>
-		<routestep x="177.19093" y="244.9871" z="535.81213"/>
-		<routestep x="177.27133" y="243.31673" z="535.81213"/>
+		<routestep x="176.07898" y="249.83328" z="536.40967"/>
+		<routestep x="175.20996" y="248.617" z="535.81213"/>
+		<routestep x="174.20007" y="247.22345" z="535.81213"/>
+		<routestep x="173.30849" y="245.9933" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600004">
+	<walker_template route_id="3005600004" loop_type="NONE">
 		<routestep x="201.28186" y="284.0284" z="550.68805"/>
 		<routestep x="200.2524" y="282.61893" z="550.49426"/>
 		<routestep x="199.2906" y="281.30225" z="550.49426"/>
@@ -954,12 +954,12 @@
 		<routestep x="178.76753" y="253.47545" z="537.9395"/>
 		<routestep x="177.85768" y="252.2539" z="537.8776"/>
 		<routestep x="176.91214" y="250.98448" z="537.1935"/>
-		<routestep x="176.98816" y="249.19962" z="536.4308"/>
-		<routestep x="177.08928" y="247.09875" z="535.81213"/>
-		<routestep x="177.19093" y="244.9871" z="535.81213"/>
-		<routestep x="177.27133" y="243.31673" z="535.81213"/>
+		<routestep x="176.07898" y="249.83328" z="536.40967"/>
+		<routestep x="175.20996" y="248.617" z="535.81213"/>
+		<routestep x="174.20007" y="247.22345" z="535.81213"/>
+		<routestep x="173.30849" y="245.9933" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600005">
+	<walker_template route_id="3005600005" loop_type="NONE">
 		<routestep x="200.2524" y="282.61893" z="550.49426"/>
 		<routestep x="199.2906" y="281.30225" z="550.49426"/>
 		<routestep x="198.42555" y="280.11786" z="550.49426"/>
@@ -985,13 +985,13 @@
 		<routestep x="178.76753" y="253.47545" z="537.9395"/>
 		<routestep x="177.85768" y="252.2539" z="537.8776"/>
 		<routestep x="176.91214" y="250.98448" z="537.1935"/>
-		<routestep x="176.98816" y="249.19962" z="536.4308"/>
-		<routestep x="177.08928" y="247.09875" z="535.81213"/>
-		<routestep x="177.19093" y="244.9871" z="535.81213"/>
-		<routestep x="177.27133" y="243.31673" z="535.81213"/>
+		<routestep x="176.07898" y="249.83328" z="536.40967"/>
+		<routestep x="175.20996" y="248.617" z="535.81213"/>
+		<routestep x="174.20007" y="247.22345" z="535.81213"/>
+		<routestep x="173.30849" y="245.9933" z="535.81213"/>
 	</walker_template>
-	<!--Level 1 Side 2-->
-	<walker_template route_id="3005600006">
+	<!--Level 1 Left 2-->
+	<walker_template route_id="3005600006" loop_type="NONE">
 		<routestep x="205.88284" y="287.48337" z="550.68805"/>
 		<routestep x="205.05261" y="286.29807" z="550.68805"/>
 		<routestep x="204.04073" y="284.8664" z="550.68805"/>
@@ -1022,11 +1022,11 @@
 		<routestep x="181.1898" y="252.90521" z="538.4467"/>
 		<routestep x="180.33372" y="251.48875" z="537.8776"/>
 		<routestep x="179.54633" y="250.186" z="537.7127"/>
-		<routestep x="179.56216" y="248.7092" z="537.0661"/>
-		<routestep x="179.57959" y="247.08696" z="536.3558"/>
-		<routestep x="179.59904" y="245.27274" z="535.81213"/>
+		<routestep x="177.98553" y="248.13275" z="536.2899"/>
+		<routestep x="176.43486" y="245.98108" z="535.81213"/>
+		<routestep x="174.70357" y="243.44371" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600007">
+	<walker_template route_id="3005600007" loop_type="NONE">
 		<routestep x="205.05261" y="286.29807" z="550.68805"/>
 		<routestep x="204.04073" y="284.8664" z="550.68805"/>
 		<routestep x="203.05289" y="283.4688" z="550.68805"/>
@@ -1056,11 +1056,11 @@
 		<routestep x="181.1898" y="252.90521" z="538.4467"/>
 		<routestep x="180.33372" y="251.48875" z="537.8776"/>
 		<routestep x="179.54633" y="250.186" z="537.7127"/>
-		<routestep x="179.56216" y="248.7092" z="537.0661"/>
-		<routestep x="179.57959" y="247.08696" z="536.3558"/>
-		<routestep x="179.59904" y="245.27274" z="535.81213"/>
+		<routestep x="177.98553" y="248.13275" z="536.2899"/>
+		<routestep x="176.43486" y="245.98108" z="535.81213"/>
+		<routestep x="174.70357" y="243.44371" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600008">
+	<walker_template route_id="3005600008" loop_type="NONE">
 		<routestep x="204.04073" y="284.8664" z="550.68805"/>
 		<routestep x="203.05289" y="283.4688" z="550.68805"/>
 		<routestep x="202.13564" y="282.1711" z="550.68805"/>
@@ -1089,11 +1089,11 @@
 		<routestep x="181.1898" y="252.90521" z="538.4467"/>
 		<routestep x="180.33372" y="251.48875" z="537.8776"/>
 		<routestep x="179.54633" y="250.186" z="537.7127"/>
-		<routestep x="179.56216" y="248.7092" z="537.0661"/>
-		<routestep x="179.57959" y="247.08696" z="536.3558"/>
-		<routestep x="179.59904" y="245.27274" z="535.81213"/>
+		<routestep x="177.98553" y="248.13275" z="536.2899"/>
+		<routestep x="176.43486" y="245.98108" z="535.81213"/>
+		<routestep x="174.70357" y="243.44371" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600009">
+	<walker_template route_id="3005600009" loop_type="NONE">
 		<routestep x="203.05289" y="283.4688" z="550.68805"/>
 		<routestep x="202.13564" y="282.1711" z="550.68805"/>
 		<routestep x="201.31685" y="281.01263" z="550.49426"/>
@@ -1121,11 +1121,11 @@
 		<routestep x="181.1898" y="252.90521" z="538.4467"/>
 		<routestep x="180.33372" y="251.48875" z="537.8776"/>
 		<routestep x="179.54633" y="250.186" z="537.7127"/>
-		<routestep x="179.56216" y="248.7092" z="537.0661"/>
-		<routestep x="179.57959" y="247.08696" z="536.3558"/>
-		<routestep x="179.59904" y="245.27274" z="535.81213"/>
+		<routestep x="177.98553" y="248.13275" z="536.2899"/>
+		<routestep x="176.43486" y="245.98108" z="535.81213"/>
+		<routestep x="174.70357" y="243.44371" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600010">
+	<walker_template route_id="3005600010" loop_type="NONE">
 		<routestep x="202.13564" y="282.1711" z="550.68805"/>
 		<routestep x="201.31685" y="281.01263" z="550.49426"/>
 		<routestep x="200.5141" y="279.8769" z="550.49426"/>
@@ -1152,12 +1152,12 @@
 		<routestep x="181.1898" y="252.90521" z="538.4467"/>
 		<routestep x="180.33372" y="251.48875" z="537.8776"/>
 		<routestep x="179.54633" y="250.186" z="537.7127"/>
-		<routestep x="179.56216" y="248.7092" z="537.0661"/>
-		<routestep x="179.57959" y="247.08696" z="536.3558"/>
-		<routestep x="179.59904" y="245.27274" z="535.81213"/>
+		<routestep x="177.98553" y="248.13275" z="536.2899"/>
+		<routestep x="176.43486" y="245.98108" z="535.81213"/>
+		<routestep x="174.70357" y="243.44371" z="535.81213"/>
 	</walker_template>
-	<!--Level 1 Side 3-->
-	<walker_template route_id="3005600011">
+	<!--Level 1 Right 1-->
+	<walker_template route_id="3005600011" loop_type="NONE">
 		<routestep x="220.89374" y="275.24585" z="550.68805"/>
 		<routestep x="219.7629" y="273.9441" z="550.68805"/>
 		<routestep x="219.07242" y="273.14923" z="550.68805"/>
@@ -1194,13 +1194,11 @@
 		<routestep x="194.4613" y="240.757" z="537.87244"/>
 		<routestep x="193.38408" y="239.28854" z="537.48145"/>
 		<routestep x="192.68785" y="238.33948" z="536.8417"/>
-		<routestep x="191.7427" y="237.73727" z="536.2724"/>
-		<routestep x="190.53395" y="236.96715" z="535.81213"/>
-		<routestep x="189.61903" y="236.38425" z="535.81213"/>
-		<routestep x="188.21149" y="235.48746" z="535.81213"/>
-		<routestep x="187.39412" y="234.96669" z="535.81213"/>
+		<routestep x="191.99263" y="237.4258" z="536.2191"/>
+		<routestep x="190.7282" y="235.5572" z="535.81213"/>
+		<routestep x="189.26541" y="233.5111" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600012">
+	<walker_template route_id="3005600012" loop_type="NONE">
 		<routestep x="219.7629" y="273.9441" z="550.68805"/>
 		<routestep x="219.07242" y="273.14923" z="550.68805"/>
 		<routestep x="218.20207" y="272.14728" z="550.68805"/>
@@ -1236,13 +1234,11 @@
 		<routestep x="194.4613" y="240.757" z="537.87244"/>
 		<routestep x="193.38408" y="239.28854" z="537.48145"/>
 		<routestep x="192.68785" y="238.33948" z="536.8417"/>
-		<routestep x="191.7427" y="237.73727" z="536.2724"/>
-		<routestep x="190.53395" y="236.96715" z="535.81213"/>
-		<routestep x="189.61903" y="236.38425" z="535.81213"/>
-		<routestep x="188.21149" y="235.48746" z="535.81213"/>
-		<routestep x="187.39412" y="234.96669" z="535.81213"/>
+		<routestep x="191.99263" y="237.4258" z="536.2191"/>
+		<routestep x="190.7282" y="235.5572" z="535.81213"/>
+		<routestep x="189.26541" y="233.5111" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600013">
+	<walker_template route_id="3005600013" loop_type="NONE">
 		<routestep x="219.07242" y="273.14923" z="550.68805"/>
 		<routestep x="218.20207" y="272.14728" z="550.68805"/>
 		<routestep x="217.20403" y="270.99832" z="550.68805"/>
@@ -1277,13 +1273,11 @@
 		<routestep x="194.4613" y="240.757" z="537.87244"/>
 		<routestep x="193.38408" y="239.28854" z="537.48145"/>
 		<routestep x="192.68785" y="238.33948" z="536.8417"/>
-		<routestep x="191.7427" y="237.73727" z="536.2724"/>
-		<routestep x="190.53395" y="236.96715" z="535.81213"/>
-		<routestep x="189.61903" y="236.38425" z="535.81213"/>
-		<routestep x="188.21149" y="235.48746" z="535.81213"/>
-		<routestep x="187.39412" y="234.96669" z="535.81213"/>
+		<routestep x="191.99263" y="237.4258" z="536.2191"/>
+		<routestep x="190.7282" y="235.5572" z="535.81213"/>
+		<routestep x="189.26541" y="233.5111" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600014">
+	<walker_template route_id="3005600014" loop_type="NONE">
 		<routestep x="218.20207" y="272.14728" z="550.68805"/>
 		<routestep x="217.20403" y="270.99832" z="550.68805"/>
 		<routestep x="216.58713" y="270.12024" z="550.68805"/>
@@ -1317,13 +1311,11 @@
 		<routestep x="194.4613" y="240.757" z="537.87244"/>
 		<routestep x="193.38408" y="239.28854" z="537.48145"/>
 		<routestep x="192.68785" y="238.33948" z="536.8417"/>
-		<routestep x="191.7427" y="237.73727" z="536.2724"/>
-		<routestep x="190.53395" y="236.96715" z="535.81213"/>
-		<routestep x="189.61903" y="236.38425" z="535.81213"/>
-		<routestep x="188.21149" y="235.48746" z="535.81213"/>
-		<routestep x="187.39412" y="234.96669" z="535.81213"/>
+		<routestep x="191.99263" y="237.4258" z="536.2191"/>
+		<routestep x="190.7282" y="235.5572" z="535.81213"/>
+		<routestep x="189.26541" y="233.5111" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600015">
+	<walker_template route_id="3005600015" loop_type="NONE">
 		<routestep x="217.20403" y="270.99832" z="550.68805"/>
 		<routestep x="216.58713" y="270.12024" z="550.68805"/>
 		<routestep x="215.69225" y="268.84656" z="550.49426"/>
@@ -1356,14 +1348,12 @@
 		<routestep x="194.4613" y="240.757" z="537.87244"/>
 		<routestep x="193.38408" y="239.28854" z="537.48145"/>
 		<routestep x="192.68785" y="238.33948" z="536.8417"/>
-		<routestep x="191.7427" y="237.73727" z="536.2724"/>
-		<routestep x="190.53395" y="236.96715" z="535.81213"/>
-		<routestep x="189.61903" y="236.38425" z="535.81213"/>
-		<routestep x="188.21149" y="235.48746" z="535.81213"/>
-		<routestep x="187.39412" y="234.96669" z="535.81213"/>
+		<routestep x="191.99263" y="237.4258" z="536.2191"/>
+		<routestep x="190.7282" y="235.5572" z="535.81213"/>
+		<routestep x="189.26541" y="233.5111" z="535.81213"/>
 	</walker_template>
-	<!--Level 1 Side 4-->
-	<walker_template route_id="3005600016">
+	<!--Level 1 Right 2-->
+	<walker_template route_id="3005600016" loop_type="NONE">
 		<routestep x="222.11205" y="274.04495" z="550.68805"/>
 		<routestep x="221.26567" y="272.89868" z="550.68805"/>
 		<routestep x="220.28874" y="271.5831" z="550.68805"/>
@@ -1398,15 +1388,12 @@
 		<routestep x="197.02147" y="240.31558" z="538.1802"/>
 		<routestep x="196.13275" y="239.12654" z="537.8624"/>
 		<routestep x="195.15474" y="237.81801" z="537.421"/>
-		<routestep x="194.27997" y="237.24039" z="536.8853"/>
-		<routestep x="193.13428" y="236.48955" z="536.18616"/>
-		<routestep x="192.15643" y="235.8487" z="535.81213"/>
-		<routestep x="190.78584" y="234.95047" z="535.81213"/>
-		<routestep x="189.62984" y="234.19286" z="535.81213"/>
-		<routestep x="188.45576" y="233.42345" z="535.81213"/>
-		<routestep x="187.40753" y="232.73647" z="535.81213"/>
+		<routestep x="193.85953" y="236.16893" z="536.284"/>
+		<routestep x="192.49011" y="237.28244" z="535.81213"/>
+		<routestep x="191.37872" y="232.78394" z="535.81213"/>
+		<routestep x="190.02782" y="230.96411" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600017">
+	<walker_template route_id="3005600017" loop_type="NONE">
 		<routestep x="221.26567" y="272.89868" z="550.68805"/>
 		<routestep x="220.28874" y="271.5831" z="550.68805"/>
 		<routestep x="219.52791" y="270.55853" z="550.68805"/>
@@ -1440,15 +1427,12 @@
 		<routestep x="197.02147" y="240.31558" z="538.1802"/>
 		<routestep x="196.13275" y="239.12654" z="537.8624"/>
 		<routestep x="195.15474" y="237.81801" z="537.421"/>
-		<routestep x="194.27997" y="237.24039" z="536.8853"/>
-		<routestep x="193.13428" y="236.48955" z="536.18616"/>
-		<routestep x="192.15643" y="235.8487" z="535.81213"/>
-		<routestep x="190.78584" y="234.95047" z="535.81213"/>
-		<routestep x="189.62984" y="234.19286" z="535.81213"/>
-		<routestep x="188.45576" y="233.42345" z="535.81213"/>
-		<routestep x="187.40753" y="232.73647" z="535.81213"/>
+		<routestep x="193.85953" y="236.16893" z="536.284"/>
+		<routestep x="192.49011" y="237.28244" z="535.81213"/>
+		<routestep x="191.37872" y="232.78394" z="535.81213"/>
+		<routestep x="190.02782" y="230.96411" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600018">
+	<walker_template route_id="3005600018" loop_type="NONE">
 		<routestep x="220.28874" y="271.5831" z="550.68805"/>
 		<routestep x="219.52791" y="270.55853" z="550.68805"/>
 		<routestep x="218.52042" y="269.20172" z="550.49426"/>
@@ -1481,15 +1465,12 @@
 		<routestep x="197.02147" y="240.31558" z="538.1802"/>
 		<routestep x="196.13275" y="239.12654" z="537.8624"/>
 		<routestep x="195.15474" y="237.81801" z="537.421"/>
-		<routestep x="194.27997" y="237.24039" z="536.8853"/>
-		<routestep x="193.13428" y="236.48955" z="536.18616"/>
-		<routestep x="192.15643" y="235.8487" z="535.81213"/>
-		<routestep x="190.78584" y="234.95047" z="535.81213"/>
-		<routestep x="189.62984" y="234.19286" z="535.81213"/>
-		<routestep x="188.45576" y="233.42345" z="535.81213"/>
-		<routestep x="187.40753" y="232.73647" z="535.81213"/>
+		<routestep x="193.85953" y="236.16893" z="536.284"/>
+		<routestep x="192.49011" y="237.28244" z="535.81213"/>
+		<routestep x="191.37872" y="232.78394" z="535.81213"/>
+		<routestep x="190.02782" y="230.96411" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600019">
+	<walker_template route_id="3005600019" loop_type="NONE">
 		<routestep x="219.52791" y="270.55853" z="550.68805"/>
 		<routestep x="218.52042" y="269.20172" z="550.49426"/>
 		<routestep x="217.49905" y="267.8262" z="550.49426"/>
@@ -1521,15 +1502,12 @@
 		<routestep x="197.02147" y="240.31558" z="538.1802"/>
 		<routestep x="196.13275" y="239.12654" z="537.8624"/>
 		<routestep x="195.15474" y="237.81801" z="537.421"/>
-		<routestep x="194.27997" y="237.24039" z="536.8853"/>
-		<routestep x="193.13428" y="236.48955" z="536.18616"/>
-		<routestep x="192.15643" y="235.8487" z="535.81213"/>
-		<routestep x="190.78584" y="234.95047" z="535.81213"/>
-		<routestep x="189.62984" y="234.19286" z="535.81213"/>
-		<routestep x="188.45576" y="233.42345" z="535.81213"/>
-		<routestep x="187.40753" y="232.73647" z="535.81213"/>
+		<routestep x="193.85953" y="236.16893" z="536.284"/>
+		<routestep x="192.49011" y="237.28244" z="535.81213"/>
+		<routestep x="191.37872" y="232.78394" z="535.81213"/>
+		<routestep x="190.02782" y="230.96411" z="535.81213"/>
 	</walker_template>
-	<walker_template route_id="3005600020">
+	<walker_template route_id="3005600020" loop_type="NONE">
 		<routestep x="218.52042" y="269.20172" z="550.49426"/>
 		<routestep x="217.49905" y="267.8262" z="550.49426"/>
 		<routestep x="216.7439" y="266.8092" z="550.49426"/>
@@ -1560,16 +1538,13 @@
 		<routestep x="197.02147" y="240.31558" z="538.1802"/>
 		<routestep x="196.13275" y="239.12654" z="537.8624"/>
 		<routestep x="195.15474" y="237.81801" z="537.421"/>
-		<routestep x="194.27997" y="237.24039" z="536.8853"/>
-		<routestep x="193.13428" y="236.48955" z="536.18616"/>
-		<routestep x="192.15643" y="235.8487" z="535.81213"/>
-		<routestep x="190.78584" y="234.95047" z="535.81213"/>
-		<routestep x="189.62984" y="234.19286" z="535.81213"/>
-		<routestep x="188.45576" y="233.42345" z="535.81213"/>
-		<routestep x="187.40753" y="232.73647" z="535.81213"/>
+		<routestep x="193.85953" y="236.16893" z="536.284"/>
+		<routestep x="192.49011" y="237.28244" z="535.81213"/>
+		<routestep x="191.37872" y="232.78394" z="535.81213"/>
+		<routestep x="190.02782" y="230.96411" z="535.81213"/>
 	</walker_template>
-	<!-- Level 2 Side 1 -->
-	<walker_template route_id="3005600021">
+	<!-- Level 2 Left 1 -->
+	<walker_template route_id="3005600021" loop_type="NONE">
 		<routestep x="306.54364" y="420.04468" z="296.40808"/>
 		<routestep x="307.4044" y="418.00693" z="296.40808"/>
 		<routestep x="308.3013" y="416.0561" z="296.40808"/>
@@ -1589,7 +1564,7 @@
 		<routestep x="336.72372" y="408.7098" z="294.58875"/>
 		<routestep x="338.14917" y="411.19247" z="294.58875"/>
 	</walker_template>
-	<walker_template route_id="3005600022">
+	<walker_template route_id="3005600022" loop_type="NONE">
 		<routestep x="307.4044" y="418.00693" z="296.40808"/>
 		<routestep x="308.3013" y="416.0561" z="296.40808"/>
 		<routestep x="309.8981" y="413.8029" z="296.40808"/>
@@ -1608,7 +1583,7 @@
 		<routestep x="336.72372" y="408.7098" z="294.58875"/>
 		<routestep x="338.14917" y="411.19247" z="294.58875"/>
 	</walker_template>
-	<walker_template route_id="3005600023">
+	<walker_template route_id="3005600023" loop_type="NONE">
 		<routestep x="308.3013" y="416.0561" z="296.40808"/>
 		<routestep x="309.8981" y="413.8029" z="296.40808"/>
 		<routestep x="311.6586" y="411.82364" z="296.40808"/>
@@ -1626,7 +1601,7 @@
 		<routestep x="336.72372" y="408.7098" z="294.58875"/>
 		<routestep x="338.14917" y="411.19247" z="294.58875"/>
 	</walker_template>
-	<walker_template route_id="3005600024">
+	<walker_template route_id="3005600024" loop_type="NONE">
 		<routestep x="309.8981" y="413.8029" z="296.40808"/>
 		<routestep x="311.6586" y="411.82364" z="296.40808"/>
 		<routestep x="313.34216" y="410.01224" z="296.40808"/>
@@ -1643,7 +1618,7 @@
 		<routestep x="336.72372" y="408.7098" z="294.58875"/>
 		<routestep x="338.14917" y="411.19247" z="294.58875"/>
 	</walker_template>
-	<walker_template route_id="3005600025">
+	<walker_template route_id="3005600025" loop_type="NONE">
 		<routestep x="311.6586" y="411.82364" z="296.40808"/>
 		<routestep x="313.34216" y="410.01224" z="296.40808"/>
 		<routestep x="315.11478" y="408.09216" z="296.40808"/>
@@ -1659,8 +1634,8 @@
 		<routestep x="336.72372" y="408.7098" z="294.58875"/>
 		<routestep x="338.14917" y="411.19247" z="294.58875"/>
 	</walker_template>
-	<!-- Level 2 Side 2 -->
-	<walker_template route_id="3005600026">
+	<!-- Level 2 Left 2 -->
+	<walker_template route_id="3005600026" loop_type="NONE">
 		<routestep x="308.5412" y="420.81482" z="296.40808"/>
 		<routestep x="309.58606" y="419.21835" z="296.40808"/>
 		<routestep x="310.2743" y="416.95712" z="296.40808"/>
@@ -1679,7 +1654,7 @@
 		<routestep x="334.76968" y="409.87402" z="294.58875"/>
 		<routestep x="336.0076" y="411.86865" z="294.58875"/>
 	</walker_template>
-	<walker_template route_id="3005600027">
+	<walker_template route_id="3005600027" loop_type="NONE">
 		<routestep x="309.58606" y="419.21835" z="296.40808"/>
 		<routestep x="310.2743" y="416.95712" z="296.40808"/>
 		<routestep x="311.48572" y="414.97253" z="296.40808"/>
@@ -1697,7 +1672,7 @@
 		<routestep x="334.76968" y="409.87402" z="294.58875"/>
 		<routestep x="336.0076" y="411.86865" z="294.58875"/>
 	</walker_template>
-	<walker_template route_id="3005600028">
+	<walker_template route_id="3005600028" loop_type="NONE">
 		<routestep x="310.2743" y="416.95712" z="296.40808"/>
 		<routestep x="311.48572" y="414.97253" z="296.40808"/>
 		<routestep x="313.02872" y="413.2609" z="296.40808"/>
@@ -1714,7 +1689,7 @@
 		<routestep x="334.76968" y="409.87402" z="294.58875"/>
 		<routestep x="336.0076" y="411.86865" z="294.58875"/>
 	</walker_template>
-	<walker_template route_id="3005600029">
+	<walker_template route_id="3005600029" loop_type="NONE">
 		<routestep x="311.48572" y="414.97253" z="296.40808"/>
 		<routestep x="313.02872" y="413.2609" z="296.40808"/>
 		<routestep x="314.91888" y="411.6293" z="296.40808"/>
@@ -1730,7 +1705,7 @@
 		<routestep x="334.76968" y="409.87402" z="294.58875"/>
 		<routestep x="336.0076" y="411.86865" z="294.58875"/>
 	</walker_template>
-	<walker_template route_id="3005600030">
+	<walker_template route_id="3005600030" loop_type="NONE">
 		<routestep x="313.02872" y="413.2609" z="296.40808"/>
 		<routestep x="314.91888" y="411.6293" z="296.40808"/>
 		<routestep x="316.93448" y="409.89655" z="296.40808"/>
@@ -1745,8 +1720,8 @@
 		<routestep x="334.76968" y="409.87402" z="294.58875"/>
 		<routestep x="336.0076" y="411.86865" z="294.58875"/>
 	</walker_template>
-	<!-- Level 2 Side 3 -->
-	<walker_template route_id="3005600031">
+	<!-- Level 2 Mid 1 -->
+	<walker_template route_id="3005600031" loop_type="NONE">
 		<routestep x="316.14932" y="430.78998" z="294.58875"/>
 		<routestep x="317.72842" y="430.33682" z="294.58875"/>
 		<routestep x="319.82697" y="429.69153" z="294.58875"/>
@@ -1758,7 +1733,7 @@
 		<routestep x="331.78485" y="425.9267" z="294.76004"/>
 		<routestep x="333.7854" y="425.33008" z="294.75943"/>
 	</walker_template>
-	<walker_template route_id="3005600032">
+	<walker_template route_id="3005600032" loop_type="NONE">
 		<routestep x="317.72842" y="430.33682" z="294.58875"/>
 		<routestep x="319.82697" y="429.69153" z="294.58875"/>
 		<routestep x="321.74866" y="429.05267" z="294.58875"/>
@@ -1769,7 +1744,7 @@
 		<routestep x="331.78485" y="425.9267" z="294.76004"/>
 		<routestep x="333.7854" y="425.33008" z="294.75943"/>
 	</walker_template>
-	<walker_template route_id="3005600033">
+	<walker_template route_id="3005600033" loop_type="NONE">
 		<routestep x="319.82697" y="429.69153" z="294.58875"/>
 		<routestep x="321.74866" y="429.05267" z="294.58875"/>
 		<routestep x="323.8728" y="428.3465" z="294.58875"/>
@@ -1779,7 +1754,7 @@
 		<routestep x="331.78485" y="425.9267" z="294.76004"/>
 		<routestep x="333.7854" y="425.33008" z="294.75943"/>
 	</walker_template>
-	<walker_template route_id="3005600034">
+	<walker_template route_id="3005600034" loop_type="NONE">
 		<routestep x="321.74866" y="429.05267" z="294.58875"/>
 		<routestep x="323.8728" y="428.3465" z="294.58875"/>
 		<routestep x="325.63297" y="427.76132" z="294.76205"/>
@@ -1788,7 +1763,7 @@
 		<routestep x="331.78485" y="425.9267" z="294.76004"/>
 		<routestep x="333.7854" y="425.33008" z="294.75943"/>
 	</walker_template>
-	<walker_template route_id="3005600035">
+	<walker_template route_id="3005600035" loop_type="NONE">
 		<routestep x="323.8728" y="428.3465" z="294.58875"/>
 		<routestep x="325.63297" y="427.76132" z="294.76205"/>
 		<routestep x="327.7051" y="427.14334" z="294.76138"/>
@@ -1796,8 +1771,8 @@
 		<routestep x="331.78485" y="425.9267" z="294.76004"/>
 		<routestep x="333.7854" y="425.33008" z="294.75943"/>
 	</walker_template>
-	<!-- Level 2 Side 4 -->
-	<walker_template route_id="3005600036">
+	<!-- Level 2 Mid 2 -->
+	<walker_template route_id="3005600036" loop_type="NONE">
 		<routestep x="316.7461" y="433.27048" z="294.58875"/>
 		<routestep x="318.1597" y="432.42426" z="294.58875"/>
 		<routestep x="319.61404" y="432.3442" z="294.58875"/>
@@ -1809,7 +1784,7 @@
 		<routestep x="331.04465" y="429.8505" z="294.76053"/>
 		<routestep x="332.89606" y="429.4389" z="294.75992"/>
 	</walker_template>
-	<walker_template route_id="3005600037">
+	<walker_template route_id="3005600037" loop_type="NONE">
 		<routestep x="318.1597" y="432.42426" z="294.58875"/>
 		<routestep x="319.61404" y="432.3442" z="294.58875"/>
 		<routestep x="321.4278" y="431.932" z="294.58875"/>
@@ -1820,7 +1795,7 @@
 		<routestep x="331.04465" y="429.8505" z="294.76053"/>
 		<routestep x="332.89606" y="429.4389" z="294.75992"/>
 	</walker_template>
-	<walker_template route_id="3005600038">
+	<walker_template route_id="3005600038" loop_type="NONE">
 		<routestep x="319.61404" y="432.3442" z="294.58875"/>
 		<routestep x="321.4278" y="431.932" z="294.58875"/>
 		<routestep x="323.3597" y="431.55896" z="294.58875"/>
@@ -1830,7 +1805,7 @@
 		<routestep x="331.04465" y="429.8505" z="294.76053"/>
 		<routestep x="332.89606" y="429.4389" z="294.75992"/>
 	</walker_template>
-	<walker_template route_id="3005600039">
+	<walker_template route_id="3005600039" loop_type="NONE">
 		<routestep x="321.4278" y="431.932" z="294.58875"/>
 		<routestep x="323.3597" y="431.55896" z="294.58875"/>
 		<routestep x="325.20535" y="431.14865" z="294.58875"/>
@@ -1839,7 +1814,7 @@
 		<routestep x="331.04465" y="429.8505" z="294.76053"/>
 		<routestep x="332.89606" y="429.4389" z="294.75992"/>
 	</walker_template>
-	<walker_template route_id="3005600040">
+	<walker_template route_id="3005600040" loop_type="NONE">
 		<routestep x="323.3597" y="431.55896" z="294.58875"/>
 		<routestep x="325.20535" y="431.14865" z="294.58875"/>
 		<routestep x="327.2818" y="430.687" z="294.76175"/>
@@ -1847,8 +1822,8 @@
 		<routestep x="331.04465" y="429.8505" z="294.76053"/>
 		<routestep x="332.89606" y="429.4389" z="294.75992"/>
 	</walker_template>
-	<!-- Level 2 Side 5 -->
-	<walker_template route_id="3005600041">
+	<!-- Level 2 Right 1 -->
+	<walker_template route_id="3005600041" loop_type="NONE">
 		<routestep x="314.70178" y="444.68613" z="296.40808"/>
 		<routestep x="316.14655" y="445.92197" z="296.40808"/>
 		<routestep x="317.91745" y="446.97937" z="296.40808"/>
@@ -1870,7 +1845,7 @@
 		<routestep x="344.23413" y="441.65433" z="294.58875"/>
 		<routestep x="344.5224" y="439.06216" z="294.7574"/>
 	</walker_template>
-	<walker_template route_id="3005600042">
+	<walker_template route_id="3005600042" loop_type="NONE">
 		<routestep x="316.14655" y="445.92197" z="296.40808"/>
 		<routestep x="317.91745" y="446.97937" z="296.40808"/>
 		<routestep x="319.68094" y="447.89825" z="296.40808"/>
@@ -1891,7 +1866,7 @@
 		<routestep x="344.23413" y="441.65433" z="294.58875"/>
 		<routestep x="344.5224" y="439.06216" z="294.7574"/>
 	</walker_template>
-	<walker_template route_id="3005600043">
+	<walker_template route_id="3005600043" loop_type="NONE">
 		<routestep x="317.91745" y="446.97937" z="296.40808"/>
 		<routestep x="319.68094" y="447.89825" z="296.40808"/>
 		<routestep x="321.58063" y="448.86118" z="296.40808"/>
@@ -1911,7 +1886,7 @@
 		<routestep x="344.23413" y="441.65433" z="294.58875"/>
 		<routestep x="344.5224" y="439.06216" z="294.7574"/>
 	</walker_template>
-	<walker_template route_id="3005600044">
+	<walker_template route_id="3005600044" loop_type="NONE">
 		<routestep x="319.68094" y="447.89825" z="296.40808"/>
 		<routestep x="321.58063" y="448.86118" z="296.40808"/>
 		<routestep x="323.39624" y="449.65268" z="296.40808"/>
@@ -1930,7 +1905,7 @@
 		<routestep x="344.23413" y="441.65433" z="294.58875"/>
 		<routestep x="344.5224" y="439.06216" z="294.7574"/>
 	</walker_template>
-	<walker_template route_id="3005600045">
+	<walker_template route_id="3005600045" loop_type="NONE">
 		<routestep x="321.58063" y="448.86118" z="296.40808"/>
 		<routestep x="323.39624" y="449.65268" z="296.40808"/>
 		<routestep x="325.48813" y="450.49716" z="296.40808"/>
@@ -1948,8 +1923,8 @@
 		<routestep x="344.23413" y="441.65433" z="294.58875"/>
 		<routestep x="344.5224" y="439.06216" z="294.7574"/>
 	</walker_template>
-	<!-- Level 2 Side 6 -->
-	<walker_template route_id="3005600046">
+	<!-- Level 2 Right 2 -->
+	<walker_template route_id="3005600046" loop_type="NONE">
 		<routestep x="312.98706" y="447.28857" z="296.40808"/>
 		<routestep x="314.63693" y="448.43115" z="296.40808"/>
 		<routestep x="316.495" y="449.23416" z="296.40808"/>
@@ -1971,7 +1946,7 @@
 		<routestep x="346.9441" y="441.67313" z="294.58875"/>
 		<routestep x="347.02505" y="439.07068" z="294.7608"/>
 	</walker_template>
-	<walker_template route_id="3005600047">
+	<walker_template route_id="3005600047" loop_type="NONE">
 		<routestep x="314.63693" y="448.43115" z="296.40808"/>
 		<routestep x="316.495" y="449.23416" z="296.40808"/>
 		<routestep x="318.1497" y="450.4274" z="296.40808"/>
@@ -1992,7 +1967,7 @@
 		<routestep x="346.9441" y="441.67313" z="294.58875"/>
 		<routestep x="347.02505" y="439.07068" z="294.7608"/>
 	</walker_template>
-	<walker_template route_id="3005600048">
+	<walker_template route_id="3005600048" loop_type="NONE">
 		<routestep x="316.495" y="449.23416" z="296.40808"/>
 		<routestep x="318.1497" y="450.4274" z="296.40808"/>
 		<routestep x="320.51926" y="451.6137" z="296.40808"/>
@@ -2012,7 +1987,7 @@
 		<routestep x="346.9441" y="441.67313" z="294.58875"/>
 		<routestep x="347.02505" y="439.07068" z="294.7608"/>
 	</walker_template>
-	<walker_template route_id="3005600049">
+	<walker_template route_id="3005600049" loop_type="NONE">
 		<routestep x="318.1497" y="450.4274" z="296.40808"/>
 		<routestep x="320.51926" y="451.6137" z="296.40808"/>
 		<routestep x="322.62775" y="452.218" z="296.40808"/>
@@ -2031,7 +2006,7 @@
 		<routestep x="346.9441" y="441.67313" z="294.58875"/>
 		<routestep x="347.02505" y="439.07068" z="294.7608"/>
 	</walker_template>
-	<walker_template route_id="3005600050">
+	<walker_template route_id="3005600050" loop_type="NONE">
 		<routestep x="320.51926" y="451.6137" z="296.40808"/>
 		<routestep x="322.62775" y="452.218" z="296.40808"/>
 		<routestep x="324.81445" y="453.1116" z="296.40808"/>
@@ -2049,8 +2024,8 @@
 		<routestep x="346.9441" y="441.67313" z="294.58875"/>
 		<routestep x="347.02505" y="439.07068" z="294.7608"/>
 	</walker_template>
-	<!-- Level 3 Side 1 -->
-	<walker_template route_id="3005600051">
+	<!-- Level 3 Left 1 -->
+	<walker_template route_id="3005600051" loop_type="NONE">
 		<routestep x="409.88763" y="56.653545" z="222.41557"/>
 		<routestep x="411.7334" y="57.51016" z="222.41104"/>
 		<routestep x="413.6849" y="58.40827" z="222.40959"/>
@@ -2076,7 +2051,7 @@
 		<routestep x="450.12213" y="82.34098" z="214.33519"/>
 		<routestep x="451.16904" y="83.49542" z="214.33556"/>
 	</walker_template>
-	<walker_template route_id="3005600052">
+	<walker_template route_id="3005600052" loop_type="NONE">
 		<routestep x="411.7334" y="57.51016" z="222.41104"/>
 		<routestep x="413.6849" y="58.40827" z="222.40959"/>
 		<routestep x="416.67792" y="59.286125" z="222.40765"/>
@@ -2101,7 +2076,7 @@
 		<routestep x="450.12213" y="82.34098" z="214.33519"/>
 		<routestep x="451.16904" y="83.49542" z="214.33556"/>
 	</walker_template>
-	<walker_template route_id="3005600053">
+	<walker_template route_id="3005600053" loop_type="NONE">
 		<routestep x="413.6849" y="58.40827" z="222.40959"/>
 		<routestep x="416.67792" y="59.286125" z="222.40765"/>
 		<routestep x="419.08026" y="60.226997" z="222.14421"/>
@@ -2125,8 +2100,8 @@
 		<routestep x="450.12213" y="82.34098" z="214.33519"/>
 		<routestep x="451.16904" y="83.49542" z="214.33556"/>
 	</walker_template>
-	<!-- Level 3 Side 2 -->
-	<walker_template route_id="3005600054">
+	<!-- Level 3 Left 2 -->
+	<walker_template route_id="3005600054" loop_type="NONE">
 		<routestep x="409.00763" y="58.69102" z="222.41164"/>
 		<routestep x="410.86633" y="59.55865" z="222.41025"/>
 		<routestep x="412.90878" y="60.187855" z="222.409"/>
@@ -2152,7 +2127,7 @@
 		<routestep x="448.8789" y="83.55186" z="214.33592"/>
 		<routestep x="450.1902" y="84.703674" z="214.33624"/>
 	</walker_template>
-	<walker_template route_id="3005600055">
+	<walker_template route_id="3005600055" loop_type="NONE">
 		<routestep x="410.86633" y="59.55865" z="222.41025"/>
 		<routestep x="412.90878" y="60.187855" z="222.409"/>
 		<routestep x="416.04535" y="61.43447" z="222.40698"/>
@@ -2177,7 +2152,7 @@
 		<routestep x="448.8789" y="83.55186" z="214.33592"/>
 		<routestep x="450.1902" y="84.703674" z="214.33624"/>
 	</walker_template>
-	<walker_template route_id="3005600056">
+	<walker_template route_id="3005600056" loop_type="NONE">
 		<routestep x="412.90878" y="60.187855" z="222.409"/>
 		<routestep x="416.04535" y="61.43447" z="222.40698"/>
 		<routestep x="418.242" y="62.30715" z="222.14369"/>
@@ -2201,8 +2176,8 @@
 		<routestep x="448.8789" y="83.55186" z="214.33592"/>
 		<routestep x="450.1902" y="84.703674" z="214.33624"/>
 	</walker_template>
-	<!-- Level 3 Side 3 -->
-	<walker_template route_id="3005600057">
+	<!-- Level 3 Mid 1 -->
+	<walker_template route_id="3005600057" loop_type="NONE">
 		<routestep x="420.5633" y="90.57509" z="214.33856"/>
 		<routestep x="422.4661" y="91.43331" z="214.33856"/>
 		<routestep x="424.35175" y="92.317375" z="214.33856"/>
@@ -2217,7 +2192,7 @@
 		<routestep x="446.43985" y="102.675064" z="212.20023"/>
 		<routestep x="448.81195" y="103.77389" z="212.20023"/>
 	</walker_template>
-	<walker_template route_id="3005600058">
+	<walker_template route_id="3005600058" loop_type="NONE">
 		<routestep x="422.4661" y="91.43331" z="214.33856"/>
 		<routestep x="424.35175" y="92.317375" z="214.33856"/>
 		<routestep x="426.07535" y="93.06536" z="213.62544"/>
@@ -2231,8 +2206,21 @@
 		<routestep x="446.43985" y="102.675064" z="212.20023"/>
 		<routestep x="448.81195" y="103.77389" z="212.20023"/>
 	</walker_template>
-	<!-- Level 3 Side 4 -->
-	<walker_template route_id="3005600059">
+	<walker_template route_id="3005600058-B" loop_type="NONE">
+		<routestep x="424.35175" y="92.317375" z="214.33856"/>
+		<routestep x="426.07535" y="93.06536" z="213.62544"/>
+		<routestep x="428.53604" y="94.34581" z="212.49121"/>
+		<routestep x="431.1152" y="95.57986" z="212.20023"/>
+		<routestep x="433.01324" y="96.455345" z="212.20023"/>
+		<routestep x="435.82513" y="97.75791" z="212.20023"/>
+		<routestep x="438.19623" y="98.856285" z="212.20023"/>
+		<routestep x="441.0343" y="100.17095" z="212.20023"/>
+		<routestep x="443.91687" y="101.50629" z="212.20023"/>
+		<routestep x="446.43985" y="102.675064" z="212.20023"/>
+		<routestep x="448.81195" y="103.77389" z="212.20023"/>
+	</walker_template>
+	<!-- Level 3 Mid 2 -->
+	<walker_template route_id="3005600059" loop_type="NONE">
 		<routestep x="419.69623" y="92.62358" z="214.33856"/>
 		<routestep x="421.59903" y="93.481804" z="214.33856"/>
 		<routestep x="423.48468" y="94.36587" z="214.3483"/>
@@ -2247,7 +2235,7 @@
 		<routestep x="444.69992" y="105.04085" z="212.20023"/>
 		<routestep x="447.51196" y="106.44838" z="212.20023"/>
 	</walker_template>
-	<walker_template route_id="3005600060">
+	<walker_template route_id="3005600060" loop_type="NONE">
 		<routestep x="421.59903" y="93.481804" z="214.33856"/>
 		<routestep x="423.48468" y="94.36587" z="214.3483"/>
 		<routestep x="424.93073" y="95.10512" z="213.70851"/>
@@ -2261,8 +2249,21 @@
 		<routestep x="444.69992" y="105.04085" z="212.20023"/>
 		<routestep x="447.51196" y="106.44838" z="212.20023"/>
 	</walker_template>
-	<!-- Level 3 Side 5 -->
-	<walker_template route_id="3005600061">
+	<walker_template route_id="3005600060-B" loop_type="NONE">
+		<routestep x="423.48468" y="94.36587" z="214.3483"/>
+		<routestep x="424.93073" y="95.10512" z="213.70851"/>
+		<routestep x="427.3951" y="96.787025" z="212.6001"/>
+		<routestep x="429.96637" y="98.11579" z="212.20023"/>
+		<routestep x="431.3443" y="99.05619" z="212.20023"/>
+		<routestep x="434.27542" y="100.03928" z="212.20023"/>
+		<routestep x="436.95392" y="101.554245" z="212.20023"/>
+		<routestep x="439.78787" y="103.26138" z="212.20023"/>
+		<routestep x="442.39334" y="103.69098" z="212.20023"/>
+		<routestep x="444.69992" y="105.04085" z="212.20023"/>
+		<routestep x="447.51196" y="106.44838" z="212.20023"/>
+	</walker_template>
+	<!-- Level 3 Right 1 -->
+	<walker_template route_id="3005600061" loop_type="NONE">
 		<routestep x="388.09738" y="104.93561" z="222.41173"/>
 		<routestep x="389.956" y="105.80447" z="222.41042"/>
 		<routestep x="391.97464" y="106.80167" z="222.40909"/>
@@ -2283,7 +2284,7 @@
 		<routestep x="432.25296" y="118.910446" z="214.33525"/>
 		<routestep x="434.85272" y="119.41646" z="214.33601"/>
 	</walker_template>
-	<walker_template route_id="3005600062">
+	<walker_template route_id="3005600062" loop_type="NONE">
 		<routestep x="389.956" y="105.80447" z="222.41042"/>
 		<routestep x="391.97464" y="106.80167" z="222.40909"/>
 		<routestep x="394.29684" y="107.75804" z="222.40755"/>
@@ -2303,7 +2304,7 @@
 		<routestep x="432.25296" y="118.910446" z="214.33525"/>
 		<routestep x="434.85272" y="119.41646" z="214.33601"/>
 	</walker_template>
-	<walker_template route_id="3005600063">
+	<walker_template route_id="3005600063" loop_type="NONE">
 		<routestep x="391.97464" y="106.80167" z="222.40909"/>
 		<routestep x="394.29684" y="107.75804" z="222.40755"/>
 		<routestep x="397.3663" y="109.02219" z="222.1435"/>
@@ -2322,8 +2323,8 @@
 		<routestep x="432.25296" y="118.910446" z="214.33525"/>
 		<routestep x="434.85272" y="119.41646" z="214.33601"/>
 	</walker_template>
-	<!-- Level 3 Side 6 -->
-	<walker_template route_id="3005600064">
+	<!-- Level 3 Right 2 -->
+	<walker_template route_id="3005600064" loop_type="NONE">
 		<routestep x="387.23022" y="106.98534" z="222.41225"/>
 		<routestep x="389.08893" y="107.85297" z="222.41093"/>
 		<routestep x="390.72717" y="108.61628" z="222.40979"/>
@@ -2344,7 +2345,7 @@
 		<routestep x="431.5372" y="121.291855" z="214.334"/>
 		<routestep x="434.2653" y="121.85319" z="214.33461"/>
 	</walker_template>
-	<walker_template route_id="3005600065">
+	<walker_template route_id="3005600065" loop_type="NONE">
 		<routestep x="389.08893" y="107.85297" z="222.41093"/>
 		<routestep x="390.72717" y="108.61628" z="222.40979"/>
 		<routestep x="393.24652" y="109.90838" z="222.40802"/>
@@ -2364,7 +2365,7 @@
 		<routestep x="431.5372" y="121.291855" z="214.334"/>
 		<routestep x="434.2653" y="121.85319" z="214.33461"/>
 	</walker_template>
-	<walker_template route_id="3005600066">
+	<walker_template route_id="3005600066" loop_type="NONE">
 		<routestep x="390.72717" y="108.61628" z="222.40979"/>
 		<routestep x="393.24652" y="109.90838" z="222.40802"/>
 		<routestep x="396.0538" y="111.34812" z="222.1443"/>

@@ -406,7 +406,7 @@
 	</chest>
 	<chest npc_id="701661">
 		<key_item item_ids="0" count="1" />
-	</chest>	
+	</chest>
 	<!-- Idgel Research Center -->
 	<chest npc_id="701935">
 		<key_item item_ids="0" count="1" />
@@ -532,10 +532,10 @@
 	</chest>
 	<chest npc_id="702018">
 		<key_item item_ids="0" count="1" />
-	</chest>	
+	</chest>
 	<chest npc_id="701974">
 		<key_item item_ids="0" count="1" />
-	</chest>	
+	</chest>
 	<!-- LinkGate Foundry -->
 	<chest npc_id="234992">
 		<key_item item_ids="0" count="1" />
@@ -563,6 +563,19 @@
 	</chest>
 	<chest npc_id="702701">
 		<key_item item_ids="0" count="1" />
+	</chest>
+	<!-- Shugo Imperial Tomb -->
+	<chest npc_id="831122">
+		<key_item item_ids="185000129 185000128" count="1" />
+	</chest>
+	<chest npc_id="831123">
+		<key_item item_ids="185000129 185000128" count="1" />
+	</chest>
+	<chest npc_id="831124">
+		<key_item item_ids="185000129 185000128" count="1" />
+	</chest>
+	<chest npc_id="831373">
+		<key_item item_ids="185000129 185000128" count="3" />
 	</chest>
 	<!-- Shugo Emperor's Vault -->
 	<chest npc_id="832929">

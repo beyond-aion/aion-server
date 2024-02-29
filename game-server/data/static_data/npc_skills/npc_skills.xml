@@ -34371,27 +34371,6 @@
 		<npc_skill id="20906" lv="60" prob="25" />
 		<npc_skill id="20904" lv="60" prob="25" />
 	</npc_skills>
-	<npc_skills npc_ids="219514">
-		<npc_skill id="21133" lv="1" prob="10" />
-	</npc_skills>
-	<npc_skills npc_ids="219515">
-		<npc_skill id="21131" lv="1" prob="10" />
-		<npc_skill id="21132" lv="1" prob="60" min_hp="26" max_hp="87" />
-	</npc_skills>
-	<npc_skills npc_ids="219522">
-		<npc_skill id="21133" lv="1" prob="25" min_hp="37" max_hp="42" />
-	</npc_skills>
-	<npc_skills npc_ids="219523">
-		<npc_skill id="21131" lv="1" prob="10" />
-	</npc_skills>
-	<npc_skills npc_ids="219530">
-		<npc_skill id="21133" lv="1" prob="10" />
-	</npc_skills>
-	<npc_skills npc_ids="219531">
-		<npc_skill id="21132" lv="1" prob="10" />
-		<npc_skill id="21134" lv="1" prob="10" />
-		<npc_skill id="21266" lv="1" prob="40" />
-	</npc_skills>
 	<npc_skills npc_ids="219553">
 		<npc_skill id="19157" lv="60" prob="10" />
 	</npc_skills>

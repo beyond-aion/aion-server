@@ -3806,7 +3806,26 @@
 		</drop_group>
 	</npc_drop>
 	<!-- Shugo Imperial Tomb -->
-	<!-- Custom Drops for 831122, 831123, 831124, 831373 -->
+	<npc_drop npc_id="831122">
+		<drop_group>
+			<drop item_id="182006892" /><!-- Broken Crystal Ball -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="831123">
+		<drop_group>
+			<drop item_id="182006892" /><!-- Broken Crystal Ball -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="831124">
+		<drop_group>
+			<drop item_id="182006892" /><!-- Broken Crystal Ball -->
+		</drop_group>
+	</npc_drop>
+	<npc_drop npc_id="831373">
+		<drop_group>
+			<drop item_id="182006892" /><!-- Broken Crystal Ball -->
+		</drop_group>
+	</npc_drop>
 	<!-- Steel Rake -->
 	<npc_drop npc_id="700553">
 		<drop_group><!-- Named Treasure Key -->

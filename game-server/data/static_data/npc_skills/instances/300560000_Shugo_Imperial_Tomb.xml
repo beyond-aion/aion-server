@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Strong Kobold Worker -->
+	<npc_skills npc_ids="219514">
+		<npc_skill id="21133" lv="1" max_hp="50" prob="0" /><!-- Binding Blow -->
+	</npc_skills>
+	<!-- Powerful Kobold Foreman -->
+	<npc_skills npc_ids="219515">
+		<npc_skill id="21132" lv="1" max_hp="90" prob="0" /><!-- Frozen Blow -->
+		<npc_skill id="21131" lv="1" max_hp="30" prob="0" /><!-- Concussion Blow -->
+	</npc_skills>
+	<!-- Elite Krall Lookout -->
+	<npc_skills npc_ids="219522">
+		<npc_skill id="21133" lv="1" max_hp="50" prob="0" /><!-- Binding Blow -->
+	</npc_skills>
+	<!-- Elite Krall Lookout Leader -->
+	<npc_skills npc_ids="219523">
+		<npc_skill id="21131" lv="1" max_hp="90" prob="0" /><!-- Concussion Blow -->
+		<npc_skill id="21131" lv="1" max_hp="50" prob="0" /><!-- Concussion Blow -->
+		<npc_skill id="21131" lv="1" max_hp="10" prob="0" /><!-- Concussion Blow -->
+	</npc_skills>
+	<!-- Letu Erezat -->
+	<npc_skills npc_ids="219530">
+		<npc_skill id="21133" lv="1" max_hp="50" prob="0" /><!-- Binding Blow -->
+	</npc_skills>
+	<!-- Captain Lediar -->
+	<npc_skills npc_ids="219531">
+		<npc_skill id="21134" lv="1" max_hp="90" prob="0" /><!-- Flames of Madness -->
+		<npc_skill id="21266" lv="1" max_hp="70" prob="0" /><!-- Summon Elite Grave Robber -->
+		<npc_skill id="21134" lv="1" max_hp="50" prob="0" /><!-- Flames of Madness -->
+		<npc_skill id="21134" lv="1" max_hp="20" prob="0" /><!-- Flames of Madness -->
+	</npc_skills>
+</npc_skill_templates>

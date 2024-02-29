@@ -3,8 +3,9 @@ package admincommands;
 import static com.aionemu.gameserver.world.WorldMapType.*;
 import static java.util.stream.Collectors.*;
 
-import java.awt.Color;
+import java.awt.*;
 import java.util.*;
+import java.util.List;
 
 import org.apache.commons.lang3.text.WordUtils;
 
@@ -244,6 +245,7 @@ public class GoTo extends AdminCommand {
 		addLocation(DRAUPNIR_CAVE, 491, 373, 622, "Draupnir Cave", "Draupnir Höhle");
 		addLocation(THEOBOMOS_LAB, 477, 201, 170, "Theobomos Lab", "Theobomos Research Lab", "TheoLab", "Theobomos Geheimlabor");
 		addLocation(DARK_POETA, 1214, 412, 140, "Dark Poeta", "DP", "Poeta der Finsternis");
+		addLocation(SHUGO_IMPERIAL_TOMB, 178, 234, 537, "Shugo Imperial Tomb", "Imperial", "Tomb");
 		// Lower Abyss
 		addLocation(SULFUR_TREE_NEST, 462, 345, 163, "Sulfur Tree Nest", "Schwefelbaum Nest");
 		addLocation(RIGHT_WING_CHAMBER, 263, 386, 103, "Right Wing Chamber", "Rechter Flügel", "Kammer Im Rechten Flügel");
