@@ -26,8 +26,8 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 @InstanceID(300590000)
 public class OphidanBridgeInstance extends GeneralInstanceHandler {
 
-	private final AtomicBoolean isNormalMode = new AtomicBoolean(false); // instance starts always in hardmode
-	private final AtomicBoolean used = new AtomicBoolean(false);
+	private final AtomicBoolean isNormalMode = new AtomicBoolean(); // instance starts always in hardmode
+	private final AtomicBoolean used = new AtomicBoolean();
 	private byte bossKills = 0;
 	private byte endBossKills = 0;
 	private Future<?> task;

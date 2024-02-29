@@ -11,13 +11,13 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.geo.GeoService;
 
-import ai.AggressiveNpcAI;
+import ai.AggressiveNoLootNpcAI;
 
 /**
  * @author Sykra
  */
 @AIName("custom_instance_bulky")
-public class CustomInstanceBulkyAI extends AggressiveNpcAI {
+public class CustomInstanceBulkyAI extends AggressiveNoLootNpcAI {
 
 	public CustomInstanceBulkyAI(Npc owner) {
 		super(owner);

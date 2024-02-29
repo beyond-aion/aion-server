@@ -198,7 +198,6 @@ public class DragonLordsRefugeInstance extends GeneralInstanceHandler {
 				Npc empyreanLord = getNpc(219488 + raceId.get() * 3);
 				if (empyreanLord != null)
 					SkillEngine.getInstance().applyEffectDirectly(npc.getNpcId() - 262170, npc, empyreanLord); // 20993 - 20996
-				npc.getController().delete();
 				break;
 			case 219488: // Kaisinel 1st Phase
 			case 219491: // Marchutan 1st Phase

@@ -20,13 +20,13 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.geo.GeoService;
 
-import ai.AggressiveNpcAI;
+import ai.AggressiveNoLootNpcAI;
 
 /**
  * @author Jo
  */
 @AIName("custom_instance_dominator")
-public class CustomInstanceDominatorAI extends AggressiveNpcAI {
+public class CustomInstanceDominatorAI extends AggressiveNoLootNpcAI {
 
 	private int challengerObjId;
 	private int challengerRank;

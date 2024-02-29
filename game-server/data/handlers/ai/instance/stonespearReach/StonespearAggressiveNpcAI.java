@@ -10,13 +10,13 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-import ai.AggressiveNpcAI;
+import ai.AggressiveNoLootNpcAI;
 
 /**
  * @author Yeats
  */
 @AIName("aggressive_stonespear")
-public class StonespearAggressiveNpcAI extends AggressiveNpcAI {
+public class StonespearAggressiveNpcAI extends AggressiveNoLootNpcAI {
 
 	private final List<Integer> guardIds = new ArrayList<>();
 
@@ -55,7 +55,7 @@ public class StonespearAggressiveNpcAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case ALLOW_RESPAWN, REWARD_AP_XP_DP_LOOT, REWARD_LOOT -> false;
+			case ALLOW_RESPAWN, REWARD_AP_XP_DP_LOOT -> false;
 			default -> super.ask(question);
 		};
 	}

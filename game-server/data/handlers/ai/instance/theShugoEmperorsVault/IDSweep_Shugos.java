@@ -28,7 +28,7 @@ public class IDSweep_Shugos extends AggressiveNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		InstanceHandler handler = getOwner().getPosition().getWorldMapInstance().getInstanceHandler();
-		InstanceScore<?> reward = null;
+		InstanceScore<?> reward;
 		if (handler != null) {
 			reward = handler.getInstanceScore();
 			if (reward != null) {
@@ -51,7 +51,7 @@ public class IDSweep_Shugos extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case REWARD_LOOT -> false;
+			case REWARD_LOOT, ALLOW_DECAY -> false;
 			default -> super.ask(question);
 		};
 	}

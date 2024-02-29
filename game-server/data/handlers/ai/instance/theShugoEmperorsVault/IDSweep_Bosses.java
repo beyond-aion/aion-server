@@ -17,7 +17,6 @@ public class IDSweep_Bosses extends IDSweep_Shugos {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case REWARD_LOOT -> false;
 			case IS_IMMUNE_TO_ABNORMAL_STATES -> true;
 			default -> super.ask(question);
 		};

@@ -80,7 +80,7 @@ public class TiamatsIncarnationAI extends AggressiveNpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case REWARD_AP_XP_DP_LOOT -> false;
+				case REWARD_AP_XP_DP_LOOT, ALLOW_DECAY -> false;
 			default -> super.ask(question);
 		};
 	}

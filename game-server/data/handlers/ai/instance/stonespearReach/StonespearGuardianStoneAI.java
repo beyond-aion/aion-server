@@ -53,7 +53,7 @@ public class StonespearGuardianStoneAI extends NpcAI {
 	@Override
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
-			case ALLOW_RESPAWN, REWARD_AP_XP_DP_LOOT, REWARD_LOOT -> false;
+			case ALLOW_RESPAWN, REWARD_AP_XP_DP_LOOT, REWARD_LOOT, ALLOW_DECAY -> false;
 			default -> super.ask(question);
 		};
 	}

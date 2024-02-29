@@ -5,6 +5,7 @@ import java.util.concurrent.Future;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -52,5 +53,13 @@ public class TiamatsIncarnationSpawnsAI extends NpcAI {
 			default:
 				return 0;
 		}
+	}
+
+	@Override
+	public boolean ask(AIQuestion question) {
+		return switch (question) {
+			case REWARD_AP_XP_DP_LOOT, ALLOW_DECAY -> false;
+			default -> super.ask(question);
+		};
 	}
 }

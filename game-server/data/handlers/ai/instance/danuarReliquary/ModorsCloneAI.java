@@ -10,13 +10,13 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import ai.AggressiveNpcAI;
+import ai.AggressiveNoLootNpcAI;
 
 /**
  * @author Ritsu, Estrayl, Yeats
  */
 @AIName("modors_clone")
-public class ModorsCloneAI extends AggressiveNpcAI {
+public class ModorsCloneAI extends AggressiveNoLootNpcAI {
 
 	private float modifier = 1.35f;
 
