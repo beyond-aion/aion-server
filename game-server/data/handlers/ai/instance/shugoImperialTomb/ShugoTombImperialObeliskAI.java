@@ -8,13 +8,13 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
-import ai.AggressiveNpcAI;
+import ai.GeneralNpcAI;
 
 /**
  * @author Ritsu
  */
 @AIName("shugo_tomb_imperial_obelisk")
-public class ShugoTombImperialObeliskAI extends AggressiveNpcAI {
+public class ShugoTombImperialObeliskAI extends GeneralNpcAI {
 
 	private final AtomicInteger damageLevel = new AtomicInteger();
 

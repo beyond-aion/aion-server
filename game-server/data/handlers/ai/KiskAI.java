@@ -86,6 +86,7 @@ public class KiskAI extends NpcAI {
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
 			case ALLOW_DECAY, ALLOW_RESPAWN, REWARD_AP_XP_DP_LOOT, REMOVE_EFFECTS_ON_MAP_REGION_DEACTIVATE -> false;
+			case IS_IMMUNE_TO_ABNORMAL_STATES -> true;
 			default -> super.ask(question);
 		};
 	}

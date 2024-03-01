@@ -15,7 +15,6 @@ import com.aionemu.gameserver.controllers.movement.NpcMoveController;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
@@ -154,7 +153,7 @@ public abstract class NpcAI extends AITemplate<Npc> {
 		return switch (question) {
 			case CAN_SHOUT -> AIConfig.SHOUTS_ENABLE && NpcShoutsService.getInstance().mayShout(getOwner());
 			case ALLOW_DECAY, ALLOW_RESPAWN, REWARD_AP_XP_DP_LOOT, REWARD_LOOT -> true;
-			case IS_IMMUNE_TO_ABNORMAL_STATES -> getOwner().isBoss() || getOwner().hasStatic() || getOwner() instanceof Kisk;
+			case IS_IMMUNE_TO_ABNORMAL_STATES -> getOwner().isBoss() || getOwner().hasStatic();
 			case REWARD_AP -> {
 				WorldType wt = getOwner().getWorldType();
 				yield wt == WorldType.ABYSS || wt != WorldType.ELYSEA && wt != WorldType.ASMODAE && apRewardingRaces.contains(getRace());

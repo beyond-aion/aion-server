@@ -2,7 +2,6 @@ package ai.instance.theShugoEmperorsVault;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -10,13 +9,13 @@ import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
-import ai.AggressiveNpcAI;
+import ai.AggressiveNoLootNpcAI;
 
 /**
  * @author Yeats
  */
 @AIName("IDSweep_shugos")
-public class IDSweep_Shugos extends AggressiveNpcAI {
+public class IDSweep_Shugos extends AggressiveNoLootNpcAI {
 
 	private int baseDamage;
 
@@ -46,13 +45,5 @@ public class IDSweep_Shugos extends AggressiveNpcAI {
 			damage = baseDamage + rndDamage;
 		}
 		return damage;
-	}
-
-	@Override
-	public boolean ask(AIQuestion question) {
-		return switch (question) {
-			case REWARD_LOOT, ALLOW_DECAY -> false;
-			default -> super.ask(question);
-		};
 	}
 }

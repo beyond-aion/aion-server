@@ -44,6 +44,6 @@ public class SpellAttackEffect extends AbstractOverTimeEffect {
 	 * If we succeeded in parsing the data, these exclusions can be removed.
 	 */
 	private boolean useMagicBoost(Effect effect) {
-		return effect.getSkillId() == 21110; // Shugo Venom
+		return effect.getSkillId() != 21110; // Shugo Venom
 	}
 }
