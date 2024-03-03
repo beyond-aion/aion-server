@@ -2888,9 +2888,19 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Upgrade Arcade" start="2020-04-06T00:00:00" end="2020-04-12T23:59:59">
-		<inventory_drop item_id="186000389" interval="60" /><!-- Arcade Token -->
+	<event name="Upgrade Arcade" start="2024-03-08T00:00:00" end="2024-03-17T23:59:59">
 		<event_drops>
+			<gd_rule rule_name="Global Arcade Token" level_based_chance_reduction="true" chance="0.1">
+				<gd_ratings>
+					<gd_rating rating="NORMAL" />
+					<gd_rating rating="ELITE" />
+					<gd_rating rating="HERO" />
+					<gd_rating rating="LEGENDARY" />
+				</gd_ratings>
+				<gd_items>
+					<gd_item id="188053863" /><!-- [Event] Arcade Token Bundle (1) -->
+				</gd_items>
+			</gd_rule>
 			<gd_rule rule_name="Instance Boss Arcade Token" chance="100">
 				<gd_maps>
 					<gd_map map_id="301270000" /><!-- Linkgate Foundry -->
@@ -2906,29 +2916,34 @@
 			</gd_rule>
 			<gd_rule rule_name="Instance Boss Arcade Token" chance="100" member_limit="6">
 				<gd_maps>
-					<gd_map map_id="300620000" /><!-- Occupied_Rentus_Base -->
-					<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
+					<gd_map map_id="301230000" /><!-- Illuminary_Obelisk -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="236300" /><!-- Brigade General Vasharti -->
-					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
-					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="188053512" /><!-- [Event] Arcade Token Bundle -->
 				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Instance Boss Arcade Token" chance="100" member_limit="12">
+			</gd_rule><gd_rule rule_name="Instance Boss Arcade Token" chance="100" member_limit="6">
 				<gd_maps>
-					<gd_map map_id="300800000" /><!-- Infinity_Shard -->
-					<gd_map map_id="300630000" /><!-- Anguished_Dragon_Lords_Refuge -->
+					<gd_map map_id="301370000" /><!-- Infernal_Illuminary_Obelisk -->
 				</gd_maps>
 				<gd_npcs>
-					<gd_npc npc_id="231073" /><!-- Hyperion -->
-					<gd_npc npc_id="702729" /><!-- Tiamat's Huge Treasure Crate -->
+					<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="188053870" /><!-- [Event] Arcade Token Bundle (10) -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Instance Boss Arcade Token" chance="100" member_limit="12">
+				<gd_maps>
+					<gd_map map_id="301390000" /><!-- Drakenspire_Depths -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="833012" /><!-- Cloak of Balaur Lord Beritra -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053870" min_count="2" /><!-- [Event] Arcade Token Bundle (10) -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
