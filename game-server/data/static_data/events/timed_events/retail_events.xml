@@ -5081,7 +5081,7 @@
 				</gd_npcs>
 				<gd_items>
 					<gd_item id="160010102" min_count="3" /><!-- Summer-Loving Inquin Form Candy -->
-					<gd_item id="166000195" min_count="5" /><!-- Omega Enchantment Stone -->
+					<gd_item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
 					<gd_item id="188052685" /><!-- [Event] Dreamer's Reward -->
 					<gd_item id="188051516" /><!-- Smart Greater Scroll Bundle -->
 				</gd_items>
