@@ -28,8 +28,8 @@ import com.aionemu.gameserver.utils.stats.StatFunctions;
 public class AggroList extends AbstractEventSource<AddDamageEvent> {
 
 	protected final Creature owner;
-	private ConcurrentHashMap<Integer, AggroInfo> aggroList = new ConcurrentHashMap<>();
-	private Future<?> reductionTask;
+	private final ConcurrentHashMap<Integer, AggroInfo> aggroList = new ConcurrentHashMap<>();
+	private Future<?> hateReductionTask;
 
 	public AggroList(Creature owner) {
 		this.owner = owner;
@@ -48,8 +48,8 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 		// If the incoming damage is higher than the rest life it will decreased to the rest life
 		if (damage >= owner.getLifeStats().getCurrentHp()) {
 			damage = owner.getLifeStats().getCurrentHp();
-		} else {
-			startReductionTask();
+		} else if (hateReductionTask == null) {
+			startHateReductionTask();
 		}
 
 		AddDamageEvent evObj = null;
@@ -272,9 +272,11 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	 * Clear aggroList
 	 */
 	public void clear() {
-		if (reductionTask != null) {
-			reductionTask.cancel(true);
-			reductionTask = null;
+		synchronized (this) {
+			if (hateReductionTask != null) {
+				hateReductionTask.cancel(true);
+				hateReductionTask = null;
+			}
 		}
 		aggroList.clear();
 	}
@@ -382,15 +384,17 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 		return event.getDamage() > 0;
 	}
 
-	private void startReductionTask() {
-		if (reductionTask == null) {
-			reductionTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-				for (AggroInfo info : aggroList.values()) {
-					if (info.getLastInteractionTime() != 0 && System.currentTimeMillis() - info.getLastInteractionTime() > 5000){
-						info.reduceHate();
+	private void startHateReductionTask() {
+		synchronized (this) {
+			if (hateReductionTask == null) {
+				hateReductionTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+					for (AggroInfo info : aggroList.values()) {
+						if (info.getLastInteractionTime() != 0 && System.currentTimeMillis() - info.getLastInteractionTime() > 5000){
+							info.reduceHate();
+						}
 					}
-				}
-			}, 10000, 10000); // every 10 sec reduce hate of not attacking creatures
+				}, 10000, 10000); // every 10 sec reduce hate of not attacking creatures
+			}
 		}
 	}
 }

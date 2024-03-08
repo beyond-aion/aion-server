@@ -203,6 +203,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 */
 	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status,
 						 boolean allowGodstoneActivation, HopType hopType, Effect criticalEffect) {
+		if (!getOwner().isSpawned())
+			return;
 		if (damage != 0 && notifyAttack) {
 			Skill skill = getOwner().getCastingSkill();
 			if (skill != null) {
