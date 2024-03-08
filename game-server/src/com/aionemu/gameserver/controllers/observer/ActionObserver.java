@@ -4,7 +4,6 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -70,9 +69,6 @@ public class ActionObserver {
 	}
 
 	public void itemused(Item item) {
-	}
-
-	public void npcdialogrequested(Npc npc) {
 	}
 
 	public void abnormalsetted(AbnormalState state) {

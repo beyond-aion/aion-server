@@ -259,7 +259,6 @@ public class NpcController extends CreatureController<Npc> {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_TOO_FAR_FROM_NPC());
 			return;
 		}
-		player.getObserveController().notifyRequestDialogObservers(getOwner());
 
 		getOwner().getAi().onCreatureEvent(AIEventType.DIALOG_START, player);
 	}

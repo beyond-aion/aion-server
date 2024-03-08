@@ -693,8 +693,7 @@ public class Skill {
 		}
 
 		if (skillMethod == SkillMethod.CAST || skillMethod == SkillMethod.CHARGE) {
-			if (effector instanceof Player)
-				effector.getObserveController().notifyEndSkillCastObservers(this);
+			effector.getObserveController().notifyEndSkillCastObservers(this);
 		}
 		if (effector instanceof Player) {
 			if (this instanceof ChargeSkill) {

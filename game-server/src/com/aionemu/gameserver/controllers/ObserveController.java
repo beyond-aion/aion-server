@@ -1,23 +1,14 @@
 package com.aionemu.gameserver.controllers;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.locks.ReentrantLock;
 
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
-import com.aionemu.gameserver.controllers.observer.AttackShieldObserver;
-import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.controllers.observer.*;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -161,9 +152,6 @@ public class ObserveController {
 			case ITEMUSE:
 				observer.itemused((Item) object[0]);
 				break;
-			case NPCDIALOGREQUEST:
-				observer.npcdialogrequested((Npc) object[0]);
-				break;
 			case ABNORMALSETTED:
 				observer.abnormalsetted((AbnormalState) object[0]);
 				break;
@@ -261,13 +249,6 @@ public class ObserveController {
 	 */
 	public void notifyItemuseObservers(Item item) {
 		notifyObservers(ObserverType.ITEMUSE, item);
-	}
-
-	/**
-	 * notify that player requested dialog with npc
-	 */
-	public void notifyRequestDialogObservers(Npc npc) {
-		notifyObservers(ObserverType.NPCDIALOGREQUEST, npc);
 	}
 
 	/**

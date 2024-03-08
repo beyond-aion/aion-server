@@ -776,8 +776,7 @@ public class Effect implements StatOwner {
 		endEffects();
 
 		// if effect is a stance, remove stance from player
-		if (effector instanceof Player) {
-			Player player = (Player) effector;
+		if (effector instanceof Player player) {
 			if (player.getController().getStanceSkillId() == getSkillId())
 				player.getController().stopStance();
 		}
@@ -794,8 +793,7 @@ public class Effect implements StatOwner {
 		}
 		effected.getEffectController().clearEffect(this, broadcast);
 
-		if (effected instanceof Npc)
-			effected.getAi().onEffectEnd(this);
+		effected.getAi().onEffectEnd(this);
 		effected.getPosition().getWorldMapInstance().getInstanceHandler().onEndEffect(this);
 	}
 

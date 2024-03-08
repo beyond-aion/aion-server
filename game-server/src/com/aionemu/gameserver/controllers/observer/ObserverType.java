@@ -13,20 +13,19 @@ public enum ObserverType {
 	DEATH(1 << 6),
 	DOT_ATTACKED(1 << 7),
 	ITEMUSE(1 << 8),
-	NPCDIALOGREQUEST(1 << 9),
-	ABNORMALSETTED(1 << 10),
-	SUMMONRELEASE(1 << 11),
-	SIT(1 << 12),
-	HP_CHANGED(1 << 13),
-	ENDSKILLCAST(1 << 14),
-	BOOSTSKILLCOST(1 << 15),
+	ABNORMALSETTED(1 << 9),
+	SUMMONRELEASE(1 << 10),
+	SIT(1 << 11),
+	HP_CHANGED(1 << 12),
+	ENDSKILLCAST(1 << 13),
+	BOOSTSKILLCOST(1 << 14),
 	EQUIP_UNEQUIP(EQUIP.observerMask | UNEQUIP.observerMask),
 	ATTACK_DEFEND(ATTACK.observerMask | ATTACKED.observerMask),
 	DOT_ATTACK_DEFEND(DOT_ATTACKED.observerMask | ATTACK.observerMask | ATTACKED.observerMask),
 	MOVE_OR_DIE(MOVE.observerMask | DEATH.observerMask),
 	ALL(MOVE.observerMask | ATTACK.observerMask | ATTACKED.observerMask | EQUIP.observerMask | UNEQUIP.observerMask | STARTSKILLCAST.observerMask
-		| DEATH.observerMask | DOT_ATTACKED.observerMask | ITEMUSE.observerMask | NPCDIALOGREQUEST.observerMask | ABNORMALSETTED.observerMask
-		| SUMMONRELEASE.observerMask | SIT.observerMask | HP_CHANGED.observerMask | ENDSKILLCAST.observerMask | BOOSTSKILLCOST.observerMask);
+		| DEATH.observerMask | DOT_ATTACKED.observerMask | ITEMUSE.observerMask | ABNORMALSETTED.observerMask | SUMMONRELEASE.observerMask
+		| SIT.observerMask | HP_CHANGED.observerMask | ENDSKILLCAST.observerMask | BOOSTSKILLCOST.observerMask);
 
 	private int observerMask;
 

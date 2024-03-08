@@ -10,7 +10,6 @@ import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.templates.item.actions.ItemActions;
@@ -129,14 +128,6 @@ public class HideEffect extends BufEffect {
 				}
 			});
 
-			effected.getObserveController().attach(new ActionObserver(ObserverType.NPCDIALOGREQUEST) {
-
-				@Override
-				public void npcdialogrequested(Npc npc) {
-					effect.endEffect();
-				}
-
-			});
 		} else { // effected is npc
 			if (type == 0) { // type >= 1, hide is maintained even after damage
 				effect.setCancelOnDmg(true);
