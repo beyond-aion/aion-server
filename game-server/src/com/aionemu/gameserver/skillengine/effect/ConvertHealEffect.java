@@ -25,8 +25,7 @@ public class ConvertHealEffect extends ShieldEffect {
 		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, hitPercent, effect, hitType, getType(),
 			hitTypeProb, 0, 0, type, 0);
 
-		effect.getEffected().getObserveController().addAttackCalcObserver(asObserver);
-		effect.setAttackShieldObserver(asObserver, position);
+		effect.addObserver(effect.getEffected(), asObserver);
 		effect.getEffected().getEffectController().setUnderShield(true);
 	}
 

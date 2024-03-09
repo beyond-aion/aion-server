@@ -5,8 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -35,57 +33,21 @@ public class HealCastorOnTargetDeadEffect extends EffectTemplate {
 	}
 
 	@Override
-	public void calculate(Effect effect) {
-		if (effect.getEffected() instanceof Player)
-			super.calculate(effect, null, null);
-	}
-
-	@Override
-	public void startEffect(final Effect effect) {
-		super.startEffect(effect);
-
-		final Player player = (Player) effect.getEffector();
-		final int valueWithDelta = calculateBaseValue(effect);
-
-		ActionObserver observer = new ActionObserver(ObserverType.DEATH) {
-
-			@Override
-			public void died(Creature creature) {
-				// Heal Caster first
-				if (PositionUtil.isInRange(effect.getEffected(), player, range, false))
-					player.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect, LOG.REGULAR);
-				// Then check for party if healparty parameter is set
-				if (healparty) {
-					if (player.getPlayerGroup() != null) {
-						for (Player p : player.getPlayerGroup().getMembers()) {
-							if (p == player)
-								continue;
-							if (PositionUtil.isInRange(effect.getEffected(), p, range, false))
-								player.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect, LOG.REGULAR);
-						}
-					} else if (player.isInAlliance()) {
-						for (Player p : player.getPlayerAllianceGroup().getMembers()) {
-							if (!p.isOnline())
-								continue;
-							if (p.equals(player))
-								continue;
-							if (PositionUtil.isInRange(effect.getEffected(), p, range, false))
-								player.getLifeStats().increaseHp(TYPE.HP, valueWithDelta, effect, LOG.REGULAR);
-						}
-					}
+	public void endEffect(Effect effect) {
+		Creature effected = effect.getEffected();
+		Creature effector = effect.getEffector();
+		if (effected.isDead()) {
+			int healValue = calculateBaseValue(effect);
+			var group = healparty && effector instanceof Player p ? p.getCurrentGroup() : null;
+			if (group == null) {
+				if (PositionUtil.isInRange(effected, effector, range, false))
+					effector.getLifeStats().increaseHp(TYPE.HP, healValue, effect, LOG.REGULAR);
+			} else {
+				for (Player p : group.getOnlineMembers()) {
+					if (PositionUtil.isInRange(effected, p, range, false))
+						effector.getLifeStats().increaseHp(TYPE.HP, healValue, effect, LOG.REGULAR);
 				}
 			}
-		};
-
-		effect.getEffected().getObserveController().addObserver(observer);
-		effect.setActionObserver(observer, position);
-	}
-
-	@Override
-	public void endEffect(Effect effect) {
-		super.endEffect(effect);
-		ActionObserver observer = effect.getActionObserver(position);
-		if ((!effect.getEffected().isDead()) && (observer != null))
-			effect.getEffected().getObserveController().removeObserver(observer);
+		}
 	}
 }

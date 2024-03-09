@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
-import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
 import com.aionemu.gameserver.controllers.observer.AttackStatusObserver;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
@@ -23,30 +22,17 @@ public class AlwaysDodgeEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(final Effect effect) {
-		AttackCalcObserver acObserver = new AttackStatusObserver(value, AttackStatus.DODGE) {
+		effect.addObserver(effect.getEffected(), new AttackStatusObserver(value, AttackStatus.DODGE) {
 
 			@Override
 			public boolean checkStatus(AttackStatus status) {
 				if (status == AttackStatus.DODGE) {
-					if (value <= 1)
+					if (--value <= 0)
 						effect.endEffect();
-					else
-						value--;
-
 					return true;
-				} else
-					return false;
+				}
+				return false;
 			}
-
-		};
-		effect.getEffected().getObserveController().addAttackCalcObserver(acObserver);
-		effect.setAttackStatusObserver(acObserver, position);
-	}
-
-	@Override
-	public void endEffect(Effect effect) {
-		AttackCalcObserver acObserver = effect.getAttackStatusObserver(position);
-		if (acObserver != null)
-			effect.getEffected().getObserveController().removeAttackCalcObserver(acObserver);
+		});
 	}
 }

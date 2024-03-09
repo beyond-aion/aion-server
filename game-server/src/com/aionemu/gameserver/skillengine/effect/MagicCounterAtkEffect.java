@@ -33,28 +33,16 @@ public class MagicCounterAtkEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(final Effect effect) {
-		final Creature effected = effect.getEffected();
-		ActionObserver observer = new ActionObserver(ObserverType.ENDSKILLCAST) {
+		Creature effected = effect.getEffected();
+		effect.addObserver(effected, new ActionObserver(ObserverType.ENDSKILLCAST) {
 
 			@Override
-			public void endSkillCast(final Skill skill) {
-				if (skill.getSkillMethod() == SkillMethod.ITEM)
-					return;
-				if (skill.getSkillTemplate().getType() == SkillType.MAGICAL) {
+			public void endSkillCast(Skill skill) {
+				if (skill.getSkillMethod() != SkillMethod.ITEM && skill.getSkillTemplate().getType() == SkillType.MAGICAL) {
 					int damage = Math.min(maxdmg, (int) (effected.getGameStats().getMaxHp().getBase() / 100f * value));
 					effected.getController().onAttack(effect, TYPE.MAGICCOUNTERATK, damage, false, LOG.MAGICCOUNTERATK, hopType);
 				}
 			}
-		};
-		effect.setActionObserver(observer, position);
-		effected.getObserveController().addObserver(observer);
+		});
 	}
-
-	@Override
-	public void endEffect(Effect effect) {
-		ActionObserver observer = effect.getActionObserver(position);
-		if (observer != null)
-			effect.getEffected().getObserveController().removeObserver(observer);
-	}
-
 }

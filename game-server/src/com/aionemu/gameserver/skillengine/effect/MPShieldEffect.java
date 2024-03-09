@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
 import com.aionemu.gameserver.controllers.observer.AttackShieldObserver;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.ShieldType;
@@ -24,20 +23,10 @@ public class MPShieldEffect extends ShieldEffect {
 	public void startEffect(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
 		int hitValueWithDelta = hitvalue + hitdelta * effect.getSkillLevel();
-		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, effect, hitType, this.getType(),
-			this.hitTypeProb, this.mpValue);
-
-		effect.getEffected().getObserveController().addAttackCalcObserver(asObserver);
-		effect.setAttackShieldObserver(asObserver, position);
+		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, effect, hitType, getType(), hitTypeProb,
+			mpValue);
+		effect.addObserver(effect.getEffected(), asObserver);
 		effect.getEffected().getEffectController().setUnderShield(true);
-	}
-
-	@Override
-	public void endEffect(Effect effect) {
-		AttackCalcObserver acObserver = effect.getAttackShieldObserver(position);
-		if (acObserver != null)
-			effect.getEffected().getObserveController().removeAttackCalcObserver(acObserver);
-		effect.getEffected().getEffectController().setUnderShield(false);
 	}
 
 	@Override

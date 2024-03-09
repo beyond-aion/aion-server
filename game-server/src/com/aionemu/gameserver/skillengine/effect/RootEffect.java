@@ -44,24 +44,18 @@ public class RootEffect extends EffectTemplate {
 			player.getMoveController().abortMove();
 		}
 
-		ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
+		effect.addObserver(effected, new ActionObserver(ObserverType.ATTACKED) {
 
 			@Override
 			public void attacked(Creature creature, int skillId) {
 				if (Rnd.chance() >= resistchance)
 					effected.getEffectController().removeEffect(effect.getSkillId());
 			}
-		};
-		effected.getObserveController().addObserver(observer);
-		effect.setActionObserver(observer, position);
-
+		});
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
 		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.ROOT);
-		ActionObserver observer = effect.getActionObserver(position);
-		if (observer != null)
-			effect.getEffected().getObserveController().removeObserver(observer);
 	}
 }

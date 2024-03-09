@@ -46,7 +46,7 @@ public class SummonHomingEffect extends SummonEffect {
 			final Homing homing = VisibleObjectSpawner.spawnHoming(spawn, instanceId, effector, attackCount, effect.getSkillId());
 
 			if (attackCount > 0) {
-				ActionObserver observer = new ActionObserver(ObserverType.ATTACK) {
+				effect.addObserver(homing, new ActionObserver(ObserverType.ATTACK) {
 
 					@Override
 					public void attack(Creature creature, int skillId) {
@@ -54,20 +54,10 @@ public class SummonHomingEffect extends SummonEffect {
 						if (homing.getAttackCount() <= 0)
 							homing.getController().delete();
 					}
-				};
-
-				homing.getObserveController().addObserver(observer);
-				effect.setActionObserver(observer, position);
+				});
 			}
 			// Schedule a despawn just in case
-			Future<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					if ((homing != null) && (homing.isSpawned()))
-						homing.getController().delete();
-				}
-			}, 15 * 1000);
+			Future<?> task = ThreadPoolManager.getInstance().schedule(() -> homing.getController().delete(), 15 * 1000);
 			homing.getController().addTask(TaskId.DESPAWN, task);
 			homing.getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
 		}

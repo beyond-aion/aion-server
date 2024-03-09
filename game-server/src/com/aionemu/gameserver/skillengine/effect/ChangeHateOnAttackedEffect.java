@@ -30,29 +30,16 @@ public class ChangeHateOnAttackedEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(final Effect effect) {
-		super.startEffect(effect);
-
 		// TODO: maybe this isn't correct formula?
 		final int finalValue = value1 + value2;
 
-		ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
+		effect.addObserver(effect.getEffected(), new ActionObserver(ObserverType.ATTACKED) {
 
 			@Override
 			public void attacked(Creature creature, int skillId) {
 				if (creature instanceof Npc)
-					((Npc) creature).getAggroList().addHate(effect.getEffected(), finalValue);
+					creature.getAggroList().addHate(effect.getEffected(), finalValue);
 			}
-		};
-
-		effect.getEffected().getObserveController().addObserver(observer);
-		effect.setActionObserver(observer, position);
-	}
-
-	@Override
-	public void endEffect(Effect effect) {
-		super.endEffect(effect);
-		ActionObserver observer = effect.getActionObserver(position);
-		if (observer != null)
-			effect.getEffected().getObserveController().removeObserver(observer);
+		});
 	}
 }

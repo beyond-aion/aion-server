@@ -45,9 +45,6 @@ public class HideEffect extends BufEffect {
 		super.endEffect(effect);
 
 		final Creature effected = effect.getEffected();
-		if (effected instanceof Player) {
-			effect.getEffected().getObserveController().removeObserver(effect.getActionObserver(position));
-		}
 		effected.unsetVisualState(state);
 		effected.getEffectController().unsetAbnormal(AbnormalState.HIDE);
 		effected.getController().onHideEnd();
@@ -80,7 +77,7 @@ public class HideEffect extends BufEffect {
 		if (effected instanceof Player) {
 
 			// Remove Hide when use skill / item skill
-			ActionObserver observer = new ActionObserver(ObserverType.STARTSKILLCAST) {
+			effect.addObserver(effected, new ActionObserver(ObserverType.STARTSKILLCAST) {
 
 				private int buffNumber = 0;
 
@@ -96,26 +93,15 @@ public class HideEffect extends BufEffect {
 					if (isShapeChange || !skill.isSelfBuff() || ++buffNumber >= buffCount)
 						effect.endEffect();
 				}
-
-			};
-			effected.getObserveController().addObserver(observer);
-			effect.setActionObserver(observer, position);
-
-			// Set attacked and dotattacked observers
-			// type >= 1, hide is maintained even after damage
-			if (type == 0)
-				effect.setCancelOnDmg(true);
-
-			// Remove Hide when attacking
-			effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACK) {
+			});
+			effect.addObserver(effected, new ActionObserver(ObserverType.ATTACK) {
 
 				@Override
 				public void attack(Creature creature, int skillId) {
 					effect.endEffect();
 				}
 			});
-
-			effected.getObserveController().attach(new ActionObserver(ObserverType.ITEMUSE) {
+			effect.addObserver(effected, new ActionObserver(ObserverType.ITEMUSE) {
 
 				@Override
 				public void itemused(Item item) {
@@ -128,12 +114,15 @@ public class HideEffect extends BufEffect {
 				}
 			});
 
+			// type >= 1, hide is maintained even after damage
+			if (type == 0)
+				effect.setCancelOnDmg(true);
 		} else { // effected is npc
 			if (type == 0) { // type >= 1, hide is maintained even after damage
 				effect.setCancelOnDmg(true);
 
 				// Remove Hide when attacking
-				effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACK) {
+				effect.addObserver(effected, new ActionObserver(ObserverType.ATTACK) {
 
 					@Override
 					public void attack(Creature creature, int skillId) {
@@ -143,7 +132,7 @@ public class HideEffect extends BufEffect {
 				});
 
 				// Remove Hide when use skill
-				effected.getObserveController().attach(new ActionObserver(ObserverType.STARTSKILLCAST) {
+				effect.addObserver(effected, new ActionObserver(ObserverType.STARTSKILLCAST) {
 
 					@Override
 					public void startSkillCast(Skill skill) {

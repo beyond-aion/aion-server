@@ -24,22 +24,12 @@ public class BoostSkillCostEffect extends BufEffect {
 	public void startEffect(final Effect effect) {
 		super.startEffect(effect);
 
-		ActionObserver observer = new ActionObserver(ObserverType.BOOSTSKILLCOST) {
+		effect.addObserver(effect.getEffected(), new ActionObserver(ObserverType.BOOSTSKILLCOST) {
 
 			@Override
 			public void boostSkillCost(Skill skill) {
 				skill.setBoostSkillCost(value);
 			}
-		};
-
-		effect.getEffected().getObserveController().addObserver(observer);
-		effect.setActionObserver(observer, position);
-	}
-
-	@Override
-	public void endEffect(Effect effect) {
-		super.endEffect(effect);
-		ActionObserver observer = effect.getActionObserver(position);
-		effect.getEffected().getObserveController().removeObserver(observer);
+		});
 	}
 }

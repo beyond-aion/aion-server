@@ -28,55 +28,15 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 		super.startEffect(effect);
 
 		final float percent = 1.0f + value / 100.0f;
-		AttackCalcObserver observer = null;
-
 		switch (type) {
-			case MAGICAL:
-				observer = new AttackCalcObserver() {
-
-					private int boostCount = 0;
-
-					@Override
-					public float getBaseMagicalDamageMultiplier() {
-						if (boostCount++ < count) {
-							if (boostCount == count)
-								removeEffect(effect);
-							return percent;
-						}
-						return 1.0f;
-					}
-				};
-				break;
-			case PHYSICAL:
-				observer = new AttackCalcObserver() {
+			case PHYSICAL, MAGICAL, ALL ->
+				effect.addObserver(effect.getEffected(), new AttackCalcObserver() {
 
 					private int boostCount = 0;
 
 					@Override
 					public float getBasePhysicalDamageMultiplier(boolean isSkill) {
-						if (!isSkill)
-							return 1f;
-
-						if (boostCount++ < count) {
-							if (boostCount == count)
-								removeEffect(effect);
-							return percent;
-						}
-						return 1.0f;
-					}
-				};
-				break;
-			case ALL:
-				observer = new AttackCalcObserver() {
-
-					private int boostCount = 0;
-
-					@Override
-					public float getBasePhysicalDamageMultiplier(boolean isSkill) {
-						if (!isSkill)
-							return 1f;
-
-						if (boostCount++ < count) {
+						if (isSkill && type != SkillType.MAGICAL && boostCount++ < count) {
 							if (boostCount == count)
 								removeEffect(effect);
 							return percent;
@@ -86,28 +46,16 @@ public class OneTimeBoostSkillAttackEffect extends BufEffect {
 
 					@Override
 					public float getBaseMagicalDamageMultiplier() {
-						if (boostCount++ < count) {
+						if (type != SkillType.PHYSICAL && boostCount++ < count) {
 							if (boostCount == count)
 								removeEffect(effect);
 							return percent;
 						}
 						return 1.0f;
 					}
-				};
-				break;
+				});
 		}
-
-		effect.getEffected().getObserveController().addAttackCalcObserver(observer);
-		effect.setAttackStatusObserver(observer, position);
 	}
-
-	@Override
-	public void endEffect(Effect effect) {
-		super.endEffect(effect);
-		AttackCalcObserver observer = effect.getAttackStatusObserver(position);
-		effect.getEffected().getObserveController().removeAttackCalcObserver(observer);
-	}
-
 
 	private void removeEffect(Effect effect) {
 		ThreadPoolManager.getInstance().schedule(() -> effect.getEffected().getEffectController().removeEffect(effect.getSkillId()), 100);

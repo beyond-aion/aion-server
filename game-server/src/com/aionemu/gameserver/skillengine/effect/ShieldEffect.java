@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
 import com.aionemu.gameserver.controllers.observer.AttackShieldObserver;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.ShieldType;
@@ -40,17 +39,12 @@ public class ShieldEffect extends EffectTemplate {
 		int hitValueWithDelta = hitvalue + hitdelta * effect.getSkillLevel();
 
 		AttackShieldObserver asObserver = new AttackShieldObserver(hitValueWithDelta, valueWithDelta, percent, effect, hitType, getType(), hitTypeProb);
-
-		effect.getEffected().getObserveController().addAttackCalcObserver(asObserver);
-		effect.setAttackShieldObserver(asObserver, position);
+		effect.addObserver(effect.getEffected(), asObserver);
 		effect.getEffected().getEffectController().setUnderShield(true);
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		AttackCalcObserver acObserver = effect.getAttackShieldObserver(position);
-		if (acObserver != null)
-			effect.getEffected().getObserveController().removeAttackCalcObserver(acObserver);
 		effect.getEffected().getEffectController().setUnderShield(false);
 	}
 

@@ -43,26 +43,17 @@ public class CaseHealEffect extends AbstractHealEffect {
 	}
 
 	@Override
-	public void endEffect(Effect effect) {
-		ActionObserver observer = effect.getActionObserver(position);
-		if (observer != null)
-			effect.getEffected().getObserveController().removeObserver(observer);
-	}
-
-	@Override
 	public void startEffect(final Effect effect) {
 		if (tryHeal(effect))
 			return;
-		ActionObserver observer = new ActionObserver(ObserverType.HP_CHANGED) {
+		effect.addObserver(effect.getEffected(), new ActionObserver(ObserverType.HP_CHANGED) {
 
 			@Override
 			public void hpChanged(int value) {
 				tryHeal(effect);
 			}
 
-		};
-		effect.getEffected().getObserveController().addObserver(observer);
-		effect.setActionObserver(observer, position);
+		});
 	}
 
 	private boolean tryHeal(final Effect effect) {

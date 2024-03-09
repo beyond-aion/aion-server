@@ -32,14 +32,8 @@ public class CondSkillLauncherEffect extends EffectTemplate {
 	}
 
 	@Override
-	public void endEffect(Effect effect) {
-		ActionObserver observer = effect.getActionObserver(position);
-		effect.getEffected().getObserveController().removeObserver(observer);
-	}
-
-	@Override
 	public void startEffect(final Effect effect) {
-		ActionObserver observer = new ActionObserver(ObserverType.HP_CHANGED) {
+		effect.addObserver(effect.getEffected(), new ActionObserver(ObserverType.HP_CHANGED) {
 
 			private final AtomicBoolean isHpBelowThreshold = new AtomicBoolean();
 
@@ -52,9 +46,7 @@ public class CondSkillLauncherEffect extends EffectTemplate {
 					isHpBelowThreshold.compareAndSet(true, false);
 				}
 			}
-		};
-		effect.getEffected().getObserveController().addObserver(observer);
-		effect.setActionObserver(observer, position);
+		});
 	}
 
 }

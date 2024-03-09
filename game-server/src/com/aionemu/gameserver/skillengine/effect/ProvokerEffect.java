@@ -38,136 +38,45 @@ public class ProvokerEffect extends ShieldEffect {
 
 	@Override
 	public void startEffect(Effect effect) {
-		ActionObserver observer = null;
-		final Creature effector = effect.getEffector();
-		final int prob2 = hitTypeProb;
-		final int radius = this.radius;
-		switch (hitType) {
-			case NMLATK:// ATTACK
-				observer = new ActionObserver(ObserverType.ATTACK) {
+		Creature effector = effect.getEffector();
+		effect.addObserver(effect.getEffected(), new ActionObserver(ObserverType.ATTACK) {
 
-					@Override
-					public void attack(Creature creature, int skillId) {
-						if (Rnd.chance() < prob2) {
-							Creature target = getProvokeTarget(provokeTarget, effector, creature);
-							createProvokedEffect(effector, target);
-						}
+			@Override
+			public void attack(Creature attacked, int attackSkillId) {
+				if (shouldApply(effector, attacked, attackSkillId)) {
+					if (effector instanceof Player player) {
+						PacketSendUtility.sendPacket(player,
+								SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n()));
 					}
-
-				};
-				break;
-			case PHHIT:
-				observer = new ActionObserver(ObserverType.ATTACKED) {
-
-					@Override
-					public void attacked(Creature creature, int id) {
-						if (radius > 0) {
-							if (!PositionUtil.isInRange(effector, creature, radius, false))
-								return;
-						}
-						if (Rnd.chance() < prob2) {
-							if (id == 0 || DataManager.SKILL_DATA.getSkillTemplate(id).getType() == SkillType.PHYSICAL) {
-								Creature target = getProvokeTarget(provokeTarget, effector, creature);
-								createProvokedEffect(effector, target);
-							}
-						}
-					}
-				};
-				break;
-			case MAHIT:
-				observer = new ActionObserver(ObserverType.ATTACKED) {
-
-					@Override
-					public void attacked(Creature creature, int id) {
-						if (radius > 0) {
-							if (!PositionUtil.isInRange(effector, creature, radius, false))
-								return;
-						}
-						if (Rnd.chance() < prob2) {
-							if (id != 0 && DataManager.SKILL_DATA.getSkillTemplate(id).getType() == SkillType.MAGICAL) {
-								Creature target = getProvokeTarget(provokeTarget, effector, creature);
-								createProvokedEffect(effector, target);
-							}
-						}
-					}
-				};
-				break;
-			case EVERYHIT:// ATTACKED
-				observer = new ActionObserver(ObserverType.ATTACKED) {
-
-					@Override
-					public void attacked(Creature creature, int id) {
-						if (radius > 0) {
-							if (!PositionUtil.isInRange(effector, creature, radius, false))
-								return;
-						}
-						if (Rnd.chance() < prob2) {
-							Creature target = getProvokeTarget(provokeTarget, effector, creature);
-							createProvokedEffect(effector, target);
-						}
-					}
-				};
-				break;
-			case BACKATK:// ATTACK opponents from back
-				observer = new ActionObserver(ObserverType.ATTACK) {
-
-					@Override
-					public void attack(Creature creature, int skillId) {
-						if (PositionUtil.isBehind(effector, creature)) {
-							if (Rnd.chance() < prob2) {
-								Creature target = getProvokeTarget(provokeTarget, effector, creature);
-								createProvokedEffect(effector, target);
-							}
-						}
-					}
-
-				};
-				break;
-		}
-
-		if (observer == null)
-			return;
-
-		effect.setActionObserver(observer, position);
-		effect.getEffected().getObserveController().addObserver(observer);
+					SkillEngine.getInstance().applyEffectDirectly(skillId, effector, getProvokeTarget(effector, attacked));
+				}
+			}
+		});
 	}
 
-	/**
-	 * @param effector
-	 * @param target
-	 */
-	private void createProvokedEffect(final Creature effector, Creature target) {
-		if (provokeTarget == ProvokeTarget.OPPONENT && target == effector) {
-			return;
-		}
-
-		if (effector instanceof Player) {
-			PacketSendUtility.sendPacket((Player) effector,
-				SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(DataManager.SKILL_DATA.getSkillTemplate(skillId).getL10n()));
-		}
-		SkillEngine.getInstance().applyEffectDirectly(skillId, effector, target);
+	private boolean shouldApply(Creature effector, Creature target, int attackSkillId) {
+		if (provokeTarget == ProvokeTarget.OPPONENT && target == effector)
+			return false;
+		if (radius > 0 && !PositionUtil.isInRange(effector, target, radius, false))
+			return false;
+		if (Rnd.chance() >= hitTypeProb)
+			return false;
+		return switch (hitType) {
+			case PHHIT -> attackSkillId == 0 || DataManager.SKILL_DATA.getSkillTemplate(attackSkillId).getType() == SkillType.PHYSICAL;
+			case MAHIT -> attackSkillId != 0 && DataManager.SKILL_DATA.getSkillTemplate(attackSkillId).getType() == SkillType.MAGICAL;
+			case BACKATK -> PositionUtil.isBehind(effector, target);
+			default -> true;
+		};
 	}
 
-	/**
-	 * @param provokeTarget
-	 * @param effector
-	 * @param target
-	 * @return
-	 */
-	private Creature getProvokeTarget(ProvokeTarget provokeTarget, Creature effector, Creature target) {
-		switch (provokeTarget) {
-			case ME:
-				return effector;
-			case OPPONENT:
-				return target;
-		}
-		throw new IllegalArgumentException("Provoker target is invalid " + provokeTarget);
+	private Creature getProvokeTarget(Creature effector, Creature target) {
+		return switch (provokeTarget) {
+			case ME -> effector;
+			case OPPONENT -> target;
+		};
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		ActionObserver observer = effect.getActionObserver(position);
-		if (observer != null)
-			effect.getEffected().getObserveController().removeObserver(observer);
 	}
 }

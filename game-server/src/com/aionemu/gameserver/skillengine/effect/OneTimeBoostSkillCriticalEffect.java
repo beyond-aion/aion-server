@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
-import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatus;
 import com.aionemu.gameserver.controllers.observer.AttackerCriticalStatusObserver;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -30,42 +29,22 @@ public class OneTimeBoostSkillCriticalEffect extends EffectTemplate {
 
 	@Override
 	public void startEffect(final Effect effect) {
-		super.startEffect(effect);
-
-		AttackerCriticalStatusObserver observer = new AttackerCriticalStatusObserver(AttackStatus.CRITICAL, count, value, percent) {
+		effect.addObserver(effect.getEffected(), new AttackerCriticalStatusObserver(AttackStatus.CRITICAL, count, value, percent) {
 
 			@Override
 			public AttackerCriticalStatus checkAttackerCriticalStatus(AttackStatus stat, boolean isSkill) {
-				if (stat == this.status && isSkill) {
-					if (this.getCount() <= 1)
+				if (stat == status && isSkill) {
+					if (getCount() <= 1)
 						effect.endEffect();
 					else
-						this.decreaseCount();
+						decreaseCount();
 
-					this.acStatus.setResult(true);
+					acStatus.setResult(true);
 				} else
-					this.acStatus.setResult(false);
+					acStatus.setResult(false);
 
-				return this.acStatus;
+				return acStatus;
 			}
-		};
-		effect.getEffected().getObserveController().addAttackCalcObserver(observer);
-		effect.setAttackStatusObserver(observer, position);
+		});
 	}
-
-	@Override
-	public void endEffect(Effect effect) {
-		super.endEffect(effect);
-
-		AttackCalcObserver observer = effect.getAttackStatusObserver(position);
-		effect.getEffected().getObserveController().removeAttackCalcObserver(observer);
-	}
-
-	/**
-	 * @return the percent
-	 */
-	public boolean isPercent() {
-		return percent;
-	}
-
 }

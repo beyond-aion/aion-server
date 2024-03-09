@@ -6,7 +6,6 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
-import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
 import com.aionemu.gameserver.controllers.observer.AttackStatusObserver;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -36,23 +35,18 @@ public class BlindEffect extends EffectTemplate {
 	public void startEffect(Effect effect) {
 		effect.setAbnormal(AbnormalState.BLIND);
 		effect.getEffected().getEffectController().setAbnormal(AbnormalState.BLIND);
-		AttackCalcObserver acObserver = new AttackStatusObserver(value, AttackStatus.DODGE) {
+		effect.addObserver(effect.getEffected(), new AttackStatusObserver(value, AttackStatus.DODGE) {
 
 			@Override
 			public boolean checkAttackerStatus(AttackStatus status) {
 				return Rnd.chance() < value;
 			}
 
-		};
-		effect.getEffected().getObserveController().addAttackCalcObserver(acObserver);
-		effect.setAttackStatusObserver(acObserver, position);
+		});
 	}
 
 	@Override
 	public void endEffect(Effect effect) {
-		AttackCalcObserver acObserver = effect.getAttackStatusObserver(position);
-		if (acObserver != null)
-			effect.getEffected().getObserveController().removeAttackCalcObserver(acObserver);
 		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.BLIND);
 	}
 

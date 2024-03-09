@@ -81,16 +81,14 @@ public class FearEffect extends EffectTemplate {
 		// resistchance of fear effect to damage, if value is lower than 100, fear can be interrupted bz damage
 		// example skillId: 540 Terrible howl
 		if (resistchance < 100) {
-			ActionObserver observer = new ActionObserver(ObserverType.ATTACKED) {
+			effect.addObserver(effected, new ActionObserver(ObserverType.ATTACKED) {
 
 				@Override
 				public void attacked(Creature creature, int skillId) {
 					if (Rnd.chance() >= resistchance)
 						effected.getEffectController().removeEffect(effect.getSkillId());
 				}
-			};
-			effected.getObserveController().addObserver(observer);
-			effect.setActionObserver(observer, position);
+			});
 		}
 
 		if (effect.getEffected() instanceof Player player && effect.getEffector().getMaster() instanceof Player) {
@@ -107,12 +105,6 @@ public class FearEffect extends EffectTemplate {
 
 		effect.getEffected().getMoveController().abortMove();
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_TARGET_IMMOBILIZE(effect.getEffected()));
-
-		if (resistchance < 100) {
-			ActionObserver observer = effect.getActionObserver(position);
-			if (observer != null)
-				effect.getEffected().getObserveController().removeObserver(observer);
-		}
 
 		if (effect.getEffected() instanceof Npc) {
 			effect.getEffected().getAi().setStateIfNot(AIState.IDLE);

@@ -70,10 +70,7 @@ public class Effect implements StatOwner {
 	private int mpShieldSkillId = 0;
 
 	private boolean addedToController;
-	private AttackCalcObserver[] attackStatusObserver;
-
-	private AttackCalcObserver[] attackShieldObserver;
-
+	private final List<Runnable> observerRemoveTasks = new ArrayList<>();
 	private boolean launchSubEffect = true;
 	private Effect subEffect;
 
@@ -97,11 +94,6 @@ public class Effect implements StatOwner {
 	private int signetBurstedCount = 0;
 
 	private int abnormals;
-
-	/**
-	 * Action observer that should be removed after effect end
-	 */
-	private ActionObserver[] actionObserver;
 
 	private float targetX, targetY, targetZ;
 	private float x, y, z;
@@ -295,45 +287,6 @@ public class Effect implements StatOwner {
 		return skillTemplate.getReqDispelLevel();
 	}
 
-	/**
-	 * @param i
-	 * @return attackStatusObserver for this effect template or null
-	 */
-	public AttackCalcObserver getAttackStatusObserver(int i) {
-		return attackStatusObserver != null ? attackStatusObserver[i - 1] : null;
-	}
-
-	/**
-	 * @param attackStatusObserver
-	 *          the attackCalcObserver to set
-	 */
-	public void setAttackStatusObserver(AttackCalcObserver attackStatusObserver, int i) {
-		if (this.attackStatusObserver == null)
-			this.attackStatusObserver = new AttackCalcObserver[4];
-		this.attackStatusObserver[i - 1] = attackStatusObserver;
-	}
-
-	/**
-	 * @param i
-	 * @return attackShieldObserver for this effect template or null
-	 */
-	public AttackCalcObserver getAttackShieldObserver(int i) {
-		return attackShieldObserver != null ? attackShieldObserver[i - 1] : null;
-	}
-
-	/**
-	 * @param attackShieldObserver
-	 *          the attackShieldObserver to set
-	 */
-	public void setAttackShieldObserver(AttackCalcObserver attackShieldObserver, int i) {
-		if (this.attackShieldObserver == null)
-			this.attackShieldObserver = new AttackCalcObserver[4];
-		this.attackShieldObserver[i - 1] = attackShieldObserver;
-	}
-
-	/**
-	 * @return the effectedHp
-	 */
 	public int getEffectedHp() {
 		return effectedHp;
 	}
@@ -718,8 +671,8 @@ public class Effect implements StatOwner {
 
 			for (EffectTemplate template : successEffects.values()) {
 				template.startEffect(this);
-				checkUseEquipmentConditions();
-				checkCancelOnDmg();
+				addEquipmentObserver();
+				addCancelOnDmgObserver();
 			}
 
 			broadcastHate();
@@ -772,6 +725,7 @@ public class Effect implements StatOwner {
 				return;
 		}
 		stopTasks();
+		removeObservers();
 
 		endEffects();
 
@@ -895,22 +849,19 @@ public class Effect implements StatOwner {
 		this.tauntHate = tauntHate;
 	}
 
-	/**
-	 * @param i
-	 * @return actionObserver for this effect template
-	 */
-	public ActionObserver getActionObserver(int i) {
-		return actionObserver == null ? null : actionObserver[i - 1];
+	public void addObserver(Creature target, ActionObserver observer) {
+		target.getObserveController().addObserver(observer);
+		observerRemoveTasks.add(() -> target.getObserveController().removeObserver(observer));
 	}
 
-	/**
-	 * @param observer
-	 *          the observer to set
-	 */
-	public void setActionObserver(ActionObserver observer, int i) {
-		if (actionObserver == null)
-			actionObserver = new ActionObserver[4];
-		actionObserver[i - 1] = observer;
+	public void addObserver(Creature target, AttackCalcObserver observer) {
+		target.getObserveController().addAttackCalcObserver(observer);
+		observerRemoveTasks.add(() -> target.getObserveController().removeAttackCalcObserver(observer));
+	}
+
+	private void removeObservers() {
+		observerRemoveTasks.forEach(Runnable::run);
+		observerRemoveTasks.clear();
 	}
 
 	public void addSuccessEffect(EffectTemplate effect) {
@@ -1129,46 +1080,36 @@ public class Effect implements StatOwner {
 		return useEquipConditions == null || useEquipConditions.validate(this);
 	}
 
-	/**
-	 * Check use equipment conditions by adding Unequip observer if needed
-	 */
-	private void checkUseEquipmentConditions() {
+	private void addEquipmentObserver() {
 		// If skill has use equipment conditions, observe for unequip event and remove effect if event occurs
 		if (getSkillTemplate().getUseEquipmentconditions() != null && !getSkillTemplate().getUseEquipmentconditions().getConditions().isEmpty()) {
-			Creature effected = getEffected();
-			ActionObserver observer = new ActionObserver(ObserverType.UNEQUIP) {
+			addObserver(getEffected(), new ActionObserver(ObserverType.UNEQUIP) {
 
 				@Override
 				public void unequip(Item item, Player owner) {
 					if (!useEquipmentConditionsCheck()) {
 						endEffect();
-						effected.getObserveController().removeObserver(this);
 					}
 				}
-			};
-			effected.getObserveController().addObserver(observer);
+			});
 		}
 	}
 
-	/**
-	 * Add Attacked/Dot_Attacked observers if this effect needs to be removed on damage received by effected
-	 */
-	private void checkCancelOnDmg() {
+	private void addCancelOnDmgObserver() {
 		if (isCancelOnDmg()) {
 			Creature effected = getEffected();
-			effected.getObserveController().attach(new ActionObserver(ObserverType.ATTACKED) {
+			addObserver(effected, new ActionObserver(ObserverType.ATTACKED) {
 
 				@Override
 				public void attacked(Creature creature, int skillId) {
-					effected.getEffectController().removeEffect(getSkillId());
+					endEffect();
 				}
 			});
-
-			effected.getObserveController().attach(new ActionObserver(ObserverType.DOT_ATTACKED) {
+			addObserver(effected, new ActionObserver(ObserverType.DOT_ATTACKED) {
 
 				@Override
 				public void dotattacked(Creature creature, Effect dotEffect) {
-					effected.getEffectController().removeEffect(getSkillId());
+					endEffect();
 				}
 			});
 		}
