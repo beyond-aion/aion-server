@@ -12,6 +12,9 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_COOLDOWN;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
+import com.aionemu.gameserver.world.World;
+
+import consolecommands.Clearusercoolt;
 
 /**
  * @author kecimis
@@ -35,8 +38,7 @@ public class RemoveCd extends AdminCommand {
 		if (target == null)
 			target = admin;
 
-		if (target instanceof Player) {
-			Player player = (Player) target;
+		if (target instanceof Player player) {
 			if (params.length == 0) {
 				if (player.getSkillCoolDowns() != null) {
 					long currentTime = System.currentTimeMillis();
@@ -54,46 +56,30 @@ public class RemoveCd extends AdminCommand {
 
 				player.getHouseObjectCooldowns().clear();
 
-				if (player.equals(admin))
-					sendInfo(admin, "Your cooldowns were removed");
-				else {
-					sendInfo(admin, "You have removed cooldowns of player: " + player.getName());
-					sendInfo(player, "Your cooldowns were removed by admin");
+				if (player.equals(admin)) {
+					sendInfo(admin, "Your item and skill cooldowns were removed.");
+				} else {
+					sendInfo(admin, "You have removed item and skill cooldowns of " + player.getName() + '.');
+					sendInfo(player, admin.getName(true) + " removed your item and skill cooldowns.");
 				}
 			} else if (params[0].equalsIgnoreCase("instance") && params.length >= 2) {
-				if (player.getPortalCooldownList().getPortalCoolDowns() == null) {
-					sendInfo(admin, "Nothing to reset");
-					return;
-				}
 				if (params[1].equalsIgnoreCase("all")) {
-					player.getPortalCooldownList().setPortalCoolDowns(null);
-
-					if (player.equals(admin))
-						sendInfo(admin, "Your instance cooldowns were removed");
-					else {
-						sendInfo(admin, "You have removed instance cooldowns of player: " + player.getName());
-						sendInfo(player, "Your instance cooldowns were removed by admin");
-					}
+					Clearusercoolt.clearAllInstanceCooldowns(admin, player);
 				} else {
-					int worldId;
-					try {
-						worldId = Integer.parseInt(params[1]);
-					} catch (NumberFormatException e) {
-						sendInfo(admin, "WorldId has to be integer or use \"all\"");
-						return;
-					}
-
+					int worldId = Integer.parseInt(params[1]);
 					if (player.getPortalCooldownList().isPortalUseDisabled(worldId)) {
-						player.getPortalCooldownList().addPortalCooldown(worldId, 0);
+						player.getPortalCooldownList().removePortalCooldown(worldId);
+						player.getPortalCooldownList().sendEntryInfo(worldId);
 
-						if (player.equals(admin))
-							sendInfo(admin, "Your instance cooldown worldId: " + worldId + " was removed");
-						else {
-							sendInfo(admin, "You have removed instance cooldown worldId: " + worldId + " of player: " + player.getName());
-							sendInfo(player, "Your instance cooldown worldId: " + worldId + " was removed by admin");
+						String worldName = World.getInstance().getWorldMap(worldId).getName().replace('_', ' ');
+						if (player.equals(admin)) {
+							sendInfo(admin, "Your instance cooldown for " + worldName + " was removed.");
+						} else {
+							sendInfo(admin, "You have removed the instance cooldown for " + worldName + " of " + player.getName() + '.');
+							sendInfo(player, admin.getName(true) + " removed your instance cooldown for " + worldName);
 						}
 					} else
-						sendInfo(admin, "You or your target can enter given instance");
+						sendInfo(admin, (player.equals(admin) ? "You have" : player.getName() + " has") + " no cooldown on given instance.");
 
 				}
 			} else {

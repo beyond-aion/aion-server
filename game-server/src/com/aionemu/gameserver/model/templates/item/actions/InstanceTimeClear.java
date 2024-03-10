@@ -13,7 +13,6 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PortalCooldown;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -84,10 +83,7 @@ public class InstanceTimeClear extends AbstractItemAction {
 				if (portalCD.getEnterCount() < 1)
 					player.getPortalCooldownList().removePortalCooldown(worldId);
 
-				if (player.isInTeam())
-					player.getCurrentTeam().sendPackets(new SM_INSTANCE_INFO((byte) 2, player, worldId));
-				else
-					PacketSendUtility.sendPacket(player, new SM_INSTANCE_INFO((byte) 2, player, worldId));
+				player.getPortalCooldownList().sendEntryInfo(worldId);
 				PacketSendUtility.broadcastPacketAndReceive(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemId(), 0, 1, 0));
 			}

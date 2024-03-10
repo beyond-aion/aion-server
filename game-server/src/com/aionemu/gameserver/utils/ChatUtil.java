@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.VisibleObjectTemplate;
+import com.aionemu.gameserver.network.aion.clientpackets.CM_GM_COMMAND_SEND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -289,10 +290,15 @@ public class ChatUtil {
 	 * @return The character name without custom tags.
 	 */
 	public static String getRealCharName(String name) {
+		return getRealCharName(name, false);
+	}
+
+	public static String getRealCharName(String name, boolean nameIsFromGMCommand) {
 		// don't perform expensive checks if name is already qualified
 		if (name.matches("^[A-Za-z]+$"))
 			return Util.convertName(name);
 
+		boolean replaceUnsupportedCommandChars = nameIsFromGMCommand && name.contains(CM_GM_COMMAND_SEND.UNSUPPORTED_COMMAND_CHAR_PLACEHOLDER);
 		char firstChar = name.charAt(0);
 		if (firstChar == ASMO_NAME_PREFIX || firstChar == ELYOS_NAME_PREFIX)
 			name = name.substring(1);
@@ -303,7 +309,11 @@ public class ChatUtil {
 			if (nameStartIndex == -1)
 				continue;
 			String namePrefix = nameFormat.substring(0, nameStartIndex > 0 ? nameStartIndex : 0);
-			String nameSuffix = nameFormat.substring(nameStartIndex + nameFlag.length(), nameFormat.length());
+			String nameSuffix = nameFormat.substring(nameStartIndex + nameFlag.length());
+			if (replaceUnsupportedCommandChars) {
+				namePrefix = CM_GM_COMMAND_SEND.replaceUnsupportedCommandChars(namePrefix);
+				nameSuffix = CM_GM_COMMAND_SEND.replaceUnsupportedCommandChars(nameSuffix);
+			}
 			if ((namePrefix + nameSuffix).length() > 0 && name.startsWith(namePrefix) && name.endsWith(nameSuffix)) {
 				int endIndex = name.indexOf(nameSuffix) - 1;
 				name = name.substring(namePrefix.length(), endIndex > 0 ? endIndex : name.length());

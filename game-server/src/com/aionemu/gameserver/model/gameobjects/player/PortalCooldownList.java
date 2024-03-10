@@ -75,6 +75,10 @@ public class PortalCooldownList {
 
 		DAOManager.getDAO(PortalCooldownsDAO.class).storePortalCooldowns(owner);
 
+		sendEntryInfo(worldId);
+	}
+
+	public void sendEntryInfo(int worldId) {
 		if (owner.isInTeam())
 			owner.getCurrentTeam().sendPackets(new SM_INSTANCE_INFO((byte) 2, owner, worldId));
 		else

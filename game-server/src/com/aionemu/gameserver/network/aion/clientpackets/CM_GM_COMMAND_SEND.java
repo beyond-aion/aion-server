@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
+import java.util.regex.Pattern;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -13,7 +14,9 @@ import com.aionemu.gameserver.utils.chathandlers.ChatProcessor;
  */
 public class CM_GM_COMMAND_SEND extends AionClientPacket {
 
-	public String command;
+	public static final String UNSUPPORTED_COMMAND_CHAR_PLACEHOLDER = "?"; // client sends this for each unsupported char in the command
+	private static final Pattern unsupportedCommandChars = Pattern.compile("[^\u0000-\u013E]");
+	private String command;
 
 	public CM_GM_COMMAND_SEND(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
@@ -22,7 +25,6 @@ public class CM_GM_COMMAND_SEND extends AionClientPacket {
 	@Override
 	protected void readImpl() {
 		command = readS();
-
 	}
 
 	@Override
@@ -31,5 +33,9 @@ public class CM_GM_COMMAND_SEND extends AionClientPacket {
 		if (!admin.hasAccess(AdminConfig.GM_PANEL))
 			return;
 		ChatProcessor.getInstance().handleConsoleCommand(admin, command);
+	}
+
+	public static String replaceUnsupportedCommandChars(String input) {
+		return unsupportedCommandChars.matcher(input).replaceAll(UNSUPPORTED_COMMAND_CHAR_PLACEHOLDER);
 	}
 }

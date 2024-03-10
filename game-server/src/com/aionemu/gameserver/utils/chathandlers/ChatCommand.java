@@ -108,7 +108,7 @@ public abstract class ChatCommand {
 					if (!containsSquareBrackets && split[0].contains("["))
 						containsSquareBrackets = true;
 					sb.append("\n\t").append(ChatUtil.color(getAliasWithPrefix(), Color.WHITE)).append(' ');
-					sb.append(split[0].replaceAll("([^<>\\[\\]| ]+)", ChatUtil.color("$1", Color.WHITE)).trim());
+					sb.append(split[0].replaceAll("([^<>\\[\\]| ]+)", ChatUtil.color("$1", Color.WHITE)).replace("[[color:f;", "[[color:f\u200B;").trim());
 					sb.append(" - ");
 					sb.append(split[1]);
 				} else {

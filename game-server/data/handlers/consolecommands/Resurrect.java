@@ -1,6 +1,5 @@
 package consolecommands;
 
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RESURRECT;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -12,32 +11,18 @@ import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 public class Resurrect extends ConsoleCommand {
 
 	public Resurrect() {
-		super("resurrect");
+		super("resurrect", "Resurrects a player.");
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-
-		if (params.length < 1) {
-			info(admin, null);
+		if (!((admin.isDead() ? admin : admin.getTarget()) instanceof Player player)) {
+			sendInfo(admin, "Please select a player.");
 			return;
 		}
-
-		final VisibleObject target = admin.getTarget();
-		if (target == null) {
-			PacketSendUtility.sendMessage(admin, "No target selected.");
-			return;
-		}
-
-		if (!(target instanceof Player)) {
-			PacketSendUtility.sendMessage(admin, "This command can only be used on a player!");
-			return;
-		}
-
-		final Player player = (Player) target;
 
 		if (!player.isDead()) {
-			PacketSendUtility.sendMessage(admin, "That player is already alive.");
+			sendInfo(admin, player.equals(admin) ? "You're already alive." : player.getName() + " is already alive.");
 			return;
 		}
 
