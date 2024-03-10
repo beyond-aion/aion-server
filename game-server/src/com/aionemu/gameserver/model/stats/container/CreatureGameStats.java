@@ -22,6 +22,7 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunctionProxy;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
@@ -85,7 +86,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	public final void addEffect(StatOwner statOwner, List<? extends IStatFunction> functions) {
 		addEffectOnly(statOwner, functions);
-		onStatsChange();
+		onStatsChange(statOwner instanceof Effect effect ? effect : null);
 	}
 
 	public final void endEffect(StatOwner statOwner) {
@@ -98,7 +99,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 			}
 		}
 		if (!owner.isDead())
-			onStatsChange();
+			onStatsChange(null);
 	}
 
 	public float getPositiveStat(StatEnum statEnum, float base) {
@@ -341,23 +342,25 @@ public abstract class CreatureGameStats<T extends Creature> {
 	 * Perform additional calculations after effects added/removed<br>
 	 * This method will be called outside of stats lock.
 	 */
-	protected void onStatsChange() {
-		checkHPStats();
-		checkMPStats();
+	protected void onStatsChange(Effect effect) {
+		checkMaxHPChanged(effect);
+		checkMaxMPChanged(effect);
 	}
 
-	private void checkHPStats() {
+	private void checkMaxHPChanged(Effect effect) {
 		synchronized (this) {
 			int oldMaxHp = cachedMaxHp != 0 ? cachedMaxHp : getMaxHp().getBase();
 			int currentMaxHp = cachedMaxHp = getMaxHp().getCurrent();
 			if (oldMaxHp != currentMaxHp) {
 				float percent = 1f * currentMaxHp / oldMaxHp;
-				owner.getLifeStats().setCurrentHp(Math.min(Math.round(owner.getLifeStats().getCurrentHp() * percent), currentMaxHp));
+				int newHp = Math.min(Math.round(owner.getLifeStats().getCurrentHp() * percent), currentMaxHp);
+				Creature effector = effect == null ? owner : effect.getEffector();
+				owner.getLifeStats().setCurrentHp(newHp, effector);
 			}
 		}
 	}
 
-	private void checkMPStats() {
+	private void checkMaxMPChanged(Effect effect) {
 		synchronized (this) {
 			int oldMaxMp = cachedMaxMp != 0 ? cachedMaxMp : getMaxMp().getBase();
 			int currentMaxMp = cachedMaxMp = getMaxMp().getCurrent();

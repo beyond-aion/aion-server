@@ -5,9 +5,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.locks.Lock;
 import java.util.concurrent.locks.ReentrantLock;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -22,7 +19,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public abstract class CreatureLifeStats<T extends Creature> {
 
-	private static final Logger log = LoggerFactory.getLogger(CreatureLifeStats.class);
 	protected int currentHp;
 	protected int currentMp;
 	protected boolean isDead = false;
@@ -52,22 +48,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		return currentMp;
 	}
 
-	/**
-	 * @return maxHp of creature according to stats
-	 */
 	public int getMaxHp() {
-		int maxHp = getOwner().getGameStats().getMaxHp().getCurrent();
-		if (maxHp == 0) {
-			maxHp = 1;
-
-			log.warn("CHECKPOINT: maxhp is 0 :" + this.getOwner().getSpawn().getNpcId());
-		}
-		return maxHp;
+		return getOwner().getGameStats().getMaxHp().getCurrent();
 	}
 
-	/**
-	 * @return maxMp of creature according to stats
-	 */
 	public int getMaxMp() {
 		return getOwner().getGameStats().getMaxMp().getCurrent();
 	}
@@ -428,27 +412,22 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 	/**
 	 * This method can be used to fully restore owners HP and remove dead state of lifestats
-	 * 
-	 * @param hpPercent
 	 */
 	public void setCurrentHpPercent(int hpPercent) {
-		hpLock.lock();
-		try {
-			currentHp = (int) (hpPercent / 100f * getMaxHp());
-			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
-			if (currentHp > 0)
-				setIsDead(false);
-		} finally {
-			hpLock.unlock();
-		}
-		onSetHp();
+		setCurrentHp((int) (hpPercent / 100f * getMaxHp()));
 	}
 
 	/**
 	 * Sets the current HP without notifying observers
 	 */
 	public final void setCurrentHp(int hp) {
+		setCurrentHp(hp, owner);
+	}
+
+	public final void setCurrentHp(int hp, Creature effector) {
 		hpLock.lock();
+		boolean wasDead = isDead;
+		int prevHp = currentHp;
 		try {
 			currentHp = Math.max(0, Math.min(hp, getMaxHp()));
 			setIsDead(currentHp == 0);
@@ -456,6 +435,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			hpLock.unlock();
 		}
 		onSetHp();
+		if (!wasDead && isDead)
+			getOwner().getController().onDie(effector, true);
+		if (prevHp != currentHp)
+			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
 	}
 
 	private void onSetHp() {

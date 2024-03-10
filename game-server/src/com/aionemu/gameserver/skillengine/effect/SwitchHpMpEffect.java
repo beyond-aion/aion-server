@@ -22,7 +22,7 @@ public class SwitchHpMpEffect extends EffectTemplate {
 		int currentMp = lifeStats.getCurrentMp();
 
 		// doesn't send sm_attack_status, checked on 4.5
-		lifeStats.setCurrentHp(currentMp);
+		lifeStats.setCurrentHp(currentMp, effect.getEffector());
 		lifeStats.setCurrentMp(currentHp);
 	}
 }

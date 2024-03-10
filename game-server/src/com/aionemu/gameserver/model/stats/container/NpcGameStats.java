@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.stats.CalculationType;
@@ -39,8 +40,8 @@ public class NpcGameStats extends CreatureGameStats<Npc> {
 	}
 
 	@Override
-	protected void onStatsChange() {
-		super.onStatsChange();
+	protected void onStatsChange(Effect effect) {
+		super.onStatsChange(effect);
 		checkSpeedStats();
 	}
 

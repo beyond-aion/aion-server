@@ -17,6 +17,7 @@ import com.aionemu.gameserver.model.templates.ride.RideInfo;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 
@@ -36,14 +37,14 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 	}
 
 	@Override
-	protected void onStatsChange() {
-		updateStatsAndSpeedVisually();
+	protected void onStatsChange(Effect effect) {
+		super.onStatsChange(effect);
+		updateStatsVisually();
+		checkSpeedStats();
 	}
 
 	public void updateStatsAndSpeedVisually() {
-		super.onStatsChange();
-		updateStatsVisually();
-		checkSpeedStats();
+		onStatsChange(null);
 	}
 
 	public void updateStatsVisually() {
