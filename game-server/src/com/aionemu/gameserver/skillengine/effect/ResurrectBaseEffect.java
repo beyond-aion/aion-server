@@ -34,6 +34,7 @@ public class ResurrectBaseEffect extends ResurrectEffect {
 		Creature effected = effect.getEffected();
 		if (effected.isDead() && effected instanceof Player player && !PvpMapService.getInstance().isOnPvPMap(player)) {
 			player.getController().addTask(TaskId.TELEPORT, ThreadPoolManager.getInstance().schedule(() -> {
+				player.getController().getAndRemoveTask(TaskId.TELEPORT); // remove manually as it won't get removed automatically
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT));
 				if (player.isInInstance())
 					PlayerReviveService.instanceRevive(player, skillId);
