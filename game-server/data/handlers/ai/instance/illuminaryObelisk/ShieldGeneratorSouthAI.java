@@ -44,4 +44,9 @@ public class ShieldGeneratorSouthAI extends ShieldGeneratorAI {
 		spawn(702016, 343.1202f, 254.10585f, 291.62302f, (byte) 0, 34); // south
 		shout(SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_N_WAVE_01_BEGIN());
 	}
+
+	@Override
+	protected void handleVortexDespawn() {
+		getPosition().getWorldMapInstance().getNpcs(702016).forEach(npc -> npc.getController().delete());
+	}
 }

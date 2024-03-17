@@ -48,6 +48,8 @@ public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 
 	protected abstract void handleVortexSpawn();
 
+	protected abstract void handleVortexDespawn();
+
 	public ShieldGeneratorAI(Npc owner) {
 		super(owner);
 	}
@@ -137,6 +139,7 @@ public abstract class ShieldGeneratorAI extends GeneralNpcAI {
 	protected void handleDied() {
 		deleteNpcs();
 		shout(getDestructionMsg());
+		handleVortexDespawn();
 		super.handleDied();
 	}
 }

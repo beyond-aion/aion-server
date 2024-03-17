@@ -44,4 +44,9 @@ public class ShieldGeneratorWestAI extends ShieldGeneratorAI {
 		spawn(702015, 255.7034f, 171.83853f, 325.81653f, (byte) 0, 18); // west
 		shout(SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_N_WAVE_01_BEGIN());
 	}
+
+	@Override
+	protected void handleVortexDespawn() {
+		getPosition().getWorldMapInstance().getNpcs(702015).forEach(npc -> npc.getController().delete());
+	}
 }

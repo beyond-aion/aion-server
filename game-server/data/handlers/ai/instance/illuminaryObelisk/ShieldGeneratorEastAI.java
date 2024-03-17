@@ -44,4 +44,9 @@ public class ShieldGeneratorEastAI extends ShieldGeneratorAI {
 		spawn(702014, 255.7926f, 338.22058f, 325.56473f, (byte) 0, 60); // east
 		shout(SM_SYSTEM_MESSAGE.STR_MSG_IDF5_U3_N_WAVE_01_BEGIN());
 	}
+
+	@Override
+	protected void handleVortexDespawn() {
+		getPosition().getWorldMapInstance().getNpcs(702014).forEach(npc -> npc.getController().delete());
+	}
 }
