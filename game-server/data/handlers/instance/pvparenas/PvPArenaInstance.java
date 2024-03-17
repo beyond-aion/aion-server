@@ -55,6 +55,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 	protected PvPArenaScore instanceScore;
 	private Future<?> instanceTask;
+	private boolean isInterrupted;
 
 	public PvPArenaInstance(WorldMapInstance instance) {
 		super(instance);
@@ -85,6 +86,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 			return;
 
 		if (!canStart()) {
+			isInterrupted = true;
 			endInstance();
 			return;
 		}
@@ -532,7 +534,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 			float scoreRate = score / (float) totalPoints;
 
 			int rank = instanceScore.getRank(reward);
-			if (instanceScore.getRound() == 1)
+			if (isInterrupted)
 				rank = reward instanceof HarmonyGroupReward ? 1 : instance.getMaxPlayers() - 1;
 			float rankRewardRate = getRewardRate(rank, difficultyId);
 
