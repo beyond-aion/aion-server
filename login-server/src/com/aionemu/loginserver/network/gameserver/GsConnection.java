@@ -18,6 +18,7 @@ import com.aionemu.commons.network.AConnection;
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.loginserver.GameServerInfo;
 import com.aionemu.loginserver.PingPongTask;
+import com.aionemu.loginserver.controller.AccountController;
 import com.aionemu.loginserver.network.factories.GsPacketHandlerFactory;
 
 /**
@@ -128,6 +129,7 @@ public class GsConnection extends AConnection<GsServerPacket> {
 			gameServerInfo.clearAccountsOnGameServer();
 			gameServerInfo = null;
 		}
+		AccountController.updateServerListForAllLoggedInPlayers();
 	}
 
 	@Override
