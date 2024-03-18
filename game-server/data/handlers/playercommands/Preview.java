@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.templates.item.enums.EquipType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.itemset.ItemPart;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RIDE_ROBOT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_UPDATE_PLAYER_APPEARANCE;
@@ -60,7 +61,7 @@ public class Preview extends PlayerCommand {
 		}
 
 		int i = 0;
-		boolean onlyColor = params.length == 1 && !params[0].contains("[") && !params[0].matches("[1-9][0-9]*");
+		boolean onlyColor = params.length == 1 && !params[0].contains("[") && !params[0].matches("([1-9][0-9]*,?)+");
 		List<ItemTemplate> items = new ArrayList<>();
 		if (onlyColor)
 			player.getEquipment().getEquippedForAppearance().forEach(item -> items.add(item.getItemTemplate()));
@@ -126,6 +127,14 @@ public class Preview extends PlayerCommand {
 
 		addOwnEquipment(player, previewItems, previewItemsSlotMask);
 		previewItems.sort(Comparator.comparingLong(Item::getEquipmentSlot)); // order by equipment slot ids (ascending) to avoid display bugs
+		int display = player.getPlayerSettings().getDisplay() | SM_CUSTOM_SETTINGS.HIDE_LEGION_CLOAK;
+		if (previewItems.stream().anyMatch(item -> item.getEquipmentSlot() == ItemSlot.HELMET.getSlotIdMask())) {
+			display &= ~SM_CUSTOM_SETTINGS.HIDE_HELMET;
+		}
+		if (previewItems.stream().anyMatch(item -> item.getEquipmentSlot() == ItemSlot.PLUME.getSlotIdMask())) {
+			display &= ~SM_CUSTOM_SETTINGS.HIDE_PLUME;
+		}
+		PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(player.getObjectId(), 1, display, player.getPlayerSettings().getDeny()));
 		PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), previewItems));
 		int switchRobotAnimationSeconds = 0;
 		if (previewRobotId != 0) {
@@ -222,6 +231,7 @@ public class Preview extends PlayerCommand {
 				resetTask.cancel(true);
 			}
 			resetTask = ThreadPoolManager.getInstance().schedule(() -> {
+				PacketSendUtility.sendPacket(player, new SM_CUSTOM_SETTINGS(player));
 				PacketSendUtility.sendPacket(player, new SM_UPDATE_PLAYER_APPEARANCE(player.getObjectId(), player.getEquipment().getEquippedForAppearance()));
 				if (previewRobot && player.isInRobotMode())
 					updateRobotAppearance(player, player.getRobotId());

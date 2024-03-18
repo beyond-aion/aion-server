@@ -22,10 +22,7 @@ public class CM_CUSTOM_SETTINGS extends AionClientPacket {
 
 	@Override
 	protected void readImpl() {
-		/**
-		 * 1 : show legion mantle 2 : priority equipment 4 : show helmet
-		 */
-		display = readUH();
+		display = readUH(); // see SM_CUSTOM_SETTINGS.HIDE_* variables
 		/**
 		 * 1 : view detail player 2 : trade 4 : party/force 8 : legion 16 : friend 32 : dual(pvp)
 		 */

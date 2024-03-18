@@ -9,9 +9,14 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_CUSTOM_SETTINGS extends AionServerPacket {
 
-	private Integer obj;
+	public static final int HIDE_LEGION_CLOAK = 1;
+	public static final int HIDE_LEGION_CLOAK_BY_WEAPON_PRIORITY = 2;
+	public static final int HIDE_HELMET = 4;
+	public static final int HIDE_PLUME = 8;
+
+	private int objectId;
 	private int unk = 0;
-	private int display;
+	private int display; // bitmask of HIDE_* values
 	private int deny;
 
 	public SM_CUSTOM_SETTINGS(Player player) {
@@ -19,7 +24,7 @@ public class SM_CUSTOM_SETTINGS extends AionServerPacket {
 	}
 
 	public SM_CUSTOM_SETTINGS(int objectId, int unk, int display, int deny) {
-		obj = objectId;
+		this.objectId = objectId;
 		this.display = display;
 		this.deny = deny;
 		this.unk = unk;
@@ -27,7 +32,7 @@ public class SM_CUSTOM_SETTINGS extends AionServerPacket {
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeD(obj);
+		writeD(objectId);
 		writeC(unk); // unk
 		writeH(display);
 		writeH(deny);
