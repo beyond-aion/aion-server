@@ -33,8 +33,8 @@ public class RandomMoveLocEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		Skill skill = effect.getSkill();
 		World.getInstance().updatePosition(effect.getEffector(), skill.getX(), skill.getY(), skill.getZ(), skill.getH());
-		if (effect.getEffector().getMoveController() instanceof PlayerMoveController pmc) 
-			pmc.setLastMoveByRandomLocEffect();
+		if (effect.getEffector().getMoveController() instanceof PlayerMoveController pmc)
+			pmc.setHasMovedByRandomMoveLocEffect(skill);
 	}
 
 	@Override

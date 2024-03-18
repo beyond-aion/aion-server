@@ -997,6 +997,10 @@ public class Skill {
 		this.hitTime = time;
 	}
 
+	public int getAnimationTime() {
+		return animationTime;
+	}
+
 	public void setAnimationTime(int animationTime) {
 		this.animationTime = animationTime;
 	}

@@ -7,6 +7,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
+import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.WorldPosition;
@@ -21,7 +22,7 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	private byte lastMovementMask;
 	private long lastPositionFromClientMillis;
 	private WorldPosition lastPositionFromClient;
-	private boolean lastMoveByRandomLocEffect;
+	private long lastRandomMoveLocEffectTimeMillis;
 
 	public PlayerMoveController(Player owner) {
 		super(owner);
@@ -111,13 +112,11 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 		owner.getObserveController().notifyMoveObservers();
 	}
 
-	public void setLastMoveByRandomLocEffect() {
-		this.lastMoveByRandomLocEffect = true;
+	public void setHasMovedByRandomMoveLocEffect(Skill skill) {
+		this.lastRandomMoveLocEffectTimeMillis = System.currentTimeMillis() + skill.getAnimationTime(); // Power: Emergency Teleport I ports after animation finished
 	}
 
-	public boolean resetLastMoveByRandomLocEffect() {
-		boolean wasLastMoveBySkill = lastMoveByRandomLocEffect;
-		lastMoveByRandomLocEffect = false;
-		return wasLastMoveBySkill;
+	public boolean hasMovedByRandomMoveLocEffect() {
+		return lastRandomMoveLocEffectTimeMillis != 0 && System.currentTimeMillis() - lastRandomMoveLocEffectTimeMillis < 300;
 	}
 }

@@ -5,10 +5,12 @@ import java.util.Set;
 import com.aionemu.gameserver.controllers.movement.GlideFlag;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
 import com.aionemu.gameserver.services.antihack.AntiHackService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -73,18 +75,10 @@ public class CM_MOVE extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
-		boolean lastMoveByRandomLocEffect = player.getMoveController().resetLastMoveByRandomLocEffect();
-		if (player.isDead())
+		if (player.isDead() || player.getEffectController().isUnderFear() || player.getEffectController().isConfused()) // just in case of bad timing
 			return;
-		if (player.getEffectController().isUnderFear() || player.getEffectController().isConfused())
+		if (handleBogusPacket(player))
 			return;
-		if (player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE)) // client sends crap when watching cutscenes in transform state
-			return;
-		if (lastMoveByRandomLocEffect && player.getTarget() != null && !PositionUtil.isInRange(player, x, y, z, 1)) {
-			// work around a client bug: you get moved to your target when using Blind Leap right on landing after jumping down a hill 
-			sendPacket(new SM_MOVE(player));
-			return;
-		}
 
 		PlayerMoveController m = player.getMoveController();
 		boolean jumping = false;
@@ -159,6 +153,34 @@ public class CM_MOVE extends AionClientPacket {
 		} else {
 			m.stopFalling(z);
 		}
+	}
+
+	private boolean handleBogusPacket(Player player) {
+		if (player.isInCustomState(CustomPlayerState.WATCHING_CUTSCENE)) // client sends crap during cutscenes in transformed state
+			return true;
+		VisibleObject target = player.getTarget();
+		if (target != null && player.getMoveController().hasMovedByRandomMoveLocEffect() && PositionUtil.isInRange(target, x, y, z, 2)
+			&& !PositionUtil.isInRange(player, x, y, z, 3)) {
+			/*
+			 * The game client often sends incorrect coordinates and tries to move you to your target's position when using any RandomMoveLocEffect
+			 * (Emergency Teleport I, Power: Emergency Teleport I, Blind Leap, Feint, etc.) while:
+			 * 1) running or jumping around the corner of an obstacle
+			 * 2) jumping on an obstacle
+			 * 3) jumping over an obstacle (harder to reproduce with skills that have no animation time)
+			 * 4) running up/down the upper end of stairs: only works for skills with animation time, animation must either start or end at the top flat level
+			 * 5) Additionally, teleporting across any type of crest blocking line of sight between the start and end position causes a similar condition.
+			 * It seems like this happens if the game thinks you have passed through an obstacle while using teleportation skills. Server side positions
+			 * are not considered for this, it is all evaluated by the client based on local coordinates.
+			 * Most often incorrect coordinates are contained in the first move packet after SM_CASTSPELL_RESULT, but sometimes it's the second one or,
+			 * in case of teleportation skills with animation time, sometimes even both. That's when we also see type == 0. Other times, type often has
+			 * MovementType.FALL but not always (especially if a directional teleport was involved).
+			 * Sending a move packet with the current server-side position works around this client bug and the client will not move you to your target's
+			 * position.
+			 */
+			sendPacket(type == 0 ? new SM_FORCED_MOVE(player, player) : new SM_MOVE(player));
+			return true;
+		}
+		return false;
 	}
 
 	private void notifyControllers(Player player, byte oldMovementMask) {
