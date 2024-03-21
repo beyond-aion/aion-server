@@ -181,36 +181,6 @@
 		<bounty item_id="186000051" count="5" /><!-- Major Ancient Crown -->
 	</kill_bounty>
 	<kill_bounty type="SEASONAL_KILLS" kill_count="500">
-		<bounty item_id="188053610" count="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
-	</kill_bounty>
-	<kill_bounty type="SEASONAL_KILLS" kill_count="510">
-		<bounty item_id="186000242" count="3" /><!-- Ceramium Medal -->
-	</kill_bounty>
-	<kill_bounty type="SEASONAL_KILLS" kill_count="520">
 		<bounty item_id="166030005" count="10" /><!-- Tempering Solution -->
-	</kill_bounty>
-	<kill_bounty type="SEASONAL_KILLS" kill_count="530">
-		<bounty item_id="186000051" count="5" /><!-- Major Ancient Crown -->
-	</kill_bounty>
-	<kill_bounty type="SEASONAL_KILLS" kill_count="540">
-		<bounty item_id="188053610" count="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
-	</kill_bounty>
-	<kill_bounty type="SEASONAL_KILLS" kill_count="550">
-		<bounty item_id="186000242" count="3" /><!-- Ceramium Medal -->
-	</kill_bounty>
-	<kill_bounty type="SEASONAL_KILLS" kill_count="560">
-		<bounty item_id="166500002" count="10" /><!-- Amplification Stone -->
-	</kill_bounty>
-	<kill_bounty type="SEASONAL_KILLS" kill_count="570">
-		<bounty item_id="186000051" count="5" /><!-- Major Ancient Crown -->
-	</kill_bounty>
-	<kill_bounty type="SEASONAL_KILLS" kill_count="580">
-		<bounty item_id="188053610" count="3" /><!-- [Event] Level 70 Composite Manastone Bundle -->
-	</kill_bounty>
-	<kill_bounty type="SEASONAL_KILLS" kill_count="590">
-		<bounty item_id="186000242" count="3" /><!-- Ceramium Medal -->
-	</kill_bounty>
-	<kill_bounty type="SEASONAL_KILLS" kill_count="600">
-		<bounty item_id="188053109" count="1" /><!-- Ahserion's Equipment Box -->
 	</kill_bounty>
 </kill_bounties>
