@@ -17399,31 +17399,17 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188052166"><!-- Token Pouch -->
-		<items>
-			<item id="186000143" max_count="3" /><!-- Kahrun's Symbol -->
+		<items chance="42.5">
+			<item id="182006999" min_count="3" max_count="10" /><!-- Shugo Coin -->
 		</items>
-		<items>
-			<item id="186000146" max_count="3" /><!-- Guestpetal -->
+		<items chance="42.5">
+			<item id="186000409" min_count="10" max_count="20" /><!-- Daeva's Respite Coin -->
 		</items>
-		<items>
-			<item id="186000114" max_count="3" race="ELYOS" /><!-- Orichalcum Token -->
-			<item id="186000115" max_count="3" race="ASMODIANS" /><!-- Circle Token -->
+		<items chance="14.0">
+			<item id="185000128" /><!-- Immortal Treasure Chest Key -->
 		</items>
-		<items>
-			<item id="186000102" max_count="3" race="ELYOS" /><!-- Fortuneers Token -->
-			<item id="186000105" max_count="3" race="ASMODIANS" /><!-- Daemon Token -->
-		</items>
-		<items>
-			<item id="186000100" max_count="3" race="ELYOS" /><!-- Progress Token -->
-			<item id="186000103" max_count="3" race="ASMODIANS" /><!-- Ward Token -->
-		</items>
-		<items>
-			<item id="186000101" max_count="3" race="ELYOS" /><!-- Radiant Token -->
-			<item id="186000104" max_count="3" race="ASMODIANS" /><!-- Crusader Token -->
-		</items>
-		<items>
-			<item id="186000132" max_count="3" race="ELYOS" /><!-- Wright's Token -->
-			<item id="186000133" max_count="3" race="ASMODIANS" /><!-- Shaper's Token -->
+		<items chance="1.0">
+			<item id="188600199" /><!-- Shugo Imperial Tomb Bonus Entry Scroll -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052167"><!-- Fairy Tail -->
@@ -25145,7 +25131,27 @@
 	</decomposable>
 	<decomposable item_id="188052725" /><!-- [Event] Pirate King's Treasure Bundle -->
 	<decomposable item_id="188052726" /><!-- [Event] Ailu Form Candy Box -->
-	<decomposable item_id="188052727" /><!-- [Event] Padmarashka's Weapon Chest -->
+	<decomposable item_id="188052727"><!-- [Event] Padmarashka's Weapon Chest -->
+		<items>
+			<item id="100001281" /><!-- Padmarashka's Raging Sword -->
+			<item id="100001317" /><!-- Padmarashka's Raging Scale Sword -->
+			<item id="100001318" /><!-- Padmarashka's Raging Reversed Sword -->
+			<item id="100100976" /><!-- Padmarashka's Raging Warhammer -->
+			<item id="100201134" /><!-- Padmarashka's Raging Dagger -->
+			<item id="100201160" /><!-- Padmarashka's Raging Dirk -->
+			<item id="100500992" /><!-- Padmarashka's Raging Jewel -->
+			<item id="100601046" /><!-- Padmarashka's Raging Tome -->
+			<item id="100900979" /><!-- Padmarashka's Raging Greatsword -->
+			<item id="101300937" /><!-- Padmarashka's Raging Spear -->
+			<item id="101501004" /><!-- Padmarashka's Raging Staff -->
+			<item id="101701018" /><!-- Padmarashka's Raging Longbow -->
+			<item id="101800860" /><!-- Padmarashka's Pistol -->
+			<item id="101800861" /><!-- Padmarashka's Pistol -->
+			<item id="101900790" /><!-- Padmarashka's Aethercannon -->
+			<item id="102000824" /><!-- Padmarashka's Harp -->
+			<item id="102100751" /><!-- Padmarashka's Cipher-Blade -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188052728" selectable="true"><!-- [Event] Dramata Wing Chest -->
 		<items>
 			<item id="187050020" /><!-- [Event] Dramata's Bone Wings -->

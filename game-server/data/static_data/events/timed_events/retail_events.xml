@@ -2968,22 +2968,11 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Shugo Imperial Tomb" start="2015-04-01T00:00:00" end="2015-05-22T23:59:59">
+	<event name="Shugo Imperial Tomb" start="2024-03-22T00:00:00" end="2024-04-07T23:59:59">
 		<quests>
-			<maintainable>80274 80275 80279 80282</maintainable>
+			<maintainable>80275 80279 80282</maintainable>
 		</quests>
 		<spawns>
-			<!-- Pandaemonium -->
-			<spawn_map map_id="120010000">
-				<!-- Indiarunark -->
-				<spawn npc_id="831117" respawn_time="295">
-					<spot x="1602.6354" y="1406.8517" z="193.12872" />
-				</spawn>
-				<!-- Marayrinerk -->
-				<spawn npc_id="831119" respawn_time="295">
-					<spot x="1604.8822" y="1410.2435" z="193.12854" />
-				</spawn>
-			</spawn_map>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
 				<!-- Indiarunark -->
@@ -2993,6 +2982,17 @@
 				<!-- Marayrinerk -->
 				<spawn npc_id="831119" respawn_time="295">
 					<spot x="1458.9354" y="1506.0077" z="573.0719" h="60" />
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Indiarunark -->
+				<spawn npc_id="831117" respawn_time="295">
+					<spot x="1602.6354" y="1406.8517" z="193.12872" />
+				</spawn>
+				<!-- Marayrinerk -->
+				<spawn npc_id="831119" respawn_time="295">
+					<spot x="1604.8822" y="1410.2435" z="193.12854" />
 				</spawn>
 			</spawn_map>
 			<!-- Inggison -->
