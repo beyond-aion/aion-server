@@ -47,11 +47,10 @@ public class ShugoTombImperialShrineAI extends GeneralNpcAI {
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogActionId);
 		env.setExtendedRewardIndex(extendedRewardIndex);
-		if (QuestEngine.getInstance().onDialog(env) && dialogActionId != QUEST_ACCEPT_1) {
-			return true;
+		switch (dialogActionId) {
+				case SETPRO1, SETPRO2, SETPRO3 -> enterTreasureRoomIfPossible(player, dialogActionId);
+				default -> QuestEngine.getInstance().onDialog(env);
 		}
-
-		enterTreasureRoomIfPossible(player, dialogActionId);
 		return true;
 	}
 
@@ -61,7 +60,7 @@ public class ShugoTombImperialShrineAI extends GeneralNpcAI {
 		switch (dialogActionId) {
 			case SETPRO1: // Emperor treasure room
 				if (!player.getInventory().decreaseByItemId(GOLD_KEY, 1)) {
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_IDEVENT01_SILVER_MAP());
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_IDEVENT01_GOLD_MAP());
 					return;
 				}
 				destination = switch (getEntryCountByKeyId(GOLD_KEY)) {

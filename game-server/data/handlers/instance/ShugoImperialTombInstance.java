@@ -58,6 +58,15 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onEnterInstance(final Player player) {
+		applyTransformation(player);
+	}
+
+	@Override
+	public void onPlayerLogin(Player player) {
+		applyTransformation(player);
+	}
+
+	private void applyTransformation(Player player) {
 		int skillId = switch (stage.get()) {
 			case 3 -> player.getRace() == Race.ASMODIANS ? 21105 : 21096;
 			case 2 -> player.getRace() == Race.ASMODIANS ? 21104 : 21095;
