@@ -3826,7 +3826,7 @@
 			<drop item_id="188053609" min_amount="3" chance="20" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="188052438" chance="5" /><!-- Danuar Reliquary Expedition's Weapon Box -->
+			<drop item_id="188053120" chance="5" /><!-- Danuar Reliquary Loot [Weapon] -->
 			<drop item_id="166200009" min_amount="2" chance="5" /><!-- Mythic Weapon Tuning Scroll -->
 			<drop item_id="166200010" chance="5" /><!-- Mythic Armor Tuning Scroll -->
 			<drop item_id="188052638" min_amount="3" chance="5" /><!-- [Event] Fabled Godstone Bundle -->
@@ -3858,7 +3858,7 @@
 			<drop item_id="188053609" min_amount="3" chance="20" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="188052438" chance="5" /><!-- Danuar Reliquary Expedition's Weapon Box -->
+			<drop item_id="188053120" chance="5" /><!-- Danuar Reliquary Loot [Weapon] -->
 			<drop item_id="166200009" min_amount="2" chance="5" /><!-- Mythic Weapon Tuning Scroll -->
 			<drop item_id="166200010" chance="5" /><!-- Mythic Armor Tuning Scroll -->
 			<drop item_id="188052638" min_amount="3" chance="5" /><!-- [Event] Fabled Godstone Bundle -->
@@ -3905,7 +3905,7 @@
 			<drop item_id="188053609" min_amount="3" chance="20" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</drop_group>
 		<drop_group>
-			<drop item_id="188052438" chance="5" /><!-- Danuar Reliquary Expedition's Weapon Box -->
+			<drop item_id="188053120" chance="5" /><!-- Danuar Reliquary Loot [Weapon] -->
 			<drop item_id="166200009" min_amount="2" chance="5" /><!-- Mythic Weapon Tuning Scroll -->
 			<drop item_id="166200010" chance="5" /><!-- Mythic Armor Tuning Scroll -->
 			<drop item_id="188052638" min_amount="3" chance="5" /><!-- [Event] Fabled Godstone Bundle -->
