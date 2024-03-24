@@ -68,7 +68,7 @@ public class ChatService {
 			log.warn("Client tried to connect but was not yet registered from game server side");
 		else if (!Arrays.equals(chatClient.getToken(), token))
 			log.warn("Client tried to connect but given token doesn't match");
-		else if (!chatClient.getAccountName().equals(accName))
+		else if (!chatClient.getAccountName().equalsIgnoreCase(accName)) // client sends accName lowercase
 			log.warn("Client tried to connect with account name: {} (expected: {})", accName, chatClient.getAccountName());
 		else if (!chatClient.getName().equals(name))
 			log.warn("Client tried to connect with character name: {} (expected: {})", name, chatClient.getName());
