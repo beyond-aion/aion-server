@@ -35,8 +35,9 @@ public class PlayerGroupService {
 	private static final Map<Integer, PlayerGroup> groups = new ConcurrentHashMap<>();
 	private static final AtomicBoolean offlineCheckStarted = new AtomicBoolean();
 
-	public static void inviteToGroup(final Player inviter, final Player invited) {
+	public static void inviteToGroup(Player inviter, Player invited) {
 		if (PlayerRestrictions.canInviteToGroup(inviter, invited)) {
+			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_INVITED_HIM(invited.getName()));
 			PlayerGroupInvite invite = new PlayerGroupInvite(inviter);
 			if (invited.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, invite)) {
 				PacketSendUtility.sendPacket(invited, new SM_QUESTION_WINDOW(SM_QUESTION_WINDOW.STR_PARTY_DO_YOU_ACCEPT_INVITATION, 0, 0, inviter.getName()));

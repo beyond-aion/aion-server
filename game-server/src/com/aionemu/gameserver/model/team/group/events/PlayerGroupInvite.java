@@ -21,7 +21,6 @@ public class PlayerGroupInvite extends RequestResponseHandler<Player> {
 	@Override
 	public void acceptRequest(Player inviter, Player invited) {
 		if (PlayerRestrictions.canInviteToGroup(inviter, invited)) {
-			PacketSendUtility.sendPacket(inviter, SM_SYSTEM_MESSAGE.STR_PARTY_INVITED_HIM(invited.getName()));
 			PlayerGroup group = inviter.getPlayerGroup();
 			if (group != null) {
 				PlayerGroupService.addPlayer(group, invited);
