@@ -9,17 +9,11 @@ import com.aionemu.gameserver.dao.OldNamesDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
-import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
-import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
-import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.CosmeticItemAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_TITLE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RENAME;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
@@ -93,16 +87,14 @@ public class CM_APPEARANCE extends AionClientPacket {
 
 			player.getCommonData().setName(newName);
 			DAOManager.getDAO(PlayerDAO.class).storePlayer(player);
-			World.getInstance().updateCachedPlayerName(oldName, player);
-			LegionService.getInstance().updateCachedPlayerName(oldName, player);
-			PacketSendUtility.broadcastPacket(player, new SM_RENAME(player.getObjectId(), oldName, newName), true);
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_SUCCESS(newName));
-			LegionService.getInstance().updateLegionMemberList(player, true);
-			PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.UPDATE);
-			PlayerGroupService.updateGroup(player, GroupEvent.UPDATE);
-			if (!player.getHouses().isEmpty())
-				player.getHouses().forEach(house -> house.getController().updateHouseSpawns());
+			onPlayerNameChanged(player, oldName);
 		}
+	}
+
+	public static void onPlayerNameChanged(Player player, String oldName) {
+		World.getInstance().updateCachedPlayerName(oldName, player);
+		LegionService.getInstance().updateCachedPlayerName(oldName, player);
+		PacketSendUtility.broadcastToWorld(new SM_RENAME(player, oldName)); // broadcast to world to update all friendlists, housing npcs, etc.
 	}
 
 	private void tryChangeLegionName(Player player, String newName, int itemObjId) {
@@ -120,15 +112,10 @@ public class CM_APPEARANCE extends AionClientPacket {
 		else {
 			Legion legion = player.getLegion();
 
+			String oldName = legion.getName();
 			legion.setName(newName);
 			DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
-
-			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
-			for (Player member : legion.getOnlineLegionMembers()) {
-				PacketSendUtility.broadcastPacket(member, new SM_LEGION_UPDATE_TITLE(member.getObjectId(), legion.getLegionId(), legion.getName(),
-					member.getLegionMember().getRank()), true);
-			}
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_SUCCESS(newName));
+			PacketSendUtility.broadcastToWorld(new SM_RENAME(legion, oldName)); // broadcast to world to update all keeps, member's tags, etc.
 		}
 	}
 

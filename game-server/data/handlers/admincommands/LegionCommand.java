@@ -13,9 +13,8 @@ import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_MEMBER;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_UPDATE_TITLE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_RENAME;
 import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.NameRestrictionService;
 import com.aionemu.gameserver.services.player.PlayerService;
@@ -116,13 +115,8 @@ public class LegionCommand extends AdminCommand {
 			String old = legion.getName();
 			legion.setName(params[2]);
 			DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
-			PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
-			for (Player legionMember : legion.getOnlineLegionMembers()) {
-				PacketSendUtility.broadcastPacket(legionMember,
-					new SM_LEGION_UPDATE_TITLE(legionMember.getObjectId(), legion.getLegionId(), legion.getName(), legionMember.getLegionMember().getRank()),
-					true);
-			}
-			PacketSendUtility.sendMessage(player, "legion " + old + " has changed name from " + old + " to " + params[2] + ".");
+			PacketSendUtility.broadcastToWorld(new SM_RENAME(legion, old));
+			PacketSendUtility.sendMessage(player, "Legion " + old + " has changed name to " + legion.getName() + ".");
 		} else if (params[0].equalsIgnoreCase("info")) {
 			if (!verifyLength(player, 2, params)) // legion info NAME
 				return;
