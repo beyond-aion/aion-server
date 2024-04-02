@@ -8,9 +8,7 @@ import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.services.player.PlayerEnterWorldService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
@@ -44,15 +42,13 @@ public class CM_CHARACTER_EDIT extends AbstractCharacterEditPacket {
 
 		boolean isGenderSwitch = player.getGender() != gender;
 		if (checkOrRemoveTicket(player, isGenderSwitch, true)) {
+			boolean spawnedBeforeAttributesChanged = player.isSpawned(); // just in case CM_LEVEL_READY was sent early
 			if (isGenderSwitch)
-				player.getCommonData().setGender(gender);
+				player.getCommonData().setGender(gender); // no need to save gender here, will be saved periodically and on logout
 			player.setPlayerAppearance(playerAppearance);
 			DAOManager.getDAO(PlayerAppearanceDAO.class).store(player); // save new appearance
-
-			// broadcast new appearance (no need to save gender here, will be saved periodically and on logout)
-			player.clearKnownlist();
-			PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
-			player.updateKnownlist();
+			if (spawnedBeforeAttributesChanged)
+				player.getController().onChangedPlayerAttributes();
 		} else { // can only happen if you illegally enter the character edit screen
 			AuditLogger.log(player, "tried to apply their plastic surgery without a ticket.");
 		}

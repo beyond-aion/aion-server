@@ -9,9 +9,7 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.services.CommandsAccessService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -110,10 +108,7 @@ public class Access extends AdminCommand {
 				if (currentLevel > getLevel() && CommandsAccessService.hasAccess(admin.getObjectId(), getAlias())) {
 					CommandsAccessService.removeAccess(admin, admin.getObjectId(), getAlias());
 				}
-				admin.clearKnownlist();
-				PacketSendUtility.sendPacket(admin, new SM_PLAYER_INFO(admin));
-				admin.getEffectController().updatePlayerEffectIcons(null);
-				admin.updateKnownlist();
+				admin.getController().onChangedPlayerAttributes();
 				break;
 			}
 			default:

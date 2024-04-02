@@ -632,6 +632,18 @@ public class PlayerController extends CreatureController<Player> {
 			LegionService.getInstance().updateMemberInfo(player);
 	}
 
+	public void onChangedPlayerAttributes() {
+		getOwner().clearKnownlist();
+		PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_INFO(getOwner()));
+		PacketSendUtility.sendPacket(getOwner(), new SM_MOTION(getOwner().getObjectId(), getOwner().getMotions().getActiveMotions()));
+		if (getOwner().isInPlayerMode(PlayerMode.RIDE))
+			PacketSendUtility.sendPacket(getOwner(), new SM_EMOTION(getOwner(), EmotionType.RIDE, 0, getOwner().ride.getNpcId()));
+		if (getOwner().getSeeState() != 0)
+			PacketSendUtility.sendPacket(getOwner(), new SM_PLAYER_STATE(getOwner())); // needed to see hidden creatures again
+		getOwner().getEffectController().updatePlayerEffectIcons(null);
+		getOwner().updateKnownlist();
+	}
+
 	/**
 	 * After entering game player char is "blinking" which means that it's in under some protection, after making an action char stops blinking. -
 	 * Starts protection active - Schedules task to end protection

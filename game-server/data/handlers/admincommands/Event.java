@@ -9,8 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -21,8 +19,7 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author Nathan
- * @modified Estrayl, Neon
+ * @author Nathan, Estrayl, Neon
  */
 public class Event extends AdminCommand {
 
@@ -122,10 +119,7 @@ public class Event extends AdminCommand {
 				return;
 			}
 			player.setInFfaTeamMode(ffaTeamMode);
-			player.clearKnownlist();
-			PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
-			PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
-			player.updateKnownlist();
+			player.getController().onChangedPlayerAttributes();
 			sendInfo(admin, ChatUtil.name(player) + " is " + msg);
 			PacketSendUtility.sendMessage(player, "You are " + msg, ChatType.BRIGHT_YELLOW_CENTER);
 		} else {
@@ -174,10 +168,7 @@ public class Event extends AdminCommand {
 			player.unsetCustomState(CustomPlayerState.EVENT_MODE);
 			player.unsetCustomState(CustomPlayerState.ENEMY_OF_ALL_PLAYERS);
 			player.setInFfaTeamMode(false);
-			player.clearKnownlist();
-			PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player, false));
-			PacketSendUtility.sendPacket(player, new SM_MOTION(player.getObjectId(), player.getMotions().getActiveMotions()));
-			player.updateKnownlist();
+			player.getController().onChangedPlayerAttributes();
 			sendInfo(admin, ChatUtil.name(player) + " was removed from event state.");
 			PacketSendUtility.sendMessage(player, "You were removed from event state!", ChatType.BRIGHT_YELLOW_CENTER);
 		} else if (!onlyRemove) {
