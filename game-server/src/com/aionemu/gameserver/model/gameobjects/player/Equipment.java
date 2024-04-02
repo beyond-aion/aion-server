@@ -32,7 +32,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.StigmaService;
-import com.aionemu.gameserver.services.event.AprilFoolsAppearance;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.utils.ChatUtil;
@@ -377,14 +376,11 @@ public class Equipment implements Persistable {
 	}
 
 	public List<Item> getEquippedForAppearance() {
-		List<Item> equippedItems = AprilFoolsAppearance.computeItems(owner);
-		if (equippedItems == null) {
-			equippedItems = new ArrayList<>();
-			synchronized (equipment) {
-				for (Item item : equipment.values()) {
-					if (ItemSlot.isVisible(item.getEquipmentSlot()) && !(item.getItemTemplate().isTwoHandWeapon() && equippedItems.contains(item)))
-						equippedItems.add(item);
-				}
+		List<Item> equippedItems = new ArrayList<>();
+		synchronized (equipment) {
+			for (Item item : equipment.values()) {
+				if (ItemSlot.isVisible(item.getEquipmentSlot()) && !(item.getItemTemplate().isTwoHandWeapon() && equippedItems.contains(item)))
+					equippedItems.add(item);
 			}
 		}
 		return equippedItems;

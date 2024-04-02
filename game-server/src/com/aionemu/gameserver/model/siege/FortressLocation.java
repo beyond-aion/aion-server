@@ -16,7 +16,6 @@ import com.aionemu.gameserver.model.templates.siegelocation.SiegeMercenaryZone;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.ShieldService;
-import com.aionemu.gameserver.services.event.AprilFoolsAppearance;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -60,8 +59,6 @@ public class FortressLocation extends SiegeLocation {
 				shieldObservers.put(creature.getObjectId(), observer);
 			}
 		}
-		if (creature instanceof Player player)
-			AprilFoolsAppearance.setAppearance(player);
 	}
 
 	@Override
@@ -72,8 +69,6 @@ public class FortressLocation extends SiegeLocation {
 		ShieldObserver observer = shieldObservers.remove(creature.getObjectId());
 		if (observer != null)
 			creature.getObserveController().removeObserver(observer);
-		if (creature instanceof Player player)
-			AprilFoolsAppearance.resetAppearance(player);
 	}
 
 	public void checkForBalanceBuff(Creature creature, SiegeBuffAction siegeBuffAction) {
