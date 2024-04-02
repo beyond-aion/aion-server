@@ -410,6 +410,8 @@ public class DropService {
 	}
 
 	private static void distributeEqually(DropItem item, List<Player> players) {
+		if (players.isEmpty())
+			return;
 		long countPerPlayer = item.getCount() / players.size();
 		for (int i = players.size() - 1; i >= 0; i--) {
 			long count = i == 0 ? item.getCount() : countPerPlayer;
