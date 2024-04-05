@@ -76,9 +76,10 @@ public class AutoGroup implements L10n {
 	}
 
 	public List<Integer> getNpcIds() {
-		if (npcIds == null) {
-			npcIds = Collections.emptyList();
-		}
-		return this.npcIds;
+		return npcIds == null ? Collections.emptyList() : npcIds;
+	}
+
+	public boolean isRecruitableInstance() {
+		return id >= 302 && id < 400 || instanceId == 300600000 || instanceId == 300220000;
 	}
 }

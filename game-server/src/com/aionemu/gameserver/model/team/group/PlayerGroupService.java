@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.GroupConfig;
-import com.aionemu.gameserver.model.gameobjects.FindGroup;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.common.events.PlayerLeavedEvent.LeaveReson;
@@ -53,11 +52,6 @@ public class PlayerGroupService {
 		if (offlineCheckStarted.compareAndSet(false, true)) {
 			initializeOfflineCheck();
 		}
-		FindGroup inviterFindGroup = FindGroupService.getInstance().removeFindGroup(leader.getRace(), 0x00, leader.getObjectId());
-		if (inviterFindGroup == null)
-			inviterFindGroup = FindGroupService.getInstance().removeFindGroup(leader.getRace(), 0x04, leader.getObjectId());
-		if (inviterFindGroup != null)
-			FindGroupService.getInstance().addFindGroupList(leader, 0x02, inviterFindGroup.getMessage(), inviterFindGroup.getGroupType());
 		return newGroup;
 	}
 
@@ -66,11 +60,8 @@ public class PlayerGroupService {
 	}
 
 	public static void addPlayerToGroup(PlayerGroup group, Player invited) {
-		FindGroupService.getInstance().removeFindGroup(invited.getRace(), 0x00, invited.getObjectId());
-		FindGroupService.getInstance().removeFindGroup(invited.getRace(), 0x04, invited.getObjectId());
 		group.addMember(new PlayerGroupMember(invited));
-		if (group.isFull())
-			FindGroupService.getInstance().removeFindGroup(group.getRace(), 0, group.getObjectId());
+		FindGroupService.getInstance().onJoinedTeam(invited);
 	}
 
 	/**
@@ -165,7 +156,7 @@ public class PlayerGroupService {
 	 * Disband group by removing all players one by one
 	 */
 	public static void disband(PlayerGroup group) {
-		FindGroupService.getInstance().removeFindGroup(group.getRace(), 0, group.getTeamId());
+		FindGroupService.getInstance().removeRecruitment(group);
 		groups.remove(group.getTeamId());
 		group.onEvent(new GroupDisbandEvent(group));
 	}

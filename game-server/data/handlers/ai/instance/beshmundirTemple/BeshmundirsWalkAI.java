@@ -6,15 +6,14 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FIND_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.findgroup.FindGroupService;
 import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -40,10 +39,7 @@ public class BeshmundirsWalkAI extends ActionItemNpcAI {
 	public boolean onDialogSelect(Player player, int dialogActionId, int questId, int extendedRewardIndex) {
 		switch (dialogActionId) {
 			case OPEN_INSTANCE_RECRUIT:
-				AutoGroupType agt = AutoGroupType.getAutoGroup(player.getLevel(), getNpcId());
-				if (agt != null) {
-					PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(0x1A, agt.getTemplate().getInstanceMapId()));
-				}
+				FindGroupService.getInstance().showInstanceGroups(player, getOwner());
 				break;
 			case INSTANCE_ENTRY: // I'm ready to enter
 				if (!player.isInGroup()) {

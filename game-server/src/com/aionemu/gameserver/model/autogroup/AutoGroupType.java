@@ -31,56 +31,6 @@ public enum AutoGroupType implements L10n {
 			return new AutoPvpInstance(this);
 		}
 	},
-	ELYOS_FIRE_TEMPLE(4, 300000) {
-
-		@Override
-		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance(this);
-		}
-	},
-	NOCHSANA_TRAINING_CAMP(5, 600000) {
-
-		@Override
-		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance(this);
-		}
-	},
-	DARK_POETA(6, 1200000) {
-
-		@Override
-		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance(this);
-		}
-	},
-	// STEEL_RAKE(7, 1200000, 6) { @Override AutoInstance newAutoInstance() { return new AutoGeneralInstance(this); } },
-	UDAS_TEMPLE(8, 600000) {
-
-		@Override
-		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance(this);
-		}
-	},
-	LOWER_UDAS_TEMPLE(9, 600000) {
-
-		@Override
-		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance(this);
-		}
-	},
-	EMPYREAN_CRUCIBLE(11, 600000) {
-
-		@Override
-		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance(this);
-		}
-	},
-	ASMODIANS_FIRE_TEMPLE(14, 300000) {
-
-		@Override
-		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance(this);
-		}
-	},
 	ARENA_OF_CHAOS_1(21, 110000, 1) {
 
 		@Override
@@ -289,20 +239,6 @@ public enum AutoGroupType implements L10n {
 		@Override
 		AutoInstance newAutoInstance() {
 			return new AutoPvpInstance(this);
-		}
-	},
-	STEEL_RAKE_ELYOS(308, 600000) {
-
-		@Override
-		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance(this);
-		}
-	},
-	STEEL_RAKE_ASMODIANS(401, 600000) {
-
-		@Override
-		AutoInstance newAutoInstance() {
-			return new AutoGeneralInstance(this);
 		}
 	};
 

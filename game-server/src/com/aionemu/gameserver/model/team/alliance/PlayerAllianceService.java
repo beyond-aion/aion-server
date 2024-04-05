@@ -9,7 +9,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.GroupConfig;
-import com.aionemu.gameserver.model.gameobjects.FindGroup;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.alliance.events.*;
@@ -73,11 +72,6 @@ public class PlayerAllianceService {
 		if (offlineCheckStarted.compareAndSet(false, true)) {
 			initializeOfflineCheck();
 		}
-		FindGroup inviterFindGroup = FindGroupService.getInstance().removeFindGroup(leader.getRace(), 0x00, leader.getObjectId());
-		if (inviterFindGroup == null)
-			inviterFindGroup = FindGroupService.getInstance().removeFindGroup(leader.getRace(), 0x04, leader.getObjectId());
-		if (inviterFindGroup != null)
-			FindGroupService.getInstance().addFindGroupList(leader, 0x02, inviterFindGroup.getMessage(), inviterFindGroup.getGroupType());
 		return newAlliance;
 	}
 
@@ -86,12 +80,9 @@ public class PlayerAllianceService {
 	}
 
 	public static PlayerAllianceMember addPlayerToAlliance(PlayerAlliance alliance, Player invited) {
-		FindGroupService.getInstance().removeFindGroup(invited.getRace(), 0x00, invited.getObjectId());
-		FindGroupService.getInstance().removeFindGroup(invited.getRace(), 0x04, invited.getObjectId());
 		PlayerAllianceMember member = new PlayerAllianceMember(invited);
 		alliance.addMember(member);
-		if (alliance.isFull())
-			FindGroupService.getInstance().removeFindGroup(alliance.getRace(), 0, alliance.getObjectId());
+		FindGroupService.getInstance().onJoinedTeam(invited);
 		return member;
 	}
 
@@ -193,7 +184,7 @@ public class PlayerAllianceService {
 	 * Disband alliance after minimum of members has been reached
 	 */
 	public static void disband(PlayerAlliance alliance, boolean onBefore) {
-		FindGroupService.getInstance().removeFindGroup(alliance.getRace(), 0, alliance.getTeamId());
+		FindGroupService.getInstance().removeRecruitment(alliance);
 		League league = alliance.getLeague();
 		if (onBefore && league != null)
 			league.onEvent(new LeagueLeftEvent(league, alliance));

@@ -13,13 +13,13 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_FIND_GROUP;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.services.findgroup.FindGroupService;
 import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -62,24 +62,20 @@ public class PortalDialogAI extends PortalAI {
 		if (questId > 0 && QuestEngine.getInstance().onDialog(env)) {
 			return true;
 		}
-		AutoGroupType agt = AutoGroupType.getAutoGroup(player.getLevel(), getNpcId());
 		switch (dialogActionId) {
 			case INSTANCE_PARTY_MATCH: // auto groups
+				AutoGroupType agt = AutoGroupType.getAutoGroup(player.getLevel(), getNpcId());
 				if (agt != null)
 					PacketSendUtility.sendPacket(player, new SM_AUTO_GROUP(agt.getTemplate().getMaskId()));
 				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 				return true;
 			case OPEN_INSTANCE_RECRUIT:
-				if (agt != null)
-					PacketSendUtility.sendPacket(player, new SM_FIND_GROUP(0x1A, agt.getTemplate().getInstanceMapId()));
+				FindGroupService.getInstance().showInstanceGroups(player, getOwner());
 				return true;
 			case SELECT1_1:
-				if (agt != null) {
-					int maxMemberCount = DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getTemplate().getInstanceMapId(), player.getRace());
-					if (maxMemberCount <= 6 && !player.isInGroup() || maxMemberCount > 6 && !player.isInAlliance()) {
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1182));
-						return true;
-					}
+				if (!player.isInTeam() && DataManager.AUTO_GROUP.getRecruitableInstanceMaskIds(getNpcId()) != null) {
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 1182)); // show OPEN_INSTANCE_RECRUIT option
+					return true;
 				}
 		}
 		if (questId == 0) {

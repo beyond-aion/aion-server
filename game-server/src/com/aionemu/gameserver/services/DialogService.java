@@ -119,7 +119,7 @@ public class DialogService {
 				case ITEM_UPGRADE: // item upgrade (4.7)
 				case CLOSE_LEGION_WAREHOUSE: // WTF??? Quest dialog packet (2.5)
 				case COMBINE_TASK: // crafting (2.5)
-				case OPEN_INSTANCE_RECRUIT: // TODO NEW INSTANCE FIND GROUP SYSTEM
+				case OPEN_INSTANCE_RECRUIT: // handled by AI
 				case INSTANCE_ENTRY: // (2.5)
 				case COMPOUND_WEAPON: // armsfusion (2.5)
 				case DECOMPOUND_WEAPON: // armsbreaking (2.5)

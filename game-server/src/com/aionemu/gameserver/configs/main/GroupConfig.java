@@ -34,4 +34,10 @@ public class GroupConfig {
 	@Property(key = "gameserver.playeralliance.inviteotherfaction", defaultValue = "false")
 	public static boolean ALLIANCE_INVITEOTHERFACTION;
 
+	/**
+	 * Allow applying for or registering instance groups in the Find Group window even if you're not at the instance entrance (like in version 6.2+)
+	 */
+	@Property(key = "gameserver.instance_group.form_anywhere", defaultValue = "false")
+	public static boolean FORM_INSTANCE_GROUP_ANYWHERE;
+
 }

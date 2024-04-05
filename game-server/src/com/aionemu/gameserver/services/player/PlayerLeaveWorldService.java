@@ -80,8 +80,7 @@ public class PlayerLeaveWorldService {
 			player.setPosition(pos);
 		}
 
-		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x00, player.getObjectId());
-		FindGroupService.getInstance().removeFindGroup(player.getRace(), 0x04, player.getObjectId());
+		FindGroupService.getInstance().onLogout(player);
 		player.getResponseRequester().denyAll();
 		player.getFriendList().setStatus(FriendList.Status.OFFLINE, player.getCommonData());
 		BrokerService.getInstance().removePlayerCache(player);
