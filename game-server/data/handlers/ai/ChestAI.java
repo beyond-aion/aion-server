@@ -17,7 +17,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.chest.ChestTemplate;
 import com.aionemu.gameserver.model.templates.chest.KeyItem;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -58,19 +57,20 @@ public class ChestAI extends ActionItemNpcAI {
 			Collection<Player> players = new HashSet<>();
 			TemporaryPlayerTeam<?> playerTeam = player.getCurrentTeam();
 			if (playerTeam != null) {
-				for (Player member : playerTeam.getOnlineMembers())
-					if (PositionUtil.isInRange(member, getOwner(),
-						DropConfig.DISABLE_RANGE_CHECK_MAPS.contains(getPosition().getMapId()) ? 9999 : GroupConfig.GROUP_MAX_DISTANCE))
+				int range = DropConfig.DISABLE_RANGE_CHECK_MAPS.contains(getPosition().getMapId()) ? 9999 : GroupConfig.GROUP_MAX_DISTANCE;
+				for (Player member : playerTeam.getOnlineMembers()) {
+					if (PositionUtil.isInRange(member, getOwner(), range))
 						players.add(member);
-			} else {
-				players.add(player);
+				}
 			}
+			if (players.isEmpty()) // no team or nobody was in range
+				players.add(player);
 			DropRegistrationService.getInstance().registerDrop(getOwner(), player, getHighestLevel(players), players);
 			AIActions.die(this, player);
 			DropService.getInstance().requestDropList(player, getObjectId());
 			super.handleUseItemFinish(player);
 		} else {
-			PacketSendUtility.sendPacket(player, new SM_SYSTEM_MESSAGE(1111301));
+			PacketSendUtility.sendMonologue(player, 1111301); // I'll need a key to open this.
 		}
 	}
 
@@ -103,6 +103,6 @@ public class ChestAI extends ActionItemNpcAI {
 	}
 
 	private int getHighestLevel(Collection<Player> players) {
-		return players.stream().mapToInt(p -> p.getLevel()).max().getAsInt();
+		return players.stream().mapToInt(Player::getLevel).max().getAsInt();
 	}
 }
