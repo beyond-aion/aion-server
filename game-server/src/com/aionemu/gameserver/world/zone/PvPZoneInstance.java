@@ -7,12 +7,8 @@ import com.aionemu.gameserver.model.templates.zone.ZoneType;
 /**
  * @author MrPoke
  */
-public class PvPZoneInstance extends SiegeZoneInstance {
+public class PvPZoneInstance extends ZoneInstance {
 
-	/**
-	 * @param mapId
-	 * @param template
-	 */
 	public PvPZoneInstance(int mapId, ZoneInfo template) {
 		super(mapId, template);
 	}
@@ -22,9 +18,8 @@ public class PvPZoneInstance extends SiegeZoneInstance {
 		if (super.onEnter(creature)) {
 			creature.setInsideZoneType(ZoneType.PVP);
 			return true;
-		} else {
-			return false;
 		}
+		return false;
 	}
 
 	@Override
@@ -32,7 +27,7 @@ public class PvPZoneInstance extends SiegeZoneInstance {
 		if (super.onLeave(creature)) {
 			creature.unsetInsideZoneType(ZoneType.PVP);
 			return true;
-		} else
-			return false;
+		}
+		return false;
 	}
 }

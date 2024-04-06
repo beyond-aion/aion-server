@@ -1,14 +1,12 @@
 package zone.pvpZones;
 
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_MSG_PvPZONE_MY_DEATH_TO_B;
-import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_PvPZONE_OUT_MESSAGE;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.zone.SiegeZoneInstance;
+import com.aionemu.gameserver.world.zone.PvPZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 import com.aionemu.gameserver.world.zone.handler.AdvancedZoneHandler;
@@ -28,17 +26,25 @@ public abstract class PvPZone implements AdvancedZoneHandler {
 
 	@Override
 	public boolean onDie(Creature lastAttacker, Creature target, ZoneInstance zone) {
-		if (!(target instanceof Player))
+		if (!(target instanceof Player player))
 			return false;
 
-		if (zone instanceof SiegeZoneInstance) {
-			Player player = (Player) target;
-			PacketSendUtility.broadcastToZone((SiegeZoneInstance) zone, STR_PvPZONE_OUT_MESSAGE(player.getName()));
+		if (zone instanceof PvPZoneInstance) {
+			zone.forEach(creature -> {
+				if (creature instanceof Player p) {
+					if (p.equals(player))
+						PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_PvPZONE_MY_DEATH_TO_B(lastAttacker.getName()));
+					else if (p.equals(lastAttacker))
+						PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_PvPZONE_HOSTILE_DEATH_TO_ME(player.getName()));
+					else
+						PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_MSG_PvPZONE_HOSTILE_DEATH_TO_B(lastAttacker.getName(), player.getName()));
+				}
+			});
 
 			ThreadPoolManager.getInstance().schedule(() -> {
 				PlayerReviveService.duelRevive(player);
 				doTeleport(player, zone.getZoneTemplate().getName());
-				PacketSendUtility.sendPacket(player, STR_MSG_PvPZONE_MY_DEATH_TO_B(lastAttacker.getName()));
+				PacketSendUtility.broadcastToZone(zone, SM_SYSTEM_MESSAGE.STR_PvPZONE_OUT_MESSAGE(player.getName()));
 			}, 5000);
 		}
 		return true;

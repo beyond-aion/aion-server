@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.function.Consumer;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,7 +23,7 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 
 	private final ZoneInfo template;
 	private final int mapId;
-	private Map<Integer, Creature> creatures = new HashMap<>();
+	protected final Map<Integer, Creature> creatures = new HashMap<>();
 	protected List<ZoneHandler> handlers = new ArrayList<>();
 
 	public ZoneInstance(int mapId, ZoneInfo template) {
@@ -174,13 +175,10 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 		return template.getZoneTemplate().getTownId();
 	}
 
-	/**
-	 * @return the creatures
-	 */
-	public Map<Integer, Creature> getCreatures() {
-		return creatures;
+	public void forEach(Consumer<Creature> action) {
+		creatures.values().forEach(action);
 	}
-	
+
 	public boolean isDominionZone() {
 		return template.getZoneTemplate().getZoneType() == ZoneClassName.DOMINION;
 	}

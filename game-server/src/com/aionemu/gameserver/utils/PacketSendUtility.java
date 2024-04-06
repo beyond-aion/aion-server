@@ -14,7 +14,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
-import com.aionemu.gameserver.world.zone.SiegeZoneInstance;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * This class contains static methods, which are utility methods, all of them are interacting only with objects passed as parameters.<br>
@@ -273,8 +273,11 @@ public class PacketSendUtility {
 		}), delay);
 	}
 
-	public static void broadcastToZone(SiegeZoneInstance zone, AionServerPacket packet) {
-		scheduleOrRun(() -> zone.forEachPlayer(player -> sendPacket(player, packet)), 0);
+	public static void broadcastToZone(ZoneInstance zone, AionServerPacket packet) {
+		scheduleOrRun(() -> zone.forEach(creature -> {
+			if (creature instanceof Player player)
+				sendPacket(player, packet);
+		}), 0);
 	}
 
 	private static void scheduleOrRun(Runnable r, int delay) {
