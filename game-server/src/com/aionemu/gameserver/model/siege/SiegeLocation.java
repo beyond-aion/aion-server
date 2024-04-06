@@ -6,13 +6,11 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.function.Consumer;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeLocationTemplate;
 import com.aionemu.gameserver.model.templates.siegelocation.SiegeReward;
+import com.aionemu.gameserver.utils.collections.CollectionUtil;
 import com.aionemu.gameserver.world.zone.SiegeZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
@@ -22,7 +20,6 @@ import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
  */
 public class SiegeLocation implements ZoneHandler {
 
-	private static final Logger log = LoggerFactory.getLogger(SiegeLocation.class);
 	public static final int STATE_INVULNERABLE = 0;
 	public static final int STATE_VULNERABLE = 1;
 
@@ -221,8 +218,8 @@ public class SiegeLocation implements ZoneHandler {
 	public void onEnterZone(Creature creature, ZoneInstance zone) {
 		if (!creatures.containsKey(creature.getObjectId())) {
 			creatures.put(creature.getObjectId(), creature);
-			if (creature instanceof Player) {
-				players.put(creature.getObjectId(), (Player) creature);
+			if (creature instanceof Player player) {
+				players.put(creature.getObjectId(), player);
 			}
 		}
 	}
@@ -235,25 +232,11 @@ public class SiegeLocation implements ZoneHandler {
 		}
 	}
 
-	public void forEachCreature(Consumer<Creature> function) {
-		try {
-			creatures.values().forEach(c -> {
-				if (c != null) // can be null if entry got removed after iterator allocation
-					function.accept(c);
-			});
-		} catch (Exception ex) {
-			log.error("Exception while iterating creatures", ex);
-		}
+	public void forEachCreature(Consumer<Creature> consumer) {
+		CollectionUtil.forEach(creatures.values(), consumer);
 	}
 
-	public void forEachPlayer(Consumer<Player> function) {
-		try {
-			players.values().forEach(p -> {
-				if (p != null) // can be null if entry got removed after iterator allocation
-					function.accept(p);
-			});
-		} catch (Exception ex) {
-			log.error("Exception while iterating players", ex);
-		}
+	public void forEachPlayer(Consumer<Player> consumer) {
+		CollectionUtil.forEach(players.values(), consumer);
 	}
 }

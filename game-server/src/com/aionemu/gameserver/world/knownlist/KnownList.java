@@ -16,6 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.collections.CollectionUtil;
 import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -258,80 +259,40 @@ public class KnownList {
 		return newObject.getVisibleDistance();
 	}
 
-	public void forEachNpc(Consumer<Npc> function) {
-		forEachNpc(function, Integer.MAX_VALUE);
+	public void forEachNpc(Consumer<Npc> consumer) {
+		forEachObject(o -> {
+			if (o instanceof Npc npc)
+				consumer.accept(npc);
+		});
 	}
 
-	public int forEachNpc(Consumer<Npc> function, int iterationLimit) {
+	public int forEachNpcWithOwner(BiConsumer<Npc, VisibleObject> consumer, int iterationLimit) {
 		int counter = 0;
-		try {
-			for (VisibleObject newObject : knownObjects.values()) {
-				if (newObject instanceof Npc) {
-					if (++counter > iterationLimit)
-						break;
-					function.accept((Npc) newObject);
+		for (VisibleObject newObject : knownObjects.values()) {
+			if (newObject instanceof Npc npc) {
+				if (++counter > iterationLimit)
+					break;
+				try {
+					consumer.accept(npc, owner);
+				} catch (Exception ex) {
+					log.error("Exception when iterating over npcs known by " + owner, ex);
 				}
 			}
-		} catch (Exception ex) {
-			log.error("Exception when iterating over npcs known by " + owner, ex);
 		}
 		return counter;
 	}
 
-	public void forEachNpcWithOwner(BiConsumer<Npc, VisibleObject> function) {
-		forEachNpcWithOwner(function, Integer.MAX_VALUE);
+	public void forEachPlayer(Consumer<Player> consumer) {
+		if (knownPlayers != null)
+			CollectionUtil.forEach(knownPlayers.values(), consumer, (player, exception) -> log.error("Could not perform operation on " + player + " known by " + owner, exception));
 	}
 
-	public int forEachNpcWithOwner(BiConsumer<Npc, VisibleObject> function, int iterationLimit) {
-		int counter = 0;
-		try {
-			for (VisibleObject newObject : knownObjects.values()) {
-				if (newObject instanceof Npc) {
-					if (++counter > iterationLimit)
-						break;
-					function.accept((Npc) newObject, owner);
-				}
-			}
-		} catch (Exception ex) {
-			log.error("Exception when iterating over npcs known by " + owner, ex);
-		}
-		return counter;
+	public void forEachObject(Consumer<VisibleObject> consumer) {
+		CollectionUtil.forEach(knownObjects.values(), consumer, (object, exception) -> log.error("Could not perform operation on " + object + " known by " + owner, exception));
 	}
 
-	public void forEachPlayer(Consumer<Player> function) {
-		if (knownPlayers == null)
-			return;
-
-		try {
-			knownPlayers.values().forEach(player -> {
-				if (player != null) // can be null if entry got removed after iterator allocation
-					function.accept(player);
-			});
-		} catch (Exception ex) {
-			log.error("Exception when iterating over players known by " + owner, ex);
-		}
-	}
-
-	public void forEachObject(Consumer<VisibleObject> function) {
-		try {
-			knownObjects.values().forEach(object -> {
-				if (object != null) // can be null if entry got removed after iterator allocation
-					function.accept(object);
-			});
-		} catch (Exception ex) {
-			log.error("Exception when iterating over objects known by " + owner, ex);
-		}
-	}
-
-	public void forEachVisibleObject(Consumer<VisibleObject> function) {
-		try {
-			visualObjects.values().forEach(object -> {
-				if (object != null) // can be null if entry got removed after iterator allocation
-					function.accept(object);
-			});
-		} catch (Exception ex) {
-			log.error("Exception when iterating over visual objects seen by " + owner, ex);
-		}
+	public void forEachVisibleObject(Consumer<VisibleObject> consumer) {
+		CollectionUtil.forEach(visualObjects.values(), consumer, (object, exception) -> log.error("Could not perform operation on " + object + " seen by " + owner, exception));
 	}
 
 	public Map<Integer, VisibleObject> getKnownObjects() {
@@ -352,12 +313,11 @@ public class KnownList {
 	}
 
 	/**
-	 * @param templateId
 	 * @return The visible object with the given template ID or null if not found.
 	 */
 	public VisibleObject findObject(int templateId) {
 		for (VisibleObject v : knownObjects.values()) {
-			if (v != null && v.getObjectTemplate().getTemplateId() == templateId) // can be null if entry got removed after iterator allocation
+			if (v.getObjectTemplate().getTemplateId() == templateId)
 				return v;
 		}
 		return null;

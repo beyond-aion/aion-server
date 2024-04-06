@@ -23,6 +23,7 @@ import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.utils.collections.CollectionUtil;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
 import com.aionemu.gameserver.world.zone.RegionZone;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
@@ -64,20 +65,10 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		initMapRegions();
 	}
 
-	/**
-	 * Return World map id.
-	 * 
-	 * @return world map id
-	 */
 	public int getMapId() {
 		return getParent().getMapId();
 	}
 
-	/**
-	 * Returns WorldMap which is parent of this instance
-	 * 
-	 * @return parent
-	 */
 	public WorldMap getParent() {
 		return parent;
 	}
@@ -89,7 +80,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	/**
 	 * Returns MapRegion that contains coordinates of VisibleObject. If the region doesn't exist, it's created.
 	 * 
-	 * @param object
 	 * @return a MapRegion
 	 */
 	MapRegion getRegion(VisibleObject object) {
@@ -99,8 +89,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	/**
 	 * Returns MapRegion that contains given x,y coordinates. If the region doesn't exist, it's created.
 	 * 
-	 * @param x
-	 * @param y
 	 * @return a MapRegion
 	 */
 	public abstract MapRegion getRegion(float x, float y, float z);
@@ -108,7 +96,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 	/**
 	 * Create new MapRegion and add link to neighbours.
 	 * 
-	 * @param regionId
 	 * @return newly created map region
 	 */
 	protected abstract MapRegion createMapRegion(int regionId);
@@ -119,9 +106,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 
 	public abstract int getOwnerId();
 
-	/**
-	 * @param object
-	 */
 	public void addObject(VisibleObject object) {
 		if (worldMapObjects.putIfAbsent(object.getObjectId(), object) != null) {
 			throw new DuplicateAionObjectException(object, worldMapObjects.get(object.getObjectId()));
@@ -218,9 +202,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return worldMapObjects.values().stream().filter(o -> o != null && o.getSpawn() != null && o.getSpawn().getStaticId() == staticId).findAny().orElse(null);
 	}
 
-	/**
-	 * @return the instanceIndex
-	 */
 	public int getInstanceId() {
 		return instanceId;
 	}
@@ -271,10 +252,6 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return emptyInstanceTask;
 	}
 
-	/**
-	 * @param emptyInstanceTask
-	 *          the emptyInstanceTask to set
-	 */
 	public void setEmptyInstanceTask(Future<?> emptyInstanceTask) {
 		this.emptyInstanceTask = emptyInstanceTask;
 	}
@@ -346,29 +323,18 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		return worldMapObjects.values().iterator();
 	}
 
-	public void forEachNpc(Consumer<Npc> function) {
-		forEach(worldMapNpcs, function);
+	public void forEachNpc(Consumer<Npc> consumer) {
+		CollectionUtil.forEach(worldMapNpcs.values(), consumer);
 	}
 
-	public void forEachPlayer(Consumer<Player> function) {
-		forEach(worldMapPlayers, function);
+	public void forEachPlayer(Consumer<Player> consumer) {
+		CollectionUtil.forEach(worldMapPlayers.values(), consumer);
 	}
 
-	public void forEachDoor(Consumer<StaticDoor> function) {
-		forEach(worldMapObjects, o -> {
-			if (o instanceof StaticDoor)
-				function.accept((StaticDoor) o);
-		});
-	}
-
-	private <T extends VisibleObject> void forEach(Map<Integer, T> concurrentMap, Consumer<T> function) {
-		concurrentMap.values().forEach(object -> {
-			try {
-				if (object != null) // can be null if entry got removed after iterator allocation
-					function.accept(object);
-			} catch (Exception ex) {
-				log.error("Exception iterating over " + object, ex);
-			}
+	public void forEachDoor(Consumer<StaticDoor> consumer) {
+		CollectionUtil.forEach(worldMapObjects.values(), o -> {
+			if (o instanceof StaticDoor staticDoor)
+				consumer.accept(staticDoor);
 		});
 	}
 }

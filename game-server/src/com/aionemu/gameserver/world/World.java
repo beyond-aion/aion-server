@@ -23,6 +23,7 @@ import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplat
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
+import com.aionemu.gameserver.utils.collections.CollectionUtil;
 import com.aionemu.gameserver.world.container.PlayerContainer;
 import com.aionemu.gameserver.world.exceptions.AlreadySpawnedException;
 import com.aionemu.gameserver.world.exceptions.DuplicateAionObjectException;
@@ -389,26 +390,12 @@ public class World {
 		return allPlayers.getAllPlayers();
 	}
 
-	public void forEachPlayer(Consumer<Player> function) {
-		try {
-			allPlayers.forEach(player -> {
-				if (player != null) // can be null if entry got removed after iterator allocation
-					function.accept(player);
-			});
-		} catch (Exception ex) {
-			log.error("Exception while iterating players", ex);
-		}
+	public void forEachPlayer(Consumer<Player> consumer) {
+		CollectionUtil.forEach(allPlayers, consumer);
 	}
 
-	public void forEachObject(Consumer<VisibleObject> function) {
-		try {
-			allObjects.values().forEach(obj -> {
-				if (obj != null) // can be null if entry got removed after iterator allocation
-					function.accept(obj);
-			});
-		} catch (Exception ex) {
-			log.error("Exception while iterating objects", ex);
-		}
+	public void forEachObject(Consumer<VisibleObject> consumer) {
+		CollectionUtil.forEach(allObjects.values(), consumer);
 	}
 
 	private static class SingletonHolder {

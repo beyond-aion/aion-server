@@ -12,6 +12,7 @@ import com.aionemu.gameserver.model.geometry.Area;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
 import com.aionemu.gameserver.model.templates.zone.ZoneInfo;
 import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
+import com.aionemu.gameserver.utils.collections.CollectionUtil;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.zone.handler.AdvancedZoneHandler;
 import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
@@ -176,7 +177,7 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 	}
 
 	public void forEach(Consumer<Creature> action) {
-		creatures.values().forEach(action);
+		CollectionUtil.forEach(creatures.values(), action);
 	}
 
 	public boolean isDominionZone() {
