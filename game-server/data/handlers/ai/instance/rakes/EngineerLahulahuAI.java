@@ -3,6 +3,7 @@ package ai.instance.rakes;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -14,10 +15,9 @@ import ai.AggressiveNpcAI;
  * @author xTz
  */
 @AIName("engineerlahulahu")
-public class EngineerLahulahuAI extends AggressiveNpcAI {
+public class EngineerLahulahuAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private boolean isStart = false;
-	private boolean isUsedSkill = false;
+	private final HpPhases hpPhases = new HpPhases(95, 25);
 	private int skill = 18153;
 	private Npc npc;
 	private Npc npc1;
@@ -55,43 +55,36 @@ public class EngineerLahulahuAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage <= 95 && !isStart) {
-			registerNpcs();
-			isStart = true;
-			AIActions.useSkill(this, 18131);
-			useSkills();
-		}
-		if (hpPercentage <= 25 && !isUsedSkill) {
-			isUsedSkill = true;
-			getEffectController().removeEffect(18131);
-			AIActions.useSkill(this, 18132);
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 95:
+				registerNpcs();
+				AIActions.useSkill(this, 18131);
+				useSkills();
+				break;
+			case 25:
+				getEffectController().removeEffect(18131);
+				AIActions.useSkill(this, 18132);
+				break;
 		}
 	}
 
 	@Override
 	protected void handleBackHome() {
-		isStart = false;
-		isUsedSkill = false;
 		super.handleBackHome();
+		hpPhases.reset();
 	}
 
 	private void doSchedule() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				useSkills();
-			}
-
-		}, 10000);
+		ThreadPoolManager.getInstance().schedule(this::useSkills, 10000);
 	}
 
 	private void useSkills() {
-		if (getPosition().isSpawned() && !isDead() && isStart) {
+		if (getPosition().isSpawned() && !isDead() && hpPhases.getCurrentPhase() > 0) {
 			int rnd = Rnd.get(1, 8);
 			switch (rnd) {
 				case 1:

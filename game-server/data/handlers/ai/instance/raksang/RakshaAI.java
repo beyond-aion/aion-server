@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,10 +21,10 @@ import ai.AggressiveNpcAI;
  * @author xTz
  */
 @AIName("raksha")
-public class RakshaAI extends AggressiveNpcAI {
+public class RakshaAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
+	private final HpPhases hpPhases = new HpPhases(75);
 	private AtomicBoolean isAggred = new AtomicBoolean(false);
-	private AtomicBoolean isStartedEvent = new AtomicBoolean(false);
 	private Future<?> phaseTask;
 
 	public RakshaAI(Npc owner) {
@@ -49,16 +50,13 @@ public class RakshaAI extends AggressiveNpcAI {
 		if (isAggred.compareAndSet(false, true)) {
 			PacketSendUtility.broadcastMessage(getOwner(), 1401152);
 		}
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage <= 75) {
-			if (isStartedEvent.compareAndSet(false, true)) {
-				PacketSendUtility.broadcastMessage(getOwner(), 1401154);
-				startPhaseTask();
-			}
-		}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		PacketSendUtility.broadcastMessage(getOwner(), 1401154);
+		startPhaseTask();
 	}
 
 	private void startPhaseTask() {
@@ -128,9 +126,9 @@ public class RakshaAI extends AggressiveNpcAI {
 	@Override
 	protected void handleBackHome() {
 		cancelPhaseTask();
-		isStartedEvent.set(false);
 		isAggred.set(false);
 		super.handleBackHome();
+		hpPhases.reset();
 	}
 
 }

@@ -6,6 +6,7 @@ import java.util.concurrent.Future;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -22,9 +23,9 @@ import ai.AggressiveNpcAI;
  * @author Ritsu, Luzien
  */
 @AIName("padmarashka")
-public class PadmarashkaAI extends AggressiveNpcAI {
+public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private int stage = 0;
+	private final HpPhases hpPhases = new HpPhases(95, 50, 25);
 	private boolean isStart = false;
 	private boolean canThink = false;
 	private Future<?> mainSkillTask;
@@ -45,7 +46,7 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 			wakeUp();
 		}
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
 	@Override
@@ -73,19 +74,12 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 		}, 10000, 20000);
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage <= 95 && stage < 1) {
-			stage1();
-			stage = 1;
-		}
-		if (hpPercentage <= 50 && stage < 2) {
-			stage2();
-			stage = 2;
-		}
-		if (hpPercentage <= 25 && stage < 3) {
-			stage3();
-			PacketSendUtility.broadcastToMap(getOwner(), 1401215); // Cave crumble
-			stage = 3;
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 95 -> stage1();
+			case 50 -> stage2();
+			case 25 -> stage3();
 		}
 	}
 
@@ -190,9 +184,9 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 		}
 	}
 
-	private void stage3() // Spawn Rock
-	{
+	private void stage3() { // Spawn Rock
 		SkillEngine.getInstance().getSkill(getOwner(), 19179, 55, getOwner()).useNoAnimationSkill();
+		PacketSendUtility.broadcastToMap(getOwner(), 1401215); // Cave crumble
 		spawn(282140, 520.99585f, 270.23776f, 66.25f, (byte) 0);
 		spawn(282140, 506.8137f, 238.60612f, 66.57414f, (byte) 0);
 		spawn(282140, 495.94504f, 218.84671f, 67.58238f, (byte) 0);
@@ -312,7 +306,7 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		super.handleBackHome();
 		isStart = false;
-		stage = 0;
+		hpPhases.reset();
 		cancelTask();
 		deSpawnNpcs();
 		putToSleep();
@@ -324,7 +318,6 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 		super.handleDied();
 		cancelTask();
 		isStart = false;
-		stage = 0;
 		deSpawnNpcs();
 	}
 

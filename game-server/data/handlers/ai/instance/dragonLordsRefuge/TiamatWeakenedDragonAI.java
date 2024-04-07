@@ -1,13 +1,13 @@
 package ai.instance.dragonLordsRefuge;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -25,11 +25,11 @@ import ai.AggressiveNpcAI;
  * @author Cheatkiller, Luzien, Estrayl
  */
 @AIName("tiamat_weakened_dragon")
-public class TiamatWeakenedDragonAI extends AggressiveNpcAI {
+public class TiamatWeakenedDragonAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
+	protected HpPhases hpPhases = new HpPhases(50, 25, 15, 5);
 	protected AtomicBoolean hasAggro = new AtomicBoolean();
 	protected List<Future<?>> spawnTasks = new ArrayList<>();
-	protected List<Integer> percents = new ArrayList<>();
 
 	public TiamatWeakenedDragonAI(Npc owner) {
 		super(owner);
@@ -41,40 +41,29 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		addPercent();
-	}
-
-	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		if (hasAggro.compareAndSet(false, true)) {
 			offerAtrocityEvent();
 			scheduleSinkingSand();
 		}
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	protected synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 50:
-						scheduleDivisiveCreations(60000);
-						break;
-					case 25:
-						scheduleInfinitePain();
-						spawnGravityCrusher();
-						break;
-					case 15:
-					case 5:
-						spawnGravityCrusher();
-						break;
-				}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 50:
+				scheduleDivisiveCreations(60000);
 				break;
-			}
+			case 25:
+				scheduleInfinitePain();
+				spawnGravityCrusher();
+				break;
+			case 15:
+			case 5:
+				spawnGravityCrusher();
+				break;
 		}
 	}
 
@@ -185,11 +174,6 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI {
 		spawn(283143, 508.32f, 515.18f, 417.4f, (byte) 0);
 	}
 
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, 50, 25, 15, 5);
-	}
-
 	protected void despawnAdds() {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
 		deleteNpcs(instance.getNpcs(283141));
@@ -220,7 +204,6 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDespawned() {
 		super.handleDespawned();
-		percents.clear();
 		despawnAdds();
 		cancelTasks();
 	}
@@ -229,9 +212,9 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		cancelTasks();
 		hasAggro.set(false);
-		addPercent();
 		despawnAdds();
 		super.handleBackHome();
+		hpPhases.reset();
 	}
 
 	@Override

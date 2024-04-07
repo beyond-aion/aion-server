@@ -1,9 +1,9 @@
 package ai.instance.unstableSplinterpath;
 
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -18,9 +18,9 @@ import ai.AggressiveNpcAI;
  * @author Ritsu, Luzien, Cheatkiler
  */
 @AIName("unstablerukril")
-public class UnstableRukrilAI extends AggressiveNpcAI {
+public class UnstableRukrilAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private final AtomicBoolean isHome = new AtomicBoolean(true);
+	private final HpPhases hpPhases = new HpPhases(95);
 	private Future<?> skillTask;
 
 	public UnstableRukrilAI(Npc owner) {
@@ -30,14 +30,13 @@ public class UnstableRukrilAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
-		regen();
+		hpPhases.tryEnterNextPhase(this);
+		tryRegen();
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage <= 95 && isHome.compareAndSet(true, false)) {
-			startSkillTask();
-		}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		startSkillTask();
 	}
 
 	private void startSkillTask() {
@@ -64,7 +63,7 @@ public class UnstableRukrilAI extends AggressiveNpcAI {
 		}
 	}
 
-	private void regen() {
+	private void tryRegen() {
 		Npc ebonsoul = getPosition().getWorldMapInstance().getNpc(219552);
 		if (ebonsoul != null && !ebonsoul.isDead() && PositionUtil.isInRange(getOwner(), ebonsoul, 5))
 			if (!getOwner().getLifeStats().isFullyRestoredHp())
@@ -82,7 +81,7 @@ public class UnstableRukrilAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		super.handleBackHome();
 		cancelTask();
-		isHome.set(true);
+		hpPhases.reset();
 		getEffectController().removeEffect(19266);
 	}
 

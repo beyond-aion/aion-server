@@ -11,6 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
@@ -43,14 +44,14 @@ import ai.AggressiveNpcAI;
  * @author Estrayl
  */
 @AIName("empowered_agent")
-public class EmpoweredAgent extends AggressiveNpcAI {
+public class EmpoweredAgent extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
 	public EmpoweredAgent(Npc owner) {
 		super(owner);
 	}
 
 	private final List<Integer> guardIds = new ArrayList<>();
-	private final List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(80, 70, 60, 50, 40, 30, 25, 20, 5);
 	private final AtomicBoolean isWalkingCompleted = new AtomicBoolean();
 	private boolean canThink = true;
 	private Npc flagNpc;
@@ -67,7 +68,6 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 		SkillEngine.getInstance().getSkill(getOwner(), 21779, 1, getOwner()).useNoAnimationSkill();
 		canThink = false;
 		EmoteManager.emoteStopAttacking(getOwner());
-		Collections.addAll(percents, 80, 70, 60, 50, 40, 30, 25, 20, 5);
 		switch (getOwner().getNpcId()) {
 			case 235064 -> {
 				Collections.addAll(guardIds, 235334, 235335, 235336, 235337, 235338, 235339);
@@ -90,20 +90,15 @@ public class EmpoweredAgent extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				switch (percent) {
-					case 80, 70, 60, 50, 40, 30, 20 -> onGuardSpawnEvent();
-					case 25, 5 -> getOwner().getQueuedSkills()
-						.offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21778, 1, 100, 0, 3000, NpcSkillTargetAttribute.ME)));
-				}
-				percents.remove(percent);
-				break;
-			}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 80, 70, 60, 50, 40, 30, 20 -> onGuardSpawnEvent();
+			case 25, 5 -> getOwner().getQueuedSkills()
+				.offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21778, 1, 100, 0, 3000, NpcSkillTargetAttribute.ME)));
 		}
 	}
 

@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -24,9 +25,9 @@ import ai.AggressiveNpcAI;
  * @author Luzien
  */
 @AIName("isbariya")
-public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
+public class IsbariyaTheResoluteAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private volatile int stage = 0;
+	private final HpPhases hpPhases = new HpPhases(75, 50, 25);
 	private AtomicBoolean isStart = new AtomicBoolean();
 	private List<Point3D> soulLocations = new ArrayList<>();
 	private Future<?> basicSkillTask;
@@ -44,7 +45,18 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 			getPosition().getWorldMapInstance().setDoorState(535, false);
 			startBasicSkillTask();
 		}
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
+	}
+
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 75 -> {
+				PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_Boss_ArchPriest_3phase());
+				launchSpecial();
+			}
+			case 50 -> PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_Boss_ArchPriest_2phase());
+		}
 	}
 
 	@Override
@@ -79,46 +91,26 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI {
 		super.handleBackHome();
 		isStart.set(false);
 		getPosition().getWorldMapInstance().setDoorState(535, true);
-		stage = 0;
-	}
-
-	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage <= 75 && stage < 1) {
-			stage = 1;
-			PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_Boss_ArchPriest_3phase());
-			launchSpecial();
-		}
-		if (hpPercentage <= 50 && stage < 2) {
-			PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_IDCatacombs_Boss_ArchPriest_2phase());
-			stage = 2;
-		}
-		if (hpPercentage <= 25 && stage < 3) {
-			stage = 3;
-		}
+		hpPhases.reset();
 	}
 
 	private void startBasicSkillTask() {
-		basicSkillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead())
-					cancelTasks(basicSkillTask);
-				else
-					SkillEngine.getInstance().getSkill(getOwner(), 18912 + Rnd.get(2), 55, getOwner()).useNoAnimationSkill();
-			}
-
+		basicSkillTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (isDead())
+				cancelTasks(basicSkillTask);
+			else
+				SkillEngine.getInstance().getSkill(getOwner(), 18912 + Rnd.get(2), 55, getOwner()).useNoAnimationSkill();
 		}, 0, 24000);
 	}
 
 	private void launchSpecial() {
-		if (isDead() || stage == 0 || getOwner().getPosition().getWorldMapInstance() == null) {
+		if (isDead() || hpPhases.getCurrentPhase() == 0 || getOwner().getPosition().getWorldMapInstance() == null) {
 			cancelTasks(basicSkillTask);
 			return;
 		}
 		int delay = 10000;
 
-		switch (stage) {
+		switch (hpPhases.getCurrentPhase()) {
 			case 1:
 				SkillEngine.getInstance().getSkill(getOwner(), 18959, 50, getTargetPlayer()).useNoAnimationSkill();
 				spawnSouls();

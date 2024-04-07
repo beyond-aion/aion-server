@@ -1,8 +1,7 @@
 package ai.instance.shugoImperialTomb;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -14,9 +13,9 @@ import ai.GeneralNpcAI;
  * @author Ritsu
  */
 @AIName("shugo_tomb_imperial_obelisk")
-public class ShugoTombImperialObeliskAI extends GeneralNpcAI {
+public class ShugoTombImperialObeliskAI extends GeneralNpcAI implements HpPhases.PhaseHandler {
 
-	private final AtomicInteger damageLevel = new AtomicInteger();
+	private final HpPhases hpPhases = new HpPhases(70, 35);
 
 	public ShugoTombImperialObeliskAI(Npc owner) {
 		super(owner);
@@ -30,14 +29,15 @@ public class ShugoTombImperialObeliskAI extends GeneralNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage > 35 && hpPercentage <= 70 && damageLevel.compareAndSet(0, 1))
-			SkillEngine.getInstance().applyEffectDirectly(21098, getOwner(), getOwner());
-		if (hpPercentage > 0 && hpPercentage <= 35 && damageLevel.compareAndSet(1, 2))
-			SkillEngine.getInstance().applyEffectDirectly(21099, getOwner(), getOwner());
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 70 -> SkillEngine.getInstance().applyEffectDirectly(21098, getOwner(), getOwner());
+			case 35 -> SkillEngine.getInstance().applyEffectDirectly(21099, getOwner(), getOwner());
+		}
 	}
 
 	@Override

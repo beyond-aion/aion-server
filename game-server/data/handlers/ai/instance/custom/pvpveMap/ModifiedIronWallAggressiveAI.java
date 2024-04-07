@@ -1,11 +1,11 @@
 package ai.instance.custom.pvpveMap;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.handler.ReturningEventHandler;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -28,50 +28,28 @@ import com.aionemu.gameserver.world.geo.GeoService;
 import ai.AggressiveNpcAI;
 
 /**
- * Created on 06.03.2017.
- * 
  * @author Yeats
  */
 @AIName("modified_iron_wall_aggressive")
-public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
+public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases;
 
 	public ModifiedIronWallAggressiveAI(Npc owner) {
 		super(owner);
-	}
-
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		if (getOwner().getNpcId() == 231304) {
-			addPercents();
-		}
+		hpPhases = owner.getNpcId() == 231304 ? new HpPhases(98, 77, 56, 35, 10) : null;
 	}
 
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		if (getOwner().getNpcId() == 231304)
-			checkPercentage(getLifeStats().getHpPercentage());
+		if (hpPhases != null)
+			hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 98:
-					case 77:
-					case 56:
-					case 35:
-					case 10:
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 1, 100, 0, 3000)));
-						break;
-				}
-				break;
-			}
-		}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 1, 100, 0, 3000)));
 	}
 
 	@Override
@@ -158,10 +136,9 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleBackHome() {
-		if (getOwner().getNpcId() == 231304) {
-			addPercents();
-		}
 		super.handleBackHome();
+		if (hpPhases != null)
+			hpPhases.reset();
 	}
 
 	@Override
@@ -170,7 +147,8 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 			World.getInstance().updatePosition(getOwner(), getOwner().getSpawn().getX(), getOwner().getSpawn().getY(), getOwner().getSpawn().getZ(),
 				getOwner().getSpawn().getHeading());
 			PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
-			addPercents();
+			if (hpPhases != null)
+				hpPhases.reset();
 			ReturningEventHandler.onBackHome(this);
 		} else {
 			super.handleNotAtHome();
@@ -196,22 +174,5 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI {
 
 	private float getRandomDmg(float damage, float min, float max) {
 		return damage * (min + Rnd.nextFloat() * (max - min));
-	}
-
-	private void addPercents() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 98, 77, 56, 35, 10 });
-	}
-
-	@Override
-	protected void handleDespawned() {
-		super.handleDespawned();
-		percents.clear();
-	}
-
-	@Override
-	protected void handleDied() {
-		super.handleDied();
-		percents.clear();
 	}
 }

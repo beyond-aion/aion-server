@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -23,28 +24,24 @@ public class HM_TiamatWeakenedDragonAI extends TiamatWeakenedDragonAI {
 
 	public HM_TiamatWeakenedDragonAI(Npc owner) {
 		super(owner);
+		hpPhases = new HpPhases(50, 25, 20, 15, 5);
 	}
 
-	protected synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 50:
-						scheduleDivisiveCreations(60000);
-						break;
-					case 25:
-						scheduleInfinitePain();
-						spawnGravityCrusher();
-						break;
-					case 20:
-					case 15:
-					case 5:
-						spawnGravityCrusher();
-						break;
-				}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 50:
+				scheduleDivisiveCreations(60000);
 				break;
-			}
+			case 25:
+				scheduleInfinitePain();
+				spawnGravityCrusher();
+				break;
+			case 20:
+			case 15:
+			case 5:
+				spawnGravityCrusher();
+				break;
 		}
 	}
 

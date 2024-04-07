@@ -1,12 +1,10 @@
 package ai.instance.raksang;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -19,10 +17,10 @@ import ai.AggressiveNpcAI;
  * @author xTz
  */
 @AIName("the_flamelord")
-public class TheFlamelordAI extends AggressiveNpcAI {
+public class TheFlamelordAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
+	private final HpPhases hpPhases = new HpPhases(90, 40, 30, 20, 10);
 	private AtomicBoolean isAggred = new AtomicBoolean(false);
-	private List<Integer> percents = new ArrayList<>();
 	private Future<?> phaseTask;
 
 	public TheFlamelordAI(Npc owner) {
@@ -30,28 +28,10 @@ public class TheFlamelordAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		addPercent();
-	}
-
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 90:
-						startPhaseTask();
-						break;
-					case 40:
-					case 30:
-					case 20:
-					case 10:
-						startPhaseEvent(percent);
-						break;
-				}
-				break;
-			}
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 90 -> startPhaseTask();
+			case 40, 30, 20, 10 -> startPhaseEvent(phaseHpPercent);
 		}
 	}
 
@@ -126,11 +106,6 @@ public class TheFlamelordAI extends AggressiveNpcAI {
 		}, 1500);
 	}
 
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 90, 40, 30, 20, 10 });
-	}
-
 	private void startPhaseTask() {
 		phaseTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
 
@@ -155,7 +130,6 @@ public class TheFlamelordAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDied() {
-		percents.clear();
 		cancelPhaseTask();
 		getPosition().getWorldMapInstance().setDoorState(118, true);
 		PacketSendUtility.broadcastMessage(getOwner(), 1401121);
@@ -164,7 +138,6 @@ public class TheFlamelordAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDespawned() {
-		percents.clear();
 		cancelPhaseTask();
 		super.handleDespawned();
 	}
@@ -175,15 +148,15 @@ public class TheFlamelordAI extends AggressiveNpcAI {
 			PacketSendUtility.broadcastMessage(getOwner(), 1401118);
 		}
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
 	@Override
 	protected void handleBackHome() {
-		addPercent();
 		cancelPhaseTask();
 		isAggred.set(false);
 		super.handleBackHome();
+		hpPhases.reset();
 	}
 
 }

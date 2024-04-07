@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -22,10 +23,10 @@ import ai.AggressiveNpcAI;
  * @author xTz
  */
 @AIName("illusion_maseter_sharik")
-public class IllusionMasterSharikAI extends AggressiveNpcAI {
+public class IllusionMasterSharikAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
+	private final HpPhases hpPhases = new HpPhases(80);
 	private AtomicBoolean startedEvent = new AtomicBoolean(false);
-	private AtomicBoolean started80PercentEvent = new AtomicBoolean(false);
 	private int position = 1;
 	private int percent = 100;
 	private Future<?> phaseTask;
@@ -47,12 +48,9 @@ public class IllusionMasterSharikAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleCreatureMoved(Creature creature) {
-		if (creature instanceof Player) {
-			final Player player = (Player) creature;
-			if (PositionUtil.getDistance(getOwner(), player) <= 30) {
-				if (startedEvent.compareAndSet(false, true)) {
-					PacketSendUtility.broadcastMessage(getOwner(), 1401112);
-				}
+		if (creature instanceof Player player && PositionUtil.isInRange(getOwner(), player, 30)) {
+			if (startedEvent.compareAndSet(false, true)) {
+				PacketSendUtility.broadcastMessage(getOwner(), 1401112);
 			}
 		}
 	}
@@ -60,22 +58,18 @@ public class IllusionMasterSharikAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		percent = hpPercentage;
-		if (hpPercentage <= 80) {
-			if (started80PercentEvent.compareAndSet(false, true)) {
-				PacketSendUtility.broadcastToMap(getOwner(), 1401136);
-				if (position == 1) {
-					spawn(730446, 738.766f, 317.482f, 911.897f, (byte) 0, 5);
-				} else {
-					spawn(730447, 735.909f, 265.696f, 911.897f, (byte) 0, 278);
-				}
-				startPhaseTask();
-			}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		PacketSendUtility.broadcastToMap(getOwner(), 1401136);
+		if (position == 1) {
+			spawn(730446, 738.766f, 317.482f, 911.897f, (byte) 0, 5);
+		} else {
+			spawn(730447, 735.909f, 265.696f, 911.897f, (byte) 0, 278);
 		}
+		startPhaseTask();
 	}
 
 	private void startPhaseTask() {

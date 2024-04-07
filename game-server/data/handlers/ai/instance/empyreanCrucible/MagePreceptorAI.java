@@ -1,11 +1,11 @@
 package ai.instance.empyreanCrucible;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,23 +20,16 @@ import ai.AggressiveNpcAI;
  * @author Luzien
  */
 @AIName("mage_preceptor")
-public class MagePreceptorAI extends AggressiveNpcAI {
+public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(75, 50, 25);
 
 	public MagePreceptorAI(Npc owner) {
 		super(owner);
 	}
 
 	@Override
-	public void handleSpawned() {
-		super.handleSpawned();
-		addPercents();
-	}
-
-	@Override
 	public void handleDespawned() {
-		percents.clear();
 		despawnNpcs();
 		super.handleDespawned();
 	}
@@ -49,67 +42,50 @@ public class MagePreceptorAI extends AggressiveNpcAI {
 
 	@Override
 	public void handleBackHome() {
-		addPercents();
 		despawnNpcs();
 		super.handleBackHome();
+		hpPhases.reset();
 	}
 
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void startEvent(int percent) {
-		if (percent == 50 || percent == 25) {
-			SkillEngine.getInstance().getSkill(getOwner(), 19606, 10, getTarget()).useNoAnimationSkill();
-		}
-
-		switch (percent) {
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
 			case 75:
 				SkillEngine.getInstance().getSkill(getOwner(), 19605, 10, getTargetPlayer()).useNoAnimationSkill();
 				break;
 			case 50:
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						if (!isDead()) {
-							SkillEngine.getInstance().getSkill(getOwner(), 19609, 10, getOwner()).useNoAnimationSkill();
-							ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-								@Override
-								public void run() {
-									WorldPosition p = getPosition();
-									spawn(282364, p.getX(), p.getY(), p.getZ(), p.getHeading());
-									spawn(282363, p.getX(), p.getY(), p.getZ(), p.getHeading());
-									scheduleSkill(2000);
-								}
-
-							}, 4500);
-
-						}
+				SkillEngine.getInstance().getSkill(getOwner(), 19606, 10, getTarget()).useNoAnimationSkill();
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (!isDead()) {
+						SkillEngine.getInstance().getSkill(getOwner(), 19609, 10, getOwner()).useNoAnimationSkill();
+						ThreadPoolManager.getInstance().schedule(() -> {
+							WorldPosition p = getPosition();
+							spawn(282364, p.getX(), p.getY(), p.getZ(), p.getHeading());
+							spawn(282363, p.getX(), p.getY(), p.getZ(), p.getHeading());
+							scheduleSkill(2000);
+						}, 4500);
 					}
 				}, 3000);
 				break;
 			case 25:
+				SkillEngine.getInstance().getSkill(getOwner(), 19606, 10, getTarget()).useNoAnimationSkill();
 				scheduleSkill(3000);
 				scheduleSkill(9000);
 				scheduleSkill(15000);
 				break;
 		}
-
 	}
 
 	private void scheduleSkill(int delay) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					SkillEngine.getInstance().getSkill(getOwner(), 19605, 10, getTargetPlayer()).useNoAnimationSkill();
-
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead()) {
+				SkillEngine.getInstance().getSkill(getOwner(), 19605, 10, getTargetPlayer()).useNoAnimationSkill();
 			}
 		}, delay);
 	}
@@ -122,21 +98,6 @@ public class MagePreceptorAI extends AggressiveNpcAI {
 			}
 		});
 		return Rnd.get(players);
-	}
-
-	private void checkPercentage(int percentage) {
-		for (Integer percent : percents) {
-			if (percentage <= percent) {
-				percents.remove(percent);
-				startEvent(percent);
-				break;
-			}
-		}
-	}
-
-	private void addPercents() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 75, 50, 25 });
 	}
 
 	private void despawnNpcs() {

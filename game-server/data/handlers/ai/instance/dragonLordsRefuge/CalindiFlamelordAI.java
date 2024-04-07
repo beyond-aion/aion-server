@@ -1,12 +1,11 @@
 package ai.instance.dragonLordsRefuge;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.stream.Collectors;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -21,49 +20,32 @@ import ai.AggressiveNpcAI;
  * @author Cheatkiller, Yeats, Estrayl
  */
 @AIName("IDTiamat_2_calindi_flamelord")
-public class CalindiFlamelordAI extends AggressiveNpcAI {
+public class CalindiFlamelordAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(75, 50, 25, 12);
 
 	public CalindiFlamelordAI(Npc owner) {
 		super(owner);
 	}
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		addPercents();
-	}
-
-	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
-		addPercents();
+		hpPhases.reset();
 	}
 
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
 		blazeEngraving();
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 75:
-					case 50:
-					case 25:
-						startHallucinatoryVictoryEvent();
-						break;
-					case 12:
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20942, 1, 100)));
-						break;
-				}
-				break;
-			}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 75, 50, 25 -> startHallucinatoryVictoryEvent();
+			case 12 -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20942, 1, 100)));
 		}
 	}
 
@@ -102,10 +84,5 @@ public class CalindiFlamelordAI extends AggressiveNpcAI {
 		List<Player> players = getKnownList().getKnownPlayers().values().stream()
 			.filter(player -> !player.isDead() && PositionUtil.isInRange(player, getOwner(), 50)).collect(Collectors.toList());
 		return Rnd.get(players);
-	}
-
-	private void addPercents() {
-		percents.clear();
-		Collections.addAll(percents, 75, 50, 25, 12);
 	}
 }

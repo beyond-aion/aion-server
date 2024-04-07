@@ -1,10 +1,10 @@
 package ai.instance.theShugoEmperorsVault;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
@@ -12,9 +12,9 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
  * @author Yeats
  */
 @AIName("ruthless_jabaraki")
-public class RuthlessJabaraki extends IDSweep_Bosses {
+public class RuthlessJabaraki extends IDSweep_Bosses implements HpPhases.PhaseHandler {
 
-	private List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(96, 80, 60, 45, 40, 35);
 	private List<Npc> spawnedAdds = new ArrayList<>();
 
 	public RuthlessJabaraki(Npc owner) {
@@ -24,40 +24,18 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 96, 80, 60, 45, 40, 35 });
-	}
-
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				switch (percent) {
-					case 95:
-						spawnAdds(1);
-						break;
-					case 80:
-						spawnAdds(1);
-						break;
-					case 65:
-						spawnAdds(2);
-						break;
-					case 50:
-						spawnAdds(3);
-						break;
-					case 35:
-						spawnAdds(4);
-						break;
-					case 20:
-						spawnAdds(5);
-						break;
-				}
-				percents.remove(percent);
-				break;
-			}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 95 -> spawnAdds(1);
+			case 80 -> spawnAdds(1);
+			case 65 -> spawnAdds(2);
+			case 50 -> spawnAdds(3);
+			case 35 -> spawnAdds(4);
+			case 20 -> spawnAdds(5);
 		}
 	}
 
@@ -136,15 +114,14 @@ public class RuthlessJabaraki extends IDSweep_Bosses {
 	}
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		addPercent();
+	protected void handleBackHome() {
+		super.handleBackHome();
+		hpPhases.reset();
 	}
 
 	@Override
 	protected void handleDied() {
 		super.handleDied();
-		percents.clear();
 		getOwner().getController().delete();
 	}
 }

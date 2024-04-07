@@ -1,8 +1,7 @@
 package ai.instance.empyreanCrucible;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.instance.StageType;
@@ -14,9 +13,9 @@ import ai.AggressiveNpcAI;
  * @author Luzien
  */
 @AIName("spectral_warrior")
-public class SpectralWarriorAI extends AggressiveNpcAI {
+public class SpectralWarriorAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private AtomicBoolean isDone = new AtomicBoolean(false);
+	private final HpPhases hpPhases = new HpPhases(50);
 
 	public SpectralWarriorAI(Npc owner) {
 		super(owner);
@@ -25,14 +24,13 @@ public class SpectralWarriorAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage <= 50 && isDone.compareAndSet(false, true)) {
-			getPosition().getWorldMapInstance().getInstanceHandler().onChangeStage(StageType.START_STAGE_6_ROUND_5);
-			ThreadPoolManager.getInstance().schedule(this::resurrectAllies, 2000);
-		}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		getPosition().getWorldMapInstance().getInstanceHandler().onChangeStage(StageType.START_STAGE_6_ROUND_5);
+		ThreadPoolManager.getInstance().schedule(this::resurrectAllies, 2000);
 	}
 
 	private void resurrectAllies() {

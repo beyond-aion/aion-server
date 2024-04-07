@@ -1,10 +1,10 @@
 package ai.instance.drakenspire;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,9 +19,9 @@ import ai.AggressiveNpcAI;
  * @author Estrayl
  */
 @AIName("twin_protector")
-public class TwinProtectorAI extends AggressiveNpcAI {
+public class TwinProtectorAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private final List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(65, 40, 25, 15, 10);
 	private final List<Npc> adds = new ArrayList<>();
 
 	public TwinProtectorAI(Npc owner) {
@@ -31,22 +31,17 @@ public class TwinProtectorAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 65, 40, 15 -> {
-						getOwner().getQueuedSkills().clear();
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21644, 1, 100, 0, 10000))); // Raging Hellfire
-					}
-					case 25, 10 -> spawnAdds(getNpcId() % 2 == 0 ? 855622 : 855621, 20);
-				}
-				break;
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 65, 40, 15 -> {
+				getOwner().getQueuedSkills().clear();
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21644, 1, 100, 0, 10000))); // Raging Hellfire
 			}
+			case 25, 10 -> spawnAdds(getNpcId() % 2 == 0 ? 855622 : 855621, 20);
 		}
 	}
 
@@ -70,21 +65,10 @@ public class TwinProtectorAI extends AggressiveNpcAI {
 		}
 	}
 
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, 65, 40, 25, 15, 10);
-	}
-
 	private void despawnAdds() {
 		for (Npc npc : adds)
 			if (npc != null)
 				npc.getController().delete();
-	}
-
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		addPercent();
 	}
 
 	@Override
@@ -95,9 +79,8 @@ public class TwinProtectorAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleBackHome() {
-		addPercent();
 		despawnAdds();
 		super.handleBackHome();
+		hpPhases.reset();
 	}
-
 }

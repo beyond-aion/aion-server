@@ -1,6 +1,9 @@
 package ai.worlds.inggison;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collection;
+import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -9,6 +12,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -31,9 +35,9 @@ import ai.AggressiveNpcAI;
  * @author Estrayl
  */
 @AIName("sematariux")
-public class SematariuxAI extends AggressiveNpcAI {
+public class SematariuxAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private List<Integer> hpEvents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(90, 70, 50, 30, 20, 10, 5);
 	private AtomicInteger deadThunderShields = new AtomicInteger();
 	private AtomicBoolean isEggEventActive = new AtomicBoolean();
 	// private long shieldRemovalStamp;
@@ -46,7 +50,6 @@ public class SematariuxAI extends AggressiveNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().applyEffectDirectly(19186, getOwner(), getOwner()), 3000);
-		initHpEvents();
 		spawnShieldNpcs();
 	}
 
@@ -66,28 +69,14 @@ public class SematariuxAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer hpEvent : hpEvents) {
-			if (hpPercentage <= hpEvent) {
-				hpEvents.remove(hpEvent);
-				switch (hpEvent) {
-					case 90:
-					case 70:
-					case 50:
-					case 30:
-					case 20:
-					case 10:
-						spawnTornado();
-						break;
-					case 5:
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(18730, 1, 100, 0, 3000))); // Berserk State
-						break;
-				}
-				break;
-			}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 90, 70, 50, 30, 20, 10 -> spawnTornado();
+			case 5 -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(18730, 1, 100, 0, 3000))); // Berserk State
 		}
 	}
 
@@ -149,8 +138,8 @@ public class SematariuxAI extends AggressiveNpcAI {
 		// deadThunderShields.set(0);
 		// ThreadPoolManager.getInstance().schedule(this::spawnShieldNpcs, Rnd.get(120, 300), TimeUnit.MINUTES);
 		// }
+		hpPhases.reset();
 		despawnNpcs(Arrays.asList(281453, 281451, 281931, 281932, 281933));
-		initHpEvents();
 	}
 
 	@Override
@@ -205,10 +194,5 @@ public class SematariuxAI extends AggressiveNpcAI {
 				handleObservedNpcDied(npc);
 			}
 		});
-	}
-
-	private void initHpEvents() {
-		hpEvents.clear();
-		Collections.addAll(hpEvents, 90, 70, 50, 30, 20, 10, 5);
 	}
 }

@@ -1,9 +1,8 @@
 package ai.instance.azoturanFortress;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
@@ -14,9 +13,9 @@ import ai.AggressiveNpcAI;
  * @modified Neon
  */
 @AIName("betrayericaronix")
-public class BetrayerIcaronixAI extends AggressiveNpcAI {
+public class BetrayerIcaronixAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private AtomicBoolean isStartEvent = new AtomicBoolean();
+	private final HpPhases hpPhases = new HpPhases(50);
 
 	public BetrayerIcaronixAI(Npc owner) {
 		super(owner);
@@ -25,14 +24,13 @@ public class BetrayerIcaronixAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage <= 50 && isStartEvent.compareAndSet(false, true)) { // icaronix transforms at 50% hp
-			Npc icaronixTheBetrayer = (Npc) spawn(214599, getPosition().getX(), getPosition().getY(), getPosition().getZ(), getPosition().getHeading());
-			icaronixTheBetrayer.getLifeStats().setCurrentHpPercent(50);
-			AIActions.deleteOwner(this);
-		}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		Npc icaronixTheBetrayer = (Npc) spawn(214599, getPosition().getX(), getPosition().getY(), getPosition().getZ(), getPosition().getHeading());
+		icaronixTheBetrayer.getLifeStats().setCurrentHpPercent(50);
+		AIActions.deleteOwner(this);
 	}
 }

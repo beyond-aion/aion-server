@@ -1,9 +1,9 @@
 package ai.instance.abyssal_splinter;
 
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -16,9 +16,9 @@ import ai.AggressiveNpcAI;
  * @author Ritsu, Luzien
  */
 @AIName("ebonsoul")
-public class EbonsoulAI extends AggressiveNpcAI {
+public class EbonsoulAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private final AtomicBoolean isHome = new AtomicBoolean(true);
+	private final HpPhases hpPhases = new HpPhases(95);
 	private Future<?> skillTask;
 
 	public EbonsoulAI(Npc owner) {
@@ -28,13 +28,12 @@ public class EbonsoulAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage <= 95 && isHome.compareAndSet(true, false)) {
-			startSkillTask();
-		}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		startSkillTask();
 	}
 
 	private void startSkillTask() {
@@ -67,7 +66,7 @@ public class EbonsoulAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		super.handleBackHome();
 		cancelTask();
-		isHome.set(true);
+		hpPhases.reset();
 		getEffectController().removeEffect(19266);
 	}
 

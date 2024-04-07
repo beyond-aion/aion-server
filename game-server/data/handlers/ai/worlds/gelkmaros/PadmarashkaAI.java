@@ -1,13 +1,12 @@
 package ai.worlds.gelkmaros;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -19,7 +18,6 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.world.WorldPosition;
 
 import ai.AggressiveNpcAI;
 
@@ -27,9 +25,9 @@ import ai.AggressiveNpcAI;
  * @author Estrayl
  */
 @AIName("padmarashka_world_boss")
-public class PadmarashkaAI extends AggressiveNpcAI {
+public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private List<Integer> hpEvents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(33, 5);
 	private AtomicInteger deadProtectors = new AtomicInteger();
 
 	public PadmarashkaAI(Npc owner) {
@@ -40,37 +38,27 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().applyEffectDirectly(19186, getOwner(), getOwner()), 3000);
-		initHpEvents();
 		spawnShieldNpcs();
 	}
 
 	private void spawnShieldNpcs() {
-		spawnAndObserveNpc(281938, new WorldPosition(220070000, 2906.05f, 865.15f, 35.289f, (byte) 107));
-		spawnAndObserveNpc(281939, new WorldPosition(220070000, 2920.70f, 878.94f, 35.289f, (byte) 94));
-		spawnAndObserveNpc(281940, new WorldPosition(220070000, 2952.03f, 878.61f, 35.266f, (byte) 81));
-		spawnAndObserveNpc(281941, new WorldPosition(220070000, 2963.97f, 859.07f, 35.289f, (byte) 69));
+		spawnAndObserveNpc(281938, 2906.05f, 865.15f, 35.289f, (byte) 107);
+		spawnAndObserveNpc(281939, 2920.70f, 878.94f, 35.289f, (byte) 94);
+		spawnAndObserveNpc(281940, 2952.03f, 878.61f, 35.266f, (byte) 81);
+		spawnAndObserveNpc(281941, 2963.97f, 859.07f, 35.289f, (byte) 69);
 	}
 
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer hpEvent : hpEvents) {
-			if (hpPercentage <= hpEvent) {
-				hpEvents.remove(hpEvent);
-				switch (hpEvent) {
-					case 33:
-						spawnRockSlides();
-						break;
-					case 3:
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(18730, 1, 100, 0, 3000))); // Berserk State
-						break;
-				}
-				break;
-			}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 33 -> spawnRockSlides();
+			case 5 -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(18730, 1, 100, 0, 3000))); // Berserk State
 		}
 	}
 
@@ -93,13 +81,8 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
+		hpPhases.reset();
 		despawnNpcs(Arrays.asList(281936));
-		initHpEvents();
-	}
-
-	@Override
-	protected void handleDied() {
-		super.handleDied();
 	}
 
 	@Override
@@ -127,8 +110,8 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 		}
 	}
 
-	private void spawnAndObserveNpc(int npcId, WorldPosition pos) {
-		Npc npc = (Npc) spawn(npcId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
+	private void spawnAndObserveNpc(int npcId, float x, float y, float z, byte h) {
+		Npc npc = (Npc) spawn(npcId, x, y, z, h);
 		npc.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) {
 
 			@Override
@@ -136,10 +119,5 @@ public class PadmarashkaAI extends AggressiveNpcAI {
 				handleObservedNpcDied(npc);
 			}
 		});
-	}
-
-	private void initHpEvents() {
-		hpEvents.clear();
-		Collections.addAll(hpEvents, 33, 5);
 	}
 }

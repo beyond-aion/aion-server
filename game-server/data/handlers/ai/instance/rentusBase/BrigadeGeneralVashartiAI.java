@@ -1,7 +1,5 @@
 package ai.instance.rentusBase;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.Objects;
 import java.util.concurrent.Future;
@@ -11,6 +9,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
@@ -34,9 +33,9 @@ import ai.AggressiveNpcAI;
  * @author xTz, Yeats, Estrayl
  */
 @AIName("brigade_general_vasharti")
-public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
+public class BrigadeGeneralVashartiAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(75, 50, 25, 10);
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private AtomicBoolean isInFlameShowerEvent = new AtomicBoolean();
 	private Future<?> enrageSchedule, flameShieldBuffSchedule, seaOfFireSpawnTask;
@@ -53,21 +52,15 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 			enrageSchedule = ThreadPoolManager.getInstance().schedule(this::handleEnrageEvent, 10, TimeUnit.MINUTES);
 			scheduleFlameShieldBuffEvent(5000);
 		}
-		checkPercentage(getLifeStats().getHpPercentage());
+		if (!isInFlameShowerEvent.get())
+			hpPhases.tryEnterNextPhase(this);
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		if (isInFlameShowerEvent.get())
-			return;
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				cancelTasks(flameShieldBuffSchedule);
-				getOwner().getQueuedSkills().clear();
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20532, 1, 100, 0, 10000))); // off (skill name)
-				break;
-			}
-		}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		cancelTasks(flameShieldBuffSchedule);
+		getOwner().getQueuedSkills().clear();
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20532, 1, 100, 0, 10000))); // off (skill name)
 	}
 
 	private void scheduleFlameShieldBuffEvent(int delay) {
@@ -188,21 +181,10 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 		npcs.stream().filter(Objects::nonNull).forEach(npc -> npc.getController().delete());
 	}
 
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, 75, 50, 25, 10);
-	}
-
 	private void cancelTasks(Future<?>... tasks) {
 		for (Future<?> task : tasks)
 			if (task != null && !task.isCancelled())
 				task.cancel(true);
-	}
-
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		addPercent();
 	}
 
 	@Override
@@ -214,12 +196,12 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleBackHome() {
-		addPercent();
 		isHome.set(true);
 		getPosition().getWorldMapInstance().setDoorState(70, true);
 		cancelTasks(enrageSchedule, flameShieldBuffSchedule, seaOfFireSpawnTask);
 		clearSpawns();
 		super.handleBackHome();
+		hpPhases.reset();
 	}
 
 	@Override

@@ -1,12 +1,11 @@
 package ai.worlds.heiron;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -20,9 +19,9 @@ import ai.AggressiveNpcAI;
  */
 
 @AIName("bollvig")
-public class BollvigAI extends AggressiveNpcAI {
+public class BollvigAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	protected List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(75, 50, 25);
 	private Future<?> firstTask;
 	private Future<?> secondTask;
 	private Future<?> thirdTask;
@@ -34,7 +33,6 @@ public class BollvigAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleSpawned() {
-		addPercent();
 		super.handleSpawned();
 		Npc npc = getPosition().getWorldMapInstance().getNpc(204655);
 		if (npc != null)
@@ -44,26 +42,21 @@ public class BollvigAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 75:
-					case 50:
-						cancelTask();
-						useFirstSkillTree();
-						break;
-					case 25:
-						cancelTask();
-						firstSkill();
-						break;
-				}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 75:
+			case 50:
+				cancelTask();
+				useFirstSkillTree();
 				break;
-			}
+			case 25:
+				cancelTask();
+				firstSkill();
+				break;
 		}
 	}
 
@@ -128,21 +121,15 @@ public class BollvigAI extends AggressiveNpcAI {
 		SkillEngine.getInstance().getSkill(getOwner(), skillId, 50, getTarget()).useSkill();
 	}
 
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, 75, 50, 25);
-	}
-
 	@Override
 	protected void handleBackHome() {
-		addPercent();
 		cancelTask();
 		super.handleBackHome();
+		hpPhases.reset();
 	}
 
 	@Override
 	protected void handleDespawned() {
-		percents.clear();
 		cancelTask();
 		deleteSummons(280802);
 		deleteSummons(280803);
@@ -154,7 +141,6 @@ public class BollvigAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDied() {
-		percents.clear();
 		cancelTask();
 		deleteSummons(280802);
 		deleteSummons(280803);
@@ -175,9 +161,6 @@ public class BollvigAI extends AggressiveNpcAI {
 
 	private boolean checkNpc() {
 		WorldMapInstance map = getPosition().getWorldMapInstance();
-		if (map.getNpc(204655) == null && (map.getNpc(212314) == null || map.getNpc(212314).isDead()))
-			return true;
-
-		return false;
+		return map.getNpc(204655) == null && (map.getNpc(212314) == null || map.getNpc(212314).isDead());
 	}
 }

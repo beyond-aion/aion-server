@@ -2,10 +2,10 @@ package ai.instance.empyreanCrucible;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,10 +20,9 @@ import ai.AggressiveNpcAI;
  * @author Luzien
  */
 @AIName("priest_preceptor")
-public class PriestPreceptorAI extends AggressiveNpcAI {
+public class PriestPreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private AtomicBoolean is75EventStarted = new AtomicBoolean(false);
-	private AtomicBoolean is25EventStarted = new AtomicBoolean(false);
+	private final HpPhases hpPhases = new HpPhases(75, 25);
 
 	public PriestPreceptorAI(Npc owner) {
 		super(owner);
@@ -32,41 +31,26 @@ public class PriestPreceptorAI extends AggressiveNpcAI {
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();
-
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				SkillEngine.getInstance().getSkill(getOwner(), 19612, 15, getOwner()).useNoAnimationSkill();
-			}
-
-		}, 1000);
-
+		ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().getSkill(getOwner(), 19612, 15, getOwner()).useNoAnimationSkill(), 1000);
 	}
 
 	@Override
 	public void handleBackHome() {
-		is75EventStarted.set(false);
-		is25EventStarted.set(false);
 		super.handleBackHome();
+		hpPhases.reset();
 	}
 
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void checkPercentage(int percentage) {
-		if (percentage <= 75) {
-			if (is75EventStarted.compareAndSet(false, true)) {
-				SkillEngine.getInstance().getSkill(getOwner(), 19611, 10, getTargetPlayer()).useNoAnimationSkill();
-			}
-		}
-		if (percentage <= 25) {
-			if (is25EventStarted.compareAndSet(false, true)) {
-				startEvent();
-			}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 75 -> SkillEngine.getInstance().getSkill(getOwner(), 19611, 10, getTargetPlayer()).useNoAnimationSkill();
+			case 25 -> startEvent();
 		}
 	}
 

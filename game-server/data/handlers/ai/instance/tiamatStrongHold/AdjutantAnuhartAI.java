@@ -1,12 +1,8 @@
 package ai.instance.tiamatStrongHold;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -16,14 +12,12 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Cheatkiller
- * @modified Estrayl
+ * @author Cheatkiller, Estrayl
  */
 @AIName("adjutantanuhart")
-public class AdjutantAnuhartAI extends AggressiveNpcAI {
+public class AdjutantAnuhartAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private AtomicBoolean isHome = new AtomicBoolean(true);
-	private List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(50, 25, 10);
 
 	public AdjutantAnuhartAI(Npc owner) {
 		super(owner);
@@ -32,7 +26,7 @@ public class AdjutantAnuhartAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
 	@Override
@@ -50,52 +44,23 @@ public class AdjutantAnuhartAI extends AggressiveNpcAI {
 			getEffectController().unsetAbnormal(AbnormalState.SANCTUARY);
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 50:
-						chooseBuff(20938);
-						break;
-					case 25:
-						chooseBuff(20939);
-						break;
-					case 10:
-						chooseBuff(20940);
-						break;
-				}
-
-				break;
-			}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 50 -> useSelfBuff(20938);
+			case 25 -> useSelfBuff(20939);
+			case 10 -> useSelfBuff(20940);
 		}
 	}
 
-	private void chooseBuff(int buff) {
+	private void useSelfBuff(int buffSkillId) {
 		AIActions.targetSelf(this);
-		AIActions.useSkill(this, buff);
-	}
-
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 50, 25, 10 });
-	}
-
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		addPercent();
+		AIActions.useSkill(this, buffSkillId);
 	}
 
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
-		addPercent();
-		isHome.set(true);
-	}
-
-	@Override
-	protected void handleDespawned() {
-		super.handleDespawned();
+		hpPhases.reset();
 	}
 }

@@ -1,13 +1,12 @@
 package ai.instance.infinityShard;
 
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
@@ -31,15 +30,13 @@ import com.aionemu.gameserver.world.WorldPosition;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Cheatkiller
- * @reworked Yeats 26.04.2016
- * @modified Estrayl March 6th, 2018
+ * @author Cheatkiller, Yeats, Estrayl
  */
 @AIName("hyperion")
-public class HyperionAI extends AggressiveNpcAI {
+public class HyperionAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
+	private final HpPhases hpPhases = new HpPhases(100, 80, 75, 67, 65, 55, 50, 45, 40, 30, 25, 20, 17, 10);
 	private List<Integer> possibleSummons = Arrays.asList(231096, 231097, 231098, 231099, 231100, 231101);
-	private List<Integer> percents = new ArrayList<>();
 	private WorldPosition northernSpawnPos = new WorldPosition(getPosition().getMapId(), 112.006f, 122.894f, 123.303f, (byte) 0);
 	private WorldPosition southernSpawnPos = new WorldPosition(getPosition().getMapId(), 148.127f, 150.346f, 123.729f, (byte) 0);
 	private Future<?> spawnTask;
@@ -48,12 +45,6 @@ public class HyperionAI extends AggressiveNpcAI {
 
 	public HyperionAI(Npc owner) {
 		super(owner);
-	}
-
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		addPercent();
 	}
 
 	@Override
@@ -67,7 +58,7 @@ public class HyperionAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleAttack(Creature creature) {
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 		super.handleAttack(creature);
 	}
 
@@ -97,45 +88,24 @@ public class HyperionAI extends AggressiveNpcAI {
 		return Rnd.get(AttackHandAnimation.values());
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 100:
-						queuePowerfulEnergyBlast();
-						break;
-					case 75:
-						spawnSummons(++stage);
-					case 80:
-					case 67:
-						spawnAncientTyrhund(2);
-						break;
-					case 55:
-						spawnAncientTyrhund(3);
-						break;
-					case 45:
-					case 30:
-					case 17:
-						spawnAncientTyrhund(4);
-						break;
-					case 65:
-					case 50:
-					case 25:
-					case 20:
-						stage++;
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21253, 56, 100, 0, 0)));
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21244, 56, 100, 0, 5000)));
-						break;
-					case 40:
-						spawnSummons(++stage);
-						break;
-					case 10:
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21246, 56, 100)));
-						break;
-				}
-				break;
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 100 -> queuePowerfulEnergyBlast();
+			case 75 -> {
+				spawnSummons(++stage);
+				spawnAncientTyrhund(2);
 			}
+			case 80, 67 -> spawnAncientTyrhund(2);
+			case 55 -> spawnAncientTyrhund(3);
+			case 45, 30, 17 -> spawnAncientTyrhund(4);
+			case 65, 50, 25, 20 -> {
+				stage++;
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21253, 56, 100, 0, 0)));
+				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21244, 56, 100, 0, 5000)));
+			}
+			case 40 -> spawnSummons(++stage);
+			case 10 -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21246, 56, 100)));
 		}
 	}
 
@@ -225,7 +195,7 @@ public class HyperionAI extends AggressiveNpcAI {
 	}
 
 	private void spawnWithWalker(int npcId, Point3D p, String walkerId) {
-		Npc npc = (Npc) spawn(npcId == 0 ? Rnd.get(possibleSummons) : 231103, p.getX(), p.getY(), p.getZ(), (byte) 0);
+		Npc npc = (Npc) spawn(npcId == 0 ? Rnd.get(possibleSummons) : npcId, p.getX(), p.getY(), p.getZ(), (byte) 0);
 		if (walkerId != null) {
 			ThreadPoolManager.getInstance().schedule(() -> {
 				if (npc.isDead())
@@ -272,18 +242,11 @@ public class HyperionAI extends AggressiveNpcAI {
 	protected void handleDespawned() {
 		cancelSpawnTask();
 		super.handleDespawned();
-		percents.clear();
 	}
 
 	@Override
 	protected void handleDied() {
 		cancelSpawnTask();
 		super.handleDied();
-		percents.clear();
-	}
-
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, 100, 80, 75, 67, 65, 55, 50, 45, 40, 30, 25, 20, 17, 10);
 	}
 }

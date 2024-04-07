@@ -1,23 +1,19 @@
 package ai.instance.darkPoeta;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.OneDmgNoActionAI;
 
 /**
- * @author Ritsu
- * @modified Estrayl 12.06.2017
+ * @author Ritsu, Estrayl
  */
 @AIName("balaurbarricade")
-public class BalaurBarricadeAI extends OneDmgNoActionAI {
+public class BalaurBarricadeAI extends OneDmgNoActionAI implements HpPhases.PhaseHandler {
 
-	protected List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(50, 10);
 
 	public BalaurBarricadeAI(Npc owner) {
 		super(owner);
@@ -26,23 +22,14 @@ public class BalaurBarricadeAI extends OneDmgNoActionAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 50:
-						spawnProtectors(true);
-						break;
-					case 10:
-						spawnProtectors(false);
-						break;
-				}
-				break;
-			}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 50 -> spawnProtectors(true);
+			case 10 -> spawnProtectors(false);
 		}
 	}
 
@@ -63,20 +50,9 @@ public class BalaurBarricadeAI extends OneDmgNoActionAI {
 		}
 	}
 
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 50, 10 });
-	}
-
-	@Override
-	protected void handleSpawned() {
-		addPercent();
-		super.handleSpawned();
-	}
-
 	@Override
 	protected void handleBackHome() {
-		addPercent();
 		super.handleBackHome();
+		hpPhases.reset();
 	}
 }

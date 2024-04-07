@@ -1,12 +1,11 @@
 package ai.instance.empyreanCrucible;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -20,9 +19,9 @@ import ai.AggressiveNpcAI;
  * @author Luzien
  */
 @AIName("king_consierd")
-public class KingConsierdAI extends AggressiveNpcAI {
+public class KingConsierdAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(75, 25);
 	private AtomicBoolean isHome = new AtomicBoolean(true);
 	private Future<?> eventTask;
 	private Future<?> skillTask;
@@ -32,15 +31,8 @@ public class KingConsierdAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void handleSpawned() {
-		super.handleSpawned();
-		addPercents();
-	}
-
-	@Override
 	public void handleDespawned() {
 		cancelTasks();
-		percents.clear();
 		super.handleDespawned();
 	}
 
@@ -54,15 +46,15 @@ public class KingConsierdAI extends AggressiveNpcAI {
 	@Override
 	public void handleBackHome() {
 		cancelTasks();
-		addPercents();
 		despawnNpcs(getPosition().getWorldMapInstance().getNpcs(282378));
 		super.handleBackHome();
+		hpPhases.reset();
 	}
 
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 		if (isHome.compareAndSet(true, false)) {
 			startBloodThirstTask();
 
@@ -82,6 +74,14 @@ public class KingConsierdAI extends AggressiveNpcAI {
 
 				}
 			}, 2000);
+		}
+	}
+
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 75 -> startSkillTask();
+			case 25 -> SkillEngine.getInstance().getSkill(getOwner(), 19690, 1, getTarget()).useNoAnimationSkill();
 		}
 	}
 
@@ -150,25 +150,6 @@ public class KingConsierdAI extends AggressiveNpcAI {
 		if (skillTask != null && !skillTask.isCancelled()) {
 			skillTask.cancel(true);
 		}
-	}
-
-	private void checkPercentage(int percentage) {
-		for (Integer percent : percents) {
-			if (percentage <= percent) {
-				percents.remove(percent);
-				if (percent == 75) {
-					startSkillTask();
-				} else if (percent == 25) {
-					SkillEngine.getInstance().getSkill(getOwner(), 19690, 1, getTarget()).useNoAnimationSkill();
-				}
-				break;
-			}
-		}
-	}
-
-	private void addPercents() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 75, 25 });
 	}
 
 	private void despawnNpcs(List<Npc> npcs) {

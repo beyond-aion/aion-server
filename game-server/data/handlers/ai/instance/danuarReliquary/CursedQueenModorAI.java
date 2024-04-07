@@ -1,12 +1,12 @@
 package ai.instance.danuarReliquary;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.animations.AttackHandAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -29,9 +29,9 @@ import ai.AggressiveNpcAI;
  * @author Yeats
  */
 @AIName("cursed_queen_modor")
-public class CursedQueenModorAI extends AggressiveNpcAI {
+public class CursedQueenModorAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(100, 81, 77, 61, 50);
 	private List<Vector3f> platformLocations = new ArrayList<>(5);
 	private AtomicInteger stage = new AtomicInteger();
 	private float multiplier = 1f;
@@ -44,7 +44,6 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		addPercent();
 		addPlatformLocations();
 	}
 
@@ -55,46 +54,38 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleAttack(Creature creature) {
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 		super.handleAttack(creature);
+	}
 
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 100:
+				queueSkill(21181, 1); // Malevolence
+				queueSkill(21171, 1); // Grendal's Explosive Wrath
+				break;
+			case 81:
+				PacketSendUtility.broadcastMessage(getOwner(), 1500741);
+				queueSkill(21171, 1); // Grendal's Explosive Wrath
+				queueSkill(21229, 1);  // Dragon Lords Lightning Shock
+				break;
+			case 77:
+				queueSkill(21165, 2, 4000);
+				queueSkill(21179, 1, 4000); // ice storm when going up 1st time
+				break;
+			case 61:
+				queueSkill(21165, 3);
+				break;
+			case 50:
+				queueSkill(21175, 4);
+				break;
+		}
 	}
 
 	@Override
 	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		return damage * multiplier;  // fix skill dmg until new calculations are available
-	}
-
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 100:
-						queueSkill(21181, 1); // Malevolence
-						queueSkill(21171, 1); // Grendal's Explosive Wrath
-						break;
-					case 81:
-						PacketSendUtility.broadcastMessage(getOwner(), 1500741);
-						queueSkill(21171, 1); // Grendal's Explosive Wrath
-						queueSkill(21229, 1);  // Dragon Lords Lightning Shock
-						break;
-					case 77:
-						queueSkill(21165, 2, 4000);
-						queueSkill(21179, 1, 4000); // ice storm when going up 1st time
-						break;
-					case 61:
-						queueSkill(21165, 3);
-						break;
-					case 50:
-						queueSkill(21175, 4);
-						break;
-					default:
-						break;
-				}
-				break;
-			}
-		}
 	}
 
 	@Override
@@ -277,11 +268,6 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 		}, 500);
 	}
 
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, 100, 81, 77, 61, 50);
-	}
-
 	private void addPlatformLocations() {
 		platformLocations.clear();
 		platformLocations.add(new Vector3f(255.49063f, 293.35785f, 253.79933f));
@@ -300,7 +286,7 @@ public class CursedQueenModorAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		super.handleBackHome();
 		stage.set(0);
-		addPercent();
+		hpPhases.reset();
 		addPlatformLocations();
 		World.getInstance().updatePosition(getOwner(), 256.62f, 257.79f, 241.79f, (byte) 90);
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_HEADING_UPDATE(getOwner()));

@@ -1,12 +1,9 @@
 package ai.instance.nightmareCircus;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.Future;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -18,45 +15,28 @@ import ai.AggressiveNpcAI;
  * @author Ritsu
  */
 @AIName("nightmarelordheiramune")
-public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
+public class NightmareLordHeiramuneAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private AtomicBoolean isHome = new AtomicBoolean(true);
+	private final HpPhases hpPhases = new HpPhases(80, 50);
 	private Future<?> spawnTask;
-	protected List<Integer> percents = new ArrayList<>();
 
 	public NightmareLordHeiramuneAI(Npc owner) {
 		super(owner);
 	}
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		addPercent();
-	}
-
-	private synchronized void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, 80, 50);
+	protected void handleAttack(Creature creature) {
+		super.handleAttack(creature);
+		hpPhases.tryEnterNextPhase(this);
 	}
 
 	@Override
-	protected void handleAttack(Creature creature) {
-		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
-	}
-
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 80 -> startSpawnTask();
-					case 50 -> {
-						PacketSendUtility.broadcastMessage(getOwner(), 1501138);
-						spawn(233162, getOwner().getX() + 5, getOwner().getY() + 5, getOwner().getZ(), getOwner().getHeading());
-					}
-				}
-				break;
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 80 -> startSpawnTask();
+			case 50 -> {
+				PacketSendUtility.broadcastMessage(getOwner(), 1501138);
+				spawn(233162, getOwner().getX() + 5, getOwner().getY() + 5, getOwner().getZ(), getOwner().getHeading());
 			}
 		}
 	}
@@ -92,8 +72,7 @@ public class NightmareLordHeiramuneAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		super.handleBackHome();
 		cancelTask();
-		addPercent();
-		isHome.set(true);
+		hpPhases.reset();
 	}
 
 	private void despawnNpcs(int... npcIds) {

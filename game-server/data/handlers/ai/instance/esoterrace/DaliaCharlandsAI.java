@@ -1,10 +1,7 @@
 package ai.instance.esoterrace;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.EmotionType;
@@ -20,48 +17,32 @@ import ai.AggressiveNpcAI;
  * @author xTz
  */
 @AIName("dalia_charlands")
-public class DaliaCharlandsAI extends AggressiveNpcAI {
+public class DaliaCharlandsAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(75, 50, 25);
 
 	public DaliaCharlandsAI(Npc owner) {
 		super(owner);
 	}
 
 	@Override
-	protected void handleSpawned() {
-		addPercent();
-		super.handleSpawned();
+	protected void handleAttack(Creature creature) {
+		super.handleAttack(creature);
+		if (hpPhases.getCurrentPhase() > 0 && getLifeStats().getHpPercentage() > 80)
+			hpPhases.reset();
+		else
+			hpPhases.tryEnterNextPhase(this);
 	}
 
 	@Override
-	protected void handleAttack(Creature creature) {
-		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
-	}
-
-	private void checkPercentage(int hpPercentage) {
-		if (hpPercentage > 80 && percents.size() < 3) {
-			addPercent();
-		}
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 75:
-					case 50:
-					case 25:
-						spawnHelpers();
-						break;
-				}
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 75:
+			case 50:
+			case 25:
+				spawnHelpers();
 				break;
-			}
 		}
-	}
-
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 75, 50, 25 });
 	}
 
 	private void spawnHelpers() {
@@ -77,22 +58,10 @@ public class DaliaCharlandsAI extends AggressiveNpcAI {
 		PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED, 0, npc.getObjectId()));
 	}
 
-	@Override
-	protected void handleDespawned() {
-		percents.clear();
-		super.handleDespawned();
-	}
-
-	@Override
-	protected void handleDied() {
-		percents.clear();
-		super.handleDied();
-	}
 
 	@Override
 	protected void handleBackHome() {
-		addPercent();
 		super.handleBackHome();
+		hpPhases.reset();
 	}
-
 }

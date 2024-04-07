@@ -1,15 +1,11 @@
 package ai.instance.theobomosLab;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 import ai.AggressiveNpcAI;
@@ -18,9 +14,9 @@ import ai.AggressiveNpcAI;
  * @author Ritsu
  */
 @AIName("silikor")
-public class SilikorofMemoryAI extends AggressiveNpcAI {
+public class SilikorofMemoryAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	protected List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(50, 25, 10);
 
 	public SilikorofMemoryAI(Npc owner) {
 		super(owner);
@@ -29,18 +25,13 @@ public class SilikorofMemoryAI extends AggressiveNpcAI {
 	@Override
 	protected void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				sp(281054);
-				sp(281053);
-				break;
-			}
-		}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		sp(281054);
+		sp(281053);
 	}
 
 	private void sp(int npcId) {
@@ -52,49 +43,22 @@ public class SilikorofMemoryAI extends AggressiveNpcAI {
 		spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), p.getHeading());
 	}
 
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 50, 25, 10 });
-	}
-
-	private void deleteNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
-			if (npc != null) {
-				npc.getController().delete();
-			}
-		}
-	}
-
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		switch (this.getNpcId()) {
-			case 214668:
-				SkillEngine.getInstance().getSkill(getOwner(), 18481, 1, getOwner()).useSkill();
-				break;
-		}
+		if (getNpcId() == 214668)
+			SkillEngine.getInstance().getSkill(getOwner(), 18481, 1, getOwner()).useSkill();
 	}
 
 	@Override
 	protected void handleBackHome() {
-		addPercent();
 		super.handleBackHome();
-	}
-
-	@Override
-	protected void handleDespawned() {
-		percents.clear();
-		super.handleDespawned();
+		hpPhases.reset();
 	}
 
 	@Override
 	protected void handleDied() {
-		WorldMapInstance instance = getPosition().getWorldMapInstance();
-		if (instance != null) {
-			deleteNpcs(instance.getNpcs(281054));
-			deleteNpcs(instance.getNpcs(281053));
-		}
-		percents.clear();
+		getPosition().getWorldMapInstance().getNpcs(281054, 281053).forEach(npc -> npc.getController().delete());
 		super.handleDied();
 	}
 

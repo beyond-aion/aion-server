@@ -1,7 +1,6 @@
 package ai.instance.tiamatStrongHold;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -9,6 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -19,7 +19,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.WorldMapInstance;
 
 import ai.AggressiveNpcAI;
 
@@ -28,14 +27,12 @@ import ai.AggressiveNpcAI;
  * @modified Luzien
  */
 @AIName("brigadegeneraltahabata")
-public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
+public class BrigadeGeneralTahabataAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
+	private final HpPhases hpPhases = new HpPhases(96, 75, 60, 55, 40, 25, 20, 10, 7);
 	private AtomicBoolean isHome = new AtomicBoolean(true);
-	private AtomicBoolean isEndPiercingStrike = new AtomicBoolean(true);
 	private Future<?> piercingStrikeTask;
-	private AtomicBoolean isEndFireStorm = new AtomicBoolean(true);
 	private Future<?> fireStormTask;
-	protected List<Integer> percents = new ArrayList<>();
 
 	public BrigadeGeneralTahabataAI(Npc owner) {
 		super(owner);
@@ -46,29 +43,19 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 		super.handleAttack(creature);
 		if (isHome.compareAndSet(true, false))
 			getPosition().getWorldMapInstance().setDoorState(610, false);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
 	private void startPiercingStrikeTask() {
-		piercingStrikeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead())
-					cancelPiercingStrike();
-				else {
-					startPiercingStrikeEvent();
-				}
-			}
-
+		piercingStrikeTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (!isDead())
+				startPiercingStrikeEvent();
 		}, 15000, 20000);
 	}
 
 	private void startFireStormTask() {
 		fireStormTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-			if (isDead())
-				cancelFireStorm();
-			else
+			if (!isDead())
 				startFireStormEvent();
 		}, 10000, 20000);
 	}
@@ -91,14 +78,7 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 	}
 
 	private void useMultiSkill() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.useSkill(BrigadeGeneralTahabataAI.this, 20755);
-			}
-
-		}, 3000);
+		ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(BrigadeGeneralTahabataAI.this, 20755), 3000);
 	}
 
 	private void teleportRandomPlayer() {
@@ -128,46 +108,39 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 		}
 	}
 
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 96:
-						lavaEruptionEvent(283116);// 4.0
-						if (isEndPiercingStrike.compareAndSet(true, false))
-							startPiercingStrikeTask();
-						break;
-					case 75:
-						AIActions.useSkill(this, 20761);
-						if (isEndFireStorm.compareAndSet(true, false))
-							startFireStormTask();
-						break;
-					case 60:
-						AIActions.useSkill(this, 20761);
-						break;
-					case 55:
-						lavaEruptionEvent(283118);// 4.0
-						break;
-					case 40:
-					case 25:
-						AIActions.useSkill(this, 20761);
-						break;
-					case 20:
-						cancelFireStorm();
-						cancelPiercingStrike();
-						lavaEruptionEvent(283120);// 4.0
-						break;
-					case 10:
-						AIActions.useSkill(this, 20942);
-						break;
-					case 7:
-						AIActions.useSkill(this, 20883);
-						spawn(283102, 679.88f, 1068.88f, 497.88f, (byte) 0);// 4.0
-						break;
-				}
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 96:
+				lavaEruptionEvent(283116);// 4.0
+				startPiercingStrikeTask();
 				break;
-			}
+			case 75:
+				AIActions.useSkill(this, 20761);
+				startFireStormTask();
+				break;
+			case 60:
+				AIActions.useSkill(this, 20761);
+				break;
+			case 55:
+				lavaEruptionEvent(283118);// 4.0
+				break;
+			case 40:
+			case 25:
+				AIActions.useSkill(this, 20761);
+				break;
+			case 20:
+				cancelFireStorm();
+				cancelPiercingStrike();
+				lavaEruptionEvent(283120);// 4.0
+				break;
+			case 10:
+				AIActions.useSkill(this, 20942);
+				break;
+			case 7:
+				AIActions.useSkill(this, 20883);
+				spawn(283102, 679.88f, 1068.88f, 497.88f, (byte) 0);// 4.0
+				break;
 		}
 	}
 
@@ -181,14 +154,9 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 	}
 
 	private void spawnfloor(final int floor) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				spawn(floor, 679.88f, 1068.88f, 497.88f, (byte) 0);
-				spawn(floor + 1, 679.88f, 1068.88f, 497.88f, (byte) 0);
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			spawn(floor, 679.88f, 1068.88f, 497.88f, (byte) 0);
+			spawn(floor + 1, 679.88f, 1068.88f, 497.88f, (byte) 0);
 		}, 10000);
 	}
 
@@ -197,48 +165,20 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 			rndSpawnInRange(npcId, 10);
 	}
 
-	private void deleteNpcs(List<Npc> npcs) {
-		for (Npc npc : npcs) {
-			if (npc != null) {
-				npc.getController().delete();
-			}
-		}
-	}
-
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, 96, 75, 60, 55, 40, 25, 20, 10, 7);
-	}
-
-	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		addPercent();
-	}
-
 	private void deleteAdds() {
-		WorldMapInstance instance = getPosition().getWorldMapInstance();
-		deleteNpcs(instance.getNpcs(283116));// 4.0
-		deleteNpcs(instance.getNpcs(283117));// 4.0
-		deleteNpcs(instance.getNpcs(283118));// 4.0
-		deleteNpcs(instance.getNpcs(283119));// 4.0
-		deleteNpcs(instance.getNpcs(283120));// 4.0
-		deleteNpcs(instance.getNpcs(283121));// 4.0
-		deleteNpcs(instance.getNpcs(283102));// 4.0
+		getPosition().getWorldMapInstance().getNpcs(283116, 283117, 283118, 283119, 283120, 283121, 283102).forEach(npc -> npc.getController().delete());
 	}
 
 	@Override
 	protected void handleBackHome() {
-		addPercent();
 		isHome.set(true);
 		getPosition().getWorldMapInstance().setDoorState(610, true);
 		super.handleBackHome();
+		hpPhases.reset();
 		getEffectController().removeEffect(20942);
 		deleteAdds();
 		cancelPiercingStrike();
 		cancelFireStorm();
-		isEndPiercingStrike.set(true);
-		isEndFireStorm.set(true);
 	}
 
 	@Override
@@ -250,7 +190,6 @@ public class BrigadeGeneralTahabataAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleDied() {
-		percents.clear();
 		getPosition().getWorldMapInstance().setDoorState(610, true);
 		super.handleDied();
 		deleteAdds();

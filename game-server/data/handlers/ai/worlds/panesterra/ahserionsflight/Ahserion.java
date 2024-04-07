@@ -1,8 +1,10 @@
 package ai.worlds.panesterra.ahserionsflight;
 
-import java.util.*;
+import java.util.HashMap;
+import java.util.Map;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -20,37 +22,23 @@ import ai.AggressiveNpcAI;
  * @author Yeats, Estrayl
  */
 @AIName("ahserion")
-public class Ahserion extends AggressiveNpcAI {
+public class Ahserion extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private final List<Integer> hpEvents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(75, 50, 25, 10);
 
 	public Ahserion(Npc owner) {
 		super(owner);
 	}
 
 	@Override
-	protected void handleSpawned() {
-		super.handleSpawned();
-		initHpEvents();
+	protected void handleAttack(Creature creature) {
+		super.handleAttack(creature);
+		hpPhases.tryEnterNextPhase(this);
 	}
 
 	@Override
-	protected void handleAttack(Creature creature) {
-		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
-	}
-
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer hpEvent : hpEvents) {
-			if (hpPercentage <= hpEvent) {
-				hpEvents.remove(hpEvent);
-				switch (hpEvent) {
-					case 75, 50, 25, 10 -> getOwner().getQueuedSkills()
-						.offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21571, 1, 100, 0, 3000, NpcSkillTargetAttribute.ME)));
-				}
-				break;
-			}
-		}
+	public void handleHpPhase(int phaseHpPercent) {
+		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21571, 1, 100, 0, 3000, NpcSkillTargetAttribute.ME)));
 	}
 
 	@Override
@@ -90,14 +78,9 @@ public class Ahserion extends AggressiveNpcAI {
 		return winner;
 	}
 
-	private void initHpEvents() {
-		hpEvents.clear();
-		Collections.addAll(hpEvents, 75, 50, 25, 10);
-	}
-
 	@Override
 	protected void handleBackHome() {
 		super.handleBackHome();
-		initHpEvents();
+		hpPhases.reset();
 	}
 }

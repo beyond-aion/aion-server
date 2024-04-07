@@ -1,11 +1,9 @@
 package ai.instance.empyreanCrucible;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -18,9 +16,9 @@ import ai.AggressiveNpcAI;
  * @author Luzien
  */
 @AIName("alukina_emp")
-public class QueenAlukinaAI extends AggressiveNpcAI {
+public class QueenAlukinaAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(75, 50, 25);
 	private Future<?> task;
 
 	public QueenAlukinaAI(Npc owner) {
@@ -28,15 +26,8 @@ public class QueenAlukinaAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	public void handleSpawned() {
-		super.handleSpawned();
-		addPercents();
-	}
-
-	@Override
 	public void handleDespawned() {
 		cancelTask();
-		percents.clear();
 		super.handleDespawned();
 	}
 
@@ -48,22 +39,22 @@ public class QueenAlukinaAI extends AggressiveNpcAI {
 
 	@Override
 	public void handleBackHome() {
-		addPercents();
 		cancelTask();
 		super.handleBackHome();
+		hpPhases.reset();
 	}
 
 	@Override
 	public void handleAttack(Creature creature) {
 		super.handleAttack(creature);
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 	}
 
-	private void startEvent(int percent) {
-
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
 		SkillEngine.getInstance().getSkill(getOwner(), 17899, 41, getTarget()).useNoAnimationSkill();
 
-		switch (percent) {
+		switch (phaseHpPercent) {
 			case 75:
 				scheduleSkill(17900, 4500);
 				PacketSendUtility.broadcastMessage(getOwner(), 340487, 10000);
@@ -75,17 +66,13 @@ public class QueenAlukinaAI extends AggressiveNpcAI {
 				scheduleSkill(17902, 8000);
 				break;
 			case 25:
-				task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-					@Override
-					public void run() {
-						if (isDead()) {
-							cancelTask();
-						} else {
-							SkillEngine.getInstance().getSkill(getOwner(), 17901, 41, getTarget()).useNoAnimationSkill();
-							scheduleSkill(17902, 5500);
-							scheduleSkill(17902, 7500);
-						}
+				task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+					if (isDead()) {
+						cancelTask();
+					} else {
+						SkillEngine.getInstance().getSkill(getOwner(), 17901, 41, getTarget()).useNoAnimationSkill();
+						scheduleSkill(17902, 5500);
+						scheduleSkill(17902, 7500);
 					}
 				}, 4500, 20000);
 				break;
@@ -98,30 +85,10 @@ public class QueenAlukinaAI extends AggressiveNpcAI {
 	}
 
 	private void scheduleSkill(final int skill, int delay) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					SkillEngine.getInstance().getSkill(getOwner(), skill, 41, getTarget()).useNoAnimationSkill();
-
-				}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead()) {
+				SkillEngine.getInstance().getSkill(getOwner(), skill, 41, getTarget()).useNoAnimationSkill();
 			}
 		}, delay);
-	}
-
-	private void checkPercentage(int percentage) {
-		for (Integer percent : percents) {
-			if (percentage <= percent) {
-				percents.remove(percent);
-				startEvent(percent);
-				break;
-			}
-		}
-	}
-
-	private void addPercents() {
-		percents.clear();
-		Collections.addAll(percents, new Integer[] { 75, 50, 25 });
 	}
 }

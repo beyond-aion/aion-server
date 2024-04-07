@@ -1,13 +1,13 @@
 package ai.instance.danuarReliquary;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.animations.AttackHandAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -30,9 +30,9 @@ import ai.AggressiveNpcAI;
  * @author Yeats
  */
 @AIName("enraged_queen_modor")
-public class EnragedQueenModorAI extends AggressiveNpcAI {
+public class EnragedQueenModorAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
-	private List<Integer> percents = new ArrayList<>();
+	private final HpPhases hpPhases = new HpPhases(100, 90, 70, 52, 25, 10);
 	private AtomicInteger stage = new AtomicInteger();
 	private List<Vector3f> platformLocations = new ArrayList<>(5);
 	// weakened reliquary jotun, weakened idean lapilima, weakened idean obscura, weakened modor guardian, weakened danuar ghost, weakened hoarfrost acheron drake,
@@ -48,7 +48,6 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
-		addPercent();
 		addPlatformLocations();
 		if (isCrazedModor()) {
 			monsterIds = new int[] {856493, 856494, 856495, 856496, 856497, 856498};
@@ -67,64 +66,59 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 
 	@Override
 	protected void handleAttack(Creature creature) {
-		checkPercentage(getLifeStats().getHpPercentage());
+		hpPhases.tryEnterNextPhase(this);
 		super.handleAttack(creature);
+	}
+
+	@Override
+	public void handleHpPhase(int phaseHpPercent) {
+		switch (phaseHpPercent) {
+			case 100:
+				queueSkill(21171, 1); // Grendal's Explosive Wrath
+				queueSkill(21169, 1, 4000); // buff
+				break;
+			case 90:
+				queueSkill(21165, 1, 4000); // rend space
+				queueSkill(21170, 1, 4000); // Grendal's Rage
+				break;
+			case 70:
+				queueSkill(21165, 2); // rend space
+				queueSkill(21176, 1); // electric vengeance
+				queueSkill(21229, 1, 4000); // electric wrath
+				queueSkill(21742, 1, 4000); // subzero malice
+				queueSkill(21743, 1, 4000); // rushing subzero malice
+				break;
+			case 52:
+				queueSkill(21165, 4); // rend space
+				queueSkill(21268, 1); // demented scream
+				queueSkill(21269, 1, 4000); // spiteful roar
+				queueSkill(21742, 1, 4000); // subzero malice
+				queueSkill(21743, 1, 4000); // rushing subzero malice
+				queueSkill(21165, 5, 4000); // rend space
+				queueSkill(21170, 1, 2500); // Grendal's Rage
+				break;
+			case 25:
+				queueSkill(21165, 6); // rend space
+				queueSkill(21176, 1); // electric vengeance
+				queueSkill(21229, 1); // electric wrath
+				queueSkill(21742, 1); // subzero malice
+				queueSkill(21743, 1); // rushing subzero malice
+				queueSkill(21165, 7, 4000); // rend space
+				queueSkill(21170, 1, 0); // Grendal's Rage
+				break;
+			case 10:
+				queueSkill(21165, 8); // rend space
+				queueSkill(21176, 1); // electric vengeance
+				queueSkill(21229, 1, 4000); // electric wrath
+				queueSkill(21165, 9, 4000); // rend space
+				queueSkill(21170, 1, 0); // Grendal's Rage
+				break;
+		}
 	}
 
 	@Override
 	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		return damage * multiplier;
-	}
-
-	private synchronized void checkPercentage(int hpPercentage) {
-		for (Integer percent : percents) {
-			if (hpPercentage <= percent) {
-				percents.remove(percent);
-				switch (percent) {
-					case 100:
-						queueSkill(21171, 1); // Grendal's Explosive Wrath
-						queueSkill(21169, 1, 4000); // buff
-						break;
-					case 90:
-						queueSkill(21165, 1, 4000); // rend space
-						queueSkill(21170, 1, 4000); // Grendal's Rage
-						break;
-					case 70:
-						queueSkill(21165, 2); // rend space
-						queueSkill(21176, 1); // electric vengeance
-						queueSkill(21229, 1, 4000); // electric wrath
-						queueSkill(21742, 1, 4000); // subzero malice
-						queueSkill(21743, 1, 4000); // rushing subzero malice
-						break;
-					case 52:
-						queueSkill(21165, 4); // rend space
-						queueSkill(21268, 1); // demented scream
-						queueSkill(21269, 1, 4000); // spiteful roar
-						queueSkill(21742, 1, 4000); // subzero malice
-						queueSkill(21743, 1, 4000); // rushing subzero malice
-						queueSkill(21165, 5, 4000); // rend space
-						queueSkill(21170, 1, 2500); // Grendal's Rage
-						break;
-					case 25:
-						queueSkill(21165, 6); // rend space
-						queueSkill(21176, 1); // electric vengeance
-						queueSkill(21229, 1); // electric wrath
-						queueSkill(21742, 1); // subzero malice
-						queueSkill(21743, 1); // rushing subzero malice
-						queueSkill(21165, 7, 4000); // rend space
-						queueSkill(21170, 1, 0); // Grendal's Rage
-						break;
-					case 10:
-						queueSkill(21165, 8); // rend space
-						queueSkill(21176, 1); // electric vengeance
-						queueSkill(21229, 1, 4000); // electric wrath
-						queueSkill(21165, 9, 4000); // rend space
-						queueSkill(21170, 1, 0); // Grendal's Rage
-						break;
-				}
-				break;
-			}
-		}
 	}
 
 	@Override
@@ -311,11 +305,6 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 		return getNpcId() == 234691; // Crazed Modor (Infernal Danuar Reliquary)
 	}
 
-	private void addPercent() {
-		percents.clear();
-		Collections.addAll(percents, 100, 90, 70, 52, 25, 10);
-	}
-
 	private void addPlatformLocations() {
 		platformLocations.clear();
 		platformLocations.add(new Vector3f(255.49063f, 293.35785f, 253.79933f));
@@ -347,7 +336,7 @@ public class EnragedQueenModorAI extends AggressiveNpcAI {
 	protected void handleBackHome() {
 		super.handleBackHome();
 		stage.set(0);
-		addPercent();
+		hpPhases.reset();
 		addPlatformLocations();
 		World.getInstance().updatePosition(getOwner(), 256.62f, 257.79f, 241.79f, (byte) 90);
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_HEADING_UPDATE(getOwner()));
