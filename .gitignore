@@ -10,5 +10,8 @@ login-server/config/myls.properties
 login-server/log/
 login-server/target/
 
-.idea/
-**.iml
+**/.idea/
+**/.settings/
+**/*.iml
+**/.classpath
+**/.project
