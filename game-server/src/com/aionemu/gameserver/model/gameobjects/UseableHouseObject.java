@@ -5,7 +5,6 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.house.HouseRegistry;
 import com.aionemu.gameserver.model.templates.housing.PlaceableHouseObject;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author Neon

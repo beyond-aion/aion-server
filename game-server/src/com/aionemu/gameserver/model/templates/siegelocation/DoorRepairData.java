@@ -1,11 +1,10 @@
 package com.aionemu.gameserver.model.templates.siegelocation;
 
 
-import com.aionemu.gameserver.configs.main.SiegeConfig;
+import java.util.*;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
-import java.util.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "DoorRepairData")

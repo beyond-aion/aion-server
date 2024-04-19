@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
-import com.aionemu.gameserver.services.item.ItemPacketService.*;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
