@@ -1,0 +1,35 @@
+name: Deploy
+
+on:
+  workflow_dispatch:
+    inputs:
+      server:
+        type: choice
+        description: Server to build
+        options:
+          - chat-server
+          - game-server
+          - login-server
+        default: game-server
+      skip-tests:
+        type: boolean
+        description: Skip tests during build
+
+jobs:
+  build:
+    name: Deploy ${{ github.event.inputs.server }}
+    runs-on: ubuntu-latest
+    environment: ${{ github.event.inputs.server == 'game-server' && 'production' || null }}
+    concurrency: ${{ github.event.inputs.server }}
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 21
+        uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+          cache: maven
+      - name: Build with Maven
+        env:
+          FTP_URL: ${{ secrets.LIVE_SERVER_FTP_URL }}
+        run: mvn -B -Dmaven.source.skip=true -Dmaven.test.skip=${{ github.event.inputs.skip-tests }} -pl :commons,:${{ github.event.inputs.server }} package -Dftp.url=$FTP_URL

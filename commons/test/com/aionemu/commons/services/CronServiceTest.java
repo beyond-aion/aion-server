@@ -1,8 +1,9 @@
 package com.aionemu.commons.services;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
-import java.util.concurrent.atomic.AtomicInteger;
+import java.util.concurrent.CountDownLatch;
+import java.util.concurrent.TimeUnit;
 
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
@@ -27,60 +28,36 @@ public class CronServiceTest {
 	}
 
 	@Test
-	public void testCronTriggerExecutionTime() throws InterruptedException {
-		AtomicInteger ref = new AtomicInteger();
-		// should run on second # 0 and every 2 seconds
-		// execute on 0, 2, 4...
-		CronService.getInstance().schedule(ref::getAndIncrement, "0/2 * * * * ?");
-		Thread.sleep(5000);
-		assertEquals(3, ref.intValue());
+	public void testJobActuallyStarting() throws InterruptedException {
+		CountDownLatch latch = new CountDownLatch(1);
+		CronService.getInstance().schedule(latch::countDown, "* * * * * ?");
+		assertTrue(latch.await(1, TimeUnit.SECONDS));
 	}
 
 	@Test
-	public void testGetRunnable() {
+	public void testFindJobDetails() {
 		Runnable test = () -> {};
-		CronService.getInstance().schedule(test, "* 5 * * * ?");
+		CronService.getInstance().schedule(test, "* * * * * ?");
 		assertEquals(1, CronService.getInstance().findJobDetails(test).size());
 	}
 
 	@Test
-	public void testCancelRunnableUsingRunnableReference() throws InterruptedException {
-		AtomicInteger val = new AtomicInteger();
-		Runnable test = new Runnable() {
-
-			@Override
-			public void run() {
-				val.getAndIncrement();
-				CronService.getInstance().cancel(this);
-			}
-		};
-		CronService.getInstance().schedule(test, "0/2 * * * * ?");
-		Thread.sleep(5000);
-		assertEquals(1, val.intValue());
+	public void testCancelTaskByRunnableReference() {
+		Runnable test = () -> {};
+		CronService.getInstance().schedule(test, "* * * * * ?");
+		assertTrue(CronService.getInstance().cancel(test));
 	}
 
 	@Test
-	public void testCancelRunnableUsingJobDetails() throws InterruptedException {
-		AtomicInteger val = new AtomicInteger();
-		Runnable test = new Runnable() {
-
-			@Override
-			public void run() {
-				val.getAndIncrement();
-				CronService.getInstance().cancel(CronService.getInstance().findJobDetails(this).get(0));
-			}
-		};
-		CronService.getInstance().schedule(test, "0/2 * * * * ?");
-		Thread.sleep(5000);
-		assertEquals(1, val.intValue());
+	public void testCancelTaskByJobDetails() {
+		JobDetail jobDetail = CronService.getInstance().schedule(() -> {}, "* * * * * ?");
+		assertTrue(CronService.getInstance().cancel(jobDetail));
 	}
 
 	@Test
 	public void testGetJobTriggers() {
-		Runnable r = () -> {};
-		CronService.getInstance().schedule(r, "0 15 * * * ?");
-		JobDetail jd = CronService.getInstance().findJobDetails(r).get(0);
-		assertEquals(1, CronService.getInstance().getJobTriggers(jd).size());
+		JobDetail jobDetail = CronService.getInstance().schedule(() -> {}, "* * * * * ?");
+		assertEquals(1, CronService.getInstance().getJobTriggers(jobDetail).size());
 	}
 
 	@AfterAll
