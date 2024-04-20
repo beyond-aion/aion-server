@@ -11,8 +11,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author ginho1
- * @modified Neon
+ * @author ginho1, Neon
  */
 public class CM_CHAT_GROUP_INFO extends AionClientPacket {
 

@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author vlog, modified Bobobear
+ * @author vlog, Bobobear
  */
 public class _30347ImprovedPistol extends AbstractQuestHandler {
 

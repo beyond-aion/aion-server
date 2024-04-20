@@ -4,8 +4,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 /**
- * @author xTz
- * @modified Neon
+ * @author xTz, Neon
  */
 public class LimitedItem {
 
@@ -24,19 +23,10 @@ public class LimitedItem {
 		this.salesTime = salesTime;
 	}
 
-	/**
-	 * return itemId.
-	 */
 	public int getItemId() {
 		return itemId;
 	}
 
-	/**
-	 * @param set
-	 *          playerObjectId.
-	 * @param set
-	 *          count.
-	 */
 	public void setBuyCount(int playerObjectId, int count) {
 		buyCounts.put(playerObjectId, count);
 	}
@@ -45,24 +35,14 @@ public class LimitedItem {
 		return buyCounts.getOrDefault(playerObjectId, 0);
 	}
 
-	/**
-	 * @param set
-	 *          itemId.
-	 */
 	public void setItem(int itemId) {
 		this.itemId = itemId;
 	}
 
-	/**
-	 * return sellLimit.
-	 */
 	public int getSellLimit() {
 		return sellLimit;
 	}
 
-	/**
-	 * return buyLimit.
-	 */
 	public int getBuyLimit() {
 		return buyLimit;
 	}
@@ -72,17 +52,10 @@ public class LimitedItem {
 		buyCounts.clear();
 	}
 
-	/**
-	 * @param set
-	 *          sellLimit.
-	 */
 	public void setSellLimit(int sellLimit) {
 		this.sellLimit = sellLimit;
 	}
 
-	/**
-	 * return defaultSellLimit.
-	 */
 	public int getDefaultSellLimit() {
 		return defaultSellLimit;
 	}

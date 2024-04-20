@@ -14,8 +14,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Ritsu
- *         #Modified Majka
+ * @author Ritsu, Majka
  */
 public class _24051InvesetigatetheDisappearance extends AbstractQuestHandler {
 

@@ -15,9 +15,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Wakizashi, vlog, Bobobear
- * @reworked Luzien
- * @modified Pad
+ * @author Wakizashi, vlog, Bobobear, Luzien, Pad
  */
 public class FountainRewards extends AbstractTemplateQuestHandler {
 

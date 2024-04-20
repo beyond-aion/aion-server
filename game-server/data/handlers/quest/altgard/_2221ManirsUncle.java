@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Mr. Poke
- * @reworked vlog
+ * @author Mr. Poke, vlog
  */
 public class _2221ManirsUncle extends AbstractQuestHandler {
 

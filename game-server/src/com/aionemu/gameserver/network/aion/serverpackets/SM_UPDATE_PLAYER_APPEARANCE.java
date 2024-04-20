@@ -6,8 +6,7 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.network.aion.AionConnection;
 
 /**
- * @author Avol
- * @modified ATracer, Neon
+ * @author Avol, ATracer, Neon
  */
 public class SM_UPDATE_PLAYER_APPEARANCE extends AbstractPlayerInfoPacket {
 

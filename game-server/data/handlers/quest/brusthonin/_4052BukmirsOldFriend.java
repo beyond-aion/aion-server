@@ -11,8 +11,8 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-/*
- * author : Aion Gates
+/**
+ * @author Aion Gates
  */
 public class _4052BukmirsOldFriend extends AbstractQuestHandler {
 

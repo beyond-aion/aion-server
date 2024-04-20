@@ -6,8 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Ranastic
- * @reworked Navyan, Estrayl
+ * @author Ranastic, Navyan, Estrayl
  */
 @XmlRootElement(name = "RequiredMaterial")
 @XmlAccessorType(XmlAccessType.FIELD)

@@ -22,8 +22,7 @@ import com.aionemu.gameserver.utils.xml.JAXBUtil;
 /**
  * Offers the functionality to delete all data about inactive players
  *
- * @author nrg
- * @reworked Neon
+ * @author nrg, Neon
  */
 public class DatabaseCleaningService {
 

@@ -13,8 +13,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author xTz
- * @modified Luzien
+ * @author xTz, Luzien
  */
 @AIName("empyreanrecordkeeper")
 public class EmpyreanRecordKeeperAI extends NpcAI {

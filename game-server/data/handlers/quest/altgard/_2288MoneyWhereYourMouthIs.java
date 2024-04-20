@@ -11,9 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Atomics
- * @modified Gigi
- * @reworked Majka
+ * @author Atomics, Gigi, Majka
  */
 public class _2288MoneyWhereYourMouthIs extends AbstractQuestHandler {
 

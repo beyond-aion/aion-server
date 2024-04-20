@@ -13,7 +13,7 @@ import com.aionemu.gameserver.restrictions.PlayerRestrictions;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Avol modified by ATracer
+ * @author Avol, ATracer
  */
 public class CM_EQUIP_ITEM extends AionClientPacket {
 

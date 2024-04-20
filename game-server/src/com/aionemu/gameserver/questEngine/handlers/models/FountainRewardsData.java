@@ -13,8 +13,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.FountainRewards;
 
 /**
- * @author Bobobear
- * @modified Pad
+ * @author Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FountainRewardsData")

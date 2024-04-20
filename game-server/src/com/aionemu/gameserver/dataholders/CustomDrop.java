@@ -16,8 +16,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.model.drop.NpcDrop;
 
 /**
- * @author ViAl
- * @modified Neon
+ * @author ViAl, Neon
  */
 @XmlRootElement(name = "custom_drop")
 @XmlAccessorType(XmlAccessType.FIELD)

@@ -11,9 +11,7 @@ import com.aionemu.gameserver.skillengine.model.ChainSkills;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
 /**
- * @author ATracer
- * @modified kecimis
- * @reworked Neon
+ * @author ATracer, kecimis, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ChainCondition")

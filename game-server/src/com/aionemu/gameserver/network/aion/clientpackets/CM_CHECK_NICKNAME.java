@@ -15,21 +15,12 @@ import com.aionemu.gameserver.utils.Util;
 /**
  * In this packets aion client is asking if given nickname is ok/free?.
  * 
- * @author -Nemesiss-
- * @modified cura
+ * @author -Nemesiss-, cura
  */
 public class CM_CHECK_NICKNAME extends AionClientPacket {
 
-	/**
-	 * nick name that need to be checked
-	 */
 	private String nick;
 
-	/**
-	 * Constructs new instance of <tt>CM_CHECK_NICKNAME </tt> packet
-	 * 
-	 * @param opcode
-	 */
 	public CM_CHECK_NICKNAME(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}

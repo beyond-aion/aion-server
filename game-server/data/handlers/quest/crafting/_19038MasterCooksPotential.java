@@ -10,9 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 
 /**
- * @author Thuatan
- * @reworked vlog
- * @modified Pad
+ * @author Thuatan, vlog, Pad
  */
 public class _19038MasterCooksPotential extends AbstractQuestHandler {
 

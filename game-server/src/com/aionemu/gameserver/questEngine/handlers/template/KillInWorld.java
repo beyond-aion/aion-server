@@ -24,9 +24,7 @@ import com.aionemu.gameserver.services.VortexService;
 /**
  * Standard xml-based handling for the DAILY quests with onKillInZone events
  * 
- * @author vlog
- * @reworked bobobear
- * @modified Pad
+ * @author vlog, bobobear, Pad
  */
 public class KillInWorld extends AbstractTemplateQuestHandler {
 

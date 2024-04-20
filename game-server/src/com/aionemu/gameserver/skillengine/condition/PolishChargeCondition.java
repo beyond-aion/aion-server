@@ -10,8 +10,7 @@ import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
 /**
- * @author Rolandas
- * @modified Cheatkiller
+ * @author Rolandas, Cheatkiller
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PolishChargeCondition")

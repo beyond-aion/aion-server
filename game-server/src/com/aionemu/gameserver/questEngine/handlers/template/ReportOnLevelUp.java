@@ -11,17 +11,12 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Majka, Bobobear
- * @modified Pad
+ * @author Majka, Bobobear, Pad
  */
 public class ReportOnLevelUp extends AbstractTemplateQuestHandler {
 
 	private final Set<Integer> endNpcIds = new HashSet<>();
 
-	/**
-	 * @param id
-	 * @param endNpcIds
-	 */
 	public ReportOnLevelUp(int questId, List<Integer> endNpcIds) {
 		super(questId);
 		if (endNpcIds != null) {

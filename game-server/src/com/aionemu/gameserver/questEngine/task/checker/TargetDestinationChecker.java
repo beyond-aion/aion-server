@@ -4,8 +4,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public class TargetDestinationChecker extends DestinationChecker {
 

@@ -12,8 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * Collect Bloodwing Meat and lure Vison (798214). Take Bloodwing Meat to Tityus (798191).
  * 
- * @author Balthazar
- * @reworked vlog
+ * @author Balthazar, vlog
  */
 public class _3092VisonTheDrakie extends AbstractQuestHandler {
 

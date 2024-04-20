@@ -6,8 +6,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * Replies to a request to add or delete a friend
  * 
- * @author Ben
- * @reworked Neon
+ * @author Ben, Neon
  */
 public class SM_FRIEND_RESPONSE extends AionServerPacket {
 

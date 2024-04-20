@@ -11,8 +11,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * Sent to update a player's status in a friendlist
  * 
- * @author Ben
- * @modified Neon
+ * @author Ben, Neon
  */
 public class SM_FRIEND_UPDATE extends AionServerPacket {
 

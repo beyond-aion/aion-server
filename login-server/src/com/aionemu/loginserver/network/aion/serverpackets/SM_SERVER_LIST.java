@@ -10,8 +10,7 @@ import com.aionemu.loginserver.network.aion.AionServerPacket;
 import com.aionemu.loginserver.network.aion.LoginConnection;
 
 /**
- * @author -Nemesiss-
- * @modified cura, Neon
+ * @author -Nemesiss-, cura, Neon
  */
 public class SM_SERVER_LIST extends AionServerPacket {
 

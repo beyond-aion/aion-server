@@ -16,7 +16,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author MrPoke remod By Nephis
+ * @author MrPoke, Nephis
  */
 public class _2324TheSpiritsNotebook extends AbstractQuestHandler {
 

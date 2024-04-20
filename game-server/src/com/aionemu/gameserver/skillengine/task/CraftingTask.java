@@ -16,8 +16,7 @@ import com.aionemu.gameserver.services.craft.CraftService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Mr. Poke, synchro2
- * @reworked Yeats
+ * @author Mr. Poke, synchro2, Yeats
  */
 public class CraftingTask extends AbstractCraftTask {
 

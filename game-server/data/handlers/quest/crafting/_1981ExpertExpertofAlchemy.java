@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 
 /**
- * @author Gigi
- * @modified Pad
+ * @author Gigi, Pad
  */
 public class _1981ExpertExpertofAlchemy extends AbstractQuestHandler {
 

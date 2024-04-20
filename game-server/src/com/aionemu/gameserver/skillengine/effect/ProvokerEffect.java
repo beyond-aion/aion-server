@@ -20,7 +20,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
- * @author ATracer modified by kecimis
+ * @author ATracer, kecimis
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ProvokerEffect")

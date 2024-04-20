@@ -5,8 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 /**
  * Implemented by handlers of <tt>CM_QUESTION_RESPONSE</tt> responses
  * 
- * @author Ben
- * @modified Lyahim
+ * @author Ben, Lyahim
  */
 public abstract class RequestResponseHandler<T extends Creature> {
 

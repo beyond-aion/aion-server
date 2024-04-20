@@ -5,8 +5,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author Mr. Poke
- * @reworked Yeats
+ * @author Mr. Poke, Yeats
  */
 public class SM_CRAFT_UPDATE extends AionServerPacket {
 
@@ -19,15 +18,6 @@ public class SM_CRAFT_UPDATE extends AionServerPacket {
 	private int executionSpeed;
 	private int delay;
 
-	/**
-	 * @param skillId
-	 * @param item
-	 * @param success
-	 * @param failure
-	 * @param action
-	 * @param executionSpeed
-	 * @param delay
-	 */
 	public SM_CRAFT_UPDATE(int skillId, ItemTemplate item, int success, int failure, int action, int executionSpeed, int delay) {
 		this.action = action;
 		this.skillId = skillId;

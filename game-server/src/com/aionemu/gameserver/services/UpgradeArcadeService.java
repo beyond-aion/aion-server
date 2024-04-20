@@ -21,8 +21,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author ginho1
- * @reworked Estrayl, Neon
+ * @author ginho1, Estrayl, Neon
  */
 public class UpgradeArcadeService {
 

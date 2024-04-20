@@ -20,8 +20,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.WorldDropType;
 
 /**
- * @author Oliver
- * @modified AionCool, Bobobear, Neon
+ * @author Oliver, AionCool, Bobobear, Neon
  */
 public class DropInfo extends AdminCommand {
 
@@ -35,13 +34,12 @@ public class DropInfo extends AdminCommand {
 	public void execute(Player player, String... params) {
 		VisibleObject visibleObject = player.getTarget();
 
-		if (!(visibleObject instanceof Npc)) {
+		if (!(visibleObject instanceof Npc npc)) {
 			sendInfo(player);
 			return;
 		}
 
 		boolean showAll = params.length > 0 && params[0].equals("all");
-		Npc npc = (Npc) visibleObject;
 		NpcDrop npcDrop = DataManager.CUSTOM_NPC_DROP.getNpcDrop(npc.getNpcId());
 		DropModifiers dropModifiers = DropRegistrationService.getInstance().createDropModifiers(npc, player, player.getLevel());
 		dropModifiers.setMaxDropsPerGroup(Integer.MAX_VALUE);

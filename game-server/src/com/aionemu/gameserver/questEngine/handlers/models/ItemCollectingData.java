@@ -13,8 +13,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.ItemCollecting;
 
 /**
- * @author MrPoke
- * @modified Rolandas, Majka, Pad
+ * @author MrPoke, Rolandas, Majka, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ItemCollectingData")

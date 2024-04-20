@@ -9,9 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author MrPoke
- * @modified Xitanium
- * @reworked Pad
+ * @author MrPoke, Xitanium, Pad
  */
 public class _1471FakeStigma extends AbstractQuestHandler {
 

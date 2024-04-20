@@ -11,8 +11,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.ActionItemNpcAI;
 
 /**
- * @author Ritsu
- * @modified Estrayl
+ * @author Ritsu, Estrayl
  */
 @AIName("flame_vent")
 public class FlameVentAI extends ActionItemNpcAI {

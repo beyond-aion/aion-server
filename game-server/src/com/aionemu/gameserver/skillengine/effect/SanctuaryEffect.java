@@ -3,8 +3,7 @@ package com.aionemu.gameserver.skillengine.effect;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
- * @author kecimis
- * @modified Cheatkiller, add AbnormalState
+ * @author kecimis, Cheatkiller, add AbnormalState
  */
 public class SanctuaryEffect extends EffectTemplate {
 

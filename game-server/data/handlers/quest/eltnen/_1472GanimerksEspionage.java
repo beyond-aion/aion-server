@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author MrPoke remod By Xitanium
+ * @author MrPoke, Xitanium
  */
 public class _1472GanimerksEspionage extends AbstractQuestHandler {
 

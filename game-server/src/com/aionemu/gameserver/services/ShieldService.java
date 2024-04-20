@@ -23,8 +23,7 @@ import com.aionemu.gameserver.model.templates.shield.ShieldTemplate;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
- * @author xavier
- * @modified Rolandas
+ * @author xavier, Rolandas
  */
 public class ShieldService {
 

@@ -17,8 +17,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Altaress, Bobobear
- * @modified Pad
+ * @author Altaress, Bobobear, Pad
  */
 public class ItemOrders extends AbstractTemplateQuestHandler {
 

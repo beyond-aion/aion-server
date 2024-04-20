@@ -13,8 +13,7 @@ import com.aionemu.gameserver.dao.BonusPackDAO;
 import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 
 /**
- * @author Estrayl
- * @modified Neon
+ * @author Estrayl, Neon
  */
 public class MySQL5BonusPackDAO extends BonusPackDAO {
 

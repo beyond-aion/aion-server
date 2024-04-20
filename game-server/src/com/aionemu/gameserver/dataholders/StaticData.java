@@ -19,7 +19,7 @@ import com.aionemu.gameserver.model.templates.mail.Mails;
 /**
  * An instance of this class is the result of data loading.
  *
- * @author Luno, orz Modified by Wakizashi
+ * @author Luno, orz, Wakizashi
  */
 @XmlRootElement(name = "static_data")
 @XmlAccessorType(XmlAccessType.NONE)

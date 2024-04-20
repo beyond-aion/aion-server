@@ -14,8 +14,7 @@ import com.aionemu.gameserver.skillengine.model.EffectReserved;
 import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 
 /**
- * @author ATracer
- * @author kecimis
+ * @author ATracer, kecimis
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PoisonEffect")

@@ -23,8 +23,7 @@ import com.aionemu.gameserver.world.World;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Cheatkiller
- * @modified Luzien
+ * @author Cheatkiller, Luzien
  */
 @AIName("brigadegeneraltahabata")
 public class BrigadeGeneralTahabataAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {

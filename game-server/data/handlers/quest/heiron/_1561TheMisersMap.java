@@ -18,8 +18,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * Find the place marked on the map (182201728).
  * 
- * @author Balthazar
- * @reworked vlog
+ * @author Balthazar, vlog
  */
 public class _1561TheMisersMap extends AbstractQuestHandler {
 

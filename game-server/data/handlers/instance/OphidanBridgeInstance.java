@@ -20,7 +20,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author Yeats 25.03.2016
+ * @author Yeats
  * @see <a href="https://www.youtube.com/watch?v=eSLV-H5hups">Ophidan Bridge</a>
  */
 @InstanceID(300590000)

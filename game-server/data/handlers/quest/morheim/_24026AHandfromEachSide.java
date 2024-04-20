@@ -19,8 +19,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * <spawnpos: 254.21326, 256.9302, 226.6418, 93>. Draconute Scout (280818), Crusader (211624), Chandala Scaleguard (213578), Chandala Fangblade
  * (213579). Speak to Kargate. Report back to Aegir.
  * 
- * @author Ritsu
- * @modified Pad
+ * @author Ritsu, Pad
  */
 public class _24026AHandfromEachSide extends AbstractQuestHandler {
 

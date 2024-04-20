@@ -8,7 +8,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.HealType;
 
 /**
- * @author ATracer modified by Sippolo
+ * @author ATracer, Sippolo
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ProcHealInstantEffect")

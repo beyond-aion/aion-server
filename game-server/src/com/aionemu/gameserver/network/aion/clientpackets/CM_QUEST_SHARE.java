@@ -26,8 +26,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
- * @author ginho1
- * @modified Neon
+ * @author ginho1, Neon
  */
 public class CM_QUEST_SHARE extends AionClientPacket {
 

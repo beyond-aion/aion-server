@@ -31,8 +31,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * @author Yeats
- * @modified Neon
+ * @author Yeats, Neon
  */
 @AIName("customcdreset")
 public class SkillCooltimeResetAI extends NpcAI {

@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author MrPoke remod By Nephis
- * @reworked vlog
+ * @author MrPoke, Nephis, vlog
  */
 public class _2430SecretInformation extends AbstractQuestHandler {
 

@@ -12,8 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author MrPoke
- * @modified Majka
+ * @author MrPoke, Majka
  */
 public class _1100KaliosCall extends AbstractQuestHandler {
 

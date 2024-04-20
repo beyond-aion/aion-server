@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Artur
- * @modified Majka
+ * @author Artur, Majka
  */
 public class _24011FunnyFloatingFungus extends AbstractQuestHandler {
 

@@ -17,8 +17,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author MrPoke
- * @modified Rolandas, Pad
+ * @author MrPoke, Rolandas, Pad
  */
 public class ReportTo extends AbstractTemplateQuestHandler {
 
@@ -30,12 +29,6 @@ public class ReportTo extends AbstractTemplateQuestHandler {
 	private final boolean isDataDriven;
 	private QuestItems workItem;
 
-	/**
-	 * @param id
-	 * @param startNpcIds
-	 * @param endNpcIds
-	 * @param itemId2
-	 */
 	public ReportTo(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, int startDialogId) {
 		super(questId);
 		if (startNpcIds != null)

@@ -14,7 +14,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import ai.GeneralNpcAI;
 
 /**
- * @author xTz, modified bobobear
+ * @author xTz, bobobear
  */
 @AIName("world_blesser")
 public class WorldBlesserAI extends GeneralNpcAI {

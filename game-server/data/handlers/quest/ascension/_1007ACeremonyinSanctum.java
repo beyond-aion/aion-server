@@ -14,8 +14,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author MrPoke + Dune11
- * @reworked vlog
+ * @author MrPoke + Dune11, vlog
  */
 public class _1007ACeremonyinSanctum extends AbstractQuestHandler {
 

@@ -11,8 +11,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
- * @author Artur
- * @modified Majka
+ * @author Artur, Majka
  */
 public class _14016AGateAgape extends AbstractQuestHandler {
 

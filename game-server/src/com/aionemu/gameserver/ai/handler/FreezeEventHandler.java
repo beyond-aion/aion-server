@@ -5,8 +5,7 @@ import com.aionemu.gameserver.ai.AbstractAI;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 
 /**
- * @author Rolandas
- * @modified Neon
+ * @author Rolandas, Neon
  */
 public class FreezeEventHandler {
 

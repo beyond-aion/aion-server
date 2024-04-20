@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author HellBoy
- * @reworked vlog
+ * @author HellBoy, vlog
  */
 public class _21073ListentoMySongStrigiks extends AbstractQuestHandler {
 

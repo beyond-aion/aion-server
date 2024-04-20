@@ -8,7 +8,6 @@ import ai.AggressiveNpcAI;
 
 /**
  * @author Luzien
- * @modified Neon
  */
 @AIName("omegaclone")
 public class CloneOfBarrierAI extends AggressiveNpcAI {
@@ -20,8 +19,8 @@ public class CloneOfBarrierAI extends AggressiveNpcAI {
 	@Override
 	protected void handleDied() {
 		VisibleObject object = getKnownList().findObject(216516); // Omega
-		if (object instanceof Npc && !((Npc) object).isDead() && isInRange(object, 5))
-			((Npc) object).getEffectController().removeEffect(18671);
+		if (object instanceof Npc omega && !omega.isDead() && isInRange(omega, 5))
+			omega.getEffectController().removeEffect(18671);
 		super.handleDied();
 	}
 }

@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Akiro
- * @reworked Majka
+ * @author Akiro, Majka
  */
 public class _2231SiblingRivalry extends AbstractQuestHandler {
 

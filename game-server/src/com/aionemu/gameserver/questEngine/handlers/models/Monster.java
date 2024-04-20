@@ -9,8 +9,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author MrPoke
- * @reworked vlog, Bobobear, Artur, Pad
+ * @author MrPoke, vlog, Bobobear, Artur, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Monster")

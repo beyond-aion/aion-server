@@ -21,9 +21,7 @@ import com.aionemu.gameserver.services.RecipeService;
 import com.aionemu.gameserver.services.item.ItemService;
 
 /**
- * @author Mr. Poke
- * @reworked Bobobear
- * @modified Pad
+ * @author Mr. Poke, Bobobear, Pad
  */
 public class WorkOrders extends AbstractTemplateQuestHandler {
 

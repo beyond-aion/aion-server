@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Altaress
- * @reworked Cheatkiller
+ * @author Altaress, Cheatkiller
  */
 public class _1394ReportingtheNewFlightPath extends AbstractQuestHandler {
 

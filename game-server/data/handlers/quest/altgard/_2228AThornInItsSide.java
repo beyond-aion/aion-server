@@ -17,8 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Dta3000
- * @modified Majka
+ * @author Dta3000, Majka
  */
 public class _2228AThornInItsSide extends AbstractQuestHandler {
 

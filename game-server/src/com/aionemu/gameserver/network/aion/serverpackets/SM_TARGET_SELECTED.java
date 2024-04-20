@@ -6,8 +6,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author Sweetkr
- * @modified -Enomine- 4.0
+ * @author Sweetkr, -Enomine-
  */
 public class SM_TARGET_SELECTED extends AionServerPacket {
 

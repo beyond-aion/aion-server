@@ -13,9 +13,7 @@ import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
  * Cleanup and rework will be made after tests and error handling<br>
  * To use only with patch!
  * 
- * @author vlog
- * @based on Imaginary's imagination
- * @modified Rolandas
+ * @author vlog (based on Imaginary's imagination), Rolandas
  */
 public class WalkerFormator {
 
@@ -26,8 +24,6 @@ public class WalkerFormator {
 	 * spawning. If it's a respawn, nothing to verify, then the method places NPC to the first step and resets data to the saved, no organizing is
 	 * needed.
 	 * 
-	 * @param npc
-	 * @param instance
 	 * @return <tt>true</tt> if npc was brought into world by the method call.
 	 */
 	public static boolean processClusteredNpc(Npc npc, int worldId, int instanceId) {
@@ -68,10 +64,6 @@ public class WalkerFormator {
 		formations.changeCluster(walkerGroup);
 	}
 
-	/**
-	 * @param worldId
-	 * @param instanceId
-	 */
 	public static void onInstanceDestroy(int worldId, int instanceId) {
 		WalkerFormationsCache.onInstanceDestroy(worldId, instanceId);
 	}

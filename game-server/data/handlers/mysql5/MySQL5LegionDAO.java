@@ -27,8 +27,7 @@ import com.aionemu.gameserver.model.team.legion.LegionHistoryType;
 import com.aionemu.gameserver.model.team.legion.LegionWarehouse;
 
 /**
- * @author Simple
- * @modified cura
+ * @author Simple, cura
  */
 public class MySQL5LegionDAO extends LegionDAO {
 
@@ -297,9 +296,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		return legionEmblem.getEmblemType() != LegionEmblemType.CUSTOM || legionEmblem.getCustomEmblemData() != null;
 	}
 
-	/**
-	 * @param legionid
-	 */
 	public boolean checkEmblem(final int legionid) {
 		PreparedStatement st = DB.prepareStatement(SELECT_EMBLEM_QUERY);
 		try {
@@ -317,11 +313,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		return false;
 	}
 
-	/**
-	 * @param legionId
-	 * @param legionEmblem
-	 * @return
-	 */
 	private void createLegionEmblem(final int legionId, final LegionEmblem legionEmblem) {
 		DB.insertUpdate(INSERT_EMBLEM_QUERY, new IUStH() {
 
@@ -340,10 +331,6 @@ public class MySQL5LegionDAO extends LegionDAO {
 		});
 	}
 
-	/**
-	 * @param legionId
-	 * @param legionEmblem
-	 */
 	private void updateLegionEmblem(final int legionId, final LegionEmblem legionEmblem) {
 		DB.insertUpdate(UPDATE_EMBLEM_QUERY, new IUStH() {
 

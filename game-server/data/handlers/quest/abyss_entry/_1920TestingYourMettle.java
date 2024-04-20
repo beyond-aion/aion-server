@@ -11,8 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * Talk with Jucleas (203752). Talk with Rinos (203876). Talk with Jucleas.
  * 
- * @author Hellboy, aion4Free
- * @reworked vlog
+ * @author Hellboy, aion4Free, vlog
  */
 public class _1920TestingYourMettle extends AbstractQuestHandler {
 

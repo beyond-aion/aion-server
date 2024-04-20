@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author Yeats 06.04.2016.
+ * @author Yeats
  */
 public class PvpMapService {
 

@@ -24,8 +24,7 @@ import com.zaxxer.hikari.HikariDataSource;
  * <br>
  * <p/>
  * 
- * @author Disturbing
- * @author SoulKeeper
+ * @author Disturbing, SoulKeeper
  */
 public class DatabaseFactory {
 

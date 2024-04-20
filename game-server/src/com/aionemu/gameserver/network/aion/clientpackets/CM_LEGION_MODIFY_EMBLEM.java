@@ -9,8 +9,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.LegionService;
 
 /**
- * @author Simple
- * @modified cura, Neon
+ * @author Simple, cura, Neon
  */
 public class CM_LEGION_MODIFY_EMBLEM extends AionClientPacket {
 
@@ -22,9 +21,6 @@ public class CM_LEGION_MODIFY_EMBLEM extends AionClientPacket {
 	private int blue;
 	private LegionEmblemType emblemType;
 
-	/**
-	 * @param opcode
-	 */
 	public CM_LEGION_MODIFY_EMBLEM(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}

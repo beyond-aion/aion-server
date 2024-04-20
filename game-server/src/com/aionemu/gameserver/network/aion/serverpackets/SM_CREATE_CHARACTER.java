@@ -6,8 +6,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 /**
  * This packet is response for CM_CREATE_CHARACTER
  * 
- * @author Nemesiss, AEJTester
- * @modified Neon
+ * @author Nemesiss, AEJTester, Neon
  */
 public class SM_CREATE_CHARACTER extends AbstractPlayerInfoPacket {
 

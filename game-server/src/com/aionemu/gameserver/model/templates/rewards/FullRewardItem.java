@@ -6,8 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author Luzien
- * @modified Pad
+ * @author Luzien, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FullRewardItem")

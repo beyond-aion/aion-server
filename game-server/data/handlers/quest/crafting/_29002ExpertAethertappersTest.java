@@ -11,8 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Gigi
- * @modified Pad
+ * @author Gigi, Pad
  */
 public class _29002ExpertAethertappersTest extends AbstractQuestHandler {
 

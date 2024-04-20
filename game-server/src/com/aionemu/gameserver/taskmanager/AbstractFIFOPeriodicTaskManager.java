@@ -7,8 +7,7 @@ import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.utils.concurrent.RunnableStatsManager;
 
 /**
- * @author lord_rex and MrPoke based on l2j-free engines.
- * @modified Neon
+ * @author lord_rex and MrPoke (based on l2j-free engines), Neon
  */
 public abstract class AbstractFIFOPeriodicTaskManager<T> extends AbstractPeriodicTaskManager {
 

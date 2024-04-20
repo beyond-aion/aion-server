@@ -5,8 +5,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcRank;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
 
 /**
- * @author Estrayl
- * @modified Neon
+ * @author Estrayl, Neon
  */
 public class NpcStatCalculation {
 

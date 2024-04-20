@@ -16,8 +16,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- * @author xTz, Luzien
- * @modified Majka
+ * @author xTz, Luzien, Majka
  */
 @InstanceID(300160000)
 public class LowerUdasTempleInstance extends GeneralInstanceHandler {

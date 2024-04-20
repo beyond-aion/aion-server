@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author MrPoke remod By Nephis
+ * @author MrPoke, Nephis
  */
 public class _1553MirrorMirror extends AbstractQuestHandler {
 

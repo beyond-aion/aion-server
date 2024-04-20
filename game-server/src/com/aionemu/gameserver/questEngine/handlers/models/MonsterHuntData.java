@@ -19,8 +19,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.MonsterHunt;
 
 /**
- * @author MrPoke
- * @modified Bobobear, Pad
+ * @author MrPoke, Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MonsterHuntData")

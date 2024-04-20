@@ -4,8 +4,7 @@ import javax.xml.bind.Marshaller;
 import javax.xml.bind.annotation.*;
 
 /**
- * @author xTz
- * @modified Rolandas
+ * @author xTz, Rolandas
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SpawnSpotTemplate")

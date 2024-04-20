@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Nanou
- * @reworked Gigi
+ * @author Nanou, Gigi
  */
 public class _4943LuckandPersistence extends AbstractQuestHandler {
 

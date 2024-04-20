@@ -19,8 +19,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author lyahim
- * @modified antness
+ * @author lyahim, antness
  */
 public class PlayerInfo extends AdminCommand {
 

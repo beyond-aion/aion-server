@@ -16,12 +16,7 @@ import com.aionemu.gameserver.skillengine.model.ShieldType;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
 /**
- * Notes:<br>
- * 1) There should be locking against onceUsedObservers<br>
- * 2) Check observers size before iteration to minimize memory allocations
- * 
- * @author ATracer
- * @author Cura
+ * @author ATracer, Cura
  */
 public class ObserveController {
 
@@ -32,8 +27,6 @@ public class ObserveController {
 
 	/**
 	 * Once used observer add to observerController. If observer notify will be removed.
-	 * 
-	 * @param observer
 	 */
 	public void attach(ActionObserver observer) {
 		observer.makeOneTimeUse();
@@ -45,23 +38,14 @@ public class ObserveController {
 		}
 	}
 
-	/**
-	 * @param observer
-	 */
 	public void addObserver(ActionObserver observer) {
 		observers.add(observer);
 	}
 
-	/**
-	 * @param observer
-	 */
 	public void addAttackCalcObserver(AttackCalcObserver observer) {
 		attackCalcObservers.add(observer);
 	}
 
-	/**
-	 * @param observer
-	 */
 	public void removeObserver(ActionObserver observer) {
 		observers.remove(observer);
 		lock.lock();
@@ -72,16 +56,10 @@ public class ObserveController {
 		}
 	}
 
-	/**
-	 * @param observer
-	 */
 	public void removeAttackCalcObserver(AttackCalcObserver observer) {
 		attackCalcObservers.remove(observer);
 	}
 
-	/**
-	 * notify all observers
-	 */
 	public void notifyObservers(ObserverType type, Object... object) {
 		List<ActionObserver> tempOnceused = Collections.emptyList();
 		lock.lock();
@@ -167,55 +145,30 @@ public class ObserveController {
 		}
 	}
 
-	/**
-	 * @param notify
-	 *          that creature died
-	 */
 	public void notifyDeathObservers(Creature creature) {
 		notifyObservers(ObserverType.DEATH, creature);
 	}
 
-	/**
-	 * notify that creature moved
-	 */
 	public void notifyMoveObservers() {
 		notifyObservers(ObserverType.MOVE);
 	}
 
-	/**
-	 * notify that creature moved
-	 */
 	public void notifySitObservers() {
 		notifyObservers(ObserverType.SIT);
 	}
 
-	/**
-	 * notify that creature attacking
-	 *
-	 * @param damage
-	 * @param skillId
-	 */
 	public void notifyAttackObservers(Creature creature, int skillId) {
 		notifyObservers(ObserverType.ATTACK, creature, skillId);
 	}
 
-	/**
-	 * notify that creature attacked
-	 */
 	public void notifyAttackedObservers(Creature creature, int skillId) {
 		notifyObservers(ObserverType.ATTACKED, creature, skillId);
 	}
 
-	/**
-	 * notify that creature attacked by dot's hit
-	 */
 	public void notifyDotAttackedObservers(Creature creature, Effect effect) {
 		notifyObservers(ObserverType.DOT_ATTACKED, creature, effect);
 	}
 
-	/**
-	 * notify that creature used a skill
-	 */
 	public void notifyStartSkillCastObservers(Skill skill) {
 		notifyObservers(ObserverType.STARTSKILLCAST, skill);
 	}
@@ -228,39 +181,22 @@ public class ObserveController {
 		notifyObservers(ObserverType.BOOSTSKILLCOST, skill);
 	}
 
-	/**
-	 * @param item
-	 * @param owner
-	 */
 	public void notifyItemEquip(Item item, Player owner) {
 		notifyObservers(ObserverType.EQUIP, item, owner);
 	}
 
-	/**
-	 * @param item
-	 * @param owner
-	 */
 	public void notifyItemUnEquip(Item item, Player owner) {
 		notifyObservers(ObserverType.UNEQUIP, item, owner);
 	}
 
-	/**
-	 * notify that player used an item
-	 */
 	public void notifyItemuseObservers(Item item) {
 		notifyObservers(ObserverType.ITEMUSE, item);
 	}
 
-	/**
-	 * notify that abnormalstate is setted in effectcontroller
-	 */
 	public void notifyAbnormalSettedObservers(AbnormalState state) {
 		notifyObservers(ObserverType.ABNORMALSETTED, state);
 	}
 
-	/**
-	 * notify that abnormalstate is setted in effectcontroller
-	 */
 	public void notifySummonReleaseObservers() {
 		notifyObservers(ObserverType.SUMMONRELEASE);
 	}
@@ -269,10 +205,6 @@ public class ObserveController {
 		notifyObservers(ObserverType.HP_CHANGED, hpValue);
 	}
 
-	/**
-	 * @param status
-	 * @return true or false
-	 */
 	public boolean checkAttackStatus(AttackStatus status) {
 		if (attackCalcObservers.size() > 0) {
 			for (AttackCalcObserver observer : attackCalcObservers) {
@@ -284,10 +216,6 @@ public class ObserveController {
 		return false;
 	}
 
-	/**
-	 * @param status
-	 * @return
-	 */
 	public boolean checkAttackerStatus(AttackStatus status) {
 		if (attackCalcObservers.size() > 0) {
 			for (AttackCalcObserver observer : attackCalcObservers) {

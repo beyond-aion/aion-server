@@ -13,8 +13,7 @@ import com.aionemu.gameserver.services.QuestService;
  * Speak to Telemachus (203901). Talk with Daedalus (203930) about your flight test. Go through all the rings within the time limit. Talk with
  * Daedalus again. Report to Telemachus.
  * 
- * @author Hellboy, aion4Free, Hilgert
- * @reworked vlog
+ * @author Hellboy, aion4Free, Hilgert, vlog
  */
 public class _1044TestingFlightSkills extends AbstractQuestHandler {
 

@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Nephis
- * @modified Pad
+ * @author Nephis, Pad
  */
 public class _1988AMeetingWithASage extends AbstractQuestHandler {
 

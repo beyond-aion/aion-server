@@ -36,8 +36,7 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  * (182200007). Meet Daminu (730008) and obtain Daminu's Essence (182200009). Talk with Pernos. Explore your lost past (310020000, 52, 174, 229).
  * Advance on Karamatis (Belpartan, 205000). Defeat Raiders (211042) (4). Defeat Orissan (211043). Talk with Pernos and choose the path you will take.
  * 
- * @author MrPoke
- * @reworked vlog
+ * @author MrPoke, vlog
  */
 public class _1006Ascension extends AbstractQuestHandler {
 

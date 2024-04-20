@@ -20,9 +20,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author Mr. Poke
- * @modified Rolandas
- * @reworked vlog
+ * @author Mr. Poke, Rolandas, vlog
  */
 public class _1929ASliverofDarkness extends AbstractQuestHandler {
 

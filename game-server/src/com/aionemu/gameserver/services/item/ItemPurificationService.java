@@ -20,8 +20,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author Ranastic
- * @modified Estrayl
+ * @author Ranastic, Estrayl
  */
 public class ItemPurificationService {
 

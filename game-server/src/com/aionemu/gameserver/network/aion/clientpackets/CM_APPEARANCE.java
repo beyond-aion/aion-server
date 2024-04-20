@@ -25,8 +25,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author xTz
- * @modified Neon
+ * @author xTz, Neon
  */
 public class CM_APPEARANCE extends AionClientPacket {
 

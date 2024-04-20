@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Gigi
- * @reworked vlog
+ * @author Gigi, vlog
  */
 public class _19000ExpertEssencetappersTest extends AbstractQuestHandler {
 

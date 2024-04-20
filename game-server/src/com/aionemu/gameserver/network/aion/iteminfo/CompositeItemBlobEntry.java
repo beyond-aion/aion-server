@@ -11,8 +11,7 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 /**
  * This blob is sending info about the item that were fused with current item.
  * 
- * @author -Nemesiss-
- * @modified Rolandas
+ * @author -Nemesiss-, Rolandas
  */
 public class CompositeItemBlobEntry extends ItemBlobEntry {
 

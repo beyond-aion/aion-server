@@ -11,8 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Artur
- * @modified Majka
+ * @author Artur, Majka
  */
 public class _14015NotBlindedByVengeance extends AbstractQuestHandler {
 

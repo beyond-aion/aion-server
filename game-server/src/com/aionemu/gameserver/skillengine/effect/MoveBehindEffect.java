@@ -13,7 +13,7 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * @author Sarynth, modified Bobobear
+ * @author Sarynth, Bobobear
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "MoveBehindEffect")

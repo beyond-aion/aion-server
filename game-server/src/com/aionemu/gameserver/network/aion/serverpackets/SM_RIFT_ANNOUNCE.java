@@ -7,8 +7,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author Sweetkr
- * @modified -Enomine-
+ * @author Sweetkr, -Enomine-
  */
 public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 
@@ -18,10 +17,6 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 	private int objectId;
 	private int gelkmaros, inggison;
 
-	/**
-	 * Rift announce packet
-	 *
-	 */
 	public SM_RIFT_ANNOUNCE(Map<Integer, Integer> rifts) {
 		this.actionId = 0;
 		this.rifts = rifts;
@@ -33,20 +28,11 @@ public class SM_RIFT_ANNOUNCE extends AionServerPacket {
 		this.actionId = 1;
 	}
 
-	/**
-	 * Rift announce packet
-	 *
-	 */
 	public SM_RIFT_ANNOUNCE(RVController rift, boolean isMaster) {
 		this.rift = rift;
 		this.actionId = isMaster ? 2 : 3;
 	}
 
-	/**
-	 * Rift despawn
-	 *
-	 * @param objectId
-	 */
 	public SM_RIFT_ANNOUNCE(int objectId) {
 		this.objectId = objectId;
 		this.actionId = 4;

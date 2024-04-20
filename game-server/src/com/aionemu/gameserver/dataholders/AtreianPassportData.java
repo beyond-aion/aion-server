@@ -14,8 +14,7 @@ import javax.xml.bind.annotation.XmlTransient;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
 
 /**
- * @author Alcapwnd
- * @author ViAl
+ * @author Alcapwnd, ViAl
  */
 @XmlRootElement(name = "login_events")
 @XmlAccessorType(XmlAccessType.FIELD)

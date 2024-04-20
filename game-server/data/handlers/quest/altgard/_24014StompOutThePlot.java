@@ -12,9 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Artur
- * @reworked Ritsu
- * @modified Majka
+ * @author Artur, Ritsu, Majka
  */
 public class _24014StompOutThePlot extends AbstractQuestHandler {
 

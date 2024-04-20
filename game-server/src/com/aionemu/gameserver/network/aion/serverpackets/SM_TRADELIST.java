@@ -17,8 +17,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.LimitedItemTradeService;
 
 /**
- * @author alexa026, ATracer, Sarynth, xTz
- * @modified Neon
+ * @author alexa026, ATracer, Sarynth, xTz, Neon
  */
 public class SM_TRADELIST extends AionServerPacket {
 

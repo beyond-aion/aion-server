@@ -12,8 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * Starts Ernia (203944). Take Teos (203945) to Dellome (790007) in Agairon Village. Talk to Dellome.
  * 
- * @author Rhys2002
- * @reworked vlog
+ * @author Rhys2002, vlog
  */
 public class _1364JourneytoAgairon extends AbstractQuestHandler {
 

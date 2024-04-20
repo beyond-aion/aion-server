@@ -15,7 +15,11 @@ import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
 
 /**
- * @author xTz TYPE_A: BuyLimit == 0 && SellLimit != 0 TYPE_B: BuyLimit != 0 && SellLimit == 0 TYPE_C: BuyLimit != 0 && SellLimit != 0
+ * TYPE_A: BuyLimit == 0 && SellLimit != 0<br>
+ * TYPE_B: BuyLimit != 0 && SellLimit == 0<br>
+ * TYPE_C: BuyLimit != 0 && SellLimit != 0
+ * 
+ * @author xTz
  */
 public class LimitedItemTradeService {
 

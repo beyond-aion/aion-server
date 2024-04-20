@@ -30,17 +30,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author ATracer
- * @modified Wakizashi, Source, vlog
- * @reworked Neon
+ * @author ATracer, Wakizashi, Source, vlog, Neon
  */
 public class EnchantService {
 
-	/**
-	 * @param player
-	 * @param targetItem
-	 * @param parentItem
-	 */
 	public static boolean breakItem(Player player, Item targetItem, Item parentItem) {
 		Storage inventory = player.getInventory();
 		if (inventory.getItemByObjId(targetItem.getObjectId()) == null || inventory.getItemByObjId(parentItem.getObjectId()) == null)
@@ -103,17 +96,7 @@ public class EnchantService {
 		}
 	}
 
-	/**
-	 * @param player
-	 * @param parentItem
-	 *          the enchantment stone
-	 * @param targetItem
-	 *          the item to enchant
-	 * @param supplementItem
-	 *          the item, giving additional chance
-	 * @return true, if successful
-	 */
-	public static boolean enchantItem(Player player, Item parentItem, Item targetItem, Item supplementItem) {
+	public static boolean enchantItem(Player player, Item enchantmentStoneItem, Item targetItem, Item supplementItem) {
 		float successChance;
 
 		if (targetItem.isAmplified())
@@ -121,7 +104,7 @@ public class EnchantService {
 		else {
 			successChance = Rates.get(player, RatesConfig.ENCHANTMENT_STONE_BASE_CHANCES);
 
-			EnchantmentStone enchantmentStone = EnchantmentStone.getByItemId(parentItem.getItemId());
+			EnchantmentStone enchantmentStone = EnchantmentStone.getByItemId(enchantmentStoneItem.getItemId());
 			int itemLevel = targetItem.getItemTemplate().getLevel();
 			if (itemLevel < EnchantmentStone.ALPHA.getBaseLevel()) // ensure low lvl items don't get too high success chances
 				itemLevel = EnchantmentStone.ALPHA.getBaseLevel();
@@ -157,7 +140,7 @@ public class EnchantService {
 					successChance += action.getChance();
 				}
 
-				action = parentItem.getItemTemplate().getActions().getEnchantAction();
+				action = enchantmentStoneItem.getItemTemplate().getActions().getEnchantAction();
 				if (action != null)
 					supplementUseCount = action.getCount();
 
@@ -307,27 +290,17 @@ public class EnchantService {
 		targetItem.setEnchantEffect(new EnchantEffect(targetItem, owner, stats));
 	}
 
-	/**
-	 * @param player
-	 * @param parentItem
-	 *          the manastone
-	 * @param targetItem
-	 *          the item to socket
-	 * @param supplementItem
-	 * @param targetWeapon
-	 *          fusioned weapon
-	 */
-	public static boolean socketManastone(Player player, Item parentItem, Item targetItem, Item supplementItem, int targetWeapon) {
+	public static boolean socketManastone(Player player, Item manastone, Item targetItem, Item supplementItem, int fusionedWeaponLevel) {
 		int targetItemLevel;
 
 		// Fusioned weapon. Primary weapon level.
-		if (targetWeapon == 1)
+		if (fusionedWeaponLevel == 1)
 			targetItemLevel = targetItem.getItemTemplate().getLevel();
 		// Fusioned weapon. Secondary weapon level.
 		else
 			targetItemLevel = targetItem.getFusionedItemTemplate().getLevel();
 
-		int stoneLevel = parentItem.getItemTemplate().getLevel();
+		int stoneLevel = manastone.getItemTemplate().getLevel();
 		int slotLevel = (int) (10 * Math.ceil((targetItemLevel + 10) / 10d));
 
 		// The current amount of socketed stones
@@ -339,7 +312,7 @@ public class EnchantService {
 			return false;
 
 		// Fusioned weapon. Primary weapon slots.
-		if (targetWeapon == 1)
+		if (fusionedWeaponLevel == 1)
 			// Count the inserted stones in the primary weapon
 			stoneCount = targetItem.getItemStones().size();
 		// Fusioned weapon. Secondary weapon slots.
@@ -348,7 +321,7 @@ public class EnchantService {
 			stoneCount = targetItem.getFusionStones().size();
 
 		// Fusioned weapon. Primary weapon slots.
-		if (targetWeapon == 1) {
+		if (fusionedWeaponLevel == 1) {
 			// Find all free slots in the primary weapon
 			if (stoneCount >= targetItem.getSockets(false)) {
 				AuditLogger.log(player, "Manastone socket overload");
@@ -365,7 +338,7 @@ public class EnchantService {
 		// Start value of success
 		float successChance = Rates.get(player, RatesConfig.MANASTONE_CHANCES);
 
-		if (parentItem.getItemTemplate().getItemQuality().getQualityId() >= ItemQuality.RARE.getQualityId())
+		if (manastone.getItemTemplate().getItemQuality().getQualityId() >= ItemQuality.RARE.getQualityId())
 			successChance *= 0.8f;
 
 		// Next socket difficulty modifier
@@ -377,11 +350,11 @@ public class EnchantService {
 		// The supplement item is used
 		if (supplementItem != null) {
 			int supplementUseCount = 0;
-			ItemTemplate manastoneTemplate = parentItem.getItemTemplate();
+			ItemTemplate manastoneTemplate = manastone.getItemTemplate();
 
 			int manastoneCount;
 			// Not fusioned
-			if (targetWeapon == 1)
+			if (fusionedWeaponLevel == 1)
 				manastoneCount = targetItem.getItemStones().size() + 1;
 			// Fusioned
 			else

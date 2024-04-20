@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Mr. Poke, Dune11
- * @reworked vlog
+ * @author Mr. Poke, Dune11, vlog
  */
 public class _1141BelbuasTreasure extends AbstractQuestHandler {
 

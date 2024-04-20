@@ -13,9 +13,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.KillInWorld;
 
 /**
- * @author vlog
- * @reworked Bobobear
- * @modified Pad
+ * @author vlog, Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "KillInWorldData")

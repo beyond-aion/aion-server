@@ -9,7 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Enomine modified by Artur
+ * @author Enomine, Artur
  */
 public class _80320ForTheAsmodians extends AbstractQuestHandler {
 

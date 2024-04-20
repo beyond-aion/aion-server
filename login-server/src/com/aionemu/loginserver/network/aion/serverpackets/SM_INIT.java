@@ -5,9 +5,6 @@ import javax.crypto.SecretKey;
 import com.aionemu.loginserver.network.aion.AionServerPacket;
 import com.aionemu.loginserver.network.aion.LoginConnection;
 
-/**
- * @modified Neon
- */
 public final class SM_INIT extends AionServerPacket {
 
 	/**
@@ -24,26 +21,10 @@ public final class SM_INIT extends AionServerPacket {
 	 */
 	private final byte[] blowfishKey;
 
-	/**
-	 * Constructor
-	 * 
-	 * @param client
-	 * @param blowfishKey
-	 */
 	public SM_INIT(LoginConnection client, SecretKey blowfishKey) {
 		this(client.getEncryptedModulus(), blowfishKey.getEncoded(), client.getSessionId());
 	}
 
-	/**
-	 * Creates new instance of <tt>SM_INIT</tt> packet.
-	 * 
-	 * @param publicRsaKey
-	 *          Public RSA key
-	 * @param blowfishKey
-	 *          Blowfish key
-	 * @param sessionId
-	 *          Session identifier
-	 */
 	private SM_INIT(byte[] publicRsaKey, byte[] blowfishKey, int sessionId) {
 		super(0x00);
 		this.sessionId = sessionId;

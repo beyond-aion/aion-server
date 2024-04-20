@@ -11,8 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author HellBoy
- * @reworked Majka
+ * @author HellBoy, Majka
  */
 public class _2230AFriendlyWager extends AbstractQuestHandler {
 

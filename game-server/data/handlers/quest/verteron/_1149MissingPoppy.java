@@ -12,8 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * Find Poppy (203191), the lost Porgus. Take Poppy safely to Cannon (203145). Talk with Cannon.
  * 
- * @author Rhys2002
- * @reworked vlog
+ * @author Rhys2002, vlog
  */
 public class _1149MissingPoppy extends AbstractQuestHandler {
 

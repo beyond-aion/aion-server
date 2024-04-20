@@ -22,8 +22,7 @@ import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraFaction;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 
 /**
- * @author xTz
- * @modified Rolandas
+ * @author xTz, Rolandas
  */
 public class SpawnGroup extends AbstractLockManager {
 
@@ -225,8 +224,6 @@ public class SpawnGroup extends AbstractLockManager {
 
 	/**
 	 * Call it before each randomization to unset all template use.
-	 * 
-	 * @param instanceId
 	 */
 	public void resetTemplates(int instanceId) {
 		HashMap<SpawnTemplate, Boolean> states = poolUsedTemplates.get(instanceId);

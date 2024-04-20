@@ -10,8 +10,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
- * @author ATracer
- * @modified Cheatkiller
+ * @author ATracer, Cheatkiller
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PolymorphEffect")

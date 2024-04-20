@@ -13,8 +13,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "Stigma")

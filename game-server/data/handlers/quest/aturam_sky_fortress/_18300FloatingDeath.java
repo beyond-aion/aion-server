@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author zhkchi
- * @modified Pad
+ * @author zhkchi, Pad
  */
 public class _18300FloatingDeath extends AbstractQuestHandler {
 

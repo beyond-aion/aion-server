@@ -8,8 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author vlog
- * @modified Bobobear, Pad
+ * @author vlog, Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QuestSkillData")

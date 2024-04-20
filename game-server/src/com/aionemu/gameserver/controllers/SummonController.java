@@ -22,8 +22,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author ATracer
- * @author RotO (Attack-speed hack protection) modified by Sippolo
+ * @author ATracer, RotO (Attack-speed hack protection), Sippolo
  */
 public class SummonController extends CreatureController<Summon> {
 

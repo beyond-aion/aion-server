@@ -55,8 +55,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * @author xTz
- * @modified Neon
+ * @author xTz, Neon
  */
 public class TeleportService {
 
@@ -321,8 +320,6 @@ public class TeleportService {
 
 	/**
 	 * This method will send the set bind point packet
-	 *
-	 * @param player
 	 */
 	public static void sendObeliskBindPoint(Player player) {
 		int worldId;
@@ -371,15 +368,6 @@ public class TeleportService {
 		teleportTo(player, worldId, x, y, z, h);
 	}
 
-	/**
-	 * Move Player concerning object with specific conditions
-	 *
-	 * @param object
-	 * @param player
-	 * @param direction
-	 * @param distance
-	 * @return true or false
-	 */
 	public static void moveToTargetWithDistance(VisibleObject object, Player player, int direction, int distance) {
 		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(object.getHeading()));
 		float x0 = object.getX();
@@ -458,8 +446,6 @@ public class TeleportService {
 	/**
 	 * Sends a teleport request to the player. He will only be teleported to the Npc if he accepts the request.
 	 * 
-	 * @param player
-	 * @param npcId
 	 * @return True, if the request was sent. False if he already had an active teleport request.
 	 */
 	public static boolean sendTeleportRequest(Player player, int npcId) {

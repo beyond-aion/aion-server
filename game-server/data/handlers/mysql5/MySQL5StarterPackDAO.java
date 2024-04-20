@@ -16,8 +16,7 @@ import com.aionemu.gameserver.dao.StarterPackDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
- * @author Estrayl
- * @modified Neon
+ * @author Estrayl, Neon
  */
 public class MySQL5StarterPackDAO extends StarterPackDAO {
 

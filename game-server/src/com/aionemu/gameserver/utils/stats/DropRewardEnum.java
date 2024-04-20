@@ -2,10 +2,6 @@ package com.aionemu.gameserver.utils.stats;
 
 import java.util.NoSuchElementException;
 
-/**
- * @author ?
- * @modified Neon
- */
 public enum DropRewardEnum {
 	MINUS_10(-10, 0),
 	MINUS_9(-9, 40),
@@ -14,10 +10,10 @@ public enum DropRewardEnum {
 	MINUS_6(-6, 80),
 	MINUS_5(-5, 100);
 
-	private int dropRewardPercent;
-	private int levelDifference;
+	private final int dropRewardPercent;
+	private final int levelDifference;
 
-	private DropRewardEnum(int levelDifference, int dropRewardPercent) {
+	DropRewardEnum(int levelDifference, int dropRewardPercent) {
 		this.levelDifference = levelDifference;
 		this.dropRewardPercent = dropRewardPercent;
 	}

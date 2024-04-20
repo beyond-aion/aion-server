@@ -20,18 +20,12 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
- * @author ATracer
- * @modified Yeats, Neon
+ * @author ATracer, Yeats, Neon
  */
 public class TargetRangeProperty {
 
 	private static final Logger log = LoggerFactory.getLogger(TargetRangeProperty.class);
 
-	/**
-	 * @param skill
-	 * @param properties
-	 * @return
-	 */
 	public static boolean set(final Skill skill, Properties properties) {
 		Creature skillEffector = skill.getEffector();
 		TargetRangeAttribute value = properties.getTargetType();

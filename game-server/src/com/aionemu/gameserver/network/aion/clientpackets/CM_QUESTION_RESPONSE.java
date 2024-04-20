@@ -10,8 +10,7 @@ import com.aionemu.gameserver.services.ExchangeService;
 /**
  * Response to SM_QUESTION_WINDOW
  * 
- * @author Ben, Sarynth
- * @modified Neon
+ * @author Ben, Sarynth, Neon
  */
 public class CM_QUESTION_RESPONSE extends AionClientPacket {
 

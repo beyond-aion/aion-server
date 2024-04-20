@@ -10,9 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Artur
- * @reworked Ritsu
- * @modified Majka
+ * @author Artur, Ritsu, Majka
  */
 public class _24012AnOminousCrop extends AbstractQuestHandler {
 

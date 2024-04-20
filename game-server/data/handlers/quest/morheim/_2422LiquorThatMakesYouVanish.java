@@ -10,9 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
- * @author MrPoke
- * @modified Nephis, Gigi
- * @reworked vlog
+ * @author MrPoke, Nephis, Gigi, vlog
  */
 public class _2422LiquorThatMakesYouVanish extends AbstractQuestHandler {
 

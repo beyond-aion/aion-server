@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author MrPoke remod By Nephis
- * @reworked vlog
+ * @author MrPoke, Nephis, vlog
  */
 public class _2493BringingUpTayga extends AbstractQuestHandler {
 

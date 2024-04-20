@@ -10,9 +10,7 @@ import com.aionemu.gameserver.model.broker.filter.BrokerRecipeFilter;
 import com.aionemu.gameserver.model.gameobjects.Item;
 
 /**
- * @author kosyachok
- * @author Simple
- * @author ATracer
+ * @author kosyachok, Simple, ATracer
  */
 public enum BrokerItemMask {
 	/**
@@ -173,38 +171,21 @@ public enum BrokerItemMask {
 	private BrokerItemMask parent;
 	private boolean childrenExist;
 
-	/**
-	 * @param typeId
-	 * @param filter
-	 * @param parent
-	 * @param childrenExist
-	 */
-	private BrokerItemMask(int typeId, BrokerFilter filter, BrokerItemMask parent, boolean childrenExist) {
+	BrokerItemMask(int typeId, BrokerFilter filter, BrokerItemMask parent, boolean childrenExist) {
 		this.typeId = typeId;
 		this.filter = filter;
 		this.parent = parent;
 		this.childrenExist = childrenExist;
 	}
 
-	/**
-	 * @return the typeId
-	 */
 	public int getId() {
 		return typeId;
 	}
 
-	/**
-	 * @param item
-	 * @return
-	 */
 	public boolean isMatches(Item item) {
 		return filter.accept(item.getItemTemplate());
 	}
 
-	/**
-	 * @param maskId
-	 * @return
-	 */
 	public boolean isChildrenMask(int maskId) {
 		for (BrokerItemMask p = parent; p != null; p = p.parent) {
 			if (p.typeId == maskId)
@@ -213,12 +194,6 @@ public enum BrokerItemMask {
 		return false;
 	}
 
-	/**
-	 * Return BrokerListType by id.
-	 * 
-	 * @param id
-	 * @return BrokerListType
-	 */
 	public static BrokerItemMask getBrokerMaskById(int id) {
 		for (BrokerItemMask mt : values()) {
 			if (mt.typeId == id)
@@ -227,9 +202,6 @@ public enum BrokerItemMask {
 		return UNKNOWN;
 	}
 
-	/**
-	 * @return the childrenExist
-	 */
 	public boolean hasChildren() {
 		return childrenExist;
 	}

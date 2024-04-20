@@ -8,7 +8,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author Yeats 06.04.2016.
+ * @author Yeats
  */
 public class Pvpmap extends AdminCommand {
 

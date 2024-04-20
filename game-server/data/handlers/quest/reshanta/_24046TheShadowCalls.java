@@ -15,8 +15,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Artur
- * @modified Majka
+ * @author Artur, Majka
  */
 public class _24046TheShadowCalls extends AbstractQuestHandler {
 

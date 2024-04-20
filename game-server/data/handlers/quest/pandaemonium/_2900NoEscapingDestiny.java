@@ -18,8 +18,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author Mr. Poke, edited Rolandas
- * @reworked vlog
+ * @author Mr. Poke, Rolandas, vlog
  */
 public class _2900NoEscapingDestiny extends AbstractQuestHandler {
 

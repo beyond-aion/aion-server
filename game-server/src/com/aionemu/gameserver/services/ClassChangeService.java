@@ -16,8 +16,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author ATracer, sweetkr
- * @reworked Neon
+ * @author ATracer, sweetkr, Neon
  */
 public class ClassChangeService {
 

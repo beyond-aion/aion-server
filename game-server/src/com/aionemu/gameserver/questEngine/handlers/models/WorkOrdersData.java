@@ -15,9 +15,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.WorkOrders;
 
 /**
- * @author Mr. Poke
- * @reworked Bobobear
- * @modified Pad
+ * @author Mr. Poke, Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "WorkOrdersData", propOrder = { "giveComponents" })

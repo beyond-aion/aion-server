@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Mr. Poke, modified Bobobear
+ * @author Mr. Poke, Bobobear
  */
 public class _29071ADispatchtoAltgard extends AbstractQuestHandler {
 

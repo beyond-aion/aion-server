@@ -10,9 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author zhkchi
- * @reworked vlog
- * @modified Majka
+ * @author zhkchi, vlog, Majka
  */
 public class _18500BigKinah extends AbstractQuestHandler {
 

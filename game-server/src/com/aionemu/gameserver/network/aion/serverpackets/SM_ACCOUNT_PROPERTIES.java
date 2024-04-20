@@ -5,8 +5,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author pixfid, Rolandas
- * @modified Yeats & Neon
+ * @author pixfid, Rolandas, Yeats, Neon
  */
 public class SM_ACCOUNT_PROPERTIES extends AionServerPacket {
 

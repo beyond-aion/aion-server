@@ -12,8 +12,7 @@ import com.aionemu.gameserver.utils.collections.SplitList;
 import com.aionemu.gameserver.utils.collections.Predicates;
 
 /**
- * @author nrg
- * @reworked Neon
+ * @author nrg, Neon
  */
 public class CM_INSTANCE_INFO extends AionClientPacket {
 

@@ -12,8 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Mr. Poke
- * @modified Majka
+ * @author Mr. Poke, Majka
  */
 public class _2005TeachingaLesson extends AbstractQuestHandler {
 

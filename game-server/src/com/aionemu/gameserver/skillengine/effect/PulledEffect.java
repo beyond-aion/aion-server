@@ -18,7 +18,7 @@ import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * @author Sarynth modified by Wakizashi, Sippolo
+ * @author Sarynth, Wakizashi, Sippolo
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PulledEffect")

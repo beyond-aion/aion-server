@@ -13,8 +13,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * Find Litonos (204616) (bring him the Berone's Necklace (182201780)). Talk with Litonos. Take Litonos to Berone (204589). Talk with Berone.
  * 
- * @author Balthazar
- * @reworked vlog
+ * @author Balthazar, vlog
  */
 public class _1562CrossedDestiny extends AbstractQuestHandler {
 

@@ -12,8 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Ritsu
- * @reworked Majka
+ * @author Ritsu, Majka
  */
 public class _24022SneakBehindtheIceClaw extends AbstractQuestHandler {
 

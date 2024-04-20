@@ -3,8 +3,7 @@ package com.aionemu.gameserver.model.animations;
 /**
  * These IDs are for use with {@link com.aionemu.gameserver.network.aion.serverpackets.SM_TELEPORT_LOC SM_TELEPORT_LOC}.
  * 
- * @author xTz
- * @reworked Neon
+ * @author xTz, Neon
  */
 public enum TeleportAnimation {
 

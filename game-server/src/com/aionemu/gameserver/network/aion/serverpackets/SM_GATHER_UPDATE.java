@@ -10,8 +10,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * This packet updates the players current gathering status / progress.
  * 
- * @author ATracer, orz
- * @reworked Yeats, Neon
+ * @author ATracer, orz, Yeats, Neon
  */
 public class SM_GATHER_UPDATE extends AionServerPacket {
 
@@ -69,12 +68,6 @@ public class SM_GATHER_UPDATE extends AionServerPacket {
 		}
 	}
 
-	/**
-	 * Writes the system message information for the specified ID.<br>
-	 * The structure and contents are the same as in SM_SYSTEM_MESSAGE when sending a {@link com.aionemu.gameserver.model.DescriptionId DescriptionId}
-	 * 
-	 * @param msgId
-	 */
 	private void writeSystemMsgInfo(int msgId) {
 		writeD(msgId); // msgId
 		writeS(l10n); // parameter

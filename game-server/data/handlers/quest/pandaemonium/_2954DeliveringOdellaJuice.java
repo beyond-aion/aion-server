@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Altaress
- * @reworked vlog
+ * @author Altaress, vlog
  */
 public class _2954DeliveringOdellaJuice extends AbstractQuestHandler {
 

@@ -8,8 +8,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * This packet is informing client that some AionObject is no longer visible.
  *
- * @author -Nemesiss-
- * @modified Neon
+ * @author -Nemesiss-, Neon
  */
 public class SM_DELETE extends AionServerPacket {
 

@@ -16,8 +16,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author vlog
- * @modified Pad
+ * @author vlog, Pad
  */
 public class KillSpawned extends AbstractTemplateQuestHandler {
 

@@ -13,8 +13,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.trade.PricesService;
 
 /**
- * @author orz, Sarynth
- * @modified Artur, Neon
+ * @author orz, Sarynth, Artur, Neon
  */
 public class SM_SELL_ITEM extends AionServerPacket {
 

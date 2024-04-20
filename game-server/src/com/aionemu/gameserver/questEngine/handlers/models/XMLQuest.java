@@ -11,8 +11,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 
 /**
- * @author MrPoke, Hilgert
- * @modified Pad
+ * @author MrPoke, Hilgert, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QuestScriptData")

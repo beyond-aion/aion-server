@@ -5,8 +5,7 @@ import com.aionemu.gameserver.services.panesterra.ahserion.AhserionRaid;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author Yeats
- * @modified Neon
+ * @author Yeats, Neon
  */
 public class Ahserion extends AdminCommand {
 

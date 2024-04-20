@@ -7,8 +7,7 @@ import com.aionemu.gameserver.model.templates.walker.WalkerTemplate;
 /**
  * Stores for the spawn needed information, used for forming walker groups and spawning NPCs
  * 
- * @author vlog
- * @modified Rolandas
+ * @author vlog, Rolandas
  */
 public class ClusteredNpc {
 

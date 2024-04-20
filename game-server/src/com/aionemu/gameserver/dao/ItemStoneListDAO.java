@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.items.IdianStone;
 import com.aionemu.gameserver.model.items.ManaStone;
 
 /**
- * @author ATracer modified by Wakizashi
+ * @author ATracer, Wakizashi
  */
 public abstract class ItemStoneListDAO implements DAO {
 

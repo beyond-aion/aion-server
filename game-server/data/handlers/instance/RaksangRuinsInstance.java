@@ -24,7 +24,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Estrayl 14.04.2016
+ * @author Estrayl
  * @since AION 4.8
  */
 @InstanceID(300610000)

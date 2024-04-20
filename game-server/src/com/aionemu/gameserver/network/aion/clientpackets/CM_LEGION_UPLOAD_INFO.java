@@ -9,7 +9,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.LegionService;
 
 /**
- * @author Simple modified cura
+ * @author Simple, cura
  */
 public class CM_LEGION_UPLOAD_INFO extends AionClientPacket {
 
@@ -20,9 +20,6 @@ public class CM_LEGION_UPLOAD_INFO extends AionClientPacket {
 	private int green;
 	private int blue;
 
-	/**
-	 * @param opcode
-	 */
 	public CM_LEGION_UPLOAD_INFO(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}

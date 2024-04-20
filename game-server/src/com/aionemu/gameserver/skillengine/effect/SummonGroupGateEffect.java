@@ -16,8 +16,7 @@ import com.aionemu.gameserver.spawnengine.VisibleObjectSpawner;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author LokiReborn
- * @modified Neon
+ * @author LokiReborn, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SummonGroupGateEffect")

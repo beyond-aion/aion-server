@@ -18,8 +18,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Cheatkiller
- * @modified Majka, Pad
+ * @author Cheatkiller, Majka, Pad
  */
 public class KillInZone extends AbstractTemplateQuestHandler {
 

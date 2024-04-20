@@ -21,8 +21,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 /**
  * This class is handling NPC shouts
  * 
- * @author Rolandas
- * @reworked Neon
+ * @author Rolandas, Neon
  */
 public class NpcShoutsService {
 

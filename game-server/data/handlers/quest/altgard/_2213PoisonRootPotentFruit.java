@@ -11,8 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- * @author Mr. Poke
- * @modified Majka
+ * @author Mr. Poke, Majka
  */
 public class _2213PoisonRootPotentFruit extends AbstractQuestHandler {
 

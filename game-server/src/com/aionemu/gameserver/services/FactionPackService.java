@@ -17,8 +17,7 @@ import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
- * @author Estrayl
- * @modified Neon
+ * @author Estrayl, Neon
  */
 public class FactionPackService {
 

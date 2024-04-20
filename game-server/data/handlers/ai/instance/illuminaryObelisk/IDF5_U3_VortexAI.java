@@ -18,7 +18,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.NoActionAI;
 
 /**
- * @author Estrayl 29.06.2017
+ * @author Estrayl
  */
 @AIName("idf5_u3_vortex")
 public class IDF5_U3_VortexAI extends NoActionAI {

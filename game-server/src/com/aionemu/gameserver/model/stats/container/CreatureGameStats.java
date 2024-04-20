@@ -26,8 +26,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
- * @author xavier
- * @modified Neon
+ * @author xavier, Neon
  */
 public abstract class CreatureGameStats<T extends Creature> {
 

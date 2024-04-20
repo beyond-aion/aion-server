@@ -9,8 +9,7 @@ import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.services.BaseService;
 
 /**
- * @author Source
- * @modified Rolandas
+ * @author Source, Rolandas
  */
 public class BaseBossDeathListener extends OnDieEventListener {
 

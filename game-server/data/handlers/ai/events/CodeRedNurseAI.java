@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.time.ServerTime;
 import ai.GeneralNpcAI;
 
 /**
- * @author xTz, modified bobobear
+ * @author xTz, bobobear
  */
 @AIName("code_red_nurse")
 public class CodeRedNurseAI extends GeneralNpcAI {

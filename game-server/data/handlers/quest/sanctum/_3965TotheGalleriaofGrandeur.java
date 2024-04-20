@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Rolandas
- * @reworked vlog
+ * @author Rolandas, vlog
  */
 public class _3965TotheGalleriaofGrandeur extends AbstractQuestHandler {
 

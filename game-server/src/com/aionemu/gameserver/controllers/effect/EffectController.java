@@ -23,8 +23,7 @@ import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author ATracer
- * @modified Wakizashi, Sippolo, Cheatkiller, Neon
+ * @author ATracer, Wakizashi, Sippolo, Cheatkiller, Neon
  */
 public class EffectController {
 
@@ -45,31 +44,18 @@ public class EffectController {
 		this.owner = owner;
 	}
 
-	/**
-	 * @return the owner
-	 */
 	public Creature getOwner() {
 		return owner;
 	}
 
-	/**
-	 * @return the isUnderShield
-	 */
 	public boolean isUnderShield() {
 		return isUnderShield;
 	}
 
-	/**
-	 * @param isUnderShield
-	 *          the isUnderShield to set
-	 */
 	public void setUnderShield(boolean isUnderShield) {
 		this.isUnderShield = isUnderShield;
 	}
 
-	/**
-	 * @param nextEffect
-	 */
 	public void addEffect(Effect nextEffect) {
 		Map<String, Effect> mapToUpdate = getMapForEffect(nextEffect);
 
@@ -373,11 +359,6 @@ public class EffectController {
 		return findFirstEffect(getMapForEffect(skillTemplate), effect -> effect.getSkillId() == skillId);
 	}
 
-	/**
-	 * Removes the effect by skillId.
-	 * 
-	 * @param skillId
-	 */
 	public void removeEffect(int skillId) {
 		Effect effect = findBySkillId(skillId);
 		if (effect != null)
@@ -388,23 +369,14 @@ public class EffectController {
 		removeEffects(abnormalEffectMap, Effect::isHideEffect);
 	}
 
-	/**
-	 * Removes Petorderunsummon effects from owner.
-	 */
 	public void removePetOrderUnSummonEffects() {
 		removeEffects(abnormalEffectMap, Effect::isPetOrderUnSummonEffect);
 	}
 
-	/**
-	 * Removes Paralyze effects from owner.
-	 */
 	public void removeParalyzeEffects() {
 		removeEffects(abnormalEffectMap, Effect::isParalyzeEffect);
 	}
 
-	/**
-	 * Removes Stun effects from owner.
-	 */
 	public void removeStunEffects() {
 		removeEffects(abnormalEffectMap, Effect::isStunEffect);
 	}
@@ -749,16 +721,10 @@ public class EffectController {
 			broadCastEffects(null);
 	}
 
-	/**
-	 * return true if creature is under Fear effect
-	 */
 	public boolean isUnderFear() {
 		return isAbnormalSet(AbnormalState.FEAR);
 	}
 
-	/**
-	 * @return true if creature is under Confuse effect
-	 */
 	public boolean isConfused() {
 		return isAbnormalSet(AbnormalState.CONFUSE);
 	}
@@ -831,9 +797,6 @@ public class EffectController {
 
 	/**
 	 * Used for checking unique abnormal states
-	 * 
-	 * @param state
-	 * @return
 	 */
 	public boolean isAbnormalSet(AbnormalState state) {
 		if (state == AbnormalState.NONE)
@@ -843,9 +806,6 @@ public class EffectController {
 
 	/**
 	 * Used for compound abnormal state checks
-	 * 
-	 * @param state
-	 * @return
 	 */
 	public boolean isInAnyAbnormalState(AbnormalState state) {
 		if (state == AbnormalState.NONE)

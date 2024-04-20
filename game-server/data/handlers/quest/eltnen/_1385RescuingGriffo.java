@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author MrPoke remod By Xitanium
+ * @author MrPoke, Xitanium
  */
 public class _1385RescuingGriffo extends AbstractQuestHandler {
 

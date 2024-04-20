@@ -10,8 +10,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * Emotion packet
  * 
- * @author SoulKeeper
- * @modified -Enomine- 4.0
+ * @author SoulKeeper, -Enomine-
  */
 public class SM_EMOTION extends AionServerPacket {
 
@@ -51,28 +50,10 @@ public class SM_EMOTION extends AionServerPacket {
 	private float z;
 	private byte heading;
 
-	/**
-	 * This constructor should be used when emotion and targetid is 0
-	 * 
-	 * @param creature
-	 * @param emotionType
-	 */
 	public SM_EMOTION(Creature creature, EmotionType emotionType) {
 		this(creature, emotionType, 0, 0);
 	}
 
-	/**
-	 * Constructs new server packet with specified opcode
-	 * 
-	 * @param senderObjectId
-	 *          who sended emotion
-	 * @param unknown
-	 *          Dunno what it is, can be 0x10 or 0x11
-	 * @param emotionId
-	 *          emotion to play
-	 * @param emotionId
-	 *          who target emotion
-	 */
 	public SM_EMOTION(Creature creature, EmotionType emotionType, int emotion, int targetObjectId) {
 		this.senderObjectId = creature.getObjectId();
 		this.emotionType = emotionType;
@@ -85,20 +66,12 @@ public class SM_EMOTION extends AionServerPacket {
 		this.speed = creature.getGameStats().getMovementSpeedFloat();
 	}
 
-	/**
-	 * @param Obj
-	 * @param doorId
-	 * @param state
-	 */
 	public SM_EMOTION(int Objid, EmotionType emotionType, int state) {
 		this.senderObjectId = Objid;
 		this.emotionType = emotionType;
 		this.state = state;
 	}
 
-	/**
-	 * New
-	 */
 	public SM_EMOTION(Player player, EmotionType emotionType, int emotion, float x, float y, float z, byte heading, int targetObjectId) {
 		this.senderObjectId = player.getObjectId();
 		this.emotionType = emotionType;

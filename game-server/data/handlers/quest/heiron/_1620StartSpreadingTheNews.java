@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author MrPoke
- * @modified Nephis
+ * @author MrPoke, Nephis
  */
 public class _1620StartSpreadingTheNews extends AbstractQuestHandler {
 

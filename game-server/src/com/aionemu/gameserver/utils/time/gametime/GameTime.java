@@ -6,9 +6,7 @@ import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
 /**
  * Represents the internal clock for the time in aion world
  * 
- * @author Ben
- * @reworked vlog
- * @modified Neon
+ * @author Ben, vlog, Neon
  */
 public class GameTime implements Cloneable {
 
@@ -81,15 +79,11 @@ public class GameTime implements Cloneable {
 		}
 	}
 
-	/**
-	 * @return the dayTime
-	 */
 	public DayTime getDayTime() {
 		return dayTime;
 	}
 
 	/**
-	 * @param dayTime
 	 * @return True if the daytime changed
 	 */
 	public boolean setDayTime(DayTime dayTime) {
@@ -174,44 +168,18 @@ public class GameTime implements Cloneable {
 			return DayTime.MORNING;
 	}
 
-	/**
-	 * Subtract the given game time from this game time
-	 * 
-	 * @param game
-	 *          time to subtract
-	 * @return new game time
-	 */
 	public GameTime minus(GameTime gt) {
 		return new GameTime(this.getTime() - gt.getTime());
 	}
 
-	/**
-	 * Add the given game time to this game time
-	 * 
-	 * @param game
-	 *          time to add
-	 * @return new game time
-	 */
 	public GameTime plus(GameTime gt) {
 		return new GameTime(this.getTime() + gt.getTime());
 	}
 
-	/**
-	 * Compares this time and the time given
-	 * 
-	 * @param gt
-	 * @return true, if this time is greater
-	 */
 	public boolean isGreaterThan(GameTime gt) {
 		return this.getTime() > gt.getTime();
 	}
 
-	/**
-	 * Compares this time and the time given
-	 * 
-	 * @param gt
-	 * @return true, if this time is less
-	 */
 	public boolean isLessThan(GameTime gt) {
 		return this.getTime() < gt.getTime();
 	}

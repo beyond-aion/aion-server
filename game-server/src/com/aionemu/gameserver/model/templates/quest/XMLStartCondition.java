@@ -20,8 +20,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 /**
  * Checks quest start conditions, listed in quest_data.xml
  * 
- * @author antness
- * @reworked vlog
+ * @author antness, vlog
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "QuestStartConditions")

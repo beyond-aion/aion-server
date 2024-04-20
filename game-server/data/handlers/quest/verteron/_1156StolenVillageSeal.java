@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Rhys2002
- * @reworked vlog
+ * @author Rhys2002, vlog
  */
 public class _1156StolenVillageSeal extends AbstractQuestHandler {
 

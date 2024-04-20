@@ -9,9 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author zhkchi
- * @reworked vlog
- * @modified Majka
+ * @author zhkchi, vlog, Majka
  */
 public class _28510DestroytheHaramelFacilities extends AbstractQuestHandler {
 

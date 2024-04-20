@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Balthazar
- * @reworked vlog
+ * @author Balthazar, vlog
  */
 public class _1647DressingUpForBollvig extends AbstractQuestHandler {
 

@@ -13,8 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * Get the antidote (182208035) from Calydon Sorcerer (214304) and bring it to Ruria (798211). Talk with Ruria. Escort Ruria to the place where
  * Melleas (798208) is. Talk with Melleas. Tell Rosina (798190) about Ruria.
  * 
- * @author Balthazar
- * @reworked vlog
+ * @author Balthazar, vlog
  */
 public class _3050RescuingRuria extends AbstractQuestHandler {
 

@@ -10,8 +10,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.aionemu.gameserver.model.templates.base.BaseTemplate;
 
 /**
- * @author Source
- * @modified Estrayl
+ * @author Source, Estrayl
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "base_locations")

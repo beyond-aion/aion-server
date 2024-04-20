@@ -13,8 +13,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.KillInZone;
 
 /**
- * @author Cheatkiller
- * @modified Majka, Pad
+ * @author Cheatkiller, Majka, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "KillInZoneData")

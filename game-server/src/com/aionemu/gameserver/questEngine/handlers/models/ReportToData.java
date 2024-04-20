@@ -13,8 +13,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.ReportTo;
 
 /**
- * @author MrPoke
- * @modified Pad, Neon
+ * @author MrPoke, Pad, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ReportToData")

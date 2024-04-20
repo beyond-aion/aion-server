@@ -26,9 +26,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author Ritsu
- * @reworked Estrayl
- * @modified Neon
+ * @author Ritsu, Estrayl, Neon
  */
 @AIName("anohas_sword")
 public class AnohasSwordAI extends NpcAI {

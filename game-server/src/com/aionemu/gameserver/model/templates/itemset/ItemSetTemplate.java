@@ -12,7 +12,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 
 /**
- * @author ATracer, modified by Antivirus
+ * @author ATracer, Antivirus
  */
 @XmlRootElement(name = "itemset")
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -28,10 +28,6 @@ public class ItemSetTemplate implements StatOwner {
 	@XmlAttribute
 	protected int id;
 
-	/**
-	 * @param u
-	 * @param parent
-	 */
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		if (fullbonus != null) {
 			// Set number of items to apply the full bonus
@@ -39,37 +35,22 @@ public class ItemSetTemplate implements StatOwner {
 		}
 	}
 
-	/**
-	 * @return the itempart
-	 */
 	public List<ItemPart> getItempart() {
 		return itempart;
 	}
 
-	/**
-	 * @return the partbonus
-	 */
 	public List<PartBonus> getPartbonus() {
 		return partbonus;
 	}
 
-	/**
-	 * @return the fullbonus
-	 */
 	public FullBonus getFullbonus() {
 		return fullbonus;
 	}
 
-	/**
-	 * @return the name
-	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @return the id
-	 */
 	public int getId() {
 		return id;
 	}

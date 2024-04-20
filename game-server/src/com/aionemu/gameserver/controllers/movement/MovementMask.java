@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.controllers.movement;
 
 /**
- * @author Mr. Poke
- * @modified Neon
+ * @author Mr. Poke, Neon
  */
 public class MovementMask {
 

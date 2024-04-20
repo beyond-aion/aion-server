@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Balthazar
- * @modified Pad
+ * @author Balthazar, Pad
  */
 public class _1162AltenosWeddingRing extends AbstractQuestHandler {
 

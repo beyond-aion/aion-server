@@ -20,7 +20,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author Yeats 11.03.2016.
+ * @author Yeats
  */
 @InstanceID(301140000)
 public class SeizedDanuarSanctuaryInstance extends GeneralInstanceHandler {

@@ -63,8 +63,7 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
- * @author Mr. Poke
- * @modified vlog, bobobear, xTz, Rolandas
+ * @author Mr. Poke, vlog, bobobear, xTz, Rolandas
  */
 public final class QuestService {
 
@@ -73,8 +72,6 @@ public final class QuestService {
 
 	/**
 	 * Finishes the quest and rewards the player.
-	 * 
-	 * @param env
 	 */
 	public static boolean finishQuest(QuestEnv env) {
 		Player player = env.getPlayer();
@@ -121,8 +118,6 @@ public final class QuestService {
 
 	/**
 	 * Validates and sets/corrects (if necessary) the reward group which is to be used. Must only be called in reward state.
-	 * 
-	 * @return False if the reward group was out of range, or if it was null before and there are more than one possible groups
 	 */
 	public static void validateAndFixRewardGroup(QuestState qs, int questId) {
 		if (qs != null && qs.getStatus() == QuestStatus.REWARD) {
@@ -452,10 +447,6 @@ public final class QuestService {
 
 	/**
 	 * Adds the quest to the players quest list.
-	 * 
-	 * @param player
-	 * @param questId
-	 * @param status
 	 */
 	public static void addOrUpdateQuest(Player player, int questId, QuestStatus status) {
 		ActionType actionType;

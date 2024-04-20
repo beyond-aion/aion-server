@@ -30,8 +30,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
- * @author KID
- * @reworked Neon
+ * @author KID, Neon
  */
 public class WebRewardService {
 

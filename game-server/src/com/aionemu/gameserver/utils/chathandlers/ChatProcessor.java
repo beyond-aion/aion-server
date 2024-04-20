@@ -18,8 +18,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author KID
- * @modified Rolandas, Neon
+ * @author KID, Rolandas, Neon
  */
 public class ChatProcessor implements GameEngine {
 

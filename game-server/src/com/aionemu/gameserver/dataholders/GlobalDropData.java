@@ -18,8 +18,7 @@ import com.aionemu.gameserver.model.templates.globaldrops.StringFunction;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 
 /**
- * @author AionCool
- * @modified Bobobear, Neon
+ * @author AionCool, Bobobear, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "global_rules")

@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author MrPoke remod by Nephis
+ * @author MrPoke, Nephis
  */
 public class _2724MissingInAction extends AbstractQuestHandler {
 

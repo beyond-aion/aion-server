@@ -5,9 +5,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author alexa026
- * @author ATracer
- * @author kecimis
+ * @author alexa026, ATracer, kecimis
  */
 public class SM_ATTACK_STATUS extends AionServerPacket {
 

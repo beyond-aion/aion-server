@@ -12,8 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * Talk with Maochinicherk (798068). Bring the Glossy Aether Paper (186000091) and Kinah (50000) to Ninis (798385).
  * 
- * @author undertrey
- * @modified vlog
+ * @author undertrey, vlog
  */
 public class _4967GrowthNinissSecondCharm extends AbstractQuestHandler {
 

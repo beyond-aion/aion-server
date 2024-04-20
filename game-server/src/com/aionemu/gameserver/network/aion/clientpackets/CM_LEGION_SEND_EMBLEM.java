@@ -8,8 +8,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.LegionService;
 
 /**
- * @author Simple
- * @modified cura, Neon
+ * @author Simple, cura, Neon
  */
 public class CM_LEGION_SEND_EMBLEM extends AionClientPacket {
 

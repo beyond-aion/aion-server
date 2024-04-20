@@ -11,8 +11,7 @@ import com.aionemu.gameserver.model.templates.item.purification.ItemPurification
 import com.aionemu.gameserver.model.templates.item.purification.PurificationResult;
 
 /**
- * @author Ranastic
- * @reworked Navyan
+ * @author Ranastic, Navyan
  */
 @XmlRootElement(name = "item_purifications")
 @XmlAccessorType(XmlAccessType.FIELD)

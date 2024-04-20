@@ -19,8 +19,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author ATracer
- * @reworked Neon
+ * @author ATracer, Neon
  */
 public class Ai extends AdminCommand {
 

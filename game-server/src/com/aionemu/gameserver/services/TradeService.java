@@ -39,8 +39,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author ATracer, Rama, Wakizashi, xTz
- * @modified Neon
+ * @author ATracer, Rama, Wakizashi, xTz, Neon
  */
 public class TradeService {
 
@@ -76,12 +75,6 @@ public class TradeService {
 
 	/**
 	 * General Trade with NPC method. Handles buy items for AP and/or tokens (coins etc.) and/or kinah
-	 * 
-	 * @param player
-	 * @param tradeList
-	 * @param useKinah
-	 *          shop subtracts kinah value of items or not
-	 * @return true or false
 	 */
 	public static boolean performBuyTransaction(Npc npc, Player player, TradeList tradeList, boolean useKinah) {
 		if (!PlayerRestrictions.canTrade(player)) {
@@ -396,19 +389,4 @@ public class TradeService {
 		ItemService.addItem(player, itemId, count);
 		return true;
 	}
-
-	/**
-	 * @return the tradeListData
-	 */
-	public static TradeListData getTradeListData() {
-		return tradeListData;
-	}
-
-	/**
-	 * @return the goodsListData
-	 */
-	public static GoodsListData getGoodsListData() {
-		return goodsListData;
-	}
-
 }

@@ -9,9 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Mr. Poke
- * @reworked vlog
- * @modified Majka
+ * @author Mr. Poke, vlog, Majka
  */
 public class _2004ACharmedCube extends AbstractQuestHandler {
 

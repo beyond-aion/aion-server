@@ -14,8 +14,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.GeneralNpcAI;
 
 /**
- * @author xTz
- * @modified Estrayl
+ * @author xTz, Estrayl
  */
 @AIName("dancing_flame")
 public class DancingFlameAI extends GeneralNpcAI {

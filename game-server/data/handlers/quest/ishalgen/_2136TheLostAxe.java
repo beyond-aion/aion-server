@@ -17,8 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Rhys2002
- * @modified Hellboy
+ * @author Rhys2002, Hellboy
  */
 public class _2136TheLostAxe extends AbstractQuestHandler {
 

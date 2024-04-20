@@ -5,8 +5,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author orz
- * @author Sarynth thx Rhys2002 for packets. :)
+ * @author orz, Sarynth, Rhys2002
  */
 public class SM_DIE extends AionServerPacket {
 

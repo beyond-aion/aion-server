@@ -8,8 +8,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author ViAl
- * @modified Neon
+ * @author ViAl, Neon
  */
 public class SM_ATREIAN_PASSPORT extends AionServerPacket {
 

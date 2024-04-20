@@ -17,8 +17,7 @@ import com.aionemu.gameserver.dao.RewardServiceDAO;
 import com.aionemu.gameserver.model.templates.rewards.RewardEntryItem;
 
 /**
- * @author KID
- * @modified Neon
+ * @author KID, Neon
  */
 public class MySQL5RewardServiceDAO extends RewardServiceDAO {
 

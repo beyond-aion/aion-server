@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author MrPoke
- * @modified Majka
+ * @author MrPoke, Majka
  */
 public class _1004NeutralizingOdium extends AbstractQuestHandler {
 

@@ -6,8 +6,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author ATracer
- * @modified aionchs-, Wylovech, Neon
+ * @author ATracer, aionchs-, Wylovech, Neon
  */
 public class Morph extends AdminCommand {
 
@@ -27,14 +26,11 @@ public class Morph extends AdminCommand {
 			return;
 		}
 
-		Player target = admin;
+		Player target = admin.getTarget() instanceof Player p ? p : admin;
 		int npcId;
 
-		if (admin.getTarget() instanceof Player)
-			target = (Player) admin.getTarget();
-
-		if (params.length == 0 && admin.getTarget() instanceof Npc) {
-			npcId = ((Npc) admin.getTarget()).getNpcId();
+		if (params.length == 0 && admin.getTarget() instanceof Npc npc) {
+			npcId = npc.getNpcId();
 		} else {
 			try {
 				npcId = Integer.parseInt(params[0]);

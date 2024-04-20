@@ -20,8 +20,7 @@ import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
  * <br>
  * This class temporarily also contains data loaded from txt files by DataLoaders. It'll be changed later.
  *
- * @author Luno , orz
- * @modified Wakizashi, Neon
+ * @author Luno , orz, Wakizashi, Neon
  */
 public final class DataManager {
 

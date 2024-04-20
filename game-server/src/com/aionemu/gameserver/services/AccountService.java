@@ -31,8 +31,7 @@ import com.aionemu.gameserver.services.player.PlayerService;
 /**
  * This class is a front-end for daos and it's responsibility is to retrieve the Account objects
  * 
- * @author Luno
- * @modified cura
+ * @author Luno, cura
  */
 public class AccountService {
 
@@ -40,13 +39,6 @@ public class AccountService {
 
 	/**
 	 * Returns {@link Account} object that has given id.
-	 * 
-	 * @param accountId
-	 * @param accountTime
-	 * @param accountName
-	 * @param accessLevel
-	 * @param membership
-	 * @return Account
 	 */
 	public static Account getAccount(int accountId, String accountName, long creationDate, AccountTime accountTime, byte accessLevel, byte membership,
 		long toll, String allowedHddSerial) {
@@ -66,8 +58,6 @@ public class AccountService {
 
 	/**
 	 * Removes from db characters that should be deleted (their deletion time has passed).
-	 * 
-	 * @param account
 	 */
 	public static void removeDeletedCharacters(Account account) {
 		/* Removes chars that should be removed */
@@ -93,10 +83,6 @@ public class AccountService {
 		}
 	}
 
-	/**
-	 * @param accountId
-	 * @return Loaded account data
-	 */
 	public static Account loadAccount(int accountId) {
 		Account account = new Account(accountId);
 		List<Integer> playerIdList = DAOManager.getDAO(PlayerDAO.class).getPlayerOidsOnAccount(accountId);

@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.skillengine.model;
 
 /**
- * @author kecimis
- * @modified Neon
+ * @author kecimis, Neon
  */
 public class ChainSkill {
 

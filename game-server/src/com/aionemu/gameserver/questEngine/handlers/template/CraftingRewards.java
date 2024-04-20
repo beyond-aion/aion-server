@@ -11,8 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 
 /**
- * @author Bobobear
- * @modified Pad
+ * @author Bobobear, Pad
  */
 public class CraftingRewards extends AbstractTemplateQuestHandler {
 

@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Rhys2002
- * @modified Majka
+ * @author Rhys2002, Majka
  */
 public class _1701GovernorsDirective extends AbstractQuestHandler {
 

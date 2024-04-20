@@ -20,9 +20,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- * @author KID
- * @modified Rolandas
- * @reworked Neon
+ * @author KID, Rolandas, Neon
  */
 public class SpawnUpdate extends AdminCommand {
 
@@ -92,10 +90,10 @@ public class SpawnUpdate extends AdminCommand {
 		WorldPosition tPos = target.getPosition();
 		tPos.setXYZH(x, y, z, h);
 
-		if (target instanceof Gatherable)
-			PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(target));
+		if (target instanceof Npc npc)
+			PacketSendUtility.sendPacket(admin, new SM_NPC_INFO(npc, admin));
 		else
-			PacketSendUtility.sendPacket(admin, new SM_NPC_INFO((Npc) target, admin));
+			PacketSendUtility.sendPacket(admin, new SM_GATHERABLE_INFO(target));
 		sendInfo(admin,
 			"Updated " + target.getClass().getSimpleName() + "'s coordinates to\nX:" + tPos.getX() + " Y:" + tPos.getY() + " Z:" + tPos.getZ() + " H:"
 				+ tPos.getHeading() + ".");

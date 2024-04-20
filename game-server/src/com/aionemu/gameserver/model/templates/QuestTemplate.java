@@ -30,8 +30,7 @@ import com.aionemu.gameserver.model.templates.quest.Rewards;
 import com.aionemu.gameserver.model.templates.quest.XMLStartCondition;
 
 /**
- * @author MrPoke
- * @modified vlog, Neon
+ * @author MrPoke, vlog, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Quest")

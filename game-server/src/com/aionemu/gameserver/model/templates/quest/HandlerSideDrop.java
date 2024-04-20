@@ -3,8 +3,7 @@ package com.aionemu.gameserver.model.templates.quest;
 import com.aionemu.gameserver.dataholders.DataManager;
 
 /**
- * @author vlog
- * @modified Rolandas
+ * @author vlog, Rolandas
  */
 public class HandlerSideDrop extends QuestDrop {
 

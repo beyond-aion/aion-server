@@ -10,8 +10,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
- * @author AionChs Master, nrg
- * @reworked Yeats
+ * @author AionChs Master, nrg, Yeats
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "npc_skill")

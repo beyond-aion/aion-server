@@ -4,8 +4,7 @@ import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 
 /**
- * @author xTz
- * @modified Rolandas
+ * @author xTz, Rolandas
  */
 public class SpawnTemplate {
 

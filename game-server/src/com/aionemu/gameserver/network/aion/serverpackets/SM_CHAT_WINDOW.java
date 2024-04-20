@@ -11,8 +11,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author ginho1
- * @modified Cheatkiller, Neon
+ * @author ginho1, Cheatkiller, Neon
  */
 public class SM_CHAT_WINDOW extends AionServerPacket {
 

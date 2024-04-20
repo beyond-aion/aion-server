@@ -12,8 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author MrPoke
- * @modified Majka
+ * @author MrPoke, Majka
  */
 public class _1001TheKerubThreat extends AbstractQuestHandler {
 

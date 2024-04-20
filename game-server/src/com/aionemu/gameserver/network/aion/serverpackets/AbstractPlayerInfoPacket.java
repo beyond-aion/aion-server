@@ -16,8 +16,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.BrokerService;
 
 /**
- * @author AEJTester, Nemesiss, Niato
- * @modified Neon
+ * @author AEJTester, Nemesiss, Niato, Neon
  */
 public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 

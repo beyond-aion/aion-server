@@ -27,9 +27,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
  * Since 4.8 there is no serial killer system anymore, but a conqueror and protector system. See
  * https://aionpowerbook.com/powerbook/Conqueror_and_Protector_System
  * 
- * @author Source
- * @modified Dtem, ginho
- * @reworked Yeats, Neon
+ * @author Source, Dtem, ginho, Yeats, Neon
  */
 public class ConquerorAndProtectorService {
 

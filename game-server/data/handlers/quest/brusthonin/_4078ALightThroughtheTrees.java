@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Leunam
- * @reworked zhkchi
+ * @author Leunam, zhkchi
  */
 public class _4078ALightThroughtheTrees extends AbstractQuestHandler {
 

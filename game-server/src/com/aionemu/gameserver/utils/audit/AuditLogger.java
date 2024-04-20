@@ -12,8 +12,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author MrPoke
- * @modified Neon
+ * @author MrPoke, Neon
  */
 public class AuditLogger {
 

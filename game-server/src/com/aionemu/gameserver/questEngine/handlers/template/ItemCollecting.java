@@ -20,9 +20,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author MrPoke
- * @reworked vlog, Rolandas
- * @modified Majka, Pad
+ * @author MrPoke, vlog, Rolandas, Majka, Pad
  */
 public class ItemCollecting extends AbstractTemplateQuestHandler {
 

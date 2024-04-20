@@ -12,8 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * Talk with Maochinicherk (798068). Bring some Kinah to Ninis (798385).
  * 
- * @author undertrey
- * @modified vlog
+ * @author undertrey, vlog
  */
 public class _4966GrowthNinissFirstCharm extends AbstractQuestHandler {
 

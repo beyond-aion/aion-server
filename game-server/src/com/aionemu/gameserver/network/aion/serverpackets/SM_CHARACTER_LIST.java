@@ -7,8 +7,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 /**
  * In this packet Server is sending Character List to client.
  * 
- * @author Nemesiss, AEJTester
- * @modified Neon
+ * @author Nemesiss, AEJTester, Neon
  */
 public class SM_CHARACTER_LIST extends AbstractPlayerInfoPacket {
 

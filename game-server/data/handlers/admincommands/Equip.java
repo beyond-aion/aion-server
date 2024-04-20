@@ -23,7 +23,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author Tago modified by Wakizashi
+ * @author Tago, Wakizashi
  */
 public class Equip extends AdminCommand {
 
@@ -250,8 +250,6 @@ public class Equip extends AdminCommand {
 
 	/**
 	 * Verify if the item is enchantble and/or socketble
-	 * 
-	 * @param item
 	 */
 	public static boolean isUpgradeble(Item item) {
 		if (item.getItemTemplate().isNoEnchant())
@@ -292,8 +290,6 @@ public class Equip extends AdminCommand {
 
 	/**
 	 * Returns the max number of manastones that can be socketed
-	 * 
-	 * @param item
 	 */
 	public static int getMaxSlots(Item item) {
 		int slots = 0;

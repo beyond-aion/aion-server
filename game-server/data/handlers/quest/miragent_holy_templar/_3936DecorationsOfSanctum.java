@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Nanou
- * @modified Gigi
+ * @author Nanou, Gigi
  */
 public class _3936DecorationsOfSanctum extends AbstractQuestHandler {
 

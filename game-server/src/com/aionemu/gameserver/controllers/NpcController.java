@@ -49,7 +49,7 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 /**
  * This class is for controlling Npc's
  * 
- * @author -Nemesiss-, ATracer (2009-09-29), Sarynth modified by Wakizashi
+ * @author -Nemesiss-, ATracer (2009-09-29), Sarynth, Wakizashi
  */
 public class NpcController extends CreatureController<Npc> {
 

@@ -11,8 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * Starts Perikles (203757). Talk with Jucleas (203752). Talk with Lavirintos (203701). Talk with Mysteris (798500).
  * 
- * @author Rolandas
- * @reworked vlog
+ * @author Rolandas, vlog
  */
 public class _19004PeriklessInsight extends AbstractQuestHandler {
 

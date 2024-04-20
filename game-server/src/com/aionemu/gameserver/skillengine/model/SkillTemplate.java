@@ -24,7 +24,7 @@ import com.aionemu.gameserver.skillengine.periodicaction.PeriodicActions;
 import com.aionemu.gameserver.skillengine.properties.Properties;
 
 /**
- * @author ATracer modified by Wakizashi
+ * @author ATracer, Wakizashi
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "skillTemplate", propOrder = { "properties", "startconditions", "useconditions", "endconditions", "useequipmentconditions", "effects",
@@ -114,168 +114,88 @@ public class SkillTemplate implements L10n {
 	private boolean applyMcrit = true;
 	@XmlAttribute(name = "hostile_type")
 	private HostileType hostileType = HostileType.NONE;
-	/**
-	 * @return the Properties
-	 */
+
 	public Properties getProperties() {
 		return properties;
 	}
 
-	/**
-	 * Gets the value of the startconditions property.
-	 * 
-	 * @return possible object is {@link Conditions }
-	 */
 	public Conditions getStartconditions() {
 		return startconditions;
 	}
 
-	/**
-	 * Gets the value of the useconditions property.
-	 * 
-	 * @return possible object is {@link Conditions }
-	 */
 	public Conditions getUseconditions() {
 		return useconditions;
 	}
 
-	/**
-	 * Gets the value of the useequipmentconditions property.
-	 * 
-	 * @return possible object is {@link Conditions }
-	 */
 	public Conditions getUseEquipmentconditions() {
 		return useequipmentconditions;
 	}
 
-	/**
-	 * Gets the value of the effects property.
-	 * 
-	 * @return possible object is {@link Effects }
-	 */
 	public Effects getEffects() {
 		return effects;
 	}
 
-	/**
-	 * Gets the value of the actions property.
-	 * 
-	 * @return possible object is {@link Actions }
-	 */
 	public Actions getActions() {
 		return actions;
 	}
 
-	/**
-	 * Gets the value of the periodicActions property.
-	 * 
-	 * @return possible object is {@link PeriodicActions }
-	 */
 	public PeriodicActions getPeriodicActions() {
 		return periodicActions;
 	}
 
-	/**
-	 * Gets the value of the motion property.
-	 * 
-	 * @return possible object is {@link Motion }
-	 */
 	public Motion getMotion() {
 		return motion;
 	}
 
-	/**
-	 * Gets the value of the skillId property.
-	 */
 	public int getSkillId() {
 		return skillId;
 	}
 
-	/**
-	 * Gets the value of the name property.
-	 * 
-	 * @return possible object is {@link String }
-	 */
 	public String getName() {
 		return name;
 	}
 
-	/**
-	 * @return the nameId
-	 */
 	@Override
 	public int getL10nId() {
 		return nameId;
 	}
 
-	/**
-	 * @return the stack
-	 */
 	public String getStack() {
 		return stack;
 	}
 
-	/**
-	 * @return the group
-	 */
 	public String getGroup() {
 		return group;
 	}
 
-	/**
-	 * @return the lvl
-	 */
 	public int getLvl() {
 		return lvl;
 	}
 
-	/**
-	 * Gets the value of the type property.
-	 * 
-	 * @return possible object is {@link SkillType }
-	 */
 	public SkillType getType() {
 		return type;
 	}
 
-	/**
-	 * @return the subType
-	 */
 	public SkillSubType getSubType() {
 		return subType;
 	}
 
-	/**
-	 * @return the targetSlot
-	 */
 	public SkillTargetSlot getTargetSlot() {
 		return targetSlot;
 	}
 
-	/**
-	 * @return the targetSlot Level
-	 */
 	public int getTargetSlotLevel() {
 		return targetSlotLevel;
 	}
 
-	/**
-	 * @return the dispelCategory
-	 */
 	public DispelCategoryType getDispelCategory() {
 		return dispelCategory;
 	}
 
-	/**
-	 * @return the reqDispelLevel
-	 */
 	public int getReqDispelLevel() {
 		return reqDispelLevel;
 	}
 
-	/**
-	 * @return the duration
-	 */
 	public int getDuration() {
 		return duration;
 	}
@@ -284,16 +204,10 @@ public class SkillTemplate implements L10n {
 		return toggleTimer;
 	}
 
-	/**
-	 * @return the stigmaType
-	 */
 	public StigmaType getStigmaType() {
 		return stigmaType;
 	}
 
-	/**
-	 * @return the activationAttribute
-	 */
 	public ActivationAttribute getActivationAttribute() {
 		return activationAttribute;
 	}
@@ -322,18 +236,11 @@ public class SkillTemplate implements L10n {
 		return activationAttribute == ActivationAttribute.CHARGE;
 	}
 
-	/**
-	 * @param position
-	 * @return EffectTemplate
-	 */
 	public EffectTemplate getEffectTemplate(int position) {
 		return effects != null && effects.getEffects().size() >= position ? effects.getEffects().get(position - 1) : null;
 
 	}
 
-	/**
-	 * @return the cooldown
-	 */
 	public int getCooldown() {
 		return cooldown;
 	}
@@ -342,9 +249,6 @@ public class SkillTemplate implements L10n {
 		return cooldownDeltaLv;
 	}
 
-	/**
-	 * @return the penaltySkillId
-	 */
 	public int getPenaltySkillId() {
 		return penaltySkillId;
 	}
@@ -353,37 +257,22 @@ public class SkillTemplate implements L10n {
 		return penaltySkillSendMsg;
 	}
 
-	/**
-	 * @return the pvpDamage
-	 */
 	public int getPvpDamage() {
 		return pvpDamage;
 	}
 
-	/**
-	 * @return the pvpDuration
-	 */
 	public int getPvpDuration() {
 		return pvpDuration;
 	}
 
-	/**
-	 * @return chainSkillProb
-	 */
 	public int getChainSkillProb() {
 		return chainSkillProb;
 	}
 
-	/**
-	 * @return cancelRate
-	 */
 	public int getCancelRate() {
 		return cancelRate;
 	}
 
-	/**
-	 * @return stance
-	 */
 	public boolean isStance() {
 		return stance;
 	}
@@ -487,9 +376,6 @@ public class SkillTemplate implements L10n {
 		return null;
 	}
 
-	/**
-	 * @return
-	 */
 	public HpCondition getHpCondition() {
 		for (Condition c : startconditions.getConditions())
 			if (c instanceof HpCondition) {

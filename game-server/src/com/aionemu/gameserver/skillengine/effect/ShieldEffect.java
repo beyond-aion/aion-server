@@ -10,7 +10,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.ShieldType;
 
 /**
- * @author ATracer modified by Wakizashi, Sippolo, kecimis
+ * @author ATracer, Wakizashi, Sippolo, kecimis
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ShieldEffect")

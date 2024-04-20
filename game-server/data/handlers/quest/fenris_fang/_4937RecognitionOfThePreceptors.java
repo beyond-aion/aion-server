@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Nanou
- * @reworked vlog
+ * @author Nanou, vlog
  */
 public class _4937RecognitionOfThePreceptors extends AbstractQuestHandler {
 

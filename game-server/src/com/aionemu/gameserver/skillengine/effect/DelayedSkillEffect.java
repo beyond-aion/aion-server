@@ -6,8 +6,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
- * @author kecimis
- * @modified Cheatkiller
+ * @author kecimis, Cheatkiller
  */
 public class DelayedSkillEffect extends EffectTemplate {
 

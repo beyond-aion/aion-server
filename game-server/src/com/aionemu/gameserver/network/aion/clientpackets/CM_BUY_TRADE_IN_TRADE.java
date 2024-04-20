@@ -10,8 +10,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.TradeService;
 
 /**
- * @author MrPoke
- * @reworked Ritsu
+ * @author MrPoke, Ritsu
  */
 public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 
@@ -23,9 +22,6 @@ public class CM_BUY_TRADE_IN_TRADE extends AionClientPacket {
 	private int tradeInListCount;
 	private List<Integer> tradeInItemObjIds;
 
-	/**
-	 * @param opcode
-	 */
 	public CM_BUY_TRADE_IN_TRADE(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}

@@ -12,8 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Ritsu
- * @modified Majka
+ * @author Ritsu, Majka
  */
 public class _2278ASecretProposal extends AbstractQuestHandler {
 

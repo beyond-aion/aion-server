@@ -22,8 +22,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
- * @author Rolandas
- * @modified Neon
+ * @author Rolandas, Neon
  */
 public class UseableItemObject extends UseableHouseObject<HousingUseableItem> {
 

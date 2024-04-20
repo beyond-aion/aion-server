@@ -14,8 +14,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author vlog
- * @modified Bobobear, Pad
+ * @author vlog, Bobobear, Pad
  */
 public class SkillUse extends AbstractTemplateQuestHandler {
 

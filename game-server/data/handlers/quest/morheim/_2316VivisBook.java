@@ -17,7 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author MrPoke remod By Nephis (http://www.evolution-fr.com/)
+ * @author MrPoke, Nephis (http://www.evolution-fr.com/)
  */
 public class _2316VivisBook extends AbstractQuestHandler {
 

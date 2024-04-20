@@ -41,8 +41,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
 /**
- * @author Avol, ATracer, kosyachok
- * @modified cura
+ * @author Avol, ATracer, kosyachok, cura
  */
 public class Equipment implements Persistable {
 
@@ -65,8 +64,6 @@ public class Equipment implements Persistable {
 	}
 
 	/**
-	 * @param itemUniqueId
-	 * @param slot
 	 * @return item or null in case of failure
 	 */
 	public Item equipItem(int itemUniqueId, long slot) {
@@ -240,8 +237,6 @@ public class Equipment implements Persistable {
 	/**
 	 * Called when CM_EQUIP_ITEM packet arrives with action 1
 	 * 
-	 * @param itemObjId
-	 * @param slot
 	 * @return item or null in case of failure
 	 */
 	public Item unEquipItem(int itemObjId, boolean checkFullInventory) {
@@ -446,8 +441,6 @@ public class Equipment implements Persistable {
 
 	/**
 	 * Should be called only when loading from DB for items isEquipped=1
-	 * 
-	 * @param item
 	 */
 	public void onLoadHandler(Item item) {
 		if (!checkAvailableEquipSkills(item)) {
@@ -550,10 +543,6 @@ public class Equipment implements Persistable {
 		return equipment.get(ItemSlot.POWER_SHARD_LEFT.getSlotIdMask());
 	}
 
-	/**
-	 * @param powerShardItem
-	 * @param count
-	 */
 	public void usePowerShard(Item powerShardItem, int count) {
 		decreaseEquippedItemCount(powerShardItem.getObjectId(), count);
 
@@ -687,10 +676,6 @@ public class Equipment implements Persistable {
 
 	/**
 	 * Checks if dual one-handed weapon is equiped in any slot combination
-	 * 
-	 * @param slot
-	 *          masks
-	 * @return
 	 */
 	public boolean hasDualWeaponEquipped(ItemSlot slot) {
 		ItemSlot[] slotValues = ItemSlot.getSlotsFor(slot.getSlotIdMask());
@@ -706,9 +691,6 @@ public class Equipment implements Persistable {
 		return false;
 	}
 
-	/**
-	 * @param armorType
-	 */
 	public boolean isArmorEquipped(ItemSubType subType) {
 		for (long slot : ARMOR_SLOTS) {
 			Item item = equipment.get(slot);
@@ -720,9 +702,6 @@ public class Equipment implements Persistable {
 
 	/**
 	 * Only used for new Player creation. Although invalid, but fits its purpose
-	 * 
-	 * @param slot
-	 * @return
 	 */
 	public boolean isSlotEquipped(long slot) {
 		return equipment.get(slot) != null;
@@ -739,28 +718,16 @@ public class Equipment implements Persistable {
 		return result;
 	}
 
-	/**
-	 * @return the persistentState
-	 */
 	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
 
-	/**
-	 * @param persistentState
-	 *          the persistentState to set
-	 */
 	@Override
 	public void setPersistentState(PersistentState persistentState) {
 		this.persistentState = persistentState;
 	}
 
-	/**
-	 * @param player
-	 * @param item
-	 * @return
-	 */
 	private boolean soulBindItem(final Player player, final Item item, final long slot) {
 		if (player.getInventory().getItemByObjId(item.getObjectId()) == null)
 			return false;

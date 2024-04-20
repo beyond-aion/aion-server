@@ -14,8 +14,7 @@ import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.SiegeService;
 
 /**
- * @author Sarynth
- * @modified Neon
+ * @author Sarynth, Neon
  */
 public class SM_SIEGE_LOCATION_INFO extends AionServerPacket {
 

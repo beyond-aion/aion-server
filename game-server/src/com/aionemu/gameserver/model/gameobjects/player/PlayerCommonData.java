@@ -25,8 +25,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 /**
  * This class is holding base information about player, that may be used even when player itself is not online.
  * 
- * @author Luno
- * @modified cura
+ * @author Luno, cura
  */
 public class PlayerCommonData extends CreatureTemplate {
 
@@ -270,8 +269,6 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	/**
 	 * sets the exp and level value
-	 * 
-	 * @param exp
 	 */
 	public void setExp(long exp) {
 		if (exp != this.exp || level == 0 && exp == 0) {
@@ -300,16 +297,10 @@ public class PlayerCommonData extends CreatureTemplate {
 		return noExp;
 	}
 
-	/**
-	 * @return Race as from template
-	 */
 	public final Race getRace() {
 		return race;
 	}
 
-	/**
-	 * @return the mentorFlagTime
-	 */
 	public int getMentorFlagTime() {
 		return mentorFlagTime;
 	}
@@ -318,10 +309,6 @@ public class PlayerCommonData extends CreatureTemplate {
 		return mentorFlagTime > System.currentTimeMillis() / 1000;
 	}
 
-	/**
-	 * @param mentorFlagTime
-	 *          the mentorFlagTime to set
-	 */
 	public void setMentorFlagTime(int mentorFlagTime) {
 		this.mentorFlagTime = mentorFlagTime;
 	}
@@ -444,8 +431,6 @@ public class PlayerCommonData extends CreatureTemplate {
 	/**
 	 * //TODO move to lifestats -> db save?<br>
 	 * => {@link PlayerGameStats#onStatsChange()}
-	 * 
-	 * @param dp
 	 */
 	public void setDp(int dp) {
 		if (playerClass.isStartingClass())
@@ -499,9 +484,6 @@ public class PlayerCommonData extends CreatureTemplate {
 		return mailboxLetters;
 	}
 
-	/**
-	 * @param boundRadius
-	 */
 	public void setBoundingRadius(BoundRadius boundRadius) {
 		this.boundRadius = boundRadius;
 	}
@@ -521,8 +503,6 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	/**
 	 * Value returned here means % of exp bonus.
-	 * 
-	 * @return
 	 */
 	public byte getCurrentSalvationPercent() {
 		if (salvationPoint <= 0)

@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Mr.Poke remod by Nephis and quest helper team
+ * @author Mr.Poke, Nephis and quest helper team
  */
 public class _1311AGermOfHope extends AbstractQuestHandler {
 

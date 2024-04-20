@@ -11,8 +11,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 
 /**
- * @author Ritsu
- * @modified Pad
+ * @author Ritsu, Pad
  */
 public class _19052ExpertPassionforConstruction extends AbstractQuestHandler {
 

@@ -3,8 +3,7 @@ package com.aionemu.gameserver.questEngine.task.checker;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public abstract class DestinationChecker {
 

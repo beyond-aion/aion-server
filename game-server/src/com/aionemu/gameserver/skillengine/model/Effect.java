@@ -32,8 +32,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 
 /**
- * @author ATracer
- * @modified Wakizashi, Sippolo, kecimis, Neon
+ * @author ATracer, Wakizashi, Sippolo, kecimis, Neon
  */
 public class Effect implements StatOwner {
 
@@ -339,32 +338,18 @@ public class Effect implements StatOwner {
 		return toSend;
 	}
 
-	/**
-	 * @return the launchSubEffect
-	 */
 	public boolean isLaunchSubEffect() {
 		return launchSubEffect;
 	}
 
-	/**
-	 * @param launchSubEffect
-	 *          the launchSubEffect to set
-	 */
 	public void setLaunchSubEffect(boolean launchSubEffect) {
 		this.launchSubEffect = launchSubEffect;
 	}
 
-	/**
-	 * @return the shieldDefense
-	 */
 	public int getShieldDefense() {
 		return shieldDefense;
 	}
 
-	/**
-	 * @param shieldDefense
-	 *          the shieldDefense to set
-	 */
 	public void setShieldDefense(int shieldDefense) {
 		this.shieldDefense = shieldDefense;
 	}
@@ -376,11 +361,6 @@ public class Effect implements StatOwner {
 		return (shieldDefense & ShieldType.SKILL_REFLECTOR.getId()) != 0;
 	}
 
-	/**
-	 * reflected damage
-	 * 
-	 * @return
-	 */
 	public int getReflectedDamage() {
 		return this.reflectedDamage;
 	}
@@ -421,40 +401,24 @@ public class Effect implements StatOwner {
 		this.protectorId = protectorId;
 	}
 
-	/**
-	 * @return the spellStatus
-	 */
 	public SpellStatus getSpellStatus() {
 		return spellStatus;
 	}
 
-	/**
-	 * @param spellStatus
-	 *          the spellStatus to set
-	 */
 	public void setSpellStatus(SpellStatus spellStatus) {
 		this.spellStatus = spellStatus;
 	}
 
-	/**
-	 * @return the dashStatus
-	 */
 	public DashStatus getDashStatus() {
 		return dashStatus;
 	}
 
-	/**
-	 * @param dashStatus
-	 *          the dashStatus to set
-	 */
 	public void setDashStatus(DashStatus dashStatus) {
 		this.dashStatus = dashStatus;
 	}
 
 	/**
 	 * Number of signets carved on target
-	 * 
-	 * @return
 	 */
 	public int getCarvedSignet() {
 		return this.carvedSignet;
@@ -464,25 +428,14 @@ public class Effect implements StatOwner {
 		this.carvedSignet = value;
 	}
 
-	/**
-	 * @return the subEffect
-	 */
 	public Effect getSubEffect() {
 		return subEffect;
 	}
 
-	/**
-	 * @param subEffect
-	 *          the subEffect to set
-	 */
 	public void setSubEffect(Effect subEffect) {
 		this.subEffect = subEffect;
 	}
 
-	/**
-	 * @param effectId
-	 * @return true or false
-	 */
 	public boolean containsEffectId(int effectId) {
 		for (EffectTemplate template : successEffects.values()) {
 			if (template.getEffectId() == effectId)
@@ -797,18 +750,10 @@ public class Effect implements StatOwner {
 		return true;
 	}
 
-	/**
-	 * @return the endTime
-	 */
 	public long getEndTime() {
 		return endTime;
 	}
 
-	/**
-	 * PVP damage ration
-	 * 
-	 * @return
-	 */
 	public int getPvpDamage() {
 		return skillTemplate.getPvpDamage();
 	}
@@ -834,17 +779,10 @@ public class Effect implements StatOwner {
 		return effectHate;
 	}
 
-	/**
-	 * @return the tauntHate
-	 */
 	public int getTauntHate() {
 		return tauntHate;
 	}
 
-	/**
-	 * @param tauntHate
-	 *          the tauntHate to set
-	 */
 	public void setTauntHate(int tauntHate) {
 		this.tauntHate = tauntHate;
 	}
@@ -967,23 +905,14 @@ public class Effect implements StatOwner {
 		return skillTemplate.isDeityAvatar();
 	}
 
-	/**
-	 * @return the x
-	 */
 	public float getX() {
 		return x;
 	}
 
-	/**
-	 * @return the y
-	 */
 	public float getY() {
 		return y;
 	}
 
-	/**
-	 * @return the z
-	 */
 	public float getZ() {
 		return z;
 	}
@@ -996,9 +925,6 @@ public class Effect implements StatOwner {
 		return instanceId;
 	}
 
-	/**
-	 * @return the subEffectType
-	 */
 	public SubEffectType getSubEffectType() {
 		return subEffectType;
 	}
@@ -1027,31 +953,18 @@ public class Effect implements StatOwner {
 		return sucEffects;
 	}
 
-	/**
-	 * @param subEffectType
-	 *          the subEffectType to set
-	 */
 	public void setSubEffectType(SubEffectType subEffectType) {
 		this.subEffectType = subEffectType;
 	}
 
-	/**
-	 * @return the targetX
-	 */
 	public float getTargetX() {
 		return targetX;
 	}
 
-	/**
-	 * @return the targetY
-	 */
 	public float getTargetY() {
 		return targetY;
 	}
 
-	/**
-	 * @return the targetZ
-	 */
 	public float getTargetZ() {
 		return targetZ;
 	}
@@ -1196,17 +1109,10 @@ public class Effect implements StatOwner {
 		return 10;
 	}
 
-	/**
-	 * @return the power
-	 */
 	public int getPower() {
 		return power;
 	}
 
-	/**
-	 * @param power
-	 *          the power to set
-	 */
 	public void setPower(int power) {
 		this.power = power;
 	}
@@ -1225,9 +1131,6 @@ public class Effect implements StatOwner {
 		return this.accModBoost;
 	}
 
-	/**
-	 * functions that check for given effecttype
-	 */
 	public boolean isHideEffect() {
 		return getSkillTemplate().hasAnyEffect(EffectType.HIDE);
 	}
@@ -1287,17 +1190,10 @@ public class Effect implements StatOwner {
 		return true;
 	}
 
-	/**
-	 * @return the signetBurstedCount
-	 */
 	public int getSignetBurstedCount() {
 		return signetBurstedCount;
 	}
 
-	/**
-	 * @param signetBurstedCount
-	 *          the signetBurstedCount to set
-	 */
 	public void setSignetBurstedCount(int signetBurstedCount) {
 		this.signetBurstedCount = signetBurstedCount;
 	}
@@ -1322,17 +1218,10 @@ public class Effect implements StatOwner {
 		this.mpAbsorbed = mpAbsorbed;
 	}
 
-	/**
-	 * @return the mpShieldSkillId
-	 */
 	public int getMpShieldSkillId() {
 		return mpShieldSkillId;
 	}
 
-	/**
-	 * @param mpShieldSkillId
-	 *          the mpShieldSkillId to set
-	 */
 	public void setMpShieldSkillId(int mpShieldSkillId) {
 		this.mpShieldSkillId = mpShieldSkillId;
 	}

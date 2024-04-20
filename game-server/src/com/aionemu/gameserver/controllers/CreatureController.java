@@ -59,8 +59,7 @@ import com.aionemu.gameserver.world.zone.ZoneUpdateService;
 /**
  * This class is for controlling Creatures [npc's, players etc]
  * 
- * @author -Nemesiss-, ATracer(2009-09-29), Sarynth
- * @modified by Wakizashi
+ * @author -Nemesiss-, ATracer(2009-09-29), Sarynth, Wakizashi
  */
 public abstract class CreatureController<T extends Creature> extends VisibleObjectController<T> {
 

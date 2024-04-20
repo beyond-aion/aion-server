@@ -13,15 +13,10 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Sarynth modified by Wakizashi
+ * @author Sarynth, Wakizashi
  */
 public class ItemRemodelService {
 
-	/**
-	 * @param player
-	 * @param keepItemObjId
-	 * @param extractItemObjId
-	 */
 	public static void remodelItem(Player player, int keepItemObjId, int extractItemObjId) {
 		Storage inventory = player.getInventory();
 		Item keepItem = inventory.getItemByObjId(keepItemObjId);

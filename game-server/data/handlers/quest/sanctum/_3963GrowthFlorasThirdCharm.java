@@ -12,8 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 /**
  * Talk with Erdos (203740). Bring the Red Aether Powder (186000089) and Kinah (70000) to Flora (798384).
  * 
- * @author undertrey
- * @modified vlog
+ * @author undertrey, vlog
  */
 public class _3963GrowthFlorasThirdCharm extends AbstractQuestHandler {
 

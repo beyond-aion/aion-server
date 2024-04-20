@@ -10,9 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Mr.Poke, Dune11
- * @modified xTz, Undertrey
- * @reworked vlog
+ * @author Mr.Poke, Dune11, xTz, Undertrey, vlog
  */
 public class _1146DelicateMandrake extends AbstractQuestHandler {
 

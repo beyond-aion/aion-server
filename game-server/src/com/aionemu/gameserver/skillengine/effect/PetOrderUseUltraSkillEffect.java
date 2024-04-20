@@ -15,7 +15,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author ATracer modified by Sippolo
+ * @author ATracer, Sippolo
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PetOrderUseUltraSkillEffect")

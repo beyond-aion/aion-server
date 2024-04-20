@@ -4,8 +4,7 @@ import com.aionemu.gameserver.network.loginserver.LoginServerConnection;
 import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 
 /**
- * @author ViAl
- * @modified Neon
+ * @author ViAl, Neon
  */
 public class SM_ACCOUNT_CONNECTION_INFO extends LsServerPacket {
 

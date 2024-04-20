@@ -12,8 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author Divinity
- * @modified Neon
+ * @author Divinity, Neon
  */
 public class Invis extends AdminCommand {
 

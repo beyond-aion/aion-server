@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.model;
 
 /**
- * @author Rolandas
- * @modified Neon
+ * @author Rolandas, Neon
  */
 public enum DialogPage {
 

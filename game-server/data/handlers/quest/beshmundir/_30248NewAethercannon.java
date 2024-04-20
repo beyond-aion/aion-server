@@ -10,7 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author vlog, modified bobobear
+ * @author vlog, bobobear
  */
 public class _30248NewAethercannon extends AbstractQuestHandler {
 

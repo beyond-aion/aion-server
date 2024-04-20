@@ -6,8 +6,7 @@ import com.aionemu.gameserver.configs.main.LegionConfig;
 import com.aionemu.gameserver.configs.main.NameConfig;
 
 /**
- * @author nrg
- * @modified Neon
+ * @author nrg, Neon
  */
 public class NameRestrictionService {
 
@@ -23,19 +22,10 @@ public class NameRestrictionService {
 		return LegionConfig.LEGION_NAME_PATTERN.matcher(name).matches();
 	}
 
-	/**
-	 * Checks if a name is forbidden
-	 * 
-	 * @param string
-	 * @return true if name is forbidden
-	 */
 	public static boolean isForbidden(String name) {
 		return containsForbiddenSequence(name) || isForbiddenWord(name);
 	}
 
-	/**
-	 * @return True if name contains a forbidden sequence.
-	 */
 	private static boolean containsForbiddenSequence(String name) {
 		if (NameConfig.FORBIDDEN_SEQUENCE_PATTERN == null)
 			return false;
@@ -43,9 +33,6 @@ public class NameRestrictionService {
 		return NameConfig.FORBIDDEN_SEQUENCE_PATTERN.matcher(name).find();
 	}
 
-	/**
-	 * @return True if the string is a forbidden word.
-	 */
 	public static boolean isForbiddenWord(String string) {
 		for (String s : NameConfig.FORBIDDEN_WORDS) {
 			if (string.equalsIgnoreCase(s))

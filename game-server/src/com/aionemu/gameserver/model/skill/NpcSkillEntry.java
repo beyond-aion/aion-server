@@ -6,8 +6,7 @@ import com.aionemu.gameserver.model.templates.npcskill.NpcSkillConditionTemplate
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
 
 /**
- * @author ATracer, nrg
- * @reworked Yeats
+ * @author ATracer, nrg, Yeats
  */
 public abstract class NpcSkillEntry extends SkillEntry {
 

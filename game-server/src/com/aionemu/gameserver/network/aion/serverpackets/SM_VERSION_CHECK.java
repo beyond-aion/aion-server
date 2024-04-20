@@ -14,8 +14,7 @@ import com.aionemu.gameserver.services.AtreianPassportService;
 import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
- * @author -Nemesiss- CC fix
- * @modified by Novo, cura, Neon
+ * @author -Nemesiss-, Novo, cura, Neon
  */
 public class SM_VERSION_CHECK extends AionServerPacket {
 

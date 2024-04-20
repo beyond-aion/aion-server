@@ -15,8 +15,7 @@ import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.model.HealType;
 
 /**
- * @author ATracer
- * @author kecimis
+ * @author ATracer, kecimis
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HealOverTimeEffect")

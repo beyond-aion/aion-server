@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 
 /**
- * @author Hilgert
- * @modified vlog
+ * @author Hilgert, vlog
  */
 public class _1706Defeat5thRankAsmodianSoldiers extends AbstractQuestHandler {
 

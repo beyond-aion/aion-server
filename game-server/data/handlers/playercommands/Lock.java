@@ -6,8 +6,7 @@ import com.aionemu.gameserver.network.loginserver.serverpackets.SM_CHANGE_ALLOWE
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 
 /**
- * @author ViAl
- * @modified Neon
+ * @author ViAl, Neon
  */
 public class Lock extends PlayerCommand {
 

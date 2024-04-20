@@ -9,8 +9,7 @@ import com.aionemu.gameserver.network.loginserver.LsServerPacket;
 /**
  * GameServer packet that sends list of logged in accounts
  * 
- * @author SoulKeeper
- * @modified Neon
+ * @author SoulKeeper, Neon
  */
 public class SM_ACCOUNT_LIST extends LsServerPacket {
 

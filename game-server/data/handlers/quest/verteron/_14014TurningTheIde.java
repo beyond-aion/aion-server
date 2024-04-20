@@ -14,9 +14,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Artur
- * @reworked Ritsu
- * @modified Majka
+ * @author Artur, Ritsu, Majka
  */
 public class _14014TurningTheIde extends AbstractQuestHandler {
 

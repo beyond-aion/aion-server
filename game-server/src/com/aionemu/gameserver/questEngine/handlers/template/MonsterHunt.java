@@ -27,9 +27,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author MrPoke
- * @reworked vlog, Bobobear
- * @modified Pad, Majka
+ * @author MrPoke, vlog, Bobobear, Pad, Majka
  */
 public class MonsterHunt extends AbstractTemplateQuestHandler {
 

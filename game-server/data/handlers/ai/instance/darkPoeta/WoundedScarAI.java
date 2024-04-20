@@ -19,7 +19,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 import ai.GeneralNpcAI;
 
 /**
- * @author Estrayl 13.06.2017
+ * @author Estrayl
  */
 @AIName("wounded_scar")
 public class WoundedScarAI extends GeneralNpcAI {

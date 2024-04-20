@@ -9,22 +9,13 @@ import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
- * @author Source
- * @modified Neon
+ * @author Source, Neon
  */
 public class PlayerChatService {
 
-	/**
-	 * Logger
-	 */
 	private static final Logger playerLog = LoggerFactory.getLogger("CHAT_LOG");
 	private static final Logger gmLog = LoggerFactory.getLogger("ADMINAUDIT_LOG");
 
-	/**
-	 * This method will control players msg
-	 *
-	 * @param player
-	 */
 	public static boolean isFlooding(final Player player) {
 		player.setLastMessageTime();
 

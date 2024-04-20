@@ -12,8 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author Artur
- * @modified Majka
+ * @author Artur, Majka
  */
 public class _14040OrdersFromReshanta extends AbstractQuestHandler {
 

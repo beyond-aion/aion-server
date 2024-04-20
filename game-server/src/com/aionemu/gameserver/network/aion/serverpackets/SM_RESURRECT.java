@@ -5,8 +5,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author ATracer
- * @author Jego
+ * @author ATracer, Jego
  */
 public class SM_RESURRECT extends AionServerPacket {
 

@@ -10,8 +10,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import ai.OneDmgAI;
 
 /**
- * @author xTz
- * @modified Neon
+ * @author xTz, Neon
  */
 @AIName("agrint")
 public class AgrintAI extends OneDmgAI implements HpPhases.PhaseHandler {

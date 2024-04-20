@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Balthazar
- * @modified Pad
+ * @author Balthazar, Pad
  */
 public class _1467TheFourLeaders extends AbstractQuestHandler {
 

@@ -1,7 +1,7 @@
 package com.aionemu.gameserver.model.templates.npcskill;
 
 /**
- * @author Yeats 24.04.2016.
+ * @author Yeats
  */
 public class QueuedNpcSkillTemplate extends NpcSkillTemplate {
 

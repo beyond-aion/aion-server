@@ -44,8 +44,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author MrPoke
- * @modified vlog, Majka
+ * @author MrPoke, vlog, Majka
  */
 public abstract class AbstractQuestHandler {
 

@@ -6,8 +6,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author AionChs Master
- * @author Schattenlilie
+ * @author AionChs Master, Schattenlilie
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PortalItem")

@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
- * @author zhkchi
- * @modified Pad
+ * @author zhkchi, Pad
  */
 public class _18303MakingASurCantA extends AbstractQuestHandler {
 

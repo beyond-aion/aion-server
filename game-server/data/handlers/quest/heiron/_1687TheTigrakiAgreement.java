@@ -13,8 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * Go to Draupnir Cave in Asmodae and get Blue Balaur Blood (186000035) (2) and Balaur Rainbow Scales (186000036) (5) for Brosia (204601). Go to
  * Brosia to choose your reward.
  * 
- * @author Balthazar
- * @reworked vlog
+ * @author Balthazar, vlog
  */
 public class _1687TheTigrakiAgreement extends AbstractQuestHandler {
 

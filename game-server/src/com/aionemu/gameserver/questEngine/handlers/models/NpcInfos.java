@@ -8,8 +8,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author Hilgert
- * @modified Pad, Neon
+ * @author Hilgert, Pad, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NpcInfos")

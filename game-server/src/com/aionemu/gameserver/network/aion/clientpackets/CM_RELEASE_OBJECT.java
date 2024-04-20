@@ -15,8 +15,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Rolandas
- * @modified Neon
+ * @author Rolandas, Neon
  */
 public class CM_RELEASE_OBJECT extends AionClientPacket {
 

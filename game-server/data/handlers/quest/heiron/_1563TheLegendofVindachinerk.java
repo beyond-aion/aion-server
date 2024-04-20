@@ -11,8 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Gigi, Shepper
- * @modified Pad
+ * @author Gigi, Shepper, Pad
  */
 public class _1563TheLegendofVindachinerk extends AbstractQuestHandler {
 

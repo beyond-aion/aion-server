@@ -10,8 +10,7 @@ import com.aionemu.gameserver.taskmanager.tasks.MovementNotifyTask;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author Rolandas
- * @modified Neon
+ * @author Rolandas, Neon
  */
 public class MapCommand extends AdminCommand {
 

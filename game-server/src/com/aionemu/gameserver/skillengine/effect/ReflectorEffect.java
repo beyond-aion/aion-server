@@ -10,8 +10,7 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.ShieldType;
 
 /**
- * @author ginho1
- * @modified Wakizashi, kecimis, Neon
+ * @author ginho1, Wakizashi, kecimis, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ReflectorEffect")

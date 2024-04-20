@@ -53,8 +53,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * @author ATracer
- * @modified Wakizashi, Neon
+ * @author ATracer, Wakizashi, Neon
  */
 public class Skill {
 

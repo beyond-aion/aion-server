@@ -21,9 +21,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Hilgert
- * @modified vlog, Pad
- * @reworked Neon
+ * @author Hilgert, vlog, Pad, Neon
  */
 public class ReportToMany extends AbstractTemplateQuestHandler {
 

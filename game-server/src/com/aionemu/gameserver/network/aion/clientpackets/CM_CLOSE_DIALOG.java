@@ -8,9 +8,6 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.DialogService;
 
-/**
- * @modified Neon
- */
 public class CM_CLOSE_DIALOG extends AionClientPacket {
 
 	/**
@@ -18,11 +15,6 @@ public class CM_CLOSE_DIALOG extends AionClientPacket {
 	 */
 	private int targetObjectId;
 
-	/**
-	 * Constructs new instance of <tt>CM_CM_REQUEST_DIALOG </tt> packet
-	 * 
-	 * @param opcode
-	 */
 	public CM_CLOSE_DIALOG(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}

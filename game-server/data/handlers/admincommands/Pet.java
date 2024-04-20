@@ -14,8 +14,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author ATracer
- * @reworked Neon
+ * @author ATracer, Neon
  */
 public class Pet extends AdminCommand {
 

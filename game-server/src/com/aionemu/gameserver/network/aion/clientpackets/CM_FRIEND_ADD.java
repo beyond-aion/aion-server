@@ -19,8 +19,7 @@ import com.aionemu.gameserver.world.World;
 /**
  * Received when a user tries to add someone as his friend
  * 
- * @author Ben
- * @modified Neon
+ * @author Ben, Neon
  */
 public class CM_FRIEND_ADD extends AionClientPacket {
 

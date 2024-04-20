@@ -10,8 +10,9 @@ import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Luzien
- * @modified Whoop TODO: onAssaultFail(), if BalaurAssaulter fails to capture
+ * TODO: onAssaultFail(), if BalaurAssaulter fails to capture
+ * 
+ * @author Luzien, Whoop
  */
 public class ArtifactAssault extends Assault<ArtifactSiege> {
 

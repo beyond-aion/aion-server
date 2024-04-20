@@ -10,8 +10,7 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob.ItemBlobType;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 
 /**
- * @author ATracer
- * @author -Nemesiss-
+ * @author ATracer, -Nemesiss-
  */
 public class SM_INVENTORY_UPDATE_ITEM extends AionServerPacket {
 

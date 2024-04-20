@@ -12,8 +12,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 import ai.ActionItemNpcAI;
 
 /**
- * @author xTz
- * @modified Neon
+ * @author xTz, Neon
  */
 @AIName("defensive_cannon")
 public class DefensiveCannonAI extends ActionItemNpcAI {

@@ -13,9 +13,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Artur
- * @reworked Ritsu
- * @modified Majka
+ * @author Artur, Ritsu, Majka
  */
 public class _24013PoisonInTheWaters extends AbstractQuestHandler {
 

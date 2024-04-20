@@ -11,8 +11,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ChatUtil;
 
 /**
- * @author alexa026
- * @author rhys2002
+ * @author alexa026, rhys2002
  */
 public class CM_CASTSPELL extends AionClientPacket {
 
@@ -28,11 +27,6 @@ public class CM_CASTSPELL extends AionClientPacket {
 	@SuppressWarnings("unused")
 	private int unk;
 
-	/**
-	 * Constructs new instance of <tt>CM_CM_REQUEST_DIALOG </tt> packet
-	 * 
-	 * @param opcode
-	 */
 	public CM_CASTSPELL(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}

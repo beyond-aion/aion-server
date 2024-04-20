@@ -3,8 +3,7 @@ package com.aionemu.gameserver.model.team.legion;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 
 /**
- * @author Simple
- ' @modified cura, Neon
+ * @author Simple, cura, Neon
  */
 public class LegionEmblem implements Persistable {
 
@@ -23,17 +22,10 @@ public class LegionEmblem implements Persistable {
 
 	private byte[] customEmblemData = {};
 
-	/**
-	 * @return the customEmblemData
-	 */
 	public byte[] getCustomEmblemData() {
 		return customEmblemData;
 	}
 
-	/**
-	 * @param customEmblemData
-	 *          the customEmblemData to set
-	 */
 	public void setCustomEmblemData(byte[] customEmblemData) {
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 		this.customEmblemData = customEmblemData;
@@ -58,9 +50,6 @@ public class LegionEmblem implements Persistable {
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
-	/**
-	 * @return the emblemId
-	 */
 	public byte getEmblemId() {
 		return emblemId;
 	}
@@ -72,61 +61,34 @@ public class LegionEmblem implements Persistable {
 		return color_a;
 	}
 
-	/**
-	 * @return the color_r
-	 */
 	public byte getColor_r() {
 		return color_r;
 	}
 
-	/**
-	 * @return the color_g
-	 */
 	public byte getColor_g() {
 		return color_g;
 	}
 
-	/**
-	 * @return the color_b
-	 */
 	public byte getColor_b() {
 		return color_b;
 	}
 
-	/**
-	 * @param isUploading
-	 *          the isUploading to set
-	 */
 	public void setUploading(boolean isUploading) {
 		this.isUploading = isUploading;
 	}
 
-	/**
-	 * @return the isUploading
-	 */
 	public boolean isUploading() {
 		return isUploading;
 	}
 
-	/**
-	 * @param emblemSize
-	 *          the emblemSize to set
-	 */
 	public void setUploadSize(int emblemSize) {
 		this.uploadSize = emblemSize;
 	}
 
-	/**
-	 * @return the emblemSize
-	 */
 	public int getUploadSize() {
 		return uploadSize;
 	}
 
-	/**
-	 * @param uploadData
-	 *          the uploadData to set
-	 */
 	public void addUploadData(byte[] data) {
 		byte[] newData = new byte[uploadedSize];
 		int i = 0;
@@ -143,39 +105,22 @@ public class LegionEmblem implements Persistable {
 		this.uploadData = newData;
 	}
 
-	/**
-	 * @return the uploadData
-	 */
 	public byte[] getUploadData() {
 		return this.uploadData;
 	}
 
-	/**
-	 * @param uploadedSize
-	 *          the uploadedSize to set
-	 */
 	public void addUploadedSize(int uploadedSize) {
 		this.uploadedSize += uploadedSize;
 	}
 
-	/**
-	 * @return the uploadedSize
-	 */
 	public int getUploadedSize() {
 		return uploadedSize;
 	}
 
-	/**
-	 * @param emblemType
-	 *          the emblemType to set
-	 */
 	public void setEmblemType(LegionEmblemType emblemType) {
 		this.emblemType = emblemType;
 	}
 
-	/**
-	 * @return the emblemType
-	 */
 	public LegionEmblemType getEmblemType() {
 		return emblemType;
 	}
@@ -189,9 +134,6 @@ public class LegionEmblem implements Persistable {
 		this.uploadData = null;
 	}
 
-	/**
-	 * @param persistentState
-	 */
 	@Override
 	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {
@@ -204,9 +146,6 @@ public class LegionEmblem implements Persistable {
 		}
 	}
 
-	/**
-	 * @return the persistentState
-	 */
 	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;

@@ -14,24 +14,13 @@ import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndP
 /**
  * This packet is displaying visible players.
  *
- * @author -Nemesiss-, Avol, srx47
- * @modified cura, -Enomine-, -Artur-, Neon
+ * @author -Nemesiss-, Avol, srx47, cura, -Enomine-, -Artur-, Neon
  */
 public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 
-	/**
-	 * Visible player
-	 */
 	private final Player player;
 	private boolean enemy;
 
-	/**
-	 * Constructs new <tt>SM_PLAYER_INFO</tt> packet
-	 *
-	 * @param player
-	 *          actual player.
-	 * @param enemy
-	 */
 	public SM_PLAYER_INFO(Player player) {
 		this(player, false);
 	}

@@ -3,12 +3,10 @@ package admincommands;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author Hilgert
- * @reworked Estrayl
+ * @author Hilgert, Estrayl
  */
 public class Dispel extends AdminCommand {
 
@@ -22,10 +20,10 @@ public class Dispel extends AdminCommand {
 		if (target == null)
 			target = admin;
 
-		if (target instanceof Creature) {
-			((Creature) target).getEffectController().removeAllEffects();
-			((Creature) target).getEffectController().removeTransformEffects();
-			PacketSendUtility.sendMessage(admin, "Removed all effects of " + target + ".");
+		if (target instanceof Creature creature) {
+			creature.getEffectController().removeAllEffects();
+			creature.getEffectController().removeTransformEffects();
+			sendInfo(admin, "Removed all effects of " + target + ".");
 		}
 	}
 }

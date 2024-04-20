@@ -27,8 +27,7 @@ import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 
 /**
- * @author Nemiroff Date: 28.12.2009
- * @modified Neon
+ * @author Nemiroff, Neon
  */
 public class Info extends AdminCommand {
 
@@ -48,10 +47,8 @@ public class Info extends AdminCommand {
 		sendInfo(admin, "[Info about " + target.getClass().getSimpleName() + "]\n\tName: " + target.getName() + ", ObjectId: " + target.getObjectId()
 			+ "\n\tTemplateId: " + target.getObjectTemplate().getTemplateId());
 
-		if (target instanceof Creature) {
-			Creature creature = (Creature) target;
-			if (creature instanceof Player) {
-				Player player = (Player) creature;
+		if (target instanceof Creature creature) {
+			if (creature instanceof Player player) {
 				Pet pet = player.getPet();
 				sendInfo(admin, (pet != null ? "Pet Id: " + pet.getObjectTemplate().getTemplateId() + ", ObjectId: " + pet.getObjectId() + "\n\t" : "")
 					+ "Town ID: " + TownService.getInstance().getTownResidence(player));
@@ -124,8 +121,7 @@ public class Info extends AdminCommand {
 									+ (faction.getState().equals(ENpcFactionQuestState.COMPLETE) ? ("\n\tNext after: " + ((faction.getTime() - System.currentTimeMillis() / 1000) / 3600f) + " h.") : ""));
 					}
 				}
-			} else if (creature instanceof Npc) {
-				Npc npc = (Npc) creature;
+			} else if (creature instanceof Npc npc) {
 				sendInfo(admin, "[Template info]\n\tRating: " + npc.getRating() + ", Rank: " + npc.getRank()
 						+ "\n\tTemplateType: " + npc.getNpcTemplateType() + ", AbyssType: " + npc.getAbyssNpcType()
 						+ "\n\tRelative XP reward: " + StatFunctions.calculateExperienceReward(admin.getLevel(), npc));

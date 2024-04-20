@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author kecimis,Tiger
- * @reworked vlog, Neon
+ * @author kecimis, Tiger, vlog, Neon
  */
 public class _1990ASagesGift extends AbstractQuestHandler {
 

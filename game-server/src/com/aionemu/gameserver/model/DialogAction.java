@@ -7,8 +7,7 @@ import java.util.Map;
 /**
  * Converted from enum to regular class with int ID fields, since JVM only supports enums up to ~3000 values, due to the 64kB bytecode limit.
  * 
- * @author Rolandas
- * @reworked Neon
+ * @author Rolandas, Neon
  */
 public final class DialogAction {
 

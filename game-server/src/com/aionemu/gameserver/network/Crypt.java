@@ -11,9 +11,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_VERSION_CHECK;
 /**
  * Crypt will encrypt server packet and decrypt client packet.
  * 
- * @author hack99
- * @author kao
- * @author -Nemesiss-
+ * @author hack99, kao, -Nemesiss-
  */
 public class Crypt {
 
@@ -59,7 +57,6 @@ public class Crypt {
 	/**
 	 * Decrypt client packet from this ByteBuffer.
 	 * 
-	 * @param buf
 	 * @return true if decryption was successful.
 	 */
 	public final boolean decrypt(ByteBuffer buf) {
@@ -68,8 +65,6 @@ public class Crypt {
 
 	/**
 	 * Encrypt server packet from this ByteBuffer.
-	 * 
-	 * @param buf
 	 */
 	public final void encrypt(ByteBuffer buf) {
 		if (!isEnabled) {

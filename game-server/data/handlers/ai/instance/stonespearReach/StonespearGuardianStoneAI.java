@@ -11,7 +11,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Yeats on 20.02.2016.
+ * @author Yeats
  */
 @AIName("stonespear_guardian_stone")
 public class StonespearGuardianStoneAI extends NpcAI {

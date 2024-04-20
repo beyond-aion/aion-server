@@ -11,7 +11,7 @@ import com.aionemu.gameserver.model.stats.container.SummonedObjectGameStats;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 
 /**
- * @author ATracer, modified Rolandas
+ * @author ATracer, Rolandas
  */
 public class SummonedObject<T extends VisibleObject> extends Npc {
 

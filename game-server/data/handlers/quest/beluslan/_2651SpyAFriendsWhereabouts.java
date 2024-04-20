@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author David
- * @reworked vlog
+ * @author David, vlog
  */
 public class _2651SpyAFriendsWhereabouts extends AbstractQuestHandler {
 

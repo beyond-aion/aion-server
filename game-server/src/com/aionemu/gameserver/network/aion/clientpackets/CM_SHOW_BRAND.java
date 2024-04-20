@@ -11,8 +11,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Sweetkr
- * @author Simple
+ * @author Sweetkr, Simple
  */
 public class CM_SHOW_BRAND extends AionClientPacket {
 
@@ -21,9 +20,6 @@ public class CM_SHOW_BRAND extends AionClientPacket {
 	private int brandId;
 	private int targetObjectId;
 
-	/**
-	 * @param opcode
-	 */
 	public CM_SHOW_BRAND(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}

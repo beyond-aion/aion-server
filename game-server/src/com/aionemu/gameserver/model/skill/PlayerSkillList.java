@@ -15,8 +15,7 @@ import com.aionemu.gameserver.skillengine.model.SkillLearnTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author IceReaper, orfeo087, Avol, AEJTester
- * @modified Neon
+ * @author IceReaper, orfeo087, Avol, AEJTester, Neon
  */
 public final class PlayerSkillList implements SkillList<Player> {
 

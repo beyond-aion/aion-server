@@ -9,9 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Mr. Poke
- * @modified by Gigi
- * @reworked vlog
+ * @author Mr. Poke, Gigi, vlog
  */
 public class _2223AMythicalMonster extends AbstractQuestHandler {
 

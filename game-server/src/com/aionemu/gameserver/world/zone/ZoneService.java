@@ -30,8 +30,7 @@ import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.world.zone.handler.*;
 
 /**
- * @author ATracer
- * @modified antness
+ * @author ATracer, antness
  */
 public final class ZoneService implements GameEngine {
 
@@ -86,9 +85,6 @@ public final class ZoneService implements GameEngine {
 		return zoneHandler != null ? zoneHandler : new GeneralZoneHandler();
 	}
 
-	/**
-	 * @param handler
-	 */
 	public final void addZoneHandlerClass(Class<? extends ZoneHandler> handler) {
 		ZoneNameAnnotation idAnnotation = handler.getAnnotation(ZoneNameAnnotation.class);
 		if (idAnnotation != null) {
@@ -110,10 +106,6 @@ public final class ZoneService implements GameEngine {
 		zoneHandlers.put(zoneName, handler);
 	}
 
-	/**
-	 * @param mapId
-	 * @return
-	 */
 	public Map<ZoneName, ZoneInstance> getZoneInstancesByWorldId(int mapId) {
 		Map<ZoneName, ZoneInstance> zones = new HashMap<>();
 		int worldSize = DataManager.WORLD_MAPS_DATA.getTemplate(mapId).getWorldSize();

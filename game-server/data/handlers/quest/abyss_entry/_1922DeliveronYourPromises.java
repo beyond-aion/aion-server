@@ -15,9 +15,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author Hellboy, aion4Free
- * @modified Gigi, Rolandas
- * @reworked vlog On 2.5 the quest has dialogs only for one choice (underground arena)
+ * @author Hellboy, aion4Free, Gigi, Rolandas, vlog
  */
 public class _1922DeliveronYourPromises extends AbstractQuestHandler {
 

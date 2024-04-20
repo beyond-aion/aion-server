@@ -11,8 +11,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author Ritsu
- * @modified Majka
+ * @author Ritsu, Majka
  */
 public class _24050NeritasOrders extends AbstractQuestHandler {
 

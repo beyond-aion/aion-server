@@ -13,7 +13,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Ritsu Modified Majka
+ * @author Ritsu, Majka
  */
 public class _2239MalodorAntidote extends AbstractQuestHandler {
 

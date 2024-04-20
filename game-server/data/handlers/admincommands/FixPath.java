@@ -20,8 +20,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- * @author Rolandas
- * @reworked Neon
+ * @author Rolandas, Neon
  */
 public class FixPath extends AdminCommand {
 
@@ -151,7 +150,6 @@ public class FixPath extends AdminCommand {
 	}
 
 	/**
-	 * @param admin
 	 * @return Returns the Z coordinate of the player after he stopped moving, or 0 on timeout.
 	 */
 	private float getZ(Player admin) {

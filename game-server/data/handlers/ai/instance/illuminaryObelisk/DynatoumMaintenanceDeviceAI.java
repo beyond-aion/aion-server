@@ -11,7 +11,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author M.O.G. Dision. Estrayl
+ * @author M.O.G. Dision, Estrayl
  */
 @AIName("dynatoum_maintenance_device")
 public class DynatoumMaintenanceDeviceAI extends NpcAI {

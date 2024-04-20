@@ -13,16 +13,10 @@ import com.aionemu.gameserver.world.World;
 /**
  * Handles activities related to social groups ingame such as the buddy list, block list, etc
  * 
- * @author Ben
- * @modified Neon
+ * @author Ben, Neon
  */
 public class SocialService {
 
-	/**
-	 * Adds blockedPlayer to the given players block list.
-	 * 
-	 * @return True on success
-	 */
 	public static boolean addBlockedUser(Player player, Player blockedPlayer, String reason) {
 		if (DAOManager.getDAO(BlockListDAO.class).addBlockedUser(player.getObjectId(), blockedPlayer.getObjectId(), reason)) {
 			player.getBlockList().add(new BlockedPlayer(blockedPlayer.getObjectId(), blockedPlayer.getName(), reason));
@@ -33,14 +27,6 @@ public class SocialService {
 		return false;
 	}
 
-	/**
-	 * Unblocks the given object ID for the given player.
-	 * 
-	 * @param player
-	 * @param target
-	 *          player to unblock
-	 * @return True on success
-	 */
 	public static boolean deleteBlockedUser(Player player, BlockedPlayer target) {
 		if (DAOManager.getDAO(BlockListDAO.class).delBlockedUser(player.getObjectId(), target.getObjId())) {
 			player.getBlockList().remove(target.getObjId());

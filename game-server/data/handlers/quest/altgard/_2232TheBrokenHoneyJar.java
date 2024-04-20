@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Mr. Poke fix by Nephis and quest helper team.
- * @reworked vlog
+ * @author Mr. Poke, Nephis and quest helper team, vlog
  */
 public class _2232TheBrokenHoneyJar extends AbstractQuestHandler {
 

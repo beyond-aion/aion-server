@@ -8,8 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.CommandsAccessService;
 
 /**
- * @author ginho1
- * @modified Neon
+ * @author ginho1, Neon
  */
 public abstract class ConsoleCommand extends ChatCommand {
 

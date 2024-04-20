@@ -5,8 +5,7 @@ import com.aionemu.gameserver.network.chatserver.ChatServerConnection;
 import com.aionemu.gameserver.network.chatserver.CsServerPacket;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public class SM_CS_AUTH extends CsServerPacket {
 

@@ -38,8 +38,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author xTz, Aioncool, Bobobear
- * @modified Neon
+ * @author xTz, Aioncool, Bobobear, Neon
  */
 public class DropRegistrationService {
 

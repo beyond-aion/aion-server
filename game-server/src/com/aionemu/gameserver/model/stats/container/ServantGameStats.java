@@ -5,7 +5,7 @@ import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
- * @author Yeats 18.03.2016.
+ * @author Yeats
  */
 public class ServantGameStats extends SummonedObjectGameStats {
 

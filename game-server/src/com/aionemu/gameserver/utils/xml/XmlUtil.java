@@ -23,8 +23,7 @@ import org.w3c.dom.Document;
 import org.xml.sax.InputSource;
 
 /**
- * @author ?
- * @reworked Neon
+ * @author ?, Neon
  */
 public abstract class XmlUtil {
 

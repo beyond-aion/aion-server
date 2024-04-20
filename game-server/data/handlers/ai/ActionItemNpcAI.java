@@ -19,8 +19,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author xTz
- * @modified vlog
+ * @author xTz, vlog
  */
 @AIName("useitem")
 public class ActionItemNpcAI extends NpcAI {

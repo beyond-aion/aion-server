@@ -17,8 +17,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author Lyahim, ATracer
- * @modified Simple, Neon
+ * @author Lyahim, ATracer, Simple, Neon
  */
 public class CM_INVITE_TO_GROUP extends AionClientPacket {
 

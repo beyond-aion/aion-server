@@ -5,8 +5,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author xTz
- * @modified Neon
+ * @author xTz, Neon
  */
 public class SM_SKILL_REMOVE extends AionServerPacket {
 

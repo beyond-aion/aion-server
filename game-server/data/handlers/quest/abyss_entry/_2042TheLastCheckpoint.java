@@ -12,8 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * Talk with Aegir (204301). Talk with Yornduf (204319). Go through all the rings within the time limit. Talk with Yornduf. Report back to Aegir.
  * 
- * @author Hellboy aion4Free, Hilgert
- * @reworked vlog
+ * @author Hellboy, aion4Free, Hilgert, vlog
  */
 public class _2042TheLastCheckpoint extends AbstractQuestHandler {
 

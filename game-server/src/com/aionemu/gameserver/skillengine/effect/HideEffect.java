@@ -21,8 +21,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Sweetkr
- * @author Cura
+ * @author Sweetkr, Cura
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HideEffect")

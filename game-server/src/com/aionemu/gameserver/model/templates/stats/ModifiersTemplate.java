@@ -17,8 +17,7 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatSetFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatSubFunction;
 
 /**
- * @author xavier
- * @modified Rolandas
+ * @author xavier, Rolandas
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlRootElement(name = "modifiers")

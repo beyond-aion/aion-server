@@ -15,11 +15,11 @@ import com.aionemu.gameserver.model.stats.calc.functions.StatAddFunction;
  */
 public class EnchantEffect implements StatOwner {
 
-	private List<IStatFunction> functions = new ArrayList<>();
 	private ItemSlot itemSlot;
 
 	public EnchantEffect(Item item, Player player, List<EnchantStat> enchantStats) {
-		Long itemSlot = item.getEquipmentSlot();
+		List<IStatFunction> functions = new ArrayList<>();
+		long itemSlot = item.getEquipmentSlot();
 		for (EnchantStat enchantStat : enchantStats) {
 			switch (enchantStat.getStat()) {
 				case PHYSICAL_ATTACK:
@@ -39,11 +39,10 @@ public class EnchantEffect implements StatOwner {
 					break;
 			}
 		}
-		player.getGameStats().addEffect(EnchantEffect.this, functions);
+		player.getGameStats().addEffect(this, functions);
 	}
 
 	public void endEffect(Player player) {
-		functions.clear();
 		player.getGameStats().endEffect(this);
 	}
 

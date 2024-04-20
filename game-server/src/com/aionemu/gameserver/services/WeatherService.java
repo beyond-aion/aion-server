@@ -22,8 +22,7 @@ import com.aionemu.gameserver.utils.time.gametime.GameTime;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
- * @author ATracer, Kwazar
- * @reworked Rolandas
+ * @author ATracer, Kwazar, Rolandas
  */
 public class WeatherService {
 
@@ -152,11 +151,6 @@ public class WeatherService {
 		return true;
 	}
 
-	/**
-	 * When a player connects, it loads his weather
-	 * 
-	 * @param player
-	 */
 	public void loadWeather(Player player) {
 		WeatherEntry[] weatherEntries = worldZoneWeathers.get(player.getWorldId());
 		if (weatherEntries != null)

@@ -7,7 +7,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Estrayl 12.06.2017
+ * @author Estrayl
  */
 @AIName("tahabata_gargoyle")
 public class TahabataGargoyleAI extends AggressiveNpcAI {

@@ -10,12 +10,7 @@ import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 /**
  * System message packet.
  * 
- * @author -Nemesiss-
- * @author EvilSpirit
- * @author Luno :D
- * @author Avol!
- * @author Simple :)
- * @author Sarynth
+ * @author -Nemesiss-, EvilSpirit, Luno :D, Avol!, Simple :), Sarynth
  */
 public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 
@@ -28796,9 +28791,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		}
 	}
 
-	/**
-	 * @return the stringId
-	 */
 	public int getId() {
 		return msgId;
 	}

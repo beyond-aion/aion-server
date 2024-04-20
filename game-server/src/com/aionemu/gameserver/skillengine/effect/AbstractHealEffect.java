@@ -15,7 +15,7 @@ import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.model.HealType;
 
 /**
- * @author ATracer modified by Wakizashi, kecimis
+ * @author ATracer, Wakizashi, kecimis
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "AbstractHealEffect")

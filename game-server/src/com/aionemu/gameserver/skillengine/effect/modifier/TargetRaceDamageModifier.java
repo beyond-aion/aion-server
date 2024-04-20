@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
- * @author ATracer modified by Sippolo, kecimis
+ * @author ATracer, Sippolo, kecimis
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TargetRaceDamageModifier")

@@ -14,8 +14,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.SkillUse;
 
 /**
- * @author vlog
- * @modified Bobobear, Pad, Neon
+ * @author vlog, Bobobear, Pad, Neon
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "SkillUseData", propOrder = { "skills" })

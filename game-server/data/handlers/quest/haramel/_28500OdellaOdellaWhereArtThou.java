@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author zhkchi
- * @modified Majka
+ * @author zhkchi, Majka
  */
 public class _28500OdellaOdellaWhereArtThou extends AbstractQuestHandler {
 

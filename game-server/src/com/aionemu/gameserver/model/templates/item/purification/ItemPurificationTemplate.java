@@ -9,9 +9,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author Ranastic
- * @reworked Navyan
- * @modified Estrayl
+ * @author Ranastic, Navyan, Estrayl
  */
 @XmlRootElement(name = "ItemPurification")
 @XmlAccessorType(XmlAccessType.FIELD)

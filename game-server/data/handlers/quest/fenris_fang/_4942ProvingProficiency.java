@@ -9,7 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Nanou, modified by bobobear
+ * @author Nanou, bobobear
  */
 public class _4942ProvingProficiency extends AbstractQuestHandler {
 

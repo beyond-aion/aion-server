@@ -13,8 +13,7 @@ import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author ATracer
- * @modified Wakizashi, Neon
+ * @author ATracer, Wakizashi, Neon
  */
 public class TradeList {
 
@@ -29,17 +28,12 @@ public class TradeList {
 	private Map<Integer, Long> requiredItems = new LinkedHashMap<>();
 
 	public TradeList() {
-
 	}
 
 	public TradeList(int sellerObjId) {
 		this.sellerObjId = sellerObjId;
 	}
 
-	/**
-	 * @param itemId
-	 * @param count
-	 */
 	public void addItem(int itemId, long count) {
 		addTradeItem(new TradeItem(itemId, count));
 	}
@@ -62,9 +56,6 @@ public class TradeList {
 		return availableKinah >= requiredKinah;
 	}
 
-	/**
-	 * @return true or false
-	 */
 	public boolean calculateAbyssRewardBuyList(Player player, int modifier) {
 		int ap = player.getAbyssRank().getAp();
 
@@ -106,9 +97,6 @@ public class TradeList {
 		return true;
 	}
 
-	/**
-	 * @return the tradeItems
-	 */
 	public List<TradeItem> getTradeItems() {
 		return tradeItems;
 	}
@@ -117,30 +105,18 @@ public class TradeList {
 		return tradeItems.size();
 	}
 
-	/**
-	 * @return the npcId
-	 */
 	public int getSellerObjId() {
 		return sellerObjId;
 	}
 
-	/**
-	 * @return the requiredAp
-	 */
 	public int getRequiredAp() {
 		return requiredAp;
 	}
 
-	/**
-	 * @return the requiredKinah
-	 */
 	public long getRequiredKinah() {
 		return requiredKinah;
 	}
 
-	/**
-	 * @return the requiredItems
-	 */
 	public Map<Integer, Long> getRequiredItems() {
 		return requiredItems;
 	}

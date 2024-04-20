@@ -12,8 +12,7 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemAddType;
 
 /**
- * @author kosyachok
- * @author -Nemesiss-
+ * @author kosyachok, -Nemesiss-
  */
 public class SM_WAREHOUSE_ADD_ITEM extends AionServerPacket {
 

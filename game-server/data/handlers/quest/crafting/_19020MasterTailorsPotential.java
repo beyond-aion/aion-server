@@ -12,8 +12,7 @@ import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Thuatan
- * @modified Pad
+ * @author Thuatan, Pad
  */
 public class _19020MasterTailorsPotential extends AbstractQuestHandler {
 

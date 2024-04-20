@@ -14,8 +14,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * Report-To-Quest Start: Perento (204500) Take the paper voucher (182213000) to Koruchinerk (798321) Go to New Heiron Gate and meet Herthia (205228)
  * Bring the Fake Stigma (182213001) to Perento
  * 
- * @author vlog
- * @modified Gigi
+ * @author vlog, Gigi
  */
 public class _18600ScoringSomeBadStigma extends AbstractQuestHandler {
 

@@ -14,8 +14,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.ReportToMany;
 
 /**
- * @author Hilgert
- * @modified Rolandas, Pad
+ * @author Hilgert, Rolandas, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ReportToManyData", propOrder = { "npcInfos" })

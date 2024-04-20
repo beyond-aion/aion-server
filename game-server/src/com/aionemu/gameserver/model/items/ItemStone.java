@@ -4,7 +4,7 @@ import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 
 /**
- * @author ATracer modified by Wakizashi
+ * @author ATracer, Wakizashi
  */
 public class ItemStone implements StatOwner, Persistable {
 
@@ -23,12 +23,6 @@ public class ItemStone implements StatOwner, Persistable {
 		IDIANSTONE;
 	}
 
-	/**
-	 * @param itemObjId
-	 * @param itemId
-	 * @param slot
-	 * @param persistentState
-	 */
 	public ItemStone(int itemObjId, int itemId, int slot, PersistentState persistentState) {
 		this.itemObjId = itemObjId;
 		this.itemId = itemId;
@@ -36,47 +30,28 @@ public class ItemStone implements StatOwner, Persistable {
 		this.persistentState = persistentState;
 	}
 
-	/**
-	 * @return the itemObjId
-	 */
 	public int getItemObjId() {
 		return itemObjId;
 	}
 
-	/**
-	 * @return the itemId
-	 */
 	public int getItemId() {
 		return itemId;
 	}
 
-	/**
-	 * @return the slot
-	 */
 	public int getSlot() {
 		return slot;
 	}
 
-	/**
-	 * @param slot
-	 *          the slot to set
-	 */
 	public void setSlot(int slot) {
 		this.slot = slot;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
-	/**
-	 * @return the pState
-	 */
 	@Override
 	public PersistentState getPersistentState() {
 		return persistentState;
 	}
 
-	/**
-	 * @param persistentState
-	 */
 	@Override
 	@SuppressWarnings("fallthrough")
 	public void setPersistentState(PersistentState persistentState) {

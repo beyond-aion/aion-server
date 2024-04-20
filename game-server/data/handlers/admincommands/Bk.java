@@ -23,8 +23,7 @@ import com.aionemu.gameserver.world.WorldMapType;
 import ch.qos.logback.classic.Logger;
 
 /**
- * @author Mrakobes
- * @modified antness
+ * @author Mrakobes, antness
  */
 public class Bk extends AdminCommand {
 

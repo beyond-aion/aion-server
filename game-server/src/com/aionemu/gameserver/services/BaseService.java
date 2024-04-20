@@ -23,8 +23,7 @@ import com.aionemu.gameserver.services.base.StainedBase;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 
 /**
- * @author Source
- * @reworked Estrayl
+ * @author Source, Estrayl
  */
 public class BaseService {
 
@@ -75,8 +74,6 @@ public class BaseService {
 
 	/**
 	 * Generates a new BaseObject for given id
-	 * 
-	 * @param id
 	 */
 	public final void start(int id) {
 		final Base<?> base;
@@ -95,11 +92,7 @@ public class BaseService {
 	}
 
 	/**
-	 * returns a type-specific base object for given id
-	 * if a base location is given for the specific id.
-	 * 
-	 * @param id
-	 * @return
+	 * @return A type-specific base object for given id, if a base location is given for the specific id.
 	 */
 	private final Base<?> newBase(int id) {
 		if (casualBases.containsKey(id))
@@ -116,9 +109,6 @@ public class BaseService {
 	 * Checks for enhancement of stained bases.
 	 * Executes or removes special stained features, if necessary.
 	 * Otherwise the captured base will be stopped and newly initialized.
-	 * 
-	 * @param id
-	 * @param race
 	 */
 	public final void capture(int id, Race race) {
 		if (!isActive(id))
@@ -174,8 +164,6 @@ public class BaseService {
 	 * Removes base with given id from activeBases
 	 * and stops it.
 	 * Should only directly called for SiegeBases
-	 * 
-	 * @param id
 	 */
 	public final void stop(int id) {
 		if (!isActive(id))

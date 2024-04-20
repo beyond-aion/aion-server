@@ -13,8 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * Go to the Mudthorn Experiment Lab and find Belbua (204645). When you're ready to leave, talk to Belbua. Escort Belbua outside the Mudthorn
  * Experiment Lab. Let Phuthollo (204519) know Belbua is free.
  * 
- * @author Rhys2002
- * @reworked vlog
+ * @author Rhys2002, vlog
  */
 public class _1614WheresBelbua extends AbstractQuestHandler {
 

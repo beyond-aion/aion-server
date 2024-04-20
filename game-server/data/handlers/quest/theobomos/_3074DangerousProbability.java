@@ -12,8 +12,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.item.ItemService;
 
 /**
- * @author Wakizashi
- * @modified vlog
+ * @author Wakizashi, vlog
  */
 public class _3074DangerousProbability extends AbstractQuestHandler {
 

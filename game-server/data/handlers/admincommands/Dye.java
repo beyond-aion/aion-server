@@ -16,8 +16,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author loleron
- * @reworked Neon
+ * @author loleron, Neon
  */
 public class Dye extends AdminCommand {
 
@@ -34,10 +33,7 @@ public class Dye extends AdminCommand {
 			return;
 		}
 
-		Player target = player;
-		if (player.getTarget() instanceof Player)
-			target = (Player) player.getTarget();
-
+		Player target = player.getTarget() instanceof Player p ? p : player;
 		Integer itemColor = null; // null = default item color
 		String colorText = "default";
 		String colorParam = params[0];

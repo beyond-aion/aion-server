@@ -11,18 +11,17 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Majka
- * @modified Pad
- * @description:
- * 							Talk with Sefrim.
- *               Talk with Julia.
- *               Investigate the Mindboggle Waste.
- *               Eliminate the Enigmatic Drakan who appears.
- *               Defeat the Interhypno Ego.
- *               Talk with Jadun.
- *               Talk with Julia.
- *               Talk with Sefrim.
- *               Order: Sefrim is looking for you. Go and see him.
+ * Talk with Sefrim.
+ * Talk with Julia.
+ * Investigate the Mindboggle Waste.
+ * Eliminate the Enigmatic Drakan who appears.
+ * Defeat the Interhypno Ego.
+ * Talk with Jadun.
+ * Talk with Julia.
+ * Talk with Sefrim.
+ * Order: Sefrim is looking for you. Go and see him.
+ *
+ * @author Majka, Pad
  */
 public class _20506MuscleOverMind extends AbstractQuestHandler {
 

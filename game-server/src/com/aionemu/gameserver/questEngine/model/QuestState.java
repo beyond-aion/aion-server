@@ -7,8 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
 
 /**
- * @author MrPoke
- * @modified vlog, Rolandas
+ * @author MrPoke, vlog, Rolandas
  */
 public class QuestState implements Persistable {
 
@@ -44,19 +43,11 @@ public class QuestState implements Persistable {
 		return questVars;
 	}
 
-	/**
-	 * @param id
-	 * @param var
-	 */
 	public void setQuestVarById(int id, int var) {
 		questVars.setVarById(id, var);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
-	/**
-	 * @param id
-	 * @return Quest var by id.
-	 */
 	public int getQuestVarById(int id) {
 		return questVars.getVarById(id);
 	}

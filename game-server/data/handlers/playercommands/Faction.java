@@ -15,8 +15,7 @@ import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author Shepper
- * @modified bobobear, Neon
+ * @author Shepper, bobobear, Neon
  */
 public class Faction extends PlayerCommand {
 

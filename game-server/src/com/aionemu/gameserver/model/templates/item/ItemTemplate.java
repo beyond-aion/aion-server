@@ -25,7 +25,7 @@ import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
 import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
- * @author Luno modified by ATracer
+ * @author Luno, ATracer
  */
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(namespace = "", name = "ItemTemplate")

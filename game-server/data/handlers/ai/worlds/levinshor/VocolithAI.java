@@ -23,8 +23,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.GeneralNpcAI;
 
 /**
- * @author Yeats
- * @modified Neon
+ * @author Yeats, Neon
  */
 @AIName("LDF4_Advance_Vocolith")
 public class VocolithAI extends GeneralNpcAI {

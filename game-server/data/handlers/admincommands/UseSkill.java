@@ -14,8 +14,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author Source, kecimis
- * @reworked Estrayl, Neon
+ * @author Source, kecimis, Estrayl, Neon
  */
 public class UseSkill extends AdminCommand {
 
@@ -62,20 +61,18 @@ public class UseSkill extends AdminCommand {
 			}
 		} catch (NumberFormatException e) {
 			sendInfo(admin, "Invalid skill id or level.");
-			return;
 		}
-
 	}
 
 	private boolean useSkill(Player player, SkillTemplate template, int skillLevel, String targetMode, boolean forceUse) {
 		Creature effector;
 		VisibleObject target;
 		if (targetMode != null) {
-			if (!(player.getTarget() instanceof Creature)) {
+			if (!(player.getTarget() instanceof Creature creatureTarget)) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 				return false;
 			}
-			effector = (Creature) player.getTarget();
+			effector = creatureTarget;
 			target = getTarget(player, targetMode);
 		} else {
 			effector = player;
@@ -90,14 +87,11 @@ public class UseSkill extends AdminCommand {
 	}
 
 	private VisibleObject getTarget(Player player, String targetMode) {
-		switch (targetMode) {
-			case "me":
-				return player;
-			case "self":
-				return player.getTarget();
-			case "target":
-				return player.getTarget() == null ? null : player.getTarget().getTarget();
-		}
-		return null;
+		return switch (targetMode) {
+			case "me" -> player;
+			case "self" -> player.getTarget();
+			case "target" -> player.getTarget() == null ? null : player.getTarget().getTarget();
+			default -> null;
+		};
 	}
 }

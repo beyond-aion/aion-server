@@ -9,8 +9,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author Divinity
- * @modified Neon
+ * @author Divinity, Neon
  */
 public class Say extends AdminCommand {
 
@@ -27,11 +26,11 @@ public class Say extends AdminCommand {
 			return;
 		}
 
-		if (!(admin.getTarget() instanceof Npc)) {
+		if (!(admin.getTarget() instanceof Npc npc)) {
 			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_INVALID_TARGET());
 			return;
 		}
 
-		PacketSendUtility.broadcastPacket(admin, new SM_MESSAGE((Npc) admin.getTarget(), String.join(" ", params), ChatType.NORMAL), true);
+		PacketSendUtility.broadcastPacket(admin, new SM_MESSAGE(npc, String.join(" ", params), ChatType.NORMAL), true);
 	}
 }

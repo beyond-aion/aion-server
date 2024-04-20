@@ -5,8 +5,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author vlog
- * @modified Neon
+ * @author vlog, Neon
  */
 @XmlType(name = "RandomItem")
 public class RandomItem {

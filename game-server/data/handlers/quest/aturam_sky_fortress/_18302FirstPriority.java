@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Luzien
- * @reworked Pad
+ * @author Luzien, Pad
  */
 public class _18302FirstPriority extends AbstractQuestHandler {
 

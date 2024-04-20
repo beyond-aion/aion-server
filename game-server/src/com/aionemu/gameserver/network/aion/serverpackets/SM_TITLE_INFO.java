@@ -7,8 +7,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author cura, xTz
- * @modified -Enomine-
+ * @author cura, xTz, -Enomine-
  */
 public class SM_TITLE_INFO extends AionServerPacket {
 
@@ -18,32 +17,16 @@ public class SM_TITLE_INFO extends AionServerPacket {
 	private int bonusTitleId;
 	private int playerObjId;
 
-	/**
-	 * title list
-	 * 
-	 * @param player
-	 */
 	public SM_TITLE_INFO(Player player) {
 		this.action = 0;
 		this.titleList = player.getTitleList();
 	}
 
-	/**
-	 * self title set
-	 * 
-	 * @param titleId
-	 */
 	public SM_TITLE_INFO(int titleId) {
 		this.action = 1;
 		this.titleId = titleId;
 	}
 
-	/**
-	 * broad title set
-	 * 
-	 * @param player
-	 * @param titleId
-	 */
 	public SM_TITLE_INFO(Player player, int titleId) {
 		this.action = 3;
 		this.playerObjId = player.getObjectId();

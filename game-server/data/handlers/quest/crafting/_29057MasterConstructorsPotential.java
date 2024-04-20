@@ -13,8 +13,7 @@ import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Ritsu
- * @modified Pad
+ * @author Ritsu, Pad
  */
 public class _29057MasterConstructorsPotential extends AbstractQuestHandler {
 

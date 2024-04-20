@@ -11,8 +11,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author prix
- * @modified Neon
+ * @author prix, Neon
  */
 public class CM_CHAT_PLAYER_INFO extends AionClientPacket {
 

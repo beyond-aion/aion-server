@@ -15,8 +15,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author Gigi
- * @modified Majka
+ * @author Gigi, Majka
  */
 public class _28602IntotheUnknown extends AbstractQuestHandler {
 

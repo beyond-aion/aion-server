@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Nephis
- * @reworked vlog
+ * @author Nephis, vlog
  */
 public class _4038AlasPoorGroznak extends AbstractQuestHandler {
 

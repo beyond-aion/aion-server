@@ -10,8 +10,7 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
  * <br>
  * Each AionObject is uniquely identified by objectId.
  * 
- * @author -Nemesiss-, SoulKeeper
- * @modified Neon
+ * @author -Nemesiss-, SoulKeeper, Neon
  */
 public abstract class AionObject {
 

@@ -13,8 +13,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUIT_RESPONSE;
 import com.aionemu.gameserver.services.player.PlayerLeaveWorldService;
 
 /**
- * @author -Nemesiss-
- * @modified Neon
+ * @author -Nemesiss-, Neon
  */
 public class CM_QUIT extends AionClientPacket {
 
@@ -23,11 +22,6 @@ public class CM_QUIT extends AionClientPacket {
 	 */
 	private boolean stayConnected;
 
-	/**
-	 * Constructs new instance of <tt>CM_QUIT</tt> packet
-	 * 
-	 * @param opcode
-	 */
 	public CM_QUIT(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}

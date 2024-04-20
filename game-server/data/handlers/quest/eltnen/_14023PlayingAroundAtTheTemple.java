@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Artur
- * @modified Majka, Pad
+ * @author Artur, Majka, Pad
  */
 public class _14023PlayingAroundAtTheTemple extends AbstractQuestHandler {
 

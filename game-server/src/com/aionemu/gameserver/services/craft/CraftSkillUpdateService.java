@@ -18,8 +18,7 @@ import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author MrPoke, sphinx
- * @modified Imaginary, Pad
+ * @author MrPoke, sphinx, Imaginary, Pad
  */
 public class CraftSkillUpdateService {
 
@@ -77,19 +76,10 @@ public class CraftSkillUpdateService {
 		log.info("CraftSkillUpdateService: Initialized.");
 	}
 
-	/**
-	 * @return the corresponding profession for the given npc
-	 */
 	public Profession getProfessionByNpc(Npc npc) {
 		return professionByNpc.get(npc.getNpcId());
 	}
 
-	/**
-	 * handles the crafting skill learning
-	 * 
-	 * @param player
-	 * @param npc
-	 */
 	public void learnSkill(Player player, Npc npc) {
 		if (player.getLevel() < 10)
 			return;
@@ -136,12 +126,6 @@ public class CraftSkillUpdateService {
 		}
 	}
 
-	/**
-	 * Get total experted crafting skills
-	 * 
-	 * @param Player
-	 * @return total number of experted crafting skills
-	 */
 	public int getTotalExpertCraftingSkills(Player player) {
 		int mastered = 0;
 
@@ -156,9 +140,6 @@ public class CraftSkillUpdateService {
 	}
 
 	/**
-	 * Get total mastered crafting skills
-	 * 
-	 * @param Player
 	 * @return total number of mastered crafting skills
 	 */
 	public int getTotalMasterCraftingSkills(Player player) {
@@ -175,12 +156,6 @@ public class CraftSkillUpdateService {
 		return mastered;
 	}
 
-	/**
-	 * Check if player can learn more expert crafting skill or not (max is 2)
-	 * 
-	 * @param Player
-	 * @return true or false
-	 */
 	public boolean canLearnMoreExpertCraftingSkill(Player player) {
 		if (getTotalExpertCraftingSkills(player) + getTotalMasterCraftingSkills(player) < CraftConfig.MAX_EXPERT_CRAFTING_SKILLS) {
 			return true;
@@ -190,12 +165,6 @@ public class CraftSkillUpdateService {
 		}
 	}
 
-	/**
-	 * Check if player can learn more master crafting skill or not (max is 1)
-	 * 
-	 * @param Player
-	 * @return true or false
-	 */
 	public boolean canLearnMoreMasterCraftingSkill(Player player) {
 		if (getTotalMasterCraftingSkills(player) < CraftConfig.MAX_MASTER_CRAFTING_SKILLS) {
 			return true;

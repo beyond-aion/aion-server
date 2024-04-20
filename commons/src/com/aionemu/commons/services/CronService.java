@@ -30,8 +30,7 @@ import com.aionemu.commons.services.cron.CronServiceException;
 import com.aionemu.commons.services.cron.RunnableRunner;
 
 /**
- * @author SoulKeeper
- * @modified Neon
+ * @author SoulKeeper, Neon
  */
 public final class CronService {
 

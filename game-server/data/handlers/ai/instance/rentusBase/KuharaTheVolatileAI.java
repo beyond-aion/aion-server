@@ -20,8 +20,7 @@ import ai.AggressiveNpcAI;
 /**
  * Still not retail-like and fully refactored.
  * 
- * @author xTz
- * @reworked Estrayl 12.04.2016
+ * @author xTz, Estrayl
  */
 @AIName("kuhara_the_volatile")
 public class KuharaTheVolatileAI extends AggressiveNpcAI {

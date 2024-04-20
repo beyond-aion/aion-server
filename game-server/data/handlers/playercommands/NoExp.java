@@ -8,8 +8,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 
 /**
- * @author Wakizashi
- * @modified Neon
+ * @author Wakizashi, Neon
  */
 public class NoExp extends PlayerCommand {
 

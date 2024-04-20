@@ -20,8 +20,7 @@ import com.aionemu.gameserver.model.items.storage.Storage;
  * screen.</li>
  * </ul>
  * 
- * @author SoulKeeper
- * @modified cura
+ * @author SoulKeeper, cura
  */
 public class Account implements Iterable<PlayerAccountData> {
 
@@ -107,32 +106,18 @@ public class Account implements Iterable<PlayerAccountData> {
 		this.accountTime = accountTime;
 	}
 
-	/**
-	 * @return the accessLevel
-	 */
 	public byte getAccessLevel() {
 		return accessLevel;
 	}
 
-	/**
-	 * @param accessLevel
-	 *          the accessLevel to set
-	 */
 	public void setAccessLevel(byte accessLevel) {
 		this.accessLevel = accessLevel;
 	}
 
-	/**
-	 * @return the membership
-	 */
 	public byte getMembership() {
 		return membership;
 	}
 
-	/**
-	 * @param membership
-	 *          the membership to set
-	 */
 	public void setMembership(byte membership) {
 		this.membership = membership;
 	}
@@ -157,17 +142,10 @@ public class Account implements Iterable<PlayerAccountData> {
 		return id;
 	}
 
-	/**
-	 * @param chaOid
-	 * @return PlayerAccountData
-	 */
 	public PlayerAccountData getPlayerAccountData(int chaOid) {
 		return players.get(chaOid);
 	}
 
-	/**
-	 * @param accPlData
-	 */
 	public void addPlayerAccountData(PlayerAccountData accPlData) {
 		PlayerAccountData oldData = players.put(accPlData.getPlayerCommonData().getPlayerObjId(), accPlData);
 		if (oldData != null) {
@@ -183,24 +161,14 @@ public class Account implements Iterable<PlayerAccountData> {
 		}
 	}
 
-	/**
-	 * @return the accountWarehouse
-	 */
 	public Storage getAccountWarehouse() {
 		return accountWarehouse;
 	}
 
-	/**
-	 * @param accountWarehouse
-	 *          the accountWarehouse to set
-	 */
 	public void setAccountWarehouse(Storage accountWarehouse) {
 		this.accountWarehouse = accountWarehouse;
 	}
 
-	/**
-	 * @return the characterPasskey
-	 */
 	public CharacterPasskey getCharacterPasskey() {
 		if (characterPasskey == null)
 			characterPasskey = new CharacterPasskey();

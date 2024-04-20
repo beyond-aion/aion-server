@@ -13,8 +13,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
- * @author Artur
- * @modified Majka
+ * @author Artur, Majka
  */
 public class _24043LazyLanguageLessons extends AbstractQuestHandler {
 

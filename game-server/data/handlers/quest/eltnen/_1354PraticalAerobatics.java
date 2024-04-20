@@ -14,8 +14,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 
 /**
- * @author Ritsu
- * @modified Pad
+ * @author Ritsu, Pad
  */
 public class _1354PraticalAerobatics extends AbstractQuestHandler {
 

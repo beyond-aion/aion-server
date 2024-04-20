@@ -11,8 +11,7 @@ import com.aionemu.gameserver.services.HousingService;
 /**
  * Sends a friend list to the client
  * 
- * @author Ben
- * @modified Neon
+ * @author Ben, Neon
  */
 public class SM_FRIEND_LIST extends AionServerPacket {
 

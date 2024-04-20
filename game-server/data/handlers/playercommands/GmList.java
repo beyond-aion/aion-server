@@ -8,8 +8,7 @@ import com.aionemu.gameserver.utils.audit.GMService;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 
 /**
- * @author Aion Gates
- * @reworked Neon
+ * @author Aion Gates, Neon
  */
 public class GmList extends PlayerCommand {
 

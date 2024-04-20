@@ -11,8 +11,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.ItemOrders;
 
 /**
- * @author Bobobear
- * @modified Pad
+ * @author Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ItemOrdersData")

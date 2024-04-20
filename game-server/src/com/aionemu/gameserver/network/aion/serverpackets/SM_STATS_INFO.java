@@ -13,25 +13,15 @@ import com.aionemu.gameserver.utils.stats.CalculationType;
 /**
  * In this packet Server is sending User Info?
  * 
- * @author -Nemesiss-
- * @author Luno
- * @author ginho1
+ * @author -Nemesiss-, Luno, ginho1
  */
 public class SM_STATS_INFO extends AionServerPacket {
 
-	/**
-	 * Player that stats info will be send
-	 */
 	private Player player;
 	private PlayerGameStats pgs;
 	private PlayerLifeStats pls;
 	private PlayerCommonData pcd;
 
-	/**
-	 * Constructs new <tt>SM_UI</tt> packet
-	 * 
-	 * @param player
-	 */
 	public SM_STATS_INFO(Player player) {
 		this.player = player;
 		this.pcd = player.getCommonData();

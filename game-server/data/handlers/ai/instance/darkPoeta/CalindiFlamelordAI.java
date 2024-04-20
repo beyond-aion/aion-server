@@ -15,8 +15,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Ritsu
- * @reworked Estrayl 12.06.2017
+ * @author Ritsu, Estrayl
  */
 @AIName("calindi_flamelord")
 public class CalindiFlamelordAI extends AggressiveNpcAI {

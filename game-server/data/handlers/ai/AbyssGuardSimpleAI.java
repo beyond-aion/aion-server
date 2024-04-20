@@ -9,8 +9,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * @author Rolandas
- * @modified Neon
+ * @author Rolandas, Neon
  */
 @AIName("simple_abyssguard")
 public class AbyssGuardSimpleAI extends AggressiveNpcAI {

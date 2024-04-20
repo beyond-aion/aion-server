@@ -7,8 +7,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 /**
  * This packet show casting spell animation.
  * 
- * @author alexa026
- * @author rhys2002
+ * @author alexa026, rhys2002
  */
 public class SM_CASTSPELL extends AionServerPacket {
 

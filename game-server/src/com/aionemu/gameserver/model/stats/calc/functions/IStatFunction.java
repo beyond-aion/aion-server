@@ -6,8 +6,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 
 /**
- * @author ATracer
- * @modified Rolandas
+ * @author ATracer, Rolandas
  */
 public interface IStatFunction extends Comparable<IStatFunction> {
 

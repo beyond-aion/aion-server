@@ -22,8 +22,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author Tibald
- * @modified Estrayl
+ * @author Tibald, Estrayl
  */
 @InstanceID(300620000)
 public class OccupiedRentusBaseInstance extends GeneralInstanceHandler {

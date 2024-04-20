@@ -42,22 +42,15 @@ import com.aionemu.gameserver.world.container.LegionMemberContainer;
 /**
  * This class is designed to do all the work related with loading/storing legions and their members.
  *
- * @author Simple
- * @modified cura, Source, Neon
+ * @author Simple, cura, Source, Neon
  */
 public class LegionService {
 
 	private static final Logger log = LoggerFactory.getLogger(LegionService.class);
 	private final LegionContainer allCachedLegions = new LegionContainer();
 	private final LegionMemberContainer allCachedLegionMembers = new LegionMemberContainer();
-	/**
-	 * Legion Permission variables
-	 */
 	private static final int MAX_LEGION_LEVEL = 8;
 
-	/**
-	 * Legion Restrictions
-	 */
 	private LegionRestrictions legionRestrictions = new LegionRestrictions();
 
 	public static LegionService getInstance() {
@@ -67,12 +60,6 @@ public class LegionService {
 	private LegionService() {
 	}
 
-	/**
-	 * Stores legion data into db
-	 *
-	 * @param legion
-	 * @param newLegion
-	 */
 	private void storeLegion(Legion legion, boolean newLegion) {
 		if (newLegion) {
 			addCachedLegion(legion);
@@ -83,22 +70,10 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * Stores newly created legion
-	 *
-	 * @param legion
-	 *          legion to store
-	 */
 	private void storeLegion(Legion legion) {
 		storeLegion(legion, false);
 	}
 
-	/**
-	 * Stores legion member data into db or saves a new one
-	 *
-	 * @param legionMember
-	 * @param newMember
-	 */
 	private void storeLegionMember(LegionMember legionMember, boolean newMember) {
 		if (newMember) {
 			addCachedLegionMember(legionMember);
@@ -107,21 +82,10 @@ public class LegionService {
 			DAOManager.getDAO(LegionMemberDAO.class).storeLegionMember(legionMember.getObjectId(), legionMember);
 	}
 
-	/**
-	 * Stores a legion member
-	 *
-	 * @param legionMember
-	 *          legion member to store
-	 */
 	public void storeLegionMember(LegionMember legionMember) {
 		storeLegionMember(legionMember, false);
 	}
 
-	/**
-	 * Stores legion member data into database
-	 *
-	 * @param legionMemberEx
-	 */
 	private void storeLegionMemberExInCache(Player player) {
 		if (this.allCachedLegionMembers.containsEx(player.getObjectId())) {
 			LegionMemberEx legionMemberEx = allCachedLegionMembers.getMemberEx(player.getObjectId());
@@ -164,9 +128,6 @@ public class LegionService {
 
 	/**
 	 * Completely removes legion from database and cache
-	 *
-	 * @param legionId
-	 *          id of legion to delete from db
 	 */
 	private void deleteLegionFromDB(Legion legion) {
 		this.allCachedLegions.remove(legion);
@@ -175,8 +136,6 @@ public class LegionService {
 
 	/**
 	 * This method will remove the legion member from cache and the database
-	 *
-	 * @param playerObjId
 	 */
 	private void deleteLegionMemberFromDB(LegionMemberEx legionMember) {
 		allCachedLegionMembers.remove(legionMember.getObjectId());
@@ -228,12 +187,6 @@ public class LegionService {
 		DAOManager.getDAO(LegionDAO.class).loadLegionHistory(legion);
 	}
 
-	/**
-	 * Returns the legion Brigade general with given legionId (if such legion exists)
-	 *
-	 * @param legionId
-	 * @return LegionMember (Brigade General)
-	 */
 	public int getBrigadeGeneralOfLegion(int legionId) {
 		Legion legion = getLegion(legionId);
 		return legion == null ? 0 : legion.getBrigadeGeneral();
@@ -263,7 +216,6 @@ public class LegionService {
 	/**
 	 * Method that checks if a legion is disbanding
 	 *
-	 * @param legion
 	 * @return true if it's time to be deleted
 	 */
 	private boolean checkDisband(Legion legion) {
@@ -290,9 +242,6 @@ public class LegionService {
 
 	/**
 	 * Returns the offline legion member with given playerId (if such member exists)
-	 *
-	 * @param playerObjId
-	 * @return LegionMemberEx
 	 */
 	public LegionMemberEx getLegionMemberEx(int playerObjId) {
 		if (this.allCachedLegionMembers.containsEx(playerObjId))
@@ -306,9 +255,6 @@ public class LegionService {
 
 	/**
 	 * Returns the offline legion member with given playerId (if such member exists)
-	 *
-	 * @param playerObjId
-	 * @return LegionMemberEx
 	 */
 	private LegionMemberEx getLegionMemberEx(String playerName) {
 		if (this.allCachedLegionMembers.containsEx(playerName))
@@ -321,12 +267,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * This method will handle when disband request is called
-	 *
-	 * @param npc
-	 * @param activePlayer
-	 */
 	public void requestDisbandLegion(Npc npc, Player activePlayer) {
 		if (legionRestrictions.canDisbandLegion(activePlayer)) {
 			RequestResponseHandler<Npc> disbandResponseHandler = new RequestResponseHandler<Npc>(npc) {
@@ -347,12 +287,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * This method will handle the creation of a legion
-	 *
-	 * @param activePlayer
-	 * @param legionName
-	 */
 	public void createLegion(Player activePlayer, String legionName) {
 		if (legionRestrictions.canCreateLegion(activePlayer, legionName)) {
 			/**
@@ -378,9 +312,6 @@ public class LegionService {
 			addHistory(legion, "", LegionHistoryType.CREATE);
 			addHistory(legion, activePlayer.getName(), LegionHistoryType.JOIN);
 
-			/**
-			 * Send required packets
-			 */
 			PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_CREATED(legion.getName()));
 		}
 	}
@@ -402,12 +333,6 @@ public class LegionService {
 		return false;
 	}
 
-	/**
-	 * Method that will handle a invitation to a legion
-	 *
-	 * @param activePlayer
-	 * @param targetPlayer
-	 */
 	private void invitePlayerToLegion(Player activePlayer, Player targetPlayer) {
 		if (legionRestrictions.canInvitePlayer(activePlayer, targetPlayer)) {
 			Legion legion = activePlayer.getLegion();
@@ -441,9 +366,6 @@ public class LegionService {
 
 	/**
 	 * Displays current legion announcement
-	 *
-	 * @param targetPlayer
-	 * @param currentAnnouncement
 	 */
 	private void displayLegionMessage(Player targetPlayer, Entry<Timestamp, String> currentAnnouncement) {
 		if (currentAnnouncement != null) {
@@ -466,12 +388,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * This method will handle a new appointed legion leader
-	 *
-	 * @param activePlayer
-	 * @param targetPlayer
-	 */
 	private void appointBrigadeGeneral(final Player activePlayer, final Player targetPlayer) {
 		if (legionRestrictions.canAppointBrigadeGeneral(activePlayer, targetPlayer)) {
 			final Legion legion = activePlayer.getLegion();
@@ -522,8 +438,6 @@ public class LegionService {
 
 	/**
 	 * This method will handle the process when a member is demoted or promoted while offline.
-	 *
-	 * @param newCenturion
 	 */
 	private void appointRank(Player activePlayer, String charName, int rankId) {
 		final LegionMemberEx LM = getLegionMemberEx(charName);
@@ -558,8 +472,6 @@ public class LegionService {
 
 	/**
 	 * This method will handle the process when a member is demoted or promoted.
-	 *
-	 * @param newCenturion
 	 */
 	private void appointRank(Player activePlayer, Player targetPlayer, int rankId) {
 		if (legionRestrictions.canAppointRank(activePlayer, targetPlayer.getObjectId())) {
@@ -585,12 +497,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * This method will handle the changement of a self intro
-	 *
-	 * @param activePlayer
-	 * @param newSelfIntro
-	 */
 	public void changeSelfIntro(Player activePlayer, String newSelfIntro) {
 		if (legionRestrictions.canChangeSelfIntro(activePlayer, newSelfIntro)) {
 			LegionMember legionMember = activePlayer.getLegionMember();
@@ -600,9 +506,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * This method will handle the update of permissions
-	 */
 	public void changePermissions(Player actingPlayer, Legion legion, short deputyPermission, short centurionPermission, short legionarPermission,
 		short volunteerPermission) {
 		if (actingPlayer.getObjectId() != legion.getBrigadeGeneral())
@@ -626,8 +529,6 @@ public class LegionService {
 
 	/**
 	 * This method will change the legion level and send update to online members
-	 *
-	 * @param legion
 	 */
 	public void changeLevel(Legion legion, int newLevel, boolean save) {
 		legion.setLegionLevel(newLevel);
@@ -638,12 +539,6 @@ public class LegionService {
 			storeLegion(legion);
 	}
 
-	/**
-	 * This method will handle the changement of a nickname
-	 *
-	 * @param playerObjId
-	 * @param legionMember
-	 */
 	private void changeNickname(Player activePlayer, String charName, String newNickname) {
 		Legion legion = activePlayer.getLegion();
 		LegionMember legionMember;
@@ -669,8 +564,6 @@ public class LegionService {
 
 	/**
 	 * This method will remove legion from all legion members online after a legion has been disbanded
-	 *
-	 * @param legion
 	 */
 	private void updateAfterDisbandLegion(Legion legion) {
 		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
@@ -682,12 +575,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * This method will send a packet to every legion member
-	 *
-	 * @param legion
-	 * @param emblemType
-	 */
 	private void updateMembersEmblem(Legion legion) {
 		LegionEmblem legionEmblem = legion.getLegionEmblem();
 		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
@@ -698,10 +585,7 @@ public class LegionService {
 	}
 
 	/**
-	 * This method will send a packet to every legion member and update them about the disband
-	 *
-	 * @param legion
-	 * @param unixTime
+	 * This method will send a packet to every legion member and update them about the disbanding
 	 */
 	private void updateMembersOfDisbandLegion(Legion legion, int unixTime) {
 		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
@@ -711,10 +595,7 @@ public class LegionService {
 	}
 
 	/**
-	 * This method will send a packet to every legion member and update them about the disband
-	 *
-	 * @param legion
-	 * @param unixTime
+	 * This method will send a packet to every legion member and update them about the recreation
 	 */
 	private void updateMembersOfRecreateLegion(Legion legion) {
 		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
@@ -723,17 +604,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * Stores the new legion emblem
-	 *
-	 * @param activePlayer
-	 * @param legionId
-	 * @param emblemId
-	 * @param color_r
-	 * @param color_g
-	 * @param color_b
-	 * @param emblemType
-	 */
 	public void storeLegionEmblem(Player activePlayer, int emblemId, int color_a, int color_r, int color_g, int color_b, LegionEmblemType emblemType) {
 		if (legionRestrictions.canStoreLegionEmblem(activePlayer, emblemId)) {
 			Legion legion = activePlayer.getLegion();
@@ -745,9 +615,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * @param legion
-	 */
 	public List<LegionMemberEx> loadLegionMemberExList(Legion legion, Integer objExcluded) {
 		List<LegionMemberEx> legionMembers = new ArrayList<>();
 		for (Integer memberObjId : legion.getLegionMembers()) {
@@ -782,10 +649,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * @param npc
-	 * @param player
-	 */
 	public void recreateLegion(Npc npc, Player activePlayer) {
 		if (legionRestrictions.canRecreateLegion(activePlayer)) {
 			RequestResponseHandler<Npc> disbandResponseHandler = new RequestResponseHandler<Npc>(npc) {
@@ -817,14 +680,7 @@ public class LegionService {
 		List<Item> allItems = legion.getLegionWarehouse().getItemsWithKinah();
 		allItems.addAll(legion.getLegionWarehouse().getDeletedItems());
 		try {
-			/**
-			 * 1. save items first
-			 */
 			DAOManager.getDAO(InventoryDAO.class).store(allItems, player.getObjectId(), player.getAccount().getId(), legion.getLegionId());
-
-			/**
-			 * 2. save item stones
-			 */
 			DAOManager.getDAO(ItemStoneListDAO.class).save(allItems);
 		} catch (Exception ex) {
 			log.error("Exception during periodic saving of legion WH", ex);
@@ -833,8 +689,6 @@ public class LegionService {
 
 	/**
 	 * This method will update all players about the level/class change
-	 *
-	 * @param player
 	 */
 	public void updateMemberInfo(Player player) {
 		PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
@@ -842,9 +696,6 @@ public class LegionService {
 
 	/**
 	 * This method will set the contribution points, specially for legion command
-	 *
-	 * @param legion
-	 * @param newPoints
 	 */
 	public void setContributionPoints(Legion legion, long newPoints, boolean save) {
 		legion.setContributionPoints(newPoints);
@@ -865,11 +716,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * @param activePlayer
-	 * @param size
-	 * @param data
-	 */
 	public void uploadEmblemData(Player activePlayer, int size, byte[] data) {
 		LegionEmblem legionEmblem = activePlayer.getLegion().getLegionEmblem();
 		if (legionRestrictions.canUploadEmblem(activePlayer, false)) {
@@ -897,12 +743,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * @param player
-	 * @param legionEmblem
-	 * @param legionId
-	 * @param legionName
-	 */
 	public void sendEmblemData(Player player, LegionEmblem legionEmblem, int legionId, String legionName) {
 		int dataLength = legionEmblem.getCustomEmblemData() == null ? 0 : legionEmblem.getCustomEmblemData().length;
 		PacketSendUtility.sendPacket(player, new SM_LEGION_SEND_EMBLEM(legionId, legionEmblem, dataLength, legionName));
@@ -939,10 +779,6 @@ public class LegionService {
 
 	/**
 	 * This will add a new announcement to the DB and change the current announcement
-	 *
-	 * @param legion
-	 * @param unixTime
-	 * @param message
 	 */
 	public void changeAnnouncement(Player activePlayer, String announcement) {
 		if (legionRestrictions.canChangeAnnouncement(activePlayer.getLegionMember(), announcement)) {
@@ -956,11 +792,6 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * This method stores all legion announcements
-	 *
-	 * @param legion
-	 */
 	private void storeLegionAnnouncements(Legion legion) {
 		for (int i = 0; i < (legion.getAnnouncementList().size() - 7); i++) {
 			removeAnnouncement(legion.getLegionId(), legion.getAnnouncementList().firstEntry().getKey());
@@ -968,23 +799,10 @@ public class LegionService {
 		}
 	}
 
-	/**
-	 * Stores newly created announcement
-	 *
-	 * @param legionId
-	 * @param currentTime
-	 * @param message
-	 * @return true if announcement was successful saved.
-	 */
 	private boolean storeNewAnnouncement(int legionId, Timestamp currentTime, String message) {
 		return DAOManager.getDAO(LegionDAO.class).saveNewAnnouncement(legionId, currentTime, message);
 	}
 
-	/**
-	 * @param legionId
-	 * @param key
-	 * @return true if succeeded
-	 */
 	private void removeAnnouncement(int legionId, Timestamp key) {
 		DAOManager.getDAO(LegionDAO.class).removeAnnouncement(legionId, key);
 	}
@@ -1000,12 +818,8 @@ public class LegionService {
 	/**
 	 * This method will add a new history for a legion
 	 *
-	 * @param legion
-	 * @param text
-	 *          - in case of reward: kinah amount
-	 * @param legionHistory
-	 * @param description
-	 *          - in case of reward: fortress id
+	 * @param text        in case of reward: kinah amount
+	 * @param description in case of reward: fortress id
 	 */
 	public void addHistory(Legion legion, String text, LegionHistoryType legionHistoryType, int tabId, String description) {
 		LegionHistory legionHistory = new LegionHistory(legionHistoryType, text, new Timestamp(System.currentTimeMillis()), tabId, description);
@@ -1018,21 +832,11 @@ public class LegionService {
 
 	/**
 	 * This method will add a new legion member to a legion with VOLUNTEER rank
-	 *
-	 * @param legion
-	 * @param player
 	 */
 	private void addLegionMember(Legion legion, Player player) {
 		addLegionMember(legion, player, LegionRank.VOLUNTEER);
 	}
 
-	/**
-	 * This method will add a new legion member to a legion with input rank
-	 *
-	 * @param legion
-	 * @param player
-	 * @param rank
-	 */
 	private void addLegionMember(Legion legion, Player player, LegionRank rank) {
 		// Set legion member of player and save in the database
 		player.setLegionMember(new LegionMember(player.getObjectId(), legion, rank));
@@ -1058,12 +862,6 @@ public class LegionService {
 		legion.addBonus();
 	}
 
-	/**
-	 * This method will remove a legion member
-	 *
-	 * @param charName
-	 * @return true if successful
-	 */
 	private boolean removeLegionMember(String charName, String kickerName) {
 		// Get LegionMemberEx from cache or database if offline
 		LegionMemberEx legionMember = getLegionMemberEx(charName);
@@ -1198,19 +996,9 @@ public class LegionService {
 	 */
 	private class LegionRestrictions {
 
-		/**
-		 * Static Emblem information *
-		 */
 		private static final int MIN_EMBLEM_ID = 0;
 		private static final int MAX_EMBLEM_ID = 49;
 
-		/**
-		 * This method checks all restrictions for legion creation
-		 *
-		 * @param activePlayer
-		 * @param legionName
-		 * @return true if allow to create a legion
-		 */
 		private boolean canCreateLegion(Player activePlayer, String legionName) {
 			/* Some reasons why legions can' be created */
 			if (!NameRestrictionService.isValidLegionName(legionName) || NameRestrictionService.isForbidden(legionName)) {
@@ -1230,13 +1018,6 @@ public class LegionService {
 			return true;
 		}
 
-		/**
-		 * This method checks all restrictions for invite player to legion
-		 *
-		 * @param activePlayer
-		 * @param targetPlayer
-		 * @return true if can invite player
-		 */
 		private boolean canInvitePlayer(Player activePlayer, Player targetPlayer) {
 			Legion legion = activePlayer.getLegion();
 			if (activePlayer.isDead()) {
@@ -1262,13 +1043,6 @@ public class LegionService {
 			return true;
 		}
 
-		/**
-		 * This method checks all restrictions for kicking a player from a legion
-		 *
-		 * @param activePlayer
-		 * @param charName
-		 * @return true if can kick player
-		 */
 		private boolean canKickPlayer(Player activePlayer, String charName) {
 			Legion legion = activePlayer.getLegion();
 			if (legion == null) {
@@ -1297,13 +1071,6 @@ public class LegionService {
 			return true;
 		}
 
-		/**
-		 * This method checks all restrictions for appointing brigade general
-		 *
-		 * @param activePlayer
-		 * @param targetPlayer
-		 * @return true if can appoint brigade general
-		 */
 		private boolean canAppointBrigadeGeneral(Player activePlayer, Player targetPlayer) {
 			Legion legion = activePlayer.getLegion();
 			if (!isBrigadeGeneral(activePlayer)) {
@@ -1319,13 +1086,6 @@ public class LegionService {
 			return true;
 		}
 
-		/**
-		 * This method checks all restrictions for appointing rank
-		 *
-		 * @param activePlayer
-		 * @param targetPlayer
-		 * @return true if can appoint rank
-		 */
 		private boolean canAppointRank(Player activePlayer, int targetObjId) {
 			Legion legion = activePlayer.getLegion();
 			if (!isBrigadeGeneral(activePlayer)) {
@@ -1342,23 +1102,10 @@ public class LegionService {
 			return true;
 		}
 
-		/**
-		 * This method checks all restrictions for changing self intro
-		 *
-		 * @param activePlayer
-		 * @param newSelfIntro
-		 * @return true if allowed to change self intro
-		 */
 		private boolean canChangeSelfIntro(Player activePlayer, String newSelfIntro) {
 			return isValidSelfIntro(newSelfIntro);
 		}
 
-		/**
-		 * This method checks all restrictions for changing legion level
-		 *
-		 * @param activePlayer
-		 * @return true if allowed to change legion level
-		 */
 		private boolean canChangeLevel(Player activePlayer) {
 			Legion legion = activePlayer.getLegion();
 			int levelContributionPrice = legion.getContributionPrice();
@@ -1391,33 +1138,14 @@ public class LegionService {
 			return true;
 		}
 
-		/**
-		 * This method will check all restrictions for changing nickname
-		 *
-		 * @return true if allowed to change nickname of target player
-		 */
 		private boolean canChangeNickname(Legion legion, int targetObjectId, String newNickname) {
 			return isValidNickname(newNickname) && legion.isMember(targetObjectId);
 		}
 
-		/**
-		 * This method checks all restrictions for changing announcements
-		 *
-		 * @param legionMember
-		 * @param announcement
-		 * @return true if can change announcement
-		 */
 		private boolean canChangeAnnouncement(LegionMember legionMember, String announcement) {
 			return legionMember.hasRights(LegionPermissionsMask.EDIT) && (announcement.isEmpty() || isValidAnnouncement(announcement));
 		}
 
-		/**
-		 * This method checks all restrictions for disband legion
-		 *
-		 * @param activePlayer
-		 * @param legion
-		 * @return true if can disband legion
-		 */
 		private boolean canDisbandLegion(Player activePlayer) {
 			Legion legion = activePlayer.getLegion();
 			if (legion == null) {
@@ -1439,12 +1167,6 @@ public class LegionService {
 			return true;
 		}
 
-		/**
-		 * This method checks all restrictions for leaving
-		 *
-		 * @param activePlayer
-		 * @return true if allowed to leave
-		 */
 		private boolean canLeave(Player activePlayer) {
 			if (isBrigadeGeneral(activePlayer)) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_LEAVE_MASTER_CANT_LEAVE_BEFORE_CHANGE_MASTER());
@@ -1456,13 +1178,6 @@ public class LegionService {
 			return true;
 		}
 
-		/**
-		 * This method checks all restrictions for recreate legion
-		 *
-		 * @param activePlayer
-		 * @param legion
-		 * @return true if allowed to recreate legion
-		 */
 		private boolean canRecreateLegion(Player activePlayer) {
 			if (!isBrigadeGeneral(activePlayer)) {
 				PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_DISPERSE_ONLY_MASTER_CAN_DISPERSE());
@@ -1474,11 +1189,6 @@ public class LegionService {
 			return true;
 		}
 
-		/**
-		 * This method checks all restrictions for uploading emblem
-		 *
-		 * @return true if allowed to upload emblem
-		 */
 		private boolean canUploadEmblem(Player activePlayer, boolean initUpload) {
 			if (!canStoreLegionEmblem(activePlayer, MIN_EMBLEM_ID)) {
 				return false;
@@ -1518,11 +1228,6 @@ public class LegionService {
 			return true;
 		}
 
-		/**
-		 * @param activePlayer
-		 * @param emblemId
-		 * @return
-		 */
 		public boolean canStoreLegionEmblem(Player activePlayer, int emblemId) {
 			if (emblemId < MIN_EMBLEM_ID || emblemId > MAX_EMBLEM_ID) {
 				// Not a valid emblemId
@@ -1541,57 +1246,22 @@ public class LegionService {
 			return true;
 		}
 
-		/**
-		 * Checks if player is brigade general and returns message if not
-		 *
-		 * @param player
-		 * @param message
-		 * @return
-		 */
 		private boolean isBrigadeGeneral(Player player) {
 			return player.getLegionMember().isBrigadeGeneral();
 		}
 
-		/**
-		 * Checks if name is already taken or not
-		 *
-		 * @param name
-		 *          character name
-		 * @return true if is free, false in other case
-		 */
 		private boolean isFreeName(String name) {
 			return !DAOManager.getDAO(LegionDAO.class).isNameUsed(name);
 		}
 
-		/**
-		 * Checks if a self intro is valid. It should contain only english letters
-		 *
-		 * @param name
-		 *          character name
-		 * @return true if name is valid, false overwise
-		 */
 		private boolean isValidSelfIntro(String name) {
 			return LegionConfig.SELF_INTRO_PATTERN.matcher(name).matches();
 		}
 
-		/**
-		 * Checks if a nickname is valid. It should contain only english letters
-		 *
-		 * @param name
-		 *          character name
-		 * @return true if name is valid, false overwise
-		 */
 		private boolean isValidNickname(String name) {
 			return LegionConfig.NICKNAME_PATTERN.matcher(name).matches();
 		}
 
-		/**
-		 * Checks if a announcement is valid. It should contain only english letters
-		 *
-		 * @param name
-		 *          announcement
-		 * @return true if name is valid, false overwise
-		 */
 		private boolean isValidAnnouncement(String name) {
 			return LegionConfig.ANNOUNCEMENT_PATTERN.matcher(name.replaceAll("\\r\\n", "")).matches();
 		}
@@ -1614,11 +1284,6 @@ public class LegionService {
 		protected static final LegionService instance = new LegionService();
 	}
 
-	/**
-	 * @param legion
-	 * @param player
-	 * @return
-	 */
 	public boolean hasCenturionPermission(Legion legion, Player player) {
 		for (int memberObjId : legion.getLegionMembers()) {
 			LegionMember legionMember = LegionService.getInstance().getLegionMember(memberObjId);

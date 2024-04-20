@@ -11,8 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Tiger
- * @modified Wakizashi, Rolandas, Pad, Neon
+ * @author Tiger, Wakizashi, Rolandas, Pad, Neon
  */
 public class _1993AnotherBeginning extends AbstractQuestHandler {
 

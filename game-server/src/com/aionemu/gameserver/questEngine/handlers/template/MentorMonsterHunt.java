@@ -13,21 +13,13 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
- * @author MrPoke
- * @reworked Bobobear
- * @modified Pad
+ * @author MrPoke, Bobobear, Pad
  */
 public class MentorMonsterHunt extends MonsterHunt {
 
 	private int menteMinLevel;
 	private int menteMaxLevel;
 
-	/**
-	 * @param questId
-	 * @param startNpc
-	 * @param endNpc
-	 * @param monsters
-	 */
 	public MentorMonsterHunt(int questId, List<Integer> startNpcIds, List<Integer> endNpcIds, List<Monster> monsters,
 		int menteMinLevel, int menteMaxLevel, boolean reward, boolean rewardNextStep) {
 		super(questId, startNpcIds, endNpcIds, monsters, 0, 0, null, 0, null, 0, reward, rewardNextStep);

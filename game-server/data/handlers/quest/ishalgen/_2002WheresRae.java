@@ -22,8 +22,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author Mr. Poke
- * @modified Hellboy, Gigi, Bobobear, Majka
+ * @author Mr. Poke, Hellboy, Gigi, Bobobear, Majka
  */
 public class _2002WheresRae extends AbstractQuestHandler {
 

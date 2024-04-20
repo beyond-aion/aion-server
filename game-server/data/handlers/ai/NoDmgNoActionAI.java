@@ -7,7 +7,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 /**
- * @author Yeats on 17.03.2016
+ * @author Yeats
  */
 @AIName("no_dmg_no_action")
 public class NoDmgNoActionAI extends NpcAI {

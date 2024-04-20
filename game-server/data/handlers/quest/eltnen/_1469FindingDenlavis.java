@@ -12,7 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author MrPoke remod By Nephis and all quest team helper
+ * @author MrPoke, Nephis and all quest team helper
  */
 public class _1469FindingDenlavis extends AbstractQuestHandler {
 

@@ -17,8 +17,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Mr.Poke
- * @modified Bobobear, Pad
+ * @author Mr.Poke, Bobobear, Pad
  */
 public class XmlQuest extends AbstractTemplateQuestHandler {
 

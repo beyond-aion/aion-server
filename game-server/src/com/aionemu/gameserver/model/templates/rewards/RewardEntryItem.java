@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.model.templates.rewards;
 
 /**
- * @author KID
- * @modified Neon
+ * @author KID, Neon
  */
 public class RewardEntryItem extends RewardItem {
 

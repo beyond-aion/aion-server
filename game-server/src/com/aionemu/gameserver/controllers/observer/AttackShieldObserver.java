@@ -19,8 +19,7 @@ import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
- * @author ATracer
- * @modified Sippolo, kecimis, Luzien, Neon
+ * @author ATracer, Sippolo, kecimis, Luzien, Neon
  */
 public class AttackShieldObserver extends AttackCalcObserver {
 

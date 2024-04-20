@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Rhys2002
- * @reworked zhkchi
+ * @author Rhys2002, zhkchi
  */
 public class _1158VillageSealFound extends AbstractQuestHandler {
 

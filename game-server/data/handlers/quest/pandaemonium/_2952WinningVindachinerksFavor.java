@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Gigi
- * @modified vlog
+ * @author Gigi, vlog
  */
 public class _2952WinningVindachinerksFavor extends AbstractQuestHandler {
 

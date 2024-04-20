@@ -7,8 +7,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author MrPoke, Rolandas
- * @modified Neon
+ * @author MrPoke, Rolandas, Neon
  */
 public class SM_NEARBY_QUESTS extends AionServerPacket {
 

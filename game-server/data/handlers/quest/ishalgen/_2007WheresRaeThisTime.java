@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 
 /**
- * @author Mr. Poke
- * @modified Majka
+ * @author Mr. Poke, Majka
  */
 public class _2007WheresRaeThisTime extends AbstractQuestHandler {
 

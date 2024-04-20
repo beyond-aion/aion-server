@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Nephis
- * @modified Gigi, Pad
+ * @author Nephis, Gigi, Pad
  */
 public class _2988TheWiseInDisguise extends AbstractQuestHandler {
 

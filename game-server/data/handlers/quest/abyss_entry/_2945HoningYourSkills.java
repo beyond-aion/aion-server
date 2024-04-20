@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Hellboy aion4Free
- * @reworked vlog
+ * @author Hellboy, aion4Free, vlog
  */
 public class _2945HoningYourSkills extends AbstractQuestHandler {
 

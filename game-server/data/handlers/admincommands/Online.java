@@ -8,8 +8,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author VladimirZ
- * @modified Neon
+ * @author VladimirZ, Neon
  */
 public class Online extends AdminCommand {
 

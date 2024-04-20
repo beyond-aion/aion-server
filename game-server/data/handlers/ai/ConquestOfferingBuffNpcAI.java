@@ -12,7 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Yeats 16.03.2016.
+ * @author Yeats
  */
 @AIName("conquest_offering_buff_npc")
 public class ConquestOfferingBuffNpcAI extends ActionItemNpcAI {

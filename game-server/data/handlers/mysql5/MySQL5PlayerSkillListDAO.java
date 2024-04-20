@@ -21,8 +21,7 @@ import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
 
 /**
- * @author SoulKeeper
- * @author IceReaper, orfeo087, Avol, AEJTester
+ * @author SoulKeeper, IceReaper, orfeo087, Avol, AEJTester
  */
 public class MySQL5PlayerSkillListDAO extends PlayerSkillListDAO {
 

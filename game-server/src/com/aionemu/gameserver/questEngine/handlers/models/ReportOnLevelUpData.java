@@ -13,8 +13,7 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.handlers.template.ReportOnLevelUp;
 
 /**
- * @author Majka, Bobobear
- * @modified Pad
+ * @author Majka, Bobobear, Pad
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ReportOnLevelUpData")

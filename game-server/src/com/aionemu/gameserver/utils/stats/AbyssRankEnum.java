@@ -8,9 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.ChatUtil;
 
 /**
- * @author ATracer
- * @author Sarynth
- * @author Imaginary
+ * @author ATracer, Sarynth, Imaginary
  */
 @XmlEnum
 public enum AbyssRankEnum {
@@ -104,10 +102,6 @@ public enum AbyssRankEnum {
 		return ChatUtil.l10n(rankL10nId);
 	}
 
-	/**
-	 * @param id
-	 * @return The abyss rank enum by his id
-	 */
 	public static AbyssRankEnum getRankById(int id) {
 		for (AbyssRankEnum rank : values()) {
 			if (rank.getId() == id)
@@ -116,10 +110,6 @@ public enum AbyssRankEnum {
 		throw new IllegalArgumentException("Invalid abyss rank provided " + id);
 	}
 
-	/**
-	 * @param ap
-	 * @return The abyss rank enum for his needed ap
-	 */
 	public static AbyssRankEnum getRankForPoints(int ap, int gp) {
 		AbyssRankEnum r = AbyssRankEnum.GRADE9_SOLDIER;
 		for (AbyssRankEnum rank : values()) {

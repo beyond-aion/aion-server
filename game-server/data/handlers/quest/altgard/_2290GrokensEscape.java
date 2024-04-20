@@ -13,8 +13,7 @@ import com.aionemu.gameserver.services.QuestService;
 /**
  * Escort Groken (203608) to the sailboat (700178). Talk with Manir (203607).
  * 
- * @author Mr. Poke
- * @reworked vlog
+ * @author Mr. Poke, vlog
  */
 public class _2290GrokensEscape extends AbstractQuestHandler {
 

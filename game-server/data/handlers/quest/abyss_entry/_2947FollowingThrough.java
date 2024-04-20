@@ -30,9 +30,7 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
  * You succeeded! Talk with Garm.<br>
  * You failed! Talk with Garm again.<br>
  * 
- * @author Hellboy aion4Free
- * @modified Gigi
- * @reworked vlog Please don't touch commented code. There is no more dialog to choose a mission. But maybe there will be one.
+ * @author Hellboy, aion4Free, Gigi, vlog
  */
 public class _2947FollowingThrough extends AbstractQuestHandler {
 

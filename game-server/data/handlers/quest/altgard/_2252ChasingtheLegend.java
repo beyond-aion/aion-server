@@ -13,8 +13,7 @@ import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author Ritsu
- * @modified Majka
+ * @author Ritsu, Majka
  */
 public class _2252ChasingtheLegend extends AbstractQuestHandler {
 

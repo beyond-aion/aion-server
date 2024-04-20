@@ -28,9 +28,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author MrPoke
- * @reworked Neon
- * @modified Pad
+ * @author MrPoke, Neon, Pad
  */
 public class Quest extends AdminCommand {
 
@@ -74,10 +72,7 @@ public class Quest extends AdminCommand {
 
 			questId = ChatUtil.getQuestId(params[index]);
 		} else {
-			if (!(admin.getTarget() instanceof Player))
-				target = admin;
-			else
-				target = (Player) admin.getTarget();
+			target = admin.getTarget() instanceof Player p ? p : admin;
 		}
 
 		if (questId == 0 || DataManager.QUEST_DATA.getQuestById(questId) == null) {

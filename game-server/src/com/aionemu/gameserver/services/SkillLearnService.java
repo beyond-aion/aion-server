@@ -15,8 +15,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author ATracer, xTz
- * @reworked Neon
+ * @author ATracer, xTz, Neon
  */
 public class SkillLearnService {
 
@@ -57,10 +56,6 @@ public class SkillLearnService {
 
 	/**
 	 * Adds all missing skills and recipes that can be auto-learned for the given level range.
-	 * 
-	 * @param player
-	 * @param fromLevel
-	 * @param toLevel
 	 */
 	public static void learnNewSkills(Player player, int fromLevel, int toLevel) {
 		PlayerClass playerClass = player.getCommonData().getPlayerClass();
@@ -78,18 +73,13 @@ public class SkillLearnService {
 			removeSkill(player, 30001);
 		}
 	}
-	
+
 	public static void learnTemporarySkill(Player player, int skillId, int skillLevel) {
 		player.getSkillList().addTemporarySkill(player, skillId, skillLevel);
 	}
 
 	/**
 	 * Adds auto-learned skills to the player, according to the specified level, class and race.
-	 * 
-	 * @param player
-	 * @param level
-	 * @param playerClass
-	 * @param playerRace
 	 */
 	private static void autoLearnSkills(Player player, int level, PlayerClass playerClass, Race playerRace) {
 		for (SkillLearnTemplate template : DataManager.SKILL_TREE_DATA.getTemplatesFor(playerClass, level, playerRace)) {

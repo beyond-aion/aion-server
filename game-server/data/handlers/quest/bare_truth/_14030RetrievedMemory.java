@@ -19,8 +19,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author Artur
- * @modified Pad
+ * @author Artur, Pad
  */
 public class _14030RetrievedMemory extends AbstractQuestHandler {
 

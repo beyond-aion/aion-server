@@ -7,8 +7,7 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 
 /**
- * @author Nemiroff Date: 01.12.2009
- * @modified cura
+ * @author Nemiroff, cura
  */
 public class CM_TITLE_SET extends AionClientPacket {
 

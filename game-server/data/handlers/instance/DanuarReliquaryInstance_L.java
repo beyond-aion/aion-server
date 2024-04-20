@@ -4,8 +4,7 @@ import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author Cheatkiller
- * @modified Estrayl October 29th, 2017.
+ * @author Cheatkiller, Estrayl
  */
 @InstanceID(301330000)
 public class DanuarReliquaryInstance_L extends DanuarReliquaryInstance {

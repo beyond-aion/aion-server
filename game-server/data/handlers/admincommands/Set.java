@@ -12,9 +12,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author Nemiroff, ATracer, IceReaper Date: 11.12.2009
- * @author Sarynth - Added AP
- * @author Artur - Added GP
+ * @author Nemiroff, ATracer, IceReaper, Sarynth, Artur
  */
 public class Set extends AdminCommand {
 

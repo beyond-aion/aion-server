@@ -8,8 +8,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author KID
- * @modified Neon
+ * @author KID, Neon
  */
 public class RecipeService {
 

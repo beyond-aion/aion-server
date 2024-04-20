@@ -17,8 +17,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author MrPoke
- * @modified Nephis, Rolandas
+ * @author MrPoke, Nephis, Rolandas
  */
 public class _1197KrallBook extends AbstractQuestHandler {
 

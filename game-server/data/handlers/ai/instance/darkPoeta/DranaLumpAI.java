@@ -11,8 +11,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.ActionItemNpcAI;
 
 /**
- * @author Ritsu
- * @modified Estrayl 13.06.2017
+ * @author Ritsu, Estrayl
  */
 @AIName("drana_lump")
 public class DranaLumpAI extends ActionItemNpcAI {

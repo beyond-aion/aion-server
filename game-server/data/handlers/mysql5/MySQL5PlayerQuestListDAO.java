@@ -21,8 +21,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author MrPoke
- * @modified vlog, Rolandas
+ * @author MrPoke, vlog, Rolandas
  */
 public class MySQL5PlayerQuestListDAO extends PlayerQuestListDAO {
 

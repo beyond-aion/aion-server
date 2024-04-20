@@ -12,8 +12,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author ginho1, Neon
- * @modified Estrayl
+ * @author ginho1, Neon, Estrayl
  */
 public class SM_UPGRADE_ARCADE extends AionServerPacket {
 

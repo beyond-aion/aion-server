@@ -5,9 +5,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author ATracer
- * @author Kwazar
- * @author Nemesiss :D:D
+ * @author ATracer, Kwazar, Nemesiss
  */
 public class SM_WEATHER extends AionServerPacket {
 

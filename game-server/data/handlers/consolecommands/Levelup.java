@@ -8,8 +8,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.ConsoleCommand;
 
 /**
- * @author ginho1
- * @reworked Neon
+ * @author ginho1, Neon
  */
 public class Levelup extends ConsoleCommand {
 

@@ -5,8 +5,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author Simple
- * @modified cura, Neon
+ * @author Simple, cura, Neon
  */
 public class SM_LEGION_UPDATE_EMBLEM extends AionServerPacket {
 

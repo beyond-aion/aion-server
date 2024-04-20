@@ -19,8 +19,7 @@ import com.aionemu.gameserver.model.templates.walker.RouteStep;
 import com.aionemu.gameserver.model.templates.zone.Point2D;
 
 /**
- * @author vlog
- * @modified Rolandas
+ * @author vlog, Rolandas
  */
 public class WalkerGroup {
 
@@ -122,7 +121,6 @@ public class WalkerGroup {
 	 * @param shift
 	 *          - distance from origin located in lines perpendicular to destination; for SagittalShift if negative then located to the left from
 	 *          origin, otherwise, to the right for CoronalShift if negative then located to back, otherwise to the front
-	 * @category TODO: move to PositionUtil when all kinds of WalkerGroupType are implemented.
 	 */
 	public static Point2D getLinePoint(Point2D origin, Point2D destination, WalkerGroupShift shift) {
 		// TODO: implement angle shift
@@ -288,9 +286,6 @@ public class WalkerGroup {
 		return members.size();
 	}
 
-	/**
-	 * @return the type
-	 */
 	public WalkerGroupType getWalkType() {
 		return type;
 	}
@@ -305,9 +300,6 @@ public class WalkerGroup {
 		return false;
 	}
 
-	/**
-	 * @return the groupStep
-	 */
 	public int getGroupStep() {
 		return groupStep;
 	}

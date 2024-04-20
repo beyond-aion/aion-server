@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author zhkchi
- * @reworked vlog
+ * @author zhkchi, vlog
  */
 public class _21051TroubleinStone extends AbstractQuestHandler {
 

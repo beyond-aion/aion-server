@@ -9,8 +9,7 @@ import com.aionemu.gameserver.services.player.PlayerEnterWorldService;
 /**
  * In this packets aion client is asking if given char [by oid] may login into game [ie start playing].
  * 
- * @author -Nemesiss-, Avol
- * @modified Neon
+ * @author -Nemesiss-, Avol, Neon
  */
 public class CM_ENTER_WORLD extends AionClientPacket {
 

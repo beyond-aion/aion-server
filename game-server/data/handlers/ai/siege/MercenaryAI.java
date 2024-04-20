@@ -18,8 +18,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import ai.GeneralNpcAI;
 
 /**
- * @author ViAl
- * @reworked Whoop
+ * @author ViAl, Whoop
  */
 @AIName("mercenary")
 public class MercenaryAI extends GeneralNpcAI {

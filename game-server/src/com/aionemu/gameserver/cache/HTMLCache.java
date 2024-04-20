@@ -13,7 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.HTMLConfig;
 
 /**
- * @authors Layane, nbali, savormix, hex1r0, lord_rex
+ * @author Layane, nbali, savormix, hex1r0, lord_rex
  */
 public final class HTMLCache {
 

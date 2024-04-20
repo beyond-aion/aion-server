@@ -5,7 +5,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 
 /**
- * @author Yeats 06.04.2016.
+ * @author Yeats
  */
 public class Pvp extends PlayerCommand {
 

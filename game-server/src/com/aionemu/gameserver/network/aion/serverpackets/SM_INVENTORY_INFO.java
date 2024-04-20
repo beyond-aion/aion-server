@@ -13,7 +13,7 @@ import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob;
 /**
  * In this packet Server is sending Inventory Info
  * 
- * @author -Nemesiss-, alexa026, Avol ;d modified by ATracer, Rolandas, modified by Artur
+ * @author -Nemesiss-, alexa026, Avol ;d, ATracer, Rolandas, Artur
  */
 public class SM_INVENTORY_INFO extends AionServerPacket {
 

@@ -11,8 +11,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author Watson
- * @reworked Neon
+ * @author Watson, Neon
  */
 public class Gag extends AdminCommand {
 

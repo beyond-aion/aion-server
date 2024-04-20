@@ -3,7 +3,7 @@ package com.aionemu.gameserver.controllers.attack;
 import com.aionemu.gameserver.skillengine.model.HitType;
 
 /**
- * @author ATracer modified by Sippolo, kecimis
+ * @author ATracer, Sippolo, kecimis
  */
 public class AttackResult {
 

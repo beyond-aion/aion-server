@@ -10,8 +10,7 @@ import com.aionemu.gameserver.skillengine.model.FlyingRestriction;
 import com.aionemu.gameserver.skillengine.model.Skill;
 
 /**
- * @author Sippolo
- * @author kecimis
+ * @author Sippolo, kecimis
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "TargetFlyingCondition")

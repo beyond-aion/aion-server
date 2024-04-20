@@ -8,8 +8,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
- * @author cura
- * @modified Neon
+ * @author cura, Neon
  */
 public class Teleportation extends AdminCommand {
 

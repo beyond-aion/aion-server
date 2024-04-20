@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.model;
 
 /**
- * @author Luno
- * @modified Wakizashi
+ * @author Luno, Wakizashi
  */
 public enum CreatureType {
 

@@ -8,8 +8,7 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.iteminfo.ItemInfoBlob;
 
 /**
- * @author Avol
- * @author ATracer
+ * @author Avol, ATracer
  */
 public class SM_EXCHANGE_ADD_ITEM extends AionServerPacket {
 

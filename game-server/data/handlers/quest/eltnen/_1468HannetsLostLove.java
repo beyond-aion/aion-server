@@ -11,7 +11,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author MrPoke remod By Xitanium and Rolandas
+ * @author MrPoke, Xitanium and Rolandas
  */
 public class _1468HannetsLostLove extends AbstractQuestHandler {
 

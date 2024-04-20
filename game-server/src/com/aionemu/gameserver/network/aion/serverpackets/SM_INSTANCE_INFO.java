@@ -11,8 +11,7 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author nrg
- * @reworked Neon
+ * @author nrg, Neon
  */
 public class SM_INSTANCE_INFO extends AionServerPacket {
 

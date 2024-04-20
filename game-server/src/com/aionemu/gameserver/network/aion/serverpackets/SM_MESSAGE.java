@@ -15,8 +15,7 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 /**
  * Message [chat, etc]
  * 
- * @author -Nemesiss-, Sweetkr
- * @modified Neon
+ * @author -Nemesiss-, Sweetkr, Neon
  */
 public class SM_MESSAGE extends AionServerPacket {
 

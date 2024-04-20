@@ -26,19 +26,12 @@ import com.aionemu.gameserver.world.World;
 /**
  * This class is responsible for NPCs spawn management. Current implementation is temporal and will be replaced in the future.
  * 
- * @author Luno
- * @modified ATracer, Source, Wakizashi, xTz, nrg
+ * @author Luno, ATracer, Source, Wakizashi, xTz, nrg
  */
 public class SpawnEngine {
 
 	private static Logger log = LoggerFactory.getLogger(SpawnEngine.class);
 
-	/**
-	 * Creates VisibleObject instance and spawns it using given {@link SpawnTemplate} instance.
-	 * 
-	 * @param spawn
-	 * @return created and spawned VisibleObject
-	 */
 	public static VisibleObject spawnObject(SpawnTemplate spawn, int instanceIndex) {
 		VisibleObject visObj = getSpawnedObject(spawn, instanceIndex);
 		if (visObj != null && visObj.getPosition().getMapRegion() != null) {
@@ -67,14 +60,6 @@ public class SpawnEngine {
 
 	/**
 	 * Create non-permanent spawn template with no respawn
-	 * 
-	 * @param worldId
-	 * @param npcId
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param heading
-	 * @return
 	 */
 	public static SpawnTemplate newSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading) {
 		return newSpawn(worldId, npcId, x, y, z, heading, 0, 0, null);

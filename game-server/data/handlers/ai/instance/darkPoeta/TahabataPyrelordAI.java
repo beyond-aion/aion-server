@@ -15,8 +15,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Ritsu
- * @reworked Estrayl 13.06.2017
+ * @author Ritsu, Estrayl
  */
 @AIName("tahabata_pyrelord")
 public class TahabataPyrelordAI extends AggressiveNpcAI {

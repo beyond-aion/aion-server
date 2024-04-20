@@ -15,8 +15,7 @@ import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
 
 /**
- * @author ATracer
- * @modified Yeats, Neon
+ * @author ATracer, Yeats, Neon
  */
 public class NpcSkillList {
 

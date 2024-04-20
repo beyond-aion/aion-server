@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author dta3000
- * @reworked Gigi
+ * @author dta3000, Gigi
  */
 public class _11010AngelToTheWounded extends AbstractQuestHandler {
 

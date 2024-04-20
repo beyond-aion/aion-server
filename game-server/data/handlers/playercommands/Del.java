@@ -8,8 +8,7 @@ import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.chathandlers.PlayerCommand;
 
 /**
- * @author Source
- * @modified Neon
+ * @author Source, Neon
  */
 public class Del extends PlayerCommand {
 

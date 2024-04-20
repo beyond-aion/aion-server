@@ -20,9 +20,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldMapType;
 
 /**
- * @author MrPoke
- * @reworked vlog
- * @modified Majka
+ * @author MrPoke, vlog, Majka
  */
 public class _1002RequestoftheElim extends AbstractQuestHandler {
 

@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author vlog
- * @modified Gigi
+ * @author vlog, Gigi
  */
 public class _11053TheseShoesAreMadeForStalking extends AbstractQuestHandler {
 

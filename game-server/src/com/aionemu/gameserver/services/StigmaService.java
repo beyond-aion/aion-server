@@ -33,19 +33,12 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author ATracer
- * @modified cura, Neon
+ * @author ATracer, cura, Neon
  */
 public class StigmaService {
 
 	private static final Logger log = LoggerFactory.getLogger(StigmaService.class);
 
-	/**
-	 * @param player
-	 * @param resultItem
-	 * @param slot
-	 * @return
-	 */
 	public static boolean notifyEquipAction(Player player, Item resultItem, long slot) {
 		if (resultItem.getItemTemplate().isStigma()) {
 			Stigma stigmaInfo = resultItem.getItemTemplate().getStigma();
@@ -92,9 +85,6 @@ public class StigmaService {
 		return true;
 	}
 
-	/**
-	 * @param player
-	 */
 	public static void onPlayerLogin(Player player) {
 		if (player.hasPermission(MembershipConfig.STIGMA_AUTOLEARN)) {
 			for (int level = 20; level <= player.getLevel(); level++) {
@@ -282,12 +272,6 @@ public class StigmaService {
 		return equippedCount == neededCount;
 	}
 
-	/**
-	 * Get the number of available Stigma
-	 *
-	 * @param player
-	 * @return
-	 */
 	private static int getPossibleStigmaCount(Player player) {
 		if (player.hasPermission(MembershipConfig.STIGMA_SLOT_QUEST))
 			return 3;
@@ -324,12 +308,6 @@ public class StigmaService {
 		return isCompleteQuest;
 	}
 
-	/**
-	 * Get the number of available Advanced Stigma
-	 *
-	 * @param player
-	 * @return
-	 */
 	private static int getPossibleAdvancedStigmaCount(Player player) {
 		if (player.hasPermission(MembershipConfig.STIGMA_SLOT_QUEST))
 			return 3;
@@ -346,13 +324,6 @@ public class StigmaService {
 		return 0;
 	}
 
-	/**
-	 * Stigma is a worn check available slots
-	 *
-	 * @param player
-	 * @param item
-	 * @return
-	 */
 	private static boolean isPossibleEquippedStigma(Player player, Item item) {
 		if (!item.getItemTemplate().isStigma())
 			return false;

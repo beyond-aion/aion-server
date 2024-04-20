@@ -9,8 +9,7 @@ import com.aionemu.gameserver.model.siege.Influence;
  * Packets: SM_PRICES, SM_TRADELIST, SM_SELL_ITEM<br/>
  * Services: Teleporter and similar fees
  * 
- * @author Sarynth
- * @modified wakizashi
+ * @author Sarynth, wakizashi
  */
 public class PricesService {
 
@@ -35,8 +34,6 @@ public class PricesService {
 
 	/**
 	 * Used in SM_PRICES
-	 * 
-	 * @return
 	 */
 	public static int getGlobalPricesModifier() {
 		return PricesConfig.DEFAULT_MODIFIER;
@@ -44,8 +41,6 @@ public class PricesService {
 
 	/**
 	 * Used in SM_PRICES
-	 * 
-	 * @return taxes
 	 */
 	public static int getTaxes(Race playerRace) {
 		int defaultTax = PricesConfig.DEFAULT_TAXES;

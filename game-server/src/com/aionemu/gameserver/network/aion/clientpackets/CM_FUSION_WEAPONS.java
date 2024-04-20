@@ -10,8 +10,7 @@ import com.aionemu.gameserver.services.ArmsfusionService;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author zdead
- * @modified Wakizashi, Neon
+ * @author zdead, Wakizashi, Neon
  */
 public class CM_FUSION_WEAPONS extends AionClientPacket {
 

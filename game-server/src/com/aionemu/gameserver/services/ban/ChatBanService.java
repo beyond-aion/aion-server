@@ -11,8 +11,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author ViAl
- * @reworked Neon
+ * @author ViAl, Neon
  */
 public class ChatBanService {
 
@@ -23,15 +22,11 @@ public class ChatBanService {
 
 	/**
 	 * Bans a player from all chats.
-	 * 
-	 * @param player
-	 * @param duration
-	 *          Ban time in milliseconds.
 	 */
-	public static void banPlayer(Player player, long duration) {
-		ChatServer.getInstance().sendPlayerGagPacket(player.getObjectId(), duration);
-		chatBans.put(player.getObjectId(), System.currentTimeMillis() + duration);
-		registerUnban(player, duration);
+	public static void banPlayer(Player player, long durationMillis) {
+		ChatServer.getInstance().sendPlayerGagPacket(player.getObjectId(), durationMillis);
+		chatBans.put(player.getObjectId(), System.currentTimeMillis() + durationMillis);
+		registerUnban(player, durationMillis);
 	}
 
 	public static void unbanPlayer(Player player) {
@@ -60,7 +55,6 @@ public class ChatBanService {
 	 * If ban is over, this method automatically unbans the player.<br>
 	 * If not and unban task is missing (e.g. due to logout), an unban task will be started.
 	 * 
-	 * @param player
 	 * @return The remaining ban time in minutes. Only returns 0 if ban time is really over.
 	 */
 	public static int getBanMinutes(Player player) {

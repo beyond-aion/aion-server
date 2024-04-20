@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Balthazar
- * @modified Rolandas
+ * @author Balthazar, Rolandas
  */
 public class _1220ASecretDelivery extends AbstractQuestHandler {
 

@@ -9,8 +9,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.services.item.ItemPurificationService;
 
 /**
- * @author FinalNovas
- * @reworked Navyan
+ * @author FinalNovas, Navyan
  */
 public class CM_ITEM_PURIFICATION extends AionClientPacket {
 
@@ -19,9 +18,6 @@ public class CM_ITEM_PURIFICATION extends AionClientPacket {
 	private int upgradedItemObjectId;
 	private int resultItemId;
 
-	/**
-	 * @param opcode
-	 */
 	public CM_ITEM_PURIFICATION(int opcode, Set<State> validStates) {
 		super(opcode, validStates);
 	}

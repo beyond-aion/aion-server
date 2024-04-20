@@ -14,8 +14,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.GeneralNpcAI;
 
 /**
- * @author Luzien
- * @modified Estrayl March 10th, 2018
+ * @author Luzien, Estrayl
  */
 @AIName("ultimate_atrocity")
 public class UltimateAtrocityAI extends GeneralNpcAI {

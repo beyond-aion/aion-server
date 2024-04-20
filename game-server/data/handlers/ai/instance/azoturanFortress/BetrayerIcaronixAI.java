@@ -9,8 +9,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Antraxx
- * @modified Neon
+ * @author Antraxx, Neon
  */
 @AIName("betrayericaronix")
 public class BetrayerIcaronixAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {

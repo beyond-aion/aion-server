@@ -10,8 +10,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
 
 /**
- * @author Rolandas
- * @reworked vlog
+ * @author Rolandas, vlog
  */
 public class _1170HeadlessStoneStatue extends AbstractQuestHandler {
 

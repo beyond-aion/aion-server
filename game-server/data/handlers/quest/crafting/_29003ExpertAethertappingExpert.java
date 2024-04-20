@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Gigi
- * @modified Pad
+ * @author Gigi, Pad
  */
 public class _29003ExpertAethertappingExpert extends AbstractQuestHandler {
 

@@ -3,8 +3,7 @@ package com.aionemu.gameserver.configs.main;
 import com.aionemu.commons.configuration.Property;
 
 /**
- * @author lord_rex
- * @modified Neon
+ * @author lord_rex, Neon
  */
 public class ThreadConfig {
 

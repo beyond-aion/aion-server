@@ -5,8 +5,7 @@ import java.util.EnumSet;
 import com.aionemu.gameserver.ai.event.AIEventType;
 
 /**
- * @author ATracer
- * @modified Neon
+ * @author ATracer, Neon
  */
 public enum AIState {
 	CREATED(AIEventType.BEFORE_SPAWNED, AIEventType.SPAWNED),
@@ -23,16 +22,15 @@ public enum AIState {
 
 	private final EnumSet<AIEventType> handledAiEvents;
 
-	private AIState() {
+	AIState() {
 		this.handledAiEvents = EnumSet.allOf(AIEventType.class);
 	}
 
-	private AIState(AIEventType first, AIEventType... rest) {
+	AIState(AIEventType first, AIEventType... rest) {
 		this.handledAiEvents = EnumSet.of(first, rest);
 	}
 
 	/**
-	 * @param event
 	 * @return True, if the given event can be handled in this state.
 	 */
 	public boolean canHandle(AIEventType event) {

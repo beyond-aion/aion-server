@@ -12,8 +12,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import ai.AggressiveNpcAI;
 
 /**
- * @author Ritsu
- * @reworked Estrayl 12.06.2017
+ * @author Ritsu, Estrayl
  */
 @AIName("telepathy_controller")
 public class TelepathyControllerAI extends AggressiveNpcAI {

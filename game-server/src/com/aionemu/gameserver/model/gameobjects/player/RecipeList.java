@@ -10,8 +10,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_RECIPE_DELETE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author MrPoke
- * @modified Neon
+ * @author MrPoke, Neon
  */
 public class RecipeList {
 

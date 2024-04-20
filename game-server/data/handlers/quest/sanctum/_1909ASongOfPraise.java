@@ -9,8 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Mr. Poke
- * @modified Nephis
+ * @author Mr. Poke, Nephis
  */
 public class _1909ASongOfPraise extends AbstractQuestHandler {
 

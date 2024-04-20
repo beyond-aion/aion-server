@@ -12,9 +12,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
  * Talk with Cornelius (203780). Talk with Sabotes (203781). Collect Tear of Luck (182206098) (20) and take them to Cornelius. Take the Oath Stone
  * (186000080) to High Priest Jucleas (203752) and ask him to perform the ritual of affirmation. Talk with Lavirintos (203701).
  * 
- * @author Nanou
- * @reworked vlog
- * @modified Gigi
+ * @author Nanou, vlog, Gigi
  */
 public class _3939PersistenceAndLuck extends AbstractQuestHandler {
 
