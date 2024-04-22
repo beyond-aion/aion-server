@@ -15,8 +15,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.options.Assertion;
 import com.aionemu.commons.utils.NetworkUtils;
 
-import edu.umd.cs.findbugs.annotations.SuppressFBWarnings;
-
 /**
  * Dispatcher that dispatch SelectionKeys set selected by Selector.
  * 
@@ -80,7 +78,6 @@ public abstract class Dispatcher extends Thread {
 	 * 
 	 * @see java.lang.Thread#run()
 	 */
-	@SuppressFBWarnings("ESync_EMPTY_SYNC")
 	@Override
 	public void run() {
 		for (;;) {
