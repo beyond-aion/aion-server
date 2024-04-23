@@ -6,11 +6,8 @@ TITLE Aion Emu - Chat Server
 :START
 CLS
 JAVA -Xms72m -Xmx72m -XX:+UseNUMA -DconsoleEncoding=CP850 -cp "libs/*" com.aionemu.chatserver.ChatServer
-IF ERRORLEVEL 2 GOTO START
-IF ERRORLEVEL 1 GOTO ERROR
-IF ERRORLEVEL 0 GOTO END
-
-:ERROR
+IF %ERRORLEVEL% EQU 0 GOTO END
+IF %ERRORLEVEL% EQU 2 GOTO START
 ECHO.
 ECHO Chat server has terminated abnormally!
 ECHO.
