@@ -141,6 +141,7 @@ public class HouseController extends VisibleObjectController<House> {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_HOUSING_REQUEST_OUT());
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	public void teleportNearHouseDoor(Player player, boolean outsideHouse) {
 		SpawnTemplate butler = getOwner().getButler().getSpawn(), relationshipCrystal = getOwner().getRelationshipCrystal().getSpawn();
 		float x, y, z; // midpoint between butler and relationship crystal, since we currently have no door coordinates in templates

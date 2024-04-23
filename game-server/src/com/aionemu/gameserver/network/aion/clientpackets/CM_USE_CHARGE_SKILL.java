@@ -22,6 +22,7 @@ public class CM_USE_CHARGE_SKILL extends AionClientPacket {
 	protected void readImpl() {
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	@Override
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();

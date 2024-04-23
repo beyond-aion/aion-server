@@ -35,6 +35,7 @@ public class GloryPointsService {
 		increaseGpBy(playerObjId, amount, true, true);
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	public static void increaseGpBy(int playerObjId, int amount, boolean applyRates, boolean modifyStats) {
 		if (amount == 0)
 			return;

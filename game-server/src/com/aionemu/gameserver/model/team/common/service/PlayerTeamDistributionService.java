@@ -29,6 +29,7 @@ public class PlayerTeamDistributionService {
 	/**
 	 * This method will send a reward if a player is in a team
 	 */
+	@SuppressWarnings("lossy-conversions")
 	public static void doReward(TemporaryPlayerTeam<?> team, float damagePercent, Npc owner, AionObject winner) {
 		if (team == null || owner == null) {
 			return;

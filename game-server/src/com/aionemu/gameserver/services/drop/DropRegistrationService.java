@@ -442,6 +442,7 @@ public class DropRegistrationService {
 		return tempItems;
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	private long getItemCount(GlobalDropItem item, Npc npc) {
 		long count = Rnd.get(item.getMinCount(), item.getMaxCount());
 		if (item.getId() == ItemId.KINAH)

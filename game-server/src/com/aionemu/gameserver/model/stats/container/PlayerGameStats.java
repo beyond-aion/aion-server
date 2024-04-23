@@ -301,6 +301,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 		return getStat(StatEnum.MAGICAL_CRITICAL, base);
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	@Override
 	public Stat2 getHpRegenRate() {
 		int base = owner.getLevel() + 3;
@@ -310,6 +311,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 		return getStat(StatEnum.REGEN_HP, base);
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	@Override
 	public Stat2 getMpRegenRate() {
 		int base = owner.getLevel() + 8;

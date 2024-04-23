@@ -206,6 +206,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 		currentGatherer.set(0);
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	public void rewardPlayer(Player player) {
 		if (player != null) {
 			int skillLvl = getOwner().getObjectTemplate().getSkillLevel();

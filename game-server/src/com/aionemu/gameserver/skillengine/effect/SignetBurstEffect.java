@@ -27,6 +27,7 @@ public class SignetBurstEffect extends DamageEffect {
 	@XmlAttribute(name = "add_effect_prob_multi")
 	protected int addEffectProbMultiplier = 0;
 
+	@SuppressWarnings("lossy-conversions")
 	@Override
 	public void calculateDamage(Effect effect) {
 		Effect signetEffect = effect.getEffected().getEffectController().getAbnormalEffect(signet);
@@ -56,16 +57,10 @@ public class SignetBurstEffect extends DamageEffect {
 		}
 	}
 
-	/**
-	 * @return the signetlvl
-	 */
 	public int getSignetlvl() {
 		return signetlvl;
 	}
 
-	/**
-	 * @return the signet
-	 */
 	public String getSignet() {
 		return signet;
 	}

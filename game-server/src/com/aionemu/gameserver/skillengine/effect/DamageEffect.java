@@ -39,6 +39,7 @@ public abstract class DamageEffect extends EffectTemplate {
 		effect.getEffected().getController().onAttack(effect, type, effect.getReserveds(this.position).getValue(), true, log, hopType);
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	@Override
 	public void calculateDamage(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);

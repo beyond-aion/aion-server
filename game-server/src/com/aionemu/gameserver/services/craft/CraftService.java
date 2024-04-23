@@ -39,6 +39,7 @@ public class CraftService {
 
 	private static final Logger log = LoggerFactory.getLogger("CRAFT_LOG");
 
+	@SuppressWarnings("lossy-conversions")
 	public static void finishCrafting(Player player, RecipeTemplate recipetemplate, int critCount, int bonus) {
 
 		if (recipetemplate.getMaxProductionCount() != null) {

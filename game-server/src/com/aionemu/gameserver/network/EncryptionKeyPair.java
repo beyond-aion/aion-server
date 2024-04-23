@@ -98,6 +98,7 @@ public class EncryptionKeyPair {
 	 * 
 	 * @return true if decryption was successful
 	 */
+	@SuppressWarnings("lossy-conversions")
 	public boolean decrypt(ByteBuffer buf) {
 		final byte[] data = buf.array();
 		final int size = buf.remaining();
@@ -145,6 +146,7 @@ public class EncryptionKeyPair {
 	/**
 	 * Encrypt server packet from this ByteBuffer
 	 */
+	@SuppressWarnings("lossy-conversions")
 	public void encrypt(ByteBuffer buf) {
 		final byte[] data = buf.array();
 		final int size = buf.remaining();

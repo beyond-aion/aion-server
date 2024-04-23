@@ -245,6 +245,7 @@ public class StatFunctions {
 		return pointsGained;
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	public static int adjustPvpDpGained(int points, int defeatedLvl, int killerLvl) {
 		int pointsGained = points;
 

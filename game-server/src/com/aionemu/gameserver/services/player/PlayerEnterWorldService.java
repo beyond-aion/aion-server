@@ -235,21 +235,7 @@ public final class PlayerEnterWorldService {
 			if (secondsOffline > 10 * 60) // 10 mins offline = 0 salvation points
 				pcd.resetSalvationPoints();
 
-			pcd.updateMaxRepose();
-			if (pcd.isReadyForReposeEnergy() && secondsOffline > 4 * 3600) { // more than 4 hours offline: start counting Repose Energy addition
-				double hours = secondsOffline / 3600d;
-				// 48 hours offline = 100% Repose Energy (~1% each 30mins source: http://forums.na.aiononline.com/na/showthread.php?t=105940)
-				long addReposeEnergy = Math.round((hours / 48) * pcd.getMaxReposeEnergy());
-				// Additional Energy of Repose bonus if inside house
-				House house = player.getActiveHouse();
-				if (house != null) {
-					HouseAddress hPos = house.getAddress();
-					if (player.getWorldId() == hPos.getMapId()
-						&& PositionUtil.isInRange(player.getX(), player.getY(), player.getZ(), hPos.getX(), hPos.getY(), hPos.getZ(), 7))
-						addReposeEnergy *= house.getHouseType() == HouseType.STUDIO ? 1.05f : 1.10f; // apartment = 5% bonus, other houses 10%
-				}
-				pcd.addReposeEnergy(addReposeEnergy);
-			}
+			updateEnergyOfRepose(player, secondsOffline);
 
 			if (secondsOffline > 5 * 60)
 				pcd.setDp(0);
@@ -424,6 +410,25 @@ public final class PlayerEnterWorldService {
 		VeteranRewardService.getInstance().tryReward(player);
 
 		PvpMapService.getInstance().onLogin(player);
+	}
+
+	@SuppressWarnings("lossy-conversions")
+	private static void updateEnergyOfRepose(Player player, long secondsOffline) {
+		player.getCommonData().updateMaxRepose();
+		if (player.getCommonData().isReadyForReposeEnergy() && secondsOffline > 4 * 3600) { // more than 4 hours offline: start counting Repose Energy addition
+			double hours = secondsOffline / 3600d;
+			// 48 hours offline = 100% Repose Energy (~1% each 30mins source: http://forums.na.aiononline.com/na/showthread.php?t=105940)
+			long addReposeEnergy = Math.round((hours / 48) * player.getCommonData().getMaxReposeEnergy());
+			// Additional Energy of Repose bonus if inside house
+			House house = player.getActiveHouse();
+			if (house != null) {
+				HouseAddress hPos = house.getAddress();
+				if (player.getWorldId() == hPos.getMapId()
+					&& PositionUtil.isInRange(player.getX(), player.getY(), player.getZ(), hPos.getX(), hPos.getY(), hPos.getZ(), 7))
+					addReposeEnergy *= house.getHouseType() == HouseType.STUDIO ? 1.05f : 1.10f; // apartment = 5% bonus, other houses 10%
+			}
+			player.getCommonData().addReposeEnergy(addReposeEnergy);
+		}
 	}
 
 	private static void activatePassiveSkillEffects(Player player) {

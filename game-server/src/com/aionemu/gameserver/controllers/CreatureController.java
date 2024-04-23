@@ -246,6 +246,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		applyGodStoneEffect(attacker, attacker.getEquipment().getOffHandWeapon(), false);
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	private void applyGodStoneEffect(Player attacker, Item weapon, boolean isMainHandWeapon) {
 		if (weapon == null || !weapon.hasGodStone())
 			return;

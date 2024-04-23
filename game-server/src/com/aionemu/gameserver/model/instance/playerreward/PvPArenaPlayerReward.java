@@ -80,7 +80,7 @@ public class PvPArenaPlayerReward extends InstancePlayerReward {
 
 	public void updateBonusTime() {
 		int offlineTime = (int) (System.currentTimeMillis() - logoutTime);
-		timeBonus -= offlineTime * timeBonusModifier;
+		timeBonus -= (int) (offlineTime * timeBonusModifier);
 	}
 
 	public boolean isRewarded() {

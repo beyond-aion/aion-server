@@ -939,6 +939,7 @@ public class Effect implements StatOwner {
 	 *     This byte is used to output the corresponding chat messages.
 	 * @return an integer containing all successful effect positions and a subeffect (if one exists)
 	 */
+	@SuppressWarnings("lossy-conversions")
 	public byte getSuccessfulEffectsAsByte() {
 		if (effectResult == EffectResult.DODGE)
 			return 0;

@@ -486,9 +486,6 @@ public abstract class EffectTemplate {
 		return 0;
 	}
 
-	/**
-	 * @param effect
-	 */
 	public void startSubEffect(Effect effect) {
 		if (subEffect == null)
 			return;
@@ -516,10 +513,9 @@ public abstract class EffectTemplate {
 	}
 
 	/**
-	 * @param effect
-	 * @param statEnum
 	 * @return true = no resist, false = resisted
 	 */
+	@SuppressWarnings("lossy-conversions")
 	public boolean calculateEffectResistRate(Effect effect, StatEnum statEnum) {
 		if (statEnum == null)
 			return true;
@@ -591,7 +587,6 @@ public abstract class EffectTemplate {
 	}
 
 	/**
-	 * @param stat
 	 * @return true = it's an altered state effect, false = it is Poison/Bleed dot (normal Dots have statEnum null here)
 	 */
 	private boolean isAlteredState(StatEnum stat) {

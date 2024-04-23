@@ -175,6 +175,7 @@ public class NpcController extends CreatureController<Npc> {
 		return pet != null && pet.getCommonData().isLooting() ? pet : null;
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	@Override
 	public void doReward() {
 		super.doReward();

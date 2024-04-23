@@ -149,6 +149,7 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		writeS(isBanned ? cbi.getReason() : "");
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	protected void writeEquippedItems(List<Item> items) {
 		int mask = 0;
 		for (Item item : items) {
