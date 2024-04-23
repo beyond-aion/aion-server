@@ -11,7 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.gameserver.configs.main.CleaningConfig;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.PlayerExperienceTable;
@@ -94,7 +93,6 @@ public class DatabaseCleaningService {
 		}
 		if (toDelete > 0) {
 			log.info("DatabaseCleaningService: Executing deletion over " + workers.size() + " longrunning threads");
-			ConsoleUtil.initAndPrintProgressBar(toDelete);
 			CountDownLatch cl = new CountDownLatch(workers.size());
 			for (Worker w : workers) // get them working on our long-running
 				ThreadPoolManager.getInstance().executeLongRunning(() -> w.work(cl, maxExp));
@@ -125,7 +123,6 @@ public class DatabaseCleaningService {
 					deletedChars += chars;
 					affectedAccounts++;
 				}
-				ConsoleUtil.increaseAndPrintProgress();
 			}
 			cl.countDown();
 		}

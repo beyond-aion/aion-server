@@ -17,7 +17,6 @@ import java.util.zip.ZipOutputStream;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfo;
 import com.aionemu.commons.utils.info.VersionInfo;
@@ -106,7 +105,6 @@ public class LoginServer {
 
 		PlayerTransferService.getInstance();
 
-		ConsoleUtil.printSection("System Info");
 		VersionInfo.logAll(LoginServer.class);
 		SystemInfo.logAll();
 

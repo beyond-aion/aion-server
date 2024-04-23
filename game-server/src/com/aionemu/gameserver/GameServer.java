@@ -26,7 +26,6 @@ import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
 import com.aionemu.commons.services.CronService;
-import com.aionemu.commons.utils.ConsoleUtil;
 import com.aionemu.commons.utils.ExitCode;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfo;
@@ -165,29 +164,22 @@ public class GameServer {
 
 		boolean enableExecutionTimeWarnings = CommonsConfig.EXECUTION_TIME_WARNING_ENABLE;
 		CommonsConfig.EXECUTION_TIME_WARNING_ENABLE = false;
-		ConsoleUtil.printSection("IDFactory");
 		IDFactory.getInstance();
 
-		ConsoleUtil.printSection("Static Data");
 		DataManager.getInstance();
 
-		ConsoleUtil.printSection("Handlers");
 		loadMultithreaded(QuestEngine.getInstance(), AIEngine.getInstance(), InstanceEngine.getInstance(), ChatProcessor.getInstance(),
 			ZoneService.getInstance()); // ZoneService before GeoService
 
-		ConsoleUtil.printSection("Geodata");
 		GeoService.getInstance().initializeGeo();
 		// ZoneService.getInstance().saveMaterialZones();
 
-		ConsoleUtil.printSection("World");
 		World.getInstance();
 		GameTimeService.getInstance();
 
-		ConsoleUtil.printSection("Drops");
 		DropRegistrationService.getInstance();
 
 		// This is loading only siege location data, no siege schedule or spawns
-		ConsoleUtil.printSection("Location Data");
 		BaseService.getInstance();
 		SiegeService.getInstance();
 		WorldRaidService.getInstance().initWorldRaidLocations();
@@ -196,7 +188,6 @@ public class GameServer {
 		RiftService.getInstance().initRiftLocations();
 		LegionDominionService.getInstance().initLocations();
 
-		ConsoleUtil.printSection("Housing");
 		HousingService.getInstance(); // init housing service before spawns since it gets called on every instance spawn
 		HousingBidService.getInstance();
 		AuctionEndTask.getInstance();
@@ -204,14 +195,12 @@ public class GameServer {
 		MaintenanceTask.getInstance();
 		ChallengeTaskService.getInstance();
 
-		ConsoleUtil.printSection("Spawns");
 		SpawnEngine.spawnAll();
 		TemporarySpawnEngine.spawnAll();
 		TownService.getInstance();
 		FlyRingService.getInstance();
 		RiftService.getInstance().initRifts();
 
-		ConsoleUtil.printSection("Limits");
 		if (GSConfig.ENABLE_RATIO_LIMITATION) { // TODO move all of this stuff in a separate class / service
 			ASMOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ASMODIANS);
 			ELYOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ELYOS);
@@ -223,19 +212,14 @@ public class GameServer {
 
 		// Init Sieges... It's separated due to spawn engine.
 		// It should not spawn siege NPCs
-		ConsoleUtil.printSection("Siege Schedule");
 		SiegeService.getInstance().initSieges();
 
-		ConsoleUtil.printSection("World Bases");
 		BaseService.getInstance().initBases();
 
-		ConsoleUtil.printSection("World Raid");
 		WorldRaidService.getInstance().initWorldRaids();
 
-		ConsoleUtil.printSection("Conqueror And Protector system");
 		ConquerorAndProtectorService.getInstance().init();
 
-		ConsoleUtil.printSection("TaskManagers");
 		AnnouncementService.getInstance();
 		DebugService.getInstance();
 		WeatherService.getInstance();
@@ -252,15 +236,12 @@ public class GameServer {
 		HTMLCache.getInstance();
 		AbyssRankingCache.getInstance();
 		AbyssRankUpdateService.scheduleUpdate();
-		ConsoleUtil.printSection("Periodic Instances");
 		PeriodicInstanceManager.getInstance();
 		EventService.getInstance();
 
-		ConsoleUtil.printSection("Access Management");
 		AdminService.getInstance();
 		CommandsAccessService.loadAccesses();
 
-		ConsoleUtil.printSection("Player Transfers");
 		PlayerTransferService.getInstance();
 
 		GameTimeService.getInstance().startClock();
@@ -271,7 +252,6 @@ public class GameServer {
 
 		System.gc();
 
-		ConsoleUtil.printSection("System Info");
 		VersionInfo.logAll(versionInfo, GSConfig.TIME_ZONE_ID);
 		SystemInfo.logAll();
 
@@ -310,13 +290,11 @@ public class GameServer {
 
 		Config.load();
 		// Second should be database factory
-		ConsoleUtil.printSection("Database");
 		DatabaseFactory.init();
 		// Initialize DAOs
 		DAOManager.init();
 		DAOManager.getDAO(PlayerDAO.class).setAllPlayersOffline();
 		// Initialize thread pools
-		ConsoleUtil.printSection("Threads");
 		ThreadPoolManager.getInstance();
 
 		if (CleaningConfig.CLEANING_ENABLE)
