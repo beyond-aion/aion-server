@@ -4413,7 +4413,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Blessing Of The Magic Fountain" start="2021-03-01T00:00:00" end="2021-03-14T23:59:59">
+	<event name="Blessing Of The Magic Fountain" start="2024-04-26T00:00:00" end="2024-05-12T23:59:59">
 		<event_drops>
 			<gd_rule rule_name="Aether Bloom Bouquet" chance="100" member_limit="6">
 				<gd_maps>

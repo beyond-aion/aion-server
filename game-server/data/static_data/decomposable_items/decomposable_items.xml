@@ -35953,47 +35953,44 @@
 	<decomposable item_id="188054026" /><!-- [Event] Honorable Armor Box of Conquest -->
 	<decomposable item_id="188054027" /><!-- [Event] Honorable Weapon Box of Conquest -->
 	<decomposable item_id="188054028"><!-- [Event] Fountain Gift -->
-		<items chance="10.0">
-			<item id="186000406" /><!-- [Event] Aether Bloom -->
-		</items>
 		<items chance="2.5">
 			<item id="125045568" /><!-- Breezy Summer Hat -->
+		</items>
+		<items chance="2.5">
+			<item id="169610060" /><!-- [Title Card] Chaser of Atreia – 30-day pass -->
+		</items>
+		<items chance="5.0">
+			<item id="188052048" /><!-- Eastern Display Furniture Pack -->
+		</items>
+		<items chance="5.0">
+			<item id="188053702" /><!-- Vasharti's Equipment Box -->
+		</items>
+		<items chance="5.0">
+			<item id="188052388" /><!-- Modor's Equipment Box -->
+		</items>
+		<items chance="5.0">
+			<item id="188052827" /><!-- Dynatoum's Equipment Chest -->
+		</items>
+		<items chance="10.0">
+			<item id="186000406" /><!-- [Event] Aether Bloom -->
 		</items>
 		<items chance="10.0">
 			<item id="186000243" min_count="5" /><!-- Fragmented Ceramium -->
 		</items>
 		<items chance="10.0">
-			<item id="186000236" min_count="15" /><!-- Blood Mark -->
+			<item id="186000236" min_count="25" /><!-- Blood Mark -->
 		</items>
 		<items chance="10.0">
-			<item id="166000195" min_count="3" /><!-- Epsilon Enchantment Stone -->
+			<item id="186000051" min_count="2" /><!-- Major Ancient Crown -->
 		</items>
 		<items chance="10.0">
-			<item id="166000194" min_count="5" /><!-- Delta Enchantment Stone -->
+			<item id="186000237" min_count="50" /><!-- Ancient Coin -->
 		</items>
-		<items chance="10.0">
-			<item id="186000237" min_count="25" /><!-- Ancient Coin -->
+		<items chance="12.5">
+			<item id="188053609" min_count="2" /><!-- [Event] Level 60 Composite Manastone Bundle -->
 		</items>
-		<items chance="10.0">
-			<item id="186000101" min_count="3" race="ELYOS" /><!-- Radiant Token -->
-			<item id="186000104" min_count="3" race="ASMODIANS" /><!-- Crusader Token -->
-		</items>
-		<items chance="10.0">
-			<item id="160005060" /><!-- [Event] Zeraka Aether Jelly -->
-		</items>
-		<items chance="2.5">
-			<item id="188052070" /><!-- [Event] Fabled Godstone Bundle -->
-		</items>
-		<items chance="2.5">
-			<item id="160010342" race="ELYOS" /><!-- Unstoppable Ailu Form -->
-			<item id="160010344" race="ASMODIANS" /><!-- Unstoppable Ailu Form -->
-		</items>
-		<items chance="2.5">
-			<item id="160010343" race="ELYOS" /><!-- Indomitable Ailu Form -->
-			<item id="160010345" race="ASMODIANS" /><!-- Indomitable Ailu Form -->
-		</items>
-		<items chance="10.0">
-			<item id="188053453" /><!-- [Event] Scroll Bundle -->
+		<items chance="12.5">
+			<item id="160005060" min_count="2" /><!-- [Event] Zeraka Aether Jelly -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188054029"><!-- [Event] Blooming Gift -->
@@ -36007,34 +36004,34 @@
 			<item id="169600038" /><!-- [Emotion Card] Scatter Petals -->
 		</items>
 		<items chance="2.5">
+			<item id="188053903" /><!-- Honorable Equipment of Conquest Box -->
+		</items>
+		<items chance="2.5">
 			<item id="188053033" /><!-- Kunax's Equipment Box -->
 		</items>
-		<items chance="10.0">
-			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
-		</items>
-		<items chance="10.0">
-			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
-		</items>
-		<items chance="10.0">
-			<item id="166500002" min_count="2" /><!-- Amplification Stone -->
-		</items>
-		<items chance="10.0">
-			<item id="188053636" /><!-- Blood Mark Box -->
-		</items>
-		<items chance="10.0">
-			<item id="164002238" /><!-- Instant Return Scroll -->
-		</items>
-		<items chance="10.0">
+		<items chance="2.5">
 			<item id="168310018" /><!-- Major Blessed Augment: Level 2 -->
 		</items>
 		<items chance="10.0">
-			<item id="186000237" min_count="50" /><!-- Ancient Coin -->
+			<item id="188053610" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 		</items>
-		<items chance="10.0">
-			<item id="160005060" min_count="3" /><!-- [Event] Zeraka Aether Jelly -->
+		<items chance="12.5">
+			<item id="188053636" /><!-- Blood Mark Box -->
 		</items>
-		<items chance="10.0">
-			<item id="188053609" min_count="3" /><!-- [Event] Level 60 Composite Manastone Bundle -->
+		<items chance="12.5">
+			<item id="188053618" /><!-- Honorable Elim's Idian Bundle -->
+		</items>
+		<items chance="12.5">
+			<item id="186000242" min_count="2" /><!-- Ceramium Medal -->
+		</items>
+		<items chance="12.5">
+			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items chance="12.5">
+			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
+		</items>
+		<items chance="12.5">
+			<item id="186000237" min_count="75" /><!-- Ancient Coin -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188054030"><!-- [Club] Decorative Furniture Bundle -->
