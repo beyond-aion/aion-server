@@ -47,7 +47,7 @@
 			<spot x="1041" y="480.346" z="245.044" h="39"/>
 			<spot x="1062.13" y="441.89" z="243.119" h="19"/>
 			<spot x="1079.54" y="541.291" z="268.57" h="29"/>
-			<spot x="1079.6" y="592.393" z="266.655" h="34" walker_id="CD3ACD2B56D4485EC7589FB9D0C7690BEF276001"/>
+			<spot x="1081.9" y="591.5" z="266.655" h="34" walker_id="CD3ACD2B56D4485EC7589FB9D0C7690BEF276001"/>
 			<spot x="1079.87" y="645.369" z="266.428" h="60"/>
 			<spot x="1091.09" y="612.977" z="266.586" h="68"/>
 			<spot x="1093.87" y="586.212" z="267.642" h="69"/>
@@ -180,9 +180,9 @@
 		</spawn>
 		<!-- Esoterrace Hunter -->
 		<spawn npc_id="217183">
-			<spot x="1022.96" y="605.4" z="248.953" h="21" walker_id="82FAC5F53D9A548EC4DF64C7EB188C56392F4E10" walker_index="1"/>
+			<spot x="1021.22" y="606.085" z="248.838" h="21" walker_id="82FAC5F53D9A548EC4DF64C7EB188C56392F4E10" walker_index="1"/>
 			<spot x="1077.47" y="640.811" z="267.04" h="60"/>
-			<spot x="1081.68" y="592.228" z="266.503" h="34" walker_id="CD3ACD2B56D4485EC7589FB9D0C7690BEF276001" walker_index="1"/>
+			<spot x="1081.9" y="591.5" z="266.655" h="34" walker_id="CD3ACD2B56D4485EC7589FB9D0C7690BEF276001" walker_index="1"/>
 		</spawn>
 		<!-- Esoterrace Hunter -->
 		<spawn npc_id="217189">
