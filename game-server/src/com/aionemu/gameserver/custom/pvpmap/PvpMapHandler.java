@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
-import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
@@ -65,7 +64,6 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	private final List<WorldPosition> treasurePositions = new ArrayList<>();
 	private final List<WorldPosition> supplyPositions = new ArrayList<>();
 	private final List<WorldPosition> keymasterPositions = new ArrayList<>();
-	private final AtomicBoolean canJoin = new AtomicBoolean();
 	private List<Future<?>> tasks = new ArrayList<>();
 	private Future<?> supplyTask, despawnTask;
 	private int currentRandomBossObjId;
@@ -84,22 +82,10 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 		spawnTreasureChests();
 		spawnNpcs();
 		startRandomBossTask();
-		setActive(true);
-	}
-
-	public boolean isActive() {
-		return canJoin.get();
-	}
-
-	public boolean setActive(boolean active) {
-		boolean success = canJoin.compareAndSet(!active, active);
-		if (!active && success)
-			instance.forEachPlayer(this::removePlayer);
-		return success;
 	}
 
 	private void spawnShugo(Player player) {
-		if (canJoin.get() && Rnd.chance() < SHUGO_SPAWN_RATE) {
+		if (CustomConfig.PVP_MAP_ENABLED && Rnd.chance() < SHUGO_SPAWN_RATE) {
 			deleteAliveNpcs(833543);
 			double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(player.getHeading()));
 			float x = player.getX() + (float) (Math.cos(radian) * 2);
@@ -168,6 +154,8 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private void startRandomBossTask() {
 		CronService.getInstance().schedule(() -> {
+			if (!CustomConfig.PVP_MAP_ENABLED)
+				return;
 			int bonus = World.getInstance().getAllPlayers().size() * 2;
 			bonus = Math.min(bonus, 30);
 			if (Rnd.chance() < (CustomConfig.PVP_MAP_RANDOM_BOSS_BASE_RATE + bonus)) {
@@ -251,7 +239,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private boolean canJoin(Player p) {
 		if (!p.isStaff()) {
-			if (!canJoin.get()) {
+			if (!CustomConfig.PVP_MAP_ENABLED) {
 				PacketSendUtility.sendMessage(p, "The PvP-Map is currently disabled.");
 				return false;
 			} else if (p.getLevel() < 60) {
@@ -294,7 +282,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	@Override
 	public boolean onReviveEvent(Player player) {
 		revive(player);
-		if (!canJoin.get() || respawnLocations.isEmpty()) {
+		if (!CustomConfig.PVP_MAP_ENABLED || respawnLocations.isEmpty()) {
 			if (instance.getPlayer(player.getObjectId()) != null) {
 				removePlayer(player);
 			}
@@ -307,7 +295,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-		if (canJoin.get()) {
+		if (CustomConfig.PVP_MAP_ENABLED) {
 			if (lastAttacker instanceof Player && !lastAttacker.equals(player)) {
 				spawnShugo((Player) lastAttacker);
 			}
@@ -406,7 +394,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	@Override
 	public void onInstanceDestroy() {
-		canJoin.set(false);
+		PvpMapService.getInstance().onInstanceDestroy();
 		cancelTasks();
 	}
 
@@ -421,7 +409,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 	}
 
 	private boolean spawnAllowed() {
-		if (!canJoin.get())
+		if (!CustomConfig.PVP_MAP_ENABLED)
 			return false;
 		byte asmodians = 0;
 		byte elyos = 0;

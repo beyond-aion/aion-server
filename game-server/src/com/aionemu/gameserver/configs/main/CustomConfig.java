@@ -245,6 +245,9 @@ public class CustomConfig {
 	@Property(key = "gameserver.custom.starter_kit.enable", defaultValue = "false")
 	public static boolean ENABLE_STARTER_KIT;
 
+	@Property(key = "gameserver.pvpmap.enable", defaultValue = "false")
+	public static boolean PVP_MAP_ENABLED;
+
 	@Property(key = "gameserver.pvpmap.apmultiplier", defaultValue = "2")
 	public static float PVP_MAP_AP_MULTIPLIER;
 

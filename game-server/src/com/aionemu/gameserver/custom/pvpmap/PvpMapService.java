@@ -2,9 +2,7 @@ package com.aionemu.gameserver.custom.pvpmap;
 
 import java.awt.Color;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -20,7 +18,6 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class PvpMapService {
 
 	private static final PvpMapService instance = new PvpMapService();
-	private static final Logger log = LoggerFactory.getLogger(PvpMapService.class);
 	private PvpMapHandler handler;
 
 	public static PvpMapService getInstance() {
@@ -33,7 +30,7 @@ public class PvpMapService {
 	}
 
 	public void onLogin(Player player) {
-		if (handler != null && handler.isActive() && handler.isRandomBossAlive())
+		if (handler != null && CustomConfig.PVP_MAP_ENABLED && handler.isRandomBossAlive())
 			notifyBossSpawn(player);
 	}
 
@@ -70,19 +67,7 @@ public class PvpMapService {
 		return handler == null ? 0 : handler.getParticipantsSize();
 	}
 
-	public boolean activate(Player admin) {
-		if (handler != null && handler.setActive(true)) {
-			log.info("[PvpMapService] Admin " + admin.getName() + " activated the PvP-Map.");
-			return true;
-		}
-		return false;
-	}
-
-	public boolean deactivate(Player admin) {
-		if (handler != null && handler.setActive(false)) {
-			log.info("[PvpMapService] Admin " + admin.getName() + " deactivated the PvP-Map");
-			return true;
-		}
-		return false;
+	void onInstanceDestroy() {
+		handler = null;
 	}
 }
