@@ -37,7 +37,14 @@ public class Config {
 	 * Load configs of the given classes or all if allowedConfigs is empty.
 	 */
 	public static void load(Class<?>... allowedConfigs) {
+		load(null, allowedConfigs);
+	}
+
+	public static void load(Properties overrideProperties, Class<?>... allowedConfigs) {
 		Properties properties = loadProperties();
+		if (overrideProperties != null) {
+			properties.putAll(overrideProperties);
+		}
 		for (Class<?> config : CONFIGS) {
 			if (allowedConfigs.length == 0 || matches(allowedConfigs, config))
 				ConfigurableProcessor.process(config, properties);

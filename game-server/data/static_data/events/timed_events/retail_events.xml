@@ -4193,6 +4193,9 @@
 		</spawns>
 	</event>
 	<event name="Legendary Symphony" start="2022-09-30T00:00:00" end="2022-10-09T23:59:59">
+		<config_properties>
+			<property>symphony = 0</property>
+		</config_properties>
 		<quests>
 			<maintainable>80673 80674 80675 80676 80677 80678 80679 80680 80681 80682 80697 80698 80699 80700 80701 80702 80703 80704 80705 80706</maintainable>
 		</quests>

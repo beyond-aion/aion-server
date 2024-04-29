@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services.event;
 
+import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
@@ -11,14 +12,15 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
-import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.Guides.GuideTemplate;
+import com.aionemu.gameserver.model.templates.QuestTemplate;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.event.InventoryDrop;
 import com.aionemu.gameserver.model.templates.quest.QuestCategory;
@@ -76,6 +78,15 @@ public class Event {
 	public void start() {
 		if (!started.compareAndSet(false, true))
 			return;
+		if (eventTemplate.hasConfigProperties()) {
+			try {
+				Config.load(eventTemplate.loadConfigProperties());
+			} catch (IOException e) {
+				log.error("Could not load config properties of event " + getEventTemplate().getName(), e);
+				started.compareAndSet(true, false);
+				return;
+			}
+		}
 		if (eventTemplate.getSpawns() != null && eventTemplate.getSpawns().size() > 0) { // TODO refactor SpawnEngine to use its methods
 			for (SpawnMap map : eventTemplate.getSpawns().getTemplates()) {
 				DataManager.SPAWNS_DATA.addNewSpawnMap(map);
@@ -143,6 +154,9 @@ public class Event {
 
 	public void stop() {
 		started.set(false);
+		if (eventTemplate.hasConfigProperties()) {
+			Config.load();
+		}
 		if (eventTemplate.getSpawns() != null && eventTemplate.getSpawns().size() > 0) {
 			int[] count = { 0 };
 			World.getInstance().forEachObject(o -> {

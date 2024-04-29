@@ -1,16 +1,13 @@
 package com.aionemu.gameserver.model.templates.event;
 
+import java.io.IOException;
+import java.io.StringReader;
 import java.time.LocalDateTime;
 import java.util.Collections;
 import java.util.List;
+import java.util.Properties;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlElementWrapper;
-import javax.xml.bind.annotation.XmlList;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
 
 import com.aionemu.gameserver.dataholders.SpawnsData;
@@ -38,6 +35,10 @@ public class EventTemplate {
 
 	@XmlAttribute(name = "theme")
 	private EventTheme theme;
+
+	@XmlElementWrapper(name = "config_properties")
+	@XmlElement(name = "property")
+	private List<String> configProperties;
 
 	@XmlElementWrapper(name = "event_drops")
 	@XmlElement(name = "gd_rule")
@@ -74,6 +75,16 @@ public class EventTemplate {
 
 	public EventTheme getTheme() {
 		return theme;
+	}
+
+	public boolean hasConfigProperties() {
+		return configProperties != null;
+	}
+
+	public Properties loadConfigProperties() throws IOException {
+		Properties configProperties = new Properties();
+		configProperties.load(new StringReader(String.join("\n", this.configProperties)));
+		return configProperties;
 	}
 
 	public List<GlobalRule> getEventDropRules() {

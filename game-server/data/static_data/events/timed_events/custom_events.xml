@@ -2874,6 +2874,9 @@
 		</spawns>
 	</event>
 	<event name="Beyond Easter" start="2023-04-07T00:00:00" end="2023-04-16T23:59:59">
+		<config_properties>
+			<property>easter = 0</property>
+		</config_properties>
 		<event_drops>
 			<gd_rule rule_name="Easter Event Drop" chance="15" member_limit="12">
 				<gd_ratings>

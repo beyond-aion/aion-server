@@ -14,17 +14,24 @@
 
 	<xs:complexType name="EventTemplate">
 		<xs:all>
-			<xs:element minOccurs="0" maxOccurs="1" name="event_drops" type="EventDrops" />
-			<xs:element minOccurs="0" maxOccurs="1" name="quests" type="EventQuestList" />
-			<xs:element minOccurs="0" maxOccurs="1" name="spawns" type="SpawnsData" />
-			<xs:element minOccurs="0" maxOccurs="1" name="inventory_drop" type="InventoryDrop" />
-			<xs:element minOccurs="0" maxOccurs="1" name="surveys" type="SurveyList" />
-			<xs:element minOccurs="0" maxOccurs="1" name="buffs" type="Buffs" />
+			<xs:element minOccurs="0" name="config_properties" type="ConfigProperties" />
+			<xs:element minOccurs="0" name="event_drops" type="EventDrops" />
+			<xs:element minOccurs="0" name="quests" type="EventQuestList" />
+			<xs:element minOccurs="0" name="spawns" type="SpawnsData" />
+			<xs:element minOccurs="0" name="inventory_drop" type="InventoryDrop" />
+			<xs:element minOccurs="0" name="surveys" type="SurveyList" />
+			<xs:element minOccurs="0" name="buffs" type="Buffs" />
 		</xs:all>
 		<xs:attribute name="name" type="xs:string" use="required" />
 		<xs:attribute name="start" type="xs:dateTime" />
 		<xs:attribute name="end" type="xs:dateTime" />
-		<xs:attribute name="theme" type="EventTheme" use="optional" />
+		<xs:attribute name="theme" type="EventTheme" />
+	</xs:complexType>
+
+	<xs:complexType name="ConfigProperties">
+		<xs:sequence>
+			<xs:element maxOccurs="unbounded" name="property" type="xs:string" />
+		</xs:sequence>
 	</xs:complexType>
 
 	<xs:complexType name="EventDrops">
@@ -42,8 +49,8 @@
 
 	<xs:complexType name="EventQuestList">
 		<xs:sequence>
-			<xs:element minOccurs="0" maxOccurs="1" name="startable" type="xs:string" />
-			<xs:element minOccurs="0" maxOccurs="1" name="maintainable" type="xs:string" />
+			<xs:element minOccurs="0" name="startable" type="xs:string" />
+			<xs:element minOccurs="0" name="maintainable" type="xs:string" />
 		</xs:sequence>
 	</xs:complexType>
 
