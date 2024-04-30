@@ -4,10 +4,8 @@ import java.lang.reflect.Field;
 import java.lang.reflect.Modifier;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.Objects;
 import java.util.Properties;
+import java.util.*;
 import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
@@ -27,28 +25,21 @@ public class ConfigurableProcessor {
 	private static final Pattern propertyPattern = Pattern.compile("\\$\\{([^}]+)\\}"); // finds strings enclosed in ${}
 
 	/**
-	 * This method is an entry point to the parser logic.<br>
-	 * Any object or class that have {@link Property} annotation in it or it's parent class/interface can be submitted here.<br>
-	 * If object(new Something()) is submitted, object fields are parsed. (non-static)<br>
-	 * If class is submitted(Sotmething.class), static fields are parsed.<br>
-	 * <p/>
-	 * 
-	 * @param object
-	 *          Class or Object that has {@link Property} annotations.
-	 * @param properties
-	 *          Properties that should be used while searching for a {@link Property#key()}
+	 * Processes annotated fields of given classes and parses corresponding values from passed properties according to {@link Property#key()} or {@link com.aionemu.commons.configuration.Properties#keyPattern()}.
+	 *
+	 * @param properties       Properties to bind to annotated fields
+	 * @param objectsOrClasses Classes or instances of objects with {@link Property} or {@link com.aionemu.commons.configuration.Properties} annotated fields. In the case of object instances, only instance fields are processed, not static fields that belong to its class.
 	 */
-	public static void process(Object object, Properties properties) {
-		Class<?> clazz;
-
-		if (object instanceof Class) {
-			clazz = (Class<?>) object;
-			object = null;
-		} else {
-			clazz = object.getClass();
+	public static Set<String> process(Properties properties, Object... objectsOrClasses) {
+		Set<String> unusedProperties = new HashSet<>(properties.stringPropertyNames());
+		for (Object object : objectsOrClasses) {
+			if (object instanceof Class<?> clazz) {
+				process(clazz, null, properties, unusedProperties);
+			} else {
+				process(object.getClass(), object, properties, unusedProperties);
+			}
 		}
-
-		process(clazz, object, properties);
+		return unusedProperties;
 	}
 
 	/**
@@ -61,21 +52,21 @@ public class ConfigurableProcessor {
 	 * @param props
 	 *          Properties with keys\values
 	 */
-	private static void process(Class<?> clazz, Object obj, Properties props) {
-		processFields(clazz, obj, props);
+	private static void process(Class<?> clazz, Object obj, Properties props, Set<String> unusedProperties) {
+		processFields(clazz, obj, props, unusedProperties);
 
 		// Interfaces can't have any object fields, only static
 		// So there is no need to parse interfaces for instances of objects
 		// Only classes (static fields) can be located in interfaces
 		if (obj == null) {
 			for (Class<?> itf : clazz.getInterfaces()) {
-				process(itf, obj, props);
+				process(itf, obj, props, unusedProperties);
 			}
 		}
 
 		Class<?> superClass = clazz.getSuperclass();
 		if (superClass != null && superClass != Object.class) {
-			process(superClass, obj, props);
+			process(superClass, obj, props, unusedProperties);
 		}
 	}
 
@@ -90,7 +81,7 @@ public class ConfigurableProcessor {
 	 * @param props
 	 *          Properties with keys\values
 	 */
-	private static void processFields(Class<?> clazz, Object obj, Properties props) {
+	private static void processFields(Class<?> clazz, Object obj, Properties props, Set<String> unusedProperties) {
 		for (Field f : clazz.getDeclaredFields()) {
 			// Static fields should not be modified when processing object
 			if (Modifier.isStatic(f.getModifiers()) && obj != null) {
@@ -106,7 +97,7 @@ public class ConfigurableProcessor {
 				// Final fields should not be processed
 				if (Modifier.isFinal(f.getModifiers()))
 					throw new RuntimeException("Can't process final field " + f.getName() + " of class " + clazz.getName());
-				processField(f, obj, props);
+				processField(f, obj, props, unusedProperties);
 			}
 		}
 	}
@@ -123,7 +114,7 @@ public class ConfigurableProcessor {
 	 * @param props
 	 *          Properties with keys & default values
 	 */
-	private static void processField(Field f, Object obj, Properties props) {
+	private static void processField(Field f, Object obj, Properties props, Set<String> unusedProperties) {
 		boolean oldAccessible = f.canAccess(obj);
 		try {
 			if (!oldAccessible)
@@ -134,14 +125,14 @@ public class ConfigurableProcessor {
 				if (properties != null)
 					throw new UnsupportedOperationException("Field can only be annotated with @Property or @Properties, not both.");
 				String key = Objects.requireNonNull(property.key(), "@Property key must not be empty");
-				String value = getValue(key, property.defaultValue(), props);
+				String value = getValue(key, property.defaultValue(), props, unusedProperties);
 				if (!Property.DEFAULT_VALUE.equals(value))
 					f.set(obj, transform(value, f));
 				else
 					log.debug("Field " + f.getName() + " of class " + f.getDeclaringClass().getName() + " wasn't modified");
 			} else {
 				Pattern pattern = Pattern.compile(properties.keyPattern());
-				Map<String, String> values = filterProperties(pattern, props);
+				Map<String, String> values = filterProperties(pattern, props, unusedProperties);
 				f.set(obj, transform(values, f));
 			}
 		} catch (Exception e) {
@@ -159,13 +150,13 @@ public class ConfigurableProcessor {
 		return PropertyTransformerFactory.getTransformer(field.getType()).transform(value, field.getType(), genericTypeArgs);
 	}
 
-	private static Map<String, String> filterProperties(Pattern pattern, Properties props) {
+	private static Map<String, String> filterProperties(Pattern pattern, Properties props, Set<String> unusedProperties) {
 		Map<String, String> input = new HashMap<>();
 		for (String k : props.stringPropertyNames()) {
 			Matcher matcher = pattern.matcher(k);
 			if (matcher.find()) {
 				String key = matcher.groupCount() > 0 ? matcher.group(1) : k;
-				String value = getValue(k, "", props);
+				String value = getValue(k, "", props, unusedProperties);
 				input.put(key, value);
 			}
 		}
@@ -179,8 +170,10 @@ public class ConfigurableProcessor {
 		return MapTransformer.transform(values, field.getType(), genericTypeArgs);
 	}
 
-	private static String getValue(String key, String defaultValue, Properties props) {
+	private static String getValue(String key, String defaultValue, Properties props, Set<String> unusedProperties) {
 		String value = props.getProperty(key, defaultValue);
+		if (unusedProperties != null && (!Objects.equals(value, defaultValue) || props.getProperty(key) != null))
+			unusedProperties.remove(key);
 		if (value.trim().equals("\"\""))
 			value = "";
 		else

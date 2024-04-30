@@ -42,7 +42,7 @@ public class ScriptCompilerCache {
 	static {
 		try {
 			java.util.Properties properties = PropertiesUtils.load(CACHE_CLASS_MAP, null);
-			ConfigurableProcessor.process(ScriptCompilerCache.class, properties);
+			ConfigurableProcessor.process(properties, ScriptCompilerCache.class);
 			if (CommonsConfig.SCRIPT_COMPILER_CACHING) {
 				if (!CACHE_CLASS_MAP.exists() || !CLASS_FILES_BY_SOURCE_FILE.keySet().stream().allMatch(File::isFile)) {
 					if (CACHE_DIR.toFile().exists())

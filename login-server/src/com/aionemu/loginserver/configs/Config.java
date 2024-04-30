@@ -1,7 +1,11 @@
 package com.aionemu.loginserver.configs;
 
+import java.io.IOException;
 import java.net.InetSocketAddress;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Properties;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -11,6 +15,8 @@ import com.aionemu.commons.configs.DatabaseConfig;
 import com.aionemu.commons.configuration.ConfigurableProcessor;
 import com.aionemu.commons.configuration.Property;
 import com.aionemu.commons.utils.PropertiesUtils;
+
+import ch.qos.logback.classic.ClassicConstants;
 
 /**
  * @author -Nemesiss-, SoulKeeper, Neon
@@ -80,11 +86,11 @@ public class Config {
 	 * Load configs from files.
 	 */
 	public static void load() {
-		Properties properties = loadProperties();
-
-		ConfigurableProcessor.process(Config.class, properties);
-		ConfigurableProcessor.process(CommonsConfig.class, properties);
-		ConfigurableProcessor.process(DatabaseConfig.class, properties);
+		Set<String> unusedProperties = ConfigurableProcessor.process(loadProperties(), Config.class, CommonsConfig.class, DatabaseConfig.class);
+		if (!unusedProperties.isEmpty()) {
+			removePropertiesUsedInLogbackXml(unusedProperties);
+			unusedProperties.forEach(unusedProperty -> LoggerFactory.getLogger(Config.class).warn("Config property " + unusedProperty + " is unknown and therefore ignored."));
+		}
 	}
 
 	private static Properties loadProperties() {
@@ -102,6 +108,18 @@ public class Config {
 			return properties;
 		} catch (Exception e) {
 			throw new Error("Can't load loginserver configuration:", e);
+		}
+	}
+
+	private static void removePropertiesUsedInLogbackXml(Set<String> properties) {
+		String logbackXml = System.getProperty(ClassicConstants.CONFIG_FILE_PROPERTY);
+		if (logbackXml != null) {
+			try {
+				String logbackXmlContent = Files.readString(Path.of(logbackXml));
+				properties.removeIf(property -> logbackXmlContent.contains("${" + property + '}'));
+			} catch (IOException e) {
+				LoggerFactory.getLogger(Config.class).error("", e);
+			}
 		}
 	}
 }

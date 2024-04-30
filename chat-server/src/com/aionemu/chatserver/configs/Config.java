@@ -1,10 +1,14 @@
 package com.aionemu.chatserver.configs;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -17,6 +21,8 @@ import com.aionemu.commons.configuration.ConfigurableProcessor;
 import com.aionemu.commons.utils.NetworkUtils;
 import com.aionemu.commons.utils.PropertiesUtils;
 
+import ch.qos.logback.classic.ClassicConstants;
+
 /**
  * @author ATracer
  */
@@ -26,15 +32,11 @@ public class Config {
 	 * Load configs from files.
 	 */
 	public static void load() {
-		Properties properties = loadProperties();
-
-		// Main
-		ConfigurableProcessor.process(CommonsConfig.class, properties);
-		ConfigurableProcessor.process(LoggingConfig.class, properties);
-
-		// Network
-		ConfigurableProcessor.process(DatabaseConfig.class, properties);
-		ConfigurableProcessor.process(NetworkConfig.class, properties);
+		Set<String> unusedProperties = ConfigurableProcessor.process(loadProperties(), CommonsConfig.class, LoggingConfig.class, DatabaseConfig.class, NetworkConfig.class);
+		if (!unusedProperties.isEmpty()) {
+			removePropertiesUsedInLogbackXml(unusedProperties);
+			unusedProperties.forEach(p -> LoggerFactory.getLogger(Config.class).warn("Config property " + p + " is unknown and therefore ignored."));
+		}
 
 		if (NetworkConfig.CLIENT_CONNECT_ADDRESS.getAddress().isAnyLocalAddress()) {
 			InetAddress localIPv4 = NetworkUtils.findLocalIPv4();
@@ -61,6 +63,18 @@ public class Config {
 			return properties;
 		} catch (Exception e) {
 			throw new Error("Can't load chatserver configuration:", e);
+		}
+	}
+
+	private static void removePropertiesUsedInLogbackXml(Set<String> properties) {
+		String logbackXml = System.getProperty(ClassicConstants.CONFIG_FILE_PROPERTY);
+		if (logbackXml != null) {
+			try {
+				String logbackXmlContent = Files.readString(Path.of(logbackXml));
+				properties.removeIf(property -> logbackXmlContent.contains("${" + property + '}'));
+			} catch (IOException e) {
+				LoggerFactory.getLogger(Config.class).error("", e);
+			}
 		}
 	}
 }

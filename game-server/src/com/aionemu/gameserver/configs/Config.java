@@ -1,10 +1,14 @@
 package com.aionemu.gameserver.configs;
 
+import java.io.IOException;
 import java.net.InetAddress;
 import java.net.InetSocketAddress;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Properties;
+import java.util.Set;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,6 +24,8 @@ import com.aionemu.gameserver.configs.administration.CommandsConfig;
 import com.aionemu.gameserver.configs.main.*;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.configs.network.PffConfig;
+
+import ch.qos.logback.classic.ClassicConstants;
 
 /**
  * @author Nemesiss, SoulKeeper
@@ -45,10 +51,17 @@ public class Config {
 		if (overrideProperties != null) {
 			properties.putAll(overrideProperties);
 		}
-		for (Class<?> config : CONFIGS) {
-			if (allowedConfigs.length == 0 || matches(allowedConfigs, config))
-				ConfigurableProcessor.process(config, properties);
+		for (Class<?> config : allowedConfigs) {
+			if (!CONFIGS.contains(config))
+				throw new IllegalArgumentException(config + " is not an allowed config");
 		}
+		boolean processAllConfigs = allowedConfigs.length == 0;
+		Set<String> unusedProperties = ConfigurableProcessor.process(properties, processAllConfigs ? CONFIGS.toArray() : allowedConfigs);
+		if (processAllConfigs && !unusedProperties.isEmpty()) {
+			removePropertiesUsedInLogbackXml(unusedProperties);
+			unusedProperties.forEach(p -> LoggerFactory.getLogger(Config.class).warn("Config property " + p + " is unknown and therefore ignored."));
+		}
+
 		if (NetworkConfig.CLIENT_CONNECT_ADDRESS.getAddress().isAnyLocalAddress()) {
 			InetAddress localIPv4 = NetworkUtils.findLocalIPv4();
 			if (localIPv4 == null)
@@ -58,12 +71,16 @@ public class Config {
 		}
 	}
 
-	private static boolean matches(Class<?>[] configs, Class<?> config) {
-		for (Class<?> c : configs) {
-			if (c == config)
-				return true;
+	private static void removePropertiesUsedInLogbackXml(Set<String> properties) {
+		String logbackXml = System.getProperty(ClassicConstants.CONFIG_FILE_PROPERTY);
+		if (logbackXml != null) {
+			try {
+				String logbackXmlContent = Files.readString(Path.of(logbackXml));
+				properties.removeIf(property -> logbackXmlContent.contains("${" + property + '}'));
+			} catch (IOException e) {
+				LoggerFactory.getLogger(Config.class).error("", e);
+			}
 		}
-		return false;
 	}
 
 	private static Properties loadProperties() {
