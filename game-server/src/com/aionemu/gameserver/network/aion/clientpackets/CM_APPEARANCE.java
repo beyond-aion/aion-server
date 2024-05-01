@@ -114,6 +114,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 			String oldName = legion.getName();
 			legion.setName(newName);
 			DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
+			LegionService.getInstance().updateCachedLegionName(oldName, legion);
 			PacketSendUtility.broadcastToWorld(new SM_RENAME(legion, oldName)); // broadcast to world to update all keeps, member's tags, etc.
 		}
 	}

@@ -99,4 +99,11 @@ public class LegionContainer implements Iterable<Legion> {
 		legionsById.clear();
 		legionsByName.clear();
 	}
+
+	public void updateCachedLegionName(String oldName, Legion legion) {
+		legionsByName.compute(oldName, (n, legionMember) -> {
+			legionsByName.put(legion.getName(), legion);
+			return null;
+		});
+	}
 }

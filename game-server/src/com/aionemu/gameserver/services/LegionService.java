@@ -1316,6 +1316,10 @@ public class LegionService {
 			allCachedLegionMembers.updateCachedPlayerName(oldName, player);
 	}
 
+	public void updateCachedLegionName(String oldName, Legion legion) {
+		allCachedLegions.updateCachedLegionName(oldName, legion);
+	}
+
 	public void joinLegionDominion(Player player, int locId) {
 		LegionMember legionMember = player.getLegionMember();
 		if (!legionMember.isBrigadeGeneral() && legionMember.getRank() != LegionRank.DEPUTY)
