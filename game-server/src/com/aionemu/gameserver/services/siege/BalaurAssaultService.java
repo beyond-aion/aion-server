@@ -14,9 +14,9 @@ import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.assemblednpc.AssembledNpc;
 import com.aionemu.gameserver.model.assemblednpc.AssembledNpcPart;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.Influence;
+import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.assemblednpc.AssembledNpcTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_NPC_ASSEMBLER;
@@ -94,23 +94,26 @@ public class BalaurAssaultService {
 		return Rnd.chance() < influence * 100f * SiegeConfig.BALAUR_ASSAULT_RATE;
 	}
 
-	public void startAssault(Player player, int location, int delay) {
-		if (fortressAssaults.containsKey(location) || artifactAssaults.containsKey(location)) {
-			PacketSendUtility.sendMessage(player, "Assault on " + location + " was already started.");
-			return;
+	public boolean startAssault(int location, int delay) {
+		Siege<? extends SiegeLocation> siege = SiegeService.getInstance().getSiege(location);
+		if (siege == null || fortressAssaults.containsKey(location) || artifactAssaults.containsKey(location)) {
+			return false;
 		}
-		newAssault(SiegeService.getInstance().getSiege(location), delay);
+		newAssault(siege, delay);
+		return true;
 	}
 
 	private void newAssault(Siege<?> siege, int delay) {
-		if (siege instanceof FortressSiege) {
-			FortressAssault assault = new FortressAssault((FortressSiege) siege);
+		if (siege instanceof FortressSiege fortressSiege) {
+			FortressAssault assault = new FortressAssault(fortressSiege);
 			assault.startAssault(delay);
 			fortressAssaults.put(siege.getSiegeLocationId(), assault);
-		} else if (siege instanceof ArtifactSiege) {
-			ArtifactAssault assault = new ArtifactAssault((ArtifactSiege) siege);
+		} else if (siege instanceof ArtifactSiege artifactSiege) {
+			ArtifactAssault assault = new ArtifactAssault(artifactSiege);
 			assault.startAssault(delay);
 			artifactAssaults.put(siege.getSiegeLocationId(), assault);
+		} else {
+			throw new IllegalArgumentException("Unsupported fortress siege type: " + siege.getClass().getSimpleName());
 		}
 		if (LoggingConfig.LOG_SIEGE)
 			log.info("Scheduled assault of " + siege + " in " + delay + " seconds");
