@@ -316,11 +316,7 @@ public final class PlayerEnterWorldService {
 		client.sendPacket(new SM_STATS_INFO(player));
 		// ----------------------------- Retail sequence -----------------------------
 
-		// Intro message
-		if (!GSConfig.SERVER_MOTD.isEmpty())
-			PacketSendUtility.sendMessage(player, GSConfig.SERVER_MOTD, ChatType.WHITE);
-
-		if (GSConfig.SERVER_MOTD_DISPLAY_REV)
+		if (player.hasAccess(AdminConfig.REVISION_INFO_ON_LOGIN))
 			PacketSendUtility.sendMessage(player, VERSION_INFO, ChatType.WHITE);
 
 		if (account.getMembership() > 0 && account.getMembership() <= MembershipConfig.MEMBERSHIP_TYPES.length) {

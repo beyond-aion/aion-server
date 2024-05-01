@@ -216,6 +216,8 @@ public class Event {
 
 	public void onPlayerLogin(Player player) {
 		startOrMaintainQuests(player);
+		if (eventTemplate.getLoginMessage() != null && !eventTemplate.getLoginMessage().isEmpty())
+			PacketSendUtility.sendMessage(player, eventTemplate.getLoginMessage());
 	}
 
 	public void onEnteredTeam(Player player, TemporaryPlayerTeam<? extends TeamMember<Player>> team) {

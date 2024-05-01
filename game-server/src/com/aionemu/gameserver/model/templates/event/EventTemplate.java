@@ -36,6 +36,9 @@ public class EventTemplate {
 	@XmlAttribute(name = "theme")
 	private EventTheme theme;
 
+	@XmlElement(name = "login_message")
+	private String loginMessage;
+
 	@XmlElementWrapper(name = "config_properties")
 	@XmlElement(name = "property")
 	private List<String> configProperties;
@@ -75,6 +78,10 @@ public class EventTemplate {
 
 	public EventTheme getTheme() {
 		return theme;
+	}
+
+	public String getLoginMessage() {
+		return loginMessage;
 	}
 
 	public boolean hasConfigProperties() {

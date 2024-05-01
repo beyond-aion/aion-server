@@ -14,6 +14,7 @@
 
 	<xs:complexType name="EventTemplate">
 		<xs:all>
+			<xs:element minOccurs="0" name="login_message" type="xs:string" />
 			<xs:element minOccurs="0" name="config_properties" type="ConfigProperties" />
 			<xs:element minOccurs="0" name="event_drops" type="EventDrops" />
 			<xs:element minOccurs="0" name="quests" type="EventQuestList" />

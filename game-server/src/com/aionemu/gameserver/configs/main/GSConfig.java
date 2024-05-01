@@ -15,14 +15,6 @@ public class GSConfig {
 	@Property(key = "gameserver.country.code", defaultValue = "99")
 	public static int SERVER_COUNTRY_CODE;
 
-	/* Server MOTD */
-	@Property(key = "gameserver.motd", defaultValue = "")
-	public static String SERVER_MOTD;
-
-	/* Server MOTD Display revision */
-	@Property(key = "gameserver.motd.display_revision", defaultValue = "false")
-	public static boolean SERVER_MOTD_DISPLAY_REV;
-
 	/* Players Max Level */
 	@Property(key = "gameserver.players.max.level", defaultValue = "65")
 	public static int PLAYER_MAX_LEVEL;

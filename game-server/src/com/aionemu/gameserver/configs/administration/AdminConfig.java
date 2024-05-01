@@ -76,6 +76,8 @@ public class AdminConfig {
 	 */
 	@Property(key = "gameserver.administration.login.execute_commands", defaultValue = "//invis, //invul, //enemy none, //see")
 	public static List<String> LOGIN_EXECUTE_COMMANDS;
+	@Property(key = "gameserver.administration.login.print_revision", defaultValue = "9")
+	public static byte REVISION_INFO_ON_LOGIN;
 	@Property(key = "gameserver.administration.login.announce_levels", defaultValue = "*")
 	public static List<String> ANNOUNCE_LEVELS;
 	@Property(key = "gameserver.administration.login.announce_to_all_players", defaultValue = "true")
