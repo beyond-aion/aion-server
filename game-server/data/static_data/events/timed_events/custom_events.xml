@@ -26,6 +26,12 @@
 			</buff>
 		</buffs>
 	</event>
+	<event name="Increased Rates" start="2024-05-20T00:00:00" end="2024-05-26T23:59:59">
+		<login_message>Benefit from increased drop rates until May 26th!</login_message>
+		<config_properties>
+			<property>gameserver.rates.drop = 1.1</property>
+		</config_properties>
+	</event>
 	<event name="April Fool's" start="2024-04-01T00:00:00" end="2024-04-01T23:59:59">
 		<spawns>
 			<spawn_map map_id="110010000">
