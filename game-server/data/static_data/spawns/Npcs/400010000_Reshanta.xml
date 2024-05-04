@@ -1957,6 +1957,10 @@
 		<spawn npc_id="278071" respawn_time="295">
 			<spot x="2131.88" y="661" z="2843.07"/>
 		</spawn>
+		<!-- Goimonerk -->
+		<spawn npc_id="278653" respawn_time="295">
+			<spot x="2912.1885" y="924.90338" z="1539.7612" h="30"/>
+		</spawn>
 		<!-- Grabakr -->
 		<spawn npc_id="278105" respawn_time="295">
 			<spot x="569.11" y="2603.8" z="2887.41" h="45"/>
