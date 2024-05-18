@@ -1,8 +1,11 @@
 package instance;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 import java.util.concurrent.Future;
+import java.util.stream.Collectors;
+import java.util.stream.IntStream;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
@@ -738,14 +741,15 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnAtRandomPositionWithinRange(int npcId, int minRange, int maxRange) {
-		for (int i = 0; i < 10; i++) { // 10 tries should be enough to find a spot. if not fuck it. I'm not going to implement a while loop
-			if (!reward.isStartProgress()) {
-				break;
-			}
-			float direction = (Rnd.get(0, 199) / 100f);
-			int range = Rnd.get(minRange, maxRange);
-			float x = 231.14f + (float) (Math.cos(Math.PI * direction) * range);
-			float y = 264.399f + (float) (Math.sin(Math.PI * direction) * range);
+		if (!reward.isStartProgress()) {
+			return;
+		}
+		List<Integer> ranges = IntStream.range(minRange, maxRange + 1).boxed().collect(Collectors.toList());
+		Collections.shuffle(ranges);
+		double direction = Rnd.get() * 2 * Math.PI;
+		for (int range : ranges) {
+			float x = 231.14f + (float) (Math.cos(direction) * range);
+			float y = 264.399f + (float) (Math.sin(direction) * range);
 			if (isValidPoint(x, y)) {
 				spawn(npcId, x, y, 96.51f, (byte) 50);
 				break;
@@ -772,8 +776,8 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 	}
 
 	private boolean isValidPoint(float x, float y) {
-		return (PositionUtil.getDistance(x, y, 211.254f, 264.134f) >= 2.5) && (PositionUtil.getDistance(x, y, 230.8977f, 285.5198f) >= 2.5)
-			&& (PositionUtil.getDistance(x, y, 251.3068f, 264.307f) >= 2.5) && (PositionUtil.getDistance(x, y, 231.2034f, 243.8273f) >= 2.5);
+		return (PositionUtil.getDistance(x, y, 211.254f, 264.134f) >= 2.5) && (PositionUtil.getDistance(x, y, 230.8977f, 285.5198f) >= 2.5) && (
+			PositionUtil.getDistance(x, y, 251.3068f, 264.307f) >= 2.5) && (PositionUtil.getDistance(x, y, 231.2034f, 243.8273f) >= 2.5);
 	}
 
 	private void addWorldPoints() {
