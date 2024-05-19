@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.items.storage.ItemStorage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
+import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.Improvement;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
@@ -463,24 +464,21 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 		return godStone == null ? 0 : godStone.getItemId();
 	}
 
-	/**
-	 * @param itemId
-	 * @return
-	 */
 	public void addGodStone(int itemId) {
 		addGodStone(itemId, 0);
 	}
 
 	public void addGodStone(int itemId, int activatedCount) {
+		GodstoneInfo godstoneInfo = DataManager.ITEM_DATA.getItemTemplate(itemId).getGodstoneInfo();
+		if (godstoneInfo == null) {
+			log.warn("Item " + itemId + " has no godstone info");
+			return;
+		}
 		if (godStone != null)
 			setGodStone(null);
-		godStone = new GodStone(this, activatedCount, itemId, PersistentState.NEW);
+		godStone = new GodStone(this, activatedCount, itemId, godstoneInfo, PersistentState.NEW);
 	}
 
-	/**
-	 * @param godStone
-	 *          the goodStone to set
-	 */
 	public void setGodStone(GodStone godStone) {
 		if (godStone == null) {
 			this.godStone.setPersistentState(PersistentState.DELETED);

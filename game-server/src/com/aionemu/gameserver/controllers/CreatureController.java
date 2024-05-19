@@ -13,7 +13,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.attack.AttackUtil;
@@ -178,30 +177,25 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	 * Perform tasks when Creature was attacked
 	 */
 	public final void onAttack(Creature creature, int damage, AttackStatus attackStatus) {
-		onAttack(creature, 0, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, true, HopType.DAMAGE);
+		onAttack(creature, null, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, HopType.DAMAGE);
 	}
 
 	public final void onAttack(Creature creature, int damage, AttackStatus attackStatus, Effect criticalEffect) {
-		onAttack(creature, 0, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, true, HopType.DAMAGE, criticalEffect);
+		onAttack(creature, null, TYPE.REGULAR, damage, true, LOG.REGULAR, attackStatus, HopType.DAMAGE, criticalEffect);
 	}
 
 	public final void onAttack(Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, HopType hopType) {
-		onAttack(effect.getEffector(), effect.getSkillId(), type, damage, notifyAttack, logId, effect.getAttackStatus(),
-			!effect.isPeriodic() && effect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED, hopType);
-		if (type == TYPE.DELAYDAMAGE)
-			effect.broadcastHate();
+		onAttack(effect.getEffector(), effect, type, damage, notifyAttack, logId, effect.getAttackStatus(), hopType, null);
 	}
 
-	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status,
-						 boolean allowGodstoneActivation, HopType hopType) {
-		onAttack(attacker, skillId, type, damage, notifyAttack, logId, status, allowGodstoneActivation, hopType, null);
+	public void onAttack(Creature attacker, Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status, HopType hopType) {
+		onAttack(attacker, effect, type, damage, notifyAttack, logId, status, hopType, null);
 	}
 
 	/**
 	 * Perform tasks when Creature was attacked
 	 */
-	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status,
-						 boolean allowGodstoneActivation, HopType hopType, Effect criticalEffect) {
+	private void onAttack(Creature attacker, Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus status, HopType hopType, Effect criticalEffect) {
 		if (!getOwner().isSpawned())
 			return;
 		if (damage != 0 && notifyAttack) {
@@ -222,23 +216,25 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 					}
 				}
 			}
-			getOwner().getObserveController().notifyAttackedObservers(attacker, skillId);
+			getOwner().getObserveController().notifyAttackedObservers(attacker, effect == null ? 0 : effect.getSkillId());
 		}
 
 		getOwner().getAggroList().addDamage(attacker, damage, notifyAttack, hopType);
 
 		// notify all NPC's around that creature is attacking me
 		getOwner().getKnownList().forEachNpc(npc -> npc.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));
-		getOwner().getLifeStats().reduceHp(type, damage, skillId, logId, attacker, true);
+		getOwner().getLifeStats().reduceHp(type, damage, effect == null ? 0 : effect.getSkillId(), logId, attacker, true);
 		getOwner().incrementAttackedCount();
 
 		if (!getOwner().isDead() && attacker instanceof Player player) {
 			if (criticalEffect != null) {
 				criticalEffect.applyEffect();
 			}
-			if (allowGodstoneActivation && status != AttackStatus.DODGE && status != AttackStatus.RESIST)
+			if ((effect == null || effect.tryActivateGodstone()) && status != AttackStatus.DODGE && status != AttackStatus.RESIST)
 				calculateGodStoneEffects(player);
 		}
+		if (effect != null && type == TYPE.DELAYDAMAGE)
+			effect.broadcastHate();
 	}
 
 	private void calculateGodStoneEffects(Player attacker) {
@@ -251,36 +247,30 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		if (weapon == null || !weapon.hasGodStone())
 			return;
 		GodStone godStone = weapon.getGodStone();
-		GodstoneInfo godStoneInfo = godStone.getGodstoneInfo();
-		if (godStoneInfo == null)
+		if (!godStone.tryActivate(isMainHandWeapon, getOwner()))
 			return;
 
-		int procProbability = isMainHandWeapon ? godStoneInfo.getProbability() : godStoneInfo.getProbabilityLeft();
-		procProbability *= CustomConfig.GODSTONE_ACTIVATION_RATE;
-		procProbability -= getOwner().getGameStats().getStat(StatEnum.PROC_REDUCE_RATE, 0).getCurrent();
-
-		if (Rnd.get(1, 1000) <= procProbability) {
-			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId());
-			Skill skill = SkillEngine.getInstance().getSkill(attacker, godStoneInfo.getSkillId(), godStoneInfo.getSkillLevel(), getOwner(), template);
-			skill.setFirstTargetRangeCheck(false);
-			if (!skill.canUseSkill(CastState.CAST_START))
-				return;
-			Effect effect = new Effect(skill, getOwner());
-			effect.initialize();
-			effect.applyEffect();
-			PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getL10n()));
-			// Illusion Godstones
-			if (godStoneInfo.getBreakProb() > 0) {
-				godStone.increaseActivatedCount();
-				if (godStone.getActivatedCount() > godStoneInfo.getNonBreakCount() && Rnd.get(1, 1000) <= godStoneInfo.getBreakProb()) {
-					// TODO: Delay 10 Minutes, send messages etc
-					// PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getL10n(),
-					// itemTemplate.getL10nId()));
-					weapon.setGodStone(null);
-					PacketSendUtility.sendPacket(attacker,
-						SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getL10n(), DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId()).getL10n()));
-					ItemPacketService.updateItemAfterInfoChange(attacker, weapon);
-				}
+		GodstoneInfo godstoneInfo = godStone.getGodstoneInfo();
+		ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId());
+		Skill skill = SkillEngine.getInstance().getSkill(attacker, godstoneInfo.getSkillId(), godstoneInfo.getSkillLevel(), getOwner(), template);
+		skill.setFirstTargetRangeCheck(false);
+		if (!skill.canUseSkill(CastState.CAST_START))
+			return;
+		Effect effect = new Effect(skill, getOwner());
+		effect.initialize();
+		effect.applyEffect();
+		PacketSendUtility.sendPacket(attacker, SM_SYSTEM_MESSAGE.STR_SKILL_PROC_EFFECT_OCCURRED(skill.getSkillTemplate().getL10n()));
+		// Illusion Godstones
+		if (godstoneInfo.getBreakProb() > 0) {
+			godStone.increaseActivatedCount();
+			if (godStone.getActivatedCount() > godstoneInfo.getNonBreakCount() && Rnd.get(1, 1000) <= godstoneInfo.getBreakProb()) {
+				// TODO: Delay 10 Minutes, send messages etc
+				// PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC_REMAIN_START(equippedItem.getL10n(),
+				// itemTemplate.getL10nId()));
+				weapon.setGodStone(null);
+				PacketSendUtility.sendPacket(attacker,
+					SM_SYSTEM_MESSAGE.STR_MSG_BREAK_PROC(weapon.getL10n(), DataManager.ITEM_DATA.getItemTemplate(godStone.getItemId()).getL10n()));
+				ItemPacketService.updateItemAfterInfoChange(attacker, weapon);
 			}
 		}
 	}

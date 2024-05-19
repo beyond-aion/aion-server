@@ -423,8 +423,8 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
-						 boolean allowGodstoneActivation, HopType hopType) {
+	public void onAttack(Creature attacker, Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
+		HopType hopType) {
 		if (getOwner().isDead())
 			return;
 
@@ -437,7 +437,7 @@ public class PlayerController extends CreatureController<Player> {
 
 		cancelUseItem();
 		cancelGathering();
-		super.onAttack(attacker, skillId, type, damage, notifyAttack, logId, attackStatus, allowGodstoneActivation, hopType);
+		super.onAttack(attacker, effect, type, damage, notifyAttack, logId, attackStatus, hopType);
 
 		if (attacker instanceof Npc) {
 			ShoutEventHandler.onAttack((NpcAI) attacker.getAi(), getOwner());
@@ -447,13 +447,6 @@ public class PlayerController extends CreatureController<Player> {
 		lastAttackedMillis = System.currentTimeMillis();
 	}
 
-	/**
-	 * @param skillId
-	 * @param targetType
-	 * @param x
-	 * @param y
-	 * @param z
-	 */
 	public void useSkill(int skillId, int targetType, float x, float y, float z, int time) {
 		Player player = getOwner();
 
@@ -469,14 +462,6 @@ public class PlayerController extends CreatureController<Player> {
 		}
 	}
 
-	/**
-	 * @param template
-	 * @param targetType
-	 * @param x
-	 * @param y
-	 * @param z
-	 * @param clientHitTime
-	 */
 	public void useSkill(SkillTemplate template, int targetType, float x, float y, float z, int clientHitTime, int skillLevel) {
 		Player player = getOwner();
 		Skill skill = SkillEngine.getInstance().getSkillFor(player, template, player.getTarget());

@@ -4,11 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -70,7 +66,10 @@ public class MySQL5ItemStoneListDAO extends ItemStoneListDAO {
 								item.getItemStones().add(new ManaStone(item.getObjectId(), itemId, slot, PersistentState.UPDATED));
 								break;
 							case 1:
-								item.setGodStone(new GodStone(item, activatedCount, itemId, PersistentState.UPDATED));
+								item.addGodStone(itemId, activatedCount);
+								GodStone godstone = item.getGodStone();
+								if (godstone != null)
+									godstone.setPersistentState(PersistentState.UPDATED);
 								break;
 							case 2:
 								if (item.getSockets(true) <= item.getFusionStonesSize()) {

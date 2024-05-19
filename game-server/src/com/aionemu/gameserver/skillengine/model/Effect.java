@@ -118,11 +118,15 @@ public class Effect implements StatOwner {
 	// Whether this effect is a sub effect of another effect
 	private boolean isSubEffect = false;
 	private boolean applyCriticalEffect = false;
+	private final AtomicBoolean allowGodstoneActivation = new AtomicBoolean();
 
 	public Effect(Skill skill, Creature effected) {
 		this(skill.getEffector(), effected, skill.getSkillTemplate(), skill.getSkillLevel(), null, null);
 		this.effectHate = skill.getHate();
 		this.skill = skill;
+		ActivationAttribute activationAttribute = skillTemplate.getActivationAttribute();
+		if (activationAttribute == ActivationAttribute.ACTIVE || activationAttribute == ActivationAttribute.CHARGE)
+			this.allowGodstoneActivation.set(true);
 	}
 
 	public Effect(Creature effector, Creature effected, SkillTemplate skillTemplate, int skillLevel) {
@@ -1265,5 +1269,9 @@ public class Effect implements StatOwner {
 
 	public boolean isSubEffect() {
 		return isSubEffect;
+	}
+
+	public boolean tryActivateGodstone() {
+		return allowGodstoneActivation.compareAndSet(true, false);
 	}
 }

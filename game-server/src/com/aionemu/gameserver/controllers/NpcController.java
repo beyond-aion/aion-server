@@ -36,6 +36,7 @@ import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.event.EventService;
+import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.HopType;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
@@ -288,8 +289,8 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public void onAttack(Creature attacker, int skillId, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
-		boolean allowGodstoneActivation, HopType hopType) {
+	public void onAttack(Creature attacker, Effect effect, TYPE type, int damage, boolean notifyAttack, LOG logId, AttackStatus attackStatus,
+		HopType hopType) {
 		if (getOwner().isDead())
 			return;
 		final Creature actingCreature;
@@ -300,7 +301,7 @@ public class NpcController extends CreatureController<Npc> {
 		else
 			actingCreature = attacker.getActingCreature();
 
-		super.onAttack(actingCreature, skillId, type, damage, notifyAttack, logId, attackStatus, allowGodstoneActivation, hopType);
+		super.onAttack(actingCreature, effect, type, damage, notifyAttack, logId, attackStatus, hopType);
 
 		Npc npc = getOwner();
 		ShoutEventHandler.onEnemyAttack((NpcAI) npc.getAi(), attacker);

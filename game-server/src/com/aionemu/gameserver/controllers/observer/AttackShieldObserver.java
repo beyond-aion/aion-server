@@ -142,7 +142,7 @@ public class AttackShieldObserver extends AttackCalcObserver {
 						effect.endEffect(); // one skill reflection ends the shield effect
 						return;
 					} else { // apply reflect damage
-						attacker.getController().onAttack(effect.getEffected(), 0, TYPE.REGULAR, reflectedHit, false, LOG.REGULAR, null, false, null);
+						attacker.getController().onAttack(effect.getEffected(), effect, TYPE.REGULAR, reflectedHit, false, LOG.REGULAR, null, null);
 					}
 				}
 				break;
@@ -169,14 +169,14 @@ public class AttackShieldObserver extends AttackCalcObserver {
 							effectorDamage = attackResult.getDamage();
 					} else
 						damageProtected = hit;
-					int finalDamage = attackResult.getDamage() - damageProtected;
-					attackResult.setDamage((finalDamage <= 0 ? 0 : finalDamage));
+					int finalDamage = Math.max(0, attackResult.getDamage() - damageProtected);
+					attackResult.setDamage(finalDamage);
 					attackResult.setShieldType(shieldType.getId());
 					attackResult.setProtectedSkillId(effect.getSkillId());
 					attackResult.setProtectedDamage(effectorDamage);
 					attackResult.setProtectorId(effect.getEffectorId());
-					effect.getEffector().getController().onAttack(attacker, effect.getSkillId(), TYPE.PROTECTDMG, effectorDamage, false, LOG.REGULAR,
-						attackResult.getAttackStatus(), attackerEffect != null ? attackerEffect.getSkillTemplate().getActivationAttribute() != ActivationAttribute.PROVOKED : true, null);
+					effect.getEffector().getController().onAttack(attacker, attackerEffect, TYPE.PROTECTDMG, effectorDamage, false, LOG.REGULAR,
+						attackResult.getAttackStatus(), null);
 					// dont launch subeffect if damage is fully absorbed
 					if (!isPunchShield(attackerEffect))
 						attackResult.setLaunchSubEffect(false);
