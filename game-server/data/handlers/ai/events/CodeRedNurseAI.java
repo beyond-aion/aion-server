@@ -10,7 +10,6 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.time.ServerTime;
 
 import ai.GeneralNpcAI;
 
@@ -29,12 +28,12 @@ public class CodeRedNurseAI extends GeneralNpcAI {
 		switch (getNpcId()) {
 			case 831435: // Jorpine (MON-THU)
 			case 831436: // Yennu (MON-THU)
-			case 831437: // Dalloren (FRI-SAT)
-			case 831518: // Dalliea (FRI-SAT)
+			case 831437: // Dalloren (FRI-SUN)
+			case 831518: // Dalliea (FRI-SUN)
 			case 831441: // Hylian (MON-THU)
 			case 831442: // Rordah (MON-THU)
-			case 831443: // Mazka (FRI-SAT)
-			case 831524: // Desha (FRI-SAT)
+			case 831443: // Mazka (FRI-SUN)
+			case 831524: // Desha (FRI-SUN)
 				super.handleDialogStart(player);
 				break;
 			default:
@@ -52,66 +51,17 @@ public class CodeRedNurseAI extends GeneralNpcAI {
 		}
 		if (dialogActionId == SETPRO1) {
 			int skillId = 0;
-			int RemoveSkillId = 0;
 			switch (getNpcId()) {
-				case 831435: // Jorpine (MON-THU)
-				case 831441: {// Hylian (MON-THU)
-					RemoveSkillId = 21281;
-					skillId = 21280;
-					break;
-				}
-				case 831436: // Yennu (MON-THU)
-				case 831442: { // Rordah (MON-THU)
-					RemoveSkillId = 21280;
-					skillId = 21281;
-					break;
-				}
-				case 831437: // Dalloren (FRI-SAT)
-				case 831524: { // Desha (FRI-SAT)
-					RemoveSkillId = 21283;
-					skillId = 21309;
-					break;
-				}
-				case 831518: // Dalliea (FRI-SAT)
-				case 831443: { // Mazka (FRI-SAT)
-					RemoveSkillId = 21309;
-					skillId = 21283;
-					break;
-				}
+				case 831435, 831441 -> skillId = 21280; // Jorpine / Hylian (MON-THU)
+				case 831436, 831442 -> skillId = 21281; // Yennu / Rordah (MON-THU)
+				case 831437, 831443 -> skillId = 21283; // Dalloren / Mazka (FRI-SUN)
+				case 831518, 831524 -> skillId = 21309; // Dalliea / Desha (FRI-SUN)
 			}
-			// only one buff at the same time
-			player.getEffectController().removeEffect(RemoveSkillId);
-			SkillEngine.getInstance().getSkill(getOwner(), skillId, 1, player).useWithoutPropSkill();
+			if (skillId != 0)
+				SkillEngine.getInstance().getSkill(getOwner(), skillId, 1, player).useWithoutPropSkill();
 		} else if (dialogActionId == QUEST_SELECT && questId != 0) {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 10, questId));
 		}
 		return true;
-	}
-
-	@Override
-	protected void handleSpawned() {
-		int currentDay = ServerTime.now().getDayOfWeek().getValue();
-		switch (getNpcId()) {
-			case 831435: // Jorpine (MON-THU)
-			case 831436: // Yennu (MON-THU)
-			case 831441: // Hylian (MON-THU)
-			case 831442: {// Rordah (MON-THU)
-				if (currentDay >= 1 && currentDay <= 4)
-					super.handleSpawned();
-				else if (!isDead())
-					getOwner().getController().delete();
-				break;
-			}
-			case 831437: // Dalloren (FRI-SAT)
-			case 831518: // Dalliea (FRI-SAT)
-			case 831443: // Mazka (FRI-SAT)
-			case 831524: { // Deshna (FRI-SAT)
-				if (currentDay >= 5 && currentDay <= 7)
-					super.handleSpawned();
-				else if (!isDead())
-					getOwner().getController().delete();
-				break;
-			}
-		}
 	}
 }

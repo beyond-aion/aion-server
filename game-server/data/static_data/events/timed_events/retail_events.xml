@@ -2489,20 +2489,24 @@
 				<spawn npc_id="831434" respawn_time="295">
 					<spot x="1440.2000" y="1493.8000" z="573" h="29" />
 				</spawn>
-				<!-- Jorpine (MON-THU) -->
+				<!-- Jorpine -->
 				<spawn npc_id="831435" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1438.3000" y="1496.2000" z="573" h="29" />
 				</spawn>
-				<!-- Yennu (MON-THU) -->
+				<!-- Yennu -->
 				<spawn npc_id="831436" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1441.8000" y="1494.5000" z="573" h="21" />
 				</spawn>
-				<!-- Dalloren (FRI-SAT) -->
+				<!-- Dalloren -->
 				<spawn npc_id="831437" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1438.3000" y="1496.2000" z="573" h="29" />
 				</spawn>
-				<!-- Dalliea (FRI-SAT) -->
+				<!-- Dalliea -->
 				<spawn npc_id="831518" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1441.8000" y="1494.5000" z="573" h="21" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2524,20 +2528,24 @@
 				<spawn npc_id="831434" respawn_time="295">
 					<spot x="1642.2000" y="1471.3000" z="119.6000" h="15" />
 				</spawn>
-				<!-- Jorpine (MON-THU) -->
+				<!-- Jorpine -->
 				<spawn npc_id="831435" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1644.3000" y="1472.4000" z="119.5000" h="19" />
 				</spawn>
-				<!-- Yennu (MON-THU) -->
+				<!-- Yennu -->
 				<spawn npc_id="831436" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1642" y="1474.8000" z="119.5000" h="13" />
 				</spawn>
-				<!-- Dalloren (FRI-SAT) -->
+				<!-- Dalloren -->
 				<spawn npc_id="831437" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1644.3000" y="1472.4000" z="119.5000" h="19" />
 				</spawn>
-				<!-- Dalliea (FRI-SAT) -->
+				<!-- Dalliea -->
 				<spawn npc_id="831518" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1642" y="1474.8000" z="119.5000" h="13" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2559,20 +2567,24 @@
 				<spawn npc_id="831434" respawn_time="295">
 					<spot x="328.5000" y="2713.5000" z="181.7000" h="113" />
 				</spawn>
-				<!-- Jorpine (MON-THU) -->
+				<!-- Jorpine -->
 				<spawn npc_id="831435" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="328.8000" y="2711.7000" z="181.5000" h="110" />
 				</spawn>
-				<!-- Yennu (MON-THU) -->
+				<!-- Yennu -->
 				<spawn npc_id="831436" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="331" y="2715.3000" z="181.6000" h="109" />
 				</spawn>
-				<!-- Dalloren (FRI-SAT) -->
+				<!-- Dalloren -->
 				<spawn npc_id="831437" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="328.8000" y="2711.7000" z="181.5000" h="110" />
 				</spawn>
-				<!-- Dalliea (FRI-SAT) -->
+				<!-- Dalliea -->
 				<spawn npc_id="831518" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="331" y="2715.3000" z="181.6000" h="109" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2594,20 +2606,24 @@
 				<spawn npc_id="831434" respawn_time="295">
 					<spot x="2451.6001" y="301.1000" z="415.1000" h="21" />
 				</spawn>
-				<!-- Jorpine (MON-THU) -->
+				<!-- Jorpine -->
 				<spawn npc_id="831435" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="2453.5000" y="302.2000" z="415.1000" h="23" />
 				</spawn>
-				<!-- Yennu (MON-THU) -->
+				<!-- Yennu -->
 				<spawn npc_id="831436" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="2450" y="303.8000" z="415.1000" h="12" />
 				</spawn>
-				<!-- Dalloren (FRI-SAT) -->
+				<!-- Dalloren -->
 				<spawn npc_id="831437" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="2453.5000" y="302.2000" z="415.1000" h="23" />
 				</spawn>
-				<!-- Dalliea (FRI-SAT) -->
+				<!-- Dalliea -->
 				<spawn npc_id="831518" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="2450" y="303.8000" z="415.1000" h="12" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2629,20 +2645,24 @@
 				<spawn npc_id="831434" respawn_time="295">
 					<spot x="1361.8000" y="240.1000" z="589.7000" h="34" />
 				</spawn>
-				<!-- Jorpine (MON-THU) -->
+				<!-- Jorpine -->
 				<spawn npc_id="831435" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1362.7000" y="243.7000" z="589.7000" h="34" />
 				</spawn>
-				<!-- Yennu (MON-THU) -->
+				<!-- Yennu -->
 				<spawn npc_id="831436" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1357.2000" y="241.8000" z="589.7000" h="34" />
 				</spawn>
-				<!-- Dalloren (FRI-SAT) -->
+				<!-- Dalloren -->
 				<spawn npc_id="831437" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1362.7000" y="243.7000" z="589.7000" h="34" />
 				</spawn>
-				<!-- Dalliea (FRI-SAT) -->
+				<!-- Dalliea -->
 				<spawn npc_id="831518" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1357.2000" y="241.8000" z="589.7000" h="34" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2664,20 +2684,24 @@
 				<spawn npc_id="831434" respawn_time="295">
 					<spot x="1463.7000" y="1516.7000" z="32" h="41" />
 				</spawn>
-				<!-- Jorpine (MON-THU) -->
+				<!-- Jorpine -->
 				<spawn npc_id="831435" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1463.6000" y="1518.5000" z="31.7000" h="41" />
 				</spawn>
-				<!-- Yennu (MON-THU) -->
+				<!-- Yennu -->
 				<spawn npc_id="831436" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1460" y="1516.1000" z="31.8000" h="41" />
 				</spawn>
-				<!-- Dalloren (FRI-SAT) -->
+				<!-- Dalloren -->
 				<spawn npc_id="831437" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1463.6000" y="1518.5000" z="31.7000" h="41" />
 				</spawn>
-				<!-- Dalliea (FRI-SAT) -->
+				<!-- Dalliea -->
 				<spawn npc_id="831518" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1460" y="1516.1000" z="31.8000" h="41" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2699,20 +2723,24 @@
 				<spawn npc_id="831440" respawn_time="295">
 					<spot x="1340.3000" y="1417" z="208" h="65" />
 				</spawn>
-				<!-- Hylian (MON-THU) -->
+				<!-- Hylian -->
 				<spawn npc_id="831441" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1338.3000" y="1418.3000" z="208.1000" h="58" />
 				</spawn>
-				<!-- Rordah (MON-THU) -->
+				<!-- Rordah -->
 				<spawn npc_id="831442" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1338.1000" y="1415.2000" z="208" h="61" />
 				</spawn>
-				<!-- Mazka (FRI-SAT) -->
+				<!-- Mazka -->
 				<spawn npc_id="831443" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1338.3000" y="1418.3000" z="208.1000" h="58" />
 				</spawn>
-				<!-- Deshna (FRI-SAT) -->
+				<!-- Deshna -->
 				<spawn npc_id="831524" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1338.1000" y="1415.2000" z="208" h="61" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2734,20 +2762,24 @@
 				<spawn npc_id="831440" respawn_time="295">
 					<spot x="1679.5000" y="1798.9000" z="252" h="114" />
 				</spawn>
-				<!-- Hylian (MON-THU) -->
+				<!-- Hylian -->
 				<spawn npc_id="831441" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1680.4000" y="1802.1000" z="251.9000" h="5" />
 				</spawn>
-				<!-- Rordah (MON-THU) -->
+				<!-- Rordah -->
 				<spawn npc_id="831442" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1681.2000" y="1797.5000" z="251.7000" h="4" />
 				</spawn>
-				<!-- Mazka (FRI-SAT) -->
+				<!-- Mazka -->
 				<spawn npc_id="831443" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1680.4000" y="1802.1000" z="251.9000" h="5" />
 				</spawn>
-				<!-- Deshna (FRI-SAT) -->
+				<!-- Deshna -->
 				<spawn npc_id="831524" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1681.2000" y="1797.5000" z="251.7000" h="4" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2769,20 +2801,24 @@
 				<spawn npc_id="831440" respawn_time="295">
 					<spot x="284.3000" y="2263.1001" z="447.5000" h="23" />
 				</spawn>
-				<!-- Hylian (MON-THU) -->
+				<!-- Hylian -->
 				<spawn npc_id="831441" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="286.6000" y="2263.5000" z="448" h="5" />
 				</spawn>
-				<!-- Rordah (MON-THU) -->
+				<!-- Rordah -->
 				<spawn npc_id="831442" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="283.9000" y="2267.1001" z="447.5000" h="115" />
 				</spawn>
-				<!-- Mazka (FRI-SAT) -->
+				<!-- Mazka -->
 				<spawn npc_id="831443" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="286.6000" y="2263.5000" z="448" h="5" />
 				</spawn>
-				<!-- Deshna (FRI-SAT) -->
+				<!-- Deshna -->
 				<spawn npc_id="831524" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="283.9000" y="2267.1001" z="447.5000" h="115" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2804,20 +2840,24 @@
 				<spawn npc_id="831440" respawn_time="295">
 					<spot x="355.7000" y="320.8000" z="229.1000" h="25" />
 				</spawn>
-				<!-- Hylian (MON-THU) -->
+				<!-- Hylian -->
 				<spawn npc_id="831441" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="357.3000" y="322.7000" z="230" h="28" />
 				</spawn>
-				<!-- Rordah (MON-THU) -->
+				<!-- Rordah -->
 				<spawn npc_id="831442" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="353.2000" y="323.1000" z="229.1000" h="26" />
 				</spawn>
-				<!-- Mazka (FRI-SAT) -->
+				<!-- Mazka -->
 				<spawn npc_id="831443" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="357.3000" y="322.7000" z="230" h="28" />
 				</spawn>
-				<!-- Deshna (FRI-SAT) -->
+				<!-- Deshna -->
 				<spawn npc_id="831524" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="353.2000" y="323.1000" z="229.1000" h="26" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2839,20 +2879,24 @@
 				<spawn npc_id="831440" respawn_time="295">
 					<spot x="2901.3999" y="2441.5000" z="17" h="12" />
 				</spawn>
-				<!-- Hylian (MON-THU) -->
+				<!-- Hylian -->
 				<spawn npc_id="831441" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="2903" y="2441.6001" z="16.7000" h="13" />
 				</spawn>
-				<!-- Rordah (MON-THU) -->
+				<!-- Rordah -->
 				<spawn npc_id="831442" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="2900.7000" y="2444.3999" z="16.9000" h="17" />
 				</spawn>
-				<!-- Mazka (FRI-SAT) -->
+				<!-- Mazka -->
 				<spawn npc_id="831443" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="2903" y="2441.6001" z="16.7000" h="13" />
 				</spawn>
-				<!-- Deshna (FRI-SAT) -->
+				<!-- Deshna -->
 				<spawn npc_id="831524" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="2900.7000" y="2444.3999" z="16.9000" h="17" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2874,20 +2918,24 @@
 				<spawn npc_id="831440" respawn_time="295">
 					<spot x="1841.2000" y="2844.2000" z="536.1000" h="37" />
 				</spawn>
-				<!-- Hylian (MON-THU) -->
+				<!-- Hylian -->
 				<spawn npc_id="831441" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1841.9000" y="2846.6001" z="537" h="39" />
 				</spawn>
-				<!-- Rordah (MON-THU) -->
+				<!-- Rordah -->
 				<spawn npc_id="831442" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="1837.4000" y="2845.3999" z="536.1000" h="39" />
 				</spawn>
-				<!-- Mazka (FRI-SAT) -->
+				<!-- Mazka -->
 				<spawn npc_id="831443" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1841.9000" y="2846.6001" z="537" h="39" />
 				</spawn>
-				<!-- Deshna (FRI-SAT) -->
+				<!-- Deshna -->
 				<spawn npc_id="831524" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="1837.4000" y="2845.3999" z="536.1000" h="39" />
 				</spawn>
 				<!-- Medical Tent -->
@@ -2909,20 +2957,24 @@
 				<spawn npc_id="831434" respawn_time="295">
 					<spot x="2972.7000" y="935.6000" z="1539" h="96" />
 				</spawn>
-				<!-- Jorpine (MON-THU) -->
+				<!-- Jorpine -->
 				<spawn npc_id="831435" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="2972" y="934.7000" z="1539" h="99" />
 				</spawn>
-				<!-- Yennu (MON-THU) -->
+				<!-- Yennu -->
 				<spawn npc_id="831436" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="2975" y="934.9000" z="1539" h="101" />
 				</spawn>
-				<!-- Dalloren (FRI-SAT) -->
+				<!-- Dalloren -->
 				<spawn npc_id="831437" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="2972" y="934.7000" z="1539" h="99" />
 				</spawn>
-				<!-- Dalliea (FRI-SAT) -->
+				<!-- Dalliea -->
 				<spawn npc_id="831518" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="2975" y="934.9000" z="1539" h="101" />
 				</spawn>
 				<!-- Largos -->
@@ -2933,20 +2985,24 @@
 				<spawn npc_id="831440" respawn_time="295">
 					<spot x="941.9000" y="2971.3000" z="1646.3000" h="44" />
 				</spawn>
-				<!-- Hylian (MON-THU) -->
+				<!-- Hylian -->
 				<spawn npc_id="831441" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="941.6000" y="2973.3000" z="1646.3000" h="44" />
 				</spawn>
-				<!-- Rordah (MON-THU) -->
+				<!-- Rordah -->
 				<spawn npc_id="831442" respawn_time="295">
+					<temporary_spawn weekdays="MONDAY TUESDAY WEDNESDAY THURSDAY" />
 					<spot x="938.8000" y="2970.5000" z="1646.3000" h="42" />
 				</spawn>
-				<!-- Mazka (FRI-SAT) -->
+				<!-- Mazka -->
 				<spawn npc_id="831443" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="941.6000" y="2973.3000" z="1646.3000" h="44" />
 				</spawn>
-				<!-- Deshna (FRI-SAT) -->
+				<!-- Deshna -->
 				<spawn npc_id="831524" respawn_time="295">
+					<temporary_spawn weekdays="FRIDAY SATURDAY SUNDAY" />
 					<spot x="938.8000" y="2970.5000" z="1646.3000" h="42" />
 				</spawn>
 				<!-- Medical Tent -->

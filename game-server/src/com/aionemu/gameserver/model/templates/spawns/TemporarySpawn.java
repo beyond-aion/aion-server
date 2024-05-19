@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
+import java.time.DayOfWeek;
+import java.util.List;
+
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -7,6 +10,7 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.services.GameTimeService;
+import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.utils.time.gametime.GameTime;
 
 /**
@@ -15,6 +19,9 @@ import com.aionemu.gameserver.utils.time.gametime.GameTime;
 @XmlAccessorType(XmlAccessType.NONE)
 @XmlType(name = "TemporarySpawn")
 public class TemporarySpawn {
+
+	@XmlAttribute(name = "weekdays")
+	private List<DayOfWeek> weekdays;
 
 	@XmlAttribute(name = "spawn_time")
 	private String spawnTime; // *.*.* hour.day.month (* = all, /n = every nth hour/day/month starting from 0)
@@ -74,14 +81,21 @@ public class TemporarySpawn {
 	}
 
 	public boolean canSpawn() {
+		if (weekdays != null && !weekdays.isEmpty() && !weekdays.contains(ServerTime.now().getDayOfWeek()))
+			return false;
 		return isTime(spawnHour, spawnDay, spawnMonth);
 	}
 
 	public boolean canDespawn() {
+		if (weekdays != null && !weekdays.isEmpty() && !weekdays.contains(ServerTime.now().getDayOfWeek()))
+			return true;
 		return isTime(despawnHour, despawnDay, despawnMonth);
 	}
 
 	public boolean isInSpawnTime() {
+		if (weekdays != null && !weekdays.isEmpty() && !weekdays.contains(ServerTime.now().getDayOfWeek()))
+			return false;
+
 		GameTime gameTime = GameTimeService.getInstance().getGameTime();
 
 		if (spawnMonth != null && !checkDate(gameTime.getMonth(), spawnMonth, despawnMonth))

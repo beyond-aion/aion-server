@@ -154,9 +154,24 @@
 		<xs:attribute name="ai" type="xs:string"/>
 	</xs:complexType>
 	<xs:complexType name="TemporarySpawn">
+		<xs:attribute name="weekdays" type="WeekdayList"/>
 		<xs:attribute name="spawn_time" type="xs:string"/>
 		<xs:attribute name="despawn_time" type="xs:string"/>
 	</xs:complexType>
+	<xs:simpleType name="WeekdayList">
+		<xs:list itemType="Weekday" />
+	</xs:simpleType>
+	<xs:simpleType name="Weekday">
+		<xs:restriction base="xs:string">
+			<xs:enumeration value="MONDAY"/>
+			<xs:enumeration value="TUESDAY"/>
+			<xs:enumeration value="WEDNESDAY"/>
+			<xs:enumeration value="THURSDAY"/>
+			<xs:enumeration value="FRIDAY"/>
+			<xs:enumeration value="SATURDAY"/>
+			<xs:enumeration value="SUNDAY"/>
+		</xs:restriction>
+	</xs:simpleType>
 	<xs:simpleType name="SiegeModType">
 		<xs:restriction base="xs:string">
 			<xs:enumeration value="PEACE"/>
