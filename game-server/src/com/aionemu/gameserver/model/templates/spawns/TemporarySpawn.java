@@ -90,7 +90,7 @@ public class TemporarySpawn {
 		if (spawnDay != null && !checkDate(gameTime.getDay(), spawnDay, despawnDay))
 			return false;
 
-		if (spawnMonth == null && spawnDay == null && !checkHour(gameTime.getHour(), spawnHour, despawnHour))
+		if (spawnHour != null && !checkHour(gameTime.getHour(), spawnHour, despawnHour))
 			return false;
 
 		return true;

@@ -28,6 +28,7 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMapInstance;
 import com.aionemu.gameserver.world.WorldPosition;
 import com.aionemu.gameserver.world.geo.GeoService;
 
@@ -87,32 +88,32 @@ public class HousingService {
 		}
 	}
 
-	public void spawnHouses(int worldId, int instanceId, int registeredId) {
+	public void spawnHouses(WorldMapInstance instance, int registeredId) {
 		if (registeredId > 0) {
-			spawnStudio(worldId, instanceId, registeredId);
+			spawnStudio(instance.getMapId(), instance.getInstanceId(), registeredId);
 			return;
 		}
 		int spawnedCounter = 0;
-		for (HouseAddress address : DataManager.HOUSE_DATA.getAddresses(worldId)) {
+		for (HouseAddress address : DataManager.HOUSE_DATA.getAddresses(instance.getMapId())) {
 			if (address.getLand().getDefaultBuilding().getType() == BuildingType.PERSONAL_INS)
 				continue; // ignore studios
 
 			House customHouse = customHouses.get(address.getId());
 			if (customHouse == null) {
-				customHouse = new House(address, instanceId);
+				customHouse = new House(address, instance.getInstanceId());
 				// house without owner when acquired will be inserted to DB
 				customHouse.setPersistentState(PersistentState.NEW);
 				customHouses.put(address.getId(), customHouse);
 			}
 			WorldPosition position = World.getInstance().createPosition(address.getMapId(), address.getX(), address.getY(), address.getZ(), (byte) 0,
-				instanceId);
+				instance.getInstanceId());
 			customHouse.setPosition(position);
 			SpawnEngine.bringIntoWorld(customHouse);
-			GeoService.getInstance().setHouseDoorState(address.getMapId(), instanceId, address.getId(), customHouse.getDoorState());
+			GeoService.getInstance().setHouseDoorState(address.getMapId(), instance.getInstanceId(), address.getId(), customHouse.getDoorState());
 			spawnedCounter++;
 		}
 		if (spawnedCounter > 0) {
-			log.info("Spawned houses " + worldId + " [" + instanceId + "]: " + spawnedCounter);
+			log.info("Spawned " + spawnedCounter + " houses in " + instance);
 		}
 	}
 

@@ -1,121 +1,89 @@
 package com.aionemu.gameserver.spawnengine;
 
-import java.util.ArrayList;
-import java.util.List;
-import java.util.Map;
-import java.util.Map.Entry;
-import java.util.Set;
-import java.util.concurrent.ConcurrentHashMap;
+import java.util.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.TemporarySpawn;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author xTz, Neon
  */
 public class TemporarySpawnEngine {
 
-	private static final Map<SpawnGroup, Set<Integer>> spawnGroups = new ConcurrentHashMap<>();
-	private static List<VisibleObject> spawnedObjects = new ArrayList<>();
+	private static final Map<SpawnGroup, Set<Integer>> spawnGroups = new HashMap<>();
+	private static final Set<VisibleObject> spawnedObjects = new HashSet<>();
 
-	public static void spawnAll() {
-		spawn(true);
-	}
-
-	public static void onHourChange() {
+	public static synchronized void onHourChange() {
 		despawn();
-		synchronized (spawnGroups) { // sync to avoid incorrect spawns on concurrent onInstanceDestroy call
-			spawn(false);
-		}
+		spawn();
 	}
 
 	private static void despawn() {
 		List<VisibleObject> remainingObjects = new ArrayList<>(spawnedObjects.size());
-		synchronized (spawnedObjects) {
-			spawnedObjects.forEach(object -> {
-				if (object.getSpawn().getTemporarySpawn().canDespawn()) {
-					if (object instanceof Npc npc && !npc.isDead() && object.getSpawn().hasPool())
-						object.getSpawn().setUse(npc.getInstanceId(), false);
-					object.getController().deleteIfAliveOrCancelRespawn();
-				} else {
-					remainingObjects.add(object);
-				}
-			});
-			spawnedObjects = remainingObjects;
-		}
+		spawnedObjects.forEach(object -> {
+			if (object.getSpawn().getTemporarySpawn().canDespawn()) {
+				if (object instanceof Npc npc && !npc.isDead() && object.getSpawn().hasPool())
+					object.getSpawn().setUse(npc.getInstanceId(), false);
+				object.getController().deleteIfAliveOrCancelRespawn();
+			} else {
+				remainingObjects.add(object);
+			}
+		});
+		spawnedObjects.retainAll(remainingObjects);
 	}
 
-	private static void spawn(boolean startCheck) {
-		for (Entry<SpawnGroup, Set<Integer>> entry : spawnGroups.entrySet()) {
-			Set<Integer> instanceIds = entry.getValue();
+	private static void spawn() {
+		spawnGroups.forEach((spawn, instanceIds) -> {
 			if (instanceIds.isEmpty())
-				continue;
-			SpawnGroup spawn = entry.getKey();
+				return;
 			if (spawn.hasPool()) {
 				TemporarySpawn temporarySpawn = spawn.getTemporarySpawn();
-				if (temporarySpawn.canSpawn() || (startCheck && temporarySpawn.isInSpawnTime())) {
+				if (temporarySpawn.canSpawn()) {
 					for (Integer instanceId : instanceIds) {
 						spawn.resetTemplates(instanceId);
 						for (int pool = 0; pool < spawn.getPool(); pool++) {
 							SpawnTemplate template = spawn.getRndTemplate(instanceId);
-							spawn(template, instanceId);
+							SpawnEngine.spawnObject(template, instanceId);
 						}
 					}
 				}
 			} else {
 				for (SpawnTemplate template : spawn.getSpawnTemplates()) {
 					TemporarySpawn temporarySpawn = template.getTemporarySpawn();
-					if (temporarySpawn.canSpawn() || (startCheck && temporarySpawn.isInSpawnTime()))
-						spawn(template, instanceIds);
+					if (temporarySpawn.canSpawn())
+						instanceIds.forEach(instanceId -> SpawnEngine.spawnObject(template, instanceId));
 				}
 			}
-		}
-	}
-
-	private static void spawn(SpawnTemplate template, Set<Integer> instanceIds) {
-		instanceIds.forEach(instanceId -> spawn(template, instanceId));
-	}
-
-	private static void spawn(SpawnTemplate template, int instanceId) {
-		VisibleObject object = SpawnEngine.spawnObject(template, instanceId);
-		if (object != null) {
-			synchronized (spawnedObjects) {
-				spawnedObjects.add(object);
-			}
-		}
-	}
-
-	public static void addSpawnGroup(SpawnGroup spawnGroup, int instanceId) {
-		spawnGroups.compute(spawnGroup, (spawn, instances) -> {
-			if (instances == null) {
-				instances = ConcurrentHashMap.newKeySet();
-			}
-			instances.add(instanceId);
-			return instances;
 		});
 	}
 
-	public static void onInstanceDestroy(int worldId, int instanceId) {
-		synchronized (spawnGroups) {
-			spawnGroups.forEach((spawnGroup, instanceIds) -> {
-				if (spawnGroup.getWorldId() == worldId)
-					instanceIds.remove(instanceId);
-				if (instanceIds.isEmpty())
-					spawnGroups.remove(spawnGroup);
-			});
-		}
+	public static synchronized void registerSpawned(VisibleObject object) {
+		spawnedObjects.add(object);
 	}
 
-	public static void updateSpawned(int oldObjId, VisibleObject respawn) {
-		if (respawn == null || respawn.getSpawn().getTemporarySpawn() == null)
-			return;
-		synchronized (spawnedObjects) {
-			spawnedObjects.stream().filter(obj -> obj.getObjectId() == oldObjId).findFirst().ifPresent(spawnedObjects::remove);
-			spawnedObjects.add(respawn);
-		}
+	public static synchronized void unregisterSpawned(int objectId) {
+		spawnedObjects.removeIf(o -> o.getObjectId() == objectId);
 	}
 
+	public static synchronized void addSpawnGroup(SpawnGroup spawnGroup, int instanceId) {
+		spawnGroups.computeIfAbsent(spawnGroup, k -> new HashSet<>()).add(instanceId);
+	}
+
+	public static synchronized void unregister(EventTemplate eventTemplate) {
+		spawnedObjects.removeIf(o -> o.getSpawn().getEventTemplate() == eventTemplate);
+		spawnGroups.keySet().removeIf(s -> s.getEventTemplate() == eventTemplate);
+	}
+
+	public static synchronized void onInstanceDestroy(WorldMapInstance instance) {
+		spawnedObjects.removeIf(o -> instance.equals(o.getWorldMapInstance()));
+		spawnGroups.forEach((spawnGroup, instanceIds) -> {
+			if (spawnGroup.getWorldId() == instance.getMapId())
+				instanceIds.remove(instance.getInstanceId());
+		});
+	}
 }

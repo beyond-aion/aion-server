@@ -61,7 +61,6 @@ import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
 import com.aionemu.gameserver.services.player.PlayerLimitService;
 import com.aionemu.gameserver.services.transfers.PlayerTransferService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
-import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionAutoFillTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.AuctionEndTask;
 import com.aionemu.gameserver.taskmanager.tasks.housing.MaintenanceTask;
@@ -196,7 +195,6 @@ public class GameServer {
 		ChallengeTaskService.getInstance();
 
 		SpawnEngine.spawnAll();
-		TemporarySpawnEngine.spawnAll();
 		TownService.getInstance();
 		FlyRingService.getInstance();
 		RiftService.getInstance().initRifts();

@@ -4,7 +4,6 @@ import java.io.IOException;
 import java.time.LocalDateTime;
 import java.time.ZonedDateTime;
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -25,7 +24,6 @@ import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.event.InventoryDrop;
 import com.aionemu.gameserver.model.templates.quest.QuestCategory;
 import com.aionemu.gameserver.model.templates.spawns.Spawn;
-import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnMap;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
@@ -40,10 +38,13 @@ import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
 import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
+import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMap;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * @author Neon
@@ -87,38 +88,22 @@ public class Event {
 				return;
 			}
 		}
-		if (eventTemplate.getSpawns() != null && eventTemplate.getSpawns().size() > 0) { // TODO refactor SpawnEngine to use its methods
+		if (eventTemplate.getSpawns() != null && eventTemplate.getSpawns().size() > 0) {
 			for (SpawnMap map : eventTemplate.getSpawns().getTemplates()) {
 				DataManager.SPAWNS_DATA.addNewSpawnMap(map);
-				Collection<Integer> instanceIds = World.getInstance().getWorldMap(map.getMapId()).getAvailableInstanceIds();
-				for (Integer instanceId : instanceIds) {
-					int spawnCount = 0;
-					for (Spawn spawn : map.getSpawns()) {
-						spawn.setEventTemplate(eventTemplate);
-						SpawnGroup group = new SpawnGroup(map.getMapId(), spawn);
-						if (group.hasPool() && SpawnEngine.checkPool(group)) {
-							group.resetTemplates(instanceId);
-							for (int i = 0; i < group.getPool(); i++) {
-								SpawnTemplate t = group.getRndTemplate(instanceId);
-								if (t == null)
-									break;
-								SpawnEngine.spawnObject(t, instanceId);
-								spawnCount++;
-							}
-						} else {
-							for (SpawnTemplate t : group.getSpawnTemplates()) {
-								SpawnEngine.spawnObject(t, instanceId);
-								spawnCount++;
-							}
-						}
-						if (spawn.isCustom())
-							despawnNonEventSpawns(spawn.getNpcId(), map.getMapId(), instanceId);
-					}
-					log.info("Spawned event objects in " + map.getMapId() + " [" + instanceId + "]: " + spawnCount + " (" + eventTemplate.getName() + ")");
+				WorldMap worldMap = World.getInstance().getWorldMap(map.getMapId());
+				for (Spawn spawn : map.getSpawns()) {
+					spawn.setEventTemplate(eventTemplate);
+					if (spawn.isCustom())
+						despawnNonEventSpawns(spawn.getNpcId(), worldMap);
 				}
 			}
 			DataManager.SPAWNS_DATA.afterUnmarshal(null, null);
 			DataManager.SPAWNS_DATA.clearTemplates();
+			for (SpawnMap map : eventTemplate.getSpawns().getTemplates()) {
+				byte difficultId = map.getSpawns().stream().map(Spawn::getDifficultId).filter(d -> d != 0).findFirst().orElse((byte) 0);
+				World.getInstance().getWorldMap(map.getMapId()).forEach(instance -> SpawnEngine.spawnEventSpawns(instance, difficultId, 0, eventTemplate));
+			}
 		}
 
 		InventoryDrop inventoryDrop = eventTemplate.getInventoryDrop();
@@ -158,6 +143,7 @@ public class Event {
 			Config.load();
 		}
 		if (eventTemplate.getSpawns() != null && eventTemplate.getSpawns().size() > 0) {
+			TemporarySpawnEngine.unregister(eventTemplate);
 			int[] count = { 0 };
 			World.getInstance().forEachObject(o -> {
 				SpawnTemplate spawn = o.getSpawn();
@@ -286,13 +272,15 @@ public class Event {
 		return true;
 	}
 
-	private void despawnNonEventSpawns(int npcId, int mapId, int instanceId) {
-		World.getInstance().getWorldMap(mapId).getWorldMapInstance(instanceId).getNpcs(npcId).forEach(npc -> {
-			if (npc.getSpawn() != null && !npc.getSpawn().isEventSpawn() && !npc.getController().hasScheduledTask(TaskId.DECAY)) {
-				if (npc.getController().delete() && !RespawnService.hasRespawnTask(npc))
-					addOnEventEndTask(new RespawnService.RespawnTask(npc));
-			}
-		});
+	private void despawnNonEventSpawns(int npcId, WorldMap worldMap) {
+		for (WorldMapInstance worldMapInstance : worldMap) {
+			worldMapInstance.getNpcs(npcId).forEach(npc -> {
+				if (npc.getSpawn() != null && !npc.getSpawn().isEventSpawn() && !npc.getController().hasScheduledTask(TaskId.DECAY)) {
+					if (npc.getController().delete() && !RespawnService.hasRespawnTask(npc))
+						addOnEventEndTask(new RespawnService.RespawnTask(npc));
+				}
+			});
+		}
 	}
 
 	public boolean addOnEventEndTask(Runnable task) {

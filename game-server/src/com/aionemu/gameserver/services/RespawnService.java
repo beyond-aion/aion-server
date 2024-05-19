@@ -188,7 +188,8 @@ public class RespawnService {
 			VisibleObject respawn = SpawnEngine.spawnObject(spawnTemplate.hasPool() ? spawnTemplate.changeTemplate(instanceId) : spawnTemplate, instanceId);
 			if (respawn != null) {
 				RiftService.getInstance().updateSpawned(oldObjectId, respawn);
-				TemporarySpawnEngine.updateSpawned(oldObjectId, respawn);
+				if (respawn.getSpawn().isTemporarySpawn() && respawn.getObjectId() != oldObjectId)
+					TemporarySpawnEngine.unregisterSpawned(oldObjectId);
 			}
 		}
 

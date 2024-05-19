@@ -22,6 +22,8 @@ import com.aionemu.gameserver.model.templates.housing.BuildingType;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AutoGroupService;
+import com.aionemu.gameserver.services.event.Event;
+import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.TemporarySpawnEngine;
@@ -45,14 +47,14 @@ public class InstanceService {
 			throw new UnsupportedOperationException("Invalid call for next available instance  of " + worldId);
 
 		WorldMapInstance instance;
-		boolean onlyEventSpawns = false;
 		if (instanceHandlerSupplier == null) {
 			instance = WorldMapInstanceFactory.createWorldMapInstance(map, ownerId, InstanceEngine.getInstance()::getNewInstanceHandler, maxPlayers);
+			SpawnEngine.spawnInstance(instance, difficultyId, ownerId);
 		}	else {
 			instance = WorldMapInstanceFactory.createWorldMapInstance(map, ownerId, instanceHandlerSupplier, maxPlayers);
-			onlyEventSpawns = true;
+			EventService.getInstance().getActiveEvents().stream().map(Event::getEventTemplate).filter(t -> t.getSpawns() != null).forEach(
+				t -> SpawnEngine.spawnEventSpawns(instance, difficultyId, ownerId, t));
 		}
-		SpawnEngine.spawnInstance(worldId, instance.getInstanceId(), difficultyId, ownerId, onlyEventSpawns);
 		instance.getInstanceHandler().onInstanceCreate();
 
 		// finally start the checker
@@ -95,7 +97,7 @@ public class InstanceService {
 
 		log.info("Destroying instance:" + worldId + " " + instanceId);
 
-		TemporarySpawnEngine.onInstanceDestroy(worldId, instanceId); // first unregister all temporary spawns, then despawn mobs
+		TemporarySpawnEngine.onInstanceDestroy(instance); // first unregister all temporary spawns, then despawn mobs
 		for (VisibleObject obj : instance) {
 			if (obj instanceof Player player) {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_LEAVE_INSTANCE_FORCE(0));

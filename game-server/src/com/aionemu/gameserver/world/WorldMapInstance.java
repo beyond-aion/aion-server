@@ -337,4 +337,9 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 				consumer.accept(staticDoor);
 		});
 	}
+
+	@Override
+	public String toString() {
+		return "WorldMapInstance " + getMapId() + " [" + instanceId + "]";
+	}
 }

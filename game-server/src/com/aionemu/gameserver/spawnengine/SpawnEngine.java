@@ -12,16 +12,18 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
+import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTemplate;
-import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.rift.RiftManager;
 import com.aionemu.gameserver.world.World;
+import com.aionemu.gameserver.world.WorldMap;
+import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
  * This class is responsible for NPCs spawn management. Current implementation is temporal and will be replaced in the future.
@@ -30,12 +32,15 @@ import com.aionemu.gameserver.world.World;
  */
 public class SpawnEngine {
 
-	private static Logger log = LoggerFactory.getLogger(SpawnEngine.class);
+	private static final Logger log = LoggerFactory.getLogger(SpawnEngine.class);
 
 	public static VisibleObject spawnObject(SpawnTemplate spawn, int instanceIndex) {
 		VisibleObject visObj = getSpawnedObject(spawn, instanceIndex);
-		if (visObj != null && visObj.getPosition().getMapRegion() != null) {
-			visObj.getPosition().getWorldMapInstance().getInstanceHandler().onSpawn(visObj);
+		if (visObj != null) {
+			if (visObj.getSpawn() != null && visObj.getSpawn().isTemporarySpawn())
+				TemporarySpawnEngine.registerSpawned(visObj);
+			if (visObj.isSpawned()) // WalkerFormator.processClusteredNpc delays spawn of pooled walkers
+				visObj.getPosition().getWorldMapInstance().getInstanceHandler().onSpawn(visObj);
 		}
 		return visObj;
 	}
@@ -115,78 +120,75 @@ public class SpawnEngine {
 	 */
 	public static void spawnAll() {
 		DataManager.WORLD_MAPS_DATA.forEachParalllel(worldMapTemplate -> {
-			if (!worldMapTemplate.isInstance())
-				spawnBasedOnTemplate(worldMapTemplate);
+			WorldMap worldMap = World.getInstance().getWorldMap(worldMapTemplate.getMapId());
+			if (!worldMap.isInstanceType())
+				worldMap.forEach(instance -> spawnInstance(instance, (byte) 0, instance.getOwnerId()));
 		});
 		DataManager.SPAWNS_DATA.clearTemplates();
 		printWorldSpawnStats();
 	}
 
-	private static void spawnBasedOnTemplate(WorldMapTemplate worldMapTemplate) {
-		int twinSpawns = worldMapTemplate.getTwinCount();
-		if (twinSpawns == 0)
-			twinSpawns = 1;
-		twinSpawns += worldMapTemplate.getBeginnerTwinCount();
-		final int mapId = worldMapTemplate.getMapId();
-
-		for (int instanceId = 1; instanceId <= twinSpawns; instanceId++) {
-			spawnInstance(mapId, instanceId, (byte) 0);
-		}
+	public static void spawnInstance(WorldMapInstance instance, byte difficultId, int ownerId) {
+		spawnInstance(instance, difficultId, ownerId, null);
 	}
 
-	public static void spawnInstance(int worldId, int instanceId, byte difficultId) {
-		spawnInstance(worldId, instanceId, difficultId, 0, false);
+	public static void spawnEventSpawns(WorldMapInstance instance, byte difficultId, int ownerId, EventTemplate eventTemplate) {
+		spawnInstance(instance, difficultId, ownerId, eventTemplate);
 	}
 
-	public static void spawnInstance(int worldId, int instanceId, byte difficultId, int ownerId, boolean onlyEventSpawns) {
-		List<SpawnGroup> worldSpawns = DataManager.SPAWNS_DATA.getSpawnsByWorldId(worldId);
-		if (!onlyEventSpawns)
-			StaticDoorSpawnManager.spawnTemplate(worldId, instanceId);
+	private static void spawnInstance(WorldMapInstance instance, byte difficultId, int ownerId, EventTemplate eventTemplate) {
+		List<SpawnGroup> worldSpawns = DataManager.SPAWNS_DATA.getSpawnsByWorldId(instance.getMapId());
+		if (eventTemplate == null)
+			StaticDoorSpawnManager.spawnTemplate(instance);
 
 		int spawnedCounter = 0;
 		if (worldSpawns != null) {
 			for (SpawnGroup spawn : worldSpawns) {
-				if (onlyEventSpawns && spawn.getEventTemplate() == null)
+				if (eventTemplate != null && eventTemplate != spawn.getEventTemplate())
 					continue;
 				if (spawn.getDifficultId() != 0 && spawn.getDifficultId() != difficultId)
 					continue;
 
 				if (spawn.isTemporarySpawn()) {
-					TemporarySpawnEngine.addSpawnGroup(spawn, instanceId);
-					continue;
+					TemporarySpawnEngine.addSpawnGroup(spawn, instance.getInstanceId());
+					if (!spawn.getTemporarySpawn().isInSpawnTime())
+						continue;
 				}
 
 				if (spawn.getHandlerType() != null) {
 					switch (spawn.getHandlerType()) {
-						case RIFT:
-							RiftManager.addRiftSpawnTemplate(spawn);
-							break;
-						case STATIC:
-							StaticObjectSpawnManager.spawnTemplate(spawn, instanceId);
-							break;
+						case RIFT -> RiftManager.addRiftSpawnTemplate(spawn);
+						case STATIC -> StaticObjectSpawnManager.spawnTemplate(spawn, instance.getInstanceId());
 					}
 				} else if (spawn.hasPool() && checkPool(spawn)) {
-					spawn.resetTemplates(instanceId);
+					spawn.resetTemplates(instance.getInstanceId());
 					for (int i = 0; i < spawn.getPool(); i++) {
-						SpawnTemplate template = spawn.getRndTemplate(instanceId);
+						SpawnTemplate template = spawn.getRndTemplate(instance.getInstanceId());
 						if (template == null)
 							break;
-						spawnObject(template, instanceId);
+						spawnObject(template, instance.getInstanceId());
 						spawnedCounter++;
 					}
 				} else {
 					for (SpawnTemplate template : spawn.getSpawnTemplates()) {
-						spawnObject(template, instanceId);
+						if (template.getTemporarySpawn() != null && !template.getTemporarySpawn().isInSpawnTime())
+							continue;
+						spawnObject(template, instance.getInstanceId());
 						spawnedCounter++;
 					}
 				}
 			}
-			if (!onlyEventSpawns)
-				WalkerFormator.organizeAndSpawn(worldId, instanceId);
+			if (eventTemplate == null)
+				WalkerFormator.organizeAndSpawn(instance.getMapId(), instance.getInstanceId());
 		}
-		log.info("Spawned " + worldId + " [" + instanceId + "]: " + spawnedCounter);
-		if (!onlyEventSpawns)
-			HousingService.getInstance().spawnHouses(worldId, instanceId, ownerId);
+		if (spawnedCounter > 0) {
+			if (eventTemplate == null)
+				log.info("Spawned " + spawnedCounter + " objects in " + instance);
+			else
+				log.info('[' + eventTemplate.getName() + "] Spawned " + spawnedCounter + " event objects in " + instance);
+		}
+		if (eventTemplate == null)
+			HousingService.getInstance().spawnHouses(instance, ownerId);
 	}
 
 	public static boolean checkPool(SpawnGroup spawn) {

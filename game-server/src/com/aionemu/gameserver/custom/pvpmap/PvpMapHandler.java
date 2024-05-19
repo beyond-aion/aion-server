@@ -74,7 +74,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	@Override
 	public void onInstanceCreate() {
-		StaticDoorSpawnManager.spawnTemplate(mapId, instance.getInstanceId());
+		StaticDoorSpawnManager.spawnTemplate(instance);
 		instance.forEachDoor(door -> door.setOpen(true));
 		addRespawnLocations();
 		startSupplyTask();
