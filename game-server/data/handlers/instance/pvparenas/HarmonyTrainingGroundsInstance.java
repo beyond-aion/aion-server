@@ -1,7 +1,7 @@
 package instance.pvparenas;
 
 import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
 
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.flyring.FlyRing;
@@ -193,7 +193,7 @@ public class HarmonyTrainingGroundsInstance extends PvPArenaInstance {
 	}
 
 	@Override
-	protected List<PvPArenaPlayerReward> getArenaRewards() {
+	protected Collection<PvPArenaPlayerReward> getArenaRewards() {
 		return new ArrayList<>(((HarmonyArenaScore) instanceScore).getHarmonyGroupInside());
 	}
 

@@ -110,18 +110,14 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void leaveInstance(Player player) {
-		if (player.getPosition().getMapId() != mapId) // Check if player has not already left
-			return;
-
-		TeleportService.moveToInstanceExit(player, mapId, player.getRace());
-		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
-			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));
+		if (instance.equals(player.getWorldMapInstance()))
+			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
 	@Override
 	public void onLeaveInstance(Player player) {
 		PvpInstancePlayerReward reward = instanceScore.getPlayerReward(player.getObjectId());
-		if (reward != null)
+		if (reward != null && instanceScore.getInstanceProgressionType() != InstanceProgressionType.END_PROGRESS)
 			instanceScore.removePlayerReward(reward);
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));

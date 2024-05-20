@@ -126,11 +126,6 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 		return false;
 	}
 
-	@Override
-	public void addPlayerReward(PvPArenaPlayerReward reward) {
-		super.addPlayerReward(reward);
-	}
-
 	public void portToPosition(Player player) {
 		int objectId = player.getObjectId();
 		regPlayerReward(player);

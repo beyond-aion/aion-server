@@ -2,6 +2,7 @@ package instance.pvparenas;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME;
 
+import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -231,7 +232,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		return (int) (number * rate * configRate);
 	}
 
-	protected List<PvPArenaPlayerReward> getArenaRewards() {
+	protected Collection<PvPArenaPlayerReward> getArenaRewards() {
 		return instanceScore.getPlayerRewards();
 	}
 

@@ -1,7 +1,8 @@
 package com.aionemu.gameserver.model.instance.instancescore;
 
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Collection;
+import java.util.Map;
+import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
@@ -11,32 +12,27 @@ import com.aionemu.gameserver.model.instance.playerreward.InstancePlayerReward;
  */
 public class InstanceScore<T extends InstancePlayerReward> {
 
-	private final List<T> playerRewards = new ArrayList<>();
+	private final Map<Integer, T> playerRewards = new ConcurrentHashMap<>();
 	private InstanceProgressionType instanceProgressionType = InstanceProgressionType.START_PROGRESS;
 
-	public List<T> getPlayerRewards() {
-		return playerRewards;
+	public Collection<T> getPlayerRewards() {
+		return playerRewards.values();
 	}
 
 	public boolean containsPlayer(int objectId) {
-		return getPlayerReward(objectId) != null;
+		return playerRewards.containsKey(objectId);
 	}
 
 	public void removePlayerReward(T reward) {
-		playerRewards.remove(reward);
+		playerRewards.remove(reward.getOwnerId());
 	}
 
 	public T getPlayerReward(int objectId) {
-		for (T playerReward : playerRewards) {
-			if (playerReward.getOwnerId() == objectId) {
-				return playerReward;
-			}
-		}
-		return null;
+		return playerRewards.get(objectId);
 	}
 
 	public void addPlayerReward(T reward) {
-		playerRewards.add(reward);
+		playerRewards.put(reward.getOwnerId(), reward);
 	}
 
 	public void setInstanceProgressionType(InstanceProgressionType instanceProgressionType) {
