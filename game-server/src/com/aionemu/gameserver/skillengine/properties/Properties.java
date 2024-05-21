@@ -10,6 +10,7 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author ATracer
@@ -66,9 +67,6 @@ public class Properties {
 	@XmlAttribute(name = "ineffective_range")
 	protected int ineffectiveRange;
 
-	/**
-	 * @param skill
-	 */
 	public boolean validate(Skill skill, CastState castState) {
 		if (firstTarget != null) {
 			if (!FirstTargetProperty.set(skill, this)) {
@@ -80,37 +78,9 @@ public class Properties {
 				return false;
 			}
 		}
-		if (targetType != null) {
-			if (!TargetRangeProperty.set(skill, this)) {
-				return false;
-			}
-		}
-		if (targetRelation != null) {
-			if (!TargetRelationProperty.set(skill, this)) {
-				return false;
-			}
-		}
-		if (targetStatus != null) {
-			if (!TargetStatusProperty.set(skill, this)) {
-				return false;
-			}
-		}
-		if (targetSpecies != null) {
-			if (!TargetSpeciesProperty.set(skill, this)) {
-				return false;
-			}
-		}
-		if (targetType != null) {
-			if (!MaxCountProperty.set(skill, this)) {
-				return false;
-			}
-		}
-		return true;
+		return validateEffectedList(skill);
 	}
 
-	/**
-	 * @param skill
-	 */
 	public boolean endCastValidate(Skill skill) {
 		Creature firstTarget = skill.getFirstTarget();
 		skill.getEffectedList().clear();
@@ -121,32 +91,30 @@ public class Properties {
 				return false;
 			}
 		}
-		if (targetType != null) {
-			if (!TargetRangeProperty.set(skill, this)) {
-				return false;
-			}
-		}
-		if (targetRelation != null) {
-			if (!TargetRelationProperty.set(skill, this)) {
-				return false;
-			}
-		}
-		if (targetStatus != null) {
-			if (!TargetStatusProperty.set(skill, this)) {
-				return false;
-			}
-		}
-		if (targetSpecies != null) {
-			if (!TargetSpeciesProperty.set(skill, this)) {
-				return false;
-			}
-		}
-		if (targetType != null) {
-			if (!MaxCountProperty.set(skill, this)) {
-				return false;
-			}
-		}
-		return true;
+		return validateEffectedList(skill);
+	}
+
+	private boolean validateEffectedList(Skill skill) {
+		ValidationResult result = validateEffectedList(skill.getEffectedList(), skill.getFirstTarget(), skill.getEffector(), skill.getSkillTemplate(), skill.getX(), skill.getY(), skill.getZ());
+		skill.setFirstTarget(result.getFirstTarget());
+		return result.isValid();
+	}
+
+	public ValidationResult validateEffectedList(List<Creature> targets, Creature firstTarget, Creature effector, SkillTemplate skillTemplate, float x,
+		float y, float z) {
+		ValidationResult result = new ValidationResult(targets, firstTarget);
+		if (targetType != null && !TargetRangeProperty.set(this, result, effector, skillTemplate, x, y, z))
+			return result;
+		if (targetRelation != null && !TargetRelationProperty.set(this, result, effector, skillTemplate))
+			return result;
+		if (targetStatus != null && !TargetStatusProperty.set(this, result, skillTemplate))
+			return result;
+		if (targetSpecies != null && !TargetSpeciesProperty.set(this, result))
+			return result;
+		if (targetType != null && !MaxCountProperty.set(this, result))
+			return result;
+		result.valid = true;
+		return result;
 	}
 
 	public FirstTargetAttribute getFirstTarget() {
@@ -216,5 +184,33 @@ public class Properties {
 
 	public int getIneffectiveRange() {
 		return ineffectiveRange;
+	}
+
+	public static class ValidationResult {
+
+		private final List<Creature> targets;
+		private Creature firstTarget;
+		private boolean valid;
+
+		public ValidationResult(List<Creature> targets, Creature firstTarget) {
+			this.targets = targets;
+			this.firstTarget = firstTarget;
+		}
+
+		public List<Creature> getTargets() {
+			return targets;
+		}
+
+		public Creature getFirstTarget() {
+			return firstTarget;
+		}
+
+		public void setFirstTarget(Creature firstTarget) {
+			this.firstTarget = firstTarget;
+		}
+
+		public boolean isValid() {
+			return valid;
+		}
 	}
 }

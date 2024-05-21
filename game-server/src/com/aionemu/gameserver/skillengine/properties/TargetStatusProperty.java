@@ -8,7 +8,7 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
-import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author kecimis
@@ -17,20 +17,15 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 @XmlType(name = "TargetStatusProperty")
 public class TargetStatusProperty {
 
-	/**
-	 * @param skill
-	 * @param properties
-	 * @return
-	 */
-	public static final boolean set(final Skill skill, Properties properties) {
+	public static boolean set(Properties properties, Properties.ValidationResult result, SkillTemplate skillTemplate) {
 		// TODO find out why skill 2504-2506 ("Protective Shell") has target_status="STUN STAGGER STUMBLE SPIN OPENAERIAL"
-		if (skill.getSkillTemplate().getStack().equals("RI_PROTECTIONCURTAIN"))
+		if (skillTemplate.getStack().equals("RI_PROTECTIONCURTAIN"))
 			return true;
 
-		skill.getEffectedList().removeIf(effected -> !hasAnyAbnormalState(effected, properties.getTargetStatus()));
+		result.getTargets().removeIf(effected -> !hasAnyAbnormalState(effected, properties.getTargetStatus()));
 
 		// if first target was filtered out (= he had no required abnormal state), the skill cannot be cast
-		return skill.getEffectedList().contains(skill.getFirstTarget());
+		return result.getTargets().contains(result.getFirstTarget());
 	}
 
 	private static boolean hasAnyAbnormalState(Creature creature, List<AbnormalState> states) {

@@ -1,5 +1,8 @@
 package com.aionemu.gameserver.skillengine;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -11,6 +14,7 @@ import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.skillengine.effect.EffectType;
 import com.aionemu.gameserver.skillengine.model.*;
 import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
+import com.aionemu.gameserver.skillengine.properties.Properties;
 
 /**
  * @author ATracer
@@ -150,6 +154,23 @@ public class SkillEngine {
 
 	public Effect applyEffectDirectly(SkillTemplate skillTemplate, int skillLevel, Creature effector, Creature effected) {
 		return applyEffect(effector, effected, skillTemplate, skillLevel, null, ForceType.DEFAULT);
+	}
+
+	/**
+	 * Applies the skill's effects to one or multiple targets, depending on its template properties.
+	 *
+	 * @return affected targets
+	 */
+	public List<Creature> applyEffectsDirectly(int skillId, Creature effector, Creature firstTarget, float x, float y, float z) {
+		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
+		Properties properties = skillTemplate.getProperties();
+		List<Creature> targets = new ArrayList<>();
+		targets.add(firstTarget);
+		if (properties != null) // add valid targets in range
+			properties.validateEffectedList(targets, firstTarget, effector, skillTemplate, x, y, z);
+		for (Creature target : targets)
+			applyEffect(effector, target, skillTemplate, skillTemplate.getLvl(), null, ForceType.DEFAULT);
+		return targets;
 	}
 
 	/**

@@ -1,49 +1,44 @@
 package com.aionemu.gameserver.skillengine.properties;
 
 import java.util.Iterator;
-import java.util.List;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
-import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
 /**
  * @author ATracer
  */
 public class TargetRelationProperty {
 
-	public static boolean set(final Skill skill, Properties properties) {
-
+	public static boolean set(Properties properties, Properties.ValidationResult result, Creature effector, SkillTemplate skillTemplate) {
 		TargetRelationAttribute value = properties.getTargetRelation();
-		List<Creature> targetsList = skill.getEffectedList();
-		Creature source = skill.getEffector();
-
 		switch (value) {
 			case ALL:
 				break;
 			case ENEMY:
-				if (!DataManager.MATERIAL_DATA.isMaterialSkill(skill.getSkillId()))
-					targetsList.removeIf(target -> !source.isEnemy(target));
+				if (!DataManager.MATERIAL_DATA.isMaterialSkill(skillTemplate.getSkillId()))
+					result.getTargets().removeIf(target -> !effector.isEnemy(target));
 				break;
 			case FRIEND:
-				if (!DataManager.MATERIAL_DATA.isMaterialSkill(skill.getSkillId()))
-					targetsList.removeIf(target -> source.isEnemy(target) || !isBuffAllowed(source, target));
+				if (!DataManager.MATERIAL_DATA.isMaterialSkill(skillTemplate.getSkillId()))
+					result.getTargets().removeIf(target -> effector.isEnemy(target) || !isBuffAllowed(effector, target));
 
-				if (targetsList.isEmpty()) {
-					skill.setFirstTarget(skill.getEffector());
-					targetsList.add(skill.getEffector());
+				if (result.getTargets().isEmpty()) {
+					result.setFirstTarget(effector);
+					result.getTargets().add(effector);
 				} else {
-					skill.setFirstTarget(targetsList.get(0));
+					result.setFirstTarget(result.getTargets().getFirst());
 				}
 				break;
 			case MYPARTY:
-				for (Iterator<Creature> iter = targetsList.iterator(); iter.hasNext();) {
+				for (Iterator<Creature> iter = result.getTargets().iterator(); iter.hasNext();) {
 					Creature target = iter.next();
 
-					if (source.getMaster() instanceof Player sourcePlayer && target instanceof Player targetPlayer) {
-						if (isBuffAllowed(source, targetPlayer)) {
+					if (effector.getMaster() instanceof Player sourcePlayer && target instanceof Player targetPlayer) {
+						if (isBuffAllowed(effector, targetPlayer)) {
 							if (targetPlayer.equals(sourcePlayer))
 								continue;
 							int teamId = sourcePlayer.getCurrentTeamId();
@@ -54,8 +49,8 @@ public class TargetRelationProperty {
 					iter.remove();
 				}
 
-				if (!targetsList.isEmpty()) {
-					skill.setFirstTarget(targetsList.get(0));
+				if (!result.getTargets().isEmpty()) {
+					result.setFirstTarget(result.getTargets().getFirst());
 				}
 				break;
 		}

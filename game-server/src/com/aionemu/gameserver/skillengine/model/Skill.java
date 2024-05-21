@@ -13,7 +13,6 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
 import com.aionemu.gameserver.ai.manager.SkillAttackManager;
 import com.aionemu.gameserver.configs.main.CustomConfig;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
@@ -25,7 +24,6 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -50,7 +48,6 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
-import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * @author ATracer, Wakizashi, Neon
@@ -78,8 +75,6 @@ public class Skill {
 	private float z;
 	private byte h;
 	private int boostSkillCost;
-	private FirstTargetAttribute firstTargetAttribute;
-	private TargetRangeAttribute targetRangeAttribute;
 	/**
 	 * Duration that depends on BOOST_CASTING_TIME
 	 */
@@ -189,7 +184,7 @@ public class Skill {
 		}
 
 		if (targetType == 0 && effectedList.isEmpty()) { // target selected but no target will be hit
-			if (targetRangeAttribute != TargetRangeAttribute.AREA) { // don't restrict AoE activation
+			if (getTargetRangeAttribute() != TargetRangeAttribute.AREA) { // don't restrict AoE activation
 				if (effector instanceof Player player)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_IS_NOT_VALID());
 				return false;
@@ -880,48 +875,48 @@ public class Skill {
 		return firstTargetRangeCheck;
 	}
 
-	/**
-	 * @param firstTargetAttribute
-	 *          the firstTargetAttribute to set
-	 */
-	public void setFirstTargetAttribute(FirstTargetAttribute firstTargetAttribute) {
-		this.firstTargetAttribute = firstTargetAttribute;
+	public FirstTargetAttribute getFirstTargetAttribute() {
+		return skillTemplate.getProperties() == null ? null : skillTemplate.getProperties().getFirstTarget();
+	}
+
+	public TargetRangeAttribute getTargetRangeAttribute() {
+		return skillTemplate.getProperties() == null ? null : skillTemplate.getProperties().getTargetType();
 	}
 
 	/**
 	 * @return true if the present skill is a non-targeted, non-point AOE skill
 	 */
 	public boolean isNonTargetAOE() {
-		return (firstTargetAttribute == FirstTargetAttribute.ME && targetRangeAttribute == TargetRangeAttribute.AREA);
+		return getFirstTargetAttribute() == FirstTargetAttribute.ME && getTargetRangeAttribute() == TargetRangeAttribute.AREA;
 	}
 
 	/**
 	 * @return true if the present skill is a targeted AOE skill
 	 */
 	private boolean isTargetAOE() {
-		return (firstTargetAttribute == FirstTargetAttribute.TARGET && targetRangeAttribute == TargetRangeAttribute.AREA);
+		return getFirstTargetAttribute() == FirstTargetAttribute.TARGET && getTargetRangeAttribute() == TargetRangeAttribute.AREA;
 	}
 
 	/**
 	 * @return true if the present skill is a self buff includes items (such as scroll buffs)
 	 */
 	public boolean isSelfBuff() {
-		return (firstTargetAttribute == FirstTargetAttribute.ME && targetRangeAttribute == TargetRangeAttribute.ONLYONE
-			&& skillTemplate.getSubType() == SkillSubType.BUFF && !skillTemplate.isDeityAvatar());
+		return getFirstTargetAttribute() == FirstTargetAttribute.ME && getTargetRangeAttribute() == TargetRangeAttribute.ONLYONE
+			&& skillTemplate.getSubType() == SkillSubType.BUFF && !skillTemplate.isDeityAvatar();
 	}
 
 	/**
 	 * @return true if the present skill has self as first target
 	 */
 	public boolean isFirstTargetSelf() {
-		return (firstTargetAttribute == FirstTargetAttribute.ME);
+		return getFirstTargetAttribute() == FirstTargetAttribute.ME;
 	}
 
 	/**
 	 * @return true if the present skill is a Point skill
 	 */
 	public boolean isPointSkill() {
-		return (firstTargetAttribute == FirstTargetAttribute.POINT);
+		return getFirstTargetAttribute() == FirstTargetAttribute.POINT;
 	}
 
 	/**
@@ -942,14 +937,6 @@ public class Skill {
 
 	public int getItemObjectId() {
 		return itemObjectId;
-	}
-
-	/**
-	 * @param targetRangeAttribute
-	 *          the targetRangeAttribute to set
-	 */
-	public void setTargetRangeAttribute(TargetRangeAttribute targetRangeAttribute) {
-		this.targetRangeAttribute = targetRangeAttribute;
 	}
 
 	public void setTargetType(int targetType, float x, float y, float z) {
@@ -1072,23 +1059,6 @@ public class Skill {
 		}
 
 		return false;
-	}
-
-	private boolean isGroundSkill() {
-		return skillTemplate.isGroundSkill();
-	}
-
-	public boolean shouldAffectTarget(VisibleObject object) {
-		// If creature is at least 2 meters above the terrain, ground skill cannot be applied
-		if (GeoDataConfig.GEO_ENABLE) {
-			if (isGroundSkill()) {
-				float geoZ = GeoService.getInstance().getZ(object, object.getZ() + 2, object.getZ() - 100);
-				if (!Float.isNaN(geoZ) && object.getZ() - geoZ > 2f)
-					return false;
-			}
-			return GeoService.getInstance().canSee(getFirstTarget(), object);
-		}
-		return true;
 	}
 
 	public void setChainCategory(String chainCategory) {

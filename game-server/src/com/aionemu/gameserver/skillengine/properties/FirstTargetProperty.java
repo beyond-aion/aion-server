@@ -18,9 +18,7 @@ public class FirstTargetProperty {
 
 	public static boolean set(Skill skill, Properties properties) {
 		Creature effector = skill.getEffector();
-		FirstTargetAttribute value = properties.getFirstTarget();
-		skill.setFirstTargetAttribute(value);
-		switch (value) {
+		switch (properties.getFirstTarget()) {
 			case ME:
 				skill.setFirstTargetRangeCheck(false);
 				skill.setFirstTarget(effector);

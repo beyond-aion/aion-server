@@ -5,6 +5,7 @@ import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -15,8 +16,9 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
-import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -26,34 +28,30 @@ public class TargetRangeProperty {
 
 	private static final Logger log = LoggerFactory.getLogger(TargetRangeProperty.class);
 
-	public static boolean set(final Skill skill, Properties properties) {
-		Creature skillEffector = skill.getEffector();
+	public static boolean set(Properties properties, Properties.ValidationResult result, Creature skillEffector, SkillTemplate skillTemplate, float x,
+		float y, float z) {
 		TargetRangeAttribute value = properties.getTargetType();
 		int distanceToTarget = properties.getTargetDistance();
 		int effectiveRange = skillEffector instanceof Trap ? skillEffector.getGameStats().getAttackRange().getCurrent() : properties.getEffectiveRange();
 		int ineffectiveRange = properties.getIneffectiveRange();
 
-		final List<Creature> effectedList = skill.getEffectedList();
-		skill.setTargetRangeAttribute(value);
+		final List<Creature> effectedList = result.getTargets();
 		switch (value) {
 			case ONLYONE:
 				break;
 			case AREA:
 				int altitude = properties.getEffectiveAltitude() != 0 ? properties.getEffectiveAltitude() : 1;
-				final Creature firstTarget = skill.getFirstTarget();
+				Creature firstTarget = result.getFirstTarget();
 
-				if (firstTarget == null) {
-					log.warn("CHECKPOINT: first target is null for skillid " + skill.getSkillTemplate().getSkillId());
+				if (firstTarget == null)
 					return false;
-				}
 
 				// Create a sorted map of the objects in knownlist
 				// and filter them properly
 				for (VisibleObject nextCreature : firstTarget.getKnownList().getKnownObjects().values()) {
-					if (!(nextCreature instanceof Creature))
+					if (!(nextCreature instanceof Creature creature))
 						continue;
-					Creature creature = (Creature) nextCreature;
-					if (!checkCommonRequirements(creature, skill))
+					if (!checkCommonRequirements(creature, skillTemplate))
 						continue;
 
 					// if (nextCreature instanceof Kisk && isInsideDisablePvpZone(creature)
@@ -68,10 +66,10 @@ public class TargetRangeProperty {
 					if (skillEffector instanceof Trap && ((Trap) skillEffector).getCreator() == nextCreature)
 						continue;
 
-					if (skill.isPointSkill()) {
-						if (PositionUtil.isInRange(skill.getX(), skill.getY(), skill.getZ(), nextCreature.getX(), nextCreature.getY(), nextCreature.getZ(),
+					if (properties.getFirstTarget() == FirstTargetAttribute.POINT) {
+						if (PositionUtil.isInRange(x, y, z, nextCreature.getX(), nextCreature.getY(), nextCreature.getZ(),
 							effectiveRange)) {
-							skill.getEffectedList().add(creature);
+							result.getTargets().add(creature);
 						}
 					} else if (properties.getEffectiveAngle() > 0) {
 						if (nextCreature.equals(skillEffector))
@@ -89,23 +87,23 @@ public class TargetRangeProperty {
 						}
 						if (!PositionUtil.isInRange(skillEffector, nextCreature, properties.getEffectiveDist(), false))
 							continue;
-						if (!skill.shouldAffectTarget(nextCreature))
+						if (!shouldAffectTarget(nextCreature, result.getFirstTarget(), skillTemplate))
 							continue;
-						skill.getEffectedList().add(creature);
+						result.getTargets().add(creature);
 					} else if (properties.getEffectiveDist() > 0) {
 						// Lightning bolt
 						if (PositionUtil.isInsideAttackCylinder(skillEffector, nextCreature, properties.getEffectiveDist(), (effectiveRange / 2f), properties.getDirection())) {
-							if (!skill.shouldAffectTarget(nextCreature))
+							if (!shouldAffectTarget(nextCreature, result.getFirstTarget(), skillTemplate))
 								continue;
-							skill.getEffectedList().add(creature);
+							result.getTargets().add(creature);
 						}
 					} else if (PositionUtil.isInRange(firstTarget, nextCreature, effectiveRange, false)) {
 						// for target_range_area_type = fireball
 						if (ineffectiveRange > 0 && PositionUtil.isInRange(firstTarget, nextCreature, ineffectiveRange, false))
 							continue;
-						if (!skill.shouldAffectTarget(nextCreature))
+						if (!shouldAffectTarget(nextCreature, result.getFirstTarget(), skillTemplate))
 							continue;
-						skill.getEffectedList().add(creature);
+						result.getTargets().add(creature);
 					}
 				}
 
@@ -115,8 +113,7 @@ public class TargetRangeProperty {
 				// if only firsttarget will be affected (e.g. Bodyguard), we don't need to evaluate the whole group
 				if (properties.getTargetMaxCount() == 1 && properties.getFirstTarget() != FirstTargetAttribute.POINT)
 					break;
-				if (skillEffector instanceof Player) {
-					final Player effector = (Player) skillEffector;
+				if (skillEffector instanceof Player effector) {
 					TemporaryPlayerTeam<? extends TeamMember<Player>> team;
 					if (value == TargetRangeAttribute.PARTY_WITHPET) {
 						team = effector.getCurrentTeam(); // group or whole alliance
@@ -128,15 +125,15 @@ public class TargetRangeProperty {
 						for (Player member : team.getMembers()) {
 							if (!member.isOnline())
 								continue;
-							if (!checkCommonRequirements(member, skill))
+							if (!checkCommonRequirements(member, skillTemplate))
 								continue;
 							if (PositionUtil.isInRange(effector, member, effectiveRange, false)) {
-								if (skill.shouldAffectTarget(member))
+								if (shouldAffectTarget(member, result.getFirstTarget(), skillTemplate))
 									effectedList.add(member);
 								if (value == TargetRangeAttribute.PARTY_WITHPET) {
 									Summon aMemberSummon = member.getSummon();
 									if (aMemberSummon != null) {
-										if (skill.shouldAffectTarget(aMemberSummon))
+										if (shouldAffectTarget(aMemberSummon, result.getFirstTarget(), skillTemplate))
 											effectedList.add(aMemberSummon);
 									}
 								}
@@ -147,18 +144,17 @@ public class TargetRangeProperty {
 				break;
 			case POINT:
 				for (VisibleObject nextCreature : skillEffector.getKnownList().getKnownObjects().values()) {
-					if (!(nextCreature instanceof Creature))
+					if (!(nextCreature instanceof Creature creature))
 						continue;
-					Creature creature = (Creature) nextCreature;
-					if (!checkCommonRequirements(creature, skill))
-						continue;
-
-					if (nextCreature instanceof Trap && !((Trap) nextCreature).getMaster().isEnemy(skillEffector))
+					if (!checkCommonRequirements(creature, skillTemplate))
 						continue;
 
-					if (!PositionUtil.isInRange(nextCreature, skill.getX(), skill.getY(), skill.getZ(), distanceToTarget + 1))
+					if (nextCreature instanceof Trap trap && !trap.getMaster().isEnemy(skillEffector))
 						continue;
-					if (skill.shouldAffectTarget(nextCreature))
+
+					if (!PositionUtil.isInRange(nextCreature, x, y, z, distanceToTarget + 1))
+						continue;
+					if (shouldAffectTarget(nextCreature, result.getFirstTarget(), skillTemplate))
 						effectedList.add(creature);
 				}
 				break;
@@ -167,8 +163,8 @@ public class TargetRangeProperty {
 		return true;
 	}
 
-	private static boolean checkCommonRequirements(Creature creature, Skill skill) {
-		if (skill.getSkillTemplate().hasResurrectEffect()) {
+	private static boolean checkCommonRequirements(Creature creature, SkillTemplate skillTemplate) {
+		if (skillTemplate.hasResurrectEffect()) {
 			if (!creature.isDead())
 				return false;
 		} else {
@@ -192,5 +188,18 @@ public class TargetRangeProperty {
 			}
 		}
 		return false;
+	}
+
+	private static boolean shouldAffectTarget(VisibleObject object, Creature firstTarget, SkillTemplate skillTemplate) {
+		// If creature is at least 2 meters above the terrain, ground skill cannot be applied
+		if (GeoDataConfig.GEO_ENABLE) {
+			if (skillTemplate.isGroundSkill()) {
+				float geoZ = GeoService.getInstance().getZ(object, object.getZ() + 2, object.getZ() - 100);
+				if (!Float.isNaN(geoZ) && object.getZ() - geoZ > 2f)
+					return false;
+			}
+			return GeoService.getInstance().canSee(firstTarget, object);
+		}
+		return true;
 	}
 }
