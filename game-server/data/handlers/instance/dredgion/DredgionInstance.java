@@ -48,7 +48,7 @@ public class DredgionInstance extends GeneralInstanceHandler {
 	protected AtomicBoolean isInstanceStarted = new AtomicBoolean();
 	protected PvpInstanceScore<PvpInstancePlayerReward> instanceScore;
 	private final static int MAX_PLAYERS_PER_FACTION = 6;
-	private final int raceStartPosition = Rnd.get(2);
+	private final int raceStartPosition = Rnd.nextInt(2);
 	private Future<?> instanceTask;
 	private long instanceTime;
 	private float losingGroupMultiplier = 1;

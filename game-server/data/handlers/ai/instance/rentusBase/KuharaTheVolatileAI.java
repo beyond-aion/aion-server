@@ -138,10 +138,10 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 	}
 
 	private Npc rndSpawn(int npcId, float x, float y, float z) {
-		float direction = Rnd.get(0, 199) / 100f;
+		double angleRadians = Math.toRadians(Rnd.nextFloat(360f));
 		float distance = Rnd.get(0, 4);
-		float x1 = (float) (Math.cos(Math.PI * direction) * distance) + x;
-		float y1 = (float) (Math.sin(Math.PI * direction) * distance) + y;
+		float x1 = (float) (Math.cos(angleRadians) * distance) + x;
+		float y1 = (float) (Math.sin(angleRadians) * distance) + y;
 		return (Npc) spawn(npcId, x1, y1, z, (byte) 0);
 	}
 

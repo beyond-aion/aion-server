@@ -208,8 +208,8 @@ public class WalkManager {
 					return;
 				int randomWalkRange = owner.getSpawn().getRandomWalkRange();
 				int diameter = randomWalkRange * 2;
-				float nextX = (Rnd.get() * diameter - randomWalkRange) + owner.getSpawn().getX();
-				float nextY = (Rnd.get() * diameter - randomWalkRange) + owner.getSpawn().getY();
+				float nextX = Rnd.nextFloat(diameter) - randomWalkRange + owner.getSpawn().getX();
+				float nextY = Rnd.nextFloat(diameter) - randomWalkRange + owner.getSpawn().getY();
 				if (GeoDataConfig.GEO_ENABLE && GeoDataConfig.GEO_NPC_MOVE) {
 					Vector3f loc = GeoService.getInstance().getClosestCollision(owner, nextX, nextY, owner.getZ(), true, RANDOM_WALK_GEO_FLAGS, IgnoreProperties.of(owner.getRace()));
 					owner.getMoveController().moveToPoint(loc.x, loc.y, loc.z);

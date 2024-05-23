@@ -99,7 +99,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI implements HpPhases.P
 			if (isDead())
 				cancelTasks(basicSkillTask);
 			else
-				SkillEngine.getInstance().getSkill(getOwner(), 18912 + Rnd.get(2), 55, getOwner()).useNoAnimationSkill();
+				SkillEngine.getInstance().getSkill(getOwner(), 18912 + Rnd.nextInt(2), 55, getOwner()).useNoAnimationSkill();
 		}, 0, 24000);
 	}
 
@@ -138,7 +138,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI implements HpPhases.P
 		int count = Rnd.get(3, 6);
 		for (int i = 0; i < count; i++) {
 			if (!points.isEmpty()) {
-				Point3D spawn = points.remove(Rnd.get(points.size()));
+				Point3D spawn = points.remove(Rnd.nextInt(points.size()));
 				spawn(281645, spawn.getX(), spawn.getY(), spawn.getZ(), (byte) 18);
 			}
 		}

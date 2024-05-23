@@ -36,8 +36,8 @@ public class TiamatsIncarnationAI extends AggressiveNpcAI {
 			if (!isDead() && getTarget() != null) {
 				List<Player> nearbyPlayers = getNearbyPlayers();
 				if (nearbyPlayers.size() > 1) {
-					Player first = nearbyPlayers.remove(Rnd.get(nearbyPlayers.size()));
-					Player second = nearbyPlayers.remove(Rnd.get(nearbyPlayers.size()));
+					Player first = nearbyPlayers.remove(Rnd.nextInt(nearbyPlayers.size()));
+					Player second = nearbyPlayers.remove(Rnd.nextInt(nearbyPlayers.size()));
 					int summonId = Rnd.get(getSummonNpcIds());
 					spawn(summonId, first.getX(), first.getY(), first.getZ(), (byte) 0);
 					spawn(summonId, second.getX(), second.getY(), second.getZ(), (byte) 0);

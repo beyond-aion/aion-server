@@ -124,10 +124,10 @@ public class HM_TiamatWeakenedDragonAI extends TiamatWeakenedDragonAI {
 		if (gravityTornadoDistanceLeft.isEmpty() || gravityTornadoDistanceRight.isEmpty())
 			return;
 
-		int distance = gravityTornadoDistanceRight.remove(Rnd.get(gravityTornadoDistanceRight.size()));
+		int distance = gravityTornadoDistanceRight.remove(Rnd.nextInt(gravityTornadoDistanceRight.size()));
 		spawnGravityTornadoByDistAndAngle(distance, 330);
 
-		distance = gravityTornadoDistanceLeft.remove(Rnd.get(gravityTornadoDistanceLeft.size()));
+		distance = gravityTornadoDistanceLeft.remove(Rnd.nextInt(gravityTornadoDistanceLeft.size()));
 		spawnGravityTornadoByDistAndAngle(distance, 30);
 	}
 

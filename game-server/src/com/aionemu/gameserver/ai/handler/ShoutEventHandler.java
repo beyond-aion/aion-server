@@ -55,7 +55,7 @@ public final class ShoutEventHandler {
 			if (shouts == null || shouts.isEmpty()) {
 				WalkerTemplate tp = DataManager.WALKER_DATA.getWalkerTemplate(walkerId);
 				int stepCount = tp.getRouteSteps().size();
-				if (Rnd.get(stepCount) < 2) {
+				if (Rnd.nextInt(stepCount) < 2) {
 					if (npc.getTarget() instanceof Player)
 						NpcShoutsService.getInstance().shoutRandom(npc, (Player) npc.getTarget(), shouts, 0);
 					else

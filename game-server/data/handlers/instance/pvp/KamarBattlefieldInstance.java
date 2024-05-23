@@ -120,13 +120,13 @@ public class KamarBattlefieldInstance extends BasicPvpInstance {
 				break;
 			case 18:
 				List<WorldPosition> temp = new ArrayList<>(generalsPos);
-				int index = Rnd.get(temp.size());
+				int index = Rnd.nextInt(temp.size());
 				WorldPosition pos1 = temp.remove(index);
 				spawn(232854, pos1.getX(), pos1.getY(), pos1.getZ(), pos1.getHeading());
-				index = Rnd.get(temp.size());
+				index = Rnd.nextInt(temp.size());
 				pos1 = temp.remove(index);
 				spawn(232853, pos1.getX(), pos1.getY(), pos1.getZ(), pos1.getHeading());
-				index = Rnd.get(temp.size());
+				index = Rnd.nextInt(temp.size());
 				pos1 = temp.remove(index);
 				spawn(232852, pos1.getX(), pos1.getY(), pos1.getZ(), pos1.getHeading());
 				spawn(232846, 1442.18f, 1370.7f, 600.6902f, (byte) 40);

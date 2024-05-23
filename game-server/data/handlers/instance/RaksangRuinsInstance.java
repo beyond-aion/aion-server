@@ -132,11 +132,11 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 			case 702691:
 			case 702692:
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_TAMES_SOLO_A_START());
-				delaySpawn(player, 236074 + Rnd.get(3), 2000);
-				delaySpawn(player, 236074 + Rnd.get(3), 2000);
-				delaySpawn(player, 236074 + Rnd.get(3), 8000);
-				delaySpawn(player, 236074 + Rnd.get(3), 8000);
-				delaySpawn(player, 236074 + Rnd.get(3), 12000);
+				delaySpawn(player, 236074 + Rnd.nextInt(3), 2000);
+				delaySpawn(player, 236074 + Rnd.nextInt(3), 2000);
+				delaySpawn(player, 236074 + Rnd.nextInt(3), 8000);
+				delaySpawn(player, 236074 + Rnd.nextInt(3), 8000);
+				delaySpawn(player, 236074 + Rnd.nextInt(3), 12000);
 				npc.getController().delete();
 				break;
 			case 730438: // Terror' Vault
@@ -268,9 +268,9 @@ public class RaksangRuinsInstance extends GeneralInstanceHandler {
 	}
 
 	private void rndSpawnInRange(Player player, int npcId, int distance) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x = player.getX() + (float) (Math.cos(Math.PI * direction) * distance);
-		float y = player.getY() + (float) (Math.sin(Math.PI * direction) * distance);
+		double angleRadians = Math.toRadians(Rnd.nextFloat(360f));
+		float x = player.getX() + (float) (Math.cos(angleRadians) * distance);
+		float y = player.getY() + (float) (Math.sin(angleRadians) * distance);
 		Vector3f pos = GeoService.getInstance().getClosestCollision(player, x, y, player.getZ());
 		byte headingTowardsPlayer = PositionUtil.getHeadingTowards(pos.getX(), pos.getY(), player.getX(), player.getY());
 		spawn(npcId, pos.getX(), pos.getY(), pos.getZ(), headingTowardsPlayer);

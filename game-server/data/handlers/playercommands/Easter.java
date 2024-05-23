@@ -67,7 +67,7 @@ public class Easter extends PlayerCommand {
             int count = 1;
             int itemId = rewards[rewardIndex][1];
             if (itemId == 0) {
-                int rndIndex = Rnd.get(randomItems.length);
+                int rndIndex = Rnd.nextInt(randomItems.length);
                 count = randomItems[rndIndex][0];
                 itemId = randomItems[rndIndex][1];
             }

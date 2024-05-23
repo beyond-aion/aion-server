@@ -130,7 +130,7 @@ public class CraftingTask extends AbstractCraftTask {
 		}
 
 		craftType = CraftType.NORMAL;
-		float multi = Rnd.get() + 1f;
+		float multi = Rnd.nextFloat(1f, 2f);
 		float failReduction = Math.max(1 - skillLvlDiff * 0.015f, 0.25f); // dynamic fail rate multiplier
 		boolean success = skillLvlDiff >= 41 || Rnd.chance() >= CraftConfig.MAX_CRAFT_FAILURE_CHANCE * failReduction;
 

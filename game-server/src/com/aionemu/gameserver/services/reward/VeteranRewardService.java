@@ -478,7 +478,7 @@ public final class VeteranRewardService {
 				} else {
 					items = new ArrayList<>(randomRewards);
 					while (items.size() > RANDOM_ITEMS_PER_MONTH)
-						items.remove(Rnd.get(items.size()));
+						items.remove(Rnd.nextInt(items.size()));
 				}
 				if (player.getMailbox().getLetters().size() >= 100) { // abort on mailbox overflow and save the correct month
 					DAOManager.getDAO(VeteranRewardDAO.class).storeReceivedMonths(player, i);

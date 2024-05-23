@@ -111,9 +111,9 @@ public class BollvigAI extends AggressiveNpcAI implements HpPhases.PhaseHandler 
 	}
 
 	private void rndSpawnInRange(int npcId) {
-		float direction = Rnd.get(0, 199) / 100f;
-		float x = (float) (Math.cos(Math.PI * direction) * 10);
-		float y = (float) (Math.sin(Math.PI * direction) * 10);
+		double angleRadians = Math.toRadians(Rnd.nextFloat(360f));
+		float x = (float) (Math.cos(angleRadians) * 10);
+		float y = (float) (Math.sin(angleRadians) * 10);
 		spawn(npcId, 1001 + x, 2828 + y, 235.66f, (byte) 0);
 	}
 

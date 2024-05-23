@@ -194,7 +194,7 @@ public class EnragedQueenModorAI extends AggressiveNpcAI implements HpPhases.Pha
 				}
 				break;
 			case 21179: // ice storm
-				Vector3f pos = getRandomPosFromCenter(Rnd.get(9));
+				Vector3f pos = getRandomPosFromCenter(Rnd.nextInt(9));
 				spawn(284528, pos.getX(), pos.getY(), pos.getZ(), (byte) 10);
 				break;
 		}
@@ -221,7 +221,7 @@ public class EnragedQueenModorAI extends AggressiveNpcAI implements HpPhases.Pha
 							lookAt = new Vector3f(cr.getX(), cr.getY(), cr.getZ());
 						}
 						World.getInstance().updatePosition(getOwner(), 256.62f, 257.79f, 241.79f,
-								lookAt == null ? (byte) Rnd.get(0, 120) : PositionUtil.getHeadingTowards(256.62f, 257.79f, lookAt.getX(), lookAt.getY()));
+								lookAt == null ? (byte) Rnd.nextInt(120) : PositionUtil.getHeadingTowards(256.62f, 257.79f, lookAt.getX(), lookAt.getY()));
 						break;
 					case 2:
 					case 6:
@@ -287,9 +287,9 @@ public class EnragedQueenModorAI extends AggressiveNpcAI implements HpPhases.Pha
 
 	private Vector3f getRandomPosFromCenter(int distance) {
 		Vector3f center = new Vector3f(256.62f, 257.79f, 241.8f);
-		float direction = Rnd.get(0, 199) / 100f;
-		center.setX(center.x + (float) (Math.cos(Math.PI * direction) * distance));
-		center.setY(center.y + (float) (Math.sin(Math.PI * direction) * distance));
+		double angleRadians = Math.toRadians(Rnd.nextFloat(360f));
+		center.setX(center.x + (float) (Math.cos(angleRadians) * distance));
+		center.setY(center.y + (float) (Math.sin(angleRadians) * distance));
 		return center;
 	}
 

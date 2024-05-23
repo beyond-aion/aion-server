@@ -102,7 +102,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 				break;
 		}
 
-		int chance = Rnd.get(10000000);
+		int chance = Rnd.nextInt(10000000);
 		int current = 0;
 		Material curMaterial = null;
 		for (Material mat : materials) {

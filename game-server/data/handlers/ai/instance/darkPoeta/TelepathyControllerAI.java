@@ -32,7 +32,7 @@ public class TelepathyControllerAI extends AggressiveNpcAI {
 				if (isAggred.get()) {
 					spawnTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
 						if (!isDead()) {
-							Npc spawn = (Npc) rndSpawnInRange(Rnd.get(2) == 0 ? 281150 : 281334, 7, 10);
+							Npc spawn = (Npc) rndSpawnInRange(Rnd.nextInt(2) == 0 ? 281150 : 281334, 7, 10);
 							spawn.getKnownList().forEachPlayer(p -> spawn.getAggroList().addHate(p, 10));
 						}
 					}, 60000, 60000);

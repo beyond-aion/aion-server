@@ -90,7 +90,7 @@ public class GatheringTask extends AbstractCraftTask {
 		}
 
 		craftType = CraftType.NORMAL;
-		float multi = Rnd.get() + 1f;
+		float multi = Rnd.nextFloat(1f, 2f);
 		float failReduction = Math.max(1 - skillLvlDiff * 0.015f, 0.25f); // dynamic fail rate multiplier
 		boolean success = Rnd.chance() >= CraftConfig.MAX_GATHER_FAILURE_CHANCE * failReduction;
 

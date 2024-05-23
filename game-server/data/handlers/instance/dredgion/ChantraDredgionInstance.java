@@ -34,7 +34,7 @@ public class ChantraDredgionInstance extends DredgionInstance {
 				spawn(216887, 486.26382f, 909.48175f, 405.24463f, (byte) 90);
 			}
 			if (Rnd.chance() < 51) {
-				switch (Rnd.get(2)) {
+				switch (Rnd.nextInt(2)) {
 					case 0:
 						spawn(216888, 416.3429f, 282.32785f, 409.7311f, (byte) 80);
 						break;

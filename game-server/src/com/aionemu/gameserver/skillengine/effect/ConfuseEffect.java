@@ -93,7 +93,7 @@ public class ConfuseEffect extends EffectTemplate {
 		@Override
 		public void run() {
 			if (effected.getEffectController().isConfused()) {
-				float angle = Rnd.get(0, 359);
+				float angle = Rnd.nextFloat(360f);
 				float maxDistance = effected.getGameStats().getMovementSpeedFloat();
 				Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effected, angle, maxDistance);
 				if (effected instanceof Npc) {

@@ -37,7 +37,7 @@ public class TerathDredgionInstance extends DredgionInstance {
 				sp(233379, 486.26382f, 906.011f, 405.24463f, (byte) 90, 720000);
 			}
 			if (Rnd.chance() < 51) {
-				switch (Rnd.get(2)) { // Supervisor Chitan
+				switch (Rnd.nextInt(2)) { // Supervisor Chitan
 					case 0:
 						spawn(233362, 421.89111f, 285.20471f, 409.7311f, (byte) 80);
 						break;

@@ -29,7 +29,7 @@ public interface Chance {
 			sumOfChances += element.getChance();
 
 		if (sumOfChances > 0) {
-			float randomChance = Rnd.get() * sumOfChances;
+			float randomChance = Rnd.nextFloat(sumOfChances);
 			float luck = 0;
 			for (Iterator<T> iterator = elements.iterator(); iterator.hasNext();) {
 				T element = iterator.next();

@@ -197,10 +197,10 @@ public class EmpoweredAgent extends AggressiveNpcAI implements HpPhases.PhaseHan
 	}
 
 	private Point3D getRndPos() {
-		float direction = Rnd.get(0, 199) / 100f;
-		float distance = Rnd.get() * 10;
-		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
+		double angleRadians = Math.toRadians(Rnd.nextFloat(360f));
+		float distance = Rnd.nextFloat(10f);
+		float x1 = (float) (Math.cos(angleRadians) * distance);
+		float y1 = (float) (Math.sin(angleRadians) * distance);
 		WorldPosition p = getPosition();
 		return new Point3D(p.getX() + x1, p.getY() + y1, p.getZ());
 	}

@@ -13,6 +13,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.Chance;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -126,7 +127,7 @@ public class DecomposeAction extends AbstractItemAction {
 		}
 		List<ExtractedItemsCollection> itemsCollections = DataManager.DECOMPOSABLE_ITEMS_DATA.getInfoByItemId(parentItem.getItemId());
 		Collection<ExtractedItemsCollection> levelSuitableItems = filterItemsByLevel(player, itemsCollections);
-		final ExtractedItemsCollection selectedCollection = selectItemByChance(levelSuitableItems);
+		final ExtractedItemsCollection selectedCollection = Chance.selectElement(levelSuitableItems);
 		if (selectedCollection.getRandomItems().isEmpty() && selectedCollection.getItems().stream().noneMatch(i -> i.isObtainableFor(player))) {
 			log.warn(
 				"Empty decomposable " + parentItem.getItemId() + " for " + player + ", class: " + player.getPlayerClass() + ", level: " + player.getLevel());
@@ -176,7 +177,7 @@ public class DecomposeAction extends AbstractItemAction {
 							switch (randomItem.getType()) {
 								case ENCHANTMENT:
 									do {
-										randomId = 166000191 + Math.round(itemLvl / 100f) + Rnd.get(4);
+										randomId = 166000191 + Math.round(itemLvl / 100f) + Rnd.nextInt(4);
 										i++;
 										if (i > 50) {
 											randomId = 0;
@@ -384,27 +385,6 @@ public class DecomposeAction extends AbstractItemAction {
 		return result;
 	}
 
-	/**
-	 * Select only 1 item based on chance attributes
-	 */
-	private ExtractedItemsCollection selectItemByChance(Collection<ExtractedItemsCollection> itemsCollections) {
-		if (itemsCollections == null) {
-			return null;
-		}
-		float sumOfChances = calcSumOfChances(itemsCollections);
-		float currentSum = 0f;
-		float rnd = Rnd.get((int) (sumOfChances * 1000)) / 1000f;
-		ExtractedItemsCollection selectedCollection = null;
-		for (ExtractedItemsCollection collection : itemsCollections) {
-			currentSum += collection.getChance();
-			if (rnd < currentSum) {
-				selectedCollection = collection;
-				break;
-			}
-		}
-		return selectedCollection;
-	}
-
 	private boolean containsSpecialCubeItems(List<ExtractedItemsCollection> itemGroups, Player player) {
 		for (ExtractedItemsCollection items : itemGroups) {
 			if (items.getMinLevel() > player.getLevel() || items.getMaxLevel() < player.getLevel())
@@ -420,13 +400,6 @@ public class DecomposeAction extends AbstractItemAction {
 			}
 		}
 		return false;
-	}
-
-	private float calcSumOfChances(Collection<ExtractedItemsCollection> itemsCollections) {
-		float sum = 0;
-		for (ExtractedItemsCollection collection : itemsCollections)
-			sum += collection.getChance();
-		return sum;
 	}
 
 	public static void validateRandomItemIds() {

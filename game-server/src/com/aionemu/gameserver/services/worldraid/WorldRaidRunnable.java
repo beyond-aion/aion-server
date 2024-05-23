@@ -47,7 +47,7 @@ public class WorldRaidRunnable implements Runnable {
 
 		// remove unused locations due to location count restriction
 		while (validRaidLocations.size() > spawnLocationCount)
-			validRaidLocations.remove(Rnd.get(validRaidLocations.size()));
+			validRaidLocations.remove(Rnd.nextInt(validRaidLocations.size()));
 
 		// start actual world raids using the remaining locations
 		for (int locationId : validRaidLocations)

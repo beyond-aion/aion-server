@@ -69,7 +69,7 @@ public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHand
 
 			@Override
 			public void run() {
-				SkillEngine.getInstance().getSkill(getOwner(), Rnd.get(2) == 0 ? 20401 : 20093, 48, getTarget()).useNoAnimationSkill();
+				SkillEngine.getInstance().getSkill(getOwner(), Rnd.nextInt(2) == 0 ? 20401 : 20093, 48, getTarget()).useNoAnimationSkill();
 			}
 		}, 10000, 20000);
 	}
@@ -91,7 +91,7 @@ public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHand
 			getOwner().clearAttackedCount();
 			int count = Rnd.get(1, 3);
 			for (int i = 0; i < count; i++) {
-				int npcId = 282792 + Rnd.get(5);
+				int npcId = 282792 + Rnd.nextInt(5);
 				attackPlayer((Npc) spawn(npcId, 531.465f + Rnd.get(-5, 5), 316.921f + Rnd.get(-5, 5), 65.351f, (byte) 105));
 			}
 			scheduleDelayEntrance(delay);

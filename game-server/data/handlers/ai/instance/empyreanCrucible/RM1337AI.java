@@ -89,7 +89,7 @@ public class RM1337AI extends AggressiveNpcAI {
 					if (getOwner().getCastingSkill() != null)
 						return;
 					if (getLifeStats().getHpPercentage() <= 50) {
-						switch (Rnd.get(2)) {
+						switch (Rnd.nextInt(2)) {
 							case 0:
 								SkillEngine.getInstance().getSkill(getOwner(), 19550, 10, getTargetPlayer()).useNoAnimationSkill();
 								break;

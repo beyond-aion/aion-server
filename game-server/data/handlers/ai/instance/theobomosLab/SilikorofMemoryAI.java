@@ -35,10 +35,10 @@ public class SilikorofMemoryAI extends AggressiveNpcAI implements HpPhases.Phase
 	}
 
 	private void sp(int npcId) {
-		float direction = Rnd.get(0, 199) / 100f;
+		double angleRadians = Math.toRadians(Rnd.nextFloat(360f));
 		int distance = Rnd.get(0, 2);
-		float x1 = (float) (Math.cos(Math.PI * direction) * distance);
-		float y1 = (float) (Math.sin(Math.PI * direction) * distance);
+		float x1 = (float) (Math.cos(angleRadians) * distance);
+		float y1 = (float) (Math.sin(angleRadians) * distance);
 		WorldPosition p = getPosition();
 		spawn(npcId, p.getX() + x1, p.getY() + y1, p.getZ(), p.getHeading());
 	}

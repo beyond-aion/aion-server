@@ -746,10 +746,10 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 		}
 		List<Integer> ranges = IntStream.range(minRange, maxRange + 1).boxed().collect(Collectors.toList());
 		Collections.shuffle(ranges);
-		double direction = Rnd.get() * 2 * Math.PI;
+		double angleRadians = Math.toRadians(Rnd.nextFloat(360f));
 		for (int range : ranges) {
-			float x = 231.14f + (float) (Math.cos(direction) * range);
-			float y = 264.399f + (float) (Math.sin(direction) * range);
+			float x = 231.14f + (float) (Math.cos(angleRadians) * range);
+			float y = 264.399f + (float) (Math.sin(angleRadians) * range);
 			if (isValidPoint(x, y)) {
 				spawn(npcId, x, y, 96.51f, (byte) 50);
 				break;

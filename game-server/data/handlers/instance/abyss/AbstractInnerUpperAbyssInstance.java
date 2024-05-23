@@ -101,7 +101,7 @@ public abstract class AbstractInnerUpperAbyssInstance extends GeneralInstanceHan
 
 	@Override
 	public void onInstanceCreate() {
-		spawn(getKeymasterId() + Rnd.get(4), 527.64f, 212.0511f, 178.4134f, (byte) 90);
+		spawn(getKeymasterId() + Rnd.nextInt(4), 527.64f, 212.0511f, 178.4134f, (byte) 90);
 
 		chestLocations.add(new WorldPosition(mapId, 575.664f, 853.248f, 199.3737f, (byte) 63));
 		chestLocations.add(new WorldPosition(mapId, 571.560f, 869.936f, 199.3737f, (byte) 69));

@@ -1039,40 +1039,40 @@ public class ShugoImperialTombInstance extends GeneralInstanceHandler {
 	private void handleBossSpawn(StageList stageList) {
 		switch (stageList) {
 			case START_STAGE_1_PHASE_1 -> {
-				switch (Rnd.get(2)) {
+				switch (Rnd.nextInt(2)) {
 					case 0 -> sp(219514, 205.88284f, 287.48337f, 550.68805f, "3005600006"); // Left
 					case 1 -> sp(219514, 220.89374f, 275.24585f, 550.68805f, "3005600011"); // Right
 				}
 			}
 			case START_STAGE_1_PHASE_2 -> {
-				switch (Rnd.get(2)) {
+				switch (Rnd.nextInt(2)) {
 					case 0 -> sp(219515, 204.04073f, 284.8664f, 550.68805f, "3005600008"); // Left
 					case 1 -> sp(219515, 219.07242f, 273.14923f, 550.68805f, "3005600013"); // Right
 				}
 			}
 			case START_STAGE_2_PHASE_1 -> {
-				switch (Rnd.get(3)) {
+				switch (Rnd.nextInt(3)) {
 					case 0 -> sp(219522, 308.5412f, 420.81482f, 296.40808f, "3005600026"); // Left
 					case 1 -> sp(219522, 316.7461f, 433.27048f, 294.58875f, "3005600036"); // Mid
 					case 2 -> sp(219522, 314.70178f, 444.68613f, 296.40808f, "3005600041"); // Right
 				}
 			}
 			case START_STAGE_2_PHASE_2 -> {
-				switch (Rnd.get(3)) {
+				switch (Rnd.nextInt(3)) {
 					case 0 -> sp(219523, 308.5412f, 420.81482f, 296.40808f, "3005600026"); // Left
 					case 1 -> sp(219523, 316.14932f, 430.78998f, 294.58875f, "3005600031"); // Mid
 					case 2 -> sp(219523, 314.70178f, 444.68613f, 296.40808f, "3005600041"); // Right
 				}
 			}
 			case START_STAGE_3_PHASE_1 -> {
-				switch (Rnd.get(3)) {
+				switch (Rnd.nextInt(3)) {
 					case 0 -> sp(219530, 412.90878f, 60.187855f, 222.409f, "3005600056"); // Left
 					case 1 -> sp(219530, 423.48468f, 94.36587f, 214.3483f, "30056000060-B"); // Mid
 					case 2 -> sp(219530, 390.72717f, 108.61628f, 222.40979f, "3005600066"); // Right
 				}
 			}
 			case START_STAGE_3_PHASE_2 -> {
-				switch (Rnd.get(3)) {
+				switch (Rnd.nextInt(3)) {
 					case 0 -> sp(219531, 409.00763f, 58.69102f, 222.41164f, "3005600054"); // Left
 					case 1 -> sp(219531, 420.5633f, 90.57509f, 214.33856f, "3005600057"); // Mid
 					case 2 -> sp(219531, 388.09738f, 104.93561f, 222.41173f, "3005600061"); // Right

@@ -103,8 +103,8 @@ public class _30721OminousDebrisEnergy extends AbstractQuestHandler {
 					boolean isItemUseComplete = useQuestItem(env, item, 2, 3, false);
 					if (isItemUseComplete) {
 						ThreadPoolManager.getInstance().schedule(() -> {
-							rndSpawnInRange(player, 4 * Rnd.nextFloat());
-							rndSpawnInRange(player, 4 * Rnd.nextFloat());
+							rndSpawnInRange(player, Rnd.nextFloat(4f));
+							rndSpawnInRange(player, Rnd.nextFloat(4f));
 						}, 1500);
 					}
 					return HandlerResult.fromBoolean(isItemUseComplete);
@@ -116,9 +116,9 @@ public class _30721OminousDebrisEnergy extends AbstractQuestHandler {
 
 	private void rndSpawnInRange(Player player, float distance) {
 		WorldPosition p = player.getPosition();
-		double directionRadian = Math.toRadians(Rnd.get(360));
-		float x = p.getX() + (float) (Math.cos(directionRadian) * distance);
-		float y = p.getY() + (float) (Math.sin(directionRadian) * distance);
+		double angleRadians = Math.toRadians(Rnd.nextFloat(360f));
+		float x = p.getX() + (float) (Math.cos(angleRadians) * distance);
+		float y = p.getY() + (float) (Math.sin(angleRadians) * distance);
 
 		Vector3f pos = GeoService.getInstance().getClosestCollision(player, x, y, p.getZ());
 		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(p.getMapId(), ATTACKER_NPC_ID, pos.getX(), pos.getY(), pos.getZ(), (byte) 0);

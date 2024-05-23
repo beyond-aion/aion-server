@@ -107,8 +107,9 @@ public class FortressSiege extends Siege<FortressLocation> {
 				continue;
 			final int amount = Rnd.get(1, 2);
 			for (int i = 0; i < amount; i++) {
-				float x1 = (float) (sn.getX() + Math.cos(Math.PI * Rnd.get()) * Rnd.get(1, 2));
-				float y1 = (float) (sn.getY() + Math.sin(Math.PI * Rnd.get()) * Rnd.get(1, 2));
+				double angleRadians = Math.toRadians(Rnd.nextFloat(180f));
+				float x1 = (float) (sn.getX() + Math.cos(angleRadians) * Rnd.get(1, 2));
+				float y1 = (float) (sn.getY() + Math.sin(angleRadians) * Rnd.get(1, 2));
 				SpawnTemplate temp = SpawnEngine.newSiegeSpawn(worldId, race == SiegeRace.ELYOS ? Rnd.get(252408, 252412) : Rnd.get(252413, 252417),
 					getSiegeLocationId(), race, SiegeModType.ASSAULT, x1, y1, sn.getZ(), (byte) 0);
 				SpawnEngine.spawnObject(temp, 1);

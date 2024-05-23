@@ -76,7 +76,7 @@ public class PvPArenaScore extends InstanceScore<PvPArenaPlayerReward> {
 	}
 
 	public final void setRndZone() {
-		int index = Rnd.get(zones.size());
+		int index = Rnd.nextInt(zones.size());
 		zone = zones.remove(index);
 	}
 

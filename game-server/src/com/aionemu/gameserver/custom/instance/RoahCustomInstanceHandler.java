@@ -139,7 +139,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 					if (newTrash > 0) {
 						for (int i = 0; i < newTrash; i++) {
-							Npc mob = (Npc) spawn(TRASH_MOB_ID, 500.1f + Rnd.get() * 8, 460f + Rnd.get() * 4, 86.7112f, (byte) 30);
+							Npc mob = (Npc) spawn(TRASH_MOB_ID, 500.1f + Rnd.nextFloat(8f), 460f + Rnd.nextFloat(4f), 86.7112f, (byte) 30);
 							adaptNPC(mob, rank);
 							mob.getAggroList().addHate(player, 1000);
 						}

@@ -472,16 +472,16 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 	}
 
 	protected final VisibleObject rndSpawnInRange(int npcId, float distance) {
-		double directionRadian = Math.toRadians(Rnd.get(360));
+		double angleRadians = Math.toRadians(Rnd.nextFloat(360f));
 		WorldPosition p = getPosition();
-		float x = p.getX() + (float) (Math.cos(directionRadian) * distance);
-		float y = p.getY() + (float) (Math.sin(directionRadian) * distance);
+		float x = p.getX() + (float) (Math.cos(angleRadians) * distance);
+		float y = p.getY() + (float) (Math.sin(angleRadians) * distance);
 		Vector3f pos = GeoService.getInstance().getClosestCollision(owner, x, y, p.getZ());
 		return spawn(npcId, pos.getX(), pos.getY(), pos.getZ(), p.getHeading());
 	}
 
 	protected final VisibleObject rndSpawnInRange(int npcId, float minDistance, float maxDistance) {
-		return rndSpawnInRange(npcId, minDistance + Rnd.nextFloat() * (maxDistance - minDistance));
+		return rndSpawnInRange(npcId, Rnd.nextFloat(minDistance, maxDistance));
 	}
 
 	@Override

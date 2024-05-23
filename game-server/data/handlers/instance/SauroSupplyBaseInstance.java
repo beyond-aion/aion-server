@@ -72,7 +72,7 @@ public class SauroSupplyBaseInstance extends GeneralInstanceHandler {
 
 		List<WorldPosition> temp = new ArrayList<>(chestPoints);
 		for (int i = 0; i < 8; i++) {
-			int index = Rnd.get(temp.size());
+			int index = Rnd.nextInt(temp.size());
 			WorldPosition pos = temp.remove(index);
 			spawn(230847, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 		}

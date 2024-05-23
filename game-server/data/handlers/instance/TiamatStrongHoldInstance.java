@@ -190,7 +190,7 @@ public class TiamatStrongHoldInstance extends GeneralInstanceHandler {
 	}
 
 	private void spawnColonels() {
-		switch (Rnd.get(4)) {
+		switch (Rnd.nextInt(4)) {
 			case 0:
 				spawn(219364, 763.4179f, 1445.6504f, 495.6519f, (byte) 90);
 				spawn(219395, 893.7009f, 1445.4846f, 495.6421f, (byte) 90);

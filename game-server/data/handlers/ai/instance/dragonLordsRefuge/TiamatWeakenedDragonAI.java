@@ -76,7 +76,7 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI implements HpPhases.
 	}
 
 	protected int calculateAtrocitySkillId() {
-		return 20922 + (Rnd.get(3) * 2);
+		return 20922 + (Rnd.nextInt(3) * 2);
 	}
 
 	@Override

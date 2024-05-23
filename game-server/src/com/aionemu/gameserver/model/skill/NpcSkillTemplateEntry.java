@@ -252,8 +252,8 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 			float x1 = 0;
 			float y1 = 0;
 			if (spawn.getMinDistance() > 0) {
-				float directionMod = (float) (Rnd.get() * 2 * Math.PI); // 0 = normal direction, PI = opposite direction
-				double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(npc.getHeading())) + directionMod;
+				double angleRadians = Math.toRadians(Rnd.nextFloat(360f));
+				double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(npc.getHeading())) + angleRadians;
 				float distance = spawn.getMaxDistance() > 0 ? Rnd.get(spawn.getMinDistance(), spawn.getMaxDistance()) : spawn.getMinDistance();
 				x1 = (float) (Math.cos(radian) * distance);
 				y1 = (float) (Math.sin(radian) * distance);

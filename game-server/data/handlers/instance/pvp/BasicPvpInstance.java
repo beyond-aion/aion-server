@@ -43,7 +43,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class BasicPvpInstance extends GeneralInstanceHandler {
 
 	protected final List<Future<?>> tasks = new ArrayList<>();
-	protected final int raceStartPosition = Rnd.get(2);
+	protected final int raceStartPosition = Rnd.nextInt(2);
 	protected PvpInstanceScore<PvpInstancePlayerReward> instanceScore;
 	protected long startTime;
 

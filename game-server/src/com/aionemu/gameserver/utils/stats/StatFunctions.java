@@ -310,7 +310,7 @@ public class StatFunctions {
 							offHandDamage = (offHandAttack.getExactCurrentWithoutFixedBonus() + totalBaseDamage * mainHandAttack.getFixedBonusRate()) * 0.8f * p.getGameStats().getSkillEfficiency();
 						}
 					} else {
-						if (Rnd.get(1000) >= p.getGameStats().getMaxDamageChance()) {
+						if (Rnd.nextInt(1000) >= p.getGameStats().getMaxDamageChance()) {
 							offHandDamage *= p.getGameStats().getMinDamageRatio();
 							if (offHandDamage <= 0 && offWeaponStats != null) {
 								offHandDamage = 1;
@@ -390,7 +390,7 @@ public class StatFunctions {
 			critical *= criticalProb / 100f;
 		}
 
-		return Rnd.get(1000) < limit(StatEnum.MAGICAL_CRITICAL, critical);
+		return Rnd.nextInt(1000) < limit(StatEnum.MAGICAL_CRITICAL, critical);
 	}
 
 	public static int calculateRatingMultiplier(NpcRating npcRating) {
@@ -497,7 +497,7 @@ public class StatFunctions {
 			int levelDiff = attacked.getLevel() - attacker.getLevel();
 			dodgeRate *= 1 + getNpcLevelDiffMod(levelDiff, 0);
 		}
-		return Rnd.get(1000) < limit(StatEnum.EVASION, dodgeRate);
+		return Rnd.nextInt(1000) < limit(StatEnum.EVASION, dodgeRate);
 	}
 
 	/**
@@ -511,7 +511,7 @@ public class StatFunctions {
 		float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent() + accMod;
 		float parry = attacked.getGameStats().getParry().getBonus()
 			+ getMovementModifier(attacked, StatEnum.PARRY, attacked.getGameStats().getParry().getBase());
-		return Rnd.get(1000) < limit(StatEnum.PARRY, parry - accuracy);
+		return Rnd.nextInt(1000) < limit(StatEnum.PARRY, parry - accuracy);
 	}
 
 	/**
@@ -526,7 +526,7 @@ public class StatFunctions {
 
 		float block = attacked.getGameStats().getBlock().getBonus()
 			+ getMovementModifier(attacked, StatEnum.BLOCK, attacked.getGameStats().getBlock().getBase());
-		return Rnd.get(1000) < limit(StatEnum.BLOCK, block - accuracy);
+		return Rnd.nextInt(1000) < limit(StatEnum.BLOCK, block - accuracy);
 	}
 
 	/**
@@ -549,7 +549,7 @@ public class StatFunctions {
 			if (acStatus.isPercent())
 				criticalRate *= (1 + acStatus.getValue() / 100);
 			else
-				return Rnd.get(1000) < acStatus.getValue();
+				return Rnd.nextInt(1000) < acStatus.getValue();
 		}
 
 		criticalRate -= attacked.getGameStats().getPCR().getCurrent();
@@ -558,7 +558,7 @@ public class StatFunctions {
 		if (criticalProb != 100 && criticalRate > 0) {
 			criticalRate *= criticalProb / 100f;
 		}
-		return Rnd.get(1000) < limit(StatEnum.PHYSICAL_CRITICAL, criticalRate);
+		return Rnd.nextInt(1000) < limit(StatEnum.PHYSICAL_CRITICAL, criticalRate);
 	}
 
 	public static int calculateMagicalResistRate(Creature attacker, Creature attacked, int accMod, SkillElement element) {

@@ -55,7 +55,7 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI implements HpP
 	@Override
 	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		if (PvpMapService.getInstance().isRandomBoss(getOwner())) {
-			return damage > 7900 ? (7700 + Rnd.get(600)) : damage;
+			return damage > 7900 ? (7700 + Rnd.nextInt(600)) : damage;
 		}
 		switch (getOwner().getNpcId()) {
 			case 218547: // cleric
@@ -172,7 +172,7 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI implements HpP
 		return pos;
 	}
 
-	private float getRandomDmg(float damage, float min, float max) {
-		return damage * (min + Rnd.nextFloat() * (max - min));
+	private float getRandomDmg(float damage, float minMultiplier, float maxMultiplier) {
+		return damage * Rnd.nextFloat(minMultiplier, maxMultiplier);
 	}
 }

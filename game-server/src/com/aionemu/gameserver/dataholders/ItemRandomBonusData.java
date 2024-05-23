@@ -62,7 +62,7 @@ public class ItemRandomBonusData {
 			return 0;
 
 		List<ModifiersTemplate> modifiersGroup = bonus.getModifiers();
-		float chance = Rnd.get() * calculateSumOfChances(modifiersGroup);
+		float chance = Rnd.nextFloat(calculateSumOfChances(modifiersGroup));
 		float chanceSum = 0;
 		for (int i = 0; i < modifiersGroup.size(); i++) {
 			chanceSum += modifiersGroup.get(i).getChance();

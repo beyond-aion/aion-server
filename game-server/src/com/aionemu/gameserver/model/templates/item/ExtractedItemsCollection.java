@@ -3,11 +3,13 @@ package com.aionemu.gameserver.model.templates.item;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.model.Chance;
+
 /**
  * @author antness
  */
 @XmlType(name = "ExtractedItemsCollection")
-public class ExtractedItemsCollection extends ResultedItemsCollection {
+public class ExtractedItemsCollection extends ResultedItemsCollection implements Chance {
 
 	@XmlAttribute(name = "chance")
 	private float chance = 100f;
