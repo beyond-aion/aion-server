@@ -91,16 +91,6 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	}
 
 	/**
-	 * Notify Dispatcher Selector that we want write some data here.
-	 */
-	protected final void enableWriteInterest() {
-		if (key.isValid()) {
-			key.interestOps(key.interestOps() | SelectionKey.OP_WRITE);
-			key.selector().wakeup();
-		}
-	}
-
-	/**
 	 * @return SocketChannel representing this connection.
 	 */
 	public SocketChannel getSocketChannel() {
@@ -115,8 +105,13 @@ public abstract class AConnection<T extends BaseServerPacket> {
 			if (pendingClose || closed)
 				return;
 
-			getSendMsgQueue().add(serverPacket);
-			enableWriteInterest();
+			if (isConnected()) {
+				getSendMsgQueue().add(serverPacket);
+				key.interestOps(key.interestOps() | SelectionKey.OP_WRITE);
+				key.selector().wakeup();
+			} else {
+				close();
+			}
 		}
 	}
 
@@ -140,16 +135,14 @@ public abstract class AConnection<T extends BaseServerPacket> {
 				return;
 
 			pendingClose = true;
-			if (closePacket != null) {
+			if (closePacket != null || !isConnected())
 				getSendMsgQueue().clear();
+			if (closePacket != null && isConnected()) {
 				getSendMsgQueue().add(closePacket);
-				enableWriteInterest();
-				dispatcher.closeConnection(this);
-			} else {
-				dispatcher.closeConnection(this);
-				if (key.isValid())
-					key.selector().wakeup(); // notify dispatcher
+				key.interestOps(SelectionKey.OP_WRITE);
 			}
+			dispatcher.closeConnection(this);
+			key.selector().wakeup(); // notify dispatcher
 		}
 	}
 
@@ -177,6 +170,10 @@ public abstract class AConnection<T extends BaseServerPacket> {
 		key.attach(null);
 
 		dcExecutor.execute(this::onDisconnect);
+	}
+
+	final boolean isConnected() {
+		return key.isValid();
 	}
 
 	/**
