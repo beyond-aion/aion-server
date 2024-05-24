@@ -11,9 +11,4 @@ public class QueuedNpcSkillEntry extends NpcSkillTemplateEntry {
 		super(template);
 	}
 
-	@Override
-	public boolean isQueued() {
-		return true;
-	}
-
 }

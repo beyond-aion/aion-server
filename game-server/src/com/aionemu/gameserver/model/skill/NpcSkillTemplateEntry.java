@@ -26,7 +26,7 @@ import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
  * Skill entry which inherits properties from template (regular npc skills)
- * 
+ *
  * @author ATracer, nrg, Yeats
  */
 public class NpcSkillTemplateEntry extends NpcSkillEntry {
@@ -43,16 +43,11 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		if (hasCooldown() || !chanceReady())
 			return false;
 
-		switch (template.getConjunctionType()) {
-			case XOR:
-				return (hpReady(hpPercentage) && !timeReady(fightingTimeInMSec)) || (!hpReady(hpPercentage) && timeReady(fightingTimeInMSec));
-			case OR:
-				return hpReady(hpPercentage) || timeReady(fightingTimeInMSec);
-			case AND:
-				return hpReady(hpPercentage) && timeReady(fightingTimeInMSec);
-			default:
-				return false;
-		}
+		return switch (template.getConjunctionType()) {
+			case XOR -> (hpReady(hpPercentage) && !timeReady(fightingTimeInMSec)) || (!hpReady(hpPercentage) && timeReady(fightingTimeInMSec));
+			case OR -> hpReady(hpPercentage) || timeReady(fightingTimeInMSec);
+			case AND -> hpReady(hpPercentage) && timeReady(fightingTimeInMSec);
+		};
 	}
 
 	@Override
@@ -101,14 +96,12 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		if (condTemp == null)
 			return true;
 		VisibleObject curTarget = creature.getTarget();
-		NpcSkillCondition condType = condTemp.getCondType();
-		switch (condType) {
+		switch (condTemp.getCondType()) {
 			case NONE:
 				return true;
 			case SELECT_TARGET_AFFECTED_BY_SKILL:
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
-					if (obj instanceof Creature) {
-						Creature target = (Creature) obj;
+					if (obj instanceof Creature target) {
 						if (target.isDead() || target.getLifeStats().isAboutToDie())
 							continue;
 						if (creature.canSee(target) && target.getEffectController().hasAbnormalEffect(condTemp.getSkillId())
@@ -121,8 +114,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				return false;
 			case HELP_FRIEND:
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
-					if (obj instanceof Creature) {
-						Creature target = (Creature) obj;
+					if (obj instanceof Creature target) {
 						if (target.isDead() || target.getLifeStats().isAboutToDie())
 							continue;
 						if ((TribeRelationService.isSupport(creature, target) || TribeRelationService.isFriend(creature, target))
@@ -218,8 +210,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		if (skillTemp != null && curTarget instanceof Creature && !((Creature) curTarget).isDead()
 			&& !((Creature) curTarget).getLifeStats().isAboutToDie()) {
 			for (EffectTemplate effectTemp : skillTemp.getEffects().getEffects()) {
-				if (effectTemp instanceof SignetBurstEffect) {
-					SignetBurstEffect signetEffect = (SignetBurstEffect) effectTemp;
+				if (effectTemp instanceof SignetBurstEffect signetEffect) {
 					String signet = signetEffect.getSignet();
 					Creature target = (Creature) curTarget;
 					Effect signetEffectOnTarget = target.getEffectController().getAbnormalEffect(signet);
@@ -302,11 +293,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 	@Override
 	public boolean canUseNextChain(Npc owner) {
 		return owner != null && (System.currentTimeMillis() - owner.getGameStats().getLastSkillTime()) < template.getMaxChainTime();
-	}
-
-	@Override
-	public boolean isQueued() {
-		return false;
 	}
 
 }

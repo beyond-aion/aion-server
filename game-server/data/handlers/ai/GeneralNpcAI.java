@@ -5,13 +5,7 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.AttackIntention;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.ai.handler.AggroEventHandler;
-import com.aionemu.gameserver.ai.handler.AttackEventHandler;
-import com.aionemu.gameserver.ai.handler.MoveEventHandler;
-import com.aionemu.gameserver.ai.handler.ReturningEventHandler;
-import com.aionemu.gameserver.ai.handler.TalkEventHandler;
-import com.aionemu.gameserver.ai.handler.TargetEventHandler;
-import com.aionemu.gameserver.ai.handler.ThinkEventHandler;
+import com.aionemu.gameserver.ai.handler.*;
 import com.aionemu.gameserver.ai.manager.SkillAttackManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -115,8 +109,8 @@ public class GeneralNpcAI extends NpcAI {
 	protected boolean canHandleEvent(AIEventType eventType) {
 		switch (eventType) {
 			case CREATURE_NEEDS_SUPPORT:
-				return (getState() == AIState.IDLE || getState() == AIState.WALKING)
-					&& DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(getOwner().getTribe());
+				return (getState() == AIState.IDLE || getState() == AIState.WALKING) && DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(
+					getOwner().getTribe());
 		}
 		return super.canHandleEvent(eventType);
 	}
@@ -139,14 +133,11 @@ public class GeneralNpcAI extends NpcAI {
 	}
 
 	protected final boolean chooseSkillAttack(boolean alwaysRandomSkill) {
-		NpcSkillEntry skill;
-		if (alwaysRandomSkill)
-			skill = getOwner().getSkillList().getRandomSkill();
-		else
-			skill = SkillAttackManager.chooseNextSkill(this);
-
+		NpcSkillEntry skill = alwaysRandomSkill ? getOwner().getSkillList().getRandomSkill() : SkillAttackManager.chooseNextSkill(this);
 		if (skill != null) {
 			getOwner().getGameStats().setLastSkill(skill);
+			if (skill.equals(getOwner().getQueuedSkills().peek()))
+				getOwner().getQueuedSkills().poll();
 			return true;
 		}
 		return false;

@@ -58,7 +58,5 @@ public abstract class NpcSkillEntry extends SkillEntry {
 
 	public abstract void fireOnEndCastEvents(Npc npc);
 
-	public abstract boolean isQueued();
-
 }
 

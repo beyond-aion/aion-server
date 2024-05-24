@@ -31,7 +31,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.GodStone;
 import com.aionemu.gameserver.model.items.ItemSlot;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
@@ -472,7 +471,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 			creature.setCasting(null);
 			if (creature instanceof Npc) {
 				creature.getAi().setSubStateIfNot(AISubState.NONE);
-				removeQueuedSkill((Npc) creature);
 				((Npc) creature).getGameStats().setLastSkill(null);
 			}
 		}
@@ -497,13 +495,6 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		}
 		if (lastAttacker instanceof Player) {
 			PacketSendUtility.sendPacket((Player) lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_SKILL_CANCELED());
-		}
-	}
-
-	private void removeQueuedSkill(Npc npc) {
-		NpcSkillEntry lastSkill = npc.getGameStats().getLastSkill();
-		if (lastSkill != null && lastSkill.isQueued()) {
-			npc.getQueuedSkills().poll();
 		}
 	}
 

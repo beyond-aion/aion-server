@@ -140,7 +140,7 @@ public class Skill {
 
 	/**
 	 * Check if the skill can be used
-	 * 
+	 *
 	 * @return True if the skill can be used
 	 */
 	public boolean canUseSkill(CastState castState) {
@@ -234,7 +234,7 @@ public class Skill {
 
 	/**
 	 * Skill entry point
-	 * 
+	 *
 	 * @return true if usage is successful
 	 */
 	public boolean useSkill() {
@@ -632,8 +632,7 @@ public class Skill {
 		}
 
 		boolean setCooldowns = true;
-		if (effector instanceof Player) {
-			Player playerEffector = (Player) effector;
+		if (effector instanceof Player playerEffector) {
 			if (skillTemplate.isStance() && !blockedStance && skillMethod == SkillMethod.CAST)
 				playerEffector.getController().startStance(skillTemplate.getSkillId());
 			if (isMulticast() && playerEffector.getChainSkills().getCurrentChainCount(chainCategory) > 0)
@@ -677,12 +676,9 @@ public class Skill {
 		effector.getAi().onEndUseSkill(skillTemplate, skillLevel);
 		if (effector instanceof Npc npc) {
 			NpcSkillEntry lastSkill = npc.getGameStats().getLastSkill();
-			if (lastSkill != null) {
-				if (lastSkill.isQueued()) {
-					npc.getQueuedSkills().poll();
-				}
+			if (lastSkill != null)
 				lastSkill.fireOnEndCastEvents(npc);
-			}
+
 			SkillAttackManager.afterUseSkill((NpcAI) npc.getAi());
 		}
 

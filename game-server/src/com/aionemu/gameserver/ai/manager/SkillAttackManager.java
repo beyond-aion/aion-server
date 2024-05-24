@@ -30,10 +30,6 @@ import com.aionemu.gameserver.world.geo.GeoService;
  */
 public class SkillAttackManager {
 
-	/**
-	 * @param npcAI
-	 * @param delay
-	 */
 	public static void performAttack(NpcAI npcAI, int delay) {
 		if (npcAI.getOwner().getObjectTemplate().getAttackRange() == 0) {
 			if (npcAI.getOwner().getTarget() != null
@@ -160,7 +156,7 @@ public class SkillAttackManager {
 		Npc owner = npcAI.getOwner();
 
 		NpcSkillEntry queuedSkill = owner.getQueuedSkills().peek();
-		if (queuedSkill != null && queuedSkill.isQueued() && queuedSkill.getNextSkillTime() == 0 && isReady(owner, queuedSkill)) {
+		if (queuedSkill != null && queuedSkill.getNextSkillTime() == 0 && isReady(owner, queuedSkill)) {
 			return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
 		}
 
