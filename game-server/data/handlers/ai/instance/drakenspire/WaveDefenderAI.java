@@ -36,33 +36,16 @@ public class WaveDefenderAI extends AggressiveNpcAI {
 	}
 
 	private byte getHeading() {
-		byte h = 30;
-		switch (getOwner().getSpawn().getWalkerId()) {
-			case "301390000_NPCPathFunction_Npc_Path07":
-				h = 100;
-				break;
-			case "301390000_NPCPathFunction_Npc_Path08":
-				h = 110;
-				break;
-			case "301390000_NPCPathFunction_Npc_Path09":
-				h = 3;
-				break;
-			case "301390000_NPCPathFunction_Npc_Path10":
-				h = 10;
-				break;
-			case "301390000_NPCPathFunction_Npc_Path13":
-				h = 77;
-				break;
-			case "301390000_NPCPathFunction_Npc_Path14":
-				h = 64;
-				break;
-			case "301390000_NPCPathFunction_Npc_Path15":
-				h = 64;
-				break;
-			case "301390000_NPCPathFunction_Npc_Path16":
-				h = 55;
-				break;
-		}
-		return h;
+		return switch (getOwner().getSpawn().getWalkerId()) {
+			case "301390000_NPCPathFunction_Npc_Path07" -> 100;
+			case "301390000_NPCPathFunction_Npc_Path08" -> 110;
+			case "301390000_NPCPathFunction_Npc_Path09" -> 3;
+			case "301390000_NPCPathFunction_Npc_Path10" -> 10;
+			case "301390000_NPCPathFunction_Npc_Path13" -> 77;
+			case "301390000_NPCPathFunction_Npc_Path14" -> 64;
+			case "301390000_NPCPathFunction_Npc_Path15" -> 64;
+			case "301390000_NPCPathFunction_Npc_Path16" -> 55;
+			default -> 30;
+		};
 	}
 }

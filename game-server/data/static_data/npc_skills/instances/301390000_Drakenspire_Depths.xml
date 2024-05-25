@@ -1,5 +1,20 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Detachment Entry Leader -->
+	<npc_skills npc_ids="209736 209801">
+		<npc_skill id="20834" lv="1" prob="100" next_chain_id="1" next_skill_time="5000" cd="60000" /><!-- Life or Death -->
+		<npc_skill id="21494" lv="65" prob="100" chain_id="1" /><!-- Ide Frenzy | Suicide -->
+	</npc_skills>
+	<!-- Detachment Entry Leader -->
+	<npc_skills npc_ids="209734 209799">
+		<npc_skill id="20835" lv="1" prob="100" next_chain_id="1" next_skill_time="5000" cd="60000" /><!-- Life or Death -->
+		<npc_skill id="21494" lv="65" prob="100" chain_id="1" /><!-- Ide Frenzy | Suicide -->
+	</npc_skills>
+	<!-- Detachment Entry Soldier -->
+	<npc_skills npc_ids="209735 209737 209800 209802">
+		<npc_skill id="20836" lv="1" prob="100" next_chain_id="1" next_skill_time="5000" cd="60000" /><!-- Life or Death -->
+		<npc_skill id="21494" lv="65" prob="100" chain_id="1" /><!-- Ide Frenzy | Suicide -->
+	</npc_skills>
 	<!-- Fountless Lava Protector -->
 	<npc_skills npc_ids="236225">
 		<npc_skill id="21641" lv="1" prob="0" is_post_spawn="true" /><!-- Binding Curse -->
@@ -55,23 +70,97 @@
 		<npc_skill id="21631" lv="1" prob="100" cd="26000" /><!-- Aerial Thrust -->
 		<npc_skill id="21630" lv="1" prob="100" /><!-- Power Attack -->
 	</npc_skills>
-	<!-- Beritra Easy Mode -->
-	<npc_skills npc_ids="236244">
-		<npc_skill id="21599" lv="1" prob="100" next_chain_id="1" next_skill_time="2000" cd="12000" /><!-- Charged Fist -->
-		<npc_skill id="21600" lv="1" prob="100" chain_id="1" /><!-- Successive Strike -->
+	<!-- Beritra -->
+	<npc_skills npc_ids="236244 236245 236246">
+		<npc_skill id="21609" lv="58" prob="100" prio="5" next_chain_id="1" max_hp="35" min_time="660000" conjunction="OR" target="ME"
+			cd="600000" /><!-- Soul Extinction Field -->
+		<npc_skill id="21606" lv="56" prob="100" chain_id="1" next_chain_id="2" next_skill_time="4500" target="ME" /><!-- Soul Plunder -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="2" next_chain_id="3" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="3" next_chain_id="4" next_skill_time="0" /><!-- Successive Strike -->
+		<npc_skill id="21599" lv="56" prob="100" chain_id="4" next_chain_id="5" next_skill_time="5700" /><!-- Charged Fist -->
+		<npc_skill id="21602" lv="56" prob="100" chain_id="5" next_chain_id="6" next_skill_time="4000" target="ME"
+			max_chain_time="20000" /><!-- Dimensional Wave -->
+		<npc_skill id="21607" lv="56" prob="100" chain_id="6" next_chain_id="7" next_skill_time="0" target="RANDOM" /><!-- Dark Sign -->
+		<npc_skill id="21606" lv="56" prob="100" chain_id="7" next_chain_id="8" next_skill_time="0" target="ME" /><!-- Soul Plunder -->
+		<npc_skill id="21604" lv="56" prob="100" chain_id="8" next_chain_id="9" next_skill_time="0" /><!-- Rending Shadow -->
+		<npc_skill id="21603" lv="56" prob="100" chain_id="9" next_chain_id="10" next_skill_time="1000" target="ME" /><!-- Rending Shadow -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="10" next_chain_id="11" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="11" next_chain_id="12" next_skill_time="0" /><!-- Successive Strike -->
+		<npc_skill id="21599" lv="56" prob="100" chain_id="12" next_chain_id="13" next_skill_time="5700" /><!-- Charged Fist -->
+		<npc_skill id="21605" lv="5" prob="100" chain_id="13" next_chain_id="14" next_skill_time="0" /><!-- Chains of Command -->
+		<npc_skill id="21601" lv="56" prob="100" chain_id="14" next_skill_time="13000" target="ME" /><!-- Pulse Wave -->
 
-		<npc_skill id="21607" lv="1" prob="100" next_chain_id="2" next_skill_time="0" cd="20000" min_time="30000" /><!-- Dark Sign -->
-		<npc_skill id="21606" lv="1" prob="100" chain_id="2" target="ME" /><!-- Soul Plunder -->
+		<npc_skill id="21609" lv="56" prob="100" prio="4" next_chain_id="21" next_skill_time="0" max_hp="35" min_time="660000"
+			conjunction="OR" target="ME" /><!-- Soul Extinction Field -->
+		<npc_skill id="21606" lv="56" prob="100" chain_id="21" next_chain_id="22" next_skill_time="4000" target="ME" /><!-- Soul Plunder -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="22" next_chain_id="23" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="23" next_chain_id="24" next_skill_time="0" /><!-- Successive Strike -->
+		<npc_skill id="21599" lv="56" prob="100" chain_id="24" next_chain_id="25" next_skill_time="5700" /><!-- Charged Fist -->
+		<npc_skill id="21602" lv="56" prob="100" chain_id="25" next_chain_id="26" next_skill_time="4000" target="ME"
+			max_chain_time="20000" /><!-- Dimensional Wave -->
+		<npc_skill id="21607" lv="56" prob="100" chain_id="26" next_chain_id="27" next_skill_time="0" target="RANDOM" /><!-- Dark Sign -->
+		<npc_skill id="21606" lv="56" prob="100" chain_id="27" next_chain_id="28" next_skill_time="0" target="ME" /><!-- Soul Plunder -->
+		<npc_skill id="21604" lv="56" prob="100" chain_id="28" next_chain_id="29" next_skill_time="0" /><!-- Rending Shadow -->
+		<npc_skill id="21603" lv="56" prob="100" chain_id="29" next_chain_id="30" next_skill_time="4000" target="ME" /><!-- Rending Shadow -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="30" next_chain_id="31" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="31" next_chain_id="32" next_skill_time="0" /><!-- Successive Strike -->
+		<npc_skill id="21599" lv="56" prob="100" chain_id="32" next_chain_id="33" next_skill_time="5700" /><!-- Charged Fist -->
+		<npc_skill id="21605" lv="5" prob="100" chain_id="33" next_chain_id="34" next_skill_time="0" /><!-- Chains of Command -->
+		<npc_skill id="21601" lv="56" prob="100" chain_id="34" next_skill_time="13000" target="ME" /><!-- Pulse Wave -->
 
-		<npc_skill id="21603" lv="1" prob="100" next_chain_id="3" next_skill_time="2000" cd="30000" min_time="120000" /><!-- Rending Shadow -->
-		<npc_skill id="21604" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="2000" target="RANDOM_EXCEPT_MOST_HATED" /><!-- Rending Shadow -->
-		<npc_skill id="21604" lv="1" prob="100" chain_id="4" target="RANDOM_EXCEPT_MOST_HATED" /><!-- Rending Shadow -->
+		<npc_skill id="21609" lv="57" prob="100" prio="3" next_chain_id="41" next_skill_time="7500" min_hp="36" max_hp="70" min_time="360000"
+			max_time="659000" conjunction="OR" target="ME" cd="600000" /><!-- Soul Extinction Field -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="41" next_chain_id="42" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="42" next_chain_id="43" next_skill_time="0" /><!-- Successive Strike -->
+		<npc_skill id="21599" lv="56" prob="100" chain_id="43" next_chain_id="44" next_skill_time="5700" /><!-- Charged Fist -->
+		<npc_skill id="21602" lv="56" prob="100" chain_id="44" next_chain_id="45" next_skill_time="4000" target="ME"
+			max_chain_time="20000" /><!-- Dimensional Wave -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="45" next_chain_id="46" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="46" next_chain_id="47" next_skill_time="0" /><!-- Successive Strike -->
+		<npc_skill id="21599" lv="56" prob="100" chain_id="47" next_chain_id="48" next_skill_time="5700" /><!-- Charged Fist -->
+		<npc_skill id="21607" lv="56" prob="100" chain_id="48" next_chain_id="49" next_skill_time="0" target="MOST_HATED" /><!-- Dark Sign -->
+		<npc_skill id="21606" lv="56" prob="100" chain_id="49" next_chain_id="50" next_skill_time="5000" target="ME" /><!-- Soul Plunder -->
+		<npc_skill id="21604" lv="56" prob="100" chain_id="50" next_chain_id="51" next_skill_time="0" /><!-- Rending Shadow -->
+		<npc_skill id="21603" lv="56" prob="100" chain_id="51" next_chain_id="52" next_skill_time="6000" target="ME" /><!-- Rending Shadow -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="52" next_chain_id="53" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21608" lv="56" prob="100" chain_id="53" next_chain_id="54" next_skill_time="7500" /><!-- Soul Extinction -->
+		<npc_skill id="21605" lv="5" prob="100" chain_id="54" next_chain_id="55" next_skill_time="0" /><!-- Chains of Command -->
+		<npc_skill id="21601" lv="56" prob="100" chain_id="55" next_skill_time="13000" target="ME" /><!-- Pulse Wave -->
 
-		<npc_skill id="21609" lv="1" prob="100" cd="30000" min_time="60000" target="ME" /><!-- Soul Extinction Field ai handling  -->
-		<npc_skill id="21608" lv="1" prob="100" cd="30000" min_time="80000" /><!-- Soul Extinction -->
+		<npc_skill id="21609" lv="56" prob="100" prio="2" next_chain_id="61" min_hp="36" max_hp="70" min_time="360000"
+			conjunction="OR" target="ME" /><!-- Soul Extinction Field -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="61" next_chain_id="62" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="62" next_chain_id="63" next_skill_time="0" /><!-- Successive Strike -->
+		<npc_skill id="21599" lv="56" prob="100" chain_id="63" next_chain_id="64" next_skill_time="5700" /><!-- Charged Fist -->
+		<npc_skill id="21602" lv="56" prob="100" chain_id="64" next_chain_id="65" next_skill_time="4000" target="ME"
+			max_chain_time="20000" /><!-- Dimensional Wave -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="65" next_chain_id="66" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="66" next_chain_id="67" next_skill_time="0" /><!-- Successive Strike -->
+		<npc_skill id="21599" lv="56" prob="100" chain_id="67" next_chain_id="68" next_skill_time="5700" /><!-- Charged Fist -->
+		<npc_skill id="21607" lv="56" prob="100" chain_id="68" next_chain_id="69" next_skill_time="0" target="MOST_HATED" /><!-- Dark Sign -->
+		<npc_skill id="21606" lv="56" prob="100" chain_id="69" next_chain_id="70" next_skill_time="5000" target="ME" /><!-- Soul Plunder -->
+		<npc_skill id="21604" lv="56" prob="100" chain_id="70" next_chain_id="71" next_skill_time="0" /><!-- Rending Shadow -->
+		<npc_skill id="21603" lv="56" prob="100" chain_id="71" next_chain_id="72" next_skill_time="6000" target="ME" /><!-- Rending Shadow -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="72" next_chain_id="73" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21608" lv="56" prob="100" chain_id="73" next_chain_id="74" next_skill_time="7500" /><!-- Soul Extinction -->
+		<npc_skill id="21605" lv="5" prob="100" chain_id="74" next_chain_id="75" next_skill_time="0" /><!-- Chains of Command -->
+		<npc_skill id="21601" lv="56" prob="100" chain_id="75" next_skill_time="13000" target="ME" /><!-- Pulse Wave -->
 
-		<npc_skill id="21601" lv="1" prob="100" cd="45000" min_time="30000" target="ME" /><!-- Pulse Wave -->
-		<!-- <npc_skill id="21605" lv="1" /> Chains of Command - TODO: fix effect -->
+		<npc_skill id="21607" lv="56" prob="100" prio="1" next_chain_id="81" next_skill_time="0" min_hp="71" max_hp="100" max_time="359000"
+			target="RANDOM" /><!-- Dark Sign -->
+		<npc_skill id="21606" lv="56" prob="100" chain_id="81" next_chain_id="82" next_skill_time="5000" target="ME" /><!-- Soul Plunder -->
+		<npc_skill id="21604" lv="56" prob="100" chain_id="82" next_chain_id="83" next_skill_time="0" /><!-- Rending Shadow -->
+		<npc_skill id="21603" lv="56" prob="100" chain_id="83" next_chain_id="84" next_skill_time="6000" target="ME" /><!-- Rending Shadow -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="84" next_chain_id="85" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="85" next_chain_id="86" next_skill_time="0" /><!-- Successive Strike -->
+		<npc_skill id="21599" lv="56" prob="100" chain_id="86" next_chain_id="87" next_skill_time="5700" /><!-- Charged Fist -->
+		<npc_skill id="21605" lv="5" prob="100" chain_id="87" next_chain_id="88" next_skill_time="0" /><!-- Chains of Command -->
+		<npc_skill id="21601" lv="56" prob="100" chain_id="88" next_chain_id="89" next_skill_time="13000"
+			target="ME" /><!-- Pulse Wave --><!-- + 100.000 Hate Random -->
+		<npc_skill id="21600" lv="56" prob="100" chain_id="89" next_chain_id="90" next_skill_time="8000" /><!-- Successive Strike -->
+		<npc_skill id="21608" lv="56" prob="100" chain_id="90" next_chain_id="91" next_skill_time="7500" /><!-- Soul Extinction -->
+		<npc_skill id="21607" lv="56" prob="100" chain_id="91" next_chain_id="92" next_skill_time="0" target="RANDOM" /><!-- Dark Sign -->
+		<npc_skill id="21601" lv="56" prob="100" chain_id="92" next_skill_time="13000" /><!-- Pulse Wave -->
 	</npc_skills>
 	<!-- Grotesque Deathchar Illdrudge -->
 	<npc_skills npc_ids="236103">
@@ -117,6 +206,54 @@
 		<npc_skill id="17935" lv="67" prob="70" cd="12000" /><!-- Successive Crippling Wave -->
 		<npc_skill id="18548" lv="67" prob="70" cd="12000" /><!-- Wide Successive Strike -->
 		<npc_skill id="21300" lv="67" prob="70" cd="9000" /><!-- Strike -->
+	</npc_skills>
+	<!-- Ghastly Drakenspire Protector -->
+	<npc_skills npc_ids="855452">
+		<npc_skill id="21884" lv="56" prob="100" next_chain_id="1" next_skill_time="6000" /><!-- Shadow Capture -->
+		<npc_skill id="21883" lv="56" prob="100" chain_id="1" next_chain_id="2" next_skill_time="10000" /><!-- Absolute Slowing -->
+		<npc_skill id="21884" lv="56" prob="100" chain_id="2" next_chain_id="1" next_skill_time="10000" /><!-- Shadow Capture -->
+	</npc_skills>
+	<!-- Drakenspire Protector -->
+	<npc_skills npc_ids="855460 855461 855462 855463 855464 855465 855466 855467 855468 855469">
+		<npc_skill id="21882" lv="57" prob="100" next_chain_id="1" next_skill_time="6000" /><!-- Suppress -->
+		<npc_skill id="21881" lv="56" prob="100" chain_id="1" next_chain_id="2" next_skill_time="6000" /><!-- Expel Order -->
+		<npc_skill id="21882" lv="56" prob="100" chain_id="2" next_chain_id="1" next_skill_time="6000" /><!-- Suppress -->
+	</npc_skills>
+	<!-- Dimensional Wave -->
+	<npc_skills npc_ids="855435">
+		<npc_skill id="21620" lv="56" prob="100" target="ME">
+			<cond despawn_time="15000" can_die="false" delay="300" />
+		</npc_skill>
+	</npc_skills>
+	<!-- idseal_beritra_dragon_soulplunder -->
+	<npc_skills npc_ids="855447">
+		<npc_skill id="21629" lv="56" prob="100" target="ME"><!-- Soul Plunder -->
+			<cond despawn_time="4500" can_die="true" delay="300" />
+		</npc_skill>
+	</npc_skills>
+	<!-- idseal_beritra_dragon_cursebrand -->
+	<npc_skills npc_ids="855448">
+		<npc_skill id="21627" lv="56" prob="100" target="ME"><!-- Burdened Curse -->
+			<cond despawn_time="4500" can_die="true" delay="300" />
+		</npc_skill>
+	</npc_skills>
+	<!-- idseal_beritra_dragon_contagion -->
+	<npc_skills npc_ids="855449">
+		<npc_skill id="21628" lv="56" prob="100" target="ME"><!-- Deteroriate -->
+			<cond despawn_time="4500" can_die="true" delay="300" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Soul Extinction Field -->
+	<npc_skills npc_ids="855450">
+		<npc_skill id="21823" lv="100" prob="100" target="ME">
+			<cond despawn_time="5500" can_die="true" delay="500" />
+		</npc_skill>
+	</npc_skills>
+	<!-- Dimensional Wave Small -->
+	<npc_skills npc_ids="856300">
+		<npc_skill id="21620" lv="56" prob="100" target="ME">
+			<cond despawn_time="15000" can_die="false" delay="300" />
+		</npc_skill>
 	</npc_skills>
 	<!-- Ripper => fire, accurate shot -->
 	<!-- Exploding Flame -->

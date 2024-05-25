@@ -5,13 +5,13 @@ import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
-import ai.AggressiveNpcAI;
+import ai.AggressiveNoLootNpcAI;
 
 /**
  * @author Estrayl
  */
 @AIName("wave_attacker")
-public class WaveAttackerAI extends AggressiveNpcAI {
+public class WaveAttackerAI extends AggressiveNoLootNpcAI {
 
 	public WaveAttackerAI(Npc owner) {
 		super(owner);

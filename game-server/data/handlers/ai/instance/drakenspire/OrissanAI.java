@@ -16,13 +16,13 @@ import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import ai.AggressiveNpcAI;
+import ai.AggressiveNoLootNpcAI;
 
 /**
  * @author Estrayl
  */
 @AIName("orissan")
-public class OrissanAI extends AggressiveNpcAI {
+public class OrissanAI extends AggressiveNoLootNpcAI {
 
 	private final AtomicBoolean isActive = new AtomicBoolean();
 	private Future<?> task;
@@ -36,14 +36,14 @@ public class OrissanAI extends AggressiveNpcAI {
 	protected void handleSpawned() {
 		super.handleSpawned();
 		lastSpawnEvent = Rnd.get(1, 2);
-		//task = ThreadPoolManager.getInstance().schedule(this::startSummoningEvent, 30000);
+		// task = ThreadPoolManager.getInstance().schedule(this::startSummoningEvent, 30000);
 	}
 
 	@Override
 	protected void handleCreatureAggro(Creature creature) {
 		super.handleCreatureAggro(creature);
-		//if (isActive.compareAndSet(false, true))
-			//task = ThreadPoolManager.getInstance().schedule(this::startSummoningEvent, 30000);
+		// if (isActive.compareAndSet(false, true))
+		// task = ThreadPoolManager.getInstance().schedule(this::startSummoningEvent, 30000);
 	}
 
 	private void startSummoningEvent() {

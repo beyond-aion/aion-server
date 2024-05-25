@@ -41,11 +41,11 @@ import com.aionemu.gameserver.world.WorldPosition;
  * - Players have failed to kill the twin bosses in under 5 minutes or failed to kill Orissan in his second vulnerable phase
  * - Players have to kill a weakened Orissan in his second vulnerable phase (if they already failed the twin bosses)
  * - Players have to defeat 3 waves to defend their siege weapon
- * - Players still have to dispel 3 buffs but Beritra remains human
+ * - Beritra remains human and NPCs will help players removing "Everlasting Life"
  * Difficulty 1: Easy Mode
  * - Players have failed to kill the twin bosses in under 5 minutes and failed to kill the weakened Orissan in his second vulnerable phase
  * - Players have to defeat 1 wave to defend their siege weapon
- * - Beritra did not have any buffs and remains human
+ * - Beritra remains human and NPCs will immediately help players removing all buffs
  * Difficulty 0: Fail Run
  * - Players have failed to defend their siege weapon, so no Beritra for them
  *
@@ -54,7 +54,11 @@ import com.aionemu.gameserver.world.WorldPosition;
 @InstanceID(301390000)
 public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 
-	private final AtomicInteger difficulty = new AtomicInteger(5); // 5 = HM, 3 = NM, 1 = EM
+	private static final int HARD_MODE = 5;
+	private static final int NORMAL_MODE = 3;
+	private static final int EASY_MODE = 1;
+	private static final int FAILED = 0;
+	private final AtomicInteger difficulty = new AtomicInteger(HARD_MODE);
 	private final AtomicBoolean isStageActive = new AtomicBoolean();
 	private final AtomicInteger waveSurvivors = new AtomicInteger(8); // increases the final boss time by 15s for each survivor
 	private final AtomicInteger eventCounter = new AtomicInteger();
@@ -116,6 +120,20 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 					break;
 				case 236247: // Dragon Beritra
 					// TODO: scheduleBeritrasDespawn();
+					spawn(702699, 153.250f, 516.473f, 1751.0494f, (byte) 0, 383); // Pillar remains
+					break;
+				case 855460:
+				case 855461:
+				case 855462:
+				case 855463:
+				case 855464: // Drakenspire Protector
+				case 855465:
+				case 855466:
+				case 855467:
+				case 855468:
+				case 855469:
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_GUARDIAN_01());
+					sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_GUARDIAN_02(), 3000);
 					break;
 			}
 		}
@@ -171,14 +189,15 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 					onWaveEventComplete(true);
 				break;
 			case 236244: // Beritra Easy Mode
-				spawn(833012, 152f, 518f, 1749.6f, (byte) 55);
-				break;
 			case 236245: // Beritra Normal Mode
-				spawn(833013, 152f, 518f, 1749.6f, (byte) 55);
+				WorldPosition pos = npc.getPosition();
+				spawn(npcId == 236244 ? 833012 : 833013, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
+				spawnExit();
 				break;
 			case 236246: // Beritra Hard Mode
 			case 236247: // Beritra Dragon
 				// TODO: spawn exit and NPCs
+				spawnExit();
 				break;
 			case 236248:
 			case 236249:
@@ -192,9 +211,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 					case 332 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_09());
 					case 522, 603 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_TWIN_08());
 				}
-				return;
 		}
-		npc.getController().delete();
 	}
 
 	@Override
@@ -264,7 +281,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 			}, 16000);
 		}, 2000);
 
-		if (difficulty.get() == 5)
+		if (difficulty.get() == HARD_MODE)
 			spawn(236232, 812.0238f, 568.3602f, 1701.045f, (byte) 92); // HM Orissan
 		else
 			spawn(236229, 812.0238f, 568.3602f, 1701.045f, (byte) 92); // NM Orissan
@@ -273,7 +290,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 	}
 
 	private void onTwinsFail() {
-		if (difficulty.compareAndSet(5, 3)) {
+		if (difficulty.compareAndSet(HARD_MODE, NORMAL_MODE)) {
 			deleteAliveNpcs(236227, 236228, 855708, 855709);
 			spawn(236225, 531.0885f, 212.4381f, 1683.412f, (byte) 60); // Fountless Lava Protector
 			spawn(236226, 530.8584f, 151.8681f, 1683.412f, (byte) 60); // Fountless Heatvent Protector
@@ -281,7 +298,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 	}
 
 	/**
-	 * Immortality phases are always 90s + 10s buff duration, vice versa his vulnerability phase differs.
+	 * Immortality phases are always 90s + 10s buff duration, vice versa; his vulnerability phase differs.
 	 * So let's handle only this phase.
 	 * 1st = 120s; 2nd = 228s, 3rd = 228s, 4th endless
 	 */
@@ -296,23 +313,23 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 			case 3 -> {
 				int prevDiff = difficulty.get();
 				switch (difficulty.getAndSet(prevDiff - 2)) {
-					case 3 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_07(), 5000);
-					case 1 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_08(), 5000);
+					case NORMAL_MODE -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_07(), 5000);
+					case EASY_MODE -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_08(), 5000);
 				}
 				delay = 240000; // Let's give them a few seconds more
 			}
 			default -> {
 				// Maybe retail has lowered the difficulty to easy mode at this point (if normal mode was present)
 				switch (difficulty.get()) {
-					case 3 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_09(), 5000);
-					case 1 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_10(), 5000);
+					case NORMAL_MODE -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_09(), 5000);
+					case EASY_MODE -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_10(), 5000);
 				}
 				return;
 			}
 		}
 
 		setCurrentEventTask(ThreadPoolManager.getInstance().schedule(() -> {
-			Npc orissan = getNpc(difficulty.get() == 5 ? 236234 : 236231);
+			Npc orissan = getNpc(difficulty.get() == HARD_MODE ? 236234 : 236231);
 			if (orissan != null) // should not happen
 				SkillEngine.getInstance().getSkill(orissan, 21635, 1, orissan).useSkill(); // Summon Crystal
 		}, delay));
@@ -376,7 +393,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 						spawn(731581, 635.39f, 784.05f, 1596.72f, (byte) 0, 548);
 					}
 					case 2 -> {
-						if (difficulty.get() == 5)
+						if (difficulty.get() == HARD_MODE)
 							sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_05());
 					}
 					case 3 -> {
@@ -384,7 +401,7 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 						instance.setDoorState(310, true);
 						spawn(731581, 707.34f, 876.80f, 1603.69f, (byte) 0, 398);
 						spawn(731581, 570.70f, 877.51f, 1599.80f, (byte) 0, 401);
-						if (difficulty.get() == 5)
+						if (difficulty.get() == HARD_MODE)
 							sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_06());
 					}
 					case 4 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_07());
@@ -427,20 +444,46 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 				case 5, 4, 3 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_02());
 				case 2, 1 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_WAVE_BONUS_01());
 			}
-			spawn(236244, 152f, 518f, 1749.6f, (byte) 55); // Beritra Easy Mode
-			/*
-			 * TODO: use this after implementing the complete beritra stuff
-			 * switch (difficulty.get()) {
-			 * case 5 -> spawn(236246, 152f, 518f, 1749.6f, (byte) 55);
-			 * case 3 -> spawn(236245, 152f, 518f, 1749.6f, (byte) 55);
-			 * case 1 -> spawn(236244, 152f, 518f, 1749.6f, (byte) 55);
-			 * }
-			 */
+			switch (difficulty.get()) {
+				// case 5 -> spawn(236246, 152f, 518f, 1749.6f, (byte) 55); TODO: Implementation
+				case HARD_MODE, NORMAL_MODE -> spawn(236245, 152.38f, 518.68f, 1749.6f, (byte) 55);
+				case EASY_MODE -> spawn(236244, 152.38f, 518.68f, 1749.6f, (byte) 55);
+			}
+
 		} else {
 			deleteAliveNpcs(702719, 702720);
 			// TODO: find sys msg for fail
 		}
 
+	}
+
+	private void spawnExit() {
+		Race r = race.get();
+		switch (difficulty.get()) {
+			case FAILED -> {
+				spawn(r == Race.ELYOS ? 209741 : 209806, 155.390f, 516.622f, 1750f, (byte) 0); // Masionel | Parsia
+				spawn(r == Race.ELYOS ? 209742 : 209807, 155.361f, 520.999f, 1750f, (byte) 0); // Detachment Entry Soldier
+			}
+			case EASY_MODE -> {
+				spawn(r == Race.ELYOS ? 209740 : 209805, 155.390f, 516.622f, 1750f, (byte) 0); // Masionel | Parsia
+				spawn(r == Race.ELYOS ? 209742 : 209807, 155.361f, 520.999f, 1750f, (byte) 0); // Detachment Entry Soldier
+			}
+			case NORMAL_MODE -> {
+				spawn(r == Race.ELYOS ? 209739 : 209804, 155.390f, 516.622f, 1750f, (byte) 0); // Masionel | Parsia
+				spawn(r == Race.ELYOS ? 209742 : 209807, 155.361f, 520.999f, 1750f, (byte) 0); // Detachment Entry Soldier
+			}
+			case HARD_MODE -> {
+				spawn(r == Race.ELYOS ? 209738 : 209803, 140.656f, 518.922f, 1750f, (byte) 0); // Masionel | Parsia
+				spawn(r == Race.ELYOS ? 209742 : 209807, 144.452f, 516.218f, 1749.4784f, (byte) 0); // Detachment Entry Soldier
+				spawn(r == Race.ELYOS ? 209742 : 209807, 144.433f, 521.472f, 1749.4768f, (byte) 0); // Detachment Entry Soldier
+			}
+		}
+		// Exits
+		spawn(731548, 320.005f, 183.281f, 1687.2552f, (byte) 60); // Start Exit
+		spawn(731548, 545.194f, 153.283f, 1681.8224f, (byte) 60); // Protector Exit
+		spawn(731548, 545.325f, 212.691f, 1681.8224f, (byte) 60); // Protector Exit
+		spawn(731548, 810.652f, 591.986f, 1701.0449f, (byte) 90); // Orissan Exit
+		spawn(731548, 137.524f, 518.576f, 1749.4153f, (byte) 0); // Beritra Exit
 	}
 
 	@Override
@@ -460,6 +503,10 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 		switch (effect.getSkillId()) {
 			case 21635 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_01()); // Summon Crystal
 			case 21885 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_IMMORTAL_04()); // Weaken Ascension Domination
+			case 21610 -> { // Dark Affinity
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_VRITRA_HUMAN_01());
+				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_VRITRA_HUMAN_02(), 3000);
+			}
 		}
 	}
 
@@ -469,12 +516,15 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 			case 21635, 21885 -> { // Weaken Ascension Domination
 				int nextId;
 				if (effect.getSkillId() == 21635)
-					nextId = difficulty.get() == 5 ? 236233 : 236230;
+					nextId = difficulty.get() == HARD_MODE ? 236233 : 236230;
 				else
-					nextId = difficulty.get() == 5 ? 236234 : 236231;
+					nextId = difficulty.get() == HARD_MODE ? 236234 : 236231;
 				WorldPosition pos = effect.getEffected().getPosition();
 				effect.getEffected().getController().delete();
 				spawn(nextId, pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
+			}
+			case 21618 -> { // Dragon Lord's Authority
+				// TODO: sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDSEAL_VRITRA_HUMAN_03()); => only if it ends naturally
 			}
 		}
 	}
@@ -538,5 +588,13 @@ public class DrakenspireDepthsInstance extends GeneralInstanceHandler {
 				PacketSendUtility.broadcastPacket(npc, new SM_EMOTION(npc, EmotionType.CHANGE_SPEED));
 			}
 		}, 2000);
+	}
+
+	@Override
+	public boolean isBoss(Npc npc) {
+		return switch (npc.getNpcId()) {
+			case 236227, 236228, 236231, 236234, 236244, 236245, 236247 -> true;
+			default -> false;
+		};
 	}
 }

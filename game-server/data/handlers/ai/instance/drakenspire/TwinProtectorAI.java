@@ -13,13 +13,13 @@ import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
-import ai.AggressiveNpcAI;
+import ai.AggressiveNoLootNpcAI;
 
 /**
  * @author Estrayl
  */
 @AIName("twin_protector")
-public class TwinProtectorAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
+public class TwinProtectorAI extends AggressiveNoLootNpcAI implements HpPhases.PhaseHandler {
 
 	private final HpPhases hpPhases = new HpPhases(65, 40, 25, 15, 10);
 	private final List<Npc> adds = new ArrayList<>();

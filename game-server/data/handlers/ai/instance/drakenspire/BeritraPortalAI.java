@@ -29,12 +29,13 @@ public class BeritraPortalAI extends ActionItemNpcAI {
 				TeleportService.teleportTo(player, 301390000, 174.7f, 518.2f, 1749.6f, (byte) 59, TeleportAnimation.FADE_OUT);
 				break;
 			case 2:
-
+				TeleportService.teleportTo(player, 301390000, 173.4f, 517.9f, 1749.6f, (byte) 59, TeleportAnimation.FADE_OUT);
 				break;
 			case 3:
-
+				TeleportService.teleportTo(player, 301390000, 173.4f, 514.6f, 1749.6f, (byte) 59, TeleportAnimation.FADE_OUT);
 				break;
 		}
-		ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 915)), 3000);
+		player.getController().startProtectionActiveTask();
+		ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 915)), 1000);
 	}
 }
