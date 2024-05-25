@@ -57,7 +57,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 
 	@Override
 	public boolean hpReady(int hpPercentage) {
-		if (template.getMaxhp() == 0 && template.getMinhp() == 0) // it's not about hp
+		if (template.getMaxhp() == 100 && template.getMinhp() == 0) // it's not about hp
 			return true;
 		else if (template.getMaxhp() >= hpPercentage && template.getMinhp() <= hpPercentage) // in hp range
 			return true;

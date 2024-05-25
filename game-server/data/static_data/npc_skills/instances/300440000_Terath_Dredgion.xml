@@ -32,7 +32,7 @@
 	<!-- Terath Fleshmender -->
     <npc_skills npc_ids="233351">
         <npc_skill id="17008" lv="46" prob="25"/>
-        <npc_skill id="16566" lv="46" prob="25" min_hp="37" max_hp="100"/>
+        <npc_skill id="16566" lv="46" prob="25" min_hp="37" />
         <npc_skill id="16638" lv="46" prob="25" min_hp="39" max_hp="44"/>
     </npc_skills>
 	<!-- Terath Vanquisher -->

@@ -410,7 +410,7 @@
 	<!-- Dux -->
 	<npc_skills npc_ids="260000 260001 260002 260003 260004">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -433,7 +433,7 @@
 	<!-- Stallari -->
 	<npc_skills npc_ids="260005 260006 260007 260008 260009">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -456,7 +456,7 @@
 	<!-- Ereshkigal's Claw -->
 	<npc_skills npc_ids="260010 260011 260012 260013 260014">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -481,7 +481,7 @@
 	<!-- Dux -->
 	<npc_skills npc_ids="267801 267802 267803 267804 267805">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -504,7 +504,7 @@
 	<!-- Stallari -->
 	<npc_skills npc_ids="267806 267807 267808 267809 267810">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -527,7 +527,7 @@
 	<!-- Ulsaruk -->
 	<npc_skills npc_ids="267811 267812 267813 267814 267815">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -551,7 +551,7 @@
 	<!-- Dux -->
 	<npc_skills npc_ids="269001 269002 269003 269004 269005">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -574,7 +574,7 @@
 	<!-- Stallari -->
 	<npc_skills npc_ids="269006 269007 269008 269009 269010">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -597,7 +597,7 @@
 	<!-- Ulsaruk -->
 	<npc_skills npc_ids="269011 269012 269013 269014 269015">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -621,7 +621,7 @@
 	<!-- Dux -->
 	<npc_skills npc_ids="269901 269902 269903 269904 269905">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -644,7 +644,7 @@
 	<!-- Stallari -->
 	<npc_skills npc_ids="269906 269907 269908 269909 269910">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -667,7 +667,7 @@
 	<!-- Ulsaruk -->
 	<npc_skills npc_ids="269911 269912 269913 269914 269915">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -691,7 +691,7 @@
 	<!-- Dux -->
 	<npc_skills npc_ids="257000 257001 257002 257003 257004">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -714,7 +714,7 @@
 	<!-- Stallari -->
 	<npc_skills npc_ids="257005 257006 257007 257008 257009">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -737,7 +737,7 @@
 	<!-- Ulsaruk -->
 	<npc_skills npc_ids="257010 257011 257012 257013 257014">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -761,7 +761,7 @@
 	<!-- Dux -->
 	<npc_skills npc_ids="257300 257301 257302 257303 257304">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -784,7 +784,7 @@
 	<!-- Stallari -->
 	<npc_skills npc_ids="257305 257306 257307 257308 257309">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -807,7 +807,7 @@
 	<!-- Ulsaruk -->
 	<npc_skills npc_ids="257310 257311 257312 257313 257314">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -831,7 +831,7 @@
 	<!-- Dux -->
 	<npc_skills npc_ids="257600 257601 257602 257603 257604">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -854,7 +854,7 @@
 	<!-- Stallari -->
 	<npc_skills npc_ids="257605 257606 257607 257608 257609">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -877,7 +877,7 @@
 	<!-- Ulsaruk -->
 	<npc_skills npc_ids="257610 257611 257612 257613 257614">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -901,7 +901,7 @@
 	<!-- Dux -->
 	<npc_skills npc_ids="257900 257901 257902 257903 257904">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -924,7 +924,7 @@
 	<!-- Stallari -->
 	<npc_skills npc_ids="257905 257906 257907 257908 257909">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -947,7 +947,7 @@
 	<!-- Ulsaruk -->
 	<npc_skills npc_ids="257910 257911 257912 257913 257914">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="56" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="56" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="56" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -971,7 +971,7 @@
 	<!-- Dux -->
 	<npc_skills npc_ids="251825 251826 251827 251828 251829">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="65" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="65" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="65" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="65" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->
@@ -994,7 +994,7 @@
 	<!-- Stallari -->
 	<npc_skills npc_ids="251830 251831 251832 251833 251834">
 		<!-- 10m range -->
-		<npc_skill id="19100" lv="65" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55"  max_hp="100" /><!-- Wide Area Aerial Thrust III -->
+		<npc_skill id="19100" lv="65" prob="25" next_chain_id="1" next_skill_time="0" cd="80000" min_hp="55" /><!-- Wide Area Aerial Thrust III -->
 		<npc_skill id="19101" lv="65" prob="100" chain_id="1" next_skill_time="8000" cd="20000" target="NONE" /><!-- Wide Area Crashing Wind Strike III -->
 		<!-- 20m range-->
 		<npc_skill id="17992" lv="65" prob="25" next_chain_id="2" next_skill_time="0" cd="80000" max_hp="50" /><!-- Wide Area Aerial Thrust III -->

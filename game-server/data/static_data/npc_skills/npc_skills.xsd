@@ -24,7 +24,7 @@
 		<xs:attribute name="id" type="xs:int" />
 		<xs:attribute name="lv" type="xs:int" />
 		<xs:attribute name="prob" type="xs:int" />
-		<xs:attribute name="max_hp" type="xs:int" />
+		<xs:attribute name="max_hp" type="xs:int" default="100" />
 		<xs:attribute name="min_hp" type="xs:int" />
 		<xs:attribute name="max_time" type="xs:int" />
 		<xs:attribute name="min_time" type="xs:int" />

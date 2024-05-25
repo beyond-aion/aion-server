@@ -146,7 +146,7 @@
 		<npc_skill id="21605" lv="5" prob="100" chain_id="74" next_chain_id="75" next_skill_time="0" /><!-- Chains of Command -->
 		<npc_skill id="21601" lv="56" prob="100" chain_id="75" next_skill_time="13000" target="ME" /><!-- Pulse Wave -->
 
-		<npc_skill id="21607" lv="56" prob="100" prio="1" next_chain_id="81" next_skill_time="0" min_hp="71" max_hp="100" max_time="359000"
+		<npc_skill id="21607" lv="56" prob="100" prio="1" next_chain_id="81" next_skill_time="0" min_hp="71" max_time="359000"
 			target="RANDOM" /><!-- Dark Sign -->
 		<npc_skill id="21606" lv="56" prob="100" chain_id="81" next_chain_id="82" next_skill_time="5000" target="ME" /><!-- Soul Plunder -->
 		<npc_skill id="21604" lv="56" prob="100" chain_id="82" next_chain_id="83" next_skill_time="0" /><!-- Rending Shadow -->

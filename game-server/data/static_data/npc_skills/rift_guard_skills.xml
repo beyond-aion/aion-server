@@ -2,7 +2,7 @@
 <npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_skills.xsd">
 	<!-- Chaos Guardian Generals -->
 	<npc_skills npc_ids="219887 219906 219913 236035 236048 236055">
-		<npc_skill id="21750" lv="65" prob="90" min_hp="35" max_hp="100" cd="15000" /> <!-- Slash -->
+		<npc_skill id="21750" lv="65" prob="90" min_hp="35" cd="15000" /> <!-- Slash -->
 		<npc_skill id="21752" lv="1" prob="70" cd="80000" next_skill_time="5000" min_hp="0" max_hp="75" /> <!-- Searing Scream -->
 		<npc_skill id="21753" lv="65" prob="85" max_hp="34" cd="15000" /> <!-- Flying Blade -->
 		<npc_skill id="21756" lv="65" prob="90" next_chain_id="1" next_skill_time="0" cd="90000" min_hp="0" max_hp="45" target="RANDOM_EXCEPT_MOST_HATED" /> <!-- Prime Target -->

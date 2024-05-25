@@ -24,7 +24,7 @@
 	<npc_skills npc_ids="230798">
 		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" />
 		<npc_skill id="20701" lv="1" prob="100" max_hp="50" cd="180000" target="ME" />
-		<npc_skill id="17335" lv="56" prob="75" min_hp="63" max_hp="100" />
+		<npc_skill id="17335" lv="56" prob="75" min_hp="63" />
 		<npc_skill id="21288" lv="56" prob="25" min_hp="85" max_hp="90" />
 	</npc_skills>
 	<!-- PRIEST -->

@@ -25,7 +25,7 @@ public class NpcSkillTemplate {
 	@XmlAttribute(name = "min_hp")
 	protected int minHp = 0;
 	@XmlAttribute(name = "max_hp")
-	protected int maxHp = 0;
+	protected int maxHp = 100;
 	@XmlAttribute(name = "max_time")
 	protected int maxTime = 0;
 	@XmlAttribute(name = "min_time")

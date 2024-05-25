@@ -340,7 +340,7 @@
 		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
 		<npc_skill id="20701" lv="56" prob="0" is_post_spawn="true" /><!-- Blessing of Blood -->
 		<!-- First Chain -->
-		<npc_skill id="21294" lv="1" prob="100" min_hp="51" max_hp="100" next_chain_id="1" next_skill_time="5500" /><!-- Thrash -->
+		<npc_skill id="21294" lv="1" prob="100" min_hp="51" next_chain_id="1" next_skill_time="5500" /><!-- Thrash -->
 		<!-- First Chain Variation 1 -->
 		<npc_skill id="20648" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="0" target="RANDOM" /><!-- Pincer Attack -->
 		<npc_skill id="20704" lv="10" prob="100" chain_id="2" next_chain_id="3" next_skill_time="5500" /><!-- Area Press -->
@@ -369,7 +369,7 @@
 			<spawn_npc npc_id="284515" min_count="2" max_count="2" min_distance="5" max_distance="5" />
 		</npc_skill>
 		<!-- First Chain -->
-		<npc_skill id="17335" lv="1" prob="100" min_hp="61" max_hp="100" next_chain_id="1" next_skill_time="5000" /><!-- Flame Bolt -->
+		<npc_skill id="17335" lv="1" prob="100" min_hp="61" next_chain_id="1" next_skill_time="5000" /><!-- Flame Bolt -->
 		<npc_skill id="17335" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="5000" target="RANDOM" /><!-- Flame Bolt -->
 		<npc_skill id="21288" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="5500" /><!-- Fire Burst -->
 		<npc_skill id="17335" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="5000" /><!-- Flame Bolt -->
@@ -394,7 +394,7 @@
 		<npc_skill id="20700" lv="1" prob="0" is_post_spawn="true" /><!-- Midnight Robe -->
 		<npc_skill id="20701" lv="56" prob="0" is_post_spawn="true" /><!-- Blessing of Blood -->
 		<!-- First Chain -->
-		<npc_skill id="17722" lv="1" prob="100" min_hp="51" max_hp="100" next_chain_id="1" next_skill_time="5500" /><!-- Head Wound -->
+		<npc_skill id="17722" lv="1" prob="100" min_hp="51" next_chain_id="1" next_skill_time="5500" /><!-- Head Wound -->
 		<npc_skill id="17335" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="8000" /><!-- Flame Bolt -->
 		<npc_skill id="21288" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="5500" /><!-- Fire Burst -->
 		<npc_skill id="17338" lv="1" prob="100" chain_id="3" next_skill_time="4500" /><!-- Hydro Eruption -->
@@ -413,7 +413,7 @@
 		<npc_skill id="20701" lv="56" prob="0" is_post_spawn="true" /><!-- Blessing of Blood -->
 		<npc_skill id="17003" lv="1" prob="100" prio="1" max_time="12000" target="RANDOM" />
 		<!-- First Chain -->
-		<npc_skill id="20858" lv="1" prob="100" min_hp="51" max_hp="100" next_chain_id="1" next_skill_time="4000" /><!-- Area Thunder Crash Fallout -->
+		<npc_skill id="20858" lv="1" prob="100" min_hp="51" next_chain_id="1" next_skill_time="4000" /><!-- Area Thunder Crash Fallout -->
 		<npc_skill id="17003" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="8000" /><!-- Powerful Shot -->
 		<npc_skill id="21299" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="4500" /><!-- Area Shot -->
 		<npc_skill id="17003" lv="1" prob="100" chain_id="3" next_skill_time="5000" /><!-- Powerful Shot -->
@@ -437,7 +437,7 @@
 		<npc_skill id="20701" lv="56" prob="0" is_post_spawn="true" /><!-- Blessing of Blood -->
 		<npc_skill id="18159" lv="1" prob="100" prio="1" max_time="12000" /><!-- Powerful Ambush -->
 		<!-- First Chain -->
-		<npc_skill id="17446" lv="1" prob="100" min_hp="51" max_hp="100" next_chain_id="1" next_skill_time="6500" /><!-- Showering Strike -->
+		<npc_skill id="17446" lv="1" prob="100" min_hp="51" next_chain_id="1" next_skill_time="6500" /><!-- Showering Strike -->
 		<npc_skill id="17332" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="5000" /><!-- Swift Edge -->
 		<npc_skill id="17332" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="5000" /><!-- Swift Edge -->
 		<npc_skill id="17320" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="0" /><!-- Frontal Strike -->
@@ -471,7 +471,7 @@
 		<npc_skill id="20701" lv="56" prob="0" is_post_spawn="true" /><!-- Blessing of Blood -->
 		<npc_skill id="17875" lv="1" prob="100" prio="1" max_time="12000" /><!-- Sword Force -->
 		<!-- First Chain -->
-		<npc_skill id="17294" lv="1" prob="100" min_hp="51" max_hp="100" next_chain_id="1" next_skill_time="4500" /><!-- Ferocious Strike I -->
+		<npc_skill id="17294" lv="1" prob="100" min_hp="51" next_chain_id="1" next_skill_time="4500" /><!-- Ferocious Strike I -->
 		<npc_skill id="17714" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="0" target="RANDOM" /><!-- Accurate Hit -->
 		<npc_skill id="20703" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="5000" /><!-- Blood Sucking -->
 		<npc_skill id="17294" lv="1" prob="100" chain_id="3" next_chain_id="4" next_skill_time="4500" /><!-- Ferocious Strike I -->
