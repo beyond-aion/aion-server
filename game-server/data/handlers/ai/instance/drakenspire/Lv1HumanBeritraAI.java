@@ -1,5 +1,6 @@
 package ai.instance.drakenspire;
 
+import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 import java.util.concurrent.Future;
@@ -19,7 +20,6 @@ import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
@@ -250,12 +250,15 @@ public class Lv1HumanBeritraAI extends AggressiveNoLootNpcAI {
 	 * Spawn soul extinction fields on three random players within 50m.
 	 */
 	private void handleSoulExtinctionFields() {
-		getAggroList().getList().stream()
-			.filter(ai -> ai.getAttacker() instanceof Player && PositionUtil.isInRange(getOwner(), (VisibleObject) ai.getAttacker(), 50)).unordered()
-			.limit(3).forEach(ai -> {
-				Player p = (Player) ai.getAttacker();
-				spawn(855450, p.getX(), p.getY(), p.getZ(), (byte) 0);
-			});
+		List<AggroInfo> playersInRange = getAggroList().getList().stream()
+			.filter(ai -> ai.getAttacker() instanceof Player && PositionUtil.isInRange(getOwner(), (Player) ai.getAttacker(), 50))
+			.collect(Collectors.toList());
+
+		Collections.shuffle(playersInRange);
+		playersInRange.stream().limit(3).forEach(ai -> {
+			Player p = (Player) ai.getAttacker();
+			spawn(855450, p.getX(), p.getY(), p.getZ(), (byte) 0);
+		});
 	}
 
 	/**
@@ -285,10 +288,18 @@ public class Lv1HumanBeritraAI extends AggressiveNoLootNpcAI {
 		switch (st.getSkillId()) {
 			case 21601 -> { // Pulse Wave
 				handlePulseWave();
-				getAggroList().getList().stream().filter(ai -> ai.getAttacker() instanceof Player).limit(1).forEach(ai -> ai.addHate(100000));
+				addHateToRandomTarget();
 			}
 			case 21602 -> handleDimensionalWave(); // Dimensional Wave
 		}
+	}
+
+	private void addHateToRandomTarget() {
+		List<AggroInfo> attackingPlayers = getAggroList().getList().stream().filter(ai -> ai.getAttacker() instanceof Player player && !player.isDead())
+			.toList();
+		AggroInfo aggroInfo = Rnd.get(attackingPlayers);
+		if (aggroInfo != null)
+			aggroInfo.addHate(100000);
 	}
 
 	@Override

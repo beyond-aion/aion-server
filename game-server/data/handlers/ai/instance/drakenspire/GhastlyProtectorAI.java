@@ -1,7 +1,12 @@
 package ai.instance.drakenspire;
 
+import java.util.List;
+
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -39,6 +44,15 @@ public class GhastlyProtectorAI extends AggressiveNoLootNpcAI {
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 21883)
-			getAggroList().getList().stream().limit(1).forEach(ai -> ai.addHate(10000));
+			addHateToRandomTarget();
 	}
+
+	private void addHateToRandomTarget() {
+		List<AggroInfo> attackingPlayers = getAggroList().getList().stream().filter(ai -> ai.getAttacker() instanceof Player player && !player.isDead())
+			.toList();
+		AggroInfo aggroInfo = Rnd.get(attackingPlayers);
+		if (aggroInfo != null)
+			aggroInfo.addHate(10000);
+	}
+
 }

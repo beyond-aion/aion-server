@@ -1,10 +1,12 @@
 package ai.instance.drakenspire;
 
 import java.util.Comparator;
+import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
@@ -65,7 +67,15 @@ public class SealGuardianAI extends AggressiveNoLootNpcAI {
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 21882)
-			getAggroList().getList().stream().limit(1).forEach(ai -> ai.addHate(10000));
+			addHateToRandomTarget();
+	}
+
+	private void addHateToRandomTarget() {
+		List<AggroInfo> attackingPlayers = getAggroList().getList().stream().filter(ai -> ai.getAttacker() instanceof Player player && !player.isDead())
+			.toList();
+		AggroInfo aggroInfo = Rnd.get(attackingPlayers);
+		if (aggroInfo != null)
+			aggroInfo.addHate(10000);
 	}
 
 	@Override
@@ -145,7 +155,6 @@ public class SealGuardianAI extends AggressiveNoLootNpcAI {
 			default -> new int[] { 855452, 855454, 855456, 855458 };
 		};
 
-		getPosition().getWorldMapInstance().getNpcs(specterIds).stream().filter(npc -> npc != null && !npc.isDead())
-			.forEach(npc -> npc.getController().delete());
+		getPosition().getWorldMapInstance().getNpcs(specterIds).forEach(npc -> npc.getController().deleteIfAliveOrCancelRespawn());
 	}
 }
