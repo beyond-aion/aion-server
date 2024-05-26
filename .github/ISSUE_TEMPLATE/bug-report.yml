@@ -1,0 +1,28 @@
+name: Bug report
+description: File a bug report.
+body:
+- type: markdown
+  attributes:
+    value: |
+      > [!IMPORTANT]  
+      > We do not provide support on how to set up the server, but you can ask the community for help in [Discussions > Q&A](../discussions/categories/q-a).
+- type: textarea
+  id: desc
+  attributes:
+    label: Description
+    description: |
+      Please provide a detailed description, including the exact in-game location where you've encountered the bug.  
+      If you can attach any screenshots or videos here, they will help us a lot.
+  validations:
+    required: true
+- type: textarea
+  id: repro
+  attributes:
+    label: Reproduction steps
+    description: How do you trigger this bug? Please walk us through it step by step.
+    value: |
+      1.
+      2.
+      3.
+  validations:
+    required: true

@@ -6,7 +6,7 @@ indent_style = tab
 insert_final_newline = false
 max_line_length = 150
 tab_width = 2
-trim_trailing_whitespace = true
+trim_trailing_whitespace = false
 ij_continuation_indent_size = 2
 ij_formatter_off_tag = @formatter:off
 ij_formatter_on_tag = @formatter:on
@@ -16,6 +16,7 @@ ij_visual_guides =
 ij_wrap_on_typing = false
 
 [*.java]
+trim_trailing_whitespace = true
 ij_java_align_consecutive_assignments = false
 ij_java_align_consecutive_variable_declarations = false
 ij_java_align_group_field_declarations = false
@@ -265,6 +266,7 @@ ij_java_wrap_long_lines = false
 ij_java_wrap_semicolon_after_call_chain = false
 
 [{*.xml,*.xsd}]
+trim_trailing_whitespace = true
 ij_xml_align_attributes = false
 ij_xml_align_text = false
 ij_xml_attribute_wrap = normal
