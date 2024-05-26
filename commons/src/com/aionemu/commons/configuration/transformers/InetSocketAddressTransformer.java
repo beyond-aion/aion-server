@@ -1,15 +1,13 @@
 package com.aionemu.commons.configuration.transformers;
 
 import java.net.InetSocketAddress;
+import java.net.URI;
 
 import com.aionemu.commons.configuration.TransformationTypeInfo;
 
 /**
- * Transforms string to InetSocketAddress. InetSocketAddress can be represented in following ways:
- * <ul>
- * <li>address:port</li>
- * <li>*:port - will use all available network interfaces</li>
- * </ul>
+ * Transforms strings in the format {@code host:port} to an InetSocketAddress, where host can be a hostname or an IP address (IPv6 addresses must be
+ * enclosed in square brackets).
  * 
  * @author SoulKeeper
  */
@@ -22,11 +20,7 @@ public class InetSocketAddressTransformer extends PropertyTransformer<InetSocket
 
 	@Override
 	protected InetSocketAddress parseObject(String value, TransformationTypeInfo typeInfo) throws Exception {
-		int delimiterIndex = value.lastIndexOf(':');
-		if (delimiterIndex < 1 || value.length() < 3)
-			throw new IllegalArgumentException("InetSocketAddress must be specified in the following format: \"address:port\" or \"*:port\"");
-		String address = value.substring(0, delimiterIndex);
-		int port = Integer.parseInt(value.substring(delimiterIndex + 1));
-		return "*".equals(address) ? new InetSocketAddress(port) : new InetSocketAddress(address, port);
+		URI uri = new URI(null, value, null, null, null);
+		return new InetSocketAddress(uri.getHost(), uri.getPort());
 	}
 }

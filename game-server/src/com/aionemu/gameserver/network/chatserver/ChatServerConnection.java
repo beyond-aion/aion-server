@@ -54,7 +54,7 @@ public class ChatServerConnection extends AConnection<CsServerPacket> {
 
 	@Override
 	protected void initialized() {
-		log.info("Connected to ChatServer!");
+		log.info("Connected to chat server");
 		sendPacket(new SM_CS_AUTH());
 	}
 
@@ -90,7 +90,7 @@ public class ChatServerConnection extends AConnection<CsServerPacket> {
 	protected final void onDisconnect() {
 		if (GameServer.isShutdownScheduled())
 			return;
-		log.warn("Lost connection with ChatServer");
+		log.warn("Lost connection with chat server");
 		ChatServer.getInstance().reconnect();
 	}
 
@@ -99,22 +99,16 @@ public class ChatServerConnection extends AConnection<CsServerPacket> {
 		ChatServer.getInstance().disconnect();
 	}
 
-	/**
-	 * @return
-	 */
 	public State getState() {
 		return state;
 	}
 
-	/**
-	 * @param state
-	 */
 	public void setState(State state) {
 		this.state = state;
 	}
 
 	@Override
 	public String toString() {
-		return "ChatServer " + getIP();
+		return "Chat server " + getIP();
 	}
 }

@@ -56,7 +56,7 @@ public class LoginServerConnection extends AConnection<LsServerPacket> {
 
 	@Override
 	protected void initialized() {
-		log.info("Connected to LoginServer!");
+		log.info("Connected to login server");
 		sendPacket(new SM_GS_AUTH());
 	}
 
@@ -104,7 +104,7 @@ public class LoginServerConnection extends AConnection<LsServerPacket> {
 	protected final void onDisconnect() {
 		if (GameServer.isShutdownScheduled())
 			return;
-		log.warn("Lost connection with LoginServer");
+		log.warn("Lost connection with login server");
 		LoginServer.getInstance().reconnect();
 	}
 
@@ -133,6 +133,6 @@ public class LoginServerConnection extends AConnection<LsServerPacket> {
 	 */
 	@Override
 	public String toString() {
-		return "LoginServer " + getIP();
+		return "Login server " + getIP();
 	}
 }

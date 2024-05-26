@@ -63,8 +63,7 @@ public class NioServer {
 				serverChannel.configureBlocking(false);
 
 				serverChannel.socket().bind(cfg.address());
-				log.info("Listening on " + (cfg.isAnyLocalAddress() ? "all interfaces on port " : cfg.getIP() + ":") + cfg.getPort() + " for "
-					+ cfg.clientDescription());
+				log.info("Listening on " + cfg.getAddressInfo() + " for " + cfg.clientDescription());
 
 				// Register the server socket channel, indicating an interest in accepting new connections
 				SelectionKey acceptKey = getAcceptDispatcher().register(serverChannel, SelectionKey.OP_ACCEPT, new Acceptor(cfg.connectionFactory(), this));

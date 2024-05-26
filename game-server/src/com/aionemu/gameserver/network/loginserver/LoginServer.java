@@ -63,12 +63,9 @@ public class LoginServer {
 
 	public void connect(NioServer nioServer) {
 		if (lsCon != null)
-			throw new IllegalStateException("LoginServer is already connected.");
-		if (nioServer == null)
-			throw new NullPointerException("NioServer for LoginServer can not be null.");
+			throw new IllegalStateException("Login server is already connected.");
 
 		try {
-			log.info("Connecting to LoginServer " + NetworkConfig.LOGIN_ADDRESS);
 			this.nioServer = nioServer;
 			SocketChannel sc = SocketChannel.open(NetworkConfig.LOGIN_ADDRESS);
 			sc.configureBlocking(false);
@@ -81,10 +78,10 @@ public class LoginServer {
 			int delay;
 			if (e instanceof SocketException) {
 				delay = 10;
-				log.info("Could not connect, trying again in " + delay + "s");
+				log.info("Could not connect to login server at " + NetworkConfig.LOGIN_ADDRESS + ", trying again in " + delay + "s");
 			} else {
 				delay = 60;
-				log.error("Critical error establishing LoginServer socket connection, trying again in " + delay + "s", e);
+				log.error("Could not connect to login server at " + NetworkConfig.LOGIN_ADDRESS + ", trying again in " + delay + "s", e);
 			}
 			ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 		}
@@ -108,7 +105,7 @@ public class LoginServer {
 			return;
 		int delay = lsCon.getState() == State.AUTHED ? 5 : 15;
 		disconnect();
-		log.info("Reconnecting to LoginServer in " + delay + "s...");
+		log.info("Reconnecting to login server in " + delay + "s...");
 		ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 	}
 

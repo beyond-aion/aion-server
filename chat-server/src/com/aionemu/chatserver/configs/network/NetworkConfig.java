@@ -9,19 +9,19 @@ public class NetworkConfig {
 	/**
 	 * Address where Aion clients will attempt to connect to (host/domain name or IP)
 	 */
-	@Property(key = "chatserver.network.client.connect_address", defaultValue = "*:10241")
+	@Property(key = "chatserver.network.client.connect_address", defaultValue = "0.0.0.0:10241")
 	public static InetSocketAddress CLIENT_CONNECT_ADDRESS;
 
 	/**
-	 * Local address where CS will listen for Aion client connections (* = bind any local IP)
+	 * Local address where CS will listen for Aion client connections (0.0.0.0 = bind any local IP)
 	 */
-	@Property(key = "chatserver.network.client.socket_address", defaultValue = "*:10241")
+	@Property(key = "chatserver.network.client.socket_address", defaultValue = "0.0.0.0:10241")
 	public static InetSocketAddress CLIENT_SOCKET_ADDRESS;
 
 	/**
-	 * Local address where CS will listen for GS connections (* = bind any local IP)
+	 * Local address where CS will listen for GS connections (0.0.0.0 = bind any local IP)
 	 */
-	@Property(key = "chatserver.network.gameserver.socket_address", defaultValue = "*:9021")
+	@Property(key = "chatserver.network.gameserver.socket_address", defaultValue = "0.0.0.0:9021")
 	public static InetSocketAddress GAMESERVER_SOCKET_ADDRESS;
 
 	/**

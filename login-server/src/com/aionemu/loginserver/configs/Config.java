@@ -24,15 +24,15 @@ import ch.qos.logback.classic.ClassicConstants;
 public class Config {
 
 	/**
-	 * Local address where LS will listen for Aion client connections (* = bind any local IP)
+	 * Local address where LS will listen for Aion client connections (0.0.0.0 = bind any local IP)
 	 */
-	@Property(key = "loginserver.network.client.socket_address", defaultValue = "*:2106")
+	@Property(key = "loginserver.network.client.socket_address", defaultValue = "0.0.0.0:2106")
 	public static InetSocketAddress CLIENT_SOCKET_ADDRESS;
 
 	/**
-	 * Local address where LS will listen for GS connections (* = bind any local IP)
+	 * Local address where LS will listen for GS connections (0.0.0.0 = bind any local IP)
 	 */
-	@Property(key = "loginserver.network.gameserver.socket_address", defaultValue = "*:9014")
+	@Property(key = "loginserver.network.gameserver.socket_address", defaultValue = "0.0.0.0:9014")
 	public static InetSocketAddress GAMESERVER_SOCKET_ADDRESS;
 
 	/**

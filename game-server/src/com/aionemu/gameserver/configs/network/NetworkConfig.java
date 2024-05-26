@@ -9,13 +9,13 @@ public class NetworkConfig {
 	/**
 	 * Address where Aion clients will attempt to connect to (host/domain name or IP)
 	 */
-	@Property(key = "gameserver.network.client.connect_address", defaultValue = "*:7777")
+	@Property(key = "gameserver.network.client.connect_address", defaultValue = "0.0.0.0:7777")
 	public static InetSocketAddress CLIENT_CONNECT_ADDRESS;
 
 	/**
-	 * Local address where GS will listen for Aion client connections (* = bind any local IP)
+	 * Local address where GS will listen for Aion client connections (0.0.0.0 = bind any local IP)
 	 */
-	@Property(key = "gameserver.network.client.socket_address", defaultValue = "*:7777")
+	@Property(key = "gameserver.network.client.socket_address", defaultValue = "0.0.0.0:7777")
 	public static InetSocketAddress CLIENT_SOCKET_ADDRESS;
 
 	/**

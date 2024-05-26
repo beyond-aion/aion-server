@@ -20,4 +20,8 @@ public record ServerCfg(InetSocketAddress address, String clientDescription, Con
 	public int getPort() {
 		return address.getPort();
 	}
+
+	public String getAddressInfo() {
+		return (isAnyLocalAddress() ? "all addresses on port " : getIP() + ":") + getPort();
+	}
 }

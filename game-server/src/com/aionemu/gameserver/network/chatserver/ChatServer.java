@@ -39,20 +39,11 @@ public class ChatServer {
 	private ChatServer() {
 	}
 
-	/**
-	 * Connects to ChatServer and returns an object representing this connection.
-	 * 
-	 * @return The {@link ChatServerConnection}.
-	 * @throws IOException
-	 */
 	public void connect(NioServer nioServer) {
 		if (csCon != null)
-			throw new IllegalStateException("ChatServer is already connected.");
-		if (nioServer == null)
-			throw new NullPointerException("NioServer for ChatServer can not be null.");
+			throw new IllegalStateException("Chat server is already connected.");
 
 		try {
-			log.info("Connecting to ChatServer " + NetworkConfig.CHAT_ADDRESS);
 			this.nioServer = nioServer;
 			SocketChannel sc = SocketChannel.open(NetworkConfig.CHAT_ADDRESS);
 			sc.configureBlocking(false);
@@ -65,10 +56,10 @@ public class ChatServer {
 			int delay;
 			if (e instanceof SocketException) {
 				delay = 10;
-				log.info("Could not connect, trying again in " + delay + "s");
+				log.info("Could not connect to chat server at " + NetworkConfig.CHAT_ADDRESS + ", trying again in " + delay + "s");
 			} else {
 				delay = 60;
-				log.error("Critical error establishing ChatServer socket connection, trying again in " + delay + "s", e);
+				log.error("Could not connect to chat server at " + NetworkConfig.CHAT_ADDRESS + ", trying again in " + delay + "s", e);
 			}
 			ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 		}
@@ -87,7 +78,7 @@ public class ChatServer {
 			return;
 		int delay = csCon.getState() == State.AUTHED ? 5 : 15;
 		disconnect();
-		log.info("Reconnecting to ChatServer in " + delay + "s...");
+		log.info("Reconnecting to chat server in " + delay + "s...");
 		ThreadPoolManager.getInstance().schedule(() -> connect(nioServer), delay * 1000);
 	}
 

@@ -39,19 +39,14 @@ public class NettyServer {
 		aionClientChannelFactory = new NioServerSocketChannelFactory(Executors.newCachedThreadPool(), Executors.newCachedThreadPool(),
 			NetworkConfig.NIO_READ_WRITE_THREADS + 1);
 		aionClientChannelGroup = new DefaultChannelGroup(NettyServer.class.getName());
-		aionClientChannelGroup.add(initChannel());
-
-		log.info("Listening on {}{} for Aion game clients",
-			NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().isAnyLocalAddress() ? "all interfaces on port "
-				: NetworkConfig.CLIENT_SOCKET_ADDRESS.getAddress().getHostAddress() + ':',
-			NetworkConfig.CLIENT_SOCKET_ADDRESS.getPort());
+		aionClientChannelGroup.add(initChannel(new ServerCfg(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion game clients", null)));
 
 		nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
 			new ServerCfg(NetworkConfig.GAMESERVER_SOCKET_ADDRESS, "game servers", new GsConnectionFactoryImpl()));
 		nioServer.connect(Executors.newSingleThreadExecutor());
 	}
 
-	private Channel initChannel() {
+	private Channel initChannel(ServerCfg gameClientConfig) {
 		ServerBootstrap bootstrap = new ServerBootstrap(aionClientChannelFactory);
 		bootstrap.setPipelineFactory(new LoginToClientPipeLineFactory(new ClientPacketHandler()));
 		bootstrap.setOption("child.bufferFactory", HeapChannelBufferFactory.getInstance(ByteOrder.LITTLE_ENDIAN));
@@ -60,7 +55,9 @@ public class NettyServer {
 		bootstrap.setOption("child.reuseAddress", true);
 		bootstrap.setOption("child.connectTimeoutMillis", 100);
 		bootstrap.setOption("readWriteFair", true);
-		return bootstrap.bind(NetworkConfig.CLIENT_SOCKET_ADDRESS);
+		Channel channel = bootstrap.bind(gameClientConfig.address());
+		log.info("Listening on " + gameClientConfig.getAddressInfo() + " for " + gameClientConfig.clientDescription());
+		return channel;
 	}
 
 	public void shutdownAll() {
