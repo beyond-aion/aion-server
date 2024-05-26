@@ -2,6 +2,7 @@ package com.aionemu.gameserver.ai.manager;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 import com.aionemu.commons.utils.Rnd;
@@ -9,6 +10,7 @@ import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
@@ -101,6 +103,15 @@ public class SkillAttackManager {
 										owner.setTarget(target2);
 									}
 								}
+								break;
+							case SECOND_MOST_HATED:
+							case THIRD_MOST_HATED:
+								int limit = temp.getTarget() == NpcSkillTargetAttribute.SECOND_MOST_HATED ? 2 : 3;
+								List<AggroInfo> topThree = owner.getAggroList().getList().stream().filter(ai -> ai.getAttacker() instanceof Creature c && !c.isDead())
+									.sorted(Comparator.comparingInt(AggroInfo::getHate).reversed()).limit(limit).toList();
+
+								if (!topThree.isEmpty())
+									owner.setTarget((Creature) topThree.getLast().getAttacker());
 								break;
 							case RANDOM:
 							case RANDOM_EXCEPT_MOST_HATED:

@@ -95,6 +95,8 @@
 			<xs:enumeration value="FRIEND" />
 			<xs:enumeration value="ME" />
 			<xs:enumeration value="MOST_HATED" />
+			<xs:enumeration value="SECOND_MOST_HATED" />
+			<xs:enumeration value="THIRD_MOST_HATED" />
 			<xs:enumeration value="RANDOM" />
 			<xs:enumeration value="RANDOM_EXCEPT_MOST_HATED" />
 			<xs:enumeration value="NONE" />
