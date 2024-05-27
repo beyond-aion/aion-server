@@ -84,7 +84,7 @@ public class AhserionRaid {
 			@Override
 			public void run() {
 				switch (++progress) {
-					case 1:
+					case 2:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_01());
 						break;
 					case 4:
@@ -112,18 +112,29 @@ public class AhserionRaid {
 						World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().forEachDoor(door -> door.setOpen(true));
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_08());
 						break;
-					case 40:
+					case 30:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_09());
 						for (PanesterraFaction faction : PanesterraFaction.values())
 							spawnStage(3, faction);
 						break;
-					case 54:
-					case 88:
+					case 40:
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_10());
+						break;
+					case 50:
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_11());
+						break;
+					case 60:
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_12());
 						for (PanesterraFaction faction : PanesterraFaction.values())
 							if (panesterraTeams.containsKey(faction) && !panesterraTeams.get(faction).isEliminated())
 								spawnStage(4, faction);
 						break;
-					case 140:
+					case 130:
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_13());
+					case 138:
+						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_14());
+						break;
+					case 150:
 						stop(); // stop after 70min (-10min preparation time -15+15min barricade invulnerable time = 30min effective time to kill Ahserion)
 						break;
 				}
@@ -271,7 +282,7 @@ public class AhserionRaid {
 	private void deleteNpcs(PanesterraFaction eliminatedFaction, int flagToDelete) {
 		World.getInstance().getWorldMap(400030000).getMainWorldMapInstance().forEachNpc(npc -> {
 			if (npc.getNpcId() == flagToDelete || (!npc.isFlag() && (npc.getSpawn().getStaticId() < 180 || npc.getSpawn().getStaticId() > 183))) {
-				if (!npc.isDead() && npc.getSpawn()instanceof AhserionsFlightSpawnTemplate template) {
+				if (!npc.isDead() && npc.getSpawn() instanceof AhserionsFlightSpawnTemplate template) {
 					if (template.getFaction() == eliminatedFaction)
 						npc.getController().delete();
 				}
