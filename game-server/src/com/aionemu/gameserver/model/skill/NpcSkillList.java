@@ -1,9 +1,6 @@
 package com.aionemu.gameserver.model.skill;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -48,7 +45,7 @@ public class NpcSkillList {
 					prios.add(template.getPriority());
 				}
 			}
-			prios.sort(null);
+			prios.sort(Comparator.reverseOrder());
 			priorities = prios.stream().mapToInt(Integer::intValue).toArray();
 		}
 	}
@@ -73,7 +70,7 @@ public class NpcSkillList {
 	public List<NpcSkillEntry> getPostSpawnSkills() {
 		List<NpcSkillEntry> filteredSkills = new ArrayList<>();
 		for (NpcSkillEntry skill : skills)
-			if (((NpcSkillTemplateEntry) skill).hasPostSpawnCondition())
+			if (skill.hasPostSpawnCondition())
 				filteredSkills.add(skill);
 		return filteredSkills;
 	}

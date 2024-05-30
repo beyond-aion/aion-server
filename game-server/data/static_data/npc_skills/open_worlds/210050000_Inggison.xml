@@ -2,13 +2,13 @@
 <npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_skills.xsd">
     <!-- Sematariux -->
     <npc_skills npc_ids="216520">
-        <npc_skill id="18722" lv="1" prob="100" cd="120000" min_time="30000" prio="1" /><!-- Primal Fear -->
+        <npc_skill id="18722" lv="1" prob="100" cd="120000" min_time="30000" prio="2" /><!-- Primal Fear -->
         <npc_skill id="18728" lv="1" prob="70" /><!-- Destructive Bite -->
         <npc_skill id="18729" lv="1" prob="70" next_chain_id="1" next_skill_time="4000" /><!-- Destructive Claw -->
         <npc_skill id="18725" lv="1" prob="100" chain_id="1" /><!-- Brandish Tail -->
         <npc_skill id="18723" lv="1" prob="70" cd="26000" max_hp="80" /><!-- Lightning Breath -->
         <npc_skill id="19178" lv="1" prob="70" cd="32000" max_hp="70" /><!-- Deadly Bolt -->
-        <npc_skill id="19182" lv="1" prob="100" cd="210000" max_hp="60" prio="2" /><!-- Ear Piercing Shriek -->
+        <npc_skill id="19182" lv="1" prob="100" cd="210000" max_hp="60" prio="1" /><!-- Ear Piercing Shriek -->
         <npc_skill id="18724" lv="1" prob="70" cd="26000" max_hp="50" /><!-- Poisonous Breath -->
         <npc_skill id="19184" lv="1" prob="70" cd="18000" max_hp="30" /><!-- Thundering Crash -->
     </npc_skills>

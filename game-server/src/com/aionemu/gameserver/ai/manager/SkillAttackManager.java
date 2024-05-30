@@ -185,8 +185,13 @@ public class SkillAttackManager {
 			NpcSkillEntry lastSkill = owner.getGameStats().getLastSkill();
 			if (lastSkill != null && lastSkill.hasChain() && lastSkill.canUseNextChain(owner)) {
 				List<NpcSkillEntry> chainSkills = skillList.getChainSkills(lastSkill);
-				if (chainSkills.size() > 1)
-					Collections.shuffle(chainSkills);
+				if (chainSkills.size() > 1) {
+					if (chainSkills.stream().anyMatch(cs -> cs.getPriority() > 0)) {
+						chainSkills.sort(Comparator.comparingInt(NpcSkillEntry::getPriority).reversed());
+					} else {
+						Collections.shuffle(chainSkills);
+					}
+				}
 				for (NpcSkillEntry entry : chainSkills) {
 					if (entry != null && isReady(owner, entry)) {
 						return getNpcSkillEntryIfNotTooFarAway(owner, entry);

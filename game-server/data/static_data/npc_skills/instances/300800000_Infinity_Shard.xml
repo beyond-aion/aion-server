@@ -15,9 +15,9 @@
 		<npc_skill id="21248" lv="56" prob="60" min_hp="15" max_hp="45" cd="30000" />
 		<npc_skill id="21249" lv="56" prob="50" max_hp="10" cd="140000" target="RANDOM_EXCEPT_MOST_HATED"/>
 		<npc_skill id="21249" lv="56" prob="60" max_hp="10" cd="30000"/>
-		<npc_skill id="21250" lv="56" prob="70" min_hp="30" max_hp="75" chain_id="0" next_chain_id="1" next_skill_time="0" cd="55000" prio="1"/>
+		<npc_skill id="21250" lv="56" prob="70" min_hp="30" max_hp="75" chain_id="0" next_chain_id="1" next_skill_time="0" cd="55000" prio="2"/>
 		<npc_skill id="21251" lv="56" prob="100" chain_id="1" />
-		<npc_skill id="21250" lv="56" prob="70" max_hp="25" chain_id="0" next_chain_id="4" next_skill_time="0" cd="55000" prio="2"/>
+		<npc_skill id="21250" lv="56" prob="70" max_hp="25" chain_id="0" next_chain_id="4" next_skill_time="0" cd="55000" prio="1"/>
 		<npc_skill id="21252" lv="56" prob="100" chain_id="4"/>
 	</npc_skills>
 	<!-- Ide Forcefield Generator -->

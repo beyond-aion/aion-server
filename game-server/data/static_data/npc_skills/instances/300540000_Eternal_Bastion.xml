@@ -50,9 +50,9 @@
 	</npc_skills>
 	<!-- Grand Commander Pashid -->
 	<npc_skills npc_ids="231130">
-		<npc_skill id="21236" lv="6" prob="100" prio="1" min_time="120000" cd="600000" next_skill_time="6500" /><!-- Exultation -->
+		<npc_skill id="21236" lv="6" prob="100" prio="3" min_time="120000" cd="600000" next_skill_time="6500" /><!-- Exultation -->
 		<npc_skill id="20777" lv="5" prob="100" prio="2" min_time="180000" cd="600000" next_skill_time="6500" /><!-- Triumphant Roar -->
-		<npc_skill id="21237" lv="1" prob="100" prio="3" min_time="240000" cd="60000" next_skill_time="6500" /><!-- Trooper Shock -->
+		<npc_skill id="21237" lv="1" prob="100" prio="1" min_time="240000" cd="60000" next_skill_time="6500" /><!-- Trooper Shock -->
 		<npc_skill id="21234" lv="56" prob="100" next_chain_id="1" next_skill_time="6500" /><!-- Corruption Breath -->
 		<npc_skill id="21231" lv="1" prob="100" chain_id="1" next_chain_id="2" next_skill_time="7000" /><!-- Acid Bomb -->
 		<npc_skill id="21231" lv="1" prob="100" chain_id="2" next_chain_id="3" next_skill_time="7000" /><!-- Acid Bomb -->

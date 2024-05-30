@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_skills.xsd">
     <npc_skills npc_ids="216580">
-        <npc_skill id="18722" lv="1" prob="100" min_time="30000" cd="120000" prio="1" /><!-- Primal Fear -->
-        <npc_skill id="20100" lv="1" prob="100" min_time="180000" cd="64000" prio="2" /><!-- Padmarashka' Roar -->
+        <npc_skill id="18722" lv="1" prob="100" min_time="30000" cd="120000" prio="2" /><!-- Primal Fear -->
+        <npc_skill id="20100" lv="1" prob="100" min_time="180000" cd="64000" prio="1" /><!-- Padmarashka' Roar -->
         <npc_skill id="20093" lv="6" prob="70" cd="26000" /><!-- Destructive Claw -->
         <npc_skill id="20401" lv="6" prob="70" cd="26000" /><!-- Venomous Claw -->
         <npc_skill id="20098" lv="8" prob="60" max_hp="80" cd="15000" /><!-- Brandish Tail -->
