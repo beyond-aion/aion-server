@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
+	<!-- Ahserion Reserve/Army Defender Captain -->
+	<npc_skills npc_ids="277187 277200">
+		<!-- <npc_skill id="16634" lv="65" prob="100" prio="98" next_skill_time="3000" target="FRIEND" /> Protective Shield | Only on needHelp call -->
+		<npc_skill id="21285" lv="65" prob="100" prio="25" chain_id="1" next_chain_id="10" next_skill_time="2500" /><!-- Accurate Hit -->
+		<npc_skill id="21285" lv="65" prob="100" prio="24" chain_id="10" next_chain_id="20" next_skill_time="1500" /><!-- Accurate Hit -->
+		<npc_skill id="16443" lv="30" prob="100" prio="23" chain_id="20" next_chain_id="1" next_skill_time="3000" target="ME" /><!-- Endurance -->
+		<npc_skill id="20897" lv="1" prob="100" prio="8" next_chain_id="1" next_skill_time="4000" target="ME" /><!-- Armed Soul -->
+	</npc_skills>
+	<!-- Ahserion Reserve Assault Leader | Can request help at 35% -->
+	<npc_skills npc_ids="277188">
+		<npc_skill id="20664" lv="56" prob="0" is_post_spawn="true" /><!-- Conqueror's Passion -->
+		<npc_skill id="21432" lv="56" prob="0" is_post_spawn="true" /><!-- Reserved Step -->
+
+		<npc_skill id="17332" lv="56" prob="100" prio="14" chain_id="30" next_chain_id="1" next_skill_time="4000" /><!-- Swift Edge -->
+		<npc_skill id="21598" lv="56" prob="100" prio="13" chain_id="20" next_chain_id="21" next_skill_time="0" target="RANDOM" /><!-- Chain Slash -->
+		<npc_skill id="21598" lv="56" prob="100" chain_id="21" next_chain_id="22" next_skill_time="0" target="RANDOM" /><!-- Chain Slash -->
+		<npc_skill id="21598" lv="56" prob="100" chain_id="22" next_chain_id="30" next_skill_time="5000" /><!-- Chain Slash -->
+		<npc_skill id="17332" lv="56" prob="100" prio="12" chain_id="10" next_chain_id="20" next_skill_time="4000" /><!-- Swift Edge -->
+		<npc_skill id="17332" lv="56" prob="100" prio="11" chain_id="1" next_chain_id="2" next_skill_time="0" /><!-- Swift Edge -->
+		<npc_skill id="21598" lv="56" prob="100" chain_id="2" next_chain_id="10" next_skill_time="5000" /><!-- Chain Slash -->
+
+		<npc_skill id="18159" lv="56" prob="100" prio="1" next_chain_id="1" next_skill_time="3000" /><!-- Powerful Ambush -->
+	</npc_skills>
+	<!-- Ahserion Reserve Drummer/Drumcaptain | Can request help at 50% -->
+	<npc_skills npc_ids="277193 277199 277212">
+		<!-- <npc_skill id="17361" lv="65" prob="100" prio="99" next_skill_time="3000" target="FRIEND" /> Healing Light | Only on needHelp call -->
+		<npc_skill id="21597" lv="56" prob="100" prio="24" chain_id="1" next_chain_id="2" next_skill_time="0" max_hp="50" /><!-- Mental Exhaustion -->
+		<npc_skill id="17361" lv="56" prob="100" prio="24" chain_id="2" next_chain_id="10" next_skill_time="3500" target="ME" /><!-- Healing Light -->
+		<npc_skill id="20715" lv="56" prob="100" prio="23" chain_id="20" next_chain_id="1" next_skill_time="3000" /><!-- Deceleration Curse -->
+		<npc_skill id="20959" lv="56" prob="100" prio="22" chain_id="10" next_chain_id="20" next_skill_time="3000" /><!-- Sonic Impact -->
+		<npc_skill id="20960" lv="56" prob="100" prio="21" chain_id="1" next_chain_id="10" next_skill_time="3000" /><!-- Sound Wave Attack -->
+
+		<npc_skill id="20715" lv="56" prob="100" prio="7" next_chain_id="1" next_skill_time="3000" /><!-- Deceleration Curse -->
+	</npc_skills>
+	<!-- Ahserion Reserve Elite Ambusher | Can request help at 35% -->
+	<npc_skills npc_ids="277195">
+		<npc_skill id="20664" lv="65" prob="0" is_post_spawn="true" /><!-- Conqueror's Passion -->
+		<npc_skill id="18762" lv="65" prob="0" is_post_spawn="true" /><!-- Hide Shape -->
+
+		<npc_skill id="17308" lv="65" prob="100" prio="26" chain_id="1" next_chain_id="2" next_skill_time="0" max_hp="35" target="ME"
+			cd="300000" /><!-- Rage -->
+		<npc_skill id="17323" lv="65" prob="100" chain_id="2" next_chain_id="20" next_skill_time="1000" /><!-- Wide Area Poison Slash -->
+		<npc_skill id="17332" lv="65" prob="100" prio="25" chain_id="1" next_chain_id="10" next_skill_time="2000" /><!-- Swift Edge -->
+		<npc_skill id="17320" lv="65" prob="100" prio="24" chain_id="10" next_chain_id="11" next_skill_time="0" /><!-- Frontal Strike -->
+		<npc_skill id="17321" lv="65" prob="100" chain_id="11" next_chain_id="20" next_skill_time="0" /><!-- Surprise Attack -->
+		<npc_skill id="17332" lv="65" prob="100" prio="21" chain_id="20" next_chain_id="1" next_skill_time="2000" /><!-- Swift Edge -->
+
+		<npc_skill id="17332" lv="65" prob="100" prio="7" next_chain_id="1" next_skill_time="2000" /><!-- Swift Edge -->
+	</npc_skills>
+	<!-- Ahserion Reserve/Army Elite Striker | Can request help at 35% -->
+	<npc_skills npc_ids="277196 277209">
+		<npc_skill id="20858" lv="56" prob="100" prio="26" chain_id="1" next_chain_id="2" next_skill_time="0" max_hp="35"
+			cd="300000" /><!-- Area Thunder Crash Fallout -->
+		<npc_skill id="21299" lv="56" prob="100" chain_id="2" next_chain_id="1" next_skill_time="2000" /><!-- Area Shot -->
+
+		<npc_skill id="21293" lv="56" prob="100" prio="25" chain_id="1" next_chain_id="10" next_skill_time="3000" /><!-- Deadeye -->
+		<npc_skill id="21293" lv="56" prob="100" prio="23" chain_id="10" next_chain_id="20" next_skill_time="3000" /><!-- Deadeye -->
+		<npc_skill id="21299" lv="56" prob="100" prio="21" chain_id="20" next_chain_id="1" next_skill_time="3000" /><!-- Area Shot -->
+
+		<npc_skill id="21219" lv="56" prob="100" prio="10" next_chain_id="1" next_skill_time="3000" /><!-- Straight Shot -->
+	</npc_skills>
+	<!-- Ahserion Reserve Magus | Can request help at 35% -->
+	<npc_skills npc_ids="277198 277211">
+		<npc_skill id="16989" lv="65" prob="100" prio="24" chain_id="1" next_chain_id="1" next_skill_time="1500" max_hp="35"
+			cd="300000" /><!-- Cold Attack -->
+
+		<npc_skill id="17335" lv="4" prob="100" prio="23" chain_id="1" next_chain_id="10" next_skill_time="1000" /><!-- Flame Bolt -->
+		<npc_skill id="21288" lv="65" prob="100" prio="21" chain_id="10" next_chain_id="1" next_skill_time="1500" /><!-- Fire Burst -->
+
+		<npc_skill id="21287" lv="1" prob="100" prio="7" next_chain_id="1" next_skill_time="1500" /><!-- Agrint Curse -->
+	</npc_skills>
+	<!-- Ahserion Army Medic -->
+	<npc_skills npc_ids="277210">
+		<!-- <npc_skill id="17361" lv="65" prob="100" prio="99" next_skill_time="3000" target="FRIEND" /> Healing Light | Only on needHelp call -->
+		<npc_skill id="17361" lv="65" prob="100" prio="22" chain_id="1" next_chain_id="1" next_skill_time="3500" max_hp="35" target="ME"
+			cd="300000" /><!-- Healing Light -->
+
+		<npc_skill id="17359" lv="65" prob="100" prio="21" chain_id="1" next_chain_id="1" next_skill_time="3500" /><!-- Hallowed Strike -->
+
+		<npc_skill id="17360" lv="65" prob="25" prio="7" next_chain_id="1" next_skill_time="0" /><!-- Wide Area Hallowed Strike -->
+		<npc_skill id="17359" lv="65" prob="100" prio="5" next_chain_id="1" next_skill_time="0" /><!-- Hallowed Strike -->
+	</npc_skills>
+	<!-- Ahserion Reserve Adjutant Fighter | Can request help at 35% -->
+	<npc_skills npc_ids="277242">
+		<npc_skill id="19016" lv="65" prob="100" prio="25" chain_id="1" next_chain_id="10" next_skill_time="3000" /><!-- Ferocious Strike I -->
+		<npc_skill id="19016" lv="65" prob="100" prio="23" chain_id="10" next_chain_id="20" next_skill_time="3000" /><!-- Ferocious Strike I -->
+		<npc_skill id="17295" lv="65" prob="100" prio="21" chain_id="20" next_chain_id="1" next_skill_time="3000" /><!-- Ferocious Strike II -->
+
+		<npc_skill id="17386" lv="65" prob="100" prio="7" next_chain_id="1" next_skill_time="4000" /><!-- Cleave -->
+	</npc_skills>
+	<!-- Ahserion -->
+	<npc_skills npc_ids="277224">
+		<npc_skill id="21565" lv="56" prob="100" prio="86" chain_id="1060" next_chain_id="850" next_skill_time="0" max_hp="5"
+			target="SECOND_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="850" next_chain_id="851" next_skill_time="0" target="THIRD_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="851" next_chain_id="852" next_skill_time="0" /><!-- Rushing Lance -->
+		<npc_skill id="21566" lv="56" prob="100" chain_id="852" next_chain_id="1000" next_skill_time="9000" target="ME" /><!-- Thunder Crash -->
+		<npc_skill id="21568" lv="25" prob="100" prio="85" chain_id="1050" next_chain_id="850" next_skill_time="0" max_hp="5" /><!-- Tear Asunder -->
+		<npc_skill id="21567" lv="56" prob="100" chain_id="850" next_chain_id="1060" next_skill_time="8000" target="ME" /><!-- Toxic Spew -->
+		<npc_skill id="21565" lv="56" prob="100" prio="84" chain_id="1040" next_chain_id="840" next_skill_time="0" max_hp="5"
+			target="SECOND_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="840" next_chain_id="841" next_skill_time="0" target="THIRD_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="841" next_chain_id="842" next_skill_time="0" /><!-- Rushing Lance -->
+		<npc_skill id="21566" lv="56" prob="100" chain_id="842" next_chain_id="1050" next_skill_time="9000" target="ME" /><!-- Thunder Crash -->
+		<npc_skill id="21568" lv="25" prob="100" prio="83" chain_id="1030" next_chain_id="830" next_skill_time="0" max_hp="5" /><!-- Tear Asunder -->
+		<npc_skill id="21567" lv="56" prob="100" chain_id="830" next_chain_id="1040" next_skill_time="8000" target="ME" /><!-- Toxic Spew -->
+		<npc_skill id="21565" lv="56" prob="100" prio="82" chain_id="1020" next_chain_id="820" next_skill_time="0" max_hp="5"
+			target="SECOND_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="820" next_chain_id="821" next_skill_time="0" target="THIRD_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="821" next_chain_id="822" next_skill_time="0" /><!-- Rushing Lance -->
+		<npc_skill id="21566" lv="56" prob="100" chain_id="822" next_chain_id="1030" next_skill_time="9000" target="ME" /><!-- Thunder Crash -->
+		<npc_skill id="21568" lv="25" prob="100" prio="81" chain_id="1010" next_chain_id="810" next_skill_time="0" max_hp="5" /><!-- Tear Asunder -->
+		<npc_skill id="21567" lv="56" prob="100" chain_id="810" next_chain_id="1020" next_skill_time="8000" target="ME" /><!-- Toxic Spew -->
+		<npc_skill id="21568" lv="25" prob="100" prio="80" chain_id="1000" next_chain_id="800" next_skill_time="0" max_hp="5" /><!-- Tear Asunder -->
+		<npc_skill id="21574" lv="56" prob="100" chain_id="800" next_chain_id="1010" next_skill_time="5000" target="ME" /><!-- Ide Destruction -->
+
+		<npc_skill id="21565" lv="56" prob="100" prio="76" chain_id="1060" next_chain_id="760" next_skill_time="0" min_hp="6" max_hp="20"
+			target="SECOND_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="760" next_chain_id="761" next_skill_time="0" target="THIRD_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="761" next_chain_id="1000" next_skill_time="10000" /><!-- Rushing Lance -->
+		<npc_skill id="21569" lv="56" prob="100" prio="75" chain_id="1050" next_chain_id="750" next_skill_time="0" min_hp="6"
+			max_hp="20" /><!-- Shock Wave -->
+		<npc_skill id="21566" lv="56" prob="100" chain_id="750" next_chain_id="1060" next_skill_time="9000" /><!-- Thunder Crash -->
+		<npc_skill id="21570" lv="56" prob="100" prio="74" chain_id="1040" next_chain_id="740" next_skill_time="0" min_hp="6" max_hp="20"
+			target="ME" /><!-- Death Shriek -->
+		<npc_skill id="21571" lv="56" prob="100" chain_id="740" next_chain_id="1050" next_skill_time="70000" /><!-- Ereshkigal's Reign -->
+		<npc_skill id="21565" lv="56" prob="100" prio="73" chain_id="1030" next_chain_id="730" next_skill_time="0" min_hp="6" max_hp="20"
+			target="SECOND_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="730" next_chain_id="731" next_skill_time="0" target="THIRD_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="731" next_chain_id="1040" next_skill_time="10000" /><!-- Rushing Lance -->
+		<npc_skill id="21568" lv="25" prob="100" prio="72" chain_id="1020" next_chain_id="720" next_skill_time="0" min_hp="6"
+			max_hp="20" /><!-- Tear Asunder -->
+		<npc_skill id="21567" lv="57" prob="100" chain_id="720" next_chain_id="1030" next_skill_time="9000" target="ME" /><!-- Toxic Spew -->
+		<npc_skill id="21568" lv="25" prob="100" prio="71" chain_id="1010" next_chain_id="710" next_skill_time="0" min_hp="6"
+			max_hp="20" /><!-- Tear Asunder -->
+		<npc_skill id="21566" lv="57" prob="100" chain_id="710" next_chain_id="1020" next_skill_time="9000" target="ME" /><!-- Thunder Crash -->
+		<npc_skill id="21574" lv="56" prob="100" prio="79" chain_id="1000" next_chain_id="1010" next_skill_time="9000" min_hp="6" max_hp="20" target="ME"
+			cd="1800000" /><!-- Ide Destruction -->
+		<npc_skill id="21563" lv="56" prob="100" prio="70" chain_id="1000" next_chain_id="1010" next_skill_time="9000" min_hp="6"
+			max_hp="20" /><!-- Dragon Fang -->
+
+		<npc_skill id="21565" lv="56" prob="100" prio="66" chain_id="1060" next_chain_id="660" next_skill_time="0" min_hp="21" max_hp="35"
+			target="SECOND_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="660" next_chain_id="661" next_skill_time="0" target="THIRD_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="661" next_chain_id="662" next_skill_time="0" /><!-- Rushing Lance -->
+		<npc_skill id="21567" lv="56" prob="100" chain_id="662" next_chain_id="1000" next_skill_time="9000" target="ME" /><!-- Toxic Spew -->
+		<npc_skill id="21568" lv="26" prob="100" prio="65" chain_id="1050" next_chain_id="650" next_skill_time="0" min_hp="21"
+			max_hp="35" /><!-- Tear Asunder -->
+		<npc_skill id="21568" lv="25" prob="100" chain_id="650" next_chain_id="1060" next_skill_time="7000" /><!-- Tear Asunder -->
+		<npc_skill id="21563" lv="56" prob="100" prio="64" chain_id="1040" next_chain_id="1050" next_skill_time="8000" min_hp="21"
+			max_hp="35" /><!-- Dragon Fang -->
+		<npc_skill id="21562" lv="56" prob="100" prio="63" chain_id="1030" next_chain_id="1040" next_skill_time="8000" min_hp="21"
+			max_hp="35" /><!-- Wyrm Spike -->
+		<npc_skill id="21565" lv="56" prob="100" prio="62" chain_id="1020" next_chain_id="620" next_skill_time="0" min_hp="21" max_hp="35"
+			target="SECOND_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="620" next_chain_id="621" next_skill_time="0" target="THIRD_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="621" next_chain_id="622" next_skill_time="0" /><!-- Rushing Lance -->
+		<npc_skill id="21566" lv="56" prob="100" chain_id="622" next_chain_id="1030" next_skill_time="8000" target="ME" /><!-- Thunder Crash -->
+		<npc_skill id="21568" lv="26" prob="100" prio="61" chain_id="1010" next_chain_id="610" next_skill_time="0" min_hp="21"
+			max_hp="35" /><!-- Tear Asunder -->
+		<npc_skill id="21568" lv="25" prob="100" chain_id="610" next_chain_id="1020" next_skill_time="7000" /><!-- Tear Asunder -->
+		<npc_skill id="21571" lv="56" prob="100" prio="200" chain_id="1000" next_chain_id="1010" next_skill_time="8000" max_hp="35" target="ME"
+			max_chain_time="70000" cd="1800000" /><!-- Ereshkigal's Reign -->
+		<npc_skill id="21562" lv="56" prob="100" prio="60" chain_id="1000" next_chain_id="1010" next_skill_time="8000" min_hp="21"
+			max_hp="35" /><!-- Wyrm Spike -->
+
+		<npc_skill id="21568" lv="25" prob="100" prio="57" chain_id="1060" next_chain_id="561" next_skill_time="0" min_hp="36" max_hp="50"
+			cd="1800000" /><!-- Tear Asunder -->
+		<npc_skill id="21564" lv="58" prob="100" chain_id="561" next_chain_id="1000" next_skill_time="9000" target="ME" /><!-- Dragon Claw -->
+		<npc_skill id="21568" lv="25" prob="100" prio="56" chain_id="1060" next_chain_id="560" next_skill_time="0" min_hp="36"
+			max_hp="50" /><!-- Tear Asunder -->
+		<npc_skill id="21564" lv="56" prob="100" chain_id="560" next_skill_time="9000" target="ME" /><!-- Dragon Claw -->
+		<npc_skill id="21562" lv="57" prob="100" prio="55" chain_id="1050" next_chain_id="550" next_skill_time="0" min_hp="36"
+			max_hp="50" /><!-- Wyrm Spike -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="550" next_chain_id="1060" next_skill_time="8000" /><!-- Rushing Lance -->
+		<npc_skill id="21568" lv="25" prob="100" prio="54" chain_id="1040" next_chain_id="540" next_skill_time="0" min_hp="36"
+			max_hp="50" /><!-- Tear Asunder -->
+		<npc_skill id="21567" lv="56" prob="100" chain_id="540" next_chain_id="1050" next_skill_time="9000" target="ME" /><!-- Toxic Spew -->
+		<npc_skill id="21563" lv="56" prob="100" prio="53" chain_id="1030" next_chain_id="1040" next_skill_time="8000" min_hp="36"
+			max_hp="50" /><!-- Dragon Fang -->
+		<npc_skill id="21568" lv="25" prob="100" prio="52" chain_id="1020" next_chain_id="520" next_skill_time="0" min_hp="36"
+			max_hp="50" /><!-- Tear Asunder -->
+		<npc_skill id="21566" lv="56" prob="100" chain_id="520" next_chain_id="1030" next_skill_time="9000" target="ME" /><!-- Thunder Crash -->
+		<npc_skill id="21562" lv="57" prob="100" prio="51" chain_id="1010" next_chain_id="510" next_skill_time="0" min_hp="36"
+			max_hp="50" /><!-- Wyrm Spike -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="510" next_chain_id="1020" next_skill_time="8000" /><!-- Rushing Lance -->
+		<npc_skill id="21570" lv="58" prob="100" prio="59" chain_id="1000" next_chain_id="502" next_skill_time="0" min_hp="36" max_hp="50" target="ME"
+			cd="1800000" /><!-- Death Shriek -->
+		<npc_skill id="21567" lv="58" prob="100" chain_id="502" next_chain_id="1010" next_skill_time="7000" target="ME" /><!-- Toxic Spew -->
+		<npc_skill id="21568" lv="25" prob="100" prio="50" chain_id="1000" next_chain_id="500" next_skill_time="0" min_hp="36" max_hp="50"
+			target="ME" /><!-- Tear Asunder -->
+		<npc_skill id="21567" lv="56" prob="100" chain_id="501" next_chain_id="1010" next_skill_time="9000" target="ME" /><!-- Toxic Spew -->
+
+		<npc_skill id="21565" lv="56" prob="100" prio="46" chain_id="1060" next_chain_id="460" next_skill_time="0" min_hp="51" max_hp="65"
+			target="THIRD_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="460" next_chain_id="461" next_skill_time="0"
+			target="SECOND_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="57" prob="100" chain_id="461" next_chain_id="1000" next_skill_time="10000" /><!-- Rushing Lance -->
+		<npc_skill id="21562" lv="56" prob="100" prio="45" chain_id="1050" next_chain_id="1060" next_skill_time="8000" min_hp="51"
+			max_hp="65" /><!-- Wyrm Spike -->
+		<npc_skill id="21564" lv="56" prob="100" prio="44" chain_id="1040" next_chain_id="1050" next_skill_time="9000" min_hp="51"
+			max_hp="65" /><!-- Dragon Claw -->
+		<npc_skill id="21565" lv="56" prob="100" prio="43" chain_id="1030" next_chain_id="430" next_skill_time="0" min_hp="51" max_hp="65"
+			target="THIRD_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="430" next_chain_id="431" next_skill_time="0"
+			target="SECOND_MOST_HATED" /><!-- Rushing Lance -->
+		<npc_skill id="21565" lv="57" prob="100" chain_id="431" next_chain_id="1040" next_skill_time="10000" /><!-- Rushing Lance -->
+		<npc_skill id="21563" lv="56" prob="100" prio="42" chain_id="1020" next_chain_id="1030" next_skill_time="8000" min_hp="51"
+			max_hp="65" /><!-- Dragon Fang -->
+		<npc_skill id="21562" lv="57" prob="100" prio="41" chain_id="1010" next_chain_id="410" next_skill_time="0" min_hp="51"
+			max_hp="65" /><!-- Wyrm Spike -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="410" next_chain_id="1020" next_skill_time="8000" /><!-- Rushing Lance -->
+		<npc_skill id="21573" lv="58" prob="100" prio="49" chain_id="1000" next_chain_id="1010" next_skill_time="9000" min_hp="51" max_hp="65"
+			target="SECOND_MOST_HATED" cd="1800000" /><!-- Distortion Pulse -->
+		<npc_skill id="21566" lv="56" prob="100" prio="40" chain_id="1000" next_chain_id="1010" next_skill_time="10000" min_hp="51" max_hp="65"
+			target="ME" /><!-- Thunder Crash -->
+
+		<npc_skill id="21566" lv="56" prob="100" prio="36" chain_id="1060" next_chain_id="1000" next_skill_time="8000" min_hp="66" max_hp="80"
+			target="ME" /><!-- Thunder Crash -->
+		<npc_skill id="21562" lv="57" prob="100" prio="35" chain_id="1050" next_chain_id="350" next_skill_time="0" min_hp="66"
+			max_hp="80" /><!-- Wyrm Spike -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="350" next_chain_id="1060" next_skill_time="8000" /><!-- Rushing Lance -->
+		<npc_skill id="21563" lv="56" prob="100" prio="34" chain_id="1040" next_chain_id="1050" next_skill_time="8000" min_hp="66"
+			max_hp="80" /><!-- Dragon Fang -->
+		<npc_skill id="21569" lv="57" prob="100" prio="33" chain_id="1030" next_chain_id="320" next_skill_time="0" min_hp="66" max_hp="80"
+			target="ME" /><!-- Shock Wave -->
+		<npc_skill id="21564" lv="56" prob="100" chain_id="320" next_chain_id="1040" next_skill_time="9000" /><!-- Dragon Claw -->
+		<npc_skill id="21562" lv="56" prob="100" prio="32" chain_id="1020" next_chain_id="320" next_skill_time="0" min_hp="66"
+			max_hp="80" /><!-- Wyrm Spike -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="320" next_chain_id="1030" next_skill_time="8000" /><!-- Rushing Lance -->
+		<npc_skill id="21569" lv="56" prob="100" prio="31" chain_id="1010" next_chain_id="310" next_skill_time="0" min_hp="66" max_hp="80"
+			target="ME" /><!-- Shock Wave -->
+		<npc_skill id="21566" lv="56" prob="100" chain_id="310" next_chain_id="1020" next_skill_time="9000" /><!-- Thunder Crash -->
+		<npc_skill id="21571" lv="56" prob="100" prio="300" chain_id="1000" next_chain_id="1010" next_skill_time="8000" max_hp="80" target="ME"
+			max_chain_time="70000" cd="1800000" /><!-- Ereshkigal's Reign -->
+		<npc_skill id="21562" lv="56" prob="100" prio="30" chain_id="1000" next_chain_id="1010" next_skill_time="8000" min_hp="66"
+			max_hp="80" /><!-- Wyrm Spike -->
+
+		<npc_skill id="21569" lv="57" prob="100" prio="26" chain_id="1060" next_chain_id="260" next_skill_time="0" min_hp="81" max_hp="95"
+			target="ME" /><!-- Shock Wave -->
+		<npc_skill id="21564" lv="56" prob="100" chain_id="260" next_chain_id="1000" next_skill_time="9000" /><!-- Dragon Claw -->
+		<npc_skill id="21568" lv="25" prob="100" prio="25" chain_id="1050" next_chain_id="250" next_skill_time="0" min_hp="81"
+			max_hp="95" /><!-- Tear Asunder -->
+		<npc_skill id="21566" lv="56" prob="100" chain_id="250" next_chain_id="1060" next_skill_time="9000" /><!-- Thunder Crash -->
+		<npc_skill id="21562" lv="57" prob="100" prio="24" chain_id="1040" next_chain_id="240" next_skill_time="0" min_hp="81"
+			max_hp="95" /><!-- Wyrm Spike -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="240" next_chain_id="1050" next_skill_time="8000" /><!-- Rushing Lance -->
+		<npc_skill id="21568" lv="25" prob="100" prio="23" chain_id="1030" next_chain_id="230" next_skill_time="0" min_hp="81"
+			max_hp="95" /><!-- Tear Asunder -->
+		<npc_skill id="21567" lv="56" prob="100" chain_id="230" next_chain_id="1040" next_skill_time="9000" /><!-- Toxic Spew -->
+		<npc_skill id="21562" lv="57" prob="100" prio="22" chain_id="1020" next_chain_id="220" next_skill_time="0" min_hp="81"
+			max_hp="95" /><!-- Wyrm Spike -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="220" next_chain_id="1030" next_skill_time="8000" /><!-- Rushing Lance -->
+		<npc_skill id="21566" lv="56" prob="100" prio="21" chain_id="1010" next_chain_id="1020" next_skill_time="9000" min_hp="81" max_hp="95"
+			target="ME" /><!-- Thunder Crash -->
+		<npc_skill id="21570" lv="56" prob="100" prio="29" chain_id="1000" next_chain_id="1010" next_skill_time="8000" min_hp="81" max_hp="95" target="ME"
+			cd="1800000" /><!-- Death Shriek -->
+		<npc_skill id="21562" lv="56" prob="100" prio="20" chain_id="1000" next_chain_id="1010" next_skill_time="8000" min_hp="81"
+			max_hp="95" /><!-- Wyrm Spike -->
+
+		<npc_skill id="21566" lv="57" prob="100" prio="16" chain_id="1060" next_chain_id="160" next_skill_time="0" min_hp="96"
+			target="ME" /><!-- Thunder Crash -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="160" next_chain_id="1000" next_skill_time="8000" /><!-- Rushing Lance -->
+		<npc_skill id="21563" lv="56" prob="100" prio="15" chain_id="1050" next_chain_id="1060" next_skill_time="8000" min_hp="96" /><!-- Dragon Fang -->
+		<npc_skill id="21562" lv="57" prob="100" prio="14" chain_id="1040" next_chain_id="140" next_skill_time="0" min_hp="96" /><!-- Wyrm Spike -->
+		<npc_skill id="21565" lv="56" prob="100" chain_id="140" next_chain_id="1050" next_skill_time="8000" /><!-- Rushing Lance -->
+		<npc_skill id="21562" lv="56" prob="100" prio="13" chain_id="1030" next_chain_id="1040" next_skill_time="8000" min_hp="96" /><!-- Wyrm Spike -->
+		<npc_skill id="21569" lv="57" prob="100" prio="12" chain_id="1020" next_chain_id="120" next_skill_time="0" min_hp="96"
+			target="ME" /><!-- Shock Wave -->
+		<npc_skill id="21564" lv="56" prob="100" chain_id="120" next_chain_id="121" next_skill_time="0" /><!-- Dragon Claw -->
+		<npc_skill id="21564" lv="56" prob="100" chain_id="121" next_chain_id="1030" next_skill_time="5000" /><!-- Dragon Claw -->
+		<npc_skill id="21563" lv="56" prob="100" prio="11" chain_id="1010" next_chain_id="1020" next_skill_time="8000" min_hp="96" /><!-- Dragon Fang -->
+		<npc_skill id="21562" lv="56" prob="100" prio="10" chain_id="1000" next_chain_id="1010" next_skill_time="8000" min_hp="96" /><!-- Wyrm Spike -->
+		<!-- Entry & Fallback -->
+		<npc_skill id="21566" lv="55" prob="100" prio="1" next_chain_id="1000" next_skill_time="8000" /><!-- Thunder Crash -->
+	</npc_skills>
+	<!-- Camp Defense Cannon -->
+	<npc_skills npc_ids="277225 277226 277227 277228">
+		<npc_skill id="20381" lv="65" prob="100" next_skill_time="2500" next_chain_id="1" /><!-- Blanket Bombardment -->
+		<npc_skill id="20378" lv="65" prob="100" next_skill_time="2500" chain_id="1" next_chain_id="2" /><!-- Precision Bombardment -->
+		<npc_skill id="20383" lv="65" prob="100" next_skill_time="2500" chain_id="2" target="RANDOM" /><!-- Precision Blanket Bombardment -->
+	</npc_skills>
+	<!-- Ahserion Troopers Commander -->
+	<npc_skills npc_ids="297184">
+		<npc_skill id="20700" lv="65" prob="0" is_post_spawn="true" />
+
+		<npc_skill id="21577" lv="20" prob="100" prio="24" chain_id="40" next_chain_id="2" next_skill_time="6000"><!-- Bombarding targets. -->
+			<cond cond_type="TARGET_IS_NPC" />
+		</npc_skill>
+		<npc_skill id="21577" lv="20" prob="100" prio="23" chain_id="30" next_chain_id="40" next_skill_time="6000"><!-- Bombarding targets. -->
+			<cond cond_type="TARGET_IS_NPC" />
+		</npc_skill>
+		<npc_skill id="21577" lv="20" prob="100" prio="22" chain_id="20" next_chain_id="30" next_skill_time="6000"><!-- Bombarding targets. -->
+			<cond cond_type="TARGET_IS_NPC" />
+		</npc_skill>
+		<npc_skill id="21577" lv="20" prob="100" prio="21" chain_id="10" next_chain_id="20" next_skill_time="6000"><!-- Bombarding targets. -->
+			<cond cond_type="TARGET_IS_NPC" />
+		</npc_skill>
+		<npc_skill id="21577" lv="20" prob="100" prio="20" chain_id="2" next_chain_id="10" next_skill_time="6000"><!-- Bombarding targets. -->
+			<cond cond_type="TARGET_IS_NPC" />
+		</npc_skill>
+
+		<npc_skill id="21296" lv="56" prob="100" prio="14" chain_id="40" next_chain_id="41" next_skill_time="0" /><!-- Sweeping -->
+		<npc_skill id="20704" lv="56" prob="100" chain_id="41" next_chain_id="2" next_skill_time="5000" /><!-- Area Press -->
+		<npc_skill id="20648" lv="56" prob="100" prio="13" chain_id="30" next_chain_id="40" next_skill_time="5000" /><!-- Pincer Attack -->
+		<npc_skill id="21294" lv="56" prob="100" prio="12" chain_id="20" next_chain_id="30" next_skill_time="5000" /><!-- Thrash -->
+		<npc_skill id="21297" lv="56" prob="100" prio="11" chain_id="10" next_chain_id="20" next_skill_time="5000" /><!-- Wide Power Attack -->
+		<npc_skill id="21294" lv="56" prob="100" prio="10" chain_id="2" next_chain_id="10" next_skill_time="5000" /><!-- Thrash -->
+
+		<npc_skill id="21296" lv="56" prob="100" prio="7" next_chain_id="1" next_skill_time="0" /><!-- Sweeping -->
+		<npc_skill id="20704" lv="56" prob="100" chain_id="1" next_chain_id="2" next_skill_time="5000" /><!-- Area Press -->
+	</npc_skills>
+	<!-- Ahserion Troopers Defender Captain -->
+	<npc_skills npc_ids="297190">
+		<npc_skill id="17386" lv="65" prob="100" prio="7" next_chain_id="1" next_skill_time="0" /><!-- Cleave -->
+		<npc_skill id="17305" lv="65" prob="100" chain_id="1" next_chain_id="10" next_skill_time="0" target="ME" /><!-- Wide Area Wrathful Strike -->
+		<!-- Should broadcast 23002 Self 25m -->
+		<npc_skill id="17305" lv="65" prob="100" prio="21" chain_id="20" next_chain_id="22" next_skill_time="0" max_hp="50" target="ME"
+			cd="300000" /><!-- Wide Area Wrathful Strike -->
+		<npc_skill id="21284" lv="20" prob="100" chain_id="22" next_chain_id="10" next_skill_time="0" target="ME" /><!-- Wide Power Attack -->
+		<npc_skill id="17305" lv="65" prob="100" prio="20" chain_id="20" next_chain_id="21" next_skill_time="0" max_hp="50"
+			target="ME" /><!-- Wide Area Wrathful Strike -->
+		<npc_skill id="21284" lv="20" prob="100" chain_id="21" next_chain_id="10" next_skill_time="0" target="ME" /><!-- Wide Power Attack -->
+		<npc_skill id="19016" lv="65" prob="100" prio="13" chain_id="20" next_chain_id="10" next_skill_time="1000"
+			target="RANDOM" /><!-- Ferocious Strike I -->
+		<npc_skill id="21284" lv="65" prob="100" chain_id="10" next_chain_id="20" next_skill_time="1000" /><!-- Wide Power Attack -->
+		<npc_skill id="19016" lv="65" prob="100" next_chain_id="10" next_skill_time="1000" /><!-- Ferocious Strike I -->
+	</npc_skills>
+	<!-- Ahserion Troopers Assassin -->
+	<npc_skills npc_ids="297191">
+		<npc_skill id="20700" lv="56" prob="0" is_post_spawn="true" />
+		<npc_skill id="17320" lv="65" prob="100" next_chain_id="1" next_skill_time="2000" /><!-- Frontal Strike -->
+		<npc_skill id="17321" lv="65" prob="100" prio="25" chain_id="1" next_chain_id="10" next_skill_time="3000" /><!-- Surprise Attack -->
+		<npc_skill id="17308" lv="65" prob="100" prio="23" chain_id="10" next_chain_id="20" next_skill_time="2500" /><!-- Rage -->
+		<npc_skill id="17320" lv="65" prob="100" prio="21" chain_id="20" next_chain_id="1" next_skill_time="2000" /><!-- Frontal Strike -->
+	</npc_skills>
+	<!-- Ahserion Troopers Sorcerer -->
+	<npc_skills npc_ids="297192">
+		<npc_skill id="16989" lv="65" prob="100" prio="24" chain_id="1" next_chain_id="10" next_skill_time="0" max_hp="35"
+			cd="180000" /><!-- Cold Attack -->
+		<npc_skill id="17335" lv="56" prob="100" prio="23" chain_id="1" next_chain_id="10" next_skill_time="0" /><!-- Flame Bolt -->
+		<npc_skill id="21288" lv="65" prob="100" prio="21" chain_id="10" next_chain_id="1" next_skill_time="0" /><!-- Fire Burst -->
+		<npc_skill id="21287" lv="56" prob="100" prio="7" next_chain_id="1" next_skill_time="0" /><!-- Agrint Curse -->
+	</npc_skills>
+	<!-- Ahserion Reserve Assault Leader -->
+	<npc_skills npc_ids="297185">
+		<npc_skill id="20700" lv="65" prob="0" is_post_spawn="true" />
+
+		<npc_skill id="21578" lv="56" prob="100" prio="23" chain_id="30" next_chain_id="1" next_skill_time="10000" /><!-- Shield Penetration -->
+		<npc_skill id="21578" lv="56" prob="100" prio="22" chain_id="20" next_chain_id="30" next_skill_time="10000" /><!-- Shield Penetration -->
+		<npc_skill id="21578" lv="56" prob="100" prio="21" chain_id="10" next_chain_id="20" next_skill_time="10000" /><!-- Shield Penetration -->
+		<npc_skill id="21578" lv="56" prob="100" prio="20" chain_id="1" next_chain_id="10" next_skill_time="10000" /><!-- Shield Penetration -->
+
+		<npc_skill id="21578" lv="56" prob="100" prio="13" chain_id="30" next_chain_id="1" next_skill_time="1000" /><!-- Shield Penetration -->
+		<npc_skill id="17446" lv="56" prob="100" prio="12" chain_id="20" next_chain_id="21" next_skill_time="0"
+			target="RANDOM" /><!-- Showering Strike -->
+		<npc_skill id="17446" lv="57" prob="100" chain_id="21" next_chain_id="22" next_skill_time="0" target="RANDOM" /><!-- Showering Strike -->
+		<npc_skill id="17446" lv="56" prob="100" chain_id="22" next_chain_id="30" next_skill_time="5000" /><!-- Showering Strike -->
+		<npc_skill id="17332" lv="56" prob="100" prio="11" chain_id="10" next_chain_id="20" next_skill_time="2000" /><!-- Swift Edge -->
+		<npc_skill id="17332" lv="56" prob="100" prio="10" chain_id="1" next_chain_id="2" next_skill_time="0" /><!-- Swift Edge -->
+		<npc_skill id="17446" lv="56" prob="100" chain_id="2" next_chain_id="10" next_skill_time="3000" /><!-- Showering Strike -->
+
+		<npc_skill id="18159" lv="56" prob="100" prio="9" next_chain_id="1" next_skill_time="3000" /><!-- Powerful Ambush -->
+	</npc_skills>
+</npc_skill_templates>

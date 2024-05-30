@@ -35668,7 +35668,7 @@
 		</npc_skill>
 		<npc_skill id="21531" lv="1" prob="70" min_hp="50" next_chain_id="2" next_skill_time="0" cd="40000" />
 		<npc_skill id="21532" lv="1" chain_id="2" prob="100" cd="10000" next_skill_time="10000" />
-		
+
 		<npc_skill id="21532" lv="1" prob="70" max_hp="50" next_chain_id="3" next_skill_time="0" cd="40000" />
 		<npc_skill id="21531" lv="1" chain_id="3" prob="100" next_skill_time="10000" cd="10000" />
 	</npc_skills>
@@ -62347,21 +62347,21 @@
 	<npc_skills npc_ids="833439">
 		<npc_skill id="21948" lv="1" prob="100" />
 	</npc_skills>
-	<!-- Taunting Spirit (1) --> 
+	<!-- Taunting Spirit (1) -->
 	<npc_skills npc_ids="833403">
 		<npc_skill id="21930" lv="1" prob="100" />
 	</npc_skills>
 	<npc_skills npc_ids="833404">
 		<npc_skill id="21930" lv="1" prob="100" />
 	</npc_skills>
-	<!-- Taunting Spirit (2) --> 
+	<!-- Taunting Spirit (2) -->
 	<npc_skills npc_ids="833478">
 		<npc_skill id="22665" lv="1" prob="100" />
 	</npc_skills>
 	<npc_skills npc_ids="833479">
 		<npc_skill id="22665" lv="1" prob="100" />
 	</npc_skills>
-	<!-- Taunting Spirit (3) --> 
+	<!-- Taunting Spirit (3) -->
 	<npc_skills npc_ids="833480">
 		<npc_skill id="22666" lv="1" prob="100" />
 	</npc_skills>
@@ -63114,8 +63114,8 @@
 		<npc_skill id="17193" lv="65" prob="100" chain_id="5" cd="35000" />
 		<npc_skill id="17191" lv="65" prob="50" cd="10000" />
 	</npc_skills>-->
-	<!-- Ahserion -->
-	<npc_skills npc_ids="277224">
+	<!-- Ahserion (PvP Map | Old) -->
+	<npc_skills npc_ids="297189">
 		<npc_skill id="21562" lv="65" prob="85" next_chain_id="1" cd="24000" next_skill_time="0" target="RANDOM" />
 		<npc_skill id="21565" lv="65" prob="100" chain_id="1" next_chain_id="2" cd="10000" next_skill_time="0" target="RANDOM" />
 		<npc_skill id="21565" lv="65" prob="100" chain_id="2" cd="10000" next_skill_time="7000" target="RANDOM" />
@@ -63136,51 +63136,8 @@
 			<cond despawn_time="3000" can_die="false" delay="1000" />
 		</npc_skill>
 	</npc_skills>
-	<!-- Assassin -->
-	<npc_skills npc_ids="297185 297191">
-		<npc_skill id="20700" lv="65" prob="0" is_post_spawn="true" />
-		<npc_skill id="21578" lv="65" prob="100" cd="7000" prio="1" />
-		<npc_skill id="17328" lv="65" prob="70" cd="10000" next_chain_id="1" next_skill_time="2000" />
-		<npc_skill id="17329" lv="65" prob="70" cd="10000" chain_id="1" />
-		<npc_skill id="17331" lv="65" prob="70" cd="10000">
-			<cond cond_type="TARGET_HAS_CARVED_SIGNET" />
-		</npc_skill>
-		<npc_skill id="17332" lv="65" prob="70" cd="15000" />
-		<npc_skill id="17320" lv="65" prob="70" cd="15000" />
-		<npc_skill id="17321" lv="65" prob="70" cd="15000" />
-		<npc_skill id="17323" lv="65" prob="70" cd="15000" />
-	</npc_skills>
-	<!-- Rider -->
-	<npc_skills npc_ids="297184">
-		<npc_skill id="20700" lv="65" prob="0" is_post_spawn="true" />
-		<npc_skill id="21577" lv="65" prob="100" cd="10000" prio="1" />
-		<npc_skill id="21294" lv="65" prob="70" cd="15000" />
-		<npc_skill id="21296" lv="65" prob="70" cd="15000" />
-		<npc_skill id="21297" lv="65" prob="70" cd="15000" />
-		<npc_skill id="21315" lv="65" prob="70" cd="15000" />
-	</npc_skills>
-	<npc_skills npc_ids="277225 277226 277227 277228">
-		<npc_skill id="20383" lv="65" prob="100" next_skill_time="0" next_chain_id="1" />
-		<npc_skill id="20378" lv="65" prob="100" next_skill_time="0" chain_id="1" />
-	</npc_skills>
-	<!-- Fighter -->
-	<npc_skills npc_ids="277187 297190 277242 277200">
-		<npc_skill id="20700" lv="65" prob="0" is_post_spawn="true" />
-		<npc_skill id="20702" lv="65" prob="70" cd="15000" />
-		<npc_skill id="21285" lv="65" prob="70" cd="15000" />
-		<npc_skill id="21319" lv="65" prob="60" cd="20000" />
-		<npc_skill id="21320" lv="65" prob="70" cd="20000" />
-	</npc_skills>
-	<!-- Mage -->
-	<npc_skills npc_ids="277211 297192 277198">
-		<npc_skill id="20700" lv="65" prob="0" is_post_spawn="true" />
-		<npc_skill id="20712" lv="65" prob="50" cd="15000" />
-		<npc_skill id="20508" lv="65" prob="100" cd="15000" />
-		<npc_skill id="20511" lv="65" prob="100" cd="15000" />
-		<npc_skill id="20512" lv="65" prob="100" cd="20000" />
-	</npc_skills>
 	<!-- Gunner -->
-	<npc_skills npc_ids="277196 297193 277209">
+	<npc_skills npc_ids="297193">
 		<npc_skill id="20700" lv="65" prob="0" is_post_spawn="true" />
 		<npc_skill id="20713" lv="65" prob="50" cd="15000" />
 		<npc_skill id="21293" lv="65" prob="70" cd="15000" />
@@ -63189,17 +63146,8 @@
 		<npc_skill id="21219" lv="65" prob="70" cd="15000" />
 		<npc_skill id="20858" lv="65" prob="70" cd="15000" />
 	</npc_skills>
-	<!-- Bard -->
-	<npc_skills npc_ids="277199 277193 277212">
-		<npc_skill id="20700" lv="65" prob="0" is_post_spawn="true" />
-		<npc_skill id="20715" lv="65" prob="70" cd="15000" />
-		<npc_skill id="20959" lv="65" prob="70" cd="15000" />
-		<npc_skill id="20960" lv="65" prob="70" cd="15000" />
-		<npc_skill id="20714" lv="65" prob="70" cd="15000" />
-		<npc_skill id="21597" lv="65" prob="70" cd="15000" />
-	</npc_skills>
 	<!-- Cleric -->
-	<npc_skills npc_ids="277210 297194">
+	<npc_skills npc_ids="297194">
 		<npc_skill id="20700" lv="65" prob="0" is_post_spawn="true" />
 		<npc_skill id="20517" lv="65" prob="70" cd="14000" next_chain_id="1" next_skill_time="2000" />
 		<npc_skill id="20518" lv="65" prob="100" cd="15000" chain_id="1" next_chain_id="2" next_skill_time="2000" />
@@ -63371,7 +63319,7 @@
 	<npc_skills npc_ids="235576">
 		<npc_skill id="20700" lv="65" prob="0" cd="10000" is_post_spawn="true" />
 		<npc_skill id="16909" lv="65" prob="70" cd="15000" />
-	</npc_skills> 
+	</npc_skills>
 	<!-- research team veteran watchman -->
 	<npc_skills npc_ids="235583">
 		<npc_skill id="20700" lv="65" prob="0" cd="10000" is_post_spawn="true" />
@@ -63384,7 +63332,7 @@
 		<npc_skill id="20179" lv="65" prob="70" cd="20000" target="RANDOM" />
 		<npc_skill id="17722" lv="65" prob="70" cd="15000" />
 		<npc_skill id="16909" lv="65" prob="70" cd="15000" />
-	</npc_skills> 
+	</npc_skills>
 	<!-- shulack mercenary veteran assaulter -->
 	<npc_skills npc_ids="235569">
 		<npc_skill id="16532" lv="65" prob="70" cd="15000" />
@@ -63465,7 +63413,7 @@
 	<!-- ruins clodworm swarm -->
 	<npc_skills npc_ids="235586">
 		<npc_skill id="17558" lv="65" prob="60" cd="25000" max_hp="80" />
-	</npc_skills> 
+	</npc_skills>
 	<!-- guardian angolem -->
 	<npc_skills npc_ids="235590">
 		<npc_skill id="16472" lv="65" prob="70" cd="15000" />
@@ -63579,7 +63527,7 @@
 	<npc_skills npc_ids="235602">
 		<npc_skill id="20700" lv="65" prob="0" cd="10000" is_post_spawn="true" />
 		<npc_skill id="16909" lv="65" prob="70" cd="15000" />
-	</npc_skills> 
+	</npc_skills>
 	<!-- Research Team Scalebalde -->
 	<npc_skills npc_ids="235609">
 		<npc_skill id="20700" lv="65" prob="0" cd="10000" is_post_spawn="true" />
@@ -63592,7 +63540,7 @@
 		<npc_skill id="20179" lv="65" prob="70" cd="20000" target="RANDOM" />
 		<npc_skill id="17722" lv="65" prob="70" cd="15000" />
 		<npc_skill id="16909" lv="65" prob="70" cd="15000" />
-	</npc_skills> 
+	</npc_skills>
 	<!-- Shulack Mercenary Assaulter -->
 	<npc_skills npc_ids="235595">
 		<npc_skill id="16532" lv="65" prob="70" cd="15000" />
@@ -63622,7 +63570,7 @@
 		<npc_skill id="19780" lv="65" prob="70" cd="15000" />
 	</npc_skills>
 	<!-- Shulack Mercenary Scout -->
-	<npc_skills npc_ids="235596"> 
+	<npc_skills npc_ids="235596">
 		<npc_skill id="16543" lv="65" prob="70" cd="15000" />
 		<npc_skill id="16674" lv="65" prob="60" cd="15000" />
 		<npc_skill id="18248" lv="65" prob="60" cd="15000" />
@@ -63806,7 +63754,7 @@
 	<!-- Runaway Hirakiki Leader -->
 	<npc_skills npc_ids="235763">
 		<npc_skill id="17340" lv="65" prob="70" cd="25000" />
-		<npc_skill id="17365" lv="65" prob="70" cd="40000" /> 
+		<npc_skill id="17365" lv="65" prob="70" cd="40000" />
 		<npc_skill id="17860" lv="65" prob="70" cd="25000" target="RANDOM" />
 		<npc_skill id="19075" lv="65" prob="100" cd="25000" />
 		<npc_skill id="21799" lv="65" prob="70" cd="35000" prio="1">
@@ -63835,7 +63783,7 @@
 		<npc_skill id="20700" lv="65" prob="0" cd="10000" is_post_spawn="true" />
 		<npc_skill id="17722" lv="65" prob="70" cd="15000" />
 		<npc_skill id="16909" lv="65" prob="70" cd="15000" />
-	</npc_skills> 
+	</npc_skills>
 	<!-- (North/South/Post) Defense Drakenclaw | Barricade Sentinel -->
 	<npc_skills npc_ids="235721 235728 235735 235742 235749">
 		<npc_skill id="20700" lv="65" prob="0" cd="10000" is_post_spawn="true" />

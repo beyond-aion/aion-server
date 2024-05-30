@@ -1,0 +1,292 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<npc_walker xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="npc_walker.xsd">
+	<walker_template route_id="gab1_sub_boss_1">
+		<routestep x="487.405" y="479.499" z="675.6387" />
+		<routestep x="498.012" y="490.106" z="675.0158" />
+		<routestep x="503.669" y="495.763" z="675.0555" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_boss_2">
+		<routestep x="476.428" y="489.882" z="674.9332" />
+		<routestep x="487.034" y="500.488" z="675.01355" />
+		<routestep x="492.691" y="506.145" z="675.05475" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_boss_3">
+		<routestep x="475.321" y="536.389" z="675.9605" />
+		<routestep x="485.928" y="485.928" z="674.9542" />
+		<routestep x="491.585" y="520.126" z="675.0489" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_boss_4">
+		<routestep x="486.321" y="547.389" z="674.92645" />
+		<routestep x="496.928" y="536.783" z="675.00616" />
+		<routestep x="502.585" y="531.126" z="675.04663" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_boss_5">
+		<routestep x="531.617" y="481.296" z="674.9428" />
+		<routestep x="521.011" y="491.903" z="675.0232" />
+		<routestep x="515.354" y="497.56" z="675.0649" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_boss_6">
+		<routestep x="541.617" y="491.296" z="675.4357" />
+		<routestep x="531.011" y="501.903" z="675.0232" />
+		<routestep x="525.354" y="507.56" z="675.0608" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_boss_7">
+		<routestep x="532.094" y="545.758" z="675.6823" />
+		<routestep x="521.487" y="535.151" z="675.0152" />
+		<routestep x="515.83" y="529.495" z="675.05536" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_boss_8">
+		<routestep x="542.093" y="535.759" z="674.9348" />
+		<routestep x="531.486" y="525.153" z="675.0152" />
+		<routestep x="525.829" y="519.496" z="675.05804" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_potal_1">
+		<routestep x="392.43" y="396.94" z="688.869" />
+		<routestep x="381.83" y="386.33" z="688.869" />
+		<routestep x="376.17" y="380.68" z="688.9361" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_potal_2">
+		<routestep x="392.64" y="628.63" z="688.869" />
+		<routestep x="382.03" y="639.24" z="688.8704" />
+		<routestep x="376.38" y="644.9" z="689.0103" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_potal_3">
+		<routestep x="629.4" y="392.98" z="688.869" />
+		<routestep x="633.69" y="388.69" z="688.869" />
+		<routestep x="640.01" y="382.37" z="688.869" />
+		<routestep x="645.66" y="376.71" z="688.8765" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_potal_4">
+		<routestep x="625.65" y="629.89" z="688.869" />
+		<routestep x="636.26" y="640.49" z="688.869" />
+		<routestep x="641.92" y="646.15" z="688.9203" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_tank_1">
+		<routestep x="510.124" y="352.167" z="684.57697" />
+		<routestep x="510.049" y="344.794" z="683.5984" />
+		<routestep x="510.124" y="337.167" z="683.0075" />
+		<routestep x="509.904" y="331.591" z="683.0075" />
+		<routestep x="509.643" y="318.998" z="684.22266" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_tank_2">
+		<routestep x="342.476" y="511.413" z="683.8348" />
+		<routestep x="340.299" y="511.257" z="683.54584" />
+		<routestep x="332.403" y="511.253" z="683.0075" />
+		<routestep x="326.844" y="511.781" z="683.0075" />
+		<routestep x="323.632" y="511.958" z="683.0075" />
+		<routestep x="315.695" y="512.116" z="684.11816" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_tank_3">
+		<routestep x="672.303" y="513.47" z="684.2126" />
+		<routestep x="688.346" y="513.901" z="683.0075" />
+		<routestep x="699.967" y="514.314" z="683.97217" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_tank_4">
+		<routestep x="508.388" y="677.939" z="684.0745" />
+		<routestep x="508.391" y="689.517" z="683.0075" />
+		<routestep x="508.63" y="697.023" z="683.0075" />
+		<routestep x="508.385" y="704.466" z="683.9913" />
+		<routestep x="508.183" y="710.721" z="683.95245" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path4">
+		<routestep x="575.7" y="396.7" z="686.83496" />
+		<routestep x="576.79" y="395.79" z="686.8311" />
+		<routestep x="578.22" y="394.39" z="686.8305" />
+		<routestep x="579.65" y="392.99" z="686.8299" />
+		<routestep x="580.71" y="391.94" z="686.82965" />
+		<routestep x="581.02" y="391.63" z="686.82965" />
+		<routestep x="580.22" y="392.43" z="686.82965" />
+		<routestep x="578.78" y="393.82" z="686.83075" />
+		<routestep x="577.34" y="395.21" z="686.8318" />
+		<routestep x="575.91" y="396.6" z="686.83264" />
+		<routestep x="575.7" y="396.73" z="686.83435" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path6">
+		<routestep x="572.22" y="400.01" z="686.8386" />
+		<routestep x="570.97" y="401.16" z="686.84076" />
+		<routestep x="569.54" y="402.55" z="686.8416" />
+		<routestep x="568.11" y="403.95" z="686.8422" />
+		<routestep x="566.97" y="405.07" z="686.84265" />
+		<routestep x="566.42" y="405.61" z="686.84283" />
+		<routestep x="567.54" y="404.51" z="686.8424" />
+		<routestep x="568.98" y="403.12" z="686.8414" />
+		<routestep x="570.42" y="401.73" z="686.8427" />
+		<routestep x="571.86" y="400.34" z="686.83923" />
+		<routestep x="572.22" y="400.0" z="686.8433" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path7">
+		<routestep x="621.55" y="452.37" z="686.841" />
+		<routestep x="621.07" y="452.91" z="686.8423" />
+		<routestep x="620.32" y="453.53" z="686.8395" />
+		<routestep x="618.88" y="454.93" z="686.8386" />
+		<routestep x="617.45" y="456.33" z="686.838" />
+		<routestep x="617.46" y="456.32" z="686.838" />
+		<routestep x="618.32" y="455.49" z="686.8386" />
+		<routestep x="619.75" y="454.1" z="686.8395" />
+		<routestep x="622.12" y="451.85" z="686.84204" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path8">
+		<routestep x="626.64" y="447.51" z="686.8459" />
+		<routestep x="627.31" y="446.9" z="686.84717" />
+		<routestep x="628.74" y="445.51" z="686.848" />
+		<routestep x="630.18" y="444.11" z="686.8488" />
+		<routestep x="631.61" y="442.72" z="686.8497" />
+		<routestep x="631.6" y="442.71" z="686.84924" />
+		<routestep x="630.74" y="443.55" z="686.8488" />
+		<routestep x="629.3" y="444.94" z="686.8478" />
+		<routestep x="627.87" y="446.33" z="686.8469" />
+		<routestep x="626.43" y="447.72" z="686.8459" />
+		<routestep x="626.65" y="447.48" z="686.84546" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path9">
+		<routestep x="441.04" y="393.89" z="686.8506" />
+		<routestep x="439.64" y="392.46" z="686.8512" />
+		<routestep x="438.25" y="391.03" z="686.85205" />
+		<routestep x="438.24" y="391.01" z="686.8523" />
+		<routestep x="439.08" y="391.89" z="686.85144" />
+		<routestep x="440.47" y="393.33" z="686.8504" />
+		<routestep x="442.94" y="395.89" z="686.84845" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path10">
+		<routestep x="448.54" y="401.74" z="686.84314" />
+		<routestep x="449.93" y="403.17" z="686.8423" />
+		<routestep x="451.33" y="404.6" z="686.8417" />
+		<routestep x="451.89" y="405.17" z="686.84143" />
+		<routestep x="450.5" y="403.74" z="686.8423" />
+		<routestep x="449.11" y="402.3" z="686.8434" />
+		<routestep x="447.71" y="400.86" z="686.84424" />
+		<routestep x="446.37" y="399.53" z="686.844" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path11">
+		<routestep x="389.59" y="444.23" z="686.8247" />
+		<routestep x="388.17" y="442.82" z="686.82495" />
+		<routestep x="387.1" y="441.8" z="686.826" />
+		<routestep x="388.19" y="442.85" z="686.82513" />
+		<routestep x="389.6" y="444.26" z="686.82513" />
+		<routestep x="391.6" y="446.22" z="686.8243" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path12">
+		<routestep x="396.35" y="451.11" z="686.82794" />
+		<routestep x="397.76" y="452.53" z="686.82745" />
+		<routestep x="399.17" y="453.95" z="686.832" />
+		<routestep x="400.58" y="455.36" z="686.82764" />
+		<routestep x="400.8" y="455.59" z="686.8279" />
+		<routestep x="399.4" y="454.16" z="686.8272" />
+		<routestep x="397.99" y="452.74" z="686.827" />
+		<routestep x="396.58" y="451.32" z="686.82684" />
+		<routestep x="395.18" y="449.89" z="686.8262" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path13">
+		<routestep x="394.54" y="576.17" z="686.8389" />
+		<routestep x="395.97" y="574.78" z="686.83813" />
+		<routestep x="397.4" y="573.38" z="686.83746" />
+		<routestep x="398.83" y="571.99" z="686.8366" />
+		<routestep x="400.27" y="570.59" z="686.83575" />
+		<routestep x="400.26" y="570.57" z="686.8364" />
+		<routestep x="399.4" y="571.42" z="686.8366" />
+		<routestep x="397.96" y="572.81" z="686.8377" />
+		<routestep x="396.53" y="574.2" z="686.83856" />
+		<routestep x="395.09" y="575.59" z="686.8396" />
+		<routestep x="394.52" y="576.15" z="686.8398" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path14">
+		<routestep x="388.97" y="581.41" z="686.846" />
+		<routestep x="387.54" y="582.81" z="686.8466" />
+		<routestep x="386.11" y="584.2" z="686.8475" />
+		<routestep x="385.54" y="584.76" z="686.84766" />
+		<routestep x="386.98" y="583.37" z="686.8466" />
+		<routestep x="388.41" y="581.98" z="686.84576" />
+		<routestep x="389.85" y="580.59" z="686.8447" />
+		<routestep x="391.29" y="579.2" z="686.8436" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path15">
+		<routestep x="441.06" y="631.08" z="686.83545" />
+		<routestep x="439.62" y="632.47" z="686.8344" />
+		<routestep x="438.19" y="633.87" z="686.83374" />
+		<routestep x="436.76" y="635.26" z="686.8329" />
+		<routestep x="436.75" y="635.3" z="686.83356" />
+		<routestep x="437.63" y="634.43" z="686.83374" />
+		<routestep x="439.06" y="633.04" z="686.8346" />
+		<routestep x="440.5" y="631.65" z="686.83563" />
+		<routestep x="441.94" y="630.26" z="686.83673" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path16">
+		<routestep x="445.44" y="627.1" z="686.844" />
+		<routestep x="446.87" y="625.71" z="686.84485" />
+		<routestep x="448.3" y="624.31" z="686.84546" />
+		<routestep x="449.74" y="622.91" z="686.8463" />
+		<routestep x="451.17" y="621.52" z="686.84717" />
+		<routestep x="451.74" y="620.96" z="686.84735" />
+		<routestep x="450.3" y="622.35" z="686.8463" />
+		<routestep x="448.86" y="623.74" z="686.8453" />
+		<routestep x="447.43" y="625.13" z="686.8444" />
+		<routestep x="445.99" y="626.52" z="686.8433" />
+		<routestep x="445.42" y="627.08" z="686.84314" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path17">
+		<routestep x="575.68" y="631.94" z="686.8485" />
+		<routestep x="577.07" y="633.37" z="686.84937" />
+		<routestep x="578.47" y="634.8" z="686.85" />
+		<routestep x="579.87" y="636.24" z="686.8508" />
+		<routestep x="579.86" y="636.27" z="686.8517" />
+		<routestep x="579.03" y="635.37" z="686.8502" />
+		<routestep x="577.64" y="633.93" z="686.8492" />
+		<routestep x="576.25" y="632.49" z="686.8481" />
+		<routestep x="574.86" y="631.06" z="686.8472" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path18">
+		<routestep x="569.33" y="625.6" z="686.84875" />
+		<routestep x="567.93" y="624.16" z="686.8479" />
+		<routestep x="566.53" y="622.73" z="686.8473" />
+		<routestep x="565.98" y="622.16" z="686.84686" />
+		<routestep x="567.37" y="623.6" z="686.8479" />
+		<routestep x="568.76" y="625.04" z="686.849" />
+		<routestep x="570.15" y="626.47" z="686.84985" />
+		<routestep x="570.85" y="627.29" z="686.8524" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path19">
+		<routestep x="622.07" y="576.34" z="686.79663" />
+		<routestep x="621.34" y="575.66" z="686.79553" />
+		<routestep x="619.94" y="574.23" z="686.7962" />
+		<routestep x="618.55" y="572.8" z="686.797" />
+		<routestep x="617.15" y="571.37" z="686.79767" />
+		<routestep x="617.15" y="571.37" z="686.79767" />
+		<routestep x="617.99" y="572.23" z="686.79724" />
+		<routestep x="619.38" y="573.67" z="686.7962" />
+		<routestep x="620.77" y="575.11" z="686.7953" />
+		<routestep x="622.16" y="576.54" z="686.79425" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path20">
+		<routestep x="627.99" y="582.0" z="686.8022" />
+		<routestep x="629.38" y="583.44" z="686.80115" />
+		<routestep x="630.78" y="584.87" z="686.8005" />
+		<routestep x="630.78" y="584.87" z="686.8005" />
+		<routestep x="629.95" y="584.0" z="686.80133" />
+		<routestep x="628.56" y="582.56" z="686.8024" />
+		<routestep x="627.16" y="581.13" z="686.80304" />
+		<routestep x="626.62" y="580.51" z="686.80475" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path21">
+		<routestep x="440.062" y="631.985" z="686.83344" />
+		<routestep x="438.63" y="633.382" z="686.8327" />
+		<routestep x="437.198" y="634.778" z="686.832" />
+		<routestep x="436.627" y="635.335" z="686.83167" />
+		<routestep x="438.064" y="633.944" z="686.83264" />
+		<routestep x="439.502" y="632.554" z="686.8337" />
+		<routestep x="440.939" y="631.163" z="686.83466" />
+		<routestep x="442.377" y="629.773" z="686.83563" />
+	</walker_template>
+	<walker_template route_id="gab1_sub_npcpath08_path22">
+		<routestep x="445.626" y="626.75" z="686.84045" />
+		<routestep x="447.058" y="625.354" z="686.84125" />
+		<routestep x="448.49" y="623.958" z="686.842" />
+		<routestep x="449.923" y="622.562" z="686.8428" />
+		<routestep x="451.355" y="621.166" z="686.8435" />
+		<routestep x="451.344" y="621.15" z="686.84296" />
+		<routestep x="450.489" y="621.999" z="686.84283" />
+		<routestep x="449.051" y="623.39" z="686.84186" />
+		<routestep x="447.614" y="624.781" z="686.8409" />
+		<routestep x="446.176" y="626.171" z="686.83984" />
+		<routestep x="445.603" y="626.725" z="686.8395" />
+	</walker_template>
+</npc_walker>

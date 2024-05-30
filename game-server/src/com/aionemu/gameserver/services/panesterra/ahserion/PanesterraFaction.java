@@ -1,10 +1,7 @@
 package com.aionemu.gameserver.services.panesterra.ahserion;
 
 /**
- * Created on October 29th, 2017.
- * 
  * @author Estrayl
- * @since Beyond AION 4.8
  */
 public enum PanesterraFaction {
 
@@ -14,9 +11,9 @@ public enum PanesterraFaction {
 	DISILLON(72),
 	BALAUR(1);
 
-	private int factionId;
+	private final int factionId;
 
-	private PanesterraFaction(int factionId) {
+	PanesterraFaction(int factionId) {
 		this.factionId = factionId;
 	}
 

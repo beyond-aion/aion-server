@@ -4,292 +4,572 @@
 		<!-- Belus -->
 		<ahserion_spawn faction="BELUS">
 			<ahserion_stage_spawn stage="0">
+				<!-- Advance Corridor -->
+				<spawn npc_id="802220">
+					<spot x="268.634" y="273.407" z="680.203" h="15" static_id="223" />
+				</spawn>
+				<!-- Belus Staging Area -->
 				<spawn npc_id="804107">
-					<spot x="282.73" y="289.1" z="687.38" h="1"/>
+					<spot x="282.718" y="289.128" z="679.677" h="45" />
+				</spawn>
+				<!-- Herailt -->
+				<spawn npc_id="802465">
+					<spot x="285.927" y="299.161" z="680.504" h="105" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="1">
+				<!-- Belus Camp Defense Cannon -->
 				<spawn npc_id="277225">
-					<spot x="389.86" y="405.68" z="689.52" h="15"/>
-					<spot x="401.61" y="394.74" z="689.52" h="15"/>
+					<spot x="390.427" y="406.347" z="689.154" h="15" />
+					<spot x="402.366" y="394.779" z="689.154" h="15" />
+				</spawn>
+			</ahserion_stage_spawn>
+			<ahserion_stage_spawn stage="2">
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="396.332" y="405.444" z="689.154" h="45" />
+					<spot x="402.808" y="398.737" z="689.154" h="105" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="3">
+				<!-- Belus Advance Corridor Shield -->
 				<spawn npc_id="297306">
-					<spot x="372.73" y="377.25" z="690.65" h="1" static_id="164"/>
+					<spot x="372.739" y="377.311" z="688.877" h="15" static_id="164" />
 				</spawn>
 			</ahserion_stage_spawn>
-			<!-- Balaur Attackers -->
+			<!-- Balaur Attackers (by schedule) -->
 			<ahserion_stage_spawn stage="4">
-				<spawn npc_id="297188">
-					<spot x="392.83" y="385.25" z="689.15" h="65"/>
+				<!-- Ahserion Troopers Commander -->
+				<spawn npc_id="297184">
+					<spot x="392.054" y="396.591" z="688.869" h="105" walker_id="gab1_sub_potal_1" />
 				</spawn>
-				<spawn npc_id="297187">
-					<spot x="380.83" y="398.25" z="689.15" h="119"/>
+				<!-- Ahserion Troopers Assault Pod -->
+				<spawn npc_id="297352">
+					<spot x="392.022" y="385.004" z="688.836" h="105" />
 				</spawn>
 			</ahserion_stage_spawn>
+			<!-- Balaur Attackers (by Ahserion) -->
 			<ahserion_stage_spawn stage="5">
+				<!-- Ahserion Troopers Commander -->
 				<spawn npc_id="297184">
-					<spot x="377.26" y="381.65" z="689.09" h="74" walker_id="gab1_sub_potal_1"/>	
+					<spot x="392.065" y="396.602" z="688.869" h="105" walker_id="gab1_sub_potal_1" />
 				</spawn>
-				<spawn npc_id="297194">
-					<spot x="379.83" y="379.05" z="689.15" h="64"/>
-				</spawn>
-				<spawn npc_id="297191">
-					<spot x="378.13" y="373.97" z="689.15" h="50"/>
-					<spot x="367.33" y="381.95" z="689.15" h="108"/>
-				</spawn>
-				<spawn npc_id="297190">
-					<spot x="385.83" y="377.05" z="689.15" h="65"/>
-				</spawn>
-				<spawn npc_id="297193">
-					<spot x="368.69" y="386.25" z="689.15" h="99"/>
-				</spawn>
-				<spawn npc_id="297192">
-					<spot x="373.19" y="385.05" z="689.15" h="87"/>
+				<!-- Ahserion Troopers Assault Pod -->
+				<spawn npc_id="297352">
+					<spot x="392.986" y="385.011" z="688.836" h="105" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="180">
 				<!-- Ahserion Reserve Ignus Engine Controller (West) -->
 				<spawn npc_id="297316">
-					<spot x="509.38" y="315.82" z="687.13" h="1" static_id="180"/>
+					<spot x="509.389" y="315.901" z="683.948" h="90" static_id="180" />
+				</spawn>
+				<!-- Ignus Engine Hangar I -->
+				<spawn npc_id="804124" handler="FLAG">
+					<spot x="510.036" y="340.987" z="683.093" h="45" />
+				</spawn>
+				<!-- Belus Ignus Engine -->
+				<spawn npc_id="277238">
+					<spot x="489.175" y="332.294" z="683.311" />
+					<spot x="489.206" y="320.593" z="683.309" />
+					<spot x="530.551" y="319.971" z="683.298" h="60" />
+					<spot x="530.658" y="332.945" z="683.295" h="60" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="510.648" y="352.299" z="684.595" h="75" walker_id="gab1_sub_tank_1" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="181">
 				<!-- Ahserion Reserve Chariot Controller (South) -->
 				<spawn npc_id="297315">
-					<spot x="706.31" y="513.9" z="684.75" h="1" static_id="181"/>
+					<spot x="706.320" y="513.961" z="684.752" static_id="181" />
+				</spawn>
+				<!-- Chariot Hangar II -->
+				<spawn npc_id="804119" handler="FLAG">
+					<spot x="680.896" y="514.267" z="683.073" h="45" />
+				</spawn>
+				<!-- Belus Chariot -->
+				<spawn npc_id="277233">
+					<spot x="701.662" y="492.809" z="683.307" h="30" />
+					<spot x="689.384" y="493.340" z="683.300" h="30" />
+					<spot x="701.904" y="534.681" z="683.305" h="90" />
+					<spot x="688.581" y="534.453" z="683.292" h="90" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="672.154" y="513.835" z="684.233" h="75" walker_id="gab1_sub_tank_3" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="182">
 				<!-- Ahserion Reserve Ignuse Engine Controller (East) -->
 				<spawn npc_id="297317">
-					<spot x="508.37" y="709.93" z="685.35" h="1" static_id="182"/>
+					<spot x="508.379" y="709.905" z="683.953" h="30" static_id="182" />
+				</spawn>
+				<!-- Ignus Engine Hangar II -->
+				<spawn npc_id="804129" handler="FLAG">
+					<spot x="508.445" y="685.286" z="683.100" h="45" />
+				</spawn>
+				<!-- Belus Ignus Engine -->
+				<spawn npc_id="277238">
+					<spot x="488.934" y="692.998" z="683.287" />
+					<spot x="489.011" y="704.528" z="683.314" />
+					<spot x="530.046" y="704.281" z="683.313" h="60" />
+					<spot x="529.969" y="692.201" z="683.300" h="60" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="508.026" y="677.598" z="684.120" h="75" walker_id="gab1_sub_tank_4" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="183">
 				<!-- Ahserion Reserve Chariot Controller (North) -->
 				<spawn npc_id="297314">
-					<spot x="312.12" y="512.82" z="686.54" h="1" static_id="183"/>
+					<spot x="312.130" y="512.877" z="683.953" h="60" static_id="183" />
+				</spawn>
+				<!-- Chariot Hangar I -->
+				<spawn npc_id="804114" handler="FLAG">
+					<spot x="335.630" y="512.749" z="683.008" h="45" />
+				</spawn>
+				<!-- Belus Chariot -->
+				<spawn npc_id="277233">
+					<spot x="318.223" y="534.124" z="683.313" h="90" />
+					<spot x="330.429" y="534.126" z="683.302" h="90" />
+					<spot x="328.594" y="493.272" z="683.288" h="30" />
+					<spot x="316.764" y="493.075" z="683.312" h="30" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="343.126" y="511.107" z="683.921" h="75" walker_id="gab1_sub_tank_2" />
 				</spawn>
 			</ahserion_stage_spawn>
 		</ahserion_spawn>
 		<!-- Aspida -->
 		<ahserion_spawn faction="ASPIDA">
 			<ahserion_stage_spawn stage="0">
+				<!-- Advance Corridor -->
+				<spawn npc_id="802222">
+					<spot x="270.552" y="751.566" z="680.247" h="105" static_id="222" />
+				</spawn>
+				<!-- Aspida Staging Area -->
 				<spawn npc_id="804109">
-					<spot x="282.49" y="739.62" z="689.66" h="1"/>
+					<spot x="282.476" y="739.653" z="679.284" h="45" />
+				</spawn>
+				<!-- Herailt -->
+				<spawn npc_id="802663">
+					<spot x="293.671" y="735.775" z="680.232" h="75" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="1">
+				<!-- Aspida Camp Defense Cannon -->
 				<spawn npc_id="277226">
-					<spot x="389.23" y="621.26" z="689.52" h="105"/>
-					<spot x="401.09" y="632.28" z="689.52" h="105"/>
+					<spot x="390.174" y="620.429" z="689.058" h="105" />
+					<spot x="401.414" y="631.765" z="689.073" h="105" />
+				</spawn>
+			</ahserion_stage_spawn>
+			<ahserion_stage_spawn stage="2">
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185" handler="ATTACKER">
+					<spot x="395.007" y="619.939" z="689.058" h="75" />
+					<spot x="401.463" y="626.507" z="689.073" h="15" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="3">
+				<!-- Aspida Advance Corridor Shield -->
 				<spawn npc_id="297307">
-					<spot x="372.45" y="650.08" z="690.65" h="1" static_id="167"/>
+					<spot x="372.459" y="650.140" z="688.877" h="105" static_id="167" />
 				</spawn>
 			</ahserion_stage_spawn>
-			<!-- Balaur Attackers -->
+			<!-- Balaur Attackers (by schedule) -->
 			<ahserion_stage_spawn stage="4">
-				<spawn npc_id="297188">
-					<spot x="380.43" y="628.55" z="689.15" h="37"/>
+				<!-- Ahserion Troopers Commander -->
+				<spawn npc_id="297184">
+					<spot x="392.278" y="629.032" z="688.869" h="75" walker_id="gab1_sub_potal_2" />
 				</spawn>
-				<spawn npc_id="297187">
-					<spot x="393.83" y="641.25" z="689.15" h="92"/>
+				<!-- Ahserion Troopers Assault Pod -->
+				<spawn npc_id="297352">
+					<spot x="380.494" y="635.263" z="688.836" h="75" />
 				</spawn>
 			</ahserion_stage_spawn>
+			<!-- Balaur Attackers (by Ahserion) -->
 			<ahserion_stage_spawn stage="5">
+				<!-- Ahserion Troopers Commander -->
 				<spawn npc_id="297184">
-					<spot x="377.06" y="645.25" z="689.09" h="45" walker_id="gab1_sub_potal_2"/>	
+					<spot x="392.125" y="629.241" z="688.869" h="75" walker_id="gab1_sub_potal_2" />
 				</spawn>
-				<spawn npc_id="297194">
-					<spot x="374.83" y="642.65" z="689.15" h="37"/>
-				</spawn>
-				<spawn npc_id="297191">
-					<spot x="368.13" y="643.27" z="689.15" h="23"/>
-					<spot x="378.33" y="654.95" z="689.15" h="74"/>
-				</spawn>
-				<spawn npc_id="297190">
-					<spot x="372.63" y="637.05" z="689.15" h="33"/>
-				</spawn>
-				<spawn npc_id="297192">
-					<spot x="382.39" y="651.25" z="689.15" h="62"/>
-				</spawn>
-				<spawn npc_id="297193">
-					<spot x="368.69" y="386.25" z="689.15" h="99"/>
+				<!-- Ahserion Troopers Assault Pod -->
+				<spawn npc_id="297352">
+					<spot x="380.512" y="635.297" z="688.836" h="75" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="180">
 				<!-- Ahserion Reserve Ignus Engine Controller (West) -->
 				<spawn npc_id="297320">
-					<spot x="509.38" y="315.82" z="687.13" h="1" static_id="180"/>
+					<spot x="509.389" y="315.901" z="683.948" h="90" static_id="180" />
+				</spawn>
+				<!-- Ignus Engine Hangar I -->
+				<spawn npc_id="804125" handler="FLAG">
+					<spot x="510.036" y="340.987" z="683.093" h="45" />
+				</spawn>
+				<!-- Aspida Ignus Engine -->
+				<spawn npc_id="277239">
+					<spot x="489.175" y="332.294" z="683.311" />
+					<spot x="489.206" y="320.593" z="683.309" />
+					<spot x="530.551" y="319.971" z="683.298" h="60" />
+					<spot x="530.658" y="332.945" z="683.295" h="60" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="510.648" y="352.299" z="684.595" h="75" walker_id="gab1_sub_tank_1" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="181">
 				<!-- Ahserion Reserve Chariot Controller (South) -->
 				<spawn npc_id="297319">
-					<spot x="706.31" y="513.9" z="684.75" h="1" static_id="181"/>
+					<spot x="706.320" y="513.961" z="684.752" static_id="181" />
+				</spawn>
+				<!-- Chariot Hangar II -->
+				<spawn npc_id="804120" handler="FLAG">
+					<spot x="680.896" y="514.267" z="683.073" h="45" />
+				</spawn>
+				<!-- Aspida Chariot -->
+				<spawn npc_id="277234">
+					<spot x="701.662" y="492.809" z="683.307" h="30" />
+					<spot x="689.384" y="493.340" z="683.300" h="30" />
+					<spot x="701.904" y="534.681" z="683.305" h="90" />
+					<spot x="688.581" y="534.453" z="683.292" h="90" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="672.154" y="513.835" z="684.233" h="75" walker_id="gab1_sub_tank_3" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="182">
 				<!-- Ahserion Reserve Ignuse Engine Controller (East) -->
 				<spawn npc_id="297321">
-					<spot x="508.37" y="709.93" z="685.35" h="1" static_id="182"/>
+					<spot x="508.379" y="709.905" z="683.953" h="30" static_id="182" />
+				</spawn>
+				<!-- Ignus Engine Hangar II -->
+				<spawn npc_id="804130" handler="FLAG">
+					<spot x="508.445" y="685.286" z="683.100" h="45" />
+				</spawn>
+				<!-- Aspida Ignus Engine -->
+				<spawn npc_id="277239">
+					<spot x="488.934" y="692.998" z="683.287" />
+					<spot x="489.011" y="704.528" z="683.314" />
+					<spot x="530.046" y="704.281" z="683.313" h="60" />
+					<spot x="529.969" y="692.201" z="683.300" h="60" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="508.026" y="677.598" z="684.120" h="75" walker_id="gab1_sub_tank_4" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="183">
 				<!-- Ahserion Reserve Chariot Controller (North) -->
 				<spawn npc_id="297318">
-					<spot x="312.12" y="512.82" z="686.54" h="1" static_id="183"/>
+					<spot x="312.130" y="512.877" z="683.953" h="60" static_id="183" />
+				</spawn>
+				<!-- Chariot Hangar I -->
+				<spawn npc_id="804115" handler="FLAG">
+					<spot x="335.630" y="512.749" z="683.008" h="45" />
+				</spawn>
+				<!-- Aspida Chariot -->
+				<spawn npc_id="277234">
+					<spot x="318.223" y="534.124" z="683.313" h="90" />
+					<spot x="330.429" y="534.126" z="683.302" h="90" />
+					<spot x="328.594" y="493.272" z="683.288" h="30" />
+					<spot x="316.764" y="493.075" z="683.312" h="30" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="343.126" y="511.107" z="683.921" h="75" walker_id="gab1_sub_tank_2" />
 				</spawn>
 			</ahserion_stage_spawn>
 		</ahserion_spawn>
-		<!-- Athanos -->
+		<!-- Atanatos -->
 		<ahserion_spawn faction="ATANATOS">
 			<ahserion_stage_spawn stage="0">
+				<!-- Advance Corridor -->
+				<spawn npc_id="802224">
+					<spot x="747.354" y="753.091" z="680.106" h="75" static_id="221" />
+				</spawn>
+				<!-- Atanatos Staging Area -->
 				<spawn npc_id="804111">
-					<spot x="734.06" y="740.75" z="681.16" h="1"/>
+					<spot x="734.052" y="740.778" z="679.449" h="45" />
+				</spawn>
+				<!-- Herailt -->
+				<spawn npc_id="802664">
+					<spot x="731.629" y="728.168" z="680.401" h="45" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="1">
+				<!-- Atanatos Camp Defense Cannon -->
 				<spawn npc_id="277227">
-					<spot x="627.92" y="620.88" z="689.52" h="75"/>
-					<spot x="616.19" y="632.48" z="689.52" h="75"/>
+					<spot x="627.732" y="620.098" z="689.154" h="75" />
+					<spot x="615.455" y="632.160" z="689.154" h="75" />
+				</spawn>
+			</ahserion_stage_spawn>
+			<ahserion_stage_spawn stage="2">
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="613.739" y="624.882" z="688.921" h="45" />
+					<spot x="620.505" y="618.270" z="688.972" h="105" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="3">
+				<!-- Atanatos Advance Corridor Shield -->
 				<spawn npc_id="297308">
-					<spot x="644.99" y="649.68" z="690.74" h="1" static_id="166"/>
+					<spot x="645.004" y="649.743" z="688.877" h="45" static_id="166" />
 				</spawn>
 			</ahserion_stage_spawn>
-			<!-- Balaur Attackers -->
+			<!-- Balaur Attackers (by schedule) -->
 			<ahserion_stage_spawn stage="4">
-				<spawn npc_id="297188">
-					<spot x="625.23" y="641.95" z="689.15" h="6"/>
+				<!-- Ahserion Troopers Commander -->
+				<spawn npc_id="297184">
+					<spot x="625.677" y="630.032" z="688.869" h="45" walker_id="gab1_sub_potal_4" />
 				</spawn>
-				<spawn npc_id="297187">
-					<spot x="636.33" y="627.35" z="689.15" h="64"/>
+				<!-- Ahserion Troopers Assault Pod -->
+				<spawn npc_id="297352">
+					<spot x="627.561" y="642.017" z="688.836" h="45" />
 				</spawn>
 			</ahserion_stage_spawn>
+			<!-- Balaur Attackers (by Ahserion) -->
 			<ahserion_stage_spawn stage="5">
+				<!-- Ahserion Troopers Commander -->
 				<spawn npc_id="297184">
-					<spot x="640.96" y="645.25" z="689.09" h="15" walker_id="gab1_sub_potal_4"/>	
+					<spot x="625.727" y="630.084" z="688.869" h="45" walker_id="gab1_sub_potal_4" />
 				</spawn>
-				<spawn npc_id="297194">
-					<spot x="638.83" y="648.45" z="689.15" h="5"/>
-				</spawn>
-				<spawn npc_id="297191">
-					<spot x="638.13" y="652.27" z="689.15" h="112"/>
-					<spot x="650.33" y="643.95" z="689.15" h="43"/>
-				</spawn>
-				<spawn npc_id="297190">
-					<spot x="633.23" y="650.35" z="689.15" h="1"/>
-				</spawn>
-				<spawn npc_id="297192">
-					<spot x="643.49" y="642.25" z="689.15" h="26"/>
-				</spawn>
-				<spawn npc_id="297193">
-					<spot x="646.89" y="639.05" z="689.15" h="32"/>
+				<!-- Ahserion Troopers Assault Pod -->
+				<spawn npc_id="297352">
+					<spot x="627.607" y="642.030" z="688.836" h="45" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="180">
 				<!-- Ahserion Reserve Ignus Engine Controller (West) -->
 				<spawn npc_id="297324">
-					<spot x="509.38" y="315.82" z="687.13" h="1" static_id="180"/>
+					<spot x="509.389" y="315.901" z="683.948" h="90" static_id="180" />
+				</spawn>
+				<!-- Ignus Engine Hangar I -->
+				<spawn npc_id="804126" handler="FLAG">
+					<spot x="510.036" y="340.987" z="683.093" h="45" />
+				</spawn>
+				<!-- Atanatos Ignus Engine -->
+				<spawn npc_id="277239">
+					<spot x="489.175" y="332.294" z="683.311" />
+					<spot x="489.206" y="320.593" z="683.309" />
+					<spot x="530.551" y="319.971" z="683.298" h="60" />
+					<spot x="530.658" y="332.945" z="683.295" h="60" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="510.648" y="352.299" z="684.595" h="75" walker_id="gab1_sub_tank_1" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="181">
 				<!-- Ahserion Reserve Chariot Controller (South) -->
 				<spawn npc_id="297323">
-					<spot x="706.31" y="513.9" z="684.75" h="1" static_id="181"/>
+					<spot x="706.320" y="513.961" z="684.752" static_id="181" />
+				</spawn>
+				<!-- Chariot Hangar II -->
+				<spawn npc_id="804121" handler="FLAG">
+					<spot x="680.896" y="514.267" z="683.073" h="45" />
+				</spawn>
+				<!-- Atanatos Chariot -->
+				<spawn npc_id="277235">
+					<spot x="701.662" y="492.809" z="683.307" h="30" />
+					<spot x="689.384" y="493.340" z="683.300" h="30" />
+					<spot x="701.904" y="534.681" z="683.305" h="90" />
+					<spot x="688.581" y="534.453" z="683.292" h="90" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="672.154" y="513.835" z="684.233" h="75" walker_id="gab1_sub_tank_3" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="182">
 				<!-- Ahserion Reserve Ignuse Engine Controller (East) -->
 				<spawn npc_id="297325">
-					<spot x="508.37" y="709.93" z="685.35" h="1" static_id="182"/>
+					<spot x="508.379" y="709.905" z="683.953" h="30" static_id="182" />
+				</spawn>
+				<!-- Ignus Engine Hangar II -->
+				<spawn npc_id="804131" handler="FLAG">
+					<spot x="508.445" y="685.286" z="683.100" h="45" />
+				</spawn>
+				<!-- Atanatos Ignus Engine -->
+				<spawn npc_id="277240">
+					<spot x="488.934" y="692.998" z="683.287" />
+					<spot x="489.011" y="704.528" z="683.314" />
+					<spot x="530.046" y="704.281" z="683.313" h="60" />
+					<spot x="529.969" y="692.201" z="683.300" h="60" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="508.026" y="677.598" z="684.120" h="75" walker_id="gab1_sub_tank_4" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="183">
 				<!-- Ahserion Reserve Chariot Controller (North) -->
 				<spawn npc_id="297322">
-					<spot x="312.12" y="512.82" z="686.54" h="1" static_id="183"/>
+					<spot x="312.130" y="512.877" z="683.953" h="60" static_id="183" />
+				</spawn>
+				<!-- Chariot Hangar I -->
+				<spawn npc_id="804116" handler="FLAG">
+					<spot x="335.630" y="512.749" z="683.008" h="45" />
+				</spawn>
+				<!-- Atanatos Chariot -->
+				<spawn npc_id="277235">
+					<spot x="318.223" y="534.124" z="683.313" h="90" />
+					<spot x="330.429" y="534.126" z="683.302" h="90" />
+					<spot x="328.594" y="493.272" z="683.288" h="30" />
+					<spot x="316.764" y="493.075" z="683.312" h="30" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="343.126" y="511.107" z="683.921" h="75" walker_id="gab1_sub_tank_2" />
 				</spawn>
 			</ahserion_stage_spawn>
 		</ahserion_spawn>
-		<!-- Deylon -->
+		<!-- Disillon -->
 		<ahserion_spawn faction="DISILLON">
 			<ahserion_stage_spawn stage="0">
+				<!-- Advance Corridor -->
+				<spawn npc_id="802226">
+					<spot x="747.479" y="274.121" z="680.076" h="43" static_id="224" />
+				</spawn>
+				<!-- Disillon Staging Area -->
 				<spawn npc_id="804113">
-					<spot x="738.58" y="286.02" z="680.71" h="1"/>
+					<spot x="738.568" y="286.046" z="679.170" h="45" />
+				</spawn>
+				<!-- Herailt -->
+				<spawn npc_id="802664">
+					<spot x="723.029" y="290.459" z="680.416" h="15" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="1">
+				<!-- Disillon Camp Defense Cannon -->
 				<spawn npc_id="277228">
-					<spot x="628.07" y="406.23" z="689.52" h="45"/>
-					<spot x="616.62" y="394.82" z="689.52" h="45"/>
+					<spot x="628.105" y="406.119" z="689.154" h="45" />
+					<spot x="616.754" y="394.816" z="689.154" h="45" />
+				</spawn>
+			</ahserion_stage_spawn>
+			<ahserion_stage_spawn stage="2">
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="619.450" y="397.229" z="689.154" h="75" />
+					<spot x="626.046" y="403.983" z="689.154" h="15" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="3">
+				<!-- Disillon Advance Corridor Shield -->
 				<spawn npc_id="297309">
-					<spot x="645.26" y="377.03" z="690.83" h="1" static_id="165"/>
+					<spot x="645.267" y="377.093" z="688.877" h="75" static_id="165" />
 				</spawn>
 			</ahserion_stage_spawn>
-			<!-- Balaur Attackers -->
+			<!-- Balaur Attackers (by schedule) -->
 			<ahserion_stage_spawn stage="4">
-				<spawn npc_id="297188">
-					<spot x="636.63" y="397.05" z="689.15" h="92"/>
+				<!-- Ahserion Troopers Commander -->
+				<spawn npc_id="297184">
+					<spot x="626.546" y="395.725" z="688.869" h="15" walker_id="gab1_sub_potal_3" />
 				</spawn>
-				<spawn npc_id="297187">
-					<spot x="624.33" y="386.05" z="689.15" h="37"/>
+				<!-- Ahserion Troopers Assault Pod -->
+				<spawn npc_id="297352">
+					<spot x="638.163" y="394.787" z="688.836" h="15" />
 				</spawn>
 			</ahserion_stage_spawn>
+			<!-- Balaur Attackers (by Ahserion) -->
 			<ahserion_stage_spawn stage="5">
+				<!-- Ahserion Troopers Commander -->
 				<spawn npc_id="297184">
-					<spot x="640.76" y="381.65" z="689.09" h="105" walker_id="gab1_sub_potal_3"/>	
+					<spot x="626.574" y="395.676" z="688.869" h="15" walker_id="gab1_sub_potal_3" />
 				</spawn>
-				<spawn npc_id="297194">
-					<spot x="643.73" y="384.55" z="689.15" h="93"/>
-				</spawn>
-				<spawn npc_id="297191">
-					<spot x="649.43" y="382.92" z="689.15" h="93"/>
-					<spot x="639.43" y="372.05" z="689.15" h="14"/>
-				</spawn>
-				<spawn npc_id="297190">
-					<spot x="645.33" y="389.85" z="689.15" h="92"/>
-				</spawn>
-				<spawn npc_id="297192">
-					<spot x="638.52" y="379.31" z="689.15" h="114"/>
-				</spawn>
-				<spawn npc_id="297193">
-					<spot x="635.19" y="376.75" z="689.15" h="0"/>
+				<!-- Ahserion Troopers Assault Pod -->
+				<spawn npc_id="297352">
+					<spot x="638.299" y="394.689" z="688.836" h="15" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="180">
 				<!-- Ahserion Reserve Ignus Engine Controller (West) -->
 				<spawn npc_id="297328">
-					<spot x="509.38" y="315.82" z="687.13" h="1" static_id="180"/>
+					<spot x="509.389" y="315.901" z="683.948" h="90" static_id="180" />
+				</spawn>
+				<!-- Ignus Engine Hangar I -->
+				<spawn npc_id="804127" handler="FLAG">
+					<spot x="510.036" y="340.987" z="683.093" h="45" />
+				</spawn>
+				<!-- Disillon Ignus Engine -->
+				<spawn npc_id="277241">
+					<spot x="489.175" y="332.294" z="683.311" />
+					<spot x="489.206" y="320.593" z="683.309" />
+					<spot x="530.551" y="319.971" z="683.298" h="60" />
+					<spot x="530.658" y="332.945" z="683.295" h="60" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="510.648" y="352.299" z="684.595" h="75" walker_id="gab1_sub_tank_1" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="181">
 				<!-- Ahserion Reserve Chariot Controller (South) -->
 				<spawn npc_id="297327">
-					<spot x="706.31" y="513.9" z="684.75" h="1" static_id="181"/>
+					<spot x="706.320" y="513.961" z="684.752" static_id="181" />
+				</spawn>
+				<!-- Chariot Hangar II -->
+				<spawn npc_id="804119" handler="FLAG">
+					<spot x="680.896" y="514.267" z="683.073" h="45" />
+				</spawn>
+				<!-- Disillon Chariot -->
+				<spawn npc_id="277236">
+					<spot x="701.662" y="492.809" z="683.307" h="30" />
+					<spot x="689.384" y="493.340" z="683.300" h="30" />
+					<spot x="701.904" y="534.681" z="683.305" h="90" />
+					<spot x="688.581" y="534.453" z="683.292" h="90" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="672.154" y="513.835" z="684.233" h="75" walker_id="gab1_sub_tank_3" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="182">
 				<!-- Ahserion Reserve Ignuse Engine Controller (East) -->
 				<spawn npc_id="297329">
-					<spot x="508.37" y="709.93" z="685.35" h="1" static_id="182"/>
+					<spot x="508.379" y="709.905" z="683.953" h="30" static_id="182" />
+				</spawn>
+				<!-- Ignus Engine Hangar II -->
+				<spawn npc_id="804132" handler="FLAG">
+					<spot x="508.445" y="685.286" z="683.100" h="45" />
+				</spawn>
+				<!-- Disillon Ignus Engine -->
+				<spawn npc_id="277241">
+					<spot x="488.934" y="692.998" z="683.287" />
+					<spot x="489.011" y="704.528" z="683.314" />
+					<spot x="530.046" y="704.281" z="683.313" h="60" />
+					<spot x="529.969" y="692.201" z="683.300" h="60" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="508.026" y="677.598" z="684.120" h="75" walker_id="gab1_sub_tank_4" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="183">
 				<!-- Ahserion Reserve Chariot Controller (North) -->
 				<spawn npc_id="297326">
-					<spot x="312.12" y="512.82" z="686.54" h="1" static_id="183"/>
+					<spot x="312.130" y="512.877" z="683.953" h="60" static_id="183" />
+				</spawn>
+				<!-- Chariot Hangar I -->
+				<spawn npc_id="804117" handler="FLAG">
+					<spot x="335.630" y="512.749" z="683.008" h="45" />
+				</spawn>
+				<!-- Disillon Chariot -->
+				<spawn npc_id="277236">
+					<spot x="318.223" y="534.124" z="683.313" h="90" />
+					<spot x="330.429" y="534.126" z="683.302" h="90" />
+					<spot x="328.594" y="493.272" z="683.288" h="30" />
+					<spot x="316.764" y="493.075" z="683.312" h="30" />
+				</spawn>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="297185">
+					<spot x="343.126" y="511.107" z="683.921" h="75" walker_id="gab1_sub_tank_2" />
 				</spawn>
 			</ahserion_stage_spawn>
 		</ahserion_spawn>
@@ -297,242 +577,325 @@
 			<ahserion_stage_spawn stage="0">
 				<!-- Bulwark Shield -->
 				<spawn npc_id="277231">
-					<spot x="546.65" y="488.785" z="676.176" h="45" static_id="61"/>
-					<spot x="533.757" y="475.627" z="676.546" h="45" static_id="34"/>
-					<spot x="485.461" y="475.973" z="676.179" h="15" static_id="71"/>
-					<spot x="472.764" y="488.744" z="676.637" h="15" static_id="72"/>
-					<spot x="472.452" y="536.342" z="676.154" h="105" static_id="80"/>
-					<spot x="485.256" y="549.866" z="676.497" h="105" static_id="59"/>
-					<spot x="533.55" y="549.712" z="676.204" h="75" static_id="163"/>
-					<spot x="546.462" y="537.078" z="676.204" h="75" static_id="162"/>
+					<spot x="545.882" y="486.777" z="676.030" static_id="61" />
+					<spot x="535.606" y="476.707" z="676.107" static_id="34" />
+					<spot x="483.847" y="475.856" z="676.035" static_id="71" />
+					<spot x="472.966" y="486.653" z="676.013" static_id="72" />
+					<spot x="472.821" y="538.121" z="676.111" static_id="80" />
+					<spot x="483.668" y="549.379" z="676.326" static_id="59" />
+					<spot x="534.200" y="549.919" z="676.172" static_id="163" />
+					<spot x="546.557" y="538.020" z="676.154" static_id="162" />
 				</spawn>
 				<!-- Hangar Barricade -->
 				<spawn npc_id="277229">
-					<spot x="356.4" y="512.25" z="685.53" h="1" static_id="73"/>
-					<spot x="508.73" y="360.09" z="685.53" h="1" static_id="173"/>
-					<spot x="662.22" y="513.56" z="685.53" h="1" static_id="174"/>
-					<spot x="509.09" y="665.94" z="685.53" h="1" static_id="175"/>
+					<spot x="356.410" y="512.315" z="685.001" static_id="73" />
+					<spot x="508.739" y="360.156" z="685.001" static_id="173" />
+					<spot x="662.228" y="513.617" z="685.001" static_id="174" />
+					<spot x="509.096" y="665.004" z="685.001" static_id="175" />
 				</spawn>
 				<!-- Ahserion's Flight Barricade -->
 				<spawn npc_id="277230">
-					<spot x="400.2" y="512.23" z="685.82" h="1" static_id="65"/>
-					<spot x="510.01" y="403.13" z="685.82" h="1" static_id="68"/>
-					<spot x="620.24" y="513.08" z="685.82" h="1" static_id="67"/>
-					<spot x="508.68" y="623.99" z="685.82" h="1" static_id="60"/>
+					<spot x="400.213" y="512.268" z="685.138" static_id="65" />
+					<spot x="510.016" y="403.170" z="684.973" static_id="68" />
+					<spot x="620.254" y="513.120" z="684.939" static_id="67" />
+					<spot x="508.693" y="624.032" z="685.012" static_id="60" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="2">
 				<!-- Ahserion -->
 				<spawn npc_id="277224">
-					<spot x="509.63" y="512.69" z="675.1" h="50"/>
+					<spot x="509.644" y="513.247" z="675.088" />
 				</spawn>
-				<spawn npc_id="277211">
-					<spot x="553.03" y="538.16" z="675.61" h="15"/>
-					<spot x="539.30" y="550.97" z="675.61" h="15"/>
-					<spot x="547.79" y="482.82" z="675.61" h="105"/>
-					<spot x="535.58" y="470.72" z="675.61" h="105"/>
-					<spot x="466.53" y="487.47" z="675.63" h="75"/>
-					<spot x="479.87" y="474.94" z="675.6" h="75"/>
-					<spot x="471.01" y="541.93" z="675.63" h="45"/>
-					<spot x="483.94" y="555.82" z="675.6" h="45"/>
-				</spawn>
-				<spawn npc_id="277212">
-					<spot x="533.81" y="556.63" z="675.52" h="15"/>
-					<spot x="553.30" y="487.83" z="675.76" h="105"/>
-					<spot x="471.28" y="482.71" z="675.72" h="75"/>
-					<spot x="465.79" y="537.03" z="675.62" h="45"/>
-				</spawn>
-				<spawn npc_id="277210">
-					<spot x="547.13" y="543.65" z="675.61" h="15"/>
-					<spot x="540.20" y="475.37" z="675.66" h="105"/>
-					<spot x="485.25" y="469.09" z="675.72" h="75"/>
-					<spot x="478.61" y="550.29" z="675.6" h="45"/>
-				</spawn>
-				<spawn npc_id="277200">
-					<spot x="553.42" y="544.25" z="675.61" h="15"/>
-					<spot x="539.9" y="557.07" z="675.61" h="15"/>
-					<spot x="553.06" y="482.59" z="676.01" h="105"/>
-					<spot x="540.59" y="469.74" z="675.62" h="105"/>
-					<spot x="479.15" y="469.42" z="676.02" h="75"/>
-					<spot x="466.57" y="482.68" z="675.72" h="75"/>
-					<spot x="478.39" y="556.5" z="675.62" h="45"/>
-					<spot x="465.44" y="543.16" z="675.62" h="45"/>
-				</spawn>
-				<spawn npc_id="277209">
-					<spot x="512.33" y="454.54" z="676.32" h="90"/>
-					<spot x="513.42" y="450.75" z="676.02" h="90"/>
-					<spot x="508.13" y="454.48" z="676.32" h="90"/>
-					<spot x="506.64" y="450.83" z="676.02" h="90"/>
-					<spot x="450.73" y="510.52" z="676.37" h="60"/>
-					<spot x="447.15" y="509.29" z="676.07" h="60"/>
-					<spot x="450.73" y="515.27" z="676.37" h="60"/>
-					<spot x="446.99" y="516.61" z="676.07" h="60"/>
-					<spot x="505.94" y="572.83" z="676.11" h="30"/>
-					<spot x="504.57" y="577.37" z="675.81" h="30"/>
-					<spot x="511.02" y="573.08" z="675.81" h="30"/>
-					<spot x="512.78" y="577.81" z="675.61" h="30"/>
-					<spot x="567.79" y="515.75" z="676.43" h="0"/>
-					<spot x="572.59" y="516.75" z="675.83" h="0"/>
-					<spot x="567.89" y="510.46" z="676.23" h="0"/>
-					<spot x="572.88" y="508.81" z="675.73" h="0"/>
-				</spawn>
-				<spawn npc_id="277196">
-					<spot x="622.09" y="451.7" z="686.93" h="17" walker_id="gab1_sub_npcpath08_path7"/>
-					<spot x="626.63" y="447.42" z="686.9" h="17" walker_id="gab1_sub_npcpath08_path8"/>
-					<spot x="572.36" y="400.26" z="686.9" h="75" walker_id="gab1_sub_npcpath08_path6"/>
-					<spot x="575.71" y="396.77" z="686.9" h="75" walker_id="gab1_sub_npcpath08_path4"/>
-					<spot x="442.91" y="395.83" z="686.94" h="107" walker_id="gab1_sub_npcpath08_path9"/>
-					<spot x="446.26" y="399.59" z="686.99" h="107" walker_id="gab1_sub_npcpath08_path10"/>
-					<spot x="395.24" y="449.74" z="686.95" h="44" walker_id="gab1_sub_npcpath08_path12"/>
-					<spot x="391.75" y="446.18" z="686.98" h="44" walker_id="gab1_sub_npcpath08_path11"/>
-					<spot x="394.49" y="575.9" z="686.92" h="75" walker_id="gab1_sub_npcpath08_path13"/>
-					<spot x="391.26" y="579.2" z="686.96" h="75" walker_id="gab1_sub_npcpath08_path14"/>
-					<spot x="445.42" y="626.85" z="686.96" h="15" walker_id="gab1_sub_npcpath08_path16"/>
-					<spot x="442.07" y="630.16" z="686.99" h="15" walker_id="gab1_sub_npcpath08_path15"/>
-					<spot x="626.3" y="580.71" z="686.95" h="105" walker_id="gab1_sub_npcpath08_path20"/>
-					<spot x="622.17" y="576.44" z="686.93" h="105" walker_id="gab1_sub_npcpath08_path19"/>
-					<spot x="574.85" y="631.08" z="686.96" h="45" walker_id="gab1_sub_npcpath08_path17"/>
-					<spot x="570.96" y="627.22" z="686.91" h="45" walker_id="gab1_sub_npcpath08_path18"/>
-				</spawn>
-				<spawn npc_id="277242">
-					<spot x="443.09" y="663.23" z="685.01" h="8"/>
-					<spot x="445.34" y="644.41" z="685.29" h="68"/>
-					<spot x="571.25" y="645.38" z="685.01" h="112"/>
-					<spot x="572.32" y="664.44" z="685.01" h="53"/>
-					<spot x="640.42" y="576.54" z="685.22" h="38"/>
-					<spot x="659.24" y="578.54" z="685.02" h="98"/>
-					<spot x="642.48" y="449.9" z="685.21" h="82"/>
-					<spot x="661.29" y="448.7" z="685.61" h="22"/>
-					<spot x="576.27" y="361.32" z="685.05" h="70"/>
-					<spot x="574.09" y="380.29" z="685.05" h="10"/>
-					<spot x="448.43" y="381.49" z="685.13" h="55"/>
-					<spot x="447.65" y="362.34" z="685.33" h="115"/>
-					<spot x="379.50" y="449.89" z="685.40" h="100"/>
-					<spot x="360.97" y="447.72" z="685.12" h="38"/>
-					<spot x="379.78" y="573.62" z="685.12" h="25"/>
-					<spot x="360.40" y="574.31" z="685.12" h="85"/>
-				</spawn>
-				<spawn npc_id="277199">
-					<!-- west -->
-					<spot x="499.29" y="654.78" z="685.68" h="90"/>
-					<spot x="499.29" y="628.34" z="685.68" h="30"/>
-					<!-- north -->
-					<spot x="392.28" y="504.14" z="685.12" h="60"/>
-					<spot x="366.28" y="504.14" z="685.12" h="0"/>
-				</spawn>
-				<spawn npc_id="277198">
-					<!-- east -->
-					<spot x="501.3" y="397.58" z="685.51" h="90"/>
-					<spot x="501.3" y="371.14" z="685.51" h="30"/>
-					<!-- west -->
-					<spot x="517.91" y="654.93" z="685.68" h="90"/>
-					<spot x="517.91" y="628.53" z="685.68" h="30"/>
-					<!-- south -->
-					<spot x="625.83" y="505.11" z="685.91" h="0"/>
-					<spot x="651.83" y="505.11" z="685.91" h="60"/>
-					<!-- north -->
-					<spot x="392.8" y="519.85" z="685.26" h="60"/>
-					<spot x="366.8" y="519.85" z="685.26" h="0"/>
-					<!-- athanos -->
-					<spot x="609.36" y="584.95" z="688.88" h="103"/>
-					<spot x="579.36" y="614.95" z="688.88" h="45"/>
-					<!-- aspida -->
-					<spot x="437.94" y="613.55" z="688.78" h="15"/>
-					<spot x="407.94" y="583.55" z="688.78" h="75"/>
-					<!-- belus -->
-					<spot x="408.54" y="442.3" z="688.72" h="45"/>
-					<spot x="437.54" y="412.3" z="688.72" h="105"/>
-					<!-- deylon-->
-					<spot x="580.14" y="412.7" z="688.74" h="75"/>
-					<spot x="610.14" y="442.7" z="688.74" h="25"/>
-				</spawn>
-				<spawn npc_id="277193">
-					<!-- east -->
-					<spot x="518.35" y="397.58" z="685.51" h="90"/>
-					<spot x="518.35" y="371.14" z="685.51" h="30"/>
-					<!-- south -->
-					<spot x="625.79" y="521.72" z="685.21" h="0"/>
-					<spot x="651.79" y="521.72" z="685.21" h="60"/>
-				</spawn>
+				<!-- Ahserion Reserve Defender Captain -->
 				<spawn npc_id="277187">
-					<!-- east -->
-					<spot x="509.9" y="397.58" z="685.51" h="90"/>
-					<spot x="509.9" y="371.14" z="685.51" h="30"/>
-					<!-- west -->
-					<spot x="508.35" y="629.6" z="685.68" h="30"/>
-					<spot x="508.35" y="655.6" z="685.68" h="90"/>
-					<!-- south -->
-					<spot x="625.18" y="513.97" z="685.91" h="0"/>
-					<spot x="651.18" y="513.97" z="685.91" h="60"/>
-					<!-- north -->
-					<spot x="364.54" y="512.89" z="685.24" h="0"/>
-					<spot x="390.54" y="512.89" z="685.24" h="60"/>
-					<!-- athanos -->
-					<spot x="617.39" y="592.44" z="688.75" h="103"/>
-					<spot x="585.39" y="623.44" z="688.75" h="45"/>
-					<!-- aspida -->
-					<spot x="429.89" y="621.25" z="688.71" h="15"/>
-					<spot x="399.89" y="591.25" z="688.71" h="75"/>
-					<!-- belus -->
-					<spot x="400.79" y="434.24" z="688.7" h="45"/>
-					<spot x="430.79" y="404.24" z="688.9" h="105"/>
-					<!-- deylon -->
-					<spot x="587.69" y="405.32" z="688.7" h="75"/>
-					<spot x="617.69" y="435.32" z="688.7" h="15"/>
+					<!-- North -->
+					<spot x="365.120" y="513.180" z="684.958" />
+					<spot x="390.004" y="512.576" z="684.958" h="60" />
+					<!-- East -->
+					<spot x="508.184" y="655.198" z="684.958" h="90" />
+					<spot x="508.522" y="630.000" z="684.958" h="30" />
+					<!-- South -->
+					<spot x="624.993" y="513.962" z="684.938" />
+					<spot x="651.377" y="513.983" z="684.938" h="60" />
+					<!-- West -->
+					<spot x="509.687" y="371.569" z="684.958" h="30" />
+					<spot x="510.192" y="397.143" z="684.958" h="90" />
+					<!-- Belus -->
+					<spot x="398.680" y="436.268" z="688.839" h="105" />
+					<spot x="432.890" y="402.217" z="688.839" h="45" />
+					<!-- Aspida -->
+					<spot x="398.027" y="588.821" z="688.839" h="15" />
+					<spot x="431.750" y="623.678" z="688.839" h="75" />
+					<!-- Atanatos -->
+					<spot x="584.557" y="624.813" z="688.839" h="105" />
+					<spot x="618.221" y="590.063" z="688.839" h="45" />
+					<!-- Disillon -->
+					<spot x="585.528" y="403.258" z="688.839" h="15" />
+					<spot x="619.862" y="437.387" z="688.839" h="75" />
 				</spawn>
-				<spawn npc_id="297185">
-					<spot x="395.54" y="410.91" z="689.07" h="76"/>
-					<spot x="408.24" y="399.14" z="689.07" h="71"/>					
-					<spot x="394.89" y="615.28" z="689.04" h="43"/>
-					<spot x="405.93" y="626.71" z="689.04" h="50"/>
-					<spot x="610.88" y="626.32" z="689.04" h="11"/>
-					<spot x="621.57" y="615.6" z="689.04" h="22"/>
-					<spot x="622.30" y="411.22" z="689.04" h="101"/>
-					<spot x="611.54" y="400.13" z="689.04" h="116"/>
+				<!-- Ahserion Reserve Assault Leader -->
+				<spawn npc_id="277188">
+					<!-- North -->
+					<spot x="369.745" y="485.699" z="689.703" h="60" />
+					<spot x="369.768" y="539.084" z="689.703" h="60" />
+					<!-- East -->
+					<spot x="482.263" y="652.238" z="689.703" h="30" />
+					<spot x="535.661" y="651.633" z="689.703" h="30" />
+					<!-- South -->
+					<spot x="647.943" y="538.573" z="689.703" />
+					<spot x="648.199" y="487.167" z="689.703" />
+					<!-- West -->
+					<spot x="483.745" y="374.074" z="689.703" h="90" />
+					<spot x="535.562" y="373.403" z="689.703" h="90" />
 				</spawn>
-			</ahserion_stage_spawn>
-			<ahserion_stage_spawn stage="3">
-				<spawn npc_id="297185">
-					<spot x="510.61" y="352.29" z="686.9" h="1" walker_id="gab1_sub_tank_1"/>
+				<!-- Ahserion Reserve Drummer -->
+				<spawn npc_id="277193">
+					<!-- East -->
+					<spot x="517.715" y="371.860" z="684.958" h="30" />
+					<spot x="519.015" y="396.622" z="685.047" h="90" />
+					<!-- South -->
+					<spot x="625.321" y="521.414" z="684.939" />
+					<spot x="652.254" y="522.019" z="684.939" h="60" />
 				</spawn>
-			</ahserion_stage_spawn>
-			<ahserion_stage_spawn stage="4">
-				<spawn npc_id="297185">
-					<spot x="672.11" y="513.82" z="686.9" h="1" walker_id="gab1_sub_tank_3"/>
+				<!-- Ahserion Reserve Elite Ambusher -->
+				<spawn npc_id="277195">
+					<!-- North -->
+					<spot x="371.377" y="484.085" z="689.703" h="75" />
+					<spot x="371.400" y="537.469" z="689.703" h="75" />
+					<spot x="371.419" y="487.398" z="689.703" h="45" />
+					<spot x="371.442" y="540.783" z="689.703" h="45" />
+					<!-- East -->
+					<spot x="480.748" y="650.631" z="689.703" h="45" />
+					<spot x="483.775" y="650.764" z="689.703" h="15" />
+					<spot x="534.147" y="650.026" z="689.703" h="45" />
+					<spot x="537.173" y="650.159" z="689.703" h="15" />
+					<!-- South -->
+					<spot x="646.331" y="537.278" z="689.703" h="105" />
+					<spot x="646.335" y="540.034" z="689.703" h="15" />
+					<spot x="646.524" y="485.552" z="689.703" h="105" />
+					<spot x="646.566" y="488.866" z="689.703" h="15" />
+					<!-- West -->
+					<spot x="482.231" y="375.664" z="689.703" h="75" />
+					<spot x="485.257" y="375.797" z="689.703" h="105" />
+					<spot x="534.047" y="374.733" z="689.703" h="75" />
+					<spot x="537.074" y="374.866" z="689.703" h="105" />
 				</spawn>
-			</ahserion_stage_spawn>
-			<ahserion_stage_spawn stage="5">
-				<spawn npc_id="297185">
-					<spot x="507.99" y="677.59" z="686.9" h="1" walker_id="gab1_sub_tank_4"/>
+				<!-- Ahserion Reserve Elite Striker -->
+				<spawn npc_id="277196">
+					<!-- Belus -->
+					<spot x="442.939" y="395.843" z="686.850" h="45" walker_id="gab1_sub_npcpath08_path9" />
+					<spot x="446.293" y="399.598" z="686.841" h="45" walker_id="gab1_sub_npcpath08_path10" />
+					<spot x="391.720" y="446.175" z="686.821" h="105" walker_id="gab1_sub_npcpath08_path11" />
+					<spot x="395.206" y="449.728" z="686.823" h="105" walker_id="gab1_sub_npcpath08_path12" />
+					<!-- Aspida -->
+					<spot x="394.496" y="575.874" z="686.846" h="15" walker_id="gab1_sub_npcpath08_path13" />
+					<spot x="391.264" y="579.172" z="686.845" h="15" walker_id="gab1_sub_npcpath08_path14" />
+					<spot x="442.352" y="629.749" z="686.835" h="15" walker_id="gab1_sub_npcpath08_path21" />
+					<spot x="445.584" y="626.450" z="686.834" h="15" walker_id="gab1_sub_npcpath08_path22" />
+					<!-- Atanatos -->
+					<spot x="574.820" y="631.068" z="686.849" h="105" walker_id="gab1_sub_npcpath08_path17" />
+					<spot x="570.932" y="627.208" z="686.849" h="105" walker_id="gab1_sub_npcpath08_path18" />
+					<spot x="622.202" y="576.450" z="686.797" h="45" walker_id="gab1_sub_npcpath08_path19" />
+					<spot x="626.326" y="580.716" z="686.794" h="45" walker_id="gab1_sub_npcpath08_path20" />
+					<!-- Disillon -->
+					<spot x="575.713" y="396.750" z="686.834" h="15" walker_id="gab1_sub_npcpath08_path4" />
+					<spot x="572.369" y="400.235" z="686.831" h="15" walker_id="gab1_sub_npcpath08_path6" />
+					<spot x="622.076" y="451.732" z="686.839" h="75" walker_id="gab1_sub_npcpath08_path7" />
+					<spot x="626.618" y="447.453" z="686.844" h="75" walker_id="gab1_sub_npcpath08_path8" />
 				</spawn>
-			</ahserion_stage_spawn>
-			<ahserion_stage_spawn stage="6">
-				<spawn npc_id="297185">
-					<spot x="343.09" y="511.1" z="686.9" h="1" walker_id="gab1_sub_tank_2"/>
+				<!-- Ahserion Reserve Magus -->
+				<spawn npc_id="277198">
+					<!-- North -->
+					<spot x="367.015" y="520.992" z="684.990" />
+					<spot x="392.583" y="518.698" z="684.958" h="60" />
+					<!-- East -->
+					<spot x="517.638" y="628.825" z="685.047" h="30" />
+					<spot x="518.174" y="654.638" z="685.047" h="90" />
+					<!-- South -->
+					<spot x="624.978" y="503.428" z="685.027" />
+					<spot x="652.677" y="506.791" z="684.939" h="60" />
+					<!-- West -->
+					<spot x="500.667" y="370.995" z="685.047" h="30" />
+					<spot x="502.005" y="396.944" z="684.958" h="90" />
+					<!-- Belus -->
+					<spot x="406.566" y="444.565" z="688.839" h="105" />
+					<spot x="440.464" y="410.018" z="688.839" h="45" />
+					<!-- Aspida -->
+					<spot x="406.043" y="580.992" z="688.839" h="15" />
+					<spot x="439.826" y="616.105" z="688.839" h="75" />
+					<!-- Atanatos -->
+					<spot x="577.140" y="616.776" z="688.839" h="105" />
+					<spot x="611.592" y="583.125" z="688.839" h="45" />
+					<!-- Disillon-->
+					<spot x="577.594" y="410.970" z="688.839" h="15" />
+					<spot x="612.520" y="444.421" z="688.839" h="75" />
+				</spawn>
+				<!-- Ahserion Reserve Drumcaptain -->
+				<spawn npc_id="277199">
+					<!-- East -->
+					<spot x="498.856" y="654.681" z="685.047" h="90" />
+					<spot x="499.723" y="628.440" z="685.026" h="30" />
+					<!-- North -->
+					<spot x="367.008" y="503.741" z="685.047" />
+					<spot x="391.567" y="504.532" z="684.983" h="60" />
+				</spawn>
+				<!-- Ahserion Army Defender Captain -->
+				<spawn npc_id="277200">
+					<!-- Inner North West -->
+					<spot x="463.783" y="478.993" z="675.625" h="75" />
+					<spot x="478.453" y="464.966" z="675.686" h="75" />
+					<!-- Inner North East -->
+					<spot x="462.395" y="544.043" z="675.500" h="45" />
+					<spot x="476.942" y="558.165" z="675.500" h="45" />
+					<!-- Inner South East-->
+					<spot x="539.839" y="560.323" z="675.500" h="15" />
+					<spot x="554.932" y="546.099" z="675.698" h="15" />
+					<!-- Inner South West-->
+					<spot x="543.169" y="467.806" z="675.500" h="105" />
+					<spot x="555.763" y="481.624" z="675.646" h="105" />
+				</spawn>
+				<!-- Ahserion Army Elite Striker -->
+				<spawn npc_id="277209">
+					<!-- Inner North -->
+					<spot x="446.647" y="516.700" z="675.747" h="60" />
+					<spot x="446.866" y="508.167" z="675.744" h="60" />
+					<spot x="449.392" y="515.216" z="676.136" h="60" />
+					<spot x="449.611" y="509.376" z="676.038" h="60" />
+					<!-- Inner East -->
+					<spot x="504.217" y="575.924" z="675.769" h="30" />
+					<spot x="505.426" y="573.179" z="675.980" h="30" />
+					<spot x="511.266" y="573.398" z="675.734" h="30" />
+					<spot x="512.750" y="576.143" z="675.500" h="30" />
+					<!-- Inner South -->
+					<spot x="569.339" y="515.871" z="676.066" />
+					<spot x="569.558" y="510.031" z="676.032" />
+					<spot x="572.084" y="517.080" z="675.735" />
+					<spot x="572.303" y="508.547" z="675.660" />
+					<!-- Inner West -->
+					<spot x="506.599" y="451.002" z="675.851" h="90" />
+					<spot x="508.084" y="453.747" z="676.110" h="90" />
+					<spot x="513.923" y="453.966" z="676.003" h="90" />
+					<spot x="515.132" y="451.221" z="675.756" h="90" />
+				</spawn>
+				<!-- Ahserion Army Medic -->
+				<spawn npc_id="277210">
+					<spot x="470.202" y="481.466" z="675.625" h="75" random_walk="1" />
+					<spot x="478.676" y="551.814" z="675.500" h="45" random_walk="1" />
+					<spot x="540.464" y="474.589" z="675.500" h="105" random_walk="1" />
+					<spot x="548.178" y="544.369" z="675.500" h="15" random_walk="1" />
+				</spawn>
+				<!-- Ahserion Army Magus -->
+				<spawn npc_id="277211">
+					<!-- Inner North West -->
+					<spot x="465.323" y="486.171" z="675.625" h="75" />
+					<spot x="485.634" y="467.046" z="675.625" h="75" />
+					<!-- Inner North East -->
+					<spot x="464.034" y="537.479" z="675.561" h="45" />
+					<spot x="483.380" y="556.693" z="675.500" h="45" />
+					<!-- Inner South East -->
+					<spot x="553.058" y="539.665" z="675.500" h="15" />
+					<spot x="533.664" y="558.485" z="675.364" h="15" />
+					<!-- Inner South West -->
+					<spot x="536.116" y="470.216" z="675.500" h="105" />
+					<spot x="554.281" y="487.093" z="675.625" h="105" />
+				</spawn>
+				<!-- Ahserion Army Drumcaptain -->
+				<spawn npc_id="277212">
+					<spot x="469.399" y="542.866" z="675.500" h="45" />
+					<spot x="480.209" y="472.585" z="675.651" h="75" />
+					<spot x="538.417" y="553.635" z="675.500" h="15" />
+					<spot x="549.803" y="482.875" z="675.500" h="105" />
+				</spawn>
+				<!-- Ahserion Reserve Adjutant Fighter -->
+				<spawn npc_id="277242">
+					<!-- Belus -->
+					<spot x="363.671" y="441.713" z="685.072" h="100" random_walk="1" />
+					<spot x="376.151" y="456.138" z="684.993" h="37" random_walk="1" />
+					<spot x="448.891" y="362.314" z="685.064" h="117" random_walk="1" />
+					<spot x="448.061" y="381.333" z="685.012" h="53" random_walk="1" />
+					<!-- Aspida -->
+					<spot x="359.921" y="573.120" z="684.988" h="85" random_walk="1" />
+					<spot x="379.753" y="573.853" z="684.997" h="20" random_walk="1" />
+					<spot x="436.708" y="660.068" z="685.133" h="70" random_walk="1" />
+					<spot x="450.668" y="647.009" z="685.188" h="8" random_walk="1" />
+					<!-- Atanatos -->
+					<spot x="572.409" y="645.500" z="684.988" h="113" random_walk="1" />
+					<spot x="571.149" y="664.895" z="684.988" h="52" random_walk="1" />
+					<spot x="643.433" y="570.823" z="685.244" h="100" random_walk="1" />
+					<spot x="656.262" y="584.470" z="684.938" h="43" random_walk="1" />
+					<!-- Disillon -->
+					<spot x="568.278" y="377.449" z="685.086" h="71" random_walk="1" />
+					<spot x="581.747" y="363.998" z="684.993" h="10" random_walk="1" />
+					<spot x="642.358" y="449.437" z="685.007" h="82" random_walk="1" />
+					<spot x="661.476" y="449.386" z="685.506" h="20" random_walk="1" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="180">
 				<!-- Ahserion Reserve Ignus Engine Controller (West) -->
 				<spawn npc_id="297312">
-					<spot x="509.38" y="315.82" z="687.13" h="1" static_id="180"/>
+					<spot x="509.389" y="315.901" z="683.948" h="90" static_id="180" />
+				</spawn>
+				<!-- Ignus Engine Hangar I -->
+				<spawn npc_id="804128" handler="FLAG">
+					<spot x="510.036" y="340.987" z="683.093" h="45" />
+				</spawn>
+				<!-- Ahserion Legion Ignus Engine -->
+				<spawn npc_id="277237">
+					<spot x="489.175" y="332.294" z="683.311" />
+					<spot x="489.206" y="320.593" z="683.309" />
+					<spot x="530.551" y="319.971" z="683.298" h="60" />
+					<spot x="530.658" y="332.945" z="683.295" h="60" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="181">
 				<!-- Ahserion Reserve Chariot Controller (South) -->
 				<spawn npc_id="297311">
-					<spot x="706.31" y="513.9" z="684.75" h="1" static_id="181"/>
+					<spot x="706.320" y="513.961" z="684.752" static_id="181" />
+				</spawn>
+				<!-- Chariot Hangar II -->
+				<spawn npc_id="804123" handler="FLAG">
+					<spot x="680.896" y="514.267" z="683.073" h="45" />
+				</spawn>
+				<!-- Ahserion Legion Chariot -->
+				<spawn npc_id="277232">
+					<spot x="701.662" y="492.809" z="683.307" h="30" />
+					<spot x="689.384" y="493.340" z="683.300" h="30" />
+					<spot x="701.904" y="534.681" z="683.305" h="90" />
+					<spot x="688.581" y="534.453" z="683.292" h="90" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="182">
-				<!-- Ahserion Reserve Ignuse Engine Controller (East) -->
+				<!-- Ahserion Reserve Ignus Engine Controller (East) -->
 				<spawn npc_id="297313">
-					<spot x="508.37" y="709.93" z="685.35" h="1" static_id="182"/>
+					<spot x="508.379" y="709.905" z="683.953" h="30" static_id="182" />
+				</spawn>
+				<!-- Ignus Engine Hangar II -->
+				<spawn npc_id="804133" handler="FLAG">
+					<spot x="508.445" y="685.286" z="683.100" h="45" />
+				</spawn>
+				<!-- Ahserion Legion Ignus Engine -->
+				<spawn npc_id="277237">
+					<spot x="488.934" y="692.998" z="683.287" />
+					<spot x="489.011" y="704.528" z="683.314" />
+					<spot x="530.046" y="704.281" z="683.313" h="60" />
+					<spot x="529.969" y="692.201" z="683.300" h="60" />
 				</spawn>
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="183">
 				<!-- Ahserion Reserve Chariot Controller (North) -->
 				<spawn npc_id="297310">
-					<spot x="312.12" y="512.82" z="686.54" h="1" static_id="183"/>
+					<spot x="312.130" y="512.877" z="683.953" h="60" static_id="183" />
+				</spawn>
+				<!-- Chariot Hangar I -->
+				<spawn npc_id="804118" handler="FLAG">
+					<spot x="335.630" y="512.749" z="683.008" h="45" />
+				</spawn>
+				<!-- Ahserion Legion Chariot -->
+				<spawn npc_id="277232">
+					<spot x="318.223" y="534.124" z="683.313" h="90" />
+					<spot x="330.429" y="534.126" z="683.302" h="90" />
+					<spot x="328.594" y="493.272" z="683.288" h="30" />
+					<spot x="316.764" y="493.075" z="683.312" h="30" />
 				</spawn>
 			</ahserion_stage_spawn>
 		</ahserion_spawn>

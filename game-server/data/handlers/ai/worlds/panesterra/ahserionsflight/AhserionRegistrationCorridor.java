@@ -1,10 +1,12 @@
 package ai.worlds.panesterra.ahserionsflight;
 
-import ai.GeneralNpcAI;
+import java.util.concurrent.TimeUnit;
+
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIRequest;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -16,7 +18,7 @@ import com.aionemu.gameserver.services.panesterra.ahserion.PanesterraTeam;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
-import java.util.concurrent.TimeUnit;
+import ai.GeneralNpcAI;
 
 /**
  * @author Yeats, Estrayl
@@ -40,7 +42,8 @@ public class AhserionRegistrationCorridor extends GeneralNpcAI {
 			case 802223 -> faction = PanesterraFaction.ATANATOS;
 			case 802225 -> faction = PanesterraFaction.DISILLON;
 		}
-		ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().delete(), 10, TimeUnit.MINUTES);
+		getOwner().getController().addTask(TaskId.DESPAWN,
+			ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().deleteIfAliveOrCancelRespawn(), 10, TimeUnit.MINUTES));
 	}
 
 	@Override

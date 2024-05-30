@@ -50,21 +50,21 @@ import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
  * Created on 06.04.2016.
- * 
+ *
  * @author Yeats
  */
 public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private static final int SHUGO_SPAWN_RATE = 30;
 	private static final int[] RANDOM_BOSS_NPC_IDS = { 231196, 233740, 235759, 235765, 235763, 235767, 235771, 235619, 235620, 235621, 855822, 855843,
-		230857, 230858, 277224, 855776, 219933, 219934, 235975, 855263, 231304 };
+		230857, 230858, 297189, 855776, 219933, 219934, 235975, 855263, 231304 };
 	private final Map<Integer, WorldPosition> origins = new HashMap<>();
 	private final Map<Integer, Long> joinOrLeaveTime = new HashMap<>();
 	private final Map<Race, List<WorldPosition>> respawnLocations = new HashMap<>();
 	private final List<WorldPosition> treasurePositions = new ArrayList<>();
 	private final List<WorldPosition> supplyPositions = new ArrayList<>();
 	private final List<WorldPosition> keymasterPositions = new ArrayList<>();
-	private List<Future<?>> tasks = new ArrayList<>();
+	private final List<Future<?>> tasks = new ArrayList<>();
 	private Future<?> supplyTask, despawnTask;
 	private int currentRandomBossObjId;
 

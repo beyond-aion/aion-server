@@ -9,6 +9,8 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.ai.NpcAI;
+import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
@@ -44,6 +46,7 @@ public class AhserionRaid {
 	public void start() {
 		if (isStarted.compareAndSet(false, true)) {
 			spawnAdvanceCorridorsAndInitTeams();
+			spawnRaid();
 			startInstanceTimer();
 		}
 	}
@@ -89,7 +92,6 @@ public class AhserionRaid {
 						break;
 					case 4:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_02());
-						spawnInstance();
 						break;
 					case 8:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_03());
@@ -105,7 +107,8 @@ public class AhserionRaid {
 						break;
 					case 19:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_07());
-						spawnStage(2, PanesterraFaction.BALAUR); // spawn mobs 30s before doors are opened
+						for (PanesterraFaction faction : PanesterraFaction.values())
+							spawnStage(2, faction); // spawn mobs 30s before doors are opened
 						break;
 					case 20:
 						checkForIllegalMovement();
@@ -135,7 +138,7 @@ public class AhserionRaid {
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_14());
 						break;
 					case 150:
-						stop(); // stop after 70min (-10min preparation time -15+15min barricade invulnerable time = 30min effective time to kill Ahserion)
+						stop();
 						break;
 				}
 			}
@@ -168,7 +171,7 @@ public class AhserionRaid {
 		SpawnEngine.spawnObject(SpawnEngine.newSingleTimeSpawn(120080000, 802225, 400.772f, 231.517f, 93.113f, (byte) 30), 1);
 	}
 
-	private void spawnInstance() {
+	private void spawnRaid() {
 		// spawn Barricades & Tank Fleets
 		spawnStage(0, PanesterraFaction.BALAUR);
 		spawnStage(180, PanesterraFaction.BALAUR);
@@ -203,9 +206,8 @@ public class AhserionRaid {
 	}
 
 	public void spawnStage(int stage, PanesterraFaction faction) {
-		if (faction != PanesterraFaction.BALAUR && stage >= 180 && stage <= 183)
-			if (panesterraTeams.get(faction) == null || panesterraTeams.get(faction).isEliminated())
-				return;
+		if (faction != PanesterraFaction.BALAUR && (panesterraTeams.get(faction) == null || panesterraTeams.get(faction).isEliminated()))
+			return;
 
 		List<SpawnGroup> ahserionSpawns = DataManager.SPAWNS_DATA.getAhserionSpawnByTeamId(faction.getId());
 		if (ahserionSpawns == null)
@@ -214,8 +216,10 @@ public class AhserionRaid {
 		for (SpawnGroup grp : ahserionSpawns) {
 			for (SpawnTemplate template : grp.getSpawnTemplates()) {
 				AhserionsFlightSpawnTemplate ahserionTemplate = (AhserionsFlightSpawnTemplate) template;
-				if (ahserionTemplate.getStage() == stage)
-					SpawnEngine.spawnObject(ahserionTemplate, 1);
+				if (ahserionTemplate.getStage() == stage) {
+					Npc npc = (Npc) SpawnEngine.spawnObject(ahserionTemplate, 1);
+					WalkManager.startWalking((NpcAI) npc.getAi());
+				}
 			}
 		}
 	}
@@ -259,7 +263,7 @@ public class AhserionRaid {
 		winner = panesterraTeams.get(winnerFaction);
 		if (winner == null || winner.isEliminated()) {
 			// something went wrong, remove all players from the map
-			LoggerFactory.getLogger(AhserionRaid.class).warn("Ahserion got killed but winnerTeam is missing or eliminated. No rewards for players.");
+			LoggerFactory.getLogger(AhserionRaid.class).warn("Ahserion got killed but winnerTeam is missing or eliminated. Skipping rewards.");
 			stop();
 			return;
 		}
