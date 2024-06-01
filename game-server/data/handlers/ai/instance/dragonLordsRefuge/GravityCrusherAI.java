@@ -8,8 +8,6 @@ import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -45,7 +43,7 @@ public class GravityCrusherAI extends AggressiveNpcAI {
 	private void transform() {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead())
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(getNpcId() == 283141 ? 20967 : 21900, 1, 100)));
+				getOwner().queueSkill(getNpcId() == 283141 ? 20967 : 21900, 1);
 		}, 30000);
 	}
 
@@ -64,7 +62,7 @@ public class GravityCrusherAI extends AggressiveNpcAI {
 	@Override
 	public void handleMoveArrived() {
 		super.handleMoveArrived();
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20987, 1, 100)));
+		getOwner().queueSkill(20987, 1);
 	}
 
 	@Override

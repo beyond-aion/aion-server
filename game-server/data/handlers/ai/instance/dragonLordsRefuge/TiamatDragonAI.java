@@ -4,8 +4,6 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -28,7 +26,7 @@ public class TiamatDragonAI extends AggressiveNpcAI {
 		super.handleSpawned();
 		ThreadPoolManager.getInstance().schedule(() -> AIActions.useSkill(this, 20920), 4000);
 		ThreadPoolManager.getInstance()
-			.schedule(() -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20984, 1, 100))), 300000);
+			.schedule(() -> getOwner().queueSkill(20984, 1), 300000);
 	}
 
 	@Override

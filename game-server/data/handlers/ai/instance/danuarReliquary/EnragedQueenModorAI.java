@@ -13,8 +13,6 @@ import com.aionemu.gameserver.model.animations.AttackHandAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HEADING_UPDATE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -298,7 +296,7 @@ public class EnragedQueenModorAI extends AggressiveNpcAI implements HpPhases.Pha
 	}
 
 	private void queueSkill(int id, int lvl, int nextSkillTime) {
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(id, lvl, 100, 0, nextSkillTime)));
+		getOwner().queueSkill(id, lvl, nextSkillTime);
 	}
 
 	private boolean isCrazedModor() {

@@ -5,8 +5,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -39,7 +37,7 @@ public class Lv3HumanBeritraAI extends Lv2HumanBeritraAI implements HpPhases.Pha
 
 	@Override
 	protected void handleLastSealBlasted() {
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20842, 56, 100)));
+		getOwner().queueSkill(20842, 56);
 	}
 
 	/**

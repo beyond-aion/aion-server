@@ -11,8 +11,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureSeeState;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -69,42 +67,42 @@ public class CustomInstanceDominatorAI extends AggressiveNoLootNpcAI {
 				getOwner().getSkillCoolDowns().clear(); // Make CD rank-dependent, not skill-dependent
 
 			if (challengerRank >= CustomInstanceRankEnum.ANCIENT.getMinRank())
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3539, 65, 100))); // Ignite Aether
+				getOwner().queueSkill(3539, 65); // Ignite Aether
 
 			if (challengerRank >= CustomInstanceRankEnum.CERANIUM.getMinRank())
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(618, 65, 100))); // Ankle Snare
+				getOwner().queueSkill(618, 65); // Ankle Snare
 			else if (challengerRank >= CustomInstanceRankEnum.GOLD.getMinRank())
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(1328, 65, 100))); // Restraint (^)
+				getOwner().queueSkill(1328, 65); // Restraint (^)
 
 			if (challengerRank >= CustomInstanceRankEnum.ANCIENT_PLUS.getMinRank())
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3775, 65, 100))); // Fear
+				getOwner().queueSkill(3775, 65); // Fear
 			else if (challengerRank >= CustomInstanceRankEnum.GOLD.getMinRank())
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(1417, 65, 100))); // Curse Tree (^)
+				getOwner().queueSkill(1417, 65); // Curse Tree (^)
 
 			// SILVER:
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3581, 65, 100))); // Withering Gloom
+			getOwner().queueSkill(3581, 65); // Withering Gloom
 
 			if (challengerRank >= CustomInstanceRankEnum.PLATINUM.getMinRank())
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3574, 65, 100))); // Shackle of Vulnerability
+				getOwner().queueSkill(3574, 65); // Shackle of Vulnerability
 			else // SILVER:
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3780, 65, 100))); // Root of Enervation (^)
+				getOwner().queueSkill(3780, 65); // Root of Enervation (^)
 
 			if (challengerRank >= CustomInstanceRankEnum.MITHRIL.getMinRank())
 				if (getOwner().getTarget() != null && getOwner().getTarget() instanceof Player
 					&& ((Player) (getOwner().getTarget())).getPlayerClass().isPhysicalClass())
-					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3571, 65, 100))); // Body Root
+					getOwner().queueSkill(3571, 65); // Body Root
 				else
-					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(3572, 65, 100))); // Sigil of Silence
+					getOwner().queueSkill(3572, 65); // Sigil of Silence
 
 			if (challengerRank >= CustomInstanceRankEnum.CERANIUM.getMinRank())
 				if (getOwner().getTarget() != null && getOwner().getTarget() instanceof Player
 					&& ((Player) (getOwner().getTarget())).getPlayerClass().isPhysicalClass())
-					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(4135, 65, 100))); // Blinding Light
+					getOwner().queueSkill(4135, 65); // Blinding Light
 				else
-					getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(1336, 65, 100))); // Curse of Weakness
+					getOwner().queueSkill(1336, 65); // Curse of Weakness
 
 			if (challengerRank >= CustomInstanceRankEnum.ANCIENT.getMinRank())
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(4490, 65, 100))); // Paralysis Resonation
+				getOwner().queueSkill(4490, 65); // Paralysis Resonation
 
 			debuffTask = ThreadPoolManager.getInstance().schedule(this::debuffTarget, 30000 - challengerRank * 1000 / 3); // 30s ... 20s
 		}

@@ -8,8 +8,6 @@ import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
@@ -38,8 +36,8 @@ public class TwinProtectorAI extends AggressiveNoLootNpcAI implements HpPhases.P
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
 			case 65, 40, 15 -> {
-				getOwner().getQueuedSkills().clear();
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21644, 1, 100, 0, 10000))); // Raging Hellfire
+				getOwner().clearQueuedSkills();
+				getOwner().queueSkill(21644, 1, 10000); // Raging Hellfire
 			}
 			case 25, 10 -> spawnAdds(getNpcId() % 2 == 0 ? 855622 : 855621, 20);
 		}

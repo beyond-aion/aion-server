@@ -14,9 +14,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
  */
 public class ThinkEventHandler {
 
-	/**
-	 * @param npcAI
-	 */
 	public static void onThink(NpcAI npcAI) {
 		if (npcAI.isDead()) {
 			AILogger.info(npcAI, "can't think in dead state");
@@ -47,9 +44,6 @@ public class ThinkEventHandler {
 		}
 	}
 
-	/**
-	 * @param npcAI
-	 */
 	private static void thinkInInactiveRegion(NpcAI npcAI) {
 		if (npcAI.isInState(AIState.WALKING)) {
 			WalkManager.stopWalking(npcAI);
@@ -73,9 +67,6 @@ public class ThinkEventHandler {
 
 	}
 
-	/**
-	 * @param npcAI
-	 */
 	public static void thinkAttack(NpcAI npcAI) {
 		Npc npc = npcAI.getOwner();
 		Creature mostHated = npc.getAggroList().getMostHated();
@@ -83,7 +74,7 @@ public class ThinkEventHandler {
 			npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 		} else {
 			npcAI.setSubStateIfNot(AISubState.NONE);
-			npc.getQueuedSkills().clear();
+			npc.clearQueuedSkills();
 			npc.getGameStats().setLastSkill(null);
 			npc.getGameStats().resetFightStats();
 			npc.getMoveController().recallPreviousStep();
@@ -92,9 +83,6 @@ public class ThinkEventHandler {
 		}
 	}
 
-	/**
-	 * @param npcAI
-	 */
 	public static void thinkIdle(NpcAI npcAI) {
 		if (npcAI.isMoveSupported() && npcAI.getOwner().isWalker())
 			WalkManager.startWalking(npcAI);

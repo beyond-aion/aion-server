@@ -4,10 +4,8 @@ import java.util.concurrent.ScheduledFuture;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.ai.Percentage;
 import com.aionemu.gameserver.model.templates.ai.SummonGroup;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.SummonerAI;
@@ -26,8 +24,8 @@ public class CaptainLakharaAI extends SummonerAI {
 
 	@Override
 	protected void handleIndividualSpawnedSummons(Percentage percent) {
-		getOwner().getQueuedSkills().clear();
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(17497, 65, 100)));
+		getOwner().clearQueuedSkills();
+		getOwner().queueSkill(17497, 65);
 		cancelDespawnTask();
 		percent.getSummons().forEach(this::summonNpcWithSmoke);
 		despawnTask = ThreadPoolManager.getInstance().schedule(() -> percent.getSummons().forEach(group -> despawnNpc(group.getNpcId())), 25000);

@@ -16,8 +16,6 @@ import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -59,20 +57,18 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI implements HpPhase
 	@Override
 	public void handleHpPhase(int phaseHpPercent) {
 		cancelTasks(flameShieldBuffSchedule);
-		getOwner().getQueuedSkills().clear();
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20532, 1, 100, 0, 10000))); // off (skill name)
+		getOwner().clearQueuedSkills();
+		getOwner().queueSkill(20532, 1, 10000); // off (skill name)
 	}
 
 	private void scheduleFlameShieldBuffEvent(int delay) {
-		flameShieldBuffSchedule = ThreadPoolManager.getInstance().schedule(() -> {
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20530 + Rnd.get(0, 1), 60, 100)));
-		}, delay);
+		flameShieldBuffSchedule = ThreadPoolManager.getInstance().schedule(() -> getOwner().queueSkill(20530 + Rnd.get(0, 1), 60), delay);
 	}
 
 	private void handleEnrageEvent() {
-		getOwner().getQueuedSkills().clear();
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19962, 1, 100, 0, 15000))); // Purple Flame Weapon
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19907, 1, 100, 0, 0))); // Chastise
+		getOwner().clearQueuedSkills();
+		getOwner().queueSkill(19962, 1, 15000); // Purple Flame Weapon
+		getOwner().queueSkill(19907, 1); // Chastise
 	}
 
 	private void handleSeaOfFireEvent() {
@@ -103,7 +99,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI implements HpPhase
 	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
 			case 19907: // repeat until reset
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19907, 1, 100, 0, 0))); // Chastise
+				getOwner().queueSkill(19907, 1); // Chastise
 				break;
 			case 20530:
 			case 20531:
@@ -118,7 +114,7 @@ public class BrigadeGeneralVashartiAI extends AggressiveNpcAI implements HpPhase
 				break;
 			case 20532:
 				EmoteManager.emoteStopAttacking(getOwner());
-				getOwner().getQueuedSkills().clear();
+				getOwner().clearQueuedSkills();
 				ThreadPoolManager.getInstance().schedule(() -> {
 					WalkManager.startForcedWalking(this, 188.17f, 414.06f, 260.75488f);
 					getOwner().setState(CreatureState.ACTIVE, true);

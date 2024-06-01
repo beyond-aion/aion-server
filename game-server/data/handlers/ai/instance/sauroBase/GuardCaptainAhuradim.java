@@ -8,10 +8,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.ConjunctionType;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -42,11 +39,11 @@ public class GuardCaptainAhuradim extends AggressiveNpcAI implements HpPhases.Ph
 		if (phaseHpPercent == 100) {
 			startGeneratorTask();
 		} else {
-			queueSkill(21194,1, 0, NpcSkillTargetAttribute.ME);
+			getOwner().queueSkill(21194,1, 0, NpcSkillTargetAttribute.ME);
 			if (Rnd.nextBoolean()) {
-				queueSkill(21429, 1, 5000, NpcSkillTargetAttribute.MOST_HATED);
+				getOwner().queueSkill(21429, 1, 5000);
 			} else {
-				queueSkill(21190, 1, 5000, NpcSkillTargetAttribute.ME);
+				getOwner().queueSkill(21190, 1, 5000, NpcSkillTargetAttribute.ME);
 			}
 		}
 	}
@@ -75,10 +72,6 @@ public class GuardCaptainAhuradim extends AggressiveNpcAI implements HpPhases.Ph
 			case 21190, 21429 -> PacketSendUtility.broadcastMessage(getOwner(), 1500785); // I'm Achradim, the Steel Wall Protector!
 			case 21194 -> PacketSendUtility.broadcastMessage(getOwner(), 1500786); // You're very persistent. Allow me to demonstrate my power!
 		}
-	}
-
-	private void queueSkill(int id, int lv, int nextSkillTime, NpcSkillTargetAttribute targetAttribute) {
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(id, lv, 100, 0, nextSkillTime, targetAttribute, 0, 0, 0, 0, ConjunctionType.AND, null)));
 	}
 
 	private void cancelTasks() {

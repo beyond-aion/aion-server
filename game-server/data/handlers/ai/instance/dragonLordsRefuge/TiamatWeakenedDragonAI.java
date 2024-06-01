@@ -11,9 +11,7 @@ import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -70,8 +68,8 @@ public class TiamatWeakenedDragonAI extends AggressiveNpcAI implements HpPhases.
 	private void offerAtrocityEvent() {
 		if (!isDead() && hasAggro.get()) {
 			if (getLifeStats().getHpPercentage() <= 50)
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20921, 1, 100)));
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(calculateAtrocitySkillId(), 1, 100)));
+				getOwner().queueSkill(20921, 1);
+			getOwner().queueSkill(calculateAtrocitySkillId(), 1);
 		}
 	}
 

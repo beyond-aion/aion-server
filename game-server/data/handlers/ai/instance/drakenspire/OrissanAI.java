@@ -9,8 +9,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -47,8 +45,8 @@ public class OrissanAI extends AggressiveNoLootNpcAI {
 	}
 
 	private void startSummoningEvent() {
-		getOwner().getQueuedSkills().clear();
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21646, 1, 100, 0, 10000)));
+		getOwner().clearQueuedSkills();
+		getOwner().queueSkill(21646, 1, 10000);
 	}
 
 	@Override
@@ -71,9 +69,9 @@ public class OrissanAI extends AggressiveNoLootNpcAI {
 				} else {
 					spawnFrigidCrystals();
 					task = ThreadPoolManager.getInstance().schedule(() -> {
-						getOwner().getQueuedSkills().clear();
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21632, 1, 100, 0, 0))); // Frigid Blast
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21633, 1, 100, 0, 8000))); // Ice Explosion
+						getOwner().clearQueuedSkills();
+						getOwner().queueSkill(21632, 1); // Frigid Blast
+						getOwner().queueSkill(21633, 1, 8000); // Ice Explosion
 					}, 10000);
 				}
 				break;

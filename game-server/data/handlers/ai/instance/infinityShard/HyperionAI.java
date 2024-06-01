@@ -16,9 +16,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.geometry.Point3D;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -101,11 +99,11 @@ public class HyperionAI extends AggressiveNpcAI implements HpPhases.PhaseHandler
 			case 45, 30, 17 -> spawnAncientTyrhund(4);
 			case 65, 50, 25, 20 -> {
 				stage++;
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21253, 56, 100, 0, 0)));
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21244, 56, 100, 0, 5000)));
+				getOwner().queueSkill(21253, 56);
+				getOwner().queueSkill(21244, 56, 5000);
 			}
 			case 40 -> spawnSummons(++stage);
-			case 10 -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21246, 56, 100)));
+			case 10 -> getOwner().queueSkill(21246, 56);
 		}
 	}
 
@@ -217,9 +215,9 @@ public class HyperionAI extends AggressiveNpcAI implements HpPhases.PhaseHandler
 	}
 
 	private void queuePowerfulEnergyBlast() {
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100)));
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100)));
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21241, 56, 100, 0, 8000)));
+		getOwner().queueSkill(21241, 56);
+		getOwner().queueSkill(21241, 56);
+		getOwner().queueSkill(21241, 56, 8000);
 	}
 
 	private void cancelSpawnTask() {

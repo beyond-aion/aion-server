@@ -15,10 +15,13 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.NpcEquippedGear;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
+import com.aionemu.gameserver.model.skill.NpcSkillTemplateEntry;
 import com.aionemu.gameserver.model.stats.container.NpcGameStats;
 import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.npc.*;
+import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
+import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
@@ -130,6 +133,22 @@ public class Npc extends Creature {
 
 	public ConcurrentLinkedQueue<NpcSkillEntry> getQueuedSkills() {
 		return queuedSkills;
+	}
+
+	public void clearQueuedSkills() {
+		queuedSkills.clear();
+	}
+
+	public void queueSkill(int skillId, int level) {
+		queuedSkills.offer(new NpcSkillTemplateEntry(new QueuedNpcSkillTemplate(skillId, level)));
+	}
+
+	public void queueSkill(int skillId, int level, int nextSkillTime) {
+		queuedSkills.offer(new NpcSkillTemplateEntry(new QueuedNpcSkillTemplate(skillId, level, nextSkillTime, NpcSkillTargetAttribute.MOST_HATED)));
+	}
+
+	public void queueSkill(int skillId, int level, int nextSkillTime, NpcSkillTargetAttribute npcSkillTargetAttribute) {
+		queuedSkills.offer(new NpcSkillTemplateEntry(new QueuedNpcSkillTemplate(skillId, level, nextSkillTime, npcSkillTargetAttribute)));
 	}
 
 	public boolean isWalker() {

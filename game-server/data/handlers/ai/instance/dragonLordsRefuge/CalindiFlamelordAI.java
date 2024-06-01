@@ -9,8 +9,6 @@ import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PositionUtil;
 
@@ -45,13 +43,13 @@ public class CalindiFlamelordAI extends AggressiveNpcAI implements HpPhases.Phas
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
 			case 75, 50, 25 -> startHallucinatoryVictoryEvent();
-			case 12 -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20942, 1, 100)));
+			case 12 -> getOwner().queueSkill(20942, 1);
 		}
 	}
 
 	protected void startHallucinatoryVictoryEvent() {
 		if (getPosition().getWorldMapInstance().getNpc(730695) == null && getPosition().getWorldMapInstance().getNpc(730696) == null)
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20911, 1, 100)));
+			getOwner().queueSkill(20911, 1);
 	}
 
 	@Override
@@ -71,7 +69,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI implements HpPhases.Phas
 
 	protected void blazeEngraving() {
 		if (Rnd.chance() < 2 && getPosition().getWorldMapInstance().getNpc(283131) == null)
-			getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(20913, 60, 100)));
+			getOwner().queueSkill(20913, 60);
 	}
 
 	protected void rndSpawn(int npcId) {

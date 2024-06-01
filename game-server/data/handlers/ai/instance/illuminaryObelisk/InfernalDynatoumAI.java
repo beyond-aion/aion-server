@@ -2,8 +2,6 @@ package ai.instance.illuminaryObelisk;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -37,7 +35,7 @@ public class InfernalDynatoumAI extends DynatoumAI {
 						scheduleDespawn(60);
 						break;
 					case 60:
-						getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21534, 1, 100, 0, 3000)));
+						getOwner().queueSkill(21534, 1, 3000);
 						break;
 				}
 			}

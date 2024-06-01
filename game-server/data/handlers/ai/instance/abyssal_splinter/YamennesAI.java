@@ -9,8 +9,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -42,15 +40,14 @@ public class YamennesAI extends AggressiveNpcAI {
 	}
 
 	private void startTasks() {
-		enrageTask = ThreadPoolManager.getInstance()
-			.schedule(() -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19098, 55, 100))), 600000);
+		enrageTask = ThreadPoolManager.getInstance().schedule(() -> getOwner().queueSkill(19098, 55), 600000);
 		portalTask = ThreadPoolManager.getInstance().schedule(() -> spawnPortals(false), 60000);
 	}
 
 	private void onHealingDebuff() {
 		WorldMapInstance instance = getPosition().getWorldMapInstance();
 		deleteNpcs(instance.getNpcs(282107));
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19282, 55, 100)));
+		getOwner().queueSkill(19282, 55);
 		spawn(282107, getOwner().getX() + 10, getOwner().getY() - 10, getOwner().getZ(), (byte) 0);
 		spawn(282107, getOwner().getX() - 10, getOwner().getY() + 10, getOwner().getZ(), (byte) 0);
 		spawn(282107, getOwner().getX() + 10, getOwner().getY() + 10, getOwner().getZ(), (byte) 0);

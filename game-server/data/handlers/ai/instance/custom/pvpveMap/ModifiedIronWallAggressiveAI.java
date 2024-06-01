@@ -11,10 +11,8 @@ import com.aionemu.gameserver.custom.pvpmap.PvpMapService;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -49,7 +47,7 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI implements HpP
 
 	@Override
 	public void handleHpPhase(int phaseHpPercent) {
-		getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21165, 1, 100, 0, 3000)));
+		getOwner().queueSkill(21165, 1, 3000);
 	}
 
 	@Override
@@ -127,7 +125,7 @@ public class ModifiedIronWallAggressiveAI extends AggressiveNpcAI implements HpP
 						World.getInstance().updatePosition(getOwner(), pos.getX(), pos.getY(), pos.getZ(), pos.getHeading());
 						PacketSendUtility.broadcastPacketAndReceive(getOwner(), new SM_FORCED_MOVE(getOwner(), getOwner()));
 						ThreadPoolManager.getInstance()
-							.schedule(() -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21171, 1, 100, 0, 6000))), 500);
+							.schedule(() -> getOwner().queueSkill(21171, 1, 6000), 500);
 					}, 500);
 					break;
 			}

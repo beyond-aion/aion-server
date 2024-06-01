@@ -13,9 +13,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.templates.ai.Percentage;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -45,8 +43,8 @@ public class AdjutantGalamatAI extends SummonerAI {
 		switch (percent.getPercent()) {
 			case 60:
 			case 20:
-				getOwner().getQueuedSkills().clear();
-				getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21799, 65, 100, 0, 25000)));
+				getOwner().clearQueuedSkills();
+				getOwner().queueSkill(21799, 65, 25000);
 				break;
 		}
 	}
@@ -125,7 +123,7 @@ public class AdjutantGalamatAI extends SummonerAI {
 	public float modifyDamage(Creature attacker, float damage, Effect effect) {
 		if (shieldPhase.get()) {
 			if (getEffectController().findBySkillId(21799) == null) {
-				getOwner().getQueuedSkills().clear();
+				getOwner().clearQueuedSkills();
 				resetVariablesAndCancelTasks();
 			} else {
 				damageInShieldPhase.addAndGet((int) damage);

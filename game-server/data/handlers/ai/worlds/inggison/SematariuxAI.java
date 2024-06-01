@@ -18,8 +18,6 @@ import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -76,7 +74,7 @@ public class SematariuxAI extends AggressiveNpcAI implements HpPhases.PhaseHandl
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
 			case 90, 70, 50, 30, 20, 10 -> spawnTornado();
-			case 5 -> getOwner().getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(18730, 1, 100, 0, 3000))); // Berserk State
+			case 5 -> getOwner().queueSkill(18730, 1, 3000); // Berserk State
 		}
 	}
 

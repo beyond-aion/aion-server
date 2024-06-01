@@ -8,8 +8,6 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -34,9 +32,9 @@ public class SematariuxEggAI extends NpcAI {
 	@Override
 	protected void handleDied() {
 		for (VisibleObject vo : getKnownList().getKnownObjects().values()) {
-			if (vo instanceof Npc && ((Npc) vo).getNpcId() == 216520) {
-				((Npc) vo).getEffectController().removeEffect(18726);
-				((Npc) vo).getQueuedSkills().offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(19199, 1, 100, 0, 3000)));
+			if (vo instanceof Npc npc && npc.getNpcId() == 216520) {
+				npc.getEffectController().removeEffect(18726);
+				npc.queueSkill(19199, 1, 3000);
 				break;
 			}
 		}

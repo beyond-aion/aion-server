@@ -24,11 +24,9 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.siege.SiegeModType;
 import com.aionemu.gameserver.model.siege.SiegeRace;
-import com.aionemu.gameserver.model.skill.QueuedNpcSkillEntry;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
-import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -97,8 +95,7 @@ public class EmpoweredAgent extends AggressiveNpcAI implements HpPhases.PhaseHan
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
 			case 80, 70, 60, 50, 40, 30, 20 -> onGuardSpawnEvent();
-			case 25, 5 -> getOwner().getQueuedSkills()
-				.offer(new QueuedNpcSkillEntry(new QueuedNpcSkillTemplate(21778, 1, 100, 0, 3000, NpcSkillTargetAttribute.ME)));
+			case 25, 5 -> getOwner().queueSkill(21778, 1,  3000, NpcSkillTargetAttribute.ME);
 		}
 	}
 
