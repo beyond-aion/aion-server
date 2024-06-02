@@ -108,7 +108,6 @@ CREATE TABLE `broker` (
   `item_id` int(11) NOT NULL,
   `item_count` bigint(20) NOT NULL,
   `item_creator` varchar(50) DEFAULT NULL,
-  `seller` varchar(50) NOT NULL,
   `price` bigint(20) NOT NULL DEFAULT '0',
   `broker_race` enum('ELYOS','ASMODIAN') NOT NULL,
   `expire_time` timestamp NOT NULL DEFAULT '2010-01-01 02:00:00',
@@ -214,7 +213,7 @@ CREATE TABLE `event` (
   `buff_index` int(11) NOT NULL,
   `buff_active_pool_ids` varchar(255) DEFAULT NULL,
   `buff_allowed_days` varchar(255) DEFAULT NULL,
-  `last_change` timestamp NOT NULL ON UPDATE CURRENT_TIMESTAMP,
+  `last_change` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP ON UPDATE CURRENT_TIMESTAMP,
   PRIMARY KEY (`event_name`,`buff_index`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
