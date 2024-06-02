@@ -8,23 +8,25 @@ CREATE TABLE `abyss_rank` (
   `daily_ap` int(11) NOT NULL,
   `weekly_ap` int(11) NOT NULL,
   `ap` int(11) NOT NULL,
-  `rank` int(2) NOT NULL DEFAULT '1',
-  `top_ranking` int(4) NOT NULL,
+  `rank` tinyint(4) NOT NULL DEFAULT '1',
+  `max_rank` tinyint(4) NOT NULL DEFAULT '1',
+  `rank_pos` smallint(6) NOT NULL DEFAULT '0',
+  `old_rank_pos` smallint(6) NOT NULL DEFAULT '0',
   `daily_kill` int(5) NOT NULL,
   `weekly_kill` int(5) NOT NULL,
   `all_kill` int(4) NOT NULL DEFAULT '0',
-  `max_rank` int(2) NOT NULL DEFAULT '1',
   `last_kill` int(5) NOT NULL,
   `last_ap` int(11) NOT NULL,
-  `last_update` decimal(20,0) NOT NULL,
-  `rank_pos` int(11) NOT NULL DEFAULT '0',
-  `old_rank_pos` int(11) NOT NULL DEFAULT '0',
+  `last_update` decimal(20, 0) NOT NULL,
   `rank_ap` int(11) NOT NULL DEFAULT '0',
   `daily_gp` int(11) NOT NULL DEFAULT '0',
   `weekly_gp` int(11) NOT NULL DEFAULT '0',
   `gp` int(11) NOT NULL DEFAULT '0',
   `last_gp` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`player_id`),
+  KEY `rank` (`rank`),
+  KEY `rank_pos` (`rank_pos`),
+  KEY `gp` (`gp`),
   CONSTRAINT `abyss_rank_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
@@ -507,13 +509,14 @@ CREATE TABLE `legions` (
   `legionary_permission` int(11) NOT NULL DEFAULT '6144',
   `volunteer_permission` int(11) NOT NULL DEFAULT '2048',
   `disband_time` int(11) NOT NULL DEFAULT '0',
-  `rank_pos` int(11) NOT NULL DEFAULT '0',
-  `old_rank_pos` int(11) NOT NULL DEFAULT '0',
+  `rank_pos` smallint(6) NOT NULL DEFAULT '0',
+  `old_rank_pos` smallint(6) NOT NULL DEFAULT '0',
   `occupied_legion_dominion` int(11) NOT NULL DEFAULT '0',
   `last_legion_dominion` int(11) NOT NULL DEFAULT '0',
   `current_legion_dominion` int(11) NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
-  UNIQUE KEY `name_unique` (`name`)
+  UNIQUE KEY `name_unique` (`name`),
+  KEY `rank_pos` (`rank_pos`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
