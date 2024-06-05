@@ -201,8 +201,8 @@ public class SkillAttackManager {
 
 			int[] priorities = skillList.getPriorities();
 			if (priorities != null) {
-				for (int index = priorities.length - 1; index >= 0; index--) {
-					List<NpcSkillEntry> skillsByPriority = skillList.getSkillsByPriority(priorities[index]);
+				for (int priority : priorities) {
+					List<NpcSkillEntry> skillsByPriority = skillList.getSkillsByPriority(priority);
 					if (skillsByPriority.size() > 1)
 						Collections.shuffle(skillsByPriority);
 
