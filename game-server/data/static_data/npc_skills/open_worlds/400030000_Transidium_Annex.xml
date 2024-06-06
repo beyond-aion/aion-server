@@ -348,10 +348,10 @@
 	<npc_skills npc_ids="297185">
 		<npc_skill id="20700" lv="65" prob="0" is_post_spawn="true" />
 
-		<npc_skill id="21578" lv="56" prob="100" prio="23" chain_id="30" next_chain_id="1" next_skill_time="10000" /><!-- Shield Penetration -->
-		<npc_skill id="21578" lv="56" prob="100" prio="22" chain_id="20" next_chain_id="30" next_skill_time="10000" /><!-- Shield Penetration -->
-		<npc_skill id="21578" lv="56" prob="100" prio="21" chain_id="10" next_chain_id="20" next_skill_time="10000" /><!-- Shield Penetration -->
-		<npc_skill id="21578" lv="56" prob="100" prio="20" chain_id="1" next_chain_id="10" next_skill_time="10000" /><!-- Shield Penetration -->
+		<npc_skill id="21578" lv="56" prob="100" prio="23" chain_id="30" next_chain_id="1" next_skill_time="11000" /><!-- Shield Penetration -->
+		<npc_skill id="21578" lv="56" prob="100" prio="22" chain_id="20" next_chain_id="30" next_skill_time="11000" /><!-- Shield Penetration -->
+		<npc_skill id="21578" lv="56" prob="100" prio="21" chain_id="10" next_chain_id="20" next_skill_time="11000" /><!-- Shield Penetration -->
+		<npc_skill id="21578" lv="56" prob="100" prio="20" chain_id="1" next_chain_id="10" next_skill_time="11000" /><!-- Shield Penetration -->
 
 		<npc_skill id="21578" lv="56" prob="100" prio="13" chain_id="30" next_chain_id="1" next_skill_time="1000" /><!-- Shield Penetration -->
 		<npc_skill id="17446" lv="56" prob="100" prio="12" chain_id="20" next_chain_id="21" next_skill_time="0"

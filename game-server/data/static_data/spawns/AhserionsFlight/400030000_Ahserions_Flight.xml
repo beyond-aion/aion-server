@@ -26,7 +26,7 @@
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="2">
 				<!-- Ahserion Reserve Assault Leader -->
-				<spawn npc_id="297185">
+				<spawn npc_id="297185" handler="ATTACKER">
 					<spot x="396.332" y="405.444" z="689.154" h="45" />
 					<spot x="402.808" y="398.737" z="689.154" h="105" />
 				</spawn>
@@ -312,7 +312,7 @@
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="2">
 				<!-- Ahserion Reserve Assault Leader -->
-				<spawn npc_id="297185">
+				<spawn npc_id="297185" handler="ATTACKER">
 					<spot x="613.739" y="624.882" z="688.921" h="45" />
 					<spot x="620.505" y="618.270" z="688.972" h="105" />
 				</spawn>
@@ -442,7 +442,7 @@
 					<spot x="738.568" y="286.046" z="679.170" h="45" />
 				</spawn>
 				<!-- Herailt -->
-				<spawn npc_id="802664">
+				<spawn npc_id="802665">
 					<spot x="723.029" y="290.459" z="680.416" h="15" />
 				</spawn>
 			</ahserion_stage_spawn>
@@ -455,7 +455,7 @@
 			</ahserion_stage_spawn>
 			<ahserion_stage_spawn stage="2">
 				<!-- Ahserion Reserve Assault Leader -->
-				<spawn npc_id="297185">
+				<spawn npc_id="297185" handler="ATTACKER">
 					<spot x="619.450" y="397.229" z="689.154" h="75" />
 					<spot x="626.046" y="403.983" z="689.154" h="15" />
 				</spawn>
