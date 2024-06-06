@@ -15,8 +15,6 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -24,7 +22,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -144,36 +141,23 @@ public class Lv1HumanBeritraAI extends AggressiveNoLootNpcAI {
 	 * Retail sequence
 	 */
 	private void spawnSealGuardian() {
-		Npc sealGuardian;
 		if (Rnd.chance() < 25) {
-			sealGuardian = (Npc) spawn(855460, 128.621f, 461.719f, 1754.576f, (byte) 15); // Chief_01
+			spawn(855460, 128.621f, 461.719f, 1754.576f, (byte) 15);
 		} else if (Rnd.chance() < 33) {
-			sealGuardian = (Npc) spawn(855461, 207.780f, 496.081f, 1754.524f, (byte) 40); // Chief_02
+			spawn(855461, 207.780f, 496.081f, 1754.524f, (byte) 40);
 		} else if (Rnd.chance() < 50) {
-			sealGuardian = (Npc) spawn(855462, 208.671f, 542.410f, 1754.609f, (byte) 67); // Chief_03
+			spawn(855462, 208.671f, 542.410f, 1754.609f, (byte) 67);
 		} else {
-			sealGuardian = (Npc) spawn(855463, 127.028f, 574.691f, 1754.681f, (byte) 103); // Chief_´04
+			spawn(855463, 127.028f, 574.691f, 1754.681f, (byte) 103);
 		}
-		addObserver(sealGuardian);
 	}
 
-	private void addObserver(Npc sealGuardian) {
-		sealGuardian.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) {
-
-			@Override
-			public void died(Creature creature) {
-				scheduleNewSealGuardianSpawn();
-				super.died(creature);
-			}
-		});
-		sealGuardian.getObserveController().addObserver(new ActionObserver(ObserverType.ABNORMALSETTED) {
-
-			@Override
-			public void abnormalsetted(AbnormalState state) {
-				spawnSealGuardian();
-				super.abnormalsetted(state);
-			}
-		});
+	@Override
+	protected void handleCustomEvent(int eventId, Object... args) {
+		switch (eventId) {
+			case 1 -> scheduleNewSealGuardianSpawn();
+			case 2 -> spawnSealGuardian();
+		}
 	}
 
 	@Override

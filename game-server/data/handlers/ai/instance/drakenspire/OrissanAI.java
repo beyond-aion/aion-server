@@ -123,17 +123,28 @@ public class OrissanAI extends AggressiveNoLootNpcAI {
 		spawn(855607, 832.8f, 567.6f, 1701.045f, (byte) 0);
 	}
 
+	private void cancelTask() {
+		if (task != null && !task.isDone()) {
+			task.cancel(true);
+		}
+	}
+
 	@Override
 	protected void handleBackHome() {
 		isActive.set(false);
-		task.cancel(true);
+		cancelTask();
 		super.handleBackHome();
 	}
 
 	@Override
+	protected void handleDied() {
+		cancelTask();
+		super.handleDespawned();
+	}
+
+	@Override
 	protected void handleDespawned() {
-		if (task != null)
-			task.cancel(true);
+		cancelTask();
 		super.handleDespawned();
 	}
 }

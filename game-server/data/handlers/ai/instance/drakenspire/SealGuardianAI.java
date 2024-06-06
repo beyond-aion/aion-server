@@ -92,7 +92,7 @@ public class SealGuardianAI extends AggressiveNoLootNpcAI {
 
 	private void despawn() {
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_SYSTEM_MESSAGE(ChatType.NPC, getOwner(), 1501358)); // Teleport…
-		getEffectController().setAbnormal(AbnormalState.SANCTUARY);
+		notifyBeritra(2);
 		AIActions.deleteOwner(this);
 	}
 
@@ -131,6 +131,8 @@ public class SealGuardianAI extends AggressiveNoLootNpcAI {
 		if (lastAttacker != null)
 			SkillEngine.getInstance().applyEffectDirectly(21625, getOwner(), lastAttacker);
 		PacketSendUtility.broadcastPacket(getOwner(), new SM_SYSTEM_MESSAGE(ChatType.NPC, getOwner(), 1501359)); // I shall… curse you…
+
+		notifyBeritra(1);
 		super.handleDied();
 	}
 
@@ -156,5 +158,12 @@ public class SealGuardianAI extends AggressiveNoLootNpcAI {
 		};
 
 		getPosition().getWorldMapInstance().getNpcs(specterIds).forEach(npc -> npc.getController().deleteIfAliveOrCancelRespawn());
+	}
+
+	private void notifyBeritra(int eventId) {
+		List<Npc> possibleBeritras = getPosition().getWorldMapInstance().getNpcs(236244, 236245, 236246);
+		if (!possibleBeritras.isEmpty()) {
+			possibleBeritras.getFirst().getAi().onCustomEvent(eventId); // 1 = Death, 2 = back home | 60s idle
+		}
 	}
 }

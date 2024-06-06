@@ -3,15 +3,15 @@
 	<spawn_map map_id="301390000">
 		<!-- Boss Room - Roof -->
 		<spawn npc_id="702695">
-			<spot x="156.21" y="518.95" z="1751.9781" static_id="82" />
+			<spot x="156.21" y="518.95" z="1745" static_id="82" />
 		</spawn>
 		<!-- Boss Room - Darkness -->
 		<spawn npc_id="702696">
-			<spot x="156.21" y="518.95" z="1751.9781" static_id="538" />
+			<spot x="156.21" y="518.95" z="1745" static_id="538" />
 		</spawn>
 		<!-- Boss Room - Dark Sun -->
 		<spawn npc_id="731582">
-			<spot x="153.1" y="516.6" z="1749.6" static_id="265" />
+			<spot x="153.1" y="516.6" z="1745" static_id="265" />
 		</spawn>
 		<!-- Deathchar Patroler -->
 		<spawn npc_id="236119">
