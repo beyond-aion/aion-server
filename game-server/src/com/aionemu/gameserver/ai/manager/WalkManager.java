@@ -27,11 +27,10 @@ public class WalkManager {
 	public static byte RANDOM_WALK_GEO_FLAGS = (byte) (CollisionIntention.CANT_SEE_COLLISIONS.getId() | CollisionIntention.WALK.getId() | CollisionIntention.PHYSICAL_SEE_THROUGH.getId());
 
 	/**
-	 * @param npcAI
 	 * @return True, if the npc started walking. False if walking is disabled, not supported, or the npc is already walking.
 	 */
 	public static boolean startWalking(NpcAI npcAI) {
-		if (!AIConfig.ACTIVE_NPC_MOVEMENT)
+		if (!AIConfig.ACTIVE_NPC_MOVEMENT || !npcAI.getOwner().isSpawned())
 			return false;
 		return startRandomWalking(npcAI) || startRouteWalking(npcAI);
 	}
