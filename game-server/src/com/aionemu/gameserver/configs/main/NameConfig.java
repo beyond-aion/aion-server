@@ -40,4 +40,10 @@ public class NameConfig {
 	 */
 	@Property(key = "gameserver.name.forbidden_words")
 	public static String[] FORBIDDEN_WORDS;
+
+	/**
+	 * Number of days a name is reserved after renaming. During this time, only the renamed player can (re)adopt this name.
+	 */
+	@Property(key = "gameserver.name.reserve_old_name_days", defaultValue = "30")
+	public static int RESERVE_OLD_NAME_DAYS;
 }

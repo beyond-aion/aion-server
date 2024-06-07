@@ -545,8 +545,10 @@ CREATE TABLE `old_names` (
   `player_id` int(11) NOT NULL,
   `old_name` varchar(50) NOT NULL,
   `new_name` varchar(50) NOT NULL,
+  `renamed_date` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id`),
   KEY `player_id` (`player_id`),
+  KEY `renamed_date` (`renamed_date`),
   CONSTRAINT `old_names_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 

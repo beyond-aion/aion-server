@@ -7,7 +7,7 @@ import com.aionemu.commons.database.dao.DAO;
  */
 public abstract class OldNamesDAO implements DAO {
 
-	public abstract boolean isOldName(String name);
+	public abstract boolean isNameReserved(String oldName, String newName, int nameReservationDurationDays);
 
 	public abstract void insertNames(int id, String oldname, String newname);
 

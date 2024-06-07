@@ -80,14 +80,6 @@ public class CustomConfig {
 	@Property(key = "gameserver.base.flytime", defaultValue = "60")
 	public static int BASE_FLYTIME;
 
-	/**
-	 * Disable prevention using old names with coupon & command
-	 */
-	@Property(key = "gameserver.oldnames.coupon.disable", defaultValue = "false")
-	public static boolean OLD_NAMES_COUPON_DISABLED;
-	@Property(key = "gameserver.oldnames.command.disable", defaultValue = "true")
-	public static boolean OLD_NAMES_COMMAND_DISABLED;
-
 	@Property(key = "gameserver.friendlist.gm_restrict", defaultValue = "false")
 	public static boolean FRIENDLIST_GM_RESTRICT;
 

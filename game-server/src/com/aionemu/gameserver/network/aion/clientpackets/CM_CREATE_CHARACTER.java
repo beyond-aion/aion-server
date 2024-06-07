@@ -88,10 +88,8 @@ public class CM_CREATE_CHARACTER extends AbstractCharacterEditPacket {
 			return SM_CREATE_CHARACTER.RESPONSE_SERVER_LIMIT_EXCEEDED;
 		if (playerClass == null) // should never happen (only with type == 1 to enter char creation screen, where we won't reach this validation)
 			return SM_CREATE_CHARACTER.FAILED_TO_CREATE_THE_CHARACTER;
-		if (!PlayerService.isFreeName(characterName))
+		if (PlayerService.isNameUsedOrReserved(null, characterName))
 			return GSConfig.CHARACTER_CREATION_MODE == 2 ? SM_CREATE_CHARACTER.RESPONSE_NAME_RESERVED : SM_CREATE_CHARACTER.RESPONSE_NAME_ALREADY_USED;
-		if (PlayerService.isOldName(characterName))
-			return SM_CREATE_CHARACTER.RESPONSE_NAME_ALREADY_USED;
 		if (!NameRestrictionService.isValidName(characterName))
 			return SM_CREATE_CHARACTER.RESPONSE_INVALID_NAME;
 		if (NameRestrictionService.isForbidden(characterName))

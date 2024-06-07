@@ -55,9 +55,6 @@ public class PlayerTransferConfig {
 	@Property(key = "ptransfer.block.samename", defaultValue = "false")
 	public static boolean BLOCK_SAMENAME;
 
-	@Property(key = "ptransfer.server.name.prefix", defaultValue = "_UNK")
-	public static String NAME_PREFIX;
-
 	@Property(key = "ptransfer.retransfer.hours", defaultValue = "0")
 	public static int REUSE_HOURS;
 

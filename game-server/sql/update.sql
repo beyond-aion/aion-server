@@ -1,6 +1,7 @@
 /*
- * DB changes since a8d02131 (21.04.2024)
+ * DB changes since 6eb8a81 (07.06.2024)
  */
 
--- remove old event items
-DELETE FROM inventory WHERE item_id IN (186000406, 186000407, 188053915, 188054028, 188054029);
+ALTER TABLE `old_names`
+	ADD COLUMN `renamed_date` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP() AFTER `new_name`,
+	ADD KEY `renamed_date` (`renamed_date`);

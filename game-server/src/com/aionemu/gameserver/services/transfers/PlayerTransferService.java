@@ -1,10 +1,6 @@
 package com.aionemu.gameserver.services.transfers;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -12,6 +8,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.PlayerTransferConfig;
+import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.LegionMemberDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -20,9 +17,8 @@ import com.aionemu.gameserver.network.loginserver.LoginServer;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_PTRANSFER_CONTROL;
 import com.aionemu.gameserver.services.AccountService;
 import com.aionemu.gameserver.services.BrokerService;
-import com.aionemu.gameserver.services.item.ItemService;
+import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.player.PlayerService;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author KID
@@ -50,25 +46,6 @@ public class PlayerTransferService {
 		log.info("PlayerTransferService loaded. With " + rsList.size() + " restricted skills.");
 	}
 
-	private String ptsnameitem = "ptsnameitem";
-
-	public void onEnterWorld(Player player) {
-		if (player.getName().endsWith(PlayerTransferConfig.NAME_PREFIX)) {
-			PacketSendUtility.sendMessage(player, "You can add your oldnickname-friend to your friendlist!");
-			if (!player.hasVar(ptsnameitem)) {
-				long count = ItemService.addItem(player, 169670001, 1);
-				if (count == 1) {
-					PacketSendUtility.sendMessage(player,
-						"Please empty your inventory and relogin again. After that you'll be able to receive item that allows you to change your name.");
-				} else
-					player.setVar(ptsnameitem, 1, true);
-			}
-		}
-	}
-
-	/**
-	 * first method - sent to source server
-	 */
 	public void startTransfer(int accountId, int targetAccountId, int playerId, byte targetServerId, int taskId) {
 		boolean exist = false;
 		for (int id : DAOManager.getDAO(PlayerDAO.class).getPlayerOidsOnAccount(accountId))
@@ -148,7 +125,7 @@ public class PlayerTransferService {
 		String name = transfer.getName();
 		String account = transfer.getAccount();
 		int targetAccountId = transfer.getTargetAccount();
-		if (!PlayerService.isFreeName(name)) {
+		if (PlayerService.isNameUsedOrReserved(null, name)) {
 			if (PlayerTransferConfig.BLOCK_SAMENAME) {
 				LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.ERROR, taskId, "Name is already in use"));
 				return;
@@ -156,11 +133,11 @@ public class PlayerTransferService {
 
 			log.info("Name is already in use `" + name + "`");
 			textLog.info("taskId:" + taskId + "; [CloneCharacter:!isFreeName]");
-			String newName = name + PlayerTransferConfig.NAME_PREFIX;
+			String newName = name;
 
 			int i = 0;
-			while (!PlayerService.isFreeName(newName)) {
-				newName = name + PlayerTransferConfig.NAME_PREFIX + i;
+			while (PlayerService.isNameUsedOrReserved(null, newName)) {
+				newName = name + "_" + ++i;
 			}
 			name = newName;
 		}
@@ -176,6 +153,8 @@ public class PlayerTransferService {
 			LoginServer.getInstance().sendPacket(
 				new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.ERROR, taskId, "unexpected sql error while creating a clone"));
 		} else {
+			if (!transfer.getName().equals(cha.getName()))
+				DAOManager.getDAO(InventoryDAO.class).store(ItemFactory.newItem(169670001), cha); // [Event] Name Change Ticket
 			DAOManager.getDAO(PlayerDAO.class).setPlayerLastTransferTime(cha.getObjectId(), System.currentTimeMillis());
 			LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.OK, taskId));
 			log.info("clone successful #" + taskId + " `" + name + "`");

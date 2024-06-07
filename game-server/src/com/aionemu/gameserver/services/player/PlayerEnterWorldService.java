@@ -61,7 +61,6 @@ import com.aionemu.gameserver.services.reward.VeteranRewardService;
 import com.aionemu.gameserver.services.teleport.BindPointTeleportService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.services.toypet.PetService;
-import com.aionemu.gameserver.services.transfers.PlayerTransferService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
@@ -397,8 +396,6 @@ public final class PlayerEnterWorldService {
 
 		if (CraftConfig.DELETE_EXCESS_CRAFT_ENABLE)
 			RelinquishCraftStatus.removeExcessCraftStatus(player, false);
-
-		PlayerTransferService.getInstance().onEnterWorld(player);
 
 		// try to send bonus pack (if mailbox was full on lvlup)
 		BonusPackService.getInstance().addPlayerCustomReward(player);

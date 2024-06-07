@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import java.util.Set;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.OldNamesDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -70,19 +69,18 @@ public class CM_APPEARANCE extends AionClientPacket {
 	}
 
 	private void tryChangeCharacterName(Player player, String newName, int itemObjId) {
-		if (player.getName().equals(newName))
+		String oldName = player.getName();
+		if (oldName.equals(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_SAME_YOUR_NAME());
 		else if (!NameRestrictionService.isValidName(newName) || NameRestrictionService.isForbidden(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_WRONG_INPUT());
-		else if (!PlayerService.isFreeName(newName) || !CustomConfig.OLD_NAMES_COUPON_DISABLED && PlayerService.isOldName(newName))
+		else if (PlayerService.isNameUsedOrReserved(oldName, newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ALREADY_EXIST());
 		else if ((player.getInventory().getItemByObjId(itemObjId).getItemId() != 169670000 && player.getInventory().getItemByObjId(itemObjId).getItemId() != 169670001)
 			|| !player.getInventory().decreaseByObjectId(itemObjId, 1))
 			AuditLogger.log(player, "tried to rename himself without coupon");
 		else {
-			String oldName = player.getName();
-			if (!CustomConfig.OLD_NAMES_COUPON_DISABLED)
-				DAOManager.getDAO(OldNamesDAO.class).insertNames(player.getObjectId(), oldName, newName);
+			DAOManager.getDAO(OldNamesDAO.class).insertNames(player.getObjectId(), oldName, newName);
 
 			player.getCommonData().setName(newName);
 			DAOManager.getDAO(PlayerDAO.class).storePlayer(player);

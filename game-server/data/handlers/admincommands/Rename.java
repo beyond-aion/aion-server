@@ -1,7 +1,7 @@
 package admincommands;
 
 import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.configs.main.CustomConfig;
+import com.aionemu.gameserver.configs.main.NameConfig;
 import com.aionemu.gameserver.dao.OldNamesDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -26,14 +26,14 @@ public class Rename extends AdminCommand {
 		// @formatter:off
 		setSyntaxInfo(
 			"<new name> - Renames your target.",
-			"<player name> <new name> - Renames the given player."
+			"<player name> <new name> [f] - Renames the given player (f = force rename, ignoring reserved names)."
 		);
 		// @formatter:on
 	}
 
 	@Override
 	public void execute(Player admin, String... params) {
-		if (params.length < 1 || params.length > 2) {
+		if (params.length < 1) {
 			sendInfo(admin);
 			return;
 		}
@@ -46,20 +46,20 @@ public class Rename extends AdminCommand {
 		if (renamedCommonData == null) {
 			PacketSendUtility.sendPacket(admin, oldName == null ? SM_SYSTEM_MESSAGE.STR_INVALID_TARGET() : SM_SYSTEM_MESSAGE.STR_NO_USER_NAMED(oldName));
 			return;
+		} else {
+			oldName = renamedCommonData.getName();
 		}
 		if (!NameRestrictionService.isValidName(newName) || NameRestrictionService.isForbidden(newName)) {
 			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ERROR_WRONG_INPUT());
 			return;
 		}
-		if (!PlayerService.isFreeName(newName) || !CustomConfig.OLD_NAMES_COMMAND_DISABLED && PlayerService.isOldName(newName)) {
+		int nameReservationDurationDays = params.length >= 3 && params[2].equalsIgnoreCase("f") ? 0 : NameConfig.RESERVE_OLD_NAME_DAYS;
+		if (PlayerService.isNameUsedOrReserved(oldName, newName, nameReservationDurationDays)) {
 			PacketSendUtility.sendPacket(admin, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_CHAR_NAME_ALREADY_EXIST());
 			return;
 		}
 
-		if (!CustomConfig.OLD_NAMES_COMMAND_DISABLED)
-			DAOManager.getDAO(OldNamesDAO.class).insertNames(renamedCommonData.getPlayerObjId(), oldName, newName);
-		if (oldName == null)
-			oldName = renamedCommonData.getName();
+		DAOManager.getDAO(OldNamesDAO.class).insertNames(renamedCommonData.getPlayerObjId(), oldName, newName);
 		renamedCommonData.setName(newName);
 		DAOManager.getDAO(PlayerDAO.class).storePlayerName(renamedCommonData);
 		if (renamed != null)

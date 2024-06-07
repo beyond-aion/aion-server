@@ -6,6 +6,7 @@ import java.util.List;
 import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
+import com.aionemu.gameserver.configs.main.NameConfig;
 import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.effect.PlayerEffectController;
 import com.aionemu.gameserver.dao.*;
@@ -49,18 +50,14 @@ import com.aionemu.gameserver.world.knownlist.KnownList;
 public class PlayerService {
 
 	/**
-	 * Checks if name is already taken or not
-	 *
-	 * @param name
-	 *          character name
-	 * @return true if is free, false in other case
+	 * @return True if the character name is taken (currently used by another character or the character with this name was recently renamed).
 	 */
-	public static boolean isFreeName(String name) {
-		return !DAOManager.getDAO(PlayerDAO.class).isNameUsed(name);
+	public static boolean isNameUsedOrReserved(String oldName, String newName) {
+		return isNameUsedOrReserved(oldName, newName, NameConfig.RESERVE_OLD_NAME_DAYS);
 	}
 
-	public static boolean isOldName(String name) {
-		return DAOManager.getDAO(OldNamesDAO.class).isOldName(name);
+	public static boolean isNameUsedOrReserved(String oldName, String newName, int nameReservationDurationDays) {
+		return DAOManager.getDAO(PlayerDAO.class).isNameUsed(newName) || DAOManager.getDAO(OldNamesDAO.class).isNameReserved(oldName, newName, nameReservationDurationDays);
 	}
 
 	/**

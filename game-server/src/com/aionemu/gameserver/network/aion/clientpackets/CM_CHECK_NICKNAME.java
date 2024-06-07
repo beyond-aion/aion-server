@@ -36,7 +36,7 @@ public class CM_CHECK_NICKNAME extends AionClientPacket {
 
 		nick = Util.convertName(nick);
 
-		if (!PlayerService.isFreeName(nick) || PlayerService.isOldName(nick)) {
+		if (PlayerService.isNameUsedOrReserved(null, nick)) {
 			if (GSConfig.CHARACTER_CREATION_MODE == 2)
 				client.sendPacket(new SM_NICKNAME_CHECK_RESPONSE(SM_CREATE_CHARACTER.RESPONSE_NAME_RESERVED));
 			else
@@ -44,7 +44,7 @@ public class CM_CHECK_NICKNAME extends AionClientPacket {
 		} else if (!NameRestrictionService.isValidName(nick)) {
 			client.sendPacket(new SM_NICKNAME_CHECK_RESPONSE(SM_CREATE_CHARACTER.RESPONSE_INVALID_NAME));
 		} else if (NameRestrictionService.isForbidden(nick)) {
-			client.sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_FORBIDDEN_CHAR_NAME));
+			client.sendPacket(new SM_NICKNAME_CHECK_RESPONSE(SM_CREATE_CHARACTER.RESPONSE_FORBIDDEN_CHAR_NAME));
 		} else {
 			client.sendPacket(new SM_NICKNAME_CHECK_RESPONSE(SM_CREATE_CHARACTER.RESPONSE_OK));
 		}
