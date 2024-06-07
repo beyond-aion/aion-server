@@ -12,6 +12,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.LetterType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.StaticDoor;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -20,6 +21,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -138,6 +140,7 @@ public class AhserionRaid {
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_14());
 						break;
 					case 150:
+						panesterraTeams.values().stream().filter(team -> !team.isEliminated()).forEach(team -> sendConsolationReward(team));
 						stop();
 						break;
 				}
@@ -254,9 +257,16 @@ public class AhserionRaid {
 		if (eliminatedTeam != null) {
 			eliminatedTeam.setIsEliminated(true);
 			eliminatedTeam.moveTeamMembersToFortressPosition();
+			sendConsolationReward(eliminatedTeam);
 		}
 		deleteNpcs(eliminatedFaction, npcId + 1);
 		SpawnEngine.spawnObject(template, 1);
+	}
+
+	private void sendConsolationReward(PanesterraTeam eliminatedTeam) {
+		eliminatedTeam.forEachMember(p -> {
+			SystemMailService.sendMail("Assault Forces", p.getName(), "Raid Announcement", "We lost.", 186000409, 100, 0, LetterType.NORMAL);
+		});
 	}
 
 	public void handleBossKilled(Npc ahserion, PanesterraFaction winnerFaction) {
