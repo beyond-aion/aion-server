@@ -41,7 +41,7 @@ public final class Rnd {
 			LoggerFactory.getLogger(Rnd.class).warn("", new IllegalArgumentException("max < min"));
 			maxInclusive = minInclusive;
 		}
-		return minInclusive == maxInclusive ? minInclusive : rnd.get().nextInt(minInclusive, maxInclusive + 1);
+		return minInclusive == maxInclusive ? minInclusive : (int) nextLong(minInclusive, maxInclusive + 1L);
 	}
 
 	/**
