@@ -30,7 +30,7 @@ public class AhserionSkyAssaulterAI extends GeneralNpcAI {
 		WorldPosition p = getPosition();
 		Npc assaultPod = (Npc) spawn(297188, p.getX(), p.getY(), p.getZ(), p.getHeading()); // Assault Pod
 		assaultPod.getController().addTask(TaskId.DESPAWN,
-			ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().deleteIfAliveOrCancelRespawn(), 6000));
+			ThreadPoolManager.getInstance().schedule(() -> assaultPod.getController().deleteIfAliveOrCancelRespawn(), 6000));
 
 		ThreadPoolManager.getInstance().schedule(this::useSkill, 1000);
 
