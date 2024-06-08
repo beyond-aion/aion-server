@@ -28,6 +28,7 @@ import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
 import com.aionemu.gameserver.model.templates.item.ItemQuality;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOT_STATUS.Status;
 import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.item.ItemService.ItemUpdatePredicate;
@@ -60,9 +61,9 @@ public class DropService {
 					// fix for elyos/asmodians being able to loot elyos/asmodian npcs
 					// TODO there might be more npcs who are friendly towards players and should not be loot able by them
 					if (visibleObject instanceof Npc npc && npc.getRace().isAsmoOrEly()) {
-						PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcUniqueId, 0), p -> npc.getRace() != p.getRace());
+						PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcUniqueId, Status.LOOT_ENABLE), p -> npc.getRace() != p.getRace());
 					} else {
-						PacketSendUtility.broadcastPacket(visibleObject, new SM_LOOT_STATUS(npcUniqueId, 0));
+						PacketSendUtility.broadcastPacket(visibleObject, new SM_LOOT_STATUS(npcUniqueId, Status.LOOT_ENABLE));
 					}
 				}
 			}
@@ -127,7 +128,7 @@ public class DropService {
 		}
 
 		PacketSendUtility.sendPacket(player, new SM_LOOT_ITEMLIST(dropNpc, dropItems, player));
-		PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npcObjectId, 2));
+		PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npcObjectId, Status.OPEN_DROP_LIST));
 		player.unsetState(CreatureState.ACTIVE);
 		player.setState(CreatureState.LOOTING);
 		player.setLootingNpcOid(npcObjectId);
@@ -180,7 +181,7 @@ public class DropService {
 					}
 				}
 			}
-			PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, 0), dropNpc::isAllowedToLoot);
+			PacketSendUtility.broadcastPacket(npc, new SM_LOOT_STATUS(npcObjectId, Status.LOOT_ENABLE), dropNpc::isAllowedToLoot);
 		}
 	}
 
@@ -428,7 +429,7 @@ public class DropService {
 			}
 		} else {
 			if (player != null) {
-				PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npcObjectId, 3));
+				PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npcObjectId, Status.CLOSE_DROP_LIST));
 				player.unsetState(CreatureState.LOOTING);
 				player.setState(CreatureState.ACTIVE);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_LOOT, 0, npcObjectId), true);
@@ -490,7 +491,7 @@ public class DropService {
 			return;
 		DropNpc dropNpc = DropRegistrationService.getInstance().getDropRegistrationMap().get(npc.getObjectId());
 		if (dropNpc != null && dropNpc.isAllowedToLoot(player)) {
-			PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npc.getObjectId(), 0));
+			PacketSendUtility.sendPacket(player, new SM_LOOT_STATUS(npc.getObjectId(), Status.LOOT_ENABLE));
 		}
 	}
 

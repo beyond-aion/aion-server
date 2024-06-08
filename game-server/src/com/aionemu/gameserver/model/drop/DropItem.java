@@ -201,4 +201,15 @@ public class DropItem {
 		return playerObjIds.contains(player.getObjectId());
 	}
 
+	public int getLootEffectId() {
+		return switch (dropTemplate.getItemId()) {
+			case 166020000, 166020001, 166020002, 166020003 -> 1003; // Omega Enchantment Stone
+			case 168000034, 168000035, 168000073, 168000074, 168000117, 168000118, 168000120, 168000121, 168000161, 168000162, 168000164, 168000165,
+					 168000213, 168000216, 168000223, 168000228, 168000230, 168000233, 168000240, 168000245 -> 1003; // Godstones
+			case 188053083 -> 1003; // Tempering Solution Chest
+			case 188053547, 188053548, 188053646, 188053647 -> 1002; // Nether Dragon King weapon boxes
+			case 190100004, 190100052 -> 1003; // Mounts
+			default -> 0;
+		};
+	}
 }

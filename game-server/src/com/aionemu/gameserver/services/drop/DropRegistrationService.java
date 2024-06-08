@@ -28,6 +28,7 @@ import com.aionemu.gameserver.model.templates.npc.AbyssNpcType;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOT_STATUS;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOT_STATUS.Status;
 import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
@@ -101,7 +102,7 @@ public class DropRegistrationService {
 		npc.getAi().onGeneralEvent(AIEventType.DROP_REGISTERED);
 
 		for (Player p : allowedLooters) {
-			PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npcObjId, 0));
+			PacketSendUtility.sendPacket(p, new SM_LOOT_STATUS(npcObjId, Status.LOOT_ENABLE));
 		}
 
 		DropService.getInstance().scheduleFreeForAll(npcObjId);
