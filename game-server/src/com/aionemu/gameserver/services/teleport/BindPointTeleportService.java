@@ -3,6 +3,8 @@ package com.aionemu.gameserver.services.teleport;
 import java.util.HashMap;
 import java.util.Map;
 
+import org.slf4j.LoggerFactory;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
@@ -11,8 +13,8 @@ import com.aionemu.gameserver.model.templates.hotspot.HotspotTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_BIND_POINT_TELEPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemPacketService;
-import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
@@ -41,7 +43,7 @@ public class BindPointTeleportService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			return;
 		}
-		final long price = computePrice(player, hotspot, kinah);
+		long price = calculateTeleportationPrice(player, hotspot, kinah);
 
 		if (!checkRequirements(player, hotspot, price))
 			return;
@@ -76,10 +78,16 @@ public class BindPointTeleportService {
 		}
 	}
 
-	private static long computePrice(Player player, HotspotTemplate hotspot, long kinah) {
-		long price = kinah > hotspot.getPrice() ? kinah : hotspot.getPrice();
-		if (price < 1 || player.getEffectController().hasAbnormalEffect(Effect::isHiPass))
-			price = 1;
+	private static long calculateTeleportationPrice(Player player, HotspotTemplate hotspot, long priceSentByGameClient) {
+		double distance = PositionUtil.getDistance(player, hotspot.getX(), hotspot.getY(), hotspot.getZ());
+		long basePrice = hotspot.getPrice();
+		long distanceCost = (long) (basePrice * distance / 1000d);
+		long price = Math.max(1, basePrice + distanceCost);
+		if (price != priceSentByGameClient) {
+			LoggerFactory.getLogger(BindPointTeleportService.class).warn("Hotspot teleport {} prices don't match: {} vs. {}", hotspot.getId(), price, priceSentByGameClient);
+			if (priceSentByGameClient > price)
+				price = priceSentByGameClient;
+		}
 		return price;
 	}
 
