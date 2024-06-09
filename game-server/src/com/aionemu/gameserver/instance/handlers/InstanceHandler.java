@@ -78,7 +78,7 @@ public interface InstanceHandler {
 
 	void handleUseItemFinish(Player player, Npc npc);
 
-	boolean canUseSkill(Player player, Skill skill);
+	void onEndCastSkill(Skill skill);
 
 	void onAggro(Npc npc);
 

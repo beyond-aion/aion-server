@@ -211,8 +211,7 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	}
 
 	@Override
-	public boolean canUseSkill(Player player, Skill skill) {
-		return true;
+	public void onEndCastSkill(Skill skill) {
 	}
 
 	@Override

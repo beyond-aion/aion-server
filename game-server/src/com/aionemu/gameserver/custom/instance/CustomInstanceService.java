@@ -117,16 +117,11 @@ public class CustomInstanceService {
 
 	public void recordPlayerModelEntry(Player player, Skill skill, VisibleObject target) {
 		// FILTER: Only record roah custom instance skills for the moment
-		if (player.getWorldId() != CUSTOM_INSTANCE_WORLD_ID || restrictedSkills.contains(skill.getSkillId()))
-			return;
-
-		WorldMapInstance wmi = player.getPosition().getWorldMapInstance();
-		if (!(wmi.getInstanceHandler() instanceof RoahCustomInstanceHandler) || !((RoahCustomInstanceHandler) wmi.getInstanceHandler()).isBossPhase()
-			|| !player.getPosition().getWorldMapInstance().isRegistered(player.getObjectId()))
+		if (restrictedSkills.contains(skill.getSkillId()))
 			return;
 
 		List<PlayerModelEntry> entries = getPlayerModelEntries(player.getObjectId());
-		entries.add(new PlayerModelEntry(player, skill.getSkillId(), target instanceof Creature ? (Creature) target : null));
+		entries.add(new PlayerModelEntry(player, skill.getSkillId(), target instanceof Creature creature ? creature : null));
 	}
 
 	private List<PlayerModelEntry> loadPlayerModelEntries(int playerId) {
