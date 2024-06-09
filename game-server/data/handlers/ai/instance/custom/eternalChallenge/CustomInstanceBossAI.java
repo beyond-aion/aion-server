@@ -271,7 +271,7 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 		functions.add(new StatSetFunction(StatEnum.MAGICAL_CRITICAL, pgs.getMCritical().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.MAIN_HAND_POWER, pgs.getMainHandPAttack(CalculationType.DISPLAY).getCurrent()));
 		int maxHP = pgs.getMaxHp().getCurrent();
-		maxHP += maxHP * rank / 10f;
+		maxHP += (int) (maxHP * rank / 10f);
 		if (onlyAttack)
 			maxHP *= 10;
 		functions.add(new StatSetFunction(StatEnum.MAXHP, maxHP));

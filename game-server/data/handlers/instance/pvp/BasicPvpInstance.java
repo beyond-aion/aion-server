@@ -123,6 +123,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.PLAYER_QUIT, player.getObjectId(), 0), getTime()));
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	@Override
 	public boolean onDie(Player victim, Creature lastAttacker) {
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),

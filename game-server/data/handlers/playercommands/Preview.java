@@ -61,7 +61,7 @@ public class Preview extends PlayerCommand {
 		}
 
 		int i = 0;
-		boolean onlyColor = params.length == 1 && !params[0].contains("[") && !params[0].matches("([1-9][0-9]*,?)+");
+		boolean onlyColor = params.length == 1 && !params[0].contains("[") && !params[0].matches("([1-9][0-9]{8},?)+");
 		List<ItemTemplate> items = new ArrayList<>();
 		if (onlyColor)
 			player.getEquipment().getEquippedForAppearance().forEach(item -> items.add(item.getItemTemplate()));

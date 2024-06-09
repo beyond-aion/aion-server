@@ -37,6 +37,7 @@ public class GodStone extends ItemStone {
 		return activatedCount;
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	public boolean tryActivate(boolean isMainHandWeapon, Creature target) {
 		long now = System.currentTimeMillis();
 		if (now < cooldownExpireTimeMillis.get())

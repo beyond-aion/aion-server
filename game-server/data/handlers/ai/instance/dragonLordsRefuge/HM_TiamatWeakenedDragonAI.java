@@ -70,7 +70,7 @@ public class HM_TiamatWeakenedDragonAI extends TiamatWeakenedDragonAI {
 
 		getKnownList().forEachPlayer(p -> {
 			if (PositionUtil.isInRange(getOwner(), p, 46)) {
-				accumulatedAnglesAndPlayers[0] += PositionUtil.calculateAngleFrom(getOwner(), p);
+				accumulatedAnglesAndPlayers[0] += Math.round(PositionUtil.calculateAngleFrom(getOwner(), p));
 				accumulatedAnglesAndPlayers[1]++;
 			}
 		});

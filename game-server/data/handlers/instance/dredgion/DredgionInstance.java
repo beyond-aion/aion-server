@@ -161,6 +161,7 @@ public class DredgionInstance extends GeneralInstanceHandler {
 			PlayerReviveService.duelRevive(player);
 	}
 
+	@SuppressWarnings("lossy-conversions")
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
 		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), false, 0, 8));

@@ -77,9 +77,9 @@ public class ChestAI extends ActionItemNpcAI {
 	private boolean tryOpening(Player player) {
 		List<KeyItem> keyItems = chestTemplate.getKeyItems();
 		for (KeyItem keyItem : keyItems) { // check if enough key items are available
-			if (keyItem.getItemIds() != null && keyItem.getItemIds().get(0) == 0) // chest can be opened w/o keys
+			if (keyItem.getItemIds() != null && keyItem.getItemIds().stream().anyMatch(itemId -> itemId == 0)) // chest can be opened w/o keys
 				return true;
-			int availableKeys = 0;
+			long availableKeys = 0;
 			for (Integer keyItemId : keyItem.getItemIds()) {
 				availableKeys += player.getInventory().getItemCountByItemId(keyItemId);
 			}
@@ -87,7 +87,7 @@ public class ChestAI extends ActionItemNpcAI {
 				return false;
 		}
 		for (KeyItem keyItem : keyItems) { // remove key items
-			int keyCountToDecrease = keyItem.getCount();
+			long keyCountToDecrease = keyItem.getCount();
 			for (Integer keyItemId : keyItem.getItemIds()) {
 				long availableKeys = player.getInventory().getItemCountByItemId(keyItemId);
 				if (availableKeys >= keyCountToDecrease) {

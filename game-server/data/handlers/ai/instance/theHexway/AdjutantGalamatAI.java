@@ -66,11 +66,11 @@ public class AdjutantGalamatAI extends SummonerAI {
 				float multiplicatorToAdd = 0f;
 				for (Player player : playersInRange) {
 					if (player.isDead()) {
-						multiplicatorToAdd += 0.2;
+						multiplicatorToAdd += 0.2f;
 						continue;
 					}
 					if (dmgPerPlayer > 0 && player.getLifeStats().getCurrentHp() <= dmgPerPlayer)
-						multiplicatorToAdd += 0.35;
+						multiplicatorToAdd += 0.35f;
 				}
 				synchronized (this) {
 					if (damageMultiplicator == 1.0f)

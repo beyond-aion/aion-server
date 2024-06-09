@@ -114,7 +114,7 @@ public class Buy extends PlayerCommand {
 			return;
 		}
 		int cost = rewards.get(itemId).get("cost");
-		int rewardCoins = 0;
+		long rewardCoins = 0;
 		for (Item i : player.getInventory().getItemsByItemId(REWARD_COIN_ID))
 			rewardCoins += i.getItemCount();
 
