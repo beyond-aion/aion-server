@@ -20,7 +20,9 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.AbyssRankEnum;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -295,4 +297,12 @@ public class DarkPoetaInstance extends GeneralInstanceHandler {
 			TeleportService.moveToInstanceExit(player, mapId, player.getRace());
 	}
 
+	@Override
+	public void onEndCastSkill(Skill skill) {
+		if (skill.getSkillId() != 18130) // Kobold Bomb Effect
+			return;
+		Npc camouflageStoneWall = getNpc(700516);
+		if (camouflageStoneWall != null && PositionUtil.isInRange(skill.getEffector(), camouflageStoneWall, 10))
+			camouflageStoneWall.getController().die();
+	}
 }
