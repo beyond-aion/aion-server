@@ -136,6 +136,7 @@ public class AhserionRaid {
 						break;
 					case 130:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_13());
+						break;
 					case 138:
 						sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_GAB1_SUB_ALARM_14());
 						break;
