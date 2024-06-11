@@ -28,7 +28,7 @@ public class RecipeList {
 	}
 
 	public boolean addRecipe(Player player, int recipeId) {
-		if (!isRecipePresent(recipeId) && DAOManager.getDAO(PlayerRecipesDAO.class).addRecipe(player.getObjectId(), recipeId)) {
+		if (!isRecipePresent(recipeId) && PlayerRecipesDAO.addRecipe(player.getObjectId(), recipeId)) {
 			recipeList.add(recipeId);
 			PacketSendUtility.sendPacket(player, new SM_LEARN_RECIPE(recipeId));
 			return true;
@@ -37,7 +37,7 @@ public class RecipeList {
 	}
 
 	public boolean deleteRecipe(Player player, int recipeId) {
-		if (recipeList.contains(recipeId) && DAOManager.getDAO(PlayerRecipesDAO.class).delRecipe(player.getObjectId(), recipeId)) {
+		if (recipeList.contains(recipeId) && PlayerRecipesDAO.delRecipe(player.getObjectId(), recipeId)) {
 			recipeList.remove(recipeId);
 			PacketSendUtility.sendPacket(player, new SM_RECIPE_DELETE(recipeId));
 			return true;

@@ -37,7 +37,7 @@ import com.aionemu.gameserver.world.WorldType;
 
 /**
  * 3.0 siege update (https://docs.google.com/document/d/1HVOw8-w9AlRp4ci0ei4iAzNaSKzAHj_xORu-qIQJFmc/edit#)
- * 
+ *
  * @author SoulKeeper, Source, Neon, Estrayl
  */
 public class SiegeService {
@@ -90,7 +90,7 @@ public class SiegeService {
 			outposts = DataManager.SIEGE_LOCATION_DATA.getOutpost();
 			locations = DataManager.SIEGE_LOCATION_DATA.getSiegeLocations();
 			agent = DataManager.SIEGE_LOCATION_DATA.getAgentLoc();
-			DAOManager.getDAO(SiegeDAO.class).loadSiegeLocations(locations);
+			SiegeDAO.loadSiegeLocations(locations);
 		} else {
 			artifacts = Collections.emptyMap();
 			fortresses = Collections.emptyMap();
@@ -252,7 +252,7 @@ public class SiegeService {
 			loc.setRace(sr);
 			loc.setLegionId(legionId);
 			spawnNpcs(locId, sr, SiegeModType.PEACE);
-			DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(loc);
+			SiegeDAO.updateSiegeLocation(loc);
 			switch (locId) {
 				case 2011:
 				case 2021:
@@ -304,7 +304,7 @@ public class SiegeService {
 		// Spawn new npc
 		spawnNpcs(loc.getLocationId(), SiegeRace.BALAUR, SiegeModType.PEACE);
 
-		DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(loc);
+		SiegeDAO.updateSiegeLocation(loc);
 	}
 
 	/**

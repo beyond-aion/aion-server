@@ -40,8 +40,8 @@ public class TownService {
 	}
 
 	private TownService() {
-		elyosTowns = DAOManager.getDAO(TownDAO.class).load(Race.ELYOS);
-		asmosTowns = DAOManager.getDAO(TownDAO.class).load(Race.ASMODIANS);
+		elyosTowns = TownDAO.load(Race.ELYOS);
+		asmosTowns = TownDAO.load(Race.ASMODIANS);
 		if (elyosTowns.size() == 0 && asmosTowns.size() == 0) {
 			for (HousingLand land : DataManager.HOUSE_DATA.getLands()) {
 				for (HouseAddress address : land.getAddresses()) {
@@ -57,7 +57,7 @@ public class TownService {
 								elyosTowns.put(town.getId(), town);
 							else
 								asmosTowns.put(town.getId(), town);
-							DAOManager.getDAO(TownDAO.class).store(town);
+							TownDAO.store(town);
 						}
 
 					}

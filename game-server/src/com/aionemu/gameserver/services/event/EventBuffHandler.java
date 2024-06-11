@@ -53,7 +53,7 @@ public class EventBuffHandler {
 	private void initBuffData() {
 		updateActiveBuffSkillIds();
 		updateAllowedBuffDays(ServerTime.now().toLocalDate().lengthOfMonth());
-		List<StoredBuffData> buffData = DAOManager.getDAO(EventDAO.class).loadStoredBuffData(eventName);
+		List<StoredBuffData> buffData = EventDAO.loadStoredBuffData(eventName);
 		if (buffData != null) {
 			for (StoredBuffData storedBuffData : buffData) {
 				if (storedBuffData.getBuffIndex() < buffs.size()) {
@@ -98,7 +98,7 @@ public class EventBuffHandler {
 			if (poolSkillIds != null && allowedDays != null)
 				storedBuffData.add(new StoredBuffData(i, poolSkillIds, allowedDays));
 		}
-		DAOManager.getDAO(EventDAO.class).storeBuffData(eventName, storedBuffData);
+		EventDAO.storeBuffData(eventName, storedBuffData);
 	}
 
 	public ForceType getEffectForceType() {

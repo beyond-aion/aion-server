@@ -24,7 +24,7 @@ public class PetList {
 	}
 
 	public void loadPets(Player player) {
-		List<PetCommonData> playerPets = DAOManager.getDAO(PlayerPetsDAO.class).getPlayerPets(player);
+		List<PetCommonData> playerPets = PlayerPetsDAO.getPlayerPets(player);
 		PetCommonData lastUsedPet = null;
 		for (PetCommonData pet : playerPets) {
 			ExpireTimerTask.getInstance().registerExpirable(pet, player);
@@ -74,7 +74,7 @@ public class PetList {
 		petCommonData.setName(name);
 		petCommonData.setBirthday(new Timestamp(birthday));
 		petCommonData.setDespawnTime(new Timestamp(System.currentTimeMillis()));
-		DAOManager.getDAO(PlayerPetsDAO.class).insertPlayerPet(player, petCommonData);
+		PlayerPetsDAO.insertPlayerPet(player, petCommonData);
 		pets.put(petId, petCommonData);
 		return petCommonData;
 	}
@@ -86,7 +86,7 @@ public class PetList {
 	public PetCommonData deletePet(int templateId) {
 		PetCommonData petCommonData = pets.remove(templateId);
 		if (petCommonData != null) {
-			DAOManager.getDAO(PlayerPetsDAO.class).removePlayerPet(petCommonData.getObjectId());
+			PlayerPetsDAO.removePlayerPet(petCommonData.getObjectId());
 			return petCommonData;
 		}
 		return null;

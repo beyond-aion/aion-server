@@ -314,7 +314,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 			CustomInstanceService.getInstance().saveNewPlayerModelEntries(playerObjId);
 			if (CustomInstanceService.getInstance().changePlayerRank(playerObjId, rank, achievedDps)) {
-				String name = player != null ? player.getName() : DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(playerObjId);
+				String name = player != null ? player.getName() : PlayerDAO.getPlayerNameByObjId(playerObjId);
 				log.info(String.format("[CI_ROAH] Rank changed for Player [id=%d, name=%s, oldRank=%s(%d), newRank=%s(%d)]", playerObjId, name,
 					CustomInstanceRankEnum.getRankDescription(oldRank), oldRank, CustomInstanceRankEnum.getRankDescription(rank), rank));
 			}

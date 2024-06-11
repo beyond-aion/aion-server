@@ -95,7 +95,7 @@ public class IdianStone extends ItemStone {
 			PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));
 			item.setIdianStone(null);
 			setPersistentState(PersistentState.DELETED);
-			DAOManager.getDAO(ItemStoneListDAO.class).storeIdianStones(this);
+			ItemStoneListDAO.storeIdianStones(this);
 		}
 	}
 

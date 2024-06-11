@@ -156,7 +156,7 @@ public class EventService {
 				if (!oldActiveEvents.contains(newActiveEvent)) {
 					if (!cleanedOldBuffData) {
 						cleanedOldBuffData = true;
-						DAOManager.getDAO(EventDAO.class).deleteOldBuffData();
+						EventDAO.deleteOldBuffData();
 					}
 					newActiveEvent.start();
 				}

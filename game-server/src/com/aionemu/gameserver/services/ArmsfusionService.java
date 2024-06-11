@@ -15,7 +15,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * This class is responsible for armsfusion related tasks (fusion and breaking, called COMPOUND and DECOMPOUND by the client)
- * 
+ *
  * @author Wakizashi, Source, xTz, Neon
  */
 public class ArmsfusionService {
@@ -90,7 +90,7 @@ public class ArmsfusionService {
 		mainWeapon.setFusionedItem(fuseWeapon);
 		ItemSocketService.copyFusionStones(fuseWeapon, mainWeapon);
 		mainWeapon.setPersistentState(PersistentState.UPDATE_REQUIRED);
-		DAOManager.getDAO(InventoryDAO.class).store(mainWeapon, player);
+		InventoryDAO.store(mainWeapon, player);
 
 		ItemPacketService.updateItemAfterInfoChange(player, mainWeapon);
 		player.getInventory().decreaseKinah(price);
@@ -130,7 +130,7 @@ public class ArmsfusionService {
 		}
 
 		weaponToBreak.setFusionedItem(null);
-		DAOManager.getDAO(InventoryDAO.class).store(weaponToBreak, player);
+		InventoryDAO.store(weaponToBreak, player);
 
 		ItemPacketService.updateItemAfterInfoChange(player, weaponToBreak);
 

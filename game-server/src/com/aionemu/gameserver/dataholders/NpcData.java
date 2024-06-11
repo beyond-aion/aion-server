@@ -25,7 +25,7 @@ import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
  * This is a container holding and serving all {@link NpcTemplate} instances.<br>
  * Briefly: Every {@link Npc} instance represents some class of NPCs among which each have the same id, name, items, statistics. Data for such NPC
  * class is defined in {@link NpcTemplate} and is uniquely identified by npc id.
- * 
+ *
  * @author Luno
  */
 @XmlRootElement(name = "npc_templates")
@@ -100,7 +100,7 @@ public class NpcData {
 
 	/**
 	 * /** Returns an {@link NpcTemplate} object with given id.
-	 * 
+	 *
 	 * @param id
 	 *          id of NPC
 	 * @return NpcTemplate object containing data about NPC with that id.

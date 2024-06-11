@@ -35,7 +35,7 @@ public class BanChar extends AdminCommand {
 
 		// Second, try to get player Id from offline player from database
 		if (playerId == 0)
-			playerId = DAOManager.getDAO(PlayerDAO.class).getPlayerIdByName(playerName);
+			playerId = PlayerDAO.getPlayerIdByName(playerName);
 
 		// Third, fail
 		if (playerId == 0) {

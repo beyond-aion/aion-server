@@ -18,7 +18,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * Automatic Announcement System
- * 
+ *
  * @author Divinity
  */
 public class AnnouncementService {
@@ -45,7 +45,7 @@ public class AnnouncementService {
 		announcements.clear();
 
 		// And load again all announcements
-		for (Announcement announcement : DAOManager.getDAO(AnnouncementsDAO.class).loadAnnouncements())
+		for (Announcement announcement : AnnouncementsDAO.loadAnnouncements())
 			schedule(announcement);
 
 		LoggerFactory.getLogger(AnnouncementService.class).info("Loaded " + announcements.size() + " announcements");
@@ -68,7 +68,7 @@ public class AnnouncementService {
 	}
 
 	public boolean addAnnouncement(String message, String faction, String chatType, int delay) {
-		int id = DAOManager.getDAO(AnnouncementsDAO.class).addAnnouncement(message, faction, chatType, delay);
+		int id = AnnouncementsDAO.addAnnouncement(message, faction, chatType, delay);
 		if (id == -1)
 			return false;
 		schedule(new Announcement(id, message, faction, chatType, delay));
@@ -76,7 +76,7 @@ public class AnnouncementService {
 	}
 
 	public boolean delAnnouncement(int id) {
-		if (announcements.remove(id) == null || !DAOManager.getDAO(AnnouncementsDAO.class).delAnnouncement(id))
+		if (announcements.remove(id) == null || !AnnouncementsDAO.delAnnouncement(id))
 			return false;
 		Future<?> delay = delays.remove(id);
 		if (delay != null)

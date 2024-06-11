@@ -100,7 +100,7 @@ public final class PlayerEnterWorldService {
 		}
 
 		if (pcd.isOnline()) { // character should soon leave the world (due to previous client crash)
-			if (DAOManager.getDAO(PlayerDAO.class).isOnline(objectId)) {
+			if (PlayerDAO.isOnline(objectId)) {
 				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.REENTRY_TIME));
 				return;
 			} else { // reload pcd, appearance, acc warehouse, ... since char was saved after acc logged in (delayed kick)
@@ -124,7 +124,7 @@ public final class PlayerEnterWorldService {
 				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
 				return;
 			} else {
-				DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(objectId, PunishmentType.CHARBAN);
+				PlayerPunishmentsDAO.unpunishPlayer(objectId, PunishmentType.CHARBAN);
 			}
 		}
 
@@ -132,7 +132,7 @@ public final class PlayerEnterWorldService {
 		if (SecurityConfig.PASSKEY_ENABLE && !account.getCharacterPasskey().isPass()) {
 			account.getCharacterPasskey().setConnectType(ConnectType.ENTER);
 			account.getCharacterPasskey().setObjectId(objectId);
-			boolean isExistPasskey = DAOManager.getDAO(PlayerPasskeyDAO.class).existCheckPlayerPasskey(account.getId());
+			boolean isExistPasskey = PlayerPasskeyDAO.existCheckPlayerPasskey(account.getId());
 			client.sendPacket(new SM_CHARACTER_SELECT(!isExistPasskey ? 0 : 1));
 			return;
 		}
@@ -191,7 +191,7 @@ public final class PlayerEnterWorldService {
 			} catch (Throwable ex) {
 				player.getController().delete();
 				pcd.setOnline(false);
-				DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false);
+				PlayerDAO.onlinePlayer(player, false);
 				player.setClientConnection(null);
 				client.setActivePlayer(null);
 				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.CONNECTION_ERROR));
@@ -213,8 +213,8 @@ public final class PlayerEnterWorldService {
 			throw new IllegalStateException("Couldn't set active player");
 		pcd.setOnline(true);
 		player.getFriendList().setStatus(Status.ONLINE, pcd);
-		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, true);
-		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), new Timestamp(System.currentTimeMillis()));
+		PlayerDAO.onlinePlayer(player, true);
+		PlayerDAO.storeLastOnlineTime(player.getObjectId(), new Timestamp(System.currentTimeMillis()));
 		log.info("Player " + player.getName() + " (account " + account.getName() + ") has entered world with " + client.getMacAddress() + " MAC and "
 			+ client.getHddSerial() + " HDD serial.");
 		pcd.setInEditMode(false);
@@ -226,7 +226,7 @@ public final class PlayerEnterWorldService {
 			validateVortexZone(player);
 
 		// if player skipped some levels offline, learn missing skills and stuff
-		player.getController().onLevelChange(DAOManager.getDAO(PlayerDAO.class).getOldCharacterLevel(player.getObjectId()), player.getLevel());
+		player.getController().onLevelChange(PlayerDAO.getOldCharacterLevel(player.getObjectId()), player.getLevel());
 
 		// Energy of Repose must be calculated before sending SM_STATS_INFO
 		if (pcd.getLastOnline() != null) {
@@ -527,10 +527,10 @@ class GeneralUpdateTask implements Runnable {
 		Player player = World.getInstance().getPlayer(playerId);
 		if (player != null) {
 			try {
-				DAOManager.getDAO(AbyssRankDAO.class).storeAbyssRank(player);
-				DAOManager.getDAO(PlayerSkillListDAO.class).storeSkills(player);
-				DAOManager.getDAO(PlayerQuestListDAO.class).store(player);
-				DAOManager.getDAO(PlayerDAO.class).storePlayer(player);
+				AbyssRankDAO.storeAbyssRank(player);
+				PlayerSkillListDAO.storeSkills(player);
+				PlayerQuestListDAO.store(player);
+				PlayerDAO.storePlayer(player);
 				for (House house : player.getHouses())
 					house.save();
 			} catch (Exception ex) {
@@ -554,8 +554,8 @@ class ItemUpdateTask implements Runnable {
 		Player player = World.getInstance().getPlayer(playerId);
 		if (player != null) {
 			try {
-				DAOManager.getDAO(InventoryDAO.class).store(player);
-				DAOManager.getDAO(ItemStoneListDAO.class).save(player);
+				InventoryDAO.store(player);
+				ItemStoneListDAO.save(player);
 			} catch (Exception ex) {
 				log.error("Exception during periodic saving of player items " + player.getName(), ex);
 			}

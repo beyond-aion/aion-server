@@ -83,7 +83,7 @@ public class ChallengeTaskService {
 		int playerTownId = TownService.getInstance().getTownResidence(player);
 		List<ChallengeTask> availableTasks = new ArrayList<>();
 		if (!taskMap.containsKey(ownerId)) {
-			Map<Integer, ChallengeTask> tasks = DAOManager.getDAO(ChallengeTasksDAO.class).load(ownerId, challengeType);
+			Map<Integer, ChallengeTask> tasks = ChallengeTasksDAO.load(ownerId, challengeType);
 			taskMap.put(ownerId, tasks);
 		}
 		for (ChallengeTask ct : taskMap.get(ownerId).values()) {
@@ -100,7 +100,7 @@ public class ChallengeTaskService {
 						if (template.getPrevTask() == null) {
 							ChallengeTask task = new ChallengeTask(ownerId, template);
 							taskMap.get(ownerId).put(task.getTaskId(), task);
-							DAOManager.getDAO(ChallengeTasksDAO.class).storeTask(task);
+							ChallengeTasksDAO.storeTask(task);
 							availableTasks.add(task);
 						} else {
 							int prevTaskId = template.getPrevTask();
@@ -109,7 +109,7 @@ public class ChallengeTaskService {
 								if (prevTask.isCompleted()) {
 									ChallengeTask task = new ChallengeTask(ownerId, template);
 									taskMap.get(ownerId).put(task.getTaskId(), task);
-									DAOManager.getDAO(ChallengeTasksDAO.class).storeTask(task);
+									ChallengeTasksDAO.storeTask(task);
 									availableTasks.add(task);
 								}
 							}
@@ -155,7 +155,7 @@ public class ChallengeTaskService {
 		if (quest.getCompleteCount() < quest.getMaxRepeats() && !task.isCompleted()) {
 			task.updateCompleteTime();
 			quest.increaseCompleteCount();
-			DAOManager.getDAO(ChallengeTasksDAO.class).storeTask(task);
+			ChallengeTasksDAO.storeTask(task);
 			Town town = TownService.getInstance().getTownById(townId);
 			if (town != null) {
 				int oldLevel = town.getLevel();
@@ -173,7 +173,7 @@ public class ChallengeTaskService {
 				}
 				if (town.getLevel() != oldLevel)
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_TOWN_LEVEL_LEVEL_UP(town.getL10n(), town.getLevel()));
-				DAOManager.getDAO(TownDAO.class).store(town);
+				TownDAO.store(town);
 			}
 		}
 	}
@@ -211,7 +211,7 @@ public class ChallengeTaskService {
 			task.updateCompleteTime();
 			quest.increaseCompleteCount();
 			player.getLegion().getOnlineLegionMembers().forEach(p -> showTaskList(p, ChallengeType.LEGION, legionId));
-			DAOManager.getDAO(ChallengeTasksDAO.class).storeTask(task);
+			ChallengeTasksDAO.storeTask(task);
 			if (task.isCompleted()) {
 				TreeMap<Integer, List<Integer>> winnersByPoints = new TreeMap<>();
 				for (Integer memberObjId : player.getLegion().getLegionMembers()) {
@@ -243,7 +243,7 @@ public class ChallengeTaskService {
 
 	public boolean canRaiseLegionLevel(Legion legion, Player actingPlayer) {
 		Map<Integer, ChallengeTask> tasks = legionTasks.computeIfAbsent(legion.getLegionId(),
-			id -> DAOManager.getDAO(ChallengeTasksDAO.class).load(id, ChallengeType.LEGION));
+			id -> ChallengeTasksDAO.load(id, ChallengeType.LEGION));
 		List<ChallengeTask> requiredTasksForLevel = new ArrayList<>();
 		for (ChallengeTask task : tasks.values()) {
 			ChallengeTaskTemplate taskTemplate = task.getTemplate();

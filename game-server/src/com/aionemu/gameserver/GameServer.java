@@ -78,7 +78,7 @@ import ch.qos.logback.classic.ClassicConstants;
 /**
  * <tt>GameServer</tt> is the main class of the application and represents the whole game server.<br>
  * This class is also an entry point with main() method.
- * 
+ *
  * @author -Nemesiss-, SoulKeeper, cura, Neon
  */
 public class GameServer {
@@ -182,7 +182,7 @@ public class GameServer {
 		BaseService.getInstance();
 		SiegeService.getInstance();
 		WorldRaidService.getInstance().initWorldRaidLocations();
-		// DAOManager.getDAO(SiegeMercenariesDAO.class).loadActiveMercenaries();
+		// SiegeMercenariesDAO.loadActiveMercenaries();
 		VortexService.getInstance().initVortexLocations();
 		RiftService.getInstance().initRiftLocations();
 		LegionDominionService.getInstance().initLocations();
@@ -200,8 +200,8 @@ public class GameServer {
 		RiftService.getInstance().initRifts();
 
 		if (GSConfig.ENABLE_RATIO_LIMITATION) { // TODO move all of this stuff in a separate class / service
-			ASMOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ASMODIANS);
-			ELYOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ELYOS);
+			ASMOS_COUNT = PlayerDAO.getCharacterCountForRace(Race.ASMODIANS);
+			ELYOS_COUNT = PlayerDAO.getCharacterCountForRace(Race.ELYOS);
 			updateRatio(null, 0);
 		}
 		LimitedItemTradeService.getInstance().start();
@@ -290,8 +290,8 @@ public class GameServer {
 		// Second should be database factory
 		DatabaseFactory.init();
 		// Initialize DAOs
-		DAOManager.init();
-		DAOManager.getDAO(PlayerDAO.class).setAllPlayersOffline();
+		//DAOManager.init(); //TODO remove
+		PlayerDAO.setAllPlayersOffline();
 		// Initialize thread pools
 		ThreadPoolManager.getInstance();
 

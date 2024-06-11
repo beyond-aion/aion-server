@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.OldNamesDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -80,10 +79,10 @@ public class CM_APPEARANCE extends AionClientPacket {
 			|| !player.getInventory().decreaseByObjectId(itemObjId, 1))
 			AuditLogger.log(player, "tried to rename himself without coupon");
 		else {
-			DAOManager.getDAO(OldNamesDAO.class).insertNames(player.getObjectId(), oldName, newName);
+			OldNamesDAO.insertNames(player.getObjectId(), oldName, newName);
 
 			player.getCommonData().setName(newName);
-			DAOManager.getDAO(PlayerDAO.class).storePlayer(player);
+			PlayerDAO.storePlayer(player);
 			onPlayerNameChanged(player, oldName);
 		}
 	}
@@ -101,7 +100,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_SAME_YOUR_NAME());
 		else if (!NameRestrictionService.isValidLegionName(newName) || NameRestrictionService.isForbidden(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_WRONG_INPUT());
-		else if (DAOManager.getDAO(LegionDAO.class).isNameUsed(newName))
+		else if (LegionDAO.isNameUsed(newName))
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ALREADY_EXIST());
 		else if ((player.getInventory().getItemByObjId(itemObjId).getItemId() != 169680000 && player.getInventory().getItemByObjId(itemObjId).getItemId() != 169680001)
 			|| !player.getInventory().decreaseByObjectId(itemObjId, 1))
@@ -111,7 +110,7 @@ public class CM_APPEARANCE extends AionClientPacket {
 
 			String oldName = legion.getName();
 			legion.setName(newName);
-			DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
+			LegionDAO.storeLegion(legion);
 			LegionService.getInstance().updateCachedLegionName(oldName, legion);
 			PacketSendUtility.broadcastToWorld(new SM_RENAME(legion, oldName)); // broadcast to world to update all keeps, member's tags, etc.
 		}

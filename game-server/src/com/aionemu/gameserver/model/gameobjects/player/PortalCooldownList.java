@@ -73,7 +73,7 @@ public class PortalCooldownList {
 		portalCooldown.increaseEnterCount();
 		portalCooldowns.put(worldId, portalCooldown);
 
-		DAOManager.getDAO(PortalCooldownsDAO.class).storePortalCooldowns(owner);
+		PortalCooldownsDAO.storePortalCooldowns(owner);
 
 		sendEntryInfo(worldId);
 	}

@@ -26,7 +26,7 @@ public class UnBanChar extends AdminCommand {
 
 		// Banned player must be offline
 		String name = Util.convertName(params[0]);
-		int playerId = DAOManager.getDAO(PlayerDAO.class).getPlayerIdByName(name);
+		int playerId = PlayerDAO.getPlayerIdByName(name);
 		if (playerId == 0) {
 			PacketSendUtility.sendMessage(admin, "Player " + name + " was not found!");
 			PacketSendUtility.sendMessage(admin, "Syntax: //unbanchar <player>");

@@ -12,13 +12,13 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * Handles activities related to social groups ingame such as the buddy list, block list, etc
- * 
+ *
  * @author Ben, Neon
  */
 public class SocialService {
 
 	public static boolean addBlockedUser(Player player, Player blockedPlayer, String reason) {
-		if (DAOManager.getDAO(BlockListDAO.class).addBlockedUser(player.getObjectId(), blockedPlayer.getObjectId(), reason)) {
+		if (BlockListDAO.addBlockedUser(player.getObjectId(), blockedPlayer.getObjectId(), reason)) {
 			player.getBlockList().add(new BlockedPlayer(blockedPlayer.getObjectId(), blockedPlayer.getName(), reason));
 			PacketSendUtility.sendPacket(player, new SM_BLOCK_LIST());
 			PacketSendUtility.sendPacket(player, new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.BLOCK_SUCCESSFUL, blockedPlayer.getName()));
@@ -28,7 +28,7 @@ public class SocialService {
 	}
 
 	public static boolean deleteBlockedUser(Player player, BlockedPlayer target) {
-		if (DAOManager.getDAO(BlockListDAO.class).delBlockedUser(player.getObjectId(), target.getObjId())) {
+		if (BlockListDAO.delBlockedUser(player.getObjectId(), target.getObjId())) {
 			player.getBlockList().remove(target.getObjId());
 			PacketSendUtility.sendPacket(player, new SM_BLOCK_LIST());
 			PacketSendUtility.sendPacket(player, new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.UNBLOCK_SUCCESSFUL, target.getName()));
@@ -39,7 +39,7 @@ public class SocialService {
 
 	/**
 	 * Sets the reason for blocking a user
-	 * 
+	 *
 	 * @param player
 	 *          Player whos block list is to be edited
 	 * @param target
@@ -50,7 +50,7 @@ public class SocialService {
 	 */
 	public static boolean setBlockedReason(Player player, BlockedPlayer target, String reason) {
 		if (!target.getReason().equals(reason)) {
-			if (DAOManager.getDAO(BlockListDAO.class).setReason(player.getObjectId(), target.getObjId(), reason)) {
+			if (BlockListDAO.setReason(player.getObjectId(), target.getObjId(), reason)) {
 				target.setReason(reason);
 				PacketSendUtility.sendPacket(player, new SM_BLOCK_LIST());
 				PacketSendUtility.sendPacket(player, new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.EDIT_NOTE, target.getName()));
@@ -65,7 +65,7 @@ public class SocialService {
 	 */
 	public static boolean setFriendMemo(Player player, Friend target, String memo) {
 		if (!target.getFriendMemo().equals(memo)) {
-			if (DAOManager.getDAO(FriendListDAO.class).setFriendMemo(player.getObjectId(), target.getObjectId(), memo)) {
+			if (FriendListDAO.setFriendMemo(player.getObjectId(), target.getObjectId(), memo)) {
 				target.setFriendMemo(memo);
 				PacketSendUtility.sendPacket(player, new SM_FRIEND_LIST());
 				return true;
@@ -76,13 +76,13 @@ public class SocialService {
 
 	/**
 	 * Adds two players to each others friend lists, and updates the database
-	 * 
+	 *
 	 * @return True on success
 	 */
 	public static boolean makeFriends(Player friend1, Player friend2) {
 		if (friend1.getFriendList().getFriend(friend2.getObjectId()) != null)
 			return false;
-		if (DAOManager.getDAO(FriendListDAO.class).addFriends(friend1, friend2)) {
+		if (FriendListDAO.addFriends(friend1, friend2)) {
 			friend1.getFriendList().addFriend(new Friend(friend2.getCommonData(), ""));
 			friend2.getFriendList().addFriend(new Friend(friend1.getCommonData(), ""));
 
@@ -98,7 +98,7 @@ public class SocialService {
 
 	/**
 	 * Deletes two players from eachother's friend lists, and updates the database
-	 * 
+	 *
 	 * @param deleter
 	 *          Player deleting a friend
 	 * @param friend
@@ -107,7 +107,7 @@ public class SocialService {
 	 */
 	public static boolean deleteFriend(Player deleter, Friend friend) {
 		int friendObjId = friend.getObjectId();
-		if (DAOManager.getDAO(FriendListDAO.class).delFriends(deleter.getObjectId(), friendObjId)) {
+		if (FriendListDAO.delFriends(deleter.getObjectId(), friendObjId)) {
 			Player friendPlayer = World.getInstance().getPlayer(friendObjId);
 			if (friendPlayer != null) {
 				friendPlayer.getFriendList().delFriend(deleter.getObjectId());

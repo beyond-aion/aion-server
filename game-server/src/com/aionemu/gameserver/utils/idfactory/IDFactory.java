@@ -32,13 +32,13 @@ public class IDFactory {
 
 	/**
 	 * Npcs with objectIds that match this bit pattern are always invisible on client side, not sure why:
-	 * 
+	 *
 	 * <pre>
 	 * ??0??000000??00?0?11001010101??
 	 * </pre>
-	 * 
+	 *
 	 * Invalid ID examples:
-	 * 
+	 *
 	 * <pre>
 	 * 6484, 6485, 6486, 6487,
 	 * 14676, 14677, 14678, 14679,
@@ -48,7 +48,7 @@ public class IDFactory {
 	 * ...
 	 * 1812773204, 1812773205, 1812773206, 1812773207
 	 * </pre>
-	 * 
+	 *
 	 * We forbid them to ensure they'll never get assigned to an npc.
 	 */
 	private static final int INVALID_ID_BIT_MASK = 0b0010011111100110101111111111100;
@@ -74,15 +74,25 @@ public class IDFactory {
 		idList = new BitSet();
 		lock = new ReentrantLock();
 		lockIds(0);
+		// TODO - I can refactor later
+		PlayerDAO playerDAO = new PlayerDAO();
+		InventoryDAO inventoryDAO = new InventoryDAO();
+		PlayerRegisteredItemsDAO playerRegisteredItemsDAO = new PlayerRegisteredItemsDAO();
+		LegionDAO legionDAO = new LegionDAO();
+		MailDAO mailDAO = new MailDAO();
+		GuideDAO guideDAO = new GuideDAO();
+		HousesDAO housesDAO = new HousesDAO();
+		PlayerPetsDAO playerPetsDAO = new PlayerPetsDAO();
+
 		// Here should be calls to all IDFactoryAwareDAO implementations to initialize already used IDs
-		lockIds(DAOManager.getDAO(PlayerDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(InventoryDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(PlayerRegisteredItemsDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(LegionDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(MailDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(GuideDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(HousesDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(PlayerPetsDAO.class).getUsedIDs());
+		lockIds(playerDAO.getUsedIDs());
+		lockIds(inventoryDAO.getUsedIDs());
+		lockIds(playerRegisteredItemsDAO.getUsedIDs());
+		lockIds(legionDAO.getUsedIDs());
+		lockIds(mailDAO.getUsedIDs());
+		lockIds(guideDAO.getUsedIDs());
+		lockIds(housesDAO.getUsedIDs());
+		lockIds(playerPetsDAO.getUsedIDs());
 
 		log.info("IDFactory: " + getUsedCount() + " IDs used.");
 	}
@@ -159,7 +169,7 @@ public class IDFactory {
 
 	/**
 	 * Internal helper method without synchronization
-	 * 
+	 *
 	 * @return True if the ID could be released, false if it was not taken
 	 */
 	private boolean release(int id) {

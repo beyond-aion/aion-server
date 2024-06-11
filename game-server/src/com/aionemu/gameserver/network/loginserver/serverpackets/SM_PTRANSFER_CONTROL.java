@@ -176,8 +176,8 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 			case ITEMS_INFORMATION:
 				writeD(this.taskId);
 				// inventory
-				List<Item> inv = DAOManager.getDAO(InventoryDAO.class).loadStorageDirect(this.player.getObjectId(), StorageType.CUBE);
-				inv.addAll(DAOManager.getDAO(InventoryDAO.class).loadStorageDirect(this.player.getObjectId(), StorageType.REGULAR_WAREHOUSE));
+				List<Item> inv = InventoryDAO.loadStorageDirect(this.player.getObjectId(), StorageType.CUBE);
+				inv.addAll(InventoryDAO.loadStorageDirect(this.player.getObjectId(), StorageType.REGULAR_WAREHOUSE));
 				writeD(inv.size());
 				ItemService.loadItemStones(inv);
 				for (Item item : inv) {

@@ -26,7 +26,7 @@ public class UnBan extends AdminCommand {
 
 		// Banned player must be offline, so get his account ID from database
 		String name = Util.convertName(params[0]);
-		int accountId = DAOManager.getDAO(PlayerDAO.class).getAccountIdByName(name);
+		int accountId = PlayerDAO.getAccountIdByName(name);
 		if (accountId == 0) {
 			PacketSendUtility.sendMessage(admin, "Player " + name + " was not found!");
 			PacketSendUtility.sendMessage(admin, "Syntax: //unban <player> [account|ip|full]");

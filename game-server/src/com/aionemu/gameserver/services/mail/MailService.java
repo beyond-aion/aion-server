@@ -65,7 +65,7 @@ public class MailService {
 		if (message.length() > 1000)
 			message = message.substring(0, 1000);
 
-		PlayerCommonData recipientCommonData = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonDataByName(recipientName);
+		PlayerCommonData recipientCommonData = PlayerDAO.loadPlayerCommonDataByName(recipientName);
 		MailMessage status = validateRecipient(sender, recipientCommonData);
 		if (status != MailMessage.MAIL_SEND_SUCCESS) {
 			PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(status));
@@ -149,13 +149,13 @@ public class MailService {
 
 		// first save attached item for FK consistency
 		if (attachedItem != null) {
-			if (!DAOManager.getDAO(InventoryDAO.class).store(attachedItem, recipientCommonData.getPlayerObjId()))
+			if (!InventoryDAO.store(attachedItem, recipientCommonData.getPlayerObjId()))
 				return;
 			// save item stones too
-			DAOManager.getDAO(ItemStoneListDAO.class).save(Collections.singletonList(attachedItem));
+			ItemStoneListDAO.save(Collections.singletonList(attachedItem));
 		}
 		// save letter
-		if (!DAOManager.getDAO(MailDAO.class).storeLetter(newLetter))
+		if (!MailDAO.storeLetter(newLetter))
 			return;
 
 		if (attachedItem != null && LoggingConfig.LOG_MAIL)
@@ -174,7 +174,7 @@ public class MailService {
 		if (recipientCommonData.getMailboxLetters() >= 100)
 			return MailMessage.RECIPIENT_MAILBOX_FULL;
 		Player p = World.getInstance().getPlayer(recipientCommonData.getPlayerObjId());
-		BlockList blockList = p != null ? p.getBlockList() : DAOManager.getDAO(BlockListDAO.class).load(recipientCommonData.getPlayerObjId());
+		BlockList blockList = p != null ? p.getBlockList() : BlockListDAO.load(recipientCommonData.getPlayerObjId());
 		if (blockList.contains(sender.getObjectId()))
 			return MailMessage.YOU_ARE_IN_RECIPIENT_IGNORE_LIST;
 		return MailMessage.MAIL_SEND_SUCCESS;
@@ -226,7 +226,7 @@ public class MailService {
 				}
 				if (attachedItem.getExpireTime() != 0 && attachedItem.getExpireTime() <= System.currentTimeMillis() / 1000) {
 					attachedItem.setPersistentState(PersistentState.DELETED);
-					DAOManager.getDAO(InventoryDAO.class).store(attachedItem, player);
+					InventoryDAO.store(attachedItem, player);
 				} else {
 					if (player.getInventory().add(attachedItem, ItemPacketService.ItemAddType.MAIL) == null)
 						return;
@@ -240,7 +240,7 @@ public class MailService {
 				// fix for kinah dupe
 				long attachedKinahCount = letter.getAttachedKinah();
 				letter.removeAttachedKinah();
-				if (!DAOManager.getDAO(MailDAO.class).storeLetter(letter)) {
+				if (!MailDAO.storeLetter(letter)) {
 					AuditLogger.log(player, "tried to use kinah mail exploit. Location: " + player.getPosition() + ", kinah count: " + attachedKinahCount);
 					return;
 				}
@@ -254,13 +254,13 @@ public class MailService {
 		Mailbox mailbox = player.getMailbox();
 		for (int letterId : mailObjId) {
 			mailbox.removeLetter(letterId);
-			DAOManager.getDAO(MailDAO.class).deleteLetter(letterId);
+			MailDAO.deleteLetter(letterId);
 		}
 		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE(mailObjId));
 	}
 
 	public static void onPlayerLogin(Player player) {
-		player.setMailbox(DAOManager.getDAO(MailDAO.class).loadPlayerMailbox(player));
+		player.setMailbox(MailDAO.loadPlayerMailbox(player));
 		PacketSendUtility.sendPacket(player, new SM_MAIL_SERVICE());
 	}
 

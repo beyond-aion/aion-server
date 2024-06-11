@@ -24,7 +24,7 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * Use this service to send raw html to the client.
- * 
+ *
  * @author lhw, xTz
  */
 public class HTMLService {
@@ -82,13 +82,13 @@ public class HTMLService {
 					continue;
 				int id = IDFactory.getInstance().nextId();
 				sendData(player, id, getHTMLTemplate(template));
-				DAOManager.getDAO(GuideDAO.class).saveGuide(id, player, template.getTitle());
+				GuideDAO.saveGuide(id, player, template.getTitle());
 			}
 		}
 	}
 
 	public static void onPlayerLogin(Player player) {
-		List<Guide> guides = DAOManager.getDAO(GuideDAO.class).loadGuides(player.getObjectId());
+		List<Guide> guides = GuideDAO.loadGuides(player.getObjectId());
 
 		for (Guide guide : guides) {
 			GuideTemplate template = DataManager.GUIDE_HTML_DATA.getTemplateByTitle(guide.getTitle());
@@ -110,7 +110,7 @@ public class HTMLService {
 			return;
 		}
 
-		Guide guide = DAOManager.getDAO(GuideDAO.class).loadGuide(player.getObjectId(), messageId);
+		Guide guide = GuideDAO.loadGuide(player.getObjectId(), messageId);
 
 		if (guide != null) {
 			GuideTemplate template = DataManager.GUIDE_HTML_DATA.getTemplateByTitle(guide.getTitle());
@@ -141,7 +141,7 @@ public class HTMLService {
 					log.info(String.format("[ITEM] Item Guide ID/Count - %d/%d to player %s.", item.getItemId(), item.getCount(), player.getName()));
 				}
 			}
-			DAOManager.getDAO(GuideDAO.class).deleteGuide(guide.getGuideId());
+			GuideDAO.deleteGuide(guide.getGuideId());
 			IDFactory.getInstance().releaseId(guide.getGuideId());
 			items.clear();
 		}

@@ -15,7 +15,6 @@ import com.aionemu.gameserver.services.mail.SystemMailService;
 public class BonusPackService {
 
 	private static final BonusPackService INSTANCE = new BonusPackService();
-	private final BonusPackDAO dao = DAOManager.getDAO(BonusPackDAO.class);
 	private final HashMap<Integer, Integer> rewards = new HashMap<>();
 
 	public static BonusPackService getInstance() {
@@ -49,10 +48,10 @@ public class BonusPackService {
 			return;
 
 		int accountId = player.getAccount().getId();
-		if (dao.loadReceivingPlayer(accountId) > 0)
+		if (BonusPackDAO.loadReceivingPlayer(accountId) > 0)
 			return;
 
-		if (!dao.storeReceivingPlayer(accountId, player.getObjectId()))
+		if (!BonusPackDAO.storeReceivingPlayer(accountId, player.getObjectId()))
 			return;
 
 		for (Map.Entry<Integer, Integer> e : rewards.entrySet()) {

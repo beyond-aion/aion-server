@@ -35,7 +35,7 @@ public class ItemService {
 
 	public static void loadItemStones(Collection<Item> itemList) {
 		if (itemList != null && itemList.size() > 0) {
-			DAOManager.getDAO(ItemStoneListDAO.class).load(itemList);
+			ItemStoneListDAO.load(itemList);
 		}
 	}
 

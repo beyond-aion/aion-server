@@ -39,7 +39,7 @@ public class Ban extends AdminCommand {
 
 		// Second, try to get account ID of offline player from database
 		if (accountId == 0)
-			accountId = DAOManager.getDAO(PlayerDAO.class).getAccountIdByName(name);
+			accountId = PlayerDAO.getAccountIdByName(name);
 
 		// Third, fail
 		if (accountId == 0) {

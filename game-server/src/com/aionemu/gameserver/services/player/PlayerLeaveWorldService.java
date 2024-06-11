@@ -48,7 +48,7 @@ public class PlayerLeaveWorldService {
 	 * This method is called when a player loses client connection, e.g. when killing the process, or due to bad network connectivity.<br>
 	 * <br>
 	 * <b><font color='red'>NOTICE:</font> This method must only be called from {@link AionConnection#onDisconnect()} and not from anywhere else</b>
-	 * 
+	 *
 	 * @see #leaveWorld(Player)
 	 */
 	public static void leaveWorldDelayed(Player player, long delayInMillis) {
@@ -104,10 +104,10 @@ public class PlayerLeaveWorldService {
 			DuelService.getInstance().loseDuel(player);
 		}
 		// store current effects
-		DAOManager.getDAO(PlayerEffectsDAO.class).storePlayerEffects(player);
-		DAOManager.getDAO(PlayerCooldownsDAO.class).storePlayerCooldowns(player);
-		DAOManager.getDAO(ItemCooldownsDAO.class).storeItemCooldowns(player);
-		DAOManager.getDAO(PlayerLifeStatsDAO.class).updatePlayerLifeStat(player);
+		PlayerEffectsDAO.storePlayerEffects(player);
+		PlayerCooldownsDAO.storePlayerCooldowns(player);
+		ItemCooldownsDAO.storeItemCooldowns(player);
+		PlayerLifeStatsDAO.updatePlayerLifeStat(player);
 
 		PlayerGroupService.onPlayerLogout(player);
 		PlayerAllianceService.onPlayerLogout(player);
@@ -145,9 +145,9 @@ public class PlayerLeaveWorldService {
 		player.getWarehouse().setOwner(null);
 		player.getAccount().getAccountWarehouse().setOwner(null);
 
-		DAOManager.getDAO(PlayerDAO.class).storeOldCharacterLevel(player.getObjectId(), player.getLevel());
-		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), lastOnline);
-		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false); // marks that player was fully saved and may enter world again
+		PlayerDAO.storeOldCharacterLevel(player.getObjectId(), player.getLevel());
+		PlayerDAO.storeLastOnlineTime(player.getObjectId(), lastOnline);
+		PlayerDAO.onlinePlayer(player, false); // marks that player was fully saved and may enter world again
 
 		con.setActivePlayer(null);
 	}

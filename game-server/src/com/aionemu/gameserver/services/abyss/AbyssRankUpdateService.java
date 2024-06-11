@@ -45,7 +45,7 @@ public class AbyssRankUpdateService {
 			// update and store rank statistics for all online players (offline players update on login)
 			World.getInstance().forEachPlayer(player -> {
 				player.getAbyssRank().doUpdate();
-				DAOManager.getDAO(AbyssRankDAO.class).storeAbyssRank(player);
+				AbyssRankDAO.storeAbyssRank(player);
 			});
 
 			AbyssRankEnum minGpRank = Arrays.stream(AbyssRankEnum.values())
@@ -57,7 +57,7 @@ public class AbyssRankUpdateService {
 					.max().orElse(1000);
 
 			// update and store player & legion DB rank_pos entries (for ▼/▲/= trend in the ranking table)
-			DAOManager.getDAO(AbyssRankDAO.class).updateRankingLists(RankingConfig.TOP_RANKING_MAX_OFFLINE_DAYS, playerLimit, RankingConfig.RANKING_LIST_LEGION_LIMIT);
+			AbyssRankDAO.updateRankingLists(RankingConfig.TOP_RANKING_MAX_OFFLINE_DAYS, playerLimit, RankingConfig.RANKING_LIST_LEGION_LIMIT);
 			// update and store GP ranks
 			updateQuotaRanksForRace(Race.ASMODIANS, minGpRank);
 			updateQuotaRanksForRace(Race.ELYOS, minGpRank);
@@ -77,7 +77,7 @@ public class AbyssRankUpdateService {
 	 *          the minimum rank that will be updated (all lower GP ranks are disabled)
 	 */
 	private static void updateQuotaRanksForRace(Race race, AbyssRankEnum minRank) {
-		List<RankingListPlayerGp> rankingListSorted = DAOManager.getDAO(AbyssRankDAO.class).loadRankingListPlayersGp(race);
+		List<RankingListPlayerGp> rankingListSorted = AbyssRankDAO.loadRankingListPlayersGp(race);
 		if (rankingListSorted == null)
 			return;
 
@@ -87,7 +87,7 @@ public class AbyssRankUpdateService {
 			usedQuota = selectAndUpdateQuotaRank(AbyssRankEnum.getRankById(i), rankingListSorted, usedQuota);
 
 		// set all players with an old GP rank to AP ranks if they hold no rank position anymore
-		Map<Integer, Integer> apByPlayerId = DAOManager.getDAO(AbyssRankDAO.class).loadApOfPlayersNotInRankingList(race, minRank);
+		Map<Integer, Integer> apByPlayerId = AbyssRankDAO.loadApOfPlayersNotInRankingList(race, minRank);
 		if (apByPlayerId != null)
 			updateToNoQuotaRank(apByPlayerId);
 	}
@@ -120,18 +120,18 @@ public class AbyssRankUpdateService {
 			if (rankChanged) {
 				player.getAbyssRank().setRank(newRank);
 				// save to db now, so cache reload loads the correct rank for online players
-				DAOManager.getDAO(AbyssRankDAO.class).updateAbyssRank(playerId, newRank);
+				AbyssRankDAO.updateAbyssRank(playerId, newRank);
 			}
 			AbyssPointsService.onRankChanged(player, false, rankChanged, rankingPosition);
 		} else {
-			DAOManager.getDAO(AbyssRankDAO.class).updateAbyssRank(playerId, newRank);
+			AbyssRankDAO.updateAbyssRank(playerId, newRank);
 		}
 	}
 
 	private static void updateDailyGpLoss() {
 		for (AbyssRankEnum rank : AbyssRankEnum.values()) {
 			if (rank.getGpLossPerDay() > 0)
-				DAOManager.getDAO(AbyssRankDAO.class).dailyUpdateGp(rank);
+				AbyssRankDAO.dailyUpdateGp(rank);
 		}
 		for (Player p : World.getInstance().getAllPlayers()) {
 			if (p.getAbyssRank().getRank().getGpLossPerDay() > 0) {

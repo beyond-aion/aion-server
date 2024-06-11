@@ -28,7 +28,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
  * Created on 01.06.2016
  * A command that handles analysis and rewarding for seasonal head hunting events.
  * Take care when using the reward parameter, it will clean all references including the database tables.
- * 
+ *
  * @author Estrayl
  * @since AION 4.8
  */
@@ -295,7 +295,7 @@ public class Headhunting extends AdminCommand {
 			rewardPlayers(admin);
 
 		PvpService.getInstance().finalizeHeadhuntingSeason();
-		DAOManager.getDAO(HeadhuntingDAO.class).clearTables();
+		HeadhuntingDAO.clearTables();
 		results.clear();
 		results = null;
 		sendInfo(admin, "Successfully cleared all references for this season and finished archiving.");

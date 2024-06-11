@@ -39,7 +39,7 @@ public class HousingBidService {
 	private Map<Integer, HouseBids> bids;
 
 	private HousingBidService() {
-		bids = DAOManager.getDAO(HouseBidsDAO.class).loadBids();
+		bids = HouseBidsDAO.loadBids();
 		setBidInfoToHouses();
 		log.info("Loaded bids for " + bids.size() + " houses");
 	}
@@ -75,7 +75,7 @@ public class HousingBidService {
 			return false;
 		if (house.getPersistentState() == Persistable.PersistentState.NEW) // house must exist in DB before saving a bid due to foreign key
 			house.save();
-		if (!DAOManager.getDAO(HouseBidsDAO.class).addBid(bid)) {
+		if (!HouseBidsDAO.addBid(bid)) {
 			bids.remove(house.getObjectId(), houseBids);
 			return false;
 		}
@@ -123,7 +123,7 @@ public class HousingBidService {
 			return null;
 		}
 		if (AuctionEndTask.getInstance().tryProlongAuction(bid.getHouseObjectId()))
-			DAOManager.getDAO(HouseBidsDAO.class).addBid(bid); // no need to save the bid if prolongation failed (the auction just ended)
+			HouseBidsDAO.addBid(bid); // no need to save the bid if prolongation failed (the auction just ended)
 		player.getInventory().decreaseKinah(bid.getKinah());
 		House bidHouse = HousingService.getInstance().findHouse(bid.getHouseObjectId());
 		if (previousBid != houseBids.getInitialOffer() && previousBid.getPlayerObjectId() != 0) {
@@ -203,7 +203,7 @@ public class HousingBidService {
 	public boolean endAuction(int houseObjectId) {
 		AuctionEndTask.getInstance().onAuctionEnd(houseObjectId);
 		HouseBids bids;
-		if (!DAOManager.getDAO(HouseBidsDAO.class).deleteHouseBids(houseObjectId) || (bids = this.bids.remove(houseObjectId)) == null)
+		if (!HouseBidsDAO.deleteHouseBids(houseObjectId) || (bids = this.bids.remove(houseObjectId)) == null)
 			return false;
 		House house = HousingService.getInstance().findHouse(houseObjectId);
 		house.setBids(null);
@@ -330,7 +330,7 @@ public class HousingBidService {
 	public void disableBids(int playerObjId) {
 		bids.values().forEach(b -> {
 			synchronized (b) {
-				DAOManager.getDAO(HouseBidsDAO.class).deleteOrDisableBids(playerObjId, b.deleteOrDisableBids(playerObjId));
+				HouseBidsDAO.deleteOrDisableBids(playerObjId, b.deleteOrDisableBids(playerObjId));
 			}
 		});
 	}
@@ -353,7 +353,7 @@ public class HousingBidService {
 		if (bids == null)
 			return false;
 
-		DAOManager.getDAO(HouseBidsDAO.class).deleteHouseBids(house.getObjectId());
+		HouseBidsDAO.deleteHouseBids(house.getObjectId());
 		house.setBids(null);
 		if (house.getOwnerId() == 0) {
 			house.setDoorState(null);

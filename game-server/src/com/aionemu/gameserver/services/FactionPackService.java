@@ -26,7 +26,6 @@ public class FactionPackService {
 	private final LocalDateTime elyosMaxCreationTime = LocalDateTime.of(2020, Month.SEPTEMBER, 26, 23, 59, 59);
 	private final LocalDateTime asmodianMinCreationTime = LocalDateTime.of(2022, Month.JUNE, 18, 0, 0, 0);
 	private final LocalDateTime asmodianMaxCreationTime = LocalDateTime.of(2022, Month.JULY, 19, 23, 59, 59);
-	private final FactionPackDAO dao = DAOManager.getDAO(FactionPackDAO.class);
 	private final List<RewardItem> rewards = new ArrayList<>();
 
 	public static FactionPackService getInstance() {
@@ -58,9 +57,9 @@ public class FactionPackService {
 		if (maxCreationTime != null && creationTime.isAfter(maxCreationTime))
 			return;
 		int accountId = player.getAccount().getId();
-		if (dao.loadReceivingPlayer(accountId) > 0)
+		if (FactionPackDAO.loadReceivingPlayer(accountId) > 0)
 			return;
-		if (!dao.storeReceivingPlayer(accountId, player.getObjectId()))
+		if (!FactionPackDAO.storeReceivingPlayer(accountId, player.getObjectId()))
 			return;
 		for (RewardItem e : rewards) {
 			ItemTemplate template = DataManager.ITEM_DATA.getItemTemplate(e.getId());

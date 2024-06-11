@@ -482,7 +482,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	public void setGodStone(GodStone godStone) {
 		if (godStone == null) {
 			this.godStone.setPersistentState(PersistentState.DELETED);
-			DAOManager.getDAO(ItemStoneListDAO.class).storeGodStones(this.godStone);
+			ItemStoneListDAO.storeGodStones(this.godStone);
 		}
 		this.godStone = godStone;
 	}
@@ -615,7 +615,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 			return;
 		for (ManaStone ms : fusionStones)
 			ms.setPersistentState(PersistentState.DELETED);
-		DAOManager.getDAO(ItemStoneListDAO.class).storeFusionStone(fusionStones);
+		ItemStoneListDAO.storeFusionStone(fusionStones);
 		fusionStones.clear();
 	}
 

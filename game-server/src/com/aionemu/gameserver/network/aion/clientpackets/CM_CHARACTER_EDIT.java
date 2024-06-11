@@ -13,7 +13,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * In this packet the Aion client is requesting edit of a character.
- * 
+ *
  * @author IlBuono, Neon
  */
 public class CM_CHARACTER_EDIT extends AbstractCharacterEditPacket {
@@ -46,7 +46,7 @@ public class CM_CHARACTER_EDIT extends AbstractCharacterEditPacket {
 			if (isGenderSwitch)
 				player.getCommonData().setGender(gender); // no need to save gender here, will be saved periodically and on logout
 			player.setPlayerAppearance(playerAppearance);
-			DAOManager.getDAO(PlayerAppearanceDAO.class).store(player); // save new appearance
+			PlayerAppearanceDAO.store(player); // save new appearance
 			if (spawnedBeforeAttributesChanged)
 				player.getController().onChangedPlayerAttributes();
 		} else { // can only happen if you illegally enter the character edit screen

@@ -60,7 +60,7 @@ public class SurveyService {
 			log.warn("[SurveyController] player " + player.getName() + " tried to receive item with full inventory.");
 			return;
 		}
-		if (DAOManager.getDAO(SurveyControllerDAO.class).useItem(item.uniqueId)) {
+		if (SurveyControllerDAO.useItem(item.uniqueId)) {
 
 			ItemService.addItem(player, item.itemId, item.count);
 			if (item.itemId == ItemId.KINAH)
@@ -75,7 +75,7 @@ public class SurveyService {
 	}
 
 	public void taskUpdate() {
-		List<SurveyItem> newList = DAOManager.getDAO(SurveyControllerDAO.class).getAllUnused();
+		List<SurveyItem> newList = SurveyControllerDAO.getAllUnused();
 		if (newList.size() == 0)
 			return;
 

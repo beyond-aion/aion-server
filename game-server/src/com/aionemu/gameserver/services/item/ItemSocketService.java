@@ -125,9 +125,9 @@ public class ItemSocketService {
 		if (player.getInventory().tryDecreaseKinah(price)) {
 			manaStoneToRemove.setPersistentState(PersistentState.DELETED);
 			if (isFusionSocket) {
-				DAOManager.getDAO(ItemStoneListDAO.class).storeFusionStone(Collections.singleton(manaStoneToRemove));
+				ItemStoneListDAO.storeFusionStone(Collections.singleton(manaStoneToRemove));
 			} else {
-				DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(Collections.singleton(manaStoneToRemove));
+				ItemStoneListDAO.storeManaStones(Collections.singleton(manaStoneToRemove));
 			}
 			itemStones.remove(manaStoneToRemove);
 
@@ -145,7 +145,7 @@ public class ItemSocketService {
 		Set<ManaStone> itemStones = item.getItemStones();
 		for (ManaStone ms : itemStones)
 			ms.setPersistentState(PersistentState.DELETED);
-		DAOManager.getDAO(ItemStoneListDAO.class).storeManaStones(itemStones);
+		ItemStoneListDAO.storeManaStones(itemStones);
 		itemStones.clear();
 
 		ItemPacketService.updateItemAfterInfoChange(player, item);

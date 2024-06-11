@@ -23,7 +23,7 @@ public class CM_GS_CHARACTER_RESPONSE extends LsClientPacket {
 
 	@Override
 	public void runImpl() {
-		int characterCount = DAOManager.getDAO(PlayerDAO.class).getCharacterCountOnAccount(accountId);
+		int characterCount = PlayerDAO.getCharacterCountOnAccount(accountId);
 		sendPacket(new SM_GS_CHARACTER(accountId, characterCount));
 	}
 }

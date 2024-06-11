@@ -55,7 +55,7 @@ public class DatabaseCleaningService {
 			File xml = new File("./data/static_data/player_experience_table.xml"); // fast unmarshal to avoid loading whole static data before
 			PlayerExperienceTable pxt = JAXBUtil.deserialize(xml, PlayerExperienceTable.class, "./data/static_data/static_data.xsd");
 			long maxExp = pxt.getStartExpForLevel(CleaningConfig.MAX_DELETABLE_CHAR_LEVEL + 1) - 1;
-			Set<Integer> accountIds = DAOManager.getDAO(PlayerDAO.class).getInactiveAccounts(CleaningConfig.MIN_ACCOUNT_INACTIVITY_DAYS);
+			Set<Integer> accountIds = PlayerDAO.getInactiveAccounts(CleaningConfig.MIN_ACCOUNT_INACTIVITY_DAYS);
 			CountDownLatch cl = delegateToThreads(accountIds, maxExp);
 			if (cl != null) {
 				try {

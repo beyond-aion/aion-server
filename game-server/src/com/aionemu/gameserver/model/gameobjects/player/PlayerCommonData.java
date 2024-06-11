@@ -24,7 +24,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * This class is holding base information about player, that may be used even when player itself is not online.
- * 
+ *
  * @author Luno, cura
  */
 public class PlayerCommonData extends CreatureTemplate {
@@ -116,7 +116,7 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	/**
 	 * calculate the lost experience must be called before setexp
-	 * 
+	 *
 	 * @author Jangan
 	 */
 	public void calculateExpLoss() {
@@ -414,7 +414,7 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	/**
 	 * Gets the corresponding Player for this common data. Returns null if the player is not online
-	 * 
+	 *
 	 * @return Player or null
 	 */
 	public Player getPlayer() {
@@ -569,7 +569,7 @@ public class PlayerCommonData extends CreatureTemplate {
 		if (player != null)
 			qsl = player.getQuestStateList();
 		else
-			qsl = DAOManager.getDAO(PlayerQuestListDAO.class).load(playerObjId);
+			qsl = PlayerQuestListDAO.load(playerObjId);
 
 		// check both quest states in case a player changed race
 		QuestStatus elyAscentQuestStatus = qsl.getQuestState(1006) != null ? qsl.getQuestState(1006).getStatus() : null;

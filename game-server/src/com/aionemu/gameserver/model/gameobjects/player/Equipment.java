@@ -236,7 +236,7 @@ public class Equipment implements Persistable {
 
 	/**
 	 * Called when CM_EQUIP_ITEM packet arrives with action 1
-	 * 
+	 *
 	 * @return item or null in case of failure
 	 */
 	public Item unEquipItem(int itemObjId, boolean checkFullInventory) {
@@ -301,7 +301,7 @@ public class Equipment implements Persistable {
 
 	/**
 	 * TODO: Move to SkillEngine Use skill stack SKILL_P_EQUIP_DUAL to check that instead
-	 * 
+	 *
 	 * @return true if player can equip two one-handed weapons
 	 */
 	private boolean hasDualWieldingSkills() {
@@ -582,7 +582,7 @@ public class Equipment implements Persistable {
 		if (equippedItem.getItemCount() == 0) {
 			equipment.remove(equippedItem.getEquipmentSlot());
 			PacketSendUtility.sendPacket(owner, new SM_DELETE_ITEM(equippedItem.getObjectId()));
-			DAOManager.getDAO(InventoryDAO.class).store(equippedItem, owner);
+			InventoryDAO.store(equippedItem, owner);
 		}
 
 		ItemPacketService.updateItemAfterInfoChange(owner, equippedItem, ItemUpdateType.STATS_CHANGE);

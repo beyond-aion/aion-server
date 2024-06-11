@@ -19,7 +19,7 @@ import com.aionemu.gameserver.utils.time.gametime.GameTime;
 public class GameTimeService {
 
 	private static final Logger log = LoggerFactory.getLogger(GameTimeService.class);
-	private final GameTime gameTime = new GameTime(DAOManager.getDAO(ServerVariablesDAO.class).loadInt("time"));
+	private final GameTime gameTime = new GameTime(ServerVariablesDAO.loadInt("time"));
 	private final AtomicBoolean isStarted = new AtomicBoolean();
 
 	private GameTimeService() {
@@ -35,11 +35,11 @@ public class GameTimeService {
 
 	/**
 	 * Saves the current time to the database
-	 * 
+	 *
 	 * @return True on success.
 	 */
 	public boolean saveGameTime() {
-		return DAOManager.getDAO(ServerVariablesDAO.class).store("time", gameTime.getTime());
+		return ServerVariablesDAO.store("time", gameTime.getTime());
 	}
 
 	public void startClock() {

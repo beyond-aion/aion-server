@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
 
 /**
  * Container for storing Legion members by Id and name.
- * 
+ *
  * @author Simple
  */
 public class LegionMemberContainer {
@@ -22,7 +22,7 @@ public class LegionMemberContainer {
 
 	/**
 	 * Add LegionMember to this Container.
-	 * 
+	 *
 	 * @param legionMember
 	 */
 	public void addMember(LegionMember legionMember) {
@@ -32,7 +32,7 @@ public class LegionMemberContainer {
 
 	/**
 	 * This method will return a member from cache
-	 * 
+	 *
 	 * @param memberObjId
 	 */
 	public LegionMember getMember(int memberObjId) {
@@ -41,7 +41,7 @@ public class LegionMemberContainer {
 
 	/**
 	 * Add LegionMemberEx to this Container.
-	 * 
+	 *
 	 * @param legionMember
 	 */
 	public void addMemberEx(LegionMemberEx legionMember) {
@@ -53,7 +53,7 @@ public class LegionMemberContainer {
 
 	/**
 	 * This method will return a memberEx from cache
-	 * 
+	 *
 	 * @param memberObjId
 	 */
 	public LegionMemberEx getMemberEx(int memberObjId) {
@@ -62,7 +62,7 @@ public class LegionMemberContainer {
 
 	/**
 	 * This method will return a memberEx from cache
-	 * 
+	 *
 	 * @param memberName
 	 */
 	public LegionMemberEx getMemberEx(String memberName) {
@@ -81,7 +81,7 @@ public class LegionMemberContainer {
 
 	/**
 	 * Returns true if legion is in cached by id
-	 * 
+	 *
 	 * @param memberObjId
 	 * @return true or false
 	 */
@@ -91,7 +91,7 @@ public class LegionMemberContainer {
 
 	/**
 	 * Returns true if legion is in cached by id
-	 * 
+	 *
 	 * @param memberObjId
 	 * @return true or false
 	 */
@@ -101,7 +101,7 @@ public class LegionMemberContainer {
 
 	/**
 	 * Returns true if legion is in cached by id
-	 * 
+	 *
 	 * @param memberName
 	 * @return true or false
 	 */
@@ -118,7 +118,7 @@ public class LegionMemberContainer {
 	public void updateCachedPlayerName(String oldName, Player player) {
 		legionMemberExByName.compute(oldName, (n, legionMember) -> {
 			if (legionMember == null)
-				legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMemberEx(player.getObjectId());
+				legionMember = LegionMemberDAO.loadLegionMemberEx(player.getObjectId());
 			else
 				legionMember.setName(player.getName());
 			legionMemberExByName.put(player.getName(), legionMember);

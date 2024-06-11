@@ -17,7 +17,7 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * Sent by the client when the teleport animation is done and the actual teleport should be executed.
- * 
+ *
  * @author Rolandas, Neon
  */
 public class CM_TELEPORT_ANIMATION_DONE extends AionClientPacket {

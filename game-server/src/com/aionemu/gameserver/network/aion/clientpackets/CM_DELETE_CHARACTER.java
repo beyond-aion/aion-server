@@ -17,7 +17,7 @@ import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
  * In this packets aion client is requesting deletion of character.
- * 
+ *
  * @author -Nemesiss-
  */
 public class CM_DELETE_CHARACTER extends AionClientPacket {
@@ -34,7 +34,7 @@ public class CM_DELETE_CHARACTER extends AionClientPacket {
 
 	/**
 	 * Constructs new instance of <tt>CM_DELETE_CHARACTER </tt> packet
-	 * 
+	 *
 	 * @param opcode
 	 */
 	public CM_DELETE_CHARACTER(int opcode, Set<State> validStates) {
@@ -56,7 +56,7 @@ public class CM_DELETE_CHARACTER extends AionClientPacket {
 			if (SecurityConfig.PASSKEY_ENABLE && !client.getAccount().getCharacterPasskey().isPass()) {
 				client.getAccount().getCharacterPasskey().setConnectType(ConnectType.DELETE);
 				client.getAccount().getCharacterPasskey().setObjectId(chaOid);
-				boolean isExistPasskey = DAOManager.getDAO(PlayerPasskeyDAO.class).existCheckPlayerPasskey(client.getAccount().getId());
+				boolean isExistPasskey = PlayerPasskeyDAO.existCheckPlayerPasskey(client.getAccount().getId());
 
 				if (!isExistPasskey)
 					client.sendPacket(new SM_CHARACTER_SELECT(0));

@@ -113,9 +113,9 @@ public class LegionDominionLocation {
 
 	private void store(LegionDominionParticipantInfo info, boolean isNew) {
 		if (isNew) {
-			DAOManager.getDAO(LegionDominionDAO.class).storeNewInfo(getLocationId(), info);
+			LegionDominionDAO.storeNewInfo(getLocationId(), info);
 		} else {
-			DAOManager.getDAO(LegionDominionDAO.class).updateInfo(info);
+			LegionDominionDAO.updateInfo(info);
 		}
 	}
 

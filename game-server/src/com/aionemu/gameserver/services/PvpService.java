@@ -59,7 +59,7 @@ public class PvpService {
 
 	private PvpService() {
 		killBounties = DataManager.KILL_BOUNTY_DATA.getKillBounties();
-		headhunters = DAOManager.getDAO(HeadhuntingDAO.class).loadHeadhunters();
+		headhunters = HeadhuntingDAO.loadHeadhunters();
 	}
 
 	public static PvpService getInstance() {

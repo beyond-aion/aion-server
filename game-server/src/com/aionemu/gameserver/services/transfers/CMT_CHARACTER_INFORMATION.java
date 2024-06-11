@@ -236,7 +236,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 			item.setPersistentState(PersistentState.NEW);
 			player.getInventory().add_CharacterTransfer(item);
 		}
-		DAOManager.getDAO(InventoryDAO.class).store(player);
+		InventoryDAO.store(player);
 
 		textLog.info(sb.toString());
 
@@ -286,7 +286,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 				player.getNpcFactions().addNpcFaction(new NpcFaction(id, time, active, ENpcFactionQuestState.valueOf(state), questId));
 		}
 		if (cnt > 0 && PlayerTransferConfig.ALLOW_NPCFACTIONS)
-			DAOManager.getDAO(PlayerNpcFactionsDAO.class).storeNpcFactions(player);
+			PlayerNpcFactionsDAO.storeNpcFactions(player);
 
 		cnt = readD();
 		textLog.info("Pets:" + cnt);
@@ -316,7 +316,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 		}
 		if (cnt > 0 && PlayerTransferConfig.ALLOW_TITLES)
 			for (Title t : player.getTitleList().getTitles()) {
-				DAOManager.getDAO(PlayerTitleListDAO.class).storeTitles(player, t);
+				PlayerTitleListDAO.storeTitles(player, t);
 			}
 
 		String[] posBind;
@@ -331,7 +331,7 @@ public class CMT_CHARACTER_INFORMATION extends BaseClientPacket<AionConnection> 
 
 		player.setBindPoint(new BindPointPosition(Integer.parseInt(posBind[0]), Float.parseFloat(posBind[1]), Float.parseFloat(posBind[2]),
 			Float.parseFloat(posBind[3]), Byte.parseByte(posBind[4])));
-		DAOManager.getDAO(PlayerBindPointDAO.class).store(player);
+		PlayerBindPointDAO.store(player);
 
 		int uilen = readD(), shortlen = readD();
 		byte[] ui = readB(uilen), sc = readB(shortlen);

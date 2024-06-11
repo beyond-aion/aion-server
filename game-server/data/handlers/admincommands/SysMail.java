@@ -199,7 +199,7 @@ public class SysMail extends AdminCommand {
 			return false;
 		} else if (recipientType == RecipientType.PLAYER) {
 			if (letterType == LetterType.NORMAL) {
-				if (!DAOManager.getDAO(PlayerDAO.class).isNameUsed(recipient)) {
+				if (!PlayerDAO.isNameUsed(recipient)) {
 					PacketSendUtility.sendMessage(admin, "Could not find a Recipient by that name.");
 					return false;
 				}

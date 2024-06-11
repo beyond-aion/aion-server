@@ -22,7 +22,7 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
  * In this packets the Aion client is requesting creation of a character or to enter the character creation menu.
- * 
+ *
  * @author -Nemesiss-, cura, Neon
  */
 public class CM_CREATE_CHARACTER extends AbstractCharacterEditPacket {
@@ -71,7 +71,7 @@ public class CM_CREATE_CHARACTER extends AbstractCharacterEditPacket {
 			sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_DB_ERROR));
 			IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());
 		} else {
-			List<Item> equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(player.getObjectId());
+			List<Item> equipment = InventoryDAO.loadEquipment(player.getObjectId());
 			accPlData.setEquipment(equipment);
 			accPlData.setCreationDate(new Timestamp(System.currentTimeMillis()));
 			PlayerService.storeCreationTime(player.getObjectId(), accPlData.getCreationDate());

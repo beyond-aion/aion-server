@@ -48,7 +48,7 @@ public class PlayerTransferService {
 
 	public void startTransfer(int accountId, int targetAccountId, int playerId, byte targetServerId, int taskId) {
 		boolean exist = false;
-		for (int id : DAOManager.getDAO(PlayerDAO.class).getPlayerOidsOnAccount(accountId))
+		for (int id : PlayerDAO.getPlayerOidsOnAccount(accountId))
 			if (id == playerId) {
 				exist = true;
 				break;
@@ -61,7 +61,7 @@ public class PlayerTransferService {
 			return;
 		}
 
-		if (DAOManager.getDAO(LegionMemberDAO.class).isIdUsed(playerId)) {
+		if (LegionMemberDAO.isIdUsed(playerId)) {
 			log.warn("cannot transfer #" + taskId + " player with existing legion " + playerId + ".");
 			LoginServer.getInstance().sendPacket(
 				new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.TASK_STOP, taskId, "cannot transfer player with existing legion " + playerId));
@@ -154,8 +154,8 @@ public class PlayerTransferService {
 				new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.ERROR, taskId, "unexpected sql error while creating a clone"));
 		} else {
 			if (!transfer.getName().equals(cha.getName()))
-				DAOManager.getDAO(InventoryDAO.class).store(ItemFactory.newItem(169670001), cha); // [Event] Name Change Ticket
-			DAOManager.getDAO(PlayerDAO.class).setPlayerLastTransferTime(cha.getObjectId(), System.currentTimeMillis());
+				InventoryDAO.store(ItemFactory.newItem(169670001), cha); // [Event] Name Change Ticket
+			PlayerDAO.setPlayerLastTransferTime(cha.getObjectId(), System.currentTimeMillis());
 			LoginServer.getInstance().sendPacket(new SM_PTRANSFER_CONTROL(SM_PTRANSFER_CONTROL.OK, taskId));
 			log.info("clone successful #" + taskId + " `" + name + "`");
 			textLog.info("taskId:" + taskId + "; [CloneCharacter:Done]");

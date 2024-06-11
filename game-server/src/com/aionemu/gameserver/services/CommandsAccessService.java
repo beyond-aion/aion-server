@@ -22,7 +22,7 @@ public class CommandsAccessService {
 	}
 
 	public static void loadAccesses() {
-		commandAccesses = DAOManager.getDAO(CommandsAccessDAO.class).loadAccesses();
+		commandAccesses = CommandsAccessDAO.loadAccesses();
 	}
 
 	public static void giveTemporaryAccess(Player admin, int playerId, String command) {
@@ -49,7 +49,7 @@ public class CommandsAccessService {
 			return commands;
 		});
 		if (!isTemporary)
-			DAOManager.getDAO(CommandsAccessDAO.class).addAccess(playerId, command);
+			CommandsAccessDAO.addAccess(playerId, command);
 		PacketSendUtility.sendMessage(admin, "Command access was granted successfuly.");
 	}
 
@@ -60,7 +60,7 @@ public class CommandsAccessService {
 		}
 		Set<String> commands = commandAccesses.get(playerId);
 		commands.remove(command);
-		DAOManager.getDAO(CommandsAccessDAO.class).removeAccess(playerId, command);
+		CommandsAccessDAO.removeAccess(playerId, command);
 		PacketSendUtility.sendMessage(admin, "Command access was removed successfully");
 	}
 
@@ -68,7 +68,7 @@ public class CommandsAccessService {
 		Set<String> commands = commandAccesses.get(playerId);
 		if (commands != null) {
 			commands.clear();
-			DAOManager.getDAO(CommandsAccessDAO.class).removeAllAccesses(playerId);
+			CommandsAccessDAO.removeAllAccesses(playerId);
 			return true;
 		}
 		return false;

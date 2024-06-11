@@ -83,7 +83,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * This class is representing Player object, it contains all needed data.
- * 
+ *
  * @author -Nemesiss-, SoulKeeper, alexa026, cura
  */
 public class Player extends Creature {
@@ -267,7 +267,7 @@ public class Player extends Creature {
 
 	/**
 	 * Set connection of this player.
-	 * 
+	 *
 	 * @param clientConnection
 	 */
 	public void setClientConnection(AionConnection clientConnection) {
@@ -276,7 +276,7 @@ public class Player extends Creature {
 
 	/**
 	 * Get connection of this player.
-	 * 
+	 *
 	 * @return AionConnection of this player.
 	 */
 	public AionConnection getClientConnection() {
@@ -309,7 +309,7 @@ public class Player extends Creature {
 
 	/**
 	 * Gets this players Friend List
-	 * 
+	 *
 	 * @return FriendList
 	 */
 	public FriendList getFriendList() {
@@ -318,7 +318,7 @@ public class Player extends Creature {
 
 	/**
 	 * Is this player looking for a group
-	 * 
+	 *
 	 * @return true or false
 	 */
 	public boolean isLookingForGroup() {
@@ -327,7 +327,7 @@ public class Player extends Creature {
 
 	/**
 	 * Sets whether or not this player is looking for a group
-	 * 
+	 *
 	 * @param lookingForGroup
 	 */
 	public void setLookingForGroup(boolean lookingForGroup) {
@@ -374,7 +374,7 @@ public class Player extends Creature {
 	/**
 	 * Sets this players friend list. <br />
 	 * Remember to send the player the <tt>SM_FRIEND_LIST</tt> packet.
-	 * 
+	 *
 	 * @param list
 	 */
 	public void setFriendList(FriendList list) {
@@ -405,7 +405,7 @@ public class Player extends Creature {
 
 	/**
 	 * Gets the ResponseRequester for this player
-	 * 
+	 *
 	 * @return ResponseRequester
 	 */
 	public ResponseRequester getResponseRequester() {
@@ -442,7 +442,7 @@ public class Player extends Creature {
 
 	/**
 	 * Return PlayerController of this Player Object.
-	 * 
+	 *
 	 * @return PlayerController.
 	 */
 	@Override
@@ -553,7 +553,7 @@ public class Player extends Creature {
 
 	/**
 	 * Items from UPDATE_REQUIRED storages and equipment
-	 * 
+	 *
 	 * @return
 	 */
 	public List<Item> getDirtyItemsToUpdate() {
@@ -578,7 +578,7 @@ public class Player extends Creature {
 
 	/**
 	 * //TODO probably need to optimize here
-	 * 
+	 *
 	 * @return
 	 */
 	public List<Item> getAllItems() {
@@ -759,7 +759,7 @@ public class Player extends Creature {
 
 	/**
 	 * CreatureState is unreliable for players returns true if player is flying or gliding
-	 * 
+	 *
 	 * @return boolean
 	 */
 	@Override
@@ -769,7 +769,7 @@ public class Player extends Creature {
 
 	/**
 	 * CreatureState is unreliable for players returns true if player is flying
-	 * 
+	 *
 	 * @return boolean
 	 */
 	@Override
@@ -930,7 +930,7 @@ public class Player extends Creature {
 	 * - different race<br>
 	 * - duel partner<br>
 	 * - in pvp zone
-	 * 
+	 *
 	 * @param enemy
 	 * @return
 	 */
@@ -1186,7 +1186,7 @@ public class Player extends Creature {
 
 	/**
 	 * Quest completion
-	 * 
+	 *
 	 * @param questId
 	 * @return
 	 */
@@ -1423,7 +1423,7 @@ public class Player extends Creature {
 
 	/**
 	 * Stone Use Order determined by highest inventory slot. :( If player has two types, wrong one might be used.
-	 * 
+	 *
 	 * @param player
 	 * @return selfRezItem
 	 */
@@ -1452,7 +1452,7 @@ public class Player extends Creature {
 
 	/**
 	 * Need to find how an item is determined as able to self-rez.
-	 * 
+	 *
 	 * @return boolean can self rez with item
 	 */
 	public boolean haveSelfRezItem() {
@@ -1519,7 +1519,7 @@ public class Player extends Creature {
 	public void setVar(String key, Object value, boolean persist) {
 		vars.put(key, value);
 		if (persist)
-			DAOManager.getDAO(PlayerVarsDAO.class).set(getObjectId(), key, value);
+			PlayerVarsDAO.set(getObjectId(), key, value);
 	}
 
 	public Object getVar(String key) {

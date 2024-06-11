@@ -26,7 +26,7 @@ public class PasskeyReset extends AdminCommand {
 		}
 
 		String name = Util.convertName(params[0]);
-		int accountId = DAOManager.getDAO(PlayerDAO.class).getAccountIdByName(name);
+		int accountId = PlayerDAO.getAccountIdByName(name);
 		if (accountId == 0) {
 			PacketSendUtility.sendMessage(player, "player " + name + " can't find!");
 			PacketSendUtility.sendMessage(player, "syntax: //passkeyreset <player> <passkey>");
@@ -46,7 +46,7 @@ public class PasskeyReset extends AdminCommand {
 			return;
 		}
 
-		DAOManager.getDAO(PlayerPasskeyDAO.class).updateForcePlayerPasskey(accountId, newPasskey);
+		PlayerPasskeyDAO.updateForcePlayerPasskey(accountId, newPasskey);
 		LoginServer.getInstance().sendBanPacket((byte) 2, accountId, "", -1, player.getObjectId());
 	}
 

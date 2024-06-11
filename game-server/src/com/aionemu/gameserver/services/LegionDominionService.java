@@ -49,9 +49,9 @@ public class LegionDominionService {
 		for (LegionDominionLocationTemplate temp : DataManager.LEGION_DOMINION_DATA.getLocationTemplates()) {
 			legionDominionLocations.put(temp.getId(), new LegionDominionLocation(temp));
 		}
-		DAOManager.getDAO(LegionDominionDAO.class).loadOrCreateLegionDominionLocations(legionDominionLocations);
+		LegionDominionDAO.loadOrCreateLegionDominionLocations(legionDominionLocations);
 		for (LegionDominionLocation loc : legionDominionLocations.values()) {
-			loc.setParticipantInfo(DAOManager.getDAO(LegionDominionDAO.class).loadParticipants(loc));
+			loc.setParticipantInfo(LegionDominionDAO.loadParticipants(loc));
 		}
 	}
 
@@ -76,7 +76,7 @@ public class LegionDominionService {
 					info.setDate(new Timestamp(System.currentTimeMillis()));
 					info.setPoints(points);
 					info.setTime((int) (time / 1000));
-					DAOManager.getDAO(LegionDominionDAO.class).updateInfo(info);
+					LegionDominionDAO.updateInfo(info);
 					loc.updateRanking();
 				}
 			}
@@ -126,7 +126,7 @@ public class LegionDominionService {
 						updateLegionOccupation(legion, loc.getLocationId(), occupiedId > 0);
 					}
 				}
-				DAOManager.getDAO(LegionDominionDAO.class).delete(info);
+				LegionDominionDAO.delete(info);
 			}
 
 			Map<Integer, List<LegionDominionReward>> dominionRewards = loc.getRewards();
@@ -149,7 +149,7 @@ public class LegionDominionService {
 			}
 			// reset locations participant info and update this location
 			loc.reset();
-			DAOManager.getDAO(LegionDominionDAO.class).updateLegionDominionLocation(loc);
+			LegionDominionDAO.updateLegionDominionLocation(loc);
 		}
 		PacketSendUtility.broadcastToWorld(new SM_LEGION_DOMINION_LOC_INFO());
 	}
@@ -160,7 +160,7 @@ public class LegionDominionService {
 		legion.setOccupiedLegionDominion(shouldOccupy ? territorialId : 0);
 		legion.setLastLegionDominion(territorialId);
 		legion.setCurrentLegionDominion(0);
-		DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
+		LegionDAO.storeLegion(legion);
 		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_DOMINION_RANK(territorialId));
 		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_INFO(legion));
 	}

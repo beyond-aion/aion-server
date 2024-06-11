@@ -153,7 +153,7 @@ public class HouseRegistry implements Persistable {
 		List<HouseObject<?>> spawnedObjects = getSpawnedObjects();
 		if (spawnedObjects.isEmpty()) {
 			if (getOwner().getOwnerId() != 0)
-				DAOManager.getDAO(PlayerRegisteredItemsDAO.class).resetRegistry(getOwner().getOwnerId());
+				PlayerRegisteredItemsDAO.resetRegistry(getOwner().getOwnerId());
 		} else {
 			for (HouseObject<?> obj : spawnedObjects)
 				obj.removeFromHouse();
@@ -167,7 +167,7 @@ public class HouseRegistry implements Persistable {
 
 	public void save() {
 		if (persistentState == PersistentState.UPDATE_REQUIRED)
-			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).store(this, getOwner().getOwnerId());
+			PlayerRegisteredItemsDAO.store(this, getOwner().getOwnerId());
 	}
 
 	@Override

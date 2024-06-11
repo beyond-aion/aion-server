@@ -68,7 +68,7 @@ public class SystemMailService {
 		if (message.length() > 1000)
 			message = message.substring(0, 1000);
 
-		PlayerCommonData recipientCommonData = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonDataByName(recipientName);
+		PlayerCommonData recipientCommonData = PlayerDAO.loadPlayerCommonDataByName(recipientName);
 
 		if (recipientCommonData == null) {
 			log.info("[SYSMAILSERVICE] > [RecipientName: " + recipientName + "] NO SUCH CHARACTER NAME.");
@@ -99,11 +99,11 @@ public class SystemMailService {
 		Letter newLetter = new Letter(IDFactory.getInstance().nextId(), recipientCommonData.getPlayerObjId(), attachedItem, finalAttachedKinahCount,
 			title, message, sender, new Timestamp(System.currentTimeMillis()), true, letterType);
 
-		if (!DAOManager.getDAO(MailDAO.class).storeLetter(newLetter))
+		if (!MailDAO.storeLetter(newLetter))
 			return false;
 
 		if (attachedItem != null)
-			if (!DAOManager.getDAO(InventoryDAO.class).store(attachedItem, recipientCommonData.getPlayerObjId()))
+			if (!InventoryDAO.store(attachedItem, recipientCommonData.getPlayerObjId()))
 				return false;
 
 		if (LoggingConfig.LOG_SYSMAIL)
@@ -118,7 +118,7 @@ public class SystemMailService {
 		Player recipient = recipientCommonData.getPlayer();
 		if (recipient == null) {
 			recipientCommonData.setMailboxLetters(recipientCommonData.getMailboxLetters() + 1);
-			DAOManager.getDAO(MailDAO.class).updateOfflineMailCounter(recipientCommonData);
+			MailDAO.updateOfflineMailCounter(recipientCommonData);
 		} else if (recipient.getMailbox() != null) { // Send mail update packets
 			Mailbox mailbox = recipient.getMailbox();
 			mailbox.putLetterToMailbox(newLetter);

@@ -183,7 +183,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		updateOutpostStatusByFortress(getSiegeLocation());
 
 		// Update data in the DB
-		DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(getSiegeLocation());
+		SiegeDAO.updateSiegeLocation(getSiegeLocation());
 		if (isBossKilled()) {
 			getSiegeLocation().forEachPlayer(p -> {
 				if (SiegeRace.getByRace(p.getRace()) == getSiegeLocation().getRace())

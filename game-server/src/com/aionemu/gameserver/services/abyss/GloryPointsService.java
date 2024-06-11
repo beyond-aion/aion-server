@@ -43,7 +43,7 @@ public class GloryPointsService {
 		if (player == null) {
 			if (applyRates)
 				amount *= RatesConfig.GP_RATES[0]; // TODO different memberships
-			DAOManager.getDAO(AbyssRankDAO.class).increaseGp(playerObjId, amount, modifyStats);
+			AbyssRankDAO.increaseGp(playerObjId, amount, modifyStats);
 		} else {
 			if (applyRates)
 				amount = (int) Rates.GP.calcResult(player, amount);
@@ -58,7 +58,7 @@ public class GloryPointsService {
 			return;
 		Player player = World.getInstance().getPlayer(playerObjId);
 		if (player == null) {
-			DAOManager.getDAO(AbyssRankDAO.class).decreaseGp(playerObjId, amount);
+			AbyssRankDAO.decreaseGp(playerObjId, amount);
 		} else {
 			player.getAbyssRank().reduceGp(amount);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE(amount));

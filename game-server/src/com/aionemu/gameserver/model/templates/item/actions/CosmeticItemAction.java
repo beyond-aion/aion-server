@@ -83,7 +83,7 @@ public class CosmeticItemAction extends AbstractItemAction {
 				return;
 			}
 		}
-		DAOManager.getDAO(PlayerAppearanceDAO.class).store(player);
+		PlayerAppearanceDAO.store(player);
 		player.getInventory().delete(targetItem);
 		player.getController().onChangedPlayerAttributes();
 	}

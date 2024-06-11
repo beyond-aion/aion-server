@@ -171,7 +171,7 @@ public class HouseController extends VisibleObjectController<House> {
 			getOwner().getPlayerScripts().removeAll();
 			getOwner().setOwnerId(newOwnerId);
 			if (newOwnerId == 0 && HousingService.getInstance().removeStudio(getOwner())) {
-				DAOManager.getDAO(HousesDAO.class).deleteHouse(oldOwnerId);
+				HousesDAO.deleteHouse(oldOwnerId);
 				notifyAboutOwnerChange(oldOwnerId, false);
 				return;
 			}

@@ -44,7 +44,6 @@ public class InGameShopEn {
 	}
 
 	private Map<Byte, List<IGItem>> items;
-	private InGameShopDAO dao;
 	private InGameShopProperty iGProperty;
 	private AtomicInteger lastRequestId = new AtomicInteger(0);
 	private ConcurrentHashMap<Integer, IGRequest> activeRequests;
@@ -55,9 +54,8 @@ public class InGameShopEn {
 			return;
 		}
 		iGProperty = InGameShopProperty.load();
-		dao = DAOManager.getDAO(InGameShopDAO.class);
 		activeRequests = new ConcurrentHashMap<>();
-		items = dao.loadInGameShopItems();
+		items = InGameShopDAO.loadInGameShopItems();
 		log.info("Loaded with " + items.size() + " items.");
 	}
 
@@ -72,7 +70,7 @@ public class InGameShopEn {
 		}
 		iGProperty.clear();
 		iGProperty = InGameShopProperty.load();
-		items = DAOManager.getDAO(InGameShopDAO.class).loadInGameShopItems();
+		items = InGameShopDAO.loadInGameShopItems();
 		log.info("Loaded with " + items.size() + " items.");
 	}
 
@@ -175,12 +173,12 @@ public class InGameShopEn {
 			return;
 		}
 
-		if (!DAOManager.getDAO(PlayerDAO.class).isNameUsed(receiver)) {
+		if (!PlayerDAO.isNameUsed(receiver)) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INGAMESHOP_NO_USER_TO_GIFT());
 			return;
 		}
 
-		PlayerCommonData recipientCommonData = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonDataByName(receiver);
+		PlayerCommonData recipientCommonData = PlayerDAO.loadPlayerCommonDataByName(receiver);
 		if (recipientCommonData.getMailboxLetters() >= 100) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MAIL_MSG_RECIPIENT_MAILBOX_FULL(recipientCommonData.getName()));
 			return;
@@ -272,19 +270,19 @@ public class InGameShopEn {
 						if (LoggingConfig.LOG_INGAMESHOP)
 							log.info("[INGAMESHOP] > " + player + " (" + player.getAccount() + ") BUY ITEM: " + item.getItemId() + " COUNT: " + item.getItemCount() + " FOR PlayerName: " + request.receiver);
 						if (LoggingConfig.LOG_INGAMESHOP_SQL)
-							DAOManager.getDAO(InGameShopLogDAO.class).log("GIFT", new Timestamp(System.currentTimeMillis()), player.getName(),
+							InGameShopLogDAO.log("GIFT", new Timestamp(System.currentTimeMillis()), player.getName(),
 								player.getAccountName(), request.receiver, item.getItemId(), item.getItemCount(), item.getItemPrice());
 					} else {
 						ItemService.addItem(player, item.getItemId(), item.getItemCount());
 						if (LoggingConfig.LOG_INGAMESHOP)
 							log.info("[INGAMESHOP] > " + player + " (" + player.getAccount() + ") BUY ITEM: " + item.getItemId() + " COUNT: " + item.getItemCount());
 						if (LoggingConfig.LOG_INGAMESHOP_SQL)
-							DAOManager.getDAO(InGameShopLogDAO.class).log("BUY", new Timestamp(System.currentTimeMillis()), player.getName(),
+							InGameShopLogDAO.log("BUY", new Timestamp(System.currentTimeMillis()), player.getName(),
 								player.getAccountName(), player.getName(), item.getItemId(), item.getItemCount(), item.getItemPrice());
-						DAOManager.getDAO(InventoryDAO.class).store(player);
+						InventoryDAO.store(player);
 					}
 					item.increaseSales();
-					dao.increaseSales(item.getObjectId(), item.getSalesRanking());
+					InGameShopDAO.increaseSales(item.getObjectId(), item.getSalesRanking());
 					PacketSendUtility.sendPacket(player, new SM_TOLL_INFO(toll));
 					player.getClientConnection().getAccount().setToll(toll);
 				} else if (result == 4) {

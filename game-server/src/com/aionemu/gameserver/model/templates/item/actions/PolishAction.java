@@ -81,7 +81,7 @@ public class PolishAction extends AbstractItemAction {
 				idianStone.onUnEquip(player);
 				targetItem.setIdianStone(null);
 				idianStone.setPersistentState(PersistentState.DELETED);
-				DAOManager.getDAO(ItemStoneListDAO.class).storeIdianStones(idianStone);
+				ItemStoneListDAO.storeIdianStones(idianStone);
 			}
 			idianStone = new IdianStone(parentItem.getItemId(), PersistentState.NEW, targetItem, bonusNumber, 1000000);
 			targetItem.setIdianStone(idianStone);

@@ -23,24 +23,24 @@ public class PunishmentService {
 
 	/**
 	 * This method will handle unbanning a character
-	 * 
+	 *
 	 * @param player
 	 * @param state
 	 * @param delayInMinutes
 	 */
 	public static void unbanChar(int playerId) {
-		DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(playerId, PunishmentType.CHARBAN);
+		PlayerPunishmentsDAO.unpunishPlayer(playerId, PunishmentType.CHARBAN);
 	}
 
 	/**
 	 * This method will handle banning a character
-	 * 
+	 *
 	 * @param player
 	 * @param state
 	 * @param delayInMinutes
 	 */
 	public static void banChar(int playerId, int dayCount, String reason) {
-		DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(playerId, PunishmentType.CHARBAN, calculateDuration(dayCount), reason);
+		PlayerPunishmentsDAO.punishPlayer(playerId, PunishmentType.CHARBAN, calculateDuration(dayCount), reason);
 
 		// if player is online - kick him
 		Player player = World.getInstance().getPlayer(playerId);
@@ -50,7 +50,7 @@ public class PunishmentService {
 
 	/**
 	 * Calculates the timestamp when a given number of days is over
-	 * 
+	 *
 	 * @param dayCount
 	 * @return ban duration in seconds
 	 */
@@ -62,7 +62,7 @@ public class PunishmentService {
 
 	/**
 	 * This method will handle moving or removing a player from prison
-	 * 
+	 *
 	 * @param player
 	 * @param state
 	 * @param delayInMinutes
@@ -75,7 +75,7 @@ public class PunishmentService {
 				ChatBanService.banPlayer(player, delayInMinutes);
 				player.setPrisonEndTimeMillis(System.currentTimeMillis() + duration);
 				TeleportService.teleportToPrison(player);
-				DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.PRISON, reason);
+				PlayerPunishmentsDAO.punishPlayer(player, PunishmentType.PRISON, reason);
 				PacketSendUtility.sendMessage(player, "You have been teleported to prison for a time of " + delayInMinutes
 					+ " minutes.\n If you disconnect the time stops and the timer of the prison'll see at your next login.");
 			}
@@ -84,14 +84,14 @@ public class PunishmentService {
 			player.setPrisonEndTimeMillis(0);
 			ChatBanService.unbanPlayer(player);
 			TeleportService.moveToBindLocation(player);
-			DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(player.getObjectId(), PunishmentType.PRISON);
+			PlayerPunishmentsDAO.unpunishPlayer(player.getObjectId(), PunishmentType.PRISON);
 			PacketSendUtility.sendMessage(player, "You come out of prison.");
 		}
 	}
 
 	/**
 	 * This method will update the prison status
-	 * 
+	 *
 	 * @param player
 	 */
 	public static void updatePrisonStatus(Player player) {
@@ -114,7 +114,7 @@ public class PunishmentService {
 
 	/**
 	 * This method will schedule a prison task
-	 * 
+	 *
 	 * @param player
 	 * @param prisonTimer
 	 */
@@ -124,7 +124,7 @@ public class PunishmentService {
 
 	/**
 	 * This method will handle can or cant gathering
-	 * 
+	 *
 	 * @param player
 	 * @param captchaCount
 	 * @param state
@@ -140,19 +140,19 @@ public class PunishmentService {
 				player.setCaptchaImage(null);
 			}
 			player.setGatherRestrictionExpirationTime(System.currentTimeMillis() + delay);
-			DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.GATHER, "Possible gatherbot");
+			PlayerPunishmentsDAO.punishPlayer(player, PunishmentType.GATHER, "Possible gatherbot");
 		} else {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CAPTCHA_RECOVERED());
 			player.setCaptchaWord(null);
 			player.setCaptchaImage(null);
 			player.setGatherRestrictionExpirationTime(0);
-			DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(player.getObjectId(), PunishmentType.GATHER);
+			PlayerPunishmentsDAO.unpunishPlayer(player.getObjectId(), PunishmentType.GATHER);
 		}
 	}
 
 	/**
 	 * PunishmentType
-	 * 
+	 *
 	 * @author Cura
 	 */
 	public enum PunishmentType {

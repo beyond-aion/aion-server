@@ -3,10 +3,10 @@ package admincommands;
 import java.util.HashMap;
 import java.util.Map;
 
+import com.aionemu.gameserver.dao.PlayerDAO;
+
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.aionemu.commons.database.dao.DAOManager;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.services.CommandsAccessService;
@@ -49,7 +49,7 @@ public class Access extends AdminCommand {
 				}
 				String playerName = params[1];
 				String commandName = params[2];
-				PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonDataByName(playerName);
+				PlayerCommonData pcd = PlayerDAO.loadPlayerCommonDataByName(playerName);
 				if (pcd == null) {
 					sendInfo(admin, "Player with name " + playerName + " doesn't exists!");
 					return;
@@ -62,7 +62,7 @@ public class Access extends AdminCommand {
 			}
 			case "removeall": {
 				String playerName = params[1];
-				PlayerCommonData pcd = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonDataByName(playerName);
+				PlayerCommonData pcd = PlayerDAO.loadPlayerCommonDataByName(playerName);
 				if (pcd == null) {
 					sendInfo(admin, "Player with name " + playerName + " doesn't exists!");
 					return;

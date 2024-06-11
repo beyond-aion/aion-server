@@ -30,7 +30,7 @@ import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
  * This class is a front-end for daos and it's responsibility is to retrieve the Account objects
- * 
+ *
  * @author Luno, cura
  */
 public class AccountService {
@@ -78,14 +78,14 @@ public class AccountService {
 			}
 		}
 		if (account.isEmpty()) {
-			DAOManager.getDAO(InventoryDAO.class).deleteAccountWH(account.getId());
+			InventoryDAO.deleteAccountWH(account.getId());
 			loadAccountWarehouse(account);
 		}
 	}
 
 	public static Account loadAccount(int accountId) {
 		Account account = new Account(accountId);
-		List<Integer> playerIdList = DAOManager.getDAO(PlayerDAO.class).getPlayerOidsOnAccount(accountId);
+		List<Integer> playerIdList = PlayerDAO.getPlayerOidsOnAccount(accountId);
 		for (int playerId : playerIdList)
 			account.addPlayerAccountData(loadPlayerAccountData(playerId));
 		account.setAccountWarehouse(loadAccountWarehouse(account));
@@ -93,20 +93,20 @@ public class AccountService {
 	}
 
 	public static PlayerAccountData loadPlayerAccountData(int playerId) {
-		PlayerCommonData playerCommonData = DAOManager.getDAO(PlayerDAO.class).loadPlayerCommonData(playerId);
-		CharacterBanInfo cbi = DAOManager.getDAO(PlayerPunishmentsDAO.class).getCharBanInfo(playerId);
-		PlayerAppearance appereance = DAOManager.getDAO(PlayerAppearanceDAO.class).load(playerId);
-		LegionMember legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMember(playerId);
+		PlayerCommonData playerCommonData = PlayerDAO.loadPlayerCommonData(playerId);
+		CharacterBanInfo cbi = PlayerPunishmentsDAO.getCharBanInfo(playerId);
+		PlayerAppearance appereance = PlayerAppearanceDAO.load(playerId);
+		LegionMember legionMember = LegionMemberDAO.loadLegionMember(playerId);
 		// Load only equipment and its stones to display on character selection screen
-		List<Item> equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(playerId);
+		List<Item> equipment = InventoryDAO.loadEquipment(playerId);
 
 		PlayerAccountData playerAccData = new PlayerAccountData(playerCommonData, appereance, cbi, equipment, legionMember);
-		DAOManager.getDAO(PlayerDAO.class).setCreationDeletionTime(playerAccData);
+		PlayerDAO.setCreationDeletionTime(playerAccData);
 		return playerAccData;
 	}
 
 	public static Storage loadAccountWarehouse(Account account) {
-		Storage wh = DAOManager.getDAO(InventoryDAO.class).loadStorage(account.getId(), StorageType.ACCOUNT_WAREHOUSE);
+		Storage wh = InventoryDAO.loadStorage(account.getId(), StorageType.ACCOUNT_WAREHOUSE);
 		ItemService.loadItemStones(wh.getItems());
 		return wh;
 	}
