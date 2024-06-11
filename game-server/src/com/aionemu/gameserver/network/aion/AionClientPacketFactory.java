@@ -214,7 +214,7 @@ public class AionClientPacketFactory {
 			packets[186] = new PacketInfo<>(CM_MAY_LOGIN_INTO_GAME.class, State.AUTHED); // [C_SA_ACCOUNT_ITEM_QUERY (SAAccountItemQueryPacket)]
 			// packets[187] = [C_SA_ACCOUNT_ITEM_ACK (SAAccountItemAckPacket)]
 			packets[188] = new PacketInfo<>(CM_ABYSS_RANKING_PLAYERS.class, State.IN_GAME); // [C_REQUEST_ABYSS_RANKER_INFO (RequestAbyssRankerInfoPacket)]
-			packets[189] = new PacketInfo<>(CM_MAC_ADDRESS.class, State.CONNECTED, State.AUTHED, State.IN_GAME); // [C_ROUTE_INFO (RouteInfoPacket)]
+			packets[189] = new PacketInfo<>(CM_MAC_ADDRESS.class, State.CONNECTED); // [C_ROUTE_INFO (RouteInfoPacket)]
 			// packets[190] = // [C_CHECK_MESSAGE (&LAB_140639ed0)] sent when receiving S_CHECK_MESSAGE (opcode 80), contains 16 (static) bytes which change every 5s, maybe some kind of consistency check
 			packets[191] = new PacketInfo<>(CM_REPORT_PLAYER.class, State.IN_GAME); // [C_ACCUSE_CHARACTER (AccuseCharacterPacket)]
 			packets[192] = new PacketInfo<>(CM_INSTANCE_INFO.class, State.IN_GAME); // [C_INSTANCE_DUNGEON_COOLTIMES (InstanceDungeonCooltimePacket)]
