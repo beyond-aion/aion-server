@@ -8,7 +8,6 @@ import java.util.concurrent.CopyOnWriteArraySet;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.RewardServiceDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
@@ -47,7 +46,7 @@ public class WebRewardService {
 	public void sendAvailableRewards(Player player) {
 		if (player == null)
 			return;
-		List<RewardEntryItem> list = DAOManager.getDAO(RewardServiceDAO.class).loadUnreceived(player.getObjectId());
+		List<RewardEntryItem> list = RewardServiceDAO.loadUnreceived(player.getObjectId());
 		if (list.size() == 0)
 			return;
 
@@ -66,7 +65,7 @@ public class WebRewardService {
 		}
 
 		if (rewarded.size() > 0)
-			DAOManager.getDAO(RewardServiceDAO.class).storeReceived(rewarded, System.currentTimeMillis());
+			RewardServiceDAO.storeReceived(rewarded, System.currentTimeMillis());
 	}
 
 	private boolean sendRewardItem(Player player, RewardEntryItem item) {

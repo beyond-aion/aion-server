@@ -2,7 +2,6 @@ package com.aionemu.gameserver.world.container;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.LegionMemberDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
@@ -118,7 +117,7 @@ public class LegionMemberContainer {
 	public void updateCachedPlayerName(String oldName, Player player) {
 		legionMemberExByName.compute(oldName, (n, legionMember) -> {
 			if (legionMember == null)
-				legionMember = DAOManager.getDAO(LegionMemberDAO.class).loadLegionMemberEx(player.getObjectId());
+				legionMember = LegionMemberDAO.loadLegionMemberEx(player.getObjectId());
 			else
 				legionMember.setName(player.getName());
 			legionMemberExByName.put(player.getName(), legionMember);

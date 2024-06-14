@@ -2,7 +2,6 @@ package com.aionemu.gameserver.controllers;
 
 import java.sql.Timestamp;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Pet;
@@ -20,20 +19,19 @@ public class PetController extends VisibleObjectController<Pet> {
 	@Override
 	public void onDelete() {
 		super.onDelete();
-		PlayerPetsDAO dao = DAOManager.getDAO(PlayerPetsDAO.class);
 		PetCommonData commonData = getOwner().getCommonData();
 		PetFeedProgress progress = commonData.getFeedProgress();
 		commonData.cancelRefeedTask();
 		if (progress != null) {
 			commonData.setCancelFeed(true);
-			dao.saveFeedStatus(getOwner().getObjectId(), progress.getHungryLevel().getValue(), progress.getDataForPacket(), commonData.getRefeedTime());
+			PlayerPetsDAO.saveFeedStatus(getOwner().getObjectId(), progress.getHungryLevel().getValue(), progress.getDataForPacket(), commonData.getRefeedTime());
 		}
 		if (commonData.getDopingBag() != null && commonData.getDopingBag().isDirty())
-			dao.saveDopingBag(getOwner().getObjectId(), commonData.getDopingBag());
+			PlayerPetsDAO.saveDopingBag(getOwner().getObjectId(), commonData.getDopingBag());
 
 		getOwner().getMaster().getController().cancelTask(TaskId.PET_UPDATE);
 		commonData.setDespawnTime(new Timestamp(System.currentTimeMillis()));
-		dao.savePetMoodData(commonData);
+		PlayerPetsDAO.savePetMoodData(commonData);
 		getOwner().getMaster().setPet(null);
 	}
 
@@ -69,7 +67,7 @@ public class PetController extends VisibleObjectController<Pet> {
 							PacketSendUtility.sendPacket(player, new SM_PET(pet, 4, 0));
 						}
 
-						DAOManager.getDAO(PlayerPetsDAO.class).savePetMoodData(pet.getCommonData());
+						PlayerPetsDAO.savePetMoodData(pet.getCommonData());
 						saved = true;
 						startTime = System.currentTimeMillis();
 					}
@@ -81,7 +79,7 @@ public class PetController extends VisibleObjectController<Pet> {
 					PacketSendUtility.sendPacket(player, new SM_PET(pet, 3, 0));
 					// Save if it reaches 100% after player snuggles the pet, not by the scheduler itself
 					if (!saved)
-						DAOManager.getDAO(PlayerPetsDAO.class).savePetMoodData(pet.getCommonData());
+						PlayerPetsDAO.savePetMoodData(pet.getCommonData());
 				}
 			} catch (Exception ex) {
 				player.getController().cancelTask(TaskId.PET_UPDATE);

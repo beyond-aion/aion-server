@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dao.PlayerEmotionListDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -35,14 +34,14 @@ public class EmotionList {
 
 		if (isNew) {
 			ExpireTimerTask.getInstance().registerExpirable(emotion, owner);
-			DAOManager.getDAO(PlayerEmotionListDAO.class).insertEmotion(owner, emotion);
+			PlayerEmotionListDAO.insertEmotion(owner, emotion);
 			PacketSendUtility.sendPacket(owner, new SM_EMOTION_LIST((byte) 1, Collections.singletonList(emotion)));
 		}
 	}
 
 	public void remove(int emotionId) {
 		emotions.remove(emotionId);
-		DAOManager.getDAO(PlayerEmotionListDAO.class).deleteEmotion(owner.getObjectId(), emotionId);
+		PlayerEmotionListDAO.deleteEmotion(owner.getObjectId(), emotionId);
 		PacketSendUtility.sendPacket(owner, new SM_EMOTION_LIST((byte) 0, getEmotions()));
 	}
 

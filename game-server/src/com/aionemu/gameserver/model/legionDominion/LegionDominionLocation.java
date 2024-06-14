@@ -9,7 +9,6 @@ import java.util.TreeMap;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.LegionConfig;
 import com.aionemu.gameserver.dao.LegionDominionDAO;
 import com.aionemu.gameserver.model.Race;
@@ -113,9 +112,9 @@ public class LegionDominionLocation {
 
 	private void store(LegionDominionParticipantInfo info, boolean isNew) {
 		if (isNew) {
-			DAOManager.getDAO(LegionDominionDAO.class).storeNewInfo(getLocationId(), info);
+			LegionDominionDAO.storeNewInfo(getLocationId(), info);
 		} else {
-			DAOManager.getDAO(LegionDominionDAO.class).updateInfo(info);
+			LegionDominionDAO.updateInfo(info);
 		}
 	}
 

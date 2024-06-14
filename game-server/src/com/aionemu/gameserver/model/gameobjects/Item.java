@@ -5,7 +5,6 @@ import java.util.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -312,8 +311,6 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 * allowed to use this method for newly created items which are not yet in any storage
 	 *
 	 * @param count
-	 * @param left
-	 *          count
 	 */
 	public long increaseItemCount(long count) {
 		if (count <= 0) {
@@ -333,8 +330,6 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	 * allowed to use this method for newly created items which are not yet in any storage
 	 *
 	 * @param count
-	 * @param left
-	 *          count
 	 */
 	public long decreaseItemCount(long count) {
 		if (count <= 0) {
@@ -482,7 +477,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 	public void setGodStone(GodStone godStone) {
 		if (godStone == null) {
 			this.godStone.setPersistentState(PersistentState.DELETED);
-			DAOManager.getDAO(ItemStoneListDAO.class).storeGodStones(this.godStone);
+			ItemStoneListDAO.storeGodStones(this.godStone);
 		}
 		this.godStone = godStone;
 	}
@@ -615,7 +610,7 @@ public class Item extends AionObject implements Expirable, StatOwner, Persistabl
 			return;
 		for (ManaStone ms : fusionStones)
 			ms.setPersistentState(PersistentState.DELETED);
-		DAOManager.getDAO(ItemStoneListDAO.class).storeFusionStone(fusionStones);
+		ItemStoneListDAO.storeFusionStone(fusionStones);
 		fusionStones.clear();
 	}
 

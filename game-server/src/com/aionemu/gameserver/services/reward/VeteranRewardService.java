@@ -5,7 +5,6 @@ import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dao.VeteranRewardDAO;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
@@ -466,11 +465,11 @@ public final class VeteranRewardService {
 		if (maxMonthsToReceive < 1) // return if account is younger than a month
 			return;
 
-		int receivedMonths = DAOManager.getDAO(VeteranRewardDAO.class).loadReceivedMonths(player); // -1 means error
+		int receivedMonths = VeteranRewardDAO.loadReceivedMonths(player); // -1 means error
 		if (receivedMonths < 0 || receivedMonths >= maxMonthsToReceive)
 			return;
 
-		if (DAOManager.getDAO(VeteranRewardDAO.class).storeReceivedMonths(player, maxMonthsToReceive))
+		if (VeteranRewardDAO.storeReceivedMonths(player, maxMonthsToReceive))
 			for (int i = receivedMonths; i < maxMonthsToReceive; i++) {
 				List<RewardItem> items;
 				if (i < 60) {
@@ -481,7 +480,7 @@ public final class VeteranRewardService {
 						items.remove(Rnd.nextInt(items.size()));
 				}
 				if (player.getMailbox().getLetters().size() >= 100) { // abort on mailbox overflow and save the correct month
-					DAOManager.getDAO(VeteranRewardDAO.class).storeReceivedMonths(player, i);
+					VeteranRewardDAO.storeReceivedMonths(player, i);
 					return;
 				}
 				for (RewardItem item : items)

@@ -5,7 +5,6 @@ import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -81,7 +80,7 @@ public class PolishAction extends AbstractItemAction {
 				idianStone.onUnEquip(player);
 				targetItem.setIdianStone(null);
 				idianStone.setPersistentState(PersistentState.DELETED);
-				DAOManager.getDAO(ItemStoneListDAO.class).storeIdianStones(idianStone);
+				ItemStoneListDAO.storeIdianStones(idianStone);
 			}
 			idianStone = new IdianStone(parentItem.getItemId(), PersistentState.NEW, targetItem, bonusNumber, 1000000);
 			targetItem.setIdianStone(idianStone);

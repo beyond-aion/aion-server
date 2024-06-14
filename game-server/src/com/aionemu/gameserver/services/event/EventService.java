@@ -9,7 +9,6 @@ import org.quartz.JobDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dao.EventDAO;
@@ -156,7 +155,7 @@ public class EventService {
 				if (!oldActiveEvents.contains(newActiveEvent)) {
 					if (!cleanedOldBuffData) {
 						cleanedOldBuffData = true;
-						DAOManager.getDAO(EventDAO.class).deleteOldBuffData();
+						EventDAO.deleteOldBuffData();
 					}
 					newActiveEvent.start();
 				}

@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.gameobjects.player.title;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerTitleListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
@@ -62,7 +61,7 @@ public class TitleList {
 			if (!titles.containsKey(titleId)) {
 				titles.put(titleId, entry);
 				ExpireTimerTask.getInstance().registerExpirable(entry, owner);
-				DAOManager.getDAO(PlayerTitleListDAO.class).storeTitles(owner, entry);
+				PlayerTitleListDAO.storeTitles(owner, entry);
 			} else {
 				PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_TOOLTIP_LEARNED_TITLE());
 				return false;
@@ -107,7 +106,7 @@ public class TitleList {
 			setBonusTitle(-1);
 		titles.remove(titleId);
 		PacketSendUtility.sendPacket(owner, new SM_TITLE_INFO(owner));
-		DAOManager.getDAO(PlayerTitleListDAO.class).removeTitle(owner.getObjectId(), titleId);
+		PlayerTitleListDAO.removeTitle(owner.getObjectId(), titleId);
 	}
 
 	public int size() {

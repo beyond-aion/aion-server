@@ -7,7 +7,6 @@ import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.dao.ServerVariablesDAO;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -17,7 +16,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public abstract class AbstractCronTask implements Runnable {
 
-	protected static final Long SERVER_STOP_MILLIS = DAOManager.getDAO(ServerVariablesDAO.class).loadLong("serverLastRun");
+	protected static final Long SERVER_STOP_MILLIS = ServerVariablesDAO.loadLong("serverLastRun");
 	private static final Semaphore semaphore = new Semaphore(1);
 	protected final Logger log = LoggerFactory.getLogger(getClass());
 	private final CronExpression cronExpression;

@@ -9,7 +9,6 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.MacroList;
@@ -176,8 +175,8 @@ public class SM_PTRANSFER_CONTROL extends LsServerPacket {
 			case ITEMS_INFORMATION:
 				writeD(this.taskId);
 				// inventory
-				List<Item> inv = DAOManager.getDAO(InventoryDAO.class).loadStorageDirect(this.player.getObjectId(), StorageType.CUBE);
-				inv.addAll(DAOManager.getDAO(InventoryDAO.class).loadStorageDirect(this.player.getObjectId(), StorageType.REGULAR_WAREHOUSE));
+				List<Item> inv = InventoryDAO.loadStorageDirect(this.player.getObjectId(), StorageType.CUBE);
+				inv.addAll(InventoryDAO.loadStorageDirect(this.player.getObjectId(), StorageType.REGULAR_WAREHOUSE));
 				writeD(inv.size());
 				ItemService.loadItemStones(inv);
 				for (Item item : inv) {

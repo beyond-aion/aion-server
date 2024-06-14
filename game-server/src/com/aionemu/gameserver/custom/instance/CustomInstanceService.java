@@ -6,7 +6,6 @@ import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
 import com.aionemu.gameserver.dao.CustomInstanceDAO;
@@ -47,7 +46,7 @@ public class CustomInstanceService {
 	}
 
 	public boolean canEnter(int playerId) {
-		CustomInstanceRank playerRankObject = DAOManager.getDAO(CustomInstanceDAO.class).loadPlayerRankObject(playerId);
+		CustomInstanceRank playerRankObject = CustomInstanceDAO.loadPlayerRankObject(playerId);
 		if (playerRankObject == null)
 			return true;
 		ZonedDateTime now = ServerTime.now();
@@ -69,14 +68,14 @@ public class CustomInstanceService {
 	}
 
 	public CustomInstanceRank loadOrCreateRank(int playerId) {
-		CustomInstanceRank customInstanceRank = DAOManager.getDAO(CustomInstanceDAO.class).loadPlayerRankObject(playerId);
+		CustomInstanceRank customInstanceRank = CustomInstanceDAO.loadPlayerRankObject(playerId);
 		if (customInstanceRank == null)
 			customInstanceRank = new CustomInstanceRank(playerId, 0, System.currentTimeMillis(), 0, 0);
 		return customInstanceRank;
 	}
 
 	public boolean resetEntryCooldown(int playerId) {
-		CustomInstanceRank rankObj = DAOManager.getDAO(CustomInstanceDAO.class).loadPlayerRankObject(playerId);
+		CustomInstanceRank rankObj = CustomInstanceDAO.loadPlayerRankObject(playerId);
 		if (rankObj == null)
 			return false;
 		ZonedDateTime now = ServerTime.now();
@@ -88,14 +87,14 @@ public class CustomInstanceService {
 		} else {
 			reUseTime = reUseTime.minusSeconds(1);
 			rankObj.setLastEntry(reUseTime.toEpochSecond() * 1000);
-			return DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj);
+			return CustomInstanceDAO.storePlayer(rankObj);
 		}
 	}
 
 	public boolean updateLastEntry(int playerId, long newEntryTime) {
 		CustomInstanceRank rankObj = loadOrCreateRank(playerId);
 		rankObj.setLastEntry(newEntryTime);
-		return DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj);
+		return CustomInstanceDAO.storePlayer(rankObj);
 	}
 
 	public boolean changePlayerRank(int playerId, int newRank, int achievedDps) {
@@ -106,7 +105,7 @@ public class CustomInstanceService {
 	}
 
 	private boolean storeNewRankData(CustomInstanceRank rankObj) {
-		return DAOManager.getDAO(CustomInstanceDAO.class).storePlayer(rankObj);
+		return CustomInstanceDAO.storePlayer(rankObj);
 	}
 
 	private void changeRank(CustomInstanceRank rankObj, int newRank) {
@@ -125,7 +124,7 @@ public class CustomInstanceService {
 	}
 
 	private List<PlayerModelEntry> loadPlayerModelEntries(int playerId) {
-		return DAOManager.getDAO(CustomInstancePlayerModelEntryDAO.class).loadPlayerModelEntries(playerId);
+		return CustomInstancePlayerModelEntryDAO.loadPlayerModelEntries(playerId);
 	}
 
 	public void saveNewPlayerModelEntries(int playerId) {
@@ -133,7 +132,7 @@ public class CustomInstanceService {
 		if (pmes == null)
 			return;
 		Collection<PlayerModelEntry> filteredEntries = pmes.stream().filter(Persistable.NEW).collect(Collectors.toList());
-		DAOManager.getDAO(CustomInstancePlayerModelEntryDAO.class).insertNewRecords(filteredEntries);
+		CustomInstancePlayerModelEntryDAO.insertNewRecords(filteredEntries);
 	}
 
 	public List<PlayerModelEntry> getPlayerModelEntries(int playerId) {
@@ -141,7 +140,7 @@ public class CustomInstanceService {
 	}
 
 	public void openLeaderboard(Player player, Race race) {
-		List<CustomInstanceRankedPlayer> rankedPlayers = DAOManager.getDAO(CustomInstanceDAO.class).loadTop10(race);
+		List<CustomInstanceRankedPlayer> rankedPlayers = CustomInstanceDAO.loadTop10(race);
 		StringBuilder content = new StringBuilder("""
 						<br><br><br>
 						<font color='3E2601' size='4'>Eternal Challenge Leaderboard</font><br>

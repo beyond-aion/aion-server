@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerAppearanceDAO;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -46,7 +45,7 @@ public class CM_CHARACTER_EDIT extends AbstractCharacterEditPacket {
 			if (isGenderSwitch)
 				player.getCommonData().setGender(gender); // no need to save gender here, will be saved periodically and on logout
 			player.setPlayerAppearance(playerAppearance);
-			DAOManager.getDAO(PlayerAppearanceDAO.class).store(player); // save new appearance
+			PlayerAppearanceDAO.store(player); // save new appearance
 			if (spawnedBeforeAttributesChanged)
 				player.getController().onChangedPlayerAttributes();
 		} else { // can only happen if you illegally enter the character edit screen

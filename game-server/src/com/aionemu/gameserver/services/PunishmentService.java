@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.concurrent.TimeUnit;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -29,7 +28,7 @@ public class PunishmentService {
 	 * @param delayInMinutes
 	 */
 	public static void unbanChar(int playerId) {
-		DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(playerId, PunishmentType.CHARBAN);
+		PlayerPunishmentsDAO.unpunishPlayer(playerId, PunishmentType.CHARBAN);
 	}
 
 	/**
@@ -40,7 +39,7 @@ public class PunishmentService {
 	 * @param delayInMinutes
 	 */
 	public static void banChar(int playerId, int dayCount, String reason) {
-		DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(playerId, PunishmentType.CHARBAN, calculateDuration(dayCount), reason);
+		PlayerPunishmentsDAO.punishPlayer(playerId, PunishmentType.CHARBAN, calculateDuration(dayCount), reason);
 
 		// if player is online - kick him
 		Player player = World.getInstance().getPlayer(playerId);
@@ -75,7 +74,7 @@ public class PunishmentService {
 				ChatBanService.banPlayer(player, delayInMinutes);
 				player.setPrisonEndTimeMillis(System.currentTimeMillis() + duration);
 				TeleportService.teleportToPrison(player);
-				DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.PRISON, reason);
+				PlayerPunishmentsDAO.punishPlayer(player, PunishmentType.PRISON, reason);
 				PacketSendUtility.sendMessage(player, "You have been teleported to prison for a time of " + delayInMinutes
 					+ " minutes.\n If you disconnect the time stops and the timer of the prison'll see at your next login.");
 			}
@@ -84,7 +83,7 @@ public class PunishmentService {
 			player.setPrisonEndTimeMillis(0);
 			ChatBanService.unbanPlayer(player);
 			TeleportService.moveToBindLocation(player);
-			DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(player.getObjectId(), PunishmentType.PRISON);
+			PlayerPunishmentsDAO.unpunishPlayer(player.getObjectId(), PunishmentType.PRISON);
 			PacketSendUtility.sendMessage(player, "You come out of prison.");
 		}
 	}
@@ -140,13 +139,13 @@ public class PunishmentService {
 				player.setCaptchaImage(null);
 			}
 			player.setGatherRestrictionExpirationTime(System.currentTimeMillis() + delay);
-			DAOManager.getDAO(PlayerPunishmentsDAO.class).punishPlayer(player, PunishmentType.GATHER, "Possible gatherbot");
+			PlayerPunishmentsDAO.punishPlayer(player, PunishmentType.GATHER, "Possible gatherbot");
 		} else {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CAPTCHA_RECOVERED());
 			player.setCaptchaWord(null);
 			player.setCaptchaImage(null);
 			player.setGatherRestrictionExpirationTime(0);
-			DAOManager.getDAO(PlayerPunishmentsDAO.class).unpunishPlayer(player.getObjectId(), PunishmentType.GATHER);
+			PlayerPunishmentsDAO.unpunishPlayer(player.getObjectId(), PunishmentType.GATHER);
 		}
 	}
 

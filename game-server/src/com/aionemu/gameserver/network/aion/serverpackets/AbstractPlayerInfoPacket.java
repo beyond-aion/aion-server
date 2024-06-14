@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.MailDAO;
 import com.aionemu.gameserver.dao.PlayerSettingsDAO;
 import com.aionemu.gameserver.model.account.CharacterBanInfo;
@@ -132,10 +131,10 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		writeD(0); // 4.5
 		writeB(new byte[68]); // 4.7
 		writeD(accPlData.getDeletionTimeInSeconds());
-		writeH(DAOManager.getDAO(PlayerSettingsDAO.class).loadSettings(playerId).getDisplay()); // display helmet 0 show, 5 dont show , possible bit operation
+		writeH(PlayerSettingsDAO.loadSettings(playerId).getDisplay()); // display helmet 0 show, 5 dont show , possible bit operation
 		writeH(0);
 		writeD(0); // total mail count
-		writeD(DAOManager.getDAO(MailDAO.class).haveUnread(playerId) ? 1 : 0); // unread mail count
+		writeD(MailDAO.haveUnread(playerId) ? 1 : 0); // unread mail count
 		writeD(0); // express mail count
 		writeD(0); // blackcloud mail count
 		writeQ(BrokerService.getInstance().getEarnedKinahFromSoldItems(pcd)); // collected money from broker

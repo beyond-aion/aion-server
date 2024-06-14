@@ -9,7 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.FlyController;
@@ -1519,7 +1518,7 @@ public class Player extends Creature {
 	public void setVar(String key, Object value, boolean persist) {
 		vars.put(key, value);
 		if (persist)
-			DAOManager.getDAO(PlayerVarsDAO.class).set(getObjectId(), key, value);
+			PlayerVarsDAO.set(getObjectId(), key, value);
 	}
 
 	public Object getVar(String key) {

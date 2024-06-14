@@ -5,7 +5,6 @@ import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAG
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIRequest;
@@ -94,7 +93,7 @@ public class ResurrectAI extends NpcAI {
 						responder.getHeading());
 					bpp.setPersistentState(old == null ? PersistentState.NEW : PersistentState.UPDATE_REQUIRED);
 					responder.setBindPoint(bpp);
-					if (DAOManager.getDAO(PlayerBindPointDAO.class).store(responder)) {
+					if (PlayerBindPointDAO.store(responder)) {
 						responder.getInventory().decreaseKinah(bindPointTemplate.getPrice());
 						TeleportService.sendObeliskBindPoint(responder);
 						PacketSendUtility.broadcastPacket(responder, new SM_ACTION_ANIMATION(responder.getObjectId(), ActionAnimation.BIND_KISK), true);

@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dao.PlayerPasskeyDAO;
 import com.aionemu.gameserver.model.account.CharacterPasskey;
@@ -48,11 +47,11 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
 			case 0:
 				chaPasskey.setIsPass(false);
 				chaPasskey.setWrongCount(0);
-				DAOManager.getDAO(PlayerPasskeyDAO.class).insertPlayerPasskey(client.getAccount().getId(), passkey);
+				PlayerPasskeyDAO.insertPlayerPasskey(client.getAccount().getId(), passkey);
 				client.sendPacket(new SM_CHARACTER_SELECT(2, type, chaPasskey.getWrongCount()));
 				break;
 			case 2:
-				boolean isSuccess = DAOManager.getDAO(PlayerPasskeyDAO.class).updatePlayerPasskey(client.getAccount().getId(), passkey, newPasskey);
+				boolean isSuccess = PlayerPasskeyDAO.updatePlayerPasskey(client.getAccount().getId(), passkey, newPasskey);
 
 				chaPasskey.setIsPass(false);
 				if (isSuccess) {
@@ -65,7 +64,7 @@ public class CM_CHARACTER_PASSKEY extends AionClientPacket {
 				}
 				break;
 			case 3:
-				boolean isPass = DAOManager.getDAO(PlayerPasskeyDAO.class).checkPlayerPasskey(client.getAccount().getId(), passkey);
+				boolean isPass = PlayerPasskeyDAO.checkPlayerPasskey(client.getAccount().getId(), passkey);
 
 				if (isPass) {
 					chaPasskey.setIsPass(true);

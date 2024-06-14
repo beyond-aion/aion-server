@@ -2,7 +2,6 @@ package com.aionemu.gameserver.model.gameobjects.player;
 
 import java.sql.Timestamp;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerQuestListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerExperienceTable;
@@ -569,7 +568,7 @@ public class PlayerCommonData extends CreatureTemplate {
 		if (player != null)
 			qsl = player.getQuestStateList();
 		else
-			qsl = DAOManager.getDAO(PlayerQuestListDAO.class).load(playerObjId);
+			qsl = PlayerQuestListDAO.load(playerObjId);
 
 		// check both quest states in case a player changed race
 		QuestStatus elyAscentQuestStatus = qsl.getQuestState(1006) != null ? qsl.getQuestState(1006).getStatus() : null;

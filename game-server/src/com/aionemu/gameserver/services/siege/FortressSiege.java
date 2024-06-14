@@ -9,7 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
@@ -183,7 +182,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		updateOutpostStatusByFortress(getSiegeLocation());
 
 		// Update data in the DB
-		DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(getSiegeLocation());
+		SiegeDAO.updateSiegeLocation(getSiegeLocation());
 		if (isBossKilled()) {
 			getSiegeLocation().forEachPlayer(p -> {
 				if (SiegeRace.getByRace(p.getRace()) == getSiegeLocation().getRace())

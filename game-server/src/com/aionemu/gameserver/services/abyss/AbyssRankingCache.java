@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.abyss;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
 import com.aionemu.gameserver.dao.AbyssRankDAO.RankingListLegion;
 import com.aionemu.gameserver.dao.AbyssRankDAO.RankingListPlayer;
@@ -51,8 +50,8 @@ public class AbyssRankingCache {
 	 */
 	private void refreshCache() {
 		List<Race> races = Arrays.asList(Race.ASMODIANS, Race.ELYOS);
-		List<RankingListPlayer> rankingListPlayers = DAOManager.getDAO(AbyssRankDAO.class).loadRankingListPlayers();
-		List<RankingListLegion> rankingListLegions = DAOManager.getDAO(AbyssRankDAO.class).loadRankingListLegions();
+		List<RankingListPlayer> rankingListPlayers = AbyssRankDAO.loadRankingListPlayers();
+		List<RankingListLegion> rankingListLegions = AbyssRankDAO.loadRankingListLegions();
 		Map<Race, List<SM_ABYSS_RANKING_PLAYERS>> newPlayerRankListPackets = new HashMap<>();
 		Map<Race, SM_ABYSS_RANKING_LEGIONS> newLegionRankListPackets = new HashMap<>();
 

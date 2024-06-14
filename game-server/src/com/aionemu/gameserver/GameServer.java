@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
 import com.aionemu.commons.services.CronService;
@@ -200,8 +199,8 @@ public class GameServer {
 		RiftService.getInstance().initRifts();
 
 		if (GSConfig.ENABLE_RATIO_LIMITATION) { // TODO move all of this stuff in a separate class / service
-			ASMOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ASMODIANS);
-			ELYOS_COUNT = DAOManager.getDAO(PlayerDAO.class).getCharacterCountForRace(Race.ELYOS);
+			ASMOS_COUNT = PlayerDAO.getCharacterCountForRace(Race.ASMODIANS);
+			ELYOS_COUNT = PlayerDAO.getCharacterCountForRace(Race.ELYOS);
 			updateRatio(null, 0);
 		}
 		LimitedItemTradeService.getInstance().start();
@@ -289,9 +288,7 @@ public class GameServer {
 		Config.load();
 		// Second should be database factory
 		DatabaseFactory.init();
-		// Initialize DAOs
-		DAOManager.init();
-		DAOManager.getDAO(PlayerDAO.class).setAllPlayersOffline();
+		PlayerDAO.setAllPlayersOffline();
 		// Initialize thread pools
 		ThreadPoolManager.getInstance();
 
