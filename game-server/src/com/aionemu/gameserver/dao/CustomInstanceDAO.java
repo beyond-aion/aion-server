@@ -14,7 +14,7 @@ import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
 
 /**
- * @author Jo
+ * @author Jo, Estrayl
  */
 public class CustomInstanceDAO {
 

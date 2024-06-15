@@ -15,7 +15,7 @@ import com.aionemu.commons.database.DatabaseFactory;
 public class OldNamesDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(OldNamesDAO.class);
-	
+
 	public static boolean isNameReserved(String oldName, String newName, int nameReservationDurationDays) {
 		if (nameReservationDurationDays > 0) {
 			try (Connection con = DatabaseFactory.getConnection();

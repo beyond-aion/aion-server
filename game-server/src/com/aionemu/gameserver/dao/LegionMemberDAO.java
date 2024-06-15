@@ -20,7 +20,7 @@ import com.aionemu.gameserver.services.LegionService;
 
 /**
  * Class that is responsible for storing/loading legion data
- *
+ * 
  * @author Simple
  */
 public class LegionMemberDAO {
@@ -104,8 +104,8 @@ public class LegionMemberDAO {
 					legionMember.setSelfIntro(resultSet.getString("selfintro"));
 					legionMember.setChallengeScore(resultSet.getInt("challenge_score"));
 					legionMember.setLegion(LegionService.getInstance().getLegion(legionId));
-				} catch (SQLException sqlE) {
-					log.debug("[DAO: MySQL5LegionMemberDAO] Player is not in a Legion");
+				} catch (SQLException e) {
+					log.error("Could not load legion member " + playerObjId, e);
 				}
 			}
 		});
@@ -142,8 +142,8 @@ public class LegionMemberDAO {
 					legionMemberEx.setSelfIntro(resultSet.getString("legion_members.selfintro"));
 
 					legionMemberEx.setLegion(LegionService.getInstance().getLegion(legionId));
-				} catch (SQLException sqlE) {
-					log.debug("[DAO: MySQL5LegionMemberDAO] Player is not in a Legion");
+				} catch (SQLException e) {
+					log.error("Could not load legion memberEx " + playerObjId, e);
 				}
 			}
 		});
@@ -180,8 +180,8 @@ public class LegionMemberDAO {
 					legionMember.setSelfIntro(resultSet.getString("selfintro"));
 
 					legionMember.setLegion(LegionService.getInstance().getLegion(legionId));
-				} catch (SQLException sqlE) {
-					log.debug("[DAO: MySQL5LegionMemberDAO] Player is not in a Legion");
+				} catch (SQLException e) {
+					log.error("Could not load legion memberEx " + playerName, e);
 				}
 			}
 		});
@@ -209,8 +209,8 @@ public class LegionMemberDAO {
 						int playerObjId = resultSet.getInt("player_id");
 						legionMembers.add(playerObjId);
 					}
-				} catch (SQLException sqlE) {
-					log.error("[DAO: MySQL5LegionMemberDAO] No players in Legion. DELETE Legion Id: " + legionId);
+				} catch (SQLException e) {
+					log.error("Could not load members of legion " + legionId, e);
 				}
 			}
 		});

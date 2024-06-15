@@ -16,7 +16,7 @@ import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelEntry;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 
 /**
- * @author Jo
+ * @author Jo, Estrayl
  */
 public class CustomInstancePlayerModelEntryDAO {
 

@@ -12,7 +12,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.PunishmentService.PunishmentType;
 
 /**
- * @author lord_rex
+ * @author lord_rex, Cura, nrg
  */
 public class PlayerPunishmentsDAO {
 

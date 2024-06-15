@@ -13,7 +13,7 @@ import com.aionemu.gameserver.model.account.PassportsList;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 
 /**
- * @author Luzien
+ * @author ViAl, Luzien
  */
 public class AccountPassportsDAO {
 

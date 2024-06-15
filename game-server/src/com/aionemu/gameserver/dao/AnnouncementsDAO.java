@@ -14,7 +14,7 @@ import com.aionemu.gameserver.model.Announcement;
 
 /**
  * DAO that manages Announcements
- *
+ * 
  * @author Divinity
  */
 public class AnnouncementsDAO {

@@ -20,8 +20,8 @@ import com.aionemu.gameserver.model.skill.PlayerSkillList;
 
 /**
  * Created on: 15.07.2009 19:33:07 Edited On: 13.09.2009 19:48:00
- *
- * @author IceReaper, orfeo087, Avol, AEJTester
+ * 
+ * @author SoulKeeper, IceReaper, orfeo087, Avol, AEJTester
  */
 public class PlayerSkillListDAO {
 
@@ -34,16 +34,14 @@ public class PlayerSkillListDAO {
 
 	public static PlayerSkillList loadSkillList(int playerId) {
 		List<PlayerSkillEntry> skills = new ArrayList<>();
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-					 PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, playerId);
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						int id = rset.getInt("skill_id");
-						int lv = rset.getInt("skill_level");
-						skills.add(new PlayerSkillEntry(id, lv, 0, PersistentState.UPDATED));
-					}
+		try (Connection con = DatabaseFactory.getConnection();
+				 PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, playerId);
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int id = rset.getInt("skill_id");
+					int lv = rset.getInt("skill_level");
+					skills.add(new PlayerSkillEntry(id, lv, 0, PersistentState.UPDATED));
 				}
 			}
 		} catch (Exception e) {
@@ -63,9 +61,7 @@ public class PlayerSkillListDAO {
 	}
 
 	private static void store(Player player, List<PlayerSkillEntry> skills) {
-		Connection con = null;
-		try {
-			con = DatabaseFactory.getConnection();
+		try (Connection con = DatabaseFactory.getConnection()) {
 			con.setAutoCommit(false);
 
 			deleteSkills(con, player, skills);
@@ -74,8 +70,6 @@ public class PlayerSkillListDAO {
 
 		} catch (SQLException e) {
 			log.error("Failed to open connection to database while saving SkillList for player " + player.getObjectId());
-		} finally {
-			DatabaseFactory.close(con);
 		}
 
 		for (PlayerSkillEntry skill : skills) {
@@ -88,10 +82,7 @@ public class PlayerSkillListDAO {
 		if (skills.isEmpty())
 			return;
 
-		PreparedStatement ps = null;
-		try {
-			ps = con.prepareStatement(INSERT_QUERY);
-
+		try (PreparedStatement ps = con.prepareStatement(INSERT_QUERY)) {
 			for (PlayerSkillEntry skill : skills) {
 				ps.setInt(1, player.getObjectId());
 				ps.setInt(2, skill.getSkillId());
@@ -103,8 +94,6 @@ public class PlayerSkillListDAO {
 			con.commit();
 		} catch (SQLException e) {
 			log.error("Can't add skills for player: " + player.getObjectId(), e);
-		} finally {
-			DatabaseFactory.close(ps);
 		}
 	}
 
@@ -113,10 +102,7 @@ public class PlayerSkillListDAO {
 		if (skills.isEmpty())
 			return;
 
-		PreparedStatement ps = null;
-		try {
-			ps = con.prepareStatement(UPDATE_QUERY);
-
+		try (PreparedStatement ps = con.prepareStatement(UPDATE_QUERY)) {
 			for (PlayerSkillEntry skill : skills) {
 				ps.setInt(1, skill.getSkillLevel());
 				ps.setInt(2, player.getObjectId());
@@ -128,8 +114,6 @@ public class PlayerSkillListDAO {
 			con.commit();
 		} catch (SQLException e) {
 			log.error("Can't update skills for player: " + player.getObjectId());
-		} finally {
-			DatabaseFactory.close(ps);
 		}
 	}
 
@@ -138,10 +122,7 @@ public class PlayerSkillListDAO {
 		if (skills.isEmpty())
 			return;
 
-		PreparedStatement ps = null;
-		try {
-			ps = con.prepareStatement(DELETE_QUERY);
-
+		try (PreparedStatement ps = con.prepareStatement(DELETE_QUERY)) {
 			for (PlayerSkillEntry skill : skills) {
 				ps.setInt(1, player.getObjectId());
 				ps.setInt(2, skill.getSkillId());
@@ -152,8 +133,6 @@ public class PlayerSkillListDAO {
 			con.commit();
 		} catch (SQLException e) {
 			log.error("Can't delete skills for player: " + player.getObjectId());
-		} finally {
-			DatabaseFactory.close(ps);
 		}
 	}
 

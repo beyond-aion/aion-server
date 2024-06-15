@@ -25,15 +25,13 @@ public class PlayerEmotionListDAO {
 
 	public static void loadEmotions(Player player) {
 		EmotionList emotions = new EmotionList(player);
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, player.getObjectId());
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						int emotionId = rset.getInt("emotion");
-						int remaining = rset.getInt("remaining");
-						emotions.add(emotionId, remaining, false);
-					}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, player.getObjectId());
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int emotionId = rset.getInt("emotion");
+					int remaining = rset.getInt("remaining");
+					emotions.add(emotionId, remaining, false);
 				}
 			}
 		} catch (Exception e) {
@@ -43,25 +41,21 @@ public class PlayerEmotionListDAO {
 	}
 
 	public static void insertEmotion(Player player, Emotion emotion) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
-				stmt.setInt(1, player.getObjectId());
-				stmt.setInt(2, emotion.getId());
-				stmt.setInt(3, emotion.getExpireTime());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
+			stmt.setInt(1, player.getObjectId());
+			stmt.setInt(2, emotion.getId());
+			stmt.setInt(3, emotion.getExpireTime());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not store emotionId for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);
 		}
 	}
 
 	public static void deleteEmotion(int playerId, int emotionId) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
-				stmt.setInt(1, playerId);
-				stmt.setInt(2, emotionId);
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
+			stmt.setInt(1, playerId);
+			stmt.setInt(2, emotionId);
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not delete title for player " + playerId + " from DB: " + e.getMessage(), e);
 		}

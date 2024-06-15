@@ -15,7 +15,7 @@ import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.gameserver.model.templates.rewards.RewardEntryItem;
 
 /**
- * @author KID
+ * @author KID, Neon
  */
 public class RewardServiceDAO {
 

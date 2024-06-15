@@ -25,7 +25,7 @@ public class VeteranRewardDAO {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
 			ResultSet rset = stmt.executeQuery();
-			while (rset.next())
+			if (rset.next())
 				return rset.getInt("received_months");
 			return 0;
 		} catch (SQLException e) {

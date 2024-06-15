@@ -26,31 +26,19 @@ public class PlayerSettingsDAO {
 	 * TODO 1) analyze possibility to zip settings 2) insert/update instead of replace 0 - uisettings 1 - shortcuts 2 - display 3 - deny
 	 */
 	public static PlayerSettings loadSettings(int playerId) {
-		final PlayerSettings playerSettings = new PlayerSettings();
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-					 PreparedStatement stmt = con.prepareStatement("SELECT * FROM player_settings WHERE player_id = ?")) {
-				stmt.setInt(1, playerId);
-				try (ResultSet resultSet = stmt.executeQuery()) {
-					while (resultSet.next()) {
-						int type = resultSet.getInt("settings_type");
-						switch (type) {
-							case 0:
-								playerSettings.setUiSettings(resultSet.getBytes("settings"));
-								break;
-							case 1:
-								playerSettings.setShortcuts(resultSet.getBytes("settings"));
-								break;
-							case 2:
-								playerSettings.setHouseBuddies(resultSet.getBytes("settings"));
-								break;
-							case -1:
-								playerSettings.setDisplay(resultSet.getInt("settings"));
-								break;
-							case -2:
-								playerSettings.setDeny(resultSet.getInt("settings"));
-								break;
-						}
+		PlayerSettings playerSettings = new PlayerSettings();
+		try (Connection con = DatabaseFactory.getConnection();
+				 PreparedStatement stmt = con.prepareStatement("SELECT * FROM player_settings WHERE player_id = ?")) {
+			stmt.setInt(1, playerId);
+			try (ResultSet resultSet = stmt.executeQuery()) {
+				while (resultSet.next()) {
+					int type = resultSet.getInt("settings_type");
+					switch (type) {
+						case 0 -> playerSettings.setUiSettings(resultSet.getBytes("settings"));
+						case 1 -> playerSettings.setShortcuts(resultSet.getBytes("settings"));
+						case 2 -> playerSettings.setHouseBuddies(resultSet.getBytes("settings"));
+						case -1 -> playerSettings.setDisplay(resultSet.getInt("settings"));
+						case -2 -> playerSettings.setDeny(resultSet.getInt("settings"));
 					}
 				}
 			}

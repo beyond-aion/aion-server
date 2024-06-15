@@ -16,8 +16,8 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 
 /**
  * Class that is responsible for loading/storing player appearance
- *
- * @author SoulKeeper
+ * 
+ * @author SoulKeeper, AEJTester, srx47
  */
 public class PlayerAppearanceDAO {
 
@@ -25,66 +25,64 @@ public class PlayerAppearanceDAO {
 
 	public static PlayerAppearance load(final int playerId) {
 		final PlayerAppearance pa = new PlayerAppearance();
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-					 PreparedStatement stmt = con.prepareStatement("SELECT * FROM player_appearance WHERE player_id = ?")) {
-				stmt.setInt(1, playerId);
-				try (ResultSet resultSet = stmt.executeQuery()) {
-					if (resultSet.next()) {
-						pa.setFace(resultSet.getInt("face"));
-						pa.setHair(resultSet.getInt("hair"));
-						pa.setDeco(resultSet.getInt("deco"));
-						pa.setTattoo(resultSet.getInt("tattoo"));
-						pa.setFaceContour(resultSet.getInt("face_contour"));
-						pa.setExpression(resultSet.getInt("expression"));
-						pa.setJawLine(resultSet.getInt("jaw_line"));
-						pa.setSkinRGB(resultSet.getInt("skin_rgb"));
-						pa.setHairRGB(resultSet.getInt("hair_rgb"));
-						pa.setEyeRGB(resultSet.getInt("eye_rgb"));
-						pa.setLipRGB(resultSet.getInt("lip_rgb"));
-						pa.setFaceShape(resultSet.getInt("face_shape"));
-						pa.setForehead(resultSet.getInt("forehead"));
-						pa.setEyeHeight(resultSet.getInt("eye_height"));
-						pa.setEyeSpace(resultSet.getInt("eye_space"));
-						pa.setEyeWidth(resultSet.getInt("eye_width"));
-						pa.setEyeSize(resultSet.getInt("eye_size"));
-						pa.setEyeShape(resultSet.getInt("eye_shape"));
-						pa.setEyeAngle(resultSet.getInt("eye_angle"));
-						pa.setBrowHeight(resultSet.getInt("brow_height"));
-						pa.setBrowAngle(resultSet.getInt("brow_angle"));
-						pa.setBrowShape(resultSet.getInt("brow_shape"));
-						pa.setNose(resultSet.getInt("nose"));
-						pa.setNoseBridge(resultSet.getInt("nose_bridge"));
-						pa.setNoseWidth(resultSet.getInt("nose_width"));
-						pa.setNoseTip(resultSet.getInt("nose_tip"));
-						pa.setCheek(resultSet.getInt("cheek"));
-						pa.setLipHeight(resultSet.getInt("lip_height"));
-						pa.setMouthSize(resultSet.getInt("mouth_size"));
-						pa.setLipSize(resultSet.getInt("lip_size"));
-						pa.setSmile(resultSet.getInt("smile"));
-						pa.setLipShape(resultSet.getInt("lip_shape"));
-						pa.setJawHeigh(resultSet.getInt("jaw_height"));
-						pa.setChinJut(resultSet.getInt("chin_jut"));
-						pa.setEarShape(resultSet.getInt("ear_shape"));
-						pa.setHeadSize(resultSet.getInt("head_size"));
-						pa.setNeck(resultSet.getInt("neck"));
-						pa.setNeckLength(resultSet.getInt("neck_length"));
-						pa.setShoulders(resultSet.getInt("shoulders"));
-						pa.setShoulderSize(resultSet.getInt("shoulder_size"));
-						pa.setTorso(resultSet.getInt("torso"));
-						pa.setChest(resultSet.getInt("chest"));
-						pa.setWaist(resultSet.getInt("waist"));
-						pa.setHips(resultSet.getInt("hips"));
-						pa.setArmThickness(resultSet.getInt("arm_thickness"));
-						pa.setArmLength(resultSet.getInt("arm_length"));
-						pa.setHandSize(resultSet.getInt("hand_size"));
-						pa.setLegThickness(resultSet.getInt("leg_thickness"));
-						pa.setLegLength(resultSet.getInt("leg_length"));
-						pa.setFootSize(resultSet.getInt("foot_size"));
-						pa.setFacialRate(resultSet.getInt("facial_rate"));
-						pa.setVoice(resultSet.getInt("voice"));
-						pa.setHeight(resultSet.getFloat("height"));
-					}
+		try (Connection con = DatabaseFactory.getConnection();
+				 PreparedStatement stmt = con.prepareStatement("SELECT * FROM player_appearance WHERE player_id = ?")) {
+			stmt.setInt(1, playerId);
+			try (ResultSet resultSet = stmt.executeQuery()) {
+				if (resultSet.next()) {
+					pa.setFace(resultSet.getInt("face"));
+					pa.setHair(resultSet.getInt("hair"));
+					pa.setDeco(resultSet.getInt("deco"));
+					pa.setTattoo(resultSet.getInt("tattoo"));
+					pa.setFaceContour(resultSet.getInt("face_contour"));
+					pa.setExpression(resultSet.getInt("expression"));
+					pa.setJawLine(resultSet.getInt("jaw_line"));
+					pa.setSkinRGB(resultSet.getInt("skin_rgb"));
+					pa.setHairRGB(resultSet.getInt("hair_rgb"));
+					pa.setEyeRGB(resultSet.getInt("eye_rgb"));
+					pa.setLipRGB(resultSet.getInt("lip_rgb"));
+					pa.setFaceShape(resultSet.getInt("face_shape"));
+					pa.setForehead(resultSet.getInt("forehead"));
+					pa.setEyeHeight(resultSet.getInt("eye_height"));
+					pa.setEyeSpace(resultSet.getInt("eye_space"));
+					pa.setEyeWidth(resultSet.getInt("eye_width"));
+					pa.setEyeSize(resultSet.getInt("eye_size"));
+					pa.setEyeShape(resultSet.getInt("eye_shape"));
+					pa.setEyeAngle(resultSet.getInt("eye_angle"));
+					pa.setBrowHeight(resultSet.getInt("brow_height"));
+					pa.setBrowAngle(resultSet.getInt("brow_angle"));
+					pa.setBrowShape(resultSet.getInt("brow_shape"));
+					pa.setNose(resultSet.getInt("nose"));
+					pa.setNoseBridge(resultSet.getInt("nose_bridge"));
+					pa.setNoseWidth(resultSet.getInt("nose_width"));
+					pa.setNoseTip(resultSet.getInt("nose_tip"));
+					pa.setCheek(resultSet.getInt("cheek"));
+					pa.setLipHeight(resultSet.getInt("lip_height"));
+					pa.setMouthSize(resultSet.getInt("mouth_size"));
+					pa.setLipSize(resultSet.getInt("lip_size"));
+					pa.setSmile(resultSet.getInt("smile"));
+					pa.setLipShape(resultSet.getInt("lip_shape"));
+					pa.setJawHeigh(resultSet.getInt("jaw_height"));
+					pa.setChinJut(resultSet.getInt("chin_jut"));
+					pa.setEarShape(resultSet.getInt("ear_shape"));
+					pa.setHeadSize(resultSet.getInt("head_size"));
+					pa.setNeck(resultSet.getInt("neck"));
+					pa.setNeckLength(resultSet.getInt("neck_length"));
+					pa.setShoulders(resultSet.getInt("shoulders"));
+					pa.setShoulderSize(resultSet.getInt("shoulder_size"));
+					pa.setTorso(resultSet.getInt("torso"));
+					pa.setChest(resultSet.getInt("chest"));
+					pa.setWaist(resultSet.getInt("waist"));
+					pa.setHips(resultSet.getInt("hips"));
+					pa.setArmThickness(resultSet.getInt("arm_thickness"));
+					pa.setArmLength(resultSet.getInt("arm_length"));
+					pa.setHandSize(resultSet.getInt("hand_size"));
+					pa.setLegThickness(resultSet.getInt("leg_thickness"));
+					pa.setLegLength(resultSet.getInt("leg_length"));
+					pa.setFootSize(resultSet.getInt("foot_size"));
+					pa.setFacialRate(resultSet.getInt("facial_rate"));
+					pa.setVoice(resultSet.getInt("voice"));
+					pa.setHeight(resultSet.getFloat("height"));
 				}
 			}
 		} catch (Exception e) {
@@ -97,7 +95,7 @@ public class PlayerAppearanceDAO {
 	/**
 	 * Saves player appearance in database.<br>
 	 * Actually calls {@link #store(int, com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance)}
-	 *
+	 * 
 	 * @param player
 	 *          whos appearance to store
 	 * @return true, if sql query was successful, false overwise
@@ -120,7 +118,6 @@ public class PlayerAppearanceDAO {
 
 			@Override
 			public void handleInsertUpdate(PreparedStatement ps) throws SQLException {
-				log.debug("[DAO: MySQL5PlayerAppearanceDAO] storing appereance " + id);
 				ps.setInt(1, id);
 				ps.setInt(2, pa.getFace());
 				ps.setInt(3, pa.getHair());

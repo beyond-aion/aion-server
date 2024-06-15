@@ -49,13 +49,11 @@ public class PlayerTitleListDAO {
 	}
 
 	public static boolean storeTitles(Player player, Title entry) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
-				stmt.setInt(1, player.getObjectId());
-				stmt.setInt(2, entry.getId());
-				stmt.setInt(3, entry.getExpireTime());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
+			stmt.setInt(1, player.getObjectId());
+			stmt.setInt(2, entry.getId());
+			stmt.setInt(3, entry.getExpireTime());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not store emotionId for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);
 			return false;
@@ -64,12 +62,10 @@ public class PlayerTitleListDAO {
 	}
 
 	public static boolean removeTitle(int playerId, int titleId) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
-				stmt.setInt(1, playerId);
-				stmt.setInt(2, titleId);
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
+			stmt.setInt(1, playerId);
+			stmt.setInt(2, titleId);
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not delete title for player " + playerId + " from DB: " + e.getMessage(), e);
 			return false;

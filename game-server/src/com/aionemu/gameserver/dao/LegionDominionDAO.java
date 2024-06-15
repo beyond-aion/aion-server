@@ -21,7 +21,6 @@ import com.aionemu.gameserver.model.legionDominion.LegionDominionParticipantInfo
 
 /**
  * @author Yeats
- *
  */
 public class LegionDominionDAO {
 

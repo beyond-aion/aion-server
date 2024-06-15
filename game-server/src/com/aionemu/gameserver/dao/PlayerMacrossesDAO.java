@@ -19,32 +19,23 @@ import com.aionemu.gameserver.model.gameobjects.player.MacroList;
  * Macrosses DAO
  * <p/>
  * Created on: 13.07.2009 17:05:56
- *
+ * 
  * @author Aquanox
  */
 public class PlayerMacrossesDAO {
 
-	private static Logger log = LoggerFactory.getLogger(PlayerMacrossesDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(PlayerMacrossesDAO.class);
 
 	public static final String INSERT_QUERY = "INSERT INTO `player_macrosses` (`player_id`, `order`, `macro`) VALUES (?,?,?)";
 	public static final String UPDATE_QUERY = "UPDATE `player_macrosses` SET `macro`=? WHERE `player_id`=? AND `order`=?";
 	public static final String DELETE_QUERY = "DELETE FROM `player_macrosses` WHERE `player_id`=? AND `order`=?";
 	public static final String SELECT_QUERY = "SELECT `order`, `macro` FROM `player_macrosses` WHERE `player_id`=?";
 
-	/**
-	 * Add a macro information into database
-	 *
-	 * @param playerId
-	 *          player object id
-	 * @param macro
-	 *          macro contents.
-	 */
 	public static void addMacro(final int playerId, final int macroPosition, final String macro) {
 		DB.insertUpdate(INSERT_QUERY, new IUStH() {
 
 			@Override
 			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-				log.debug("[DAO: MySQL5PlayerMacrossesDAO] storing macro " + playerId + " " + macroPosition);
 				stmt.setInt(1, playerId);
 				stmt.setInt(2, macroPosition);
 				stmt.setString(3, macro);
@@ -58,7 +49,6 @@ public class PlayerMacrossesDAO {
 
 			@Override
 			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-				log.debug("[DAO: MySQL5PlayerMacrossesDAO] updating macro " + playerId + " " + macroPosition);
 				stmt.setString(1, macro);
 				stmt.setInt(2, playerId);
 				stmt.setInt(3, macroPosition);
@@ -72,7 +62,6 @@ public class PlayerMacrossesDAO {
 
 			@Override
 			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-				log.debug("[DAO: MySQL5PlayerMacrossesDAO] removing macro " + playerId + " " + macroPosition);
 				stmt.setInt(1, playerId);
 				stmt.setInt(2, macroPosition);
 				stmt.execute();
@@ -81,17 +70,14 @@ public class PlayerMacrossesDAO {
 	}
 
 	public static MacroList restoreMacrosses(final int playerId) {
-		final Map<Integer, String> macrosses = new HashMap<>();
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, playerId);
-				try (ResultSet rset = stmt.executeQuery()) {
-					log.debug("[DAO: MySQL5PlayerMacrossesDAO] loading macroses for playerId: " + playerId);
-					while (rset.next()) {
-						int order = rset.getInt("order");
-						String text = rset.getString("macro");
-						macrosses.put(order, text);
-					}
+		Map<Integer, String> macrosses = new HashMap<>();
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, playerId);
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int order = rset.getInt("order");
+					String text = rset.getString("macro");
+					macrosses.put(order, text);
 				}
 			}
 		} catch (Exception e) {

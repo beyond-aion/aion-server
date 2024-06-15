@@ -23,8 +23,8 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * Class that is responsible for storing/loading player data
- *
- * @author SoulKeeper, Saelya, cura
+ * 
+ * @author SoulKeeper, Saelya, cura, KID, xTz
  */
 public class PlayerDAO {
 
@@ -47,7 +47,6 @@ public class PlayerDAO {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement(
 					 "UPDATE players SET name=?, exp=?, recoverexp=?, x=?, y=?, z=?, heading=?, world_id=?, gender=?, race=?, player_class=?, quest_expands=?, npc_expands=?, item_expands=?, wh_npc_expands=?, wh_bonus_expands=?, note=?, title_id=?, bonus_title_id=?, dp=?, soul_sickness=?, mailbox_letters=?, reposte_energy=?, mentor_flag_time=?, world_owner=? WHERE id=?")) {
-			log.debug("[DAO: MySQL5PlayerDAO] storing player " + player.getObjectId() + " " + player.getName());
 			PlayerCommonData pcd = player.getCommonData();
 			stmt.setString(1, pcd.getName());
 			stmt.setLong(2, pcd.getExp());
@@ -84,32 +83,28 @@ public class PlayerDAO {
 	}
 
 	public static boolean saveNewPlayer(Player player, int accountId, String accountName) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-					 PreparedStatement stmt = con.prepareStatement(
-						 "INSERT INTO players(id, `name`, account_id, account_name, x, y, z, heading, world_id, gender, race, player_class , quest_expands, npc_expands, item_expands, wh_npc_expands, wh_bonus_expands, online) "
-							 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)")) {
-				log.debug("[DAO: MySQL5PlayerDAO] saving new player: " + player.getObjectId() + " " + player.getName());
-
-				stmt.setInt(1, player.getObjectId());
-				stmt.setString(2, player.getName());
-				stmt.setInt(3, accountId);
-				stmt.setString(4, accountName);
-				stmt.setFloat(5, player.getPosition().getX());
-				stmt.setFloat(6, player.getPosition().getY());
-				stmt.setFloat(7, player.getPosition().getZ());
-				stmt.setInt(8, player.getPosition().getHeading());
-				stmt.setInt(9, player.getPosition().getMapId());
-				stmt.setString(10, player.getGender().toString());
-				stmt.setString(11, player.getRace().toString());
-				stmt.setString(12, player.getPlayerClass().toString());
-				stmt.setInt(13, player.getQuestExpands());
-				stmt.setInt(14, player.getNpcExpands());
-				stmt.setInt(15, player.getItemExpands());
-				stmt.setInt(16, player.getWhNpcExpands());
-				stmt.setInt(17, player.getWhBonusExpands());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection();
+				 PreparedStatement stmt = con.prepareStatement(
+					 "INSERT INTO players(id, `name`, account_id, account_name, x, y, z, heading, world_id, gender, race, player_class , quest_expands, npc_expands, item_expands, wh_npc_expands, wh_bonus_expands, online) "
+						 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, 0)")) {
+			stmt.setInt(1, player.getObjectId());
+			stmt.setString(2, player.getName());
+			stmt.setInt(3, accountId);
+			stmt.setString(4, accountName);
+			stmt.setFloat(5, player.getPosition().getX());
+			stmt.setFloat(6, player.getPosition().getY());
+			stmt.setFloat(7, player.getPosition().getZ());
+			stmt.setInt(8, player.getPosition().getHeading());
+			stmt.setInt(9, player.getPosition().getMapId());
+			stmt.setString(10, player.getGender().toString());
+			stmt.setString(11, player.getRace().toString());
+			stmt.setString(12, player.getPlayerClass().toString());
+			stmt.setInt(13, player.getQuestExpands());
+			stmt.setInt(14, player.getNpcExpands());
+			stmt.setInt(15, player.getItemExpands());
+			stmt.setInt(16, player.getWhNpcExpands());
+			stmt.setInt(17, player.getWhBonusExpands());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error saving new " + player, e);
 			return false;
@@ -144,8 +139,6 @@ public class PlayerDAO {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT * FROM players WHERE id = ?")) {
 			stmt.setInt(1, playerObjId);
 			try (ResultSet resultSet = stmt.executeQuery()) {
-				log.debug("[DAO: MySQL5PlayerDAO] loading from db " + playerObjId);
-
 				if (resultSet.next()) {
 					PlayerCommonData cd = new PlayerCommonData(playerObjId);
 					cd.setName(resultSet.getString("name"));
@@ -186,6 +179,9 @@ public class PlayerDAO {
 		return null;
 	}
 
+	/**
+	 * Removes player and all related data (via CASCADE DELETION)
+	 */
 	public static void deletePlayer(int playerId) {
 		PreparedStatement statement = DB.prepareStatement("DELETE FROM players WHERE id = ?");
 		try {
@@ -325,8 +321,6 @@ public class PlayerDAO {
 
 			@Override
 			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-				log.debug("[DAO: MySQL5PlayerDAO] online status " + player.getObjectId() + " " + player.getName());
-
 				stmt.setBoolean(1, online);
 				stmt.setInt(2, player.getObjectId());
 				stmt.execute();
@@ -409,12 +403,8 @@ public class PlayerDAO {
 		return 0;
 	}
 
-	/**
-	 * @author xTz
-	 */
 	public static void storePlayerName(PlayerCommonData recipientCommonData) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("UPDATE players SET name=? WHERE id=?")) {
-			log.debug("[DAO: MySQL5PlayerDAO] storing playerName " + recipientCommonData.getPlayerObjId() + " " + recipientCommonData.getName());
 			stmt.setString(1, recipientCommonData.getName());
 			stmt.setInt(2, recipientCommonData.getPlayerObjId());
 			stmt.execute();

@@ -11,7 +11,7 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.database.DatabaseFactory;
 
 /**
- * @author Estrayl
+ * @author Estrayl, Neon
  */
 public class BonusPackDAO {
 

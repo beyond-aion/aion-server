@@ -15,10 +15,7 @@ import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.services.PvpService;
 
 /**
- * Created on 30.05.2016
- *
  * @author Estrayl
- * @since AION 4.8
  */
 public class HeadhuntingDAO {
 

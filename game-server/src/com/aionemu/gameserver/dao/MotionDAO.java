@@ -26,16 +26,14 @@ public class MotionDAO {
 
 	public static void loadMotionList(Player player) {
 		MotionList motions = new MotionList(player);
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, player.getObjectId());
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						int motionId = rset.getInt("motion_id");
-						int time = rset.getInt("time");
-						boolean isActive = rset.getBoolean("active");
-						motions.add(new Motion(motionId, time, isActive), false);
-					}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, player.getObjectId());
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int motionId = rset.getInt("motion_id");
+					int time = rset.getInt("time");
+					boolean isActive = rset.getBoolean("active");
+					motions.add(new Motion(motionId, time, isActive), false);
 				}
 			}
 		} catch (Exception e) {
@@ -45,14 +43,12 @@ public class MotionDAO {
 	}
 
 	public static boolean storeMotion(int objectId, Motion motion) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
-				stmt.setInt(1, objectId);
-				stmt.setInt(2, motion.getId());
-				stmt.setBoolean(3, motion.isActive());
-				stmt.setInt(4, motion.getExpireTime());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
+			stmt.setInt(1, objectId);
+			stmt.setInt(2, motion.getId());
+			stmt.setBoolean(3, motion.isActive());
+			stmt.setInt(4, motion.getExpireTime());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not store motion for player " + objectId + " from DB: " + e.getMessage(), e);
 			return false;
@@ -61,12 +57,10 @@ public class MotionDAO {
 	}
 
 	public static boolean deleteMotion(int objectId, int motionId) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
-				stmt.setInt(1, objectId);
-				stmt.setInt(2, motionId);
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
+			stmt.setInt(1, objectId);
+			stmt.setInt(2, motionId);
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not delete motion for player " + objectId + " from DB: " + e.getMessage(), e);
 			return false;
@@ -75,13 +69,11 @@ public class MotionDAO {
 	}
 
 	public static boolean updateMotion(int objectId, Motion motion) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
-				stmt.setBoolean(1, motion.isActive());
-				stmt.setInt(2, objectId);
-				stmt.setInt(3, motion.getId());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
+			stmt.setBoolean(1, motion.isActive());
+			stmt.setInt(2, objectId);
+			stmt.setInt(3, motion.getId());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not store motion for player " + objectId + " from DB: " + e.getMessage(), e);
 			return false;

@@ -24,20 +24,18 @@ public class PlayerBindPointDAO {
 	public static final String UPDATE_QUERY = "UPDATE player_bind_point set `map_id`=?, `x`=?, `y`=? , `z`=?, `heading`=? WHERE `player_id`=?";
 
 	public static void loadBindPoint(Player player) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, player.getObjectId());
-				try (ResultSet rset = stmt.executeQuery()) {
-					if (rset.next()) {
-						int mapId = rset.getInt("map_id");
-						float x = rset.getFloat("x");
-						float y = rset.getFloat("y");
-						float z = rset.getFloat("z");
-						byte heading = rset.getByte("heading");
-						BindPointPosition bind = new BindPointPosition(mapId, x, y, z, heading);
-						bind.setPersistentState(PersistentState.UPDATED);
-						player.setBindPoint(bind);
-					}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, player.getObjectId());
+			try (ResultSet rset = stmt.executeQuery()) {
+				if (rset.next()) {
+					int mapId = rset.getInt("map_id");
+					float x = rset.getFloat("x");
+					float y = rset.getFloat("y");
+					float z = rset.getFloat("z");
+					byte heading = rset.getByte("heading");
+					BindPointPosition bind = new BindPointPosition(mapId, x, y, z, heading);
+					bind.setPersistentState(PersistentState.UPDATED);
+					player.setBindPoint(bind);
 				}
 			}
 		} catch (Exception e) {
@@ -46,17 +44,15 @@ public class PlayerBindPointDAO {
 	}
 
 	public static boolean insertBindPoint(Player player) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
-				BindPointPosition bpp = player.getBindPoint();
-				stmt.setInt(1, player.getObjectId());
-				stmt.setInt(2, bpp.getMapId());
-				stmt.setFloat(3, bpp.getX());
-				stmt.setFloat(4, bpp.getY());
-				stmt.setFloat(5, bpp.getZ());
-				stmt.setByte(6, bpp.getHeading());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
+			BindPointPosition bpp = player.getBindPoint();
+			stmt.setInt(1, player.getObjectId());
+			stmt.setInt(2, bpp.getMapId());
+			stmt.setFloat(3, bpp.getX());
+			stmt.setFloat(4, bpp.getY());
+			stmt.setFloat(5, bpp.getZ());
+			stmt.setByte(6, bpp.getHeading());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not store BindPointPosition data for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);
 			return false;
@@ -65,17 +61,15 @@ public class PlayerBindPointDAO {
 	}
 
 	public static boolean updateBindPoint(Player player) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
-				BindPointPosition bpp = player.getBindPoint();
-				stmt.setInt(1, bpp.getMapId());
-				stmt.setFloat(2, bpp.getX());
-				stmt.setFloat(3, bpp.getY());
-				stmt.setFloat(4, bpp.getZ());
-				stmt.setByte(5, bpp.getHeading());
-				stmt.setFloat(6, player.getObjectId());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
+			BindPointPosition bpp = player.getBindPoint();
+			stmt.setInt(1, bpp.getMapId());
+			stmt.setFloat(2, bpp.getX());
+			stmt.setFloat(3, bpp.getY());
+			stmt.setFloat(4, bpp.getZ());
+			stmt.setByte(5, bpp.getHeading());
+			stmt.setFloat(6, player.getObjectId());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not update BindPointPosition data for player " + player.getObjectId() + " from DB: " + e.getMessage(), e);
 			return false;

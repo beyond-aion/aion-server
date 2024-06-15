@@ -26,11 +26,9 @@ public class GuideDAO {
 	public static final String SELECT_GUIDE_QUERY = "SELECT * FROM `guides` WHERE `guide_id`=? AND `player_id`=?";
 
 	public static boolean deleteGuide(int guide_id) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
-				stmt.setInt(1, guide_id);
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
+			stmt.setInt(1, guide_id);
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error delete guide_id: " + guide_id, e);
 			return false;
@@ -39,18 +37,16 @@ public class GuideDAO {
 	}
 
 	public static List<Guide> loadGuides(int playerId) {
-		final List<Guide> guides = new ArrayList<>();
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, playerId);
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						int guide_id = rset.getInt("guide_id");
-						int player_id = rset.getInt("player_id");
-						String title = rset.getString("title");
-						Guide guide = new Guide(guide_id, player_id, title);
-						guides.add(guide);
-					}
+		List<Guide> guides = new ArrayList<>();
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, playerId);
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					int guide_id = rset.getInt("guide_id");
+					int player_id = rset.getInt("player_id");
+					String title = rset.getString("title");
+					Guide guide = new Guide(guide_id, player_id, title);
+					guides.add(guide);
 				}
 			}
 		} catch (Exception e) {
@@ -61,15 +57,13 @@ public class GuideDAO {
 
 	public static Guide loadGuide(int player_id, int guide_id) {
 		Guide guide = null;
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_GUIDE_QUERY)) {
-				stmt.setInt(1, guide_id);
-				stmt.setInt(2, player_id);
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						String title = rset.getString("title");
-						guide = new Guide(guide_id, player_id, title);
-					}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_GUIDE_QUERY)) {
+			stmt.setInt(1, guide_id);
+			stmt.setInt(2, player_id);
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					String title = rset.getString("title");
+					guide = new Guide(guide_id, player_id, title);
 				}
 			}
 		} catch (Exception e) {
@@ -79,14 +73,12 @@ public class GuideDAO {
 	}
 
 	public static void saveGuide(int guide_id, Player player, String title) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-					 PreparedStatement stmt = con.prepareStatement("INSERT INTO guides(guide_id, title, player_id)" + "VALUES (?, ?, ?)")) {
-				stmt.setInt(1, guide_id);
-				stmt.setString(2, title);
-				stmt.setInt(3, player.getObjectId());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection();
+				 PreparedStatement stmt = con.prepareStatement("INSERT INTO guides(guide_id, title, player_id)" + "VALUES (?, ?, ?)")) {
+			stmt.setInt(1, guide_id);
+			stmt.setString(2, title);
+			stmt.setInt(3, player.getObjectId());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error saving playerName: " + player, e);
 		}

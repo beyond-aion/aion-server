@@ -67,12 +67,9 @@ public class PlayerEffectsDAO {
 		if (effects.isEmpty())
 			return;
 
-		Connection con = null;
-		PreparedStatement ps = null;
-		try {
-			con = DatabaseFactory.getConnection();
+		try (Connection con = DatabaseFactory.getConnection();
+				 PreparedStatement ps = con.prepareStatement(INSERT_QUERY)) {
 			con.setAutoCommit(false);
-			ps = con.prepareStatement(INSERT_QUERY);
 
 			for (Effect effect : effects) {
 				ps.setInt(1, player.getObjectId());
@@ -88,8 +85,6 @@ public class PlayerEffectsDAO {
 			con.commit();
 		} catch (SQLException e) {
 			log.error("Exception while saving effects of player " + player.getObjectId(), e);
-		} finally {
-			DatabaseFactory.close(ps, con);
 		}
 	}
 

@@ -17,10 +17,9 @@ import com.aionemu.gameserver.model.team.legion.*;
 
 /**
  * Class that is responsible for storing/loading legion data
- *
- * @author Simple
+ * 
+ * @author Simple, cura
  */
-
 public class LegionDAO {
 
 	/** Logger */
@@ -66,8 +65,6 @@ public class LegionDAO {
 
 			@Override
 			public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
-				log.debug("[DAO: MySQL5LegionDAO] saving new legion: " + legion.getLegionId() + " " + legion.getName());
-
 				preparedStatement.setInt(1, legion.getLegionId());
 				preparedStatement.setString(2, legion.getName());
 				preparedStatement.execute();
@@ -81,8 +78,6 @@ public class LegionDAO {
 
 			@Override
 			public void handleInsertUpdate(PreparedStatement stmt) throws SQLException {
-				log.debug("[DAO: MySQL5LegionDAO] storing player " + legion.getLegionId() + " " + legion.getName());
-
 				stmt.setString(1, legion.getName());
 				stmt.setInt(2, legion.getLegionLevel());
 				stmt.setLong(3, legion.getContributionPoints());
@@ -218,8 +213,6 @@ public class LegionDAO {
 			}
 		});
 
-		log.debug("[MySQL5LegionDAO] Loaded announcementList " + legionId + " legion.");
-
 		return success ? announcementList : null;
 	}
 
@@ -228,8 +221,6 @@ public class LegionDAO {
 
 			@Override
 			public void handleInsertUpdate(PreparedStatement preparedStatement) throws SQLException {
-				log.debug("[DAO: MySQL5LegionDAO] saving new announcement.");
-
 				preparedStatement.setInt(1, legionId);
 				preparedStatement.setString(2, message);
 				preparedStatement.setTimestamp(3, currentTime);

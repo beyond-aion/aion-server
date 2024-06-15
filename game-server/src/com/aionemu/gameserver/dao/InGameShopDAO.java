@@ -27,31 +27,29 @@ public class InGameShopDAO {
 
 	public static Map<Byte, List<IGItem>> loadInGameShopItems() {
 		Map<Byte, List<IGItem>> items = new HashMap<>();
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				try (ResultSet rset = stmt.executeQuery()) {
-					while (rset.next()) {
-						byte category = rset.getByte("category");
-						byte subCategory = rset.getByte("sub_category");
-						if (subCategory < 3)
-							continue;
-						int objectId = rset.getInt("object_id");
-						int itemId = rset.getInt("item_id");
-						long itemCount = rset.getLong("item_count");
-						long itemPrice = rset.getLong("item_price");
-						int list = rset.getInt("list");
-						int salesRanking = rset.getInt("sales_ranking");
-						byte itemType = rset.getByte("item_type");
-						byte gift = rset.getByte("gift");
-						String titleDescription = rset.getString("title_description");
-						String description = rset.getString("description");
-						if (!items.containsKey(category)) {
-							items.put(category, new ArrayList<IGItem>());
-						}
-						items.get(category).add(
-							new IGItem(objectId, itemId, itemCount, itemPrice, category, subCategory, list, salesRanking, itemType, gift, titleDescription,
-								description));
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			try (ResultSet rset = stmt.executeQuery()) {
+				while (rset.next()) {
+					byte category = rset.getByte("category");
+					byte subCategory = rset.getByte("sub_category");
+					if (subCategory < 3)
+						continue;
+					int objectId = rset.getInt("object_id");
+					int itemId = rset.getInt("item_id");
+					long itemCount = rset.getLong("item_count");
+					long itemPrice = rset.getLong("item_price");
+					int list = rset.getInt("list");
+					int salesRanking = rset.getInt("sales_ranking");
+					byte itemType = rset.getByte("item_type");
+					byte gift = rset.getByte("gift");
+					String titleDescription = rset.getString("title_description");
+					String description = rset.getString("description");
+					if (!items.containsKey(category)) {
+						items.put(category, new ArrayList<IGItem>());
 					}
+					items.get(category).add(
+						new IGItem(objectId, itemId, itemCount, itemPrice, category, subCategory, list, salesRanking, itemType, gift, titleDescription,
+							description));
 				}
 			}
 		} catch (Exception e) {
@@ -61,14 +59,12 @@ public class InGameShopDAO {
 	}
 
 	public static boolean deleteIngameShopItem(int itemId, byte category, byte subCategory, int list) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
-				stmt.setInt(1, itemId);
-				stmt.setInt(2, category);
-				stmt.setInt(3, subCategory);
-				stmt.setInt(4, list);
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
+			stmt.setInt(1, itemId);
+			stmt.setInt(2, category);
+			stmt.setInt(3, subCategory);
+			stmt.setInt(4, list);
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error delete ingameshopItem: " + itemId, e);
 			return false;
@@ -78,37 +74,33 @@ public class InGameShopDAO {
 
 	public static void saveIngameShopItem(int objectId, int itemId, long itemCount, long itemPrice, byte category, byte subCategory, int list,
 		int salesRanking, byte itemType, byte gift, String titleDescription, String description) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection();
-					 PreparedStatement stmt = con
-						 .prepareStatement("INSERT INTO ingameshop(object_id, item_id, item_count, item_price, category, sub_category, list, sales_ranking, item_type, gift, title_description, description)"
-							 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
-				stmt.setInt(1, objectId);
-				stmt.setInt(2, itemId);
-				stmt.setLong(3, itemCount);
-				stmt.setLong(4, itemPrice);
-				stmt.setByte(5, category);
-				stmt.setByte(6, subCategory);
-				stmt.setInt(7, list);
-				stmt.setInt(8, salesRanking);
-				stmt.setByte(9, itemType);
-				stmt.setByte(10, gift);
-				stmt.setString(11, titleDescription);
-				stmt.setString(12, description);
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection();
+				 PreparedStatement stmt = con
+					 .prepareStatement("INSERT INTO ingameshop(object_id, item_id, item_count, item_price, category, sub_category, list, sales_ranking, item_type, gift, title_description, description)"
+						 + "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)")) {
+			stmt.setInt(1, objectId);
+			stmt.setInt(2, itemId);
+			stmt.setLong(3, itemCount);
+			stmt.setLong(4, itemPrice);
+			stmt.setByte(5, category);
+			stmt.setByte(6, subCategory);
+			stmt.setInt(7, list);
+			stmt.setInt(8, salesRanking);
+			stmt.setByte(9, itemType);
+			stmt.setByte(10, gift);
+			stmt.setString(11, titleDescription);
+			stmt.setString(12, description);
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error saving Item: " + objectId, e);
 		}
 	}
 
 	public static boolean increaseSales(int object, int current) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_SALES_QUERY)) {
-				stmt.setInt(1, current);
-				stmt.setInt(2, object);
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_SALES_QUERY)) {
+			stmt.setInt(1, current);
+			stmt.setInt(2, object);
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error increaseSales Item: " + object, e);
 			return false;

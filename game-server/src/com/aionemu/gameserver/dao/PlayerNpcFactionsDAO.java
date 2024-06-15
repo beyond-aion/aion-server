@@ -26,22 +26,20 @@ public class PlayerNpcFactionsDAO {
 	public static final String UPDATE_QUERY = "UPDATE player_npc_factions SET `active`=?, `time`=?, `state`=?, `quest_id`=?  WHERE `player_id`=? AND `faction_id`=?";
 
 	public static void loadNpcFactions(Player player) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
-				stmt.setInt(1, player.getObjectId());
-				try (ResultSet rset = stmt.executeQuery()) {
-					NpcFactions factions = new NpcFactions(player);
-					player.setNpcFactions(factions);
-					while (rset.next()) {
-						int faction_id = rset.getInt("faction_id");
-						boolean active = rset.getBoolean("active");
-						int time = rset.getInt("time");
-						int questId = rset.getInt("quest_id");
-						ENpcFactionQuestState state = ENpcFactionQuestState.valueOf(rset.getString("state"));
-						NpcFaction faction = new NpcFaction(faction_id, time, active, state, questId);
-						faction.setPersistentState(PersistentState.UPDATED);
-						factions.addNpcFaction(faction);
-					}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
+			stmt.setInt(1, player.getObjectId());
+			try (ResultSet rset = stmt.executeQuery()) {
+				NpcFactions factions = new NpcFactions(player);
+				player.setNpcFactions(factions);
+				while (rset.next()) {
+					int faction_id = rset.getInt("faction_id");
+					boolean active = rset.getBoolean("active");
+					int time = rset.getInt("time");
+					int questId = rset.getInt("quest_id");
+					ENpcFactionQuestState state = ENpcFactionQuestState.valueOf(rset.getString("state"));
+					NpcFaction faction = new NpcFaction(faction_id, time, active, state, questId);
+					faction.setPersistentState(PersistentState.UPDATED);
+					factions.addNpcFaction(faction);
 				}
 			}
 		} catch (Exception e) {
@@ -63,32 +61,28 @@ public class PlayerNpcFactionsDAO {
 	}
 
 	private static void insertNpcFaction(int playerObjectId, NpcFaction faction) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
-				stmt.setInt(1, playerObjectId);
-				stmt.setInt(2, faction.getId());
-				stmt.setBoolean(3, faction.isActive());
-				stmt.setInt(4, faction.getTime());
-				stmt.setString(5, faction.getState().name());
-				stmt.setInt(6, faction.getQuestId());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
+			stmt.setInt(1, playerObjectId);
+			stmt.setInt(2, faction.getId());
+			stmt.setBoolean(3, faction.isActive());
+			stmt.setInt(4, faction.getTime());
+			stmt.setString(5, faction.getState().name());
+			stmt.setInt(6, faction.getQuestId());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not insert Npc faction data for playerObjId: " + playerObjectId + " from DB: " + e.getMessage(), e);
 		}
 	}
 
 	private static void updateNpcFaction(int playerObjectId, NpcFaction faction) {
-		try {
-			try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
-				stmt.setBoolean(1, faction.isActive());
-				stmt.setInt(2, faction.getTime());
-				stmt.setString(3, faction.getState().name());
-				stmt.setInt(4, faction.getQuestId());
-				stmt.setInt(5, playerObjectId);
-				stmt.setInt(6, faction.getId());
-				stmt.execute();
-			}
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
+			stmt.setBoolean(1, faction.isActive());
+			stmt.setInt(2, faction.getTime());
+			stmt.setString(3, faction.getState().name());
+			stmt.setInt(4, faction.getQuestId());
+			stmt.setInt(5, playerObjectId);
+			stmt.setInt(6, faction.getId());
+			stmt.execute();
 		} catch (Exception e) {
 			log.error("Could not update Npc faction data for playerObjId: " + playerObjectId + " from DB: " + e.getMessage(), e);
 		}

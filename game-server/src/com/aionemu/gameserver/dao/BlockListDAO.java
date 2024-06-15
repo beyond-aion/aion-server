@@ -18,7 +18,7 @@ import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
  * Responsible for saving and loading data on players' block lists
- *
+ * 
  * @author Ben
  */
 public class BlockListDAO {
