@@ -34,6 +34,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerService;
+import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -397,8 +398,10 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		return true;
 	}
 
-	public boolean isBossPhase() {
-		return isBossPhase;
+	@Override
+	public void onEndCastSkill(Skill skill) {
+		if (isBossPhase && skill.getEffector() instanceof Player effector && instance.isRegistered(effector.getObjectId()))
+			CustomInstanceService.getInstance().recordPlayerModelEntry(effector, skill, effector.getTarget());
 	}
 
 	public PlayerModel getPlayerModel() {

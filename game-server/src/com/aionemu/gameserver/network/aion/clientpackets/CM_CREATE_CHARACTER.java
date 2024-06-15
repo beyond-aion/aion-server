@@ -21,7 +21,7 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
  * In this packets the Aion client is requesting creation of a character or to enter the character creation menu.
- *
+ * 
  * @author -Nemesiss-, cura, Neon
  */
 public class CM_CREATE_CHARACTER extends AbstractCharacterEditPacket {

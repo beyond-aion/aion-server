@@ -14,7 +14,7 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * Received when a player reports another player with /ReportAutoHunting
- *
+ * 
  * @author Jego, Neon
  */
 public class CM_REPORT_PLAYER extends AionClientPacket {

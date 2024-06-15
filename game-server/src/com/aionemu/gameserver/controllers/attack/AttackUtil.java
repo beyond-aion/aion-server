@@ -566,7 +566,7 @@ public class AttackUtil {
 
 	/**
 	 * Send a packet to everyone who is targeting creature.
-	 *
+	 * 
 	 * @param object
 	 */
 	public static void removeTargetFrom(Creature object) {

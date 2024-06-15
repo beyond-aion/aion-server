@@ -11,7 +11,7 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * Handles activities related to social groups ingame such as the buddy list, block list, etc
- *
+ * 
  * @author Ben, Neon
  */
 public class SocialService {
@@ -38,7 +38,7 @@ public class SocialService {
 
 	/**
 	 * Sets the reason for blocking a user
-	 *
+	 * 
 	 * @param player
 	 *          Player whos block list is to be edited
 	 * @param target
@@ -75,7 +75,7 @@ public class SocialService {
 
 	/**
 	 * Adds two players to each others friend lists, and updates the database
-	 *
+	 * 
 	 * @return True on success
 	 */
 	public static boolean makeFriends(Player friend1, Player friend2) {
@@ -97,7 +97,7 @@ public class SocialService {
 
 	/**
 	 * Deletes two players from eachother's friend lists, and updates the database
-	 *
+	 * 
 	 * @param deleter
 	 *          Player deleting a friend
 	 * @param friend

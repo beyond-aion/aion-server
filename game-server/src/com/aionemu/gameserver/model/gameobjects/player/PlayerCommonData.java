@@ -23,7 +23,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 
 /**
  * This class is holding base information about player, that may be used even when player itself is not online.
- *
+ * 
  * @author Luno, cura
  */
 public class PlayerCommonData extends CreatureTemplate {
@@ -115,7 +115,7 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	/**
 	 * calculate the lost experience must be called before setexp
-	 *
+	 * 
 	 * @author Jangan
 	 */
 	public void calculateExpLoss() {
@@ -413,7 +413,7 @@ public class PlayerCommonData extends CreatureTemplate {
 
 	/**
 	 * Gets the corresponding Player for this common data. Returns null if the player is not online
-	 *
+	 * 
 	 * @return Player or null
 	 */
 	public Player getPlayer() {

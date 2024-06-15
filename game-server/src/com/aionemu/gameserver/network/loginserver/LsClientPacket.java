@@ -11,7 +11,7 @@ public abstract class LsClientPacket extends BaseClientPacket<LoginServerConnect
 
 	/**
 	 * Constructs new client packet with specified opcode. If using this constructor, user must later manually set buffer and connection.
-	 *
+	 * 
 	 * @param opcode
 	 *          packet id
 	 */
@@ -33,7 +33,7 @@ public abstract class LsClientPacket extends BaseClientPacket<LoginServerConnect
 
 	/**
 	 * Send new LsServerPacket to connection that is owner of this packet. This method is equivalent to: getConnection().sendPacket(msg);
-	 *
+	 * 
 	 * @param msg
 	 */
 	protected void sendPacket(LsServerPacket msg) {

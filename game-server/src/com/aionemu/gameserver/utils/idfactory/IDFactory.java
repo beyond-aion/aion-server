@@ -4,13 +4,12 @@ import java.util.BitSet;
 import java.util.Collection;
 import java.util.concurrent.locks.ReentrantLock;
 
-import com.aionemu.gameserver.model.gameobjects.AionObject;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dao.*;
+import com.aionemu.gameserver.model.gameobjects.AionObject;
 
 /**
  * This class is responsible for id generation for all Aion-Emu objects.<br>
@@ -77,7 +76,8 @@ public class IDFactory {
 	 * Returns next free id.
 	 *
 	 * @return next free id
-	 * @throws IDFactoryError if there is no free id's
+	 * @throws IDFactoryError
+	 *           if there is no free id's
 	 */
 	public int nextId() {
 		lock.lock();
@@ -91,11 +91,6 @@ public class IDFactory {
 		}
 	}
 
-	/**
-	 * Releases given id
-	 *
-	 * @param id id to release
-	 */
 	public void releaseId(int id) {
 		lock.lock();
 		try {
@@ -124,8 +119,6 @@ public class IDFactory {
 	}
 
 	/**
-	 * Returns amount of used ids
-	 *
 	 * @return amount of used ids
 	 */
 	public int getUsedCount() {

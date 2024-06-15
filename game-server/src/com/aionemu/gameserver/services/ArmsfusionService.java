@@ -14,7 +14,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * This class is responsible for armsfusion related tasks (fusion and breaking, called COMPOUND and DECOMPOUND by the client)
- *
+ * 
  * @author Wakizashi, Source, xTz, Neon
  */
 public class ArmsfusionService {

@@ -48,7 +48,7 @@ public class QuestVars {
 
 	/**
 	 * Fill the array with values, based on
-	 *
+	 * 
 	 * @param int
 	 *          value, represented like above
 	 */

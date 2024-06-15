@@ -31,7 +31,7 @@ public class SkillEngine {
 
 	/**
 	 * This method is used for skills that were learned by player
-	 *
+	 * 
 	 * @param player
 	 * @param skillId
 	 * @return Skill
@@ -47,7 +47,7 @@ public class SkillEngine {
 
 	/**
 	 * This method is used for skills that were learned by player
-	 *
+	 * 
 	 * @param player
 	 * @param template
 	 * @param firstTarget
@@ -77,7 +77,7 @@ public class SkillEngine {
 
 	/**
 	 * This method is used for not learned skills (item skills etc)
-	 *
+	 * 
 	 * @param creature
 	 * @param skillId
 	 * @param skillLevel
@@ -136,7 +136,7 @@ public class SkillEngine {
 	/**
 	 * This method is used to apply effects of given skill directly without checking properties. Should be only used from handlers, or when you are sure
 	 * about it
-	 *
+	 * 
 	 * @param duration
 	 *          - null = calculates native duration, number = uses forced duration value (0 meaning permanent)
 	 * @param forceType

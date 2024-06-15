@@ -12,7 +12,7 @@ import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
  * In this packet the Aion client is requesting edit of a character.
- *
+ * 
  * @author IlBuono, Neon
  */
 public class CM_CHARACTER_EDIT extends AbstractCharacterEditPacket {

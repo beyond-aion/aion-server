@@ -17,7 +17,7 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * Automatic Announcement System
- *
+ * 
  * @author Divinity
  */
 public class AnnouncementService {

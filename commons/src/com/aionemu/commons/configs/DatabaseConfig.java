@@ -1,7 +1,5 @@
 package com.aionemu.commons.configs;
 
-import java.io.File;
-
 import com.aionemu.commons.configuration.Property;
 
 /**

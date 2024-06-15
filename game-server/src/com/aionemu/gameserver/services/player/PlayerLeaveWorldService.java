@@ -47,7 +47,7 @@ public class PlayerLeaveWorldService {
 	 * This method is called when a player loses client connection, e.g. when killing the process, or due to bad network connectivity.<br>
 	 * <br>
 	 * <b><font color='red'>NOTICE:</font> This method must only be called from {@link AionConnection#onDisconnect()} and not from anywhere else</b>
-	 *
+	 * 
 	 * @see #leaveWorld(Player)
 	 */
 	public static void leaveWorldDelayed(Player player, long delayInMillis) {

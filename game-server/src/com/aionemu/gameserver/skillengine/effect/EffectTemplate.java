@@ -203,7 +203,7 @@ public abstract class EffectTemplate {
 
 	/**
 	 * Gets the effect conditions status
-	 *
+	 * 
 	 * @return list of Conditions for effect template
 	 */
 	public Conditions getEffectConditions() {
@@ -212,7 +212,7 @@ public abstract class EffectTemplate {
 
 	/**
 	 * Gets the sub effect conditions status
-	 *
+	 * 
 	 * @return list of Conditions for sub effects within effect template
 	 */
 	public Conditions getEffectSubConditions() {
@@ -277,7 +277,7 @@ public abstract class EffectTemplate {
 	 * 1) check conditions 2) check preeffect 3) check effectresistrate 4) check noresist 5) decide if its magical or physical effect 6) physical -
 	 * check cannotmiss 7) check magic resist / dodge 8) addsuccess exceptions: buffbind buffsilence buffsleep buffstun randommoveloc recallinstant
 	 * returneffect returnpoint shieldeffect signeteffect summoneffect xpboosteffect
-	 *
+	 * 
 	 * @param effect
 	 * @param statEnum
 	 * @param spellStatus
@@ -395,14 +395,14 @@ public abstract class EffectTemplate {
 
 	/**
 	 * Apply effect to effected
-	 *
+	 * 
 	 * @param effect
 	 */
 	public abstract void applyEffect(Effect effect);
 
 	/**
 	 * Start effect on effected
-	 *
+	 * 
 	 * @param effect
 	 */
 	public void startEffect(Effect effect) {
@@ -498,7 +498,7 @@ public abstract class EffectTemplate {
 
 	/**
 	 * Do periodic effect on effected
-	 *
+	 * 
 	 * @param effect
 	 */
 	public void onPeriodicAction(Effect effect) {
@@ -506,7 +506,7 @@ public abstract class EffectTemplate {
 
 	/**
 	 * End effect on effected
-	 *
+	 * 
 	 * @param effect
 	 */
 	public void endEffect(Effect effect) {

@@ -23,7 +23,7 @@ import com.aionemu.gameserver.world.World;
 
 /**
  * Use this service to send raw html to the client.
- *
+ * 
  * @author lhw, xTz
  */
 public class HTMLService {

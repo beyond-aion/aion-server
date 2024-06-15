@@ -84,7 +84,7 @@ public class Kisk extends SummonedObject<Player> {
 
 	/**
 	 * 1 ~ race 2 ~ legion 3 ~ solo 4 ~ group 5 ~ alliance
-	 *
+	 * 
 	 * @return useMask
 	 */
 	public int getUseMask() {

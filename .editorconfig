@@ -16,6 +16,7 @@ ij_visual_guides =
 ij_wrap_on_typing = false
 
 [*.java]
+trim_trailing_whitespace = true
 ij_java_align_consecutive_assignments = false
 ij_java_align_consecutive_variable_declarations = false
 ij_java_align_group_field_declarations = false
@@ -265,6 +266,7 @@ ij_java_wrap_long_lines = false
 ij_java_wrap_semicolon_after_call_chain = false
 
 [{*.xml,*.xsd}]
+trim_trailing_whitespace = true
 ij_xml_align_attributes = false
 ij_xml_align_text = false
 ij_xml_attribute_wrap = normal

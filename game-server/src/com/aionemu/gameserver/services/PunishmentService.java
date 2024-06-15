@@ -22,7 +22,7 @@ public class PunishmentService {
 
 	/**
 	 * This method will handle unbanning a character
-	 *
+	 * 
 	 * @param player
 	 * @param state
 	 * @param delayInMinutes
@@ -33,7 +33,7 @@ public class PunishmentService {
 
 	/**
 	 * This method will handle banning a character
-	 *
+	 * 
 	 * @param player
 	 * @param state
 	 * @param delayInMinutes
@@ -49,7 +49,7 @@ public class PunishmentService {
 
 	/**
 	 * Calculates the timestamp when a given number of days is over
-	 *
+	 * 
 	 * @param dayCount
 	 * @return ban duration in seconds
 	 */
@@ -61,7 +61,7 @@ public class PunishmentService {
 
 	/**
 	 * This method will handle moving or removing a player from prison
-	 *
+	 * 
 	 * @param player
 	 * @param state
 	 * @param delayInMinutes
@@ -90,7 +90,7 @@ public class PunishmentService {
 
 	/**
 	 * This method will update the prison status
-	 *
+	 * 
 	 * @param player
 	 */
 	public static void updatePrisonStatus(Player player) {
@@ -113,7 +113,7 @@ public class PunishmentService {
 
 	/**
 	 * This method will schedule a prison task
-	 *
+	 * 
 	 * @param player
 	 * @param prisonTimer
 	 */
@@ -123,7 +123,7 @@ public class PunishmentService {
 
 	/**
 	 * This method will handle can or cant gathering
-	 *
+	 * 
 	 * @param player
 	 * @param captchaCount
 	 * @param state
@@ -151,7 +151,7 @@ public class PunishmentService {
 
 	/**
 	 * PunishmentType
-	 *
+	 * 
 	 * @author Cura
 	 */
 	public enum PunishmentType {

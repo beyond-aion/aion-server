@@ -16,7 +16,7 @@ import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
  * In this packets aion client is requesting deletion of character.
- *
+ * 
  * @author -Nemesiss-
  */
 public class CM_DELETE_CHARACTER extends AionClientPacket {
@@ -33,7 +33,7 @@ public class CM_DELETE_CHARACTER extends AionClientPacket {
 
 	/**
 	 * Constructs new instance of <tt>CM_DELETE_CHARACTER </tt> packet
-	 *
+	 * 
 	 * @param opcode
 	 */
 	public CM_DELETE_CHARACTER(int opcode, Set<State> validStates) {
