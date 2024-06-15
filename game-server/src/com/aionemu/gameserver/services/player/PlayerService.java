@@ -128,7 +128,6 @@ public class PlayerService {
 		PlayerNpcFactionsDAO.loadNpcFactions(player);
 		MotionDAO.loadMotionList(player);
 		AccountPassportsDAO.loadPassport(player.getAccount());
-		player.setVars(PlayerVarsDAO.load(player.getObjectId()));
 		player.setEffectController(new PlayerEffectController(player));
 		player.setFlyController(new FlyController(player));
 		PlayerStatFunctions.addPredefinedStatFunctions(player);
