@@ -7,7 +7,6 @@ import java.util.List;
 
 import org.slf4j.Logger;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.network.packet.BaseClientPacket;
 import com.aionemu.gameserver.configs.main.PlayerTransferConfig;
 import com.aionemu.gameserver.dao.InventoryDAO;

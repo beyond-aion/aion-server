@@ -30,7 +30,7 @@ import com.aionemu.gameserver.model.team.legion.LegionWarehouse;
  * @author Simple
  */
 
-public class LegionDAO implements IDFactoryAwareDAO {
+public class LegionDAO {
 
 	/** Logger */
 	private static final Logger log = LoggerFactory.getLogger(LegionDAO.class);
@@ -189,7 +189,7 @@ public class LegionDAO implements IDFactoryAwareDAO {
 		DB.executeUpdateAndClose(statement);
 	}
 
-	public int[] getUsedIDs() {
+	public static int[] getUsedIDs() {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement("SELECT id FROM legions", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 			ResultSet rs = stmt.executeQuery();

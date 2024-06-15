@@ -23,7 +23,7 @@ import com.aionemu.gameserver.model.templates.housing.HousingLand;
 /**
  * @author Rolandas
  */
-public class HousesDAO implements IDFactoryAwareDAO {
+public class HousesDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(HousesDAO.class);
 
@@ -36,7 +36,7 @@ public class HousesDAO implements IDFactoryAwareDAO {
 	private static final String UPDATE_HOUSE_QUERY = "UPDATE houses SET building_id=?, player_id=?, acquire_time=?, settings=?, next_pay=?, sign_notice=? WHERE id=?";
 	private static final String DELETE_HOUSE_QUERY = "DELETE FROM houses WHERE player_id=?";
 
-	public int[] getUsedIDs() {
+	public static int[] getUsedIDs() {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement("SELECT DISTINCT id FROM houses", ResultSet.TYPE_SCROLL_INSENSITIVE,
 					 ResultSet.CONCUR_READ_ONLY)) {
@@ -52,10 +52,6 @@ public class HousesDAO implements IDFactoryAwareDAO {
 			log.error("Can't get list of IDs from houses table", e);
 			return null;
 		}
-	}
-
-	public static boolean supports(String databaseName, int majorVersion, int minorVersion) {
-		return MySQL5DAOUtils.supports(databaseName, majorVersion, minorVersion);
 	}
 
 	public static void storeHouse(House house) {

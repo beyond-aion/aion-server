@@ -10,7 +10,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModel;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelController;
@@ -35,7 +34,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerService;
-import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -399,10 +397,8 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		return true;
 	}
 
-	@Override
-	public void onEndCastSkill(Skill skill) {
-		if (isBossPhase && skill.getEffector() instanceof Player effector && instance.isRegistered(effector.getObjectId()))
-			CustomInstanceService.getInstance().recordPlayerModelEntry(effector, skill, effector.getTarget());
+	public boolean isBossPhase() {
+		return isBossPhase;
 	}
 
 	public PlayerModel getPlayerModel() {

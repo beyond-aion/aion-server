@@ -1,9 +1,9 @@
 package admincommands;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -69,7 +69,7 @@ public class Kill extends AdminCommand {
 				}
 				// if input was integer, add 0.999 so it matches the clients displayed target distance (client doesn't round up at .5)
 				if (range == Math.round(range))
-					range += 0.999f;
+					range += 0.999;
 			}
 
 			if (params.length == 2 && NumberUtils.isDigits(params[1])) {

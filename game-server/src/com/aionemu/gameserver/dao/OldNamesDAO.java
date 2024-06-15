@@ -5,18 +5,20 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
+import com.aionemu.commons.database.DatabaseFactory;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.DatabaseFactory;
-
+import com.aionemu.commons.database.DB;
+import com.aionemu.commons.database.IUStH;
 /**
  * @author synchro2
  */
 public class OldNamesDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(OldNamesDAO.class);
-
+	
 	public static boolean isNameReserved(String oldName, String newName, int nameReservationDurationDays) {
 		if (nameReservationDurationDays > 0) {
 			try (Connection con = DatabaseFactory.getConnection();

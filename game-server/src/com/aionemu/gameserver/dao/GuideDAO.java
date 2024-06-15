@@ -92,7 +92,7 @@ public class GuideDAO {
 		}
 	}
 
-	public int[] getUsedIDs() {
+	public static int[] getUsedIDs() {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement("SELECT guide_id FROM guides", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 			ResultSet rs = stmt.executeQuery();

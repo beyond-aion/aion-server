@@ -8,7 +8,6 @@ import java.util.*;
 
 import org.quartz.JobDetail;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;

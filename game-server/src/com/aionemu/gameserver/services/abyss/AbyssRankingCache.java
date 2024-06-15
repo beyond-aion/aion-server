@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.abyss;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
 import com.aionemu.gameserver.dao.AbyssRankDAO.RankingListLegion;
 import com.aionemu.gameserver.dao.AbyssRankDAO.RankingListPlayer;

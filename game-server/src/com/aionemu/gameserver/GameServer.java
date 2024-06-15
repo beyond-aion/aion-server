@@ -22,7 +22,6 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.configs.CommonsConfig;
 import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
 import com.aionemu.commons.services.CronService;
@@ -78,7 +77,7 @@ import ch.qos.logback.classic.ClassicConstants;
 /**
  * <tt>GameServer</tt> is the main class of the application and represents the whole game server.<br>
  * This class is also an entry point with main() method.
- *
+ * 
  * @author -Nemesiss-, SoulKeeper, cura, Neon
  */
 public class GameServer {
@@ -182,7 +181,7 @@ public class GameServer {
 		BaseService.getInstance();
 		SiegeService.getInstance();
 		WorldRaidService.getInstance().initWorldRaidLocations();
-		// SiegeMercenariesDAO.loadActiveMercenaries();
+		// DAOManager.getDAO(SiegeMercenariesDAO.class).loadActiveMercenaries();
 		VortexService.getInstance().initVortexLocations();
 		RiftService.getInstance().initRiftLocations();
 		LegionDominionService.getInstance().initLocations();
@@ -289,8 +288,6 @@ public class GameServer {
 		Config.load();
 		// Second should be database factory
 		DatabaseFactory.init();
-		// Initialize DAOs
-		//DAOManager.init(); //TODO remove
 		PlayerDAO.setAllPlayersOffline();
 		// Initialize thread pools
 		ThreadPoolManager.getInstance();

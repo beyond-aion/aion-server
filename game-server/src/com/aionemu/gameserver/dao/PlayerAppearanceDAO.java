@@ -97,7 +97,7 @@ public class PlayerAppearanceDAO {
 
 	/**
 	 * Saves player appearance in database.<br>
-	 * Actually calls {@link #store(int, PlayerAppearance)}
+	 * Actually calls {@link #store(int, com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance)}
 	 *
 	 * @param player
 	 *          whos appearance to store

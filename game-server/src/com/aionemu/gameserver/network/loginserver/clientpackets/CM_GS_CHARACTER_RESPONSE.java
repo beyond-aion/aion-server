@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.loginserver.clientpackets;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.network.loginserver.LsClientPacket;
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_GS_CHARACTER;

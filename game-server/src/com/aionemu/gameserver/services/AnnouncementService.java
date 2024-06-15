@@ -7,7 +7,6 @@ import java.util.concurrent.Future;
 
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.AnnouncementsDAO;
 import com.aionemu.gameserver.model.Announcement;
 import com.aionemu.gameserver.model.ChatType;

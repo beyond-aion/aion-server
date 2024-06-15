@@ -2,7 +2,6 @@ package com.aionemu.gameserver.controllers;
 
 import java.sql.Timestamp;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Pet;

@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services.abyss;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.dao.AbyssRankDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;

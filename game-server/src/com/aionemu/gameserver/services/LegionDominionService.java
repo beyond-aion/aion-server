@@ -10,7 +10,6 @@ import java.util.TreeMap;
 
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.LegionDominionDAO;
 import com.aionemu.gameserver.dataholders.DataManager;

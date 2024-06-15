@@ -27,7 +27,7 @@ import com.aionemu.gameserver.world.World;
 /**
  * @author Rolandas
  */
-public class PlayerRegisteredItemsDAO implements IDFactoryAwareDAO {
+public class PlayerRegisteredItemsDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerRegisteredItemsDAO.class);
 
@@ -42,7 +42,7 @@ public class PlayerRegisteredItemsDAO implements IDFactoryAwareDAO {
 	public static final String DELETE_QUERY = "DELETE FROM `player_registered_items` WHERE `item_unique_id` = ?";
 	public static final String RESET_QUERY = "UPDATE `player_registered_items` SET x=0,y=0,z=0,h=0,area='NONE' WHERE `player_id`=? AND `area` != 'DECOR'";
 
-	public int[] getUsedIDs() {
+	public static int[] getUsedIDs() {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement("SELECT item_unique_id FROM player_registered_items WHERE item_unique_id <> 0",
 					 ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {

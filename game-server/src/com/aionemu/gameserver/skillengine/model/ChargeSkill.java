@@ -16,6 +16,7 @@ public class ChargeSkill extends Skill {
 
 	@Override
 	public void calculateAndSetCastDuration() {
+
 	}
 
 	@Override
@@ -30,14 +31,5 @@ public class ChargeSkill extends Skill {
 		effector.getObserveController().attach(moveListener);
 		endCast();
 		return true;
-	}
-
-	@Override
-	protected void endCast() {
-		super.endCast();
-		if (effector instanceof Player player) {
-			float temporaryAdjustmentFactor = 0.8f; // TODO remove after fixing motion validation (see 1dabdd7)
-			player.setNextSkillUse(System.currentTimeMillis() + (long) (getAnimationTime() * temporaryAdjustmentFactor));
-		}
 	}
 }

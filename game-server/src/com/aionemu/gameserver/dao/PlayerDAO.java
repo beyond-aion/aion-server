@@ -26,7 +26,7 @@ import com.aionemu.gameserver.world.World;
  *
  * @author SoulKeeper, Saelya, cura
  */
-public class PlayerDAO implements IDFactoryAwareDAO {
+public class PlayerDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerDAO.class);
 
@@ -291,7 +291,7 @@ public class PlayerDAO implements IDFactoryAwareDAO {
 		});
 	}
 
-	public int[] getUsedIDs() {
+	public static int[] getUsedIDs() {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement("SELECT id FROM players", ResultSet.TYPE_SCROLL_INSENSITIVE, ResultSet.CONCUR_READ_ONLY)) {
 			ResultSet rs = stmt.executeQuery();

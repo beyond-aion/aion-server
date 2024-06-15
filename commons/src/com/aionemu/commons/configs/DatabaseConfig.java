@@ -31,10 +31,4 @@ public class DatabaseConfig {
 	@Property(key = "database.connectionpool.timeout", defaultValue = "5000")
 	public static int DATABASE_TIMEOUT;
 
-	/**
-	 * Location of DAO .java implementations
-	 */
-	@Property(key = "database.dao_directory", defaultValue = "./data/handlers/mysql5")
-	public static File DAO_DIRECTORY;
-
 }

@@ -2,7 +2,6 @@ package com.aionemu.gameserver.world.container;
 
 import java.util.concurrent.ConcurrentHashMap;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.LegionMemberDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.LegionMember;

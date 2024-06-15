@@ -19,8 +19,6 @@ import com.aionemu.commons.database.DB;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.database.IUStH;
 import com.aionemu.commons.database.ParamReadStH;
-import com.aionemu.gameserver.dao.MailDAO;
-import com.aionemu.gameserver.dao.MySQL5DAOUtils;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
@@ -34,7 +32,7 @@ import com.aionemu.gameserver.services.item.ItemService;
 /**
  * @author kosyachok
  */
-public class MailDAO implements IDFactoryAwareDAO {
+public class MailDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(MailDAO.class);
 
@@ -260,7 +258,7 @@ public class MailDAO implements IDFactoryAwareDAO {
 		});
 	}
 
-	public int[] getUsedIDs() {
+	public static int[] getUsedIDs() {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement("SELECT mail_unique_id FROM mail", ResultSet.TYPE_SCROLL_INSENSITIVE,
 					 ResultSet.CONCUR_READ_ONLY)) {

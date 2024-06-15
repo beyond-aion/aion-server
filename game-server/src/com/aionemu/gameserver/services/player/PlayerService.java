@@ -3,7 +3,6 @@ package com.aionemu.gameserver.services.player;
 import java.sql.Timestamp;
 import java.util.List;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.configs.main.NameConfig;
@@ -63,12 +62,14 @@ public class PlayerService {
 	/**
 	 * Stores newly created player
 	 *
-	 * @param player player to store
+	 * @param player
+	 *          player to store
 	 * @return true if character was successful saved.
 	 */
 	public static boolean storeNewPlayer(Player player, String accountName, int accountId) {
-		return PlayerDAO.saveNewPlayer(player, accountId, accountName) && PlayerAppearanceDAO.store(
-			player) && PlayerSkillListDAO.storeSkills(player) && InventoryDAO.store(player);
+		return PlayerDAO.saveNewPlayer(player, accountId, accountName)
+			&& PlayerAppearanceDAO.store(player) && PlayerSkillListDAO.storeSkills(player)
+			&& InventoryDAO.store(player);
 	}
 
 	/**
@@ -259,7 +260,8 @@ public class PlayerService {
 	/**
 	 * Cancel Player deletion process if its possible.
 	 *
-	 * @param accData PlayerAccountData
+	 * @param accData
+	 *          PlayerAccountData
 	 * @return True if deletion was successful canceled.
 	 */
 	public static boolean cancelPlayerDeletion(PlayerAccountData accData) {
@@ -278,7 +280,8 @@ public class PlayerService {
 	/**
 	 * Starts player deletion process if its possible. If deletion is possible character should be deleted after 5 minutes.
 	 *
-	 * @param accData PlayerAccountData
+	 * @param accData
+	 *          PlayerAccountData
 	 */
 	public static void deletePlayer(PlayerAccountData accData) {
 		if (accData.getDeletionDate() != null) {
@@ -292,7 +295,8 @@ public class PlayerService {
 	/**
 	 * Completely removes player from database
 	 *
-	 * @param playerId id of player to delete from db
+	 * @param playerId
+	 *          id of player to delete from db
 	 */
 	public static void deletePlayerFromDB(int playerId) {
 		InventoryDAO.deletePlayerItems(playerId);
@@ -304,8 +308,10 @@ public class PlayerService {
 	/**
 	 * Completely removes player from database
 	 *
-	 * @param accountId id of account to delete player on
-	 * @param maxExp    maximum allowed character experience points (level) for deletion
+	 * @param accountId
+	 *          id of account to delete player on
+	 * @param maxExp
+	 *          maximum allowed character experience points (level) for deletion
 	 * @return number of deleted chars
 	 */
 	public static int deleteAccountsCharsFromDB(int accountId, long maxExp) {
@@ -318,7 +324,8 @@ public class PlayerService {
 	/**
 	 * Updates deletion time in database
 	 *
-	 * @param accData PlayerAccountData
+	 * @param accData
+	 *          PlayerAccountData
 	 */
 	private static void storeDeletionTime(PlayerAccountData accData) {
 		PlayerDAO.updateDeletionTime(accData.getPlayerCommonData().getPlayerObjId(), accData.getDeletionDate());
@@ -335,9 +342,12 @@ public class PlayerService {
 	/**
 	 * Add macro for player
 	 *
-	 * @param player     Player
-	 * @param macroOrder Macro order
-	 * @param macroXML   Macro XML
+	 * @param player
+	 *          Player
+	 * @param macroOrder
+	 *          Macro order
+	 * @param macroXML
+	 *          Macro XML
 	 */
 	public static void addMacro(Player player, int macroOrder, String macroXML) {
 		if (player.getMacroList().addMacro(macroOrder, macroXML)) {
@@ -350,8 +360,10 @@ public class PlayerService {
 	/**
 	 * Remove macro with specified index from specified player
 	 *
-	 * @param player     Player
-	 * @param macroOrder Macro order index
+	 * @param player
+	 *          Player
+	 * @param macroOrder
+	 *          Macro order index
 	 */
 	public static void removeMacro(Player player, int macroOrder) {
 		if (player.getMacroList().removeMacro(macroOrder)) {

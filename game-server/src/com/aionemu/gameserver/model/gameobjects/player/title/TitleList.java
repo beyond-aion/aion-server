@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.gameobjects.player.title;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerTitleListDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;

@@ -29,7 +29,7 @@ import com.aionemu.gameserver.utils.idfactory.IDFactory;
 /**
  * @author ATracer
  */
-public class InventoryDAO implements IDFactoryAwareDAO {
+public class InventoryDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(InventoryDAO.class);
 
@@ -420,7 +420,7 @@ public class InventoryDAO implements IDFactoryAwareDAO {
 		}
 	}
 
-	public int[] getUsedIDs() {
+	public static int[] getUsedIDs() {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement("SELECT item_unique_id FROM inventory", ResultSet.TYPE_SCROLL_INSENSITIVE,
 					 ResultSet.CONCUR_READ_ONLY)) {

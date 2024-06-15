@@ -2,7 +2,6 @@ package com.aionemu.gameserver.services;
 
 import java.util.concurrent.TimeUnit;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.player.Player;

@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 import java.nio.charset.StandardCharsets;
 import java.util.Set;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dao.PlayerPasskeyDAO;
 import com.aionemu.gameserver.model.account.CharacterPasskey;
