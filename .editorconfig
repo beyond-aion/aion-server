@@ -16,7 +16,7 @@ ij_visual_guides =
 ij_wrap_on_typing = false
 
 [*.java]
-trim_trailing_whitespace = true
+# trim_trailing_whitespace = true creates too many unwanted changes in files with empty JavaDoc lines
 ij_java_align_consecutive_assignments = false
 ij_java_align_consecutive_variable_declarations = false
 ij_java_align_group_field_declarations = false
