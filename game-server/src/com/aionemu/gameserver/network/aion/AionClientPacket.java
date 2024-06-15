@@ -6,9 +6,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.packet.BaseClientPacket;
-import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 
 /**
  * Base class for every Aion -> GS Client Packet
@@ -34,19 +32,11 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 		this.validStates = validStates;
 	}
 
-	/**
-	 * run runImpl catching and logging Throwable.
-	 */
 	@Override
 	public final void run() {
 		try {
-			if (!isValid()) // run only if packet is still valid (connection state didn't change, for example due to logout)
-				return;
-			if (isForbidden()) {
-				getConnection().sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_ACCUSE_TARGET_IS_NOT_VALID());
-				return;
-			}
-			runImpl();
+			if (isValid()) // run only if packet is still valid (connection state didn't change, for example due to logout)
+				runImpl();
 		} catch (Throwable e) {
 			log.error("Error handling client packet from " + getConnection() + ": " + this, e);
 		}
@@ -78,19 +68,6 @@ public abstract class AionClientPacket extends BaseClientPacket<AionConnection> 
 	 */
 	public final boolean isValid() {
 		return validStates.contains(getConnection().getState());
-	}
-
-	/**
-	 * Checks if the packet is allowed to be processed for the current user.
-	 * 
-	 * @return True if it is a forbidden packet for this connection.
-	 */
-	public final boolean isForbidden() {
-		if (SecurityConfig.HDD_SERIAL_HACKED_ACCOUNTS_FORBIDDEN_PACKETS.isEmpty())
-			return false;
-		if (getConnection().getAccount() == null)
-			return false;
-		return getConnection().getAccount().isHacked() && SecurityConfig.HDD_SERIAL_HACKED_ACCOUNTS_FORBIDDEN_PACKETS.contains(getClass());
 	}
 
 	@Override

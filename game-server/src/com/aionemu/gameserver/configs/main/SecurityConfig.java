@@ -85,12 +85,9 @@ public class SecurityConfig {
 	@Property(key = "gameserver.security.kick.dualboxing", defaultValue = "false")
 	public static boolean KICK_DUALBOXING;
 
-	@Property(key = "gameserver.security.hdd_serial.lock_new_accounts", defaultValue = "false")
-	public static boolean HDD_SERIAL_LOCK_NEW_ACCOUNTS;
+	@Property(key = "gameserver.security.hdd_serial_lock.enable", defaultValue = "false")
+	public static boolean HDD_SERIAL_LOCK_ENABLE;
 
-	@Property(key = "gameserver.security.hdd_serial.hacked_accounts.kick", defaultValue = "false")
-	public static boolean HDD_SERIAL_HACKED_ACCOUNTS_KICK;
-
-	@Property(key = "gameserver.security.hdd_serial.hacked_accounts.forbidden_packets")
-	public static Set<Class<? extends AionClientPacket>> HDD_SERIAL_HACKED_ACCOUNTS_FORBIDDEN_PACKETS;
+	@Property(key = "gameserver.security.hdd_serial_lock.auto_lock", defaultValue = "false")
+	public static boolean HDD_SERIAL_LOCK_UNLOCKED_ACCOUNTS;
 }

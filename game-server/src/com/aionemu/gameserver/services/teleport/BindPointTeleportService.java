@@ -83,12 +83,10 @@ public class BindPointTeleportService {
 		long basePrice = hotspot.getPrice();
 		long distanceCost = (long) (basePrice * distance / 1000d);
 		long price = Math.max(1, basePrice + distanceCost);
-		if (price != priceSentByGameClient) {
+		long priceDifference = Math.abs(price - priceSentByGameClient);
+		if (priceDifference > 1) // only warn about unexpected differences (minimal discrepancies from floating-point calculations can be ignored)
 			LoggerFactory.getLogger(BindPointTeleportService.class).warn("Hotspot teleport {} prices don't match: {} vs. {}", hotspot.getId(), price, priceSentByGameClient);
-			if (priceSentByGameClient > price)
-				price = priceSentByGameClient;
-		}
-		return price;
+		return Math.max(price, priceSentByGameClient);
 	}
 
 	private static boolean checkRequirements(Player player, HotspotTemplate hotspot, long price) {

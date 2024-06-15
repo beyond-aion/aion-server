@@ -214,8 +214,7 @@ public final class PlayerEnterWorldService {
 		player.getFriendList().setStatus(Status.ONLINE, pcd);
 		PlayerDAO.onlinePlayer(player, true);
 		PlayerDAO.storeLastOnlineTime(player.getObjectId(), new Timestamp(System.currentTimeMillis()));
-		log.info("Player " + player.getName() + " (account " + account.getName() + ") has entered world with " + client.getMacAddress() + " MAC and "
-			+ client.getHddSerial() + " HDD serial.");
+		log.info("Player " + player.getName() + " (" + account + ") logged on");
 		pcd.setInEditMode(false);
 
 		World.getInstance().storeObject(player);

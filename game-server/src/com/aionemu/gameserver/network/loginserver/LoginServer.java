@@ -13,12 +13,14 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.network.Dispatcher;
 import com.aionemu.commons.network.NioServer;
+import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.AccountTime;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
+import com.aionemu.gameserver.network.BannedMacManager;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_L2AUTH_LOGIN_CHECK;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_RECONNECT_KEY;
@@ -26,6 +28,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.network.loginserver.LoginServerConnection.State;
 import com.aionemu.gameserver.network.loginserver.serverpackets.*;
 import com.aionemu.gameserver.services.AccountService;
+import com.aionemu.gameserver.services.ban.HDDBanService;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
@@ -154,22 +157,47 @@ public class LoginServer {
 	 */
 	public void accountAuthenticationResponse(int accountId, String accountName, boolean result, long creationDate, AccountTime accountTime,
 		byte accessLevel, byte membership, long toll, String allowedHddSerial) {
-		AionConnection client = loginRequests.get(accountId);
+		AionConnection client = loginRequests.remove(accountId);
 		if (client == null)
 			return;
 
-		if (!result)
+		if (!result || !validateMacAndHddSerial(client, allowedHddSerial)) {
 			client.close(new SM_L2AUTH_LOGIN_CHECK(false, accountName)); // LS sends no accName when result is false
-		else {
-			Account account = AccountService.getAccount(accountId, accountName, creationDate, accountTime, accessLevel, membership, toll, allowedHddSerial);
-			kickOnlineCharacters(account);
-			client.setAccount(account);
-			client.setState(AionConnection.State.AUTHED);
-			loggedInAccounts.put(accountId, client);
-			loginRequests.remove(accountId);
-			log.info("Account authed: [Account ID: " + accountId + " Name: " + accountName + "]");
-			client.sendPacket(new SM_L2AUTH_LOGIN_CHECK(true, accountName));
+			sendPacket(new SM_ACCOUNT_DISCONNECTED(accountId)); // disconnect manually from login server because account isn't attached to connection yet
+			return;
 		}
+		Account account = AccountService.getAccount(accountId, accountName, creationDate, accountTime, accessLevel, membership, toll, allowedHddSerial);
+		if (SecurityConfig.HDD_SERIAL_LOCK_UNLOCKED_ACCOUNTS && account.getAllowedHddSerial().isEmpty() && !client.getHddSerial().isEmpty()) {
+			account.setAllowedHddSerial(client.getHddSerial());
+			sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(account));
+		}
+		kickOnlineCharacters(account);
+		client.setAccount(account);
+		client.setState(AionConnection.State.AUTHED);
+		loggedInAccounts.put(accountId, client);
+		log.info(account + " authed with MAC: " + client.getMacAddress() + " and HDD serial: " + client.getHddSerial());
+		client.sendPacket(new SM_L2AUTH_LOGIN_CHECK(true, accountName));
+		sendPacket(new SM_ACCOUNT_CONNECTION_INFO(account.getId(), System.currentTimeMillis(), client.getIP(), client.getMacAddress(), client.getHddSerial()));
+	}
+
+	private boolean validateMacAndHddSerial(AionConnection client, String allowedHddSerial) {
+		if (client.getMacAddress() == null || client.getHddSerial() == null) {
+			log.warn(client + " did not send CM_MAC_ADDRESS during login (modified client or hack)");
+			return false;
+		} else if (!client.getMacAddress().matches("^([0-9A-F]{2}-){5}[0-9A-F]{2}$")) {
+			log.warn(client + " sent an invalid MAC address (modified client or hack): " + client.getMacAddress());
+			return false;
+		} else if (BannedMacManager.getInstance().isBanned(client.getMacAddress())) {
+			log.info(client + " was kicked due to mac ban");
+			return false;
+		} else if (HDDBanService.getInstance().isBanned(client.getHddSerial())) {
+			log.info(client + " was kicked because hdd serial " + client.getHddSerial() + " is banned");
+			return false;
+		} else if (SecurityConfig.HDD_SERIAL_LOCK_ENABLE && !allowedHddSerial.isEmpty() && !allowedHddSerial.equals(client.getHddSerial())) {
+			log.info(client + " was kicked due to hdd serial mismatch. Expected " + allowedHddSerial + " but client connected with " + client.getHddSerial());
+			return false;
+		}
+		return true;
 	}
 
 	private void kickOnlineCharacters(Account account) {
