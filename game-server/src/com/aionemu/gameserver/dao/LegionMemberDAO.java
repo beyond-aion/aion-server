@@ -37,7 +37,7 @@ public class LegionMemberDAO {
 	private static final String SELECT_LEGIONMEMBEREX_QUERY = "SELECT players.name, players.exp, players.player_class, players.last_online, players.world_id, legion_members.* FROM players, legion_members WHERE id = ? AND players.id=legion_members.player_id";
 	private static final String SELECT_LEGIONMEMBEREX2_QUERY = "SELECT players.id, players.exp, players.player_class, players.last_online, players.world_id, legion_members.* FROM players, legion_members WHERE name = ? AND players.id=legion_members.player_id";
 
-	public static boolean isIdUsed(final int playerObjId) {
+	public static boolean isIdUsed(int playerObjId) {
 		PreparedStatement s = DB.prepareStatement("SELECT count(player_id) as cnt FROM legion_members WHERE ? = legion_members.player_id");
 		try {
 			s.setInt(1, playerObjId);
@@ -52,7 +52,7 @@ public class LegionMemberDAO {
 		}
 	}
 
-	public static boolean saveNewLegionMember(final LegionMember legionMember) {
+	public static boolean saveNewLegionMember(LegionMember legionMember) {
 		boolean success = DB.insertUpdate(INSERT_LEGIONMEMBER_QUERY, new IUStH() {
 
 			@Override
@@ -66,7 +66,7 @@ public class LegionMemberDAO {
 		return success;
 	}
 
-	public static void storeLegionMember(final int playerId, final LegionMember legionMember) {
+	public static void storeLegionMember(int playerId, LegionMember legionMember) {
 		DB.insertUpdate(UPDATE_LEGIONMEMBER_QUERY, new IUStH() {
 
 			@Override
@@ -81,11 +81,11 @@ public class LegionMemberDAO {
 		});
 	}
 
-	public static LegionMember loadLegionMember(final int playerObjId) {
+	public static LegionMember loadLegionMember(int playerObjId) {
 		if (playerObjId == 0)
 			return null;
 
-		final LegionMember legionMember = new LegionMember(playerObjId);
+		LegionMember legionMember = new LegionMember(playerObjId);
 
 		boolean success = DB.select(SELECT_LEGIONMEMBER_QUERY, new ParamReadStH() {
 
@@ -117,8 +117,8 @@ public class LegionMemberDAO {
 		return null;
 	}
 
-	public static LegionMemberEx loadLegionMemberEx(final int playerObjId) {
-		final LegionMemberEx legionMemberEx = new LegionMemberEx(playerObjId);
+	public static LegionMemberEx loadLegionMemberEx(int playerObjId) {
+		LegionMemberEx legionMemberEx = new LegionMemberEx(playerObjId);
 
 		boolean success = DB.select(SELECT_LEGIONMEMBEREX_QUERY, new ParamReadStH() {
 
@@ -156,8 +156,8 @@ public class LegionMemberDAO {
 		return null;
 	}
 
-	public static LegionMemberEx loadLegionMemberEx(final String playerName) {
-		final LegionMemberEx legionMember = new LegionMemberEx(playerName);
+	public static LegionMemberEx loadLegionMemberEx(String playerName) {
+		LegionMemberEx legionMember = new LegionMemberEx(playerName);
 
 		boolean success = DB.select(SELECT_LEGIONMEMBEREX2_QUERY, new ParamReadStH() {
 
@@ -195,8 +195,8 @@ public class LegionMemberDAO {
 		return null;
 	}
 
-	public static List<Integer> loadLegionMembers(final int legionId) {
-		final List<Integer> legionMembers = new ArrayList<>();
+	public static List<Integer> loadLegionMembers(int legionId) {
+		List<Integer> legionMembers = new ArrayList<>();
 
 		boolean success = DB.select(SELECT_LEGIONMEMBERS_QUERY, new ParamReadStH() {
 

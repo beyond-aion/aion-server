@@ -29,7 +29,7 @@ public class MailDAO {
 	private static final Logger log = LoggerFactory.getLogger(MailDAO.class);
 
 	public static Mailbox loadPlayerMailbox(Player player) {
-		final Mailbox mailbox = new Mailbox(player);
+		Mailbox mailbox = new Mailbox(player);
 		Map<Letter, Integer> letters = new HashMap<>();
 		List<Item> mailboxItems = null;
 
@@ -99,8 +99,8 @@ public class MailDAO {
 		return false;
 	}
 
-	private static List<Item> loadMailboxItems(final int playerId) {
-		final List<Item> mailboxItems = new ArrayList<>();
+	private static List<Item> loadMailboxItems(int playerId) {
+		List<Item> mailboxItems = new ArrayList<>();
 
 		DB.select("SELECT * FROM inventory WHERE `item_owner` = ? AND `item_location` = 127", new ParamReadStH() {
 
@@ -181,7 +181,7 @@ public class MailDAO {
 		if (letter.getAttachedItem() != null)
 			attachedItemId = letter.getAttachedItem().getObjectId();
 
-		final int fAttachedItemId = attachedItemId;
+		int fAttachedItemId = attachedItemId;
 
 		return DB.insertUpdate(
 			"INSERT INTO `mail` (`mail_unique_id`, `mail_recipient_id`, `sender_name`, `mail_title`, `mail_message`, `unread`, `attached_item_id`, `attached_kinah_count`, `express`, `recieved_time`) VALUES(?,?,?,?,?,?,?,?,?,?)",
@@ -209,7 +209,7 @@ public class MailDAO {
 		if (letter.getAttachedItem() != null)
 			attachedItemId = letter.getAttachedItem().getObjectId();
 
-		final int fAttachedItemId = attachedItemId;
+		int fAttachedItemId = attachedItemId;
 
 		return DB.insertUpdate(
 			"UPDATE mail SET  unread=?, attached_item_id=?, attached_kinah_count=?, `express`=?, recieved_time=? WHERE mail_unique_id=?", new IUStH() {
@@ -227,7 +227,7 @@ public class MailDAO {
 			});
 	}
 
-	public static boolean deleteLetter(final int letterId) {
+	public static boolean deleteLetter(int letterId) {
 		return DB.insertUpdate("DELETE FROM mail WHERE mail_unique_id=?", new IUStH() {
 
 			@Override
@@ -238,7 +238,7 @@ public class MailDAO {
 		});
 	}
 
-	public static void updateOfflineMailCounter(final PlayerCommonData recipientCommonData) {
+	public static void updateOfflineMailCounter(PlayerCommonData recipientCommonData) {
 		DB.insertUpdate("UPDATE players SET mailbox_letters=? WHERE name=?", new IUStH() {
 
 			@Override
@@ -268,7 +268,7 @@ public class MailDAO {
 		}
 	}
 
-	public static boolean cleanMail(final String recipient) {
+	public static boolean cleanMail(String recipient) {
 		return DB.insertUpdate(
 			"DELETE FROM mail WHERE mail_recipient_id=(SELECT id FROM players WHERE name=?) AND attached_item_id=0 AND attached_kinah_count=0",
 			new IUStH() {

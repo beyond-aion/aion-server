@@ -18,7 +18,10 @@ import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
-import com.aionemu.gameserver.model.gameobjects.player.*;
+import com.aionemu.gameserver.model.gameobjects.player.Equipment;
+import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.house.House;
 import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.items.storage.PlayerStorage;
@@ -115,9 +118,7 @@ public class PlayerService {
 			player.setLegionMember(legionMember);
 		}
 
-		MacroList macroses = PlayerMacrossesDAO.restoreMacrosses(playerObjId);
-		player.setMacroList(macroses);
-
+		player.setMacroList(PlayerMacrosDAO.loadMacros(playerObjId));
 		player.setSkillList(PlayerSkillListDAO.loadSkillList(playerObjId));
 		player.setKnownlist(new KnownList(player));
 		player.setFriendList(FriendListDAO.load(player));
@@ -350,9 +351,9 @@ public class PlayerService {
 	 */
 	public static void addMacro(Player player, int macroOrder, String macroXML) {
 		if (player.getMacroList().addMacro(macroOrder, macroXML)) {
-			PlayerMacrossesDAO.addMacro(player.getObjectId(), macroOrder, macroXML);
+			PlayerMacrosDAO.addMacro(player.getObjectId(), macroOrder, macroXML);
 		} else {
-			PlayerMacrossesDAO.updateMacro(player.getObjectId(), macroOrder, macroXML);
+			PlayerMacrosDAO.updateMacro(player.getObjectId(), macroOrder, macroXML);
 		}
 	}
 
@@ -366,7 +367,7 @@ public class PlayerService {
 	 */
 	public static void removeMacro(Player player, int macroOrder) {
 		if (player.getMacroList().removeMacro(macroOrder)) {
-			PlayerMacrossesDAO.deleteMacro(player.getObjectId(), macroOrder);
+			PlayerMacrosDAO.deleteMacro(player.getObjectId(), macroOrder);
 		}
 	}
 

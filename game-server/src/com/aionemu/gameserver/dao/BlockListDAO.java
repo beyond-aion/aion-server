@@ -30,7 +30,7 @@ public class BlockListDAO {
 	public static final String DEL_QUERY = "DELETE FROM blocks WHERE player=? AND blocked_player=?";
 	public static final String SET_REASON_QUERY = "UPDATE blocks SET reason=? WHERE player=? AND blocked_player=?";
 
-	public static boolean addBlockedUser(final int playerObjId, final int objIdToBlock, final String reason) {
+	public static boolean addBlockedUser(int playerObjId, int objIdToBlock, String reason) {
 		return DB.insertUpdate(ADD_QUERY, new IUStH() {
 
 			@Override
@@ -43,7 +43,7 @@ public class BlockListDAO {
 		});
 	}
 
-	public static boolean delBlockedUser(final int playerObjId, final int objIdToDelete) {
+	public static boolean delBlockedUser(int playerObjId, int objIdToDelete) {
 		return DB.insertUpdate(DEL_QUERY, new IUStH() {
 
 			@Override
@@ -56,7 +56,7 @@ public class BlockListDAO {
 	}
 
 	public static BlockList load(int playerObjId) {
-		final Map<Integer, BlockedPlayer> list = new HashMap<>();
+		Map<Integer, BlockedPlayer> list = new HashMap<>();
 
 		DB.select(LOAD_QUERY, new ParamReadStH() {
 
@@ -82,7 +82,7 @@ public class BlockListDAO {
 		return new BlockList(list);
 	}
 
-	public static boolean setReason(final int playerObjId, final int blockedPlayerObjId, final String reason) {
+	public static boolean setReason(int playerObjId, int blockedPlayerObjId, String reason) {
 		return DB.insertUpdate(SET_REASON_QUERY, new IUStH() {
 
 			@Override

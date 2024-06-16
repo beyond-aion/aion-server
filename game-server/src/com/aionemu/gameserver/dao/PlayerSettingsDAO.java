@@ -49,18 +49,18 @@ public class PlayerSettingsDAO {
 		return playerSettings;
 	}
 
-	public static void saveSettings(final Player player) {
-		final int playerId = player.getObjectId();
+	public static void saveSettings(Player player) {
+		int playerId = player.getObjectId();
 
 		PlayerSettings playerSettings = player.getPlayerSettings();
 		if (playerSettings.getPersistentState() == PersistentState.UPDATED)
 			return;
 
-		final byte[] uiSettings = playerSettings.getUiSettings();
-		final byte[] shortcuts = playerSettings.getShortcuts();
-		final byte[] houseBuddies = playerSettings.getHouseBuddies();
-		final int display = playerSettings.getDisplay();
-		final int deny = playerSettings.getDeny();
+		byte[] uiSettings = playerSettings.getUiSettings();
+		byte[] shortcuts = playerSettings.getShortcuts();
+		byte[] houseBuddies = playerSettings.getHouseBuddies();
+		int display = playerSettings.getDisplay();
+		int deny = playerSettings.getDeny();
 
 		if (uiSettings != null) {
 			DB.insertUpdate("REPLACE INTO player_settings values (?, ?, ?)", new IUStH() {

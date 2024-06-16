@@ -36,7 +36,7 @@ public class ItemStoneListDAO {
 	public static final String DELETE_QUERY = "DELETE FROM `item_stones` WHERE `item_unique_id`=? AND slot=? AND category=?";
 	public static final String SELECT_QUERY = "SELECT `item_id`, `slot`, `category`, `polishNumber`, `polishCharge`, `proc_count` FROM `item_stones` WHERE `item_unique_id`=?";
 
-	public static void load(final Collection<Item> items) {
+	public static void load(Collection<Item> items) {
 		List<Item> validItems = items.stream().filter(i -> i.getItemTemplate().isArmor() || i.getItemTemplate().isWeapon()).collect(Collectors.toList());
 		if (validItems.isEmpty())
 			return;

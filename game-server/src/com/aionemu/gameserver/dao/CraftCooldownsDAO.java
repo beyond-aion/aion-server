@@ -42,8 +42,8 @@ public class CraftCooldownsDAO {
 		deleteCraftCoolDowns(player);
 
 		for (Map.Entry<Integer, Long> entry : player.getCraftCooldowns().entrySet()) {
-			final int delayId = entry.getKey();
-			final long reuseTime = entry.getValue();
+			int delayId = entry.getKey();
+			long reuseTime = entry.getValue();
 
 			if (reuseTime < System.currentTimeMillis())
 				continue;

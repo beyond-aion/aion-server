@@ -45,7 +45,7 @@ public class LegionDAO {
 	private static final String SELECT_HISTORY_QUERY = "SELECT * FROM `legion_history` WHERE legion_id=? ORDER BY date ASC;";
 	private static final String CLEAR_LEGION_SIEGE = "UPDATE siege_locations SET legion_id=0 WHERE legion_id=?";
 
-	public static boolean isNameUsed(final String name) {
+	public static boolean isNameUsed(String name) {
 		PreparedStatement s = DB.prepareStatement("SELECT count(id) as cnt FROM legions WHERE ? = legions.name");
 		try {
 			s.setString(1, name);
@@ -60,7 +60,7 @@ public class LegionDAO {
 		}
 	}
 
-	public static boolean saveNewLegion(final Legion legion) {
+	public static boolean saveNewLegion(Legion legion) {
 		boolean success = DB.insertUpdate(INSERT_LEGION_QUERY, new IUStH() {
 
 			@Override
@@ -73,7 +73,7 @@ public class LegionDAO {
 		return success;
 	}
 
-	public static void storeLegion(final Legion legion) {
+	public static void storeLegion(Legion legion) {
 		DB.insertUpdate(UPDATE_LEGION_QUERY, new IUStH() {
 
 			@Override
@@ -95,8 +95,8 @@ public class LegionDAO {
 		});
 	}
 
-	public static Legion loadLegion(final String legionName) {
-		final Legion[] legion = new Legion[1];
+	public static Legion loadLegion(String legionName) {
+		Legion[] legion = new Legion[1];
 
 		boolean success = DB.select(SELECT_LEGION_QUERY2, new ParamReadStH() {
 
@@ -126,8 +126,8 @@ public class LegionDAO {
 		return success ? legion[0] : null;
 	}
 
-	public static Legion loadLegion(final int legionId) {
-		final Legion[] legion = new Legion[1];
+	public static Legion loadLegion(int legionId) {
+		Legion[] legion = new Legion[1];
 
 		boolean success = DB.select(SELECT_LEGION_QUERY1, new ParamReadStH() {
 
@@ -192,8 +192,8 @@ public class LegionDAO {
 		}
 	}
 
-	public static TreeMap<Timestamp, String> loadAnnouncementList(final int legionId) {
-		final TreeMap<Timestamp, String> announcementList = new TreeMap<>();
+	public static TreeMap<Timestamp, String> loadAnnouncementList(int legionId) {
+		TreeMap<Timestamp, String> announcementList = new TreeMap<>();
 
 		boolean success = DB.select(SELECT_ANNOUNCEMENTLIST_QUERY, new ParamReadStH() {
 
@@ -216,7 +216,7 @@ public class LegionDAO {
 		return success ? announcementList : null;
 	}
 
-	public static boolean saveNewAnnouncement(final int legionId, final Timestamp currentTime, final String message) {
+	public static boolean saveNewAnnouncement(int legionId, Timestamp currentTime, String message) {
 		boolean success = DB.insertUpdate(INSERT_ANNOUNCEMENT_QUERY, new IUStH() {
 
 			@Override
@@ -241,7 +241,7 @@ public class LegionDAO {
 		DB.executeUpdateAndClose(statement);
 	}
 
-	public static void storeLegionEmblem(final int legionId, final LegionEmblem legionEmblem) {
+	public static void storeLegionEmblem(int legionId, LegionEmblem legionEmblem) {
 		if (!validEmblem(legionEmblem))
 			return;
 		if (!(checkEmblem(legionId)))
@@ -259,11 +259,11 @@ public class LegionDAO {
 		legionEmblem.setPersistentState(PersistentState.UPDATED);
 	}
 
-	private static boolean validEmblem(final LegionEmblem legionEmblem) {
+	private static boolean validEmblem(LegionEmblem legionEmblem) {
 		return legionEmblem.getEmblemType() != LegionEmblemType.CUSTOM || legionEmblem.getCustomEmblemData() != null;
 	}
 
-	public static boolean checkEmblem(final int legionid) {
+	public static boolean checkEmblem(int legionid) {
 		PreparedStatement st = DB.prepareStatement(SELECT_EMBLEM_QUERY);
 		try {
 			st.setInt(1, legionid);
@@ -280,7 +280,7 @@ public class LegionDAO {
 		return false;
 	}
 
-	private static void createLegionEmblem(final int legionId, final LegionEmblem legionEmblem) {
+	private static void createLegionEmblem(int legionId, LegionEmblem legionEmblem) {
 		DB.insertUpdate(INSERT_EMBLEM_QUERY, new IUStH() {
 
 			@Override
@@ -298,7 +298,7 @@ public class LegionDAO {
 		});
 	}
 
-	private static void updateLegionEmblem(final int legionId, final LegionEmblem legionEmblem) {
+	private static void updateLegionEmblem(int legionId, LegionEmblem legionEmblem) {
 		DB.insertUpdate(UPDATE_EMBLEM_QUERY, new IUStH() {
 
 			@Override
@@ -316,8 +316,8 @@ public class LegionDAO {
 		});
 	}
 
-	public static LegionEmblem loadLegionEmblem(final int legionId) {
-		final LegionEmblem legionEmblem = new LegionEmblem();
+	public static LegionEmblem loadLegionEmblem(int legionId) {
+		LegionEmblem legionEmblem = new LegionEmblem();
 
 		DB.select(SELECT_EMBLEM_QUERY, new ParamReadStH() {
 
@@ -341,10 +341,10 @@ public class LegionDAO {
 	}
 
 	public static LegionWarehouse loadLegionStorage(Legion legion) {
-		final LegionWarehouse inventory = new LegionWarehouse(legion);
-		final int legionId = legion.getLegionId();
-		final int storage = StorageType.LEGION_WAREHOUSE.getId();
-		final int equipped = 0;
+		LegionWarehouse inventory = new LegionWarehouse(legion);
+		int legionId = legion.getLegionId();
+		int storage = StorageType.LEGION_WAREHOUSE.getId();
+		int equipped = 0;
 
 		DB.select(SELECT_STORAGE_QUERY, new ParamReadStH() {
 
@@ -407,7 +407,7 @@ public class LegionDAO {
 		}
 	}
 
-	public static boolean saveNewLegionHistory(final int legionId, final LegionHistory legionHistory) {
+	public static boolean saveNewLegionHistory(int legionId, LegionHistory legionHistory) {
 		boolean success = DB.insertUpdate(INSERT_HISTORY_QUERY, new IUStH() {
 
 			@Override

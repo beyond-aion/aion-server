@@ -27,7 +27,7 @@ public class PlayerCooldownsDAO {
 	public static final String DELETE_QUERY = "DELETE FROM `player_cooldowns` WHERE `player_id`=?";
 	public static final String SELECT_QUERY = "SELECT `cooldown_id`, `reuse_delay` FROM `player_cooldowns` WHERE `player_id`=?";
 
-	public static void loadPlayerCooldowns(final Player player) {
+	public static void loadPlayerCooldowns(Player player) {
 		DB.select(SELECT_QUERY, new ParamReadStH() {
 
 			@Override
@@ -48,7 +48,7 @@ public class PlayerCooldownsDAO {
 		});
 	}
 
-	public static void storePlayerCooldowns(final Player player) {
+	public static void storePlayerCooldowns(Player player) {
 		deletePlayerCooldowns(player);
 
 		Map<Integer, Long> cooldowns = player.getSkillCoolDowns();
@@ -78,7 +78,7 @@ public class PlayerCooldownsDAO {
 		}
 	}
 
-	private static void deletePlayerCooldowns(final Player player) {
+	private static void deletePlayerCooldowns(Player player) {
 		DB.insertUpdate(DELETE_QUERY, new IUStH() {
 
 			@Override

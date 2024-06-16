@@ -16,22 +16,20 @@ import com.aionemu.commons.database.IUStH;
 import com.aionemu.gameserver.model.gameobjects.player.MacroList;
 
 /**
- * Macrosses DAO
- * <p/>
  * Created on: 13.07.2009 17:05:56
  * 
  * @author Aquanox
  */
-public class PlayerMacrossesDAO {
+public class PlayerMacrosDAO {
 
-	private static final Logger log = LoggerFactory.getLogger(PlayerMacrossesDAO.class);
+	private static final Logger log = LoggerFactory.getLogger(PlayerMacrosDAO.class);
 
 	public static final String INSERT_QUERY = "INSERT INTO `player_macrosses` (`player_id`, `order`, `macro`) VALUES (?,?,?)";
 	public static final String UPDATE_QUERY = "UPDATE `player_macrosses` SET `macro`=? WHERE `player_id`=? AND `order`=?";
 	public static final String DELETE_QUERY = "DELETE FROM `player_macrosses` WHERE `player_id`=? AND `order`=?";
 	public static final String SELECT_QUERY = "SELECT `order`, `macro` FROM `player_macrosses` WHERE `player_id`=?";
 
-	public static void addMacro(final int playerId, final int macroPosition, final String macro) {
+	public static void addMacro(int playerId, int macroPosition, String macro) {
 		DB.insertUpdate(INSERT_QUERY, new IUStH() {
 
 			@Override
@@ -44,7 +42,7 @@ public class PlayerMacrossesDAO {
 		});
 	}
 
-	public static void updateMacro(final int playerId, final int macroPosition, final String macro) {
+	public static void updateMacro(int playerId, int macroPosition, String macro) {
 		DB.insertUpdate(UPDATE_QUERY, new IUStH() {
 
 			@Override
@@ -57,7 +55,7 @@ public class PlayerMacrossesDAO {
 		});
 	}
 
-	public static void deleteMacro(final int playerId, final int macroPosition) {
+	public static void deleteMacro(int playerId, int macroPosition) {
 		DB.insertUpdate(DELETE_QUERY, new IUStH() {
 
 			@Override
@@ -69,20 +67,20 @@ public class PlayerMacrossesDAO {
 		});
 	}
 
-	public static MacroList restoreMacrosses(final int playerId) {
-		Map<Integer, String> macrosses = new HashMap<>();
+	public static MacroList loadMacros(int playerId) {
+		Map<Integer, String> macros = new HashMap<>();
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, playerId);
 			try (ResultSet rset = stmt.executeQuery()) {
 				while (rset.next()) {
 					int order = rset.getInt("order");
 					String text = rset.getString("macro");
-					macrosses.put(order, text);
+					macros.put(order, text);
 				}
 			}
 		} catch (Exception e) {
-			log.error("Could not restore MacroList data for player " + playerId + " from DB: " + e.getMessage(), e);
+			log.error("Could not load macros for player " + playerId, e);
 		}
-		return new MacroList(macrosses);
+		return new MacroList(macros);
 	}
 }

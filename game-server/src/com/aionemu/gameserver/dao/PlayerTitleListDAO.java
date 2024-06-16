@@ -26,8 +26,8 @@ public class PlayerTitleListDAO {
 	private static final String INSERT_QUERY = "INSERT INTO `player_titles`(`player_id`,`title_id`, `remaining`) VALUES (?,?,?)";
 	private static final String DELETE_QUERY = "DELETE FROM `player_titles` WHERE `player_id`=? AND `title_id` =?;";
 
-	public static TitleList loadTitleList(final int playerId) {
-		final TitleList tl = new TitleList();
+	public static TitleList loadTitleList(int playerId) {
+		TitleList tl = new TitleList();
 
 		DB.select(LOAD_QUERY, new ParamReadStH() {
 

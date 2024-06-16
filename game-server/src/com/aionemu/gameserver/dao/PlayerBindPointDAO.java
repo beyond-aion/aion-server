@@ -77,7 +77,7 @@ public class PlayerBindPointDAO {
 		return true;
 	}
 
-	public static boolean store(final Player player) {
+	public static boolean store(Player player) {
 		boolean insert = false;
 		BindPointPosition bind = player.getBindPoint();
 

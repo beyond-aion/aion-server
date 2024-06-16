@@ -23,7 +23,7 @@ public class HouseObjectCooldownsDAO {
 	public static final String DELETE_QUERY = "DELETE FROM `house_object_cooldowns` WHERE `player_id`=?";
 	public static final String SELECT_QUERY = "SELECT `object_id`, `reuse_time` FROM `house_object_cooldowns` WHERE `player_id`=?";
 
-	public static void loadHouseObjectCooldowns(final Player player) {
+	public static void loadHouseObjectCooldowns(Player player) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
 			try (ResultSet rset = stmt.executeQuery()) {
@@ -38,12 +38,12 @@ public class HouseObjectCooldownsDAO {
 		}
 	}
 
-	public static void storeHouseObjectCooldowns(final Player player) {
+	public static void storeHouseObjectCooldowns(Player player) {
 		deleteHouseObjectCoolDowns(player);
 
 		for (Map.Entry<Integer, Long> entry : player.getHouseObjectCooldowns().entrySet()) {
-			final int templateId = entry.getKey();
-			final long reuseTime = entry.getValue();
+			int templateId = entry.getKey();
+			long reuseTime = entry.getValue();
 
 			if (reuseTime < System.currentTimeMillis())
 				continue;
@@ -59,7 +59,7 @@ public class HouseObjectCooldownsDAO {
 		}
 	}
 
-	private static void deleteHouseObjectCoolDowns(final Player player) {
+	private static void deleteHouseObjectCoolDowns(Player player) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
 			stmt.execute();

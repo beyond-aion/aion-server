@@ -31,8 +31,8 @@ public class FriendListDAO {
 	public static final String DEL_QUERY = "DELETE FROM friends WHERE player = ? AND friend = ?";
 	public static final String SET_MEMO_QUERY = "UPDATE friends SET memo=? WHERE player=? AND friend=?";
 
-	public static FriendList load(final Player player) {
-		final List<Friend> friends = new ArrayList<>();
+	public static FriendList load(Player player) {
+		List<Friend> friends = new ArrayList<>();
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(LOAD_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
 			ResultSet rset = stmt.executeQuery();
@@ -51,7 +51,7 @@ public class FriendListDAO {
 		return new FriendList(player, friends);
 	}
 
-	public static boolean addFriends(final Player player, final Player friend) {
+	public static boolean addFriends(Player player, Player friend) {
 		return DB.insertUpdate(ADD_QUERY, new IUStH() {
 
 			@Override
@@ -70,7 +70,7 @@ public class FriendListDAO {
 
 	}
 
-	public static boolean delFriends(final int playerOid, final int friendOid) {
+	public static boolean delFriends(int playerOid, int friendOid) {
 		return DB.insertUpdate(DEL_QUERY, new IUStH() {
 
 			@Override
@@ -88,7 +88,7 @@ public class FriendListDAO {
 		});
 	}
 
-	public static boolean setFriendMemo(final int playerOid, final int friendOid, final String memo) {
+	public static boolean setFriendMemo(int playerOid, int friendOid, String memo) {
 		return DB.insertUpdate(SET_MEMO_QUERY, new IUStH() {
 
 			@Override

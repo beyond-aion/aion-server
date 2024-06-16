@@ -23,9 +23,9 @@ public class BrokerDAO {
 	private static final Logger log = LoggerFactory.getLogger(BrokerDAO.class);
 
 	public static List<BrokerItem> loadBroker() {
-		final List<BrokerItem> brokerItems = new ArrayList<>();
+		List<BrokerItem> brokerItems = new ArrayList<>();
 
-		final List<Item> items = getBrokerItems();
+		List<Item> items = getBrokerItems();
 
 		DB.select("SELECT * FROM broker", new ReadStH() {
 
@@ -67,7 +67,7 @@ public class BrokerDAO {
 	}
 
 	private static List<Item> getBrokerItems() {
-		final List<Item> brokerItems = new ArrayList<>();
+		List<Item> brokerItems = new ArrayList<>();
 
 		DB.select("SELECT * FROM inventory WHERE `item_location` = 126", new ReadStH() {
 
@@ -140,7 +140,7 @@ public class BrokerDAO {
 		return result;
 	}
 
-	private static boolean insertBrokerItem(final BrokerItem item) {
+	private static boolean insertBrokerItem(BrokerItem item) {
 		boolean result = DB.insertUpdate(
 			"INSERT INTO `broker` (`item_pointer`, `item_id`, `item_count`, `item_creator`, `price`, `broker_race`, `expire_time`, `seller_id`, `is_sold`, `is_settled`, `splitting_available`) VALUES (?,?,?,?,?,?,?,?,?,?,?)",
 			new IUStH() {
@@ -165,7 +165,7 @@ public class BrokerDAO {
 		return result;
 	}
 
-	private static boolean deleteBrokerItem(final BrokerItem item) {
+	private static boolean deleteBrokerItem(BrokerItem item) {
 		boolean result = DB.insertUpdate("DELETE FROM `broker` WHERE `item_pointer` = ? AND `seller_id` = ? AND `expire_time` = ?", new IUStH() {
 
 			@Override
@@ -180,7 +180,7 @@ public class BrokerDAO {
 		return result;
 	}
 
-	private static boolean updateBrokerItem(final BrokerItem item) {
+	private static boolean updateBrokerItem(BrokerItem item) {
 		boolean result = DB.insertUpdate(
 			"UPDATE broker SET `is_sold` = ?, `is_settled` = ?, `settle_time` = ?, `item_count` = ? WHERE `item_pointer` = ? AND `expire_time` = ? AND `seller_id` = ? AND `is_settled` = 0",
 			new IUStH() {

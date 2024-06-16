@@ -23,8 +23,8 @@ public class PlayerAppearanceDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(PlayerAppearanceDAO.class);
 
-	public static PlayerAppearance load(final int playerId) {
-		final PlayerAppearance pa = new PlayerAppearance();
+	public static PlayerAppearance load(int playerId) {
+		PlayerAppearance pa = new PlayerAppearance();
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement("SELECT * FROM player_appearance WHERE player_id = ?")) {
 			stmt.setInt(1, playerId);
@@ -104,7 +104,7 @@ public class PlayerAppearanceDAO {
 		return store(player.getObjectId(), player.getPlayerAppearance());
 	}
 
-	public static boolean store(int id, final PlayerAppearance pa) {
+	public static boolean store(int id, PlayerAppearance pa) {
 
 		return DB.insertUpdate("REPLACE INTO player_appearance ("
 			+ "player_id, face, hair, deco, tattoo, face_contour, expression, jaw_line, skin_rgb, hair_rgb, lip_rgb, eye_rgb, face_shape,"

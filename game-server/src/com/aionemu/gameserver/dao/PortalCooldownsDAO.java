@@ -22,7 +22,7 @@ public class PortalCooldownsDAO {
 	public static final String DELETE_QUERY = "DELETE FROM `portal_cooldowns` WHERE `player_id`=?";
 	public static final String SELECT_QUERY = "SELECT `world_id`, `reuse_time`, `entry_count` FROM `portal_cooldowns` WHERE `player_id`=?";
 
-	public static void loadPortalCooldowns(final Player player) {
+	public static void loadPortalCooldowns(Player player) {
 		Map<Integer, PortalCooldown> portalCoolDowns = new HashMap<>();
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
@@ -42,7 +42,7 @@ public class PortalCooldownsDAO {
 		}
 	}
 
-	public static void storePortalCooldowns(final Player player) {
+	public static void storePortalCooldowns(Player player) {
 		deletePortalCooldowns(player);
 		Map<Integer, PortalCooldown> portalCoolDowns = player.getPortalCooldownList().getPortalCoolDowns();
 

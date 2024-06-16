@@ -21,7 +21,7 @@ public class PlayerLifeStatsDAO {
 	public static final String SELECT_QUERY = "SELECT `hp`, `mp`, `fp` FROM `player_life_stats` WHERE `player_id`=?";
 	public static final String UPDATE_QUERY = "UPDATE player_life_stats set `hp`=?, `mp`=?, `fp`=? WHERE `player_id`=?";
 
-	public static void loadPlayerLifeStat(final Player player) {
+	public static void loadPlayerLifeStat(Player player) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
 			try (ResultSet rset = stmt.executeQuery()) {
@@ -38,7 +38,7 @@ public class PlayerLifeStatsDAO {
 		}
 	}
 
-	public static void insertPlayerLifeStat(final Player player) {
+	public static void insertPlayerLifeStat(Player player) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(INSERT_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
 			stmt.setInt(2, player.getLifeStats().getCurrentHp());
@@ -50,7 +50,7 @@ public class PlayerLifeStatsDAO {
 		}
 	}
 
-	public static void updatePlayerLifeStat(final Player player) {
+	public static void updatePlayerLifeStat(Player player) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(UPDATE_QUERY)) {
 			stmt.setInt(1, player.getLifeStats().getCurrentHp());
 			stmt.setInt(2, player.getLifeStats().getCurrentMp());

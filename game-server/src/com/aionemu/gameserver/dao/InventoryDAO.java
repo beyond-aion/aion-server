@@ -40,9 +40,9 @@ public class InventoryDAO {
 	public static final String SELECT_QUERY2 = "SELECT * FROM `inventory` WHERE `item_owner`=? AND `item_location`=?";
 
 	public static Storage loadStorage(int ownerId, StorageType storageType) {
-		final Storage inventory = new PlayerStorage(storageType);
-		final int storage = storageType.getId();
-		final int equipped = 0;
+		Storage inventory = new PlayerStorage(storageType);
+		int storage = storageType.getId();
+		int equipped = 0;
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, ownerId);
 			stmt.setInt(2, storage);
@@ -82,9 +82,9 @@ public class InventoryDAO {
 	}
 
 	public static Equipment loadEquipment(Player player) {
-		final Equipment equipment = new Equipment(player);
-		final int storage = 0;
-		final int equipped = 1;
+		Equipment equipment = new Equipment(player);
+		int storage = 0;
+		int equipped = 1;
 
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, player.getObjectId());
@@ -104,9 +104,9 @@ public class InventoryDAO {
 	}
 
 	public static List<Item> loadEquipment(int playerId) {
-		final List<Item> items = new ArrayList<>();
-		final int storage = 0;
-		final int equipped = 1;
+		List<Item> items = new ArrayList<>();
+		int storage = 0;
+		int equipped = 1;
 
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 			stmt.setInt(1, playerId);
@@ -124,7 +124,7 @@ public class InventoryDAO {
 		return items;
 	}
 
-	private static Item constructItem(final int storage, ResultSet rset) throws SQLException {
+	private static Item constructItem(int storage, ResultSet rset) throws SQLException {
 		int itemUniqueId = rset.getInt("item_unique_id");
 		int itemId = rset.getInt("item_id");
 		long itemCount = rset.getLong("item_count");
@@ -157,7 +157,7 @@ public class InventoryDAO {
 			bonusStatsId, fusionedItemBonusStatsId, tempering, packCount, isAmplified == 1, buffSkill, rndPlumeBonusValue);
 	}
 
-	private static int loadPlayerAccountId(final int playerId) {
+	private static int loadPlayerAccountId(int playerId) {
 		int accountId = 0;
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_ACCOUNT_QUERY)) {
 			stmt.setInt(1, playerId);
@@ -172,7 +172,7 @@ public class InventoryDAO {
 		return accountId;
 	}
 
-	public static int loadLegionId(final int playerId) {
+	public static int loadLegionId(int playerId) {
 		int legionId = 0;
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(SELECT_LEGION_QUERY)) {
 			stmt.setInt(1, playerId);
@@ -392,7 +392,7 @@ public class InventoryDAO {
 	/**
 	 * Since inventory is not using FK - need to clean items
 	 */
-	public static boolean deletePlayerItems(final int playerId) {
+	public static boolean deletePlayerItems(int playerId) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_CLEAN_QUERY)) {
 			stmt.setInt(1, playerId);
 			stmt.execute();
@@ -403,7 +403,7 @@ public class InventoryDAO {
 		return true;
 	}
 
-	public static void deleteAccountWH(final int accountId) {
+	public static void deleteAccountWH(int accountId) {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement(DELETE_ACCOUNT_WH)) {
 			stmt.setInt(1, accountId);
 			stmt.execute();

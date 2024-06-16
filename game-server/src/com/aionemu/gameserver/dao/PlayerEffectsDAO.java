@@ -32,7 +32,7 @@ public class PlayerEffectsDAO {
 
 	private static final Predicate<Effect> insertableEffectsPredicate = effect -> effect.canSaveOnLogout() && effect.getRemainingTimeMillis() > 28000;
 
-	public static void loadPlayerEffects(final Player player) {
+	public static void loadPlayerEffects(Player player) {
 		DB.select(SELECT_QUERY, new ParamReadStH() {
 
 			@Override
@@ -58,7 +58,7 @@ public class PlayerEffectsDAO {
 		player.getEffectController().broadCastEffects(null);
 	}
 
-	public static void storePlayerEffects(final Player player) {
+	public static void storePlayerEffects(Player player) {
 		deletePlayerEffects(player);
 
 		List<Effect> effects = player.getEffectController().getAbnormalEffects();
@@ -88,7 +88,7 @@ public class PlayerEffectsDAO {
 		}
 	}
 
-	private static void deletePlayerEffects(final Player player) {
+	private static void deletePlayerEffects(Player player) {
 		DB.insertUpdate(DELETE_QUERY, new IUStH() {
 
 			@Override

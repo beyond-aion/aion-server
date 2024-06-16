@@ -20,7 +20,7 @@ import com.aionemu.gameserver.model.Announcement;
 public class AnnouncementsDAO {
 
 	public static List<Announcement> loadAnnouncements() {
-		final List<Announcement> result = new ArrayList<>();
+		List<Announcement> result = new ArrayList<>();
 		DB.select("SELECT * FROM announcements ORDER BY id", new ReadStH() {
 
 			@Override

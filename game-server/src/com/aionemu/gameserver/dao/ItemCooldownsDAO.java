@@ -28,7 +28,7 @@ public class ItemCooldownsDAO {
 	public static final String DELETE_QUERY = "DELETE FROM `item_cooldowns` WHERE `player_id`=?";
 	public static final String SELECT_QUERY = "SELECT `delay_id`, `use_delay`, `reuse_time` FROM `item_cooldowns` WHERE `player_id`=?";
 
-	public static void loadItemCooldowns(final Player player) {
+	public static void loadItemCooldowns(Player player) {
 		DB.select(SELECT_QUERY, new ParamReadStH() {
 
 			@Override
@@ -83,7 +83,7 @@ public class ItemCooldownsDAO {
 		}
 	}
 
-	private static void deleteItemCooldowns(final Player player) {
+	private static void deleteItemCooldowns(Player player) {
 		DB.insertUpdate(DELETE_QUERY, new IUStH() {
 
 			@Override

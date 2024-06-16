@@ -19,8 +19,8 @@ public class PlayerRecipesDAO {
 	private static final String ADD_QUERY = "INSERT INTO player_recipes (`player_id`, `recipe_id`) VALUES (?, ?)";
 	private static final String DELETE_QUERY = "DELETE FROM player_recipes WHERE `player_id`=? AND `recipe_id`=?";
 
-	public static RecipeList load(final int playerId) {
-		final HashSet<Integer> recipeList = new HashSet<>();
+	public static RecipeList load(int playerId) {
+		HashSet<Integer> recipeList = new HashSet<>();
 		DB.select(SELECT_QUERY, new ParamReadStH() {
 
 			@Override
@@ -38,7 +38,7 @@ public class PlayerRecipesDAO {
 		return new RecipeList(recipeList);
 	}
 
-	public static boolean addRecipe(final int playerId, final int recipeId) {
+	public static boolean addRecipe(int playerId, int recipeId) {
 		return DB.insertUpdate(ADD_QUERY, new IUStH() {
 
 			@Override
@@ -50,7 +50,7 @@ public class PlayerRecipesDAO {
 		});
 	}
 
-	public static boolean delRecipe(final int playerId, final int recipeId) {
+	public static boolean delRecipe(int playerId, int recipeId) {
 		return DB.insertUpdate(DELETE_QUERY, new IUStH() {
 
 			@Override
