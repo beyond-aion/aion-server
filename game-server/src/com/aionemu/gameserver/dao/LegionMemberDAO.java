@@ -97,7 +97,8 @@ public class LegionMemberDAO {
 			@Override
 			public void handleRead(ResultSet resultSet) {
 				try {
-					resultSet.next();
+					if (!resultSet.next())
+						return;
 					int legionId = resultSet.getInt("legion_id");
 					legionMember.setRank(LegionRank.valueOf(resultSet.getString("rank")));
 					legionMember.setNickname(resultSet.getString("nickname"));
@@ -129,7 +130,8 @@ public class LegionMemberDAO {
 			@Override
 			public void handleRead(ResultSet resultSet) {
 				try {
-					resultSet.next();
+					if (!resultSet.next())
+						return;
 					legionMemberEx.setName(resultSet.getString("players.name"));
 					legionMemberEx.setPlayerClass(PlayerClass.valueOf(resultSet.getString("players.player_class")));
 					legionMemberEx.setLevelByExp(resultSet.getLong("players.exp"));
@@ -167,7 +169,8 @@ public class LegionMemberDAO {
 			@Override
 			public void handleRead(ResultSet resultSet) {
 				try {
-					resultSet.next();
+					if (!resultSet.next())
+						return;
 					legionMember.setObjectId(resultSet.getInt("id"));
 					legionMember.setPlayerClass(PlayerClass.valueOf(resultSet.getString("player_class")));
 					legionMember.setLevelByExp(resultSet.getLong("exp"));
