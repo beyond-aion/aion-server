@@ -3075,7 +3075,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Shugo Emperor's Vault" start="2023-06-19T00:00:00" end="2023-06-30T23:59:59">
+	<event name="Shugo Emperor's Vault" start="2024-06-17T00:00:00" end="2024-06-30T23:59:59">
 		<quests>
 			<maintainable>80689 80690 80691 80692 80693 80694 80695 80696</maintainable>
 		</quests>

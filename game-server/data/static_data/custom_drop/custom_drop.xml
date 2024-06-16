@@ -5320,7 +5320,7 @@
 	<!-- Shugo Emperor's Vault: Emperor's Treasure Box -->
 	<npc_drop npc_id="832929">
 		<drop_group race="ELYOS">
-			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="110900384" /><!-- Shadow Wraith Armor -->
 			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
 			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
 			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
@@ -5330,7 +5330,7 @@
 			<drop item_id="160010158" min_amount="3" /><!-- [Event] Shugo Disguise Candy -->
 		</drop_group>
 		<drop_group race="ASMODIANS">
-			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="110900384" /><!-- Shadow Wraith Armor -->
 			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
 			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
 			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
@@ -5359,7 +5359,7 @@
 	<!-- Shugo Emperor's Vault: Emperor's Quality Treasure Box -->
 	<npc_drop npc_id="832930">
 		<drop_group race="ELYOS" max_items="2">
-			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="110900384" /><!-- Shadow Wraith Armor -->
 			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
 			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
 			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
@@ -5369,7 +5369,7 @@
 			<drop item_id="160010158" min_amount="3" /><!-- [Event] Shugo Disguise Candy -->
 		</drop_group>
 		<drop_group race="ASMODIANS" max_items="2">
-			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="110900384" /><!-- Shadow Wraith Armor -->
 			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
 			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
 			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
@@ -5398,7 +5398,7 @@
 	<!-- Shugo Emperor's Vault: Emperor's Premium Treasure Box -->
 	<npc_drop npc_id="832931">
 		<drop_group race="ELYOS" max_items="2">
-			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="110900384" /><!-- Shadow Wraith Armor -->
 			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
 			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
 			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
@@ -5408,7 +5408,7 @@
 			<drop item_id="160010158" min_amount="3" /><!-- [Event] Shugo Disguise Candy -->
 		</drop_group>
 		<drop_group race="ASMODIANS" max_items="2">
-			<drop item_id="110900876" /><!-- Nyerkcarrier -->
+			<drop item_id="110900384" /><!-- Shadow Wraith Armor -->
 			<drop item_id="188052761" min_amount="2" /><!-- [Event] Bonus Entry Scroll Bundle -->
 			<drop item_id="186000055" min_amount="3" /><!-- Major Ancient Goblet -->
 			<drop item_id="169620079" /><!-- Gathering Boost Charm II - 100% -->
