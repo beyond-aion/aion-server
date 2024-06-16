@@ -7,16 +7,8 @@ import java.util.concurrent.locks.ReentrantLock;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.GenericValidator;
-import com.aionemu.gameserver.dao.GuideDAO;
-import com.aionemu.gameserver.dao.HousesDAO;
-import com.aionemu.gameserver.dao.InventoryDAO;
-import com.aionemu.gameserver.dao.LegionDAO;
-import com.aionemu.gameserver.dao.MailDAO;
-import com.aionemu.gameserver.dao.PlayerDAO;
-import com.aionemu.gameserver.dao.PlayerPetsDAO;
-import com.aionemu.gameserver.dao.PlayerRegisteredItemsDAO;
+import com.aionemu.gameserver.dao.*;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 
 /**
@@ -58,12 +50,12 @@ public class IDFactory {
 	 * Bitset that is used for all id's.<br>
 	 * We are allowing BitSet to grow over time, so in the end it can be as big as {@link Integer#MAX_VALUE}
 	 */
-	private final BitSet idList;
+	private final BitSet idList = new BitSet();
 
 	/**
 	 * Synchronization of bitset
 	 */
-	private final ReentrantLock lock;
+	private final ReentrantLock lock = new ReentrantLock();
 
 	/**
 	 * Id that will be used as minimal on next id request
@@ -71,20 +63,9 @@ public class IDFactory {
 	private volatile int nextMinId = 1;
 
 	private IDFactory() {
-		idList = new BitSet();
-		lock = new ReentrantLock();
 		lockIds(0);
-		// Here should be calls to all IDFactoryAwareDAO implementations to initialize already used IDs
-		lockIds(DAOManager.getDAO(PlayerDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(InventoryDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(PlayerRegisteredItemsDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(LegionDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(MailDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(GuideDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(HousesDAO.class).getUsedIDs());
-		lockIds(DAOManager.getDAO(PlayerPetsDAO.class).getUsedIDs());
-
-		log.info("IDFactory: " + getUsedCount() + " IDs used.");
+		initializeUsedIds();
+		log.info("IDFactory: {} IDs used.", getUsedCount());
 	}
 
 	public static IDFactory getInstance() {
@@ -99,12 +80,10 @@ public class IDFactory {
 	 *           if there is no free id's
 	 */
 	public int nextId() {
+		lock.lock();
 		try {
-			lock.lock();
-
 			int id = nextValidId(nextMinId);
 			idList.set(id);
-
 			nextMinId = id + 1;
 			return id;
 		} finally {
@@ -112,10 +91,61 @@ public class IDFactory {
 		}
 	}
 
+	public void releaseId(int id) {
+		lock.lock();
+		try {
+			if (!release(id)) {
+				log.warn("Couldn't release ID {} because it wasn't taken", id, new IllegalArgumentException());
+			}
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	public void releaseObjectIds(Collection<? extends AionObject> unusedObjects) {
+		if (GenericValidator.isBlankOrNull(unusedObjects))
+			return;
+
+		lock.lock();
+		try {
+			unusedObjects.forEach(obj -> {
+				if (!release(obj.getObjectId())) {
+					log.warn("Couldn't release object ID of {} (ID wasn't taken)", obj, new IllegalArgumentException());
+				}
+			});
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	/**
+	 * @return amount of used ids
+	 */
+	public int getUsedCount() {
+		lock.lock();
+		try {
+			return idList.cardinality();
+		} finally {
+			lock.unlock();
+		}
+	}
+
+	private void initializeUsedIds() {
+		lockIds(PlayerDAO.getUsedIDs());
+		lockIds(InventoryDAO.getUsedIDs());
+		lockIds(PlayerRegisteredItemsDAO.getUsedIDs());
+		lockIds(LegionDAO.getUsedIDs());
+		lockIds(MailDAO.getUsedIDs());
+		lockIds(GuideDAO.getUsedIDs());
+		lockIds(HousesDAO.getUsedIDs());
+		lockIds(PlayerPetsDAO.getUsedIDs());
+	}
+
 	private int nextValidId(int searchIndex) {
 		int id = idList.nextClearBit(searchIndex);
-		if (id == Integer.MIN_VALUE) // Integer.MIN_VALUE means we have used up all available IDs
+		if (id == Integer.MIN_VALUE) {
 			throw new IDFactoryError("All IDs are used, please clear your database");
+		}
 		return isInvalidId(id) ? nextValidId(id + 1) : id;
 	}
 
@@ -133,27 +163,10 @@ public class IDFactory {
 	 */
 	private void lockIds(int... ids) {
 		for (int id : ids) {
-			boolean status = idList.get(id);
-			if (status) {
+			if (idList.get(id)) {
 				throw new IDFactoryError("ID " + id + " is already taken, fatal error!!!");
 			}
 			idList.set(id);
-		}
-	}
-
-	/**
-	 * Releases given id
-	 *
-	 * @param id
-	 *          id to release
-	 */
-	public void releaseId(int id) {
-		try {
-			lock.lock();
-			if (!release(id))
-				log.warn("Couldn't release ID " + id + " because it wasn't taken", new IllegalArgumentException()); // print stack
-		} finally {
-			lock.unlock();
 		}
 	}
 
@@ -163,8 +176,7 @@ public class IDFactory {
 	 * @return True if the ID could be released, false if it was not taken
 	 */
 	private boolean release(int id) {
-		boolean status = idList.get(id);
-		if (!status)
+		if (!idList.get(id))
 			return false;
 		idList.clear(id);
 		if (id < nextMinId || nextMinId == Integer.MIN_VALUE)
@@ -172,37 +184,8 @@ public class IDFactory {
 		return true;
 	}
 
-	public void releaseObjectIds(Collection<? extends AionObject> unusedObjects) {
-		if (GenericValidator.isBlankOrNull(unusedObjects))
-			return;
-
-		try {
-			lock.lock();
-			for (AionObject obj : unusedObjects) {
-				if (!release(obj.getObjectId()))
-					log.warn("Couldn't release object ID of " + obj + " (ID wasn't taken)", new IllegalArgumentException()); // print object and stack
-			}
-		} finally {
-			lock.unlock();
-		}
-	}
-
-	/**
-	 * Returns amount of used ids
-	 *
-	 * @return amount of used ids
-	 */
-	public int getUsedCount() {
-		try {
-			lock.lock();
-			return idList.cardinality();
-		} finally {
-			lock.unlock();
-		}
-	}
-
 	private static class SingletonHolder {
 
-		protected static final IDFactory instance = new IDFactory();
+		private static final IDFactory instance = new IDFactory();
 	}
 }

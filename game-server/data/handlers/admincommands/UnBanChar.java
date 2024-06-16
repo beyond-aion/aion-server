@@ -1,6 +1,5 @@
 package admincommands;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.PunishmentService;
@@ -26,7 +25,7 @@ public class UnBanChar extends AdminCommand {
 
 		// Banned player must be offline
 		String name = Util.convertName(params[0]);
-		int playerId = DAOManager.getDAO(PlayerDAO.class).getPlayerIdByName(name);
+		int playerId = PlayerDAO.getPlayerIdByName(name);
 		if (playerId == 0) {
 			PacketSendUtility.sendMessage(admin, "Player " + name + " was not found!");
 			PacketSendUtility.sendMessage(admin, "Syntax: //unbanchar <player>");

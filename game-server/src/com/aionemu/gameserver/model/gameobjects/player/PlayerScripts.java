@@ -6,7 +6,6 @@ import java.util.Arrays;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.HouseScriptsDAO;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.house.House;
@@ -53,7 +52,7 @@ public class PlayerScripts {
 			House house = HousingService.getInstance().findHouseOrStudio(houseObjId);
 			if (house.getPersistentState() == PersistentState.NEW)
 				house.save(); // new houses must be inserted first, due to foreign key constraints
-			DAOManager.getDAO(HouseScriptsDAO.class).storeScript(houseObjId, id, scriptXML);
+			HouseScriptsDAO.storeScript(houseObjId, id, scriptXML);
 		}
 		scripts[id] = new PlayerScript(id, compressedXML, uncompressedSize);
 		return true;
@@ -62,12 +61,12 @@ public class PlayerScripts {
 	public void remove(int scriptId) {
 		if (isInvalidScriptId(scriptId))
 			return;
-		DAOManager.getDAO(HouseScriptsDAO.class).deleteScript(houseObjId, scriptId);
+		HouseScriptsDAO.deleteScript(houseObjId, scriptId);
 		scripts[scriptId] = new PlayerScript(scriptId, null, 0);
 	}
 
 	public void removeAll() {
-		DAOManager.getDAO(HouseScriptsDAO.class).deleteScriptsForHouse(houseObjId);
+		HouseScriptsDAO.deleteScriptsForHouse(houseObjId);
 		fillEmptyScriptsArray();
 	}
 

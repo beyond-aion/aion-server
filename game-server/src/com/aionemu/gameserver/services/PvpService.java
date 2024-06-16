@@ -6,7 +6,6 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
@@ -59,7 +58,7 @@ public class PvpService {
 
 	private PvpService() {
 		killBounties = DataManager.KILL_BOUNTY_DATA.getKillBounties();
-		headhunters = DAOManager.getDAO(HeadhuntingDAO.class).loadHeadhunters();
+		headhunters = HeadhuntingDAO.loadHeadhunters();
 	}
 
 	public static PvpService getInstance() {

@@ -3,7 +3,6 @@ package admincommands;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
@@ -199,7 +198,7 @@ public class SysMail extends AdminCommand {
 			return false;
 		} else if (recipientType == RecipientType.PLAYER) {
 			if (letterType == LetterType.NORMAL) {
-				if (!DAOManager.getDAO(PlayerDAO.class).isNameUsed(recipient)) {
+				if (!PlayerDAO.isNameUsed(recipient)) {
 					PacketSendUtility.sendMessage(admin, "Could not find a Recipient by that name.");
 					return false;
 				}

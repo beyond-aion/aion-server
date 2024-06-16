@@ -2,7 +2,6 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPunishmentsDAO;
 import com.aionemu.gameserver.model.account.PlayerAccountData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -41,7 +40,7 @@ public class CM_QUIT extends AionClientPacket {
 			if (stayConnected) { // update char selection info
 				player.getAccountData().setEquipment(player.getEquipment().getEquippedForAppearance());
 				for (PlayerAccountData plAccData : con.getAccount().getPlayerAccDataList())
-					plAccData.setCharBanInfo(DAOManager.getDAO(PlayerPunishmentsDAO.class).getCharBanInfo(plAccData.getPlayerCommonData().getPlayerObjId()));
+					plAccData.setCharBanInfo(PlayerPunishmentsDAO.getCharBanInfo(plAccData.getPlayerCommonData().getPlayerObjId()));
 			}
 			charEditScreen = player.getCommonData().isInEditMode();
 			PlayerLeaveWorldService.leaveWorld(player);

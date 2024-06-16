@@ -4,7 +4,6 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.LegionMemberDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -114,7 +113,7 @@ public class LegionCommand extends AdminCommand {
 			}
 			String old = legion.getName();
 			legion.setName(params[2]);
-			DAOManager.getDAO(LegionDAO.class).storeLegion(legion);
+			LegionDAO.storeLegion(legion);
 			PacketSendUtility.broadcastToWorld(new SM_RENAME(legion, old));
 			PacketSendUtility.sendMessage(player, "Legion " + old + " has changed name to " + legion.getName() + ".");
 		} else if (params[0].equalsIgnoreCase("info")) {
@@ -223,7 +222,7 @@ public class LegionCommand extends AdminCommand {
 						member.setRank(LegionRank.LEGIONARY);
 						PacketSendUtility.broadcastToLegion(target.getLegion(), new SM_LEGION_UPDATE_MEMBER(member, 0, ""));
 						PacketSendUtility.sendMessage(player, "You have sucessfully demoted " + member.getName() + " to Legionary rank.");
-						DAOManager.getDAO(LegionMemberDAO.class).storeLegionMember(memberId, bgPlayer);
+						LegionMemberDAO.storeLegionMember(memberId, bgPlayer);
 						break;
 					}
 

@@ -8,7 +8,6 @@ import java.util.stream.Collectors;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dao.InventoryDAO;
@@ -582,7 +581,7 @@ public class Equipment implements Persistable {
 		if (equippedItem.getItemCount() == 0) {
 			equipment.remove(equippedItem.getEquipmentSlot());
 			PacketSendUtility.sendPacket(owner, new SM_DELETE_ITEM(equippedItem.getObjectId()));
-			DAOManager.getDAO(InventoryDAO.class).store(equippedItem, owner);
+			InventoryDAO.store(equippedItem, owner);
 		}
 
 		ItemPacketService.updateItemAfterInfoChange(owner, equippedItem, ItemUpdateType.STATS_CHANGE);

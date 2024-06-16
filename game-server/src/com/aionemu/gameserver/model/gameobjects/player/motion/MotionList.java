@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.MotionDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOTION;
@@ -58,12 +57,12 @@ public class MotionList {
 			Motion old = activeMotions.put(Motion.motionType.get(motion.getId()), motion);
 			if (old != null) {
 				old.setActive(false);
-				DAOManager.getDAO(MotionDAO.class).updateMotion(owner.getObjectId(), old);
+				MotionDAO.updateMotion(owner.getObjectId(), old);
 			}
 		}
 		if (persist) {
 			ExpireTimerTask.getInstance().registerExpirable(motion, owner);
-			DAOManager.getDAO(MotionDAO.class).storeMotion(owner.getObjectId(), motion);
+			MotionDAO.storeMotion(owner.getObjectId(), motion);
 		}
 	}
 
@@ -71,7 +70,7 @@ public class MotionList {
 		Motion motion = motions.remove(motionId);
 		if (motion != null) {
 			PacketSendUtility.sendPacket(owner, new SM_MOTION((short) motionId));
-			DAOManager.getDAO(MotionDAO.class).deleteMotion(owner.getObjectId(), motionId);
+			MotionDAO.deleteMotion(owner.getObjectId(), motionId);
 			if (motion.isActive()) {
 				activeMotions.remove(Motion.motionType.get(motionId));
 				return true;
@@ -90,16 +89,16 @@ public class MotionList {
 			Motion old = activeMotions.put(motionType, motion);
 			if (old != null) {
 				old.setActive(false);
-				DAOManager.getDAO(MotionDAO.class).updateMotion(owner.getObjectId(), old);
+				MotionDAO.updateMotion(owner.getObjectId(), old);
 			}
 			motion.setActive(true);
-			DAOManager.getDAO(MotionDAO.class).updateMotion(owner.getObjectId(), motion);
+			MotionDAO.updateMotion(owner.getObjectId(), motion);
 		} else if (activeMotions != null) {
 			Motion old = activeMotions.remove(motionType);
 			if (old == null)
 				return; // TODO packet hack??
 			old.setActive(false);
-			DAOManager.getDAO(MotionDAO.class).updateMotion(owner.getObjectId(), old);
+			MotionDAO.updateMotion(owner.getObjectId(), old);
 		}
 		PacketSendUtility.sendPacket(owner, new SM_MOTION((short) motionId, (byte) motionType));
 		PacketSendUtility.broadcastPacket(owner, new SM_MOTION(owner.getObjectId(), activeMotions), true);

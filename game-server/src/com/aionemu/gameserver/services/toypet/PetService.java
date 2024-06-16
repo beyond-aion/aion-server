@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PlayerPetsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
@@ -54,7 +53,7 @@ public class PetService {
 		Pet pet = player.getPet();
 		if (pet != null) {
 			pet.getCommonData().setName(name);
-			DAOManager.getDAO(PlayerPetsDAO.class).updatePetName(pet.getCommonData());
+			PlayerPetsDAO.updatePetName(pet.getCommonData());
 			PacketSendUtility.broadcastPacket(player, new SM_PET(pet.getObjectId(), pet.getName()), true);
 		}
 	}
@@ -121,7 +120,7 @@ public class PetService {
 				commonData.scheduleRefeed(delay);
 				long refeedTime = System.currentTimeMillis() + delay;
 				commonData.setRefeedTime(refeedTime);
-				DAOManager.getDAO(PlayerPetsDAO.class).setTime(pet.getObjectId(), refeedTime);
+				PlayerPetsDAO.setTime(pet.getObjectId(), refeedTime);
 				progress.reset();
 			} else {
 				PacketSendUtility.sendPacket(player, new SM_PET(2, item.getObjectId(), --count, pet));

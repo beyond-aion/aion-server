@@ -8,7 +8,6 @@ import java.util.*;
 
 import org.quartz.JobDetail;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -49,9 +48,9 @@ public class AtreianPassportService {
 					return;
 				}
 				boolean isFirstDayOfMonth = ServerTime.now().getDayOfMonth() == 1;
-				DAOManager.getDAO(AccountPassportsDAO.class).resetAllPassports();
+				AccountPassportsDAO.resetAllPassports();
 				if (isFirstDayOfMonth)
-					DAOManager.getDAO(AccountPassportsDAO.class).resetAllStamps();
+					AccountPassportsDAO.resetAllStamps();
 
 				World.getInstance().forEachPlayer(player -> {
 					player.getAccount().setLastStamp(null);
@@ -120,7 +119,7 @@ public class AtreianPassportService {
 			}
 		}
 		if (!toRemove.isEmpty())
-			DAOManager.getDAO(AccountPassportsDAO.class).storePassportList(player.getAccount().getId(), toRemove);
+			AccountPassportsDAO.storePassportList(player.getAccount().getId(), toRemove);
 		onLogin(player);
 	}
 
@@ -166,7 +165,7 @@ public class AtreianPassportService {
 			pa.increasePassportStamps();
 			pa.setLastStamp(new Timestamp(System.currentTimeMillis()));
 			checkPassportLimit(player);
-			DAOManager.getDAO(AccountPassportsDAO.class).storePassport(pa); // save account
+			AccountPassportsDAO.storePassport(pa); // save account
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_NEW_PASSPORT_AVAIBLE());
 		}
 		sendPassport(player);
@@ -205,7 +204,7 @@ public class AtreianPassportService {
 		}
 		if (!toRemove.isEmpty()) {
 			pl.removeAll(toRemove);
-			DAOManager.getDAO(AccountPassportsDAO.class).storePassportList(player.getAccount().getId(), toRemove);
+			AccountPassportsDAO.storePassportList(player.getAccount().getId(), toRemove);
 			toRemove.clear();
 		}
 

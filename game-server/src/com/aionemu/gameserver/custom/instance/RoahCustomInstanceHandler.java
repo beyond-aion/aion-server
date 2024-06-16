@@ -10,7 +10,6 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModel;
 import com.aionemu.gameserver.custom.instance.neuralnetwork.PlayerModelController;
@@ -314,7 +313,7 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 			CustomInstanceService.getInstance().saveNewPlayerModelEntries(playerObjId);
 			if (CustomInstanceService.getInstance().changePlayerRank(playerObjId, rank, achievedDps)) {
-				String name = player != null ? player.getName() : DAOManager.getDAO(PlayerDAO.class).getPlayerNameByObjId(playerObjId);
+				String name = player != null ? player.getName() : PlayerDAO.getPlayerNameByObjId(playerObjId);
 				log.info(String.format("[CI_ROAH] Rank changed for Player [id=%d, name=%s, oldRank=%s(%d), newRank=%s(%d)]", playerObjId, name,
 					CustomInstanceRankEnum.getRankDescription(oldRank), oldRank, CustomInstanceRankEnum.getRankDescription(rank), rank));
 			}

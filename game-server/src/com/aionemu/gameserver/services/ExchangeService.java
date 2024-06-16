@@ -8,7 +8,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -465,8 +464,8 @@ public class ExchangeService {
 
 		@Override
 		public void run() {
-			DAOManager.getDAO(InventoryDAO.class).store(player1Items, player1Id);
-			DAOManager.getDAO(InventoryDAO.class).store(player2Items, player2Id);
+			InventoryDAO.store(player1Items, player1Id);
+			InventoryDAO.store(player2Items, player2Id);
 		}
 	}
 

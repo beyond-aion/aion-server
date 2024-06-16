@@ -8,7 +8,6 @@ import org.apache.commons.lang3.ArrayUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.dao.BrokerDAO;
 import com.aionemu.gameserver.dao.InventoryDAO;
@@ -69,7 +68,7 @@ public class BrokerService {
 		int loadedBrokerItemsCount = 0;
 		int loadedSettledItemsCount = 0;
 
-		List<BrokerItem> brokerItems = DAOManager.getDAO(BrokerDAO.class).loadBroker();
+		List<BrokerItem> brokerItems = BrokerDAO.loadBroker();
 
 		for (BrokerItem item : brokerItems) {
 			if (item.getItemBrokerRace() == BrokerRace.ASMODIAN) {
@@ -763,11 +762,11 @@ public class BrokerService {
 		public void run() {
 			// first save item for FK consistency
 			if (item != null)
-				DAOManager.getDAO(InventoryDAO.class).store(item, playerId);
+				InventoryDAO.store(item, playerId);
 			if (brokerItem != null)
-				DAOManager.getDAO(BrokerDAO.class).store(brokerItem);
+				BrokerDAO.store(brokerItem);
 			if (kinahItem != null)
-				DAOManager.getDAO(InventoryDAO.class).store(kinahItem, playerId);
+				InventoryDAO.store(kinahItem, playerId);
 		}
 
 	}

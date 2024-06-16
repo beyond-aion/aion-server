@@ -8,7 +8,6 @@ import java.util.Map;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.cache.HTMLCache;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.dao.SurveyControllerDAO;
@@ -60,7 +59,7 @@ public class SurveyService {
 			log.warn("[SurveyController] player " + player.getName() + " tried to receive item with full inventory.");
 			return;
 		}
-		if (DAOManager.getDAO(SurveyControllerDAO.class).useItem(item.uniqueId)) {
+		if (SurveyControllerDAO.useItem(item.uniqueId)) {
 
 			ItemService.addItem(player, item.itemId, item.count);
 			if (item.itemId == ItemId.KINAH)
@@ -75,7 +74,7 @@ public class SurveyService {
 	}
 
 	public void taskUpdate() {
-		List<SurveyItem> newList = DAOManager.getDAO(SurveyControllerDAO.class).getAllUnused();
+		List<SurveyItem> newList = SurveyControllerDAO.getAllUnused();
 		if (newList.size() == 0)
 			return;
 

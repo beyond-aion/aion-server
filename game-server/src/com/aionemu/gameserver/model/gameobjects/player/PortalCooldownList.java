@@ -3,7 +3,6 @@ package com.aionemu.gameserver.model.gameobjects.player;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.dao.PortalCooldownsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_INFO;
@@ -73,7 +72,7 @@ public class PortalCooldownList {
 		portalCooldown.increaseEnterCount();
 		portalCooldowns.put(worldId, portalCooldown);
 
-		DAOManager.getDAO(PortalCooldownsDAO.class).storePortalCooldowns(owner);
+		PortalCooldownsDAO.storePortalCooldowns(owner);
 
 		sendEntryInfo(worldId);
 	}

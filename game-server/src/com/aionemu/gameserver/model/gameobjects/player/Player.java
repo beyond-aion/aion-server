@@ -9,7 +9,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.concurrent.atomic.AtomicLong;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.FlyController;
@@ -20,7 +19,6 @@ import com.aionemu.gameserver.controllers.attack.PlayerAggroList;
 import com.aionemu.gameserver.controllers.effect.PlayerEffectController;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.dao.PlayerVarsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Gender;
 import com.aionemu.gameserver.model.PlayerClass;
@@ -1508,40 +1506,6 @@ public class Player extends Creature {
 
 	public Race getOppositeRace() {
 		return getRace() == Race.ELYOS ? Race.ASMODIANS : Race.ELYOS;
-	}
-
-	private Map<String, Object> vars = new HashMap<>();
-
-	public boolean hasVar(String key) {
-		return vars.containsKey(key);
-	}
-
-	public void setVar(String key, Object value, boolean persist) {
-		vars.put(key, value);
-		if (persist)
-			DAOManager.getDAO(PlayerVarsDAO.class).set(getObjectId(), key, value);
-	}
-
-	public Object getVar(String key) {
-		return vars.get(key);
-	}
-
-	public int getVarInt(String key) {
-		Object o = vars.get(key);
-		if (o != null)
-			return Integer.parseInt(o.toString());
-		return 0;
-	}
-
-	public String getVarStr(String key) {
-		Object o = vars.get(key);
-		if (o != null)
-			return o.toString();
-		return null;
-	}
-
-	public void setVars(Map<String, Object> map) {
-		this.vars = map;
 	}
 
 	@Override

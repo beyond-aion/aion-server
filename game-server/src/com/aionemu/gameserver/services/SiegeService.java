@@ -11,7 +11,6 @@ import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.schedule.SiegeSchedules;
@@ -90,7 +89,7 @@ public class SiegeService {
 			outposts = DataManager.SIEGE_LOCATION_DATA.getOutpost();
 			locations = DataManager.SIEGE_LOCATION_DATA.getSiegeLocations();
 			agent = DataManager.SIEGE_LOCATION_DATA.getAgentLoc();
-			DAOManager.getDAO(SiegeDAO.class).loadSiegeLocations(locations);
+			SiegeDAO.loadSiegeLocations(locations);
 		} else {
 			artifacts = Collections.emptyMap();
 			fortresses = Collections.emptyMap();
@@ -252,7 +251,7 @@ public class SiegeService {
 			loc.setRace(sr);
 			loc.setLegionId(legionId);
 			spawnNpcs(locId, sr, SiegeModType.PEACE);
-			DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(loc);
+			SiegeDAO.updateSiegeLocation(loc);
 			switch (locId) {
 				case 2011:
 				case 2021:
@@ -304,7 +303,7 @@ public class SiegeService {
 		// Spawn new npc
 		spawnNpcs(loc.getLocationId(), SiegeRace.BALAUR, SiegeModType.PEACE);
 
-		DAOManager.getDAO(SiegeDAO.class).updateSiegeLocation(loc);
+		SiegeDAO.updateSiegeLocation(loc);
 	}
 
 	/**

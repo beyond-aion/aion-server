@@ -9,7 +9,6 @@ import java.util.stream.Stream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.dao.HousesDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
@@ -52,15 +51,15 @@ public class HousingService {
 	}
 
 	private HousingService() {
-		customHouses = new ConcurrentHashMap<>(DAOManager.getDAO(HousesDAO.class).loadHouses(DataManager.HOUSE_DATA.getLands(), false));
-		studios = new ConcurrentHashMap<>(DAOManager.getDAO(HousesDAO.class).loadHouses(DataManager.HOUSE_DATA.getLands(), true));
+		customHouses = new ConcurrentHashMap<>(HousesDAO.loadHouses(DataManager.HOUSE_DATA.getLands(), false));
+		studios = new ConcurrentHashMap<>(HousesDAO.loadHouses(DataManager.HOUSE_DATA.getLands(), true));
 		updateInactiveStateForAllHouses();
 		revokeOwnershipOfDeletedPlayers();
 		log.info("Loaded " + customHouses.size() + " houses and " + studios.size() + " studios");
 	}
 
 	private void revokeOwnershipOfDeletedPlayers() {
-		Set<Integer> playerIds = IntStream.of(DAOManager.getDAO(PlayerDAO.class).getUsedIDs()).boxed().collect(Collectors.toSet());
+		Set<Integer> playerIds = IntStream.of(PlayerDAO.getUsedIDs()).boxed().collect(Collectors.toSet());
 		Stream.concat(customHouses.values().stream(), studios.values().stream()).forEach(house -> {
 			// houses table has no player_id foreign key because houses need to stay in DB even on player deletion (to keep bidding possible for example)
 			if (house.getOwnerId() > 0 && !playerIds.contains(house.getOwnerId())) {

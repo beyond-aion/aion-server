@@ -9,7 +9,6 @@ import java.util.concurrent.TimeUnit;
 
 import org.apache.commons.lang3.time.DateUtils;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.administration.AdminConfig;
 import com.aionemu.gameserver.configs.main.HousingConfig;
 import com.aionemu.gameserver.controllers.HouseController;
@@ -254,7 +253,7 @@ public class House extends VisibleObject implements Persistable {
 	public synchronized void reloadHouseRegistry() {
 		houseRegistry = new HouseRegistry(this);
 		if (ownerId != 0 && !isInactive())
-			DAOManager.getDAO(PlayerRegisteredItemsDAO.class).loadRegistry(houseRegistry);
+			PlayerRegisteredItemsDAO.loadRegistry(houseRegistry);
 	}
 
 	public PlayerScripts getPlayerScripts() {
@@ -264,7 +263,7 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public synchronized void reloadPlayerScripts() {
-		playerScripts = DAOManager.getDAO(HouseScriptsDAO.class).getPlayerScripts(getObjectId());
+		playerScripts = HouseScriptsDAO.getPlayerScripts(getObjectId());
 	}
 
 	public HouseType getHouseType() {
@@ -272,7 +271,7 @@ public class House extends VisibleObject implements Persistable {
 	}
 
 	public synchronized void save() {
-		DAOManager.getDAO(HousesDAO.class).storeHouse(this);
+		HousesDAO.storeHouse(this);
 		if (houseRegistry != null)
 			houseRegistry.save();
 	}

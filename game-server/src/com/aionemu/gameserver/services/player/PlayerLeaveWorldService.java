@@ -6,7 +6,6 @@ import java.util.concurrent.Future;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.dao.*;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -104,10 +103,10 @@ public class PlayerLeaveWorldService {
 			DuelService.getInstance().loseDuel(player);
 		}
 		// store current effects
-		DAOManager.getDAO(PlayerEffectsDAO.class).storePlayerEffects(player);
-		DAOManager.getDAO(PlayerCooldownsDAO.class).storePlayerCooldowns(player);
-		DAOManager.getDAO(ItemCooldownsDAO.class).storeItemCooldowns(player);
-		DAOManager.getDAO(PlayerLifeStatsDAO.class).updatePlayerLifeStat(player);
+		PlayerEffectsDAO.storePlayerEffects(player);
+		PlayerCooldownsDAO.storePlayerCooldowns(player);
+		ItemCooldownsDAO.storeItemCooldowns(player);
+		PlayerLifeStatsDAO.updatePlayerLifeStat(player);
 
 		PlayerGroupService.onPlayerLogout(player);
 		PlayerAllianceService.onPlayerLogout(player);
@@ -145,9 +144,9 @@ public class PlayerLeaveWorldService {
 		player.getWarehouse().setOwner(null);
 		player.getAccount().getAccountWarehouse().setOwner(null);
 
-		DAOManager.getDAO(PlayerDAO.class).storeOldCharacterLevel(player.getObjectId(), player.getLevel());
-		DAOManager.getDAO(PlayerDAO.class).storeLastOnlineTime(player.getObjectId(), lastOnline);
-		DAOManager.getDAO(PlayerDAO.class).onlinePlayer(player, false); // marks that player was fully saved and may enter world again
+		PlayerDAO.storeOldCharacterLevel(player.getObjectId(), player.getLevel());
+		PlayerDAO.storeLastOnlineTime(player.getObjectId(), lastOnline);
+		PlayerDAO.onlinePlayer(player, false); // marks that player was fully saved and may enter world again
 
 		con.setActivePlayer(null);
 	}

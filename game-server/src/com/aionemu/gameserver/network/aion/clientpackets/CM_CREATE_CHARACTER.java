@@ -4,7 +4,6 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Set;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dao.InventoryDAO;
@@ -71,7 +70,7 @@ public class CM_CREATE_CHARACTER extends AbstractCharacterEditPacket {
 			sendPacket(new SM_CREATE_CHARACTER(null, SM_CREATE_CHARACTER.RESPONSE_DB_ERROR));
 			IDFactory.getInstance().releaseId(playerCommonData.getPlayerObjId());
 		} else {
-			List<Item> equipment = DAOManager.getDAO(InventoryDAO.class).loadEquipment(player.getObjectId());
+			List<Item> equipment = InventoryDAO.loadEquipment(player.getObjectId());
 			accPlData.setEquipment(equipment);
 			accPlData.setCreationDate(new Timestamp(System.currentTimeMillis()));
 			PlayerService.storeCreationTime(player.getObjectId(), accPlData.getCreationDate());

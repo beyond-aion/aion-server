@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.model.items;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
@@ -95,7 +94,7 @@ public class IdianStone extends ItemStone {
 			PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, item));
 			item.setIdianStone(null);
 			setPersistentState(PersistentState.DELETED);
-			DAOManager.getDAO(ItemStoneListDAO.class).storeIdianStones(this);
+			ItemStoneListDAO.storeIdianStones(this);
 		}
 	}
 

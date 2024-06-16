@@ -8,7 +8,6 @@ import java.util.concurrent.TimeUnit;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.database.dao.DAOManager;
 import com.aionemu.gameserver.configs.main.PeriodicSaveConfig;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.ItemStoneListDAO;
@@ -59,9 +58,9 @@ public class PeriodicSaveService {
 				allItems.addAll(legion.getLegionWarehouse().getDeletedItems());
 				try {
 					// 1. save items first
-					DAOManager.getDAO(InventoryDAO.class).store(allItems, null, null, legion.getLegionId());
+					InventoryDAO.store(allItems, null, null, legion.getLegionId());
 					// 2. save item stones
-					DAOManager.getDAO(ItemStoneListDAO.class).save(allItems);
+					ItemStoneListDAO.save(allItems);
 				} catch (Exception ex) {
 					log.error("Exception during periodic saving of legion WH", ex);
 				}
@@ -81,7 +80,7 @@ public class PeriodicSaveService {
 
 		@Override
 		public void run() {
-			DAOManager.getDAO(ServerVariablesDAO.class).store("serverLastRun", System.currentTimeMillis());
+			ServerVariablesDAO.store("serverLastRun", System.currentTimeMillis());
 		}
 	}
 
