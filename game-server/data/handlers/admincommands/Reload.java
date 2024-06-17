@@ -37,7 +37,7 @@ public class Reload extends AdminCommand {
 			"<events> - Reloads event templates and (re)starts events.",
 			"<arcade> - Reloads the Upgrade Arcade reward item list.",
 			"<decomposables> - Reloads content of item bundles",
-			"<npcs|items|customdrops|gameshop> - Reloads the specified data." 
+			"<items|customdrops|gameshop> - Reloads the specified data." 
 		);
 		// @formatter:on
 	}
@@ -68,10 +68,6 @@ public class Reload extends AdminCommand {
 				.forEach(e -> templates.addAll(e.getAllNpcSkillTemplates()));
 			DataManager.NPC_SKILL_DATA.setNpcSkillTemplates(templates);
 			sendInfo(admin, DataManager.NPC_SKILL_DATA.size() + " npc skills loaded.");
-		} else if (params[0].equalsIgnoreCase("npcs")) {
-			File xml = new File("./data/static_data/npcs/npc_templates.xml");
-			DataManager.NPC_DATA = JAXBUtil.deserialize(xml, NpcData.class, "./data/static_data/static_data.xsd");
-			sendInfo(admin, DataManager.NPC_DATA.size() + " npc templates loaded.");
 		} else if (params[0].equalsIgnoreCase("items")) {
 			File xml = new File("./data/static_data/items/item_templates.xml");
 			DataManager.ITEM_DATA = JAXBUtil.deserialize(xml, ItemData.class, "./data/static_data/static_data.xsd");
