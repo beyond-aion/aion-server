@@ -32,25 +32,25 @@ public class AccountTimeDAO {
 	}
 
 	public static AccountTime getAccountTime(int accountId) {
+		AccountTime accountTime = new AccountTime();
 		try (Connection con = DatabaseFactory.getConnection();
 			PreparedStatement st = con.prepareStatement("SELECT * FROM account_time WHERE account_id = ?")) {
 			st.setLong(1, accountId);
 			try (ResultSet rs = st.executeQuery()) {
 				if (rs.next()) {
-					AccountTime accountTime = new AccountTime();
 					accountTime.setLastLoginTime(rs.getTimestamp("last_active"));
 					accountTime.setSessionDuration(rs.getLong("session_duration"));
 					accountTime.setAccumulatedOnlineTime(rs.getLong("accumulated_online"));
 					accountTime.setAccumulatedRestTime(rs.getLong("accumulated_rest"));
 					accountTime.setPenaltyEnd(rs.getTimestamp("penalty_end"));
 					accountTime.setExpirationTime(rs.getTimestamp("expiration_time"));
-					return accountTime;
 				}
 			}
 		} catch (Exception e) {
 			LoggerFactory.getLogger(AccountTimeDAO.class).error("Can't get account time for account with id: " + accountId, e);
+			return null;
 		}
-		return null;
+		return accountTime;
 	}
 
 }
