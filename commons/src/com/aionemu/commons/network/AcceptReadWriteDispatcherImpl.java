@@ -77,9 +77,10 @@ public class AcceptReadWriteDispatcherImpl extends Dispatcher {
 		if (pendingClose.isEmpty())
 			return;
 		synchronized (pendingClose) {
+			long nowMillis = System.currentTimeMillis();
 			for (Iterator<AConnection<?>> iterator = pendingClose.iterator(); iterator.hasNext();) {
 				AConnection<?> connection = iterator.next();
-				if (connection.getSendMsgQueue().isEmpty() || !connection.isConnected()) {
+				if (connection.getSendMsgQueue().isEmpty() || !connection.isConnected() || nowMillis > connection.pendingCloseUntilMillis) {
 					closeConnectionImpl(connection);
 					iterator.remove();
 				}

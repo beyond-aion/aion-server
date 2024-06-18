@@ -32,9 +32,9 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	 */
 	private SelectionKey key;
 	/**
-	 * True if this connection should be closed after sending last server packet.
+	 * Time when the closing connection should be force-closed
 	 */
-	protected boolean pendingClose;
+	protected long pendingCloseUntilMillis;
 	/**
 	 * True if this connection is already closed.
 	 */
@@ -102,7 +102,7 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	 */
 	public final void sendPacket(T serverPacket) {
 		synchronized (guard) {
-			if (pendingClose || closed)
+			if (pendingCloseUntilMillis != 0 || closed)
 				return;
 
 			if (isConnected()) {
@@ -131,10 +131,10 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	 */
 	public final void close(T closePacket) {
 		synchronized (guard) {
-			if (pendingClose || closed)
+			if (pendingCloseUntilMillis != 0 || closed)
 				return;
 
-			pendingClose = true;
+			pendingCloseUntilMillis = System.currentTimeMillis() + 2000;
 			if (closePacket != null || !isConnected())
 				getSendMsgQueue().clear();
 			if (closePacket != null && isConnected()) {
@@ -180,7 +180,7 @@ public abstract class AConnection<T extends BaseServerPacket> {
 	 * @return True if this connection is pendingClose and not closed yet.
 	 */
 	final boolean isPendingClose() {
-		return pendingClose && !closed;
+		return pendingCloseUntilMillis != 0 && !closed;
 	}
 
 	final boolean isClosed() {
