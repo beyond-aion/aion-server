@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAllianceMember;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.utils.collections.Predicates;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
@@ -151,7 +150,7 @@ public class League extends GeneralTeam<PlayerAlliance, LeagueMember> {
 					if (skippedPlayer != null) {
 						predicate = Predicates.Players.allExcept(skippedPlayer);
 					}
-					targetAlliance.sendPacket(predicate, new SM_ALLIANCE_INFO(targetAlliance, skippedAlliance), new SM_SHOW_BRAND(0, 0, true));
+					targetAlliance.sendPacket(predicate, new SM_ALLIANCE_INFO(targetAlliance, skippedAlliance));
 				}
 			}
 		} finally {

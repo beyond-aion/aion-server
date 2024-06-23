@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_RANK_UPDATE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_MEMBER_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -27,10 +26,8 @@ public class PlayerAllianceEnteredEvent extends PlayerEnteredEvent<PlayerAllianc
 		PlayerAllianceMember invitedMember = PlayerAllianceService.addPlayerToAlliance(team, player);
 
 		SM_ALLIANCE_INFO allianceInfo = new SM_ALLIANCE_INFO(team);
-		SM_SHOW_BRAND allianceMark = new SM_SHOW_BRAND(0, 0, team.isInLeague());
 		SM_ALLIANCE_MEMBER_INFO allianceMemberInfo = new SM_ALLIANCE_MEMBER_INFO(invitedMember, PlayerAllianceEvent.JOIN);
 		PacketSendUtility.sendPacket(player, allianceInfo);
-		PacketSendUtility.sendPacket(player, allianceMark);
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_FORCE_ENTERED_FORCE());
 		PacketSendUtility.sendPacket(player, allianceMemberInfo);
 		team.sendBrands(player);
@@ -40,7 +37,6 @@ public class PlayerAllianceEnteredEvent extends PlayerEnteredEvent<PlayerAllianc
 				PacketSendUtility.sendPacket(p, allianceMemberInfo);
 				PacketSendUtility.sendPacket(p, SM_SYSTEM_MESSAGE.STR_FORCE_HE_ENTERED_FORCE(player.getName()));
 				PacketSendUtility.sendPacket(p, allianceInfo);
-				PacketSendUtility.sendPacket(p, allianceMark);
 				PacketSendUtility.sendPacket(player, new SM_ALLIANCE_MEMBER_INFO(member, PlayerAllianceEvent.ENTER));
 			}
 		});

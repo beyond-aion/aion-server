@@ -171,16 +171,6 @@ public class PlayerGroupService {
 		}
 	}
 
-	/**
-	 * Show specific mark on top of player
-	 */
-	public static void showBrand(Player player, int targetObjId, int brandId) {
-		PlayerGroup group = player.getPlayerGroup();
-		if (group != null) {
-			group.onBrand(targetObjId, brandId);
-		}
-	}
-
 	public static void changeLeader(Player player) {
 		PlayerGroup group = player.getPlayerGroup();
 		if (group != null) {
@@ -206,15 +196,6 @@ public class PlayerGroupService {
 		if (group != null) {
 			group.onEvent(new PlayerGroupStopMentoringEvent(group, player));
 		}
-	}
-
-	public static final void cleanup() {
-		log.info(getServiceStatus());
-		groups.clear();
-	}
-
-	public static final String getServiceStatus() {
-		return "Number of groups: " + groups.size();
 	}
 
 	public static final PlayerGroup searchGroup(int playerObjId) {

@@ -4,7 +4,6 @@ import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 
 /**
  * @author Source, Neon
@@ -22,10 +21,7 @@ public class LeagueLootRulesChangeEvent extends AlwaysTrueTeamEvent {
 	@Override
 	public void handleEvent() {
 		league.setLootGroupRules(lootGroupRules);
-		league.forEach(alliance -> {
-			alliance.sendPackets(new SM_ALLIANCE_INFO(alliance));
-			alliance.sendPackets(new SM_SHOW_BRAND(0, 0, true));
-		});
+		league.forEach(alliance -> alliance.sendPackets(new SM_ALLIANCE_INFO(alliance)));
 	}
 
 }

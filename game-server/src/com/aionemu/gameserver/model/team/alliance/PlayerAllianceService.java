@@ -263,20 +263,6 @@ public class PlayerAllianceService {
 		}
 	}
 
-	/**
-	 * Show specific mark on top of player
-	 */
-	public static void showBrand(Player player, int targetObjId, int brandId) {
-		PlayerAlliance alliance = player.getPlayerAlliance();
-		if (alliance != null) {
-			alliance.onBrand(targetObjId, brandId);
-		}
-	}
-
-	public static final String getServiceStatus() {
-		return "Number of alliances: " + alliances.size();
-	}
-
 	public static class OfflinePlayerAllianceChecker implements Runnable {
 
 		@Override

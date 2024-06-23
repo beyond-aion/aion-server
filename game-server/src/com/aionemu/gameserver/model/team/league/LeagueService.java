@@ -142,11 +142,6 @@ public class LeagueService {
 		return Collections.unmodifiableCollection(leagues.values());
 	}
 
-	public static void showBrand(Player player, int targetObjId, int brandId) {
-		League league = player.getPlayerAlliance().getLeague();
-		league.onEvent(new LeagueShowBrandEvent(league, targetObjId, brandId));
-	}
-
 	public static void moveAlliance(Player player, int selectedId, int targetId) {
 		League league = player.getPlayerAlliance().getLeague();
 		if (league.getLeaderObject().getLeaderObject().equals(player)) {

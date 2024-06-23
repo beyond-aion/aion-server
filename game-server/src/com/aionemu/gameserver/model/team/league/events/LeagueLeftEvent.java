@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.model.team.league.LeagueService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -50,18 +49,15 @@ public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Consumer<Pla
 		switch (reason) {
 			case LEAVE:
 				alliance.sendPackets(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_LEFT_ME, alliance.getLeaderObject().getName()));
-				alliance.sendPackets(new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
 				checkDisband();
 				break;
 			case EXPEL:
 				// TODO getCaptainName in team
 				alliance.sendPackets(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_EXPELLED, league.getLeaderObject().getLeader().getName()));
-				alliance.sendPackets(new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
 				checkDisband();
 				break;
 			case DISBAND:
 				alliance.sendPackets(new SM_ALLIANCE_INFO(alliance, SM_ALLIANCE_INFO.LEAGUE_DISPERSED, ""));
-				alliance.sendPackets(new SM_SHOW_BRAND(0, 0, alliance.isInLeague()));
 				break;
 		}
 	}
@@ -79,12 +75,10 @@ public class LeagueLeftEvent extends AlwaysTrueTeamEvent implements Consumer<Pla
 				case LEAVE:
 					PacketSendUtility.sendPacket(member,
 						new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_LEFT_HIM, alliance.getLeader().getName()));
-					PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, leagueAlliance.isInLeague()));
 					break;
 				case EXPEL:
 					// TODO may be EXPEL message only to leader
 					PacketSendUtility.sendPacket(member, new SM_ALLIANCE_INFO(leagueAlliance, SM_ALLIANCE_INFO.LEAGUE_EXPEL, alliance.getLeader().getName()));
-					PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(0, 0, leagueAlliance.isInLeague()));
 					break;
 			}
 		});

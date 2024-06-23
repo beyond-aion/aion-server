@@ -7,7 +7,6 @@ import java.util.function.Predicate;
 
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.team.common.events.ShowBrandEvent;
 import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -22,7 +21,7 @@ import com.aionemu.gameserver.utils.collections.Predicates;
 public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends GeneralTeam<Player, TM> {
 
 	private LootGroupRules lootGroupRules = new LootGroupRules();
-	private Map<Integer, Integer> brands = new ConcurrentHashMap<>();
+	protected final Map<Integer, Integer> targetIdsByBrandId = new ConcurrentHashMap<>();
 
 	public TemporaryPlayerTeam(int objId, boolean autoReleaseObjectId) {
 		super(objId, autoReleaseObjectId);
@@ -38,17 +37,13 @@ public abstract class TemporaryPlayerTeam<TM extends TeamMember<Player>> extends
 	 */
 	public abstract int getMaxExpPlayerLevel();
 
-	public void onBrand(int targetObjectId, int brandId) {
-		if (targetObjectId == 0) {
-			brands.values().removeIf(bId -> bId == brandId);
-		} else {
-			brands.put(targetObjectId, brandId);
-		}
-		onEvent(new ShowBrandEvent<>(this, targetObjectId, brandId));
+	public void updateBrand(int brandId, int targetObjectId) {
+		targetIdsByBrandId.put(brandId, targetObjectId);
+		sendPackets(new SM_SHOW_BRAND(brandId, targetObjectId));
 	}
 
 	public void sendBrands(Player member) {
-		brands.forEach((targetObjId, brandId) -> PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(brandId, targetObjId)));
+		PacketSendUtility.sendPacket(member, new SM_SHOW_BRAND(targetIdsByBrandId));
 	}
 
 	@Override

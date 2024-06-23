@@ -4,7 +4,6 @@ import com.aionemu.gameserver.model.team.common.events.AlwaysTrueTeamEvent;
 import com.aionemu.gameserver.model.team.league.League;
 import com.aionemu.gameserver.model.team.league.LeagueMember;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ALLIANCE_INFO;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SHOW_BRAND;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 
 /**
@@ -38,7 +37,6 @@ public class LeagueMoveEvent extends AlwaysTrueTeamEvent {
 		targetName = target.getObject().getLeaderObject().getName();
 		league.forEach(alliance -> {
 			alliance.sendPackets(new SM_ALLIANCE_INFO(alliance));
-			alliance.sendPackets(new SM_SHOW_BRAND(0, 0, true));
 
 			if (alliance.getObjectId() == selectedAllianceId) {
 				alliance.sendPackets(SM_SYSTEM_MESSAGE.STR_UNION_CHANGE_FORCE_NUMBER_ME(targetCurrentPosition));
