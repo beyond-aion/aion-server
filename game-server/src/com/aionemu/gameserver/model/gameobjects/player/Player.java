@@ -1729,28 +1729,25 @@ public class Player extends Creature {
 
 	public boolean validateCumulativeFearResistExpirationTime() {
 		if (System.currentTimeMillis() > cumulativeFearResistExpirationTime.get()) {
-			return true;
-		} else {
 			resetFearCount();
 			return false;
 		}
+		return true;
 	}
 
 	public boolean validateCumulativeSleepResistExpirationTime() {
 		if (System.currentTimeMillis() > cumulativeSleepResistExpirationTime.get()) {
-			return true;
-		} else {
 			resetSleepCount();
 			return false;
 		}
+		return true;
 	}
 
 	public boolean validateCumulativeParalyzeResistExpirationTime() {
 		if (System.currentTimeMillis() > cumulativeParalyzeResistExpirationTime.get()) {
-			return true;
-		} else {
 			resetParalyzeCount();
 			return false;
 		}
+		return true;
 	}
 }
