@@ -2,12 +2,12 @@ package com.aionemu.gameserver.network.aion.clientpackets;
 
 import java.util.Set;
 
-import com.aionemu.gameserver.dao.LegionDAO;
 import com.aionemu.gameserver.dao.OldNamesDAO;
 import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.legion.Legion;
+import com.aionemu.gameserver.model.team.legion.LegionHistoryType;
 import com.aionemu.gameserver.model.templates.item.actions.AbstractItemAction;
 import com.aionemu.gameserver.model.templates.item.actions.CosmeticItemAction;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
@@ -89,31 +89,20 @@ public class CM_APPEARANCE extends AionClientPacket {
 
 	public static void onPlayerNameChanged(Player player, String oldName) {
 		World.getInstance().updateCachedPlayerName(oldName, player);
-		LegionService.getInstance().updateCachedPlayerName(oldName, player);
+		if (player.isLegionMember()) {
+			LegionService.getInstance().updateCachedPlayerName(oldName, player);
+			LegionService.getInstance().addHistory(player.getLegion(), oldName, LegionHistoryType.CHARACTER_RENAME, 0, player.getName());
+		}
 		PacketSendUtility.broadcastToWorld(new SM_RENAME(player, oldName)); // broadcast to world to update all friendlists, housing npcs, etc.
 	}
 
 	private void tryChangeLegionName(Player player, String newName, int itemObjId) {
-		if (!player.isLegionMember() || !player.getLegionMember().isBrigadeGeneral())
+		Legion legion = player.getLegion();
+		if (legion == null || !player.getLegionMember().isBrigadeGeneral()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_ONLY_MASTER_CAN_CHANGE_NAME());
-		else if (player.getLegion().getName().equals(newName))
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_SAME_YOUR_NAME());
-		else if (!NameRestrictionService.isValidLegionName(newName) || NameRestrictionService.isForbidden(newName))
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ERROR_WRONG_INPUT());
-		else if (LegionDAO.isNameUsed(newName))
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EDIT_GUILD_NAME_ALREADY_EXIST());
-		else if ((player.getInventory().getItemByObjId(itemObjId).getItemId() != 169680000 && player.getInventory().getItemByObjId(itemObjId).getItemId() != 169680001)
-			|| !player.getInventory().decreaseByObjectId(itemObjId, 1))
-			AuditLogger.log(player, "Tried to rename legion without coupon.");
-		else {
-			Legion legion = player.getLegion();
-
-			String oldName = legion.getName();
-			legion.setName(newName);
-			LegionDAO.storeLegion(legion);
-			LegionService.getInstance().updateCachedLegionName(oldName, legion);
-			PacketSendUtility.broadcastToWorld(new SM_RENAME(legion, oldName)); // broadcast to world to update all keeps, member's tags, etc.
+			return;
 		}
+		LegionService.getInstance().tryRename(legion, newName, player, itemObjId);
 	}
 
 	private void tryUseCosmeticItem(Player player, int itemObjId) {
