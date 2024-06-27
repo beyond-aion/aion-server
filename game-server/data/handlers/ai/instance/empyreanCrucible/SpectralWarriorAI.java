@@ -37,16 +37,15 @@ public class SpectralWarriorAI extends AggressiveNpcAI implements HpPhases.Phase
 		getKnownList().forEachNpc(npc -> {
 			if (npc.isDead())
 				return;
-
 			switch (npc.getNpcId()) {
-				case 205413:
+				case 205413 -> {
 					spawn(217576, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 					npc.getController().delete();
-					break;
-				case 205414:
+				}
+				case 205414 -> {
 					spawn(217577, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 					npc.getController().delete();
-					break;
+				}
 			}
 		});
 	}

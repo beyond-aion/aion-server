@@ -21,14 +21,10 @@ public class TakunGojiraAI extends AggressiveNpcAI {
 	@Override
 	public void handleSpawned() {
 		super.handleSpawned();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				counterpart = getPosition().getWorldMapInstance().getNpc(getNpcId() == 217596 ? 217597 : 217596);
-				if (counterpart != null)
-					getAggroList().addHate(counterpart, 1000000);
-			}
+		ThreadPoolManager.getInstance().schedule(() -> {
+			counterpart = getPosition().getWorldMapInstance().getNpc(getNpcId() == 217596 ? 217597 : 217596);
+			if (counterpart != null)
+				getAggroList().addHate(counterpart, 1000000);
 		}, 500);
 	}
 

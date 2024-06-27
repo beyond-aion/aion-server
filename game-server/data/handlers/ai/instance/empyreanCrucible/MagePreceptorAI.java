@@ -56,10 +56,8 @@ public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHa
 	@Override
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
-			case 75:
-				SkillEngine.getInstance().getSkill(getOwner(), 19605, 10, getTargetPlayer()).useNoAnimationSkill();
-				break;
-			case 50:
+			case 75 -> SkillEngine.getInstance().getSkill(getOwner(), 19605, 10, getTargetPlayer()).useNoAnimationSkill();
+			case 50 -> {
 				SkillEngine.getInstance().getSkill(getOwner(), 19606, 10, getTarget()).useNoAnimationSkill();
 				ThreadPoolManager.getInstance().schedule(() -> {
 					if (!isDead()) {
@@ -72,21 +70,20 @@ public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHa
 						}, 4500);
 					}
 				}, 3000);
-				break;
-			case 25:
+			}
+			case 25 -> {
 				SkillEngine.getInstance().getSkill(getOwner(), 19606, 10, getTarget()).useNoAnimationSkill();
 				scheduleSkill(3000);
 				scheduleSkill(9000);
 				scheduleSkill(15000);
-				break;
+			}
 		}
 	}
 
 	private void scheduleSkill(int delay) {
 		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isDead()) {
+			if (!isDead())
 				SkillEngine.getInstance().getSkill(getOwner(), 19605, 10, getTargetPlayer()).useNoAnimationSkill();
-			}
 		}, delay);
 	}
 
@@ -106,8 +103,7 @@ public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHa
 	}
 
 	private void despawnNpc(Npc npc) {
-		if (npc != null) {
+		if (npc != null)
 			npc.getController().delete();
-		}
 	}
 }
