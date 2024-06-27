@@ -52,55 +52,40 @@ public class WarriorPreceptorAI extends AggressiveNpcAI {
 
 	@Override
 	public void handleAttack(Creature creature) {
-
 		super.handleAttack(creature);
-		if (isHome.compareAndSet(true, false)) {
+		if (isHome.compareAndSet(true, false))
 			startSkillTask();
-		}
 	}
 
 	private void startSkillTask() {
-		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isDead()) {
-					cancelTask();
-				} else {
-					startSkillEvent();
-				}
+		task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (isDead()) {
+				cancelTask();
+			} else {
+				startSkillEvent();
 			}
-
 		}, 30000, 30000);
 	}
 
 	private void cancelTask() {
-		if (task != null && !task.isCancelled()) {
+		if (task != null && !task.isCancelled())
 			task.cancel(true);
-		}
 	}
 
 	private void startSkillEvent() {
 		PacketSendUtility.broadcastMessage(getOwner(), 1500207);
 		SkillEngine.getInstance().getSkill(getOwner(), 19595, 10, getTargetPlayer()).useNoAnimationSkill();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					SkillEngine.getInstance().getSkill(getOwner(), 19596, 15, getOwner()).useNoAnimationSkill();
-				}
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead())
+				SkillEngine.getInstance().getSkill(getOwner(), 19596, 15, getOwner()).useNoAnimationSkill();
 		}, 6000);
 	}
 
 	private Player getTargetPlayer() {
 		List<Player> players = new ArrayList<>();
 		getKnownList().forEachPlayer(player -> {
-			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 15)) {
+			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 15))
 				players.add(player);
-			}
 		});
 		return Rnd.get(players);
 	}

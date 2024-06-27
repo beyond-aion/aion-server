@@ -84,7 +84,7 @@
 	<portal_loc world_id="210060000" loc_id="2100606" x="1221.755" y="369.1291" z="217.601"/> <!-- Basilon -->
 	<portal_loc world_id="210060000" loc_id="2100607" x="2679.0627" y="821.21454" z="138.35718" h="57"/> <!-- Atreia Defense Portal (Elyos) -->
 	<portal_loc world_id="210060000" loc_id="2100608" x="2682.2722" y="849.81226" z="138.35718" h="37"/> <!-- Atreia Defense Portal (Elyos) -->
-	<portal_loc world_id="210060000" loc_id="2100609" x="2681.577" y="852.42816" z="138.35718"/> <!-- Adma Stronghold Exit --> 
+	<portal_loc world_id="210060000" loc_id="2100609" x="2681.577" y="852.42816" z="138.35718"/> <!-- Adma Stronghold Exit -->
 	<!-- Cygnea -->
 	<portal_loc world_id="210070000" loc_id="2100700" x="2902.3115" y="799.593" z="569.935" h="25"/> <!-- Aequis Expedition Headquarters -->
 	<portal_loc world_id="210070000" loc_id="2100701" x="1893.7953" y="2455.609" z="336.875" h="112"/> <!-- Beritra Invasion Corridor -->
@@ -328,7 +328,7 @@
 	<!-- Azoturan Fortress -->
 	<portal_loc world_id="310100000" loc_id="3101000" x="305.8" y="334.46" z="1019.69" h="27"/>
 	<!-- Empyrean Crucible -->
-	<portal_loc world_id="300300000" loc_id="3003000" x="354.7868" y="349.34567" z="96.09097"/>
+	<portal_loc world_id="300300000" loc_id="3003000" x="354.7868" y="349.34567" z="96.09097" h="60"/>
 	<!-- Adma Stronghold -->
 	<portal_loc world_id="320130000" loc_id="3201300" x="476.61665" y="832.25867" z="165.14975"/>
 	<portal_loc world_id="320130000" loc_id="3201301" x="450.66864" y="199.70248" z="167.84444"/>

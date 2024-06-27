@@ -27,28 +27,15 @@ public class StrangeCreatureAI extends GeneralNpcAI {
 	}
 
 	private void startEventTask() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					PacketSendUtility.broadcastMessage(getOwner(), 341444);
-					SkillEngine.getInstance().getSkill(getOwner(), 17914, 34, getOwner()).useNoAnimationSkill();
-				}
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead())
+				PacketSendUtility.broadcastMessage(getOwner(), 341444);
+			SkillEngine.getInstance().getSkill(getOwner(), 17914, 34, getOwner()).useNoAnimationSkill();
 		}, 500);
 	}
 
 	private void startLifeTask() {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				AIActions.deleteOwner(StrangeCreatureAI.this);
-			}
-
-		}, 6500);
+		ThreadPoolManager.getInstance().schedule(() -> AIActions.deleteOwner(StrangeCreatureAI.this), 6500);
 	}
 
 }

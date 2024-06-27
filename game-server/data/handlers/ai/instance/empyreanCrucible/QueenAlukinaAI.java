@@ -53,29 +53,26 @@ public class QueenAlukinaAI extends AggressiveNpcAI implements HpPhases.PhaseHan
 	@Override
 	public void handleHpPhase(int phaseHpPercent) {
 		SkillEngine.getInstance().getSkill(getOwner(), 17899, 41, getTarget()).useNoAnimationSkill();
-
 		switch (phaseHpPercent) {
-			case 75:
+			case 75 -> {
 				scheduleSkill(17900, 4500);
 				PacketSendUtility.broadcastMessage(getOwner(), 340487, 10000);
 				scheduleSkill(17899, 14000);
 				scheduleSkill(17900, 18000);
-				break;
-			case 50:
+			}
+			case 50 -> {
 				scheduleSkill(17280, 4500);
 				scheduleSkill(17902, 8000);
-				break;
-			case 25:
-				task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
-					if (isDead()) {
-						cancelTask();
-					} else {
-						SkillEngine.getInstance().getSkill(getOwner(), 17901, 41, getTarget()).useNoAnimationSkill();
-						scheduleSkill(17902, 5500);
-						scheduleSkill(17902, 7500);
-					}
-				}, 4500, 20000);
-				break;
+			}
+			case 25 -> task = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+				if (isDead()) {
+					cancelTask();
+				} else {
+					SkillEngine.getInstance().getSkill(getOwner(), 17901, 41, getTarget()).useNoAnimationSkill();
+					scheduleSkill(17902, 5500);
+					scheduleSkill(17902, 7500);
+				}
+			}, 4500, 20000);
 		}
 	}
 
@@ -86,9 +83,8 @@ public class QueenAlukinaAI extends AggressiveNpcAI implements HpPhases.PhaseHan
 
 	private void scheduleSkill(final int skill, int delay) {
 		ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isDead()) {
+			if (!isDead())
 				SkillEngine.getInstance().getSkill(getOwner(), skill, 41, getTarget()).useNoAnimationSkill();
-			}
 		}, delay);
 	}
 }

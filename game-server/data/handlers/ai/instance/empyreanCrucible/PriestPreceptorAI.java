@@ -56,24 +56,14 @@ public class PriestPreceptorAI extends AggressiveNpcAI implements HpPhases.Phase
 
 	private void startEvent() {
 		SkillEngine.getInstance().getSkill(getOwner(), 19610, 10, getOwner()).useNoAnimationSkill();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				SkillEngine.getInstance().getSkill(getOwner(), 19614, 10, getOwner()).useNoAnimationSkill();
-
-				ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-					@Override
-					public void run() {
-						WorldPosition p = getPosition();
-						applySoulSickness((Npc) spawn(282366, p.getX(), p.getY(), p.getZ(), p.getHeading()));
-						applySoulSickness((Npc) spawn(282367, p.getX(), p.getY(), p.getZ(), p.getHeading()));
-						applySoulSickness((Npc) spawn(282368, p.getX(), p.getY(), p.getZ(), p.getHeading()));
-					}
-				}, 5000);
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			SkillEngine.getInstance().getSkill(getOwner(), 19614, 10, getOwner()).useNoAnimationSkill();
+			ThreadPoolManager.getInstance().schedule(() -> {
+				WorldPosition p = getPosition();
+				applySoulSickness((Npc) spawn(282366, p.getX(), p.getY(), p.getZ(), p.getHeading()));
+				applySoulSickness((Npc) spawn(282367, p.getX(), p.getY(), p.getZ(), p.getHeading()));
+				applySoulSickness((Npc) spawn(282368, p.getX(), p.getY(), p.getZ(), p.getHeading()));
+			}, 5000);
 		}, 2000);
 	}
 
@@ -88,14 +78,9 @@ public class PriestPreceptorAI extends AggressiveNpcAI implements HpPhases.Phase
 	}
 
 	private void applySoulSickness(final Npc npc) {
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				npc.getLifeStats().setCurrentHpPercent(50); // TODO: remove this, fix max hp debuffs not reducing current hp properly
-				SkillEngine.getInstance().getSkill(npc, 19594, 4, npc).useNoAnimationSkill();
-			}
-
+		ThreadPoolManager.getInstance().schedule(() -> {
+			npc.getLifeStats().setCurrentHpPercent(50); // TODO: remove this, fix max hp debuffs not reducing current hp properly
+			SkillEngine.getInstance().getSkill(npc, 19594, 4, npc).useNoAnimationSkill();
 		}, 1000);
 	}
 
