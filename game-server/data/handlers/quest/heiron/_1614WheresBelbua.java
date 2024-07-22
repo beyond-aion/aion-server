@@ -60,8 +60,8 @@ public class _1614WheresBelbua extends AbstractQuestHandler {
 							return false;
 						case SETPRO1:
 							changeQuestStep(env, 0, 1);
-							return sendQuestDialog(env, 1352);
 						case SETPRO2:
+							changeQuestStep(env, 1, 2);
 							return defaultStartFollowEvent(env, (Npc) env.getVisibleObject(), 376f, 529f, 133f, 1, 2);
 					}
 			}
@@ -95,6 +95,6 @@ public class _1614WheresBelbua extends AbstractQuestHandler {
 
 	@Override
 	public boolean onNpcLostTargetEvent(QuestEnv env) {
-		return defaultFollowEndEvent(env, 2, 1, false); // 1
+		return defaultFollowEndEvent(env, 2, 0, false); // 0
 	}
 }

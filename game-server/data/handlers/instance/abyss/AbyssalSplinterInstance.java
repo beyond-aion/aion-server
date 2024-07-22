@@ -98,6 +98,8 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 				spawnYamennesTreasureBoxes(npcId == 216952 ? 700937 : 700938);
 				deleteAliveNpcs(282107);
 				spawn(730317, 328.476f, 762.585f, 197.479f, (byte) 90); // Exit
+				spawn(700857, 322.206f, 759.478f, 197.132f, (byte) 28); // artifact of protection(elyos)
+				spawn(700858, 333.542f, 759.376f, 197.150f, (byte) 34); // artifact of protection(asmodians)
 				break;
 			case 700955: // Huge Aether Fragment
 				destroyedFragments++;
@@ -220,7 +222,7 @@ public class AbyssalSplinterInstance extends GeneralInstanceHandler {
 			case 2 -> sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_02());
 			case 3 -> {
 				deleteAliveNpcs(700856); // Artifact of Protection (Easy Mode)
-				spawn(701593, 326.1821f, 766.9640f, 202.1832f, (byte) 100, 79); // Artifact of Protection (Hard Mode)
+				spawn(701593, 326.1492f, 766.9335f, 203.1832f, (byte) 100, 79); // Artifact of Protection (Hard Mode)
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDAbRe_Core_Artifact_Die_03());
 			}
 		}

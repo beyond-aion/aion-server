@@ -84,7 +84,9 @@ public class _1636AFluteForTheFixing extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideItemUseZone(ZoneName.get("LF3_ITEMUSEAREA_Q1636"))) {
+			if (player.isInsideItemUseZone(ZoneName.get("LF3_ITEMUSEAREA_Q1636_210040000"))) {
+				playQuestMovie(env, 210);
+				spawn(212008, player.getWorldMapInstance(), (float) 181.897, (float) 2704.131, (float) 147.319, (byte) 0);
 				return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 3, true));
 			}
 		}

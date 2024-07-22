@@ -58,11 +58,11 @@ public class _1605TheLepharistSituation extends AbstractQuestHandler {
 		} else if (targetId == 204501) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialogActionId() == QUEST_SELECT)
-					return sendQuestDialog(env, 1352);
-				else if (env.getDialogActionId() == SETPRO1) {
+					return sendQuestDialog(env, 1693);
+				else if (env.getDialogActionId() == SETPRO2) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1693));
+					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 					return true;
 				} else
 					return sendQuestStartDialog(env);

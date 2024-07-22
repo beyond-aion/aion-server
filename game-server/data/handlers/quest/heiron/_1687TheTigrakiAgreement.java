@@ -62,13 +62,22 @@ public class _1687TheTigrakiAgreement extends AbstractQuestHandler {
 						return defaultCloseDialog(env, var, var);
 					case SETPRO10:
 						qs.setRewardGroup(0);
-						return defaultCloseDialog(env, var, var, true, true); // reward 1
+					    qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
+						qs.setStatus(QuestStatus.REWARD);
+						updateQuestStatus(env);
+						return closeDialogWindow(env);
 					case SETPRO20:
 						qs.setRewardGroup(1);
-						return defaultCloseDialog(env, var, var, true, true); // reward 2
+					    qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
+						qs.setStatus(QuestStatus.REWARD);
+						updateQuestStatus(env);
+						return closeDialogWindow(env);
 					case SETPRO30:
 						qs.setRewardGroup(2);
-						return defaultCloseDialog(env, var, var, true, true); // reward 3
+					    qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
+						qs.setStatus(QuestStatus.REWARD);
+						updateQuestStatus(env);
+						return closeDialogWindow(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

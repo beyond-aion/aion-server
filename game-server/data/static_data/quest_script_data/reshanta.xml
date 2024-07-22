@@ -150,9 +150,9 @@
 			1839 [XML] A Deal with Silvius
 			1840 [XML] Enemy in the Abyss
 			1841 [XML] The Balaur Below
-			1842 [XML] A New Battle
-			1843 [XML] Pain in the Fortress
-			1844 [XML] Target: Balaur
+			1842 [SCRIPT] A New Battle
+			1843 [SCRIPT] Pain in the Fortress
+			1844 [SCRIPT] Target: Balaur
 			1845 [SCRIPT] Opening Doors
 			1846 [SCRIPT] Paper Trail
 			1847 [SCRIPT] A Strange Soul
@@ -314,8 +314,8 @@
 			2841 [SCRIPT] Cleansing the Asteria Chamber
 			2842 [SCRIPT] Balaur in the Undirborg
 			2843 [SCRIPT] Operation: Annihilate
-			2844 [XML] Simple but Difficult
-			2845 [XML] Take out the Trash
+			2844 [SCRIPT] Simple but Difficult
+			2845 [SCRIPT] Take out the Trash
 			2846 [XML] The Red Matter
 			2847 [XML] It's All Balaur to Me
 			2848 [XML] Whispering Stigma
@@ -618,9 +618,9 @@
 	<monster_hunt id="1839" start_npc_ids="263597"/>
 	<monster_hunt id="1840" start_npc_ids="271067"/>
 	<monster_hunt id="1841" start_npc_ids="266567"/>
-	<monster_hunt id="1842" start_npc_ids="268080"/>
-	<monster_hunt id="1843" start_npc_ids="269265"/>
-	<monster_hunt id="1844" start_npc_ids="270165"/>
+	<!-- <monster_hunt id="1842" start_npc_ids="268080"/> -->
+	<!-- <monster_hunt id="1843" start_npc_ids="269265"/> -->
+	<!-- <monster_hunt id="1844" start_npc_ids="270165"/> -->
 	<monster_hunt id="1855" start_npc_ids="268080"/>
 	<monster_hunt id="1856" start_npc_ids="269265"/>
 	<monster_hunt id="1857" start_npc_ids="270165"/>
@@ -659,8 +659,8 @@
 	<monster_hunt id="2838" start_npc_ids="264798"/>
 	<monster_hunt id="2839" start_npc_ids="263296"/>
 	<monster_hunt id="2840" start_npc_ids="263598"/>
-	<monster_hunt id="2844" start_npc_ids="269266"/>
-	<monster_hunt id="2845" start_npc_ids="215220"/>
+	<!-- <monster_hunt id="2844" start_npc_ids="269266"/> -->
+	<!-- <monster_hunt id="2845" start_npc_ids="270166"/> -->
 	<monster_hunt id="2855" start_npc_ids="268081"/>
 	<monster_hunt id="2856" start_npc_ids="269266"/>
 	<monster_hunt id="2857" start_npc_ids="270166"/>

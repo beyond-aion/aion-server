@@ -7661,9 +7661,9 @@
 		</spawn>
 		<!-- Supervisor Wyrmirren -->
 		<spawn npc_id="214029" respawn_time="3600" pool="1">
-			<spot x="2464" y="2674" z="681.8228" h="113"/>
-			<spot x="2486" y="2598" z="682" h="113"/>
-			<spot x="2538" y="2712" z="680.368" h="113"/>
+			<spot x="2464" y="2674" z="679.3184" h="44"/>
+            <spot x="2486.0" y="2598.0" z="679.77795" h="113"/>
+            <spot x="2538.0" y="2712.0" z="680.3676" h="113"/>
 		</spawn>
 		<!-- Support Leader -->
 		<spawn npc_id="207593" respawn_time="295">

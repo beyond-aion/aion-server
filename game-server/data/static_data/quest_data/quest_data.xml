@@ -20310,6 +20310,9 @@
 		<rewards exp="2815297" title="35">
 			<reward_item item_id="166000192" count="2"/>
 		</rewards>
+		<quest_kill step="0" var="1" count="1" npc_ids="215069" seq="1"/>
+		<quest_kill step="0" var="2" count="1" npc_ids="215070" seq="2"/>
+		<quest_kill step="0" var="3" count="1" npc_ids="215081" seq="3"/>
 		<start_conditions>
 			<finished quest_id="3210"/>
 		</start_conditions>
@@ -21644,24 +21647,12 @@
 			<reward_item item_id="186000003" count="3"/>
 			<reward_item item_id="188050808" count="1"/>
 		</rewards>
-		<quest_drop item_id="186000067" npc_id="214804" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="214804" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="214804" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700462" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700462" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700462" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700463" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700463" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700463" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700464" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700464" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700464" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700471" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700471" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700471" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700466" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700466" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700466" chance="5"/>
+		<quest_drop item_id="186000067" npc_id="214804" chance="10"/>
+        <quest_drop item_id="186000067" npc_id="700462" chance="10"/>
+        <quest_drop item_id="186000067" npc_id="700463" chance="10"/>
+        <quest_drop item_id="186000067" npc_id="700464" chance="10"/>
+        <quest_drop item_id="186000068" npc_id="700471" chance="10"/>
+        <quest_drop item_id="186000069" npc_id="700466" chance="10"/>
 	</quest>
 	<quest id="3906" name="[Group] Destruction and Rebirth" nameId="1103005" quest_zone="Sanctum" minlevel_permitted="40" max_repeat_count="1" cannot_share="true" race_permitted="ELYOS" category="QUEST" restricted="true">
 		<collect_items>
@@ -21670,6 +21661,12 @@
 			<collect_item item_id="182400001" count="3600000"/>
 		</collect_items>
 		<rewards exp="2954681"/>
+		<quest_drop item_id="186000070" npc_id="700475" chance="10"/>
+        <quest_drop item_id="186000070" npc_id="700476" chance="10"/>
+        <quest_drop item_id="186000070" npc_id="700477" chance="10"/>
+		<quest_drop item_id="186000071" npc_id="700472" chance="10"/>
+        <quest_drop item_id="186000071" npc_id="700473" chance="10"/>
+        <quest_drop item_id="186000071" npc_id="700474" chance="10"/>
 		<start_conditions>
 			<finished quest_id="3905"/>
 		</start_conditions>
@@ -21682,11 +21679,12 @@
 			<collect_item item_id="182400001" count="4800000"/>
 		</collect_items>
 		<rewards exp="2954681"/>
-		<quest_drop item_id="186000074" npc_id="700539" chance="10"/>
-        <quest_drop item_id="186000074" npc_id="700541" chance="10"/>
-        <quest_drop item_id="186000074" npc_id="700542" chance="10"/>
+		<quest_drop item_id="186000072" npc_id="700539" chance="10"/>
+        <quest_drop item_id="186000072" npc_id="700540" chance="20"/>
+        <quest_drop item_id="186000073" npc_id="700541" chance="10"/>
+		<quest_drop item_id="186000073" npc_id="700542" chance="20"/>
 		<quest_drop item_id="186000074" npc_id="700543" chance="10"/>
-        <quest_drop item_id="186000074" npc_id="700544" chance="10"/>
+        <quest_drop item_id="186000074" npc_id="700544" chance="20"/>
 		<start_conditions>
 			<finished quest_id="3906"/>
 		</start_conditions>
@@ -24290,6 +24288,9 @@
 		<rewards gold="102910" exp="2815297" title="85">
 			<reward_item item_id="166000192" count="2"/>
 		</rewards>
+		<quest_kill step="0" var="1" count="1" npc_ids="215069" seq="1"/>
+		<quest_kill step="0" var="2" count="1" npc_ids="215070" seq="2"/>
+		<quest_kill step="0" var="3" count="1" npc_ids="215081" seq="3"/>
 		<start_conditions>
 			<finished quest_id="4210"/>
 		</start_conditions>

@@ -101,7 +101,7 @@
 			3905 [XML] To Catch a Dragon
 			3906 [XML] Destruction and Rebirth
 			3907 [XML] Fire and Ice
-			3908 [XML] To Master the Dragon
+			3908 [SCRIPT] To Master the Dragon
 			3909 [XML] Guide of Life
 			3910 [XML] Meaning of Life
 			3911 [XML] Teachings of Life
@@ -154,8 +154,8 @@
 			3969 [SCRIPT] Sexiest Man Alive
 			3970 [SCRIPT] Kinah-Digging Daughter
 			3971 [XML] What Did You Buy Me?
-			3972 [XML] The Go-Between
-			3973 [XML] Love's Messenger
+			3972 [SCRIPT] The Go-Between
+			3973 [SCRIPT] Love's Messenger
 			3974 [XML] Love Suicide
 			3975 [XML] Koruchinerk's Offer
 			3976 [XML] Legionary Letters
@@ -374,7 +374,7 @@
 	    <npc_infos npc_ids="205309"/>
 		<npc_infos npc_ids="205315"/>
 	</report_to_many>
-	<xml_quest id="3972" start_npc_ids="203893">
+	<!-- <xml_quest id="3972" start_npc_ids="203893">
 		<on_talk_event ids="798949">
 			<var value="0">
 				<npc id="798949">
@@ -407,8 +407,8 @@
 				</npc>
 			</var>
 		</on_talk_event>
-	</xml_quest>
-	<xml_quest id="3973" start_npc_ids="203893" end_npc_ids="798949">
+	</xml_quest> -->
+	<!-- <xml_quest id="3973" start_npc_ids="203893" end_npc_ids="798949">
 		<on_talk_event ids="203792 203793 798391 798949">
 			<var value="0">
 				<npc id="203792">
@@ -467,7 +467,7 @@
 				</npc>
 			</var>
 		</on_talk_event>
-	</xml_quest>
+	</xml_quest> -->
 	
 	<!-- SKILL USE -->
 	<skill_use id="3909" start_npc_ids="203761" end_npc_ids="203707">
@@ -538,7 +538,7 @@
 	<item_collecting id="3905" start_npc_ids="798316"/>
 	<item_collecting id="3906" start_npc_ids="798316"/>
 	<item_collecting id="3907" start_npc_ids="798316"/>
-	<item_collecting id="3908" start_npc_ids="798316"/>
+	<!-- <item_collecting id="3908" start_npc_ids="798316"/> -->
 	<item_collecting id="3915" start_npc_ids="203384"/>
 	<item_collecting id="3916" start_npc_ids="203384"/>
 	<item_collecting id="3918" start_npc_ids="798357"/>

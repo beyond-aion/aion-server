@@ -45,9 +45,6 @@
 	<report_to id="30351" start_npc_ids="799364" end_npc_ids="278048"/>
 	<report_to id="30352" start_npc_ids="278048" end_npc_ids="260265"/>
 	
-	<!-- COLLECTING QUESTS -->
-	<item_collecting id="30260" start_npc_ids="278652"/>
-	
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="30253" start_npc_ids="260264"/>
 	<monster_hunt id="30254" start_npc_ids="260264"/>
@@ -55,6 +52,7 @@
 	<monster_hunt id="30257" start_npc_ids="278652"/>
 	<monster_hunt id="30258" start_npc_ids="278652"/>
 	<monster_hunt id="30259" start_npc_ids="278652"/>
+	<monster_hunt id="30260" start_npc_ids="278652"/>
 	<monster_hunt id="30262" start_npc_ids="260264"/>
 	<monster_hunt id="30266" start_npc_ids="260264"/>
 	<monster_hunt id="30267" start_npc_ids="260264"/>

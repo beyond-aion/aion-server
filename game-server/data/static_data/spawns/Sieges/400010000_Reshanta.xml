@@ -7787,36 +7787,36 @@
 					<!-- var -->
 					<spawn npc_id="802065" respawn_time="295">
 						<spot x="2023.9338" y="1325.2656" z="2915.7908" h="106"/>
-					</spawn>
+					</spawn>				
 					<!-- TODO: recheck the following spawns -->
 					<!-- krotan guard tower (Elyos) -->
 					<spawn npc_id="276218" respawn_time="295">
-						<spot x="2380.6423" y="1593.8671" z="2886.0676" h="73"/>
-						<spot x="2371.8013" y="1606.9308" z="2885.3745" h="73"/>
+						<spot x="2621.91" y="1466.99" z="2908.75" h="73" />
+						<spot x="2613.069" y="1480.054" z="2908.75" h="73" />
 					</spawn>
 					<!-- menelaus (Elyos) -->
 					<spawn npc_id="278609" respawn_time="295">
-						<spot x="2376.4353" y="1600.5991" z="2885.7661" h="73"/>
+						<spot x="2617.703" y="1473.722" z="2908.792" h="73" />
 					</spawn>
 					<!-- lyaeus (Elyos) -->
 					<spawn npc_id="278610" respawn_time="295">
-						<spot x="2374.8687" y="1592.1648" z="2886.9199" h="73"/>
+						<spot x="2616.136" y="1465.288" z="2909.086" h="73" />
 					</spawn>
 					<!-- myrrha (Elyos) -->
 					<spawn npc_id="278611" respawn_time="295">
-						<spot x="2368.4546" y="1602.3329" z="2886.4797" h="73"/>
+						<spot x="2609.722" y="1475.456" z="2909.071" h="73" />
 					</spawn>
 					<!-- leager (Elyos) -->
 					<spawn npc_id="278612" respawn_time="295">
-						<spot x="2378.8582" y="1611.3616" z="2884.2354" h="13"/>
+						<spot x="2620.125" y="1484.484" z="2908.343" h="13" />
 					</spawn>
 					<!-- mors (Elyos) -->
 					<spawn npc_id="278613" respawn_time="295">
-						<spot x="2387.2446" y="1599.2854" z="2884.6794" h="13"/>
+						<spot x="2628.512" y="1472.408" z="2908.219" h="13" />
 					</spawn>
 					<!-- tamed griffon (Elyos) -->
 					<spawn npc_id="203352" respawn_time="295">
-						<spot x="2377.5645" y="1600.1200" z="2885.6926" h="73"/>
+						<spot x="2618.832" y="1473.243" z="2908.748" h="73" />
 					</spawn>
 				</siege_mod>
 				<siege_mod mod="SIEGE">
@@ -8123,33 +8123,62 @@
 					</spawn>
 					<!-- TODO: recheck the following spawns -->
 					<!-- krotan guard tower (Elyos) -->
-					<spawn npc_id="276218" respawn_time="295">
+					<!-- <spawn npc_id="276218" respawn_time="295">
 						<spot x="2380.6423" y="1593.8671" z="2886.0676" h="73"/>
 						<spot x="2371.8013" y="1606.9308" z="2885.3745" h="73"/>
+					</spawn> -->
+					<!-- menelaus (Elyos) -->
+					<!-- <spawn npc_id="278609" respawn_time="295">
+						<spot x="2376.4353" y="1600.5991" z="2885.7661" h="73"/>
+					</spawn> -->
+					<!-- lyaeus (Elyos) -->
+					<!-- <spawn npc_id="278610" respawn_time="295">
+						<spot x="2374.8687" y="1592.1648" z="2886.9199" h="73"/>
+					</spawn> -->
+					<!-- myrrha (Elyos) -->
+					<!-- <spawn npc_id="278611" respawn_time="295">
+						<spot x="2368.4546" y="1602.3329" z="2886.4797" h="73"/>
+					</spawn> -->
+					<!-- leager (Elyos) -->
+					<!-- <spawn npc_id="278612" respawn_time="295">
+						<spot x="2378.8582" y="1611.3616" z="2884.2354" h="13"/>
+					</spawn> -->
+					<!-- mors (Elyos) -->
+					<!-- <spawn npc_id="278613" respawn_time="295">
+						<spot x="2387.2446" y="1599.2854" z="2884.6794" h="13"/>
+					</spawn> -->
+					<!-- tamed griffon (Elyos) -->
+					<!-- <spawn npc_id="203352" respawn_time="295">
+						<spot x="2377.5645" y="1600.1200" z="2885.6926" h="73"/>
+					</spawn> -->
+					<!-- krotan guard tower (Elyos) -->
+					<spawn npc_id="276218" respawn_time="295">
+						<spot x="2621.91" y="1466.99" z="2908.75" h="73" />
+						<spot x="2613.069" y="1480.054" z="2908.75" h="73" />
 					</spawn>
 					<!-- menelaus (Elyos) -->
 					<spawn npc_id="278609" respawn_time="295">
-						<spot x="2376.4353" y="1600.5991" z="2885.7661" h="73"/>
+						<spot x="2617.703" y="1473.722" z="2908.792" h="73" />
 					</spawn>
 					<!-- lyaeus (Elyos) -->
 					<spawn npc_id="278610" respawn_time="295">
-						<spot x="2374.8687" y="1592.1648" z="2886.9199" h="73"/>
+						<spot x="2616.136" y="1465.288" z="2909.086" h="73" />
 					</spawn>
 					<!-- myrrha (Elyos) -->
 					<spawn npc_id="278611" respawn_time="295">
-						<spot x="2368.4546" y="1602.3329" z="2886.4797" h="73"/>
+						<spot x="2609.722" y="1475.456" z="2909.071" h="73" />
 					</spawn>
 					<!-- leager (Elyos) -->
 					<spawn npc_id="278612" respawn_time="295">
-						<spot x="2378.8582" y="1611.3616" z="2884.2354" h="13"/>
+						<spot x="2620.125" y="1484.484" z="2908.343" h="13" />
 					</spawn>
 					<!-- mors (Elyos) -->
 					<spawn npc_id="278613" respawn_time="295">
-						<spot x="2387.2446" y="1599.2854" z="2884.6794" h="13"/>
+						<spot x="2628.512" y="1472.408" z="2908.219" h="13" />
 					</spawn>
 					<!-- tamed griffon (Elyos) -->
 					<spawn npc_id="203352" respawn_time="295">
-						<spot x="2377.5645" y="1600.1200" z="2885.6926" h="73"/>
+						<spot x="2618.832" y="1473.243" z="2908.748" h="73" />
 					</spawn>
 				</siege_mod>
 			</siege_race>
@@ -8210,31 +8239,35 @@
 					<spawn npc_id="268024" respawn_time="295">
 						<spot x="2079.4570" y="1253.2587" z="2963.5488" h="60"/>
 					</spawn>
-					<!-- Krotan Guard Tower -->
-					<spawn npc_id="276222" respawn_time="295">
+					<!-- krotan guard tower (Asmo) -->
+					<!-- <spawn npc_id="276222" respawn_time="295">
 						<spot x="2621.91" y="1466.99" z="2908.75" h="73" />
 						<spot x="2613.069" y="1480.054" z="2908.75" h="73" />
-					</spawn>
-					<!-- Laufey -->
-					<spawn npc_id="278110" respawn_time="295">
-						<spot x="2616.136" y="1465.288" z="2909.086" h="73" />
-					</spawn>
-					<!-- Lodurr -->
-					<spawn npc_id="278113" respawn_time="295">
-						<spot x="2628.512" y="1472.408" z="2908.219" h="13" />
-					</spawn>
-					<!-- Modir -->
-					<spawn npc_id="278112" respawn_time="295">
-						<spot x="2620.125" y="1484.484" z="2908.343" h="13" />
-					</spawn>
+					</spawn> -->
 					<!-- Radgrid -->
-					<spawn npc_id="278109" respawn_time="295">
+					<!-- <spawn npc_id="278109" respawn_time="295">
 						<spot x="2617.703" y="1473.722" z="2908.792" h="73" />
-					</spawn>
+					</spawn> -->
+					<!-- Laufey -->
+					<!-- <spawn npc_id="278110" respawn_time="295">
+						<spot x="2616.136" y="1465.288" z="2909.086" h="73" />
+					</spawn> -->
+					<!-- Goinn -->
+					<!-- <spawn npc_id="278111" respawn_time="295">
+						<spot x="2609.722" y="1475.456" z="2909.071" h="73" />
+					</spawn> -->
+					<!-- Modir -->
+					<!-- <spawn npc_id="278112" respawn_time="295">
+						<spot x="2620.125" y="1484.484" z="2908.343" h="13" />
+					</spawn> -->
+					<!-- Lodurr -->
+					<!-- <spawn npc_id="278113" respawn_time="295">
+						<spot x="2628.512" y="1472.408" z="2908.219" h="13" />
+					</spawn> -->
 					<!-- Tamed Worg -->
-					<spawn npc_id="203357" respawn_time="295">
+					<!-- <spawn npc_id="203357" respawn_time="295">
 						<spot x="2618.832" y="1473.243" z="2908.748" h="73" />
-					</spawn>
+					</spawn> -->
 				</siege_mod>
 				<siege_mod mod="SIEGE">
 					<!-- Master Krotan Bodyguard -->
@@ -8594,30 +8627,30 @@
 					<spawn npc_id="802080" respawn_time="295">
 						<spot x="2023.9338" y="1325.2656" z="2915.7908" h="106"/>
 					</spawn>
-					<!-- Goinn -->
-					<spawn npc_id="278111" respawn_time="295">
-						<spot x="2609.722" y="1475.456" z="2909.071" h="73" />
-					</spawn>
-					<!-- Krotan Guard Tower -->
+					<!-- krotan guard tower (Asmo) -->
 					<spawn npc_id="276222" respawn_time="295">
 						<spot x="2621.91" y="1466.99" z="2908.75" h="73" />
 						<spot x="2613.069" y="1480.054" z="2908.75" h="73" />
+					</spawn>
+					<!-- Radgrid -->
+					<spawn npc_id="278109" respawn_time="295">
+						<spot x="2617.703" y="1473.722" z="2908.792" h="73" />
 					</spawn>
 					<!-- Laufey -->
 					<spawn npc_id="278110" respawn_time="295">
 						<spot x="2616.136" y="1465.288" z="2909.086" h="73" />
 					</spawn>
-					<!-- Lodurr -->
-					<spawn npc_id="278113" respawn_time="295">
-						<spot x="2628.512" y="1472.408" z="2908.219" h="13" />
+					<!-- Goinn -->
+					<spawn npc_id="278111" respawn_time="295">
+						<spot x="2609.722" y="1475.456" z="2909.071" h="73" />
 					</spawn>
 					<!-- Modir -->
 					<spawn npc_id="278112" respawn_time="295">
 						<spot x="2620.125" y="1484.484" z="2908.343" h="13" />
 					</spawn>
-					<!-- Radgrid -->
-					<spawn npc_id="278109" respawn_time="295">
-						<spot x="2617.703" y="1473.722" z="2908.792" h="73" />
+					<!-- Lodurr -->
+					<spawn npc_id="278113" respawn_time="295">
+						<spot x="2628.512" y="1472.408" z="2908.219" h="13" />
 					</spawn>
 					<!-- Tamed Worg -->
 					<spawn npc_id="203357" respawn_time="295">
@@ -8928,33 +8961,62 @@
 					</spawn>
 					<!-- TODO: recheck the following spawns -->
 					<!-- krotan guard tower (Asmo) -->
-					<spawn npc_id="276222" respawn_time="295">
+					<!-- <spawn npc_id="276222" respawn_time="295">
 						<spot x="2380.6423" y="1593.8671" z="2886.0676" h="73"/>
 						<spot x="2371.8013" y="1606.9308" z="2885.3745" h="73"/>
-					</spawn>
+					</spawn> -->
 					<!-- radgrid (Asmo) -->
-					<spawn npc_id="278109" respawn_time="295">
+					<!-- <spawn npc_id="278109" respawn_time="295">
 						<spot x="2376.4353" y="1600.5991" z="2885.7661" h="73"/>
-					</spawn>
+					</spawn> -->
 					<!-- laufey (Asmo) -->
-					<spawn npc_id="278110" respawn_time="295">
+					<!-- <spawn npc_id="278110" respawn_time="295">
 						<spot x="2374.8687" y="1592.1648" z="2886.9199" h="73"/>
-					</spawn>
+					</spawn> -->
 					<!-- goinn (Asmo) -->
-					<spawn npc_id="278111" respawn_time="295">
+					<!-- <spawn npc_id="278111" respawn_time="295">
 						<spot x="2368.4546" y="1602.3329" z="2886.4797" h="73"/>
-					</spawn>
+					</spawn> -->
 					<!-- modir (Asmo) -->
-					<spawn npc_id="278112" respawn_time="295">
+					<!-- <spawn npc_id="278112" respawn_time="295">
 						<spot x="2378.8582" y="1611.3616" z="2884.2354" h="13"/>
-					</spawn>
+					</spawn> -->
 					<!-- lodurr (Asmo) -->
-					<spawn npc_id="278113" respawn_time="295">
+					<!-- <spawn npc_id="278113" respawn_time="295">
 						<spot x="2387.2446" y="1599.2854" z="2884.6794" h="13"/>
-					</spawn>
+					</spawn> -->
 					<!-- tamed worg (Asmo) -->
-					<spawn npc_id="203357" respawn_time="295">
+					<!-- <spawn npc_id="203357" respawn_time="295">
 						<spot x="2377.5645" y="1600.1200" z="2885.6926" h="73"/>
+					</spawn> -->
+					<!-- krotan guard tower (Asmo) -->
+					<spawn npc_id="276222" respawn_time="295">
+						<spot x="2621.91" y="1466.99" z="2908.75" h="73" />
+						<spot x="2613.069" y="1480.054" z="2908.75" h="73" />
+					</spawn>
+					<!-- Radgrid -->
+					<spawn npc_id="278109" respawn_time="295">
+						<spot x="2617.703" y="1473.722" z="2908.792" h="73" />
+					</spawn>
+					<!-- Laufey -->
+					<spawn npc_id="278110" respawn_time="295">
+						<spot x="2616.136" y="1465.288" z="2909.086" h="73" />
+					</spawn>
+					<!-- Goinn -->
+					<spawn npc_id="278111" respawn_time="295">
+						<spot x="2609.722" y="1475.456" z="2909.071" h="73" />
+					</spawn>
+					<!-- Modir -->
+					<spawn npc_id="278112" respawn_time="295">
+						<spot x="2620.125" y="1484.484" z="2908.343" h="13" />
+					</spawn>
+					<!-- Lodurr -->
+					<spawn npc_id="278113" respawn_time="295">
+						<spot x="2628.512" y="1472.408" z="2908.219" h="13" />
+					</spawn>
+					<!-- Tamed Worg -->
+					<spawn npc_id="203357" respawn_time="295">
+						<spot x="2618.832" y="1473.243" z="2908.748" h="73" />
 					</spawn>
 				</siege_mod>
 			</siege_race>
@@ -9434,7 +9496,7 @@
 					<spawn npc_id="279448" respawn_time="295">
 						<spot x="2429.8779" y="1993.7974" z="3013.7241" h="45" state="2"/>
 					</spawn>
-					<!-- Guard Tower (Elyos) -->
+					<!-- kysis guard tower (Elyos) -->
 					<spawn npc_id="276315" respawn_time="295">
 						<spot x="1982.1034" y="2533.5103" z="2913.3704" h="105"/>
 						<spot x="1999.1769" y="2549.5325" z="2914.1665" h="105"/>
@@ -9443,25 +9505,25 @@
 					<spawn npc_id="203352" respawn_time="295">
 						<spot x="1989.8849" y="2540.1531" z="2913.7329" h="105"/>
 					</spawn>
-					<!-- Bromius (Elyos) -->
-					<spawn npc_id="278622" respawn_time="295">
-						<spot x="1978.5419" y="2541.4126" z="2914.8826" h="45"/>
-					</spawn>
 					<!-- Bellona (Elyos) -->
 					<spawn npc_id="278619" respawn_time="295">
 						<spot x="1991.0841" y="2540.5344" z="2913.6875" h="105"/>
+					</spawn>
+					<!-- Battus (Elyos) -->
+					<spawn npc_id="278620" respawn_time="295">
+						<spot x="1991.8851" y="2530.3953" z="2912.0710" h="105"/>
 					</spawn>
 					<!-- Luptini (Elyos) -->
 					<spawn npc_id="278621" respawn_time="295">
 						<spot x="2001.8307" y="2540.5266" z="2912.8381" h="105"/>
 					</spawn>
+					<!-- Bromius (Elyos) -->
+					<spawn npc_id="278622" respawn_time="295">
+						<spot x="1978.5419" y="2541.4126" z="2914.8826" h="45"/>
+					</spawn>
 					<!-- Vergilius (Elyos) -->
 					<spawn npc_id="278623" respawn_time="295">
 						<spot x="1991.2330" y="2553.2544" z="2915.2559" h="45"/>
-					</spawn>
-					<!-- Battus (Elyos) -->
-					<spawn npc_id="278620" respawn_time="295">
-						<spot x="1991.8851" y="2530.3953" z="2912.0710" h="105"/>
 					</spawn>
 				</siege_mod>
 				<siege_mod mod="SIEGE">
@@ -9712,7 +9774,7 @@
 					<spawn npc_id="269007">
 						<spot x="2495.5784" y="2120.4683" z="3004.0457" h="77"/>
 					</spawn>
-					<!-- Guard Tower (Elyos) -->
+					<!-- kysis guard tower (Elyos) -->
 					<spawn npc_id="276315" respawn_time="295">
 						<spot x="1982.1034" y="2533.5103" z="2913.3704" h="105"/>
 						<spot x="1999.1769" y="2549.5325" z="2914.1665" h="105"/>
@@ -9721,25 +9783,25 @@
 					<spawn npc_id="203352" respawn_time="295">
 						<spot x="1989.8849" y="2540.1531" z="2913.7329" h="105"/>
 					</spawn>
-					<!-- Bromius (Elyos) -->
-					<spawn npc_id="278622" respawn_time="295">
-						<spot x="1978.5419" y="2541.4126" z="2914.8826" h="45"/>
-					</spawn>
 					<!-- Bellona (Elyos) -->
 					<spawn npc_id="278619" respawn_time="295">
 						<spot x="1991.0841" y="2540.5344" z="2913.6875" h="105"/>
+					</spawn>
+					<!-- Battus (Elyos) -->
+					<spawn npc_id="278620" respawn_time="295">
+						<spot x="1991.8851" y="2530.3953" z="2912.0710" h="105"/>
 					</spawn>
 					<!-- Luptini (Elyos) -->
 					<spawn npc_id="278621" respawn_time="295">
 						<spot x="2001.8307" y="2540.5266" z="2912.8381" h="105"/>
 					</spawn>
+					<!-- Bromius (Elyos) -->
+					<spawn npc_id="278622" respawn_time="295">
+						<spot x="1978.5419" y="2541.4126" z="2914.8826" h="45"/>
+					</spawn>
 					<!-- Vergilius (Elyos) -->
 					<spawn npc_id="278623" respawn_time="295">
 						<spot x="1991.2330" y="2553.2544" z="2915.2559" h="45"/>
-					</spawn>
-					<!-- Battus (Elyos) -->
-					<spawn npc_id="278620" respawn_time="295">
-						<spot x="1991.8851" y="2530.3953" z="2912.0710" h="105"/>
 					</spawn>
 				</siege_mod>
 			</siege_race>
@@ -10119,35 +10181,35 @@
 					<spawn npc_id="279154" respawn_time="295">
 						<spot x="2429.8779" y="1993.7974" z="3013.7241" h="45" state="2"/>
 					</spawn>
-					<!-- Guard Tower (Asmodian) -->
+					<!-- kysis guard tower (Asmodian) -->
 					<spawn npc_id="276319" respawn_time="295">
 						<spot x="1982.1034" y="2533.5103" z="2913.3704" h="105"/>
 						<spot x="1999.1769" y="2549.5325" z="2914.1665" h="105"/>
 					</spawn>
-					<!-- Tamed Griffon (Elyos) 
-					<spawn npc_id="203352" respawn_time="295"> 
+					<!-- Tamed Worg (Asmodian) -->
+					<spawn npc_id="203357" respawn_time="295"> 
 						<spot x="1989.8849" y="2540.1531" z="2913.7329" h="105"/>
-					</spawn> -->
-					<!-- Bromius (Elyos) 
-					<spawn npc_id="278622" respawn_time="295"> <spot 
-						x="1978.5419" y="2541.4126" z="2914.8826" h="45"/> 
-					</spawn> -->
-					<!-- Bellona (Elyos) 
-					<spawn npc_id="278619" respawn_time="295"> <spot 
+					</spawn> 
+					<!-- menglad (Asmodian) -->
+					<spawn npc_id="278119" respawn_time="295"> <spot 
 						x="1991.0841" y="2540.5344" z="2913.6875" h="105"/> 
-					</spawn> -->
-					<!-- Luptini (Elyos) 
-					<spawn npc_id="278621" respawn_time="295"> <spot 
-						x="2001.8307" y="2540.5266" z="2912.8381" h="105"/> 
-					</spawn> -->
-					<!-- Vergilius (Elyos) 
-					<spawn npc_id="278623" respawn_time="295"> <spot 
-						x="1991.2330" y="2553.2544" z="2915.2559" h="45"/> 
-					</spawn> -->
-					<!-- Battus (Elyos) 
-					<spawn npc_id="278620" respawn_time="295"> <spot 
+					</spawn> 
+					<!-- modsognir (Asmodian) -->
+					<spawn npc_id="278120" respawn_time="295"> <spot 
 						x="1991.8851" y="2530.3953" z="2912.0710" h="105"/>
-					</spawn> -->
+					</spawn> 
+					<!-- reginlief (Asmodian) -->
+					<spawn npc_id="278121" respawn_time="295"> <spot 
+						x="2001.8307" y="2540.5266" z="2912.8381" h="105"/> 
+					</spawn> 
+					<!-- moinn (Asmodian) -->
+					<spawn npc_id="278122" respawn_time="295"> <spot 
+						x="1978.5419" y="2541.4126" z="2914.8826" h="45"/> 
+					</spawn> 
+					<!-- geri (Asmodian) -->
+					<spawn npc_id="278123" respawn_time="295"> <spot 
+						x="1991.2330" y="2553.2544" z="2915.2559" h="45"/> 
+					</spawn> 
 				</siege_mod>
 				<siege_mod mod="SIEGE">
 					<!-- Elyos Protection Tower -->
@@ -10392,6 +10454,35 @@
 					<!-- Dux -->
 					<spawn npc_id="269002">
 						<spot x="2495.5784" y="2120.4683" z="3004.0457" h="77"/>
+					</spawn>
+					<!-- kysis guard tower (Asmodian) -->
+					<spawn npc_id="276319" respawn_time="295">
+						<spot x="1982.1034" y="2533.5103" z="2913.3704" h="105"/>
+						<spot x="1999.1769" y="2549.5325" z="2914.1665" h="105"/>
+					</spawn>
+					<!-- Tamed Worg (Asmodian) -->
+					<spawn npc_id="203357" respawn_time="295"> 
+						<spot x="1989.8849" y="2540.1531" z="2913.7329" h="105"/>
+					</spawn> 
+					<!-- menglad (Asmodian) -->
+					<spawn npc_id="278119" respawn_time="295"> <spot 
+						x="1991.0841" y="2540.5344" z="2913.6875" h="105"/> 
+					</spawn> 
+					<!-- modsognir (Asmodian) -->
+					<spawn npc_id="278120" respawn_time="295"> <spot 
+						x="1991.8851" y="2530.3953" z="2912.0710" h="105"/>
+					</spawn> 
+					<!-- reginlief (Asmodian) -->
+					<spawn npc_id="278121" respawn_time="295"> <spot 
+						x="2001.8307" y="2540.5266" z="2912.8381" h="105"/> 
+					</spawn> 
+					<!-- moinn (Asmodian) -->
+					<spawn npc_id="278122" respawn_time="295"> <spot 
+						x="1978.5419" y="2541.4126" z="2914.8826" h="45"/> 
+					</spawn> 
+					<!-- geri (Asmodian) -->
+					<spawn npc_id="278123" respawn_time="295"> <spot 
+						x="1991.2330" y="2553.2544" z="2915.2559" h="45"/> 
 					</spawn>
 				</siege_mod>
 			</siege_race>
@@ -10732,7 +10823,7 @@
 						<spot x="1824.6636" y="2237.0383" z="2901.9229" h="46"/>
 					</spawn>
 					<!-- //TODO Recheck the following spawns -->
-					<!-- Guard Tower (Elyos) -->
+					<!-- Miren Guard Tower (Elyos) -->
 					<spawn npc_id="276415" respawn_time="295">
 						<spot x="1868.1400" y="1801.2230" z="2886.5649" h="30"/>
 						<spot x="1885.1134" y="1801.2623" z="2887.4666" h="30"/>
@@ -10985,7 +11076,7 @@
 						<spot x="1772.5507" y="2268.9673" z="2903.7485" h="110"/>
 					</spawn>
 					<!-- //TODO Recheck the following spawns -->
-					<!-- Guard Tower (Elyos) -->
+					<!-- Miren Guard Tower (Elyos) -->
 					<spawn npc_id="276415" respawn_time="295">
 						<spot x="1868.1400" y="1801.2230" z="2886.5649" h="30"/>
 						<spot x="1885.1134" y="1801.2623" z="2887.4666" h="30"/>

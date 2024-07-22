@@ -3,9 +3,12 @@ package quest.theobomos;
 import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
+import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
@@ -23,6 +26,7 @@ public class _3058StoneofMabolo extends AbstractQuestHandler {
 
 	@Override
 	public void register() {
+		qe.registerQuestItem(182208041, questId);
 		qe.registerQuestNpc(798189).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203701).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798213).addOnTalkEvent(questId);
@@ -93,5 +97,21 @@ public class _3058StoneofMabolo extends AbstractQuestHandler {
 			}
 		}
 		return false;
+	}
+
+	@Override
+	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
+		final Player player = env.getPlayer();
+		final int id = item.getItemTemplate().getTemplateId();
+		final int itemObjId = item.getObjectId();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+
+		if (id != 182208041)
+			return HandlerResult.UNKNOWN;
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
+		if (qs == null || qs.isStartable()) {
+			QuestService.startQuest(env);
+		}
+		return HandlerResult.SUCCESS;
 	}
 }

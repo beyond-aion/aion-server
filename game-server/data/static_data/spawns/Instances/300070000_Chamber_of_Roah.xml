@@ -109,11 +109,6 @@
 		<spawn npc_id="215450">
 			<spot x="504.0030" y="612.1686" z="103.6952" h="90"/>
 		</spawn>
-		<!-- Flash Lapilimo -->
-		<spawn npc_id="283215">
-			<spot x="504.2821" y="405.5221" z="93.8281"/>
-			<spot x="504.2821" y="453.8559" z="86.7039"/>
-		</spawn>
 		<!-- Golden Fortress Crate -->
 		<spawn npc_id="700472">
 			<spot x="379.5858" y="511.9879" z="102.6181" h="113"/>

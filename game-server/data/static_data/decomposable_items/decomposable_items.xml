@@ -7008,8 +7008,136 @@
 			<item id="152000911" max_count="5" /><!-- Magical Aether -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188051049" /><!-- Gorgos' Loot -->
-	<decomposable item_id="188051050" /><!-- Nerita's Loot -->
+	<decomposable item_id="188051049"><!-- Gorgos' Loot -->
+	     <items>
+			<item id="101300434" player_classes="GLADIATOR" />
+			<item id="100000587" player_classes="TEMPLAR" />
+			<item id="100200559" player_classes="ASSASSIN" />
+			<item id="101700464" player_classes="RANGER" />
+			<item id="100600482" player_classes="SORCERER" />
+			<item id="100500449" player_classes="SPIRIT_MASTER" />
+			<item id="101500451" player_classes="CHANTER" />
+			<item id="100100452" player_classes="CLERIC" />
+			<item id="102100478" player_classes="RIDER" />
+			<item id="102000511" player_classes="BARD" />
+			<item id="101800495" player_classes="GUNNER" />
+		</items>
+		<items>
+			<item id="100900445" player_classes="GLADIATOR" />
+			<item id="115000730" player_classes="TEMPLAR" />
+			<item id="100000587" player_classes="ASSASSIN" />
+			<item id="100200559" player_classes="RANGER" />
+			<item id="100500449" player_classes="SORCERER" />
+			<item id="100600482" player_classes="SPIRIT_MASTER" />
+			<item id="115000730" player_classes="CHANTER" />
+			<item id="115000730" player_classes="CLERIC" />
+			<item id="101900481" player_classes="GUNNER" />
+		</items>
+		<items>
+			<item id="112600675" player_classes="GLADIATOR" />
+			<item id="112600675" player_classes="TEMPLAR" />
+			<item id="112300679" player_classes="ASSASSIN" />
+			<item id="112300679" player_classes="RANGER" />
+			<item id="112100679" player_classes="SORCERER" />
+			<item id="112100679" player_classes="SPIRIT_MASTER" />
+			<item id="112500667" player_classes="CHANTER" />
+			<item id="112500667" player_classes="CLERIC" />
+			<item id="112300679" player_classes="GUNNER" />
+			<item id="112100679" player_classes="BARD" />
+			<item id="112500667" player_classes="RIDER" />
+		</items>
+		<items>
+			<item id="110600728" player_classes="GLADIATOR" />
+			<item id="110600728" player_classes="TEMPLAR" />
+			<item id="110300764" player_classes="ASSASSIN" />
+			<item id="110300764" player_classes="RANGER" />
+			<item id="110100808" player_classes="SORCERER" />
+			<item id="110100808" player_classes="SPIRIT_MASTER" />
+			<item id="110500740" player_classes="CHANTER" />
+			<item id="110500740" player_classes="CLERIC" />
+			<item id="110300764" player_classes="GUNNER" />
+			<item id="110100808" player_classes="BARD" />
+			<item id="110500740" player_classes="RIDER" />
+		</items>
+		<items>
+			<item id="113600694" player_classes="GLADIATOR" />
+			<item id="113600694" player_classes="TEMPLAR" />
+			<item id="113300747" player_classes="ASSASSIN" />
+			<item id="113300747" player_classes="RANGER" />
+			<item id="113100730" player_classes="SORCERER" />
+			<item id="113100730" player_classes="SPIRIT_MASTER" />
+			<item id="113500720" player_classes="CHANTER" />
+			<item id="113500720" player_classes="CLERIC" />
+			<item id="113300747" player_classes="GUNNER" />
+			<item id="113100730" player_classes="BARD" />
+			<item id="113500720" player_classes="RIDER" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188051050"><!-- Nerita's Loot -->
+	     <items>
+			<item id="101300434" player_classes="GLADIATOR" />
+			<item id="100000587" player_classes="TEMPLAR" />
+			<item id="100200559" player_classes="ASSASSIN" />
+			<item id="101700464" player_classes="RANGER" />
+			<item id="100600482" player_classes="SORCERER" />
+			<item id="100500449" player_classes="SPIRIT_MASTER" />
+			<item id="101500451" player_classes="CHANTER" />
+			<item id="100100452" player_classes="CLERIC" />
+			<item id="102100478" player_classes="RIDER" />
+			<item id="102000511" player_classes="BARD" />
+			<item id="101800495" player_classes="GUNNER" />
+		</items>
+		<items>
+			<item id="100900445" player_classes="GLADIATOR" />
+			<item id="115000730" player_classes="TEMPLAR" />
+			<item id="100000587" player_classes="ASSASSIN" />
+			<item id="100200559" player_classes="RANGER" />
+			<item id="100500449" player_classes="SORCERER" />
+			<item id="100600482" player_classes="SPIRIT_MASTER" />
+			<item id="115000730" player_classes="CHANTER" />
+			<item id="115000730" player_classes="CLERIC" />
+			<item id="101900481" player_classes="GUNNER" />
+		</items>
+		<items>
+			<item id="112600675" player_classes="GLADIATOR" />
+			<item id="112600675" player_classes="TEMPLAR" />
+			<item id="112300679" player_classes="ASSASSIN" />
+			<item id="112300679" player_classes="RANGER" />
+			<item id="112100679" player_classes="SORCERER" />
+			<item id="112100679" player_classes="SPIRIT_MASTER" />
+			<item id="112500667" player_classes="CHANTER" />
+			<item id="112500667" player_classes="CLERIC" />
+			<item id="112300679" player_classes="GUNNER" />
+			<item id="112100679" player_classes="BARD" />
+			<item id="112500667" player_classes="RIDER" />
+		</items>
+		<items>
+			<item id="110600728" player_classes="GLADIATOR" />
+			<item id="110600728" player_classes="TEMPLAR" />
+			<item id="110300764" player_classes="ASSASSIN" />
+			<item id="110300764" player_classes="RANGER" />
+			<item id="110100808" player_classes="SORCERER" />
+			<item id="110100808" player_classes="SPIRIT_MASTER" />
+			<item id="110500740" player_classes="CHANTER" />
+			<item id="110500740" player_classes="CLERIC" />
+			<item id="110300764" player_classes="GUNNER" />
+			<item id="110100808" player_classes="BARD" />
+			<item id="110500740" player_classes="RIDER" />
+		</items>
+		<items>
+			<item id="113600694" player_classes="GLADIATOR" />
+			<item id="113600694" player_classes="TEMPLAR" />
+			<item id="113300747" player_classes="ASSASSIN" />
+			<item id="113300747" player_classes="RANGER" />
+			<item id="113100730" player_classes="SORCERER" />
+			<item id="113100730" player_classes="SPIRIT_MASTER" />
+			<item id="113500720" player_classes="CHANTER" />
+			<item id="113500720" player_classes="CLERIC" />
+			<item id="113300747" player_classes="GUNNER" />
+			<item id="113100730" player_classes="BARD" />
+			<item id="113500720" player_classes="RIDER" />
+		</items>
+	</decomposable>
 	<decomposable item_id="188051051"><!-- [Event] Brave One's Pouch -->
 		<items>
 			<random_item type="ENCHANTMENT" min_count="3" />
