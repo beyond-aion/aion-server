@@ -15,15 +15,15 @@ import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * Talk with Aegir (204301). Meet Taisan (204403). Pass through Morheim Abyss Gate and talk with Kargate (204423). Protect Kargate from the Balaur:
- * <spawnpos: 254.21326, 256.9302, 226.6418, 93>. Draconute Scout (280818), Crusader (211624), Chandala Scaleguard (213578), Chandala Fangblade
+ * Talk with Aegir (204301). Meet Taisan (204403). Pass through Morheim Abyss Gate and talk with Kargate (204432). Protect Kargate from the Balaur:
+ * <spawnpos: 254.21326, 256.9302, 226.6418, 93>. Draconute Scout (213576), Crusader (213575), Chandala Scaleguard (213578), Chandala Fangblade
  * (213579). Speak to Kargate. Report back to Aegir.
- * 
+ *
  * @author Ritsu, Pad
  */
 public class _24026AHandfromEachSide extends AbstractQuestHandler {
 
-	private final static int[] mobIds = { 213575, 280818 };
+	private final static int[] mobIds = { 213575 };
 	private int balaurKilled = 0;
 
 	public _24026AHandfromEachSide() {
@@ -82,6 +82,7 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 								return sendQuestDialog(env, 1011);
 							return false;
 						case SETPRO1:
+							giveQuestItem(env, 182215371, 1);
 							defaultCloseDialog(env, 0, 1); // 1
 							TeleportService.teleportTo(player, 220020000, 2794.55f, 477.6f, 265.65f, (byte) 40, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
@@ -94,6 +95,7 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 								return sendQuestDialog(env, 1352);
 							return false;
 						case SETPRO2:
+							giveQuestItem(env, 182215372, 1);
 							defaultCloseDialog(env, 1, 2); // 2
 							TeleportService.teleportTo(player, 220020000, 3030.5f, 875.5f, 363.0f, (byte) 12, TeleportAnimation.FADE_OUT_BEAM);
 							return true;
@@ -110,11 +112,12 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 						case SETPRO3:
 							balaurKilled = 0;
 							spawn(213575, player, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader
-							spawn(213575, player, 259.10f, 261.79f, 227.77f, (byte) 94); // 280818 Draconute Scout
+							spawn(213575, player, 259.10f, 261.79f, 227.77f, (byte) 94); // Crusader
 							QuestService.questTimerStart(env, 240);
 							return defaultCloseDialog(env, 2, 3); // 3
 						case SETPRO4:
 							if (var == 4) {
+								removeQuestItem(env, 182215371, 1);
 								qs.setRewardGroup(0); // set default reward group to suppress warnings (both possible reward groups are identical)
 								defaultCloseDialog(env, 4, 4, true, false); // reward
 								TeleportService.teleportTo(player, 220020000, 3030.8676f, 875.6538f, 363.2065f, (byte) 73, TeleportAnimation.FADE_OUT_BEAM);
@@ -136,11 +139,11 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 
 		if (qs.getQuestVarById(0) == 3) {
 			int targetId = env.getTargetId();
-			if (targetId == 213575 || targetId == 280818) {
+			if (targetId == 213575) {
 				balaurKilled++;
 				if (balaurKilled == 2) {
 					spawn(213575, player, 248.78f, 259.28f, 227.74f, (byte) 94); // Crusader
-					spawn(213575, player, 259.10f, 261.79f, 227.77f, (byte) 94); // 280818 Draconute Scout
+					spawn(213575, player, 259.10f, 261.79f, 227.77f, (byte) 94); // Crusader
 				} else if (balaurKilled == 4) {
 					QuestService.questTimerEnd(env);
 					if (kargateIsAlive(env)) {
@@ -217,7 +220,7 @@ public class _24026AHandfromEachSide extends AbstractQuestHandler {
 	}
 
 	private void deleteBalaur(QuestEnv env) {
-		for (Npc npc : env.getPlayer().getWorldMapInstance().getNpcs(213575, 280818)) {
+		for (Npc npc : env.getPlayer().getWorldMapInstance().getNpcs(213575)) {
 			npc.getController().delete();
 		}
 	}

@@ -71,11 +71,20 @@ public class _1691TheLittleLeatherSlipper extends AbstractQuestHandler {
 						case QUEST_SELECT: {
 							if (qs.getQuestVarById(0) == 1) {
 								return sendQuestDialog(env, 1693);
+							} else if (qs.getQuestVarById(0) == 3) {
+								return sendQuestDialog(env, 2375);
 							}
+
 							return false;
 						}
 						case SETPRO2: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
+							updateQuestStatus(env);
+							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
+							return true;
+						}
+						case SELECT_QUEST_REWARD: {
+							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 							return true;
@@ -92,12 +101,12 @@ public class _1691TheLittleLeatherSlipper extends AbstractQuestHandler {
 						}
 						case SETPRO3: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-							qs.setStatus(QuestStatus.REWARD);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-							return true;
+							return closeDialogWindow(env);
 						}
 					}
+					return false;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 798386) {

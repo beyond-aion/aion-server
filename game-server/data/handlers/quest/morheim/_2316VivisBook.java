@@ -40,10 +40,12 @@ public class _2316VivisBook extends AbstractQuestHandler {
 		if (env.getVisibleObject() instanceof Npc)
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 		if (targetId == 0) {
-			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
-				QuestService.startQuest(env);
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-				return true;
+			if (env.getDialogActionId() == ASK_QUEST_ACCEPT) {
+				return sendQuestDialog(env, 4);
+			} else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
+				return sendQuestStartDialog(env);
+			} else if (env.getDialogActionId() == QUEST_REFUSE_1) {
+				return closeDialogWindow(env);
 			}
 		} else if (targetId == 204386) {
 			if (qs != null) {
@@ -70,15 +72,14 @@ public class _2316VivisBook extends AbstractQuestHandler {
 
 		if (id != 182204115)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 3000, 0, 0), true);
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 0, 0), true);
 		ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
 				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
-				sendQuestDialog(env, 4);
 			}
-		}, 3000);
+		}, 20);
 		return HandlerResult.SUCCESS;
 	}
 }

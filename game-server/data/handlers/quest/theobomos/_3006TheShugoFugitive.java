@@ -61,7 +61,7 @@ public class _3006TheShugoFugitive extends AbstractQuestHandler {
 							}
 							return false;
 						}
-						case SETPRO1: {
+						case SELECT2_1_1: {
 							qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 							updateQuestStatus(env);
 							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));

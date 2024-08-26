@@ -42,8 +42,9 @@ public class _3100AShugosBestFriend extends AbstractQuestHandler {
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1011);
+					case ASK_QUEST_ACCEPT:
+						return sendQuestDialog(env, 4);
 					case QUEST_ACCEPT_1:
-					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env, 182208072, 1);
 				}
 			}

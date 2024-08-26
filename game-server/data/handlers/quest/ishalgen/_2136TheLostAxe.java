@@ -5,14 +5,12 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.services.QuestService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
@@ -43,12 +41,13 @@ public class _2136TheLostAxe extends AbstractQuestHandler {
 			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.isStartable()) {
-			if (env.getDialogActionId() == QUEST_ACCEPT_1) {
-				QuestService.startQuest(env);
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
-				return true;
-			} else
-				PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(0, 0));
+			if (env.getDialogActionId() == ASK_QUEST_ACCEPT) {
+				return sendQuestDialog(env, 4);
+			} else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
+				return sendQuestStartDialog(env);
+			} else if (env.getDialogActionId() == QUEST_REFUSE_1) {
+				return closeDialogWindow(env);
+			}
 		}
 
 		if (qs == null)
@@ -111,18 +110,21 @@ public class _2136TheLostAxe extends AbstractQuestHandler {
 	}
 
 	@Override
-	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
+	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
 		final Player player = env.getPlayer();
 		final int id = item.getItemTemplate().getTemplateId();
 		final int itemObjId = item.getObjectId();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (id != 182203130)
 			return HandlerResult.UNKNOWN;
-		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 1, 0), true);
-		if (qs == null || qs.isStartable()) {
-			QuestService.startQuest(env);
-		}
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 0, 0), true);
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+			@Override
+			public void run() {
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+			}
+		}, 20);
 		return HandlerResult.SUCCESS;
 	}
 }
