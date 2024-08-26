@@ -19,70 +19,22 @@ public class _2843OperationAnnihilate extends AbstractQuestHandler {
 
 	@Override
 	public void register() {
+		int[] mobs = { 215094, 215095, 215096, 215097, 215098, 215099, 215100, 215101, 215102, 215103, 215104, 215105, 215106, 215107, 215108, 215109,
+			215110, 215111, 215112, 215113, 215114, 215115, 215116, 215117, 215118, 215119, 215120, 215121, 215122, 215123, 215124, 215125, 215126, 215127,
+			215128, 215129, 215130, 215131, 215132, 215133, 215135, 215136, 215285, 215286, 215287, 215288, 215289, 215290, 215291, 215292, 215293, 215294,
+			215295, 215296, 215297, 215298, 215299, 215300, 215301, 215302, 215303, 215304, 215305, 215306, 215307, 215308, 215309, 215310, 215311, 215312,
+			215313, 215314, 215315, 215316, 215134 };
 		qe.registerQuestNpc(268081).addOnQuestStart(questId);
 		qe.registerQuestNpc(268081).addOnTalkEvent(questId);
-		qe.registerQuestNpc(215134).addOnKillEvent(questId);
-		qe.registerQuestNpc(215136).addOnKillEvent(questId);
-		qe.registerQuestNpc(215122).addOnKillEvent(questId);
-		qe.registerQuestNpc(215124).addOnKillEvent(questId);
-		qe.registerQuestNpc(215116).addOnKillEvent(questId);
-		qe.registerQuestNpc(215315).addOnKillEvent(questId);
-		qe.registerQuestNpc(215299).addOnKillEvent(questId);
-		qe.registerQuestNpc(215112).addOnKillEvent(questId);
-		qe.registerQuestNpc(215120).addOnKillEvent(questId);
-		qe.registerQuestNpc(215125).addOnKillEvent(questId);
-		qe.registerQuestNpc(215118).addOnKillEvent(questId);
-		qe.registerQuestNpc(215119).addOnKillEvent(questId);
-		qe.registerQuestNpc(215312).addOnKillEvent(questId);
-		qe.registerQuestNpc(215109).addOnKillEvent(questId);
-		qe.registerQuestNpc(215097).addOnKillEvent(questId);
-		qe.registerQuestNpc(215304).addOnKillEvent(questId);
-		qe.registerQuestNpc(215308).addOnKillEvent(questId);
-		qe.registerQuestNpc(215292).addOnKillEvent(questId);
-		qe.registerQuestNpc(215101).addOnKillEvent(questId);
-		qe.registerQuestNpc(215126).addOnKillEvent(questId);
-		qe.registerQuestNpc(215098).addOnKillEvent(questId);
-		qe.registerQuestNpc(215305).addOnKillEvent(questId);
-		qe.registerQuestNpc(215289).addOnKillEvent(questId);
-		qe.registerQuestNpc(215300).addOnKillEvent(questId);
-		qe.registerQuestNpc(215113).addOnKillEvent(questId);
-		qe.registerQuestNpc(215316).addOnKillEvent(questId);
-		qe.registerQuestNpc(215094).addOnKillEvent(questId);
-		qe.registerQuestNpc(215301).addOnKillEvent(questId);
-		qe.registerQuestNpc(215313).addOnKillEvent(questId);
-		qe.registerQuestNpc(215110).addOnKillEvent(questId);
-		qe.registerQuestNpc(215297).addOnKillEvent(questId);
-		qe.registerQuestNpc(215314).addOnKillEvent(questId);
-		qe.registerQuestNpc(215111).addOnKillEvent(questId);
-		qe.registerQuestNpc(215298).addOnKillEvent(questId);
-		qe.registerQuestNpc(215104).addOnKillEvent(questId);
-		qe.registerQuestNpc(215096).addOnKillEvent(questId);
-		qe.registerQuestNpc(215303).addOnKillEvent(questId);
-		qe.registerQuestNpc(215287).addOnKillEvent(questId);
-		qe.registerQuestNpc(215128).addOnKillEvent(questId);
-		qe.registerQuestNpc(215121).addOnKillEvent(questId);
-		qe.registerQuestNpc(215106).addOnKillEvent(questId);
-		qe.registerQuestNpc(215293).addOnKillEvent(questId);
-		qe.registerQuestNpc(215107).addOnKillEvent(questId);
-		qe.registerQuestNpc(215100).addOnKillEvent(questId);
-		qe.registerQuestNpc(215291).addOnKillEvent(questId);
-		qe.registerQuestNpc(215307).addOnKillEvent(questId);
-		qe.registerQuestNpc(215290).addOnKillEvent(questId);
-		qe.registerQuestNpc(215099).addOnKillEvent(questId);
-		qe.registerQuestNpc(215306).addOnKillEvent(questId);
-		qe.registerQuestNpc(215123).addOnKillEvent(questId);
-		qe.registerQuestNpc(215108).addOnKillEvent(questId);
-		qe.registerQuestNpc(215295).addOnKillEvent(questId);
-		qe.registerQuestNpc(215311).addOnKillEvent(questId);
-		qe.registerQuestNpc(215095).addOnKillEvent(questId);
-		qe.registerQuestNpc(215302).addOnKillEvent(questId);
-		qe.registerQuestNpc(215133).addOnKillEvent(questId);
+		for (int mob : mobs) {
+			qe.registerQuestNpc(mob).addOnKillEvent(questId);
+		}
+		qe.registerOnEnterWorld(questId);
 	}
 
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
-
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 
 		if (qs == null || qs.isStartable()) {
@@ -94,7 +46,7 @@ public class _2843OperationAnnihilate extends AbstractQuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (env.getTargetId() == 268081)
-				return true;
+				return false;
 		} else if (qs.getStatus() == QuestStatus.REWARD && env.getTargetId() == 268081) {
 			qs.setQuestVarById(0, 0);
 			updateQuestStatus(env);

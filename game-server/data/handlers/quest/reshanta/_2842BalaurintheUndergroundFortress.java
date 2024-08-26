@@ -47,7 +47,7 @@ public class _2842BalaurintheUndergroundFortress extends AbstractQuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 266568)
-				return true;
+				return false;
 		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 266568) {
 			qs.setQuestVarById(0, 0);
 			updateQuestStatus(env);

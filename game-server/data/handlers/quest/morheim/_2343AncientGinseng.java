@@ -1,15 +1,18 @@
 package quest.morheim;
 
-import static com.aionemu.gameserver.model.DialogAction.QUEST_ACCEPT_1;
+import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 import com.aionemu.gameserver.services.QuestService;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Cheatkiller
@@ -35,15 +38,16 @@ public class _2343AncientGinseng extends AbstractQuestHandler {
 		int targetId = env.getTargetId();
 
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 0) {
-				if (dialogActionId == QUEST_ACCEPT_1) {
-					QuestService.startQuest(env);
-					return closeDialogWindow(env);
-				}
+			if (env.getDialogActionId() == ASK_QUEST_ACCEPT) {
+				return sendQuestDialog(env, 4);
+			} else if (env.getDialogActionId() == QUEST_ACCEPT_1) {
+				return sendQuestStartDialog(env);
+			} else if (env.getDialogActionId() == QUEST_REFUSE_1) {
+				return closeDialogWindow(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 700243) {
-				spawnForFiveMinutes(212814, player.getWorldMapInstance(), 1008.36f, 481.88f, 509.3f, (byte) 60);
+				spawn(212814, player.getWorldMapInstance(), 1008.36f, 481.88f, 509.3f, (byte) 60);
 				removeQuestItem(env, 182204134, 1);
 				qs.setStatus(QuestStatus.REWARD);
 				QuestService.finishQuest(env);
@@ -54,12 +58,21 @@ public class _2343AncientGinseng extends AbstractQuestHandler {
 	}
 
 	@Override
-	public HandlerResult onItemUseEvent(QuestEnv env, Item item) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || qs.isStartable()) {
-			return HandlerResult.fromBoolean(sendQuestDialog(env, 4));
-		}
-		return HandlerResult.FAILED;
+	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
+		final Player player = env.getPlayer();
+		final int id = item.getItemTemplate().getTemplateId();
+		final int itemObjId = item.getObjectId();
+
+		if (id != 182204134)
+			return HandlerResult.UNKNOWN;
+		PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 20, 0, 0), true);
+		ThreadPoolManager.getInstance().schedule(new Runnable() {
+
+			@Override
+			public void run() {
+				PacketSendUtility.broadcastPacket(player, new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), itemObjId, id, 0, 1, 0), true);
+			}
+		}, 20);
+		return HandlerResult.SUCCESS;
 	}
 }

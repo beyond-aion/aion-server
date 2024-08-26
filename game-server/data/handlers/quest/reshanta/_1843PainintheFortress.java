@@ -2,7 +2,6 @@ package quest.reshanta;
 
 import static com.aionemu.gameserver.model.DialogAction.QUEST_SELECT;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -10,20 +9,23 @@ import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 /**
- * @author Hilgert, Bobobear
+ * @author Hilgert
  */
-public class _2841CleansingtheAsteriaChamber extends AbstractQuestHandler {
+public class _1843PainintheFortress extends AbstractQuestHandler {
 
-	public _2841CleansingtheAsteriaChamber() {
-		super(2841);
+	public _1843PainintheFortress() {
+		super(1843);
 	}
 
 	@Override
 	public void register() {
-		int[] mobs = { 214752, 214753, 214754, 214755, 214756, 214757, 214758, 214759, 214760, 214761, 214762, 214763, 214764, 214765, 214766, 214767,
-			214768, 214769, 214770, 215439, 215440, 215441, 215442, 215443, 215444 };
-		qe.registerQuestNpc(271068).addOnQuestStart(questId);
-		qe.registerQuestNpc(271068).addOnTalkEvent(questId);
+		int[] mobs = { 215137, 215138, 215139, 215140, 215141, 215142, 215143, 215144, 215145, 215146, 215147, 215148, 215149, 215150, 215151, 215152,
+			215153, 215154, 215155, 215156, 215157, 215158, 215159, 215160, 215161, 215162, 215163, 215164, 215165, 215166, 215167, 215168, 215169, 215170,
+			215171, 215172, 215173, 215174, 215175, 215176, 215178, 215179, 215317, 215318, 215319, 215320, 215321, 215322, 215323, 215324, 215325, 215326,
+			215327, 215328, 215329, 215330, 215331, 215332, 215333, 215334, 215335, 215336, 215337, 215338, 215339, 215340, 215341, 215342, 215343, 215344,
+			215345, 215346, 215347, 215348, 215177 };
+		qe.registerQuestNpc(269265).addOnQuestStart(questId);
+		qe.registerQuestNpc(269265).addOnTalkEvent(questId);
 		for (int mob : mobs) {
 			qe.registerQuestNpc(mob).addOnKillEvent(questId);
 		}
@@ -33,22 +35,19 @@ public class _2841CleansingtheAsteriaChamber extends AbstractQuestHandler {
 	@Override
 	public boolean onDialogEvent(QuestEnv env) {
 		final Player player = env.getPlayer();
-		int targetId = 0;
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (env.getVisibleObject() instanceof Npc)
-			targetId = ((Npc) env.getVisibleObject()).getNpcId();
 
 		if (qs == null || qs.isStartable()) {
-			if (targetId == 271068) {
+			if (env.getTargetId() == 269265) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1011);
 				else
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 271068)
+			if (env.getTargetId() == 269265)
 				return false;
-		} else if (qs.getStatus() == QuestStatus.REWARD && targetId == 271068) {
+		} else if (qs.getStatus() == QuestStatus.REWARD && env.getTargetId() == 269265) {
 			qs.setQuestVarById(0, 0);
 			updateQuestStatus(env);
 			return sendQuestEndDialog(env);
@@ -64,12 +63,12 @@ public class _2841CleansingtheAsteriaChamber extends AbstractQuestHandler {
 			return false;
 
 		if (qs.getStatus() == QuestStatus.START) {
-			if (player.getPosition().getMapId() == 300050000) {
-				if (qs.getQuestVarById(0) < 43) {
+			if (player.getPosition().getMapId() == 300120000) {
+				if (qs.getQuestVarById(0) < 79) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					updateQuestStatus(env);
 					return true;
-				} else if (qs.getQuestVarById(0) == 43 || qs.getQuestVarById(0) > 43) {
+				} else if (qs.getQuestVarById(0) == 79 || qs.getQuestVarById(0) > 79) {
 					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
 					qs.setStatus(QuestStatus.REWARD);
 					updateQuestStatus(env);

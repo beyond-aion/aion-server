@@ -23,6 +23,8 @@ public class _3712DredgionPrisonBreak extends AbstractQuestHandler {
 		qe.registerQuestNpc(279045).addOnQuestStart(questId);
 		qe.registerQuestNpc(279045).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798323).addOnTalkEvent(questId);
+		qe.registerQuestNpc(798324).addOnTalkEvent(questId);
+		qe.registerQuestNpc(798325).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798326).addOnTalkEvent(questId);
 	}
 
@@ -42,7 +44,7 @@ public class _3712DredgionPrisonBreak extends AbstractQuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 798326 || targetId == 798323) {
+			if (targetId == 798326 || targetId == 798323 || targetId == 798324 || targetId == 798325) {
 				if (dialogActionId == QUEST_SELECT) {
 					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 1011);

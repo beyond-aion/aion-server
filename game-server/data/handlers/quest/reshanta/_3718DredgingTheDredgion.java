@@ -21,7 +21,7 @@ public class _3718DredgingTheDredgion extends AbstractQuestHandler {
 	public void register() {
 		qe.registerOnDredgionReward(questId);
 		qe.registerQuestNpc(279045).addOnQuestStart(questId);
-		qe.registerQuestNpc(279045).addOnTalkEvent(questId);
+		qe.registerQuestNpc(278501).addOnTalkEvent(questId);
 		qe.registerQuestNpc(214814).addOnKillEvent(questId);
 	}
 
@@ -34,32 +34,21 @@ public class _3718DredgingTheDredgion extends AbstractQuestHandler {
 
 		if (qs == null || qs.isStartable()) {
 			if (targetId == 279045) {
-				if (dialogActionId == QUEST_SELECT) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 4762);
 				} else {
 					return sendQuestStartDialog(env);
 				}
 			}
-		} else if (qs.getStatus() == QuestStatus.START) {
+		} else if ((qs.getStatus() == QuestStatus.START) || (qs.getStatus() == QuestStatus.REWARD)) {
+			int var = qs.getQuestVarById(0);
 			int var1 = qs.getQuestVarById(1);
 			int var2 = qs.getQuestVarById(2);
-			if (targetId == 279045) {
-				if (dialogActionId == QUEST_SELECT) {
-					if (qs.getQuestVarById(0) == 0) {
-						return sendQuestDialog(env, 1011);
-					} else if (var1 == 3 && var2 == 8) {
-						return sendQuestDialog(env, 10002);
-					}
-				} else if (dialogActionId == SETPRO1) {
-					return defaultCloseDialog(env, 0, 1);
-				} else if (dialogActionId == SELECT_QUEST_REWARD) {
-					return defaultCloseDialog(env, 1, 1, true, true);
-				}
-			}
-		} else if (qs.getStatus() == QuestStatus.REWARD) {
-			if (targetId == 279045) {
-				if (dialogActionId == USE_OBJECT) {
+			if (targetId == 278501) {
+				if (env.getDialogActionId() == QUEST_SELECT) {
 					return sendQuestDialog(env, 10002);
+				} else if (env.getDialogActionId() == SELECT_QUEST_REWARD) {
+					return defaultCloseDialog(env, 0, 0, true, true);
 				}
 				return sendQuestEndDialog(env);
 			}

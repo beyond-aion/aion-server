@@ -22,7 +22,7 @@ import com.aionemu.gameserver.world.WorldMapType;
  */
 public class _14047ChainingMemories extends AbstractQuestHandler {
 
-	private static final int icaronixNormalId = 233877; // elite version is not for this quest
+	private static final int icaronixNormalId = 214599; // 233877 elite version is not for this quest
 	private final static int[] npc_ids = { 203704, 798154, 204574, 802051, 802052, 278500 };
 
 	public _14047ChainingMemories() {
