@@ -68,10 +68,10 @@ public class _2663AcquiringanAntidote extends AbstractQuestHandler {
 					return false;
 				case SETPRO1:
 					if (var == 0) {
+						giveQuestItem(env, 182204489, 1);
 						qs.setQuestVarById(0, var + 1);
 						qs.setStatus(QuestStatus.REWARD);
-						if (!giveQuestItem(env, 182204489, 1))
-							updateQuestStatus(env);
+						updateQuestStatus(env);
 						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
 						return true;
 					}

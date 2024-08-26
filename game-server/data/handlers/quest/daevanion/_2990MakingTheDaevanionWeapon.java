@@ -75,9 +75,9 @@ public class _2990MakingTheDaevanionWeapon extends AbstractQuestHandler {
 							return sendQuestDialog(env, 1011);
 						if (var == 1)
 							return sendQuestDialog(env, 1352);
-						if (var == 2 && var1 == 60)
+						if (var == 2)
 							return sendQuestDialog(env, 1693);
-						if (var == 3 && player.getInventory().getItemCountByItemId(186000040) > 0)
+						if (var == 3)
 							return sendQuestDialog(env, 2034);
 						return false;
 					case CHECK_USER_HAS_QUEST_ITEM:
