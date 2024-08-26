@@ -2363,10 +2363,10 @@
 			<reward_item item_id="161000003" count="3"/>
 		</rewards>
 		<quest_drop npc_id="210821" item_id="186000015" chance="1"/>
-        <quest_drop npc_id="210845" item_id="186000015" chance="1"/>
-        <quest_drop npc_id="210880" item_id="186000015" chance="1"/>
-        <quest_drop npc_id="210901" item_id="186000015" chance="1"/>
-        <quest_drop npc_id="210918" item_id="186000015" chance="1"/>
+		<quest_drop npc_id="210845" item_id="186000015" chance="1"/>
+		<quest_drop npc_id="210880" item_id="186000015" chance="1"/>
+		<quest_drop npc_id="210901" item_id="186000015" chance="1"/>
+		<quest_drop npc_id="210918" item_id="186000015" chance="1"/>
 		<quest_work_items>
 			<quest_work_item item_id="182201320"/>
 		</quest_work_items>
@@ -4422,9 +4422,9 @@
 		<quest_drop npc_id="211079" item_id="182201713"/>
 		<quest_drop npc_id="211089" item_id="182201713"/>
 		<start_conditions>
-        	<unfinished>18600</unfinished>
-            <noacquired>18600</noacquired>
-        </start_conditions>
+			<unfinished>18600</unfinished>
+			<noacquired>18600</noacquired>
+		</start_conditions>
 	</quest>
 	<quest id="1527" name="Rotten Rotrons" nameId="1102727" quest_zone="Heiron" minlevel_permitted="36" max_repeat_count="1" cannot_share="true" race_permitted="ELYOS" category="IMPORTANT" restricted="true">
 		<rewards exp="3921386">
@@ -5862,7 +5862,7 @@
 			<reward_item item_id="186000005" count="20"/>
 		</rewards>
 		<quest_kill step="0" count="5" npc_ids="214055 219112 219139" seq="0"/>
-        <quest_kill step="0" count="5" npc_ids="213964 219106 219132 235520" seq="1"/>
+		<quest_kill step="0" count="5" npc_ids="213964 219106 219132 235520" seq="1"/>
 	</quest>
 	<quest id="1667" name="[Coin] Eradicating Undead" nameId="1102858" quest_zone="Heiron" minlevel_permitted="42" max_repeat_count="255" race_permitted="ELYOS" category="QUEST" restricted="true">
 		<rewards>
@@ -5889,12 +5889,12 @@
 			<reward_item item_id="162000006" count="10"/>
 			<reward_item item_id="162000011" count="10"/>
 		</rewards>
-			<quest_drop npc_id="235504" item_id="182201769" drop_each_member="1"/>
-			<quest_drop npc_id="235505" item_id="182201769" drop_each_member="1"/>
-			<quest_drop npc_id="235506" item_id="182201769" drop_each_member="1"/>
-			<quest_drop npc_id="235507" item_id="182201769" drop_each_member="1"/>
-			<quest_drop npc_id="235508" item_id="182201769" drop_each_member="1"/>
-			<quest_drop npc_id="235509" item_id="182201769" drop_each_member="1"/>
+		<quest_drop npc_id="235504" item_id="182201769" drop_each_member="1"/>
+		<quest_drop npc_id="235505" item_id="182201769" drop_each_member="1"/>
+		<quest_drop npc_id="235506" item_id="182201769" drop_each_member="1"/>
+		<quest_drop npc_id="235507" item_id="182201769" drop_each_member="1"/>
+		<quest_drop npc_id="235508" item_id="182201769" drop_each_member="1"/>
+		<quest_drop npc_id="235509" item_id="182201769" drop_each_member="1"/>
 	</quest>
 	<quest id="1670" name="Invisible Bridges" nameId="1102861" quest_zone="Heiron" minlevel_permitted="38" max_repeat_count="1" cannot_share="true" race_permitted="ELYOS" category="QUEST" restricted="true">
 		<rewards gold="46650" exp="3218619">
@@ -8787,47 +8787,47 @@
 	<quest id="1987" name="A Bigger Warehouse" nameId="1102987" quest_zone="Sanctum" minlevel_permitted="29" max_repeat_count="1" cannot_share="true" race_permitted="ELYOS" category="SIGNIFICANT">
 		<rewards exp="291412" extend_inventory="2"/>
 		<start_conditions>
-        	<finished quest_id="1941"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="1942"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="1943"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="1944"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="1945"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="1946"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="19050"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="3943"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="3946"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="3949"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="3952"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="3955"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="3958"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="19056"/>
-        </start_conditions>
+			<finished quest_id="1941"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="1942"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="1943"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="1944"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="1945"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="1946"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="19050"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="3943"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="3946"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="3949"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="3952"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="3955"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="3958"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="19056"/>
+		</start_conditions>
 	</quest>
 	<quest id="1988" name="A Meeting with a Sage" nameId="1102988" quest_zone="Daevanion Quest" minlevel_permitted="30" max_repeat_count="1" race_permitted="ELYOS" category="QUEST" restricted="true">
 		<collect_items>
@@ -17634,11 +17634,11 @@
 		<rewards gold="14450" exp="484471">
 			<reward_item item_id="188050590" count="1"/>
 		</rewards>
-		<quest_drop npc_id="212466" item_id="182207055" chance="15"/>
-		<quest_drop npc_id="212467" item_id="182207055" chance="15"/>
-		<quest_drop npc_id="213025" item_id="182207056" chance="15"/>
-		<quest_drop npc_id="213026" item_id="182207056" chance="15"/>
-		<quest_drop npc_id="256652" item_id="182207057" chance="15"/>
+		<quest_drop npc_id="212466" item_id="182207055" chance="30"/>
+		<quest_drop npc_id="212467" item_id="182207055" chance="30"/>
+		<quest_drop npc_id="213025" item_id="182207056" chance="30"/>
+		<quest_drop npc_id="213026" item_id="182207056" chance="30"/>
+		<quest_drop npc_id="256652" item_id="182207057" chance="30"/>
 		<start_conditions>
 			<finished quest_id="2925"/>
 		</start_conditions>
@@ -18348,47 +18348,47 @@
 	<quest id="2985" name="An Expert's Reward" nameId="1104185" quest_zone="Pandaemonium" minlevel_permitted="29" max_repeat_count="1" cannot_share="true" race_permitted="ASMODIANS" category="SIGNIFICANT">
 		<rewards exp="291412" extend_inventory="2"/>
 		<start_conditions>
-        	<finished quest_id="2931"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="2932"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="2933"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="2934"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="2935"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="2936"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="29050"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="4947"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="4950"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="4953"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="4956"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="4959"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="4962"/>
-        </start_conditions>
-        <start_conditions>
-        	<finished quest_id="29056"/>
-        </start_conditions>
+			<finished quest_id="2931"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="2932"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="2933"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="2934"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="2935"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="2936"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="29050"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="4947"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="4950"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="4953"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="4956"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="4959"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="4962"/>
+		</start_conditions>
+		<start_conditions>
+			<finished quest_id="29056"/>
+		</start_conditions>
 	</quest>
 	<quest id="2986" name="Daevanion Weapon" nameId="1104186" quest_zone="Daevanion Quest" minlevel_permitted="99" max_repeat_count="1" cannot_share="true" race_permitted="ASMODIANS" category="QUEST" restricted="true">
 		<rewards gold="2980"/>
@@ -20310,6 +20310,9 @@
 		<rewards exp="2815297" title="35">
 			<reward_item item_id="166000192" count="2"/>
 		</rewards>
+		<quest_kill step="0" var="1" count="1" npc_ids="215069" seq="1"/>
+		<quest_kill step="0" var="2" count="1" npc_ids="215070" seq="2"/>
+		<quest_kill step="0" var="3" count="1" npc_ids="215081" seq="3"/>
 		<start_conditions>
 			<finished quest_id="3210"/>
 		</start_conditions>
@@ -21644,24 +21647,12 @@
 			<reward_item item_id="186000003" count="3"/>
 			<reward_item item_id="188050808" count="1"/>
 		</rewards>
-		<quest_drop item_id="186000067" npc_id="214804" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="214804" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="214804" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700462" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700462" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700462" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700463" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700463" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700463" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700464" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700464" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700464" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700471" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700471" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700471" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700466" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700466" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700466" chance="5"/>
+		<quest_drop item_id="186000067" npc_id="214804" chance="10"/>
+		<quest_drop item_id="186000067" npc_id="700462" chance="10"/>
+		<quest_drop item_id="186000067" npc_id="700463" chance="10"/>
+		<quest_drop item_id="186000067" npc_id="700464" chance="10"/>
+		<quest_drop item_id="186000068" npc_id="700471" chance="10"/>
+		<quest_drop item_id="186000069" npc_id="700466" chance="30"/>
 	</quest>
 	<quest id="3906" name="[Group] Destruction and Rebirth" nameId="1103005" quest_zone="Sanctum" minlevel_permitted="40" max_repeat_count="1" cannot_share="true" race_permitted="ELYOS" category="QUEST" restricted="true">
 		<collect_items>
@@ -21670,6 +21661,12 @@
 			<collect_item item_id="182400001" count="3600000"/>
 		</collect_items>
 		<rewards exp="2954681"/>
+		<quest_drop item_id="186000070" npc_id="700475" chance="35"/>
+		<quest_drop item_id="186000070" npc_id="700476" chance="35"/>
+		<quest_drop item_id="186000070" npc_id="700477" chance="35"/>
+		<quest_drop item_id="186000071" npc_id="700472" chance="35"/>
+		<quest_drop item_id="186000071" npc_id="700473" chance="35"/>
+		<quest_drop item_id="186000071" npc_id="700474" chance="35"/>
 		<start_conditions>
 			<finished quest_id="3905"/>
 		</start_conditions>
@@ -21682,11 +21679,12 @@
 			<collect_item item_id="182400001" count="4800000"/>
 		</collect_items>
 		<rewards exp="2954681"/>
-		<quest_drop item_id="186000074" npc_id="700539" chance="10"/>
-        <quest_drop item_id="186000074" npc_id="700541" chance="10"/>
-        <quest_drop item_id="186000074" npc_id="700542" chance="10"/>
-		<quest_drop item_id="186000074" npc_id="700543" chance="10"/>
-        <quest_drop item_id="186000074" npc_id="700544" chance="10"/>
+		<quest_drop item_id="186000072" npc_id="700539" chance="30"/>
+		<quest_drop item_id="186000072" npc_id="700540" chance="50"/>
+		<quest_drop item_id="186000073" npc_id="700541" chance="30"/>
+		<quest_drop item_id="186000073" npc_id="700542" chance="50"/>
+		<quest_drop item_id="186000074" npc_id="700543" chance="30"/>
+		<quest_drop item_id="186000074" npc_id="700544" chance="50"/>
 		<start_conditions>
 			<finished quest_id="3906"/>
 		</start_conditions>
@@ -24290,6 +24288,9 @@
 		<rewards gold="102910" exp="2815297" title="85">
 			<reward_item item_id="166000192" count="2"/>
 		</rewards>
+		<quest_kill step="0" var="1" count="1" npc_ids="215069" seq="1"/>
+		<quest_kill step="0" var="2" count="1" npc_ids="215070" seq="2"/>
+		<quest_kill step="0" var="3" count="1" npc_ids="215081" seq="3"/>
 		<start_conditions>
 			<finished quest_id="4210"/>
 		</start_conditions>
@@ -25693,24 +25694,12 @@
 			<reward_item item_id="186000008" count="3"/>
 			<reward_item item_id="188050898" count="1"/>
 		</rewards>
-		<quest_drop item_id="186000067" npc_id="214804" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="214804" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="214804" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700462" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700462" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700462" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700463" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700463" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700463" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700464" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700464" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700464" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700471" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700471" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700471" chance="5"/>
-        <quest_drop item_id="186000067" npc_id="700466" chance="5"/>
-        <quest_drop item_id="186000068" npc_id="700466" chance="5"/>
-        <quest_drop item_id="186000069" npc_id="700466" chance="5"/>
+		<quest_drop item_id="186000067" npc_id="214804" chance="10"/>
+		<quest_drop item_id="186000067" npc_id="700462" chance="10"/>
+		<quest_drop item_id="186000067" npc_id="700463" chance="10"/>
+		<quest_drop item_id="186000067" npc_id="700464" chance="10"/>
+		<quest_drop item_id="186000068" npc_id="700471" chance="10"/>
+		<quest_drop item_id="186000069" npc_id="700466" chance="30"/>
 	</quest>
 	<quest id="4910" name="[Group] 2 Fragments of Agrif's Rage" nameId="1104209" quest_zone="Pandaemonium" minlevel_permitted="40" max_repeat_count="1" cannot_share="true" race_permitted="ASMODIANS" category="QUEST" restricted="true">
 		<collect_items>
@@ -25721,6 +25710,12 @@
 		<rewards exp="2954681">
 			<reward_item item_id="188051194" count="2"/>
 		</rewards>
+		<quest_drop item_id="186000070" npc_id="700475" chance="35"/>
+		<quest_drop item_id="186000070" npc_id="700476" chance="35"/>
+		<quest_drop item_id="186000070" npc_id="700477" chance="35"/>
+		<quest_drop item_id="186000071" npc_id="700472" chance="35"/>
+		<quest_drop item_id="186000071" npc_id="700473" chance="35"/>
+		<quest_drop item_id="186000071" npc_id="700474" chance="35"/>
 		<start_conditions>
 			<finished quest_id="4909"/>
 		</start_conditions>
@@ -25733,11 +25728,12 @@
 			<collect_item item_id="182400001" count="4800000"/>
 		</collect_items>
 		<rewards exp="2954681"/>
-		<quest_drop item_id="186000074" npc_id="700539" chance="10"/>
-        <quest_drop item_id="186000074" npc_id="700541" chance="10"/>
-        <quest_drop item_id="186000074" npc_id="700542" chance="10"/>
-		<quest_drop item_id="186000074" npc_id="700543" chance="10"/>
-        <quest_drop item_id="186000074" npc_id="700544" chance="10"/>
+		<quest_drop item_id="186000072" npc_id="700539" chance="30"/>
+		<quest_drop item_id="186000072" npc_id="700540" chance="50"/>
+		<quest_drop item_id="186000073" npc_id="700541" chance="30"/>
+		<quest_drop item_id="186000073" npc_id="700542" chance="50"/>
+		<quest_drop item_id="186000074" npc_id="700543" chance="30"/>
+		<quest_drop item_id="186000074" npc_id="700544" chance="50"/>
 		<start_conditions>
 			<finished quest_id="4910"/>
 		</start_conditions>
@@ -78975,7 +78971,7 @@
 		<rewards>
 			<reward_item item_id="185000187"/>
 		</rewards>
-				<quest_kill step="0" var="0" count="10" npc_ids="233467" seq="0"/>
+		<quest_kill step="0" var="0" count="10" npc_ids="233467" seq="0"/>
 		<start_conditions>
 			<finished quest_id="80343"/>
 		</start_conditions>

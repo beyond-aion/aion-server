@@ -150,9 +150,9 @@
 			1839 [XML] A Deal with Silvius
 			1840 [XML] Enemy in the Abyss
 			1841 [XML] The Balaur Below
-			1842 [XML] A New Battle
-			1843 [XML] Pain in the Fortress
-			1844 [XML] Target: Balaur
+			1842 [SCRIPT] A New Battle
+			1843 [SCRIPT] Pain in the Fortress
+			1844 [SCRIPT] Target: Balaur
 			1845 [SCRIPT] Opening Doors
 			1846 [SCRIPT] Paper Trail
 			1847 [SCRIPT] A Strange Soul
@@ -314,8 +314,8 @@
 			2841 [SCRIPT] Cleansing the Asteria Chamber
 			2842 [SCRIPT] Balaur in the Undirborg
 			2843 [SCRIPT] Operation: Annihilate
-			2844 [XML] Simple but Difficult
-			2845 [XML] Take out the Trash
+			2844 [SCRIPT] Simple but Difficult
+			2845 [SCRIPT] Take out the Trash
 			2846 [XML] The Red Matter
 			2847 [XML] It's All Balaur to Me
 			2848 [XML] Whispering Stigma
@@ -386,7 +386,7 @@
 			80323 [TODO] Befitting the Hero of Archons (for mages)
 		[END] SUMMARY
 	-->
-	
+
 	<!-- REPORTING QUESTS -->
 	<report_to id="1729" start_npc_ids="278559" end_npc_ids="278593"/>
 	<report_to id="1732" start_npc_ids="278593" end_npc_ids="278592"/>
@@ -427,11 +427,11 @@
 		<npc_infos npc_ids="278089"/>
 		<npc_infos npc_ids="204799"/>
 	</report_to_many>
-	
+
 	<!-- FOUNTAIN REWARDS -->
 	<fountain_rewards id="1717" start_npc_ids="730142"/>
 	<fountain_rewards id="2717" start_npc_ids="730143"/>
-	
+
 	<!-- ITEM COLLECTING -->
 	<item_collecting id="1730" start_npc_ids="278593"/>
 	<item_collecting id="1731" start_npc_ids="278593"/>
@@ -566,7 +566,7 @@
 	<item_collecting id="38501" start_npc_ids="278654"/>
 	<item_collecting id="48500" start_npc_ids="278153"/>
 	<item_collecting id="48501" start_npc_ids="278654"/>
-	
+
 	<!-- RELIC REWARDS -->
 	<relic_rewards id="1833" start_npc_ids="278644"/>
 	<relic_rewards id="1834" start_npc_ids="278645"/>
@@ -578,7 +578,7 @@
 	<relic_rewards id="2835" start_npc_ids="278145"/>
 	<relic_rewards id="2836" start_npc_ids="278146"/>
 	<relic_rewards id="2837" start_npc_ids="278147"/>
-	
+
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="1715" start_npc_ids="278516"/>
 	<monster_hunt id="1716" start_npc_ids="278514"/>
@@ -618,9 +618,9 @@
 	<monster_hunt id="1839" start_npc_ids="263597"/>
 	<monster_hunt id="1840" start_npc_ids="271067"/>
 	<monster_hunt id="1841" start_npc_ids="266567"/>
-	<monster_hunt id="1842" start_npc_ids="268080"/>
-	<monster_hunt id="1843" start_npc_ids="269265"/>
-	<monster_hunt id="1844" start_npc_ids="270165"/>
+	<!-- <monster_hunt id="1842" start_npc_ids="268080"/> -->
+	<!-- <monster_hunt id="1843" start_npc_ids="269265"/> -->
+	<!-- <monster_hunt id="1844" start_npc_ids="270165"/> -->
 	<monster_hunt id="1855" start_npc_ids="268080"/>
 	<monster_hunt id="1856" start_npc_ids="269265"/>
 	<monster_hunt id="1857" start_npc_ids="270165"/>
@@ -659,8 +659,8 @@
 	<monster_hunt id="2838" start_npc_ids="264798"/>
 	<monster_hunt id="2839" start_npc_ids="263296"/>
 	<monster_hunt id="2840" start_npc_ids="263598"/>
-	<monster_hunt id="2844" start_npc_ids="269266"/>
-	<monster_hunt id="2845" start_npc_ids="215220"/>
+	<!-- <monster_hunt id="2844" start_npc_ids="269266"/> -->
+	<!-- <monster_hunt id="2845" start_npc_ids="270166"/> -->
 	<monster_hunt id="2855" start_npc_ids="268081"/>
 	<monster_hunt id="2856" start_npc_ids="269266"/>
 	<monster_hunt id="2857" start_npc_ids="270166"/>
