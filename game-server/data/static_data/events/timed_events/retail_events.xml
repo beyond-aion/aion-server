@@ -5007,7 +5007,7 @@
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
 				<!-- Demaine -->
-				<spawn npc_id="831709" respawn_time="295">
+				<spawn npc_id="831865" respawn_time="295">
 					<spot x="1525.85" y="1522.49" z="565.913" h="60" />
 				</spawn>
 			</spawn_map>
