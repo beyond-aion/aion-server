@@ -588,6 +588,7 @@ public class PlayerController extends CreatureController<Player> {
 				GameServer.updateRatio(player.getRace(), -1);
 		}
 
+		player.getGameStats().updateStatsTemplate();
 		player.getCommonData().updateMaxRepose();
 		player.getCommonData().resetSalvationPoints();
 		upgradePlayer();

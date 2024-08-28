@@ -233,10 +233,6 @@ public class StatsTemplate {
 		this.abnormalResistance = abnormalResistance;
 	}
 
-	public void setSpeeds(CreatureSpeeds speeds) {
-		this.speeds = speeds;
-	}
-
 	public int getPower() {
 		return 100;
 	}

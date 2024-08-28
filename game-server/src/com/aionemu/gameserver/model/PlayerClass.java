@@ -2,10 +2,8 @@ package com.aionemu.gameserver.model;
 
 import javax.xml.bind.annotation.XmlEnum;
 
-import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.model.stats.calc.PlayerStatCalculator;
 import com.aionemu.gameserver.model.templates.L10n;
-import com.aionemu.gameserver.model.templates.stats.CreatureSpeeds;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
 
 /**
@@ -15,47 +13,42 @@ import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
  */
 @XmlEnum
 public enum PlayerClass implements L10n {
-	WARRIOR(0, 240000, true, 110, 110, 100 ,100, 90, 90, 400, 400, 18, 2, 50, 0),
-	GLADIATOR(1, 240001, WARRIOR, 115, 115, 100, 100, 90, 90, 440, 400, 18, 2, 50, 0), // fighter
-	TEMPLAR(2, 240002, WARRIOR, 115, 100, 100, 100, 90, 105, 460, 400, 18, 2, 50, 0), // knight
-	SCOUT(3, 240003, true, 100, 100, 110, 110, 90, 90, 360, 400, 18, 2, 50, 0),
-	ASSASSIN(4, 240004, SCOUT, 110, 100, 110, 110, 90, 90, 360, 400, 18, 2, 50, 0),
-	RANGER(5, 240005, SCOUT, 100, 100, 115, 115, 90, 90, 280, 400, 18, 2, 50, 0),
-	MAGE(6, 240006, true, 90, 90, 95, 95, 115, 115, 260, 600, 18, 2, 50, 0),
-	SORCERER(7, 240007, MAGE, 90, 90, 100, 100, 120, 110, 260, 600, 18, 2, 50, 50), // wizard
-	SPIRIT_MASTER(8, 240008, MAGE, 90, 90, 100, 100, 115, 115, 280, 600, 18, 2, 50, 50), // elementalist
-	PRIEST(9, 240009, true, 95, 95, 100, 100, 100, 100, 360, 600, 18, 2, 50, 0),
-	CLERIC(10, 240010, PRIEST, 105, 110, 90, 90, 105, 110, 320, 600, 18, 2, 50, 50),
-	CHANTER(11, 240011, PRIEST, 110, 105, 90, 90, 105, 110, 360, 600, 18, 2, 50, 0),
-	ENGINEER(12, 904314, true, 100, 100, 110, 110, 90, 90, 360, 400, 18, 2, 50, 0),
-	RIDER(13, 904315, ENGINEER, 100, 100, 100, 100, 105, 105, 420, 480, 18, 2, 50, 0),
-	GUNNER(14, 904316, ENGINEER, 100, 105, 105, 100, 100, 100, 360, 400, 18, 2, 50, 0),
-	ARTIST(15, 904317, true, 95, 95, 100, 100, 100, 105, 320, 600, 18, 2, 50, 0),
-	BARD(16, 904318, ARTIST, 90, 100, 100, 100, 110, 110, 320, 520, 18, 2, 50, 50);
+	WARRIOR(0, 240000, true, 110, 110, 100 ,100, 90, 90, 400, 400, 0),
+	GLADIATOR(1, 240001, WARRIOR, 115, 115, 100, 100, 90, 90, 440, 400, 0), // fighter
+	TEMPLAR(2, 240002, WARRIOR, 115, 100, 100, 100, 90, 105, 460, 400, 0), // knight
+	SCOUT(3, 240003, true, 100, 100, 110, 110, 90, 90, 360, 400, 0),
+	ASSASSIN(4, 240004, SCOUT, 110, 100, 110, 110, 90, 90, 360, 400, 0),
+	RANGER(5, 240005, SCOUT, 100, 100, 115, 115, 90, 90, 280, 400, 0),
+	MAGE(6, 240006, true, 90, 90, 95, 95, 115, 115, 260, 600, 0),
+	SORCERER(7, 240007, MAGE, 90, 90, 100, 100, 120, 110, 260, 600, 50), // wizard
+	SPIRIT_MASTER(8, 240008, MAGE, 90, 90, 100, 100, 115, 115, 280, 600, 50), // elementalist
+	PRIEST(9, 240009, true, 95, 95, 100, 100, 100, 100, 360, 600, 0),
+	CLERIC(10, 240010, PRIEST, 105, 110, 90, 90, 105, 110, 320, 600, 50),
+	CHANTER(11, 240011, PRIEST, 110, 105, 90, 90, 105, 110, 360, 600, 0),
+	ENGINEER(12, 904314, true, 100, 100, 110, 110, 90, 90, 360, 400, 0),
+	RIDER(13, 904315, ENGINEER, 100, 100, 100, 100, 105, 105, 420, 480, 0),
+	GUNNER(14, 904316, ENGINEER, 100, 105, 105, 100, 100, 100, 360, 400, 0),
+	ARTIST(15, 904317, true, 95, 95, 100, 100, 100, 105, 320, 600, 0),
+	BARD(16, 904318, ARTIST, 90, 100, 100, 100, 110, 110, 320, 520, 50);
 
 	/** This id is used on client side */
 	private final byte classId;
 
 	private final int nameId;
 
-	/** This is the mask for this class id, used with bitwise AND in arguments that contain more than one possible class */
-	private final int idMask;
-
 	/** Tells whether player can create new character with this class */
 	private PlayerClass startingClass;
 
-	private final StatsTemplate[] templatesByLevel = new StatsTemplate[GSConfig.PLAYER_MAX_LEVEL];
-	private final int power, health, agility, accuracy, knowledge, will, healthMultiplier, willMultiplier;
+	private final int power, health, agility, accuracy, knowledge, will, healthMultiplier, willMultiplier, magicalCriticalResist;
 
-	PlayerClass(int classId, int nameId, PlayerClass startingClass, int power, int health, int agility, int accuracy, int knowledge, int will, int healthMultiplier, int willMultiplier, int physicalAttack, int physicalCritical, int magicalCritical, int magicalCriticalResist) {
-		this(classId, nameId, false, power, health, agility, accuracy, knowledge, will, healthMultiplier, willMultiplier, physicalAttack, physicalCritical, magicalCritical, magicalCriticalResist);
+	PlayerClass(int classId, int nameId, PlayerClass startingClass, int power, int health, int agility, int accuracy, int knowledge, int will, int healthMultiplier, int willMultiplier, int magicalCriticalResist) {
+		this(classId, nameId, false, power, health, agility, accuracy, knowledge, will, healthMultiplier, willMultiplier, magicalCriticalResist);
 		this.startingClass = startingClass;
 	}
 
-	PlayerClass(Integer classId, int nameId, boolean isStartingClass, int power, int health, int agility, int accuracy, int knowledge, int will, int healthMultiplier, int willMultiplier, int physicalAttack, int physicalCritical, int magicalCritical, int magicalCriticalResist) {
-		this.nameId = nameId;
+	PlayerClass(Integer classId, int nameId, boolean isStartingClass, int power, int health, int agility, int accuracy, int knowledge, int will, int healthMultiplier, int willMultiplier, int magicalCriticalResist) {
 		this.classId = classId.byteValue();
-		this.idMask = (int) Math.pow(2, classId);
+		this.nameId = nameId;
 		if (isStartingClass)
 			this.startingClass = this;
 		this.power = power;
@@ -66,31 +59,24 @@ public enum PlayerClass implements L10n {
 		this.will = will;
 		this.healthMultiplier = healthMultiplier;
 		this.willMultiplier = willMultiplier;
-		initializeTemplatesForEachLevel(physicalAttack, physicalCritical, magicalCritical, magicalCriticalResist);
+		this.magicalCriticalResist = magicalCriticalResist;
 	}
 
-	private void initializeTemplatesForEachLevel(int physicalAttack, int physicalCritical, int magicalCritical, int magicalCriticalResist) {
-		for (int level = 1; level <= templatesByLevel.length; level++) {
-			PlayerStatsTemplate statsTemplate = new PlayerStatsTemplate();
-			statsTemplate.setMaxHp(PlayerStatCalculator.calculateMaxHp(this, level));
-			statsTemplate.setMaxMp(PlayerStatCalculator.calculateMaxMp(this, level));
-			statsTemplate.setBlock(PlayerStatCalculator.calculateBlockEvasionOrParry(level));
-			statsTemplate.setParry(PlayerStatCalculator.calculateBlockEvasionOrParry(level));
-			statsTemplate.setEvasion(PlayerStatCalculator.calculateBlockEvasionOrParry(level));
-			statsTemplate.setAccuracy(PlayerStatCalculator.calculatePhysicalAccuracy(level));
-			statsTemplate.setMacc(PlayerStatCalculator.calculateMagicalAccuracy(level));
-			statsTemplate.setPcrit(physicalCritical);
-			statsTemplate.setMcrit(magicalCritical);
-			statsTemplate.setStrikeResist(PlayerStatCalculator.calculateStrikeResist(level));
-			statsTemplate.setAttack(physicalAttack);
-			statsTemplate.setSpellResist(magicalCriticalResist);
-			CreatureSpeeds speeds = new CreatureSpeeds();
-			speeds.setWalkSpeed(1.5f);
-			speeds.setRunSpeed(6f);
-			speeds.setFlySpeed(9f);
-			statsTemplate.setSpeeds(speeds);
-			templatesByLevel[level - 1] = statsTemplate;
-		}
+	public StatsTemplate createStatsTemplate(int level) {
+		PlayerStatsTemplate statsTemplate = new PlayerStatsTemplate();
+		statsTemplate.setMaxHp(PlayerStatCalculator.calculateMaxHp(this, level));
+		statsTemplate.setMaxMp(PlayerStatCalculator.calculateMaxMp(this, level));
+		statsTemplate.setBlock(PlayerStatCalculator.calculateBlockEvasionOrParry(level));
+		statsTemplate.setParry(PlayerStatCalculator.calculateBlockEvasionOrParry(level));
+		statsTemplate.setEvasion(PlayerStatCalculator.calculateBlockEvasionOrParry(level));
+		statsTemplate.setAccuracy(PlayerStatCalculator.calculatePhysicalAccuracy(level));
+		statsTemplate.setMacc(PlayerStatCalculator.calculateMagicalAccuracy(level));
+		statsTemplate.setAttack(18);
+		statsTemplate.setPcrit(2);
+		statsTemplate.setMcrit(50);
+		statsTemplate.setStrikeResist(PlayerStatCalculator.calculateStrikeResist(level));
+		statsTemplate.setSpellResist(magicalCriticalResist);
+		return statsTemplate;
 	}
 
 	/**
@@ -138,23 +124,11 @@ public enum PlayerClass implements L10n {
 		return startingClass;
 	}
 
-	public int getMask() {
-		return idMask;
-	}
-
 	public boolean isPhysicalClass() {
-		switch (this) {
-			case WARRIOR:
-			case GLADIATOR:
-			case TEMPLAR:
-			case SCOUT:
-			case ASSASSIN:
-			case RANGER:
-			case CHANTER:
-				return true;
-			default:
-				return false;
-		}
+		return switch (this) {
+			case WARRIOR, GLADIATOR, TEMPLAR, SCOUT, ASSASSIN, RANGER, CHANTER -> true;
+			default -> false;
+		};
 	}
 
 	public String getIconImage() {
@@ -177,10 +151,6 @@ public enum PlayerClass implements L10n {
 			case ARTIST -> "textures/ui/EMBLEM/Icon_emblem_Artist.dds";
 			case BARD -> "textures/ui/EMBLEM/Icon_emblem_Bard.dds";
 		};
-	}
-
-	public StatsTemplate getStatsTemplateFor(int level) {
-		return templatesByLevel[Math.min(level, templatesByLevel.length) - 1];
 	}
 
 	public int getPower() {
@@ -257,6 +227,21 @@ public enum PlayerClass implements L10n {
 		@Override
 		public int getWill() {
 			return will;
+		}
+
+		@Override
+		public float getWalkSpeed() {
+			return 1.5f;
+		}
+
+		@Override
+		public float getRunSpeed() {
+			return 6f;
+		}
+
+		@Override
+		public float getFlySpeed() {
+			return 9f;
 		}
 	}
 }

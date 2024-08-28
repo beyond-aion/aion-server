@@ -26,6 +26,7 @@ import com.aionemu.gameserver.utils.stats.CalculationType;
  */
 public class PlayerGameStats extends CreatureGameStats<Player> {
 
+	private StatsTemplate statsTemplate;
 	private int cachedAttackSpeed;
 	private int maxDamageChance;
 	private float minDamageRatio;
@@ -33,6 +34,7 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 
 	public PlayerGameStats(Player owner) {
 		super(owner);
+		updateStatsTemplate();
 	}
 
 	@Override
@@ -65,7 +67,11 @@ public class PlayerGameStats extends CreatureGameStats<Player> {
 
 	@Override
 	public StatsTemplate getStatsTemplate() {
-		return owner.getPlayerClass().getStatsTemplateFor(owner.getLevel());
+		return statsTemplate;
+	}
+
+	public void updateStatsTemplate() {
+		this.statsTemplate = owner.getPlayerClass().createStatsTemplate(owner.getLevel());
 	}
 
 	public Stat2 getMaxDp() {

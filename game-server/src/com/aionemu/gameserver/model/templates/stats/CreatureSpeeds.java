@@ -53,16 +53,4 @@ public class CreatureSpeeds {
 	public float getGroupRunSpeedFight() {
 		return groupRunSpeedFight;
 	}
-
-	public void setWalkSpeed(float walkSpeed) {
-		this.walkSpeed = walkSpeed;
-	}
-
-	public void setRunSpeed(float runSpeed) {
-		this.runSpeed = runSpeed;
-	}
-
-	public void setFlySpeed(float flySpeed) {
-		this.flySpeed = flySpeed;
-	}
 }
