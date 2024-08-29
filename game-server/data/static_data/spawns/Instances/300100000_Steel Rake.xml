@@ -272,11 +272,12 @@
 			<spot x="444.1760" y="454.3152" z="888.0911" static_id="11"/>
 			<spot x="503.2861" y="491.8665" z="886.1453" static_id="15"/>
 			<spot x="503.1329" y="527.4506" z="886.1453" static_id="14"/>
+			<spot x="479.4789" y="454.3800" z="888.0911" static_id="1"/>
 		</spawn>
 		<!-- Prison Door -->
-		<spawn npc_id="730208">
+		<!-- <spawn npc_id="730208">
 			<spot x="479.4789" y="454.3800" z="888.0911" h="30" static_id="1"/>
-		</spawn>
+		</spawn> -->
 		<!-- Rabinerk -->
 		<spawn npc_id="798331">
 			<spot x="705.18" y="466.3" z="1016" h="90"/>
