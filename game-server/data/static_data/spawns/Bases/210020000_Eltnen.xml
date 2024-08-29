@@ -19,8 +19,8 @@
 				<spawn npc_id="232062" handler="SENTINEL" respawn_time="295">
 					<spot x="1800.5" y="1107.5" z="436.125" h="15"/>
 					<spot x="1831.75" y="1090.875" z="435.75" h="105"/>
-					<spot x="1798.75" y="1120.0" z="434.25012" h="45"/>
-					<spot x="1823.5" y="1085.125" z="433.14847" h="90"/>
+					<spot x="1798.75" y="1120.0" z="432.6875" h="45"/>
+					<spot x="1823.5" y="1085.125" z="431.7520" h="90"/>
 				</spawn>
 				<!-- Alcman Administration Officer -->
 				<spawn npc_id="801164" handler="MERCHANT" respawn_time="295">
@@ -50,9 +50,9 @@
 				</spawn>
 				<!-- Eltnen Infiltrator -->
 				<spawn npc_id="232065" handler="SENTINEL" respawn_time="295">
-					<spot x="1798.75" y="1120" z="436.5" h="45"/>
+					<spot x="1798.75" y="1120" z="432.6875" h="45"/>
 					<spot x="1800.5" y="1107.5" z="436.125" h="15"/>
-					<spot x="1823.5" y="1085.125" z="435.75" h="90"/>
+					<spot x="1823.5" y="1085.125" z="431.7520" h="90"/>
 					<spot x="1831.75" y="1090.875" z="435.75" h="105"/>
 				</spawn>
 				<!-- Dalla Administration Officer -->
@@ -93,7 +93,7 @@
 					<spot x="1798.75" y="1120" z="432.6875" h="45"/>
 				</spawn>
 			</simple_race>
-		  </base_spawn>	
+		  </base_spawn>
 		<base_spawn id="2121"> <!-- Eracus Outpost -->
 			<simple_race race="ELYOS">
 				<!-- Elyos Territory -->
