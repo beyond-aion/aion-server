@@ -256,7 +256,6 @@ public class KamarBattlefieldInstance extends BasicPvpInstance {
 				updatePoints(player, player.getRace(), npc.getObjectTemplate().getL10n(), 200);
 				spawn(player.getRace() == Race.ELYOS ? 701900 : 701901, npc.getX(), npc.getY(), npc.getZ(), npc.getHeading());
 				npc.getController().delete();
-				}
 				break;
 		}
 		if (points > 0) {
