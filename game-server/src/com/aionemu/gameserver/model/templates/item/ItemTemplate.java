@@ -376,6 +376,12 @@ public class ItemTemplate extends VisibleObjectTemplate {
 			return false;
 		return getItemSubType() == ItemSubType.TWO_HAND;
 	}
+	
+	public boolean isOneHandWeapon() {
+		if (!isWeapon())
+			return false;
+		return getItemSubType() == ItemSubType.ONE_HAND;
+	}
 
 	public int getTempExchangeTime() {
 		return temExchangeTime;
