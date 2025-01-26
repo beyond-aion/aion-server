@@ -1,0 +1,35 @@
+#此工作流将使用Maven构建Java项目，并缓存/恢复任何依赖项以提高工作流执行时间
+#有关详细信息，请参阅：https://docs.github.com/en/actions/automating-builds-and-tests/building-and-testing-java-with-maven
+
+#此工作流使用未经GitHub认证的操作。
+#它们由第三方提供，并由
+#单独的服务条款、隐私政策和支持
+#documentation。
+
+姓名:使用Maven的Java CI
+
+在……之上:
+推:
+分支机构:[ "4.8" ]
+pull_request:
+分支机构:[ "4.8" ]
+
+工作:
+建立:
+
+run-on:ubuntu-最新
+
+步骤:
+-uses:操作/结帐@v4
+-姓名:设置JDK17
+uses:操作/设置-java@v4
+和……一起:
+java版:'17'
+分布:'temurin'
+缓存:Maven
+-姓名:使用Maven构建
+跑:mvn-B包--file pom.xml
+
+    #可选：将完整的依赖关系图上载到GitHub，以提高此存储库可以接收的Dependabot警报的质量
+-姓名:更新依赖关系图
+uses:advanced-security/maven-dependency-submission-action@571e99aab1055c2e71a1e2309b9691de18d6b7d6
