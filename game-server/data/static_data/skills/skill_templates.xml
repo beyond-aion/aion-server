@@ -74587,7 +74587,7 @@
 		<effects>
 			<healinstant value="1668" e="1" noresist="true" element="WATER" hoptype="SKILLLV" hopb="12872" />
 			<heal checktime="2000" value="153" duration2="6000" effectid="947192" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="16158" hopa="458" />
-			<statup duration2="20000" effectid="947193" e="3" noresist="true" preeffect="1">
+			<statup duration2="6000" effectid="947193" e="3" noresist="true" preeffect="1">
 				<change stat="PVP_DEFEND_RATIO" func="ADD" value="300" />
 			</statup>
 		</effects>
@@ -74608,7 +74608,7 @@
 		<effects>
 			<healinstant value="1803" e="1" noresist="true" element="WATER" hoptype="SKILLLV" hopb="14241" />
 			<heal checktime="2000" value="153" duration2="6000" effectid="947192" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="16158" hopa="458" />
-			<statup duration2="20000" effectid="947193" e="3" noresist="true" preeffect="1">
+			<statup duration2="6000" effectid="947193" e="3" noresist="true" preeffect="1">
 				<change stat="PVP_DEFEND_RATIO" func="ADD" value="300" />
 			</statup>
 		</effects>
@@ -74629,7 +74629,7 @@
 		<effects>
 			<healinstant value="1938" e="1" noresist="true" element="WATER" hoptype="SKILLLV" hopb="15610" />
 			<heal checktime="2000" value="153" duration2="6000" effectid="947192" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="16158" hopa="458" />
-			<statup duration2="20000" effectid="947193" e="3" noresist="true" preeffect="1">
+			<statup duration2="6000" effectid="947193" e="3" noresist="true" preeffect="1">
 				<change stat="PVP_DEFEND_RATIO" func="ADD" value="300" />
 			</statup>
 		</effects>
@@ -74650,7 +74650,7 @@
 		<effects>
 			<healinstant value="2073" e="1" noresist="true" element="WATER" hoptype="SKILLLV" hopb="16980" />
 			<heal checktime="2000" value="153" duration2="6000" effectid="947192" e="2" noresist="true" element="WATER" preeffect="1" hoptype="SKILLLV" hopb="16158" hopa="458" />
-			<statup duration2="20000" effectid="947193" e="3" noresist="true" preeffect="1">
+			<statup duration2="6000" effectid="947193" e="3" noresist="true" preeffect="1">
 				<change stat="PVP_DEFEND_RATIO" func="ADD" value="300" />
 			</statup>
 		</effects>
