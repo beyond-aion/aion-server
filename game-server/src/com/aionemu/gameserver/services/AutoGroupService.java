@@ -47,26 +47,6 @@ public class AutoGroupService {
 				return;
 			}
 
-			// Verifica se há um player registrado com o mesmo MAC address
-			String playerMac = player.getClientConnection().getMacAddress();
-			String playerIp = player.getClientConnection().getIP();
-			boolean isMacAlreadyRegistered = false;
-			for (Player p : World.getInstance().getAllPlayers()) {
-				String pMac = p.getClientConnection().getMacAddress();
-				String pIp = p.getClientConnection().getIP();
-				if(pMac.equals(playerMac) && playerIp.equals(pIp)){
-					lfp = getSearchEntry(p.getObjectId(), lfps);
-					if (lfp != null) {
-						isMacAlreadyRegistered = true;
-					}
-				}
-			}
-
-			if (isMacAlreadyRegistered) {
-				PacketSendUtility.sendMessage(player, "It is not allowed to apply with two accounts!");
-				return;
-			}
-
 			lfp = new LookingForParty(player, ert, maskId);
 			lfps.add(lfp);
 
