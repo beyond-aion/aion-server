@@ -552,6 +552,10 @@ public class EffectController {
 				if (targetSlot == SkillTargetSlot.DEBUFF && !effect.getEffector().equals(ef.getEffector()))
 					continue;
 
+				// remove only skill that can be dispelled by the effector ( SM debuffs )
+				if(targetSlot == SkillTargetSlot.DEBUFF && effect.getEffector().equals(ef.getEffector()) && !ef.canBeDispelled())
+					continue;
+
 				switch (dispelCat) {
 					case ALL:
 					case BUFF:// DispelBuffCounterAtkEffect

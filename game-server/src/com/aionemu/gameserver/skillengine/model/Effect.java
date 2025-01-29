@@ -1087,6 +1087,25 @@ public class Effect implements StatOwner {
 		return 10;
 	}
 
+	public boolean canBeDispelled()
+	{
+		if (skillTemplate.getGroup() != null) {
+			switch (skillTemplate.getGroup()) {
+				case "EL_ENFEEBLEMENT":
+				case "EL_MANAREVERSE":
+				case "EL_HELLPAIN":
+					return true;
+			}
+		}
+		if (skillTemplate.getStack() != null) {
+			if (skillTemplate.getStack().equals("EL_MANAREVERSE_SYS")) {
+				return true;
+			}
+		}
+
+		return false;
+	}
+
 	public int getPower() {
 		return power;
 	}
