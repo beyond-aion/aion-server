@@ -10849,15 +10849,96 @@
 	<decomposable item_id="188051357" /><!-- Decent bundle of Fossilized Golden Saam -->
 	<decomposable item_id="188051358" /><!-- Big bundle of Fossilized Golden Saam -->
 	<decomposable item_id="188051359" /><!-- Large bundle of Fossilized Golden Saam -->
-	<decomposable item_id="188051360" /><!-- Red Cap Kobushka's Bundle -->
-	<decomposable item_id="188051361" /><!-- Red Cap Kobushka's Zesty Cache -->
-	<decomposable item_id="188051362" /><!-- Red Cap Kobushka's Mystery Cache -->
-	<decomposable item_id="188051363" /><!-- Red Cap Kobushka's Green Cache -->
-	<decomposable item_id="188051364" /><!-- Red Cap Kobushka's Red Cache -->
-	<decomposable item_id="188051365" /><!-- Red Cap Kobushka's Yellow Cache -->
-	<decomposable item_id="188051366" /><!-- Red Cap Kobushka's Copious Cache -->
-	<decomposable item_id="188051367" /><!-- Red Cap Kobushka's Capacious Cache -->
-	<decomposable item_id="188051368" /><!-- Red Cap Kobushka's Colossal Cache -->
+	<decomposable item_id="188051360"><!-- Red Cap Kobushka's Bundle -->
+		<items chance="100.0">
+			<item id="188051361" />
+		</items>
+		<items chance="100.0">
+			<item id="188051362" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188051361"><!-- Red Cap Kobushka's Zesty Cache -->
+		<items chance="40.0">
+			<item id="188051363" />
+		</items>
+		<items chance="40.0">
+			<item id="188051364" />
+		</items>
+		<items chance="20.0">
+			<item id="188051365" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188051362"><!-- Red Cap Kobushka's Mystery Cache -->
+		<items chance="62.0">
+			<item id="188051366" />
+		</items>
+		<items chance="37.0">
+			<item id="188051367" />
+		</items>
+		<items chance="1.0">
+			<item id="188051368" />
+		</items>
+	</decomposable>
+	<decomposable item_id="188051363"><!-- Red Cap Kobushka's Green Cache -->
+		<items chance="100.0">
+			<item id="162000016" min_count="5"/>
+		</items>
+		<items chance="100.0">
+			<item id="162000021" min_count="5"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188051364"><!-- Red Cap Kobushka's Red Cache -->
+		<items chance="100.0">
+			<item id="164000073" min_count="5"/>
+		</items>
+		<items chance="100.0">
+			<item id="164000076" min_count="5"/>
+		</items>
+		<items chance="100.0">
+			<item id="164000134" min_count="5"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188051365"><!-- Red Cap Kobushka's Yellow Cache -->
+		<items chance="100.0">
+			<item id="162000077" min_count="5"/>
+		</items>
+		<items chance="100.0">
+			<item id="162000078" min_count="5"/>
+		</items>
+		<items chance="100.0">
+			<item id="164000073" min_count="5"/>
+		</items>
+		<items chance="100.0">
+			<item id="164000076" min_count="5"/>
+		</items>
+		<items chance="100.0">
+			<item id="164000134" min_count="5"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188051366"><!-- Red Cap Kobushka's Copious Cache -->
+		<items chance="100.0">
+			<item id="166000075" min_count="5"/>
+		</items>
+		<items chance="100.0">
+			<item id="186000147" min_count="2"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188051367"><!-- Red Cap Kobushka's Capacious Cache -->
+		<items chance="100.0">
+			<item id="166020000" min_count="1"/>
+		</items>
+		<items chance="100.0">
+			<item id="186000236" min_count="2"/>
+		</items>
+	</decomposable>
+	<decomposable item_id="188051368"><!-- Red Cap Kobushka's Colossal Cache -->
+		<items chance="100.0">
+			<item id="166020000" min_count="2"/>
+		</items>
+		<items chance="100.0">
+			<item id="186000242" min_count="3"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188051369" /><!-- Menotios' Cache of Arms -->
 	<decomposable item_id="188051370" /><!-- Red Cap Kobushka's Premium Cache -->
 	<decomposable item_id="188051371" /><!-- Enchanted Heart Box -->
@@ -11487,7 +11568,20 @@
 	<decomposable item_id="188051509" /><!-- Magic Manastone Bundle -->
 	<decomposable item_id="188051510" /><!-- Defense Manastone Bundle -->
 	<decomposable item_id="188051511" /><!-- Greater Divine Remedy Bundle -->
-	<decomposable item_id="188051512" /><!-- Major Divine Remedy Bundle -->
+	<decomposable item_id="188051512"><!-- Major Divine Remedy Bundle -->
+		<items>
+			<item id="161000003" min_count="3" /><!-- Reviving Elemental Stone -->
+		</items>
+		<items>
+			<item id="162000137" min_count="10" /><!-- Sublime Life Serum -->
+		</items>
+		<items>
+			<item id="162000139" min_count="10" /><!-- Sublime Mana Serum -->
+		</items>
+		<items>
+			<item id="162000141" min_count="10" /><!-- Sublime Wind Serum -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051513" /><!-- Tough Scroll Bundle -->
 	<decomposable item_id="188051514" /><!-- Tough Greater Scroll Bundle -->
 	<decomposable item_id="188051515" /><!-- Smart Scroll Bundle -->
@@ -13327,7 +13421,107 @@
 	<decomposable item_id="188051645" /><!-- Mithril Medal Chest -->
 	<decomposable item_id="188051646" /><!-- Lukeshunerk's Package -->
 	<decomposable item_id="188051647" /><!-- Lukeshunerk's Emergency Supplies -->
-	<decomposable item_id="188051648" /><!-- Lukeshunerk's Divination Chest -->
+	<decomposable item_id="188051648"><!-- Lukeshunerk's Divination Chest -->
+		<items chance="2.71">
+			<item id="169620017"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620018"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620019"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620020"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620021"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620022"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620023"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620024"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620025"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620026"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620027"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620028"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620029"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620030"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620031"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620032"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620033"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620034"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620035"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620036"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620037"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620038"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620039"/>
+		</items>
+		<items chance="2.71">
+			<item id="169620040"/>
+		</items>
+		<items chance="4.99">
+			<item id="169620041"/>
+		</items>
+		<items chance="4.98">
+			<item id="169620042"/>
+		</items>
+		<items chance="4.98">
+			<item id="169620043"/>
+		</items>
+		<items chance="4.98">
+			<item id="169620044"/>
+		</items>
+		<items chance="4.98">
+			<item id="169620045"/>
+		</items>
+		<items chance="2.51">
+			<item id="169610076"/>
+		</items>
+		<items chance="2.51">
+			<item id="169610077"/>
+		</items>
+		<items chance="2.51">
+			<item id="169610078"/>
+		</items>
+		<items chance="2.51">
+			<item id="169610079"/>
+		</items>
+	</decomposable>
 	<decomposable item_id="188051649"><!-- [Event] White Tiger Jade Crate -->
 		<items>
 			<item id="160010011" race="ELYOS" /><!-- [Event] Valiant Tiger Candy -->
@@ -15701,9 +15895,21 @@
 	<decomposable item_id="188051903" /><!-- [Event] Box of Blood Crusade Marks -->
 	<decomposable item_id="188051904" /><!-- [Event] Box of Charlirunerk's Daemons Marks -->
 	<decomposable item_id="188051905" /><!-- [Event] Box of The Circle Marks -->
-	<decomposable item_id="188051906" /><!-- Tea of Repose - 100% Recovery (10-Pack) -->
-	<decomposable item_id="188051907" /><!-- Tea of Repose - 50% Recovery (10-Pack) -->
-	<decomposable item_id="188051908" /><!-- Tea of Repose - 20% Recovery (10-Pack) -->
+	<decomposable item_id="188051906"><!-- Tea of Repose - 100% Recovery (10-Pack) -->
+		<items>
+			<item id="162001013" min_count="10"/><!-- Tea of Repose -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051907"><!-- Tea of Repose - 50% Recovery (10-Pack) -->
+		<items>
+			<item id="162001012" min_count="10"/><!-- Tea of Repose -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188051908"><!-- Tea of Repose - 20% Recovery (10-Pack) -->
+		<items>
+			<item id="162001014" min_count="10"/><!-- Tea of Repose -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188051909" /><!-- [Event] Large First Place Beer Case -->
 	<decomposable item_id="188051910" /><!-- [Event] Large Second Place Beer Case -->
 	<decomposable item_id="188051911" /><!-- [Event] Large Third Place Beer Case -->
@@ -32253,7 +32459,20 @@
 	<decomposable item_id="188053668" /><!-- [Event] Sonatine's Friendship Box -->
 	<decomposable item_id="188053669" /><!-- [Event] Ascension Supply Box -->
 	<decomposable item_id="188053670" /><!-- [Event] Weapon Box of the Distorted Balaur Lord -->
-	<decomposable item_id="188053671" /><!-- [Event] Pallasite Material Box -->
+	<decomposable item_id="188053671"><!-- [Event] Pallasite Material Box -->
+		<items chance="25">
+			<item id="169405338" /> <!-- Pallasite Ore -->
+		</items>
+		<items chance="25">
+			<item id="169405339" /> <!-- Pallasite Crystal -->
+		</items>
+		<items chance="25">
+			<item id="169405340" /> <!-- Pallasite Powder -->
+		</items>
+		<items chance="25">
+			<item id="169405341" /> <!-- Pallasite Refined Water -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053672" selectable="true"><!-- [Event] Rainbow Gift -->
 		<items>
 			<item id="110900490" /><!-- Revelers Spotted Snake Costume (1 day) -->
@@ -35591,15 +35810,15 @@
 		</items>
 		<items chance="3">
 			<item id="121001330" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Vanquisher's Flame Necklace -->
-			<item id="121001330" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Necklace -->
+			<item id="121001331" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Necklace -->
 		</items>
 		<items chance="3">
 			<item id="122001599" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Vanquisher's Flame Ring -->
-			<item id="122001599" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Ring -->
+			<item id="122001600" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Ring -->
 		</items>
 		<items chance="3">
 			<item id="123001359" player_classes="TEMPLAR GLADIATOR ASSASSIN RANGER CHANTER" /><!-- Vanquisher's Flame Belt -->
-			<item id="123001359" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Belt -->
+			<item id="123001360" player_classes="SORCERER SPIRIT_MASTER CLERIC GUNNER BARD RIDER" /><!-- Vanquisher's Freezing Belt -->
 		</items>
 		<items chance="3">
 			<item id="100001794" player_classes="GLADIATOR TEMPLAR ASSASSIN RANGER" /><!-- Conqueror's Honorable Sword -->
@@ -36108,7 +36327,14 @@
 			<item id="184002087" race="ASMODIANS"/><!-- [Event] Asmodian Legion Companion Kisk Summoning Stone -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188054014" /><!-- [Event] Lunahare Kisk Box -->
+	<decomposable item_id="188054014" selectable="true"><!-- [Event] Lunahare Kisk Box -->
+		<items>
+			<item id="184002099" race="ELYOS"/><!-- [Event] Alliance Lunahare Kisk Summoning Stone -->
+			<item id="184002098" race="ELYOS"/><!-- [Event] Group Lunahare Kisk Summoning Stone -->
+			<item id="184002101" race="ASMODIANS"/><!-- [Event] Alliance Lunahare Kisk Summoning Stone -->
+			<item id="184002100" race="ASMODIANS"/><!-- [Event] Group Lunahare Kisk Summoning Stone -->
+		</items>
+	</decomposable>	
 	<decomposable item_id="188054015" /><!-- Group Companion Kisk Box -->
 	<decomposable item_id="188054016" /><!-- Alliance Companion Kisk Box -->
 	<decomposable item_id="188054017" /><!-- Legion Companion Kisk Box -->
