@@ -5,6 +5,7 @@ import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.model.ChatType;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.autogroup.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
@@ -18,6 +19,7 @@ import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
 import com.aionemu.gameserver.services.instance.PvPArenaService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
+import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -44,6 +46,27 @@ public class AutoGroupService {
 				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_INSTANCE_ALREADY_REGISTERED(agt.getTemplate().getInstanceMapId()));
 				return;
 			}
+
+			// Verifica se há um player registrado com o mesmo MAC address
+			String playerMac = player.getClientConnection().getMacAddress();
+			String playerIp = player.getClientConnection().getIP();
+			boolean isMacAlreadyRegistered = false;
+			for (Player p : World.getInstance().getAllPlayers()) {
+				String pMac = p.getClientConnection().getMacAddress();
+				String pIp = p.getClientConnection().getIP();
+				if(pMac.equals(playerMac) && playerIp.equals(pIp)){
+					lfp = getSearchEntry(p.getObjectId(), lfps);
+					if (lfp != null) {
+						isMacAlreadyRegistered = true;
+					}
+				}
+			}
+
+			if (isMacAlreadyRegistered) {
+				PacketSendUtility.sendMessage(player, "It is not allowed to apply with two accounts!");
+				return;
+			}
+
 			lfp = new LookingForParty(player, ert, maskId);
 			lfps.add(lfp);
 
@@ -53,6 +76,10 @@ public class AutoGroupService {
 				PacketSendUtility.broadcastToWorld(
 					new SM_MESSAGE(0, null, player.getRace().getL10n() + " have registered for " + agt.getL10n() + ".", ChatType.BRIGHT_YELLOW_CENTER),
 					p -> p.getRace() != player.getRace() && agt.isInLvlRange(p.getLevel()));
+			}else if( AutoGroupConfig.ANNOUNCE_BATTLEGROUND_REGISTRATIONS && (agt.isHarmonyArena() || agt.isPvPSoloArena()) ){
+				PacketSendUtility.broadcastToWorld(
+					new SM_MESSAGE(0, null, "Players have registered for " + agt.getL10n() + ".", ChatType.BRIGHT_YELLOW_CENTER),
+					p -> agt.isInLvlRange(p.getLevel()));
 			}
 
 			if (!checkInstancesForOpenQuickEntries(lfp, maskId))
@@ -64,86 +91,235 @@ public class AutoGroupService {
 		List<LookingForParty> queuedParties = lookingParties.get(maskId);
 		if (queuedParties == null || queuedParties.isEmpty())
 			return;
+
 		AutoGroupType agt = AutoGroupType.getAGTByMaskId(maskId);
 		if (agt == null)
 			return;
+
 		synchronized (queuedParties) {
 			queuedParties.sort(null);
 
 			for (int i = 0; i < queuedParties.size(); i++) {
 				AutoInstance autoInstance = agt.createAutoInstance();
-				LookingForParty lfp = queuedParties.get(i);
-				AGQuestion question = autoInstance.addLookingForParty(lfp);
+				Map<Race, Integer> raceCount = new HashMap<>();
+				raceCount.put(Race.ELYOS, 0);
+				raceCount.put(Race.ASMODIANS, 0);
+
+				LookingForParty firstParty = queuedParties.get(i);
+				AGQuestion question = autoInstance.addLookingForParty(firstParty);
 				if (question == AGQuestion.FAILED)
 					continue;
+
 				List<LookingForParty> filteredParties = new ArrayList<>();
-				filteredParties.add(lfp);
+				filteredParties.add(firstParty);
+				raceCount.put(firstParty.getRace(), raceCount.get(firstParty.getRace()) + firstParty.getMemberObjectIds().size());
+
+				boolean allowSameRace = agt.isHarmonyArena() || agt.isPvPSoloArena() || agt.isGloryArena() || agt.isPvPFFAArena() || agt.isTrainingPvPFFAArena() || agt.isTrainingPvPSoloArena() || agt.isTrainingHarmonyArena();
+
 				if (question != AGQuestion.READY) {
 					for (int j = i + 1; j < queuedParties.size(); j++) {
-						lfp = queuedParties.get(j);
-						question = autoInstance.addLookingForParty(lfp);
+						LookingForParty secondParty = queuedParties.get(j);
+
+						Race secondRace = secondParty.getRace();
+						int secondGroupSize = secondParty.getMemberObjectIds().size();
+
+						if(!allowSameRace) {
+							if (raceCount.get(secondRace) + secondGroupSize > autoInstance.getMaxPlayers() / 2) {
+								continue;
+							}
+						}else{
+							if (raceCount.get(secondRace) + secondGroupSize > autoInstance.getMaxPlayers()) {
+								continue;
+							}
+						}
+
+						if (!allowSameRace && firstParty.getRace() == secondRace) {
+							continue;
+						}
+
+						question = autoInstance.addLookingForParty(secondParty);
 						if (question != AGQuestion.FAILED) {
-							filteredParties.add(lfp);
-							if (question == AGQuestion.READY)
+							filteredParties.add(secondParty);
+							raceCount.put(secondRace, raceCount.get(secondRace) + secondGroupSize);
+
+							if (question == AGQuestion.READY) {
 								break;
+							}
 						}
 					}
 				}
+
 				if (question == AGQuestion.READY) {
-					createNewInstance(autoInstance, agt, filteredParties, maskId);
-					break;
+					int totalPlayers = filteredParties.stream()
+						.mapToInt(p -> p.getMemberObjectIds().size())
+						.sum();
+
+					if (totalPlayers == autoInstance.getMaxPlayers()) {
+						createNewInstance(autoInstance, agt, filteredParties, maskId);
+						break;
+					}
 				}
 			}
 		}
 	}
 
 	private void createNewInstance(AutoInstance autoInstance, AutoGroupType agt, List<LookingForParty> filteredParties, int maskId) {
-		WorldMapInstance instance = InstanceService.getNextAvailableInstance(agt.getTemplate().getInstanceMapId(), 0, agt.getDifficultId(), null,
-			autoInstance.getMaxPlayers(), false);
+		WorldMapInstance instance = InstanceService.getNextAvailableInstance(
+			agt.getTemplate().getInstanceMapId(),
+			0,
+			agt.getDifficultId(),
+			null,
+			autoInstance.getMaxPlayers(),
+			false
+		);
 		autoInstance.onInstanceCreate(instance);
 		autoInstances.put(instance, autoInstance);
+
+		Map<Race, Integer> raceCount = new HashMap<>();
+		raceCount.put(Race.ELYOS, 0);
+		raceCount.put(Race.ASMODIANS, 0);
+
 		for (LookingForParty lfp : filteredParties) {
-			removeSearchEntry(lfp);
-			lfp.setStartEnterTime();
-			lfp.getMemberObjectIds().forEach(id -> {
-				searchAndRemoveAdditionalRegistrations(id);
-				AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 4);
-			});
+			Race groupRace = lfp.getRace();
+			raceCount.put(groupRace, raceCount.get(groupRace) + lfp.getMemberObjectIds().size());
+		}
+
+		boolean allowSameRace = agt.isHarmonyArena() || agt.isPvPSoloArena() || agt.isGloryArena() || agt.isPvPFFAArena() || agt.isTrainingPvPFFAArena() || agt.isTrainingPvPSoloArena() || agt.isTrainingHarmonyArena();
+		int totalPlayers = raceCount.values().stream().mapToInt(Integer::intValue).sum();
+
+		if ((allowSameRace || raceCount.size() > 1) && totalPlayers == autoInstance.getMaxPlayers()) {
+			for (LookingForParty lfp : filteredParties) {
+				acceptGroupEntry(lfp, maskId, raceCount);
+			}
+		} else {
+			autoInstances.remove(instance);
 		}
 	}
 
 	private boolean checkInstancesForOpenQuickEntries(LookingForParty lfp, int maskId) {
-		if (lfp.getEntryRequestType() != EntryRequestType.QUICK_GROUP_ENTRY || lfp.isOnStartEnterTask())
+		if (lfp.getEntryRequestType() != EntryRequestType.QUICK_GROUP_ENTRY || lfp.isOnStartEnterTask()) {
 			return false;
+		}
+
 		for (AutoInstance autoInstance : autoInstances.values()) {
-			if (autoInstance.getAutoGroupType().getTemplate().getMaskId() == maskId && autoInstance.addLookingForParty(lfp) == AGQuestion.ADDED) {
-				removeSearchEntry(lfp);
-				lfp.setStartEnterTime();
-				AutoGroupUtility.sendWindowToPlayerIfOnline(lfp.getLeaderObjId(), maskId, 4);
-				searchAndRemoveAdditionalRegistrations(lfp.getLeaderObjId());
+			if (autoInstance.getAutoGroupType().getTemplate().getMaskId() != maskId) {
+				continue;
+			}
+
+			Map<Race, Integer> raceCount = new HashMap<>();
+			raceCount.put(Race.ELYOS, 0);
+			raceCount.put(Race.ASMODIANS, 0);
+
+			if (autoInstance.getInstance() != null) {
+				for (Player player : autoInstance.getInstance().getPlayersInside()) {
+					Race playerRace = player.getRace();
+					raceCount.put(playerRace, raceCount.get(playerRace) + 1);
+				}
+			}
+
+			AutoGroupType agt = autoInstance.getAutoGroupType();
+			boolean allowSameRace = agt.isHarmonyArena() || agt.isPvPSoloArena() || agt.isGloryArena() || agt.isPvPFFAArena() || agt.isTrainingPvPFFAArena() || agt.isTrainingPvPSoloArena() || agt.isTrainingHarmonyArena();
+			Race lfpRace = lfp.getRace();
+			int lfpGroupSize = lfp.getMemberObjectIds().size();
+
+			if(!allowSameRace) {
+				if (raceCount.get(lfpRace) + lfpGroupSize > autoInstance.getMaxPlayers() / 2) {
+					continue;
+				}
+			}else{
+				if (raceCount.get(lfpRace) + lfpGroupSize > autoInstance.getMaxPlayers()) {
+					continue;
+				}
+			}
+
+			if (!allowSameRace && raceCount.values().stream().allMatch(count -> count == 0)) {
+
+				continue;
+			}
+
+			AGQuestion question = autoInstance.addLookingForParty(lfp);
+			if (question == AGQuestion.READY) {
+
+				acceptGroupEntry(lfp, maskId, raceCount);
 				return true;
+			} else if (question != AGQuestion.FAILED) {
+				raceCount.put(lfpRace, raceCount.get(lfpRace) + lfpGroupSize);
 			}
 		}
 		return false;
 	}
 
 	private void checkQueueForQuickEntries(AutoInstance autoInstance) {
+		Map<Race, Integer> raceCount = new HashMap<>();
+		raceCount.put(Race.ELYOS, 0);
+		raceCount.put(Race.ASMODIANS, 0);
+
+		for (Player player : autoInstance.getInstance().getPlayersInside()) {
+			Race playerRace = player.getRace();
+			raceCount.put(playerRace, raceCount.get(playerRace) + 1);
+		}
+
 		int maskId = autoInstance.getAutoGroupType().getTemplate().getMaskId();
 		List<LookingForParty> parties = lookingParties.get(maskId);
-		if (parties == null || parties.isEmpty())
+		if (parties == null || parties.isEmpty()) {
 			return;
+		}
+
+		AutoGroupType agt = autoInstance.getAutoGroupType();
+		boolean allowSameRace = agt.isHarmonyArena() || agt.isPvPSoloArena() || agt.isGloryArena() || agt.isPvPFFAArena() || agt.isTrainingPvPFFAArena() || agt.isTrainingPvPSoloArena() || agt.isTrainingHarmonyArena();
+
 		synchronized (parties) {
+			List<LookingForParty> filteredParties = new ArrayList<>();
+
 			for (LookingForParty lfp : parties) {
-				if (lfp.getEntryRequestType() == EntryRequestType.QUICK_GROUP_ENTRY && !lfp.isOnStartEnterTask()
-					&& autoInstance.addLookingForParty(lfp) == AGQuestion.ADDED) {
-					removeSearchEntry(lfp);
-					lfp.setStartEnterTime();
-					AutoGroupUtility.sendWindowToPlayerIfOnline(lfp.getLeaderObjId(), maskId, 4);
-					searchAndRemoveAdditionalRegistrations(lfp.getLeaderObjId());
+				Race race = lfp.getRace();
+				int groupSize = lfp.getMemberObjectIds().size();
+
+				if(!allowSameRace) {
+					if (raceCount.get(race) + groupSize > autoInstance.getMaxPlayers() / 2) {
+						continue;
+					}
+				}else{
+					if (raceCount.get(race) + groupSize > autoInstance.getMaxPlayers()) {
+						continue;
+					}
+				}
+
+				if (!allowSameRace && filteredParties.stream().anyMatch(p -> p.getRace() == race)) {
+					continue;
+				}
+
+				filteredParties.add(lfp);
+				raceCount.put(race, raceCount.get(race) + groupSize);
+
+				int totalPlayers = filteredParties.stream()
+					.mapToInt(p -> p.getMemberObjectIds().size())
+					.sum();
+
+				if (totalPlayers == autoInstance.getMaxPlayers()) {
+					createNewInstance(autoInstance, autoInstance.getAutoGroupType(), filteredParties, maskId);
 					return;
 				}
 			}
 		}
+	}
+
+	private void acceptGroupEntry(LookingForParty lfp, int maskId, Map<Race, Integer> sentPlayers) {
+		List<Integer> memberIds = lfp.getMemberObjectIds();
+		Race groupRace = null;
+		removeSearchEntry(lfp);
+		lfp.setStartEnterTime();
+		for (int id : memberIds) {
+			Player player = World.getInstance().getPlayer(id);
+			if (player == null) {
+				continue;
+			}
+			groupRace = player.getRace();
+			searchAndRemoveAdditionalRegistrations(id);
+			AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 4);
+		}
+
+		sentPlayers.put(groupRace, sentPlayers.get(groupRace) + memberIds.size());
 	}
 
 	private void searchAndRemoveAdditionalRegistrations(int objectId) {
