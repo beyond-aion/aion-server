@@ -44,8 +44,9 @@ public class _1643TheStarOfHeiron extends AbstractQuestHandler {
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 4762);
+					case ASK_QUEST_ACCEPT:
+						return sendQuestDialog(env, 4);
 					case QUEST_ACCEPT_1:
-					case QUEST_ACCEPT_SIMPLE:
 						return sendQuestStartDialog(env, 182201764, 1);
 				}
 			}
