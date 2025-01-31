@@ -4,12 +4,10 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author VladimirZ
@@ -67,15 +65,9 @@ public class _2663AcquiringanAntidote extends AbstractQuestHandler {
 						return sendQuestDialog(env, 1352);
 					return false;
 				case SETPRO1:
-					if (var == 0) {
+					if (var == 0)
 						giveQuestItem(env, 182204489, 1);
-						qs.setQuestVarById(0, var + 1);
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-					}
-					return false;
+					return defaultCloseDialog(env, var, var+1, true,false);
 			}
 		}
 		return false;
