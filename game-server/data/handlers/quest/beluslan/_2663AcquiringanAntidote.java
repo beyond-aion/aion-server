@@ -67,7 +67,7 @@ public class _2663AcquiringanAntidote extends AbstractQuestHandler {
 				case SETPRO1:
 					if (var == 0)
 						giveQuestItem(env, 182204489, 1);
-					return defaultCloseDialog(env, var, var+1, true,false);
+					return defaultCloseDialog(env, 0, 1, true, false);
 			}
 		}
 		return false;
