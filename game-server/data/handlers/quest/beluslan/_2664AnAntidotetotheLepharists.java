@@ -39,7 +39,7 @@ public class _2664AnAntidotetotheLepharists extends AbstractQuestHandler {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 4762);
 				else
-					return sendQuestStartDialog(env);
+					return sendQuestStartDialog(env, workItems.getFirst());
 			}
 		}
 		if (qs == null)
