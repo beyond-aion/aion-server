@@ -102,6 +102,7 @@
 	<portal_loc world_id="210070000" loc_id="21007052" x="1216.25" y="1604.65" z="472" h="115"/>
 	<portal_loc world_id="210070000" loc_id="21007041" x="1356" y="622" z="584" h="95"/>
 	<portal_loc world_id="210070000" loc_id="21007042" x="1353.58" y="641.89" z="587" h="35"/>
+	<portal_loc world_id="210070000" loc_id="6000350" x="100.22615" y="1466.7427" z="491.8714" h="101"/> <!-- Tiamat Stronghold Exit -->
 	<!-- Idian Depths Light -->
 	<portal_loc world_id="210090000" loc_id="2100900" x="670.5392" y="643.403" z="514.8737" h="0"/> <!-- Starting Point -->
 	<portal_loc world_id="210090000" loc_id="2100901" x="305.2538" y="702.342" z="562.3906" h="90"/> <!-- Clawed Fist Garrison -->
@@ -176,6 +177,7 @@
 	<portal_loc world_id="220080000" loc_id="22008022" x="1456.2" y="1760.4" z="335" h="50"/>
 	<portal_loc world_id="220080000" loc_id="22008011" x="1770" y="2556" z="300" h="75"/>
 	<portal_loc world_id="220080000" loc_id="22008012" x="1785.3" y="2573.3" z="305" h="15"/>
+	<portal_loc world_id="220080000" loc_id="6000351" x="2836.962" y="1673.9382" z="301.06396" h="66"/> <!-- Tiamat Stronghold Exit -->
 	<!-- Idian Depths Dark -->
 	<portal_loc world_id="220100000" loc_id="2201000" x="688.5966" y="831.2409" z="514.8277" h="0"/> <!-- Starting Point -->
 	<portal_loc world_id="220100000" loc_id="2201001" x="305.2538" y="702.342" z="562.3906" h="90"/> <!-- Beritra's Fist Garrison -->
