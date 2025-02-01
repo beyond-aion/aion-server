@@ -500,6 +500,10 @@ public abstract class AbstractQuestHandler {
 		return defaultCloseDialog(env, step, nextStep, reward, sameNpc, 0, 0, 0, 0);
 	}
 
+	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, boolean reward, boolean sameNpc, QuestItems questItemToAdd) {
+		return defaultCloseDialog(env, step, nextStep, reward, sameNpc, questItemToAdd.getItemId(), questItemToAdd.getCount(), 0, 0);
+	}
+
 	public boolean defaultCloseDialog(QuestEnv env, int step, int nextStep, int giveItemId, long giveItemCount, int removeItemId,
 		long removeItemCount) {
 		return defaultCloseDialog(env, step, nextStep, false, false, giveItemId, giveItemCount, removeItemId, removeItemCount);
