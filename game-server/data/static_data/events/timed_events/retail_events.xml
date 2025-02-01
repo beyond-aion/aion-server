@@ -5246,7 +5246,7 @@
 		<quests>
 			<maintainable>80683 80684 80685 80686 80687 80688</maintainable>
 		</quests>
-		<inventory_drop item_id="188053673" startlevel="10" interval="20" /><!-- [Event] Coiled Gift -->
+		<inventory_drop item_id="188053673" startlevel="30" interval="20" /><!-- [Event] Coiled Gift -->
 		<spawns>
 			<!-- Sanctum -->
 			<spawn_map map_id="110010000">
@@ -5307,6 +5307,30 @@
 				<gd_items>
 					<gd_item id="188100257" /><!-- [Event] Blue Scale -->
 					<gd_item id="188100258" /><!-- [Event] Yellow Scale -->
+					<gd_item id="188100259" /><!-- [Event] Red Scale -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Blue scale" chance="5">
+				<gd_maps>
+					<gd_map map_id="301270000" /><!-- Linkgate Foundry -->
+				</gd_maps>
+				<gd_items>
+					<gd_item id="188100257" /><!-- [Event] Blue Scale -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Yellow scale" chance="5">
+				<gd_maps>
+					<gd_map map_id="300610000" /><!-- Raksang Ruins -->
+				</gd_maps>
+				<gd_items>
+					<gd_item id="188100258" /><!-- [Event] Yellow Scale -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Red scale" chance="5">
+				<gd_maps>
+					<gd_map map_id="300240000" /><!-- Aturam Sky Fortress -->
+				</gd_maps>
+				<gd_items>
 					<gd_item id="188100259" /><!-- [Event] Red Scale -->
 				</gd_items>
 			</gd_rule>

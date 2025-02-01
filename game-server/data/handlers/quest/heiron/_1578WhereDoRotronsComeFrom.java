@@ -4,12 +4,10 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author MrPoke, Nephis
@@ -47,25 +45,17 @@ public class _1578WhereDoRotronsComeFrom extends AbstractQuestHandler {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 0) {
 				if (env.getDialogActionId() == QUEST_SELECT)
 					return sendQuestDialog(env, 1352);
-				else if (env.getDialogActionId() == SETPRO1) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-					return true;
-				} else
-					return sendQuestStartDialog(env);
+				else if (env.getDialogActionId() == SETPRO1)
+					return defaultCloseDialog(env, 0, 1);
+				return sendQuestStartDialog(env);
 			}
 		} else if (targetId == 204560) {
 			if (qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 1) {
 				if (env.getDialogActionId() == QUEST_SELECT)
-					return sendQuestDialog(env, 1352);
-				else if (env.getDialogActionId() == SETPRO1) {
-					qs.setQuestVarById(0, qs.getQuestVarById(0) + 1);
-					updateQuestStatus(env);
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 1693));
-					return true;
-				} else
-					return sendQuestStartDialog(env);
+					return sendQuestDialog(env, 1693);
+				else if (env.getDialogActionId() == SETPRO2) 
+					return defaultCloseDialog(env, 1, 2);
+				return sendQuestStartDialog(env);
 			}
 		} else if (targetId == 204579) {
 			if (qs != null) {
