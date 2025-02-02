@@ -71,10 +71,7 @@ public class _3058StoneofMabolo extends AbstractQuestHandler {
 						return sendQuestDialog(env, 1352);
 					return false;
 				case SETPRO1:
-					if (var == 0) {
 						return defaultCloseDialog(env, 0, 1);
-					}
-					return false;
 			}
 		} else if (targetId == 203701) {
 			switch (env.getDialogActionId()) {
@@ -83,10 +80,7 @@ public class _3058StoneofMabolo extends AbstractQuestHandler {
 						return sendQuestDialog(env, 1693);
 					return false;
 				case SETPRO2:
-					if (var == 1) {
 						return defaultCloseDialog(env, 1, 2, true, false);
-					}
-					return false;
 			}
 		}
 		return false;
