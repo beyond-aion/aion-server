@@ -5,7 +5,6 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -87,9 +86,7 @@ public class _4200ASuspiciousCall extends AbstractQuestHandler {
 						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.STEEL_RAKE.getId(), player);
 						// teleport to cell in steel rake
 						TeleportService.teleportTo(player, newInstance, 403.55f, 508.11f, 885.77f);
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						return true;
+						return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 798332 && var == 1) { // Haorunerk
 				switch (env.getDialogActionId()) {
@@ -99,10 +96,7 @@ public class _4200ASuspiciousCall extends AbstractQuestHandler {
 						playQuestMovie(env, 431);
 						break;
 					case SETPRO2:
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
+						return defaultCloseDialog(env, 1, 2);
 				}
 			} else if (targetId == 700522 && var == 2) { // Haorunerks Bag, loc: 401.24 503.19 885.76 119
 				ThreadPoolManager.getInstance().schedule(new Runnable() {
@@ -118,10 +112,7 @@ public class _4200ASuspiciousCall extends AbstractQuestHandler {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2034);
 					case SET_SUCCEED:
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
+						return defaultCloseDialog(env, 3, 3, true, false);
 				}
 			}
 		}
