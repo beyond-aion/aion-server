@@ -84,7 +84,7 @@ public class _3058StoneofMabolo extends AbstractQuestHandler {
 					return false;
 				case SETPRO2:
 					if (var == 1) {
-						return defaultCloseDialog(env, 1, 2);
+						return defaultCloseDialog(env, 1, 2, true, false);
 					}
 					return false;
 			}
