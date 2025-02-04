@@ -13423,103 +13423,103 @@
 	<decomposable item_id="188051647" /><!-- Lukeshunerk's Emergency Supplies -->
 	<decomposable item_id="188051648"><!-- Lukeshunerk's Divination Chest -->
 		<items chance="2.71">
-			<item id="169620017"/>
+			<item id="169620017"/><!-- [Favorable Luck] Face of Unflinching Will -->
 		</items>
 		<items chance="2.71">
-			<item id="169620018"/>
+			<item id="169620018"/><!-- [Favorable Luck] Face of Indomitable Spirit -->
 		</items>
 		<items chance="2.71">
-			<item id="169620019"/>
+			<item id="169620019"/><!-- [Favorable Luck] Face of a Blessing in Disguise -->
 		</items>
 		<items chance="2.71">
-			<item id="169620020"/>
+			<item id="169620020"/><!-- [Favorable Luck] Face of Just Outcomes -->
 		</items>
 		<items chance="2.71">
-			<item id="169620021"/>
+			<item id="169620021"/><!-- [Favorable Luck] Face of a Relentless Momentum -->
 		</items>
 		<items chance="2.71">
-			<item id="169620022"/>
+			<item id="169620022"/><!-- [Favorable Luck] Face of Circumspection -->
 		</items>
 		<items chance="2.71">
-			<item id="169620023"/>
+			<item id="169620023"/><!-- [Favorable Luck] Face of Courteous Listening -->
 		</items>
 		<items chance="2.71">
-			<item id="169620024"/>
+			<item id="169620024"/><!-- [Favorable Luck] Face of Indefatigable Wanderlust -->
 		</items>
 		<items chance="2.71">
-			<item id="169620025"/>
+			<item id="169620025"/><!-- [Favorable Luck] Face of Breezy Sailing -->
 		</items>
 		<items chance="2.71">
-			<item id="169620026"/>
+			<item id="169620026"/><!-- [Favorable Luck] Face of Broad-mindedness -->
 		</items>
 		<items chance="2.71">
-			<item id="169620027"/>
+			<item id="169620027"/><!-- [Favorable Luck] Face of Ambiguity -->
 		</items>
 		<items chance="2.71">
-			<item id="169620028"/>
+			<item id="169620028"/><!-- [Favorable Luck] Face of Natural Flow -->
 		</items>
 		<items chance="2.71">
-			<item id="169620029"/>
+			<item id="169620029"/><!-- [Favorable Luck] Face of Complete Overhaul -->
 		</items>
 		<items chance="2.71">
-			<item id="169620030"/>
+			<item id="169620030"/><!-- [Favorable Luck] Face of Spring Burgeoning -->
 		</items>
 		<items chance="2.71">
-			<item id="169620031"/>
+			<item id="169620031"/><!-- [Favorable Luck] Face of Serendipity -->
 		</items>
 		<items chance="2.71">
-			<item id="169620032"/>
+			<item id="169620032"/><!-- [Favorable Luck] Face of Third Time Lucky -->
 		</items>
 		<items chance="2.71">
-			<item id="169620033"/>
+			<item id="169620033"/><!-- [Favorable Luck] Face of a Humble Sage -->
 		</items>
 		<items chance="2.71">
-			<item id="169620034"/>
+			<item id="169620034"/><!-- [Favorable Luck] Face of Gung-ho Spirit -->
 		</items>
 		<items chance="2.71">
-			<item id="169620035"/>
+			<item id="169620035"/><!-- [Favorable Luck] Face of Beautiful Flower Petals -->
 		</items>
 		<items chance="2.71">
-			<item id="169620036"/>
+			<item id="169620036"/><!-- [Favorable Luck] Face of Magnanimity -->
 		</items>
 		<items chance="2.71">
-			<item id="169620037"/>
+			<item id="169620037"/><!-- [Favorable Luck] Face of Inseparable Relationship -->
 		</items>
 		<items chance="2.71">
-			<item id="169620038"/>
+			<item id="169620038"/><!-- [Favorable Luck] Face of Seeking a Pie in the Sky -->
 		</items>
 		<items chance="2.71">
-			<item id="169620039"/>
+			<item id="169620039"/><!-- [Favorable Luck] Face of a Matchless Warrior -->
 		</items>
 		<items chance="2.71">
-			<item id="169620040"/>
+			<item id="169620040"/><!-- [Favorable Luck] Face of Confusing Directions -->
 		</items>
 		<items chance="4.99">
-			<item id="169620041"/>
+			<item id="169620041"/><!-- [Excellent Luck] Face of Easy Prosperity -->
 		</items>
 		<items chance="4.98">
-			<item id="169620042"/>
+			<item id="169620042"/><!-- [Excellent Luck] Face of Flowers Added to Embroidery -->
 		</items>
 		<items chance="4.98">
-			<item id="169620043"/>
+			<item id="169620043"/><!-- [Excellent Luck] Face of an Honorable Return -->
 		</items>
 		<items chance="4.98">
-			<item id="169620044"/>
+			<item id="169620044"/><!-- [Excellent Luck] Face of Serving Two Ends -->
 		</items>
 		<items chance="4.98">
-			<item id="169620045"/>
+			<item id="169620045"/><!-- [Excellent Luck] Face of Rapid Advance -->
 		</items>
 		<items chance="2.51">
-			<item id="169610076"/>
+			<item id="169610076"/><!-- [Title Card] Daeva in a Predicament– 1-day pass -->
 		</items>
 		<items chance="2.51">
-			<item id="169610077"/>
+			<item id="169610077"/><!-- [Title Card] Wracked Daeva – 1-day pass -->
 		</items>
 		<items chance="2.51">
-			<item id="169610078"/>
+			<item id="169610078"/><!-- [Title Card] Devil-may-care Daeva – 1-day pass -->
 		</items>
 		<items chance="2.51">
-			<item id="169610079"/>
+			<item id="169610079"/><!-- [Title Card] Cast-away Daeva – 1-day pass -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051649"><!-- [Event] White Tiger Jade Crate -->
