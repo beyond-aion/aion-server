@@ -10851,92 +10851,92 @@
 	<decomposable item_id="188051359" /><!-- Large bundle of Fossilized Golden Saam -->
 	<decomposable item_id="188051360"><!-- Red Cap Kobushka's Bundle -->
 		<items>
-			<item id="188051361" />
+			<item id="188051361" /><!-- Red Cap Kobushka's Zesty Cache -->
 		</items>
 		<items>
-			<item id="188051362" />
+			<item id="188051362" /><!-- Red Cap Kobushka's Mystery Cache -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051361"><!-- Red Cap Kobushka's Zesty Cache -->
 		<items chance="40.0">
-			<item id="188051363" />
+			<item id="188051363" /><!-- Red Cap Kobushka's Green Cache -->
 		</items>
 		<items chance="40.0">
-			<item id="188051364" />
+			<item id="188051364" /><!-- Red Cap Kobushka's Red Cache -->
 		</items>
 		<items chance="20.0">
-			<item id="188051365" />
+			<item id="188051365" /><!-- Red Cap Kobushka's Yellow Cache -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051362"><!-- Red Cap Kobushka's Mystery Cache -->
 		<items chance="62.0">
-			<item id="188051366" />
+			<item id="188051366" /><!-- Red Cap Kobushka's Copious Cache -->
 		</items>
 		<items chance="37.0">
-			<item id="188051367" />
+			<item id="188051367" /><!-- Red Cap Kobushka's Capacious Cache -->
 		</items>
 		<items chance="1.0">
-			<item id="188051368" />
+			<item id="188051368" /><!-- Red Cap Kobushka's Colossal Cache -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051363"><!-- Red Cap Kobushka's Green Cache -->
 		<items>
-			<item id="162000016" min_count="5"/>
+			<item id="162000016" min_count="5"/><!-- Major Life Serum -->
 		</items>
 		<items>
-			<item id="162000021" min_count="5"/>
+			<item id="162000021" min_count="5"/><!-- Major Mana Serum -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051364"><!-- Red Cap Kobushka's Red Cache -->
 		<items>
-			<item id="164000073" min_count="5"/>
+			<item id="164000073" min_count="5"/><!-- Greater Courage Scroll -->
 		</items>
 		<items>
-			<item id="164000076" min_count="5"/>
+			<item id="164000076" min_count="5"/><!-- Greater Running Scroll -->
 		</items>
 		<items>
-			<item id="164000134" min_count="5"/>
+			<item id="164000134" min_count="5"/><!-- Greater Awakening Scroll -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051365"><!-- Red Cap Kobushka's Yellow Cache -->
 		<items>
-			<item id="162000077" min_count="5"/>
+			<item id="162000077" min_count="5"/><!-- Fine Life Serum -->
 		</items>
 		<items>
-			<item id="162000078" min_count="5"/>
+			<item id="162000078" min_count="5"/><!-- Fine Mana Serum -->
 		</items>
 		<items>
-			<item id="164000073" min_count="5"/>
+			<item id="164000073" min_count="5"/><!-- Greater Courage Scroll -->
 		</items>
 		<items>
-			<item id="164000076" min_count="5"/>
+			<item id="164000076" min_count="5"/><!-- Greater Running Scroll -->
 		</items>
 		<items>
-			<item id="164000134" min_count="5"/>
+			<item id="164000134" min_count="5"/><!-- Greater Awakening Scroll -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051366"><!-- Red Cap Kobushka's Copious Cache -->
 		<items>
-			<item id="166000075" min_count="5"/>
+			<item id="166000075" min_count="5"/><!-- L75 Enchantment Stone -->
 		</items>
 		<items>
-			<item id="186000147" min_count="2"/>
+			<item id="186000147" min_count="2"/><!-- Mithril Medal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051367"><!-- Red Cap Kobushka's Capacious Cache -->
 		<items>
-			<item id="166020000" min_count="1"/>
+			<item id="166020000" min_count="1"/><!-- Omega Enchantment Stone -->
 		</items>
 		<items>
-			<item id="186000236" min_count="2"/>
+			<item id="186000236" min_count="2"/><!-- Blood Mark -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051368"><!-- Red Cap Kobushka's Colossal Cache -->
 		<items>
-			<item id="166020000" min_count="2"/>
+			<item id="166020000" min_count="2"/><!-- Omega Enchantment Stone -->
 		</items>
 		<items>
-			<item id="186000242" min_count="3"/>
+			<item id="186000242" min_count="3"/><!-- Ceramium Medal -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188051369" /><!-- Menotios' Cache of Arms -->
