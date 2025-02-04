@@ -68,11 +68,7 @@ public class _2600HumongousMalek extends AbstractQuestHandler {
 					}
 					return false;
 				case SETPRO1:
-					if (var == 0) {
-						giveQuestItem(env, 182204528, 1);
-						return defaultCloseDialog(env, 0, 1);
-					}
-					return false;
+					return defaultCloseDialog(env, 0, 1, 182204528, 1);
 			}
 		} else if (targetId == 700512) {
 			switch (env.getDialogActionId()) {
@@ -95,11 +91,7 @@ public class _2600HumongousMalek extends AbstractQuestHandler {
 						return sendQuestDialog(env, 2716);
 					}
 				case SELECT_QUEST_REWARD:
-					if (var == 1) {
-						removeQuestItem(env, 182204529, 1);
-						return defaultCloseDialog(env, 1, 1, true, true);
-					}
-					return false;
+					return removeQuestItem(env, 182204529, 1) && defaultCloseDialog(env, 1, 1, true, true);
 			}
 		}
 		return false;
