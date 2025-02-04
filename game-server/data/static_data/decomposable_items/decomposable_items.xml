@@ -36329,12 +36329,12 @@
 	</decomposable>
 	<decomposable item_id="188054014"><!-- [Event] Lunahare Kisk Box -->
 		<items>
-			<item id="184002099" race="ELYOS"/><!-- [Event] Alliance Lunahare Kisk Summoning Stone -->
 			<item id="184002098" race="ELYOS"/><!-- [Event] Group Lunahare Kisk Summoning Stone -->
+			<item id="184002100" race="ASMODIANS"/><!-- [Event] Group Lunahare Kisk Summoning Stone -->
 		</items>
 		<items>
+			<item id="184002099" race="ELYOS"/><!-- [Event] Alliance Lunahare Kisk Summoning Stone -->
 			<item id="184002101" race="ASMODIANS"/><!-- [Event] Alliance Lunahare Kisk Summoning Stone -->
-			<item id="184002100" race="ASMODIANS"/><!-- [Event] Group Lunahare Kisk Summoning Stone -->
 		</items>
 	</decomposable>	
 	<decomposable item_id="188054015" /><!-- Group Companion Kisk Box -->
