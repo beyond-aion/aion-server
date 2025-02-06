@@ -32460,17 +32460,17 @@
 	<decomposable item_id="188053669" /><!-- [Event] Ascension Supply Box -->
 	<decomposable item_id="188053670" /><!-- [Event] Weapon Box of the Distorted Balaur Lord -->
 	<decomposable item_id="188053671"><!-- [Event] Pallasite Material Box -->
-		<items chance="25">
-			<item id="169405338" /> <!-- Pallasite Ore -->
+		<items>
+			<item id="169405338" /><!-- Pallasite Ore -->
 		</items>
-		<items chance="25">
-			<item id="169405339" /> <!-- Pallasite Crystal -->
+		<items>
+			<item id="169405339" /><!-- Pallasite Crystal -->
 		</items>
-		<items chance="25">
-			<item id="169405340" /> <!-- Pallasite Powder -->
+		<items>
+			<item id="169405340" /><!-- Pallasite Powder -->
 		</items>
-		<items chance="25">
-			<item id="169405341" /> <!-- Pallasite Refined Water -->
+		<items>
+			<item id="169405341" /><!-- Pallasite Refined Water -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053672" selectable="true"><!-- [Event] Rainbow Gift -->
