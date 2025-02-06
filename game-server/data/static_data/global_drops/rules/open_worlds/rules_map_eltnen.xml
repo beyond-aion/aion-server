@@ -1571,6 +1571,7 @@
 			<gd_npc npc_id="211025" /><!-- sorcerer -->
 			<gd_npc npc_id="211029" /><!-- sorcerer -->
 			<gd_npc npc_id="211030" /><!-- lepharist footsoldier -->
+			<gd_npc npc_id="211031" /><!-- lepharist defense commander-->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="186000046" /><!-- Golden Lepharist Insignia -->
