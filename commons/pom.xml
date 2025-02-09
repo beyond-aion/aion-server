@@ -20,18 +20,6 @@
 		<plugins>
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-compiler-plugin</artifactId>
-				<version>3.13.0</version>
-				<configuration>
-					<compilerArgs>
-						<arg>-Xlint:all,-preview,-this-escape</arg>
-					</compilerArgs>
-					<showWarnings>true</showWarnings>
-					<debug>true</debug>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
 				<version>3.3.1</version>
 				<configuration>
@@ -44,58 +32,6 @@
 						</goals>
 					</execution>
 				</executions>
-			</plugin>
-			<plugin>
-				<groupId>io.github.git-commit-id</groupId>
-				<artifactId>git-commit-id-maven-plugin</artifactId>
-				<version>8.0.2</version>
-				<configuration>
-					<includeOnlyProperties>
-						<includeOnlyProperty>^git.branch$</includeOnlyProperty>
-						<includeOnlyProperty>^git.commit.id.abbrev$</includeOnlyProperty>
-						<includeOnlyProperty>^git.dirty$</includeOnlyProperty>
-					</includeOnlyProperties>
-					<replacementProperties>
-						<replacementProperty>
-							<property>git.dirty</property>
-							<token>true</token>
-							<value>-DIRTY</value>
-						</replacementProperty>
-						<replacementProperty>
-							<property>git.dirty</property>
-							<token>false</token>
-							<value />
-						</replacementProperty>
-					</replacementProperties>
-					<failOnNoGitDirectory>false</failOnNoGitDirectory>
-				</configuration>
-				<executions>
-					<execution>
-						<phase>initialize</phase>
-						<goals>
-							<goal>revision</goal>
-						</goals>
-					</execution>
-				</executions>
-			</plugin>
-			<plugin>
-				<artifactId>maven-jar-plugin</artifactId>
-				<version>3.4.1</version>
-				<configuration>
-					<archive>
-						<manifestEntries>
-							<POMVersion>${project.version}</POMVersion>
-							<Revision>${git.commit.id.abbrev}${git.dirty}</Revision>
-							<Branch>${git.branch}</Branch>
-							<Date>${maven.build.timestamp}</Date>
-						</manifestEntries>
-					</archive>
-				</configuration>
-			</plugin>
-			<plugin>
-				<groupId>org.apache.maven.plugins</groupId>
-				<artifactId>maven-surefire-plugin</artifactId>
-				<version>3.2.5</version>
 			</plugin>
 		</plugins>
 	</build>
