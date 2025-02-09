@@ -32,4 +32,4 @@ jobs:
       - name: Build with Maven
         env:
           FTP_URL: ${{ secrets.LIVE_SERVER_FTP_URL }}
-        run: mvn -B -Dmaven.source.skip=true -Dmaven.test.skip=${{ github.event.inputs.skip-tests }} -pl :commons,:${{ github.event.inputs.server }} package -Dftp.url=$FTP_URL
+        run: mvn -B -Dmaven.source.skip=true -Dmaven.test.skip=${{ github.event.inputs.skip-tests }} -pl :${{ github.event.inputs.server }} -am package -Dftp.url=$FTP_URL

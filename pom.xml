@@ -2,9 +2,10 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
+
 	<groupId>com.aionemu</groupId>
 	<artifactId>aion-server</artifactId>
-	<version>1.0-SNAPSHOT</version>
+	<version>4.8-SNAPSHOT</version>
 	<packaging>pom</packaging>
 
 	<modules>
@@ -13,4 +14,21 @@
 		<module>game-server</module>
 		<module>login-server</module>
 	</modules>
+
+	<properties>
+		<maven.compiler.release>21</maven.compiler.release>
+		<maven.test.skip>true</maven.test.skip>
+
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+	</properties>
+
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>com.aionemu</groupId>
+				<artifactId>commons</artifactId>
+				<version>${project.version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

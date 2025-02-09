@@ -2,15 +2,18 @@
 <project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.aionemu</groupId>
+
+	<parent>
+		<groupId>com.aionemu</groupId>
+		<artifactId>aion-server</artifactId>
+		<version>4.8-SNAPSHOT</version>
+		<relativePath>../pom.xml</relativePath>
+	</parent>
+
 	<artifactId>login-server</artifactId>
-	<version>4.8-SNAPSHOT</version>
 	<name>Aion Login Server</name>
 	<packaging>jar</packaging>
-	<properties>
-		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-		<maven.test.skip>true</maven.test.skip>
-	</properties>
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
@@ -20,7 +23,6 @@
 				<artifactId>maven-compiler-plugin</artifactId>
 				<version>3.13.0</version>
 				<configuration>
-					<release>21</release>
 					<compilerArgs>
 						<arg>-Xlint:all,-preview,-this-escape</arg>
 					</compilerArgs>
@@ -149,7 +151,6 @@
 		<dependency>
 			<groupId>com.aionemu</groupId>
 			<artifactId>commons</artifactId>
-			<version>2.0-SNAPSHOT</version>
 		</dependency>
 		<dependency>
 			<groupId>org.junit.jupiter</groupId>
