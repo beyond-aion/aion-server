@@ -27773,17 +27773,110 @@
 	<decomposable item_id="188053066" /><!-- Daru Cipher-Blade Box -->
 	<decomposable item_id="188053067" /><!-- Ailu Cipher-Blade Box -->
 	<decomposable item_id="188053068" /><!-- Elite Greater Composite Manastone Chest -->
-	<decomposable item_id="188053069" /><!-- Dazzling Daevanion Box -->
-	<decomposable item_id="188053070" /><!-- Dazzling Daevanion Chain Bundle -->
-	<decomposable item_id="188053071" /><!-- Dazzling Daevanion Chain Bundle -->
-	<decomposable item_id="188053072" /><!-- Dazzling Daevanion Plate Bundle -->
-	<decomposable item_id="188053073" /><!-- Dazzling Daevanion Plate Bundle -->
-	<decomposable item_id="188053074" /><!-- Dazzling Daevanion Leather Bundle -->
-	<decomposable item_id="188053075" /><!-- Dazzling Daevanion Leather Bundle -->
-	<decomposable item_id="188053076" /><!-- Dazzling Daevanion Magic Leather Bundle -->
-	<decomposable item_id="188053077" /><!-- Dazzling Daevanion Magic Leather Bundle -->
-	<decomposable item_id="188053078" /><!-- Dazzling Daevanion Cloth Bundle -->
-	<decomposable item_id="188053079" /><!-- Dazzling Daevanion Cloth Bundle -->
+	<decomposable item_id="188053069"><!-- Dazzling Daevanion Box -->
+		<items>
+			<item id="188053070" race="ELYOS" player_classes="CLERIC CHANTER RIDER" /><!-- Dazzling Daevanion Chain Bundle -->
+			<item id="188053071" race="ASMODIANS" player_classes="CLERIC CHANTER RIDER" /><!-- Dazzling Daevanion Chain Bundle -->
+			<item id="188053072" race="ELYOS" player_classes="TEMPLAR GLADIATOR" /><!-- Dazzling Daevanion Plate Bundle -->
+			<item id="188053073" race="ASMODIANS" player_classes="TEMPLAR GLADIATOR" /><!-- Dazzling Daevanion Plate Bundle -->
+			<item id="188053074" race="ELYOS" player_classes="ASSASSIN RANGER" /><!-- Dazzling Daevanion Leather Bundle -->
+			<item id="188053075" race="ASMODIANS" player_classes="ASSASSIN RANGER" /><!-- Dazzling Daevanion Leather Bundle -->
+			<item id="188053076" race="ELYOS" player_classes="GUNNER" /><!-- Dazzling Daevanion Magic Leather Bundle -->
+			<item id="188053077" race="ASMODIANS" player_classes="GUNNER" /><!-- Dazzling Daevanion Magic Leather Bundle -->
+			<item id="188053078" race="ELYOS" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Dazzling Daevanion Cloth Bundle -->
+			<item id="188053079" race="ASMODIANS" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Dazzling Daevanion Cloth Bundle -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053070"><!-- Dazzling Daevanion Chain Bundle -->
+		<items>
+			<item id="110551086" /><!-- Dazzling Daevanion Hauberk -->
+			<item id="113501663" /><!-- Dazzling Daevanion Chausses -->
+			<item id="114501673" /><!-- Dazzling Daevanion Brogans -->
+			<item id="112501584" /><!-- Dazzling Daevanion Spaulders -->
+			<item id="111501645" /><!-- Dazzling Daevanion Handguards -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053071"><!-- Dazzling Daevanion Chain Bundle -->
+		<items>
+			<item id="110551087" /><!-- Dazzling Daevanion Hauberk -->
+			<item id="113501664" /><!-- Dazzling Daevanion Chausses -->
+			<item id="114501674" /><!-- Dazzling Daevanion Brogans -->
+			<item id="112501585" /><!-- Dazzling Daevanion Spaulders -->
+			<item id="111501646" /><!-- Dazzling Daevanion Handguards -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053072"><!-- Dazzling Daevanion Plate Bundle -->
+		<items>
+			<item id="110601551" /><!-- Dazzling Daevanion Breastplate -->
+			<item id="113601497" /><!-- Dazzling Daevanion Greaves -->
+			<item id="114601504" /><!-- Dazzling Daevanion Sabatons -->
+			<item id="112601496" /><!-- Dazzling Daevanion Shoulderplates -->
+			<item id="111601514" /><!-- Dazzling Daevanion Gauntlets -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053073"><!-- Dazzling Daevanion Plate Bundle -->
+		<items>
+			<item id="110601552" /><!-- Dazzling Daevanion Breastplate -->
+			<item id="113601498" /><!-- Dazzling Daevanion Greaves -->
+			<item id="114601505" /><!-- Dazzling Daevanion Sabatons -->
+			<item id="112601497" /><!-- Dazzling Daevanion Shoulderplates -->
+			<item id="111601515" /><!-- Dazzling Daevanion Gauntlets -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053074"><!-- Dazzling Daevanion Leather Bundle -->
+		<items>
+			<item id="110301755" /><!-- Dazzling Daevanion Jerkin -->
+			<item id="113301724" /><!-- Dazzling Daevanion Breeches -->
+			<item id="114301761" /><!-- Dazzling Daevanion Boots -->
+			<item id="112301632" /><!-- Dazzling Daevanion Shoulderguards -->
+			<item id="111301693" /><!-- Dazzling Daevanion Vambrace -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053075"><!-- Dazzling Daevanion Leather Bundle -->
+		<items>
+			<item id="110301756" /><!-- Dazzling Daevanion Jerkin -->
+			<item id="113301725" /><!-- Dazzling Daevanion Breeches -->
+			<item id="114301762" /><!-- Dazzling Daevanion Boots -->
+			<item id="112301633" /><!-- Dazzling Daevanion Shoulderguards -->
+			<item id="111301694" /><!-- Dazzling Daevanion Vambrace -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053076"><!-- Dazzling Daevanion Magic Leather Bundle -->
+		<items>
+			<item id="110301753" /><!-- Dazzling Daevanion Mystic Jerkin -->
+			<item id="113301722" /><!-- Dazzling Daevanion Mystic Breeches -->
+			<item id="114301759" /><!-- Dazzling Daevanion Mystic Boots -->
+			<item id="112301630" /><!-- Dazzling Daevanion Mystic Shoulderguards -->
+			<item id="111301691" /><!-- Dazzling Daevanion Mystic Vambrace -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053077"><!-- Dazzling Daevanion Magic Leather Bundle -->
+		<items>
+			<item id="110301754" /><!-- Dazzling Daevanion Mystic Jerkin -->
+			<item id="113301723" /><!-- Dazzling Daevanion Mystic Breeches -->
+			<item id="114301760" /><!-- Dazzling Daevanion Mystic Boots -->
+			<item id="112301631" /><!-- Dazzling Daevanion Mystic Shoulderguards -->
+			<item id="111301692" /><!-- Dazzling Daevanion Mystic Vambrace -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053078"><!-- Dazzling Daevanion Cloth Bundle -->
+		<items>
+			<item id="110101756" /><!-- Dazzling Daevanion Tunic -->
+			<item id="113101593" /><!-- Dazzling Daevanion Leggings -->
+			<item id="114101627" /><!-- Dazzling Daevanion Shoes -->
+			<item id="112101531" /><!-- Dazzling Daevanion Pauldrons -->
+			<item id="111101581" /><!-- Dazzling Daevanion Gloves -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053079"><!-- Dazzling Daevanion Cloth Bundle -->
+		<items>
+			<item id="110101757" /><!-- Dazzling Daevanion Tunic -->
+			<item id="113101594" /><!-- Dazzling Daevanion Leggings -->
+			<item id="114101628" /><!-- Dazzling Daevanion Shoes -->
+			<item id="112101532" /><!-- Dazzling Daevanion Pauldrons -->
+			<item id="111101582" /><!-- Dazzling Daevanion Gloves -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053080" /><!-- Test Low Grade Manastone Bundle -->
 	<decomposable item_id="188053081" /><!-- Test Middle Grade Manastone Bundle -->
 	<decomposable item_id="188053082" /><!-- Test High Grade Manastone Bundle -->
