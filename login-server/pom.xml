@@ -14,6 +14,10 @@
 	<name>Aion Login Server</name>
 	<packaging>jar</packaging>
 
+	<properties>
+		<maven.install.skip>true</maven.install.skip>
+	</properties>
+
 	<build>
 		<sourceDirectory>src</sourceDirectory>
 		<testSourceDirectory>test</testSourceDirectory>
