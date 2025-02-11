@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _3973LovesMessenger extends AbstractQuestHandler {
 
-	private final static int questId = 3973;
-
 	public _3973LovesMessenger() {
-		super(questId);
+		super(3973);
 	}
 
 	public void register() {
