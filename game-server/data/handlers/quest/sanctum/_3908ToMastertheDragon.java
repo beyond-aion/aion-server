@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _3908ToMastertheDragon extends AbstractQuestHandler {
 
-	private final static int questId = 3908;
-
 	public _3908ToMastertheDragon() {
-		super(questId);
+		super(3908);
 	}
 
 	@Override
