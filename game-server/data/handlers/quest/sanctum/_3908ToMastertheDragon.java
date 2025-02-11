@@ -39,8 +39,7 @@ public class _3908ToMastertheDragon extends AbstractQuestHandler {
 			if (targetId == 700515) {
 				switch (dialogActionId) {
 					case USE_OBJECT: 
-						if (player.getInventory().getItemCountByItemId(182206056) >= 1) 
-							removeQuestItem(env, 182206056, 1);
+						if (removeQuestItem(env, 182206056, 1)) 
 							spawn(215384, player.getWorldMapInstance(), (float) 493.9681, (float) 519.1524, (float) 968.9094, (byte) 0);
 							return useQuestObject(env, 0, 0, false, false);
 				}
