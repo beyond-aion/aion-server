@@ -115,8 +115,6 @@ public class BrokerService {
 		if (searchItems == null)
 			return;
 
-		int totalSearchItemsCount = searchItems.length;
-
 		getPlayerCache(player).setBrokerSortTypeCache(sortType);
 		getPlayerCache(player).setBrokerStartPageCache(startPage);
 
@@ -133,6 +131,7 @@ public class BrokerService {
 			getPlayerCache(player).setSearchItemsList(null);
 
 		sortBrokerItems(searchItems, sortType);
+		int totalSearchItemsCount = searchItems.length;
 		searchItems = getRequestedPage(searchItems, startPage);
 
 		for (BrokerItem bi : searchItems) {
@@ -142,31 +141,6 @@ public class BrokerService {
 		}
 
 		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE(searchItems, totalSearchItemsCount, startPage));
-	}
-
-	public long getLowerPrice(Race race, int itemId) {
-		BrokerItem[] searchItems = null;
-
-		Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(race);
-		if (brokerItems == null)
-			return 0;
-
-		long lower = 0;
-
-		searchItems = brokerItems.values().toArray(new BrokerItem[brokerItems.values().size()]);
-
-		for (BrokerItem item : searchItems) {
-			if (itemId == item.getItemId()) {
-				if (lower == 0) {
-					lower = item.getPrice() / item.getItemCount();
-				} else {
-					if (lower > item.getPrice())
-						lower = item.getPrice() / item.getItemCount();
-				}
-			}
-		}
-
-		return lower;
 	}
 
 	public long getAveragePrice(Race race, int itemId) {
@@ -189,31 +163,6 @@ public class BrokerService {
 		}
 		average = sum / counter;
 		return average;
-	}
-
-	public long getHigherPrice(Race race, int itemId) {
-		BrokerItem[] searchItems = null;
-
-		Map<Integer, BrokerItem> brokerItems = getRaceBrokerItems(race);
-		if (brokerItems == null)
-			return 0;
-
-		long higher = 0;
-
-		searchItems = brokerItems.values().toArray(new BrokerItem[brokerItems.values().size()]);
-
-		for (BrokerItem item : searchItems) {
-			if (itemId == item.getItemId()) {
-				if (higher == 0) {
-					higher = item.getPrice() / item.getItemCount();
-				} else {
-					if (higher < item.getPrice())
-						higher = item.getPrice() / item.getItemCount();
-				}
-			}
-		}
-
-		return higher;
 	}
 
 	private BrokerItem[] getItemsByMask(Player player, int clientMask, boolean cached) {
@@ -498,14 +447,15 @@ public class BrokerService {
 
 	public void showSellWindow(Player player, int itemUniqueId) {
 		Item itemToRegister = player.getInventory().getItemByObjId(itemUniqueId);
-
 		if (itemToRegister == null)
 			return;
-
-		Race race = player.getRace();
-
-		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE((byte) 0, itemUniqueId, getLowerPrice(race, itemToRegister.getItemId()),
-			getHigherPrice(race, itemToRegister.getItemId())));
+		LongSummaryStatistics priceStats = getRaceBrokerItems(player.getRace()).values().stream()
+			.filter(item -> itemToRegister.getItemId() == item.getItemId())
+			.mapToLong(BrokerItem::getPrice)
+			.summaryStatistics();
+		long lowestPrice = priceStats.getMin() == Long.MAX_VALUE ? 0 : priceStats.getMin();
+		long highestPrice = priceStats.getMax() == Long.MIN_VALUE ? 0 : priceStats.getMax();
+		PacketSendUtility.sendPacket(player, new SM_BROKER_SERVICE((byte) 0, itemUniqueId, lowestPrice, highestPrice));
 	}
 
 	public void showRegisteredItems(Player player) {

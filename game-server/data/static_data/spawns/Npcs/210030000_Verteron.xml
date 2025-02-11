@@ -1164,7 +1164,7 @@
 		</spawn>
 		<!-- Geolus -->
 		<spawn npc_id="203149" respawn_time="295">
-			<spot x="1676.37" y="2270.09" z="166.773" h="35"/>
+			<spot x="1676.37" y="2270.09" z="166.773" h="35" state="6"/>
 		</spawn>
 		<!-- Georg -->
 		<spawn npc_id="799813" respawn_time="295">

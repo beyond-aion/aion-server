@@ -304,7 +304,7 @@
 		</spawn>
 		<!-- Benulroden -->
 		<spawn npc_id="830774" respawn_time="295">
-			<spot x="455.9706" y="1091.3303" z="77.5838" h="60"/>
+			<spot x="455.9706" y="1091.3303" z="77.5838" h="60" state="6"/>
 		</spawn>
 		<!-- Bernaus -->
 		<spawn npc_id="830595" respawn_time="295">
@@ -316,7 +316,7 @@
 		</spawn>
 		<!-- Berosinen -->
 		<spawn npc_id="830797" respawn_time="295">
-			<spot x="461.0381" y="1075.9672" z="77.2500" h="73"/>
+			<spot x="461.0381" y="1075.9672" z="77.2500" h="73" state="6"/>
 		</spawn>
 		<!-- Besrea -->
 		<spawn npc_id="830706" respawn_time="295">
@@ -2051,7 +2051,7 @@
 		</spawn>
 		<!-- Pedosien -->
 		<spawn npc_id="830798" respawn_time="295">
-			<spot x="458.0663" y="1079.8898" z="77.2500" h="73"/>
+			<spot x="458.0663" y="1079.8898" z="77.2500" h="73" state="6"/>
 		</spawn>
 		<!-- Pelkairon -->
 		<spawn npc_id="830772" respawn_time="295">
