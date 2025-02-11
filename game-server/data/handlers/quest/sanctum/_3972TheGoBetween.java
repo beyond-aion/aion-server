@@ -10,10 +10,8 @@ import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
 public class _3972TheGoBetween extends AbstractQuestHandler {
 
-	private final static int questId = 3972;
-
 	public _3972TheGoBetween() {
-		super(questId);
+		super(3972);
 	}
 
 	public void register() {
