@@ -154,8 +154,8 @@
 			3969 [SCRIPT] Sexiest Man Alive
 			3970 [SCRIPT] Kinah-Digging Daughter
 			3971 [XML] What Did You Buy Me?
-			3972 [SCRIPT] The Go-Between
-			3973 [SCRIPT] Love's Messenger
+			3972 [XML] The Go-Between
+			3973 [XML] Love's Messenger
 			3974 [XML] Love Suicide
 			3975 [XML] Koruchinerk's Offer
 			3976 [XML] Legionary Letters
@@ -369,6 +369,16 @@
 	<report_to_many id="3914" start_item_id="182206084">
 		<npc_infos npc_ids="203752"/>
 		<npc_infos npc_ids="203384"/>
+	</report_to_many>
+	<report_to_many id="3972" start_npc_ids="203893">
+		<npc_infos npc_ids="798949"/>
+		<npc_infos npc_ids="203893"/>
+	</report_to_many>
+	<report_to_many id="3973" start_npc_ids="203893">
+		<npc_infos npc_ids="203792"/>
+		<npc_infos npc_ids="203793"/>
+		<npc_infos npc_ids="798391"/>
+		<npc_infos npc_ids="798949"/>
 	</report_to_many>
 	<report_to_many id="18225" start_npc_ids="205471">
 		<npc_infos npc_ids="205309"/>

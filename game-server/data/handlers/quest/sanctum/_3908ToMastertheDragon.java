@@ -41,7 +41,7 @@ public class _3908ToMastertheDragon extends AbstractQuestHandler {
 					case USE_OBJECT: 
 						if (removeQuestItem(env, 182206056, 1)) 
 							spawn(215384, player.getWorldMapInstance(), (float) 493.9681, (float) 519.1524, (float) 968.9094, (byte) 0);
-							return useQuestObject(env, 0, 0, false, false);
+						return true;
 				}
 			} else if (targetId == 798316) {
 				switch (dialogActionId) {
@@ -55,7 +55,7 @@ public class _3908ToMastertheDragon extends AbstractQuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
-				return sendQuestEndDialog(env);
+			return sendQuestEndDialog(env);
 		}
 		return false;
 	}
