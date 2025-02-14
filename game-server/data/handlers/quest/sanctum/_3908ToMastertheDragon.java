@@ -8,6 +8,9 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
 
+/**
+ * @author sky123
+ */
 public class _3908ToMastertheDragon extends AbstractQuestHandler {
 
 	public _3908ToMastertheDragon() {
