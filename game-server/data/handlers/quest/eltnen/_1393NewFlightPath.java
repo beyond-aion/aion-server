@@ -51,15 +51,13 @@ public class _1393NewFlightPath extends AbstractQuestHandler {
 		}
 		if (qs == null)
 			return false;
-		
+
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204041) {
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 					case QUEST_ACCEPT_1:
 						return sendQuestDialog(env, 1003);
-					case SELECT1_1_1:
-						return sendQuestDialog(env, 1013);
 					case SETPRO1:
 						player.setState(CreatureState.FLYING);
 						player.unsetState(CreatureState.ACTIVE);
@@ -87,11 +85,8 @@ public class _1393NewFlightPath extends AbstractQuestHandler {
 		Player player = env.getPlayer();
 		QuestState qs = player.getQuestStateList().getQuestState(questId);
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			if (var < 1) {
-				changeQuestStep(env, 0, 0, true);
-				return true;
-			}
+			changeQuestStep(env, 0, 0, true);
+			return true;
 		}
 		return false;
 	}
