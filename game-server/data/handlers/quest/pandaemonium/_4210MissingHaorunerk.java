@@ -43,7 +43,7 @@ public class _4210MissingHaorunerk extends AbstractQuestHandler {
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 798332) {
-				if (dialogActionId == QUEST_SELECT) {
+				if (dialogActionId == USE_OBJECT) {
 					if (qs.getQuestVarById(0) == 0) {
 						return sendQuestDialog(env, 1011);
 					}
