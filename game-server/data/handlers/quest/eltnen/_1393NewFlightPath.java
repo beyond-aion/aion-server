@@ -51,30 +51,46 @@ public class _1393NewFlightPath extends AbstractQuestHandler {
 		}
 		if (qs == null)
 			return false;
-
+		
 		if (qs.getStatus() == QuestStatus.START) {
 			if (targetId == 204041) {
 				switch (env.getDialogActionId()) {
+					case QUEST_SELECT:
+					case QUEST_ACCEPT_1:
+						return sendQuestDialog(env, 1003);
+					case SELECT1_1_1:
+						return sendQuestDialog(env, 1013);
 					case SETPRO1:
 						player.setState(CreatureState.FLYING);
 						player.unsetState(CreatureState.ACTIVE);
 						player.setFlightTeleportId(17001);
 						PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FLYTELEPORT, 17001, 0));
-						return defaultCloseDialog(env, 0, 1, true, false);
-					default:
 						return closeDialogWindow(env);
 				}
 			}
 		}
-
 		if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204041) {
 				switch (env.getDialogActionId()) {
 					case USE_OBJECT:
-						return sendQuestDialog(env, 5);
+						return sendQuestDialog(env, 1352);
 					default:
 						return sendQuestEndDialog(env);
 				}
+			}
+		}
+		return false;
+	}
+
+	@Override
+	public boolean onEnterZoneEvent(QuestEnv env, ZoneName zoneName) {
+		Player player = env.getPlayer();
+		QuestState qs = player.getQuestStateList().getQuestState(questId);
+		if (qs != null && qs.getStatus() == QuestStatus.START) {
+			int var = qs.getQuestVarById(0);
+			if (var < 1) {
+				changeQuestStep(env, 0, 0, true);
+				return true;
 			}
 		}
 		return false;
