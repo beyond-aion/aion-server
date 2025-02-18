@@ -2,14 +2,13 @@ package quest.heiron;
 
 import static com.aionemu.gameserver.model.DialogAction.*;
 
-import com.aionemu.gameserver.model.gameobjects.Item;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
-import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
+import com.aionemu.gameserver.questEngine.model.QuestActionType;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.world.zone.ZoneName;
 
 /**
  * @author Balthazar, fixed Shaman, vlog
@@ -24,8 +23,8 @@ public class _1636AFluteForTheFixing extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(204535).addOnQuestStart(questId);
 		qe.registerQuestNpc(204535).addOnTalkEvent(questId);
+		qe.registerQuestNpc(700239).addOnTalkEvent(questId);
 		qe.registerQuestNpc(203792).addOnTalkEvent(questId);
-		qe.registerQuestItem(182201785, questId);
 	}
 
 	@Override
@@ -66,6 +65,12 @@ public class _1636AFluteForTheFixing extends AbstractQuestHandler {
 						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
 					}
+					break;
+				case 700239: // Drake Stone Statue
+					playQuestMovie(env, 210);
+					VisibleObject drakeStoneStatue = env.getVisibleObject();
+					spawnTemporarily(212008, player.getWorldMapInstance(), drakeStoneStatue.getX(), drakeStoneStatue.getY(), drakeStoneStatue.getZ(), (byte) 30, 60);
+					return useQuestObject(env, 3, 3, true, true);
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204535) { // Maximus
@@ -80,16 +85,8 @@ public class _1636AFluteForTheFixing extends AbstractQuestHandler {
 	}
 
 	@Override
-	public HandlerResult onItemUseEvent(final QuestEnv env, Item item) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (player.isInsideItemUseZone(ZoneName.get("LF3_ITEMUSEAREA_Q1636_210040000"))) {
-				playQuestMovie(env, 210);
-				spawnTemporarily(212008, player.getWorldMapInstance(), (float) 181.897, (float) 2704.131, (float) 147.319, (byte) 0, 60);
-				return HandlerResult.fromBoolean(useQuestItem(env, item, 3, 3, true));
-			}
-		}
-		return HandlerResult.FAILED;
+	public boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects) {
+		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(env.getQuestId());
+		return env.getTargetId() == 700239 && qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3;
 	}
 }
