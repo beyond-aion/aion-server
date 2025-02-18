@@ -74,18 +74,16 @@ public class _4200ASuspiciousCall extends AbstractQuestHandler {
 			}
 			return false;
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 204839)// Uikinerk
-			{
+			if (targetId == 204839 && var == 0) { // Uikinerk
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1003);
-					case SELECT1:
-						return sendQuestDialog(env, 1011);
 					case SETPRO1:
-						// Create instance
-						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.STEEL_RAKE.getId(), player);
-						// teleport to cell in steel rake
-						TeleportService.teleportTo(player, newInstance, 403.55f, 508.11f, 885.77f);
+						WorldMapInstance steelRake = InstanceService.getNextAvailableInstance(WorldMapType.STEEL_RAKE.getId(), player);
+						Npc haorunerksCorpse = steelRake.getNpc(798333);
+						spawn(798332, steelRake, haorunerksCorpse.getX(), haorunerksCorpse.getY(), haorunerksCorpse.getZ(), (byte) 30);
+						haorunerksCorpse.getController().delete();
+						TeleportService.teleportTo(player, steelRake, 403.55f, 508.11f, 885.77f);
 						return defaultCloseDialog(env, 0, 1);
 				}
 			} else if (targetId == 798332 && var == 1) { // Haorunerk
