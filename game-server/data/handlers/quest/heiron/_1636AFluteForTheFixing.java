@@ -69,7 +69,7 @@ public class _1636AFluteForTheFixing extends AbstractQuestHandler {
 				case 700239: // Drake Stone Statue
 					playQuestMovie(env, 210);
 					VisibleObject drakeStoneStatue = env.getVisibleObject();
-					spawnTemporarily(212008, player.getWorldMapInstance(), drakeStoneStatue.getX(), drakeStoneStatue.getY(), drakeStoneStatue.getZ(), (byte) 30, 60);
+					spawnTemporarily(290106, player.getWorldMapInstance(), drakeStoneStatue.getX(), drakeStoneStatue.getY(), drakeStoneStatue.getZ(), (byte) 30, 60);
 					return useQuestObject(env, 3, 3, true, true);
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
