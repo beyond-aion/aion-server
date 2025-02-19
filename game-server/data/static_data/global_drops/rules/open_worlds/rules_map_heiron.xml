@@ -370,7 +370,7 @@
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
+			<gd_npc npc_id="290106"/><!-- Akairun of Medeus -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="100000583"/><!-- Akairun's Sword -->
