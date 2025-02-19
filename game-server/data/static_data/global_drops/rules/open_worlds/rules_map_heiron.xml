@@ -1603,7 +1603,7 @@
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="152200194"/><!-- Design: Akairun's Spear -->
-      <gd_item id="152200508"/><!-- Design: Akairun's Helm -->
+			<gd_item id="152200508"/><!-- Design: Akairun's Spear -->
 		</gd_items>
 	</gd_rule>
 	<gd_rule rule_name="Named Material" chance="50">
