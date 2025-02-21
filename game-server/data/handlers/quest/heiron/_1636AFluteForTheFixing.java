@@ -61,16 +61,20 @@ public class _1636AFluteForTheFixing extends AbstractQuestHandler {
 						case CHECK_USER_HAS_QUEST_ITEM:
 							return checkQuestItems(env, 1, 2, false, 10000, 10001); // 2
 						case SETPRO4:
-							return defaultCloseDialog(env, 2, 3, 182201785, 1, 0, 0); // 3
+							return defaultCloseDialog(env, 2, 3, 182201785, 1, 182201789, 1); // 3
 						case FINISH_DIALOG:
 							return sendQuestSelectionDialog(env);
 					}
 					break;
 				case 700239: // Drake Stone Statue
-					playQuestMovie(env, 210);
-					VisibleObject drakeStoneStatue = env.getVisibleObject();
-					spawnTemporarily(290106, player.getWorldMapInstance(), drakeStoneStatue.getX(), drakeStoneStatue.getY(), drakeStoneStatue.getZ(), (byte) 30, 60);
-					return useQuestObject(env, 3, 3, true, true);
+					if (removeQuestItem(env, 182201785, 1)) {
+						playQuestMovie(env, 210);
+						VisibleObject drakeStoneStatue = env.getVisibleObject();
+						spawnTemporarily(212008, player.getWorldMapInstance(), drakeStoneStatue.getX(), drakeStoneStatue.getY(), drakeStoneStatue.getZ(),
+							(byte) 30, 60);
+						return useQuestObject(env, 3, 3, true, true);
+					}
+					return false;
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204535) { // Maximus

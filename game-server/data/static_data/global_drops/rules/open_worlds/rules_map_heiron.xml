@@ -370,7 +370,7 @@
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="290106"/><!-- Akairun of Medeus -->
+			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="100000583"/><!-- Akairun's Sword -->
@@ -414,7 +414,7 @@
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="290106"/><!-- Akairun of Medeus -->
+			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="100900441"/><!-- Fatal Sword -->
@@ -1198,7 +1198,7 @@
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="290106"/><!-- Akairun of Medeus -->
+			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="120000745"/><!-- Akairun's Sapphire Earrings -->
@@ -1412,7 +1412,7 @@
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="290106"/><!-- Akairun of Medeus -->
+			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="125001575"/><!-- Akairun's Headband -->
@@ -1588,7 +1588,7 @@
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="290106"/><!-- Akairun of Medeus -->
+			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="152012033"/><!-- Akairun's Horn -->
@@ -1599,7 +1599,7 @@
 			<gd_map map_id="210040000"/><!-- Heiron -->
 		</gd_maps>
 		<gd_npcs>
-			<gd_npc npc_id="290106"/><!-- Akairun of Medeus -->
+			<gd_npc npc_id="212008"/><!-- Akairun of Medeus -->
 		</gd_npcs>
 		<gd_items>
 			<gd_item id="152200194"/><!-- Design: Akairun's Spear -->
