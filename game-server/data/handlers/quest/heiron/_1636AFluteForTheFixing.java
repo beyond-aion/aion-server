@@ -67,7 +67,7 @@ public class _1636AFluteForTheFixing extends AbstractQuestHandler {
 					}
 					break;
 				case 700239: // Drake Stone Statue
-					if (removeQuestItem(env, 182201785, 1)) {
+					if (player.getInventory().getItemCountByItemId(182201785) >= 1) {
 						playQuestMovie(env, 210);
 						VisibleObject drakeStoneStatue = env.getVisibleObject();
 						spawnTemporarily(212008, player.getWorldMapInstance(), drakeStoneStatue.getX(), drakeStoneStatue.getY(), drakeStoneStatue.getZ(),
