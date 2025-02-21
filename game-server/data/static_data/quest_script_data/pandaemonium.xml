@@ -99,12 +99,12 @@
 			4904 [XML] Lyfjaberga's Recommendation
 			4905 [SCRIPT] Interviewing the Veterans
 			4906 [SCRIPT] Tales of Heroes
-			4907 [XML] Lepharists in Elysea
+			4907 [SCRIPT] Lepharists in Elysea
 			4908 [4.0] Shugo Express Mail
 			4909 [XML] 3 Fragments of Agrif's Rage
 			4910 [XML] 2 Fragments of Agrif's Rage
 			4911 [XML] Hilt of Agrif's Rage
-			4912 [XML] The Curse of Agrif's Rage
+			4912 [SCRIPT] The Curse of Agrif's Rage
 			4913 [XML] A Future Threat
 			4914 [XML] Lifeform Remodeling Report
 			4915 [XML] Obtaining the Dragel
@@ -299,7 +299,7 @@
 			80551 [XML] [Event/Daily] Bundle the Joy
 		[END] SUMMARY
 	-->
-	
+
 	<!-- REPORTING QUESTS -->
 	<report_to id="2939" start_npc_ids="204104" end_npc_ids="278010"/>
 	<report_to id="2940" start_npc_ids="204106" end_npc_ids="278011"/>
@@ -354,7 +354,7 @@
 	    <npc_infos npc_ids="205321"/>
 		<npc_infos npc_ids="205323"/>
 	</report_to_many>
-	
+
 	<!-- SKILL USE -->
 	<skill_use id="4922" start_npc_ids="204056">
 		<skill end_var="10" ids="599"/><!-- Gladiator: Daevic Fury -->
@@ -398,7 +398,7 @@
 	<skill_use id="29075" start_npc_ids="801223">
 		<skill end_var="10" ids="4469"/><!-- Bard: Symphony of Destruction -->
 	</skill_use>
-	
+
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="2905" start_npc_ids="204104"/>
 	<item_collecting id="2906" start_npc_ids="204106"/>
@@ -422,11 +422,9 @@
 	<item_collecting id="4214" start_npc_ids="204284"/>
 	<item_collecting id="4215" start_npc_ids="204072"/>
 	<item_collecting id="4216" start_npc_ids="204282"/>
-	<item_collecting id="4907" start_npc_ids="204208"/>
 	<item_collecting id="4909" start_npc_ids="798317"/>
 	<item_collecting id="4910" start_npc_ids="798317"/>
 	<item_collecting id="4911" start_npc_ids="798317"/>
-	<item_collecting id="4912" start_npc_ids="798317"/>
 	<item_collecting id="4915" start_npc_ids="203385"/>
 	<item_collecting id="4916" start_npc_ids="203385"/>
 	<item_collecting id="4918" start_npc_ids="798358"/>
@@ -502,7 +500,7 @@
 	<item_collecting id="80168" start_npc_ids="800276"/>
 	<item_collecting id="80169" start_npc_ids="800277"/>
 	<item_collecting id="80171" start_npc_ids="800274"/>
-	
+
 	<!-- CRAFTING REWARDS -->
 	<crafting_rewards id="4947" start_npc_id="204104" end_npc_id="204052" skill_id="40002" level_reward="400"/>
 	<crafting_rewards id="4950" start_npc_id="204106" end_npc_id="204052" skill_id="40003" level_reward="400"/>
@@ -525,7 +523,7 @@
 	<crafting_rewards id="29033" start_npc_id="204102" end_npc_id="798800" movie="144" skill_id="40007" level_reward="500"/>
 	<crafting_rewards id="29021" start_npc_id="204110" end_npc_id="798800" movie="145" skill_id="40004" level_reward="500"/>
 	<crafting_rewards id="29058" start_npc_id="798452" end_npc_id="798800" movie="147" skill_id="40010" level_reward="500"/>
-	
+
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="4213" start_npc_ids="204202"/>
 	<monster_hunt id="4977" start_npc_ids="203385"/>
@@ -533,7 +531,7 @@
 	<monster_hunt id="4979" start_npc_ids="204283"/>
 	<monster_hunt id="80013" start_npc_ids="799788"/>
 	<monster_hunt id="80014" start_npc_ids="799788"/>
-	
+
 	<!-- ITEM ORDERS QUESTS -->
 	<item_order id="2966" end_npc_id="278055"/>
 	<item_order id="2967" end_npc_id="278055"/>
