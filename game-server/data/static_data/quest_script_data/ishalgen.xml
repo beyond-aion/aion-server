@@ -53,7 +53,7 @@
 			80160 [XML] [Event] Just One New Thing
 		[END] SUMMARY
 	-->
-	
+
 	<!-- REPORTING QUESTS -->
 	<report_to id="2101" start_npc_ids="203500" end_npc_ids="203504"/>
 	<report_to id="2103" start_npc_ids="203504" end_npc_ids="203501"/>
@@ -62,7 +62,11 @@
 	<report_to id="2121" start_npc_ids="203540" end_npc_ids="203547"/>
 	<report_to id="2131" start_npc_ids="203515" end_npc_ids="203542"/>
 	<report_to id="2137" start_npc_ids="203539" end_npc_ids="203541"/>
-	
+	<report_to_many id="2107" start_item_id="182203107">
+		<npc_infos npc_ids="203516"/>
+		<npc_infos npc_ids="203512"/>
+	</report_to_many>
+
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="2104" start_npc_ids="203502"/>
 	<item_collecting id="2105" start_npc_ids="203502"/>
@@ -81,10 +85,7 @@
 	<item_collecting id="2133" start_npc_ids="203519"/>
 	<item_collecting id="2134" start_npc_ids="203543"/>
 	<item_collecting id="80160" start_npc_ids="830534"/>
-	
-	<!-- ITEM ORDERS QUESTS -->
-	<item_order id="2107" talk_npc_id1="203516" end_npc_id="203512"/>
-	
+
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="2102" start_npc_ids="203504"/>
 	<monster_hunt id="2117" start_npc_ids="203540"/>
