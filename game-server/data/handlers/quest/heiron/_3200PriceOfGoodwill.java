@@ -5,7 +5,6 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.handlers.HandlerResult;
@@ -89,7 +88,6 @@ public class _3200PriceOfGoodwill extends AbstractQuestHandler {
 						TeleportService.teleportTo(player, steelRake, 403.55f, 508.11f, 885.77f);
 						return defaultCloseDialog(env, 0, 1);
 				}
-
 			} else if (targetId == 798332 && var == 1) { // Haorunerk
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
@@ -114,10 +112,7 @@ public class _3200PriceOfGoodwill extends AbstractQuestHandler {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 2034);
 					case SET_SUCCEED:
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						qs.setStatus(QuestStatus.REWARD);
-						updateQuestStatus(env);
-						return true;
+						return defaultCloseDialog(env, 3, 3, true, false);
 
 				}
 			}
