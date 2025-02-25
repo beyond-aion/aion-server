@@ -9,6 +9,7 @@ import com.aionemu.gameserver.questEngine.model.QuestActionType;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Balthazar, fixed Shaman, vlog
@@ -69,7 +70,10 @@ public class _1636AFluteForTheFixing extends AbstractQuestHandler {
 				case 700239: // Drake Stone Statue
 					playQuestMovie(env, 210);
 					VisibleObject drakeStoneStatue = env.getVisibleObject();
-					spawnTemporarily(212008, player.getWorldMapInstance(), drakeStoneStatue.getX(), drakeStoneStatue.getY(), drakeStoneStatue.getZ(), (byte) 30, 60);
+					ThreadPoolManager.getInstance().schedule(() -> {
+						spawnTemporarily(212008, player.getWorldMapInstance(), drakeStoneStatue.getX(), drakeStoneStatue.getY(), drakeStoneStatue.getZ(),
+							(byte) 30, 60);
+					}, 20000);
 					return useQuestObject(env, 3, 3, true, true);
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
