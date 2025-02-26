@@ -54,13 +54,21 @@ public class _2106VanarsFlattery extends AbstractQuestHandler {
 				switch (dialogActionId) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1003);
+					case USE_OBJECT:
+						return sendQuestDialog(env, 1011);
 					case SETPRO1:
-						changeQuestStep(env, 0, 1, true);
+						changeQuestStep(env, 0, 0, true);
 						return closeDialogWindow(env);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 203517) {
+				switch (dialogActionId) {
+					case USE_OBJECT:
+						return sendQuestDialog(env, 10002);
+					case SELECT_QUEST_REWARD:
+						return sendQuestDialog(env, 5);
+				}
 				return sendQuestEndDialog(env);
 			}
 		}
