@@ -24,7 +24,6 @@ import com.aionemu.gameserver.model.instance.instancescore.InstanceScore;
 import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 import com.aionemu.gameserver.network.aion.instanceinfo.DredgionScoreWriter;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -164,7 +163,6 @@ public class DredgionInstance extends GeneralInstanceHandler {
 	@SuppressWarnings("lossy-conversions")
 	@Override
 	public boolean onDie(Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), false, 0, 8));
 		int points = 60;
 		if (lastAttacker instanceof Player killer && killer.getRace() != player.getRace()) {
 			if (killer.getRace() != instanceScore.getRaceWithHighestPoints())

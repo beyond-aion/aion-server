@@ -15,7 +15,7 @@ public class NpcLifeStats extends CreatureLifeStats<Npc> {
 	@Override
 	public void triggerRestoreTask() {
 		synchronized (restoreLock) {
-			if (lifeRestoreTask == null && !isDead) {
+			if (lifeRestoreTask == null && !isDead()) {
 				this.lifeRestoreTask = LifeStatsRestoreService.getInstance().scheduleHpRestoreTask(this);
 			}
 		}

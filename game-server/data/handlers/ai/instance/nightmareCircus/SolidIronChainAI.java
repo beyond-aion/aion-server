@@ -1,7 +1,5 @@
 package ai.instance.nightmareCircus;
 
-import java.util.concurrent.atomic.AtomicBoolean;
-
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
@@ -24,14 +22,10 @@ public class SolidIronChainAI extends AggressiveNpcAI {
 		return false;
 	}
 
-	private AtomicBoolean moviePlayed = new AtomicBoolean();
-
 	@Override
 	protected void handleDespawned() {
 		super.handleDespawned();
-		if (moviePlayed.compareAndSet(false, true)) {
-			getPosition().getWorldMapInstance().forEachPlayer(p -> PacketSendUtility.sendPacket(p, new SM_PLAY_MOVIE(0, 983)));
-		}
+		PacketSendUtility.broadcastToMap(getOwner(), new SM_PLAY_MOVIE(false, 0, 0, 983, true));
 	}
 
 }

@@ -28,7 +28,6 @@ import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.model.stats.calc.functions.StatSetFunction;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
@@ -394,7 +393,6 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 			}
 			setResult(false);
 		}
-		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 0));
 		return true;
 	}
 
@@ -410,5 +408,20 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 
 	public List<Integer> getSkillSet() {
 		return skillSet;
+	}
+
+	@Override
+	public boolean allowSelfReviveBySkill() {
+		return false;
+	}
+
+	@Override
+	public boolean allowSelfReviveByItem() {
+		return false;
+	}
+
+	@Override
+	public boolean allowInstanceRevive() {
+		return false;
 	}
 }

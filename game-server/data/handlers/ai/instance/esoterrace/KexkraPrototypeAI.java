@@ -32,7 +32,7 @@ public class KexkraPrototypeAI extends AggressiveNpcAI implements HpPhases.Phase
 	public void handleHpPhase(int phaseHpPercent) {
 		getKnownList().forEachPlayer(player -> {
 			if (!player.isDead()) {
-				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 472));
+				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, 472, true));
 			}
 		});
 		spawn(217206, 1320.639282f, 1171.063354f, 51.494003f, (byte) 0);

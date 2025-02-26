@@ -9,7 +9,6 @@ import java.util.concurrent.Future;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
-import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -25,8 +24,6 @@ import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.rewards.ArenaRewardItem;
 import com.aionemu.gameserver.model.templates.rewards.RewardItem;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -130,8 +127,6 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 	@Override
 	public boolean onDie(Player victim, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(victim, new SM_DIE(false, false, 0, 8));
-
 		PvPArenaPlayerReward victimReward = getStatReward(victim);
 		PvPArenaPlayerReward winnerReward = null;
 		if (lastAttacker != victim && lastAttacker instanceof Player winner) {
@@ -333,7 +328,6 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			for (Player player : instance.getPlayersInside()) {
 				if (player.isDead()) {
-					PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.RESURRECT), true);
 					PlayerReviveService.revive(player, 100, 100, false, 0);
 					player.getGameStats().updateStatsAndSpeedVisually();
 				}
@@ -656,6 +650,15 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 	protected void sendPacket(Player receiver, InstanceScoreType scoreType) {
 	}
 
-	protected record BaseRewards(int ap, int gp, int crucibleInsignia, int courageInsignia) {
+	@Override
+	public boolean allowSelfReviveBySkill() {
+		return false;
 	}
+
+	@Override
+	public boolean allowSelfReviveByItem() {
+		return false;
+	}
+
+	protected record BaseRewards(int ap, int gp, int crucibleInsignia, int courageInsignia) {}
 }

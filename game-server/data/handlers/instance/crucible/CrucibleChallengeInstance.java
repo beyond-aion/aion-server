@@ -417,7 +417,7 @@ public class CrucibleChallengeInstance extends CrucibleInstance {
 	}
 
 	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
+	public boolean onDie(Player player, Creature lastAttacker) {
 		super.onDie(player, lastAttacker);
 		int place = 0;
 		if (isInZone(ZoneName.get("ILLUSION_STADIUM_4_300320000"), player)) { // stage 1

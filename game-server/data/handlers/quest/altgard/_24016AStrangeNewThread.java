@@ -27,7 +27,6 @@ public class _24016AStrangeNewThread extends AbstractQuestHandler {
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnDie(questId);
 		qe.registerOnEnterWorld(questId);
-		qe.registerOnMovieEndQuest(154, questId);
 		for (int npc : npcs)
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		qe.registerQuestNpc(233876).addOnKillEvent(questId);
@@ -153,15 +152,9 @@ public class _24016AStrangeNewThread extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-
-		if (movieId == 154 && qs != null) {
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 154)
 			TeleportService.teleportTo(env.getPlayer(), 220030000, 1683.2405f, 1757.608f, 259.44543f, (byte) 64, TeleportAnimation.FADE_OUT_BEAM);
-			return true;
-		}
-		return false;
 	}
 
 	@Override

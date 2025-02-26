@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.instance.instancescore.PvpInstanceScore;
 import com.aionemu.gameserver.model.instance.playerreward.PvpInstancePlayerReward;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.network.aion.instanceinfo.PvpInstanceScoreWriter;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_INSTANCE_SCORE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
@@ -129,7 +128,6 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 	public boolean onDie(Player victim, Creature lastAttacker) {
 		sendPacket(new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.UPDATE_PLAYER_BUFF_STATUS, victim.getObjectId(), 60), getTime()));
-		PacketSendUtility.sendPacket(victim, new SM_DIE(victim.canUseRebirthRevive(), false, 0, 8));
 		if (lastAttacker instanceof Player killer && killer.getRace() != victim.getRace()) {
 			int killPoints = 200;
 			if (instanceScore.isStartProgress() && getTime() <= 600000 && victim.getRace() != instanceScore.getRaceWithHighestPoints())

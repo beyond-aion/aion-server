@@ -3,6 +3,7 @@ package com.aionemu.gameserver.model.stats.container;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.configs.administration.AdminConfig;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
@@ -32,38 +33,29 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	@Override
-	protected void onIncreaseHp(TYPE type, int value, int skillId, LOG log) {
+	protected void onHpChanged(int previousHp, int newHp, Creature effector) {
 		if (isFullyRestoredHp()) // FIXME: Temp Fix: Reset aggro list when hp is full
 			owner.getAggroList().clear();
-		super.onIncreaseHp(type, value, skillId, log);
+		if (owner.isSpawned()) {
+			sendHpPacketUpdate();
+			sendGroupPacketUpdate();
+			if (previousHp == 0 || newHp < previousHp)
+				triggerRestoreTask();
+			if (previousHp == 0)
+				triggerFpRestore();
+		}
+		super.onHpChanged(previousHp, newHp, effector);
 	}
 
 	@Override
-	protected void onReduceHp(TYPE type, int value, int skillId, LOG log) {
-		super.onReduceHp(type, value, skillId, log);
-		if (value > 0)
-			triggerRestoreTask();
-	}
-
-	@Override
-	protected void onHpChanged() {
-		super.onHpChanged();
-		sendHpPacketUpdate();
-		sendGroupPacketUpdate();
-	}
-
-	@Override
-	protected void onReduceMp(TYPE type, int value, int skillId, LOG log) {
-		super.onReduceMp(type, value, skillId, log);
-		if (value > 0)
-			triggerRestoreTask();
-	}
-
-	@Override
-	protected void onMpChanged() {
-		super.onMpChanged();
-		sendMpPacketUpdate();
-		sendGroupPacketUpdate();
+	protected void onMpChanged(int previousMp, int newMp) {
+		super.onMpChanged(previousMp, newMp);
+		if (owner.isSpawned()) {
+			sendMpPacketUpdate();
+			sendGroupPacketUpdate();
+			if (newMp < previousMp)
+				triggerRestoreTask();
+		}
 	}
 
 	private void sendGroupPacketUpdate() {
@@ -222,9 +214,9 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	public void triggerFpRestore() {
-		cancelFpReduce();
 		synchronized (restoreLock) {
-			if (flyRestoreTask == null && !isDead && !isFlyTimeFullyRestored()) {
+			cancelFpReduce();
+			if (flyRestoreTask == null && !isDead() && !isFlyTimeFullyRestored()) {
 				flyRestoreTask = LifeStatsRestoreService.getInstance().scheduleFpRestoreTask(this);
 			}
 		}
@@ -240,7 +232,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	public void triggerFpReduce() {
-		if (owner.hasAccess(AdminConfig.UNLIMITED_FLIGHT_TIME) || isDead)
+		if (owner.hasAccess(AdminConfig.UNLIMITED_FLIGHT_TIME) || isDead())
 			return;
 		synchronized (restoreLock) {
 			if (owner.isInSprintMode()) {
@@ -254,7 +246,7 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 				return;
 			}
 			cancelFpRestore();
-			if (flyReduceTask == null && !isDead)
+			if (flyReduceTask == null && !isDead())
 				flyReduceTask = LifeStatsRestoreService.getInstance().scheduleFpReduceTask(this);
 		}
 	}
@@ -277,11 +269,6 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 		super.cancelAllTasks();
 		cancelFpReduce();
 		cancelFpRestore();
-	}
-
-	public void triggerRestoreOnRevive() {
-		this.triggerRestoreTask();
-		triggerFpRestore();
 	}
 
 	public int getFlightReducePeriod() {

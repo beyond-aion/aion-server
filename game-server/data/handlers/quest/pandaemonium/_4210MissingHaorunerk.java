@@ -21,7 +21,7 @@ public class _4210MissingHaorunerk extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(204283).addOnQuestStart(questId);
 		qe.registerQuestNpc(798331).addOnTalkEvent(questId);
-		qe.registerQuestNpc(798332).addOnTalkEvent(questId);
+		qe.registerQuestNpc(798333).addOnTalkEvent(questId);
 		qe.registerQuestNpc(215056).addOnKillEvent(questId);
 		qe.registerQuestNpc(215080).addOnKillEvent(questId);
 	}
@@ -42,11 +42,9 @@ public class _4210MissingHaorunerk extends AbstractQuestHandler {
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 798332) {
+			if (targetId == 798333 && qs.getQuestVarById(0) == 0) { // Haorunerk's Corpse
 				if (dialogActionId == QUEST_SELECT) {
-					if (qs.getQuestVarById(0) == 0) {
-						return sendQuestDialog(env, 1011);
-					}
+					return sendQuestDialog(env, 1011);
 				} else if (dialogActionId == SETPRO1) {
 					return defaultCloseDialog(env, 0, 1);
 				}

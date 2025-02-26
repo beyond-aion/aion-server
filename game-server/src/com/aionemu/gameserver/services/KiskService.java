@@ -48,7 +48,7 @@ public class KiskService {
 			TeleportService.sendKiskBindPoint(member);
 			member.setKisk(null);
 			if (member.isDead()) // player has died and is not revived
-				member.getController().sendDie();
+				member.getController().showResurrectionOptions();
 		}
 	}
 

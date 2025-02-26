@@ -20,6 +20,7 @@ import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
+import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.zone.ZoneInstance;
 
 /**
@@ -252,6 +253,26 @@ public class GeneralInstanceHandler implements InstanceHandler {
 	@Override
 	public float getApMultiplier() {
 		return 1f;
+	}
+
+	@Override
+	public boolean allowSelfReviveBySkill() {
+		return true; // see skill_prohibit_set_id in client /data/world/worldid.xml + data/skills/client_skill_prohibit.xml
+	}
+
+	@Override
+	public boolean allowSelfReviveByItem() {
+		return true;
+	}
+
+	@Override
+	public boolean allowKiskRevive() {
+		return !instance.getTemplate().isInstance();
+	}
+
+	@Override
+	public boolean allowInstanceRevive() {
+		return instance.getTemplate().isInstance() && getClass() != GeneralInstanceHandler.class || instance.getTemplate().getWorldType() == WorldType.PANESTERRA;
 	}
 
 	protected boolean isRestrictedToInstance(Item item) {

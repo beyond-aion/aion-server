@@ -33,10 +33,6 @@ public abstract class AbstractHealEffect extends EffectTemplate implements HealE
 	public void applyEffect(Effect effect, HealType healType) {
 		Creature effected = effect.getEffected();
 		int healValue = effect.getReserveds(position).getValue();
-
-		if (healValue <= 0)
-			return;
-
 		switch (healType) {
 			case HP:
 				if (this instanceof ProcHealInstantEffect)// item heal, eg potions

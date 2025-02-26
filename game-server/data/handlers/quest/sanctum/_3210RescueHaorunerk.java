@@ -4,12 +4,10 @@ import static com.aionemu.gameserver.model.DialogAction.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.questEngine.handlers.AbstractQuestHandler;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
  * @author synchro2
@@ -25,7 +23,7 @@ public class _3210RescueHaorunerk extends AbstractQuestHandler {
 		qe.registerQuestNpc(798318).addOnQuestStart(questId);
 		qe.registerQuestNpc(798318).addOnTalkEvent(questId);
 		qe.registerQuestNpc(798331).addOnTalkEvent(questId);
-		qe.registerQuestNpc(798332).addOnTalkEvent(questId);
+		qe.registerQuestNpc(798333).addOnTalkEvent(questId);
 		qe.registerQuestNpc(215056).addOnKillEvent(questId);
 		qe.registerQuestNpc(215080).addOnKillEvent(questId);
 	}
@@ -56,17 +54,11 @@ public class _3210RescueHaorunerk extends AbstractQuestHandler {
 		}
 
 		if (qs != null && qs.getStatus() == QuestStatus.START) {
-			if (targetId == 798332 && qs.getQuestVarById(0) == 0) {
-				switch (dialogActionId) {
-					case USE_OBJECT:
-						return sendQuestDialog(env, 1011);
-					case SELECT1_1:
-						return sendQuestDialog(env, 1012);
-					case SETPRO1:
-						qs.setQuestVarById(0, 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
+			if (targetId == 798333 && qs.getQuestVarById(0) == 0) { // Haorunerk's Corpse
+				if (dialogActionId == QUEST_SELECT) {
+					return sendQuestDialog(env, 1011);
+				} else if (dialogActionId == SETPRO1) {
+					return defaultCloseDialog(env, 0, 1);
 				}
 			}
 		}

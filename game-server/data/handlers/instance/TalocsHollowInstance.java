@@ -8,7 +8,6 @@ import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.flyring.FlyRing;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Summon;
@@ -19,7 +18,6 @@ import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.model.QuestState;
@@ -114,7 +112,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 						if (summon != null) {
 							if (summon.getNpcId() == 799500 || summon.getNpcId() == 799501) {
 								SummonsService.doMode(SummonMode.RELEASE, summon, UnsummonType.UNSPECIFIED);
-								PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 435));
+								PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, 435, true));
 							}
 						}
 					});
@@ -128,7 +126,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 			case 215488: // celestius
 				Player player = npc.getAggroList().getMostPlayerDamage();
 				if (player != null)
-					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 10021, 437, 0));
+					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 10021, 437, true));
 				Npc contaminatedFragment = getNpc(700740);
 				if (contaminatedFragment != null) {
 					SpawnTemplate fragmentTemplate = contaminatedFragment.getSpawn();
@@ -157,7 +155,7 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 	private void sendMovie(Player player, int movie) {
 		if (!movies.contains(movie)) {
 			movies.add(movie);
-			PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, movie));
+			PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, movie, true));
 		}
 	}
 
@@ -185,12 +183,6 @@ public class TalocsHollowInstance extends GeneralInstanceHandler {
 			sendMovie(player, 464);
 		}
 		return false;
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
 	}
 
 	@Override

@@ -23,7 +23,6 @@ public class _2223AMythicalMonster extends AbstractQuestHandler {
 		qe.registerQuestNpc(203616).addOnTalkEvent(questId);
 		qe.registerQuestNpc(700134).addOnTalkEvent(questId);
 		qe.registerQuestNpc(211621).addOnKillEvent(questId);
-		qe.registerOnMovieEndQuest(67, questId);
 	}
 
 	@Override
@@ -104,12 +103,8 @@ public class _2223AMythicalMonster extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-		if (movieId == 67) {
-			spawnForFiveMinutes(211621, player.getWorldMapInstance(), (float) 1547.1047, (float) 894.2969, (float) 248.019, (byte) 85);
-			return true;
-		}
-		return false;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 67)
+			spawnForFiveMinutes(211621, env.getPlayer().getWorldMapInstance(), (float) 1547.1047, (float) 894.2969, (float) 248.019, (byte) 85);
 	}
 }

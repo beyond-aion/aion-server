@@ -24,7 +24,6 @@ public class _1157GaphyrksLove extends AbstractQuestHandler {
 		qe.registerQuestNpc(798003).addOnQuestStart(questId);
 		qe.registerQuestNpc(798003).addOnTalkEvent(questId);
 		qe.registerQuestNpc(210319).addOnAttackEvent(questId);
-		qe.registerOnMovieEndQuest(17, questId);
 	}
 
 	@Override
@@ -82,13 +81,8 @@ public class _1157GaphyrksLove extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs == null || movieId != 17 || qs.getStatus() == QuestStatus.COMPLETE)
-			return false;
-		qs.setStatus(QuestStatus.REWARD);
-		updateQuestStatus(env);
-		return true;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 17)
+			changeQuestStep(env, 0, 0, true); // reward
 	}
 }

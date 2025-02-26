@@ -31,7 +31,6 @@ public class _2900NoEscapingDestiny extends AbstractQuestHandler {
 		int[] npcs = { 204182, 203550, 790003, 790002, 203546, 204264, 204061 };
 		int[] stigmas = { 140000001, 140000002, 140000003, 140000004 };
 		qe.registerOnLevelChanged(questId);
-		qe.registerOnMovieEndQuest(156, questId);
 		qe.registerQuestNpc(204263).addOnKillEvent(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnDie(questId);
@@ -177,12 +176,9 @@ public class _2900NoEscapingDestiny extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		if (movieId == 156) {
-			changeQuestStep(env, 95, 96); // 96
-			return true;
-		}
-		return false;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 156)
+			changeQuestStep(env, 95, 96);
 	}
 
 	@Override

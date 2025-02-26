@@ -19,9 +19,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 	protected int currentHp;
 	protected int currentMp;
-	protected boolean isDead = false;
-	protected boolean isAboutToDie = false;// for long animation skills that will kill
-	protected int killingBlow;// for long animation skills that will kill - last damage
+	protected int killingBlow; // for long animation skills that will kill - last damage
 	protected final T owner;
 	private final Object hpLock = new Object();
 	private final Object mpLock = new Object();
@@ -54,43 +52,20 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		return getOwner().getGameStats().getMaxMp().getCurrent();
 	}
 
-	/**
-	 * @return the isDead There is no setter method cause life stats should be completely renewed on revive
-	 */
 	public boolean isDead() {
-		return isDead;
-	}
-
-	public void setIsAboutToDie() {
-		this.isAboutToDie = true;
+		return currentHp == 0;
 	}
 
 	public boolean isAboutToDie() {
-		return isAboutToDie;
+		return killingBlow != 0;
 	}
 
-	/**
-	 * @return the killingBlow
-	 */
-	public int getKillingBlow() {
-		return killingBlow;
-	}
-
-	/**
-	 * @param killingBlow
-	 *          the killingBlow to set
-	 */
 	public void setKillingBlow(int killingBlow) {
 		this.killingBlow = killingBlow;
 	}
 
 	private void unsetIsAboutToDie() {
-		this.isAboutToDie = false;
 		this.killingBlow = 0;
-	}
-
-	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker) {
-		return reduceHp(type, value, skillId, log, attacker, true);
 	}
 
 	/**
@@ -106,42 +81,33 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 *          log type (see {@link SM_ATTACK_STATUS.LOG}) for the attack status packet to be sent
 	 * @param attacker
 	 *          attacking creature or self
-	 * @param sendDiePacket
-	 *          send SM_DIE to players
 	 * @return The HP that this creature has left. If 0, the creature died.
 	 */
-	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker, boolean sendDiePacket) {
+	public int reduceHp(TYPE type, int value, int skillId, LOG log, Creature attacker) {
 		Objects.requireNonNull(attacker, "attacker");
 		if (getOwner().isInvulnerable()) {
-			if (isAboutToDie())
-				unsetIsAboutToDie();
+			unsetIsAboutToDie();
 			return currentHp;
 		}
 
-		int hpReduced = 0;
-		boolean died = false;
+		int previousHp, newHp;
 		synchronized (hpLock) {
-			if (isDead)
+			if (isDead())
 				return 0;
 
-			int newHp = Math.max(currentHp - value, 0);
-			if (newHp < currentHp) {
-				hpReduced = currentHp - newHp;
-				currentHp = newHp;
-				if (currentHp == 0) {
-					currentMp = 0;
-					setIsDead(died = true);
-				}
+			previousHp = currentHp;
+			currentHp = newHp = Math.min(currentHp, Math.max(currentHp - value, 0));
+			if (isDead()) {
+				currentMp = 0;
+				unsetIsAboutToDie();
 			}
 		}
 
-		if (hpReduced > 0 || skillId != 0)
-			onReduceHp(type, hpReduced, skillId, log);
-		if (died)
-			getOwner().getController().onDie(attacker, sendDiePacket);
-		if (hpReduced > 0)
-			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
-		return currentHp;
+		if (newHp != previousHp || skillId != 0)
+			sendAttackStatusPacketUpdate(type, previousHp - newHp, skillId, log);
+		if (newHp != previousHp)
+			onHpChanged(previousHp, newHp, attacker);
+		return newHp;
 	}
 
 	/**
@@ -158,21 +124,20 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * @return The MP that this creature has left.
 	 */
 	public int reduceMp(TYPE type, int value, int skillId, LOG log) {
-		int mpReduced = 0;
+		int previousMp, newMp;
 		synchronized (mpLock) {
-			if (isDead)
+			if (isDead())
 				return 0;
 
-			int newMp = Math.max(currentMp - value, 0);
-			if (newMp < currentMp) {
-				mpReduced = currentMp - newMp;
-				currentMp = newMp;
-			}
+			previousMp = currentMp;
+			currentMp = newMp = Math.min(currentMp, Math.max(currentMp - value, 0));
 		}
 
-		if (mpReduced > 0 || skillId != 0)
-			onReduceMp(type, mpReduced, skillId, log);
-		return currentMp;
+		if (newMp != previousMp || skillId != 0)
+			sendAttackStatusPacketUpdate(type, previousMp - newMp, skillId, log);
+		if (newMp != previousMp)
+			onMpChanged(previousMp, newMp);
+		return newMp;
 	}
 
 	protected void sendAttackStatusPacketUpdate(TYPE type, int value, int skillId, LOG log) {
@@ -198,34 +163,28 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	private int increaseHp(TYPE type, int value, Creature effector, int skillId, LOG log) {
+		if (value < 0) // some skills reduce hp via a negative heal (e.g. 3732 Spirit Absorption)
+			return reduceHp(type, -value, skillId, log, effector);
+
 		if (getOwner().getEffectController().isAbnormalSet(AbnormalState.DISEASE))
 			return currentHp;
 
-		int hpIncreased;
-		boolean died = false;
+		int previousHp, newHp;
 		synchronized (hpLock) {
-			if (isDead)
+			if (isDead())
 				return 0;
 
-			int newHp = Math.min(currentHp + value, getMaxHp());
-			hpIncreased = newHp - currentHp;
-			currentHp = newHp;
-			if (hpIncreased < 0 && currentHp <= 0) { // some skills reduce hp via a negative heal (ghost absorption)
-				currentHp = 0;
-				setIsDead(died = true);
-			}
+			previousHp = currentHp;
+			currentHp = newHp = Math.min(currentHp + value, getMaxHp());
+			if (killingBlow != 0 && newHp > killingBlow)
+				unsetIsAboutToDie();
 		}
 
-		if (hpIncreased > 0 || skillId != 0)
-			onIncreaseHp(type, hpIncreased, skillId, log);
-		if (died)
-			getOwner().getController().onDie(effector == null ? getOwner() : effector, true);
-		if (hpIncreased > 0) {
-			if (killingBlow != 0 && currentHp > killingBlow)
-				unsetIsAboutToDie();
-			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
-		}
-		return currentHp;
+		if (newHp != previousHp || skillId != 0)
+			sendAttackStatusPacketUpdate(type, newHp - previousHp, skillId, log);
+		if (newHp != previousHp)
+			onHpChanged(previousHp, newHp, effector == null ? getOwner() : effector);
+		return newHp;
 	}
 
 	/**
@@ -239,20 +198,19 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	public int increaseMp(TYPE type, int value, int skillId, LOG log) {
-		int mpIncreased = 0;
+		int previousMp, newMp;
 		synchronized (mpLock) {
-			if (isDead)
+			if (isDead())
 				return 0;
 
-			int newMp = Math.min(currentMp + value, getMaxMp());
-			if (newMp > currentMp) {
-				mpIncreased = newMp - currentMp;
-				currentMp = newMp;
-			}
+			previousMp = currentMp;
+			currentMp = newMp = Math.max(currentMp, Math.min(currentMp + value, getMaxMp()));
 		}
 
-		if (mpIncreased > 0 || skillId != 0)
-			onIncreaseMp(type, mpIncreased, skillId, log);
+		if (newMp != previousMp || skillId != 0)
+			sendAttackStatusPacketUpdate(type, newMp - previousMp, skillId, log);
+		if (newMp != previousMp)
+			onMpChanged(previousMp, newMp);
 		return currentMp;
 	}
 
@@ -348,37 +306,19 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		return (int) (100f * currentMp / getMaxMp());
 	}
 
-	protected void onIncreaseHp(TYPE type, int value, int skillId, LOG log) {
-		sendAttackStatusPacketUpdate(type, value, skillId, log);
-		if (value > 0)
-			onHpChanged();
+	protected void onHpChanged(int previousHp, int newHp, Creature effector) {
+		if (newHp == 0)
+			getOwner().getController().onDie(effector);
+		getOwner().getObserveController().notifyHPChangeObservers(newHp);
 	}
 
-	protected void onReduceHp(TYPE type, int value, int skillId, LOG log) {
-		sendAttackStatusPacketUpdate(type, value, skillId, log);
-		if (value > 0)
-			onHpChanged();
-	}
-
-	protected void onIncreaseMp(TYPE type, int value, int skillId, LOG log) {
-		sendAttackStatusPacketUpdate(type, value, skillId, log);
-		if (value > 0)
-			onMpChanged();
-	}
-
-	protected void onReduceMp(TYPE type, int value, int skillId, LOG log) {
-		sendAttackStatusPacketUpdate(type, value, skillId, log);
-		if (value > 0)
-			onMpChanged();
+	protected void onMpChanged(int previousMp, int newMp) {
 	}
 
 	public int getMaxFp() {
 		return 0;
 	}
 
-	/**
-	 * @return
-	 */
 	public int getCurrentFp() {
 		return 0;
 	}
@@ -394,7 +334,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 * This method can be used to fully restore owners HP and remove dead state of lifestats
 	 */
 	public void setCurrentHpPercent(int hpPercent) {
-		setCurrentHp((int) (hpPercent / 100f * getMaxHp()));
+		setCurrentHp((int) ((long) getMaxHp() * hpPercent / 100));
 	}
 
 	/**
@@ -405,66 +345,39 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	public final void setCurrentHp(int hp, Creature effector) {
-		boolean wasDead;
-		int prevHp;
+		int previousHp, newHp;
 		synchronized (hpLock) {
-			wasDead = isDead;
-			prevHp = currentHp;
-			currentHp = Math.max(0, Math.min(hp, getMaxHp()));
-			setIsDead(currentHp == 0);
+			previousHp = currentHp;
+			currentHp = newHp = Math.max(0, Math.min(hp, getMaxHp()));
+			if (killingBlow != 0 && (newHp == 0 || newHp > killingBlow))
+				unsetIsAboutToDie();
 		}
-		onSetHp();
-		if (!wasDead && isDead)
-			getOwner().getController().onDie(effector, true);
-		if (prevHp != currentHp)
-			getOwner().getObserveController().notifyHPChangeObservers(currentHp);
+		if (newHp != previousHp) {
+			// broadcast current hp percentage to others
+			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, TYPE.HP, 0, 0, LOG.REGULAR));
+			onHpChanged(previousHp, newHp, effector);
+		}
 	}
 
-	private void onSetHp() {
-		// broadcast current hp percentage to others
-		PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, TYPE.HP, 0, 0, LOG.REGULAR));
-		// update hp bar on owners client
-		onHpChanged();
-	}
-
-	protected void onHpChanged() {
-	}
-
-	/**
-	 * Sets the current MP without notifying observers
-	 */
 	public final void setCurrentMp(int value) {
+		int previousMp, newMp;
 		synchronized (mpLock) {
-			currentMp = Math.max(0, Math.min(value, getMaxMp()));
+			if (isDead())
+				return;
+			previousMp = currentMp;
+			currentMp = newMp = Math.max(0, Math.min(value, getMaxMp()));
 		}
-		onSetMp();
+		if (newMp != previousMp) {
+			PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, TYPE.HEAL_MP, 0, 0, LOG.MPHEAL));
+			onMpChanged(previousMp, newMp);
+		}
 	}
 
 	/**
 	 * This method can be used to fully restore owners MP
-	 * 
-	 * @param mpPercent
 	 */
 	public final void setCurrentMpPercent(int mpPercent) {
-		synchronized (mpLock) {
-			currentMp = (int) (mpPercent / 100f * getMaxMp());
-		}
-		onSetMp();
+		setCurrentMp((int) ((long) getMaxMp() * mpPercent / 100));
 	}
 
-	private void onSetMp() {
-		// broadcast current mp percentage to others
-		PacketSendUtility.broadcastToSightedPlayers(owner, new SM_ATTACK_STATUS(owner, TYPE.HEAL_MP, 0, 0, LOG.MPHEAL));
-		// update mp bar on owners client
-		onMpChanged();
-	}
-
-	protected void onMpChanged() {
-	}
-
-	private void setIsDead(boolean isDead) {
-		if (this.isDead != isDead)
-			unsetIsAboutToDie();
-		this.isDead = isDead;
-	}
 }

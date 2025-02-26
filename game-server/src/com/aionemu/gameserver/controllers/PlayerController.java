@@ -252,7 +252,7 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
-	public void onDie(Creature lastAttacker, boolean sendDiePacket) {
+	public void onDie(Creature lastAttacker) {
 		Player player = getOwner();
 		player.getController().cancelCurrentSkill(null);
 		setRebirthReviveInfo();
@@ -263,10 +263,8 @@ public class PlayerController extends CreatureController<Player> {
 			DuelService.getInstance().loseDuel(player);
 			if (killedByOpponent) {
 				player.getEffectController().removeByDispelSlotType(DispelSlotType.DEBUFF);
-				if (player.getLifeStats().getHpPercentage() < 33) {
+				if (player.getLifeStats().getHpPercentage() < 33)
 					player.getLifeStats().setCurrentHpPercent(33);
-					player.getLifeStats().triggerRestoreOnRevive();
-				}
 				if (player.getLifeStats().getMpPercentage() < 33)
 					player.getLifeStats().setCurrentMpPercent(33);
 				if (master.getLifeStats().getHpPercentage() < 33)
@@ -302,7 +300,9 @@ public class PlayerController extends CreatureController<Player> {
 		player.resetParalyzeCount();
 
 		// Effects removed with super.onDie()
-		super.onDie(lastAttacker, sendDiePacket);
+		super.onDie(lastAttacker);
+
+		scheduleShowResurrectionOptions();
 
 		if (player.getPosition().getWorldMapInstance().getInstanceHandler().onDie(player, lastAttacker))
 			return;
@@ -317,10 +317,6 @@ public class PlayerController extends CreatureController<Player> {
 			if (player.getLevel() > 4 && !player.getEffectController().hasAbnormalEffect(Effect::isNoDeathPenalty))
 				player.getCommonData().calculateExpLoss();
 		}
-
-		if (sendDiePacket && !player.getController().hasTask(TaskId.TELEPORT)) // don't show res options if the player is about to get teleported (see
-																																						// ResurrectBaseEffect)
-			sendDieFromCreature(lastAttacker);
 
 		QuestEngine.getInstance().onDie(new QuestEnv(null, player, 0));
 	}
@@ -347,18 +343,16 @@ public class PlayerController extends CreatureController<Player> {
 		super.onDespawn();
 	}
 
-	public void sendDie() {
-		sendDieFromCreature(getOwner());
+	public void scheduleShowResurrectionOptions() {
+		ThreadPoolManager.getInstance().schedule(() -> {
+			// teleportation task can be assigned shortly after death (see PlayerReviveService#scheduleReviveAtBase)
+			if (getOwner().isDead() && !hasTask(TaskId.TELEPORT))
+				showResurrectionOptions();
+		}, 500);
 	}
 
-	private void sendDieFromCreature(Creature lastAttacker) {
-		Player player = getOwner();
-		if (WorldMapType.isPanesterraMap(player.getWorldId())) {
-			PacketSendUtility.sendPacket(player, new SM_DIE(player, 6));
-			return;
-		}
-		int kiskTimeRemaining = (player.getKisk() != null ? player.getKisk().getRemainingLifetime() : 0);
-		PacketSendUtility.sendPacket(player, new SM_DIE(player.canUseRebirthRevive(), player.haveSelfRezItem(), kiskTimeRemaining, 0, isInvader(player)));
+	public void showResurrectionOptions() {
+		PacketSendUtility.sendPacket(getOwner(), new SM_DIE(getOwner()));
 	}
 
 	private boolean isInvader(Player player) {

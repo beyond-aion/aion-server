@@ -193,8 +193,7 @@ public abstract class AbstractQuestHandler {
 		return false;
 	}
 
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		return false;
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
 	}
 
 	public boolean onQuestTimerEndEvent(QuestEnv env) {
@@ -663,10 +662,13 @@ public abstract class AbstractQuestHandler {
 		return false;
 	}
 
-	/** Play movie with given ID */
-	public boolean playQuestMovie(QuestEnv env, int MovieId) {
-		Player player = env.getPlayer();
-		PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, MovieId));
+	public boolean playQuestMovie(QuestEnv env, int movieId) {
+		return playQuestMovie(env, movieId, false);
+	}
+
+	public boolean playQuestMovie(QuestEnv env, int cutsceneId, boolean isCutsceneMovie) {
+		int targetObjectId = env.getVisibleObject() == null ? 0 : env.getVisibleObject().getObjectId();
+		PacketSendUtility.sendPacket(env.getPlayer(), new SM_PLAY_MOVIE(isCutsceneMovie, targetObjectId, env.getQuestId(), cutsceneId, true));
 		return false;
 	}
 

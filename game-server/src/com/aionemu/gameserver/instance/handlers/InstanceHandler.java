@@ -99,4 +99,9 @@ public interface InstanceHandler {
 	float getExpMultiplier();
 
 	float getApMultiplier();
+
+	boolean allowSelfReviveBySkill();
+	boolean allowSelfReviveByItem();
+	boolean allowKiskRevive();
+	boolean allowInstanceRevive();
 }

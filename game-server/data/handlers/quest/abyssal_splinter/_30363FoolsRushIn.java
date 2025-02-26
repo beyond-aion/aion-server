@@ -48,7 +48,7 @@ public class _30363FoolsRushIn extends AbstractQuestHandler {
 						}
 						return false;
 					case SETPRO1:
-						return defaultCloseDialog(env, 0, 1, true, false, 0, 0, 182209801, 1);
+						return defaultCloseDialog(env, 0, 0, true, false, 0, 0, 182209801, 1);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {

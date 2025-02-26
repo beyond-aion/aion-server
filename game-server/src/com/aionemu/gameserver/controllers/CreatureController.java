@@ -150,10 +150,9 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 	/**
 	 * Perform tasks on Creature death.<br>
-	 * Should ONLY be called from {@link com.aionemu.gameserver.model.stats.container.CreatureLifeStats#reduceHp(TYPE, int, int, LOG, Creature, boolean)
-	 * reduceHp()} to avoid duplicate death events.
+	 * Should ONLY be called from {@link com.aionemu.gameserver.model.stats.container.CreatureLifeStats} to avoid duplicate death events.
 	 */
-	public void onDie(Creature lastAttacker, boolean sendDiePacket) {
+	public void onDie(Creature lastAttacker) {
 		getOwner().getMoveController().abortMove();
 		getOwner().setCasting(null);
 		getOwner().getEffectController().removeAllEffects();
@@ -224,7 +223,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 
 		// notify all NPC's around that creature is attacking me
 		getOwner().getKnownList().forEachNpc(npc -> npc.getAi().onCreatureEvent(AIEventType.CREATURE_NEEDS_SUPPORT, getOwner()));
-		getOwner().getLifeStats().reduceHp(type, damage, effect == null ? 0 : effect.getSkillId(), logId, attacker, true);
+		getOwner().getLifeStats().reduceHp(type, damage, effect == null ? 0 : effect.getSkillId(), logId, attacker);
 		getOwner().incrementAttackedCount();
 
 		if (!getOwner().isDead() && attacker instanceof Player player) {
@@ -420,11 +419,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	}
 
 	public boolean die(TYPE type, LOG log, Creature lastAttacker) {
-		return getOwner().getLifeStats().reduceHp(type, Integer.MAX_VALUE, 0, log, lastAttacker, true) == 0;
-	}
-
-	public boolean die(TYPE type, LOG log, Creature lastAttacker, boolean sendDiePacket) {
-		return getOwner().getLifeStats().reduceHp(type, Integer.MAX_VALUE, 0, log, lastAttacker, sendDiePacket) == 0;
+		return getOwner().getLifeStats().reduceHp(type, Integer.MAX_VALUE, 0, log, lastAttacker) == 0;
 	}
 
 	/**

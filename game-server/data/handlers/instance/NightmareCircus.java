@@ -8,10 +8,8 @@ import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
@@ -298,7 +296,7 @@ public class NightmareCircus extends GeneralInstanceHandler {
 				npc.getController().delete();
 				break;
 			case 233467:
-				instance.forEachPlayer(p -> PacketSendUtility.sendPacket(p, new SM_PLAY_MOVIE(0, 984)));
+				PacketSendUtility.broadcastToMap(instance, new SM_PLAY_MOVIE(false, 0, 0, 984, true));
 				deleteAliveNpcs(831740, 831627, 831741, 831718, 831551, 831552, 831553);
 				// Open Cage
 				spawn(831598, 522.3982f, 564.6901f, 199.0337f, (byte) 60, 14);
@@ -344,12 +342,6 @@ public class NightmareCircus extends GeneralInstanceHandler {
 
 	private void sendMsg(int npcId, int msg) {
 		PacketSendUtility.broadcastMessage(getNpc(npcId), msg);
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(false, false, 0, 8));
-		return true;
 	}
 
 	@Override

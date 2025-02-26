@@ -77,21 +77,17 @@ public class _3200PriceOfGoodwill extends AbstractQuestHandler {
 			}
 			return false;
 		} else if (qs.getStatus() == QuestStatus.START) {
-			if (targetId == 204658)// Roikinerk
-			{
+			if (targetId == 204658 && var == 0) { // Roikinerk
 				switch (env.getDialogActionId()) {
 					case QUEST_SELECT:
 						return sendQuestDialog(env, 1003);
-					case SELECT1:
-						return sendQuestDialog(env, 1011);
 					case SETPRO1:
-						// Create instance
-						WorldMapInstance newInstance = InstanceService.getNextAvailableInstance(WorldMapType.STEEL_RAKE.getId(), player);
-						// teleport to cell in steel rake
-						TeleportService.teleportTo(player, newInstance, 403.55f, 508.11f, 885.77f);
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						return true;
+						WorldMapInstance steelRake = InstanceService.getNextAvailableInstance(WorldMapType.STEEL_RAKE.getId(), player);
+						Npc haorunerksCorpse = steelRake.getNpc(798333);
+						spawn(798332, steelRake, haorunerksCorpse.getX(), haorunerksCorpse.getY(), haorunerksCorpse.getZ(), (byte) 30);
+						haorunerksCorpse.getController().delete();
+						TeleportService.teleportTo(player, steelRake, 403.55f, 508.11f, 885.77f);
+						return defaultCloseDialog(env, 0, 1);
 				}
 
 			} else if (targetId == 798332 && var == 1) { // Haorunerk
@@ -102,10 +98,7 @@ public class _3200PriceOfGoodwill extends AbstractQuestHandler {
 						playQuestMovie(env, 431);
 						break;
 					case SETPRO2:
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
+						return defaultCloseDialog(env, 1, 2);
 				}
 			} else if (targetId == 700522 && var == 2) { // Haorunerks Bag, loc: 401.24 503.19 885.76 119
 				ThreadPoolManager.getInstance().schedule(new Runnable() {

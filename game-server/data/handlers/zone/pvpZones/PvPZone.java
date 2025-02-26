@@ -1,5 +1,6 @@
 package zone.pvpZones;
 
+import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -41,11 +42,12 @@ public abstract class PvPZone implements AdvancedZoneHandler {
 				}
 			});
 
-			ThreadPoolManager.getInstance().schedule(() -> {
+			player.getController().addTask(TaskId.TELEPORT, ThreadPoolManager.getInstance().schedule(() -> {
+				player.getController().getAndRemoveTask(TaskId.TELEPORT); // remove manually as it won't get removed automatically
 				PlayerReviveService.duelRevive(player);
 				doTeleport(player, zone.getZoneTemplate().getName());
 				PacketSendUtility.broadcastToZone(zone, SM_SYSTEM_MESSAGE.STR_PvPZONE_OUT_MESSAGE(player.getName()));
-			}, 5000);
+			}, 5000));
 		}
 		return true;
 	}

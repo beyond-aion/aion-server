@@ -7,11 +7,9 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceID;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAY_MOVIE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -80,7 +78,7 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 				instance.setDoorState(467, true);
 				break;
 			case 799342:
-				sendPacket(new SM_PLAY_MOVIE(0, 447));
+				sendPacket(new SM_PLAY_MOVIE(false, 0, 0, 447, true));
 				break;
 			case 216157:
 			case 216238:
@@ -154,11 +152,5 @@ public class BeshmundirInstance extends GeneralInstanceHandler {
 	@Override
 	public void onInstanceCreate() {
 		instance.setDoorState(535, true);
-	}
-
-	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
-		PacketSendUtility.sendPacket(player, new SM_DIE(player, 8));
-		return true;
 	}
 }

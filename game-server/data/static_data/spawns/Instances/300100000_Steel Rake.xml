@@ -120,9 +120,9 @@
 			<spot x="604.616" y="493.056" z="879.779" h="30"/>
 			<spot x="630.715" y="488.983" z="1031.13" h="90"/>
 		</spawn>
-		<!-- Haorunerk -->
-		<spawn npc_id="798332">
-			<spot x="406.312" y="499.564" z="885.76" h="30"/>
+		<!-- Haorunerk's Corpse -->
+		<spawn npc_id="798333">
+			<spot x="406.312" y="499.564" z="885.76"/>
 		</spawn>
 		<!-- Haorunerk's Bag -->
 		<spawn npc_id="700522">

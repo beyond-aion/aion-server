@@ -33,7 +33,6 @@ public class _1929ASliverofDarkness extends AbstractQuestHandler {
 		int[] npcs = { 203752, 203852, 203164, 205110, 700240, 205111, 203701, 203711 };
 		int[] stigmas = { 140000001, 140000002, 140000003, 140000004 };
 		qe.registerOnLevelChanged(questId);
-		qe.registerOnMovieEndQuest(155, questId);
 		qe.registerQuestNpc(212992).addOnKillEvent(questId);
 		qe.registerOnEnterWorld(questId);
 		qe.registerOnDie(questId);
@@ -192,14 +191,11 @@ public class _1929ASliverofDarkness extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		final Player player = env.getPlayer();
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
 		if (movieId == 155) {
-			spawnForFiveMinutes(205111, player.getWorldMapInstance(), (float) 197.6, (float) 265.9, (float) 1374.0, (byte) 0);
-			changeQuestStep(env, 94, 98); // 98
-			return true;
+			changeQuestStep(env, 94, 98);
+			spawnForFiveMinutes(205111, env.getPlayer().getWorldMapInstance(), (float) 197.6, (float) 265.9, (float) 1374.0, (byte) 0);
 		}
-		return false;
 	}
 
 	@Override

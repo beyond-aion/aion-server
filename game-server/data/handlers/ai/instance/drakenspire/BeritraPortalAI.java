@@ -36,6 +36,6 @@ public class BeritraPortalAI extends ActionItemNpcAI {
 				break;
 		}
 		player.getController().startProtectionActiveTask();
-		ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 915)), 1000);
+		ThreadPoolManager.getInstance().schedule(() -> PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, 915, true)), 1000);
 	}
 }

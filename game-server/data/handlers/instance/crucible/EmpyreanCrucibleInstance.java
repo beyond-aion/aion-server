@@ -918,7 +918,7 @@ public class EmpyreanCrucibleInstance extends CrucibleInstance {
 	}
 
 	@Override
-	public boolean onDie(final Player player, Creature lastAttacker) {
+	public boolean onDie(Player player, Creature lastAttacker) {
 		super.onDie(player, lastAttacker);
 		getPlayerReward(player.getObjectId()).setPlayerDefeated(true);
 

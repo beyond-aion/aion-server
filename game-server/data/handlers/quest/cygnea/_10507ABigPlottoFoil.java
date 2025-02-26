@@ -51,7 +51,6 @@ public class _10507ABigPlottoFoil extends AbstractQuestHandler {
 		qe.registerOnEnterZone(ZoneName.get("LF5_SENSORYAREA_Q10507_206366_2_210070000"), questId); // Beritra Guard Captain's Tent zone
 		qe.registerOnLevelChanged(questId);
 		qe.registerOnQuestCompleted(questId);
-		qe.registerOnMovieEndQuest(993, questId);
 	}
 
 	@Override
@@ -210,16 +209,11 @@ public class _10507ABigPlottoFoil extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId != 993)
+			return;
 		Player player = env.getPlayer();
-		if (player == null) {
-			return false;
-		}
-
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.REWARD)
-			spawnTemporarily(236266, player.getWorldMapInstance(), player.getX() + 2, player.getY() + 3, player.getZ(), (byte) 73, 2);
-		return true;
+		spawnTemporarily(236266, player.getWorldMapInstance(), player.getX() + 2, player.getY() + 3, player.getZ(), (byte) 73, 2);
 	}
 
 	@Override

@@ -315,10 +315,8 @@ public class Effect implements StatOwner {
 			if (value <= 0) {
 				value = 0;
 				// effected is about to die
-				if (!effected.isDead()) {
-					effected.getLifeStats().setIsAboutToDie();
+				if (!effected.isDead())
 					effected.getLifeStats().setKillingBlow(er.getValue());
-				}
 			}
 			effectedHp = (int) (100f * value / effected.getLifeStats().getMaxHp());
 		}

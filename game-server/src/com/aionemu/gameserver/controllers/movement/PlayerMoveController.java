@@ -1,14 +1,11 @@
 package com.aionemu.gameserver.controllers.movement;
 
 import com.aionemu.gameserver.configs.main.FallDamageConfig;
-import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.skillengine.model.Skill;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -73,21 +70,8 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 	public void updateFalling(float newZ) {
 		if (lastFallZ != 0) {
 			fallDistance += lastFallZ - newZ;
-			if (fallDistance >= FallDamageConfig.MAXIMUM_DISTANCE_MIDAIR) {
-				fallDistance = 0;
-				lastFallZ = 0;
-				boolean isInInstance = owner.isInInstance();
-				if (!owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner, isInInstance)) // invulnerable players cannot die
-					return;
-				owner.getController().onStopMove(); // stops and notifies move observers
-				if (!isInInstance) { // instant revive at kisk or bind point
-					Kisk kisk = owner.getKisk();
-					if (kisk != null && kisk.isActive())
-						PlayerReviveService.kiskRevive(owner);
-					else
-						PlayerReviveService.bindRevive(owner);
-					PacketSendUtility.sendPacket(owner, SM_SYSTEM_MESSAGE.STR_REBIRTH_MASSAGE_ME());
-				}
+			if (fallDistance >= FallDamageConfig.MAXIMUM_DISTANCE_MIDAIR && owner.getController().die(TYPE.FALL_DAMAGE, LOG.REGULAR, owner)) {
+				PlayerReviveService.scheduleReviveAtBase(owner, 1000, 0);
 				return;
 			}
 		}
@@ -99,7 +83,7 @@ public class PlayerMoveController extends PlayableMoveController<Player> {
 		if (lastFallZ == 0)
 			return;
 
-		if (!owner.isFlying()) {
+		if (!owner.isFlying() && !owner.isDead()) {
 			fallDistance += lastFallZ - newZ;
 			int damage = StatFunctions.calculateFallDamage(owner, fallDistance);
 			if (damage > 0) {

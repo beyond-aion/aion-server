@@ -31,7 +31,7 @@ public class PlegetonAI extends NpcAI {
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), 0));
 			switch (getNpcId()) {
 				case 799517:
-					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 0, 448, 16777216));
+					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, 448, false));
 					if (!isStartTimer) {
 						isStartTimer = true;
 						sendTimer();
@@ -52,15 +52,15 @@ public class PlegetonAI extends NpcAI {
 					TeleportService.teleportTo(player, 300170000, 958.45233f, 430.4892f, 219.80301f);
 					break;
 				case 799518:
-					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 0, 449, 16777216));
+					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, 449, false));
 					TeleportService.teleportTo(player, 300170000, 822.0199f, 465.1819f, 220.29918f);
 					break;
 				case 799519:
-					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 0, 450, 16777216));
+					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, 450, false));
 					TeleportService.teleportTo(player, 300170000, 777.1054f, 300.39005f, 219.89926f);
 					break;
 				case 799520:
-					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(0, 0, 451, 16777216));
+					PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, 451, false));
 					TeleportService.teleportTo(player, 300170000, 942.3092f, 270.91855f, 219.86185f);
 					break;
 			}

@@ -5,18 +5,13 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.scene.Spatial;
-import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Kisk;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.SiegeRace;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Rolandas
@@ -41,16 +36,7 @@ public class CollisionDieActor extends AbstractCollisionObserver {
 	}
 
 	public static void kill(Creature creature) {
-		if (creature.getController().die() && creature instanceof Player player && !player.getController().hasTask(TaskId.TELEPORT)) {
-			player.getController().addTask(TaskId.TELEPORT, ThreadPoolManager.getInstance().schedule(() -> {
-				player.getController().getAndRemoveTask(TaskId.TELEPORT); // remove manually as it won't get removed automatically
-				Kisk kisk = player.getKisk();
-				if (kisk != null && kisk.isActive())
-					PlayerReviveService.kiskRevive(player);
-				else
-					PlayerReviveService.bindRevive(player);
-				PacketSendUtility.sendPacket(player, new SM_EMOTION(creature, EmotionType.RESURRECT)); // send to remove res option window
-			}, 2850));
-		}
+		if (creature.getController().die() && creature instanceof Player player)
+			PlayerReviveService.scheduleReviveAtBase(player, 2500, 0);
 	}
 }

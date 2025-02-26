@@ -28,7 +28,6 @@ public class _24051InvesetigatetheDisappearance extends AbstractQuestHandler {
 		qe.registerOnQuestCompleted(questId);
 		qe.registerOnLevelChanged(questId);
 		qe.registerQuestItem(182215375, questId);
-		qe.registerOnMovieEndQuest(236, questId);
 		qe.registerOnEnterZone(ZoneName.get("MINE_PORT_220040000"), questId);
 		qe.registerOnEnterWorld(questId);
 		for (int npc : npcs) {
@@ -137,17 +136,11 @@ public class _24051InvesetigatetheDisappearance extends AbstractQuestHandler {
 	}
 
 	@Override
-	public boolean onMovieEndEvent(QuestEnv env, int movieId) {
-		if (movieId != 236)
-			return false;
-		Player player = env.getPlayer();
-		QuestState qs = player.getQuestStateList().getQuestState(questId);
-		if (qs != null && qs.getStatus() == QuestStatus.START) {
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 236) {
 			changeQuestStep(env, 5, 5, true); // reward
 			removeQuestItem(env, 182215377, 1);
-			return true;
 		}
-		return false;
 	}
 
 	@Override

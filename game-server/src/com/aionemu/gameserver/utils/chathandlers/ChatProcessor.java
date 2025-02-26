@@ -5,7 +5,6 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -49,30 +48,30 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	public void registerCommand(ChatCommand cmd) {
-		if (commandHandlers.containsKey(cmd.getAlias()))
-			throw new IllegalArgumentException("Failed to register chat command: " + cmd.getAlias() + " is already registered.");
-
 		if (cmd.getLevel() < 0)
 			throw new NullPointerException("Failed to register chat command: Invalid access level for " + cmd.getAlias() + ".");
-
-		commandHandlers.put(cmd.getAlias(), cmd);
+		if (commandHandlers.putIfAbsent(cmd.getAlias().toLowerCase(), cmd) != null)
+			throw new IllegalArgumentException("Failed to register chat command: " + cmd.getAlias() + " is already registered.");
 	}
 
 	public boolean handleChatCommand(Player player, String text) {
 		if (text == null || text.isEmpty())
 			return false;
 
-		if (!StringUtils.startsWithAny(text, AdminCommand.PREFIX, PlayerCommand.PREFIX))
+		String prefix;
+		if (text.startsWith(AdminCommand.PREFIX))
+			prefix = AdminCommand.PREFIX;
+		else if (text.startsWith(PlayerCommand.PREFIX))
+			prefix = PlayerCommand.PREFIX;
+		else
 			return false;
-
-		String cmdName = text.split(" ")[0];
-		String cmdParams = text.substring(cmdName.length());
-		for (ChatCommand cmd : commandHandlers.values()) {
-			if (!(cmd instanceof ConsoleCommand) && cmdName.equals(cmd.getAliasWithPrefix()))
-				return cmd.process(player, getParamsFromString(cmdParams));
-		}
-
-		return false;
+		int splitIndex = text.indexOf(' ');
+		String cmdName = text.substring(prefix.length(), splitIndex == -1 ? text.length() : splitIndex);
+		ChatCommand cmd = getCommand(cmdName);
+		if (cmd == null)
+			return false;
+		String cmdParams = splitIndex == -1 ? "" : text.substring(splitIndex);
+		return cmd.process(player, getParamsFromString(cmdParams));
 	}
 
 	public void handleConsoleCommand(Player player, String text) {
@@ -106,7 +105,7 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	private ChatCommand getCommand(String alias) {
-		return commandHandlers.get(alias);
+		return commandHandlers.get(alias.toLowerCase());
 	}
 
 	/**
@@ -132,7 +131,7 @@ public class ChatProcessor implements GameEngine {
 	}
 
 	public boolean isCommandExists(String alias) {
-		return commandHandlers.containsKey(alias);
+		return commandHandlers.containsKey(alias.toLowerCase());
 	}
 
 	public static ChatProcessor getInstance() {

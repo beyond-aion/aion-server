@@ -92,9 +92,9 @@ public class SiegeWeaponController extends SummonController {
 	}
 
 	@Override
-	public void onDie(Creature lastAttacker, boolean sendDiePacket) {
+	public void onDie(Creature lastAttacker) {
 		getMaster().getController().cancelTask(TaskId.SUMMON_FOLLOW);
-		super.onDie(lastAttacker, sendDiePacket);
+		super.onDie(lastAttacker);
 	}
 
 	public NpcSkillTemplates getNpcSkillTemplates() {

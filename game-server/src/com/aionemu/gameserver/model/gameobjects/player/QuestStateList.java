@@ -1,11 +1,6 @@
 package com.aionemu.gameserver.model.gameobjects.player;
 
-import java.util.ArrayList;
-import java.util.HashSet;
-import java.util.List;
-import java.util.Set;
-import java.util.SortedMap;
-import java.util.TreeMap;
+import java.util.*;
 import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
@@ -74,10 +69,10 @@ public class QuestStateList {
 	}
 
 	/**
-	 * @return All quests, that are completed.
+	 * @return All quests, that have been completed at least once.
 	 */
 	public List<QuestState> getCompletedQuests() {
-		return quests.values().stream().filter(qs -> qs.getStatus() == QuestStatus.COMPLETE).collect(Collectors.toList());
+		return quests.values().stream().filter(qs -> qs.getCompleteCount() > 0).collect(Collectors.toList());
 	}
 
 	/**
