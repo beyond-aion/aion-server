@@ -25,6 +25,18 @@
 			<gd_item id="182203120" /><!-- quest_2122a -->
 		</gd_items>
 	</gd_rule>
+	<gd_rule rule_name="Named Quest-Start Item" chance="5">
+		<gd_maps>
+			<gd_map map_id="220010000" /><!-- Ishalgen -->
+		</gd_maps>
+		<gd_npcs>
+			<gd_npc npc_id="210372" /><!-- blackbeak airon -->
+			<gd_npc npc_id="210589" /><!-- blackbeak airon -->
+		</gd_npcs>
+		<gd_items>
+			<gd_item id="182203107" /><!-- QUEST_2107A -->
+		</gd_items>
+	</gd_rule>
 	<!-- Single Monster Drops -->
 	<gd_rule rule_name="Named Armor (Common)" chance="90">
 		<gd_maps>
