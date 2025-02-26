@@ -9,7 +9,6 @@ import com.aionemu.gameserver.questEngine.model.QuestActionType;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.questEngine.model.QuestState;
 import com.aionemu.gameserver.questEngine.model.QuestStatus;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Balthazar, fixed Shaman, vlog
@@ -68,13 +67,7 @@ public class _1636AFluteForTheFixing extends AbstractQuestHandler {
 					}
 					break;
 				case 700239: // Drake Stone Statue
-					playQuestMovie(env, 210);
-					VisibleObject drakeStoneStatue = env.getVisibleObject();
-					ThreadPoolManager.getInstance().schedule(() -> {
-						spawnTemporarily(212008, player.getWorldMapInstance(), drakeStoneStatue.getX(), drakeStoneStatue.getY(), drakeStoneStatue.getZ(),
-							(byte) 30, 60);
-					}, 20000);
-					return useQuestObject(env, 3, 3, true, true);
+					return playQuestMovie(env, 210);
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 			if (targetId == 204535) { // Maximus
@@ -92,5 +85,15 @@ public class _1636AFluteForTheFixing extends AbstractQuestHandler {
 	public boolean onCanAct(QuestEnv env, QuestActionType questEventType, Object... objects) {
 		QuestState qs = env.getPlayer().getQuestStateList().getQuestState(env.getQuestId());
 		return env.getTargetId() == 700239 && qs != null && qs.getStatus() == QuestStatus.START && qs.getQuestVarById(0) == 3;
+	}
+
+	@Override
+	public void onMovieEndEvent(QuestEnv env, int movieId) {
+		if (movieId == 210) {
+			changeQuestStep(env, 3, 3, true);
+			VisibleObject drakeStoneStatue = env.getVisibleObject();
+			drakeStoneStatue.getController().deleteAndScheduleRespawn();
+			spawnTemporarily(212008, drakeStoneStatue.getWorldMapInstance(), drakeStoneStatue.getX(), drakeStoneStatue.getY(), drakeStoneStatue.getZ(), (byte) 30, 60);
+		}
 	}
 }
