@@ -91,7 +91,8 @@ public class DuelService {
 
 			@Override
 			public void acceptRequest(Player requester, Player responder) {
-				startDuel(requester, responder);
+				if (!isDueling(requester))
+					startDuel(requester, responder);
 			}
 		};
 		if (targetPlayer.getResponseRequester().putRequest(SM_QUESTION_WINDOW.STR_DUEL_DO_YOU_ACCEPT_REQUEST, rrh)) {
