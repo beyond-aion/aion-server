@@ -39,10 +39,6 @@ public class _4907LepharistsinElysea extends AbstractQuestHandler {
 					return sendQuestStartDialog(env);
 			}
 		} else if (qs.getStatus() == QuestStatus.START) {
-			int var = qs.getQuestVarById(0);
-			long collect1 = player.getInventory().getItemCountByItemId(182207079);
-			long collect2 = player.getInventory().getItemCountByItemId(182207080);
-			long collect3 = player.getInventory().getItemCountByItemId(182207081);
 			if (targetId == 700511) {
 				switch (dialogActionId) {
 					case USE_OBJECT:
@@ -54,20 +50,13 @@ public class _4907LepharistsinElysea extends AbstractQuestHandler {
 			} else if (targetId == 204208) {
 				switch (dialogActionId) {
 					case QUEST_SELECT:
-						if (var == 1)
-							return sendQuestDialog(env, 1352);
+						return sendQuestDialog(env, 1352);
 					case CHECK_USER_HAS_QUEST_ITEM:
-						if (collect1 >= 1 && collect2 >= 1 && collect3 >= 1)
-							return defaultCloseDialog(env, 1, 1, true, true);
-						else
-							return sendQuestDialog(env, 10001);
+						return checkQuestItems(env, 1, 1, true, 5, 10001);
 				}
 			}
 		} else if (qs.getStatus() == QuestStatus.REWARD) {
 				if (targetId == 204208) {
-					removeQuestItem(env, 182207079, 1);
-					removeQuestItem(env, 182207080, 1);
-					removeQuestItem(env, 182207081, 1);
 					return sendQuestEndDialog(env);
 				}
 		}
