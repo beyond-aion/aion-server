@@ -192,11 +192,6 @@
 		<spawn npc_id="700279">
 			<spot x="255.302" y="310.364" z="128.25" h="28" static_id="64"/>
 		</spawn>
-		<!-- Red Journal -->
-		<spawn npc_id="730148">
-			<spot x="328.204" y="275.623" z="142.929" h="11" static_id="61"/>
-			<spot x="327.362" y="267.952" z="143.02" h="92" static_id="206"/>
-		</spawn>
 		<!-- Old Book -->
 		<spawn npc_id="730195">
 			<spot x="348.8" y="279.798" z="144.827" h="101" static_id="191"/>
@@ -242,9 +237,5 @@
 		<spawn npc_id="700230">
 			<spot x="348.9067" y="280.0165" z="141.9738" static_id="191"/>
 		</spawn>
-		<!-- Strange Creature // spawned after boss 212211 die
-		<spawn npc_id="280790">
-			<spot x="243.7621" y="308.1200" z="124.9966"/>
-		</spawn> -->
 	</spawn_map>
 </spawns>
