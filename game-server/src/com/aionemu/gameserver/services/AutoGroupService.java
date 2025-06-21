@@ -105,7 +105,7 @@ public class AutoGroupService {
 		for (LookingForParty lfp : filteredParties) {
 			removeSearchEntry(lfp);
 			lfp.setStartEnterTime();
-			lfp.getMemberObjectIds().forEach(id -> {
+			lfp.getMembers().keySet().forEach(id -> {
 				searchAndRemoveAdditionalRegistrations(id);
 				AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 4);
 			});
@@ -153,7 +153,7 @@ public class AutoGroupService {
 			if (lfp.isLeader(objectId)) {
 				removeSearchEntry(lfp);
 				penaliseParty(lfp);
-				lfp.getMemberObjectIds().forEach(id -> AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 2));
+				lfp.getMembers().keySet().forEach(id -> AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 2));
 			} else {
 				lfp.unregisterMember(objectId);
 				AutoGroupUtility.sendWindowToPlayerIfOnline(objectId, maskId, 2);
@@ -232,7 +232,7 @@ public class AutoGroupService {
 					cancelEnter(player, autoInstance.getAutoGroupType().getTemplate().getMaskId());
 				}
 			} else if (lfp.isLeader(objectId)) {
-				lfp.setLeaderObjId(lfp.getMemberObjectIds().stream().filter(id -> id != objectId).findFirst().orElse(0));
+				lfp.setLeaderObjId(lfp.getMembers().keySet().stream().filter(id -> id != objectId).findFirst().orElse(0));
 				if (lfp.getLeaderObjId() == 0) {
 					removeSearchEntry(lfp);
 				}
@@ -285,7 +285,7 @@ public class AutoGroupService {
 	}
 
 	private void penaliseParty(LookingForParty lfp) {
-		lfp.getMemberObjectIds().forEach(this::penalisePlayerAndScheduleRemoval);
+		lfp.getMembers().keySet().forEach(this::penalisePlayerAndScheduleRemoval);
 	}
 
 	private void penalisePlayerAndScheduleRemoval(int objectId) {
@@ -300,7 +300,7 @@ public class AutoGroupService {
 	public void stopRegistrationsByMaskId(int maskId) {
 		List<LookingForParty> parties = lookingParties.remove(maskId);
 		if (parties != null && !parties.isEmpty())
-			parties.forEach(lfp -> lfp.getMemberObjectIds().forEach(id -> AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 2)));
+			parties.forEach(lfp -> lfp.getMembers().keySet().forEach(id -> AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 2)));
 	}
 
 	public void cancelRegistration(Player player, int maskId) {
@@ -313,7 +313,7 @@ public class AutoGroupService {
 			if (lfp.isLeader(objectId)) {
 				lookingParties.get(maskId).remove(lfp);
 				penaliseParty(lfp);
-				lfp.getMemberObjectIds().forEach(id -> AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 2));
+				lfp.getMembers().keySet().forEach(id -> AutoGroupUtility.sendWindowToPlayerIfOnline(id, maskId, 2));
 			} else {
 				lfp.unregisterMember(objectId);
 				AutoGroupUtility.sendWindowToPlayer(player, maskId, 2);

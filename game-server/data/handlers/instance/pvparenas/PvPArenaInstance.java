@@ -565,8 +565,8 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		int size = associatedPlayers.size();
 
 		for (AGPlayer agPlayer : associatedPlayers) {
-			PvPArenaPlayerReward apr = instanceScore.getPlayerReward(agPlayer.getObjectId());
-			Player player = instance.getPlayer(agPlayer.getObjectId());
+			PvPArenaPlayerReward apr = instanceScore.getPlayerReward(agPlayer.objectId());
+			Player player = instance.getPlayer(agPlayer.objectId());
 			if (apr == null || player == null)
 				continue;
 

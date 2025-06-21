@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.team.TeamType;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
-import com.aionemu.gameserver.services.autogroup.AutoGroupUtility;
 
 /**
  * Includes Dredgion, Engulfed Ophidan Bridge, Idgel Dome, Iron Wall Warfront and Kamar Battlefield
@@ -30,14 +29,10 @@ public class AutoPvpInstance extends AutoInstance {
 				return AGQuestion.FAILED;
 
 			List<AGPlayer> playersByRace = getAGPlayersByRace(lookingForParty.getRace());
-			if (lookingForParty.getMemberObjectIds().size() + playersByRace.size() > getMaxPlayers(lookingForParty.getRace()))
+			if (lookingForParty.getMembers().size() + playersByRace.size() > getMaxPlayers(lookingForParty.getRace()))
 				return AGQuestion.FAILED;
 
-			for (int objectId : lookingForParty.getMemberObjectIds()) {
-				AGPlayer agp = AutoGroupUtility.getNewAutoGroupPlayer(objectId);
-				if (agp != null)
-					registeredAGPlayers.put(objectId, new AGPlayer(objectId));
-			}
+			registeredAGPlayers.putAll(lookingForParty.getMembers());
 			return instance == null && registeredAGPlayers.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED;
 		} finally {
 			writeUnlock();
@@ -59,10 +54,10 @@ public class AutoPvpInstance extends AutoInstance {
 			if (!instance.isRegistered(teamId))
 				instance.register(teamId);
 		} else {
-			if (playersByRace.get(0).isInGroup())
-				PlayerGroupService.addPlayer(playersByRace.get(0).getPlayerGroup(), player);
+			if (playersByRace.getFirst().isInGroup())
+				PlayerGroupService.addPlayer(playersByRace.getFirst().getPlayerGroup(), player);
 			else
-				PlayerAllianceService.addPlayer(playersByRace.get(0).getPlayerAlliance(), player);
+				PlayerAllianceService.addPlayer(playersByRace.getFirst().getPlayerAlliance(), player);
 		}
 		int objectId = player.getObjectId();
 		if (!instance.isRegistered(objectId))

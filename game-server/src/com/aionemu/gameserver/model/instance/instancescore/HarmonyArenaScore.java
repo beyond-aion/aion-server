@@ -29,7 +29,7 @@ public class HarmonyArenaScore extends PvPArenaScore {
 		List<HarmonyGroupReward> harmonyGroups = new ArrayList<>();
 		for (HarmonyGroupReward group : groups) {
 			for (AGPlayer agp : group.getAssociatedPlayers()) {
-				Player p = instance.getPlayer(agp.getObjectId());
+				Player p = instance.getPlayer(agp.objectId());
 				if (p != null) {
 					harmonyGroups.add(group);
 					break;

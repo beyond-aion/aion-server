@@ -107,11 +107,11 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 	}
 
 	protected List<AGPlayer> getAGPlayersByRace(Race race) {
-		return registeredAGPlayers.values().stream().filter(p -> p.getRace() == race).collect(Collectors.toList());
+		return registeredAGPlayers.values().stream().filter(p -> p.race() == race).collect(Collectors.toList());
 	}
 
 	protected List<AGPlayer> getAGPlayersByClass(PlayerClass playerClass) {
-		return registeredAGPlayers.values().stream().filter(p -> p.getPlayerClass() == playerClass).collect(Collectors.toList());
+		return registeredAGPlayers.values().stream().filter(p -> p.playerClass() == playerClass).collect(Collectors.toList());
 	}
 
 	protected List<Player> getPlayersByRace(Race race) {
@@ -121,7 +121,7 @@ public abstract class AutoInstance extends AbstractLockManager implements AutoIn
 	public int getMaxPlayers() {
 		if (instance != null)
 			return instance.getMaxPlayers();
-		Race race = registeredAGPlayers.isEmpty() ? Race.ELYOS : registeredAGPlayers.values().iterator().next().getRace();
+		Race race = registeredAGPlayers.isEmpty() ? Race.ELYOS : registeredAGPlayers.values().iterator().next().race();
 		return DataManager.INSTANCE_COOLTIME_DATA.getMaxMemberCount(agt.getTemplate().getInstanceMapId(), race);
 	}
 }

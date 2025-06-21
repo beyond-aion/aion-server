@@ -10,7 +10,6 @@ import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_AUTO_GROUP;
 import com.aionemu.gameserver.services.AutoGroupService;
-import com.aionemu.gameserver.services.autogroup.AutoGroupUtility;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -121,7 +120,7 @@ public class AutoHarmonyInstance extends AutoInstance {
 		List<Player> _players = new ArrayList<>();
 		for (AGPlayer agp : group) {
 			for (Player p : instance.getPlayersInside()) {
-				if (p.getObjectId() == agp.getObjectId()) {
+				if (p.getObjectId() == agp.objectId()) {
 					_players.add(p);
 					break;
 				}
@@ -143,17 +142,14 @@ public class AutoHarmonyInstance extends AutoInstance {
 	}
 
 	private AGQuestion canAddParty(List<AGPlayer> group, LookingForParty lfp) {
-		if (group.size() + lfp.getMemberObjectIds().size() > 3)
+		if (group.size() + lfp.getMembers().size() > 3)
 			return AGQuestion.FAILED;
-		if (!group.isEmpty() && group.getFirst().getRace() != lfp.getRace())
+		if (!group.isEmpty() && group.getFirst().race() != lfp.getRace())
 			return AGQuestion.FAILED;
 
-		for (int objectId : lfp.getMemberObjectIds()) {
-			AGPlayer agp = AutoGroupUtility.getNewAutoGroupPlayer(objectId);
-			if (agp != null) {
-				group.add(agp);
-				registeredAGPlayers.put(objectId, agp);
-			}
+		for (Map.Entry<Integer, AGPlayer> entry : lfp.getMembers().entrySet()) {
+			group.add(entry.getValue());
+			registeredAGPlayers.put(entry.getKey(), entry.getValue());
 		}
 		return instance != null ? AGQuestion.ADDED : registeredAGPlayers.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED;
 	}
