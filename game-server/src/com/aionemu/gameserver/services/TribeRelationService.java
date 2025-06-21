@@ -56,10 +56,9 @@ public class TribeRelationService {
 				break;
 		}
 		if (creature2 instanceof Player p && p.getPanesterraFaction() != null && creature1.getTribe().name().startsWith("GAB1_")) {
-			TribeClass playerTribe = creature1.getTribe().name().startsWith("GAB1_SUB") ? p.getPanesterraFaction().getSubTribe() : p.getPanesterraFaction().getTribe();
-			if (creature1.getTribe() == playerTribe)
+			if (creature1.getTribe() == p.getPanesterraFaction().getTribe())
 				return false;
-			return DataManager.TRIBE_RELATIONS_DATA.isAggressiveRelation(creature1.getTribe(), playerTribe);
+			return DataManager.TRIBE_RELATIONS_DATA.isAggressiveRelation(creature1.getTribe(), p.getPanesterraFaction().getTribe());
 		}
 
 		return DataManager.TRIBE_RELATIONS_DATA.isAggressiveRelation(creature1.getTribe(), creature2.getTribe());
@@ -102,10 +101,9 @@ public class TribeRelationService {
 				break;
 		}
 		if (creature2 instanceof Player p && p.getPanesterraFaction() != null && creature1.getTribe().name().startsWith("GAB1_")) {
-			TribeClass playerTribe = creature1.getTribe().name().startsWith("GAB1_SUB") ? p.getPanesterraFaction().getSubTribe() : p.getPanesterraFaction().getTribe();
-			if (creature1.getTribe() == playerTribe)
+			if (creature1.getTribe() == p.getPanesterraFaction().getTribe())
 				return true;
-			return DataManager.TRIBE_RELATIONS_DATA.isFriendlyRelation(creature1.getTribe(), playerTribe);
+			return DataManager.TRIBE_RELATIONS_DATA.isFriendlyRelation(creature1.getTribe(), p.getPanesterraFaction().getTribe());
 		}
 
 		return DataManager.TRIBE_RELATIONS_DATA.isFriendlyRelation(creature1.getTribe(), creature2.getTribe());
@@ -127,10 +125,9 @@ public class TribeRelationService {
 				break;
 		}
 		if (creature2 instanceof Player p && p.getPanesterraFaction() != null && creature1.getTribe().name().startsWith("GAB1_")) {
-			TribeClass playerTribe = creature1.getTribe().name().startsWith("GAB1_SUB") ? p.getPanesterraFaction().getSubTribe() : p.getPanesterraFaction().getTribe();
-			if (creature1.getTribe() == playerTribe)
+			if (creature1.getTribe() == p.getPanesterraFaction().getTribe())
 				return true;
-			return DataManager.TRIBE_RELATIONS_DATA.isSupportRelation(creature1.getTribe(), playerTribe);
+			return DataManager.TRIBE_RELATIONS_DATA.isSupportRelation(creature1.getTribe(), p.getPanesterraFaction().getTribe());
 		}
 
 		return DataManager.TRIBE_RELATIONS_DATA.isSupportRelation(creature1.getTribe(), creature2.getTribe());
@@ -180,10 +177,9 @@ public class TribeRelationService {
 		}
 
 		if (creature2 instanceof Player p && p.getPanesterraFaction() != null && creature1.getTribe().name().startsWith("GAB1_")) {
-			TribeClass playerTribe = creature1.getTribe().name().startsWith("GAB1_SUB") ? p.getPanesterraFaction().getSubTribe() : p.getPanesterraFaction().getTribe();
-			if (creature1.getTribe() == playerTribe)
+			if (creature1.getTribe() == p.getPanesterraFaction().getTribe())
 				return false;
-			return DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(creature1.getTribe(), playerTribe);
+			return DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(creature1.getTribe(), p.getPanesterraFaction().getTribe());
 		}
 
 		return DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(creature1.getTribe(), creature2.getTribe());
