@@ -37,6 +37,6 @@ public class EnragedAgent extends SummonerAI {
 	@Override
 	public void modifyOwnerStat(Stat2 stat) {
 		if (stat.getStat() == StatEnum.MAXHP)
-			stat.setBaseRate(SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
+			stat.setBaseRate(SiegeConfig.FORTRESS_PROTECTOR_HEALTH_MULTIPLIER);
 	}
 }

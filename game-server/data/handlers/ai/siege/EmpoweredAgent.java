@@ -95,7 +95,7 @@ public class EmpoweredAgent extends AggressiveNpcAI implements HpPhases.PhaseHan
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
 			case 80, 70, 60, 50, 40, 30, 20 -> onGuardSpawnEvent();
-			case 25, 5 -> getOwner().queueSkill(21778, 1,  3000, NpcSkillTargetAttribute.ME);
+			case 25, 5 -> getOwner().queueSkill(21778, 1, 3000, NpcSkillTargetAttribute.ME);
 		}
 	}
 
@@ -234,6 +234,6 @@ public class EmpoweredAgent extends AggressiveNpcAI implements HpPhases.PhaseHan
 	@Override
 	public void modifyOwnerStat(Stat2 stat) {
 		if (stat.getStat() == StatEnum.MAXHP)
-			stat.setBaseRate(SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
+			stat.setBaseRate(SiegeConfig.FORTRESS_PROTECTOR_HEALTH_MULTIPLIER);
 	}
 }

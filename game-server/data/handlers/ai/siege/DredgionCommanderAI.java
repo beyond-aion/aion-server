@@ -58,14 +58,14 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 	@Override
 	public float modifyOwnerDamage(float damage, Creature effected, Effect effect) {
 		if (effected == fortressBoss)
-			damage *= SiegeConfig.SIEGE_HEALTH_MULTIPLIER;
+			damage *= SiegeConfig.FORTRESS_PROTECTOR_HEALTH_MULTIPLIER;
 		return damage;
 	}
 
 	@Override
 	public void modifyOwnerStat(Stat2 stat) {
 		if (stat.getStat() == StatEnum.MAXHP)
-			stat.setBaseRate(SiegeConfig.SIEGE_HEALTH_MULTIPLIER);
+			stat.setBaseRate(SiegeConfig.FORTRESS_PROTECTOR_HEALTH_MULTIPLIER);
 	}
 
 	@Override
