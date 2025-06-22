@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<spawns xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../../spawns.xsd">
+	<!-- Sanctum Arena -->
+	<spawn_map map_id="110010000">
+		<spawn npc_id="831375" respawn_time="295">
+			<spot x="1429.4757" y="1247.142" z="569.4698" h="34" />
+		</spawn>
+	</spawn_map>
+	<!-- Pandaemonium Arena -->
+	<spawn_map map_id="120010000">
+		<spawn npc_id="831375" respawn_time="295">
+			<spot x="929.23376" y="1600.1057" z="223.76688" h="115" />
+		</spawn>
+	</spawn_map>
+</spawns>

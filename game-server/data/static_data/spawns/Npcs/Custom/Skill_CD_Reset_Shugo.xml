@@ -9,7 +9,7 @@
 	<!-- Pandaemonium Arena -->
 	<spawn_map map_id="120010000">
 		<spawn npc_id="833543" respawn_time="295">
-			<spot x="930.0757" y="1604.4641" z="225.6" h="105" ai="customcdreset" />
+			<spot x="934.2408" y="1605.3118" z="223.76688" h="102" ai="customcdreset" />
 		</spawn>
 	</spawn_map>
 	<!-- Discipline Training Grounds -->
