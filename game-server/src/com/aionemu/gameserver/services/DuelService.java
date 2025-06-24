@@ -9,16 +9,13 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.InstanceConfig;
 import com.aionemu.gameserver.model.DuelResult;
-import com.aionemu.gameserver.model.gameobjects.Summon;
-import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.player.DeniedStatus;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.RequestResponseHandler;
-import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
-import com.aionemu.gameserver.services.summons.SummonsService;
-import com.aionemu.gameserver.skillengine.model.DispelSlotType;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.skillengine.model.Skill;
+import com.aionemu.gameserver.skillengine.model.SkillTargetSlot;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -192,35 +189,37 @@ public class DuelService {
 		Integer opponentId = getOpponentId(loser);
 		if (opponentId == null) // not dueling
 			return;
-
+		endDebuffsByOpponent(loser, opponentId); // Chain of Suffering must be ended before calling removeDuel
 		Player winner = World.getInstance().getPlayer(opponentId);
 		if (winner != null) {
-			winner.getEffectController().removeByDispelSlotType(DispelSlotType.DEBUFF); // all debuffs are removed from winner, but buffs will remain
+			endDebuffsByOpponent(winner, loser.getObjectId()); // Chain of Suffering must be ended before calling removeDuel
 			winner.getController().cancelCurrentSkill(null);
 			winner.getAggroList().remove(loser);
-			cancelSlaveAttacks(loser, winner);
+			cancelSummonedObjectAttacks(loser, winner);
+			cancelSummonedObjectAttacks(winner, loser);
 			PacketSendUtility.sendPacket(winner, SM_DUEL.SM_DUEL_RESULT(DuelResult.DUEL_WON, loser.getName()));
 			PacketSendUtility.sendPacket(loser, SM_DUEL.SM_DUEL_RESULT(DuelResult.DUEL_LOST, winner.getName()));
 		} else { // duel winner is already out of world
-			cancelSlaveAttacks(loser);
-			PacketSendUtility.sendPacket(loser, SM_DUEL.SM_DUEL_RESULT(DuelResult.DUEL_LOST, null));
+			PacketSendUtility.sendPacket(loser, SM_DUEL.SM_DUEL_RESULT(DuelResult.DUEL_LOST, PlayerService.getPlayerName(opponentId)));
 		}
 		removeDuel(loser);
 	}
 
-	private void cancelSlaveAttacks(Player... players) {
-		for (Player player : players) {
-			player.getKnownList().forEachObject(visibleObject -> { // cancel summoned object attacking
-				if (visibleObject instanceof SummonedObject<?> summonedObject) {
-					Skill castingSkill = summonedObject.getCastingSkill();
-					if (castingSkill != null && player.equals(castingSkill.getFirstTarget()) && !summonedObject.isEnemy(player))
-						summonedObject.getController().cancelCurrentSkill(null);
-				} else if (visibleObject instanceof Summon summon) { // cancel summon attacking
-					if (summon.getMode() == SummonMode.ATTACK && player.equals(summon.getTarget()) && !summon.isEnemy(player))
-						SummonsService.doMode(SummonMode.GUARD, summon);
-				}
-			});
-		}
+	private void endDebuffsByOpponent(Player player, int opponentId) {
+		player.getEffectController().getAbnormalEffects().forEach(effect -> {
+			if (effect.getTargetSlot() == SkillTargetSlot.DEBUFF && effect.getEffectorId() == opponentId)
+				effect.endEffect();
+		});
+	}
+
+	private void cancelSummonedObjectAttacks(Player summoner, Player target) {
+		target.getKnownList().forEachNpc(npc -> {
+			if (npc.getMaster().equals(summoner)) {
+				Skill castingSkill = npc.getCastingSkill();
+				if (castingSkill != null && target.equals(castingSkill.getFirstTarget()))
+					npc.getController().cancelCurrentSkill(null);
+			}
+		});
 	}
 
 	private void createTask(Player requester, Player responder) {

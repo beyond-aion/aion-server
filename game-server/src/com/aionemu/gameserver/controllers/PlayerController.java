@@ -54,8 +54,11 @@ import com.aionemu.gameserver.services.summons.SummonsService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
 import com.aionemu.gameserver.skillengine.effect.RebirthEffect;
-import com.aionemu.gameserver.skillengine.model.*;
+import com.aionemu.gameserver.skillengine.model.Effect;
+import com.aionemu.gameserver.skillengine.model.HopType;
+import com.aionemu.gameserver.skillengine.model.Skill;
 import com.aionemu.gameserver.skillengine.model.Skill.SkillMethod;
+import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.PlayerMoveTaskManager;
 import com.aionemu.gameserver.taskmanager.tasks.TeamMoveUpdater;
 import com.aionemu.gameserver.taskmanager.tasks.TeamStatUpdater;
@@ -259,10 +262,9 @@ public class PlayerController extends CreatureController<Player> {
 		Creature master = lastAttacker.getMaster();
 
 		if (DuelService.getInstance().isDueling(player)) {
-			boolean killedByOpponent = master instanceof Player && ((Player) master).isDueling(player);
+			boolean killedByOpponent = player.isDueling(master);
 			DuelService.getInstance().loseDuel(player);
 			if (killedByOpponent) {
-				player.getEffectController().removeByDispelSlotType(DispelSlotType.DEBUFF);
 				if (player.getLifeStats().getHpPercentage() < 33)
 					player.getLifeStats().setCurrentHpPercent(33);
 				if (player.getLifeStats().getMpPercentage() < 33)

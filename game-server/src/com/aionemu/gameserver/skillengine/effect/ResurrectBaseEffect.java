@@ -26,7 +26,7 @@ public class ResurrectBaseEffect extends ResurrectEffect {
 	@Override
 	public void endEffect(Effect effect) {
 		Creature effected = effect.getEffected();
-		if (effected.isDead() && effected instanceof Player player)
+		if (effected.isDead() && effected instanceof Player player && !player.isDueling(effect.getEffector()))
 			PlayerReviveService.scheduleReviveAtBase(player, 2500, skillId);
 	}
 }
