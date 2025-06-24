@@ -42,7 +42,6 @@ public class ApExtractAction extends AbstractItemAction {
 			case GREATSWORD:
 			case POLEARM:
 			case STAFF:
-			case SHIELD:
 			case HARP:
 			case GUN:
 			case KEYBLADE:
@@ -74,6 +73,7 @@ public class ApExtractAction extends AbstractItemAction {
 			case PL_SHOULDER:
 			case PL_GLOVE:
 			case PL_SHOES:
+			case SHIELD:
 				type = UseTarget.ARMOR;
 				break;
 			case NECKLACE:
