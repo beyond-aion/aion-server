@@ -12,7 +12,6 @@ import com.aionemu.gameserver.configs.main.AutoGroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.DialogPage;
-import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.autogroup.AutoGroupType;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.PetAction;
@@ -24,9 +23,6 @@ import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.templates.goods.GoodsList;
 import com.aionemu.gameserver.model.templates.npc.TalkInfo;
-import com.aionemu.gameserver.model.templates.portal.PortalPath;
-import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
-import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate;
 import com.aionemu.gameserver.model.templates.tradelist.TradeListTemplate.TradeTab;
 import com.aionemu.gameserver.model.templates.zone.ZoneClassName;
@@ -40,7 +36,6 @@ import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
 import com.aionemu.gameserver.services.item.ItemChargeService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
-import com.aionemu.gameserver.services.teleport.PortalService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.skillengine.model.DispelSlotType;
@@ -70,9 +65,7 @@ public class DialogService {
 			mailbox.mailBoxState = PlayerMailboxState.CLOSED;
 	}
 
-	public static void onDialogSelect(int dialogActionId, final Player player, Npc npc, int questId, int extendedRewardIndex) {
-		QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
-		env.setExtendedRewardIndex(extendedRewardIndex);
+	public static void onDialogSelect(int dialogActionId, Player player, Npc npc, int questId, int extendedRewardIndex) {
 		int targetObjectId = npc.getObjectId();
 
 		if (questId == 0) {
@@ -277,34 +270,14 @@ public class DialogService {
 				case HOUSING_RECREATE_PERSONAL_INS: // recreate personal house instance (studio)
 					HousingService.getInstance().recreatePlayerStudio(player);
 					break;
-				case SETPRO1:
-				case SETPRO2:
-				case SETPRO3:
-				case TELEPORT_SIMPLE:
-					if (QuestEngine.getInstance().onDialog(env)) { // remove this shit after assigning AI portal_dialog
-						return;
-					}
-					PortalPath portalPath = DataManager.PORTAL2_DATA.getPortalDialogPath(npc.getNpcId(), dialogActionId, player);
-					if (portalPath != null) {
-						PortalService.port(portalPath, player, npc);
-					} else {
-						TeleporterTemplate template = DataManager.TELEPORTER_DATA.getTeleporterTemplateByNpcId(npc.getNpcId());
-						if (template != null) {
-							TeleportLocation loc = template.getTeleLocIdData().getTelelocations().get(0);
-							if (loc != null)
-								TeleportService.teleport(template, loc.getLocId(), player, npc,
-									npc.getAi().getName().equals("general") ? TeleportAnimation.JUMP_IN : TeleportAnimation.FADE_OUT_BEAM);
-						}
-					}
-					break;
 				default:
-					if (QuestEngine.getInstance().onDialog(env))
-						return;
 					// action id = next page id
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogActionId));
 					break;
 			}
 		} else {
+			QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
+			env.setExtendedRewardIndex(extendedRewardIndex);
 			if (QuestEngine.getInstance().onDialog(env))
 				return;
 			// action id = next page id

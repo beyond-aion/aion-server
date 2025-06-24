@@ -262,10 +262,14 @@ public class NpcController extends CreatureController<Npc> {
 	}
 
 	@Override
-	public void onDialogSelect(int dialogActionId, int prevDialogId, final Player player, int questId, int extendedRewardIndex) {
-		QuestEnv env = new QuestEnv(getOwner(), player, questId, dialogActionId);
-		if (!PositionUtil.isInTalkRange(player, getOwner()) && !QuestEngine.getInstance().onDialog(env))
-			return;
+	public void onDialogSelect(int dialogActionId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
+		if (!PositionUtil.isInTalkRange(player, getOwner())) {
+			// TODO remove this call and return unconditionally once logging has clarified wtf it is trying to solve 
+			if (QuestEngine.getInstance().onDialog(new QuestEnv(getOwner(), player, questId, dialogActionId)))
+				log.warn(player + " talked to " + getOwner() + " out of range, but QuestEngine.onDialog returned true");
+			else
+				return;
+		}
 		if (!getOwner().getAi().onDialogSelect(player, dialogActionId, questId, extendedRewardIndex)) {
 			DialogService.onDialogSelect(dialogActionId, player, getOwner(), questId, extendedRewardIndex);
 		}
