@@ -26,8 +26,8 @@
 			</buff>
 		</buffs>
 	</event>
-	<event name="Increased XP &amp; AP Rates" start="2025-03-17T00:00:00" end="2025-03-19T23:59:59">
-		<login_message>Benefit from increased XP and AP until Wednesday!</login_message>
+	<event name="Increased XP &amp; AP Rates" start="2025-08-01T00:00:00" end="2025-08-07T23:59:59">
+		<login_message>Benefit from increased XP and AP until Thursday!</login_message>
 		<buffs>
 			<!-- AP Boost Effect - 30% -->
 			<!-- [Event] Marvelous XP Energy (XP +100%) -->
@@ -35,6 +35,9 @@
 				<trigger condition="ENTER_MAP" />
 			</buff>
 		</buffs>
+		<config_properties>
+			<property>gameserver.rates.ap.pve = 1.54</property>
+		</config_properties>
 	</event>
 	<event name="Increased Gathering &amp; Crafting XP Rates" start="2025-03-20T00:00:00" end="2025-03-21T23:59:59">
 		<login_message>Benefit from increased skill experience when gathering or crafting until Friday!</login_message>
@@ -54,6 +57,27 @@
 				<trigger condition="ENTER_MAP" />
 			</buff>
 		</buffs>
+	</event>
+	<event name="Increased Drop Rates 50%" start="2025-08-08T00:00:00" end="2025-08-14T23:59:59">
+		<login_message>Benefit from increased drop rates until next Thursday!</login_message>
+		<buffs>
+			<!-- [Event] Powerful Item Energy (Drop Boost +50%) -->
+			<buff skill_ids="10826" permanent="true">
+				<trigger condition="ENTER_MAP" />
+			</buff>
+		</buffs>
+	</event>
+	<event name="Increased Gather Count" start="2025-08-15T00:00:00" end="2025-08-21T23:59:59">
+		<login_message>Benefit from increased gather count until next Thursday!</login_message>
+		<config_properties>
+			<property>gameserver.rates.gathering.count = 4</property>
+		</config_properties>
+	</event>
+	<event name="Increased Crafting Crit Rate" start="2025-08-22T00:00:00" end="2025-08-24T23:59:59">
+		<login_message>Benefit from increased crafting crit rate until Sunday!</login_message>
+		<config_properties>
+			<property>gameserver.rates.crafting.crit_chances = 50</property>
+		</config_properties>
 	</event>
 	<event name="Kill Collector" start="2024-07-08T00:00:00" end="2024-08-04T23:59:59">
 		<config_properties>
@@ -2925,7 +2949,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Beritra Lucky Week" start="2025-04-16T00:00:00" end="2024-04-30T23:59:59">
+	<event name="Beritra Lucky Week" start="2025-07-30T00:00:00" end="2025-08-17T23:59:59">
 		<event_drops>
 			<gd_rule rule_name="Beritra Equipment Chest" chance="100" member_limit="12">
 				<gd_maps>

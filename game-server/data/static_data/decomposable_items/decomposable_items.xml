@@ -23609,53 +23609,56 @@
 	<decomposable item_id="188052623" /><!-- [Event] Romantic Dye Box -->
 	<decomposable item_id="188052624" /><!-- [Event] Dramata's Bone Wing Box -->
 	<decomposable item_id="188052625"><!-- [Event] Ice-hot Box -->
-		<items chance="10">
-			<item id="162000107" min_count="10" /><!-- Saam King's Herbs -->
+		<items chance="13">
+			<item id="162000107" min_count="5" max_count="10" /><!-- Saam King's Herbs -->
 		</items>
-		<items chance="10">
+		<items chance="13">
 			<item id="186000238" min_count="50" /><!-- Conqueror's Mark -->
 		</items>
-		<items chance="10">
+		<items chance="13">
 			<item id="186000237" min_count="75" /><!-- Ancient Coin -->
 		</items>
-		<items chance="10">
-			<item id="186000130" min_count="500" /><!-- Crucible Insignia -->
+		<items chance="13">
+			<item id="186000409" min_count="5" max_count="15" /><!-- Daeva's Respite Coin -->
 		</items>
-		<items chance="7">
+		<items chance="8">
 			<item id="186000243" min_count="3" /><!-- Fragmented Ceramium -->
 		</items>
-		<items chance="7">
-			<item id="186000399" min_count="25" /><!-- Honorable Conqueror's Mark -->
+		<items chance="8">
+			<item id="186000399" min_count="10" max_count="25" /><!-- Honorable Conqueror's Mark -->
 		</items>
-		<items chance="7">
+		<items chance="8">
 			<item id="188054198" /><!-- Greater Scroll Bundle -->
 		</items>
-		<items chance="7">
-			<item id="188054035" /><!-- [Club] Full Furniture Bundle -->
+		<items chance="5">
+			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
 		</items>
 		<items chance="5">
-			<item id="166020000" min_count="5" /><!-- Omega Enchantment Stone -->
+			<item id="166030005" min_count="3" /><!-- Tempering Solution -->
 		</items>
 		<items chance="5">
-			<item id="166030005" min_count="5" /><!-- Tempering Solution -->
+			<item id="166500002" min_count="2" /><!-- Amplification Stone -->
 		</items>
-		<items chance="5">
-			<item id="188053113" min_count="3" /><!-- Ahserion's Flight Ancient Manastone Bundle -->
+		<items chance="2">
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
 		</items>
-		<items chance="4">
-			<item id="169629003" /><!-- Shiny Vinna -->
+		<items chance="2">
+			<item id="188053614" /><!-- Illusion Godstone Bundle -->
 		</items>
-		<items chance="4">
-			<item id="169650000" /><!-- Plastic Surgery Ticket -->
-		</items>
-		<items chance="3">
+		<items chance="2">
 			<item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
 		</items>
-		<items chance="3">
+		<items chance="2">
 			<item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
 		</items>
-		<items chance="3">
-			<item id="188053004" /><!-- [Event] Dragon Lord's Weapon Chest -->
+		<items chance="0.5">
+			<item id="187000121" /><!-- Hyperion Wings -->
+		</items>
+		<items chance="0.4">
+			<item id="190070017" /><!-- Sidekick Akumu Summoning Lamp -->
+		</items>
+		<items chance="0.1">
+			<item id="165020020" /><!-- Noble Weapon Wrapping Scroll (Mythic/Lv. 65 and lower) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188052626"><!-- [Event] Cocktail Shaker -->
