@@ -511,6 +511,7 @@
 			<gd_map map_id="301130000" /><!-- Sauro_Supply_Base -->
 		</gd_maps>
 		<gd_npcs>
+			<gd_npc npc_id="230852" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233316" /><!-- Commander Ranodim -->
 			<gd_npc npc_id="233317" /><!-- Commander Ranodim -->
 		</gd_npcs>
