@@ -116,7 +116,8 @@ public class AttackUtil {
 			float defenseBonus = element == SkillElement.NONE ? attacked.getGameStats().getPDef().getBonus() : attacked.getGameStats().getMDef().getBonus();
 			StatEnum defenseStat = element == SkillElement.NONE ? StatEnum.PHYSICAL_DEFENSE : StatEnum.MAGICAL_DEFEND;
 			float def = StatFunctions.getMovementModifier(attacked, defenseStat, defenseBase) + defenseBonus;
-			float damage = (StatFunctions.adjustDamageByMovementModifier(attacker,attackResultList.get(i).getDamage()) - (def/10)) * (i == 0 ? mainMultiplier : offMultiplier);
+			float damage = (attackResultList.get(i).getDamage() - (def/10)) * (i == 0 ? mainMultiplier : offMultiplier);
+			damage = StatFunctions.adjustDamageByMovementModifier(attacker, damage);
 			if (reduceRatio > 0) {
 				float dmgToReduce = damage - (damage * reduceRatio);
 				if (dmgToReduce > reduceMax) {
