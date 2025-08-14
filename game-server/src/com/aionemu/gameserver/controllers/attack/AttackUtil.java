@@ -112,9 +112,10 @@ public class AttackUtil {
 		if (maxListIndex < attackResultList.size()) // should never happen but log just in case
 			LoggerFactory.getLogger(AttackUtil.class).warn("attackResultList has more elements than expected (" + attackResultList.size() + ")");
 		for (int i = 0; i < maxListIndex; i++) {
+			float defenseBase = element == SkillElement.NONE ? attacked.getGameStats().getPDef().getBase() : attacked.getGameStats().getMDef().getBase();
+			float defenseBonus = element == SkillElement.NONE ? attacked.getGameStats().getPDef().getBonus() : attacked.getGameStats().getMDef().getBonus();
 			StatEnum defenseStat = element == SkillElement.NONE ? StatEnum.PHYSICAL_DEFENSE : StatEnum.MAGICAL_DEFEND;
-			float def = attacked.getGameStats().getPDef().getBonus() + StatFunctions.getMovementModifier(attacked, defenseStat,
-				defenseStat == StatEnum.PHYSICAL_DEFENSE ? attacked.getGameStats().getPDef().getBase() : attacked.getGameStats().getMDef().getBase());
+			float def = StatFunctions.getMovementModifier(attacked, defenseStat, defenseBase) + defenseBonus;
 			float damage = (StatFunctions.adjustDamageByMovementModifier(attacker,attackResultList.get(i).getDamage()) - (def/10)) * (i == 0 ? mainMultiplier : offMultiplier);
 			if (reduceRatio > 0) {
 				float dmgToReduce = damage - (damage * reduceRatio);
