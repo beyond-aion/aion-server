@@ -284,7 +284,10 @@ public class DialogService {
 					break;
 			}
 		} else {
-			handleQuestDialog(player, npc, questId, dialogActionId, extendedRewardIndex);
+			if(handleQuestDialog(player, npc, questId, dialogActionId, extendedRewardIndex)) {
+				return;
+			}
+			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogActionId, questId));
 		}
 	}
 
