@@ -81,10 +81,21 @@ public class PositionUtil {
 	 * </pre>
 	 */
 	public static float calculateAngleTowards(VisibleObject object, VisibleObject target) {
-		float angle1 = convertHeadingToAngle(object.getHeading());
-		float angle2 = calculateAngleFrom(object, target);
-		float angleDiff = Math.abs(angle1 - angle2);
-		return angleDiff > 180 ? angleDiff - 360 : angleDiff;
+		return calculateAngleTowards(object.getX(), object.getY(), object.getHeading(), target.getX(), target.getY());
+	}
+
+	/**
+	 * @see #calculateAngleTowards(VisibleObject, VisibleObject)
+	 */
+	public static float calculateAngleTowards(float x, float y, byte heading, float targetX, float targetY) {
+		float angle1 = convertHeadingToAngle(heading);
+		float angle2 = calculateAngleFrom(x, y, targetX, targetY);
+		float angleDiff = angle1 - angle2;
+		if (angleDiff < -180)
+			angleDiff += 360;
+		else if (angleDiff > 180)
+			angleDiff -= 360;
+		return angleDiff;
 	}
 
 	/**
