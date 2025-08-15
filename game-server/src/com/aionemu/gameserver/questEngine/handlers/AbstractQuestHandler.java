@@ -95,7 +95,7 @@ public abstract class AbstractQuestHandler {
 		if (dialogActionId >= SELECT1 && dialogActionId <= SELECT15_4_4_4_4) {
 			// simple "next page" event (action ID = next dialog page ID), but there are some quests where this default behavior does not apply (e.g.
 			// 4074)
-			sendDialogPacket(env, dialogActionId, questId);
+			PacketSendUtility.sendPacket(env.getPlayer(), new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), dialogActionId));
 			return true;
 		}
 		switch (dialogActionId) {

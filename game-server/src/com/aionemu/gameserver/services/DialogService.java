@@ -65,6 +65,12 @@ public class DialogService {
 			mailbox.mailBoxState = PlayerMailboxState.CLOSED;
 	}
 
+	private static boolean handleQuestDialog(Player player, Npc npc, int questId, int dialogActionId, int extendedRewardIndex) {
+		QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
+		env.setExtendedRewardIndex(extendedRewardIndex);
+		return QuestEngine.getInstance().onDialog(env);
+	}
+	
 	public static void onDialogSelect(int dialogActionId, Player player, Npc npc, int questId, int extendedRewardIndex) {
 		int targetObjectId = npc.getObjectId();
 
@@ -271,17 +277,14 @@ public class DialogService {
 					HousingService.getInstance().recreatePlayerStudio(player);
 					break;
 				default:
-					// action id = next page id
+					if (handleQuestDialog(player, npc, questId, dialogActionId, extendedRewardIndex)) {
+						break;	
+					}
 					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogActionId));
 					break;
 			}
 		} else {
-			QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
-			env.setExtendedRewardIndex(extendedRewardIndex);
-			if (QuestEngine.getInstance().onDialog(env))
-				return;
-			// action id = next page id
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogActionId, questId));
+			handleQuestDialog(player, npc, questId, dialogActionId, extendedRewardIndex);
 		}
 	}
 
