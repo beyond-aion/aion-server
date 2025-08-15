@@ -20,7 +20,8 @@ public enum CreatureState {
 	CHAIR(FLYING.getId() + RESTING.getId(), true), // 2 + 4 (need to stand near a chair, otherwise shows resting state)
 	DEAD(ACTIVE.getId() + FLYING.getId() + RESTING.getId()), // 1 + 2 + 4
 	PRIVATE_SHOP(ACTIVE.getId() + FLYING.getId() + FLOATING_CORPSE.getId(), true), // 1 + 2 + 8
-	LOOTING(RESTING.getId() + FLOATING_CORPSE.getId()); // 4 + 8
+	LOOTING(RESTING.getId() + FLOATING_CORPSE.getId()), // 4 + 8
+	ACTIVE_WITH_POWERSHARD(ACTIVE.getId() + POWERSHARD.getId(), true); // 1 + 128
 
 	private int id;
 	private boolean mustMatchExact;

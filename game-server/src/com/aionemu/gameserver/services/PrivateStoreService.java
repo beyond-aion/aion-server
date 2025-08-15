@@ -74,7 +74,10 @@ public class PrivateStoreService {
 		}
 		if (player.isDead())
 			return false;
-		if (player.getState() != CreatureState.ACTIVE.getId())
+		if (
+			!player.isInState(CreatureState.ACTIVE) &&
+			!player.isInState(CreatureState.ACTIVE_WITH_POWERSHARD)
+		)
 			return false;
 		if (player.getStore() != null)
 			return false;
