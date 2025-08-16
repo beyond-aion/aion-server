@@ -43,7 +43,7 @@ public class PrivateStoreService {
 			store.addItemToSell(tradePSItem.getItemObjId(), tradePSItem);
 		}
 		player.setStore(store);
-		player.setState(CreatureState.PRIVATE_SHOP);
+		player.setState(CreatureState.PRIVATE_SHOP, true);
 		PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.OPEN_PRIVATESHOP, 0, 0), true);
 	}
 
@@ -74,7 +74,7 @@ public class PrivateStoreService {
 		}
 		if (player.isDead())
 			return false;
-		if (player.getState() != CreatureState.ACTIVE.getId())
+		if (player.isInState(CreatureState.CHAIR))
 			return false;
 		if (player.getStore() != null)
 			return false;
