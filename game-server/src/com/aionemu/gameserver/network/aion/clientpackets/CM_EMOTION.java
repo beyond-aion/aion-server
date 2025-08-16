@@ -154,11 +154,11 @@ public class CM_EMOTION extends AionClientPacket {
 				player.unsetState(CreatureState.RESTING);
 				break;
 			case CHAIR_SIT:
-				if (!player.isInState(CreatureState.WEAPON_EQUIPPED))
-					player.setState(CreatureState.CHAIR);
+				player.setState(CreatureState.CHAIR, true);
 				break;
 			case CHAIR_UP:
-				player.unsetState(CreatureState.CHAIR);
+				if (player.isInState(CreatureState.CHAIR))
+					player.setState(CreatureState.ACTIVE);
 				break;
 			case LAND_FLYTELEPORT:
 				player.getController().onFlyTeleportEnd();
