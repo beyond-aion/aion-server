@@ -339,7 +339,7 @@ public class StatFunctions {
 	 * @return damage reduced by elemental resistance
 	 */
 	private static float reduceDamageByElementalResistance(Creature attacked, SkillElement element, float damage) {
-		return damage * (1 - getMovementModifier(attacked, SkillElement.getResistanceForElement(element), attacked.getGameStats().getMagicalDefenseFor(element))/ 1450f);
+		return damage * (1 - adjustStatByMovementModifier(attacked, StatEnum.MAGICAL_DEFEND, attacked.getGameStats().getMagicalDefenseFor(element))/ 1450f);
 	}
 
 
@@ -456,9 +456,8 @@ public class StatFunctions {
 				}
 			}
 		} else if (!useTemplateDmg) {
-			if (attacker instanceof Player) {
-				int levelDiff = target.getLevel() - attacker.getLevel(); // npcs dmg is not reduced because of the level difference GF (4.9) 23.04.2016
-				damage *= (1f - getNpcLevelDiffMod(levelDiff, 0));
+			if (attacker instanceof Player) { // npcs dmg is not reduced because of the level difference GF (4.9) 23.04.2016
+				damage *= 1f - getNpcLevelDiffMod(target, attacker);
 			}
 			attackBonus = attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO, 0).getCurrent() * 0.001f;
 			defenseBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent() * 0.001f;
@@ -488,14 +487,13 @@ public class StatFunctions {
 
 		float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent() + accMod;
 		float dodge = attacked.getGameStats().getEvasion().getBonus()
-			+ getMovementModifier(attacked, StatEnum.EVASION, attacked.getGameStats().getEvasion().getBase());
+			+ adjustStatByMovementModifier(attacked, StatEnum.EVASION, attacked.getGameStats().getEvasion().getBase());
 		float dodgeRate = dodge - accuracy;
 		if (attacked instanceof Npc npc) {
 			// static npcs never dodge
 			if (npc.hasStatic())
 				return false;
-			int levelDiff = attacked.getLevel() - attacker.getLevel();
-			dodgeRate *= 1 + getNpcLevelDiffMod(levelDiff, 0);
+			dodgeRate *= 1 + getNpcLevelDiffMod(attacked, attacker);
 		}
 		return Rnd.nextInt(1000) < limit(StatEnum.EVASION, dodgeRate);
 	}
@@ -510,7 +508,7 @@ public class StatFunctions {
 
 		float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent() + accMod;
 		float parry = attacked.getGameStats().getParry().getBonus()
-			+ getMovementModifier(attacked, StatEnum.PARRY, attacked.getGameStats().getParry().getBase());
+			+ adjustStatByMovementModifier(attacked, StatEnum.PARRY, attacked.getGameStats().getParry().getBase());
 		return Rnd.nextInt(1000) < limit(StatEnum.PARRY, parry - accuracy);
 	}
 
@@ -525,7 +523,7 @@ public class StatFunctions {
 		float accuracy = attacker.getGameStats().getMainHandPAccuracy().getCurrent() + accMod;
 
 		float block = attacked.getGameStats().getBlock().getBonus()
-			+ getMovementModifier(attacked, StatEnum.BLOCK, attacked.getGameStats().getBlock().getBase());
+			+ adjustStatByMovementModifier(attacked, StatEnum.BLOCK, attacked.getGameStats().getBlock().getBase());
 		return Rnd.nextInt(1000) < limit(StatEnum.BLOCK, block - accuracy);
 	}
 
@@ -591,47 +589,38 @@ public class StatFunctions {
 		return fallDamage;
 	}
 
-	public static float getMovementModifier(Creature creature, StatEnum stat, float value) {
-		if (!(creature instanceof Player) || stat == null)
+	public static float adjustStatByMovementModifier(Creature creature, StatEnum stat, float value) {
+		if (!(creature instanceof Player player) || stat == null)
 			return value;
 
-		Player player = (Player) creature;
-		int h = player.getMoveController().getMovementHeading();
-		if (h < 0)
-			return value;
-		// 7 0 1
-		// \ | /
-		// 6- -2
-		// / | \
-		// 5 4 3
-		switch (h) {
-			case 7:
-			case 0:
-			case 1:
+		// https://web.archive.org/web/20170429204823/gameguide.na.aiononline.com/aion/Combat
+		switch (player.getMoveController().getMovementDirection()) {
+			case FORWARD:
 				switch (stat) {
-					case WATER_RESISTANCE:
-					case WIND_RESISTANCE:
-					case FIRE_RESISTANCE:
-					case EARTH_RESISTANCE:
-					case ELEMENTAL_RESISTANCE_DARK:
-					case ELEMENTAL_RESISTANCE_LIGHT:
+					case PHYSICAL_ATTACK:
+					case MAGICAL_ATTACK:
+						return value * 1.1f;
+					case MAGICAL_DEFEND:
 					case PHYSICAL_DEFENSE:
 						return value * 0.8f;
 				}
 				break;
-			case 6:
-			case 2:
+			case SIDEWAYS:
 				switch (stat) {
+					case PHYSICAL_ATTACK:
+					case MAGICAL_ATTACK:
+						return value * 0.3f;
 					case EVASION:
 						return value + 300;
 					case SPEED:
 						return value * 0.8f;
 				}
 				break;
-			case 5:
-			case 4:
-			case 3:
+			case BACKWARD:
 				switch (stat) {
+					case PHYSICAL_ATTACK:
+					case MAGICAL_ATTACK:
+						return value * 0.3f;
 					case PARRY:
 					case BLOCK:
 						return value + 500;
@@ -643,52 +632,18 @@ public class StatFunctions {
 		return value;
 	}
 
-	public static float adjustDamageByMovementModifier(Creature creature, float value) {
-		if (!(creature instanceof Player))
-			return value;
-		int h = ((Player) creature).getMoveController().getMovementHeading();
-		if (h < 0)
-			return value;
-		switch (h) {
-			case 7:
-			case 0:
-			case 1:
-				value *= 1.1f;
-				break;
-			case 6:
-			case 2:
-				value *= 0.8f; // correct? it's only 30% according to https://web.archive.org/web/20170429204823/gameguide.na.aiononline.com/aion/Combat
-				break;
-			case 5:
-			case 4:
-			case 3:
-				value *= 0.8f; // correct? it's only 30% according to https://web.archive.org/web/20170429204823/gameguide.na.aiononline.com/aion/Combat
-				break;
-		}
-		return value;
-	}
-
-	private static float getNpcLevelDiffMod(int levelDiff, int base) {
-		switch (levelDiff) {
-			case 3:
-				return 0.1f;
-			case 4:
-				return 0.2f;
-			case 5:
-				return 0.3f;
-			case 6:
-				return 0.4f;
-			case 7:
-				return 0.5f;
-			case 8:
-				return 0.6f;
-			case 9:
-				return 0.7f;
-			default:
-				if (levelDiff > 9)
-					return 0.8f;
-		}
-		return base;
+	private static float getNpcLevelDiffMod(Creature target, Creature attacker) {
+		int levelDiff = target.getLevel() - attacker.getLevel();
+		return switch (levelDiff) {
+			case 3 -> 0.1f;
+			case 4 -> 0.2f;
+			case 5 -> 0.3f;
+			case 6 -> 0.4f;
+			case 7 -> 0.5f;
+			case 8 -> 0.6f;
+			case 9 -> 0.7f;
+			default -> levelDiff > 9 ? 0.8f : 0;
+		};
 	}
 
 	/**

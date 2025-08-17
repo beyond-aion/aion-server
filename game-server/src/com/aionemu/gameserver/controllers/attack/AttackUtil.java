@@ -112,10 +112,16 @@ public class AttackUtil {
 		if (maxListIndex < attackResultList.size()) // should never happen but log just in case
 			LoggerFactory.getLogger(AttackUtil.class).warn("attackResultList has more elements than expected (" + attackResultList.size() + ")");
 		for (int i = 0; i < maxListIndex; i++) {
-			StatEnum defenseStat = element == SkillElement.NONE ? StatEnum.PHYSICAL_DEFENSE : StatEnum.MAGICAL_DEFEND;
-			float def = attacked.getGameStats().getPDef().getBonus() + StatFunctions.getMovementModifier(attacked, defenseStat,
-				defenseStat == StatEnum.PHYSICAL_DEFENSE ? attacked.getGameStats().getPDef().getBase() : attacked.getGameStats().getMDef().getBase());
-			float damage = (StatFunctions.adjustDamageByMovementModifier(attacker,attackResultList.get(i).getDamage()) - (def/10)) * (i == 0 ? mainMultiplier : offMultiplier);
+			float damageMultiplier = i == 0 ? mainMultiplier : offMultiplier;
+			boolean isPhysical = element == SkillElement.NONE;
+			StatEnum attackStat = isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK;
+			StatEnum defenseStat = isPhysical ? StatEnum.PHYSICAL_DEFENSE : StatEnum.MAGICAL_DEFEND;
+			float defenseBase = isPhysical ? attacked.getGameStats().getPDef().getBase() : attacked.getGameStats().getMDef().getBase();
+			float defenseBonus = isPhysical ? attacked.getGameStats().getPDef().getBonus() : attacked.getGameStats().getMDef().getBonus();
+			float defense = StatFunctions.adjustStatByMovementModifier(attacked, defenseStat, defenseBase) + defenseBonus;
+			float damage = attackResultList.get(i).getDamage() - (defense / 10);
+			damage *= damageMultiplier;
+			damage = StatFunctions.adjustStatByMovementModifier(attacker, attackStat, damage);
 			if (reduceRatio > 0) {
 				float dmgToReduce = damage - (damage * reduceRatio);
 				if (dmgToReduce > reduceMax) {
@@ -304,19 +310,17 @@ public class AttackUtil {
 			}
 		}
 
+		boolean isPhysical = element == SkillElement.NONE;
 		if (!useTemplateDmg) {
 			float damageMultiplier;
-			switch (element) {
-				case NONE -> {
-					damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
-					damage += bonus;
-				}
-				default -> {
-					damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
-					damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, element, true, true);
-				}
+			if (isPhysical) {
+				damageMultiplier = effector.getObserveController().getBasePhysicalDamageMultiplier(true);
+				damage += bonus;
+			} else {
+				damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
+				damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, element, true, true);
 			}
-			damage = StatFunctions.adjustDamageByMovementModifier(effector, damage);
+			damage = StatFunctions.adjustStatByMovementModifier(effector, isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK, damage);
 			damage *= damageMultiplier;
 		}
 
@@ -329,8 +333,8 @@ public class AttackUtil {
 			default -> damage;
 		};
 
-		if (element == SkillElement.NONE) {
-			float def = effected.getGameStats().getPDef().getBonus() + StatFunctions.getMovementModifier(effected, StatEnum.PHYSICAL_DEFENSE,
+		if (isPhysical) {
+			float def = effected.getGameStats().getPDef().getBonus() + StatFunctions.adjustStatByMovementModifier(effected, StatEnum.PHYSICAL_DEFENSE,
 					effected.getGameStats().getPDef().getBase());
 			damage -= def / 10;
 		}
