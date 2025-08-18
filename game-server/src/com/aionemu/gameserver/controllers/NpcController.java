@@ -263,12 +263,9 @@ public class NpcController extends CreatureController<Npc> {
 
 	@Override
 	public void onDialogSelect(int dialogActionId, int prevDialogId, Player player, int questId, int extendedRewardIndex) {
-		if (!PositionUtil.isInTalkRange(player, getOwner())) {
+		if (!PositionUtil.isInTalkRange(player, getOwner()))
 			return;
-		}
-		if (
-			!getOwner().getAi().onDialogSelect(player, dialogActionId, questId, extendedRewardIndex)
-		) {
+		if (!getOwner().getAi().onDialogSelect(player, dialogActionId, questId, extendedRewardIndex)) {
 			DialogService.onDialogSelect(dialogActionId, player, getOwner(), questId, extendedRewardIndex);
 		}
 	}

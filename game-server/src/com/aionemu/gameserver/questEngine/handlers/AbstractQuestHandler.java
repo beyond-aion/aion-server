@@ -91,13 +91,7 @@ public abstract class AbstractQuestHandler {
 	public abstract void register();
 
 	public boolean onDialogEvent(QuestEnv env) {
-		int dialogActionId = env.getDialogActionId();
-		if (dialogActionId >= SELECT1 && dialogActionId <= SELECT15_4_4_4_4) {
-			// simple "next page" event (action ID = next dialog page ID), but there are some quests where this default behavior does not apply (e.g.
-			// 4074)
-			return false;
-		}
-		switch (dialogActionId) {
+		switch (env.getDialogActionId()) {
 			case ASK_QUEST_ACCEPT: // show quest accept dialog (coming from pre-conversation)
 				sendDialogPacket(env, DialogPage.ASK_QUEST_ACCEPT_WINDOW.id(), questId);
 				return true;
