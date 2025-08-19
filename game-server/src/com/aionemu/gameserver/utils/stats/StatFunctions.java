@@ -599,7 +599,7 @@ public class StatFunctions {
 				switch (stat) {
 					case PHYSICAL_ATTACK:
 					case MAGICAL_ATTACK:
-						return value * 1.1f;
+						return value * 1.1f; // verified on 4.6 PTS
 					case MAGICAL_DEFEND:
 					case PHYSICAL_DEFENSE:
 						return value * 0.8f;
@@ -609,23 +609,22 @@ public class StatFunctions {
 				switch (stat) {
 					case PHYSICAL_ATTACK:
 					case MAGICAL_ATTACK:
-						return value * 0.3f;
+					case SPEED:
+						return value * 0.8f; // verified on 4.6 PTS
 					case EVASION:
 						return value + 300;
-					case SPEED:
-						return value * 0.8f;
 				}
 				break;
 			case BACKWARD:
 				switch (stat) {
 					case PHYSICAL_ATTACK:
 					case MAGICAL_ATTACK:
-						return value * 0.3f;
+						return value * 0.8f; // verified on 4.6 PTS
+					case SPEED:
+						return value * 0.6f; // verified on 4.6 PTS
 					case PARRY:
 					case BLOCK:
 						return value + 500;
-					case SPEED:
-						return value * 0.6f;
 				}
 				break;
 		}
