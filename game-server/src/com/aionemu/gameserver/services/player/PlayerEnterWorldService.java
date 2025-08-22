@@ -111,6 +111,10 @@ public final class PlayerEnterWorldService {
 			.map(p -> p.getPlayerCommonData().getPlayerObjId())
 			.orElse(null);
 		if (onlinePlayerId != null) { // a char was online during acc login (double login or client crash), so reload pcd, appearance and acc warehouse
+			if (PlayerDAO.isOnline(onlinePlayerId)) { // the found char is still leaving the world, so the acc wh might still be outdated
+				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.REENTRY_TIME));
+				return;
+			}
 			playerAccData = AccountService.loadPlayerAccountData(onlinePlayerId);
 			if (onlinePlayerId == objectId)
 				pcd = playerAccData.getPlayerCommonData(); // refresh lastOnline for reentry time validation
