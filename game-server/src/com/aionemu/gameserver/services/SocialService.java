@@ -5,6 +5,7 @@ import com.aionemu.gameserver.dao.FriendListDAO;
 import com.aionemu.gameserver.model.gameobjects.player.BlockedPlayer;
 import com.aionemu.gameserver.model.gameobjects.player.Friend;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
@@ -16,9 +17,9 @@ import com.aionemu.gameserver.world.World;
  */
 public class SocialService {
 
-	public static boolean addBlockedUser(Player player, Player blockedPlayer, String reason) {
-		if (BlockListDAO.addBlockedUser(player.getObjectId(), blockedPlayer.getObjectId(), reason)) {
-			player.getBlockList().add(new BlockedPlayer(blockedPlayer.getObjectId(), blockedPlayer.getName(), reason));
+	public static boolean addBlockedUser(Player player, PlayerCommonData blockedPlayer, String reason) {
+		if (BlockListDAO.addBlockedUser(player.getObjectId(), blockedPlayer.getPlayerObjId(), reason)) {
+			player.getBlockList().add(new BlockedPlayer(blockedPlayer.getPlayerObjId(), blockedPlayer.getName(), reason));
 			PacketSendUtility.sendPacket(player, new SM_BLOCK_LIST());
 			PacketSendUtility.sendPacket(player, new SM_BLOCK_RESPONSE(SM_BLOCK_RESPONSE.BLOCK_SUCCESSFUL, blockedPlayer.getName()));
 			return true;

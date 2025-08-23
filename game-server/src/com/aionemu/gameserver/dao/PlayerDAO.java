@@ -21,7 +21,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Mailbox;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.team.legion.LegionRank;
-import com.aionemu.gameserver.world.World;
 
 /**
  * Class that is responsible for storing/loading player data
@@ -115,10 +114,6 @@ public class PlayerDAO {
 	}
 
 	public static PlayerCommonData loadPlayerCommonDataByName(String name) {
-		Player player = World.getInstance().getPlayer(name);
-		if (player != null) {
-			return player.getCommonData();
-		}
 		int playerObjId = 0;
 
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement stmt = con.prepareStatement("SELECT id FROM players WHERE name = ?")) {

@@ -233,6 +233,13 @@ public class PlayerService {
 		return player.getCommonData();
 	}
 
+	public static PlayerCommonData getOrLoadPlayerCommonData(String name) {
+		Player player = World.getInstance().getPlayer(name);
+		if (player == null)
+			return PlayerDAO.loadPlayerCommonDataByName(name);
+		return player.getCommonData();
+	}
+
 	/**
 	 * Cancel Player deletion process if its possible.
 	 *

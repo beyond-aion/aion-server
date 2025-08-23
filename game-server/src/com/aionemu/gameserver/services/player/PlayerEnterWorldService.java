@@ -101,16 +101,25 @@ public final class PlayerEnterWorldService {
 			return;
 		}
 
-		if (pcd.isOnline()) { // character should soon leave the world (due to previous client crash)
-			if (PlayerDAO.isOnline(objectId)) {
+		if (PlayerDAO.isOnline(objectId)) { // char is still leaving the world and not saved yet (fast reentry from plastic surgery screen or packet hack)
+			client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.REENTRY_TIME));
+			return;
+		}
+		Integer onlinePlayerId = account.getPlayerAccDataList().stream()
+			.filter(p -> p.getPlayerCommonData().isOnline())
+			.findAny()
+			.map(p -> p.getPlayerCommonData().getPlayerObjId())
+			.orElse(null);
+		if (onlinePlayerId != null) { // a char was online during acc login (double login or client crash), so reload pcd, appearance and acc warehouse
+			if (PlayerDAO.isOnline(onlinePlayerId)) { // the found char is still leaving the world, so the acc wh might still be outdated
 				client.sendPacket(new SM_ENTER_WORLD_CHECK(Msg.REENTRY_TIME));
 				return;
-			} else { // reload pcd, appearance, acc warehouse, ... since char was saved after acc logged in (delayed kick)
-				playerAccData = AccountService.loadPlayerAccountData(objectId);
-				pcd = playerAccData.getPlayerCommonData();
-				account.addPlayerAccountData(playerAccData);
-				account.setAccountWarehouse(AccountService.loadAccountWarehouse(account));
 			}
+			playerAccData = AccountService.loadPlayerAccountData(onlinePlayerId);
+			if (onlinePlayerId == objectId)
+				pcd = playerAccData.getPlayerCommonData(); // refresh lastOnline for reentry time validation
+			account.addPlayerAccountData(playerAccData);
+			account.setAccountWarehouse(AccountService.loadAccountWarehouse(account));
 		}
 
 		if (World.getInstance().isInWorld(objectId)) {

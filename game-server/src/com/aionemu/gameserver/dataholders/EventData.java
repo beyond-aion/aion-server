@@ -26,6 +26,8 @@ public class EventData {
 			events = Collections.emptyList();
 		allNpcIds.clear();
 		for (EventTemplate ev : events) {
+			if (ev.getEndDate() != null && ev.getStartDate() != null && !ev.getStartDate().isBefore(ev.getEndDate()))
+				throw new IllegalArgumentException("Event \"" + ev.getName() + "\" has an invalid start or end date: start date must be before end date");
 			if (ev.getSpawns() != null)
 				allNpcIds.addAll(ev.getSpawns().getAllNpcIds());
 		}

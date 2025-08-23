@@ -271,18 +271,21 @@ public class DialogService {
 					HousingService.getInstance().recreatePlayerStudio(player);
 					break;
 				default:
-					// action id = next page id
-					PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogActionId));
+					handleQuestDialogueOrSendNextPage(dialogActionId, player, npc, questId, extendedRewardIndex);
 					break;
 			}
 		} else {
-			QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
-			env.setExtendedRewardIndex(extendedRewardIndex);
-			if (QuestEngine.getInstance().onDialog(env))
-				return;
-			// action id = next page id
-			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(targetObjectId, dialogActionId, questId));
+			handleQuestDialogueOrSendNextPage(dialogActionId, player, npc, questId, extendedRewardIndex);
 		}
+	}
+
+	private static void handleQuestDialogueOrSendNextPage(int dialogActionId, Player player, Npc npc, int questId, int extendedRewardIndex) {
+		QuestEnv env = new QuestEnv(npc, player, questId, dialogActionId);
+		env.setExtendedRewardIndex(extendedRewardIndex);
+		if (QuestEngine.getInstance().onDialog(env))
+			return;
+		// action id = next page id
+		PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(npc.getObjectId(), dialogActionId, questId));
 	}
 
 	private static void sendDialogWindow(int dialogActionId, final Player player, Npc npc) {
