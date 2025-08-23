@@ -11,7 +11,10 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.LoggingConfig;
-import com.aionemu.gameserver.dao.*;
+import com.aionemu.gameserver.dao.BlockListDAO;
+import com.aionemu.gameserver.dao.InventoryDAO;
+import com.aionemu.gameserver.dao.ItemStoneListDAO;
+import com.aionemu.gameserver.dao.MailDAO;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Letter;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
@@ -30,6 +33,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.AdminService;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.item.ItemPacketService;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.services.trade.PricesService;
 import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -64,7 +68,7 @@ public class MailService {
 		if (message.length() > 1000)
 			message = message.substring(0, 1000);
 
-		PlayerCommonData recipientCommonData = PlayerDAO.loadPlayerCommonDataByName(recipientName);
+		PlayerCommonData recipientCommonData = PlayerService.getOrLoadPlayerCommonData(recipientName);
 		MailMessage status = validateRecipient(sender, recipientCommonData);
 		if (status != MailMessage.MAIL_SEND_SUCCESS) {
 			PacketSendUtility.sendPacket(sender, new SM_MAIL_SERVICE(status));

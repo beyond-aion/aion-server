@@ -27,6 +27,7 @@ import com.aionemu.gameserver.network.loginserver.serverpackets.SM_ACCOUNT_TOLL_
 import com.aionemu.gameserver.network.loginserver.serverpackets.SM_PREMIUM_CONTROL;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.mail.SystemMailService;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
@@ -177,7 +178,7 @@ public class InGameShopEn {
 			return;
 		}
 
-		PlayerCommonData recipientCommonData = PlayerDAO.loadPlayerCommonDataByName(receiver);
+		PlayerCommonData recipientCommonData = PlayerService.getOrLoadPlayerCommonData(receiver);
 		if (recipientCommonData.getMailboxLetters() >= 100) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MAIL_MSG_RECIPIENT_MAILBOX_FULL(recipientCommonData.getName()));
 			return;

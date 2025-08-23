@@ -5,10 +5,11 @@ import java.util.Map;
 
 import org.apache.commons.lang3.math.NumberUtils;
 
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.services.CommandsAccessService;
+import com.aionemu.gameserver.services.player.PlayerService;
+import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 /**
@@ -46,9 +47,9 @@ public class Access extends AdminCommand {
 					sendInfo(admin);
 					return;
 				}
-				String playerName = params[1];
+				String playerName = Util.convertName(params[1]);
 				String commandName = params[2];
-				PlayerCommonData pcd = PlayerDAO.loadPlayerCommonDataByName(playerName);
+				PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(playerName);
 				if (pcd == null) {
 					sendInfo(admin, "Player with name " + playerName + " doesn't exists!");
 					return;
@@ -60,8 +61,8 @@ public class Access extends AdminCommand {
 				break;
 			}
 			case "removeall": {
-				String playerName = params[1];
-				PlayerCommonData pcd = PlayerDAO.loadPlayerCommonDataByName(playerName);
+				String playerName = Util.convertName(params[1]);
+				PlayerCommonData pcd = PlayerService.getOrLoadPlayerCommonData(playerName);
 				if (pcd == null) {
 					sendInfo(admin, "Player with name " + playerName + " doesn't exists!");
 					return;

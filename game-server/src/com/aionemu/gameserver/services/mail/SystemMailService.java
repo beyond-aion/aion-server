@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.dao.InventoryDAO;
 import com.aionemu.gameserver.dao.MailDAO;
-import com.aionemu.gameserver.dao.PlayerDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Letter;
@@ -22,6 +21,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_MAIL_SERVICE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.item.ItemFactory;
 import com.aionemu.gameserver.services.player.PlayerMailboxState;
+import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
@@ -67,7 +67,7 @@ public class SystemMailService {
 		if (message.length() > 1000)
 			message = message.substring(0, 1000);
 
-		PlayerCommonData recipientCommonData = PlayerDAO.loadPlayerCommonDataByName(recipientName);
+		PlayerCommonData recipientCommonData = PlayerService.getOrLoadPlayerCommonData(recipientName);
 
 		if (recipientCommonData == null) {
 			log.info("[SYSMAILSERVICE] > [RecipientName: " + recipientName + "] NO SUCH CHARACTER NAME.");
