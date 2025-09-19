@@ -10,29 +10,6 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 /**
  * @author Rolandas
  */
-
-/**
- * <p>
- * Java class for NpcShout complex type.
- * <p>
- * The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="NpcShout">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;attribute name="string_id" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="when" use="required" type="{}ShoutEventType" />
- *       &lt;attribute name="pattern" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="param" type="{http://www.w3.org/2001/XMLSchema}string" />
- *       &lt;attribute name="type" type="{}ShoutType" default="BROADCAST" />
- *       &lt;attribute name="skill_no" type="{http://www.w3.org/2001/XMLSchema}int" default="0" />
- *       &lt;attribute name="poll_delay" type="{http://www.w3.org/2001/XMLSchema}int" default="0" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
- */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "NpcShout")
 public class NpcShout {

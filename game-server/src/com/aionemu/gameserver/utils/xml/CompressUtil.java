@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.utils.xml;
 
 import java.io.ByteArrayOutputStream;
-import java.nio.charset.StandardCharsets;
 import java.util.zip.Deflater;
 import java.util.zip.Inflater;
 
@@ -10,15 +9,13 @@ import java.util.zip.Inflater;
  */
 public final class CompressUtil {
 
-	public static String decompress(byte[] bytes) throws Exception {
-		Inflater decompressor = new Inflater();
-		decompressor.setInput(bytes);
-
+	public static byte[] decompress(byte[] bytes) throws Exception {
 		// Create an expandable byte array to hold the decompressed data
 		ByteArrayOutputStream bos = new ByteArrayOutputStream(bytes.length);
 
 		byte[] buffer = new byte[1024];
-		try {
+		try (Inflater decompressor = new Inflater()) {
+			decompressor.setInput(bytes);
 			while (true) {
 				int count = decompressor.inflate(buffer);
 				if (count > 0) {
@@ -29,30 +26,23 @@ public final class CompressUtil {
 					throw new RuntimeException("Bad zip data, size: " + bytes.length);
 				}
 			}
-		} finally {
-			decompressor.end();
 		}
 
-		return bos.toString(StandardCharsets.UTF_16LE);
+		return bos.toByteArray();
 	}
 
-	public static byte[] compress(String text) {
-		Deflater compressor = new Deflater();
-		byte[] bytes = text.getBytes(StandardCharsets.UTF_16LE);
-		compressor.setInput(bytes);
-
+	public static byte[] compress(byte[] bytes) {
 		// Create an expandable byte array to hold the compressed data
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
-		compressor.finish();
 
 		byte[] buffer = new byte[1024];
-		try {
+		try (Deflater compressor = new Deflater()) {
+			compressor.setInput(bytes);
+			compressor.finish();
 			while (!compressor.finished()) {
 				int count = compressor.deflate(buffer);
 				bos.write(buffer, 0, count);
 			}
-		} finally {
-			compressor.finish();
 		}
 
 		return bos.toByteArray();

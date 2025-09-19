@@ -32,13 +32,7 @@
 
 package com.aionemu.gameserver.geoEngine.utils;
 
-import java.nio.Buffer;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.DoubleBuffer;
-import java.nio.FloatBuffer;
-import java.nio.IntBuffer;
-import java.nio.ShortBuffer;
+import java.nio.*;
 import java.util.ArrayList;
 import java.util.Map;
 import java.util.WeakHashMap;
@@ -56,17 +50,17 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
  */
 public final class BufferUtils {
 
-    ////  -- TEMP DATA OBJECTS --  ////
+    /*  -- TEMP DATA OBJECTS --  */
 //    private static final Vector2f _tempVec2 = new Vector2f();
 //    private static final Vector3f _tempVec3 = new Vector3f();
 //    private static final ColorRGBA _tempColor = new ColorRGBA();
 
-    ////  -- TRACKER HASH --  ////
+    /*  -- TRACKER HASH --  */
     private static final Map<Buffer, Object> trackingHash = new ConcurrentHashMap<>(new WeakHashMap<Buffer, Object>());
     private static final Object ref = new Object();
     private static final boolean trackDirectMemory = false;
 
-    ////  -- GENERIC CLONE -- ////
+    /*  -- GENERIC CLONE -- */
 
     public static Buffer clone(Buffer buf){
         if (buf instanceof FloatBuffer){
@@ -85,7 +79,7 @@ public final class BufferUtils {
     }
 
 
-    ////  -- VECTOR3F METHODS -- ////
+    /*  -- VECTOR3F METHODS -- */
 
     /**
      * Generate a new FloatBuffer using the given array of Vector3f objects.
@@ -154,28 +148,6 @@ public final class BufferUtils {
 
         return createFloatBuffer(3 * vertices);
     }
-
-    
-    /**
-     * Sets the data contained in the given color into the FloatBuffer at the
-     * specified index.
-     *
-     * @param color
-     *            the data to insert
-     * @param buf
-     *            the buffer to insert into
-     * @param index
-     *            the postion to place the data; in terms of colors not floats
-     */
-    /*
-    public static void setInBuffer(ColorRGBA color, FloatBuffer buf,
-            int index) {
-        buf.position(index*4);
-        buf.put(color.r);
-        buf.put(color.g);
-        buf.put(color.b);
-        buf.put(color.a);
-    }*/
 
     /**
      * Sets the data contained in the given Vector3F into the FloatBuffer at the
@@ -326,7 +298,7 @@ public final class BufferUtils {
         return eq;
     }
 
-    // // -- VECTOR2F METHODS -- ////
+    /* -- VECTOR2F METHODS -- */
 
     /**
      * Generate a new FloatBuffer using the given array of Vector2f objects.
@@ -385,7 +357,7 @@ public final class BufferUtils {
 
 
 
-    ////  -- INT METHODS -- ////
+    /*  -- INT METHODS -- */
 
     /**
      * Generate a new IntBuffer using the given array of ints. The IntBuffer
@@ -441,7 +413,7 @@ public final class BufferUtils {
     }
 
 
-    //// -- GENERAL DOUBLE ROUTINES -- ////
+    /* -- GENERAL DOUBLE ROUTINES -- */
 
     /**
      * Create a new DoubleBuffer of the specified size.
@@ -507,7 +479,7 @@ public final class BufferUtils {
 
 
 
-    //// -- GENERAL FLOAT ROUTINES -- ////
+    /* -- GENERAL FLOAT ROUTINES -- */
 
     /**
      * Create a new FloatBuffer of the specified size.
@@ -571,7 +543,7 @@ public final class BufferUtils {
     }
 
 
-    //// -- GENERAL INT ROUTINES -- ////
+    /* -- GENERAL INT ROUTINES -- */
 
     /**
      * Create a new IntBuffer of the specified size.
@@ -636,7 +608,7 @@ public final class BufferUtils {
     }
 
 
-    //// -- GENERAL BYTE ROUTINES -- ////
+    /* -- GENERAL BYTE ROUTINES -- */
 
     /**
      * Create a new ByteBuffer of the specified size.
@@ -716,7 +688,7 @@ public final class BufferUtils {
     }
 
 
-    //// -- GENERAL SHORT ROUTINES -- ////
+    /* -- GENERAL SHORT ROUTINES -- */
 
     /**
      * Create a new ShortBuffer of the specified size.

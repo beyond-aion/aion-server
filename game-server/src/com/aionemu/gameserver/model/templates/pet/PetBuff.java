@@ -3,37 +3,12 @@ package com.aionemu.gameserver.model.templates.pet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.templates.stats.ModifiersTemplate;
 
 /**
  * @author Rolandas
- */
-
-/**
- * <p>
- * Java class for PetBuff complex type.
- * <p>
- * The following schema fragment specifies the expected content contained within this class.
- * 
- * <pre>
- * &lt;complexType name="PetBuff">
- *   &lt;complexContent>
- *     &lt;restriction base="{http://www.w3.org/2001/XMLSchema}anyType">
- *       &lt;sequence>
- *         &lt;element name="modifiers" type="{}Modifiers" maxOccurs="unbounded"/>
- *       &lt;/sequence>
- *       &lt;attribute name="feed_count" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
- *       &lt;attribute name="id" use="required" type="{http://www.w3.org/2001/XMLSchema}int" />
- *     &lt;/restriction>
- *   &lt;/complexContent>
- * &lt;/complexType>
- * </pre>
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "PetBuff", propOrder = { "modifiers" })

@@ -81,20 +81,20 @@ public class PlayerScripts {
 	}
 
 	private String decompressAndValidate(byte[] compressedXML, int uncompressedSize) {
-		String scriptXML = "";
-		if (compressedXML != null && compressedXML.length > 0) {
-			try {
-				scriptXML = CompressUtil.decompress(compressedXML);
-			} catch (Exception ex) {
-				log.error("New housing script data could not be decompressed", ex);
-				return null;
-			}
-			byte[] bytes = scriptXML.getBytes(StandardCharsets.UTF_16LE);
-			if (bytes.length != uncompressedSize) {
-				log.error("New housing script data had unexpected file size after decompression: Expected {} bytes, got {} bytes:\n{}", uncompressedSize,
-					bytes.length, scriptXML);
-				return null;
-			}
+		if (compressedXML == null || compressedXML.length == 0)
+			return "";
+		byte[] bytes;
+		try {
+			bytes = CompressUtil.decompress(compressedXML);
+		} catch (Exception ex) {
+			log.error("Housing script data for house {} could not be decompressed", houseObjId, ex);
+			return null;
+		}
+		String scriptXML = new String(bytes, StandardCharsets.UTF_16LE);
+		if (bytes.length != uncompressedSize) {
+			log.warn("Unexpected housing script size after decompression for house {}: Expected {} bytes, got {} bytes:\n{}", houseObjId, uncompressedSize,
+				bytes.length, scriptXML);
+			return null;
 		}
 		return scriptXML;
 	}

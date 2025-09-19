@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.dao;
 
+import java.nio.charset.StandardCharsets;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -73,7 +74,7 @@ public class HouseScriptsDAO {
 		if (scriptXML == null || scriptXML.length() == 0) {
 			return scripts.set(id, new byte[0], 0, false);
 		} else {
-			byte[] bytes = CompressUtil.compress(scriptXML);
+			byte[] bytes = CompressUtil.compress(scriptXML.getBytes(StandardCharsets.UTF_16LE));
 			int oldLength = bytes.length;
 			bytes = Arrays.copyOf(bytes, bytes.length + 8);
 			for (int i = oldLength; i < bytes.length; i++)

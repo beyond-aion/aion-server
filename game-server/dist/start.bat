@@ -5,7 +5,7 @@ TITLE Aion Emu - Game Server
 
 :START
 CLS
-JAVA -Xms1024m -Xmx2560m -XX:+UseNUMA -DconsoleEncoding=CP850 -cp "libs/*" com.aionemu.gameserver.GameServer
+JAVA -Xms1024m -Xmx2560m -XX:+UseNUMA -XX:+UseCompactObjectHeaders -DconsoleEncoding=CP850 -cp "libs/*" com.aionemu.gameserver.GameServer
 IF %ERRORLEVEL% EQU 0 GOTO END
 IF %ERRORLEVEL% EQU 2 GOTO START
 ECHO.

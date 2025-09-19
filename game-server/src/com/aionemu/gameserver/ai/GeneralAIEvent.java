@@ -9,8 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
  */
 public class GeneralAIEvent extends AbstractEvent<AbstractAI<? extends Creature>> {
 
-	private static final long serialVersionUID = 5936695693551359627L;
-
 	private final AIEventType eventType;
 
 	public GeneralAIEvent(AbstractAI<? extends Creature> source, AIEventType eventType) {
