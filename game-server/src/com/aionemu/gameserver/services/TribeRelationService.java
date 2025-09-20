@@ -193,9 +193,7 @@ public class TribeRelationService {
 			|| npc.getBaseTribe() == TribeClass.GENERAL_DRAGON && npc.getObjectTemplate().getAbyssNpcType() != AbyssNpcType.ARTIFACT;
 	}
 
-	public static boolean canHelpCreature(Creature creature1, Creature creature2) {
-		return creature1.getTribe() == creature2.getTribe()
-			|| DataManager.TRIBE_RELATIONS_DATA.isSupportRelation(creature1.getTribe(), creature2.getTribe())
-			|| DataManager.TRIBE_RELATIONS_DATA.isFriendlyRelation(creature1.getTribe(), creature2.getTribe());
+	public static boolean canHelpCreature(Creature creature, Creature creatureAskingForSupport) {
+		return DataManager.TRIBE_RELATIONS_DATA.canSupport(creature.getTribe(), creatureAskingForSupport.getTribe());
 	}
 }

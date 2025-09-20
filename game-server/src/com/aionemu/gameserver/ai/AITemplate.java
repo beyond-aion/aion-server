@@ -56,7 +56,7 @@ public abstract class AITemplate<T extends Creature> extends AbstractAI<T> {
 	}
 
 	@Override
-	protected boolean handleGuardAgainstAttacker(Creature creature) {
+	protected boolean handleCreatureNeedsSupportByGuard(Creature creature) {
 		return false;
 	}
 

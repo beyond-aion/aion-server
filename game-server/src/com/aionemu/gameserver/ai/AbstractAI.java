@@ -255,7 +255,7 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 
 	protected abstract boolean handleCreatureNeedsSupport(Creature creature);
 
-	protected abstract boolean handleGuardAgainstAttacker(Creature creature);
+	protected abstract boolean handleCreatureNeedsSupportByGuard(Creature creature);
 
 	@AIListenable(enabled = false, type = AIEventType.CREATURE_SEE)
 	protected abstract void handleCreatureSee(Creature creature);
@@ -402,12 +402,8 @@ public abstract class AbstractAI<T extends Creature> extends AbstractEventSource
 				logEvent(event);
 				break;
 			case CREATURE_NEEDS_SUPPORT:
-				if (!handleCreatureNeedsSupport(creature)) {
-					if (creature.getTarget() instanceof Creature) {
-						if (!handleCreatureNeedsSupport((Creature) creature.getTarget()) && !handleGuardAgainstAttacker(creature))
-							handleGuardAgainstAttacker((Creature) creature.getTarget());
-					}
-				}
+				if (!handleCreatureNeedsSupport(creature))
+					handleCreatureNeedsSupportByGuard(creature);
 				logEvent(event);
 				break;
 			case CREATURE_NEEDS_HELP:

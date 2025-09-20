@@ -44,7 +44,7 @@ public class AbyssGuardSimpleAI extends AggressiveNpcAI {
 	}
 
 	@Override
-	protected boolean handleGuardAgainstAttacker(Creature attacker) {
+	protected boolean handleCreatureNeedsSupportByGuard(Creature creature) {
 		return false;
 	}
 

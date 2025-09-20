@@ -97,11 +97,11 @@ public enum TribeClass {
 	DRAMATATIMERA,
 	DRAMATATIMERB,
 	DUMMY,
-	DUMMY_DGUARD(Race.ASMODIANS),
-	DUMMY_LGUARD(Race.ELYOS),
+	DUMMY_DGUARD,
+	DUMMY_LGUARD,
 	DUMMY2,
-	DUMMY2_DGUARD(Race.ASMODIANS),
-	DUMMY2_LGUARD(Race.ELYOS),
+	DUMMY2_DGUARD,
+	DUMMY2_LGUARD,
 	ELEMENTAL_AIR,
 	ELEMENTAL_EARTH,
 	ELEMENTAL_FIRE,
@@ -110,9 +110,9 @@ public enum TribeClass {
 	ENEMY_AGUARD_DARK,
 	ESCORT,
 	ETTIN,
-	F4GUARD_DARK(Race.ASMODIANS),
-	F4GUARD_DRAGON(Race.DRAGON),
-	F4GUARD_LIGHT(Race.ELYOS),
+	F4GUARD_DARK,
+	F4GUARD_DRAGON,
+	F4GUARD_LIGHT,
 	F4RAID,
 	FANATIC,
 	FARMER_HKERUBIM_LF1,
@@ -159,19 +159,19 @@ public enum TribeClass {
 	GRIFFO,
 	GRIFFON,
 	GSLAVE,
-	GUARD(Race.ELYOS, true),
+	GUARD(true),
 	GUARD_D1NOATTACK,
-	GUARD_DARK(Race.ASMODIANS, true),
-	GUARD_DARK_ALYCANARATMAN_DF1(Race.ASMODIANS),
-	GUARD_DARKAENEMY(Race.ASMODIANS),
-	GUARD_DARKMA(Race.ASMODIANS),
-	GUARD_DRAGON(Race.DRAGON, true),
-	GUARD_DRAGONMA(Race.DRAGON),
+	GUARD_DARK(true),
+	GUARD_DARK_ALYCANARATMAN_DF1,
+	GUARD_DARKAENEMY,
+	GUARD_DARKMA,
+	GUARD_DRAGON(true),
+	GUARD_DRAGONMA,
 	GUARD_FTARGETBASFELT_DF1,
 	GUARD_FTARGETBASFELT_LF1,
-	GUARD_LIGHT_AKERUBIM_LF1(Race.ELYOS),
-	GUARD_LIGHTMA(Race.ELYOS),
-	GUARDDARK_ALEHPAR(Race.ASMODIANS),
+	GUARD_LIGHT_AKERUBIM_LF1,
+	GUARD_LIGHTMA,
+	GUARDDARK_ALEHPAR,
 	GUARDIAN,
 	GURURU_D1,
 	GURURU_DECO,
@@ -452,9 +452,9 @@ public enum TribeClass {
 	PREDATOR,
 	PREY,
 	PRETOR_ALEHPAR,
-	PROTECTGUARD_DARK(Race.ASMODIANS),
+	PROTECTGUARD_DARK,
 	PROTECTGUARD_DARK_SIEGEWEAPON,
-	PROTECTGUARD_LIGHT(Race.ELYOS),
+	PROTECTGUARD_LIGHT,
 	PROTECTGUARD_LIGHT_SIEGEWEAPON,
 	QUESTGUARD_DARK,
 	QUESTGUARD_LIGHT,
@@ -732,44 +732,25 @@ public enum TribeClass {
 	LF5_ITEM,
 	LF5_ITEM_SUM;
 
-	private Race guardRace;
-	private boolean isBasic;
+	private final boolean isGuard;
+	private final boolean isBasic;
 	private boolean isUsed = false;
 
-	private TribeClass() {
+	TribeClass() {
+		this(false);
 	}
 
-	private TribeClass(Race guardRace) {
-		this.guardRace = guardRace;
-	}
-
-	private TribeClass(Race guardRace, boolean isBasic) {
-		this.guardRace = guardRace;
-		this.isBasic = isBasic;
-	}
-
-	private TribeClass(boolean isBasic) {
+	TribeClass(boolean isBasic) {
+		this.isGuard = name().toUpperCase().contains("GUARD");
 		this.isBasic = isBasic;
 	}
 
 	public boolean isGuard() {
-		return guardRace != null;
+		return isGuard;
 	}
 
 	public boolean isBasicClass() {
 		return isBasic;
-	}
-
-	public boolean isLightGuard() {
-		return guardRace == Race.ELYOS;
-	}
-
-	public boolean isDarkGuard() {
-		return guardRace == Race.ASMODIANS;
-	}
-
-	public boolean isDrakanGuard() {
-		return guardRace == Race.DRAGON;
 	}
 
 	public boolean isPC() {

@@ -296,12 +296,9 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 		return ai;
 	}
 
-	/**
-	 * @param creature
-	 * @return boolean
-	 */
 	public boolean isHating(Creature creature) {
-		return aggroList.containsKey(creature.getObjectId());
+		AggroInfo aggroInfo = aggroList.get(creature.getObjectId());
+		return aggroInfo != null && aggroInfo.getHate() > 0;
 	}
 
 	/**
@@ -371,7 +368,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 
 	protected boolean isAware(Creature creature) {
 		return creature != null && !creature.equals(owner) && !owner.getEffectController().isAbnormalSet(AbnormalState.SANCTUARY)
-			&& (isHating(creature) || creature.isEnemy(owner) || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(owner.getTribe(), creature.getTribe()));
+			&& (aggroList.containsKey(creature.getObjectId()) || creature.isEnemy(owner) || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(owner.getTribe(), creature.getTribe()));
 	}
 
 	@Override

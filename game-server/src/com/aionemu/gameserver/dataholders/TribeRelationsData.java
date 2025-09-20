@@ -172,17 +172,13 @@ public class TribeRelationsData {
 	}
 
 	/**
-	 * @return true if any other tribe supports the tribe in argument
+	 * @return True, if tribeName can support tribeNameAskingForSupport
 	 */
-	public boolean hasAnySupporter(TribeClass tribeName) {
-		Tribe tribe1 = tribeNameMap.get(tribeName);
-		if (tribe1 == null)
+	public boolean canSupport(TribeClass tribeName, TribeClass tribeNameAskingForSupport) {
+		Tribe tribe = tribeNameMap.get(tribeName);
+		Tribe tribeAskingForSupport = tribeNameMap.get(tribeNameAskingForSupport);
+		if (tribe == null || tribeAskingForSupport == null)
 			return false;
-
-		for (TribeClass tribe2 : tribeNameMap.keySet()) {
-			if (isSupportRelation(tribe2, tribeName))
-				return true;
-		}
-		return false;
+		return tribe.getSupport().contains(tribeNameAskingForSupport) || tribe.getSupport().contains(tribeAskingForSupport.getBase());
 	}
 }
