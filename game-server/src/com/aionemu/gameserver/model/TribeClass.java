@@ -39,7 +39,7 @@ public enum TribeClass {
 	ARCHERYBASFELT_ATARGETBASFELT_LF1,
 	ARCHERYBASFELT2_ATARGETBASFELT2_DF1,
 	ARCHERYBASFELT2_ATARGETBASFELT2_LF1,
-	ASIST_D(true),
+	ASIST_D,
 	ATAURIC,
 	ATKDRAKAN,
 	BAT_FAMILY_ELITE,
@@ -120,8 +120,8 @@ public enum TribeClass {
 	FIELD_OBJECT_ALL,
 	FIELD_OBJECT_ALL_HOSTILEMONSTER,
 	FIELD_OBJECT_ALL_MONSTER,
-	FIELD_OBJECT_DARK(true),
-	FIELD_OBJECT_LIGHT(true),
+	FIELD_OBJECT_DARK,
+	FIELD_OBJECT_LIGHT,
 	FIREEL1,
 	FIREEL2,
 	FIREEL3,
@@ -136,12 +136,12 @@ public enum TribeClass {
 	FUNGUS,
 	GARGOYLE,
 	GARGOYLE_ELITE,
-	GENERAL(true),
+	GENERAL,
 	GENERAL_ADADR,
-	GENERAL_DARK(true),
+	GENERAL_DARK,
 	GENERAL_DARK_IDLDF4A_INTRO,
 	GENERAL_DARK_LYCAN,
-	GENERAL_DRAGON(true),
+	GENERAL_DRAGON,
 	GENERAL_IDLDF4A_INTRO,
 	GENERAL_KRALL,
 	GENERAL_LDF4A_PUBLIC_YUN,
@@ -159,13 +159,13 @@ public enum TribeClass {
 	GRIFFO,
 	GRIFFON,
 	GSLAVE,
-	GUARD(true),
+	GUARD,
 	GUARD_D1NOATTACK,
-	GUARD_DARK(true),
+	GUARD_DARK,
 	GUARD_DARK_ALYCANARATMAN_DF1,
 	GUARD_DARKAENEMY,
 	GUARD_DARKMA,
-	GUARD_DRAGON(true),
+	GUARD_DRAGON,
 	GUARD_DRAGONMA,
 	GUARD_FTARGETBASFELT_DF1,
 	GUARD_FTARGETBASFELT_LF1,
@@ -407,7 +407,7 @@ public enum TribeClass {
 	MINX,
 	MINX_HKALNIF,
 	MINX_HZAIF,
-	MONSTER(true),
+	MONSTER,
 	MONSTER_FRIENDLY_LDFCHIEF,
 	MONSTER_LDF4A_PUBLIC_LIZARDMAN,
 	MOSBEARBABY,
@@ -436,15 +436,15 @@ public enum TribeClass {
 	NNAGA_SERVANT,
 	NOFIGHT,
 	NONAGRRESSIVEFRIENDLYVRITRA,
-	NONE(true),
-	NPC(true),
+	NONE,
+	NPC,
 	OCTASIDE_AMUTA,
 	OCTASIDEBABY,
 	ORC,
 	PARENTSMONSTER,
-	PC(true),
-	PC_DARK(true),
-	PC_DRAGON(true),
+	PC,
+	PC_DARK,
+	PC_DRAGON,
 	PET,
 	PET_DARK,
 	POLYMORPHFUNGY,
@@ -524,7 +524,7 @@ public enum TribeClass {
 	TRICON,
 	UNDEADGRADIATOR_DF1,
 	UNDER_01_WAR_VRITRA,
-	USEALL(true),
+	USEALL,
 	USEALL_HOSTILEPC,
 	USEALL_LDF5_TOWER_DA,
 	USEALL_LDF5_TOWER_LI,
@@ -733,38 +733,16 @@ public enum TribeClass {
 	LF5_ITEM_SUM;
 
 	private final boolean isGuard;
-	private final boolean isBasic;
-	private boolean isUsed = false;
 
 	TribeClass() {
-		this(false);
-	}
-
-	TribeClass(boolean isBasic) {
 		this.isGuard = name().toUpperCase().contains("GUARD");
-		this.isBasic = isBasic;
 	}
 
 	public boolean isGuard() {
 		return isGuard;
 	}
 
-	public boolean isBasicClass() {
-		return isBasic;
-	}
-
 	public boolean isPC() {
 		return this == TribeClass.PC || this == TribeClass.PC_DARK;
-	}
-
-	/**
-	 * @return true if tribe is used for any npc
-	 */
-	public boolean isUsed() {
-		return isUsed;
-	}
-
-	public void setUsed(boolean isUsed) {
-		this.isUsed = isUsed;
 	}
 }

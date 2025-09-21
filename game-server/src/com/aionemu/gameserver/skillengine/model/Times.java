@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.skillengine.model;
 
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
@@ -27,6 +28,10 @@ public class Times {
 
 	@XmlAttribute(name = "animation_length")
 	private float animationLength;
+
+	void afterUnmarshal(Unmarshaller u, Object parent) {
+		weapon = weapon.intern();
+	}
 
 	public int getId() {
 		return id;

@@ -45,9 +45,6 @@ public class NpcData {
 	private void init() {
 		for (NpcTemplate npc : npcs) {
 			npcData.put(npc.getTemplateId(), npc);
-			npc.internAiName();
-			if (npc.getTribe() != null && !npc.getTribe().isUsed())
-				npc.getTribe().setUsed(true);
 			if (npc.getFuncDialogIds() != null) {
 				for (Integer dialogActionId : npc.getFuncDialogIds()) {
 					if (DialogAction.nameOf(dialogActionId) == null)
