@@ -64,7 +64,7 @@ public class PrivateStoreService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_CANT_OPEN_STORE_DURING_CRAFTING()); // name "crafting" is NC fail, msg is correct
 			return false;
 		}
-		if (player.isInPlayerMode(PlayerMode.RIDE)) {
+		if (player.isInPlayerMode(PlayerMode.RIDE) || player.isInRobotMode()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PERSONAL_SHOP_RESTRICTION_RIDE());
 			return false;
 		}
