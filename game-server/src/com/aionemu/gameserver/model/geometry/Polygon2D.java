@@ -24,25 +24,14 @@ import java.awt.Point;
 import java.awt.Polygon;
 import java.awt.Rectangle;
 import java.awt.Shape;
-import java.awt.geom.AffineTransform;
-import java.awt.geom.GeneralPath;
-import java.awt.geom.Line2D;
-import java.awt.geom.PathIterator;
-import java.awt.geom.Point2D;
-import java.awt.geom.Rectangle2D;
-import java.io.Serializable;
+import java.awt.geom.*;
 
 /**
  * This class is a Polygon with float coordinates.
  * 
  * @version $Id: Polygon2D.java 594018 2007-11-12 04:17:41Z cam $
  */
-public class Polygon2D implements Shape, Cloneable, Serializable {
-
-	/**
-	 * 
-	 */
-	private static final long serialVersionUID = 1L;
+public class Polygon2D implements Shape, Cloneable {
 
 	/**
 	 * The total number of points. The value of <code>npoints</code> represents the number of valid points in this <code>Polygon</code>.
@@ -502,9 +491,7 @@ public class Polygon2D implements Shape, Cloneable, Serializable {
  * 
  * @version $Id: Polyline2D.java 594018 2007-11-12 04:17:41Z cam $
  */
-class Polyline2D implements Shape, Cloneable, Serializable {
-
-	private static final long serialVersionUID = 8555427697285636463L;
+class Polyline2D implements Shape, Cloneable {
 
 	private static final float ASSUME_ZERO = 0.001f;
 

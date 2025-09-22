@@ -15,9 +15,9 @@ import com.aionemu.gameserver.utils.annotations.AnnotationManager;
  */
 public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 
-	private static Logger log = LoggerFactory.getLogger(AbstractEventSource.class);
+	private static final Logger log = LoggerFactory.getLogger(AbstractEventSource.class);
 
-	private Collection<EventListener<T>> listeners = new CopyOnWriteArrayList<>();
+	private final Collection<EventListener<T>> listeners = new CopyOnWriteArrayList<>();
 
 	public AbstractEventSource() {
 		Class<?> theClass = getClass();
@@ -54,24 +54,11 @@ public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 	/**
 	 * Method to notify all listeners about the event before it is actually handled
 	 * 
-	 * @param event
-	 * @return true if notified
-	 */
-	protected boolean fireBeforeEvent(T event) {
-		return fireBeforeEvent(event, null);
-	}
-
-	/**
-	 * Method to pass event arguments to event listener. Override it in class and call it from event method
-	 * 
-	 * @param event
-	 * @param callingArguments
 	 * @return false if the class should not have listeners for the event
 	 */
-	protected boolean fireBeforeEvent(T event, Object[] callingArguments) {
+	protected boolean fireBeforeEvent(T event) {
 		if (!canHaveEventNotifications(event))
 			return false;
-		event.callingArguments = callingArguments;
 		for (EventListener<T> listener : listeners) {
 			listener.onBeforeEvent(event);
 		}
@@ -81,24 +68,11 @@ public abstract class AbstractEventSource<T extends AbstractEvent<?>> {
 	/**
 	 * Method to notify all listeners about the event after the handler was called
 	 * 
-	 * @param event
-	 * @return true if notified
-	 */
-	protected boolean fireAfterEvent(T event) {
-		return fireAfterEvent(event, null);
-	}
-
-	/**
-	 * Method to pass event arguments to event listener. Override it in class and call it from event method
-	 * 
-	 * @param event
-	 * @param callingArguments
 	 * @return false if the class should not have listeners for the event or calling fireBeforeEvent disabled it by setting isHandled to false
 	 */
-	protected boolean fireAfterEvent(T event, Object[] callingArguments) {
+	protected boolean fireAfterEvent(T event) {
 		if (!canHaveEventNotifications(event) || !event.isHandled())
 			return false;
-		event.callingArguments = callingArguments;
 		for (EventListener<T> listener : listeners) {
 			listener.onAfterEvent(event);
 		}

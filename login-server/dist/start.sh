@@ -8,7 +8,7 @@
 
 loop() {
   while true; do
-    java -Xms48m -Xmx48m -XX:+UseNUMA $@ -cp "libs/*" com.aionemu.loginserver.LoginServer
+    java -Xms48m -Xmx48m -XX:+UseNUMA -XX:+UseCompactObjectHeaders $@ -cp "libs/*" com.aionemu.loginserver.LoginServer
     err=$?
     case $err in
       0) # regular shutdown

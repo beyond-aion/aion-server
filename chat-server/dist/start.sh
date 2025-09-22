@@ -8,7 +8,7 @@
 
 loop() {
   while true; do
-    java -Xms72m -Xmx72m -XX:+UseNUMA $@ -cp "libs/*" com.aionemu.chatserver.ChatServer
+    java -Xms72m -Xmx72m -XX:+UseNUMA -XX:+UseCompactObjectHeaders $@ -cp "libs/*" com.aionemu.chatserver.ChatServer
     err=$?
     case $err in
       0) # regular shutdown

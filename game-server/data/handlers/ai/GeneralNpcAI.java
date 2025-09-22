@@ -7,7 +7,6 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.handler.*;
 import com.aionemu.gameserver.ai.manager.SkillAttackManager;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -108,8 +107,7 @@ public class GeneralNpcAI extends NpcAI {
 	protected boolean canHandleEvent(AIEventType eventType) {
 		switch (eventType) {
 			case CREATURE_NEEDS_SUPPORT:
-				return (getState() == AIState.IDLE || getState() == AIState.WALKING) && DataManager.TRIBE_RELATIONS_DATA.hasSupportRelations(
-					getOwner().getTribe());
+				return getState() == AIState.IDLE || getState() == AIState.WALKING;
 		}
 		return super.canHandleEvent(eventType);
 	}

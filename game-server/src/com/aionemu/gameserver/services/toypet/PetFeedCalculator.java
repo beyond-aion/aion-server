@@ -14,9 +14,6 @@ import com.aionemu.gameserver.model.templates.pet.PetFlavour;
 import com.aionemu.gameserver.model.templates.pet.PetRewards;
 
 /**
- * @author Rolandas
- */
-/**
  * <b>Current pre-calculated values multiplied by 4; in packet 14 bits. Max value: 17600 / 4 is 13 bits; feed points as in retail packets.</b><br>
  * static final byte[][] pointValues = new byte[][] {<br>
  * // 10 25 40 50 100 200 -- feed max count<br>
@@ -33,6 +30,8 @@ import com.aionemu.gameserver.model.templates.pet.PetRewards;
  * { 800, 2000, 3200, 4000, 8000, 16000 }, // level 51~55 items (feed points 80)<br>
  * { 880, 2200, 3520, 4400, 8800, 17600 } // level 56~60 items (feed points 88)<br>
  * };
+ * 
+ *  @author Rolandas
  */
 public final class PetFeedCalculator {
 

@@ -1,11 +1,8 @@
 package com.aionemu.gameserver.model.trade;
 
-import java.util.ArrayList;
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
-import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 
 /**
@@ -22,7 +19,6 @@ public class Exchange {
 	private long kinahCount;
 
 	private Map<Integer, ExchangeItem> items = new HashMap<>();
-	private List<Item> itemsToUpdate = new ArrayList<>();
 
 	public Exchange(Player activeplayer, Player targetPlayer) {
 		super();
@@ -95,20 +91,7 @@ public class Exchange {
 	}
 
 	public boolean isExchangeListFull() {
-		return items.size() > 18;
+		return items.size() >= 18;
 	}
 
-	/**
-	 * @return the itemsToUpdate
-	 */
-	public List<Item> getItemsToUpdate() {
-		return itemsToUpdate;
-	}
-
-	/**
-	 * @param item
-	 */
-	public void addItemToUpdate(Item item) {
-		itemsToUpdate.add(item);
-	}
 }

@@ -1,26 +1,21 @@
 package com.aionemu.gameserver.events;
 
-import java.util.EventObject;
+import java.util.Objects;
 
 /**
  * @author Rolandas
  */
-public abstract class AbstractEvent<SourceType> extends EventObject {
+public abstract class AbstractEvent<T> {
 
-	private static final long serialVersionUID = -5493949678727753836L;
-
-	protected Object[] callingArguments;
-
+	protected T source;
 	private boolean handled;
 
-	public AbstractEvent(SourceType source) {
-		super(source);
+	public AbstractEvent(T source) {
+		this.source = Objects.requireNonNull(source);
 	}
 
-	@Override
-	@SuppressWarnings("unchecked")
-	public SourceType getSource() {
-		return (SourceType) super.getSource();
+	public T getSource() {
+		return source;
 	}
 
 	public boolean isHandled() {

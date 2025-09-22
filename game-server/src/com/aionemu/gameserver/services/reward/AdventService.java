@@ -1,10 +1,9 @@
 package com.aionemu.gameserver.services.reward;
 
-import java.awt.*;
+import java.awt.Color;
 import java.time.Month;
 import java.time.ZonedDateTime;
 import java.util.*;
-import java.util.List;
 
 import com.aionemu.gameserver.dao.AdventDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -139,12 +138,12 @@ public class AdventService {
 				sendRewardMail(player, item.getId(), item.getCount(), day);
 				continue;
 			}
-			int remainingItemCount = item.getCount();
+			long remainingItemCount = item.getCount();
 			while (remainingItemCount > maxStackCount) {
 				remainingItemCount -= maxStackCount;
-				sendRewardMail(player, item.getId(), (int) maxStackCount, day);
+				sendRewardMail(player, item.getId(), Math.toIntExact(maxStackCount), day);
 			}
-			sendRewardMail(player, item.getId(), remainingItemCount, day);
+			sendRewardMail(player, item.getId(), Math.toIntExact(remainingItemCount), day);
 		}
 	}
 
@@ -160,7 +159,7 @@ public class AdventService {
 				continue;
 			}
 			long maxStackCount = itemTemplate.getMaxStackCount();
-			int remainingItemCount = reward.getCount();
+			long remainingItemCount = reward.getCount();
 			while (remainingItemCount >= maxStackCount) {
 				expectedMailCount++;
 				remainingItemCount -= maxStackCount;

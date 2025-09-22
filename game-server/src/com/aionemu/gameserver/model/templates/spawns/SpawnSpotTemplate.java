@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.templates.spawns;
 
 import javax.xml.bind.Marshaller;
+import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
 /**
@@ -78,6 +79,11 @@ public class SpawnSpotTemplate {
 			state = 0;
 		if (walkerIdx == null)
 			walkerIdx = 0;
+	}
+
+	void afterUnmarshal(Unmarshaller u, Object parent) {
+		if (ai != null)
+			ai = ai.intern();
 	}
 
 	public SpawnSpotTemplate(float x, float y, float z, byte h, int randomWalk, String walkerId, Integer walkerIndex) {
