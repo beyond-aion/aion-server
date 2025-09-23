@@ -35,6 +35,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Macros;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.house.House;
+import com.aionemu.gameserver.model.house.PlayerScript;
 import com.aionemu.gameserver.model.items.storage.IStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
@@ -214,6 +215,7 @@ public final class PlayerEnterWorldService {
 				pcd.setDp(0);
 		}
 
+		client.sendPacket(new SM_HOUSE_SCRIPTS(0, PlayerScript.LUA_SANDBOX_FIX)); // client executes this immediately (scary, right?!)
 		client.sendPacket(new SM_UNK_3_5_1());
 		StigmaService.onPlayerLogin(player);
 		client.sendPacket(new SM_ENTER_WORLD_CHECK());
