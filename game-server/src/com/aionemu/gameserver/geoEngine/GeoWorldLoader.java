@@ -53,8 +53,8 @@ public class GeoWorldLoader {
 	 */
 	private static void loadTerrains(Collection<GeoMap> maps) {
 		Map<GeoMap, Terrain> terrainByMap = new ConcurrentHashMap<>();
-		try {
-			Files.find(GEO_DIR, 1, (p, attr) -> attr.isRegularFile() && p.toString().toLowerCase().endsWith(".png")).parallel().forEach(path -> {
+		try (var paths = Files.find(GEO_DIR, 1, (p, attr) -> attr.isRegularFile() && p.toString().toLowerCase().endsWith(".png"))) {
+			paths.parallel().forEach(path -> {
 				BufferedImage image = null;
 				Set<String> mapIds = Stream.of(path.getFileName().toString().split(",")).collect(Collectors.toSet());
 				for (GeoMap map : maps) {

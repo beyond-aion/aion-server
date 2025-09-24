@@ -5,7 +5,7 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
-import java.util.Iterator;
+import java.util.List;
 import java.util.Properties;
 
 /**
@@ -73,15 +73,13 @@ public class PropertiesUtils {
 	 *           If a file could not be read
 	 */
 	public static void loadFromDirectory(Properties properties, File dir, boolean recursive) throws IOException {
-		for (Iterator<File> iter = propertiesFileIterator(dir, recursive); iter.hasNext();) {
-			loadProperties(properties, iter.next());
-		}
+		for (File file : collectPropertiesFiles(dir, recursive))
+			loadProperties(properties, file);
 	}
 
-	private static Iterator<File> propertiesFileIterator(File dir, boolean recursive) throws IOException {
-		return Files.walk(dir.toPath(), recursive ? Integer.MAX_VALUE : 1)
-			.filter(p -> p.toString().endsWith(".properties") && p.toFile().isFile())
-			.map(Path::toFile)
-			.iterator();
+	private static List<File> collectPropertiesFiles(File dir, boolean recursive) throws IOException {
+		try (var paths = Files.find(dir.toPath(), recursive ? Integer.MAX_VALUE : 1, (path, attr) -> attr.isRegularFile() && path.toString().endsWith(".properties"))) {
+			return paths.map(Path::toFile).toList();
+		}
 	}
 }

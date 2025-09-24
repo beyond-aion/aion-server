@@ -4,7 +4,6 @@ import java.io.*;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.util.Collection;
-import java.util.stream.Collectors;
 
 import javax.xml.XMLConstants;
 import javax.xml.parsers.DocumentBuilder;
@@ -112,8 +111,8 @@ public abstract class XmlUtil {
 	 * @return List of .xml files inside the root directory.
 	 */
 	public static Collection<File> listFiles(File root, boolean recursive) {
-		try {
-			return Files.find(root.toPath(), recursive ? Integer.MAX_VALUE : 1, (path, attrs) -> attrs.isRegularFile() && path.toString().toLowerCase().endsWith(".xml")).map(Path::toFile).collect(Collectors.toList());
+		try (var paths = Files.find(root.toPath(), recursive ? Integer.MAX_VALUE : 1, (path, attrs) -> attrs.isRegularFile() && path.toString().toLowerCase().endsWith(".xml"))) {
+			return paths.map(Path::toFile).toList();
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
