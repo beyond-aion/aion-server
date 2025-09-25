@@ -4,7 +4,9 @@ import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlType;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.skillengine.model.Effect;
 
 @XmlAccessorType(XmlAccessType.FIELD)
@@ -30,5 +32,15 @@ public class WeaponDualEffect extends BufEffect {
 			p.getGameStats().updateStatsVisually();
 		}
 		super.endEffect(effect);
+	}
+
+	public static boolean hasDualWieldEffect(Player player) {
+		if (!player.isSpawned()) { // fallback for enterWorld
+			for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills()) {
+				if (DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId()).getEffects().hasAnyEffectType(EffectType.WEAPONDUAL))
+					return true;
+			}
+		}
+		return player.getGameStats().getSkillEfficiency() != 0;
 	}
 }

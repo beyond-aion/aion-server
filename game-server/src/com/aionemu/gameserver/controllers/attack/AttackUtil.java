@@ -250,7 +250,7 @@ public class AttackUtil {
 		List<AttackResult> weaponAttack = new ArrayList<>();
 		float damage = 0;
 		CalculationType[] calculationTypes = new CalculationType[] { CalculationType.SKILL };
-		if (effector instanceof Player p && p.getEquipment().hasDualWeaponEquipped(ItemSlot.LEFT_HAND))
+		if (effector instanceof Player p && p.getEquipment().isDualWeaponEquipped())
 			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.DUAL_WIELD);
 		if (!useTemplateDmg) {
 			if (effector instanceof SummonedObject && !(effector instanceof Servant)) {
