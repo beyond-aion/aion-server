@@ -1,16 +1,11 @@
 package com.aionemu.gameserver.dataholders;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
 import javax.xml.bind.Unmarshaller;
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlRootElement;
-import javax.xml.bind.annotation.XmlTransient;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.model.enchants.EnchantList;
 import com.aionemu.gameserver.model.enchants.EnchantStat;
@@ -28,23 +23,15 @@ public class EnchantData {
 	private List<EnchantList> enchantList;
 
 	@XmlTransient
-	Map<String, Map<Integer, List<EnchantStat>>> templates = new LinkedHashMap<>();
+	Map<String, Map<Integer, List<EnchantStat>>> templates = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (EnchantList enchant : enchantList) {
-			String group = enchant.getItemGroup();
-			Map<Integer, List<EnchantStat>> map = new LinkedHashMap<>();
-			templates.put(group, map);
-			for (EnchantTemplateData data : enchant.getEnchantDatas()) {
-				int level = data.getLevel();
-				List<EnchantStat> stats = new ArrayList<>();
-				for (EnchantStat stat : data.getEnchantStats()) {
-					stats.add(stat);
-				}
-				templates.get(group).put(Integer.valueOf(level), stats);
-			}
+			Map<Integer, List<EnchantStat>> map = new HashMap<>();
+			templates.put(enchant.getItemGroup(), map);
+			for (EnchantTemplateData data : enchant.getEnchantDatas())
+				map.put(data.getLevel(), data.getEnchantStats());
 		}
-		enchantList.clear();
 		enchantList = null;
 	}
 
