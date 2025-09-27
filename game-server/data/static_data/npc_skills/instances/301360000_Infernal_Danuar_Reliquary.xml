@@ -2,8 +2,8 @@
 <npc_skill_templates xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="../npc_skills.xsd">
 	<!-- Vengeful Modor -->
 	<npc_skills npc_ids="234690">
-		<npc_skill id="21174" lv="1" prob="70" cd="10000" next_skill_time="6000"/><!-- Freezing Sphere of Revenge -->
-		<npc_skill id="21175" lv="1" prob="70" cd="10000" next_skill_time="6000"/><!-- Freezing Sphere of Malice -->
+		<npc_skill id="21174" lv="1" prob="70" cd="10000" next_skill_time="6000"/><!-- Freezing Sphere of Malice -->
+		<npc_skill id="21175" lv="1" prob="70" cd="10000" next_skill_time="6000"/><!-- Freezing Sphere of Revenge -->
 	</npc_skills>
 	<!-- Crazed Modor -->
 	<npc_skills npc_ids="234691">
