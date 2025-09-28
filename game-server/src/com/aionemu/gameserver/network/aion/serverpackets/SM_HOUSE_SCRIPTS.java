@@ -4,7 +4,6 @@ import java.util.Collections;
 import java.util.List;
 import java.util.function.Function;
 
-import com.aionemu.gameserver.model.gameobjects.player.PlayerScripts;
 import com.aionemu.gameserver.model.house.PlayerScript;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
@@ -14,16 +13,17 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 
-	public static final int STATIC_BODY_SIZE = 48;
+	public static final int STATIC_BODY_SIZE = 6;
+	private static final byte[] SCRIPT_PADDING = { -51, -51, -51, -51, -51, -51, -51, -51 }; // values seem to not matter, but length does
+	public final static int MAX_COMPRESSED_SCRIPT_SIZE = AionServerPacket.MAX_USABLE_PACKET_BODY_SIZE - STATIC_BODY_SIZE - 11 - SCRIPT_PADDING.length;
 	public static final Function<PlayerScript, Integer> DYNAMIC_BODY_PART_SIZE_CALCULATOR = (
-		script) -> script.hasData() ? 88 + script.compressedBytes().length : 24;
+		script) -> script.hasData() ? 11 + script.compressedBytes().length + SCRIPT_PADDING.length : 3;
 
 	private final int houseAddress;
 	private final List<PlayerScript> scripts;
 
-	public SM_HOUSE_SCRIPTS(int houseAddress, PlayerScripts scripts, int scriptId) {
+	public SM_HOUSE_SCRIPTS(int houseAddress, PlayerScript script) {
 		this.houseAddress = houseAddress;
-		PlayerScript script = scripts.get(scriptId);
 		this.scripts = script == null ? Collections.emptyList() : Collections.singletonList(script);
 	}
 
@@ -40,10 +40,11 @@ public class SM_HOUSE_SCRIPTS extends AionServerPacket {
 			writeC(script.id());
 			if (script.hasData()) {
 				byte[] scriptContent = script.compressedBytes();
-				writeH(8 + scriptContent.length); // total following byte size for this script
-				writeD(scriptContent.length);
+				writeH(8 + scriptContent.length + SCRIPT_PADDING.length); // total following byte size for this script
+				writeD(scriptContent.length + SCRIPT_PADDING.length);
 				writeD(script.uncompressedSize());
 				writeB(scriptContent);
+				writeB(SCRIPT_PADDING);
 			} else {
 				writeH(0); // removes script from the in-game list
 			}
