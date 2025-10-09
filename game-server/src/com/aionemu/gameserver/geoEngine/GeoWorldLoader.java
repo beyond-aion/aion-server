@@ -127,15 +127,15 @@ public class GeoWorldLoader {
 
 					int vertices = geo.getShort() & 0xFFFF;
 					int verticesBytes = vertices * 3 * 4; // 3 floats per vertex (x, y, z), 4 bytes each
-					m.setBuffer(VertexBuffer.Type.Position, 3, geo.slice(geo.position(), verticesBytes).asFloatBuffer());
+					m.setVertices(geo.slice(geo.position(), verticesBytes).asFloatBuffer());
 					geo.position(geo.position() + verticesBytes);
 
 					int faces = geo.getShort() & 0xFFFF;
 					byte indexSize = geo.get();
 					int facesBytes = faces * 3 * indexSize; // 3 vertex indices per face, `indexSize` bytes each
 					switch (indexSize) {
-						case 1 -> m.setBuffer(VertexBuffer.Type.Index, 3, geo.slice(geo.position(), facesBytes));
-						case 2 -> m.setBuffer(VertexBuffer.Type.Index, 3, geo.slice(geo.position(), facesBytes).asShortBuffer());
+						case 1 -> m.setIndices(geo.slice(geo.position(), facesBytes));
+						case 2 -> m.setIndices(geo.slice(geo.position(), facesBytes).asShortBuffer());
 						default -> throw new IOException("Index size " + indexSize + " is not supported");
 					}
 					geo.position(geo.position() + facesBytes);

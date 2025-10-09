@@ -34,7 +34,10 @@ package com.aionemu.gameserver.geoEngine.bounding;
 
 import java.nio.FloatBuffer;
 
-import com.aionemu.gameserver.geoEngine.collision.*;
+import com.aionemu.gameserver.geoEngine.collision.Collidable;
+import com.aionemu.gameserver.geoEngine.collision.CollisionResult;
+import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
+import com.aionemu.gameserver.geoEngine.collision.UnsupportedCollisionException;
 import com.aionemu.gameserver.geoEngine.math.*;
 import com.aionemu.gameserver.geoEngine.utils.TempVars;
 
@@ -299,7 +302,6 @@ public class BoundingBox extends BoundingVolume {
 		rVal.xExtent = xExtent;
 		rVal.yExtent = yExtent;
 		rVal.zExtent = zExtent;
-		rVal.isTreeCollidable = isTreeCollidable;
 		return rVal;
 	}
 
@@ -312,17 +314,6 @@ public class BoundingBox extends BoundingVolume {
 	@Override
 	public String toString() {
 		return getClass().getSimpleName() + " [Center: " + center + "  xExtent: " + xExtent + "  yExtent: " + yExtent + "  zExtent: " + zExtent + "]";
-	}
-
-	/**
-	 * determines if this bounding box intersects a given bounding sphere.
-	 * 
-	 * @see com.jme.bounding.BoundingVolume#intersectsSphere(com.jme.bounding.BoundingSphere)
-	 */
-	@Override
-	public boolean intersectsSphere(BoundingSphere bs) {
-		return ((FastMath.abs(center.x - bs.center.x) < bs.getRadius() + xExtent) && (FastMath.abs(center.y - bs.center.y) < bs.getRadius() + yExtent)
-			&& (FastMath.abs(center.z - bs.center.z) < bs.getRadius() + zExtent));
 	}
 
 	/**
@@ -453,19 +444,6 @@ public class BoundingBox extends BoundingVolume {
 				Vector3f contactPoint2 = new Vector3f(ray.direction).multLocal(t[1]).addLocal(ray.origin);
 				results.addCollision(new CollisionResult(contactPoint2, t[1]));
 				collisions++;
-			}
-		}
-		if (results instanceof WorldBoundCollisionResults wbCollisionResults) {
-			if (wbCollisionResults.shouldAddBoxCenterPlaneCollision()) {
-				saveT0 = t[0];
-				saveT1 = t[1];
-				boolean rayIntersectsCenterPlane = clip(+direction.y, -diff.y, t) && clip(-direction.y, +diff.y, t) && (t[0] != saveT0 || t[1] != saveT1);
-				if (rayIntersectsCenterPlane) {
-					// This collision is of a "flat" box, meaning a rectangle with the width (xExtend * 2) and height (zExtent * 2) of this box.
-					// Just imagine the original box lost one dimension, everything else stays the same.
-					Vector3f centerPlaneContactPoint = new Vector3f(ray.direction).multLocal(t[0]).addLocal(ray.origin);
-					wbCollisionResults.setBoxCenterPlaneCollision(new CollisionResult(centerPlaneContactPoint, t[0]));
-				}
 			}
 		}
 		vars.release();

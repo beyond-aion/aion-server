@@ -35,8 +35,6 @@ package com.aionemu.gameserver.geoEngine.math;
 import java.nio.FloatBuffer;
 import java.util.logging.Logger;
 
-import com.aionemu.gameserver.geoEngine.utils.BufferUtils;
-
 /**
  * <code>Matrix3f</code> defines a 3x3 matrix. Matrix data is maintained
  * internally and is accessible via the get and set methods. Convenience methods
@@ -348,22 +346,6 @@ public final class Matrix3f implements Cloneable {
             throw new IllegalArgumentException("Invalid row index. " + i);
         }
         return store;
-    }
-
-    /**
-     * <code>toFloatBuffer</code> returns a FloatBuffer object that contains
-     * the matrix data.
-     * 
-     * @return matrix data as a FloatBuffer.
-     */
-    public FloatBuffer toFloatBuffer() {
-        FloatBuffer fb = BufferUtils.createFloatBuffer(9);
-
-        fb.put(m00).put(m01).put(m02);
-        fb.put(m10).put(m11).put(m12);
-        fb.put(m20).put(m21).put(m22);
-        fb.rewind();
-        return fb;
     }
 
     /**

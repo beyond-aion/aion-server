@@ -152,6 +152,7 @@ public class TempVars {
 	/**
 	 * BIHTree
 	 */
-	public final float[] bihSwapTmp = new float[9];
+	public final byte[] bihSwapTmp = new byte[3];
+	public final short[] bihSwapTmpShort = new short[3];
 	public final ArrayList<BIHStackData> bihStack = new ArrayList<>();
 }
