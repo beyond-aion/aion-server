@@ -24,7 +24,7 @@ public class UseSkill extends AdminCommand {
 		// @formatter:off
 		setSyntaxInfo(
 			"<id> [lvl] [f] - Uses the skill with the specified skill level on your target (f = force use).",
-			"<me|self|target> <id> [lvl] [f] - Let's your target use the skill on you, itself or its target (f = force use)."
+			"<me|self|target> <id> [lvl] [f] - Lets your target use the skill on you, itself or its target (f = force use)."
 		);
 		// @formatter:on
 	}

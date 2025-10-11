@@ -76,4 +76,8 @@ public class EmotionLearnAction extends AbstractItemAction {
 	public static List<Integer> getLearnableEmotionIds() {
 		return LEARNABLE_IDS.stream().sorted().toList();
 	}
+
+	public int getEmotionId() {
+		return emotionId;
+	}
 }
