@@ -32,7 +32,6 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.services.RespawnService;
-import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
@@ -118,12 +117,13 @@ public class NpcController extends CreatureController<Npc> {
 		if (owner.getSpawn().hasPool())
 			owner.getSpawn().setUse(owner.getInstanceId(), false);
 
+		if (owner.getAi().ask(AIQuestion.ALLOW_RESPAWN))
+			RespawnService.scheduleRespawn(getOwner()); // schedule respawn before onDie events are fired, so handlers can cancel the respawn task if needed
+
 		boolean allowDecay = true;
-		boolean allowRespawn = true;
 		boolean shouldLoot = true;
 		try {
 			allowDecay = owner.getAi().ask(AIQuestion.ALLOW_DECAY);
-			allowRespawn = owner.getAi().ask(AIQuestion.ALLOW_RESPAWN);
 			shouldLoot = owner.getAi().ask(AIQuestion.REWARD_LOOT);
 			if (owner.getAi().ask(AIQuestion.REWARD_AP_XP_DP_LOOT))
 				doReward();
@@ -134,9 +134,6 @@ public class NpcController extends CreatureController<Npc> {
 		}
 
 		super.onDie(lastAttacker);
-
-		if (allowRespawn && SiegeService.getInstance().isRespawnAllowed(owner))
-			RespawnService.scheduleRespawn(getOwner());
 
 		if (allowDecay) {
 			if (shouldLoot)

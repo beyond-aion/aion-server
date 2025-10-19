@@ -22,6 +22,7 @@ import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.knownlist.KnownList;
@@ -152,7 +153,8 @@ public abstract class NpcAI extends AITemplate<Npc> {
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
 			case CAN_SHOUT -> AIConfig.SHOUTS_ENABLE && NpcShoutsService.getInstance().mayShout(getOwner());
-			case ALLOW_DECAY, ALLOW_RESPAWN, REWARD_AP_XP_DP_LOOT, REWARD_LOOT -> true;
+			case ALLOW_RESPAWN -> SiegeService.getInstance().isRespawnAllowed(getOwner());
+			case ALLOW_DECAY, REWARD_AP_XP_DP_LOOT, REWARD_LOOT -> true;
 			case IS_IMMUNE_TO_ABNORMAL_STATES -> getOwner().isBoss() || getOwner().hasStatic();
 			case REWARD_AP -> {
 				WorldType wt = getOwner().getWorldType();
