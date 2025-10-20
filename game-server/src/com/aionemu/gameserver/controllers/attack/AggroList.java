@@ -7,8 +7,6 @@ import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.events.AbstractEventSource;
-import com.aionemu.gameserver.events.Listenable;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -19,13 +17,12 @@ import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
 import com.aionemu.gameserver.skillengine.model.HopType;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
-import com.aionemu.gameserver.utils.annotations.AnnotatedMethod;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 
 /**
  * @author ATracer, KKnD
  */
-public class AggroList extends AbstractEventSource<AddDamageEvent> {
+public class AggroList {
 
 	protected final Creature owner;
 	private final ConcurrentHashMap<Integer, AggroInfo> aggroList = new ConcurrentHashMap<>();
@@ -37,11 +34,7 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 
 	/**
 	 * Only add damage from enemies. (Verify this includes summons, traps, pets, and excludes fall damage.)
-	 *
-	 * @param attacker
-	 * @param damage
 	 */
-	@Listenable
 	public void addDamage(Creature attacker, int damage, boolean notifyAttack, HopType hopType) {
 		if (!isAware(attacker))
 			return;
@@ -52,16 +45,8 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 			startHateReductionTask();
 		}
 
-		AddDamageEvent evObj = null;
-		if (hasSubscribers()) {
-			evObj = new AddDamageEvent(this, attacker, damage);
-			if (!super.fireBeforeEvent(evObj))
-				evObj = null;
-		}
-
 		AggroInfo ai = getAggroInfo(attacker);
 		ai.addDamage(damage);
-
 
 		// for now we add hate equal to each damage received, additionally effectHate will be broadcast to all hating creatures
 		boolean isNewInAggroList = ai.getHate() == 0;
@@ -72,9 +57,6 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 			ai.addHate(1);
 		}
 		owner.getController().onAddHate(attacker, isNewInAggroList);
-
-		if (evObj != null)
-			super.fireAfterEvent(evObj);
 	}
 
 	/**
@@ -369,16 +351,6 @@ public class AggroList extends AbstractEventSource<AddDamageEvent> {
 	protected boolean isAware(Creature creature) {
 		return creature != null && !creature.equals(owner) && !owner.getEffectController().isAbnormalSet(AbnormalState.SANCTUARY)
 			&& (aggroList.containsKey(creature.getObjectId()) || creature.isEnemy(owner) || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(owner.getTribe(), creature.getTribe()));
-	}
-
-	@Override
-	protected boolean addListenable(AnnotatedMethod annotatedMethod) {
-		return annotatedMethod.getAnnotation(Listenable.class) != null;
-	}
-
-	@Override
-	protected boolean canHaveEventNotifications(AddDamageEvent event) {
-		return event.getDamage() > 0;
 	}
 
 	private void startHateReductionTask() {

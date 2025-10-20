@@ -40,9 +40,6 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 
 	@Override
 	protected void onSiegeFinish() {
-		// cleanup
-		unregisterSiegeBossListeners();
-
 		// despawn npcs
 		despawnNpcs(getSiegeLocationId());
 
@@ -64,7 +61,7 @@ public class ArtifactSiege extends Siege<ArtifactLocation> {
 
 	protected void onCapture() {
 		// Update winner counter
-		SiegeRaceCounter wRaceCounter = getSiegeCounter().getWinnerRaceCounter();
+		SiegeRaceCounter wRaceCounter = getWinnerRaceCounter();
 		getSiegeLocation().setRace(wRaceCounter.getSiegeRace());
 
 		// Update legion

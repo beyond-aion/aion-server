@@ -12,21 +12,16 @@ import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTempl
  */
 public class SiegeNpc extends Npc {
 
-	private final int siegeId;
-	private final SiegeRace siegeRace;
-
 	public SiegeNpc(NpcController controller, SiegeSpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
 		super(controller, spawnTemplate, objectTemplate);
-		this.siegeId = spawnTemplate.getSiegeId();
-		this.siegeRace = spawnTemplate.getSiegeRace();
 	}
 
 	public SiegeRace getSiegeRace() {
-		return siegeRace;
+		return getSpawn().getSiegeRace();
 	}
 
 	public int getSiegeId() {
-		return siegeId;
+		return getSpawn().getSiegeId();
 	}
 
 	@Override
@@ -39,10 +34,9 @@ public class SiegeNpc extends Npc {
 	 */
 	@Override
 	public boolean isEnemyFrom(Creature creature) {
-		if (creature instanceof SiegeNpc && this.getSiegeRace() != ((SiegeNpc) creature).getSiegeRace()) {
+		if (creature instanceof SiegeNpc siegeNpc && siegeNpc.getSiegeRace() != getSiegeRace())
 			return true;
-		} else
-			return super.isEnemyFrom(creature);
+		return super.isEnemyFrom(creature);
 	}
 
 }

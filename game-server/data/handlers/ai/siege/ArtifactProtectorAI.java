@@ -10,7 +10,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
  * @author ATracer
  */
 @AIName("artifact_protector")
-public class ArtifactProtectorAI extends SiegeNpcAI {
+public class ArtifactProtectorAI extends AbstractSiegeProtectorAI {
 
 	public ArtifactProtectorAI(Npc owner) {
 		super(owner);

@@ -33,21 +33,12 @@ import com.aionemu.gameserver.world.zone.ZoneName;
  */
 public class AgentSiege extends Siege<AgentLocation> {
 
-	private final AgentDeathListener veilleDeathListener = new AgentDeathListener(this);
-	private final AgentDeathListener mastaDeathListener = new AgentDeathListener(this);
-	private final SiegeBossDoAddDamageListener veilleDoAddDamageListener = new SiegeBossDoAddDamageListener(this);
-	private final SiegeBossDoAddDamageListener mastaDoAddDamageListener = new SiegeBossDoAddDamageListener(this);
 	private byte startProgress = 1;
 	private SiegeNpc masta, veille;
 	private SiegeRace winner;
 
-	/**
-	 * Set race for both deathListeners with opposite race.
-	 */
 	public AgentSiege(AgentLocation siegeLocation) {
 		super(siegeLocation);
-		veilleDeathListener.setRace(SiegeRace.ASMODIANS);
-		mastaDeathListener.setRace(SiegeRace.ELYOS);
 	}
 
 	@Override
@@ -76,7 +67,6 @@ public class AgentSiege extends Siege<AgentLocation> {
 	protected void onSiegeFinish() {
 		PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_LDF4_ADVANCE_GODELITE_TIME_03());
 		getSiegeLocation().setVulnerable(false);
-		removeListeners();
 		despawnSiegeNpcs();
 		if (winner == null)
 			return;
@@ -118,7 +108,6 @@ public class AgentSiege extends Siege<AgentLocation> {
 				}
 			}
 		}
-		registerListeners();
 	}
 
 	public void despawnSiegeNpcs() {
@@ -143,25 +132,6 @@ public class AgentSiege extends Siege<AgentLocation> {
 				break;
 			default:
 				throw new SiegeException("Tried to init a npc with not supported TemplateType " + target.getNpcTemplateType() + " for agent fight!");
-		}
-	}
-
-	private void registerListeners() {
-		veille.getAggroList().addEventListener(veilleDoAddDamageListener);
-		veille.getAi().addEventListener(veilleDeathListener);
-
-		masta.getAggroList().addEventListener(mastaDoAddDamageListener);
-		masta.getAi().addEventListener(mastaDeathListener);
-	}
-
-	private void removeListeners() {
-		if (veille != null) {
-			veille.getAggroList().removeEventListener(veilleDoAddDamageListener);
-			veille.getAi().removeEventListener(veilleDeathListener);
-		}
-		if (masta != null) {
-			masta.getAggroList().removeEventListener(mastaDoAddDamageListener);
-			masta.getAi().removeEventListener(mastaDeathListener);
 		}
 	}
 
