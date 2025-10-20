@@ -7,6 +7,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
@@ -30,7 +31,7 @@ public abstract class Base<T extends BaseLocation> {
 	private final AtomicBoolean isStarted = new AtomicBoolean();
 	private final AtomicBoolean isStopped = new AtomicBoolean();
 	private Future<?> assaultTask, assaultDespawnTask, bossSpawnTask, outriderSpawnTask;
-	private Npc boss, flag;
+	private Npc flag;
 
 	protected abstract int getAssaultDelay();
 
@@ -126,11 +127,7 @@ public abstract class Base<T extends BaseLocation> {
 		}, getAssaultDelay());
 	}
 
-	private BaseOccupier chooseAssaultRace() {
-		if (bLoc instanceof PanesterraBaseLocation) {
-			return BaseOccupier.BALAUR;
-		}
-
+	protected BaseOccupier chooseAssaultRace() {
 		List<BaseOccupier> coll = new ArrayList<>(List.of(BaseOccupier.ASMODIANS, BaseOccupier.ELYOS, BaseOccupier.BALAUR));
 		coll.remove(getOccupier());
 		return Rnd.get(coll);
@@ -146,14 +143,13 @@ public abstract class Base<T extends BaseLocation> {
 	}
 
 	private void despawnAssaulter() {
-		for (Npc npc : assaulter) {
-			if (npc != null)
-				npc.getController().deleteIfAliveOrCancelRespawn();
-		}
+		for (Npc npc : assaulter)
+			npc.getController().deleteIfAliveOrCancelRespawn();
 		assaulter.clear();
 	}
 
 	public void spawnBySpawnHandler(SpawnHandlerType type, BaseOccupier occupier) {
+		Npc boss = null;
 		for (SpawnGroup group : DataManager.SPAWNS_DATA.getBaseSpawnsByLocId(id)) {
 			if (group.getHandlerType() != type)
 				continue;
@@ -161,15 +157,21 @@ public abstract class Base<T extends BaseLocation> {
 				if (((BaseSpawnTemplate) template).getOccupier() != occupier)
 					continue;
 				Npc npc = (Npc) SpawnEngine.spawnObject(template, 1);
+				if (npc == null)
+					throw new BaseException("Npc " + template.getNpcId() + " could not be spawned at base " + id);
 				switch (type) {
 					case ATTACKER:
 						assaulter.add(npc);
 						break;
 					case BOSS:
-						initBoss(npc);
+						if (boss != null)
+							throw new BaseException("Tried to spawn boss twice at base " + id);
+						boss = npc;
 						break;
 					case FLAG:
-						initFlag(npc);
+						if (flag != null)
+							throw new BaseException("Tried to spawn flag twice at base " + id);
+						flag = npc;
 						break;
 				}
 			}
@@ -180,21 +182,8 @@ public abstract class Base<T extends BaseLocation> {
 			throw new BaseException("No flag found for base! ID: " + id);
 	}
 
-	private void initBoss(Npc npc) throws BaseException, NullPointerException {
-		if (npc == null)
-			throw new BaseException("Boss could not be spawned! Base ID: " + id);
-		if (boss != null)
-			throw new BaseException("Tried to initialize boss twice! Base ID: " + id);
-		boss = npc;
-		boss.getAi().addEventListener(new BaseBossDeathListener(this));
-	}
-
-	private void initFlag(Npc npc) throws BaseException, NullPointerException {
-		if (npc == null)
-			throw new BaseException("Flag could not be spawned! Base ID: " + id);
-		if (flag != null)
-			throw new BaseException("Tried to initialize flag twice! Base ID: " + id);
-		flag = npc;
+	public BaseOccupier getOccupier(Creature bossKiller) {
+		return bossKiller == null ? getLocation().getTemplate().getDefaultOccupier() : BaseOccupier.findBy(bossKiller.getRace());
 	}
 
 	/**
@@ -255,14 +244,6 @@ public abstract class Base<T extends BaseLocation> {
 			if (task != null && !task.isDone())
 				task.cancel(true);
 		}
-	}
-
-	public Npc getBoss() {
-		return boss;
-	}
-
-	public Npc getFlag() {
-		return flag;
 	}
 
 	public T getLocation() {

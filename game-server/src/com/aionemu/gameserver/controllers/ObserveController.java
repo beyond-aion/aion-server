@@ -139,8 +139,8 @@ public class ObserveController {
 		}
 	}
 
-	public void notifyDeathObservers(Creature creature) {
-		notifyObservers(ObserverType.DEATH, creature);
+	public void notifyDeathObservers(Creature lastAttacker) {
+		notifyObservers(ObserverType.DEATH, lastAttacker);
 	}
 
 	public void notifyMoveObservers() {

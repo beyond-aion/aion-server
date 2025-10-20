@@ -2,8 +2,6 @@ package com.aionemu.gameserver.ai;
 
 import java.util.EnumSet;
 
-import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.ai.event.AIListenable;
 import com.aionemu.gameserver.ai.handler.*;
 import com.aionemu.gameserver.ai.manager.SimpleAttackManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
@@ -100,51 +98,43 @@ public abstract class NpcAI extends AITemplate<Npc> {
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.ACTIVATE)
 	protected void handleActivate() {
 		ActivateEventHandler.onActivate(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.DEACTIVATE)
 	protected void handleDeactivate() {
 		ActivateEventHandler.onDeactivate(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.BEFORE_SPAWNED)
 	protected void handleBeforeSpawned() {
 		SpawnEventHandler.onBeforeSpawn(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.SPAWNED)
 	protected void handleSpawned() {
 		SpawnEventHandler.onSpawn(this);
 		ShoutEventHandler.onSpawn(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.DESPAWNED)
 	protected void handleDespawned() {
 		ShoutEventHandler.onBeforeDespawn(this);
 		SpawnEventHandler.onDespawn(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.DIED)
 	protected void handleDied() {
 		DiedEventHandler.onDie(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.MOVE_ARRIVED)
 	protected void handleMoveArrived() {
 		ShoutEventHandler.onReachedWalkPoint(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.TARGET_CHANGED)
 	protected void handleTargetChanged(Creature creature) {
 		ShoutEventHandler.onSwitchedTarget(this, creature);
 	}

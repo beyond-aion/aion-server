@@ -14,11 +14,11 @@ import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
 import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
-import com.aionemu.gameserver.model.vortex.VortexLocation;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.VortexService;
 import com.aionemu.gameserver.services.panesterra.PanesterraService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
+import com.aionemu.gameserver.services.vortex.DimensionalVortex;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -117,9 +117,9 @@ public class PlayerReviveService {
 			PanesterraService.getInstance().reviveInEventLocation(player);
 		} else if (!PanesterraService.getInstance().teleportToStartPosition(player)) {
 			WorldPosition resPos = null;
-			for (VortexLocation loc : VortexService.getInstance().getVortexLocations().values()) {
-				if (loc.isInsideActiveVotrex(player) && player.getRace().equals(loc.getInvadersRace())) {
-					resPos = loc.getResurrectionPoint();
+			for (DimensionalVortex<?> vortex : VortexService.getInstance().getActiveInvasions().values()) {
+				if (player.getRace() == vortex.getVortexLocation().getInvadersRace() && vortex.getVortexLocation().isInsideLocation(player)) {
+					resPos = vortex.getVortexLocation().getResurrectionPoint();
 					break;
 				}
 			}

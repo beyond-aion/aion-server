@@ -68,7 +68,7 @@ public class ActionObserver {
 	public void boostSkillCost(Skill skill) {
 	}
 
-	public void died(Creature creature) {
+	public void died(Creature lastAttacker) {
 	}
 
 	public void dotattacked(Creature creature, Effect dotEffect) {

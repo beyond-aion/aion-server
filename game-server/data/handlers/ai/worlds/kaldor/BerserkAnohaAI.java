@@ -35,24 +35,21 @@ public class BerserkAnohaAI extends AggressiveNpcAI {
 	@Override
 	protected void handleSpawned() {
 		super.handleSpawned();
+		PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_SPAWN());
 		scheduleDespawn();
 		occupier = SiegeService.getInstance().getFortress(7011).getRace();
 	}
 
 	private void scheduleDespawn() {
-		getOwner().getController().addTask(TaskId.DESPAWN, ThreadPoolManager.getInstance().schedule(() -> {
-			if (!isDead()) {
-				getOwner().getController().delete();
-				PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DESPAWN());
-			}
-		}, 60 * 60000)); // 1hour
+		getOwner().getController().addTask(TaskId.DESPAWN,
+			ThreadPoolManager.getInstance().schedule(() -> getOwner().getController().deleteIfAliveOrCancelRespawn(), 1, TimeUnit.HOURS));
 	}
 
 	@Override
 	protected void handleDespawned() {
-		Npc flag = getOwner().getPosition().getWorldMapInstance().getNpc(702618); // see AnohasSword AI
-		if (flag != null)
-			flag.getController().delete();
+		if (!isDead())
+			PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DESPAWN());
+		despawnFlag();
 		super.handleDespawned();
 	}
 
@@ -60,8 +57,15 @@ public class BerserkAnohaAI extends AggressiveNpcAI {
 	protected void handleDied() {
 		getOwner().getController().cancelTask(TaskId.DESPAWN);
 		PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_DIE());
+		despawnFlag();
 		checkForFactionReward();
 		super.handleDied();
+	}
+
+	private void despawnFlag() {
+		Npc flag = getOwner().getPosition().getWorldMapInstance().getNpc(702618); // see AnohasSword AI
+		if (flag != null)
+			flag.getController().delete();
 	}
 
 	private void checkForFactionReward() {
