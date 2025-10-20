@@ -49,7 +49,6 @@ public class Npc extends Creature {
 	private int creatorId = 0;
 	private int townId;
 	private CreatureType type = null;
-	private ItemAttackType attacktype = ItemAttackType.PHYSICAL;
 	private NpcEquippedGear overridenEquipment;
 	private SummonOwner summonOwner = null;
 
@@ -124,7 +123,7 @@ public class Npc extends Creature {
 
 	@Override
 	public ItemAttackType getAttackType() {
-		return getAi().modifyAttackType(attacktype);
+		return getAi().modifyAttackType(ItemAttackType.PHYSICAL);
 	}
 
 	public NpcSkillList getSkillList() {
