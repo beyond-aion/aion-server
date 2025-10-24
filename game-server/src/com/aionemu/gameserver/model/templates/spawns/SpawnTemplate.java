@@ -127,15 +127,15 @@ public class SpawnTemplate {
 	}
 
 	public SpawnTemplate changeTemplate(int instanceId) {
-		return spawnGroup.getRndTemplate(instanceId);
+		return spawnGroup.reserveRandomFreePoolSpot(instanceId);
 	}
 
 	public int getRespawnTime() {
 		return spawnGroup.getRespawnTime();
 	}
 
-	public void setUse(int instanceId, boolean isUsed) {
-		spawnGroup.setTemplateUse(instanceId, this, isUsed);
+	public void resetPoolSpot(int instanceId) {
+		spawnGroup.resetPoolSpot(instanceId, this);
 	}
 
 	public TemporarySpawn getTemporarySpawn() {

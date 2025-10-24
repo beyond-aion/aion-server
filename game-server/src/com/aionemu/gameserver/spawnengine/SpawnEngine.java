@@ -161,9 +161,9 @@ public class SpawnEngine {
 						case STATIC -> StaticObjectSpawnManager.spawnTemplate(spawn, instance.getInstanceId());
 					}
 				} else if (spawn.hasPool() && checkPool(spawn)) {
-					spawn.resetTemplates(instance.getInstanceId());
+					spawn.resetPoolSpots(instance.getInstanceId());
 					for (int i = 0; i < spawn.getPool(); i++) {
-						SpawnTemplate template = spawn.getRndTemplate(instance.getInstanceId());
+						SpawnTemplate template = spawn.reserveRandomFreePoolSpot(instance.getInstanceId());
 						if (template == null)
 							break;
 						spawnObject(template, instance.getInstanceId());

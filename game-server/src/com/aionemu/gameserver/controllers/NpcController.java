@@ -104,6 +104,8 @@ public class NpcController extends CreatureController<Npc> {
 		Npc owner = getOwner();
 		cancelCurrentSkill(null);
 		owner.getEffectController().removeAllEffects();
+		if (owner.getSpawn().hasPool() && !owner.isDead())
+			owner.getSpawn().resetPoolSpot(owner.getInstanceId());
 		DropService.getInstance().unregisterDrop(owner);
 		owner.getPosition().getWorldMapInstance().getInstanceHandler().onDespawn(owner);
 		owner.getAi().onGeneralEvent(AIEventType.DESPAWNED);
@@ -115,7 +117,7 @@ public class NpcController extends CreatureController<Npc> {
 	public void onDie(Creature lastAttacker) {
 		Npc owner = getOwner();
 		if (owner.getSpawn().hasPool())
-			owner.getSpawn().setUse(owner.getInstanceId(), false);
+			owner.getSpawn().resetPoolSpot(owner.getInstanceId());
 
 		if (owner.getAi().ask(AIQuestion.ALLOW_RESPAWN))
 			RespawnService.scheduleRespawn(getOwner()); // schedule respawn before onDie events are fired, so handlers can cancel the respawn task if needed
