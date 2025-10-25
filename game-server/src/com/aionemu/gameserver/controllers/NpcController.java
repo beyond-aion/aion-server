@@ -86,11 +86,8 @@ public class NpcController extends CreatureController<Npc> {
 		owner.getLifeStats().setCurrentHpPercent(100);
 		owner.getAi().onGeneralEvent(AIEventType.BEFORE_SPAWNED);
 
-		if (owner.getSpawn().getState() > 0) {
+		if (owner.getSpawn().getState() > 0)
 			owner.setState(owner.getSpawn().getState());
-		} else if (owner.getSpawn().canFly()) {
-			owner.setState(CreatureState.FLYING);
-		}
 	}
 
 	@Override
