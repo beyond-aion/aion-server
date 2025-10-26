@@ -1596,7 +1596,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Trick or treat! The witch and the king" start="2017-10-29T18:00:00" end="2017-11-02T20:00:00" theme="HALLOWEEN">
+	<event name="Trick or treat! The witch and the king" start="2025-10-27T00:00:00" end="2025-11-02T23:59:59" theme="HALLOWEEN">
 		<quests>
 			<maintainable>80010 80011 80012 80013 80014 80015 80086 80087 80088 80089 80090 80091 80092 80093 80094 80095 80096 80097 80098 80099 80100 80101 80102 80103 80104 80105 80106 80107 80108 80109 80110 80111</maintainable>
 		</quests>
