@@ -15,7 +15,6 @@ import com.aionemu.gameserver.model.siege.SiegeRace;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTemplate;
@@ -50,8 +49,6 @@ public class SpawnEngine {
 
 		if (npcId > 400000 && npcId < 499999) {
 			return VisibleObjectSpawner.spawnGatherable(spawn, instanceIndex);
-		} else if (spawn instanceof BaseSpawnTemplate) {
-			return VisibleObjectSpawner.spawnBaseNpc((BaseSpawnTemplate) spawn, instanceIndex);
 		} else if (spawn instanceof RiftSpawnTemplate) {
 			return VisibleObjectSpawner.spawnRiftNpc((RiftSpawnTemplate) spawn, instanceIndex);
 		} else if (spawn instanceof SiegeSpawnTemplate) {

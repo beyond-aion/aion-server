@@ -13,7 +13,6 @@ import com.aionemu.gameserver.geoEngine.collision.CollisionIntention;
 import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.base.Base;
 import com.aionemu.gameserver.model.gameobjects.*;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -25,12 +24,10 @@ import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
-import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.riftspawns.RiftSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.vortexspawns.VortexSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PLAYER_STATE;
-import com.aionemu.gameserver.services.BaseService;
 import com.aionemu.gameserver.services.RiftService;
 import com.aionemu.gameserver.skillengine.effect.SummonOwner;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -76,30 +73,6 @@ public class VisibleObjectSpawner {
 	public static SummonedHouseNpc spawnHouseNpc(SpawnTemplate spawn, int instanceIndex, House creator) {
 		SummonedHouseNpc npc = new SummonedHouseNpc(new NpcController(), spawn, creator);
 		SpawnEngine.bringIntoWorld(npc, spawn, instanceIndex);
-		return npc;
-	}
-
-	protected static VisibleObject spawnBaseNpc(BaseSpawnTemplate spawn, int instanceIndex) {
-		int npcId = spawn.getNpcId();
-		NpcTemplate npcTemplate = DataManager.NPC_DATA.getNpcTemplate(npcId);
-
-		if (npcTemplate == null) {
-			log.error("No template for Base NPC {}", npcId);
-			return null;
-		}
-
-		Base<?> base = BaseService.getInstance().getActiveBase(spawn.getId());
-		if (base == null) // inactive base
-			return null;
-
-		if (spawn.getOccupier() != base.getOccupier()) // avoid respawn of previous owner race spawns
-			return null;
-
-		Npc npc = new Npc(new NpcController(), spawn, npcTemplate);
-		npc.setKnownlist(new NpcKnownList(npc));
-		npc.setEffectController(new EffectController(npc));
-		SpawnEngine.bringIntoWorld(npc, spawn, instanceIndex);
-
 		return npc;
 	}
 
