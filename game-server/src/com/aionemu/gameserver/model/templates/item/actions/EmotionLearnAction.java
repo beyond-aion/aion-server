@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
+import java.util.List;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 
@@ -63,12 +64,20 @@ public class EmotionLearnAction extends AbstractItemAction {
 	 * 64 - 155<br>
 	 * <br>
 	 * Not learnable known valid IDs:<br>
-	 * 1 - 34 - default emotions<br>
+	 * 1 - 35 - default emotions<br>
 	 * >10000 - housing emotions (10006/10007 lay in left/right side of a bed, 10008 sitting on a chair, ...)
 	 * 
 	 * @return True if there exists a learn template for given emotion. False means it's either a default or an invalid emotion.
 	 */
 	public static boolean isLearnable(int emotionId) {
 		return LEARNABLE_IDS.contains(emotionId);
+	}
+
+	public static List<Integer> getLearnableEmotionIds() {
+		return LEARNABLE_IDS.stream().sorted().toList();
+	}
+
+	public int getEmotionId() {
+		return emotionId;
 	}
 }

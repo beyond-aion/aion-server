@@ -32,7 +32,6 @@ import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.DialogService;
 import com.aionemu.gameserver.services.RespawnService;
-import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
@@ -87,11 +86,8 @@ public class NpcController extends CreatureController<Npc> {
 		owner.getLifeStats().setCurrentHpPercent(100);
 		owner.getAi().onGeneralEvent(AIEventType.BEFORE_SPAWNED);
 
-		if (owner.getSpawn().getState() > 0) {
+		if (owner.getSpawn().getState() > 0)
 			owner.setState(owner.getSpawn().getState());
-		} else if (owner.getSpawn().canFly()) {
-			owner.setState(CreatureState.FLYING);
-		}
 	}
 
 	@Override
@@ -105,6 +101,8 @@ public class NpcController extends CreatureController<Npc> {
 		Npc owner = getOwner();
 		cancelCurrentSkill(null);
 		owner.getEffectController().removeAllEffects();
+		if (owner.getSpawn().hasPool() && !owner.isDead())
+			owner.getSpawn().resetPoolSpot(owner.getInstanceId());
 		DropService.getInstance().unregisterDrop(owner);
 		owner.getPosition().getWorldMapInstance().getInstanceHandler().onDespawn(owner);
 		owner.getAi().onGeneralEvent(AIEventType.DESPAWNED);
@@ -116,14 +114,15 @@ public class NpcController extends CreatureController<Npc> {
 	public void onDie(Creature lastAttacker) {
 		Npc owner = getOwner();
 		if (owner.getSpawn().hasPool())
-			owner.getSpawn().setUse(owner.getInstanceId(), false);
+			owner.getSpawn().resetPoolSpot(owner.getInstanceId());
+
+		if (owner.getAi().ask(AIQuestion.ALLOW_RESPAWN))
+			RespawnService.scheduleRespawn(getOwner()); // schedule respawn before onDie events are fired, so handlers can cancel the respawn task if needed
 
 		boolean allowDecay = true;
-		boolean allowRespawn = true;
 		boolean shouldLoot = true;
 		try {
 			allowDecay = owner.getAi().ask(AIQuestion.ALLOW_DECAY);
-			allowRespawn = owner.getAi().ask(AIQuestion.ALLOW_RESPAWN);
 			shouldLoot = owner.getAi().ask(AIQuestion.REWARD_LOOT);
 			if (owner.getAi().ask(AIQuestion.REWARD_AP_XP_DP_LOOT))
 				doReward();
@@ -134,9 +133,6 @@ public class NpcController extends CreatureController<Npc> {
 		}
 
 		super.onDie(lastAttacker);
-
-		if (allowRespawn && SiegeService.getInstance().isRespawnAllowed(owner))
-			RespawnService.scheduleRespawn(getOwner());
 
 		if (allowDecay) {
 			if (shouldLoot)

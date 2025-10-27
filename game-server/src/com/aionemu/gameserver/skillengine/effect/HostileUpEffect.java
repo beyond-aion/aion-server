@@ -1,24 +1,22 @@
 package com.aionemu.gameserver.skillengine.effect;
 
+import java.util.concurrent.ScheduledFuture;
+import java.util.concurrent.atomic.AtomicReference;
+
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.atomic.AtomicReference;
-
 /**
- * @author ATracer,
- * Updated by Yeats 26.02.20
+ * @author ATracer, Yeats
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "HostileUpEffect")
@@ -44,27 +42,13 @@ public class HostileUpEffect extends EffectTemplate {
 				totalHate += effect.getEffectHate();
 			effected.getAggroList().addHate(effect.getEffector(), totalHate + tempHate);
 			if (tempHate > 0) {
-				AtomicReference<ActionObserver> observerRef = new AtomicReference<>();
-				ScheduledFuture<?> task = ThreadPoolManager.getInstance().schedule(new Runnable() {
-					@Override
-					public void run() {
-						if (effected.getAggroList().isHating(effect.getEffector())) {
-							effected.getAggroList().addHate(effect.getEffector(), -1 * tempHate);
-						}
-						if (observerRef.get() != null) {
-							effect.getEffector().getObserveController().removeObserver(observerRef.get());
-						}
-					}
+				AtomicReference<DeathObserver> observerRef = new AtomicReference<>();
+				ScheduledFuture<?> task = ThreadPoolManager.getInstance().schedule(() -> {
+					effected.getAggroList().addHate(effect.getEffector(), -tempHate);
+					effect.getEffector().getObserveController().removeObserver(observerRef.get());
 				}, tempDuration);
-
-				observerRef.set(new ActionObserver(ObserverType.DEATH) {
-					@Override
-					public void died(Creature creature) {
-						task.cancel(false);
-						effect.getEffector().getObserveController().removeObserver(this);
-					}
-				});
-				effect.getEffector().getObserveController().addObserver(observerRef.get());
+				observerRef.set(new DeathObserver(_ -> task.cancel(false)));
+				effect.getEffector().getObserveController().attach(observerRef.get());
 			}
 		}
 	}

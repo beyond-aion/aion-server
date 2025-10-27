@@ -78,12 +78,8 @@ public class _1559WhatsintheBox extends AbstractQuestHandler {
 						return sendQuestDialog(env, 1352);
 					return false;
 				case SETPRO1:
-					if (var == 0) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-					}
+					if (changeQuestStep(env, 0, 1))
+						return closeDialogWindow(env);
 					return false;
 			}
 		} else if (targetId == 204571) {
@@ -93,12 +89,8 @@ public class _1559WhatsintheBox extends AbstractQuestHandler {
 						return sendQuestDialog(env, 1693);
 					return false;
 				case SETPRO2:
-					if (var == 1) {
-						qs.setQuestVarById(0, var + 1);
-						updateQuestStatus(env);
-						PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-						return true;
-					}
+					if (changeQuestStep(env, 1, 2))
+						return closeDialogWindow(env);
 					return false;
 			}
 		} else if (targetId == 798013) {
@@ -108,16 +100,10 @@ public class _1559WhatsintheBox extends AbstractQuestHandler {
 						return sendQuestDialog(env, 2034);
 					return false;
 				case SETPRO3:
-					if (var == 2) {
-						{
-							qs.setQuestVarById(0, var + 1);
-							qs.setStatus(QuestStatus.REWARD);
-							updateQuestStatus(env);
-							if (giveQuestItem(env, 182201824, 1))
-								;
-							PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(env.getVisibleObject().getObjectId(), 10));
-							return true;
-						}
+					if (changeQuestStep(env, 2, 3, true)) {
+						removeQuestItem(env, 182201823, 1);
+						giveQuestItem(env, 182201824, 1);
+						return closeDialogWindow(env);
 					}
 					return false;
 			}

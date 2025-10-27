@@ -6,8 +6,8 @@ import javax.xml.bind.annotation.XmlType;
 
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.AttackShieldObserver;
+import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.ShieldType;
@@ -35,14 +35,7 @@ public class ProtectEffect extends ShieldEffect {
 
 			});
 		} else {
-			effect.addObserver(effect.getEffector(), new ActionObserver(ObserverType.DEATH) {
-
-				@Override
-				public void died(Creature creature) {
-					effect.endEffect();
-				}
-
-			});
+			effect.addObserver(effect.getEffector(), new DeathObserver(_ -> effect.endEffect()));
 		}
 	}
 

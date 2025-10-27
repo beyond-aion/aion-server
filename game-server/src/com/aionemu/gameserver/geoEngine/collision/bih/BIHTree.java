@@ -32,25 +32,19 @@
 
 package com.aionemu.gameserver.geoEngine.collision.bih;
 
-
 import static java.lang.Math.max;
-
-import java.nio.FloatBuffer;
 
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
 import com.aionemu.gameserver.geoEngine.bounding.BoundingVolume;
 import com.aionemu.gameserver.geoEngine.collision.Collidable;
 import com.aionemu.gameserver.geoEngine.collision.CollisionResults;
 import com.aionemu.gameserver.geoEngine.collision.UnsupportedCollisionException;
-import com.aionemu.gameserver.geoEngine.collision.WorldBoundCollisionResults;
 import com.aionemu.gameserver.geoEngine.math.FastMath;
 import com.aionemu.gameserver.geoEngine.math.Matrix4f;
 import com.aionemu.gameserver.geoEngine.math.Ray;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.geoEngine.scene.CollisionData;
 import com.aionemu.gameserver.geoEngine.scene.Mesh;
-import com.aionemu.gameserver.geoEngine.scene.VertexBuffer.Type;
-import com.aionemu.gameserver.geoEngine.scene.mesh.IndexBuffer;
 import com.aionemu.gameserver.geoEngine.utils.TempVars;
 
 public class BIHTree implements CollisionData {
@@ -59,54 +53,15 @@ public class BIHTree implements CollisionData {
     public static final int MAX_TRIS_PER_NODE  = 21;
 
     private BIHNode root;
-    private int maxTrisPerNode;
-    private int numTris;
-    private float[] pointData;
-
-    private void initTriList(FloatBuffer vb, IndexBuffer ib){
-        pointData = new float[numTris * 3 * 3];
-        int p = 0;
-        for (int i = 0; i < numTris*3; i+=3){
-            int vert = ib.get(i)*3;
-            pointData[p++] = vb.get(vert++);
-            pointData[p++] = vb.get(vert++);
-            pointData[p++] = vb.get(vert);
-
-            vert = ib.get(i+1)*3;
-            pointData[p++] = vb.get(vert++);
-            pointData[p++] = vb.get(vert++);
-            pointData[p++] = vb.get(vert);
-
-            vert = ib.get(i+2)*3;
-            pointData[p++] = vb.get(vert++);
-            pointData[p++] = vb.get(vert++);
-            pointData[p++] = vb.get(vert);
-        }
-    }
-
-    public BIHTree(Mesh mesh, int maxTrisPerNode){
-        this.maxTrisPerNode = maxTrisPerNode;
-
-        if (maxTrisPerNode < 1 || mesh == null)
-            throw new IllegalArgumentException();
-
-        FloatBuffer vb = (FloatBuffer) mesh.getBuffer(Type.Position).getData();
-        IndexBuffer ib = mesh.getIndexBuffer();
-
-        numTris = ib.size() / 3;
-        initTriList(vb, ib);
-    }
+    private final Mesh mesh;
 
     public BIHTree(Mesh mesh){
-        this(mesh, MAX_TRIS_PER_NODE);
-    }
-
-    public BIHTree(){
+        this.mesh = mesh;
     }
 
     public void construct(){
-        BoundingBox sceneBbox = createBox(0, numTris-1);
-        root = createNode(0, numTris-1, sceneBbox, 0);
+        int numTris = mesh.getTriangleCount();
+        root = createNode(0, numTris-1, (BoundingBox) mesh.getBound(), 0);
     }
 
     private BoundingBox createBox(int l, int r) {
@@ -139,7 +94,7 @@ public class BIHTree implements CollisionData {
             getTriangle(pivot, v1, v2, v3);
             v1.addLocal(v2).addLocal(v3).multLocal(FastMath.ONE_THIRD);
             if (v1.get(axis) > split){
-                swapTriangles(pivot, j);
+                mesh.swapTriangles(pivot, j);
                 --j;
             } else {
                 ++pivot;
@@ -171,11 +126,11 @@ public class BIHTree implements CollisionData {
     }
 
     private BIHNode createNode(int l, int r, BoundingBox nodeBbox, int depth) {
-        if ((r - l) < maxTrisPerNode || depth > MAX_TREE_DEPTH){
+        if ((r - l) < MAX_TRIS_PER_NODE || depth > MAX_TREE_DEPTH){
             return new BIHNode(l, r);
         }
         
-        BoundingBox currentBox = createBox(l, r);
+        BoundingBox currentBox = nodeBbox == mesh.getBound() ? nodeBbox : createBox(l, r);
 
         Vector3f exteriorExt = nodeBbox.getExtent(null);
         Vector3f interiorExt = currentBox.getExtent(null);
@@ -236,35 +191,7 @@ public class BIHTree implements CollisionData {
     }
 
     public void getTriangle(int index, Vector3f v1, Vector3f v2, Vector3f v3){
-        int pointIndex = index * 9;
-
-        v1.x = pointData[pointIndex++];
-        v1.y = pointData[pointIndex++];
-        v1.z = pointData[pointIndex++];
-
-        v2.x = pointData[pointIndex++];
-        v2.y = pointData[pointIndex++];
-        v2.z = pointData[pointIndex++];
-
-        v3.x = pointData[pointIndex++];
-        v3.y = pointData[pointIndex++];
-        v3.z = pointData[pointIndex];
-    }
-
-    public void swapTriangles(int index1, int index2){
-        int p1 = index1 * 9;
-        int p2 = index2 * 9;
-
-        TempVars vars = TempVars.get();
-        // store p1 in tmp
-        System.arraycopy(pointData, p1, vars.bihSwapTmp, 0, 9);
-
-        // copy p2 to p1
-        System.arraycopy(pointData, p2, pointData, p1, 9);
-
-        // copy tmp to p2
-        System.arraycopy(vars.bihSwapTmp, 0, pointData, p2, 9);
-        vars.release();
+        mesh.getTriangle(index, v1, v2, v3);
     }
 
     private int collideWithRay(Ray r,
@@ -272,14 +199,11 @@ public class BIHTree implements CollisionData {
                                BoundingVolume worldBound,
                                CollisionResults results){
 
-        WorldBoundCollisionResults wbCollisions = new WorldBoundCollisionResults(results, worldBound);
+        CollisionResults wbCollisions = new CollisionResults(results.getIntentions(), results.getInstanceId(), results.isOnlyFirst());
         worldBound.collideWith(r, wbCollisions);
-        int collisions = wbCollisions.addValidCollisionsTo(results);
-        if (collisions > 0 && results.isOnlyFirst()) {
-          return collisions;
-        }
+        int collisions = 0;
         // if worldBound contains ray origin and there are no collisions it means ray starts and ends inside worldBound
-        if (wbCollisions.size() > 0 || wbCollisions.getCenterPlaneContactPoint() != null || worldBound.contains(r.getOrigin())) {
+        if (wbCollisions.size() > 0 || worldBound.contains(r.getOrigin())) {
             float tMin = 0;
             float tMax = r.getLimit();
             if (wbCollisions.size() > 0) {

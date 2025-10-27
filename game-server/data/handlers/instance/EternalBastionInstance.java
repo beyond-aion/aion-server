@@ -128,6 +128,7 @@ public class EternalBastionInstance extends GeneralInstanceHandler {
 				PacketSendUtility.broadcastToMap(npc, SM_SYSTEM_MESSAGE.STR_MSG_IDLDF5b_TD_AddWave_02());
 				spawnWithDelay(231164, 667.350f, 281.046f, 225.698f, (byte) 33, 30000); // Pashid Assault Pod
 				spawnWithDelay(231165, 721.498f, 358.172f, 230.940f, (byte) 0, 30000);
+				break;
 			case 231181: // Pashid Army Barricade
 				addPoints(npc, 266);
 				break;

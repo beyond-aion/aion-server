@@ -13,8 +13,7 @@ import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.HpPhases;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -185,12 +184,6 @@ public class SematariuxAI extends AggressiveNpcAI implements HpPhases.PhaseHandl
 
 	private void spawnAndObserveNpc(int npcId, WorldPosition pos) {
 		Npc npc = (Npc) spawn(npcId, pos.getX() + Rnd.get(-5, 5), pos.getY() + Rnd.get(-3, 3), pos.getZ() + 0.4f, (byte) 0);
-		npc.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) {
-
-			@Override
-			public void died(Creature creature) {
-				handleObservedNpcDied(npc);
-			}
-		});
+		npc.getObserveController().attach(new DeathObserver(_ -> handleObservedNpcDied(npc)));
 	}
 }

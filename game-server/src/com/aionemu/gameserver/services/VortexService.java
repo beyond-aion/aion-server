@@ -1,9 +1,9 @@
 package com.aionemu.gameserver.services;
 
-import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
+import java.util.concurrent.TimeUnit;
 
 import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.CustomConfig;
@@ -29,38 +29,14 @@ import com.aionemu.gameserver.world.WorldMapType;
 public class VortexService {
 
 	private final Map<Integer, DimensionalVortex<?>> activeInvasions = new ConcurrentHashMap<>();
-	private Map<Integer, VortexLocation> vortex;
 
 	public void initVortexLocations() {
 		if (CustomConfig.VORTEX_ENABLED) {
-			vortex = DataManager.VORTEX_DATA.getVortexLocations();
-
-			// Spawn peace
-			for (VortexLocation loc : getVortexLocations().values()) {
+			for (VortexLocation loc : DataManager.VORTEX_DATA.getVortexLocations().values())
 				spawn(loc, VortexStateType.PEACE);
-			}
 
-			// Brusthonin schedule
-			CronService.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					startInvasion(1);
-				}
-
-			}, CustomConfig.VORTEX_BRUSTHONIN_SCHEDULE);
-
-			// Theobomos schedule
-			CronService.getInstance().schedule(new Runnable() {
-
-				@Override
-				public void run() {
-					startInvasion(0);
-				}
-
-			}, CustomConfig.VORTEX_THEOBOMOS_SCHEDULE);
-		} else {
-			vortex = Collections.emptyMap();
+			CronService.getInstance().schedule(() -> startInvasion(0), CustomConfig.VORTEX_THEOBOMOS_SCHEDULE);
+			CronService.getInstance().schedule(() -> startInvasion(1), CustomConfig.VORTEX_BRUSTHONIN_SCHEDULE);
 		}
 	}
 
@@ -71,23 +47,14 @@ public class VortexService {
 			if (activeInvasions.containsKey(id)) {
 				return;
 			}
-			invasion = new Invasion(vortex.get(id));
+			invasion = new Invasion(DataManager.VORTEX_DATA.getVortexLocations().get(id));
 			activeInvasions.put(id, invasion);
 		}
 
 		invasion.start();
 
-		// Scheduled invasion end
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!invasion.isGeneratorDestroyed()) {
-					stopInvasion(id);
-				}
-			}
-
-		}, getDuration() * 3600 * 1000);
+		// schedule invasion end
+		ThreadPoolManager.getInstance().schedule(() -> stopInvasion(id), getDuration(), TimeUnit.HOURS);
 	}
 
 	public void stopInvasion(int id) {
@@ -179,38 +146,22 @@ public class VortexService {
 	}
 
 	public boolean isInsideVortexZone(Player player) {
-		int playerWorldId = player.getWorldId();
-
-		if (playerWorldId == 210060000 || playerWorldId == 220050000) {
-			VortexLocation loc = getLocationByWorld(playerWorldId);
-			if (loc != null) {
-				return loc.getPlayers().containsKey(player.getObjectId());
-			}
-		}
-
-		return false;
+		VortexLocation loc = getLocationByWorld(player.getWorldId());
+		return loc != null && loc.getPlayers().containsKey(player.getObjectId());
 	}
 
 	public VortexLocation getLocationByRift(int npcId) {
-		return getVortexLocation(npcId == 831141 ? 1 : 0);
+		return getLocationByWorld(npcId == 831141 ? WorldMapType.BRUSTHONIN.getId() : WorldMapType.THEOBOMOS.getId());
 	}
 
 	public VortexLocation getLocationByWorld(int worldId) {
 		if (worldId == WorldMapType.THEOBOMOS.getId()) {
-			return getVortexLocation(0);
+			return DataManager.VORTEX_DATA.getVortexLocations().get(0);
 		} else if (worldId == WorldMapType.BRUSTHONIN.getId()) {
-			return getVortexLocation(1);
+			return DataManager.VORTEX_DATA.getVortexLocations().get(1);
 		} else {
 			return null;
 		}
-	}
-
-	public VortexLocation getVortexLocation(int id) {
-		return vortex.get(id);
-	}
-
-	public Map<Integer, VortexLocation> getVortexLocations() {
-		return vortex;
 	}
 
 	public static VortexService getInstance() {

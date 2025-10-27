@@ -3,7 +3,6 @@ package com.aionemu.gameserver.spawnengine;
 import java.util.*;
 import java.util.stream.Collectors;
 
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
@@ -27,8 +26,6 @@ public class TemporarySpawnEngine {
 		List<VisibleObject> remainingObjects = new ArrayList<>(spawnedObjects.size());
 		spawnedObjects.forEach(object -> {
 			if (object.getSpawn().getTemporarySpawn().canDespawn()) {
-				if (object instanceof Npc npc && !npc.isDead() && object.getSpawn().hasPool())
-					object.getSpawn().setUse(npc.getInstanceId(), false);
 				object.getController().deleteIfAliveOrCancelRespawn();
 			} else {
 				remainingObjects.add(object);
@@ -49,9 +46,9 @@ public class TemporarySpawnEngine {
 				Set<Integer> spawnableInstanceIds = new HashSet<>(instanceIds);
 				spawned.forEach(o -> spawnableInstanceIds.remove(o.getInstanceId()));
 				for (Integer instanceId : spawnableInstanceIds) {
-					spawn.resetTemplates(instanceId);
+					spawn.resetPoolSpots(instanceId);
 					for (int pool = 0; pool < spawn.getPool(); pool++) {
-						SpawnTemplate template = spawn.getRndTemplate(instanceId);
+						SpawnTemplate template = spawn.reserveRandomFreePoolSpot(instanceId);
 						SpawnEngine.spawnObject(template, instanceId);
 					}
 				}

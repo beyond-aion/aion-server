@@ -17,7 +17,6 @@ public class SpawnTemplate {
 	private int randomWalk;
 	private String walkerId;
 	private Integer walkerIdx;
-	private int fly;
 	private String anchor;
 	private SpawnGroup spawnGroup;
 	private String aiName;
@@ -34,7 +33,6 @@ public class SpawnTemplate {
 		staticId = spot.getStaticId();
 		randomWalk = spot.getRandomWalk();
 		walkerId = spot.getWalkerId();
-		fly = spot.getFly();
 		anchor = spot.getAnchor();
 		walkerIdx = spot.getWalkerIndex();
 		aiName = spot.getAi();
@@ -42,12 +40,12 @@ public class SpawnTemplate {
 		temporarySpawn = spot.getTemporarySpawn();
 	}
 
-	public SpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly) {
-		this(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, fly, 0, null);
+	public SpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId) {
+		this(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, 0, null);
 	}
 
-	public SpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int fly,
-		int creatorId, String aiName) {
+	public SpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId, int staticId, int creatorId,
+		String aiName) {
 		this.spawnGroup = spawnGroup;
 		this.x = x;
 		this.y = y;
@@ -56,7 +54,6 @@ public class SpawnTemplate {
 		this.randomWalk = randWalk;
 		this.walkerId = walkerId;
 		this.staticId = staticId;
-		this.fly = fly;
 		this.aiName = aiName;
 		this.creatorId = creatorId;
 		addTemplate();
@@ -110,14 +107,6 @@ public class SpawnTemplate {
 		return randomWalk;
 	}
 
-	public int getFly() {
-		return fly;
-	}
-
-	public boolean canFly() {
-		return fly > 0;
-	}
-
 	public int getNpcId() {
 		return spawnGroup.getNpcId();
 	}
@@ -127,15 +116,15 @@ public class SpawnTemplate {
 	}
 
 	public SpawnTemplate changeTemplate(int instanceId) {
-		return spawnGroup.getRndTemplate(instanceId);
+		return spawnGroup.reserveRandomFreePoolSpot(instanceId);
 	}
 
 	public int getRespawnTime() {
 		return spawnGroup.getRespawnTime();
 	}
 
-	public void setUse(int instanceId, boolean isUsed) {
-		spawnGroup.setTemplateUse(instanceId, this, isUsed);
+	public void resetPoolSpot(int instanceId) {
+		spawnGroup.resetPoolSpot(instanceId, this);
 	}
 
 	public TemporarySpawn getTemporarySpawn() {

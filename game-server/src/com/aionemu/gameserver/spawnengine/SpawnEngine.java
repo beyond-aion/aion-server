@@ -85,7 +85,7 @@ public class SpawnEngine {
 
 	private static SpawnTemplate newSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int respawnTime, int creatorId,
 		String aiName) {
-		return new SpawnTemplate(new SpawnGroup(worldId, npcId, respawnTime), x, y, z, heading, 0, null, 0, 0, creatorId, aiName);
+		return new SpawnTemplate(new SpawnGroup(worldId, npcId, respawnTime), x, y, z, heading, 0, null, 0, creatorId, aiName);
 	}
 
 	/**
@@ -93,7 +93,7 @@ public class SpawnEngine {
 	 */
 	public static SiegeSpawnTemplate newSiegeSpawn(int worldId, int npcId, int siegeId, SiegeRace race, SiegeModType mod, float x, float y, float z,
 		byte heading) {
-		return new SiegeSpawnTemplate(siegeId, race, mod, new SpawnGroup(worldId, npcId, 0), x, y, z, heading, 0, null, 0, 0);
+		return new SiegeSpawnTemplate(siegeId, race, mod, new SpawnGroup(worldId, npcId, 0), x, y, z, heading, 0, null, 0);
 	}
 
 	static void bringIntoWorld(VisibleObject visibleObject, SpawnTemplate spawn, int instanceIndex) {
@@ -161,9 +161,9 @@ public class SpawnEngine {
 						case STATIC -> StaticObjectSpawnManager.spawnTemplate(spawn, instance.getInstanceId());
 					}
 				} else if (spawn.hasPool() && checkPool(spawn)) {
-					spawn.resetTemplates(instance.getInstanceId());
+					spawn.resetPoolSpots(instance.getInstanceId());
 					for (int i = 0; i < spawn.getPool(); i++) {
-						SpawnTemplate template = spawn.getRndTemplate(instance.getInstanceId());
+						SpawnTemplate template = spawn.reserveRandomFreePoolSpot(instance.getInstanceId());
 						if (template == null)
 							break;
 						spawnObject(template, instance.getInstanceId());

@@ -35,8 +35,6 @@ package com.aionemu.gameserver.geoEngine.math;
 import java.nio.FloatBuffer;
 import java.util.logging.Logger;
 
-import com.aionemu.gameserver.geoEngine.utils.BufferUtils;
-
 /**
  * <code>Matrix4f</code> defines and maintains a 4x4 matrix in row major order.
  * This matrix is intended for use in a translation and rotational capacity.
@@ -560,34 +558,6 @@ public final class Matrix4f implements Cloneable {
         m32 = tmp;
 
         return this;
-    }
-    
-    
-    /**
-     * <code>toFloatBuffer</code> returns a FloatBuffer object that contains
-     * the matrix data.
-     * 
-     * @return matrix data as a FloatBuffer.
-     */
-    public FloatBuffer toFloatBuffer() {
-    	return toFloatBuffer(false);
-    }
-
-    /**
-     * <code>toFloatBuffer</code> returns a FloatBuffer object that contains the
-     * matrix data.
-     * 
-     * @param columnMajor
-     *            if true, this buffer should be filled with column major data,
-     *            otherwise it will be filled row major.
-     * @return matrix data as a FloatBuffer. The position is set to 0 for
-     *         convenience.
-     */
-    public FloatBuffer toFloatBuffer(boolean columnMajor) {
-    	FloatBuffer fb = BufferUtils.createFloatBuffer(16);
-    	fillFloatBuffer(fb, columnMajor);
-    	fb.rewind();
-    	return fb;
     }
     
     /**

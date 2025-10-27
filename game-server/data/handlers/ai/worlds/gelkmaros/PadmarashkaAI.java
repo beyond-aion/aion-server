@@ -7,8 +7,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
@@ -110,12 +109,6 @@ public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHand
 
 	private void spawnAndObserveNpc(int npcId, float x, float y, float z, byte h) {
 		Npc npc = (Npc) spawn(npcId, x, y, z, h);
-		npc.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) {
-
-			@Override
-			public void died(Creature creature) {
-				handleObservedNpcDied(npc);
-			}
-		});
+		npc.getObserveController().attach(new DeathObserver(_ -> handleObservedNpcDied(npc)));
 	}
 }

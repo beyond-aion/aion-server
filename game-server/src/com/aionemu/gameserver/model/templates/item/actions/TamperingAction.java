@@ -1,8 +1,5 @@
 package com.aionemu.gameserver.model.templates.item.actions;
 
-import java.util.List;
-import java.util.Map;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -11,18 +8,16 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.LoggingConfig;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.controllers.observer.ItemUseObserver;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.enchants.TemperingEffect;
-import com.aionemu.gameserver.model.enchants.TemperingStat;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_INVENTORY_UPDATE_ITEM;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
+import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.collections.Predicates;
@@ -82,31 +77,9 @@ public class TamperingAction extends AbstractItemAction {
 
 				int maxTemp = targetItem.getItemTemplate().getMaxTampering();
 				if (targetItem.getTempering() < maxTemp) {
-					if (targetItem.getTemperingEffect() != null) {
-						targetItem.getTemperingEffect().endEffect(player);
-						targetItem.setTemperingEffect(null);
-					}
-
 					float temperingChance = calculateChance(player, targetItem);
 					if (Rnd.chance() < temperingChance) {
-						targetItem.setTempering(targetItem.getTempering() + 1);
-						if (targetItem.getTempering() > 4 && targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
-							// Random chance to get 4-7 ATK/20-32 MBoost
-							if (targetItem.getItemTemplate().getTemperingName().equals("TSHIRT_PHYSICAL")) {
-								targetItem.setRndPlumeBonusValue(targetItem.getRndPlumeBonusValue() + Rnd.get(0, 3));
-							} else {
-								targetItem.setRndPlumeBonusValue(targetItem.getRndPlumeBonusValue() + Rnd.get(0, 12));
-							}
-						}
-						if (targetItem.isEquipped()) {
-							if (targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
-								targetItem.setTemperingEffect(new TemperingEffect(player, targetItem));
-							} else {
-								Map<Integer, List<TemperingStat>> tempering = DataManager.TEMPERING_DATA.getTemplates(targetItem.getItemTemplate());
-								if (tempering != null)
-									targetItem.setTemperingEffect(new TemperingEffect(player, tempering.get(targetItem.getTempering())));
-							}
-						}
+						setTemperingLevel(targetItem, player, targetItem.getTempering() + 1);
 						PacketSendUtility.sendPacket(player,
 							SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_SUCCEEDED(targetItem.getL10n(), targetItem.getTempering()));
 						PacketSendUtility.broadcastPacketAndReceive(player,
@@ -123,7 +96,7 @@ public class TamperingAction extends AbstractItemAction {
 							log.info("Player " + player.getName() + " successfully tampered item " + targetItem.getItemId() + "(" + targetItem.getObjectId()
 								+ ") to level " + targetItem.getTempering());
 					} else {
-						targetItem.setTempering(0);
+						setTemperingLevel(targetItem, player, 0);
 						if (targetItem.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED_TSHIRT(targetItem.getL10n()));
 							PacketSendUtility.broadcastPacketAndReceive(player,
@@ -141,20 +114,37 @@ public class TamperingAction extends AbstractItemAction {
 						if (LoggingConfig.LOG_TAMPERING)
 							log.info("Player " + player.getName() + " failed to tamper item " + targetItem.getItemId() + "(" + targetItem.getObjectId() + ").");
 					}
-					if (targetItem.getPersistentState() != PersistentState.DELETED) {
-						targetItem.setPersistentState(PersistentState.UPDATE_REQUIRED);
-
-						if (targetItem.isEquipped())
-							player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
-						else
-							player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
-
-						PacketSendUtility.sendPacket(player, new SM_INVENTORY_UPDATE_ITEM(player, targetItem));
-					}
 				}
 			}
 
 		}, 5000));
+	}
+
+	public static void setTemperingLevel(Item item, Player player, int temperingLevel) {
+		int oldTemperingLevel = item.getTempering();
+		item.setTempering(temperingLevel);
+		if (item.getItemTemplate().getItemGroup() == ItemGroup.PLUME) {
+			if (item.getTempering() > 4) {
+				int rndBonusValue = item.getRndPlumeBonusValue();
+				for (int i = oldTemperingLevel; i < item.getTempering(); i++) // Random chance to get 4-7 ATK/20-32 MBoost
+					rndBonusValue += item.getItemTemplate().getTemperingName().equals("TSHIRT_PHYSICAL") ? Rnd.get(0, 3) : Rnd.get(0, 12);
+				item.setRndPlumeBonusValue(rndBonusValue);
+			} else {
+				item.setRndPlumeBonusValue(0);
+			}
+		}
+		if (item.getTemperingEffect() != null) {
+			item.getTemperingEffect().endEffect(player);
+			item.setTemperingEffect(null);
+		}
+		if (item.isEquipped() && item.getTempering() > 0)
+			TemperingEffect.apply(player, item);
+
+		ItemPacketService.updateItemAfterInfoChange(player, item, ItemPacketService.ItemUpdateType.STATS_CHANGE);
+		if (item.isEquipped())
+			player.getEquipment().setPersistentState(PersistentState.UPDATE_REQUIRED);
+		else
+			player.getInventory().setPersistentState(PersistentState.UPDATE_REQUIRED);
 	}
 
 	private float calculateChance(Player player, Item item) {

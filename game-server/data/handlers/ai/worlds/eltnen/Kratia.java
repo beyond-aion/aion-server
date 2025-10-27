@@ -3,9 +3,7 @@ package ai.worlds.eltnen;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
-import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.AggressiveNpcAI;
@@ -26,13 +24,7 @@ public class Kratia extends AggressiveNpcAI {
 	protected void handleDied() {
 		Npc kratia = getOwner();
 		Npc harpback = (Npc) spawn(211812, kratia.getX(), kratia.getY(), kratia.getZ(), kratia.getHeading());
-		harpback.getObserveController().attach(new ActionObserver(ObserverType.DEATH) {
-
-			@Override
-			public void died(Creature creature) {
-				AIActions.scheduleRespawn(Kratia.this);
-			}
-		});
+		harpback.getObserveController().attach(new DeathObserver(_ -> AIActions.scheduleRespawn(this)));
 		super.handleDied();
 	}
 

@@ -30,7 +30,6 @@ import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.items.GodStone;
-import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.GodstoneInfo;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
@@ -297,7 +296,7 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		List<AttackResult> attackResult;
 
 		CalculationType[] calculationTypes = new CalculationType[] { CalculationType.APPLY_POWER_SHARD_DAMAGE, CalculationType.REMOVE_POWER_SHARD };
-		if (getOwner() instanceof Player p && p.getEquipment().hasDualWeaponEquipped(ItemSlot.LEFT_HAND))
+		if (getOwner() instanceof Player p && p.getEquipment().isDualWeaponEquipped())
 			calculationTypes = ArrayUtils.add(calculationTypes, CalculationType.DUAL_WIELD);
 		if (getOwner().getAttackType() == ItemAttackType.PHYSICAL)
 			attackResult = AttackUtil.calculatePhysAttackResult(getOwner(), target, calculationTypes);

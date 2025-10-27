@@ -2,20 +2,17 @@ package ai.worlds.kaldor;
 
 import static com.aionemu.gameserver.model.DialogAction.SETPRO1;
 
+import java.util.concurrent.TimeUnit;
+
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.controllers.NpcController;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.DialogPage;
 import com.aionemu.gameserver.model.EmotionType;
-import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -60,7 +57,6 @@ public class AnohasSwordAI extends NpcAI {
 			PacketSendUtility.sendPacket(receiver, SM_SYSTEM_MESSAGE.STR_MSG_LDF5_FORTRESS_NAMED_SPAWN());
 			PacketSendUtility.sendPacket(receiver, SM_SYSTEM_MESSAGE.STR_MSG_LDF5_FORTRESS_NAMED_SPAWN_SYSTEM());
 		});
-		Race raceSummoned = player.getRace();
 		Npc sword = getOwner();
 		NpcController swordController = sword.getController();
 		AIActions.die(this); // kill sword (starts animation)
@@ -68,19 +64,11 @@ public class AnohasSwordAI extends NpcAI {
 			PacketSendUtility.broadcastPacket(sword, new SM_EMOTION(sword, EmotionType.RESURRECT));
 			PacketSendUtility.broadcastPacket(sword, new SM_EMOTION(sword, EmotionType.DIE));
 		}, 10 * 1000, 10 * 1000)); // disable despawn, repeat special die animation instead until anoha spawns
-		VisibleObject flag = spawn(702618, 791.38214f, 488.93655f, 143.47617f, (byte) 30); // map icon
+		spawn(702618, 791.38214f, 488.93655f, 143.47617f, (byte) 30); // map icon
 		ThreadPoolManager.getInstance().schedule(() -> {
-			Npc berserkAnoha = (Npc) spawn(855263, 791.38214f, 488.93655f, 143.47517f, (byte) 30); // Berserk Anoha
-			berserkAnoha.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) {
-
-				@Override
-				public void died(Creature creature) {
-					flag.getController().delete();
-				}
-			});
-			PacketSendUtility.broadcastToWorld(SM_SYSTEM_MESSAGE.STR_MSG_ANOHA_SPAWN());
+			spawn(855263, 791.38214f, 488.93655f, 143.47517f, (byte) 30); // Berserk Anoha
 			swordController.delete(); // despawn sword
-		}, 30 * 60000);
+		}, 30, TimeUnit.MINUTES);
 		return true;
 	}
 

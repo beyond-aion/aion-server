@@ -132,17 +132,13 @@ public class FortressSiege extends Siege<FortressLocation> {
 			SiegeRace oldRace = getSiegeLocation().getRace();
 			int oldLegionId = getSiegeLocation().getLegionId();
 			if (isBossKilled()) {
-				SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
+				SiegeRaceCounter winner = getWinnerRaceCounter();
 				log.info(this + ": Siege finished. Old race: " + oldRace + ", legion ID: " + oldLegionId + " -> New race: " + winner.getSiegeRace()
 					+ ", legion ID: " + (winner.getWinnerLegionId() == null ? 0 : winner.getWinnerLegionId()));
 			} else {
 				log.info(this + ": Siege finished. No winner found. Race: " + oldRace + ", legion ID: " + oldLegionId);
 			}
 		}
-
-		// Unregister siege boss listeners
-		// cleanup :)
-		unregisterSiegeBossListeners();
 
 		// despawn protectors and make fortress invulnerable
 		SiegeService.getInstance().deSpawnNpcs(getSiegeLocationId());
@@ -192,7 +188,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 	}
 
 	private void onCapture() {
-		SiegeRaceCounter winner = getSiegeCounter().getWinnerRaceCounter();
+		SiegeRaceCounter winner = getWinnerRaceCounter();
 		SiegeRace winnerRace = winner.getSiegeRace();
 		SiegeRace oldRace = getSiegeLocation().getRace();
 		Legion oldLegion = oldLegionId == 0 ? null : LegionService.getInstance().getLegion(oldLegionId);

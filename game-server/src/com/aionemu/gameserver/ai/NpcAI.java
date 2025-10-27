@@ -2,8 +2,6 @@ package com.aionemu.gameserver.ai;
 
 import java.util.EnumSet;
 
-import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.ai.event.AIListenable;
 import com.aionemu.gameserver.ai.handler.*;
 import com.aionemu.gameserver.ai.manager.SimpleAttackManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
@@ -22,6 +20,7 @@ import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.services.NpcShoutsService;
+import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.world.WorldType;
 import com.aionemu.gameserver.world.knownlist.KnownList;
@@ -99,51 +98,43 @@ public abstract class NpcAI extends AITemplate<Npc> {
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.ACTIVATE)
 	protected void handleActivate() {
 		ActivateEventHandler.onActivate(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.DEACTIVATE)
 	protected void handleDeactivate() {
 		ActivateEventHandler.onDeactivate(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.BEFORE_SPAWNED)
 	protected void handleBeforeSpawned() {
 		SpawnEventHandler.onBeforeSpawn(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.SPAWNED)
 	protected void handleSpawned() {
 		SpawnEventHandler.onSpawn(this);
 		ShoutEventHandler.onSpawn(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.DESPAWNED)
 	protected void handleDespawned() {
 		ShoutEventHandler.onBeforeDespawn(this);
 		SpawnEventHandler.onDespawn(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.DIED)
 	protected void handleDied() {
 		DiedEventHandler.onDie(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.MOVE_ARRIVED)
 	protected void handleMoveArrived() {
 		ShoutEventHandler.onReachedWalkPoint(this);
 	}
 
 	@Override
-	@AIListenable(type = AIEventType.TARGET_CHANGED)
 	protected void handleTargetChanged(Creature creature) {
 		ShoutEventHandler.onSwitchedTarget(this, creature);
 	}
@@ -152,7 +143,8 @@ public abstract class NpcAI extends AITemplate<Npc> {
 	public boolean ask(AIQuestion question) {
 		return switch (question) {
 			case CAN_SHOUT -> AIConfig.SHOUTS_ENABLE && NpcShoutsService.getInstance().mayShout(getOwner());
-			case ALLOW_DECAY, ALLOW_RESPAWN, REWARD_AP_XP_DP_LOOT, REWARD_LOOT -> true;
+			case ALLOW_RESPAWN -> SiegeService.getInstance().isRespawnAllowed(getOwner());
+			case ALLOW_DECAY, REWARD_AP_XP_DP_LOOT, REWARD_LOOT -> true;
 			case IS_IMMUNE_TO_ABNORMAL_STATES -> getOwner().isBoss() || getOwner().hasStatic();
 			case REWARD_AP -> {
 				WorldType wt = getOwner().getWorldType();

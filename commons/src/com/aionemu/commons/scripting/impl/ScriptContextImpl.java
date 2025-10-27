@@ -90,9 +90,8 @@ public class ScriptContextImpl implements ScriptContext {
 	private List<File> findFiles() {
 		List<File> files = new ArrayList<>();
 		for (File dir : directories) {
-			try {
-				Files.find(dir.toPath(), Integer.MAX_VALUE, (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java"))
-					.forEach(path -> files.add(path.toFile()));
+			try (var paths = Files.find(dir.toPath(), Integer.MAX_VALUE, (path, attrs) -> attrs.isRegularFile() && path.toString().endsWith(".java"))) {
+				paths.forEach(path -> files.add(path.toFile()));
 			} catch (IOException e) {
 				throw new RuntimeException("Error scanning " + dir, e);
 			}

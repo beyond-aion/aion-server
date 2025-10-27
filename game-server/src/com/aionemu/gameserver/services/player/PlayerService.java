@@ -5,6 +5,7 @@ import java.util.List;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.EventsConfig;
+import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.configs.main.NameConfig;
 import com.aionemu.gameserver.controllers.FlyController;
 import com.aionemu.gameserver.controllers.effect.PlayerEffectController;
@@ -28,6 +29,7 @@ import com.aionemu.gameserver.model.skill.PlayerSkillList;
 import com.aionemu.gameserver.model.stats.calc.functions.PlayerStatFunctions;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
+import com.aionemu.gameserver.model.templates.item.actions.EmotionLearnAction;
 import com.aionemu.gameserver.services.BrokerService;
 import com.aionemu.gameserver.services.HousingService;
 import com.aionemu.gameserver.services.LegionService;
@@ -167,6 +169,10 @@ public class PlayerService {
 
 		PlayerLifeStatsDAO.loadPlayerLifeStat(player);
 		PlayerEmotionListDAO.loadEmotions(player);
+		if (player.hasPermission(MembershipConfig.EMOTIONS_ALL)) {
+			for (int emotionId : EmotionLearnAction.getLearnableEmotionIds())
+				player.getEmotions().add(emotionId, 0, false);
+		}
 
 		return player;
 	}

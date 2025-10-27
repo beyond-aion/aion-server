@@ -19,11 +19,6 @@ public class AhserionsFlightSpawnTemplate extends SpawnTemplate {
 		super(spawnGroup, spot);
 	}
 	
-	public AhserionsFlightSpawnTemplate(SpawnGroup spawnGroup, float x, float y, float z, byte heading, int randWalk, String walkerId,
-		int staticId, int fly) {
-		super(spawnGroup, x, y, z, heading, randWalk, walkerId, staticId, fly);
-	}
-	
 	public int getStage() {
 		return stage;
 	}

@@ -25,9 +25,9 @@ public class StaticObjectSpawnManager {
 			return;
 
 		if (spawn.hasPool()) {
-			spawn.resetTemplates(instanceIndex);
+			spawn.resetPoolSpots(instanceIndex);
 			for (int i = 0; i < spawn.getPool(); i++) {
-				SpawnTemplate template = spawn.getRndTemplate(instanceIndex);
+				SpawnTemplate template = spawn.reserveRandomFreePoolSpot(instanceIndex);
 				StaticObject staticObject = new StaticObject(new StaticObjectController(), template, objectTemplate);
 				staticObject.setKnownlist(new PlayerAwareKnownList(staticObject));
 				bringIntoWorld(staticObject, template, instanceIndex);

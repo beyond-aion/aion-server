@@ -13,7 +13,7 @@ import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 public class See extends AdminCommand {
 
 	public See() {
-		super("see", "Let's you see hidden npcs and players.");
+		super("see", "Lets you see hidden npcs and players.");
 	}
 
 	@Override

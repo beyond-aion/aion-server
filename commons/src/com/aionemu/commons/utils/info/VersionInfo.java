@@ -63,14 +63,15 @@ public class VersionInfo {
 
 	private File findLatestFile(File sourceFile) throws IOException {
 		AtomicReference<FileTime> latestChange = new AtomicReference<>();
-		return Files.find(sourceFile.toPath(), Integer.MAX_VALUE, (filePath, fileAttr) -> {
+		try (var paths = Files.find(sourceFile.toPath(), Integer.MAX_VALUE, (filePath, fileAttr) -> {
 			FileTime lastModified = fileAttr.lastModifiedTime();
 			return fileAttr.isRegularFile() && filePath.toString().endsWith(".class")
 				&& latestChange.updateAndGet(t -> t == null || lastModified.compareTo(t) > 0 ? lastModified : t) == lastModified;
-		})
-			.reduce((first, second) -> second) // due to the file matcher the last element will be the latest, so no need to call .max()
-			.get()
-			.toFile();
+		})) {
+			return paths.reduce((_, second) -> second) // due to the file matcher, the last element will be the latest (faster than .max())
+				.map(Path::toFile)
+				.orElse(null);
+		}
 	}
 
 	public String getSource() {

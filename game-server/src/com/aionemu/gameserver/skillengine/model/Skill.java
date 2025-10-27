@@ -16,8 +16,7 @@ import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.configs.main.GSConfig;
 import com.aionemu.gameserver.configs.main.SecurityConfig;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.controllers.observer.StartMovingListener;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.MotionData.AnimationTimes;
@@ -91,7 +90,7 @@ public class Skill {
 	private String chainCategory = null;
 	private int chainUsageDuration = 0;
 	private int hate;
-	private volatile ActionObserver firstTargetDieObserver;
+	private volatile DeathObserver firstTargetDieObserver;
 
 	public enum SkillMethod {
 		CAST,
@@ -525,13 +524,7 @@ public class Skill {
 				|| (skillTemplate.getProperties().getFirstTarget() == FirstTargetAttribute.TARGET && skillTemplate.getProperties().getEffectiveDist() > 0)) {
 				return;
 			}
-			firstTargetDieObserver = new ActionObserver(ObserverType.DEATH) {
-
-				@Override
-				public void died(Creature creature) {
-					getEffector().getController().cancelCurrentSkill(null, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_LOST());
-				}
-			};
+			firstTargetDieObserver = new DeathObserver(_ -> getEffector().getController().cancelCurrentSkill(null, SM_SYSTEM_MESSAGE.STR_SKILL_TARGET_LOST()));
 			firstTarget.getObserveController().attach(firstTargetDieObserver);
 		}
 

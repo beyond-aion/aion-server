@@ -23,7 +23,6 @@ import com.aionemu.gameserver.model.items.ItemSlot;
 import com.aionemu.gameserver.model.stats.listeners.ItemEquipmentListener;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
-import com.aionemu.gameserver.model.templates.item.enums.EquipType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
@@ -33,6 +32,7 @@ import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.StigmaService;
 import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.services.item.ItemPacketService.ItemUpdateType;
+import com.aionemu.gameserver.skillengine.effect.WeaponDualEffect;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -73,7 +73,7 @@ public class Equipment implements Persistable {
 		ItemTemplate itemTemplate = item.getItemTemplate();
 		if (itemTemplate.isTwoHandWeapon()) // client only sends main+sub slot when equipping via right click / double click
 			slot = ItemSlot.MAIN_OR_SUB.getSlotIdMask();
-		else if (itemTemplate.isOneHandWeapon() && !hasDualWieldingSkills())
+		else if (itemTemplate.isOneHandWeapon() && !WeaponDualEffect.hasDualWieldEffect(owner))
 			slot = ItemSlot.MAIN_HAND.getSlotIdMask();
 
 		if (!itemTemplate.isClassSpecific(owner.getPlayerClass())) {
@@ -115,9 +115,6 @@ public class Equipment implements Persistable {
 		}
 
 		if (!checkAvailableEquipSkills(item))
-			return null;
-
-		if (!checkDualWieldRestriction(item, slot))
 			return null;
 
 		ItemSlot[] targetSlots = ItemSlot.getSlotsFor(slot);
@@ -167,10 +164,8 @@ public class Equipment implements Persistable {
 	}
 
 	private boolean checkDualWieldRestriction(Item item, long slot) {
-		if (item.getEquipmentType() == EquipType.WEAPON && !item.getItemTemplate().isTwoHandWeapon()) {
-			if ((slot & ItemSlot.LEFT_HAND.getSlotIdMask()) == slot && !hasDualWieldingSkills())
-				return false;
-		}
+		if (item.getItemTemplate().isOneHandWeapon() && (slot & ItemSlot.LEFT_HAND.getSlotIdMask()) == slot && !WeaponDualEffect.hasDualWieldEffect(owner))
+			return false;
 		return true;
 	}
 
@@ -298,16 +293,6 @@ public class Equipment implements Persistable {
 		}
 		owner.getLifeStats().updateCurrentStats();
 		owner.getGameStats().updateStatsAndSpeedVisually();
-	}
-
-	/**
-	 * TODO: Move to SkillEngine Use skill stack SKILL_P_EQUIP_DUAL to check that instead
-	 * 
-	 * @return true if player can equip two one-handed weapons
-	 */
-	private boolean hasDualWieldingSkills() {
-		return owner.getSkillList().isSkillPresent(55) || owner.getSkillList().isSkillPresent(171) || owner.getSkillList().isSkillPresent(143)
-			|| owner.getSkillList().isSkillPresent(144) || owner.getSkillList().isSkillPresent(207);
 	}
 
 	private boolean checkAvailableEquipSkills(Item item) {
@@ -675,21 +660,13 @@ public class Equipment implements Persistable {
 		return false;
 	}
 
-	/**
-	 * Checks if dual one-handed weapon is equiped in any slot combination
-	 */
-	public boolean hasDualWeaponEquipped(ItemSlot slot) {
-		ItemSlot[] slotValues = ItemSlot.getSlotsFor(slot.getSlotIdMask());
-		if (slotValues.length == 0)
-			return false;
-		for (ItemSlot s : slotValues) {
-			Item weapon = equipment.get(s.getSlotIdMask());
-			if (weapon == null || weapon.getItemTemplate().isTwoHandWeapon())
-				continue;
-			if (weapon.getItemTemplate().isWeapon())
-				return true;
+	public boolean isDualWeaponEquipped() {
+		for (ItemSlot offhandSlot : List.of(ItemSlot.SUB_HAND, ItemSlot.MAIN_HAND)) {
+			Item weapon = equipment.get(offhandSlot.getSlotIdMask());
+			if (weapon == null || !weapon.getItemTemplate().isOneHandWeapon())
+				return false;
 		}
-		return false;
+		return true;
 	}
 
 	public boolean isArmorEquipped(ItemSubType subType) {

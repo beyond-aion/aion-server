@@ -5,7 +5,6 @@ import java.util.Collections;
 import java.util.LinkedHashMap;
 import java.util.Map;
 
-import com.aionemu.gameserver.configs.main.MembershipConfig;
 import com.aionemu.gameserver.dao.PlayerEmotionListDAO;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.item.actions.EmotionLearnAction;
@@ -50,7 +49,7 @@ public class EmotionList {
 	}
 
 	public boolean canUse(int emotionId) {
-		return !EmotionLearnAction.isLearnable(emotionId) || contains(emotionId) || owner.hasPermission(MembershipConfig.EMOTIONS_ALL);
+		return !EmotionLearnAction.isLearnable(emotionId) || contains(emotionId);
 	}
 
 	public Collection<Emotion> getEmotions() {

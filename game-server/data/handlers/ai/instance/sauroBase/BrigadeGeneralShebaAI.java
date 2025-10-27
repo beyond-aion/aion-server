@@ -30,13 +30,16 @@ public class BrigadeGeneralShebaAI extends AggressiveNpcAI {
 
 	@Override
 	public void onStartUseSkill(SkillTemplate skillTemplate, int skillLevel) {
+		multiplier = 1f;
 		switch (skillTemplate.getSkillId()) {
 			case 21188:
-				multiplier = 0.55f;
 				PacketSendUtility.broadcastMessage(getOwner(),1500775);
+				multiplier = 0.55f;
 				break;
 			case 21183:
 				PacketSendUtility.broadcastMessage(getOwner(), 1500779);
+				multiplier = 0.55f;
+				break;
 			case 21187:
 			case 21410:
 			case 21425:

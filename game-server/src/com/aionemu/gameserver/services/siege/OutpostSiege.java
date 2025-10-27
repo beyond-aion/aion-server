@@ -39,13 +39,12 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 
 	@Override
 	protected void onSiegeFinish() {
-		unregisterSiegeBossListeners();
 		getSiegeLocation().setVulnerable(false);
 		despawnSiegeNpcs();
 
 		if (isBossKilled()) {
 			onAgentDefeated();
-			sendRewardsToParticipants(getSiegeCounter().getWinnerRaceCounter(), SiegeResult.OCCUPY);
+			sendRewardsToParticipants(getWinnerRaceCounter(), SiegeResult.OCCUPY);
 			sendRewardsToParticipants(getSiegeCounter().getRaceCounter(getSiegeLocationId() == 2111 ? SiegeRace.ELYOS : SiegeRace.ASMODIANS),
 				SiegeResult.FAIL);
 		} else {
@@ -59,7 +58,7 @@ public class OutpostSiege extends Siege<OutpostLocation> {
 	}
 
 	private void onAgentDefeated() {
-		SiegeRaceCounter winnerCounter = getSiegeCounter().getWinnerRaceCounter();
+		SiegeRaceCounter winnerCounter = getWinnerRaceCounter();
 		Map<Integer, Long> topPlayerDamages = winnerCounter.getPlayerDamageCounter();
 		if (!topPlayerDamages.isEmpty()) {
 			Player topOnlinePlayer = null;

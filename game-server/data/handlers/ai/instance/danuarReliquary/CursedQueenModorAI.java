@@ -107,17 +107,17 @@ public class CursedQueenModorAI extends AggressiveNpcAI implements HpPhases.Phas
 				stage.set(1);
 				PacketSendUtility.broadcastMessage(getOwner(), 1500740);
 				break;
-			case 21175: // frozen domain of revenge
+			case 21175: // Freezing Sphere of Revenge
 				if (skillLevel == 4) { // use this skill to despawn modor and spawn clones
 					stage.set(4);
 					PacketSendUtility.broadcastMessage(getOwner(), 1500742);
 				}
+				multiplier = 0.5f;
+				break;
 			case 21174:
 			case 21229:
 			case 21173:
 				multiplier = 0.5f;
-				break;
-			default:
 				break;
 		}
 	}

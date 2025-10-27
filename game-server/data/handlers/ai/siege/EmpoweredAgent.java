@@ -17,6 +17,7 @@ import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.EmotionType;
+import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -29,6 +30,7 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
+import com.aionemu.gameserver.services.siege.AgentSiege;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -36,17 +38,11 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
-import ai.AggressiveNpcAI;
-
 /**
  * @author Estrayl
  */
 @AIName("empowered_agent")
-public class EmpoweredAgent extends AggressiveNpcAI implements HpPhases.PhaseHandler {
-
-	public EmpoweredAgent(Npc owner) {
-		super(owner);
-	}
+public class EmpoweredAgent extends AbstractSiegeProtectorAI implements HpPhases.PhaseHandler {
 
 	private final List<Integer> guardIds = new ArrayList<>();
 	private final HpPhases hpPhases = new HpPhases(80, 70, 60, 50, 40, 30, 25, 20, 5);
@@ -54,6 +50,10 @@ public class EmpoweredAgent extends AggressiveNpcAI implements HpPhases.PhaseHan
 	private boolean canThink = true;
 	private Npc flagNpc;
 	private Future<?> activationTask, aggroResetTask;
+
+	public EmpoweredAgent(Npc owner) {
+		super(owner);
+	}
 
 	@Override
 	public boolean canThink() {
@@ -186,8 +186,7 @@ public class EmpoweredAgent extends AggressiveNpcAI implements HpPhases.PhaseHan
 			guardAmount = 6;
 		for (int i = 0; i < guardAmount; i++) {
 			Point3D pos = getRndPos();
-			// TODO: change to dynamic siegeID
-			SiegeSpawnTemplate template = SpawnEngine.newSiegeSpawn(worldId, Rnd.get(guardIds), 8011, SiegeRace.BALAUR, SiegeModType.SIEGE, pos.getX(),
+			SiegeSpawnTemplate template = SpawnEngine.newSiegeSpawn(worldId, Rnd.get(guardIds), getSpawnTemplate().getSiegeId(), SiegeRace.BALAUR, SiegeModType.SIEGE, pos.getX(),
 				pos.getY(), pos.getZ(), (byte) 0);
 			SpawnEngine.spawnObject(template, 1);
 		}
@@ -213,6 +212,7 @@ public class EmpoweredAgent extends AggressiveNpcAI implements HpPhases.PhaseHan
 	protected void handleDied() {
 		despawnFlag();
 		cancelActivationTask();
+		((AgentSiege) getSiege()).setWinnerRace(getObjectTemplate().getRace() == Race.GHENCHMAN_LIGHT ? SiegeRace.ASMODIANS : SiegeRace.ELYOS);
 		super.handleDied();
 	}
 

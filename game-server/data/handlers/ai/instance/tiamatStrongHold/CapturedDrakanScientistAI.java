@@ -7,8 +7,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.ObserverType;
+import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -42,13 +41,7 @@ public class CapturedDrakanScientistAI extends GeneralNpcAI {
 		if (creature instanceof Player && isActivated.compareAndSet(false, true)) {
 			getKnownList().forEachNpc(n -> {
 				if (n.getNpcId() == 219390 && PositionUtil.isInRange(getOwner(), n, 25)) {
-					n.getObserveController().addObserver(new ActionObserver(ObserverType.DEATH) {
-
-						@Override
-						public void died(Creature creature) {
-							handleObservedNpcDied();
-						}
-					});
+					n.getObserveController().attach(new DeathObserver(_ -> handleObservedNpcDied()));
 				}
 			});
 		}
@@ -69,7 +62,7 @@ public class CapturedDrakanScientistAI extends GeneralNpcAI {
 
 	private void handleNpcEscaping() {
 		handleQuestUpdate();
-		AIActions.deleteOwner(CapturedDrakanScientistAI.this);
+		AIActions.deleteOwner(this);
 	}
 
 	private void handleQuestUpdate() {

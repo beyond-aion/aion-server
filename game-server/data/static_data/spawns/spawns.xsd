@@ -98,7 +98,7 @@
 		<xs:sequence>
 			<xs:element name="siege_mod" type="SiegeModTemplate" minOccurs="0" maxOccurs="unbounded"/>
 		</xs:sequence>
-		<xs:attribute name="race" type="SiegeRaceType"/>
+		<xs:attribute name="race" type="SiegeRaceType" use="required"/>
 	</xs:complexType>
 	<xs:complexType name="SiegeModTemplate">
 		<xs:sequence>

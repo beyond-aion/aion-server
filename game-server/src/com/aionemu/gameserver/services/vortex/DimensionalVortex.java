@@ -3,6 +3,7 @@ package com.aionemu.gameserver.services.vortex;
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
+import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -16,10 +17,7 @@ import com.aionemu.gameserver.services.VortexService;
 public abstract class DimensionalVortex<VL extends VortexLocation> {
 
 	private final VL vortexLocation;
-	private final GeneratorDestroyListener generatorDestroyListener = new GeneratorDestroyListener(this);
 	private final AtomicBoolean finished = new AtomicBoolean();
-	private boolean generatorDestroyed;
-	private Npc generator;
 	private boolean started;
 
 	protected abstract void startInvasion();
@@ -68,9 +66,7 @@ public abstract class DimensionalVortex<VL extends VortexLocation> {
 	}
 
 	protected void initRiftGenerator() {
-
 		Npc gen = null;
-
 		for (VisibleObject obj : getVortexLocation().getSpawned()) {
 			int npcId = ((Npc) obj).getNpcId();
 			if (npcId == 209487 || npcId == 209486) {
@@ -81,9 +77,7 @@ public abstract class DimensionalVortex<VL extends VortexLocation> {
 		if (gen == null) {
 			throw new NullPointerException("No generator was found in loc:" + getVortexLocationId());
 		}
-
-		setGenerator(gen);
-		registerSiegeBossListeners();
+		gen.getObserveController().attach(new DeathObserver(_ -> VortexService.getInstance().stopInvasion(getVortexLocationId())));
 	}
 
 	protected void spawn(VortexStateType type) {
@@ -92,30 +86,6 @@ public abstract class DimensionalVortex<VL extends VortexLocation> {
 
 	protected void despawn() {
 		VortexService.getInstance().despawn(getVortexLocation());
-	}
-
-	protected void registerSiegeBossListeners() {
-		getGenerator().getAi().addEventListener(generatorDestroyListener);
-	}
-
-	protected void unregisterSiegeBossListeners() {
-		getGenerator().getAi().removeEventListener(generatorDestroyListener);
-	}
-
-	public boolean isGeneratorDestroyed() {
-		return generatorDestroyed;
-	}
-
-	public void setGeneratorDestroyed(boolean state) {
-		this.generatorDestroyed = state;
-	}
-
-	public Npc getGenerator() {
-		return generator;
-	}
-
-	public void setGenerator(Npc generator) {
-		this.generator = generator;
 	}
 
 	public boolean isFinished() {

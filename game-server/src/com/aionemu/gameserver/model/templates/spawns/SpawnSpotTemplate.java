@@ -35,9 +35,6 @@ public class SpawnSpotTemplate {
 	@XmlAttribute(name = "walker_index")
 	private Integer walkerIdx;
 
-	@XmlAttribute(name = "fly")
-	private Integer fly = 0;
-
 	@XmlAttribute(name = "anchor")
 	private String anchor;
 
@@ -58,8 +55,6 @@ public class SpawnSpotTemplate {
 	void beforeMarshal(Marshaller marshaller) {
 		if (ZERO.equals(staticId))
 			staticId = null;
-		if (ZERO.equals(fly))
-			fly = null;
 		if (ZERO.equals(randomWalk))
 			randomWalk = null;
 		if (ZERO.equals(state))
@@ -71,8 +66,6 @@ public class SpawnSpotTemplate {
 	void afterMarshal(Marshaller marshaller) {
 		if (staticId == null)
 			staticId = 0;
-		if (fly == null)
-			fly = 0;
 		if (randomWalk == null)
 			randomWalk = 0;
 		if (state == null)
@@ -135,10 +128,6 @@ public class SpawnSpotTemplate {
 
 	public int getRandomWalk() {
 		return randomWalk;
-	}
-
-	public int getFly() {
-		return fly;
 	}
 
 	public String getAnchor() {
