@@ -137,13 +137,15 @@ public class Event {
 		if (eventTemplate.getSpawns() != null && eventTemplate.getSpawns().size() > 0) {
 			TemporarySpawnEngine.unregister(eventTemplate);
 			int[] count = { 0 };
-			World.getInstance().forEachObject(o -> {
-				SpawnTemplate spawn = o.getSpawn();
-				if (spawn != null && eventTemplate.equals(spawn.getEventTemplate())) {
-					o.getController().delete();
-					count[0]++;
-				}
-			});
+			for (SpawnMap map : eventTemplate.getSpawns().getTemplates()) {
+				World.getInstance().getWorldMap(map.getMapId()).forEachObject(o -> {
+					SpawnTemplate spawn = o.getSpawn();
+					if (spawn != null && eventTemplate.equals(spawn.getEventTemplate())) {
+						o.getController().delete();
+						count[0]++;
+					}
+				});
+			}
 			count[0] += RespawnService.cancelEventRespawns(eventTemplate);
 			DataManager.SPAWNS_DATA.removeEventSpawnObjects(eventTemplate);
 			log.info("Removed " + count[0] + " event spawns (" + eventTemplate.getName() + ")");
