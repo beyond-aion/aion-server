@@ -528,7 +528,7 @@ public abstract class EffectTemplate {
 			effectPower -= effected.getGameStats().getAbnormalResistance().getCurrent();
 
 		// effect resistance
-		effectPower -= effected.getGameStats().getStat(statEnum, 0).getCurrent();
+		effectPower -= effected.getGameStats().getResistance(statEnum).getCurrent();
 
 		// penetration
 		StatEnum penetrationStat = this.getPenetrationStat(statEnum);
