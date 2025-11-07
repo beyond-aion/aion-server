@@ -477,10 +477,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		if (castingSkill != null) {
 			castingSkill.cancelCast();
 			creature.setCasting(null);
-			if (creature instanceof Npc) {
-				creature.getAi().setSubStateIfNot(AISubState.NONE);
-				((Npc) creature).getGameStats().setLastSkill(null);
-			}
+		}
+		if (creature instanceof Npc npc) {
+			creature.getAi().setSubStateIfNot(AISubState.NONE);
+			npc.getGameStats().setLastSkill(null);
 		}
 		return castingSkill;
 	}
