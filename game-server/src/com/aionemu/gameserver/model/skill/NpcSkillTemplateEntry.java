@@ -99,19 +99,6 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		switch (condTemp.getCondType()) {
 			case NONE:
 				return true;
-			case SELECT_TARGET_AFFECTED_BY_SKILL:
-				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
-					if (obj instanceof Creature target) {
-						if (target.isDead() || target.getLifeStats().isAboutToDie())
-							continue;
-						if (creature.canSee(target) && target.getEffectController().hasAbnormalEffect(condTemp.getSkillId())
-							&& PositionUtil.isInRange(creature, target, condTemp.getRange(), false) && GeoService.getInstance().canSee(creature, target)) {
-							creature.setTarget(target);
-							return true;
-						}
-					}
-				}
-				return false;
 			case HELP_FRIEND:
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
 					if (obj instanceof Creature target) {

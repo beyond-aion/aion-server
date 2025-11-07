@@ -1025,9 +1025,7 @@
 		<npc_skill id="21754" lv="65" prob="100" chain_id="4" next_skill_time="9000" cd="20000" max_hp="50" /><!-- Demolish -->
 		<npc_skill id="21758" lv="65" prob="70" cd="70000" /><!-- Fetters -->
 		<npc_skill id="21756" lv="65" prob="70" next_chain_id="1" next_skill_time="0" max_hp="50" cd="50000" target="RANDOM_EXCEPT_MOST_HATED" /><!-- Prime Target -->
-		<npc_skill id="21757" lv="65" prob="100" chain_id="1" next_skill_time="8000" target="NONE"><!-- Punishing Blow -->
-			<cond cond_type="SELECT_TARGET_AFFECTED_BY_SKILL" skill_id="21756" range="50" />
-		</npc_skill>
+		<npc_skill id="21757" lv="65" prob="100" chain_id="1" next_skill_time="8000" target="NONE" /><!-- Punishing Blow -->
 		<npc_skill id="21759" lv="65" prob="70" cd="20000" max_hp="35" /><!-- Annihilation -->
 		<npc_skill id="21755" lv="65" prob="100" cd="40000" max_hp="70"><!-- Explosive Suicide -->
 			<spawn_npc npc_id="855262" min_distance="5" max_distance="20" max_count="4" />
