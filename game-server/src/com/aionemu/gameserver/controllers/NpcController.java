@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.controllers;
 
-import java.util.Collection;
 import java.util.Set;
 
 import org.slf4j.Logger;
@@ -10,9 +9,9 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.handler.ShoutEventHandler;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
-import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
+import com.aionemu.gameserver.controllers.attack.DamageInfo;
+import com.aionemu.gameserver.controllers.attack.TeamDamageList;
 import com.aionemu.gameserver.custom.pvpmap.PvpMapHandler;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
@@ -177,37 +176,19 @@ public class NpcController extends CreatureController<Npc> {
 	@Override
 	public void doReward() {
 		super.doReward();
-		AggroList list = getOwner().getAggroList();
-		Collection<AggroInfo> finalList = list.getFinalDamageList(true);
-		AionObject winner = list.getMostDamage();
-
-		if (winner == null) {
+		TeamDamageList finalList = getOwner().getAggroList().getFinalDamageList().toTeamDamages();
+		DamageInfo<AionObject> mostDamage = finalList.getMostDamage();
+		AionObject winner = mostDamage == null ? null : mostDamage.getAttacker();
+		if (winner == null)
 			return;
-		}
-
-		float totalDmg = 0;
-		for (AggroInfo info : finalList) {
-			totalDmg += info.getDamage();
-		}
-
-		if (totalDmg <= 0) {
-			log.warn("WARN total damage to " + getOwner().getName() + " is " + totalDmg + " reward process was skiped!");
-			return;
-		}
 
 		InstanceHandler instanceHandler = getOwner().getPosition().getWorldMapInstance().getInstanceHandler();
 		float apMultiplier = instanceHandler.getApMultiplier();
-		for (AggroInfo info : finalList) {
+		for (DamageInfo<AionObject> info : finalList.getCreatureOrTeamDamages()) {
 			AionObject attacker = info.getAttacker();
-
-			if (attacker instanceof Npc) // don't reward npcs or summons
-				continue;
-
-			float percentage = info.getDamage() / totalDmg;
+			float percentage = info.getDamage() / (float) finalList.getTotalDamage();
 			if (attacker instanceof TemporaryPlayerTeam<?> tmpPlayerTeam) {
-				PlayerTeamDistributionService.doReward(tmpPlayerTeam, percentage, getOwner(), winner);
-			} else if (attacker instanceof Player player && player.isInGroup()) {
-				PlayerTeamDistributionService.doReward(player.getPlayerGroup(), percentage, getOwner(), winner);
+				PlayerTeamDistributionService.doReward(tmpPlayerTeam, percentage, getOwner(), winner, finalList);
 			} else if (attacker instanceof Player player) {
 				if (!player.isDead()) {
 					// Reward init

@@ -63194,7 +63194,7 @@
 		<npc_skill id="21753" lv="65" prob="100" chain_id="3" next_chain_id="4" next_skill_time="9000" cd="20000" max_hp="75" />
 		<npc_skill id="21754" lv="65" prob="100" chain_id="4" next_skill_time="9000" cd="20000" max_hp="50" />
 		<npc_skill id="21758" lv="65" prob="60" cd="40000" />
-		<npc_skill id="21756" lv="65" prob="60" next_chain_id="1" next_skill_time="0" max_hp="25" cd="30000" target="RANDOM_EXCEPT_MOST_HATED" />
+		<npc_skill id="21756" lv="65" prob="60" next_chain_id="1" next_skill_time="0" max_hp="25" cd="30000" target="RANDOM_EXCEPT_CURRENT_TARGET" />
 		<npc_skill id="21757" lv="65" prob="100" chain_id="1" next_skill_time="8000" target="NONE" />
 		<npc_skill id="21759" lv="65" prob="60" cd="20000" max_hp="35" />
 		<!-- this skill spawns 855262, who use 21760 and despawn. -->

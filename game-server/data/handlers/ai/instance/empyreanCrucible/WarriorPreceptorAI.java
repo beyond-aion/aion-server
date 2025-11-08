@@ -1,18 +1,14 @@
 package ai.instance.empyreanCrucible;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -82,26 +78,15 @@ public class WarriorPreceptorAI extends AggressiveNpcAI {
 
 	private void startSkillEvent() {
 		PacketSendUtility.broadcastMessage(getOwner(), 1500207);
-		SkillEngine.getInstance().getSkill(getOwner(), 19595, 10, getTargetPlayer()).useNoAnimationSkill();
-		ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-			@Override
-			public void run() {
-				if (!isDead()) {
-					SkillEngine.getInstance().getSkill(getOwner(), 19596, 15, getOwner()).useNoAnimationSkill();
-				}
+		SkillEngine.getInstance().getSkill(getOwner(), 19595, 10, getRandomTarget()).useNoAnimationSkill(); // Divine Grasp II
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (!isDead()) {
+				SkillEngine.getInstance().getSkill(getOwner(), 19596, 15, getOwner()).useNoAnimationSkill(); // Wrathful Wave II
 			}
-
 		}, 6000);
 	}
 
-	private Player getTargetPlayer() {
-		List<Player> players = new ArrayList<>();
-		getKnownList().forEachPlayer(player -> {
-			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 15)) {
-				players.add(player);
-			}
-		});
-		return Rnd.get(players);
+	private Creature getRandomTarget() {
+		return getAggroList().getTarget(AggroTarget.RANDOM, 15);
 	}
 }

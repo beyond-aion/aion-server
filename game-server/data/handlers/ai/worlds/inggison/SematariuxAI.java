@@ -6,13 +6,12 @@ import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.HpPhases;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -94,7 +93,7 @@ public class SematariuxAI extends AggressiveNpcAI implements HpPhases.PhaseHandl
 			case 18726: // Extract Essence
 				isEggEventActive.set(false);
 				setStateIfNot(AIState.FIGHT);
-				AIActions.targetCreature(this, getAggroList().getMostHated());
+				getOwner().setTarget(getAggroList().getTarget(AggroTarget.MOST_HATED));
 				getMoveController().moveToTargetObject();
 				break;
 			case 19178: // Deadly Bolt
@@ -159,10 +158,9 @@ public class SematariuxAI extends AggressiveNpcAI implements HpPhases.PhaseHandl
 	}
 
 	private void spawnTornado() {
-		Player rndPlayer = Rnd.get(getKnownList().getKnownPlayers().values().stream()
-			.filter(p -> !p.isDead() && PositionUtil.isInRange(p, getOwner(), 80)).collect(Collectors.toList()));
-		if (rndPlayer != null)
-			spawn(281453, rndPlayer.getX(), rndPlayer.getY(), rndPlayer.getZ(), (byte) 0);
+		Creature randomTarget = getAggroList().getTarget(AggroTarget.RANDOM, 80);
+		if (randomTarget != null)
+			spawn(281453, randomTarget.getX(), randomTarget.getY(), randomTarget.getZ(), (byte) 0);
 	}
 
 	private void handleObservedNpcDied(Npc npc) {

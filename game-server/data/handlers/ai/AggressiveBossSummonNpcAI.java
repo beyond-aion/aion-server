@@ -1,6 +1,7 @@
 package ai;
 
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
@@ -27,7 +28,7 @@ public class AggressiveBossSummonNpcAI extends AggressiveNpcAI {
 	}
 
 	private boolean isCreatorStillFighting() {
-		return getKnownList().getObject(getCreatorId()) instanceof Creature creator && !creator.isDead() && creator.getAggroList().getMostHated() != null;
+		return getKnownList().getObject(getCreatorId()) instanceof Creature creator && !creator.isDead() && creator.getAggroList().getTarget(AggroTarget.MOST_HATED) != null;
 	}
 
 	@Override

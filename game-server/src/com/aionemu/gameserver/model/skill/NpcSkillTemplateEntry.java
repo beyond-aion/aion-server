@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.model.skill;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -96,10 +95,9 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		if (condTemp == null)
 			return true;
 		VisibleObject curTarget = creature.getTarget();
-		switch (condTemp.getCondType()) {
-			case NONE:
-				return true;
-			case HELP_FRIEND:
+		return switch (condTemp.getCondType()) {
+			case NONE -> true;
+			case HELP_FRIEND -> {
 				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
 					if (obj instanceof Creature target) {
 						if (target.isDead() || target.getLifeStats().isAboutToDie())
@@ -108,89 +106,33 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 							&& target.getLifeStats().getHpPercentage() <= condTemp.getHpBelow() && creature.canSee(target)
 							&& PositionUtil.isInRange(creature, target, condTemp.getRange(), false) && GeoService.getInstance().canSee(creature, target)) {
 							creature.setTarget(target);
-							return true;
+							yield true;
 						}
 					}
 				}
-				return false;
-			case TARGET_IS_AETHERS_HOLD:
-				if (curTarget instanceof Creature) {
-					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.OPENAERIAL);
-				}
-				return false;
-			case TARGET_IS_STUNNED:
-				if (curTarget instanceof Creature) {
-					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.STUN);
-				}
-				return false;
-			case TARGET_IS_IN_ANY_STUN:
-				if (curTarget instanceof Creature) {
-					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.ANY_STUN);
-				}
-				return false;
-			case TARGET_IS_IN_STUMBLE:
-				if (curTarget instanceof Creature) {
-					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.STUMBLE);
-				}
-				return false;
-			case TARGET_IS_SLEEPING:
-				if (curTarget instanceof Creature) {
-					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.SLEEP);
-				}
-				return false;
-			case TARGET_IS_FLYING:
-				if (curTarget instanceof Creature) {
-					return ((Creature) curTarget).isInFlyingState();
-				}
-				return false;
-			case TARGET_IS_POISONED:
-				if (curTarget instanceof Creature) {
-					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.POISON);
-				}
-				return false;
-			case TARGET_IS_BLEEDING:
-				if (curTarget instanceof Creature) {
-					return ((Creature) curTarget).getEffectController().isInAnyAbnormalState(AbnormalState.BLEED);
-				}
-				return false;
-			case TARGET_IS_GATE:
-				if (curTarget instanceof Creature) {
-					NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(curTarget.getObjectId());
-					return template != null && template.getAbyssNpcType() == AbyssNpcType.DOOR;
-				}
-				return false;
-			case TARGET_IS_PLAYER:
-				return curTarget instanceof Player;
-			case TARGET_IS_NPC:
-				return curTarget instanceof Npc;
-			case TARGET_IS_MAGICAL_CLASS:
-				return curTarget instanceof Player && !((Player) curTarget).getPlayerClass().isPhysicalClass();
-			case TARGET_IS_PHYSICAL_CLASS:
-				return curTarget instanceof Player && ((Player) curTarget).getPlayerClass().isPhysicalClass();
-			case TARGET_HAS_CARVED_SIGNET:
-				return hasCarvedSignet(curTarget, template.getSkillTemplate(), 0);
-			case TARGET_HAS_CARVED_SIGNET_LEVEL_II:
-				return hasCarvedSignet(curTarget, template.getSkillTemplate(), 1);
-			case TARGET_HAS_CARVED_SIGNET_LEVEL_III:
-				return hasCarvedSignet(curTarget, template.getSkillTemplate(), 2);
-			case TARGET_HAS_CARVED_SIGNET_LEVEL_IV:
-				return hasCarvedSignet(curTarget, template.getSkillTemplate(), 3);
-			case TARGET_HAS_CARVED_SIGNET_LEVEL_V:
-				return hasCarvedSignet(curTarget, template.getSkillTemplate(), 4);
-			case NPC_IS_ALIVE:
-				VisibleObject object = creature.getKnownList().findObject(condTemp.getNpcId());
-				return object instanceof Creature npc && !npc.isDead();
-			case TARGET_IS_IN_RANGE:
-				if (curTarget instanceof Creature target && (target.isDead() || target.getLifeStats().isAboutToDie()))
-					return false;
-				if (!creature.canSee(curTarget) || !PositionUtil.isInRange(creature, curTarget, condTemp.getRange(), false))
-					return false;
-				if (!GeoService.getInstance().canSee(creature, curTarget))
-					return false;
-				return true;
-			default:
-				return true;
-		}
+				yield false;
+			}
+			case TARGET_IS_AETHERS_HOLD -> curTarget instanceof Creature t && t.getEffectController().isInAnyAbnormalState(AbnormalState.OPENAERIAL);
+			case TARGET_IS_STUNNED -> curTarget instanceof Creature t && t.getEffectController().isInAnyAbnormalState(AbnormalState.STUN);
+			case TARGET_IS_IN_ANY_STUN -> curTarget instanceof Creature t && t.getEffectController().isInAnyAbnormalState(AbnormalState.ANY_STUN);
+			case TARGET_IS_IN_STUMBLE -> curTarget instanceof Creature t && t.getEffectController().isInAnyAbnormalState(AbnormalState.STUMBLE);
+			case TARGET_IS_SLEEPING -> curTarget instanceof Creature t && t.getEffectController().isInAnyAbnormalState(AbnormalState.SLEEP);
+			case TARGET_IS_FLYING -> curTarget instanceof Creature t && t.isInFlyingState();
+			case TARGET_IS_POISONED -> curTarget instanceof Creature t && t.getEffectController().isInAnyAbnormalState(AbnormalState.POISON);
+			case TARGET_IS_BLEEDING -> curTarget instanceof Creature t && t.getEffectController().isInAnyAbnormalState(AbnormalState.BLEED);
+			case TARGET_IS_GATE -> curTarget.getObjectTemplate() instanceof NpcTemplate npcTemplate && npcTemplate.getAbyssNpcType() == AbyssNpcType.DOOR;
+			case TARGET_IS_PLAYER -> curTarget instanceof Player;
+			case TARGET_IS_NPC -> curTarget instanceof Npc;
+			case TARGET_IS_MAGICAL_CLASS -> curTarget instanceof Player player && !player.getPlayerClass().isPhysicalClass();
+			case TARGET_IS_PHYSICAL_CLASS -> curTarget instanceof Player player && player.getPlayerClass().isPhysicalClass();
+			case TARGET_HAS_CARVED_SIGNET -> hasCarvedSignet(curTarget, template.getSkillTemplate(), 0);
+			case TARGET_HAS_CARVED_SIGNET_LEVEL_II -> hasCarvedSignet(curTarget, template.getSkillTemplate(), 1);
+			case TARGET_HAS_CARVED_SIGNET_LEVEL_III -> hasCarvedSignet(curTarget, template.getSkillTemplate(), 2);
+			case TARGET_HAS_CARVED_SIGNET_LEVEL_IV -> hasCarvedSignet(curTarget, template.getSkillTemplate(), 3);
+			case TARGET_HAS_CARVED_SIGNET_LEVEL_V -> hasCarvedSignet(curTarget, template.getSkillTemplate(), 4);
+			case NPC_IS_ALIVE -> creature.getWorldMapInstance().getNpcs(condTemp.getNpcId()).stream().anyMatch(npc -> !npc.isDead());
+			case TARGET_IS_IN_RANGE -> PositionUtil.isInRange(creature, curTarget, condTemp.getRange(), false);
+		};
 	}
 
 	private boolean hasCarvedSignet(VisibleObject curTarget, SkillTemplate skillTemp, int signetLvl) {

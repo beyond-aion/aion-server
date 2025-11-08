@@ -1,7 +1,5 @@
 package ai.siege;
 
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.services.SiegeService;
@@ -27,10 +25,7 @@ public abstract class AbstractSiegeProtectorAI extends SiegeNpcAI {
 
 	private void stopSiege() {
 		Siege<? extends SiegeLocation> siege = getSiege();
-		for (AggroInfo aggroInfo : getAggroList().getList()) {
-			if (aggroInfo.getAttacker() instanceof Creature attacker)
-				siege.getSiegeCounter().addDamage(attacker.getMaster(), aggroInfo.getDamage());
-		}
+		getAggroList().stream().forEach(aggroInfo -> siege.getSiegeCounter().addDamage(aggroInfo.getAttacker().getMaster(), aggroInfo.getDamage()));
 		siege.setBossKilled(true);
 		SiegeService.getInstance().stopSiege(siege.getSiegeLocationId());
 	}

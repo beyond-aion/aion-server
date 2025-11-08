@@ -5,7 +5,7 @@ import java.util.Map;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
+import com.aionemu.gameserver.controllers.attack.DamageInfo;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -101,16 +101,16 @@ public class AhserionTankControllerAI extends AhserionConstructAI {
 		Map<PanesterraFaction, Integer> panesterraDamage = new HashMap<>();
 
 		// Only players or balaur can attack the controller, there are no other npcs on this map
-		for (AggroInfo ai : getOwner().getAggroList().getFinalDamageList(false)) {
+		for (DamageInfo<Creature> damageInfo : getAggroList().getFinalDamageList().getCreatureDamages()) {
 			PanesterraFaction faction = null;
-			if (ai.getAttacker() instanceof Player player) {
+			if (damageInfo.getAttacker() instanceof Player player) {
 				PanesterraTeam team = PanesterraService.getInstance().getTeam(player);
 				if (team != null && !team.isEliminated())
 					faction = team.getFaction();
 			} else
 				faction = PanesterraFaction.BALAUR;
 
-			panesterraDamage.merge(faction, ai.getDamage(), Integer::sum);
+			panesterraDamage.merge(faction, damageInfo.getDamage(), Integer::sum);
 		}
 		int staticId = getSpawnTemplate().getStaticId();
 

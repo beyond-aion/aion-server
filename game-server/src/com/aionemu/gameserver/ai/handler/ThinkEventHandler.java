@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.ai.manager.AttackManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -69,9 +70,8 @@ public class ThinkEventHandler {
 
 	public static void thinkAttack(NpcAI npcAI) {
 		Npc npc = npcAI.getOwner();
-		Creature mostHated = npc.getAggroList().getMostHated();
-		if (mostHated != null && !mostHated.isDead()) {
-			npcAI.onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
+		if (npc.getTarget() instanceof Creature target && npc.getAggroList().isHating(target)) {
+			AttackManager.scheduleNextAttack(npcAI);
 		} else {
 			npcAI.setSubStateIfNot(AISubState.NONE);
 			npc.clearQueuedSkills();

@@ -6,6 +6,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -64,7 +65,7 @@ public class BeritraMinionAI extends AggressiveNoLootNpcAI {
 			} else {
 				followAttempts.set(0);
 				getAggroList().stopHating(getTarget());
-				Creature mostHated = getAggroList().getMostHated();
+				Creature mostHated = getAggroList().getTarget(AggroTarget.MOST_HATED);
 				if (mostHated != null)
 					onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 				else

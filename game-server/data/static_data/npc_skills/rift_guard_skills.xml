@@ -5,7 +5,7 @@
 		<npc_skill id="21750" lv="65" prob="90" min_hp="35" cd="15000" /> <!-- Slash -->
 		<npc_skill id="21752" lv="1" prob="70" cd="80000" next_skill_time="5000" min_hp="0" max_hp="75" /> <!-- Searing Scream -->
 		<npc_skill id="21753" lv="65" prob="85" max_hp="34" cd="15000" /> <!-- Flying Blade -->
-		<npc_skill id="21756" lv="65" prob="90" next_chain_id="1" next_skill_time="0" cd="90000" min_hp="0" max_hp="45" target="RANDOM_EXCEPT_MOST_HATED" /> <!-- Prime Target -->
+		<npc_skill id="21756" lv="65" prob="90" next_chain_id="1" next_skill_time="0" cd="90000" min_hp="0" max_hp="45" target="RANDOM_EXCEPT_CURRENT_TARGET" /> <!-- Prime Target -->
 		<npc_skill id="21757" lv="65" prob="100" chain_id="1" cd="20000" next_skill_time="5000" /> <!-- Punishing Blow -->
 		<npc_skill id="21758" lv="1" prob="70" cd="85000" next_skill_time="3000" target="NONE" /> <!-- Fetters -->
 		<npc_skill id="17992" lv="1" prob="30" next_chain_id="2" next_skill_time="0" cd="120000" min_hp="0" max_hp="45" /> <!-- Wide Area Aerial Thrust III -->

@@ -1,16 +1,12 @@
 package ai.instance.dragonLordsRefuge;
 
-import java.util.List;
-import java.util.stream.Collectors;
-
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.PositionUtil;
 
 import ai.AggressiveNpcAI;
 
@@ -61,7 +57,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI implements HpPhases.Phas
 				rndSpawn(283133);
 				break;
 			case 20913:
-				Player target = getRandomTarget();
+				Creature target = getRandomTarget();
 				if (target != null)
 					spawn(283131, target.getX(), target.getY(), target.getZ(), (byte) 0);
 		}
@@ -78,9 +74,7 @@ public class CalindiFlamelordAI extends AggressiveNpcAI implements HpPhases.Phas
 		}
 	}
 
-	protected Player getRandomTarget() {
-		List<Player> players = getKnownList().getKnownPlayers().values().stream()
-			.filter(player -> !player.isDead() && PositionUtil.isInRange(player, getOwner(), 50)).collect(Collectors.toList());
-		return Rnd.get(players);
+	protected Creature getRandomTarget() {
+		return getAggroList().getTarget(AggroTarget.RANDOM, 50);
 	}
 }

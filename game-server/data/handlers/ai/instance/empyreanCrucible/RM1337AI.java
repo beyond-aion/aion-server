@@ -1,18 +1,15 @@
 package ai.instance.empyreanCrucible;
 
-import java.util.ArrayList;
-import java.util.List;
 import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -89,25 +86,19 @@ public class RM1337AI extends AggressiveNpcAI {
 					if (getOwner().getCastingSkill() != null)
 						return;
 					if (getLifeStats().getHpPercentage() <= 50) {
-						switch (Rnd.nextInt(2)) {
-							case 0:
-								SkillEngine.getInstance().getSkill(getOwner(), 19550, 10, getTargetPlayer()).useNoAnimationSkill();
-								break;
-							default:
-								final Player target = getTargetPlayer();
-								SkillEngine.getInstance().getSkill(getOwner(), 19552, 10, target).useNoAnimationSkill();
-								ThreadPoolManager.getInstance().schedule(new Runnable() {
-
-									@Override
-									public void run() {
-										if (!isDead()) {
-											SkillEngine.getInstance().getSkill(getOwner(), 19553, 10, target).useNoAnimationSkill();
-										}
-									}
-								}, 4000);
+						if (Rnd.nextBoolean()) {
+							SkillEngine.getInstance().getSkill(getOwner(), 19550, 10, getRandomTarget()).useNoAnimationSkill();
+						} else {
+							Creature target = getRandomTarget();
+							SkillEngine.getInstance().getSkill(getOwner(), 19552, 10, target).useNoAnimationSkill();
+							ThreadPoolManager.getInstance().schedule(() -> {
+								if (!isDead()) {
+									SkillEngine.getInstance().getSkill(getOwner(), 19553, 10, target).useNoAnimationSkill();
+								}
+							}, 4000);
 						}
 					} else
-						SkillEngine.getInstance().getSkill(getOwner(), 19550, 10, getTargetPlayer()).useNoAnimationSkill();
+						SkillEngine.getInstance().getSkill(getOwner(), 19550, 10, getRandomTarget()).useNoAnimationSkill();
 				}
 			}
 		}, 10000, 23000);
@@ -145,13 +136,7 @@ public class RM1337AI extends AggressiveNpcAI {
 		}, 4000);
 	}
 
-	private Player getTargetPlayer() {
-		List<Player> players = new ArrayList<>();
-		getKnownList().forEachPlayer(player -> {
-			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 37)) {
-				players.add(player);
-			}
-		});
-		return Rnd.get(players);
+	private Creature getRandomTarget() {
+		return getAggroList().getTarget(AggroTarget.RANDOM, 37);
 	}
 }

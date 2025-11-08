@@ -8,6 +8,7 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -89,8 +90,8 @@ public class KuharaTheVolatileAI extends AggressiveNpcAI {
 				bombEventTask = ThreadPoolManager.getInstance().schedule(() -> {
 					if (!isDead()) {
 						canThink = true;
-						Creature creature = getAggroList().getMostHated();
-						if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
+						Creature creature = getAggroList().getTarget(AggroTarget.MOST_HATED);
+						if (creature == null) {
 							setStateIfNot(AIState.FIGHT);
 							think();
 						} else {

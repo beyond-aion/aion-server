@@ -14,7 +14,8 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
+import com.aionemu.gameserver.controllers.attack.DamageInfo;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -232,15 +233,11 @@ public class Lv1HumanBeritraAI extends AggressiveNoLootNpcAI {
 	 * Spawn soul extinction fields on three random players within 50m.
 	 */
 	private void handleSoulExtinctionFields() {
-		List<AggroInfo> playersInRange = getAggroList().getList().stream()
-			.filter(ai -> ai.getAttacker() instanceof Player && PositionUtil.isInRange(getOwner(), (Player) ai.getAttacker(), 50))
-			.collect(Collectors.toList());
-
+		List<Creature> playersInRange = getAggroList().streamValidTargets(50).filter(c -> c instanceof Player).collect(Collectors.toList());
 		Collections.shuffle(playersInRange);
-		playersInRange.stream().limit(3).forEach(ai -> {
-			Player p = (Player) ai.getAttacker();
-			spawn(855450, p.getX(), p.getY(), p.getZ(), (byte) 0);
-		});
+		playersInRange.stream()
+			.limit(3)
+			.forEach(p -> spawn(855450, p.getX(), p.getY(), p.getZ(), (byte) 0));
 	}
 
 	/**
@@ -277,11 +274,7 @@ public class Lv1HumanBeritraAI extends AggressiveNoLootNpcAI {
 	}
 
 	private void addHateToRandomTarget() {
-		List<AggroInfo> attackingPlayers = getAggroList().getList().stream().filter(ai -> ai.getAttacker() instanceof Player player && !player.isDead())
-			.toList();
-		AggroInfo aggroInfo = Rnd.get(attackingPlayers);
-		if (aggroInfo != null)
-			aggroInfo.addHate(100000);
+		getAggroList().addHate(getAggroList().getTarget(AggroTarget.RANDOM), 100000);
 	}
 
 	@Override
@@ -337,7 +330,7 @@ public class Lv1HumanBeritraAI extends AggressiveNoLootNpcAI {
 	protected void handleTargetTooFar() {
 		if (!isTargetInsideArena()) {
 			getAggroList().stopHating(getTarget());
-			Creature mostHated = getAggroList().getMostHated();
+			Creature mostHated = getAggroList().getTarget(AggroTarget.MOST_HATED);
 			if (mostHated != null)
 				onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
 			else
@@ -382,7 +375,8 @@ public class Lv1HumanBeritraAI extends AggressiveNoLootNpcAI {
 
 	private void logMetrics() {
 		long fullFightTime = (System.currentTimeMillis() - fightStartTime) / 1000;
-		String damageDealt = getAggroList().getFinalDamageList(false).stream().sorted((Comparator.comparingInt(AggroInfo::getDamage).reversed()))
+		String damageDealt = getAggroList().getFinalDamageList().getCreatureDamages().stream()
+			.sorted(Comparator.comparingInt(DamageInfo<Creature>::getDamage).reversed())
 			.map(ai -> String.format("%s (ID: %d, Dmg: %d)", ai.getAttacker().getName(), ai.getAttacker().getObjectId(), ai.getDamage()))
 			.collect(Collectors.joining(", "));
 

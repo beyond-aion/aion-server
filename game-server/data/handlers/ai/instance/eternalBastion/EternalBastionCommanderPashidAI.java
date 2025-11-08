@@ -2,6 +2,7 @@ package ai.instance.eternalBastion;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.animations.AttackHandAnimation;
 import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -76,7 +77,7 @@ public class EternalBastionCommanderPashidAI extends EternalBastionAggressiveNpc
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		switch (skillTemplate.getSkillId()) {
-			case 21239 -> getAggroList().addHate(Rnd.get(getKnownList().getKnownPlayers().values().stream().toList()), 100000); // Gnaw
+			case 21239 -> getAggroList().addHate(getAggroList().getTarget(AggroTarget.RANDOM), 100000); // Gnaw
 			case 21236 -> PacketSendUtility.broadcastMessage(getOwner(), 1500757); // Exultation
 		}
 	}

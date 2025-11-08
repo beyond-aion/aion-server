@@ -2,7 +2,6 @@ package ai.quests;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 
@@ -79,12 +78,7 @@ public class NidalberBalaurAI extends AggressiveNpcAI {
 			getOwner().getController().delete();
 			return;
 		}
-		for (AggroInfo info : getOwner().getAggroList().getList()) {
-			if (info == null)
-				continue;
-			if (info.getAttacker() == questNpc && info.getHate() > 0)
-				return;
-		}
-		getOwner().getAggroList().addHate(questNpc, 100);
+		if (!getAggroList().isHating(questNpc))
+			getAggroList().addHate(questNpc, 100);
 	}
 }

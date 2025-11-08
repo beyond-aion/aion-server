@@ -1,22 +1,15 @@
 package ai.worlds.panesterra.ahserionsflight;
 
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
-import java.util.stream.Collectors;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.templates.spawns.panesterra.AhserionsFlightSpawnTemplate;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNoLootNpcAI;
-
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author Yeats
@@ -38,13 +31,7 @@ public class AhserionAggressiveNpcAI extends AggressiveNoLootNpcAI {
 	}
 
 	protected void addHateToRndTarget() {
-		List<VisibleObject> objects = getKnownList().getKnownObjects().values().stream()
-			.filter(o -> o instanceof Creature creature && !creature.isDead() && getOwner().isEnemy(creature))
-			.collect(Collectors.toCollection(ArrayList::new));
-		Collections.shuffle(objects);
-		Creature rndTarget = (Creature) Rnd.get(objects);
-		if (rndTarget != null)
-			getAggroList().addHate(rndTarget, 100000);
+		getAggroList().addHate(getAggroList().getTarget(AggroTarget.RANDOM), 100000);
 	}
 
 	@Override

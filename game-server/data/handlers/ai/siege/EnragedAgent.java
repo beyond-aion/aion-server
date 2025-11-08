@@ -2,6 +2,7 @@ package ai.siege;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -29,7 +30,7 @@ public class EnragedAgent extends SummonerAI {
 		switch (effect.getSkillId()) {
 			case 18704:
 				ThreadPoolManager.getInstance()
-					.schedule(() -> SkillEngine.getInstance().getSkill(getOwner(), 18705, 60, getAggroList().getMostHated()).useSkill(), 650);
+					.schedule(() -> SkillEngine.getInstance().getSkill(getOwner(), 18705, 60, getAggroList().getTarget(AggroTarget.MOST_HATED)).useSkill(), 650);
 				break;
 		}
 	}

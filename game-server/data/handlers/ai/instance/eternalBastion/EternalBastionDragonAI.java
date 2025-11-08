@@ -3,6 +3,7 @@ package ai.instance.eternalBastion;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.animations.AttackHandAnimation;
 import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -61,7 +62,7 @@ public class EternalBastionDragonAI extends EternalBastionAggressiveNpcAI {
 
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
-		if (skillTemplate.getSkillId() == 21239)
-			getAggroList().addHate(Rnd.get(getKnownList().getKnownPlayers().values().stream().toList()), 50000); // Gnaw
+		if (skillTemplate.getSkillId() == 21239) // Gnaw
+			getAggroList().addHate(getAggroList().getTarget(AggroTarget.RANDOM), 50000);
 	}
 }

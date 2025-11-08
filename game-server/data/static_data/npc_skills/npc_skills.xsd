@@ -96,7 +96,7 @@
 			<xs:enumeration value="SECOND_MOST_HATED" />
 			<xs:enumeration value="THIRD_MOST_HATED" />
 			<xs:enumeration value="RANDOM" />
-			<xs:enumeration value="RANDOM_EXCEPT_MOST_HATED" />
+			<xs:enumeration value="RANDOM_EXCEPT_CURRENT_TARGET" />
 			<xs:enumeration value="NONE" />
 		</xs:restriction>
 	</xs:simpleType>

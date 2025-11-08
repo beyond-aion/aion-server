@@ -21,12 +21,12 @@ public class HaramelInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
-		Player player = npc.getAggroList().getMostPlayerDamage();
-		if (player == null)
-			return;
 		switch (npc.getNpcId()) {
 			case 216922:
+				Player player = npc.getAggroList().getMostPlayerDamage();
 				npc.getController().delete();
+				if (player == null)
+					return;
 				sendMsg(SM_SYSTEM_MESSAGE.STR_MSG_IDNOVICE_HAMEROON_TREASUREBOX_SPAWN());
 				PacketSendUtility.sendPacket(player, new SM_PLAY_MOVIE(false, 0, 0, 457, true));
 				switch (player.getPlayerClass()) {

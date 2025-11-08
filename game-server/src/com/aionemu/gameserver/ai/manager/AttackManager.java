@@ -5,6 +5,7 @@ import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.AttackIntention;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -16,9 +17,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
  */
 public class AttackManager {
 
-	/**
-	 * @param npcAI
-	 */
 	public static void startAttacking(NpcAI npcAI) {
 		if (npcAI.isLogging()) {
 			AILogger.info(npcAI, "AttackManager: startAttacking");
@@ -30,9 +28,6 @@ public class AttackManager {
 		scheduleNextAttack(npcAI);
 	}
 
-	/**
-	 * @param npcAI
-	 */
 	public static void scheduleNextAttack(NpcAI npcAI) {
 		if (npcAI.isLogging()) {
 			AILogger.info(npcAI, "AttackManager: scheduleNextAttack");
@@ -48,9 +43,6 @@ public class AttackManager {
 		}
 	}
 
-	/**
-	 * choose attack type
-	 */
 	protected static void chooseAttack(NpcAI npcAI, int delay) {
 		AttackIntention attackIntention = npcAI.chooseAttackIntention();
 		if (npcAI.isLogging()) {
@@ -72,9 +64,6 @@ public class AttackManager {
 		}
 	}
 
-	/**
-	 * @param npcAI
-	 */
 	public static void targetTooFar(NpcAI npcAI) {
 		Npc npc = npcAI.getOwner();
 		if (npcAI.isLogging()) {
@@ -83,8 +72,8 @@ public class AttackManager {
 
 		// switch target if there is more hated creature
 		if (npc.getGameStats().getLastChangeTargetTimeDelta() > 5) {
-			Creature mostHated = npc.getAggroList().getMostHated();
-			if (mostHated != null && !mostHated.isDead() && !npc.isTargeting(mostHated.getObjectId())) {
+			Creature mostHated = npc.getAggroList().getTarget(AggroTarget.MOST_HATED);
+			if (mostHated != null && !npc.isTargeting(mostHated.getObjectId())) {
 				if (npcAI.isLogging()) {
 					AILogger.info(npcAI, "AttackManager: switching target during chase");
 				}
