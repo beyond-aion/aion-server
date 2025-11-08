@@ -331,6 +331,10 @@ public abstract class WorldMapInstance implements Iterable<VisibleObject> {
 		CollectionUtil.forEach(worldMapPlayers.values(), consumer);
 	}
 
+	public void forEachObject(Consumer<VisibleObject> consumer) {
+		CollectionUtil.forEach(worldMapObjects.values(), consumer);
+	}
+
 	public void forEachDoor(Consumer<StaticDoor> consumer) {
 		CollectionUtil.forEach(worldMapObjects.values(), o -> {
 			if (o instanceof StaticDoor staticDoor)

@@ -2,8 +2,6 @@ package ai;
 
 import static com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE.*;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.concurrent.ScheduledFuture;
 import java.util.function.Consumer;
 
@@ -28,11 +26,7 @@ import com.aionemu.gameserver.model.siege.ArtifactStatus;
 import com.aionemu.gameserver.model.team.legion.LegionPermissionsMask;
 import com.aionemu.gameserver.model.templates.siegelocation.ArtifactActivation;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_ABYSS_ARTIFACT_INFO3;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_QUESTION_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_USE_OBJECT;
+import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -48,8 +42,6 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class ArtifactAI extends NpcAI {
 
 	private static final Logger log = LoggerFactory.getLogger("SIEGE_LOG");
-
-	private Map<Integer, ItemUseObserver> observers = new HashMap<>();
 
 	public ArtifactAI(Npc owner) {
 		super(owner);
@@ -159,15 +151,12 @@ public class ArtifactAI extends NpcAI {
 			}
 
 		};
-		observers.put(player.getObjectId(), observer);
 		player.getObserveController().attach(observer);
 		player.getController().addTask(TaskId.ACTION_ITEM_NPC, ThreadPoolManager.getInstance().schedule(new Runnable() {
 
 			@Override
 			public void run() {
-				ItemUseObserver observer = observers.remove(player.getObjectId());
-				if (observer != null)
-					player.getObserveController().removeObserver(observer);
+				player.getObserveController().removeObserver(observer);
 
 				PacketSendUtility.sendPacket(player, new SM_USE_OBJECT(player.getObjectId(), getObjectId(), 10000, 0));
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, EmotionType.END_QUESTLOOT, 0, getObjectId()), true);

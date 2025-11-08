@@ -798,7 +798,6 @@
 					<gd_npc npc_id="235218" /><!-- Cruel Lamia -->
 					<gd_npc npc_id="235219" /><!-- Destroyer Feld -->
 					<gd_npc npc_id="235220" /><!-- Ruthless Tyrannica -->
-					<gd_npc npc_id="218540" /><!-- Flaming Breath Byak -->
 					<gd_npc npc_id="218745" /><!-- Ruthless Ossek -->
 					<gd_npc npc_id="217964" /><!-- Deputy Chieftain Aruru -->
 					<gd_npc npc_id="218326" /><!-- Continuum Guardian Arachi -->
@@ -1596,7 +1595,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Trick or treat! The witch and the king" start="2017-10-29T18:00:00" end="2017-11-02T20:00:00" theme="HALLOWEEN">
+	<event name="Trick or treat! The witch and the king" start="2025-10-27T00:00:00" end="2025-11-02T23:59:59" theme="HALLOWEEN">
 		<quests>
 			<maintainable>80010 80011 80012 80013 80014 80015 80086 80087 80088 80089 80090 80091 80092 80093 80094 80095 80096 80097 80098 80099 80100 80101 80102 80103 80104 80105 80106 80107 80108 80109 80110 80111</maintainable>
 		</quests>
@@ -4046,7 +4045,6 @@
 					<gd_race race="CONSTRUCT" />
 					<gd_race race="UNDEAD" />
 				</gd_races>
-				<gd_excluded_npcs npc_ids="218085" />
 				<gd_items>
 					<gd_item id="188053528" /><!-- [Event] Heart Mini Trump -->
 					<gd_item id="188053529" /><!-- [Event] Club Mini Trump -->
@@ -4062,18 +4060,6 @@
 				<gd_items>
 					<gd_item id="188053528" /><!-- [Event] Heart Mini Trump -->
 					<gd_item id="188053529" /><!-- [Event] Club Mini Trump -->
-				</gd_items>
-			</gd_rule>
-			<gd_rule rule_name="Trump Legendary Drop" chance="100" member_limit="6">
-				<gd_maps>
-					<gd_map map_id="600010000" /><!-- Silentera Canyon -->
-				</gd_maps>
-				<gd_npcs>
-					<gd_npc npc_id="218085" /><!-- Debarim the Omnipotent -->
-				</gd_npcs>
-				<gd_items>
-					<gd_item id="188053528" min_count="3" /><!-- [Event] Heart Mini Trump -->
-					<gd_item id="188053529" min_count="3" /><!-- [Event] Club Mini Trump -->
 				</gd_items>
 			</gd_rule>
 			<gd_rule rule_name="Trump Single Drop" chance="25" member_limit="6">

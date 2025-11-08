@@ -84,8 +84,7 @@ public class NpcData {
 						strikeResist = 700;
 					template.setStrikeResist(strikeResist);
 				}
-				if (template.getAbnormalResistance() == 0)
-					template.setAbnormalResistance(NpcStatCalculation.calculateStat(StatEnum.ABNORMAL_RESISTANCE_ALL, rating, rank, level));
+				template.setStunLikeResistance(NpcStatCalculation.calculateStat(StatEnum.STUNLIKE_RESISTANCE, rating, rank, level));
 			}
 			if (npc.getFuncDialogIds() != null)
 				functionDialogIds.addAll(npc.getFuncDialogIds());

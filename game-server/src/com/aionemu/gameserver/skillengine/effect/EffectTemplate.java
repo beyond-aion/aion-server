@@ -528,7 +528,7 @@ public abstract class EffectTemplate {
 			effectPower -= effected.getGameStats().getAbnormalResistance().getCurrent();
 
 		// effect resistance
-		effectPower -= effected.getGameStats().getStat(statEnum, 0).getCurrent();
+		effectPower -= effected.getGameStats().getResistance(statEnum).getCurrent();
 
 		// penetration
 		StatEnum penetrationStat = this.getPenetrationStat(statEnum);
@@ -542,9 +542,6 @@ public abstract class EffectTemplate {
 				float reductionRate = 0.1f * (lvlDiff - 4); // see https://forums.aiononline.com/topic/25-arena-of-discipline-entries/?page=2#elComment_2213
 				effectPower *= Math.max(1 - reductionRate, 0.1f);
 			}
-		} else if (effected instanceof Npc) { // resist mod PvE
-			int hpGaugeMod = ((Npc) effected).getObjectTemplate().getRank().ordinal();
-			effectPower -= hpGaugeMod * 100;
 		}
 		return Rnd.get(1, 1000) <= effectPower;
 	}

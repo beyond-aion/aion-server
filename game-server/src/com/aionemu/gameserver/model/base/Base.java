@@ -74,13 +74,18 @@ public abstract class Base<T extends BaseLocation> {
 	}
 
 	private void despawnAllNpcs() {
-		List<Npc> spawned = World.getInstance().getBaseSpawns(id);
-		if (spawned != null) {
-			for (Npc npc : spawned) {
-				if (npc != null)
-					npc.getController().deleteIfAliveOrCancelRespawn();
-			}
-		}
+		despawnNpcs(null);
+	}
+
+	protected void despawnByHandlerType(SpawnHandlerType type) {
+		despawnNpcs(type);
+	}
+
+	private void despawnNpcs(SpawnHandlerType type) {
+		World.getInstance().getWorldMap(getLocation().getTemplate().getWorldId()).forEachObject(o -> {
+			if (o.getSpawn() instanceof BaseSpawnTemplate spawn && spawn.getId() == id && (type == null || spawn.getHandlerType() == type))
+				o.getController().deleteIfAliveOrCancelRespawn();
+		});
 	}
 
 	protected void scheduleOutriderSpawn() {
@@ -184,17 +189,6 @@ public abstract class Base<T extends BaseLocation> {
 
 	public BaseOccupier getOccupier(Creature bossKiller) {
 		return bossKiller == null ? getLocation().getTemplate().getDefaultOccupier() : BaseOccupier.findBy(bossKiller.getRace());
-	}
-
-	/**
-	 * Despawns all alive npcs of this base, which have the given SpawnHandlerType. Respawn tasks of dead base npcs will be cancelled.
-	 */
-	public void despawnByHandlerType(SpawnHandlerType type) {
-		for (Npc npc : World.getInstance().getBaseSpawns(id)) {
-			if (npc != null && npc.getSpawn().getHandlerType() == type) {
-				npc.getController().deleteIfAliveOrCancelRespawn();
-			}
-		}
 	}
 
 	private SM_SYSTEM_MESSAGE getBossSpawnMsg() {

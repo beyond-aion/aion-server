@@ -37,7 +37,8 @@ public class WeaponDualEffect extends BufEffect {
 	public static boolean hasDualWieldEffect(Player player) {
 		if (!player.isSpawned()) { // fallback for enterWorld
 			for (PlayerSkillEntry skillEntry : player.getSkillList().getAllSkills()) {
-				if (DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId()).getEffects().hasAnyEffectType(EffectType.WEAPONDUAL))
+				Effects effects = DataManager.SKILL_DATA.getSkillTemplate(skillEntry.getSkillId()).getEffects();
+				if (effects != null && effects.hasAnyEffectType(EffectType.WEAPONDUAL))
 					return true;
 			}
 		}

@@ -53,6 +53,8 @@ public class StatsTemplate {
 
 	@XmlAttribute(name = "abnormal_resist")
 	private int abnormalResistance;
+	@XmlTransient // TODO add individual resistance fields when importing PTS template data
+	private int stunLikeResistance;
 
 	@XmlElement
 	private CreatureSpeeds speeds;
@@ -229,8 +231,12 @@ public class StatsTemplate {
 		return abnormalResistance;
 	}
 
-	public void setAbnormalResistance(int abnormalResistance) {
-		this.abnormalResistance = abnormalResistance;
+	public int getStunLikeResistance() {
+		return stunLikeResistance;
+	}
+
+	public void setStunLikeResistance(int stunLikeResistance) {
+		this.stunLikeResistance = stunLikeResistance;
 	}
 
 	public int getPower() {

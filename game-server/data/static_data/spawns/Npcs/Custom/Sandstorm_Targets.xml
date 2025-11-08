@@ -11,7 +11,7 @@
 			<spot x="539.7662" y="1980.1721" z="466.75" h="110" />
 		</spawn>
 		<!-- Leontidan -->
-		<spawn npc_id="205560">
+		<spawn npc_id="205560" respawn_time="295">
 			<spot x="541.012" y="1982.509" z="466.75" h="116" />
 		</spawn>
 		<!-- Dena -->
@@ -57,10 +57,6 @@
 		</spawn>
 	</spawn_map>
 	<spawn_map map_id="600090000"><!-- Kaldor -->
-		<!-- Flaming Breath Byak -->
-		<spawn npc_id="218540" respawn_time="32400">
-			<spot x="475.8551" y="316.3324" z="145.5117" h="68" />
-		</spawn>
 		<!-- Ruthless Ossek -->
 		<spawn npc_id="218745" respawn_time="32400">
 			<spot x="1271.1799" y="686.0034" z="167.8775" h="28" />
@@ -68,12 +64,6 @@
 		<!-- Deputy Chieftain Aruru -->
 		<spawn npc_id="217964" respawn_time="32400">
 			<spot x="232.4105" y="776.3938" z="134.3247" h="112" />
-		</spawn>
-	</spawn_map>
-	<spawn_map map_id="600010000"><!-- Silentera_Canyon -->
-		<!-- Debarim the Omnipotent -->
-		<spawn npc_id="218085" respawn_time="32400">
-			<spot x="784.5342" y="769.3612" z="292.7161" h="59" />
 		</spawn>
 	</spawn_map>
 	<spawn_map map_id="210090000"><!-- Idian_Depths_L -->
@@ -125,18 +115,14 @@
 		<spawn npc_id="218459" respawn_time="7200">
 			<spot x="524.0351" y="2331.3352" z="287.2434" h="16" />
 		</spawn>
-		<!-- Yndigo Blackice -->
-		<spawn npc_id="218519" respawn_time="14400"><!-- titel -->
-			<spot x="2547.1392" y="1767.8143" z="370.4462" h="22" />
-		</spawn>
 	</spawn_map>
 	<spawn_map map_id="220080000"><!-- Enshar -->
 		<!-- Assault Team Leader Kunati -->
 		<spawn npc_id="218543" respawn_time="7200">
 			<spot x="2795.2827" y="806.5164" z="227.2735" h="63" />
 		</spawn>
-		<!-- Chieftain Pukikor -->
-		<spawn npc_id="218495" respawn_time="14400">
+		<!-- Noble Ricid -->
+		<spawn npc_id="218458" respawn_time="32400">
 			<spot x="159.8261" y="1509.2024" z="280.3751" />
 		</spawn>
 	</spawn_map>
@@ -155,8 +141,8 @@
 		<spawn npc_id="218555" respawn_time="7200">
 			<spot x="2357.8125" y="1255.0906" z="249.2514" h="82" />
 		</spawn>
-		<!-- Chieftain Haridoo -->
-		<spawn npc_id="218005" respawn_time="32400">
+		<!-- General Chunapa -->
+		<spawn npc_id="218183" respawn_time="32400">
 			<spot x="2172.7391" y="2010.0936" z="312.7561" h="50" />
 		</spawn>
 	</spawn_map>

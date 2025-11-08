@@ -273,6 +273,14 @@ public abstract class CreatureGameStats<T extends Creature> {
 		return getStat(StatEnum.ABNORMAL_RESISTANCE_ALL, getStatsTemplate().getAbnormalResistance());
 	}
 
+	public Stat2 getResistance(StatEnum statEnum) {
+		int base = switch (statEnum) {
+			case OPENAERIAL_RESISTANCE, PARALYZE_RESISTANCE, SPIN_RESISTANCE, STAGGER_RESISTANCE, STUMBLE_RESISTANCE, STUN_RESISTANCE -> getStatsTemplate().getStunLikeResistance();
+			default -> 0;
+		};
+		return getStat(statEnum, base);
+	}
+
 	public abstract Stat2 getAttackSpeed();
 
 	public abstract Stat2 getMovementSpeed();

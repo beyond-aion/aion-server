@@ -1,6 +1,9 @@
 package com.aionemu.gameserver.world;
 
-import java.util.*;
+import java.util.Collection;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.function.Consumer;
@@ -8,18 +11,15 @@ import java.util.function.Consumer;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.utils.GenericValidator;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.PlayerInitialData.LocationData;
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.BindPointPosition;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
-import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.ShieldService;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
@@ -50,17 +50,7 @@ public class World {
 	/**
 	 * Container with all SiegeNpcs in the world [SiegeNpcs,SiegeProtectors etc]
 	 */
-	private final Map<Integer, Collection<SiegeNpc>> localSiegeNpcs = new HashMap<>();
-
-	/**
-	 * Container with all Npcs related to base spawns
-	 */
-	private final Map<Integer, List<Npc>> baseNpc = new ConcurrentHashMap<>();
-
-	/**
-	 * Container with all Npcs in the world
-	 */
-	private final Map<Integer, Npc> allNpcs = new ConcurrentHashMap<>();
+	private final Map<Integer, Collection<SiegeNpc>> localSiegeNpcs = new ConcurrentHashMap<>();
 
 	/**
 	 * World maps supported by server.
@@ -91,34 +81,8 @@ public class World {
 		if (oldObject != null)
 			throw new DuplicateAionObjectException(object, oldObject);
 
-		if (object instanceof Npc npc) {
-			if (object instanceof SiegeNpc siegeNpc) {
-				Collection<SiegeNpc> npcs = localSiegeNpcs.get(siegeNpc.getSiegeId());
-				if (npcs == null) {
-					synchronized (localSiegeNpcs) {
-						if (localSiegeNpcs.containsKey(siegeNpc.getSiegeId())) {
-							npcs = localSiegeNpcs.get(siegeNpc.getSiegeId());
-						} else {
-							// We now have multi-threaded siege timers
-							// This should be thread-safe
-							npcs = new CopyOnWriteArrayList<>();
-							localSiegeNpcs.put(siegeNpc.getSiegeId(), npcs);
-						}
-					}
-				}
-
-				npcs.add(siegeNpc);
-			}
-
-			if (object.getSpawn() instanceof BaseSpawnTemplate baseSpawnTemplate) {
-				int baseId = baseSpawnTemplate.getId();
-				if (!baseNpc.containsKey(baseId)) {
-					baseNpc.putIfAbsent(baseId, new CopyOnWriteArrayList<>());
-				}
-				baseNpc.get(baseId).add(npc);
-			}
-
-			allNpcs.put(object.getObjectId(), npc);
+		if (object instanceof SiegeNpc siegeNpc) {
+			localSiegeNpcs.computeIfAbsent(siegeNpc.getSiegeId(), _ -> new CopyOnWriteArrayList<>()).add(siegeNpc);
 		} else if (object instanceof Player player) {
 			allPlayers.add(player);
 		}
@@ -150,20 +114,8 @@ public class World {
 			}
 		}
 		if (removed) {
-			if (object instanceof Npc) {
-				if (object instanceof SiegeNpc siegeNpc) {
-					Collection<SiegeNpc> locSpawn = localSiegeNpcs.get(siegeNpc.getSiegeId());
-					if (!GenericValidator.isBlankOrNull(locSpawn)) {
-						locSpawn.remove(siegeNpc);
-					}
-				}
-
-				if (object.getSpawn() instanceof BaseSpawnTemplate baseSpawnTemplate) {
-					int baseId = baseSpawnTemplate.getId();
-					baseNpc.get(baseId).remove(object);
-				}
-
-				allNpcs.remove(object.getObjectId());
+			if (object instanceof SiegeNpc siegeNpc) {
+				localSiegeNpcs.get(siegeNpc.getSiegeId()).remove(siegeNpc);
 			} else if (object instanceof Player player) {
 				allPlayers.remove(player);
 			}
@@ -174,14 +126,6 @@ public class World {
 	public Collection<SiegeNpc> getLocalSiegeNpcs(int locationId) {
 		Collection<SiegeNpc> result = localSiegeNpcs.get(locationId);
 		return result != null ? result : Collections.emptySet();
-	}
-
-	public List<Npc> getBaseSpawns(int baseId) {
-		return baseNpc.get(baseId);
-	}
-
-	public Collection<Npc> getNpcs() {
-		return allNpcs.values();
 	}
 
 	/**
