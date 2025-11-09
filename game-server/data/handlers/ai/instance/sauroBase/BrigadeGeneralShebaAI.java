@@ -3,7 +3,6 @@ package ai.instance.sauroBase;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -101,12 +100,6 @@ public class BrigadeGeneralShebaAI extends AggressiveNpcAI {
 	}
 
 	private void removeAdds() {
-		for (VisibleObject obj : getKnownList().getKnownObjects().values()) {
-			if (obj instanceof Npc) {
-				if (((Npc) obj).getNpcId() == 284435 || ((Npc) obj).getNpcId() == 284436) {
-					((Npc) obj).getController().delete();
-				}
-			}
-		}
+		getOwner().getWorldMapInstance().getNpcs(284435, 284436).forEach(npc -> npc.getController().delete());
 	}
 }

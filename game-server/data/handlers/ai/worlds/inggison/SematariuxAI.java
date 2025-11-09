@@ -1,11 +1,9 @@
 package ai.worlds.inggison;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
@@ -15,7 +13,6 @@ import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -34,8 +31,8 @@ import ai.AggressiveNpcAI;
 public class SematariuxAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
 	private final HpPhases hpPhases = new HpPhases(90, 70, 50, 30, 20, 10, 5);
-	private AtomicInteger deadThunderShields = new AtomicInteger();
-	private AtomicBoolean isEggEventActive = new AtomicBoolean();
+	private final AtomicInteger deadThunderShields = new AtomicInteger();
+	private final AtomicBoolean isEggEventActive = new AtomicBoolean();
 	// private long shieldRemovalStamp;
 
 	public SematariuxAI(Npc owner) {
@@ -97,16 +94,11 @@ public class SematariuxAI extends AggressiveNpcAI implements HpPhases.PhaseHandl
 				getMoveController().moveToTargetObject();
 				break;
 			case 19178: // Deadly Bolt
-				Collection<Player> knownPlayers = getKnownList().getKnownPlayers().values();
-				List<Integer> targetedPlayers = new ArrayList<>();
-				while (targetedPlayers.size() < knownPlayers.size() * 0.2f) {
-					for (Player p : knownPlayers) {
-						if (!targetedPlayers.contains(p.getObjectId()) && Rnd.nextBoolean()) {
-							spawn(281452, p.getX(), p.getY(), p.getZ(), (byte) 0);
-							targetedPlayers.add(p.getObjectId());
-						}
-					}
-				}
+				List<Creature> targets = getKnownList().streamPlayers().filter(p -> !p.isDead() && isInRange(p, 80)).collect(Collectors.toList());
+				for (int maxTargetCount = Math.max(1, (int) (targets.size() * 0.2f)); targets.size() > maxTargetCount; )
+					targets.remove(Rnd.get(targets));
+				for (Creature target : targets)
+					spawn(281452, target.getX(), target.getY(), target.getZ(), (byte) 0);
 				break;
 			case 19182: // Ear Piercing Shriek
 				// ThreadPoolManager.getInstance().schedule(() -> {
@@ -121,7 +113,7 @@ public class SematariuxAI extends AggressiveNpcAI implements HpPhases.PhaseHandl
 	public void onEffectEnd(Effect effect) {
 		if (effect.getSkillId() == 19186) {
 			// shieldRemovalStamp = System.currentTimeMillis();
-			despawnNpcs(Arrays.asList(282123));
+			despawnNpcs(282123);
 			PacketSendUtility.broadcastToMap(getOwner(), SM_SYSTEM_MESSAGE.STR_MSG_LF4_DRAMATA_AWAKENING());
 		}
 	}
@@ -135,26 +127,24 @@ public class SematariuxAI extends AggressiveNpcAI implements HpPhases.PhaseHandl
 		// ThreadPoolManager.getInstance().schedule(this::spawnShieldNpcs, Rnd.get(120, 300), TimeUnit.MINUTES);
 		// }
 		hpPhases.reset();
-		despawnNpcs(Arrays.asList(281453, 281451, 281931, 281932, 281933));
+		despawnNpcs(281453, 281451, 281931, 281932, 281933);
 	}
 
 	@Override
 	protected void handleDied() {
-		despawnNpcs(Arrays.asList(281453, 281451, 281931, 281932, 281933));
+		despawnNpcs(281453, 281451, 281931, 281932, 281933);
 		super.handleDied();
 	}
 
 	@Override
 	protected void handleDespawned() {
-		despawnNpcs(Arrays.asList(281453, 281451, 281931, 281932, 281933));
+		despawnNpcs(281453, 281451, 281931, 281932, 281933);
 		super.handleDespawned();
 	}
 
-	private void despawnNpcs(List<Integer> npcIds) {
-		getKnownList().getKnownObjects().values().forEach(o -> {
-			if (o instanceof Npc && npcIds.contains(((Npc) o).getNpcId()))
-				o.getController().delete();
-		});
+	private void despawnNpcs(int... npcIds) {
+		for (Npc npc : getOwner().getWorldMapInstance().getNpcs(npcIds))
+			npc.getController().delete();
 	}
 
 	private void spawnTornado() {

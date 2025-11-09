@@ -952,9 +952,6 @@ public class Player extends Creature {
 
 	@Override
 	public boolean canSee(VisibleObject object) {
-		if (object instanceof Pet && !equals(((Pet) object).getMaster()) && !getKnownList().sees(((Pet) object).getMaster()))
-			return false; // pet spawn packet must be sent after owner's
-
 		if (super.canSee(object))
 			return true;
 

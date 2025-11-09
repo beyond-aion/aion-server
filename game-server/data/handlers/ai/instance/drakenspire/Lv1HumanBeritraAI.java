@@ -365,7 +365,7 @@ public class Lv1HumanBeritraAI extends AggressiveNoLootNpcAI {
 	}
 
 	protected Race getAttackingPlayerRace() {
-		return getKnownList().getKnownPlayers().values().stream().filter(p -> !p.isStaff()).map(Player::getRace).findAny().orElse(Race.ELYOS);
+		return getKnownList().streamPlayers().filter(p -> !p.isStaff()).map(Player::getRace).findAny().orElse(Race.ELYOS);
 	}
 
 	private void cancelTasks() {

@@ -99,7 +99,7 @@ public class HalloweenPumpkinAI extends OneDmgAI {
 
 	private Integer selectWeaponPrototypeItemId(Set<Integer> allowedLooters) {
 		List<Integer> itemIds = allowedLooters.stream()
-			.map(id -> getKnownList().getPlayer(id))
+			.map(id -> getKnownList().getObject(id) instanceof Player player ? player : null)
 			.filter(Objects::nonNull)
 			.flatMap(this::getWeaponPrototypeItemIds)
 			.toList();

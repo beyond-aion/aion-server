@@ -26,9 +26,7 @@ public class TargetRangeProperty {
 	public static boolean set(Properties properties, Properties.ValidationResult result, Creature skillEffector, SkillTemplate skillTemplate, float x,
 		float y, float z) {
 		TargetRangeAttribute value = properties.getTargetType();
-		int distanceToTarget = properties.getTargetDistance();
 		int effectiveRange = skillEffector instanceof Trap ? skillEffector.getGameStats().getAttackRange().getCurrent() : properties.getEffectiveRange();
-		int ineffectiveRange = properties.getIneffectiveRange();
 
 		final List<Creature> effectedList = result.getTargets();
 		switch (value) {
@@ -43,65 +41,17 @@ public class TargetRangeProperty {
 
 				// Create a sorted map of the objects in knownlist
 				// and filter them properly
-				for (VisibleObject nextCreature : firstTarget.getKnownList().getKnownObjects().values()) {
-					if (!(nextCreature instanceof Creature creature))
-						continue;
-					if (!checkCommonRequirements(creature, skillTemplate))
-						continue;
-
-					// if (nextCreature instanceof Kisk && isInsideDisablePvpZone(creature)
-					// continue;
-
-					if (Math.abs(firstTarget.getZ() - nextCreature.getZ()) > altitude
-						|| ((nextCreature instanceof Player) && ((Player) nextCreature).isInPlayerMode(PlayerMode.WINDSTREAM))) {
-						continue;
-					}
-
-					// TODO this is a temporary hack for traps
-					if (skillEffector instanceof Trap && ((Trap) skillEffector).getCreator() == nextCreature)
-						continue;
-
-					if (properties.getFirstTarget() == FirstTargetAttribute.POINT) {
-						if (PositionUtil.isInRange(x, y, z, nextCreature.getX(), nextCreature.getY(), nextCreature.getZ(),
-							effectiveRange)) {
-							result.getTargets().add(creature);
-						}
-					} else if (properties.getEffectiveAngle() > 0) {
-						if (nextCreature.equals(skillEffector))
-							continue;
-						// for target_range_area_type = firestorm
-						if (properties.getEffectiveAngle() < 360) {
-							float angle = properties.getEffectiveAngle() / 2f; // e.g. 60 degrees (always positive) = 30 degrees in positive and negative direction
-							if (properties.getDirection() == AreaDirections.BACK) {
-								if (!PositionUtil.isBehind(nextCreature, skillEffector, angle))
-									continue;
-							} else {
-								if (!PositionUtil.isInFrontOf(nextCreature, skillEffector, angle))
-									continue;
-							}
-						}
-						if (!PositionUtil.isInRange(skillEffector, nextCreature, properties.getEffectiveDist(), false))
-							continue;
-						if (!shouldAffectTarget(nextCreature, result.getFirstTarget(), skillTemplate))
-							continue;
-						result.getTargets().add(creature);
-					} else if (properties.getEffectiveDist() > 0) {
-						// Lightning bolt
-						if (PositionUtil.isInsideAttackCylinder(skillEffector, nextCreature, properties.getEffectiveDist(), (effectiveRange / 2f), properties.getDirection())) {
-							if (!shouldAffectTarget(nextCreature, result.getFirstTarget(), skillTemplate))
-								continue;
-							result.getTargets().add(creature);
-						}
-					} else if (PositionUtil.isInRange(firstTarget, nextCreature, effectiveRange, false)) {
-						// for target_range_area_type = fireball
-						if (ineffectiveRange > 0 && PositionUtil.isInRange(firstTarget, nextCreature, ineffectiveRange, false))
-							continue;
-						if (!shouldAffectTarget(nextCreature, result.getFirstTarget(), skillTemplate))
-							continue;
-						result.getTargets().add(creature);
-					}
-				}
-
+				firstTarget.getKnownList().stream()
+					.filter(knownObject -> knownObject.get() instanceof Creature)
+					.map(knownObject -> (Creature) knownObject.get())
+					.filter(creature -> checkCommonRequirements(creature, skillTemplate))
+//					.filter(creature -> !(creature instanceof Kisk && isInsideDisablePvpZone(creature)))
+					.filter(creature -> Math.abs(firstTarget.getZ() - creature.getZ()) <= altitude)
+					.filter(creature -> !(creature instanceof Player player && player.isInPlayerMode(PlayerMode.WINDSTREAM)))
+					.filter(creature -> !(skillEffector instanceof Trap trap && trap.getCreator() == creature)) // TODO this is a temporary hack for traps
+					.filter(creature -> checkRange(properties, skillEffector, x, y, z, creature, effectiveRange, firstTarget))
+					.filter(creature -> checkGeo(creature, result.getFirstTarget(), skillTemplate))
+					.forEach(effectedList::add);
 				break;
 			case PARTY:
 			case PARTY_WITHPET:
@@ -124,7 +74,7 @@ public class TargetRangeProperty {
 							if (!checkCommonRequirements(member, skillTemplate))
 								continue;
 							if (PositionUtil.isInRange(effector, member, effectiveRange, false)) {
-								if (shouldAffectTarget(member, result.getFirstTarget(), skillTemplate))
+								if (checkGeo(member, result.getFirstTarget(), skillTemplate))
 									effectedList.add(member);
 								if (value == TargetRangeAttribute.PARTY_WITHPET)
 									tryAddSummon(member.getSummon(), result, skillTemplate, effectedList);
@@ -134,20 +84,14 @@ public class TargetRangeProperty {
 				}
 				break;
 			case POINT:
-				for (VisibleObject nextCreature : skillEffector.getKnownList().getKnownObjects().values()) {
-					if (!(nextCreature instanceof Creature creature))
-						continue;
-					if (!checkCommonRequirements(creature, skillTemplate))
-						continue;
-
-					if (nextCreature instanceof Trap trap && !trap.getMaster().isEnemy(skillEffector))
-						continue;
-
-					if (!PositionUtil.isInRange(nextCreature, x, y, z, distanceToTarget + 1))
-						continue;
-					if (shouldAffectTarget(nextCreature, result.getFirstTarget(), skillTemplate))
-						effectedList.add(creature);
-				}
+				skillEffector.getKnownList().stream()
+					.filter(knownObject -> knownObject.get() instanceof Creature)
+					.map(knownObject -> (Creature) knownObject.get())
+					.filter(creature -> checkCommonRequirements(creature, skillTemplate))
+					.filter(creature -> !(creature instanceof Trap trap) || trap.getMaster().isEnemy(skillEffector))
+					.filter(creature -> PositionUtil.isInRange(creature, x, y, z, properties.getTargetDistance() + 1))
+					.filter(creature -> checkGeo(creature, result.getFirstTarget(), skillTemplate))
+					.forEach(effectedList::add);
 				break;
 		}
 
@@ -181,21 +125,50 @@ public class TargetRangeProperty {
 		return false;
 	}
 
-	private static boolean shouldAffectTarget(VisibleObject object, Creature firstTarget, SkillTemplate skillTemplate) {
+	private static boolean checkRange(Properties properties, Creature skillEffector, float x, float y, float z, Creature creature, int effectiveRange, Creature firstTarget) {
+		if (properties.getFirstTarget() == FirstTargetAttribute.POINT)
+			return PositionUtil.isInRange(x, y, z, creature.getX(), creature.getY(), creature.getZ(), effectiveRange);
+		if (properties.getIneffectiveRange() > 0 && PositionUtil.isInRange(firstTarget, creature, properties.getIneffectiveRange(), false))
+			return false;
+		if (properties.getEffectiveDist() > 0) {
+			if (properties.getEffectiveAngle() > 0) {
+				if (creature.equals(skillEffector))
+					return false;
+				// for target_range_area_type = firestorm
+				if (properties.getEffectiveAngle() < 360) {
+					float angle = properties.getEffectiveAngle() / 2f; // e.g. 60 degrees (always positive) = 30 degrees in positive and negative direction
+					if (properties.getDirection() == AreaDirections.BACK) {
+						if (!PositionUtil.isBehind(creature, skillEffector, angle))
+							return false;
+					} else if (!PositionUtil.isInFrontOf(creature, skillEffector, angle)) {
+						return false;
+					}
+				}
+				return PositionUtil.isInRange(skillEffector, creature, properties.getEffectiveDist(), false);
+			} else {
+				// Lightning bolt
+				return PositionUtil.isInsideAttackCylinder(skillEffector, creature, properties.getEffectiveDist(), (effectiveRange / 2f), properties.getDirection());
+			}
+		}
+		return PositionUtil.isInRange(firstTarget, creature, effectiveRange, false);
+	}
+
+	private static boolean checkGeo(VisibleObject object, Creature firstTarget, SkillTemplate skillTemplate) {
 		// If creature is at least 2 meters above the terrain, ground skill cannot be applied
 		if (GeoDataConfig.GEO_ENABLE) {
 			if (skillTemplate.isGroundSkill()) {
-				float geoZ = GeoService.getInstance().getZ(object, object.getZ() + 2, object.getZ() - 100);
-				if (!Float.isNaN(geoZ) && object.getZ() - geoZ > 2f)
+				float geoZ = GeoService.getInstance().getZ(object, object.getZ() + 2, object.getZ() - 2);
+				if (Float.isNaN(geoZ))
 					return false;
 			}
-			return GeoService.getInstance().canSee(firstTarget, object);
+			if (skillTemplate.getProperties().getFirstTarget() != FirstTargetAttribute.POINT && !GeoService.getInstance().canSee(firstTarget, object))
+				return false;
 		}
 		return true;
 	}
 
 	private static void tryAddSummon(Summon summon, Properties.ValidationResult result, SkillTemplate skillTemplate, List<Creature> effectedList) {
-		if (summon != null && shouldAffectTarget(summon, result.getFirstTarget(), skillTemplate))
+		if (summon != null && checkGeo(summon, result.getFirstTarget(), skillTemplate))
 			effectedList.add(summon);
 	}
 }

@@ -1,7 +1,6 @@
 package com.aionemu.gameserver.services.summons;
 
 import java.util.ArrayList;
-import java.util.Collection;
 import java.util.List;
 import java.util.concurrent.Future;
 
@@ -130,13 +129,12 @@ public class SummonsService {
 			}
 		}
 
-		private List<AggroList> findSummonOnlyHaters(Summon owner) {
-			Collection<VisibleObject> npcsKnownByMaster = owner.getMaster().getKnownList().getKnownObjects().values();
+		private List<AggroList> findSummonOnlyHaters(Summon summon) {
 			List<AggroList> aggroLists = new ArrayList<>();
-			npcsKnownByMaster.forEach(object -> {
-				if (object instanceof Creature) {
-					AggroList aggroList = ((Creature) object).getAggroList();
-					if (aggroList.isHating(owner) && !aggroList.isHating(owner.getMaster()))
+			summon.getMaster().getKnownList().forEachObject(object -> {
+				if (object instanceof Creature creature) {
+					AggroList aggroList = creature.getAggroList();
+					if (aggroList.isHating(summon) && !aggroList.isHating(summon.getMaster()))
 						aggroLists.add(aggroList);
 				}
 			});

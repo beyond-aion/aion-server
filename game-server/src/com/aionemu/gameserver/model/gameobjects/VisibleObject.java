@@ -162,7 +162,7 @@ public abstract class VisibleObject extends AionObject {
 	}
 
 	public void updateKnownlist() {
-		getKnownList().doUpdate();
+		getKnownList().update();
 	}
 
 	/**

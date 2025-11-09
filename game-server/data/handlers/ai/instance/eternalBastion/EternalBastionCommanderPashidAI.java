@@ -38,7 +38,7 @@ public class EternalBastionCommanderPashidAI extends EternalBastionAggressiveNpc
 	}
 
 	private void hateCommander(int hate) {
-		if (commander != null && !getOwner().getAggroList().isHating(commander) && PositionUtil.isInRange(getOwner(), commander, 20))
+		if (commander != null && !getOwner().getAggroList().isHating(commander) && isInRange(commander, 20))
 			getOwner().getAggroList().addHate(commander, hate);
 	}
 

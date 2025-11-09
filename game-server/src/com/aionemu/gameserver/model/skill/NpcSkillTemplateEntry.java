@@ -98,17 +98,15 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 		return switch (condTemp.getCondType()) {
 			case NONE -> true;
 			case HELP_FRIEND -> {
-				for (VisibleObject obj : creature.getKnownList().getKnownObjects().values()) {
-					if (obj instanceof Creature target) {
-						if (target.isDead() || target.getLifeStats().isAboutToDie())
-							continue;
-						if ((TribeRelationService.isSupport(creature, target) || TribeRelationService.isFriend(creature, target))
-							&& target.getLifeStats().getHpPercentage() <= condTemp.getHpBelow() && creature.canSee(target)
-							&& PositionUtil.isInRange(creature, target, condTemp.getRange(), false) && GeoService.getInstance().canSee(creature, target)) {
-							creature.setTarget(target);
-							yield true;
-						}
-					}
+				VisibleObject validTarget = creature.getKnownList().findObject(knownObject ->
+					knownObject.isVisible() && knownObject.get() instanceof Creature target && !target.isDead() && !target.getLifeStats().isAboutToDie()
+					&& (TribeRelationService.isSupport(creature, target) || TribeRelationService.isFriend(creature, target))
+					&& target.getLifeStats().getHpPercentage() <= condTemp.getHpBelow() && PositionUtil.isInRange(creature, target, condTemp.getRange(), false)
+					&& GeoService.getInstance().canSee(creature, target)
+				);
+				if (validTarget != null) {
+					creature.setTarget(validTarget);
+					yield true;
 				}
 				yield false;
 			}

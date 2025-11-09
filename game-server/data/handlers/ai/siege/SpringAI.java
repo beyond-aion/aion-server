@@ -8,10 +8,6 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
-import com.aionemu.gameserver.model.stats.container.CreatureLifeStats;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -62,23 +58,11 @@ public class SpringAI extends NpcAI {
 	private void checkForHeal() {
 		if (isDead() || !getPosition().isSpawned())
 			return;
-		for (VisibleObject object : getKnownList().getKnownObjects().values()) {
-			Creature creature = (Creature) object;
-			CreatureLifeStats<?> lifeStats = creature.getLifeStats();
-			if (isInRange(creature, 10) && !creature.getEffectController().hasAbnormalEffect(19116) && !lifeStats.isDead()
-				&& (lifeStats.getCurrentHp() < lifeStats.getMaxHp()))
-				if (creature instanceof SiegeNpc npc) {
-					if (getObjectTemplate().getRace() == npc.getObjectTemplate().getRace()) {
-						doHeal();
-						break;
-					}
-				} else if (creature instanceof Player player) {
-					if (getObjectTemplate().getRace() == player.getRace() && player.isOnline()) {
-						doHeal();
-						break;
-					}
-				}
-		}
+		boolean targetNearby = getKnownList().stream()
+			.anyMatch(o -> o.get() instanceof Creature creature && getRace() == creature.getRace() && !creature.isDead() && !creature.getLifeStats().isFullyRestoredHp()
+			&& isInRange(creature, 10) && !creature.getEffectController().hasAbnormalEffect(19116));
+		if (targetNearby)
+			doHeal();
 	}
 
 	private void doHeal() {

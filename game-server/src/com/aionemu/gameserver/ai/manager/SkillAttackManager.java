@@ -82,11 +82,8 @@ public class SkillAttackManager {
 				NpcSkillTemplate temp = skill.getTemplate();
 				int range = template.getProperties().getFirstTargetRange() == 0 ? Integer.MAX_VALUE : template.getProperties().getFirstTargetRange();
 				VisibleObject newTarget = switch (temp.getTarget()) {
-					case FRIEND -> owner.getKnownList().getKnownObjects().values().stream()
-						.filter(vo -> vo instanceof Npc npc && !npc.isDead() && !npc.getLifeStats().isAboutToDie() && !owner.isEnemy(npc) && owner.canSee(npc)
-							&& PositionUtil.isInRange(owner, npc, range, false) && GeoService.getInstance().canSee(owner, npc))
-						.findAny()
-						.orElse(null);
+					case FRIEND -> owner.getKnownList().findObject(o -> o.isVisible() && o.get() instanceof Npc npc && !npc.isDead() && !npc.getLifeStats().isAboutToDie() && !owner.isEnemy(npc)
+							&& PositionUtil.isInRange(owner, npc, range, false) && GeoService.getInstance().canSee(owner, npc));
 					case ME -> owner;
 					case MOST_HATED -> owner.getAggroList().getTarget(AggroTarget.MOST_HATED);
 					case SECOND_MOST_HATED -> owner.getAggroList().getTarget(AggroTarget.SECOND_MOST_HATED);

@@ -27,7 +27,7 @@ public class DimensionalWaveAI extends UseSkillAndDieAI {
 	}
 
 	private void calculateAndApplyDamage() {
-		getKnownList().getKnownPlayers().values().stream().filter(p -> !p.isDead() && PositionUtil.isInRange(getOwner(), p, 29, true)).forEach(p -> {
+		getKnownList().streamPlayers().filter(p -> !p.isDead() && isInRange(p, 29)).forEach(p -> {
 			int headingTowardsPlayer = PositionUtil.getHeadingTowards(getPosition().getX(), getPosition().getY(), p.getX(), p.getY());
 			int headingMax = getPosition().getHeading(); // 30 or 90
 			int headingMin = headingMax - 60;

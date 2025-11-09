@@ -2,6 +2,7 @@ package admincommands;
 
 import java.util.Iterator;
 import java.util.List;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Item;
@@ -25,7 +26,7 @@ public class PlayerInfo extends AdminCommand {
 
 	public PlayerInfo() {
 		super("playerinfo", "Shows information about a player.");
-		setSyntaxInfo("<player name> <loc|item|group|skills|legion|ap|chars|knownlist|visuallist>");
+		setSyntaxInfo("<player name> <loc|item|group|skills|legion|ap|chars|knownlist>");
 	}
 
 	@Override
@@ -102,11 +103,7 @@ public class PlayerInfo extends AdminCommand {
 			sendInfo(admin, "Others characters of " + target.getName() + " (" + target.getClientConnection().getAccount().size() + ") :");
 			target.getClientConnection().getAccount().forEach(d -> sendInfo(admin, d.getPlayerCommonData().getName()));
 		} else if (params[1].equals("knownlist")) {
-			sendInfo(admin, "KnownList of " + target.getName());
-			target.getKnownList().forEachObject(obj -> sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId()));
-		} else if (params[1].equals("visuallist")) {
-			sendInfo(admin, "VisualList of " + target.getName());
-			target.getKnownList().forEachVisibleObject(obj -> sendInfo(admin, obj.getName() + " objectId:" + obj.getObjectId()));
+			sendInfo(admin, "KnownList of " + target.getName() + target.getKnownList().stream().map(o -> "\n\t" + o).collect(Collectors.joining()));
 		} else {
 			sendInfo(admin);
 		}

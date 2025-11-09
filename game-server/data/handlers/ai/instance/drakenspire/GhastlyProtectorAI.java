@@ -33,7 +33,7 @@ public class GhastlyProtectorAI extends AggressiveNoLootNpcAI {
 	}
 
 	private void aggroPlayer() {
-		getKnownList().getKnownPlayers().values().stream()
+		getKnownList().streamPlayers()
 			.filter(p -> !p.isDead() && PositionUtil.isInRange(p, 152.38f, 518.68f, 1749.6f, 24))
 			.findAny()
 			.ifPresent(p -> getAggroList().addHate(p, 10000));

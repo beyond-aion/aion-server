@@ -13,6 +13,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.ChatType;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.LetterType;
+import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.ItemId;
@@ -121,7 +122,7 @@ public class WebRewardService {
 						qs.setQuestVar(questVar);
 					PacketSendUtility.sendPacket(player, new SM_QUEST_ACTION(ActionType.UPDATE, qs));
 				}
-				VisibleObject questNpc = player.getKnownList().findObject(questNpcId);
+				VisibleObject questNpc = player.getKnownList().findObject(o -> o.get() instanceof Npc npc && npc.getNpcId() == questNpcId);
 				if (questNpc == null || PositionUtil.getDistance(player, questNpc) >= 20)
 					TeleportService.sendTeleportRequest(player, questNpcId); // completing the quest (updates daeva status) calls the reward method again
 			} else {

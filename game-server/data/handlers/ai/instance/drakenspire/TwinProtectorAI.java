@@ -7,7 +7,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 
@@ -53,14 +52,9 @@ public class TwinProtectorAI extends AggressiveNoLootNpcAI implements HpPhases.P
 
 	private void spawnAdds(int npcId, int hpThreshold) {
 		int count = getLifeStats().getHpPercentage() < hpThreshold ? 3 : 1;
-		for (Player p : getKnownList().getKnownPlayers().values()) {
-			if (p != null && !p.isDead() && isInRange(p, 20)) {
-				adds.add((Npc) spawn(npcId, p.getX(), p.getY(), p.getZ(), (byte) 0));
-				count--;
-				if (count <= 0)
-					break;
-			}
-		}
+		getAggroList().streamValidTargets(20)
+			.limit(count)
+			.forEach(target -> adds.add((Npc) spawn(npcId, target.getX(), target.getY(), target.getZ(), (byte) 0)));
 	}
 
 	private void despawnAdds() {

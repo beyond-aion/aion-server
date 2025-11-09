@@ -9,6 +9,7 @@ import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
@@ -234,7 +235,8 @@ public class _14026ALoneDefense extends AbstractQuestHandler {
 				break;
 		}
 		Npc spawn = (Npc) spawn(mobToSpawn, player, x, y, z, (byte) 95);
-		if (spawn.getKnownList().findObject(204044) instanceof Npc target) {
+		VisibleObject target = spawn.getKnownList().findObject(o -> o.get() instanceof Npc npc && npc.getNpcId() == 204020);
+		if (target != null) {
 			spawn.setTarget(target);
 			spawn.getAi().setStateIfNot(AIState.WALKING);
 			spawn.setState(CreatureState.ACTIVE, true);

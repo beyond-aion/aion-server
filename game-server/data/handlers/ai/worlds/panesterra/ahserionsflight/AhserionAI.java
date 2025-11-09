@@ -132,7 +132,7 @@ public class AhserionAI extends AggressiveNpcAI {
 	 * Retail: activate_skillarea 21575
 	 */
 	private void handleIdeDestruction() {
-		getKnownList().getKnownPlayers().values().stream().filter(p -> !p.isDead() && PositionUtil.isInRange(p, 509.64f, 513.25f, 675.145f, 45))
+		getKnownList().streamPlayers().filter(p -> !p.isDead() && PositionUtil.isInRange(p, 509.64f, 513.25f, 675.145f, 45))
 			.forEach(p -> SkillEngine.getInstance().getSkill(getOwner(), 21575, 1, p).useWithoutPropSkill());
 	}
 

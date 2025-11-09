@@ -77,59 +77,33 @@ public abstract class Creature extends VisibleObject {
 		return new AggroList(this);
 	}
 
-	/**
-	 * Return CreatureController of this Creature object.
-	 * 
-	 * @return CreatureController.
-	 */
 	@Override
 	public CreatureController<? extends Creature> getController() {
 		return (CreatureController<?>) super.getController();
 	}
 
-	/**
-	 * @return the lifeStats
-	 */
 	public CreatureLifeStats<? extends Creature> getLifeStats() {
 		return lifeStats;
 	}
 
-	/**
-	 * @param lifeStats
-	 *          the lifeStats to set
-	 */
 	public void setLifeStats(CreatureLifeStats<? extends Creature> lifeStats) {
 		this.lifeStats = lifeStats;
 	}
 
-	/**
-	 * @return the gameStats
-	 */
 	public CreatureGameStats<? extends Creature> getGameStats() {
 		return gameStats;
 	}
 
-	/**
-	 * @param gameStats
-	 *          the gameStats to set
-	 */
 	public void setGameStats(CreatureGameStats<? extends Creature> gameStats) {
 		this.gameStats = gameStats;
 	}
 
 	public abstract byte getLevel();
 
-	/**
-	 * @return the effectController
-	 */
 	public EffectController getEffectController() {
 		return effectController;
 	}
 
-	/**
-	 * @param effectController
-	 *          the effectController to set
-	 */
 	public void setEffectController(EffectController effectController) {
 		this.effectController = effectController;
 	}
@@ -149,19 +123,12 @@ public abstract class Creature extends VisibleObject {
 		return false;
 	}
 
-	/**
-	 * Is creature casting some skill
-	 * 
-	 * @return
-	 */
 	public boolean isCasting() {
 		return castingSkill != null;
 	}
 
 	/**
 	 * Set current casting skill or null when skill ends
-	 * 
-	 * @param castingSkill
 	 */
 	public void setCasting(Skill castingSkill) {
 		if (castingSkill != null)
@@ -169,20 +136,10 @@ public abstract class Creature extends VisibleObject {
 		this.castingSkill = castingSkill;
 	}
 
-	/**
-	 * Current casting skill id
-	 * 
-	 * @return
-	 */
 	public int getCastingSkillId() {
 		return castingSkill != null ? castingSkill.getSkillTemplate().getSkillId() : 0;
 	}
 
-	/**
-	 * Current casting skill
-	 * 
-	 * @return
-	 */
 	public Skill getCastingSkill() {
 		return castingSkill;
 	}
@@ -209,8 +166,6 @@ public abstract class Creature extends VisibleObject {
 
 	/**
 	 * All abnormal effects are checked that disable movements
-	 * 
-	 * @return
 	 */
 	public boolean canPerformMove() {
 		return (!(getEffectController().isInAnyAbnormalState(AbnormalState.CANT_MOVE_STATE) && isSpawned() && canUseSkillInMove()));
@@ -229,17 +184,12 @@ public abstract class Creature extends VisibleObject {
 
 	/**
 	 * All abnormal effects are checked that disable attack
-	 * 
-	 * @return
 	 */
 	public boolean canAttack() {
 		return (!getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE) && !isCasting() && !isInState(CreatureState.RESTING)
 			&& !isInState(CreatureState.PRIVATE_SHOP));
 	}
 
-	/**
-	 * @return state
-	 */
 	public int getState() {
 		return state;
 	}
@@ -280,17 +230,10 @@ public abstract class Creature extends VisibleObject {
 			return (this.state & state.getId()) == state.getId();
 	}
 
-	/**
-	 * @return visualState
-	 */
 	public int getVisualState() {
 		return visualState;
 	}
 
-	/**
-	 * @param visualState
-	 *          the visualState to set
-	 */
 	public void setVisualState(CreatureVisualState visualState) {
 		this.visualState |= visualState.getId();
 	}
@@ -307,17 +250,10 @@ public abstract class Creature extends VisibleObject {
 		return visualState != CreatureVisualState.VISIBLE.getId() && visualState != CreatureVisualState.BLINKING.getId();
 	}
 
-	/**
-	 * @return seeState
-	 */
 	public int getSeeState() {
 		return seeState;
 	}
 
-	/**
-	 * @param seeState
-	 *          the seeState to set
-	 */
 	public void setSeeState(CreatureSeeState seeState) {
 		this.seeState |= seeState.getId();
 	}
@@ -349,49 +285,26 @@ public abstract class Creature extends VisibleObject {
 		return transformModel != null && getTransformModel().isActive();
 	}
 
-	/**
-	 * @return the aggroList
-	 */
 	public final AggroList getAggroList() {
 		return aggroList;
 	}
 
-	/**
-	 * @return the observeController
-	 */
 	public ObserveController getObserveController() {
 		return observeController;
 	}
 
-	/**
-	 * Double dispatch like method
-	 * 
-	 * @param creature
-	 * @return
-	 */
 	public boolean isEnemy(Creature creature) {
 		return creature.isEnemyFrom(this);
 	}
 
-	/**
-	 * @param creature
-	 */
 	public boolean isEnemyFrom(Creature creature) {
 		return false;
 	}
 
-	/**
-	 * @param player
-	 * @return
-	 */
 	public boolean isEnemyFrom(Player player) {
 		return false;
 	}
 
-	/**
-	 * @param npc
-	 * @return
-	 */
 	public boolean isEnemyFrom(Npc npc) {
 		return false;
 	}
@@ -411,6 +324,9 @@ public abstract class Creature extends VisibleObject {
 			if (visualStateExcludingBlinking <= getSeeState())
 				return true;
 			return equals(creature.getMaster()); // traps, summons, etc. should always be visible to the master
+		} else if (object instanceof Pet pet) {
+			// we must prevent sending the pet's spawn packet to others before the master's, as this causes the pet to stay invisible
+			return equals(pet.getMaster()) || canSee(pet.getMaster()) && getKnownList().sees(pet.getMaster());
 		}
 		return super.canSee(object);
 	}
