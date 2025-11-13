@@ -79,9 +79,11 @@
 			<property>gameserver.rates.crafting.crit_chances = 50</property>
 		</config_properties>
 	</event>
-	<event name="Kill Collector" start="2024-07-08T00:00:00" end="2024-08-04T23:59:59">
+	<event name="Kill Collector" start="2025-11-15T00:00:00" end="2025-11-30T23:59:59">
 		<config_properties>
 			<property>gameserver.event.headhunting.enable = true</property>
+			<property>gameserver.event.headhunting.maps = 210050000, 220070000, 301220000, 400020000, 600090000, 600100000</property>
+			<property>gameserver.event.headhunting.consolation_prize_kills = 99999</property>
 		</config_properties>
 	</event>
 	<event name="April Fool's" start="2025-04-01T00:00:00" end="2025-04-01T23:59:59">
@@ -2949,7 +2951,7 @@
 			</gd_rule>
 		</event_drops>
 	</event>
-	<event name="Beritra Lucky Week" start="2025-07-30T00:00:00" end="2025-08-17T23:59:59">
+	<event name="Beritra's Grace" start="2025-11-15T00:00:00" end="2025-11-30T23:59:59">
 		<event_drops>
 			<gd_rule rule_name="Beritra Equipment Chest" chance="100" member_limit="12">
 				<gd_maps>
@@ -3160,9 +3162,9 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Beyond Aion Birthday Event" start="2024-11-15T00:00:00" end="2024-12-01T23:59:59">
+	<event name="Beyond Aion Birthday Event" start="2025-11-15T00:00:00" end="2025-11-30T23:59:59">
 		<event_drops>
-			<gd_rule rule_name="Birthday Coins" chance="30">
+			<gd_rule rule_name="Birthday Coins" chance="100">
 				<gd_maps>
 					<gd_map map_id="400020000" /><!-- Belus -->
 				</gd_maps>
@@ -3198,7 +3200,7 @@
 					<gd_item id="186000409" /><!-- Daeva's Respite Coin -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Birthday Coins" chance="4">
+			<gd_rule rule_name="Birthday Coins" chance="30">
 				<gd_maps>
 					<gd_map map_id="400020000" /><!-- Belus -->
 				</gd_maps>
@@ -3272,7 +3274,7 @@
 					<gd_item id="186000409" /><!-- Daeva's Respite Coin -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Birthday Consumables" chance="10">
+			<gd_rule rule_name="Birthday Consumables" chance="15">
 				<gd_maps>
 					<gd_map map_id="400020000" /><!-- Belus -->
 				</gd_maps>
@@ -3348,11 +3350,11 @@
 					<gd_item id="186000237" /><!-- Ancient Coin -->
 					<gd_item id="188052722" /><!-- [Event] Daeva's Day Kisk Present -->
 					<gd_item id="188051784" /><!-- Birthday Cake Bundle -->
-					<gd_item id="169000011" min_count="40" /><!-- Power Shard: +50 -->
+					<gd_item id="169000011" min_count="40" /><!-- Ancient Power Shard -->
 					<gd_item id="188053628" /><!-- Pallasite Bundle -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Birthday MIX" chance="10">
+			<gd_rule rule_name="Birthday MIX" chance="20">
 				<gd_maps>
 					<gd_map map_id="400020000" /><!-- Belus -->
 				</gd_maps>
@@ -3385,15 +3387,16 @@
 					<gd_npc npc_id="880720" /><!-- Belsal Scout Slayer -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="186000236" chance="30" min_count="2" max_count="10" /><!-- Blood Mark -->
-					<gd_item id="186000243" chance="20" min_count="3" max_count="5" /><!-- Fragmented Ceranium -->
+					<gd_item id="186000236" chance="29.9" min_count="2" max_count="10" /><!-- Blood Mark -->
+					<gd_item id="186000243" chance="20" min_count="3" max_count="5" /><!-- Fragmented Ceramium -->
 					<gd_item id="162000137" chance="20" min_count="2" /><!-- Sublime Life Serum -->
 					<gd_item id="186000059" chance="10" /><!-- Major Ancient Seal -->
 					<gd_item id="166020000" chance="10" /><!-- Omega Enchantment Stone -->
 					<gd_item id="166030005" chance="10" /><!-- Tempering Solution -->
+					<gd_item id="190020091" chance="0.1" /><!-- Potbelly Inquin Egg -->
 				</gd_items>
 			</gd_rule>
-			<gd_rule rule_name="Birthday SUPER_RARE" chance="0.5">
+			<gd_rule rule_name="Birthday Shugo Icebox" chance="3.5">
 				<gd_maps>
 					<gd_map map_id="400020000" /><!-- Belus -->
 				</gd_maps>
@@ -3412,13 +3415,58 @@
 					<gd_npc npc_id="219198" /><!-- protectorate special ops -->
 				</gd_npcs>
 				<gd_items>
-					<gd_item id="188053007" /><!-- [Event] Hyperion's Mythic Weapon Chest -->
-					<gd_item id="188053006" /><!-- [Event] Hyperion's Mythic Armor Chest -->
-					<gd_item id="188053728" /><!-- Beritra's Equipment Box -->
 					<gd_item id="188052936" /><!-- Shugo Icebox -->
-					<gd_item id="187000157" /><!-- Beritra's Phantom Wings -->
-					<gd_item id="190100164" /><!-- Magnificent Clucklich -->
-					<gd_item id="188950019" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Birthday SUPER_RARE" chance="1">
+				<gd_maps>
+					<gd_map map_id="400020000" /><!-- Belus -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="219166" /><!-- protectorate combat officer -->
+					<gd_npc npc_id="219167" /><!-- protectorate hunter -->
+					<gd_npc npc_id="219169" /><!-- protectorate corpsman -->
+					<gd_npc npc_id="219187" /><!-- protectorate fighter -->
+					<gd_npc npc_id="219188" /><!-- protectorate searcher -->
+					<gd_npc npc_id="219189" /><!-- protectorate mage -->
+					<gd_npc npc_id="219190" /><!-- protectorate healer -->
+					<gd_npc npc_id="219194" /><!-- protectorate myrmidon -->
+					<gd_npc npc_id="219195" /><!-- protectorate pathfinder -->
+					<gd_npc npc_id="219196" /><!-- protectorate magistrate -->
+					<gd_npc npc_id="219197" /><!-- protectorate surgeon -->
+					<gd_npc npc_id="219198" /><!-- protectorate special ops -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188950019" chance="30" /><!-- Special Courier Pass (Mythic/Lv. 61-65) -->
+					<gd_item id="188052831" chance="30" /><!-- Dynatoum's Brazen Armor Box -->
+					<gd_item id="188052830" chance="15" /><!-- Dynatoum's Brazen Weapon Box -->
+					<gd_item id="190100156" chance="5" /><!-- Quick Frillneck -->
+					<gd_item id="187000151" chance="5" /><!-- Bright Wing Feather of Allure -->
+					<gd_item id="187000139" chance="5" /><!-- NPC General's Gallery Wings -->
+					<gd_item id="190020174" chance="5" /><!-- Traveling Kitter Egg -->
+					<gd_item id="190020234" chance="5" /><!-- Swordsman Ailu Egg -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Birthday ULTRA_RARE" chance="0.1">
+				<gd_maps>
+					<gd_map map_id="400020000" /><!-- Belus -->
+				</gd_maps>
+				<gd_npcs>
+					<gd_npc npc_id="219166" /><!-- protectorate combat officer -->
+					<gd_npc npc_id="219167" /><!-- protectorate hunter -->
+					<gd_npc npc_id="219169" /><!-- protectorate corpsman -->
+					<gd_npc npc_id="219187" /><!-- protectorate fighter -->
+					<gd_npc npc_id="219188" /><!-- protectorate searcher -->
+					<gd_npc npc_id="219189" /><!-- protectorate mage -->
+					<gd_npc npc_id="219190" /><!-- protectorate healer -->
+					<gd_npc npc_id="219194" /><!-- protectorate myrmidon -->
+					<gd_npc npc_id="219195" /><!-- protectorate pathfinder -->
+					<gd_npc npc_id="219196" /><!-- protectorate magistrate -->
+					<gd_npc npc_id="219197" /><!-- protectorate surgeon -->
+					<gd_npc npc_id="219198" /><!-- protectorate special ops -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188053109" /><!-- [Event] Ahserion's Equipment Box -->
 				</gd_items>
 			</gd_rule>
 		</event_drops>
@@ -3645,7 +3693,7 @@
 					<spot x="1040.0308" y="1125.3003" z="1529.944" h="90" />
 				</spawn>
 				<!-- Cakes Outer Fortress Area -->
-				<spawn npc_id="701952" respawn_time="360" pool="15">
+				<spawn npc_id="701952" respawn_time="300" pool="20">
 					<spot x="1037.1733" y="928.169" z="1489.0814" h="52" />
 					<spot x="1038.1992" y="910.4922" z="1489.0774" h="73" />
 					<spot x="928.2134" y="1011.7362" z="1489.0774" h="15" />
@@ -3728,7 +3776,7 @@
 					<spot x="957.31146" y="1533.2417" z="1523.4377" h="103" />
 				</spawn>
 				<!-- Cakes Inner Fortress Area -->
-				<spawn npc_id="701983" respawn_time="720" pool="5">
+				<spawn npc_id="701983" respawn_time="300" pool="5">
 					<spot x="983.3415" y="991.6242" z="1553.2124" h="9" />
 					<spot x="1065.294" y="1057.0938" z="1553.1906" h="83" />
 					<spot x="1101.096" y="1087.0659" z="1552.1055" h="91" />

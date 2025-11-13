@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.controllers.observer.DeathObserver;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -34,6 +35,14 @@ public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHand
 		super.handleSpawned();
 		ThreadPoolManager.getInstance().schedule(() -> SkillEngine.getInstance().applyEffectDirectly(19186, getOwner(), getOwner()), 3000);
 		spawnShieldNpcs();
+	}
+
+	@Override
+	public void modifyOwnerStat(Stat2 stat) {
+		switch (stat.getStat()) { 	// Tweak for 12p (600 s | 3000 dps)
+			case MAXHP -> stat.setBase(20_880_000);
+			case PHYSICAL_ATTACK -> stat.setBase(2200);
+		}
 	}
 
 	private void spawnShieldNpcs() {
