@@ -99,7 +99,7 @@ public class PvpService {
 	public void doReward(Player victim, float apWinMulti) {
 		DamageList damageList = victim.getAggroList().getFinalDamageList();
 		DamageInfo<Creature> mostDamage = damageList.getMostDamage();
-		if (!(mostDamage.getAttacker() instanceof Player winner)) {
+		if (mostDamage == null || !(mostDamage.getAttacker() instanceof Player winner)) {
 			PacketSendUtility.sendPacket(victim, SM_SYSTEM_MESSAGE.STR_MSG_COMBAT_MY_DEATH());
 			TemporaryPlayerTeam<?> team = victim.getCurrentTeam();
 			if (team != null)
