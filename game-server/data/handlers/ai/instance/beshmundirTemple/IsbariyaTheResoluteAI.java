@@ -9,14 +9,13 @@ import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.geometry.Point3D;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
@@ -112,7 +111,7 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI implements HpPhases.P
 
 		switch (hpPhases.getCurrentPhase()) {
 			case 1:
-				SkillEngine.getInstance().getSkill(getOwner(), 18959, 50, getTargetPlayer()).useNoAnimationSkill();
+				SkillEngine.getInstance().getSkill(getOwner(), 18959, 50, getRandomTarget()).useNoAnimationSkill();
 				spawnSouls();
 				delay = 25000;
 				break;
@@ -144,14 +143,8 @@ public class IsbariyaTheResoluteAI extends AggressiveNpcAI implements HpPhases.P
 		}
 	}
 
-	private Player getTargetPlayer() {
-		List<Player> players = new ArrayList<>();
-		getKnownList().forEachPlayer(player -> {
-			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 40) && player != getTarget()) {
-				players.add(player);
-			}
-		});
-		return Rnd.get(players);
+	private Creature getRandomTarget() {
+		return getAggroList().getTarget(AggroTarget.RANDOM_EXCEPT_CURRENT_TARGET, 40);
 	}
 
 	private void scheduleSpecial(int delay) {

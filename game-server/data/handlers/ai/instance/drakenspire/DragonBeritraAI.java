@@ -1,7 +1,7 @@
 package ai.instance.drakenspire;
 
-import ai.AggressiveNoLootNpcAI;
-import ai.AggressiveNpcAI;
+import java.util.Comparator;
+import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
@@ -10,8 +10,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
-import java.util.Comparator;
-import java.util.concurrent.Future;
+import ai.AggressiveNoLootNpcAI;
 
 /**
  *
@@ -31,11 +30,10 @@ public class DragonBeritraAI extends AggressiveNoLootNpcAI {
 	 * => Spawn soul extinction fields on all players in descending order i.e., starting with the player, which dealt the most damage.
 	 */
 	private void wipe() {
-		getAggroList().getList().stream().filter(ai -> ai.getAttacker() instanceof Player).sorted(
-			Comparator.comparingInt(AggroInfo::getDamage).reversed()).forEach(ai -> {
-			Player p = (Player) ai.getAttacker();
-			spawn(855450, p.getX(), p.getY(), p.getZ(), (byte) 0);
-		});
+		getAggroList().stream()
+			.filter(ai -> ai.getAttacker() instanceof Player)
+			.sorted(Comparator.comparingInt(AggroInfo::getDamage).reversed())
+			.forEach(ai -> spawn(855450, ai.getAttacker().getX(), ai.getAttacker().getY(), ai.getAttacker().getZ(), (byte) 0));
 		// STR_CHAT_IDSeal_Vritra_Human_Gossip_09
 		PacketSendUtility.broadcastMessage(getOwner(), 1501276);
 	}

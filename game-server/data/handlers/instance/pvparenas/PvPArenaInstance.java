@@ -7,7 +7,8 @@ import java.util.List;
 import java.util.concurrent.Future;
 
 import com.aionemu.commons.utils.Rnd;
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
+import com.aionemu.gameserver.controllers.attack.DamageInfo;
+import com.aionemu.gameserver.controllers.attack.DamageList;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.model.autogroup.AGPlayer;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -153,18 +154,19 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 		calculateAndUpdatePoints(npc, points);
 	}
 
+	@SuppressWarnings("unchecked")
 	private void calculateAndUpdatePoints(Creature victim, int points) {
 		if (!instanceScore.isStartProgress())
 			return;
 
-		int totalDamage = victim.getAggroList().getTotalDamage();
-		for (AggroInfo aggroInfo : victim.getAggroList().getFinalDamageList(shouldMergeGroupDamage())) {
-			if (aggroInfo.getDamage() == 0)
-				continue;
-			int rewardPoints = points * aggroInfo.getDamage() / totalDamage;
-			if (aggroInfo.getAttacker() instanceof Creature && ((Creature) aggroInfo.getAttacker()).getMaster() instanceof Player attacker) {
+		DamageList damageList = victim.getAggroList().getFinalDamageList();
+		int totalDamage = damageList.getTotalDamage();
+		Collection<DamageInfo<?>> damages = (Collection<DamageInfo<?>>) (shouldMergeGroupDamage() ? damageList.toTeamDamages().getCreatureOrTeamDamages() : damageList.getCreatureDamages());
+		for (DamageInfo<?> damageInfo : damages) {
+			int rewardPoints = points * damageInfo.getDamage() / totalDamage;
+			if (damageInfo.getAttacker() instanceof Player attacker) {
 				updatePoints(getStatReward(attacker), attacker, victim, rewardPoints);
-			} else if (aggroInfo.getAttacker() instanceof TemporaryPlayerTeam<?> team) {
+			} else if (damageInfo.getAttacker() instanceof TemporaryPlayerTeam<?> team) {
 				Player leader = team.getLeaderObject();
 				updatePoints(getStatReward(leader), leader, victim, rewardPoints);
 				team.getOnlineMembers().stream().filter(p -> !p.equals(leader)).forEach(p -> sendSystemMsg(p, victim, rewardPoints));

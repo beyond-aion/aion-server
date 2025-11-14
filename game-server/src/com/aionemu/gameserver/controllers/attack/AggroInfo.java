@@ -1,6 +1,6 @@
 package com.aionemu.gameserver.controllers.attack;
 
-import com.aionemu.gameserver.model.gameobjects.AionObject;
+import com.aionemu.gameserver.model.gameobjects.Creature;
 
 /**
  * AggroInfo: - hate of creature - damage of creature
@@ -10,83 +10,50 @@ import com.aionemu.gameserver.model.gameobjects.AionObject;
 public class AggroInfo {
 
 	private static final int HATE_REDUCE_VALUE = 364; // most retail npcs lose 364 hate. TODO: find formula
-	private AionObject attacker;
+	private final Creature attacker;
 	private int hate;
 	private int damage;
 	private long lastInteractionTime = 0;
 	private int hateReduceCount = 1;
 
-	/**
-	 * @param attacker
-	 */
-	AggroInfo(AionObject attacker) {
+	AggroInfo(Creature attacker) {
 		this.attacker = attacker;
 	}
 
-	/**
-	 * @return attacker
-	 */
-	public AionObject getAttacker() {
+	public Creature getAttacker() {
 		return attacker;
 	}
 
-	/**
-	 * @param damage
-	 */
-	public void addDamage(int damageValue) {
-		this.damage += damageValue;
-		if (this.damage < 0)
-			this.damage = 0;
+	public void addDamage(int damage) {
+		if (damage > 0)
+			this.damage += damage;
 	}
 
-	/**
-	 * @param damage
-	 */
-	public void addHate(int damageValue) {
-		this.hate += damageValue;
+	public void addHate(int hate) {
+		this.hate += hate;
 		if (this.hate < 1)
 			this.hate = 1;
 		lastInteractionTime = System.currentTimeMillis();
 		hateReduceCount = 1;
 	}
 
-	/**
-	 * @return hate
-	 */
 	public int getHate() {
 		return this.hate;
 	}
 
-	/**
-	 * @param hate
-	 */
 	public void setHate(int hate) {
 		this.hate = hate;
 	}
 
-	/**
-	 * @return damage
-	 */
 	public int getDamage() {
 		return this.damage;
-	}
-
-	/**
-	 * @param damage
-	 */
-	public void setDamage(int damage) {
-		this.damage = damage;
 	}
 
 	public long getLastInteractionTime() {
 		return lastInteractionTime;
 	}
 
-	public int getHateReduceCount() {
-		return hateReduceCount;
-	}
-
-	public void reduceHate() {
+	void reduceHate() {
 		if (hate > 1) {
 			hate -= HATE_REDUCE_VALUE * hateReduceCount;
 			hateReduceCount++;

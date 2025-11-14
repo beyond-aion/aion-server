@@ -118,7 +118,7 @@ public class EmpoweredAgent extends AbstractSiegeProtectorAI implements HpPhases
 		if (otherAgent != null && PositionUtil.getDistance(getOwner(), otherAgent, false) <= 5) {
 			getOwner().getEffectController().removeEffect(21779);
 			getOwner().getLifeStats().setCurrentHpPercent(100);
-			aggroOtherAgent(otherAgent);
+			getAggroList().addHate(otherAgent, 100_000_000);
 			onReactiveThinking(otherAgent);
 		} else {
 			activationTask = ThreadPoolManager.getInstance().schedule(this::tryActivating, 5000);
@@ -131,10 +131,6 @@ public class EmpoweredAgent extends AbstractSiegeProtectorAI implements HpPhases
 			case 235065 -> getOwner().getPosition().getWorldMapInstance().getNpc(235064); // Mastarius
 			default -> null;
 		};
-	}
-
-	private void aggroOtherAgent(Npc otherAgent) {
-		getOwner().getAggroList().addHate(otherAgent, 100_000_000);
 	}
 
 	private void onReactiveThinking(Npc otherAgent) {
@@ -153,7 +149,7 @@ public class EmpoweredAgent extends AbstractSiegeProtectorAI implements HpPhases
 	}
 
 	private void resetPlayerHate() {
-		getAggroList().getList().stream().filter(info -> info.getAttacker() instanceof Player).forEach(info -> info.setHate(0));
+		getAggroList().stream().filter(info -> info.getAttacker() instanceof Player).forEach(info -> info.setHate(0));
 	}
 
 	private void spawnFlag() {
@@ -181,7 +177,7 @@ public class EmpoweredAgent extends AbstractSiegeProtectorAI implements HpPhases
 
 	private void onGuardSpawnEvent() {
 		int worldId = getOwner().getWorldId();
-		float guardAmount = getOwner().getAggroList().getList().size() / 2.5f;
+		float guardAmount = getAggroList().stream().filter(aggroInfo -> aggroInfo.getHate() > 0).count() / 2.5f;
 		if (guardAmount < 6)
 			guardAmount = 6;
 		for (int i = 0; i < guardAmount; i++) {

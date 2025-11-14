@@ -1,8 +1,9 @@
 package ai.worlds.inggison;
 
+import com.aionemu.gameserver.ai.AIActions;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.AggressiveNpcAI;
 
@@ -17,10 +18,21 @@ public class CloneOfBarrierAI extends AggressiveNpcAI {
 	}
 
 	@Override
+	protected void handleSpawned() {
+		super.handleSpawned();
+		// delay for spawn animation and because KnownList isn't initialized yet
+		ThreadPoolManager.getInstance().schedule(() -> {
+			if (getKnownList().getObject(getCreatorId()) instanceof Npc omega) {
+				getOwner().setTarget(omega);
+				AIActions.useSkill(this, 18671);
+			}
+		}, 3000);
+	}
+
+	@Override
 	protected void handleDied() {
-		VisibleObject object = getKnownList().findObject(216516); // Omega
-		if (object instanceof Npc omega && !omega.isDead() && isInRange(omega, 5))
-			omega.getEffectController().removeEffect(18671);
 		super.handleDied();
+		if (getKnownList().getObject(getCreatorId()) instanceof Npc omega)
+			omega.getEffectController().removeEffect(18671);
 	}
 }

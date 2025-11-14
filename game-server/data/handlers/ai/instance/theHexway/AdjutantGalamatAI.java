@@ -4,7 +4,6 @@ import java.util.List;
 import java.util.concurrent.ScheduledFuture;
 import java.util.concurrent.atomic.AtomicBoolean;
 import java.util.concurrent.atomic.AtomicInteger;
-import java.util.stream.Collectors;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -16,7 +15,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.ai.Percentage;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.SummonerAI;
@@ -58,8 +56,7 @@ public class AdjutantGalamatAI extends SummonerAI {
 				shieldPhase.set(false);
 				if (addSpawnTask != null && !addSpawnTask.isDone())
 					addSpawnTask.cancel(true);
-				List<Player> playersInRange = getKnownList().getKnownPlayers().values().stream().filter(p -> PositionUtil.isInRange(p, getOwner(), 30))
-					.collect(Collectors.toList());
+				List<Player> playersInRange = getKnownList().streamPlayers().filter(p -> isInRange(p, 30)).toList();
 				if (playersInRange.isEmpty())
 					return;
 				int dmgPerPlayer = damageInShieldPhase.getAndSet(0) / playersInRange.size();

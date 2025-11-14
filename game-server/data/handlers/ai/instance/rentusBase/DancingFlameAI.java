@@ -6,7 +6,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
@@ -31,22 +30,10 @@ public class DancingFlameAI extends GeneralNpcAI {
 	}
 
 	private void startBuffTask() {
-		buffTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new Runnable() {
-
-			@Override
-			public void run() {
-				if (isAnyPlayerInRange())
-					SkillEngine.getInstance().getSkill(getOwner(), getNpcId() == 282998 ? 20536 : 20535, 60, getOwner()).useNoAnimationSkill();
-			}
-
+		buffTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(() -> {
+			if (getKnownList().streamPlayers().anyMatch(p -> isInRange(p, 10)))
+				SkillEngine.getInstance().getSkill(getOwner(), getNpcId() == 282998 ? 20536 : 20535, 60, getOwner()).useNoAnimationSkill();
 		}, 10000, 9000);
-	}
-
-	private boolean isAnyPlayerInRange() {
-		for (Player player : getKnownList().getKnownPlayers().values())
-			if (isInRange(player, 10))
-				return true;
-		return false;
 	}
 
 	@Override

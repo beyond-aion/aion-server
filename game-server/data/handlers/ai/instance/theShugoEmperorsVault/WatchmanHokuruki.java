@@ -6,6 +6,7 @@ import java.util.List;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
@@ -73,9 +74,10 @@ public class WatchmanHokuruki extends IDSweep_Bosses implements HpPhases.PhaseHa
 	}
 
 	private void rndSpawn(int npcId, int count) {
+		Creature mostHated = getAggroList().getTarget(AggroTarget.MOST_HATED);
 		for (int i = 0; i < count; i++) {
 			Npc npc = (Npc) rndSpawnInRange(npcId, 3, 5);
-			npc.getAggroList().addHate(getOwner().getAggroList().getMostHated(), 1);
+			npc.getAggroList().addHate(mostHated, 1);
 		}
 	}
 }

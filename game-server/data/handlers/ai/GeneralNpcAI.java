@@ -7,9 +7,9 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.handler.*;
 import com.aionemu.gameserver.ai.manager.SkillAttackManager;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 
@@ -114,14 +114,12 @@ public class GeneralNpcAI extends NpcAI {
 
 	@Override
 	public AttackIntention chooseAttackIntention() {
-		VisibleObject currentTarget = getTarget();
-		Creature mostHated = getAggroList().getMostHated();
-
-		if (mostHated == null || mostHated.isDead())
-			return AttackIntention.FINISH_ATTACK;
-
-		if (currentTarget == null)
+		if (!(getTarget() instanceof Creature target) || !getAggroList().isHating(target)) {
+			Creature mostHated = getAggroList().getTarget(AggroTarget.MOST_HATED);
+			if (mostHated == null)
+				return AttackIntention.FINISH_ATTACK;
 			onCreatureEvent(AIEventType.TARGET_CHANGED, mostHated);
+		}
 
 		if (chooseSkillAttack(getOwner().getObjectTemplate().getAttackRange() == 0))
 			return AttackIntention.SKILL_ATTACK;

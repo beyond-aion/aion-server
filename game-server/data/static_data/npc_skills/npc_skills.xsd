@@ -42,7 +42,6 @@
 		<xs:attribute name="cond_type" type="ConditionType" />
 		<xs:attribute name="range" type="xs:int" />
 		<xs:attribute name="hp_below" type="xs:int" />
-		<xs:attribute name="skill_id" type="xs:int" />
 		<xs:attribute name="npc_id" type="xs:int" />
 		<xs:attribute name="delay" type="xs:int" />
 		<xs:attribute name="despawn_time" type="xs:int" />
@@ -86,7 +85,6 @@
 			<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_III" />
 			<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_IV" />
 			<xs:enumeration value="TARGET_HAS_CARVED_SIGNET_LEVEL_V" />
-			<xs:enumeration value="SELECT_TARGET_AFFECTED_BY_SKILL" />
 			<xs:enumeration value="NPC_IS_ALIVE" />
 		</xs:restriction>
 	</xs:simpleType>
@@ -98,7 +96,7 @@
 			<xs:enumeration value="SECOND_MOST_HATED" />
 			<xs:enumeration value="THIRD_MOST_HATED" />
 			<xs:enumeration value="RANDOM" />
-			<xs:enumeration value="RANDOM_EXCEPT_MOST_HATED" />
+			<xs:enumeration value="RANDOM_EXCEPT_CURRENT_TARGET" />
 			<xs:enumeration value="NONE" />
 		</xs:restriction>
 	</xs:simpleType>

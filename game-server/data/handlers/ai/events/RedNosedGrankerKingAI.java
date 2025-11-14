@@ -46,8 +46,7 @@ public class RedNosedGrankerKingAI extends OneDmgAI implements HpPhases.PhaseHan
 
 	@Override
 	protected void handleDied() {
-		long chestSpawnCount = getAggroList().getList().stream()
-			.filter(a -> a.getAttacker() instanceof Player && ((Player) a.getAttacker()).isOnline() && isInRange((Player) a.getAttacker(), 50)).count();
+		long chestSpawnCount = getAggroList().stream().filter(a -> a.getAttacker() instanceof Player p && isInRange(p, 50)).count();
 		for (int i = 0; i < chestSpawnCount; i++)
 			rndSpawnInRange(701457, 1, 6); // stolen solorius box
 

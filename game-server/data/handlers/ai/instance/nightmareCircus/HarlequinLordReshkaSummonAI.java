@@ -1,7 +1,7 @@
 package ai.instance.nightmareCircus;
 
 import com.aionemu.gameserver.ai.AIName;
-import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 
 import ai.AggressiveNpcAI;
@@ -19,10 +19,8 @@ public class HarlequinLordReshkaSummonAI extends AggressiveNpcAI {
 	@Override
 	protected void handleSpawned() {
 		Npc boss = getPosition().getWorldMapInstance().getNpc(233453);
-		if (boss != null && !boss.isDead()) {
-			Creature player = boss.getPosition().getWorldMapInstance().getNpc(233453).getAggroList().getMostHated();
-			getAggroList().addHate(player, 1);
-		}
+		if (boss != null && !boss.isDead())
+			getAggroList().addHate(boss.getAggroList().getTarget(AggroTarget.MOST_HATED), 1);
 		super.handleSpawned();
 	}
 }

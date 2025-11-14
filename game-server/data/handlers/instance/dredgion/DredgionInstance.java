@@ -247,8 +247,10 @@ public class DredgionInstance extends GeneralInstanceHandler {
 
 	@Override
 	public void onDie(Npc npc) {
-		int hpGauge = npc.getObjectTemplate().getHpGauge();
 		Player mostPlayerDamage = npc.getAggroList().getMostPlayerDamage();
+		if (mostPlayerDamage == null)
+			return;
+		int hpGauge = npc.getObjectTemplate().getHpGauge();
 		if (hpGauge <= 5) {
 			updateScore(mostPlayerDamage, npc, 12, false);
 		} else if (hpGauge <= 9) {

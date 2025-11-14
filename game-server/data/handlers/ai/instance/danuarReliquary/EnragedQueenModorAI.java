@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.animations.AttackHandAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
@@ -213,13 +214,13 @@ public class EnragedQueenModorAI extends AggressiveNpcAI implements HpPhases.Pha
 								PositionUtil.getHeadingTowards(loc.getX(), loc.getY(), 256.62f, 257.79f));
 						break;
 					case 4:
-						Vector3f lookAt = null;
-						Creature cr = getOwner().getAggroList().getMostHated();
-						if (cr != null && !cr.isDead()) {
-							lookAt = new Vector3f(cr.getX(), cr.getY(), cr.getZ());
-						}
-						World.getInstance().updatePosition(getOwner(), 256.62f, 257.79f, 241.79f,
-								lookAt == null ? (byte) Rnd.nextInt(120) : PositionUtil.getHeadingTowards(256.62f, 257.79f, lookAt.getX(), lookAt.getY()));
+						byte heading;
+						Creature mostHated = getAggroList().getTarget(AggroTarget.MOST_HATED);
+						if (mostHated != null)
+							heading = PositionUtil.getHeadingTowards(256.62f, 257.79f, mostHated.getX(), mostHated.getY());
+						else
+							heading = (byte) Rnd.nextInt(120);
+						World.getInstance().updatePosition(getOwner(), 256.62f, 257.79f, 241.79f, heading);
 						break;
 					case 2:
 					case 6:

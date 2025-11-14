@@ -4,7 +4,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 import ai.UseSkillAndDieAI;
@@ -27,7 +26,7 @@ public class DimensionalWaveSmallAI extends UseSkillAndDieAI {
 	}
 
 	private void calculateAndApplyDamage() {
-		getKnownList().getKnownPlayers().values().stream().filter(p -> !p.isDead() && PositionUtil.isInRange(getOwner(), p, 22, true))
+		getKnownList().streamPlayers().filter(p -> !p.isDead() && isInRange(p, 22))
 			.forEach(p -> SkillEngine.getInstance().applyEffect(21874, getOwner(), p));
 	}
 }

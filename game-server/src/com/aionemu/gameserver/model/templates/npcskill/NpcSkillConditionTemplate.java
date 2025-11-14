@@ -16,8 +16,6 @@ public class NpcSkillConditionTemplate {
 	protected NpcSkillCondition condType = NpcSkillCondition.NONE;
 	@XmlAttribute(name = "hp_below")
 	protected int hpBelow = 50;
-	@XmlAttribute(name = "skill_id")
-	protected int skillId;
 	@XmlAttribute(name = "range")
 	protected int range = 10;
 	@XmlAttribute(name = "npc_id")
@@ -35,10 +33,6 @@ public class NpcSkillConditionTemplate {
 
 	public int getHpBelow() {
 		return hpBelow;
-	}
-
-	public int getSkillId() {
-		return skillId;
 	}
 
 	public int getRange() {

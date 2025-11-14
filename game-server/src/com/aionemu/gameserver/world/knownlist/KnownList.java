@@ -1,16 +1,15 @@
 package com.aionemu.gameserver.world.knownlist;
 
-import java.util.Collections;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
+import java.util.function.Predicate;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.model.animations.ObjectDeleteAnimation;
-import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -21,8 +20,9 @@ import com.aionemu.gameserver.world.MapRegion;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- * The Knownlist contains every object the owner currently knows (visible and invisble). Which objects are found is controlled by distance and
- * awareness modifiers. Knowing is always a two way relation, so if A knows B, then B also knows A. 
+ * The KnownList contains every object the owner currently knows (visible and invisible). Which objects are found is controlled by distance and
+ * awareness modifiers.<br>
+ * Knowing is always a two-way relation, so if A knows B, then B also knows A. If just one is not aware of the other, both can't know each other.
  * 
  * @author -Nemesiss-, kosyachok, Neon
  */
@@ -30,57 +30,28 @@ public class KnownList {
 
 	private static final Logger log = LoggerFactory.getLogger(KnownList.class);
 
-	/**
-	 * Owner of this KnownList.
-	 */
 	protected final VisibleObject owner;
-
-	/**
-	 * List of objects that this KnownList owner knows
-	 */
-	protected final Map<Integer, VisibleObject> knownObjects = new ConcurrentHashMap<>();
-
-	/**
-	 * List of player that this KnownList owner knows
-	 */
-	protected volatile Map<Integer, Player> knownPlayers;
-
-	/**
-	 * List of objects that this KnownList owner sees
-	 */
-	protected final Map<Integer, VisibleObject> visualObjects = new ConcurrentHashMap<>();
+	protected final Map<Integer, KnownObject> knownObjects = new ConcurrentHashMap<>();
 
 	public KnownList(VisibleObject owner) {
 		this.owner = owner;
 	}
 
 	/**
-	 * Do KnownList update.
+	 * Updates the cached visibility state of all objects in this list and adds or removes objects based on their current distance to the owner.
 	 */
-	public synchronized void doUpdate() {
-		try {
-			forgetObjects();
-			findVisibleObjects();
-		} catch (Exception e) {
-			log.error("Exception during KnownList update of {}", owner, e);
-		}
+	public synchronized void update() {
+		forgetObjectsOrUpdateVisibility();
+		findVisibleObjects();
 	}
 
 	/**
-	 * Clear known list. Used when object is despawned.
-	 * 
-	 * @param animation
-	 *          - the animation others will see on despawn
+	 * Removes all objects from this list and sends a despawn animation for the owner to all removed players.
 	 */
-	public void clear(ObjectDeleteAnimation animation) {
-		for (VisibleObject object : knownObjects.values())
-			object.getKnownList().del(owner, animation);
-
+	public synchronized void clear(ObjectDeleteAnimation animation) {
+		for (KnownObject object : knownObjects.values())
+			object.get().getKnownList().del(owner, animation);
 		knownObjects.clear();
-		if (knownPlayers != null) {
-			knownPlayers.clear();
-		}
-		visualObjects.clear();
 	}
 
 	/**
@@ -94,56 +65,46 @@ public class KnownList {
 	 * Checks if owner sees the object.
 	 */
 	public boolean sees(VisibleObject object) {
-		return visualObjects.containsKey(object.getObjectId());
+		KnownObject knownObject = knownObjects.get(object.getObjectId());
+		return knownObject != null && knownObject.isVisible();
 	}
 
-	/**
-	 * Add VisibleObject to this KnownList.
-	 * 
-	 * @param object
-	 */
 	private boolean add(VisibleObject object) {
 		if (!isAwareOf(object))
 			return false;
-
-		if (knownObjects.put(object.getObjectId(), object) == null) {
-			if (object instanceof Player) {
-				checkKnownPlayersInitialized();
-				knownPlayers.put(object.getObjectId(), (Player) object);
-			}
-
-			updateVisibleObject(object);
-			return true;
-		}
-
-		return false;
+		KnownObject knownObject = new KnownObject(object);
+		if (knownObjects.putIfAbsent(object.getObjectId(), knownObject) != null)
+			return false;
+		updateVisibility(knownObject);
+		return true;
 	}
 
 	/**
-	 * Updates the visibility state in this {@link KnownList}, depending on the current see state of the {@link KnownList} owner.<br>
-	 * IMPORTANT: This method should only be called if the owner already knows the given object. There are no checks preventing adding unknown objects
-	 * to in sight list.
+	 * Updates the object's cached visibility state in this list, depending on the current see state of the owner.
 	 */
-	public void updateVisibleObject(VisibleObject other) {
-		if (owner.canSee(other))
-			addToVisibleObjects(other);
-		else
-			delFromVisibleObjects(other, ObjectDeleteAnimation.FADE_OUT);
+	public void updateVisibleObject(VisibleObject object) {
+		KnownObject knownObject = knownObjects.get(object.getObjectId());
+		if (knownObject != null)
+			updateVisibility(knownObject);
 	}
 
-	private void addToVisibleObjects(VisibleObject object) {
-		if (visualObjects.putIfAbsent(object.getObjectId(), object) == null) {
-			try {
-				owner.getController().see(object);
-			} catch (Exception e) {
-				log.error("", e);
-			}
-			if (object instanceof Player) {
-				Pet pet = ((Player) object).getPet(); // pet spawn packet must be sent after SM_PLAYER_INFO, otherwise the pet will not be displayed
-				// only add if the pet can know this knownlists owner (currently players), otherwise we get memory leaks if the pet gets dismissed (despawns)
-				if (pet != null && pet.getKnownList().isAwareOf(owner))
-					addToVisibleObjects(pet);
-			}
+	private void updateVisibility(KnownObject knownObject) {
+		boolean visible = owner.canSee(knownObject.get());
+		if (!knownObject.updateVisible(visible))
+			return;
+		if (visible) {
+			notifySee(knownObject.get());
+		} else {
+			notifyNotSee(knownObject.get(), ObjectDeleteAnimation.FADE_OUT);
+		}
+		updatePetVisibility(knownObject); // pet spawn packet must be sent after SM_PLAYER_INFO, otherwise the pet will not be displayed
+	}
+
+	private void updatePetVisibility(KnownObject knownObject) {
+		if (knownObject.get() instanceof Player player && player.getPet() instanceof Pet pet) {
+			KnownObject petKnownObject = knownObjects.get(pet.getObjectId());
+			if (petKnownObject != null)
+				updateVisibility(petKnownObject);
 		}
 	}
 
@@ -155,45 +116,48 @@ public class KnownList {
 	 *          - the disappear animation others will see
 	 */
 	private void del(VisibleObject object, ObjectDeleteAnimation animation) {
-		if (knownObjects.remove(object.getObjectId()) != null) {
-			if (knownPlayers != null)
-				knownPlayers.remove(object.getObjectId());
-			delFromVisibleObjects(object, animation);
-			try {
-				owner.getController().notKnow(object);
-			} catch (Exception e) {
-				log.error("", e);
-			}
+		KnownObject knownObject = knownObjects.remove(object.getObjectId());
+		if (knownObject != null) {
+			if (knownObject.updateVisible(false))
+				notifyNotSee(object, animation);
+			notifyNotKnow(object);
+		}
+	}
+
+	private void notifySee(VisibleObject object) {
+		try {
+			owner.getController().see(object);
+		} catch (Exception e) {
+			log.error("", e);
+		}
+	}
+
+	private void notifyNotSee(VisibleObject object, ObjectDeleteAnimation animation) {
+		try {
+			owner.getController().notSee(object, animation);
+		} catch (Exception e) {
+			log.error("", e);
+		}
+	}
+
+	private void notifyNotKnow(VisibleObject object) {
+		try {
+			owner.getController().notKnow(object);
+		} catch (Exception e) {
+			log.error("", e);
 		}
 	}
 
 	/**
-	 * Deletes VisibleObject.
-	 * 
-	 * @param object
-	 * @param animation
-	 *          - the disappear animation others will see
+	 * forget out of distance objects or update visible state.
 	 */
-	private void delFromVisibleObjects(VisibleObject object, ObjectDeleteAnimation animation) {
-		if (visualObjects.remove(object.getObjectId()) != null) {
-			if (object instanceof Player player && player.getPet() != null) // pets have no visual/see state, so we sync visibility with their master
-				delFromVisibleObjects(player.getPet(), ObjectDeleteAnimation.FADE_OUT);
-			try {
-				owner.getController().notSee(object, animation);
-			} catch (Exception e) {
-				log.error("", e);
-			}
-		}
-	}
-
-	/**
-	 * forget out of distance objects.
-	 */
-	private void forgetObjects() {
-		for (VisibleObject object : knownObjects.values()) {
-			if (!PositionUtil.isInRange(owner, object, getVisibleDistance(object))) {
-				del(object, ObjectDeleteAnimation.NONE);
-				object.getKnownList().del(owner, ObjectDeleteAnimation.NONE);
+	private void forgetObjectsOrUpdateVisibility() {
+		for (KnownObject object : knownObjects.values()) {
+			if (PositionUtil.isInRange(owner, object.get(), getVisibleDistance(object.get()))) {
+				updateVisibility(object);
+			} else {
+				del(object.get(), ObjectDeleteAnimation.NONE);
+				object.get().getKnownList().del(owner, ObjectDeleteAnimation.NONE);
 			}
 		}
 	}
@@ -206,20 +170,16 @@ public class KnownList {
 			return;
 
 		WorldPosition position = owner.getPosition();
-		if (owner instanceof Npc) {
-			if (((Creature) owner).isFlag()) {
-				position.getWorldMapInstance().forEachPlayer(player -> {
-					if (add(player)) {
-						player.getKnownList().add(owner);
-					}
-				});
-			}
+		if (owner instanceof Npc npc && npc.isFlag()) {
+			position.getWorldMapInstance().forEachPlayer(player -> {
+				if (player.getKnownList().add(owner)) {
+					add(player);
+				}
+			});
 		} else if (owner instanceof Player) {
 			position.getWorldMapInstance().forEachNpc(npc -> {
-				if (npc.isFlag()) {
-					if (add(npc)) {
-						npc.getKnownList().add(owner);
-					}
+				if (npc.isFlag() && npc.getKnownList().add(owner)) {
+					add(npc);
 				}
 			});
 		}
@@ -231,16 +191,14 @@ public class KnownList {
 				if (!isAwareOf(newObject))
 					continue;
 
-				if (knownObjects.containsKey(newObject.getObjectId())) {
-					updateVisibleObject(newObject);
+				if (knows(newObject))
 					continue;
-				}
 
 				if (!PositionUtil.isInRange(owner, newObject, getVisibleDistance(newObject)))
 					continue;
 
-				if (add(newObject))
-					newObject.getKnownList().add(owner);
+				if (newObject.getKnownList().add(owner))
+					add(newObject);
 			}
 		}
 	}
@@ -259,76 +217,55 @@ public class KnownList {
 		return newObject.getVisibleDistance();
 	}
 
-	public void forEachNpc(Consumer<Npc> consumer) {
-		forEachObject(o -> {
-			if (o instanceof Npc npc)
-				consumer.accept(npc);
-		});
-	}
-
-	public int forEachNpcWithOwner(BiConsumer<Npc, VisibleObject> consumer, int iterationLimit) {
-		int counter = 0;
-		for (VisibleObject newObject : knownObjects.values()) {
-			if (newObject instanceof Npc npc) {
-				if (++counter > iterationLimit)
-					break;
-				try {
-					consumer.accept(npc, owner);
-				} catch (Exception ex) {
-					log.error("Exception when iterating over npcs known by " + owner, ex);
-				}
-			}
-		}
-		return counter;
-	}
-
-	public void forEachPlayer(Consumer<Player> consumer) {
-		if (knownPlayers != null)
-			CollectionUtil.forEach(knownPlayers.values(), consumer, (player, exception) -> log.error("Could not perform operation on " + player + " known by " + owner, exception));
-	}
-
-	public void forEachObject(Consumer<VisibleObject> consumer) {
-		CollectionUtil.forEach(knownObjects.values(), consumer, (object, exception) -> log.error("Could not perform operation on " + object + " known by " + owner, exception));
-	}
-
-	public void forEachVisibleObject(Consumer<VisibleObject> consumer) {
-		CollectionUtil.forEach(visualObjects.values(), consumer, (object, exception) -> log.error("Could not perform operation on " + object + " seen by " + owner, exception));
-	}
-
-	public Map<Integer, VisibleObject> getKnownObjects() {
-		return knownObjects;
-	}
-
-	public Map<Integer, Player> getKnownPlayers() {
-		return knownPlayers != null ? knownPlayers : Collections.emptyMap();
-	}
-
-	private void checkKnownPlayersInitialized() {
-		if (knownPlayers == null) {
-			synchronized (this) {
-				if (knownPlayers == null)
-					knownPlayers = new ConcurrentHashMap<>();
-			}
-		}
-	}
-
-	/**
-	 * @return The visible object with the given template ID or null if not found.
-	 */
-	public VisibleObject findObject(int templateId) {
-		for (VisibleObject v : knownObjects.values()) {
-			if (v.getObjectTemplate().getTemplateId() == templateId)
-				return v;
+	public VisibleObject findObject(Predicate<? super KnownObject> predicate) {
+		for (KnownObject value : knownObjects.values()) {
+			if (predicate.test(value))
+				return value.get();
 		}
 		return null;
 	}
 
 	public VisibleObject getObject(int targetObjectId) {
-		return knownObjects.get(targetObjectId);
+		KnownObject knownObject = knownObjects.get(targetObjectId);
+		return knownObject == null ? null : knownObject.get();
 	}
 
 	public Player getPlayer(int targetObjectId) {
-		return knownPlayers == null ? null : knownPlayers.get(targetObjectId);
+		KnownObject knownObject = knownObjects.get(targetObjectId);
+		return knownObject != null && knownObject.get() instanceof Player player ? player : null;
 	}
 
+	public void forEach(Consumer<? super KnownObject> action) {
+		CollectionUtil.forEach(knownObjects.values(), action, () -> "KnownList owner: " + owner);
+	}
+
+	public void forEachObject(Consumer<VisibleObject> consumer) {
+		forEach(object -> consumer.accept(object.get()));
+	}
+
+	public void forEachNpc(Consumer<Npc> consumer) {
+		forEach(o -> {
+			if (o.get() instanceof Npc npc)
+				consumer.accept(npc);
+		});
+	}
+
+	public void forEachPlayer(Consumer<Player> consumer) {
+		forEach(object -> {
+			if (object.get() instanceof Player player)
+				consumer.accept(player);
+		});
+	}
+
+	public Stream<KnownObject> stream() {
+		return knownObjects.values().stream();
+	}
+
+	public Stream<Player> streamPlayers() {
+		return stream().filter(o -> o.get() instanceof Player).map(o -> (Player) o.get());
+	}
+
+	public Stream<Player> streamVisiblePlayers() {
+		return stream().filter(o -> o.isVisible() && o.get() instanceof Player).map(o -> (Player) o.get());
+	}
 }

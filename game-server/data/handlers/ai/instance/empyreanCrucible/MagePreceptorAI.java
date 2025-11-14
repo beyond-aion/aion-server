@@ -1,16 +1,11 @@
 package ai.instance.empyreanCrucible;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -57,7 +52,7 @@ public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHa
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
 			case 75:
-				SkillEngine.getInstance().getSkill(getOwner(), 19605, 10, getTargetPlayer()).useNoAnimationSkill();
+				SkillEngine.getInstance().getSkill(getOwner(), 19605, 10, getRandomTarget()).useNoAnimationSkill();
 				break;
 			case 50:
 				SkillEngine.getInstance().getSkill(getOwner(), 19606, 10, getTarget()).useNoAnimationSkill();
@@ -85,19 +80,13 @@ public class MagePreceptorAI extends AggressiveNpcAI implements HpPhases.PhaseHa
 	private void scheduleSkill(int delay) {
 		ThreadPoolManager.getInstance().schedule(() -> {
 			if (!isDead()) {
-				SkillEngine.getInstance().getSkill(getOwner(), 19605, 10, getTargetPlayer()).useNoAnimationSkill();
+				SkillEngine.getInstance().getSkill(getOwner(), 19605, 10, getRandomTarget()).useNoAnimationSkill();
 			}
 		}, delay);
 	}
 
-	private Player getTargetPlayer() {
-		List<Player> players = new ArrayList<>();
-		getKnownList().forEachPlayer(player -> {
-			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 37)) {
-				players.add(player);
-			}
-		});
-		return Rnd.get(players);
+	private Creature getRandomTarget() {
+		return getAggroList().getTarget(AggroTarget.RANDOM, 37);
 	}
 
 	private void despawnNpcs() {

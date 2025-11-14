@@ -18,11 +18,9 @@ public class GuardCaptainAhuradimGenerator extends NoActionAI {
 	@Override
 	public void onEndUseSkill(SkillTemplate skillTemplate, int skillLevel) {
 		if (skillTemplate.getSkillId() == 21200) {
-			for (VisibleObject obj : getKnownList().getKnownObjects().values()) {
-				if (obj instanceof Npc && ((Npc) obj).getNpcId() == 230857) { // Guard Captain Ahuradim
-					SkillEngine.getInstance().getSkill(getOwner(),21191, 1, obj).useSkill();
-				}
-			}
+			VisibleObject guardCaptainAhuradim = getKnownList().findObject(o -> o.get() instanceof Npc npc && npc.getNpcId() == 230857);
+			if (guardCaptainAhuradim != null)
+				SkillEngine.getInstance().getSkill(getOwner(),21191, 1, guardCaptainAhuradim).useSkill();
 		}
 	}
 }

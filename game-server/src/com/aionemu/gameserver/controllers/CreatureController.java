@@ -76,8 +76,8 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 	@Override
 	public void notKnow(VisibleObject object) {
 		super.notKnow(object);
-		if (object instanceof Creature)
-			getOwner().getAggroList().remove((Creature) object);
+		if (object instanceof Creature creature)
+			getOwner().getAggroList().remove(creature);
 	}
 
 	/**
@@ -163,6 +163,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		getOwner().getObserveController().notifyDeathObservers(lastAttacker);
 		PacketSendUtility.broadcastPacketAndReceive(getOwner(),
 			new SM_EMOTION(getOwner(), EmotionType.DIE, 0, getOwner().equals(lastAttacker) ? 0 : lastAttacker.getObjectId()));
+		getOwner().getKnownList().forEachObject(o -> {
+			if (o instanceof Creature creature)
+				creature.getAggroList().stopHating(getOwner());
+		});
 	}
 
 	/**
@@ -477,10 +481,10 @@ public abstract class CreatureController<T extends Creature> extends VisibleObje
 		if (castingSkill != null) {
 			castingSkill.cancelCast();
 			creature.setCasting(null);
-			if (creature instanceof Npc) {
-				creature.getAi().setSubStateIfNot(AISubState.NONE);
-				((Npc) creature).getGameStats().setLastSkill(null);
-			}
+		}
+		if (creature instanceof Npc npc) {
+			creature.getAi().setSubStateIfNot(AISubState.NONE);
+			npc.getGameStats().setLastSkill(null);
 		}
 		return castingSkill;
 	}

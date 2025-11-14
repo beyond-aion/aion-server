@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.manager.EmoteManager;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.EmotionType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
@@ -83,8 +84,8 @@ public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 				}
 				npc.getController().delete();
 				canThink = true;
-				Creature creature = getAggroList().getMostHated();
-				if (creature == null || creature.isDead() || !getOwner().canSee(creature)) {
+				Creature creature = getAggroList().getTarget(AggroTarget.MOST_HATED);
+				if (creature == null) {
 					setStateIfNot(AIState.FIGHT);
 					think();
 				} else {

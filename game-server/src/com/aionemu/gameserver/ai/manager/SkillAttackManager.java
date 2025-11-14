@@ -1,18 +1,18 @@
 package com.aionemu.gameserver.ai.manager;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AILogger;
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
-import com.aionemu.gameserver.controllers.attack.AggroInfo;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.dataholders.DataManager;
-import com.aionemu.gameserver.model.gameobjects.*;
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
@@ -79,66 +79,21 @@ public class SkillAttackManager {
 			if (template.getProperties().getFirstTarget() == FirstTargetAttribute.ME) {
 				owner.setTarget(owner);
 			} else {
-				NpcSkillEntry lastSkill = owner.getGameStats().getLastSkill();
-				if (lastSkill != null) {
-					NpcSkillTemplate temp = lastSkill.getTemplate();
-					if (temp != null) {
-						switch (temp.getTarget()) {
-							case FRIEND:
-								owner.getKnownList().getKnownObjects().values().stream()
-									.filter(vo -> vo instanceof Npc npc && !npc.isDead() && !npc.getLifeStats().isAboutToDie() && !owner.isEnemy(npc)
-										&& owner.canSee(npc) && PositionUtil.isInRange(owner, npc, template.getProperties().getFirstTargetRange(), false)
-										&& GeoService.getInstance().canSee(owner, npc))
-									.findAny().ifPresent(owner::setTarget);
-								break;
-							case ME:
-								if (!target.equals(owner)) {
-									owner.setTarget(owner);
-								}
-								break;
-							case MOST_HATED:
-								Creature target2 = owner.getAggroList().getMostHated();
-								if (target2 != null && !target2.isDead()) {
-									if (!target.equals(target2)) {
-										owner.setTarget(target2);
-									}
-								}
-								break;
-							case SECOND_MOST_HATED:
-							case THIRD_MOST_HATED:
-								int limit = temp.getTarget() == NpcSkillTargetAttribute.SECOND_MOST_HATED ? 2 : 3;
-								List<AggroInfo> topThree = owner.getAggroList().getList().stream().filter(ai -> ai.getAttacker() instanceof Creature c && !c.isDead())
-									.sorted(Comparator.comparingInt(AggroInfo::getHate).reversed()).limit(limit).toList();
-
-								if (!topThree.isEmpty())
-									owner.setTarget((Creature) topThree.getLast().getAttacker());
-								break;
-							case RANDOM:
-							case RANDOM_EXCEPT_MOST_HATED:
-								List<Creature> knownCreatures = new ArrayList<>();
-								for (VisibleObject obj : owner.getKnownList().getKnownObjects().values()) {
-									if (obj instanceof Creature target3 && !(obj instanceof Summon) && !(obj instanceof SummonedObject)) {
-										if (target3.isDead() || target3.getLifeStats().isAboutToDie())
-											continue;
-										if (temp.getTarget() == NpcSkillTargetAttribute.RANDOM_EXCEPT_MOST_HATED && owner.getAggroList().getMostHated().equals(target3))
-											continue;
-										if (owner.isEnemy(target3) && owner.canSee(target3)
-											&& PositionUtil.isInRange(owner, target3, template.getProperties().getFirstTargetRange(), false)
-											&& GeoService.getInstance().canSee(owner, target3)) {
-											knownCreatures.add(target3);
-										}
-									}
-								}
-								if (!knownCreatures.isEmpty()) {
-									Creature target3 = Rnd.get(knownCreatures);
-									if (target3 != null) {
-										owner.setTarget(target3);
-									}
-								}
-								break;
-						}
-					}
-				}
+				NpcSkillTemplate temp = skill.getTemplate();
+				int range = template.getProperties().getFirstTargetRange() == 0 ? Integer.MAX_VALUE : template.getProperties().getFirstTargetRange();
+				VisibleObject newTarget = switch (temp.getTarget()) {
+					case FRIEND -> owner.getKnownList().findObject(o -> o.isVisible() && o.get() instanceof Npc npc && !npc.isDead() && !npc.getLifeStats().isAboutToDie() && !owner.isEnemy(npc)
+							&& PositionUtil.isInRange(owner, npc, range, false) && GeoService.getInstance().canSee(owner, npc));
+					case ME -> owner;
+					case MOST_HATED -> owner.getAggroList().getTarget(AggroTarget.MOST_HATED);
+					case SECOND_MOST_HATED -> owner.getAggroList().getTarget(AggroTarget.SECOND_MOST_HATED);
+					case THIRD_MOST_HATED -> owner.getAggroList().getTarget(AggroTarget.THIRD_MOST_HATED);
+					case RANDOM -> owner.getAggroList().getTarget(AggroTarget.RANDOM, range);
+					case RANDOM_EXCEPT_CURRENT_TARGET -> owner.getAggroList().getTarget(AggroTarget.RANDOM_EXCEPT_CURRENT_TARGET, range);
+					case NONE -> null;
+				};
+				if (newTarget != null)
+					owner.setTarget(newTarget);
 			}
 			boolean success = owner.getController().useSkill(skill.getSkillId(), skill.getSkillLevel());
 			if (!success) {

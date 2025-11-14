@@ -8,7 +8,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -85,12 +84,7 @@ public class AethicFieldGeneratorAI extends GeneralNpcAI implements HpPhases.Pha
 	}
 
 	private boolean isInRangePlayer() {
-		for (Player player : getKnownList().getKnownPlayers().values()) {
-			if (isInRange(player, 40) && !player.isDead() && getOwner().canSee(player)) {
-				return true;
-			}
-		}
-		return false;
+		return getKnownList().streamVisiblePlayers().anyMatch(player -> isInRange(player, 40) && !player.isDead());
 	}
 
 	private void cancelAggroTask() {

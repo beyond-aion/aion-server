@@ -6,7 +6,6 @@ import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
@@ -34,15 +33,13 @@ public class DredgionCommanderAI extends SiegeNpcAI {
 	}
 
 	private void findFortressBoss() {
-		for (VisibleObject vo : getKnownList().getKnownObjects().values()) {
-			if (vo instanceof Npc boss) {
-				if (boss.getRace() == Race.GCHIEF_LIGHT || boss.getRace() == Race.GCHIEF_DARK) {
-					fortressBoss = boss;
-					getAggroList().addHate(fortressBoss, 500000);
-					break;
-				}
-			}
-		}
+		fortressBoss = getKnownList().stream()
+			.filter(knownObject -> knownObject.get() instanceof Npc npc && (npc.getRace() == Race.GCHIEF_LIGHT || npc.getRace() == Race.GCHIEF_DARK))
+			.findAny()
+			.map(knownObject -> (Npc) knownObject.get())
+			.orElse(null);
+		if (fortressBoss != null)
+			getAggroList().addHate(fortressBoss, 500000);
 	}
 
 	@Override

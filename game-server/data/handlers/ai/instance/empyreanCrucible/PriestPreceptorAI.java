@@ -1,16 +1,11 @@
 package ai.instance.empyreanCrucible;
 
-import java.util.ArrayList;
-import java.util.List;
-
-import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.HpPhases;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
-import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.WorldPosition;
 
@@ -49,7 +44,7 @@ public class PriestPreceptorAI extends AggressiveNpcAI implements HpPhases.Phase
 	@Override
 	public void handleHpPhase(int phaseHpPercent) {
 		switch (phaseHpPercent) {
-			case 75 -> SkillEngine.getInstance().getSkill(getOwner(), 19611, 10, getTargetPlayer()).useNoAnimationSkill();
+			case 75 -> SkillEngine.getInstance().getSkill(getOwner(), 19611, 10, getRandomTarget()).useNoAnimationSkill();
 			case 25 -> startEvent();
 		}
 	}
@@ -77,14 +72,8 @@ public class PriestPreceptorAI extends AggressiveNpcAI implements HpPhases.Phase
 		}, 2000);
 	}
 
-	private Player getTargetPlayer() {
-		List<Player> players = new ArrayList<>();
-		getKnownList().forEachPlayer(player -> {
-			if (!player.isDead() && PositionUtil.isInRange(player, getOwner(), 25)) {
-				players.add(player);
-			}
-		});
-		return Rnd.get(players);
+	private Creature getRandomTarget() {
+		return getAggroList().getTarget(AggroTarget.RANDOM, 25);
 	}
 
 	private void applySoulSickness(final Npc npc) {

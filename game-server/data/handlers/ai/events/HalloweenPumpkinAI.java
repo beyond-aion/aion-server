@@ -60,7 +60,7 @@ public class HalloweenPumpkinAI extends OneDmgAI {
 	protected void handleDropRegistered() {
 		if (getNpcId() == 219484) {
 			float chance = Rnd.chance();
-			if (chance < 1 && getAggroList().getMostDamage() instanceof Player p && canReward(p))
+			if (chance < 1 && getAggroList().getMostPlayerDamage() instanceof Player p && canReward(p))
 				replaceDropWithItem(162000131); // Fine Bracing Water
 			else if (chance < 3)
 				tryReplaceDropWithWeaponPrototype();
@@ -99,7 +99,7 @@ public class HalloweenPumpkinAI extends OneDmgAI {
 
 	private Integer selectWeaponPrototypeItemId(Set<Integer> allowedLooters) {
 		List<Integer> itemIds = allowedLooters.stream()
-			.map(id -> getKnownList().getPlayer(id))
+			.map(id -> getKnownList().getObject(id) instanceof Player player ? player : null)
 			.filter(Objects::nonNull)
 			.flatMap(this::getWeaponPrototypeItemIds)
 			.toList();

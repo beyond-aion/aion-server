@@ -1,7 +1,5 @@
 package ai.worlds.gelkmaros;
 
-import java.util.Arrays;
-import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 
 import com.aionemu.commons.utils.Rnd;
@@ -25,7 +23,7 @@ import ai.AggressiveNpcAI;
 public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHandler {
 
 	private final HpPhases hpPhases = new HpPhases(33, 5);
-	private AtomicInteger deadProtectors = new AtomicInteger();
+	private final AtomicInteger deadProtectors = new AtomicInteger();
 
 	public PadmarashkaAI(Npc owner) {
 		super(owner);
@@ -79,20 +77,17 @@ public class PadmarashkaAI extends AggressiveNpcAI implements HpPhases.PhaseHand
 	protected void handleBackHome() {
 		super.handleBackHome();
 		hpPhases.reset();
-		despawnNpcs(Arrays.asList(281936));
+		despawnNpcs(281936);
 	}
 
 	@Override
 	protected void handleDespawned() {
-		despawnNpcs(Arrays.asList(281938, 281939, 281940, 281941, 281936));
+		despawnNpcs(281938, 281939, 281940, 281941, 281936);
 		super.handleDespawned();
 	}
 
-	private void despawnNpcs(List<Integer> npcIds) {
-		getKnownList().getKnownObjects().values().forEach(o -> {
-			if (o instanceof Npc && npcIds.contains(((Npc) o).getNpcId()))
-				o.getController().delete();
-		});
+	private void despawnNpcs(int... npcIds) {
+		getOwner().getWorldMapInstance().getNpcs(npcIds).forEach(npc -> npc.getController().delete());
 	}
 
 	private void handleObservedNpcDied(Npc npc) {

@@ -1,14 +1,17 @@
 package ai.worlds.pernon;
 
+import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
-import com.aionemu.gameserver.controllers.observer.GaleCycloneObserver;
+import com.aionemu.gameserver.controllers.observer.ActionObserver;
+import com.aionemu.gameserver.controllers.observer.ObserverType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.utils.PositionUtil;
 
 /**
  * @author xTz
@@ -16,8 +19,7 @@ import com.aionemu.gameserver.skillengine.SkillEngine;
 @AIName("gale_cyclone")
 public class GaleCycloneAI extends NpcAI {
 
-	private ConcurrentHashMap<Integer, GaleCycloneObserver> observed = new ConcurrentHashMap<>();
-	private boolean blocked;
+	private final Map<Integer, GaleCycloneObserver> observed = new ConcurrentHashMap<>();
 
 	public GaleCycloneAI(Npc owner) {
 		super(owner);
@@ -25,38 +27,12 @@ public class GaleCycloneAI extends NpcAI {
 
 	@Override
 	protected void handleCreatureSee(Creature creature) {
-		if (blocked) {
-			return;
-		}
-		if (creature instanceof Player) {
-			final Player player = (Player) creature;
-			final GaleCycloneObserver observer = new GaleCycloneObserver(player, getOwner()) {
-
-				@Override
-				public void onMove() {
-					if (!blocked) {
-						SkillEngine.getInstance().getSkill(getOwner(), 20528, 50, player).useNoAnimationSkill();
-					}
-				}
-
-			};
-			player.getObserveController().addObserver(observer);
-			observed.put(player.getObjectId(), observer);
-		}
-	}
-
-	@Override
-	protected void handleCreatureNotSee(Creature creature) {
-		if (blocked) {
-			return;
-		}
-		if (creature instanceof Player) {
-			Player player = (Player) creature;
-			int obj = player.getObjectId();
-			GaleCycloneObserver observer = observed.remove(obj);
-			if (observer != null) {
-				player.getObserveController().removeObserver(observer);
-			}
+		if (creature instanceof Player player) {
+			observed.computeIfAbsent(player.getObjectId(), _ -> {
+				GaleCycloneObserver galeCycloneObserver = new GaleCycloneObserver(player, getOwner());
+				player.getObserveController().addObserver(galeCycloneObserver);
+				return galeCycloneObserver;
+			});
 		}
 	}
 
@@ -73,13 +49,42 @@ public class GaleCycloneAI extends NpcAI {
 	}
 
 	private void clear() {
-		blocked = true;
-		for (Integer obj : observed.keySet()) {
-			Player player = getKnownList().getPlayer(obj);
-			GaleCycloneObserver observer = observed.remove(obj);
-			if (player != null) {
-				player.getObserveController().removeObserver(observer);
+		observed.values().forEach(GaleCycloneObserver::remove);
+	}
+
+	private class GaleCycloneObserver extends ActionObserver {
+
+		private final Player player;
+		private final Creature creature;
+		private double oldRange;
+
+		public GaleCycloneObserver(Player player, Creature creature) {
+			super(ObserverType.MOVE);
+			this.player = player;
+			this.creature = creature;
+			oldRange = PositionUtil.getDistance(player, creature);
+		}
+
+		@Override
+		public void moved() {
+			double newRange = PositionUtil.getDistance(player, creature);
+			if (creature.isDead() || creature.getLifeStats().isAboutToDie() || !creature.getKnownList().sees(player)) {
+				remove();
+				return;
 			}
+			if (oldRange > 12 && newRange <= 12) {
+				SkillEngine.getInstance().getSkill(creature, 20528, 50, player).useNoAnimationSkill();
+			}
+			oldRange = newRange;
+		}
+
+		private void remove() {
+			player.getObserveController().removeObserver(this);
+		}
+
+		@Override
+		public void onRemoved() {
+			observed.remove(player.getObjectId());
 		}
 	}
 }

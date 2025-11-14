@@ -47,10 +47,10 @@ public class CM_GATHER extends AionClientPacket {
 		// player can switch targets during gathering, so the target is not guaranteed to be the correct gatherable
 		Gatherable gatherable = player.getTarget() instanceof Gatherable g && g.getController().getGatheringPlayerId() == player.getObjectId() ? g : null;
 		if (gatherable == null) {
-			gatherable = player.getKnownList().getKnownObjects().values().stream()
-				.filter(o -> o instanceof Gatherable g && g.getController().getGatheringPlayerId() == player.getObjectId())
-				.map(o -> (Gatherable) o)
+			gatherable = player.getKnownList().stream()
+				.filter(o -> o.get() instanceof Gatherable g && g.getController().getGatheringPlayerId() == player.getObjectId())
 				.findFirst()
+				.map(o -> (Gatherable) o.get())
 				.orElse(null);
 		}
 		if (gatherable != null)

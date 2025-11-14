@@ -3,6 +3,7 @@ package ai.siege;
 import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
+import com.aionemu.gameserver.controllers.attack.DamageInfo;
 import com.aionemu.gameserver.model.base.Base;
 import com.aionemu.gameserver.model.base.BaseOccupier;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
@@ -37,8 +38,8 @@ public class BaseProtectorAI extends AggressiveNpcAI {
 		Base<?> base = BaseService.getInstance().getActiveBase(getSpawnTemplate().getId());
 		if (base == null)
 			return;
-		AionObject mostDamage = getAggroList().getMostDamage();
-		Creature bossKiller = mostDamage instanceof TemporaryPlayerTeam<?> team ? team.getLeaderObject() : (Creature) mostDamage;
+		DamageInfo<AionObject> mostDamage = getAggroList().getFinalDamageList().toTeamDamages().getMostDamage();
+		Creature bossKiller = mostDamage.getAttacker() instanceof TemporaryPlayerTeam<?> team ? team.getLeaderObject() : (Creature) mostDamage.getAttacker();
 		BaseOccupier newOccupier = base.getOccupier(bossKiller);
 		BaseService.getInstance().capture(base.getId(), newOccupier);
 	}

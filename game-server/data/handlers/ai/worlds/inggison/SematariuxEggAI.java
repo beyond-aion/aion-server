@@ -7,7 +7,6 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.VisibleObject;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
@@ -31,12 +30,10 @@ public class SematariuxEggAI extends NpcAI {
 
 	@Override
 	protected void handleDied() {
-		for (VisibleObject vo : getKnownList().getKnownObjects().values()) {
-			if (vo instanceof Npc npc && npc.getNpcId() == 216520) {
-				npc.getEffectController().removeEffect(18726);
-				npc.queueSkill(19199, 1, 3000);
-				break;
-			}
+		Npc sematariux = getOwner().getWorldMapInstance().getNpc(216520);
+		if (sematariux != null) {
+			sematariux.getEffectController().removeEffect(18726);
+			sematariux.queueSkill(19199, 1, 3000);
 		}
 		cancelSpawnTask();
 		super.handleDied();
