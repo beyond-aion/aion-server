@@ -19,6 +19,7 @@ public enum PetEmote {
 	EAT_START(134), // when feeding the pet (loading bar appears)
 	EAT_STOP(135), // when feeding stopped
 	EAT_STOP_HEART(136), // when feeding stopped and the pet loved the food
+	NOT_HUNGRY(137), // when trying to feed but the pet is still full
 	ATTACK_MODE_FEARLESS(140), // when player is in attack mode (some pets are of fearless nature)
 	ATTACK_MODE_FEARFUL(141), // when player is in attack mode (some pets are of fearful nature)
 	ALARM(142),
