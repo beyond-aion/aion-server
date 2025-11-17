@@ -30,8 +30,6 @@ public class PlayerConnectedEvent extends AlwaysTrueTeamEvent {
 
 		PacketSendUtility.sendPacket(connected, new SM_ALLIANCE_INFO(alliance));
 		PacketSendUtility.sendPacket(connected, new SM_ALLIANCE_MEMBER_INFO(connectedMember, PlayerAllianceEvent.RECONNECT));
-		alliance.sendBrands(connected);
-
 		alliance.forEachTeamMember(member -> {
 			Player player = member.getObject();
 			if (!connected.equals(player)) {

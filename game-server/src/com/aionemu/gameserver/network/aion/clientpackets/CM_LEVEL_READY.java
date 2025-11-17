@@ -22,6 +22,7 @@ import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndP
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.rift.RiftInformer;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
 
 /**
@@ -103,5 +104,9 @@ public class CM_LEVEL_READY extends AionClientPacket {
 
 		TownService.getInstance().onEnterWorld(activePlayer);
 		EventService.getInstance().onEnterMap(activePlayer);
+
+		var team = activePlayer.getCurrentTeam();
+		if (team != null)
+			ThreadPoolManager.getInstance().schedule(() -> team.sendBrands(activePlayer), 100); // delayed to fix brands when returning from studios/houses
 	}
 }
