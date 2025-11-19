@@ -152,7 +152,7 @@ public class CM_PET extends AionClientPacket {
 					pet.getCommonData().setCancelFeed(true);
 					PacketSendUtility.sendPacket(player, new SM_PET(4, 0, 0, player.getPet()));
 					PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
-				} else if (!pet.getCommonData().isFeedingTime()) {
+				} else if (pet.getCommonData().getRefeedDelay() > 0) { // not hungry yet
 					PacketSendUtility.sendPacket(player, new SM_PET(8, objectId, count, player.getPet()));
 				} else
 					PetService.getInstance().removeObject(objectId, count, player);
