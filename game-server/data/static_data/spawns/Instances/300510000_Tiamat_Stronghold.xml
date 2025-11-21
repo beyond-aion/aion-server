@@ -9,7 +9,7 @@
 			<spot x="1070.2626" y="938.6526" z="495.0851"/>
 			<spot x="1074.1127" y="1232.2438" z="495.2705" h="90"/>
 			<spot x="1095.9150" y="1232.2438" z="495.2704" h="90"/>
-		</spawn> 
+		</spawn>
 		<!-- protectorate elite magistrate -->
 		<spawn npc_id="219375">
 			<spot x="1069.0236" y="1209.1133" z="495.2704"/>
@@ -81,7 +81,7 @@
 		</spawn>
 		<!-- Invincible Shabokan -->
 		<spawn npc_id="219352">
-			<spot x="1216.66" y="1069.27" z="498.59897"/>
+			<spot x="1216.66" y="1069.27" z="491.32993"/>
 		</spawn>
 		<!-- Arcane Support -->
 		<spawn npc_id="283048">
