@@ -47,7 +47,6 @@ public class PetSpawnService {
 		}
 		PetCommonData petCommonData = pet.getCommonData();
 		if (petCommonData.getRefeedDelay() > 0) {
-			petCommonData.setIsFeedingTime(false);
 			petCommonData.scheduleRefeed(petCommonData.getRefeedDelay());
 		} else if (petCommonData.getFeedProgress() != null)
 			petCommonData.getFeedProgress().setHungryLevel(PetHungryLevel.HUNGRY);

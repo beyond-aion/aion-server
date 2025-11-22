@@ -141,7 +141,7 @@ public class Event {
 				World.getInstance().getWorldMap(map.getMapId()).forEachObject(o -> {
 					SpawnTemplate spawn = o.getSpawn();
 					if (spawn != null && eventTemplate.equals(spawn.getEventTemplate())) {
-						o.getController().delete();
+						o.getController().deleteIfAliveOrCancelRespawn();
 						count[0]++;
 					}
 				});

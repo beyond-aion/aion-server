@@ -29,7 +29,6 @@ public class PetCommonData implements Expirable {
 	PetFeedProgress feedProgress = null;
 	PetDopingBag dopingBag = null;
 	private volatile boolean cancelFeed = false;
-	private boolean feedingTime = true;
 	private long refeedTime;
 	private long startMoodTime;
 	private int shuggleCounter;
@@ -109,14 +108,6 @@ public class PetCommonData implements Expirable {
 		this.refeedTime = curentTime;
 	}
 
-	public void setIsFeedingTime(boolean food) {
-		this.feedingTime = food;
-	}
-
-	public boolean isFeedingTime() {
-		return feedingTime;
-	}
-
 	public boolean getCancelFeed() {
 		return cancelFeed;
 	}
@@ -126,10 +117,8 @@ public class PetCommonData implements Expirable {
 	}
 
 	public void scheduleRefeed(long reFoodTime) {
-		setIsFeedingTime(false);
 		cancelRefeedTask();
 		refeedTask = ThreadPoolManager.getInstance().schedule(() -> {
-			feedingTime = true;
 			refeedTime = 0;
 			feedProgress.setHungryLevel(PetHungryLevel.HUNGRY);
 		}, reFoodTime);
