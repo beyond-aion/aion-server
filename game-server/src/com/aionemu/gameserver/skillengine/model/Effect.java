@@ -590,7 +590,7 @@ public class Effect implements StatOwner {
 				effected.getKnownList().forEachObject(visibleObject -> {
 					if (visibleObject instanceof Creature) {
 						AggroList al = ((Creature) visibleObject).getAggroList();
-						if (al.isHating(effector))
+						if (al.isHating(effector) || al.isHating(effected))
 							al.addHate(effector, effectHate);
 					}
 				});
