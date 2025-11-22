@@ -3,7 +3,6 @@ package com.aionemu.commons.configuration.transformers;
 import java.lang.reflect.Array;
 import java.util.List;
 
-import com.aionemu.commons.configuration.PropertyTransformerFactory;
 import com.aionemu.commons.configuration.TransformationTypeInfo;
 
 /**
@@ -13,7 +12,10 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
  */
 public class ArrayTransformer extends CommaSeparatedValueTransformer<Object> {
 
-	public static final ArrayTransformer SHARED_INSTANCE = new ArrayTransformer();
+	@Override
+	public boolean matches(Class<?> targetType) {
+		return targetType.isArray();
+	}
 
 	@Override
 	protected Object parseObject(List<String> values, TransformationTypeInfo typeInfo) {
@@ -22,7 +24,7 @@ public class ArrayTransformer extends CommaSeparatedValueTransformer<Object> {
 		Object array = Array.newInstance(arrayType, values.size());
 
 		if (!values.isEmpty()) {
-			PropertyTransformer<?> pt = PropertyTransformerFactory.getTransformer(arrayType);
+			PropertyTransformer<?> pt = PropertyTransformers.get(arrayType);
 			for (int i = 0; i < values.size(); i++)
 				Array.set(array, i, pt.transform(values.get(i), arrayType));
 		}

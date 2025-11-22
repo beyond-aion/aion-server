@@ -20,10 +20,10 @@ import java.util.zip.ZipOutputStream;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.commons.configuration.transformers.PropertyTransformers;
 import com.aionemu.commons.database.DatabaseFactory;
 import com.aionemu.commons.network.NioServer;
 import com.aionemu.commons.network.ServerCfg;
-import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.concurrent.UncaughtExceptionHandler;
 import com.aionemu.commons.utils.info.SystemInfo;
 import com.aionemu.commons.utils.info.VersionInfo;
@@ -52,6 +52,8 @@ import com.aionemu.gameserver.services.*;
 import com.aionemu.gameserver.services.abyss.AbyssRankUpdateService;
 import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
+import com.aionemu.gameserver.services.cron.CronExpressionTransformer;
+import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
@@ -278,6 +280,7 @@ public class GameServer {
 		// Set default uncaught exception handler
 		Thread.setDefaultUncaughtExceptionHandler(new UncaughtExceptionHandler());
 
+		PropertyTransformers.register(new CronExpressionTransformer());
 		Config.load();
 		// Second should be database factory
 		DatabaseFactory.init();

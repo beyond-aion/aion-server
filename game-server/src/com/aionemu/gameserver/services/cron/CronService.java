@@ -1,33 +1,14 @@
-package com.aionemu.commons.services;
+package com.aionemu.gameserver.services.cron;
 
-import java.text.ParseException;
-import java.util.ArrayList;
-import java.util.Collections;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Properties;
-import java.util.Set;
-import java.util.TimeZone;
+import java.io.Serial;
+import java.util.*;
 
-import org.quartz.CronExpression;
-import org.quartz.CronScheduleBuilder;
-import org.quartz.CronTrigger;
-import org.quartz.JobBuilder;
-import org.quartz.JobDataMap;
-import org.quartz.JobDetail;
-import org.quartz.JobKey;
-import org.quartz.Scheduler;
-import org.quartz.SchedulerException;
-import org.quartz.Trigger;
-import org.quartz.TriggerBuilder;
+import org.quartz.*;
 import org.quartz.impl.StdSchedulerFactory;
+import org.quartz.impl.triggers.CronTriggerImpl;
+import org.quartz.spi.MutableTrigger;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import com.aionemu.commons.services.cron.CronServiceException;
-import com.aionemu.commons.services.cron.RunnableRunner;
 
 /**
  * @author SoulKeeper, Neon
@@ -54,10 +35,6 @@ public final class CronService {
 		instance = new CronService(runnableRunner, timeZone);
 	}
 
-	/**
-	 * Private constructor to prevent instantiation.<br>
-	 * Can be instantiated using reflection (for tests), but no real use for application please!
-	 */
 	private CronService(Class<? extends RunnableRunner> runnableRunner, TimeZone timeZone) {
 		Properties properties = new Properties();
 		properties.setProperty("org.quartz.threadPool.threadCount", "1");
@@ -89,11 +66,7 @@ public final class CronService {
 	}
 
 	public JobDetail schedule(Runnable r, String cronExpression, boolean longRunning) {
-		try {
-			return schedule(r, new CronExpression(cronExpression), longRunning);
-		} catch (ParseException e) {
-			throw new RuntimeException("CronExpression \"" + cronExpression + "\" is invalid.", e);
-		}
+		return schedule(r, CronExpressions.getOrCreate(cronExpression), longRunning);
 	}
 
 	public JobDetail schedule(Runnable r, CronExpression cronExpression) {
@@ -109,14 +82,11 @@ public final class CronService {
 			JobDataMap jdm = new JobDataMap();
 			jdm.put(RunnableRunner.KEY_RUNNABLE_OBJECT, r);
 			jdm.put(RunnableRunner.KEY_PROPERTY_IS_LONGRUNNING_TASK, longRunning);
-			jdm.put(RunnableRunner.KEY_CRON_EXPRESSION, cronExpression);
 
 			String jobId = "Started at ms" + System.currentTimeMillis() + "; ns" + System.nanoTime();
 			JobKey jobKey = new JobKey("JobKey:" + jobId);
 			JobDetail jobDetail = JobBuilder.newJob(runnableRunner).usingJobData(jdm).withIdentity(jobKey).build();
-
-			CronScheduleBuilder csb = CronScheduleBuilder.cronSchedule(cronExpression).inTimeZone(timeZone);
-			CronTrigger trigger = TriggerBuilder.newTrigger().withSchedule(csb).build();
+			CronTrigger trigger = TriggerBuilder.newTrigger().withSchedule(new CronScheduleBuilder(cronExpression)).build();
 
 			scheduler.scheduleJob(jobDetail, trigger);
 			return jobDetail;
@@ -217,6 +187,36 @@ public final class CronService {
 			return nextFireTimes;
 		} catch (Exception e) {
 			throw new CronServiceException("Can't get all active job details", e);
+		}
+	}
+
+	private class CronScheduleBuilder extends ScheduleBuilder<CronTrigger> {
+
+		private final CronExpression cronExpression;
+
+		public CronScheduleBuilder(CronExpression cronExpression) {
+			this.cronExpression = cronExpression;
+		}
+
+		@Override
+		public MutableTrigger build() {
+			CronTriggerImpl cronTrigger = new MemoryEfficientCronTrigger();
+			cronTrigger.setCronExpression(cronExpression);
+			cronTrigger.setTimeZone(timeZone);
+			return cronTrigger;
+		}
+	}
+
+	private static class MemoryEfficientCronTrigger extends CronTriggerImpl {
+
+		@Serial
+		private static final long serialVersionUID = -2797900570649980596L;
+
+		@Override
+		public Object clone() {
+			CronTriggerImpl clone = (CronTriggerImpl) super.clone();
+			clone.setCronExpression(CronExpressions.getOrCreate(getCronExpression()));
+			return clone;
 		}
 	}
 }

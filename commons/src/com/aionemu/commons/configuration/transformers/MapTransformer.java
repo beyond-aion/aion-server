@@ -6,7 +6,6 @@ import java.util.EnumMap;
 import java.util.HashMap;
 import java.util.Map;
 
-import com.aionemu.commons.configuration.PropertyTransformerFactory;
 import com.aionemu.commons.configuration.TransformationException;
 import com.aionemu.commons.configuration.TransformationTypeInfo;
 
@@ -38,8 +37,8 @@ public class MapTransformer {
 
 	@SuppressWarnings({ "unchecked", "rawtypes" })
 	private static <K, V> void transformAndFill(Map<String, String> values, Map<K, V> output, TransformationTypeInfo keyType, TransformationTypeInfo valueType) {
-		PropertyTransformer keyTransformer = PropertyTransformerFactory.getTransformer(keyType.getType());
-		PropertyTransformer valueTransformer = PropertyTransformerFactory.getTransformer(valueType.getType());
+		PropertyTransformer keyTransformer = PropertyTransformers.get(keyType.getType());
+		PropertyTransformer valueTransformer = PropertyTransformers.get(valueType.getType());
 		values.forEach((k, v) -> {
 			K key = (K) keyTransformer.transform(k, keyType);
 			try {

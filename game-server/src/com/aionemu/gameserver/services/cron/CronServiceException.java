@@ -1,4 +1,4 @@
-package com.aionemu.commons.services.cron;
+package com.aionemu.gameserver.services.cron;
 
 public class CronServiceException extends RuntimeException {
 

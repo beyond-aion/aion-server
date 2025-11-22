@@ -16,7 +16,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
-import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.gameserver.GameServerError;
 import com.aionemu.gameserver.configs.main.AIConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -40,7 +39,6 @@ public class AIEngine implements GameEngine {
 	public void init() {
 		AggregatedClassListener acl = new AggregatedClassListener();
 		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
 		acl.addClassListener(new AIHandlerClassListener());
 		scriptManager.setGlobalClassListener(acl);
 		scriptManager.load(AIConfig.HANDLER_DIRECTORY);

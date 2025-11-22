@@ -58,7 +58,6 @@ public interface ScriptContext {
 	 * </pre>
 	 *
 	 * @see com.aionemu.commons.scripting.classlistener.AggregatedClassListener
-	 * @see com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener
 	 * @return Associated class listener
 	 */
 	ClassListener getClassListener();

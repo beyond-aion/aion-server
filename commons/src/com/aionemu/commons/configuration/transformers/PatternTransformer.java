@@ -11,10 +11,10 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
  */
 public class PatternTransformer extends PropertyTransformer<Pattern> {
 
-	/**
-	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
-	 */
-	public static final PatternTransformer SHARED_INSTANCE = new PatternTransformer();
+	@Override
+	public boolean matches(Class<?> targetType) {
+		return targetType == Pattern.class;
+	}
 
 	@Override
 	protected Pattern parseObject(String value, TransformationTypeInfo typeInfo) {

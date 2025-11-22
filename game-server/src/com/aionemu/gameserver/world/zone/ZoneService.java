@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
-import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -46,7 +45,6 @@ public final class ZoneService implements GameEngine {
 		ScriptManager scriptManager = new ScriptManager();
 		AggregatedClassListener acl = new AggregatedClassListener();
 		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
 		acl.addClassListener(new ZoneHandlerClassListener());
 		scriptManager.setGlobalClassListener(acl);
 		scriptManager.load(WorldConfig.ZONE_HANDLER_DIRECTORY);

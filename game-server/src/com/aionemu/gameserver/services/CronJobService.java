@@ -2,11 +2,11 @@ package com.aionemu.gameserver.services;
 
 import java.util.concurrent.TimeUnit;
 
-import com.aionemu.commons.services.CronService;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.services.panesterra.PanesterraService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.utils.ThreadPoolManager;

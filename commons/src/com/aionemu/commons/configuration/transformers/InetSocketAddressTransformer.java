@@ -13,10 +13,10 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
  */
 public class InetSocketAddressTransformer extends PropertyTransformer<InetSocketAddress> {
 
-	/**
-	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
-	 */
-	public static final InetSocketAddressTransformer SHARED_INSTANCE = new InetSocketAddressTransformer();
+	@Override
+	public boolean matches(Class<?> targetType) {
+		return InetSocketAddress.class.isAssignableFrom(targetType);
+	}
 
 	@Override
 	protected InetSocketAddress parseObject(String value, TransformationTypeInfo typeInfo) throws Exception {

@@ -37,5 +37,7 @@ public abstract class PropertyTransformer<T> {
 		}
 	}
 
+	public abstract boolean matches(Class<?> targetType);
+
 	protected abstract T parseObject(String value, TransformationTypeInfo typeInfo) throws Exception;
 }

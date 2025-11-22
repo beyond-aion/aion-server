@@ -9,7 +9,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
-import com.aionemu.commons.scripting.classlistener.ScheduledTaskClassListener;
 import com.aionemu.gameserver.configs.main.InstanceConfig;
 import com.aionemu.gameserver.instance.handlers.GeneralInstanceHandler;
 import com.aionemu.gameserver.instance.handlers.InstanceHandler;
@@ -30,7 +29,6 @@ public class InstanceEngine implements GameEngine {
 		ScriptManager scriptManager = new ScriptManager();
 		AggregatedClassListener acl = new AggregatedClassListener();
 		acl.addClassListener(new OnClassLoadUnloadListener());
-		acl.addClassListener(new ScheduledTaskClassListener());
 		acl.addClassListener(new InstanceHandlerClassListener());
 		scriptManager.setGlobalClassListener(acl);
 		scriptManager.load(InstanceConfig.HANDLER_DIRECTORY);

@@ -9,7 +9,6 @@ import org.quartz.JobDetail;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.EventsConfig;
 import com.aionemu.gameserver.dao.EventDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -21,6 +20,7 @@ import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.globaldrops.GlobalRule;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_VERSION_CHECK;
+import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.skillengine.model.Effect.ForceType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.time.ServerTime;

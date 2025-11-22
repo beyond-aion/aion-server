@@ -11,10 +11,10 @@ import com.aionemu.commons.configuration.TransformationTypeInfo;
  */
 public class BooleanTransformer extends PropertyTransformer<Boolean> {
 
-	/**
-	 * Shared instance of this transformer. It's thread-safe so no need of multiple instances
-	 */
-	public static final BooleanTransformer SHARED_INSTANCE = new BooleanTransformer();
+	@Override
+	public boolean matches(Class<?> targetType) {
+		return targetType == boolean.class;
+	}
 
 	@Override
 	protected Boolean parseObject(String value, TransformationTypeInfo typeInfo) {

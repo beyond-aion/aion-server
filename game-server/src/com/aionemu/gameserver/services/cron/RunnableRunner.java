@@ -1,4 +1,4 @@
-package com.aionemu.commons.services.cron;
+package com.aionemu.gameserver.services.cron;
 
 import org.quartz.Job;
 import org.quartz.JobDataMap;
@@ -9,7 +9,6 @@ public abstract class RunnableRunner implements Job {
 
 	public static final String KEY_RUNNABLE_OBJECT = "cronservice.scheduled.runnable.instance";
 	public static final String KEY_PROPERTY_IS_LONGRUNNING_TASK = "cronservice.scheduled.runnable.islongrunning";
-	public static final String KEY_CRON_EXPRESSION = "cronservice.scheduled.runnable.cronexpression";
 
 	@Override
 	public void execute(JobExecutionContext context) throws JobExecutionException {

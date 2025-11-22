@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.services;
 
-import java.text.ParseException;
 import java.util.*;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicBoolean;
@@ -11,7 +10,6 @@ import org.quartz.CronExpression;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.services.CronService;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.configs.schedule.SiegeSchedules;
 import com.aionemu.gameserver.dao.SiegeDAO;
@@ -27,6 +25,8 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnGroup;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.siegespawns.SiegeSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
+import com.aionemu.gameserver.services.cron.CronExpressions;
+import com.aionemu.gameserver.services.cron.CronService;
 import com.aionemu.gameserver.services.panesterra.PanesterraService;
 import com.aionemu.gameserver.services.siege.*;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
@@ -47,15 +47,7 @@ public class SiegeService {
 	/**
 	 * We should broadcast fortress status every hour Actually only an influence packet must be sent, but that doesn't matter
 	 */
-	private static final CronExpression SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE;
-
-	static {
-		try {
-			SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE = new CronExpression("0 0 * ? * *");
-		} catch (ParseException e) {
-			throw new ExceptionInInitializerError(e);
-		}
-	}
+	private static final CronExpression SIEGE_LOCATION_STATUS_BROADCAST_SCHEDULE = CronExpressions.getOrCreate("0 0 * ? * *");
 
 	/**
 	 * Singleton that is loaded on the class initialization. Guys, we really do not SingletonHolder classes
