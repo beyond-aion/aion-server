@@ -1,29 +1,27 @@
 package admincommands;
 
+import java.util.Comparator;
+
 import com.aionemu.gameserver.model.base.Base;
+import com.aionemu.gameserver.model.base.BaseLocation;
 import com.aionemu.gameserver.model.base.BaseOccupier;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.BaseService;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 
 public class BaseCommand extends AdminCommand {
 
-	private static final String COMMAND_LIST = "list";
-	private static final String COMMAND_START = "start";
-	private static final String COMMAND_STOP = "stop";
-	private static final String COMMAND_CAPTURE = "capture";
-	private static final String COMMAND_ASSAULT = "assault";
-
 	public BaseCommand() {
-		super("base");
+		super("base", "Lists bases or changes their state.");
 
 		// @formatter:off
 		setSyntaxInfo(
-			"<list> - Lists all available base locations with their respective occupier",
-			"<capture> [id] [occupier] - Captures the specified base with the specified new occupier.",
-			"<assault> [id] - Spawns attacker NPCs for the specified base if available."
+			"list - Lists all available base locations with their respective occupier.",
+			"start <id> - Activates the specified base.",
+			"stop <id> - Deactivates the specified base.",
+			"capture <id> <occupier> - Captures the specified base with the specified new occupier.",
+			"assault <id> - Spawns attacker NPCs for the specified base if available."
 		);
 		// @formatter:on
 	}
@@ -31,120 +29,98 @@ public class BaseCommand extends AdminCommand {
 	@Override
 	public void execute(Player player, String... params) {
 		if (params.length == 0) {
-			sendInfo(player, "Not enough parameters.");
+			sendInfo(player);
 			return;
 		}
 
 		switch (params[0].toLowerCase()) {
-			case COMMAND_LIST -> showBaseLocationList(player, params);
-			case COMMAND_START -> startBase(player, params);
-			case COMMAND_STOP -> stopBase(player, params);
-			case COMMAND_CAPTURE -> captureBase(player, params);
-			case COMMAND_ASSAULT -> assaultBase(player, params);
+			case "list" -> showBaseLocationList(player);
+			case "start" -> startBase(player, params);
+			case "stop" -> stopBase(player, params);
+			case "capture" -> captureBase(player, params);
+			case "assault" -> assaultBase(player, params);
+			default -> sendInfo(player);
 		}
 	}
 
-	protected void showBaseLocationList(Player player, String[] params) {
-		BaseService.getInstance().getBaseLocations().values()
-			.forEach(loc -> PacketSendUtility.sendMessage(player, "Base: %d belongs to %s".formatted(loc.getId(), loc.getOccupier())));
+	private void showBaseLocationList(Player player) {
+		BaseService.getInstance().getBaseLocations().stream()
+			.sorted(Comparator.comparingInt(BaseLocation::getId))
+			.forEach(loc -> sendInfo(player, "Base %d belongs to %s".formatted(loc.getId(), loc.getOccupier())));
 	}
 
 	private void startBase(Player player, String[] params) {
-		int baseId = parseBaseId(player, params);
+		int baseId = parseBaseId(player, params, 2);
 		if (baseId == 0)
 			return;
 
 		if (BaseService.getInstance().isActive(baseId)) {
-			sendInfo(player, "Unnecessary, it is already active. [id=%d]".formatted(baseId));
+			sendInfo(player, "Base is already active");
 			return;
 		}
 		BaseService.getInstance().start(baseId);
 	}
 
 	private void stopBase(Player player, String[] params) {
-		int baseId = parseBaseId(player, params);
+		int baseId = parseBaseId(player, params, 2);
 		if (baseId == 0)
 			return;
 
 		if (!BaseService.getInstance().isActive(baseId)) {
-			sendInfo(player, "Unnecessary, it is not active. [id=%d]".formatted(baseId));
+			sendInfo(player, "Base is already inactive.");
 			return;
 		}
 		BaseService.getInstance().stop(baseId);
 	}
 
 	protected void captureBase(Player player, String[] params) {
-		int baseId = parseBaseId(player, params);
+		int baseId = parseBaseId(player, params, 3);
 		if (baseId == 0)
 			return;
 
 		if (!BaseService.getInstance().isActive(baseId)) {
-			sendInfo(player, "[id=%d] cannot only be captured if it is active".formatted(baseId));
+			sendInfo(player, "Inactive bases cannot be captured.");
 			return;
 		}
 
-		BaseOccupier occupier = getOccupier(params[2].toUpperCase());
-		if (occupier == null) {
-			sendInfo(player, params[2] + " is not a valid occupier");
-			return;
-		}
-
+		BaseOccupier occupier = BaseOccupier.valueOf(params[2].toUpperCase());
 		BaseService.getInstance().capture(baseId, occupier);
 	}
 
 	protected void assaultBase(Player player, String[] params) {
-		int baseId = parseBaseId(player, params);
+		int baseId = parseBaseId(player, params, 3);
 		if (baseId == 0)
 			return;
 
-		if (!BaseService.getInstance().isActive(baseId)) {
-			sendInfo(player, "[id=%d] cannot only be assaulted if it is active".formatted(baseId));
-			return;
-		}
-
-		BaseOccupier occupier = getOccupier(params[2].toUpperCase());
-		if (occupier == null) {
-			sendInfo(player, params[2] + " is not a valid occupier");
-			return;
-		}
-
-		// assault
 		Base<?> base = BaseService.getInstance().getActiveBase(baseId);
-		if (base != null) {
-			if (base.isUnderAssault())
-				PacketSendUtility.sendMessage(player, "Assault is already active!");
-			else
-				base.spawnBySpawnHandler(SpawnHandlerType.ATTACKER, occupier);
+		if (base == null) {
+			sendInfo(player, "Inactive bases cannot be assaulted.");
+			return;
 		}
+		if (base.isUnderAssault()) {
+			sendInfo(player, "Base is already under assault.");
+			return;
+		}
+		BaseOccupier occupier = BaseOccupier.valueOf(params[2].toUpperCase());
+		if (base.getOccupier() == occupier) {
+			sendInfo(player, "Base cannot be assaulted by the same occupier");
+			return;
+		}
+		base.spawnBySpawnHandler(SpawnHandlerType.ATTACKER, occupier);
 	}
 
-	private int parseBaseId(Player admin, String[] params) {
-		if (params.length < 2) {
-			sendInfo(admin, "Not enough parameters");
+	private int parseBaseId(Player admin, String[] params, int expectedParameters) {
+		if (params.length < expectedParameters) {
+			sendInfo(admin, "Not enough parameters.");
 			return 0;
 		}
 
-		int baseId;
-		try {
-			baseId = Integer.parseInt(params[1]);
-		} catch (NumberFormatException e) {
-			sendInfo(admin, "This baseId is not a number.");
-			return 0;
-		}
-
-		if (!BaseService.getInstance().getBaseLocations().containsKey(baseId)) {
-			sendInfo(admin, "This baseId does not exist.");
+		int baseId = Integer.parseInt(params[1]);
+		if (BaseService.getInstance().getBaseLocation(baseId) == null) {
+			sendInfo(admin, "Invalid base ID.");
 			return 0;
 		}
 
 		return baseId;
-	}
-
-	private BaseOccupier getOccupier(String param) {
-		try {
-			return BaseOccupier.valueOf(param);
-		} catch (IllegalArgumentException e) {
-			return null;
-		}
 	}
 }

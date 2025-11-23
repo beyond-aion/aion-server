@@ -1,5 +1,6 @@
 package com.aionemu.gameserver.services;
 
+import java.util.Collection;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -140,8 +141,8 @@ public class BaseService {
 		}
 	}
 
-	public Map<Integer, BaseLocation> getBaseLocations() {
-		return allBaseLocations;
+	public Collection<BaseLocation> getBaseLocations() {
+		return allBaseLocations.values();
 	}
 
 	public Base<?> getActiveBase(int id) {
