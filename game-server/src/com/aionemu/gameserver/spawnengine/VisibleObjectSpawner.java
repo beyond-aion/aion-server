@@ -36,6 +36,7 @@ import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 import com.aionemu.gameserver.world.geo.GeoService;
 import com.aionemu.gameserver.world.knownlist.CreatureAwareKnownList;
+import com.aionemu.gameserver.world.knownlist.FlagKnownList;
 import com.aionemu.gameserver.world.knownlist.NpcKnownList;
 import com.aionemu.gameserver.world.knownlist.PlayerAwareKnownList;
 
@@ -55,7 +56,7 @@ public class VisibleObjectSpawner {
 		}
 		Npc npc = new Npc(new NpcController(), spawn, npcTemplate);
 		npc.setCreatorId(spawn.getCreatorId());
-		npc.setKnownlist(new NpcKnownList(npc));
+		npc.setKnownlist(npc.isFlag() ? new FlagKnownList(npc) : new NpcKnownList(npc));
 		npc.setEffectController(new EffectController(npc));
 
 		if (WalkerFormator.processClusteredNpc(npc, spawn.getWorldId(), instanceIndex))

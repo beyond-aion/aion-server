@@ -69,7 +69,7 @@ public class KnownList {
 		return knownObject != null && knownObject.isVisible();
 	}
 
-	private boolean add(VisibleObject object) {
+	protected boolean add(VisibleObject object) {
 		if (!isAwareOf(object))
 			return false;
 		KnownObject knownObject = new KnownObject(object);
@@ -153,7 +153,7 @@ public class KnownList {
 	 */
 	private void forgetObjectsOrUpdateVisibility() {
 		for (KnownObject object : knownObjects.values()) {
-			if (PositionUtil.isInRange(owner, object.get(), getVisibleDistance(object.get()))) {
+			if (isInRange(object.get())) {
 				updateVisibility(object);
 			} else {
 				del(object.get(), ObjectDeleteAnimation.NONE);
@@ -170,13 +170,7 @@ public class KnownList {
 			return;
 
 		WorldPosition position = owner.getPosition();
-		if (owner instanceof Npc npc && npc.isFlag()) {
-			position.getWorldMapInstance().forEachPlayer(player -> {
-				if (player.getKnownList().add(owner)) {
-					add(player);
-				}
-			});
-		} else if (owner instanceof Player) {
+		if (owner instanceof Player) {
 			position.getWorldMapInstance().forEachNpc(npc -> {
 				if (npc.isFlag() && npc.getKnownList().add(owner)) {
 					add(npc);
@@ -194,7 +188,7 @@ public class KnownList {
 				if (knows(newObject))
 					continue;
 
-				if (!PositionUtil.isInRange(owner, newObject, getVisibleDistance(newObject)))
+				if (!isInRange(newObject))
 					continue;
 
 				if (newObject.getKnownList().add(owner))
@@ -211,10 +205,16 @@ public class KnownList {
 	}
 
 	/**
-	 * @return Detection radius in meters in which newObject can be added to this knownlist.
+	 * @return Detection radius in meters of this knownlist.
 	 */
-	protected float getVisibleDistance(VisibleObject newObject) {
-		return newObject.getVisibleDistance();
+	protected float getVisibleDistance() {
+		return owner.getVisibleDistance();
+	}
+
+	private boolean isInRange(VisibleObject newObject) {
+		// the two-way relation of KnownLists requires checking the maximum valid distance for both objects to avoid flickering and other display errors
+		float distance = Math.max(getVisibleDistance(), newObject.getKnownList().getVisibleDistance());
+		return PositionUtil.isInRange(owner, newObject, distance);
 	}
 
 	public VisibleObject findObject(Predicate<? super KnownObject> predicate) {

@@ -378,11 +378,6 @@ public class Npc extends Creature {
 		return getObjectTemplate().getGroupDrop();
 	}
 
-	@Override
-	public float getVisibleDistance() {
-		return isFlag() || isRaidMonster() ? Float.MAX_VALUE : super.getVisibleDistance();
-	}
-
 	public void overrideEquipmentList(NpcEquipmentList v) {
 		overridenEquipment = new NpcEquippedGear(v);
 	}
