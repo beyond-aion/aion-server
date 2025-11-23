@@ -7,6 +7,7 @@ import com.aionemu.gameserver.ai.manager.SimpleAttackManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
 import com.aionemu.gameserver.configs.main.AIConfig;
+import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.effect.EffectController;
 import com.aionemu.gameserver.controllers.movement.NpcMoveController;
@@ -15,6 +16,7 @@ import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
+import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.skill.NpcSkillList;
 import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
@@ -104,6 +106,8 @@ public abstract class NpcAI extends AITemplate<Npc> {
 
 	@Override
 	protected void handleDeactivate() {
+		if (SiegeConfig.BALAUR_AUTO_ASSAULT && getOwner() instanceof SiegeNpc || getOwner().isRaidMonster())
+			return;
 		ActivateEventHandler.onDeactivate(this);
 	}
 

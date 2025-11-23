@@ -20,7 +20,7 @@ import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 /**
  * @author ATracer
  */
-public class ZoneInstance implements Comparable<ZoneInstance> {
+public class ZoneInstance {
 
 	private final ZoneInfo template;
 	private final int mapId;
@@ -89,15 +89,6 @@ public class ZoneInstance implements Comparable<ZoneInstance> {
 
 	public boolean isInsideCordinate(float x, float y, float z) {
 		return template.getArea().isInside3D(x, y, z);
-	}
-
-	@Override
-	public int compareTo(ZoneInstance o) {
-		int result = getZoneTemplate().getPriority() - o.getZoneTemplate().getPriority();
-		if (result == 0) {
-			return template.getZoneTemplate().getName().id() - o.template.getZoneTemplate().getName().id();
-		}
-		return result;
 	}
 
 	public void addHandler(ZoneHandler handler) {
