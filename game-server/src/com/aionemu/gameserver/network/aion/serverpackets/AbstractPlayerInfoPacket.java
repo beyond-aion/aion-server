@@ -11,9 +11,11 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.ItemSlot;
+import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.BrokerService;
+import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.player.MultiClientingService;
 
 /**
@@ -29,6 +31,7 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 	protected void writePlayerInfo(PlayerAccountData accPlData, AionConnection con) {
 		PlayerCommonData pcd = accPlData.getPlayerCommonData();
 		int playerId = pcd.getPlayerObjId();
+		LegionMember legionMember = LegionService.getInstance().getLegionMember(pcd);
 		PlayerAppearance playerAppearance = accPlData.getAppearance();
 		CharacterBanInfo cbi = getCharBanInfo(accPlData, con);
 
@@ -105,9 +108,9 @@ public abstract class AbstractPlayerInfoPacket extends AionServerPacket {
 		writeH(pcd.getLevel());
 		writeH(0); // unk 2.5
 		writeD(pcd.getTitleId());
-		writeD(accPlData.isLegionMember() ? accPlData.getLegion().getLegionId() : 0);
-		writeS(accPlData.isLegionMember() ? accPlData.getLegion().getName() : null, 40);
-		writeH(accPlData.isLegionMember() ? 1 : 0);
+		writeD(legionMember != null ? legionMember.getLegion().getLegionId() : 0);
+		writeS(legionMember != null ? legionMember.getLegion().getName() : null, 40);
+		writeH(legionMember != null ? 1 : 0);
 		writeD(pcd.getLastOnlineEpochSeconds());
 		for (int i = 0; i < 16; i++) { // 16 items is always expected by the client...
 			PlayerAccountData.VisibleItem item = i < accPlData.getVisibleItems().size() ? accPlData.getVisibleItems().get(i) : null;

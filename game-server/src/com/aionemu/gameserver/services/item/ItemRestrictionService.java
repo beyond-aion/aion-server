@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.team.legion.LegionPermissionsMask;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
@@ -22,9 +21,7 @@ public class ItemRestrictionService {
 	public static boolean isItemRestrictedFrom(Player player, Item item, StorageType storageType) {
 		switch (storageType) {
 			case LEGION_WAREHOUSE:
-				if (!LegionService.getInstance().getLegionMember(player.getObjectId()).hasRights(LegionPermissionsMask.WH_WITHDRAWAL)
-					|| !LegionConfig.LEGION_WAREHOUSE || !player.isLegionMember()) {
-					// You do not have the authority to use the Legion warehouse.
+				if (!LegionConfig.LEGION_WAREHOUSE || !player.isLegionMember() || !player.getLegionMember().hasRights(LegionPermissionsMask.WH_WITHDRAWAL)) {
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
 					return true;
 				}

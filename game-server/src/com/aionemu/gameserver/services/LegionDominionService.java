@@ -26,7 +26,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_DOMINION_RANK
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.mail.SystemMailService;
-import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.time.ServerTime;
@@ -138,7 +137,7 @@ public class LegionDominionService {
 					continue;
 				List<LegionDominionReward> legionRewards = dominionRewards.get(i+1);
 				if (!legionRewards.isEmpty()) {
-					String playerName = PlayerService.getPlayerName(legion.getBrigadeGeneral());
+					String playerName = legion.getBrigadeGeneral().getName();
 					for (LegionDominionReward reward : legionRewards) {
 						// TODO send proper system (most likely $$GD_REWARD_MAIL) mail
 						SystemMailService.sendMail("Legion Dominion", playerName, "Reward Mail", "", reward.getItemId(), reward.getCount(),

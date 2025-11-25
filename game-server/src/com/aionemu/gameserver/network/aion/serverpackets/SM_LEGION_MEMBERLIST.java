@@ -4,7 +4,7 @@ import java.util.List;
 
 import com.aionemu.gameserver.configs.network.NetworkConfig;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
+import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 import com.aionemu.gameserver.services.HousingService;
@@ -15,9 +15,9 @@ import com.aionemu.gameserver.services.HousingService;
 public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 
 	private final boolean isFirst, isLast;
-	private final List<LegionMemberEx> legionMembers;
+	private final List<LegionMember> legionMembers;
 
-	public SM_LEGION_MEMBERLIST(List<LegionMemberEx> legionMembers, boolean isFirst, boolean isLast) {
+	public SM_LEGION_MEMBERLIST(List<LegionMember> legionMembers, boolean isFirst, boolean isLast) {
 		this.legionMembers = legionMembers;
 		this.isFirst = isFirst;
 		this.isLast = isLast;
@@ -28,11 +28,11 @@ public class SM_LEGION_MEMBERLIST extends AionServerPacket {
 		int size = legionMembers.size();
 		writeC(isFirst ? 1 : 0);
 		writeH(isLast ? -size : size);
-		for (LegionMemberEx legionMember : legionMembers)
+		for (LegionMember legionMember : legionMembers)
 			writeLegionMember(legionMember);
 	}
 
-	protected void writeLegionMember(LegionMemberEx legionMember) {
+	protected void writeLegionMember(LegionMember legionMember) {
 		writeD(legionMember.getObjectId());
 		writeS(legionMember.getName());
 		writeC(legionMember.getPlayerClass().getClassId());

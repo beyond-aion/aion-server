@@ -26,7 +26,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.mail.SystemMailService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.world.World;
 
 /**
  * @author ViAl
@@ -209,15 +208,14 @@ public class ChallengeTaskService {
 		if (!task.isCompleted()) {
 			task.updateCompleteTime();
 			quest.increaseCompleteCount();
-			player.getLegion().getOnlineLegionMembers().forEach(p -> showTaskList(p, ChallengeType.LEGION, legionId));
+			player.getLegion().getOnlinePlayers().forEach(p -> showTaskList(p, ChallengeType.LEGION, legionId));
 			ChallengeTasksDAO.storeTask(task);
 			if (task.isCompleted()) {
 				TreeMap<Integer, List<Integer>> winnersByPoints = new TreeMap<>();
-				for (Integer memberObjId : player.getLegion().getLegionMembers()) {
-					LegionMember legionMember = LegionService.getInstance().getLegionMember(memberObjId);
-					winnersByPoints.computeIfAbsent(legionMember.getChallengeScore(), k -> new ArrayList<>()).add(memberObjId);
+				for (LegionMember legionMember : player.getLegion().getMembers()) {
+					winnersByPoints.computeIfAbsent(legionMember.getChallengeScore(), _ -> new ArrayList<>()).add(legionMember.getObjectId());
 					legionMember.setChallengeScore(0);
-					if (World.getInstance().getPlayer(memberObjId) == null) // save legionMember to DB since owning player is not online (no autosave schedule)
+					if (!legionMember.isOnline()) // save legionMember to DB since owning player is not online (no autosave schedule)
 						LegionService.getInstance().storeLegionMember(legionMember);
 				}
 				int rewardsAdded = 0, itemId, itemCount;

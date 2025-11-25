@@ -187,13 +187,13 @@ public class PacketSendUtility {
 	 *          ServerPacket to be broadcast
 	 */
 	public static void broadcastToLegion(Legion legion, AionServerPacket packet) {
-		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
+		for (Player onlineLegionMember : legion.getOnlinePlayers()) {
 			sendPacket(onlineLegionMember, packet);
 		}
 	}
 
 	public static void broadcastToLegion(Legion legion, AionServerPacket packet, int playerObjId) {
-		for (Player onlineLegionMember : legion.getOnlineLegionMembers()) {
+		for (Player onlineLegionMember : legion.getOnlinePlayers()) {
 			if (onlineLegionMember.getObjectId() != playerObjId)
 				sendPacket(onlineLegionMember, packet);
 		}

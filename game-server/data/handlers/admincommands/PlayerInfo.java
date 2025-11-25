@@ -1,6 +1,5 @@
 package admincommands;
 
-import java.util.Iterator;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -10,9 +9,8 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
+import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.utils.ChatUtil;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.Util;
@@ -84,13 +82,9 @@ public class PlayerInfo extends AdminCommand {
 				sendInfo(admin, "-legion info: no legion");
 			else {
 				StringBuilder strbld = new StringBuilder();
-				List<LegionMemberEx> legionmemblist = LegionService.getInstance().loadLegionMemberExList(legion, null);
-				Iterator<LegionMemberEx> it = legionmemblist.iterator();
 				strbld.append("-legion info:\n\tname: " + legion.getName() + ", level: " + legion.getLegionLevel() + "\n\tmembers(online):\n");
-				while (it.hasNext()) {
-					LegionMemberEx act = it.next();
-					strbld.append("\t\t" + act.getName() + "(" + (act.isOnline() ? "online" : "offline") + ")" + act.getRank().toString() + "\n");
-				}
+				for (LegionMember lm : legion.getMembers())
+					strbld.append("\t\t" + lm.getName() + "(" + (lm.isOnline() ? "online" : "offline") + ")" + lm.getRank().toString() + "\n");
 				sendInfo(admin, strbld.toString());
 			}
 		} else if (params[1].equals("ap")) {

@@ -124,14 +124,13 @@ public class PlayerLeaveWorldService {
 		if (player.getCraftingTask() != null)
 			player.getCraftingTask().stop();
 
-		if (player.isLegionMember())
-			LegionService.getInstance().onLogout(player);
-
 		QuestEngine.getInstance().onLogOut(new QuestEnv(null, player, 0));
 		Timestamp lastOnline = new Timestamp(System.currentTimeMillis());
 		player.getController().delete();
 		player.getCommonData().setOnline(false);
 		player.getCommonData().setLastOnline(lastOnline);
+		if (player.isLegionMember()) // must be called after setOnline and setLastOnline
+			LegionService.getInstance().onLogout(player);
 		player.getCommonData().setX(player.getX());
 		player.getCommonData().setY(player.getY());
 		player.getCommonData().setZ(player.getZ());

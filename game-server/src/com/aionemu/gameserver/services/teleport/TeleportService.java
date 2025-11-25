@@ -37,6 +37,7 @@ import com.aionemu.gameserver.model.templates.teleport.TeleportType;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.services.DuelService;
+import com.aionemu.gameserver.services.LegionService;
 import com.aionemu.gameserver.services.PrivateStoreService;
 import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.conquerorAndProtectorSystem.ConquerorAndProtectorService;
@@ -220,9 +221,8 @@ public class TeleportService {
 		player.setPortAnimation(ArrivalAnimation.LANDING);
 		PacketSendUtility.sendPacket(player, new SM_PLAYER_INFO(player));
 
-		if (player.isLegionMember()) {
-			PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
-		}
+		if (player.isLegionMember() && player.getLegionMember().getWorldId() != worldId)
+			LegionService.getInstance().updateMemberInfo(player);
 	}
 
 	public static void teleportTo(Player player, int worldId, float x, float y, float z) {
@@ -516,8 +516,8 @@ public class TeleportService {
 				if (DataManager.WORLD_MAPS_DATA.getTemplate(worldId).isInstance() && !WorldMapType.getWorld(worldId).isPersonal())
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_INSTANCE_DUNGEON_OPENED_FOR_SELF(worldId));
 			}
-			if (player.isLegionMember())
-				PacketSendUtility.broadcastToLegion(player.getLegion(), new SM_LEGION_UPDATE_MEMBER(player, 0, ""));
+			if (player.isLegionMember() && player.getLegionMember().getWorldId() != worldId)
+				LegionService.getInstance().updateMemberInfo(player);
 		}
 
 	}

@@ -101,7 +101,7 @@ public class SiegeCommand extends AdminCommand {
 					legion = LegionService.getInstance().getLegion(legionName.trim());
 				}
 				if (legion != null) {
-					sr = SiegeRace.getByRace(PlayerService.getOrLoadPlayerCommonData(legion.getBrigadeGeneral()).getRace());
+					sr = SiegeRace.getByRace(PlayerService.getOrLoadPlayerCommonData(legion.getBrigadeGeneral().getObjectId()).getRace());
 				}
 			}
 			if (legion == null && sr == null) {

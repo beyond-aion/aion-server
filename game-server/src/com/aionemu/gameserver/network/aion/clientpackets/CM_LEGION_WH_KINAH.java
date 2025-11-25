@@ -4,7 +4,6 @@ import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionHistoryAction;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.team.legion.LegionPermissionsMask;
@@ -35,33 +34,32 @@ public class CM_LEGION_WH_KINAH extends AionClientPacket {
 	@Override
 	protected void runImpl() {
 		Player activePlayer = getConnection().getActivePlayer();
-		Legion legion = activePlayer.getLegion();
-		if (legion != null) {
-			LegionMember LM = LegionService.getInstance().getLegionMember(activePlayer.getObjectId());
-			switch (actionType) {
-				case 0:
-					if (!LM.hasRights(LegionPermissionsMask.WH_WITHDRAWAL)) {
-						// You do not have the authority to use the Legion warehouse.
-						PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
-						return;
-					}
-					if (activePlayer.getStorage(StorageType.LEGION_WAREHOUSE.getId()).tryDecreaseKinah(amount)) {
-						activePlayer.getInventory().increaseKinah(amount);
-						LegionService.getInstance().addHistory(legion, activePlayer.getName(), LegionHistoryAction.KINAH_WITHDRAW, Long.toString(amount));
-					}
-					break;
-				case 1:
-					if (!LM.hasRights(LegionPermissionsMask.WH_DEPOSIT)) {
-						// You do not have the authority to use the Legion warehouse.
-						PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
-						return;
-					}
-					if (activePlayer.getInventory().tryDecreaseKinah(amount)) {
-						activePlayer.getStorage(StorageType.LEGION_WAREHOUSE.getId()).increaseKinah(amount);
-						LegionService.getInstance().addHistory(legion, activePlayer.getName(), LegionHistoryAction.KINAH_DEPOSIT, Long.toString(amount));
-					}
-					break;
-			}
+		LegionMember legionMember = activePlayer.getLegionMember();
+		if (legionMember == null)
+			return;
+		switch (actionType) {
+			case 0:
+				if (!legionMember.hasRights(LegionPermissionsMask.WH_WITHDRAWAL)) {
+					// You do not have the authority to use the Legion warehouse.
+					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
+					return;
+				}
+				if (activePlayer.getStorage(StorageType.LEGION_WAREHOUSE.getId()).tryDecreaseKinah(amount)) {
+					activePlayer.getInventory().increaseKinah(amount);
+					LegionService.getInstance().addHistory(legionMember.getLegion(), activePlayer.getName(), LegionHistoryAction.KINAH_WITHDRAW, Long.toString(amount));
+				}
+				break;
+			case 1:
+				if (!legionMember.hasRights(LegionPermissionsMask.WH_DEPOSIT)) {
+					// You do not have the authority to use the Legion warehouse.
+					PacketSendUtility.sendPacket(activePlayer, SM_SYSTEM_MESSAGE.STR_GUILD_WAREHOUSE_NO_RIGHT());
+					return;
+				}
+				if (activePlayer.getInventory().tryDecreaseKinah(amount)) {
+					activePlayer.getStorage(StorageType.LEGION_WAREHOUSE.getId()).increaseKinah(amount);
+					LegionService.getInstance().addHistory(legionMember.getLegion(), activePlayer.getName(), LegionHistoryAction.KINAH_DEPOSIT, Long.toString(amount));
+				}
+				break;
 		}
 	}
 }

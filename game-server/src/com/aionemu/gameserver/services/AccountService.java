@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.storage.PlayerStorage;
 import com.aionemu.gameserver.model.items.storage.Storage;
 import com.aionemu.gameserver.model.items.storage.StorageType;
-import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
@@ -90,10 +89,9 @@ public class AccountService {
 		PlayerCommonData playerCommonData = PlayerDAO.loadPlayerCommonData(playerId);
 		CharacterBanInfo cbi = PlayerPunishmentsDAO.getCharBanInfo(playerId);
 		PlayerAppearance appereance = PlayerAppearanceDAO.load(playerId);
-		LegionMember legionMember = LegionMemberDAO.loadLegionMember(playerId);
 		// Load only equipment and its stones to display on character selection screen
 		List<PlayerAccountData.VisibleItem> equipment = InventoryDAO.loadVisibleEquipment(playerId);
-		PlayerAccountData playerAccData = new PlayerAccountData(playerCommonData, appereance, cbi, equipment, legionMember);
+		PlayerAccountData playerAccData = new PlayerAccountData(playerCommonData, appereance, cbi, equipment);
 		PlayerDAO.setCreationDeletionTime(playerAccData);
 		return playerAccData;
 	}

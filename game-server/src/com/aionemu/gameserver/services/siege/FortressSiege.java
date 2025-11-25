@@ -337,7 +337,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			return;
 		try {
 			Set<Integer> participatedLegionMembers = new HashSet<>(src.getPlayerAbyssPoints().keySet());
-			participatedLegionMembers.retainAll(legion.getLegionMembers());
+			participatedLegionMembers.retainAll(legion.getMemberIds());
 
 			if (participatedLegionMembers.isEmpty()) {
 				if (LoggingConfig.LOG_SIEGE)
@@ -361,7 +361,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 		try {
 			long totalKinah = 0;
 			int nonKinahItems = 0;
-			PlayerCommonData brigadeGeneral = PlayerService.getOrLoadPlayerCommonData(legion.getBrigadeGeneral());
+			PlayerCommonData brigadeGeneral = PlayerService.getOrLoadPlayerCommonData(legion.getBrigadeGeneral().getObjectId());
 			for (SiegeLegionReward item : legionRewards) {
 				if (item.getItemId() == ItemId.KINAH) {
 					long kinah = isBossKilled() ? item.getItemCount() : Math.round(item.getItemCount() * 0.7f);

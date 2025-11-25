@@ -102,7 +102,7 @@ public class CM_HOUSE_TELEPORT extends AionClientPacket {
 			addHouseIfAccessible(player, houses, friend.getObjectId());
 		Legion legion = player.getLegion();
 		if (legion != null) {
-			for (int memberId : legion.getLegionMembers()) {
+			for (int memberId : legion.getMemberIds()) {
 				if (memberId != player.getObjectId())
 					addHouseIfAccessible(player, houses, memberId);
 			}

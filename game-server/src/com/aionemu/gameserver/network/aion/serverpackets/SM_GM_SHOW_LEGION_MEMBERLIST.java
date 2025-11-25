@@ -2,7 +2,7 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 
 import java.util.List;
 
-import com.aionemu.gameserver.model.team.legion.LegionMemberEx;
+import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.services.player.PlayerService;
 
 /**
@@ -10,12 +10,12 @@ import com.aionemu.gameserver.services.player.PlayerService;
  */
 public class SM_GM_SHOW_LEGION_MEMBERLIST extends SM_LEGION_MEMBERLIST {
 
-	public SM_GM_SHOW_LEGION_MEMBERLIST(List<LegionMemberEx> legionMembers, boolean isFirst, boolean isLast) {
+	public SM_GM_SHOW_LEGION_MEMBERLIST(List<LegionMember> legionMembers, boolean isFirst, boolean isLast) {
 		super(legionMembers, isFirst, isLast);
 	}
 
 	@Override
-	protected void writeLegionMember(LegionMemberEx legionMember) {
+	protected void writeLegionMember(LegionMember legionMember) {
 		writeD(legionMember.getObjectId());
 		writeS(legionMember.getName());
 		writeC(legionMember.getPlayerClass().getClassId());

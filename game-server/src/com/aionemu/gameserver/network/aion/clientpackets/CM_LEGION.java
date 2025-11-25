@@ -11,6 +11,7 @@ import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_LEGION_INFO;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.LegionService;
+import com.aionemu.gameserver.utils.Util;
 
 /**
  * @author Simple
@@ -116,40 +117,42 @@ public class CM_LEGION extends AionClientPacket {
 		final Player activePlayer = getConnection().getActivePlayer();
 		if (activePlayer.isLegionMember()) {
 			final Legion legion = activePlayer.getLegion();
-
-			if (charName != null) {
-				LegionService.getInstance().handleCharNameRequest(exOpcode, activePlayer, charName, newNickname, rank);
-			} else {
-				switch (exOpcode) {
-					case 0x02: // leave legion
-						LegionService.getInstance().leaveLegion(activePlayer, false);
-						break;
-					case 0x07: // show legion notice (from /gnotice chat command)
-						Legion.Announcement currentAnnouncement = legion.getAnnouncement();
-						if (currentAnnouncement == null)
-							sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_NOSET_GUILD_NOTICE());
-						else
-							sendPacket(SM_SYSTEM_MESSAGE.STR_GUILD_NOTICE(currentAnnouncement.message(), currentAnnouncement.time().getTime() / 1000));
-						break;
-					case 0x08: // refresh legion info
-						sendPacket(new SM_LEGION_INFO(legion));
-						break;
-					case 0x09: // edit announcements
-						LegionService.getInstance().changeAnnouncement(activePlayer, announcement);
-						break;
-					case 0x0A: // change self introduction
-						LegionService.getInstance().changeSelfIntro(activePlayer, newSelfIntro);
-						break;
-					case 0x0D: // edit permissions
-						LegionService.getInstance().changePermissions(activePlayer, legion, deputyPermission, centurionPermission, legionarPermission, volunteerPermission);
-						break;
-					case 0x0E: // level up legion
-						LegionService.getInstance().requestChangeLevel(activePlayer);
-						break;
-					case 0x10: // select Legion Dominion to participate
-						LegionService.getInstance().joinLegionDominion(activePlayer, legionDominionId);
-						break;
+			if (charName != null)
+				charName = Util.convertName(charName);
+			switch (exOpcode) {
+				// invite to legion
+				case 0x01 -> LegionService.getInstance().invitePlayerToLegion(activePlayer, charName);
+				// leave legion
+				case 0x02 -> LegionService.getInstance().leaveLegion(activePlayer, false);
+				// kick member
+				case 0x04 -> LegionService.getInstance().kickMember(activePlayer, charName);
+				// appoint a new Brigade General
+				case 0x05 -> LegionService.getInstance().startBrigadeGeneralChangeProcess(activePlayer, charName);
+				// change rank
+				case 0x06 -> LegionService.getInstance().appointRank(activePlayer, charName, rank);
+				// show legion notice (from /gnotice chat command)
+				case 0x07 -> {
+					Legion.Announcement currentAnnouncement = legion.getAnnouncement();
+					if (currentAnnouncement == null)
+						sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_NOSET_GUILD_NOTICE());
+					else
+						sendPacket(SM_SYSTEM_MESSAGE.STR_GUILD_NOTICE(currentAnnouncement.message(), currentAnnouncement.time().getTime() / 1000));
 				}
+				// refresh legion info
+				case 0x08 -> sendPacket(new SM_LEGION_INFO(legion));
+				// edit announcements
+				case 0x09 -> LegionService.getInstance().changeAnnouncement(activePlayer, announcement);
+				// change self introduction
+				case 0x0A ->LegionService.getInstance().changeSelfIntro(activePlayer, newSelfIntro);
+				// edit permissions
+				case 0x0D -> LegionService.getInstance().changePermissions(activePlayer, deputyPermission, centurionPermission, legionarPermission,
+						volunteerPermission);
+				// level up legion
+				case 0x0E -> LegionService.getInstance().requestChangeLevel(activePlayer);
+				// change nickname
+				case 0x0F -> LegionService.getInstance().changeNickname(activePlayer, charName, newNickname);
+				// select Legion Dominion to participate
+				case 0x10 -> LegionService.getInstance().joinLegionDominion(activePlayer, legionDominionId);
 			}
 		} else {
 			switch (exOpcode) {

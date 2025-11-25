@@ -9,8 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerCommonData;
 import com.aionemu.gameserver.model.items.ItemSlot;
-import com.aionemu.gameserver.model.team.legion.Legion;
-import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.templates.BoundRadius;
 
 /**
@@ -29,18 +27,15 @@ public class PlayerAccountData {
 	private List<VisibleItem> visibleItems;
 	private Timestamp creationDate;
 	private Timestamp deletionDate;
-	private LegionMember legionMember;
 
 	public PlayerAccountData(PlayerCommonData playerCommonData, PlayerAppearance appearance) {
-		this(playerCommonData, appearance, null, Collections.emptyList(), null);
+		this(playerCommonData, appearance, null, Collections.emptyList());
 	}
 
-	public PlayerAccountData(PlayerCommonData playerCommonData, PlayerAppearance appearance, CharacterBanInfo cbi, List<VisibleItem> visibleItems,
-		LegionMember legionMember) {
+	public PlayerAccountData(PlayerCommonData playerCommonData, PlayerAppearance appearance, CharacterBanInfo cbi, List<VisibleItem> visibleItems) {
 		this.playerCommonData = playerCommonData;
 		this.appearance = appearance;
 		this.cbi = cbi;
-		this.legionMember = legionMember;
 		this.visibleItems = visibleItems;
 		updateBoundingRadius();
 	}
@@ -104,27 +99,8 @@ public class PlayerAccountData {
 		playerCommonData.setBoundingRadius(new BoundRadius(0.25f, 0.25f, appearance.getBoundHeight()));
 	}
 
-	/**
-	 * @param timestamp
-	 */
 	public void setCreationDate(Timestamp creationDate) {
 		this.creationDate = creationDate;
-	}
-
-	/**
-	 * @return the legionMember
-	 */
-	public Legion getLegion() {
-		return legionMember.getLegion();
-	}
-
-	/**
-	 * Returns true if player is a legion member
-	 * 
-	 * @return true or false
-	 */
-	public boolean isLegionMember() {
-		return legionMember != null;
 	}
 
 	public List<VisibleItem> getVisibleItems() {

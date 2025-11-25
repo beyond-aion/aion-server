@@ -3,7 +3,10 @@ package com.aionemu.gameserver.model.team.legion;
 import java.sql.Timestamp;
 import java.time.Duration;
 import java.util.*;
+import java.util.concurrent.CopyOnWriteArrayList;
 import java.util.concurrent.atomic.AtomicBoolean;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import com.aionemu.gameserver.configs.main.LegionConfig;
 import com.aionemu.gameserver.model.gameobjects.AionObject;
@@ -22,8 +25,7 @@ public class Legion extends AionObject {
 	private String legionName;
 	private int legionLevel = 1;
 	private long contributionPoints = 0;
-	private Collection<Integer> legionMembers = new ArrayList<>();
-	private int onlineMembersCount = 0;
+	private List<Integer> memberIds = new CopyOnWriteArrayList<>();
 	private short deputyPermission = 0x1E0C;
 	private short centurionPermission = 0x1C08;
 	private short legionaryPermission = 0x1800;
@@ -33,7 +35,7 @@ public class Legion extends AionObject {
 	private LegionEmblem legionEmblem = new LegionEmblem();
 	private final LegionWarehouse legionWarehouse;
 	private final Map<Type, List<LegionHistoryEntry>> legionHistoryByType = new EnumMap<>(Type.class);
-	private AtomicBoolean hasBonus = new AtomicBoolean(false);
+	private final AtomicBoolean hasBonus = new AtomicBoolean(false);
 	private int occupiedLegionDominion = 0;
 	private int currentLegionDominion = 0;
 	private int lastLegionDominion = 0;
@@ -54,132 +56,69 @@ public class Legion extends AionObject {
 		return legionName;
 	}
 
-	/**
-	 * @param legionName
-	 *          the legionName to set
-	 */
 	public void setName(String legionName) {
 		this.legionName = legionName;
 	}
 
-	/**
-	 * @param legionMembers
-	 *          the legionMembers to set
-	 */
-	public void setLegionMembers(List<Integer> legionMembers) {
-		this.legionMembers = legionMembers;
+	public void setMemberIds(List<Integer> memberIds) {
+		this.memberIds = memberIds;
 	}
 
-	/**
-	 * @return the legionMembers
-	 */
-	public Collection<Integer> getLegionMembers() {
-		return legionMembers;
+	public List<Integer> getMemberIds() {
+		return memberIds;
 	}
 
-	/**
-	 * @return the online legionMembers
-	 */
-	public List<Player> getOnlineLegionMembers() {
-		List<Player> onlineLegionMembers = new ArrayList<>();
-		for (int legionMemberObjId : legionMembers) {
-			Player onlineLegionMember = World.getInstance().getPlayer(legionMemberObjId);
-			if (onlineLegionMember != null)
-				onlineLegionMembers.add(onlineLegionMember);
-		}
-		return onlineLegionMembers;
+	public List<LegionMember> getMembers() {
+		return streamMembers().collect(Collectors.toList());
 	}
 
-	public int getBrigadeGeneral() {
-		for (int memberObjId : legionMembers) {
-			LegionMember legionMember = LegionService.getInstance().getLegionMember(memberObjId);
-			if (legionMember.getRank() == LegionRank.BRIGADE_GENERAL)
-				return memberObjId;
-		}
-		return 0;
+	private Stream<LegionMember> streamMembers() {
+		return memberIds.stream().map(LegionService.getInstance()::getLegionMember).filter(Objects::nonNull);
 	}
 
-	/**
-	 * Add a legionMember to the legionMembers list
-	 *
-	 * @param legionMember
-	 */
+	public List<Player> getOnlinePlayers() {
+		return memberIds.stream().map(World.getInstance()::getPlayer).filter(Objects::nonNull).collect(Collectors.toList());
+	}
+
+	public LegionMember getBrigadeGeneral() {
+		return streamMembers().filter(LegionMember::isBrigadeGeneral).findFirst().orElseThrow();
+	}
+
 	public boolean addLegionMember(int playerObjId) {
 		if (canAddMember()) {
-			legionMembers.add(playerObjId);
+			memberIds.add(playerObjId);
 			return true;
 		}
 		return false;
 	}
 
-	/**
-	 * Delete a legionMember from the legionMembers list
-	 *
-	 * @param playerObjId
-	 */
-	public void deleteLegionMember(int playerObjId) {
-		legionMembers.remove(playerObjId);
+	public void removeMember(int playerObjId) {
+		memberIds.remove(playerObjId);
 	}
 
-	public int getOnlineMembersCount() {
-		return this.onlineMembersCount;
-	}
-
-	public void decreaseOnlineMembersCount() {
-		this.onlineMembersCount--;
-	}
-
-	public void increaseOnlineMembersCount() {
-		this.onlineMembersCount++;
-	}
-
-	/**
-	 * This method will set the permissions
-	 *
-	 * @param legionarPermission2
-	 * @param centurionPermission1
-	 * @param centurionPermission2
-	 * @return true or false
-	 */
-	public boolean setLegionPermissions(short deputyPermission, short centurionPermission, short legionaryPermission, short volunteerPermission) {
+	public void setLegionPermissions(short deputyPermission, short centurionPermission, short legionaryPermission, short volunteerPermission) {
 		this.deputyPermission = deputyPermission;
 		this.centurionPermission = centurionPermission;
 		this.legionaryPermission = legionaryPermission;
 		this.volunteerPermission = volunteerPermission;
-		return true;
 	}
 
-	/**
-	 * @return the deputyPermission
-	 */
 	public short getDeputyPermission() {
 		return deputyPermission;
 	}
 
-	/**
-	 * @return the centurionPermission
-	 */
 	public short getCenturionPermission() {
 		return centurionPermission;
 	}
 
-	/**
-	 * @return the legionarPermission
-	 */
 	public short getLegionaryPermission() {
 		return legionaryPermission;
 	}
 
-	/**
-	 * @return the volunteerPermission
-	 */
 	public short getVolunteerPermission() {
 		return volunteerPermission;
 	}
 
-	/**
-	 * @return the legionLevel
-	 */
 	public int getLegionLevel() {
 		return legionLevel;
 	}
@@ -189,24 +128,14 @@ public class Legion extends AionObject {
 		getLegionWarehouse().updateLimit(getWarehouseExpansions());
 	}
 
-	/**
-	 * @param contributionPoints
-	 *          the contributionPoints to set
-	 */
 	public void addContributionPoints(long contributionPoints) {
 		this.contributionPoints += contributionPoints;
 	}
 
-	/**
-	 * @param newPoints
-	 */
 	public void setContributionPoints(long contributionPoints) {
 		this.contributionPoints = contributionPoints;
 	}
 
-	/**
-	 * @return the contributionPoints
-	 */
 	public long getContributionPoints() {
 		return contributionPoints;
 	}
@@ -217,7 +146,7 @@ public class Legion extends AionObject {
 	 * @return true or false
 	 */
 	public boolean hasRequiredMembers() {
-		int memberSize = getLegionMembers().size();
+		int memberSize = getMemberIds().size();
 		switch (getLegionLevel()) {
 			case 1:
 				return memberSize >= LegionConfig.LEGION_LEVEL2_REQUIRED_MEMBERS;
@@ -293,7 +222,7 @@ public class Legion extends AionObject {
 	 * @return
 	 */
 	private boolean canAddMember() {
-		int memberSize = getLegionMembers().size();
+		int memberSize = getMemberIds().size();
 		switch (getLegionLevel()) {
 			case 1:
 				return memberSize < LegionConfig.LEGION_LEVEL1_MAX_MEMBERS;
@@ -352,7 +281,7 @@ public class Legion extends AionObject {
 	 * @return true if ID is found in the list
 	 */
 	public boolean isMember(int playerObjId) {
-		return legionMembers.contains(playerObjId);
+		return memberIds.contains(playerObjId);
 	}
 
 	/**
@@ -411,7 +340,7 @@ public class Legion extends AionObject {
 	}
 
 	public void addBonus() {
-		List<Player> members = getOnlineLegionMembers();
+		List<Player> members = getOnlinePlayers();
 		if (members.size() >= 10) {
 			if (hasBonus.compareAndSet(false, true)) {
 				for (Player member : members) {
@@ -422,7 +351,7 @@ public class Legion extends AionObject {
 	}
 
 	public void removeBonus() {
-		List<Player> members = getOnlineLegionMembers();
+		List<Player> members = getOnlinePlayers();
 		if (members.size() < 10) {
 			if (hasBonus.compareAndSet(true, false)) {
 				for (Player member : members) {
