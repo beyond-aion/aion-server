@@ -27,7 +27,7 @@ public class GloryPointsService {
 		if (amount > 0)
 			increaseGpBy(playerObjId, amount, applyRatesOnIncrease, modifyStatsOnIncrease);
 		else
-			decreaseGpBy(playerObjId, amount);
+			decreaseGpBy(playerObjId, -amount);
 	}
 
 	public static void increaseGpBy(int playerObjId, int amount) {
