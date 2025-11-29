@@ -1,20 +1,10 @@
 /*
-* DB changes since 16e4dcf (15.12.2024)
+* DB changes since 937026f (28.11.2025)
  */
 
-DROP TABLE `skill_motions`;
-DROP TABLE `tasks`;
-DELETE inventory FROM inventory LEFT JOIN legions l ON l.id = item_owner WHERE item_location = 3 AND l.id IS NULL;
-ALTER TABLE `inventory`
-	CHANGE COLUMN `enchant` `enchant` TINYINT UNSIGNED NOT NULL DEFAULT '0' AFTER `item_location`,
-	CHANGE COLUMN `optional_socket` `optional_socket` TINYINT UNSIGNED NOT NULL DEFAULT (0) AFTER `fusioned_item`,
-	CHANGE COLUMN `optional_fusion_socket` `optional_fusion_socket` TINYINT UNSIGNED NOT NULL DEFAULT (0) AFTER `optional_socket`,
-	CHANGE COLUMN `rnd_plume_bonus` `rnd_plume_bonus` SMALLINT UNSIGNED NOT NULL DEFAULT (0) AFTER `buff_skill`;
-ALTER TABLE `player_registered_items`
-	DROP INDEX `item_unique_id`,
-	ADD UNIQUE INDEX `item_unique_id` (`item_unique_id`) USING BTREE;
-DELETE b FROM broker b LEFT JOIN inventory i ON b.item_pointer = i.item_unique_id AND i.item_location = 126 WHERE i.item_id != b.item_id OR i.item_id IS NULL AND b.is_sold = 0;
--- Broken Hearts event items
-DELETE FROM inventory WHERE item_id IN (188052318, 188100091, 188100092, 188100093, 188100094);
--- Rainbow Snake Festival event items
-DELETE FROM inventory WHERE item_id IN (188053672, 188053673, 188053674, 188100257, 188100258, 188100259, 182007171);
+DROP TABLE IF EXISTS advent;
+CREATE TABLE `advent` (
+	`account_id` int NOT NULL,
+	`last_day_received` date NOT NULL,
+	PRIMARY KEY (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

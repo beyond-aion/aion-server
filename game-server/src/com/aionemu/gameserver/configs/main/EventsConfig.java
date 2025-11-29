@@ -41,4 +41,10 @@ public class EventsConfig {
 
 	@Property(key = "gameserver.event.headhunting.consolation_prize_kills", defaultValue = "50")
 	public static int HEADHUNTING_CONSOLATION_PRIZE_KILLS;
+
+	/**
+	 * Advent Calendar
+	 */
+	@Property(key = "gameserver.event.advent_calendar.enable", defaultValue = "false")
+	public static boolean ENABLE_ADVENT_CALENDAR;
 }

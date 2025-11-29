@@ -55,6 +55,16 @@ CREATE TABLE `account_stamps` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
+-- Table structure for `advent`
+-- ----------------------------
+DROP TABLE IF EXISTS `advent`;
+CREATE TABLE `advent` (
+  `account_id` int NOT NULL,
+  `last_day_received` date NOT NULL,
+  PRIMARY KEY (`account_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
 -- Table structure for `announcements`
 -- ----------------------------
 DROP TABLE IF EXISTS `announcements`;
