@@ -17,7 +17,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Equipment;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.siege.Influence;
-import com.aionemu.gameserver.model.stats.calc.AdditionStat;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.StatCapUtil;
 import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
@@ -264,11 +263,11 @@ public class StatFunctions {
 	}
 
 	/**
-	 * Hate based on BOOST_HATE stat Now used only from skills, probably need to use for regular attack
+	 * Applies BOOST_HATE modifiers from equipment and buffs
 	 */
 	public static int calculateHate(Creature creature, int value) {
-		Stat2 stat = new AdditionStat(StatEnum.BOOST_HATE, value, creature, 0.1f);
-		return creature.getGameStats().getStat(StatEnum.BOOST_HATE, stat).getCurrent();
+		int boostHate = creature.getGameStats().getStat(StatEnum.BOOST_HATE, 100).getCurrent();
+		return (int) ((long) value * (1000 + boostHate) / 1000);
 	}
 
 	public static List<AttackResult> calculateAttackDamage(Creature attacker,
