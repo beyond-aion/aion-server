@@ -93,7 +93,7 @@ public class Legion extends AionObject {
 	}
 
 	public void removeMember(int playerObjId) {
-		memberIds.remove(playerObjId);
+		memberIds.remove((Integer) playerObjId);
 	}
 
 	public void setLegionPermissions(short deputyPermission, short centurionPermission, short legionaryPermission, short volunteerPermission) {
