@@ -104,24 +104,28 @@ public class LegionService {
 		Legion legion = legionsById.values().stream().filter(l -> l.getName().equalsIgnoreCase(legionName)).findAny().orElse(null);
 		if (legion == null) {
 			legion = LegionDAO.loadLegion(legionName);
-			if (legion == null)
+			if (legion == null || checkDisband(legion))
 				return null;
 			loadLegionInfo(legion);
 			addCachedLegion(legion);
+		} else if (checkDisband(legion)) {
+			return null;
 		}
-		return checkDisband(legion) ? null : legion;
+		return legion;
 	}
 
 	public Legion getLegion(int legionId) {
 		Legion legion = legionsById.get(legionId);
 		if (legion == null) {
 			legion = LegionDAO.loadLegion(legionId);
-			if (legion == null)
+			if (legion == null || checkDisband(legion))
 				return null;
 			loadLegionInfo(legion);
 			addCachedLegion(legion);
+		} else if (checkDisband(legion)) {
+			return null;
 		}
-		return checkDisband(legion) ? null : legion;
+		return legion;
 	}
 
 	private void loadLegionInfo(Legion legion) {

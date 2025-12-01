@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Objects;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -87,7 +86,9 @@ public class LegionMemberDAO {
 			if (!resultSet.next())
 				return null;
 			int legionId = resultSet.getInt("legion_id");
-			Legion legion = Objects.requireNonNull(LegionService.getInstance().getLegion(legionId));
+			Legion legion = LegionService.getInstance().getLegion(legionId);
+			if (legion == null) // disbanded by calling getLegion
+				return null;
 			LegionMember legionMember = new LegionMember(playerObjId, legion);
 			legionMember.setRank(LegionRank.valueOf(resultSet.getString("rank")));
 			legionMember.setNickname(resultSet.getString("nickname"));
