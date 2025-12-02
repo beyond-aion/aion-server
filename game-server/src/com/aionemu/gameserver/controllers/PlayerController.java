@@ -144,6 +144,13 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
+	public void onTargetChanged(VisibleObject oldTarget, VisibleObject newTarget) {
+		super.onTargetChanged(oldTarget, newTarget);
+		PacketSendUtility.sendPacket(getOwner(), new SM_TARGET_SELECTED(newTarget));
+		PacketSendUtility.broadcastPacket(getOwner(), new SM_TARGET_UPDATE(getOwner()));
+	}
+
+	@Override
 	public void onHide() {
 		super.onHide();
 		DuelService.getInstance().fixTeamVisibility(getOwner());

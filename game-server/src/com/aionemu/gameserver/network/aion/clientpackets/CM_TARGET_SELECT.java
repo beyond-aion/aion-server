@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.network.aion.clientpackets;
 
-import java.util.Objects;
 import java.util.Set;
 
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -8,9 +7,6 @@ import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_UPDATE;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
@@ -68,12 +64,6 @@ public class CM_TARGET_SELECT extends AionClientPacket {
 				newTarget = null;
 			}
 		}
-		if (Objects.equals(newTarget, player.getTarget()))
-			return;
 		player.setTarget(newTarget);
-		int actualTargetId = player.getTarget() == null ? 0 : player.getTarget().getObjectId();
-		if (actualTargetId != targetObjectId)
-			sendPacket(new SM_TARGET_SELECTED(player.getTarget()));
-		PacketSendUtility.broadcastToSightedPlayers(player, new SM_TARGET_UPDATE(player));
 	}
 }

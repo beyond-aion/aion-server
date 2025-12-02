@@ -104,6 +104,12 @@ public class SummonController extends CreatureController<Summon> {
 	}
 
 	@Override
+	public void onTargetChanged(VisibleObject oldTarget, VisibleObject newTarget) {
+		super.onTargetChanged(oldTarget, newTarget);
+		getOwner().clearSkillOrders();
+	}
+
+	@Override
 	public void onDespawn() {
 		if (getOwner().getMode() == SummonMode.RELEASE)
 			getOwner().getEffectController().removeAllEffects();

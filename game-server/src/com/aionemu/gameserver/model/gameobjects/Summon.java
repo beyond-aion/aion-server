@@ -1,8 +1,7 @@
 package com.aionemu.gameserver.model.gameobjects;
 
-import java.util.LinkedList;
-import java.util.Objects;
 import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import java.util.concurrent.Future;
 
 import com.aionemu.gameserver.controllers.SiegeWeaponController;
@@ -32,7 +31,7 @@ public class Summon extends Creature {
 
 	private final Player master;
 	private SummonMode mode = SummonMode.GUARD;
-	private Queue<SkillOrder> skillOrders = new LinkedList<>();
+	private final Queue<SkillOrder> skillOrders = new ConcurrentLinkedQueue<>();
 	private Future<?> releaseTask;
 	private SkillElement alwaysResistElement = SkillElement.NONE;
 	private int summonedBySkillId, liveTime;
@@ -82,9 +81,6 @@ public class Summon extends Creature {
 		return master;
 	}
 
-	/**
-	 * @return the level
-	 */
 	@Override
 	public byte getLevel() {
 		return getObjectTemplate().getLevel();
@@ -103,9 +99,6 @@ public class Summon extends Creature {
 		return getObjectTemplate().getL10n();
 	}
 
-	/**
-	 * @return NpcObjectType.SUMMON
-	 */
 	@Override
 	public NpcObjectType getNpcObjectType() {
 		return NpcObjectType.SUMMON;
@@ -116,20 +109,13 @@ public class Summon extends Creature {
 		return (SummonController) super.getController();
 	}
 
-	/**
-	 * @return the mode
-	 */
 	public SummonMode getMode() {
 		return mode;
 	}
 
-	/**
-	 * @param mode
-	 *          the mode to set
-	 */
 	public void setMode(SummonMode mode) {
 		if (mode != SummonMode.ATTACK)
-			skillOrders.clear();
+			clearSkillOrders();
 		this.mode = mode;
 	}
 
@@ -197,17 +183,10 @@ public class Summon extends Creature {
 		this.liveTime = liveTime;
 	}
 
-	/**
-	 * @return the summonedBySkillId
-	 */
 	public int getSummonedBySkillId() {
 		return summonedBySkillId;
 	}
 
-	/**
-	 * @param summonedBySkillId
-	 *          the summonedBySkillId to set
-	 */
 	public void setSummonedBySkillId(int summonedBySkillId) {
 		this.summonedBySkillId = summonedBySkillId;
 	}
@@ -222,15 +201,6 @@ public class Summon extends Creature {
 		}
 	}
 
-	@Override
-	public void setTarget(VisibleObject target) {
-		SkillOrder order = skillOrders.peek();
-		if (order != null && !Objects.equals(target, order.getTarget())) {
-			skillOrders.clear();
-		}
-		super.setTarget(target);
-	}
-
 	public void addSkillOrder(int skillId, int skillLvl, Creature target, int hate, boolean release) {
 		skillOrders.add(new SkillOrder(skillId, skillLvl, target, hate, release));
 	}
@@ -241,6 +211,10 @@ public class Summon extends Creature {
 
 	public SkillOrder getNextSkillOrder() {
 		return skillOrders.peek();
+	}
+
+	public void clearSkillOrders() {
+		skillOrders.clear();
 	}
 
 	public SkillElement getAlwaysResistElement() {

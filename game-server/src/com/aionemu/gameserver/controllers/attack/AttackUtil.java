@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_TARGET_SELECTED;
 import com.aionemu.gameserver.skillengine.change.Func;
 import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
@@ -28,7 +27,6 @@ import com.aionemu.gameserver.skillengine.model.EffectReserved;
 import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.skillengine.model.SkillType;
-import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 
@@ -575,12 +573,8 @@ public class AttackUtil {
 
 	public static void removeTargetFrom(Creature object, boolean validateSee) {
 		object.getKnownList().forEachPlayer(player -> {
-			if (player.getTarget() == object) {
-				if (!validateSee || !player.canSee(object)) {
-					player.setTarget(null);
-					PacketSendUtility.sendPacket(player, new SM_TARGET_SELECTED(null));
-				}
-			}
+			if (player.getTarget() == object && (!validateSee || !player.canSee(object)))
+				player.setTarget(null);
 		});
 	}
 

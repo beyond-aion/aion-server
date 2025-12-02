@@ -24,7 +24,6 @@ import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTargetAttribute;
 import com.aionemu.gameserver.model.templates.npcskill.QueuedNpcSkillTemplate;
 import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
 import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.skillengine.effect.SummonOwner;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
@@ -291,20 +290,6 @@ public class Npc extends Creature {
 
 	public VisibleObject getCreator() {
 		return null;
-	}
-
-	@Override
-	public void setTarget(VisibleObject creature) {
-		if (getTarget() != creature) {
-			super.setTarget(creature);
-			super.clearAttackedCount();
-			getGameStats().renewLastChangeTargetTime();
-			if (!isDead()) {
-				if (creature != null && !this.equals(creature))
-					getPosition().setH(PositionUtil.getHeadingTowards(this, creature));
-				PacketSendUtility.broadcastPacket(this, new SM_LOOKATOBJECT(this));
-			}
-		}
 	}
 
 	public void setWalkerGroup(WalkerGroup wg) {

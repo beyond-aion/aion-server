@@ -199,18 +199,15 @@ public abstract class VisibleObject extends AionObject {
 		return controller;
 	}
 
-	/**
-	 * @return VisibleObject
-	 */
 	public final VisibleObject getTarget() {
 		return target;
 	}
 
-	/**
-	 * @param creature
-	 */
-	public void setTarget(VisibleObject creature) {
-		target = creature;
+	public final void setTarget(VisibleObject creature) {
+		if (target != creature) {
+			target = creature;
+			getController().onTargetChanged(target, creature);
+		}
 	}
 
 	/**

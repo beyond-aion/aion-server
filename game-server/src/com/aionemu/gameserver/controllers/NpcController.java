@@ -25,6 +25,7 @@ import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.common.service.PlayerTeamDistributionService;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.LOG;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_LOOKATOBJECT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_PET;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -69,6 +70,18 @@ public class NpcController extends CreatureController<Npc> {
 			getOwner().getAi().onCreatureEvent(AIEventType.CREATURE_NOT_SEE, creature);
 		}
 		super.notSee(object, animation);
+	}
+
+	@Override
+	public void onTargetChanged(VisibleObject oldTarget, VisibleObject newTarget) {
+		super.onTargetChanged(oldTarget, newTarget);
+		getOwner().clearAttackedCount();
+		getOwner().getGameStats().renewLastChangeTargetTime();
+		if (!getOwner().isDead()) {
+			if (newTarget != null && !getOwner().equals(newTarget))
+				getOwner().getPosition().setH(PositionUtil.getHeadingTowards(getOwner(), newTarget));
+			PacketSendUtility.broadcastPacket(getOwner(), new SM_LOOKATOBJECT(getOwner()));
+		}
 	}
 
 	@Override

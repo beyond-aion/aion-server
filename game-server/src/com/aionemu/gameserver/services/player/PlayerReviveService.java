@@ -188,10 +188,8 @@ public class PlayerReviveService {
 
 	public static void revive(Player player, int hpPercent, int mpPercent, boolean setSoulSickness, int resurrectionSkill) {
 		player.getKnownList().forEachPlayer(p -> {
-			if (player.equals(p.getTarget())) {
+			if (player.equals(p.getTarget()))
 				p.setTarget(null);
-				PacketSendUtility.sendPacket(p, new SM_TARGET_SELECTED(null));
-			}
 		});
 		boolean isNoResurrectPenalty = player.getEffectController().hasAbnormalEffect(Effect::isNoResurrectPenalty);
 		player.setPlayerResActivate(false);
