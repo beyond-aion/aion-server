@@ -300,8 +300,7 @@ public class LegionService {
 
 	private void appointBrigadeGeneral(final Player activePlayer, final Player targetPlayer) {
 		if (legionRestrictions.canAppointBrigadeGeneral(activePlayer, targetPlayer)) {
-			final Legion legion = activePlayer.getLegion();
-			RequestResponseHandler<Player> responseHandler = new RequestResponseHandler<Player>(activePlayer) {
+			RequestResponseHandler<Player> responseHandler = new RequestResponseHandler<>(activePlayer) {
 
 				@Override
 				public void acceptRequest(Player requester, Player responder) {
@@ -310,7 +309,7 @@ public class LegionService {
 					} else if (!legionRestrictions.canAppointBrigadeGeneral(requester, responder)) {
 						AuditLogger.log(requester, "possibly tried to exploit legion leadership transfer");
 					} else {
-						appointBrigadeGeneral(responder);
+						appointBrigadeGeneral(responder.getLegionMember());
 					}
 				}
 
@@ -336,19 +335,19 @@ public class LegionService {
 		}
 	}
 
-	public void appointBrigadeGeneral(Player player) {
-		if (player.getLegionMember().isBrigadeGeneral())
+	public void appointBrigadeGeneral(LegionMember member) {
+		if (member.isBrigadeGeneral())
 			return;
-		Legion legion = player.getLegion();
+		Legion legion = member.getLegion();
 		LegionMember prevBrigadeGeneral = legion.getBrigadeGeneral();
 		prevBrigadeGeneral.setRank(LegionRank.CENTURION);
 		if (!prevBrigadeGeneral.isOnline())
 			LegionMemberDAO.storeLegionMember(prevBrigadeGeneral);
 		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_UPDATE_MEMBER(prevBrigadeGeneral));
-		player.getLegionMember().setRank(LegionRank.BRIGADE_GENERAL);
-		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_UPDATE_MEMBER(player, 1300273, player.getName()));
+		member.setRank(LegionRank.BRIGADE_GENERAL);
+		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_UPDATE_MEMBER(member, 1300273, member.getName()));
 		PacketSendUtility.broadcastToLegion(legion, new SM_LEGION_EDIT(0x08));
-		addHistory(legion, player.getName(), LegionHistoryAction.APPOINTED);
+		addHistory(legion, member.getName(), LegionHistoryAction.APPOINTED);
 	}
 
 	/**
