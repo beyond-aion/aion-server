@@ -1,162 +1,85 @@
 package com.aionemu.gameserver.model.templates.quest;
 
-import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Rewards", propOrder = { "selectableRewardItem", "rewardItem" })
 public class Rewards {
 
 	@XmlElement(name = "selectable_reward_item")
-	protected List<QuestItems> selectableRewardItem;
+	private List<QuestItems> selectableRewardItem;
 	@XmlElement(name = "reward_item")
-	protected List<QuestItems> rewardItem;
+	private List<QuestItems> rewardItem;
+	@XmlAttribute(name = "gold")
+	private long kinah;
 	@XmlAttribute
-	protected Integer gold;
-	@XmlAttribute
-	protected Integer exp;
+	private int exp;
 	@XmlAttribute(name = "ap")
-	protected Integer abyssPoints;
+	private int abyssPoints;
 	@XmlAttribute(name = "dp")
-	private Integer divinePoints;
+	private int divinePoints;
 	@XmlAttribute(name = "gp")
-	protected Integer gloryPoints;
+	private int gloryPoints;
 	@XmlAttribute
-	protected Integer title;
+	private int title;
 	@XmlAttribute(name = "extend_inventory")
-	protected Integer extendInventory;
+	private int extendInventory;
 	@XmlAttribute(name = "extend_stigma")
-	protected Integer extendStigma;
+	private int extendStigma;
+	@XmlAttribute(name = "ccheck")
+	private List<Integer> collectItemChecks;
+	@XmlAttribute(name = "icheck")
+	private int inventoryItemCheck;
 
-	@XmlAttribute
-	protected List<Integer> icheck;
-	@XmlAttribute
-	protected List<Integer> ccheck;
-
-	/**
-	 * Gets the value of the selectableRewardItem property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the selectableRewardItem property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getSelectableRewardItem().add(newItem);
-	 * </pre>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link QuestItems }
-	 */
 	public List<QuestItems> getSelectableRewardItem() {
-		if (selectableRewardItem == null) {
-			selectableRewardItem = new ArrayList<>();
-		}
-		return this.selectableRewardItem;
+		return selectableRewardItem == null ? Collections.emptyList() : selectableRewardItem;
 	}
 
-	/**
-	 * Gets the value of the rewardItem property.
-	 * <p>
-	 * This accessor method returns a reference to the live list, not a snapshot. Therefore any modification you make to the returned list will be
-	 * present inside the JAXB object. This is why there is not a <CODE>set</CODE> method for the rewardItem property.
-	 * <p>
-	 * For example, to add a new item, do as follows:
-	 * 
-	 * <pre>
-	 * getRewardItem().add(newItem);
-	 * </pre>
-	 * <p>
-	 * Objects of the following type(s) are allowed in the list {@link QuestItems }
-	 */
 	public List<QuestItems> getRewardItem() {
-		if (rewardItem == null) {
-			rewardItem = new ArrayList<>();
-		}
-		return this.rewardItem;
+		return rewardItem == null ? Collections.emptyList() : rewardItem;
 	}
 
-	/**
-	 * Gets the value of the gold property.
-	 * 
-	 * @return possible object is {@link Integer }
-	 */
-	public Integer getGold() {
-		return gold;
+	public long getKinah() {
+		return kinah;
 	}
 
-	/**
-	 * Gets the value of the exp property.
-	 * 
-	 * @return possible object is {@link Integer }
-	 */
-	public Integer getExp() {
+	public int getExp() {
 		return exp;
 	}
 
-	/**
-	 * Gets the value of the abyssPoints property.
-	 * 
-	 * @return possible object is {@link Integer }
-	 */
-	public Integer getAp() {
+	public int getAp() {
 		return abyssPoints;
 	}
 
-	/**
-	 * Gets the value of the divinePoints property.
-	 * 
-	 * @return possible object is {@link Integer }
-	 */
-	public Integer getDp() {
+	public int getDp() {
 		return divinePoints;
 	}
 
-	/**
-	 * Gets the value of the gloryPoints property.
-	 * 
-	 * @return possible object is {@link Integer }
-	 */
-	public Integer getGp() {
+	public int getGp() {
 		return gloryPoints;
 	}
 
-	/**
-	 * Gets the value of the title property.
-	 * 
-	 * @return possible object is {@link Integer }
-	 */
-	public Integer getTitle() {
+	public int getTitle() {
 		return title;
 	}
 
-	/**
-	 * @return the extendInventory
-	 */
-	public Integer getExtendInventory() {
+	public int getExtendInventory() {
 		return extendInventory;
 	}
 
-	/**
-	 * @return the extendStigma
-	 */
-	public Integer getExtendStigma() {
+	public int getExtendStigma() {
 		return extendStigma;
 	}
 
 	public List<Integer> getCollectItemChecks() {
-		return ccheck;
+		return collectItemChecks == null ? Collections.emptyList() : collectItemChecks;
 	}
 
-	public List<Integer> getInventoryItemChecks() {
-		if (icheck == null)
-			icheck = new ArrayList<>();
-		return this.icheck;
+	public int getInventoryItemCheck() {
+		return inventoryItemCheck;
 	}
 
 }
