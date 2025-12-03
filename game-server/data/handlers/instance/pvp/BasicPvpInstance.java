@@ -91,7 +91,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 	protected void distributeRewards(Player player, PvpInstancePlayerReward reward) {
 		PacketSendUtility.sendPacket(player, new SM_INSTANCE_SCORE(instance.getMapId(),
 			new PvpInstanceScoreWriter(instanceScore, InstanceScoreType.SHOW_REWARD, player.getObjectId(), 0), getTime()));
-		AbyssPointsService.addAp(player, (int) Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
+		AbyssPointsService.addAp(player, Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
 		int gpToAdd = reward.getBaseGp() + reward.getBonusGp();
 		if (gpToAdd > 0)
 			GloryPointsService.increaseGpBy(player.getObjectId(), gpToAdd);

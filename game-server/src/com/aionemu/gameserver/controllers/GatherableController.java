@@ -166,7 +166,7 @@ public class GatherableController extends VisibleObjectController<Gatherable> {
 			int xpReward = (int) ((0.0031 * (skillLvl + 5.3) * (skillLvl + 1592.8) + 60));
 
 			int skillId = getOwner().getObjectTemplate().getHarvestSkill();
-			int gainedGatherXp = (int) Rates.SKILL_XP_GATHERING.calcResult(player, xpReward);
+			int gainedGatherXp = Rates.SKILL_XP_GATHERING.calcResult(player, xpReward);
 			StatEnum boostStat = StatEnum.getModifier(skillId);
 			if (boostStat != null)
 				gainedGatherXp *= player.getGameStats().getStat(boostStat, 100).getCurrent() / 100f;

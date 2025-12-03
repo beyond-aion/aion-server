@@ -229,9 +229,8 @@ public final class QuestService {
 			player.getTitleList().addTitle(rewards.getTitle(), true, 0);
 		if (rewards.getAp() != 0) {
 			int ap = rewards.getAp();
-			if (DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getCategory() != QuestCategory.NON_COUNT) // don't multiply with quest rates for relic
-																																																					// exchanges
-				ap = (int) Rates.AP_QUEST.calcResult(player, ap);
+			if (DataManager.QUEST_DATA.getQuestById(env.getQuestId()).getCategory() != QuestCategory.NON_COUNT) // don't multiply with quest rates for relic exchanges
+				ap = Rates.AP_QUEST.calcResult(player, ap);
 			AbyssPointsService.addAp(player, ap);
 		}
 		if (rewards.getDp() != 0)

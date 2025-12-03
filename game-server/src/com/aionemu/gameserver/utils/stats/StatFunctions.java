@@ -104,7 +104,7 @@ public class StatFunctions {
 		// http://www.aionsource.com/forum/mechanic-analysis/42597-character-stats-xp-dp-origin-gerbator-team-july-2009-a.html
 		int baseDP = targetLevel * calculateRatingMultiplier(npcRating);
 		int xpPercentage = XPRewardEnum.xpRewardFrom(targetLevel - playerLevel);
-		return (int) Rates.DP_PVE.calcResult(player, (int) Math.floor(baseDP * xpPercentage / 100f));
+		return Rates.DP_PVE.calcResult(player, (int) Math.floor(baseDP * xpPercentage / 100f));
 	}
 
 	/**
@@ -120,7 +120,7 @@ public class StatFunctions {
 		if (target.getName().equals("flame hoverstone"))
 			apNpcRate = 0.5f;
 
-		return (int) Rates.AP_PVE.calcResult(player, (int) Math.floor(15 * apNpcRate));
+		return Rates.AP_PVE.calcResult(player, (int) Math.floor(15 * apNpcRate));
 	}
 
 	/**
@@ -139,7 +139,7 @@ public class StatFunctions {
 		else if (difference == 3)
 			pointsLost = Math.round(pointsLost * 0.85f);
 
-		return (int) Rates.AP_PVP_LOST.calcResult(defeated, pointsLost);
+		return Rates.AP_PVP_LOST.calcResult(defeated, pointsLost);
 	}
 
 	/**

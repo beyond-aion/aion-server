@@ -45,7 +45,7 @@ public class GloryPointsService {
 			AbyssRankDAO.increaseGp(playerObjId, amount, modifyStats);
 		} else {
 			if (applyRates)
-				amount = (int) Rates.GP.calcResult(player, amount);
+				amount = Rates.GP.calcResult(player, amount);
 			player.getAbyssRank().increaseGp(amount, modifyStats);
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_GAIN(amount));
 			PacketSendUtility.sendPacket(player, new SM_ABYSS_RANK(player));

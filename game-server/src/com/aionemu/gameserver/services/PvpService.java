@@ -242,18 +242,13 @@ public class PvpService {
 			int memberXpGain = 1;
 			int memberDpGain = 1;
 			if (KillCounter.addKillFor(member.getObjectId(), victim.getObjectId()) < CustomConfig.MAX_DAILY_PVP_KILLS) {
-				if (apRewardPerMember > 0) {
-					try {
-						memberApGain = Math.toIntExact(Rates.AP_PVP.calcResult(member, apRewardPerMember));
-					} catch (ArithmeticException ae) {
-						log.error("Attempt to add a massive amount of ap to player " + member.getName() + " that overflows Integer.MAX_VALUE!");
-					}
-				}
+				if (apRewardPerMember > 0)
+					memberApGain = Rates.AP_PVP.calcResult(member, apRewardPerMember);
 				if (xpRewardPerMember > 0)
 					memberXpGain = xpRewardPerMember; // rates are applied in addExp()
 				if (dpRewardPerMember > 0) {
 					memberDpGain = StatFunctions.adjustPvpDpGained(dpRewardPerMember, victim.getLevel(), member.getLevel());
-					memberDpGain = (int) Rates.DP_PVP.calcResult(member, memberDpGain);
+					memberDpGain = Rates.DP_PVP.calcResult(member, memberDpGain);
 				}
 
 			}

@@ -133,7 +133,7 @@ public class DredgionInstance extends GeneralInstanceHandler {
 	private void distributeRewards(Player player, PvpInstancePlayerReward reward) {
 		QuestEnv env = new QuestEnv(null, player, 0);
 		QuestEngine.getInstance().onDredgionReward(env);
-		AbyssPointsService.addAp(player, (int) Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
+		AbyssPointsService.addAp(player, Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
 		if (reward.getReward1ItemId() > 0)
 			ItemService.addItem(player, reward.getReward1ItemId(), reward.getReward1Count() + reward.getReward1BonusCount(), true);
 		if (reward.getReward2ItemId() > 0)

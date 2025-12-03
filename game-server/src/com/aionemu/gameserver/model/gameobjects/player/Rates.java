@@ -150,6 +150,16 @@ public enum Rates {
 
 	public abstract long calcResult(Player player, long value);
 
+	public int calcResult(Player player, int value) {
+		long result = calcResult(player, (long) value);
+		try {
+			return Math.toIntExact(result);
+		} catch (ArithmeticException e) {
+			LoggerFactory.getLogger(getClass()).error(name() + " result is too large for " + player + ": " + result, e);
+			return value;
+		}
+	}
+
 	/**
 	 * @return The rate for the given player, selected by his current membership
 	 */
