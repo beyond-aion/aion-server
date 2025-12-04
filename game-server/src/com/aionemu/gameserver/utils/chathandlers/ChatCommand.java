@@ -1,6 +1,8 @@
 package com.aionemu.gameserver.utils.chathandlers;
 
 import java.awt.Color;
+import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -166,6 +168,14 @@ public abstract class ChatCommand {
 			String[] enumNameParts = enumName.split("(?<=[a-z])(?=[A-Z])|(?<=[A-Z])(?=[A-Z][a-z])"); // -> ["Siege", "Race"]
 			enumName = String.join(" ", enumNameParts).toLowerCase(); // -> "siege race"
 			msg = "Invalid " + enumName + ".";
+			try {
+				Class<?> enumClass = Class.forName(Stream.of(enumParts).limit(enumParts.length - 1).collect(Collectors.joining(".")));
+				@SuppressWarnings("unchecked")
+				String values = Stream.of(((Class<Enum<?>>) enumClass).getEnumConstants()).map(Enum::toString).collect(Collectors.joining(", "));
+				msg += "\nPossible values:\n" + values;
+			} catch (Exception ex) {
+				log.error("Could not get enum values for " + enumName, ex);
+			}
 		} else if (e instanceof NumberFormatException) { // Integer.parseInt and Long.parseLong don't provide nice error messages
 			if (msg != null && msg.startsWith("For input string: "))
 				msg = "Invalid number: " + msg.substring(18);
