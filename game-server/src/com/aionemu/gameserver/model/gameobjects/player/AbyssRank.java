@@ -101,25 +101,16 @@ public class AbyssRank implements Persistable {
 	}
 
 	/**
-	 * Do not use this method directly. Add GP by using {@link com.aionemu.gameserver.services.abyss.GloryPointsService}
+	 * Do not use this method directly. Add or subtract GP by using {@link com.aionemu.gameserver.services.abyss.GloryPointsService}
 	 * @param amount Amount of GloryPoints to add
 	 * @param addToStats true, if daily and weekly gp stats should be modified
 	 */
-	public void increaseGp(int amount, boolean addToStats) {
+	public void addGp(int amount, boolean addToStats) {
 		if (addToStats) {
 			dailyGP += amount;
 			weeklyGP += amount;
 		}
 		currentGp += amount;
-		setPersistentState(PersistentState.UPDATE_REQUIRED);
-	}
-
-	/**
-	 * Do not use this method directly. Remove GP by using {@link com.aionemu.gameserver.services.abyss.GloryPointsService}
-	 * @param amount Amount of GloryPoints to remove
-	 */
-	public void reduceGp(int amount) {
-		currentGp -= amount;
 		if (currentGp < 0)
 			currentGp = 0;
 		setPersistentState(PersistentState.UPDATE_REQUIRED);

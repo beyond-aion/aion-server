@@ -603,7 +603,7 @@ public abstract class PvPArenaInstance extends GeneralInstanceHandler {
 
 				ArenaRewardItem gpReward = reward.getGp();
 				if (gpReward.getTotalCount() > 0)
-					GloryPointsService.increaseGpBy(player.getObjectId(), gpReward.getTotalCount(), false, true);
+					GloryPointsService.addGp(player.getObjectId(), gpReward.getTotalCount());
 
 				ArenaRewardItem courageInsigniaReward = reward.getCourageInsignia();
 				if (courageInsigniaReward.getTotalCount() > 0)

@@ -94,7 +94,7 @@ public class BasicPvpInstance extends GeneralInstanceHandler {
 		AbyssPointsService.addAp(player, Rates.AP_DREDGION.calcResult(player, reward.getBaseAp() + reward.getBonusAp()));
 		int gpToAdd = reward.getBaseGp() + reward.getBonusGp();
 		if (gpToAdd > 0)
-			GloryPointsService.increaseGpBy(player.getObjectId(), gpToAdd);
+			GloryPointsService.addGp(player.getObjectId(), Rates.GP.calcResult(player, gpToAdd));
 		if (reward.getReward1ItemId() > 0)
 			ItemService.addItem(player, reward.getReward1ItemId(), reward.getReward1Count() + reward.getReward1BonusCount(), true);
 		if (reward.getReward2ItemId() > 0)

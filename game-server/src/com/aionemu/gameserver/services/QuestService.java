@@ -236,7 +236,7 @@ public final class QuestService {
 		if (rewards.getDp() != 0)
 			player.getCommonData().addDp(rewards.getDp());
 		if (rewards.getGp() != 0)
-			GloryPointsService.modifyGpBy(player.getObjectId(), rewards.getGp());
+			GloryPointsService.addGp(player.getObjectId(), Rates.GP.calcResult(player, rewards.getGp()));
 		if (rewards.getExtendInventory() == 1)
 			CubeExpandService.questExpand(player);
 		else if (rewards.getExtendInventory() == 2)

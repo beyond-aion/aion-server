@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.instance.InstanceProgressionType;
 import com.aionemu.gameserver.model.instance.instancescore.LegionDominionScore;
 import com.aionemu.gameserver.model.team.legion.Legion;
@@ -272,7 +273,7 @@ public class StonespearReachInstance extends GeneralInstanceHandler {
 			ItemService.addItem(player, reward.getRewardItem2(), reward.getRewardItem2Count(), true);
 			ItemService.addItem(player, reward.getRewardItem3(), reward.getRewardItem3Count(), true);
 			if (reward.getFinalGP() > 0) {
-				GloryPointsService.increaseGpBy(player.getObjectId(), reward.getFinalGP());
+				GloryPointsService.addGp(player.getObjectId(), Rates.GP.calcResult(player, reward.getFinalGP()));
 			}
 			if (reward.getFinalAp() > 0) {
 				AbyssPointsService.addAp(player, reward.getFinalAp());

@@ -345,7 +345,7 @@ public class FortressSiege extends Siege<FortressLocation> {
 			} else {
 				int gp = Math.min(Math.round(legionGp / (float) participatedLegionMembers.size()), SiegeConfig.LEGION_GP_CAP_PER_MEMBER);
 				for (int participant : participatedLegionMembers)
-					GloryPointsService.increaseGpBy(participant, gp);
+					GloryPointsService.addGp(participant, gp);
 				if (LoggingConfig.LOG_SIEGE)
 					log.info(this + ": Distributed " + gp + " GP each, to the following members of " + legion + ": " + participatedLegionMembers);
 			}

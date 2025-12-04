@@ -202,7 +202,7 @@ public abstract class Siege<SL extends SiegeLocation> {
 
 					if (gp > 0) {
 						rewardedGpPlayers.add(playerId);
-						GloryPointsService.increaseGpBy(playerId, gp);
+						GloryPointsService.addGp(playerId, gp); // Rates.GP.calcResult() cannot be fairly applied here, because some players could be offline
 					}
 				}
 				if (LoggingConfig.LOG_SIEGE && !rewardedGpPlayers.isEmpty()) {

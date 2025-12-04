@@ -32,9 +32,8 @@ public class AbyssRankDAO {
 	private static final String SELECT_QUERY = "SELECT daily_ap, weekly_ap, ap, daily_gp, weekly_gp, gp, `rank`, daily_kill, weekly_kill, all_kill, max_rank, last_kill, last_ap, last_gp, last_update FROM abyss_rank WHERE player_id = ?";
 	private static final String INSERT_QUERY = "INSERT INTO abyss_rank (player_id, daily_ap, weekly_ap, ap, `rank`, daily_kill, weekly_kill, all_kill, max_rank, last_kill, last_ap, last_update, daily_gp, weekly_gp, gp, last_gp) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 	private static final String UPDATE_QUERY = "UPDATE abyss_rank SET  daily_ap = ?, weekly_ap = ?, ap = ?, `rank` = ?, daily_kill = ?, weekly_kill = ?, all_kill = ?, max_rank = ?, last_kill = ?, last_ap = ?, last_update = ?, daily_gp = ?, weekly_gp = ?, gp = ?, last_gp = ? WHERE player_id = ?";
-	private static final String DECREASE_GP_DAILY = "UPDATE abyss_rank SET gp = gp - ? WHERE `rank` = ?";
-	private static final String DECREASE_GP_QUERY = "UPDATE abyss_rank SET gp = gp - ? WHERE player_id = ?";
-	private static final String INCREASE_GP_QUERY = "UPDATE abyss_rank SET gp = gp + ? WHERE player_id = ?";
+	private static final String DECREASE_GP_DAILY = "UPDATE abyss_rank SET gp = GREATEST(gp - ?, 0) WHERE `rank` = ?";
+	private static final String INCREASE_GP_QUERY = "UPDATE abyss_rank SET gp = GREATEST(gp + ?, 0) WHERE player_id = ?";
 	private static final String INCREASE_GP_QUERY_WITH_STATS = "UPDATE abyss_rank SET gp = gp + ?, daily_gp = daily_gp + ?, weekly_gp = weekly_gp + ? WHERE player_id = ?";
 	private static final String UPDATE_RANK = "UPDATE abyss_rank SET `rank` = ? WHERE player_id = ?";
 	private static final String SELECT_RANKING_LIST_PLAYERS = "SELECT a.rank_pos, a.old_rank_pos, p.id, p.name, p.race, p.exp, a.rank, a.ap, a.gp, p.title_id, p.player_class, p.gender, l.name FROM abyss_rank a JOIN players p ON a.player_id = p.id LEFT JOIN legion_members lm ON lm.player_id = p.id LEFT JOIN legions l ON l.id = lm.legion_id WHERE a.rank_pos > 0";
@@ -167,7 +166,7 @@ public class AbyssRankDAO {
 		}
 	}
 
-	public static void increaseGp(int playerObjId, int additionalGp, boolean modifyStats) {
+	public static void addGp(int playerObjId, int additionalGp, boolean modifyStats) {
 		String updateQuery = modifyStats ? INCREASE_GP_QUERY_WITH_STATS : INCREASE_GP_QUERY;
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement(updateQuery)) {
@@ -183,17 +182,6 @@ public class AbyssRankDAO {
 			stmt.execute();
 		} catch (SQLException e) {
 			log.error("Couldn't increase {} GP for player {}", additionalGp, playerObjId, e);
-		}
-	}
-
-	public static void decreaseGp(int playerObjId, int gpToRemove) {
-		try (Connection con = DatabaseFactory.getConnection();
-				 PreparedStatement stmt = con.prepareStatement(DECREASE_GP_QUERY)) {
-			stmt.setInt(1, gpToRemove);
-			stmt.setInt(2, playerObjId);
-			stmt.execute();
-		} catch (SQLException e) {
-			log.error("Couldn't decrease {} GP from player {}", gpToRemove, playerObjId, e);
 		}
 	}
 
