@@ -49,9 +49,10 @@ public class KnownList {
 	 * Removes all objects from this list and sends a despawn animation for the owner to all removed players.
 	 */
 	public synchronized void clear(ObjectDeleteAnimation animation) {
-		for (KnownObject object : knownObjects.values())
+		for (KnownObject object : knownObjects.values()) {
+			del(object.get(), ObjectDeleteAnimation.NONE);
 			object.get().getKnownList().del(owner, animation);
-		knownObjects.clear();
+		}
 	}
 
 	/**

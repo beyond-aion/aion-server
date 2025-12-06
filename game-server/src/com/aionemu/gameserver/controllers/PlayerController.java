@@ -130,6 +130,8 @@ public class PlayerController extends CreatureController<Player> {
 	@Override
 	public void notSee(VisibleObject object, ObjectDeleteAnimation animation) {
 		super.notSee(object, animation);
+		if (!getOwner().isSpawned()) // player is teleporting, no need to send deletion packets
+			return;
 		if (object instanceof Pet) {
 			PacketSendUtility.sendPacket(getOwner(), new SM_PET(object.getObjectId(), animation));
 		} else if (object instanceof House) {
