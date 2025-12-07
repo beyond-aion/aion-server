@@ -7,7 +7,6 @@ import com.aionemu.gameserver.model.animations.TeleportAnimation;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.portal.PortalPath;
-import com.aionemu.gameserver.model.templates.teleport.TeleportLocation;
 import com.aionemu.gameserver.model.templates.teleport.TeleporterTemplate;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
@@ -51,10 +50,7 @@ public class PortalAI extends ActionItemNpcAI {
 		if (portalPath != null) {
 			PortalService.port(portalPath, player, getOwner());
 		} else if (teleportTemplate != null) {
-			TeleportLocation loc = teleportTemplate.getTeleLocIdData().getTelelocations().get(0);
-			if (loc != null) {
-				TeleportService.teleport(teleportTemplate, loc.getLocId(), player, getOwner(), TeleportAnimation.FADE_OUT_BEAM);
-			}
+			TeleportService.teleportToFirstTeleportLocation(player, getOwner(), TeleportAnimation.FADE_OUT_BEAM);
 		} else {
 			super.handleUseItemFinish(player);
 		}
