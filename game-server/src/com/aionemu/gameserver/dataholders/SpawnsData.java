@@ -7,6 +7,7 @@ import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
@@ -63,8 +64,6 @@ public class SpawnsData extends AbstractLockManager {
 	private final Map<Integer, MercenarySpawn> mercenarySpawns = new HashMap<>();
 	@XmlTransient
 	private final Map<Integer, List<SpawnGroup>> ahserionSpawnMaps = new HashMap<>(); // Ahserion's flight
-	@XmlTransient
-	private Set<Integer> allNpcIds;
 
 	public void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (SpawnMap map : templates) {
@@ -182,12 +181,6 @@ public class SpawnsData extends AbstractLockManager {
 				}
 			}
 		}
-		allNpcIds = allSpawnMaps.values().stream().flatMap(spawn -> spawn.keySet().stream()).collect(Collectors.toSet());
-		allNpcIds.addAll(baseSpawnMaps.values().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
-		allNpcIds.addAll(siegeSpawnMaps.values().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
-		allNpcIds.addAll(riftSpawnMaps.values().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
-		allNpcIds.addAll(vortexSpawnMaps.values().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
-		allNpcIds.addAll(ahserionSpawnMaps.values().stream().flatMap(group -> group.stream().map(SpawnGroup::getNpcId)).collect(Collectors.toSet()));
 	}
 
 	public void clearTemplates() {
@@ -505,18 +498,19 @@ public class SpawnsData extends AbstractLockManager {
 		return ahserionSpawnMaps.get(id);
 	}
 
-	/**
-	 * @return All npc ids which appear in the spawn templates.
-	 */
-	public Set<Integer> getAllNpcIds() {
-		return allNpcIds;
+	public void addAllNpcIdsToSet(Set<Integer> npcIds) {
+		allSpawnMaps.values().forEach(spawnGroupsByNpcId -> npcIds.addAll(spawnGroupsByNpcId.keySet()));
+		mercenarySpawns.values().stream()
+			.flatMap(s -> s.getMercenaryRaces().stream())
+			.flatMap(r -> r.getMercenaryZones().stream())
+			.flatMap(z -> z.getSpawns().stream())
+			.map(Spawn::getNpcId)
+			.forEach(npcIds::add);
+		Stream.of(baseSpawnMaps, riftSpawnMaps, siegeSpawnMaps, vortexSpawnMaps, ahserionSpawnMaps)
+			.flatMap(map -> map.values().stream())
+			.flatMap(Collection::stream)
+			.map(SpawnGroup::getNpcId)
+			.forEach(npcIds::add);
 	}
 
-	/**
-	 * @param npcId
-	 * @return True, if the given npc appears in any of the spawn templates (world, instance, siege, base, ...)
-	 */
-	public boolean containsAnySpawnForNpc(int npcId) {
-		return allNpcIds.contains(npcId);
-	}
 }
