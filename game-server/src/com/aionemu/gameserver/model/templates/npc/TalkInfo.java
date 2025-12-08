@@ -27,31 +27,22 @@ public class TalkInfo {
 	private List<Integer> funcDialogIds;
 
 	@XmlAttribute(name = "subdialog_type")
-	private SubDialogType subDialogType = SubDialogType.ALL_ALLOWED;
+	private SubDialogType subDialogType;
 
 	@XmlAttribute(name = "subdialog_value")
-	private Integer subDialogValue;
+	private int subDialogValue;
 
 	@XmlAttribute(name = "can_talk_invisible")
 	private boolean canTalkInvisible = true;
 
-	/**
-	 * @return the talkDistance
-	 */
 	public int getDistance() {
 		return talkDistance;
 	}
 
-	/**
-	 * @return the talk_delay
-	 */
 	public int getDelay() {
 		return talkDelay;
 	}
 
-	/**
-	 * @return the hasDialog
-	 */
 	public boolean isDialogNpc() {
 		return hasDialog;
 	}
@@ -60,23 +51,14 @@ public class TalkInfo {
 		return funcDialogIds;
 	}
 
-	/**
-	 * @return the subDialogType
-	 */
 	public SubDialogType getSubDialogType() {
 		return subDialogType;
 	}
 
-	/**
-	 * @return the subDialogValue
-	 */
-	public Integer getSubDialogValue() {
+	public int getSubDialogValue() {
 		return subDialogValue;
 	}
 
-	/**
-	 * @return the canTalkInvisible
-	 */
 	public boolean isCanTalkInvisible() {
 		return canTalkInvisible;
 	}

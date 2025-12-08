@@ -30,6 +30,7 @@ import com.aionemu.gameserver.model.templates.zone.ZoneTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.*;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
+import com.aionemu.gameserver.services.abyss.AbyssRankingCache;
 import com.aionemu.gameserver.services.craft.CraftSkillUpdateService;
 import com.aionemu.gameserver.services.craft.RelinquishCraftStatus;
 import com.aionemu.gameserver.services.instance.PeriodicInstanceManager;
@@ -311,11 +312,9 @@ public class DialogService {
 
 	private static boolean isSubDialogRestricted(Player player, Npc npc) {
 		TalkInfo talkInfo = npc.getObjectTemplate().getTalkInfo();
-		if (talkInfo == null)
+		if (talkInfo == null || talkInfo.getSubDialogType() == null)
 			return false;
 		switch (talkInfo.getSubDialogType()) {
-			case ALL_ALLOWED:
-				return false;
 			case FORT_CAPTURE:
 				if (player.getLegion() == null)
 					return true;
@@ -344,10 +343,14 @@ public class DialogService {
 				return player.getSkillList().getSkillEntry(talkInfo.getSubDialogValue()) == null;
 			case ITEM_ID:
 				return player.getInventory().getItemCountByItemId(talkInfo.getSubDialogValue()) == 0;
+			case RETURN:
+				return player.getInventory().getItemCountByItemId(164000335) == 0; // Abbey Return Stone (30 days)
 			case ABYSSRANK:
 				if (player.isStaff())
 					return false;
 				return player.getAbyssRank().getRank().getId() < talkInfo.getSubDialogValue();
+			case ABYSSRANKING:
+				return AbyssRankingCache.getInstance().getRankingListPosition(player) > talkInfo.getSubDialogValue();
 			case TARGET_LEGION_DOMINION:
 				if (LegionDominionService.getInstance().isInCalculationTime())
 					return true;
@@ -360,8 +363,15 @@ public class DialogService {
 					return player.getLegion().getOccupiedLegionDominion() != talkInfo.getSubDialogValue();
 				}
 				return true;
+			case LEVEL:
+				return player.getLevel() != talkInfo.getSubDialogValue();
+			case LEVEL_LOW:
+				return player.getLevel() > talkInfo.getSubDialogValue();
+			case LEVEL_HIGH:
+				return player.getLevel() < talkInfo.getSubDialogValue();
 			default:
-				return false;
+				log.warn("Unhandled subdialog type " + talkInfo.getSubDialogType() + " for npc: " + npc.getNpcId());
+				return true;
 		}
 	}
 }
