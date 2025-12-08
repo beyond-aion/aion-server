@@ -5,6 +5,7 @@ import java.util.Comparator;
 import java.util.List;
 
 import com.aionemu.gameserver.ai.AILogger;
+import com.aionemu.gameserver.ai.AIState;
 import com.aionemu.gameserver.ai.AISubState;
 import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
@@ -51,8 +52,11 @@ public class SkillAttackManager {
 	}
 
 	protected static void skillAction(NpcAI npcAI) {
-		if (npcAI.getSubState() != AISubState.CAST)
+		if (npcAI.getSubState() != AISubState.CAST) {
+			if (npcAI.getSubState() == AISubState.NONE && npcAI.getState() == AIState.FIGHT) // cast was interrupted, so resume attacking
+				npcAI.think();
 			return;
+		}
 		Npc owner = npcAI.getOwner();
 		VisibleObject target = owner.getTarget();
 		NpcSkillEntry skill = owner.getGameStats().getLastSkill();
