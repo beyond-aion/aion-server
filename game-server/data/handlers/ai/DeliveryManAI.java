@@ -7,6 +7,7 @@ import com.aionemu.gameserver.model.TaskId;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
+import com.aionemu.gameserver.services.player.PlayerMailboxState;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.World;
@@ -46,10 +47,12 @@ public class DeliveryManAI extends FollowingNpcAI {
 
 	@Override
 	protected void handleDialogStart(Player player) {
-		if (player.equals(getPlayer()))
+		if (player.equals(getPlayer())) {
+			player.getMailbox().mailBoxState = PlayerMailboxState.EXPRESS;
 			PacketSendUtility.sendPacket(player, new SM_DIALOG_WINDOW(getObjectId(), DialogPage.MAIL.id()));
-		else
+		} else {
 			PacketSendUtility.broadcastMessage(getOwner(), 390269); // There is no mail for you, nyerk.
+		}
 	}
 
 	private Player getPlayer() {
