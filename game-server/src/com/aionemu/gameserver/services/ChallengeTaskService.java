@@ -78,7 +78,6 @@ public class ChallengeTaskService {
 			taskMap = legionTasks;
 		else
 			taskMap = cityTasks;
-		int playerTownId = TownService.getInstance().getTownResidence(player);
 		List<ChallengeTask> availableTasks = new ArrayList<>();
 		if (!taskMap.containsKey(ownerId)) {
 			Map<Integer, ChallengeTask> tasks = ChallengeTasksDAO.load(ownerId, challengeType);
@@ -92,9 +91,6 @@ public class ChallengeTaskService {
 			if (template.getType() == challengeType && template.getRace() == player.getRace()) {
 				if (!taskMap.get(ownerId).containsKey(template.getId())) {
 					if (ownerLevel >= template.getMinLevel() && ownerLevel <= template.getMaxLevel()) {
-						if (template.isTownResidence() && playerTownId != ownerId) {
-							continue;
-						}
 						if (template.getPrevTask() == null) {
 							ChallengeTask task = new ChallengeTask(ownerId, template);
 							taskMap.get(ownerId).put(task.getTaskId(), task);

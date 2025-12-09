@@ -115,7 +115,6 @@ public class DialogService {
 				case CHARGE_ITEM_SINGLE: // condition an individual item
 				case CHARGE_ITEM_SINGLE2: // augmenting an individual item
 				case TOWN_CHALLENGE: // town improvement
-					// Custom Feature: Quests can be done in any village
 					sendDialogWindow(dialogActionId, player, npc);
 					break;
 				case DISPERSE_LEGION: // disband legion
