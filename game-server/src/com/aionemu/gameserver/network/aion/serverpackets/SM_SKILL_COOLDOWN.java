@@ -1,9 +1,11 @@
 package com.aionemu.gameserver.network.aion.serverpackets;
 
-import java.util.List;
-import java.util.Map;
+import java.util.*;
+import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.dataholders.DataManager;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.skill.PlayerSkillEntry;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
@@ -12,43 +14,53 @@ import com.aionemu.gameserver.network.aion.AionServerPacket;
  */
 public class SM_SKILL_COOLDOWN extends AionServerPacket {
 
-	private Map<Integer, Long> cooldowns;
+	private final List<Cooldown> cooldowns = new ArrayList<>();
+	private final boolean notify;
 
-	private boolean onLogin;
-
-	public SM_SKILL_COOLDOWN(Map<Integer, Long> cooldowns, boolean onLogin) {
-		this.cooldowns = cooldowns;
-		this.onLogin = onLogin;
+	public SM_SKILL_COOLDOWN(int skillId, long expirationTimeMillis) {
+		cooldowns.add(new Cooldown(skillId, expirationTimeMillis));
+		notify = true;
 	}
 
-	public SM_SKILL_COOLDOWN(Map<Integer, Long> cooldowns) {
-		this(cooldowns, false);
+	public SM_SKILL_COOLDOWN(Player player, Map<Integer, Long> cooldownExpirationMillisByCooldownId, boolean notify) {
+		for (PlayerSkillEntry skill : player.getSkillList().getAllSkills()) {
+			int cooldownId = DataManager.SKILL_DATA.getSkillTemplate(skill.getSkillId()).getCooldownId();
+			Long cooldownExpirationMillis = cooldownExpirationMillisByCooldownId.get(cooldownId);
+			if (cooldownExpirationMillis != null)
+				cooldowns.add(new Cooldown(skill.getSkillId(), cooldownExpirationMillis));
+		}
+		// The game plays the same icon cooldown animation for all skills that share a cooldownId and the last entry per cooldownId wins, so we sort by
+		// animation duration to avoid animations that are shorter than the remaining cooldown time.
+		cooldowns.sort(Comparator.comparingInt(Cooldown::getDurationMillis));
+		this.notify = notify;
+	}
+
+	/**
+	 * Creates a skill cooldown reset packet
+	 */
+	public SM_SKILL_COOLDOWN(Player player, Collection<Integer> resettableCooldownIds) {
+		this(player, resettableCooldownIds.stream().collect(Collectors.toMap(c -> c, _ -> 0L)), true);
 	}
 
 	@Override
 	protected void writeImpl(AionConnection con) {
-		writeH(calculateSize());
-		writeC(1); // unk 0 or 1
-		long currentTime = System.currentTimeMillis();
-		for (Map.Entry<Integer, Long> entry : cooldowns.entrySet()) {
-			int left = (int) ((entry.getValue() - currentTime) / 1000);
-			List<Integer> skillsWithCooldown = DataManager.SKILL_DATA.getSkillsForCooldownId(entry.getKey());
-
-			for (int index = 0; index < skillsWithCooldown.size(); index++) {
-				int skillId = skillsWithCooldown.get(index);
-				writeH(skillId);
-				writeD(left > 0 ? left : 0);
-				writeD(onLogin ? 0 : DataManager.SKILL_DATA.getSkillTemplate(skillId).getCooldown());
-			}
+		writeH(cooldowns.size());
+		writeC(notify ? 1 : 0); // 1 will trigger a notification sound and animation on all sent skills
+		for (Cooldown cooldown : cooldowns) {
+			writeH(cooldown.skillId);
+			writeD(cooldown.getRemainingSeconds());
+			writeD(cooldown.getDurationMillis()); // 0 also seems to always work
 		}
 	}
 
-	private int calculateSize() {
-		int size = 0;
-		for (Map.Entry<Integer, Long> entry : cooldowns.entrySet()) {
-			size += DataManager.SKILL_DATA.getSkillsForCooldownId(entry.getKey()).size();
-		}
-		return size;
-	}
+	private record Cooldown(int skillId, long expirationTimeMillis) {
 
+		int getRemainingSeconds() {
+			return expirationTimeMillis == 0 ? 0 : (int) Math.max(0, (expirationTimeMillis - System.currentTimeMillis()) / 1000);
+		}
+
+		int getDurationMillis() {
+			return DataManager.SKILL_DATA.getSkillTemplate(skillId).getCooldown() * 100;
+		}
+	}
 }

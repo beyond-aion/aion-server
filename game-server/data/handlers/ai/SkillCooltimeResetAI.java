@@ -114,8 +114,7 @@ public class SkillCooltimeResetAI extends NpcAI {
 							responder.getLifeStats().increaseMp(SM_ATTACK_STATUS.TYPE.HEAL_MP, responder.getLifeStats().getMaxMp(), 0, SM_ATTACK_STATUS.LOG.MPHEAL);
 							if (!skillCooldownIds.isEmpty()) {
 								skillCooldownIds.forEach(responder::removeSkillCoolDown);
-								PacketSendUtility.sendPacket(responder, new SM_SKILL_COOLDOWN(
-									skillCooldownIds.stream().collect(Collectors.toMap(cooldownId -> cooldownId, cooldownId -> System.currentTimeMillis()))));
+								PacketSendUtility.sendPacket(responder, new SM_SKILL_COOLDOWN(responder, skillCooldownIds));
 							}
 							if (!itemCooldownIds.isEmpty()) {
 								Map<Integer, ItemCooldown> dummyCds = new HashMap<>(); // 4.8 client ignores reuseTime <= currentTime, but sending old cds + useDelay 0 works

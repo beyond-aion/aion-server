@@ -229,7 +229,7 @@ public final class PlayerEnterWorldService {
 			SM_SKILL_LIST.STATIC_BODY_SIZE, SkillEntryWriter.DYNAMIC_BODY_PART_SIZE_CALCULATOR);
 		skillEntrySplitList.forEach(part -> PacketSendUtility.sendPacket(player, new SM_SKILL_LIST(part)));
 		if (player.getSkillCoolDowns() != null)
-			client.sendPacket(new SM_SKILL_COOLDOWN(player.getSkillCoolDowns(), true));
+			client.sendPacket(new SM_SKILL_COOLDOWN(player, player.getSkillCoolDowns(), false));
 
 		if (!player.getItemCoolDowns().isEmpty())
 			client.sendPacket(new SM_ITEM_COOLDOWN(player.getItemCoolDowns()));

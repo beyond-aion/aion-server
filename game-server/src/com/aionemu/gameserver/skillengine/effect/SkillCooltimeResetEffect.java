@@ -42,9 +42,8 @@ public class SkillCooltimeResetEffect extends EffectTemplate {
 			effected.setSkillCoolDown(i, delay + System.currentTimeMillis());
 			resetSkillCoolDowns.put(i, delay + System.currentTimeMillis());
 		}
-		if (effected instanceof Player) {
-			if (resetSkillCoolDowns.size() > 0)
-				PacketSendUtility.sendPacket((Player) effected, new SM_SKILL_COOLDOWN(resetSkillCoolDowns));
+		if (!resetSkillCoolDowns.isEmpty() && effected instanceof Player player) {
+			PacketSendUtility.sendPacket(player, new SM_SKILL_COOLDOWN(player, resetSkillCoolDowns, true));
 		}
 	}
 

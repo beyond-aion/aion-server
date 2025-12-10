@@ -1,6 +1,9 @@
 package com.aionemu.gameserver.model.stats.listeners;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.List;
+import java.util.Set;
 import java.util.function.Consumer;
 
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -52,7 +55,6 @@ public class ItemEquipmentListener {
 		if (item.getBuffSkill() != 0) {
 			SkillTemplate buffSkill = DataManager.SKILL_DATA.getSkillTemplate(item.getBuffSkill());
 			SkillLearnService.learnTemporarySkill(owner, item.getBuffSkill(), 1);
-			Map<Integer, Long> coolDowns = new HashMap<>();
 			long currTime = System.currentTimeMillis();
 			long oldCooldown = owner.getSkillCoolDown(buffSkill.getCooldownId());
 			long newCooldown;
@@ -61,8 +63,7 @@ public class ItemEquipmentListener {
 			else
 				newCooldown = currTime + 15000;
 			owner.setSkillCoolDown(buffSkill.getCooldownId(), newCooldown);
-			coolDowns.put(buffSkill.getCooldownId(), newCooldown);
-			PacketSendUtility.sendPacket(owner, new SM_SKILL_COOLDOWN(coolDowns));
+			PacketSendUtility.sendPacket(owner, new SM_SKILL_COOLDOWN(buffSkill.getSkillId(), newCooldown));
 		}
 		forEachBonusStats(bonusStats -> bonusStats.applyEffect(owner), item.getBonusStatsEffect(), item.getFusionedItemBonusStatsEffect());
 		if (item.getConditioningInfo() != null) {
