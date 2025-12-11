@@ -36,8 +36,8 @@ public class Summon extends Creature {
 	private SkillElement alwaysResistElement = SkillElement.NONE;
 	private int summonedBySkillId, liveTime;
 
-	public Summon(int objId, SummonController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, Player master, int time, boolean autoReleaseObjectId) {
-		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()), autoReleaseObjectId);
+	public Summon(int objId, SummonController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate, Player master, int time) {
+		super(objId, controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()), true);
 		controller.setOwner(this);
 		moveController = controller instanceof SiegeWeaponController ? new SiegeWeaponMoveController(this) : new SummonMoveController(this);
 		this.liveTime = time;

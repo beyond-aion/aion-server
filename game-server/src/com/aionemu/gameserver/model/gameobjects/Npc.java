@@ -31,6 +31,7 @@ import com.aionemu.gameserver.spawnengine.WalkerGroupShift;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
+import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
@@ -163,6 +164,8 @@ public class Npc extends Creature {
 
 	@Override
 	public TribeClass getTribe() {
+		if (getCreator() instanceof Creature creature)
+			return creature.getTribe();
 		TribeClass transformTribe = isTransformed() ? getTransformModel().getTribe() : null;
 		if (transformTribe != null) {
 			return transformTribe;
@@ -289,7 +292,7 @@ public class Npc extends Creature {
 	}
 
 	public VisibleObject getCreator() {
-		return null;
+		return creatorId == 0 ? null : World.getInstance().findVisibleObject(creatorId);
 	}
 
 	public void setWalkerGroup(WalkerGroup wg) {

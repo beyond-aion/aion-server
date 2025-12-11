@@ -4,7 +4,6 @@ import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.Race;
-import com.aionemu.gameserver.model.TribeClass;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.container.NpcLifeStats;
 import com.aionemu.gameserver.model.stats.container.SummonedObjectGameStats;
@@ -85,13 +84,6 @@ public class SummonedObject<T extends VisibleObject> extends Npc {
 		if (creator instanceof Creature)
 			return ((Creature) creator).isEnemyFrom(player);
 		return super.isEnemyFrom(player);
-	}
-
-	@Override
-	public TribeClass getTribe() {
-		if (creator instanceof Creature)
-			return ((Creature) creator).getTribe();
-		return super.getTribe();
 	}
 
 	@Override

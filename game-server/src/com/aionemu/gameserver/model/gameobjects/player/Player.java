@@ -56,6 +56,7 @@ import com.aionemu.gameserver.model.team.legion.LegionMember;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
+import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
 import com.aionemu.gameserver.model.templates.windstreams.WindstreamPath;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
@@ -985,19 +986,20 @@ public class Player extends Creature {
 		return getTribe();
 	}
 
-	/**
-	 * @return the summon
-	 */
 	public Summon getSummon() {
 		return summon;
 	}
 
-	/**
-	 * @param summon
-	 *          the summon to set
-	 */
 	public void setSummon(Summon summon) {
 		this.summon = summon;
+	}
+
+	public Creature getSummonOrMercenary(int objectId) {
+		if (summon != null && summon.getObjectId() == objectId)
+			return summon;
+		if (getKnownList().getObject(objectId) instanceof Npc npc && npc.getCreatorId() == getObjectId() && npc.getNpcTemplateType() == NpcTemplateType.MERCENARY)
+			return npc;
+		return null;
 	}
 
 	/**

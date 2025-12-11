@@ -5,6 +5,7 @@ import java.util.Set;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -13,7 +14,6 @@ import com.aionemu.gameserver.model.summons.SkillOrder;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
@@ -46,20 +46,15 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 	protected void runImpl() {
 		Player player = getConnection().getActivePlayer();
 
-		final Summon summon = player.getSummon();
-		if (summon == null || !summon.isPet()) {
+		Creature summonOrMercenary = player.getSummonOrMercenary(summonObjId);
+		if (summonOrMercenary == null || summonOrMercenary instanceof Summon summon && !summon.isPet()) {
 			sendPacket(SM_SYSTEM_MESSAGE.STR_SKILL_NOT_NEED_PET());
 			return;
 		}
 
-		if (summon.getObjectId() != summonObjId) {
-			AuditLogger.log(player, "tried to cast a summon spell from a different summon instance");
-			return;
-		}
-
 		Creature target;
-		if (targetObjId != summon.getObjectId()) {
-			VisibleObject obj = summon.getKnownList().getObject(targetObjId);
+		if (targetObjId != summonOrMercenary.getObjectId()) {
+			VisibleObject obj = summonOrMercenary.getKnownList().getObject(targetObjId);
 			if (obj instanceof Creature) {
 				target = (Creature) obj;
 			} else { // null or not a creature (attack should be client restricted)
@@ -68,15 +63,23 @@ public class CM_SUMMON_CASTSPELL extends AionClientPacket {
 				return;
 			}
 		} else {
-			target = summon;
+			target = summonOrMercenary;
 		}
 
-		final SkillOrder order = summon.retrieveNextSkillOrder();
-		if (order != null && order.getTarget().equals(target)) {
-			if (order.getSkillId() != skillId || order.getSkillLevel() != skillLvl)
-				log.warn(player + " used summon order with a different skill: skillId {}->{}; skillLvl {}->{}.", skillId, order.getSkillId(), skillLvl,
-					order.getSkillLevel());
-			ThreadPoolManager.getInstance().execute(() -> summon.getController().useSkill(order));
+		if (summonOrMercenary instanceof Summon summon) {
+			final SkillOrder order = summon.retrieveNextSkillOrder();
+			if (order != null && order.getTarget().equals(target)) {
+				if (order.getSkillId() != skillId || order.getSkillLevel() != skillLvl)
+					log.warn(player + " used summon order with a different skill: skillId {}->{}; skillLvl {}->{}.", skillId, order.getSkillId(), skillLvl,
+						order.getSkillLevel());
+				summon.getController().useSkill(order);
+			}
+		} else {
+			summonOrMercenary.setTarget(target);
+			if (DataManager.PET_SKILL_DATA.petHasSkill(summonOrMercenary.getObjectTemplate().getTemplateId(), skillId))
+				summonOrMercenary.getController().useSkill(skillId, skillLvl);
+			else
+				AuditLogger.log(player, "tried to use invalid mercenary skill " + skillId);
 		}
 	}
 }
