@@ -141,7 +141,8 @@ public class TeleportService {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_WRONG_NPC());
 			return null;
 		}
-		if (teleporter.getType(player) != CreatureType.FRIEND) {
+		CreatureType creatureType = teleporter.getType(player);
+		if (creatureType != CreatureType.FRIEND && creatureType != CreatureType.SUPPORT) {
 			AuditLogger.log(player, "tried to use invalid teleporter " + teleporter + " (wrong race) at " + player.getPosition());
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_WRONG_NPC());
 			return null;
