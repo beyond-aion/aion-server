@@ -358,7 +358,7 @@ public class Effect implements StatOwner {
 	 * @return True if the whole effect is reflected (through shield observer)
 	 */
 	public boolean isReflected() {
-		return (shieldDefense & ShieldType.SKILL_REFLECTOR.getId()) != 0;
+		return (shieldDefense & ShieldType.SKILL_REFLECTOR.getId()) != 0 && getSkillSubType() != SkillSubType.BUFF;
 	}
 
 	public int getReflectedDamage() {
