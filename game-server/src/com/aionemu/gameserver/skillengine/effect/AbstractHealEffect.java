@@ -83,6 +83,9 @@ public abstract class AbstractHealEffect extends EffectTemplate implements HealE
 			return 0;
 		int cap = getMaxStatValue(effect) - getCurrentStatValue(effect);
 		int healValue = HealEffectTemplate.super.calculateHealValue(effect, type);
-		return Math.min(cap, healValue);
+		int finalHeal = Math.min(cap, healValue);
+		if (finalHeal < 0)
+			finalHeal = 0;
+		return finalHeal;
 	}
 }
