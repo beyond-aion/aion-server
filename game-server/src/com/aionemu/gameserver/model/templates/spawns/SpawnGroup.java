@@ -34,8 +34,8 @@ public class SpawnGroup {
 	private final Map<Integer, Set<SpawnTemplate>> poolUsedTemplates;
 	private final EventTemplate eventTemplate;
 
-	public SpawnGroup(int worldId, int npcId, int respawnTime) {
-		this(worldId, npcId, 0, respawnTime, (byte) 0, null, null, new ArrayList<>(1), null);
+	public SpawnGroup(int worldId, int npcId, int respawnTime, EventTemplate eventTemplate) {
+		this(worldId, npcId, 0, respawnTime, (byte) 0, null, null, new ArrayList<>(1), eventTemplate);
 	}
 
 	public SpawnGroup(int worldId, Spawn spawn) {

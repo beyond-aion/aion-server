@@ -95,7 +95,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			if (Float.isNaN(z))
 				z = player.getZ() + 0.5f;
 			byte heading = PositionUtil.getHeadingTowards(x, y, player.getX(), player.getY());
-			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, 833543, x, y, z, heading, 0, "customcdreset");
+			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(mapId, 833543, x, y, z, heading, null, "customcdreset");
 			SpawnEngine.spawnObject(template, instance.getInstanceId());
 		}
 	}
@@ -162,7 +162,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 			if (Rnd.chance() < (CustomConfig.PVP_MAP_RANDOM_BOSS_BASE_RATE + bonus)) {
 				int npcId = Rnd.get(RANDOM_BOSS_NPC_IDS);
 				NpcTemplate template = DataManager.NPC_DATA.getNpcTemplate(npcId);
-				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43, 0,
+				SpawnTemplate spawn = SpawnEngine.newSingleTimeSpawn(mapId, npcId, 744.337f, 292.986f, 233.697f, (byte) 43, null,
 					"modified_iron_wall_aggressive");
 				Npc npc = new Npc(new NpcController(), spawn, template);
 				npc.setKnownlist(new NpcKnownList(npc));

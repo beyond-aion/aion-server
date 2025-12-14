@@ -177,7 +177,7 @@ public class NpcSkillTemplateEntry extends NpcSkillEntry {
 				y1 = (float) (Math.sin(radian) * distance);
 			}
 			SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(npc.getWorldId(), spawn.getNpcId(), npc.getX() + x1, npc.getY() + y1, npc.getZ(),
-				npc.getHeading(), npc.getObjectId());
+				npc.getHeading(), npc, null);
 			SpawnEngine.spawnObject(template, npc.getInstanceId());
 		}
 	}

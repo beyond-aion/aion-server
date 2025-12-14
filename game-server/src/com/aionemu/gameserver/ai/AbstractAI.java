@@ -392,7 +392,11 @@ public abstract class AbstractAI<T extends Creature> implements AI {
 	 * Spawn object with staticId in the same world and instance as AI's owner
 	 */
 	protected final VisibleObject spawn(int npcId, float x, float y, float z, byte heading, int staticId) {
-		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, x, y, z, heading, owner.getObjectId());
+		return spawn(npcId, x, y, z, heading, staticId, null);
+	}
+
+	protected final VisibleObject spawn(int npcId, float x, float y, float z, byte heading, int staticId, String aiName) {
+		SpawnTemplate template = SpawnEngine.newSingleTimeSpawn(owner.getWorldId(), npcId, x, y, z, heading, owner, aiName);
 		template.setStaticId(staticId);
 		return SpawnEngine.spawnObject(template, owner.getInstanceId());
 	}
