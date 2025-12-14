@@ -98,7 +98,7 @@ public class QuestSpawnAnalyzer {
 
 	public static Set<Integer> loadNpcIdsSpawnedByHandlers() {
 		Set<Integer> npcIds = new HashSet<>();
-		Pattern pattern = Pattern.compile("\\bspawn\\([^,\\d]*(\\d{6})(?: : (\\d{6}))?");
+		Pattern pattern = Pattern.compile("\\bsp(?:awn)?\\([^,\\d]*(\\d{6})(?: : (\\d{6}))?");
 		parseSpawnNpcIds(InstanceConfig.HANDLER_DIRECTORY, pattern, npcIds);
 		parseSpawnNpcIds(GSConfig.QUEST_HANDLER_DIRECTORY, pattern, npcIds);
 		parseSpawnNpcIds(AIConfig.HANDLER_DIRECTORY, pattern, npcIds);
