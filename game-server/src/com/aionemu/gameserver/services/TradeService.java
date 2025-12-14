@@ -147,7 +147,8 @@ public class TradeService {
 
 		// 7. finally add items and update sell limits
 		for (TradeItem tradeItem : tradeList.getTradeItems()) {
-			long notAddedCount = ItemService.addItem(player, tradeItem.getItemId(), tradeItem.getCount(), false,
+			// allow inventory overflow because player can get deranked during purchase, possibly reducing the number of free inventory slots
+			ItemService.addItem(player, tradeItem.getItemId(), tradeItem.getCount(), true,
 				new ItemUpdatePredicate(ItemAddType.BUY, ItemUpdateType.INC_ITEM_BUY));
 
 			LimitedItem item = LimitedItemTradeService.getInstance().getLimitedItem(tradeItem.getItemId(), npc.getNpcId());
@@ -156,12 +157,6 @@ public class TradeService {
 					item.setBuyCount(player.getObjectId(), item.getBuyCount(player.getObjectId()) + (int) tradeItem.getCount());
 				if (item.getDefaultSellLimit() > 0)
 					item.setSellLimit(item.getSellLimit() - (int) tradeItem.getCount());
-			}
-
-			if (notAddedCount != 0) {
-				log.error(String.format("ItemService couldn't add all items (%d/%d) on buy: %d %d", notAddedCount, tradeItem.getCount(), player.getObjectId(),
-					tradeItem.getItemId()));
-				return false;
 			}
 		}
 
