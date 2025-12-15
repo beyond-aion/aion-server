@@ -149,7 +149,7 @@ public class PlayerController extends CreatureController<Player> {
 	public void onTargetChanged(VisibleObject oldTarget, VisibleObject newTarget) {
 		super.onTargetChanged(oldTarget, newTarget);
 		PacketSendUtility.sendPacket(getOwner(), new SM_TARGET_SELECTED(newTarget));
-		PacketSendUtility.broadcastPacket(getOwner(), new SM_TARGET_UPDATE(getOwner()));
+		PacketSendUtility.broadcastToSightedPlayers(getOwner(), new SM_TARGET_UPDATE(getOwner()));
 	}
 
 	@Override
