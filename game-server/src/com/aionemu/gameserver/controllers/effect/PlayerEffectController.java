@@ -84,18 +84,9 @@ public class PlayerEffectController extends EffectController {
 
 	/**
 	 * Effect of DEBUFF should not be added if duel ended (friendly unit)
-	 * 
-	 * @param effect
-	 * @return
 	 */
 	private boolean checkDuelCondition(Effect effect) {
-		Creature creature = effect.getEffector();
-		if (creature instanceof Player) {
-			if (!getOwner().isEnemy(creature) && effect.getTargetSlot() == SkillTargetSlot.DEBUFF) {
-				return true;
-			}
-		}
-		return false;
+		return effect.getTargetSlot() == SkillTargetSlot.DEBUFF && effect.getEffector() instanceof Player player && !getOwner().equals(player) && !getOwner().isEnemy(player);
 	}
 
 	public void addSavedEffect(int skillId, int skillLvl, int remainingTime, long endTime, ForceType forceType) {
