@@ -68,7 +68,9 @@ public class SpawnEngine {
 	}
 
 	public static SpawnTemplate newSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading, VisibleObject creator, String aiName) {
-		return newSpawn(worldId, npcId, x, y, z, heading, 0, creator.getObjectId(), aiName, creator.getSpawn().getEventTemplate());
+		int creatorId = creator == null ? 0 : creator.getObjectId();
+		EventTemplate eventTemplate = creator == null || creator.getSpawn() == null ? null : creator.getSpawn().getEventTemplate();
+		return newSpawn(worldId, npcId, x, y, z, heading, 0, creatorId, aiName, eventTemplate);
 	}
 
 	public static SpawnTemplate newSingleTimeSpawn(int worldId, int npcId, float x, float y, float z, byte heading, int creatorId) {
