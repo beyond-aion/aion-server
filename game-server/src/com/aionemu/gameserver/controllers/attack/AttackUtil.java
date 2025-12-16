@@ -224,13 +224,13 @@ public class AttackUtil {
 		};
 	}
 
-	public static void calculateSkillResult(Effect effect, int skillDamage, EffectTemplate template, boolean ignoreShield) {
+	public static void calculateSkillResult(Effect effect, int skillDamage, DamageEffect template, boolean ignoreShield) {
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
 		// define values
 		ActionModifier modifier = template.getActionModifiers(effect);
 		SkillElement element = template.getElement();
-		Func func = template instanceof DamageEffect damageEffect ? damageEffect.getMode() : Func.ADD;
+		Func func = template.getMode();
 		int randomDamageType = template instanceof SkillAttackInstantEffect skillAttackInstantEffect ? skillAttackInstantEffect.getRnddmg() : 0;
 		int critAddDmg = template.getCritAddDmg2() + template.getCritAddDmg1() * effect.getSkillLevel();
 		boolean useTemplateDmg = isUseTemplateDmg(effect, template);
@@ -318,7 +318,9 @@ public class AttackUtil {
 				damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
 				damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, element, true, true);
 			}
-			damage = StatFunctions.adjustStatByMovementModifier(effector, isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK, damage);
+			if (template.shouldApplyMovementModifier()){
+				damage = StatFunctions.adjustStatByMovementModifier(effector, isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK, damage);
+			}
 			damage *= damageMultiplier;
 		}
 

@@ -59,4 +59,23 @@ public abstract class DamageEffect extends EffectTemplate {
 	public boolean isShared() {
 		return shared;
 	}
+	
+	/**
+	 * Determines whether movement-based modifiers should be applied
+	 * to this damage effect during damage calculation.
+	 *
+	 * <p>Movement-based modifiers may vary depending on the attacker's
+	 * movement state (e.g. standing, moving forward, or moving backward).
+	 * This method only defines whether such modifiers are applicable to
+	 * the effect at all.</p>
+	 *
+	 * <p>Specific {@link DamageEffect} implementations may override this
+	 * method to exclude themselves from movement-based damage adjustments.</p>
+	 *
+	 * @return {@code true} if movement-based modifiers should be applied,
+	 *         {@code false} otherwise
+	 */
+	public boolean shouldApplyMovementModifier() {
+		return true;
+	}
 }
