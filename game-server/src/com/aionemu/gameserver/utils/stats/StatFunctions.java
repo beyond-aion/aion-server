@@ -600,7 +600,7 @@ public class StatFunctions {
 					case MAGICAL_ATTACK:
 						return value * 1.1f; // verified on 4.6 PTS
 					case MAGICAL_DEFEND:
-						return value - 50;
+						return value - 50; // verified on 4.6 PTS
 					case PHYSICAL_DEFENSE:
 						return value * 0.8f;
 				}
