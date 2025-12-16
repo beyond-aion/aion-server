@@ -351,6 +351,8 @@ public class Effect implements StatOwner {
 	}
 
 	public void setShieldDefense(int shieldDefense) {
+		if ((shieldDefense & ShieldType.SKILL_REFLECTOR.getId()) != 0 && getSkillSubType() != SkillSubType.ATTACK && getSkillSubType() != SkillSubType.DEBUFF)
+			shieldDefense &= ~ShieldType.SKILL_REFLECTOR.getId(); // disable SKILL_REFLECTOR bit (only attack type effects can reflect whole effects)
 		this.shieldDefense = shieldDefense;
 	}
 
