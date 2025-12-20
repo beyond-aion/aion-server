@@ -461,6 +461,7 @@ public abstract class AbstractQuestHandler {
 				case SET_SUCCEED: // report to pre-end npc (another npc is actually responsible for rewarding, so close this window)
 					return closeDialogWindow(env);
 				case USE_OBJECT: // start talking to npc
+				case QUEST_SELECT: // start talking to npc
 				case SELECT_QUEST_REWARD: // report to end npc
 				case CHECK_USER_HAS_QUEST_ITEM: // report to end npc with collect item checks
 				case CHECK_USER_HAS_QUEST_ITEM_SIMPLE: // report to end npc with collect item checks

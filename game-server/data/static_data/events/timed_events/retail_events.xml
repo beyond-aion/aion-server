@@ -4028,6 +4028,331 @@
 			</spawn_map>
 		</spawns>
 	</event>
+	<!-- https://web.archive.org/web/20250911085622/https://www.playaion.net/news/icefestivalevent/ (modified, but it's the only archived news) -->
+	<event name="Ice Festival" start="2025-12-22T00:00:00" end="2026-01-11T23:59:59">
+		<quests>
+			<maintainable>80715 80716 80717 80718 80719 80720 80721</maintainable>
+		</quests>
+		<event_drops>
+			<gd_rule rule_name="Ice Festival Ice Queen" chance="100">
+				<gd_npcs>
+					<gd_npc npc_id="237174" /><!-- Ice Queen -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188054111" /><!-- [Event] Ice Queen's Goods Box -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Ice Festival Treasure Crate Box" chance="100">
+				<gd_npcs>
+					<gd_npc npc_id="833521" /><!-- Ice Festival Treasure Crate -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="188054037" /><!-- [Event] Engraved Ice Festival Box -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Ice Festival Ice Carving Tool" chance="100" member_limit="6">
+				<gd_npcs>
+					<gd_npc npc_id="236749" /><!-- Secret Ice Festival Box -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="164002294" min_count="5" /><!-- [Event] Ice Carving Tool -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Ice Festival Cold Ice Crystal" chance="2" level_based_chance_reduction="true">
+				<gd_maps>
+					<gd_map map_id="210070000" /><!-- Cygnea -->
+				</gd_maps>
+				<gd_items>
+					<gd_item id="182215802" /><!-- [Event] Cold Ice Crystal -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Ice Festival Heart-shaped Ice Crystal" chance="100" member_limit="12">
+				<gd_npcs>
+					<gd_npc npc_id="231073" /><!-- Hyperion -->
+					<gd_npc npc_id="230857" /><!-- Guard Captain Ahuradim -->
+					<gd_npc npc_id="230858" /><!-- Brigade General Sheba -->
+					<gd_npc npc_id="233740" /><!-- Test Weapon Dynatoum -->
+					<gd_npc npc_id="234990" /><!-- Wounded Belsagos -->
+					<gd_npc npc_id="233898" /><!-- Volatile Belsagos -->
+					<gd_npc npc_id="234991" /><!-- Furious Belsagos -->
+					<gd_npc npc_id="234686" /><!-- Remodeled Dynatoum -->
+					<!-- Eternal Challenge - handled in InstanceHandler -->
+				</gd_npcs>
+				<gd_items>
+					<gd_item id="182215803" /><!-- [Event] Heart-shaped Ice Crystal -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Ice Festival Clear Ice Crystal" chance="2" level_based_chance_reduction="true">
+				<gd_maps>
+					<gd_map map_id="220080000" /><!-- Enshar -->
+				</gd_maps>
+				<gd_items>
+					<gd_item id="182215804" /><!-- [Event] Clear Ice Crystal -->
+				</gd_items>
+			</gd_rule>
+			<gd_rule rule_name="Ice Festival Pure Ice Crystal" chance="100">
+				<gd_maps>
+					<gd_map map_id="300510000" /><!-- Tiamat Stronghold -->
+					<gd_map map_id="300610000" /><!-- Raksang Ruins -->
+					<gd_map map_id="301270000" /><!-- Linkgate Foundry -->
+					<gd_map map_id="301130000" /><!-- Sauro Supply Base -->
+				</gd_maps>
+				<gd_items>
+					<gd_item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+				</gd_items>
+			</gd_rule>
+		</event_drops>
+		<spawns>
+			<!-- Sanctum -->
+			<spawn_map map_id="110010000">
+				<!-- Festival Icefield -->
+				<spawn npc_id="833532" respawn_time="10">
+					<spot x="1532.4" y="1511.6" z="565.9"/>
+				</spawn>
+				<!-- Ishrunerk -->
+				<spawn npc_id="833536" respawn_time="10">
+					<spot x="1517.7" y="1509.8" z="565.9" h="59" ai="ishrunerk"/>
+				</spawn>
+				<!-- Atirunerk -->
+				<spawn npc_id="833537" respawn_time="10">
+					<spot x="1520.4" y="1511.6" z="566.2" h="66" ai="atirunerk"/>
+				</spawn>
+				<!-- Lirunerk -->
+				<spawn npc_id="833538" respawn_time="10">
+					<spot x="1517.7" y="1513.6" z="565.9" h="69"/>
+				</spawn>
+				<!-- Ice Festival Treasure Crate -->
+				<spawn npc_id="833521" respawn_time="10">
+					<spot x="1541" y="1512" z="566.2" h="66" ai="chest"/>
+				</spawn>
+				<!-- Horse Sculpture -->
+				<spawn npc_id="833533" respawn_time="10">
+					<spot x="1530" y="1518" z="566.2" h="66" ai="icefestival_ice_sculpture"/>
+					<spot x="1529" y="1497" z="566.2" h="36" ai="icefestival_ice_sculpture"/>
+				</spawn>
+				<!-- Bird Sculpture -->
+				<spawn npc_id="833534" respawn_time="10">
+					<spot x="1523" y="1509" z="566.2" h="66" ai="icefestival_ice_sculpture"/>
+					<spot x="1540" y="1503" z="566.2" h="36" ai="icefestival_ice_sculpture"/>
+				</spawn>
+				<!-- Shugo Sculpture -->
+				<spawn npc_id="833535" respawn_time="10">
+					<spot x="1522" y="1515" z="566.2" h="66" ai="icefestival_ice_sculpture"/>
+					<spot x="1527" y="1504" z="566.2" h="66" ai="icefestival_ice_sculpture"/>
+				</spawn>
+				<!-- Toroonerk -->
+				<spawn npc_id="833571" respawn_time="10">
+					<spot x="1530.4" y="1505.5" z="566.2" h="37"/>
+					<spot x="1525.3" y="1513.4" z="566.2" h="37"/>
+				</spawn>
+				<!-- Raw Ice Chunk -->
+				<spawn npc_id="833516">
+					<spot x="1525" y="1515" z="566.2" h="67" ai="icefestival_ice_chunk"/>
+					<spot x="1531" y="1522" z="566.2" h="54" ai="icefestival_ice_chunk"/>
+					<spot x="1523" y="1524" z="566.2" h="73" ai="icefestival_ice_chunk"/>
+					<spot x="1523" y="1535" z="566.2" h="80" ai="icefestival_ice_chunk"/>
+					<spot x="1512" y="1531" z="566.2" h="56" ai="icefestival_ice_chunk"/>
+					<spot x="1523" y="1498" z="566.2" h="55" ai="icefestival_ice_chunk"/>
+					<spot x="1540" y="1500" z="566.2" h="50" ai="icefestival_ice_chunk"/>
+					<spot x="1530" y="1507" z="566.2" h="51" ai="icefestival_ice_chunk"/>
+					<spot x="1537" y="1527" z="566.2" h="77" ai="icefestival_ice_chunk"/>
+					<spot x="1533" y="1497" z="566.2" h="69" ai="icefestival_ice_chunk"/>
+					<spot x="1530" y="1489" z="566.2" h="66" ai="icefestival_ice_chunk"/>
+					<spot x="1518" y="1541" z="566.2" h="63" ai="icefestival_ice_chunk"/>
+					<spot x="1536" y="1533" z="566.2" h="53" ai="icefestival_ice_chunk"/>
+					<spot x="1530" y="1541" z="566.2" h="80" ai="icefestival_ice_chunk"/>
+					<spot x="1516" y="1492" z="566.2" h="72" ai="icefestival_ice_chunk"/>
+					<spot x="1520" y="1483" z="566.2" h="52" ai="icefestival_ice_chunk"/>
+					<spot x="1540" y="1480" z="566.2" h="58" ai="icefestival_ice_chunk"/>
+					<spot x="1542" y="1520" z="566.2" h="65" ai="icefestival_ice_chunk"/>
+				</spawn>
+			</spawn_map>
+			<!-- Pandaemonium -->
+			<spawn_map map_id="120010000">
+				<!-- Festival Icefield -->
+				<spawn npc_id="833532" respawn_time="10">
+					<spot x="1200.7" y="1400" z="208.2" h="65"/>
+				</spawn>
+				<!-- Ishrunerk -->
+				<spawn npc_id="833536" respawn_time="10">
+					<spot x="1215.4" y="1399.1" z="208.2" h="13" ai="ishrunerk"/>
+				</spawn>
+				<!-- Atirunerk -->
+				<spawn npc_id="833537" respawn_time="10">
+					<spot x="1212.9" y="1400.3" z="208.2" h="9" ai="atirunerk"/>
+				</spawn>
+				<!-- Lirunerk -->
+				<spawn npc_id="833538" respawn_time="10">
+					<spot x="1214.8" y="1402.1" z="208.2" h="10"/>
+				</spawn>
+				<!-- Ice Festival Treasure Crate -->
+				<spawn npc_id="833521" respawn_time="10">
+					<spot x="1190" y="1399" z="208.2" ai="chest"/>
+				</spawn>
+				<!-- Horse Sculpture -->
+				<spawn npc_id="833533" respawn_time="10">
+					<spot x="1205" y="1406" z="208.2" h="39" ai="icefestival_ice_sculpture"/>
+					<spot x="1214" y="1393" z="208.2" h="6" ai="icefestival_ice_sculpture"/>
+				</spawn>
+				<!-- Bird Sculpture -->
+				<spawn npc_id="833534" respawn_time="10">
+					<spot x="1205" y="1389" z="208.2" h="39" ai="icefestival_ice_sculpture"/>
+					<spot x="1197" y="1401" z="208.2" h="36" ai="icefestival_ice_sculpture"/>
+				</spawn>
+				<!-- Shugo Sculpture -->
+				<spawn npc_id="833535" respawn_time="10">
+					<spot x="1210" y="1396" z="208.2" h="6" ai="icefestival_ice_sculpture"/>
+					<spot x="1207" y="1412" z="208.2" h="6" ai="icefestival_ice_sculpture"/>
+				</spawn>
+				<!-- Toroonerk -->
+				<spawn npc_id="833571" respawn_time="10">
+					<spot x="1206.9" y="1401.4" z="208.2" h="97"/>
+					<spot x="1210.4" y="1406.5" z="208.2" h="37"/>
+				</spawn>
+				<!-- Raw Ice Chunk -->
+				<spawn npc_id="833516">
+					<spot x="1207" y="1400" z="208.2" h="21" ai="icefestival_ice_chunk"/>
+					<spot x="1205" y="1392" z="208.2" h="13" ai="icefestival_ice_chunk"/>
+					<spot x="1210" y="1389" z="208.2" h="8" ai="icefestival_ice_chunk"/>
+					<spot x="1202" y="1404" z="208.2" h="23" ai="icefestival_ice_chunk"/>
+					<spot x="1210" y="1408" z="208.2" h="2" ai="icefestival_ice_chunk"/>
+					<spot x="1200" y="1411" z="208.2" h="20" ai="icefestival_ice_chunk"/>
+					<spot x="1189" y="1414" z="208.2" h="2" ai="icefestival_ice_chunk"/>
+					<spot x="1195" y="1389" z="208.2" h="1" ai="icefestival_ice_chunk"/>
+					<spot x="1201" y="1386" z="208.2" h="17" ai="icefestival_ice_chunk"/>
+					<spot x="1210" y="1415" z="208.2" h="22" ai="icefestival_ice_chunk"/>
+					<spot x="1195" y="1380" z="208.2" h="23" ai="icefestival_ice_chunk"/>
+					<spot x="1200" y="1396" z="208.2" h="21" ai="icefestival_ice_chunk"/>
+					<spot x="1189" y="1384" z="208.2" h="24" ai="icefestival_ice_chunk"/>
+					<spot x="1200" y="1419" z="208.2" h="25" ai="icefestival_ice_chunk"/>
+					<spot x="1185" y="1422" z="208.2" h="10" ai="icefestival_ice_chunk"/>
+					<spot x="1183" y="1409" z="208.2" h="16" ai="icefestival_ice_chunk"/>
+					<spot x="1208" y="1382" z="208.2" h="9" ai="icefestival_ice_chunk"/>
+					<spot x="1186" y="1391" z="208.2" h="1" ai="icefestival_ice_chunk"/>
+				</spawn>
+			</spawn_map>
+			<!-- Linkgate Foundry -->
+			<spawn_map map_id="301270000">
+				<!-- Secret Ice Festival Box -->
+				<spawn npc_id="236749">
+					<spot x="254.70" y="185.46" z="392.37" h="44" />
+				</spawn>
+			</spawn_map>
+			<!-- Eternal Challenge -->
+			<spawn_map map_id="300070000">
+				<!-- Secret Ice Festival Box -->
+				<spawn npc_id="236749">
+					<spot x="484.42" y="557.65" z="100.51" h="15" />
+				</spawn>
+			</spawn_map>
+			<!-- Sauro Supply Base -->
+			<spawn_map map_id="301130000">
+				<!-- Secret Ice Festival Box -->
+				<spawn npc_id="236749">
+					<spot x="472.27" y="391.84" z="181.99" h="93" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Icefestival Boss Spawn Week 1 Day 1" start="2025-12-24T20:00:00" end="2025-12-24T23:59:59">
+		<spawns>
+			<!-- Kaldor -->
+			<spawn_map map_id="600090000">
+				<!-- Ice Queen -->
+				<spawn npc_id="237174">
+					<spot x="743.54" y="1063.034" z="150.1764" h="31" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Icefestival Boss Spawn Week 1 Day 2" start="2025-12-25T20:00:00" end="2025-12-25T23:59:59">
+		<spawns>
+			<!-- Kaldor -->
+			<spawn_map map_id="600090000">
+				<!-- Ice Queen -->
+				<spawn npc_id="237174">
+					<spot x="743.54" y="1063.034" z="150.1764" h="31" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Icefestival Boss Spawn Week 1 Day 3" start="2025-12-27T20:00:00" end="2025-12-27T23:59:59">
+		<spawns>
+			<!-- Kaldor -->
+			<spawn_map map_id="600090000">
+				<!-- Ice Queen -->
+				<spawn npc_id="237174">
+					<spot x="743.54" y="1063.034" z="150.1764" h="31" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Icefestival Boss Spawn Week 2 Day 1" start="2025-12-31T20:00:00" end="2025-12-31T23:59:59">
+		<spawns>
+			<!-- Kaldor -->
+			<spawn_map map_id="600090000">
+				<!-- Ice Queen -->
+				<spawn npc_id="237174">
+					<spot x="743.54" y="1063.034" z="150.1764" h="31" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Icefestival Boss Spawn Week 2 Day 2" start="2026-01-01T20:00:00" end="2026-01-01T23:59:59">
+		<spawns>
+			<!-- Kaldor -->
+			<spawn_map map_id="600090000">
+				<!-- Ice Queen -->
+				<spawn npc_id="237174">
+					<spot x="743.54" y="1063.034" z="150.1764" h="31" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Icefestival Boss Spawn Week 2 Day 3" start="2026-01-03T20:00:00" end="2026-01-03T23:59:59">
+		<spawns>
+			<!-- Kaldor -->
+			<spawn_map map_id="600090000">
+				<!-- Ice Queen -->
+				<spawn npc_id="237174">
+					<spot x="743.54" y="1063.034" z="150.1764" h="31" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Icefestival Boss Spawn Week 3 Day 1" start="2026-01-07T20:00:00" end="2026-01-07T23:59:59">
+		<spawns>
+			<!-- Kaldor -->
+			<spawn_map map_id="600090000">
+				<!-- Ice Queen -->
+				<spawn npc_id="237174">
+					<spot x="743.54" y="1063.034" z="150.1764" h="31" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Icefestival Boss Spawn Week 3 Day 2" start="2026-01-08T20:00:00" end="2026-01-08T23:59:59">
+		<spawns>
+			<!-- Kaldor -->
+			<spawn_map map_id="600090000">
+				<!-- Ice Queen -->
+				<spawn npc_id="237174">
+					<spot x="743.54" y="1063.034" z="150.1764" h="31" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
+	<event name="Icefestival Boss Spawn Week 3 Day 3" start="2026-01-10T20:00:00" end="2026-01-10T23:59:59">
+		<spawns>
+			<!-- Kaldor -->
+			<spawn_map map_id="600090000">
+				<!-- Ice Queen -->
+				<spawn npc_id="237174">
+					<spot x="743.54" y="1063.034" z="150.1764" h="31" />
+				</spawn>
+			</spawn_map>
+		</spawns>
+	</event>
 	<!-- https://web.archive.org/web/20160116181805/http://na.aiononline.com/en/news/events/01132016-jokers-wild.php -->
 	<event name="Joker's Wild Event" start="2021-10-29T00:00:00" end="2021-11-07T23:59:59">
 		<quests>

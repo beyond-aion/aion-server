@@ -35911,14 +35911,10 @@
 		<npc_skill id="19135" lv="65" prob="25" />
 	</npc_skills>
 	<npc_skills npc_ids="237174">
-		<npc_skill id="19140" lv="85" prob="75" />
-		<npc_skill id="19148" lv="1" prob="55" />
-		<npc_skill id="19150" lv="90" prob="55" />
-		<npc_skill id="19155" lv="150" prob="55" />
-		<npc_skill id="19156" lv="250" prob="55" />
-		<npc_skill id="19160" lv="1" prob="55" />
-		<npc_skill id="19289" lv="65" prob="65" />
-		<npc_skill id="22717" lv="65" prob="75" />
+		<npc_skill id="22717" lv="65" prob="75" /><!-- High-speed Freeze -->
+		<npc_skill id="19009" lv="60" prob="100" /><!-- Wide Area Pull -->
+		<npc_skill id="19155" lv="60" prob="100" /><!-- Aether Storm -->
+		<npc_skill id="19134" lv="60" prob="100" cd="10000" /><!-- Arcane Thunderbolt -->
 	</npc_skills>
 	<npc_skills npc_ids="251001">
 		<npc_skill id="17829" lv="42" prob="25" />

@@ -27624,7 +27624,14 @@
 	<decomposable item_id="188053020" /><!-- Archon Scroll Bundle -->
 	<decomposable item_id="188053021" /><!-- Guardian Summoning Scroll Bundle -->
 	<decomposable item_id="188053022" /><!-- Archon Summoning Scroll Bundle -->
-	<decomposable item_id="188053023" /><!-- Special Medal Chest -->
+	<decomposable item_id="188053023"><!-- Special Medal Chest -->
+		<items chance="30.0">
+			<item id="186000242" /><!-- Ceramium Medal -->
+		</items>
+		<items chance="70.0">
+			<item id="186000147" /><!-- Mithril Medal -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053024" /><!-- Infused Idian Shugo Box: Physical Attack -->
 	<decomposable item_id="188053025" /><!-- Infused Idian Shugo Box: Magical Attack -->
 	<decomposable item_id="188053026" /><!-- Infused Idian Shugo Box: Block -->
@@ -29847,46 +29854,45 @@
 	<decomposable item_id="188053211" /><!-- [Event] Sauro Commander's Weapon Box -->
 	<decomposable item_id="188053212"><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
 		<items>
-			<item id="115001475" /><!-- Dragon Lord's Agony -->
+			<item id="100501092" player_classes="SORCERER SPIRIT_MASTER" /><!-- Dragon Lord's Arrogance (Orb) -->
+			<item id="100001407" player_classes="ASSASSIN RANGER" /><!-- Dragon Lord's Wrath (Sword) -->
+			<item id="100101104" player_classes="CLERIC CHANTER" /><!-- Dragon Lord's Delight (Mace) -->
+			<item id="100001407" player_classes="TEMPLAR GLADIATOR" /><!-- Dragon Lord's Wrath (Sword) -->
+			<item id="102000882" player_classes="BARD" /><!-- Dragon Lord's Passion (Harp) -->
+			<item id="101800850" player_classes="GUNNER" /><!-- Dragon Lord's Resolve (Pistol) -->
+			<item id="102100742" player_classes="RIDER" /><!-- Dragon Lord's Passage (Cipher-Blade) -->
 		</items>
 		<items>
-			<item id="100501092" /><!-- Dragon Lord's Arrogance -->
+			<item id="100501092" player_classes="SORCERER SPIRIT_MASTER" /><!-- Dragon Lord's Arrogance (Orb) -->
+			<item id="100201246" player_classes="ASSASSIN RANGER" /><!-- Dragon Lord's Murderous Intent (Dagger) -->
+			<item id="100101104" player_classes="CLERIC" /><!-- Dragon Lord's Delight (Mace) -->
+			<item id="101501118" player_classes="CHANTER"/><!-- Dragon Lord's Pride (Staff) -->
+			<item id="100001407" player_classes="TEMPLAR" /><!-- Dragon Lord's Wrath (Sword) -->
+			<item id="100201246" player_classes="GLADIATOR" /><!-- Dragon Lord's Murderous Intent (Dagger) -->
+			<item id="102000882" player_classes="BARD" /><!-- Dragon Lord's Passion (Harp) -->
+			<item id="101800850" player_classes="GUNNER" /><!-- Dragon Lord's Resolve (Pistol) -->
+			<item id="102100742" player_classes="RIDER" /><!-- Dragon Lord's Passage (Cipher-Blade) -->
 		</items>
 		<items>
-			<item id="101900848" /><!-- Dragon Lord's Courage -->
+			<item id="100601148" player_classes="SORCERER SPIRIT_MASTER" /><!-- Dragon Lord's Distrust (Spellbook) -->
+			<item id="100201246" player_classes="ASSASSIN" /><!-- Dragon Lord's Murderous Intent (Dagger) -->
+			<item id="101701129" player_classes="RANGER"/><!-- Dragon Lord's Envy (Bow) -->
+			<item id="100101104" player_classes="CLERIC" /><!-- Dragon Lord's Delight (Mace) -->
+			<item id="101501118" player_classes="CHANTER"/><!-- Dragon Lord's Pride (Staff) -->
+			<item id="100901100" player_classes="TEMPLAR GLADIATOR" /><!-- Dragon Lord's Hatred (Greatsword) -->
+			<item id="102000882" player_classes="BARD" /><!-- Dragon Lord's Passion (Harp) -->
+			<item id="101900848" player_classes="GUNNER" /><!-- Dragon Lord's Courage (Cannon) -->
+			<item id="102100742" player_classes="RIDER" /><!-- Dragon Lord's Passage (Cipher-Blade) -->
 		</items>
 		<items>
-			<item id="100101104" /><!-- Dragon Lord's Delight -->
-		</items>
-		<items>
-			<item id="100601148" /><!-- Dragon Lord's Distrust -->
-		</items>
-		<items>
-			<item id="101701129" /><!-- Dragon Lord's Envy -->
-		</items>
-		<items>
-			<item id="101301037" /><!-- Dragon Lord's Greed -->
-		</items>
-		<items>
-			<item id="100901100" /><!-- Dragon Lord's Hatred -->
-		</items>
-		<items>
-			<item id="102100742" /><!-- Dragon Lord's Passage -->
-		</items>
-		<items>
-			<item id="102000882" /><!-- Dragon Lord's Passion -->
-		</items>
-		<items>
-			<item id="101501118" /><!-- Dragon Lord's Pride -->
-		</items>
-		<items>
-			<item id="101800850" /><!-- Dragon Lord's Resolve -->
-		</items>
-		<items>
-			<item id="115001459" /><!-- Dragon Lord's Sigh -->
-		</items>
-		<items>
-			<item id="100001407" /><!-- Dragon Lord's Wrath -->
+			<item id="100601148" player_classes="SORCERER SPIRIT_MASTER" /><!-- Dragon Lord's Distrust (Spellbook) -->
+			<item id="101701129" player_classes="ASSASSIN RANGER" /><!-- Dragon Lord's Envy (Bow) -->
+			<item id="101501118" player_classes="CLERIC CHANTER" /><!-- Dragon Lord's Pride (Staff) -->
+			<item id="100901100" player_classes="TEMPLAR" /><!-- Dragon Lord's Hatred (Greatsword) -->
+			<item id="101301037" player_classes="GLADIATOR" /><!-- Dragon Lord's Greed (Polearm) -->
+			<item id="102000882" player_classes="BARD" /><!-- Dragon Lord's Passion (Harp) -->
+			<item id="101900848" player_classes="GUNNER" /><!-- Dragon Lord's Courage (Cannon) -->
+			<item id="101800850" player_classes="RIDER" /><!-- Dragon Lord's Resolve (Pistol) -->
 		</items>
 	</decomposable>
 	<decomposable item_id="188053213" /><!-- [Event] Remodeled Danuar Weapon Chest -->
@@ -36309,10 +36315,152 @@
 	</decomposable>
 	<decomposable item_id="188053953" /><!-- Special Legionnaire Armor Box -->
 	<decomposable item_id="188053954" /><!-- Legionnaire Armor Box -->
-	<decomposable item_id="188053955" /><!-- [Event] Ice Sculptor's Box -->
-	<decomposable item_id="188053956" /><!-- [Event] Talented Ice Sculptor's Box -->
-	<decomposable item_id="188053957" /><!-- [Event] Enheartened Ice Sculptor's Box -->
-	<decomposable item_id="188053958" /><!-- [Event] Soulful Ice Sculptor's Box -->
+	<decomposable item_id="188053955"><!-- [Event] Ice Sculptor's Box -->
+		<items chance="1.0">
+			<item id="169650003" /><!-- [Special] Plastic Surgery Ticket -->
+		</items>
+		<items chance="1.0">
+			<item id="188052073" /><!-- [Event] Ancient Spirit's Wing Box -->
+		</items>
+		<items chance="0.5">
+			<item id="188053005" /><!-- [Event] Hyperion's Wing Chest -->
+		</items>
+		<items chance="0.5">
+			<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+		</items>
+		<items chance="1.0">
+			<item id="188054038" /><!-- Wave Song Armor Box -->
+		</items>
+		<items chance="1.0">
+			<item id="188054039" /><!-- Sea Feast Armor Box -->
+		</items>
+		<items chance="15.0">
+			<item id="188052632" /><!-- [Event] Superior Manastone Bundle -->
+		</items>
+		<items chance="20.0">
+			<item id="188053644" /><!-- [Event] Small Ancient Coin Bundle -->
+		</items>
+		<items chance="20.0">
+			<item id="188052693" /><!-- [Event] Saam King's Herbs Bundle -->
+		</items>
+		<items chance="20.0">
+			<item id="188052716" /><!-- [Event] Lucky Scroll Pouch -->
+		</items>
+		<items chance="20.0">
+			<item id="161000003" /><!-- Reviving Elemental Stone -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053956"><!-- [Event] Talented Ice Sculptor's Box -->
+		<items chance="5.0">
+			<item id="188053784" /><!-- Stigma Bundle -->
+		</items>
+		<items chance="5.0">
+			<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+		</items>
+		<items chance="5.0">
+			<item id="188053208" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+		</items>
+		<items chance="1.0">
+			<item id="188053005" /><!-- [Event] Hyperion's Wing Chest -->
+		</items>
+		<items chance="1.0">
+			<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+		</items>
+		<items chance="2.0">
+			<item id="188054038" /><!-- Wave Song Armor Box -->
+		</items>
+		<items chance="2.0">
+			<item id="188054039" /><!-- Sea Feast Armor Box -->
+		</items>
+		<items chance="15.0">
+			<item id="188053610" /><!-- [Event] Level 70 Composite Manastone Bundle -->
+		</items>
+		<items chance="5.0">
+			<item id="169200006" /><!-- Dye: True White -->
+		</items>
+		<items chance="5.0">
+			<item id="169200007" /><!-- Dye: True Black -->
+		</items>
+		<items chance="20.0">
+			<item id="188053663" /><!-- [Event] Blood Mark Box -->
+		</items>
+		<items chance="24.0">
+			<item id="188053644" /><!-- [Event] Small Ancient Coin Bundle -->
+		</items>
+		<items chance="10.0">
+			<item id="188052716" /><!-- [Event] Lucky Scroll Pouch -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053957"><!-- [Event] Enheartened Ice Sculptor's Box -->
+		<items chance="2.0">
+			<item id="188053785" /><!-- Greater Stigma Bundle -->
+		</items>
+		<items chance="2.0">
+			<item id="188052559" /><!-- Assured Greater Felicitous Socketing Box (Eternal) -->
+		</items>
+		<items chance="2.0">
+			<item id="187060091" /><!-- Shining Light's Wings -->
+		</items>
+		<items chance="2.0">
+			<item id="187060094" /><!-- Splendid Light's Wings -->
+		</items>
+		<items chance="5.0">
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
+		</items>
+		<items chance="10.0">
+			<item id="169405339" /><!-- Pallasite Crystal -->
+		</items>
+		<items chance="2.0">
+			<item id="188053005" /><!-- [Event] Hyperion's Wing Chest -->
+		</items>
+		<items chance="2.0">
+			<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+		</items>
+		<items chance="4.0">
+			<item id="188054038" /><!-- Wave Song Armor Box -->
+		</items>
+		<items chance="4.0">
+			<item id="188054039" /><!-- Sea Feast Armor Box -->
+		</items>
+		<items chance="15.0">
+			<item id="188053663" min_count="3" /><!-- [Event] Blood Mark Box -->
+		</items>
+		<items chance="20.0">
+			<item id="188053663" min_count="2" /><!-- [Event] Blood Mark Box -->
+		</items>
+		<items chance="30.0">
+			<item id="188053663" /><!-- [Event] Blood Mark Box -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188053958"><!-- [Event] Soulful Ice Sculptor's Box -->
+		<items chance="1.0">
+			<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
+		</items>
+		<items chance="15.0">
+			<item id="166500002" /><!-- Amplification Stone -->
+		</items>
+		<items chance="10.0">
+			<item id="188051577" /><!-- Packaged Sharptooth -->
+		</items>
+		<items chance="15.0">
+			<item id="188052560" /><!-- Assured Greater Felicitous Socketing Box (Mythic) -->
+		</items>
+		<items chance="15.0">
+			<item id="188053786" /><!-- Major Stigma Bundle -->
+		</items>
+		<items chance="10.0">
+			<item id="188053005" /><!-- [Event] Hyperion's Wing Chest -->
+		</items>
+		<items chance="10.0">
+			<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+		</items>
+		<items chance="12.0">
+			<item id="188054038" /><!-- Wave Song Armor Box -->
+		</items>
+		<items chance="12.0">
+			<item id="188054039" /><!-- Sea Feast Armor Box -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188053959"><!-- [Camping] Display Furniture Bag -->
 		<items>
 			<item id="170115027" /><!-- Camping Essentials -->
@@ -36658,10 +36806,178 @@
 			<item id="188054031" /><!-- [Club] Functional Furniture Bundle -->
 		</items>
 	</decomposable>
-	<decomposable item_id="188054036" /><!-- [Event] Frozen Ice Festival Box -->
-	<decomposable item_id="188054037" /><!-- [Event] Engraved Ice Festival Box -->
-	<decomposable item_id="188054038" /><!-- Wave Song Armor Box -->
-	<decomposable item_id="188054039" /><!-- Sea Feast Armor Box -->
+	<decomposable item_id="188054036"><!-- [Event] Frozen Ice Festival Box -->
+		<items>
+			<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="169650003" /><!-- [Special] Plastic Surgery Ticket -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052319" /><!-- [Event] Dragon Lord's Wing Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="166500002" /><!-- Amplification Stone -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052560" /><!-- Assured Greater Felicitous Socketing Box (Mythic) -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052559" /><!-- Assured Greater Felicitous Socketing Box (Eternal) -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052073" /><!-- [Event] Ancient Spirit's Wing Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053786" /><!-- Major Stigma Bundle -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="187060091" /><!-- Shining Light's Wings -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="187060094" /><!-- Splendid Light's Wings -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053785" /><!-- Greater Stigma Bundle -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188054038" /><!-- Wave Song Armor Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188054039" /><!-- Sea Feast Armor Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053206" /><!-- [Event] Stormwing's Eternal Armor Chest -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053784" /><!-- Stigma Bundle -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053208" /><!-- [Event] Tiamat Guard's Eternal Armor Chest -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053324" /><!-- Levinshor Alliance Noble Ancient Manastone Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="169405339" /><!-- Pallasite Crystal -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053295" /><!-- Empyrean Plume Chest -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052693" /><!-- [Event] Saam King's Herbs Bundle -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188052716" /><!-- [Event] Lucky Scroll Pouch -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053663" /><!-- [Event] Blood Mark Box -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="188053644" /><!-- [Event] Small Ancient Coin Bundle -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+		<items>
+			<item id="161000003" /><!-- Reviving Elemental Stone -->
+			<item id="182215805" /><!-- [Event] Pure Ice Crystal -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054037"><!-- [Event] Engraved Ice Festival Box -->
+		<items chance="1">
+			<item id="188053212" /><!-- [Event] Dragon Lord's Mythic Weapon Chest -->
+		</items>
+		<items chance="4">
+			<item id="188052560" /><!-- Greater Felicitous Socketing Box (Mythic) -->
+		</items>
+		<items chance="5">
+			<item id="188053663" min_count="3" /><!-- [Event] Blood Mark Box -->
+		</items>
+		<items chance="10">
+			<item id="188053663" /><!-- [Event] Blood Mark Box -->
+		</items>
+		<items chance="20">
+			<item id="166020000" min_count="3" /><!-- Omega Enchantment Stone -->
+		</items>
+		<items chance="20">
+			<item id="166030005" min_count="2" /><!-- Tempering Solution -->
+		</items>
+		<items chance="20">
+			<item id="166500002" min_count="3" /><!-- Amplification Stone -->
+		</items>
+		<items chance="20">
+			<item id="188053786" /><!-- Major Stigma Bundle -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054038" selectable="true"><!-- Wave Song Armor Box -->
+		<items>
+			<item id="110101909" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Tunic Skin -->
+			<item id="111101724" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Gloves Skin -->
+			<item id="114101769" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Shoes Skin -->
+			<item id="113101736" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Leggings Skin -->
+			<item id="112101671" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Pauldrons Skin -->
+			<item id="110301903" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Jerkin Skin -->
+			<item id="111301841" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Vambraces Skin -->
+			<item id="114301909" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Boots Skin -->
+			<item id="113301873" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Breeches Skin -->
+			<item id="112301780" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Shoulderguards Skin -->
+			<item id="110551239" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Hauberk Skin -->
+			<item id="111501798" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Handguards Skin -->
+			<item id="114501826" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Brogans Skin -->
+			<item id="113501818" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Chausses Skin -->
+			<item id="112501735" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Spaulders Skin -->
+			<item id="110601700" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Breastplate Skin -->
+			<item id="111601663" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Gauntlets Skin -->
+			<item id="114601653" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Sabatons Skin -->
+			<item id="113601647" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Greaves Skin -->
+			<item id="112601645" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Shoulderplates Skin -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054039" selectable="true"><!-- Sea Feast Armor Box -->
+		<items>
+			<item id="110101910" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Tunic Skin -->
+			<item id="111101725" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Gloves Skin -->
+			<item id="114101770" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Shoes Skin -->
+			<item id="113101737" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Leggings Skin -->
+			<item id="112101672" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Pauldrons Skin -->
+			<item id="110301904" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Jerkin Skin -->
+			<item id="111301842" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Vambraces Skin -->
+			<item id="114301910" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Boots Skin -->
+			<item id="113301874" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Breeches Skin -->
+			<item id="112301781" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Shoulderguards Skin -->
+			<item id="110551240" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Hauberk Skin -->
+			<item id="111501799" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Handguards Skin -->
+			<item id="114501827" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Brogans Skin -->
+			<item id="113501819" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Chausses Skin -->
+			<item id="112501736" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Spaulders Skin -->
+			<item id="110601701" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Breastplate Skin -->
+			<item id="111601664" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Gauntlets Skin -->
+			<item id="114601654" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Sabatons Skin -->
+			<item id="113601648" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Greaves Skin -->
+			<item id="112601646" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Shoulderplates Skin -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188054074" /><!-- Aion Member Daily Gift -->
 	<decomposable item_id="188054075" /><!-- [Black Star] Esoteric Document -->
 	<decomposable item_id="188054076" /><!-- [Blackstar] Manastone Bundle -->
@@ -36690,9 +37006,60 @@
 	<decomposable item_id="188054108" /><!-- Afterburner Bundle -->
 	<decomposable item_id="188054109" /><!-- Aether Cherry Bundle -->
 	<decomposable item_id="188054110" /><!-- Mega Coin Bundle -->
-	<decomposable item_id="188054111" /><!-- [Event] Ice Queen's Goods Box -->
-	<decomposable item_id="188054112" /><!-- Wave Song Armor Box -->
-	<decomposable item_id="188054113" /><!-- Sea Feast Armor Box -->
+	<decomposable item_id="188054111"><!-- [Event] Ice Queen's Goods Box -->
+		<items>
+			<item id="188054036" min_count="4" /><!-- [Event] Frozen Ice Festival Box -->
+			<item id="186000242" /><!-- Ceramium Medal -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054112" selectable="true"><!-- Wave Song Armor Box -->
+		<items>
+			<item id="110101909" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Tunic Skin -->
+			<item id="111101724" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Gloves Skin -->
+			<item id="114101769" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Shoes Skin -->
+			<item id="113101736" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Leggings Skin -->
+			<item id="112101671" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Wave Song Pauldrons Skin -->
+			<item id="110301903" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Jerkin Skin -->
+			<item id="111301841" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Vambraces Skin -->
+			<item id="114301909" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Boots Skin -->
+			<item id="113301873" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Breeches Skin -->
+			<item id="112301780" player_classes="ASSASSIN RANGER GUNNER" /><!-- Wave Song Shoulderguards Skin -->
+			<item id="110551239" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Hauberk Skin -->
+			<item id="111501798" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Handguards Skin -->
+			<item id="114501826" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Brogans Skin -->
+			<item id="113501818" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Chausses Skin -->
+			<item id="112501735" player_classes="CLERIC CHANTER RIDER" /><!-- Wave Song Spaulders Skin -->
+			<item id="110601700" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Breastplate Skin -->
+			<item id="111601663" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Gauntlets Skin -->
+			<item id="114601653" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Sabatons Skin -->
+			<item id="113601647" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Greaves Skin -->
+			<item id="112601645" player_classes="GLADIATOR TEMPLAR" /><!-- Wave Song Shoulderplates Skin -->
+		</items>
+	</decomposable>
+	<decomposable item_id="188054113" selectable="true"><!-- Sea Feast Armor Box -->
+		<items>
+			<item id="110101910" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Tunic Skin -->
+			<item id="111101725" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Gloves Skin -->
+			<item id="114101770" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Shoes Skin -->
+			<item id="113101737" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Leggings Skin -->
+			<item id="112101672" player_classes="SORCERER SPIRIT_MASTER BARD" /><!-- Sea Feast Pauldrons Skin -->
+			<item id="110301904" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Jerkin Skin -->
+			<item id="111301842" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Vambraces Skin -->
+			<item id="114301910" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Boots Skin -->
+			<item id="113301874" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Breeches Skin -->
+			<item id="112301781" player_classes="ASSASSIN RANGER GUNNER" /><!-- Sea Feast Shoulderguards Skin -->
+			<item id="110551240" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Hauberk Skin -->
+			<item id="111501799" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Handguards Skin -->
+			<item id="114501827" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Brogans Skin -->
+			<item id="113501819" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Chausses Skin -->
+			<item id="112501736" player_classes="CLERIC CHANTER RIDER" /><!-- Sea Feast Spaulders Skin -->
+			<item id="110601701" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Breastplate Skin -->
+			<item id="111601664" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Gauntlets Skin -->
+			<item id="114601654" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Sabatons Skin -->
+			<item id="113601648" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Greaves Skin -->
+			<item id="112601646" player_classes="GLADIATOR TEMPLAR" /><!-- Sea Feast Shoulderplates Skin -->
+		</items>
+	</decomposable>
 	<decomposable item_id="188054169" /><!-- Lucky Gift Box -->
 	<decomposable item_id="188054170" /><!-- Lucky Happiness Box -->
 	<decomposable item_id="188054171" /><!-- Lucky Mysterious Box -->

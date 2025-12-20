@@ -31,6 +31,7 @@ import com.aionemu.gameserver.model.templates.flyring.FlyRingTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MESSAGE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_QUEST_ACTION;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
+import com.aionemu.gameserver.services.event.EventService;
 import com.aionemu.gameserver.services.item.ItemService;
 import com.aionemu.gameserver.services.player.PlayerService;
 import com.aionemu.gameserver.skillengine.model.Skill;
@@ -194,13 +195,13 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 				if (pcd.getPlayerClass() != PlayerClass.RIDER) {
 					switch (pcd.getRace()) {
 						case ASMODIANS -> bossID = switch (pcd.getGender()) {
-								case MALE -> BOSS_MOB_A_M_ID;
-								case FEMALE -> BOSS_MOB_A_F_ID;
-							};
+							case MALE -> BOSS_MOB_A_M_ID;
+							case FEMALE -> BOSS_MOB_A_F_ID;
+						};
 						case ELYOS -> bossID = switch (pcd.getGender()) {
-								case MALE -> BOSS_MOB_E_M_ID;
-								case FEMALE -> BOSS_MOB_E_F_ID;
-							};
+							case MALE -> BOSS_MOB_E_M_ID;
+							case FEMALE -> BOSS_MOB_E_F_ID;
+						};
 					}
 				}
 				spawn(bossID, 503.96774f, 631.935f, 104.548775f, (byte) 90); // spawn bossMob
@@ -250,6 +251,9 @@ public class RoahCustomInstanceHandler extends GeneralInstanceHandler {
 		if (dropItems != null) { // dropItems can possibly be null if the player died right before the boss
 			dropItems.clear();
 			dropItems.add(DropRegistrationService.getInstance().regDropItem(0, playerObjId, npcObjId, REWARD_COIN_ID, getRewardCoinAmount(rank)));
+
+			if (EventService.getInstance().isEventActive("Ice Festival"))
+				dropItems.add(DropRegistrationService.getInstance().regDropItem(0, playerObjId, npcObjId, 182215803, 1));
 		}
 	}
 

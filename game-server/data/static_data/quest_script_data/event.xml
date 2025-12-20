@@ -253,6 +253,13 @@
 			80704 [XML] [Event] Mass Verification of Symphony of Legend - The Fourth Movement
 			80705 [CUSTOM_REMOVED] [Event] Confirmation of Friendship
 			80706 [CUSTOM_REMOVED] [Event] Confirmation of Friendship
+
+			80715 [XML] [Event/Daily] Daily Gift of the Ice Festival Group
+			80716 [XML] [Event/Daily] Cold Ice Collection
+			80717 [XML] [Event/Daily] Take Heart, Crystal
+			80718 [XML] [Event/Daily] Crystals Like Glass
+			80719 [XML] [Event/Daily] Sculpting the Sculptor
+			80720 [XML] [Event] Ice Isn't Even My Final Form!
 		[END] SUMMARY
 	-->
 
@@ -303,6 +310,8 @@
 	<report_to id="80686" start_npc_ids="832976"/>
 	<report_to id="80687" start_npc_ids="832977"/>
 	<report_to id="80708" start_npc_ids="833503"/>
+	<report_to id="80715" start_npc_ids="833536"/>
+	<report_to id="80719" start_npc_ids="833537"/>
 
 	<!-- COLLECTING QUESTS -->
 	<item_collecting id="50035" start_npc_ids="832749"/>
@@ -411,6 +420,10 @@
 	<item_collecting id="80702" start_npc_ids="832972"/>
 	<item_collecting id="80703" start_npc_ids="832972"/>
 	<item_collecting id="80704" start_npc_ids="832972"/>
+	<item_collecting id="80716" start_npc_ids="833536"/>
+	<item_collecting id="80717" start_npc_ids="833536"/>
+	<item_collecting id="80718" start_npc_ids="833536"/>
+	<item_collecting id="80720" start_npc_ids="833536"/>
 
 	<!-- HUNTING QUESTS -->
 	<monster_hunt id="80223" start_npc_ids="831028"/>

@@ -612,4 +612,8 @@
 	<chest npc_id="833015">
 		<key_item item_ids="0" count="1" />
 	</chest>
+	<!-- Ice Festival -->
+	<chest npc_id="833521">
+		<key_item item_ids="185000236" count="1" />
+	</chest>
 </chest_templates>
