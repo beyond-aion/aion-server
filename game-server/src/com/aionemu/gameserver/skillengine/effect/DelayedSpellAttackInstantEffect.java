@@ -40,9 +40,4 @@ public class DelayedSpellAttackInstantEffect extends DamageEffect {
 	@Override
 	public void calculateDamage(Effect effect) {
 	}
-
-	@Override
-	public boolean shouldApplyMovementModifier() {
-		return false;
-	}
 }
