@@ -2,6 +2,7 @@ package com.aionemu.gameserver.skillengine.properties;
 
 import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -44,8 +45,11 @@ public class FirstTargetRangeProperty {
 			return true;
 
 		// on end cast check add revision distance value
-		if (castState == CastState.CAST_END && firstTarget instanceof Player)
+		boolean isPlayerTarget =
+			firstTarget instanceof Player || firstTarget instanceof SummonedObject<?> summoned && summoned.getCreator() instanceof Player;
+		if (castState == CastState.CAST_END && isPlayerTarget) {
 			firstTargetRange += properties.getRevisionDistance();
+		}
 
 		// Add Weapon Range to distance
 		if (properties.isAddWeaponRange())
