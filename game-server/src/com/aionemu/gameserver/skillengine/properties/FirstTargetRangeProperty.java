@@ -44,7 +44,7 @@ public class FirstTargetRangeProperty {
 			return true;
 
 		// on end cast check add revision distance value
-		if (castState == CastState.CAST_END)
+		if (castState == CastState.CAST_END && firstTarget instanceof Player)
 			firstTargetRange += properties.getRevisionDistance();
 
 		// Add Weapon Range to distance
