@@ -19,7 +19,7 @@ public interface HealEffectTemplate {
 	default int calculateHealValue(Effect effect, HealType type) {
 		int healValue = isPercent() ? getMaxStatValue(effect) * calculateBaseHealValue(effect) / 100 : calculateBaseHealValue(effect);
 
-		if (type == HealType.HP) {
+		if (type == HealType.HP && healValue >= 0) { // ignore skills like Spirit Absorption that apply damage via negative heals
 			if (allowHpHealBoost(effect)) {
 				// caster's heal boost from equipment, titles, etc. (capped at 1000 / 100% boost)
 				int healBoost = effect.getEffector().getGameStats().getStat(StatEnum.HEAL_BOOST, 0).getCurrent();
@@ -29,7 +29,7 @@ public interface HealEffectTemplate {
 			}
 			// apply target's heal related effects (e.g. brilliant protection)
 			if (allowHpHealSkillDeboost(effect))
-				healValue = effect.getEffected().getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, healValue).getCurrent();
+				healValue = Math.max(0, effect.getEffected().getGameStats().getStat(StatEnum.HEAL_SKILL_DEBOOST, healValue).getCurrent());
 		}
 		return healValue;
 	}
