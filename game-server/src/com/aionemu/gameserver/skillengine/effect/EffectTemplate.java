@@ -571,7 +571,7 @@ public abstract class EffectTemplate {
 
 	private boolean isProtectedByShield(Creature effected, StatEnum stat) {
 		return switch (stat) {
-			case PULLED_RESISTANCE, STUMBLE_RESISTANCE, OPENAERIAL_RESISTANCE, SPIN_RESISTANCE, STAGGER_RESISTANCE -> effected.getEffectController().isUnderNormalShield();
+			case STUMBLE_RESISTANCE, OPENAERIAL_RESISTANCE, SPIN_RESISTANCE, STAGGER_RESISTANCE -> effected.getEffectController().isUnderNormalShield();
 			default -> false;
 		};
 	}
