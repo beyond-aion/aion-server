@@ -230,7 +230,6 @@ public class AttackUtil {
 		// define values
 		ActionModifier modifier = template.getActionModifiers(effect);
 		SkillElement element = template.getElement();
-		Func func = template.getMode();
 		int randomDamageType = template instanceof SkillAttackInstantEffect skillAttackInstantEffect ? skillAttackInstantEffect.getRnddmg() : 0;
 		int critAddDmg = template.getCritAddDmg2() + template.getCritAddDmg1() * effect.getSkillLevel();
 		boolean useTemplateDmg = isUseTemplateDmg(effect, template);
@@ -289,11 +288,9 @@ public class AttackUtil {
 			damage += res.getExactDamage();
 		}
 		// add skill damage
-		if (func != null) {
-			switch (func) {
-				case ADD -> damage += skillDamage;
-				case PERCENT -> damage += baseAttack * skillDamage / 100f;
-			}
+		switch (template.getMode()) {
+			case ADD -> damage += skillDamage;
+			case PERCENT -> damage += baseAttack * skillDamage / 100f;
 		}
 
 		// add bonus damage
