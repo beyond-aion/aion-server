@@ -2,7 +2,6 @@ package com.aionemu.gameserver.skillengine.properties;
 
 import com.aionemu.gameserver.geoEngine.collision.IgnoreProperties;
 import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.SummonedObject;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.skillengine.effect.AbnormalState;
@@ -44,10 +43,8 @@ public class FirstTargetRangeProperty {
 		if (castState != CastState.CAST_START && !(effector instanceof Player)) // NPCs don't cancel skills once started, could be abused -> no range or geo to check
 			return true;
 
-		// on end cast check add revision distance value
-		boolean isPlayerTarget =
-			firstTarget instanceof Player || firstTarget instanceof SummonedObject<?> summoned && summoned.getCreator() instanceof Player;
-		if (castState == CastState.CAST_END && isPlayerTarget) {
+		// on end cast check add revision distance value (only for pvp targets, checked on 4.6 PTS)
+		if (castState == CastState.CAST_END && firstTarget.getMaster() instanceof Player) {
 			firstTargetRange += properties.getRevisionDistance();
 		}
 
