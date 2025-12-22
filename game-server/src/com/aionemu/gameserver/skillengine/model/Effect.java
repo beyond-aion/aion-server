@@ -8,6 +8,7 @@ import java.util.concurrent.atomic.AtomicBoolean;
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
+import com.aionemu.gameserver.controllers.effect.CumulativeResistType;
 import com.aionemu.gameserver.controllers.observer.ActionObserver;
 import com.aionemu.gameserver.controllers.observer.AttackCalcObserver;
 import com.aionemu.gameserver.controllers.observer.ObserverType;
@@ -851,23 +852,11 @@ public class Effect implements StatOwner {
 		long duration = calculateTemplateDuration();
 
 		// adjust with pvp duration (not sure why some self target skills have pvp duration o.O idk how to handle that)
-		if (getEffected() instanceof Player) {
+		if (getEffected() instanceof Player effectedPlayer) {
 			if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected))
 				duration = duration * skillTemplate.getPvpDuration() / 100;
-			if (getEffector().getMaster() instanceof Player) {
-				for (EffectTemplate et : successEffects.values()) {
-					if (et instanceof ParalyzeEffect && ((Player) getEffected()).validateCumulativeParalyzeResistExpirationTime()) {
-						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getParalyzeCount()) / 100f);
-						break;
-					} else if (et instanceof FearEffect && ((Player) getEffected()).validateCumulativeFearResistExpirationTime()) {
-						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getFearCount()) / 100f);
-						break;
-					} else if (et instanceof SleepEffect && ((Player) getEffected()).validateCumulativeSleepResistExpirationTime()) {
-						duration = (long) (duration * getCumulativeResistDurationMultiplierFor(((Player) getEffected()).getSleepCount()) / 100f);
-						break;
-					}
-				}
-			}
+			if (getEffector().getMaster() instanceof Player)
+				duration = applyCumulativeResistDurationMultiplier(duration, effectedPlayer);
 		}
 
 		return (int) Math.min(Integer.MAX_VALUE, duration);
@@ -886,21 +875,18 @@ public class Effect implements StatOwner {
 		return 0;
 	}
 
-	private int getCumulativeResistDurationMultiplierFor(int resistCount) {
-		switch (resistCount) {
-			case 0:
-			case 1:
-			case 2:
-				return 100;
-			case 3:
-				return 90;
-			case 4:
-				return 85;
-			case 5:
-				return 80;
-			default:
-				return 1;
+	private long applyCumulativeResistDurationMultiplier(long duration, Player effected) {
+		for (EffectTemplate et : successEffects.values()) {
+			CumulativeResistType cumulativeResistType = switch (et) {
+				case FearEffect _ -> CumulativeResistType.FEAR;
+				case ParalyzeEffect _ -> CumulativeResistType.PARALYZE;
+				case SleepEffect _ -> CumulativeResistType.SLEEP;
+				default -> null;
+			};
+			if (cumulativeResistType != null)
+				return effected.getEffectController().calculateAndApplyCumulativeResistDuration(cumulativeResistType, duration);
 		}
+		return duration;
 	}
 
 	public boolean isDeityAvatar() {

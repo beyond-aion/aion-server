@@ -90,13 +90,6 @@ public class FearEffect extends EffectTemplate {
 				}
 			});
 		}
-
-		if (effect.getEffected() instanceof Player player && effect.getEffector().getMaster() instanceof Player) {
-			long duration = getDuration2() + ((long) getDuration1()) * effect.getSkillLevel();
-			if (getRandomTime() > 0 )
-				duration -= getRandomTime()/2;
-			player.incrementFearCountAndUpdateExpirationTime(duration);
-		}
 	}
 
 	@Override

@@ -2,6 +2,8 @@ package com.aionemu.gameserver.controllers.effect;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.EnumMap;
+import java.util.Map;
 
 import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -23,6 +25,8 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  * @author ATracer
  */
 public class PlayerEffectController extends EffectController {
+
+	private final Map<CumulativeResistType, CumulativeResist> cumulativeResistInfo = new EnumMap<>(CumulativeResistType.class);
 
 	public PlayerEffectController(Creature owner) {
 		super(owner);
@@ -116,5 +120,29 @@ public class PlayerEffectController extends EffectController {
 
 		if (effect.getSkillTemplate().getTargetSlot() != SkillTargetSlot.NOSHOW)
 			PacketSendUtility.sendPacket(getOwner(), new SM_ABNORMAL_STATE(Collections.singletonList(effect), abnormals, SkillTargetSlot.FULLSLOTS));
+	}
+
+	@Override
+	public void removeAllEffects() {
+		super.removeAllEffects();
+		synchronized (cumulativeResistInfo) {
+			cumulativeResistInfo.clear();
+		}
+	}
+
+	public long calculateAndApplyCumulativeResistDuration(CumulativeResistType type, long duration) {
+		synchronized (cumulativeResistInfo) {
+			CumulativeResist cumulativeResist = cumulativeResistInfo.computeIfAbsent(type, _ -> new CumulativeResist());
+			// retail uses a dynamic duration after the last successful fear/para/sleep, which we approximate by multiplying the base duration * 2 for now
+			cumulativeResist.tryIncrementLevel(duration * 2);
+			return (long) (duration * cumulativeResist.getDurationMultiplier());
+		}
+	}
+
+	public int getCumulativeResistance(CumulativeResistType type) {
+		synchronized (cumulativeResistInfo) {
+			CumulativeResist cumulativeResist = cumulativeResistInfo.get(type);
+			return cumulativeResist == null ? 0 : cumulativeResist.getResistance();
+		}
 	}
 }

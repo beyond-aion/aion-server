@@ -306,10 +306,6 @@ public class PlayerController extends CreatureController<Player> {
 		player.unsetFlyState(FlyState.FLYING);
 		player.unsetFlyState(FlyState.GLIDING);
 
-		player.resetFearCount();
-		player.resetSleepCount();
-		player.resetParalyzeCount();
-
 		// Effects removed with super.onDie()
 		super.onDie(lastAttacker);
 
