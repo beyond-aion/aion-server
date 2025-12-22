@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.skillengine.change.Func;
 import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -315,7 +314,7 @@ public class AttackUtil {
 				damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
 				damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, element, true, true);
 			}
-			if (template.shouldApplyMovementModifier()){
+			if (template.shouldApplyAttackerMovementModifier()){
 				damage = StatFunctions.adjustStatByMovementModifier(effector, isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK, damage);
 			}
 			damage *= damageMultiplier;

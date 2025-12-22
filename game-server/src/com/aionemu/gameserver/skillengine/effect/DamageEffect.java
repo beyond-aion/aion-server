@@ -75,7 +75,7 @@ public abstract class DamageEffect extends EffectTemplate {
 	 * @return {@code true} if movement-based modifiers should be applied,
 	 *         {@code false} otherwise
 	 */
-	public boolean shouldApplyMovementModifier() {
+	public boolean shouldApplyAttackerMovementModifier() {
 		return true;
 	}
 }

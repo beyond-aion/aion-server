@@ -35,7 +35,7 @@ public class NoReduceSpellATKInstantEffect extends DamageEffect {
 	}
 
 	@Override
-	public boolean shouldApplyMovementModifier() {
+	public boolean shouldApplyAttackerMovementModifier() {
 		return false;
 	}
 }
