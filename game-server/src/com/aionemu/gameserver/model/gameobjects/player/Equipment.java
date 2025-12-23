@@ -295,6 +295,16 @@ public class Equipment implements Persistable {
 		owner.getGameStats().updateStatsAndSpeedVisually();
 	}
 
+	private void unequip(Item item) {
+		if (item.getItemTemplate().isTwoHandWeapon()) {
+			for (ItemSlot slot : ItemSlot.getSlotsFor(item.getEquipmentSlot()))
+				equipment.remove(slot.getSlotIdMask());
+		} else {
+			equipment.remove(item.getEquipmentSlot());
+		}
+		item.setEquipped(false);
+	}
+
 	private boolean checkAvailableEquipSkills(Item item) {
 		int[] requiredSkills = item.getItemTemplate().getRequiredSkills();
 		if (requiredSkills.length == 0) // if no skills required - validate as true
@@ -566,7 +576,7 @@ public class Equipment implements Persistable {
 			equippedItem.decreaseItemCount(equippedItem.getItemCount());
 
 		if (equippedItem.getItemCount() == 0) {
-			equipment.remove(equippedItem.getEquipmentSlot());
+			unequip(equippedItem);
 			PacketSendUtility.sendPacket(owner, new SM_DELETE_ITEM(equippedItem.getObjectId()));
 			InventoryDAO.store(equippedItem, owner);
 		}
@@ -598,14 +608,7 @@ public class Equipment implements Persistable {
 			equippedWeapon.add(subOffHandItem);
 
 		for (Item item : equippedWeapon) {
-			if (item.getItemTemplate().isTwoHandWeapon()) {
-				ItemSlot[] slots = ItemSlot.getSlotsFor(item.getEquipmentSlot());
-				for (ItemSlot slot : slots)
-					equipment.remove(slot.getSlotIdMask());
-			} else {
-				equipment.remove(item.getEquipmentSlot());
-			}
-			item.setEquipped(false);
+			unequip(item);
 			PacketSendUtility.sendPacket(owner, new SM_INVENTORY_UPDATE_ITEM(owner, item, ItemUpdateType.EQUIP_UNEQUIP));
 			if (owner.getGameStats() != null) {
 				if ((item.getEquipmentSlot() & ItemSlot.MAIN_HAND.getSlotIdMask()) != 0
