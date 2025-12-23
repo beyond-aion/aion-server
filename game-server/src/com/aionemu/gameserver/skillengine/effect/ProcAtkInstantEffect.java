@@ -22,6 +22,11 @@ public class ProcAtkInstantEffect extends DamageEffect {
 	}
 
 	@Override
+	public boolean shouldApplyAttackerMovementModifier() {
+		return false;
+	}
+
+	@Override
 	protected int calculateBaseValue(Effect effect) {
 		if (delta == 1 && effect.getSkillTemplate().isProvoked())
 			return value;

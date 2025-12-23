@@ -33,4 +33,9 @@ public class NoReduceSpellATKInstantEffect extends DamageEffect {
 
 		AttackUtil.calculateSkillResult(effect, valueWithDelta, this, false);
 	}
+
+	@Override
+	public boolean shouldApplyAttackerMovementModifier() {
+		return false;
+	}
 }

@@ -47,6 +47,11 @@ public class DispelBuffCounterAtkEffect extends DamageEffect {
 	}
 
 	@Override
+	public boolean shouldApplyAttackerMovementModifier() {
+		return false;
+	}
+
+	@Override
 	public void endEffect(Effect effect) {
 		effect.getEffected().getEffectController().resetDesignatedDispelEffect(effect);
 		super.endEffect(effect);

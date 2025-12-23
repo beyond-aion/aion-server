@@ -19,7 +19,6 @@ import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.enums.ItemGroup;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
-import com.aionemu.gameserver.skillengine.change.Func;
 import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.effect.modifier.ActionModifier;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -224,13 +223,12 @@ public class AttackUtil {
 		};
 	}
 
-	public static void calculateSkillResult(Effect effect, int skillDamage, EffectTemplate template, boolean ignoreShield) {
+	public static void calculateSkillResult(Effect effect, int skillDamage, DamageEffect template, boolean ignoreShield) {
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
 		// define values
 		ActionModifier modifier = template.getActionModifiers(effect);
 		SkillElement element = template.getElement();
-		Func func = template instanceof DamageEffect damageEffect ? damageEffect.getMode() : Func.ADD;
 		int randomDamageType = template instanceof SkillAttackInstantEffect skillAttackInstantEffect ? skillAttackInstantEffect.getRnddmg() : 0;
 		int critAddDmg = template.getCritAddDmg2() + template.getCritAddDmg1() * effect.getSkillLevel();
 		boolean useTemplateDmg = isUseTemplateDmg(effect, template);
@@ -289,11 +287,9 @@ public class AttackUtil {
 			damage += res.getExactDamage();
 		}
 		// add skill damage
-		if (func != null) {
-			switch (func) {
-				case ADD -> damage += skillDamage;
-				case PERCENT -> damage += baseAttack * skillDamage / 100f;
-			}
+		switch (template.getMode()) {
+			case ADD -> damage += skillDamage;
+			case PERCENT -> damage += baseAttack * skillDamage / 100f;
 		}
 
 		// add bonus damage
@@ -318,7 +314,9 @@ public class AttackUtil {
 				damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
 				damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, element, true, true);
 			}
-			damage = StatFunctions.adjustStatByMovementModifier(effector, isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK, damage);
+			if (template.shouldApplyAttackerMovementModifier()) {
+				damage = StatFunctions.adjustStatByMovementModifier(effector, isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK, damage);
+			}
 			damage *= damageMultiplier;
 		}
 
