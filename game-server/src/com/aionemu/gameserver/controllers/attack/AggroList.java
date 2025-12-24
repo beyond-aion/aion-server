@@ -110,16 +110,16 @@ public class AggroList {
 
 	private void transferDamagesToMaster(AggroInfo aggroInfo) {
 		Creature master = aggroInfo.getAttacker().getMaster();
-		if (!master.equals(aggroInfo.getAttacker())) {
-			aggroList.compute(master.getObjectId(), (_, masterAggroInfo) -> {
-				if (masterAggroInfo == null) {
-					masterAggroInfo = new AggroInfo(master);
-					masterAggroInfo.setHate(1);
-				}
-				masterAggroInfo.addDamage(aggroInfo.getDamage());
-				return masterAggroInfo;
-			});
-		}
+		if (master.equals(aggroInfo.getAttacker()) || !isAware(master))
+			return;
+		aggroList.compute(master.getObjectId(), (_, masterAggroInfo) -> {
+			if (masterAggroInfo == null) {
+				masterAggroInfo = new AggroInfo(master);
+				masterAggroInfo.setHate(1);
+			}
+			masterAggroInfo.addDamage(aggroInfo.getDamage());
+			return masterAggroInfo;
+		});
 	}
 
 	public void clear() {
@@ -192,7 +192,7 @@ public class AggroList {
 	}
 
 	protected boolean isAware(Creature creature) {
-		return creature != null && !creature.equals(owner) && !owner.getEffectController().isAbnormalSet(AbnormalState.SANCTUARY)
+		return creature != null && owner.getKnownList().knows(creature) && !owner.getEffectController().isAbnormalSet(AbnormalState.SANCTUARY)
 			&& (aggroList.containsKey(creature.getObjectId()) || creature.isEnemy(owner) || DataManager.TRIBE_RELATIONS_DATA.isHostileRelation(owner.getTribe(), creature.getTribe()));
 	}
 

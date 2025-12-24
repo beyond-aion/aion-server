@@ -14,6 +14,6 @@ public class CreatureAwareKnownList extends KnownList {
 
 	@Override
 	protected final boolean isAwareOf(VisibleObject newObject) {
-		return newObject instanceof Creature;
+		return super.isAwareOf(newObject) && newObject instanceof Creature;
 	}
 }

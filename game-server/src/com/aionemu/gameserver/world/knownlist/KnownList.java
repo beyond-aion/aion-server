@@ -180,9 +180,6 @@ public class KnownList {
 		}
 		for (MapRegion region : position.getMapRegion().getNeighbours()) {
 			for (VisibleObject newObject : region.getObjects().values()) {
-				if (newObject == null || owner.equals(newObject))
-					continue;
-
 				if (!isAwareOf(newObject))
 					continue;
 
@@ -202,7 +199,7 @@ public class KnownList {
 	 * @return True if the knownlist owner is aware of newObject (should be kept in knownlist)
 	 */
 	protected boolean isAwareOf(VisibleObject newObject) {
-		return true;
+		return newObject != null && !newObject.equals(owner);
 	}
 
 	/**
