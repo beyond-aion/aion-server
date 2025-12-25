@@ -103,8 +103,12 @@ public class AggroList {
 	 * Remove creature from aggro list and transfer its damages to the master
 	 */
 	public void remove(Creature creature) {
+		remove(creature, true);
+	}
+
+	public void remove(Creature creature, boolean transferDamagesToMaster) {
 		AggroInfo aggroInfo = aggroList.remove(creature.getObjectId());
-		if (aggroInfo != null)
+		if (transferDamagesToMaster && aggroInfo != null)
 			transferDamagesToMaster(aggroInfo);
 	}
 
