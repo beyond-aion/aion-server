@@ -4,6 +4,7 @@ import com.aionemu.gameserver.ai.AIName;
 import com.aionemu.gameserver.configs.main.SiegeConfig;
 import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.gameobjects.siege.SiegeNpc;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.skillengine.SkillEngine;
@@ -39,5 +40,17 @@ public class EnragedAgent extends SummonerAI {
 	public void modifyOwnerStat(Stat2 stat) {
 		if (stat.getStat() == StatEnum.MAXHP)
 			stat.setBaseRate(SiegeConfig.FORTRESS_PROTECTOR_HEALTH_MULTIPLIER);
+	}
+
+	@Override
+	public void handleBackHome() {
+		super.handleBackHome();
+		getAggroList().clear(); // make sure old damages aren't counted in stopSiege
+	}
+
+	@Override
+	protected void handleDied() {
+		super.handleDied();
+		AbstractSiegeProtectorAI.stopSiege((SiegeNpc) getOwner());
 	}
 }
