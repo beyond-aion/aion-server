@@ -28782,6 +28782,16 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	public static SM_SYSTEM_MESSAGE STR_MOVE_PORTAL_ERROR_INVALID_RACE() {
 		return new SM_SYSTEM_MESSAGE(901354);
 	}
+	
+	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_START_MESSAGE() {
+		return new SM_SYSTEM_MESSAGE(1402606);
+	}
+	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_STOP_MESSAGE() {
+		return new SM_SYSTEM_MESSAGE(1402607);
+	}
+	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_STOP_MESSAGE_03() {
+		return new SM_SYSTEM_MESSAGE(1402672);
+	}
 
 	private int msgId;
 	private byte chatType;
