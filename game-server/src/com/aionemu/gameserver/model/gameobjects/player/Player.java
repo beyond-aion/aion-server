@@ -48,6 +48,7 @@ import com.aionemu.gameserver.model.team.TeamMember;
 import com.aionemu.gameserver.model.team.TemporaryPlayerTeam;
 import com.aionemu.gameserver.model.team.alliance.PlayerAlliance;
 import com.aionemu.gameserver.model.team.alliance.PlayerAllianceGroup;
+import com.aionemu.gameserver.model.team.common.legacy.LootGroupRules;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
@@ -1445,6 +1446,16 @@ public class Player extends Creature {
 			setResPosY(0);
 			setResPosZ(0);
 		}
+	}
+
+	public LootGroupRules getLootGroupRules() {
+		if (isInGroup()) {
+			return getPlayerGroup().getLootGroupRules();
+		}
+		if (isInAlliance()) {
+			return getPlayerAlliance().getLootGroupRules();
+		}
+		return null;
 	}
 
 	public boolean isLooting() {
