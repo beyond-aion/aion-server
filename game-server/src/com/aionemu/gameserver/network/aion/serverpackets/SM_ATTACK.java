@@ -50,13 +50,8 @@ public class SM_ATTACK extends AionServerPacket {
 
 		writeD(target.getObjectId());
 
-		int attackerMaxHp = attacker.getLifeStats().getMaxHp();
-		int attackerCurrHp = attacker.getLifeStats().getCurrentHp();
-		int targetMaxHp = target.getLifeStats().getMaxHp();
-		int targetCurrHp = target.getLifeStats().getCurrentHp();
-
-		writeC((byte) (100f * targetCurrHp / targetMaxHp)); // target %hp
-		writeC((byte) (100f * attackerCurrHp / attackerMaxHp)); // attacker %hp
+		writeC(target.getLifeStats().getHpPercentage());
+		writeC(attacker.getLifeStats().getHpPercentage());
 
 		// TODO refactor attack controller
 		switch (attackList.get(0).getAttackStatus().getId()) // Counter skills
