@@ -6,23 +6,25 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author ATracer, Neon
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
-public class SM_PET_EMOTE extends AionServerPacket {
 
-	private Pet pet;
-	private PetEmote emote;
-	private int emotionId, param1;
+public class SM_PET_EMOTE extends AionServerPacket {
+	private final Pet pet;
+	private final PetEmote emote;
+	private final int emotionId;
+	private final int objectId;
 
 	public SM_PET_EMOTE(Pet pet, PetEmote emote) {
 		this(pet, emote, 0, 0);
 	}
 
-	public SM_PET_EMOTE(Pet pet, PetEmote emote, int emotionId, int param1) {
+	public SM_PET_EMOTE(Pet pet, PetEmote emote, int emotionId, int objectId) {
 		this.pet = pet;
 		this.emote = emote;
 		this.emotionId = emotionId;
-		this.param1 = param1;
+		this.objectId = objectId;
 	}
 
 	@Override
@@ -30,13 +32,13 @@ public class SM_PET_EMOTE extends AionServerPacket {
 		writeD(pet.getObjectId());
 		writeC(emote.getEmoteId());
 		switch (emote) {
-			case MOVE_STOP:
+			case MOVE_STOP -> {
 				writeF(pet.getX());
 				writeF(pet.getY());
 				writeF(pet.getZ());
 				writeC(pet.getHeading());
-				break;
-			case MOVETO:
+			}
+			case MOVETO -> {
 				writeF(pet.getX());
 				writeF(pet.getY());
 				writeF(pet.getZ());
@@ -44,11 +46,11 @@ public class SM_PET_EMOTE extends AionServerPacket {
 				writeF(pet.getMoveController().getTargetX2());
 				writeF(pet.getMoveController().getTargetY2());
 				writeF(pet.getMoveController().getTargetZ2());
-				break;
-			default:
+			}
+			default -> {
 				writeC(emotionId);
-				writeC(param1); // happinessAdded?
-				break;
+				writeC(objectId);
+			}
 		}
 	}
 }

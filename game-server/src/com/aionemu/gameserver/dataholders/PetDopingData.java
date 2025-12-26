@@ -10,21 +10,22 @@ import javax.xml.bind.annotation.*;
 import com.aionemu.gameserver.model.templates.pet.PetDopingEntry;
 
 /**
- * @author Rolandas
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
+
 @XmlRootElement(name = "dopings")
 @XmlAccessorType(XmlAccessType.FIELD)
 public class PetDopingData {
-
 	@XmlElement(name = "doping")
 	private List<PetDopingEntry> list;
-
 	@XmlTransient
 	private final Map<Integer, PetDopingEntry> dopingsById = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		for (PetDopingEntry dope : list)
+		for (var dope : list) {
 			dopingsById.put(dope.getId(), dope);
+		}
 		list = null;
 	}
 
@@ -35,5 +36,4 @@ public class PetDopingData {
 	public PetDopingEntry getDopingTemplate(int id) {
 		return dopingsById.get(id);
 	}
-
 }

@@ -10,16 +10,17 @@ import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.templates.pet.PetDopingBag;
 import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
-import com.aionemu.gameserver.model.templates.pet.PetTemplate;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author M@xx, xTz, Rolandas
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
-public class SM_PET extends AionServerPacket {
 
-	private PetAction action;
+//Фул новый пакет.
+public class SM_PET extends AionServerPacket {
+	private final PetAction action;
 	private Pet pet;
 	private int petObjectId;
 	private PetCommonData commonData;
@@ -28,7 +29,7 @@ public class SM_PET extends AionServerPacket {
 	private Collection<PetCommonData> pets;
 	private int count;
 	private int subType;
-	private int shuggleEmotion;
+	private int snuggleEmotion;
 	private boolean isActing;
 	private int lootNpcObjId;
 	private int dopeAction;
@@ -63,17 +64,21 @@ public class SM_PET extends AionServerPacket {
 		this.commonData = commonData;
 	}
 
+	@SuppressWarnings("unused")
 	public SM_PET(int petId, int petObjectId) {
 		this.action = PetAction.SURRENDER;
 		this.petObjectId = petObjectId;
 	}
 
-	/**
-	 * For listing all pets on this character
-	 */
 	public SM_PET(Collection<PetCommonData> pets) {
 		this.action = PetAction.LOAD_PETS;
 		this.pets = pets;
+	}
+
+	public SM_PET(boolean isBuffing) {
+		this.action = PetAction.SPECIAL_FUNCTION;
+		this.isActing = isBuffing;
+		this.subType = 5;
 	}
 
 	public SM_PET(PetSpecialFunction specialFunction, boolean active) {
@@ -91,27 +96,17 @@ public class SM_PET extends AionServerPacket {
 		this.action = PetAction.SPECIAL_FUNCTION;
 		this.dopeAction = dopeAction;
 		this.subType = PetSpecialFunction.DOPING.getId();
-		itemObjectId = itemId; // it's template ID, not objectId though. also it's misused as slot2 for slot switch action (dopeAction 2)
+		itemObjectId = itemId;
 		dopeSlot = slot;
 	}
 
-	/**
-	 * For mood only
-	 * 
-	 * @param actionId
-	 * @param pet
-	 * @param shuggleEmotion
-	 */
-	public SM_PET(Pet pet, int subType, int shuggleEmotion) {
+	public SM_PET(Pet pet, int subType, int snuggleEmotion) {
 		this.action = PetAction.MOOD;
-		this.shuggleEmotion = shuggleEmotion;
+		this.snuggleEmotion = snuggleEmotion;
 		this.subType = subType;
 		this.commonData = pet.getCommonData();
 	}
 
-	/**
-	 * For deleting pet visually.
-	 */
 	public SM_PET(int petObjectId, ObjectDeleteAnimation animation) {
 		this.action = PetAction.DISMISS;
 		this.petObjectId = petObjectId;
@@ -122,27 +117,24 @@ public class SM_PET extends AionServerPacket {
 	protected void writeImpl(AionConnection con) {
 		writeH(action.getActionId());
 		switch (action) {
-			case LOAD_PETS: // load list on login
-				writeC(0); // unk
+			case LOAD_PETS -> { //Загрузка листа питомцев при входе в игру.
+				writeC(0);
 				writeH(pets.size());
-				for (PetCommonData commonData : pets) {
+				for (var commonData : pets) {
 					writePetData(commonData);
 				}
-				break;
-			case ADOPT:
-				writePetData(commonData);
-				break;
-			case SURRENDER:
+			}
+			case ADOPT -> writePetData(commonData); //Взять питомца.
+			case SURRENDER -> { //Далеко от владельца.
 				writeD(commonData.getTemplateId());
 				writeD(commonData.getObjectId());
-				writeD(0); // unk
-				writeD(0); // unk
-				break;
-			case SPAWN:
+				writeD(0);
+				writeD(0);
+			}
+			case SPAWN -> { //Призыв питомца.
 				writeS(pet.getName());
 				writeD(pet.getObjectTemplate().getTemplateId());
 				writeD(pet.getObjectId());
-
 				writeF(pet.getPosition().getX());
 				writeF(pet.getPosition().getY());
 				writeF(pet.getPosition().getZ());
@@ -150,137 +142,128 @@ public class SM_PET extends AionServerPacket {
 				writeF(pet.getMoveController().getTargetY2());
 				writeF(pet.getMoveController().getTargetZ2());
 				writeC(pet.getHeading());
-
 				writeD(pet.getMaster().getObjectId());
-
 				writeAppearance(pet.getCommonData());
-				break;
-			case DISMISS:
+			}
+			case DISMISS -> { //Отмена призыва питомца.
 				writeD(petObjectId);
 				writeC(animationId);
-				break;
-			case FOOD:
+			}
+			case FOOD -> { //Кормление.
 				writeH(1);
 				writeC(1);
 				writeC(subType);
 				switch (subType) {
-					case 1: // eat
+					case 1 -> { //Кормление.
 						writeD(commonData.getFeedProgress().getDataForPacket());
 						writeD(0);
 						writeD(itemObjectId);
 						writeD(count);
-						break;
-					case 2: // eating successful
+					}
+					case 2 -> { //Успешное кормление.
 						writeD(commonData.getFeedProgress().getDataForPacket());
 						writeD(0);
 						writeD(itemObjectId);
 						writeD(count);
 						writeC(0);
-						break;
-					case 3: // not hungry
-					case 4: // cancel feed
-					case 5: // clean feed task
+					}
+					case 3, 4, 5 -> { //Не голоден| Отмена кормления | Очистки задачи кормления.
 						writeD(commonData.getFeedProgress().getDataForPacket());
 						writeD((int) commonData.getRefeedDelay() / 1000);
-						break;
-					case 6: // give item
+					}
+					case 6 -> { //Дать предмет.
 						writeD(commonData.getFeedProgress().getDataForPacket());
 						writeD(0);
 						writeD(itemObjectId);
 						writeC(0);
-						break;
-					case 7: // present notification
+					}
+					case 7 -> { //Текущее уведомление.
 						writeD(commonData.getFeedProgress().getDataForPacket());
 						writeD((int) commonData.getRefeedDelay() / 1000); // time
 						writeD(itemObjectId);
 						writeD(0);
-						break;
-					case 8: // is full
+					}
+					case 8 -> { //Наелся.
 						writeD(commonData.getFeedProgress().getDataForPacket());
 						writeD((int) commonData.getRefeedDelay() / 1000);
 						writeD(itemObjectId);
 						writeD(count);
-						break;
+					}
 				}
-				break;
-			case RENAME:
+			}
+			case RENAME -> { //Смена имени питомца.
 				writeD(petObjectId);
 				writeS(petName);
-				break;
-			case MOOD:
+			}
+			case MOOD -> { //Настроение.
 				switch (subType) {
-					case 0: // check pet status
+					case 0 -> { //Проверка статуса питомца.
 						writeC(subType);
-						// desynced feedback data, need to send delta in percents
-						if (commonData.getLastSentPoints() < commonData.getMoodPoints(true))
+						if (commonData.getLastSentPoints() < commonData.getMoodPoints(true)) {
 							writeD(commonData.getMoodPoints(true) - commonData.getLastSentPoints());
-						else {
+						} else {
 							writeD(0);
 							commonData.setLastSentPoints(commonData.getMoodPoints(true));
 						}
-						break;
-					case 2: // emotion sent
+					}
+					case 2 -> { //Отправленная эмоция питомцем.
 						writeC(subType);
 						writeD(0);
 						writeD(commonData.getMoodPoints(true));
-						writeD(shuggleEmotion);
+						writeD(snuggleEmotion);
 						commonData.setLastSentPoints(commonData.getMoodPoints(true));
 						commonData.setMoodCdStarted(System.currentTimeMillis());
-						break;
-					case 3: // give gift
+					}
+					case 3 -> { //Дать подарок.
 						writeC(subType);
 						writeD(DataManager.PET_DATA.getPetTemplate(commonData.getTemplateId()).getConditionReward());
 						commonData.setGiftCdStarted(System.currentTimeMillis());
-						break;
-					case 4: // periodic update
+					}
+					case 4 -> { //Периодическое обновление.
 						writeC(subType);
 						writeD(commonData.getMoodPoints(true));
 						writeD(commonData.getMoodRemainingTime());
 						writeD(commonData.getGiftRemainingTime());
 						commonData.setLastSentPoints(commonData.getMoodPoints(true));
-						break;
+					}
 				}
-				break;
-			case SPECIAL_FUNCTION:
+			}
+			case SPECIAL_FUNCTION -> { //Специальные функции.
 				writeC(subType);
 				if (subType == 2) {
 					writeC(dopeAction);
 					switch (dopeAction) {
-						case 0: // add item
+						case 0 -> { //Добавление предмет.
 							writeD(itemObjectId);
 							writeD(dopeSlot);
-							break;
-						case 1: // remove item
-							writeD(dopeSlot);
-							break;
-						case 2: // move item from one slot to other
-							writeD(dopeSlot); // slot 1
-							writeD(itemObjectId); // slot 2
-							break;
-						case 3: // use item
-							writeD(itemObjectId);
-							break;
+						}
+						case 1 -> writeD(dopeSlot); //Удаление предмет.
+						case 2 -> {
+							writeD(dopeSlot); //Слот 1.
+							writeD(itemObjectId); //Слот 2.
+						}
+						case 3 -> writeD(itemObjectId); //Использование предмета.
 					}
 				} else if (subType == 3) {
-					// looting NPC
 					if (lootNpcObjId > 0) {
-						writeC(isActing ? 1 : 2); // 0x02 display looted msg.
+						writeC(isActing ? 1 : 2); //Сообщение на экран об успешном луте.
 						writeD(lootNpcObjId);
 					} else {
-						// loot function activation
 						writeC(0);
 						writeC(isActing ? 1 : 0);
 					}
 				} else if (subType == 4) {
 					writeC(0);
 					writeC(isActing ? 1 : 0);
+				} else if (subType == 5) {
+					writeC(isActing ? 0 : 1);
 				}
-				break;
+			}
 		}
 	}
 
 	private void writePetData(PetCommonData petCommonData) {
-		PetTemplate petTemplate = DataManager.PET_DATA.getPetTemplate(petCommonData.getTemplateId());
+		final var petTemplate = DataManager.PET_DATA.getPetTemplate(petCommonData.getTemplateId());
 		writeS(petCommonData.getName());
 		writeD(petCommonData.getTemplateId());
 		writeD(petCommonData.getObjectId());
@@ -288,54 +271,59 @@ public class SM_PET extends AionServerPacket {
 		writeD(0);
 		writeD(0);
 		writeD(petCommonData.getBirthday());
-		writeD(petCommonData.secondsUntilExpiration()); // accompanying time
-
+		writeD(petCommonData.secondsUntilExpiration());
 		int specialtyCount = 0;
 		if (petTemplate.containsFunction(PetFunctionType.WAREHOUSE)) {
 			writeC(PetFunctionType.WAREHOUSE.getId());
-			writeC(0); // length of following bytes
+			writeC(0);
 			specialtyCount++;
 		}
 		if (petTemplate.containsFunction(PetFunctionType.LOOT)) {
 			writeC(PetFunctionType.LOOT.getId());
-			writeC(1); // length of following bytes
+			writeC(1);
 			writeC(0);
+			specialtyCount++;
+		}
+		//Функция "Помощь" с использованием Эфирной вишенки.
+		if (petTemplate.containsFunction(PetFunctionType.CHERRY)) {
+			writeC(PetFunctionType.CHERRY.getId());
+			writeC(2);
+			short cheerId = (short) petTemplate.getPetFunction(PetFunctionType.CHERRY).getId();
+			writeH(cheerId);
 			specialtyCount++;
 		}
 		if (petTemplate.containsFunction(PetFunctionType.DOPING)) {
 			writeC(PetFunctionType.DOPING.getId());
-			writeC(PetDopingBag.MAX_ITEMS * 4); // length of following bytes (always write MAX_ITEMS, otherwise some pets show items of other pets) 
+			writeC(PetDopingBag.MAX_ITEMS * 4);
 			int[] items = petCommonData.getDopingBag().getItems();
-			for (int i = 0; i < PetDopingBag.MAX_ITEMS; i++)
+			for (int i = 0; i < PetDopingBag.MAX_ITEMS; i++) {
 				writeD(i < items.length ? items[i] : 0);
+			}
 			specialtyCount++;
 		}
 		if (petTemplate.containsFunction(PetFunctionType.FOOD)) {
 			writeC(PetFunctionType.FOOD.getId());
-			writeC(8); // length of following bytes
+			writeC(8);
 			writeD(petCommonData.getFeedProgress().getDataForPacket());
 			writeD((int) (petCommonData.getRefeedDelay() / 1000));
 			specialtyCount++;
 		}
-
-		// Pets have only 2 functions max. If absent filled with NONE
 		if (specialtyCount == 0) {
 			writeH(PetFunctionType.NONE.getId());
 			writeH(PetFunctionType.NONE.getId());
 		} else if (specialtyCount == 1) {
 			writeH(PetFunctionType.NONE.getId());
 		}
-
 		writeAppearance(petCommonData);
 	}
 
 	private void writeAppearance(PetCommonData petCommonData) {
 		writeH(PetFunctionType.APPEARANCE.getId());
-		writeC(0); // not implemented color R ?
-		writeC(0); // not implemented color G ?
-		writeC(0); // not implemented color B ?
+		writeC(0);
+		writeC(0);
+		writeC(0);
 		writeD(petCommonData.getDecoration());
-		writeD(0); // wings ID if customize_attach = 1
-		writeD(0); // unk
+		writeD(0);
+		writeD(0);
 	}
 }

@@ -1,20 +1,19 @@
 package com.aionemu.gameserver.model.templates.pet;
 
 /**
- * @author IlBuono, Rolandas
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
+
 public enum PetFunctionType {
 	WAREHOUSE(0),
 	FOOD(1),
 	DOPING(2),
 	LOOT(3),
-	BUFF(4),
+	CHERRY(5),
 	MERCHANT(5),
 	NONE(6),
-
 	APPEARANCE(1, false),
-
-	// non writable to packets
 	BAG(-1, false),
 	WING(-2, false);
 

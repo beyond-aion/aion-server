@@ -10,15 +10,15 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author Rolandas
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PetRewards", propOrder = { "results" })
-public class PetRewards {
 
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlType(name = "PetRewards", propOrder = {"results"})
+public class PetRewards {
 	@XmlElement(name = "result")
 	protected List<PetFeedResult> results;
-
 	@XmlAttribute(name = "group", required = true)
 	protected FoodType type;
 
@@ -29,7 +29,7 @@ public class PetRewards {
 		if (results == null) {
 			results = new ArrayList<>();
 		}
-		return this.results;
+		return results;
 	}
 
 	public FoodType getType() {
@@ -39,5 +39,4 @@ public class PetRewards {
 	public boolean isLoved() {
 		return loved;
 	}
-
 }

@@ -969,16 +969,16 @@
 		<petstats reaction="brave" run_speed="6.0" walk_speed="1.132" height="1.0"/>
 	</pet>
 	<pet id="900194" name="royal kitter" nameid="1613961" condition_reward="188051378">
-		<petfunction id="5" type="BUFF"/>
+		<petfunction id="5" type="CHERRY"/>
 		<petfunction id="1030000" type="WING"/>
 		<petstats reaction="brave" run_speed="6.0" walk_speed="1.132" height="1.0"/>
 	</pet>
 	<pet id="900195" name="shu-ghost" nameid="1613967" condition_reward="188051378">
-		<petfunction id="3" type="BUFF"/>
+		<petfunction id="3" type="CHERRY"/>
 		<petstats reaction="brave" run_speed="6.0" walk_speed="1.132" height="1.0" altitude="1.5"/>
 	</pet>
 	<pet id="900196" name="pinkybell" nameid="1613969" condition_reward="188051378">
-		<petfunction id="4" type="BUFF"/>
+		<petfunction id="4" type="CHERRY"/>
 		<petstats reaction="brave" run_speed="6.0" walk_speed="1.132" height="1.0" altitude="1.5"/>
 	</pet>
 	<pet id="900197" name="bottlenose tion" nameid="1613965" condition_reward="188051378">
@@ -987,12 +987,12 @@
 		<petstats reaction="brave" run_speed="6.0" walk_speed="1.132" height="1.0"/>
 	</pet>
 	<pet id="900198" name="tiamat whelp" nameid="1613971" condition_reward="188051378">
-		<petfunction id="6" type="BUFF"/>
+		<petfunction id="6" type="CHERRY"/>
 		<petfunction id="1030000" type="WING"/>
 		<petstats reaction="cowardly" run_speed="6.0" walk_speed="1.132" height="1.2"/>
 	</pet>
 	<pet id="900199" name="squeeble" nameid="1613973" condition_reward="188051378">
-		<petfunction id="7" type="BUFF"/>
+		<petfunction id="7" type="CHERRY"/>
 		<petstats reaction="brave" run_speed="6.0" walk_speed="1.132" height="1.0" altitude="1.5"/>
 	</pet>
 	<pet id="900200" name="kungfu ailu" nameid="1613975" condition_reward="188051378">
@@ -1008,7 +1008,7 @@
 		<petstats reaction="brave" run_speed="6.0" walk_speed="1.132" height="0.7"/>
 	</pet>
 	<pet id="900202" name="stormbringer" nameid="1613979" condition_reward="188051378">
-		<petfunction id="9" type="BUFF"/>
+		<petfunction id="9" type="CHERRY"/>
 		<petfunction id="1030000" type="WING"/>
 		<petstats reaction="cowardly" run_speed="6.0" walk_speed="1.132" height="1.2"/>
 	</pet>
@@ -1092,4 +1092,15 @@
 		<petfunction id="27" type="DOPING"/>
 		<petstats reaction="brave" run_speed="6.0" walk_speed="1.132" height="1.0" altitude="1.5"/>
 	</pet>
+	<!-- New Pets -->
+	<pet id="970020" name="black tiger" nameid="1613981" condition_reward="188051378">
+        <petfunction id="1020035" type="BAG"/>
+        <petfunction id="17" type="WAREHOUSE" slots="35"/>
+        <petstats reaction="cowardly" run_speed="6.0" walk_speed="1.132" height="0.7"/>
+    </pet>
+	<pet id="900216" name="Puppy Knight" nameid="1613985" condition_reward="186000001">
+        <petfunction id="27" type="DOPING"/>
+        <petfunction id="46" type="FOOD"/>
+        <petstats reaction="brave" run_speed="6.0" walk_speed="1.132" height="1.0" altitude="1.5"/>
+    </pet>
 </pets>

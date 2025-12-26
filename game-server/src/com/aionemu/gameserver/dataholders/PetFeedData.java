@@ -15,27 +15,26 @@ import javax.xml.bind.annotation.XmlType;
 import com.aionemu.gameserver.model.templates.pet.PetFlavour;
 
 /**
- * @author Rolandas
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
 
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "", propOrder = { "flavours" })
+@XmlType(name = "", propOrder = {"flavours"})
 @XmlRootElement(name = "pet_feed")
 public class PetFeedData {
-
 	@XmlElement(name = "flavour")
 	protected List<PetFlavour> flavours;
-
 	@XmlTransient
-	private Map<Integer, PetFlavour> petFlavoursById = new HashMap<>();
+	private final Map<Integer, PetFlavour> petFlavoursById = new HashMap<>();
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
-		if (flavours == null)
+		if (flavours == null) {
 			return;
-
-		for (PetFlavour flavour : flavours)
+		}
+		for (var flavour : flavours) {
 			petFlavoursById.put(flavour.getId(), flavour);
-
+		}
 		flavours.clear();
 		flavours = null;
 	}
@@ -51,5 +50,4 @@ public class PetFeedData {
 	public PetFlavour[] getPetFlavours() {
 		return petFlavoursById.values().toArray(new PetFlavour[0]);
 	}
-
 }

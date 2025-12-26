@@ -1,24 +1,22 @@
 package com.aionemu.gameserver.services.toypet;
 
 /**
- * @author Rolandas
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
-public final class PetFeedProgress {
 
+public final class PetFeedProgress {
 	private int totalPoints = 0;
 	private short regularConsumed = 0;
 	private short lovedConsumed = 0;
 	private PetHungryLevel hungryLevel = PetHungryLevel.HUNGRY;
-	private short lovedFoodMax = 0;
-	private boolean lovedFeeded = false;
+	private final short lovedFoodMax;
+	private boolean loved_feed = false;
 
 	public PetFeedProgress(short lovedFoodLimit) {
 		lovedFoodMax = (short) (lovedFoodLimit & 0x3F);
 	}
 
-	/**
-	 * @return the totalPoints
-	 */
 	public int getTotalPoints() {
 		return totalPoints;
 	}
@@ -27,9 +25,6 @@ public final class PetFeedProgress {
 		totalPoints = points & 0x3FFF;
 	}
 
-	/**
-	 * @return the hungryLevel
-	 */
 	public PetHungryLevel getHungryLevel() {
 		return hungryLevel;
 	}
@@ -38,13 +33,11 @@ public final class PetFeedProgress {
 		hungryLevel = level;
 	}
 
-	/**
-	 * @return the consumed
-	 */
 	public int getRegularCount() {
 		return regularConsumed & 0xFF;
 	}
 
+	@SuppressWarnings("unused")
 	public void setRegularCount(short count) {
 		regularConsumed = count;
 	}
@@ -54,11 +47,11 @@ public final class PetFeedProgress {
 	}
 
 	public boolean isLovedFeeded() {
-		return lovedFeeded;
+		return loved_feed;
 	}
 
 	public void setIsLovedFeeded() {
-		lovedFeeded = true;
+		loved_feed = true;
 	}
 
 	public void incrementCount(boolean lovedFood) {
@@ -70,9 +63,9 @@ public final class PetFeedProgress {
 	}
 
 	public void reset() {
-		if (lovedFeeded)
-			lovedFeeded = false;
-		else {
+		if (loved_feed) {
+			loved_feed = false;
+		} else {
 			totalPoints = 0;
 			regularConsumed = 0;
 		}
@@ -84,12 +77,12 @@ public final class PetFeedProgress {
 		value |= totalPoints >> 2;
 		value <<= 6;
 		value |= lovedConsumed & 0x3F;
-		value <<= 4; // unk
+		value <<= 4;
 		return value;
 	}
 
 	public void setData(int savedData) {
-		savedData >>= 4; // drop unk
+		savedData >>= 4;
 		lovedConsumed = (short) (savedData & 0x3F);
 		savedData >>= 6;
 		totalPoints = (savedData & 0x3FFF) << 2;

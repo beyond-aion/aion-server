@@ -4,9 +4,11 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author Rolandas
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
-@XmlType(name = "FoodType")
+
+@XmlType(name="FoodType")
 @XmlEnum
 public enum FoodType {
 	AETHER_CHERRY,
@@ -16,7 +18,7 @@ public enum FoodType {
 	ARMOR,
 	BALAUR_SCALES,
 	BONES,
-	EXCLUDES, // Excluded items
+	EXCLUDES,
 	FLUIDS,
 	HEALTHY_FOOD_ALL,
 	HEALTHY_FOOD_SPICY,
@@ -26,8 +28,9 @@ public enum FoodType {
 	POPPY_SNACK_NUTRITIOUS,
 	SOULS,
 	SHUGO_EVENT_COIN,
-	STINKY, // Other excuded items
-	THORNS;
+	STINKY,
+	THORNS,
+	NEW_YEAR_PET_FOOD;
 
 	public String value() {
 		return name();

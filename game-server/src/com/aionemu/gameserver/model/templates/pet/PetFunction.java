@@ -6,12 +6,13 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * @author IlBuono
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "petfunction")
 public class PetFunction {
-
 	@XmlAttribute(name = "type")
 	private PetFunctionType type;
 	@XmlAttribute(name = "id")
@@ -38,9 +39,8 @@ public class PetFunction {
 	}
 
 	public static PetFunction CreateEmpty() {
-		PetFunction result = new PetFunction();
+		var result = new PetFunction();
 		result.type = PetFunctionType.NONE;
 		return result;
 	}
-
 }

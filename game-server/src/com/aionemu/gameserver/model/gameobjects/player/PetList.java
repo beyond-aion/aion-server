@@ -11,12 +11,13 @@ import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
- * @author ATracer
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
-public class PetList {
 
+public class PetList {
 	private int lastUsedPetTemplateId;
-	private Map<Integer, PetCommonData> pets = new LinkedHashMap<>();
+	private final Map<Integer, PetCommonData> pets = new LinkedHashMap<>();
 
 	PetList(Player player) {
 		loadPets(player);
@@ -25,25 +26,22 @@ public class PetList {
 	public void loadPets(Player player) {
 		List<PetCommonData> playerPets = PlayerPetsDAO.getPlayerPets(player);
 		PetCommonData lastUsedPet = null;
-		for (PetCommonData pet : playerPets) {
+		for (var pet : playerPets) {
 			ExpireTimerTask.getInstance().registerExpirable(pet, player);
-			pets.put(pet.getTemplateId(), pet); // the client only sends template ids for spawn/dismiss, so we cannot support multiple same pets
-			if (lastUsedPet == null || pet.getDespawnTime().after(lastUsedPet.getDespawnTime()))
+			pets.put(pet.getTemplateId(), pet);
+			if (lastUsedPet == null || pet.getDespawnTime().after(lastUsedPet.getDespawnTime())) {
 				lastUsedPet = pet;
+			}
 		}
-
-		if (lastUsedPet != null)
+		if (lastUsedPet != null) {
 			lastUsedPetTemplateId = lastUsedPet.getObjectId();
+		}
 	}
 
 	public Collection<PetCommonData> getPets() {
 		return pets.values();
 	}
 
-	/**
-	 * @param petId
-	 * @return
-	 */
 	public PetCommonData getPet(int petId) {
 		return pets.get(petId);
 	}
@@ -56,19 +54,12 @@ public class PetList {
 		this.lastUsedPetTemplateId = lastUsedPetTemplateId;
 	}
 
-	/**
-	 * @param player
-	 * @param petId
-	 * @param decorationId
-	 * @param name
-	 * @return
-	 */
 	public PetCommonData addPet(Player player, int petId, int decorationId, String name, int expireTime) {
 		return addPet(player, petId, decorationId, System.currentTimeMillis(), name, expireTime);
 	}
 
 	public PetCommonData addPet(Player player, int petId, int decorationId, long birthday, String name, int expireTime) {
-		PetCommonData petCommonData = new PetCommonData(IDFactory.getInstance().nextId(), petId, player.getObjectId(), expireTime);
+		var petCommonData = new PetCommonData(IDFactory.getInstance().nextId(), petId, player.getObjectId(), expireTime);
 		petCommonData.setDecoration(decorationId);
 		petCommonData.setName(name);
 		petCommonData.setBirthday(new Timestamp(birthday));
@@ -83,7 +74,7 @@ public class PetList {
 	}
 
 	public PetCommonData deletePet(int templateId) {
-		PetCommonData petCommonData = pets.remove(templateId);
+		var petCommonData = pets.remove(templateId);
 		if (petCommonData != null) {
 			PlayerPetsDAO.removePlayerPet(petCommonData.getObjectId());
 			return petCommonData;

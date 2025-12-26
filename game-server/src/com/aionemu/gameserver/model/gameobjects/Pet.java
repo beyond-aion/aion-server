@@ -8,12 +8,13 @@ import com.aionemu.gameserver.model.templates.pet.PetTemplate;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- * @author ATracer
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
-public class Pet extends VisibleObject {
 
+public class Pet extends VisibleObject {
 	private final Player master;
-	private CreatureMoveController<Pet> moveController;
+	private final CreatureMoveController<Pet> moveController;
 	private final PetCommonData commonData;
 
 	public Pet(PetTemplate petTemplate, PetController controller, PetCommonData commonData, Player master) {
@@ -45,5 +46,4 @@ public class Pet extends VisibleObject {
 	public final PetTemplate getObjectTemplate() {
 		return (PetTemplate) super.getObjectTemplate();
 	}
-
 }
