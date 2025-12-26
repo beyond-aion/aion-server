@@ -1,104 +1,109 @@
 package com.aionemu.gameserver.model.account;
 
-import java.sql.Timestamp;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
 
+import java.sql.Timestamp;
+import java.time.temporal.ChronoUnit;
+
 /**
- * @author ViAl
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
+
 public class Passport implements Persistable {
+    private int id;
+    private boolean rewarded;
+    private Timestamp arriveDate;
+    private PersistentState state = PersistentState.NOACTION;
+    private boolean fakeStamp = false;
 
-	private int id;
-	private boolean rewarded;
-	private Timestamp arriveDate;
-	private PersistentState state = PersistentState.NOACTION;
-	private boolean fakeStamp = false;
+    public Passport(int id, boolean rewarded, Timestamp arriveDate) {
+        this.id = id;
+        this.rewarded = rewarded;
+        this.arriveDate = normTs(arriveDate);
+    }
 
-	public Passport(int id, boolean rewarded, Timestamp arriveDate) {
-		this.id = id;
-		this.rewarded = rewarded;
-		this.arriveDate = arriveDate;
-	}
+    public int getId() {
+        return id;
+    }
 
-	public int getId() {
-		return id;
-	}
+    public void setId(int id) {
+        this.id = id;
+    }
 
-	public void setId(int id) {
-		this.id = id;
-	}
+    public boolean isRewarded() {
+        return rewarded;
+    }
 
-	public boolean isRewarded() {
-		return rewarded;
-	}
+    public void setRewarded(boolean rewarded) {
+        this.rewarded = rewarded;
+    }
 
-	public void setRewarded(boolean rewarded) {
-		this.rewarded = rewarded;
-	}
+    public RewardStatus getRewardStatus() {
+        if (fakeStamp) {
+            return rewarded ? RewardStatus.TAKEN : RewardStatus.UPCOMING;
+        }
+        return rewarded ? RewardStatus.TAKEN : RewardStatus.AVAILABLE;
+    }
 
-	public RewardStatus getRewardStatus() {
-		if (fakeStamp)
-			return rewarded ? RewardStatus.TAKEN : RewardStatus.UPCOMING;
-		else
-			return rewarded ? RewardStatus.EXPIRED : RewardStatus.AVAILABLE;
-	}
+    public Timestamp getArriveDate() {
+        return arriveDate;
+    }
 
-	public Timestamp getArriveDate() {
-		return arriveDate;
-	}
+    @SuppressWarnings("unused")
+    public void setArriveDate(Timestamp arriveDate) {
+        this.arriveDate = arriveDate;
+    }
 
-	public void setArriveDate(Timestamp arriveDate) {
-		this.arriveDate = arriveDate;
-	}
+    @Override
+    public PersistentState getPersistentState() {
+        return state;
+    }
 
-	@Override
-	public PersistentState getPersistentState() {
-		return state;
-	}
+    @Override
+    public void setPersistentState(PersistentState newState) {
+        if (newState == null) {
+            return;
+        }
+        if (this.state == PersistentState.NEW && newState == PersistentState.UPDATE_REQUIRED) {
+            this.state = PersistentState.UPDATE_REQUIRED;
+            return;
+        }
+        this.state = newState;
+    }
 
-	@Override
-	public void setPersistentState(PersistentState state) {
-		if (this.state == PersistentState.NEW) {
-			if (state == PersistentState.UPDATE_REQUIRED)
-				return;
-			else if (state == PersistentState.DELETED) {
-				this.state = PersistentState.NOACTION;
-				return;
-			}
-		}
-		this.state = state;
-	}
+    public boolean isFakeStamp() {
+        return fakeStamp;
+    }
 
-	public boolean isFakeStamp() {
-		return fakeStamp;
-	}
+    public void setFakeStamp(boolean fakeStamp) {
+        this.fakeStamp = fakeStamp;
+    }
 
-	public void setFakeStamp(boolean fakeStamp) {
-		this.fakeStamp = fakeStamp;
-	}
+    private static Timestamp normTs(Timestamp ts) {
+        return ts == null ? null : Timestamp.from(ts.toInstant().truncatedTo(ChronoUnit.SECONDS));
+    }
 
-	public AtreianPassport getTemplate() {
-		return DataManager.ATREIAN_PASSPORT_DATA.getAtreianPassportId(id);
-	}
+    public AtreianPassport getTemplate() {
+        return DataManager.ATREIAN_PASSPORT_DATA.getAtreianPassportId(id);
+    }
 
-	public enum RewardStatus {
+    public enum RewardStatus {
+        UPCOMING(0),
+        AVAILABLE(1),
+        TAKEN(2),
+        EXPIRED(3);
 
-		UPCOMING(0),
-		AVAILABLE(1),
-		TAKEN(2),
-		EXPIRED(3);
+        private final int id;
 
-		private final int id;
+        RewardStatus(int id) {
+            this.id = id;
+        }
 
-		RewardStatus(int id) {
-			this.id = id;
-		}
-
-		public int getId() {
-			return id;
-		}
-	}
+        public int getId() {
+            return id;
+        }
+    }
 }
