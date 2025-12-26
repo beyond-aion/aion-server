@@ -293,10 +293,12 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	}
 
 	/**
-	 * @return HP percentage 0 - 100
+	 * @return HP percentage 0 - 100 (minimum 1% while alive)
 	 */
 	public int getHpPercentage() {
-		return (int) (100f * currentHp / getMaxHp());
+		if (currentHp == 0)
+			return 0;
+		return Math.max(1, (int) (100f * currentHp / getMaxHp()));
 	}
 
 	/**

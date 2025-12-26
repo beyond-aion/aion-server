@@ -318,8 +318,10 @@ public class Effect implements StatOwner {
 				// effected is about to die
 				if (!effected.isDead())
 					effected.getLifeStats().setKillingBlow(er.getValue());
+				effectedHp = 0;
+			} else {
+				effectedHp = Math.max(1, (int) (100f * value / effected.getLifeStats().getMaxHp()));
 			}
-			effectedHp = (int) (100f * value / effected.getLifeStats().getMaxHp());
 		}
 		synchronized (reservedEffects) {
 			reservedEffects.add(er);
