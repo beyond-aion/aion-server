@@ -1,23 +1,23 @@
 package com.aionemu.gameserver.model.templates.event;
 
-import java.time.LocalDateTime;
+import com.aionemu.gameserver.dataholders.loadingutils.adapters.LocalDateTimeAdapter;
+import com.aionemu.gameserver.model.AttendType;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-
-import com.aionemu.gameserver.dataholders.loadingutils.adapters.LocalDateTimeAdapter;
-import com.aionemu.gameserver.model.AttendType;
+import java.time.LocalDateTime;
 
 /**
- * @author Alcapwnd
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
+
 @XmlRootElement(name = "login_event")
 @XmlAccessorType(XmlAccessType.NONE)
 public class AtreianPassport {
-
 	@XmlAttribute(name = "id", required = true)
 	private int id;
 	@XmlAttribute(name = "active", required = true)
@@ -36,6 +36,10 @@ public class AtreianPassport {
 	private int rewardItemId;
 	@XmlAttribute(name = "reward_item_num", required = true)
 	private int rewardItemCount;
+	@XmlAttribute(name = "reward_item_expire_time")
+	private int rewardExpireMinutes;
+	@XmlAttribute(name = "reward_permit_level")
+	private int rewardPermitLevel;
 
 	public int getId() {
 		return id;
@@ -67,5 +71,13 @@ public class AtreianPassport {
 
 	public int getRewardItemCount() {
 		return rewardItemCount;
+	}
+
+	public int getRewardExpireMinutes() {
+		return rewardExpireMinutes;
+	}
+
+	public int getRewardPermitLevel() {
+		return rewardPermitLevel;
 	}
 }

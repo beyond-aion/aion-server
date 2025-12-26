@@ -1,16 +1,18 @@
 package com.aionemu.gameserver.model.account;
 
-import java.sql.Timestamp;
-
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
 
-/**
- * @author ViAl
- */
-public class Passport implements Persistable {
+import java.sql.Timestamp;
+import java.time.temporal.ChronoUnit;
 
+/**
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
+ */
+
+public class Passport implements Persistable {
 	private int id;
 	private boolean rewarded;
 	private Timestamp arriveDate;
@@ -20,7 +22,7 @@ public class Passport implements Persistable {
 	public Passport(int id, boolean rewarded, Timestamp arriveDate) {
 		this.id = id;
 		this.rewarded = rewarded;
-		this.arriveDate = arriveDate;
+		this.arriveDate = normTs(arriveDate);
 	}
 
 	public int getId() {
@@ -40,16 +42,17 @@ public class Passport implements Persistable {
 	}
 
 	public RewardStatus getRewardStatus() {
-		if (fakeStamp)
+		if (fakeStamp) {
 			return rewarded ? RewardStatus.TAKEN : RewardStatus.UPCOMING;
-		else
-			return rewarded ? RewardStatus.EXPIRED : RewardStatus.AVAILABLE;
+		}
+		return rewarded ? RewardStatus.TAKEN : RewardStatus.AVAILABLE;
 	}
 
 	public Timestamp getArriveDate() {
 		return arriveDate;
 	}
 
+	@SuppressWarnings("unused")
 	public void setArriveDate(Timestamp arriveDate) {
 		this.arriveDate = arriveDate;
 	}
@@ -60,16 +63,15 @@ public class Passport implements Persistable {
 	}
 
 	@Override
-	public void setPersistentState(PersistentState state) {
-		if (this.state == PersistentState.NEW) {
-			if (state == PersistentState.UPDATE_REQUIRED)
-				return;
-			else if (state == PersistentState.DELETED) {
-				this.state = PersistentState.NOACTION;
-				return;
-			}
+	public void setPersistentState(PersistentState newState) {
+		if (newState == null) {
+			return;
 		}
-		this.state = state;
+		if (this.state == PersistentState.NEW && newState == PersistentState.UPDATE_REQUIRED) {
+			this.state = PersistentState.UPDATE_REQUIRED;
+			return;
+		}
+		this.state = newState;
 	}
 
 	public boolean isFakeStamp() {
@@ -80,12 +82,15 @@ public class Passport implements Persistable {
 		this.fakeStamp = fakeStamp;
 	}
 
+	private static Timestamp normTs(Timestamp ts) {
+		return ts == null ? null : Timestamp.from(ts.toInstant().truncatedTo(ChronoUnit.SECONDS));
+	}
+
 	public AtreianPassport getTemplate() {
 		return DataManager.ATREIAN_PASSPORT_DATA.getAtreianPassportId(id);
 	}
 
 	public enum RewardStatus {
-
 		UPCOMING(0),
 		AVAILABLE(1),
 		TAKEN(2),

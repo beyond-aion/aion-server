@@ -28783,6 +28783,18 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 		return new SM_SYSTEM_MESSAGE(901354);
 	}
 
+	public static SM_SYSTEM_MESSAGE STR_MSG_ATTEND_REWARD_INVALID_LEVEL(String name, int level) {
+		return new SM_SYSTEM_MESSAGE(1402573, name, level);
+	}
+
+	public static SM_SYSTEM_MESSAGE STR_ATTEND_MSG_ATTEND_REWARD_GET() {
+		return new SM_SYSTEM_MESSAGE(1402601);
+	}
+
+	public static SM_SYSTEM_MESSAGE STR_MSG_ATTEND_REWARD_REMOVE_EXCESS(String name) {
+		return new SM_SYSTEM_MESSAGE(1402627, name);
+	}
+
 	private int msgId;
 	private byte chatType;
 	private int senderObjId;
