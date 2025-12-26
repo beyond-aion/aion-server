@@ -1,13 +1,15 @@
 package com.aionemu.gameserver.model.gameobjects;
 
 /**
- * @author Neon
+ * @author SVDNESS
+ * @version 4.8 [JDK 25]
  */
-public enum PetSpecialFunction {
 
+public enum PetSpecialFunction {
 	DOPING(2),
 	AUTOLOOT(3),
-	AUTOSELL(4);
+	AUTOSELL(4),
+	BUFF(5);
 
 	private final int id;
 
@@ -19,10 +21,12 @@ public enum PetSpecialFunction {
 		return id;
 	}
 
+	@SuppressWarnings("unused")
 	public static PetSpecialFunction getById(int id) {
-		for (PetSpecialFunction specialFunction : values()) {
-			if (specialFunction.getId() == id)
+		for (var specialFunction : values()) {
+			if (specialFunction.getId() == id) {
 				return specialFunction;
+			}
 		}
 		return null;
 	}
