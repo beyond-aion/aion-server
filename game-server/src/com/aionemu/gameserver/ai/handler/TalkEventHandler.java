@@ -9,12 +9,10 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_DIALOG_WINDOW;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_HEADING_UPDATE;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.services.TownService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
-import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer
@@ -61,17 +59,6 @@ public class TalkEventHandler {
 				npcAI.think();
 			} else {
 				owner.setTarget(null);
-				ThreadPoolManager.getInstance().schedule(() -> {
-					if (owner.getTarget() == null) {
-						npcAI.think();
-						ThreadPoolManager.getInstance().schedule(() -> {
-							if (owner.getTarget() == null && !owner.getMoveController().isInMove() && owner.isAtSpawnLocation()) {
-								owner.getPosition().setH(owner.getSpawn().getHeading());
-								PacketSendUtility.broadcastPacket(owner, new SM_HEADING_UPDATE(owner));
-							}
-						}, 500);
-					}
-				}, 750);
 			}
 		}
 	}

@@ -9,6 +9,10 @@ import com.aionemu.gameserver.ai.manager.AttackManager;
 import com.aionemu.gameserver.ai.manager.WalkManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
+import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_HEADING_UPDATE;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
  * @author ATracer
@@ -85,5 +89,18 @@ public class ThinkEventHandler {
 	public static void thinkIdle(NpcAI npcAI) {
 		if (npcAI.isMoveSupported() && npcAI.getOwner().isWalker())
 			WalkManager.startWalking(npcAI);
+		else if (shouldResetHeading(npcAI)) {
+			ThreadPoolManager.getInstance().schedule(() -> {
+				if (shouldResetHeading(npcAI)) {
+					npcAI.getPosition().setH(npcAI.getOwner().getSpawn().getHeading());
+					PacketSendUtility.broadcastPacket(npcAI.getOwner(), new SM_HEADING_UPDATE(npcAI.getOwner()));
+				}
+			}, 500);
+		}
+	}
+
+	private static boolean shouldResetHeading(NpcAI npcAI) {
+		SpawnTemplate spawn = npcAI.getOwner().getSpawn();
+		return npcAI.getTarget() == null && spawn != null && !npcAI.getOwner().getMoveController().isInMove() && npcAI.getPosition().getHeading() != spawn.getHeading() && npcAI.getOwner().isAtSpawnLocation();
 	}
 }
