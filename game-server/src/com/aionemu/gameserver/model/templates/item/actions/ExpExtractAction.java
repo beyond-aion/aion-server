@@ -15,8 +15,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author Rolandas
- * Fix by daddycaddy
+ * @author Rolandas, daddycaddy
  */
 public class ExpExtractAction extends AbstractItemAction {
 
