@@ -22,9 +22,7 @@ public class SpellAttackEffect extends AbstractOverTimeEffect {
 	@Override
 	public void startEffect(Effect effect) {
 		int valueWithDelta = calculateBaseValue(effect);
-		int critAddDmg = critAddDmg2 + critAddDmg1 * effect.getSkillLevel();
-		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, element, position, useMagicBoost(effect), critProbMod2,
-			critAddDmg);
+		int finalDamage = AttackUtil.calculateMagicalOverTimeSkillResult(effect, valueWithDelta, this, useMagicBoost(effect));
 		effect.setReserveds(new EffectReserved(position, finalDamage, ResourceType.HP, true, false), true);
 		super.startEffect(effect);
 	}
