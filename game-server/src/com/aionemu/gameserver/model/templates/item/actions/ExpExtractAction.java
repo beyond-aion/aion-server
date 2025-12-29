@@ -20,34 +20,29 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 public class ExpExtractAction extends AbstractItemAction {
 
 	@XmlAttribute
-	protected int cost;
+	private long cost;
 	@XmlAttribute(name = "percent")
-	protected boolean isPercent;
+	private boolean isPercent;
 	@XmlAttribute(name = "item_id")
-	protected int itemId;
+	private int itemId;
 
 	@Override
 	public boolean canAct(Player player, Item parentItem, Item targetItem, Object... params) {
-		if (player.getInventory().isFull()) {
-			return false;
-		}
-
 		PlayerCommonData cd = player.getCommonData();
+		long newExp = cd.getExp() - getRequiredExp(cd);
+		return canExtractExp(player, newExp);
+	}
 
-		long expShown = cd.getExpShown();
-
-		int required;
-		if (isPercent) {
-			required = (int) ((long) cd.getExpNeed() * cost / 100L);
-		} else {
-			required = cost;
-		}
-
-		if (required <= 0) {
+	private boolean canExtractExp(Player player, long newExp) {
+		if (player.getInventory().isFull()) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_DECOMPRESS_INVENTORY_IS_FULL());
 			return false;
 		}
-
-		return expShown >= required;
+		if (newExp < DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(player.getLevel())) {
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXP_EXTRACTION_USE_NOT_ENOUGH_EXP());
+			return false;
+		}
+		return true;
 	}
 
 	@Override
@@ -76,25 +71,11 @@ public class ExpExtractAction extends AbstractItemAction {
 			public void run() {
 				player.getObserveController().removeObserver(observer);
 
-				int toDecrease;
-				if (isPercent) {
-					toDecrease = (int) ((long) player.getCommonData().getExpNeed() * cost / 100L);
-				} else {
-					toDecrease = cost;
-				}
-
 				PlayerCommonData cd = player.getCommonData();
-				long currentExp = cd.getExp();
-				long levelStartExp = DataManager.PLAYER_EXPERIENCE_TABLE.getStartExpForLevel(cd.getLevel());
-
-				long newExp = currentExp - toDecrease;
-				if (newExp < levelStartExp) {
-					newExp = levelStartExp;
-				}
-
-				if (newExp == currentExp) {
+				long requiredExp = getRequiredExp(cd);
+				long newExp = cd.getExp() - requiredExp;
+				if (!canExtractExp(player, newExp) || !player.getInventory().decreaseByItemId(parentItem.getItemId(), 1)) {
 					player.getController().cancelTask(TaskId.ITEM_USE);
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_DECOMPOSE_ITEM_INVALID_STANCE(parentItem.getL10n()));
 					PacketSendUtility.sendPacket(player,
 						new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(),
 							parentItem.getItemTemplate().getTemplateId(), 0, 2, 0));
@@ -102,14 +83,19 @@ public class ExpExtractAction extends AbstractItemAction {
 				}
 
 				cd.setExp(newExp);
-
 				ItemService.addItem(player, itemId, 1);
-				player.getInventory().decreaseByItemId(parentItem.getItemId(), 1);
-
+				String rewardItem = DataManager.ITEM_DATA.getItemTemplate(itemId).getL10n();
+				PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_EXP_EXTRACTION_USE(parentItem.getL10n(), requiredExp, rewardItem));
 				PacketSendUtility.sendPacket(player,
 					new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parentItem.getObjectId(), parentItem.getItemTemplate().getTemplateId(), 0, 1, 0));
 			}
 		}, 5000));
+	}
 
+	private long getRequiredExp(PlayerCommonData cd) {
+		if (isPercent) {
+			return Math.max(1, cd.getExpNeed() * cost / 100L);
+		}
+		return cost;
 	}
 }
