@@ -96,7 +96,7 @@ public class _24044ChangeTheFuture extends AbstractQuestHandler {
 							}
 							return false;
 						case SETPRO5:
-							return defaultCloseDialog(env, 4, 5, 188020000, 1, 0, 0); // 5
+							return defaultCloseDialog(env, 4, 5); // 5
 						case SET_SUCCEED:
 							return defaultCloseDialog(env, 6, 6, true, false); // reward
 					}
