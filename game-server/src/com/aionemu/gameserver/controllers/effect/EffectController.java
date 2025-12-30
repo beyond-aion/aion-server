@@ -169,7 +169,7 @@ public class EffectController {
 			lock.readLock().unlock();
 		}
 		if (effectToEnd != null)
-			effectToEnd.endEffect(false);
+			effectToEnd.endEffect(effectToEnd.getTargetSlot() != nextEffect.getTargetSlot());
 		return false;
 	}
 
