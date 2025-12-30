@@ -84,8 +84,11 @@ public class EffectController {
 
 		if (useEffectId) {
 			// idea here is that effects with same effectId shouldn't stack, effect with higher basic lvl takes priority
-			if (searchConflict(mapToUpdate, nextEffect))
+			if (searchConflict(mapToUpdate, nextEffect)) {
+				if (!nextEffect.isPassive() && nextEffect.getTargetSlot() != SkillTargetSlot.DEBUFF)
+					nextEffect.setEffectResult(EffectResult.CONFLICT);
 				return;
+			}
 		}
 		endConflictedEffect(mapToUpdate, nextEffect);
 		checkEffectCooldownId(nextEffect);
@@ -144,22 +147,20 @@ public class EffectController {
 		try {
 			mainLoop:
 			for (Effect effect : mapToUpdate.values()) {
-				if (effect.getSkillSubType() == nextEffect.getSkillSubType() || effect.getTargetSlot() == nextEffect.getTargetSlot()) {
-					for (EffectTemplate et : effect.getEffectTemplates()) {
-						if (et.getEffectId() == 0)
+				if (!canConflict(effect, nextEffect))
+					continue;
+				for (EffectTemplate et : effect.getEffectTemplates()) {
+					if (et.getEffectId() == 0)
+						continue;
+					for (EffectTemplate et2 : nextEffect.getEffectTemplates()) {
+						if (et2.getEffectId() == 0)
 							continue;
-						for (EffectTemplate et2 : nextEffect.getEffectTemplates()) {
-							if (et2.getEffectId() == 0)
-								continue;
-							if ((et.getEffectId() == et2.getEffectId()) || (et instanceof SilenceEffect && et2 instanceof SilenceEffect)) {
-								if (et.getBasicLvl() > et2.getBasicLvl()) {
-									if (!nextEffect.isPassive() && nextEffect.getTargetSlot() != SkillTargetSlot.DEBUFF)
-										nextEffect.setEffectResult(EffectResult.CONFLICT);
-									return true;
-								} else {
-									effectToEnd = effect;
-									break mainLoop;
-								}
+						if ((et.getEffectId() == et2.getEffectId()) || (et instanceof SilenceEffect && et2 instanceof SilenceEffect)) {
+							if (et.getBasicLvl() > et2.getBasicLvl()) {
+								return true;
+							} else {
+								effectToEnd = effect;
+								break mainLoop;
 							}
 						}
 					}
@@ -174,26 +175,20 @@ public class EffectController {
 	}
 
 	/**
-	 * Checks whether {@code newEffectTemplate} is in conflict
-	 * with any existing effects without removing any effects. <br>
-	 * {@code newEffect}'s EffectResult is set to {@code EffectResult.CONFLICT} if a conflict is found. <br>
-	 * Note: EffectResult is not changed in case of passive effects or effects with {@code SkillTargetSlot.DEBUFF}.
-	 * 
-	 * @param newEffect
-	 *          The effect {@code newEffectTemplate} belongs to.
-	 * @param newEffectTemplate
-	 *          The {@code EffectTemplate} to check for conflicts.
 	 * @return True if {@code newEffectTemplate} is in conflict with another existing effect.
 	 */
-	public boolean isConflicting(Effect newEffect, EffectTemplate newEffectTemplate) {
-		if (newEffectTemplate.getEffectId() == 0)
+	public boolean isConflicting(Effect newEffect) {
+		if (newEffect.isPassive() || newEffect.getTargetSlot() == SkillTargetSlot.DEBUFF)
 			return false;
-		Map<String, Effect> mapToUpdate = getMapForEffect(newEffect);
+		Map<String, Effect> mapForEffect = getMapForEffect(newEffect);
 		lock.readLock().lock();
 		try {
-			mainLoop:
-			for (Effect currentEffect : mapToUpdate.values()) {
-				if (currentEffect.getSkillSubType() == newEffect.getSkillSubType() || currentEffect.getTargetSlot() == newEffect.getTargetSlot()) {
+			for (Effect currentEffect : mapForEffect.values()) {
+				if (!canConflict(currentEffect, newEffect))
+					continue;
+				for (EffectTemplate newEffectTemplate : newEffect.getEffectTemplates()) {
+					if (newEffectTemplate.getEffectId() == 0)
+						continue;
 					for (EffectTemplate currentEffectTemplate : currentEffect.getEffectTemplates()) {
 						if (currentEffectTemplate.getEffectId() == 0)
 							continue;
@@ -201,8 +196,6 @@ public class EffectController {
 							|| (currentEffectTemplate instanceof SilenceEffect && newEffectTemplate instanceof SilenceEffect)) {
 							if (currentEffectTemplate.getBasicLvl() > newEffectTemplate.getBasicLvl() && !(currentEffectTemplate instanceof HideEffect)) {
 								return true;
-							} else {
-								break mainLoop;
 							}
 						}
 					}
@@ -211,6 +204,14 @@ public class EffectController {
 		} finally {
 			lock.readLock().unlock();
 		}
+		return false;
+	}
+
+	private static boolean canConflict(Effect e1, Effect e2) {
+		if (e1.getTargetSlot() == e2.getTargetSlot())
+			return true;
+		if (e1.getSkillSubType() == e2.getSkillSubType())
+			return e1.getTargetSlot() != SkillTargetSlot.BOOST && e2.getTargetSlot() != SkillTargetSlot.BOOST; // retail allows Lucky Vinna II + candy
 		return false;
 	}
 
