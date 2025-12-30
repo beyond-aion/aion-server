@@ -59,9 +59,8 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	private void sendGroupPacketUpdate() {
-		if (owner.isInTeam() && !TeamStatUpdater.getInstance().hasTask(owner)) {
-			TeamStatUpdater.getInstance().startTask(owner);
-		}
+		if (owner.isInTeam())
+			TeamStatUpdater.getInstance().add(owner);
 	}
 
 	@Override
