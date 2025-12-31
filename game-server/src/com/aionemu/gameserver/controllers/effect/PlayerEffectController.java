@@ -83,7 +83,7 @@ public class PlayerEffectController extends EffectController {
 	public void updatePlayerEffectIcons(Effect effect) {
 		int slot = effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS;
 		Collection<Effect> effects = getAbnormalEffectsToShow();
-		PacketSendUtility.sendPacket(getOwner(), new SM_ABNORMAL_STATE(effects, abnormals, slot));
+		PacketSendUtility.sendPacket(getOwner(), new SM_ABNORMAL_STATE(effects, getAbnormals(), slot));
 	}
 
 	/**
@@ -109,17 +109,12 @@ public class PlayerEffectController extends EffectController {
 		}
 
 		Effect effect = new Effect(getOwner(), getOwner(), template, skillLvl, remainingTime, forceType);
-		lock.writeLock().lock();
-		try {
-			getMapForEffect(effect).put(effect.getStack(), effect);
-		} finally {
-			lock.writeLock().unlock();
-		}
+		put(effect);
 		effect.addAllEffectToSucess();
 		effect.startEffect();
 
 		if (effect.getSkillTemplate().getTargetSlot() != SkillTargetSlot.NOSHOW)
-			PacketSendUtility.sendPacket(getOwner(), new SM_ABNORMAL_STATE(Collections.singletonList(effect), abnormals, SkillTargetSlot.FULLSLOTS));
+			PacketSendUtility.sendPacket(getOwner(), new SM_ABNORMAL_STATE(Collections.singletonList(effect), getAbnormals(), SkillTargetSlot.FULLSLOTS));
 	}
 
 	@Override

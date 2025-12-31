@@ -131,8 +131,7 @@ public class GeneralNpcAI extends NpcAI {
 		NpcSkillEntry skill = alwaysRandomSkill ? getOwner().getSkillList().getRandomSkill() : SkillAttackManager.chooseNextSkill(this);
 		if (skill != null) {
 			getOwner().getGameStats().setLastSkill(skill);
-			if (skill.equals(getOwner().getQueuedSkills().peek()))
-				getOwner().getQueuedSkills().poll();
+			getOwner().removeNextQueuedSkill(skill);
 			return true;
 		}
 		return false;

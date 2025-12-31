@@ -1,11 +1,7 @@
 package com.aionemu.gameserver.controllers.effect;
 
-import java.util.ArrayList;
-import java.util.LinkedHashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.concurrent.locks.ReadWriteLock;
-import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.*;
+import java.util.concurrent.locks.StampedLock;
 import java.util.function.Predicate;
 import java.util.stream.Collectors;
 
@@ -28,16 +24,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class EffectController {
 
 	private final Creature owner;
-	private final Map<String, Effect> passiveEffectMap = new LinkedHashMap<>();
-	private final Map<String, Effect> noshowEffects = new LinkedHashMap<>();
+	private final StampedLock lock = new StampedLock();
+	private volatile Map<String, Effect> passiveEffectMap = Collections.emptyMap();
 	private final Map<String, Effect> abnormalEffectMap = new LinkedHashMap<>();
-	private long abnormalMapUpdate;
-
-	protected final ReadWriteLock lock = new ReentrantReadWriteLock();
-
-	protected int abnormals;
-
-	private boolean isUnderNormalShield = false;
+	private int abnormals;
 	private boolean keepBuffsOnDie;
 
 	public EffectController(Creature owner) {
@@ -48,25 +38,17 @@ public class EffectController {
 		return owner;
 	}
 
-	public boolean isUnderNormalShield() {
-		return isUnderNormalShield;
-	}
-
-	public void setUnderNormalShield(boolean isUnderNormalShield) {
-		this.isUnderNormalShield = isUnderNormalShield;
-	}
-
 	public void addEffect(Effect nextEffect) {
 		Map<String, Effect> mapToUpdate = getMapForEffect(nextEffect);
 
 		boolean useEffectId = true;
 		if (nextEffect.isPassive()) {
 			Effect existingEffect;
-			lock.readLock().lock();
+			long stamp = lock.readLock();
 			try {
 				existingEffect = mapToUpdate.get(nextEffect.getStack());
 			} finally {
-				lock.readLock().unlock();
+				lock.unlockRead(stamp);
 			}
 			if (existingEffect != null && existingEffect.isPassive()) {
 				// check stack level
@@ -94,11 +76,11 @@ public class EffectController {
 		checkEffectCooldownId(nextEffect);
 
 		// max 3 aura effects or 1 toggle skill in noshoweffects
-		if (nextEffect.isToggle() && nextEffect.getTargetSlot() == SkillTargetSlot.NOSHOW) {
+		if (isNoShowToggle(nextEffect)) {
 			int mts = nextEffect.getSkillSubType() == SkillSubType.CHANT ? 3 : 1;
 			// Rangers & Riders are allowed to use 2 Toggle skills. There might be a pattern.
-			if (nextEffect.getEffector() instanceof Player && (((Player) nextEffect.getEffector()).getPlayerClass() == PlayerClass.RANGER
-				|| ((Player) nextEffect.getEffector()).getPlayerClass() == PlayerClass.RIDER)) {
+			if (nextEffect.getEffector() instanceof Player player && (player.getPlayerClass() == PlayerClass.RANGER
+				|| player.getPlayerClass() == PlayerClass.RIDER)) {
 				mts = 2;
 			}
 			List<Effect> filteredMap = nextEffect.getSkillSubType() == SkillSubType.CHANT ? getAuraEffects() : getNoShowToggleEffectsExceptAuras();
@@ -108,26 +90,29 @@ public class EffectController {
 
 		// max 4 chants
 		if (nextEffect.isChant()) {
-			List<Effect> chants = filterEffects(abnormalEffectMap, Effect::isChant);
+			List<Effect> chants = filterEffects(abnormalEffectMap, e -> !isNoShowToggle(e) && e.isChant());
 			if (chants.size() >= 4)
 				chants.getFirst().endEffect();
 		}
-		lock.writeLock().lock();
-		try {
-			if (nextEffect.getSkill() != null && System.currentTimeMillis() - abnormalMapUpdate < nextEffect.getSkill().getHitTime()) {
-				addBeforeLastElement(mapToUpdate, nextEffect);
-			} else {
-				abnormalMapUpdate = System.currentTimeMillis();
-				mapToUpdate.put(nextEffect.getStack(), nextEffect);
-			}
-		} finally {
-			lock.writeLock().unlock();
-		}
+		put(mapToUpdate, nextEffect);
 
 		nextEffect.startEffect();
 
 		if (!nextEffect.isPassive())
 			broadCastEffects(nextEffect);
+	}
+
+	protected final void put(Effect nextEffect) {
+		put(getMapForEffect(nextEffect), nextEffect);
+	}
+
+	private void put(Map<String, Effect> mapToUpdate, Effect nextEffect) {
+		long stamp = lock.writeLock();
+		try {
+			mapToUpdate.put(nextEffect.getStack(), nextEffect);
+		} finally {
+			lock.unlockWrite(stamp);
+		}
 	}
 
 	private void endConflictedEffect(Map<String, Effect> effectMap, Effect newEffect) {
@@ -143,7 +128,7 @@ public class EffectController {
 		if (checkExtraEffect(mapToUpdate, nextEffect))
 			return false;
 		Effect effectToEnd = null;
-		lock.readLock().lock();
+		long stamp = lock.readLock();
 		try {
 			mainLoop:
 			for (Effect effect : mapToUpdate.values()) {
@@ -167,7 +152,7 @@ public class EffectController {
 				}
 			}
 		} finally {
-			lock.readLock().unlock();
+			lock.unlockRead(stamp);
 		}
 		if (effectToEnd != null)
 			effectToEnd.endEffect(effectToEnd.getTargetSlot() != nextEffect.getTargetSlot());
@@ -180,8 +165,8 @@ public class EffectController {
 	public boolean isConflicting(Effect newEffect) {
 		if (newEffect.isPassive() || newEffect.getTargetSlot() == SkillTargetSlot.DEBUFF)
 			return false;
-		Map<String, Effect> mapForEffect = getMapForEffect(newEffect);
-		lock.readLock().lock();
+		Map<String, Effect> mapForEffect = getMapForEffect(newEffect.getSkillTemplate(), false);
+		long stamp = lock.readLock();
 		try {
 			for (Effect currentEffect : mapForEffect.values()) {
 				if (!canConflict(currentEffect, newEffect))
@@ -202,7 +187,7 @@ public class EffectController {
 				}
 			}
 		} finally {
-			lock.readLock().unlock();
+			lock.unlockRead(stamp);
 		}
 		return false;
 	}
@@ -228,11 +213,11 @@ public class EffectController {
 	}
 
 	private List<Effect> getAuraEffects() {
-		return filterEffects(noshowEffects, effect -> effect.getSkillSubType() == SkillSubType.CHANT);
+		return filterEffects(abnormalEffectMap, effect -> isNoShowToggle(effect) && effect.getSkillSubType() == SkillSubType.CHANT);
 	}
 
 	private List<Effect> getNoShowToggleEffectsExceptAuras() {
-		return filterEffects(noshowEffects, effect -> effect.getSkillSubType() != SkillSubType.CHANT);
+		return filterEffects(abnormalEffectMap, effect -> isNoShowToggle(effect) && effect.getSkillSubType() != SkillSubType.CHANT);
 	}
 
 	private void checkEffectCooldownId(Effect effect) {
@@ -252,7 +237,7 @@ public class EffectController {
 				break;
 		}
 		List<Effect> effects = filterEffects(abnormalEffectMap,
-			e -> e.getTargetSlot() == effect.getTargetSlot() && e.getSkillTemplate().getCooldownId() == cdId);
+			e -> !isNoShowToggle(e) && e.getTargetSlot() == effect.getTargetSlot() && e.getSkillTemplate().getCooldownId() == cdId);
 		if (effects.size() >= size)
 			effects.getFirst().endEffect();
 		// archer buffs
@@ -279,42 +264,30 @@ public class EffectController {
 		}
 	}
 
-	/**
-	 * DON'T call this method anywhere else than addEffect() since it's not no synchronized
-	 */
-	private void addBeforeLastElement(Map<String, Effect> mapToUpdate, Effect newEffect) {
-		Effect lastEffect = null;
-		for (Effect effect : mapToUpdate.values()) {
-			lastEffect = effect;
+	private Map<String, Effect> getMapForEffect(Effect effect) {
+		return getMapForEffect(effect.getSkillTemplate(), true);
+	}
+
+	private Map<String, Effect> getMapForEffect(SkillTemplate template, boolean initialize) {
+		return template.isPassive() ? getPassiveEffectMap(initialize) : abnormalEffectMap;
+	}
+
+	private Map<String, Effect> getPassiveEffectMap(boolean initialize) {
+		if (initialize && passiveEffectMap == Collections.EMPTY_MAP) {
+			synchronized (this) {
+				if (passiveEffectMap == Collections.EMPTY_MAP)
+					passiveEffectMap = new LinkedHashMap<>();
+			}
 		}
-
-		if (lastEffect != null && !(lastEffect.getEffector() instanceof Player))
-			mapToUpdate.remove(lastEffect.getStack());
-		mapToUpdate.put(newEffect.getStack(), newEffect);
-		if (lastEffect != null && !(lastEffect.getEffector() instanceof Player))
-			mapToUpdate.put(lastEffect.getStack(), lastEffect);
-	}
-
-	protected Map<String, Effect> getMapForEffect(Effect effect) {
-		return getMapForEffect(effect.getSkillTemplate());
-	}
-
-	private Map<String, Effect> getMapForEffect(SkillTemplate template) {
-		if (template.isPassive())
-			return passiveEffectMap;
-
-		if (template.getActivationAttribute() == ActivationAttribute.TOGGLE && template.getTargetSlot() == SkillTargetSlot.NOSHOW)
-			return noshowEffects;
-
-		return abnormalEffectMap;
+		return passiveEffectMap;
 	}
 
 	public Effect getAbnormalEffect(String stack) {
-		lock.readLock().lock();
+		long stamp = lock.readLock();
 		try {
 			return abnormalEffectMap.get(stack);
 		} finally {
-			lock.readLock().unlock();
+			lock.unlockRead(stamp);
 		}
 	}
 
@@ -326,6 +299,10 @@ public class EffectController {
 		return hasAbnormalEffect(effect -> effect.getSkillId() == skillId);
 	}
 
+	public boolean isUnderNormalShield() {
+		return hasAbnormalEffect(e -> (e.getShieldDefense() & ShieldType.NORMAL.getId()) == ShieldType.NORMAL.getId());
+	}
+
 	public void broadCastEffects(Effect effect) {
 		int slot = effect != null ? effect.getTargetSlot().getId() : SkillTargetSlot.FULLSLOTS;
 		List<Effect> effects = getAbnormalEffects();
@@ -333,8 +310,8 @@ public class EffectController {
 	}
 
 	public void clearEffect(Effect effect, boolean broadCastEffects) {
-		Map<String, Effect> effectMap = getMapForEffect(effect);
-		lock.writeLock().lock();
+		Map<String, Effect> effectMap = getMapForEffect(effect.getSkillTemplate(), false);
+		long stamp = lock.writeLock();
 		try {
 			Effect oldEffect = effectMap.get(effect.getStack());
 			if (oldEffect != null) {
@@ -343,7 +320,7 @@ public class EffectController {
 				effectMap.remove(effect.getStack());
 			}
 		} finally {
-			lock.writeLock().unlock();
+			lock.unlockWrite(stamp);
 		}
 		if (broadCastEffects)
 			broadCastEffects(effect);
@@ -353,7 +330,7 @@ public class EffectController {
 		SkillTemplate skillTemplate = DataManager.SKILL_DATA.getSkillTemplate(skillId);
 		if (skillTemplate == null)
 			throw new NullPointerException("Skill with ID " + skillId + " does not exist");
-		return findFirstEffect(getMapForEffect(skillTemplate), effect -> effect.getSkillId() == skillId);
+		return findFirstEffect(getMapForEffect(skillTemplate, false), effect -> effect.getSkillId() == skillId);
 	}
 
 	public void removeEffect(int skillId) {
@@ -409,41 +386,39 @@ public class EffectController {
 	}
 
 	private Effect findFirstEffect(Map<String, Effect> effectMap, Predicate<Effect> filter) {
-		lock.readLock().lock();
+		long stamp = lock.readLock();
 		try {
 			for (Effect effect : effectMap.values()) {
 				if (filter.test(effect))
 					return effect;
 			}
 		} finally {
-			lock.readLock().unlock();
+			lock.unlockRead(stamp);
 		}
 		return null;
 	}
 
 	public List<Effect> getAllEffects() {
-		List<Effect> effects = new ArrayList<>();
-		lock.readLock().lock();
+		long stamp = lock.readLock();
 		try {
-			effects.addAll(abnormalEffectMap.values());
-			effects.addAll(noshowEffects.values());
+			List<Effect> effects = new ArrayList<>(abnormalEffectMap.values());
 			effects.addAll(passiveEffectMap.values());
+			return effects;
 		} finally {
-			lock.readLock().unlock();
+			lock.unlockRead(stamp);
 		}
-		return effects;
 	}
 
 	private List<Effect> filterEffects(Map<String, Effect> effectMap, Predicate<Effect> filter) {
 		List<Effect> effects = new ArrayList<>();
-		lock.readLock().lock();
+		long stamp = lock.readLock();
 		try {
 			for (Effect effect : effectMap.values()) {
 				if (filter.test(effect))
 					effects.add(effect);
 			}
 		} finally {
-			lock.readLock().unlock();
+			lock.unlockRead(stamp);
 		}
 		return effects;
 	}
@@ -456,9 +431,7 @@ public class EffectController {
 	}
 
 	public boolean removeByEffectId(int effectId, int dispelLevel, int power) {
-		if (removeByEffectId(abnormalEffectMap, effectId, dispelLevel, power))
-			return true;
-		return removeByEffectId(noshowEffects, effectId, dispelLevel, power);
+		return removeByEffectId(abnormalEffectMap, effectId, dispelLevel, power);
 	}
 
 	private boolean removeByEffectId(Map<String, Effect> effectMap, int effectId, int dispelLevel, int power) {
@@ -473,20 +446,21 @@ public class EffectController {
 	}
 
 	public void removeByDispelEffect(EffectType effectType, DispelSlotType dispelSlotType, int count, int dispelLevel, int power) {
-		count = removeByDispelEffect(abnormalEffectMap, effectType, dispelSlotType, count, dispelLevel, power);
-		if (count > 0)
-			removeByDispelEffect(noshowEffects, effectType, dispelSlotType, count, dispelLevel, power);
+		removeByDispelEffect(abnormalEffectMap, effectType, dispelSlotType, count, dispelLevel, power);
 	}
 
 	private int removeByDispelEffect(Map<String, Effect> effectMap, EffectType effectType, DispelSlotType dispelSlotType, int count, int dispelLevel,
 		int power) {
 		List<Effect> effectsToEnd = new ArrayList<>();
-		lock.readLock().lock();
+		long stamp = lock.readLock();
 		try {
 			for (Effect effect : effectMap.values()) {
 				// check count
 				if (count == 0)
 					break;
+
+				if (isNoShowToggle(effect))
+					continue;
 
 				if (effectType != null) {
 					if (!effect.getSkillTemplate().hasAnyEffect(effectType))
@@ -509,7 +483,7 @@ public class EffectController {
 				count--;
 			}
 		} finally {
-			lock.readLock().unlock();
+			lock.unlockRead(stamp);
 		}
 		for (Effect effect : effectsToEnd)
 			effect.endEffect();
@@ -523,27 +497,15 @@ public class EffectController {
 	 */
 	public int calculateBuffsOrEffectorDebuffsToRemove(Effect effect, int count, int dispelLevel, int power) {
 		int dispelledEffectCount = 0;
-		lock.readLock().lock();
+		long stamp = lock.readLock();
 		try {
 			for (Effect ef : abnormalEffectMap.values()) {
 				if (count == 0)
 					break;
-
+				if (!isDispellable(ef))
+					continue;
 				DispelCategoryType dispelCat = ef.getDispelCategory();
 				SkillTargetSlot targetSlot = ef.getSkillTemplate().getTargetSlot();
-
-				// skip effects that are about to be removed by another dispel effect
-				if (ef.getDesignatedDispelEffect() != null)
-					continue;
-
-				// effects with duration 86400000 cant be dispelled
-				// TODO recheck
-				if (ef.getDuration() >= 86400000 && !isRemovableEffect(ef))
-					continue;
-
-				if (ef.isSanctuaryEffect())
-					continue;
-
 				// check for targetslot, effects with target slot higher or equal to 2 cant be removed (ex. skillId: 11885)
 				if (targetSlot != SkillTargetSlot.BUFF && (targetSlot != SkillTargetSlot.DEBUFF && dispelCat != DispelCategoryType.ALL)
 					|| ef.getTargetSlotLevel() >= 2)
@@ -567,7 +529,7 @@ public class EffectController {
 				}
 			}
 		} finally {
-			lock.readLock().unlock();
+			lock.unlockRead(stamp);
 		}
 		return dispelledEffectCount;
 	}
@@ -576,24 +538,13 @@ public class EffectController {
 		List<Effect> effectsToEnd = new ArrayList<>();
 		boolean insufficientDispelPower = false;
 		boolean insufficientDispelLevel = false;
-		lock.readLock().lock();
+		long stamp = lock.readLock();
 		try {
 			for (Effect effect : abnormalEffectMap.values()) {
 				if (count == 0)
 					break;
-				// effects with duration 86400000 cant be dispelled
-				// TODO recheck
-				if (effect.getDuration() >= 86400000 && !isRemovableEffect(effect)) {
+				if (!isDispellable(effect))
 					continue;
-				}
-
-				if (effect.isSanctuaryEffect())
-					continue;
-
-				// skip effects that are about to be removed by another dispel effect
-				if (effect.getDesignatedDispelEffect() != null)
-					continue;
-
 				// check for targetslot, effects with target slot level higher or equal to 2 cant be removed (ex. skillId: 11885)
 				if (effect.getTargetSlot() != targetSlot || effect.getTargetSlotLevel() >= 2)
 					continue;
@@ -644,7 +595,7 @@ public class EffectController {
 					insufficientDispelLevel = true;
 			}
 		} finally {
-			lock.readLock().unlock();
+			lock.unlockRead(stamp);
 		}
 		for (Effect effect : effectsToEnd) // end outside lock so broadcasting effects can't cause deadlocks
 			effect.endEffect();
@@ -656,18 +607,27 @@ public class EffectController {
 		}
 	}
 
+	private boolean isNoShowToggle(Effect effect) {
+		return effect.getTargetSlot() == SkillTargetSlot.NOSHOW && effect.isToggle();
+	}
+
+	private boolean isDispellable(Effect effect) {
+		if (isNoShowToggle(effect))
+			return false;
+		if (effect.isSanctuaryEffect())
+			return false;
+		// skip effects that are about to be removed by another dispel effect
+		if (effect.getDesignatedDispelEffect() != null)
+			return false;
+		// effects with duration 86400000 cant be dispelled
+		// TODO recheck
+		if (effect.getDuration() >= 86400000 && !isRemovableEffect(effect))
+			return false;
+		return true;
+	}
+
 	public void dispelBuffCounterAtkEffect(Effect effect) {
-		List<Effect> effectsToEnd = new ArrayList<>();
-		lock.readLock().lock();
-		try {
-			for (Effect ef : abnormalEffectMap.values()) {
-				if (effect.equals(ef.getDesignatedDispelEffect())) {
-					effectsToEnd.add(ef);
-				}
-			}
-		} finally {
-			lock.readLock().unlock();
-		}
+		List<Effect> effectsToEnd = filterEffects(abnormalEffectMap, e -> effect.equals(e.getDesignatedDispelEffect()));
 		for (Effect ef : effectsToEnd) {
 			ef.endEffect();
 		}
@@ -713,15 +673,14 @@ public class EffectController {
 			effects = getAllEffects();
 		} else {
 			effects = new ArrayList<>();
-			lock.readLock().lock();
+			long stamp = lock.readLock();
 			try {
 				for (Effect effect : abnormalEffectMap.values()) {
-					if (effect.canRemoveOnDie() && (!keepBuffsOnDie || effect.getTargetSlot() == SkillTargetSlot.DEBUFF))
+					if (effect.canRemoveOnDie() && (!keepBuffsOnDie || effect.getTargetSlot() == SkillTargetSlot.DEBUFF || isNoShowToggle(effect)))
 						effects.add(effect);
 				}
-				effects.addAll(noshowEffects.values());
 			} finally {
-				lock.readLock().unlock();
+				lock.unlockRead(stamp);
 			}
 		}
 		for (Effect effect : effects) // end outside lock so broadcasting effects can't cause deadlocks
@@ -742,36 +701,21 @@ public class EffectController {
 	 * @return copy of abnormals list
 	 */
 	public List<Effect> getAbnormalEffects() {
-		lock.readLock().lock();
-		try {
-			return new ArrayList<>(abnormalEffectMap.values());
-		} finally {
-			lock.readLock().unlock();
-		}
+		return filterEffects(abnormalEffectMap, e -> !isNoShowToggle(e));
 	}
 
 	/**
 	 * @return list of effects to display as top icons
 	 */
 	public List<Effect> getAbnormalEffectsToTargetSlot(final int slot) {
-		lock.readLock().lock();
-		try {
-			return abnormalEffectMap.values().stream().filter(e -> e.getTargetSlot().getId() == slot).collect(Collectors.toList());
-		} finally {
-			lock.readLock().unlock();
-		}
+		return filterEffects(abnormalEffectMap, e -> !isNoShowToggle(e) && e.getTargetSlot().getId() == slot);
 	}
 
 	/**
 	 * @return list of effects to display as top icons
 	 */
 	public List<Effect> getAbnormalEffectsToShow() {
-		lock.readLock().lock();
-		try {
-			return abnormalEffectMap.values().stream().filter(e -> e.getTargetSlot() != SkillTargetSlot.NOSHOW).collect(Collectors.toList());
-		} finally {
-			lock.readLock().unlock();
-		}
+		return filterEffects(abnormalEffectMap, e -> e.getTargetSlot() != SkillTargetSlot.NOSHOW);
 	}
 
 	public void setAbnormal(AbnormalState state) {
@@ -790,7 +734,7 @@ public class EffectController {
 
 	public void unsetAbnormal(AbnormalState state) {
 		int count = 0;
-		lock.readLock().lock();
+		long stamp = lock.readLock();
 		try {
 			for (Effect effect : abnormalEffectMap.values()) {
 				if ((effect.getAbnormals() & state.getId()) == state.getId()) {
@@ -799,7 +743,7 @@ public class EffectController {
 				}
 			}
 		} finally {
-			lock.readLock().unlock();
+			lock.unlockRead(stamp);
 		}
 		abnormals &= ~state.getId();
 	}
@@ -835,7 +779,7 @@ public class EffectController {
 	}
 
 	public void resetDesignatedDispelEffect(Effect effect) {
-		lock.readLock().lock();
+		long stamp = lock.readLock();
 		try {
 			for (Effect ef : abnormalEffectMap.values()) {
 				if (effect.equals(ef.getDesignatedDispelEffect())) {
@@ -843,7 +787,7 @@ public class EffectController {
 				}
 			}
 		} finally {
-			lock.readLock().unlock();
+			lock.unlockRead(stamp);
 		}
 	}
 }

@@ -125,7 +125,7 @@ public class SkillAttackManager {
 
 		Npc owner = npcAI.getOwner();
 
-		NpcSkillEntry queuedSkill = owner.getQueuedSkills().peek();
+		NpcSkillEntry queuedSkill = owner.getNextQueuedSkill();
 		if (queuedSkill != null && queuedSkill.getNextSkillTime() == 0 && isReady(owner, queuedSkill)) {
 			return getNpcSkillEntryIfNotTooFarAway(owner, queuedSkill);
 		}

@@ -24,8 +24,8 @@ public class ThinkEventHandler {
 			AILogger.info(npcAI, "can't think in dead state");
 			return;
 		}
-		if (!npcAI.tryLockThink()) {
-			AILogger.info(npcAI, "can't acquire think lock");
+		if (!npcAI.setThinking()) {
+			AILogger.info(npcAI, "skipped onThink because AI is already thinking");
 			return;
 		}
 		try {
@@ -45,7 +45,7 @@ public class ThinkEventHandler {
 					break;
 			}
 		} finally {
-			npcAI.unlockThink();
+			npcAI.unsetThinking();
 		}
 	}
 
