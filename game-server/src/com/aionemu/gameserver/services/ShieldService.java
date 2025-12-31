@@ -19,6 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeShield;
+import com.aionemu.gameserver.model.siege.SiegeType;
 import com.aionemu.gameserver.model.templates.shield.ShieldTemplate;
 
 /**
@@ -70,7 +71,7 @@ public class ShieldService {
 	public void attachShield(SiegeLocation location) {
 		var mapId = location.getTemplate().getWorldId();
 		var mapShields = registeredShields.get(mapId);
-		if (mapShields == null || mapShields.isEmpty()) {
+		if (mapShields == null) {
 			return;
 		}
 		List<SiegeShield> attached = new ArrayList<>();
@@ -84,7 +85,7 @@ public class ShieldService {
 			}
 		}
 		if (attached.isEmpty()) {
-			if (location.getLocationId() != 1241) { // miren doesn't have any shields
+			if (location.getType() != SiegeType.OUTPOST && location.getLocationId() != 1241) { // outposts and miren don't have any shields
 				log.warn("Could not find a shield for location ID {}.", location.getLocationId());
 			}
 		} else {
@@ -111,7 +112,7 @@ public class ShieldService {
 					area.isInside3D(min.x, max.y, max.z) ||
 					area.isInside3D(max.x, min.y, min.z) ||
 					area.isInside3D(max.x, min.y, max.z) ||
-					area.isInside3D(max.x, max.y,min.z) ||
+					area.isInside3D(max.x, max.y, min.z) ||
 					area.isInside3D(max.x, max.y, max.z)) {
 					return true;
 				}
