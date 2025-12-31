@@ -3,7 +3,6 @@ package com.aionemu.gameserver.controllers.effect;
 import java.util.*;
 import java.util.concurrent.locks.StampedLock;
 import java.util.function.Predicate;
-import java.util.stream.Collectors;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.EmotionType;
@@ -28,7 +27,6 @@ public class EffectController {
 	private volatile Map<String, Effect> passiveEffectMap = Collections.emptyMap();
 	private final Map<String, Effect> abnormalEffectMap = new LinkedHashMap<>();
 	private int abnormals;
-	private boolean keepBuffsOnDie;
 
 	public EffectController(Creature owner) {
 		this.owner = owner;
@@ -672,21 +670,16 @@ public class EffectController {
 		if (logout) { // remove all effects on logout
 			effects = getAllEffects();
 		} else {
-			effects = new ArrayList<>();
-			long stamp = lock.readLock();
-			try {
-				for (Effect effect : abnormalEffectMap.values()) {
-					if (effect.canRemoveOnDie() && (!keepBuffsOnDie || effect.getTargetSlot() == SkillTargetSlot.DEBUFF || isNoShowToggle(effect)))
-						effects.add(effect);
-				}
-			} finally {
-				lock.unlockRead(stamp);
-			}
+			effects = filterEffects(abnormalEffectMap, this::canRemoveOnDie);
 		}
 		for (Effect effect : effects) // end outside lock so broadcasting effects can't cause deadlocks
 			effect.endEffect(false);
 		if (!logout)
 			broadCastEffects(null);
+	}
+
+	protected boolean canRemoveOnDie(Effect effect) {
+		return effect.canRemoveOnDie();
 	}
 
 	public boolean isUnderFear() {
@@ -772,10 +765,6 @@ public class EffectController {
 
 	public boolean isEmpty() {
 		return abnormalEffectMap.isEmpty();
-	}
-
-	public void setKeepBuffsOnDie(boolean keepBuffsOnDie) {
-		this.keepBuffsOnDie = keepBuffsOnDie;
 	}
 
 	public void resetDesignatedDispelEffect(Effect effect) {

@@ -27,9 +27,14 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 public class PlayerEffectController extends EffectController {
 
 	private final Map<CumulativeResistType, CumulativeResist> cumulativeResistInfo = new EnumMap<>(CumulativeResistType.class);
+	private boolean keepBuffsOnDie;
 
 	public PlayerEffectController(Creature owner) {
 		super(owner);
+	}
+
+	public void setKeepBuffsOnDie(boolean keepBuffsOnDie) {
+		this.keepBuffsOnDie = keepBuffsOnDie;
 	}
 
 	@Override
@@ -123,6 +128,15 @@ public class PlayerEffectController extends EffectController {
 		synchronized (cumulativeResistInfo) {
 			cumulativeResistInfo.clear();
 		}
+	}
+
+	@Override
+	protected boolean canRemoveOnDie(Effect effect) {
+		if (!super.canRemoveOnDie(effect))
+			return false;
+		if (keepBuffsOnDie)
+			return effect.getTargetSlot() == SkillTargetSlot.DEBUFF;
+		return true;
 	}
 
 	public long calculateAndApplyCumulativeResistDuration(CumulativeResistType type, long duration) {

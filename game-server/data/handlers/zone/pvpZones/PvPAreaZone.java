@@ -1,5 +1,6 @@
 package zone.pvpZones;
 
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.services.teleport.TeleportService;
@@ -14,13 +15,15 @@ import com.aionemu.gameserver.world.zone.handler.ZoneNameAnnotation;
 public class PvPAreaZone extends PvPZone {
 
 	@Override
-	public void onEnterZone(Creature player, ZoneInstance zone) {
-		player.getEffectController().setKeepBuffsOnDie(true);
+	public void onEnterZone(Creature creature, ZoneInstance zone) {
+		if (creature instanceof Player player && CustomConfig.KEEP_BUFFS_IN_COLISEUM)
+			player.getEffectController().setKeepBuffsOnDie(true);
 	}
 
 	@Override
-	public void onLeaveZone(Creature player, ZoneInstance zone) {
-		player.getEffectController().setKeepBuffsOnDie(false);
+	public void onLeaveZone(Creature creature, ZoneInstance zone) {
+		if (creature instanceof Player player)
+			player.getEffectController().setKeepBuffsOnDie(false);
 	}
 
 	@Override

@@ -168,6 +168,12 @@ public class CustomConfig {
 	public static boolean ENABLE_KILL_REWARD;
 
 	/**
+	 * Keep buffs when getting killed in Sanctum's Coliseum or Pandaemonium's Triniel Coliseum
+	 */
+	@Property(key = "gameserver.coliseum.keep_buffs", defaultValue = "false")
+	public static boolean KEEP_BUFFS_IN_COLISEUM;
+
+	/**
 	 * Enable one kisk restriction
 	 */
 	@Property(key = "gameserver.kisk.restriction.enable", defaultValue = "true")
