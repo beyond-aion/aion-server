@@ -1,25 +1,25 @@
 package com.aionemu.gameserver.model.siege;
 
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.model.gameobjects.Creature;
-import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.geoEngine.scene.DespawnableNode;
-import com.aionemu.gameserver.geoEngine.scene.Spatial;
-import com.aionemu.gameserver.services.ShieldService;
-import com.aionemu.gameserver.services.SiegeService;
-import com.aionemu.gameserver.world.World;
-import com.aionemu.gameserver.world.zone.ZoneInstance;
-import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
-
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 
-/**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
- */
+import com.aionemu.gameserver.controllers.observer.ActionObserver;
+import com.aionemu.gameserver.geoEngine.scene.DespawnableNode;
+import com.aionemu.gameserver.geoEngine.scene.Spatial;
+import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.services.ShieldService;
+import com.aionemu.gameserver.services.SiegeService;
+import com.aionemu.gameserver.world.zone.ZoneInstance;
+import com.aionemu.gameserver.world.zone.handler.ZoneHandler;
 
+/**
+ * Shields have material ID 11 in geo.
+ * 
+ * @author Rolandas
+ */
 public class SiegeShield implements ZoneHandler {
+
 	private final Map<Integer, ActionObserver> observed = new ConcurrentHashMap<>();
 	private final Spatial geometry;
 	private int siegeLocationId;
@@ -37,57 +37,41 @@ public class SiegeShield implements ZoneHandler {
 		return geometry;
 	}
 
-	    @Override
-    public void onEnterZone(Creature creature, ZoneInstance zone) {
-        if (!(creature instanceof Player player)) {
-            return;
-        }
-        if (!isEnabled) {
-            return;
-        }
-        var loc = SiegeService.getInstance().getFortress(siegeLocationId);
-        if (loc == null || loc.getRace() != SiegeRace.getByRace(player.getRace())) {
-            var actionObserver = ShieldService.getInstance().createShieldObserver(this, creature);
-            if (actionObserver != null) {
-                creature.getObserveController().addObserver(actionObserver);
-                observed.put(creature.getObjectId(), actionObserver);
-            }
-        }
-    }
+	@Override
+	public void onEnterZone(Creature creature, ZoneInstance zone) {
+		if (creature instanceof Player player && (isEnabled || siegeLocationId == 0)) {
+			FortressLocation loc = SiegeService.getInstance().getFortress(siegeLocationId);
+			if (loc == null || loc.getRace() != SiegeRace.getByRace(player.getRace())) {
+				ActionObserver actionObserver = ShieldService.getInstance().createShieldObserver(this, creature);
+				if (actionObserver != null) {
+					creature.getObserveController().addObserver(actionObserver);
+					observed.put(creature.getObjectId(), actionObserver);
+				}
+			}
+		}
+	}
 
 	@Override
 	public void onLeaveZone(Creature creature, ZoneInstance zone) {
-		var actionObserver = observed.remove(creature.getObjectId());
+		ActionObserver actionObserver = observed.remove(creature.getObjectId());
 		if (actionObserver != null)
 			creature.getObserveController().removeObserver(actionObserver);
 	}
 
-   public void setEnabled(boolean enable) {
-        if (isEnabled == enable) {
-            return;
-        }
-        isEnabled = enable;
-        if (!enable) {
-            clearObservers();
-        }
-        if (geometry != null && geometry.getParent() instanceof DespawnableNode despawnableNode) {
-            despawnableNode.setActive(1, enable);
-        }
-    }
+	public void setEnabled(boolean enable) {
+		isEnabled = enable;
+		if (geometry != null && geometry.getParent() instanceof DespawnableNode despawnableNode) {
+			despawnableNode.setActive(1, enable);
+		}
+	}
 
-     //Insurance just in case.
-	   public void clearObservers() {
-        if (observed.isEmpty()) {
-            return;
-        }
-        observed.forEach((objectId, obs) -> {
-            var obj = World.getInstance().findVisibleObject(objectId);
-            if (obj instanceof Creature creature) {
-                creature.getObserveController().removeObserver(obs);
-            }
-        });
-        observed.clear();
-    }
+	public boolean isEnabled() {
+		return isEnabled;
+	}
+
+	public int getSiegeLocationId() {
+		return siegeLocationId;
+	}
 
 	public void setSiegeLocationId(int siegeLocationId) {
 		this.siegeLocationId = siegeLocationId;
@@ -100,4 +84,5 @@ public class SiegeShield implements ZoneHandler {
 	public String toString() {
 		return "LocId=" + siegeLocationId + "; Name=" + geometry.getName() + "; Bounds=" + geometry.getWorldBound();
 	}
+
 }
