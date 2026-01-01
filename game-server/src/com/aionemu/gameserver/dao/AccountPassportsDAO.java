@@ -1,8 +1,6 @@
 package com.aionemu.gameserver.dao;
 
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
-import java.sql.Timestamp;
+import java.sql.*;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
@@ -32,24 +30,24 @@ public class AccountPassportsDAO {
 	private static final String SELECT_STAMPS_QUERY = "SELECT `stamps`, `last_stamp` FROM `account_stamps` WHERE `account_id`=?";
 
 	public static void loadPassport(Account account) {
-		var passportList = new PassportsList();
-		try (var con = DatabaseFactory.getConnection()) {
-			try (var stmt = con.prepareStatement(SELECT_QUERY)) {
+		PassportsList passportList = new PassportsList();
+		try (Connection con = DatabaseFactory.getConnection()) {
+			try (PreparedStatement stmt = con.prepareStatement(SELECT_QUERY)) {
 				stmt.setInt(1, account.getId());
-				var rset = stmt.executeQuery();
+				ResultSet rset = stmt.executeQuery();
 				while (rset.next()) {
 					int passport_id = rset.getInt("passport_id");
 					boolean rewarded = rset.getInt("rewarded") != 0;
-					var arriveDate = normTs(rset.getTimestamp("arrive_date"));
-					var pp = new Passport(passport_id, rewarded, arriveDate);
+					Timestamp arriveDate = normTs(rset.getTimestamp("arrive_date"));
+					Passport pp = new Passport(passport_id, rewarded, arriveDate);
 					pp.setPersistentState(PersistentState.UPDATED);
 					passportList.addPassport(pp);
 				}
 				account.setPassportsList(passportList);
 			}
-			try (var stmt = con.prepareStatement(SELECT_STAMPS_QUERY)) {
+			try (PreparedStatement stmt = con.prepareStatement(SELECT_STAMPS_QUERY)) {
 				stmt.setInt(1, account.getId());
-				var rset = stmt.executeQuery();
+				ResultSet rset = stmt.executeQuery();
 				int stamps = 0;
 				Timestamp lastStamp = null;
 				if (rset.next()) {
@@ -67,7 +65,7 @@ public class AccountPassportsDAO {
 	}
 
 	public static void storePassportList(int accountId, List<Passport> pList) {
-		for (var passport : pList) {
+		for (Passport passport : pList) {
 			switch (passport.getPersistentState()) {
 				case NEW -> addPassports(accountId, passport);
 				case UPDATE_REQUIRED -> updatePassport(accountId, passport);
@@ -83,7 +81,7 @@ public class AccountPassportsDAO {
 	}
 
 	private static void addPassports(int accountId, Passport passport) {
-		try (var conn = DatabaseFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(INSERT_QUERY)) {
+		try (Connection conn = DatabaseFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(INSERT_QUERY)) {
 			ps.setInt(1, accountId);
 			ps.setInt(2, passport.getId());
 			ps.setInt(3, passport.isRewarded() ? 1 : 0);
@@ -95,7 +93,7 @@ public class AccountPassportsDAO {
 	}
 
 	private static void updatePassport(int accountId, Passport passport) {
-		try (var con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(UPDATE_QUERY)) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(UPDATE_QUERY)) {
 			ps.setInt(1, passport.isRewarded() ? 1 : 0);
 			ps.setInt(2, accountId);
 			ps.setInt(3, passport.getId());
@@ -107,7 +105,7 @@ public class AccountPassportsDAO {
 	}
 
 	private static void deletePassport(int accountId, Passport passport) {
-		try (var con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(DELETE_QUERY)) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(DELETE_QUERY)) {
 			ps.setInt(1, accountId);
 			ps.setInt(2, passport.getId());
 			ps.setTimestamp(3, passport.getArriveDate());
@@ -118,7 +116,7 @@ public class AccountPassportsDAO {
 	}
 
 	private static void insertStamps(int accountId) {
-		try (var conn = DatabaseFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(INSERT_STAMPS_QUERY)) {
+		try (Connection conn = DatabaseFactory.getConnection(); PreparedStatement ps = conn.prepareStatement(INSERT_STAMPS_QUERY)) {
 			ps.setInt(1, accountId);
 			ps.setInt(2, 0);
 			ps.setTimestamp(3, null);
@@ -129,7 +127,7 @@ public class AccountPassportsDAO {
 	}
 
 	private static void updateStamps(Account account) {
-		try (var con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(UPDATE_STAMPS_QUERY)) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(UPDATE_STAMPS_QUERY)) {
 			ps.setInt(1, account.getPassportStamps());
 			ps.setTimestamp(2, account.getLastStamp());
 			ps.setInt(3, account.getId());
@@ -140,15 +138,15 @@ public class AccountPassportsDAO {
 	}
 
 	public static void resetAllLastStamps() {
-		try (var con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(RESET_LAST_STAMPS_QUERY)) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(RESET_LAST_STAMPS_QUERY)) {
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			log.error("Failed to reset all passports.", e);
+			log.error("Failed to reset all last stamps.", e);
 		}
 	}
 
 	public static void resetAllStamps() {
-		try (var con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(RESET_STAMPS_QUERY)) {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(RESET_STAMPS_QUERY)) {
 			ps.executeUpdate();
 		} catch (SQLException e) {
 			log.error("Failed to reset all stamps.", e);

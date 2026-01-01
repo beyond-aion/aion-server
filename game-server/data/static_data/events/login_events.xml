@@ -394,6 +394,4 @@
 	<login_event id="392" active="1" period_start="2020-12-01T09:00:00" period_end="2021-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="14" reward_item="188053414" reward_item_num="1"/>
 	<login_event id="393" active="1" period_start="2020-12-01T09:00:00" period_end="2021-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="21" reward_item="188053419" reward_item_num="1"/>
 	<login_event id="394" active="1" period_start="2020-12-01T09:00:00" period_end="2021-01-01T08:59:59" attend_type="CUMULATIVE" attend_num="28" reward_permit_level="46" reward_item="166030008" reward_item_num="1" reward_item_expire_time="10080"/>
-    <!-- TEST 
-	<login_event id="395" active="1" period_start="2025-01-01T00:00:00" period_end="2025-12-31T23:59:59" attend_type="DAILY" attend_num="1" reward_permit_level="50" reward_item="188052315" reward_item_num="1" reward_item_expire_time="10"/> -->
 </login_events>

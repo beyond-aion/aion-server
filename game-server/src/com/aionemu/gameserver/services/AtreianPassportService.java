@@ -8,7 +8,6 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
-import com.aionemu.gameserver.model.account.PassportsList;
 import org.quartz.JobDetail;
 
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
@@ -16,6 +15,7 @@ import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.AttendType;
 import com.aionemu.gameserver.model.account.Account;
 import com.aionemu.gameserver.model.account.Passport;
+import com.aionemu.gameserver.model.account.PassportsList;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
@@ -101,11 +101,11 @@ public class AtreianPassportService {
 			for (var time : entry.getValue()) {
 				var passport = ppl.getPassport(passId, time);
 				if (passport == null) {
-					AuditLogger.log(player, "Tried to get non-existing passport (ID: " + passId + ", time: " + time + ").");
+					AuditLogger.log(player, "tried to get non-existing passport (ID: " + passId + ", time: " + time + ").");
 					continue;
 				}
 				if (passport.isRewarded() || passport.getPersistentState() == PersistentState.DELETED) {
-					AuditLogger.log(player, "Tried to get passport which is already rewarded (ID: " + passId + ").");
+					AuditLogger.log(player, "tried to get passport which is already rewarded (ID: " + passId + ").");
 					continue;
 				}
 				if (player.getInventory().isFull()) {

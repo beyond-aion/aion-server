@@ -1,9 +1,10 @@
 package com.aionemu.gameserver.model.account;
 
 import java.time.LocalDate;
-import java.time.ZoneId;
 import java.util.ArrayList;
 import java.util.List;
+
+import com.aionemu.gameserver.utils.time.ServerTime;
 
 /**
  * @author ViAl, SVDNESS
@@ -44,15 +45,9 @@ public class PassportsList {
 	}
 
 	public boolean hasPassportForDay(int passportId, LocalDate attendDay) {
-		for (var pp : passports) {
-			if (pp.getId() != passportId) {
-				continue;
-			}
-			var ppDay = pp.getArriveDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate();
-			if (ppDay.equals(attendDay)) {
-				return true;
-			}
-		}
-		return false;
+		return passports.stream()
+			.filter(pp -> pp.getId() == passportId)
+			.map(pp -> ServerTime.atDate(pp.getArriveDate()).toLocalDate())
+			.anyMatch(attendDay::equals);
 	}
 }
