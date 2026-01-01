@@ -10,12 +10,12 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
-import com.aionemu.gameserver.controllers.observer.ActionObserver;
-import com.aionemu.gameserver.controllers.observer.CollisionDieActor;
 import com.aionemu.gameserver.controllers.observer.ShieldObserver;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.geoEngine.bounding.BoundingBox;
+import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.gameobjects.Creature;
+import com.aionemu.gameserver.model.geometry.RectangleArea;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
 import com.aionemu.gameserver.model.siege.SiegeShield;
@@ -53,16 +53,15 @@ public class ShieldService {
 		return template == null ? null : new ShieldObserver(location, template, observed);
 	}
 
-	public ActionObserver createShieldObserver(SiegeShield geoShield, Creature observed) {
-		return GeoDataConfig.GEO_SHIELDS_ENABLE ? new CollisionDieActor(observed, geoShield.getGeometry()) : null;
-	}
-
 	/**
 	 * Registers geo shield for zone lookup
 	 */
-	public void registerShield(int worldId, SiegeShield shield) {
-		if (!isIgnored(worldId, shield))
-			registeredShields.computeIfAbsent(worldId, _ -> new ArrayList<>()).add(shield);
+	public SiegeShield tryRegisterShield(int worldId, Spatial geometry) {
+		if (!GeoDataConfig.GEO_SHIELDS_ENABLE || isIgnored(worldId, geometry.getName()))
+			return null;
+		SiegeShield shield = new SiegeShield(geometry);
+		registeredShields.computeIfAbsent(worldId, _ -> new ArrayList<>()).add(shield);
+		return shield;
 	}
 
 	/**
@@ -84,46 +83,32 @@ public class ShieldService {
 				shield.setSiegeLocationId(location.getLocationId());
 			}
 		}
-		if (attached.isEmpty()) {
-			if (location.getType() != SiegeType.OUTPOST && location.getLocationId() != 1241) { // outposts and miren don't have any shields
-				log.warn("Could not find a shield for location ID {}.", location.getLocationId());
-			}
-		} else {
-			location.setShields(attached);
-		}
+		if (attached.isEmpty() && location.getType() != SiegeType.OUTPOST && location.getLocationId() != 1241) // Outposts and Miren don't have shields
+			log.warn("Could not find a shield for location ID {}.", location.getLocationId());
 	}
 
-	private static boolean isShieldInsideLocation(SiegeShield shield, SiegeLocation location) {
+	private boolean isShieldInsideLocation(SiegeShield shield, SiegeLocation location) {
 		var wb = shield.getGeometry().getWorldBound();
 		var center = wb.getCenter();
-		for (var z : location.getZone()) {
-			var area = z.getAreaTemplate();
-			//1. Center.
-			if (area.isInside3D(center.x, center.y, center.z)) {
-				return true;
+		if (location.isInsideLocation(center.getX(), center.getY(), center.getZ()))
+			return true;
+		if (wb instanceof BoundingBox bb) {
+			var min = bb.getMin(null);
+			var max = bb.getMax(null);
+			switch (shield.getGeometry().getName()) {
+				case "PR_A_AIRBUNKER_EFFECT_01A_CHILD1_324011", "PR_A_AIRBUNKER_EFFECT_01A_CHILD2_324011" -> min.z -= 6;
 			}
-			//2. Corners AABB.
-			if (wb instanceof BoundingBox bb) {
-				var min = bb.getMin(null);
-				var max = bb.getMax(null);
-				if (area.isInside3D(min.x, min.y, min.z) ||
-					area.isInside3D(min.x, min.y, max.z) ||
-					area.isInside3D(min.x, max.y, min.z) ||
-					area.isInside3D(min.x, max.y, max.z) ||
-					area.isInside3D(max.x, min.y, min.z) ||
-					area.isInside3D(max.x, min.y, max.z) ||
-					area.isInside3D(max.x, max.y, min.z) ||
-					area.isInside3D(max.x, max.y, max.z)) {
-					return true;
-				}
+			RectangleArea rectangleArea = new RectangleArea(null, 0, min.x, min.y, max.x, max.y, min.z, max.z);
+			if (location.getZone().stream().anyMatch(z -> z.getAreaTemplate().intersectsRectangle(rectangleArea))) {
+				return true;
 			}
 		}
 		return false;
 	}
 
-	private static boolean isIgnored(int mapId, SiegeShield shield) {
+	private boolean isIgnored(int mapId, String geometryName) {
 		var ignoredShields = IGNORED_SHIELDS_BY_MAP_ID.get(mapId);
-		return ignoredShields != null && ignoredShields.contains(shield.getGeometry().getName());
+		return ignoredShields != null && ignoredShields.contains(geometryName);
 	}
 
 	private static class SingletonHolder {
