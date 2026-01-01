@@ -27862,8 +27862,8 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	/**
 	 * You can only obtain %1% when you have reached Level %0.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_ATTEND_REWARD_INVALID_LEVEL(String name, int level) {
-		return new SM_SYSTEM_MESSAGE(1402573, name, level);
+	public static SM_SYSTEM_MESSAGE STR_MSG_ATTEND_REWARD_INVALID_LEVEL(int level, String name) {
+		return new SM_SYSTEM_MESSAGE(1402573, level, name);
 	}
 
 	/**

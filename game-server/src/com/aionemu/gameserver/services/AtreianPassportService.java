@@ -8,6 +8,7 @@ import java.time.LocalTime;
 import java.time.temporal.ChronoUnit;
 import java.util.*;
 
+import com.aionemu.gameserver.model.account.PassportsList;
 import org.quartz.JobDetail;
 
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
@@ -18,7 +19,6 @@ import com.aionemu.gameserver.model.account.Passport;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
-import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATREIAN_PASSPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.cron.CronService;
@@ -50,7 +50,7 @@ public class AtreianPassportService {
 					cronInfo = null;
 					return;
 				}
-				boolean isFirstDayOfMonth = ServerTime.now().getDayOfMonth() == 1;
+				final boolean isFirstDayOfMonth = ServerTime.now().getDayOfMonth() == 1;
 				AccountPassportsDAO.resetAllLastStamps();
 				if (isFirstDayOfMonth) {
 					AccountPassportsDAO.resetAllStamps();
@@ -94,18 +94,18 @@ public class AtreianPassportService {
 		if (isAtreianPassportDisabled()) {
 			return;
 		}
-		final var toRemove = new ArrayList<Passport>();
-		final var ppl = player.getAccount().getPassportsList();
+		List<Passport> toRemove = new ArrayList<>();
+		final PassportsList ppl = player.getAccount().getPassportsList();
 		for (var entry : passports.entrySet()) {
 			final int passId = entry.getKey();
 			for (var time : entry.getValue()) {
 				var passport = ppl.getPassport(passId, time);
 				if (passport == null) {
-					AuditLogger.log(player, "tried to get non-existing passport (ID: " + passId + ", time: " + time + ").");
+					AuditLogger.log(player, "Tried to get non-existing passport (ID: " + passId + ", time: " + time + ").");
 					continue;
 				}
 				if (passport.isRewarded() || passport.getPersistentState() == PersistentState.DELETED) {
-					AuditLogger.log(player, "tried to get passport which is already rewarded (ID: " + passId + ").");
+					AuditLogger.log(player, "Tried to get passport which is already rewarded (ID: " + passId + ").");
 					continue;
 				}
 				if (player.getInventory().isFull()) {
@@ -120,12 +120,12 @@ public class AtreianPassportService {
 					if (itemTemplate != null && itemTemplate.getL10n() != null) {
 						itemName = itemTemplate.getL10n();
 					}
-					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ATTEND_REWARD_INVALID_LEVEL(itemName, minLevel));
+					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ATTEND_REWARD_INVALID_LEVEL(minLevel, itemName));
 					continue;
 				}
 				int expireMin = atp.getRewardExpireMinutes();
 				if (expireMin > 0) {
-					var deadline = passport.getArriveDate().toInstant().plusSeconds(expireMin * 60L);
+					final Instant deadline = passport.getArriveDate().toInstant().plusSeconds(expireMin * 60L);
 					if (Instant.now().isAfter(deadline)) {
 						passport.setPersistentState(PersistentState.DELETED);
 						ppl.removePassport(passport);
@@ -151,14 +151,14 @@ public class AtreianPassportService {
 			return;
 		}
 		purgeExpiredPassports(player);
-		final var pa = player.getAccount();
+		Account pa = player.getAccount();
 		final boolean doReward = checkOnlineDate(pa, now) && pa.getPassportStamps() < 28;
 		for (var atp : DataManager.ATREIAN_PASSPORT_DATA.getAll().values()) {
 			if (atp.isActive() && atp.getPeriodStart().isBefore(now) && atp.getPeriodEnd().isAfter(now)) {
 				switch (atp.getAttendType()) {
 					case DAILY -> {
 						if (doReward) {
-							var attendDay = getAttendDay(now);
+							final LocalDate attendDay = getAttendDay(now);
 							if (!pa.getPassportsList().hasPassportForDay(atp.getId(), attendDay)) {
 								var ts = nowTs();
 								var passport = new Passport(atp.getId(), false, ts);
@@ -184,8 +184,7 @@ public class AtreianPassportService {
 						}
 					}
 					case ANNIVERSARY -> {
-						var creationDate = getAccountCreationDate(player);
-						int monthsAlive = getAccountAgeInMonths(creationDate, now.toLocalDate());
+						int monthsAlive = getAccountAgeInMonths(player, now.toLocalDate());
 						int target = atp.getAttendNum();
 						if (pa.getPassportsList().isPassportPresent(atp.getId())) {
 							break;
@@ -217,29 +216,29 @@ public class AtreianPassportService {
 	}
 
 	private void sendPassport(Player player) {
-		var pa = player.getAccount();
-		var playerCreationDate = ServerTime.atDate(player.getCreationDate()).toLocalDate();
+		Account pa = player.getAccount();
+		LocalDate playerCreationDate = ServerTime.atDate(player.getCreationDate()).toLocalDate();
 		PacketSendUtility.sendPacket(player, new SM_ATREIAN_PASSPORT(pa.getPassportsList(), pa.getPassportStamps(), playerCreationDate));
 	}
 
 	private boolean checkOnlineDate(Account pa, LocalDateTime now) {
-		var last = pa.getLastStamp();
+		Timestamp last = pa.getLastStamp();
 		if (last == null) {
 			return true;
 		}
-		var lastAttendDay = ServerTime.atDate(last).toLocalDateTime().minusHours(ATTEND_RESET_HOUR).toLocalDate();
-		var currentAttendDay = now.minusHours(ATTEND_RESET_HOUR).toLocalDate();
+		var lastAttendDay = getAttendDay(ServerTime.atDate(last).toLocalDateTime());
+		LocalDate currentAttendDay = getAttendDay(now);
 		return !currentAttendDay.equals(lastAttendDay);
 	}
 
-	private LocalDate getAttendDay(LocalDateTime now) {
-		return now.minusHours(ATTEND_RESET_HOUR).toLocalDate();
+	private LocalDate getAttendDay(LocalDateTime serverTime) {
+		return serverTime.minusHours(ATTEND_RESET_HOUR).toLocalDate();
 	}
 
-	//Сохраняется не более 50 паспортов.
 	private void checkPassportLimit(Player player) {
-		var pa = player.getAccount();
+		Account pa = player.getAccount();
 		var pl = pa.getPassportsList().getAllPassports();
+		//More than 50 passports cannot be saved.
 		if (pl.size() < 50) {
 			return;
 		}
@@ -256,16 +255,16 @@ public class AtreianPassportService {
 			oldest.setPersistentState(PersistentState.DELETED);
 			pa.getPassportsList().removePassport(oldest);
 			AccountPassportsDAO.storePassportList(pa.getId(), List.of(oldest));
-			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(oldest.getTemplate().getRewardItemId());
+			var itemTemplate = DataManager.ITEM_DATA.getItemTemplate(oldest.getTemplate().getRewardItemId());
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ATTEND_REWARD_REMOVE_EXCESS(itemTemplate.getL10n()));
 		}
 	}
 
 	private void purgeExpiredPassports(Player player) {
-		var pa = player.getAccount();
-		var ppl = pa.getPassportsList();
-		var now = Instant.now();
-		var toRemove = new ArrayList<Passport>();
+		Account pa = player.getAccount();
+		PassportsList ppl = pa.getPassportsList();
+		Instant now = ServerTime.now().toInstant();
+		List<Passport> toRemove = new ArrayList<>();
 		for (var pp : new ArrayList<>(ppl.getAllPassports())) {
 			if (pp.isRewarded() || pp.isFakeStamp()) {
 				continue;
@@ -278,9 +277,7 @@ public class AtreianPassportService {
 			if (expireMin <= 0) {
 				continue;
 			}
-			var deadline = pp.getArriveDate()
-					.toInstant()
-					.plusSeconds(expireMin * 60L);
+			Instant deadline = pp.getArriveDate().toInstant().plusSeconds(expireMin * 60L);
 			if (now.isAfter(deadline)) {
 				pp.setPersistentState(PersistentState.DELETED);
 				ppl.removePassport(pp);
@@ -292,13 +289,16 @@ public class AtreianPassportService {
 		}
 	}
 
-	private LocalDate getAccountCreationDate(Player player) {
-		return ServerTime.atDate(player.getCreationDate()).toLocalDate();
-	}
-
-	private int getAccountAgeInMonths(LocalDate creationDate, LocalDate now) {
+	/**
+	 * Calculates the number of full months between the account creation date and the given date.
+	 * The calculation is based on year and month difference. If the day of the given date is
+	 * earlier than the day of the creation date, the current month is considered incomplete
+	 * and is not counted.
+	 * The returned value is always non-negative.
+	 */
+	private int getAccountAgeInMonths(Player player, LocalDate now) {
+		LocalDate creationDate = ServerTime.atDate(player.getCreationDate()).toLocalDate();
 		int months = (now.getYear() - creationDate.getYear()) * 12 + (now.getMonthValue() - creationDate.getMonthValue());
-		//Если сегодня день месяца меньше дня создания — полный месяц еще не прошел.
 		if (now.getDayOfMonth() < creationDate.getDayOfMonth()) {
 			months--;
 		}
@@ -306,11 +306,10 @@ public class AtreianPassportService {
 	}
 
 	private static Timestamp nowTs() {
-		return Timestamp.from(Instant.now().truncatedTo(ChronoUnit.SECONDS));
+		return Timestamp.from(ServerTime.now().toInstant().truncatedTo(ChronoUnit.SECONDS));
 	}
 
 	private static class SingletonHolder {
-
 		protected static final AtreianPassportService instance = new AtreianPassportService();
 	}
 
