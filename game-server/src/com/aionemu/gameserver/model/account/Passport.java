@@ -1,17 +1,15 @@
 package com.aionemu.gameserver.model.account;
 
+import java.sql.Timestamp;
+import java.time.temporal.ChronoUnit;
+
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.Persistable;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
 
-import java.sql.Timestamp;
-import java.time.temporal.ChronoUnit;
-
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author ViAl, SVDNESS
  */
-
 public class Passport implements Persistable {
 	private int id;
 	private boolean rewarded;

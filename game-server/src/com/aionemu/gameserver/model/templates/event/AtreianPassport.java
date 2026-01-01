@@ -1,20 +1,19 @@
 package com.aionemu.gameserver.model.templates.event;
 
-import com.aionemu.gameserver.dataholders.loadingutils.adapters.LocalDateTimeAdapter;
-import com.aionemu.gameserver.model.AttendType;
+import java.time.LocalDateTime;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlRootElement;
 import javax.xml.bind.annotation.adapters.XmlJavaTypeAdapter;
-import java.time.LocalDateTime;
+
+import com.aionemu.gameserver.dataholders.loadingutils.adapters.LocalDateTimeAdapter;
+import com.aionemu.gameserver.model.AttendType;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author Alcapwnd, SVDNESS
  */
-
 @XmlRootElement(name = "login_event")
 @XmlAccessorType(XmlAccessType.NONE)
 public class AtreianPassport {

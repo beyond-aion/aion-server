@@ -1,5 +1,15 @@
 package com.aionemu.gameserver.services;
 
+import java.sql.Timestamp;
+import java.time.Instant;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
+import java.util.*;
+
+import org.quartz.JobDetail;
+
 import com.aionemu.gameserver.dao.AccountPassportsDAO;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.AttendType;
@@ -8,6 +18,7 @@ import com.aionemu.gameserver.model.account.Passport;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.event.AtreianPassport;
+import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATREIAN_PASSPORT;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.cron.CronService;
@@ -19,42 +30,27 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 import com.aionemu.gameserver.utils.time.ServerTime;
 import com.aionemu.gameserver.world.World;
-import org.quartz.JobDetail;
-
-import java.sql.Timestamp;
-import java.time.Instant;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.LocalTime;
-import java.time.temporal.ChronoUnit;
-import java.util.ArrayList;
-import java.util.Comparator;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author ViAl, Luzien, SVDNESS
  */
-
 public class AtreianPassportService {
+
 	private static final String DAILY_CRON_AT_09_00 = "0 0 9 ? * *";
 	private static final int ATTEND_RESET_HOUR = 9;
 	private final LocalDateTime expireDate;
 	private JobDetail cronInfo;
 
 	private AtreianPassportService() {
-		this.expireDate = calculatePassportExpireDate();
+		expireDate = calculatePassportExpireDate();
 		if (!isAtreianPassportDisabled()) {
-			this.cronInfo = CronService.getInstance().schedule(() -> {
+			cronInfo = CronService.getInstance().schedule(() -> {
 				if (isAtreianPassportDisabled()) {
 					CronService.getInstance().cancel(cronInfo);
 					cronInfo = null;
 					return;
 				}
-				final var now = ServerTime.now();
-				final boolean isFirstDayOfMonth = now.getDayOfMonth() == 1;
+				boolean isFirstDayOfMonth = ServerTime.now().getDayOfMonth() == 1;
 				AccountPassportsDAO.resetAllLastStamps();
 				if (isFirstDayOfMonth) {
 					AccountPassportsDAO.resetAllStamps();
@@ -105,15 +101,14 @@ public class AtreianPassportService {
 			for (var time : entry.getValue()) {
 				var passport = ppl.getPassport(passId, time);
 				if (passport == null) {
-					AuditLogger.log(player, "Tried to get non-existing passport (ID: " + passId + ", time: " + time + ").");
+					AuditLogger.log(player, "tried to get non-existing passport (ID: " + passId + ", time: " + time + ").");
 					continue;
 				}
 				if (passport.isRewarded() || passport.getPersistentState() == PersistentState.DELETED) {
-					AuditLogger.log(player, "Tried to get passport which is already rewarded (ID: " + passId + ").");
+					AuditLogger.log(player, "tried to get passport which is already rewarded (ID: " + passId + ").");
 					continue;
 				}
 				if (player.getInventory().isFull()) {
-					//У вас нет свободного места в инвентаре.
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_WAREHOUSE_FULL_INVENTORY());
 					break;
 				}
@@ -125,7 +120,6 @@ public class AtreianPassportService {
 					if (itemTemplate != null && itemTemplate.getL10n() != null) {
 						itemName = itemTemplate.getL10n();
 					}
-					//%1: награда доступна только для персонажей %0-го уровня и выше.
 					PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ATTEND_REWARD_INVALID_LEVEL(itemName, minLevel));
 					continue;
 				}
@@ -217,7 +211,6 @@ public class AtreianPassportService {
 			pa.setLastStamp(nowTs());
 			checkPassportLimit(player);
 			AccountPassportsDAO.storePassport(pa);
-			//Вы получили ежедневный подарок.
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_ATTEND_MSG_ATTEND_REWARD_GET());
 		}
 		sendPassport(player);
@@ -263,8 +256,8 @@ public class AtreianPassportService {
 			oldest.setPersistentState(PersistentState.DELETED);
 			pa.getPassportsList().removePassport(oldest);
 			AccountPassportsDAO.storePassportList(pa.getId(), List.of(oldest));
-			//Список подарков переполнен, поэтому самый старый (%0%) удаляется.
-			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ATTEND_REWARD_REMOVE_EXCESS("Atreian Passport"));
+			ItemTemplate itemTemplate = DataManager.ITEM_DATA.getItemTemplate(oldest.getTemplate().getRewardItemId());
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ATTEND_REWARD_REMOVE_EXCESS(itemTemplate.getL10n()));
 		}
 	}
 
@@ -317,6 +310,7 @@ public class AtreianPassportService {
 	}
 
 	private static class SingletonHolder {
+
 		protected static final AtreianPassportService instance = new AtreianPassportService();
 	}
 

@@ -1,26 +1,25 @@
 package com.aionemu.gameserver.dao;
 
-import com.aionemu.commons.database.DatabaseFactory;
-import com.aionemu.gameserver.model.account.Account;
-import com.aionemu.gameserver.model.account.Passport;
-import com.aionemu.gameserver.model.account.PassportsList;
-import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.time.temporal.ChronoUnit;
 import java.util.List;
 
-/**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
- */
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
-//Фул новый DAO.
+import com.aionemu.commons.database.DatabaseFactory;
+import com.aionemu.gameserver.model.account.Account;
+import com.aionemu.gameserver.model.account.Passport;
+import com.aionemu.gameserver.model.account.PassportsList;
+import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
+
+/**
+ * @author ViAl, Luzien, SVDNESS
+ */
 public class AccountPassportsDAO {
+
 	private static final Logger log = LoggerFactory.getLogger(AccountPassportsDAO.class);
 	private static final String SELECT_QUERY = "SELECT `passport_id`, `rewarded`, `arrive_date` FROM `account_passports` WHERE `account_id`=?";
 	private static final String UPDATE_QUERY = "UPDATE `account_passports` SET `rewarded`=? WHERE `account_id`=? AND `passport_id`=? AND `arrive_date`=?";

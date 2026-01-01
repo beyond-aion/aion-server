@@ -6,11 +6,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author ViAl, SVDNESS
  */
-
 public class PassportsList {
+
 	private final List<Passport> passports;
 
 	public PassportsList() {
@@ -26,19 +25,16 @@ public class PassportsList {
 	}
 
 	public Passport getPassport(int passportId, int timestamp) {
-		for (var passport : this.passports) {
-			if (passport.getId() == passportId && passport.getArriveDate().getTime() / 1000 == timestamp) {
+		for (Passport passport : this.passports)
+			if (passport.getId() == passportId && passport.getArriveDate().getTime() / 1000 == timestamp)
 				return passport;
-			}
-		}
 		return null;
 	}
 
 	public boolean isPassportPresent(int passportId) {
-		for (var pp : this.passports) {
-			if (pp.getId() == passportId) {
+		for (Passport pp : this.passports) {
+			if (pp.getId() == passportId)
 				return true;
-			}
 		}
 		return false;
 	}
