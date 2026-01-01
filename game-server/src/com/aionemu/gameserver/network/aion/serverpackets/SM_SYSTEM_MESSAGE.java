@@ -27874,6 +27874,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * You can only obtain %1% when you have reached Level %0.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_ATTEND_REWARD_INVALID_LEVEL(int level, String name) {
+		return new SM_SYSTEM_MESSAGE(1402573, level, name);
+	}
+
+	/**
 	 * You obtained %1% from the Equipment Blessing for %0.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_ITEM_UPGRADE_MSG_UPGRADE_SUCCESS(String value0, String value1) {
@@ -27965,9 +27972,9 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
-	 * Atreian Passport
+	 * Today's reward is here.
 	 */
-	public static SM_SYSTEM_MESSAGE STR_MSG_NEW_PASSPORT_AVAIBLE() {
+	public static SM_SYSTEM_MESSAGE STR_ATTEND_MSG_ATTEND_REWARD_GET() {
 		return new SM_SYSTEM_MESSAGE(1402601);
 	}
 
@@ -27976,6 +27983,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_IDLDF4_Re_01_secret_room_03() {
 		return new SM_SYSTEM_MESSAGE(1402603);
+	}
+
+	/**
+	 * Because the Reward Box was full, the oldest gift (%0%) has been deleted.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_ATTEND_REWARD_REMOVE_EXCESS(String name) {
+		return new SM_SYSTEM_MESSAGE(1402627, name);
 	}
 
 	/**

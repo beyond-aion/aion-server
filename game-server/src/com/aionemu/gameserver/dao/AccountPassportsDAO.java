@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.dao;
 
 import java.sql.*;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 
 import org.slf4j.Logger;
@@ -13,17 +14,16 @@ import com.aionemu.gameserver.model.account.PassportsList;
 import com.aionemu.gameserver.model.gameobjects.Persistable.PersistentState;
 
 /**
- * @author ViAl, Luzien
+ * @author ViAl, Luzien, SVDNESS
  */
 public class AccountPassportsDAO {
 
 	private static final Logger log = LoggerFactory.getLogger(AccountPassportsDAO.class);
-
 	private static final String SELECT_QUERY = "SELECT `passport_id`, `rewarded`, `arrive_date` FROM `account_passports` WHERE `account_id`=?";
-	private static final String UPDATE_QUERY = "UPDATE `account_passports` SET `rewarded`=? WHERE `account_id`=? AND `passport_id`=?";
-	private static final String RESET_LASTSTAMPS_QUERY = "UPDATE `account_stamps` SET `last_stamp`=NULL";
+	private static final String UPDATE_QUERY = "UPDATE `account_passports` SET `rewarded`=? WHERE `account_id`=? AND `passport_id`=? AND `arrive_date`=?";
+	private static final String RESET_LAST_STAMPS_QUERY = "UPDATE `account_stamps` SET `last_stamp`=NULL";
 	private static final String RESET_STAMPS_QUERY = "UPDATE `account_stamps` SET `stamps`=0";
-	private static final String INSERT_QUERY = "INSERT INTO `account_passports` (`account_id`, `passport_id`, `rewarded`, `arrive_date`) VALUES (?,?,?,?)";
+	private static final String INSERT_QUERY = "INSERT INTO `account_passports` (`account_id`, `passport_id`, `rewarded`, `arrive_date`) VALUES (?,?,?,?) ON DUPLICATE KEY UPDATE `rewarded` = GREATEST(`rewarded`, VALUES(`rewarded`))";
 	private static final String DELETE_QUERY = "DELETE FROM `account_passports` WHERE account_id = ? AND passport_id = ? and arrive_date = ?";
 	private static final String INSERT_STAMPS_QUERY = "INSERT INTO `account_stamps` (`account_id`, `stamps`, `last_stamp`) VALUES (?,?,?)";
 	private static final String UPDATE_STAMPS_QUERY = "UPDATE `account_stamps` SET `stamps`= ?, `last_stamp`  = ? WHERE `account_id` = ?";
@@ -38,7 +38,7 @@ public class AccountPassportsDAO {
 				while (rset.next()) {
 					int passport_id = rset.getInt("passport_id");
 					boolean rewarded = rset.getInt("rewarded") != 0;
-					Timestamp arriveDate = rset.getTimestamp("arrive_date");
+					Timestamp arriveDate = normTs(rset.getTimestamp("arrive_date"));
 					Passport pp = new Passport(passport_id, rewarded, arriveDate);
 					pp.setPersistentState(PersistentState.UPDATED);
 					passportList.addPassport(pp);
@@ -60,22 +60,16 @@ public class AccountPassportsDAO {
 				account.setLastStamp(lastStamp);
 			}
 		} catch (Exception e) {
-			log.error("Could not restore completed passport data for account: " + account.getId() + " from DB", e);
+			log.error("Could not restore completed passport data for account: {} from DB.", account.getId(), e);
 		}
 	}
 
 	public static void storePassportList(int accountId, List<Passport> pList) {
 		for (Passport passport : pList) {
 			switch (passport.getPersistentState()) {
-				case NEW:
-					addPassports(accountId, passport);
-					break;
-				case UPDATE_REQUIRED:
-					updatePassport(accountId, passport);
-					break;
-				case DELETED:
-					deletePassport(accountId, passport);
-					break;
+				case NEW -> addPassports(accountId, passport);
+				case UPDATE_REQUIRED -> updatePassport(accountId, passport);
+				case DELETED -> deletePassport(accountId, passport);
 			}
 			passport.setPersistentState(PersistentState.UPDATED);
 		}
@@ -94,7 +88,7 @@ public class AccountPassportsDAO {
 			ps.setTimestamp(4, passport.getArriveDate());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			log.error("Error while adding passports for account " + accountId, e);
+			log.error("Error while adding passports for account {}.", accountId, e);
 		}
 	}
 
@@ -103,9 +97,10 @@ public class AccountPassportsDAO {
 			ps.setInt(1, passport.isRewarded() ? 1 : 0);
 			ps.setInt(2, accountId);
 			ps.setInt(3, passport.getId());
+			ps.setTimestamp(4, passport.getArriveDate());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			log.error("Failed to update existing passports for account " + accountId, e);
+			log.error("Failed to update existing passports for account {}.", accountId, e);
 		}
 	}
 
@@ -116,7 +111,7 @@ public class AccountPassportsDAO {
 			ps.setTimestamp(3, passport.getArriveDate());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			log.error("Failed to delete passports for account " + accountId, e);
+			log.error("Failed to delete passports for account {}.", accountId, e);
 		}
 	}
 
@@ -127,7 +122,7 @@ public class AccountPassportsDAO {
 			ps.setTimestamp(3, null);
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			log.error("Error while adding stamos for account " + accountId, e);
+			log.error("Error while adding stamps for account {}.", accountId, e);
 		}
 	}
 
@@ -138,15 +133,15 @@ public class AccountPassportsDAO {
 			ps.setInt(3, account.getId());
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			log.error("Failed to update existing passports for account " + account.getId(), e);
+			log.error("Failed to update existing passports for account {}.", account.getId(), e);
 		}
 	}
 
-	public static void resetAllPassports() {
-		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(RESET_LASTSTAMPS_QUERY)) {
+	public static void resetAllLastStamps() {
+		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(RESET_LAST_STAMPS_QUERY)) {
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			log.error("Failed to reset all passports", e);
+			log.error("Failed to reset all last stamps.", e);
 		}
 	}
 
@@ -154,8 +149,11 @@ public class AccountPassportsDAO {
 		try (Connection con = DatabaseFactory.getConnection(); PreparedStatement ps = con.prepareStatement(RESET_STAMPS_QUERY)) {
 			ps.executeUpdate();
 		} catch (SQLException e) {
-			log.error("Failed to reset all stamps", e);
+			log.error("Failed to reset all stamps.", e);
 		}
 	}
 
+	private static Timestamp normTs(Timestamp ts) {
+		return ts == null ? null : Timestamp.from(ts.toInstant().truncatedTo(ChronoUnit.SECONDS));
+	}
 }

@@ -12,12 +12,11 @@ import com.aionemu.gameserver.dataholders.loadingutils.adapters.LocalDateTimeAda
 import com.aionemu.gameserver.model.AttendType;
 
 /**
- * @author Alcapwnd
+ * @author Alcapwnd, SVDNESS
  */
 @XmlRootElement(name = "login_event")
 @XmlAccessorType(XmlAccessType.NONE)
 public class AtreianPassport {
-
 	@XmlAttribute(name = "id", required = true)
 	private int id;
 	@XmlAttribute(name = "active", required = true)
@@ -36,6 +35,10 @@ public class AtreianPassport {
 	private int rewardItemId;
 	@XmlAttribute(name = "reward_item_num", required = true)
 	private int rewardItemCount;
+	@XmlAttribute(name = "reward_item_expire_time")
+	private int rewardExpireMinutes;
+	@XmlAttribute(name = "reward_permit_level")
+	private int rewardPermitLevel;
 
 	public int getId() {
 		return id;
@@ -67,5 +70,13 @@ public class AtreianPassport {
 
 	public int getRewardItemCount() {
 		return rewardItemCount;
+	}
+
+	public int getRewardExpireMinutes() {
+		return rewardExpireMinutes;
+	}
+
+	public int getRewardPermitLevel() {
+		return rewardPermitLevel;
 	}
 }
