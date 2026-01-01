@@ -16,11 +16,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author ATracer, SVDNESS
  */
-
 public class PetCommonData implements Expirable {
+
 	private final int objectId;
 	private final int templateId;
 	private final int masterObjectId;
@@ -87,9 +86,8 @@ public class PetCommonData implements Expirable {
 	}
 
 	public int getBirthday() {
-		if (birthday == null) {
+		if (birthday == null)
 			return 0;
-		}
 
 		return (int) (birthday.getTime() / 1000);
 	}
@@ -158,9 +156,8 @@ public class PetCommonData implements Expirable {
 			startMoodTime = System.currentTimeMillis();
 		}
 		int points = Math.round((System.currentTimeMillis() - startMoodTime) / 1000f) + snuggleCounter * 1000;
-		if (forPacket && points > 9000) {
+		if (forPacket && points > 9000)
 			return 9000;
-		}
 		return points;
 	}
 
@@ -173,9 +170,8 @@ public class PetCommonData implements Expirable {
 	}
 
 	public final boolean increaseShuggleCounter() {
-		if (getMoodRemainingTime() > 0) {
+		if (getMoodRemainingTime() > 0)
 			return false;
-		}
 		this.moodCdStarted = System.currentTimeMillis();
 		this.snuggleCounter++;
 		return true;

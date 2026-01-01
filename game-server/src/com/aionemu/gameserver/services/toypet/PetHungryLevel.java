@@ -1,10 +1,8 @@
 package com.aionemu.gameserver.services.toypet;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author Rolandas
  */
-
 public enum PetHungryLevel {
 	HUNGRY(0),
 	CONTENT(1),

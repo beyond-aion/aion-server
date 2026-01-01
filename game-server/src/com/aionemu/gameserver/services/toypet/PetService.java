@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.TimeUnit;
 
-import com.aionemu.gameserver.model.pets.PetBuff;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -18,9 +17,11 @@ import com.aionemu.gameserver.model.gameobjects.Pet;
 import com.aionemu.gameserver.model.gameobjects.PetSpecialFunction;
 import com.aionemu.gameserver.model.gameobjects.player.PetCommonData;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.pets.PetBuff;
 import com.aionemu.gameserver.model.team.common.legacy.LootRuleType;
 import com.aionemu.gameserver.model.templates.item.actions.SkillUseAction;
-import com.aionemu.gameserver.model.templates.pet.*;
+import com.aionemu.gameserver.model.templates.pet.PetFeedResult;
+import com.aionemu.gameserver.model.templates.pet.PetFunctionType;
 import com.aionemu.gameserver.model.trade.TradeList;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ITEM_USAGE_ANIMATION;
@@ -38,19 +39,19 @@ import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.audit.AuditLogger;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author M@xx, IlBuono, xTz, Rolandas, SVDNESS
  */
-
 public class PetService {
+
 	private static final Logger log = LoggerFactory.getLogger(PetService.class);
 	private final Map<Integer, PetBuff> activeBuffs = new ConcurrentHashMap<>();
 
-	private PetService() {}
+	private PetService() {
+	}
 
 	public void renamePet(Player player, String name) {
 		name = Util.convertName(name);
-		var pet = player.getPet();
+		Pet pet = player.getPet();
 		if (pet != null) {
 			pet.getCommonData().setName(name);
 			PlayerPetsDAO.updatePetName(pet.getCommonData());
@@ -60,17 +61,16 @@ public class PetService {
 
 	public void onPlayerLogin(Player player) {
 		Collection<PetCommonData> playerPets = player.getPetList().getPets();
-		if (!playerPets.isEmpty()) {
+		if (!playerPets.isEmpty())
 			PacketSendUtility.sendPacket(player, new SM_PET(playerPets));
-		}
 	}
 
 	public void removeObject(int objectId, int count, Player player) {
-		var item = player.getInventory().getItemByObjId(objectId);
-		if (item == null || player.getPet() == null || count > item.getItemCount()) {
+		Item item = player.getInventory().getItemByObjId(objectId);
+		if (item == null || player.getPet() == null || count > item.getItemCount())
 			return;
-		}
-		var pet = player.getPet();
+
+		Pet pet = player.getPet();
 		pet.getCommonData().setCancelFeed(false);
 		PacketSendUtility.sendPacket(player, new SM_PET(1, item.getObjectId(), count, pet));
 		PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.START_FEEDING, 0, player.getObjectId()));
@@ -111,7 +111,7 @@ public class PetService {
 				PacketSendUtility.sendPacket(player, new SM_EMOTION(player, EmotionType.END_FEEDING, 0, player.getObjectId()));
 				PacketSendUtility.sendPacket(player, new SM_PET(7, 0, 0, pet));
 				ItemService.addItem(player, reward.getItem(), 1);
-				long delay = flavour.getCoolDown() * 60_000L;
+				long delay = flavour.getCooldown() * 60_000L;
 				commonData.scheduleRefeed(delay);
 				long refeedTime = System.currentTimeMillis() + delay;
 				commonData.setRefeedTime(refeedTime);
@@ -217,12 +217,10 @@ public class PetService {
 				AuditLogger.log(pet.getMaster(), "Tried to enable auto-loot on non-looting " + pet + ".");
 				return;
 			}
-			if (pet.getMaster().isInTeam()) {
-				var lootType = pet.getMaster().getLootGroupRules().getLootRule();
-				if (lootType == LootRuleType.FREEFORALL) {
-					PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03());
-					return;
-				}
+			var team = pet.getMaster().getCurrentTeam();
+			if (team != null && team.getLootGroupRules().getLootRule() == LootRuleType.FREEFORALL) {
+				PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE03());
+				return;
 			}
 			PacketSendUtility.sendPacket(pet.getMaster(), SM_SYSTEM_MESSAGE.STR_MSG_LOOTING_PET_MESSAGE01());
 		}

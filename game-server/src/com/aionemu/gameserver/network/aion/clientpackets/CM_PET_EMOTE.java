@@ -15,11 +15,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.world.World;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author ATracer, SVDNESS
  */
-
 public class CM_PET_EMOTE extends AionClientPacket {
+
 	private PetEmote emote;
 	private float x1, y1, z1, x2, y2, z2;
 	private byte h;
@@ -59,18 +58,18 @@ public class CM_PET_EMOTE extends AionClientPacket {
 
 	@Override
 	protected void runImpl() {
-		final var player = getConnection().getActivePlayer();
-		if (player == null) {
+		Player player = getConnection().getActivePlayer();
+		Pet pet = player.getPet();
+
+		if (pet == null || !pet.isSpawned()) // client sometimes just doesn't care...
 			return;
-		}
-		final var pet = player.getPet();
-		if (pet == null || !pet.isSpawned()) {
-			return;
-		}
 		if (emote == PetEmote.UNKNOWN) {
 			LoggerFactory.getLogger(getClass()).warn("{} / {} sent pet emote {} (emotionId: {}, unk2: {})", player, pet, emoteId, emotionId, unk2);
 			return;
 		}
+		// sometimes client is crazy enough to send -2.4457384E7 as z coordinate
+		// TODO (check retail) either its client bug or packet problem somewhere
+		// reproducible by flying randomly and falling from long height with fly resume
 		if (x1 < 0 || y1 < 0 || z1 < 0) {
 			LoggerFactory.getLogger(getClass()).warn("{} of {} sent {} at x:{}, y:{}, z:{}, h:{}.", pet, player, emote, x1, y1, z1, h);
 			return;

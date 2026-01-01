@@ -11,11 +11,10 @@ import com.aionemu.gameserver.model.templates.pet.PetFeedResult;
 import com.aionemu.gameserver.model.templates.pet.PetRewards;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author Rolandas, SVDNESS
  */
-
 public final class PetFeedCalculator {
+
 	static byte ITEM_MAX_LEVEL = 60;
 	static final short[] fullCounts;
 	static final byte[] itemLevels;

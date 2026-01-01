@@ -1092,15 +1092,4 @@
 		<petfunction id="27" type="DOPING"/>
 		<petstats reaction="brave" run_speed="6.0" walk_speed="1.132" height="1.0" altitude="1.5"/>
 	</pet>
-	<!-- New Pets -->
-	<pet id="970020" name="black tiger" nameid="1613981" condition_reward="188051378">
-        <petfunction id="1020035" type="BAG"/>
-        <petfunction id="17" type="WAREHOUSE" slots="35"/>
-        <petstats reaction="cowardly" run_speed="6.0" walk_speed="1.132" height="0.7"/>
-    </pet>
-	<pet id="900216" name="Puppy Knight" nameid="1613985" condition_reward="186000001">
-        <petfunction id="27" type="DOPING"/>
-        <petfunction id="46" type="FOOD"/>
-        <petstats reaction="brave" run_speed="6.0" walk_speed="1.132" height="1.0" altitude="1.5"/>
-    </pet>
 </pets>

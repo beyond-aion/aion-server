@@ -27965,6 +27965,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Activates the Cheer skill. If needed, any Aether Cherries in the Inventory are used automatically.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_START_MESSAGE() {
+		return new SM_SYSTEM_MESSAGE(1402606);
+	}
+
+	/**
+	 * Deactivates the Cheer skill.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_STOP_MESSAGE() {
+		return new SM_SYSTEM_MESSAGE(1402607);
+	}
+
+	/**
 	 * The Advance Corridor Shield has been activated.
 	 * If the protection device is destroyed, the corridor will disappear and you will return to the fortress.
 	 */
@@ -28116,6 +28130,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_LIMITED_VENDOR_CANT_OVER_GOLD() {
 		return new SM_SYSTEM_MESSAGE(1402666);
+	}
+
+	/**
+	 * You need Aether Cherries to use the Cheer skill.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_STOP_MESSAGE_03() {
+		return new SM_SYSTEM_MESSAGE(1402672);
 	}
 
 	/**
@@ -28781,16 +28802,6 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MOVE_PORTAL_ERROR_INVALID_RACE() {
 		return new SM_SYSTEM_MESSAGE(901354);
-	}
-	
-	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_START_MESSAGE() {
-		return new SM_SYSTEM_MESSAGE(1402606);
-	}
-	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_STOP_MESSAGE() {
-		return new SM_SYSTEM_MESSAGE(1402607);
-	}
-	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_STOP_MESSAGE_03() {
-		return new SM_SYSTEM_MESSAGE(1402672);
 	}
 
 	private int msgId;

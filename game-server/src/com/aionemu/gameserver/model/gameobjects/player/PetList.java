@@ -11,11 +11,10 @@ import com.aionemu.gameserver.taskmanager.tasks.ExpireTimerTask;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author ATracer
  */
-
 public class PetList {
+
 	private int lastUsedPetTemplateId;
 	private final Map<Integer, PetCommonData> pets = new LinkedHashMap<>();
 
@@ -26,16 +25,14 @@ public class PetList {
 	public void loadPets(Player player) {
 		List<PetCommonData> playerPets = PlayerPetsDAO.getPlayerPets(player);
 		PetCommonData lastUsedPet = null;
-		for (var pet : playerPets) {
+		for (PetCommonData pet : playerPets) {
 			ExpireTimerTask.getInstance().registerExpirable(pet, player);
-			pets.put(pet.getTemplateId(), pet);
-			if (lastUsedPet == null || pet.getDespawnTime().after(lastUsedPet.getDespawnTime())) {
+			pets.put(pet.getTemplateId(), pet); // the client only sends template ids for spawn/dismiss, so we cannot support multiple same pets
+			if (lastUsedPet == null || pet.getDespawnTime().after(lastUsedPet.getDespawnTime()))
 				lastUsedPet = pet;
-			}
 		}
-		if (lastUsedPet != null) {
+		if (lastUsedPet != null)
 			lastUsedPetTemplateId = lastUsedPet.getObjectId();
-		}
 	}
 
 	public Collection<PetCommonData> getPets() {
@@ -59,7 +56,7 @@ public class PetList {
 	}
 
 	public PetCommonData addPet(Player player, int petId, int decorationId, long birthday, String name, int expireTime) {
-		var petCommonData = new PetCommonData(IDFactory.getInstance().nextId(), petId, player.getObjectId(), expireTime);
+		PetCommonData petCommonData = new PetCommonData(IDFactory.getInstance().nextId(), petId, player.getObjectId(), expireTime);
 		petCommonData.setDecoration(decorationId);
 		petCommonData.setName(name);
 		petCommonData.setBirthday(new Timestamp(birthday));
@@ -74,7 +71,7 @@ public class PetList {
 	}
 
 	public PetCommonData deletePet(int templateId) {
-		var petCommonData = pets.remove(templateId);
+		PetCommonData petCommonData = pets.remove(templateId);
 		if (petCommonData != null) {
 			PlayerPetsDAO.removePlayerPet(petCommonData.getObjectId());
 			return petCommonData;

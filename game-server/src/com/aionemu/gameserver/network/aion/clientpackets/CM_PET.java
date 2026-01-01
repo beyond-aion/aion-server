@@ -18,11 +18,10 @@ import com.aionemu.gameserver.services.toypet.PetSpawnService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author M@xx, xTz, SVDNESS
  */
-
 public class CM_PET extends AionClientPacket {
+
 	private PetAction action;
 	private int templateId;
 	private int objectId;

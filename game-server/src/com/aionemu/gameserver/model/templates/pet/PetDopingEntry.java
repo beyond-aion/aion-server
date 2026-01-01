@@ -6,19 +6,21 @@ import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author Rolandas
  */
-
 @XmlType(name = "dope")
 @XmlAccessorType(XmlAccessType.NONE)
 public class PetDopingEntry {
+
 	@XmlAttribute(name = "id", required = true)
 	private int id;
+
 	@XmlAttribute(name = "usedrink", required = true)
 	private boolean usedrink;
+
 	@XmlAttribute(name = "usefood", required = true)
 	private boolean usefood;
+
 	@XmlAttribute(name = "usescroll", required = true)
 	private int usescroll;
 
@@ -37,4 +39,5 @@ public class PetDopingEntry {
 	public int getScrollsUsed() {
 		return usescroll;
 	}
+
 }

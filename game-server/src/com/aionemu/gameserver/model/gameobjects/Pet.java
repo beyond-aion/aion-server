@@ -8,11 +8,10 @@ import com.aionemu.gameserver.model.templates.pet.PetTemplate;
 import com.aionemu.gameserver.world.WorldPosition;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author ATracer
  */
-
 public class Pet extends VisibleObject {
+
 	private final Player master;
 	private final CreatureMoveController<Pet> moveController;
 	private final PetCommonData commonData;

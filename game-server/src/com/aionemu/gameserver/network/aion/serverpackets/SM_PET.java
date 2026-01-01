@@ -14,12 +14,10 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author M@xx, xTz, Rolandas, SVDNESS
  */
-
-//Фул новый пакет.
 public class SM_PET extends AionServerPacket {
+
 	private final PetAction action;
 	private Pet pet;
 	private int petObjectId;
@@ -319,11 +317,11 @@ public class SM_PET extends AionServerPacket {
 
 	private void writeAppearance(PetCommonData petCommonData) {
 		writeH(PetFunctionType.APPEARANCE.getId());
-		writeC(0);
-		writeC(0);
-		writeC(0);
+		writeC(0); // not implemented color R ?
+		writeC(0); // not implemented color G ?
+		writeC(0); // not implemented color B ?
 		writeD(petCommonData.getDecoration());
-		writeD(0);
-		writeD(0);
+		writeD(0); // wings ID if customize_attach = 1
+		writeD(0); // unk
 	}
 }

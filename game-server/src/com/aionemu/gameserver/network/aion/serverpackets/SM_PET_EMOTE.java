@@ -6,11 +6,10 @@ import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.AionServerPacket;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author ATracer, Neon, SVDNESS
  */
-
 public class SM_PET_EMOTE extends AionServerPacket {
+
 	private final Pet pet;
 	private final PetEmote emote;
 	private final int emotionId;

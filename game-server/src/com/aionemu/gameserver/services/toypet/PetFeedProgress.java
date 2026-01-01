@@ -1,11 +1,10 @@
 package com.aionemu.gameserver.services.toypet;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author Rolandas
  */
-
 public final class PetFeedProgress {
+
 	private int totalPoints = 0;
 	private short regularConsumed = 0;
 	private short lovedConsumed = 0;
@@ -77,12 +76,12 @@ public final class PetFeedProgress {
 		value |= totalPoints >> 2;
 		value <<= 6;
 		value |= lovedConsumed & 0x3F;
-		value <<= 4;
+		value <<= 4; // unk
 		return value;
 	}
 
 	public void setData(int savedData) {
-		savedData >>= 4;
+		savedData >>= 4; // drop unk
 		lovedConsumed = (short) (savedData & 0x3F);
 		savedData >>= 6;
 		totalPoints = (savedData & 0x3FFF) << 2;

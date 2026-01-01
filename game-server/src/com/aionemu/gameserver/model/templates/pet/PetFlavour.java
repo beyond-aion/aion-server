@@ -3,11 +3,7 @@ package com.aionemu.gameserver.model.templates.pet;
 import java.util.ArrayList;
 import java.util.List;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlType;
+import javax.xml.bind.annotation.*;
 
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.services.toypet.PetFeedCalculator;
@@ -15,13 +11,12 @@ import com.aionemu.gameserver.services.toypet.PetFeedProgress;
 import com.aionemu.gameserver.services.toypet.PetHungryLevel;
 
 /**
- * @author SVDNESS
- * @version 4.8 [JDK 25]
+ * @author Rolandas
  */
-
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlType(name = "PetFlavour", propOrder = {"food"})
+@XmlType(name = "PetFlavour", propOrder = { "food" })
 public class PetFlavour {
+
 	@XmlElement(required = true)
 	protected List<PetRewards> food;
 	@XmlAttribute(required = true)
@@ -41,49 +36,51 @@ public class PetFlavour {
 	}
 
 	public FoodType getFoodType(int itemId) {
-		for (var rewards : getFood()) {
-			if (DataManager.ITEM_GROUPS_DATA.isFood(itemId, rewards.getType())) {
+		for (PetRewards rewards : getFood()) {
+			if (DataManager.ITEM_GROUPS_DATA.isFood(itemId, rewards.getType()))
 				return rewards.getType();
-			}
 		}
 		return null;
 	}
 
+	/**
+	 * Returns reward details if earned, otherwise null. Updates progress automatically
+	 */
 	public PetFeedResult processFeedResult(PetFeedProgress progress, FoodType foodType, int itemLevel, int playerLevel) {
 		PetRewards rewardGroup = null;
-		for (var rewards : getFood()) {
+		for (PetRewards rewards : getFood()) {
 			if (rewards.getType() == foodType) {
 				rewardGroup = rewards;
 				break;
 			}
 		}
-		if (rewardGroup == null) {
+		if (rewardGroup == null)
 			return null;
-		}
+
 		int maxFeedCount = 1;
 		if (rewardGroup.isLoved()) {
 			progress.setIsLovedFeeded();
 		} else {
 			maxFeedCount = fullCount;
 		}
+
 		PetFeedCalculator.updatePetFeedProgress(progress, itemLevel, maxFeedCount);
-		if (progress.getHungryLevel() != PetHungryLevel.FULL) {
+		if (progress.getHungryLevel() != PetHungryLevel.FULL)
 			return null;
-		}
+
 		return PetFeedCalculator.getReward(maxFeedCount, rewardGroup, progress, playerLevel);
 	}
 
 	public boolean isLovedFood(FoodType foodType) {
 		PetRewards rewardGroup = null;
-		for (var rewards : getFood()) {
+		for (PetRewards rewards : getFood()) {
 			if (rewards.getType() == foodType) {
 				rewardGroup = rewards;
 				break;
 			}
 		}
-		if (rewardGroup == null) {
+		if (rewardGroup == null)
 			return false;
-		}
 		return rewardGroup.isLoved();
 	}
 
@@ -99,7 +96,7 @@ public class PetFlavour {
 		return lovedFoodLimit;
 	}
 
-	public int getCoolDown() {
+	public int getCooldown() {
 		return cooldown;
 	}
 }
