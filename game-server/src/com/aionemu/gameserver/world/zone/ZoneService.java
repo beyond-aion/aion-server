@@ -8,7 +8,6 @@ import org.slf4j.LoggerFactory;
 import com.aionemu.commons.scripting.ScriptManager;
 import com.aionemu.commons.scripting.classlistener.AggregatedClassListener;
 import com.aionemu.commons.scripting.classlistener.OnClassLoadUnloadListener;
-import com.aionemu.gameserver.configs.main.GeoDataConfig;
 import com.aionemu.gameserver.configs.main.WorldConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.dataholders.ZoneData;
@@ -16,7 +15,6 @@ import com.aionemu.gameserver.geoEngine.scene.Spatial;
 import com.aionemu.gameserver.model.GameEngine;
 import com.aionemu.gameserver.model.geometry.*;
 import com.aionemu.gameserver.model.siege.SiegeLocation;
-import com.aionemu.gameserver.model.siege.SiegeShield;
 import com.aionemu.gameserver.model.templates.materials.MaterialTemplate;
 import com.aionemu.gameserver.model.templates.world.WorldMapTemplate;
 import com.aionemu.gameserver.model.templates.zone.MaterialZoneTemplate;
@@ -115,8 +113,7 @@ public final class ZoneService implements GameEngine {
 					SiegeLocation siege = DataManager.SIEGE_LOCATION_DATA.getSiegeLocations().get(area.getZoneTemplate().getSiegeId().get(0));
 					if (siege != null) {
 						siege.addZone((SiegeZoneInstance) instance);
-						if (GeoDataConfig.GEO_SHIELDS_ENABLE)
-							ShieldService.getInstance().attachShield(siege);
+						ShieldService.getInstance().attachShield(siege);
 					}
 					break;
 				case ARTIFACT:
@@ -201,10 +198,8 @@ public final class ZoneService implements GameEngine {
 		ZoneHandler handler = collidableHandlers.get(zoneName);
 		if (handler == null) {
 			if (geometry.getMaterialId() == 11) {
-				if (GeoDataConfig.GEO_SHIELDS_ENABLE) {
-					handler = new SiegeShield(geometry);
-					ShieldService.getInstance().registerShield(worldId, (SiegeShield) handler);
-				} else
+				handler = ShieldService.getInstance().tryRegisterShield(worldId, geometry);
+				if (handler == null)
 					return;
 			} else {
 				MaterialTemplate template = DataManager.MATERIAL_DATA.getTemplate(geometry.getMaterialId());

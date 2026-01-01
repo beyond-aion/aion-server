@@ -485,7 +485,7 @@ public class PlayerController extends CreatureController<Player> {
 	public void onMove() {
 		super.onMove();
 		if (getOwner().isInTeam())
-			TeamMoveUpdater.getInstance().startTask(getOwner());
+			TeamMoveUpdater.getInstance().add(getOwner());
 	}
 
 	@Override
@@ -597,8 +597,8 @@ public class PlayerController extends CreatureController<Player> {
 		player.getLifeStats().synchronizeWithMaxStats();
 		player.getGameStats().updateStatsVisually();
 
-		if (player.isInTeam() && !TeamStatUpdater.getInstance().hasTask(player)) // SM_GROUP_MEMBER_INFO / SM_ALLIANCE_MEMBER_INFO task
-			TeamStatUpdater.getInstance().startTask(player);
+		if (player.isInTeam()) // SM_GROUP_MEMBER_INFO / SM_ALLIANCE_MEMBER_INFO task
+			TeamStatUpdater.getInstance().add(player);
 
 		if (player.isLegionMember()) // SM_LEGION_UPDATE_MEMBER
 			LegionService.getInstance().updateMemberInfo(player);

@@ -25,6 +25,8 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
+import com.aionemu.gameserver.skillengine.effect.EffectTemplate;
+import com.aionemu.gameserver.skillengine.effect.NoReduceSpellATKInstantEffect;
 import com.aionemu.gameserver.skillengine.model.HitType;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -341,32 +343,31 @@ public class StatFunctions {
 		return damage * (1 - adjustStatByMovementModifier(attacked, StatEnum.MAGICAL_DEFEND, attacked.getGameStats().getMagicalDefenseFor(element))/ 1450f);
 	}
 
-
-	public static float calculateMagicalSkillDamage(Creature speller, Creature target, float baseDamage, int bonus, SkillElement element,
+	public static float calculateMagicalSkillDamage(Creature effector, Creature target, float baseDamage, int bonus, EffectTemplate template,
 													boolean useMagicBoost, boolean useKnowledge) {
-		CreatureGameStats<?> sgs = speller.getGameStats();
-		CreatureGameStats<?> tgs = target.getGameStats();
+		float damage = baseDamage;
+		if (!(template instanceof NoReduceSpellATKInstantEffect)) {
+			CreatureGameStats<?> sgs = effector.getGameStats();
+			CreatureGameStats<?> tgs = target.getGameStats();
+			float magicBoost = useMagicBoost ? sgs.getMBoost().getCurrent() : 0;
+			magicBoost -= effector instanceof Trap ? 0 : tgs.getMBResist().getCurrent();
+			magicBoost = (int) Math.max(0, limit(StatEnum.BOOST_MAGICAL_SKILL, magicBoost));
+			float knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
+			damage *= (1 + (magicBoost / (knowledge * 10)));
+			damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
+		}
 
-		float magicBoost = useMagicBoost ? sgs.getMBoost().getCurrent() : 0;
-		magicBoost -= speller instanceof Trap ? 0 : tgs.getMBResist().getCurrent();
-
-		magicBoost = (int) Math.max(0, limit(StatEnum.BOOST_MAGICAL_SKILL, magicBoost));
-		float knowledge = useKnowledge ? sgs.getKnowledge().getCurrent() : 100; // this line might be wrong now
-		float damage = baseDamage * (1 + (magicBoost / (knowledge * 10)));
-
-
-		damage = sgs.getStat(StatEnum.BOOST_SPELL_ATTACK, (int) damage).getCurrent();
 		// add bonus damage
 		damage += bonus;
-		if (element != SkillElement.NONE) {
-			damage = reduceDamageByElementalResistance(target, element, damage);
+		if (template.getElement() != SkillElement.NONE && !(template instanceof NoReduceSpellATKInstantEffect)) {
+			damage = reduceDamageByElementalResistance(target, template.getElement(), damage);
 			// damage is reduced by 100 per 1000 mdef
 			damage -= target.getGameStats().getMDef().getCurrent()/10f;
 		}
 
 		if (damage < 0) {
 			damage = 0;
-		} else if (speller instanceof Npc && !(speller instanceof SummonedObject<?>)) {
+		} else if (effector instanceof Npc && !(effector instanceof SummonedObject<?>)) {
 			int rnd = (int) (damage * 0.08f);
 			damage += Rnd.get(-rnd, rnd);
 		}

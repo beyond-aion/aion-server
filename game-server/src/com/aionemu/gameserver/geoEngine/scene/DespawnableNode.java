@@ -50,24 +50,26 @@ public class DespawnableNode extends Node {
 		if (type == DespawnableType.EVENT) {
 			if (EventService.getInstance().getEventTheme().getId() != id)
 				return 0;
-		} else {
-			if (type != DespawnableType.HOUSE && !isActive(results.getInstanceId())) {
+		} else if (type == DespawnableType.SHIELD) {
+			IgnoreProperties ignoreProperties = results.getIgnoreProperties();
+			if (ignoreProperties == IgnoreProperties.ANY_RACE)
 				return 0;
-			} else if ((results.getIgnoreProperties() != null)) {
-				if (type == DespawnableType.SHIELD
-					&& (results.getIgnoreProperties().getRace() != null || results.getIgnoreProperties() == IgnoreProperties.ANY_RACE)) {
-					SiegeLocation loc = SiegeService.getInstance().getSiegeLocation(id);
-					if (loc != null) {
-						if (results.getIgnoreProperties() == IgnoreProperties.ANY_RACE
-							|| loc.getRace() != SiegeRace.BALAUR && results.getIgnoreProperties().getRace().getRaceId() == loc.getRace().getRaceId()
-							|| loc.getRace() == SiegeRace.BALAUR && results.getIgnoreProperties() == IgnoreProperties.BALAUR) {
-							return 0;
-						}
-					}
-				}
-				if (results.getIgnoreProperties().getStaticId() > 0 && results.getIgnoreProperties().getStaticId() == id) {
+			SiegeLocation loc = SiegeService.getInstance().getSiegeLocation(id);
+			if (loc != null) {
+				if (!loc.isUnderShield())
 					return 0;
+				if (ignoreProperties != null) {
+					if (loc.getRace() != SiegeRace.BALAUR && ignoreProperties.getRace().getRaceId() == loc.getRace().getRaceId())
+						return 0;
+					if (loc.getRace() == SiegeRace.BALAUR && ignoreProperties.getRace() == IgnoreProperties.BALAUR.getRace())
+						return 0;
 				}
+			}
+		} else if (type != DespawnableType.HOUSE && !isActive(results.getInstanceId())) {
+			return 0;
+		} else if (results.getIgnoreProperties() != null) {
+			if (results.getIgnoreProperties().getStaticId() > 0 && results.getIgnoreProperties().getStaticId() == id) {
+				return 0;
 			}
 		}
 		return super.collideWith(other, results);

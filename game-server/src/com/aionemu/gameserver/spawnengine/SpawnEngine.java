@@ -122,7 +122,6 @@ public class SpawnEngine {
 			if (!worldMap.isInstanceType())
 				worldMap.forEach(instance -> spawnInstance(instance, (byte) 0, instance.getOwnerId()));
 		});
-		DataManager.SPAWNS_DATA.clearTemplates();
 		printWorldSpawnStats();
 	}
 

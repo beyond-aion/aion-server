@@ -194,6 +194,8 @@ public class GameServer {
 	 * Starts servers for connection with aion client and login\chat server.
 	 */
 	private static NioServer initNioServer() {
+		if (NetworkConfig.NIO_READ_WRITE_THREADS > 1 && !NetworkConfig.NIO_READ_WRITE_THREADS_UNSAFE_ALLOW)
+			throw new Error("gameserver.network.nio.threads must not exceed 1 (the game server is not thread-safe)");
 		NioServer nioServer = new NioServer(NetworkConfig.NIO_READ_WRITE_THREADS,
 			new ServerCfg(NetworkConfig.CLIENT_SOCKET_ADDRESS, "Aion game clients", new GameConnectionFactoryImpl()));
 		nioServer.connect(ThreadPoolManager.getInstance());

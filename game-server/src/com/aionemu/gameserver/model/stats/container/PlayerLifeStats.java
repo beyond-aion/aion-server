@@ -59,9 +59,8 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	private void sendGroupPacketUpdate() {
-		if (owner.isInTeam() && !TeamStatUpdater.getInstance().hasTask(owner)) {
-			TeamStatUpdater.getInstance().startTask(owner);
-		}
+		if (owner.isInTeam())
+			TeamStatUpdater.getInstance().add(owner);
 	}
 
 	@Override
@@ -94,11 +93,11 @@ public class PlayerLifeStats extends CreatureLifeStats<Player> {
 	}
 
 	private void sendHpPacketUpdate() {
-		PacketSendUtility.sendPacket(owner, new SM_STATUPDATE_HP(currentHp, getMaxHp()));
+		PacketSendUtility.sendPacket(owner, new SM_STATUPDATE_HP(getCurrentHp(), getMaxHp()));
 	}
 
 	private void sendMpPacketUpdate() {
-		PacketSendUtility.sendPacket(owner, new SM_STATUPDATE_MP(currentMp, getMaxMp()));
+		PacketSendUtility.sendPacket(owner, new SM_STATUPDATE_MP(getCurrentMp(), getMaxMp()));
 	}
 
 	/**

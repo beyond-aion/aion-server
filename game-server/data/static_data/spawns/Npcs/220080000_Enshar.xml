@@ -3615,10 +3615,6 @@
 		<spawn npc_id="804931" respawn_time="295">
 			<spot x="1771.27002" y="2578.47998" z="298.70438" h="67"/>
 		</spawn>
-		<!-- jormungand bridge of chance gatekeeper -->
-		<spawn npc_id="833004" respawn_time="295">
-			<spot x="487.04999" y="88.20000" z="199.67188" h="30"/>
-		</spawn>
 		<!-- joviana -->
 		<spawn npc_id="804988" respawn_time="295">
 			<spot x="1468.41003" y="1767.88000" z="329.06625"/>

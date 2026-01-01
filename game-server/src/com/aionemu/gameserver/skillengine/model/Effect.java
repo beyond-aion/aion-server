@@ -318,8 +318,10 @@ public class Effect implements StatOwner {
 				// effected is about to die
 				if (!effected.isDead())
 					effected.getLifeStats().setKillingBlow(er.getValue());
+				effectedHp = 0;
+			} else {
+				effectedHp = Math.max(1, (int) (100f * value / effected.getLifeStats().getMaxHp()));
 			}
-			effectedHp = (int) (100f * value / effected.getLifeStats().getMaxHp());
 		}
 		synchronized (reservedEffects) {
 			reservedEffects.add(er);
@@ -472,16 +474,8 @@ public class Effect implements StatOwner {
 		if (skillTemplate.getEffects() == null)
 			return;
 
-		if (effected != null) {
-			for (EffectTemplate template : getEffectTemplates()) {
-				if (effected.getEffectController().isConflicting(this, template)) {
-					if (!isPassive() && getTargetSlot() != SkillTargetSlot.DEBUFF) {
-						setEffectResult(EffectResult.CONFLICT);
-						break;
-					}
-				}
-			}
-		}
+		if (effected != null && effected.getEffectController().isConflicting(this))
+			setEffectResult(EffectResult.CONFLICT);
 		if (effectResult != EffectResult.CONFLICT) {
 			for (EffectTemplate template : getEffectTemplates()) {
 				template.calculate(this);

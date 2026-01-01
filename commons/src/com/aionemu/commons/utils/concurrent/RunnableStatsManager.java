@@ -5,16 +5,7 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.text.NumberFormat;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.EnumSet;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Locale;
-import java.util.Map;
-import java.util.concurrent.locks.ReentrantLock;
+import java.util.*;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -79,8 +70,6 @@ public final class RunnableStatsManager {
 
 	private static final class MethodStat {
 
-		private final ReentrantLock lock = new ReentrantLock();
-
 		private final String className;
 		private final String methodName;
 
@@ -94,16 +83,11 @@ public final class RunnableStatsManager {
 			this.methodName = methodName;
 		}
 
-		private void handleStats(long runTime) {
-			lock.lock();
-			try {
-				count++;
-				total += runTime;
-				min = Math.min(min, runTime);
-				max = Math.max(max, runTime);
-			} finally {
-				lock.unlock();
-			}
+		private synchronized void handleStats(long runTime) {
+			count++;
+			total += runTime;
+			min = Math.min(min, runTime);
+			max = Math.max(max, runTime);
 		}
 	}
 

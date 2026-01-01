@@ -261,6 +261,10 @@ public abstract class EffectTemplate {
 		return value + delta * effect.getSkillLevel();
 	}
 
+	public int calculateCritAddDmg(Effect effect) {
+		return critAddDmg2 + critAddDmg1 * effect.getSkillLevel();
+	}
+
 	/**
 	 * Calculate effect result
 	 *

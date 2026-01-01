@@ -5,6 +5,7 @@ import java.io.IOException;
 import java.nio.file.*;
 import java.nio.file.attribute.BasicFileAttributes;
 import java.util.*;
+import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.atomic.AtomicReference;
 import java.util.stream.Collectors;
 import java.util.stream.Stream;
@@ -15,7 +16,6 @@ import javax.xml.bind.annotation.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import com.aionemu.commons.taskmanager.AbstractLockManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.gameobjects.Gatherable;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -43,7 +43,7 @@ import com.aionemu.gameserver.world.WorldType;
 @XmlRootElement(name = "spawns")
 @XmlType(namespace = "", name = "SpawnsData")
 @XmlAccessorType(XmlAccessType.NONE)
-public class SpawnsData extends AbstractLockManager {
+public class SpawnsData {
 
 	private static final Logger log = LoggerFactory.getLogger(SpawnsData.class);
 
@@ -51,7 +51,7 @@ public class SpawnsData extends AbstractLockManager {
 	private List<SpawnMap> templates;
 
 	@XmlTransient
-	private final Map<Integer, Map<Integer, List<SpawnGroup>>> allSpawnMaps = new HashMap<>();
+	private final Map<Integer, Map<Integer, List<SpawnGroup>>> allSpawnMaps = new ConcurrentHashMap<>();
 	@XmlTransient
 	private final Map<Integer, List<SpawnGroup>> baseSpawnMaps = new HashMap<>();
 	@XmlTransient
@@ -65,149 +65,121 @@ public class SpawnsData extends AbstractLockManager {
 	@XmlTransient
 	private final Map<Integer, List<SpawnGroup>> ahserionSpawnMaps = new HashMap<>(); // Ahserion's flight
 
-	public void afterUnmarshal(Unmarshaller u, Object parent) {
+	void afterUnmarshal(Unmarshaller u, Object parent) {
 		for (SpawnMap map : templates) {
-			Map<Integer, List<SpawnGroup>> mapSpawns = allSpawnMaps.get(map.getMapId());
-			writeLock();
-			try {
-				if (mapSpawns == null) {
-					mapSpawns = new HashMap<>();
-					allSpawnMaps.put(map.getMapId(), mapSpawns);
-				}
+			addRegularSpawns(map);
+			addBaseSpawns(map);
+			addRiftSpawns(map);
+			addSiegeSpawns(map);
+			addVortexSpawns(map);
+			addMercenarySpawns(map);
+			addAhserionSpawns(map);
+		}
+		if (!(parent instanceof EventTemplate))
+			templates = null;
+	}
 
-				List<Integer> customs = new ArrayList<>();
-				for (Spawn spawn : map.getSpawns()) {
-					if (customs.contains(spawn.getNpcId()))
+	public void addRegularSpawns(SpawnMap map) {
+		allSpawnMaps.compute(map.getMapId(), (_, mapSpawns) -> {
+			if (mapSpawns == null)
+				mapSpawns = new HashMap<>();
+			List<Integer> customs = new ArrayList<>();
+			for (Spawn spawn : map.getSpawns()) {
+				if (customs.contains(spawn.getNpcId()))
+					continue;
+				if (spawn.isCustom() && spawn.getEventTemplate() == null) { // custom event spawns are handled in Event class
+					mapSpawns.remove(spawn.getNpcId());
+					customs.add(spawn.getNpcId());
+				}
+				List<SpawnGroup> spawnGroups = mapSpawns.computeIfAbsent(spawn.getNpcId(), _ -> new ArrayList<>(1));
+				spawnGroups.add(new SpawnGroup(map.getMapId(), spawn));
+			}
+			return mapSpawns;
+		});
+	}
+
+	private void addBaseSpawns(SpawnMap map) {
+		for (BaseSpawn baseSpawn : map.getBaseSpawns()) {
+			int baseId = baseSpawn.getId();
+			List<SpawnGroup> baseSpawns = baseSpawnMaps.computeIfAbsent(baseId, _ -> new ArrayList<>());
+			for (BaseSpawn.BaseOccupierTemplate simpleRace : baseSpawn.getOccupierTemplates()) {
+				for (Spawn spawn : simpleRace.getSpawns())
+					baseSpawns.add(new SpawnGroup(map.getMapId(), spawn, baseId, simpleRace.getOccupier()));
+			}
+		}
+	}
+
+	private void addRiftSpawns(SpawnMap map) {
+		for (RiftSpawn rift : map.getRiftSpawns()) {
+			List<SpawnGroup> riftSpawns = riftSpawnMaps.computeIfAbsent(rift.getId(), _ -> new ArrayList<>());
+			for (Spawn spawn : rift.getSpawns())
+				riftSpawns.add(new SpawnGroup(map.getMapId(), spawn, rift.getId()));
+		}
+	}
+
+	private void addSiegeSpawns(SpawnMap map) {
+		for (SiegeSpawn siegeSpawn : map.getSiegeSpawns()) {
+			int siegeId = siegeSpawn.getSiegeId();
+			List<SpawnGroup> siegeSpawns = siegeSpawnMaps.computeIfAbsent(siegeId, _ -> new ArrayList<>());
+			for (SiegeSpawn.SiegeRaceTemplate race : siegeSpawn.getSiegeRaceTemplates()) {
+				for (SiegeSpawn.SiegeRaceTemplate.SiegeModTemplate mod : race.getSiegeModTemplates()) {
+					if (mod.getSpawns() == null)
 						continue;
-					if (spawn.isCustom() && spawn.getEventTemplate() == null) { // custom event spawns are handled in Event class
-						mapSpawns.remove(spawn.getNpcId());
-						customs.add(spawn.getNpcId());
-					}
-					List<SpawnGroup> spawnGroups = mapSpawns.get(spawn.getNpcId());
-					if (spawnGroups == null) {
-						spawnGroups = new ArrayList<>(1);
-						mapSpawns.put(spawn.getNpcId(), spawnGroups);
-					}
-					spawnGroups.add(new SpawnGroup(map.getMapId(), spawn));
-				}
-			} finally {
-				writeUnlock();
-			}
-
-			for (BaseSpawn baseSpawn : map.getBaseSpawns()) {
-				int baseId = baseSpawn.getId();
-				if (!baseSpawnMaps.containsKey(baseId)) {
-					baseSpawnMaps.put(baseId, new ArrayList<>());
-				}
-				for (BaseSpawn.BaseOccupierTemplate simpleRace : baseSpawn.getOccupierTemplates()) {
-					for (Spawn spawn : simpleRace.getSpawns()) {
-						SpawnGroup spawnGroup = new SpawnGroup(map.getMapId(), spawn, baseId, simpleRace.getOccupier());
-						baseSpawnMaps.get(baseId).add(spawnGroup);
-					}
-				}
-			}
-
-			for (RiftSpawn rift : map.getRiftSpawns()) {
-				int id = rift.getId();
-				if (!riftSpawnMaps.containsKey(id)) {
-					riftSpawnMaps.put(id, new ArrayList<>());
-				}
-				for (Spawn spawn : rift.getSpawns()) {
-					SpawnGroup spawnGroup = new SpawnGroup(map.getMapId(), spawn, id);
-					riftSpawnMaps.get(id).add(spawnGroup);
-				}
-			}
-
-			for (SiegeSpawn SiegeSpawn : map.getSiegeSpawns()) {
-				int siegeId = SiegeSpawn.getSiegeId();
-				if (!siegeSpawnMaps.containsKey(siegeId)) {
-					siegeSpawnMaps.put(siegeId, new ArrayList<>());
-				}
-				for (SiegeSpawn.SiegeRaceTemplate race : SiegeSpawn.getSiegeRaceTemplates()) {
-					for (SiegeSpawn.SiegeRaceTemplate.SiegeModTemplate mod : race.getSiegeModTemplates()) {
-						if (mod == null || mod.getSpawns() == null) {
-							continue;
-						}
-						for (Spawn spawn : mod.getSpawns()) {
-							SpawnGroup spawnGroup = new SpawnGroup(map.getMapId(), spawn, siegeId, race.getSiegeRace(), mod.getSiegeModType());
-							siegeSpawnMaps.get(siegeId).add(spawnGroup);
-						}
-					}
-				}
-			}
-
-			for (VortexSpawn VortexSpawn : map.getVortexSpawns()) {
-				int id = VortexSpawn.getId();
-				if (!vortexSpawnMaps.containsKey(id)) {
-					vortexSpawnMaps.put(id, new ArrayList<>());
-				}
-				for (VortexSpawn.VortexStateTemplate type : VortexSpawn.getSiegeModTemplates()) {
-					if (type == null || type.getSpawns() == null) {
-						continue;
-					}
-					for (Spawn spawn : type.getSpawns()) {
-						SpawnGroup spawnGroup = new SpawnGroup(map.getMapId(), spawn, id, type.getStateType());
-						vortexSpawnMaps.get(id).add(spawnGroup);
-					}
-				}
-			}
-
-			for (MercenarySpawn mercenarySpawn : map.getMercenarySpawns()) {
-				int id = mercenarySpawn.getSiegeId();
-				mercenarySpawns.put(id, mercenarySpawn);
-				for (MercenaryRace mrace : mercenarySpawn.getMercenaryRaces()) {
-					for (MercenaryZone mzone : mrace.getMercenaryZones()) {
-						mzone.setWorldId(map.getMapId());
-						mzone.setSiegeId(mercenarySpawn.getSiegeId());
-					}
-
-				}
-			}
-
-			for (AhserionsFlightSpawn ahserionSpawn : map.getAhserionSpawns()) {
-				int teamId = ahserionSpawn.getFaction().ordinal();
-				if (!ahserionSpawnMaps.containsKey(teamId)) {
-					ahserionSpawnMaps.put(teamId, new ArrayList<>());
-				}
-
-				for (AhserionsFlightSpawn.AhserionStageSpawnTemplate stageTemplate : ahserionSpawn.getStageSpawnTemplate()) {
-					if (stageTemplate == null || stageTemplate.getSpawns() == null)
-						continue;
-
-					for (Spawn spawn : stageTemplate.getSpawns()) {
-						SpawnGroup spawnGroup = new SpawnGroup(map.getMapId(), spawn, stageTemplate.getStage(), ahserionSpawn.getFaction());
-						ahserionSpawnMaps.get(teamId).add(spawnGroup);
-					}
+					for (Spawn spawn : mod.getSpawns())
+						siegeSpawns.add(new SpawnGroup(map.getMapId(), spawn, siegeId, race.getSiegeRace(), mod.getSiegeModType()));
 				}
 			}
 		}
 	}
 
-	public void clearTemplates() {
-		templates = null;
+	private void addVortexSpawns(SpawnMap map) {
+		for (VortexSpawn vortexSpawn : map.getVortexSpawns()) {
+			int id = vortexSpawn.getId();
+			List<SpawnGroup> vortexSpawns = vortexSpawnMaps.computeIfAbsent(id, _ -> new ArrayList<>());
+			for (VortexSpawn.VortexStateTemplate type : vortexSpawn.getStateTemplates()) {
+				for (Spawn spawn : type.getSpawns())
+					vortexSpawns.add(new SpawnGroup(map.getMapId(), spawn, id, type.getStateType()));
+			}
+		}
+	}
+
+	private void addMercenarySpawns(SpawnMap map) {
+		for (MercenarySpawn mercenarySpawn : map.getMercenarySpawns()) {
+			int id = mercenarySpawn.getSiegeId();
+			mercenarySpawns.put(id, mercenarySpawn);
+			for (MercenaryRace mrace : mercenarySpawn.getMercenaryRaces()) {
+				for (MercenaryZone mzone : mrace.getMercenaryZones()) {
+					mzone.setWorldId(map.getMapId());
+					mzone.setSiegeId(mercenarySpawn.getSiegeId());
+				}
+			}
+		}
+	}
+
+	private void addAhserionSpawns(SpawnMap map) {
+		for (AhserionsFlightSpawn ahserionSpawn : map.getAhserionSpawns()) {
+			int teamId = ahserionSpawn.getFaction().ordinal();
+			List<SpawnGroup> ahserionSpawns = ahserionSpawnMaps.computeIfAbsent(teamId, _ -> new ArrayList<>());
+			for (AhserionsFlightSpawn.AhserionStageSpawnTemplate stageTemplate : ahserionSpawn.getStageSpawnTemplate()) {
+				if (stageTemplate.getSpawns() == null)
+					continue;
+				for (Spawn spawn : stageTemplate.getSpawns())
+					ahserionSpawns.add(new SpawnGroup(map.getMapId(), spawn, stageTemplate.getStage(), ahserionSpawn.getFaction()));
+			}
+		}
 	}
 
 	public List<SpawnGroup> getSpawnsByWorldId(int worldId) {
-		readLock();
-		try {
-			Map<Integer, List<SpawnGroup>> spawnGroupsByNpcId = allSpawnMaps.get(worldId);
-			if (spawnGroupsByNpcId == null)
-				return Collections.emptyList();
-			return spawnGroupsByNpcId.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
-		} finally {
-			readUnlock();
-		}
+		Map<Integer, List<SpawnGroup>> spawnGroupsByNpcId = allSpawnMaps.get(worldId);
+		if (spawnGroupsByNpcId == null)
+			return Collections.emptyList();
+		return spawnGroupsByNpcId.values().stream().flatMap(Collection::stream).collect(Collectors.toList());
 	}
 
 	public List<SpawnGroup> getSpawnsForNpc(int worldId, int npcId) {
-		readLock();
-		try {
-			Map<Integer, List<SpawnGroup>> spawnGroupsByNpcId = allSpawnMaps.get(worldId);
-			List<SpawnGroup> spawnGroups = spawnGroupsByNpcId == null ? null : spawnGroupsByNpcId.get(npcId);
-			return spawnGroups == null ? Collections.emptyList() : spawnGroups;
-		} finally {
-			readUnlock();
-		}
+		Map<Integer, List<SpawnGroup>> spawnGroupsByNpcId = allSpawnMaps.get(worldId);
+		List<SpawnGroup> spawnGroups = spawnGroupsByNpcId == null ? null : spawnGroupsByNpcId.get(npcId);
+		return spawnGroups == null ? Collections.emptyList() : spawnGroups;
 	}
 
 	public List<SpawnGroup> getBaseSpawnsByLocId(int id) {
@@ -298,9 +270,7 @@ public class SpawnsData extends AbstractLockManager {
 		spawn.setY(spot.getY());
 		spawn.setZ(spot.getZ());
 		spawn.setHeading(spot.getHeading());
-		templates = data.templates;
-		afterUnmarshal(null, null);
-		clearTemplates();
+		addRegularSpawns(spawnMap);
 		return true;
 	}
 
@@ -465,29 +435,12 @@ public class SpawnsData extends AbstractLockManager {
 		return spawnSpots.isEmpty() ? null : toSpawnSearchResult(worldId, spawnSpots.get(0));
 	}
 
-	/**
-	 * Used by Event Service to add additional spawns
-	 * 
-	 * @param spawnMap
-	 *          templates to add
-	 */
-	public void addNewSpawnMap(SpawnMap spawnMap) {
-		if (templates == null)
-			templates = new ArrayList<>();
-		templates.add(spawnMap);
-	}
-
 	public void removeEventSpawnObjects(EventTemplate eventTemplate) {
-		writeLock();
-		try {
-			allSpawnMaps.values().forEach(spawnGroupsByNpcId -> {
-				Collection<List<SpawnGroup>> allSpawnGroups = spawnGroupsByNpcId.values();
-				allSpawnGroups.forEach(spawnGroups -> spawnGroups.removeIf(spawnGroup -> eventTemplate.equals(spawnGroup.getEventTemplate())));
-				allSpawnGroups.removeIf(List::isEmpty);
-			});
-		} finally {
-			writeUnlock();
-		}
+		allSpawnMaps.values().forEach(spawnGroupsByNpcId -> {
+			Collection<List<SpawnGroup>> allSpawnGroups = spawnGroupsByNpcId.values();
+			allSpawnGroups.forEach(spawnGroups -> spawnGroups.removeIf(spawnGroup -> eventTemplate.equals(spawnGroup.getEventTemplate())));
+			allSpawnGroups.removeIf(List::isEmpty);
+		});
 	}
 
 	public List<SpawnMap> getTemplates() {

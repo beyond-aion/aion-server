@@ -65,7 +65,6 @@ public class CM_TELEPORT_SELECT extends AionClientPacket {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_CANNOT_MOVE_TO_AIRPORT_NO_ROUTE());
 			return;
 		}
-		TeleportService.teleport(player, location,
-			npc.getName().toLowerCase().contains("statue") ? TeleportAnimation.JUMP_IN_STATUE : TeleportAnimation.JUMP_IN);
+		TeleportService.teleport(player, location, npc.hasStatic() ? TeleportAnimation.JUMP_IN_STATUE : TeleportAnimation.JUMP_IN);
 	}
 }

@@ -21,7 +21,7 @@ public class _1908UlaguruSpeaks extends AbstractQuestHandler {
 	public void register() {
 		qe.registerQuestNpc(203864).addOnQuestStart(questId);
 		qe.registerQuestNpc(203864).addOnTalkEvent(questId);
-		qe.registerQuestNpc(204120).addOnTalkEvent(questId);
+		qe.registerQuestNpc(203890).addOnTalkEvent(questId);
 	}
 
 	@Override

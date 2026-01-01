@@ -2,8 +2,6 @@ package com.aionemu.gameserver.ai;
 
 import java.util.Arrays;
 import java.util.Objects;
-import java.util.concurrent.locks.Lock;
-import java.util.concurrent.locks.ReentrantLock;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.event.AIEventLog;
@@ -33,7 +31,7 @@ public abstract class AbstractAI<T extends Creature> implements AI {
 	private final T owner;
 	private AIState currentState;
 	private AISubState currentSubState;
-	private final Lock thinkLock = new ReentrantLock();
+	private boolean thinking;
 
 	private boolean logging = false;
 
@@ -174,12 +172,14 @@ public abstract class AbstractAI<T extends Creature> implements AI {
 		return owner.isDead();
 	}
 
-	public final boolean tryLockThink() {
-		return thinkLock.tryLock();
+	public synchronized final boolean setThinking() {
+		if (thinking)
+			return false;
+		return thinking = true;
 	}
 
-	public final void unlockThink() {
-		thinkLock.unlock();
+	public synchronized final void unsetThinking() {
+		thinking = false;
 	}
 
 	@Override

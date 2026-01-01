@@ -88,9 +88,7 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		} else {
 			writeB(new byte[12]);
 		}
-		int maxHp = player.getLifeStats().getMaxHp();
-		int currHp = player.getLifeStats().getCurrentHp();
-		writeC(100 * currHp / maxHp);// %hp
+		writeC(player.getLifeStats().getHpPercentage());
 		writeH(pcd.getDp());// current dp
 		writeC(0x00);// unk (0x00)
 

@@ -4034,7 +4034,7 @@
 			<maintainable>80715 80716 80717 80718 80719 80720 80721</maintainable>
 		</quests>
 		<event_drops>
-			<gd_rule rule_name="Ice Festival Ice Queen" chance="100">
+			<gd_rule rule_name="Ice Festival Ice Queen" chance="100" member_limit="48">
 				<gd_npcs>
 					<gd_npc npc_id="237174" /><!-- Ice Queen -->
 				</gd_npcs>
