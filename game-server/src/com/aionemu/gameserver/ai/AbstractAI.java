@@ -8,6 +8,7 @@ import com.aionemu.gameserver.ai.event.AIEventLog;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.handler.FreezeEventHandler;
 import com.aionemu.gameserver.configs.main.AIConfig;
+import com.aionemu.gameserver.controllers.attack.AggroTarget;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.animations.AttackHandAnimation;
 import com.aionemu.gameserver.model.animations.AttackTypeAnimation;
@@ -130,9 +131,10 @@ public abstract class AbstractAI<T extends Creature> implements AI {
 			}
 			try {
 				handleCreatureEvent(event, creature);
-			} catch (StackOverflowError e) {
+			} catch (StackOverflowError | BootstrapMethodError e) {
+				Creature mostHated = getOwner().getAggroList().getTarget(AggroTarget.MOST_HATED);
 				StackOverflowError error = new StackOverflowError(
-					"Aborted never ending AI event loop for " + getOwner() + " with AIEventType." + event + " and target: " + creature);
+					"Aborted never ending AI event loop for " + getOwner() + " with AIEventType." + event + " and target: " + creature + ", most hated: " + mostHated);
 				error.setStackTrace(Arrays.copyOfRange(e.getStackTrace(), Math.max(e.getStackTrace().length - 42, 0), e.getStackTrace().length));
 				throw error;
 			}

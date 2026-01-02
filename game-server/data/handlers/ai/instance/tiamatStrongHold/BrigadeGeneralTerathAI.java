@@ -120,7 +120,6 @@ public class BrigadeGeneralTerathAI extends AggressiveNpcAI implements HpPhases.
 				getOwner().setTarget(creature);
 				getOwner().getGameStats().renewLastAttackTime();
 				getOwner().getGameStats().renewLastAttackedTime();
-				getOwner().getGameStats().renewLastChangeTargetTime();
 				getOwner().getGameStats().renewLastSkillTime();
 				setStateIfNot(AIState.WALKING);
 				getOwner().setState(CreatureState.ACTIVE, true);

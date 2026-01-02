@@ -92,7 +92,6 @@ public class GoldenEyeMantutuAI extends AggressiveNpcAI {
 					getOwner().setTarget(creature);
 					getOwner().getGameStats().renewLastAttackTime();
 					getOwner().getGameStats().renewLastAttackedTime();
-					getOwner().getGameStats().renewLastChangeTargetTime();
 					getOwner().getGameStats().renewLastSkillTime();
 					setStateIfNot(AIState.FIGHT);
 					handleMoveValidate();

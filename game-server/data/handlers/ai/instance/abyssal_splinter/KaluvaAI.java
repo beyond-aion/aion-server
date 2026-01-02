@@ -58,7 +58,6 @@ public class KaluvaAI extends SummonerAI {
 					getOwner().setTarget(creature);
 					getOwner().getGameStats().renewLastAttackTime();
 					getOwner().getGameStats().renewLastAttackedTime();
-					getOwner().getGameStats().renewLastChangeTargetTime();
 					getOwner().getGameStats().renewLastSkillTime();
 				}
 				setStateIfNot(AIState.FIGHT);

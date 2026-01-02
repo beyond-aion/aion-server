@@ -119,7 +119,7 @@ public class EmpoweredAgent extends AbstractSiegeProtectorAI implements HpPhases
 			getOwner().getEffectController().removeEffect(21779);
 			getOwner().getLifeStats().setCurrentHpPercent(100);
 			getAggroList().addHate(otherAgent, 100_000_000);
-			onReactiveThinking(otherAgent);
+			startFight(otherAgent);
 		} else {
 			activationTask = ThreadPoolManager.getInstance().schedule(this::tryActivating, 5000);
 		}
@@ -133,13 +133,10 @@ public class EmpoweredAgent extends AbstractSiegeProtectorAI implements HpPhases
 		};
 	}
 
-	private void onReactiveThinking(Npc otherAgent) {
+	private void startFight(Npc otherAgent) {
 		canThink = true;
+		getOwner().getGameStats().resetFightStats();
 		getOwner().setTarget(otherAgent);
-		getOwner().getGameStats().renewLastAttackTime();
-		getOwner().getGameStats().renewLastAttackedTime();
-		getOwner().getGameStats().renewLastChangeTargetTime();
-		getOwner().getGameStats().renewLastSkillTime();
 		setStateIfNot(AIState.FIGHT);
 		think();
 		getOwner().setState(CreatureState.ACTIVE, true);
@@ -149,7 +146,7 @@ public class EmpoweredAgent extends AbstractSiegeProtectorAI implements HpPhases
 	}
 
 	private void resetPlayerHate() {
-		getAggroList().stream().filter(info -> info.getAttacker() instanceof Player).forEach(info -> info.setHate(0));
+		getAggroList().stream().filter(info -> info.getAttacker().getMaster() instanceof Player).forEach(info -> info.setHate(0));
 	}
 
 	private void spawnFlag() {
