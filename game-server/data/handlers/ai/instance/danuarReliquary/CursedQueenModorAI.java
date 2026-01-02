@@ -11,7 +11,6 @@ import com.aionemu.gameserver.geoEngine.math.Vector3f;
 import com.aionemu.gameserver.model.animations.AttackHandAnimation;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.skill.NpcSkillEntry;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_HEADING_UPDATE;
 import com.aionemu.gameserver.skillengine.model.Effect;
@@ -292,13 +291,8 @@ public class CursedQueenModorAI extends AggressiveNpcAI implements HpPhases.Phas
 	}
 
 	private boolean shouldUsePlatformSkills(int skillLevel) {
-		for (NpcSkillEntry skill : getOwner().getQueuedSkills()) {
-			// if another teleport skill(=21165) is queued with level != 10 -> next stage is ready so stop switching platforms
-			if (skill.getSkillLevel() != 10 && skill.getSkillId() == 21165 && skill.getSkillLevel() != skillLevel) {
-				return false;
-			}
-		}
-		return true;
+		// if another teleport skill(=21165) is queued with level != 10 -> next stage is ready so stop switching platforms
+		return !getOwner().hasQueuedSkill(skill -> skill.getSkillId() == 21165 && skill.getSkillLevel() != 10 && skill.getSkillLevel() != skillLevel);
 	}
 
 	private int getRealCloneId() {

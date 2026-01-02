@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.model.gameobjects;
 
+import java.util.LinkedList;
 import java.util.Objects;
-import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.Queue;
+import java.util.function.Predicate;
 
 import com.aionemu.gameserver.controllers.NpcController;
 import com.aionemu.gameserver.controllers.movement.NpcMoveController;
@@ -43,7 +45,7 @@ public class Npc extends Creature {
 
 	private WalkerGroup walkerGroup;
 	private NpcSkillList skillList;
-	private ConcurrentLinkedQueue<NpcSkillEntry> queuedSkills;
+	private final Queue<NpcSkillEntry> queuedSkills = new LinkedList<>();
 	private WalkerGroupShift walkerGroupShift;
 	private String masterName;
 	private int creatorId = 0;
@@ -58,7 +60,6 @@ public class Npc extends Creature {
 		controller.setOwner(this);
 		moveController = new NpcMoveController(this);
 		skillList = new NpcSkillList(this);
-		queuedSkills = new ConcurrentLinkedQueue<>();
 		setupStatContainers();
 	}
 
@@ -130,24 +131,48 @@ public class Npc extends Creature {
 		return skillList;
 	}
 
-	public ConcurrentLinkedQueue<NpcSkillEntry> getQueuedSkills() {
-		return queuedSkills;
+	public NpcSkillEntry getNextQueuedSkill() {
+		synchronized (queuedSkills) {
+			return queuedSkills.peek();
+		}
+	}
+
+	public boolean hasQueuedSkill(Predicate<NpcSkillEntry> filter) {
+		synchronized (queuedSkills) {
+			return  queuedSkills.stream().anyMatch(filter);
+		}
+	}
+
+	public void removeNextQueuedSkill(NpcSkillEntry skill) {
+		synchronized (queuedSkills) {
+			if (queuedSkills.peek() == skill) {
+				queuedSkills.poll();
+			}
+		}
 	}
 
 	public void clearQueuedSkills() {
-		queuedSkills.clear();
+		synchronized (queuedSkills) {
+			queuedSkills.clear();
+		}
+	}
+
+	public void queueSkill(NpcSkillEntry skill) {
+		synchronized (queuedSkills) {
+			queuedSkills.offer(skill);
+		}
 	}
 
 	public void queueSkill(int skillId, int level) {
-		queuedSkills.offer(new NpcSkillTemplateEntry(new QueuedNpcSkillTemplate(skillId, level)));
+		queueSkill(new NpcSkillTemplateEntry(new QueuedNpcSkillTemplate(skillId, level)));
 	}
 
 	public void queueSkill(int skillId, int level, int nextSkillTime) {
-		queuedSkills.offer(new NpcSkillTemplateEntry(new QueuedNpcSkillTemplate(skillId, level, nextSkillTime, NpcSkillTargetAttribute.MOST_HATED)));
+		queueSkill(new NpcSkillTemplateEntry(new QueuedNpcSkillTemplate(skillId, level, nextSkillTime, NpcSkillTargetAttribute.MOST_HATED)));
 	}
 
 	public void queueSkill(int skillId, int level, int nextSkillTime, NpcSkillTargetAttribute npcSkillTargetAttribute) {
-		queuedSkills.offer(new NpcSkillTemplateEntry(new QueuedNpcSkillTemplate(skillId, level, nextSkillTime, npcSkillTargetAttribute)));
+		queueSkill(new NpcSkillTemplateEntry(new QueuedNpcSkillTemplate(skillId, level, nextSkillTime, npcSkillTargetAttribute)));
 	}
 
 	public boolean isWalker() {

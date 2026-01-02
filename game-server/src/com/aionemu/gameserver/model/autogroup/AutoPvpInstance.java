@@ -22,21 +22,16 @@ public class AutoPvpInstance extends AutoInstance {
 	}
 
 	@Override
-	public AGQuestion addLookingForParty(LookingForParty lookingForParty) {
-		writeLock();
-		try {
-			if (isRegistrationDisabled(lookingForParty) || registeredAGPlayers.size() >= getMaxPlayers())
-				return AGQuestion.FAILED;
+	public synchronized AGQuestion addLookingForParty(LookingForParty lookingForParty) {
+		if (isRegistrationDisabled(lookingForParty) || registeredAGPlayers.size() >= getMaxPlayers())
+			return AGQuestion.FAILED;
 
-			List<AGPlayer> playersByRace = getAGPlayersByRace(lookingForParty.getRace());
-			if (lookingForParty.getMembers().size() + playersByRace.size() > getMaxPlayers(lookingForParty.getRace()))
-				return AGQuestion.FAILED;
+		List<AGPlayer> playersByRace = getAGPlayersByRace(lookingForParty.getRace());
+		if (lookingForParty.getMembers().size() + playersByRace.size() > getMaxPlayers(lookingForParty.getRace()))
+			return AGQuestion.FAILED;
 
-			registeredAGPlayers.putAll(lookingForParty.getMembers());
-			return instance == null && registeredAGPlayers.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED;
-		} finally {
-			writeUnlock();
-		}
+		registeredAGPlayers.putAll(lookingForParty.getMembers());
+		return instance == null && registeredAGPlayers.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED;
 	}
 
 	@Override

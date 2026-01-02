@@ -42,6 +42,7 @@ import com.aionemu.gameserver.skillengine.model.SkillTemplate;
 import com.aionemu.gameserver.taskmanager.tasks.MoveTaskManager;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
+import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.stats.StatFunctions;
 import com.aionemu.gameserver.world.World;
 import com.aionemu.gameserver.world.geo.GeoService;
@@ -78,9 +79,16 @@ public class NpcController extends CreatureController<Npc> {
 		getOwner().clearAttackedCount();
 		getOwner().getGameStats().renewLastChangeTargetTime();
 		if (!getOwner().isDead()) {
-			if (newTarget != null && !getOwner().equals(newTarget))
-				getOwner().getPosition().setH(PositionUtil.getHeadingTowards(getOwner(), newTarget));
-			PacketSendUtility.broadcastPacket(getOwner(), new SM_LOOKATOBJECT(getOwner()));
+			if (newTarget == null && getOwner().getObjectTemplate().getTalkInfo() != null) {
+				ThreadPoolManager.getInstance().schedule(() -> {
+					if (getOwner().getTarget() == null)
+						getOwner().getAi().think(); // resume walking or reset heading
+				}, 750);
+			} else {
+				if (newTarget != null && !getOwner().equals(newTarget))
+					getOwner().getPosition().setH(PositionUtil.getHeadingTowards(getOwner(), newTarget));
+				PacketSendUtility.broadcastPacket(getOwner(), new SM_LOOKATOBJECT(getOwner()));
+			}
 		}
 	}
 

@@ -17,12 +17,10 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public abstract class CreatureLifeStats<T extends Creature> {
 
-	protected int currentHp;
-	protected int currentMp;
-	protected int killingBlow; // for long animation skills that will kill - last damage
+	private int currentHp;
+	private int currentMp;
+	private int killingBlow; // for long animation skills that will kill - last damage
 	protected final T owner;
-	private final Object hpLock = new Object();
-	private final Object mpLock = new Object();
 	protected final Object restoreLock = new Object();
 	protected Future<?> lifeRestoreTask;
 
@@ -91,7 +89,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		}
 
 		int previousHp, newHp;
-		synchronized (hpLock) {
+		synchronized (this) {
 			if (isDead())
 				return 0;
 
@@ -125,7 +123,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 	 */
 	public int reduceMp(TYPE type, int value, int skillId, LOG log) {
 		int previousMp, newMp;
-		synchronized (mpLock) {
+		synchronized (this) {
 			if (isDead())
 				return 0;
 
@@ -170,7 +168,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 			return currentHp;
 
 		int previousHp, newHp;
-		synchronized (hpLock) {
+		synchronized (this) {
 			if (isDead())
 				return 0;
 
@@ -199,7 +197,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 	public int increaseMp(TYPE type, int value, int skillId, LOG log) {
 		int previousMp, newMp;
-		synchronized (mpLock) {
+		synchronized (this) {
 			if (isDead())
 				return 0;
 
@@ -252,16 +250,10 @@ public abstract class CreatureLifeStats<T extends Creature> {
 		}
 	}
 
-	/**
-	 * @return true or false
-	 */
 	public boolean isFullyRestoredHpMp() {
 		return getMaxHp() == currentHp && getMaxMp() == currentMp;
 	}
 
-	/**
-	 * @return
-	 */
 	public boolean isFullyRestoredHp() {
 		return getMaxHp() == currentHp;
 	}
@@ -348,7 +340,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 	public final void setCurrentHp(int hp, Creature effector) {
 		int previousHp, newHp;
-		synchronized (hpLock) {
+		synchronized (this) {
 			previousHp = currentHp;
 			currentHp = newHp = Math.max(0, Math.min(hp, getMaxHp()));
 			if (killingBlow != 0 && (newHp == 0 || newHp > killingBlow))
@@ -363,7 +355,7 @@ public abstract class CreatureLifeStats<T extends Creature> {
 
 	public final void setCurrentMp(int value) {
 		int previousMp, newMp;
-		synchronized (mpLock) {
+		synchronized (this) {
 			if (isDead())
 				return;
 			previousMp = currentMp;

@@ -21,7 +21,7 @@ public class _25070TruthOfTheCrystal extends AbstractQuestHandler {
 	public void register() {
 		// Brandun 804919
 		qe.registerQuestNpc(804919).addOnQuestStart(questId);
-		int[] npcs = { 804919 };
+		int[] npcs = { 804919, 731552 };
 		for (int npc : npcs) {
 			qe.registerQuestNpc(npc).addOnTalkEvent(questId);
 		}

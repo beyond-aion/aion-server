@@ -230,7 +230,6 @@ public class AttackUtil {
 		ActionModifier modifier = template.getActionModifiers(effect);
 		SkillElement element = template.getElement();
 		int randomDamageType = template instanceof SkillAttackInstantEffect skillAttackInstantEffect ? skillAttackInstantEffect.getRnddmg() : 0;
-		int critAddDmg = template.getCritAddDmg2() + template.getCritAddDmg1() * effect.getSkillLevel();
 		boolean useTemplateDmg = isUseTemplateDmg(effect, template);
 		boolean send = !(template instanceof DelayedSpellAttackInstantEffect) && !(template instanceof ProcAtkInstantEffect);
 		boolean shouldIncreaseByOneTimeBoost = !(template instanceof ProcAtkInstantEffect);
@@ -312,7 +311,7 @@ public class AttackUtil {
 				damage += bonus;
 			} else {
 				damageMultiplier = shouldIncreaseByOneTimeBoost ? effector.getObserveController().getBaseMagicalDamageMultiplier() : 1f;
-				damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, element, true, true);
+				damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, damage, (int) bonus, template, true, true);
 			}
 			if (template.shouldApplyAttackerMovementModifier()) {
 				damage = StatFunctions.adjustStatByMovementModifier(effector, isPhysical ? StatEnum.PHYSICAL_ATTACK : StatEnum.MAGICAL_ATTACK, damage);
@@ -323,11 +322,11 @@ public class AttackUtil {
 		if (randomDamageType > 0)
 			damage = randomizeDamage(randomDamageType, damage);
 
-		damage = switch (status) {
-			case CRITICAL_BLOCK, CRITICAL_PARRY, CRITICAL -> calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, element == SkillElement.NONE ?
-						StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE : StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
-			default -> damage;
-		};
+		if (status.isCritical()) {
+			int critAddDmg = template.calculateCritAddDmg(effect);
+			StatEnum stat = element == SkillElement.NONE ? StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE : StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE;
+			damage = calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg, stat, true);
+		}
 
 		if (isPhysical) {
 			float def = effected.getGameStats().getPDef().getBonus() + StatFunctions.adjustStatByMovementModifier(effected, StatEnum.PHYSICAL_DEFENSE,
@@ -344,7 +343,7 @@ public class AttackUtil {
 			damage = effector.getAi().modifyOwnerDamage(damage, effected, effect);
 		}
 
-		if (effect.getSkill() != null && effect.getSkill().getEffectedList().size() > 1 && template instanceof DamageEffect damageEffect && damageEffect.isShared()) {
+		if (effect.getSkill() != null && effect.getSkill().getEffectedList().size() > 1 && template.isShared()) {
 			damage /= effect.getSkill().getEffectedList().size();
 		}
 		damage = StatFunctions.adjustDamageByPvpOrPveModifiers(effector, effected, damage, effect.getPvpDamage(), useTemplateDmg, element);
@@ -464,8 +463,7 @@ public class AttackUtil {
 		return attackResultList;
 	}
 
-	public static int calculateMagicalOverTimeSkillResult(Effect effect, float skillDamage, SkillElement element, int position, boolean useMagicBoost,
-		int criticalProb, int critAddDmg) {
+	public static int calculateMagicalOverTimeSkillResult(Effect effect, float skillDamage, EffectTemplate template, boolean useMagicBoost) {
 		Creature effector = effect.getEffector();
 		Creature effected = effect.getEffected();
 		float damage;
@@ -473,22 +471,20 @@ public class AttackUtil {
 		if (effector instanceof Trap) {
 			damage = skillDamage;
 		} else {
-			// TODO is damage multiplier used on dot?
 			float damageMultiplier = effector.getObserveController().getBaseMagicalDamageMultiplier();
-			damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, element, useMagicBoost, false);
+			damage = StatFunctions.calculateMagicalSkillDamage(effector, effected, skillDamage, 0, template, useMagicBoost, false);
 			damage = damage * damageMultiplier;
 
 			AttackStatus status = effect.getAttackStatus();
 			// calculate attack status only if it has not been forced already
-			if (status == AttackStatus.NORMALHIT && position == 1)
-				status = calculateMagicalStatus(effector, effected, criticalProb, true, effect.getSkillTemplate().isMcritApplied());
-			switch (status) {
-				case CRITICAL:
-					damage = calculateWeaponCritical(element, effected, damage, getWeaponGroup(effector, true), critAddDmg,
-						StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
-					break;
+			if (status == AttackStatus.NORMALHIT && template.getPosition() == 1)
+				status = calculateMagicalStatus(effector, effected, template.getCritProbMod2(), true, effect.getSkillTemplate().isMcritApplied());
+			if (status == AttackStatus.CRITICAL) {
+				int critAddDmg = template.calculateCritAddDmg(effect);
+				damage = calculateWeaponCritical(template.getElement(), effected, damage, getWeaponGroup(effector, true), critAddDmg,
+					StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, true);
 			}
-			damage = StatFunctions.adjustDamageByPvpOrPveModifiers(effector, effected, damage, effect.getPvpDamage(), false, element);
+			damage = StatFunctions.adjustDamageByPvpOrPveModifiers(effector, effected, damage, effect.getPvpDamage(), false, template.getElement());
 		}
 
 		if (damage < 1)

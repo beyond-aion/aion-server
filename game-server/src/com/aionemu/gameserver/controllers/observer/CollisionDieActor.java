@@ -9,7 +9,6 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.siege.FortressLocation;
 import com.aionemu.gameserver.model.siege.SiegeRace;
-import com.aionemu.gameserver.services.SiegeService;
 import com.aionemu.gameserver.services.player.PlayerReviveService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -18,8 +17,11 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
  */
 public class CollisionDieActor extends AbstractCollisionObserver {
 
-	public CollisionDieActor(Creature creature, Spatial geometry) {
+	private final FortressLocation fortressLocation;
+
+	public CollisionDieActor(Creature creature, Spatial geometry, FortressLocation fortressLocation) {
 		super(creature, geometry, CollisionIntention.MATERIAL.getId(), CheckType.PASS);
+		this.fortressLocation = fortressLocation;
 	}
 
 	@Override
@@ -29,8 +31,7 @@ public class CollisionDieActor extends AbstractCollisionObserver {
 				CollisionResult result = collisionResults.getClosestCollision();
 				PacketSendUtility.sendMessage(player, "Entered " + result.getGeometry().getName());
 			}
-			FortressLocation fortress = SiegeService.getInstance().findFortress(creature.getWorldId(), creature.getX(), creature.getY(), creature.getZ());
-			if (fortress != null && fortress.isUnderShield() && fortress.getRace() != SiegeRace.getByRace(creature.getRace()))
+			if (fortressLocation.isUnderShield() && fortressLocation.getRace() != SiegeRace.getByRace(creature.getRace()))
 				kill(creature);
 		}
 	}

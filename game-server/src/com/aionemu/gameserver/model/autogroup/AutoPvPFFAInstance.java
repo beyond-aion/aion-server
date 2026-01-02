@@ -24,19 +24,14 @@ public class AutoPvPFFAInstance extends AutoInstance {
 	}
 
 	@Override
-	public AGQuestion addLookingForParty(LookingForParty lookingForParty) {
-		super.writeLock();
-		try {
-			if (isRegistrationDisabled(lookingForParty) || lookingForParty.getMembers().size() > 1
-				|| registeredAGPlayers.size() >= getMaxPlayers()) {
-				return AGQuestion.FAILED;
-			}
-
-			registeredAGPlayers.putAll(lookingForParty.getMembers());
-			return instance == null && registeredAGPlayers.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED;
-		} finally {
-			super.writeUnlock();
+	public synchronized AGQuestion addLookingForParty(LookingForParty lookingForParty) {
+		if (isRegistrationDisabled(lookingForParty) || lookingForParty.getMembers().size() > 1
+			|| registeredAGPlayers.size() >= getMaxPlayers()) {
+			return AGQuestion.FAILED;
 		}
+
+		registeredAGPlayers.putAll(lookingForParty.getMembers());
+		return instance == null && registeredAGPlayers.size() == getMaxPlayers() ? AGQuestion.READY : AGQuestion.ADDED;
 	}
 
 	@Override

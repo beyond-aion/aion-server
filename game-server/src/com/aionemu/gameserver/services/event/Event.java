@@ -82,19 +82,18 @@ public class Event {
 			Config.load();
 		if (eventTemplate.getSpawns() != null && eventTemplate.getSpawns().size() > 0) {
 			for (SpawnMap map : eventTemplate.getSpawns().getTemplates()) {
-				DataManager.SPAWNS_DATA.addNewSpawnMap(map);
+				byte difficultId = 0;
 				WorldMap worldMap = World.getInstance().getWorldMap(map.getMapId());
 				for (Spawn spawn : map.getSpawns()) {
 					spawn.setEventTemplate(eventTemplate);
 					if (spawn.isCustom())
 						despawnNonEventSpawns(spawn.getNpcId(), worldMap);
+					if (difficultId == 0)
+						difficultId = spawn.getDifficultId();
 				}
-			}
-			DataManager.SPAWNS_DATA.afterUnmarshal(null, null);
-			DataManager.SPAWNS_DATA.clearTemplates();
-			for (SpawnMap map : eventTemplate.getSpawns().getTemplates()) {
-				byte difficultId = map.getSpawns().stream().map(Spawn::getDifficultId).filter(d -> d != 0).findFirst().orElse((byte) 0);
-				World.getInstance().getWorldMap(map.getMapId()).forEach(instance -> SpawnEngine.spawnEventSpawns(instance, difficultId, 0, eventTemplate));
+				DataManager.SPAWNS_DATA.addRegularSpawns(map);
+				for (WorldMapInstance instance : worldMap)
+					SpawnEngine.spawnEventSpawns(instance, difficultId, 0, eventTemplate);
 			}
 		}
 

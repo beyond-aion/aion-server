@@ -5,14 +5,14 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAllianceService;
 import com.aionemu.gameserver.model.team.common.legacy.GroupEvent;
 import com.aionemu.gameserver.model.team.common.legacy.PlayerAllianceEvent;
 import com.aionemu.gameserver.model.team.group.PlayerGroupService;
-import com.aionemu.gameserver.taskmanager.AbstractIterativePeriodicTaskManager;
+import com.aionemu.gameserver.taskmanager.AbstractFIFOPeriodicTaskManager;
 
 /**
  * Supports PlayerGroup and PlayerAlliance stat updating.
  * 
  * @author Sarynth
  */
-public final class TeamStatUpdater extends AbstractIterativePeriodicTaskManager<Player> {
+public final class TeamStatUpdater extends AbstractFIFOPeriodicTaskManager<Player> {
 
 	private static final class SingletonHolder {
 
@@ -36,7 +36,6 @@ public final class TeamStatUpdater extends AbstractIterativePeriodicTaskManager<
 				PlayerAllianceService.updateAlliance(player, PlayerAllianceEvent.MOVEMENT);
 			}
 		}
-		this.stopTask(player); // task will be re-added on demand
 	}
 
 	@Override

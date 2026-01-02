@@ -6,7 +6,6 @@ import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.stream.Collectors;
 
-import com.aionemu.commons.taskmanager.AbstractLockManager;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.PlayerClass;
 import com.aionemu.gameserver.model.Race;
@@ -19,7 +18,7 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 /**
  * @author xTz, Estrayl
  */
-public abstract class AutoInstance extends AbstractLockManager implements AutoInstanceHandler {
+public abstract class AutoInstance implements AutoInstanceHandler {
 
 	protected final Map<Integer, AGPlayer> registeredAGPlayers = new ConcurrentHashMap<>();
 	protected final AutoGroupType agt;

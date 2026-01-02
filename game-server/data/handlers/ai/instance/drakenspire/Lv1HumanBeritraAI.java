@@ -181,7 +181,7 @@ public class Lv1HumanBeritraAI extends AggressiveNoLootNpcAI {
 		getOwner().queueSkill(21604, 56, 0);
 		getOwner().queueSkill(21603, 56, entry == null ? -1 : 0);
 		if (entry != null)
-			getOwner().getQueuedSkills().offer(entry);
+			getOwner().queueSkill(entry);
 	}
 
 	/**

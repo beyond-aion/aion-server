@@ -34,19 +34,14 @@ public class AutoHarmonyInstance extends AutoInstance {
 	}
 
 	@Override
-	public AGQuestion addLookingForParty(LookingForParty lookingForParty) {
-		super.writeLock();
-		try {
-			if (isRegistrationDisabled(lookingForParty) || registeredAGPlayers.size() >= getMaxPlayers())
-				return AGQuestion.FAILED;
+	public synchronized AGQuestion addLookingForParty(LookingForParty lookingForParty) {
+		if (isRegistrationDisabled(lookingForParty) || registeredAGPlayers.size() >= getMaxPlayers())
+			return AGQuestion.FAILED;
 
-			AGQuestion question = canAddParty(groups.get(0), lookingForParty);
-			if (question == AGQuestion.FAILED)
-				question = canAddParty(groups.get(1), lookingForParty);
-			return question;
-		} finally {
-			super.writeUnlock();
-		}
+		AGQuestion question = canAddParty(groups.get(0), lookingForParty);
+		if (question == AGQuestion.FAILED)
+			question = canAddParty(groups.get(1), lookingForParty);
+		return question;
 	}
 
 	@Override
