@@ -55,7 +55,7 @@ public class StarterKitService {
 		itemMap.get(50).add(new RewardItem(161001001, 5)); // Revival Stone
 		itemMap.get(60).add(new RewardItem(169620072, 1)); // AP Boost Charm II - 30%
 		itemMap.get(60).add(new RewardItem(162002030, 100)); // Event] Premium Restoration Serum
-		itemMap.get(60).add(new RewardItem(162000107, 50)); // Saam King's Herbs
+		itemMap.get(60).add(new RewardItem(162002018, 50)); // [Event] Wormwood Dish
 		itemMap.get(60).add(new RewardItem(188053526, 5)); // [Event] Aion's Steel Form Candy Box
 		itemMap.get(60).add(new RewardItem(188053783, 5)); // Stigma Sack
 	}
