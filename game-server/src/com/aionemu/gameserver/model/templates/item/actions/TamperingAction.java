@@ -21,7 +21,6 @@ import com.aionemu.gameserver.services.item.ItemPacketService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.utils.collections.Predicates;
-import com.aionemu.gameserver.network.aion.serverpackets.SM_DELETE_ITEM;
 
 /**
  * @author Rolandas
@@ -102,16 +101,10 @@ public class TamperingAction extends AbstractItemAction {
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED_TSHIRT(targetItem.getL10n()));
 							PacketSendUtility.broadcastPacketAndReceive(player,
 								new SM_ITEM_USAGE_ANIMATION(player.getObjectId(), parntObjectId, parentItemId, 0, 2, 0));
-							
-							int plumeObjId = targetItem.getObjectId();
-							if (targetItem.isEquipped()) {
-								player.getEquipment().unEquipItem(plumeObjId, false);
-							}
-							boolean decreased = player.getInventory().decreaseByObjectId(plumeObjId, 1);
-							Item left = player.getInventory().getItemByObjId(plumeObjId);
-							if (decreased && (left == null || left.getItemCount() <= 0)) {
-								PacketSendUtility.sendPacket(player, new SM_DELETE_ITEM(plumeObjId));
-							}
+							if (targetItem.isEquipped())
+								player.getEquipment().decreaseEquippedItemCount(targetItem.getObjectId(), 1);
+							else
+								player.getInventory().decreaseByObjectId(targetItem.getObjectId(), 1);
 						} else {
 							PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_ITEM_AUTHORIZE_FAILED(targetItem.getL10n()));
 							PacketSendUtility.broadcastPacketAndReceive(player,

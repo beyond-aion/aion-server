@@ -576,12 +576,12 @@ public class Equipment implements Persistable {
 			equippedItem.decreaseItemCount(equippedItem.getItemCount());
 
 		if (equippedItem.getItemCount() == 0) {
+			InventoryDAO.store(equippedItem, owner); // must store (delete) before unequip
 			unequip(equippedItem);
 			PacketSendUtility.sendPacket(owner, new SM_DELETE_ITEM(equippedItem.getObjectId()));
-			InventoryDAO.store(equippedItem, owner);
+		} else {
+			ItemPacketService.updateItemAfterInfoChange(owner, equippedItem, ItemUpdateType.STATS_CHANGE);
 		}
-
-		ItemPacketService.updateItemAfterInfoChange(owner, equippedItem, ItemUpdateType.STATS_CHANGE);
 		PacketSendUtility.broadcastPacket(owner, new SM_UPDATE_PLAYER_APPEARANCE(owner.getObjectId(), owner.getEquipment().getEquippedForAppearance()),
 			true);
 		setPersistentState(PersistentState.UPDATE_REQUIRED);
