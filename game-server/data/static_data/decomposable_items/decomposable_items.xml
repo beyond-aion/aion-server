@@ -28369,13 +28369,13 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188053109"><!-- Ahserion's Equipment Box -->
-		<items>
+		<items chance="10">
 			<item id="188053106" /><!-- Ahserion's Weapon Box -->
 		</items>
-		<items>
+		<items chance="50">
 			<item id="188053107" /><!-- Ahserion's Armor Box -->
 		</items>
-		<items>
+		<items chance="40">
 			<item id="188053108" /><!-- Ahserion's Accessory Box -->
 		</items>
 	</decomposable>
