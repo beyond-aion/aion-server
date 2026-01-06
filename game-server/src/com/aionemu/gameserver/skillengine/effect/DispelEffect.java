@@ -72,6 +72,11 @@ public class DispelEffect extends EffectTemplate {
 			case EFFECTTYPE:
 				for (EffectType type : effecttype) {
 					effect.getEffected().getEffectController().removeByDispelEffect(type, null, count, dispelLevel, finalPower);
+					if (type.equals(EffectType.RIDEROBOT)) {
+						Effect ef = effect.getEffected().getEffectController().getAbnormalEffect("RI_SUMMONARMOR");
+						if (ef != null)
+							ef.endEffect();
+					}
 				}
 				break;
 			case SLOTTYPE:
