@@ -336,11 +336,24 @@ public class StatFunctions {
 	}
 
 	/**
-	 * elemental resistance, 145 = 10% magical damage reduction (cap at +-1150)
+	 * Applies elemental resistance to incoming damage.
+	 *
+	 * Elemental resistance scales damage reduction linearly:
+	 * <ul>
+	 *   <li>For players:   1450 elemental resist = 100% reduction</li>
+	 *   <li>For NPCs/others: 1300 elemental resist = 100% reduction</li>
+	 * </ul>
+	 *
+	 * Example: 145 elemental resist reduces magical damage by 10% for players.
+	 *
+	 * @param attacked target receiving damage
+	 * @param element damage element
+	 * @param damage base damage before elemental resistance
 	 * @return damage reduced by elemental resistance
 	 */
 	private static float reduceDamageByElementalResistance(Creature attacked, SkillElement element, float damage) {
-		return damage * (1 - adjustStatByMovementModifier(attacked, StatEnum.MAGICAL_DEFEND, attacked.getGameStats().getMagicalDefenseFor(element))/ 1450f);
+		float elementalDenominator = attacked instanceof Player ? 1450 : 1300;
+		return damage * (1 - adjustStatByMovementModifier(attacked, StatEnum.MAGICAL_DEFEND, attacked.getGameStats().getMagicalDefenseFor(element)) / elementalDenominator);
 	}
 
 	public static float calculateMagicalSkillDamage(Creature effector, Creature target, float baseDamage, int bonus, EffectTemplate template,
