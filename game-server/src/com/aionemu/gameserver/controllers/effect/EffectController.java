@@ -456,10 +456,6 @@ public class EffectController {
 				// check count
 				if (count == 0)
 					break;
-
-				if (isNoShowToggle(effect))
-					continue;
-
 				if (effectType != null) {
 					if (!effect.getSkillTemplate().hasAnyEffect(effectType))
 						continue;
