@@ -349,7 +349,7 @@ public class Skill {
 			castDuration = (int) effector.getGameStats().getPositiveStat(StatEnum.ATTACK_SPEED, baseCastDuration);
 		else
 			castDuration = calculateMagicalCastDuration();
-		return Math.max(castDuration, (int) (baseCastDuration * 0.3f)); // TODO check limit with retail
+		return Math.max(castDuration, (int) (baseCastDuration * 0.25f));
 	}
 
 	private int calculateCastDuration() {
@@ -362,19 +362,16 @@ public class Skill {
 	}
 
 	private int calculateMagicalCastDuration() {
-		boolean noBaseDurationCap = false;
-		int castDuration = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, baseCastDuration);
+		int baseDurationCap = Math.round(baseCastDuration * 0.25f);
+		//casting time stats cap 75%
+		int castDuration = Math.max(effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, baseCastDuration), baseDurationCap);
 		int boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, baseCastDuration);
 		switch (skillTemplate.getSubType()) {
 			case SUMMON:
 				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMON, boostValue);
-				if (effector.getEffectController().hasAbnormalEffect(3779))
-					noBaseDurationCap = true;
 				break;
 			case SUMMONHOMING:
 				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMONHOMING, boostValue);
-				if (effector.getEffectController().hasAbnormalEffect(3779))
-					noBaseDurationCap = true;
 				break;
 			case SUMMONTRAP:
 				int tempBoostVal = boostValue;
@@ -382,8 +379,6 @@ public class Skill {
 				if (boostValue == 0 && castDuration < tempBoostVal) {
 					boostValue = tempBoostVal - castDuration;
 				}
-				if (effector.getEffectController().hasAbnormalEffect(913))
-					noBaseDurationCap = true;
 				break;
 			case HEAL:
 				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_HEAL, boostValue);
@@ -393,16 +388,17 @@ public class Skill {
 				break;
 		}
 		castDuration -= baseCastDuration - boostValue;
-
-		// 75% of base skill castDuration cap
-		// No cast speed cap for skill Summoning Alacrity I(skillId: 1778) and Nimble Fingers I(skillId: 2386)
-		if (!noBaseDurationCap) {
-			int baseDurationCap = Math.round(baseCastDuration * 0.25f);
+		
+		if (!isSummonType(skillTemplate.getSubType())) {
 			if (castDuration < baseDurationCap) {
 				castDuration = baseDurationCap;
 			}
 		}
 		return Math.max(castDuration, 0);
+	}
+
+	private boolean isSummonType(SkillSubType type) {
+		return type == SkillSubType.SUMMON || type == SkillSubType.SUMMONHOMING || type == SkillSubType.SUMMONTRAP;
 	}
 
 	protected void updateHitTime(boolean checkAnimation) {
