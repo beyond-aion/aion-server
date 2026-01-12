@@ -394,10 +394,10 @@ public class Skill {
 		}
 		castDuration -= baseCastDuration - boostValue;
 
-		// 70% of base skill castDuration cap
+		// 75% of base skill castDuration cap
 		// No cast speed cap for skill Summoning Alacrity I(skillId: 1778) and Nimble Fingers I(skillId: 2386)
 		if (!noBaseDurationCap) {
-			int baseDurationCap = Math.round(baseCastDuration * 0.3f);
+			int baseDurationCap = Math.round(baseCastDuration * 0.25f);
 			if (castDuration < baseDurationCap) {
 				castDuration = baseDurationCap;
 			}
