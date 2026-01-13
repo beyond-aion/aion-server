@@ -387,12 +387,11 @@ public class Skill {
 				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_ATTACK, boostValue);
 				break;
 		}
-		castDuration -= baseCastDuration - boostValue;
+		int buffDelta = baseCastDuration - boostValue;
+		castDuration -= buffDelta;
 		
 		if (!isSummonType(skillTemplate.getSubType())) {
-			if (castDuration < baseDurationCap) {
-				castDuration = baseDurationCap;
-			}
+			castDuration = Math.max(castDuration, baseDurationCap);
 		}
 		return Math.max(castDuration, 0);
 	}
