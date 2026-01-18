@@ -366,27 +366,10 @@ public class Skill {
 		//casting time stats cap 75%
 		int castDuration = Math.max(effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME, baseCastDuration), baseDurationCap);
 		int boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SKILL, baseCastDuration);
-		switch (skillTemplate.getSubType()) {
-			case SUMMON:
-				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMON, boostValue);
-				break;
-			case SUMMONHOMING:
-				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_SUMMONHOMING, boostValue);
-				break;
-			case SUMMONTRAP:
-				int tempBoostVal = boostValue;
-				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_TRAP, boostValue);
-				if (boostValue == 0 && castDuration < tempBoostVal) {
-					boostValue = tempBoostVal - castDuration;
-				}
-				break;
-			case HEAL:
-				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_HEAL, boostValue);
-				break;
-			case ATTACK:
-				boostValue = effector.getGameStats().getPositiveReverseStat(StatEnum.BOOST_CASTING_TIME_ATTACK, boostValue);
-				break;
-		}
+		StatEnum skillCastBoostStat = getSkillCastBoostStat();
+		if (skillCastBoostStat != null)
+			boostValue = effector.getGameStats().getPositiveReverseStat(skillCastBoostStat, boostValue);
+
 		int buffDelta = baseCastDuration - boostValue;
 		castDuration -= buffDelta;
 		
@@ -394,6 +377,17 @@ public class Skill {
 			castDuration = Math.max(castDuration, baseDurationCap);
 		}
 		return Math.max(castDuration, 0);
+	}
+
+	private StatEnum getSkillCastBoostStat() {
+		return switch (skillTemplate.getSubType()) {
+			case SUMMON -> StatEnum.BOOST_CASTING_TIME_SUMMON;
+			case SUMMONHOMING -> StatEnum.BOOST_CASTING_TIME_SUMMONHOMING;
+			case SUMMONTRAP -> StatEnum.BOOST_CASTING_TIME_TRAP;
+			case HEAL -> StatEnum.BOOST_CASTING_TIME_HEAL;
+			case ATTACK -> StatEnum.BOOST_CASTING_TIME_ATTACK;
+			default -> null;
+		};
 	}
 
 	private boolean isSummonType(SkillSubType type) {
