@@ -49,14 +49,13 @@ public class Npc extends Creature {
 	private WalkerGroupShift walkerGroupShift;
 	private String masterName;
 	private int creatorId = 0;
-	private int townId;
 	private CreatureType type = null;
 	private NpcEquippedGear overridenEquipment;
 	private SummonOwner summonOwner = null;
 
 	public Npc(NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
+		Objects.requireNonNull(objectTemplate);
 		super(IDFactory.getInstance().nextId(), controller, spawnTemplate, objectTemplate, new WorldPosition(spawnTemplate.getWorldId()), true);
-		Objects.requireNonNull(objectTemplate, "Npcs should be based on template");
 		controller.setOwner(this);
 		moveController = new NpcMoveController(this);
 		skillList = new NpcSkillList(this);
@@ -306,14 +305,6 @@ public class Npc extends Creature {
 
 	public void setCreatorId(int creatorId) {
 		this.creatorId = creatorId;
-	}
-
-	public int getTownId() {
-		return townId;
-	}
-
-	public void setTownId(int townId) {
-		this.townId = townId;
 	}
 
 	public VisibleObject getCreator() {
