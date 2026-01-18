@@ -360,7 +360,7 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		Point2D dest = null;
 		if (owner.getWalkerGroup() != null) {
 			dest = WalkerGroup.getLinePoint(new Point2D(currentStep.getX(), currentStep.getY()), new Point2D(step.getX(), step.getY()),
-				owner.getWalkerGroupShift());
+				owner.getWalkerGroup().getClusterData(owner));
 			this.pointZ = currentStep.getZ();
 			owner.getWalkerGroup().setStep(owner, step.getStepIndex());
 		} else {

@@ -29,7 +29,6 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_CUSTOM_SETTINGS;
 import com.aionemu.gameserver.services.TribeRelationService;
 import com.aionemu.gameserver.skillengine.effect.SummonOwner;
 import com.aionemu.gameserver.spawnengine.WalkerGroup;
-import com.aionemu.gameserver.spawnengine.WalkerGroupShift;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.idfactory.IDFactory;
@@ -43,10 +42,9 @@ import com.aionemu.gameserver.world.WorldPosition;
  */
 public class Npc extends Creature {
 
-	private WalkerGroup walkerGroup;
-	private NpcSkillList skillList;
+	private final NpcSkillList skillList;
 	private final Queue<NpcSkillEntry> queuedSkills = new LinkedList<>();
-	private WalkerGroupShift walkerGroupShift;
+	private WalkerGroup walkerGroup;
 	private String masterName;
 	private int creatorId = 0;
 	private CreatureType type = null;
@@ -317,14 +315,6 @@ public class Npc extends Creature {
 
 	public WalkerGroup getWalkerGroup() {
 		return walkerGroup;
-	}
-
-	public void setWalkerGroupShift(WalkerGroupShift shift) {
-		this.walkerGroupShift = shift;
-	}
-
-	public WalkerGroupShift getWalkerGroupShift() {
-		return walkerGroupShift;
 	}
 
 	@Override
