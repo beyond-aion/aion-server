@@ -4,6 +4,8 @@ import java.util.EnumMap;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.stats.container.CombatMode;
+import com.aionemu.gameserver.model.stats.container.RatioType;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 
 /**
@@ -56,6 +58,26 @@ public class StatCapUtil {
 			stat2.setBonus(lowerCap - stat2.getBase());
 		}
 	}
+
+	public static int limitValueForPvpOrPveStat(CombatMode mode, RatioType type, int value) {
+		// Note: PvP/PvE ratio caps are symmetric:
+    // - attack min is fixed, defense max is fixed
+    // - upper/lower bounds depend on combat mode
+		Cap cap = switch (mode) {
+			case PVP -> switch (type) {
+				case ATTACK  -> new Cap(-900, 1000);
+				case DEFENSE -> new Cap(-1000, 900);
+			};
+			case PVE -> switch (type) {
+				case ATTACK  -> new Cap(-900, 5000);
+				case DEFENSE -> new Cap(-5000, 900);
+			};
+		};
+
+		return Math.min(cap.max(), Math.max(cap.min(), value));
+	}
+
+	private record Cap(int min, int max) {}
 
 	private static class StatLimits {
 
@@ -110,9 +132,6 @@ public class StatCapUtil {
 					break;
 				case FLY_SPEED:
 					value = 16000;
-					break;
-				case PVP_DEFEND_RATIO:
-					value = 900;
 					break;
 				case HEAL_BOOST:
 					value = 1000;

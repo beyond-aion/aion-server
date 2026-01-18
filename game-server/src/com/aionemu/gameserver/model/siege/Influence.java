@@ -89,26 +89,23 @@ public class Influence {
 	}
 
 	/**
-	 * @return float containing dmg modifier for disadvantaged race
+	 * @return int containing dmg modifier for disadvantaged race
 	 */
-	public float getPvpRaceBonus(Race attRace) {
-		switch (attRace) {
-			case ASMODIANS:
-				return calculatePvpRaceBonus(getAsmodianInfluenceRate(), getElyosInfluenceRate());
-			case ELYOS:
-				return calculatePvpRaceBonus(getElyosInfluenceRate(), getAsmodianInfluenceRate());
-			default:
-				return 1f;
-		}
+	public int getPvpRaceBonusRatio(Race attRace) {
+		return switch (attRace) {
+			case ASMODIANS -> calculatePvpRaceBonusRatio(getAsmodianInfluenceRate(), getElyosInfluenceRate());
+			case ELYOS -> calculatePvpRaceBonusRatio(getElyosInfluenceRate(), getAsmodianInfluenceRate());
+			default -> 0;
+		};
 	}
 
-	private float calculatePvpRaceBonus(float ownInfluence, float enemyInfluence) {
+	private int calculatePvpRaceBonusRatio(float ownInfluence, float enemyInfluence) {
 		if (enemyInfluence >= 0.81f && ownInfluence <= 0.10f)
-			return 1.2f;
+			return 200;
 		else if (enemyInfluence >= 0.81f || (enemyInfluence >= 0.71f && ownInfluence <= 0.10f))
-			return 1.15f;
+			return 150;
 		else if (enemyInfluence >= 0.71f)
-			return 1.1f;
-		return 1f;
+			return 100;
+		return 0;
 	}
 }
