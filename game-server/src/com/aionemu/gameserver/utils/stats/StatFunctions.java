@@ -655,7 +655,9 @@ public class StatFunctions {
 			case 7 -> 0.5f;
 			case 8 -> 0.6f;
 			case 9 -> 0.7f;
-			default -> levelDiff > 9 ? 0.8f : 0;
+			case 10 -> 0.8f;
+			case 11 -> 0.9f;
+			default -> levelDiff > 11 ? 1f : 0;
 		};
 	}
 
