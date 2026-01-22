@@ -647,18 +647,9 @@ public class StatFunctions {
 
 	private static float getNpcLevelDiffMod(Creature target, Creature attacker) {
 		int levelDiff = target.getLevel() - attacker.getLevel();
-		return switch (levelDiff) {
-			case 3 -> 0.1f;
-			case 4 -> 0.2f;
-			case 5 -> 0.3f;
-			case 6 -> 0.4f;
-			case 7 -> 0.5f;
-			case 8 -> 0.6f;
-			case 9 -> 0.7f;
-			case 10 -> 0.8f;
-			case 11 -> 0.9f;
-			default -> levelDiff > 11 ? 1f : 0;
-		};
+		if (levelDiff <= 2) return 0f;
+		if (levelDiff >= 12) return 1f;
+		return (levelDiff - 2) * 0.1f;
 	}
 
 	/**
