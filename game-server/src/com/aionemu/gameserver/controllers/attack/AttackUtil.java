@@ -391,36 +391,37 @@ public class AttackUtil {
 	}
 
 	private static float randomizeDamage(int randomDamageType, float damage) {
-		switch (randomDamageType) {
-			case 1:
-				switch (Rnd.get(1, 3)) {
-					case 1 -> damage *= 0.5f;
-					case 2 -> damage *= 1.5f;
-				}
-				break;
-			case 2:
-				if (Rnd.chance() < 70)
-					damage *= 0.6f;
-				else
-					damage *= 2;
-				break;
-			case 3:
-				switch (Rnd.get(1, 3)) {
-					case 1 -> damage *= 1.15f;
-					case 2 -> damage *= 1.25f;
-				}
-				break;
-			case 4:
-				damage *= (Rnd.get(25, 100) * 0.02f);
-				break;
-			case 6:
-				if (Rnd.chance() < 30)
-					damage *= 2;
-				break;
-			default:
-				throw new IllegalArgumentException("Unhandled random damage type rnddmg=\"" + randomDamageType + "\"");
-		}
-		return damage;
+		float multiplier = switch (randomDamageType) {
+			case 1 -> {
+				int roll = Rnd.get(0, 19);
+				yield roll <= 6  ? 0.5f :
+					roll <= 12 ? 1.0f :
+						1.5f;
+			}
+
+			case 2 ->
+				Rnd.chance() < 70.0f ? 0.6f : 2.0f;
+
+			case 3 -> {
+				int roll = Rnd.get(0, 19);
+				yield roll <= 6  ? 0.9f :
+					roll <= 12 ? 1.0f :
+						1.1f;
+			}
+
+			case 6 ->
+				Rnd.chance() < 70.0f ? 1.0f : 2.0f;
+
+			case 4, 5, 7, 8, 9, 10 ->
+				1.0f;
+
+			default ->
+				throw new IllegalArgumentException(
+					"Unhandled random damage type rnddmg=\"" + randomDamageType + "\""
+				);
+		};
+
+		return damage * multiplier;
 	}
 
 	private static void calculateEffectResult(Effect effect, Creature effected, int damage, AttackStatus status, HitType hitType, boolean ignoreShield,
