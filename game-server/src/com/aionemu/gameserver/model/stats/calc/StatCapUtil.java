@@ -57,7 +57,7 @@ public class StatCapUtil {
 
 	public static int getElementalCapForCreature(Creature creature) {
 		if (creature instanceof Player) {
-			return getElementalResistanceBaseValue() + Math.max(0, creature.getLevel() - 50) * 10;
+			return getElementalResistanceBaseValue() - 300 + Math.max(0, creature.getLevel() - 50) * 10;
 		}
 		return getElementalResistanceBaseValue();
 	}
