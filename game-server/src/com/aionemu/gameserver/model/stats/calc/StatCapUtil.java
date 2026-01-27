@@ -121,12 +121,6 @@ public class StatCapUtil {
 					value = 0;
 					break;
 				case HEAL_BOOST:
-				case WATER_RESISTANCE:
-				case FIRE_RESISTANCE:
-				case EARTH_RESISTANCE:
-				case WIND_RESISTANCE:
-				case DARK_RESISTANCE:
-				case LIGHT_RESISTANCE:
 					value = -1000;
 					break;
 			}
@@ -145,7 +139,7 @@ public class StatCapUtil {
 				case PVP_DEFEND_RATIO:
 					value = 900;
 					break;
-				case HEAL_BOOST, WATER_RESISTANCE, FIRE_RESISTANCE, EARTH_RESISTANCE, WIND_RESISTANCE, DARK_RESISTANCE, LIGHT_RESISTANCE:
+				case HEAL_BOOST:
 					value = 1000;
 					break;
 			}
