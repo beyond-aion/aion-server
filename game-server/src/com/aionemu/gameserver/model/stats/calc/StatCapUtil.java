@@ -19,8 +19,12 @@ public class StatCapUtil {
 		}
 	}
 
+	public static int getElementalResistanceBaseValue() {
+		return 1300;
+	}
+
 	public static void calculateBaseValue(Stat2 stat, Creature creature) {
-		int lowerCap = getLowerCap(stat.getStat());
+		int lowerCap = getLowerCap(stat.getStat(), creature);
 		int upperCap = getUpperCap(stat.getStat(), creature);
 
 		if (stat.getStat() == StatEnum.ATTACK_SPEED) {
@@ -34,7 +38,10 @@ public class StatCapUtil {
 		calculate(stat, lowerCap, upperCap);
 	}
 
-	public static int getLowerCap(StatEnum stat) {
+	public static int getLowerCap(StatEnum stat, Creature creature) {
+		if (isElementalDefendStat(stat)) {
+			return -getElementalCapForCreature(creature);
+		}
 		return limits.get(stat).lowerCap;
 	}
 
@@ -42,7 +49,24 @@ public class StatCapUtil {
 		boolean isSpeedUnrestricted = !(creature instanceof Player) || ((Player) creature).isStaff();
 		if ((stat == StatEnum.SPEED || stat == StatEnum.FLY_SPEED) && isSpeedUnrestricted)
 			return Integer.MAX_VALUE;
+		if (isElementalDefendStat(stat)) {
+			return getElementalCapForCreature(creature);
+		}
 		return limits.get(stat).upperCap;
+	}
+
+	public static int getElementalCapForCreature(Creature creature) {
+		if (creature instanceof Player) {
+			return getElementalResistanceBaseValue() + Math.max(0, creature.getLevel() - 50) * 10;
+		}
+		return getElementalResistanceBaseValue();
+	}
+
+	private static boolean isElementalDefendStat(StatEnum stat) {
+		return switch (stat) {
+			case WATER_RESISTANCE, FIRE_RESISTANCE, EARTH_RESISTANCE, WIND_RESISTANCE, DARK_RESISTANCE, LIGHT_RESISTANCE -> true;
+			default -> false;
+		};
 	}
 
 	public static int getDifferenceLimit(StatEnum stat) {
@@ -55,6 +79,12 @@ public class StatCapUtil {
 		} else if (stat2.getCurrent() < lowerCap) {
 			stat2.setBonus(lowerCap - stat2.getBase());
 		}
+	}
+
+	public static int clampStatValue(StatEnum stat, Creature creature, int value) {
+		int lower = getLowerCap(stat, creature);
+		int upper = getUpperCap(stat, creature);
+		return Math.min(upper, Math.max(lower, value));
 	}
 
 	private static class StatLimits {
@@ -90,13 +120,14 @@ public class StatCapUtil {
 				case MAXMP:
 					value = 0;
 					break;
+				case HEAL_BOOST:
 				case WATER_RESISTANCE:
 				case FIRE_RESISTANCE:
 				case EARTH_RESISTANCE:
 				case WIND_RESISTANCE:
 				case DARK_RESISTANCE:
 				case LIGHT_RESISTANCE:
-					value = -1150;
+					value = -1000;
 					break;
 			}
 			return value;
@@ -114,16 +145,8 @@ public class StatCapUtil {
 				case PVP_DEFEND_RATIO:
 					value = 900;
 					break;
-				case HEAL_BOOST:
+				case HEAL_BOOST, WATER_RESISTANCE, FIRE_RESISTANCE, EARTH_RESISTANCE, WIND_RESISTANCE, DARK_RESISTANCE, LIGHT_RESISTANCE:
 					value = 1000;
-					break;
-				case WATER_RESISTANCE:
-				case FIRE_RESISTANCE:
-				case EARTH_RESISTANCE:
-				case WIND_RESISTANCE:
-				case DARK_RESISTANCE:
-				case LIGHT_RESISTANCE:
-					value = 1150;
 					break;
 			}
 			return value;

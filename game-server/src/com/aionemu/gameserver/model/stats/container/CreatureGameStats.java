@@ -291,7 +291,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	public abstract Stat2 getMpRegenRate();
 
-	public int getMagicalDefenseFor(SkillElement element) {
+	public int getElementalDefendFor(SkillElement element) {
 		switch (element) {
 			case EARTH:
 				return getStat(StatEnum.EARTH_RESISTANCE, 0).getCurrent();
