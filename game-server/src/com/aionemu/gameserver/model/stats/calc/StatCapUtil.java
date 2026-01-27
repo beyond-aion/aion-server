@@ -19,7 +19,7 @@ public class StatCapUtil {
 		}
 	}
 
-	public static int getElementalResistanceBaseValue() {
+	public static int getElementalDefendBaseValue() {
 		return 1300;
 	}
 
@@ -59,7 +59,7 @@ public class StatCapUtil {
 		if (creature instanceof Player) {
 			return 1000 + Math.max(0, creature.getLevel() - 50) * 10;
 		}
-		return getElementalResistanceBaseValue();
+		return getElementalDefendBaseValue();
 	}
 
 	private static boolean isElementalDefendStat(StatEnum stat) {

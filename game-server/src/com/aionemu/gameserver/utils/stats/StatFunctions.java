@@ -336,53 +336,53 @@ public class StatFunctions {
 	}
 
 	/**
-	 * Applies elemental resistance to incoming damage.
+	 * Applies elemental defend to incoming damage.
 	 *
-	 * <p>Elemental resistance reduces damage linearly using a normalized scale
+	 * <p>Elemental defend reduces damage linearly using a normalized scale
 	 * (denominator) that depends on target type and level.</p>
 	 *
 	 * <ul>
-	 *   <li><b>Players:</b> resistance is normalized against a level-scaled denominator
+	 *   <li><b>Players:</b> defend is normalized against a level-scaled denominator
 	 *       (base {@code 1300}, increasing by {@code +10} per level above {@code 50},
 	 *       using {@code min(attackerLevel, defenderLevel)}).</li>
-	 *   <li><b>NPCs and other creatures:</b> resistance is normalized against a fixed
+	 *   <li><b>NPCs and other creatures:</b> defend is normalized against a fixed
 	 *       denominator of {@code 1300}.</li>
 	 * </ul>
 	 *
 	 * <p>Damage reduction formula:</p>
 	 * <pre>
-	 *   finalDamage = damage * (1 - effectiveResistance / denominator)
+	 *   finalDamage = damage * (1 - effectiveDefend / denominator)
 	 * </pre>
 	 *
 	 * <p>Example (player(63) vs player(65), or npc(65) vs player(63)):</p>
 	 * <ul>
 	 *   <li>Effective level = {@code min(63, 65) = 63}</li>
 	 *   <li>Denominator = {@code 1300 + (63 - 50) * 10 = 1430}</li>
-	 *   <li>{@code 143} elemental resistance reduces damage by {@code 10%}</li>
+	 *   <li>{@code 143} elemental defend reduces damage by {@code 10%}</li>
 	 * </ul>
-	 * <p>The resistance value is clamped to its valid stat caps after applying
+	 * <p>The defend value is clamped to its valid stat caps after applying
 	 * movement and situational modifiers.</p>
 	 *
 	 * @param effector the attacking creature
 	 * @param attacked the target receiving damage
 	 * @param element the elemental type of the damage
-	 * @param damage base damage before elemental resistance
-	 * @return damage reduced by elemental resistance
+	 * @param damage base damage before elemental defend
+	 * @return damage reduced by elemental defend
 	 */
-	private static float reduceDamageByElementalResistance(Creature effector, Creature attacked, SkillElement element, float damage) {
-		float elementalDenominator = getElementalResistanceDenominator(effector, attacked);
+	private static float reduceDamageByElementalDefend(Creature effector, Creature attacked, SkillElement element, float damage) {
+		float elementalDenominator = getElementalDefendDenominator(effector, attacked);
 		int rawDefend = attacked.getGameStats().getElementalDefendFor(element);
 		int adjustedDefend = (int) adjustStatByMovementModifier(attacked, element.getStatForElement(), rawDefend);
 		adjustedDefend = StatCapUtil.clampStatValue(element.getStatForElement(), attacked, adjustedDefend);
 		return damage * (1f - adjustedDefend / elementalDenominator);
 	}
 
-	private static int getElementalResistanceDenominator(Creature effector, Creature attacked) {
+	private static int getElementalDefendDenominator(Creature effector, Creature attacked) {
 		if (!(attacked instanceof Player)) {
-			return StatCapUtil.getElementalResistanceBaseValue();
+			return StatCapUtil.getElementalDefendBaseValue();
 		}
 		int level = Math.min(effector.getLevel(), attacked.getLevel());
-		return StatCapUtil.getElementalResistanceBaseValue() + Math.max(0, level - 50) * 10;
+		return StatCapUtil.getElementalDefendBaseValue() + Math.max(0, level - 50) * 10;
 	}
 
 	public static float calculateMagicalSkillDamage(Creature effector, Creature target, float baseDamage, int bonus, EffectTemplate template,
@@ -402,7 +402,7 @@ public class StatFunctions {
 		// add bonus damage
 		damage += bonus;
 		if (template.getElement() != SkillElement.NONE && !(template instanceof NoReduceSpellATKInstantEffect)) {
-			damage = reduceDamageByElementalResistance(effector, target, template.getElement(), damage);
+			damage = reduceDamageByElementalDefend(effector, target, template.getElement(), damage);
 			// damage is reduced by 100 per 1000 mdef
 			damage -= adjustStatByMovementModifier(target, StatEnum.MAGICAL_DEFEND, target.getGameStats().getMDef().getCurrent()) / 10f;
 		}
