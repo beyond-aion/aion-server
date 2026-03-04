@@ -94,6 +94,9 @@ public class EffectController {
 		}
 		put(mapToUpdate, nextEffect);
 
+		if (nextEffect.isFearWithSpeedReduction())
+			removeSpeedReductionEffects();
+
 		nextEffect.startEffect();
 
 		if (!nextEffect.isPassive())
@@ -351,6 +354,14 @@ public class EffectController {
 
 	public void removeStunEffects() {
 		removeEffects(abnormalEffectMap, Effect::isStunEffect);
+	}
+
+	public void removeSpeedReductionEffects() {
+		removeEffects(abnormalEffectMap, effect -> effect.reducesMovementSpeed() && !effect.isFearWithSpeedReduction());
+	}
+
+	public boolean hasActiveFearWithSpeedReduction() {
+		return hasAbnormalEffect(Effect::isFearWithSpeedReduction);
 	}
 
 	/**

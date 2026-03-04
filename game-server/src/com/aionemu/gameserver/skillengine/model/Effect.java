@@ -17,11 +17,13 @@ import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
+import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.model.templates.item.ItemTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_ATTACK_STATUS.TYPE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SKILL_ACTIVATION;
 import com.aionemu.gameserver.services.event.Event;
 import com.aionemu.gameserver.skillengine.SkillEngine;
+import com.aionemu.gameserver.skillengine.change.Change;
 import com.aionemu.gameserver.skillengine.effect.*;
 import com.aionemu.gameserver.skillengine.model.EffectReserved.ResourceType;
 import com.aionemu.gameserver.skillengine.periodicaction.PeriodicAction;
@@ -766,10 +768,34 @@ public class Effect implements StatOwner {
 		if (!addedToController) {
 			Creature effected = getEffected();
 			if (effected.getLifeStats() != null && !effected.isDead()) {
+				if (reducesMovementSpeed() && !skillTemplate.hasAnyEffect(EffectType.FEAR) && effected.getEffectController().hasActiveFearWithSpeedReduction())
+					return;
 				effected.getEffectController().addEffect(this);
 				addedToController = true;
 			}
 		}
+	}
+
+	/**
+	 * @return true if any effect has a stat change that reduces SPEED or FLY_SPEED
+	 */
+	public boolean reducesMovementSpeed() {
+		for (EffectTemplate template : getEffectTemplates()) {
+			if (template.getChange() != null) {
+				for (Change change : template.getChange()) {
+					if ((change.getStat() == StatEnum.SPEED || change.getStat() == StatEnum.FLY_SPEED) && change.getValue() < 0)
+						return true;
+				}
+			}
+		}
+		return false;
+	}
+
+	/**
+	 * @return true if this effect is a fear that also reduces movement speed (e.g. Curse of Fire/Water)
+	 */
+	public boolean isFearWithSpeedReduction() {
+		return skillTemplate.hasAnyEffect(EffectType.FEAR) && reducesMovementSpeed();
 	}
 
 	public int getEffectHate() {
