@@ -60,5 +60,6 @@ public class CM_MOVE_IN_AIR extends AionClientPacket {
 
 		World.getInstance().updatePosition(player, x, y, z, heading);
 		player.getMoveController().onMoveFromClient();
+		player.getController().onMove();
 	}
 }
