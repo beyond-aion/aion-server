@@ -36697,25 +36697,22 @@
 		</items>
 	</decomposable>
 	<decomposable item_id="188054029"><!-- [Event] Blooming Gift -->
-		<items chance="2.5">
+		<items chance="3">
 			<item id="188053915" /><!-- [Event] Aether Bloom Bouquet -->
 		</items>
-		<items chance="2.5">
-			<item id="110900949" /><!-- Breezy Summer Outfit -->
+		<items chance="3">
+			<item id="190100115" /><!-- Lightning Steed -->
 		</items>
-		<items chance="2.5">
+		<items chance="3">
 			<item id="169600038" /><!-- [Emotion Card] Scatter Petals -->
 		</items>
-		<items chance="2.5">
-			<item id="188053903" /><!-- Honorable Equipment of Conquest Box -->
+		<items chance="3">
+			<item id="188054238" /><!-- Iron Wall Armor Box -->
 		</items>
-		<items chance="2.5">
-			<item id="188053033" /><!-- Kunax's Equipment Box -->
+		<items chance="3">
+			<item id="188053695" min_count="3" /><!-- High Grade Crafting Material Box of Conquest -->
 		</items>
-		<items chance="2.5">
-			<item id="168310018" /><!-- Major Blessed Augment: Level 2 -->
-		</items>
-		<items chance="10.0">
+		<items chance="10">
 			<item id="188053610" /><!-- [Event] Level 70 Composite Manastone Bundle -->
 		</items>
 		<items chance="12.5">
