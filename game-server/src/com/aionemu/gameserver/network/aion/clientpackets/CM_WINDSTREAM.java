@@ -9,7 +9,7 @@ import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
-import com.aionemu.gameserver.model.templates.windstreams.WindstreamPath;
+import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
@@ -18,6 +18,7 @@ import com.aionemu.gameserver.network.aion.serverpackets.SM_WINDSTREAM;
 import com.aionemu.gameserver.questEngine.QuestEngine;
 import com.aionemu.gameserver.questEngine.model.QuestEnv;
 import com.aionemu.gameserver.utils.PacketSendUtility;
+
 public class CM_WINDSTREAM extends AionClientPacket {
 
 	int teleportId;
@@ -43,9 +44,9 @@ public class CM_WINDSTREAM extends AionClientPacket {
 				player.unsetPlayerMode(PlayerMode.RIDE);
 				break;
 			case 1: // entering windstream
-				if (player.isInPlayerMode(PlayerMode.WINDSTREAM) || !player.isFlying())
+				if (player.isUsingFlightTransporterOrWindstream() || !player.isFlying())
 					return;
-				player.setPlayerMode(PlayerMode.WINDSTREAM, new WindstreamPath(teleportId, distance));
+				player.setFlightPath(new FlightPath(FlightPath.Type.WINDSTREAM, teleportId, distance));
 				player.unsetState(CreatureState.ACTIVE);
 				player.unsetState(CreatureState.GLIDING);
 				player.setState(CreatureState.FLYING);
@@ -57,7 +58,7 @@ public class CM_WINDSTREAM extends AionClientPacket {
 				return; // don't send SM_WINDSTREAM
 			case 2: // leaving windstream (gliding)
 			case 3: // leaving windstream
-				if (!player.isInPlayerMode(PlayerMode.WINDSTREAM))
+				if (!player.isUsingFlightPath(FlightPath.Type.WINDSTREAM))
 					return;
 				player.unsetState(CreatureState.FLYING);
 				player.setState(CreatureState.ACTIVE);
@@ -67,7 +68,7 @@ public class CM_WINDSTREAM extends AionClientPacket {
 					player.getFlyController().switchToGliding();
 				else
 					player.getGameStats().updateStatsAndSpeedVisually();
-				player.unsetPlayerMode(PlayerMode.WINDSTREAM);
+				player.setFlightPath(null);
 				PacketSendUtility.broadcastPacket(player, new SM_EMOTION(player, state == 2 ? EmotionType.WINDSTREAM_END : EmotionType.WINDSTREAM_EXIT),
 					true);
 				if (player.isTransformed()) // send sm_transform if player is transformed

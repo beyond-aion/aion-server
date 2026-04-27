@@ -192,7 +192,7 @@ public class Skill {
 	}
 
 	private boolean canUseSkill(Player player) {
-		if (player.isUsingFlyTeleport())
+		if (player.isUsingFlightTransporterOrWindstream())
 			return false;
 		if (!getSkillTemplate().hasEvadeEffect() && player.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE))
 			return false;
@@ -203,7 +203,7 @@ public class Skill {
 
 	private boolean isValidTarget(Player player, Creature target) {
 		if (target instanceof Player targetPlayer) {
-			if (targetPlayer.isUsingFlyTeleport())
+			if (targetPlayer.isUsingFlightTransporterOrWindstream())
 				return false;
 			if (target.getRace() != player.getRace()) {
 				if (!target.isEnemyFrom(player))

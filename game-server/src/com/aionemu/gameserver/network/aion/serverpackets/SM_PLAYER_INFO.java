@@ -3,7 +3,6 @@ package com.aionemu.gameserver.network.aion.serverpackets;
 import com.aionemu.gameserver.controllers.movement.MovementMask;
 import com.aionemu.gameserver.controllers.movement.PlayerMoveController;
 import com.aionemu.gameserver.geoEngine.math.Vector3f;
-import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.player.PlayerAppearance;
@@ -196,12 +195,9 @@ public class SM_PLAYER_INFO extends AbstractPlayerInfoPacket {
 		writeF(player.getZ());
 		writeC(movementMask);
 
-		if (player.isUsingFlyTeleport()) {
-			writeD(player.getFlightTeleportId());
-			writeD(player.getFlightDistance());
-		} else if (player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
-			writeD(player.windstreamPath.teleportId);
-			writeD(player.windstreamPath.distance);
+		if (player.isUsingFlightTransporterOrWindstream()) {
+			writeD(player.getFlightPath().getId());
+			writeD(player.getFlightPath().getDistance());
 		}
 		writeC(player.getVisualState()); // visualState
 		writeS(player.getCommonData().getNote()); // note show in right down windows if your target on player

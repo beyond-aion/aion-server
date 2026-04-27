@@ -266,7 +266,7 @@ public class PvpMapHandler extends GeneralInstanceHandler {
 
 	private boolean checkState(Player p) {
 		return !p.getController().isInCombat() && !p.getLifeStats().isAboutToDie() && !p.isDead() && !p.isLooting() && !p.isInGlidingState()
-			&& !p.isFlying() && !p.isUsingFlyTeleport() && !p.isInPlayerMode(PlayerMode.WINDSTREAM) && !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore()
+			&& !p.isFlying() && !p.isUsingFlightTransporterOrWindstream() && !p.isInPlayerMode(PlayerMode.RIDE) && !p.hasStore()
 			&& p.getCastingSkill() == null && !p.getEffectController().isInAnyAbnormalState(AbnormalState.CANT_ATTACK_STATE)
 			&& !p.getEffectController().isInAnyAbnormalState(AbnormalState.ROOT);
 	}

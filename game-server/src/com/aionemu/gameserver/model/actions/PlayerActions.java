@@ -8,7 +8,6 @@ import com.aionemu.gameserver.model.gameobjects.player.InRoll;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
-import com.aionemu.gameserver.model.templates.windstreams.WindstreamPath;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_EMOTION;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 
@@ -23,8 +22,6 @@ public class PlayerActions {
 				return player.ride != null;
 			case IN_ROLL:
 				return player.inRoll != null;
-			case WINDSTREAM:
-				return player.windstreamPath != null;
 		}
 		return false;
 	}
@@ -36,9 +33,6 @@ public class PlayerActions {
 				break;
 			case IN_ROLL:
 				player.inRoll = (InRoll) obj;
-				break;
-			case WINDSTREAM:
-				player.windstreamPath = (WindstreamPath) obj;
 				break;
 		}
 	}
@@ -76,11 +70,6 @@ public class PlayerActions {
 				if (player.inRoll == null)
 					return false;
 				player.inRoll = null;
-				return true;
-			case WINDSTREAM:
-				if (player.windstreamPath == null)
-					return false;
-				player.windstreamPath = null;
 				return true;
 			default:
 				return false;
