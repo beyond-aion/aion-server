@@ -1,10 +1,5 @@
 /*
-* DB changes since 937026f (28.11.2025)
+* DB changes since 4509007 (09.03.2026)
  */
 
-DROP TABLE IF EXISTS advent;
-CREATE TABLE `advent` (
-	`account_id` int NOT NULL,
-	`last_day_received` date NOT NULL,
-	PRIMARY KEY (`account_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+DELETE FROM inventory WHERE item_id IN (186000406, 186000407, 188053915, 188054028, 188054029);

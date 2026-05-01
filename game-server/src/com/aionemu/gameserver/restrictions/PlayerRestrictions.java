@@ -5,7 +5,6 @@ import com.aionemu.gameserver.configs.main.GroupConfig;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TaskId;
-import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Item;
 import com.aionemu.gameserver.model.gameobjects.VisibleObject;
@@ -41,15 +40,13 @@ import com.aionemu.gameserver.world.zone.ZoneName;
 public class PlayerRestrictions {
 
 	private static boolean checkFly(Player player, VisibleObject target) {
-		if (player.isUsingFlyTeleport() || player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
+		if (player.isUsingFlightTransporterOrWindstream()) {
 			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_SKILL_RESTRICTION_NO_FLY());
 			return false;
 		}
 
-		if (target instanceof Player playerTarget) {
-			if (playerTarget.isUsingFlyTeleport() || playerTarget.isInPlayerMode(PlayerMode.WINDSTREAM)) {
-				return false;
-			}
+		if (target instanceof Player playerTarget && playerTarget.isUsingFlightTransporterOrWindstream()) {
+			return false;
 		}
 		return true;
 	}

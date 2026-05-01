@@ -36,6 +36,7 @@ import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
 import com.aionemu.gameserver.model.summons.SummonMode;
 import com.aionemu.gameserver.model.summons.UnsummonType;
 import com.aionemu.gameserver.model.templates.QuestTemplate;
+import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.panels.SkillPanel;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
@@ -497,6 +498,13 @@ public class PlayerController extends CreatureController<Player> {
 	}
 
 	@Override
+	protected void notifyAIOnMove() {
+		if (getOwner().isUsingFlightTransporterOrWindstream())
+			return;
+		super.notifyAIOnMove();
+	}
+
+	@Override
 	public void cancelCurrentSkill(Creature lastAttacker) {
 		cancelCurrentSkill(lastAttacker, SM_SYSTEM_MESSAGE.STR_SKILL_CANCELED());
 	}
@@ -645,8 +653,7 @@ public class PlayerController extends CreatureController<Player> {
 	 */
 	public void onFlyTeleportEnd() {
 		Player player = getOwner();
-		if (player.isInPlayerMode(PlayerMode.WINDSTREAM)) {
-			player.unsetPlayerMode(PlayerMode.WINDSTREAM);
+		if (player.isUsingFlightPath(FlightPath.Type.WINDSTREAM)) {
 			player.unsetState(CreatureState.FLYING);
 			player.unsetFlyState(FlyState.FLYING);
 			player.setFlyState(FlyState.GLIDING);
@@ -656,8 +663,6 @@ public class PlayerController extends CreatureController<Player> {
 			player.getGameStats().updateStatsAndSpeedVisually();
 		} else {
 			player.unsetState(CreatureState.FLYING);
-			player.setFlightTeleportId(0);
-
 			if (SecurityConfig.ENABLE_FLYPATH_VALIDATOR) {
 				long diff = (System.currentTimeMillis() - player.getFlyStartTime());
 				FlyPathEntry path = player.getCurrentFlyPath();
@@ -676,11 +681,10 @@ public class PlayerController extends CreatureController<Player> {
 
 				player.setCurrentFlypath(null);
 			}
-
-			player.setFlightDistance(0);
 			player.setState(CreatureState.ACTIVE);
 			updateZone();
 		}
+		player.setFlightPath(null);
 	}
 
 	public void startStance(int skillId) {

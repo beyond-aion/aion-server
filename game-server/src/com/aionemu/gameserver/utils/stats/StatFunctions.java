@@ -352,7 +352,7 @@ public class StatFunctions {
 	 */
 	private static float reduceDamageByElementalResistance(Creature attacked, SkillElement element, float damage) {
 		float elementalDenominator = attacked instanceof Player ? 1450 : 1300;
-		return damage * (1 - adjustStatByMovementModifier(attacked, StatEnum.MAGICAL_DEFEND, attacked.getGameStats().getMagicalDefenseFor(element)) / elementalDenominator);
+		return damage * (1 - adjustStatByMovementModifier(attacked, element.getStatForElement(), attacked.getGameStats().getMagicalDefenseFor(element)) / elementalDenominator);
 	}
 
 	public static float calculateMagicalSkillDamage(Creature effector, Creature target, float baseDamage, int bonus, EffectTemplate template,
@@ -374,7 +374,7 @@ public class StatFunctions {
 		if (template.getElement() != SkillElement.NONE && !(template instanceof NoReduceSpellATKInstantEffect)) {
 			damage = reduceDamageByElementalResistance(target, template.getElement(), damage);
 			// damage is reduced by 100 per 1000 mdef
-			damage -= target.getGameStats().getMDef().getCurrent()/10f;
+			damage -= adjustStatByMovementModifier(target, StatEnum.MAGICAL_DEFEND, target.getGameStats().getMDef().getCurrent()) / 10f;
 		}
 
 		if (damage < 0) {
@@ -620,10 +620,10 @@ public class StatFunctions {
 					case PHYSICAL_ATTACK:
 					case MAGICAL_ATTACK:
 						return value * 1.1f; // verified on 4.6 PTS
-					case MAGICAL_DEFEND:
+					case FIRE_RESISTANCE, EARTH_RESISTANCE, WATER_RESISTANCE, WIND_RESISTANCE, LIGHT_RESISTANCE, DARK_RESISTANCE:
 						return value - 50; // verified on 4.6 PTS
-					case PHYSICAL_DEFENSE:
-						return value * 0.8f;
+					case MAGICAL_DEFEND, PHYSICAL_DEFENSE:
+						return value * 0.8f; // verified on 4.6 PTS
 				}
 				break;
 			case SIDEWAYS:
@@ -654,16 +654,11 @@ public class StatFunctions {
 
 	private static float getNpcLevelDiffMod(Creature target, Creature attacker) {
 		int levelDiff = target.getLevel() - attacker.getLevel();
-		return switch (levelDiff) {
-			case 3 -> 0.1f;
-			case 4 -> 0.2f;
-			case 5 -> 0.3f;
-			case 6 -> 0.4f;
-			case 7 -> 0.5f;
-			case 8 -> 0.6f;
-			case 9 -> 0.7f;
-			default -> levelDiff > 9 ? 0.8f : 0;
-		};
+		if (levelDiff <= 2)
+			return 0f;
+		if (levelDiff >= 12)
+			return 1f;
+		return (levelDiff - 2) * 0.1f;
 	}
 
 	/**

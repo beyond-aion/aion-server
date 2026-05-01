@@ -4,6 +4,7 @@ import java.util.Map;
 import java.util.Set;
 import java.util.concurrent.ConcurrentHashMap;
 import java.util.concurrent.Future;
+import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -115,15 +116,19 @@ public class RespawnService {
 		return false;
 	}
 
-	public static int cancelEventRespawns(EventTemplate eventTemplate) {
+	public static int cancelRespawns(Predicate<SpawnTemplate> predicate) {
 		int count = 0;
 		for (RespawnTask respawn : pendingRespawns.values()) {
-			if (eventTemplate.equals(respawn.spawnTemplate.getEventTemplate())) {
+			if (predicate.test(respawn.spawnTemplate)) {
 				respawn.cancel();
 				count++;
 			}
 		}
 		return count;
+	}
+
+	public static int cancelEventRespawns(EventTemplate eventTemplate) {
+		return cancelRespawns(spawnTemplate -> eventTemplate.equals(spawnTemplate.getEventTemplate()));
 	}
 
 	private static class DecayTask implements Runnable {

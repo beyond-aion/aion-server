@@ -51,12 +51,12 @@ import com.aionemu.gameserver.model.team.alliance.PlayerAllianceGroup;
 import com.aionemu.gameserver.model.team.group.PlayerGroup;
 import com.aionemu.gameserver.model.team.legion.Legion;
 import com.aionemu.gameserver.model.team.legion.LegionMember;
+import com.aionemu.gameserver.model.templates.flypath.FlightPath;
 import com.aionemu.gameserver.model.templates.flypath.FlyPathEntry;
 import com.aionemu.gameserver.model.templates.item.ItemAttackType;
 import com.aionemu.gameserver.model.templates.item.ItemUseLimits;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.model.templates.ride.RideInfo;
-import com.aionemu.gameserver.model.templates.windstreams.WindstreamPath;
 import com.aionemu.gameserver.model.templates.zone.ZoneType;
 import com.aionemu.gameserver.network.aion.AionConnection;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_STATS_INFO;
@@ -86,7 +86,6 @@ public class Player extends Creature {
 
 	public volatile RideInfo ride;
 	public volatile InRoll inRoll;
-	public volatile WindstreamPath windstreamPath;
 	public InGameShop inGameShop;
 	private final PlayerAccountData playerAccountData;
 	private final Account playerAccount;
@@ -125,8 +124,7 @@ public class Player extends Creature {
 	private int flyState = 0;
 	private FlyController flyController;
 	private CraftingTask craftingTask;
-	private int flightTeleportId;
-	private int flightDistance;
+	private FlightPath flightPath;
 	private Summon summon;
 	private Pet pet;
 	private Kisk kisk;
@@ -820,19 +818,23 @@ public class Player extends Creature {
 	}
 
 	public void setFlightTeleportId(int flightTeleportId) {
-		this.flightTeleportId = flightTeleportId;
+		setFlightPath(new FlightPath(FlightPath.Type.FLIGHT_TRANSPORTER, flightTeleportId, 0));
 	}
 
-	/**
-	 * @return flightTeleportId
-	 */
-	public int getFlightTeleportId() {
-		return flightTeleportId;
+	public void setFlightPath(FlightPath flightPath) {
+		this.flightPath = flightPath;
 	}
 
-	public void setFlightDistance(int flightDistance) {
-		this.flightDistance = flightDistance;
+	public boolean isUsingFlightPath(FlightPath.Type type) {
+		return flightPath != null && flightPath.getType() == type && isInState(CreatureState.FLYING);
+	}
 
+	public boolean isUsingFlightTransporterOrWindstream() {
+		return flightPath != null && isInState(CreatureState.FLYING);
+	}
+
+	public FlightPath getFlightPath() {
+		return flightPath;
 	}
 
 	public void setCurrentFlypath(FlyPathEntry path) {
@@ -841,17 +843,6 @@ public class Player extends Creature {
 			this.flyStartTime = System.currentTimeMillis();
 		else
 			this.flyStartTime = 0;
-	}
-
-	/**
-	 * @return flightDistance
-	 */
-	public int getFlightDistance() {
-		return flightDistance;
-	}
-
-	public boolean isUsingFlyTeleport() {
-		return isInState(CreatureState.FLYING) && flightTeleportId != 0;
 	}
 
 	/**

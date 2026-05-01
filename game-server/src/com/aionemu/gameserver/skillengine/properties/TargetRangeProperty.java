@@ -3,7 +3,6 @@ package com.aionemu.gameserver.skillengine.properties;
 import java.util.List;
 
 import com.aionemu.gameserver.configs.main.GeoDataConfig;
-import com.aionemu.gameserver.model.actions.PlayerMode;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Summon;
 import com.aionemu.gameserver.model.gameobjects.Trap;
@@ -47,7 +46,7 @@ public class TargetRangeProperty {
 					.filter(creature -> checkCommonRequirements(creature, skillTemplate))
 //					.filter(creature -> !(creature instanceof Kisk && isInsideDisablePvpZone(creature)))
 					.filter(creature -> Math.abs(firstTarget.getZ() - creature.getZ()) <= altitude)
-					.filter(creature -> !(creature instanceof Player player && player.isInPlayerMode(PlayerMode.WINDSTREAM)))
+					.filter(creature -> !(creature instanceof Player player && player.isUsingFlightTransporterOrWindstream()))
 					.filter(creature -> !(skillEffector instanceof Trap trap && trap.getCreator() == creature)) // TODO this is a temporary hack for traps
 					.filter(creature -> checkRange(properties, skillEffector, x, y, z, creature, effectiveRange, firstTarget))
 					.filter(creature -> checkGeo(creature, result.getFirstTarget(), skillTemplate))

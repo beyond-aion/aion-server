@@ -14,6 +14,7 @@ import com.aionemu.gameserver.model.templates.spawns.SpawnTemplate;
 import com.aionemu.gameserver.model.templates.spawns.basespawns.BaseSpawnTemplate;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_SYSTEM_MESSAGE;
 import com.aionemu.gameserver.services.BaseService;
+import com.aionemu.gameserver.services.RespawnService;
 import com.aionemu.gameserver.spawnengine.SpawnEngine;
 import com.aionemu.gameserver.spawnengine.SpawnHandlerType;
 import com.aionemu.gameserver.utils.PacketSendUtility;
@@ -83,9 +84,14 @@ public abstract class Base<T extends BaseLocation> {
 
 	private void despawnNpcs(SpawnHandlerType type) {
 		World.getInstance().getWorldMap(getLocation().getTemplate().getWorldId()).forEachObject(o -> {
-			if (o.getSpawn() instanceof BaseSpawnTemplate spawn && spawn.getId() == id && (type == null || spawn.getHandlerType() == type))
+			if (isSpawnForCurrentBase(o.getSpawn(), type))
 				o.getController().deleteIfAliveOrCancelRespawn();
 		});
+		RespawnService.cancelRespawns(spawnTemplate -> isSpawnForCurrentBase(spawnTemplate, type));
+	}
+
+	private boolean isSpawnForCurrentBase(SpawnTemplate spawnTemplate, SpawnHandlerType type) {
+		return spawnTemplate instanceof BaseSpawnTemplate spawn && spawn.getId() == id && (type == null || spawn.getHandlerType() == type);
 	}
 
 	protected void scheduleOutriderSpawn() {

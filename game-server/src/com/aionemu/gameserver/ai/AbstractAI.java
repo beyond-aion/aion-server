@@ -1,6 +1,5 @@
 package com.aionemu.gameserver.ai;
 
-import java.util.Arrays;
 import java.util.Objects;
 
 import com.aionemu.commons.utils.Rnd;
@@ -28,6 +27,8 @@ import com.aionemu.gameserver.world.geo.GeoService;
  * @author ATracer
  */
 public abstract class AbstractAI<T extends Creature> implements AI {
+
+	private static final ThreadLocal<Integer> DEPTH = ThreadLocal.withInitial(() -> 0);
 
 	private final T owner;
 	private AIState currentState;
@@ -130,13 +131,15 @@ public abstract class AbstractAI<T extends Creature> implements AI {
 				AILogger.info(this, "Creature event " + event + ": " + creature.getObjectTemplate().getTemplateId());
 			}
 			try {
+				int depth = DEPTH.get();
+				if (depth > 20)
+					throw new StackOverflowError(
+						"Aborted abnormal AI event recursion for " + owner + " with AIEventType." + event + " and target: " + creature + ", most hated: "
+							+ owner.getAggroList().getTarget(AggroTarget.MOST_HATED));
+				DEPTH.set(depth + 1);
 				handleCreatureEvent(event, creature);
-			} catch (StackOverflowError | BootstrapMethodError e) {
-				Creature mostHated = getOwner().getAggroList().getTarget(AggroTarget.MOST_HATED);
-				StackOverflowError error = new StackOverflowError(
-					"Aborted never ending AI event loop for " + getOwner() + " with AIEventType." + event + " and target: " + creature + ", most hated: " + mostHated);
-				error.setStackTrace(Arrays.copyOfRange(e.getStackTrace(), Math.max(e.getStackTrace().length - 42, 0), e.getStackTrace().length));
-				throw error;
+			} finally {
+				DEPTH.set(0);
 			}
 		}
 	}
