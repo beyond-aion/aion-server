@@ -38,9 +38,4 @@ public class ProcHealInstantEffect extends AbstractHealEffect {
 	public boolean allowHpHealBoost(Effect effect) {
 		return false;
 	}
-
-	@Override
-	public boolean allowHpHealSkillDeboost(Effect effect) {
-		return false;
-	}
 }
