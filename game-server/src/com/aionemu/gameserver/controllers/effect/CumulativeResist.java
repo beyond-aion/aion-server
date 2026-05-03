@@ -12,13 +12,24 @@ class CumulativeResist {
 		this.expirationTime = System.currentTimeMillis() + maxDurationMillis;
 	}
 
-	float getDurationMultiplier() {
-		resetIfExpired();
+	float getDurationMultiplier(CumulativeResistType type) {
 		return switch (level) {
-			case 0, 1, 2 -> 1f;
-			case 3 -> 0.9f;
-			case 4 -> 0.85f;
-			default -> 0.8f;
+			case 0, 1 -> 1;
+			case 2 -> 0.9f;
+			case 3 -> 0.85f;
+			case 4 -> 0.8f;
+			default -> 0;
+		};
+	}
+
+	int getCooldownMultiplier(CumulativeResistType type) {
+		return 1;
+	}
+
+	int getCooldownTimeOffset(CumulativeResistType type) {
+		return switch (type) {
+			case SLEEP, PARALYZE -> 0;
+			case FEAR -> 2000;
 		};
 	}
 

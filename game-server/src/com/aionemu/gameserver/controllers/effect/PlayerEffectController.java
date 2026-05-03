@@ -142,9 +142,9 @@ public class PlayerEffectController extends EffectController {
 	public long calculateAndApplyCumulativeResistDuration(CumulativeResistType type, long duration) {
 		synchronized (cumulativeResistInfo) {
 			CumulativeResist cumulativeResist = cumulativeResistInfo.computeIfAbsent(type, _ -> new CumulativeResist());
-			// retail uses a dynamic duration after the last successful fear/para/sleep, which we approximate by multiplying the base duration * 2 for now
-			cumulativeResist.tryIncrementLevel(duration * 2);
-			return (long) (duration * cumulativeResist.getDurationMultiplier());
+			long cooldownAfterProc = duration * cumulativeResist.getCooldownMultiplier(type) + cumulativeResist.getCooldownTimeOffset(type); 
+			cumulativeResist.tryIncrementLevel(cooldownAfterProc);
+			return (long) (duration * cumulativeResist.getDurationMultiplier(type));
 		}
 	}
 
