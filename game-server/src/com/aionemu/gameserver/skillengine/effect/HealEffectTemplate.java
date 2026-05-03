@@ -25,7 +25,7 @@ public interface HealEffectTemplate {
 				int healBoost = effect.getEffector().getGameStats().getStat(StatEnum.HEAL_BOOST, 0).getCurrent();
 				// caster's heal related effects (passive boosts, active buffs e.g. blessed shield)
 				int healSkillBoost = effect.getEffector().getGameStats().getStat(StatEnum.HEAL_SKILL_BOOST, 1000).getCurrent() - 1000;
-				healValue += Math.round(healValue * (healBoost + healSkillBoost) / 1000f);
+				healValue += Math.round(healValue * Math.min(2000, healBoost + healSkillBoost) / 1000f);
 			}
 			// apply target's heal related effects (e.g. brilliant protection)
 			if (allowHpHealSkillDeboost(effect))
