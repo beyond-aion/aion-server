@@ -3,8 +3,6 @@ package com.aionemu.gameserver.utils.stats;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.aionemu.gameserver.model.stats.container.*;
-
 import org.apache.commons.lang3.ArrayUtils;
 
 import com.aionemu.commons.utils.Rnd;
@@ -21,6 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.siege.Influence;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.StatCapUtil;
+import com.aionemu.gameserver.model.stats.container.*;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
@@ -490,7 +489,7 @@ public class StatFunctions {
 		float multiplier = 1f + (attackBonus - defenseBonus) / 1000f;
 		// prevent negative or zero damage
 		multiplier = Math.max(multiplier, 0.1f);
-		
+
 		return damage * multiplier;
 	}
 

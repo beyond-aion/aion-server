@@ -61,15 +61,15 @@ public class StatCapUtil {
 
 	public static int limitValueForPvpOrPveStat(CombatMode mode, RatioType type, int value) {
 		// Note: PvP/PvE ratio caps are symmetric:
-    // - attack min is fixed, defense max is fixed
-    // - upper/lower bounds depend on combat mode
+		// - attack min is fixed, defense max is fixed
+		// - upper/lower bounds depend on combat mode
 		Cap cap = switch (mode) {
 			case PVP -> switch (type) {
-				case ATTACK  -> new Cap(-900, 1000);
+				case ATTACK -> new Cap(-900, 1000);
 				case DEFENSE -> new Cap(-1000, 900);
 			};
 			case PVE -> switch (type) {
-				case ATTACK  -> new Cap(-900, 5000);
+				case ATTACK -> new Cap(-900, 5000);
 				case DEFENSE -> new Cap(-5000, 900);
 			};
 		};
