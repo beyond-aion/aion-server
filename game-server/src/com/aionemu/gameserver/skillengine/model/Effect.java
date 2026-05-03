@@ -845,14 +845,14 @@ public class Effect implements StatOwner {
 	private int calculateEffectsDuration() {
 		long duration = calculateTemplateDuration();
 
-		// adjust with pvp duration (not sure why some self target skills have pvp duration o.O idk how to handle that)
 		if (getEffected() instanceof Player effectedPlayer) {
-			if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected))
-				duration = duration * skillTemplate.getPvpDuration() / 100;
-			if (getEffector().getMaster() instanceof Player)
+			if (getEffector().getMaster() instanceof Player) {
 				duration = applyCumulativeResistDurationMultiplier(duration, effectedPlayer);
+			}
+			if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected)) {
+				duration = duration * skillTemplate.getPvpDuration() / 100;
+			}
 		}
-
 		return (int) Math.min(Integer.MAX_VALUE, duration);
 	}
 
