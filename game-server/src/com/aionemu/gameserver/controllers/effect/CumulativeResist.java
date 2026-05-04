@@ -22,10 +22,6 @@ class CumulativeResist {
 		};
 	}
 
-	int getCooldownMultiplier(CumulativeResistType type) {
-		return 1;
-	}
-
 	int getCooldownTimeOffset(CumulativeResistType type) {
 		return switch (type) {
 			case SLEEP, PARALYZE -> 0;
