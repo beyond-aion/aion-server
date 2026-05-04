@@ -120,9 +120,6 @@ public class StatCapUtil {
 				case MAXMP:
 					value = 0;
 					break;
-				case HEAL_BOOST:
-					value = -1000;
-					break;
 			}
 			return value;
 		}
