@@ -74,7 +74,7 @@ public class StatCapUtil {
 			};
 		};
 
-		return Math.min(cap.max(), Math.max(cap.min(), value));
+		return Math.clamp(value, cap.min(), cap.max());
 	}
 
 	private record Cap(int min, int max) {}
