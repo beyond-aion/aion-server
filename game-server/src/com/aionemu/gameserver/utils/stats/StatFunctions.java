@@ -336,13 +336,13 @@ public class StatFunctions {
 	}
 
 	/**
-	 * Applies elemental defend to incoming damage.
+	 * Applies elemental defense to incoming damage.
 	 *
-	 * <p>Elemental defend reduces damage linearly using a normalized scale
+	 * <p>Elemental defense reduces damage linearly using a normalized scale
 	 * (denominator) that depends on target type and level.</p>
 	 *
 	 * <ul>
-	 *   <li><b>Players:</b> defend is normalized against a level-scaled denominator
+	 *   <li><b>Players:</b> defense is normalized against a level-scaled denominator
 	 *       (base {@code 1300}, increasing by {@code +10} per level above {@code 50},
 	 *       using {@code min(attackerLevel, defenderLevel)}).</li>
 	 *   <li><b>NPCs and other creatures:</b> defend is normalized against a fixed
@@ -351,7 +351,7 @@ public class StatFunctions {
 	 *
 	 * <p>Damage reduction formula:</p>
 	 * <pre>
-	 *   finalDamage = damage * (1 - effectiveDefend / denominator)
+	 *   finalDamage = damage * (1 - effectiveDefense / denominator)
 	 * </pre>
 	 *
 	 * <p>Example (player(63) vs player(65), or npc(65) vs player(63)):</p>
@@ -369,20 +369,20 @@ public class StatFunctions {
 	 * @param damage base damage before elemental defend
 	 * @return damage reduced by elemental defend
 	 */
-	private static float reduceDamageByElementalDefend(Creature effector, Creature attacked, SkillElement element, float damage) {
-		float elementalDenominator = getElementalDefendDenominator(effector, attacked);
-		int rawDefend = attacked.getGameStats().getElementalDefendFor(element);
-		int adjustedDefend = (int) adjustStatByMovementModifier(attacked, element.getStatForElement(), rawDefend);
+	private static float reduceDamageByElementalDefense(Creature effector, Creature attacked, SkillElement element, float damage) {
+		float elementalDenominator = getElementalDefenseDenominator(effector, attacked);
+		int rawDefense = attacked.getGameStats().getElementalDefenseFor(element);
+		int adjustedDefend = (int) adjustStatByMovementModifier(attacked, element.getStatForElement(), rawDefense);
 		adjustedDefend = StatCapUtil.clampStatValue(element.getStatForElement(), attacked, adjustedDefend);
 		return damage * (1f - adjustedDefend / elementalDenominator);
 	}
 
-	private static int getElementalDefendDenominator(Creature effector, Creature attacked) {
+	private static int getElementalDefenseDenominator(Creature effector, Creature attacked) {
 		if (!(attacked instanceof Player)) {
-			return StatCapUtil.getElementalDefendBaseValue();
+			return StatCapUtil.getElementalDefenseBaseValue();
 		}
 		int level = Math.min(effector.getLevel(), attacked.getLevel());
-		return StatCapUtil.getElementalDefendBaseValue() + Math.max(0, level - 50) * 10;
+		return StatCapUtil.getElementalDefenseBaseValue() + Math.max(0, level - 50) * 10;
 	}
 
 	public static float calculateMagicalSkillDamage(Creature effector, Creature target, float baseDamage, int bonus, EffectTemplate template,
@@ -402,7 +402,7 @@ public class StatFunctions {
 		// add bonus damage
 		damage += bonus;
 		if (template.getElement() != SkillElement.NONE && !(template instanceof NoReduceSpellATKInstantEffect)) {
-			damage = reduceDamageByElementalDefend(effector, target, template.getElement(), damage);
+			damage = reduceDamageByElementalDefense(effector, target, template.getElement(), damage);
 			// damage is reduced by 100 per 1000 mdef
 			damage -= adjustStatByMovementModifier(target, StatEnum.MAGICAL_DEFEND, target.getGameStats().getMDef().getCurrent()) / 10f;
 		}

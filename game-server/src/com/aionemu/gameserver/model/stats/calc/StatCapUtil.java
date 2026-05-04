@@ -19,7 +19,7 @@ public class StatCapUtil {
 		}
 	}
 
-	public static int getElementalDefendBaseValue() {
+	public static int getElementalDefenseBaseValue() {
 		return 1300;
 	}
 
@@ -39,8 +39,8 @@ public class StatCapUtil {
 	}
 
 	public static int getLowerCap(StatEnum stat, Creature creature) {
-		if (isElementalDefendStat(stat)) {
-			return -getElementalCapForCreature(creature);
+		if (isElementalDefenseStat(stat)) {
+			return -getElementalDefenseCapForCreature(creature);
 		}
 		return limits.get(stat).lowerCap;
 	}
@@ -49,20 +49,20 @@ public class StatCapUtil {
 		boolean isSpeedUnrestricted = !(creature instanceof Player) || ((Player) creature).isStaff();
 		if ((stat == StatEnum.SPEED || stat == StatEnum.FLY_SPEED) && isSpeedUnrestricted)
 			return Integer.MAX_VALUE;
-		if (isElementalDefendStat(stat)) {
-			return getElementalCapForCreature(creature);
+		if (isElementalDefenseStat(stat)) {
+			return getElementalDefenseCapForCreature(creature);
 		}
 		return limits.get(stat).upperCap;
 	}
 
-	public static int getElementalCapForCreature(Creature creature) {
+	public static int getElementalDefenseCapForCreature(Creature creature) {
 		if (creature instanceof Player) {
 			return 1000 + Math.max(0, creature.getLevel() - 50) * 10;
 		}
-		return getElementalDefendBaseValue();
+		return getElementalDefenseBaseValue();
 	}
 
-	private static boolean isElementalDefendStat(StatEnum stat) {
+	private static boolean isElementalDefenseStat(StatEnum stat) {
 		return switch (stat) {
 			case WATER_RESISTANCE, FIRE_RESISTANCE, EARTH_RESISTANCE, WIND_RESISTANCE, DARK_RESISTANCE, LIGHT_RESISTANCE -> true;
 			default -> false;

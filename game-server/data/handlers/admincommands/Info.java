@@ -100,12 +100,12 @@ public class Info extends AdminCommand {
 							+ "\n\t\tEvasion: " + pgs.getEvasion().getCurrent()
 							+ "\n\t\tCrit. Strike Resist: " + pgs.getPCR().getCurrent()
 							+ "\n\t\tCrit. Strike Fortitude: " + pgs.getStat(StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, 0).getCurrent()
-							+ "\n\t\tWind Resist: " + pgs.getElementalDefendFor(SkillElement.WIND)
-							+ "\n\t\tWater Resist: " + pgs.getElementalDefendFor(SkillElement.WATER)
-							+ "\n\t\tEarth Resist: " + pgs.getElementalDefendFor(SkillElement.EARTH)
-							+ "\n\t\tFire Resist: " + pgs.getElementalDefendFor(SkillElement.FIRE)
-							+ "\n\t\tDark Resist: " + pgs.getElementalDefendFor(SkillElement.DARK)
-							+ "\n\t\tLight Resist: " + pgs.getElementalDefendFor(SkillElement.LIGHT)
+							+ "\n\t\tWind Resist: " + pgs.getElementalDefenseFor(SkillElement.WIND)
+							+ "\n\t\tWater Resist: " + pgs.getElementalDefenseFor(SkillElement.WATER)
+							+ "\n\t\tEarth Resist: " + pgs.getElementalDefenseFor(SkillElement.EARTH)
+							+ "\n\t\tFire Resist: " + pgs.getElementalDefenseFor(SkillElement.FIRE)
+							+ "\n\t\tDark Resist: " + pgs.getElementalDefenseFor(SkillElement.DARK)
+							+ "\n\t\tLight Resist: " + pgs.getElementalDefenseFor(SkillElement.LIGHT)
 							+ "\n\t-------------PvP Stats-------------"
 							+ "\n\tPvP attack: " + pgs.getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.1f + "%"
 							+ "\n\tPvP p. attack: " + pgs.getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.1f + "%"
