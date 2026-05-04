@@ -487,7 +487,7 @@ public class StatFunctions {
 		attackBonus = StatCapUtil.limitValueForPvpOrPveStat(mode, RatioType.ATTACK, attackBonus);
 		defenseBonus = StatCapUtil.limitValueForPvpOrPveStat(mode, RatioType.DEFENSE, defenseBonus);
 		float multiplier = 1f + (attackBonus - defenseBonus) / 1000f;
-		// prevent negative or zero damage
+		// Retail behavior: damage multiplier has a minimum cap of 10% (0.1f)
 		multiplier = Math.max(multiplier, 0.1f);
 
 		return damage * multiplier;
