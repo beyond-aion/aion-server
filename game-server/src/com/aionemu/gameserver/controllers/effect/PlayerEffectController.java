@@ -142,7 +142,7 @@ public class PlayerEffectController extends EffectController {
 	public long calculateAndApplyCumulativeResistDuration(CumulativeResistType type, long duration) {
 		synchronized (cumulativeResistInfo) {
 			CumulativeResist cumulativeResist = cumulativeResistInfo.computeIfAbsent(type, _ -> new CumulativeResist());
-			long cooldownAfterProc = duration * cumulativeResist.getCooldownMultiplier(type) + cumulativeResist.getCooldownTimeOffset(type); 
+			long cooldownAfterProc = duration + cumulativeResist.getCooldownTimeOffset(type); 
 			cumulativeResist.tryIncrementLevel(cooldownAfterProc);
 			return (long) (duration * cumulativeResist.getDurationMultiplier(type));
 		}
