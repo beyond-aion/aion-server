@@ -12,7 +12,7 @@ class CumulativeResist {
 		this.expirationTime = System.currentTimeMillis() + maxDurationMillis;
 	}
 
-	float getDurationMultiplier(CumulativeResistType type) {
+	float getDurationMultiplier() {
 		return switch (level) {
 			case 0, 1 -> 1;
 			case 2 -> 0.9f;
