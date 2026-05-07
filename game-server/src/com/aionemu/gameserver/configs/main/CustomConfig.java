@@ -238,6 +238,12 @@ public class CustomConfig {
 	public static int CHARACTER_DELETION_TIME_MINUTES;
 
 	/**
+	 * Don't consume potions when already at full HP/MP
+	 */
+	@Property(key = "gameserver.items.ignore_potions_at_full_health", defaultValue = "false")
+	public static boolean IGNORE_POTIONS_AT_FULL_HEALTH;
+
+	/**
 	 * Custom Reward Packages
 	 */
 	@Property(key = "gameserver.custom.starter_kit.enable", defaultValue = "false")
