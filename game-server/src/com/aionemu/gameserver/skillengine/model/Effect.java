@@ -846,7 +846,7 @@ public class Effect implements StatOwner {
 		long duration = calculateTemplateDuration();
 
 		if (getEffected() instanceof Player effectedPlayer) {
-			if (getEffector().getMaster() instanceof Player) {
+			if (getEffector() instanceof Player) {
 				duration = applyCumulativeResistDurationMultiplier(duration, effectedPlayer);
 			}
 			if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected)) {
