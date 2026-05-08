@@ -11,8 +11,9 @@ class CumulativeResist {
 			level++;
 		this.expirationTime = System.currentTimeMillis() + maxDurationMillis;
 	}
-	//time_value* from repeated_abnormal_status_immune.xml retail file
+
 	float getDurationMultiplier() {
+		//time_value* from repeated_abnormal_status_immune.xml retail file
 		return switch (level) {
 			case 0, 1 -> 1;
 			case 2 -> 0.9f;
@@ -21,16 +22,17 @@ class CumulativeResist {
 			default -> 0;
 		};
 	}
-
-	//holding_time2 from repeated_abnormal_status_immune.xml retail file
+	
 	int getCooldownTimeOffset(CumulativeResistType type) {
+		//holding_time2 from repeated_abnormal_status_immune.xml retail file
 		return switch (type) {
 			case SLEEP, PARALYZE -> 0;
 			case FEAR -> 2000;
 		};
 	}
-	//resist_value* from repeated_abnormal_status_immune.xml retail file
+
 	int getResistance() {
+		//resist_value* from repeated_abnormal_status_immune.xml retail file
 		resetIfExpired();
 		return switch (level) {
 			case 0, 1, 2 -> 0;
