@@ -22,7 +22,7 @@ class CumulativeResist {
 			default -> 0;
 		};
 	}
-	
+
 	int getCooldownTimeOffset(CumulativeResistType type) {
 		//holding_time2 from repeated_abnormal_status_immune.xml retail file
 		return switch (type) {
@@ -32,8 +32,8 @@ class CumulativeResist {
 	}
 
 	int getResistance() {
-		//resist_value* from repeated_abnormal_status_immune.xml retail file
 		resetIfExpired();
+		//resist_value* from repeated_abnormal_status_immune.xml retail file
 		return switch (level) {
 			case 0, 1, 2 -> 0;
 			case 3 -> 200;
