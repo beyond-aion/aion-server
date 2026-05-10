@@ -18,6 +18,7 @@ import com.aionemu.gameserver.model.items.ManaStone;
 import com.aionemu.gameserver.model.items.RandomBonusEffect;
 import com.aionemu.gameserver.model.stats.calc.*;
 import com.aionemu.gameserver.model.stats.calc.functions.IStatFunction;
+import com.aionemu.gameserver.model.stats.calc.functions.StatArmorMasteryFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunctionProxy;
 import com.aionemu.gameserver.model.templates.itemset.ItemSetTemplate;
 import com.aionemu.gameserver.model.templates.stats.StatsTemplate;
@@ -312,6 +313,17 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	public float getMovementSpeedFloat() {
 		return getMovementSpeed().getCurrent() / 1000f;
+	}
+
+	public void updateArmorMasteryStats(List<Item> equipment) {
+		stats.values().forEach(statFunctions -> {
+			statFunctions.forEach(statFunction -> {
+				if (statFunction instanceof StatFunctionProxy proxy)
+					statFunction = proxy.getProxiedFunction();
+				if (statFunction instanceof StatArmorMasteryFunction armorMasteryFunction)
+					armorMasteryFunction.updateEquipmentFactor(equipment);
+			});
+		});
 	}
 
 	/**

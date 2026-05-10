@@ -50,14 +50,6 @@ public class Equipment implements Persistable {
 	private final Player owner;
 	private PersistentState persistentState = PersistentState.UPDATED;
 
-	private static final long[] ARMOR_SLOTS = new long[] { // @formatter:off
-		ItemSlot.BOOTS.getSlotIdMask(),
-		ItemSlot.GLOVES.getSlotIdMask(),
-		ItemSlot.PANTS.getSlotIdMask(),
-		ItemSlot.SHOULDER.getSlotIdMask(),
-		ItemSlot.TORSO.getSlotIdMask()
-	}; // @formatter:on
-
 	public Equipment(Player player) {
 		this.owner = player;
 	}
@@ -670,15 +662,6 @@ public class Equipment implements Persistable {
 				return false;
 		}
 		return true;
-	}
-
-	public boolean isArmorEquipped(ItemSubType subType) {
-		for (long slot : ARMOR_SLOTS) {
-			Item item = equipment.get(slot);
-			if (item != null && item.getItemTemplate().getItemSubType() == subType)
-				return true;
-		}
-		return false;
 	}
 
 	/**
