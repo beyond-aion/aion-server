@@ -272,19 +272,23 @@ public class Equipment implements Persistable {
 	 *          - Must be composite for dual weapons
 	 */
 	private void unEquip(long slot) {
+		boolean updateStats = false;
 		ItemSlot[] allSlots = ItemSlot.getSlotsFor(slot);
 		for (ItemSlot itemSlot : allSlots) {
 			Item item = equipment.remove(itemSlot.getSlotIdMask());
 			if (item == null || !item.isEquipped()) // check isEquipped to avoid duplicate notifyUnequip, since two handed weapons occupy two slots
 				continue;
+			updateStats = true;
 			item.setEquipped(false);
 			item.setEquipmentSlot(0);
 			owner.getInventory().put(item);
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 			notifyItemUnequip(item);
 		}
-		owner.getLifeStats().updateCurrentStats();
-		owner.getGameStats().updateStatsAndSpeedVisually();
+		if (updateStats) {
+			owner.getLifeStats().updateCurrentStats();
+			owner.getGameStats().updateStatsAndSpeedVisually();
+		}
 	}
 
 	private void unequip(Item item) {
