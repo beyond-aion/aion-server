@@ -74,6 +74,7 @@ public class ItemEquipmentListener {
 			EnchantService.applyEnchantEffect(item, owner, item.getEnchantLevel());
 		if (item.getTempering() > 0)
 			TemperingEffect.apply(owner, item);
+		owner.getGameStats().updateArmorMasteryStats(owner.getEquipment().getEquippedItems());
 	}
 
 	private static void forEachBonusStats(Consumer<RandomBonusEffect> action, RandomBonusEffect... bonusStatsEffects) {
@@ -116,6 +117,7 @@ public class ItemEquipmentListener {
 		}
 		if (item.getBuffSkill() != 0)
 			SkillLearnService.removeSkill(owner, item.getBuffSkill());
+		owner.getGameStats().updateArmorMasteryStats(owner.getEquipment().getEquippedItems());
 	}
 
 	private static void addWeaponStats(Item item, CreatureGameStats<?> cgs) {

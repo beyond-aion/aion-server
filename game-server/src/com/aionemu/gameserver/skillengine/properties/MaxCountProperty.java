@@ -16,8 +16,6 @@ public class MaxCountProperty {
 	public static boolean set(Properties properties, Properties.ValidationResult result) {
 		TargetRangeAttribute value = properties.getTargetType();
 		int maxCount = properties.getTargetMaxCount();
-		if (properties.getFirstTarget() == FirstTargetAttribute.TARGET && value == TargetRangeAttribute.AREA) // firstTarget doesn't count on AREA skills (see skill 1245 or 16689)
-			maxCount += 1;
 		if (maxCount == 0 || result.getTargets().size() <= maxCount)
 			return true;
 

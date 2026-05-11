@@ -771,7 +771,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="1">
+			<armormastery armor="CLOTHES" value="1" delta="0" effectid="121" e="1" basiclvl="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -782,7 +782,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="LEATHER" effectid="122" e="1" basiclvl="1">
+			<armormastery armor="LEATHER" value="1" delta="0" effectid="122" e="1" basiclvl="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -793,7 +793,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CHAIN" effectid="123" e="1" basiclvl="1">
+			<armormastery armor="CHAIN" value="1" delta="0" effectid="123" e="1" basiclvl="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -848,7 +848,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="2">
+			<armormastery armor="CLOTHES" value="10" delta="0" effectid="121" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -859,7 +859,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="LEATHER" effectid="122" e="1" basiclvl="2">
+			<armormastery armor="LEATHER" value="10" delta="0" effectid="122" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -870,7 +870,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CHAIN" effectid="123" e="1" basiclvl="2">
+			<armormastery armor="CHAIN" value="10" delta="0" effectid="123" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -925,7 +925,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="PLATE" effectid="124" e="1" basiclvl="2">
+			<armormastery armor="PLATE" value="10" delta="0" effectid="124" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -978,7 +978,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="2">
+			<armormastery armor="CLOTHES" value="10" delta="0" effectid="121" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -989,7 +989,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="LEATHER" effectid="122" e="1" basiclvl="2">
+			<armormastery armor="LEATHER" value="10" delta="0" effectid="122" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1000,7 +1000,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CHAIN" effectid="123" e="1" basiclvl="2">
+			<armormastery armor="CHAIN" value="10" delta="0" effectid="123" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1033,7 +1033,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="PLATE" effectid="124" e="1" basiclvl="2">
+			<armormastery armor="PLATE" value="10" delta="0" effectid="124" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1077,7 +1077,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="1">
+			<armormastery armor="CLOTHES" value="1" delta="0" effectid="121" e="1" basiclvl="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1088,7 +1088,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="LEATHER" effectid="122" e="1" basiclvl="1">
+			<armormastery armor="LEATHER" value="1" delta="0" effectid="122" e="1" basiclvl="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1141,7 +1141,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="2">
+			<armormastery armor="CLOTHES" value="10" delta="0" effectid="121" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1152,7 +1152,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="LEATHER" effectid="122" e="1" basiclvl="2">
+			<armormastery armor="LEATHER" value="10" delta="0" effectid="122" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1205,7 +1205,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="2">
+			<armormastery armor="CLOTHES" value="10" delta="0" effectid="121" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1216,7 +1216,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="LEATHER" effectid="122" e="1" basiclvl="2">
+			<armormastery armor="LEATHER" value="10" delta="0" effectid="122" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1258,7 +1258,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="1">
+			<armormastery armor="CLOTHES" value="1" delta="0" effectid="121" e="1" basiclvl="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1269,7 +1269,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="LEATHER" effectid="122" e="1" basiclvl="1">
+			<armormastery armor="LEATHER" value="1" delta="0" effectid="122" e="1" basiclvl="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1280,7 +1280,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CHAIN" effectid="123" e="1" basiclvl="1">
+			<armormastery armor="CHAIN" value="1" delta="0" effectid="123" e="1" basiclvl="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1313,7 +1313,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="2">
+			<armormastery armor="CLOTHES" value="10" delta="0" effectid="121" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1324,7 +1324,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="LEATHER" effectid="122" e="1" basiclvl="2">
+			<armormastery armor="LEATHER" value="10" delta="0" effectid="122" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1335,7 +1335,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CHAIN" effectid="123" e="1" basiclvl="2">
+			<armormastery armor="CHAIN" value="10" delta="0" effectid="123" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1379,7 +1379,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="2">
+			<armormastery armor="CLOTHES" value="10" delta="0" effectid="121" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1390,7 +1390,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="LEATHER" effectid="122" e="1" basiclvl="2">
+			<armormastery armor="LEATHER" value="10" delta="0" effectid="122" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1401,7 +1401,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CHAIN" effectid="123" e="1" basiclvl="2">
+			<armormastery armor="CHAIN" value="10" delta="0" effectid="123" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1445,7 +1445,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="1">
+			<armormastery armor="CLOTHES" value="1" delta="0" effectid="121" e="1" basiclvl="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1456,7 +1456,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="ROBE" effectid="125" e="1" basiclvl="1">
+			<armormastery armor="ROBE" value="1" delta="0" effectid="125" e="1" basiclvl="1">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1478,7 +1478,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="2">
+			<armormastery armor="CLOTHES" value="10" delta="0" effectid="121" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1489,7 +1489,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="ROBE" effectid="125" e="1" basiclvl="2">
+			<armormastery armor="ROBE" value="10" delta="0" effectid="125" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1522,7 +1522,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="2">
+			<armormastery armor="CLOTHES" value="10" delta="0" effectid="121" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -1533,7 +1533,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="ROBE" effectid="125" e="1" basiclvl="2">
+			<armormastery armor="ROBE" value="10" delta="0" effectid="125" e="1" basiclvl="2">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -110303,7 +110303,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CHAIN" effectid="123" e="1" basiclvl="1" hoptype="SKILLLV">
+			<armormastery armor="CHAIN" value="2" delta="0" effectid="123" e="1" basiclvl="1" hoptype="SKILLLV">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="0" />
 			</armormastery>
 		</effects>
@@ -110334,7 +110334,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="LEATHER" effectid="122" e="1" basiclvl="1" hoptype="SKILLLV">
+			<armormastery armor="LEATHER" value="2" delta="0" effectid="122" e="1" basiclvl="1" hoptype="SKILLLV">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="0" />
 			</armormastery>
 		</effects>
@@ -110356,7 +110356,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="ROBE" effectid="125" e="1" basiclvl="1" hoptype="SKILLLV">
+			<armormastery armor="ROBE" value="2" delta="0" effectid="125" e="1" basiclvl="1" hoptype="SKILLLV">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="0" />
 			</armormastery>
 		</effects>
@@ -110411,7 +110411,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="CLOTHES" effectid="121" e="1" basiclvl="1" hoptype="SKILLLV">
+			<armormastery armor="CLOTHES" value="0" delta="1" effectid="121" e="1" basiclvl="1" hoptype="SKILLLV">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -110433,7 +110433,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="LEATHER" effectid="122" e="1" basiclvl="1" hoptype="SKILLLV">
+			<armormastery armor="LEATHER" value="0" delta="1" effectid="122" e="1" basiclvl="1" hoptype="SKILLLV">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>
@@ -110618,7 +110618,7 @@
 			<move_casting allow="false" />
 		</useconditions>
 		<effects>
-			<armormastery armor="PLATE" effectid="124" e="1" basiclvl="2" hoptype="SKILLLV">
+			<armormastery armor="PLATE" value="9" delta="1" effectid="124" e="1" basiclvl="2" hoptype="SKILLLV">
 				<change stat="PHYSICAL_DEFENSE" func="PERCENT" value="10" />
 			</armormastery>
 		</effects>

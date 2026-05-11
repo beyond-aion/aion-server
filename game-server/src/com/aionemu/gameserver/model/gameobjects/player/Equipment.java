@@ -50,14 +50,6 @@ public class Equipment implements Persistable {
 	private final Player owner;
 	private PersistentState persistentState = PersistentState.UPDATED;
 
-	private static final long[] ARMOR_SLOTS = new long[] { // @formatter:off
-		ItemSlot.BOOTS.getSlotIdMask(),
-		ItemSlot.GLOVES.getSlotIdMask(),
-		ItemSlot.PANTS.getSlotIdMask(),
-		ItemSlot.SHOULDER.getSlotIdMask(),
-		ItemSlot.TORSO.getSlotIdMask()
-	}; // @formatter:on
-
 	public Equipment(Player player) {
 		this.owner = player;
 	}
@@ -280,19 +272,23 @@ public class Equipment implements Persistable {
 	 *          - Must be composite for dual weapons
 	 */
 	private void unEquip(long slot) {
+		boolean updateStats = false;
 		ItemSlot[] allSlots = ItemSlot.getSlotsFor(slot);
 		for (ItemSlot itemSlot : allSlots) {
 			Item item = equipment.remove(itemSlot.getSlotIdMask());
 			if (item == null || !item.isEquipped()) // check isEquipped to avoid duplicate notifyUnequip, since two handed weapons occupy two slots
 				continue;
+			updateStats = true;
 			item.setEquipped(false);
 			item.setEquipmentSlot(0);
 			owner.getInventory().put(item);
 			setPersistentState(PersistentState.UPDATE_REQUIRED);
 			notifyItemUnequip(item);
 		}
-		owner.getLifeStats().updateCurrentStats();
-		owner.getGameStats().updateStatsAndSpeedVisually();
+		if (updateStats) {
+			owner.getLifeStats().updateCurrentStats();
+			owner.getGameStats().updateStatsAndSpeedVisually();
+		}
 	}
 
 	private void unequip(Item item) {
@@ -670,15 +666,6 @@ public class Equipment implements Persistable {
 				return false;
 		}
 		return true;
-	}
-
-	public boolean isArmorEquipped(ItemSubType subType) {
-		for (long slot : ARMOR_SLOTS) {
-			Item item = equipment.get(slot);
-			if (item != null && item.getItemTemplate().getItemSubType() == subType)
-				return true;
-		}
-		return false;
 	}
 
 	/**
