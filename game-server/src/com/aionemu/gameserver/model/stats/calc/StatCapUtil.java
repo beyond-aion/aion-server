@@ -46,7 +46,7 @@ public class StatCapUtil {
 	}
 
 	public static int getUpperCap(StatEnum stat, Creature creature) {
-		boolean isSpeedUnrestricted = !(creature instanceof Player) || ((Player) creature).isStaff();
+		boolean isSpeedUnrestricted = !(creature instanceof Player player) || player.isStaff();
 		if ((stat == StatEnum.SPEED || stat == StatEnum.FLY_SPEED) && isSpeedUnrestricted)
 			return Integer.MAX_VALUE;
 		if (isElementalDefenseStat(stat)) {
@@ -84,7 +84,7 @@ public class StatCapUtil {
 	public static int clampStatValue(StatEnum stat, Creature creature, int value) {
 		int lower = getLowerCap(stat, creature);
 		int upper = getUpperCap(stat, creature);
-		return Math.min(upper, Math.max(lower, value));
+		return Math.clamp(value, lower, upper);
 	}
 
 	private static class StatLimits {
