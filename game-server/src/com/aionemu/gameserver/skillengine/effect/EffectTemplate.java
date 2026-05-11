@@ -518,8 +518,7 @@ public abstract class EffectTemplate {
 		effectPower -= effected.getGameStats().getResistance(statEnum).getCurrent();
 
 		// calculate cumulative resist chance for fear, sleep and paralyze if effector and effected are players
-		boolean isEffectorPlayer =
-			CustomConfig.COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST ? effector.getMaster() instanceof Player : effector instanceof Player;
+		boolean isEffectorPlayer = (CustomConfig.COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST ? effector.getMaster() : effector) instanceof Player;
 		if (isEffectorPlayer && effected instanceof Player player)
 			effectPower -= player.getEffectController().getCumulativeResistance(CumulativeResistType.get(statEnum));
 
