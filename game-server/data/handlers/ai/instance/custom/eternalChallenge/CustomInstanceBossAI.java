@@ -252,10 +252,10 @@ public class CustomInstanceBossAI extends GeneralNpcAI {
 	private void adaptStats(Player player) {
 		PlayerGameStats pgs = player.getGameStats();
 		List<StatSetFunction> functions = new ArrayList<>();
-		functions.add(new StatSetFunction(StatEnum.EARTH_RESISTANCE, pgs.getMagicalDefenseFor(SkillElement.EARTH)));
-		functions.add(new StatSetFunction(StatEnum.FIRE_RESISTANCE, pgs.getMagicalDefenseFor(SkillElement.FIRE)));
-		functions.add(new StatSetFunction(StatEnum.WATER_RESISTANCE, pgs.getMagicalDefenseFor(SkillElement.WATER)));
-		functions.add(new StatSetFunction(StatEnum.WIND_RESISTANCE, pgs.getMagicalDefenseFor(SkillElement.WIND)));
+		functions.add(new StatSetFunction(StatEnum.EARTH_RESISTANCE, pgs.getElementalDefenseFor(SkillElement.EARTH)));
+		functions.add(new StatSetFunction(StatEnum.FIRE_RESISTANCE, pgs.getElementalDefenseFor(SkillElement.FIRE)));
+		functions.add(new StatSetFunction(StatEnum.WATER_RESISTANCE, pgs.getElementalDefenseFor(SkillElement.WATER)));
+		functions.add(new StatSetFunction(StatEnum.WIND_RESISTANCE, pgs.getElementalDefenseFor(SkillElement.WIND)));
 		functions.add(new StatSetFunction(StatEnum.ABNORMAL_RESISTANCE_ALL, pgs.getAbnormalResistance().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.ACCURACY, pgs.getAccuracy().getCurrent()));
 		functions.add(new StatSetFunction(StatEnum.AGILITY, pgs.getAgility().getCurrent()));
