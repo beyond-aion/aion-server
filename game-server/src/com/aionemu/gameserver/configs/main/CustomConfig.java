@@ -263,4 +263,10 @@ public class CustomConfig {
 
 	@Property(key = "gameserver.rates.godstone.evaluation.cooldown_millis", defaultValue = "750")
 	public static int GODSTONE_EVALUATION_COOLDOWN_MILLIS;
+
+	/**
+	 * PvP config
+	 */
+	@Property(key = "gameserver.pvp.cumulative_resist.count_summon_effects", defaultValue = "false")
+	public static boolean COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST;
 }
