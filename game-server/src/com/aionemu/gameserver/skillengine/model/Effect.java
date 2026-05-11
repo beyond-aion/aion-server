@@ -6,6 +6,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.effect.CumulativeResistType;
@@ -846,7 +847,9 @@ public class Effect implements StatOwner {
 		long duration = calculateTemplateDuration();
 
 		if (getEffected() instanceof Player effectedPlayer) {
-			if (getEffector() instanceof Player) {
+			boolean isEffectorPlayer =
+				CustomConfig.COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST ? getEffector().getMaster() instanceof Player : getEffector() instanceof Player;
+			if (isEffectorPlayer) {
 				duration = applyCumulativeResistDurationMultiplier(duration, effectedPlayer);
 			}
 			if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected)) {
