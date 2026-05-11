@@ -19,9 +19,7 @@ import com.aionemu.gameserver.model.gameobjects.player.Rates;
 import com.aionemu.gameserver.model.siege.Influence;
 import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.StatCapUtil;
-import com.aionemu.gameserver.model.stats.container.CreatureGameStats;
-import com.aionemu.gameserver.model.stats.container.PlayerGameStats;
-import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.model.stats.container.*;
 import com.aionemu.gameserver.model.templates.item.WeaponStats;
 import com.aionemu.gameserver.model.templates.item.enums.ItemSubType;
 import com.aionemu.gameserver.model.templates.npc.NpcRating;
@@ -470,46 +468,54 @@ public class StatFunctions {
 	 */
 	public static float adjustDamageByPvpOrPveModifiers(Creature attacker, Creature target, float baseDamage, int pvpDamage, boolean useTemplateDmg,
 		SkillElement element) {
-		float attackBonus = 1;
-		float defenseBonus = 1;
+		int attackBonus = 0;
+		int defenseBonus = 0;
 		float damage = baseDamage;
-		if (attacker.isPvpTarget(target)) {
+		boolean pvpTarget = attacker.isPvpTarget(target);
+		if (pvpTarget) {
 			if (pvpDamage > 0)
 				damage *= pvpDamage * 0.01f;
 			damage *= 0.42f; // PVP modifier 42%, last checked on NA (4.9) 19.03.2016
 			if (!useTemplateDmg) {
+				attackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent();
+				defenseBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent();
 				if (attacker.getRace() != target.getRace() && !attacker.isInInstance())
-					damage *= Influence.getInstance().getPvpRaceBonus(attacker.getRace());
-
-				attackBonus = attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO, 0).getCurrent() * 0.001f;
-				defenseBonus = target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO, 0).getCurrent() * 0.001f;
+					attackBonus += Influence.getInstance().getPvpRaceBonusRatio(attacker.getRace());
 				switch (element) {
 					case NONE:
-						attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
-						defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
+						attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_PHYSICAL, 0).getCurrent();
+						defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_PHYSICAL, 0).getCurrent();
 						break;
 					default:
-						attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
-						defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
+						attackBonus += attacker.getGameStats().getStat(StatEnum.PVP_ATTACK_RATIO_MAGICAL, 0).getCurrent();
+						defenseBonus += target.getGameStats().getStat(StatEnum.PVP_DEFEND_RATIO_MAGICAL, 0).getCurrent();
 				}
 			}
 		} else if (!useTemplateDmg) {
 			if (attacker instanceof Player) { // npcs dmg is not reduced because of the level difference GF (4.9) 23.04.2016
 				damage *= 1f - getNpcLevelDiffMod(target, attacker);
 			}
-			attackBonus = attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO, 0).getCurrent() * 0.001f;
-			defenseBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent() * 0.001f;
+			attackBonus = attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO, 0).getCurrent();
+			defenseBonus = target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO, 0).getCurrent();
 			switch (element) {
 				case NONE:
-					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
-					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_PHYSICAL, 0).getCurrent() * 0.001f;
+					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_PHYSICAL, 0).getCurrent();
+					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_PHYSICAL, 0).getCurrent();
 					break;
 				default:
-					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
-					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_MAGICAL, 0).getCurrent() * 0.001f;
+					attackBonus += attacker.getGameStats().getStat(StatEnum.PVE_ATTACK_RATIO_MAGICAL, 0).getCurrent();
+					defenseBonus += target.getGameStats().getStat(StatEnum.PVE_DEFEND_RATIO_MAGICAL, 0).getCurrent();
 			}
 		}
-		return damage + (damage * attackBonus) - (damage * defenseBonus);
+		CombatMode mode = pvpTarget ? CombatMode.PVP : CombatMode.PVE;
+		// PvP/PvE ratio caps are applied after aggregation (retail behavior)
+		attackBonus = StatCapUtil.limitValueForPvpOrPveStat(mode, RatioType.ATTACK, attackBonus);
+		defenseBonus = StatCapUtil.limitValueForPvpOrPveStat(mode, RatioType.DEFENSE, defenseBonus);
+		float multiplier = 1f + (attackBonus - defenseBonus) / 1000f;
+		// Retail behavior: damage multiplier has a minimum cap of 10% (0.1f)
+		multiplier = Math.max(multiplier, 0.1f);
+
+		return damage * multiplier;
 	}
 
 	/**
