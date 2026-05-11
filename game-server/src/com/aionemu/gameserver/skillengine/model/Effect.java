@@ -847,8 +847,7 @@ public class Effect implements StatOwner {
 		long duration = calculateTemplateDuration();
 
 		if (getEffected() instanceof Player effectedPlayer) {
-			boolean isEffectorPlayer =
-				CustomConfig.COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST ? getEffector().getMaster() instanceof Player : getEffector() instanceof Player;
+			boolean isEffectorPlayer = (CustomConfig.COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST ? effector.getMaster() : effector) instanceof Player;
 			if (isEffectorPlayer) {
 				duration = applyCumulativeResistDurationMultiplier(duration, effectedPlayer);
 			}
