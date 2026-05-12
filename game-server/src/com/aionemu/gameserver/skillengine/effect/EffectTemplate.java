@@ -308,7 +308,7 @@ public abstract class EffectTemplate {
 				return false;
 			if (!validatePreEffects(effect))
 				return false;
-			if (getPosition() == 1 ? !checkPrimaryEffectApplication(effect, statEnum) : !checkSecondaryEffectApplication(effect, statEnum))
+			if (getPosition() == 1 ? !validateFirstEffect(effect, statEnum) : !validateSecondaryEffect(effect, statEnum))
 				return false;
 		}
 		addSuccessEffect(effect, spellStatus);
@@ -332,18 +332,17 @@ public abstract class EffectTemplate {
 		return true;
 	}
 
-	private boolean checkPrimaryEffectApplication(Effect effect, StatEnum statEnum) {
-		if (!canDodgeOrResist(effect)) {
-			return true;
+	private boolean validateFirstEffect(Effect effect, StatEnum statEnum) {
+		if (canDodgeOrResist(effect)) {
+			if (!calculateEffectResistRate(effect, statEnum))
+				return false;
+			return !isDodgedOrResisted(effect);
 		}
-		if (!passesEffectResistRateCheck(effect, statEnum)) {
-			return false;
-		}
-		return !isDodgedOrResisted(effect);
+		return true;
 	}
 
-	private boolean checkSecondaryEffectApplication(Effect effect, StatEnum statEnum) {
-		if (canDodgeOrResist(effect) && (!passesEffectResistRateCheck(effect, statEnum) || isDodgedOrResisted(effect))) {
+	private boolean validateSecondaryEffect(Effect effect, StatEnum statEnum) {
+		if (canDodgeOrResist(effect) && (!calculateEffectResistRate(effect, statEnum) || isDodgedOrResisted(effect))) {
 			EffectTemplate firstEffect = effect.effectInPos(1);
 			if (!(firstEffect instanceof DamageEffect)) {
 				effect.getSuccessEffects().remove(firstEffect);
@@ -499,7 +498,7 @@ public abstract class EffectTemplate {
 	 * @return true = no resist, false = resisted
 	 */
 	@SuppressWarnings("lossy-conversions")
-	public boolean passesEffectResistRateCheck(Effect effect, StatEnum statEnum) {
+	public boolean calculateEffectResistRate(Effect effect, StatEnum statEnum) {
 		if (statEnum == null)
 			return true;
 
