@@ -183,12 +183,10 @@ public abstract class EffectTemplate {
 		return preEffects;
 	}
 
-	/**
-	 * @return the noResist
-	 */
 	public boolean isNoResist() {
 		return noResist;
 	}
+
 	/**
 	 * @return the critProbMod2
 	 */
