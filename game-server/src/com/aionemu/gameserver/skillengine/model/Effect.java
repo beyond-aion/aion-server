@@ -879,7 +879,7 @@ public class Effect implements StatOwner {
 				case SleepEffect _ -> CumulativeResistType.SLEEP;
 				default -> null;
 			};
-			if (cumulativeResistType != null)
+			if (cumulativeResistType != null && !et.isNoResist())
 				return effected.getEffectController().calculateAndApplyCumulativeResistDuration(cumulativeResistType, duration);
 		}
 		return duration;
