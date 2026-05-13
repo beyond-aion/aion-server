@@ -5,12 +5,11 @@ import java.util.List;
 
 import javax.xml.bind.annotation.*;
 
-import com.aionemu.gameserver.configs.main.CustomConfig;
-
 import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.effect.CumulativeResistType;
 import com.aionemu.gameserver.dataholders.DataManager;
