@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.ai.poll.AIQuestion;
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.effect.CumulativeResistType;
 import com.aionemu.gameserver.dataholders.DataManager;
@@ -181,6 +182,10 @@ public abstract class EffectTemplate {
 		return preEffects;
 	}
 
+	public boolean isNoResist() {
+		return noResist;
+	}
+
 	/**
 	 * @return the critProbMod2
 	 */
@@ -327,11 +332,10 @@ public abstract class EffectTemplate {
 	}
 
 	private boolean validateFirstEffect(Effect effect, StatEnum statEnum) {
-		if (!calculateEffectResistRate(effect, statEnum)) {
-			return false;
-		}
-		if (canDodgeOrResist(effect) && isDodgedOrResisted(effect)) {
-			return false;
+		if (canDodgeOrResist(effect)) {
+			if (!calculateEffectResistRate(effect, statEnum))
+				return false;
+			return !isDodgedOrResisted(effect);
 		}
 		return true;
 	}
@@ -516,7 +520,8 @@ public abstract class EffectTemplate {
 		effectPower -= effected.getGameStats().getResistance(statEnum).getCurrent();
 
 		// calculate cumulative resist chance for fear, sleep and paralyze if effector and effected are players
-		if (effector.getMaster() instanceof Player && effected instanceof Player player)
+		boolean isEffectorPlayer = (CustomConfig.COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST ? effector.getMaster() : effector) instanceof Player;
+		if (isEffectorPlayer && effected instanceof Player player)
 			effectPower -= player.getEffectController().getCumulativeResistance(CumulativeResistType.get(statEnum));
 
 		// penetration

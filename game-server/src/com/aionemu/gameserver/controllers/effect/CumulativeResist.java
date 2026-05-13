@@ -13,17 +13,27 @@ class CumulativeResist {
 	}
 
 	float getDurationMultiplier() {
-		resetIfExpired();
+		//time_value* from repeated_abnormal_status_immune.xml retail file
 		return switch (level) {
-			case 0, 1, 2 -> 1f;
-			case 3 -> 0.9f;
-			case 4 -> 0.85f;
-			default -> 0.8f;
+			case 0, 1 -> 1;
+			case 2 -> 0.9f;
+			case 3 -> 0.85f;
+			case 4 -> 0.8f;
+			default -> 0;
+		};
+	}
+
+	int getCooldownTimeOffset(CumulativeResistType type) {
+		//holding_time2 from repeated_abnormal_status_immune.xml retail file
+		return switch (type) {
+			case SLEEP, PARALYZE -> 0;
+			case FEAR -> 2000;
 		};
 	}
 
 	int getResistance() {
 		resetIfExpired();
+		//resist_value* from repeated_abnormal_status_immune.xml retail file
 		return switch (level) {
 			case 0, 1, 2 -> 0;
 			case 3 -> 200;

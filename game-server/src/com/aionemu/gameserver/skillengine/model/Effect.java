@@ -6,6 +6,7 @@ import java.util.concurrent.Future;
 import java.util.concurrent.atomic.AtomicBoolean;
 
 import com.aionemu.commons.utils.Rnd;
+import com.aionemu.gameserver.configs.main.CustomConfig;
 import com.aionemu.gameserver.controllers.attack.AggroList;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
 import com.aionemu.gameserver.controllers.effect.CumulativeResistType;
@@ -845,14 +846,15 @@ public class Effect implements StatOwner {
 	private int calculateEffectsDuration() {
 		long duration = calculateTemplateDuration();
 
-		// adjust with pvp duration (not sure why some self target skills have pvp duration o.O idk how to handle that)
 		if (getEffected() instanceof Player effectedPlayer) {
-			if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected))
-				duration = duration * skillTemplate.getPvpDuration() / 100;
-			if (getEffector().getMaster() instanceof Player)
+			boolean isEffectorPlayer = (CustomConfig.COUNT_SUMMON_EFFECTS_FOR_CUMULATIVE_RESIST ? effector.getMaster() : effector) instanceof Player;
+			if (isEffectorPlayer) {
 				duration = applyCumulativeResistDurationMultiplier(duration, effectedPlayer);
+			}
+			if (skillTemplate.getPvpDuration() != 0 && !effector.equals(effected)) {
+				duration = duration * skillTemplate.getPvpDuration() / 100;
+			}
 		}
-
 		return (int) Math.min(Integer.MAX_VALUE, duration);
 	}
 
@@ -877,7 +879,7 @@ public class Effect implements StatOwner {
 				case SleepEffect _ -> CumulativeResistType.SLEEP;
 				default -> null;
 			};
-			if (cumulativeResistType != null)
+			if (cumulativeResistType != null && !et.isNoResist())
 				return effected.getEffectController().calculateAndApplyCumulativeResistDuration(cumulativeResistType, duration);
 		}
 		return duration;
