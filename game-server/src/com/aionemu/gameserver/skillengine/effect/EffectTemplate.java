@@ -335,7 +335,7 @@ public abstract class EffectTemplate {
 	}
 
 	private boolean isDodgedOrResisted(Effect effect, StatEnum statEnum) {
-		return canDodgeOrResist(effect) && (!checkEffectResistRate(effect, statEnum) || checkDodgeOrResistRate(effect));
+		return canDodgeOrResist(effect) && !(checkEffectResistRate(effect, statEnum) && checkDodgeOrResistRate(effect));
 	}
 
 	protected boolean canDodgeOrResist(Effect effect) {
@@ -346,13 +346,16 @@ public abstract class EffectTemplate {
 		return true;
 	}
 
+	/**
+	 * @return true = no dodge/resist, false = dodged/resisted
+	 */
 	private boolean checkDodgeOrResistRate(Effect effect) {
 		int accuracyModifier = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost();
 		if (effect.getSkillTemplate().getSubType() == SkillSubType.DEBUFF)
 			accuracyModifier += effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
 		if (element == SkillElement.NONE)
-			return StatFunctions.checkIsDodgedHit(effect.getEffector(), effect.getEffected(), accuracyModifier);
-		return Rnd.get(1, 1000) <= StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accuracyModifier, element);
+			return !StatFunctions.checkIsDodgedHit(effect.getEffector(), effect.getEffected(), accuracyModifier);
+		return Rnd.get(1, 1000) > StatFunctions.calculateMagicalResistRate(effect.getEffector(), effect.getEffected(), accuracyModifier, element);
 	}
 
 	private void addSuccessEffect(Effect effect, SpellStatus spellStatus) {
