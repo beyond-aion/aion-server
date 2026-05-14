@@ -307,8 +307,11 @@ public abstract class EffectTemplate {
 				return false;
 			if (!validatePreEffects(effect))
 				return false;
-			if (getPosition() == 1 ? !validateFirstEffect(effect, statEnum) : !validateSecondaryEffect(effect, statEnum))
+			if (isDodgedOrResisted(effect, statEnum)) {
+				if (getPosition() != 1 && !(effect.effectInPos(1) instanceof DamageEffect))
+					effect.getSuccessEffects().clear();
 				return false;
+			}
 		}
 		addSuccessEffect(effect, spellStatus);
 		calculateDamage(effect);
@@ -331,24 +334,8 @@ public abstract class EffectTemplate {
 		return true;
 	}
 
-	private boolean validateFirstEffect(Effect effect, StatEnum statEnum) {
-		if (canDodgeOrResist(effect)) {
-			if (!calculateEffectResistRate(effect, statEnum))
-				return false;
-			return !isDodgedOrResisted(effect);
-		}
-		return true;
-	}
-
-	private boolean validateSecondaryEffect(Effect effect, StatEnum statEnum) {
-		if (canDodgeOrResist(effect) && (!calculateEffectResistRate(effect, statEnum) || isDodgedOrResisted(effect))) {
-			EffectTemplate firstEffect = effect.effectInPos(1);
-			if (!(firstEffect instanceof DamageEffect)) {
-				effect.getSuccessEffects().remove(firstEffect);
-			}
-			return false;
-		}
-		return true;
+	private boolean isDodgedOrResisted(Effect effect, StatEnum statEnum) {
+		return canDodgeOrResist(effect) && (!checkEffectResistRate(effect, statEnum) || checkDodgeOrResistRate(effect));
 	}
 
 	protected boolean canDodgeOrResist(Effect effect) {
@@ -359,7 +346,7 @@ public abstract class EffectTemplate {
 		return true;
 	}
 
-	private boolean isDodgedOrResisted(Effect effect) {
+	private boolean checkDodgeOrResistRate(Effect effect) {
 		int accuracyModifier = accMod2 + accMod1 * effect.getSkillLevel() + effect.getAccModBoost();
 		if (effect.getSkillTemplate().getSubType() == SkillSubType.DEBUFF)
 			accuracyModifier += effect.getEffector().getGameStats().getStat(StatEnum.BOOST_RESIST_DEBUFF, 0).getCurrent();
@@ -497,7 +484,7 @@ public abstract class EffectTemplate {
 	 * @return true = no resist, false = resisted
 	 */
 	@SuppressWarnings("lossy-conversions")
-	public boolean calculateEffectResistRate(Effect effect, StatEnum statEnum) {
+	public boolean checkEffectResistRate(Effect effect, StatEnum statEnum) {
 		if (statEnum == null)
 			return true;
 
