@@ -24,10 +24,17 @@ public class StatCapUtil {
 		registerLower(0, StatEnum.MAIN_HAND_POWER, StatEnum.MAIN_HAND_ACCURACY, StatEnum.MAIN_HAND_CRITICAL, StatEnum.OFF_HAND_POWER,
 			StatEnum.OFF_HAND_ACCURACY, StatEnum.OFF_HAND_CRITICAL, StatEnum.MAGICAL_RESIST, StatEnum.PHYSICAL_CRITICAL_RESIST,
 			StatEnum.MAGICAL_CRITICAL_RESIST, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, StatEnum.EVASION,
-			StatEnum.BLOCK, StatEnum.PARRY, StatEnum.PHYSICAL_DEFENSE, StatEnum.PHYSICAL_ACCURACY, StatEnum.MAGICAL_ACCURACY);
+			StatEnum.BLOCK, StatEnum.PARRY, StatEnum.PHYSICAL_DEFENSE, StatEnum.PHYSICAL_ACCURACY, StatEnum.MAGICAL_ACCURACY, StatEnum.BOOST_MAGICAL_SKILL);
 
-		register(StatEnum.SPEED, 0, 12000);
-		register(StatEnum.FLY_SPEED, 0, 16000);
+		register(StatEnum.SPEED, 0, creature -> {
+			boolean unrestricted = !(creature instanceof Player player) || player.isStaff();
+			return unrestricted ? Integer.MAX_VALUE : 12000;
+		});
+
+		register(StatEnum.FLY_SPEED, 0, creature -> {
+			boolean unrestricted = !(creature instanceof Player player) || player.isStaff();
+			return unrestricted ? Integer.MAX_VALUE : 16000;
+		});
 		register(StatEnum.HEAL_BOOST, -1000, 1000);
 		register(StatEnum.MAXHP, creature -> creature instanceof Player ? 100 : 1, CapFunction.UNLIMITED_UPPER);
 		register(StatEnum.MAXMP, creature -> creature instanceof Player ? 1 : 0, CapFunction.UNLIMITED_UPPER);
@@ -73,9 +80,6 @@ public class StatCapUtil {
 	}
 
 	public static int getUpperCap(StatEnum stat, Creature creature) {
-		boolean isSpeedUnrestricted = !(creature instanceof Player player) || player.isStaff();
-		if ((stat == StatEnum.SPEED || stat == StatEnum.FLY_SPEED) && isSpeedUnrestricted)
-			return Integer.MAX_VALUE;
 		return getRule(stat).upperCap().apply(creature);
 	}
 
@@ -128,6 +132,10 @@ public class StatCapUtil {
 
 	private static void register(StatEnum stat, CapFunction lowerCap, CapFunction upperCap) {
 		register(stat, lowerCap, upperCap, Integer.MAX_VALUE);
+	}
+	
+	private static void register(StatEnum stat, int lowerCap, CapFunction upperCap) {
+		register(stat, _ -> lowerCap, upperCap, Integer.MAX_VALUE);
 	}
 
 	private static void register(StatEnum stat, CapFunction lowerCap, CapFunction upperCap, int diffLimit) {
