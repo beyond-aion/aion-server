@@ -1,6 +1,7 @@
 package com.aionemu.gameserver.model.stats.calc;
 
 import java.util.EnumMap;
+import java.util.EnumSet;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -13,12 +14,39 @@ import com.aionemu.gameserver.model.stats.container.StatEnum;
  */
 public class StatCapUtil {
 
-	private static final EnumMap<StatEnum, StatLimits> limits = new EnumMap<>(StatEnum.class);
+	private static final EnumMap<StatEnum, StatCapRule> limits = new EnumMap<>(StatEnum.class);
 
 	static {
-		for (StatEnum stat : StatEnum.values()) {
-			limits.put(stat, new StatLimits(stat));
+		registerDefaults();
+	}
+
+	private static void registerDefaults() {
+		registerLower(0, StatEnum.MAIN_HAND_POWER, StatEnum.MAIN_HAND_ACCURACY, StatEnum.MAIN_HAND_CRITICAL, StatEnum.OFF_HAND_POWER,
+			StatEnum.OFF_HAND_ACCURACY, StatEnum.OFF_HAND_CRITICAL, StatEnum.MAGICAL_RESIST, StatEnum.PHYSICAL_CRITICAL_RESIST,
+			StatEnum.MAGICAL_CRITICAL_RESIST, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, StatEnum.EVASION,
+			StatEnum.PHYSICAL_DEFENSE, StatEnum.PHYSICAL_ACCURACY, StatEnum.MAGICAL_ACCURACY);
+
+		register(StatEnum.SPEED, 0, 12000);
+		register(StatEnum.FLY_SPEED, 0, 16000);
+		register(StatEnum.HEAL_BOOST, -1000, 1000);
+		register(StatEnum.MAXHP, creature -> creature instanceof Player ? 100 : 1, CapFunction.UNLIMITED_UPPER);
+		register(StatEnum.MAXMP, creature -> creature instanceof Player ? 1 : 0, CapFunction.UNLIMITED_UPPER);
+
+		for (StatEnum statEnum : EnumSet.of(StatEnum.POWER, StatEnum.AGILITY, StatEnum.ACCURACY, StatEnum.HEALTH, StatEnum.KNOWLEDGE, StatEnum.WILL)) {
+			register(statEnum, 80, 999);
 		}
+
+		registerUpper(700, StatEnum.PHYSICAL_CRITICAL_RESIST, StatEnum.MAGICAL_CRITICAL_RESIST, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE,
+			StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE);
+
+		registerDifferenceLimit(500, StatEnum.BLOCK, StatEnum.PHYSICAL_CRITICAL, StatEnum.MAGICAL_CRITICAL);
+		registerDifferenceLimit(900, StatEnum.MAGICAL_RESIST); // in PvP: 500 (see StatFunctions#calculateMagicalResistRate)
+		registerDifferenceLimit(300, StatEnum.EVASION);
+		registerDifferenceLimit(400, StatEnum.PARRY);
+		registerDifferenceLimit(2900, StatEnum.BOOST_MAGICAL_SKILL);
+
+		registerElementalDefense(StatEnum.WATER_RESISTANCE, StatEnum.FIRE_RESISTANCE, StatEnum.EARTH_RESISTANCE, StatEnum.WIND_RESISTANCE,
+			StatEnum.DARK_RESISTANCE, StatEnum.LIGHT_RESISTANCE);
 	}
 
 	public static int getElementalDefenseBaseValue() {
@@ -41,20 +69,14 @@ public class StatCapUtil {
 	}
 
 	public static int getLowerCap(StatEnum stat, Creature creature) {
-		if (isElementalDefenseStat(stat)) {
-			return -getElementalDefenseCapForCreature(creature);
-		}
-		return limits.get(stat).lowerCap;
+		return getRule(stat).lowerCap().apply(creature);
 	}
 
 	public static int getUpperCap(StatEnum stat, Creature creature) {
 		boolean isSpeedUnrestricted = !(creature instanceof Player player) || player.isStaff();
 		if ((stat == StatEnum.SPEED || stat == StatEnum.FLY_SPEED) && isSpeedUnrestricted)
 			return Integer.MAX_VALUE;
-		if (isElementalDefenseStat(stat)) {
-			return getElementalDefenseCapForCreature(creature);
-		}
-		return limits.get(stat).upperCap;
+		return getRule(stat).upperCap().apply(creature);
 	}
 
 	public static int getElementalDefenseCapForCreature(Creature creature) {
@@ -64,23 +86,8 @@ public class StatCapUtil {
 		return getElementalDefenseBaseValue();
 	}
 
-	private static boolean isElementalDefenseStat(StatEnum stat) {
-		return switch (stat) {
-			case WATER_RESISTANCE, FIRE_RESISTANCE, EARTH_RESISTANCE, WIND_RESISTANCE, DARK_RESISTANCE, LIGHT_RESISTANCE -> true;
-			default -> false;
-		};
-	}
-
 	public static int getDifferenceLimit(StatEnum stat) {
-		return limits.get(stat).diffLimit;
-	}
-
-	private static void calculate(Stat2 stat2, int lowerCap, int upperCap) {
-		if (stat2.getCurrent() > upperCap) {
-			stat2.setBonus(upperCap - stat2.getBase());
-		} else if (stat2.getCurrent() < lowerCap) {
-			stat2.setBonus(lowerCap - stat2.getBase());
-		}
+		return getRule(stat).diffLimit();
 	}
 
 	public static int clampStatValue(StatEnum stat, Creature creature, int value) {
@@ -107,77 +114,78 @@ public class StatCapUtil {
 		return Math.clamp(value, cap.min(), cap.max());
 	}
 
+	private static void calculate(Stat2 stat2, int lowerCap, int upperCap) {
+		if (stat2.getCurrent() > upperCap) {
+			stat2.setBonus(upperCap - stat2.getBase());
+		} else if (stat2.getCurrent() < lowerCap) {
+			stat2.setBonus(lowerCap - stat2.getBase());
+		}
+	}
+
+	private static void register(StatEnum stat, int lowerCap, int upperCap) {
+		register(stat, _ -> lowerCap, _ -> upperCap, Integer.MAX_VALUE);
+	}
+
+	private static void register(StatEnum stat, CapFunction lowerCap, CapFunction upperCap) {
+		register(stat, lowerCap, upperCap, Integer.MAX_VALUE);
+	}
+
+	private static void register(StatEnum stat, CapFunction lowerCap, CapFunction upperCap, int diffLimit) {
+		limits.put(stat, new StatCapRule(lowerCap, upperCap, diffLimit));
+	}
+
+	private static void registerLower(int lowerCap, StatEnum... stats) {
+		registerLower(_ -> lowerCap, stats);
+	}
+
+	private static void registerLower(CapFunction lowerCap, StatEnum... stats) {
+		for (StatEnum stat : stats) {
+			limits.compute(stat, (_, rule) -> rule == null ? new StatCapRule(lowerCap, CapFunction.UNLIMITED_UPPER, Integer.MAX_VALUE)
+				: new StatCapRule(lowerCap, rule.upperCap(), rule.diffLimit()));
+		}
+	}
+
+	private static void registerUpper(int upperCap, StatEnum... stats) {
+		registerUpper(_ -> upperCap, stats);
+	}
+
+	private static void registerUpper(CapFunction upperCap, StatEnum... stats) {
+		for (StatEnum stat : stats) {
+			limits.compute(stat, (_, rule) -> rule == null ? new StatCapRule(CapFunction.UNLIMITED_LOWER, upperCap, Integer.MAX_VALUE)
+				: new StatCapRule(rule.lowerCap(), upperCap, rule.diffLimit()));
+		}
+	}
+
+	private static void registerDifferenceLimit(int diffLimit, StatEnum... stats) {
+		for (StatEnum stat : stats) {
+			limits.compute(stat, (_, rule) -> rule == null ? new StatCapRule(CapFunction.UNLIMITED_LOWER, CapFunction.UNLIMITED_UPPER, diffLimit)
+				: new StatCapRule(rule.lowerCap(), rule.upperCap(), diffLimit));
+		}
+	}
+
+	private static void registerElementalDefense(StatEnum... stats) {
+		for (StatEnum stat : stats) {
+			register(stat, creature -> -getElementalDefenseCapForCreature(creature), StatCapUtil::getElementalDefenseCapForCreature);
+		}
+	}
+
+	private static StatCapRule getRule(StatEnum stat) {
+		return limits.getOrDefault(stat, StatCapRule.UNLIMITED);
+	}
+
 	private record Cap(int min, int max) {}
 
-	private static class StatLimits {
+	@FunctionalInterface
+	private interface CapFunction {
 
-		private final int lowerCap;
-		private final int upperCap;
-		private final int diffLimit;
+		CapFunction UNLIMITED_LOWER = _ -> Integer.MIN_VALUE;
+		CapFunction UNLIMITED_UPPER = _ -> Integer.MAX_VALUE;
 
-		private StatLimits(StatEnum stat) {
-			this.lowerCap = lowerCapFor(stat);
-			this.upperCap = upperCapFor(stat);
-			this.diffLimit = differenceLimitFor(stat);
-		}
+		int apply(Creature creature);
+	}
 
-		private static int lowerCapFor(StatEnum stat) {
-			int value = Integer.MIN_VALUE;
-			switch (stat) {
-				case MAIN_HAND_POWER:
-				case MAIN_HAND_ACCURACY:
-				case MAIN_HAND_CRITICAL:
-				case OFF_HAND_POWER:
-				case OFF_HAND_ACCURACY:
-				case OFF_HAND_CRITICAL:
-				case MAGICAL_RESIST:
-				case PHYSICAL_CRITICAL_RESIST:
-				case EVASION:
-				case PHYSICAL_DEFENSE:
-				case PHYSICAL_ACCURACY:
-				case MAGICAL_ACCURACY:
-				case SPEED:
-				case FLY_SPEED:
-				case MAXHP:
-				case MAXMP:
-					value = 0;
-					break;
-			}
-			return value;
-		}
+	private record StatCapRule(CapFunction lowerCap, CapFunction upperCap, int diffLimit) {
 
-		private static int upperCapFor(StatEnum stat) {
-			int value = Integer.MAX_VALUE;
-			switch (stat) {
-				case SPEED:
-					value = 12000;
-					break;
-				case FLY_SPEED:
-					value = 16000;
-					break;
-				case HEAL_BOOST:
-					value = 1000;
-					break;
-			}
-			return value;
-		}
-
-		private static int differenceLimitFor(StatEnum stat) {
-			switch (stat) {
-				case BLOCK:
-				case PHYSICAL_CRITICAL:
-				case MAGICAL_CRITICAL:
-					return 500;
-				case MAGICAL_RESIST:
-					return 900; // in PvP: 500 (see StatFunctions#calculateMagicalResistRate)
-				case EVASION:
-					return 300;
-				case PARRY:
-					return 400;
-				case BOOST_MAGICAL_SKILL:
-					return 2900;
-			}
-			return Integer.MAX_VALUE;
-		}
+		private static final StatCapRule UNLIMITED = new StatCapRule(CapFunction.UNLIMITED_LOWER, CapFunction.UNLIMITED_UPPER, Integer.MAX_VALUE);
 	}
 }
