@@ -335,7 +335,7 @@ public abstract class EffectTemplate {
 	}
 
 	private boolean isDodgedOrResisted(Effect effect, StatEnum statEnum) {
-		return canDodgeOrResist(effect) && !(checkEffectResistRate(effect, statEnum) && checkDodgeOrResistRate(effect));
+		return canDodgeOrResist(effect) && (!checkEffectResistRate(effect, statEnum) || !checkDodgeOrResistRate(effect));
 	}
 
 	protected boolean canDodgeOrResist(Effect effect) {
