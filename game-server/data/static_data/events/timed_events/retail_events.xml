@@ -4650,7 +4650,7 @@
 		</spawns>
 	</event>
 	<!-- https://web.archive.org/web/20150227104713/http://na.aiononline.com/en/news/events/02252015-legendary-symphony-event.php -->
-	<event name="Legendary Symphony" start="2022-09-30T00:00:00" end="2022-10-09T23:59:59">
+	<event name="Legendary Symphony" start="2026-05-23T00:00:00" end="2026-06-09T23:59:59">
 		<config_properties>
 			<property>symphony = 0</property>
 		</config_properties>
@@ -4694,7 +4694,7 @@
 			</spawn_map>
 		</spawns>
 	</event>
-	<event name="Legendary Symphony Drop" start="2022-09-30T00:00:00" end="2022-10-09T23:59:59">
+	<event name="Legendary Symphony Drop" start="2026-05-23T00:00:00" end="2026-06-07T23:59:59">
 		<event_drops>
 			<!-- Green Garrisons -->
 			<gd_rule rule_name="Symphony of Legend - The First Movement" chance="100" member_limit="3">
