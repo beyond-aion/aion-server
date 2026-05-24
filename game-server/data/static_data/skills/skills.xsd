@@ -39,6 +39,7 @@
 		<xs:attribute name="tslot_level" type="xs:int" default="0" />
 		<xs:attribute name="dispel_category" type="DispelCategoryType" default="NONE" />
 		<xs:attribute name="req_dispel_level" type="xs:int" />
+		<xs:attribute name="req_dispel_count" type="xs:int" />
 		<xs:attribute name="activation" type="activationAttribute" use="required" />
 		<xs:attribute name="stigma" type="StigmaType" />
 		<xs:attribute name="ammospeed" type="xs:int" />

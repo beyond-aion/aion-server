@@ -59,6 +59,8 @@ public class SkillTemplate implements L10n {
 	private DispelCategoryType dispelCategory = DispelCategoryType.NONE;
 	@XmlAttribute(name = "req_dispel_level")
 	private int reqDispelLevel;
+	@XmlAttribute(name = "req_dispel_count")
+	private int reqDispelCount;
 	@XmlAttribute(name = "activation", required = true)
 	private ActivationAttribute activationAttribute;
 	@XmlAttribute(required = true)
@@ -179,6 +181,10 @@ public class SkillTemplate implements L10n {
 
 	public int getReqDispelLevel() {
 		return reqDispelLevel;
+	}
+
+	public int getReqDispelCount() {
+		return reqDispelCount;
 	}
 
 	public int getDuration() {
