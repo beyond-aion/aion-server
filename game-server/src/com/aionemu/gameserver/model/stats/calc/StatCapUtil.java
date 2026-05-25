@@ -129,7 +129,7 @@ public class StatCapUtil {
 
 	private static void register(StatEnum stat, CapFunction lowerCap, CapFunction upperCap, int diffLimit) {
 		if (limits.putIfAbsent(stat, new StatCapRule(lowerCap, upperCap, diffLimit)) != null)
-			throw new IllegalStateException("Limit for " + stat + " already registered");
+			throw new IllegalArgumentException("A limit for " + stat + " is already registered");
 	}
 
 	private static void registerDifferenceLimit(int diffLimit, StatEnum... stats) {
