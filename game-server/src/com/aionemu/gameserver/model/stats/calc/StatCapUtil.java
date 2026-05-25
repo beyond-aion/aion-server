@@ -28,21 +28,22 @@ public class StatCapUtil {
 		register(SPEED, 0, creature -> creature instanceof Player p && !p.isStaff() ? 12000 : Integer.MAX_VALUE);
 		register(FLY_SPEED, 0, creature -> creature instanceof Player p && !p.isStaff() ? 16000 : Integer.MAX_VALUE);
 		register(HEAL_BOOST, -1000, 1000);
+		register(EVASION, 0, CapFunction.UNLIMITED_UPPER, 300);
+		register(BLOCK, 0, CapFunction.UNLIMITED_UPPER, 500);
+		register(PARRY, 0, CapFunction.UNLIMITED_UPPER, 400);
+		register(PHYSICAL_CRITICAL, 0, CapFunction.UNLIMITED_UPPER, 500);
+		register(MAGICAL_CRITICAL, 0, CapFunction.UNLIMITED_UPPER, 500);
+		register(MAGICAL_RESIST, 0, CapFunction.UNLIMITED_UPPER, 900); // diffLimit in PvP: 500 (see StatFunctions#calculateMagicalResistRate)
+		register(BOOST_MAGICAL_SKILL, 0, CapFunction.UNLIMITED_UPPER, 2900);
 		for (StatEnum stat : List.of(PHYSICAL_CRITICAL_RESIST, MAGICAL_CRITICAL_RESIST, PHYSICAL_CRITICAL_DAMAGE_REDUCE, MAGICAL_CRITICAL_DAMAGE_REDUCE))
 			register(stat, 0, 700);
 		for (StatEnum stat : List.of(POWER, AGILITY, ACCURACY, HEALTH, KNOWLEDGE, WILL))
 			register(stat, 80, 999);
-		for (StatEnum stat : List.of(MAIN_HAND_POWER, MAIN_HAND_ACCURACY, MAIN_HAND_CRITICAL, OFF_HAND_POWER, OFF_HAND_ACCURACY, OFF_HAND_CRITICAL, MAGICAL_CRITICAL, PHYSICAL_CRITICAL,
-			MAGICAL_RESIST, EVASION, BLOCK, PARRY, PHYSICAL_DEFENSE, PHYSICAL_ACCURACY, MAGICAL_ACCURACY, BOOST_MAGICAL_SKILL))
+		for (StatEnum stat : List.of(MAIN_HAND_POWER, MAIN_HAND_ACCURACY, MAIN_HAND_CRITICAL, OFF_HAND_POWER, OFF_HAND_ACCURACY, OFF_HAND_CRITICAL,
+			PHYSICAL_DEFENSE, PHYSICAL_ACCURACY, MAGICAL_ACCURACY))
 			register(stat, 0, CapFunction.UNLIMITED_UPPER);
 		for (StatEnum stat : List.of(WATER_RESISTANCE, FIRE_RESISTANCE, EARTH_RESISTANCE, WIND_RESISTANCE, DARK_RESISTANCE, LIGHT_RESISTANCE))
 			register(stat, creature -> -getElementalDefenseCapForCreature(creature), StatCapUtil::getElementalDefenseCapForCreature);
-
-		registerDifferenceLimit(500, BLOCK, PHYSICAL_CRITICAL, MAGICAL_CRITICAL);
-		registerDifferenceLimit(900, MAGICAL_RESIST); // in PvP: 500 (see StatFunctions#calculateMagicalResistRate)
-		registerDifferenceLimit(300, EVASION);
-		registerDifferenceLimit(400, PARRY);
-		registerDifferenceLimit(2900, BOOST_MAGICAL_SKILL);
 	}
 
 	public static int getElementalDefenseBaseValue() {
@@ -127,16 +128,13 @@ public class StatCapUtil {
 		register(stat, _ -> lowerCap, upperCap, Integer.MAX_VALUE);
 	}
 
+	private static void register(StatEnum stat, int lowerCap, CapFunction upperCap, int diffLimit) {
+		register(stat, _ -> lowerCap, upperCap, diffLimit);
+	}
+
 	private static void register(StatEnum stat, CapFunction lowerCap, CapFunction upperCap, int diffLimit) {
 		if (limits.putIfAbsent(stat, new StatCapRule(lowerCap, upperCap, diffLimit)) != null)
 			throw new IllegalArgumentException("A limit for " + stat + " is already registered");
-	}
-
-	private static void registerDifferenceLimit(int diffLimit, StatEnum... stats) {
-		for (StatEnum stat : stats) {
-			limits.compute(stat, (_, rule) -> rule == null ? new StatCapRule(CapFunction.UNLIMITED_LOWER, CapFunction.UNLIMITED_UPPER, diffLimit)
-				: new StatCapRule(rule.lowerCap(), rule.upperCap(), diffLimit));
-		}
 	}
 
 	private static StatCapRule getRule(StatEnum stat) {
