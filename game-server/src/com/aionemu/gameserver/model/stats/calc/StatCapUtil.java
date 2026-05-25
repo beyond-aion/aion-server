@@ -29,8 +29,8 @@ public class StatCapUtil {
 		register(FLY_SPEED, 0, creature -> creature instanceof Player p && !p.isStaff() ? 16000 : Integer.MAX_VALUE);
 		register(HEAL_BOOST, -1000, 1000);
 		register(EVASION, 0, CapFunction.UNLIMITED_UPPER, 300);
-		register(BLOCK, 0, CapFunction.UNLIMITED_UPPER, 500);
 		register(PARRY, 0, CapFunction.UNLIMITED_UPPER, 400);
+		register(BLOCK, 0, CapFunction.UNLIMITED_UPPER, 500);
 		register(PHYSICAL_CRITICAL, 0, CapFunction.UNLIMITED_UPPER, 500);
 		register(MAGICAL_CRITICAL, 0, CapFunction.UNLIMITED_UPPER, 500);
 		register(MAGICAL_RESIST, 0, CapFunction.UNLIMITED_UPPER, 900); // diffLimit in PvP: 500 (see StatFunctions#calculateMagicalResistRate)
