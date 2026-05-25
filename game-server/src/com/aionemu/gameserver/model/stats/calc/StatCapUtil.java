@@ -1,7 +1,9 @@
 package com.aionemu.gameserver.model.stats.calc;
 
+import static com.aionemu.gameserver.model.stats.container.StatEnum.*;
+
 import java.util.EnumMap;
-import java.util.EnumSet;
+import java.util.List;
 
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -21,39 +23,26 @@ public class StatCapUtil {
 	}
 
 	private static void registerDefaults() {
-		registerLower(0, StatEnum.MAIN_HAND_POWER, StatEnum.MAIN_HAND_ACCURACY, StatEnum.MAIN_HAND_CRITICAL, StatEnum.OFF_HAND_POWER,
-			StatEnum.OFF_HAND_ACCURACY, StatEnum.OFF_HAND_CRITICAL, StatEnum.MAGICAL_RESIST, StatEnum.PHYSICAL_CRITICAL_RESIST,
-			StatEnum.MAGICAL_CRITICAL_RESIST, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE, StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE, StatEnum.EVASION,
-			StatEnum.BLOCK, StatEnum.PARRY, StatEnum.PHYSICAL_DEFENSE, StatEnum.PHYSICAL_ACCURACY, StatEnum.MAGICAL_ACCURACY, StatEnum.BOOST_MAGICAL_SKILL);
+		register(MAXHP, creature -> creature instanceof Player ? 100 : 1, CapFunction.UNLIMITED_UPPER);
+		register(MAXMP, creature -> creature instanceof Player ? 1 : 0, CapFunction.UNLIMITED_UPPER);
+		register(SPEED, 0, creature -> creature instanceof Player p && !p.isStaff() ? 12000 : Integer.MAX_VALUE);
+		register(FLY_SPEED, 0, creature -> creature instanceof Player p && !p.isStaff() ? 16000 : Integer.MAX_VALUE);
+		register(HEAL_BOOST, -1000, 1000);
+		for (StatEnum stat : List.of(PHYSICAL_CRITICAL_RESIST, MAGICAL_CRITICAL_RESIST, PHYSICAL_CRITICAL_DAMAGE_REDUCE, MAGICAL_CRITICAL_DAMAGE_REDUCE))
+			register(stat, 0, 700);
+		for (StatEnum stat : List.of(POWER, AGILITY, ACCURACY, HEALTH, KNOWLEDGE, WILL))
+			register(stat, 80, 999);
+		for (StatEnum stat : List.of(MAIN_HAND_POWER, MAIN_HAND_ACCURACY, MAIN_HAND_CRITICAL, OFF_HAND_POWER, OFF_HAND_ACCURACY, OFF_HAND_CRITICAL,
+			MAGICAL_RESIST, EVASION, BLOCK, PARRY, PHYSICAL_DEFENSE, PHYSICAL_ACCURACY, MAGICAL_ACCURACY, BOOST_MAGICAL_SKILL))
+			register(stat, 0, CapFunction.UNLIMITED_UPPER);
+		for (StatEnum stat : List.of(WATER_RESISTANCE, FIRE_RESISTANCE, EARTH_RESISTANCE, WIND_RESISTANCE, DARK_RESISTANCE, LIGHT_RESISTANCE))
+			register(stat, creature -> -getElementalDefenseCapForCreature(creature), StatCapUtil::getElementalDefenseCapForCreature);
 
-		register(StatEnum.SPEED, 0, creature -> {
-			boolean unrestricted = !(creature instanceof Player player) || player.isStaff();
-			return unrestricted ? Integer.MAX_VALUE : 12000;
-		});
-
-		register(StatEnum.FLY_SPEED, 0, creature -> {
-			boolean unrestricted = !(creature instanceof Player player) || player.isStaff();
-			return unrestricted ? Integer.MAX_VALUE : 16000;
-		});
-		register(StatEnum.HEAL_BOOST, -1000, 1000);
-		register(StatEnum.MAXHP, creature -> creature instanceof Player ? 100 : 1, CapFunction.UNLIMITED_UPPER);
-		register(StatEnum.MAXMP, creature -> creature instanceof Player ? 1 : 0, CapFunction.UNLIMITED_UPPER);
-
-		for (StatEnum statEnum : EnumSet.of(StatEnum.POWER, StatEnum.AGILITY, StatEnum.ACCURACY, StatEnum.HEALTH, StatEnum.KNOWLEDGE, StatEnum.WILL)) {
-			register(statEnum, 80, 999);
-		}
-
-		registerUpper(700, StatEnum.PHYSICAL_CRITICAL_RESIST, StatEnum.MAGICAL_CRITICAL_RESIST, StatEnum.PHYSICAL_CRITICAL_DAMAGE_REDUCE,
-			StatEnum.MAGICAL_CRITICAL_DAMAGE_REDUCE);
-
-		registerDifferenceLimit(500, StatEnum.BLOCK, StatEnum.PHYSICAL_CRITICAL, StatEnum.MAGICAL_CRITICAL);
-		registerDifferenceLimit(900, StatEnum.MAGICAL_RESIST); // in PvP: 500 (see StatFunctions#calculateMagicalResistRate)
-		registerDifferenceLimit(300, StatEnum.EVASION);
-		registerDifferenceLimit(400, StatEnum.PARRY);
-		registerDifferenceLimit(2900, StatEnum.BOOST_MAGICAL_SKILL);
-
-		registerElementalDefense(StatEnum.WATER_RESISTANCE, StatEnum.FIRE_RESISTANCE, StatEnum.EARTH_RESISTANCE, StatEnum.WIND_RESISTANCE,
-			StatEnum.DARK_RESISTANCE, StatEnum.LIGHT_RESISTANCE);
+		registerDifferenceLimit(500, BLOCK, PHYSICAL_CRITICAL, MAGICAL_CRITICAL);
+		registerDifferenceLimit(900, MAGICAL_RESIST); // in PvP: 500 (see StatFunctions#calculateMagicalResistRate)
+		registerDifferenceLimit(300, EVASION);
+		registerDifferenceLimit(400, PARRY);
+		registerDifferenceLimit(2900, BOOST_MAGICAL_SKILL);
 	}
 
 	public static int getElementalDefenseBaseValue() {
@@ -64,7 +53,7 @@ public class StatCapUtil {
 		int lowerCap = getLowerCap(stat.getStat(), creature);
 		int upperCap = getUpperCap(stat.getStat(), creature);
 
-		if (stat.getStat() == StatEnum.ATTACK_SPEED) {
+		if (stat.getStat() == ATTACK_SPEED) {
 			int base = stat.getBase() / 2;
 			if (stat.getBonus() > 0 && base < stat.getBonus())
 				stat.setBonus(base);
@@ -133,47 +122,20 @@ public class StatCapUtil {
 	private static void register(StatEnum stat, CapFunction lowerCap, CapFunction upperCap) {
 		register(stat, lowerCap, upperCap, Integer.MAX_VALUE);
 	}
-	
+
 	private static void register(StatEnum stat, int lowerCap, CapFunction upperCap) {
 		register(stat, _ -> lowerCap, upperCap, Integer.MAX_VALUE);
 	}
 
 	private static void register(StatEnum stat, CapFunction lowerCap, CapFunction upperCap, int diffLimit) {
-		limits.put(stat, new StatCapRule(lowerCap, upperCap, diffLimit));
-	}
-
-	private static void registerLower(int lowerCap, StatEnum... stats) {
-		registerLower(_ -> lowerCap, stats);
-	}
-
-	private static void registerLower(CapFunction lowerCap, StatEnum... stats) {
-		for (StatEnum stat : stats) {
-			limits.compute(stat, (_, rule) -> rule == null ? new StatCapRule(lowerCap, CapFunction.UNLIMITED_UPPER, Integer.MAX_VALUE)
-				: new StatCapRule(lowerCap, rule.upperCap(), rule.diffLimit()));
-		}
-	}
-
-	private static void registerUpper(int upperCap, StatEnum... stats) {
-		registerUpper(_ -> upperCap, stats);
-	}
-
-	private static void registerUpper(CapFunction upperCap, StatEnum... stats) {
-		for (StatEnum stat : stats) {
-			limits.compute(stat, (_, rule) -> rule == null ? new StatCapRule(CapFunction.UNLIMITED_LOWER, upperCap, Integer.MAX_VALUE)
-				: new StatCapRule(rule.lowerCap(), upperCap, rule.diffLimit()));
-		}
+		if (limits.putIfAbsent(stat, new StatCapRule(lowerCap, upperCap, diffLimit)) != null)
+			throw new IllegalStateException("Limit for " + stat + " already registered");
 	}
 
 	private static void registerDifferenceLimit(int diffLimit, StatEnum... stats) {
 		for (StatEnum stat : stats) {
 			limits.compute(stat, (_, rule) -> rule == null ? new StatCapRule(CapFunction.UNLIMITED_LOWER, CapFunction.UNLIMITED_UPPER, diffLimit)
 				: new StatCapRule(rule.lowerCap(), rule.upperCap(), diffLimit));
-		}
-	}
-
-	private static void registerElementalDefense(StatEnum... stats) {
-		for (StatEnum stat : stats) {
-			register(stat, creature -> -getElementalDefenseCapForCreature(creature), StatCapUtil::getElementalDefenseCapForCreature);
 		}
 	}
 
