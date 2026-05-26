@@ -141,7 +141,7 @@ public class Effect implements StatOwner {
 		this.duration = duration;
 		this.forceType = forceType;
 		this.isSubEffect = isSubEffect;
-		this.power = initializePower();
+		this.power = skillTemplate.getReqDispelCount();
 	}
 
 	/**
@@ -154,8 +154,7 @@ public class Effect implements StatOwner {
 		this.skillLevel = skillLevel;
 		this.duration = duration;
 		this.forceType = forceType;
-
-		this.power = initializePower();
+		this.power = skillTemplate.getReqDispelCount();
 	}
 
 	public void setWorldPosition(int worldId, int instanceId, float x, float y, float z) {
@@ -1005,68 +1004,6 @@ public class Effect implements StatOwner {
 		}
 		if (hasStatModifiers)
 			getEffected().getGameStats().endEffect(this);
-	}
-
-	private int initializePower() {
-		// tweak for pet order spirit substitution and bodyguard
-		if (skillTemplate.getActivationAttribute().equals(ActivationAttribute.MAINTAIN)) {
-			return 30;
-		} else if (skillTemplate.getActivationAttribute().equals(ActivationAttribute.TOGGLE)) {
-			return 100;
-		}
-		switch (skillTemplate.getName()) {
-			case "Explosion of Wrath": // Tahabata fear
-			case "Soul Petrify": // Tahabata paralyse
-			case "Protective Shield":
-				return 30;
-			case "Surkana Aetheric Field":
-				return 60;
-			case "Sap Damage":
-			case "Resistance":
-			case "Weeping Curtain":
-			case "Submissive Strike":
-			case "Spinning Smash":
-			case "Conqueror's Strike":
-			case "Weaken":
-			case "Canyonguard's Target":
-			case "Relic Explosion":
-			case "Ide Shielding":
-				return 255;
-
-		}
-		if (skillTemplate.getGroup() != null) {
-			switch (skillTemplate.getGroup()) {
-				case "PR_GODSVOICE":// Word of Destruction I
-				case "RA_SILENTARROW":
-					return 20;
-				case "WA_STEADINESS":// Unwavering Devotion
-				case "KN_IRONBODY":// Iron Skin
-				case "KN_INVINSIBLEPROTECT": // Empyrean Providence
-				case "FI_CRUSADE": // Nezekans Blessing
-				case "FI_BERSERK": // Zikels Threat
-				case "KN_PURIFYWING":// Prayer of Freedom
-				case "EL_ORDER_SACRIFICE":// Spirit Substitution
-				case "EL_ETERNALSHIELD": // Spirit Preserve
-				case "CH_IMPROVEDBODY": // Elemental Screen
-				case "WI_GAINMANA": // Gain Mana
-				case "RA_SHOCKARROW":// Shock Arrow
-				case "RA_ROOTARROW":
-				case "FI_ANKLEGRAB":// Ankle Snare
-				case "WI_COUNTERMAGIC":// Curse Of Weakness
-				case "PR_PAINLINKS":// Chain of Suffering
-				case "CH_ETERNALSEAL": // Stilling Word
-				case "EL_DECAYINGWING":
-				case "AS_VENOMSTAB":
-				case "CH_SOAREDROCK":
-					return 30;
-				case "EL_PLAGUESWAM":// Cursecloud
-				case "BA_SONGOFBRAVE":
-					return 40; // need 2 cleric dispels or potions
-				case "RI_MAGNETICFIELD":
-					return 255;
-			}
-		}
-		return 10;
 	}
 
 	public int getPower() {
