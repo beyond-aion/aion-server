@@ -1123,6 +1123,10 @@ public class Effect implements StatOwner {
 		this.mpShieldSkillId = mpShieldSkillId;
 	}
 
+	public Set<EffectType> getPossibleConflictEffectTypes() {
+		return skillTemplate.getEffects() == null ? Collections.emptySet() : skillTemplate.getEffects().getPossibleConflictEffectTypes();
+	}
+
 	public static class ForceType {
 
 		private static final Map<String, ForceType> forceTypes = new ConcurrentHashMap<>();

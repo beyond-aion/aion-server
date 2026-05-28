@@ -193,8 +193,8 @@ public class EffectController {
 	private static boolean canConflict(Effect e1, Effect e2) {
 		if (e1.getTargetSlot() == e2.getTargetSlot())
 			return true;
-		if (e1.getSkillSubType() == e2.getSkillSubType())
-			return e1.getTargetSlot() != SkillTargetSlot.BOOST && e2.getTargetSlot() != SkillTargetSlot.BOOST; // retail allows Lucky Vinna II + candy
+		if (!Collections.disjoint(e1.getPossibleConflictEffectTypes(), e2.getPossibleConflictEffectTypes()))
+			return true; // a few effect types can even conflict on differing target slots (example: Barricade of Steel and Holy Shield)
 		return false;
 	}
 

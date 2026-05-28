@@ -118,13 +118,19 @@ public class Effects {
 
 	@XmlTransient
 	private Set<EffectType> effectTypes;
+	@XmlTransient
+	private Set<EffectType> possibleConflictEffectTypes = EnumSet.noneOf(EffectType.class);
+	private static final Set<EffectType> CONFLICT_TYPES = EnumSet.of(EffectType.SHIELD, EffectType.PROTECT, EffectType.REFLECTOR);
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		effectTypes = EnumSet.noneOf(EffectType.class);
 		for (EffectTemplate et : effects) {
-			String effectName = et.getClass().getSimpleName().replaceAll("Effect", "").toUpperCase();
+			String effectName = et.getClass().getSimpleName().replace("Effect", "").toUpperCase();
 			try {
-				effectTypes.add(EffectType.valueOf(effectName));
+				EffectType effectType = EffectType.valueOf(effectName);
+				effectTypes.add(effectType);
+				if (CONFLICT_TYPES.contains(effectType))
+					possibleConflictEffectTypes.add(effectType);
 			} catch (Exception e) {
 				throw new IllegalArgumentException("Missing EffectType " + effectName + " for: " + et.getClass());
 			}
@@ -133,6 +139,10 @@ public class Effects {
 
 	public List<EffectTemplate> getEffects() {
 		return effects;
+	}
+
+	public Set<EffectType> getPossibleConflictEffectTypes() {
+		return possibleConflictEffectTypes;
 	}
 
 	public boolean hasAnyEffectType(EffectType... types) {
