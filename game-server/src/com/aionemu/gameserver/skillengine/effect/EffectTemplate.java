@@ -186,6 +186,10 @@ public abstract class EffectTemplate {
 		return noResist;
 	}
 
+	void setNoResist(boolean noResist) {
+		this.noResist = noResist;
+	}
+
 	/**
 	 * @return the critProbMod2
 	 */
@@ -335,15 +339,7 @@ public abstract class EffectTemplate {
 	}
 
 	private boolean isDodgedOrResisted(Effect effect, StatEnum statEnum) {
-		return canDodgeOrResist(effect) && (!checkEffectResistRate(effect, statEnum) || !checkDodgeOrResistRate(effect));
-	}
-
-	protected boolean canDodgeOrResist(Effect effect) {
-		if (noResist)
-			return false;
-		if (effect.getSkillTemplate().getActivationAttribute() == ActivationAttribute.TOGGLE) // Sprinting must not be dodged by Focused Evasion
-			return false;
-		return true;
+		return !isNoResist() && (!checkEffectResistRate(effect, statEnum) || !checkDodgeOrResistRate(effect));
 	}
 
 	/**

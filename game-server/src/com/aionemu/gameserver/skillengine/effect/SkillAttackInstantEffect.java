@@ -27,10 +27,9 @@ public class SkillAttackInstantEffect extends DamageEffect {
 		return cannotmiss;
 	}
 
-	protected boolean canDodgeOrResist(Effect effect) {
-		if (cannotmiss)
-			return false;
-		return super.canDodgeOrResist(effect);
+	@Override
+	public boolean isNoResist() {
+		return cannotmiss || super.isNoResist();
 	}
 
 }

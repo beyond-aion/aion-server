@@ -7,12 +7,26 @@ import java.util.Set;
 import javax.xml.bind.Unmarshaller;
 import javax.xml.bind.annotation.*;
 
+import static com.aionemu.gameserver.skillengine.effect.EffectType.*;
+
 /**
  * @author ATracer
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "Effects")
 public class Effects {
+
+	private static final Set<EffectType> CONFLICT_TYPES = EnumSet.of(SHIELD, PROTECT, REFLECTOR, MPSHIELD);
+	private static final Set<EffectType> ALWAYS_NO_RESIST = EnumSet.of(ABSOLUTESTATTOPCBUFF, ALWAYSBLOCK, ALWAYSDODGE, ALWAYSPARRY, ALWAYSRESIST,
+		ARMORMASTERY, APBOOST, AURA, BOOSTHATE, BOOSTHEAL, BOOSTSKILLCASTINGTIME, BOOSTSKILLCOST, BOOSTSPELLATTACK, CASEHEAL, CHANGEHATEONATTACKED,
+		CONDSKILLLAUNCHER, CONVERTHEAL, DISPELDEBUFF, DISPELDEBUFFMENTAL, DISPELDEBUFFPHYSICAL, DISPELNPCDEBUFF, DPHEAL, DPHEALINSTANT, DPTRANSFER,
+		DRBOOST, ESCAPE, EXTENDAURARANGE, FPHEAL, FPHEALINSTANT, HEAL, HEALINSTANT, HIDE, HIPASS, HOSTILEUP, INVULNERABLEWING, SKILLXPBOOST, MPHEAL,
+		MPHEALINSTANT, MPSHIELD, NODEATHPENALTY, NORESURRECTPENALTY, ONETIMEBOOSTHEAL, ONETIMEBOOSTSKILLATTACK, ONETIMEBOOSTSKILLCRITICAL,
+		PETORDERUSEULTRASKILL, POLYMORPH, PROCDPHEALINSTANT, PROCFPHEALINSTANT, PROCHEALINSTANT, PROCMPHEALINSTANT, PROCVPHEALINSTANT, PROTECT,
+		RANDOMMOVELOC, REBIRTH, RECALLINSTANT, REFLECTOR, RESURRECT, RESURRECTBASE, RESURRECTPOSITIONAL, RETURN, RETURNPOINT, RIDEROBOT, SANCTUARY,
+		SEARCH, SHAPECHANGE, SHIELD, SHIELDMASTERY, SIGNET, SKILLLAUNCHER, STATBOOST, STATUP, SUBTYPEBOOSTRESIST, SUBTYPEEXTENDDURATION, SUMMON,
+		SUMMONBINDINGGROUPGATE, SUMMONFUNCTIONALNPC, SUMMONGROUPGATE, SUMMONHOMING, SUMMONHOUSEGATE, SUMMONSERVANT, SUMMONSKILLAREA, SUMMONTOTEM,
+		SUMMONTRAP, SUPPORTEVENT, SWITCHHOSTILE, SWITCHHPMP, WEAPONSTATBOOST, WEAPONSTATUP, WEAPONDUAL, WEAPONMASTERY, XPBOOST);
 
 	@XmlElements({ @XmlElement(name = "root", type = RootEffect.class), @XmlElement(name = "buf", type = BufEffect.class),
 		@XmlElement(name = "spellatk", type = SpellAttackEffect.class), @XmlElement(name = "deform", type = DeformEffect.class),
@@ -120,20 +134,56 @@ public class Effects {
 	private Set<EffectType> effectTypes;
 	@XmlTransient
 	private Set<EffectType> possibleConflictEffectTypes = EnumSet.noneOf(EffectType.class);
-	private static final Set<EffectType> CONFLICT_TYPES = EnumSet.of(EffectType.SHIELD, EffectType.PROTECT, EffectType.REFLECTOR);
 
 	void afterUnmarshal(Unmarshaller u, Object parent) {
 		effectTypes = EnumSet.noneOf(EffectType.class);
-		for (EffectTemplate et : effects) {
-			String effectName = et.getClass().getSimpleName().replace("Effect", "").toUpperCase();
-			try {
-				EffectType effectType = EffectType.valueOf(effectName);
-				effectTypes.add(effectType);
-				if (CONFLICT_TYPES.contains(effectType))
-					possibleConflictEffectTypes.add(effectType);
-			} catch (Exception e) {
-				throw new IllegalArgumentException("Missing EffectType " + effectName + " for: " + et.getClass());
-			}
+
+		for (EffectTemplate effect : effects) {
+			EffectType effectType = resolveEffectType(effect);
+
+			registerEffectType(effectType);
+			registerConflictEffectType(effectType);
+			normalizeNoResist(effect, effectType);
+		}
+	}
+
+	private void registerEffectType(EffectType effectType) {
+		effectTypes.add(effectType);
+	}
+
+	private void registerConflictEffectType(EffectType effectType) {
+		if (CONFLICT_TYPES.contains(effectType))
+			possibleConflictEffectTypes.add(effectType);
+	}
+
+	/**
+	 * Applies retail-specific normalization for no-resist behavior.
+	 *
+	 * <p>Retail servers override the XML {@code noresist} setting for certain effect types.
+	 * This behavior appears to be intended to prevent players from resisting or negating
+	 * their own beneficial effects (such as buffs, heals, and shields).</p>
+	 *
+	 * <p>These effect types are primarily beneficial (positive) in nature, but the same rule
+	 * may also affect certain edge-case debuffs, leading to non-intuitive behavior
+	 * (e.g. Slowing Hammer (id = 4011)).</p>
+	 *
+	 * <p>To ensure consistency with retail mechanics, the same logic is applied during
+	 * template post-processing.</p>
+	 *
+	 * @param effect effect template to normalize
+	 * @param effectType resolved effect type of the template
+	 */
+	private void normalizeNoResist(EffectTemplate effect, EffectType effectType) {
+		if (ALWAYS_NO_RESIST.contains(effectType))
+			effect.setNoResist(true);
+	}
+
+	private EffectType resolveEffectType(EffectTemplate et) {
+		String effectName = et.getClass().getSimpleName().replace("Effect", "").toUpperCase();
+		try {
+			return EffectType.valueOf(effectName);
+		} catch (Exception e) {
+			throw new IllegalArgumentException("Missing EffectType " + effectName + " for: " + et.getClass());
 		}
 	}
 
