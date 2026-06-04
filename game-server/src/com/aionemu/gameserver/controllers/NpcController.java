@@ -36,6 +36,7 @@ import com.aionemu.gameserver.services.abyss.AbyssPointsService;
 import com.aionemu.gameserver.services.drop.DropRegistrationService;
 import com.aionemu.gameserver.services.drop.DropService;
 import com.aionemu.gameserver.services.event.EventService;
+import com.aionemu.gameserver.services.instance.InstanceScaler;
 import com.aionemu.gameserver.skillengine.model.Effect;
 import com.aionemu.gameserver.skillengine.model.HopType;
 import com.aionemu.gameserver.skillengine.model.SkillTemplate;
@@ -102,7 +103,8 @@ public class NpcController extends CreatureController<Npc> {
 			owner.setState(owner.getObjectTemplate().getState());
 		else
 			owner.setState(CreatureState.WALK_MODE);
-
+		
+		InstanceScaler.onBeforeSpawn(owner);
 		owner.getLifeStats().setCurrentHpPercent(100);
 		owner.getAi().onGeneralEvent(AIEventType.BEFORE_SPAWNED);
 

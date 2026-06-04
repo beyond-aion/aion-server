@@ -204,6 +204,7 @@ public class InstanceService {
 	public static void onEnterInstance(Player player) {
 		player.getPosition().getWorldMapInstance().getInstanceHandler().onEnterInstance(player);
 		AutoGroupService.getInstance().onEnterInstance(player);
+		InstanceScaler.onEnterInstance(player);
 	}
 
 	public static void onLeaveInstance(Player player) {
