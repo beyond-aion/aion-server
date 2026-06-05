@@ -110,7 +110,7 @@ public class PlayerPetsDAO {
 					}
 					petCommonData.setBirthday(rs.getTimestamp("birthday"));
 					petCommonData.setStartMoodTime(rs.getLong("mood_started"));
-					petCommonData.setShuggleCounter(rs.getInt("counter"));
+					petCommonData.setSnuggleCounter(rs.getInt("counter"));
 					petCommonData.setMoodCdStarted(rs.getLong("mood_cd_started"));
 					petCommonData.setGiftCdStarted(rs.getLong("gift_cd_started"));
 					Timestamp ts = rs.getTimestamp("despawn_time");
@@ -137,12 +137,12 @@ public class PlayerPetsDAO {
 		}
 	}
 
-	public static boolean savePetMoodData(PetCommonData petCommonData) {
+	public static void savePetMoodData(PetCommonData petCommonData) {
 		try (Connection con = DatabaseFactory.getConnection();
 				 PreparedStatement stmt = con.prepareStatement(
 					 "UPDATE player_pets SET mood_started = ?, counter = ?, mood_cd_started = ?, gift_cd_started = ?, despawn_time = ? WHERE id = ?")) {
 			stmt.setLong(1, petCommonData.getMoodStartTime());
-			stmt.setInt(2, petCommonData.getShuggleCounter());
+			stmt.setInt(2, petCommonData.getSnuggleCounter());
 			stmt.setLong(3, petCommonData.getMoodCdStarted());
 			stmt.setLong(4, petCommonData.getGiftCdStarted());
 			stmt.setTimestamp(5, petCommonData.getDespawnTime());
@@ -150,9 +150,7 @@ public class PlayerPetsDAO {
 			stmt.execute();
 		} catch (Exception e) {
 			log.error("Error updating mood for pet #" + petCommonData.getObjectId(), e);
-			return false;
 		}
-		return true;
 	}
 
 	public static int[] getUsedIDs() {
@@ -171,5 +169,4 @@ public class PlayerPetsDAO {
 			return null;
 		}
 	}
-
 }

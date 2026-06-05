@@ -1,82 +1,64 @@
-<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<pet_buffs>
-	<buff id="1" feed_count="5">
-		<modifiers>
-			<rate name="ATTACK_SPEED" value="-2" bonus="true"/>
-			<rate name="BOOST_CASTING_TIME" value="2" bonus="true"/>
-			<rate name="SPEED" value="5" bonus="true"/>
-			<add name="MAXHP" value="120" bonus="true"/>
-			<add name="MAXMP" value="200" bonus="true"/>
-		</modifiers>
-	</buff>
-	<buff id="2" feed_count="2">
-		<modifiers>
-			<rate name="ATTACK_SPEED" value="-1" bonus="true"/>
-			<rate name="BOOST_CASTING_TIME" value="1" bonus="true"/>
-			<rate name="SPEED" value="3" bonus="true"/>
-		</modifiers>
-	</buff>
-	<buff id="3" feed_count="5">
-		<modifiers>
-			<rate name="SPEED" value="2" bonus="true"/>
-			<add name="BOOST_MAGICAL_SKILL" value="11" bonus="true"/>
-			<add name="PHYSICAL_ATTACK" value="2" bonus="true"/>
-			<add name="PHYSICAL_CRITICAL" value="8" bonus="true"/>
-			<add name="MAGICAL_CRITICAL" value="2" bonus="true"/>
-		</modifiers>
-	</buff>
-	<buff id="4" feed_count="5">
-		<modifiers>
-			<rate name="SPEED" value="2" bonus="true"/>
-			<add name="PHYSICAL_DEFENSE" value="30" bonus="true"/>
-			<add name="PARRY" value="8" bonus="true"/>
-			<add name="MAGICAL_RESIST" value="6" bonus="true"/>
-			<add name="MAGIC_SKILL_BOOST_RESIST" value="6" bonus="true"/>
-		</modifiers>
-	</buff>
-	<buff id="5" feed_count="5">
-		<modifiers>
-			<rate name="SPEED" value="2" bonus="true"/>
-			<rate name="FLY_SPEED" value="2" bonus="true"/>
-			<add name="FLY_TIME" value="3" bonus="true"/>
-			<add name="MAXMP" value="44" bonus="true"/>
-			<add name="MAXHP" value="40" bonus="true"/>
-		</modifiers>
-	</buff>
-	<buff id="6" feed_count="5">
-		<modifiers>
-			<rate name="SPEED" value="2" bonus="true"/>
-			<add name="BOOST_MAGICAL_SKILL" value="11" bonus="true"/>
-			<add name="MAGICAL_CRITICAL" value="2" bonus="true"/>
-			<add name="MAGICAL_ACCURACY" value="6" bonus="true"/>
-			<add name="MAXHP" value="40" bonus="true"/>
-		</modifiers>
-	</buff>
-	<buff id="7" feed_count="5">
-		<modifiers>
-			<rate name="SPEED" value="2" bonus="true"/>
-			<add name="PHYSICAL_ATTACK" value="2" bonus="true"/>
-			<add name="PHYSICAL_CRITICAL" value="8" bonus="true"/>
-			<add name="PHYSICAL_ACCURACY" value="12" bonus="true"/>
-			<add name="MAXHP" value="40" bonus="true"/>
-		</modifiers>
-	</buff>
-	<buff id="8" feed_count="5">
-		<modifiers>
-			<rate name="SPEED" value="2" bonus="true"/>
-			<add name="MAGICAL_RESIST" value="6" bonus="true"/>
-			<add name="MAGIC_SKILL_BOOST_RESIST" value="6" bonus="true"/>
-			<add name="MAXHP" value="40" bonus="true"/>
-			<add name="MAXMP" value="44" bonus="true"/>
-		</modifiers>
-	</buff>
-	<buff id="9" feed_count="5">
-		<modifiers>
-			<rate name="SPEED" value="2" bonus="true"/>
-			<add name="PVP_ATTACK_RATIO" value="4" bonus="true"/>
-			<add name="PVP_DEFEND_RATIO" value="4" bonus="true"/>
-			<add name="MAXHP" value="40" bonus="true"/>
-			<add name="MAXMP" value="44" bonus="true"/>
-		</modifiers>
-	</buff>
+<?xml version="1.0" encoding="UTF-8"?>
+<pet_buffs xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="pet_buffs.xsd">
+	<pet_buffs buff_id="1" food_count="5">
+		<penalty_attr stat="ATTACK_SPEED" func="PERCENT" value="-2"/>
+		<penalty_attr stat="BOOST_CASTING_TIME" func="PERCENT" value="2"/>
+		<penalty_attr stat="SPEED" func="PERCENT" value="5"/>
+		<penalty_attr stat="MAXHP" func="ADD" value="120"/>
+		<penalty_attr stat="MAXMP" func="ADD" value="200"/>
+	</pet_buffs>
+	<pet_buffs buff_id="2" food_count="2">
+		<penalty_attr stat="ATTACK_SPEED" func="PERCENT" value="-1"/>
+		<penalty_attr stat="BOOST_CASTING_TIME" func="PERCENT" value="1"/>
+		<penalty_attr stat="SPEED" func="PERCENT" value="3"/>
+	</pet_buffs>
+	<pet_buffs buff_id="3" food_count="5">
+		<penalty_attr stat="SPEED" func="PERCENT" value="2"/>
+		<penalty_attr stat="BOOST_MAGICAL_SKILL" func="PERCENT" value="11"/>
+		<penalty_attr stat="PHYSICAL_ATTACK" func="ADD" value="2"/>
+		<penalty_attr stat="PHYSICAL_CRITICAL" func="ADD" value="8"/>
+		<penalty_attr stat="MAGICAL_CRITICAL" func="ADD" value="2"/>
+	</pet_buffs>
+	<pet_buffs buff_id="4" food_count="5">
+		<penalty_attr stat="SPEED" func="PERCENT" value="2"/>
+		<penalty_attr stat="PHYSICAL_DEFENSE" func="ADD" value="30"/>
+		<penalty_attr stat="PARRY" func="ADD" value="8"/>
+		<penalty_attr stat="MAGICAL_RESIST" func="ADD" value="6"/>
+		<penalty_attr stat="MAGIC_SKILL_BOOST_RESIST" func="ADD" value="6"/>
+	</pet_buffs>
+	<pet_buffs buff_id="5" food_count="5">
+		<penalty_attr stat="SPEED" func="PERCENT" value="2"/>
+		<penalty_attr stat="FLY_SPEED" func="PERCENT" value="2"/>
+		<penalty_attr stat="FLY_TIME" func="ADD" value="3"/>
+		<penalty_attr stat="MAXHP" func="ADD" value="44"/>
+		<penalty_attr stat="MAXMP" func="ADD" value="40"/>
+	</pet_buffs>
+	<pet_buffs buff_id="6" food_count="5">
+		<penalty_attr stat="SPEED" func="PERCENT" value="2"/>
+		<penalty_attr stat="BOOST_MAGICAL_SKILL" func="ADD" value="11"/>
+		<penalty_attr stat="MAGICAL_CRITICAL" func="ADD" value="2"/>
+		<penalty_attr stat="MAGICAL_ACCURACY" func="ADD" value="6"/>
+		<penalty_attr stat="MAXHP" func="ADD" value="40"/>
+	</pet_buffs>
+	<pet_buffs buff_id="7" food_count="5">
+		<penalty_attr stat="SPEED" func="PERCENT" value="2"/>
+		<penalty_attr stat="PHYSICAL_ATTACK" func="ADD" value="2"/>
+		<penalty_attr stat="PHYSICAL_CRITICAL" func="ADD" value="8"/>
+		<penalty_attr stat="PHYSICAL_ACCURACY" func="ADD" value="12"/>
+		<penalty_attr stat="MAXHP" func="ADD" value="40"/>
+	</pet_buffs>
+	<pet_buffs buff_id="8" food_count="5">
+		<penalty_attr stat="SPEED" func="PERCENT" value="2"/>
+		<penalty_attr stat="MAGICAL_RESIST" func="ADD" value="6"/>
+		<penalty_attr stat="MAGIC_SKILL_BOOST_RESIST" func="ADD" value="6"/>
+		<penalty_attr stat="MAXHP" func="ADD" value="40"/>
+		<penalty_attr stat="MAXMP" func="ADD" value="44"/>
+	</pet_buffs>
+	<pet_buffs buff_id="9" food_count="5">
+		<penalty_attr stat="SPEED" func="PERCENT" value="2"/>
+		<penalty_attr stat="PVP_ATTACK_RATIO" func="ADD" value="4"/>
+		<penalty_attr stat="PVP_DEFEND_RATIO" func="ADD" value="4"/>
+		<penalty_attr stat="MAXHP" func="ADD" value="40"/>
+		<penalty_attr stat="MAXMP" func="ADD" value="44"/>
+	</pet_buffs>
 </pet_buffs>

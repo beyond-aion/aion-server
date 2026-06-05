@@ -27986,6 +27986,20 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	}
 
 	/**
+	 * Activates the Cheer skill. If needed, any Aether Cherries in the Inventory are used automatically.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_START_MESSAGE() {
+		return new SM_SYSTEM_MESSAGE(1402606);
+	}
+
+	/**
+	 * Deactivates the Cheer skill.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_STOP_MESSAGE() {
+		return new SM_SYSTEM_MESSAGE(1402607);
+  }
+
+  /**
 	 * Because the Reward Box was full, the oldest gift (%0%) has been deleted.
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_ATTEND_REWARD_REMOVE_EXCESS(String name) {
@@ -28144,6 +28158,13 @@ public final class SM_SYSTEM_MESSAGE extends AionServerPacket {
 	 */
 	public static SM_SYSTEM_MESSAGE STR_MSG_LIMITED_VENDOR_CANT_OVER_GOLD() {
 		return new SM_SYSTEM_MESSAGE(1402666);
+	}
+
+	/**
+	 * You need Aether Cherries to use the Cheer skill.
+	 */
+	public static SM_SYSTEM_MESSAGE STR_MSG_BUFF_PET_USE_STOP_MESSAGE_03() {
+		return new SM_SYSTEM_MESSAGE(1402672);
 	}
 
 	/**

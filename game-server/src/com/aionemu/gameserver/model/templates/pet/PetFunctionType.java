@@ -1,14 +1,14 @@
 package com.aionemu.gameserver.model.templates.pet;
 
 /**
- * @author IlBuono, Rolandas
+ * @author IlBuono, Rolandas, SVDNESS
  */
 public enum PetFunctionType {
 	WAREHOUSE(0),
 	FOOD(1),
 	DOPING(2),
 	LOOT(3),
-	BUFF(4),
+	CHERRY(5),
 	MERCHANT(5),
 	NONE(6),
 

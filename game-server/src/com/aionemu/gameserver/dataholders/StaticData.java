@@ -155,7 +155,7 @@ public class StaticData {
 	public PetDopingData petDopingData;
 
 	@XmlElement(name = "pet_buffs")
-	public PetBuffsData petBuffsData;
+	public PetBuffData petBuffData;
 
 	@XmlElement(name = "guides")
 	public GuideHtmlData guideData;
@@ -327,7 +327,7 @@ public class StaticData {
 		log.info("Loaded " + npcShoutData.size() + " npc shout templates");
 		log.info("Loaded " + petData.size() + " pet templates and " + petFeedData.size() + " food flavours");
 		log.info("Loaded " + petDopingData.size() + " pet doping templates");
-		log.info("Loaded " + petBuffsData.size() + " pet buffs templates");
+		log.info("Loaded {} pet doping templates.", petDopingData.size());
 		log.info("Loaded " + playerInitialData.size() + " initial player templates");
 		log.info("Loaded " + tradeListData.size() + " trade lists");
 		log.info("Loaded " + teleporterData.size() + " npc teleporter templates");

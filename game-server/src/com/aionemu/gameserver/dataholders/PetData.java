@@ -11,8 +11,6 @@ import javax.xml.bind.annotation.*;
 import com.aionemu.gameserver.model.templates.pet.PetTemplate;
 
 /**
- * This is a container holding and serving all {@link PetTemplate} instances.<br>
- * 
  * @author IlBuono
  */
 @XmlRootElement(name = "pets")
@@ -21,7 +19,6 @@ public class PetData {
 
 	@XmlElement(name = "pet")
 	private List<PetTemplate> pets;
-
 	@XmlTransient
 	private final Map<Integer, PetTemplate> petData = new HashMap<>();
 
@@ -36,13 +33,6 @@ public class PetData {
 		return petData.size();
 	}
 
-	/**
-	 * /** Returns an {@link PetTemplate} object with given id.
-	 * 
-	 * @param id
-	 *          id of Pet
-	 * @return PetTemplate object containing data about Pet with that id.
-	 */
 	public PetTemplate getPetTemplate(int id) {
 		return petData.get(id);
 	}

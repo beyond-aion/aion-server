@@ -16,7 +16,7 @@ import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.ThreadPoolManager;
 
 /**
- * @author ATracer
+ * @author ATracer, SVDNESS
  */
 public class PetCommonData implements Expirable {
 
@@ -31,11 +31,11 @@ public class PetCommonData implements Expirable {
 	private volatile boolean cancelFeed = false;
 	private long refeedTime;
 	private long startMoodTime;
-	private int shuggleCounter;
+	private int snuggleCounter;
 	private int lastSentPoints;
 	private long moodCdStarted;
 	private long giftCdStarted;
-	private int expireTime;
+	private final int expireTime;
 	private Timestamp despawnTime;
 	private boolean isLooting = false;
 	private boolean isSelling = false;
@@ -104,12 +104,12 @@ public class PetCommonData implements Expirable {
 		return refeedTime;
 	}
 
-	public void setRefeedTime(long curentTime) {
-		this.refeedTime = curentTime;
+	public void setRefeedTime(long currentTime) {
+		this.refeedTime = currentTime;
 	}
 
 	public boolean getCancelFeed() {
-		return cancelFeed;
+		return !cancelFeed;
 	}
 
 	public void setCancelFeed(boolean cancelFeed) {
@@ -125,8 +125,9 @@ public class PetCommonData implements Expirable {
 	}
 
 	public void cancelRefeedTask() {
-		if (refeedTask != null)
+		if (refeedTask != null) {
 			refeedTask.cancel(false);
+		}
 	}
 
 	public long getRefeedDelay() {
@@ -135,7 +136,6 @@ public class PetCommonData implements Expirable {
 			refeedTime = 0;
 			time = 0;
 		}
-
 		return time;
 	}
 
@@ -143,18 +143,19 @@ public class PetCommonData implements Expirable {
 		return startMoodTime;
 	}
 
-	public final int getShuggleCounter() {
-		return shuggleCounter;
+	public final int getSnuggleCounter() {
+		return snuggleCounter;
 	}
 
-	public final void setShuggleCounter(int shuggleCounter) {
-		this.shuggleCounter = shuggleCounter;
+	public final void setSnuggleCounter(int snuggleCounter) {
+		this.snuggleCounter = snuggleCounter;
 	}
 
 	public final int getMoodPoints(boolean forPacket) {
-		if (startMoodTime == 0)
+		if (startMoodTime == 0) {
 			startMoodTime = System.currentTimeMillis();
-		int points = Math.round((System.currentTimeMillis() - startMoodTime) / 1000f) + shuggleCounter * 1000;
+		}
+		int points = Math.round((System.currentTimeMillis() - startMoodTime) / 1000f) + snuggleCounter * 1000;
 		if (forPacket && points > 9000)
 			return 9000;
 		return points;
@@ -172,30 +173,23 @@ public class PetCommonData implements Expirable {
 		if (getMoodRemainingTime() > 0)
 			return false;
 		this.moodCdStarted = System.currentTimeMillis();
-		this.shuggleCounter++;
+		this.snuggleCounter++;
 		return true;
 	}
 
 	public final void clearMoodStatistics() {
 		this.startMoodTime = 0;
-		this.shuggleCounter = 0;
+		this.snuggleCounter = 0;
 	}
 
 	public final void setStartMoodTime(long startMoodTime) {
 		this.startMoodTime = startMoodTime;
 	}
 
-	/**
-	 * @return moodCdStarted
-	 */
 	public long getMoodCdStarted() {
 		return moodCdStarted;
 	}
 
-	/**
-	 * @param moodCdStarted
-	 *          the moodCdStarted to set
-	 */
 	public void setMoodCdStarted(long moodCdStarted) {
 		this.moodCdStarted = moodCdStarted;
 	}
@@ -210,17 +204,10 @@ public class PetCommonData implements Expirable {
 		return (int) (remains / 1000);
 	}
 
-	/**
-	 * @return the giftCdStarted
-	 */
 	public long getGiftCdStarted() {
 		return giftCdStarted;
 	}
 
-	/**
-	 * @param giftCdStarted
-	 *          the giftCdStarted to set
-	 */
 	public void setGiftCdStarted(long giftCdStarted) {
 		this.giftCdStarted = giftCdStarted;
 	}
@@ -235,24 +222,14 @@ public class PetCommonData implements Expirable {
 		return (int) (remains / 1000);
 	}
 
-	/**
-	 * @return the despawnTime
-	 */
 	public Timestamp getDespawnTime() {
 		return despawnTime;
 	}
 
-	/**
-	 * @param despawnTime
-	 *          the despawnTime to set
-	 */
 	public void setDespawnTime(Timestamp despawnTime) {
 		this.despawnTime = despawnTime;
 	}
 
-	/**
-	 * @return feedProgress, null if pet has no feed function
-	 */
 	public PetFeedProgress getFeedProgress() {
 		return feedProgress;
 	}
@@ -287,5 +264,4 @@ public class PetCommonData implements Expirable {
 		PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_MSG_PET_ABANDON_EXPIRE_TIME_COMPLETE(name));
 		PetAdoptionService.surrenderPet(player, templateId);
 	}
-
 }

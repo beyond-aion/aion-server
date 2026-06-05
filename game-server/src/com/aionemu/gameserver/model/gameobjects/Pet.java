@@ -13,7 +13,7 @@ import com.aionemu.gameserver.world.WorldPosition;
 public class Pet extends VisibleObject {
 
 	private final Player master;
-	private CreatureMoveController<Pet> moveController;
+	private final CreatureMoveController<Pet> moveController;
 	private final PetCommonData commonData;
 
 	public Pet(PetTemplate petTemplate, PetController controller, PetCommonData commonData, Player master) {
@@ -45,5 +45,4 @@ public class Pet extends VisibleObject {
 	public final PetTemplate getObjectTemplate() {
 		return (PetTemplate) super.getObjectTemplate();
 	}
-
 }

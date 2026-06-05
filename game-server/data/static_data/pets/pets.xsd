@@ -40,7 +40,7 @@
 			<xs:enumeration value="WING"/>
 			<xs:enumeration value="LOOT"/>
 			<xs:enumeration value="DOPING"/>
-			<xs:enumeration value="BUFF"/>
+			<xs:enumeration value="CHERRY"/>
 			<xs:enumeration value="MERCHANT"/>
 		</xs:restriction>
 	</xs:simpleType>

@@ -4,7 +4,7 @@ import javax.xml.bind.annotation.XmlEnum;
 import javax.xml.bind.annotation.XmlType;
 
 /**
- * @author Rolandas
+ * @author Rolandas, SVDNESS
  */
 @XmlType(name = "FoodType")
 @XmlEnum
@@ -27,7 +27,8 @@ public enum FoodType {
 	SOULS,
 	SHUGO_EVENT_COIN,
 	STINKY, // Other excuded items
-	THORNS;
+	THORNS,
+	NEW_YEAR_PET_FOOD;
 
 	public String value() {
 		return name();

@@ -9,16 +9,13 @@ public final class PetFeedProgress {
 	private short regularConsumed = 0;
 	private short lovedConsumed = 0;
 	private PetHungryLevel hungryLevel = PetHungryLevel.HUNGRY;
-	private short lovedFoodMax = 0;
-	private boolean lovedFeeded = false;
+	private final short lovedFoodMax;
+	private boolean loved_feed = false;
 
 	public PetFeedProgress(short lovedFoodLimit) {
 		lovedFoodMax = (short) (lovedFoodLimit & 0x3F);
 	}
 
-	/**
-	 * @return the totalPoints
-	 */
 	public int getTotalPoints() {
 		return totalPoints;
 	}
@@ -27,9 +24,6 @@ public final class PetFeedProgress {
 		totalPoints = points & 0x3FFF;
 	}
 
-	/**
-	 * @return the hungryLevel
-	 */
 	public PetHungryLevel getHungryLevel() {
 		return hungryLevel;
 	}
@@ -38,13 +32,11 @@ public final class PetFeedProgress {
 		hungryLevel = level;
 	}
 
-	/**
-	 * @return the consumed
-	 */
 	public int getRegularCount() {
 		return regularConsumed & 0xFF;
 	}
 
+	@SuppressWarnings("unused")
 	public void setRegularCount(short count) {
 		regularConsumed = count;
 	}
@@ -54,11 +46,11 @@ public final class PetFeedProgress {
 	}
 
 	public boolean isLovedFeeded() {
-		return lovedFeeded;
+		return loved_feed;
 	}
 
 	public void setIsLovedFeeded() {
-		lovedFeeded = true;
+		loved_feed = true;
 	}
 
 	public void incrementCount(boolean lovedFood) {
@@ -70,9 +62,9 @@ public final class PetFeedProgress {
 	}
 
 	public void reset() {
-		if (lovedFeeded)
-			lovedFeeded = false;
-		else {
+		if (loved_feed) {
+			loved_feed = false;
+		} else {
 			totalPoints = 0;
 			regularConsumed = 0;
 		}
