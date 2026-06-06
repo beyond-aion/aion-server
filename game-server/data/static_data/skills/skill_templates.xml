@@ -805,7 +805,7 @@
 		</useconditions>
 		<effects>
 			<shieldmastery effectid="126" e="1" basiclvl="1">
-				<change stat="BLOCK" func="PERCENT" value="0" />
+				<change stat="DAMAGE_REDUCE" func="PERCENT" value="0" />
 			</shieldmastery>
 		</effects>
 	</skill_template>
@@ -882,7 +882,7 @@
 		</useconditions>
 		<effects>
 			<shieldmastery effectid="126" e="1" basiclvl="2">
-				<change stat="BLOCK" func="PERCENT" value="5" />
+				<change stat="DAMAGE_REDUCE" func="PERCENT" value="5" />
 			</shieldmastery>
 		</effects>
 	</skill_template>
@@ -1012,7 +1012,7 @@
 		</useconditions>
 		<effects>
 			<shieldmastery effectid="126" e="1" basiclvl="2">
-				<change stat="BLOCK" func="PERCENT" value="5" />
+				<change stat="DAMAGE_REDUCE" func="PERCENT" value="5" />
 			</shieldmastery>
 		</effects>
 	</skill_template>
@@ -1347,7 +1347,7 @@
 		</useconditions>
 		<effects>
 			<shieldmastery effectid="126" e="1" basiclvl="2">
-				<change stat="BLOCK" func="PERCENT" value="5" />
+				<change stat="DAMAGE_REDUCE" func="PERCENT" value="5" />
 			</shieldmastery>
 		</effects>
 	</skill_template>
@@ -1413,7 +1413,7 @@
 		</useconditions>
 		<effects>
 			<shieldmastery effectid="126" e="1" basiclvl="2">
-				<change stat="BLOCK" func="PERCENT" value="5" />
+				<change stat="DAMAGE_REDUCE" func="PERCENT" value="5" />
 			</shieldmastery>
 		</effects>
 	</skill_template>
@@ -110368,7 +110368,7 @@
 		</useconditions>
 		<effects>
 			<shieldmastery effectid="126" e="1" basiclvl="1" hoptype="SKILLLV">
-				<change stat="BLOCK" func="PERCENT" delta="2" value="18" />
+				<change stat="DAMAGE_REDUCE" func="PERCENT" delta="2" value="18" />
 			</shieldmastery>
 		</effects>
 	</skill_template>
