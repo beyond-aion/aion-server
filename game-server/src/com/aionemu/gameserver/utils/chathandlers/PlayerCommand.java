@@ -24,7 +24,7 @@ public abstract class PlayerCommand extends ChatCommand {
 
 	@Override
 	public boolean validateAccess(Player player) {
-		boolean hasAccess = player.hasPermission(getLevel()) || CommandsAccessService.hasAccess(player.getObjectId(), getAlias());
+		boolean hasAccess = player.hasPermission(getLevel()) || CommandsAccessService.hasAccess(player.getObjectId(), getAliasForLevel());
 		if (!hasAccess && player.isStaff())
 			sendInfo(player, "<You need membership level " + getLevel() + " or higher to use " + getAliasWithPrefix() + ">");
 		return hasAccess;

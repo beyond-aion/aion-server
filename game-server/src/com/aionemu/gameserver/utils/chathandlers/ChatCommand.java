@@ -69,6 +69,10 @@ public abstract class ChatCommand {
 		return alias;
 	}
 
+	protected String getAliasForLevel() {
+		return alias;
+	}
+
 	public final String getDescription() {
 		return description;
 	}
@@ -126,9 +130,9 @@ public abstract class ChatCommand {
 	}
 
 	public final byte getLevel() {
-		Byte level = CommandsConfig.ACCESS_LEVELS.get(alias);
+		Byte level = CommandsConfig.ACCESS_LEVELS.get(getAliasForLevel());
 		if (level == null)
-			throw new NullPointerException("Missing access level for " + getAliasWithPrefix());
+			throw new NullPointerException("Missing access level for " + prefix + getAliasForLevel());
 		return level;
 	}
 

@@ -321,6 +321,7 @@ public final class PlayerEnterWorldService {
 			ClassChangeService.showClassChangeDialog(player);
 
 		GMService.getInstance().onPlayerLogin(player);
+		BookmarkDAO.loadBookmarks(player.getObjectId()).forEach(bookmark -> PacketSendUtility.sendPacket(player, new SM_GM_BOOKMARK_ADD(bookmark)));
 
 		if (player.getAbyssRank().getRank().getId() >= AbyssRankEnum.STAR1_OFFICER.getId()) {
 			client.sendPacket(SM_SYSTEM_MESSAGE.STR_MSG_GLORY_POINT_LOSE_COMMON());

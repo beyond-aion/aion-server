@@ -106,14 +106,14 @@ CREATE TABLE `bonus_packs` (
 -- ----------------------------
 DROP TABLE IF EXISTS `bookmark`;
 CREATE TABLE `bookmark` (
-  `id` int NOT NULL AUTO_INCREMENT,
-  `name` varchar(50) DEFAULT NULL,
-  `char_id` int NOT NULL,
+  `player_id` int NOT NULL,
+  `name` varchar(27) NOT NULL,
+  `world_id` int NOT NULL,
   `x` float NOT NULL,
   `y` float NOT NULL,
   `z` float NOT NULL,
-  `world_id` int NOT NULL,
-  PRIMARY KEY (`id`)
+  PRIMARY KEY (`player_id`, `name`)
+	CONSTRAINT `bookmark_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------
