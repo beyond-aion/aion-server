@@ -16,11 +16,6 @@ import com.aionemu.gameserver.skillengine.model.Effect;
 public class FallEffect extends EffectTemplate {
 
 	@Override
-	public void calculate(Effect effect) {
-		super.calculate(effect, null, null);
-	}
-
-	@Override
 	protected boolean isDodgedOrResisted(Effect effect, StatEnum statEnum) {
 		if (effect.getEffected().getEffectController().isInAnyAbnormalState(AbnormalState.INVULNERABLE_WING)) {
 			return true;
