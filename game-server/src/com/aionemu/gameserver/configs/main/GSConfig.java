@@ -9,7 +9,7 @@ public class GSConfig {
 
 	/**
 	 * Server country code (the client checks it against its cc start parameter)<br>
-	 * 1=NA, 2=EU, 7=RU, 99=Region free (allows any client, but client will limit character names to 10 characters)
+	 * 0=KR, 1=NA, 2=EU, 4=JP, 5=CN, 6=TW, 7=RU, 99=Region free (allows any client, but client will limit character names to 10 characters)
 	 */
 	@Property(key = "gameserver.country.code", defaultValue = "99")
 	public static int SERVER_COUNTRY_CODE;
