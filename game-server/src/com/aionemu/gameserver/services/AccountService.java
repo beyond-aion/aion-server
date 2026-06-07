@@ -30,11 +30,8 @@ public class AccountService {
 
 	private static final Logger log = LoggerFactory.getLogger(AccountService.class);
 
-	/**
-	 * Returns {@link Account} object that has given id.
-	 */
 	public static Account getAccount(int accountId, String accountName, long creationDate, AccountTime accountTime, byte accessLevel, byte membership,
-		long toll, String allowedHddSerial) {
+			String allowedHddSerial) {
 		log.debug("[AS] request for account: " + accountId);
 
 		Account account = loadAccount(accountId);
@@ -43,7 +40,6 @@ public class AccountService {
 		account.setAccountTime(accountTime);
 		account.setAccessLevel(accessLevel);
 		account.setMembership(membership);
-		account.setToll(toll);
 		account.setAllowedHddSerial(allowedHddSerial);
 		removeDeletedCharacters(account);
 		return account;

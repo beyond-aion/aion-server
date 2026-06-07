@@ -57,7 +57,7 @@ public class AccountDAO {
 	public static boolean insertAccount(Account account) {
 		try (Connection con = DatabaseFactory.getConnection();
 			PreparedStatement st = con.prepareStatement("INSERT INTO account_data(`" + MYSQL_TABLE_ACCOUNT_NAME
-				+ "`, `password`, access_level, membership, activated, last_server, last_ip, last_mac, ip_force, toll) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)",
+				+ "`, `password`, access_level, membership, activated, last_server, last_ip, last_mac, ip_force) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)",
 				Statement.RETURN_GENERATED_KEYS)) {
 			st.setString(1, account.getName());
 			st.setString(2, account.getPasswordHash());
@@ -68,7 +68,6 @@ public class AccountDAO {
 			st.setString(7, account.getLastIp());
 			st.setString(8, account.getLastMac());
 			st.setString(9, account.getIpForce());
-			st.setLong(10, 0);
 			if (st.executeUpdate() == 0)
 				throw new SQLException();
 			try (ResultSet rs = st.getGeneratedKeys()) {

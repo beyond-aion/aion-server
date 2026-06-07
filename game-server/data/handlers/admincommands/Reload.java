@@ -9,7 +9,6 @@ import com.aionemu.gameserver.ai.AIEngine;
 import com.aionemu.gameserver.configs.Config;
 import com.aionemu.gameserver.dataholders.*;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
-import com.aionemu.gameserver.model.ingameshop.InGameShopEn;
 import com.aionemu.gameserver.model.templates.event.EventTemplate;
 import com.aionemu.gameserver.model.templates.npcskill.NpcSkillTemplates;
 import com.aionemu.gameserver.questEngine.QuestEngine;
@@ -37,7 +36,7 @@ public class Reload extends AdminCommand {
 			"<events> - Reloads event templates and (re)starts events.",
 			"<arcade> - Reloads the Upgrade Arcade reward item list.",
 			"<decomposables> - Reloads content of item bundles",
-			"<items|customdrops|gameshop> - Reloads the specified data." 
+			"<items|customdrops> - Reloads the specified data." 
 		);
 		// @formatter:on
 	}
@@ -86,9 +85,6 @@ public class Reload extends AdminCommand {
 			File xml = new File("./data/static_data/custom_drop/custom_drop.xml");
 			DataManager.CUSTOM_NPC_DROP = JAXBUtil.deserialize(xml, CustomDrop.class, "./data/static_data/static_data.xsd");
 			sendInfo(admin, DataManager.CUSTOM_NPC_DROP.size() + " custom drops loaded.");
-		} else if (params[0].equalsIgnoreCase("gameshop")) {
-			InGameShopEn.getInstance().reload();
-			sendInfo(admin, "Gameshop successfully reloaded!");
 		} else if (params[0].equalsIgnoreCase("events")) {
 			List<EventTemplate> templates = new ArrayList<>();
 			Collection<File> files = XmlUtil.listFiles("./data/static_data/events/timed_events", true);

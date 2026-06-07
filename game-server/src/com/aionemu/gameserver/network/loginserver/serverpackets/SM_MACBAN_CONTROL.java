@@ -14,7 +14,7 @@ public class SM_MACBAN_CONTROL extends LsServerPacket {
 	private long time;
 
 	public SM_MACBAN_CONTROL(byte type, String address, long time, String details) {
-		super(10);
+		super(9);
 		this.type = type;
 		this.address = address;
 		this.time = time;

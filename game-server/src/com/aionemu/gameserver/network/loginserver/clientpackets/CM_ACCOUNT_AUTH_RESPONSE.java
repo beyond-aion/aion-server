@@ -10,15 +10,12 @@ import com.aionemu.gameserver.network.loginserver.LsClientPacket;
  * 
  * @author -Nemesiss-
  */
-public class CM_ACOUNT_AUTH_RESPONSE extends LsClientPacket {
+public class CM_ACCOUNT_AUTH_RESPONSE extends LsClientPacket {
 
-	public CM_ACOUNT_AUTH_RESPONSE(int opCode) {
+	public CM_ACCOUNT_AUTH_RESPONSE(int opCode) {
 		super(opCode);
 	}
 
-	/**
-	 * accountId
-	 */
 	private int accountId;
 
 	/**
@@ -34,9 +31,6 @@ public class CM_ACOUNT_AUTH_RESPONSE extends LsClientPacket {
 	 * Time of account creation, measured in milliseconds since 1.1.1970 0:00 UTC
 	 */
 	private long creationDate;
-	/**
-	 * accountTime
-	 */
 	private AccountTime accountTime;
 	/**
 	 * access level - regular/gm/admin
@@ -47,13 +41,6 @@ public class CM_ACOUNT_AUTH_RESPONSE extends LsClientPacket {
 	 */
 	private byte membership;
 
-	/**
-	 * Toll
-	 */
-	private long toll;
-	/**
-	 * Allowed HDD serial
-	 */
 	private String allowedHddSerial;
 
 	@Override
@@ -65,20 +52,16 @@ public class CM_ACOUNT_AUTH_RESPONSE extends LsClientPacket {
 			accountName = readS();
 			creationDate = readQ();
 			accountTime = new AccountTime();
-
 			accountTime.setAccumulatedOnlineTime(readQ());
 			accountTime.setAccumulatedRestTime(readQ());
-
 			accessLevel = readC();
 			membership = readC();
-			toll = readQ();
 			allowedHddSerial = readS();
 		}
 	}
 
 	@Override
 	public void runImpl() {
-		LoginServer.getInstance().accountAuthenticationResponse(accountId, accountName, result, creationDate, accountTime, accessLevel, membership, toll,
-			allowedHddSerial);
+		LoginServer.getInstance().accountAuthenticationResponse(accountId, accountName, result, creationDate, accountTime, accessLevel, membership, allowedHddSerial);
 	}
 }

@@ -19,7 +19,6 @@ CREATE TABLE `account_data` (
   `allowed_hdd_serial` varchar(100) DEFAULT NULL,
   `ip_force` varchar(20) DEFAULT NULL,
   `expire` date DEFAULT NULL,
-  `toll` bigint NOT NULL DEFAULT '0',
   PRIMARY KEY (`id`),
   UNIQUE KEY `name` (`name`),
   UNIQUE KEY `ext_auth_name` (`ext_auth_name`)
@@ -38,20 +37,6 @@ CREATE TABLE `account_time` (
   `accumulated_rest` int DEFAULT '0',
   `penalty_end` timestamp NULL DEFAULT NULL,
   PRIMARY KEY (`account_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
--- ----------------------------
--- Table structure for `account_rewards`
--- ----------------------------
-DROP TABLE IF EXISTS `account_rewards`;
-CREATE TABLE `account_rewards` (
-  `uniqId` int NOT NULL AUTO_INCREMENT,
-  `accountId` int NOT NULL,
-  `added` varchar(70) NOT NULL DEFAULT '',
-  `points` decimal(20,0) NOT NULL DEFAULT '0',
-  `received` varchar(70) NOT NULL DEFAULT '0',
-  `rewarded` boolean NOT NULL DEFAULT '0',
-  PRIMARY KEY (`uniqId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- ----------------------------

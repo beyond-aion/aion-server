@@ -1,5 +1,6 @@
 /*
- * DB changes since 16e4dcf (15.12.2024)
+ * DB changes since 796a72b (06.06.2026)
  */
 
-DROP TABLE `tasks`;
+ALTER TABLE `account_data` DROP COLUMN `toll`;
+DROP TABLE `account_rewards`;

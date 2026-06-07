@@ -147,7 +147,7 @@ public class LoginServer {
 	 * This method is called by CM_ACCOUNT_AUTH_RESPONSE LoginServer packets to notify GameServer about results of client authentication.
 	 */
 	public void accountAuthenticationResponse(int accountId, String accountName, boolean result, long creationDate, AccountTime accountTime,
-		byte accessLevel, byte membership, long toll, String allowedHddSerial) {
+		byte accessLevel, byte membership, String allowedHddSerial) {
 		LoginRequest loginRequest = loginRequests.remove(accountId);
 		if (loginRequest == null)
 			return;
@@ -158,7 +158,7 @@ public class LoginServer {
 			sendPacket(new SM_ACCOUNT_DISCONNECTED(accountId)); // disconnect manually from login server because account isn't attached to connection yet
 			return;
 		}
-		Account account = AccountService.getAccount(accountId, accountName, creationDate, accountTime, accessLevel, membership, toll, allowedHddSerial);
+		Account account = AccountService.getAccount(accountId, accountName, creationDate, accountTime, accessLevel, membership, allowedHddSerial);
 		if (SecurityConfig.HDD_SERIAL_LOCK_UNLOCKED_ACCOUNTS && account.getAllowedHddSerial().isEmpty() && !client.getHddSerial().isEmpty()) {
 			account.setAllowedHddSerial(client.getHddSerial());
 			sendPacket(new SM_CHANGE_ALLOWED_HDD_SERIAL(account));

@@ -22,12 +22,6 @@ public class LoggingConfig {
 	@Property(key = "gameserver.log.chats.private", defaultValue = "false")
 	public static boolean LOG_PRIVATE_CHATS;
 
-	@Property(key = "gameserver.log.ingameshop", defaultValue = "false")
-	public static boolean LOG_INGAMESHOP;
-
-	@Property(key = "gameserver.log.ingameshop.sql", defaultValue = "false")
-	public static boolean LOG_INGAMESHOP_SQL;
-
 	@Property(key = "gameserver.log.item", defaultValue = "true")
 	public static boolean LOG_ITEM;
 

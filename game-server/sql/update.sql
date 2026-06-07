@@ -12,3 +12,6 @@ ALTER TABLE `bookmark`
 	DROP PRIMARY KEY,
 	ADD PRIMARY KEY (`player_id`, `name`),
 	ADD CONSTRAINT `bookmark_ibfk_1` FOREIGN KEY (`player_id`) REFERENCES `players` (`id`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+DROP TABLE `ingameshop`;
+DROP TABLE `ingameshop_log`;

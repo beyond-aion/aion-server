@@ -38,7 +38,6 @@ import com.aionemu.gameserver.model.gameobjects.state.CreatureState;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.gameobjects.state.FlyState;
 import com.aionemu.gameserver.model.house.House;
-import com.aionemu.gameserver.model.ingameshop.InGameShop;
 import com.aionemu.gameserver.model.items.ItemCooldown;
 import com.aionemu.gameserver.model.items.storage.*;
 import com.aionemu.gameserver.model.skill.PlayerSkillList;
@@ -86,7 +85,6 @@ public class Player extends Creature {
 
 	public volatile RideInfo ride;
 	public volatile InRoll inRoll;
-	public InGameShop inGameShop;
 	private final PlayerAccountData playerAccountData;
 	private final Account playerAccount;
 	private LegionMember legionMember;
@@ -216,7 +214,6 @@ public class Player extends Creature {
 
 		setGameStats(new PlayerGameStats(this));
 		setLifeStats(new PlayerLifeStats(this));
-		inGameShop = new InGameShop();
 		absStatsHolder = new AbsoluteStatOwner(this, 0);
 	}
 

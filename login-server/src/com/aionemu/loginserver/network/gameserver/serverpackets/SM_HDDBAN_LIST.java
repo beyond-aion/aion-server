@@ -21,7 +21,7 @@ public class SM_HDDBAN_LIST extends GsServerPacket {
 
 	@Override
 	protected void writeImpl(GsConnection con) {
-		writeC(13);
+		writeC(10);
 		writeD(bannedList.size());
 
 		for (Entry<String, Timestamp> e : bannedList.entrySet()) {
