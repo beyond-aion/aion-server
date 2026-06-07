@@ -13,7 +13,11 @@
 
 		Most basic version is to type:
 		<import file="some_file.xml"/>
-		Merger will just include content of the some_file.xml (omitting attributes of root node)
+		Merger will just include content of the some_file.xml (omitting attributes of root node). If present, a region-specific variant of some_file.xml
+		will be loaded, depending on the country code setting of the server. This is the same mechanism the game client uses when loading its data.
+		These are the file name suffixes (country code = country suffix): 1 = _usa, 2 = _europe, 4 = _japan, 5 = _china, 6 = _taiwan, 7 = _russia
+		Example: The server is configured with country code 2. If it exists, some_file_europe.xml will be loaded instead of some_file.xml.
+
 		Instead of some_file.xml we can type name of directory, then all xml files in that
 		directory (by default recursively) will be loaded.
 
