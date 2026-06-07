@@ -7,7 +7,6 @@ import org.apache.commons.lang3.ArrayUtils;
 
 import com.aionemu.commons.utils.Rnd;
 import com.aionemu.gameserver.configs.main.FallDamageConfig;
-import com.aionemu.gameserver.configs.main.InstanceConfig;
 import com.aionemu.gameserver.configs.main.RatesConfig;
 import com.aionemu.gameserver.controllers.attack.AttackResult;
 import com.aionemu.gameserver.controllers.attack.AttackStatus;
@@ -56,10 +55,6 @@ public class StatFunctions {
 			mapMulti *= instance.getMaxPlayers(); // on retail you get mob EP * max instance member count (only for group instances)
 			mapMulti /= RatesConfig.XP_SOLO_RATES[0]; // custom: divide by regular xp rates, so they will not affect the rewarded XP
 		}
-		if (InstanceConfig.INSTANCE_SCALING_ENABLE && instance.getParent().isInstanceType() && instance.getMaxPlayers() > 1) {
-			long count = instance.getPlayersInside().stream().filter(p -> !p.isStaff()).count();
-			mapMulti *= Math.max(InstanceConfig.INSTANCE_SCALING_XP_FLOOR, (float) Math.min(count, instance.getMaxPlayers()) / instance.getMaxPlayers());
-		}	
 		int xpPercentage = XPRewardEnum.xpRewardFrom(target.getLevel() - maxLevelInRange);
 		long rewardXP = Math.round(baseXP * mapMulti * (xpPercentage / 100f));
 		return rewardXP;

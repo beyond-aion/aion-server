@@ -103,7 +103,7 @@ public class NpcController extends CreatureController<Npc> {
 			owner.setState(owner.getObjectTemplate().getState());
 		else
 			owner.setState(CreatureState.WALK_MODE);
-		
+
 		InstanceScaler.onBeforeSpawn(owner);
 		owner.getLifeStats().setCurrentHpPercent(100);
 		owner.getAi().onGeneralEvent(AIEventType.BEFORE_SPAWNED);

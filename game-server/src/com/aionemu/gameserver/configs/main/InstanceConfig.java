@@ -31,9 +31,6 @@ public class InstanceConfig {
 	@Property(key = "gameserver.instance.scaling.dmg_floor", defaultValue = "0.5")
 	public static float INSTANCE_SCALING_DMG_FLOOR;
 
-	@Property(key = "gameserver.instance.scaling.xp_floor", defaultValue = "0.5")
-	public static float INSTANCE_SCALING_XP_FLOOR;
-
 	@Property(key = "gameserver.instance.scaling.excluded_maps", defaultValue = "")
 	public static Set<Integer> INSTANCE_SCALING_EXCLUDED_MAPS;
 

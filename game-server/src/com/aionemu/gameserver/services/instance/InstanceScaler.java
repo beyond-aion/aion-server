@@ -56,7 +56,7 @@ public class InstanceScaler implements StatOwner {
 		double dmgMulti = calculateMultiplier(instance, playerCount, INSTANCE_SCALING_DMG_FLOOR);
 		for (Npc npc : instance.getNpcs())
 			if (shouldScale(npc, instance))
-				scaleNpc(npc, hpMulti, dmgMulti);			
+				scaleNpc(npc, hpMulti, dmgMulti);
 	}
 
 	private static boolean shouldScale(Npc npc, WorldMapInstance instance) {
