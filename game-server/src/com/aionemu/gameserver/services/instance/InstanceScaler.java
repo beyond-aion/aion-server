@@ -31,7 +31,7 @@ public class InstanceScaler implements StatOwner {
 
 	public static void onBeforeSpawn(Npc npc) {
 		WorldMapInstance instance = npc.getPosition().getWorldMapInstance();
-		if (!canScale(instance))
+		if (!canScale(instance) || maxPlayerCounts.get(instance) == null)
 			return;
 		if (shouldScale(npc, instance))
 			scaleNpc(npc, calculateMultiplier(instance, INSTANCE_SCALING_HP_FLOOR), calculateMultiplier(instance, INSTANCE_SCALING_DMG_FLOOR));
