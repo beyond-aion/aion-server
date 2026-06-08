@@ -83,7 +83,7 @@ public class TradeService {
 		}
 
 		if (!validateBuyItems(npc, tradeList, player)) {
-			PacketSendUtility.sendMessage(player, "Some items are not allowed to be sold from this NPC.");
+			PacketSendUtility.sendPacket(player, SM_SYSTEM_MESSAGE.STR_BUY_SELL_USER_BUY_FAILED());
 			return false;
 		}
 
