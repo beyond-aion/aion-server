@@ -8,6 +8,7 @@ import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.calc.functions.StatAddFunction;
+import com.aionemu.gameserver.model.stats.calc.functions.StatRateFunction;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
@@ -62,7 +63,8 @@ public class InstanceScaler implements StatOwner {
 		int baseMAtk = stats.getMagicalAttack();
 		npc.getGameStats().addEffect(INSTANCE, List.of(new StatAddFunction(StatEnum.MAXHP, (int) (baseHp * hpMulti) - baseHp, true),
 			new StatAddFunction(StatEnum.PHYSICAL_ATTACK, (int) (baseAtk * dmgMulti) - baseAtk, true),
-			new StatAddFunction(StatEnum.MAGICAL_ATTACK, (int) (baseMAtk * dmgMulti) - baseMAtk, true)));
+			new StatAddFunction(StatEnum.MAGICAL_ATTACK, (int) (baseMAtk * dmgMulti) - baseMAtk, true),
+			new StatRateFunction(StatEnum.BOOST_SPELL_ATTACK, (int) (100 * dmgMulti - 100), true)));
 	}
 
 	private static int activePlayerCount(WorldMapInstance instance) {
