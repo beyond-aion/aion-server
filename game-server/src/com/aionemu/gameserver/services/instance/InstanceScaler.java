@@ -2,7 +2,10 @@ package com.aionemu.gameserver.services.instance;
 
 import static com.aionemu.gameserver.configs.main.InstanceConfig.*;
 
+import java.util.Collections;
 import java.util.List;
+import java.util.Map;
+import java.util.WeakHashMap;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
@@ -18,30 +21,25 @@ import com.aionemu.gameserver.world.WorldMapInstance;
 public class InstanceScaler implements StatOwner {
 
 	private static final InstanceScaler INSTANCE = new InstanceScaler();
+	private static final Map<WorldMapInstance, Integer> maxPlayerCounts = Collections.synchronizedMap(new WeakHashMap<>());
 
 	public static void onEnterInstance(Player player) {
 		WorldMapInstance instance = player.getPosition().getWorldMapInstance();
-		if (player.isStaff() || !canScale(instance))
-			return;
-		rescale(instance, activePlayerCount(instance));
+		if (canScale(instance) && playerCountIncreased(instance))
+			rescale(instance);
 	}
 
 	public static void onBeforeSpawn(Npc npc) {
 		WorldMapInstance instance = npc.getPosition().getWorldMapInstance();
 		if (!canScale(instance))
 			return;
-		if (shouldScale(npc, instance)) {
-			int count = activePlayerCount(instance);
-			scaleNpc(npc, calculateMultiplier(instance, count, INSTANCE_SCALING_HP_FLOOR),
-				calculateMultiplier(instance, count, INSTANCE_SCALING_DMG_FLOOR));
-		}
+		if (shouldScale(npc, instance))
+			scaleNpc(npc, calculateMultiplier(instance, INSTANCE_SCALING_HP_FLOOR), calculateMultiplier(instance, INSTANCE_SCALING_DMG_FLOOR));
 	}
 
-	private static void rescale(WorldMapInstance instance, int playerCount) {
-		if (playerCount == 0)
-			return;
-		float hpMulti = calculateMultiplier(instance, playerCount, INSTANCE_SCALING_HP_FLOOR);
-		float dmgMulti = calculateMultiplier(instance, playerCount, INSTANCE_SCALING_DMG_FLOOR);
+	private static void rescale(WorldMapInstance instance) {
+		float hpMulti = calculateMultiplier(instance, INSTANCE_SCALING_HP_FLOOR);
+		float dmgMulti = calculateMultiplier(instance, INSTANCE_SCALING_DMG_FLOOR);
 		for (Npc npc : instance.getNpcs())
 			if (shouldScale(npc, instance))
 				scaleNpc(npc, hpMulti, dmgMulti);
@@ -67,11 +65,15 @@ public class InstanceScaler implements StatOwner {
 			new StatRateFunction(StatEnum.BOOST_SPELL_ATTACK, (int) (100 * dmgMulti - 100), true)));
 	}
 
-	private static int activePlayerCount(WorldMapInstance instance) {
-		return (int) instance.getPlayersInside().stream().filter(p -> !p.isStaff()).count();
+	private static boolean playerCountIncreased(WorldMapInstance instance) {
+		int playerCount = (int) instance.getPlayersInside().stream().filter(p -> !p.isStaff()).count();
+		int previousPlayerCount = maxPlayerCounts.getOrDefault(instance, 0);
+		int maxPlayerCount = maxPlayerCounts.compute(instance, (_, v) -> v == null || v < playerCount ? playerCount : v);
+		return previousPlayerCount < maxPlayerCount;
 	}
 
-	private static float calculateMultiplier(WorldMapInstance instance, int playerCount, float floor) {
+	public static float calculateMultiplier(WorldMapInstance instance, float floor) {
+		int playerCount = maxPlayerCounts.getOrDefault(instance, instance.getMaxPlayers());
 		return Math.max(floor, (float) Math.min(playerCount, instance.getMaxPlayers()) / instance.getMaxPlayers());
 	}
 }
