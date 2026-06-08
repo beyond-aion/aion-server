@@ -4,7 +4,6 @@ import static com.aionemu.gameserver.configs.main.InstanceConfig.*;
 
 import java.util.List;
 
-import com.aionemu.gameserver.configs.main.InstanceConfig;
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
@@ -20,25 +19,15 @@ public class InstanceScaler implements StatOwner {
 	private static final InstanceScaler INSTANCE = new InstanceScaler();
 
 	public static void onEnterInstance(Player player) {
-		if (!InstanceConfig.INSTANCE_SCALING_ENABLE)
-			return;
-		if (player.isStaff())
-			return;
 		WorldMapInstance instance = player.getPosition().getWorldMapInstance();
-		if (instance.getMaxPlayers() <= 1)
-			return;
-		if (InstanceConfig.INSTANCE_SCALING_EXCLUDED_MAPS.contains(instance.getMapId()))
+		if (player.isStaff() || !canScale(instance))
 			return;
 		rescale(instance, activePlayerCount(instance));
 	}
 
 	public static void onBeforeSpawn(Npc npc) {
-		if (!InstanceConfig.INSTANCE_SCALING_ENABLE)
-			return;
 		WorldMapInstance instance = npc.getPosition().getWorldMapInstance();
-		if (instance.getMaxPlayers() <= 1)
-			return;
-		if (InstanceConfig.INSTANCE_SCALING_EXCLUDED_MAPS.contains(instance.getMapId()))
+		if (!canScale(instance))
 			return;
 		if (shouldScale(npc, instance)) {
 			int count = activePlayerCount(instance);
@@ -48,24 +37,24 @@ public class InstanceScaler implements StatOwner {
 	}
 
 	private static void rescale(WorldMapInstance instance, int playerCount) {
-		if (instance.getMaxPlayers() <= 1)
-			return;
 		if (playerCount == 0)
 			return;
-		double hpMulti = calculateMultiplier(instance, playerCount, INSTANCE_SCALING_HP_FLOOR);
-		double dmgMulti = calculateMultiplier(instance, playerCount, INSTANCE_SCALING_DMG_FLOOR);
+		float hpMulti = calculateMultiplier(instance, playerCount, INSTANCE_SCALING_HP_FLOOR);
+		float dmgMulti = calculateMultiplier(instance, playerCount, INSTANCE_SCALING_DMG_FLOOR);
 		for (Npc npc : instance.getNpcs())
 			if (shouldScale(npc, instance))
 				scaleNpc(npc, hpMulti, dmgMulti);
 	}
 
-	private static boolean shouldScale(Npc npc, WorldMapInstance instance) {
-		return instance.getPlayersInside().stream().filter(p -> !p.isStaff()).findFirst().map(npc::isEnemyFrom).orElse(false);
+	public static boolean canScale(WorldMapInstance instance) {
+		return INSTANCE_SCALING_ENABLE && instance.getMaxPlayers() > 1 && instance.getParent().isInstanceType() && !INSTANCE_SCALING_EXCLUDED_MAPS.contains(instance.getMapId());
 	}
 
-	private static void scaleNpc(Npc npc, double hpMulti, double dmgMulti) {
-		if (npc.isDead())
-			return;
+	private static boolean shouldScale(Npc npc, WorldMapInstance instance) {
+		return !npc.isDead() && instance.getPlayersInside().stream().filter(p -> !p.isStaff()).findFirst().map(npc::isEnemyFrom).orElse(false);
+	}
+
+	private static void scaleNpc(Npc npc, float hpMulti, float dmgMulti) {
 		npc.getGameStats().endEffect(INSTANCE);
 		var stats = npc.getObjectTemplate().getStatsTemplate();
 		int baseHp = stats.getMaxHp();
@@ -80,7 +69,7 @@ public class InstanceScaler implements StatOwner {
 		return (int) instance.getPlayersInside().stream().filter(p -> !p.isStaff()).count();
 	}
 
-	private static double calculateMultiplier(WorldMapInstance instance, int playerCount, float floor) {
-		return Math.max(floor, (double) Math.min(playerCount, instance.getMaxPlayers()) / instance.getMaxPlayers());
+	private static float calculateMultiplier(WorldMapInstance instance, int playerCount, float floor) {
+		return Math.max(floor, (float) Math.min(playerCount, instance.getMaxPlayers()) / instance.getMaxPlayers());
 	}
 }
