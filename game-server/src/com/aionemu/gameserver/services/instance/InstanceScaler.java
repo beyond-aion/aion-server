@@ -6,11 +6,11 @@ import java.util.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
+import com.aionemu.gameserver.model.stats.calc.Stat2;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
-import com.aionemu.gameserver.model.stats.calc.functions.StatAddFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
-import com.aionemu.gameserver.model.stats.calc.functions.StatRateFunction;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
+import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
@@ -53,18 +53,14 @@ public class InstanceScaler implements StatOwner {
 
 	private static void scaleNpc(Npc npc, float hpMulti, float dmgMulti) {
 		npc.getGameStats().endEffect(INSTANCE);
-		var stats = npc.getObjectTemplate().getStatsTemplate();
-		List<StatFunction> statFunctions = new ArrayList<>();
+		List<InstanceScalerStatFunction> statFunctions = new ArrayList<>();
 		if (hpMulti != 1) {
-			int baseHp = stats.getMaxHp();
-			statFunctions.add(new StatAddFunction(StatEnum.MAXHP, (int) (baseHp * hpMulti) - baseHp, true));
+			statFunctions.add(new InstanceScalerStatFunction(StatEnum.MAXHP, hpMulti));
 		}
 		if (dmgMulti != 1) {
-			int baseAtk = stats.getAttack();
-			int baseMAtk = stats.getMagicalAttack();
-			statFunctions.add(new StatAddFunction(StatEnum.PHYSICAL_ATTACK, (int) (baseAtk * dmgMulti) - baseAtk, true));
-			statFunctions.add(new StatAddFunction(StatEnum.MAGICAL_ATTACK, (int) (baseMAtk * dmgMulti) - baseMAtk, true));
-			statFunctions.add(new StatRateFunction(StatEnum.BOOST_SPELL_ATTACK, (int) (100 * dmgMulti - 100), true));
+			statFunctions.add(new InstanceScalerStatFunction(StatEnum.PHYSICAL_ATTACK, dmgMulti));
+			statFunctions.add(new InstanceScalerStatFunction(StatEnum.MAGICAL_ATTACK, dmgMulti));
+			statFunctions.add(new InstanceScalerStatFunction(StatEnum.BOOST_SPELL_ATTACK, dmgMulti));
 		}
 		if (!statFunctions.isEmpty())
 			npc.getGameStats().addEffect(INSTANCE, statFunctions);
@@ -80,5 +76,26 @@ public class InstanceScaler implements StatOwner {
 	public static float calculateMultiplier(WorldMapInstance instance, float floor) {
 		int playerCount = maxPlayerCounts.getOrDefault(instance, instance.getMaxPlayers());
 		return Math.max(floor, (float) Math.min(playerCount, instance.getMaxPlayers()) / instance.getMaxPlayers());
+	}
+
+	static class InstanceScalerStatFunction extends StatFunction {
+
+		private final float rate;
+
+		InstanceScalerStatFunction(StatEnum stat, float rate) {
+			this.stat = stat;
+			this.rate = rate;
+		}
+
+		@Override
+		public void apply(Stat2 stat, CalculationType... calculationTypes) {
+			stat.setBaseRate(stat.getBaseRate() * rate);
+			stat.setBonusRate(stat.getBonusRate() * rate);
+		}
+
+		@Override
+		public int getPriority() {
+			return 120;
+		}
 	}
 }
