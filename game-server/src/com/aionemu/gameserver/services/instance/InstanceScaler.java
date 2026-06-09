@@ -2,15 +2,13 @@ package com.aionemu.gameserver.services.instance;
 
 import static com.aionemu.gameserver.configs.main.InstanceConfig.*;
 
-import java.util.Collections;
-import java.util.List;
-import java.util.Map;
-import java.util.WeakHashMap;
+import java.util.*;
 
 import com.aionemu.gameserver.model.gameobjects.Npc;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.stats.calc.StatOwner;
 import com.aionemu.gameserver.model.stats.calc.functions.StatAddFunction;
+import com.aionemu.gameserver.model.stats.calc.functions.StatFunction;
 import com.aionemu.gameserver.model.stats.calc.functions.StatRateFunction;
 import com.aionemu.gameserver.model.stats.container.StatEnum;
 import com.aionemu.gameserver.world.WorldMapInstance;
@@ -56,13 +54,20 @@ public class InstanceScaler implements StatOwner {
 	private static void scaleNpc(Npc npc, float hpMulti, float dmgMulti) {
 		npc.getGameStats().endEffect(INSTANCE);
 		var stats = npc.getObjectTemplate().getStatsTemplate();
-		int baseHp = stats.getMaxHp();
-		int baseAtk = stats.getAttack();
-		int baseMAtk = stats.getMagicalAttack();
-		npc.getGameStats().addEffect(INSTANCE, List.of(new StatAddFunction(StatEnum.MAXHP, (int) (baseHp * hpMulti) - baseHp, true),
-			new StatAddFunction(StatEnum.PHYSICAL_ATTACK, (int) (baseAtk * dmgMulti) - baseAtk, true),
-			new StatAddFunction(StatEnum.MAGICAL_ATTACK, (int) (baseMAtk * dmgMulti) - baseMAtk, true),
-			new StatRateFunction(StatEnum.BOOST_SPELL_ATTACK, (int) (100 * dmgMulti - 100), true)));
+		List<StatFunction> statFunctions = new ArrayList<>();
+		if (hpMulti != 1) {
+			int baseHp = stats.getMaxHp();
+			statFunctions.add(new StatAddFunction(StatEnum.MAXHP, (int) (baseHp * hpMulti) - baseHp, true));
+		}
+		if (dmgMulti != 1) {
+			int baseAtk = stats.getAttack();
+			int baseMAtk = stats.getMagicalAttack();
+			statFunctions.add(new StatAddFunction(StatEnum.PHYSICAL_ATTACK, (int) (baseAtk * dmgMulti) - baseAtk, true));
+			statFunctions.add(new StatAddFunction(StatEnum.MAGICAL_ATTACK, (int) (baseMAtk * dmgMulti) - baseMAtk, true));
+			statFunctions.add(new StatRateFunction(StatEnum.BOOST_SPELL_ATTACK, (int) (100 * dmgMulti - 100), true));
+		}
+		if (!statFunctions.isEmpty())
+			npc.getGameStats().addEffect(INSTANCE, statFunctions);
 	}
 
 	private static boolean playerCountIncreased(WorldMapInstance instance) {
