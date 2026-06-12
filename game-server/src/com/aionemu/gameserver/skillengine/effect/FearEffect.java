@@ -30,12 +30,12 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * @author Sarynth
+ * @author Sarynth, SVDNESS
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "FearEffect")
 public class FearEffect extends EffectTemplate {
-
 	@XmlAttribute
 	protected int resistchance = 100;
 
@@ -43,11 +43,10 @@ public class FearEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		Creature effected = effect.getEffected();
 		effected.getEffectController().removeHideEffects();
-		// Fear stops gliding
+		//If the target is gliding, then we remove this condition.
 		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
 			((Player) effected).getFlyController().onStopGliding();
 		}
-
 		effect.addToEffectedController();
 	}
 
@@ -63,30 +62,26 @@ public class FearEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill(effector);
 		effect.setAbnormal(AbnormalState.FEAR);
 		effected.getEffectController().setAbnormal(AbnormalState.FEAR);
-
 		effected.getMoveController().abortMove();
-
 		if (effected instanceof Npc) {
-			EmoteManager.emoteStartAttacking((Npc) effected, effector); // set weapon_equipped for faster walk speed
+			EmoteManager.emoteStartAttacking((Npc) effected, effector); //Set weapon_equipped for faster walk speed.
 			effected.getAi().setStateIfNot(AIState.FEAR);
 		} else if (effected instanceof Player && effected.isInState(CreatureState.WALK_MODE)) {
 			effected.unsetState(CreatureState.WALK_MODE);
 			PacketSendUtility.broadcastPacket((Player) effected, new SM_EMOTION(effected, EmotionType.RUN), true);
 		}
 		if (GeoDataConfig.FEAR_ENABLE) {
-			ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new FearTask(effector, effected), 0, 1000);
+			ScheduledFuture<?> fearTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new FearTask(effector, effected), 0, 1_000);
 			effect.setPeriodicTask(fearTask, position);
 		}
-
-		// resistchance of fear effect to damage, if value is lower than 100, fear can be interrupted bz damage
-		// example skillId: 540 Terrible howl
+		//Resistchance of fear effect to damage, if value is lower than 100, fear can be interrupted bz damage (example skillId: Terrible howl).
 		if (resistchance < 100) {
 			effect.addObserver(effected, new ActionObserver(ObserverType.ATTACKED) {
-
 				@Override
 				public void attacked(Creature creature, int skillId) {
-					if (Rnd.chance() >= resistchance)
+					if (Rnd.chance() >= resistchance) {
 						effected.getEffectController().removeEffect(effect.getSkillId());
+					}
 				}
 			});
 		}
@@ -95,35 +90,28 @@ public class FearEffect extends EffectTemplate {
 	@Override
 	public void endEffect(Effect effect) {
 		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.FEAR);
-
 		effect.getEffected().getMoveController().abortMove();
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_POSITION(effect.getEffected()));
-
 		if (effect.getEffected() instanceof Npc) {
 			effect.getEffected().getAi().setStateIfNot(AIState.IDLE);
 			effect.getEffected().getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
 		}
 	}
 
-	class FearTask implements Runnable {
-
-		private Creature effector;
-		private Creature effected;
-
-		FearTask(Creature effector, Creature effected) {
-			this.effector = effector;
-			this.effected = effected;
-		}
+	record FearTask(Creature effector, Creature effected) implements Runnable {
+		//The flee point is farther than the target travels per tick (1 sec):
+		//the target never reaches it between ticks and keeps running smoothly — same as retail behavior.
+		private static final float FLEE_SECONDS = 2.5f;
 
 		@Override
 		public void run() {
 			if (effected.getEffectController().isUnderFear() && PositionUtil.isInRange(effected, effector, 40)) {
 				float angle = PositionUtil.calculateAngleFrom(effector, effected);
-				float maxDistance = effected.getGameStats().getMovementSpeedFloat();
+				float maxDistance = effected.getGameStats().getMovementSpeedFloat() * FLEE_SECONDS;
 				Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effected, angle, maxDistance);
-				if (effected instanceof Npc) {
-					((Npc) effected).getMoveController().resetMove();
-					((Npc) effected).getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
+				if (effected instanceof Npc npc) {
+					//Updates destination on the fly (no resetMove): movement stays continuous.
+					npc.getMoveController().retargetPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 				} else {
 					byte moveAwayHeading = PositionUtil.convertAngleToHeading(angle);
 					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), moveAwayHeading);

@@ -27,8 +27,9 @@ import com.aionemu.gameserver.utils.ThreadPoolManager;
 import com.aionemu.gameserver.world.geo.GeoService;
 
 /**
- * @author Yeats
+ * @author Yeats, SVDNESS
  */
+
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlType(name = "ConfuseEffect")
 public class ConfuseEffect extends EffectTemplate {
@@ -37,7 +38,7 @@ public class ConfuseEffect extends EffectTemplate {
 	public void applyEffect(Effect effect) {
 		Creature effected = effect.getEffected();
 		effected.getEffectController().removeHideEffects();
-
+		//If the target is gliding, then we remove this condition.
 		if (effected instanceof Player && ((Player) effected).isInGlidingState()) {
 			((Player) effected).getFlyController().onStopGliding();
 		}
@@ -56,7 +57,6 @@ public class ConfuseEffect extends EffectTemplate {
 		effected.getController().cancelCurrentSkill(effect.getEffector());
 		effected.getEffectController().setAbnormal(AbnormalState.CONFUSE);
 		effect.setAbnormal(AbnormalState.CONFUSE);
-
 		effected.getMoveController().abortMove();
 		if (effected instanceof Npc) {
 			EmoteManager.emoteStartAttacking((Npc) effected, effector);
@@ -66,7 +66,7 @@ public class ConfuseEffect extends EffectTemplate {
 			PacketSendUtility.broadcastPacket((Player) effected, new SM_EMOTION(effected, EmotionType.RUN), true);
 		}
 		if (GeoDataConfig.FEAR_ENABLE) {
-			ScheduledFuture<?> confuseTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new ConfuseTask(effected), 0, 1000);
+			ScheduledFuture<?> confuseTask = ThreadPoolManager.getInstance().scheduleAtFixedRate(new ConfuseTask(effected), 0, 1_000);
 			effect.setPeriodicTask(confuseTask, position);
 		}
 	}
@@ -76,29 +76,26 @@ public class ConfuseEffect extends EffectTemplate {
 		effect.getEffected().getEffectController().unsetAbnormal(AbnormalState.CONFUSE);
 		effect.getEffected().getMoveController().abortMove();
 		PacketSendUtility.broadcastPacketAndReceive(effect.getEffected(), new SM_POSITION(effect.getEffected()));
-
 		if (effect.getEffected() instanceof Npc) {
 			effect.getEffected().getAi().setStateIfNot(AIState.IDLE);
 			effect.getEffected().getAi().onCreatureEvent(AIEventType.ATTACK, effect.getEffected());
 		}
 	}
 
-	class ConfuseTask implements Runnable {
-		private Creature effected;
-
-		ConfuseTask(Creature effected) {
-			this.effected = effected;
-		}
+	record ConfuseTask (Creature effected) implements Runnable {
+		//The flee point is farther than the target travels per tick (1 sec):
+		//the target never reaches it between ticks and keeps running smoothly — same as retail behavior.
+		private static final float FLEE_SECONDS = 2.5f;
 
 		@Override
 		public void run() {
 			if (effected.getEffectController().isConfused()) {
 				float angle = Rnd.nextFloat(360f);
-				float maxDistance = effected.getGameStats().getMovementSpeedFloat();
+				float maxDistance = effected.getGameStats().getMovementSpeedFloat() * FLEE_SECONDS;
 				Vector3f closestCollision = GeoService.getInstance().findMovementCollision(effected, angle, maxDistance);
-				if (effected instanceof Npc) {
-					((Npc) effected).getMoveController().resetMove();
-					((Npc) effected).getMoveController().moveToPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
+				if (effected instanceof Npc npc) {
+					//Updates destination on the fly (no resetMove): movement stays continuous.
+					npc.getMoveController().retargetPoint(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ());
 				} else {
 					byte heading = PositionUtil.convertAngleToHeading(angle);
 					effected.getMoveController().setNewDirection(closestCollision.getX(), closestCollision.getY(), closestCollision.getZ(), heading);
@@ -107,5 +104,4 @@ public class ConfuseEffect extends EffectTemplate {
 			}
 		}
 	}
-
 }
