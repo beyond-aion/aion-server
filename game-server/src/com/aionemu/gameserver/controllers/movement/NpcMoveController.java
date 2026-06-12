@@ -50,6 +50,8 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 	private float pointZ;
 	private boolean nextPointFromGeo;
 	private boolean isStop;
+	private long nextAirborneCheckMillis;
+	private boolean airborne;
 
 	private LinkedList<Point3D> lastSteps;
 
@@ -92,6 +94,22 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 			updateLastMove();
 			owner.getController().onStartMove();
 		}
+	}
+
+	//Updates the destination without stopping.
+	//Otherwise, fear/confuse would cause stuttering "run-stop-run" movement each tick.
+	public void retargetPoint(float x, float y, float z) {
+		destination = Destination.POINT;
+		pointX = x;
+		pointY = y;
+		pointZ = z;
+		if (started.compareAndSet(false, true)) {
+			if (owner.getAi().isLogging()) {
+				AILogger.moveinfo(owner, "MC: retargetPoint started.");
+			}
+			owner.getController().onStartMove();
+		}
+		updateLastMove();
 	}
 
 	public void forcedMoveToPoint(float x, float y, float z) {
@@ -149,9 +167,11 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 				if (target == null)
 					return;
 				if (!PositionUtil.isInRange(target, pointX, pointY, pointZ, MOVE_CHECK_OFFSET)) {
-					if (GeoDataConfig.GEO_NPC_MOVE && !owner.isInFlyingState() && target instanceof Creature creature && (nextPointFromGeo || (nextPointFromGeo = !isOnGround(creature)))) {
-						if (trySetValidGeoPoint(target.getX(), target.getY()) && nextPointFromGeo)
+					if (GeoDataConfig.GEO_NPC_MOVE && !owner.isInFlyingState() && target instanceof Creature creature && (nextPointFromGeo
+						|| (nextPointFromGeo = !isOnGround(creature))) && !isAirborne()) {
+						if (trySetValidGeoPoint(target.getX(), target.getY()) && nextPointFromGeo) {
 							nextPointFromGeo = !isOnGround(creature);
+						}
 					} else {
 						pointX = target.getX();
 						pointY = target.getY();
@@ -170,6 +190,22 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 
 	private boolean isOnGround(Creature creature) {
 		return !creature.isFlying() && !creature.getMoveController().isJumping() && (creature.getMoveController().getMovementMask() & MovementMask.FALL) == 0;
+	}
+
+	/**
+	 * @return True if there is no walkable surface within 2.5m below the npc (flying patrols hovering mid-air). Npcs never have
+	 * {@link CreatureState#FLYING}, so geo is the only way to detect them. Geo point clamping must be skipped for such npcs:
+	 * {@link #trySetValidGeoPoint(float, float)} cannot find ground near their Z (getZ returns NaN), so the chase point would
+	 * degenerate to the npcs own position, freezing it in place instead of chasing the flying target.
+	 */
+	private boolean isAirborne() {
+		long now = System.currentTimeMillis();
+		if (now >= nextAirborneCheckMillis) {
+			nextAirborneCheckMillis = now + 1000;
+			float geoZ = GeoService.getInstance().getZ(owner.getWorldId(), owner.getX(), owner.getY(), owner.getZ() + 1, owner.getZ() - 2.5f, owner.getInstanceId());
+			airborne = Float.isNaN(geoZ);
+		}
+		return airborne;
 	}
 
 	/**
