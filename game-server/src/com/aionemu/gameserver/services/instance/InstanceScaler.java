@@ -14,7 +14,7 @@ import com.aionemu.gameserver.utils.stats.CalculationType;
 import com.aionemu.gameserver.world.WorldMapInstance;
 
 /**
- * @author Boidlz
+ * @author Minzi90
  */
 public class InstanceScaler implements StatOwner {
 
