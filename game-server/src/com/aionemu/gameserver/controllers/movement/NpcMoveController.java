@@ -96,22 +96,6 @@ public class NpcMoveController extends CreatureMoveController<Npc> {
 		}
 	}
 
-	//Updates the destination without stopping.
-	//Otherwise, fear/confuse would cause stuttering "run-stop-run" movement each tick.
-	public void retargetPoint(float x, float y, float z) {
-		destination = Destination.POINT;
-		pointX = x;
-		pointY = y;
-		pointZ = z;
-		if (started.compareAndSet(false, true)) {
-			if (owner.getAi().isLogging()) {
-				AILogger.moveinfo(owner, "MC: retargetPoint started.");
-			}
-			owner.getController().onStartMove();
-		}
-		updateLastMove();
-	}
-
 	public void forcedMoveToPoint(float x, float y, float z) {
 		if (started.compareAndSet(false, true)) {
 			if (owner.getAi().isLogging()) {
