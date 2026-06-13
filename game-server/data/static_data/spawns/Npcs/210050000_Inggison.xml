@@ -2256,34 +2256,34 @@
 		</spawn>
 		<!-- Dancing Seafoam -->
 		<spawn npc_id="216479" respawn_time="295">
-			<spot x="721.024" y="1051.14" z="243" h="19" random_walk="8"/>
-			<spot x="760.91" y="1085.02" z="260" h="5" random_walk="8"/>
-			<spot x="773.85" y="1131.35" z="320" h="26" random_walk="8"/>
-			<spot x="776.277" y="1026.51" z="322" h="64" random_walk="8"/>
-			<spot x="779.94" y="996.14" z="262" h="73" random_walk="8"/>
-			<spot x="790.08" y="1059.25" z="321" h="29" random_walk="8"/>
-			<spot x="791.81" y="1108.72" z="239" h="45" random_walk="8"/>
-			<spot x="792.61" y="1042.05" z="301" h="44" random_walk="8"/>
-			<spot x="810.24" y="1019.93" z="260" h="57" random_walk="8"/>
-			<spot x="814.48" y="979.79" z="280" h="99" random_walk="8"/>
-			<spot x="815.596" y="1041.8" z="242" h="109" random_walk="8"/>
-			<spot x="823.34" y="1097.23" z="320" h="77" random_walk="8"/>
-			<spot x="826.83" y="963.76" z="262" h="51" random_walk="8"/>
-			<spot x="834.27" y="1015.74" z="321" h="7" random_walk="8"/>
-			<spot x="841.91" y="939.12" z="298" h="74" random_walk="8"/>
-			<spot x="848.735" y="1059.29" z="320" h="66" random_walk="8"/>
-			<spot x="848.92" y="988.17" z="280" h="36" random_walk="8"/>
-			<spot x="863.17" y="950.84" z="262" h="56" random_walk="8"/>
-			<spot x="873.16" y="1062.51" z="279" h="55" random_walk="8"/>
-			<spot x="878.02" y="1093.37" z="319" h="9" random_walk="8"/>
-			<spot x="903.51" y="1074.73" z="242" h="92" random_walk="8"/>
-			<spot x="929.67" y="1061.85" z="280" h="25" random_walk="8"/>
-			<spot x="941.17" y="1072.23" z="321" h="28" random_walk="8"/>
-			<spot x="954.69" y="1075.59" z="300" h="59" random_walk="8"/>
-			<spot x="973.05" y="1082.38" z="280" h="106" random_walk="8"/>
-			<spot x="974.278" y="1059.56" z="243" h="2" random_walk="8"/>
-			<spot x="1025.09" y="1024.27" z="242" h="116" random_walk="8"/>
-			<spot x="1057.94" y="1061.51" z="322" h="114" random_walk="8"/>
+			<spot x="721.024" y="1051.14" z="243" h="19" random_walk="8" state="2"/>
+			<spot x="760.91" y="1085.02" z="260" h="5" random_walk="8" state="2"/>
+			<spot x="773.85" y="1131.35" z="320" h="26" random_walk="8" state="2"/>
+			<spot x="776.277" y="1026.51" z="322" h="64" random_walk="8" state="2"/>
+			<spot x="779.94" y="996.14" z="262" h="73" random_walk="8" state="2"/>
+			<spot x="790.08" y="1059.25" z="321" h="29" random_walk="8" state="2"/>
+			<spot x="791.81" y="1108.72" z="239" h="45" random_walk="8" state="2"/>
+			<spot x="792.61" y="1042.05" z="301" h="44" random_walk="8" state="2"/>
+			<spot x="810.24" y="1019.93" z="260" h="57" random_walk="8" state="2"/>
+			<spot x="814.48" y="979.79" z="280" h="99" random_walk="8" state="2"/>
+			<spot x="815.596" y="1041.8" z="242" h="109" random_walk="8" state="2"/>
+			<spot x="823.34" y="1097.23" z="320" h="77" random_walk="8" state="2"/>
+			<spot x="826.83" y="963.76" z="262" h="51" random_walk="8" state="2"/>
+			<spot x="834.27" y="1015.74" z="321" h="7" random_walk="8" state="2"/>
+			<spot x="841.91" y="939.12" z="298" h="74" random_walk="8" state="2"/>
+			<spot x="848.735" y="1059.29" z="320" h="66" random_walk="8" state="2"/>
+			<spot x="848.92" y="988.17" z="280" h="36" random_walk="8" state="2"/>
+			<spot x="863.17" y="950.84" z="262" h="56" random_walk="8" state="2"/>
+			<spot x="873.16" y="1062.51" z="279" h="55" random_walk="8" state="2"/>
+			<spot x="878.02" y="1093.37" z="319" h="9" random_walk="8" state="2"/>
+			<spot x="903.51" y="1074.73" z="242" h="92" random_walk="8" state="2"/>
+			<spot x="929.67" y="1061.85" z="280" h="25" random_walk="8" state="2"/>
+			<spot x="941.17" y="1072.23" z="321" h="28" random_walk="8" state="2"/>
+			<spot x="954.69" y="1075.59" z="300" h="59" random_walk="8" state="2"/>
+			<spot x="973.05" y="1082.38" z="280" h="106" random_walk="8" state="2"/>
+			<spot x="974.278" y="1059.56" z="243" h="2" random_walk="8" state="2"/>
+			<spot x="1025.09" y="1024.27" z="242" h="116" random_walk="8" state="2"/>
+			<spot x="1057.94" y="1061.51" z="322" h="114" random_walk="8" state="2"/>
 		</spawn>
 		<!-- Daneh -->
 		<spawn npc_id="205446" respawn_time="295">

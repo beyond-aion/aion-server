@@ -3,7 +3,7 @@
 	<spawn_map map_id="300280000">
 		<!-- IDYun_Dispel_Area_Polymorph_NoShowNpc -->
 		<spawn npc_id="282950">
-			<spot x="543.4936" y="580.2133" z="151.1486" />
+			<spot x="543.4936" y="580.2133" z="151.1486" state="2" />
 		</spawn>
 		<!-- BIDYun_Check_Race -->
 		<spawn npc_id="855952">
@@ -67,14 +67,14 @@
 			<spot x="482.1451" y="564.4037" z="149.6161" state="2" />
 			<spot x="378.01" y="486.48" z="140" state="2" />
 			<spot x="347.0732" y="622.2233" z="152" state="2" />
-			<spot x="339.6676" y="686.378" z="156.7905" />
+			<spot x="339.6676" y="686.378" z="156.7905" state="2" />
 			<spot x="313.5001" y="733.6783" z="165" state="2" />
 			<spot x="259.4721" y="757.3481" z="193" state="2" />
-			<spot x="240.7137" y="335.6584" z="255.3503" />
-			<spot x="177.9938" y="311.4473" z="252.6286" />
+			<spot x="240.7137" y="335.6584" z="255.3503" state="2" />
+			<spot x="177.9938" y="311.4473" z="252.6286" state="2" />
 			<spot x="190.1138" y="280.0637" z="259.6598" state="2" />
-			<spot x="214.1983" y="238.0218" z="255.3503" />
-			<spot x="99.62707" y="249.0827" z="252.6286" />
+			<spot x="214.1983" y="238.0218" z="255.3503" state="2" />
+			<spot x="99.62707" y="249.0827" z="252.6286" state="2" />
 			<spot x="72.82" y="270.78" z="260.0939" state="2" />
 			<spot x="101.59" y="378.25" z="262.015" state="2" />
 		</spawn>
@@ -91,15 +91,15 @@
 		</spawn>
 		<!-- Exhausted Vasharti Combat Officer -->
 		<spawn npc_id="217290">
-			<spot x="426.1408" y="489.7896" z="138.5044" h="94" state="32" />
+			<spot x="426.1408" y="489.7896" z="138.5044" h="94" />
 		</spawn>
 		<!-- Exhausted Vasharti Combatant -->
 		<spawn npc_id="217293">
-			<spot x="419.8489" y="470.7892" z="138.4412" h="90" state="32" />
+			<spot x="419.8489" y="470.7892" z="138.4412" h="90" />
 		</spawn>
 		<!-- Exhausted Vasharti Pagati Combatant -->
 		<spawn npc_id="217292">
-			<spot x="471.8835" y="445.2884" z="151.125" h="31" state="32" />
+			<spot x="471.8835" y="445.2884" z="151.125" h="31" />
 		</spawn>
 		<!-- Fallen Reian -->
 		<spawn npc_id="799661">
@@ -247,11 +247,11 @@
 		</spawn>
 		<!-- Reian Priest -->
 		<spawn npc_id="799653">
-			<spot x="467.9294" y="445.4326" z="151.1294" h="119" state="32" />
+			<spot x="467.9294" y="445.4326" z="151.1294" h="119" />
 		</spawn>
 		<!-- Reian Priest -->
 		<spawn npc_id="799656">
-			<spot x="429.5352" y="489.8107" z="139.1129" h="60" state="32" />
+			<spot x="429.5352" y="489.8107" z="139.1129" h="60" />
 		</spawn>
 		<!-- Reian Prisoner -->
 		<spawn npc_id="799659">
@@ -326,9 +326,9 @@
 		<spawn npc_id="799654">
 			<spot x="543.7376" y="564.9186" z="147.9495" h="46" />
 			<spot x="549.3779" y="576.5768" z="152.1138" h="46" />
-			<spot x="474.3211" y="444.8884" z="151.2322" h="56" state="32" />
-			<spot x="426.8879" y="486.3764" z="138.3959" h="34" state="32" />
-			<spot x="419.8409" y="467.5999" z="138.8361" h="29" state="32" />
+			<spot x="474.3211" y="444.8884" z="151.2322" h="56" />
+			<spot x="426.8879" y="486.3764" z="138.3959" h="34" />
+			<spot x="419.8409" y="467.5999" z="138.8361" h="29" />
 		</spawn>
 		<!-- Reian Warrior -->
 		<spawn npc_id="800285">
@@ -342,12 +342,12 @@
 		</spawn>
 		<!-- Reian Warrior -->
 		<spawn npc_id="856405">
-			<spot x="471.6629" y="447.9062" z="151.125" h="91" state="32" />
+			<spot x="471.6629" y="447.9062" z="151.125" h="91" />
 		</spawn>
 		<!-- Reian Warrior -->
 		<spawn npc_id="799648">
-			<spot x="416.569" y="470.8056" z="138.2712" state="32" />
-			<spot x="393.5242" y="474.4319" z="138.25" h="54" state="32" />
+			<spot x="416.569" y="470.8056" z="138.2712" />
+			<spot x="393.5242" y="474.4319" z="138.25" h="54" />
 		</spawn>
 		<!-- Reian Warrior -->
 		<spawn npc_id="856014">
@@ -404,7 +404,7 @@
 		</spawn>
 		<!-- Vasharti Butcher -->
 		<spawn npc_id="217300">
-			<spot x="390.5043" y="475.3219" z="138.25" h="114" state="32" />
+			<spot x="390.5043" y="475.3219" z="138.25" h="114" />
 		</spawn>
 		<!-- Vasharti Elite Watch Officer -->
 		<spawn npc_id="236285">
@@ -467,41 +467,41 @@
 		</spawn>
 		<!-- Vasharti Swiftshot -->
 		<spawn npc_id="217325">
-			<spot x="13.33" y="379.2" z="288.39" walker_id="300280000_drakanrider_flying_60_ae_sz1_32" />
-			<spot x="45.58" y="399.4" z="270.3" walker_id="300280000_drakanrider_flying_60_ae_sz1_30" />
-			<spot x="59.19" y="309.08" z="299.51" walker_id="300280000_drakanrider_flying_60_ae_sz1_31" />
-			<spot x="129.4" y="518.97" z="193.66" walker_id="300280000_drakanrider_flying_60_ae_sz3_8" />
-			<spot x="134.99" y="706.5" z="213.09" walker_id="300280000_drakanrider_flying_60_ae_sz3_12" />
-			<spot x="152.12" y="548.44" z="189.4" walker_id="300280000_drakanrider_flying_60_ae_sz3_7" />
-			<spot x="163.38" y="399.67" z="313.3" walker_id="300280000_drakanrider_flying_60_ae_sz6_2" />
-			<spot x="199.38" y="363.21" z="297.11" walker_id="300280000_drakanrider_flying_60_ae_sz6_4" />
-			<spot x="204.39" y="653.73" z="221.1" walker_id="300280000_drakanrider_flying_60_ae_sz3_11" />
-			<spot x="226.68" y="420.65" z="301.37" walker_id="300280000_drakanrider_flying_60_ae_sz6_1" />
-			<spot x="233.75" y="268.57" z="329.62" walker_id="300280000_drakanrider_flying_60_ae_sz1_34" />
-			<spot x="268.26" y="494.49" z="189.4" walker_id="300280000_drakanrider_flying_60_ae_sz3_5" />
-			<spot x="281.86" y="300.73" z="280.93" walker_id="300280000_drakanrider_flying_60_ae_sz1_33" />
-			<spot x="351.62" y="397.69" z="211.13" walker_id="300280000_drakanrider_flying_60_ae_sz3_10" />
-			<spot x="369.11" y="544.9" z="160.5" walker_id="300280000_drakanrider_flying_60_ae_sz3_2" />
-			<spot x="423.79" y="586.4" z="160.1" walker_id="300280000_drakanrider_flying_60_ae_sz3_1" />
-			<spot x="433.97" y="595.67" z="176.51" walker_id="300280000_drakanrider_flying_60_ae_sz3_3" />
-			<spot x="456.24" y="451.03" z="199.54" walker_id="300280000_drakanrider_flying_60_ae_sz3_9" />
-			<spot x="542.75" y="645.61" z="191.71" walker_id="300280000_drakanrider_flying_60_ae_sz1_25" />
-			<spot x="585.38" y="655.14" z="199.17" walker_id="300280000_drakanrider_flying_60_ae_sz1_26" />
-			<spot x="605.79" y="220.26" z="65.4" walker_id="300280000_drakanrider_flying_60_ae_sz1_2" />
-			<spot x="630.42" y="638.33" z="199.65" walker_id="300280000_drakanrider_flying_60_ae_sz1_23" />
-			<spot x="682.35" y="724.91" z="202.99" walker_id="300280000_drakanrider_flying_60_ae_sz1_27" />
-			<spot x="719.94" y="131.04" z="84.92" walker_id="300280000_drakanrider_flying_60_ae_sz1_3" />
-			<spot x="731.09" y="556.75" z="188.85" walker_id="300280000_drakanrider_flying_60_ae_sz1_28" />
-			<spot x="757.4" y="438.11" z="141.52" walker_id="300280000_drakanrider_flying_60_ae_sz1_12" />
-			<spot x="758.05" y="298.84" z="133.51" walker_id="300280000_drakanrider_flying_60_ae_sz1_11" />
-			<spot x="796.7" y="569.15" z="186.7" walker_id="300280000_drakanrider_flying_60_ae_sz1_22" />
-			<spot x="807.38" y="152.49" z="105.39" walker_id="300280000_drakanrider_flying_60_ae_sz1_8" />
-			<spot x="873.09" y="539.67" z="171.42" walker_id="300280000_drakanrider_flying_60_ae_sz1_16" />
-			<spot x="881.95" y="731.48" z="192.76" walker_id="300280000_drakanrider_flying_60_ae_sz1_21" />
-			<spot x="893.78" y="386.87" z="146.1" walker_id="300280000_drakanrider_flying_60_ae_sz1_14" />
-			<spot x="967.85" y="217.45" z="118.24" walker_id="300280000_drakanrider_flying_60_ae_sz1_9" />
-			<spot x="982.01" y="444.73" z="163.25" walker_id="300280000_drakanrider_flying_60_ae_sz1_18" />
-			<spot x="1001.04" y="574.44" z="179.72" walker_id="300280000_drakanrider_flying_60_ae_sz1_20" />
+			<spot x="13.33" y="379.2" z="288.39" walker_id="300280000_drakanrider_flying_60_ae_sz1_32" state="2" />
+			<spot x="45.58" y="399.4" z="270.3" walker_id="300280000_drakanrider_flying_60_ae_sz1_30" state="2" />
+			<spot x="59.19" y="309.08" z="299.51" walker_id="300280000_drakanrider_flying_60_ae_sz1_31" state="2" />
+			<spot x="129.4" y="518.97" z="193.66" walker_id="300280000_drakanrider_flying_60_ae_sz3_8" state="2" />
+			<spot x="134.99" y="706.5" z="213.09" walker_id="300280000_drakanrider_flying_60_ae_sz3_12" state="2" />
+			<spot x="152.12" y="548.44" z="189.4" walker_id="300280000_drakanrider_flying_60_ae_sz3_7" state="2" />
+			<spot x="163.38" y="399.67" z="313.3" walker_id="300280000_drakanrider_flying_60_ae_sz6_2" state="2" />
+			<spot x="199.38" y="363.21" z="297.11" walker_id="300280000_drakanrider_flying_60_ae_sz6_4" state="2" />
+			<spot x="204.39" y="653.73" z="221.1" walker_id="300280000_drakanrider_flying_60_ae_sz3_11" state="2" />
+			<spot x="226.68" y="420.65" z="301.37" walker_id="300280000_drakanrider_flying_60_ae_sz6_1" state="2" />
+			<spot x="233.75" y="268.57" z="329.62" walker_id="300280000_drakanrider_flying_60_ae_sz1_34" state="2" />
+			<spot x="268.26" y="494.49" z="189.4" walker_id="300280000_drakanrider_flying_60_ae_sz3_5" state="2" />
+			<spot x="281.86" y="300.73" z="280.93" walker_id="300280000_drakanrider_flying_60_ae_sz1_33" state="2" />
+			<spot x="351.62" y="397.69" z="211.13" walker_id="300280000_drakanrider_flying_60_ae_sz3_10" state="2" />
+			<spot x="369.11" y="544.9" z="160.5" walker_id="300280000_drakanrider_flying_60_ae_sz3_2" state="2" />
+			<spot x="423.79" y="586.4" z="160.1" walker_id="300280000_drakanrider_flying_60_ae_sz3_1" state="2" />
+			<spot x="433.97" y="595.67" z="176.51" walker_id="300280000_drakanrider_flying_60_ae_sz3_3" state="2" />
+			<spot x="456.24" y="451.03" z="199.54" walker_id="300280000_drakanrider_flying_60_ae_sz3_9" state="2" />
+			<spot x="542.75" y="645.61" z="191.71" walker_id="300280000_drakanrider_flying_60_ae_sz1_25" state="2" />
+			<spot x="585.38" y="655.14" z="199.17" walker_id="300280000_drakanrider_flying_60_ae_sz1_26" state="2" />
+			<spot x="605.79" y="220.26" z="65.4" walker_id="300280000_drakanrider_flying_60_ae_sz1_2" state="2" />
+			<spot x="630.42" y="638.33" z="199.65" walker_id="300280000_drakanrider_flying_60_ae_sz1_23" state="2" />
+			<spot x="682.35" y="724.91" z="202.99" walker_id="300280000_drakanrider_flying_60_ae_sz1_27" state="2" />
+			<spot x="719.94" y="131.04" z="84.92" walker_id="300280000_drakanrider_flying_60_ae_sz1_3" state="2" />
+			<spot x="731.09" y="556.75" z="188.85" walker_id="300280000_drakanrider_flying_60_ae_sz1_28" state="2" />
+			<spot x="757.4" y="438.11" z="141.52" walker_id="300280000_drakanrider_flying_60_ae_sz1_12" state="2" />
+			<spot x="758.05" y="298.84" z="133.51" walker_id="300280000_drakanrider_flying_60_ae_sz1_11" state="2" />
+			<spot x="796.7" y="569.15" z="186.7" walker_id="300280000_drakanrider_flying_60_ae_sz1_22" state="2" />
+			<spot x="807.38" y="152.49" z="105.39" walker_id="300280000_drakanrider_flying_60_ae_sz1_8" state="2" />
+			<spot x="873.09" y="539.67" z="171.42" walker_id="300280000_drakanrider_flying_60_ae_sz1_16" state="2" />
+			<spot x="881.95" y="731.48" z="192.76" walker_id="300280000_drakanrider_flying_60_ae_sz1_21" state="2" />
+			<spot x="893.78" y="386.87" z="146.1" walker_id="300280000_drakanrider_flying_60_ae_sz1_14" state="2" />
+			<spot x="967.85" y="217.45" z="118.24" walker_id="300280000_drakanrider_flying_60_ae_sz1_9" state="2" />
+			<spot x="982.01" y="444.73" z="163.25" walker_id="300280000_drakanrider_flying_60_ae_sz1_18" state="2" />
+			<spot x="1001.04" y="574.44" z="179.72" walker_id="300280000_drakanrider_flying_60_ae_sz1_20" state="2" />
 		</spawn>
 		<!-- <spawn npc_id="217325">
 			<spot x="602.808" y="537.6359" z="199.9435" h="116" state="2" />
@@ -531,13 +531,13 @@
 		</spawn> -->
 		<!-- Vasharti Swiftshot -->
 		<spawn npc_id="217331">
-			<spot x="480.14" y="555.9967" z="147.1413" h="25" state="32" />
-			<spot x="344.0199" y="634.5128" z="150.75" h="94" state="32" />
-			<spot x="303.7" y="720.77" z="162.7385" h="17" state="32" />
-			<spot x="271.8007" y="763.9653" z="193" h="69" state="32" />
-			<spot x="197.21" y="278.05" z="261" h="54" state="32" />
-			<spot x="68.06" y="262.65" z="260.0939" h="19" state="32" />
-			<spot x="98.31" y="388.3" z="262.015" h="96" state="32" />
+			<spot x="480.14" y="555.9967" z="147.1413" h="25" />
+			<spot x="344.0199" y="634.5128" z="150.75" h="94" />
+			<spot x="303.7" y="720.77" z="162.7385" h="17" />
+			<spot x="271.8007" y="763.9653" z="193" h="69" />
+			<spot x="197.21" y="278.05" z="261" h="54" />
+			<spot x="68.06" y="262.65" z="260.0939" h="19" />
+			<spot x="98.31" y="388.3" z="262.015" h="96" />
 		</spawn>
 	</spawn_map>
 </spawns>

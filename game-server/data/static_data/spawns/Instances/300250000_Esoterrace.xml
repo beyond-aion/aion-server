@@ -309,38 +309,38 @@
 		</spawn>
 		<!-- IDF4Re_Drana_FOBJ_id_dranamach_01a -->
 		<spawn npc_id="701045">
-			<spot x="1315.31" y="1170.77" z="209.044" static_id="338"/>
+			<spot x="1315.31" y="1170.77" z="209.044" static_id="338" state="2"/>
 		</spawn>
 		<!-- IDF4Re_Drana_FOBJ_id_dranamach_02b -->
 		<spawn npc_id="701046">
-			<spot x="1315.17" y="1170.45" z="210.223" static_id="178"/>
+			<spot x="1315.17" y="1170.45" z="210.223" static_id="178" state="2"/>
 		</spawn>
 		<!-- IDF4Re_Drana_FOBJ_idf4re_lazer_02 -->
 		<spawn npc_id="701049">
-			<spot x="1316.3" y="1170.21" z="55.2492" static_id="73"/>
+			<spot x="1316.3" y="1170.21" z="55.2492" static_id="73" state="2"/>
 		</spawn>
 		<!-- IDF4Re_Drana_FOBJ_idf4re_smoke -->
 		<spawn npc_id="701050">
-			<spot x="1343.62" y="1176.03" z="150.967" static_id="128"/>
+			<spot x="1343.62" y="1176.03" z="150.967" static_id="128" state="2"/>
 		</spawn>
 		<!-- IDF4Re_Drana_FOBJ_idf4re_spark -->
 		<spawn npc_id="701051">
-			<spot x="1302.56" y="1164.92" z="119.066" static_id="176"/>
-			<spot x="1306.22" y="1177.17" z="139.633" static_id="116"/>
-			<spot x="1321.17" y="1172.85" z="122.167" static_id="175"/>
-			<spot x="1321.49" y="1160.81" z="150.65" static_id="179"/>
+			<spot x="1302.56" y="1164.92" z="119.066" static_id="176" state="2"/>
+			<spot x="1306.22" y="1177.17" z="139.633" static_id="116" state="2"/>
+			<spot x="1321.17" y="1172.85" z="122.167" static_id="175" state="2"/>
+			<spot x="1321.49" y="1160.81" z="150.65" static_id="179" state="2"/>
 		</spawn>
 		<!-- IDF4Re_Drana_FOBJ_NPC_2 -->
 		<spawn npc_id="282292">
-			<spot x="1315.9" y="1171.45" z="112.509"/>
-			<spot x="1316.02" y="1171.47" z="113.468"/>
-			<spot x="1316.21" y="1170.22" z="152.72"/>
-			<spot x="1316.48" y="1170.22" z="143.597"/>
-			<spot x="1316.5" y="1170.28" z="142.545"/>
+			<spot x="1315.9" y="1171.45" z="112.509" state="2"/>
+			<spot x="1316.02" y="1171.47" z="113.468" state="2"/>
+			<spot x="1316.21" y="1170.22" z="152.72" state="2"/>
+			<spot x="1316.48" y="1170.22" z="143.597" state="2"/>
+			<spot x="1316.5" y="1170.28" z="142.545" state="2"/>
 		</spawn>
 		<!-- IDF4Re_Drana_FOBJ_NPC_4 -->
 		<spawn npc_id="282294">
-			<spot x="1373.68" y="1178.3" z="159.325" h="113"/>
+			<spot x="1373.68" y="1178.3" z="159.325" h="113" state="2"/>
 		</spawn>
 		<!-- IDF4Re_Drana_FOBJ_NPC_6 -->
 		<spawn npc_id="282296">
@@ -424,12 +424,12 @@
 		</spawn>
 		<!-- LDF4_Fortress_InvisibleNPC -->
 		<spawn npc_id="258262">
-			<spot x="1058.33" y="890.048" z="346.956" static_id="601"/>
-			<spot x="1058.35" y="895.644" z="346.956" static_id="600"/>
-			<spot x="1058.35" y="901.449" z="346.956" static_id="599"/>
-			<spot x="1058.35" y="901.449" z="346.956" static_id="599"/>
-			<spot x="1344.2" y="1038.84" z="204.19" static_id="467"/>
-			<spot x="1347.59" y="1029.35" z="204.19" static_id="470"/>
+			<spot x="1058.33" y="890.048" z="346.956" static_id="601" state="2"/>
+			<spot x="1058.35" y="895.644" z="346.956" static_id="600" state="2"/>
+			<spot x="1058.35" y="901.449" z="346.956" static_id="599" state="2"/>
+			<spot x="1058.35" y="901.449" z="346.956" static_id="599" state="2"/>
+			<spot x="1344.2" y="1038.84" z="204.19" static_id="467" state="2"/>
+			<spot x="1347.59" y="1029.35" z="204.19" static_id="470" state="2"/>
 		</spawn>
 		<!-- Murugan's Mailbox -->
 		<spawn npc_id="730381">

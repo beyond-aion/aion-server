@@ -38,30 +38,30 @@
 		</spawn>
 		<!-- Abyss Fragment -->
 		<spawn npc_id="700091" respawn_time="295">
-			<spot x="1585.6" y="1485.99" z="205" h="100"/>
-			<spot x="1610.44" y="1484.6" z="220" h="100"/>
-			<spot x="1620.84" y="1420.38" z="180"/>
-			<spot x="1644.03" y="1447.17" z="210"/>
-			<spot x="1648.33" y="1500.23" z="190" h="70"/>
-			<spot x="1648.89" y="1484.32" z="190" h="10"/>
-			<spot x="1656.04" y="1509.95" z="182" h="90"/>
-			<spot x="1659.93" y="1574.93" z="190" h="20"/>
-			<spot x="1661.3" y="1464.26" z="172" h="70"/>
-			<spot x="1677.07" y="1421.59" z="170" h="40"/>
-			<spot x="1680.04" y="1530.31" z="200" h="50"/>
-			<spot x="1686.1" y="1453.66" z="205" h="60"/>
-			<spot x="1688.12" y="1498.63" z="210" h="60"/>
-			<spot x="1694.99" y="1501.0601" z="195" h="50"/>
-			<spot x="1695.46" y="1548.1" z="175" h="20"/>
-			<spot x="1698.81" y="1440.45" z="180" h="110"/>
-			<spot x="1704.1" y="1469.17" z="215" h="110"/>
-			<spot x="1710.28" y="1479.43" z="200" h="90"/>
-			<spot x="1717.33" y="1504.69" z="180" h="80"/>
-			<spot x="1718.81" y="1401.3" z="190" h="10"/>
-			<spot x="1719.54" y="1464.77" z="195" h="80"/>
-			<spot x="1732.03" y="1440.45" z="215" h="30"/>
-			<spot x="1732.26" y="1531.55" z="170" h="40"/>
-			<spot x="1738.55" y="1498.1" z="210" h="30"/>
+			<spot x="1585.6" y="1485.99" z="205" h="100" state="2"/>
+			<spot x="1610.44" y="1484.6" z="220" h="100" state="2"/>
+			<spot x="1620.84" y="1420.38" z="180" state="2"/>
+			<spot x="1644.03" y="1447.17" z="210" state="2"/>
+			<spot x="1648.33" y="1500.23" z="190" h="70" state="2"/>
+			<spot x="1648.89" y="1484.32" z="190" h="10" state="2"/>
+			<spot x="1656.04" y="1509.95" z="182" h="90" state="2"/>
+			<spot x="1659.93" y="1574.93" z="190" h="20" state="2"/>
+			<spot x="1661.3" y="1464.26" z="172" h="70" state="2"/>
+			<spot x="1677.07" y="1421.59" z="170" h="40" state="2"/>
+			<spot x="1680.04" y="1530.31" z="200" h="50" state="2"/>
+			<spot x="1686.1" y="1453.66" z="205" h="60" state="2"/>
+			<spot x="1688.12" y="1498.63" z="210" h="60" state="2"/>
+			<spot x="1694.99" y="1501.0601" z="195" h="50" state="2"/>
+			<spot x="1695.46" y="1548.1" z="175" h="20" state="2"/>
+			<spot x="1698.81" y="1440.45" z="180" h="110" state="2"/>
+			<spot x="1704.1" y="1469.17" z="215" h="110" state="2"/>
+			<spot x="1710.28" y="1479.43" z="200" h="90" state="2"/>
+			<spot x="1717.33" y="1504.69" z="180" h="80" state="2"/>
+			<spot x="1718.81" y="1401.3" z="190" h="10" state="2"/>
+			<spot x="1719.54" y="1464.77" z="195" h="80" state="2"/>
+			<spot x="1732.03" y="1440.45" z="215" h="30" state="2"/>
+			<spot x="1732.26" y="1531.55" z="170" h="40" state="2"/>
+			<spot x="1738.55" y="1498.1" z="210" h="30" state="2"/>
 		</spawn>
 		<!-- Abolos -->
 		<spawn npc_id="203126" respawn_time="295">
@@ -809,10 +809,10 @@
 		</spawn>
 		<!-- Dukaki Runner -->
 		<spawn npc_id="210067" respawn_time="295">
-			<spot x="778.58" y="2531.33" z="217.96375" h="36" walker_id="72ECFA5DB4C207826A5DB886A4D321425F7BD7B5" state="32"/>
-			<spot x="782.72" y="2598.84" z="218.6075" h="15" walker_id="20E56C55FE9ED4FFF9828617CCAC164FF4CEDDF9" state="32"/>
-			<spot x="934.48" y="2575.25" z="178.14188" h="78" walker_id="FE6FB84FDF8B977469230DDB0BBCFD0A1E88B910" state="32"/>
-			<spot x="1043.04" y="2338.83" z="171.36188" h="11" walker_id="67E88C58D668C9F1CF487C8C11A3A3DDB044DBE5" state="32"/>
+			<spot x="778.58" y="2531.33" z="217.96375" h="36" walker_id="72ECFA5DB4C207826A5DB886A4D321425F7BD7B5"/>
+			<spot x="782.72" y="2598.84" z="218.6075" h="15" walker_id="20E56C55FE9ED4FFF9828617CCAC164FF4CEDDF9"/>
+			<spot x="934.48" y="2575.25" z="178.14188" h="78" walker_id="FE6FB84FDF8B977469230DDB0BBCFD0A1E88B910"/>
+			<spot x="1043.04" y="2338.83" z="171.36188" h="11" walker_id="67E88C58D668C9F1CF487C8C11A3A3DDB044DBE5"/>
 		</spawn>
 		<!-- Dukaki Scrapper -->
 		<spawn npc_id="210093" respawn_time="295">
@@ -1164,7 +1164,7 @@
 		</spawn>
 		<!-- Geolus -->
 		<spawn npc_id="203149" respawn_time="295">
-			<spot x="1676.37" y="2270.09" z="166.773" h="35" state="6"/>
+			<spot x="1676.37" y="2270.09" z="166.773" h="35"/>
 		</spawn>
 		<!-- Georg -->
 		<spawn npc_id="799813" respawn_time="295">
@@ -1500,7 +1500,7 @@
 		</spawn>
 		<!-- Lightningfoot Tuka -->
 		<spawn npc_id="210317" respawn_time="295">
-			<spot x="1017.81" y="2260.56" z="168.30875" h="15" walker_id="B2490968DBFCD48A28E1FFB68E174A2C538BC92D" state="32"/>
+			<spot x="1017.81" y="2260.56" z="168.30875" h="15" walker_id="B2490968DBFCD48A28E1FFB68E174A2C538BC92D" state="32" ai="generalrunner"/>
 		</spawn>
 		<!-- Linorasa -->
 		<spawn npc_id="203168" respawn_time="295">
@@ -2849,7 +2849,7 @@
 		</spawn>
 		<!-- Verteron Abyss Gate -->
 		<spawn npc_id="730059" respawn_time="295">
-			<spot x="1687.519" y="1490.021" z="248.9991" static_id="1190"/>
+			<spot x="1687.519" y="1490.021" z="248.9991" static_id="1190" state="2"/>
 		</spawn>
 		<!-- Veteran Tursin Cracker -->
 		<spawn npc_id="210176" respawn_time="300">

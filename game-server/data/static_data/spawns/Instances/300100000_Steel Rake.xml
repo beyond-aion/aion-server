@@ -256,7 +256,7 @@
 		</spawn>
 		<!-- Pirate Ship Anchor -->
 		<spawn npc_id="730209">
-			<spot x="727.459" y="463.354" z="867.666" h="22"/>
+			<spot x="727.459" y="463.354" z="867.666" h="22" state="2"/>
 		</spawn>
 		<!-- Pirate Ship Treasure Box -->
 		<spawn npc_id="700554">
@@ -734,7 +734,7 @@
 		</spawn>
 		<!-- Stigma Amplifier -->
 		<spawn npc_id="281180">
-			<spot x="403.184" y="510.165" z="1076.36"/>
+			<spot x="403.184" y="510.165" z="1076.36" state="2"/>
 		</spawn>
 		<!-- Sturdy Bubukin -->
 		<spawn npc_id="215401">
