@@ -3,18 +3,18 @@
 	<spawn_map map_id="220030000">
 		<!-- Abyss Fungus -->
 		<spawn npc_id="700092" respawn_time="20">
-			<spot x="1627.91" y="1842.72" z="368.275" h="93" state="2"/>
-			<spot x="1642.47" y="1845.79" z="368.275" h="93" state="2"/>
-			<spot x="1661.54" y="1848.34" z="368.275" h="90" state="2"/>
-			<spot x="1675.65" y="1846.7" z="368.275" h="86" state="2"/>
-			<spot x="1687.65" y="1842.67" z="368.275" h="84" state="2"/>
-			<spot x="1688.18" y="1767.2" z="400" h="66" state="2"/>
-			<spot x="1699.4" y="1834.86" z="367.32" h="78" state="2"/>
-			<spot x="1700.17" y="1820.28" z="390" h="102" state="2"/>
-			<spot x="1709" y="1823.36" z="367.32" h="70" state="2"/>
-			<spot x="1714.86" y="1807.16" z="367.32" h="63" state="2"/>
-			<spot x="1717.28" y="1794.58" z="367.32" h="63" state="2"/>
-			<spot x="1720.3" y="1778.93" z="367.32" h="63" state="2"/>
+			<spot x="1627.91" y="1842.72" z="368.275" h="93" aerial_spawn="true"/>
+			<spot x="1642.47" y="1845.79" z="368.275" h="93" aerial_spawn="true"/>
+			<spot x="1661.54" y="1848.34" z="368.275" h="90" aerial_spawn="true"/>
+			<spot x="1675.65" y="1846.7" z="368.275" h="86" aerial_spawn="true"/>
+			<spot x="1687.65" y="1842.67" z="368.275" h="84" aerial_spawn="true"/>
+			<spot x="1688.18" y="1767.2" z="400" h="66" aerial_spawn="true"/>
+			<spot x="1699.4" y="1834.86" z="367.32" h="78" aerial_spawn="true"/>
+			<spot x="1700.17" y="1820.28" z="390" h="102" aerial_spawn="true"/>
+			<spot x="1709" y="1823.36" z="367.32" h="70" aerial_spawn="true"/>
+			<spot x="1714.86" y="1807.16" z="367.32" h="63" aerial_spawn="true"/>
+			<spot x="1717.28" y="1794.58" z="367.32" h="63" aerial_spawn="true"/>
+			<spot x="1720.3" y="1778.93" z="367.32" h="63" aerial_spawn="true"/>
 		</spawn>
 		<!-- Altgard Abyss Gate -->
 		<spawn npc_id="700089" respawn_time="295">
@@ -22,7 +22,7 @@
 		</spawn>
 		<!-- Altgard Abyss Gate -->
 		<spawn npc_id="730062" respawn_time="295">
-			<spot x="1658.61" y="1812.1" z="373.958" static_id="168" state="2"/>
+			<spot x="1658.61" y="1812.1" z="373.958" static_id="168" aerial_spawn="true"/>
 		</spawn>
 		<!-- Amitnir -->
 		<spawn npc_id="203614" respawn_time="295">

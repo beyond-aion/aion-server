@@ -1687,7 +1687,7 @@
 		</spawn>
 		<!-- Blue Aerial Aether Searcher -->
 		<spawn npc_id="700611" respawn_time="295">
-			<spot x="2825.6272" y="480.8731" z="350.0097" static_id="528"/>
+			<spot x="2825.6272" y="480.8731" z="350.0097" static_id="528" aerial_spawn="true"/>
 		</spawn>
 		<!-- Bluetail Crestlich -->
 		<spawn npc_id="215492" respawn_time="295">
@@ -2256,34 +2256,34 @@
 		</spawn>
 		<!-- Dancing Seafoam -->
 		<spawn npc_id="216479" respawn_time="295">
-			<spot x="721.024" y="1051.14" z="243" h="19" random_walk="8" state="2"/>
-			<spot x="760.91" y="1085.02" z="260" h="5" random_walk="8" state="2"/>
-			<spot x="773.85" y="1131.35" z="320" h="26" random_walk="8" state="2"/>
-			<spot x="776.277" y="1026.51" z="322" h="64" random_walk="8" state="2"/>
-			<spot x="779.94" y="996.14" z="262" h="73" random_walk="8" state="2"/>
-			<spot x="790.08" y="1059.25" z="321" h="29" random_walk="8" state="2"/>
-			<spot x="791.81" y="1108.72" z="239" h="45" random_walk="8" state="2"/>
-			<spot x="792.61" y="1042.05" z="301" h="44" random_walk="8" state="2"/>
-			<spot x="810.24" y="1019.93" z="260" h="57" random_walk="8" state="2"/>
-			<spot x="814.48" y="979.79" z="280" h="99" random_walk="8" state="2"/>
-			<spot x="815.596" y="1041.8" z="242" h="109" random_walk="8" state="2"/>
-			<spot x="823.34" y="1097.23" z="320" h="77" random_walk="8" state="2"/>
-			<spot x="826.83" y="963.76" z="262" h="51" random_walk="8" state="2"/>
-			<spot x="834.27" y="1015.74" z="321" h="7" random_walk="8" state="2"/>
-			<spot x="841.91" y="939.12" z="298" h="74" random_walk="8" state="2"/>
-			<spot x="848.735" y="1059.29" z="320" h="66" random_walk="8" state="2"/>
-			<spot x="848.92" y="988.17" z="280" h="36" random_walk="8" state="2"/>
-			<spot x="863.17" y="950.84" z="262" h="56" random_walk="8" state="2"/>
-			<spot x="873.16" y="1062.51" z="279" h="55" random_walk="8" state="2"/>
-			<spot x="878.02" y="1093.37" z="319" h="9" random_walk="8" state="2"/>
-			<spot x="903.51" y="1074.73" z="242" h="92" random_walk="8" state="2"/>
-			<spot x="929.67" y="1061.85" z="280" h="25" random_walk="8" state="2"/>
-			<spot x="941.17" y="1072.23" z="321" h="28" random_walk="8" state="2"/>
-			<spot x="954.69" y="1075.59" z="300" h="59" random_walk="8" state="2"/>
-			<spot x="973.05" y="1082.38" z="280" h="106" random_walk="8" state="2"/>
-			<spot x="974.278" y="1059.56" z="243" h="2" random_walk="8" state="2"/>
-			<spot x="1025.09" y="1024.27" z="242" h="116" random_walk="8" state="2"/>
-			<spot x="1057.94" y="1061.51" z="322" h="114" random_walk="8" state="2"/>
+			<spot x="721.024" y="1051.14" z="243" h="19" random_walk="8" aerial_spawn="true"/>
+			<spot x="760.91" y="1085.02" z="260" h="5" random_walk="8" aerial_spawn="true"/>
+			<spot x="773.85" y="1131.35" z="320" h="26" random_walk="8" aerial_spawn="true"/>
+			<spot x="776.277" y="1026.51" z="322" h="64" random_walk="8" aerial_spawn="true"/>
+			<spot x="779.94" y="996.14" z="262" h="73" random_walk="8" aerial_spawn="true"/>
+			<spot x="790.08" y="1059.25" z="321" h="29" random_walk="8" aerial_spawn="true"/>
+			<spot x="791.81" y="1108.72" z="239" h="45" random_walk="8" aerial_spawn="true"/>
+			<spot x="792.61" y="1042.05" z="301" h="44" random_walk="8" aerial_spawn="true"/>
+			<spot x="810.24" y="1019.93" z="260" h="57" random_walk="8" aerial_spawn="true"/>
+			<spot x="814.48" y="979.79" z="280" h="99" random_walk="8" aerial_spawn="true"/>
+			<spot x="815.596" y="1041.8" z="242" h="109" random_walk="8" aerial_spawn="true"/>
+			<spot x="823.34" y="1097.23" z="320" h="77" random_walk="8" aerial_spawn="true"/>
+			<spot x="826.83" y="963.76" z="262" h="51" random_walk="8" aerial_spawn="true"/>
+			<spot x="834.27" y="1015.74" z="321" h="7" random_walk="8" aerial_spawn="true"/>
+			<spot x="841.91" y="939.12" z="298" h="74" random_walk="8" aerial_spawn="true"/>
+			<spot x="848.735" y="1059.29" z="320" h="66" random_walk="8" aerial_spawn="true"/>
+			<spot x="848.92" y="988.17" z="280" h="36" random_walk="8" aerial_spawn="true"/>
+			<spot x="863.17" y="950.84" z="262" h="56" random_walk="8" aerial_spawn="true"/>
+			<spot x="873.16" y="1062.51" z="279" h="55" random_walk="8" aerial_spawn="true"/>
+			<spot x="878.02" y="1093.37" z="319" h="9" random_walk="8" aerial_spawn="true"/>
+			<spot x="903.51" y="1074.73" z="242" h="92" random_walk="8" aerial_spawn="true"/>
+			<spot x="929.67" y="1061.85" z="280" h="25" random_walk="8" aerial_spawn="true"/>
+			<spot x="941.17" y="1072.23" z="321" h="28" random_walk="8" aerial_spawn="true"/>
+			<spot x="954.69" y="1075.59" z="300" h="59" random_walk="8" aerial_spawn="true"/>
+			<spot x="973.05" y="1082.38" z="280" h="106" random_walk="8" aerial_spawn="true"/>
+			<spot x="974.278" y="1059.56" z="243" h="2" random_walk="8" aerial_spawn="true"/>
+			<spot x="1025.09" y="1024.27" z="242" h="116" random_walk="8" aerial_spawn="true"/>
+			<spot x="1057.94" y="1061.51" z="322" h="114" random_walk="8" aerial_spawn="true"/>
 		</spawn>
 		<!-- Daneh -->
 		<spawn npc_id="205446" respawn_time="295">
@@ -3960,16 +3960,16 @@
 			<spot x="2678.22" y="367.105" z="356" h="59"/>
 			<spot x="2679.42" y="416.356" z="356" h="101"/>
 			<spot x="2686.52" y="339.343" z="356" h="59"/>
-			<spot x="2714.78" y="326.087" z="398" h="5"/>
+			<spot x="2714.78" y="326.087" z="398" h="5" aerial_spawn="true"/>
 			<spot x="2725.45" y="219.624" z="352" h="69"/>
-			<spot x="2728.69" y="394.464" z="398" h="17"/>
-			<spot x="2730.11" y="290.098" z="384" h="109"/>
-			<spot x="2733.83" y="473.225" z="398" h="61"/>
+			<spot x="2728.69" y="394.464" z="398" h="17" aerial_spawn="true"/>
+			<spot x="2730.11" y="290.098" z="384" h="109" aerial_spawn="true"/>
+			<spot x="2733.83" y="473.225" z="398" h="61" aerial_spawn="true"/>
 			<spot x="2735.87" y="201.188" z="352" h="105"/>
 			<spot x="2750.31" y="129.473" z="354" h="37"/>
 			<spot x="2753.86" y="196.234" z="350" h="45"/>
-			<spot x="2757.56" y="224.629" z="414" h="34"/>
-			<spot x="2762.1" y="478.349" z="398" h="89"/>
+			<spot x="2757.56" y="224.629" z="414" h="34" aerial_spawn="true"/>
+			<spot x="2762.1" y="478.349" z="398" h="89" aerial_spawn="true"/>
 			<spot x="2762.38" y="302.123" z="348" h="98"/>
 			<spot x="2764.6" y="389.242" z="348" h="36"/>
 			<spot x="2765.4" y="295.829" z="348" h="64"/>
@@ -3980,47 +3980,47 @@
 			<spot x="2775.2" y="420.958" z="342" h="86"/>
 			<spot x="2780.35" y="117.677" z="358" h="85"/>
 			<spot x="2782.99" y="93.2438" z="358" h="30"/>
-			<spot x="2784.67" y="554.39" z="398" h="101"/>
+			<spot x="2784.67" y="554.39" z="398" h="101" aerial_spawn="true"/>
 			<spot x="2794.01" y="436.213" z="340" h="5"/>
 			<spot x="2803.44" y="262.294" z="342" h="73"/>
 			<spot x="2804.05" y="269.494" z="342"/>
 			<spot x="2804.22" y="459.621" z="340" h="51"/>
-			<spot x="2807.33" y="207.117" z="384" h="40"/>
-			<spot x="2812.22" y="469.761" z="398" h="74"/>
+			<spot x="2807.33" y="207.117" z="384" h="40" aerial_spawn="true"/>
+			<spot x="2812.22" y="469.761" z="398" h="74" aerial_spawn="true"/>
 			<spot x="2814.01" y="460.578" z="340" h="58"/>
 			<spot x="2831.33" y="288.531" z="340" h="118"/>
 			<spot x="2832.49" y="462.693" z="340" h="23"/>
-			<spot x="2843.65" y="508.02" z="384" h="97"/>
+			<spot x="2843.65" y="508.02" z="384" h="97" aerial_spawn="true"/>
 			<spot x="2846.46" y="229.974" z="354" h="14"/>
 			<spot x="2851.33" y="232.501" z="354" h="95"/>
 			<spot x="2853.9" y="448.508" z="340" h="66"/>
 			<spot x="2855.11" y="523.995" z="342" h="68"/>
-			<spot x="2859.77" y="146.011" z="384" h="32"/>
+			<spot x="2859.77" y="146.011" z="384" h="32" aerial_spawn="true"/>
 			<spot x="2861.78" y="297.414" z="344" h="78"/>
 			<spot x="2869.23" y="569.297" z="348" h="66"/>
-			<spot x="2869.48" y="477.806" z="414" h="19"/>
+			<spot x="2869.48" y="477.806" z="414" h="19" aerial_spawn="true"/>
 			<spot x="2871.15" y="455.055" z="330" h="42"/>
 			<spot x="2875.72" y="311.36" z="348" h="39"/>
-			<spot x="2875.9" y="573.142" z="398" h="81"/>
+			<spot x="2875.9" y="573.142" z="398" h="81" aerial_spawn="true"/>
 			<spot x="2876.44" y="204.682" z="354" h="63"/>
 			<spot x="2879.31" y="569.198" z="348" h="83"/>
 			<spot x="2879.66" y="441.159" z="332" h="61"/>
-			<spot x="2884.53" y="228.812" z="384" h="63"/>
-			<spot x="2885.95" y="303.2" z="384" h="115"/>
+			<spot x="2884.53" y="228.812" z="384" h="63" aerial_spawn="true"/>
+			<spot x="2885.95" y="303.2" z="384" h="115" aerial_spawn="true"/>
 			<spot x="2888.76" y="439.359" z="332"/>
 			<spot x="2888.81" y="106.842" z="358" h="95"/>
-			<spot x="2891.46" y="147.807" z="418" h="64"/>
+			<spot x="2891.46" y="147.807" z="418" h="64" aerial_spawn="true"/>
 			<spot x="2895.77" y="473.008" z="340" h="118"/>
-			<spot x="2898.43" y="462.962" z="384" h="25"/>
+			<spot x="2898.43" y="462.962" z="384" h="25" aerial_spawn="true"/>
 			<spot x="2901.78" y="348.396" z="348" h="52"/>
 			<spot x="2902.88" y="404.184" z="352" h="10"/>
 			<spot x="2903.18" y="464.277" z="340" h="16"/>
 			<spot x="2907.18" y="452.888" z="340" h="110"/>
 			<spot x="2908.72" y="357.149" z="348" h="31"/>
-			<spot x="2916.39" y="502.853" z="398" h="101"/>
+			<spot x="2916.39" y="502.853" z="398" h="101" aerial_spawn="true"/>
 			<spot x="2923.88" y="400.339" z="344" h="90"/>
-			<spot x="2932.99" y="368.351" z="384" h="83"/>
-			<spot x="2936.51" y="434.777" z="384" h="50"/>
+			<spot x="2932.99" y="368.351" z="384" h="83" aerial_spawn="true"/>
+			<spot x="2936.51" y="434.777" z="384" h="50" aerial_spawn="true"/>
 			<spot x="2944.58" y="626.411" z="348" h="22"/>
 			<spot x="2944.64" y="524.27" z="348" h="79"/>
 			<spot x="2951.78" y="151.914" z="348" h="118"/>
@@ -4040,11 +4040,11 @@
 		</spawn>
 		<!-- Illusion & Phanoe Windstream -->
 		<spawn npc_id="206169" respawn_time="295">
-			<spot x="1609.916" y="509.97122" z="538"/>
+			<spot x="1609.916" y="509.97122" z="538" aerial_spawn="true"/>
 		</spawn>
 		<!-- Illusion Fortress Windstream -->
 		<spawn npc_id="206168" respawn_time="295">
-			<spot x="1405.8973" y="365.36523" z="590"/>
+			<spot x="1405.8973" y="365.36523" z="590" aerial_spawn="true"/>
 		</spawn>
 		<!-- Infused Crestlich -->
 		<spawn npc_id="215627" respawn_time="295">
@@ -4510,7 +4510,7 @@
 		</spawn>
 		<!-- Light Aerial Aether Searcher -->
 		<spawn npc_id="700614" respawn_time="295">
-			<spot x="2819.3884" y="275.1347" z="355.7253" static_id="649"/>
+			<spot x="2819.3884" y="275.1347" z="355.7253" static_id="649" aerial_spawn="true"/>
 		</spawn>
 		<!-- Limping Daeva -->
 		<spawn npc_id="799072" respawn_time="295">
@@ -5081,7 +5081,7 @@
 		</spawn>
 		<!-- Old Aerial Aether Searcher -->
 		<spawn npc_id="700613" respawn_time="295">
-			<spot x="2923.7295" y="362.0702" z="362.0" static_id="527"/>
+			<spot x="2923.7295" y="362.0702" z="362.0" static_id="527" aerial_spawn="true"/>
 		</spawn>
 		<!-- Omega -->
 		<spawn npc_id="216516" respawn_time="72000">
@@ -5260,7 +5260,7 @@
 		</spawn>
 		<!-- Phanoe & Taloc Windstream -->
 		<spawn npc_id="206170" respawn_time="295">
-			<spot x="2529.0056" y="180.72392" z="445"/>
+			<spot x="2529.0056" y="180.72392" z="445" aerial_spawn="true"/>
 		</spawn>
 		<!-- Philon -->
 		<spawn npc_id="798981" respawn_time="295">
@@ -5940,7 +5940,7 @@
 		</spawn>
 		<!-- Shining Aerial Aether Searcher -->
 		<spawn npc_id="700612" respawn_time="295">
-			<spot x="2761.9902" y="375.8928" z="354.3210" static_id="525"/>
+			<spot x="2761.9902" y="375.8928" z="354.3210" static_id="525" aerial_spawn="true"/>
 		</spawn>
 		<!-- Shortleaf Agrint -->
 		<spawn npc_id="216594" respawn_time="295">
@@ -7586,59 +7586,59 @@
 		</spawn>
 		<!-- Tidal Seafoam -->
 		<spawn npc_id="215875" respawn_time="295">
-			<spot x="2133.97" y="2349.22" z="120" h="13" random_walk="6"/>
-			<spot x="2158.28" y="2296.84" z="119" h="70" random_walk="6"/>
-			<spot x="2169.3" y="2341.17" z="139" h="60" random_walk="6"/>
-			<spot x="2172.58" y="2317.97" z="181" h="66" random_walk="6"/>
-			<spot x="2177.96" y="2305.33" z="100" h="22" random_walk="6"/>
-			<spot x="2186.45" y="2141.89" z="119" h="52" random_walk="6"/>
-			<spot x="2186.52" y="2331.16" z="157" h="6" random_walk="6"/>
-			<spot x="2192.46" y="2111.39" z="120" h="38" random_walk="6"/>
-			<spot x="2204.84" y="2145.41" z="100" h="35" random_walk="6"/>
-			<spot x="2206.77" y="2101.3" z="100" h="49" random_walk="6"/>
-			<spot x="2207.26" y="2315.52" z="99.9981" h="62" random_walk="6"/>
-			<spot x="2213.42" y="2135.06" z="181" h="61" random_walk="6"/>
-			<spot x="2215.28" y="2323.77" z="181" h="17" random_walk="6"/>
-			<spot x="2215.43" y="2158.13" z="79.3045" h="46" random_walk="6"/>
-			<spot x="2218.89" y="2085.18" z="160" h="5" random_walk="6"/>
-			<spot x="2220.07" y="2186.39" z="182" h="48" random_walk="6"/>
-			<spot x="2220.29" y="2176.82" z="120" h="113" random_walk="6"/>
-			<spot x="2220.86" y="2114.87" z="120" h="118" random_walk="6"/>
-			<spot x="2224.2" y="2333.03" z="140" h="25" random_walk="6"/>
-			<spot x="2225" y="2206" z="101" h="61" random_walk="6"/>
-			<spot x="2227.98" y="2138.58" z="137" h="15" random_walk="6"/>
-			<spot x="2229.59" y="2171.41" z="161" h="18" random_walk="6"/>
-			<spot x="2230.9" y="2228.78" z="120" h="33" random_walk="6"/>
-			<spot x="2231.04" y="2116.61" z="180" h="88" random_walk="6"/>
-			<spot x="2232.2" y="2201.34" z="79.3045" h="95" random_walk="6"/>
-			<spot x="2237.5" y="2342.89" z="179" h="92" random_walk="6"/>
-			<spot x="2237.62" y="2312.49" z="118" h="56" random_walk="6"/>
-			<spot x="2238.49" y="2088.12" z="181" h="113" random_walk="6"/>
-			<spot x="2238.58" y="2275.96" z="119" h="66" random_walk="6"/>
-			<spot x="2239.31" y="2323.73" z="161" h="78" random_walk="6"/>
-			<spot x="2240.21" y="2204.54" z="118" h="113" random_walk="6"/>
-			<spot x="2242.54" y="2077.8" z="79" h="109" random_walk="6"/>
-			<spot x="2243.61" y="2359.75" z="122" h="56" random_walk="6"/>
-			<spot x="2244.96" y="2127.23" z="120" h="30" random_walk="6"/>
-			<spot x="2248.19" y="2304.67" z="181" h="93" random_walk="6"/>
-			<spot x="2249.56" y="2208.67" z="161" h="99" random_walk="6"/>
-			<spot x="2252.35" y="2060.69" z="140" h="45" random_walk="6"/>
-			<spot x="2253.04" y="2288.58" z="121" h="91" random_walk="6"/>
-			<spot x="2253.39" y="2096.39" z="120" h="54" random_walk="6"/>
-			<spot x="2262.23" y="2358.97" z="102" h="68" random_walk="6"/>
-			<spot x="2264.78" y="2240.97" z="123" h="56" random_walk="6"/>
-			<spot x="2267.63" y="2062.23" z="120" h="8" random_walk="6"/>
-			<spot x="2269.07" y="2044.75" z="179" h="59" random_walk="6"/>
-			<spot x="2270.94" y="2304.95" z="144" h="69" random_walk="6"/>
-			<spot x="2271.71" y="2258.69" z="161" h="63" random_walk="6"/>
-			<spot x="2273.27" y="2087.75" z="161" h="28" random_walk="6"/>
-			<spot x="2275.52" y="2275.96" z="120" h="76" random_walk="6"/>
-			<spot x="2283.91" y="2106.99" z="141" h="101" random_walk="6"/>
-			<spot x="2285.81" y="2045.1" z="79.3045" h="84" random_walk="6"/>
-			<spot x="2287.18" y="2246.49" z="181" h="83" random_walk="6"/>
-			<spot x="2293" y="2263.27" z="140" h="16" random_walk="6"/>
-			<spot x="2293.78" y="2030.19" z="120" h="71" random_walk="6"/>
-			<spot x="2297.53" y="2281.42" z="183" h="99" random_walk="6"/>
+			<spot x="2133.97" y="2349.22" z="120" h="13" random_walk="6" aerial_spawn="true"/>
+			<spot x="2158.28" y="2296.84" z="119" h="70" random_walk="6" aerial_spawn="true"/>
+			<spot x="2169.3" y="2341.17" z="139" h="60" random_walk="6" aerial_spawn="true"/>
+			<spot x="2172.58" y="2317.97" z="181" h="66" random_walk="6" aerial_spawn="true"/>
+			<spot x="2177.96" y="2305.33" z="100" h="22" random_walk="6" aerial_spawn="true"/>
+			<spot x="2186.45" y="2141.89" z="119" h="52" random_walk="6" aerial_spawn="true"/>
+			<spot x="2186.52" y="2331.16" z="157" h="6" random_walk="6" aerial_spawn="true"/>
+			<spot x="2192.46" y="2111.39" z="120" h="38" random_walk="6" aerial_spawn="true"/>
+			<spot x="2204.84" y="2145.41" z="100" h="35" random_walk="6" aerial_spawn="true"/>
+			<spot x="2206.77" y="2101.3" z="100" h="49" random_walk="6" aerial_spawn="true"/>
+			<spot x="2207.26" y="2315.52" z="99.9981" h="62" random_walk="6" aerial_spawn="true"/>
+			<spot x="2213.42" y="2135.06" z="181" h="61" random_walk="6" aerial_spawn="true"/>
+			<spot x="2215.28" y="2323.77" z="181" h="17" random_walk="6" aerial_spawn="true"/>
+			<spot x="2215.43" y="2158.13" z="79.3045" h="46" random_walk="6" aerial_spawn="true"/>
+			<spot x="2218.89" y="2085.18" z="160" h="5" random_walk="6" aerial_spawn="true"/>
+			<spot x="2220.07" y="2186.39" z="182" h="48" random_walk="6" aerial_spawn="true"/>
+			<spot x="2220.29" y="2176.82" z="120" h="113" random_walk="6" aerial_spawn="true"/>
+			<spot x="2220.86" y="2114.87" z="120" h="118" random_walk="6" aerial_spawn="true"/>
+			<spot x="2224.2" y="2333.03" z="140" h="25" random_walk="6" aerial_spawn="true"/>
+			<spot x="2225" y="2206" z="101" h="61" random_walk="6" aerial_spawn="true"/>
+			<spot x="2227.98" y="2138.58" z="137" h="15" random_walk="6" aerial_spawn="true"/>
+			<spot x="2229.59" y="2171.41" z="161" h="18" random_walk="6" aerial_spawn="true"/>
+			<spot x="2230.9" y="2228.78" z="120" h="33" random_walk="6" aerial_spawn="true"/>
+			<spot x="2231.04" y="2116.61" z="180" h="88" random_walk="6" aerial_spawn="true"/>
+			<spot x="2232.2" y="2201.34" z="79.3045" h="95" random_walk="6" aerial_spawn="true"/>
+			<spot x="2237.5" y="2342.89" z="179" h="92" random_walk="6" aerial_spawn="true"/>
+			<spot x="2237.62" y="2312.49" z="118" h="56" random_walk="6" aerial_spawn="true"/>
+			<spot x="2238.49" y="2088.12" z="181" h="113" random_walk="6" aerial_spawn="true"/>
+			<spot x="2238.58" y="2275.96" z="119" h="66" random_walk="6" aerial_spawn="true"/>
+			<spot x="2239.31" y="2323.73" z="161" h="78" random_walk="6" aerial_spawn="true"/>
+			<spot x="2240.21" y="2204.54" z="118" h="113" random_walk="6" aerial_spawn="true"/>
+			<spot x="2242.54" y="2077.8" z="79" h="109" random_walk="6" aerial_spawn="true"/>
+			<spot x="2243.61" y="2359.75" z="122" h="56" random_walk="6" aerial_spawn="true"/>
+			<spot x="2244.96" y="2127.23" z="120" h="30" random_walk="6" aerial_spawn="true"/>
+			<spot x="2248.19" y="2304.67" z="181" h="93" random_walk="6" aerial_spawn="true"/>
+			<spot x="2249.56" y="2208.67" z="161" h="99" random_walk="6" aerial_spawn="true"/>
+			<spot x="2252.35" y="2060.69" z="140" h="45" random_walk="6" aerial_spawn="true"/>
+			<spot x="2253.04" y="2288.58" z="121" h="91" random_walk="6" aerial_spawn="true"/>
+			<spot x="2253.39" y="2096.39" z="120" h="54" random_walk="6" aerial_spawn="true"/>
+			<spot x="2262.23" y="2358.97" z="102" h="68" random_walk="6" aerial_spawn="true"/>
+			<spot x="2264.78" y="2240.97" z="123" h="56" random_walk="6" aerial_spawn="true"/>
+			<spot x="2267.63" y="2062.23" z="120" h="8" random_walk="6" aerial_spawn="true"/>
+			<spot x="2269.07" y="2044.75" z="179" h="59" random_walk="6" aerial_spawn="true"/>
+			<spot x="2270.94" y="2304.95" z="144" h="69" random_walk="6" aerial_spawn="true"/>
+			<spot x="2271.71" y="2258.69" z="161" h="63" random_walk="6" aerial_spawn="true"/>
+			<spot x="2273.27" y="2087.75" z="161" h="28" random_walk="6" aerial_spawn="true"/>
+			<spot x="2275.52" y="2275.96" z="120" h="76" random_walk="6" aerial_spawn="true"/>
+			<spot x="2283.91" y="2106.99" z="141" h="101" random_walk="6" aerial_spawn="true"/>
+			<spot x="2285.81" y="2045.1" z="79.3045" h="84" random_walk="6" aerial_spawn="true"/>
+			<spot x="2287.18" y="2246.49" z="181" h="83" random_walk="6" aerial_spawn="true"/>
+			<spot x="2293" y="2263.27" z="140" h="16" random_walk="6" aerial_spawn="true"/>
+			<spot x="2293.78" y="2030.19" z="120" h="71" random_walk="6" aerial_spawn="true"/>
+			<spot x="2297.53" y="2281.42" z="183" h="99" random_walk="6" aerial_spawn="true"/>
 		</spawn>
 		<!-- Tillen -->
 		<spawn npc_id="799552" respawn_time="295">

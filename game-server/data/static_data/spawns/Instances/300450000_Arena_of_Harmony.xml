@@ -123,28 +123,28 @@
 		</spawn>
 		<!-- Explosive Aether -->
 		<spawn npc_id="219274" respawn_time="105">
-			<spot x="466.8595" y="1762.2043" z="176.6272"/>
-			<spot x="475.9515" y="1761.9174" z="138.4368"/>
-			<spot x="484.7343" y="1762.1692" z="153.1951"/>
-			<spot x="504.3533" y="1776.1320" z="176.1036"/>
-			<spot x="520.1926" y="1799.5516" z="178.6339"/>
-			<spot x="537.2490" y="1793.4799" z="157.7597"/>
+			<spot x="466.8595" y="1762.2043" z="176.6272" aerial_spawn="true"/>
+			<spot x="475.9515" y="1761.9174" z="138.4368" aerial_spawn="true"/>
+			<spot x="484.7343" y="1762.1692" z="153.1951" aerial_spawn="true"/>
+			<spot x="504.3533" y="1776.1320" z="176.1036" aerial_spawn="true"/>
+			<spot x="520.1926" y="1799.5516" z="178.6339" aerial_spawn="true"/>
+			<spot x="537.2490" y="1793.4799" z="157.7597" aerial_spawn="true"/>
 		</spawn>
 		<!-- shock aether -->
 		<spawn npc_id="219317" respawn_time="105">
-			<spot x="450.6126" y="1782.3124" z="157.7597"/>
-			<spot x="472.5491" y="1780.5325" z="151.8221"/>
-			<spot x="472.5491" y="1780.5325" z="151.8221"/>
-			<spot x="473.7124" y="1780.2981" z="175.9438"/>
-			<spot x="481.4114" y="1760.4656" z="148.9378"/>
-			<spot x="481.4114" y="1800.0477" z="148.9378"/>
-			<spot x="494.3278" y="1802.4974" z="162.6689"/>
-			<spot x="495.2348" y="1768.7341" z="176.5305"/>
-			<spot x="495.2348" y="1791.5541" z="176.5305"/>
-			<spot x="495.2589" y="1759.1063" z="162.8430"/>
-			<spot x="515.2239" y="1780.2656" z="175.9438"/>
-			<spot x="515.8977" y="1780.5023" z="152.4728"/>
-			<spot x="538.1978" y="1778.9984" z="157.7597"/>
+			<spot x="450.6126" y="1782.3124" z="157.7597" aerial_spawn="true"/>
+			<spot x="472.5491" y="1780.5325" z="151.8221" aerial_spawn="true"/>
+			<spot x="472.5491" y="1780.5325" z="151.8221" aerial_spawn="true"/>
+			<spot x="473.7124" y="1780.2981" z="175.9438" aerial_spawn="true"/>
+			<spot x="481.4114" y="1760.4656" z="148.9378" aerial_spawn="true"/>
+			<spot x="481.4114" y="1800.0477" z="148.9378" aerial_spawn="true"/>
+			<spot x="494.3278" y="1802.4974" z="162.6689" aerial_spawn="true"/>
+			<spot x="495.2348" y="1768.7341" z="176.5305" aerial_spawn="true"/>
+			<spot x="495.2348" y="1791.5541" z="176.5305" aerial_spawn="true"/>
+			<spot x="495.2589" y="1759.1063" z="162.8430" aerial_spawn="true"/>
+			<spot x="515.2239" y="1780.2656" z="175.9438" aerial_spawn="true"/>
+			<spot x="515.8977" y="1780.5023" z="152.4728" aerial_spawn="true"/>
+			<spot x="538.1978" y="1778.9984" z="157.7597" aerial_spawn="true"/>
 		</spawn>
 		<!-- Heated Negotiator Grangvolkan -->
 		<spawn npc_id="219280" respawn_time="105" difficult_id="1">
@@ -168,11 +168,11 @@
 		</spawn>
 		<!-- IDArena_pvp01_InviNPC_8 -->
 		<spawn npc_id="207049" respawn_time="105">
-			<spot x="499.7514" y="1773.8922" z="171.1570"/>
+			<spot x="499.7514" y="1773.8922" z="171.1570" aerial_spawn="true"/>
 		</spawn>
 		<!-- IDArena_pvp01_InviNPC_9 -->
 		<spawn npc_id="207050" respawn_time="105">
-			<spot x="501.1699" y="1777.8212" z="171.1570"/>
+			<spot x="501.1699" y="1777.8212" z="171.1570" aerial_spawn="true"/>
 		</spawn>
 		<!-- IDArena_pvp02_InviNPC_1 -->
 		<spawn npc_id="207033" respawn_time="105">
@@ -180,20 +180,20 @@
 		</spawn>
 		<!-- IDArena_Team01_S1_Noshown_for_lever_close -->
 		<spawn npc_id="207114" respawn_time="105">
-			<spot x="1842.3353" y="1736.1937" z="310.3235"/>
+			<spot x="1842.3353" y="1736.1937" z="310.3235" aerial_spawn="true"/>
 		</spawn>
 		<!-- IDArena_Team01_S1_Noshown_for_lever_set -->
 		<spawn npc_id="207115" respawn_time="105">
-			<spot x="1844.6798" y="1743.0077" z="311.1429"/>
+			<spot x="1844.6798" y="1743.0077" z="311.1429" aerial_spawn="true"/>
 		</spawn>
 		<!-- IDArena_Team01_S2_Noshown_for_track_close -->
 		<spawn npc_id="207107" respawn_time="105">
-			<spot x="469.0275" y="1781.2261" z="163.8116"/>
-			<spot x="517.3068" y="1781.9104" z="163.8116"/>
+			<spot x="469.0275" y="1781.2261" z="163.8116" aerial_spawn="true"/>
+			<spot x="517.3068" y="1781.9104" z="163.8116" aerial_spawn="true"/>
 		</spawn>
 		<!-- IDArena_Team01_S2_Noshown_for_track_open -->
 		<spawn npc_id="207106" respawn_time="105">
-			<spot x="498.2446" y="1790.5735" z="169.7353"/>
+			<spot x="498.2446" y="1790.5735" z="169.7353" aerial_spawn="true"/>
 		</spawn>
 		<!-- Lurking Fangwing -->
 		<spawn npc_id="219283" respawn_time="105" difficult_id="1">
@@ -270,42 +270,42 @@
 		</spawn>
 		<!-- Sky Loop -->
 		<spawn npc_id="207101" respawn_time="105">
-			<spot x="450.1526" y="1771.6342" z="154.4948" h="45"/>
-			<spot x="451.9798" y="1789.6945" z="154.4945" h="15"/>
-			<spot x="453.2310" y="1774.9258" z="177.3975" h="36"/>
-			<spot x="453.3799" y="1791.6423" z="177.3270" h="23"/>
-			<spot x="459.6954" y="1783.1649" z="153.1804" h="33"/>
-			<spot x="463.6774" y="1761.2948" z="177.3270" h="43"/>
-			<spot x="464.1622" y="1801.0581" z="177.3270" h="10"/>
-			<spot x="469.6530" y="1769.2192" z="138.8079" h="53"/>
-			<spot x="469.7408" y="1792.6573" z="165.4409" h="10"/>
-			<spot x="472.1582" y="1781.9821" z="151.6493"/>
-			<spot x="485.8056" y="1801.1987" z="177.3270"/>
-			<spot x="485.9503" y="1761.1323" z="177.3270"/>
-			<spot x="486.1324" y="1781.1040" z="152.0575"/>
-			<spot x="486.7321" y="1759.7345" z="144.8943"/>
-			<spot x="486.9509" y="1801.9956" z="158.4124"/>
-			<spot x="494.7642" y="1759.5282" z="152.5068"/>
-			<spot x="494.9348" y="1802.1798" z="152.5857"/>
-			<spot x="494.9674" y="1791.8362" z="152.1635" h="30"/>
-			<spot x="495.0289" y="1769.2734" z="152.1635" h="30"/>
-			<spot x="495.0894" y="1781.0751" z="152.1635"/>
-			<spot x="496.5575" y="1781.0718" z="152.1614"/>
-			<spot x="503.2661" y="1801.7520" z="143.9769"/>
-			<spot x="503.3351" y="1759.6985" z="158.4491"/>
-			<spot x="505.1635" y="1781.0885" z="152.3523"/>
-			<spot x="506.2996" y="1761.2419" z="177.3270"/>
-			<spot x="506.4008" y="1801.0159" z="177.3270"/>
-			<spot x="518.0588" y="1780.5404" z="152.5605"/>
-			<spot x="519.9453" y="1792.4106" z="139.4744" h="53"/>
-			<spot x="520.1588" y="1767.9170" z="165.3259" h="8"/>
-			<spot x="526.5186" y="1761.3792" z="177.3270" h="10"/>
-			<spot x="526.5524" y="1799.9530" z="177.3270" h="43"/>
-			<spot x="529.5792" y="1780.8058" z="153.6571" h="33"/>
-			<spot x="537.3194" y="1789.4381" z="177.3270" h="36"/>
-			<spot x="537.6169" y="1772.0968" z="177.3270" h="23"/>
-			<spot x="539.3393" y="1791.3956" z="154.9766" h="45"/>
-			<spot x="539.5499" y="1767.9496" z="154.2043" h="15"/>
+			<spot x="450.1526" y="1771.6342" z="154.4948" h="45" aerial_spawn="true"/>
+			<spot x="451.9798" y="1789.6945" z="154.4945" h="15" aerial_spawn="true"/>
+			<spot x="453.2310" y="1774.9258" z="177.3975" h="36" aerial_spawn="true"/>
+			<spot x="453.3799" y="1791.6423" z="177.3270" h="23" aerial_spawn="true"/>
+			<spot x="459.6954" y="1783.1649" z="153.1804" h="33" aerial_spawn="true"/>
+			<spot x="463.6774" y="1761.2948" z="177.3270" h="43" aerial_spawn="true"/>
+			<spot x="464.1622" y="1801.0581" z="177.3270" h="10" aerial_spawn="true"/>
+			<spot x="469.6530" y="1769.2192" z="138.8079" h="53" aerial_spawn="true"/>
+			<spot x="469.7408" y="1792.6573" z="165.4409" h="10" aerial_spawn="true"/>
+			<spot x="472.1582" y="1781.9821" z="151.6493" aerial_spawn="true"/>
+			<spot x="485.8056" y="1801.1987" z="177.3270" aerial_spawn="true"/>
+			<spot x="485.9503" y="1761.1323" z="177.3270" aerial_spawn="true"/>
+			<spot x="486.1324" y="1781.1040" z="152.0575" aerial_spawn="true"/>
+			<spot x="486.7321" y="1759.7345" z="144.8943" aerial_spawn="true"/>
+			<spot x="486.9509" y="1801.9956" z="158.4124" aerial_spawn="true"/>
+			<spot x="494.7642" y="1759.5282" z="152.5068" aerial_spawn="true"/>
+			<spot x="494.9348" y="1802.1798" z="152.5857" aerial_spawn="true"/>
+			<spot x="494.9674" y="1791.8362" z="152.1635" h="30" aerial_spawn="true"/>
+			<spot x="495.0289" y="1769.2734" z="152.1635" h="30" aerial_spawn="true"/>
+			<spot x="495.0894" y="1781.0751" z="152.1635" aerial_spawn="true"/>
+			<spot x="496.5575" y="1781.0718" z="152.1614" aerial_spawn="true"/>
+			<spot x="503.2661" y="1801.7520" z="143.9769" aerial_spawn="true"/>
+			<spot x="503.3351" y="1759.6985" z="158.4491" aerial_spawn="true"/>
+			<spot x="505.1635" y="1781.0885" z="152.3523" aerial_spawn="true"/>
+			<spot x="506.2996" y="1761.2419" z="177.3270" aerial_spawn="true"/>
+			<spot x="506.4008" y="1801.0159" z="177.3270" aerial_spawn="true"/>
+			<spot x="518.0588" y="1780.5404" z="152.5605" aerial_spawn="true"/>
+			<spot x="519.9453" y="1792.4106" z="139.4744" h="53" aerial_spawn="true"/>
+			<spot x="520.1588" y="1767.9170" z="165.3259" h="8" aerial_spawn="true"/>
+			<spot x="526.5186" y="1761.3792" z="177.3270" h="10" aerial_spawn="true"/>
+			<spot x="526.5524" y="1799.9530" z="177.3270" h="43" aerial_spawn="true"/>
+			<spot x="529.5792" y="1780.8058" z="153.6571" h="33" aerial_spawn="true"/>
+			<spot x="537.3194" y="1789.4381" z="177.3270" h="36" aerial_spawn="true"/>
+			<spot x="537.6169" y="1772.0968" z="177.3270" h="23" aerial_spawn="true"/>
+			<spot x="539.3393" y="1791.3956" z="154.9766" h="45" aerial_spawn="true"/>
+			<spot x="539.5499" y="1767.9496" z="154.2043" h="15" aerial_spawn="true"/>
 		</spawn>
 		<!-- Volcanic Heart Crystal -->
 		<spawn npc_id="219481" respawn_time="105" difficult_id="1">

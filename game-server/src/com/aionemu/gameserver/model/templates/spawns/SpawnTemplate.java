@@ -21,6 +21,7 @@ public class SpawnTemplate {
 	private SpawnGroup spawnGroup;
 	private String aiName;
 	private int state;
+	private boolean aerialSpawn;
 	private int creatorId;
 	private TemporarySpawn temporarySpawn;
 
@@ -37,6 +38,7 @@ public class SpawnTemplate {
 		walkerIdx = spot.getWalkerIndex();
 		aiName = spot.getAi();
 		state = spot.getState();
+		aerialSpawn = spot.isAerialSpawn();
 		temporarySpawn = spot.getTemporarySpawn();
 	}
 
@@ -181,6 +183,10 @@ public class SpawnTemplate {
 
 	public int getState() {
 		return state;
+	}
+
+	public boolean isAerialSpawn() {
+		return aerialSpawn;
 	}
 
 	public int getCreatorId() {

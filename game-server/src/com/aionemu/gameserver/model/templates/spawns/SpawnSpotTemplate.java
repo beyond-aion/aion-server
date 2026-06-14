@@ -41,6 +41,9 @@ public class SpawnSpotTemplate {
 	@XmlAttribute(name = "state")
 	private Integer state = 0;
 
+	@XmlAttribute(name = "aerial_spawn")
+	private Boolean aerialSpawn;
+
 	@XmlElement(name = "temporary_spawn")
 	private TemporarySpawn temporaySpawn;
 
@@ -59,6 +62,8 @@ public class SpawnSpotTemplate {
 			randomWalk = null;
 		if (ZERO.equals(state))
 			state = null;
+		if (Boolean.FALSE.equals(aerialSpawn))
+			aerialSpawn = null;
 		if (ZERO.equals(walkerIdx))
 			walkerIdx = null;
 	}
@@ -70,6 +75,8 @@ public class SpawnSpotTemplate {
 			randomWalk = 0;
 		if (state == null)
 			state = 0;
+		if (aerialSpawn == null)
+			aerialSpawn = false;
 		if (walkerIdx == null)
 			walkerIdx = 0;
 	}
@@ -142,6 +149,10 @@ public class SpawnSpotTemplate {
 		if (state == null)
 			return 0;
 		return state;
+	}
+
+	public boolean isAerialSpawn() {
+		return aerialSpawn != null && aerialSpawn;
 	}
 
 	public TemporarySpawn getTemporarySpawn() {

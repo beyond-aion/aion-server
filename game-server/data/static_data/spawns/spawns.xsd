@@ -130,10 +130,10 @@
 			<xs:element name="spot" type="SpawnSpotTemplate" minOccurs="1" maxOccurs="unbounded"/>
 		</xs:sequence>
 		<xs:attribute name="npc_id" type="xs:int" use="required"/>
-		<xs:attribute name="pool" type="xs:int" use="optional"/>
+		<xs:attribute name="pool" type="xs:int"/>
 		<xs:attribute name="respawn_time" type="xs:int"/>
 		<xs:attribute name="handler" type="SpawnHandlerType"/>
-		<xs:attribute name="custom" type="xs:boolean" use="optional" default="false"/>
+		<xs:attribute name="custom" type="xs:boolean" default="false"/>
 		<xs:attribute name="difficult_id" type="xs:byte"/>
 	</xs:complexType>
 	<xs:complexType name="SpawnSpotTemplate">
@@ -143,14 +143,15 @@
 		<xs:attribute name="x" type="xs:float"/>
 		<xs:attribute name="y" type="xs:float"/>
 		<xs:attribute name="z" type="xs:float"/>
-		<xs:attribute name="h" type="HeadingType" use="optional" default="0"/>
-		<xs:attribute name="static_id" type="xs:int" use="optional" default="0"/>
-		<xs:attribute name="random_walk" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="h" type="HeadingType" default="0"/>
+		<xs:attribute name="static_id" type="xs:int" default="0"/>
+		<xs:attribute name="random_walk" type="xs:int" default="0"/>
 		<xs:attribute name="walker_id" type="xs:string"/>
-		<xs:attribute name="walker_index" type="xs:int" use="optional" default="0"/>
-		<xs:attribute name="fly" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="walker_index" type="xs:int" default="0"/>
+		<xs:attribute name="fly" type="xs:int" default="0"/>
 		<xs:attribute name="anchor" type="xs:string"/>
-		<xs:attribute name="state" type="xs:int" use="optional" default="0"/>
+		<xs:attribute name="state" type="xs:int" default="0"/>
+		<xs:attribute name="aerial_spawn" type="xs:boolean"/>
 		<xs:attribute name="ai" type="xs:string"/>
 	</xs:complexType>
 	<xs:complexType name="TemporarySpawn">

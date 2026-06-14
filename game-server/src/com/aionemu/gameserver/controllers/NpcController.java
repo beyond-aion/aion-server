@@ -97,17 +97,18 @@ public class NpcController extends CreatureController<Npc> {
 		super.onBeforeSpawn();
 		Npc owner = getOwner();
 
-		// set state from npc templates
-		if (owner.getObjectTemplate().getState() > 0)
+		if (owner.getSpawn().getState() > 0)
+			owner.setState(owner.getSpawn().getState());
+		else if (owner.getObjectTemplate().getState() > 0)
 			owner.setState(owner.getObjectTemplate().getState());
-		else
+		else {
 			owner.setState(CreatureState.WALK_MODE);
+			if (owner.getSpawn().isAerialSpawn())
+				owner.setState(CreatureState.FLYING);
+		}
 
 		owner.getLifeStats().setCurrentHpPercent(100);
 		owner.getAi().onGeneralEvent(AIEventType.BEFORE_SPAWNED);
-
-		if (owner.getSpawn().getState() > 0)
-			owner.setState(owner.getSpawn().getState());
 	}
 
 	@Override

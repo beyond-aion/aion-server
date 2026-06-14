@@ -1205,15 +1205,15 @@
 		</spawn>
 		<!-- Dredgion Part -->
 		<spawn npc_id="700304" respawn_time="295">
-			<spot x="1530.36" y="1878.83" z="2919.6" static_id="1025" state="2"/>
-			<spot x="1539.53" y="1906.54" z="2927.71" static_id="1009" state="2"/>
-			<spot x="1598.57" y="1914.55" z="2893.06" static_id="1028" state="2"/>
-			<spot x="1600.05" y="1842.53" z="2891.81" static_id="1029" state="2"/>
-			<spot x="1605.53" y="1842.44" z="2894.01" static_id="1002" state="2"/>
-			<spot x="1614.57" y="1868.05" z="2900.44" static_id="1016" state="2"/>
-			<spot x="1645" y="1836.42" z="2901.66" static_id="999" state="2"/>
-			<spot x="1658.04" y="1815.67" z="2891.57" static_id="1006" state="2"/>
-			<spot x="1665.64" y="1833.09" z="2891.57" static_id="1003" state="2"/>
+			<spot x="1530.36" y="1878.83" z="2919.6" static_id="1025" aerial_spawn="true"/>
+			<spot x="1539.53" y="1906.54" z="2927.71" static_id="1009" aerial_spawn="true"/>
+			<spot x="1598.57" y="1914.55" z="2893.06" static_id="1028" aerial_spawn="true"/>
+			<spot x="1600.05" y="1842.53" z="2891.81" static_id="1029" aerial_spawn="true"/>
+			<spot x="1605.53" y="1842.44" z="2894.01" static_id="1002" aerial_spawn="true"/>
+			<spot x="1614.57" y="1868.05" z="2900.44" static_id="1016" aerial_spawn="true"/>
+			<spot x="1645" y="1836.42" z="2901.66" static_id="999" aerial_spawn="true"/>
+			<spot x="1658.04" y="1815.67" z="2891.57" static_id="1006" aerial_spawn="true"/>
+			<spot x="1665.64" y="1833.09" z="2891.57" static_id="1003" aerial_spawn="true"/>
 		</spawn>
 		<!-- Dry Ember -->
 		<spawn npc_id="253701" respawn_time="295">
@@ -1865,9 +1865,9 @@
 		</spawn>
 		<!-- Fright Reaper -->
 		<spawn npc_id="253043" respawn_time="295">
-			<spot x="2687.89" y="3262.536" z="1507.377" h="108" random_walk="12" state="2"/>
-			<spot x="2723.044" y="3278.161" z="1485.949" h="97" state="2"/>
-			<spot x="2729.84" y="3256.17" z="1475.9977" h="45" walker_id="564F5944467E8442B4448C7E00D11730382445EE" state="2"/>
+			<spot x="2687.89" y="3262.536" z="1507.377" h="108" random_walk="12" aerial_spawn="true"/>
+			<spot x="2723.044" y="3278.161" z="1485.949" h="97" aerial_spawn="true"/>
+			<spot x="2729.84" y="3256.17" z="1475.9977" h="45" walker_id="564F5944467E8442B4448C7E00D11730382445EE" aerial_spawn="true"/>
 		</spawn>
 		<!-- Furious Storm Spirit -->
 		<spawn npc_id="256631" respawn_time="295">
@@ -3192,36 +3192,36 @@
 		</spawn>
 		<!-- Mind Reaper -->
 		<spawn npc_id="252537" respawn_time="295">
-			<spot x="3097.75" y="2114.77" z="1456.52" h="71" state="2"/>
-			<spot x="3098" y="2074.62" z="1459.84" h="93" state="2"/>
-			<spot x="3108.32" y="2082.31" z="1459.3552" h="5" walker_id="A4269CC9D4D6AE74D87D160C3650892D558A81D4" state="2"/>
-			<spot x="3118.22" y="2032.12" z="1459.79" h="70" state="2"/>
-			<spot x="3122.03" y="2072.97" z="1456.62" h="98" state="2"/>
-			<spot x="3122.88" y="2013.16" z="1460" h="85" state="2"/>
-			<spot x="3129.34" y="2136.51" z="1454.33" h="63" state="2"/>
-			<spot x="3136.62" y="2124.14" z="55.2223" h="114" state="2"/>
-			<spot x="3137.4" y="2152.24" z="1459.8" h="6" state="2"/>
-			<spot x="3146.77" y="2007.11" z="1459.67" h="50" state="2"/>
-			<spot x="3152.79" y="2059.08" z="1462.47" h="104" random_walk="8" state="2"/>
-			<spot x="3156.48" y="2142.8" z="1454.87" h="105" state="2"/>
-			<spot x="3159.03" y="2173.37" z="1449.48" h="36" state="2"/>
-			<spot x="3160.74" y="2112.75" z="1460.11" h="6" state="2"/>
-			<spot x="3164.78" y="2029.33" z="1461.4" h="64" random_walk="8" state="2"/>
-			<spot x="3190.69" y="2071.07" z="1459.17" h="35" random_walk="8" state="2"/>
-			<spot x="3192.58" y="2174.88" z="1450.2" h="45" state="2"/>
-			<spot x="3201.75" y="2062.0" z="1456.6023" h="36" walker_id="BCEA8217FBA7520A7F717AEAEC89606E7779B240" state="2"/>
-			<spot x="3203.54" y="2137.78" z="1451.23" h="116" state="2"/>
-			<spot x="3213.22" y="2080.75" z="1301.87" h="92" state="2"/>
-			<spot x="3217.46" y="2034.16" z="1451.3" h="1" state="2"/>
-			<spot x="3221.06" y="2060.55" z="1453.65" h="85" state="2"/>
-			<spot x="3224.33" y="2117.64" z="1461.28" h="44" state="2"/>
-			<spot x="3244.24" y="2148.45" z="1452.81" h="95" state="2"/>
-			<spot x="3245.27" y="2098.99" z="1450.65" h="92" state="2"/>
-			<spot x="3246.23" y="2130.01" z="1451.53" h="56" state="2"/>
+			<spot x="3097.75" y="2114.77" z="1456.52" h="71" aerial_spawn="true"/>
+			<spot x="3098" y="2074.62" z="1459.84" h="93" aerial_spawn="true"/>
+			<spot x="3108.32" y="2082.31" z="1459.3552" h="5" walker_id="A4269CC9D4D6AE74D87D160C3650892D558A81D4" aerial_spawn="true"/>
+			<spot x="3118.22" y="2032.12" z="1459.79" h="70" aerial_spawn="true"/>
+			<spot x="3122.03" y="2072.97" z="1456.62" h="98" aerial_spawn="true"/>
+			<spot x="3122.88" y="2013.16" z="1460" h="85" aerial_spawn="true"/>
+			<spot x="3129.34" y="2136.51" z="1454.33" h="63" aerial_spawn="true"/>
+			<spot x="3136.62" y="2124.14" z="55.2223" h="114" aerial_spawn="true"/>
+			<spot x="3137.4" y="2152.24" z="1459.8" h="6" aerial_spawn="true"/>
+			<spot x="3146.77" y="2007.11" z="1459.67" h="50" aerial_spawn="true"/>
+			<spot x="3152.79" y="2059.08" z="1462.47" h="104" random_walk="8" aerial_spawn="true"/>
+			<spot x="3156.48" y="2142.8" z="1454.87" h="105" aerial_spawn="true"/>
+			<spot x="3159.03" y="2173.37" z="1449.48" h="36" aerial_spawn="true"/>
+			<spot x="3160.74" y="2112.75" z="1460.11" h="6" aerial_spawn="true"/>
+			<spot x="3164.78" y="2029.33" z="1461.4" h="64" random_walk="8" aerial_spawn="true"/>
+			<spot x="3190.69" y="2071.07" z="1459.17" h="35" random_walk="8" aerial_spawn="true"/>
+			<spot x="3192.58" y="2174.88" z="1450.2" h="45" aerial_spawn="true"/>
+			<spot x="3201.75" y="2062.0" z="1456.6023" h="36" walker_id="BCEA8217FBA7520A7F717AEAEC89606E7779B240" aerial_spawn="true"/>
+			<spot x="3203.54" y="2137.78" z="1451.23" h="116" aerial_spawn="true"/>
+			<spot x="3213.22" y="2080.75" z="1301.87" h="92" aerial_spawn="true"/>
+			<spot x="3217.46" y="2034.16" z="1451.3" h="1" aerial_spawn="true"/>
+			<spot x="3221.06" y="2060.55" z="1453.65" h="85" aerial_spawn="true"/>
+			<spot x="3224.33" y="2117.64" z="1461.28" h="44" aerial_spawn="true"/>
+			<spot x="3244.24" y="2148.45" z="1452.81" h="95" aerial_spawn="true"/>
+			<spot x="3245.27" y="2098.99" z="1450.65" h="92" aerial_spawn="true"/>
+			<spot x="3246.23" y="2130.01" z="1451.53" h="56" aerial_spawn="true"/>
 		</spawn>
 		<!-- Mind Reaper -->
 		<spawn npc_id="252538" respawn_time="295">
-			<spot x="3126.88" y="2137.25" z="1454.8855" h="63" walker_id="FF18CBD9D2C77D721DCFC40E8AD1FE08FFD6141B" state="2"/>
+			<spot x="3126.88" y="2137.25" z="1454.8855" h="63" walker_id="FF18CBD9D2C77D721DCFC40E8AD1FE08FFD6141B" aerial_spawn="true"/>
 		</spawn>
 		<!-- Minon -->
 		<spawn npc_id="278511" respawn_time="295">
@@ -3410,7 +3410,7 @@
 		</spawn>
 		<!-- Nightmare Reaper -->
 		<spawn npc_id="252543" respawn_time="295">
-			<spot x="3112.63" y="2700.38" z="1458.2002" h="44" walker_id="92CC8AD3D0D58B6291BCD72EB1F2F9FA5E97B2C4" state="2"/>
+			<spot x="3112.63" y="2700.38" z="1458.2002" h="44" walker_id="92CC8AD3D0D58B6291BCD72EB1F2F9FA5E97B2C4" aerial_spawn="true"/>
 		</spawn>
 		<!-- Nineve -->
 		<spawn npc_id="278077" respawn_time="295">
@@ -3564,17 +3564,17 @@
 		</spawn>
 		<!-- Petralith's Hand -->
 		<spawn npc_id="700311" respawn_time="295">
-			<spot x="2490.32" y="1550.33" z="2949.38" static_id="1015"/>
-			<spot x="2568.14" y="1667.61" z="2910.04" static_id="1010"/>
+			<spot x="2490.32" y="1550.33" z="2949.38" static_id="1015" aerial_spawn="true"/>
+			<spot x="2568.14" y="1667.61" z="2910.04" static_id="1010" aerial_spawn="true"/>
 		</spawn>
 		<!-- Petralith's Heart -->
 		<spawn npc_id="700310" respawn_time="295">
-			<spot x="2526.5" y="1601.86" z="2919.59" static_id="1008"/>
+			<spot x="2526.5" y="1601.86" z="2919.59" static_id="1008" aerial_spawn="true"/>
 		</spawn>
 		<!-- Petralith's Shoulder -->
 		<spawn npc_id="700309" respawn_time="295">
-			<spot x="2534.92" y="1571.44" z="2955.87" static_id="1027"/>
-			<spot x="2552.7" y="1563.43" z="2976.12" static_id="1019"/>
+			<spot x="2534.92" y="1571.44" z="2955.87" static_id="1027" aerial_spawn="true"/>
+			<spot x="2552.7" y="1563.43" z="2976.12" static_id="1019" aerial_spawn="true"/>
 		</spawn>
 		<!-- Petryr -->
 		<spawn npc_id="804505" respawn_time="295">
@@ -4629,21 +4629,21 @@
 		</spawn>
 		<!-- Tigraki Crystal -->
 		<spawn npc_id="700307" respawn_time="295">
-			<spot x="1534.41" y="2301.97" z="2946.59" static_id="997" state="2"/>
-			<spot x="1619.04" y="2240.43" z="2957.03" static_id="1034" state="2"/>
-			<spot x="1630.12" y="1661.14" z="2918.59" static_id="1043" state="2"/>
-			<spot x="1674.71" y="1786.82" z="2926.22" static_id="1044" state="2"/>
-			<spot x="1759.26" y="1808.76" z="2921.01" static_id="1045" state="2"/>
-			<spot x="1899.12" y="2094.47" z="2995.9" static_id="1033" state="2"/>
-			<spot x="1908.67" y="1839.9" z="2928.15" static_id="1046" state="2"/>
-			<spot x="1961.24" y="2134.69" z="2995.47" static_id="1035" state="2"/>
-			<spot x="2059.74" y="2553.19" z="2943.7" static_id="1036" state="2"/>
-			<spot x="2099.38" y="2401.45" z="2933.6" static_id="1040" state="2"/>
-			<spot x="2101.97" y="2263.08" z="2919.47" static_id="1039" state="2"/>
-			<spot x="2222.85" y="2569.67" z="2921.57" static_id="1037" state="2"/>
-			<spot x="2409.65" y="2548.64" z="2892.29" static_id="1038" state="2"/>
-			<spot x="2556.59" y="2407.72" z="3031.95" static_id="1041" state="2"/>
-			<spot x="2671.13" y="2386.92" z="3019.22" static_id="1042" state="2"/>
+			<spot x="1534.41" y="2301.97" z="2946.59" static_id="997" aerial_spawn="true"/>
+			<spot x="1619.04" y="2240.43" z="2957.03" static_id="1034" aerial_spawn="true"/>
+			<spot x="1630.12" y="1661.14" z="2918.59" static_id="1043" aerial_spawn="true"/>
+			<spot x="1674.71" y="1786.82" z="2926.22" static_id="1044" aerial_spawn="true"/>
+			<spot x="1759.26" y="1808.76" z="2921.01" static_id="1045" aerial_spawn="true"/>
+			<spot x="1899.12" y="2094.47" z="2995.9" static_id="1033" aerial_spawn="true"/>
+			<spot x="1908.67" y="1839.9" z="2928.15" static_id="1046" aerial_spawn="true"/>
+			<spot x="1961.24" y="2134.69" z="2995.47" static_id="1035" aerial_spawn="true"/>
+			<spot x="2059.74" y="2553.19" z="2943.7" static_id="1036" aerial_spawn="true"/>
+			<spot x="2099.38" y="2401.45" z="2933.6" static_id="1040" aerial_spawn="true"/>
+			<spot x="2101.97" y="2263.08" z="2919.47" static_id="1039" aerial_spawn="true"/>
+			<spot x="2222.85" y="2569.67" z="2921.57" static_id="1037" aerial_spawn="true"/>
+			<spot x="2409.65" y="2548.64" z="2892.29" static_id="1038" aerial_spawn="true"/>
+			<spot x="2556.59" y="2407.72" z="3031.95" static_id="1041" aerial_spawn="true"/>
+			<spot x="2671.13" y="2386.92" z="3019.22" static_id="1042" aerial_spawn="true"/>
 		</spawn>
 		<!-- Time Relic -->
 		<spawn npc_id="730215" respawn_time="295">
