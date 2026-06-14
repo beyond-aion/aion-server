@@ -12,6 +12,7 @@ import com.aionemu.gameserver.network.aion.AionClientPacket;
 import com.aionemu.gameserver.network.aion.AionConnection.State;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_FORCED_MOVE;
 import com.aionemu.gameserver.network.aion.serverpackets.SM_MOVE;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
 import com.aionemu.gameserver.services.antihack.AntiHackService;
 import com.aionemu.gameserver.utils.PacketSendUtility;
 import com.aionemu.gameserver.utils.PositionUtil;
@@ -104,7 +105,7 @@ public class CM_MOVE extends AionClientPacket {
 						player.getMoveController().setIsJumping(false);
 						World.getInstance().updatePosition(player, x2, y2, z2, heading);
 						m.onMoveFromClient();
-						PacketSendUtility.broadcastToSightedPlayers(player, new SM_MOVE(player), true);
+						PacketSendUtility.broadcastToSightedPlayers(player, new SM_POSITION(player), true);
 						return;
 					}
 				} else {

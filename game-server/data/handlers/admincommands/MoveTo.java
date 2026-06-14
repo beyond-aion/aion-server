@@ -8,9 +8,12 @@ import org.apache.commons.lang3.math.NumberUtils;
 import com.aionemu.gameserver.dataholders.DataManager;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplate;
+import com.aionemu.gameserver.network.aion.serverpackets.SM_POSITION;
 import com.aionemu.gameserver.services.instance.InstanceService;
 import com.aionemu.gameserver.services.teleport.TeleportService;
 import com.aionemu.gameserver.utils.ChatUtil;
+import com.aionemu.gameserver.utils.PacketSendUtility;
+import com.aionemu.gameserver.utils.PositionUtil;
 import com.aionemu.gameserver.utils.Util;
 import com.aionemu.gameserver.utils.chathandlers.AdminCommand;
 import com.aionemu.gameserver.world.World;
@@ -32,7 +35,8 @@ public class MoveTo extends AdminCommand {
 			"<map name|ID> <x> <y> [z] - Moves you to the specified position (map names need underscores instead of spaces).",
 			"<position link> - Moves you to the position of the chat link.",
 			"<player name> - Moves you to the position of the player.",
-			"<npc name|ID> - Moves you to the position of the npc."
+			"<npc name|ID> - Moves you to the position of the npc.",
+			"forward <distance> - Moves you forward by the specified distance, ignoring any obstacles in between."
 		);
 		// @formatter:on
 	}
@@ -42,6 +46,10 @@ public class MoveTo extends AdminCommand {
 		String errorMsg = null;
 
 		if (params.length >= 1) {
+			if (params.length == 2 && "forward".equalsIgnoreCase(params[0])) {
+				moveForward(admin, Float.parseFloat(params[1]));
+				return;
+			}
 			WorldPosition pos;
 			if (params.length == 1) {
 				pos = ChatUtil.getPosition(params[0]);
@@ -78,6 +86,14 @@ public class MoveTo extends AdminCommand {
 		sendInfo(admin, errorMsg);
 	}
 
+	private void moveForward(Player admin, float distance) {
+		double radian = Math.toRadians(PositionUtil.convertHeadingToAngle(admin.getHeading()));
+		float newX = (float) (admin.getX() + Math.cos(radian) * distance);
+		float newY = (float) (admin.getY() + Math.sin(radian) * distance);
+		admin.getPosition().setXYZH(newX, newY, admin.getZ(), admin.getHeading());
+		PacketSendUtility.broadcastToSightedPlayers(admin, new SM_POSITION(admin), true);
+	}
+
 	private WorldPosition parseWorldPosition(Player admin, String[] params) {
 		int coordIndex = 0;
 		int mapId;
@@ -88,7 +104,7 @@ public class MoveTo extends AdminCommand {
 				mapId = WorldMapType.getMapId(params[0]);
 			coordIndex = 1;
 		} else {
-			mapId = admin.getPosition().getMapId();
+			mapId = admin.getWorldId() + admin.getInstanceId() - 1;
 		}
 		Float x = null, y = null, z = null;
 		Pattern p = Pattern.compile("^((?<type>x|y|z)(=|:)\"?)?(?<coord>[0-9]+(\\.[0-9]+)?f?)\"?,?$", Pattern.CASE_INSENSITIVE);
