@@ -372,7 +372,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	private void checkMaxHPChanged(Effect effect) {
 		synchronized (this) {
-			int oldMaxHp = cachedMaxHp != 0 ? cachedMaxHp : getMaxHp().getBase();
+			int oldMaxHp = cachedMaxHp != 0 ? cachedMaxHp : getStatsTemplate().getMaxHp();
 			int currentMaxHp = cachedMaxHp = getMaxHp().getCurrent();
 			if (oldMaxHp != currentMaxHp) {
 				float percent = 1f * currentMaxHp / oldMaxHp;
@@ -385,7 +385,7 @@ public abstract class CreatureGameStats<T extends Creature> {
 
 	private void checkMaxMPChanged(Effect effect) {
 		synchronized (this) {
-			int oldMaxMp = cachedMaxMp != 0 ? cachedMaxMp : getMaxMp().getBase();
+			int oldMaxMp = cachedMaxMp != 0 ? cachedMaxMp : getStatsTemplate().getMaxMp();
 			int currentMaxMp = cachedMaxMp = getMaxMp().getCurrent();
 			if (oldMaxMp != currentMaxMp) {
 				float percent = 1f * currentMaxMp / oldMaxMp;
