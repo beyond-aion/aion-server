@@ -64,7 +64,7 @@ public class StatFunctions {
 	 * @return Experience value identical to the ones seen on aion databases (but seen retail exp rewards are always higher)
 	 */
 	private static int calculateBaseExp(Npc npc) {
-		int maxHp = npc.getObjectTemplate().getStatsTemplate().getMaxHp();
+		int maxHp = npc.getGameStats().getMaxHp().getCurrent();
 		if (maxHp <= 0)
 			return 0;
 		float multiplier;
