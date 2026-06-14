@@ -7,7 +7,6 @@ import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.ai.manager.AttackManager;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.gameobjects.state.CreatureVisualState;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
@@ -54,10 +53,6 @@ public class CreatureEventHandler {
 		}
 	}
 
-	/**
-	 * @param ai
-	 * @param creature
-	 */
 	protected static void checkAggro(NpcAI ai, Creature creature) {
 		if (ai.isInState(AIState.FIGHT))
 			return;
@@ -69,6 +64,9 @@ public class CreatureEventHandler {
 			return;
 
 		if (creature.isInVisualState(CreatureVisualState.BLINKING))
+			return;
+
+		if (creature.isFlag())
 			return;
 
 		Npc owner = ai.getOwner();
@@ -86,9 +84,7 @@ public class CreatureEventHandler {
 
 		if (isInSeeRange(creature, owner)) {
 			ai.handleCreatureDetected(creature); // TODO: Move to AIEventType, prevent calling multiple times
-			boolean isPlayer = creature instanceof Player;
-			if (isPlayer && ((Player) creature).isInCustomState(CustomPlayerState.ENEMY_OF_ALL_NPCS)
-				|| TribeRelationService.isAggressive(owner, creature) && (isPlayer || creature.isEnemyFrom(owner))) { // aggressive mob
+			if (TribeRelationService.isAggressive(owner, creature) && !TribeRelationService.isFriend(owner, creature) && creature.isEnemyFrom(owner)) {
 				if (validateAggro(owner, creature) && GeoService.getInstance().canSee(owner, creature)) {
 					ShoutEventHandler.onSee(ai, creature);
 					if (ai.canThink())

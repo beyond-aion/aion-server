@@ -4,7 +4,6 @@ import com.aionemu.gameserver.ai.NpcAI;
 import com.aionemu.gameserver.ai.event.AIEventType;
 import com.aionemu.gameserver.model.gameobjects.Creature;
 import com.aionemu.gameserver.model.gameobjects.Npc;
-import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.templates.npc.NpcTemplateType;
 import com.aionemu.gameserver.services.TribeRelationService;
@@ -19,16 +18,10 @@ public class AggroEventHandler {
 
 	private static final int SUPPORT_RANGE_OFFSET = 2; // might be <pushed_range> in client data
 
-	public static void onAggro(NpcAI npcAI, final Creature myTarget) {
-		final Npc owner = npcAI.getOwner();
-		// TODO move out?
-		if (myTarget instanceof Player) {
-			if (((Player) myTarget).isInCustomState(CustomPlayerState.NEUTRAL_TO_ALL_NPCS))
-				return;
-		} else if (TribeRelationService.isFriend(owner, myTarget) || myTarget.isFlag())
-			return;
-		ThreadPoolManager.getInstance().schedule(new AggroNotifier(owner, myTarget, true), 500);
-		owner.getPosition().getWorldMapInstance().getInstanceHandler().onAggro(owner);
+	public static void onAggro(NpcAI npcAI, Creature target) {
+		Npc owner = npcAI.getOwner();
+		ThreadPoolManager.getInstance().schedule(new AggroNotifier(owner, target, true), 500);
+		owner.getWorldMapInstance().getInstanceHandler().onAggro(owner);
 	}
 
 	public static boolean onCreatureNeedsSupport(NpcAI npcAI, Creature creatureAskingForSupport) {

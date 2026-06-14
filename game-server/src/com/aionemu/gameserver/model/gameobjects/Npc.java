@@ -13,6 +13,7 @@ import com.aionemu.gameserver.model.CreatureType;
 import com.aionemu.gameserver.model.DialogAction;
 import com.aionemu.gameserver.model.Race;
 import com.aionemu.gameserver.model.TribeClass;
+import com.aionemu.gameserver.model.gameobjects.player.CustomPlayerState;
 import com.aionemu.gameserver.model.gameobjects.player.Player;
 import com.aionemu.gameserver.model.items.NpcEquippedGear;
 import com.aionemu.gameserver.model.skill.NpcSkillEntry;
@@ -47,8 +48,8 @@ public class Npc extends Creature {
 	private WalkerGroup walkerGroup;
 	private String masterName;
 	private int creatorId = 0;
-	private CreatureType type = null;
-	private NpcEquippedGear overridenEquipment;
+	private CreatureType overriddenType = null;
+	private NpcEquippedGear overriddenEquipment;
 	private SummonOwner summonOwner = null;
 
 	public Npc(NpcController controller, SpawnTemplate spawnTemplate, NpcTemplate objectTemplate) {
@@ -241,8 +242,17 @@ public class Npc extends Creature {
 	}
 
 	public CreatureType getType(Creature creature) {
-		if (type != null)
-			return type;
+		CreatureType type = overriddenType != null ? overriddenType : getRelationBasedType(creature);
+		if (creature instanceof Player player) {
+			if (player.isInCustomState(CustomPlayerState.ENEMY_OF_ALL_NPCS) && type != CreatureType.ATTACKABLE && type != CreatureType.AGGRESSIVE)
+				return CreatureType.ATTACKABLE;
+			if (player.isInCustomState(CustomPlayerState.NEUTRAL_TO_ALL_NPCS) && (type == CreatureType.ATTACKABLE || type == CreatureType.AGGRESSIVE))
+				return CreatureType.PEACE;
+		}
+		return type;
+	}
+
+	private CreatureType getRelationBasedType(Creature creature) {
 		if (TribeRelationService.isNone(this, creature))
 			return CreatureType.PEACE;
 		else if (TribeRelationService.isAggressive(this, creature))
@@ -260,10 +270,10 @@ public class Npc extends Creature {
 	 * Sets a constant type and broadcasts it, if the npc is spawned. Set to null, to disable it.
 	 */
 	public void overrideNpcType(CreatureType newType) {
-		type = newType;
+		overriddenType = newType;
 		if (isSpawned()) {
-			if (type != null)
-				PacketSendUtility.broadcastPacket(this, new SM_CUSTOM_SETTINGS(getObjectId(), 0, type.getId(), 0));
+			if (overriddenType != null)
+				PacketSendUtility.broadcastPacket(this, new SM_CUSTOM_SETTINGS(getObjectId(), 0, overriddenType.getId(), 0));
 			else
 				getKnownList().forEachPlayer(p -> PacketSendUtility.sendPacket(p, new SM_CUSTOM_SETTINGS(getObjectId(), 0, getType(p).getId(), 0)));
 		}
@@ -373,13 +383,13 @@ public class Npc extends Creature {
 	}
 
 	public void overrideEquipmentList(NpcEquipmentList v) {
-		overridenEquipment = new NpcEquippedGear(v);
+		overriddenEquipment = new NpcEquippedGear(v);
 	}
 
 	@Override
 	public NpcEquippedGear getOverrideEquipment() {
-		if (overridenEquipment != null)
-			return overridenEquipment;
+		if (overriddenEquipment != null)
+			return overriddenEquipment;
 		return getObjectTemplate().getEquipment();
 	}
 
