@@ -511,11 +511,9 @@ public class EffectController {
 				switch (dispelCat) {
 					case ALL:
 					case BUFF:// DispelBuffCounterAtkEffect
-						if (ef.getReqDispelLevel() <= dispelLevel) {
-							if (removePower(ef, power)) {
-								ef.setDesignatedDispelEffect(effect);
-								dispelledEffectCount++;
-							}
+						if (ef.getReqDispelLevel() <= dispelLevel && removePower(ef, power)) {
+							ef.setDesignatedDispelEffect(effect);
+							dispelledEffectCount++;
 							count--;
 						}
 						break;
@@ -579,10 +577,10 @@ public class EffectController {
 				if (remove) {
 					if (removePower(effect, power)) {
 						effectsToEnd.add(effect);
+						count--;
 					} else if (owner instanceof Player) {
 						insufficientDispelPower = true;
 					}
-					count--;
 				} else
 					insufficientDispelLevel = true;
 			}
