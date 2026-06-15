@@ -22,6 +22,18 @@ public class InstanceConfig {
 	@Property(key = "gameserver.instance.duel.enable", defaultValue = "true")
 	public static boolean INSTANCE_DUEL_ENABLE;
 
+	@Property(key = "gameserver.instance.scaling.enable", defaultValue = "false")
+	public static boolean INSTANCE_SCALING_ENABLE;
+
+	@Property(key = "gameserver.instance.scaling.hp_floor", defaultValue = "0.5")
+	public static float INSTANCE_SCALING_HP_FLOOR;
+
+	@Property(key = "gameserver.instance.scaling.dmg_floor", defaultValue = "0.5")
+	public static float INSTANCE_SCALING_DMG_FLOOR;
+
+	@Property(key = "gameserver.instance.scaling.excluded_maps", defaultValue = "")
+	public static Set<Integer> INSTANCE_SCALING_EXCLUDED_MAPS;
+
 	/**
 	 * Location of instance *.java handlers
 	 */
