@@ -511,12 +511,10 @@ public class EffectController {
 				switch (dispelCat) {
 					case ALL:
 					case BUFF:// DispelBuffCounterAtkEffect
-						if (ef.getReqDispelLevel() <= dispelLevel) {
-							if (removePower(ef, power)) {
-								ef.setDesignatedDispelEffect(effect);
-								dispelledEffectCount++;
-								count--;
-							}
+						if (ef.getReqDispelLevel() <= dispelLevel && removePower(ef, power)) {
+							ef.setDesignatedDispelEffect(effect);
+							dispelledEffectCount++;
+							count--;
 						}
 						break;
 				}
