@@ -515,8 +515,8 @@ public class EffectController {
 							if (removePower(ef, power)) {
 								ef.setDesignatedDispelEffect(effect);
 								dispelledEffectCount++;
+								count--;
 							}
-							count--;
 						}
 						break;
 				}
@@ -579,10 +579,10 @@ public class EffectController {
 				if (remove) {
 					if (removePower(effect, power)) {
 						effectsToEnd.add(effect);
+						count--;
 					} else if (owner instanceof Player) {
 						insufficientDispelPower = true;
 					}
-					count--;
 				} else
 					insufficientDispelLevel = true;
 			}
